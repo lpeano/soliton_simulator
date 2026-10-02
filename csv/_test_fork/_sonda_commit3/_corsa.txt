@@ -1,0 +1,20 @@
+====================================================================================================
+SONDA DEL COMMIT 3 -- il punto unico cambia un bit?
+  ### NON E' IL SIGILLO: il <<prima>> viene da una COPIA, non da git.
+  ### Non vale come prova. Serve a non committare codice che non ha mai girato.
+====================================================================================================
+  DOPO  (il punto unico) ... 0e22b95a
+  PRIMA (dalla copia) ...... 3d78cfd2   C:/Users/lpeano/AppData/Local/Temp/claude/c--Users-lpeano-soliton-simulator/e7487ef8-0ec5-4947-a513-c239b80b97c3/scratchpad/_sim_prima_commit3.py
+  seme 11   passi 72
+
+  DOPO:  249 grandezze nell'insieme, 232 scattate
+  DOPO:  nati_mitosi=9 nati_schwinger=1 nati=10 coppie=1
+  DOPO:  eventi di nascita contati dal punto unico (_g_nascite) = 9
+  PRIMA: nati_mitosi=9 nati_schwinger=1 nati=10 coppie=1
+
+  ### DIFFERENZE: 1 in tutto, di cui 1 ATTESE (contatori nuovi) e 0 VERE
+      attesa:  {"nome": "_g_nascite", "come": "presente in UNO solo"}
+
+====================================================================================================
+### LA SONDA PASSA: zero differenze vere su 231 grandezze confrontate.
+###   (e resta una SONDA: la prova e' il braccio `E` del sigillo.)

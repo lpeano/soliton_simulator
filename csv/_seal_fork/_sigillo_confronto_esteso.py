@@ -211,8 +211,40 @@ def principale():
     stampa("")
     stampa("  ### LE TRE SCOPERTE DAL CONTRATTO, sono nell'insieme? %s"
            % ("  ".join("%s=%s" % (k, "SI" if k in quali else "NO") for k in tre)))
-    A_ok = len(presenti) == 3
-    stampa("  ### BRACCIO A: %s" % ("PASSA" if A_ok else "FALLISCE -- la regola non le prende"))
+    # ### E IL PRESIDIO CHE CONTA DAVVERO: L'INSIEME NON SI RESTRINGE.
+    #   Il difetto peggiore che un sigillo possa avere non e' sbagliare un verdetto:
+    #   e' ### **SMETTERE DI GUARDARE.** Il `COMMIT 3` sposta 13 grandezze dai due
+    #   `_eredita_*` (metodi, che scrivono `self.<nome>`) alle regole `_rn_*`
+    #   (funzioni di modulo, che scrivono `net.<nome>`): se lo scanner del perimetro
+    #   non seguisse lo spostamento, l'insieme si ridurrebbe ### IN SILENZIO e il
+    #   sigillo direbbe <<0 differenze>> perche' non le cerca piu'.
+    #   ### QUINDI SI CONFRONTA COL REFERTO COMMITTATO, e una grandezza PERSA
+    #   fa FALLIRE il braccio.
+    perse, atteso = [], None
+    _rif = os.path.join(FUORI, "_sigillo_confronto_esteso.json")
+    if os.path.isfile(_rif):
+        try:
+            _vecchio = json.load(io.open(_rif, encoding="utf-8"))
+            atteso = sorted(set(sum(_vecchio["braccio_A"]["per_classe"].values(), [])))
+        except Exception as _e:
+            stampa("  ### NON HO POTUTO LEGGERE IL REFERTO PRECEDENTE: %s" % _e)
+    if atteso:
+        perse = sorted(k for k in atteso if k not in quali)
+        stampa("  ### NESSUNA GRANDEZZA PERSA rispetto al referto committato?")
+        stampa("      il referto precedente ne elencava %d; ora ne mancano %d"
+               % (len(atteso), len(perse)))
+        for k in perse:
+            stampa("      ### PERSA: %s" % k)
+        if not perse:
+            stampa("      ### SI: nessuna. L'insieme non si e' ristretto.")
+    else:
+        stampa("  ### NESSUN REFERTO PRECEDENTE da cui misurare le perdite --")
+        stampa("      e questo NON e' un <<nessuna perdita>>: e' un NON MISURATO.")
+    A_ok = (len(presenti) == 3) and not perse and bool(atteso)
+    stampa("  ### BRACCIO A: %s" % ("PASSA" if A_ok else "FALLISCE -- "
+           + ("la regola non prende le tre scoperte" if len(presenti) != 3
+              else ("l'insieme si e' RISTRETTO: %d grandezze perse" % len(perse))
+              if perse else "nessun referto precedente: la perdita non e' MISURABILE")))
     stampa("")
 
     # BRACCIO C -------------------------------------------------------------------------------
@@ -307,13 +339,67 @@ def principale():
         stampa("  ### BRACCIO D: %s" % ("PASSA" if D_ok else "FALLISCE"))
     stampa("")
 
+    # BRACCIO E -------------------------------------------------------------------------------
+    #   ### IL COMMIT 3: il PUNTO UNICO DI NASCITA non cambia un bit.
+    #   Il <<prima>> viene dal PADRE del commit che introduce la chiamata al punto unico
+    #   (`H-P8`), estratto in BINARIO. ### E IL CRITERIO E' ZERO, SENZA ECCEZIONI: nessun
+    #   contatore nuovo, nessuna grandezza <<attesa>>. Un criterio con un'eccezione sarebbe
+    #   piu' debole, ed e' esattamente cio' che Luca ha chiesto di non fare.
+    stampa("=" * 104)
+    stampa("BRACCIO E -- IL COMMIT 3: il PUNTO UNICO DI NASCITA non cambia un bit")
+    stampa("=" * 104)
+    ANCORA_PUNTO = 'nascita(self, "divisione", c)'
+    E_ok, dE_n, dE_o, prima_pu, introduce_pu = None, [], [], None, None
+    dest_pu = os.path.join(FUORI, "_sim_prima_punto_unico.py")
+    try:
+        introduce_pu = _cli_flag.sim_prima_del_flag(ANCORA_PUNTO, dest_pu)
+        prima_pu = dest_pu
+    except Exception as e:
+        stampa("  ### BRACCIO E NON ESEGUIBILE: %s: %s" % (type(e).__name__, e))
+        stampa("      (il punto unico non e' ancora committato: il codice si committa PRIMA")
+        stampa("       del run, par.5, e solo allora il <<prima>> esiste nella storia.)")
+    if prima_pu:
+        stampa("  il <<prima>> .. %s  blob %s"
+               % (os.path.relpath(prima_pu, RADICE).replace(chr(92), "/"), blob(prima_pu)[:8]))
+        stampa("      dal PADRE del commit che introduce il punto unico, cioe' di %s^"
+               % introduce_pu[:8])
+        stampa("      (`H-P8`; e `sim_prima_del_flag` ASSERISCE che l'ancora NON sia nel file)")
+        SE, nE = carica("cfr_E", seme, sim=prima_pu)
+        avanza(SE, nE, passi)
+        fe, qe = CN.foto(SE, nE, sorgente=prima_pu)
+        dE_n = CN.confronta(fa, fe)
+        dE_o = CN.confronta({k: v for k, v in fa.items() if k in oggi},
+                            {k: v for k, v in fe.items() if k in oggi})
+        stampa("  grandezze confrontate: %d (insieme NUOVO) / %d (regola di OGGI)"
+               % (len(set(fa) & set(fe)), len([k for k in set(fa) & set(fe) if k in oggi])))
+        stampa("  con la regola NUOVA ... differenze: %d" % len(dE_n))
+        for d in dE_n[:24]:
+            stampa("      ### %s" % d)
+        stampa("  con la regola di OGGI  differenze: %d" % len(dE_o))
+        for d in dE_o[:12]:
+            stampa("      %s" % d)
+        # ### E IL CONTROLLO CHE LE NASCITE CI SIANO STATE: zero differenze su zero
+        #   nascite non e' un sigillo, e' un NON MISURATO (e' la voce `FALSO-ZERO`).
+        nati_ev = (int(getattr(nA, "_g_nati_mitosi_ev", 0)),
+                   int(getattr(nA, "_g_nati_schwinger_ev", 0)))
+        stampa("  eventi di nascita nel run: mitosi %d, Schwinger %d" % nati_ev)
+        if not nati_ev[0]:
+            stampa("  ### NESSUNA MITOSI: zero differenze NON significa niente. NON MISURATO.")
+        E_ok = (not dE_n) and (not dE_o) and bool(nati_ev[0])
+        stampa("")
+        stampa("  ### BRACCIO E: %s" % ("PASSA -- byte-identico su TUTTO" if E_ok
+                                        else "FALLISCE"))
+    stampa("")
+
     # VERDETTO --------------------------------------------------------------------------------
     stampa("=" * 104)
-    passa = A_ok and B_ok and C_ok and chirurgica and (D_ok is not False)
-    stampa("### IL SIGILLO %s   (A %s · B %s · C %s · D %s · copia chirurgica %s)"
+    passa = (A_ok and B_ok and C_ok and chirurgica and (D_ok is not False)
+             and (E_ok is not False))
+    stampa("### IL SIGILLO %s   (A %s · B %s · C %s · D %s · E %s · copia chirurgica %s)"
            % ("PASSA" if passa else "FALLISCE",
               "OK" if A_ok else "NO", "OK" if B_ok else "NO", "OK" if C_ok else "NO",
               ("OK" if D_ok else ("NO" if D_ok is False else "NON ESEGUITO")),
+              ("OK" if E_ok else ("NO" if E_ok is False else "NON ESEGUITO")),
               "OK" if chirurgica else "NO"))
     stampa("=" * 104)
 
@@ -329,6 +415,8 @@ def principale():
                          "per_classe": {k: sorted(v) for k, v in per_classe.items()},
                          "che_la_regola_di_oggi_si_perde": nuove,
                          "mai_apparse": mai,
+                         "atteso_dal_referto_precedente": atteso,
+                         "grandezze_PERSE": perse,
                          "le_tre_scoperte_sono_nell_insieme": {k: (k in quali) for k in tre},
                          "perche": {k: quali[k]["perche"] for k in quali}},
            "braccio_C": {"passa": bool(C_ok), "diff_nuova": dC_n, "diff_oggi": dC_o},
@@ -338,7 +426,14 @@ def principale():
                          "blob_prima": (blob(prima) if prima else None),
                          "commit_che_introduce_l_ancora": introduce,
                          "ancora": "_peqn_med_pre",
-                         "diff_nuova": dD_n, "diff_oggi": dD_o}}
+                         "diff_nuova": dD_n, "diff_oggi": dD_o},
+           "braccio_E": {"eseguito": bool(prima_pu), "passa": E_ok,
+                         "blob_prima": (blob(prima_pu) if prima_pu else None),
+                         "commit_che_introduce_il_punto_unico": introduce_pu,
+                         "ancora": ANCORA_PUNTO if prima_pu else None,
+                         "eventi_di_nascita": [int(getattr(nA, "_g_nati_mitosi_ev", 0)),
+                                              int(getattr(nA, "_g_nati_schwinger_ev", 0))],
+                         "diff_nuova": dE_n, "diff_oggi": dE_o}}
     io.open(os.path.join(FUORI, "_sigillo_confronto_esteso.json"), "w", encoding="utf-8",
             newline=NL).write(json.dumps(ref, indent=1, default=str))
     io.open(os.path.join(FUORI, "_corsa.txt"), "w", encoding="utf-8",

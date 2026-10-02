@@ -65,7 +65,24 @@ SIM = os.path.join(RADICE, "soliton_simulator.py")
 #   `decidi_divisione` c'e' perche' la DECISIONE e' parte dell'evento di nascita (e scrive i suoi
 #   contatori); i due `_eredita_*` perche' la nascita scrive da la' 13 grandezze del registro.
 PERIMETRO = ("mitosi", "decidi_divisione", "semina", "_allaccia",
-             "_eredita_psi_figli", "_eredita_spinore_figli")
+             "_eredita_psi_figli", "_eredita_spinore_figli",
+             "nascita")
+# ### E DAL `COMMIT 3` (il PUNTO UNICO) il perimetro ha anche un PREFISSO: le regole
+#   di nascita sono funzioni di modulo `_rn_<evento>_<grandezza>`, e scrivono su
+#   ### **`net.<nome>`, non `self.<nome>`** -- quindi uno scanner che cercasse solo
+#   `self` ### **non le vedrebbe**, e l'insieme da confrontare si restringerebbe
+#   ### IN SILENZIO. E' il difetto peggiore che un sigillo possa avere: non
+#   sbagliare un verdetto, ma ### **smettere di guardare.**
+PREFISSI_PERIMETRO = ("_rn_",)
+# ⚠ **E I DUE `_eredita_*` RESTANO NELLA LISTA anche se il simulatore di oggi non li
+#   ha piu':** il braccio `D` del sigillo gira sul blob **PRIMA** della cura, dove
+#   ci sono. ### **Il perimetro si ALLARGA, non si sposta** -- togliere un nome
+#   renderebbe il confronto col passato piu' povero del confronto col presente.
+
+
+def _nel_perimetro(nome, perimetro=PERIMETRO):
+    """Il nome e' nel perimetro della nascita: per elenco **o** per prefisso."""
+    return nome in perimetro or any(nome.startswith(p) for p in PREFISSI_PERIMETRO)
 
 
 def _scritte_nel_perimetro(sorgente=None, perimetro=PERIMETRO):
@@ -73,7 +90,7 @@ def _scritte_nel_perimetro(sorgente=None, perimetro=PERIMETRO):
     t = ast.parse(io.open(sorgente or SIM, encoding="utf-8").read())
     fuori = {}
     for n in ast.walk(t):
-        if not (isinstance(n, ast.FunctionDef) and n.name in perimetro):
+        if not (isinstance(n, ast.FunctionDef) and _nel_perimetro(n.name, perimetro)):
             continue
         for x in ast.walk(n):
             if not isinstance(x, (ast.Assign, ast.AugAssign, ast.AnnAssign)):
@@ -84,8 +101,10 @@ def _scritte_nel_perimetro(sorgente=None, perimetro=PERIMETRO):
                     yy = y
                     while isinstance(yy, ast.Subscript):
                         yy = yy.value
+                    # ### IL RICEVITORE PUO' ESSERE `net`: le regole di nascita sono
+                    #   funzioni di modulo, non metodi, e scrivono `net.<nome>`.
                     if (isinstance(yy, ast.Attribute) and isinstance(yy.value, ast.Name)
-                            and yy.value.id == "self"):
+                            and yy.value.id in ("self", "net")):
                         fuori.setdefault(yy.attr, set()).add(n.name)
     return {k: sorted(v) for k, v in fuori.items()}
 
@@ -95,7 +114,7 @@ def _letta_fuori_dal_perimetro(sorgente=None, perimetro=PERIMETRO):
     t = ast.parse(io.open(sorgente or SIM, encoding="utf-8").read())
     fuori = set()
     for n in ast.walk(t):
-        if isinstance(n, ast.FunctionDef) and n.name in perimetro:
+        if isinstance(n, ast.FunctionDef) and _nel_perimetro(n.name, perimetro):
             continue
         if not isinstance(n, (ast.FunctionDef, ast.Module)):
             continue

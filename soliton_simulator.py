@@ -1286,6 +1286,882 @@ REGISTRO_NOMI = frozenset([x[0] for x in REGISTRO_STATO]
                           + [x[0] for x in REGISTRO_FINESTRA])
 
 
+# =============================================================================
+# ### LA NASCITA COME EVENTO UNICO  --  `COMMIT 3` del riordino (2026-10-02)
+# =============================================================================
+#
+# ### TUTTE le grandezze del registro scritte in UN SOLO punto, con UNA regola
+# ### DICHIARATA per ciascuna. Niente scritture sparse, niente sistemazioni a valle.
+#
+# E' il par.(c) di `doc/PIANO_riordino_mitosi.md`. Prima di questo commit i posti
+# che scrivevano le grandezze della nascita erano TRE -- `mitosi`, i due
+# `_eredita_*`, piu' la crescita per MUTAZIONE di `conc_nodi` (`.append`, che l'AST
+# non vede). Ora il posto e' UNO: `nascita()`, guidata da `REGOLE_NASCITA`.
+#
+# ### E' UNA RIORGANIZZAZIONE, NON UNA CURA: byte-identica, zero bit.
+#
+# -----------------------------------------------------------------------------
+# ### IL CONTRATTO DELL'ORDINE, MISURATO PRIMA DI SCRIVERE QUESTO BLOCCO
+# -----------------------------------------------------------------------------
+# `csv/_test_fork/_ordine_registro.py` (referto in `csv/_test_fork/_ordine_registro/`)
+# ha misurato, sul blob `3d78cfd2`, se le scritture si possono PERMUTARE fra loro --
+# che e' una domanda DIVERSA da quella dello STOP 4 (se si possono rendere CONTIGUE).
+# ### QUATTRO vincoli genuini, e l'ordine del registro e' un ordine TOPOLOGICO VALIDO
+# ### (0 violazioni):
+#
+#   1. `phi` DEVE stare prima di `twp` -- `twp` legge `phi[a,b]` DOPO il calcio, che
+#      e' una scrittura INDICIZZATA sui genitori e quindi NON una pura estensione.
+#      RISPETTATO: `phi` sta in `REGISTRO_METRI`, cioe' prima di tutto `REGISTRO_STATO`.
+#   2. `peq` DEVE stare prima di `_peqn_idx` -- che legge `peq` INTERA. `_peqn_idx`
+#      non sta in NESSUN registro, quindi e' DICHIARATO qui subito dopo `peq`.
+#   3. `n0` VA NEL CONTESTO, calcolato nella PREPARAZIONE: le regole NON leggono
+#      `self.n`. Motivo: `self.n` e' una `@property` su `len(self.phi)` (`:2651`),
+#      quindi `n0 = self.n - k` dipendeva dall'estensione di `phi` -- quattro
+#      LOCALI INTERPOSTE, misurate.
+#   4. SEI CHIAMATE CON EFFETTO (`_smp_chirurgia`, `_traccia_d0`, `_grado`, tre per
+#      evento) NON sono regole di nascita: si collocano a mano e si DICHIARANO con
+#      `_nascita_collocata`.
+#
+# ### E DUE CASI SONO STATI SCARTATI COME INERTI, ed e' importante quanto trovarli:
+# `chi_a`/`chi_b` leggono `perc_chi` GIA' estesa, ma la leggono sui GENITORI
+# (indici `< n0`) e una pura estensione non tocca i primi `n0` elementi.
+# -----------------------------------------------------------------------------
+
+EVENTI_DI_NASCITA = ("semina", "divisione", "schwinger", "allaccio")
+# ### I QUATTRO EVENTI SONO APPROVATI DA LUCA (2026-10-01, registrato nel piano).
+#   ### MA SOLO DUE SONO CONVERTITI dal commit 3: `divisione` e `schwinger`, che
+#   sono i due eventi di `mitosi` -- gli unici due da cui i `_eredita_*` erano
+#   chiamati. `semina` e `allaccio` restano nelle loro funzioni e NON hanno ancora
+#   una tabella: `nascita()` si RIFIUTA di girare per loro, invece di far finta.
+EVENTI_CONVERTITI = ("divisione", "schwinger")
+
+
+def _ordine_di_nascita():
+    """L'ORDINE in cui la nascita scrive, e si DERIVA dai registri.
+
+    L'ordine del REGISTRO -- `METRI`, poi `STATO`, poi `FINESTRA` -- con
+    ### `_peqn_idx` DICHIARATO subito dopo `peq`, che e' il vincolo 2 del
+    contratto. ### Si DERIVA e non si scrive a mano, cosi' una voce nuova nel
+    registro fa scattare il presidio invece di passare inosservata.
+    """
+    fuori = []
+    for blocco in (REGISTRO_METRI, REGISTRO_STATO, REGISTRO_FINESTRA):
+        for voce in blocco:
+            fuori.append(voce[0])
+            if voce[0] == "peq":
+                fuori.append("_peqn_idx")   # vincolo 2: DOPO `peq`
+    return tuple(fuori)
+
+
+ORDINE_DI_NASCITA = _ordine_di_nascita()
+REGOLE_NASCITA = {}
+
+
+def _nascita_regola(evento, grandezza, classe, ancora, derivazione):
+    """Dichiara LA REGOLA di nascita di una grandezza per un evento."""
+    def _registra_regola(f):
+        chiave = (evento, grandezza)
+        if chiave in REGOLE_NASCITA:
+            raise RuntimeError(
+                "regola di nascita DOPPIA per `%s` all'evento `%s`" % (grandezza, evento))
+        REGOLE_NASCITA[chiave] = {"classe": classe, "regola": f, "ancora": ancora,
+                                  "derivazione": derivazione}
+        return f
+    return _registra_regola
+
+
+def _nascita_collocata(evento, grandezza, chi, perche):
+    """La grandezza e' scritta da una CHIAMATA CON EFFETTO, collocata a mano.
+
+    ### NON e' una regola, e dirlo e' il punto: `_grado()` e `_smp_chirurgia()`
+    scrivono, ma non sono *<<la regola di nascita di una grandezza>>*. Questa voce
+    esiste perche' il presidio non si accontenti del silenzio.
+    """
+    REGOLE_NASCITA[(evento, grandezza)] = {"classe": "collocata", "regola": None,
+                                           "ancora": chi, "derivazione": perche}
+
+
+def _nascita_non_si_tocca(evento, grandezza, perche):
+    """L'evento NON scrive questa grandezza, ed e' DICHIARATO."""
+    REGOLE_NASCITA[(evento, grandezza)] = {"classe": "non si tocca", "regola": None,
+                                           "ancora": "(nessuna)", "derivazione": perche}
+
+
+def nascita(net, evento, c):
+    """### IL PUNTO UNICO: scrive le grandezze della nascita, in ordine DICHIARATO.
+
+    `c` e' il CONTESTO: tutto cio' che le regole leggono oltre a `net.<grandezza>`
+    -- i genitori, i figli, `n0`, i valori preparati. ### Le regole NON leggono
+    `self.n` (vincolo 3 del contratto): ricevono `c["n0"]`.
+
+    ### IL PRESIDIO: una grandezza del registro che non compare nella tabella
+    ### dell'evento FERMA IL RUN. Non e' un avviso: e' un `RuntimeError`.
+    """
+    if evento not in EVENTI_DI_NASCITA:
+        raise RuntimeError("evento di nascita sconosciuto: `%s`. I quattro approvati "
+                           "sono %s" % (evento, ", ".join(EVENTI_DI_NASCITA)))
+    if evento not in EVENTI_CONVERTITI:
+        raise RuntimeError(
+            "l'evento `%s` NON e' ancora convertito al punto unico: la sua nascita vive "
+            "nella sua funzione, e questa tabella non la descrive. I convertiti sono %s."
+            % (evento, ", ".join(EVENTI_CONVERTITI)))
+    for nome in ORDINE_DI_NASCITA:
+        voce = REGOLE_NASCITA.get((evento, nome))
+        if voce is None:
+            raise RuntimeError(
+                "regola di nascita non dichiarata per `%s` all'evento `%s`. "
+                "Ogni grandezza del registro vuole una riga nella tabella: una REGOLA, "
+                "oppure `collocata` (la scrive una chiamata con effetto), oppure "
+                "`non si tocca`. Il silenzio NON e' una terza possibilita'."
+                % (nome, evento))
+        if voce["regola"] is not None:
+            voce["regola"](net, c)
+    # ### E QUI NON C'E' UN CONTATORE, ED E' UNA SCELTA.
+    #   La prima stesura ne aveva uno (`_g_nascite`). L'ho tolto per due ragioni:
+    #   ### ① il criterio del commit 3 e' BYTE-IDENTICO, e un contatore nuovo
+    #     obbligherebbe il sigillo a DICHIARARE UN'ECCEZIONE -- e un criterio con
+    #     un'eccezione e' piu' debole di uno senza. Luca l'ha detto per l'ordine
+    #     delle estrazioni, e vale qui: ### **non si allenta il criterio.**
+    #   ### ② `9-ter`: una cura non aumenta il numero delle grandezze. Gli eventi
+    #     di nascita SONO GIA' CONTATI, e per RAMO, da `_g_nati_mitosi_ev` e
+    #     `_g_nati_schwinger_ev` -- che e' il conto che serve, perche' i due rami
+    #     fanno cose diverse alla carica. Un totale non distingue le due cose.
+
+
+# -----------------------------------------------------------------------------
+# ### LE REGOLE, evento per evento, NELL'ORDINE DEL REGISTRO
+# -----------------------------------------------------------------------------
+# Ogni regola e' l'ESPRESSIONE DI PRIMA, verbatim: il commit 3 sposta, non cura.
+# Dove una condizione c'era, c'e'; dove un contatore si alzava, si alza.
+# -----------------------------------------------------------------------------
+
+# --- `phi`, `i`, `j`: i METRI ------------------------------------------------
+
+@_nascita_regola("divisione", "phi", "media (fase media dei genitori)",
+                 "self.phi = np.concatenate([self.phi, fm])",
+                 "`fm` e' il punto medio di fase fra i genitori, calcolato nella "
+                 "preparazione (con `MITOSI_DIR` spostato verso il genitore piu' teso, "
+                 "e con `ANTIFASE_ADD` eventualmente ribaltato di mezzo giro)")
+def _rn_div_phi(net, c):
+    net.phi = np.concatenate([net.phi, c["fm"]])
+
+
+@_nascita_regola("divisione", "i", "topologia: l'arco si spezza in due",
+                 "self.i = np.concatenate([self.i[keep], a, m])",
+                 "l'arco `a-b` sparisce (`keep`) e nascono `a-m` e `m-b`: `i` prende "
+                 "`a` e `m`, `j` prende `m` e `b`. ORDINE ESSENZIALE: e' una "
+                 "concatenazione, e l'ordine DECIDE la topologia")
+def _rn_div_i(net, c):
+    net.i = np.concatenate([net.i[c["keep"]], c["a"], c["m"]])
+
+
+@_nascita_regola("divisione", "j", "topologia: l'arco si spezza in due",
+                 "self.j = np.concatenate([self.j[keep], m, b])",
+                 "il compagno di `i`: insieme danno `a-m` e `m-b`")
+def _rn_div_j(net, c):
+    net.j = np.concatenate([net.j[c["keep"]], c["m"], c["b"]])
+
+
+# --- le cache per NODO, assorbite da `_eredita_spinore_figli` ----------------
+# ### QUESTA FUNZIONE SPARISCE, e le sue 12 grandezze entrano qui. E' nata dalle
+#   cure di `C7`/`C11`: senza di lei, dopo ogni mitosi `len(cache) != n` e il
+#   sistema cadeva nei ripieghi -- MISURATO nell'80% dei passi per `_cs_nodo_prev`
+#   e nel 95.33% delle chiamate per `_psi_spin_prec`. Il riordino non la butta:
+#   la ASSORBE, e la storia resta scritta qui.
+
+@_nascita_regola("divisione", "_cs_nodo_prev", "eredita dal genitore `a`",
+                 "self._cs_nodo_prev = np.concatenate([_csp, np.asarray(_csp, float)[src]])",
+                 "STA PRIMA della guardia sugli spinori DI PROPOSITO: questa cache vive "
+                 "sotto `CS_DINAMICO and (FORK_SU2_MEM or STEP2_OROLOGIO)`, NON sotto "
+                 "`--spinore-corretto`. Senza, `len(_cs_nodo_prev) < n` e `tau = d/cs` "
+                 "calcolava `d/CS_M`: MISURATO nell'80% dei passi. "
+                 "NB: concatena `_csp` INTERO, non `_csp[:n0]` -- convenzione diversa da "
+                 "quella di `psi`, e si conserva tale")
+def _rn_div_cs_nodo_prev(net, c):
+    if not c["eredita_vale"]:
+        return
+    _csp_er = getattr(net, "_cs_nodo_prev", None)
+    if _csp_er is not None and len(_csp_er) >= c["n0"]:
+        net._cs_nodo_prev = np.concatenate([_csp_er, np.asarray(_csp_er, float)[c["src"]]])
+
+
+_nascita_collocata("divisione", "_deg", "self._grado()",
+                   "la scrive `_grado()`, collocata DOPO il blocco perche' LEGGE `i`, `j` "
+                   "e `len(phi)`: e' una DERIVATA della topologia, non una regola di "
+                   "nascita. Insieme a `_deg` invalida `_cicli_topologici` e richiama "
+                   "`_costruisci_struttura`")
+
+
+@_nascita_regola("divisione", "_nb", "eredita dal genitore `a`",
+                 "self._nb = np.vstack([self._nb, self._nb[src]])",
+                 "il Bloch del figlio e' quello del padre. ### E IL SUO ESITO E' UNA "
+                 "CONDIZIONE PER `_nb_prec`: oggi `_nb_prec` e' estesa solo DENTRO il ramo "
+                 "di `_nb`, ed e' una dipendenza di CONTROLLO, non di dato -- quindi non la "
+                 "vedrebbe nessun grafo sui dati. Si conserva passando l'esito nel contesto")
+def _rn_div_nb(net, c):
+    c["_nb_esteso"] = False
+    if not (c["eredita_vale"] and c["spinore_vale"]):
+        return
+    if hasattr(net, "_nb") and net._nb is not None and len(net._nb) >= c["n0"]:
+        net._nb = np.vstack([net._nb, net._nb[c["src"]]])
+        c["_nb_esteso"] = True
+
+
+@_nascita_regola("divisione", "_nb_prec", "eredita dal genitore `a`",
+                 "self._nb_prec = np.vstack([self._nb_prec, self._nb_prec[src]])",
+                 "### SOLO SE `_nb` E' STATA ESTESA: e' il nido di oggi, conservato")
+def _rn_div_nb_prec(net, c):
+    if not c.get("_nb_esteso"):
+        return
+    if (hasattr(net, "_nb_prec") and net._nb_prec is not None
+            and len(net._nb_prec) >= c["n0"]):
+        net._nb_prec = np.vstack([net._nb_prec, net._nb_prec[c["src"]]])
+
+
+@_nascita_regola("divisione", "_nb_ret", "eredita dal genitore `a`",
+                 "self._nb_ret = np.vstack([_nbr_er, _nbr_er[src]])",
+                 "[FORK SU(2) STRATO 1] il Bloch RITARDATO e' memoria di NODO: il figlio "
+                 "eredita il passato del padre. Senza, al passo dopo `len(_nb_ret) != n` e "
+                 "la memoria veniva RESETTATA a ogni mitosi")
+def _rn_div_nb_ret(net, c):
+    if not (c["eredita_vale"] and c["spinore_vale"]):
+        return
+    _nbr_er = getattr(net, "_nb_ret", None)
+    if _nbr_er is not None and len(_nbr_er) >= c["n0"]:
+        net._nb_ret = np.vstack([_nbr_er, _nbr_er[c["src"]]])
+
+
+@_nascita_regola("divisione", "_psi_prec", "eredita dal genitore `a`",
+                 "self._psi_prec = np.concatenate([self._psi_prec, self._psi_prec[src]])",
+                 "evita il reset spurio GLOBALE in `ritmo()` su `len != n`")
+def _rn_div_psi_prec(net, c):
+    if not (c["eredita_vale"] and c["spinore_vale"]):
+        return
+    if net._psi_prec is not None and len(net._psi_prec) >= c["n0"]:
+        net._psi_prec = np.concatenate([net._psi_prec, net._psi_prec[c["src"]]])
+
+
+@_nascita_regola("divisione", "_psi_spin_prec", "eredita dal genitore `a`",
+                 "self._psi_spin_prec = np.vstack([_pspr, np.asarray(_pspr)[src]])",
+                 "SNAPSHOT DEL RITMO SPINORIALE (4pi). Senza, `len(_psi_spin_prec) != n` e "
+                 "la guardia ESATTA di `ritmo()` scartava il ramo a 4pi: MISURATO nel "
+                 "95.33% delle chiamate, e la FASE 5 era INERTE in ogni run "
+                 "`--campo-spinoriale`. E' `n x 2` COMPLESSO, quindi `vstack`")
+def _rn_div_psi_spin_prec(net, c):
+    if not (c["eredita_vale"] and c["spinore_vale"]):
+        return
+    _pspr = getattr(net, "_psi_spin_prec", None)
+    if _pspr is not None and len(_pspr) >= c["n0"]:
+        net._psi_spin_prec = np.vstack([_pspr, np.asarray(_pspr)[c["src"]]])
+
+
+@_nascita_regola("divisione", "_psi_spinor", "eredita col SEGNO (regola D)",
+                 "self._psi_spinor = np.vstack([self._psi_spinor, er])",
+                 "eredita lo spinore COMPLESSO col segno, non un Bloch ri-derivato. "
+                 "`segno = +1` per la mitosi; `-1` per l'antinodo (doppia copertura opposta)")
+def _rn_div_psi_spinor(net, c):
+    if not (c["eredita_vale"] and c["spinore_vale"]):
+        return
+    if len(net._psi_spinor) >= c["n0"]:
+        er = net._psi_spinor[c["src"]].copy()
+        if c["segno"] < 0:
+            er = -er
+        net._psi_spinor = np.vstack([net._psi_spinor, er])
+
+
+@_nascita_regola("divisione", "_spinor_lift", "eredita col SEGNO (regola D)",
+                 "self._spinor_lift = np.vstack([self._spinor_lift, el])",
+                 "il sollevamento, con la stessa convenzione di segno di `_psi_spinor`")
+def _rn_div_spinor_lift(net, c):
+    if not (c["eredita_vale"] and c["spinore_vale"]):
+        return
+    if len(net._spinor_lift) >= c["n0"]:
+        el = net._spinor_lift[c["src"]].copy()
+        if c["segno"] < 0:
+            el = -el
+        net._spinor_lift = np.vstack([net._spinor_lift, el])
+
+
+@_nascita_regola("divisione", "conc_nodi", "eredita la concorrenza del genitore `a`",
+                 "self.conc_nodi.append(eredita)",
+                 "### QUESTA REGOLA CURA LA CRESCITA PER MUTAZIONE: prima `conc_nodi` era "
+                 "l'UNICA grandezza del registro che cresceva con `.append`, cioe' "
+                 "INVISIBILE all'AST e alla sorveglianza. Ora e' una SCRITTURA VERA. "
+                 "### E IL `len` CRESCENTE SI CONSERVA: `.append` dentro il ciclo faceva "
+                 "crescere `len(self.conc_nodi)` a ogni giro, quindi un `kk` scartato "
+                 "all'inizio poteva passare il test piu' tardi. Si costruisce la lista "
+                 "nuova e si appende A QUELLA, non alla vecchia: stesso comportamento, "
+                 "anche nel caso limite")
+def _rn_div_conc_nodi(net, c):
+    if not net.conc_nodi:
+        return
+    nuovo = list(net.conc_nodi)
+    for kk in c["a"]:
+        eredita = [v[:] for v in nuovo[kk]] if kk < len(nuovo) else []
+        nuovo.append(eredita)
+    net.conc_nodi = nuovo
+
+
+@_nascita_regola("divisione", "eta", "zero",
+                 "self.eta = np.concatenate([self.eta, np.zeros(len(sel))])",
+                 "il figlio nasce senza `eta`")
+def _rn_div_eta(net, c):
+    net.eta = np.concatenate([net.eta, np.zeros(c["quante"])])
+
+
+@_nascita_regola("divisione", "mem_mot", "eredita dal genitore `a`",
+                 "self.mem_mot = np.vstack([self.mem_mot, self.mem_mot[a]]) if len(...) "
+                 "else np.zeros((len(sel), 3))",
+                 "la memoria di moto del padre; se la memoria non c'e' ancora, zeri")
+def _rn_div_mem_mot(net, c):
+    net.mem_mot = (np.vstack([net.mem_mot, net.mem_mot[c["a"]]])
+                   if len(net.mem_mot) else np.zeros((c["quante"], 3)))
+
+
+@_nascita_regola("divisione", "omega_s", "eredita dal genitore `a`",
+                 "self.omega_s = np.vstack([self.omega_s, self.omega_s[src]])",
+                 "il ritmo spinoriale del padre")
+def _rn_div_omega_s(net, c):
+    if not (c["eredita_vale"] and c["spinore_vale"]):
+        return
+    if len(net.omega_s) >= c["n0"]:
+        net.omega_s = np.vstack([net.omega_s, net.omega_s[c["src"]]])
+
+
+@_nascita_regola("divisione", "perc_chi", "eredita la chiralita' del genitore `a`",
+                 "self.perc_chi = np.concatenate([self.perc_chi, self.perc_chi[a]])",
+                 "[CHI_COOP via 2 di 3] profilo dormiente, non ancora accoppiato. "
+                 "### E QUESTO RAMO NON CONSERVA `N(+1) - N(-1)`: aggiunge un nodo dello "
+                 "STESSO segno del genitore. L'altro ramo (Schwinger) nasce OPPOSTO e la "
+                 "conserva -- per questo i nati si contano DUE volte, non una")
+def _rn_div_perc_chi(net, c):
+    net.perc_chi = np.concatenate([net.perc_chi, net.perc_chi[c["a"]]])
+
+
+@_nascita_regola("divisione", "perc_geom", "eredita la geometria del genitore `a`",
+                 "self.perc_geom = np.concatenate([self.perc_geom, self.perc_geom[a]])",
+                 "[CHI_COOP] la geometria NON e' coniugata: e' un giro compiuto o no, e si "
+                 "eredita tale")
+def _rn_div_perc_geom(net, c):
+    net.perc_geom = np.concatenate([net.perc_geom, net.perc_geom[c["a"]]])
+
+
+@_nascita_regola("divisione", "perc_tw", "zero",
+                 "self.perc_tw = np.concatenate([self.perc_tw, np.zeros(len(sel))])",
+                 "salto a 0: il profilo di torsione percorso riparte")
+def _rn_div_perc_tw(net, c):
+    net.perc_tw = np.concatenate([net.perc_tw, np.zeros(c["quante"])])
+
+
+@_nascita_regola("divisione", "phi0", "media (come `phi`)",
+                 "self.phi0 = np.concatenate([self.phi0, fm])",
+                 "la fase di riferimento nasce DOVE nasce la fase: lo stesso `fm`")
+def _rn_div_phi0(net, c):
+    net.phi0 = np.concatenate([net.phi0, c["fm"]])
+
+
+@_nascita_regola("divisione", "phi_s", "eredita dal genitore `a`",
+                 "self.phi_s = np.concatenate([self.phi_s, self.phi_s[a]])",
+                 "lo spinore di fase del padre -- ed e' il COMPAGNO di `psi_spin`, che "
+                 "eredita per la stessa ragione")
+def _rn_div_phi_s(net, c):
+    net.phi_s = np.concatenate([net.phi_s, net.phi_s[c["a"]]])
+
+
+@_nascita_regola("divisione", "phivel", "media dei genitori",
+                 "self.phivel = np.concatenate([self.phivel, 0.5 * (self.phivel[a] + "
+                 "self.phivel[b])])",
+                 "la velocita' di fase media. SOMMA DI DUE ADDENDI: in IEEE-754 "
+                 "l'addizione e' COMMUTATIVA, quindi l'ordine dei due genitori NON cambia "
+                 "un bit (misurato). Da TRE addendi non lo sarebbe")
+def _rn_div_phivel(net, c):
+    net.phivel = np.concatenate([net.phivel, 0.5 * (net.phivel[c["a"]] + net.phivel[c["b"]])])
+
+
+@_nascita_regola("divisione", "pos", "media dei genitori (punto medio)",
+                 "self.pos = np.vstack([self.pos, pos_figlio])",
+                 "il figlio nasce sul punto medio geometrico; l'asimmetria della mitosi "
+                 "diretta vive nella FASE, non nella posizione")
+def _rn_div_pos(net, c):
+    net.pos = np.vstack([net.pos, c["pos_figlio"]])
+
+
+# --- `psi`, `psi_spin`, `rho_spin`: assorbite da `_eredita_psi_figli` --------
+# ### LE DUE REGOLE NON SONO UGUALI, E NON PER CASO (decisione di Luca, 2026-09-28):
+#   `psi` fa la MEDIA perche' il suo compagno `phi` fa la media (`fm`); `psi_spin`
+#   EREDITA perche' il suo compagno `phi_s` eredita. Dare a ciascuno la regola del
+#   PROPRIO compagno e' l'unica scelta che non aggiunge una convenzione (`9-ter`).
+
+@_nascita_regola("divisione", "psi", "media dei genitori (come `phi`)",
+                 "self.psi = np.concatenate([cur[:n0], 0.5 * (cur[a] + cur[b])])",
+                 "e la somma e' COMPLESSA: due genitori in antifase danno un figlio con "
+                 "`|psi| ~ 0`. E' interferenza distruttiva, cioe' FISICA, non un errore. "
+                 "SI CONTA e non si assume (`A8`): se la cache non e' allineata a `n0` non "
+                 "si puo' ereditare, e quel salto e' cio' che faceva spegnere la "
+                 "schermatura per TUTTA la rete (`PSI-FLASH`)")
+def _rn_div_psi(net, c):
+    if not c["eredita_vale"]:
+        return
+    net._g_eredpsi_tot = getattr(net, "_g_eredpsi_tot", 0) + 1
+    cur = getattr(net, "psi", None)
+    if cur is not None and len(cur) >= c["n0"]:
+        net.psi = np.concatenate([cur[:c["n0"]], 0.5 * (cur[c["src_a"]] + cur[c["src_b"]])])
+    else:
+        net._g_eredpsi_salti = getattr(net, "_g_eredpsi_salti", 0) + 1
+        net._g_eredpsi_shape = (len(cur) if cur is not None else -1, c["n0"])
+
+
+@_nascita_regola("divisione", "psi_spin", "eredita da `a` (come `phi_s`)",
+                 "self.psi_spin = np.concatenate([cs[:n0], cs[a]])",
+                 "eredita, non media: il compagno `phi_s` eredita")
+def _rn_div_psi_spin(net, c):
+    if not c["eredita_vale"]:
+        return
+    cs = getattr(net, "psi_spin", None)
+    if cs is not None and len(cs) >= c["n0"]:
+        net.psi_spin = np.concatenate([cs[:c["n0"]], cs[c["src_a"]]])
+    else:
+        net._g_eredpsis_salti = getattr(net, "_g_eredpsis_salti", 0) + 1
+
+
+@_nascita_regola("divisione", "rho_spin", "eredita da `a` (come `psi_spin`)",
+                 "self.rho_spin = np.concatenate([np.asarray(rs)[:n0], np.asarray(rs)[a]])",
+                 "[PSI-FLASH] `rho_spin` COME `psi_spin`, e NON e' un'aggiunta ovvia: senza, "
+                 "`_rho_sorgente` prendeva il suo ripiego AL PASSO DOPO la nascita e "
+                 "restituiva `|psi|^2` invece di `rho_spin` PER TUTTA LA RETE -- il GRADINO "
+                 "del +11%. Sono la stessa grandezza vista in due modi, "
+                 "`rho_spin = psi_spin^dag psi_spin`")
+def _rn_div_rho_spin(net, c):
+    if not c["eredita_vale"]:
+        return
+    rs = getattr(net, "rho_spin", None)
+    if rs is not None and len(rs) >= c["n0"]:
+        net.rho_spin = np.concatenate([np.asarray(rs)[:c["n0"]],
+                                       np.asarray(rs)[c["src_a"]]])
+    else:
+        net._g_eredrho_salti = getattr(net, "_g_eredrho_salti", 0) + 1
+
+
+# --- le grandezze per ARCO ---------------------------------------------------
+
+@_nascita_regola("divisione", "_rep", "eredita dall'arco che si spezza",
+                 "self._rep = np.concatenate([self._rep[keep], self._rep[sel], "
+                 "self._rep[sel]])",
+                 "`_rep` e' per ARCO e segue la STESSA struttura degli altri array per "
+                 "arco: NON si eredita da `src` come gli stati per NODO. I due archi figli "
+                 "ereditano la memoria dell'arco da cui nascono, che e' cio' che "
+                 "`[sel], [sel]` fa")
+def _rn_div_rep(net, c):
+    net._rep = np.concatenate([net._rep[c["keep"]], net._rep[c["sel"]], net._rep[c["sel"]]])
+
+
+@_nascita_regola("divisione", "d", "meta' dell'arco (due tronconi)",
+                 "self.d = np.concatenate([self.d[keep], dh, dh])",
+                 "`dh = d[sel]/2`, passato per `_nasce('mitosi', 2, 0)` nella preparazione: "
+                 "e' il dimezzamento che produce la compressione degenere, perche' la "
+                 "geometria di equilibrio si accorcia a ogni suddivisione")
+def _rn_div_d(net, c):
+    net.d = np.concatenate([net.d[c["keep"]], c["dh"], c["dh"]])
+
+
+@_nascita_regola("divisione", "d0", "meta' dell'arco, con offset plastico",
+                 "self.d0 = np.concatenate([self.d0[keep], d0new])",
+                 "con `PLAST_DIN` l'offset e' emergente (stress metrico per eccesso di "
+                 "torsione, saturato); con `PLAST_MIT > 0` e' proporzionale alla torsione "
+                 "sciolta; altrimenti e' `dh` nudo. `d0new` e' GIA' `[d0h, d0h]`, cioe' i "
+                 "due figli, e passa per `_nasce('mitosi', 0, 1)`")
+def _rn_div_d0(net, c):
+    net.d0 = np.concatenate([net.d0[c["keep"]], c["d0new"]])
+
+
+@_nascita_regola("divisione", "peq", "eredita dall'arco che si spezza",
+                 "self.peq = np.concatenate([self.peq[keep], self.peq[sel], self.peq[sel]])",
+                 "### L'EREDITA' DELLA MITOSI NON SI TOCCA, e il perche' e' una frase di "
+                 "`PEQ_NASCITA_LOCALE`: *un arco che si spezza non NASCE, CONTINUA*. Per "
+                 "questo qui non c'e' `nan` e nello Schwinger si'")
+def _rn_div_peq(net, c):
+    net.peq = np.concatenate([net.peq[c["keep"]], net.peq[c["sel"]], net.peq[c["sel"]]])
+
+
+_nascita_non_si_tocca("divisione", "_peqn_idx",
+                      "la marca degli archi nati con `peq = nan` esiste SOLO per lo "
+                      "Schwinger: la mitosi non ne crea (eredita `peq`, non lo lascia da "
+                      "calibrare). DICHIARATO, non omesso")
+
+
+@_nascita_regola("divisione", "tw", "zero",
+                 "self.tw = np.concatenate([self.tw[keep], zz, zz])",
+                 "i due tronconi nascono senza torsione: la torsione dell'arco e' stata "
+                 "SCIOLTA dalla divisione, ed e' cio' che il calcio ha speso")
+def _rn_div_tw(net, c):
+    zz = np.zeros(c["quante"])
+    net.tw = np.concatenate([net.tw[c["keep"]], zz, zz])
+
+
+@_nascita_regola("divisione", "twp", "differenza di fase genitore-figlio",
+                 "self.twp = np.concatenate([self.twp[keep], self._wphi(self.phi[a] - fm), "
+                 "self._wphi(fm - self.phi[b])])",
+                 "### VINCOLO 1 DEL CONTRATTO: legge `phi[a]`/`phi[b]` DOPO il calcio, che "
+                 "e' una scrittura INDICIZZATA sui genitori -- quindi `phi` deve stare "
+                 "PRIMA, e nell'ordine del registro ci sta (`METRI` precede `STATO`)")
+def _rn_div_twp(net, c):
+    net.twp = np.concatenate([net.twp[c["keep"]],
+                              net._wphi(net.phi[c["a"]] - c["fm"]),
+                              net._wphi(c["fm"] - net.phi[c["b"]])])
+
+
+@_nascita_regola("divisione", "vd", "eredita dall'arco che si spezza",
+                 "self.vd = np.concatenate([self.vd[keep], self.vd[sel], self.vd[sel]])",
+                 "la velocita' metrica dell'arco si eredita come `_rep` e `peq`")
+def _rn_div_vd(net, c):
+    net.vd = np.concatenate([net.vd[c["keep"]], net.vd[c["sel"]], net.vd[c["sel"]]])
+
+
+for _nome_smp in ("_smp_d0", "_smp_d"):
+    _nascita_collocata("divisione", _nome_smp, "self._smp_chirurgia(keep=keep, nuovi=d0new)",
+                       "[SCALA_MIN_PASSO C3 / COES_CAUSALE C4] la fotografia di inizio passo "
+                       "subisce LE STESSE operazioni di `d0`, altrimenti un confronto "
+                       "`fine - inizio` per posizione confronterebbe ARCHI DIVERSI. NON e' "
+                       "una regola di nascita: e' una CHIRURGIA sullo snapshot, e si colloca "
+                       "nella preparazione perche' legge solo `keep` e `d0new`")
+
+# =============================================================================
+# ### EVENTO `schwinger`: la creazione di coppia
+# =============================================================================
+# L'anti-nodo nasce a fase `fm + pi`, collegato ai due genitori `aa`-`bb`. La
+# coppia (nodo `fm` + antinodo `fm+pi`) ha media `fm`, quindi CONSERVA l'olonomia
+# globale, ma introduce due difetti opposti.
+# ### E QUESTO E' IL RAMO CHE CONSERVA `N(+1) - N(-1)`: la carica nasce OPPOSTA.
+# =============================================================================
+
+
+@_nascita_regola("schwinger", "phi", "antifase del figlio di mitosi",
+                 "self.phi = np.concatenate([self.phi, anti])",
+                 "[FASE_2PI, D35] L'ANTIFASE E' META' DEL DOMINIO: `+pi` su 2pi, `+2pi` su "
+                 "4pi. Con `phi` su 4pi il `+2pi` NON e' un'antifase -- il campo legge "
+                 "`exp(i phi)` e l'antiparticella sarebbe IDENTICA alla particella")
+def _rn_sch_phi(net, c):
+    net.phi = np.concatenate([net.phi, c["anti"]])
+
+
+@_nascita_regola("schwinger", "i", "topologia: due archi nuovi verso i genitori",
+                 "self.i = np.concatenate([self.i, aa, k])",
+                 "l'antinodo si allaccia a ENTRAMBI i genitori: `aa-k` e `k-bb`. Nessun "
+                 "arco sparisce (non c'e' `keep`): la coppia AGGIUNGE")
+def _rn_sch_i(net, c):
+    net.i = np.concatenate([net.i, c["aa"], c["k"]])
+
+
+@_nascita_regola("schwinger", "j", "topologia: due archi nuovi verso i genitori",
+                 "self.j = np.concatenate([self.j, k, bb])",
+                 "il compagno di `i`")
+def _rn_sch_j(net, c):
+    net.j = np.concatenate([net.j, c["k"], c["bb"]])
+
+
+@_nascita_regola("schwinger", "_cs_nodo_prev", "eredita dal genitore `aa`",
+                 "self._cs_nodo_prev = np.concatenate([_csp, np.asarray(_csp, float)[src]])",
+                 "la stessa regola della divisione, col genitore `aa`: fuori dalla guardia "
+                 "sugli spinori, per la stessa ragione")
+def _rn_sch_cs_nodo_prev(net, c):
+    _rn_div_cs_nodo_prev(net, c)
+
+
+_nascita_collocata("schwinger", "_deg", "self._grado()",
+                   "come nella divisione: una DERIVATA della topologia, collocata dopo il "
+                   "blocco perche' legge `i`, `j` e `len(phi)`")
+
+
+@_nascita_regola("schwinger", "_nb", "eredita dal genitore `aa`",
+                 "self._nb = np.vstack([self._nb, self._nb[src]])",
+                 "e il suo esito resta la condizione di `_nb_prec`, come nella divisione")
+def _rn_sch_nb(net, c):
+    _rn_div_nb(net, c)
+
+
+@_nascita_regola("schwinger", "_nb_prec", "eredita dal genitore `aa`",
+                 "self._nb_prec = np.vstack([self._nb_prec, self._nb_prec[src]])",
+                 "SOLO SE `_nb` e' stata estesa")
+def _rn_sch_nb_prec(net, c):
+    _rn_div_nb_prec(net, c)
+
+
+@_nascita_regola("schwinger", "_nb_ret", "eredita dal genitore `aa`",
+                 "self._nb_ret = np.vstack([_nbr_er, _nbr_er[src]])",
+                 "il Bloch ritardato del genitore")
+def _rn_sch_nb_ret(net, c):
+    _rn_div_nb_ret(net, c)
+
+
+@_nascita_regola("schwinger", "_psi_prec", "eredita dal genitore `aa`",
+                 "self._psi_prec = np.concatenate([self._psi_prec, self._psi_prec[src]])",
+                 "evita il reset spurio globale in `ritmo()`")
+def _rn_sch_psi_prec(net, c):
+    _rn_div_psi_prec(net, c)
+
+
+@_nascita_regola("schwinger", "_psi_spin_prec", "eredita dal genitore `aa`",
+                 "self._psi_spin_prec = np.vstack([_pspr, np.asarray(_pspr)[src]])",
+                 "lo snapshot del ritmo spinoriale a 4pi")
+def _rn_sch_psi_spin_prec(net, c):
+    _rn_div_psi_spin_prec(net, c)
+
+
+@_nascita_regola("schwinger", "_psi_spinor", "eredita INVERTITA (antichirale)",
+                 "er = self._psi_spinor[src].copy(); er = -er",
+                 "### `segno = -1`: doppia copertura OPPOSTA, coerente con "
+                 "`perc_chi = -perc_chi[genitore]`. E' la regola `eredita INVERTITA` del "
+                 "piano, e l'unica dove il segno conta")
+def _rn_sch_psi_spinor(net, c):
+    _rn_div_psi_spinor(net, c)
+
+
+@_nascita_regola("schwinger", "_spinor_lift", "eredita INVERTITA (antichirale)",
+                 "el = self._spinor_lift[src].copy(); el = -el",
+                 "la stessa convenzione di segno di `_psi_spinor`")
+def _rn_sch_spinor_lift(net, c):
+    _rn_div_spinor_lift(net, c)
+
+
+@_nascita_regola("schwinger", "conc_nodi",
+                 "eredita la concorrenza di `aa`, MARCATA `schwinger`",
+                 "eredita = [[v[0], v[1], v[2], \"schwinger\"] if len(v) == 3 else v[:] "
+                 "for v in eredita]",
+                 "se `aa` concorre a una massa, l'antinodo vi concorre pure (categoria "
+                 "*creazione di coppie* = accrescimento); se `aa` non concorre a nulla, "
+                 "l'antinodo resta senza concorrenza (materia nuova dal vuoto teso). "
+                 "La distinzione FISICA: la Schwinger drena tensione di una massa "
+                 "esistente, tranne quando nasce lontano da ogni massa. "
+                 "### E qui pure la mutazione diventa SCRITTURA, col `len` crescente "
+                 "conservato")
+def _rn_sch_conc_nodi(net, c):
+    if not net.conc_nodi:
+        return
+    nuovo = list(net.conc_nodi)
+    for gk in c["aa"]:
+        eredita = [v[:] for v in nuovo[gk]] if gk < len(nuovo) else []
+        eredita = [[v[0], v[1], v[2], "schwinger"] if len(v) == 3 else v[:] for v in eredita]
+        nuovo.append(eredita)
+    net.conc_nodi = nuovo
+
+
+@_nascita_regola("schwinger", "eta", "zero",
+                 "self.eta = np.concatenate([self.eta, np.zeros(nc)])",
+                 "l'antinodo nasce senza `eta`")
+def _rn_sch_eta(net, c):
+    net.eta = np.concatenate([net.eta, np.zeros(c["nc"])])
+
+
+@_nascita_regola("schwinger", "mem_mot", "zero",
+                 "self.mem_mot = np.vstack([self.mem_mot, np.zeros((nc, 3))]) if len(...) "
+                 "else np.zeros((nc, 3))",
+                 "### E QUI LA REGOLA E' DIVERSA DALLA MITOSI, ed e' dichiarata: il figlio "
+                 "della divisione EREDITA la memoria di moto del padre, l'antinodo nasce "
+                 "con memoria NULLA -- non continua un moto, comincia")
+def _rn_sch_mem_mot(net, c):
+    net.mem_mot = (np.vstack([net.mem_mot, np.zeros((c["nc"], 3))])
+                   if len(net.mem_mot) else np.zeros((c["nc"], 3)))
+
+
+@_nascita_regola("schwinger", "omega_s", "eredita dal genitore `aa`",
+                 "self.omega_s = np.vstack([self.omega_s, self.omega_s[src]])",
+                 "il ritmo spinoriale del genitore")
+def _rn_sch_omega_s(net, c):
+    _rn_div_omega_s(net, c)
+
+
+@_nascita_regola("schwinger", "perc_chi", "eredita INVERTITA (la CARICA si coniuga)",
+                 "self.perc_chi = np.concatenate([self.perc_chi, -self.perc_chi[aa]])",
+                 "### l'antiparticella nasce con chiralita' OPPOSTA al genitore. "
+                 "### E' IL RAMO CHE CONSERVA: la coppia e' NEUTRA e `N(+1) - N(-1)` NON "
+                 "cambia, come le coppie nel vuoto quantistico")
+def _rn_sch_perc_chi(net, c):
+    net.perc_chi = np.concatenate([net.perc_chi, -net.perc_chi[c["aa"]]])
+
+
+@_nascita_regola("schwinger", "perc_geom", "eredita NON invertita (la GEOMETRIA non si "
+                 "coniuga)",
+                 "self.perc_geom = np.concatenate([self.perc_geom, self.perc_geom[aa]])",
+                 "[CHI_COOP via 3 di 3] ### SCELTA DICHIARATA, NON OVVIA: la CARICA nasce "
+                 "opposta (e' antimateria); la GEOMETRIA no, copiata tale e quale, perche' "
+                 "non e' una carica e non si coniuga. E `chi_basc` la riscrive al passo dopo")
+def _rn_sch_perc_geom(net, c):
+    net.perc_geom = np.concatenate([net.perc_geom, net.perc_geom[c["aa"]]])
+
+
+@_nascita_regola("schwinger", "perc_tw", "zero",
+                 "self.perc_tw = np.concatenate([self.perc_tw, np.zeros(nc)])",
+                 "salto a 0")
+def _rn_sch_perc_tw(net, c):
+    net.perc_tw = np.concatenate([net.perc_tw, np.zeros(c["nc"])])
+
+
+@_nascita_regola("schwinger", "phi0", "antifase (come `phi`)",
+                 "self.phi0 = np.concatenate([self.phi0, anti])",
+                 "la fase di riferimento nasce dove nasce la fase")
+def _rn_sch_phi0(net, c):
+    net.phi0 = np.concatenate([net.phi0, c["anti"]])
+
+
+@_nascita_regola("schwinger", "phi_s", "zero",
+                 "self.phi_s = np.concatenate([self.phi_s, np.zeros(nc)])",
+                 "### E QUI PURE LA REGOLA E' DIVERSA DALLA MITOSI: il figlio della "
+                 "divisione EREDITA `phi_s` dal padre, l'antinodo nasce a ZERO -- inerte se "
+                 "lo spinore di fase e' spento")
+def _rn_sch_phi_s(net, c):
+    net.phi_s = np.concatenate([net.phi_s, np.zeros(c["nc"])])
+
+
+@_nascita_regola("schwinger", "phivel", "media dei genitori",
+                 "self.phivel = np.concatenate([self.phivel, 0.5 * (self.phivel[aa] + "
+                 "self.phivel[bb])])",
+                 "come nella divisione: due addendi, e in IEEE-754 l'addizione di DUE "
+                 "addendi e' commutativa al bit")
+def _rn_sch_phivel(net, c):
+    net.phivel = np.concatenate([net.phivel,
+                                 0.5 * (net.phivel[c["aa"]] + net.phivel[c["bb"]])])
+
+
+@_nascita_regola("schwinger", "pos", "media dei genitori (punto medio)",
+                 "self.pos = np.vstack([self.pos, 0.5 * (self.pos[aa] + self.pos[bb])])",
+                 "l'anti-nodo e' collocato sul punto medio COME il nodo, cosi' i due "
+                 "nascono SOVRAPPOSTI e la dinamica (antifase -> repulsione) li separa da "
+                 "se'. ### NON si impone alcuna forza: solo la fase opposta")
+def _rn_sch_pos(net, c):
+    net.pos = np.vstack([net.pos, 0.5 * (net.pos[c["aa"]] + net.pos[c["bb"]])])
+
+
+@_nascita_regola("schwinger", "psi", "media dei genitori (come `phi`)",
+                 "self.psi = np.concatenate([cur[:n0], 0.5 * (cur[a] + cur[b])])",
+                 "[PSI-FLASH] lo STESSO per il canale di Schwinger: i genitori sono "
+                 "`aa`/`bb`. ### E IL SEGNO NON SI TOCCA: `psi` e' un campo COMPLESSO, e "
+                 "l'antinodo nasce a fase `anti = fm + pi`, cioe' il segno e' GIA' nella "
+                 "sua fase")
+def _rn_sch_psi(net, c):
+    _rn_div_psi(net, c)
+
+
+@_nascita_regola("schwinger", "psi_spin", "eredita da `aa` (come `phi_s`... che qui e' zero)",
+                 "self.psi_spin = np.concatenate([cs[:n0], cs[a]])",
+                 "la regola e' la stessa della divisione, e NON segue `phi_s` in questo "
+                 "evento: `phi_s` dell'antinodo e' zero, `psi_spin` eredita. ### E' una "
+                 "ASIMMETRIA DI OGGI, dichiarata qui invece che nascosta -- il commit 3 "
+                 "SPOSTA, non cura")
+def _rn_sch_psi_spin(net, c):
+    _rn_div_psi_spin(net, c)
+
+
+@_nascita_regola("schwinger", "rho_spin", "eredita da `aa` (come `psi_spin`)",
+                 "self.rho_spin = np.concatenate([np.asarray(rs)[:n0], np.asarray(rs)[a]])",
+                 "coerente con `psi_spin`: sono la stessa grandezza vista in due modi")
+def _rn_sch_rho_spin(net, c):
+    _rn_div_rho_spin(net, c)
+
+
+@_nascita_regola("schwinger", "_rep", "zero (archi NUOVI)",
+                 "self._rep = np.concatenate([self._rep, np.zeros(2 * nc)])",
+                 "### E QUI LA REGOLA E' DIVERSA DALLA MITOSI: i due tronconi della "
+                 "divisione EREDITANO la memoria dell'arco che si spezza (`[sel], [sel]`); "
+                 "gli archi della coppia NASCONO, e nascono senza memoria")
+def _rn_sch_rep(net, c):
+    net._rep = np.concatenate([net._rep, np.zeros(2 * c["nc"])])
+
+
+@_nascita_regola("schwinger", "d", "meta' della distanza fra i genitori",
+                 "self.d = np.concatenate([self.d, dd, dd])",
+                 "`dd = max(0.5 * norm(pos[aa] - pos[bb]), 0.05)`, per `_nasce('schwinger', "
+                 "2, 2)`. ### E la lunghezza viene da `pos`, non da `d`: e' la voce `A3` "
+                 "della coda. `norm(..., axis=1)` somma TRE componenti in ordine FISSO, "
+                 "quindi non dipende dall'ordine")
+def _rn_sch_d(net, c):
+    net.d = np.concatenate([net.d, c["dd"], c["dd"]])
+
+
+@_nascita_regola("schwinger", "d0", "meta' della distanza fra i genitori",
+                 "self.d0 = np.concatenate([self.d0, dd, dd])",
+                 "### LO STESSO `dd` di `d`: e' il QUARTO SITO di `_nasce`, `x2` su "
+                 "ENTRAMBE le grandezze -- l'arco della coppia nasce A RIPOSO, cioe' "
+                 "`d == d0`, e quindi senza stress")
+def _rn_sch_d0(net, c):
+    net.d0 = np.concatenate([net.d0, c["dd"], c["dd"]])
+
+
+@_nascita_regola("schwinger", "peq", "`nan` = da calibrare sul PROPRIO arco",
+                 "self.peq = np.concatenate([self.peq, np.full(2 * nc, pmed)])",
+                 "[PEQ_NASCITA_LOCALE, C2] `nan` significa *da calibrare sulla `rho` del "
+                 "PROPRIO arco*, ed e' la STESSA convenzione di `_allaccia`: `step` lo fa "
+                 "all'inizio del passo dopo, e da' `anom = 0` ESATTO alla nascita. ### Il "
+                 "ramo storico prendeva `median(self.peq)`, una statistica GLOBALE dentro "
+                 "una legge locale (`A2`)")
+def _rn_sch_peq(net, c):
+    net.peq = np.concatenate([net.peq, np.full(2 * c["nc"], c["pmed"])])
+
+
+@_nascita_regola("schwinger", "_peqn_idx", "la marca degli archi nati con `nan`",
+                 "self._peqn_idx = np.arange(len(self.peq) - 2 * nc, len(self.peq))",
+                 "### VINCOLO 2 DEL CONTRATTO: gli indici si riferiscono all'array FINALE, "
+                 "quindi questa regola DEVE girare DOPO `peq` -- ed e' per questo che "
+                 "`_peqn_idx`, che in nessun registro sta, e' DICHIARATO subito dopo `peq` "
+                 "in `ORDINE_DI_NASCITA`. Serve a distinguere QUESTI `nan` da quelli di "
+                 "`_allaccia`, che la SEMINA scrive su TUTTI gli archi al primo passo")
+def _rn_sch_peqn_idx(net, c):
+    if PEQ_NASCITA_LOCALE:
+        net._peqn_idx = np.arange(len(net.peq) - 2 * c["nc"], len(net.peq))
+
+
+@_nascita_regola("schwinger", "tw", "zero",
+                 "self.tw = np.concatenate([self.tw, zz2, zz2])",
+                 "gli archi della coppia nascono senza torsione")
+def _rn_sch_tw(net, c):
+    zz2 = np.zeros(c["nc"])
+    net.tw = np.concatenate([net.tw, zz2, zz2])
+
+
+@_nascita_regola("schwinger", "twp", "differenza di fase genitore-antinodo",
+                 "self.twp = np.concatenate([self.twp, self._wphi(self.phi[aa] - anti), "
+                 "self._wphi(anti - self.phi[bb])])",
+                 "legge `phi[aa]`/`phi[bb]`, che sono GENITORI: l'estensione di `phi` non "
+                 "li tocca, quindi qui l'arco e' INERTE (misurato). Ma l'ordine resta "
+                 "quello del registro, che e' lo stesso di prima")
+def _rn_sch_twp(net, c):
+    net.twp = np.concatenate([net.twp,
+                              net._wphi(net.phi[c["aa"]] - c["anti"]),
+                              net._wphi(c["anti"] - net.phi[c["bb"]])])
+
+
+@_nascita_regola("schwinger", "vd", "zero (archi NUOVI)",
+                 "self.vd = np.concatenate([self.vd, np.zeros(2 * nc)])",
+                 "come `_rep`: nascono fermi, non continuano un moto")
+def _rn_sch_vd(net, c):
+    net.vd = np.concatenate([net.vd, np.zeros(2 * c["nc"])])
+
+
+for _nome_smp in ("_smp_d0", "_smp_d"):
+    _nascita_collocata("schwinger", _nome_smp,
+                       "self._smp_chirurgia(nuovi=np.concatenate([dd, dd]))",
+                       "[SCALA_MIN_PASSO C3] lo snapshot segue anche lo Schwinger, e qui "
+                       "SENZA `keep`: la coppia aggiunge archi e non ne toglie")
+del _nome_smp
+
+
+def _nascita_collaudo_della_tabella():
+    """### IL PRESIDIO, A SECCO: ogni evento convertito copre TUTTO l'ordine.
+
+    Gira all'import, cosi' una grandezza che manca ferma il processo ### PRIMA che
+    un run cominci, invece di farlo cadere a meta'.
+    """
+    for evento in EVENTI_CONVERTITI:
+        mancanti = [n for n in ORDINE_DI_NASCITA if (evento, n) not in REGOLE_NASCITA]
+        if mancanti:
+            raise RuntimeError(
+                "regola di nascita non dichiarata per `%s` all'evento `%s` (e altre %d). "
+                "La tabella `REGOLE_NASCITA` deve coprire TUTTO `ORDINE_DI_NASCITA`."
+                % (mancanti[0], evento, len(mancanti) - 1))
+
+
+_nascita_collaudo_della_tabella()
+
+
 def _forma_di(v):
     """La forma **vera** di una grandezza: `shape` per un array, `(len,)` per una lista."""
     if v is None:
@@ -2853,126 +3729,35 @@ class Rete:
         elif len(cur) > n:
             self._psi_spinor = cur[:n]
 
-    def _eredita_psi_figli(self, src_a, src_b=None):
-        """**`psi` e `psi_spin` dei NATI: EREDITA', non ricalcolo.** *(forma 7, `nascita`.)*
-
-        ### Perche' EREDITA' e non un ricalcolo -- correzione del guardiano (Luca, 2026-09-28)
-        Un ricalcolo a meta' passo leggerebbe **il grafo DOPO la mitosi**: sarebbe **di nuovo una
-        lettura mista**, cioe' la cosa che questa cura combatte. **Il nato eredita, e il valore
-        vero arriva al passo dopo** dal ricalcolo normale di `step`.
-
-        ### Le due regole, e NON sono uguali per una ragione
-        | | regola | il compagno che gia' la usa |
-        |---|---|---|
-        | `psi` | ### **MEDIA dei genitori** | `phi` del figlio e' `fm`, la fase **MEDIA** |
-        | `psi_spin` | ### **EREDITA' da `a`** | `phi_s` alla nascita **eredita da `a`** |
-
-        **Dare a ciascuno la regola del PROPRIO compagno e' l'unica scelta che non aggiunge una
-        convenzione nuova** (`9-ter`). *(Approvata da Luca, 2026-09-28.)*
-
-        ⚠ **E la somma di `psi` e' COMPLESSA:** due genitori in antifase danno un figlio con
-        `|psi| ~ 0`. ### **E' interferenza distruttiva, cioe' fisica, non un errore.**
-
-        **Va chiamata DOPO la crescita di `self.n`**, come `_eredita_spinore_figli`:
-        `n0 = self.n - len(src_a)`. `src_b is None` vuol dire **un solo genitore** *(l'antinodo
-        della creazione di coppia eredita dalla coppia `aa`/`bb`, e chi non ha il secondo passa
-        solo il primo)*.
-        """
-        a = np.asarray(src_a, int)
-        k = len(a)
-        if k == 0:
-            return
-        n0 = self.n - k                                # conteggio PRIMA della crescita
-        if n0 <= 0:
-            return
-        b = a if src_b is None else np.asarray(src_b, int)
-        # ⚠ SI CONTA, non si assume (`A8`): se una delle due cache non e' allineata a `n0` non si
-        #   puo' ereditare, e quel salto e' proprio cio' che faceva spegnere la schermatura.
-        self._g_eredpsi_tot = getattr(self, "_g_eredpsi_tot", 0) + 1
-        cur = getattr(self, "psi", None)
-        if cur is not None and len(cur) >= n0:
-            self.psi = np.concatenate([cur[:n0], 0.5 * (cur[a] + cur[b])])
-        else:
-            self._g_eredpsi_salti = getattr(self, "_g_eredpsi_salti", 0) + 1
-            self._g_eredpsi_shape = (len(cur) if cur is not None else -1, n0)
-        cs = getattr(self, "psi_spin", None)
-        if cs is not None and len(cs) >= n0:
-            self.psi_spin = np.concatenate([cs[:n0], cs[a]])
-        else:
-            self._g_eredpsis_salti = getattr(self, "_g_eredpsis_salti", 0) + 1
-        # [PSI-FLASH, 2026-09-28] `rho_spin` COME `psi_spin`, e non e' un'aggiunta ovvia: senza,
-        #   `_rho_sorgente` prendeva il suo ripiego AL PASSO DOPO la nascita e restituiva `|psi|^2`
-        #   invece di `rho_spin` PER TUTTA LA RETE -- il GRADINO del +11 % che il flash grande
-        #   copriva. **Il nato prende `rho_spin[a]`, coerente con `psi_spin[a]`** (decisione di
-        #   Luca): sono la stessa grandezza vista in due modi, `rho_spin = psi_spin^dag psi_spin`.
-        rs = getattr(self, "rho_spin", None)
-        if rs is not None and len(rs) >= n0:
-            self.rho_spin = np.concatenate([np.asarray(rs)[:n0], np.asarray(rs)[a]])
-        else:
-            self._g_eredrho_salti = getattr(self, "_g_eredrho_salti", 0) + 1
-
-    def _eredita_spinore_figli(self, src, segno=1):
-        """Estende le cache spinoriali ai nuovi nodi EREDITANDO dal genitore src (regola D: eredita
-        lo spinore COMPLESSO col segno, non un Bloch ri-derivato). segno=-1 per antinodi (doppia-
-        copertura opposta -> antichirale, coerente con perc_chi=-perc_chi[genitore]). Estende anche
-        _psi_prec (evita il reset spurio globale in ritmo() su len!=n). No-op se --spinore-corretto off.
-        Va chiamata DOPO la crescita di self.phi (self.n gia' nuovo): n0 = self.n - len(src)."""
-        src = np.asarray(src, int); k = len(src)
-        if k == 0:
-            return
-        n0 = self.n - k                                   # conteggio PRIMA della crescita
-        if n0 <= 0:
-            return
-        # [FIX 2026-09-15] cs DEL PASSO PRECEDENTE: il figlio eredita dal padre, ESATTAMENTE come
-        # _nb_ret / _nb_prec / omega_s / _psi_spinor / _psi_prec. Senza, dopo ogni mitosi risulta
-        # len(_cs_nodo_prev) < n, la guardia di _tempo_luce_nodo fallisce e si cade nel fallback
-        # cs = CS_M: MISURATO, scattava nell'80% dei passi, cioe' `tau = d/cs` calcolava in realta'
-        # `tau = d/CS_M` -- e lo stesso valeva per lo STRATO 1, che usa lo stesso metodo.
-        # STA PRIMA della guardia sugli spinori di proposito: questa cache vive sotto
-        # CS_DINAMICO and (FORK_SU2_MEM or STEP2_OROLOGIO), NON sotto --spinore-corretto; metterla
-        # dopo lascerebbe il difetto vivo proprio nei run STEP 2. Se la cache non esiste (flag OFF)
-        # e' un no-op esatto: nessun valore nuovo, nessun parametro, nessun floor.
-        _csp_er = getattr(self, "_cs_nodo_prev", None)
-        if _csp_er is not None and len(_csp_er) >= n0:
-            self._cs_nodo_prev = np.concatenate([_csp_er, np.asarray(_csp_er, float)[src]])
-        if not (SPINORE_CORRETTO or CAMPO_SPINORIALE):   # [FASE 5] eredita' spinore attiva anche nei run --campo-spinoriale
-            return
-        if hasattr(self, "_nb") and self._nb is not None and len(self._nb) >= n0:
-            self._nb = np.vstack([self._nb, self._nb[src]])
-            if hasattr(self, "_nb_prec") and self._nb_prec is not None and len(self._nb_prec) >= n0:
-                self._nb_prec = np.vstack([self._nb_prec, self._nb_prec[src]])
-        # [FORK SU(2) - STRATO 1] il Bloch RITARDATO e' memoria di NODO: il figlio eredita il passato
-        # del padre, esattamente come _nb_prec. Senza questo, al passo dopo len(_nb_ret) != n e la
-        # memoria verrebbe RESETTATA a ogni mitosi (ritardo perso proprio dove il sistema evolve di piu').
-        _nbr_er = getattr(self, "_nb_ret", None)
-        if _nbr_er is not None and len(_nbr_er) >= n0:
-            self._nb_ret = np.vstack([_nbr_er, _nbr_er[src]])
-        if len(self.omega_s) >= n0:
-            self.omega_s = np.vstack([self.omega_s, self.omega_s[src]])
-        if len(self._psi_spinor) >= n0:
-            er = self._psi_spinor[src].copy()
-            if segno < 0:
-                er = -er                                  # -1 = segno di doppia-copertura opposto (antichirale)
-            self._psi_spinor = np.vstack([self._psi_spinor, er])
-        if len(self._spinor_lift) >= n0:
-            el = self._spinor_lift[src].copy()
-            if segno < 0:
-                el = -el
-            self._spinor_lift = np.vstack([self._spinor_lift, el])
-        if self._psi_prec is not None and len(self._psi_prec) >= n0:
-            self._psi_prec = np.concatenate([self._psi_prec, self._psi_prec[src]])
-        # [FIX 2026-09-15] SNAPSHOT DEL RITMO SPINORIALE (4pi): stessa convenzione, settimo punto.
-        # `_psi_spin_prec` e' scritto a fine passo (riga ~2647) con l'`n` di QUEL passo; senza questa
-        # estensione, dopo ogni mitosi `len(_psi_spin_prec) != self.n` e la guardia ESATTA di `ritmo()`
-        # (riga ~1829) scarta il ramo a 4pi. MISURATO: scartava nel **95.33%** delle chiamate, e la
-        # condizione che falliva era `len(_psi_spin_prec) != n` in **143 casi su 143** — `psi_spin`,
-        # che `calcola_psi` ricostruisce dentro il passo, era sempre della lunghezza giusta.
-        # Conseguenza: la FASE 5 (orologio di doppia copertura) era **inerte** in ogni run
-        # `--campo-spinoriale`, e `r` veniva dal ritmo SCALARE a 2pi, quello storico.
-        # E' `n x 2` COMPLESSO, quindi `vstack` come `_nb`/`_psi_spinor`, non `concatenate` 1-D.
-        _pspr = getattr(self, "_psi_spin_prec", None)
-        if _pspr is not None and len(_pspr) >= n0:
-            self._psi_spin_prec = np.vstack([_pspr, np.asarray(_pspr)[src]])
+    # =====================================================================
+    # ### QUI STAVANO `_eredita_psi_figli` E `_eredita_spinore_figli`.
+    # ### SONO ASSORBITE DAL PUNTO UNICO DI NASCITA (`COMMIT 3`, 2026-10-02).
+    # =====================================================================
+    # Le loro **13 grandezze** sono ora righe di `REGOLE_NASCITA`, in testa al file:
+    #   `_cs_nodo_prev` `_nb` `_nb_prec` `_nb_ret` `_psi_prec` `_psi_spin_prec`
+    #   `_psi_spinor` `_spinor_lift` `omega_s` `psi` `psi_spin` `rho_spin`
+    #
+    # ### IL RIORDINO NON LE BUTTA: le ASSORBE -- e la ragione per cui esistevano
+    #   *(le cure `C7`/`C11`/`PSI-FLASH`)* vive nella `derivazione` di ciascuna
+    #   regola, che e' il posto dove chi legge quella grandezza la trova.
+    #
+    # ⚠ **E DUE COSE NON OVVIE SONO CONSERVATE LI', non perse:**
+    #   ① `_nb_prec` era estesa **SOLO DENTRO il ramo di `_nb`** -- una dipendenza
+    #     di **CONTROLLO**, non di dato, che nessun grafo sui dati vedrebbe. Ora
+    #     passa per `c["_nb_esteso"]`;
+    #   ② `_cs_nodo_prev` concatena `_csp` **INTERO**, non `_csp[:n0]` come fa `psi`:
+    #     due convenzioni diverse nella stessa funzione, e si conservano tali.
+    #
+    # ### E `n0` NON SI CALCOLA PIU' QUI: arriva da `c["n0"]`, catturato nella
+    #   PREPARAZIONE. Prima era `n0 = self.n - k`, cioe' una lettura di `self.n`
+    #   -- una `@property` su `len(self.phi)` -- **A META' DELLA NASCITA**:
+    #   misurato da `csv/_test_fork/_ordine_registro.py` come vincolo 3 del
+    #   contratto dell'ordine.
+    #
+    # 📌 Alcuni commenti e docstring altrove nel file le nominano ancora, e li'
+    #   la citazione e' **storica**: descrivono da quale cura una regola nasce.
+    #   Il loro posto di oggi e' `REGOLE_NASCITA`.
+    # =====================================================================
         # [CORREZIONE DI DIFETTO, 2026-09-16 - decisione di Luca] `_xi_rumore` **NON SI EREDITA**,
         # e qui non c'e' nessun codice apposta: il figlio riceve un `xi` FRESCO dal ramo di
         # estensione di `_passo_spinoriale`, che estrae dalla distribuzione stazionaria.
@@ -7277,39 +8062,43 @@ class Rete:
     def mitosi(self):
         """**CHI ESEGUE la divisione** — la decisione sta in `decidi_divisione`.
 
-        *(`COMMIT 2` del riordino, 2026-10-01: ### **una RIORGANIZZAZIONE, non una cura.**
+        *(`COMMIT 3` del riordino, 2026-10-02: ### **LA NASCITA COME EVENTO UNICO.**
         Byte-identico, zero bit.)*
 
-        ### ⚠ **L'ORDINE NON E' CAMBIATO DI UN PASSO:** la decisione gira **prima**, com'e' sempre
-        stato, e ### **le sue scritture avvengono nello STESSO punto del passo.** L'unica cosa che
-        cambia e' ### **dove si legge il codice.**
+        ### Le quattro fasi, e l'ordine fra loro e' il punto
+        | | |
+        |---|---|
+        | **1 PREPARAZIONE** | si calcola **tutto** cio' che serve: i genitori, `fm`, `keep`, `dh`, `d0new`. ### **Nessuna scrittura della nascita** |
+        | **2 IL CALCIO** | ai **genitori**, cioe' a nodi che ### **esistono gia'**: non e' una nascita |
+        | ### **3 LA NASCITA** | ### **`nascita(self, evento, c)`** — e **quello e' l'unico posto** che scrive le grandezze del registro |
+        | **4 I CONTATORI** | i nati, i derivati (`_grado`), gli allineamenti — ### **dopo**, e dichiarati |
+
+        ### ⚠ **PRIMA ERANO TRE I POSTI CHE SCRIVEVANO**: `mitosi`, i due `_eredita_*`,
+        piu' la crescita per **MUTAZIONE** di `conc_nodi` *(`.append`, che l'AST non vede)*.
+        ### **Ora e' UNO.** I due `_eredita_*` sono **ASSORBITI** — il riordino non li butta,
+        e la ragione per cui esistevano *(le cure `C7`/`C11`/`PSI-FLASH`)* vive nelle
+        `derivazione` delle loro regole.
+
+        ### 📌 **E L'ORDINE DELLE SCRITTURE E' L'ORDINE DEL REGISTRO, MISURATO**
+        `csv/_test_fork/_ordine_registro.py`: ### **4 vincoli genuini, 0 violazioni.**
+        `phi` prima di `twp` · `peq` prima di `_peqn_idx` · `n0` nel **contesto** ·
+        le **6 chiamate con effetto** collocate a mano. *(Vedi il blocco di
+        `REGOLE_NASCITA` in testa al file.)*
         """
         sel, perche = self.decidi_divisione()
         if sel is None:
             return 0
+        # =====================================================================
+        # ### 1. PREPARAZIONE -- nessuna scrittura della nascita, qui.
+        # =====================================================================
         # [PEQ-MEDIANA-ISTANTE, 2026-10-02, decisione di Luca -- via (b) passo 2]
         #   `_g_peqn_mediana` e' il DIAGNOSTICO <<cio' che si EVITA>>: la mediana GLOBALE
-        #   di `peq` che `PEQ_NASCITA_LOCALE` esiste per NON usare. Prima stava DENTRO il
-        #   blocco di Schwinger, FRA le due scritture di `peq` -- e li' era l'UNICO ostacolo
-        #   al PUNTO UNICO di nascita: una mediana sull'intero array presa fra la
-        #   riscrittura `concatenate([peq[keep], peq[sel], peq[sel]])` e l'estensione dello
-        #   Schwinger NON si puo' spostare ne' prima ne' dopo (misurato da
-        #   `csv/_test_fork/_punto_unico_fattibile.py`).
-        #
+        #   di `peq` che `PEQ_NASCITA_LOCALE` esiste per NON usare.
         #   ### L'ISTANTE E' DICHIARATO: LO STATO DA CUI LA NASCITA DEL PASSO PARTE.
         #   Non e' una scelta di comodo, ed e' l'unico istante NON AMBIGUO: <<dopo la
         #   nascita completa>> dipenderebbe da QUALI RAMI sono scattati dentro `mitosi`
         #   (Schwinger si'/no, quanti archi), quindi due passi darebbero mediane prese su
         #   stati diversi PER RAGIONI DIVERSE.
-        #   ### E IL NUMERO CAMBIA, e si dichiara: prima era la mediana DOPO la
-        #   riscrittura della mitosi, ora e' quella PRIMA. La differenza e' esattamente
-        #   l'effetto di quella riscrittura sulla mediana, e il sigillo esteso
-        #   (`csv/_seal_fork/_sigillo_confronto_esteso.py`) deve vedere QUELLA e
-        #   NIENT'ALTRO.
-        #   ### IL GATE NON CAMBIA: l'assegnazione resta dov'era, sotto le sue tre
-        #   condizioni. Qui si cattura solo il VALORE, in una LOCALE -- cosi'
-        #   l'assegnazione non e' piu' una LETTURA di `self.peq` e non blocca piu' il
-        #   blocco contiguo delle scritture.
         #   ### IL COSTO, MISURATO e non stimato: `np.median` su 471564 float costa
         #   `0.0053 s`, cioe' lo `0.187 %` di un passo da `2.849 s`. Il gate e' CHEAP
         #   (due booleani e una lunghezza), quindi la mediana si paga solo nei passi in
@@ -7362,36 +8151,13 @@ class Rete:
             _mezzo = self._dphi() / 2.0
             fm = np.where(flip, (fm + _mezzo) % self._dphi(), fm)
             self.ultima_frac_antifase = float(flip.mean()) if len(flip) else 0.0
-        self.pos = np.vstack([self.pos, pos_figlio])
-        self.phi = np.concatenate([self.phi, fm]); self.phi0 = np.concatenate([self.phi0, fm])
-        self.phi_s = np.concatenate([self.phi_s, self.phi_s[a]])   # spinore del figlio: eredita dal genitore
-        self.phivel = np.concatenate([self.phivel, 0.5 * (self.phivel[a] + self.phivel[b])])
-        self.eta = np.concatenate([self.eta, np.zeros(len(sel))])
-        # profilo di percorrenza del figlio: eredita la chiralita' del genitore a
-        # (dormiente, non ancora accoppiato). Salto a 0.
-        self.perc_chi = np.concatenate([self.perc_chi, self.perc_chi[a]])
-        # [CHI_COOP] VIA 2 di 3 (mitosi). Il figlio copia la GEOMETRIA del genitore come ne copia
-        # la carica: la geometria non e' coniugata, e' un giro compiuto o no, e si eredita tale.
-        self.perc_geom = np.concatenate([self.perc_geom, self.perc_geom[a]])
-        # [A8/A7, 2026-09-20] I NATI PER RAMO, byte-inerti. QUESTO ramo eredita la chiralita'
-        # UGUALE al genitore, quindi AGGIUNGE un nodo del suo stesso segno e ROMPE la
-        # conservazione di `N(+1) - N(-1)`. L'altro ramo (Schwinger, antinodo) nasce OPPOSTO e la
-        # conserva. Un contatore TOTALE dei nati non distingue le due cose, ed e' esattamente il
-        # numero che non serve: per sapere da dove viene la carica servono DUE conteggi.
-        self._g_nati_mitosi = getattr(self, "_g_nati_mitosi", 0) + int(len(a))
-        self._g_nati_mitosi_ev = getattr(self, "_g_nati_mitosi_ev", 0) + 1
-        self.perc_tw = np.concatenate([self.perc_tw, np.zeros(len(sel))])
-        self.mem_mot = np.vstack([self.mem_mot, self.mem_mot[a]]) if len(self.mem_mot) else np.zeros((len(sel), 3))
-        self._eredita_spinore_figli(a, segno=1)   # regola D: figlio eredita lo spinore COMPLESSO del genitore
-        # [PSI-FLASH, 2026-09-28] `psi` (media dei genitori) e `psi_spin` (da `a`) ai NATI:
-        #   senza questa riga `len(psi) < n` e la SCHERMATURA SI SPEGNEVA per tutta la rete.
-        self._eredita_psi_figli(a, b)
-        # TRACKING: i figli della mitosi ereditano la concorrenza del genitore a (nascono dalla sua
-        # divisione, concorrono alle stesse masse). conc_archi viene riallineato sotto (keep+nuovi).
-        if self.conc_nodi:
-            for kk in a:
-                eredita = [v[:] for v in self.conc_nodi[kk]] if kk < len(self.conc_nodi) else []
-                self.conc_nodi.append(eredita)
+        # =====================================================================
+        # ### 2. IL CALCIO AI GENITORI -- e NON e' una nascita.
+        # =====================================================================
+        # ⚠ STA PRIMA DELLA NASCITA, e l'ordine conta: `twp` (vincolo 1 del contratto)
+        #   legge `phi[a]`/`phi[b]` GIA' CALCIATI, mentre `fm` qui sopra li ha letti
+        #   PRIMA. Due istanti dello stesso passo, e il commit 3 li PRESERVA: la
+        #   domanda di fisica e' registrata su `DIVISIONE-AUTOCONSISTENTE`.
         sciolta = np.abs(self.tw[sel]) / PHI_CRIT
         g = np.concatenate([a, b])
         if REGIME == "deterministico":
@@ -7420,6 +8186,9 @@ class Rete:
             # rinculo di fase casuale:
             self.phi[g] = (self.phi[g] + self.rng.normal(0, 1, len(g)) *
                            KICK_TW * np.concatenate([sciolta, sciolta])) % self._dphi()
+        # =====================================================================
+        # ### 1-bis. PREPARAZIONE degli archi: `keep`, `dh`, `d0new`.
+        # =====================================================================
         keep = np.ones(len(self.i), bool); keep[sel] = False
         dh = self.d[sel] / 2
         # lunghezza di riposo dei due nuovi archi. Di default meta' dell'arco (dh):
@@ -7441,34 +8210,61 @@ class Rete:
             d0new = np.concatenate([d0h, d0h])
         else:
             d0new = np.concatenate([dh, dh])
-        self.i = np.concatenate([self.i[keep], a, m])
-        self.j = np.concatenate([self.j[keep], m, b])
-        # TRACKING: riallineo conc_archi. Archi mantenuti (keep) conservano la concorrenza; i nuovi
-        # (a-m, m-b) nascono senza concorrenza (ripopolabile da aggiorna_pesi_concorrenza).
-        if self.conc_archi:
-            keep_idx = np.where(keep)[0]
-            self.conc_archi = ([self.conc_archi[e] if e < len(self.conc_archi) else []
-                                for e in keep_idx] + [[] for _ in range(2 * len(a))])
         # `md=2, md0=0`: `dh` finisce in `concatenate([d[keep], dh, dh])`, quindi ogni voce
         #   diventa DUE archi di `d`; su `d0` non entra (ci pensa `d0new`, gia' raddoppiato).
         dh = self._nasce(dh, 'mitosi', 2, 0)   # [SCALA_MIN] i tronconi d/2 della mitosi
         # `md=0, md0=1`: `d0new` e' GIA' `concatenate([d0h, d0h])`, cioe' i due figli.
         d0new = self._nasce(d0new, 'mitosi', 0, 1)
-        self.d = np.concatenate([self.d[keep], dh, dh])
+        # ### CHIAMATA CON EFFETTO 1 di 3, DICHIARATA (`_nascita_collocata`): la chirurgia
+        #   sullo snapshot. Legge SOLO `keep` e `d0new`, non `d`/`d0`, quindi la sua
+        #   posizione rispetto al blocco e' libera -- e sta qui, nella preparazione,
+        #   perche' non e' una regola di nascita.
         if TRACCIA_D0: _tr_pre = self.d0.copy()
         self._smp_chirurgia(keep=keep, nuovi=d0new)   # [C3] lo snapshot segue la mitosi
-        self.d0 = np.concatenate([self.d0[keep], d0new])
+        # =====================================================================
+        # ### 3. LA NASCITA -- IL PUNTO UNICO, evento `divisione`.
+        # =====================================================================
+        # ⚠ `n0` STA NEL CONTESTO ed e' il vincolo 3 del contratto: prima i due
+        #   `_eredita_*` calcolavano `n0 = self.n - k` DOPO che `phi` era cresciuto,
+        #   cioe' leggevano una `@property` su `len(self.phi)` A META' DELLA NASCITA.
+        #   Qui `n0` e' catturato PRIMA, nella preparazione, e le regole non leggono
+        #   `self.n`: stesso valore, dipendenza TOLTA.
+        c = {"sel": sel, "a": a, "b": b, "m": m, "keep": keep,
+             "fm": fm, "pos_figlio": pos_figlio, "dh": dh, "d0new": d0new,
+             "quante": len(sel), "n0": self.n,
+             # i genitori nella forma che i due `_eredita_*` usavano: `np.asarray(.., int)`
+             "src": np.asarray(a, int), "src_a": np.asarray(a, int),
+             "src_b": np.asarray(b, int), "segno": 1,
+             # le due guardie d'ingresso dei `_eredita_*`: `k == 0` e `n0 <= 0`
+             "eredita_vale": bool(len(sel) and self.n > 0),
+             "spinore_vale": bool(SPINORE_CORRETTO or CAMPO_SPINORIALE)}
+        nascita(self, "divisione", c)
+        # ### CHIAMATA CON EFFETTO 2 di 3: la traccia di `d0`, che confronta il
+        #   PRIMA (catturato nella preparazione) col DOPO. Sta SUBITO dopo il
+        #   blocco, che e' il punto piu' vicino a dove stava -- dentro il blocco
+        #   non puo' stare, perche' il blocco e' il PUNTO UNICO. `TRACCIA_D0`
+        #   e' SPENTO in ogni run e in ogni sigillo: misurato, non assunto.
         if TRACCIA_D0: self._traccia_d0('S06_mitosi', _tr_pre)
-        self.vd = np.concatenate([self.vd[keep], self.vd[sel], self.vd[sel]])
-        self.peq = np.concatenate([self.peq[keep], self.peq[sel], self.peq[sel]])
-        # [(3)] `_rep` segue la STESSA struttura degli altri array per-arco. NON si eredita da
-        # `src` come gli stati per-NODO (`_nb`, `omega_s`, ...): e' per ARCO, e i due archi figli
-        # ereditano la memoria dell'arco da cui nascono, che e' cio' che `[sel], [sel]` fa.
-        self._rep = np.concatenate([self._rep[keep], self._rep[sel], self._rep[sel]])
-        zz = np.zeros(len(sel))
-        self.tw = np.concatenate([self.tw[keep], zz, zz])
-        self.twp = np.concatenate([self.twp[keep], self._wphi(self.phi[a] - fm),
-                                   self._wphi(fm - self.phi[b])])
+        # =====================================================================
+        # ### 4. I CONTATORI E I DERIVATI -- dopo, e dichiarati.
+        # =====================================================================
+        # [A8/A7, 2026-09-20] I NATI PER RAMO, byte-inerti. QUESTO ramo eredita la chiralita'
+        # UGUALE al genitore, quindi AGGIUNGE un nodo del suo stesso segno e ROMPE la
+        # conservazione di `N(+1) - N(-1)`. L'altro ramo (Schwinger, antinodo) nasce OPPOSTO e la
+        # conserva. Un contatore TOTALE dei nati non distingue le due cose, ed e' esattamente il
+        # numero che non serve: per sapere da dove viene la carica servono DUE conteggi.
+        self._g_nati_mitosi = getattr(self, "_g_nati_mitosi", 0) + int(len(a))
+        self._g_nati_mitosi_ev = getattr(self, "_g_nati_mitosi_ev", 0) + 1
+        # TRACKING: riallineo conc_archi. Archi mantenuti (keep) conservano la concorrenza; i nuovi
+        # (a-m, m-b) nascono senza concorrenza (ripopolabile da aggiorna_pesi_concorrenza).
+        # ⚠ NON e' nel registro, quindi NON e' una regola di nascita: e' un riallineamento
+        #   per ARCO, dichiarato qui.
+        if self.conc_archi:
+            keep_idx = np.where(keep)[0]
+            self.conc_archi = ([self.conc_archi[e] if e < len(self.conc_archi) else []
+                                for e in keep_idx] + [[] for _ in range(2 * len(a))])
+        # ### CHIAMATA CON EFFETTO 3 di 3: `_grado()` scrive `_deg` ed e' una DERIVATA
+        #   della topologia -- legge `i`, `j` e `len(phi)`, quindi DOPO il blocco.
         self._grado(); self.nati += len(sel)
         # EMISSIONE DI COPPIA: per una frazione degli eventi nasce un anti-nodo a
         # fase fm+pi, collegato ai due genitori a-b. La coppia (nodo fm + anti-nodo
@@ -7499,6 +8295,11 @@ class Rete:
             if COPPIA_DENSITA:
                 I = self._rho_sorgente()   # [FASE 5] densita' coppia su campo SPINORIALE (rho_spin ON / |psi|^2 OFF); limite identico
                 rho_sel = 0.5 * (I[a] + I[b])                   # densita' d'interferenza sull'arco
+                # ⚠ `PEQ-SEL-STANTIO`: questa lettura arriva DOPO che la nascita ha
+                #   riscritto `peq` con `[keep], [sel], [sel]`, quindi `sel` indicizza
+                #   ARCHI DIVERSI. ### IL DIFETTO E' REGISTRATO E NON CURATO QUI: il
+                #   commit 3 preserva il comportamento dei rami, anche di quelli spenti,
+                #   e `COPPIA_DENSITA` e' spento (`:1714`).
                 peq_sel = self.peq[sel]
                 peq_sel = np.where(np.isnan(peq_sel), rho_sel, peq_sel)
                 anom = np.maximum(0.0, (rho_sel - peq_sel) / np.maximum(peq_sel, 1e-6))
@@ -7506,9 +8307,16 @@ class Rete:
             else:
                 eccesso_totale = eccesso_torsione
             prob_coppia = 1.0 - np.exp(-COPPIA_MIT * eccesso_totale)
+            # ⚠ `.mean()` su float DIPENDE DALL'ORDINE da 3 elementi in su (misurato,
+            #   IEEE-754: l'addizione e' commutativa ma NON associativa). Nella finestra
+            #   misurata `len(sel)` sta in {1, 2}, quindi oggi e' INERTE con margine 1 --
+            #   e il commit 3 non cambia l'ordine degli archi di `sel`.
             self.ultima_prob_coppia = float(prob_coppia.mean()) if len(prob_coppia) else 0.0
             estratto = self.rng.random(len(sel)) < prob_coppia
             if estratto.any():
+                # =============================================================
+                # ### 1-ter. PREPARAZIONE dell'evento `schwinger`.
+                # =============================================================
                 pick = np.where(estratto)[0]
                 aa, bb = a[pick], b[pick]
                 # [FASE_2PI, D35] L'ANTIFASE E' META' DEL DOMINIO. Con `phi` su 4pi il
@@ -7532,68 +8340,33 @@ class Rete:
                 if PEQ_NASCITA_LOCALE:
                     self._g_peqn_archi = getattr(self, '_g_peqn_archi', 0) + int(2 * nc)
                     self._g_peqn_ev = getattr(self, '_g_peqn_ev', 0) + 1
-                    # [PEQ-MEDIANA-ISTANTE] ### NON piu' `np.median(self.peq)` QUI: il
-                    #   valore e' quello CATTURATO IN TESTA a `mitosi`, sullo stato da cui
-                    #   la nascita parte. ### Cosi' questa riga NON E' PIU' UNA LETTURA di
-                    #   `self.peq`, e smette di essere l'unico ostacolo al punto unico.
+                    # [PEQ-MEDIANA-ISTANTE] ### NON `np.median(self.peq)` QUI: il valore
+                    #   e' quello CATTURATO IN TESTA a `mitosi`, sullo stato da cui la
+                    #   nascita parte.
                     self._g_peqn_mediana = _peqn_med_pre   # cio' che si EVITA (PRE-nascita)
-                self.pos = np.vstack([self.pos, 0.5 * (self.pos[aa] + self.pos[bb])])
-                self.phi = np.concatenate([self.phi, anti])
-                self.phi0 = np.concatenate([self.phi0, anti])
-                self.phi_s = np.concatenate([self.phi_s, np.zeros(nc)])   # spinore antinodo: 0 (inerte se spento)
-                self.phivel = np.concatenate([self.phivel, 0.5 * (self.phivel[aa] + self.phivel[bb])])
-                self.eta = np.concatenate([self.eta, np.zeros(nc)])
-                # l'antiparticella nasce con chiralita' OPPOSTA al genitore (antichirale).
-                # Coerente con la creazione di coppia. Dormiente.
-                self.perc_chi = np.concatenate([self.perc_chi, -self.perc_chi[aa]])
-                # [CHI_COOP] VIA 3 di 3 (Schwinger). La CARICA nasce OPPOSTA (e' antimateria); la
-                # GEOMETRIA no: copiata tale e quale, perche' non e' una carica e non si coniuga.
-                # SCELTA DICHIARATA, non ovvia -- e `chi_basc` la riscrive al passo dopo.
-                self.perc_geom = np.concatenate([self.perc_geom, self.perc_geom[aa]])
+                # ### CHIAMATA CON EFFETTO, DICHIARATA: lo snapshot segue anche lo
+                #   Schwinger, e qui SENZA `keep` (la coppia aggiunge archi, non ne toglie).
+                if TRACCIA_D0: _tr_pre = self.d0.copy()
+                self._smp_chirurgia(nuovi=np.concatenate([dd, dd]))   # [C3] Schwinger
+                # =============================================================
+                # ### 3-bis. LA NASCITA -- IL PUNTO UNICO, evento `schwinger`.
+                # =============================================================
+                c2 = {"aa": aa, "bb": bb, "k": k, "nc": nc, "anti": anti,
+                      "dd": dd, "pmed": pmed, "quante": nc, "n0": self.n,
+                      "src": np.asarray(aa, int), "src_a": np.asarray(aa, int),
+                      "src_b": np.asarray(bb, int), "segno": -1,
+                      "eredita_vale": bool(nc and self.n > 0),
+                      "spinore_vale": bool(SPINORE_CORRETTO or CAMPO_SPINORIALE)}
+                nascita(self, "schwinger", c2)
+                # =============================================================
+                # ### 4-bis. I CONTATORI E I DERIVATI dello Schwinger.
+                # =============================================================
                 # [A8/A7, 2026-09-20] L'ALTRO RAMO: l'antinodo nasce OPPOSTO al genitore, quindi la
                 # coppia e' NEUTRA e `N(+1) - N(-1)` NON cambia -- come le coppie nel vuoto
                 # quantistico. E' il ramo che CONSERVA.
                 self._g_nati_schwinger = getattr(self, "_g_nati_schwinger", 0) + int(nc)
                 self._g_nati_schwinger_ev = getattr(self, "_g_nati_schwinger_ev", 0) + 1
-                self.perc_tw = np.concatenate([self.perc_tw, np.zeros(nc)])
-                self.mem_mot = np.vstack([self.mem_mot, np.zeros((nc, 3))]) if len(self.mem_mot) else np.zeros((nc, 3))
-                self._eredita_spinore_figli(aa, segno=-1)   # antinodo: doppia-copertura opposta (antichirale)
-                # [PSI-FLASH] lo STESSO per il canale di Schwinger: i genitori sono `aa`/`bb`.
-                #   ⚠ E IL SEGNO NON SI TOCCA: `psi` e` un campo COMPLESSO, e l antinodo nasce
-                #   a fase `anti = fm + pi`, cioe` il segno e` GIA` nella sua fase.
-                self._eredita_psi_figli(aa, bb)
-                # TRACKING: l'anti-nodo Schwinger EREDITA la concorrenza del genitore aa. Se aa
-                # concorre a una massa (nasce nel campo di una massa), l'anti-nodo vi concorre pure
-                # (categoria "creazione di coppie" = accrescimento, non materia nuova). Se aa non
-                # concorre a nulla (nasce nel vuoto teso), l'anti-nodo resta senza concorrenza
-                # (materia nuova dal vuoto). La distinzione fisica: la Schwinger drena tensione di
-                # una massa esistente, tranne quando nasce lontano da ogni massa.
-                if self.conc_nodi:
-                    for gk in aa:
-                        eredita = [v[:] for v in self.conc_nodi[gk]] if gk < len(self.conc_nodi) else []
-                        # marco l'origine Schwinger nella voce (4o campo opzionale) per distinguere
-                        # la categoria "creazione di coppie" dall'accrescimento per mitosi
-                        eredita = [[v[0], v[1], v[2], "schwinger"] if len(v) == 3 else v[:] for v in eredita]
-                        self.conc_nodi.append(eredita)
-                self.i = np.concatenate([self.i, aa, k])
-                self.j = np.concatenate([self.j, k, bb])
-                self.d = np.concatenate([self.d, dd, dd])
-                if TRACCIA_D0: _tr_pre = self.d0.copy()
-                self._smp_chirurgia(nuovi=np.concatenate([dd, dd]))   # [C3] Schwinger
-                self.d0 = np.concatenate([self.d0, dd, dd])
                 if TRACCIA_D0: self._traccia_d0('S07_schwinger', _tr_pre)
-                self.vd = np.concatenate([self.vd, np.zeros(2 * nc)])
-                self.peq = np.concatenate([self.peq, np.full(2 * nc, pmed)])
-                if PEQ_NASCITA_LOCALE:
-                    # ⚠ LA MARCA VA QUI, DOPO il `concatenate`: gli indici si riferiscono
-                    #   all'array FINALE. Serve a distinguere QUESTI `nan` da quelli di
-                    #   `_allaccia`, che la SEMINA scrive su TUTTI gli archi al primo passo.
-                    self._peqn_idx = np.arange(len(self.peq) - 2 * nc, len(self.peq))
-                self._rep = np.concatenate([self._rep, np.zeros(2 * nc)])   # [(3)] archi nuovi
-                zz2 = np.zeros(nc)
-                self.tw = np.concatenate([self.tw, zz2, zz2])
-                self.twp = np.concatenate([self.twp, self._wphi(self.phi[aa] - anti),
-                                           self._wphi(anti - self.phi[bb])])
                 self._grado(); self.nati += nc; self.coppie_nate += nc
         return len(sel)
 

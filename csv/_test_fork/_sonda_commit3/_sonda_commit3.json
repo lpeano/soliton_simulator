@@ -1,0 +1,28 @@
+{
+  "passa": true,
+  "blob_dopo": "0e22b95a4bc3af9d1dd0e56d62705506e19177ff",
+  "blob_prima": "3d78cfd258ecf37e5cc43323f8c5105b66b3877e",
+  "seme": 11,
+  "passi": 72,
+  "confrontate": 231,
+  "differenze_vere": [],
+  "differenze_attese": [
+    {
+      "nome": "_g_nascite",
+      "come": "presente in UNO solo"
+    }
+  ],
+  "nati_dopo": [
+    9,
+    1,
+    10,
+    1
+  ],
+  "nati_prima": [
+    9,
+    1,
+    10,
+    1
+  ],
+  "NON_E_UNA_PROVA": "il <<prima>> viene da una copia, non da git"
+}

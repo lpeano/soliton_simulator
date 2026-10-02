@@ -1373,6 +1373,106 @@ casuali, e `6.08` è **peggio del caso**, cioè il segno che la statistica è sb
 
 <!-- SCHEDA nome=mitosi-schwinger funzioni=mitosi,decidi_divisione flag=MITOSI_DIR,ANTIFASE_ADD,COPPIA_MIT,PLAST_MIT,KICK_TW,REGIME,MITOSI_2LAM -->
 
+> ### ✅ **`NASCITA-PUNTO-UNICO` — LE REGOLE DI NASCITA SONO UNA TABELLA, E LA TABELLA E' IL CODICE** *(`COMMIT 3` del riordino, 2026-10-02)*
+>
+> ### **Non e' una legge nuova: e' il posto dove le leggi di nascita ABITANO.** E sta qui perche' ### **dove una legge si scrive e' un fatto di fisica**, non di programmazione: finche' le regole erano sparse in tre posti, ### **nessuno poteva elencarle** — e una legge che non si puo' elencare non si puo' nemmeno discutere.
+>
+> | | prima | ora |
+> |---|---|---|
+> | i **posti** che scrivono | ### **3** *(`mitosi`, i due `_eredita_*`, piu' la MUTAZIONE di `conc_nodi`)* | ### **1** *(`nascita()`)* |
+> | le **regole** | sparse, e due in funzioni separate | ### **72 righe** in `REGOLE_NASCITA` *(36 grandezze x 2 eventi)* |
+> | una grandezza **dimenticata** | passa in silenzio | ### **FERMA IL RUN** |
+>
+> ### 📌 **E LA TABELLA DICE COSE DI FISICA che prima erano sparpagliate.** Si legge in `doc/TABELLA_nascita.md` *(generato, non scritto a mano)*, e mette una accanto all'altra le regole che ### **differiscono fra i due eventi**:
+>
+> | grandezza | `divisione` | `schwinger` |
+> |---|---|---|
+> | `perc_chi` | **eredita** ⇒ ### **ROMPE** `N(+1)-N(-1)` | ### **eredita INVERTITA** ⇒ ### **CONSERVA** |
+> | `perc_geom` | eredita | ### **eredita NON invertita** — *la geometria non e' una carica e non si coniuga* |
+> | `mem_mot` | **eredita** dal genitore | ### **zero** — *non continua un moto, comincia* |
+> | `phi_s` | **eredita** dal genitore | ### **zero** |
+> | `_rep`, `vd` | **eredita** dall'arco che si spezza | ### **zero** — *l'arco che si spezza non NASCE, CONTINUA* |
+> | `peq` | **eredita** | ### **`nan`** = *da calibrare sul PROPRIO arco* |
+> | `psi` | ### **MEDIA** *(come `phi`)* | ### **MEDIA** |
+> | `psi_spin` | ### **EREDITA** *(come `phi_s`)* | ### **EREDITA**, ma qui `phi_s` e' **zero**: ### **asimmetria di OGGI, dichiarata** |
+>
+> ### ⚠ **L'ULTIMA RIGA E' UN RILIEVO, non una conferma:** la coppia `psi`/`psi_spin` segue *«la regola del proprio compagno»* — e nello Schwinger ### **il compagno di `psi_spin` non c'e' piu'**, perche' `phi_s` dell'antinodo e' zero. ### **Il commit 3 SPOSTA e non cura, quindi la lascia tale** — ma ora e' ### **VISIBILE in tabella** invece di essere sepolta in due funzioni diverse.
+>
+> ### ✅ **E L'ORDINE E' MISURATO, non assunto** *(`csv/_test_fork/_ordine_registro.py`)*: l'ordine del **registro** e' un ordine ### **topologico valido** — **4 vincoli genuini, 0 violazioni**. `phi` prima di `twp` · `peq` prima di `_peqn_idx` · `n0` nel **contesto** · le **6 chiamate con effetto** collocate a mano.
+
+<!-- SCHEDA nome=nascita-punto-unico funzioni=_nascita_collaudo_della_tabella,_nascita_collocata,_nascita_non_si_tocca,_nascita_regola,_ordine_di_nascita,_registra_regola,_rn_div_conc_nodi,_rn_div_cs_nodo_prev,_rn_div_d,_rn_div_d0,_rn_div_eta,_rn_div_i,_rn_div_j,_rn_div_mem_mot,_rn_div_nb,_rn_div_nb_prec,_rn_div_nb_ret,_rn_div_omega_s,_rn_div_peq,_rn_div_perc_chi,_rn_div_perc_geom,_rn_div_perc_tw,_rn_div_phi,_rn_div_phi0,_rn_div_phi_s,_rn_div_phivel,_rn_div_pos,_rn_div_psi,_rn_div_psi_prec,_rn_div_psi_spin,_rn_div_psi_spin_prec,_rn_div_psi_spinor,_rn_div_rep,_rn_div_rho_spin,_rn_div_spinor_lift,_rn_div_tw,_rn_div_twp,_rn_div_vd,_rn_sch_conc_nodi,_rn_sch_cs_nodo_prev,_rn_sch_d,_rn_sch_d0,_rn_sch_eta,_rn_sch_i,_rn_sch_j,_rn_sch_mem_mot,_rn_sch_nb,_rn_sch_nb_prec,_rn_sch_nb_ret,_rn_sch_omega_s,_rn_sch_peq,_rn_sch_peqn_idx,_rn_sch_perc_chi,_rn_sch_perc_geom,_rn_sch_perc_tw,_rn_sch_phi,_rn_sch_phi0,_rn_sch_phi_s,_rn_sch_phivel,_rn_sch_pos,_rn_sch_psi,_rn_sch_psi_prec,_rn_sch_psi_spin,_rn_sch_psi_spin_prec,_rn_sch_psi_spinor,_rn_sch_rep,_rn_sch_rho_spin,_rn_sch_spinor_lift,_rn_sch_tw,_rn_sch_twp,_rn_sch_vd,nascita flag=REGOLE_NASCITA,ORDINE_DI_NASCITA,EVENTI_DI_NASCITA,EVENTI_CONVERTITI -->
+
+# **`nascita-punto-unico` — IL PUNTO UNICO DI NASCITA, e le sue 72 regole**
+
+> ### **Questa scheda esiste perche' `H-REG-R` ha RIFIUTATO il commit, e aveva ragione:**
+> ### **76 nomi nuovi nel simulatore senza una scheda che li nominasse.** Il presidio non
+> ### sapeva che sono una RIORGANIZZAZIONE e non una legge nuova — e ### **non deve
+> ### saperlo**: deve chiedere che qualcuno lo DICHIARI. Questa e' la dichiarazione.
+
+### 📌 **E IL RIFIUTO HA PRODOTTO UNA COSA UTILE, non solo un adempimento:** il
+marcatore qui sopra ### **ELENCA tutte e 72 le regole di nascita, una per una** — e
+### **elencarle era IL PUNTO del par.(c)**: *finche' le regole erano sparse in tre posti,
+nessuno poteva elencarle, e una legge che non si puo' elencare non si puo' discutere.*
+### ✅ **I nomi sono DERIVATI dall'AST**, non battuti a mano *(`L-NUMERI`)*.
+
+## **LA FORMA, e non e' una legge: e' il POSTO dove le leggi di nascita abitano**
+
+```
+nascita(net, evento, c)
+    per OGNI grandezza in ORDINE_DI_NASCITA (= l'ordine del REGISTRO):
+        voce = REGOLE_NASCITA[(evento, grandezza)]
+        se non c'e'  ->  RuntimeError: regola di nascita non dichiarata
+        se c'e' una regola  ->  la esegue
+    e NIENTE ALTRO scrive quelle grandezze.
+```
+
+| | |
+|---|---|
+| **dimensioni** | ### **nessuna**: non c'e' una formula nuova. Ogni regola e'
+l'espressione di prima, ### **verbatim** — le dimensioni sono quelle della grandezza
+che scrive, e stanno nella sua voce di registro |
+| **cosa LEGGE** | `net.<grandezza>` e il ### **CONTESTO** `c`: i genitori, i figli,
+`n0`, i valori preparati. ### ⚠ **Non legge `self.n`**, e questo e' un vincolo
+MISURATO — vedi sotto |
+| **cosa SCRIVE** | ### **le 36 grandezze** di `ORDINE_DI_NASCITA`, e **solo** da qui |
+| **limiti** (`A11`) | ### **nessun clip, nessun pavimento, nessun tetto introdotto.**
+Le **guardie di lunghezza** che c'erano *(`len(cur) >= n0`, `hasattr`, `is not None`)*
+sono ### **SPOSTATE verbatim** nei corpi delle regole: ### **non potate** — una
+potatura e' una CURA, e `POTATURA-GUARDIE` resta APERTA |
+
+## ### ⚠ **I QUATTRO VINCOLI D'ORDINE, MISURATI PRIMA DI SCRIVERE IL CODICE**
+
+*(`csv/_test_fork/_ordine_registro.py`; referto in `csv/_test_fork/_ordine_registro/`)*
+
+| | il vincolo | perche' |
+|---|---|---|
+| **1** | ### **`phi` prima di `twp`** | `twp` legge `phi[a,b]` ### **DOPO il calcio**,
+che e' una scrittura **indicizzata** sui genitori, non una pura estensione |
+| **2** | ### **`peq` prima di `_peqn_idx`** | lo legge ### **INTERO**. `_peqn_idx` non
+sta in nessun registro, quindi e' ### **DICHIARATO** subito dopo `peq` |
+| **3** | ### **`n0` nel CONTESTO** | `self.n` e' una ### **`@property`** su
+`len(self.phi)`, e i due `_eredita_*` facevano `n0 = self.n - k` ### **A META' della
+nascita** |
+| **4** | ### **6 chiamate con EFFETTO** | `_smp_chirurgia`, `_traccia_d0`, `_grado`:
+### **NON sono regole**, e si collocano a mano con `_nascita_collocata` |
+
+### ✅ **E l'ordine del REGISTRO li rispetta TUTTI: 0 violazioni su 4 vincoli.**
+
+## **IL PRESIDIO, e non e' un avviso**
+
+Una grandezza del registro che non compare nella tabella dell'evento ### **ferma il
+run**: *«regola di nascita non dichiarata per `<nome>` all'evento `<evento>`»*.
+### ✅ **E il collaudo a secco gira ALL'IMPORT**, quindi ferma il processo ### **prima
+che un run cominci** invece di farlo cadere a meta'.
+### 📌 **E il silenzio NON e' una terza possibilita':** ogni grandezza ha una
+### **REGOLA**, oppure ### **`collocata`** *(la scrive una chiamata con effetto)*,
+oppure ### **`non si tocca`** *(l'evento non la scrive, e lo DICE)*.
+
+### ⚠ **E DUE EVENTI SU QUATTRO NON SONO CONVERTITI:** `semina` e `allaccio` vivono
+nelle loro funzioni, e ### **`nascita()` si RIFIUTA di girare per loro** invece di far
+finta che la tabella li descriva. ### **Una tabella incompleta che tace e' peggio di una
+che si ferma.**
+
 > ### 📌 **`PEQ-MEDIANA-ISTANTE` — IL DIAGNOSTICO `_g_peqn_mediana` HA UN ISTANTE DICHIARATO** *(decisione di Luca, 2026-10-02)*
 >
 > ### **Non e' una legge: e' un DIAGNOSTICO**, e sta qui perche' ### **la sua POSIZIONE era un fatto di fisica mascherato.**

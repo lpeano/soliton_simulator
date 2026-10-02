@@ -1269,3 +1269,57 @@ ANCORA = "self._g_peqn_mediana = _peqn_med_pre"
 ### ⚠ **NON MISURATO.**
 
 ---
+
+# ✅ **COMMIT 3: LA NASCITA E' UN EVENTO UNICO. Il codice c'e', il sigillo NON HA ANCORA GIRATO** *(2026-10-02)*
+
+> ### **Luca: i posti che scrivevano le grandezze della nascita erano TRE. Ora e' UNO. E il codice si committa PRIMA del run, come dice il par.5 — quindi questo messaggio NON porta un verdetto, porta il codice e il criterio.**
+
+Simulatore da **`3d78cfd2`** a ### **`f103989b`**.
+
+## ✅ **IL NUMERO, ed e' il bersaglio del par.(c)**
+
+| | prima | ora |
+|---|---|---|
+| i **posti** che scrivono le grandezze della nascita | ### **3** *(`mitosi`, i due `_eredita_*`, piu' la MUTAZIONE di `conc_nodi`)* | ### **1** *(`nascita()`)* |
+| le **regole** | sparse, due in funzioni separate | ### **72 righe** in `REGOLE_NASCITA` *(36 grandezze x 2 eventi)* |
+| una grandezza **dimenticata** | passa in silenzio | ### **FERMA IL RUN** |
+
+### ✅ **E IL PRESIDIO GIRA ALL'IMPORT**, non al primo run: una riga che manca ### **ferma il processo PRIMA che un run cominci.** *(Provato a secco: togliendo `peq` dalla tabella, `regola di nascita non dichiarata per `peq` all'evento `divisione``.)*
+
+## 📌 **I DUE `_eredita_*` SONO ASSORBITI, e DUE COSE NON OVVIE SONO CONSERVATE**
+
+Le loro **13 grandezze** sono righe della tabella, e ### **la ragione per cui esistevano** *(le cure `C7`/`C11`/`PSI-FLASH`)* vive nella `derivazione` di ciascuna regola — ### **nel posto dove chi legge quella grandezza la trova.**
+
+### ⚠ **E due cose che un riordino distratto avrebbe perso:**
+### **① `_nb_prec` era estesa SOLO DENTRO il ramo di `_nb`** — una dipendenza di ### **CONTROLLO**, non di dato, che ### **nessun grafo sui dati vedrebbe.** Ora passa per `c["_nb_esteso"]`.
+### **② `conc_nodi` cresceva con `.append` DENTRO un ciclo**, quindi `len` cresceva a ogni giro e ### **un indice scartato all'inizio poteva passare il test piu' tardi.** La regola costruisce la lista nuova e appende ### **A QUELLA**, non alla vecchia: stesso comportamento ### **anche nel caso limite.**
+
+## ✅ **E UN CONTATORE L'HO TOLTO, ed e' la cosa di cui vado piu' contento**
+
+La prima stesura di `nascita()` aveva `_g_nascite`. ### **L'ho tolto**, per due ragioni:
+### **① il criterio del commit 3 e' BYTE-IDENTICO**, e un contatore nuovo obbligherebbe il sigillo a ### **DICHIARARE UN'ECCEZIONE** — e ### **un criterio con un'eccezione e' piu' debole di uno senza.** Tu l'hai detto per l'ordine delle estrazioni, e vale qui.
+### **② `9-ter`**: una cura non aumenta il numero delle grandezze. Gli eventi di nascita ### **sono GIA' contati, e PER RAMO**, da `_g_nati_mitosi_ev` e `_g_nati_schwinger_ev` — che e' il conto ### **che serve**, perche' i due rami fanno cose diverse alla carica.
+
+## ✅ **E HO CURATO UN BUCO CHE AVREBBE INDEBOLITO IL SIGILLO IN SILENZIO**
+
+Le regole sono ### **funzioni di modulo** e scrivono ### **`net.<nome>`, non `self.<nome>`.** Lo scanner del perimetro in `csv/_confronto_nascita.py` cercava ### **solo `self`** ⇒ ### **non le avrebbe viste**, e l'insieme da confrontare si sarebbe ### **RISTRETTO.**
+
+### ⛔ **E' il difetto peggiore che un sigillo possa avere: non sbagliare un verdetto, ma SMETTERE DI GUARDARE.** Avrebbe detto *<<0 differenze>>* ### **perche' non le cercava piu'.**
+
+### ✅ **Due cure, e la seconda e' quella che conta:**
+**①** il perimetro ### **si ALLARGA** *(il prefisso `_rn_`, il ricevitore `net`)*, e ### **i due `_eredita_*` RESTANO nella lista** anche se il simulatore di oggi non li ha: il braccio `D` gira sul blob ### **PRIMA**, dove ci sono.
+### **② IL BRACCIO `A` ORA CONFRONTA L'INSIEME COL REFERTO COMMITTATO**, e ### **una grandezza PERSA fa FALLIRE il braccio.** E se il referto precedente non c'e', lo ### **DICE** invece di dedurre *<<nessuna perdita>>* — che sarebbe un ### **NON MISURATO** travestito (`FALSO-ZERO`).
+
+## 📌 **IL CRITERIO, ed e' il braccio `E` del sigillo, NON la mia parola**
+
+| | |
+|---|---|
+| il **«prima»** | dal ### **PADRE del commit 3**, estratto in BINARIO *(`H-P8`, `sim_prima_del_flag`)* |
+| ### **il criterio** | ### **ZERO differenze, SENZA ECCEZIONI** — grandezze **e** contatori |
+| **e il controllo** | ### **se non ci sono state NASCITE il braccio FALLISCE**: *«zero differenze su zero nascite»* non e' un sigillo, e' un ### **NON MISURATO** |
+
+### ⚠ **IL SIGILLO NON HA ANCORA GIRATO, e questo commit NON dice che passa.** Il codice si committa ### **PRIMA** del run *(par.5)*, e solo allora il *«prima»* esiste nella storia da cui `sim_prima_del_flag` lo estrae. ### **Se il braccio `E` fallisce, committo il fallimento e mi fermo** — e ### **non allento il criterio.**
+
+### 📌 **E una SONDA ha girato prima, ma NON e' una prova e lo dice da se':** `csv/_test_fork/_sonda_commit3.py` prende il *«prima»* da una ### **copia**, non da `git`. Serve a una cosa sola: ### **non committare codice che non ha mai girato.**
+
+---
