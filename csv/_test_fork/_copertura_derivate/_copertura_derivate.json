@@ -17,7 +17,7 @@
    "etichetta": "corta",
    "seme": 11,
    "passi": 72,
-   "passi_con_nascita": 8,
+   "chiamate_a_nascita": 9,
    "eventi_mitosi": 8,
    "eventi_schwinger": 1,
    "nodi_mitosi": 9,
@@ -27,7 +27,7 @@
    "etichetta": "lunga",
    "seme": 11,
    "passi": 150,
-   "passi_con_nascita": 83,
+   "chiamate_a_nascita": 147,
    "eventi_mitosi": 83,
    "eventi_schwinger": 64,
    "nodi_mitosi": 938,
@@ -37,7 +37,7 @@
    "etichetta": "altro_seme",
    "seme": 12,
    "passi": 72,
-   "passi_con_nascita": 10,
+   "chiamate_a_nascita": 14,
    "eventi_mitosi": 10,
    "eventi_schwinger": 4,
    "nodi_mitosi": 13,
@@ -277,6 +277,28 @@
  },
  "totale_letture_ast": 31,
  "coperte_nella_finestra": {
+  "_chi_core_nodi": [],
+  "_chi_core_raggio": [],
+  "_chi_core_rho0": [],
+  "_fatt_cs_ultimo": [],
+  "_chi_geom_nodi": [],
+  "_r_corrente": [],
+  "_g_rampa_prec": [
+   [
+    "_pesi",
+    5703
+   ]
+  ],
+  "_xi_rumore": [
+   [
+    "_passo_spinoriale",
+    5029
+   ]
+  ],
+  "_dt_e_ultimo": [],
+  "_sin2_vir": []
+ },
+ "coperte_dal_PRESIDIO": {
   "_chi_core_nodi": [
    [
     "verifica_invarianti",
@@ -333,20 +355,9 @@
    ]
   ]
  },
- "coperte_dal_PRESIDIO": {
-  "_chi_core_nodi": [],
-  "_chi_core_raggio": [],
-  "_chi_core_rho0": [],
-  "_fatt_cs_ultimo": [],
-  "_chi_geom_nodi": [],
-  "_r_corrente": [],
-  "_g_rampa_prec": [],
-  "_xi_rumore": [],
-  "_dt_e_ultimo": [],
-  "_sin2_vir": []
- },
  "lettori_di_presidio_DICHIARATI": [
   "_ferma_se_registro_incoerente",
+  "verifica_invarianti",
   "rapporto_guardie",
   "_forma_di",
   "_registro_coerente",
@@ -483,4857 +494,1250 @@
    "codice": "setattr(net, _k, _v)"
   }
  ],
- "totale_provate": 0,
+ "totale_provate": 2,
  "letture_sporche": [
   {
-   "grandezza": "_dt_e_ultimo",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
+   "grandezza": "_g_rampa_prec",
+   "funzione": "_pesi",
+   "riga": 5703,
    "scena": "corta"
   },
   {
-   "grandezza": "_r_corrente",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "corta"
-  },
-  {
-   "grandezza": "_fatt_cs_ultimo",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "corta"
-  },
-  {
-   "grandezza": "_xi_rumore",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "corta"
-  },
-  {
-   "grandezza": "_chi_core_nodi",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "corta"
-  },
-  {
-   "grandezza": "_chi_geom_nodi",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "corta"
-  },
-  {
-   "grandezza": "_chi_core_rho0",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "corta"
-  },
-  {
-   "grandezza": "_chi_core_raggio",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "corta"
-  },
-  {
-   "grandezza": "_dt_e_ultimo",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "corta"
-  },
-  {
-   "grandezza": "_r_corrente",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "corta"
-  },
-  {
-   "grandezza": "_fatt_cs_ultimo",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "corta"
-  },
-  {
    "grandezza": "_xi_rumore",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "corta"
-  },
-  {
-   "grandezza": "_chi_core_nodi",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "corta"
-  },
-  {
-   "grandezza": "_chi_geom_nodi",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "corta"
-  },
-  {
-   "grandezza": "_chi_core_rho0",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "corta"
-  },
-  {
-   "grandezza": "_chi_core_raggio",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "corta"
-  },
-  {
-   "grandezza": "_dt_e_ultimo",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "corta"
-  },
-  {
-   "grandezza": "_r_corrente",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
+   "funzione": "_passo_spinoriale",
+   "riga": 5029,
    "scena": "corta"
   },
   {
-   "grandezza": "_fatt_cs_ultimo",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
+   "grandezza": "_g_rampa_prec",
+   "funzione": "_pesi",
+   "riga": 5703,
    "scena": "corta"
   },
   {
    "grandezza": "_xi_rumore",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "corta"
-  },
-  {
-   "grandezza": "_chi_core_nodi",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "corta"
-  },
-  {
-   "grandezza": "_chi_geom_nodi",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "corta"
-  },
-  {
-   "grandezza": "_chi_core_rho0",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "corta"
-  },
-  {
-   "grandezza": "_chi_core_raggio",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "corta"
-  },
-  {
-   "grandezza": "_dt_e_ultimo",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
+   "funzione": "_passo_spinoriale",
+   "riga": 5029,
    "scena": "corta"
   },
   {
-   "grandezza": "_r_corrente",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
+   "grandezza": "_g_rampa_prec",
+   "funzione": "_pesi",
+   "riga": 5703,
    "scena": "corta"
   },
   {
-   "grandezza": "_fatt_cs_ultimo",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "corta"
-  },
-  {
    "grandezza": "_xi_rumore",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "corta"
-  },
-  {
-   "grandezza": "_chi_core_nodi",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "corta"
-  },
-  {
-   "grandezza": "_chi_geom_nodi",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "corta"
-  },
-  {
-   "grandezza": "_chi_core_rho0",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "corta"
-  },
-  {
-   "grandezza": "_chi_core_raggio",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "corta"
-  },
-  {
-   "grandezza": "_dt_e_ultimo",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "corta"
-  },
-  {
-   "grandezza": "_r_corrente",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
+   "funzione": "_passo_spinoriale",
+   "riga": 5029,
    "scena": "corta"
   },
   {
-   "grandezza": "_fatt_cs_ultimo",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
+   "grandezza": "_g_rampa_prec",
+   "funzione": "_pesi",
+   "riga": 5703,
    "scena": "corta"
   },
   {
    "grandezza": "_xi_rumore",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "corta"
-  },
-  {
-   "grandezza": "_chi_core_nodi",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "corta"
-  },
-  {
-   "grandezza": "_chi_geom_nodi",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "corta"
-  },
-  {
-   "grandezza": "_chi_core_rho0",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "corta"
-  },
-  {
-   "grandezza": "_chi_core_raggio",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "corta"
-  },
-  {
-   "grandezza": "_dt_e_ultimo",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
+   "funzione": "_passo_spinoriale",
+   "riga": 5029,
    "scena": "corta"
   },
   {
-   "grandezza": "_r_corrente",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
+   "grandezza": "_g_rampa_prec",
+   "funzione": "_pesi",
+   "riga": 5703,
    "scena": "corta"
   },
   {
-   "grandezza": "_fatt_cs_ultimo",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "corta"
-  },
-  {
    "grandezza": "_xi_rumore",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "corta"
-  },
-  {
-   "grandezza": "_chi_core_nodi",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "corta"
-  },
-  {
-   "grandezza": "_chi_geom_nodi",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "corta"
-  },
-  {
-   "grandezza": "_chi_core_rho0",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
+   "funzione": "_passo_spinoriale",
+   "riga": 5029,
    "scena": "corta"
   },
   {
-   "grandezza": "_chi_core_raggio",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
+   "grandezza": "_g_rampa_prec",
+   "funzione": "_pesi",
+   "riga": 5703,
    "scena": "corta"
   },
   {
-   "grandezza": "_dt_e_ultimo",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "corta"
-  },
-  {
-   "grandezza": "_r_corrente",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "corta"
-  },
-  {
-   "grandezza": "_fatt_cs_ultimo",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "corta"
-  },
-  {
    "grandezza": "_xi_rumore",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "corta"
-  },
-  {
-   "grandezza": "_chi_core_nodi",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "corta"
-  },
-  {
-   "grandezza": "_chi_geom_nodi",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "corta"
-  },
-  {
-   "grandezza": "_chi_core_rho0",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "corta"
-  },
-  {
-   "grandezza": "_chi_core_raggio",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "corta"
-  },
-  {
-   "grandezza": "_dt_e_ultimo",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
+   "funzione": "_passo_spinoriale",
+   "riga": 5029,
    "scena": "corta"
   },
   {
-   "grandezza": "_r_corrente",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
+   "grandezza": "_g_rampa_prec",
+   "funzione": "_pesi",
+   "riga": 5703,
    "scena": "corta"
   },
   {
-   "grandezza": "_fatt_cs_ultimo",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "corta"
-  },
-  {
    "grandezza": "_xi_rumore",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "corta"
-  },
-  {
-   "grandezza": "_chi_core_nodi",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "corta"
-  },
-  {
-   "grandezza": "_chi_geom_nodi",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "corta"
-  },
-  {
-   "grandezza": "_chi_core_rho0",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
+   "funzione": "_passo_spinoriale",
+   "riga": 5029,
    "scena": "corta"
   },
   {
-   "grandezza": "_chi_core_raggio",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "corta"
-  },
-  {
-   "grandezza": "_dt_e_ultimo",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
+   "grandezza": "_g_rampa_prec",
+   "funzione": "_pesi",
+   "riga": 5703,
    "scena": "lunga"
   },
   {
-   "grandezza": "_r_corrente",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
+   "grandezza": "_xi_rumore",
+   "funzione": "_passo_spinoriale",
+   "riga": 5029,
    "scena": "lunga"
   },
   {
-   "grandezza": "_fatt_cs_ultimo",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
+   "grandezza": "_g_rampa_prec",
+   "funzione": "_pesi",
+   "riga": 5703,
    "scena": "lunga"
   },
   {
    "grandezza": "_xi_rumore",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
+   "funzione": "_passo_spinoriale",
+   "riga": 5029,
    "scena": "lunga"
   },
   {
-   "grandezza": "_chi_core_nodi",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
+   "grandezza": "_g_rampa_prec",
+   "funzione": "_pesi",
+   "riga": 5703,
    "scena": "lunga"
   },
   {
-   "grandezza": "_chi_geom_nodi",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
+   "grandezza": "_xi_rumore",
+   "funzione": "_passo_spinoriale",
+   "riga": 5029,
    "scena": "lunga"
   },
   {
-   "grandezza": "_chi_core_rho0",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
+   "grandezza": "_g_rampa_prec",
+   "funzione": "_pesi",
+   "riga": 5703,
    "scena": "lunga"
   },
   {
-   "grandezza": "_chi_core_raggio",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
+   "grandezza": "_xi_rumore",
+   "funzione": "_passo_spinoriale",
+   "riga": 5029,
    "scena": "lunga"
   },
   {
-   "grandezza": "_dt_e_ultimo",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
+   "grandezza": "_g_rampa_prec",
+   "funzione": "_pesi",
+   "riga": 5703,
    "scena": "lunga"
   },
   {
-   "grandezza": "_r_corrente",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
+   "grandezza": "_xi_rumore",
+   "funzione": "_passo_spinoriale",
+   "riga": 5029,
    "scena": "lunga"
   },
   {
-   "grandezza": "_fatt_cs_ultimo",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
+   "grandezza": "_g_rampa_prec",
+   "funzione": "_pesi",
+   "riga": 5703,
    "scena": "lunga"
   },
   {
    "grandezza": "_xi_rumore",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
+   "funzione": "_passo_spinoriale",
+   "riga": 5029,
    "scena": "lunga"
   },
   {
-   "grandezza": "_chi_core_nodi",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
+   "grandezza": "_g_rampa_prec",
+   "funzione": "_pesi",
+   "riga": 5703,
    "scena": "lunga"
   },
   {
-   "grandezza": "_chi_geom_nodi",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
+   "grandezza": "_xi_rumore",
+   "funzione": "_passo_spinoriale",
+   "riga": 5029,
    "scena": "lunga"
   },
   {
-   "grandezza": "_chi_core_rho0",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
+   "grandezza": "_g_rampa_prec",
+   "funzione": "_pesi",
+   "riga": 5703,
    "scena": "lunga"
   },
   {
-   "grandezza": "_chi_core_raggio",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
+   "grandezza": "_xi_rumore",
+   "funzione": "_passo_spinoriale",
+   "riga": 5029,
    "scena": "lunga"
   },
   {
-   "grandezza": "_dt_e_ultimo",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
+   "grandezza": "_g_rampa_prec",
+   "funzione": "_pesi",
+   "riga": 5703,
    "scena": "lunga"
   },
   {
-   "grandezza": "_r_corrente",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
+   "grandezza": "_xi_rumore",
+   "funzione": "_passo_spinoriale",
+   "riga": 5029,
    "scena": "lunga"
   },
   {
-   "grandezza": "_fatt_cs_ultimo",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
+   "grandezza": "_g_rampa_prec",
+   "funzione": "_pesi",
+   "riga": 5703,
    "scena": "lunga"
   },
   {
    "grandezza": "_xi_rumore",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
+   "funzione": "_passo_spinoriale",
+   "riga": 5029,
    "scena": "lunga"
   },
   {
-   "grandezza": "_chi_core_nodi",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
+   "grandezza": "_g_rampa_prec",
+   "funzione": "_pesi",
+   "riga": 5703,
    "scena": "lunga"
   },
   {
-   "grandezza": "_chi_geom_nodi",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
+   "grandezza": "_xi_rumore",
+   "funzione": "_passo_spinoriale",
+   "riga": 5029,
    "scena": "lunga"
   },
   {
-   "grandezza": "_chi_core_rho0",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
+   "grandezza": "_g_rampa_prec",
+   "funzione": "_pesi",
+   "riga": 5703,
    "scena": "lunga"
   },
   {
-   "grandezza": "_chi_core_raggio",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
+   "grandezza": "_xi_rumore",
+   "funzione": "_passo_spinoriale",
+   "riga": 5029,
    "scena": "lunga"
   },
   {
-   "grandezza": "_dt_e_ultimo",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
+   "grandezza": "_g_rampa_prec",
+   "funzione": "_pesi",
+   "riga": 5703,
    "scena": "lunga"
   },
   {
-   "grandezza": "_r_corrente",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
+   "grandezza": "_xi_rumore",
+   "funzione": "_passo_spinoriale",
+   "riga": 5029,
    "scena": "lunga"
   },
   {
-   "grandezza": "_fatt_cs_ultimo",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
+   "grandezza": "_g_rampa_prec",
+   "funzione": "_pesi",
+   "riga": 5703,
    "scena": "lunga"
   },
   {
    "grandezza": "_xi_rumore",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
+   "funzione": "_passo_spinoriale",
+   "riga": 5029,
    "scena": "lunga"
   },
   {
-   "grandezza": "_chi_core_nodi",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
+   "grandezza": "_g_rampa_prec",
+   "funzione": "_pesi",
+   "riga": 5703,
    "scena": "lunga"
   },
   {
-   "grandezza": "_chi_geom_nodi",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
+   "grandezza": "_xi_rumore",
+   "funzione": "_passo_spinoriale",
+   "riga": 5029,
    "scena": "lunga"
   },
   {
-   "grandezza": "_chi_core_rho0",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
+   "grandezza": "_g_rampa_prec",
+   "funzione": "_pesi",
+   "riga": 5703,
    "scena": "lunga"
   },
   {
-   "grandezza": "_chi_core_raggio",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
+   "grandezza": "_xi_rumore",
+   "funzione": "_passo_spinoriale",
+   "riga": 5029,
    "scena": "lunga"
   },
   {
-   "grandezza": "_dt_e_ultimo",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
+   "grandezza": "_g_rampa_prec",
+   "funzione": "_pesi",
+   "riga": 5703,
    "scena": "lunga"
   },
   {
-   "grandezza": "_r_corrente",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
+   "grandezza": "_xi_rumore",
+   "funzione": "_passo_spinoriale",
+   "riga": 5029,
    "scena": "lunga"
   },
   {
-   "grandezza": "_fatt_cs_ultimo",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
+   "grandezza": "_g_rampa_prec",
+   "funzione": "_pesi",
+   "riga": 5703,
    "scena": "lunga"
   },
   {
    "grandezza": "_xi_rumore",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
+   "funzione": "_passo_spinoriale",
+   "riga": 5029,
    "scena": "lunga"
   },
   {
-   "grandezza": "_chi_core_nodi",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
+   "grandezza": "_g_rampa_prec",
+   "funzione": "_pesi",
+   "riga": 5703,
    "scena": "lunga"
   },
   {
-   "grandezza": "_chi_geom_nodi",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
+   "grandezza": "_xi_rumore",
+   "funzione": "_passo_spinoriale",
+   "riga": 5029,
    "scena": "lunga"
   },
   {
-   "grandezza": "_chi_core_rho0",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
+   "grandezza": "_g_rampa_prec",
+   "funzione": "_pesi",
+   "riga": 5703,
    "scena": "lunga"
   },
   {
-   "grandezza": "_chi_core_raggio",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
+   "grandezza": "_xi_rumore",
+   "funzione": "_passo_spinoriale",
+   "riga": 5029,
    "scena": "lunga"
   },
   {
-   "grandezza": "_dt_e_ultimo",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
+   "grandezza": "_g_rampa_prec",
+   "funzione": "_pesi",
+   "riga": 5703,
    "scena": "lunga"
   },
   {
-   "grandezza": "_r_corrente",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
+   "grandezza": "_xi_rumore",
+   "funzione": "_passo_spinoriale",
+   "riga": 5029,
    "scena": "lunga"
   },
   {
-   "grandezza": "_fatt_cs_ultimo",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
+   "grandezza": "_g_rampa_prec",
+   "funzione": "_pesi",
+   "riga": 5703,
    "scena": "lunga"
   },
   {
    "grandezza": "_xi_rumore",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
+   "funzione": "_passo_spinoriale",
+   "riga": 5029,
    "scena": "lunga"
   },
   {
-   "grandezza": "_chi_core_nodi",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
+   "grandezza": "_g_rampa_prec",
+   "funzione": "_pesi",
+   "riga": 5703,
    "scena": "lunga"
   },
   {
-   "grandezza": "_chi_geom_nodi",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
+   "grandezza": "_xi_rumore",
+   "funzione": "_passo_spinoriale",
+   "riga": 5029,
    "scena": "lunga"
   },
   {
-   "grandezza": "_chi_core_rho0",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
+   "grandezza": "_g_rampa_prec",
+   "funzione": "_pesi",
+   "riga": 5703,
    "scena": "lunga"
   },
   {
-   "grandezza": "_chi_core_raggio",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
+   "grandezza": "_xi_rumore",
+   "funzione": "_passo_spinoriale",
+   "riga": 5029,
    "scena": "lunga"
   },
   {
-   "grandezza": "_dt_e_ultimo",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
+   "grandezza": "_g_rampa_prec",
+   "funzione": "_pesi",
+   "riga": 5703,
    "scena": "lunga"
   },
   {
-   "grandezza": "_r_corrente",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
+   "grandezza": "_xi_rumore",
+   "funzione": "_passo_spinoriale",
+   "riga": 5029,
    "scena": "lunga"
   },
   {
-   "grandezza": "_fatt_cs_ultimo",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
+   "grandezza": "_g_rampa_prec",
+   "funzione": "_pesi",
+   "riga": 5703,
    "scena": "lunga"
   },
   {
    "grandezza": "_xi_rumore",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
+   "funzione": "_passo_spinoriale",
+   "riga": 5029,
    "scena": "lunga"
   },
   {
-   "grandezza": "_chi_core_nodi",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
+   "grandezza": "_g_rampa_prec",
+   "funzione": "_pesi",
+   "riga": 5703,
    "scena": "lunga"
   },
   {
-   "grandezza": "_chi_geom_nodi",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
+   "grandezza": "_xi_rumore",
+   "funzione": "_passo_spinoriale",
+   "riga": 5029,
    "scena": "lunga"
   },
   {
-   "grandezza": "_chi_core_rho0",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
+   "grandezza": "_g_rampa_prec",
+   "funzione": "_pesi",
+   "riga": 5703,
    "scena": "lunga"
   },
   {
-   "grandezza": "_chi_core_raggio",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
+   "grandezza": "_xi_rumore",
+   "funzione": "_passo_spinoriale",
+   "riga": 5029,
    "scena": "lunga"
   },
   {
-   "grandezza": "_dt_e_ultimo",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
+   "grandezza": "_g_rampa_prec",
+   "funzione": "_pesi",
+   "riga": 5703,
    "scena": "lunga"
   },
   {
-   "grandezza": "_r_corrente",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
+   "grandezza": "_xi_rumore",
+   "funzione": "_passo_spinoriale",
+   "riga": 5029,
    "scena": "lunga"
   },
   {
-   "grandezza": "_fatt_cs_ultimo",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
+   "grandezza": "_g_rampa_prec",
+   "funzione": "_pesi",
+   "riga": 5703,
    "scena": "lunga"
   },
   {
    "grandezza": "_xi_rumore",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
+   "funzione": "_passo_spinoriale",
+   "riga": 5029,
    "scena": "lunga"
   },
   {
-   "grandezza": "_chi_core_nodi",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
+   "grandezza": "_g_rampa_prec",
+   "funzione": "_pesi",
+   "riga": 5703,
    "scena": "lunga"
   },
   {
-   "grandezza": "_chi_geom_nodi",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
+   "grandezza": "_xi_rumore",
+   "funzione": "_passo_spinoriale",
+   "riga": 5029,
    "scena": "lunga"
   },
   {
-   "grandezza": "_chi_core_rho0",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
+   "grandezza": "_g_rampa_prec",
+   "funzione": "_pesi",
+   "riga": 5703,
    "scena": "lunga"
   },
   {
-   "grandezza": "_chi_core_raggio",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
+   "grandezza": "_xi_rumore",
+   "funzione": "_passo_spinoriale",
+   "riga": 5029,
    "scena": "lunga"
   },
   {
-   "grandezza": "_dt_e_ultimo",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
+   "grandezza": "_g_rampa_prec",
+   "funzione": "_pesi",
+   "riga": 5703,
    "scena": "lunga"
   },
   {
-   "grandezza": "_r_corrente",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
+   "grandezza": "_xi_rumore",
+   "funzione": "_passo_spinoriale",
+   "riga": 5029,
    "scena": "lunga"
   },
   {
-   "grandezza": "_fatt_cs_ultimo",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
+   "grandezza": "_g_rampa_prec",
+   "funzione": "_pesi",
+   "riga": 5703,
    "scena": "lunga"
   },
   {
    "grandezza": "_xi_rumore",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
+   "funzione": "_passo_spinoriale",
+   "riga": 5029,
    "scena": "lunga"
   },
   {
-   "grandezza": "_chi_core_nodi",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
+   "grandezza": "_g_rampa_prec",
+   "funzione": "_pesi",
+   "riga": 5703,
    "scena": "lunga"
   },
   {
-   "grandezza": "_chi_geom_nodi",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
+   "grandezza": "_xi_rumore",
+   "funzione": "_passo_spinoriale",
+   "riga": 5029,
    "scena": "lunga"
   },
   {
-   "grandezza": "_chi_core_rho0",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
+   "grandezza": "_g_rampa_prec",
+   "funzione": "_pesi",
+   "riga": 5703,
    "scena": "lunga"
   },
   {
-   "grandezza": "_chi_core_raggio",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
+   "grandezza": "_xi_rumore",
+   "funzione": "_passo_spinoriale",
+   "riga": 5029,
    "scena": "lunga"
   },
   {
-   "grandezza": "_dt_e_ultimo",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
+   "grandezza": "_g_rampa_prec",
+   "funzione": "_pesi",
+   "riga": 5703,
    "scena": "lunga"
   },
   {
-   "grandezza": "_r_corrente",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
+   "grandezza": "_xi_rumore",
+   "funzione": "_passo_spinoriale",
+   "riga": 5029,
    "scena": "lunga"
   },
   {
-   "grandezza": "_fatt_cs_ultimo",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
+   "grandezza": "_g_rampa_prec",
+   "funzione": "_pesi",
+   "riga": 5703,
    "scena": "lunga"
   },
   {
    "grandezza": "_xi_rumore",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
+   "funzione": "_passo_spinoriale",
+   "riga": 5029,
    "scena": "lunga"
   },
   {
-   "grandezza": "_chi_core_nodi",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
+   "grandezza": "_g_rampa_prec",
+   "funzione": "_pesi",
+   "riga": 5703,
    "scena": "lunga"
   },
   {
-   "grandezza": "_chi_geom_nodi",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
+   "grandezza": "_xi_rumore",
+   "funzione": "_passo_spinoriale",
+   "riga": 5029,
    "scena": "lunga"
   },
   {
-   "grandezza": "_chi_core_rho0",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
+   "grandezza": "_g_rampa_prec",
+   "funzione": "_pesi",
+   "riga": 5703,
    "scena": "lunga"
   },
   {
-   "grandezza": "_chi_core_raggio",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
+   "grandezza": "_xi_rumore",
+   "funzione": "_passo_spinoriale",
+   "riga": 5029,
    "scena": "lunga"
   },
   {
-   "grandezza": "_dt_e_ultimo",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
+   "grandezza": "_g_rampa_prec",
+   "funzione": "_pesi",
+   "riga": 5703,
    "scena": "lunga"
   },
   {
-   "grandezza": "_r_corrente",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
+   "grandezza": "_xi_rumore",
+   "funzione": "_passo_spinoriale",
+   "riga": 5029,
    "scena": "lunga"
   },
   {
-   "grandezza": "_fatt_cs_ultimo",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
+   "grandezza": "_g_rampa_prec",
+   "funzione": "_pesi",
+   "riga": 5703,
    "scena": "lunga"
   },
   {
    "grandezza": "_xi_rumore",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
+   "funzione": "_passo_spinoriale",
+   "riga": 5029,
    "scena": "lunga"
   },
   {
-   "grandezza": "_chi_core_nodi",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
+   "grandezza": "_g_rampa_prec",
+   "funzione": "_pesi",
+   "riga": 5703,
    "scena": "lunga"
   },
   {
-   "grandezza": "_chi_geom_nodi",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
+   "grandezza": "_xi_rumore",
+   "funzione": "_passo_spinoriale",
+   "riga": 5029,
    "scena": "lunga"
   },
   {
-   "grandezza": "_chi_core_rho0",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
+   "grandezza": "_g_rampa_prec",
+   "funzione": "_pesi",
+   "riga": 5703,
    "scena": "lunga"
   },
   {
-   "grandezza": "_chi_core_raggio",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
+   "grandezza": "_xi_rumore",
+   "funzione": "_passo_spinoriale",
+   "riga": 5029,
    "scena": "lunga"
   },
   {
-   "grandezza": "_dt_e_ultimo",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
+   "grandezza": "_g_rampa_prec",
+   "funzione": "_pesi",
+   "riga": 5703,
    "scena": "lunga"
   },
   {
-   "grandezza": "_r_corrente",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
+   "grandezza": "_xi_rumore",
+   "funzione": "_passo_spinoriale",
+   "riga": 5029,
    "scena": "lunga"
   },
   {
-   "grandezza": "_fatt_cs_ultimo",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
+   "grandezza": "_g_rampa_prec",
+   "funzione": "_pesi",
+   "riga": 5703,
    "scena": "lunga"
   },
   {
    "grandezza": "_xi_rumore",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
+   "funzione": "_passo_spinoriale",
+   "riga": 5029,
    "scena": "lunga"
   },
   {
-   "grandezza": "_chi_core_nodi",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
+   "grandezza": "_g_rampa_prec",
+   "funzione": "_pesi",
+   "riga": 5703,
    "scena": "lunga"
   },
   {
-   "grandezza": "_chi_geom_nodi",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
+   "grandezza": "_xi_rumore",
+   "funzione": "_passo_spinoriale",
+   "riga": 5029,
    "scena": "lunga"
   },
   {
-   "grandezza": "_chi_core_rho0",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
+   "grandezza": "_g_rampa_prec",
+   "funzione": "_pesi",
+   "riga": 5703,
    "scena": "lunga"
   },
   {
-   "grandezza": "_chi_core_raggio",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
+   "grandezza": "_xi_rumore",
+   "funzione": "_passo_spinoriale",
+   "riga": 5029,
    "scena": "lunga"
   },
   {
-   "grandezza": "_dt_e_ultimo",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
+   "grandezza": "_g_rampa_prec",
+   "funzione": "_pesi",
+   "riga": 5703,
    "scena": "lunga"
   },
   {
-   "grandezza": "_r_corrente",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
+   "grandezza": "_xi_rumore",
+   "funzione": "_passo_spinoriale",
+   "riga": 5029,
    "scena": "lunga"
   },
   {
-   "grandezza": "_fatt_cs_ultimo",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
+   "grandezza": "_g_rampa_prec",
+   "funzione": "_pesi",
+   "riga": 5703,
    "scena": "lunga"
   },
   {
    "grandezza": "_xi_rumore",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
+   "funzione": "_passo_spinoriale",
+   "riga": 5029,
    "scena": "lunga"
   },
   {
-   "grandezza": "_chi_core_nodi",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
+   "grandezza": "_g_rampa_prec",
+   "funzione": "_pesi",
+   "riga": 5703,
    "scena": "lunga"
   },
   {
-   "grandezza": "_chi_geom_nodi",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
+   "grandezza": "_xi_rumore",
+   "funzione": "_passo_spinoriale",
+   "riga": 5029,
    "scena": "lunga"
   },
   {
-   "grandezza": "_chi_core_rho0",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
+   "grandezza": "_g_rampa_prec",
+   "funzione": "_pesi",
+   "riga": 5703,
    "scena": "lunga"
   },
   {
-   "grandezza": "_chi_core_raggio",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
+   "grandezza": "_xi_rumore",
+   "funzione": "_passo_spinoriale",
+   "riga": 5029,
    "scena": "lunga"
   },
   {
-   "grandezza": "_dt_e_ultimo",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
+   "grandezza": "_g_rampa_prec",
+   "funzione": "_pesi",
+   "riga": 5703,
    "scena": "lunga"
   },
   {
-   "grandezza": "_r_corrente",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
+   "grandezza": "_xi_rumore",
+   "funzione": "_passo_spinoriale",
+   "riga": 5029,
    "scena": "lunga"
   },
   {
-   "grandezza": "_fatt_cs_ultimo",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
+   "grandezza": "_g_rampa_prec",
+   "funzione": "_pesi",
+   "riga": 5703,
    "scena": "lunga"
   },
   {
    "grandezza": "_xi_rumore",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
+   "funzione": "_passo_spinoriale",
+   "riga": 5029,
    "scena": "lunga"
   },
   {
-   "grandezza": "_chi_core_nodi",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
+   "grandezza": "_g_rampa_prec",
+   "funzione": "_pesi",
+   "riga": 5703,
    "scena": "lunga"
   },
   {
-   "grandezza": "_chi_geom_nodi",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
+   "grandezza": "_xi_rumore",
+   "funzione": "_passo_spinoriale",
+   "riga": 5029,
    "scena": "lunga"
   },
   {
-   "grandezza": "_chi_core_rho0",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
+   "grandezza": "_g_rampa_prec",
+   "funzione": "_pesi",
+   "riga": 5703,
    "scena": "lunga"
   },
   {
-   "grandezza": "_chi_core_raggio",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
+   "grandezza": "_xi_rumore",
+   "funzione": "_passo_spinoriale",
+   "riga": 5029,
    "scena": "lunga"
   },
   {
-   "grandezza": "_dt_e_ultimo",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
+   "grandezza": "_g_rampa_prec",
+   "funzione": "_pesi",
+   "riga": 5703,
    "scena": "lunga"
   },
   {
-   "grandezza": "_r_corrente",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
+   "grandezza": "_xi_rumore",
+   "funzione": "_passo_spinoriale",
+   "riga": 5029,
    "scena": "lunga"
   },
   {
-   "grandezza": "_fatt_cs_ultimo",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
+   "grandezza": "_g_rampa_prec",
+   "funzione": "_pesi",
+   "riga": 5703,
    "scena": "lunga"
   },
   {
    "grandezza": "_xi_rumore",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
+   "funzione": "_passo_spinoriale",
+   "riga": 5029,
    "scena": "lunga"
   },
   {
-   "grandezza": "_chi_core_nodi",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
+   "grandezza": "_g_rampa_prec",
+   "funzione": "_pesi",
+   "riga": 5703,
    "scena": "lunga"
   },
   {
-   "grandezza": "_chi_geom_nodi",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
+   "grandezza": "_xi_rumore",
+   "funzione": "_passo_spinoriale",
+   "riga": 5029,
    "scena": "lunga"
   },
   {
-   "grandezza": "_chi_core_rho0",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
+   "grandezza": "_g_rampa_prec",
+   "funzione": "_pesi",
+   "riga": 5703,
    "scena": "lunga"
   },
   {
-   "grandezza": "_chi_core_raggio",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
+   "grandezza": "_xi_rumore",
+   "funzione": "_passo_spinoriale",
+   "riga": 5029,
    "scena": "lunga"
   },
   {
-   "grandezza": "_dt_e_ultimo",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
+   "grandezza": "_g_rampa_prec",
+   "funzione": "_pesi",
+   "riga": 5703,
    "scena": "lunga"
   },
   {
-   "grandezza": "_r_corrente",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
+   "grandezza": "_xi_rumore",
+   "funzione": "_passo_spinoriale",
+   "riga": 5029,
    "scena": "lunga"
   },
   {
-   "grandezza": "_fatt_cs_ultimo",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
+   "grandezza": "_g_rampa_prec",
+   "funzione": "_pesi",
+   "riga": 5703,
    "scena": "lunga"
   },
   {
    "grandezza": "_xi_rumore",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
+   "funzione": "_passo_spinoriale",
+   "riga": 5029,
    "scena": "lunga"
   },
   {
-   "grandezza": "_chi_core_nodi",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
+   "grandezza": "_g_rampa_prec",
+   "funzione": "_pesi",
+   "riga": 5703,
    "scena": "lunga"
   },
   {
-   "grandezza": "_chi_geom_nodi",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
+   "grandezza": "_xi_rumore",
+   "funzione": "_passo_spinoriale",
+   "riga": 5029,
    "scena": "lunga"
   },
   {
-   "grandezza": "_chi_core_rho0",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
+   "grandezza": "_g_rampa_prec",
+   "funzione": "_pesi",
+   "riga": 5703,
    "scena": "lunga"
   },
   {
-   "grandezza": "_chi_core_raggio",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
+   "grandezza": "_xi_rumore",
+   "funzione": "_passo_spinoriale",
+   "riga": 5029,
    "scena": "lunga"
   },
   {
-   "grandezza": "_dt_e_ultimo",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
+   "grandezza": "_g_rampa_prec",
+   "funzione": "_pesi",
+   "riga": 5703,
    "scena": "lunga"
   },
   {
-   "grandezza": "_r_corrente",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
+   "grandezza": "_xi_rumore",
+   "funzione": "_passo_spinoriale",
+   "riga": 5029,
    "scena": "lunga"
   },
   {
-   "grandezza": "_fatt_cs_ultimo",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
+   "grandezza": "_g_rampa_prec",
+   "funzione": "_pesi",
+   "riga": 5703,
    "scena": "lunga"
   },
   {
    "grandezza": "_xi_rumore",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
+   "funzione": "_passo_spinoriale",
+   "riga": 5029,
    "scena": "lunga"
   },
   {
-   "grandezza": "_chi_core_nodi",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
+   "grandezza": "_g_rampa_prec",
+   "funzione": "_pesi",
+   "riga": 5703,
    "scena": "lunga"
   },
   {
-   "grandezza": "_chi_geom_nodi",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
+   "grandezza": "_xi_rumore",
+   "funzione": "_passo_spinoriale",
+   "riga": 5029,
    "scena": "lunga"
   },
   {
-   "grandezza": "_chi_core_rho0",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
+   "grandezza": "_g_rampa_prec",
+   "funzione": "_pesi",
+   "riga": 5703,
    "scena": "lunga"
   },
   {
-   "grandezza": "_chi_core_raggio",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
+   "grandezza": "_xi_rumore",
+   "funzione": "_passo_spinoriale",
+   "riga": 5029,
    "scena": "lunga"
   },
   {
-   "grandezza": "_dt_e_ultimo",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
+   "grandezza": "_g_rampa_prec",
+   "funzione": "_pesi",
+   "riga": 5703,
    "scena": "lunga"
   },
   {
-   "grandezza": "_r_corrente",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
+   "grandezza": "_xi_rumore",
+   "funzione": "_passo_spinoriale",
+   "riga": 5029,
    "scena": "lunga"
   },
   {
-   "grandezza": "_fatt_cs_ultimo",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
+   "grandezza": "_g_rampa_prec",
+   "funzione": "_pesi",
+   "riga": 5703,
    "scena": "lunga"
   },
   {
    "grandezza": "_xi_rumore",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
+   "funzione": "_passo_spinoriale",
+   "riga": 5029,
    "scena": "lunga"
   },
   {
-   "grandezza": "_chi_core_nodi",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
+   "grandezza": "_g_rampa_prec",
+   "funzione": "_pesi",
+   "riga": 5703,
    "scena": "lunga"
   },
   {
-   "grandezza": "_chi_geom_nodi",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
+   "grandezza": "_xi_rumore",
+   "funzione": "_passo_spinoriale",
+   "riga": 5029,
    "scena": "lunga"
   },
   {
-   "grandezza": "_chi_core_rho0",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
+   "grandezza": "_g_rampa_prec",
+   "funzione": "_pesi",
+   "riga": 5703,
    "scena": "lunga"
   },
   {
-   "grandezza": "_chi_core_raggio",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
+   "grandezza": "_xi_rumore",
+   "funzione": "_passo_spinoriale",
+   "riga": 5029,
    "scena": "lunga"
   },
   {
-   "grandezza": "_dt_e_ultimo",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
+   "grandezza": "_g_rampa_prec",
+   "funzione": "_pesi",
+   "riga": 5703,
    "scena": "lunga"
   },
   {
-   "grandezza": "_r_corrente",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
+   "grandezza": "_xi_rumore",
+   "funzione": "_passo_spinoriale",
+   "riga": 5029,
    "scena": "lunga"
   },
   {
-   "grandezza": "_fatt_cs_ultimo",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
+   "grandezza": "_g_rampa_prec",
+   "funzione": "_pesi",
+   "riga": 5703,
    "scena": "lunga"
   },
   {
    "grandezza": "_xi_rumore",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
+   "funzione": "_passo_spinoriale",
+   "riga": 5029,
    "scena": "lunga"
   },
   {
-   "grandezza": "_chi_core_nodi",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
+   "grandezza": "_g_rampa_prec",
+   "funzione": "_pesi",
+   "riga": 5703,
    "scena": "lunga"
   },
   {
-   "grandezza": "_chi_geom_nodi",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
+   "grandezza": "_xi_rumore",
+   "funzione": "_passo_spinoriale",
+   "riga": 5029,
    "scena": "lunga"
   },
   {
-   "grandezza": "_chi_core_rho0",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
+   "grandezza": "_g_rampa_prec",
+   "funzione": "_pesi",
+   "riga": 5703,
    "scena": "lunga"
   },
   {
-   "grandezza": "_chi_core_raggio",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
+   "grandezza": "_xi_rumore",
+   "funzione": "_passo_spinoriale",
+   "riga": 5029,
    "scena": "lunga"
   },
   {
-   "grandezza": "_dt_e_ultimo",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
+   "grandezza": "_g_rampa_prec",
+   "funzione": "_pesi",
+   "riga": 5703,
    "scena": "lunga"
   },
   {
-   "grandezza": "_r_corrente",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
+   "grandezza": "_xi_rumore",
+   "funzione": "_passo_spinoriale",
+   "riga": 5029,
    "scena": "lunga"
   },
   {
-   "grandezza": "_fatt_cs_ultimo",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
+   "grandezza": "_g_rampa_prec",
+   "funzione": "_pesi",
+   "riga": 5703,
    "scena": "lunga"
   },
   {
    "grandezza": "_xi_rumore",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
+   "funzione": "_passo_spinoriale",
+   "riga": 5029,
    "scena": "lunga"
   },
   {
-   "grandezza": "_chi_core_nodi",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
+   "grandezza": "_g_rampa_prec",
+   "funzione": "_pesi",
+   "riga": 5703,
    "scena": "lunga"
   },
   {
-   "grandezza": "_chi_geom_nodi",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
+   "grandezza": "_xi_rumore",
+   "funzione": "_passo_spinoriale",
+   "riga": 5029,
    "scena": "lunga"
   },
   {
-   "grandezza": "_chi_core_rho0",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
+   "grandezza": "_g_rampa_prec",
+   "funzione": "_pesi",
+   "riga": 5703,
    "scena": "lunga"
   },
   {
-   "grandezza": "_chi_core_raggio",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
+   "grandezza": "_xi_rumore",
+   "funzione": "_passo_spinoriale",
+   "riga": 5029,
    "scena": "lunga"
   },
   {
-   "grandezza": "_dt_e_ultimo",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
+   "grandezza": "_g_rampa_prec",
+   "funzione": "_pesi",
+   "riga": 5703,
    "scena": "lunga"
   },
   {
-   "grandezza": "_r_corrente",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
+   "grandezza": "_xi_rumore",
+   "funzione": "_passo_spinoriale",
+   "riga": 5029,
    "scena": "lunga"
   },
   {
-   "grandezza": "_fatt_cs_ultimo",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
+   "grandezza": "_g_rampa_prec",
+   "funzione": "_pesi",
+   "riga": 5703,
    "scena": "lunga"
   },
   {
    "grandezza": "_xi_rumore",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
+   "funzione": "_passo_spinoriale",
+   "riga": 5029,
    "scena": "lunga"
   },
   {
-   "grandezza": "_chi_core_nodi",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
+   "grandezza": "_g_rampa_prec",
+   "funzione": "_pesi",
+   "riga": 5703,
+   "scena": "altro_seme"
   },
   {
-   "grandezza": "_chi_geom_nodi",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
+   "grandezza": "_xi_rumore",
+   "funzione": "_passo_spinoriale",
+   "riga": 5029,
+   "scena": "altro_seme"
   },
   {
-   "grandezza": "_chi_core_rho0",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
+   "grandezza": "_g_rampa_prec",
+   "funzione": "_pesi",
+   "riga": 5703,
+   "scena": "altro_seme"
   },
   {
-   "grandezza": "_chi_core_raggio",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
+   "grandezza": "_xi_rumore",
+   "funzione": "_passo_spinoriale",
+   "riga": 5029,
+   "scena": "altro_seme"
   },
   {
-   "grandezza": "_dt_e_ultimo",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
+   "grandezza": "_g_rampa_prec",
+   "funzione": "_pesi",
+   "riga": 5703,
+   "scena": "altro_seme"
   },
   {
-   "grandezza": "_r_corrente",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
+   "grandezza": "_xi_rumore",
+   "funzione": "_passo_spinoriale",
+   "riga": 5029,
+   "scena": "altro_seme"
   },
   {
-   "grandezza": "_fatt_cs_ultimo",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
+   "grandezza": "_g_rampa_prec",
+   "funzione": "_pesi",
+   "riga": 5703,
+   "scena": "altro_seme"
   },
   {
    "grandezza": "_xi_rumore",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
+   "funzione": "_passo_spinoriale",
+   "riga": 5029,
+   "scena": "altro_seme"
   },
   {
-   "grandezza": "_chi_core_nodi",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
+   "grandezza": "_g_rampa_prec",
+   "funzione": "_pesi",
+   "riga": 5703,
+   "scena": "altro_seme"
   },
   {
-   "grandezza": "_chi_geom_nodi",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
+   "grandezza": "_xi_rumore",
+   "funzione": "_passo_spinoriale",
+   "riga": 5029,
+   "scena": "altro_seme"
   },
   {
-   "grandezza": "_chi_core_rho0",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
+   "grandezza": "_g_rampa_prec",
+   "funzione": "_pesi",
+   "riga": 5703,
+   "scena": "altro_seme"
   },
   {
-   "grandezza": "_chi_core_raggio",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
+   "grandezza": "_xi_rumore",
+   "funzione": "_passo_spinoriale",
+   "riga": 5029,
+   "scena": "altro_seme"
   },
   {
-   "grandezza": "_dt_e_ultimo",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
+   "grandezza": "_g_rampa_prec",
+   "funzione": "_pesi",
+   "riga": 5703,
+   "scena": "altro_seme"
   },
   {
-   "grandezza": "_r_corrente",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
+   "grandezza": "_xi_rumore",
+   "funzione": "_passo_spinoriale",
+   "riga": 5029,
+   "scena": "altro_seme"
   },
   {
-   "grandezza": "_fatt_cs_ultimo",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
+   "grandezza": "_g_rampa_prec",
+   "funzione": "_pesi",
+   "riga": 5703,
+   "scena": "altro_seme"
   },
   {
    "grandezza": "_xi_rumore",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
+   "funzione": "_passo_spinoriale",
+   "riga": 5029,
+   "scena": "altro_seme"
   },
   {
-   "grandezza": "_chi_core_nodi",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
+   "grandezza": "_g_rampa_prec",
+   "funzione": "_pesi",
+   "riga": 5703,
+   "scena": "altro_seme"
   },
   {
-   "grandezza": "_chi_geom_nodi",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
+   "grandezza": "_xi_rumore",
+   "funzione": "_passo_spinoriale",
+   "riga": 5029,
+   "scena": "altro_seme"
   },
   {
-   "grandezza": "_chi_core_rho0",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
+   "grandezza": "_g_rampa_prec",
+   "funzione": "_pesi",
+   "riga": 5703,
+   "scena": "altro_seme"
   },
   {
-   "grandezza": "_chi_core_raggio",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_dt_e_ultimo",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_r_corrente",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_fatt_cs_ultimo",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_xi_rumore",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_core_nodi",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_geom_nodi",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_core_rho0",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_core_raggio",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_dt_e_ultimo",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_r_corrente",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_fatt_cs_ultimo",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_xi_rumore",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_core_nodi",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_geom_nodi",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_core_rho0",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_core_raggio",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_dt_e_ultimo",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_r_corrente",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_fatt_cs_ultimo",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_xi_rumore",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_core_nodi",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_geom_nodi",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_core_rho0",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_core_raggio",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_dt_e_ultimo",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_r_corrente",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_fatt_cs_ultimo",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_xi_rumore",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_core_nodi",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_geom_nodi",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_core_rho0",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_core_raggio",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_dt_e_ultimo",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_r_corrente",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_fatt_cs_ultimo",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_xi_rumore",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_core_nodi",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_geom_nodi",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_core_rho0",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_core_raggio",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_dt_e_ultimo",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_r_corrente",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_fatt_cs_ultimo",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_xi_rumore",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_core_nodi",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_geom_nodi",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_core_rho0",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_core_raggio",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_dt_e_ultimo",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_r_corrente",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_fatt_cs_ultimo",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_xi_rumore",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_core_nodi",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_geom_nodi",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_core_rho0",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_core_raggio",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_dt_e_ultimo",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_r_corrente",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_fatt_cs_ultimo",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_xi_rumore",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_core_nodi",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_geom_nodi",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_core_rho0",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_core_raggio",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_dt_e_ultimo",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_r_corrente",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_fatt_cs_ultimo",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_xi_rumore",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_core_nodi",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_geom_nodi",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_core_rho0",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_core_raggio",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_dt_e_ultimo",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_r_corrente",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_fatt_cs_ultimo",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_xi_rumore",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_core_nodi",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_geom_nodi",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_core_rho0",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_core_raggio",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_dt_e_ultimo",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_r_corrente",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_fatt_cs_ultimo",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_xi_rumore",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_core_nodi",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_geom_nodi",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_core_rho0",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_core_raggio",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_dt_e_ultimo",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_r_corrente",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_fatt_cs_ultimo",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_xi_rumore",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_core_nodi",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_geom_nodi",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_core_rho0",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_core_raggio",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_dt_e_ultimo",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_r_corrente",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_fatt_cs_ultimo",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_xi_rumore",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_core_nodi",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_geom_nodi",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_core_rho0",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_core_raggio",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_dt_e_ultimo",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_r_corrente",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_fatt_cs_ultimo",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_xi_rumore",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_core_nodi",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_geom_nodi",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_core_rho0",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_core_raggio",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_dt_e_ultimo",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_r_corrente",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_fatt_cs_ultimo",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_xi_rumore",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_core_nodi",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_geom_nodi",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_core_rho0",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_core_raggio",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_dt_e_ultimo",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_r_corrente",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_fatt_cs_ultimo",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_xi_rumore",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_core_nodi",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_geom_nodi",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_core_rho0",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_core_raggio",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_dt_e_ultimo",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_r_corrente",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_fatt_cs_ultimo",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_xi_rumore",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_core_nodi",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_geom_nodi",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_core_rho0",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_core_raggio",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_dt_e_ultimo",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_r_corrente",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_fatt_cs_ultimo",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_xi_rumore",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_core_nodi",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_geom_nodi",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_core_rho0",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_core_raggio",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_dt_e_ultimo",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_r_corrente",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_fatt_cs_ultimo",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_xi_rumore",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_core_nodi",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_geom_nodi",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_core_rho0",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_core_raggio",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_dt_e_ultimo",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_r_corrente",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_fatt_cs_ultimo",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_xi_rumore",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_core_nodi",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_geom_nodi",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_core_rho0",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_core_raggio",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_dt_e_ultimo",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_r_corrente",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_fatt_cs_ultimo",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_xi_rumore",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_core_nodi",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_geom_nodi",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_core_rho0",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_core_raggio",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_dt_e_ultimo",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_r_corrente",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_fatt_cs_ultimo",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_xi_rumore",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_core_nodi",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_geom_nodi",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_core_rho0",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_core_raggio",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_dt_e_ultimo",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_r_corrente",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_fatt_cs_ultimo",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_xi_rumore",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_core_nodi",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_geom_nodi",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_core_rho0",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_core_raggio",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_dt_e_ultimo",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_r_corrente",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_fatt_cs_ultimo",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_xi_rumore",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_core_nodi",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_geom_nodi",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_core_rho0",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_core_raggio",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_dt_e_ultimo",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_r_corrente",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_fatt_cs_ultimo",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_xi_rumore",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_core_nodi",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_geom_nodi",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_core_rho0",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_core_raggio",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_dt_e_ultimo",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_r_corrente",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_fatt_cs_ultimo",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_xi_rumore",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_core_nodi",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_geom_nodi",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_core_rho0",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_core_raggio",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_dt_e_ultimo",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_r_corrente",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_fatt_cs_ultimo",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_xi_rumore",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_core_nodi",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_geom_nodi",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_core_rho0",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_core_raggio",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_dt_e_ultimo",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_r_corrente",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_fatt_cs_ultimo",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_xi_rumore",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_core_nodi",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_geom_nodi",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_core_rho0",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_core_raggio",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_dt_e_ultimo",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_r_corrente",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_fatt_cs_ultimo",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_xi_rumore",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_core_nodi",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_geom_nodi",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_core_rho0",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_core_raggio",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_dt_e_ultimo",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_r_corrente",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_fatt_cs_ultimo",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_xi_rumore",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_core_nodi",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_geom_nodi",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_core_rho0",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_core_raggio",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_dt_e_ultimo",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_r_corrente",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_fatt_cs_ultimo",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_xi_rumore",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_core_nodi",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_geom_nodi",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_core_rho0",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_core_raggio",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_dt_e_ultimo",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_r_corrente",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_fatt_cs_ultimo",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_xi_rumore",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_core_nodi",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_geom_nodi",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_core_rho0",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_core_raggio",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_dt_e_ultimo",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_r_corrente",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_fatt_cs_ultimo",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_xi_rumore",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_core_nodi",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_geom_nodi",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_core_rho0",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_core_raggio",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_dt_e_ultimo",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_r_corrente",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_fatt_cs_ultimo",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_xi_rumore",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_core_nodi",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_geom_nodi",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_core_rho0",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_core_raggio",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_dt_e_ultimo",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_r_corrente",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_fatt_cs_ultimo",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_xi_rumore",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_core_nodi",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_geom_nodi",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_core_rho0",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_core_raggio",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_dt_e_ultimo",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_r_corrente",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_fatt_cs_ultimo",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_xi_rumore",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_core_nodi",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_geom_nodi",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_core_rho0",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_core_raggio",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_dt_e_ultimo",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_r_corrente",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_fatt_cs_ultimo",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_xi_rumore",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_core_nodi",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_geom_nodi",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_core_rho0",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_core_raggio",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_dt_e_ultimo",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_r_corrente",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_fatt_cs_ultimo",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_xi_rumore",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_core_nodi",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_geom_nodi",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_core_rho0",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_core_raggio",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_dt_e_ultimo",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_r_corrente",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_fatt_cs_ultimo",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_xi_rumore",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_core_nodi",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_geom_nodi",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_core_rho0",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_core_raggio",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_dt_e_ultimo",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_r_corrente",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_fatt_cs_ultimo",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_xi_rumore",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_core_nodi",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_geom_nodi",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_core_rho0",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_core_raggio",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_dt_e_ultimo",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_r_corrente",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_fatt_cs_ultimo",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_xi_rumore",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_core_nodi",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_geom_nodi",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_core_rho0",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_core_raggio",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_dt_e_ultimo",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_r_corrente",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_fatt_cs_ultimo",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_xi_rumore",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_core_nodi",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_geom_nodi",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_core_rho0",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_core_raggio",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_dt_e_ultimo",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_r_corrente",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_fatt_cs_ultimo",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_xi_rumore",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_core_nodi",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_geom_nodi",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_core_rho0",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_core_raggio",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_dt_e_ultimo",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_r_corrente",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_fatt_cs_ultimo",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_xi_rumore",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_core_nodi",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_geom_nodi",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_core_rho0",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_core_raggio",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_dt_e_ultimo",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_r_corrente",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_fatt_cs_ultimo",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_xi_rumore",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_core_nodi",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_geom_nodi",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_core_rho0",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_core_raggio",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_dt_e_ultimo",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_r_corrente",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_fatt_cs_ultimo",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_xi_rumore",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_core_nodi",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_geom_nodi",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_core_rho0",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_core_raggio",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_dt_e_ultimo",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_r_corrente",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_fatt_cs_ultimo",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_xi_rumore",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_core_nodi",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_geom_nodi",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_core_rho0",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_core_raggio",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_dt_e_ultimo",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_r_corrente",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_fatt_cs_ultimo",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_xi_rumore",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_core_nodi",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_geom_nodi",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_core_rho0",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_core_raggio",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_dt_e_ultimo",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_r_corrente",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_fatt_cs_ultimo",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_xi_rumore",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_core_nodi",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_geom_nodi",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_core_rho0",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_core_raggio",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_dt_e_ultimo",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_r_corrente",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_fatt_cs_ultimo",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_xi_rumore",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_core_nodi",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_geom_nodi",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_core_rho0",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_core_raggio",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_dt_e_ultimo",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_r_corrente",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_fatt_cs_ultimo",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_xi_rumore",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_core_nodi",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_geom_nodi",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_core_rho0",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_core_raggio",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_dt_e_ultimo",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_r_corrente",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_fatt_cs_ultimo",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_xi_rumore",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_core_nodi",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_geom_nodi",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_core_rho0",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_core_raggio",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_dt_e_ultimo",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_r_corrente",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_fatt_cs_ultimo",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_xi_rumore",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_core_nodi",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_geom_nodi",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_core_rho0",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_core_raggio",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_dt_e_ultimo",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_r_corrente",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_fatt_cs_ultimo",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_xi_rumore",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_core_nodi",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_geom_nodi",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_core_rho0",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_core_raggio",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_dt_e_ultimo",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_r_corrente",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_fatt_cs_ultimo",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_xi_rumore",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_core_nodi",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_geom_nodi",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_core_rho0",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_core_raggio",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_dt_e_ultimo",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_r_corrente",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_fatt_cs_ultimo",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_xi_rumore",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_core_nodi",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_geom_nodi",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_core_rho0",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_core_raggio",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_dt_e_ultimo",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_r_corrente",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_fatt_cs_ultimo",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_xi_rumore",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_core_nodi",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_geom_nodi",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_core_rho0",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_core_raggio",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_dt_e_ultimo",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_r_corrente",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_fatt_cs_ultimo",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_xi_rumore",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_core_nodi",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_geom_nodi",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_core_rho0",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_core_raggio",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_dt_e_ultimo",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_r_corrente",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_fatt_cs_ultimo",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_xi_rumore",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_core_nodi",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_geom_nodi",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_core_rho0",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_core_raggio",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_dt_e_ultimo",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_r_corrente",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_fatt_cs_ultimo",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_xi_rumore",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_core_nodi",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_geom_nodi",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_core_rho0",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_chi_core_raggio",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "lunga"
-  },
-  {
-   "grandezza": "_dt_e_ultimo",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "altro_seme"
-  },
-  {
-   "grandezza": "_r_corrente",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "altro_seme"
-  },
-  {
-   "grandezza": "_fatt_cs_ultimo",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "altro_seme"
-  },
-  {
-   "grandezza": "_xi_rumore",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "altro_seme"
-  },
-  {
-   "grandezza": "_chi_core_nodi",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "altro_seme"
-  },
-  {
-   "grandezza": "_chi_geom_nodi",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "altro_seme"
-  },
-  {
-   "grandezza": "_chi_core_rho0",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "altro_seme"
-  },
-  {
-   "grandezza": "_chi_core_raggio",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "altro_seme"
-  },
-  {
-   "grandezza": "_dt_e_ultimo",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "altro_seme"
-  },
-  {
-   "grandezza": "_r_corrente",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "altro_seme"
-  },
-  {
-   "grandezza": "_fatt_cs_ultimo",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "altro_seme"
-  },
-  {
-   "grandezza": "_xi_rumore",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "altro_seme"
-  },
-  {
-   "grandezza": "_chi_core_nodi",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "altro_seme"
-  },
-  {
-   "grandezza": "_chi_geom_nodi",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "altro_seme"
-  },
-  {
-   "grandezza": "_chi_core_rho0",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "altro_seme"
-  },
-  {
-   "grandezza": "_chi_core_raggio",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "altro_seme"
-  },
-  {
-   "grandezza": "_dt_e_ultimo",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "altro_seme"
-  },
-  {
-   "grandezza": "_r_corrente",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "altro_seme"
-  },
-  {
-   "grandezza": "_fatt_cs_ultimo",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "altro_seme"
-  },
-  {
-   "grandezza": "_xi_rumore",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "altro_seme"
-  },
-  {
-   "grandezza": "_chi_core_nodi",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "altro_seme"
-  },
-  {
-   "grandezza": "_chi_geom_nodi",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "altro_seme"
-  },
-  {
-   "grandezza": "_chi_core_rho0",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "altro_seme"
-  },
-  {
-   "grandezza": "_chi_core_raggio",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "altro_seme"
-  },
-  {
-   "grandezza": "_dt_e_ultimo",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "altro_seme"
-  },
-  {
-   "grandezza": "_r_corrente",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "altro_seme"
-  },
-  {
-   "grandezza": "_fatt_cs_ultimo",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "altro_seme"
-  },
-  {
-   "grandezza": "_xi_rumore",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "altro_seme"
-  },
-  {
-   "grandezza": "_chi_core_nodi",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "altro_seme"
-  },
-  {
-   "grandezza": "_chi_geom_nodi",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "altro_seme"
-  },
-  {
-   "grandezza": "_chi_core_rho0",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "altro_seme"
-  },
-  {
-   "grandezza": "_chi_core_raggio",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "altro_seme"
-  },
-  {
-   "grandezza": "_dt_e_ultimo",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "altro_seme"
-  },
-  {
-   "grandezza": "_r_corrente",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "altro_seme"
-  },
-  {
-   "grandezza": "_fatt_cs_ultimo",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "altro_seme"
-  },
-  {
-   "grandezza": "_xi_rumore",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "altro_seme"
-  },
-  {
-   "grandezza": "_chi_core_nodi",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "altro_seme"
-  },
-  {
-   "grandezza": "_chi_geom_nodi",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "altro_seme"
-  },
-  {
-   "grandezza": "_chi_core_rho0",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "altro_seme"
-  },
-  {
-   "grandezza": "_chi_core_raggio",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "altro_seme"
-  },
-  {
-   "grandezza": "_dt_e_ultimo",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "altro_seme"
-  },
-  {
-   "grandezza": "_r_corrente",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "altro_seme"
-  },
-  {
-   "grandezza": "_fatt_cs_ultimo",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "altro_seme"
-  },
-  {
-   "grandezza": "_xi_rumore",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "altro_seme"
-  },
-  {
-   "grandezza": "_chi_core_nodi",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "altro_seme"
-  },
-  {
-   "grandezza": "_chi_geom_nodi",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "altro_seme"
-  },
-  {
-   "grandezza": "_chi_core_rho0",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "altro_seme"
-  },
-  {
-   "grandezza": "_chi_core_raggio",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "altro_seme"
-  },
-  {
-   "grandezza": "_dt_e_ultimo",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "altro_seme"
-  },
-  {
-   "grandezza": "_r_corrente",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "altro_seme"
-  },
-  {
-   "grandezza": "_fatt_cs_ultimo",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "altro_seme"
-  },
-  {
-   "grandezza": "_xi_rumore",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "altro_seme"
-  },
-  {
-   "grandezza": "_chi_core_nodi",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "altro_seme"
-  },
-  {
-   "grandezza": "_chi_geom_nodi",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "altro_seme"
-  },
-  {
-   "grandezza": "_chi_core_rho0",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "altro_seme"
-  },
-  {
-   "grandezza": "_chi_core_raggio",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "altro_seme"
-  },
-  {
-   "grandezza": "_dt_e_ultimo",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "altro_seme"
-  },
-  {
-   "grandezza": "_r_corrente",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "altro_seme"
-  },
-  {
-   "grandezza": "_fatt_cs_ultimo",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "altro_seme"
-  },
-  {
-   "grandezza": "_xi_rumore",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "altro_seme"
-  },
-  {
-   "grandezza": "_chi_core_nodi",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "altro_seme"
-  },
-  {
-   "grandezza": "_chi_geom_nodi",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "altro_seme"
-  },
-  {
-   "grandezza": "_chi_core_rho0",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "altro_seme"
-  },
-  {
-   "grandezza": "_chi_core_raggio",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "altro_seme"
-  },
-  {
-   "grandezza": "_dt_e_ultimo",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "altro_seme"
-  },
-  {
-   "grandezza": "_r_corrente",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "altro_seme"
-  },
-  {
-   "grandezza": "_fatt_cs_ultimo",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "altro_seme"
-  },
-  {
-   "grandezza": "_xi_rumore",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "altro_seme"
-  },
-  {
-   "grandezza": "_chi_core_nodi",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "altro_seme"
-  },
-  {
-   "grandezza": "_chi_geom_nodi",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "altro_seme"
-  },
-  {
-   "grandezza": "_chi_core_rho0",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "altro_seme"
-  },
-  {
-   "grandezza": "_chi_core_raggio",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "altro_seme"
-  },
-  {
-   "grandezza": "_dt_e_ultimo",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "altro_seme"
-  },
-  {
-   "grandezza": "_r_corrente",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "altro_seme"
-  },
-  {
-   "grandezza": "_fatt_cs_ultimo",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "altro_seme"
-  },
-  {
    "grandezza": "_xi_rumore",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "altro_seme"
-  },
-  {
-   "grandezza": "_chi_core_nodi",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "altro_seme"
-  },
-  {
-   "grandezza": "_chi_geom_nodi",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "altro_seme"
-  },
-  {
-   "grandezza": "_chi_core_rho0",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
-   "scena": "altro_seme"
-  },
-  {
-   "grandezza": "_chi_core_raggio",
-   "funzione": "verifica_invarianti",
-   "riga": 6112,
+   "funzione": "_passo_spinoriale",
+   "riga": 5029,
    "scena": "altro_seme"
   }
  ],
+ "collaudo_del_rilevatore_in_posto": {
+  "passa": true,
+  "parziali_attese": [
+   [
+    "_sin2_vir",
+    "idx"
+   ]
+  ],
+  "parziali_ottenute": [
+   [
+    "_sin2_vir",
+    "idx"
+   ]
+  ],
+  "complete_attese": [
+   [
+    "_r_corrente",
+    ":"
+   ],
+   [
+    "_xi_rumore",
+    "np.copyto"
+   ]
+  ],
+  "complete_ottenute": [
+   [
+    "_r_corrente",
+    ":"
+   ],
+   [
+    "_xi_rumore",
+    "np.copyto"
+   ]
+  ]
+ },
+ "modifiche_in_posto_PARZIALI": [],
+ "modifiche_in_posto_COMPLETE_allarmi_spuri": [],
+ "controllo_positivo_finestra_INIETTATO": {
+  "passa": true,
+  "riga_iniettata": 8279,
+  "lettura": "_ = getattr(self, \"_r_corrente\", None)   # LETTURA INIETTATA (controllo positivo della finestra)",
+  "eventi_mitosi": 8,
+  "trovate": [
+   [
+    "_r_corrente",
+    "mitosi",
+    8279
+   ]
+  ],
+  "blob_copia": "9cfba6d34c55bf9fbc73116d659df0b16c23dcfe"
+ },
+ "mitosi_legge_derivate": false,
+ "perche_il_primo_controllo_era_mal_posto": "chiedeva una lettura dentro `mitosi` dopo la nascita, ma `mitosi` non legge nessuna delle dieci derivate (misurato sull'AST): il suo zero non discriminava ne' il successo ne' il fallimento della cura",
  "non_provate": [
   {
    "grandezza": "_chi_core_nodi",
@@ -5420,27 +1824,6 @@
    "gate": [],
    "classe": "non raggiunta, SENZA GATE",
    "perche": "nessuna condizione la protegge: se non e' stata letta e' perche' la funzione non e' stata chiamata nella finestra"
-  },
-  {
-   "grandezza": "_g_rampa_prec",
-   "funzione": "_pesi",
-   "riga": 5703,
-   "gate": [
-    "SEMINA_MATURA"
-   ],
-   "classe": "condizione mai scattata",
-   "perche": "il gate e' `SEMINA_MATURA`, e nessuna delle tre scene l'ha reso vero nella finestra"
-  },
-  {
-   "grandezza": "_xi_rumore",
-   "funzione": "_passo_spinoriale",
-   "riga": 5029,
-   "gate": [
-    "SCUOTIMENTO",
-    "RUMORE_COLORATO"
-   ],
-   "classe": "condizione mai scattata",
-   "perche": "il gate e' `SCUOTIMENTO and RUMORE_COLORATO`, e nessuna delle tre scene l'ha reso vero nella finestra"
   },
   {
    "grandezza": "_dt_e_ultimo",
@@ -5639,5 +2022,5 @@
    "perche": "il gate e' `not (_coorti)`, e nessuna delle tre scene l'ha reso vero nella finestra"
   }
  ],
- "verdetto": "808 letture sporche su 0 provate, 31 non provate"
+ "verdetto": "198 letture sporche su 2 provate, 29 non provate"
 }

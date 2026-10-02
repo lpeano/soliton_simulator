@@ -1659,3 +1659,41 @@ Almeno una lettura da ### **dentro `mitosi`** deve comparire nella finestra dell
 ### ✅ **E questa volta NON ho usato `git stash`** *(`L-PATCH`)*: `git add` dei file e basta.
 
 ---
+
+# ⛔ **LA MISURA E' FATTA, E IL SUO RISULTATO CAMBIA IL DISEGNO DEL VELENO** *(2026-10-03)*
+
+> ### **Luca: 198 letture sporche su 2 provate e 29 non provate. E le 198 cadono su DUE SOLI SITI, che sono esattamente i due che il registro dichiara `AUTO-RINFRESCO`. Il veleno, come il piano lo descrive, LI ROMPEREBBE ENTRAMBI — e la scelta su come procedere e' TUA.**
+
+### ✅ **E IL CONTROLLO POSITIVO PASSA**, quindi il verdetto vale: la lettura ### **iniettata** compare nella finestra, attribuita a `mitosi` `:8279`. Con la finestra al ritorno di `mitosi` *(il difetto curato)* ### **non comparirebbe.**
+
+## ⛔ **I DUE SITI, e il veleno li romperebbe in due modi OPPOSTI**
+
+| il sito | la guardia | con il veleno |
+|---|---|---|
+| `_xi_rumore` `:5031` | `if _xi is None or len(_xi) < n:` | estendere la rende ### **FALSA** ⇒ ### **l'estrazione fresca NON avviene** ⇒ i nodi nuovi prendono `NaN`. ### **E il commento dichiara che quello e' <<IL PERCORSO NORMALE della mitosi>>** |
+| `_g_rampa_prec` `:5704` | `if len(_prec) == len(ramp):` | estendere la rende ### **VERA** ⇒ `ramp < _prec` confronta con `NaN` ⇒ ### **False in silenzio**, e il ramo che conta il disallineamento ### **smette di scattare** |
+
+### ➜ **IL DISALLINEAMENTO DI LUNGHEZZA *E'* IL SEGNALE che quelle due leggi usano per ripulirsi.** Riempirle di `NaN` ### **distrugge esattamente il meccanismo che il registro dichiara.**
+
+## 📌 **LE DUE VIE, e scelgo di NON scegliere** *(voce `VELENO-AUTORINFRESCO`, `da-decidere`)*
+
+| | |
+|---|---|
+| ### **VIA A** — esenzione **dichiarata nel registro** | si avvelena ogni derivata ### **tranne** le `AUTO-RINFRESCO`. E' ### **la forma che hai GIA' approvato** per `eta` e per `peq` ⇒ per `9-ter` ### **non e' una legge in piu': e' il TERZO caso della STESSA esenzione**, ed e' ### **meno** di tre leggi separate |
+| **VIA B** — avvelenare anche quelle due e ### **curare i due siti** | sarebbe una ### **CURA DELLA FISICA dentro un commit di presidio**, e ### **`_xi_rumore` E' la regola di nascita** di una grandezza: toccarla e' toccare la fisica della nascita |
+
+### ✅ **RACCOMANDO LA VIA A**, e dico perche': ### **①** il registro la dichiara gia' ### **a parole** — il commit 4 la renderebbe solo ### **leggibile da una macchina**; ### **②** `9-ter`, perche' ### **unifica tre esenzioni invece di aggiungerne una**; ### **③** la via B cambierebbe la fisica della nascita ### **dentro un commit il cui criterio e' che lo STATO resti byte-identico** — cioe' ### **il criterio e la cura si contraddirebbero.**
+
+### ⛔ **E IL CODICE DEL COMMIT 4 NON LO SCRIVO PRIMA DELLA TUA SCELTA:** la ### **forma del veleno** dipende da quella decisione, e scriverlo nella via A per poi scoprire che volevi la B sarebbe lavoro buttato ### **e una decisione presa al tuo posto** (`L-DOPO-STOP`).
+
+## 📌 **E LE 29 NON PROVATE, col motivo di ciascuna**
+
+### **22** *condizione mai scattata* — gate come `TORS_4PI and len(perc_chi) >= n`, `ZETA_VIR and _sin2_vir is not None`, `CHI_CORE`, `SEMINA_MATURA`, `VERLET`.
+### **7** *non raggiunta, SENZA GATE* — la funzione non e' stata chiamata nella finestra.
+### ➜ **Il veleno non direbbe NIENTE su quelle 29**, e il verdetto lo scrive invece di tacerlo.
+
+## ✅ **E le tre scene: 147 chiamate a `nascita` nella lunga contro 9 nella corta**
+
+Con la sola corta il canale di Schwinger ha ### **1 evento contro 64.** La scena lunga che hai chiesto ### **e' quella che fa il lavoro.**
+
+---

@@ -297,6 +297,108 @@ per far passare un commit non e' un criterio, e' una formalita'.)*
 ### 📌 **E IL VERDETTO SI SCRIVE COSI', e non altrimenti:**
 > ### **«zero letture sporche su `N` PROVATE, `M` NON PROVATE (elencate)»**
 
+---
+
+## ⛔ **LA MISURA E' FATTA, E IL SUO RISULTATO CAMBIA IL DISEGNO DEL VELENO** *(2026-10-03, `csv/_test_fork/_copertura_derivate.py`)*
+
+> ### **VERDETTO: 198 letture sporche su 2 PROVATE, 29 NON PROVATE** — e le 198 cadono su
+> ### **DUE soli siti**, che sono ### **esattamente i due che il registro dichiara `AUTO-RINFRESCO`.**
+
+| il sito | quante | che cosa il registro dice di lui |
+|---|---|---|
+| `_g_rampa_prec` ← `_pesi` `:5703` | **99** *(7 + 82 + 10)* | *«`_pesi` la legge corta e la riscrive **LEI STESSA** un evento dopo, e il disallineamento e' **GIA' CONTATO**»* |
+| `_xi_rumore` ← `_passo_spinoriale` `:5029` | **99** | *«AUTO-RINFRESCO, ed **E' LA REGOLA DI NASCITA**: `xi` e' l'AMBIENTE, non una proprieta' del nodo, quindi il figlio **NON lo eredita**»* |
+
+### ⛔ **E QUI IL VELENO, COME IL PIANO LO DESCRIVE, ROMPEREBBE ENTRAMBI I SITI**
+
+Il piano dice *«le derivate **dei nuovi nodi** si riempiono con un valore avvelenato»* — cioe'
+### **ESTENDE** l'array alla lunghezza giusta. Ma le due guardie sono queste:
+
+| | la guardia | con il veleno |
+|---|---|---|
+| `_xi_rumore` `:5031` | `if _xi is None or len(_xi) < n:` | estendere rende la guardia ### **FALSA** ⇒ ### **l'estrazione fresca NON avviene** ⇒ i nodi nuovi prendono `NaN`. ### **E il commento dichiara che quello e' <<IL PERCORSO NORMALE della mitosi>>, non un fallback** |
+| `_g_rampa_prec` `:5704` | `if _prec is not None and len(_prec) == len(ramp):` | estendere la rende ### **VERA** ⇒ `ramp < _prec` confronta con `NaN` ⇒ ### **False in silenzio**, e il ramo `elif` che conta `_g_rampa_prec_disallineata` ### **smette di scattare** |
+
+### ➜ **IL DISALLINEAMENTO DI LUNGHEZZA *E'* IL SEGNALE che quelle due leggi usano per
+### ripulirsi. Riempirle di `NaN` distrugge esattamente il meccanismo che il registro dichiara.**
+
+### ✅ **LA CONSEGUENZA SUL DISEGNO, e NON la decido io** *(`A1`: la legge, non il numero — e qui la scelta e' di FORMA, quindi e' di Luca)*
+
+La forma che il risultato suggerisce e' ### **un'ESENZIONE DICHIARATA NEL REGISTRO**, che e'
+### **esattamente la forma che Luca ha gia' approvato** per `eta` *(l'`inf` del vuoto)* e per
+`peq` *(il `nan` da calibrare)*:
+
+| | |
+|---|---|
+| **si avvelena** | ogni derivata ### **tranne** quelle dichiarate `AUTO-RINFRESCO` |
+| ### **le due esenti** | `_g_rampa_prec` e `_xi_rumore`, ### **e il registro le dichiara GIA' COSI' a parole**: il commit 4 non aggiunge una convenzione, la rende ### **leggibile da una macchina** |
+| ### **e per `9-ter`** | ### **non e' una legge in piu':** e' il terzo caso della ### **stessa** esenzione *(`eta`, `peq`, `AUTO-RINFRESCO`)*, ed e' ### **meno** di tre leggi separate |
+
+### ⚠ **E L'ALTERNATIVA ESISTE, e va detta perche' la scelta sia una scelta:** avvelenare
+### **anche** quelle due e ### **curare i due siti** perche' non usino la lunghezza come
+segnale. ### **Sarebbe una CURA della fisica dentro un commit di presidio** — e
+### **`_xi_rumore` e' la regola di nascita di una grandezza**, quindi toccarla e' toccare la
+fisica della nascita. ### ⛔ **NON lo faccio senza che Luca lo decida.**
+
+### 📌 **E LE 29 NON PROVATE, col loro motivo:** ### **22** *condizione mai scattata*
+*(gate come `TORS_4PI and len(perc_chi) >= n`, `ZETA_VIR and _sin2_vir is not None`, `CHI_CORE`,
+`SEMINA_MATURA`, `VERLET`)* e ### **7** *non raggiunta, SENZA GATE* — cioe' la funzione non e'
+stata chiamata nella finestra. ### **Il veleno non direbbe NIENTE su quelle 29**, e il verdetto
+lo scrive.
+
+---
+
+---
+
+## ⛔ **LA MISURA E' FATTA, E IL SUO RISULTATO CAMBIA IL DISEGNO DEL VELENO** *(2026-10-03, `csv/_test_fork/_copertura_derivate.py`)*
+
+> ### **VERDETTO: 198 letture sporche su 2 PROVATE, 29 NON PROVATE** — e le 198 cadono su
+> ### **DUE soli siti**, che sono ### **esattamente i due che il registro dichiara `AUTO-RINFRESCO`.**
+
+| il sito | quante | che cosa il registro dice di lui |
+|---|---|---|
+| `_g_rampa_prec` ← `_pesi` `:5703` | **99** *(7 + 82 + 10)* | *«`_pesi` la legge corta e la riscrive **LEI STESSA** un evento dopo, e il disallineamento e' **GIA' CONTATO**»* |
+| `_xi_rumore` ← `_passo_spinoriale` `:5029` | **99** | *«AUTO-RINFRESCO, ed **E' LA REGOLA DI NASCITA**: `xi` e' l'AMBIENTE, non una proprieta' del nodo, quindi il figlio **NON lo eredita**»* |
+
+### ⛔ **E QUI IL VELENO, COME IL PIANO LO DESCRIVE, ROMPEREBBE ENTRAMBI I SITI**
+
+Il piano dice *«le derivate **dei nuovi nodi** si riempiono con un valore avvelenato»* — cioe'
+### **ESTENDE** l'array alla lunghezza giusta. Ma le due guardie sono queste:
+
+| | la guardia | con il veleno |
+|---|---|---|
+| `_xi_rumore` `:5031` | `if _xi is None or len(_xi) < n:` | estendere rende la guardia ### **FALSA** ⇒ ### **l'estrazione fresca NON avviene** ⇒ i nodi nuovi prendono `NaN`. ### **E il commento dichiara che quello e' <<IL PERCORSO NORMALE della mitosi>>, non un fallback** |
+| `_g_rampa_prec` `:5704` | `if _prec is not None and len(_prec) == len(ramp):` | estendere la rende ### **VERA** ⇒ `ramp < _prec` confronta con `NaN` ⇒ ### **False in silenzio**, e il ramo `elif` che conta `_g_rampa_prec_disallineata` ### **smette di scattare** |
+
+### ➜ **IL DISALLINEAMENTO DI LUNGHEZZA *E'* IL SEGNALE che quelle due leggi usano per
+### ripulirsi. Riempirle di `NaN` distrugge esattamente il meccanismo che il registro dichiara.**
+
+### ✅ **LA CONSEGUENZA SUL DISEGNO, e NON la decido io** *(`A1`: la legge, non il numero — e qui la scelta e' di FORMA, quindi e' di Luca)*
+
+La forma che il risultato suggerisce e' ### **un'ESENZIONE DICHIARATA NEL REGISTRO**, che e'
+### **esattamente la forma che Luca ha gia' approvato** per `eta` *(l'`inf` del vuoto)* e per
+`peq` *(il `nan` da calibrare)*:
+
+| | |
+|---|---|
+| **si avvelena** | ogni derivata ### **tranne** quelle dichiarate `AUTO-RINFRESCO` |
+| ### **le due esenti** | `_g_rampa_prec` e `_xi_rumore`, ### **e il registro le dichiara GIA' COSI' a parole**: il commit 4 non aggiunge una convenzione, la rende ### **leggibile da una macchina** |
+| ### **e per `9-ter`** | ### **non e' una legge in piu':** e' il terzo caso della ### **stessa** esenzione *(`eta`, `peq`, `AUTO-RINFRESCO`)*, ed e' ### **meno** di tre leggi separate |
+
+### ⚠ **E L'ALTERNATIVA ESISTE, e va detta perche' la scelta sia una scelta:** avvelenare
+### **anche** quelle due e ### **curare i due siti** perche' non usino la lunghezza come
+segnale. ### **Sarebbe una CURA della fisica dentro un commit di presidio** — e
+### **`_xi_rumore` e' la regola di nascita di una grandezza**, quindi toccarla e' toccare la
+fisica della nascita. ### ⛔ **NON lo faccio senza che Luca lo decida.**
+
+### 📌 **E LE 29 NON PROVATE, col loro motivo:** ### **22** *condizione mai scattata*
+*(gate come `TORS_4PI and len(perc_chi) >= n`, `ZETA_VIR and _sin2_vir is not None`, `CHI_CORE`,
+`SEMINA_MATURA`, `VERLET`)* e ### **7** *non raggiunta, SENZA GATE* — cioe' la funzione non e'
+stata chiamata nella finestra. ### **Il veleno non direbbe NIENTE su quelle 29**, e il verdetto
+lo scrive.
+
+---
+
 ### ⛔ **MAI «nessuna derivata sporca»:** quella frase afferma qualcosa su cio' che ### **non e' stato guardato.**
 
 ---
