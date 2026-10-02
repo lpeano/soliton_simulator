@@ -38,6 +38,20 @@ stessi argomenti e nello stesso ordine. ### **Lo stream non si tocca** -- si ann
 * ### **non misura le estrazioni fuori dal passo** *(la `semina`, che gira alla costruzione della
   scena)*: la (A) le riporta **a parte**, da un conteggio sul passo zero.
 
+## ⛔ **DUE DIFETTI DELLA PRIMA STESURA (`99bc86dc`), trovati dal GIRO CORTO** *(`STANDARD 7`)*
+
+| | il difetto | la cura |
+|---|---|---|
+| ### **① un FALSO ZERO sulla semina** | la prima stesura metteva la spia **sottoclassando `S.Rete`** *(dopo `carica_dal_cli`)*, e riportava ### **«estrazioni della semina: 0»** -- un numero **falso**, non un errore. ### **La causa, verificata e non supposta:** `_applica_flag` crea la `Rete` *(`:9830`)* e chiama `net.semina(...)` *(`:9847`)* ### **DENTRO `carica_dal_cli`**, cioe' **prima** che una sottoclasse possa esistere | si avvolge ### **`np.random.default_rng`** *(l'**unico** punto in cui il file costruisce un generatore: `:2564`)* **prima** del caricamento, e si ripristina dopo. ### **Cosi' la spia c'e' dal primo numero pescato** |
+| ### **② l'ordine degli addendi NON conta sui CONTATORI** | la (B) elencava **82** scritture, e fra loro ### **`getattr(self, '_g_nati_mitosi', 0) + int(len(a))`**: una somma di **INTERI**, dove ### **l'ordine degli addendi NON cambia il risultato.** Metterle nel contratto lo ### **diluisce**: il contratto deve dire dove l'ordine **conta** | ogni riga porta ### **se la grandezza e' nel REGISTRO** e ### **se la somma e' in VIRGOLA MOBILE.** ### **Il CONTRATTO e' il sottoinsieme in virgola mobile**; gli interi si riportano **separati e dichiarati inerti** |
+
+### 📌 **E il ① e' il difetto peggiore dei due, perche' non fallisce: RISPONDE.**
+Uno zero falso in un referto ### **si legge come un fatto** -- *«la semina non pesca»* -- e
+avrebbe mandato il contratto a dire il contrario di cio' che succede. ### **E' la stessa famiglia
+dello `0` del primo run sul `--regime`** *(2026-10-01: «zero differenze» perche' lo strumento non
+aveva creato il secondo sistema)*. ### **Un numero che non torna si guarda; uno che torna si
+crede.**
+
 COMANDO:  python csv/_test_fork/_ordine_estrazioni.py [--da=40] [--fino=72] [--seme=11]
 USCITA:   `csv/_test_fork/_ordine_estrazioni/_ordine_estrazioni.json` + `_corsa.txt` + stdout.
 ASCII puro nel codice; il docstring e' utf-8 e `_presidio` riconfigura lo stdout.
@@ -192,7 +206,7 @@ def identiche(a, b):
 
 
 # ------------------------------------------------------------------- (B) l'ordine degli addendi
-def somme_della_nascita(percorso, funzioni):
+def somme_della_nascita(percorso, funzioni, nomi_registro, tipi_registro):
     """Le scritture della nascita che DIPENDONO DALL'ORDINE DEGLI ADDENDI, dall'AST.
 
     Due forme contano, e per la stessa ragione (la virgola mobile non e' associativa):
@@ -253,8 +267,20 @@ def somme_della_nascita(percorso, funzioni):
                     break
             if vista is None:
                 continue
+            g = nomi[0]
+            tp = tipi_registro.get(g)
+            # ⚠ L'ORDINE DEGLI ADDENDI CONTA SOLO IN VIRGOLA MOBILE. `getattr(self, '_g_x', 0)
+            #   + 1` e' una somma di INTERI: l'ordine NON cambia il risultato, e metterla nel
+            #   contratto lo diluisce. Il tipo viene dal REGISTRO, non da un'euristica sul nome;
+            #   cio' che il registro non dichiara si marca `(non dichiarata)` e NON si assume.
+            mobile = None
+            if g in nomi_registro:
+                mobile = bool(tp is not None and ("float" in str(tp) or "complex" in str(tp)))
             fuori.append({"funzione": nodo.name, "riga_oggi": x.lineno,
-                          "grandezza": nomi[0], "forma": vista[0],
+                          "grandezza": g, "forma": vista[0],
+                          "nel_registro": g in nomi_registro,
+                          "tipo_dichiarato": tp,
+                          "ordine_conta": mobile,
                           "addendi_in_ordine": vista[1],
                           "testo": righe[x.lineno - 1].strip()[:150]})
     return fuori
@@ -400,34 +426,48 @@ def principale():
             stampa("        %2d. voce `%s`  ->  rng.%s  (%d elementi)" % (k, v, mt, q))
     stampa("")
 
-    # le estrazioni della SEMINA, fuori dal passo: si contano a parte, su una scena nuova.
-    stampa("  LE ESTRAZIONI DELLA SEMINA (fuori dal passo, alla costruzione della scena):")
-    reg_semina, dove_semina = [], {"passo": 0, "voce": "semina (costruzione della scena)"}
-    with contextlib.redirect_stdout(io.StringIO()):
-        _S0, argv2 = _cli_flag.argv_del_driver(extra=["--seme=%d" % seme],
-                                              dest=os.path.join(FUORI, "_scarto_cli2"))
-        S2, a2 = _cli_flag.carica_dal_cli(list(argv2), nome="ordest_semina")
-        S2._applica_regime(a2)
-        S2._NMASSE_VIDEO["n"] = max(2, int(getattr(a2, "nmasse", 2)))
-        S2._NMASSE_VIDEO["sep"] = float(getattr(a2, "sep", 3.0))
-        S2._NMASSE_VIDEO["size"] = None
-        _vera_rete = S2.Rete
+    # LE ESTRAZIONI FUORI DAL PASSO: si contano a parte.
+    #   ⚠ LA SPIA SI INSTALLA AVVOLGENDO `np.random.default_rng`, PRIMA del caricamento. La prima
+    #     stesura sottoclassava `S.Rete` DOPO `carica_dal_cli` e riportava ZERO: un numero FALSO,
+    #     perche' `_applica_flag` crea la `Rete` (`:9830`) e chiama `net.semina(...)` (`:9847`)
+    #     DENTRO `carica_dal_cli`. Verificato sul sorgente, non supposto.
+    stampa("  LE ESTRAZIONI FUORI DAL PASSO (il vuoto di `_applica_flag`, poi la scena):")
+    reg_semina = []
+    dove_semina = {"passo": 0, "voce": "vuoto (_applica_flag, dentro carica_dal_cli)"}
+    _vero_default_rng = np.random.default_rng
 
-        class ReteSpiata(_vera_rete):
-            def __init__(self, *aa, **kk):
-                _vera_rete.__init__(self, *aa, **kk)
-                self.rng = RngSpiato(self.rng, reg_semina, dove_semina)
-        S2.Rete = ReteSpiata
-        S2.avvia_test("MASSE-COERENTI")()
+    def _rng_spiato(*aa, **kk):
+        return RngSpiato(_vero_default_rng(*aa, **kk), reg_semina, dove_semina)
+
+    try:
+        np.random.default_rng = _rng_spiato
+        with contextlib.redirect_stdout(io.StringIO()):
+            _S0, argv2 = _cli_flag.argv_del_driver(extra=["--seme=%d" % seme],
+                                                   dest=os.path.join(FUORI, "_scarto_cli2"))
+            S2, a2 = _cli_flag.carica_dal_cli(list(argv2), nome="ordest_semina")
+            S2._applica_regime(a2)
+            S2._NMASSE_VIDEO["n"] = max(2, int(getattr(a2, "nmasse", 2)))
+            S2._NMASSE_VIDEO["sep"] = float(getattr(a2, "sep", 3.0))
+            S2._NMASSE_VIDEO["size"] = None
+            dove_semina["voce"] = "scena MASSE-COERENTI (avvia_test)"
+            S2.avvia_test("MASSE-COERENTI")()
+    finally:
+        np.random.default_rng = _vero_default_rng
     sem = {}
     for e in reg_semina:
-        sem.setdefault(e["metodo"], {"chiamate": 0, "elementi": 0})
-        sem[e["metodo"]]["chiamate"] += 1
-        sem[e["metodo"]]["elementi"] += e["quanti"]
+        k = (e["voce"], e["metodo"])
+        sem.setdefault(k, {"chiamate": 0, "elementi": 0})
+        sem[k]["chiamate"] += 1
+        sem[k]["elementi"] += e["quanti"]
     stampa("    n = %d, archi = %d   estrazioni: %d"
            % (S2.net.n, len(S2.net.i), len(reg_semina)))
-    for mt, q in sorted(sem.items()):
-        stampa("    rng.%-18s chiamate %4d   elementi %12d" % (mt, q["chiamate"], q["elementi"]))
+    if not reg_semina:
+        stampa("    ### ⛔ ZERO ESTRAZIONI: NON si legge come un fatto. La semina PESCA")
+        stampa("        (`rng.random`, `rng.normal`, `rng.choice` nel suo corpo), quindi uno")
+        stampa("        zero qui vuol dire CHE LA SPIA NON C'ERA. Si dichiara NON MISURATO.")
+    for (v, mt), q in sorted(sem.items()):
+        stampa("    %-44s rng.%-10s chiamate %4d   elementi %12d"
+               % (v, mt, q["chiamate"], q["elementi"]))
     stampa("")
 
     # ---------- la MISURA (B): l'ordine degli addendi -----------------------------------------
@@ -436,14 +476,38 @@ def principale():
     stampa("(B) LE SCRITTURE CHE DIPENDONO DALL'ORDINE DEGLI ADDENDI  (dall'AST, e qui l'AST")
     stampa("    E' lo strumento giusto: l'ordine di `a + b` E' un fatto della SINTASSI)")
     stampa("=" * 104)
-    somme = somme_della_nascita(SIM, FUNZ)
+    nomi_reg = set(getattr(S, "REGISTRO_NOMI", ()))
+    tipi_reg = {}
+    for x in getattr(S, "REGISTRO_STATO", ()):
+        tipi_reg[x[0]] = x[2]
+    for x in getattr(S, "REGISTRO_FINESTRA", ()):
+        tipi_reg[x[0]] = x[2]
+    somme = somme_della_nascita(SIM, FUNZ, nomi_reg, tipi_reg)
+    conta = [s for s in somme if s["ordine_conta"] is True]
+    inerti = [s for s in somme if s["ordine_conta"] is False]
+    fuori_reg = [s for s in somme if s["ordine_conta"] is None]
     stampa("  funzioni esaminate: %s" % ", ".join(FUNZ))
-    stampa("  scritture trovate : %d" % len(somme))
+    stampa("  scritture trovate : %d   di cui nel REGISTRO %d"
+           % (len(somme), len(conta) + len(inerti)))
     stampa("")
-    for s in somme:
-        stampa("  :%-6d %-22s %-12s %s" % (s["riga_oggi"], s["funzione"], s["forma"],
-                                           s["grandezza"]))
+    stampa("  ### IL CONTRATTO E' QUESTO: %d scritture in VIRGOLA MOBILE, dove l'ordine CONTA"
+           % len(conta))
+    stampa("  " + "-" * 100)
+    for s in conta:
+        stampa("  :%-6d %-22s %-12s %-16s [%s]" % (s["riga_oggi"], s["funzione"], s["forma"],
+                                                   s["grandezza"], s["tipo_dichiarato"]))
         stampa("          addendi in ordine: %s" % " | ".join(s["addendi_in_ordine"]))
+    stampa("")
+    stampa("  E %d scritture di grandezze del registro in cui l'ordine NON conta (INTERI):"
+           % len(inerti))
+    for s in inerti:
+        stampa("    :%-6d %-16s [%s]  %s" % (s["riga_oggi"], s["grandezza"],
+                                             s["tipo_dichiarato"],
+                                             " | ".join(s["addendi_in_ordine"])[:70]))
+    stampa("")
+    stampa("  E %d scritture NON nel registro (contatori, locali, tracking): FUORI dal contratto"
+           % len(fuori_reg))
+    stampa("    %s" % ", ".join(sorted({s["grandezza"] for s in fuori_reg})))
     stampa("")
 
     ref = {"vale": True,
@@ -461,10 +525,17 @@ def principale():
            "sequenza_passo_senza_nascite": sequenza(p_senza) if p_senza else None,
            "sequenza_passo_con_nascite": sequenza(p_nasc) if p_nasc else None,
            "passo_senza_nascite": p_senza, "passo_con_nascite": p_nasc,
-           "semina_fuori_dal_passo": {"estrazioni": len(reg_semina),
-                                      "per_metodo": sem,
-                                      "n": int(S2.net.n), "archi": len(S2.net.i)},
+           "fuori_dal_passo": {"estrazioni": len(reg_semina),
+                               "misurato": bool(reg_semina),
+                               "per_voce_e_metodo": [{"voce": v, "metodo": mt,
+                                                      "chiamate": q["chiamate"],
+                                                      "elementi": q["elementi"]}
+                                                     for (v, mt), q in sorted(sem.items())],
+                               "n": int(S2.net.n), "archi": len(S2.net.i)},
            "somme_ordine_addendi": somme,
+           "somme_contratto_virgola_mobile": conta,
+           "somme_interi_ordine_inerte": inerti,
+           "somme_fuori_dal_registro": fuori_reg,
            "registro_completo": registro}
     io.open(os.path.join(FUORI, "_ordine_estrazioni.json"), "w", encoding="utf-8",
             newline=NL).write(json.dumps(ref, indent=1, default=str))

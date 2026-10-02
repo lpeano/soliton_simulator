@@ -296,3 +296,48 @@ Il **par.9** dice: *«un difetto nuovo = una riga nell'indice, **piu' la spiegaz
 **PROSSIMO: il run, e il referto. Poi la tabella `doc/REGOLE_nascita.tsv` estesa col contratto.**
 
 ---
+
+# ⛔ **IL GIRO CORTO HA TROVATO DUE DIFETTI DEL MIO STRUMENTO, e uno era un FALSO ZERO** *(2026-10-02)*
+
+> ### **Luca, lo strumento rispondeva «la semina pesca ZERO». E' falso, e un numero falso in un referto si legge come un fatto.**
+
+`csv/_test_fork/_ordine_estrazioni.py` da **`99bc86dc`** a ### **`59ef30a4`**. ### **Nessuna riga del simulatore:** blob `3ddc56d9` prima e dopo. **Il fallimento non si aggiusta nel commit dell'output: la correzione e' un commit a se'** *(par.5)*, e ### **il giro vero parte dopo.**
+
+## ✅ **CIO' CHE IL GIRO CORTO HA DETTO DI BUONO, e va detto per primo**
+
+| | |
+|---|---|
+| ### **IL CONTROLLO TIENE** | lo stesso passo **CON** e **SENZA** la spia su `net.rng` e' ### **BYTE-IDENTICO**, su ### **188 grandezze e contatori** confrontati |
+| ### **la configurazione e' quella del driver** | **zero differenze su 81 booleani** (`H-P5`) |
+| ### **e la sequenza di un passo SENZA nascite e' TRE estrazioni** | `scuoti_vuoto` → `rng.normal` *(12802)* · `step` → `rng.normal` *(38406)* · ### **`mitosi` → `rng.random` (471564)** |
+
+### ⭐ **E IL TERZO NUMERO CONFERMA CIO' CHE IL COMMIT 2 AVEVA DICHIARATO**
+### **`471564` elementi = TUTTI gli archi**, ed e' l'estrazione di `decidi_divisione` *(`nasce = self.rng.random(len(avv)) < prob`)*. ### **Pesca a OGNI passo, anche quando non nasce niente** — e il docstring del commit 2 lo diceva: *«il generatore AVANZA: spostarla cambia l'ORDINE delle estrazioni»*.
+### ➜ **Quindi la mia premessa 1 del task history era sbagliata DUE volte:** non erano due estrazioni ma ### **tre**, e quella che credevo ci fosse *(`ANTIFASE_ADD`)* ### **non si e' vista affatto nella finestra misurata.**
+
+## ⛔ **DIFETTO 1, ed e' il peggiore dei due: UN FALSO ZERO**
+
+| | |
+|---|---|
+| che cosa diceva | *«LE ESTRAZIONI DELLA SEMINA ... **estrazioni: 0**»* |
+| ### **perche' e' FALSO** | la `semina` pesca, e si legge nel suo corpo: `rng.random`, `rng.normal`, `rng.choice`. ### **Uno zero li' non vuol dire «non pesca»: vuol dire CHE LA SPIA NON C'ERA** |
+| ### **la CAUSA, verificata sul sorgente e non supposta** | mettevo la spia **sottoclassando `S.Rete`**, ### **dopo `carica_dal_cli`.** Ma ### **`_applica_flag` crea la `Rete` (`:9830`) e chiama `net.semina(...)` (`:9847`) DENTRO `carica_dal_cli`**: quando la mia sottoclasse esiste, ### **la semina e' GIA' AVVENUTA** |
+| ### **la cura** | si avvolge ### **`np.random.default_rng`** — ### **l'UNICO punto in cui il file costruisce un generatore** *(`:2564`, verificato: una sola occorrenza)* — **prima** del caricamento, e si ripristina dopo. ### **Cosi' la spia c'e' dal primo numero pescato** |
+| ### **e un presidio, perche' A9** | se le estrazioni fuori dal passo risultassero **zero**, il referto ora ### **DICE CHE NON SI LEGGE COME UN FATTO** e marca `misurato: false`. ### **Un numero che non si puo' ottenere non deve poter essere stampato come se si fosse ottenuto** |
+
+### 📌 **E LA FAMIGLIA DI QUESTO ERRORE E' GIA' NEL REPO, di ieri**
+### **E' lo `0` del primo run sul `--regime`** *(«zero differenze» perche' lo strumento non aveva creato il secondo sistema)*. ### **Stessa forma: uno zero che non e' una misura, e' l'assenza di una misura.**
+### ➜ **E la lezione operativa e' secca: un numero che NON TORNA si guarda; uno che TORNA si crede.** Qui lo zero ### **tornava** — e' quello che rende il caso pericoloso.
+
+## ⚠ **DIFETTO 2: l'ordine degli addendi NON conta sui CONTATORI, e metterli nel contratto lo diluisce**
+
+La misura (B) elencava ### **82 scritture**, e fra loro ### **`getattr(self, '_g_nati_mitosi', 0) + int(len(a))`**: una somma di ### **INTERI**, dove ### **l'ordine degli addendi non cambia il risultato.**
+### ➜ **Ora ogni riga porta DUE cose in piu': se la grandezza e' nel REGISTRO, e se la somma e' in VIRGOLA MOBILE** — e ### **il tipo viene dal registro, non da un'euristica sul nome.** ### **Il CONTRATTO e' il solo sottoinsieme in virgola mobile**; gli interi si riportano **separati e dichiarati inerti**, e cio' che il registro non dichiara si marca ### **`(non dichiarata)` invece di assumerlo.**
+
+## ✅ **E CHE COSA QUESTO DICE DI `STANDARD 7`**
+
+Il giro corto e' costato ### **meno di un minuto** e ha preso **due difetti**, di cui uno ### **avrebbe messo un numero falso in un contratto.** ### **I collaudi dei criteri non avrebbero preso nessuno dei due**, perche' non c'era un criterio: c'era un **conteggio** — e un conteggio sbagliato ### **non fallisce, risponde.**
+
+**PROSSIMO: il giro VERO, dal passo 40 al 72, sulla scena grande, dove le nascite ci sono.**
+
+---
