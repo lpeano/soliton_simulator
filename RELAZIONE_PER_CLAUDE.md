@@ -818,3 +818,57 @@ Gli archi di `sel` sono ### **esattamente quelli con `keep` FALSE**: dopo `:7433
 Il commit 3 deve ### **preservare il comportamento dei rami che GIRANO**, e una cura di un ramo spento infilata la' dentro sarebbe ### **un secondo cambiamento nello stesso commit** *(par.5)*. ### **E se il blocco unico spostasse NATURALMENTE quella lettura prima della riscrittura, lo DICHIARO come cura del ramo spento, separata e nominata** — non assorbita in silenzio.
 
 ---
+
+# 🔧 **VIA (b) PASSO 1: LA REGOLA DI CONFRONTO ESTESA E IL SUO SIGILLO, committati PRIMA di girare** *(2026-10-02)*
+
+> ### **Luca, ho preso la tua decisione nell'ordine che hai dato. E il presidio mi ha RIFIUTATO di girare il sigillo prima del commit: la scelta del nome ha funzionato.**
+
+`csv/_confronto_nascita.py` *(**`cf00b8dc`**)* · `csv/_seal_fork/_sigillo_confronto_esteso.py` *(**`f1f7d783`**)*. ### **Nessuna riga del simulatore:** blob `3ddc56d9` prima e dopo.
+
+## ⭐ **LA REGOLA NUOVA: TRE INSIEMI, e il terzo parte da CIO' CHE LA GRANDEZZA E'**
+
+| # | l'insieme | da dove viene |
+|--:|---|---|
+| **1** | **REGISTRO** | `REGISTRO_NOMI` del modulo — **45** |
+| **2** | **CONTATORI** | `_` piu' **INTERO** *(la regola di oggi)* — **14** |
+| ### **3** | ### **SCRITTE NELLA NASCITA** | ### **l'AST**: ogni `self.<nome>` scritto dal perimetro della nascita, che non sia in (1) ne' (2), ### **e di cui qualcuno si accorga** — letto altrove nel simulatore **oppure** riportato in un file **TRACCIATO** da git — **7** |
+
+### ✅ **PERCHE' LA TERZA CONDIZIONE NON E' UN CAPRICCIO**
+Senza di lei l'insieme prenderebbe ### **anche le variabili di servizio che nessuno guarda**, e ### **un sigillo che confronta cio' che nessuno legge fallirebbe per RUMORE.** Con lei una grandezza entra ### **se e solo se un cambiamento su di lei sarebbe VISIBILE a qualcuno** — il codice o un referto. ### **E' la definizione di «cio' che la grandezza E'», non del suo nome.**
+
+## ⛔ **E UN DIFETTO CHE HO PRESO AL PRIMO GIRO, e non era ovvio**
+
+Col solo `hasattr`, ### **`_g_peqn_mediana` NON entrava nell'insieme**: non esiste sulla rete appena costruita, nasce ### **solo dopo uno Schwinger.** ### ➜ **Quindi avevo la regola giusta e la grandezza sfuggiva comunque, perche' la foto si prendeva troppo presto.**
+### ✅ **Curato: le ASSENTI entrano MARCATE**, e il referto dice ### **quali non sono MAI apparse** invece di tacerle — ed e' il **braccio `F`** del controllo unico, applicato qui. ### **Sono 37**, fra cui `_g_peqn_mediana` e `ultima_frac_antifase` *(quest'ultima non esistera' mai, perche' `ANTIFASE_ADD` e' spento: e lo si DICE)*.
+
+## ✅ **IL SIGILLO: TRE bracci, e il terzo non e' facoltativo**
+
+| braccio | che cosa dimostra |
+|---|---|
+| ### **A -- LA REGOLA** | elenca ### **che cosa confronta e PERCHE'**, e nomina ### **cio' che la regola di oggi si perde.** Fallisce se le **tre** grandezze del contratto non ci sono |
+| ### **B -- IL CASO CHE DEVE FALLIRE** | una COPIA del simulatore con ### **`_g_peqn_mediana` cambiata di UN ULP** *(`np.nextafter`: la perturbazione **piu' piccola possibile**, ### **non un numero scelto**)*. ### **La regola NUOVA deve CADERE, quella di OGGI NO** — e se la vecchia la vedesse, ### **il caso non proverebbe nulla** |
+| ### **C -- L'INVOLUCRO** | due bracci sul simulatore ### **NON modificato** devono dare ### **zero differenze con ENTRAMBE** le regole |
+
+### ⭐ **PERCHE' `C` NON E' FACOLTATIVO, e lo scrivo prima:** `STANDARD 1` dice che ### **un criterio di DIFFERENZA passa piu' facilmente PROPRIO col banco rotto.** Il braccio `B` chiede *«i due DEVONO differire»*, quindi ### **prima vanno confrontati due bracci IDENTICI** — senno' lo `0` della regola vecchia potrebbe voler dire *«il banco e' rotto»* invece di *«la regola vecchia non vede»*.
+
+### ✅ **E `_g_peqn_mediana` E' IL CASO GIUSTO, non una scelta comoda:** e' ### **solo ASSEGNATA e mai LETTA da nessun codice** *(verificato su tutto il repo: le occorrenze sono il simulatore, le sue copie, e i referti)*. ### ➜ **Quindi un ulp su di lei e' INERTE su tutto il resto**, e la differenza che il sigillo deve vedere e' ### **esattamente UNA.** ### **Se il braccio `B` ne trovasse due, la copia non e' chirurgica — e il sigillo lo dice.**
+
+## ⛔⛔ **E IL RILIEVO SUL PRESIDIO E' PIU' GRAVE DI COME L'AVEVO SCRITTO: I SIGILLI DI QUESTO LAVORO NON SONO COPERTI**
+
+**Misurato:** `csv/` ha ### **68 script `_sigillo_*`** *(coperti dal rifiuto)* e ### **SEI `_sig_*`** *(NON coperti)*. E i sei sono:
+
+| | referti TRACCIATI |
+|---|--:|
+| ### **`_sig_controllo_unico`** *(il sigillo del **COMMIT 1** del riordino)* | ### **7** |
+| ### **`_sig_nascita_psi`** *(`PSI-FLASH`)* | ### **6** |
+| ### **`_sig_decisione_separata`** *(il sigillo del **COMMIT 2**)* | ### **2** |
+| `_sig_max_nodi` · `_sig_sched_tipi` · `_sig_segni_una_legge` | 0 |
+
+### ➜ **Il rifiuto e' condizionato a `startswith('_sigillo_')`, e `_sig_` NON lo soddisfa:** ### **quei tre sigilli potrebbero girare DIRTY e produrre un referto committato senza che nulla lo impedisca.**
+### ⚠ **E la cosa peggiore e' che il prefisso SOMIGLIA:** chi legge `_sig_` ### **crede di essere nella classe protetta.**
+### ✅ **NON HO RINOMINATO NIENTE:** una rinomina cambierebbe il nome di ### **tre sigilli con referti committati**, e ### **i reperti non si riscrivono** *(par.9)*. Il sigillo **nuovo** si chiama `_sigillo_*` ### **di proposito**, e ### **il presidio HA RIFIUTATO DAVVERO** al primo tentativo, prima del commit — che e' la prova che la scelta funziona.
+### 🛑 **DECIDE LUCA:** rinominare i tre, oppure ### **cambiare il criterio del rifiuto da «il NOME» a «CIO' CHE LO SCRIPT FA»** *(produce un referto committato)* — che e' la via **(b)** gia' scritta in `PRESIDIO-RIFIUTO-SOLO-SIGILLI`.
+
+**PROSSIMO: il giro corto, poi il giro vero del sigillo, e il suo referto.**
+
+---
