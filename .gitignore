@@ -45,3 +45,7 @@ csv/_test_fork/_pilota_prova1/FOTOGRAMMA_*.png
 #   dice di essere una copia del simulatore e non lo e' piu'. Il dato E' il comando che
 #   la produce (par.6, la regola dei `.pkl` applicata a una copia del sorgente).
 csv/_seal_fork/_sigillo_confronto_esteso/_sim_ulp.py
+#   E lo stesso per il <<PRIMA>> del braccio `D`: lo ESTRAE `sim_prima_del_flag`
+#   dal PADRE del commit che introduce l'ancora, a ogni giro. Il repo ha gia' quel
+#   blob nella sua storia: committarne una copia sarebbe duplicare git.
+csv/_seal_fork/_sigillo_confronto_esteso/_sim_prima_cura.py

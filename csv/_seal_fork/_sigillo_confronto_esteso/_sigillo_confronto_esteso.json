@@ -1,14 +1,14 @@
 {
  "passa": true,
- "blob_sim_sha1_byte": "3ddc56d947d91069c89ae476f89afcadcb1ae4e6",
- "blob_sigillo": "f1f7d7833c4b5310b2d5ed39e4da7aeb44cd6e81",
+ "blob_sim_sha1_byte": "3d78cfd258ecf37e5cc43323f8c5105b66b3877e",
+ "blob_sigillo": "11b4f20e39f8bf5745121e2b5fda75a610f360ac",
  "blob_regola": "cf00b8dc9a54333f3777da27831eb7c2ec396747",
- "blob_copia_ulp": "40ff75134ea3ce24e77d22cae4925588802965db",
+ "blob_copia_ulp": "5dfbac76541265bbfd70241b28bb5095e4c3e472",
  "seme": 11,
  "passi": 72,
  "copia_chirurgica": true,
  "righe_diverse_nella_copia": [
-  7505
+  7539
  ],
  "braccio_A": {
   "passa": true,
@@ -546,28 +546,28 @@
    "_xi_esteso": "comincia con `_` ed e' un intero (la regola di OGGI)",
    "_xi_nuovi": "comincia con `_` ed e' un intero (la regola di OGGI)",
    "_cura4_maturi": "scritta da semina; letta fuori dal perimetro",
-   "_g_eredpsi_salti": "scritta da _eredita_psi_figli; riportata in 7 file tracciati",
-   "_g_eredpsi_shape": "scritta da _eredita_psi_figli; riportata in 4 file tracciati",
-   "_g_eredpsis_salti": "scritta da _eredita_psi_figli; riportata in 6 file tracciati",
-   "_g_eredrho_salti": "scritta da _eredita_psi_figli; riportata in 6 file tracciati",
-   "_g_m2l_dmin": "scritta da decidi_divisione; riportata in 11 file tracciati",
-   "_g_peqn_mediana": "scritta da mitosi; riportata in 25 file tracciati",
-   "_g_tors4pi_quando": "scritta da decidi_divisione; riportata in 16 file tracciati",
-   "_g_tors4pi_salti": "scritta da decidi_divisione; riportata in 16 file tracciati",
-   "_g_tors4pi_shape": "scritta da decidi_divisione; riportata in 16 file tracciati",
-   "_peqn_idx": "scritta da mitosi; riportata in 18 file tracciati",
-   "_rep_dte_assente": "scritta da decidi_divisione; riportata in 20 file tracciati",
-   "_rep_dte_fallback": "scritta da decidi_divisione; riportata in 25 file tracciati",
-   "_rep_guardia_salti": "scritta da decidi_divisione; riportata in 24 file tracciati",
-   "_rep_guardia_shape": "scritta da decidi_divisione; riportata in 19 file tracciati",
-   "_rep_realloc": "scritta da decidi_divisione; riportata in 26 file tracciati",
-   "_rep_scarto_max": "scritta da decidi_divisione; riportata in 21 file tracciati",
+   "_g_eredpsi_salti": "scritta da _eredita_psi_figli; riportata in 10 file tracciati",
+   "_g_eredpsi_shape": "scritta da _eredita_psi_figli; riportata in 7 file tracciati",
+   "_g_eredpsis_salti": "scritta da _eredita_psi_figli; riportata in 9 file tracciati",
+   "_g_eredrho_salti": "scritta da _eredita_psi_figli; riportata in 9 file tracciati",
+   "_g_m2l_dmin": "scritta da decidi_divisione; riportata in 14 file tracciati",
+   "_g_peqn_mediana": "scritta da mitosi; riportata in 30 file tracciati",
+   "_g_tors4pi_quando": "scritta da decidi_divisione; riportata in 19 file tracciati",
+   "_g_tors4pi_salti": "scritta da decidi_divisione; riportata in 19 file tracciati",
+   "_g_tors4pi_shape": "scritta da decidi_divisione; riportata in 19 file tracciati",
+   "_peqn_idx": "scritta da mitosi; riportata in 21 file tracciati",
+   "_rep_dte_assente": "scritta da decidi_divisione; riportata in 23 file tracciati",
+   "_rep_dte_fallback": "scritta da decidi_divisione; riportata in 28 file tracciati",
+   "_rep_guardia_salti": "scritta da decidi_divisione; riportata in 27 file tracciati",
+   "_rep_guardia_shape": "scritta da decidi_divisione; riportata in 22 file tracciati",
+   "_rep_realloc": "scritta da decidi_divisione; riportata in 29 file tracciati",
+   "_rep_scarto_max": "scritta da decidi_divisione; riportata in 24 file tracciati",
    "conc_archi": "scritta da mitosi; letta fuori dal perimetro",
    "coppie_nate": "scritta da mitosi; letta fuori dal perimetro",
    "masse_info": "scritta da semina; letta fuori dal perimetro",
    "nati": "scritta da mitosi; letta fuori dal perimetro",
    "negate": "scritta da decidi_divisione; letta fuori dal perimetro",
-   "ultima_frac_antifase": "scritta da mitosi; riportata in 50 file tracciati",
+   "ultima_frac_antifase": "scritta da mitosi; riportata in 53 file tracciati",
    "ultima_prob_coppia": "scritta da mitosi; letta fuori dal perimetro"
   }
  },
@@ -582,12 +582,29 @@
    {
     "nome": "_g_peqn_mediana",
     "come": "scalare float",
-    "a": "1.7026985177180012",
-    "b": "1.7026985177180014",
+    "a": "1.7026802215251897",
+    "b": "1.70268022152519",
     "ulp": 1
    }
   ],
   "diff_oggi": [],
   "solo_g_peqn_mediana": true
+ },
+ "braccio_D": {
+  "eseguito": true,
+  "passa": true,
+  "blob_prima": "3ddc56d947d91069c89ae476f89afcadcb1ae4e6",
+  "commit_che_introduce_l_ancora": "f54126119edc92157688c07b6449d2ce5588615d",
+  "ancora": "_peqn_med_pre",
+  "diff_nuova": [
+   {
+    "nome": "_g_peqn_mediana",
+    "come": "scalare float",
+    "a": "1.7026802215251897",
+    "b": "1.7026985177180012",
+    "ulp": 82398727128
+   }
+  ],
+  "diff_oggi": []
  }
 }

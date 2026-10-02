@@ -1099,3 +1099,45 @@ Sigillo da **`8df62ea6`** a ### **`11b4f20e`**. ### **Nessuna riga del simulator
 **PROSSIMO: il giro vero, quattro bracci.**
 
 ---
+
+# ✅✅ **IL SIGILLO A QUATTRO BRACCI PASSA. IL PASSO 2 E' CHIUSO CON LA SUA PROVA** *(2026-10-02)*
+
+> ### **Luca: la cura ha cambiato ESATTAMENTE un numero, e la regola di OGGI non lo avrebbe visto. Il tuo ordine era quello giusto, e ora ha due numeri invece di uno.**
+
+*(72 passi, scena grande, seme 11. Sigillo **`11b4f20e`**, regola `cf00b8dc`, simulatore **`3d78cfd2`**.)*
+
+## ✅ **BRACCIO `D` — LA DIFFERENZA ATTESA, ed e' UNA**
+
+| | |
+|---|---|
+| il **«prima»** | ### **`3ddc56d9`**, dal ### **PADRE del commit che introduce `_peqn_med_pre`** *(`f541261^`)*, estratto **in BINARIO** |
+| ### **la regola NUOVA** | ### **1 differenza**: `_g_peqn_mediana` da ### **`1.7026985177180012`** a ### **`1.7026802215251897`** |
+| ### **la regola di OGGI** | ### **0 differenze** — ### **NON la vede** |
+
+### ➜ **E questo e' il numero che giustifica l'ordine che hai dato:** ### **la cura del passo 2 sarebbe passata IN SILENZIO** col sigillo di ieri. ### **Non perche' fosse sbagliata — perche' nessuno la guardava** (`A8`).
+### ✅ **E che la differenza sia UNA SOLA e' il criterio che avevo fissato prima:** ### **due ⇒ la cura aveva toccato qualcos'altro e il commit non passava; zero ⇒ non aveva fatto niente.** ### **E' una, ed e' quella.**
+
+## ✅ **E GLI ALTRI TRE, sul simulatore nuovo**
+
+| braccio | esito |
+|---|---|
+| **`A`** la regola | ### **PASSA** |
+| ### **`B`** l'ulp **iniettato** | ### **PASSA**: 1 differenza *(`_g_peqn_mediana`, **1 ulp**)*, e ### **0 con la regola di oggi** |
+| **`C`** l'involucro | ### **PASSA**: ### **0 differenze con ENTRAMBE** le regole |
+| la **copia guasta** | ### **CHIRURGICA**: una riga, `:7539` — ### **l'ancora sull'ASSEGNAZIONE tiene** dove quella sulla formula era caduta |
+
+### 📌 **E `B` e `D` insieme dicono due cose diverse, ed e' per questo che sono due:** `B` prova che la regola ### **vede anche un ULP**; `D` prova che vede ### **esattamente cio' che e' cambiato e niente di piu'.**
+
+## ✅ **E NEMMENO IL «PRIMA» SI COMMITTA, per la stessa ragione della copia guasta**
+
+Lo ### **estrae `sim_prima_del_flag`** dal padre del commit, a ogni giro. ### **Il repo ha GIA' quel blob nella sua storia:** committarne una copia ### **sarebbe duplicare git** — e creare un secondo artefatto che puo' scadere. E' in `.gitignore` col motivo.
+
+## 📋 **IL PUNTO DOVE SIAMO, sulla tua decisione**
+
+| passo | stato |
+|---|---|
+| **1** — ### **il SIGILLO** | ### **FATTO e PROVATO** *(quattro bracci)* |
+| **2** — ### **il DIAGNOSTICO** | ### **FATTO e PROVATO**: la differenza attesa e' **una**, e la regola di ieri non l'avrebbe vista |
+| **3** — il **PUNTO UNICO** | ### **PROSSIMO** |
+
+---
