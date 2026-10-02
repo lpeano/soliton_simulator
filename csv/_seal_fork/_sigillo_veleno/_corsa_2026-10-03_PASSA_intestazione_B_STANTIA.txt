@@ -1,0 +1,172 @@
+[TIMBRO] _sigillo_veleno.py  sha1-BYTE 6f31c4ff  committato e pulito
+========================================================================================================
+IL SIGILLO DEL COMMIT 4: il VELENO alle derivate (via A, decisione di Luca)
+========================================================================================================
+simulatore ..... 41e4e107
+questo sigillo . 6f31c4ff
+regola in ...... csv/_confronto_nascita.py  71fd078a
+
+il <<prima>> .. blob dc10df7f, dal PADRE di b9c109a4 (l'ancora e' `_avvelena_derivate(net)`)
+    *(e `sim_prima_del_flag` ASSERISCE che l'ancora NON sia nel file estratto)*
+
+========================================================================================================
+BRACCIO A -- lo STATO e' byte-identico sulle TRE scene; le DERIVATE no
+========================================================================================================
+  scena `corta      ` seme 11, 72 passi, nascite 8/1
+      ### differenze sullo STATO ..... 0   (atteso 0)
+      contatori DEL PRESIDIO, separati e RIPORTATI: 5
+          {"nome": "_g_inv_veleno_ok", "come": "presente in UNO solo"}
+          {"nome": "_g_inv_veleno_scaduti", "come": "presente in UNO solo"}
+          {"nome": "_g_veleno_celle", "come": "presente in UNO solo"}
+          {"nome": "_g_veleno_esenti", "come": "presente in UNO solo"}
+          {"nome": "_g_veleno_voci", "come": "presente in UNO solo"}
+          *(cambiano PER COSTRUZIONE: nel simulatore di PRIMA questi nomi
+            non esistono. Si RIPORTANO, non si nascondono -- e se una
+            differenza non avesse questi prefissi sarebbe STATO VERO.)*
+      differenze sulle DERIVATE ...... 7   (informazione, NON un criterio)
+          *(il primo giro CHIEDEVA che fossero > 0, ed era SBAGLIATO: nella
+            scena `altro_seme` sono ZERO perche' le leggi avevano riscritto
+            TUTTE le celle avvelenate prima della fine del run. Un controllo
+            che puo' fallire senza che ci sia un difetto NON e' un controllo.)*
+      veleno: voci 72, celle 82, esenti 18, gia' lunghe 0
+      ### IL CONTROLLO POSITIVO: celle avvelenate = 82   (atteso > 0)
+      ### le due ESENTI, dopo il run:
+          _g_rampa_prec      {"grandezza": "_g_rampa_prec", "len": 12811, "n": 12812, "corta": true, "non_finiti": 0}
+          _xi_rumore         {"grandezza": "_xi_rumore", "len": 12811, "n": 12812, "corta": true, "non_finiti": 0}
+  scena `lunga      ` seme 11, 150 passi, nascite 83/64
+      ### differenze sullo STATO ..... 0   (atteso 0)
+      contatori DEL PRESIDIO, separati e RIPORTATI: 5
+          {"nome": "_g_inv_veleno_ok", "come": "presente in UNO solo"}
+          {"nome": "_g_inv_veleno_scaduti", "come": "presente in UNO solo"}
+          {"nome": "_g_veleno_celle", "come": "presente in UNO solo"}
+          {"nome": "_g_veleno_esenti", "come": "presente in UNO solo"}
+          {"nome": "_g_veleno_voci", "come": "presente in UNO solo"}
+          *(cambiano PER COSTRUZIONE: nel simulatore di PRIMA questi nomi
+            non esistono. Si RIPORTANO, non si nascondono -- e se una
+            differenza non avesse questi prefissi sarebbe STATO VERO.)*
+      differenze sulle DERIVATE ...... 7   (informazione, NON un criterio)
+          *(il primo giro CHIEDEVA che fossero > 0, ed era SBAGLIATO: nella
+            scena `altro_seme` sono ZERO perche' le leggi avevano riscritto
+            TUTTE le celle avvelenate prima della fine del run. Un controllo
+            che puo' fallire senza che ci sia un difetto NON e' un controllo.)*
+      veleno: voci 1176, celle 10104, esenti 294, gia' lunghe 0
+      ### IL CONTROLLO POSITIVO: celle avvelenate = 10104   (atteso > 0)
+      ### le due ESENTI, dopo il run:
+          _g_rampa_prec      {"grandezza": "_g_rampa_prec", "len": 13974, "n": 14000, "corta": true, "non_finiti": 0}
+          _xi_rumore         {"grandezza": "_xi_rumore", "len": 13974, "n": 14000, "corta": true, "non_finiti": 0}
+  scena `altro_seme ` seme 12, 72 passi, nascite 10/4
+      ### differenze sullo STATO ..... 0   (atteso 0)
+      contatori DEL PRESIDIO, separati e RIPORTATI: 5
+          {"nome": "_g_inv_veleno_ok", "come": "presente in UNO solo"}
+          {"nome": "_g_inv_veleno_scaduti", "come": "presente in UNO solo"}
+          {"nome": "_g_veleno_celle", "come": "presente in UNO solo"}
+          {"nome": "_g_veleno_esenti", "come": "presente in UNO solo"}
+          {"nome": "_g_veleno_voci", "come": "presente in UNO solo"}
+          *(cambiano PER COSTRUZIONE: nel simulatore di PRIMA questi nomi
+            non esistono. Si RIPORTANO, non si nascondono -- e se una
+            differenza non avesse questi prefissi sarebbe STATO VERO.)*
+      differenze sulle DERIVATE ...... 0   (informazione, NON un criterio)
+          *(il primo giro CHIEDEVA che fossero > 0, ed era SBAGLIATO: nella
+            scena `altro_seme` sono ZERO perche' le leggi avevano riscritto
+            TUTTE le celle avvelenate prima della fine del run. Un controllo
+            che puo' fallire senza che ci sia un difetto NON e' un controllo.)*
+      veleno: voci 112, celle 144, esenti 28, gia' lunghe 0
+      ### IL CONTROLLO POSITIVO: celle avvelenate = 144   (atteso > 0)
+      ### le due ESENTI, dopo il run:
+          _g_rampa_prec      {"grandezza": "_g_rampa_prec", "len": 12782, "n": 12782, "corta": false, "non_finiti": 0}
+          _xi_rumore         {"grandezza": "_xi_rumore", "len": 12782, "n": 12782, "corta": false, "non_finiti": 0}
+
+  ### BRACCIO A: PASSA
+  ### BRACCIO C: PASSA (le esenti non hanno NaN aggiunti dal veleno)
+
+========================================================================================================
+BRACCIO B -- IL CASO CHE DEVE FALLIRE: si toglie l'esenzione a `_xi_rumore`
+========================================================================================================
+  Il registro dichiara `_g_rampa_prec` AUTO-RINFRESCO perche' la guardia
+  `if _prec is not None and len(_prec) == len(ramp):` (:5704) E' IL SUO SEGNALE.
+  ### E NON USO `_xi_rumore`, e il motivo e' MISURATO: ha shape (12802, 3), cioe'
+  ### DUE ASSI, quindi il ramo `multiasse` del veleno la salterebbe COMUNQUE --
+  ### togliere la sua esenzione NON CAMBIEREBBE NIENTE. Il primo giro l'ha fatto,
+  ### e il braccio ha detto PASSA per DUE CONTATORI DEL VELENO.
+  ### E L'EFFETTO ATTESO NON E' UNA CADUTA, e lo prevedo PRIMA: `_g_rampa_prec` e'
+  ### la SOLA derivata che NON sta in DOMINI, quindi il controllo di dominio non
+  ### la guarda. Avvelenarla rende VERA la guardia, quindi `ramp < _prec` confronta
+  ### con `nan` e da' False IN SILENZIO: i contatori `_g_rampa_cali`,
+  ### `_g_rampa_calo_somma`, `_g_rampa_calo_max` SMETTONO DI SALIRE. ### Quella e'
+  ### la differenza che questo braccio deve vedere, e NON e' un contatore del
+  ### veleno: e' un contatore della DIAGNOSTICA, cioe' STATO VERO.
+  la copia: {"righe_diverse": [1274]}
+  il run NON e' caduto. Allora la differenza deve essere MISURABILE:
+      ### `_g_rampa_prec` non finiti: 1   (len 12812, n 12812)
+      contatori DEL VELENO (separati, NON contano): 3
+          {"nome": "_g_veleno_celle", "come": "scalare", "a": "82", "b": "92"}
+          {"nome": "_g_veleno_esenti", "come": "scalare", "a": "18", "b": "9"}
+          {"nome": "_g_veleno_voci", "come": "scalare", "a": "72", "b": "81"}
+      ### differenze VERE sullo stato: 4
+          ### {"nome": "_g_rampa_cali", "come": "scalare", "a": "24", "b": "36"}
+          ### {"nome": "_g_rampa_calo_quando", "come": "scalare", "a": "818", "b": "854"}
+          ### {"nome": "_g_rampa_prec_disallineata", "come": "presente in UNO solo"}
+          ### {"nome": "_g_rampa_prec_shape", "come": "presente in UNO solo"}
+  ### BRACCIO B: PASSA
+
+========================================================================================================
+BRACCIO D -- IL VERDETTO DELLA COPERTURA, citato dal referto COMMITTATO
+========================================================================================================
+  referto .. csv/_test_fork/_copertura_derivate/_copertura_derivate.json
+      blob del referto ........... 3b31a712
+      girato sul simulatore ...... dc10df7f
+      ### IL VERDETTO ............ 198 letture sporche su 2 provate, 29 non provate
+      letture dall'AST 31, provate 2, NON provate 29
+          condizione mai scattata        22
+          non raggiunta, SENZA GATE      7
+      controllo positivo della finestra (iniettato): True
+  ### E IL VERDETTO NON SI RISCRIVE A PAROLE: si CITA, col blob del referto
+  ###   e col blob del simulatore su cui e' girato. Un numero ricopiato non
+  ###   ha provenienza (`L-NUMERI`).
+  ### BRACCIO D: PASSA
+
+========================================================================================================
+BRACCIO E -- UNA CELLA AVVELENATA SCRITTA senza riscrivere l'array
+========================================================================================================
+  L'iniezione e' IN POSTO (`net._dt_e_ultimo[inizio] = 1.0`), quindi CONSERVA
+  l'identita' dell'oggetto: il registro del veleno resta VIVO. ### E allora
+  l'esenzione per cella DEVE NOMINARE quella cella, perche' un NUMERO li' vuol
+  dire che qualcuno ha scritto UNA CELLA senza riscrivere la derivata.
+  ### E' il SECONDO VERSO della strettezza: senza di lui l'esenzione
+  ### ammetterebbe tutto, ed e' `A9` (un presidio che ammette tutto non
+  ### impedisce niente).
+  la copia: {"righe_prima": 12894, "righe_dopo": 12897}
+  ### IL RUN E' CADUTO, ed e' CIO' CHE DEVE SUCCEDERE:
+      passo 42, voce `verifica_invarianti`, riga 6428
+      tipo ...... DominioViolato
+      messaggio . [INVARIANTE] `_dt_e_ultimo` VIOLA `> 0 | e nelle 1 celle AVVELENATE il valore DEVE essere `nan` (esenzione PER CELLA ancorata al veleno: un NUMERO li' significa una cella scritta SENZA riscrivere la derivata)` al passo 42, in `esegui_passo`.
+  quanti: 1
+  indici (primi 8): 471564
+  valori (primi 8): 1.000000e+00
+  arco=12802-1583 quanti=1 su=471565
+      ### nomina `_dt_e_ultimo`? SI
+      ### e dice che e' una CELLA AVVELENATA? SI
+  ### BRACCIO E: PASSA
+
+========================================================================================================
+BRACCIO F -- IL VELENO NON REGISTRA LE CELLE: il run deve cadere COME PRIMA
+========================================================================================================
+  Senza il registro il controllo non ha niente a cui ancorare l'esenzione, e il
+  run deve cadere come cadeva PRIMA della via (a): al passo 42, su
+  `_dt_e_ultimo` che viola `> 0`. ### E' il CONTROLLO POSITIVO DEL REGISTRO:
+  ### se il run passasse anche senza registro, l'esenzione non sarebbe ancorata
+  ### a niente e il braccio A non proverebbe nulla.
+  la copia: {"righe_diverse": [1542]}
+  ### IL RUN E' CADUTO, ed e' CIO' CHE DEVE SUCCEDERE:
+      passo 42, voce `verifica_invarianti`, riga 6425
+      messaggio . [INVARIANTE] `_dt_e_ultimo` VIOLA `> 0` al passo 42, in `esegui_passo`.
+  quanti: 1
+  indici (primi 8): 471564
+  valori (primi 8): nan
+  arco=12802-1583 quanti=1 su=471565
+      ### al passo 42, come prima della via (a)? SI
+  ### BRACCIO F: PASSA
+
+========================================================================================================
+### IL SIGILLO PASSA   (A OK · B OK · C OK · D OK · E OK · F OK)
+========================================================================================================

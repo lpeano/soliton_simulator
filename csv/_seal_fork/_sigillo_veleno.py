@@ -7,7 +7,7 @@ Criteri ### **fissati PRIMA dei numeri** *(par.(d) del piano, piu' il mandato de
 | | il braccio | che cosa deve dire |
 |---|---|---|
 | **A** | lo ### **STATO e' byte-identico** sulle tre scene | e le ### **DERIVATE NO**, ed e' il prezzo ### **dichiarato e accettato** da Luca |
-| **B** | il ### **CASO CHE DEVE FALLIRE** | si ### **toglie l'esenzione** a `_xi_rumore` ⇒ il veleno deve ### **ROMPERE** il run, ### **nel sito dichiarato, con voce e riga** |
+| **B** | il ### **CASO CHE DEVE FALLIRE** | si ### **toglie l'esenzione** a `_g_rampa_prec` ⇒ il veleno deve ### **ROMPERE il sito dichiarato, con voce e riga** — e per `_g_rampa_prec`, che e' la ### **sola derivata fuori da `DOMINI`**, *<<rompere>>* vuol dire che i contatori della diagnostica ### **smettono di salire**, non che il run cade |
 | **C** | le ### **due esenti NON sono avvelenate** | dopo una nascita restano ### **CORTE**, senza `NaN` aggiunto |
 | **D** | il ### **verdetto della COPERTURA** | citato dal referto ### **committato**, col suo blob — non ricalcolato a parole |
 
@@ -296,7 +296,8 @@ def principale():
 
     # ---------- BRACCIO B: il caso che DEVE fallire ----------------------------------------
     stampa("=" * 104)
-    stampa("BRACCIO B -- IL CASO CHE DEVE FALLIRE: si toglie l'esenzione a `_xi_rumore`")
+    stampa("BRACCIO B -- IL CASO CHE DEVE FALLIRE: si toglie l'esenzione a "
+           "`_g_rampa_prec`")
     stampa("=" * 104)
     stampa("  Il registro dichiara `_g_rampa_prec` AUTO-RINFRESCO perche' la guardia")
     stampa("  `if _prec is not None and len(_prec) == len(ramp):` (:5704) E' IL SUO SEGNALE.")

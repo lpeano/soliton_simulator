@@ -1840,3 +1840,45 @@ Nel braccio `B` e' comparso `_g_veleno_multiasse`. ### **Misurato: `_xi_rumore` 
 ### ✅ **Committo il fallimento e NON lo curo qui** *(par.5)*, e qui conta il doppio: la correzione tocca ### **I CRITERI** del sigillo, e ### **un criterio corretto nello stesso commit in cui fallisce e' un criterio che si adatta al risultato.**
 
 ---
+
+# ✅✅ **IL SIGILLO DEL COMMIT 4 PASSA, SEI BRACCI. E il braccio `B` ha dato cio' che avevo PREVISTO** *(2026-10-03)*
+
+> ### **Luca: A OK · B OK · C OK · D OK · E OK · F OK. E la previsione che avevo scritto PRIMA di girare e' confermata dai numeri.**
+
+## ✅ **IL BRACCIO `B`, e il valore sta nell'aver previsto l'effetto prima**
+
+Avevo scritto in `308dd0a`: *«`_g_rampa_prec` e' la SOLA derivata fuori da `DOMINI`, quindi avvelenarla ### **non fara' cadere** il run — rendera' vera la guardia del `:5704`, e i contatori `_g_rampa_cali`/`_calo_somma`/`_calo_max` ### **smetteranno di salire**»*.
+
+| | il numero |
+|---|---|
+| `_g_rampa_prec` non finiti | ### **1** — avvelenata |
+| contatori del veleno | **3**, ### **separati e NON contati** |
+| ### **differenze VERE sullo stato** | ### **4** |
+| | `_g_rampa_cali` ### **24 contro 36** |
+| | `_g_rampa_calo_quando` ### **818 contro 854** |
+| | `_g_rampa_prec_disallineata` ### **presente in UNO solo** |
+| | `_g_rampa_prec_shape` ### **presente in UNO solo** |
+
+### ➜ **Il ramo che contava il disallineamento HA SMESSO DI SCATTARE**, e i cali hanno smesso di salire. ### **Esattamente come previsto, e la previsione era committata prima del run.**
+
+## ✅ **E IL BRACCIO `A` ORA PASSA SU TUTTE E TRE LE SCENE: ZERO differenze VERE**
+
+| scena | differenze sullo STATO | contatori del presidio | celle avvelenate |
+|---|---|---|---|
+| corta *(72)* | ### **0** | 5, riportati | **82** |
+| lunga *(150)* | ### **0** | 5, riportati | ### **10104** |
+| altro seme *(72)* | ### **0** | 5, riportati | **144** |
+
+### 📌 **E i 5 contatori del presidio ci sono ancora, ELENCATI A PARTE:** non li ho nascosti, e se una differenza fosse fuori dai prefissi dichiarati sarebbe ### **stato vero.**
+
+## ⛔ **MA L'INTESTAZIONE DEL BRACCIO `B` NOMINAVA LA GRANDEZZA SBAGLIATA, e non la committo cosi'**
+
+La riga stampata diceva *«si toglie l'esenzione a `_xi_rumore`»*, mentre il corpo toglie l'esenzione a ### **`_g_rampa_prec`** e misura quella. Il corpo lo chiarisce tre righe sotto — ### **ma un'intestazione che nomina la grandezza sbagliata fa concludere a chi legge che il caso provato e' un altro.**
+
+### ➜ **E' la stessa ragione per cui due ore fa non ho committato un referto che diceva <<il verdetto NON VALE>> mentre io dicevo che valeva:** ### **un referto deve essere COERENTE DA SOLO.** Il prezzo e' un rigiro, e lo pago.
+
+### 📌 **E la mia patch aveva curato le quattro righe di spiegazione e NON il titolo:** e' `P1-quater` al contrario — ho sostituito ### **cio' che avevo in mente** invece di cercare ### **TUTTI** i punti che nominavano la grandezza vecchia. Il `grep` ne trovava ### **quattro**: due commenti ### **giusti** *(spiegano perche' NON la uso)*, il titolo e la riga di docstring.
+
+### ✅ **E la riga di docstring ora dice una cosa che il titolo da solo non diceva:** per `_g_rampa_prec`, che e' la ### **sola derivata fuori da `DOMINI`**, *<<rompere>>* vuol dire che i contatori della diagnostica ### **smettono di salire**, non che il run cade.
+
+---
