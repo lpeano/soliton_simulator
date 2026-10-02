@@ -38,3 +38,10 @@ db/
 csv/_test_fork/_pilota_prova1/stati/
 csv/_test_fork/_pilota_prova1/*.mp4
 csv/_test_fork/_pilota_prova1/FOTOGRAMMA_*.png
+# [SIGILLO CONFRONTO ESTESO, 2026-10-02] la COPIA GUASTA (un ulp su _g_peqn_mediana)
+#   NON si committa, ed e' una scelta: il sigillo la RIGENERA a ogni giro dal simulatore
+#   di QUEL momento, con l'ancora ASSERITA unica. Committarla creerebbe esattamente
+#   l'ARTEFATTO STANTIO che `SIM-PRIMA-STANTIO` ha nominato il 2026-10-01: un file che
+#   dice di essere una copia del simulatore e non lo e' piu'. Il dato E' il comando che
+#   la produce (par.6, la regola dei `.pkl` applicata a una copia del sorgente).
+csv/_seal_fork/_sigillo_confronto_esteso/_sim_ulp.py

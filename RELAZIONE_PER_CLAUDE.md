@@ -872,3 +872,53 @@ Col solo `hasattr`, ### **`_g_peqn_mediana` NON entrava nell'insieme**: non esis
 **PROSSIMO: il giro corto, poi il giro vero del sigillo, e il suo referto.**
 
 ---
+
+# ✅✅ **IL SIGILLO DELLA REGOLA ESTESA PASSA: TRE BRACCI SU TRE** *(2026-10-02, via (b) passo 1)*
+
+> ### **Luca: la regola nuova vede l'ULP e quella di oggi NON lo vede. E' esattamente il caso che hai chiesto, nei due versi.**
+
+*(72 passi, scena grande, seme 11. Sigillo `f1f7d783`, regola `cf00b8dc`, simulatore **`3ddc56d9`** — ### **nessuna riga toccata.** Referto: `csv/_seal_fork/_sigillo_confronto_esteso/`.)*
+
+## ✅ **BRACCIO `B` — IL CASO CHE DEVE FALLIRE, e passa nei DUE versi**
+
+| | |
+|---|---|
+| la **copia** | ### **CHIRURGICA: UNA riga diversa**, `:7505`, con `np.nextafter(..., inf)` — ### **la perturbazione piu' piccola possibile**, non un numero scelto |
+| ### **la regola NUOVA** | ### **1 differenza, ed e' ESATTAMENTE `_g_peqn_mediana`**: `1.7026985177180012` contro `1.7026985177180014`, ### **1 ulp** |
+| ### **la regola di OGGI** | ### **0 differenze** — ### **non la vede** |
+
+### ➜ **E il secondo verso e' quello che rende il caso una PROVA e non una constatazione:** se la regola vecchia l'avesse vista, ### **vorrebbe dire che era gia' coperta** e il caso non proverebbe niente.
+### ✅ **E che la differenza sia UNA SOLA conferma che `_g_peqn_mediana` e' il caso giusto:** e' ### **solo assegnata, mai letta**, quindi un ulp su di lei ### **non propaga.** Se il braccio ne avesse trovate due, la copia non era chirurgica.
+
+## ✅ **BRACCIO `C` — L'INVOLUCRO: 0 differenze su ENTRAMBE le regole**
+
+Due bracci sul simulatore **non modificato**, 72 passi: ### **zero differenze su 231 grandezze scattate.**
+### ➜ **Senza questo braccio lo `0` della regola vecchia nel `B` sarebbe illeggibile** — potrebbe voler dire *«il banco e' rotto»* invece di *«la regola vecchia non vede»*. ### **E' `STANDARD 1` letto al contrario, e qui serviva davvero.**
+
+## ✅ **BRACCIO `A` — LA REGOLA: che cosa confronta, e PERCHE'**
+
+| classe | quante |
+|---|--:|
+| **registro** | 45 |
+| **contatori** *(`_` piu' intero)* | 179 |
+| ### **scritte nella nascita** | ### **24** |
+| ### **TOTALE nell'insieme** | ### **248** |
+| scattate nella foto | 231 |
+| ### **che la regola di OGGI si perde** | ### **24** |
+
+### ✅ **E le TRE del contratto ci sono tutte:** `_g_peqn_mediana` · `ultima_prob_coppia` · `ultima_frac_antifase`.
+**Le altre 21 che oggi sfuggono** sono `conc_archi`, `coppie_nate`, `masse_info`, `nati`, `negate` *(lette fuori dal perimetro)* e i contatori nati dentro la nascita.
+
+## ✅ **E LE 17 «MAI APPARSE» SI DICONO, invece di tacerle** *(il braccio `F` del controllo unico, applicato qui)*
+
+Fra loro ### **`ultima_frac_antifase`** *(`ANTIFASE_ADD` e' **spento**: non esistera' mai in questa configurazione)* e ### **`_smp_d` / `_smp_d0`**, che sono ### **grandezze a FINESTRA**: esistono **solo dentro** il passo, e la foto si prende **fra** due passi.
+### ➜ **Nessuna delle due e' un difetto, ed e' la ragione per cui vanno DETTE:** un'assenza dichiarata e' informazione; ### **un'assenza silenziosa e' un buco.**
+
+## ⚠ **E IL GIRO CORTO E' UN DATO, non un inconveniente**
+
+A **3 passi** il braccio `B` ### **FALLISCE**, perche' senza uno Schwinger ### **`_g_peqn_mediana` non nasce** e non c'e' niente da confrontare.
+### ➜ **Quindi il sigillo NON PASSA A VUOTO**, e questo l'ho visto **prima** del giro vero. ### **Un sigillo che passasse anche quando la grandezza non esiste non starebbe misurando la regola: starebbe misurando se stesso** (`P1-sexies`).
+
+**PROSSIMO: il passo 2 — `_g_peqn_mediana` presa UNA volta, a un istante DICHIARATO. Il disegno e' pronto e il codice NON e' ancora scritto.**
+
+---

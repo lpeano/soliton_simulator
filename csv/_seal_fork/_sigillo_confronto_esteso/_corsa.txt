@@ -1,0 +1,85 @@
+========================================================================================================
+SIGILLO DELLA REGOLA DI CONFRONTO ESTESA  (via (b) passo 1, decisione di Luca)
+========================================================================================================
+simulatore ..... 3ddc56d9
+questo sigillo . f1f7d783
+regola in ...... csv/_confronto_nascita.py  cf00b8dc
+seme 11   passi 72
+
+========================================================================================================
+LA COPIA GUASTA: `_g_peqn_mediana` cambiata di UN ULP (`np.nextafter(..., inf)`)
+========================================================================================================
+  file ........... csv/_seal_fork/_sigillo_confronto_esteso/_sim_ulp.py
+  blob ........... 40ff7513
+  righe DIVERSE .. 1   [7505]
+  ### CHIRURGICA: SI
+
+  braccio A: scena n = 12802, archi = 471564
+====================================================================================================
+LA CONFIGURAZIONE INTERA (`P5`) -- non i flag toccati, TUTTI
+====================================================================================================
+  booleani di modulo confrontati con l'argv del DRIVER: 81
+  -> IN CONFIGURAZIONE DEL DRIVER: nessuna differenza. ZERO su 81.
+
+
+========================================================================================================
+BRACCIO A -- LA REGOLA: che cosa confronta, e PERCHE'
+========================================================================================================
+  registro                 45
+  contatore                179
+  scritta-nella-nascita    24
+  ----------------------------------------------------------------------------------------------
+  ### TOTALE nell'insieme ........... 248
+  ### scattate nella foto ........... 231
+  ### che la regola di OGGI SI PERDE . 24
+      ### _cura4_maturi              scritta da semina; letta fuori dal perimetro
+      ### _g_eredpsi_salti           scritta da _eredita_psi_figli; riportata in 7 file tracciati
+      ### _g_eredpsi_shape           scritta da _eredita_psi_figli; riportata in 4 file tracciati
+      ### _g_eredpsis_salti          scritta da _eredita_psi_figli; riportata in 6 file tracciati
+      ### _g_eredrho_salti           scritta da _eredita_psi_figli; riportata in 6 file tracciati
+      ### _g_m2l_dmin                scritta da decidi_divisione; riportata in 11 file tracciati
+      ### _g_peqn_mediana            scritta da mitosi; riportata in 25 file tracciati
+      ### _g_tors4pi_quando          scritta da decidi_divisione; riportata in 16 file tracciati
+      ### _g_tors4pi_salti           scritta da decidi_divisione; riportata in 16 file tracciati
+      ### _g_tors4pi_shape           scritta da decidi_divisione; riportata in 16 file tracciati
+      ### _peqn_idx                  scritta da mitosi; riportata in 18 file tracciati
+      ### _rep_dte_assente           scritta da decidi_divisione; riportata in 20 file tracciati
+      ### _rep_dte_fallback          scritta da decidi_divisione; riportata in 25 file tracciati
+      ### _rep_guardia_salti         scritta da decidi_divisione; riportata in 24 file tracciati
+      ### _rep_guardia_shape         scritta da decidi_divisione; riportata in 19 file tracciati
+      ### _rep_realloc               scritta da decidi_divisione; riportata in 26 file tracciati
+      ### _rep_scarto_max            scritta da decidi_divisione; riportata in 21 file tracciati
+      ### conc_archi                 scritta da mitosi; letta fuori dal perimetro
+      ### coppie_nate                scritta da mitosi; letta fuori dal perimetro
+      ### masse_info                 scritta da semina; letta fuori dal perimetro
+      ### nati                       scritta da mitosi; letta fuori dal perimetro
+      ### negate                     scritta da decidi_divisione; letta fuori dal perimetro
+      ### ultima_frac_antifase       scritta da mitosi; riportata in 50 file tracciati
+      ### ultima_prob_coppia         scritta da mitosi; letta fuori dal perimetro
+  grandezze dell'insieme MAI apparse: 17   _cura4_maturi, _g_eredpsi_salti, _g_eredpsi_shape, _g_eredpsis_salti, _g_eredrho_salti, _g_tors4pi_quando, _g_tors4pi_salti, _g_tors4pi_shape, _peqn_idx, _rep_dte_assente, _rep_dte_fallback, _rep_guardia_salti, _rep_guardia_shape, _rep_realloc, _smp_d, _smp_d0, ultima_frac_antifase
+      (non e' un difetto: una grandezza di un ramo spento non esiste. Si DICE.)
+
+  ### LE TRE SCOPERTE DAL CONTRATTO, sono nell'insieme? _g_peqn_mediana=SI  ultima_prob_coppia=SI  ultima_frac_antifase=SI
+  ### BRACCIO A: PASSA
+
+========================================================================================================
+BRACCIO C -- L'INVOLUCRO: due bracci sul simulatore NON modificato
+========================================================================================================
+  con la regola NUOVA ... differenze: 0
+  con la regola di OGGI  differenze: 0
+  ### BRACCIO C: PASSA -- il banco e' inerte
+
+========================================================================================================
+BRACCIO B -- IL CASO CHE DEVE FALLIRE: un ULP su `_g_peqn_mediana`
+========================================================================================================
+  con la regola NUOVA ... differenze: 1
+      ### {'nome': '_g_peqn_mediana', 'come': 'scalare float', 'a': '1.7026985177180012', 'b': '1.7026985177180014', 'ulp': 1}
+  con la regola di OGGI  differenze: 0
+
+  la regola NUOVA vede ESATTAMENTE `_g_peqn_mediana` e nient'altro? SI
+  la regola di OGGI NON la vede? ................................. SI
+  ### BRACCIO B: PASSA
+
+========================================================================================================
+### IL SIGILLO PASSA   (A OK · B OK · C OK · copia chirurgica OK)
+========================================================================================================
