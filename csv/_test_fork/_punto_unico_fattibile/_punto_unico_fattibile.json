@@ -1,0 +1,3199 @@
+{
+ "blob_sim_sha1_byte": "3ddc56d947d91069c89ae476f89afcadcb1ae4e6",
+ "blob_strumento": "be5c8133c1352ede8dea4bf50986c3f2ec55e4b6",
+ "mitosi": {
+  "riga_da": 7277,
+  "riga_a": 7564
+ },
+ "grandezze_registro": [
+  "AUTO-RINFRESCO, ed E LA REGOLA DI NASCITA: `xi` e l AMBIENTE, non una proprieta del nodo, quindi il figlio NON lo eredita -- e il codice lo dichiara al sito di lettura",
+  "AUTO-RINFRESCO: `_pesi` la legge corta e la riscrive LEI STESSA un evento dopo, e il disallineamento e GIA CONTATO (`_g_rampa_prec_disallineata`)",
+  "_chi_core_nodi",
+  "_chi_core_raggio",
+  "_chi_core_rho0",
+  "_chi_geom_nodi",
+  "_cs_nodo_prev",
+  "_deg",
+  "_dt_e_ultimo",
+  "_fatt_cs_ultimo",
+  "_g_rampa_prec",
+  "_nb",
+  "_nb_prec",
+  "_nb_ret",
+  "_psi_prec",
+  "_psi_spin_prec",
+  "_psi_spinor",
+  "_r_corrente",
+  "_rep",
+  "_sin2_vir",
+  "_smp_d",
+  "_smp_d0",
+  "_spinor_lift",
+  "_xi_rumore",
+  "apri",
+  "arco",
+  "chiudi",
+  "complex128",
+  "conc_nodi",
+  "d",
+  "d0",
+  "eta",
+  "float64",
+  "i",
+  "int64",
+  "j",
+  "la fotografia di `d0` a inizio passo pieno (`SCALA_MIN_PASSO` C3 + `COES_CAUSALE` C4): la scrive `_smp_apri`, la riallinea `_smp_chirurgia` quando la mitosi cambia gli archi, la legge e la azzera `_smp_chiudi`. MISURATA aperta da `apri` a `memoria_hebbiana_moto`.",
+  "la fotografia di `d` dello stesso istante, e viaggia SEMPRE con `_smp_d0`: misurate insieme in tutti e 27 i controlli, mai una senza l altra.",
+  "la legge la trova GIA RISCRITTA (chiralita_core_locale)",
+  "la legge la trova GIA RISCRITTA (memoria_hebbiana_moto)",
+  "la legge la trova GIA RISCRITTA (step)",
+  "m",
+  "mem_mot",
+  "n",
+  "nessuna legge la legge -- e coincide col commento del codice, che la dichiara DIAGNOSTICA e senza lettori (Z7)",
+  "nessuna legge la legge nella finestra della nascita",
+  "nodo",
+  "omega_s",
+  "peq",
+  "perc_chi",
+  "perc_geom",
+  "perc_tw",
+  "phi",
+  "phi0",
+  "phi_s",
+  "phivel",
+  "pos",
+  "psi",
+  "psi_spin",
+  "rho_spin",
+  "tw",
+  "twp",
+  "vd"
+ ],
+ "servizio_scrive": {
+  "_eredita_psi_figli": [
+   "psi",
+   "psi_spin",
+   "rho_spin"
+  ],
+  "_eredita_spinore_figli": [
+   "_cs_nodo_prev",
+   "_nb",
+   "_nb_prec",
+   "_nb_ret",
+   "_psi_prec",
+   "_psi_spin_prec",
+   "_psi_spinor",
+   "_spinor_lift",
+   "omega_s"
+  ],
+  "_grado": [
+   "_deg"
+  ],
+  "_smp_chirurgia": [],
+  "_nasce": []
+ },
+ "istruzioni": 139,
+ "scritture_registro": 47,
+ "prima_scrittura_riga": 7335,
+ "ultima_scrittura_riga": 7563,
+ "istruzioni_fra": 111,
+ "non_scritture_fra": 64,
+ "legate_in_mezzo": [
+  {
+   "riga": 7375,
+   "testo": "chi_a = self.perc_chi[a]",
+   "gate": [
+    "REGIME == 'deterministico'"
+   ],
+   "pesca_dal_generatore": false,
+   "legata_a_prima": [
+    {
+     "riga": 7342,
+     "self": [
+      "perc_chi"
+     ],
+     "locali": [],
+     "pura_estensione": true
+    }
+   ],
+   "legata_a_dopo": [],
+   "anti_dipendenze": [
+    {
+     "riga": 7514,
+     "self": [
+      "perc_chi"
+     ],
+     "pura_estensione": true
+    }
+   ],
+   "genuina_a_granularita_indice": false,
+   "gira_col_driver": true,
+   "perche_gate": "tutte le condizioni del gate sono vere coi flag di oggi"
+  },
+  {
+   "riga": 7375,
+   "testo": "chi_b = self.perc_chi[b]",
+   "gate": [
+    "REGIME == 'deterministico'"
+   ],
+   "pesca_dal_generatore": false,
+   "legata_a_prima": [
+    {
+     "riga": 7342,
+     "self": [
+      "perc_chi"
+     ],
+     "locali": [],
+     "pura_estensione": true
+    }
+   ],
+   "legata_a_dopo": [],
+   "anti_dipendenze": [
+    {
+     "riga": 7514,
+     "self": [
+      "perc_chi"
+     ],
+     "pura_estensione": true
+    }
+   ],
+   "genuina_a_granularita_indice": false,
+   "gira_col_driver": true,
+   "perche_gate": "tutte le condizioni del gate sono vere coi flag di oggi"
+  },
+  {
+   "riga": 7472,
+   "testo": "peq_sel = self.peq[sel]",
+   "gate": [
+    "COPPIA_MIT > 0.0",
+    "COPPIA_DENSITA"
+   ],
+   "pesca_dal_generatore": false,
+   "legata_a_prima": [
+    {
+     "riga": 7433,
+     "self": [
+      "peq"
+     ],
+     "locali": [],
+     "pura_estensione": false
+    }
+   ],
+   "legata_a_dopo": [],
+   "anti_dipendenze": [
+    {
+     "riga": 7552,
+     "self": [
+      "peq"
+     ],
+     "pura_estensione": true
+    }
+   ],
+   "genuina_a_granularita_indice": true,
+   "gira_col_driver": false,
+   "perche_gate": "COPPIA_DENSITA = False"
+  },
+  {
+   "riga": 7494,
+   "testo": "dd = self._nasce(np.maximum(0.5 * np.linalg.norm(self.pos[aa] - self.pos[bb], axis=1), 0.05), 's",
+   "gate": [
+    "COPPIA_MIT > 0.0",
+    "estratto.any()"
+   ],
+   "pesca_dal_generatore": false,
+   "legata_a_prima": [
+    {
+     "riga": 7335,
+     "self": [
+      "pos"
+     ],
+     "locali": [],
+     "pura_estensione": true
+    }
+   ],
+   "legata_a_dopo": [
+    {
+     "riga": 7546,
+     "self": [],
+     "locali": [
+      "dd"
+     ]
+    },
+    {
+     "riga": 7549,
+     "self": [],
+     "locali": [
+      "dd"
+     ]
+    }
+   ],
+   "anti_dipendenze": [
+    {
+     "riga": 7506,
+     "self": [
+      "pos"
+     ],
+     "pura_estensione": true
+    }
+   ],
+   "genuina_a_granularita_indice": true,
+   "gira_col_driver": true,
+   "perche_gate": "tutte le condizioni del gate sono vere coi flag di oggi"
+  },
+  {
+   "riga": 7501,
+   "testo": "pmed = np.nan if PEQ_NASCITA_LOCALE else float(np.median(self.peq))",
+   "gate": [
+    "COPPIA_MIT > 0.0",
+    "estratto.any()"
+   ],
+   "pesca_dal_generatore": false,
+   "legata_a_prima": [
+    {
+     "riga": 7433,
+     "self": [
+      "peq"
+     ],
+     "locali": [],
+     "pura_estensione": false
+    }
+   ],
+   "legata_a_dopo": [
+    {
+     "riga": 7552,
+     "self": [],
+     "locali": [
+      "pmed"
+     ]
+    }
+   ],
+   "anti_dipendenze": [
+    {
+     "riga": 7552,
+     "self": [
+      "peq"
+     ],
+     "pura_estensione": true
+    }
+   ],
+   "genuina_a_granularita_indice": true,
+   "gira_col_driver": true,
+   "perche_gate": "tutte le condizioni del gate sono vere coi flag di oggi"
+  },
+  {
+   "riga": 7505,
+   "testo": "self._g_peqn_mediana = float(np.median(self.peq))",
+   "gate": [
+    "COPPIA_MIT > 0.0",
+    "estratto.any()",
+    "PEQ_NASCITA_LOCALE"
+   ],
+   "pesca_dal_generatore": false,
+   "legata_a_prima": [
+    {
+     "riga": 7433,
+     "self": [
+      "peq"
+     ],
+     "locali": [],
+     "pura_estensione": false
+    }
+   ],
+   "legata_a_dopo": [],
+   "anti_dipendenze": [
+    {
+     "riga": 7552,
+     "self": [
+      "peq"
+     ],
+     "pura_estensione": true
+    }
+   ],
+   "genuina_a_granularita_indice": true,
+   "gira_col_driver": true,
+   "perche_gate": "tutte le condizioni del gate sono vere coi flag di oggi"
+  },
+  {
+   "riga": 7547,
+   "testo": "_tr_pre = self.d0.copy()",
+   "gate": [
+    "COPPIA_MIT > 0.0",
+    "estratto.any()",
+    "TRACCIA_D0"
+   ],
+   "pesca_dal_generatore": false,
+   "legata_a_prima": [
+    {
+     "riga": 7430,
+     "self": [
+      "d0"
+     ],
+     "locali": [],
+     "pura_estensione": false
+    }
+   ],
+   "legata_a_dopo": [],
+   "anti_dipendenze": [
+    {
+     "riga": 7549,
+     "self": [
+      "d0"
+     ],
+     "pura_estensione": true
+    }
+   ],
+   "genuina_a_granularita_indice": true,
+   "gira_col_driver": false,
+   "perche_gate": "TRACCIA_D0 = False"
+  }
+ ],
+ "legate_che_girano": [
+  7375,
+  7375,
+  7494,
+  7501,
+  7505
+ ],
+ "legate_GENUINE_che_girano": [
+  {
+   "riga": 7494,
+   "testo": "dd = self._nasce(np.maximum(0.5 * np.linalg.norm(self.pos[aa] - self.pos[bb], axis=1), 0.05), 's"
+  },
+  {
+   "riga": 7501,
+   "testo": "pmed = np.nan if PEQ_NASCITA_LOCALE else float(np.median(self.peq))"
+  },
+  {
+   "riga": 7505,
+   "testo": "self._g_peqn_mediana = float(np.median(self.peq))"
+  }
+ ],
+ "verdetto": "STOP: un blocco contiguo richiede di RIORDINARE",
+ "passi": [
+  {
+   "riga": 7278,
+   "testo": "\"**CHI ESEGUE la divisione** \u2014 la decisione sta in `decidi_divisione`.\\n\\n        *(`COMMIT 2` d",
+   "scrive_registro": [],
+   "servizio": [],
+   "self_scritte": [],
+   "self_lette": [],
+   "locali_scritte": [],
+   "locali_lette": [],
+   "gate": []
+  },
+  {
+   "riga": 7287,
+   "testo": "sel, perche = self.decidi_divisione()",
+   "scrive_registro": [],
+   "servizio": [],
+   "self_scritte": [],
+   "self_lette": [
+    "decidi_divisione"
+   ],
+   "locali_scritte": [
+    "perche",
+    "sel"
+   ],
+   "locali_lette": [],
+   "gate": []
+  },
+  {
+   "riga": 7289,
+   "testo": "return 0",
+   "scrive_registro": [],
+   "servizio": [],
+   "self_scritte": [],
+   "self_lette": [],
+   "locali_scritte": [],
+   "locali_lette": [],
+   "gate": [
+    "sel is None"
+   ]
+  },
+  {
+   "riga": 7291,
+   "testo": "I = perche['I']",
+   "scrive_registro": [],
+   "servizio": [],
+   "self_scritte": [],
+   "self_lette": [],
+   "locali_scritte": [
+    "I"
+   ],
+   "locali_lette": [
+    "perche"
+   ],
+   "gate": []
+  },
+  {
+   "riga": 7292,
+   "testo": "a, b = (self.i[sel], self.j[sel])",
+   "scrive_registro": [],
+   "servizio": [],
+   "self_scritte": [],
+   "self_lette": [
+    "i",
+    "j"
+   ],
+   "locali_scritte": [
+    "a",
+    "b"
+   ],
+   "locali_lette": [
+    "sel"
+   ],
+   "gate": []
+  },
+  {
+   "riga": 7292,
+   "testo": "m = self.n + np.arange(len(sel))",
+   "scrive_registro": [],
+   "servizio": [],
+   "self_scritte": [],
+   "self_lette": [
+    "n"
+   ],
+   "locali_scritte": [
+    "m"
+   ],
+   "locali_lette": [
+    "len",
+    "np",
+    "sel"
+   ],
+   "gate": []
+  },
+  {
+   "riga": 7293,
+   "testo": "D = self._wphi(self.phi[a] - self.phi[b])",
+   "scrive_registro": [],
+   "servizio": [],
+   "self_scritte": [],
+   "self_lette": [
+    "_wphi",
+    "phi"
+   ],
+   "locali_scritte": [
+    "D"
+   ],
+   "locali_lette": [
+    "a",
+    "b"
+   ],
+   "gate": []
+  },
+  {
+   "riga": 7303,
+   "testo": "twn = np.zeros(self.n)",
+   "scrive_registro": [],
+   "servizio": [],
+   "self_scritte": [],
+   "self_lette": [
+    "n"
+   ],
+   "locali_scritte": [
+    "twn"
+   ],
+   "locali_lette": [
+    "np"
+   ],
+   "gate": [
+    "MITOSI_DIR != 0.0"
+   ]
+  },
+  {
+   "riga": 7304,
+   "testo": "np.add.at(twn, self.i[self.i < self.n], np.abs(self.tw)[self.i < self.n])",
+   "scrive_registro": [],
+   "servizio": [],
+   "self_scritte": [],
+   "self_lette": [
+    "i",
+    "n",
+    "tw"
+   ],
+   "locali_scritte": [],
+   "locali_lette": [
+    "np",
+    "twn"
+   ],
+   "gate": [
+    "MITOSI_DIR != 0.0"
+   ]
+  },
+  {
+   "riga": 7305,
+   "testo": "np.add.at(twn, self.j[self.j < self.n], np.abs(self.tw)[self.j < self.n])",
+   "scrive_registro": [],
+   "servizio": [],
+   "self_scritte": [],
+   "self_lette": [
+    "j",
+    "n",
+    "tw"
+   ],
+   "locali_scritte": [],
+   "locali_lette": [
+    "np",
+    "twn"
+   ],
+   "gate": [
+    "MITOSI_DIR != 0.0"
+   ]
+  },
+  {
+   "riga": 7306,
+   "testo": "twn = twn / np.maximum(self._deg, 1)",
+   "scrive_registro": [],
+   "servizio": [],
+   "self_scritte": [],
+   "self_lette": [
+    "_deg"
+   ],
+   "locali_scritte": [
+    "twn"
+   ],
+   "locali_lette": [
+    "np",
+    "twn"
+   ],
+   "gate": [
+    "MITOSI_DIR != 0.0"
+   ]
+  },
+  {
+   "riga": 7308,
+   "testo": "bias = 0.5 * np.tanh(MITOSI_DIR * (twn[a] - twn[b]))",
+   "scrive_registro": [],
+   "servizio": [],
+   "self_scritte": [],
+   "self_lette": [],
+   "locali_scritte": [
+    "bias"
+   ],
+   "locali_lette": [
+    "MITOSI_DIR",
+    "a",
+    "b",
+    "np",
+    "twn"
+   ],
+   "gate": [
+    "MITOSI_DIR != 0.0"
+   ]
+  },
+  {
+   "riga": 7309,
+   "testo": "fm = (self.phi[a] - (0.5 + bias) * D) % self._dphi()",
+   "scrive_registro": [],
+   "servizio": [],
+   "self_scritte": [],
+   "self_lette": [
+    "_dphi",
+    "phi"
+   ],
+   "locali_scritte": [
+    "fm"
+   ],
+   "locali_lette": [
+    "D",
+    "a",
+    "bias"
+   ],
+   "gate": [
+    "MITOSI_DIR != 0.0"
+   ]
+  },
+  {
+   "riga": 7311,
+   "testo": "fm = (self.phi[a] - 0.5 * D) % self._dphi()",
+   "scrive_registro": [],
+   "servizio": [],
+   "self_scritte": [],
+   "self_lette": [
+    "_dphi",
+    "phi"
+   ],
+   "locali_scritte": [
+    "fm"
+   ],
+   "locali_lette": [
+    "D",
+    "a"
+   ],
+   "gate": [
+    "NOT (MITOSI_DIR != 0.0)"
+   ]
+  },
+  {
+   "riga": 7312,
+   "testo": "pos_figlio = 0.5 * (self.pos[a] + self.pos[b])",
+   "scrive_registro": [],
+   "servizio": [],
+   "self_scritte": [],
+   "self_lette": [
+    "pos"
+   ],
+   "locali_scritte": [
+    "pos_figlio"
+   ],
+   "locali_lette": [
+    "a",
+    "b"
+   ],
+   "gate": []
+  },
+  {
+   "riga": 7322,
+   "testo": "rho_sel = 0.5 * (I[a] + I[b])",
+   "scrive_registro": [],
+   "servizio": [],
+   "self_scritte": [],
+   "self_lette": [],
+   "locali_scritte": [
+    "rho_sel"
+   ],
+   "locali_lette": [
+    "I",
+    "a",
+    "b"
+   ],
+   "gate": [
+    "ANTIFASE_ADD"
+   ]
+  },
+  {
+   "riga": 7323,
+   "testo": "peq_sel = self.peq[sel]",
+   "scrive_registro": [],
+   "servizio": [],
+   "self_scritte": [],
+   "self_lette": [
+    "peq"
+   ],
+   "locali_scritte": [
+    "peq_sel"
+   ],
+   "locali_lette": [
+    "sel"
+   ],
+   "gate": [
+    "ANTIFASE_ADD"
+   ]
+  },
+  {
+   "riga": 7324,
+   "testo": "peq_sel = np.where(np.isnan(peq_sel), rho_sel, peq_sel)",
+   "scrive_registro": [],
+   "servizio": [],
+   "self_scritte": [],
+   "self_lette": [],
+   "locali_scritte": [
+    "peq_sel"
+   ],
+   "locali_lette": [
+    "np",
+    "peq_sel",
+    "rho_sel"
+   ],
+   "gate": [
+    "ANTIFASE_ADD"
+   ]
+  },
+  {
+   "riga": 7327,
+   "testo": "rho_c = np.maximum(peq_sel, 1e-06) * max(massa_critica_collasso() / max(self.n, 1), 0.001)",
+   "scrive_registro": [],
+   "servizio": [],
+   "self_scritte": [],
+   "self_lette": [
+    "n"
+   ],
+   "locali_scritte": [
+    "rho_c"
+   ],
+   "locali_lette": [
+    "massa_critica_collasso",
+    "max",
+    "np",
+    "peq_sel"
+   ],
+   "gate": [
+    "ANTIFASE_ADD"
+   ]
+  },
+  {
+   "riga": 7328,
+   "testo": "s = (rho_sel - peq_sel) / np.maximum(rho_c, 1e-06)",
+   "scrive_registro": [],
+   "servizio": [],
+   "self_scritte": [],
+   "self_lette": [],
+   "locali_scritte": [
+    "s"
+   ],
+   "locali_lette": [
+    "np",
+    "peq_sel",
+    "rho_c",
+    "rho_sel"
+   ],
+   "gate": [
+    "ANTIFASE_ADD"
+   ]
+  },
+  {
+   "riga": 7329,
+   "testo": "p_anti = np.where(s > 0, np.tanh(s), 0.0)",
+   "scrive_registro": [],
+   "servizio": [],
+   "self_scritte": [],
+   "self_lette": [],
+   "locali_scritte": [
+    "p_anti"
+   ],
+   "locali_lette": [
+    "np",
+    "s"
+   ],
+   "gate": [
+    "ANTIFASE_ADD"
+   ]
+  },
+  {
+   "riga": 7330,
+   "testo": "flip = self.rng.random(len(sel)) < p_anti",
+   "scrive_registro": [],
+   "servizio": [],
+   "self_scritte": [],
+   "self_lette": [
+    "rng"
+   ],
+   "locali_scritte": [
+    "flip"
+   ],
+   "locali_lette": [
+    "len",
+    "p_anti",
+    "sel"
+   ],
+   "gate": [
+    "ANTIFASE_ADD"
+   ]
+  },
+  {
+   "riga": 7332,
+   "testo": "_mezzo = self._dphi() / 2.0",
+   "scrive_registro": [],
+   "servizio": [],
+   "self_scritte": [],
+   "self_lette": [
+    "_dphi"
+   ],
+   "locali_scritte": [
+    "_mezzo"
+   ],
+   "locali_lette": [],
+   "gate": [
+    "ANTIFASE_ADD"
+   ]
+  },
+  {
+   "riga": 7333,
+   "testo": "fm = np.where(flip, (fm + _mezzo) % self._dphi(), fm)",
+   "scrive_registro": [],
+   "servizio": [],
+   "self_scritte": [],
+   "self_lette": [
+    "_dphi"
+   ],
+   "locali_scritte": [
+    "fm"
+   ],
+   "locali_lette": [
+    "_mezzo",
+    "flip",
+    "fm",
+    "np"
+   ],
+   "gate": [
+    "ANTIFASE_ADD"
+   ]
+  },
+  {
+   "riga": 7334,
+   "testo": "self.ultima_frac_antifase = float(flip.mean()) if len(flip) else 0.0",
+   "scrive_registro": [],
+   "servizio": [],
+   "self_scritte": [
+    "ultima_frac_antifase"
+   ],
+   "self_lette": [],
+   "locali_scritte": [],
+   "locali_lette": [
+    "flip",
+    "float",
+    "len"
+   ],
+   "gate": [
+    "ANTIFASE_ADD"
+   ]
+  },
+  {
+   "riga": 7335,
+   "testo": "self.pos = np.vstack([self.pos, pos_figlio])",
+   "scrive_registro": [
+    "pos"
+   ],
+   "servizio": [],
+   "self_scritte": [
+    "pos"
+   ],
+   "self_lette": [
+    "pos"
+   ],
+   "locali_scritte": [],
+   "locali_lette": [
+    "np",
+    "pos_figlio"
+   ],
+   "gate": []
+  },
+  {
+   "riga": 7336,
+   "testo": "self.phi = np.concatenate([self.phi, fm])",
+   "scrive_registro": [
+    "phi"
+   ],
+   "servizio": [],
+   "self_scritte": [
+    "phi"
+   ],
+   "self_lette": [
+    "phi"
+   ],
+   "locali_scritte": [],
+   "locali_lette": [
+    "fm",
+    "np"
+   ],
+   "gate": []
+  },
+  {
+   "riga": 7336,
+   "testo": "self.phi0 = np.concatenate([self.phi0, fm])",
+   "scrive_registro": [
+    "phi0"
+   ],
+   "servizio": [],
+   "self_scritte": [
+    "phi0"
+   ],
+   "self_lette": [
+    "phi0"
+   ],
+   "locali_scritte": [],
+   "locali_lette": [
+    "fm",
+    "np"
+   ],
+   "gate": []
+  },
+  {
+   "riga": 7337,
+   "testo": "self.phi_s = np.concatenate([self.phi_s, self.phi_s[a]])",
+   "scrive_registro": [
+    "phi_s"
+   ],
+   "servizio": [],
+   "self_scritte": [
+    "phi_s"
+   ],
+   "self_lette": [
+    "phi_s"
+   ],
+   "locali_scritte": [],
+   "locali_lette": [
+    "a",
+    "np"
+   ],
+   "gate": []
+  },
+  {
+   "riga": 7338,
+   "testo": "self.phivel = np.concatenate([self.phivel, 0.5 * (self.phivel[a] + self.phivel[b])])",
+   "scrive_registro": [
+    "phivel"
+   ],
+   "servizio": [],
+   "self_scritte": [
+    "phivel"
+   ],
+   "self_lette": [
+    "phivel"
+   ],
+   "locali_scritte": [],
+   "locali_lette": [
+    "a",
+    "b",
+    "np"
+   ],
+   "gate": []
+  },
+  {
+   "riga": 7339,
+   "testo": "self.eta = np.concatenate([self.eta, np.zeros(len(sel))])",
+   "scrive_registro": [
+    "eta"
+   ],
+   "servizio": [],
+   "self_scritte": [
+    "eta"
+   ],
+   "self_lette": [
+    "eta"
+   ],
+   "locali_scritte": [],
+   "locali_lette": [
+    "len",
+    "np",
+    "sel"
+   ],
+   "gate": []
+  },
+  {
+   "riga": 7342,
+   "testo": "self.perc_chi = np.concatenate([self.perc_chi, self.perc_chi[a]])",
+   "scrive_registro": [
+    "perc_chi"
+   ],
+   "servizio": [],
+   "self_scritte": [
+    "perc_chi"
+   ],
+   "self_lette": [
+    "perc_chi"
+   ],
+   "locali_scritte": [],
+   "locali_lette": [
+    "a",
+    "np"
+   ],
+   "gate": []
+  },
+  {
+   "riga": 7345,
+   "testo": "self.perc_geom = np.concatenate([self.perc_geom, self.perc_geom[a]])",
+   "scrive_registro": [
+    "perc_geom"
+   ],
+   "servizio": [],
+   "self_scritte": [
+    "perc_geom"
+   ],
+   "self_lette": [
+    "perc_geom"
+   ],
+   "locali_scritte": [],
+   "locali_lette": [
+    "a",
+    "np"
+   ],
+   "gate": []
+  },
+  {
+   "riga": 7351,
+   "testo": "self._g_nati_mitosi = getattr(self, '_g_nati_mitosi', 0) + int(len(a))",
+   "scrive_registro": [],
+   "servizio": [],
+   "self_scritte": [
+    "_g_nati_mitosi"
+   ],
+   "self_lette": [],
+   "locali_scritte": [],
+   "locali_lette": [
+    "a",
+    "getattr",
+    "int",
+    "len"
+   ],
+   "gate": []
+  },
+  {
+   "riga": 7352,
+   "testo": "self._g_nati_mitosi_ev = getattr(self, '_g_nati_mitosi_ev', 0) + 1",
+   "scrive_registro": [],
+   "servizio": [],
+   "self_scritte": [
+    "_g_nati_mitosi_ev"
+   ],
+   "self_lette": [],
+   "locali_scritte": [],
+   "locali_lette": [
+    "getattr"
+   ],
+   "gate": []
+  },
+  {
+   "riga": 7353,
+   "testo": "self.perc_tw = np.concatenate([self.perc_tw, np.zeros(len(sel))])",
+   "scrive_registro": [
+    "perc_tw"
+   ],
+   "servizio": [],
+   "self_scritte": [
+    "perc_tw"
+   ],
+   "self_lette": [
+    "perc_tw"
+   ],
+   "locali_scritte": [],
+   "locali_lette": [
+    "len",
+    "np",
+    "sel"
+   ],
+   "gate": []
+  },
+  {
+   "riga": 7354,
+   "testo": "self.mem_mot = np.vstack([self.mem_mot, self.mem_mot[a]]) if len(self.mem_mot) else np.zeros((le",
+   "scrive_registro": [
+    "mem_mot"
+   ],
+   "servizio": [],
+   "self_scritte": [
+    "mem_mot"
+   ],
+   "self_lette": [
+    "mem_mot"
+   ],
+   "locali_scritte": [],
+   "locali_lette": [
+    "a",
+    "len",
+    "np",
+    "sel"
+   ],
+   "gate": []
+  },
+  {
+   "riga": 7355,
+   "testo": "self._eredita_spinore_figli(a, segno=1)",
+   "scrive_registro": [
+    "_cs_nodo_prev",
+    "_nb",
+    "_nb_prec",
+    "_nb_ret",
+    "_psi_prec",
+    "_psi_spin_prec",
+    "_psi_spinor",
+    "_spinor_lift",
+    "omega_s"
+   ],
+   "servizio": [
+    "_eredita_spinore_figli"
+   ],
+   "self_scritte": [],
+   "self_lette": [
+    "_eredita_spinore_figli"
+   ],
+   "locali_scritte": [],
+   "locali_lette": [
+    "a"
+   ],
+   "gate": []
+  },
+  {
+   "riga": 7358,
+   "testo": "self._eredita_psi_figli(a, b)",
+   "scrive_registro": [
+    "psi",
+    "psi_spin",
+    "rho_spin"
+   ],
+   "servizio": [
+    "_eredita_psi_figli"
+   ],
+   "self_scritte": [],
+   "self_lette": [
+    "_eredita_psi_figli"
+   ],
+   "locali_scritte": [],
+   "locali_lette": [
+    "a",
+    "b"
+   ],
+   "gate": []
+  },
+  {
+   "riga": 7363,
+   "testo": "eredita = [v[:] for v in self.conc_nodi[kk]] if kk < len(self.conc_nodi) else []",
+   "scrive_registro": [],
+   "servizio": [],
+   "self_scritte": [],
+   "self_lette": [
+    "conc_nodi"
+   ],
+   "locali_scritte": [
+    "eredita"
+   ],
+   "locali_lette": [
+    "kk",
+    "len",
+    "v"
+   ],
+   "gate": [
+    "self.conc_nodi",
+    "<ciclo> for kk in a:"
+   ]
+  },
+  {
+   "riga": 7364,
+   "testo": "self.conc_nodi.append(eredita)",
+   "scrive_registro": [],
+   "servizio": [],
+   "self_scritte": [],
+   "self_lette": [
+    "conc_nodi"
+   ],
+   "locali_scritte": [],
+   "locali_lette": [
+    "eredita"
+   ],
+   "gate": [
+    "self.conc_nodi",
+    "<ciclo> for kk in a:"
+   ]
+  },
+  {
+   "riga": 7365,
+   "testo": "sciolta = np.abs(self.tw[sel]) / PHI_CRIT",
+   "scrive_registro": [],
+   "servizio": [],
+   "self_scritte": [],
+   "self_lette": [
+    "tw"
+   ],
+   "locali_scritte": [
+    "sciolta"
+   ],
+   "locali_lette": [
+    "PHI_CRIT",
+    "np",
+    "sel"
+   ],
+   "gate": []
+  },
+  {
+   "riga": 7366,
+   "testo": "g = np.concatenate([a, b])",
+   "scrive_registro": [],
+   "servizio": [],
+   "self_scritte": [],
+   "self_lette": [],
+   "locali_scritte": [
+    "g"
+   ],
+   "locali_lette": [
+    "a",
+    "b",
+    "np"
+   ],
+   "gate": []
+  },
+  {
+   "riga": 7373,
+   "testo": "tau_a = 1.0 + np.abs(self.tw[sel]) / PHI_CRIT",
+   "scrive_registro": [],
+   "servizio": [],
+   "self_scritte": [],
+   "self_lette": [
+    "tw"
+   ],
+   "locali_scritte": [
+    "tau_a"
+   ],
+   "locali_lette": [
+    "PHI_CRIT",
+    "np",
+    "sel"
+   ],
+   "gate": [
+    "REGIME == 'deterministico'"
+   ]
+  },
+  {
+   "riga": 7374,
+   "testo": "mod = tau_a / (1.0 + tau_a)",
+   "scrive_registro": [],
+   "servizio": [],
+   "self_scritte": [],
+   "self_lette": [],
+   "locali_scritte": [
+    "mod"
+   ],
+   "locali_lette": [
+    "tau_a"
+   ],
+   "gate": [
+    "REGIME == 'deterministico'"
+   ]
+  },
+  {
+   "riga": 7375,
+   "testo": "chi_a = self.perc_chi[a]",
+   "scrive_registro": [],
+   "servizio": [],
+   "self_scritte": [],
+   "self_lette": [
+    "perc_chi"
+   ],
+   "locali_scritte": [
+    "chi_a"
+   ],
+   "locali_lette": [
+    "a"
+   ],
+   "gate": [
+    "REGIME == 'deterministico'"
+   ]
+  },
+  {
+   "riga": 7375,
+   "testo": "chi_b = self.perc_chi[b]",
+   "scrive_registro": [],
+   "servizio": [],
+   "self_scritte": [],
+   "self_lette": [
+    "perc_chi"
+   ],
+   "locali_scritte": [
+    "chi_b"
+   ],
+   "locali_lette": [
+    "b"
+   ],
+   "gate": [
+    "REGIME == 'deterministico'"
+   ]
+  },
+  {
+   "riga": 7376,
+   "testo": "comune = KICK_TW * sciolta * (mod - 0.5)",
+   "scrive_registro": [],
+   "servizio": [],
+   "self_scritte": [],
+   "self_lette": [],
+   "locali_scritte": [
+    "comune"
+   ],
+   "locali_lette": [
+    "KICK_TW",
+    "mod",
+    "sciolta"
+   ],
+   "gate": [
+    "REGIME == 'deterministico'"
+   ]
+  },
+  {
+   "riga": 7377,
+   "testo": "calcio_a = comune + 0.5 * KICK_TW * sciolta * chi_a * mod",
+   "scrive_registro": [],
+   "servizio": [],
+   "self_scritte": [],
+   "self_lette": [],
+   "locali_scritte": [
+    "calcio_a"
+   ],
+   "locali_lette": [
+    "KICK_TW",
+    "chi_a",
+    "comune",
+    "mod",
+    "sciolta"
+   ],
+   "gate": [
+    "REGIME == 'deterministico'"
+   ]
+  },
+  {
+   "riga": 7378,
+   "testo": "calcio_b = comune - 0.5 * KICK_TW * sciolta * chi_b * mod",
+   "scrive_registro": [],
+   "servizio": [],
+   "self_scritte": [],
+   "self_lette": [],
+   "locali_scritte": [
+    "calcio_b"
+   ],
+   "locali_lette": [
+    "KICK_TW",
+    "chi_b",
+    "comune",
+    "mod",
+    "sciolta"
+   ],
+   "gate": [
+    "REGIME == 'deterministico'"
+   ]
+  },
+  {
+   "riga": 7379,
+   "testo": "self.phi[a] = (self.phi[a] + calcio_a) % self._dphi()",
+   "scrive_registro": [
+    "phi"
+   ],
+   "servizio": [],
+   "self_scritte": [
+    "phi"
+   ],
+   "self_lette": [
+    "_dphi",
+    "phi"
+   ],
+   "locali_scritte": [],
+   "locali_lette": [
+    "a",
+    "calcio_a"
+   ],
+   "gate": [
+    "REGIME == 'deterministico'"
+   ]
+  },
+  {
+   "riga": 7380,
+   "testo": "self.phi[b] = (self.phi[b] + calcio_b) % self._dphi()",
+   "scrive_registro": [
+    "phi"
+   ],
+   "servizio": [],
+   "self_scritte": [
+    "phi"
+   ],
+   "self_lette": [
+    "_dphi",
+    "phi"
+   ],
+   "locali_scritte": [],
+   "locali_lette": [
+    "b",
+    "calcio_b"
+   ],
+   "gate": [
+    "REGIME == 'deterministico'"
+   ]
+  },
+  {
+   "riga": 7391,
+   "testo": "self.phi[g] = (self.phi[g] + self.rng.normal(0, 1, len(g)) * KICK_TW * np.concatenate([sciolta, ",
+   "scrive_registro": [
+    "phi"
+   ],
+   "servizio": [],
+   "self_scritte": [
+    "phi"
+   ],
+   "self_lette": [
+    "_dphi",
+    "phi",
+    "rng"
+   ],
+   "locali_scritte": [],
+   "locali_lette": [
+    "KICK_TW",
+    "g",
+    "len",
+    "np",
+    "sciolta"
+   ],
+   "gate": [
+    "NOT (REGIME == 'deterministico')"
+   ]
+  },
+  {
+   "riga": 7393,
+   "testo": "keep = np.ones(len(self.i), bool)",
+   "scrive_registro": [],
+   "servizio": [],
+   "self_scritte": [],
+   "self_lette": [
+    "i"
+   ],
+   "locali_scritte": [
+    "keep"
+   ],
+   "locali_lette": [
+    "bool",
+    "len",
+    "np"
+   ],
+   "gate": []
+  },
+  {
+   "riga": 7393,
+   "testo": "keep[sel] = False",
+   "scrive_registro": [],
+   "servizio": [],
+   "self_scritte": [],
+   "self_lette": [],
+   "locali_scritte": [
+    "keep"
+   ],
+   "locali_lette": [
+    "keep",
+    "sel"
+   ],
+   "gate": []
+  },
+  {
+   "riga": 7394,
+   "testo": "dh = self.d[sel] / 2",
+   "scrive_registro": [],
+   "servizio": [],
+   "self_scritte": [],
+   "self_lette": [
+    "d"
+   ],
+   "locali_scritte": [
+    "dh"
+   ],
+   "locali_lette": [
+    "sel"
+   ],
+   "gate": []
+  },
+  {
+   "riga": 7404,
+   "testo": "stress_arco = np.abs(self.d[sel] - self.d0[sel]) / np.maximum(self.d0[sel], 1e-06)",
+   "scrive_registro": [],
+   "servizio": [],
+   "self_scritte": [],
+   "self_lette": [
+    "d",
+    "d0"
+   ],
+   "locali_scritte": [
+    "stress_arco"
+   ],
+   "locali_lette": [
+    "np",
+    "sel"
+   ],
+   "gate": [
+    "PLAST_DIN"
+   ]
+  },
+  {
+   "riga": 7405,
+   "testo": "sciolta_ecc = np.abs(self.tw[sel]) / PHI_CRIT - 1.0",
+   "scrive_registro": [],
+   "servizio": [],
+   "self_scritte": [],
+   "self_lette": [
+    "tw"
+   ],
+   "locali_scritte": [
+    "sciolta_ecc"
+   ],
+   "locali_lette": [
+    "PHI_CRIT",
+    "np",
+    "sel"
+   ],
+   "gate": [
+    "PLAST_DIN"
+   ]
+  },
+  {
+   "riga": 7406,
+   "testo": "fattore_plastico = np.tanh(np.maximum(sciolta_ecc * stress_arco, 0.0))",
+   "scrive_registro": [],
+   "servizio": [],
+   "self_scritte": [],
+   "self_lette": [],
+   "locali_scritte": [
+    "fattore_plastico"
+   ],
+   "locali_lette": [
+    "np",
+    "sciolta_ecc",
+    "stress_arco"
+   ],
+   "gate": [
+    "PLAST_DIN"
+   ]
+  },
+  {
+   "riga": 7407,
+   "testo": "d0h = dh * (1.0 + fattore_plastico)",
+   "scrive_registro": [],
+   "servizio": [],
+   "self_scritte": [],
+   "self_lette": [],
+   "locali_scritte": [
+    "d0h"
+   ],
+   "locali_lette": [
+    "dh",
+    "fattore_plastico"
+   ],
+   "gate": [
+    "PLAST_DIN"
+   ]
+  },
+  {
+   "riga": 7408,
+   "testo": "d0new = np.concatenate([d0h, d0h])",
+   "scrive_registro": [],
+   "servizio": [],
+   "self_scritte": [],
+   "self_lette": [],
+   "locali_scritte": [
+    "d0new"
+   ],
+   "locali_lette": [
+    "d0h",
+    "np"
+   ],
+   "gate": [
+    "PLAST_DIN"
+   ]
+  },
+  {
+   "riga": 7410,
+   "testo": "d0h = dh * (1.0 + PLAST_MIT * sciolta)",
+   "scrive_registro": [],
+   "servizio": [],
+   "self_scritte": [],
+   "self_lette": [],
+   "locali_scritte": [
+    "d0h"
+   ],
+   "locali_lette": [
+    "PLAST_MIT",
+    "dh",
+    "sciolta"
+   ],
+   "gate": [
+    "NOT (PLAST_DIN)",
+    "PLAST_MIT > 0.0"
+   ]
+  },
+  {
+   "riga": 7411,
+   "testo": "d0new = np.concatenate([d0h, d0h])",
+   "scrive_registro": [],
+   "servizio": [],
+   "self_scritte": [],
+   "self_lette": [],
+   "locali_scritte": [
+    "d0new"
+   ],
+   "locali_lette": [
+    "d0h",
+    "np"
+   ],
+   "gate": [
+    "NOT (PLAST_DIN)",
+    "PLAST_MIT > 0.0"
+   ]
+  },
+  {
+   "riga": 7413,
+   "testo": "d0new = np.concatenate([dh, dh])",
+   "scrive_registro": [],
+   "servizio": [],
+   "self_scritte": [],
+   "self_lette": [],
+   "locali_scritte": [
+    "d0new"
+   ],
+   "locali_lette": [
+    "dh",
+    "np"
+   ],
+   "gate": [
+    "NOT (PLAST_DIN)",
+    "NOT (PLAST_MIT > 0.0)"
+   ]
+  },
+  {
+   "riga": 7414,
+   "testo": "self.i = np.concatenate([self.i[keep], a, m])",
+   "scrive_registro": [
+    "i"
+   ],
+   "servizio": [],
+   "self_scritte": [
+    "i"
+   ],
+   "self_lette": [
+    "i"
+   ],
+   "locali_scritte": [],
+   "locali_lette": [
+    "a",
+    "keep",
+    "m",
+    "np"
+   ],
+   "gate": []
+  },
+  {
+   "riga": 7415,
+   "testo": "self.j = np.concatenate([self.j[keep], m, b])",
+   "scrive_registro": [
+    "j"
+   ],
+   "servizio": [],
+   "self_scritte": [
+    "j"
+   ],
+   "self_lette": [
+    "j"
+   ],
+   "locali_scritte": [],
+   "locali_lette": [
+    "b",
+    "keep",
+    "m",
+    "np"
+   ],
+   "gate": []
+  },
+  {
+   "riga": 7419,
+   "testo": "keep_idx = np.where(keep)[0]",
+   "scrive_registro": [],
+   "servizio": [],
+   "self_scritte": [],
+   "self_lette": [],
+   "locali_scritte": [
+    "keep_idx"
+   ],
+   "locali_lette": [
+    "keep",
+    "np"
+   ],
+   "gate": [
+    "self.conc_archi"
+   ]
+  },
+  {
+   "riga": 7420,
+   "testo": "self.conc_archi = [self.conc_archi[e] if e < len(self.conc_archi) else [] for e in keep_idx] + [",
+   "scrive_registro": [],
+   "servizio": [],
+   "self_scritte": [
+    "conc_archi"
+   ],
+   "self_lette": [
+    "conc_archi"
+   ],
+   "locali_scritte": [],
+   "locali_lette": [
+    "a",
+    "e",
+    "keep_idx",
+    "len",
+    "range"
+   ],
+   "gate": [
+    "self.conc_archi"
+   ]
+  },
+  {
+   "riga": 7424,
+   "testo": "dh = self._nasce(dh, 'mitosi', 2, 0)",
+   "scrive_registro": [],
+   "servizio": [
+    "_nasce"
+   ],
+   "self_scritte": [],
+   "self_lette": [
+    "_nasce"
+   ],
+   "locali_scritte": [
+    "dh"
+   ],
+   "locali_lette": [
+    "dh"
+   ],
+   "gate": []
+  },
+  {
+   "riga": 7426,
+   "testo": "d0new = self._nasce(d0new, 'mitosi', 0, 1)",
+   "scrive_registro": [],
+   "servizio": [
+    "_nasce"
+   ],
+   "self_scritte": [],
+   "self_lette": [
+    "_nasce"
+   ],
+   "locali_scritte": [
+    "d0new"
+   ],
+   "locali_lette": [
+    "d0new"
+   ],
+   "gate": []
+  },
+  {
+   "riga": 7427,
+   "testo": "self.d = np.concatenate([self.d[keep], dh, dh])",
+   "scrive_registro": [
+    "d"
+   ],
+   "servizio": [],
+   "self_scritte": [
+    "d"
+   ],
+   "self_lette": [
+    "d"
+   ],
+   "locali_scritte": [],
+   "locali_lette": [
+    "dh",
+    "keep",
+    "np"
+   ],
+   "gate": []
+  },
+  {
+   "riga": 7428,
+   "testo": "_tr_pre = self.d0.copy()",
+   "scrive_registro": [],
+   "servizio": [],
+   "self_scritte": [],
+   "self_lette": [
+    "d0"
+   ],
+   "locali_scritte": [
+    "_tr_pre"
+   ],
+   "locali_lette": [],
+   "gate": [
+    "TRACCIA_D0"
+   ]
+  },
+  {
+   "riga": 7429,
+   "testo": "self._smp_chirurgia(keep=keep, nuovi=d0new)",
+   "scrive_registro": [],
+   "servizio": [
+    "_smp_chirurgia"
+   ],
+   "self_scritte": [],
+   "self_lette": [
+    "_smp_chirurgia"
+   ],
+   "locali_scritte": [],
+   "locali_lette": [
+    "d0new",
+    "keep"
+   ],
+   "gate": []
+  },
+  {
+   "riga": 7430,
+   "testo": "self.d0 = np.concatenate([self.d0[keep], d0new])",
+   "scrive_registro": [
+    "d0"
+   ],
+   "servizio": [],
+   "self_scritte": [
+    "d0"
+   ],
+   "self_lette": [
+    "d0"
+   ],
+   "locali_scritte": [],
+   "locali_lette": [
+    "d0new",
+    "keep",
+    "np"
+   ],
+   "gate": []
+  },
+  {
+   "riga": 7431,
+   "testo": "self._traccia_d0('S06_mitosi', _tr_pre)",
+   "scrive_registro": [],
+   "servizio": [],
+   "self_scritte": [],
+   "self_lette": [
+    "_traccia_d0"
+   ],
+   "locali_scritte": [],
+   "locali_lette": [
+    "_tr_pre"
+   ],
+   "gate": [
+    "TRACCIA_D0"
+   ]
+  },
+  {
+   "riga": 7432,
+   "testo": "self.vd = np.concatenate([self.vd[keep], self.vd[sel], self.vd[sel]])",
+   "scrive_registro": [
+    "vd"
+   ],
+   "servizio": [],
+   "self_scritte": [
+    "vd"
+   ],
+   "self_lette": [
+    "vd"
+   ],
+   "locali_scritte": [],
+   "locali_lette": [
+    "keep",
+    "np",
+    "sel"
+   ],
+   "gate": []
+  },
+  {
+   "riga": 7433,
+   "testo": "self.peq = np.concatenate([self.peq[keep], self.peq[sel], self.peq[sel]])",
+   "scrive_registro": [
+    "peq"
+   ],
+   "servizio": [],
+   "self_scritte": [
+    "peq"
+   ],
+   "self_lette": [
+    "peq"
+   ],
+   "locali_scritte": [],
+   "locali_lette": [
+    "keep",
+    "np",
+    "sel"
+   ],
+   "gate": []
+  },
+  {
+   "riga": 7437,
+   "testo": "self._rep = np.concatenate([self._rep[keep], self._rep[sel], self._rep[sel]])",
+   "scrive_registro": [
+    "_rep"
+   ],
+   "servizio": [],
+   "self_scritte": [
+    "_rep"
+   ],
+   "self_lette": [
+    "_rep"
+   ],
+   "locali_scritte": [],
+   "locali_lette": [
+    "keep",
+    "np",
+    "sel"
+   ],
+   "gate": []
+  },
+  {
+   "riga": 7438,
+   "testo": "zz = np.zeros(len(sel))",
+   "scrive_registro": [],
+   "servizio": [],
+   "self_scritte": [],
+   "self_lette": [],
+   "locali_scritte": [
+    "zz"
+   ],
+   "locali_lette": [
+    "len",
+    "np",
+    "sel"
+   ],
+   "gate": []
+  },
+  {
+   "riga": 7439,
+   "testo": "self.tw = np.concatenate([self.tw[keep], zz, zz])",
+   "scrive_registro": [
+    "tw"
+   ],
+   "servizio": [],
+   "self_scritte": [
+    "tw"
+   ],
+   "self_lette": [
+    "tw"
+   ],
+   "locali_scritte": [],
+   "locali_lette": [
+    "keep",
+    "np",
+    "zz"
+   ],
+   "gate": []
+  },
+  {
+   "riga": 7440,
+   "testo": "self.twp = np.concatenate([self.twp[keep], self._wphi(self.phi[a] - fm), self._wphi(fm - self.ph",
+   "scrive_registro": [
+    "twp"
+   ],
+   "servizio": [],
+   "self_scritte": [
+    "twp"
+   ],
+   "self_lette": [
+    "_wphi",
+    "phi",
+    "twp"
+   ],
+   "locali_scritte": [],
+   "locali_lette": [
+    "a",
+    "b",
+    "fm",
+    "keep",
+    "np"
+   ],
+   "gate": []
+  },
+  {
+   "riga": 7442,
+   "testo": "self._grado()",
+   "scrive_registro": [
+    "_deg"
+   ],
+   "servizio": [
+    "_grado"
+   ],
+   "self_scritte": [],
+   "self_lette": [
+    "_grado"
+   ],
+   "locali_scritte": [],
+   "locali_lette": [],
+   "gate": []
+  },
+  {
+   "riga": 7442,
+   "testo": "self.nati += len(sel)",
+   "scrive_registro": [],
+   "servizio": [],
+   "self_scritte": [
+    "nati"
+   ],
+   "self_lette": [],
+   "locali_scritte": [],
+   "locali_lette": [
+    "len",
+    "sel"
+   ],
+   "gate": []
+  },
+  {
+   "riga": 7459,
+   "testo": "eccesso_torsione = np.maximum(0.0, sciolta - 1.0)",
+   "scrive_registro": [],
+   "servizio": [],
+   "self_scritte": [],
+   "self_lette": [],
+   "locali_scritte": [
+    "eccesso_torsione"
+   ],
+   "locali_lette": [
+    "np",
+    "sciolta"
+   ],
+   "gate": [
+    "COPPIA_MIT > 0.0"
+   ]
+  },
+  {
+   "riga": 7470,
+   "testo": "I = self._rho_sorgente()",
+   "scrive_registro": [],
+   "servizio": [],
+   "self_scritte": [],
+   "self_lette": [
+    "_rho_sorgente"
+   ],
+   "locali_scritte": [
+    "I"
+   ],
+   "locali_lette": [],
+   "gate": [
+    "COPPIA_MIT > 0.0",
+    "COPPIA_DENSITA"
+   ]
+  },
+  {
+   "riga": 7471,
+   "testo": "rho_sel = 0.5 * (I[a] + I[b])",
+   "scrive_registro": [],
+   "servizio": [],
+   "self_scritte": [],
+   "self_lette": [],
+   "locali_scritte": [
+    "rho_sel"
+   ],
+   "locali_lette": [
+    "I",
+    "a",
+    "b"
+   ],
+   "gate": [
+    "COPPIA_MIT > 0.0",
+    "COPPIA_DENSITA"
+   ]
+  },
+  {
+   "riga": 7472,
+   "testo": "peq_sel = self.peq[sel]",
+   "scrive_registro": [],
+   "servizio": [],
+   "self_scritte": [],
+   "self_lette": [
+    "peq"
+   ],
+   "locali_scritte": [
+    "peq_sel"
+   ],
+   "locali_lette": [
+    "sel"
+   ],
+   "gate": [
+    "COPPIA_MIT > 0.0",
+    "COPPIA_DENSITA"
+   ]
+  },
+  {
+   "riga": 7473,
+   "testo": "peq_sel = np.where(np.isnan(peq_sel), rho_sel, peq_sel)",
+   "scrive_registro": [],
+   "servizio": [],
+   "self_scritte": [],
+   "self_lette": [],
+   "locali_scritte": [
+    "peq_sel"
+   ],
+   "locali_lette": [
+    "np",
+    "peq_sel",
+    "rho_sel"
+   ],
+   "gate": [
+    "COPPIA_MIT > 0.0",
+    "COPPIA_DENSITA"
+   ]
+  },
+  {
+   "riga": 7474,
+   "testo": "anom = np.maximum(0.0, (rho_sel - peq_sel) / np.maximum(peq_sel, 1e-06))",
+   "scrive_registro": [],
+   "servizio": [],
+   "self_scritte": [],
+   "self_lette": [],
+   "locali_scritte": [
+    "anom"
+   ],
+   "locali_lette": [
+    "np",
+    "peq_sel",
+    "rho_sel"
+   ],
+   "gate": [
+    "COPPIA_MIT > 0.0",
+    "COPPIA_DENSITA"
+   ]
+  },
+  {
+   "riga": 7475,
+   "testo": "eccesso_totale = eccesso_torsione + anom",
+   "scrive_registro": [],
+   "servizio": [],
+   "self_scritte": [],
+   "self_lette": [],
+   "locali_scritte": [
+    "eccesso_totale"
+   ],
+   "locali_lette": [
+    "anom",
+    "eccesso_torsione"
+   ],
+   "gate": [
+    "COPPIA_MIT > 0.0",
+    "COPPIA_DENSITA"
+   ]
+  },
+  {
+   "riga": 7477,
+   "testo": "eccesso_totale = eccesso_torsione",
+   "scrive_registro": [],
+   "servizio": [],
+   "self_scritte": [],
+   "self_lette": [],
+   "locali_scritte": [
+    "eccesso_totale"
+   ],
+   "locali_lette": [
+    "eccesso_torsione"
+   ],
+   "gate": [
+    "COPPIA_MIT > 0.0",
+    "NOT (COPPIA_DENSITA)"
+   ]
+  },
+  {
+   "riga": 7478,
+   "testo": "prob_coppia = 1.0 - np.exp(-COPPIA_MIT * eccesso_totale)",
+   "scrive_registro": [],
+   "servizio": [],
+   "self_scritte": [],
+   "self_lette": [],
+   "locali_scritte": [
+    "prob_coppia"
+   ],
+   "locali_lette": [
+    "COPPIA_MIT",
+    "eccesso_totale",
+    "np"
+   ],
+   "gate": [
+    "COPPIA_MIT > 0.0"
+   ]
+  },
+  {
+   "riga": 7479,
+   "testo": "self.ultima_prob_coppia = float(prob_coppia.mean()) if len(prob_coppia) else 0.0",
+   "scrive_registro": [],
+   "servizio": [],
+   "self_scritte": [
+    "ultima_prob_coppia"
+   ],
+   "self_lette": [],
+   "locali_scritte": [],
+   "locali_lette": [
+    "float",
+    "len",
+    "prob_coppia"
+   ],
+   "gate": [
+    "COPPIA_MIT > 0.0"
+   ]
+  },
+  {
+   "riga": 7480,
+   "testo": "estratto = self.rng.random(len(sel)) < prob_coppia",
+   "scrive_registro": [],
+   "servizio": [],
+   "self_scritte": [],
+   "self_lette": [
+    "rng"
+   ],
+   "locali_scritte": [
+    "estratto"
+   ],
+   "locali_lette": [
+    "len",
+    "prob_coppia",
+    "sel"
+   ],
+   "gate": [
+    "COPPIA_MIT > 0.0"
+   ]
+  },
+  {
+   "riga": 7482,
+   "testo": "pick = np.where(estratto)[0]",
+   "scrive_registro": [],
+   "servizio": [],
+   "self_scritte": [],
+   "self_lette": [],
+   "locali_scritte": [
+    "pick"
+   ],
+   "locali_lette": [
+    "estratto",
+    "np"
+   ],
+   "gate": [
+    "COPPIA_MIT > 0.0",
+    "estratto.any()"
+   ]
+  },
+  {
+   "riga": 7483,
+   "testo": "aa, bb = (a[pick], b[pick])",
+   "scrive_registro": [],
+   "servizio": [],
+   "self_scritte": [],
+   "self_lette": [],
+   "locali_scritte": [
+    "aa",
+    "bb"
+   ],
+   "locali_lette": [
+    "a",
+    "b",
+    "pick"
+   ],
+   "gate": [
+    "COPPIA_MIT > 0.0",
+    "estratto.any()"
+   ]
+  },
+  {
+   "riga": 7488,
+   "testo": "anti = (fm[pick] + self._dphi() / 2.0) % self._dphi()",
+   "scrive_registro": [],
+   "servizio": [],
+   "self_scritte": [],
+   "self_lette": [
+    "_dphi"
+   ],
+   "locali_scritte": [
+    "anti"
+   ],
+   "locali_lette": [
+    "fm",
+    "pick"
+   ],
+   "gate": [
+    "COPPIA_MIT > 0.0",
+    "estratto.any()"
+   ]
+  },
+  {
+   "riga": 7489,
+   "testo": "nc = len(pick)",
+   "scrive_registro": [],
+   "servizio": [],
+   "self_scritte": [],
+   "self_lette": [],
+   "locali_scritte": [
+    "nc"
+   ],
+   "locali_lette": [
+    "len",
+    "pick"
+   ],
+   "gate": [
+    "COPPIA_MIT > 0.0",
+    "estratto.any()"
+   ]
+  },
+  {
+   "riga": 7490,
+   "testo": "k = self.n + np.arange(nc)",
+   "scrive_registro": [],
+   "servizio": [],
+   "self_scritte": [],
+   "self_lette": [
+    "n"
+   ],
+   "locali_scritte": [
+    "k"
+   ],
+   "locali_lette": [
+    "nc",
+    "np"
+   ],
+   "gate": [
+    "COPPIA_MIT > 0.0",
+    "estratto.any()"
+   ]
+  },
+  {
+   "riga": 7494,
+   "testo": "dd = self._nasce(np.maximum(0.5 * np.linalg.norm(self.pos[aa] - self.pos[bb], axis=1), 0.05), 's",
+   "scrive_registro": [],
+   "servizio": [
+    "_nasce"
+   ],
+   "self_scritte": [],
+   "self_lette": [
+    "_nasce",
+    "pos"
+   ],
+   "locali_scritte": [
+    "dd"
+   ],
+   "locali_lette": [
+    "aa",
+    "bb",
+    "np"
+   ],
+   "gate": [
+    "COPPIA_MIT > 0.0",
+    "estratto.any()"
+   ]
+  },
+  {
+   "riga": 7501,
+   "testo": "pmed = np.nan if PEQ_NASCITA_LOCALE else float(np.median(self.peq))",
+   "scrive_registro": [],
+   "servizio": [],
+   "self_scritte": [],
+   "self_lette": [
+    "peq"
+   ],
+   "locali_scritte": [
+    "pmed"
+   ],
+   "locali_lette": [
+    "PEQ_NASCITA_LOCALE",
+    "float",
+    "np"
+   ],
+   "gate": [
+    "COPPIA_MIT > 0.0",
+    "estratto.any()"
+   ]
+  },
+  {
+   "riga": 7503,
+   "testo": "self._g_peqn_archi = getattr(self, '_g_peqn_archi', 0) + int(2 * nc)",
+   "scrive_registro": [],
+   "servizio": [],
+   "self_scritte": [
+    "_g_peqn_archi"
+   ],
+   "self_lette": [],
+   "locali_scritte": [],
+   "locali_lette": [
+    "getattr",
+    "int",
+    "nc"
+   ],
+   "gate": [
+    "COPPIA_MIT > 0.0",
+    "estratto.any()",
+    "PEQ_NASCITA_LOCALE"
+   ]
+  },
+  {
+   "riga": 7504,
+   "testo": "self._g_peqn_ev = getattr(self, '_g_peqn_ev', 0) + 1",
+   "scrive_registro": [],
+   "servizio": [],
+   "self_scritte": [
+    "_g_peqn_ev"
+   ],
+   "self_lette": [],
+   "locali_scritte": [],
+   "locali_lette": [
+    "getattr"
+   ],
+   "gate": [
+    "COPPIA_MIT > 0.0",
+    "estratto.any()",
+    "PEQ_NASCITA_LOCALE"
+   ]
+  },
+  {
+   "riga": 7505,
+   "testo": "self._g_peqn_mediana = float(np.median(self.peq))",
+   "scrive_registro": [],
+   "servizio": [],
+   "self_scritte": [
+    "_g_peqn_mediana"
+   ],
+   "self_lette": [
+    "peq"
+   ],
+   "locali_scritte": [],
+   "locali_lette": [
+    "float",
+    "np"
+   ],
+   "gate": [
+    "COPPIA_MIT > 0.0",
+    "estratto.any()",
+    "PEQ_NASCITA_LOCALE"
+   ]
+  },
+  {
+   "riga": 7506,
+   "testo": "self.pos = np.vstack([self.pos, 0.5 * (self.pos[aa] + self.pos[bb])])",
+   "scrive_registro": [
+    "pos"
+   ],
+   "servizio": [],
+   "self_scritte": [
+    "pos"
+   ],
+   "self_lette": [
+    "pos"
+   ],
+   "locali_scritte": [],
+   "locali_lette": [
+    "aa",
+    "bb",
+    "np"
+   ],
+   "gate": [
+    "COPPIA_MIT > 0.0",
+    "estratto.any()"
+   ]
+  },
+  {
+   "riga": 7507,
+   "testo": "self.phi = np.concatenate([self.phi, anti])",
+   "scrive_registro": [
+    "phi"
+   ],
+   "servizio": [],
+   "self_scritte": [
+    "phi"
+   ],
+   "self_lette": [
+    "phi"
+   ],
+   "locali_scritte": [],
+   "locali_lette": [
+    "anti",
+    "np"
+   ],
+   "gate": [
+    "COPPIA_MIT > 0.0",
+    "estratto.any()"
+   ]
+  },
+  {
+   "riga": 7508,
+   "testo": "self.phi0 = np.concatenate([self.phi0, anti])",
+   "scrive_registro": [
+    "phi0"
+   ],
+   "servizio": [],
+   "self_scritte": [
+    "phi0"
+   ],
+   "self_lette": [
+    "phi0"
+   ],
+   "locali_scritte": [],
+   "locali_lette": [
+    "anti",
+    "np"
+   ],
+   "gate": [
+    "COPPIA_MIT > 0.0",
+    "estratto.any()"
+   ]
+  },
+  {
+   "riga": 7509,
+   "testo": "self.phi_s = np.concatenate([self.phi_s, np.zeros(nc)])",
+   "scrive_registro": [
+    "phi_s"
+   ],
+   "servizio": [],
+   "self_scritte": [
+    "phi_s"
+   ],
+   "self_lette": [
+    "phi_s"
+   ],
+   "locali_scritte": [],
+   "locali_lette": [
+    "nc",
+    "np"
+   ],
+   "gate": [
+    "COPPIA_MIT > 0.0",
+    "estratto.any()"
+   ]
+  },
+  {
+   "riga": 7510,
+   "testo": "self.phivel = np.concatenate([self.phivel, 0.5 * (self.phivel[aa] + self.phivel[bb])])",
+   "scrive_registro": [
+    "phivel"
+   ],
+   "servizio": [],
+   "self_scritte": [
+    "phivel"
+   ],
+   "self_lette": [
+    "phivel"
+   ],
+   "locali_scritte": [],
+   "locali_lette": [
+    "aa",
+    "bb",
+    "np"
+   ],
+   "gate": [
+    "COPPIA_MIT > 0.0",
+    "estratto.any()"
+   ]
+  },
+  {
+   "riga": 7511,
+   "testo": "self.eta = np.concatenate([self.eta, np.zeros(nc)])",
+   "scrive_registro": [
+    "eta"
+   ],
+   "servizio": [],
+   "self_scritte": [
+    "eta"
+   ],
+   "self_lette": [
+    "eta"
+   ],
+   "locali_scritte": [],
+   "locali_lette": [
+    "nc",
+    "np"
+   ],
+   "gate": [
+    "COPPIA_MIT > 0.0",
+    "estratto.any()"
+   ]
+  },
+  {
+   "riga": 7514,
+   "testo": "self.perc_chi = np.concatenate([self.perc_chi, -self.perc_chi[aa]])",
+   "scrive_registro": [
+    "perc_chi"
+   ],
+   "servizio": [],
+   "self_scritte": [
+    "perc_chi"
+   ],
+   "self_lette": [
+    "perc_chi"
+   ],
+   "locali_scritte": [],
+   "locali_lette": [
+    "aa",
+    "np"
+   ],
+   "gate": [
+    "COPPIA_MIT > 0.0",
+    "estratto.any()"
+   ]
+  },
+  {
+   "riga": 7518,
+   "testo": "self.perc_geom = np.concatenate([self.perc_geom, self.perc_geom[aa]])",
+   "scrive_registro": [
+    "perc_geom"
+   ],
+   "servizio": [],
+   "self_scritte": [
+    "perc_geom"
+   ],
+   "self_lette": [
+    "perc_geom"
+   ],
+   "locali_scritte": [],
+   "locali_lette": [
+    "aa",
+    "np"
+   ],
+   "gate": [
+    "COPPIA_MIT > 0.0",
+    "estratto.any()"
+   ]
+  },
+  {
+   "riga": 7522,
+   "testo": "self._g_nati_schwinger = getattr(self, '_g_nati_schwinger', 0) + int(nc)",
+   "scrive_registro": [],
+   "servizio": [],
+   "self_scritte": [
+    "_g_nati_schwinger"
+   ],
+   "self_lette": [],
+   "locali_scritte": [],
+   "locali_lette": [
+    "getattr",
+    "int",
+    "nc"
+   ],
+   "gate": [
+    "COPPIA_MIT > 0.0",
+    "estratto.any()"
+   ]
+  },
+  {
+   "riga": 7523,
+   "testo": "self._g_nati_schwinger_ev = getattr(self, '_g_nati_schwinger_ev', 0) + 1",
+   "scrive_registro": [],
+   "servizio": [],
+   "self_scritte": [
+    "_g_nati_schwinger_ev"
+   ],
+   "self_lette": [],
+   "locali_scritte": [],
+   "locali_lette": [
+    "getattr"
+   ],
+   "gate": [
+    "COPPIA_MIT > 0.0",
+    "estratto.any()"
+   ]
+  },
+  {
+   "riga": 7524,
+   "testo": "self.perc_tw = np.concatenate([self.perc_tw, np.zeros(nc)])",
+   "scrive_registro": [
+    "perc_tw"
+   ],
+   "servizio": [],
+   "self_scritte": [
+    "perc_tw"
+   ],
+   "self_lette": [
+    "perc_tw"
+   ],
+   "locali_scritte": [],
+   "locali_lette": [
+    "nc",
+    "np"
+   ],
+   "gate": [
+    "COPPIA_MIT > 0.0",
+    "estratto.any()"
+   ]
+  },
+  {
+   "riga": 7525,
+   "testo": "self.mem_mot = np.vstack([self.mem_mot, np.zeros((nc, 3))]) if len(self.mem_mot) else np.zeros((",
+   "scrive_registro": [
+    "mem_mot"
+   ],
+   "servizio": [],
+   "self_scritte": [
+    "mem_mot"
+   ],
+   "self_lette": [
+    "mem_mot"
+   ],
+   "locali_scritte": [],
+   "locali_lette": [
+    "len",
+    "nc",
+    "np"
+   ],
+   "gate": [
+    "COPPIA_MIT > 0.0",
+    "estratto.any()"
+   ]
+  },
+  {
+   "riga": 7526,
+   "testo": "self._eredita_spinore_figli(aa, segno=-1)",
+   "scrive_registro": [
+    "_cs_nodo_prev",
+    "_nb",
+    "_nb_prec",
+    "_nb_ret",
+    "_psi_prec",
+    "_psi_spin_prec",
+    "_psi_spinor",
+    "_spinor_lift",
+    "omega_s"
+   ],
+   "servizio": [
+    "_eredita_spinore_figli"
+   ],
+   "self_scritte": [],
+   "self_lette": [
+    "_eredita_spinore_figli"
+   ],
+   "locali_scritte": [],
+   "locali_lette": [
+    "aa"
+   ],
+   "gate": [
+    "COPPIA_MIT > 0.0",
+    "estratto.any()"
+   ]
+  },
+  {
+   "riga": 7530,
+   "testo": "self._eredita_psi_figli(aa, bb)",
+   "scrive_registro": [
+    "psi",
+    "psi_spin",
+    "rho_spin"
+   ],
+   "servizio": [
+    "_eredita_psi_figli"
+   ],
+   "self_scritte": [],
+   "self_lette": [
+    "_eredita_psi_figli"
+   ],
+   "locali_scritte": [],
+   "locali_lette": [
+    "aa",
+    "bb"
+   ],
+   "gate": [
+    "COPPIA_MIT > 0.0",
+    "estratto.any()"
+   ]
+  },
+  {
+   "riga": 7539,
+   "testo": "eredita = [v[:] for v in self.conc_nodi[gk]] if gk < len(self.conc_nodi) else []",
+   "scrive_registro": [],
+   "servizio": [],
+   "self_scritte": [],
+   "self_lette": [
+    "conc_nodi"
+   ],
+   "locali_scritte": [
+    "eredita"
+   ],
+   "locali_lette": [
+    "gk",
+    "len",
+    "v"
+   ],
+   "gate": [
+    "COPPIA_MIT > 0.0",
+    "estratto.any()",
+    "self.conc_nodi",
+    "<ciclo> for gk in aa:"
+   ]
+  },
+  {
+   "riga": 7542,
+   "testo": "eredita = [[v[0], v[1], v[2], 'schwinger'] if len(v) == 3 else v[:] for v in eredita]",
+   "scrive_registro": [],
+   "servizio": [],
+   "self_scritte": [],
+   "self_lette": [],
+   "locali_scritte": [
+    "eredita"
+   ],
+   "locali_lette": [
+    "eredita",
+    "len",
+    "v"
+   ],
+   "gate": [
+    "COPPIA_MIT > 0.0",
+    "estratto.any()",
+    "self.conc_nodi",
+    "<ciclo> for gk in aa:"
+   ]
+  },
+  {
+   "riga": 7543,
+   "testo": "self.conc_nodi.append(eredita)",
+   "scrive_registro": [],
+   "servizio": [],
+   "self_scritte": [],
+   "self_lette": [
+    "conc_nodi"
+   ],
+   "locali_scritte": [],
+   "locali_lette": [
+    "eredita"
+   ],
+   "gate": [
+    "COPPIA_MIT > 0.0",
+    "estratto.any()",
+    "self.conc_nodi",
+    "<ciclo> for gk in aa:"
+   ]
+  },
+  {
+   "riga": 7544,
+   "testo": "self.i = np.concatenate([self.i, aa, k])",
+   "scrive_registro": [
+    "i"
+   ],
+   "servizio": [],
+   "self_scritte": [
+    "i"
+   ],
+   "self_lette": [
+    "i"
+   ],
+   "locali_scritte": [],
+   "locali_lette": [
+    "aa",
+    "k",
+    "np"
+   ],
+   "gate": [
+    "COPPIA_MIT > 0.0",
+    "estratto.any()"
+   ]
+  },
+  {
+   "riga": 7545,
+   "testo": "self.j = np.concatenate([self.j, k, bb])",
+   "scrive_registro": [
+    "j"
+   ],
+   "servizio": [],
+   "self_scritte": [
+    "j"
+   ],
+   "self_lette": [
+    "j"
+   ],
+   "locali_scritte": [],
+   "locali_lette": [
+    "bb",
+    "k",
+    "np"
+   ],
+   "gate": [
+    "COPPIA_MIT > 0.0",
+    "estratto.any()"
+   ]
+  },
+  {
+   "riga": 7546,
+   "testo": "self.d = np.concatenate([self.d, dd, dd])",
+   "scrive_registro": [
+    "d"
+   ],
+   "servizio": [],
+   "self_scritte": [
+    "d"
+   ],
+   "self_lette": [
+    "d"
+   ],
+   "locali_scritte": [],
+   "locali_lette": [
+    "dd",
+    "np"
+   ],
+   "gate": [
+    "COPPIA_MIT > 0.0",
+    "estratto.any()"
+   ]
+  },
+  {
+   "riga": 7547,
+   "testo": "_tr_pre = self.d0.copy()",
+   "scrive_registro": [],
+   "servizio": [],
+   "self_scritte": [],
+   "self_lette": [
+    "d0"
+   ],
+   "locali_scritte": [
+    "_tr_pre"
+   ],
+   "locali_lette": [],
+   "gate": [
+    "COPPIA_MIT > 0.0",
+    "estratto.any()",
+    "TRACCIA_D0"
+   ]
+  },
+  {
+   "riga": 7548,
+   "testo": "self._smp_chirurgia(nuovi=np.concatenate([dd, dd]))",
+   "scrive_registro": [],
+   "servizio": [
+    "_smp_chirurgia"
+   ],
+   "self_scritte": [],
+   "self_lette": [
+    "_smp_chirurgia"
+   ],
+   "locali_scritte": [],
+   "locali_lette": [
+    "dd",
+    "np"
+   ],
+   "gate": [
+    "COPPIA_MIT > 0.0",
+    "estratto.any()"
+   ]
+  },
+  {
+   "riga": 7549,
+   "testo": "self.d0 = np.concatenate([self.d0, dd, dd])",
+   "scrive_registro": [
+    "d0"
+   ],
+   "servizio": [],
+   "self_scritte": [
+    "d0"
+   ],
+   "self_lette": [
+    "d0"
+   ],
+   "locali_scritte": [],
+   "locali_lette": [
+    "dd",
+    "np"
+   ],
+   "gate": [
+    "COPPIA_MIT > 0.0",
+    "estratto.any()"
+   ]
+  },
+  {
+   "riga": 7550,
+   "testo": "self._traccia_d0('S07_schwinger', _tr_pre)",
+   "scrive_registro": [],
+   "servizio": [],
+   "self_scritte": [],
+   "self_lette": [
+    "_traccia_d0"
+   ],
+   "locali_scritte": [],
+   "locali_lette": [
+    "_tr_pre"
+   ],
+   "gate": [
+    "COPPIA_MIT > 0.0",
+    "estratto.any()",
+    "TRACCIA_D0"
+   ]
+  },
+  {
+   "riga": 7551,
+   "testo": "self.vd = np.concatenate([self.vd, np.zeros(2 * nc)])",
+   "scrive_registro": [
+    "vd"
+   ],
+   "servizio": [],
+   "self_scritte": [
+    "vd"
+   ],
+   "self_lette": [
+    "vd"
+   ],
+   "locali_scritte": [],
+   "locali_lette": [
+    "nc",
+    "np"
+   ],
+   "gate": [
+    "COPPIA_MIT > 0.0",
+    "estratto.any()"
+   ]
+  },
+  {
+   "riga": 7552,
+   "testo": "self.peq = np.concatenate([self.peq, np.full(2 * nc, pmed)])",
+   "scrive_registro": [
+    "peq"
+   ],
+   "servizio": [],
+   "self_scritte": [
+    "peq"
+   ],
+   "self_lette": [
+    "peq"
+   ],
+   "locali_scritte": [],
+   "locali_lette": [
+    "nc",
+    "np",
+    "pmed"
+   ],
+   "gate": [
+    "COPPIA_MIT > 0.0",
+    "estratto.any()"
+   ]
+  },
+  {
+   "riga": 7557,
+   "testo": "self._peqn_idx = np.arange(len(self.peq) - 2 * nc, len(self.peq))",
+   "scrive_registro": [],
+   "servizio": [],
+   "self_scritte": [
+    "_peqn_idx"
+   ],
+   "self_lette": [
+    "peq"
+   ],
+   "locali_scritte": [],
+   "locali_lette": [
+    "len",
+    "nc",
+    "np"
+   ],
+   "gate": [
+    "COPPIA_MIT > 0.0",
+    "estratto.any()",
+    "PEQ_NASCITA_LOCALE"
+   ]
+  },
+  {
+   "riga": 7558,
+   "testo": "self._rep = np.concatenate([self._rep, np.zeros(2 * nc)])",
+   "scrive_registro": [
+    "_rep"
+   ],
+   "servizio": [],
+   "self_scritte": [
+    "_rep"
+   ],
+   "self_lette": [
+    "_rep"
+   ],
+   "locali_scritte": [],
+   "locali_lette": [
+    "nc",
+    "np"
+   ],
+   "gate": [
+    "COPPIA_MIT > 0.0",
+    "estratto.any()"
+   ]
+  },
+  {
+   "riga": 7559,
+   "testo": "zz2 = np.zeros(nc)",
+   "scrive_registro": [],
+   "servizio": [],
+   "self_scritte": [],
+   "self_lette": [],
+   "locali_scritte": [
+    "zz2"
+   ],
+   "locali_lette": [
+    "nc",
+    "np"
+   ],
+   "gate": [
+    "COPPIA_MIT > 0.0",
+    "estratto.any()"
+   ]
+  },
+  {
+   "riga": 7560,
+   "testo": "self.tw = np.concatenate([self.tw, zz2, zz2])",
+   "scrive_registro": [
+    "tw"
+   ],
+   "servizio": [],
+   "self_scritte": [
+    "tw"
+   ],
+   "self_lette": [
+    "tw"
+   ],
+   "locali_scritte": [],
+   "locali_lette": [
+    "np",
+    "zz2"
+   ],
+   "gate": [
+    "COPPIA_MIT > 0.0",
+    "estratto.any()"
+   ]
+  },
+  {
+   "riga": 7561,
+   "testo": "self.twp = np.concatenate([self.twp, self._wphi(self.phi[aa] - anti), self._wphi(anti - self.phi",
+   "scrive_registro": [
+    "twp"
+   ],
+   "servizio": [],
+   "self_scritte": [
+    "twp"
+   ],
+   "self_lette": [
+    "_wphi",
+    "phi",
+    "twp"
+   ],
+   "locali_scritte": [],
+   "locali_lette": [
+    "aa",
+    "anti",
+    "bb",
+    "np"
+   ],
+   "gate": [
+    "COPPIA_MIT > 0.0",
+    "estratto.any()"
+   ]
+  },
+  {
+   "riga": 7563,
+   "testo": "self._grado()",
+   "scrive_registro": [
+    "_deg"
+   ],
+   "servizio": [
+    "_grado"
+   ],
+   "self_scritte": [],
+   "self_lette": [
+    "_grado"
+   ],
+   "locali_scritte": [],
+   "locali_lette": [],
+   "gate": [
+    "COPPIA_MIT > 0.0",
+    "estratto.any()"
+   ]
+  },
+  {
+   "riga": 7563,
+   "testo": "self.nati += nc",
+   "scrive_registro": [],
+   "servizio": [],
+   "self_scritte": [
+    "nati"
+   ],
+   "self_lette": [],
+   "locali_scritte": [],
+   "locali_lette": [
+    "nc"
+   ],
+   "gate": [
+    "COPPIA_MIT > 0.0",
+    "estratto.any()"
+   ]
+  },
+  {
+   "riga": 7563,
+   "testo": "self.coppie_nate += nc",
+   "scrive_registro": [],
+   "servizio": [],
+   "self_scritte": [
+    "coppie_nate"
+   ],
+   "self_lette": [],
+   "locali_scritte": [],
+   "locali_lette": [
+    "nc"
+   ],
+   "gate": [
+    "COPPIA_MIT > 0.0",
+    "estratto.any()"
+   ]
+  },
+  {
+   "riga": 7564,
+   "testo": "return len(sel)",
+   "scrive_registro": [],
+   "servizio": [],
+   "self_scritte": [],
+   "self_lette": [],
+   "locali_scritte": [],
+   "locali_lette": [
+    "len",
+    "sel"
+   ],
+   "gate": []
+  }
+ ]
+}

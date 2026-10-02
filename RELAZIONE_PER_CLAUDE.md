@@ -696,3 +696,76 @@ Il mio task history fissa come ### **punto di STOP numero ④**: *«il punto uni
 **PROSSIMO: il run, e il verdetto. Se dice STOP, mi fermo li' e lo dico.**
 
 ---
+
+# 🛑🛑 **IL PUNTO DI STOP ④ E' SCATTATO: IL BLOCCO CONTIGUO RICHIEDE DI RIORDINARE. NON HO SCRITTO IL CODICE DEL COMMIT 3** *(2026-10-02)*
+
+> ### **Luca, mi fermo qui, ed e' il punto che il mio task history aveva fissato PRIMA di cominciare. Ma il blocco e' UNO SOLO, e NON e' una legge di fisica: e' una riga DIAGNOSTICA.**
+
+**Referto:** `csv/_test_fork/_punto_unico_fattibile/_punto_unico_fattibile.json` *(strumento **`be5c8133`**)*. ### **Nessuna riga del simulatore:** blob **`3ddc56d9`** prima e dopo.
+
+## 📊 **I NUMERI, e come si assottigliano da 7 a UNO**
+
+| | |
+|---|--:|
+| istruzioni di `mitosi` *(scendendo dentro `if` e cicli)* | **139** |
+| di cui **scrivono** una grandezza del registro | **47** |
+| istruzioni fra la **prima** *(`:7335`)* e l'**ultima** *(`:7563`)* | **111** |
+| di queste, **NON** di scrittura | **64** |
+| ### **segnalate come LEGATE in mezzo** | ### **7** |
+| che **girano** con la configurazione del driver | **5** |
+| ### **GENUINE anche a granularita' di INDICE** | ### **3** |
+| ### **che NON si possono spostare per davvero** | ### **1** |
+
+## ⭐ **IL BLOCCO VERO, ed e' UNA RIGA**
+
+```
+:7433   self.peq = np.concatenate([self.peq[keep], self.peq[sel], self.peq[sel]])   <- scrittura
+:7505   self._g_peqn_mediana = float(np.median(self.peq))                           <- LEGATA
+:7552   self.peq = np.concatenate([self.peq, np.full(2 * nc, pmed)])                <- scrittura
+```
+
+### ➜ **E' una MEDIANA GLOBALE su `peq`, presa FRA le due scritture di `peq`.** ### **Non si puo' spostare PRIMA** *(leggerebbe il `peq` pre-mitosi)* ### **ne' DOPO** *(leggerebbe quello post-Schwinger)*. ### **E la dipendenza e' GENUINA anche a granularita' di indice, perche' `:7433` FILTRA con `keep`:** dopo quella riga lo stesso indice punta a ### **un'ALTRA voce**, e una mediana sull'intero array cambia.
+### ➜ **Quindi raccogliere le scritture di `peq` in un blocco contiguo la SCAVALCA, e scavalcarla cambia un numero.**
+
+## ⚠ **E LE ALTRE QUATTRO NON SONO LA PROVA: lo dico invece di contarle tutte e sette**
+
+| riga | perche' NON e' la prova |
+|---|---|
+| `:7472` `peq_sel = self.peq[sel]` | ### **NON GIRA**: `COPPIA_DENSITA = False` *(dal runtime)* |
+| `:7547` `_tr_pre = self.d0.copy()` | ### **NON GIRA**: `TRACCIA_D0 = False` |
+| `:7375` `chi_a`/`chi_b = self.perc_chi[a]`/`[b]` | ### **SPURIA a granularita' di indice:** `:7342` e' una ### **PURA ESTENSIONE** *(`concatenate([perc_chi, perc_chi[a]])`)*, e `a`/`b` sono indici di ### **genitori PREESISTENTI** ⇒ il valore e' lo stesso prima e dopo |
+| `:7494` `dd = ...norm(pos[aa] - pos[bb])...` | la lettura di `pos` e' ### **spuria** *(estensione, indici preesistenti)*; resta il flusso locale `dd → :7546`, ### **che si soddisfa calcolando `dd` PRIMA del blocco** |
+| `:7501` `pmed = np.nan if PEQ_NASCITA_LOCALE else ...median(peq)` | con `PEQ_NASCITA_LOCALE = True` *(runtime)* ### **la mediana NON VIENE NEMMENO VALUTATA**: `pmed = np.nan`, e ### **nessuna lettura di `peq` avviene** |
+
+### ⚠ **E questa tabella e' una LETTURA DEL SORGENTE, non un'uscita dello strumento:** lo strumento dice ### **3 genuine**, io dico ### **1**, e la differenza sta in due cose che l'AST non sa vedere — ### **il corto circuito di un'espressione condizionale** *(`:7501`)* e ### **un flusso di VALORE locale che si puo' sollevare prima del blocco** *(`:7494`)*. ### **Lo dichiaro cosi' invece di correggere il numero dello strumento a mano** *(`L-NUMERI`)*.
+
+## ⭐ **E IL FATTO CHE CONTA DAVVERO: IL BLOCCO NON E' UNA LEGGE DI FISICA**
+
+| | |
+|---|---|
+| ### **che cos'e' `_g_peqn_mediana`** | un ### **DIAGNOSTICO**: *«cio' che si EVITA»* — la mediana globale che `PEQ_NASCITA_LOCALE` esiste per **non** usare. **Non e' nel registro.** |
+| ### **il sigillo lo confronta?** | ### **NO** — e' una delle **tre** grandezze che il contratto di stamattina ha trovato **scoperte** *(ha il prefisso `_g_` dei contatori ### **ma e' un `float`**, e `_contatori` prende solo gli INTERI)* |
+| ### ⛔ **la conseguenza, ed e' scomoda** | ### **se scrivessi il commit 3 raccogliendo le scritture, `_g_peqn_mediana` cambierebbe E IL SIGILLO NON LO VEDREBBE.** Il commit passerebbe, ### **e il difetto sarebbe silenzioso.** |
+
+### 📌 **E' `A8` in forma pura:** ### **l'unico ostacolo al punto unico e' un numero che nessuno controlla.** Se il sigillo non lo guardasse, non ci sarebbe nemmeno un ostacolo — ### **ci sarebbe un difetto.**
+
+## 🛑 **LE DUE VIE, e NON ne scelgo nessuna**
+
+| | la via | il prezzo |
+|---|---|---|
+| ### **(a)** | ### **il punto unico LASCIA `:7505` dov'e'** e raccoglie tutto il resto | ### **non e' piu' «un punto solo»: e' un punto piu' una riga.** Il piano dice *«da TRE posti a UNO»*, e questo sarebbe ### **UNO e mezzo** — e va detto cosi', non arrotondato |
+| ### **(b)** | ### **si cura `_g_peqn_mediana` PRIMA**: quel diagnostico si prende **una volta**, a un istante **dichiarato**, invece che fra due scritture | e' ### **un commit a se', e NON byte-identico su quel numero** — ma ### **il sigillo oggi non lo confronta**, quindi ### **il primo lavoro e' ESTENDERE IL SIGILLO**, non cambiare il codice |
+
+### ➜ **E la mia raccomandazione, perche' me la chiedi sempre: (b), e nell'ordine `sigillo → diagnostico → punto unico`.** ### **Estendere il sigillo PRIMA e' l'unica cosa che rende visibile il cambiamento che poi si fa** — e senza quello la (a) e la (b) ### **sono indistinguibili dai numeri.**
+
+## 📋 **IL TODO DEL TASK HISTORY, aggiornato** *(par.5-bis)*
+
+**0** task history → **FATTO** · **1** strumento → **FATTO** *(sei cure)* · **2** run e referto → **FATTO** · **3** contratto → **FATTO** · ### **4 il CODICE → NON FATTO, e il punto di STOP ④ e' la ragione** · **5** sigillo → **DA FARE**, ### **e ora ha DUE requisiti nuovi: le tre grandezze scoperte, e il verdetto su `_g_peqn_mediana`** · **6** referto e STOP → **qui** · **7** i fatti mancanti → **IN CODA**.
+
+## ✅ **CHE COSA RESTA IN PIEDI DI TUTTO IL GIRO, perche' non e' poco**
+
+**Il contratto dell'ordine e' nel repo e non c'era** · **la sequenza delle estrazioni e' misurata** · **la soglia dell'associativita' e' misurata e coincide con due misure indipendenti** · ### **tre grandezze scoperte dal sigillo sono state TROVATE PRIMA di scrivere il sigillo** · ### **e il blocco al punto unico ha un nome, una riga e una causa** invece di essere scoperto da un sigillo che cade.
+
+### 🛑 **MI FERMO QUI.** Il punto di STOP ④ e' quello che il task history ha fissato **prima** di cominciare, ### **e scattava proprio per non farmi riordinare le scritture credendo di spostarle.**
+
+---
