@@ -262,3 +262,37 @@ Il **par.9** dice: *«un difetto nuovo = una riga nell'indice, **piu' la spiegaz
 **PROSSIMO: lo strumento che misura l'ordine delle estrazioni, committato PRIMA di girarlo.**
 
 ---
+
+# 🔧 **LO STRUMENTO DEL PASSO 1 DEL COMMIT 3, committato PRIMA di girare** *(2026-10-02)*
+
+`csv/_test_fork/_ordine_estrazioni.py` *(blob **`99bc86dc`**)*. ### **Nessuna riga del simulatore:** blob **`3ddc56d9`** prima e dopo. **Si committa prima perche' il par.5 lo impone e perche' `_presidio.avvia` RIFIUTA DI GIRARE uno script non committato e pulito** — ### **e' un meccanismo, non una nota** *(`A9`)*.
+
+## ⛔ **E UNA PREMESSA DEL MIO TASK HISTORY E' GIA' CADUTA, PRIMA DI GIRARE** *(par.8: si annota, non si riscrive)*
+
+**Avevo scritto, due ore fa:** *«le estrazioni casuali nella nascita, nella configurazione di riferimento, sono DUE: `ANTIFASE_ADD` e `COPPIA_MIT»*.
+### ⛔ **Ne mancava una, e NON e' un dettaglio: `decidi_divisione` pesca SEMPRE** — `nasce = self.rng.random(len(avv)) < prob`. ### **E' la decisione stessa di quali archi si dividono.**
+### ➜ **E il codice me lo diceva: il COMMIT 2 l'ha gia' DICHIARATA**, in una tabella del docstring di `decidi_divisione`:
+> *«l'estrazione casuale `self.rng.random(len(avv))` — il generatore **AVANZA**: spostarla cambia l'**ORDINE delle estrazioni**, e il run non sarebbe piu' byte-identico. ### **(E' esattamente cio' che il commit 3 deve dichiarare.)**»*
+### 📌 **Quindi il contratto di questo commit era GIA' SCRITTO da ieri, e io l'ho cercato dopo aver scritto la mia previsione sbagliata.** ### **La lezione e' `P1`: ho proposto per associazione** *(«le estrazioni stanno nella mitosi»)* **invece di rileggere dal disco cio' che era gia' stabilito su quel punto.**
+
+## ✅ **LO STRUMENTO, e la cosa che dichiara per prima: QUALE STRUMENTO VALE PER QUALE DOMANDA**
+
+| la misura | con che cosa | **perche' quello** |
+|---|---|---|
+| ### **(A) le ESTRAZIONI** | ### **il RUNTIME** — `net.rng` avvolto da un oggetto che **inoltra e registra** | ### ⛔ **l'AST vede `rng.<metodo>` in NOVE posti e NON SA QUALI RAMI GIRANO:** `ANTIFASE_ADD` e `COPPIA_DENSITA` sono flag, quindi ### **un conteggio statico direbbe nove dove il runtime dice uno o due** |
+| ### **(B) l'ordine degli ADDENDI** | ### **l'AST** | ### **e qui l'AST E' lo strumento giusto: l'ordine di `a + b` E' un fatto della SINTASSI**, e non c'e' un runtime che lo dica meglio |
+
+### 📌 **E il fatto di aver dovuto SCRIVERE questa distinzione e' il punto.** La forma dell'errore che in questa sessione si e' ripetuta **sei volte** e' ### **usare la sintassi per rispondere a una domanda di RUNTIME.** ### **Non e' «l'AST e' sbagliato»: e' che va usato dove la domanda e' sintattica.**
+
+## ✅ **IL CONTROLLO CHE RENDE LA MISURA VALIDA, e se fallisce lo strumento SI FERMA**
+
+### **Lo stesso passo CON e SENZA la spia deve essere byte-identico — grandezze E CONTATORI.** Se non lo e', il referto scrive ### **`vale: false`** col motivo, e ### **non si riporta nessun numero.**
+### ➜ **E la spia INOLTRA, non reimplementa:** ogni chiamata arriva al `Generator` vero, cogli stessi argomenti e nello stesso ordine. ### **Lo stream non si tocca: si annota.** *(E `bit_generator` si inoltra, perche' `salva_stato` ne legge lo stato e una copia romperebbe la ripresa.)*
+
+## ⚠ **TRE COSE CHE LO STRUMENTO NON FA, dichiarate PRIMA dei numeri**
+
+**①** ### **non decide se il byte-identico del commit 3 passera':** dice ### **qual e' l'ordine da RISPETTARE.** E' il **contratto**, non la verifica. · **②** ### **non copre i rami spenti:** se un flag cambia, l'ordine cambia — e per questo il referto porta la **configurazione INTERA** (`H-P5`). · **③** le estrazioni della **semina** *(che gira alla costruzione della scena, non nel passo)* si riportano ### **a parte**, da un conteggio sul passo zero.
+
+**PROSSIMO: il run, e il referto. Poi la tabella `doc/REGOLE_nascita.tsv` estesa col contratto.**
+
+---
