@@ -1,0 +1,62 @@
+[TIMBRO] _sigillo_tre_casi.py  sha1-BYTE 2ab06dba  committato e pulito
+========================================================================================================
+I TRE CASI CHE DEVONO FALLIRE  --  `COMMIT 3`, la nascita come evento unico
+========================================================================================================
+simulatore ..... f103989b (sha1 byte grezzi)
+questo sigillo . 2ab06dba
+seme 11   passi 72
+
+========================================================================================================
+CASO 1 -- SI TOGLIE UNA GRANDEZZA DALLA TABELLA: il run deve FERMARSI
+========================================================================================================
+  copia: una grandezza RINOMINATA nella tabella: {'righe_prima': 12635, 'righe_dopo': 12635, 'aggiunte': 0, 'righe_diverse': [1777]}
+  l'import ha alzato ... RuntimeError
+  il messaggio ......... regola di nascita non dichiarata per `peq` all'evento `divisione` (e altre 0). La tabella `REGOLE_NASCITA` deve coprire TUTTO `ORDINE_DI_NASCITA`.
+  nomina la grandezza E l'evento? SI
+  ### E SI FERMA ALL'IMPORT, non al primo run: il processo non parte nemmeno.
+  ### CASO 1: PASSA
+
+========================================================================================================
+CASO 3 -- UNA SCRITTURA SPARSA A VALLE: il presidio deve NOMINARLA
+========================================================================================================
+  grandezze governate 36   regole `_rn_*` 65   funzioni che chiamano `nascita()` mitosi
+  ### estensioni SPARSE nel perimetro, fuori dalle regole: 0
+
+  CONTROLLO POSITIVO: iniettata `self.phi = np.concatenate([self.phi, fm])`
+      subito DOPO la chiamata al punto unico: {'righe_prima': 12635, 'righe_dopo': 12636, 'aggiunte': 1, 'prima_riga_diversa': 8242}
+      ### il presidio la trova? SI
+      ### NOMINATA: phi dentro `mitosi` :8242   self.phi = np.concatenate([self.phi, fm])
+
+  ### E IL PRESIDIO NON E' CABLATO IN UN HOOK: e' uno SCRIPT (`A9`).
+      Finche' non gira nel `pre-commit`, NON IMPEDISCE NIENTE -- lo dico.
+  ### CASO 3: PASSA
+
+========================================================================================================
+CASO 2 -- SI CAMBIA LA REGOLA DI `psi` (da MEDIA a EREDITA): il sigillo deve VEDERLA
+========================================================================================================
+  copia: `psi` EREDITA da `a` invece di MEDIARE. {'righe_prima': 12635, 'righe_dopo': 12635, 'aggiunte': 0, 'righe_diverse': [1708]}
+      ### ed e' il cambio di UNA regola, non di un numero: e' il tipo di
+      ### difetto che un riordino puo' introdurre senza accorgersene.
+  ### il sigillo vede 47 differenze
+      ### {"nome": "_chi_core_rho0", "come": "array DIVERSO"}
+      ### {"nome": "_chi_geom_nodi", "come": "array DIVERSO"}
+      ### {"nome": "_cs_nodo_prev", "come": "array DIVERSO"}
+      ### {"nome": "_dt_e_ultimo", "come": "array DIVERSO"}
+      ### {"nome": "_fatt_cs_ultimo", "come": "array DIVERSO"}
+      ### {"nome": "_g_cct_allarga", "come": "scalare", "a": "27139268", "b": "27139815"}
+      ### {"nome": "_g_cct_stringe", "come": "scalare", "a": "6813428", "b": "6812881"}
+      ### {"nome": "_g_m2l_dmin", "come": "scalare float", "a": "1.4384450656167553", "b": "1.438465459185848", "ulp": 91844470166}
+      ### {"nome": "_g_peqn_mediana", "come": "scalare float", "a": "1.7026802215251897", "b": "1.7027051427548692", "ulp": 112235240698}
+      ### {"nome": "_g_rampa_cali", "come": "scalare", "a": "24", "b": "31"}
+      ### {"nome": "_g_rampa_prec", "come": "array DIVERSO"}
+      ### {"nome": "_g_sm_discese", "come": "scalare", "a": "34230754", "b": "34230658"}
+      ### {"nome": "_g_smp_discese", "come": "scalare", "a": "17999596", "b": "17999543"}
+      ### {"nome": "_g_smp_salite", "come": "scalare", "a": "15953100", "b": "15953153"}
+  le grandezze diverse: _chi_core_rho0, _chi_geom_nodi, _cs_nodo_prev, _dt_e_ultimo, _fatt_cs_ultimo, _g_cct_allarga, _g_cct_stringe, _g_m2l_dmin, _g_peqn_mediana, _g_rampa_cali, _g_rampa_prec, _g_sm_discese, _g_smp_discese, _g_smp_salite, _nb, _nb_prec, _nb_ret, _psi_prec, _psi_spin_prec, _psi_spinor
+  `psi` e' fra loro? SI
+  eventi di mitosi nel run: 8
+  ### CASO 2: PASSA
+
+========================================================================================================
+### I TRE CASI PASSANO   (1 OK · 2 OK · 3 OK)
+========================================================================================================

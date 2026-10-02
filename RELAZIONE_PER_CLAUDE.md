@@ -1424,3 +1424,38 @@ Si ### **INIETTA** `self.phi = np.concatenate([self.phi, fm])` subito dopo la ch
 ### 📌 **E la correzione e' un COMMIT A SE'** *(par.5)*: non si infila nel commit che porta il difetto. Il giro si rifa' ### **dopo**, col sigillo committato — che e' anche ### **l'unico modo di girarlo**, perche' il nome comincia con `_sigillo_` e `_presidio.avvia` ### **si rifiuta di girare uno sporco.**
 
 ---
+
+# ✅✅ **IL COMMIT 3 E' COMPLETO: CINQUE BRACCI E TRE CASI, TUTTI OK** *(2026-10-02)*
+
+> ### **Luca: il giro rifatto da' gli STESSI tre esiti, e il referto ora si legge (4.8 KB invece di 29). La correzione ha toccato il REFERTO e non il test — ed era esattamente la cosa che andava ricontrollata.**
+
+| | caso | esito |
+|---|---|---|
+| **①** | si **TOGLIE** una grandezza | ### **PASSA** — `RuntimeError` all'### **IMPORT**, e nomina ### **grandezza E evento** |
+| **②** | si **CAMBIA** la regola di `psi` | ### **PASSA** — ### **47 differenze**, `psi` fra loro, 8 eventi di mitosi |
+| **③** | una scrittura **SPARSA** | ### **PASSA** — ### **0** nel vero, e il controllo positivo la ### **NOMINA** |
+
+### 📌 **E le copie guaste sono CHIRURGICHE, e ora il referto lo dice in una riga invece che in 4800:** il caso ① cambia ### **la riga 1777**, il ② ### **la 1708**, il ③ ### **AGGIUNGE una riga** alla `:8242`.
+
+## 📋 **IL PUNTO DOVE SIAMO, sulla tua decisione di stamattina**
+
+| passo | stato |
+|---|---|
+| **1** — il **SIGILLO** esteso | ### **FATTO e PROVATO** |
+| **2** — il **DIAGNOSTICO** *(`PEQ-MEDIANA-ISTANTE`)* | ### **FATTO e PROVATO**: braccio `D`, ### **una** differenza |
+| **3** — il ### **PUNTO UNICO** | ### **FATTO e PROVATO**: braccio `E`, ### **ZERO su TUTTO**, piu' i tre casi |
+
+### ⛔ **E MI FERMO QUI, come hai chiesto:** *<<STOP dopo il referto del sigillo del commit 3>>*. Questo e' quel referto.
+
+## 📌 **CIO' CHE RESTA IN CODA, e nessuna di queste cose l'ho fatta**
+
+| | |
+|---|---|
+| ### **l'ANCORA d'iniezione** | la tua nota 1: rendere l'ancora ### **il solo bersaglio** *(prefisso + fino a fine riga)*. ### **Commit a se', DOPO il 3** — cioe' il prossimo |
+| il **presidio ③** nel `pre-commit` | oggi e' uno ### **SCRIPT**: non impedisce niente (`A9`) |
+| `_g_m2l_negati` sui 72 passi | decide il criterio del **commit 6b**, che poggia su una premessa falsa |
+| `DIVISIONE-AUTOCONSISTENTE` | la tua nota 2: `fm` prima del calcio, `twp` dopo. ### **Domanda aperta, col criterio di chiusura scritto** |
+| `PEQ-SEL-STANTIO` | il difetto latente del ramo spento: ### **registrato e NON curato**, come da mandato |
+| `FALSO-ZERO` | ### **sette casi**, e il presidio ### **non e' cablato** |
+
+---

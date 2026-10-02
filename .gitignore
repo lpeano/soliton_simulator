@@ -51,3 +51,9 @@ csv/_seal_fork/_sigillo_confronto_esteso/_sim_ulp.py
 csv/_seal_fork/_sigillo_confronto_esteso/_sim_prima_cura.py
 #   E lo stesso per il <<PRIMA>> del braccio `E` (il commit 3).
 csv/_seal_fork/_sigillo_confronto_esteso/_sim_prima_punto_unico.py
+#   E le TRE copie guaste del sigillo dei tre casi, per la stessa ragione:
+#   il sigillo le RIGENERA a ogni giro dal simulatore di QUEL momento, con
+#   l'ancora ASSERITA unica. Committarle creerebbe tre artefatti che dicono
+#   di essere copie del simulatore e non lo sono piu' (`SIM-PRIMA-STANTIO`),
+#   per 2.4 MB. ### Il dato E' il comando che le produce.
+csv/_seal_fork/_sigillo_tre_casi/_sim_*.py

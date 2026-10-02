@@ -1,0 +1,273 @@
+{
+ "blob_sim_sha1_byte": "f103989b5c2cef00fa63da6b630c08d322ab2290",
+ "blob_sigillo": "2ab06dbaed948e316f518702dbb49c3800c6c7fe",
+ "seme": 11,
+ "passi": 72,
+ "caso_1": {
+  "passa": true,
+  "righe_diverse": {
+   "righe_prima": 12635,
+   "righe_dopo": 12635,
+   "aggiunte": 0,
+   "righe_diverse": [
+    1777
+   ]
+  },
+  "eccezione": "regola di nascita non dichiarata per `peq` all'evento `divisione` (e altre 0). La tabella `REGOLE_NASCITA` deve coprire TUTTO `ORDINE_DI_NASCITA`."
+ },
+ "caso_3": {
+  "passa": true,
+  "sparse_nel_simulatore": [],
+  "controllo_positivo_trovate": [
+   {
+    "grandezza": "phi",
+    "dentro": "mitosi",
+    "riga": 8242,
+    "codice": "self.phi = np.concatenate([self.phi, fm])"
+   }
+  ],
+  "righe_diverse": {
+   "righe_prima": 12635,
+   "righe_dopo": 12636,
+   "aggiunte": 1,
+   "prima_riga_diversa": 8242
+  },
+  "grandezze_governate": 36,
+  "regole": 65,
+  "chiamanti": [
+   "mitosi"
+  ],
+  "NON_CABLATO": "e' uno script, non un hook (A9)"
+ },
+ "caso_2": {
+  "passa": true,
+  "eseguito": true,
+  "differenze": [
+   {
+    "nome": "_chi_core_rho0",
+    "come": "array DIVERSO"
+   },
+   {
+    "nome": "_chi_geom_nodi",
+    "come": "array DIVERSO"
+   },
+   {
+    "nome": "_cs_nodo_prev",
+    "come": "array DIVERSO"
+   },
+   {
+    "nome": "_dt_e_ultimo",
+    "come": "array DIVERSO"
+   },
+   {
+    "nome": "_fatt_cs_ultimo",
+    "come": "array DIVERSO"
+   },
+   {
+    "nome": "_g_cct_allarga",
+    "come": "scalare",
+    "a": "27139268",
+    "b": "27139815"
+   },
+   {
+    "nome": "_g_cct_stringe",
+    "come": "scalare",
+    "a": "6813428",
+    "b": "6812881"
+   },
+   {
+    "nome": "_g_m2l_dmin",
+    "come": "scalare float",
+    "a": "1.4384450656167553",
+    "b": "1.438465459185848",
+    "ulp": 91844470166
+   },
+   {
+    "nome": "_g_peqn_mediana",
+    "come": "scalare float",
+    "a": "1.7026802215251897",
+    "b": "1.7027051427548692",
+    "ulp": 112235240698
+   },
+   {
+    "nome": "_g_rampa_cali",
+    "come": "scalare",
+    "a": "24",
+    "b": "31"
+   },
+   {
+    "nome": "_g_rampa_prec",
+    "come": "array DIVERSO"
+   },
+   {
+    "nome": "_g_sm_discese",
+    "come": "scalare",
+    "a": "34230754",
+    "b": "34230658"
+   },
+   {
+    "nome": "_g_smp_discese",
+    "come": "scalare",
+    "a": "17999596",
+    "b": "17999543"
+   },
+   {
+    "nome": "_g_smp_salite",
+    "come": "scalare",
+    "a": "15953100",
+    "b": "15953153"
+   },
+   {
+    "nome": "_nb",
+    "come": "array DIVERSO"
+   },
+   {
+    "nome": "_nb_prec",
+    "come": "array DIVERSO"
+   },
+   {
+    "nome": "_nb_ret",
+    "come": "array DIVERSO"
+   },
+   {
+    "nome": "_psi_prec",
+    "come": "array DIVERSO"
+   },
+   {
+    "nome": "_psi_spin_prec",
+    "come": "array DIVERSO"
+   },
+   {
+    "nome": "_psi_spinor",
+    "come": "array DIVERSO"
+   },
+   {
+    "nome": "_r_corrente",
+    "come": "array DIVERSO"
+   },
+   {
+    "nome": "_rep",
+    "come": "array DIVERSO"
+   },
+   {
+    "nome": "_rep_scarto_max",
+    "come": "scalare float",
+    "a": "0.024209204456203837",
+    "b": "0.02421038415333629",
+    "ulp": 340024548232
+   },
+   {
+    "nome": "_sin2_vir",
+    "come": "array DIVERSO"
+   },
+   {
+    "nome": "_spinor_lift",
+    "come": "array DIVERSO"
+   },
+   {
+    "nome": "_taup_causale_scatti",
+    "come": "scalare",
+    "a": "5391381",
+    "b": "5391730"
+   },
+   {
+    "nome": "_tum_clip0_prob",
+    "come": "scalare",
+    "a": "33950925",
+    "b": "33950915"
+   },
+   {
+    "nome": "_xi_rumore",
+    "come": "array DIVERSO"
+   },
+   {
+    "nome": "d",
+    "come": "array DIVERSO"
+   },
+   {
+    "nome": "d0",
+    "come": "array DIVERSO"
+   },
+   {
+    "nome": "eta",
+    "come": "array DIVERSO"
+   },
+   {
+    "nome": "mem_mot",
+    "come": "array DIVERSO"
+   },
+   {
+    "nome": "omega_s",
+    "come": "array DIVERSO"
+   },
+   {
+    "nome": "peq",
+    "come": "array DIVERSO"
+   },
+   {
+    "nome": "perc_geom",
+    "come": "array DIVERSO"
+   },
+   {
+    "nome": "phi",
+    "come": "array DIVERSO"
+   },
+   {
+    "nome": "phi0",
+    "come": "array DIVERSO"
+   },
+   {
+    "nome": "phi_s",
+    "come": "array DIVERSO"
+   },
+   {
+    "nome": "phivel",
+    "come": "array DIVERSO"
+   },
+   {
+    "nome": "pos",
+    "come": "array DIVERSO"
+   },
+   {
+    "nome": "psi",
+    "come": "array DIVERSO"
+   },
+   {
+    "nome": "psi_spin",
+    "come": "array DIVERSO"
+   },
+   {
+    "nome": "rho_spin",
+    "come": "array DIVERSO"
+   },
+   {
+    "nome": "tw",
+    "come": "array DIVERSO"
+   },
+   {
+    "nome": "twp",
+    "come": "array DIVERSO"
+   },
+   {
+    "nome": "ultima_prob_coppia",
+    "come": "scalare float",
+    "a": "0.2799254413201987",
+    "b": "0.2799233466530062",
+    "ulp": 37734169550
+   },
+   {
+    "nome": "vd",
+    "come": "array DIVERSO"
+   }
+  ],
+  "righe_diverse": {
+   "righe_prima": 12635,
+   "righe_dopo": 12635,
+   "aggiunte": 0,
+   "righe_diverse": [
+    1708
+   ]
+  }
+ },
+ "passa": true
+}
