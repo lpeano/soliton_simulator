@@ -1232,3 +1232,40 @@ Guardavo solo le letture ### **DENTRO** lo statement di scrittura. Ma `n0 = self
 **PROSSIMO: il codice del commit 3, con questo contratto davanti.**
 
 ---
+
+# 📌 **LE DUE NOTE DEL GUARDIANO, REGISTRATE PRIMA DI SCRIVERE IL COMMIT 3** *(2026-10-02)*
+
+> ### **Nessuna delle due si cura dentro il commit 3, e nessuna delle due resta in chat.**
+
+## ⛔ **NOTA 1 — LA MIA FRASE SULL'ANCORA E' SBAGLIATA, e il guardiano ha ragione**
+
+Ho scritto in `6ab31f7` che l'ancora d'iniezione ora vale *<<**qualunque sia il membro destro**>>*.
+### **E NON E' VERO.** L'ancora e'
+
+```
+ANCORA = "self._g_peqn_mediana = _peqn_med_pre"
+```
+
+### ➜ **e il membro destro E' DENTRO.** Se la locale cambia nome, ### **l'ancora si rompe di nuovo** — cioe' ho curato *questo* caso, non ### **la FORMA** del caso.
+
+### ✅ **Che cosa NON e':** non e' grave. Il presidio ### **la ferma** invece di scrivere una copia non guasta, ed e' esattamente cio' che e' successo la prima volta. ### **Ma la frase prometteva una generalita' che il codice non ha**, e una frase cosi' e' ### **peggio** di nessuna frase, perche' la prossima volta mi fiderei.
+
+### 📌 **IN CODA, COMMIT A SE' DOPO IL COMMIT 3** *(decisione di Luca)*, e ### **scelgo la seconda via**: rendere l'ancora ### **il solo BERSAGLIO** — prefisso `self._g_peqn_mediana = ` e sostituzione ### **fino a fine riga.** ### ➜ **Toglie il difetto invece di descriverlo** *(e `9-ter`: a parita' d'effetto si preferisce togliere un'eccezione)*.
+
+## 📌 **NOTA 2 — UNA DOMANDA APERTA DI FISICA, e NON un difetto** *(`DIVISIONE-AUTOCONSISTENTE`)*
+
+| | si calcola | legge |
+|---|---|---|
+| `fm` — la **fase del figlio** | `:7339-7341`, ### **PRIMA del calcio** | i genitori ### **come ERANO** |
+| `twp` — la **torsione degli archi figli** | `:7470`, ### **DOPO il calcio** | `phi[a]`, `phi[b]` ### **GIA' CALCIATI** |
+
+### ➜ **Cioe': il figlio nasce alla fase media dei genitori COME ERANO, e i suoi archi misurano la differenza di fase dai genitori COME SONO DIVENTATI.** ### **Due numeri dello stesso evento, presi a due ISTANTI diversi dello stesso passo.**
+
+### ✅ **E IL COMMIT 3 LO PRESERVA, ed e' la cosa giusta:** e' ### **il vincolo 1 del contratto dell'ordine** *(`phi` prima di `twp`)*, misurato — e il commit 3 e' una ### **RIORGANIZZAZIONE**: se cambiasse questo ### **non sarebbe byte-identico, e non sarebbe un riordino.**
+
+### 📌 **IL CRITERIO DI CHIUSURA** *(una voce senza criterio e' un desiderio, par.4)*: si misura se `twp` calcolato sui genitori ### **PRE-calcio** cambia l'evoluzione ### **oltre la barra d'errore.**
+### ① **se NON la cambia** ⇒ i due istanti sono equivalenti, e la voce si chiude come ### **non-difetto**.
+### ② **se la cambia** ⇒ allora la scelta dell'istante ### **E' FISICA**, e va ### **derivata** — non ereditata dall'ordine in cui le righe sono state scritte.
+### ⚠ **NON MISURATO.**
+
+---
