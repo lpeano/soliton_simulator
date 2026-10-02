@@ -141,8 +141,18 @@ def copia_con(sorgente, dest, vecchio, nuovo, etichetta):
                          "copia. **" % (etichetta, n))
     io.open(dest, "wb").write(t.replace(vecchio, nuovo).encode("utf-8"))
     a, b = t.split(NL), io.open(dest, encoding="utf-8", newline="").read().split(NL)
-    diverse = [k + 1 for k, (x, y) in enumerate(zip(a, b)) if x != y]
-    return diverse
+    # ### SE L'INIEZIONE AGGIUNGE UNA RIGA, il confronto riga-per-riga SLITTA TUTTO:
+    #   il caso 3 inserisce una riga, e la prima stesura stampava 4800 numeri di riga
+    #   -- un referto di 29 KB che NESSUNO legge. ### Era un difetto del REFERTO, non
+    #   del test, e un referto illeggibile e' un referto che non serve.
+    #   ### Quando le lunghezze DIFFERISCONO si riporta cio' che conta: quante righe
+    #   prima, quante dopo, e DOVE comincia la differenza.
+    if len(a) != len(b):
+        k = next((i + 1 for i, (x, y) in enumerate(zip(a, b)) if x != y), len(a) + 1)
+        return {"righe_prima": len(a), "righe_dopo": len(b),
+                "aggiunte": len(b) - len(a), "prima_riga_diversa": k}
+    return {"righe_prima": len(a), "righe_dopo": len(b), "aggiunte": 0,
+            "righe_diverse": [k + 1 for k, (x, y) in enumerate(zip(a, b)) if x != y]}
 
 
 def importa_isolato(percorso, nome):
@@ -216,7 +226,7 @@ def principale():
     try:
         diverse1 = copia_con(SIM, d1, ANC1, '@_nascita_regola("divisione", "peq_TOLTA", '
                              '"eredita dall\'arco che si spezza",', "caso 1")
-        stampa("  copia: una grandezza RINOMINATA nella tabella, righe diverse %s" % diverse1)
+        stampa("  copia: una grandezza RINOMINATA nella tabella: %s" % diverse1)
         err1, _m = importa_isolato(d1, "_sim_caso1")
         atteso = "regola di nascita non dichiarata per `peq` all'evento `divisione`"
         ok1 = err1 is not None and atteso in str(err1)
@@ -227,7 +237,7 @@ def principale():
         stampa("  ### E SI FERMA ALL'IMPORT, non al primo run: il processo non parte nemmeno.")
     except SystemExit as e:
         stampa("  ### CASO 1 NON ESEGUIBILE: %s" % e)
-        ok1, diverse1, err1 = False, [], None
+        ok1, diverse1, err1 = False, {}, None
     stampa("  ### CASO 1: %s" % ("PASSA" if ok1 else "FALLISCE"))
     ref["caso_1"] = {"passa": bool(ok1), "righe_diverse": diverse1,
                      "eccezione": (str(err1) if err1 else None)}
@@ -255,7 +265,7 @@ def principale():
         trovata = [s for s in sparse3 if s["grandezza"] == "phi"]
         stampa("")
         stampa("  CONTROLLO POSITIVO: iniettata `self.phi = np.concatenate([self.phi, fm])`")
-        stampa("      subito DOPO la chiamata al punto unico (righe diverse %s)" % diverse3)
+        stampa("      subito DOPO la chiamata al punto unico: %s" % diverse3)
         stampa("      ### il presidio la trova? %s" % ("SI" if trovata else "### NO"))
         for s in trovata:
             stampa("      ### NOMINATA: %s dentro `%s` :%d   %s"
@@ -263,7 +273,7 @@ def principale():
         ok3 = (len(sparse) == 0) and (len(trovata) == 1)
     except SystemExit as e:
         stampa("  ### CONTROLLO POSITIVO NON ESEGUIBILE: %s" % e)
-        ok3, diverse3, trovata = False, [], []
+        ok3, diverse3, trovata = False, {}, []
     stampa("")
     stampa("  ### E IL PRESIDIO NON E' CABLATO IN UN HOOK: e' uno SCRIPT (`A9`).")
     stampa("      Finche' non gira nel `pre-commit`, NON IMPEDISCE NIENTE -- lo dico.")
@@ -279,7 +289,7 @@ def principale():
     stampa("=" * 104)
     stampa("CASO 2 -- SI CAMBIA LA REGOLA DI `psi` (da MEDIA a EREDITA): il sigillo deve VEDERLA")
     stampa("=" * 104)
-    ok2, diff2, diverse2 = None, [], []
+    ok2, diff2, diverse2 = None, [], {}
     if salta2:
         stampa("  ### NON ESEGUITO (`--salta-2`), e lo dichiaro: due run da %d passi." % passi)
     else:
@@ -290,7 +300,7 @@ def principale():
                      '   # REGOLA CAMBIATA: eredita invece di media')
         try:
             diverse2 = copia_con(SIM, d2, ANC2, MEDIA_VIA, "caso 2")
-            stampa("  copia: `psi` EREDITA da `a` invece di MEDIARE. Righe diverse %s" % diverse2)
+            stampa("  copia: `psi` EREDITA da `a` invece di MEDIARE. %s" % diverse2)
             stampa("      ### ed e' il cambio di UNA regola, non di un numero: e' il tipo di")
             stampa("      ### difetto che un riordino puo' introdurre senza accorgersene.")
             SA, nA = carica("tre_casi_sano", seme)

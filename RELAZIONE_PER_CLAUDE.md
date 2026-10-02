@@ -1398,3 +1398,29 @@ Si ### **INIETTA** `self.phi = np.concatenate([self.phi, fm])` subito dopo la ch
 ### 📌 **E CHE `D` PASSI ANCORA DICE UNA COSA IN PIU':** la differenza col blob ### **di PRIMA del passo 2** e' ### **ancora UNA SOLA** — cioe' il commit 3 ### **non ne ha aggiunta nessuna.** E' lo stesso fatto di `E`, visto da un'altra distanza.
 
 ---
+
+# ✅ **I TRE CASI PASSANO. Ma il referto era GONFIO, e la correzione e' un commit a se'** *(2026-10-02)*
+
+> ### **Luca: i tre casi che devono fallire passano tutti e tre. Il giro che li ha misurati ha pero' scritto un referto di 29 KB che nessuno leggerebbe, quindi quei numeri NON hanno ancora un json committato — e lo dico invece di citarli come se l'avessero.**
+
+## ✅ **CHE COSA HANNO DETTO**
+
+| caso | esito |
+|---|---|
+| ### **①** si **TOGLIE** una grandezza | ### **PASSA**: `RuntimeError` — *<<regola di nascita non dichiarata per `peq` all'evento `divisione`>>* — e si ferma ### **ALL'IMPORT**: il processo ### **non parte nemmeno** |
+| ### **②** si **CAMBIA** la regola di `psi` | ### **PASSA**: il sigillo vede ### **47 differenze**, `psi` e' fra loro, e nel run ci sono stati ### **8 eventi di mitosi** |
+| ### **③** una scrittura **SPARSA** a valle | ### **PASSA**: ### **ZERO** nel simulatore vero, e il ### **controllo positivo la NOMINA** — *<<`phi` dentro `mitosi` `:8242`>>* |
+
+### 📌 **E il caso ③ e' quello che conta, perche' il suo presidio NON ESISTEVA prima di oggi**: il punto unico era *<<unico>>* ### **per costruzione mia**, non per presidio.
+
+## ⛔ **IL DIFETTO DEL REFERTO, e non del test**
+
+`copia_con` confrontava le due copie ### **riga per riga.** Ma l'iniezione del caso ③ ### **AGGIUNGE una riga**, quindi dalla `:8242` in poi ### **tutto slitta** ⇒ ### **~4800 numeri di riga, 29 KB.**
+
+### ➜ **Un referto che nessuno legge e' un referto che non serve**, e committarlo cosi' avrebbe messo 29 KB di rumore in un `json` che esiste ### **per essere letto.**
+
+### ✅ **LA CURA:** quando le lunghezze ### **differiscono** si riporta cio' che conta — `righe_prima`, `righe_dopo`, `aggiunte`, `prima_riga_diversa`. Quando sono ### **uguali** resta l'elenco, che li' ### **E' l'informazione giusta**: e' il controllo di ### **CHIRURGIA.**
+
+### 📌 **E la correzione e' un COMMIT A SE'** *(par.5)*: non si infila nel commit che porta il difetto. Il giro si rifa' ### **dopo**, col sigillo committato — che e' anche ### **l'unico modo di girarlo**, perche' il nome comincia con `_sigillo_` e `_presidio.avvia` ### **si rifiuta di girare uno sporco.**
+
+---
