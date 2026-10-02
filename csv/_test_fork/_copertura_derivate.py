@@ -83,7 +83,16 @@ SCENE = (("corta", 11, 72), ("lunga", 11, 150), ("altro_seme", 12, 72))
 #   ### E' un elenco DICHIARATO: se un domani un presidio nuovo legge le derivate e non
 #   e' qui, le sue letture finiscono fra quelle di fisica -- cioe' l'errore cade dalla
 #   parte PRUDENTE (una lettura in piu' da spiegare, non una in meno).
-LETTORI_DI_PRESIDIO = ("_ferma_se_registro_incoerente", "rapporto_guardie", "_forma_di",
+#   ### E `verifica_invarianti` L'HA AGGIUNTO IL GIRO VERO, non io: ha prodotto
+#   ### TUTTE le 808 <<letture sporche>> del primo giro, e TUTTE dalla STESSA riga
+#   (`:6112`), che e' `v = getattr(self, quale, None)` dentro il ciclo su `DOMINI`.
+#   ### E' IL CONTROLLO DEGLI INVARIANTI che scorre le grandezze dichiarate -- cioe'
+#   l'ULTIMA voce del passo, e ### col veleno e' PROPRIO la voce che lo prende.
+#   ### 808 letture da UNA riga di presidio non sono 808 difetti: sono UN lettore
+#   che non avevo dichiarato -- e il referto lo diceva a chi lo leggeva, perche'
+#   stampava la funzione e la riga di ciascuna.
+LETTORI_DI_PRESIDIO = ("_ferma_se_registro_incoerente", "verifica_invarianti",
+                       "rapporto_guardie", "_forma_di",
                        "_registro_coerente", "_censimento", "grandezze", "foto",
                        "_diagnostica", "stato_registro")
 FUORI_DAL_PASSO = ("_applica_flag", "_cli", "esegui_headless", "main", "_salva_scena",
@@ -281,22 +290,37 @@ class Diario:
 
     def __init__(self, nomi):
         self.nomi = list(nomi)
-        self.finestra = False
+        self.sporche_ora = set()   # le derivate SPORCHE in questo istante
         self.coperte = {k: set() for k in nomi}        # (funzione, riga) che LEGGONO
         self.coperte_finestra = {k: set() for k in nomi}
         self.coperte_presidio = {k: set() for k in nomi}   # il CONTROLLO che guarda
         self.scritte = {k: set() for k in nomi}
         self.sporche = []                              # letture PRIMA della scrittura
-        self.gia_scritta = set()                       # nella finestra corrente
         self.passi_con_nascita = 0
 
     def apri_finestra(self):
-        self.finestra = True
-        self.gia_scritta = set()
-        self.passi_con_nascita += 1
+        """Una nascita: TUTTE le derivate diventano SPORCHE, e restano tali FINO ALLA
+        RISCRITTURA -- anche attraverso il confine del passo.
 
-    def chiudi_finestra(self):
-        self.finestra = False
+        ### IL GIRO VERO HA TROVATO QUI UN DIFETTO STRUTTURALE DELLA MISURA, e quel
+        difetto GARANTIVA UNO ZERO. La prima stesura chiudeva la finestra ### all'inizio
+        di ogni passo. Ma `PASSO_COMPOSIZIONE` e'
+
+            `apri, scuoti_vuoto, ### step, ### mitosi, rilassa_disegno, ...`
+
+        cioe' ### **`step` viene PRIMA di `mitosi`.** Una derivata avvelenata alla
+        nascita viene riletta da `step` ### **AL PASSO DOPO** -- e una finestra che si
+        chiude all'inizio del passo si chiude ### **esattamente prima di quella
+        lettura.** ### Il primo giro ha dato <<0 PROVATE su 31>>, e quello zero era
+        ### GARANTITO DALLA COSTRUZIONE, non misurato.
+
+        ### LA CURA: la finestra e' PER GRANDEZZA e dura fino alla sua SCRITTURA -- che
+        e' letteralmente cio' che la domanda chiede, *<<letta fra la nascita e la
+        riscrittura>>*. Se una derivata non viene mai riscritta resta sporca, ed ### e'
+        giusto: leggerla e' leggere un valore che la nascita ha invalidato.
+        """
+        self.sporche_ora = set(self.nomi)
+        self.passi_con_nascita += 1
 
     def leggi(self, nome, funzione, riga):
         # ### IL PRESIDIO NON E' UNA LEGGE, e tenerli separati e' il punto: il controllo
@@ -308,15 +332,16 @@ class Diario:
             self.coperte_presidio[nome].add((funzione, riga))
             return
         self.coperte[nome].add((funzione, riga))
-        if self.finestra:
+        if nome in self.sporche_ora:
             self.coperte_finestra[nome].add((funzione, riga))
-            if nome not in self.gia_scritta:
-                self.sporche.append({"grandezza": nome, "funzione": funzione, "riga": riga})
+            self.sporche.append({"grandezza": nome, "funzione": funzione, "riga": riga})
 
     def scrivi(self, nome, funzione, riga):
         self.scritte[nome].add((funzione, riga))
-        if self.finestra:
-            self.gia_scritta.add(nome)
+        # ### LA RISCRITTURA PULISCE, ed e' la SOLA cosa che pulisce: non il confine del
+        #   passo, non un'altra grandezza. E' la semantica del par.(d): <<tornano pulite
+        #   quando LA LORO LEGGE le riscrive>>.
+        self.sporche_ora.discard(nome)
 
 
 def carica(nome, seme, sim):
@@ -366,7 +391,9 @@ def una_scena(etichetta, seme, passi, nomi, stampa):
     try:
         with contextlib.redirect_stdout(io.StringIO()):
             for _ in range(passi):
-                diario.chiudi_finestra()
+                # ### NESSUNA CHIUSURA QUI: la finestra e' PER GRANDEZZA e la chiude la
+                #   SUA riscrittura, anche in un passo successivo. Chiuderla qui era il
+                #   difetto che garantiva lo zero.
                 _passo.passo_pieno(S, net)
         ev = (int(getattr(net, "_g_nati_mitosi_ev", 0)),
               int(getattr(net, "_g_nati_schwinger_ev", 0)),
