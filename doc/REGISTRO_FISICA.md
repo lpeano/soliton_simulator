@@ -5225,6 +5225,167 @@ carica cambia di `±1`** — e il commento del codice dice l'opposto *(«la copp
 
 ---
 
+## ✅ **E IL 2026-10-02 `:M7` E' ARRIVATA: le decisioni 2 e 4 HANNO il loro numero**
+
+**La riga «aspetta `:M7`» non aspetta piu'**, e la risposta e' ### **girata dalla parte sbagliata**
+rispetto a come l'avevo posta. Sta in **`TERMOSTATO-E-FRENO`** e nel par. **(C-ter)** di
+`doc/PIANO_divisione_e_calore.md`:
+
+| | |
+|---|---|
+| ### **il ruolo DOMINANTE del termostato non e' rifornire: e' FRENARE** | rifornisce **`+3.678e+03`** in 55 passi e ### **toglie `−1.1691e+05`** in 94 ⇒ netto ### **`−1.1323e+05`** su 150 passi *(149 misurati)*. ### **Il prelievo e' `31.8` volte il rifornimento** |
+| **il vuoto copre il termostato** | ### **SI', con un margine di `48.2`** *(`+1.775e+05` dallo scuotimento contro `+3.678e+03`)*, e lo copre **da solo** in **149 passi su 149** |
+| ### **e il PICCO separa due regimi** | fino al passo 88: `W = −1.4102e+04`, rifornisce **55** e frena 32. ### **Dopo il passo 88: `W = −9.9126e+04`, rifornisce ZERO volte e frena in TUTTI e 62 i passi** |
+
+### ⛔ **QUINDI IL RISCHIO CHE AVEVO SCRITTO NEL PIANO ERA ROVESCIATO, e lo annoto invece di riscriverlo**
+Avevo scritto, come **il rischio vero** della temperatura per nodo: *«senza un «fuori» il sistema
+puo' SOLO PERDERE»*. ### **Misurato: il pericolo e' l'opposto — senza il termostato il sistema puo'
+solo CRESCERE**, con un vuoto che immette `+1.775e+05` e **nessuno che lo contrasti.**
+### ➜ **E la (c) di Luca resta giusta** *(l'energia globale non si conserva)*: ### **ma non si
+conserva VERSO L'ALTO.**
+
+### 📌 **Precisazione di un numero del 2026-10-01**, e la faccio perche' esce dallo stesso `json`:
+avevo scritto *«`xi` cambia segno UNA volta, al passo 56»*. ### **Il passo 56 e' l'ULTIMO con
+`xi < 0`** *(`−7.480e-03`)* **e il 57 e' il PRIMO con `xi > 0`** *(`+2.871e-02`)*: il cambio sta
+**fra i due**. *(Una volta sola: e' confermato.)*
+
+---
+
+# ⭐⭐ **REVISIONE DELLA VISIONE: LA MATERIA E' UNO STATO COLLETTIVO, LA CARICA E' UN VERSO DI ROTAZIONE** *(decisione di Luca, 2026-10-01 sera)*
+
+> ### ⚠ **QUESTA DECISIONE RIVEDE TRE RIGHE DELLA VISIONE REGISTRATA QUI SOPRA.**
+> **Le righe vecchie RESTANO leggibili** *(par.8: un ragionamento non si riscrive, si ANNOTA)*, e
+> qui sotto ciascuna porta accanto ### **che cosa la sostituisce.**
+
+## ⭐ **① LA MATERIA E' L'INTERFERENZA COSTRUTTIVA DI TANTI SOLITONI**
+
+> ### **I NODI sono i solitoni. LA MATERIA e' uno STATO COLLETTIVO — una «massa» — NON un nodo.**
+
+### ✅ **E il codice lo dice gia', in due punti** *(cercati per nome di funzione, non per riga)*:
+
+| dove | la frase |
+|---|---|
+| `mitosi` | *«il **baricentro dell'interferenza (=la materia)** trasla in quella [direzione]»* |
+| `classifica_topologia` | *«**baricentro dell'interferenza (dove sta davvero la massa)**, non il centro nominale»* |
+
+### ➜ **Quindi la revisione non introduce un concetto nuovo: dichiara come LEGGE cio' che il codice
+usava gia' come descrizione.** E per `9-ter` questo conta: ### **nessuna legge in piu'.**
+
+## ⭐ **② LA CARICA E' IL VERSO DI ROTAZIONE COLLETTIVO DELLA FASE**
+
+> ### **densita' di carica `∝ |ψ|² · ω` con `ω = phivel`; la carica di una MASSA e' la somma sui
+> ### solitoni che la compongono.**
+
+| | |
+|---|---|
+| ### **perche' NON dipende da una convenzione** | spostare **tutte** le fasi di una costante ### **non cambia il verso di rotazione**: `phivel` e' una **derivata**, e una traslazione rigida di `φ` la lascia identica |
+| ### **che cos'e', in una riga** | e' la ### **carica di Noether della simmetria di fase globale** `φ → φ + c`. ### ➜ **Si conserva PER SIMMETRIA — non per una regola di nascita — SE il nucleo e' conservativo** |
+| ### ⛔ **e oggi DUE leggi la violano** | ### **scrivono `phivel`**: il **termostato** *(dentro `step`: `self.phivel = _phivel_t + delta_phivel`)* e lo **scuotimento** *(`scuoti_vuoto`: `net.phivel[:net.n] += calcio`, l'**unica** scrittura di stato di quella voce — verificato dal sorgente)*. ### **E' un motivo IN PIU' per il nucleo reversibile**, non un difetto a se' |
+| ### ✅ **e `phivel` E' la velocita' di fase**, non una mia lettura | il registro lo dichiara: `'phivel': ('finito', 'velocita di fase: entrambi i segni')` |
+
+### 📌 **E `ω = phivel` chiude un cerchio col PRINCIPIO GUIDA** *(par.10 di `CLAUDE.md`)*:
+*«lo spinore E' il tempo proprio della massa»*. ### **Un verso di rotazione della fase e' un
+orologio con un senso di marcia** — ed e' la forma in cui *«materia contro antimateria»* diventa
+**una proprieta' dello STATO COLLETTIVO** invece di un'etichetta per nodo.
+
+## ⛔ **③ `perc_chi` NON E' QUESTA CARICA, e lo DICHIARO**
+
+| | |
+|---|---|
+| `perc_chi` | il **segno del foglio della doppia copertura** dello spinore *(`CARICA-DI-GAUGE`)* |
+| ### **e il suo segno e' una CONVENZIONE al 100 %** | misurato su **tre** run: cambiando il rappresentante canonico si ribaltano ### **12812/12812, 12782/12782, 14000/14000** cariche — **frazione `1.000000`** |
+| ### ➜ **la carica della revisione e' un'ALTRA grandezza** | viene da `|ψ|²·phivel`, ### **non dal foglio dello spinore.** Chiamarle entrambe *«carica»* sarebbe ### **la collisione di nomi che l'indice esiste per curare** *(`A3` era tre cose)* |
+
+### ⚠ **E questo NON dice che `CARICA-DI-GAUGE` sia risolta:** dice che ### **quel difetto riguarda
+`perc_chi`, non la carica della visione.** La voce resta **aperta**, e la sua misura resta valida.
+
+## ⭐ **④ LA CHIRALITA' SPINORIALE COLLETTIVA E' UNA GRANDEZZA DISTINTA**
+
+> ### **Somiglia a un'ELICITA'. NON va identificata con la carica senza un argomento.**
+
+### ➜ **E' la terza colonna della tabella di `GEOM-SENZA-VERSO`, letta sullo stato COLLETTIVO
+invece che sul nodo:** li' le tre grandezze con tre mestieri sono `perc_geom` *(«avvolto si'/no»)*,
+il **verso di rotazione**, e `perc_chi` *(il foglio)*. ### **La revisione aggiunge che il «verso di
+rotazione» e la «chiralita' spinoriale» sono DUE cose anche loro**, e che la **carica** e' il primo.
+
+## 🔁 **LE TRE RIGHE RIVISTE, una per una**
+
+| la riga vecchia | ### **cio' che la sostituisce** |
+|---|---|
+| **(a)** *«la nascita di un nodo ha TRE ESITI: spazio · materia · materia e antimateria»* | ### **UN SOLO TIPO DI NASCITA DI NODO, in TRE REGIMI**: ① **vuoto → spazio** · ② **interferenza costruttiva → RAFFORZA una massa** · ③ **regime di coppie**. ### **Non sono tre eventi diversi: e' un evento in tre regimi**, e `peq` resta il riferimento che li separa |
+| ### **criterio 8** *«la materia carica nasce a coppie: DUE NODI NUOVI, uno `+1` e uno `−1`»* | ### **una coppia di PATTERN (masse) con VERSO DI ROTAZIONE OPPOSTO**, che nascono e si annichilano **insieme** e **in modo reversibile**. ### ⛔ **NON «due nodi nuovi»:** la nascita di nodi e' ### **SOLO SPAZIO**, e resta ### **l'UNICA FRECCIA del tempo** |
+| ### **decisione 1** *«`tw` e' qualcosa di simile a una CARICA»* | ### **`tw` e' una TENSIONE che PAGA LO SPAZIO, NON una carica.** La carica e' il verso di rotazione. ### ➜ **E ne segue una verifica, non una legge: che le DIVISIONI non cambino la carica delle masse** |
+
+### 📌 **Che cosa cambia in pratica, e vale la pena dirlo in una riga**
+La revisione **sposta la conservazione** da *«un conteggio di nodi `±1`»* a ### **«una somma su uno
+stato collettivo»** — e con lei ### **sposta anche il posto in cui si verifica:** non piu' il
+`d_somma` di un evento di nascita *(`:G4`)*, ma ### **la carica di ogni MASSA nel tempo**
+*(`CARICA-ROTAZIONE`)*.
+
+## 🗣 **NOTA DI LINGUAGGIO, per chi legge il repo da fuori** *(e va dichiarata, non assorbita)*
+
+| la parola | che cosa significa **in fisica** | che cosa significa **in questo repo** |
+|---|---|---|
+| ### **«solitone»** | lo **stato collettivo LOCALIZZATO** | ### **la MASSA** *(l'interferenza costruttiva di tanti nodi)* |
+| ### **i «nodi» di questo modello** | — | ### **somigliano a QUANTI DI SPAZIO**, non a solitoni |
+
+### ➜ **Il repo MANTIENE i suoi nomi** *(par.9: un reperto non si riscrive, e «nodo» vive in
+centinaia di referti e di `json`)*, ### **ma la corrispondenza va DICHIARATA**, senno' chi legge da
+fuori legge *«solitone»* e pensa alla massa mentre il codice intende il nodo.
+
+## 📐 **LA MISURA IN CODA: `CARICA-ROTAZIONE`** *(NON oggi)*
+
+| | |
+|---|---|
+| **che cosa misura** | per **ogni massa**, la somma di ### **`|ψ|² · phivel`** nel tempo |
+| **le tre domande** | ① **esistono masse di segno opposto?** · ② **quanto varia per PASSO?** · ③ **quanto varia per VOCE** *(scuotimento, termostato, `step`, `mitosi`)* |
+| ### **come si misura il «per voce»** | con la **spia sui confini di voce** — il controllo del **commit 1**, che gira dopo **ogni** voce. ### **E' la stessa imbragatura di `:M1`, `:M4`, `:M6`** |
+| ### **da cosa dipende** | ### **da `MASSA-ID`**: *«per ogni massa»* richiede di sapere **quali nodi** sono una massa, e `MASSA-ID` e' **BLOCCATA** *(due blocchi, verificati dal disco il 2026-09-27)*. ### **Lo dico invece di scoprirlo girando** |
+
+## 🛑 **E LE VOCI SULLA CARICA E SULLE COPPIE NON SI IMPLEMENTANO**
+
+> ### **Finche' Luca non ha CHIUSO questa revisione, `CARICA-DI-GAUGE`, `SCHWINGER-UN-NODO` e il
+> ### criterio 8 NON si curano.**
+
+### ➜ **La ragione e' precisa:** la revisione ### **cambia che cosa sia la carica**, quindi
+cambierebbe ### **l'obiettivo** delle loro cure. Curarle adesso vorrebbe dire ### **far nascere le
+coppie neutre in una grandezza che fra una settimana non e' piu' quella che si conserva.**
+### ⚠ **E nel frattempo le loro MISURE restano valide:** `:G1` e `:G4` misurano `perc_chi`, e
+`perc_chi` **continua a essere quello che e'.**
+
+---
+
+# 🔄 **LA DIREZIONE DI LUCA SULLA REVERSIBILITA': `REVERSIBILITA-LOCALE`** *(2026-10-02, **IN VALUTAZIONE**)*
+
+> ### ⚠ **E' REGISTRATA COME «IN VALUTAZIONE», NON COME DECISIONE.** Lo scrivo cosi' perche' Luca
+> l'ha data cosi': ### **una direzione da valutare, non una legge da applicare.** `stato = teoria`
+> nell'indice.
+
+> ### **REVERSIBILITA' LOCALE, IRREVERSIBILITA' GLOBALE.**
+> L'irreversibilita' globale ### **EMERGE dal caos delle leggi locali reversibili** *(Boltzmann)*.
+> ### **La SOLA freccia fondamentale ammessa e' la CRESCITA DELLO SPAZIO** — la nascita dei nodi.
+
+## 📐 **IL CRITERIO MISURABILE, e questo e' cio' che la rende valutabile e non un desiderio**
+
+> ### **«L'eco di Loschmidt FALLISCE SOLO nella voce della NASCITA.»**
+
+### ➜ **Che cosa lo deciderebbe:** `LOSCHMIDT-ECO`. ### **Se l'eco fallisse anche in `step`, in
+`chiudi` o nel termostato, la direzione NON sarebbe soddisfatta dal codice di oggi** — e allora si
+saprebbe **dove** e **di quanto**, invece di saperlo in generale.
+
+## ⚠ **TRE COSE CHE QUESTA DIREZIONE CHIEDE, e che oggi non ci sono**
+
+| | |
+|---|---|
+| **1** | ### **il termostato NON e' reversibile**: il richiamo `−ξ` e il `clip(±2)` sono un attrito, e `:M7` misura che ### **frena in 94 passi su 149** |
+| **2** | ### **le ESTRAZIONI CASUALI non sono reversibili** come sono scritte: scuotimento, nascite, Schwinger pescano da `net.rng`, e ### **tornare indietro vorrebbe dire ri-pescare gli stessi numeri in ordine inverso** |
+| ### **3** | ### **`phi[ii] = (...)` con `ii` RIPETUTO fa vincere l'ultimo**, e ### **una scelta implicita fatta dall'ordine di un array non ha un'inversa** *(`MEM-HEBB-VERSO`, criterio 7 del piano del calore)* |
+
+### ➜ **Nessuna delle tre e' un argomento CONTRO la direzione:** sono ### **l'elenco di cio' che la
+direzione implicherebbe di cambiare**, e serve averlo scritto **prima** di chiamarla una decisione.
+
+---
+
 # ⭐ **STELLA POLARE: LE LEGGI SONO SIMMETRICHE, GLI STATI SCELGONO** *(Luca, 2026-09-29)*
 
 > ### ✅ **E IL 2026-10-01 LA STELLA POLARE HA LA SUA PRIMA APPLICAZIONE: `FRAZIONE-DIVISIONE`.**

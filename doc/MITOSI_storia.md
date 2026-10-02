@@ -360,4 +360,4 @@ if len(self._rep) != len(rep):
 | `POTATURA-GUARDIE` · `P-EQ-MEDIANA-ARCHI` · `GEOM-SENZA-VERSO` · `perc_geom` del nato | **in coda**, nell'ordine del par.4 |
 | generalizzazione **4** *(derivate sporche)* e **3-bis** *(registro dichiarato)* | ### **DENTRO il piano** del riordino |
 | generalizzazione **5** *(matrice di configurazioni)* | **in coda con `T5`** |
-| ### ⚠ **`RELAZIONE_PER_CLAUDE.md` tiene piu' giorni** | **violazione in corso** del par.4, dichiarata: l'ultimo giorno chiuso in `doc/relazioni/` e' il **2026-09-25**. ### **E' la voce piu' vecchia della coda** |
+| ### ✅ **`RELAZIONE_PER_CLAUDE.md` tiene piu' giorni — CHIUSA il 2026-10-02** | ~~**violazione in corso** del par.4, dichiarata: l'ultimo giorno chiuso in `doc/relazioni/` e' il **2026-09-25**. **E' la voce piu' vecchia della coda**~~ ### ✅ **ARCHIVIATA il 2026-10-02** *(`871101d`)*: cinque giorni staccati *(`2026-09-26` 2214 · `09-27` 2787 · `09-28` 1707 · `09-29` 1122 · `10-01` 1519 righe)*, file vivo da ### **9407 a 61 righe**, e la conservazione delle righe ### **9408 = 9408** piu' una verifica INDIPENDENTE sul multiset delle righe |

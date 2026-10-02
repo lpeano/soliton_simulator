@@ -424,6 +424,141 @@ giudicare una DINAMICA.**
 
 ---
 
+# **(C-ter) `:M7` E' ARRIVATA, E IL RISCHIO DI QUESTO PIANO ERA ROVESCIATO** *(2026-10-02)*
+
+> ### **Luca, la misura che il par. (C) dichiarava MANCANTE c'e'. E dice che la domanda era girata
+> ### dalla parte sbagliata: il termostato FRENA piu' di quanto rifornisca.**
+
+*(Voce `TERMOSTATO-E-FRENO`. Strumento `csv/_test_fork/_m7_potenza_termostato.py` *(`64ba17d0`)*,
+referto `csv/_test_fork/_m7_potenza_termostato/_m7_potenza_termostato.json`; scena grande, seme 11,
+**150 passi**, **149 misurati** — il passo 1 **squalificato** perche' `_ritmo_sicurezza` e'
+scattato. **I numeri qui sotto sono DERIVATI dal `json`, non ricopiati** (`L-NUMERI`).)*
+
+## 📊 **IL BILANCIO DEL SOLO TERMINE `−ξ·phivel`**
+
+| | |
+|---|---|
+| **rifornisce** *(`W > 0`)* | **55** passi, ### **`+3.678130e+03`** |
+| ### **frena** *(`W < 0`)* | ### **94** passi, ### **`−1.169060e+05`** |
+| ### **netto** | ### **`−1.132279e+05`** ⇒ ### **il prelievo e' `31.8` volte il rifornimento** |
+| `ξ` cambia segno | ### **UNA volta**: il passo **56** e' l'ultimo con `ξ < 0` *(`−7.480e-03`)*, il **57** il primo con `ξ > 0` *(`+2.871e-02`)* |
+| ### **e il PICCO separa due regimi** | fino al passo **88**: `W = −1.4102e+04`, rifornisce **55** / frena 32. ### **Dopo l'88: `W = −9.9126e+04`, rifornisce ZERO volte e frena in TUTTI e 62 i passi** |
+| il vuoto copre il termostato? | ### **SI', margine `48.2`** *(`+1.775e+05` dallo scuotimento contro `+3.678e+03`)*, e **da solo** in **149 passi su 149** |
+
+### ➜ **E QUESTO SPIEGA `FINESTRA-DEL-PICCO`:** la discesa di `K_fase` dal massimo al `77.7 %`
+### **E' IL TERMOSTATO CHE FRENA.** ### **Il picco non e' un caso: e' il passo in cui il termostato
+cambia mestiere.**
+
+## ⛔ **IL RISCHIO SCRITTO NEL PAR. (C) ERA ROVESCIATO — si ANNOTA, non si riscrive** *(par.8)*
+
+**Cio' che avevo scritto** *(e resta leggibile nel par. (C), «E QUI STA IL RISCHIO VERO»)*:
+*«se non c'e' un «fuori», il sistema puo' SOLO PERDERE»*.
+
+### ⛔ **MISURATO: il pericolo e' l'OPPOSTO.** Togliere il termostato ### **non lascerebbe un
+deficit di energia** *(il vuoto lo copre 48 volte)*: ### **lascerebbe il sistema SENZA FRENO**, con
+un vuoto che immette `+1.775e+05` e nessuno che lo contrasti.
+### ➜ **La (c) di Luca resta giusta** *(l'energia globale non si conserva)*, ### **ma non si
+conserva VERSO L'ALTO.**
+
+## 🎯 **LA CONSEGUENZA PER LA PROPOSTA DEL CALORE LOCALE, ed e' il pezzo che MANCA**
+
+> ### **La temperatura per nodo nasce «dove si dissipa» e CONDUCE. Quindi puo' sostituire il
+> ### termostato come SORGENTE — che `:M7` misura essere il ruolo PICCOLO.**
+> ### ⛔ **MA LA PROPOSTA NON DICE COME FRENA.**
+
+### ➜ **E' il pezzo che manca a questo piano, e non l'avevo visto perche' guardavo la finestra
+sbagliata** — su 72 passi il termostato **sembra solo una sorgente** *(`:M3`: «rifornisce in 56
+passi su 72», ### **vero e INCOMPLETO**)*.
+### 📌 **Quindi il par. (C) acquista un requisito, e non e' negoziabile:** ### **qualunque cosa
+sostituisca il Nose-Hoover deve dire DOVE VA l'energia che lui toglie** — non solo da dove viene
+quella che immette. **Senza, si sostituisce la meta' piccola del meccanismo e si butta la grande.**
+
+---
+
+# **(C-quater) LA PROPOSTA DI LUCA: `VUOTO-LOCALE-DETERMINISTICO`** *(2026-10-02)*
+
+> ### **Termostato LOCALE + scuotimento DETERMINISTICO del vuoto.**
+> Ogni nodo ha **uno o piu' gradi di liberta' del vuoto** *(il calore locale)*; lo scambio
+> ### **fase ⟷ vuoto e' DETERMINISTICO e REVERSIBILE**; il calore ### **si conduce lungo gli
+> archi**; ### **il globale e' la SOMMA delle locali.**
+
+### ➜ **Che cosa sostituirebbe:** il **Nose-Hoover globale** *(una statistica globale dentro una
+legge locale: `A2`)* **e** lo **scuotimento casuale**. ### **E' la forma CONCRETA della decisione 4**
+del par. (G) — quella che chiedeva *«il ruolo dello scuotimento: sostituito, sorgente, o
+affiancato»*.
+
+## ⭐ **LA FORMA, chiarita con Luca: UNA SOLA LEGGE PER NODO, e la gerarchia EMERGE**
+
+> ### ⛔ **NON tanti termostati gerarchici** *(uno per grumo, uno per regione, uno globale)*:
+> ### **UNA sola legge per nodo** — fase ⟷ gradi di liberta' del vuoto, trasporto lungo gli archi —
+> ### **e SENZA temperatura obiettivo.**
+
+### ✅ **La gerarchia non si scrive: VIENE FUORI.** E viene fuori **dalla geometria del grafo**:
+
+| | |
+|---|---|
+| **dentro un grumo di materia** *(nodi fitti)* | il calore ### **circola in fretta**, e il grumo raggiunge ### **una sua temperatura interna** |
+| **fra grumi** | il calore passa ### **lentamente**, attraverso il vuoto |
+| ### **il vuoto e' il serbatoio GRANDE** | perche' ### **contiene la maggior parte dei nodi** — ### **come lo spazio per una stella** |
+| ### **e l'espansione RAFFREDDA da sola** | i nodi nuovi ### **portano gradi di liberta' nuovi**, e lo stesso calore ### **si distribuisce su piu' nodi** |
+
+### ✅ **E «il vuoto contiene la maggior parte dei nodi» E' MISURATO, non assunto**
+`PESO-MAX` *(2026-09-27, quattro semi)*: i nodi che appartengono a una massa sono
+### **`1237` · `1217` · `1239` · `1212` su `12802`**, cioe' ### **circa il `9.7 %`.**
+### ⚠ **E il limite va detto: e' la scena `MASSE-COERENTI` a 3 masse**, non una proprieta' generale
+del modello. ### **Su un'altra scena il rapporto cambierebbe, e il «serbatoio grande» con lui.**
+
+### 📌 **Perche' questa forma conta per `9-ter`**
+*«Una cura non aumenta il numero delle leggi»*. ### **Tanti termostati gerarchici sarebbero TANTE
+leggi**; una legge per nodo da cui la gerarchia **emerge** e' ### **UNA.** E togliere la
+*«temperatura obiettivo»* ### **toglie anche `P-EQ-MEDIANA-ARCHI`** *(la fetta arbitraria
+`median(d0[:n])`)* ### **e il `clip(±2)` di `ξ`**, che `:M3` misura ### **non scattare mai** —
+cioe' **tre** cose in meno, non una in piu'.
+
+## ⚠ **LE QUATTRO CONDIZIONI, scritte PRIMA di qualunque legge**
+
+| | la condizione |
+|---|---|
+| ### **1 — serve prima un'ENERGIA DEFINITA** | ### **oggi non esiste** *(`:M0`: nessuna funzione calcola un'energia totale, e per il settore metrico ### **non esiste un potenziale** perche' `diag(cs²)·M` non e' simmetrica)*. ### ➜ **«Scambio fase ⟷ vuoto» e' una frase su una grandezza che non c'e'.** La forma proposta e' quella di `:M0` *(`K_fase` · `K_metr` · `V_metr` · `V_fase`, piu' il conto esplicito dei flussi non conservativi)*, ed e' ### **`ENERGIA-NON-DEFINITA`** |
+| ### **2 — la simmetria si rompe dallo STATO INIZIALE, non dalle LEGGI** | un seme con ### **piccole asimmetrie**, amplificate dal **caos**. ### ✅ **E' la STELLA POLARE applicata** *(«le leggi sono simmetriche, gli stati scelgono»)*, ### **ed e' coerente con `SCUOT-INNESCO`**: col vuoto spento `_nb` somma ### **esattamente `n`** — ogni Bloch e' **lo stesso versore**, e ### **la simmetria non si rompe MAI.** ### ➜ **Quindi lo scuotimento deterministico deve ereditare il MESTIERE dell'innesco, non solo la potenza** |
+| ### **3 — un solo grado di liberta' per nodo potrebbe NON essere ERGODICO** | e' il difetto noto del Nose-Hoover a una variabile. ### **Le due vie della letteratura:** le **catene di Nose-Hoover** *(un termostato che termostata il termostato)* e i **bagni di oscillatori alla Caldeira-Leggett**. ### ⚠ **E qui NON propongo: si MISURA** — perche' «non ergodico» ### **non e' un'opinione, e' una proprieta' della distribuzione campionata** |
+| ### **4 — lo SPAZIO NUOVO porta il suo VUOTO** | e' la **visione (c)**: uno spaziotempo che si espande ### **non conserva l'energia globale.** ### ➜ **Operativamente: la regola di nascita di `T_nodo` non e' solo «media dei genitori»** — ### **un nodo nuovo porta gradi di liberta' NUOVI**, e il totale globale **cresce per costruzione.** ### **Va DICHIARATO, non nascosto in una normalizzazione** |
+
+## 🔁 **E ALLA LUCE DI `:M7`, IL QUADRO CAMBIA — e questo va detto prima di scrivere la legge**
+
+| | |
+|---|---|
+| ### **in uno scambio REVERSIBILE ne' il vuoto ne' il termostato sono piu' SORGENTI o POZZI netti** | oggi lo sono: ### **il vuoto immette `+1.775e+05`, il termostato toglie `−1.1691e+05`**, e ### **nessuno dei due ha un «dove»** |
+| ### **il FRENO diventa ENERGIA CHE PASSA** | non piu' energia che **esce dal sistema**, ma energia che ### **va nei gradi di liberta' del vuoto** — ### **e li' si puo' RITROVARE.** ### ➜ **E' esattamente il «COME FRENA» che il par. (C-ter) dichiara mancante** |
+| ### ⚠ **E L'ANDAMENTO DI OGGI CAMBIERA': lo dichiaro PRIMA** | la serie misurata e' ### **salita → picco al passo 88 → discesa al `77.7 %`** *(`FINESTRA-DEL-PICCO`)*, e la discesa ### **E' il termostato che frena** *(`:M7`)*. ### **Con uno scambio reversibile quella discesa non c'e' piu' nella stessa forma**: l'energia non esce, ### **si ridistribuisce.** ### ➜ **Quindi il criterio del par. (E) NON si puo' applicare alla cieca al sistema nuovo:** andra' riletto, e ### **la finestra andra' RIMISURATA** |
+
+## ⛔ **LA SOTTIGLIEZZA CHE PUO' FAR CADERE TUTTO, e la scrivo per prima**
+
+> ### **LA CONDUZIONE CLASSICA — la DIFFUSIONE — E' IRREVERSIBILE PER COSTRUZIONE.**
+
+`∂T/∂t = D·∇²T` ### **non ha un'inversa stabile**: invertire il tempo in un'equazione di diffusione
+### **amplifica il rumore invece di tornare indietro.** ### ➜ **Quindi «il calore si conduce lungo
+gli archi» scritto come diffusione CONTRADDICE «lo scambio e' reversibile»** — e la contraddizione
+non e' nei numeri: ### **e' nella forma dell'equazione.**
+
+### ✅ **LA VIA CHE LA SCIOGLIE:** per un nucleo reversibile il calore deve essere portato da
+### **gradi di liberta' REVERSIBILI** — per esempio ### **oscillatori del vuoto per nodo che si
+PROPAGANO** *(un'equazione d'onda, non di diffusione)* — ### **e la diffusione EMERGE dal caos**,
+esattamente come la direzione `REVERSIBILITA-LOCALE` chiede.
+
+## 🛑 **LA SCELTA APERTA, e NON la prendo io** *(par.4: ogni voce col suo criterio di chiusura)*
+
+| | la via | il prezzo |
+|---|---|---|
+| ### **(a)** | ### **calore SCALARE diffusivo** | ### **semplice**, e si scrive subito. ### ⛔ **IRREVERSIBILE**: accettabile ### **solo come DESCRIZIONE EFFICACE DICHIARATA**, cioe' scritta nel registro come *«qui il nucleo non e' reversibile, e lo e' di proposito»*. ### **Non e' compatibile con `REVERSIBILITA-LOCALE` come legge fondamentale** |
+| ### **(b)** | ### **OSCILLATORI reversibili** *(gradi di liberta' del vuoto che propagano)* | ### **fedele alla visione**, e la diffusione **emerge**. ### ⛔ **Piu' COSTOSO** *(piu' stato per nodo, e un'equazione d'onda invece di un rilassamento)*, e ### **va VERIFICATO — con `LOSCHMIDT-ECO`** |
+
+### 📐 **CHE COSA DECIDEREBBE FRA (a) e (b), in una riga:** ### **se `REVERSIBILITA-LOCALE` diventa
+una decisione o resta una direzione.** ### **Sono la stessa domanda posta due volte**, e conviene
+risponderle insieme.
+
+---
+
 # **(D) I CRITERI, fissati ORA, prima di qualunque numero e di qualunque legge**
 
 | | il criterio | perche' |
@@ -454,6 +589,59 @@ giudicare una DINAMICA.**
 `self.phi[ii] = (...)` con `ii` che contiene **ripetizioni** fa ### **vincere l'ultimo**, e scarta
 tutti gli altri **in silenzio**. ### **Se la legge somma, si usa `np.add.at`; se scegli, si dichiara
 il criterio della scelta.** ### **Il default di numpy non e' una legge fisica.**
+
+---
+
+# **(D-ter) LA MISURA IN CODA: `LOSCHMIDT-ECO`** *(2026-10-02, **NON da fare oggi**)*
+
+> ### ⚠ **E non esiste un `(D-bis)`: non è una sezione persa.** Il par. **(D)** porta i **criteri**, e questa è una **misura** che da quei criteri discende: ### **l'etichetta dice la discendenza, non una numerazione continua** — ### **la stessa convenzione del `par.9-ter` di `CLAUDE.md`**, che non ha un `9-bis`.
+
+> ### **Avanti `N` passi · inversione del verso del tempo OVUNQUE · indietro `N` passi.**
+> Si misura ### **l'errore di ritorno PER VOCE** e ### **la sua crescita nel tempo.**
+
+## 🔬 **E LA LETTURA SI FISSA ORA, prima dei numeri — perche' i due esiti sono OPPOSTI**
+
+| che cosa si vede | che cosa significa |
+|---|---|
+| ### **un errore che compare SUBITO e GRANDE in una voce** | ### **IRREVERSIBILITA' DEL CODICE.** Quella voce ha una legge che ### **non ha un'inversa**, e il nome della voce ### **E' il luogo** |
+| ### **un errore che parte da `~1e-16` e cresce in modo ESPONENZIALE REGOLARE** | ### **CAOS che amplifica gli arrotondamenti**, e ### **la pendenza E' l'esponente di Lyapunov.** ### **Non e' un difetto: e' una MISURA della sensibilita' del sistema** |
+
+### 📌 **E i due si distinguono per COSTRUZIONE, non a occhio:** il primo e' ### **grande al primo
+passo di ritorno**, il secondo e' ### **al livello della precisione di macchina** al primo passo.
+### **Se non si distinguessero, la misura non avrebbe risposto** — e allora lo si dice.
+
+## ✅ **COME SI MISURA IL «PER VOCE»: l'IMBRAGATURA DEL CONTROLLO UNICO**
+
+La **spia** su `_ferma_se_registro_incoerente`, che il **commit 1** chiama ### **dopo OGNI voce**.
+### ➜ **E' la stessa tecnica di `:M1`, `:M4`, `:M6` e di `MEM-HEBB-VERSO`** — quella che ha
+localizzato il verso dell'arco ### **in UNA voce, con un fattore `1e14` fra un confine e il
+successivo.** ### **Senza quell'attribuzione, «l'eco fallisce» sarebbe un totale indistinto.**
+
+## 🔎 **I SOSPETTI, GIA' NOTI, elencati PRIMA di girare** *(cosi' un esito atteso non diventa una conferma a posteriori)*
+
+| | |
+|---|---|
+| ### **il termostato** | il richiamo `−ξ` e il ### **`clip(±2)`**. ### **`:M7` misura che frena in 94 passi su 149**: un attrito **non** ha un'inversa |
+| **`beta·vd`** | l'attrito metrico, dichiarato non conservativo in `:M0` |
+| **i RILASSAMENTI** | `_rep` · `peq` · `mem_mot`: un rilassamento ### **dimentica la condizione iniziale**, ed e' il modo piu' pulito di essere irreversibile |
+| ### **le ESTRAZIONI CASUALI** | scuotimento · nascite · Schwinger. ### **Tornare indietro vorrebbe dire ri-pescare da `net.rng` gli stessi numeri in ordine INVERSO**, e il generatore non e' scritto per questo |
+| ### **`phi[ii]` dove VINCE L'ULTIMO** | `MEM-HEBB-VERSO`, criterio **7**: ### **una scelta implicita fatta dall'ordine di un array NON ha un'inversa** |
+| ### **la DIVISIONE** | ### **l'arco cancellato** *(`keep` lo toglie)* e i ### **figli a `tw = 0`**: `:M1` misura `1.20` avvolgimenti persi per arco diviso. ### **Questa e' la voce in cui l'eco DEVE fallire** se `REVERSIBILITA-LOCALE` e' soddisfatta |
+| **`_nasce` a `LAM`** | porta a `LAM` cio' che sta sotto: ### **una proiezione, e una proiezione non si inverte** |
+| **i CLIP** | `clip(±π/4)` dello shift di fase, `clip(±2)` di `ξ`, il pavimento `1e-6`: ### **ognuno e' una proiezione** |
+| ### **l'INTEGRATORE** | il **Verlet** e' reversibile **in principio**, ### **ma solo se tutte le forze sono funzioni dello STATO** — e `FORK_SU2_MEM` legge il Bloch ### **RITARDATO `n(t−τ)`** *(`:M0`, ragione ②)*. ### **Un ritardo non si inverte senza la storia** |
+
+### ⚠ **E DUE DIPENDENZE, dichiarate: NON si gira oggi**
+① ### **l'ENERGIA DEFINITA** *(`ENERGIA-NON-DEFINITA`)*: senza, *«l'errore di ritorno»* non ha una
+norma dichiarata e ogni grandezza va riportata per se'. ② ### **`MEM-HEBB-VERSO`**: finche' non e'
+curato, ### **l'eco misurerebbe anche l'asimmetria del verso dell'arco**, e i due effetti non si
+separano.
+
+### ⛔ **E UNA TRAPPOLA DI NOME, presa PRIMA di cadere dentro**
+Nel simulatore esiste ### **`TEMPO_SEGNO`** *(`:2315`, `False`, e ### **non gira in nessun run**)*,
+ed e' ### **un'ALTRA cosa**: il **verso del tempo proprio** alla Feynman-Stuckelberg,
+`perc_chi`-dipendente. ### **NON e' l'inversione del verso del tempo di questa misura**, e
+confonderli sarebbe ### **la collisione di nomi che l'indice esiste per curare.**
 
 ---
 
@@ -512,9 +700,9 @@ la fisica legge**, e il calore che nasce *«in mezzo»* ### **nasce in un punto 
 | | la decisione | che cosa la decide |
 |---|---|---|
 | ### **1** | ### **L'AVVOLGIMENTO SI CONSERVA O SI SCIOGLIE?** I figli ereditano la loro parte di `tw`, oppure una parte ### **si scioglie in rotazione** *(e allora il calcio ai genitori e' quella parte)* | ### **`:M1` E' MISURATA, E DA' DUE LETTURE OPPOSTE** — e vanno lette **insieme**: ### **in relativo sulla rete e' `5.36e-05`**, trascurabile — ### **ma solo perche' le divisioni sono OTTO in 72 passi**; ### **per evento sparisce `1.17` AVVOLGIMENTI INTERI** *(min `0.60`, max `1.33`, con `PHI_CRIT = 2π` esatto)*, cioe' ### **tutto l'avvolgimento dell'arco**. ### ➜ **Non e' un arrotondamento: e' una carica che svanisce, e il pozzo cresce col RITMO delle divisioni** |
-| ### **2** | ### **IL NOSE-HOOVER SI SOSTITUISCE O SI AFFIANCA IN PROVA?** | il rischio del par. **(C)**: ### **senza un «fuori» il sistema puo' solo perdere.** ### **Affiancare permette un A/B a variabile singola**; sostituire e' piu' pulito ma ### **se sbaglia, spegne il sistema** |
+| ### **2** | ### **IL NOSE-HOOVER SI SOSTITUISCE O SI AFFIANCA IN PROVA?** | ### ✅ **`:M7` E' ARRIVATA il 2026-10-02, e il par. (C-ter) la riporta.** ~~il rischio del par. **(C)**: senza un «fuori» il sistema puo' solo perdere~~ ### ⛔ **IL RISCHIO ERA ROVESCIATO** *(si annota, non si riscrive: par.8)*: il termostato **frena** `−1.1691e+05` e **rifornisce** solo `+3.678e+03`, quindi ### **senza di lui il sistema non si spegne, CRESCE SENZA FRENO.** ### ➜ **Resta da decidere, ma la domanda e' cambiata: non «chi rifornisce», ### «CHI FRENA».** **Affiancare** permette un A/B a variabile singola |
 | ### **3** | ### **QUALE GRANDEZZA DECIDE `t`?** I candidati che lo stato offre: `tw`, la **densita'**, `psi`, il **tempo proprio** | ### **non ne propongo uno.** Il vincolo e' il criterio **1** del par. **(D)**: `f(a,b) = 1 − f(b,a)` |
-| ### **4** | ### **IL RUOLO DELLO SCUOTIMENTO:** sostituito, sorgente, o affiancato *(le tre vie del par. **(C)**)* | ### **`:M6` E' MISURATA**: `+1.22e+03` per passo *(mediano)*, ### **positivo in 72 passi su 72**, e ### **torsione ZERO ESATTO**. ⚠ **Ma il confronto che deciderebbe NON e' ancora possibile:** serve ### **`:M7`** *(la potenza del solo `−xi·phivel`)*, perche' il netto di `step` ### **non separa il termostato dall'attrito e dalla coppia** |
+| ### **4** | ### **IL RUOLO DELLO SCUOTIMENTO:** sostituito, sorgente, o affiancato *(le tre vie del par. **(C)**)* | ### **`:M6` E' MISURATA**: `+1.22e+03` per passo *(mediano)*, ### **positivo in 72 passi su 72**, e ### **torsione ZERO ESATTO**. ⚠ **Ma il confronto che deciderebbe NON e' ancora possibile:** serve ### **`:M7`** *(la potenza del solo `−xi·phivel`)*, perche' il netto di `step` ### **non separa il termostato dall'attrito e dalla coppia**. ### ✅ **`:M7` E' ARRIVATA il 2026-10-02:** il vuoto copre il termostato con un margine di ### **`48.2`**, e lo copre **da solo** in **149 passi su 149**. ### ➜ **E la forma CONCRETA di questa decisione e' ora una voce: `VUOTO-LOCALE-DETERMINISTICO`** *(par. (C-quater))*, ### **con le sue QUATTRO condizioni e una scelta aperta fra calore diffusivo e oscillatori reversibili** |
 | ### **5** | ### **`MEM-HEBB-VERSO` BLOCCA IL RUN BASE?** | e' nell'indice come ### **`DA-DECIDERE`**: curarlo ### **cambia la fisica di OGNI passo**, non solo quella delle nascite. ### **E' la decisione piu' urgente delle cinque**, perche' finche' non e' presa ### **ogni misura nuova nasce su un sistema che dipende dall'ordine di memorizzazione degli archi** |
 
 ---
@@ -531,6 +719,23 @@ perso** (par.4). ### **Nessuno di questi si cura in questo giro.**)*
 | ### **`MEM-HEBB-PIANO-XY`** | `dir_laterale` ruota di 90 gradi ### **nel solo piano `xy`** e azzera `z`: ### **un piano preferito** in una legge che dovrebbe essere isotropa. ### **Non misurato** |
 | ### **il clip `±2` di `xi_termo`** | ### **non scatta mai** *(`:M3`)*: `A9` + `A11` — si cerca **l'errore** da cui proteggeva, e se non c'e' **esce** |
 | ### **UNA SOLA funzione per «confronta due stati»** | la trappola dei **non finiti** *(`inf − inf = NaN`)* mi e' costata ### **DUE volte in una sessione, in due file diversi**, e la distanza **ciclica** di `phi` una terza. ### **Oggi ogni strumento ha il suo confronto**, e ### **ognuno sbaglia per conto suo**: la regola di confronto *(non finiti, cicliche, assenti in entrambi, antisimmetriche)* ### **merita UN posto solo** (`9-ter`) |
+
+---
+
+# **(I) L'ORDINE DI LAVORO** *(2026-10-02, e viene da Luca)*
+
+| # | che cosa | perche' viene qui |
+|--:|---|---|
+| **1** | ### **il RIORDINO DELLA MITOSI** *(commit 3 e seguenti)* | il calore ### **nasce alla divisione**, e oggi la nascita e' in **tre posti**: una regola di nascita per `T_nodo` scritta prima ### **andrebbe scritta in tre copie, e due copie divergono** *(par. (F))* |
+| **2** | ### **`MEM-HEBB-VERSO`** | ### **decisione 5 di Luca: BLOCCA il run base.** Finche' non e' curato ### **ogni misura nuova nasce su un sistema che dipende dall'ordine di memorizzazione degli archi** — e `LOSCHMIDT-ECO` ne misurerebbe l'asimmetria credendola irreversibilita' |
+| **3** | ### **l'ENERGIA DEFINITA** *(`ENERGIA-NON-DEFINITA`)* | ### **«bilancio» e «calore» non hanno base senza di lei** *(`:M0`)*, e ### **l'errore di ritorno di `LOSCHMIDT-ECO` non ha una norma** |
+| **4** | ### **`LOSCHMIDT-ECO` sul NUCLEO** | dice ### **dove** il codice e' irreversibile **prima** di proporre una legge che si dichiara reversibile. ### **E' il criterio di `REVERSIBILITA-LOCALE`** |
+| **5** | ### **`VUOTO-LOCALE-DETERMINISTICO`** | ha bisogno di **1** *(un posto solo per la nascita)*, **3** *(l'energia)* e **4** *(sapere da dove si parte)* |
+| **6** | ### **la VERIFICA che lo scuotimento DETERMINISTICO inneschi ancora la materia** | ### **`SCUOT-INNESCO` misura che col vuoto spento NON NASCE NIENTE e lo spin resta omogeneo** *(`_nb` somma **esattamente `n`**)*. ### ➜ **Una sostituzione che spegne l'innesco produce un sistema STERILE**, e la misura che lo direbbe ### **esiste gia'** |
+
+### 🛑 **E CHE COSA QUESTO ORDINE NON PROMETTE:** che i passi **3** e **5** siano ### **miei da
+scrivere.** ### **L'energia e la forma della legge sono DECISIONI DI FISICA di Luca** — qui c'e'
+l'ordine in cui le loro **precondizioni** diventano vere.
 
 ---
 

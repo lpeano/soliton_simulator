@@ -116,3 +116,105 @@ Il primo giro ha prodotto ### **due `---` di fila.** Causa: il blocco dell'indic
 
 ---
 
+# ⭐⭐ **PASSO 2: LA REVISIONE DELLA VISIONE E LA PROPOSTA DEL VUOTO LOCALE SONO NEL REPO** *(2026-10-02)*
+
+> ### **Luca, le tue sei cose sono registrate. Un commit di SOLI DOCUMENTI: nessuna riga del simulatore, blob `3ddc56d9` prima e dopo.**
+
+**Dove sta ciascuna:** `doc/REGISTRO_FISICA.md` *(la revisione, la reversibilita', `:M7`)* · `doc/PIANO_divisione_e_calore.md` *(i par. **(C-ter)**, **(C-quater)**, **(D-ter)**, **(I)**)* · `doc/INDICE_ID.tsv` *(**5 voci nuove**, **3 annotazioni**)* · `doc/MITOSI_storia.md` *(la violazione del par.4 chiusa)*.
+
+## ✅ **(a) `:M7`: IL TERMOSTATO FRENA PIU' DI QUANTO RIFORNISCA — e i numeri li ho RIDERIVATI dal `json`**
+
+| | |
+|---|---|
+| **rifornisce** | **55** passi, ### **`+3.678130e+03`** |
+| ### **frena** | ### **94** passi, ### **`−1.169060e+05`** |
+| ### **netto** | ### **`−1.132279e+05`** su 150 passi *(149 misurati)* ⇒ ### **il prelievo e' `31.8` volte il rifornimento** |
+| ### **dopo il picco al passo 88** | ### **rifornisce ZERO volte e frena in TUTTI e 62 i passi** *(`W = −9.9126e+04`)* |
+| il vuoto copre il termostato | ### **SI', margine `48.2`**, e **da solo** in 149 passi su 149 |
+
+### ⛔ **IL RISCHIO DEL PIANO ERA ROVESCIATO, e l'ho annotato invece di riscriverlo** *(par.8)*
+Il par. **(C)** diceva *«senza un «fuori» il sistema puo' SOLO PERDERE»*. ### **Misurato: senza il termostato il sistema non si spegne, CRESCE SENZA FRENO.**
+### ➜ **E la conseguenza e' nel piano, come chiedi: la proposta del calore locale deve dire COME FRENA, non solo come rifornisce.** È il par. **(C-ter)**, e il requisito non e' negoziabile: ### **chi sostituisce il Nose-Hoover senza dirlo sostituirebbe la meta' PICCOLA del meccanismo e butterebbe la GRANDE.**
+
+### 📌 **E una PRECISAZIONE di un numero di ieri, dallo stesso `json`**
+Avevo scritto *«`xi` cambia segno UNA volta, al passo 56»*. ### **Il 56 e' l'ULTIMO con `xi < 0`** *(`−7.480e-03`)* **e il 57 il PRIMO con `xi > 0`** *(`+2.871e-02`)*: il cambio sta **fra i due**. *(Che sia **una volta sola** e' confermato.)* — ### **l'ho derivata dalla serie, non ricopiata** (`L-NUMERI`).
+
+## ⭐ **(f) LA REVISIONE DELLA VISIONE, e RIVEDE TRE RIGHE registrate ieri**
+
+| la riga vecchia | cio' che la sostituisce |
+|---|---|
+| *«la nascita ha TRE ESITI»* | ### **UN SOLO tipo di nascita di nodo, in TRE REGIMI** *(vuoto -> spazio · interferenza costruttiva -> rafforza una massa · regime di coppie)* |
+| **criterio 8** *«due NODI nuovi, `+1` e `−1`»* | ### **una coppia di PATTERN (masse) con verso di rotazione OPPOSTO**, che nascono e si annichilano insieme e **in modo reversibile**. ### **La nascita di nodi e' SOLO SPAZIO, e resta l'UNICA FRECCIA** |
+| **decisione 1** *«`tw` e' simile a una CARICA»* | ### **`tw` e' una TENSIONE che paga lo spazio, NON una carica.** La carica e' il **verso di rotazione** |
+
+### ✅ **E TRE AFFERMAZIONI LE HO VERIFICATE SUL SORGENTE PRIMA DI SCRIVERLE COME FATTI**
+
+| | |
+|---|---|
+| *«la materia e' il baricentro dell'interferenza»* | ### **e' nel codice, in DUE punti**: in `mitosi` *(«il baricentro dell'interferenza **(=la materia)** trasla»)* e in `classifica_topologia` *(«dove sta **davvero** la massa»)*. ### **Cercati per NOME DI FUNZIONE, con l'AST, non per riga** |
+| *«`omega = phivel`»* | lo dichiara il registro: `'phivel': ('finito', 'velocita di fase: entrambi i segni')` |
+| ### *«termostato e scuotimento scrivono `phivel`»* | ### **confermato**: `step` fa `self.phivel = _phivel_t + delta_phivel`, e `scuoti_vuoto` fa ### **`net.phivel[:net.n] += calcio`** — ### **l'unica scrittura di stato di quella voce** |
+
+### ⛔ **E UN MIO ERRORE DI MISURA, preso in tempo e dichiarato**
+Il mio primo scan AST di `scuoti_vuoto` ha risposto ### **«nessun attributo scritto»**, e avrei potuto scriverlo come fatto. ### **Cercavo `self.X` e la riga e' `net.phivel[...]`:** quella voce e' una ### **funzione di modulo che riceve `net`**, non un metodo.
+### ➜ **E' di nuovo la forma dell'errore che ho fatto sei volte: una regola basata sulla SINTASSI** *(`self.`)* **invece che su cio' che fa.** ### **La relazione di ieri aveva ragione e il mio strumento no**, e l'ho visto leggendo la riga invece di fidarmi del conteggio.
+
+### ⛔ **`perc_chi` NON E' QUESTA CARICA, e l'ho DICHIARATO** *(come chiedi)*
+`perc_chi` e' il **segno del foglio della doppia copertura**, e il suo segno e' una convenzione ### **al 100 %** *(`CARICA-DI-GAUGE`: 12812/12812, 12782/12782, 14000/14000 ribaltate)*. ### **La carica della revisione viene da `|psi|^2 · phivel`: sono DUE grandezze diverse**, e chiamarle entrambe *«carica»* sarebbe la collisione di nomi che l'indice esiste per curare.
+### ⚠ **E questo NON risolve `CARICA-DI-GAUGE`:** dice che quel difetto riguarda `perc_chi`, non la grandezza che la visione vuole conservare.
+
+### 🗣 **LA NOTA DI LINGUAGGIO c'e'**, con la tabella: in fisica *«solitone»* e' lo **stato collettivo localizzato** *(qui: la MASSA)*, e i **nodi** di questo modello ### **somigliano a quanti di spazio.** ### **Il repo mantiene i suoi nomi** *(par.9: un reperto non si riscrive, e «nodo» vive in centinaia di `json`)*, **ma la corrispondenza e' dichiarata.**
+
+### 🛑 **E LE VOCI SULLA CARICA E SULLE COPPIE NON SI IMPLEMENTANO** finche' non chiudi la revisione: ### **la revisione cambia CHE COSA SIA la carica, quindi cambierebbe l'OBIETTIVO delle loro cure.** Curarle ora vorrebbe dire ### **far nascere le coppie neutre in una grandezza che fra una settimana non e' piu' quella che si conserva.**
+
+## ⭐ **(b) `VUOTO-LOCALE-DETERMINISTICO`: la voce c'e', con la FORMA che hai chiarito**
+
+### **UNA SOLA LEGGE PER NODO** — fase <-> gradi di liberta' del vuoto, trasporto lungo gli archi — ### **SENZA temperatura obiettivo**, e ### **NON tanti termostati gerarchici.** ### **La gerarchia EMERGE** dalla geometria: dentro un grumo il calore circola in fretta e il grumo raggiunge una sua temperatura; fra grumi passa lentamente attraverso il vuoto; **il vuoto e' il serbatoio grande, come lo spazio per una stella**; e ### **l'espansione raffredda da sola**, perche' i nodi nuovi portano gradi di liberta' nuovi.
+
+### ✅ **E «il vuoto contiene la maggior parte dei nodi» l'ho verificato invece di assumerlo**
+`PESO-MAX` *(2026-09-27, quattro semi)*: i nodi in una massa sono ### **1237 · 1217 · 1239 · 1212 su 12802**, cioe' ### **circa il 9.7 %.**
+### ⚠ **E il limite va detto: e' la scena `MASSE-COERENTI` a 3 masse**, non una proprieta' generale del modello.
+
+### ⛔ **LA SOTTIGLIEZZA, e l'ho messa PER PRIMA perche' puo' far cadere tutto**
+### **La diffusione e' IRREVERSIBILE PER COSTRUZIONE:** l'equazione del calore non ha un'inversa stabile — invertire il tempo **amplifica il rumore** invece di tornare indietro. ### ➜ **Quindi «il calore si conduce lungo gli archi» scritto come diffusione CONTRADDICE «lo scambio e' reversibile»**, e la contraddizione ### **non e' nei numeri: e' nella FORMA DELL'EQUAZIONE.**
+### ✅ **La via che la scioglie:** il calore portato da ### **gradi di liberta' REVERSIBILI** *(oscillatori del vuoto per nodo che **propagano**: un'equazione d'onda, non di diffusione)*, e ### **la diffusione EMERGE dal caos.**
+### 🛑 **E LA SCELTA FRA (a) diffusivo e (b) oscillatori NON LA PRENDO IO**, col prezzo di ciascuna scritto. ### **E dico che cosa la deciderebbe: se `REVERSIBILITA-LOCALE` diventa una DECISIONE o resta una direzione.** ### **Sono la stessa domanda posta due volte.**
+
+### 📌 **E per `9-ter` il conto delle leggi NON cresce:** una legge per nodo da cui la gerarchia emerge e' **UNA**, e togliere la *«temperatura obiettivo»* toglie anche ### **`P-EQ-MEDIANA-ARCHI`** *(la fetta arbitraria `median(d0[:n])`)* **e il `clip(±2)` di `xi`** che `:M3` misura ### **non scattare mai** — ### **tre cose in meno, non una in piu'.**
+
+## 🔄 **(c) `REVERSIBILITA-LOCALE`: registrata come `teoria`, NON come decisione**
+
+Lo scrivo cosi' perche' ### **l'hai data cosi'**: una direzione **da valutare**. Il criterio misurabile c'e' — ### *«l'eco di Loschmidt fallisce SOLO nella voce della nascita»* — e ### **cio' che la deciderebbe e' `LOSCHMIDT-ECO`.**
+### ⚠ **E ho scritto le TRE cose che la direzione implicherebbe di cambiare**, perche' serve averle in mano **prima** di chiamarla una decisione: il **termostato** *(un attrito: frena in 94 passi su 149)*, le **estrazioni casuali** *(tornare indietro vuol dire ri-pescare da `net.rng` in ordine inverso)*, e ### **`phi[ii]` dove vince l'ultimo** *(una scelta fatta dall'ordine di un array **non ha un'inversa**)*.
+### ➜ **Nessuna delle tre e' un argomento CONTRO.** Sono l'elenco del costo.
+
+## 📐 **(d) `LOSCHMIDT-ECO`: in coda, con la LETTURA fissata PRIMA dei numeri**
+
+| che cosa si vede | che cosa significa |
+|---|---|
+| ### **errore SUBITO e GRANDE in una voce** | ### **IRREVERSIBILITA' DEL CODICE**, e il nome della voce ### **E' il luogo** |
+| ### **errore da `~1e-16` che cresce in modo esponenziale REGOLARE** | ### **CAOS che amplifica gli arrotondamenti**, e ### **la pendenza E' l'esponente di Lyapunov** |
+
+### **I due si distinguono PER COSTRUZIONE, non a occhio:** il primo e' grande ### **al primo passo di ritorno**, il secondo e' alla precisione di macchina.
+**I sospetti sono elencati PRIMA di girare** *(cosi' un esito atteso non diventa una conferma a posteriori)*: termostato · `beta·vd` · i rilassamenti · le estrazioni · `phi[ii]` · la divisione · `_nasce` a `LAM` · i clip · l'integratore. ### **E la DIVISIONE e' la voce in cui l'eco DEVE fallire**, se la direzione e' soddisfatta.
+### ⛔ **E UNA TRAPPOLA DI NOME, presa prima di caderci dentro:** nel simulatore esiste ### **`TEMPO_SEGNO`** *(`False`, e **non gira in nessun run**)*, ed e' ### **un'ALTRA cosa** — il verso del **tempo proprio** alla Feynman-Stuckelberg. ### **Non e' l'inversione del verso del tempo di questa misura.**
+**Dipendenze dichiarate:** l'**energia definita** e ### **`MEM-HEBB-VERSO`** *(senza la cura, l'eco misurerebbe anche l'asimmetria del verso dell'arco, e i due effetti non si separano)*.
+
+## ⚠ **(e) `RITMO-AVVIO-FREDDO`: in coda, e NON ho inferito il perche'**
+
+`ritmo()` cade nel suo ramo di sicurezza *(`_ritmo_sicurezza`)* ### **al PASSO 1**, e il passo 1 e' **l'unico squalificato su 150**. Quando scatta restituisce ### **un orologio UNIFORME**; negli altri 149 passi `r` va da `2.06e-05` a `1.4142`.
+### ➜ **E' LO STESSO RIPIEGO CHE HA PRODOTTO IL BRACCIO `C` FALSO** *(`SOGLIA-NON-MODULATA`, chiusa come FALSA)*.
+### ⛔ **Il «perche'» l'ho scritto come SOSPETTO, non come fatto:** l'avvio a freddo e' il candidato *(al passo 1 manca il passato)*, ### **ma la condizione del fallback e' `r is None or len(r) < n` e i due casi al passo 1 sono DISTINGUIBILI** — ### **va verificato sul sorgente, e non l'ho fatto.**
+**Le due cose da decidere sono distinte:** ### **perche'** scatta, e ### **se va dichiarato come REGOLA INIZIALE** *(e allora va nel registro col suo motivo misurato, come le tolleranze di `_nb_ret`)* ### **oppure CURATO.** `blocca_run_base = DA-DECIDERE`.
+
+## 📋 **L'ORDINE DI LAVORO e' nel piano** *(par. **(I)**)*, e ciascun passo dice **perche' viene li'**
+### **riordino della mitosi** *(commit 3 e seguenti)* -> ### **`MEM-HEBB-VERSO`** -> ### **energia definita** -> ### **`LOSCHMIDT-ECO` sul nucleo** -> ### **`VUOTO-LOCALE-DETERMINISTICO`** -> ### **verifica che lo scuotimento deterministico inneschi ancora la materia** *(e la misura che lo direbbe **esiste gia'**: `SCUOT-INNESCO`)*.
+
+## ⚠ **UNA DIVERGENZA FRA UNA REGOLA SCRITTA E LA PRATICA, e la dichiaro invece di scegliere in silenzio**
+
+Il **par.9** dice: *«un difetto nuovo = una riga nell'indice, **piu' la spiegazione lunga in `doc/STATO_RUN.md` con lo STESSO ID**»*.
+### ⛔ **Misurato: NESSUNA delle cinque voci nuove del 2026-10-01 sta in `STATO_RUN.md`** — `TERMOSTATO-E-FRENO`, `CARICA-DI-GAUGE`, `SCUOT-INNESCO`, `MEM-HEBB-VERSO`, `FINESTRA-DEL-PICCO`: **`0` occorrenze ciascuna.**
+### ➜ **Ho seguito la PRATICA in uso** — la spiegazione lunga vive nel `nota` dell'indice e nella `fonte_principale` — ### **e lo dico invece di far finta che la regola sia soddisfatta.** E' un `A9`: ### **quella parte del par.9 non e' un presidio, e oggi non impedisce niente.**
+### 📌 **Che cosa la deciderebbe:** se `STATO_RUN.md` sia ancora il posto della spiegazione lunga **o** se il par.9 vada riscritto su cio' che si fa davvero. ### **Decidi tu**, e nel frattempo l'informazione **non e' persa**: sta nell'indice, interrogabile col comando.
+
+---
