@@ -60,3 +60,7 @@ csv/_seal_fork/_sigillo_tre_casi/_sim_*.py
 #   E il <<prima>> del sigillo dell'inerzia dei commenti: lo ESTRAE
 #   `sim_prima_del_flag` dal padre del commit, a ogni giro.
 csv/_seal_fork/_sigillo_inerzia_commenti/_sim_prima.py
+#   E la copia con la LETTURA INIETTATA del controllo positivo della
+#   finestra: la rigenera lo strumento a ogni giro, con l'ancora ASSERITA
+#   unica. Committarla sarebbe un artefatto che scade (`SIM-PRIMA-STANTIO`).
+csv/_test_fork/_copertura_derivate/_sim_lettura_iniettata.py

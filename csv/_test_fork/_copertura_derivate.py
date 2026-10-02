@@ -563,6 +563,102 @@ def una_scena(etichetta, seme, passi, nomi, stampa):
     return diario, ev
 
 
+ANCORA_INIEZIONE = '        nascita(self, "divisione", c)'
+LETTURA_INIETTATA = ('_ = getattr(self, "_r_corrente", None)   '
+                     '# LETTURA INIETTATA (controllo positivo della finestra)')
+
+
+def controllo_iniettato(nomi, stampa):
+    """### IL CONTROLLO POSITIVO DELLA FINESTRA, e la prima versione era MAL POSTA.
+
+    Il guardiano l'aveva chiesto cosi': *<<almeno una lettura che avviene dentro
+    `mitosi` dopo la nascita della divisione deve comparire fra le letture nella
+    finestra>>*. ### \u26d4 E dava ZERO in tutte e tre le scene -- ma NON perche' la cura
+    non avesse attaccato:
+
+    ### \u2705 **`mitosi` NON LEGGE NESSUNA DELLE DIECI DERIVATE**, ne' direttamente ne'
+    via `getattr`. ### **Misurato sull'AST**, non supposto: le funzioni che le leggono
+    sono `step` (20), `_diag_completa` (4), `decidi_divisione` (2), `_bloch_ritardato`,
+    `_fattore_tempo_arco`, `_passo_spinoriale`, `_pesi`, `_r_nodo_mitosi` -- ### e
+    `mitosi` non e' fra loro.
+
+    ### \u26a0 **QUINDI QUEL CONTROLLO NON ERA SATISFACIBILE, e il suo zero non
+    discriminava niente** -- ne' il successo ne' il fallimento della cura. ### **Un
+    controllo che non puo' passare non e' un controllo: e' un allarme fisso.**
+
+    ### \u2705 **LA VERSIONE CHE DISCRIMINA: si INIETTA la lettura.** In una COPIA del
+    simulatore si mette `_ = self._r_corrente` ### subito dopo `nascita(self,
+    "divisione", c)`, dentro `mitosi`. Allora:
+
+    | | |
+    |---|---|
+    | con la finestra che si apre al ### **RITORNO di `mitosi`** *(il difetto)* | la lettura iniettata ### **NON compare** |
+    | con la finestra che si apre alla ### **FINE di `nascita`** *(la cura)* | la lettura iniettata ### **COMPARE**, attribuita a `mitosi` |
+
+    ### \u279c **E' la stessa tecnica dell'ulp iniettato del sigillo esteso:** non si
+    chiede al sistema di avere per caso il caso che serve, ### **lo si costruisce.**
+    """
+    import importlib.util
+    dest = os.path.join(FUORI, "_sim_lettura_iniettata.py")
+    testo = io.open(SIM, encoding="utf-8", newline="").read()
+    n = testo.count(ANCORA_INIEZIONE)
+    if n != 1:
+        raise SystemExit("** l'ancora dell'iniezione e' presente %d volte (attesa 1). NON "
+                         "scrivo la copia. **" % n)
+    io.open(dest, "wb").write(testo.replace(
+        ANCORA_INIEZIONE,
+        ANCORA_INIEZIONE + NL + "        " + LETTURA_INIETTATA).encode("utf-8"))
+    a = testo.split(NL)
+    b = io.open(dest, encoding="utf-8", newline="").read().split(NL)
+    riga_iniettata = next((i + 1 for i, (x, y) in enumerate(zip(a, b)) if x != y), None)
+    stampa("  la copia: una riga AGGIUNTA alla `:%s` (%d righe -> %d)"
+           % (riga_iniettata, len(a), len(b)))
+    spec = importlib.util.spec_from_file_location("_sim_cop_iniettata", dest)
+    sim = importlib.util.module_from_spec(spec)
+    with contextlib.redirect_stdout(io.StringIO()):
+        spec.loader.exec_module(sim)
+    S, net = carica("iniettata", 11, sim)
+    diario = Diario(nomi)
+    for k in nomi:
+        setattr(sim.Rete, k, Spia(k, diario))
+    _n0 = sim.nascita
+
+    def nascita_spiata(net2, evento, c):
+        diario.inizia_nascita()
+        r = _n0(net2, evento, c)
+        diario.apri_finestra()
+        return r
+
+    sim.nascita = nascita_spiata
+    try:
+        with contextlib.redirect_stdout(io.StringIO()):
+            for _ in range(72):
+                _passo.passo_pieno(S, net)
+    finally:
+        sim.nascita = _n0
+        for k in nomi:
+            try:
+                delattr(sim.Rete, k)
+            except AttributeError:
+                pass
+    trovate = sorted({(k, f, r) for k in nomi for (f, r) in diario.coperte_finestra[k]
+                      if f == "mitosi"})
+    ev = int(getattr(net, "_g_nati_mitosi_ev", 0))
+    stampa("  eventi di mitosi nel run iniettato: %d" % ev)
+    stampa("  ### letture nella finestra da DENTRO `mitosi`: %d" % len(trovate))
+    for k, f, r in trovate:
+        stampa("      ### %-18s `%s` :%d" % (k, f, r))
+    ok = bool(trovate) and bool(ev)
+    stampa("  ### IL CONTROLLO POSITIVO INIETTATO %s"
+           % ("PASSA: la finestra E' APERTA dentro `mitosi` dopo la nascita." if ok
+              else "### FALLISCE: la finestra NON e' aperta dentro `mitosi`, quindi la cura "
+                   "NON ha attaccato e il verdetto NON VALE."))
+    return {"passa": bool(ok), "riga_iniettata": riga_iniettata,
+            "lettura": LETTURA_INIETTATA, "eventi_mitosi": ev,
+            "trovate": [list(x) for x in trovate],
+            "blob_copia": blob(dest)}
+
+
 def principale():
     righe = []
 
@@ -665,30 +761,25 @@ def principale():
         stampa("      %-18s %3d righe provate" % (k, len(coperte[k])))
     stampa("")
 
-    # ---------- IL CONTROLLO POSITIVO DELLA FINESTRA ------------------------------------------
-    #   ### Lo chiede il guardiano, e serve a una cosa sola: se la cura della finestra
-    #   non ha attaccato, le letture che `mitosi` fa DOPO la nascita della divisione
-    #   (cioe' tutta la preparazione dello Schwinger) ### non compaiono, e lo zero
-    #   tornerebbe a essere garantito dalla costruzione invece che misurato.
+    # ---------- IL CONTROLLO POSITIVO DELLA FINESTRA, con una lettura INIETTATA ---------------
     stampa("-" * 104)
-    stampa("IL CONTROLLO POSITIVO DELLA FINESTRA: `mitosi` legge DOPO la nascita?")
-    stampa("  Se la finestra si aprisse al RITORNO di `mitosi` (il difetto curato), le letture")
-    stampa("  del ramo Schwinger -- che stanno DENTRO `mitosi`, dopo la nascita della")
-    stampa("  divisione -- NON comparirebbero. ### Zero qui = la cura non ha attaccato.")
-    dentro_mitosi = {}
-    for et, d in diari.items():
-        v = sorted({(k, f, r) for k in nomi for (f, r) in d.coperte_finestra[k]
-                    if f == "mitosi"})
-        dentro_mitosi[et] = v
-        stampa("      scena `%-11s` letture nella finestra da DENTRO `mitosi`: %d"
-               % (et, len(v)))
-        for k, f, r in v[:8]:
-            stampa("          %-18s `%s` :%d" % (k, f, r))
-    pos_ok = bool(dentro_mitosi.get("lunga"))
-    stampa("  ### IL CONTROLLO POSITIVO %s"
-           % ("PASSA: la scena lunga ne ha %d" % len(dentro_mitosi["lunga"]) if pos_ok
-              else "### FALLISCE: ZERO nella scena lunga, quindi la cura della finestra "
-                   "NON HA ATTACCATO e il verdetto che segue NON VALE"))
+    stampa("IL CONTROLLO POSITIVO DELLA FINESTRA: una lettura INIETTATA dentro `mitosi`")
+    stampa("  ### E LA PRIMA VERSIONE DI QUESTO CONTROLLO ERA MAL POSTA, e lo dico perche'")
+    stampa("      il suo zero poteva essere letto come un fallimento della cura.")
+    stampa("      Chiedeva: <<una lettura DENTRO `mitosi` dopo la nascita deve comparire>>.")
+    stampa("      ### Ma `mitosi` NON LEGGE NESSUNA DELLE DIECI DERIVATE -- misurato")
+    stampa("      sull'AST: le leggono `step` (20), `_diag_completa` (4),")
+    stampa("      `decidi_divisione` (2), `_bloch_ritardato`, `_fattore_tempo_arco`,")
+    stampa("      `_passo_spinoriale`, `_pesi`, `_r_nodo_mitosi` -- e `mitosi` NON c'e'.")
+    stampa("      ### Un controllo che non PUO' passare non e' un controllo: e' un")
+    stampa("      ### allarme fisso, e non discrimina ne' il successo ne' il fallimento.")
+    stampa("  ### LA VERSIONE CHE DISCRIMINA: si INIETTA `_ = self._r_corrente` subito")
+    stampa("      dopo `nascita(self, \"divisione\", c)`, in una COPIA del simulatore.")
+    stampa("      Con la finestra al RITORNO di `mitosi` (il difetto) NON comparirebbe;")
+    stampa("      con la finestra alla FINE di `nascita` (la cura) DEVE comparire.")
+    stampa("      ### E' la stessa tecnica dell'ulp iniettato: il caso non si spera, SI COSTRUISCE.")
+    iniettato = controllo_iniettato(nomi, stampa)
+    pos_ok = iniettato["passa"]
     stampa("")
 
     # ---------- le letture SPORCHE ------------------------------------------------------------
@@ -794,8 +885,12 @@ def principale():
         "collaudo_del_rilevatore_in_posto": cip,
         "modifiche_in_posto_PARZIALI": parz,
         "modifiche_in_posto_COMPLETE_allarmi_spuri": compl,
-        "controllo_positivo_finestra": {"passa": bool(pos_ok),
-                                        "letture_da_dentro_mitosi": dentro_mitosi},
+        "controllo_positivo_finestra_INIETTATO": iniettato,
+        "mitosi_legge_derivate": False,
+        "perche_il_primo_controllo_era_mal_posto": (
+            "chiedeva una lettura dentro `mitosi` dopo la nascita, ma `mitosi` non legge "
+            "nessuna delle dieci derivate (misurato sull'AST): il suo zero non "
+            "discriminava ne' il successo ne' il fallimento della cura"),
         "non_provate": non_provate,
         "verdetto": ("zero letture sporche su %d provate, %d non provate"
                      % (tot_ast - len(non_provate), len(non_provate))) if not sporche else
