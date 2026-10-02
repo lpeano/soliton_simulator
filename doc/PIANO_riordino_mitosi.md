@@ -247,6 +247,27 @@ fatto di aver cambiato l'ORDINE.**
 > ### **NON allento il criterio.** *(E' la regola di Luca, ed e' quella giusta: un criterio allentato
 > per far passare un commit non e' un criterio, e' una formalita'.)*
 
+### ✅ **IL CONTRATTO DELL'ORDINE, MISURATO PRIMA DI SCRIVERE IL CODICE** *(2026-10-02, `csv/_test_fork/_ordine_registro.py`)*
+
+> ### **Il par.(c) chiede <<nell'ordine del REGISTRO>>. QUESTO E' MISURATO, non assunto: l'ordine
+> del registro e' un ordine TOPOLOGICO VALIDO, e i vincoli sono QUATTRO in due forme.**
+
+| | il vincolo | perche' |
+|---|---|---|
+| **1** | ### **`phi` prima di `twp`** | `twp` legge `phi[a,b]` ### **DOPO il calcio**, che e' una scrittura **indicizzata** sui genitori, non un'estensione ⇒ **genuino**. ### ✅ **Rispettato**: `phi` sta in `METRI`, cioe' prima di tutto `STATO` |
+| **2** | ### **`peq` prima di `_peqn_idx`** | `_peqn_idx` legge `peq` ### **INTERA**, ed e' cio' che il commento al `:7588` **dichiara**. `_peqn_idx` non sta in nessun registro ⇒ ### **va dichiarato DOPO `peq`** nella tabella |
+| **3** | ### **`n0` va nel CONTESTO** | **4 locali interposte**, tutte `n0` *(i due `_eredita_*`, i due eventi)*: `n0 = self.n - k` legge ### **`self.n`, cioe' `len(self.phi)`, DOPO l'estensione.** ⇒ ### **la regola NON deve leggere `self.n`**: riceve `n0` calcolato nella fase di **PREPARAZIONE** |
+| **4** | ### **6 chiamate con EFFETTO** | `_smp_chirurgia`, `_traccia_d0`, `_grado` — ### **tre per evento.** ### **NON sono regole di nascita** e non vanno in tabella: si collocano **a mano** e si **dichiarano** una per una |
+
+### 📌 **E DUE CASI SONO STATI SCARTATI COME INERTI, ed e' importante quanto trovarli:**
+`chi_a`/`chi_b` al `:7405` leggono `perc_chi` ### **gia' estesa** al `:7372` — ma la leggono ### **sui GENITORI** *(indici `< n0`)* e la scrittura precedente e' una ### **PURA ESTENSIONE**, che non tocca i primi `n0` elementi. ### ➜ **Il valore non cambia, e contarli per ostacoli avrebbe gonfiato la cura** (`9-ter`).
+
+### ⚠ **E LO STRUMENTO HA AVUTO TRE BUCHI PRIMA DI DARE QUESTO NUMERO**, tutti della forma `FALSO-ZERO`: l'insieme sul solo `REGISTRO_STATO` *(escludeva `phi`/`i`/`j`/`_peqn_idx`)*, le letture mediate da una ### **`@property`** *(`self.n`)*, e le ### **locali interposte**. ### **Il primo numero era ZERO, e lo zero era falso.**
+
+---
+
+per far passare un commit non e' un criterio, e' una formalita'.)*
+
 ### **Criteri, fissati PRIMA dei numeri**
 
 | | |

@@ -7,6 +7,9 @@ IN CHE ORDINE SI POSSONO SCRIVERE LE GRANDEZZE DELLA NASCITA?
   REGISTRO_NOMI          0 voci
   REGISTRO_STATO        30 voci
   ### l'ordine del REGISTRO, per intero: METRI + STATO + FINESTRA = 35 voci
+  ### le @property RISOLTE (una lettura di una property e' una lettura
+      di cio' che legge, INTERA): 1
+      `n` -> phi
 
   ### E QUESTA VERSIONE CURA UN FALSO ZERO della versione 1fb6ac63:
       quella faceva girare l'analisi sul solo REGISTRO_STATO, e cosi'
@@ -29,6 +32,19 @@ EVENTO `schwinger`: 45 scritture su 45 grandezze DIVERSE
       ### peq            DEVE stare prima di _peqn_idx       (flusso: `_peqn_idx` legge `peq` INTERA)
   ### L'ORDINE DEL REGISTRO VIOLA 0 di questi vincoli
 ----------------------------------------------------------------------------------------------------
+LE LOCALI DEFINITE *FRA* LE SCRITTURE -- il settimo buco dello strumento
+  Una locale definita fra le scritture legge `self.*` a uno STATO INTERMEDIO:
+  spostarla, o spostare le scritture attorno a lei, CAMBIA IL VALORE.
+  Lo statement che la definisce NON scrive `self.X`, quindi la passata sulle
+  sole scritture non la vedeva.
+  ### LOCALI INTERPOSTE: 6 casi, di cui 4 GENUINI e 2 inerti
+      ### `n0` :2923 (`divisione`) `phi` e' letta INTERA dopo essere stata scritta: il valore CAMBIA
+      ### `n0` :2885 (`divisione`) `phi` e' letta INTERA dopo essere stata scritta: il valore CAMBIA
+          `chi_a` :7405 (`divisione`) `perc_chi` e' letta su [a] e le sue scritture precedenti sono PURE ESTENSIONI: il valore NON cambia
+          `chi_b` :7405 (`divisione`) `perc_chi` e' letta su [b] e le sue scritture precedenti sono PURE ESTENSIONI: il valore NON cambia
+      ### `n0` :2923 (`schwinger`) `phi` e' letta INTERA dopo essere stata scritta: il valore CAMBIA
+      ### `n0` :2885 (`schwinger`) `phi` e' letta INTERA dopo essere stata scritta: il valore CAMBIA
+----------------------------------------------------------------------------------------------------
 LE CHIAMATE CON EFFETTO, che NON sono regole e vanno collocate A MANO: 6
     _smp_chirurgia     :7459   evento `divisione`
     _traccia_d0        :7461   evento `divisione`
@@ -40,3 +56,7 @@ LE CHIAMATE CON EFFETTO, che NON sono regole e vanno collocate A MANO: 6
 ### VERDETTO
 ###   vincoli d'ordine GENUINI nel perimetro: 4
 ###   l'ordine del REGISTRO li rispetta TUTTI: e' un ordine topologico valido.
+###   E 4 LOCALI INTERPOSTE leggono una grandezza GIA' scritta:
+###      ognuna va RISOLTA passandole il valore nel CONTESTO, calcolato
+###      nella fase di PREPARAZIONE -- non lasciandola leggere self.*
+###      a meta' della nascita. E' una scelta di progetto, e si DICHIARA.

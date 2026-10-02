@@ -44,6 +44,11 @@
     "REGISTRO_FINESTRA": 2,
     "REGISTRO_NOMI": 0
   },
+  "proprieta_risolte": {
+    "n": [
+      "phi"
+    ]
+  },
   "divisione": {
     "grandezze": [
       "ultima_frac_antifase",
@@ -293,6 +298,80 @@
       "rho_spin"
     ]
   },
+  "locali_interposte": [
+    {
+      "locale": "n0",
+      "riga": 2923,
+      "evento": "divisione",
+      "legge": "phi",
+      "indici": [
+        ""
+      ],
+      "genuino": true,
+      "assorbita": true,
+      "perche": "`phi` e' letta INTERA dopo essere stata scritta: il valore CAMBIA"
+    },
+    {
+      "locale": "n0",
+      "riga": 2885,
+      "evento": "divisione",
+      "legge": "phi",
+      "indici": [
+        ""
+      ],
+      "genuino": true,
+      "assorbita": true,
+      "perche": "`phi` e' letta INTERA dopo essere stata scritta: il valore CAMBIA"
+    },
+    {
+      "locale": "chi_a",
+      "riga": 7405,
+      "evento": "divisione",
+      "legge": "perc_chi",
+      "indici": [
+        "a"
+      ],
+      "genuino": false,
+      "assorbita": false,
+      "perche": "`perc_chi` e' letta su [a] e le sue scritture precedenti sono PURE ESTENSIONI: il valore NON cambia"
+    },
+    {
+      "locale": "chi_b",
+      "riga": 7405,
+      "evento": "divisione",
+      "legge": "perc_chi",
+      "indici": [
+        "b"
+      ],
+      "genuino": false,
+      "assorbita": false,
+      "perche": "`perc_chi` e' letta su [b] e le sue scritture precedenti sono PURE ESTENSIONI: il valore NON cambia"
+    },
+    {
+      "locale": "n0",
+      "riga": 2923,
+      "evento": "schwinger",
+      "legge": "phi",
+      "indici": [
+        ""
+      ],
+      "genuino": true,
+      "assorbita": true,
+      "perche": "`phi` e' letta INTERA dopo essere stata scritta: il valore CAMBIA"
+    },
+    {
+      "locale": "n0",
+      "riga": 2885,
+      "evento": "schwinger",
+      "legge": "phi",
+      "indici": [
+        ""
+      ],
+      "genuino": true,
+      "assorbita": true,
+      "perche": "`phi` e' letta INTERA dopo essere stata scritta: il valore CAMBIA"
+    }
+  ],
   "servizio": [
     {
       "nome": "_smp_chirurgia",

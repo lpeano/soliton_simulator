@@ -1195,3 +1195,40 @@ Ho cercato *<<falso zero>>* nell'indice: ### **ZERO voci su 879** — benche' in
 **PROSSIMO: il commit 3, il punto unico — e ora l'ordine della tabella e' MISURATO prima di scriverlo, non scoperto dopo.**
 
 ---
+
+# ✅ **IL CONTRATTO DELL'ORDINE E' MISURATO. E LO STRUMENTO AVEVA TRE BUCHI, NON UNO** *(2026-10-02)*
+
+> ### **Luca: ti ho scritto un'ora fa che la forma `FALSO-ZERO` aveva morso cinque volte. Subito dopo ha morso altre DUE, nello stesso strumento che l'aveva appena dichiarata. Le registro, perche' una voce che elenca solo i casi comodi non serve a niente.**
+
+## ⛔ **IL SESTO: `self.n` E' UNA `@property`, e io la trattavo come un attributo**
+
+`self.n` e' `len(self.phi)` *(`:2651`)*. ### ➜ **Quindi leggere `n` E' leggere `phi`** — e i due `_eredita_*` fanno ### **`n0 = self.n - k`**, cioe' ### **dipendono dall'estensione di `phi`.**
+Lo strumento vedeva `n` come un attributo ### **senza scrittore**, e quell'arco non esisteva.
+### ✅ **Cura:** le `@property` si ### **DERIVANO dal sorgente** *(nel simulatore ce n'e' **una sola**, e il referto lo dichiara)*, e una lettura di property si risolve negli attributi che legge, ### **marcati come letti INTERI** — perche' `len()` cambia a ogni estensione.
+
+## ⛔ **IL SETTIMO: le LOCALI INTERPOSTE, e questo e' il piu' sottile**
+
+Guardavo solo le letture ### **DENTRO** lo statement di scrittura. Ma `n0 = self.n - k` ### **non scrive `self.X`**: scrive una ### **locale.** E una locale definita ### **FRA** le scritture legge `self.*` a uno ### **STATO INTERMEDIO.**
+### ✅ **Cura:** una passata sulle locali definite fra la **prima** e l'**ultima** scrittura dell'evento, con la ### **stessa classificazione genuino/inerte** degli archi.
+
+## ✅ **E LA CLASSIFICAZIONE PAGA IN DUE DIREZIONI, che e' la ragione per cui c'e'**
+
+| | |
+|---|---|
+| ### **trova 4 casi GENUINI** | tutte e quattro `n0`, e ### **leggendo il sorgente NON le avevo viste** |
+| ### **scarta 2 casi INERTI** | `chi_a`/`chi_b` al `:7405` leggono `perc_chi` ### **gia' estesa** al `:7372` — ma ### **sui GENITORI**, e una pura estensione non tocca i primi `n0`. ### **Contarli per ostacoli avrebbe gonfiato la cura** (`9-ter`) |
+
+## ✅ **IL CONTRATTO DEL COMMIT 3, ed e' SCRITTO PRIMA DEL CODICE**
+
+| | il vincolo |
+|---|---|
+| **1** | ### **`phi` prima di `twp`** — rispettato: `phi` sta in `METRI`, prima di tutto `STATO` |
+| **2** | ### **`peq` prima di `_peqn_idx`** — e `_peqn_idx`, che in nessun registro sta, va **dichiarato** li' |
+| **3** | ### **`n0` nel CONTESTO**, calcolato nella fase di PREPARAZIONE — la regola ### **non legge `self.n`** |
+| **4** | ### **6 chiamate con EFFETTO** *(`_smp_chirurgia`, `_traccia_d0`, `_grado`, tre per evento)*: ### **non sono regole**, si collocano a mano e si **dichiarano** |
+
+### ✅ **E L'ORDINE DEL REGISTRO E' UN ORDINE TOPOLOGICO VALIDO: 0 violazioni su 4 vincoli.** La forma che il piano chiede ### **si puo' usare**, e ora lo so ### **per misura**, non per fiducia.
+
+**PROSSIMO: il codice del commit 3, con questo contratto davanti.**
+
+---

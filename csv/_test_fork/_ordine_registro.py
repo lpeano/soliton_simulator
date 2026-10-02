@@ -97,11 +97,50 @@ def registri_dal_sorgente(albero):
     return fuori
 
 
+def proprieta_dal_sorgente(albero):
+    """Le `@property` della classe, e GLI ATTRIBUTI CHE LEGGONO.
+
+    ### E' IL SESTO BUCO DELLO STRUMENTO, trovato il 2026-10-02 prima di usarlo:
+    `self.n` **e' una property** su `len(self.phi)` *(`:2651`)*, quindi ### **una
+    lettura di `n` E' una lettura di `phi`** - e i due `_eredita_*` calcolano
+    `n0 = self.n - k`, cioe' ### **dipendono dall'estensione di `phi`.** La versione
+    `dec47cf1` trattava `n` come un attributo ### **senza scrittore**, e quell'arco
+    non lo vedeva.
+
+    ### E L'INSIEME SI DERIVA, non si scrive a mano *(e' la cura di `FALSO-ZERO`
+    applicata a questo strumento)*: si scandisce la classe e si prendono tutte le
+    `@property`. Nel simulatore ce n'e' ### **una sola**, e il referto lo dichiara.
+    """
+    fuori = {}
+    for cls in ast.walk(albero):
+        if not isinstance(cls, ast.ClassDef):
+            continue
+        for f in cls.body:
+            if not isinstance(f, ast.FunctionDef):
+                continue
+            for d in f.decorator_list:
+                e_prop = ((isinstance(d, ast.Name) and d.id == "property")
+                          or (isinstance(d, ast.Attribute) and d.attr == "property"))
+                if e_prop:
+                    fuori[f.name] = sorted(
+                        {n.attr for n in ast.walk(f)
+                         if isinstance(n, ast.Attribute) and isinstance(n.ctx, ast.Load)
+                         and isinstance(n.value, ast.Name) and n.value.id == "self"})
+    return fuori
+
+
+PROPRIETA = {}
+
+
 def letture(nodo):
     """Le letture `self.<attr>` nel nodo, ognuna con GLI INDICI con cui e' letta.
 
     Restituisce `{attr: set(sorgente_dell_indice)}`; l'indice `""` significa
     *letta INTERA* (nessun `[...]`), che e' il caso piu' vincolante.
+
+    ### E una lettura di una `@property` si RISOLVE negli attributi che quella
+    legge, ### **marcati come letti INTERI**: `len(self.phi)` cambia a ogni
+    estensione, quindi e' il caso piu' vincolante e non si puo' sconta.
     """
     fuori = {}
     for n in ast.walk(nodo):
@@ -121,6 +160,12 @@ def letture(nodo):
     for k in fuori:
         if not fuori[k]:
             fuori[k].add("")        # letta INTERA
+    # ### LE PROPERTY SI RISOLVONO: leggere `n` e' leggere `phi`, INTERA.
+    for nome in list(fuori):
+        if nome in PROPRIETA:
+            for sotto in PROPRIETA[nome]:
+                fuori.setdefault(sotto, set()).add("")
+            del fuori[nome]
     return fuori
 
 
@@ -190,6 +235,22 @@ def corpo_piatto(lista, ev, funzioni, racc, prof=0):
                                  "riga": st.lineno, "evento": ev})
                     continue
         a, indicizzata = scritto_da(st)
+        if a is None and isinstance(st, (ast.Assign, ast.AugAssign)):
+            # ### UNA LOCALE. Conta solo se e' definita FRA le scritture: allora
+            #   le sue letture di `self.*` sono prese a UNO STATO INTERMEDIO, e
+            #   spostarla cambia il valore. E' il settimo buco, trovato il
+            #   2026-10-02: `n0 = self.n - k` dentro i due `_eredita_*` legge
+            #   `self.n`, cioe' `len(self.phi)`, DOPO che `phi` e' cresciuto --
+            #   e lo statement che lo legge NON scrive `self.X`, quindi la
+            #   passata sulle sole scritture non lo vedeva.
+            bersagli = (st.targets if isinstance(st, ast.Assign) else [st.target])
+            nomi_l = sorted({t.id for b in bersagli for t in ast.walk(b)
+                             if isinstance(t, ast.Name) and isinstance(t.ctx, ast.Store)})
+            lette = letture(st.value)
+            if nomi_l and lette:
+                racc.append({"tipo": "locale", "scrive": "+".join(nomi_l),
+                             "riga": st.lineno, "evento": ev, "assorbita": prof > 0,
+                             "legge": {k: sorted(v) for k, v in lette.items()}})
         if a is not None:
             racc.append({"tipo": "scrittura", "scrive": a, "riga": st.lineno,
                          "evento": ev, "assorbita": prof > 0,
@@ -224,6 +285,8 @@ def principale():
         if isinstance(n, ast.FunctionDef):
             funzioni.setdefault(n.name, n)
     regs = registri_dal_sorgente(albero)
+    global PROPRIETA
+    PROPRIETA = proprieta_dal_sorgente(albero)
     # l'ordine del REGISTRO, per intero: METRI prima di STATO, com'e' dichiarato.
     ord_registro = []
     for k in ("REGISTRO_METRI", "REGISTRO_STATO", "REGISTRO_FINESTRA"):
@@ -238,6 +301,10 @@ def principale():
         stampa("  %-20s %3d voci" % (k, len(regs[k])))
     stampa("  ### l'ordine del REGISTRO, per intero: METRI + STATO + FINESTRA = %d voci"
            % len(ord_registro))
+    stampa("  ### le @property RISOLTE (una lettura di una property e' una lettura")
+    stampa("      di cio' che legge, INTERA): %d" % len(PROPRIETA))
+    for k in sorted(PROPRIETA):
+        stampa("      `%s` -> %s" % (k, ", ".join(PROPRIETA[k])))
     stampa("")
     stampa("  ### E QUESTA VERSIONE CURA UN FALSO ZERO della versione 1fb6ac63:")
     stampa("      quella faceva girare l'analisi sul solo REGISTRO_STATO, e cosi'")
@@ -251,7 +318,7 @@ def principale():
     scritture = [r for r in racc if r["tipo"] == "scrittura"]
     servizi = [r for r in racc if r["tipo"] == "servizio"]
     esito = {"blob_sim_sha1_byte": bsim, "ordine_registro": ord_registro,
-             "registri": {k: len(v) for k, v in regs.items()}}
+             "registri": {k: len(v) for k, v in regs.items()}, "proprieta_risolte": PROPRIETA}
 
     for ev in ("divisione", "schwinger"):
         qui = [r for r in scritture if r["evento"] == ev]
@@ -322,6 +389,59 @@ def principale():
                      "violati_dall_ordine_del_registro": violati,
                      "assorbite": sorted(set(r["scrive"] for r in qui if r["assorbita"]))}
 
+    # --- LE LOCALI DEFINITE FRA LE SCRITTURE, e sono il settimo buco
+    locali = [r for r in racc if r["tipo"] == "locale"]
+    stampa("-" * 100)
+    stampa("LE LOCALI DEFINITE *FRA* LE SCRITTURE -- il settimo buco dello strumento")
+    stampa("  Una locale definita fra le scritture legge `self.*` a uno STATO INTERMEDIO:")
+    stampa("  spostarla, o spostare le scritture attorno a lei, CAMBIA IL VALORE.")
+    stampa("  Lo statement che la definisce NON scrive `self.X`, quindi la passata sulle")
+    stampa("  sole scritture non la vedeva.")
+    interposte = []
+    for ev in ("divisione", "schwinger"):
+        scr_ev = [r for r in racc if r["tipo"] == "scrittura" and r["evento"] == ev]
+        if not scr_ev:
+            continue
+        ordine_ev = [r for r in racc if r["evento"] == ev]
+        prima_scr = next(i for i, r in enumerate(ordine_ev) if r["tipo"] == "scrittura")
+        ultima_scr = max(i for i, r in enumerate(ordine_ev) if r["tipo"] == "scrittura")
+        for i, r in enumerate(ordine_ev):
+            if r["tipo"] != "locale" or not (prima_scr < i < ultima_scr):
+                continue
+            # scritte PRIMA di lei, dentro l'evento
+            # ### E OGNI CASO SI CLASSIFICA, con lo STESSO criterio degli archi:
+            #   se TUTTE le scritture precedenti di quella grandezza sono PURE
+            #   ESTENSIONI e la locale la legge sui soli GENITORI, allora il
+            #   valore non cambia e il caso e' INERTE.
+            prec = {}
+            for s in ordine_ev[:i]:
+                if s["tipo"] == "scrittura":
+                    prec.setdefault(s["scrive"], []).append(s)
+            for nome in sorted(set(r["legge"]) & set(prec)):
+                idx = r["legge"][nome]
+                tutte_est = all(s["estensione"] for s in prec[nome])
+                inerte = tutte_est and sul_genitore(idx)
+                interposte.append({
+                    "locale": r["scrive"], "riga": r["riga"], "evento": ev,
+                    "legge": nome, "indici": idx, "genuino": not inerte,
+                    "assorbita": r["assorbita"],
+                    "perche": ("`%s` e' letta su [%s] e le sue scritture precedenti sono "
+                               "PURE ESTENSIONI: il valore NON cambia"
+                               % (nome, ",".join(idx))) if inerte
+                    else ("`%s` e' letta %s dopo essere stata scritta: il valore CAMBIA"
+                          % (nome, ("su [%s]" % ",".join(idx)) if idx != [""] else "INTERA"))})
+    gen = [x for x in interposte if x["genuino"]]
+    stampa("  ### LOCALI INTERPOSTE: %d casi, di cui %d GENUINI e %d inerti"
+           % (len(interposte), len(gen), len(interposte) - len(gen)))
+    for x in interposte:
+        stampa("      %s `%s` :%d (`%s`) %s"
+               % ("###" if x["genuino"] else "   ", x["locale"], x["riga"],
+                  x["evento"], x["perche"]))
+    if not interposte:
+        stampa("      nessuna.")
+    esito["locali_interposte"] = interposte
+    interposte = gen
+
     stampa("-" * 100)
     stampa("LE CHIAMATE CON EFFETTO, che NON sono regole e vanno collocate A MANO: %d"
            % len(servizi))
@@ -343,6 +463,11 @@ def principale():
         stampa("###      l'ordine, perche' l'ordine del registro da solo cambierebbe i byte.")
     else:
         stampa("###   l'ordine del REGISTRO li rispetta TUTTI: e' un ordine topologico valido.")
+    if interposte:
+        stampa("###   E %d LOCALI INTERPOSTE leggono una grandezza GIA' scritta:" % len(interposte))
+        stampa("###      ognuna va RISOLTA passandole il valore nel CONTESTO, calcolato")
+        stampa("###      nella fase di PREPARAZIONE -- non lasciandola leggere self.*")
+        stampa("###      a meta' della nascita. E' una scelta di progetto, e si DICHIARA.")
     esito["vincoli_genuini"] = tot
     esito["violati"] = viol
     esito["registro_basta"] = (viol == 0)
