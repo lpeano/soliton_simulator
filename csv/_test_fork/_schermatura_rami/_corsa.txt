@@ -1,0 +1,13 @@
+[TIMBRO] _sonda_scherm.py  sha1-BYTE ?  FUORI DA UN REPO GIT
+  SCHERMATURA = True   (configurazione del driver)
+  dopo la costruzione della scena:
+    _g_scherm_init           0
+    _g_scherm_ricorsione     0
+  dopo 72 passi:
+    _g_scherm_init                1   -> 0.014 per passo
+    _g_scherm_ricorsione        504   -> 7.00 per passo
+  e per confronto, cio' che il commento del codice dichiara (blob VECCHIO):
+    _g_scherm_ricorsione: 308 su 44 passi = 7.00 per passo
+    _g_scherm_init:       2 (il ripiego di len(psi))
+  e lo stato della schermatura ADESSO: lambda min 0.594814  max 0.609170  (LAM = 0.800000, portata_minima = 0.120000)
+    nodi alla PORTATA MINIMA: 0 su 12812 (0.00%)

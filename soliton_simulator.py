@@ -79,8 +79,24 @@ headless:     python soliton_simulator.py --test URTO --out urto.mp4
 # SVOLTA (schermatura dolce dell'interferenza -- PRIMA stabilizzazione sana):
 #   Le masse crescono per interferenza -> solo una SCHERMATURA dall'interferenza
 #   le stabilizza (intuizione di Luca). Meccanismo: lambda_nodi() ora accorcia la
-#   portata dell'interferenza dove e' denso, con TRANSIZIONE DOLCE (tanh), non un
-#   muro: la portata e' ora determinata direttamente dal rapporto rho/rho_c. Il
+#   portata dell'interferenza dove e' denso, con una TRANSIZIONE DOLCE, non un
+#   muro: la portata e' determinata dal rapporto u = rho/rho_c. Il
+#   ⚠⚠ CORREZIONE DEL 2026-10-03, rilievo del guardiano: QUI C'ERA SCRITTO <<(tanh)>>,
+#      E IL CODICE NON USA tanh. Usa `fattore = 1 / (1 + softplus(u - 1))`, con
+#      `softplus = log1p(exp(clip(u-1, -30, 30)))` (:5003-5004).
+#      ### E LA DIFFERENZA NON E' UNA SFUMATURA, ed e' misurata:
+#        softplus: fattore -> 1/u per u grande, cioe' NON SATURA e la portata -> 0;
+#        tanh:     fattore -> 0.5 per u grande, cioe' SATURA a metA' portata.
+#      ### E A u = 0 `1/(1+tanh(u-1))` darebbe 4.19, cioe' ALLUNGHEREBBE la portata:
+#        quindi la frase vecchia non era imprecisa, ### DESCRIVEVA UNA LEGGE DIVERSA
+#        da quella scritta.
+#      ### E LA SCELTA softplus NON E' MOTIVATA DA NESSUNA PARTE: voce
+#        `SCHERMATURA-LEGGE-REVISIONE`.
+#      ### E UN FATTO MISURATO CHE NESSUNO AVEVA SCRITTO: a u -> 0 il fattore e'
+#        0.761463, cioe' la portata e' TAGLIATA DEL 23.85% ANCHE DOVE LA DENSITA'
+#        E' NULLA -- la schermatura NON RESTITUISCE MAI `LAM`. E il `lambda` MAX
+#        misurato nel run del driver e' 0.609170 = `LAM * 0.761463` ESATTAMENTE:
+#        ### nessun nodo sta nel regime <<non schermato>>.
 #   grumo puo' stabilizzarsi a taglia finita (massa si assesta, non cresce senza
 #   limite, e lambda resta finita). Il nucleo denso, schermato, smette
 #   di sentire la propria interferenza collettiva -> mitosi non alimentata -> stop.

@@ -1973,3 +1973,54 @@ Il tetto e' `_passo_causale = _csa * DT` *(`:9099`)*: ### **`c_s` LOCALE dell'ar
 ### ⚠ **E la tua nota su `np.isnan` e' registrata su `VELENO-DOMINI`, che torna APERTA con riserva:** l'esenzione usa `~np.isfinite`, quindi ### **accetta anche `±inf`.** E la forma dell'errore e' ### **nota in questo repo**: per `eta` esiste la forma `nonneg_inf` ### **proprio perche' `+inf` e' legittimo** — cioe' il repo ### **distingue gia'** `nan` da `inf`, e io li ho confusi in una riga nuova. ### **Un commit a se'.**
 
 ---
+
+# 📌 **DUE VOCI SULLA SCHERMATURA — e la misura ha trovato DUE fatti che non erano nel mandato** *(2026-10-03)*
+
+> ### **Luca: avevi chiesto di dire quante volte scattano i due rami. Li ho misurati, e nel misurarli e' venuto fuori che la legge NON fa quello che il suo commento dice — e nemmeno quello che io credevo.**
+
+### ⚠ **E una cosa di forma, prima di tutto:** avevi detto *<<nello stesso commit di documenti di `TETTO-CAUSALE-TEMPO-COORDINATO`>>*. ### **Quel commit era gia' pushato** (`a9b764a`) quando la richiesta e' arrivata, quindi queste due voci stanno in un ### **secondo** commit di documenti — e lo dico invece di far finta che fossero insieme.
+
+## ✅ **I DUE RAMI, misurati nella configurazione del driver** *(seme 11, 72 passi)*
+
+| | |
+|---|---|
+| `_g_scherm_ricorsione` | ### **504 su 72 passi = ESATTAMENTE 7.00 per passo** — lo stesso tasso del commento vecchio *(308 su 44)*. Quindi il ramo che restituisce `LAM` a ### **tutta la rete** e' ### **deterministico**, non marginale |
+| `_g_scherm_init` | ### **1** in 72 passi — l'inizializzazione, una volta sola |
+
+## ⛔ **FATTO 1 (non nel mandato): la portata minima NON MORDE MAI**
+
+`lambda` min misurato ### **0.594814** contro `portata_minima` ### **0.12**: ### **cinque volte sopra**, e ### **0 nodi su 12812 (0.00%)** al limite. Morderebbe solo da `u = rho/rho_c` ### **~6.7** in su.
+
+### ➜ **Quindi il numero non derivato del punto (c) oggi e' INERTE** — e per `A11` un pavimento che non scatta mai ### **o e' inutile o protegge da qualcosa che non sta ancora succedendo.** ### **In entrambi i casi va DETTO.**
+
+## ⛔ **FATTO 2 (non nel mandato, e il piu' importante): la schermatura NON restituisce MAI `LAM`**
+
+Al limite ### **`rho` → 0** il fattore e' ### **0.761463**, cioe' la portata e' ### **tagliata del 23.85% ANCHE DOVE LA DENSITA' E' NULLA.**
+
+### ✅ **E il `lambda` MAX misurato nel run e' `0.609170` = `LAM * 0.761463` ESATTAMENTE:** ### **nessun nodo del run sta nel regime <<non schermato>>.**
+
+### ➜ **Cioe' la legge non e' <<accorcia la portata dove e' denso>>: e' <<accorcia SEMPRE, e di piu' dove e' denso>>** — e questo ### **nessuno lo aveva scritto.**
+
+## ✅ **E IL PUNTO (b) ERA PEGGIO DI COME ERA POSTO, e l'ho corretto**
+
+L'intestazione diceva *<<transizione dolce ### **(tanh)**>>*, e il codice usa ### **softplus**. Ma non e' una funzione sbagliata per un'altra simile:
+
+| | |
+|---|---|
+| **softplus** | fattore → **1/u**, cioe' ### **NON satura**: la portata va a **0** |
+| **tanh** | fattore → **0.5**, cioe' ### **SATURA** a meta' portata |
+| ### **e a `u = 0`** | `1/(1+tanh(-1))` darebbe ### **4.19**, cioe' ### **ALLUNGHEREBBE** la portata |
+
+### ➜ **Quindi la frase vecchia non era imprecisa: DESCRIVEVA UNA LEGGE CHE NON E' QUELLA IMPLEMENTATA.** E la scelta `softplus` ### **non e' motivata da nessuna parte.**
+
+### ✅ **E CHE SIA UN CAMBIO DI SOLI COMMENTI E' PROVATO, in modo ESATTO:** gli ### **alberi sintattici del file sono IDENTICI** — non <<uguali dopo la normalizzazione>>, ### **identici tali e quali**, perche' un `#` ### **non produce nessun nodo nell'AST.** ### **Nessun run necessario.**
+
+## 📌 **E `GUSCIO-ANTIFASE-EMERGENTE` comincia con la TUA posizione, come hai chiesto**
+
+> ### **Se il guscio non emerge, la legge di schermatura RESTA e gestisce comunque la stabilita'.**
+
+### ➜ **Quindi la misura NON mette in discussione la stabilita':** decide se e' ### **emergente** o ### **imposta**, e sono ### **due cose da dichiarare, non una da scegliere.** E se e' imposta, la sola domanda che resta e' ### **se la legge e' fatta bene** — cioe' l'altra voce.
+
+### ⚠ **E la storia da citare la hai data tu, ed e' una trappola vera:** ### **`Z48` era l'anello delle masse SEMINATE, un artefatto del batch**; la struttura vera e' `Z49`. ### **Chi rifa' la misura deve sapere che un anello nel profilo radiale puo' venire dalla scena e non dalla fisica.**
+
+---
