@@ -22,7 +22,22 @@ coincidono>>**.
 *(e con una riduzione a coppie)* che ### **non e' `2 *` la somma su `n`**. ### **Gli interi
 non se ne accorgono, i float SI'.**
 
-## ✅ **LA FORMA CHE REGGE, e la misura la conferma**
+## ✅ ### ⛔ **E LA COLONNA `(C)` NON E' UNA MISURA DELLA CURA: E' UN'IDENTITA'**
+
+*(rilievo del guardiano, 2026-10-03, ed e' giusto.)* `s + s` e `2 * s` sono ### **lo stesso
+numero** in IEEE-754, perche' il raddoppio e' uno scalamento per una ### **potenza di due**:
+### **non c'e' niente da misurare, c'e' da DIMOSTRARE.** ### ➜ **Quindi lo ZERO della
+colonna `(C)` non prova che la cura funziona: prova che ho scritto l'identita' giusta.**
+
+### **LA PROVA VERA SARA' IL BRACCIO `A` DEL SIGILLO, su una scena con
+`_sm_trd_mitosi > 0`** -- dove i troncamenti ### **esistono** e le due meta' sono
+### **diverse**. ### ⚠ **Oggi quel numero NON c'e'.**
+
+### 📌 **E la colonna `(C)` resta, per una ragione sola:** se un giorno desse qualcosa
+di diverso da zero, ### **la mia idea di IEEE-754 sarebbe sbagliata** -- e vale avere un
+posto dove accorgersene.
+
+**LA FORMA CHE REGGE, e la misura la conferma**
 
 ### **`fab_a + fab_b`** -- la somma calcolata ### **PER META'** e poi sommata. A `t = 0.5` le
 due meta' sono ### **identiche**, quindi `s + s`, e ### **`s + s == 2 * s` E' ESATTO** perche'
@@ -80,6 +95,18 @@ def principale():
     stampa("    (A)  np.sum(np.concatenate([x, x]))   <- UNA chiamata su 2n (md = 1)")
     stampa("    (B)  2.0 * np.sum(x)                  <- la chiamata di OGGI (md = 2)")
     stampa("    (C)  np.sum(x) + np.sum(x)            <- PER META' e sommate (la cura)")
+    stampa("")
+    stampa("  *** E LA COLONNA (C) NON E' UNA MISURA DELLA CURA: E' UN'IDENTITA'")
+    stampa("  ARITMETICA CHE NON PUO' FALLIRE. *** (rilievo del guardiano, 2026-10-03,")
+    stampa("  ed e' giusto.) `s + s` e `2 * s` sono lo STESSO numero in IEEE-754, perche'")
+    stampa("  il raddoppio e' uno scalamento per una POTENZA DI DUE: non c'e' niente da")
+    stampa("  misurare, c'e' da DIMOSTRARE -- e il conto e' di una riga.")
+    stampa("  Quindi lo ZERO della colonna (C) NON prova che la cura funziona: prova solo")
+    stampa("  che ho scritto l'identita' giusta. *** LA PROVA VERA SARA' IL BRACCIO A DEL")
+    stampa("  SIGILLO, SU UNA SCENA CON _sm_trd_mitosi > 0 *** -- cioe' dove i troncamenti")
+    stampa("  ESISTONO e le due meta' sono DIVERSE. Oggi quel numero NON c'e'.")
+    stampa("  E la colonna (C) sta qui comunque, per una ragione: se un giorno dasse")
+    stampa("  qualcosa di diverso da zero, la mia idea di IEEE-754 sarebbe sbagliata.")
     stampa("")
     stampa("  %-6s %14s %14s   %s" % ("n", "(A) != (B)", "(C) != (B)", "verdetto"))
     stampa("  " + "-" * 72)

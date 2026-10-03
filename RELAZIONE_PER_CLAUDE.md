@@ -2949,3 +2949,68 @@ riga dopo** diceva *«la differenza non tocca né la FRAZIONE né l'EREDITA-MEDI
 ### ✅ **Curato: la frase si CALCOLA dalle classi, non si afferma.**
 
 ---
+
+# ✅ **I QUATTRO PUNTI DEL TUO RILIEVO. E il pezzo nuovo trova TRE siti che il tuo conteggio non aveva**
+
+*Nessuna riga del simulatore: `6d306976`, invariato. **Niente codice del `6a`:** il cancello è
+scattato e il commit resta **fermo**.*
+
+### ⚠ **UNA NOTA DI FORMA:** dici *«un solo commit»*, e i referti li metto in un commit a parte —
+**par.5 vuole il codice committato prima che l'output nasca**, e in `CLAUDE.md` quella regola
+prevale su un prompt che la contraddice. **Lo dico invece di scegliere in silenzio.**
+
+## ✅ **`1a` — la lista è corretta, e la correzione dichiara DI CHI è l'errore**
+
+`:8495` *(l'ampiezza del bias)* e `:8496` *(la frazione `(0.5 + bias)`)* al posto di `:8489`, che
+era la riga del **cancello**. ### **E con la lista corretta la differenza CALCOLATA risulta tutta
+`ALTRO`: è il controllo che la correzione è giusta, non una mia asserzione.**
+
+## ✅ **`1b` — il ramo `else` è generico**
+
+Aveva di nuovo una frase **fissa** su `:8496`: **lo stesso difetto spostato di un livello**, come
+dici. Ora elenca le righe non-`ALTRO` con classe, funzione e **testo**, e **nessuna spiegazione
+scritta a mano**. La storia di `:8489` sta nel commento della lista e nel task history.
+
+## ⭐ **`2` — il pezzo nuovo, e sono servite DUE cure perché funzionasse**
+
+| | |
+|---|---|
+| ### **la DELEGA** | `_rn_sch_psi_spin` fa **soltanto** `_rn_div_psi_spin(net, c)`: nel suo corpo **nessun accesso al contesto**, quindi il setaccio la vedeva con l'insieme **vuoto**. ### **Senza risolverla, TRE regole sono invisibili — e sono tre delle tue sei.** |
+| ### **il FILTRO, letto da `DOMINI`** | una frazione ha senso solo per una forma **continua e dichiarata**: non per `indice` *(topologia)*, non per `segno` *(categoriale — e il registro lo dice: «sommare due decisioni darebbe `+2`, `0` o `-2`»)*. ### **Il criterio non è mio: è la forma che il registro dichiara.** |
+
+### **ESITO: `8` siti `COPIA-GENITORE` e `22` esclusi col motivo, contro i tuoi `6`.**
+
+| | |
+|---|---|
+| ### **le tre in più** | `divisione/mem_mot`, `divisione/omega_s`, `schwinger/omega_s` — ### **verificate dal registro**: `classe = «eredita dal genitore»`. **Aggiunte reali.** |
+| l'unica solo nella tua | `schwinger/phi_s`, che ha ### **`classe = "zero"`** *(`np.zeros(nc)`)* — e **tu stesso** l'annotavi *«zero (non da un genitore)»*. ### **D'accordo sulla sostanza.** |
+
+### ⭐ **E il fatto che chiedevi di far emergere c'è: `psi` nasce come MEDIA, il suo compagno
+`psi_spin` come COPIA di `a`.** ### **Due grandezze della stessa famiglia, due frazioni diverse:
+`0.5` e `0`.** ### **Non entra nel cancello del `6a`** — è materiale per la decisione di Luca, e
+il referto lo scrive.
+
+## ✅ **`3` — la colonna `(C)` è un'IDENTITÀ, non una misura della cura**
+
+Hai ragione. `s + s` e `2 * s` sono **lo stesso numero** in IEEE-754: ### **non c'è niente da
+misurare, c'è da DIMOSTRARE.** ➜ **Lo zero di `(C)` non prova che la cura funziona: prova che ho
+scritto l'identità giusta.** ### **La prova vera sarà il braccio `A`, su una scena con
+`_sm_trd_mitosi > 0` — e oggi quel numero non c'è.** Scritto nel docstring, nel referto e
+nell'inventario.
+
+### 📌 **E `(C)` resta per una ragione sola:** se un giorno desse qualcosa di diverso da zero,
+### **la mia idea di IEEE-754 sarebbe sbagliata**, e vale avere un posto dove accorgersene.
+
+## ✅ **`4` — il task history: tre ANNOTAZIONI, non una riscrittura**
+
+`(a)` il verdetto *(cancello scattato, 5 coppie, la quinta è `DIVISIONE/fm`, il `6a` è **fermo**)*
+· `(b)` lo stato dei todo, **uno per uno col commit** · `(c)` il vincolo per il codice futuro.
+
+### ⛔ **E il `(c)` è il più importante:** la cura *«`_fab` per metà»* tocca ### **SOLO il percorso
+`dh`**. `_nasce(d0new, 'mitosi', 0, 1)` somma **già** un array `2n` in **una** chiamata, perché
+`d0new` è **già** `concatenate([d0h, d0h])`. ### **Quel percorso deve restare così: spezzarlo
+cambierebbe `_sm_lund0_mitosi`, che è lo stesso difetto di `_fab` AL ROVESCIO.**
+### 📌 **E il motivo per cui non è simmetrico:** `dh` entra con `md = 2`, `d0new` con `md0 = 1` —
+### **la cura serve dove `md` MOLTIPLICA una somma, non dove la somma è già sull'array intero.**
+
+---

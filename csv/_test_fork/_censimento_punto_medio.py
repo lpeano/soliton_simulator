@@ -38,7 +38,9 @@ strumento** invece di cambiare il conteggio in silenzio *(`A9`)*.
 **USCITA:** `csv/_test_fork/_censimento_punto_medio/`
 """
 import ast
+import contextlib
 import hashlib
+import importlib.util
 import io
 import json
 import os
@@ -121,6 +123,15 @@ DICHIARATI = {
 #   Il mandato chiede: *<<fallo dall'AST, confronta la tua lista con questa, e se
 #   differiscono dimmi DOVE>>*. La tengo qui perche' il confronto lo faccia LA MACCHINA.
 GUARDIANO_OLTRE_I_QUATTRO = {
+    # ### CORREZIONE DEL 2026-10-03, E LA CAUSA E' UN ERRORE DEL GUARDIANO, che la
+    #   dichiara: aveva citato il ramo `MITOSI_DIR` come ### **`:8489`**, che e' la riga
+    #   del CANCELLO (`if MITOSI_DIR != 0.0`), non la riga del NUMERO. Le righe del
+    #   numero, misurate dall'AST, sono ### **`:8495`** (l'ampiezza del bias) e
+    #   ### **`:8496`** (la frazione `(0.5 + bias)`).
+    #   ### ✅ E CON LA LISTA CORRETTA LA DIFFERENZA CALCOLATA DEVE RISULTARE TUTTA
+    #   `ALTRO`: ### e' il controllo che la correzione e' giusta, e non una mia asserzione.
+    8495: "l'ampiezza del bias del ramo MITOSI_DIR (correzione: il guardiano citava :8489)",
+    8496: "la frazione (0.5 + bias) del ramo MITOSI_DIR (correzione: era :8489)",
     8498: "la fase fm = phi[a] - 0.5*D",
     1954: "phivel nella divisione",
     2335: "phivel nello Schwinger",
@@ -134,6 +145,36 @@ GUARDIANO_FALSI_POSITIVI = {
 }
 GUARDIANO_I_QUATTRO = {8499: "DIVISIONE/pos", 8561: "DIVISIONE/d,d0",
                        2344: "SCHWINGER/pos", 8701: "SCHWINGER/dd"}
+
+
+# ### IL CONTEGGIO DEL GUARDIANO per l'EREDITA' DA UN SOLO GENITORE, da confrontare
+#   con quello della macchina.
+GUARDIANO_COPIA_GENITORE = {
+    ("divisione", "phi_s"): "da `a`",
+    ("divisione", "psi_spin"): "da `a`",
+    ("divisione", "rho_spin"): "da `a`",
+    ("schwinger", "psi_spin"): "da `aa`",
+    ("schwinger", "rho_spin"): "da `aa`",
+    ("schwinger", "phi_s"): "zero (non da un genitore)",
+}
+# ### LE CHIAVI DEL CONTESTO, divise per LATO. Una regola che indicizza SOLO il lato `a`
+#   e non il lato `b` eredita ### **da un solo genitore**, cioe' usa un ### **`t = 0`
+#   IMPLICITO** -- e il setaccio del NUMERO non lo vede, perche' ### **non c'e' nessun
+#   numero da trovare.** ### 📌 E' `FALSO-ZERO` applicato alla decisione aperta di
+#   Luca: cercando i `0.5` si conclude *<<cinque siti>>* e si perde una CLASSE INTERA di
+#   siti dove la frazione e' ### **gia' decisa, a zero.**
+LATO_A = ("a", "aa", "src", "src_a")
+LATO_B = ("b", "bb", "src_b")
+# ### LE FORME PER CUI UNA FRAZIONE NON HA SENSO, e il criterio e' LETTO DAL REPO
+#   (`DOMINI`, 42 voci: nome -> (forma, descrizione)) invece di una mia lista a mano:
+#     `indice`  -> `i`, `j`: e' TOPOLOGIA, non un valore da interpolare;
+#     `segno`   -> `perc_chi`, `perc_geom`: e' CATEGORIALE, e il registro lo dice
+#                  esplicitamente -- *<<sommare due decisioni darebbe +2, 0 o -2,
+#                  che non sono valori ammessi>>*.
+#   ### E una grandezza che NON STA in `DOMINI` ha la forma ### **non dichiarata**:
+#   non posso affermare che una frazione abbia senso, quindi la ESCLUDO ### **col suo
+#   motivo** invece di contarla.
+FORME_SENZA_FRAZIONE = ("indice", "segno")
 
 
 def blob(p):
@@ -152,6 +193,61 @@ def _il_numero(nodo):
             and isinstance(nodo.right, ast.Constant) and nodo.right.value in (2, 2.0)):
         return "/ 2"
     return None
+
+
+class LatiDelleRegole(ast.NodeVisitor):
+    """Per ogni `_rn_*`: quali chiavi del CONTESTO indicizza, e di quale LATO.
+
+    ### Non cerca un numero: cerca ### **l'ASSENZA** del lato `b`. Una regola che
+    legge solo `c["a"]` (o `aa`, `src`, `src_a`) e mai `c["b"]` eredita da ### **un
+    solo genitore**, cioe' ha una frazione ### **implicita a zero.**
+    """
+
+    def __init__(self):
+        self.per_regola = {}
+        self.delega = {}
+        self.pila = ["<modulo>"]
+
+    def visit_FunctionDef(self, nodo):
+        self.pila.append(nodo.name)
+        if nodo.name.startswith(PERIMETRO_PREFISSI):
+            self.per_regola.setdefault(nodo.name, set())
+        self.generic_visit(nodo)
+        self.pila.pop()
+
+    visit_AsyncFunctionDef = visit_FunctionDef
+
+    def visit_Subscript(self, nodo):
+        # `c["a"]`: un Subscript su un Name `c` con una stringa costante
+        if (isinstance(nodo.value, ast.Name) and nodo.value.id == "c"
+                and isinstance(nodo.slice, ast.Constant)
+                and isinstance(nodo.slice.value, str)):
+            d = self.pila[-1]
+            if d.startswith(PERIMETRO_PREFISSI):
+                self.per_regola.setdefault(d, set()).add(nodo.slice.value)
+        self.generic_visit(nodo)
+
+    def visit_Call(self, nodo):
+        """### LA DELEGA, e senza di lei TRE regole sono INVISIBILI.
+
+        `_rn_sch_psi_spin(net, c)` fa ### **soltanto** `_rn_div_psi_spin(net, c)`:
+        nel suo corpo ### **non c'e' nessun `c["..."]`**, quindi il setaccio dei lati
+        la vedeva con l'insieme ### **vuoto** e la escludeva. ### E sono esattamente
+        tre delle sei che il guardiano conta.
+        """
+        if (isinstance(nodo.func, ast.Name)
+                and nodo.func.id.startswith(PERIMETRO_PREFISSI)):
+            d = self.pila[-1]
+            if d.startswith(PERIMETRO_PREFISSI) and d != nodo.func.id:
+                self.delega[d] = nodo.func.id
+        self.generic_visit(nodo)
+
+    def risolvi_deleghe(self):
+        """Le chiavi di chi delega sono quelle del delegato. UN SALTO, non ricorsivo:
+        due salti sarebbero una deduzione, e una deduzione va DICHIARATA."""
+        for chi, a_chi in self.delega.items():
+            if not self.per_regola.get(chi) and self.per_regola.get(a_chi):
+                self.per_regola[chi] = set(self.per_regola[a_chi])
 
 
 class Setaccio(ast.NodeVisitor):
@@ -347,6 +443,91 @@ def principale():
         stampa("###   *** QUATTRO O MENO: si procede. ***")
     stampa("=" * 100)
 
+    # ------------------------------- L'EREDITA' DA UN SOLO GENITORE: UN `t = 0` IMPLICITO
+    lati = LatiDelleRegole()
+    lati.visit(ast.parse(sorgente))
+    lati.risolvi_deleghe()
+    with contextlib.redirect_stdout(io.StringIO()):
+        spec = importlib.util.spec_from_file_location("_sim_cens6a", SIM)
+        _S = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(_S)
+    copie, esclusi = [], []
+    for nome, chiavi in sorted(lati.per_regola.items()):
+        usa_a = sorted(k for k in chiavi if k in LATO_A)
+        usa_b = sorted(k for k in chiavi if k in LATO_B)
+        if not (usa_a and not usa_b):
+            continue
+        ev = "divisione" if nome.startswith("_rn_div_") else "schwinger"
+        gr = nome.split("_", 3)[3] if nome.count("_") >= 3 else "?"
+        voce = _S.REGOLE_NASCITA.get((ev, gr)) or {}
+        dom = _S.DOMINI.get(gr)
+        forma = dom[0] if dom else None
+        x = {"regola": nome, "evento": ev, "grandezza": gr, "chiavi_a": usa_a,
+             "forma": forma, "delegata_a": lati.delega.get(nome),
+             "classe_dichiarata": voce.get("classe", "?")}
+        # ### IL FILTRO E' LETTO DA `DOMINI`, non deciso da me: una frazione ha senso
+        #   solo per una grandezza CONTINUA e DICHIARATA.
+        if forma is None:
+            x["motivo_esclusione"] = "forma NON DICHIARATA in DOMINI"
+            esclusi.append(x)
+        elif forma in FORME_SENZA_FRAZIONE:
+            x["motivo_esclusione"] = "forma `%s`: una frazione NON ha senso" % forma
+            esclusi.append(x)
+        else:
+            copie.append(x)
+    stampa("")
+    stampa("-" * 100)
+    stampa("PEZZO NUOVO -- L'EREDITA' DA UN SOLO GENITORE: UN `t = 0` IMPLICITO")
+    stampa("  ### E IL SETACCIO DEL NUMERO NON LO VEDE, perche' NON C'E' NESSUN NUMERO DA")
+    stampa("  ###   TROVARE: la frazione non e' scritta, e' nella SCELTA DELL'INDICE.")
+    stampa("  ###   E' FALSO-ZERO applicato alla decisione aperta di Luca -- cercando i")
+    stampa("  ###   `0.5` si conclude <<cinque siti>> e si perde UNA CLASSE INTERA di siti")
+    stampa("  ###   dove la frazione e' GIA' DECISA, A ZERO.")
+    stampa("  ### NON ENTRA NEL CONTEGGIO DEL CANCELLO DEL 6a: e' materiale per la")
+    stampa("  ###   decisione di Luca (DIVISIONE-AUTOCONSISTENTE), non un sito da curare.")
+    stampa("")
+    stampa("  COPIA-GENITORE: indicizza SOLO il lato `a`, E la forma dichiarata in")
+    stampa("  DOMINI ammette una frazione. Siti: %d" % len(copie))
+    stampa("    %-24s %-11s %-13s %-8s %-8s %s"
+           % ("regola", "evento", "grandezza", "forma", "delega", "classe dichiarata"))
+    for x in copie:
+        stampa("    %-24s %-11s %-13s %-8s %-8s %s"
+               % (x["regola"][:24], x["evento"], x["grandezza"][:13], x["forma"],
+                  "si" if x["delegata_a"] else "-", str(x["classe_dichiarata"])[:40]))
+    stampa("")
+    stampa("  ESCLUSI, col MOTIVO letto da DOMINI: %d" % len(esclusi))
+    for x in esclusi:
+        stampa("    %-24s %-13s %s"
+               % (x["regola"][:24], x["grandezza"][:13], x["motivo_esclusione"]))
+    stampa("  ### IL CRITERIO NON E' MIO: e' la FORMA che il registro DICHIARA.")
+    stampa("  ###   `indice` e' topologia, `segno` e' categoriale -- e per il `segno` il")
+    stampa("  ###   registro lo dice esplicitamente: sommare due decisioni darebbe")
+    stampa("  ###   +2, 0 o -2, che non sono valori ammessi. Una grandezza senza forma")
+    stampa("  ###   dichiarata la ESCLUDO col suo motivo, invece di contarla.")
+    mie_cg = {(x["evento"], x["grandezza"]) for x in copie}
+    sue_cg = set(GUARDIANO_COPIA_GENITORE)
+    stampa("")
+    stampa("  IL CONFRONTO col conteggio del guardiano")
+    stampa("    nella MIA e non nella sua .. %s"
+           % (sorted(mie_cg - sue_cg) or "nessuna"))
+    stampa("    nella SUA e non nella mia .. %s"
+           % (sorted(sue_cg - mie_cg) or "nessuna"))
+    for k in sorted(sue_cg - mie_cg):
+        stampa("      %s -> il guardiano la descrive come: %s"
+               % (k, GUARDIANO_COPIA_GENITORE[k]))
+    stampa("")
+    stampa("  ### IL FATTO DA FAR EMERGERE, e il guardiano lo nomina:")
+    _psi = [x for x in v.trovate if x["riga"] == 1984]
+    stampa("    `psi` nasce come MEDIA dei due genitori (:1984, classe EREDITA-MEDIA%s),"
+           % ("" if _psi else " -- NON TROVATA, da verificare"))
+    _comp = [x for x in copie if x["grandezza"] == "psi_spin"]
+    stampa("    il suo COMPAGNO `psi_spin` nasce come COPIA di `a` (%d regole: %s)."
+           % (len(_comp), ", ".join(x["regola"] for x in _comp)))
+    stampa("    ### DUE GRANDEZZE DELLA STESSA FAMIGLIA, DUE FRAZIONI DIVERSE: 0.5 e 0.")
+    stampa("    ### Non e' un difetto dichiarato: e' la DOMANDA che la decisione di Luca")
+    stampa("    ###   deve chiudere, e senza questo pezzo non si vedrebbe affatto.")
+    stampa("")
+
     # ---------------------------------------------- IL CONFRONTO CON LA LISTA DEL GUARDIANO
     stampa("")
     stampa("-" * 100)
@@ -380,16 +561,23 @@ def principale():
         stampa("  ###   la mia lista e' un SOVRAINSIEME e la differenza e' TUTTA `ALTRO`:")
         stampa("  ###   non tocca ne' la FRAZIONE ne' l'EREDITA-MEDIA.")
     else:
+        # ### IL RAMO E' GENERICO: elenca le righe non-`ALTRO` con classe e TESTO, e
+        #   ### NESSUNA spiegazione scritta a mano su righe specifiche.
+        #   ### ⛔ La stesura precedente aveva qui una frase FISSA su `:8496` -- cioe'
+        #   lo STESSO difetto <<commento contro codice>> spostato di un livello: se la
+        #   differenza toccasse un'altra riga, quella frase la stamperebbe comunque.
+        #   ### La storia di `:8489`/`:8496` sta nel commento di `GUARDIANO_OLTRE_I_QUATTRO`
+        #   e nel task history, ### NON in un print che finge di essere calcolato.
         stampa("  ###   *** LA DIFFERENZA TOCCA %s, non solo `ALTRO`. ***"
                % ", ".join(sorted(_tocca)))
         for k in sorted(_tocca):
             for r in _cl[k]:
-                stampa("  ###     :%d e' %s e NON e' nella lista del guardiano" % (r, k))
-        stampa("  ###   E IL CASO E' :8496, la frazione `(0.5 + bias)` del ramo MITOSI_DIR:")
-        stampa("  ###   il guardiano cita quel ramo come :8489 (la riga del CANCELLO), non")
-        stampa("  ###   la riga del NUMERO. Quindi NON e' un sito che gli e' sfuggito: e'")
-        stampa("  ###   lo STESSO sito, citato con un'altra riga. Ma la differenza va")
-        stampa("  ###   detta per quello che e', e la frase NON si afferma: si CALCOLA.")
+                x = [y for y in v.trovate if y["riga"] == r][0]
+                stampa("  ###     :%-6d %-14s %-20s %s"
+                       % (r, k, x["dentro"][:20], x["testo"][:70]))
+        stampa("  ###   Ogni riga qui sopra e' un sito di classe non-`ALTRO` che NON sta")
+        stampa("  ###   nella lista del guardiano: va spiegata UNA PER UNA, e la")
+        stampa("  ###   spiegazione NON sta in questo print.")
     stampa("")
     stampa("  SOLO NELLA SUA: %d" % len(solo_sue))
     for r in solo_sue:
@@ -415,6 +603,9 @@ def principale():
     stampa("  ###   `phivel` hanno DUE siti ciascuna: la condivisione NON e' uniforme.")
     stampa("")
     esito = {"confronto_solo_mie": solo_mie, "confronto_solo_sue": solo_sue,
+             "copia_genitore": copie,
+             "copia_genitore_solo_mie": sorted("/".join(k) for k in (mie_cg - sue_cg)),
+             "copia_genitore_solo_sue": sorted("/".join(k) for k in (sue_cg - mie_cg)),
              "blob_sim": blob(SIM), "blob_strumento": blob(os.path.abspath(__file__)),
              "perimetro_esatto": list(PERIMETRO_ESATTO),
              "perimetro_prefissi": list(PERIMETRO_PREFISSI),

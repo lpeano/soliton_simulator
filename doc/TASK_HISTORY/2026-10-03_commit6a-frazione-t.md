@@ -175,6 +175,57 @@ rifarebbe il difetto `E4-LAM`)*.
 
 ---
 
+## ✅ **ANNOTAZIONE DEL 2026-10-03 — IL CENSIMENTO E' GIRATO, E IL CANCELLO E' SCATTATO**
+
+*(par.8: si ANNOTA, non si riscrive.)*
+
+| | |
+|---|---|
+| ### **il verdetto** | ### **5 coppie `(evento, grandezza)` su 6 siti**, non quattro |
+| la quinta | ### **`DIVISIONE/fm` (la FASE del figlio)**, ai siti `:8496` e `:8498` |
+| ### **lo stato del `6a`** | ### **FERMO**, in attesa della ### **decisione di Luca** — `DIVISIONE-AUTOCONSISTENTE` |
+
+### **E L'ERRORE DEL MANDATO E' DICHIARATO DAL GUARDIANO:** aveva ricopiato *<<quattro
+formule>>* dal piano, dove si parlava della ### **sola geometria.** ### **Il censimento resta il
+CANCELLO, e il cancello ha fatto il suo lavoro.**
+
+### ⚠ **E DUE COSE DEL MIO SETACCIO ERANO LENIENTI, entrambe nella direzione sbagliata:**
+partiva dalle ### **FORME** *(17 siti, e non vedeva `(0.5 + bias) * D`)* → ora cerca
+### **il NUMERO** *(19 siti)*; e il cancello contava i ### **NOMI** *(4 invece di 5, collassando
+`pos` dei due eventi)* → ora conta le ### **COPPIE**.
+
+### 📌 **E LA STORIA DI `:8489` CONTRO `:8495`/`:8496` STA QUI, non in un print:** il
+guardiano aveva citato il ramo `MITOSI_DIR` con la riga del ### **CANCELLO** *(`if MITOSI_DIR !=
+0.0`)*; le righe del ### **NUMERO**, misurate dall'AST, sono `:8495` *(l'ampiezza del bias)* e
+`:8496` *(la frazione `(0.5 + bias)`)*. ### **La lista del guardiano nello strumento e' corretta
+con le due righe giuste**, e con la lista corretta la differenza calcolata risulta
+### **tutta `ALTRO`** — che e' il controllo che la correzione e' giusta.
+
+## ✅ **ANNOTAZIONE — LO STATO DEI TODO**
+
+| | il todo | stato |
+|---|---|---|
+| **1** | committare il task history prima del lavoro | ### **FATTO**: `621cfbd` |
+| **2** | `csv/_test_fork/_censimento_punto_medio.py` + inventario, committato e girato | ### **FATTO**: `2ab4ce2`, curato in `47cda46`, referto in `97fde1c` |
+| **3** | il verdetto del censimento: quattro o piu'? | ### **FATTO: CINQUE** → ### **STOP** |
+| **4** | il codice | ### **NON FATTO, e non si fa:** il cancello e' scattato |
+| **5** | il sigillo | ### **NON FATTO** |
+| ### **+** | la misura di `_fab` | ### **FATTO**: `csv/_test_fork/_somma_meta.py`, `2ab4ce2` |
+| ### **+** | l'eredita' da ### **UN SOLO genitore** *(un `t = 0` implicito)* | ### **FATTO**: pezzo nuovo del censimento |
+
+## ⛔ **ANNOTAZIONE — IL VINCOLO PER IL CODICE FUTURO, e vale SOLO per un percorso**
+
+> ### **La cura *<<`_fab` per meta'>>* tocca SOLO il percorso `dh`.**
+
+`_nasce(d0new, 'mitosi', 0, 1)` somma ### **GIA' un array `2n` in UNA sola chiamata** — perche'
+`d0new` e' ### **gia'** `concatenate([d0h, d0h])`, cioe' i due figli.
+### ➜ **Quel percorso DEVE RESTARE COSI'**: spezzarlo in due somme
+### **cambierebbe `_sm_lund0_mitosi`**, che e' lo stesso difetto di `_fab` ### **al rovescio.**
+
+### 📌 **E il motivo per cui non e' simmetrico:** `dh` entra con `md = 2` *(una voce →
+due archi di `d`)*, `d0new` con `md0 = 1` *(e' gia' raddoppiato)*. ### **La cura serve dove `md`
+MOLTIPLICA una somma, non dove la somma e' gia' sull'array intero.**
+
 ## 3. TODO DEL NEXT STEP
 
 1. ☐ **committare e pushare QUESTO FILE** *(par.8: prima del lavoro)*
