@@ -3014,3 +3014,69 @@ cambierebbe `_sm_lund0_mitosi`, che è lo stesso difetto di `_fab` AL ROVESCIO.*
 ### **la cura serve dove `md` MOLTIPLICA una somma, non dove la somma è già sull'array intero.**
 
 ---
+
+# ⛔ **TRE `FALSO-ZERO` IN FILA NEL PEZZO `COPIA-GENITORE`, tutti miei. E il fatto emerge solo ora**
+
+*Nessuna riga del simulatore: `6d306976`, invariato. `DOMINI` compreso. **Niente codice del `6a`.***
+
+### ✅ **E sui due commit hai ragione tu a dire che avevo ragione io:** anche qui il lavoro in un
+commit e i referti nel successivo.
+
+## ⛔ **`①` — escludere per «forma NON DICHIARATA» era un `FALSO-ZERO`, e hai ragione**
+
+### **Una forma IGNOTA non è una forma in cui la frazione non ha senso.** Escludere per
+**ignoranza** faceva **scomparire** regole che copiano da un solo genitore.
+### ✅ **Curato: una TERZA CLASSE, `COPIA-GENITORE-FORMA-IGNOTA`, che ELENCA invece di escludere.**
+
+## ⛔ **`②` — E UN LIVELLO PIÙ SOTTO, lo stesso errore: il nome lo DEDUCEVO io**
+
+`_rn_div_psi_spinor` dava `psi_spinor`, ma la grandezza si chiama ### **`_psi_spinor`**, col
+trattino basso. ➜ **La forma risultava *«non dichiarata»* per colpa del MIO nome, non del
+registro** — e **16 delle 18** erano in `DOMINI` con forme dichiarate: `pos`, `unita`, `finito`.
+### ✅ **Curato: il nome si RISOLVE contro i registri.**
+
+| | |
+|---|---|
+| ### **`24`** | `COPIA-GENITORE` — forma dichiarata, **la frazione ha senso** |
+| `2` | forma ignota: ### **solo `conc_nodi`**, nei due eventi |
+| `4` | esclusi **col motivo**: `i` *(`indice`)* e `perc_chi` *(`segno`)*, per i due eventi |
+| ### **`30`** | ### **il totale — e coincide col tuo conteggio** |
+
+### 📌 **E il tuo errore iniziale è dichiarato nel referto:** contavi `6` perché non contavi
+`c["src"]`, e perdevi `omega_s`, `mem_mot` e tutte le regole indicizzate da `src`.
+
+## ⛔ **`③` — E IL TERZO l'ha trovato l'uscita dello strumento, non io**
+
+La patch del nome **riassegnava `gr`**, che era **già** la lista delle grandezze della `FRAZIONE`:
+### **il CANCELLO contava i CARATTERI di `_spinor_lift`** invece delle coppie, e stampava
+*«le grandezze della frazione sono 12 (`_`, `s`, `p`, `i`, `n`, `o`, `r`, …)»*.
+### ➜ **Si è visto perché il referto ha stampato un'assurdità, non perché l'avessi previsto.**
+### **E aveva rotto proprio il pezzo che deve essere più affidabile: il cancello.**
+
+## ⭐ **E IL FATTO PRINCIPALE EMERGE SOLO ORA**
+
+> ### **LO SPINORE STESSO nasce come COPIA di `a`** — `_psi_spinor` *(`unita`)*,
+> `_spinor_lift` *(`finito`)*, `_nb` *(`unita`)* — **col segno `-1` nello Schwinger**
+> *(«eredita INVERTITA, antichirale»)* — ### **mentre `psi` nasce come MEDIA.**
+
+### ➜ **Due descrizioni della stessa materia, due frazioni: `0.5` e `0`.** ### **E con gli esclusi
+per «forma ignota» non si vedeva affatto.** Non entra nel cancello: **è materiale per la decisione
+di Luca.**
+
+## ⛔ **`2` — LA RECIDIVA: la lista dei file era scritta a memoria**
+
+`2ab4ce2` e `1d58764` dicono *«FILE CAMBIATI, tutti»* e ### **omettono
+`doc/INDICE_ID_ESCLUSI.tsv`**. ### **La parola *«tutti»* in una lista scritta a memoria è una
+promessa che non posso mantenere**, e alla seconda volta **non è una distrazione: è un metodo
+sbagliato.**
+### ✅ **Da ora la lista si GENERA:** `git diff --cached --name-only`.
+### ⚠ **E non è un presidio** *(`A9`)*: nessun hook confronta la lista col commit. **È una
+pratica** — la differenza è che ora c'è **un comando** al posto della memoria.
+
+## ⚠ **`3` — e un numero discorde, sul più innocuo che c'era**
+
+`97fde1c` dice `numpy 2.3.3`, il referto dice `2.3.0`. ### **Il referto ha ragione: quel numero lo
+stampa lo strumento, il messaggio l'ho scritto io.** ### 📌 **È `L-NUMERI` preso alla lettera, e
+violato dove sembrava non contare.** Annotato nel task history.
+
+---

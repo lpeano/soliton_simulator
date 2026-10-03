@@ -171,9 +171,14 @@ LATO_B = ("b", "bb", "src_b")
 #     `segno`   -> `perc_chi`, `perc_geom`: e' CATEGORIALE, e il registro lo dice
 #                  esplicitamente -- *<<sommare due decisioni darebbe +2, 0 o -2,
 #                  che non sono valori ammessi>>*.
-#   ### E una grandezza che NON STA in `DOMINI` ha la forma ### **non dichiarata**:
-#   non posso affermare che una frazione abbia senso, quindi la ESCLUDO ### **col suo
-#   motivo** invece di contarla.
+#   ### ⛔ **E UNA GRANDEZZA CHE NON STA IN `DOMINI` NON SI ESCLUDE: SI ELENCA.**
+#   La prima stesura la escludeva *<<perche' la forma non e' dichiarata>>*, ed era un
+#   ### **FALSO-ZERO** *(rilievo del guardiano, 2026-10-03, ed e' giusto)*:
+#   ### **una forma IGNOTA non e' una forma in cui la frazione non ha senso.**
+#   Escludere per ignoranza fa SCOMPARIRE 18 regole che copiano da un solo genitore --
+#   e fra loro c'e' ### **lo SPINORE.**
+#   ### ✅ CURA: una ### **TERZA CLASSE**, `COPIA-GENITORE-FORMA-IGNOTA`. Restano
+#   esclusi ### **solo** i quattro che hanno un motivo DICHIARATO.
 FORME_SENZA_FRAZIONE = ("indice", "segno")
 
 
@@ -451,25 +456,41 @@ def principale():
         spec = importlib.util.spec_from_file_location("_sim_cens6a", SIM)
         _S = importlib.util.module_from_spec(spec)
         spec.loader.exec_module(_S)
-    copie, esclusi = [], []
+    copie, ignote, esclusi = [], [], []
     for nome, chiavi in sorted(lati.per_regola.items()):
         usa_a = sorted(k for k in chiavi if k in LATO_A)
         usa_b = sorted(k for k in chiavi if k in LATO_B)
         if not (usa_a and not usa_b):
             continue
         ev = "divisione" if nome.startswith("_rn_div_") else "schwinger"
-        gr = nome.split("_", 3)[3] if nome.count("_") >= 3 else "?"
-        voce = _S.REGOLE_NASCITA.get((ev, gr)) or {}
-        dom = _S.DOMINI.get(gr)
+        # ### `gq` e NON `gr`: `gr` e' GIA' usata piu' sopra per le grandezze della
+        #   FRAZIONE, e riassegnarla qui ha rotto IL CANCELLO -- il verdetto contava i
+        #   CARATTERI di `_spinor_lift` invece delle coppie. Il guasto si e' visto perche'
+        #   il referto ha stampato un'assurdita', non perche' l'avessi previsto.
+        gq = nome.split("_", 3)[3] if nome.count("_") >= 3 else "?"
+        # ### IL NOME SI RISOLVE CONTRO I REGISTRI, NON SI DEDUCE DAL NOME DELLA
+        #   FUNZIONE. `_rn_div_psi_spinor` -> `psi_spinor`, ma la grandezza si chiama
+        #   ### **`_psi_spinor`**, col trattino basso. ### ⛔ La stesura precedente
+        #   troncava e concludeva *<<forma non dichiarata in DOMINI>>* per SEDICI regole
+        #   su diciotto -- cioe' ### **lo stesso FALSO-ZERO un livello piu' sotto**:
+        #   la forma era dichiarata, era IL MIO NOME a essere sbagliato.
+        for _cand in (gq, "_" + gq):
+            if (ev, _cand) in _S.REGOLE_NASCITA or _cand in _S.DOMINI:
+                gq = _cand
+                break
+        voce = _S.REGOLE_NASCITA.get((ev, gq)) or {}
+        dom = _S.DOMINI.get(gq)
         forma = dom[0] if dom else None
-        x = {"regola": nome, "evento": ev, "grandezza": gr, "chiavi_a": usa_a,
+        x = {"regola": nome, "evento": ev, "grandezza": gq, "chiavi_a": usa_a,
              "forma": forma, "delegata_a": lati.delega.get(nome),
              "classe_dichiarata": voce.get("classe", "?")}
         # ### IL FILTRO E' LETTO DA `DOMINI`, non deciso da me: una frazione ha senso
         #   solo per una grandezza CONTINUA e DICHIARATA.
         if forma is None:
-            x["motivo_esclusione"] = "forma NON DICHIARATA in DOMINI"
-            esclusi.append(x)
+            # ### NON si esclude: si ELENCA. Una forma ignota non e' una forma in cui
+            #   la frazione non ha senso -- e `COPIA-GENITORE` resta cio' che e'.
+            x["nota"] = "forma non dichiarata in DOMINI"
+            ignote.append(x)
         elif forma in FORME_SENZA_FRAZIONE:
             x["motivo_esclusione"] = "forma `%s`: una frazione NON ha senso" % forma
             esclusi.append(x)
@@ -495,19 +516,68 @@ def principale():
                % (x["regola"][:24], x["evento"], x["grandezza"][:13], x["forma"],
                   "si" if x["delegata_a"] else "-", str(x["classe_dichiarata"])[:40]))
     stampa("")
-    stampa("  ESCLUSI, col MOTIVO letto da DOMINI: %d" % len(esclusi))
+    stampa("  COPIA-GENITORE-FORMA-IGNOTA: indicizza SOLO il lato `a`, e la forma NON e'")
+    stampa("  dichiarata in DOMINI. SI ELENCANO, non si escludono. Siti: %d" % len(ignote))
+    stampa("    %-24s %-11s %-15s %-8s %s"
+           % ("regola", "evento", "grandezza", "delega", "classe dichiarata"))
+    for x in ignote:
+        stampa("    %-24s %-11s %-15s %-8s %s"
+               % (x["regola"][:24], x["evento"], x["grandezza"][:15],
+                  "si" if x["delegata_a"] else "-", str(x["classe_dichiarata"])[:44]))
+    stampa("  ### \u26d4 E LA STESURA PRECEDENTE LE ESCLUDEVA <<perche' la forma non e'")
+    stampa("  ###   dichiarata>>: ERA UN FALSO-ZERO. Una forma IGNOTA non e' una forma in")
+    stampa("  ###   cui la frazione non ha senso: escludere per IGNORANZA fa SCOMPARIRE")
+    stampa("  ###   regole che copiano da un solo genitore.")
+    stampa("  ### E C'ERA UN SECONDO FALSO-ZERO, UN LIVELLO PIU' SOTTO: il nome della")
+    stampa("  ###   grandezza lo DEDUCEVO dal nome della funzione, e `_rn_div_psi_spinor`")
+    stampa("  ###   dava `psi_spinor` mentre la grandezza si chiama `_psi_spinor`, COL")
+    stampa("  ###   TRATTINO BASSO. Cosi' la forma risultava <<non dichiarata>> per colpa")
+    stampa("  ###   del MIO nome, non del registro. Ora il nome si RISOLVE contro i")
+    stampa("  ###   registri, e delle %d regole a un solo genitore ne restano %d con forma"
+           % (len(copie) + len(ignote) + len(esclusi), len(ignote)))
+    stampa("  ###   ignota: solo `conc_nodi`, nei due eventi.")
+    stampa("")
+    stampa("  ESCLUSI, e solo questi hanno un MOTIVO DICHIARATO: %d" % len(esclusi))
     for x in esclusi:
-        stampa("    %-24s %-13s %s"
-               % (x["regola"][:24], x["grandezza"][:13], x["motivo_esclusione"]))
+        stampa("    %-24s %-15s %s"
+               % (x["regola"][:24], x["grandezza"][:15], x["motivo_esclusione"]))
     stampa("  ### IL CRITERIO NON E' MIO: e' la FORMA che il registro DICHIARA.")
     stampa("  ###   `indice` e' topologia, `segno` e' categoriale -- e per il `segno` il")
     stampa("  ###   registro lo dice esplicitamente: sommare due decisioni darebbe")
-    stampa("  ###   +2, 0 o -2, che non sono valori ammessi. Una grandezza senza forma")
-    stampa("  ###   dichiarata la ESCLUDO col suo motivo, invece di contarla.")
+    stampa("  ###   +2, 0 o -2, che non sono valori ammessi.")
+    stampa("")
+    stampa("  IL TOTALE: %d copie + %d forma ignota + %d esclusi = %d regole che"
+           % (len(copie), len(ignote), len(esclusi),
+              len(copie) + len(ignote) + len(esclusi)))
+    stampa("  indicizzano UN SOLO GENITORE.")
+    stampa("")
+    stampa("  *** IL FATTO PRINCIPALE, e lo fa emergere la terza classe: ***")
+    _spin = [x for x in (copie + ignote)
+             if x["grandezza"] in ("_psi_spinor", "spinor_lift", "_spinor_lift",
+                                   "psi_spinor", "nb", "_nb")]
+    stampa("    LO SPINORE STESSO NASCE COME COPIA DI `a`, NON COME MEDIA.")
+    for x in sorted(_spin, key=lambda y: (y["grandezza"], y["evento"])):
+        stampa("      %-11s %-15s %s"
+               % (x["evento"], x["grandezza"][:15], str(x["classe_dichiarata"])[:60]))
+    stampa("    MENTRE `psi` NASCE COME MEDIA DEI DUE GENITORI (:1984, EREDITA-MEDIA).")
+    stampa("    ### E nello Schwinger la copia dello spinore porta il SEGNO -1 (doppia")
+    stampa("    ###   copertura OPPOSTA), che e' una scelta dichiarata nel registro.")
+    stampa("    ### QUINDI: il campo `psi` interpola fra i genitori, LO SPINORE NO.")
+    stampa("    ###   Due descrizioni della stessa materia, DUE FRAZIONI DIVERSE.")
+    stampa("    ### Non e' un difetto dichiarato: e' la DOMANDA che la decisione di Luca")
+    stampa("    ###   deve chiudere -- e con gli esclusi per <<forma ignota>> NON SI")
+    stampa("    ###   VEDEVA AFFATTO.")
     mie_cg = {(x["evento"], x["grandezza"]) for x in copie}
+    tutte_cg = {(x["evento"], x["grandezza"]) for x in (copie + ignote + esclusi)}
     sue_cg = set(GUARDIANO_COPIA_GENITORE)
     stampa("")
     stampa("  IL CONFRONTO col conteggio del guardiano")
+    stampa("    ### E IL CONTEGGIO INIZIALE DEL GUARDIANO ERA SEI, e lui dichiara perche'")
+    stampa("    ###   era sbagliato: NON CONTAVA `c[\"src\"]`, quindi perdeva `omega_s`,")
+    stampa("    ###   `mem_mot` e TUTTE le regole indicizzate da `src`. Errore del")
+    stampa("    ###   guardiano, dichiarato da lui. Con `src` contato come lato `a`")
+    stampa("    ###   (vale `a` a :8604 e `aa` a :8724) i due conteggi coincidono: %d."
+           % len(tutte_cg))
     stampa("    nella MIA e non nella sua .. %s"
            % (sorted(mie_cg - sue_cg) or "nessuna"))
     stampa("    nella SUA e non nella mia .. %s"
@@ -603,7 +673,9 @@ def principale():
     stampa("  ###   `phivel` hanno DUE siti ciascuna: la condivisione NON e' uniforme.")
     stampa("")
     esito = {"confronto_solo_mie": solo_mie, "confronto_solo_sue": solo_sue,
-             "copia_genitore": copie,
+             "copia_genitore": copie, "copia_genitore_forma_ignota": ignote,
+             "copia_genitore_esclusi": esclusi,
+             "copia_genitore_totale": len(copie) + len(ignote) + len(esclusi),
              "copia_genitore_solo_mie": sorted("/".join(k) for k in (mie_cg - sue_cg)),
              "copia_genitore_solo_sue": sorted("/".join(k) for k in (sue_cg - mie_cg)),
              "blob_sim": blob(SIM), "blob_strumento": blob(os.path.abspath(__file__)),

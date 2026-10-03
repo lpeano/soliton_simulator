@@ -226,6 +226,25 @@ con le due righe giuste**, e con la lista corretta la differenza calcolata risul
 due archi di `d`)*, `d0new` con `md0 = 1` *(e' gia' raddoppiato)*. ### **La cura serve dove `md`
 MOLTIPLICA una somma, non dove la somma e' gia' sull'array intero.**
 
+## ⛔ **ANNOTAZIONE — DUE DIFETTI DI FORMA MIEI, e il primo e' una RECIDIVA**
+
+### ⛔ **① LA LISTA DEI FILE NEL MESSAGGIO DI COMMIT ERA SCRITTA A MEMORIA, e due volte ha
+OMESSO UN FILE.** `2ab4ce2` e `1d58764` dicono *<<FILE CAMBIATI, tutti>>* e ### **non elencano
+`doc/INDICE_ID_ESCLUSI.tsv`**, che in entrambi i casi era nel commit.
+### ➜ **La parola *<<tutti>>* in una lista scritta a memoria e' una promessa che non posso
+mantenere**, e alla seconda volta non e' una distrazione: e' ### **un metodo sbagliato.**
+### ✅ **DA ORA LA LISTA SI GENERA:** `git diff --cached --name-only`, e si incolla.
+### ⚠ **E non e' un presidio** *(`A9`)*: nessun hook guarda la corrispondenza fra la lista nel
+messaggio e i file nel commit. ### **E' una pratica, e come tale puo' essere violata di nuovo** —
+la differenza e' che ora c'e' ### **un comando** al posto della memoria.
+
+### ⚠ **② UN NUMERO DISCORDE FRA IL MESSAGGIO E IL REFERTO.** Il messaggio di `97fde1c`
+dice ### **`numpy 2.3.3`**, il referto committato dice ### **`numpy 2.3.0`**.
+### **Il referto ha ragione: quel numero lo stampa lo strumento, il messaggio l'ho scritto io.**
+### 📌 **Ed e' `L-NUMERI` preso alla lettera** — *ogni numero scritto in un commit esce
+da uno script* — ### **violato sul numero piu' innocuo che c'era.** Un numero ricopiato a mano
+non ha provenienza anche quando e' quasi giusto.
+
 ## 3. TODO DEL NEXT STEP
 
 1. ☐ **committare e pushare QUESTO FILE** *(par.8: prima del lavoro)*
