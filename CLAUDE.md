@@ -328,7 +328,7 @@ sta in `doc/PATTERN_DI_PROVA.md`, che si legge prima di scrivere un sigillo o un
 
 ---
 
-## 12. I PRESIDI AUTOMATICI — **i hook, e sono nove**
+## 12. I PRESIDI AUTOMATICI — **i hook, e sono DIECI**
 
 > ### ⚠ **UN COMANDO, UNA VOLTA PER CLONE, PRIMA DI LAVORARE:**
 > ```
@@ -351,6 +351,7 @@ non viaggia col repo. `core.hooksPath` **SOSTITUISCE** quella cartella.
 | **`H-REG-R`** | `commit-msg` | una **legge** che cambia **senza la sua scheda** in `REGISTRO_FISICA` |
 | **`H-INDICE`** | `commit-msg` | un **ID** aggiunto a un documento vivo o citato nel messaggio **che non e' nell'indice** |
 | **`H-RIGHE`** | `pre-commit` | **`CLAUDE.md` oltre le 400 righe** |
+| **`H-FILE`** | `commit-msg` | una lista **`FILE CAMBIATI`** che **non coincide** con `git diff --cached --name-only`, **o che manca** *(decisione di Luca, 2026-10-03: la regola era scritta da due recidive, e **una regola scritta non e' un presidio**)* |
 
 > **Il prefisso `H-` dice *«questo lo impedisce una macchina»*, e cura una collisione reale:**
 > `P3` e `P5` erano **due regole diverse** con lo stesso nome — la regola di metodo e il presidio
@@ -362,7 +363,7 @@ leggibile invece di passare in silenzio:
 
 | via d'uscita | dove si scrive |
 |---|---|
-| `[SENZA-RELAZIONE: <motivo>]` · `[SENZA-INDICE: <motivo>]` · `[CLAUDE-OLTRE-400: <motivo>]` | nel **messaggio** di commit |
+| `[SENZA-RELAZIONE: <motivo>]` · `[SENZA-INDICE: <motivo>]` · `[CLAUDE-OLTRE-400: <motivo>]` · `[SENZA-FILE-CAMBIATI: <motivo>]` | nel **messaggio** di commit |
 | `# ESENTE-H-P5: <motivo>` *(e simili)* | in un **commento del file**, **e** dev'essere **elencata** in `doc/ESENZIONI_presidi.md` (`python csv/_hook_presidi.py --elenca`): **un'esenzione non elencata fa fallire il commit comunque** |
 
 ### ⛔ **E C'E' UN DECIMO PRESIDIO, E NON E' UN HOOK** *(decisione di Luca, 2026-10-03)*

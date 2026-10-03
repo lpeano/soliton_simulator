@@ -3434,3 +3434,39 @@ era dunque **vicino al conteggio dell'ultimo passo**, non a quello della costruz
 resta ritirato:** «quasi giusto» non è una provenienza.
 
 ---
+
+## **`H-FILE`: la lista dei file diventa un presidio. E il suo primo atto scagiona un commit**
+
+**Decisione di Luca, 2026-10-03.** La regola *«la lista si genera da `git diff --cached
+--name-only`»* era scritta da due recidive — `2ab4ce2` e `1d58764`, entrambe con
+`doc/INDICE_ID_ESCLUSI.tsv` omesso — e **una regola scritta non è un presidio: è `A9`.** Ora è
+una macchina: `csv/_hook_file_cambiati.py`, chiamato dal `commit-msg` **prima** di
+`H-P1-bis`.
+
+**Collaudato prima di committarlo, su tutti e cinque i rami** *(non solo quello che il mandato
+chiedeva: un presidio con un caso provato è mezzo presidio)*:
+
+| caso | atteso | ottenuto |
+|---|---|---|
+| lista giusta | passa | ✅ passa |
+| **un file omesso** | **rifiuta** | ✅ **rifiuta, e lo NOMINA** |
+| un file inventato | rifiuta | ✅ rifiuta |
+| sezione assente | rifiuta | ✅ rifiuta |
+| `[SENZA-FILE-CAMBIATI: …]` | passa | ✅ passa |
+
+### ⛔ **E LA TERZA RECIDIVA CHE MI CONTESTI NON C'È. Verificato con `git log` e `git show` su
+`1927b45`:**
+
+```
+la lista NEL MESSAGGIO .. 6 righe, doc/INVENTARIO_strumenti.md COMPRESO
+i file DAVVERO cambiati . 6, gli stessi sei
+```
+
+### **Coincidono esattamente.** Non lo dico per discolparmi: lo dico perché **un addebito
+sbagliato costa quanto un difetto non visto** — se accettassi la terza recidiva, la cura
+cercherebbe un errore che non c'è e lascerebbe quello che c'è. ### ✅ **E il presidio serve
+anche a questo: decidere con un comando, in ENTRAMBE le direzioni, una cosa che altrimenti si
+decide a memoria.** *(Le due recidive vere restano vere, e sono il motivo per cui il presidio
+esiste.)*
+
+---
