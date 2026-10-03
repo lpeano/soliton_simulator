@@ -604,3 +604,26 @@ modo indipendente: rigirarli costerebbe `70` minuti per riprodurre numeri che no
 discussione. ### ⚠ **Ma il referto deve DIRLO:** il riepilogo stampa
 `NON ESEGUITO (--solo-cbis)` per ciascuno, perché **un referto che non nomina i bracci che
 non ha girato si legge come un sigillo intero.**
+
+### **E IL CONTROLLO HA PARLATO: il difetto è MISURATO, non raccontato**
+
+Il complemento *(`_corsa_2026-10-03_COMPLEMENTO_cbis.txt`, sigillo `94224cb7`)*:
+
+| | regola **NUOVA** | regola **VECCHIA** |
+|---|---|---|
+| chiavi sbagliate sulla copia pulita | **NESSUNA** | **`['_eventi']`** |
+| i sei siti | **NON scoperta** × 6 ✅ | **SCOPERTA** × 6 ⛔ |
+
+### ✅ **E le sei copie `C-bis` ora passano per la ragione giusta:** per ciascuna, le chiavi
+**davvero** sbagliate sono **esattamente** le attese — `['pos_figlio convesso']`,
+`['dh_a…', 'dh_b…']`, `['fm = (phi[a] - t*D) mod']`, `['fm = (phi[a]-(t+bias)*D)']`,
+`['pos antinodo convesso']`, `['dd_a…', 'dd_b…']`. ### **Prima questa colonna non esisteva, e
+senza di lei «sei bocciature» non diceva CHE COSA avesse bocciato.**
+
+### ⚠ **UNA SCELTA SUL NOME DELL'ARTEFATTO, e nasce dal difetto appena curato.** Il sigillo
+scrive `_sigillo.json` e `_corsa.txt` con nomi **generici**, che ogni corsa sovrascrive.
+### **Un nome generico è l'invito a citare l'artefatto della corsa SBAGLIATA** — è
+esattamente `FALSO-UNO` caso ①. Quindi del complemento si committa una **copia col nome
+proprio**, `_sigillo_2026-10-03_COMPLEMENTO_cbis.json`, e i due generici **restano non
+tracciati**. *(Che non siano tracciati è anche il motivo per cui questa corsa non ha
+distrutto nulla del referto `1927b45`: verificato con `git status` prima di committare.)*

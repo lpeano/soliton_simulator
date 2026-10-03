@@ -1,0 +1,130 @@
+{
+ "blob_sim": "c18c9bf6f412c81b5a55eefbc8ee64eca85e4122",
+ "blob_sigillo": "94224cb7f67738a1e1a6c547feac20da914187c4",
+ "blob_patch": "2b8f9d5eaea551f72623b155d3c89faae36ae2e8",
+ "piattaforma": {
+  "sistema": "Windows",
+  "macchina": "AMD64",
+  "python": "3.13.2",
+  "numpy": "2.3.0"
+ },
+ "blob_prima": "6d30697619d2cafbf20a6466fbfbca210656111d",
+ "controllo_cbis": {
+  "per_sito": {
+   "pos_div": {
+    "scoperta_da_C_nuova": false,
+    "scoperta_da_C_vecchia": true
+   },
+   "dh": {
+    "scoperta_da_C_nuova": false,
+    "scoperta_da_C_vecchia": true
+   },
+   "fm": {
+    "scoperta_da_C_nuova": false,
+    "scoperta_da_C_vecchia": true
+   },
+   "fm_bias": {
+    "scoperta_da_C_nuova": false,
+    "scoperta_da_C_vecchia": true
+   },
+   "pos_sch": {
+    "scoperta_da_C_nuova": false,
+    "scoperta_da_C_vecchia": true
+   },
+   "dd": {
+    "scoperta_da_C_nuova": false,
+    "scoperta_da_C_vecchia": true
+   }
+  },
+  "passa": true,
+  "vecchia_regola_sbagliava": true,
+  "sbagliate_nuova": [],
+  "sbagliate_vecchia": [
+   "_eventi"
+  ]
+ },
+ "braccio_C_bis": {
+  "pos_div": {
+   "letterali_B": 1,
+   "grandezze_sbagliate": [
+    "pos_figlio convesso"
+   ],
+   "chiavi_attese": [
+    "pos_figlio convesso"
+   ],
+   "scoperta_da_B": true,
+   "scoperta_da_C": true,
+   "mitosi_dir_acceso": false,
+   "scoperta": true
+  },
+  "dh": {
+   "letterali_B": 1,
+   "grandezze_sbagliate": [
+    "dh_a = t*d[sel]",
+    "dh_b = (1-t)*d[sel]"
+   ],
+   "chiavi_attese": [
+    "dh_a = t*d[sel]",
+    "dh_b = (1-t)*d[sel]"
+   ],
+   "scoperta_da_B": true,
+   "scoperta_da_C": true,
+   "mitosi_dir_acceso": false,
+   "scoperta": true
+  },
+  "fm": {
+   "letterali_B": 1,
+   "grandezze_sbagliate": [
+    "fm = (phi[a] - t*D) mod"
+   ],
+   "chiavi_attese": [
+    "fm = (phi[a] - t*D) mod"
+   ],
+   "scoperta_da_B": true,
+   "scoperta_da_C": true,
+   "mitosi_dir_acceso": false,
+   "scoperta": true
+  },
+  "fm_bias": {
+   "letterali_B": 1,
+   "grandezze_sbagliate": [
+    "fm = (phi[a]-(t+bias)*D)"
+   ],
+   "chiavi_attese": [
+    "fm = (phi[a]-(t+bias)*D)"
+   ],
+   "scoperta_da_B": true,
+   "scoperta_da_C": true,
+   "mitosi_dir_acceso": true,
+   "scoperta": true
+  },
+  "pos_sch": {
+   "letterali_B": 1,
+   "grandezze_sbagliate": [
+    "pos antinodo convesso"
+   ],
+   "chiavi_attese": [
+    "pos antinodo convesso"
+   ],
+   "scoperta_da_B": true,
+   "scoperta_da_C": true,
+   "mitosi_dir_acceso": false,
+   "scoperta": true
+  },
+  "dd": {
+   "letterali_B": 1,
+   "grandezze_sbagliate": [
+    "dd_a = max(t*L, 0.05)",
+    "dd_b = max((1-t)*L, 0.05)"
+   ],
+   "chiavi_attese": [
+    "dd_a = max(t*L, 0.05)",
+    "dd_b = max((1-t)*L, 0.05)"
+   ],
+   "scoperta_da_B": true,
+   "scoperta_da_C": true,
+   "mitosi_dir_acceso": false,
+   "scoperta": true
+  }
+ }
+}

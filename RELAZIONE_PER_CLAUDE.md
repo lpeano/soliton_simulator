@@ -3544,3 +3544,44 @@ dopo il cancello è assegnato soltanto nei bracci saltati — zero rischi di `Na
 contava ciò che viene assegnato DOPO il cancello: corretto prima di fidarmene.)*
 
 ---
+
+## **IL COMPLEMENTO DI `C-bis`: il difetto è MISURATO, non raccontato**
+
+Run staccato (PID `34852`), `21:44:50` → terminato, **stderr vuoto**, terminazione verificata
+in tre modi. Sigillo `94224cb7`, simulatore `c18c9bf6`.
+
+| | regola **NUOVA** | regola **VECCHIA** |
+|---|---|---|
+| chiavi sbagliate sulla **copia pulita** | **NESSUNA** | **`['_eventi']`** |
+| i sei siti, giudicati su quella copia | **NON scoperta** × 6 ✅ | **SCOPERTA** × 6 ⛔ |
+
+### ✅ **Il controllo che può fallire non ha fallito, e la colonna accanto dimostra che il
+difetto c'era:** la stessa copia, senza un solo letterale, risultava «scoperta da `C`» per
+**tutti e sei** i siti con la regola vecchia — e il colpevole è **nominato**, `_eventi`.
+
+### ✅ **E le sei copie `C-bis` ora passano per la ragione giusta.** Per ciascuna, le chiavi
+**davvero** sbagliate sono **esattamente** le attese:
+
+```
+pos_div   attese ['pos_figlio convesso']            davvero ['pos_figlio convesso']
+dh        attese ['dh_a = t*d[sel]', 'dh_b = …']    davvero le stesse due
+fm        attese ['fm = (phi[a] - t*D) mod']        davvero la stessa
+fm_bias   attese ['fm = (phi[a]-(t+bias)*D)']       davvero la stessa
+pos_sch   attese ['pos antinodo convesso']          davvero la stessa
+dd        attese ['dd_a = max(t*L, 0.05)', 'dd_b…'] davvero le stesse due
+```
+
+### 📌 **Prima questa colonna non esisteva — e senza di lei *«sei bocciature»* non diceva CHE
+COSA avesse bocciato.** È il punto del tuo rilievo: il referto aveva i dati giusti, il
+criterio non li guardava.
+
+**Il riepilogo dichiara i sei bracci non eseguiti**, con l'esito che sta in `1927b45`.
+### ⚠ **E una scelta sul nome dell'artefatto, che nasce dal difetto appena curato:** il
+sigillo scrive `_sigillo.json` e `_corsa.txt` con nomi **generici**, sovrascritti a ogni
+corsa — e **un nome generico è l'invito a citare l'artefatto della corsa sbagliata**, cioè
+`FALSO-UNO` caso ①. Quindi del complemento committo una copia col **nome proprio**, e i due
+generici restano **non tracciati**. *(Che non lo siano è anche il motivo per cui questa corsa
+non ha distrutto nulla del referto `1927b45`: verificato con `git status` prima di
+committare.)*
+
+---
