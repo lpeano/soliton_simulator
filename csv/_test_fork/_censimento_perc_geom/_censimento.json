@@ -1,0 +1,419 @@
+{
+ "blob_sim": "7ed5660856f51fa28478dd4d489ab88f3670081a",
+ "blob_strumento": "030faa8de70c057bbc0d61ca4f3239b4cd189403",
+ "PHI_CRIT": 6.283185307179586,
+ "posti_ordine_nascita": {
+  "i": 1,
+  "j": 2,
+  "_deg": 4,
+  "perc_chi": 16,
+  "perc_geom": 17,
+  "tw": 31,
+  "twp": 32
+ },
+ "ordine_nascita": [
+  "phi",
+  "i",
+  "j",
+  "_cs_nodo_prev",
+  "_deg",
+  "_nb",
+  "_nb_prec",
+  "_nb_ret",
+  "_psi_prec",
+  "_psi_spin_prec",
+  "_psi_spinor",
+  "_spinor_lift",
+  "conc_nodi",
+  "eta",
+  "mem_mot",
+  "omega_s",
+  "perc_chi",
+  "perc_geom",
+  "perc_tw",
+  "phi0",
+  "phi_s",
+  "phivel",
+  "pos",
+  "psi",
+  "psi_spin",
+  "rho_spin",
+  "_rep",
+  "d",
+  "d0",
+  "peq",
+  "_peqn_idx",
+  "tw",
+  "twp",
+  "vd",
+  "_smp_d0",
+  "_smp_d"
+ ],
+ "ast": [
+  {
+   "riga": 1833,
+   "dentro": "_rn_div_perc_geom",
+   "forma": "attributo",
+   "testo": "net.perc_geom = np.concatenate([net.perc_geom, net.perc_geom[c[\"a\"]]])",
+   "classe": "ESTENDE (nasce un valore per un nodo nuovo)"
+  },
+  {
+   "riga": 2209,
+   "dentro": "_rn_sch_perc_geom",
+   "forma": "attributo",
+   "testo": "net.perc_geom = np.concatenate([net.perc_geom, net.perc_geom[c[\"aa\"]]])",
+   "classe": "ESTENDE (nasce un valore per un nodo nuovo)"
+  },
+  {
+   "riga": 3709,
+   "dentro": "__init__",
+   "forma": "attributo",
+   "testo": "self.perc_geom = np.zeros(0, int)    # [CHI_COOP] geometria: giro compiuto o no (+1/-1)",
+   "classe": "inizializza (array VUOTO: nessun valore)"
+  },
+  {
+   "riga": 4779,
+   "dentro": "semina",
+   "forma": "attributo",
+   "testo": "self.perc_geom = np.concatenate([self.perc_geom, chi_nuovi])",
+   "classe": "ESTENDE (nasce un valore per un nodo nuovo)"
+  },
+  {
+   "riga": 7560,
+   "dentro": "step",
+   "forma": "in posto (slice)",
+   "testo": "self.perc_geom[:self.n] = np.where(twn > soglia, 1, -1).astype(self.perc_geom.dtype)",
+   "classe": "in posto (riscrive nodi che ESISTONO)"
+  }
+ ],
+ "ast_setattr_variabile": [
+  {
+   "riga": 1557,
+   "dentro": "_avvelena_derivate",
+   "verdetto": "?",
+   "come": "`nome` non e' legata in questa funzione (ambito `_avvelena_derivate`): la sorgente sta altrove",
+   "testo": "setattr(net, nome, _nuovo)",
+   "verdetto_finale": "NO",
+   "come_finale": "DICHIARATO: `_avvelena_derivate`: `nome` scorre i nomi di REGISTRO_DERIVATE, e `perc_geom` NON e' fra loro -- e lo strumento lo VERIFICA dal modulo, non lo assume"
+  },
+  {
+   "riga": 6242,
+   "dentro": "_smorza",
+   "verdetto": "NO",
+   "come": "prefisso letterale `_g_sm_`, e `perc_geom` non comincia cosi'",
+   "testo": "setattr(self, '_g_sm_' + quale, getattr(self, '_g_sm_' + quale, 0) + 1)",
+   "verdetto_finale": "NO",
+   "come_finale": "prefisso letterale `_g_sm_`, e `perc_geom` non comincia cosi'"
+  },
+  {
+   "riga": 6492,
+   "dentro": "_smp_chirurgia",
+   "verdetto": "NO",
+   "come": "`for _nome in ['_smp_d0', '_smp_d']`: insieme ENUMERATO, `perc_geom` non c'e'",
+   "testo": "setattr(self, _nome, v)",
+   "verdetto_finale": "NO",
+   "come_finale": "`for _nome in ['_smp_d0', '_smp_d']`: insieme ENUMERATO, `perc_geom` non c'e'"
+  },
+  {
+   "riga": 6590,
+   "dentro": "_nasce",
+   "verdetto": "?",
+   "come": "`_k` legata a un'espressione non letterale",
+   "testo": "setattr(self, _k, getattr(self, _k, _zero) + _val)",
+   "verdetto_finale": "NO",
+   "come_finale": "DICHIARATO: `_nasce`: il nome e' `_k = _b %% (_pre, _q, dove)` con `_b = \"_sm_%%s%%s_%%s\"` due righe sopra -- cioe' un CONTATORE col prefisso `_sm_`, e la scrittura e' un ACCUMULO (`getattr(...) + _val`), non un rebind di una grandezza. ### DICHIARATO e non risolto dalla macchina PERCHE' SERVIREBBERO DUE SALTI (`_k` -> `_b` -> la costante), e due salti sono gia' una DEDUZIONE: la regola di questo strumento e' che una deduzione si DICHIARA invece di passare per misura"
+  },
+  {
+   "riga": 6819,
+   "dentro": "carica_stato",
+   "verdetto": "?",
+   "come": "`k` non e' legata in questa funzione (ambito `carica_stato`): la sorgente sta altrove",
+   "testo": "setattr(self, k, v)",
+   "verdetto_finale": "RESTORE",
+   "come_finale": "DICHIARATO: `carica_stato`: `stato['attrs'].items()` PUO' contenere `perc_geom` (e' un ndarray di __dict__, e `salva_stato` li accetta). ### Ma e' un RIPRISTINO, non una nascita, e non gira nella configurazione del driver: nessun `--carica`"
+  },
+  {
+   "riga": 12208,
+   "dentro": "_diag_completa",
+   "verdetto": "NO",
+   "come": "`key = '_ang_prec_%d' % ...`: prefisso letterale `_ang_prec_`, e `perc_geom` non comincia cosi'",
+   "testo": "setattr(net,key,d['ang'])",
+   "verdetto_finale": "NO",
+   "come_finale": "`key = '_ang_prec_%d' % ...`: prefisso letterale `_ang_prec_`, e `perc_geom` non comincia cosi'"
+  },
+  {
+   "riga": 12234,
+   "dentro": "_diag_completa",
+   "verdetto": "NO",
+   "come": "`keyo = '_ang_orb_%d_%d' % ...`: prefisso letterale `_ang_orb_`, e `perc_geom` non comincia cosi'",
+   "testo": "setattr(net,keyo,ang_orb)",
+   "verdetto_finale": "NO",
+   "come_finale": "`keyo = '_ang_orb_%d_%d' % ...`: prefisso letterale `_ang_orb_`, e `perc_geom` non comincia cosi'"
+  },
+  {
+   "riga": 12687,
+   "dentro": "batch_condensazione",
+   "verdetto": "?",
+   "come": "`_k` non e' legata in questa funzione (ambito `batch_condensazione`): la sorgente sta altrove",
+   "testo": "setattr(net, _k, _v)",
+   "verdetto_finale": "RESTORE",
+   "come_finale": "DICHIARATO: `batch_condensazione`: `_snap_fisica` e' uno SNAPSHOT ripristinato perche' il diaglog <<non lasci tracce sulla fisica>>. PUO' contenere `perc_geom`, ed e' NEUTRO AL BYTE per costruzione"
+  },
+  {
+   "riga": 12787,
+   "dentro": "batch_condensazione",
+   "verdetto": "?",
+   "come": "`_k` non e' legata in questa funzione (ambito `batch_condensazione`): la sorgente sta altrove",
+   "testo": "setattr(net, _k, _v)",
+   "verdetto_finale": "RESTORE",
+   "come_finale": "DICHIARATO: `batch_condensazione`: `_snap_cond`, idem -- il ripristino esiste proprio perche' `--ogni` non contamini lo stream"
+  }
+ ],
+ "setattr_dichiarati": {
+  "1557": [
+   "NO",
+   "`_avvelena_derivate`: `nome` scorre i nomi di REGISTRO_DERIVATE, e `perc_geom` NON e' fra loro -- e lo strumento lo VERIFICA dal modulo, non lo assume"
+  ],
+  "6590": [
+   "NO",
+   "`_nasce`: il nome e' `_k = _b %% (_pre, _q, dove)` con `_b = \"_sm_%%s%%s_%%s\"` due righe sopra -- cioe' un CONTATORE col prefisso `_sm_`, e la scrittura e' un ACCUMULO (`getattr(...) + _val`), non un rebind di una grandezza. ### DICHIARATO e non risolto dalla macchina PERCHE' SERVIREBBERO DUE SALTI (`_k` -> `_b` -> la costante), e due salti sono gia' una DEDUZIONE: la regola di questo strumento e' che una deduzione si DICHIARA invece di passare per misura"
+  ],
+  "6819": [
+   "RESTORE",
+   "`carica_stato`: `stato['attrs'].items()` PUO' contenere `perc_geom` (e' un ndarray di __dict__, e `salva_stato` li accetta). ### Ma e' un RIPRISTINO, non una nascita, e non gira nella configurazione del driver: nessun `--carica`"
+  ],
+  "12687": [
+   "RESTORE",
+   "`batch_condensazione`: `_snap_fisica` e' uno SNAPSHOT ripristinato perche' il diaglog <<non lasci tracce sulla fisica>>. PUO' contenere `perc_geom`, ed e' NEUTRO AL BYTE per costruzione"
+  ],
+  "12787": [
+   "RESTORE",
+   "`batch_condensazione`: `_snap_cond`, idem -- il ripristino esiste proprio perche' `--ogni` non contamini lo stream"
+  ]
+ },
+ "ast_estendono": [
+  {
+   "riga": 1833,
+   "dentro": "_rn_div_perc_geom",
+   "forma": "attributo",
+   "testo": "net.perc_geom = np.concatenate([net.perc_geom, net.perc_geom[c[\"a\"]]])",
+   "classe": "ESTENDE (nasce un valore per un nodo nuovo)"
+  },
+  {
+   "riga": 2209,
+   "dentro": "_rn_sch_perc_geom",
+   "forma": "attributo",
+   "testo": "net.perc_geom = np.concatenate([net.perc_geom, net.perc_geom[c[\"aa\"]]])",
+   "classe": "ESTENDE (nasce un valore per un nodo nuovo)"
+  },
+  {
+   "riga": 4779,
+   "dentro": "semina",
+   "forma": "attributo",
+   "testo": "self.perc_geom = np.concatenate([self.perc_geom, chi_nuovi])",
+   "classe": "ESTENDE (nasce un valore per un nodo nuovo)"
+  }
+ ],
+ "scene": {
+  "corta": {
+   "seme": 11,
+   "passi": 72,
+   "contatori_chibasc": {
+    "_g_chibasc_su_geom": 72,
+    "_g_chibasc_su_chi": 0
+   },
+   "soglia": {
+    "piu1_max": 1,
+    "passi_con_piu1": 5,
+    "twn_max": 6.420164658187551,
+    "passi": 72
+   },
+   "scritture_runtime": [
+    {
+     "dove": "_rn_div_perc_geom",
+     "riga": 1833,
+     "n": 8,
+     "cresciute": 8,
+     "nuovi": 9
+    },
+    {
+     "dove": "_rn_sch_perc_geom",
+     "riga": 2209,
+     "n": 1,
+     "cresciute": 1,
+     "nuovi": 1
+    },
+    {
+     "dove": "__init__",
+     "riga": 3709,
+     "n": 1,
+     "cresciute": 0,
+     "nuovi": 0
+    },
+    {
+     "dove": "semina",
+     "riga": 4779,
+     "n": 1,
+     "cresciute": 1,
+     "nuovi": 12802
+    }
+   ],
+   "nati": 10,
+   "per_evento": {
+    "divisione": {
+     "n": 9,
+     "er_m1": 9,
+     "er_p1": 0,
+     "der_m1": 9,
+     "der_p1": 0,
+     "diversi": 0
+    },
+    "schwinger": {
+     "n": 1,
+     "er_m1": 1,
+     "er_p1": 0,
+     "der_m1": 1,
+     "der_p1": 0,
+     "diversi": 0
+    }
+   },
+   "twn_max_dei_nati": 0.0,
+   "diversi": 0
+  },
+  "lunga": {
+   "seme": 11,
+   "passi": 150,
+   "contatori_chibasc": {
+    "_g_chibasc_su_geom": 150,
+    "_g_chibasc_su_chi": 0
+   },
+   "soglia": {
+    "piu1_max": 103,
+    "passi_con_piu1": 83,
+    "twn_max": 20.256253601148266,
+    "passi": 150
+   },
+   "scritture_runtime": [
+    {
+     "dove": "_rn_div_perc_geom",
+     "riga": 1833,
+     "n": 83,
+     "cresciute": 83,
+     "nuovi": 938
+    },
+    {
+     "dove": "_rn_sch_perc_geom",
+     "riga": 2209,
+     "n": 64,
+     "cresciute": 64,
+     "nuovi": 260
+    },
+    {
+     "dove": "__init__",
+     "riga": 3709,
+     "n": 1,
+     "cresciute": 0,
+     "nuovi": 0
+    },
+    {
+     "dove": "semina",
+     "riga": 4779,
+     "n": 1,
+     "cresciute": 1,
+     "nuovi": 12802
+    }
+   ],
+   "nati": 1198,
+   "per_evento": {
+    "divisione": {
+     "n": 938,
+     "er_m1": 938,
+     "er_p1": 0,
+     "der_m1": 938,
+     "der_p1": 0,
+     "diversi": 0
+    },
+    "schwinger": {
+     "n": 260,
+     "er_m1": 260,
+     "er_p1": 0,
+     "der_m1": 260,
+     "der_p1": 0,
+     "diversi": 0
+    }
+   },
+   "twn_max_dei_nati": 0.0,
+   "diversi": 0
+  },
+  "altro_seme": {
+   "seme": 12,
+   "passi": 72,
+   "contatori_chibasc": {
+    "_g_chibasc_su_geom": 72,
+    "_g_chibasc_su_chi": 0
+   },
+   "soglia": {
+    "piu1_max": 3,
+    "passi_con_piu1": 16,
+    "twn_max": 7.510570656079996,
+    "passi": 72
+   },
+   "scritture_runtime": [
+    {
+     "dove": "_rn_div_perc_geom",
+     "riga": 1833,
+     "n": 10,
+     "cresciute": 10,
+     "nuovi": 13
+    },
+    {
+     "dove": "_rn_sch_perc_geom",
+     "riga": 2209,
+     "n": 4,
+     "cresciute": 4,
+     "nuovi": 4
+    },
+    {
+     "dove": "__init__",
+     "riga": 3709,
+     "n": 1,
+     "cresciute": 0,
+     "nuovi": 0
+    },
+    {
+     "dove": "semina",
+     "riga": 4779,
+     "n": 1,
+     "cresciute": 1,
+     "nuovi": 12765
+    }
+   ],
+   "nati": 17,
+   "per_evento": {
+    "divisione": {
+     "n": 13,
+     "er_m1": 13,
+     "er_p1": 0,
+     "der_m1": 13,
+     "der_p1": 0,
+     "diversi": 0
+    },
+    "schwinger": {
+     "n": 4,
+     "er_m1": 4,
+     "er_p1": 0,
+     "der_m1": 4,
+     "der_p1": 0,
+     "diversi": 0
+    }
+   },
+   "twn_max_dei_nati": 0.0,
+   "diversi": 0
+  }
+ },
+ "solo_ast": [
+  7560
+ ],
+ "solo_runtime": [],
+ "punto_d_totale": 0
+}

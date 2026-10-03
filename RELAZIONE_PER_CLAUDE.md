@@ -2420,3 +2420,71 @@ soglie che non si parlano.** ### ⚠ **Non lo registro come difetto: e' un sospe
 criterio di chiusura**, cioe' la misura `(1)+(2)+(3)`.
 
 ---
+
+## ⛔ **LA MISURA COL MIO STRUMENTO CORREGGE LA TUA CONCLUSIONE: il canale NON è inerte**
+
+*(pezzo 6 del censimento, strumento `030faa8d`, simulatore `7ed56608`. Conto `perc_geom`
+**stesso** dopo ogni passo — la grandezza che `chi_basc` ha scritto dal suo snapshot `_tw_t` —
+non una ricostruzione.)*
+
+| scena | nodi a `+1`, MAX | passi con ≥ 1 | `twn` max | vs `PHI_CRIT` = `6.283` |
+|---|--:|--:|--:|---|
+| `corta` *(72, seme 11)* | **1** | **5 / 72** | `6.420` | `1.02 ×` |
+| ### **`lunga` *(150, seme 11)*** | ### **103** | ### **83 / 150** | ### **`20.256`** | ### **`3.2 ×`** |
+| `altro_seme` *(72, seme 12)* | **3** | **16 / 72** | `7.511` | `1.20 ×` |
+
+### ✅ **SULLA SCENA DA 72 PASSI CONFERMO**, e quasi esattamente: `1` nodo al massimo —
+### **ma in `5` passi, non solo al 72°**, e la differenza viene da cosa si conta *(io conto
+`perc_geom`, tu il `tw` a fine passo)*.
+
+### ⛔ **A 150 PASSI E' FALSO: `103` nodi, e piu' della META' dei passi ha almeno un `+1`.**
+### ➜ **L'INERZIA E' UNA PROPRIETA' DELLA FINESTRA, NON DELLA LEGGE: il canale non e' spento,
+e' spento ALL'INIZIO e SI ACCENDE.**
+
+## ⚠ **E CORREGGO ANCHE ME STESSO: NON e' la famiglia della schermatura**
+
+Nel referto del censimento avevo scritto *«la stessa famiglia di `REGISTRO_FISICA:P5`»*.
+### **La misura lo NEGA per la scena lunga**, e la differenza e' sostanziale:
+
+| | la schermatura | `perc_geom` |
+|---|---|---|
+| la soglia e' raggiunta? | ### **NO, per COSTRUZIONE** *(`u` max `11%` di `ρ_c`, e la legge taglia comunque sempre del `24%`)* | ### **SI', e sempre di piu' coi passi** |
+
+### ➜ **Era un SOSPETTO legittimo nella finestra corta, e la misura l'ha smentito.** Lo lascio
+scritto perche' un sospetto smentito e' un'informazione, non un errore da cancellare.
+
+## ⚠ **MA LA MISURA APRE UNA DOMANDA, e non la chiudo per analogia (`P1`)**
+
+> ### **Se nella scena lunga `103` nodi stanno a `+1`, perche' NESSUNO dei `1198` nati ha
+> ereditato `+1`?**
+
+### **L'IPOTESI, e si DERIVA dalle due definizioni:**
+
+| | la grandezza che decide | conseguenza |
+|---|---|---|
+| `perc_geom` | ### **la MEDIA di `\|tw\|` sugli archi del nodo** | un solo arco teso e' ### **DILUITO DAL GRADO** *(grado 10, un arco a `8` e nove a `0.5` ⇒ media `1.25`, sotto `2π`)* |
+| la divisione | ### **il `\|tw\|` dell'ARCO SINGOLO** *(`avv = np.abs(self.tw)`)* | ### **basta UN arco teso** |
+
+### ➜ **Un nodo che DIVIDE ha bisogno di UN SOLO arco teso; un nodo a `+1` ha bisogno che
+QUASI TUTTI i suoi archi lo siano.** Le due condizioni selezionano ### **nodi diversi** — e
+sarebbe questo il motivo per cui il punto `(d)` e' zero ### **anche dove il canale lavora.**
+
+### 📌 **E SAREBBE LA FORMA PIU' ACUTA DI `GEOM-SENZA-VERSO`:** `perc_geom` non perde solo
+**il VERSO** *(mediando `|tw|`)*, perde anche ### **la LOCALITA'** *(mediando sul grado)*. Un
+nodo con un arco a **cinque giri** e nove archi fermi e', per `perc_geom`, ### **un nodo in cui
+il giro non e' compiuto.**
+
+### ⛔ **CRITERIO DI CHIUSURA, E NON L'HO MISURATO:** per ogni nascita servono `(1)` il `twn`
+del **GENITORE** e il suo `perc_geom` al momento della nascita, `(2)` il `|tw|` dell'**ARCO** che
+si divide, `(3)` il **GRADO** del genitore. ### **Lo dico invece di dedurlo.**
+
+## 📌 **E UNA CONSEGUENZA SUL `COMMIT 5`, DA DICHIARARE NEL REFERTO DEL SIGILLO**
+
+### **La byte-identita' del commit 5 e' una proprieta' DI QUESTE TRE SCENE, non della cura.**
+In un run piu' lungo, dove `103` nodi stanno a `+1`, un nato da un genitore a `+1` e'
+### **possibile** — e allora eredita' e derivazione ### **divergerebbero.**
+
+### ➜ **Quindi il verdetto si legge cosi': `byte-identico SU QUESTE SCENE`, e `la derivazione e'
+giusta INDIPENDENTEMENTE da questo`. Sono DUE affermazioni distinte**, come dici tu.
+
+---

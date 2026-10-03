@@ -1,0 +1,196 @@
+====================================================================================================
+IL CENSIMENTO DI `perc_geom`: dove nasce un suo valore per un nodo NUOVO
+====================================================================================================
+  simulatore .. 7ed56608 (sha1 byte grezzi)
+  strumento ... 030faa8d
+  scene ....... corta(seme 11, 72 passi), lunga(seme 11, 150 passi), altro_seme(seme 12, 72 passi)
+
+----------------------------------------------------------------------------------------------------
+PEZZO 0 -- IL FATTO STRUTTURALE: i posti in `ORDINE_DI_NASCITA`, e le CLASSI
+    PHI_CRIT = 6.283185307179586   (> 0 ? True  -> twn = 0 da' -1 col confronto STRETTO)
+
+    pos  grandezza    classe (divisione)         nota
+    1    i            topologia: l'arco si spezz 
+    2    j            topologia: l'arco si spezz 
+    4    _deg         collocata                  <-- COLLOCATA: gira DOPO nascita(), quindi DENTRO la nascita e' STANTIO
+    16   perc_chi     eredita la chiralita' del  
+    17   perc_geom    eredita la geometria del g 
+    31   tw           zero                       
+    32   twp          differenza di fase genitor 
+
+    ### `perc_geom` sta al posto 17, `tw` al posto 31.
+    ### ==> QUANDO LA REGOLA DI `perc_geom` GIRA, IL `tw` DEI NUOVI ARCHI
+    ###     NON ESISTE ANCORA. Una derivazione scritta LI' leggerebbe lo
+    ###     stato VECCHIO e darebbe -1 PER IL MOTIVO SBAGLIATO: sarebbe la
+    ###     COSTANTE -1 TRAVESTITA DA DERIVAZIONE.
+    ###     SERVE IL VINCOLO 4: `perc_geom` DOPO `tw`.
+    ###     (e si chiama 4 e non 3 perche' 3 E' GIA' PRESO: il
+    ###      contratto ha 1 = `twp`, 2 = `_peqn_idx`, 3 = le regole
+    ###      NON leggono `self.n`. Par.9: un'etichetta non si ricicla.)
+
+----------------------------------------------------------------------------------------------------
+PEZZO 1 -- DALL'AST: ogni scrittura di `perc_geom` in TUTTO il file (anche rami spenti)
+    trovate: 5
+
+    :1833   _rn_div_perc_geom          ESTENDE (nasce un valore per un nodo nuovo)
+            net.perc_geom = np.concatenate([net.perc_geom, net.perc_geom[c["a"]]])
+    :2209   _rn_sch_perc_geom          ESTENDE (nasce un valore per un nodo nuovo)
+            net.perc_geom = np.concatenate([net.perc_geom, net.perc_geom[c["aa"]]])
+    :3709   __init__                   inizializza (array VUOTO: nessun valore)
+            self.perc_geom = np.zeros(0, int)    # [CHI_COOP] geometria: giro compiuto o no (+1/-1)
+    :4779   semina                     ESTENDE (nasce un valore per un nodo nuovo)
+            self.perc_geom = np.concatenate([self.perc_geom, chi_nuovi])
+    :7560   step                       in posto (riscrive nodi che ESISTONO)
+            self.perc_geom[:self.n] = np.where(twn > soglia, 1, -1).astype(self.perc_geom.dtype)
+
+    ### I `setattr` COL NOME IN UNA VARIABILE: 9, e si RISOLVONO
+        (e `perc_geom` in REGISTRO_DERIVATE? False -- VERIFICATO dal modulo)
+        :1557   _avvelena_derivate     NO       DICHIARATO: `_avvelena_derivate`: `nome` scorre i nomi di REGISTRO_DERIVATE, e `perc_geom` NON e' fra loro -- e lo strumento lo VERIFICA dal modulo, n
+        :6242   _smorza                NO       prefisso letterale `_g_sm_`, e `perc_geom` non comincia cosi'
+        :6492   _smp_chirurgia         NO       `for _nome in ['_smp_d0', '_smp_d']`: insieme ENUMERATO, `perc_geom` non c'e'
+        :6590   _nasce                 NO       DICHIARATO: `_nasce`: il nome e' `_k = _b %% (_pre, _q, dove)` con `_b = "_sm_%%s%%s_%%s"` due righe sopra -- cioe' un CONTATORE col prefisso `_sm_`, 
+        :6819   carica_stato           RESTORE  DICHIARATO: `carica_stato`: `stato['attrs'].items()` PUO' contenere `perc_geom` (e' un ndarray di __dict__, e `salva_stato` li accetta). ### Ma e' un 
+        :12208  _diag_completa         NO       `key = '_ang_prec_%d' % ...`: prefisso letterale `_ang_prec_`, e `perc_geom` non comincia cosi'
+        :12234  _diag_completa         NO       `keyo = '_ang_orb_%d_%d' % ...`: prefisso letterale `_ang_orb_`, e `perc_geom` non comincia cosi'
+        :12687  batch_condensazione    RESTORE  DICHIARATO: `batch_condensazione`: `_snap_fisica` e' uno SNAPSHOT ripristinato perche' il diaglog <<non lasci tracce sulla fisica>>. PUO' contenere `p
+        :12787  batch_condensazione    RESTORE  DICHIARATO: `batch_condensazione`: `_snap_cond`, idem -- il ripristino esiste proprio perche' `--ogni` non contamini lo stream
+
+    ### 6 NON possono scriverla · 3 sono RESTORE (non nascite) · 0 SI'
+    ### ✅ NESSUN QUARTO SITO DI NASCITA: i tre che estendono restano tre.
+
+    ### LE SCRITTURE CHE FANNO NASCERE UN VALORE (estendono): 3
+        :1833   _rn_div_perc_geom
+        :2209   _rn_sch_perc_geom
+        :4779   semina
+
+----------------------------------------------------------------------------------------------------
+SCENA `corta` -- seme 11, 72 passi
+  PEZZO 2 -- DAL RUNTIME: 11 scritture, da 4 righe distinte
+    funzione                     riga      scritt. crescite nodi nuovi
+    _rn_div_perc_geom            :1833           8        8        9
+    _rn_sch_perc_geom            :2209           1        1        1
+    __init__                     :3709           1        0        0
+    semina                       :4779           1        1    12802
+
+  ### E LA SPIA VEDE I *REBIND*, NON LE SCRITTURE IN POSTO: `chi_basc`
+  ###   (`:7560`), che e' LA DEFINIZIONE, scrive con `perc_geom[:n] = ...`
+  ###   e quindi NON compare sopra. NON e' codice morto, e il numero lo dice:
+  ###     _g_chibasc_su_geom = 72   (chi_basc scrive la GEOMETRIA)
+  ###     _g_chibasc_su_chi  = 0   (chi_basc scrive la CARICA)
+
+  PEZZO 4 e 5 -- I NATI: ereditato contro DERIVATO, per evento
+    evento         nati |   er. -1   er. +1 |  der. -1  der. +1 | DIVERSI
+    divisione         9 |        9        0 |        9        0 | 0
+    schwinger         1 |        1        0 |        1        0 | 0
+    ### `twn` dei nati: MAX 0.000000e+00  contro PHI_CRIT 6.283185  -> sopra soglia? False
+
+  ### IL PUNTO (d) DA' ZERO IN QUESTA SCENA: nessun nato ha un `perc_geom`
+  ###   ereditato diverso dalla derivazione. ==> IL COMMIT 5 SAREBBE
+  ###   BYTE-IDENTICO QUI, e i bracci (a)-(c) NON PROVEREBBERO NIENTE:
+  ###   il sigillo deve appoggiarsi a un CONTROLLO POSITIVO COSTRUITO.
+
+
+  PEZZO 6 -- LA SOGLIA E' MAI RAGGIUNTA? (`perc_geom` arriva mai a +1?)
+    nodi a +1, MASSIMO su 72 passi .......... 1
+    passi con almeno un nodo a +1 ........... 5 su 72
+    `twn` MAX visto (su tutti i nodi e passi)  6.420165e+00
+    PHI_CRIT ................................. 6.283185
+    ### la soglia sta 1.0 VOLTE sopra il massimo misurato.
+  ### la soglia E' raggiunta: fino a 1 nodi a +1. Il canale lavora,
+  ###   e un nato che eredita +1 e' POSSIBILE: il punto (d) puo'
+  ###   essere diverso da zero in un'altra scena.
+----------------------------------------------------------------------------------------------------
+SCENA `lunga` -- seme 11, 150 passi
+  PEZZO 2 -- DAL RUNTIME: 149 scritture, da 4 righe distinte
+    funzione                     riga      scritt. crescite nodi nuovi
+    _rn_div_perc_geom            :1833          83       83      938
+    _rn_sch_perc_geom            :2209          64       64      260
+    __init__                     :3709           1        0        0
+    semina                       :4779           1        1    12802
+
+  ### E LA SPIA VEDE I *REBIND*, NON LE SCRITTURE IN POSTO: `chi_basc`
+  ###   (`:7560`), che e' LA DEFINIZIONE, scrive con `perc_geom[:n] = ...`
+  ###   e quindi NON compare sopra. NON e' codice morto, e il numero lo dice:
+  ###     _g_chibasc_su_geom = 150   (chi_basc scrive la GEOMETRIA)
+  ###     _g_chibasc_su_chi  = 0   (chi_basc scrive la CARICA)
+
+  PEZZO 4 e 5 -- I NATI: ereditato contro DERIVATO, per evento
+    evento         nati |   er. -1   er. +1 |  der. -1  der. +1 | DIVERSI
+    divisione       938 |      938        0 |      938        0 | 0
+    schwinger       260 |      260        0 |      260        0 | 0
+    ### `twn` dei nati: MAX 0.000000e+00  contro PHI_CRIT 6.283185  -> sopra soglia? False
+
+  ### IL PUNTO (d) DA' ZERO IN QUESTA SCENA: nessun nato ha un `perc_geom`
+  ###   ereditato diverso dalla derivazione. ==> IL COMMIT 5 SAREBBE
+  ###   BYTE-IDENTICO QUI, e i bracci (a)-(c) NON PROVEREBBERO NIENTE:
+  ###   il sigillo deve appoggiarsi a un CONTROLLO POSITIVO COSTRUITO.
+
+
+  PEZZO 6 -- LA SOGLIA E' MAI RAGGIUNTA? (`perc_geom` arriva mai a +1?)
+    nodi a +1, MASSIMO su 150 passi .......... 103
+    passi con almeno un nodo a +1 ........... 83 su 150
+    `twn` MAX visto (su tutti i nodi e passi)  2.025625e+01
+    PHI_CRIT ................................. 6.283185
+    ### la soglia sta 0.3 VOLTE sopra il massimo misurato.
+  ### la soglia E' raggiunta: fino a 103 nodi a +1. Il canale lavora,
+  ###   e un nato che eredita +1 e' POSSIBILE: il punto (d) puo'
+  ###   essere diverso da zero in un'altra scena.
+----------------------------------------------------------------------------------------------------
+SCENA `altro_seme` -- seme 12, 72 passi
+  PEZZO 2 -- DAL RUNTIME: 16 scritture, da 4 righe distinte
+    funzione                     riga      scritt. crescite nodi nuovi
+    _rn_div_perc_geom            :1833          10       10       13
+    _rn_sch_perc_geom            :2209           4        4        4
+    __init__                     :3709           1        0        0
+    semina                       :4779           1        1    12765
+
+  ### E LA SPIA VEDE I *REBIND*, NON LE SCRITTURE IN POSTO: `chi_basc`
+  ###   (`:7560`), che e' LA DEFINIZIONE, scrive con `perc_geom[:n] = ...`
+  ###   e quindi NON compare sopra. NON e' codice morto, e il numero lo dice:
+  ###     _g_chibasc_su_geom = 72   (chi_basc scrive la GEOMETRIA)
+  ###     _g_chibasc_su_chi  = 0   (chi_basc scrive la CARICA)
+
+  PEZZO 4 e 5 -- I NATI: ereditato contro DERIVATO, per evento
+    evento         nati |   er. -1   er. +1 |  der. -1  der. +1 | DIVERSI
+    divisione        13 |       13        0 |       13        0 | 0
+    schwinger         4 |        4        0 |        4        0 | 0
+    ### `twn` dei nati: MAX 0.000000e+00  contro PHI_CRIT 6.283185  -> sopra soglia? False
+
+  ### IL PUNTO (d) DA' ZERO IN QUESTA SCENA: nessun nato ha un `perc_geom`
+  ###   ereditato diverso dalla derivazione. ==> IL COMMIT 5 SAREBBE
+  ###   BYTE-IDENTICO QUI, e i bracci (a)-(c) NON PROVEREBBERO NIENTE:
+  ###   il sigillo deve appoggiarsi a un CONTROLLO POSITIVO COSTRUITO.
+
+
+  PEZZO 6 -- LA SOGLIA E' MAI RAGGIUNTA? (`perc_geom` arriva mai a +1?)
+    nodi a +1, MASSIMO su 72 passi .......... 3
+    passi con almeno un nodo a +1 ........... 16 su 72
+    `twn` MAX visto (su tutti i nodi e passi)  7.510571e+00
+    PHI_CRIT ................................. 6.283185
+    ### la soglia sta 0.8 VOLTE sopra il massimo misurato.
+  ### la soglia E' raggiunta: fino a 3 nodi a +1. Il canale lavora,
+  ###   e un nato che eredita +1 e' POSSIBILE: il punto (d) puo'
+  ###   essere diverso da zero in un'altra scena.
+----------------------------------------------------------------------------------------------------
+PEZZO 3 -- LA DIFFERENZA `AST` meno `RUNTIME`, riga per riga COL MOTIVO
+    righe che SCRIVONO secondo l'AST ........ 5
+    righe che hanno SCRITTO nel runtime ..... 4
+
+    ### VISTE DALL'AST E MAI GIRATE: 1
+        :7560   step                       in posto (riscrive nodi che ESISTONO)
+                self.perc_geom[:self.n] = np.where(twn > soglia, 1, -1).astype(self.perc_geom.dtype)
+                ### IL MOTIVO: e' una scrittura IN POSTO, e la spia
+                ###   intercetta i REBIND. NON vuol dire che non gira --
+                ###   per `chi_basc` il contatore `_g_chibasc_su_geom`
+                ###   sopra dice quante volte ha girato DAVVERO.
+
+    ### GIRATE E NON VISTE DALL'AST: ZERO. Le due colonne si chiudono, e
+    ###   QUESTO E' IL CONTROLLO che lo zero dell'AST non sia un FALSO-ZERO.
+
+====================================================================================================
+### IL VERDETTO DEL CENSIMENTO
+###   5 siti dall'AST, di cui 3 ESTENDONO (fanno nascere un valore).
+###   4 righe hanno scritto nel runtime; 1 viste dall'AST non girano; 0
+###   girate e non viste dall'AST.
+###   IL PUNTO (d), sulle tre scene: 0 nati con ereditato != derivato.
+====================================================================================================
