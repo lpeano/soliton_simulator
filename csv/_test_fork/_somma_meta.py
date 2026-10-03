@@ -73,6 +73,122 @@ SEME = 20261003
 LAM = 0.8
 
 
+# ### I TRE SITI DI `_nasce` NEL PERIMETRO DELLA NASCITA, letti dal codice:
+#     | sito                  | `md` | `md0` | che cosa diventa col `6a`          |
+#     | `mitosi`    (`dh`)     |  2   |   0   | ### UNA chiamata su `2n`, `md = 1` |
+#     | `mitosi`    (`d0new`)  |  0   |   1   | ### RESTA com'e' (gia' `2n`)       |
+#     | `schwinger` (`dd`)     |  2   |   2   | ### UNA chiamata su `2n`, `md = 1` |
+SITI = (("mitosi/dh", 2, 0, "sdoppia"),
+        ("mitosi/d0new", 0, 1, "resta"),
+        ("schwinger/dd", 2, 2, "sdoppia"))
+
+
+def contatori_oggi(v, md, md0):
+    """I quattro contatori come li calcola `_nasce` OGGI, verbatim dal codice."""
+    _v = np.asarray(v, dtype=float)
+    _sotto = _v < LAM
+    _ntr = int(_sotto.sum())
+    _fab = float(np.sum(LAM - _v[_sotto])) if _ntr else 0.0
+    fuori = {"nascite": 1}
+    for _q, _m in (("d", md), ("d0", md0)):
+        if not _m:
+            continue
+        fuori["lun" + _q] = _m * _fab
+        fuori["tr" + _q] = _m * _ntr
+        fuori["vis" + _q] = _m * int(_v.size)
+    return fuori
+
+
+def contatori_6a(va, vb, md, md0):
+    """I quattro contatori col `6a`: UNA chiamata su `concatenate([va, vb])`, `md` dimezzato,
+    e ### **`_fab` come somma della meta' `a` PIU' somma della meta' `b`** — NON
+    `np.sum` sull'array di `2n`, che ### **non e' identica al bit** *(misurato sopra)*.
+    """
+    _v = np.concatenate([np.asarray(va, float), np.asarray(vb, float)])
+    _sotto = _v < LAM
+    _ntr = int(_sotto.sum())
+    # ### LA CURA: per META' e sommate
+    _fa = np.asarray(va, float)
+    _fb = np.asarray(vb, float)
+    _sa = _fa < LAM
+    _sb = _fb < LAM
+    _fab = ((float(np.sum(LAM - _fa[_sa])) if _sa.any() else 0.0)
+            + (float(np.sum(LAM - _fb[_sb])) if _sb.any() else 0.0))
+    fuori = {"nascite": 1}
+    for _q, _m in (("d", md), ("d0", md0)):
+        if not _m:
+            continue
+        fuori["lun" + _q] = _m * _fab
+        fuori["tr" + _q] = _m * _ntr
+        fuori["vis" + _q] = _m * int(_v.size)
+    return fuori
+
+
+def pezzo_contatori(stampa, rng):
+    """### LA VERIFICA CHE IL MANDATO PRETENDE PRIMA DI SCRIVERE IL CODICE:
+    a `t = 0.5`, tutti e ### **quattro** i contatori, per tutti e ### **tre** i siti,
+    ### **identici al bit**.
+    """
+    stampa("")
+    stampa("=" * 100)
+    stampa("I QUATTRO CONTATORI DI `_nasce`, PER I TRE SITI, A t = 0.5")
+    stampa("=" * 100)
+    stampa("  La domanda del mandato: portando `_nasce` da UNA chiamata con md=2 su n voci a")
+    stampa("  UNA chiamata con md=1 su 2n voci, e calcolando `_fab` PER META', a t = 0.5")
+    stampa("  tutti e quattro i contatori restano IDENTICI AL BIT?")
+    stampa("")
+    stampa("  %-16s %-9s %10s %10s %10s %10s" % ("sito", "md,md0", "nascite", "lun", "tr", "vis"))
+    stampa("  " + "-" * 72)
+    esito = []
+    for nome, md, md0, modo in SITI:
+        diverse = {"nascite": 0, "lun": 0, "tr": 0, "vis": 0}
+        for _ in range(PROVE):
+            n = int(rng.integers(1, 40))
+            # ### i valori sono LUNGHEZZE: alcune SOTTO `LAM` (cosi' `_ntr` e `_fab` non
+            #   sono zero per costruzione -- sarebbe un FALSO-ZERO della verifica)
+            d = rng.uniform(0.2, 2.5, n)
+            if modo == "resta":
+                # `d0new` e' GIA' l'array dei due figli: la chiamata non cambia
+                v = np.concatenate([0.5 * d, 0.5 * d])
+                a = contatori_oggi(v, md, md0)
+                b = contatori_oggi(v, md, md0)
+            else:
+                mezzo = 0.5 * d
+                if nome == "schwinger/dd":
+                    v = np.maximum(mezzo, 0.05)
+                    va = np.maximum(0.5 * d, 0.05)
+                    vb = np.maximum(0.5 * d, 0.05)
+                else:
+                    v = mezzo
+                    va = vb = mezzo
+                a = contatori_oggi(v, md, md0)
+                b = contatori_6a(va, vb, md // 2 if md else 0, md0 // 2 if md0 else 0)
+            for k in a:
+                base = k.rstrip("d0").rstrip("d") if k != "nascite" else "nascite"
+                if a[k] != b.get(k):
+                    diverse[base if base in diverse else "lun"] += 1
+        esito.append({"sito": nome, "md": md, "md0": md0, **diverse})
+        stampa("  %-16s %-9s %10d %10d %10d %10d"
+               % (nome, "%d,%d" % (md, md0), diverse["nascite"], diverse["lun"],
+                  diverse["tr"], diverse["vis"]))
+    stampa("")
+    tot = sum(sum(v for k, v in x.items() if k not in ("sito", "md", "md0")) for x in esito)
+    if tot == 0:
+        stampa("  ### TUTTI E QUATTRO I CONTATORI, PER TUTTI E TRE I SITI: IDENTICI AL BIT")
+        stampa("  ###   su %d prove per sito, con taglie fra 1 e 39 e valori che INCLUDONO"
+               % PROVE)
+        stampa("  ###   lunghezze sotto LAM (quindi `_ntr` e `_fab` NON sono zero per")
+        stampa("  ###   costruzione -- sarebbe un FALSO-ZERO della verifica).")
+        stampa("  ### ==> LA FORMA DEL CODICE REGGE, e si puo' scrivere.")
+    else:
+        stampa("  ### *** %d DIFFERENZE: LA FORMA DEL CODICE NON REGGE. *** Si FERMA qui,"
+               % tot)
+        stampa("  ###   e NON si scrive il codice: il braccio A del sigillo fallirebbe, e")
+        stampa("  ###   fallirebbe per una ragione che si sapeva prima.")
+    stampa("=" * 100)
+    return esito, tot
+
+
 def principale():
     out = []
 
@@ -160,7 +276,10 @@ def principale():
         stampa("###   e va capito prima di correggere il task history. ***")
     stampa("=" * 100)
 
-    esito = {"strumento": hashlib.sha1(
+    cont, cont_diverse = pezzo_contatori(stampa, rng)
+
+    esito = {"contatori_tre_siti": cont, "contatori_differenze": cont_diverse,
+             "strumento": hashlib.sha1(
         io.open(os.path.abspath(__file__), "rb").read()).hexdigest(),
         "numpy": np.__version__, "seme": SEME, "prove_per_taglia": PROVE,
         "righe": righe, "A_diverse_totale": tot_A, "C_diverse_totale": tot_C,
