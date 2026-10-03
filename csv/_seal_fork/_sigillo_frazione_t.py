@@ -22,6 +22,7 @@ import importlib.util
 import io
 import json
 import os
+import pickle
 import subprocess
 import sys
 
@@ -42,6 +43,16 @@ FUORI = os.path.join(_QUI, "_sigillo_frazione_t")
 PATCH = os.path.join(_QUI, "_frazione_t_patch.py")
 CENS = os.path.join(RADICE, "csv", "_test_fork", "_censimento_punto_medio.py")
 NL = chr(10)
+# ### L'ANCORA DEL *PRIMA* E' IL NOME STORICO, e il motivo e' preciso.
+#   `sim_prima_del_flag` prende il commit PIU' VECCHIO che introduce la stringa e
+#   poi il suo PADRE. Con `FRAZ_NASCITA` quel commit sarebbe LA RINOMINA, e il
+#   padre conterrebbe `T_NASCITA` -- cioe' il `6a` GIA' FATTO: il *prima* non
+#   sarebbe il prima, e la patch non attaccherebbe.
+#   ### Con `T_NASCITA` il commit piu' vecchio e' quello che ha introdotto il `6a`,
+#   e il padre e' il blob PRE-6a -- che e' il *prima* vero. ### E
+#   `sim_prima_del_flag` ASSERISCE che il file estratto NON contenga l'ancora,
+#   quindi se un giorno questa scelta diventasse sbagliata il sigillo SI FERMEREBBE
+#   invece di misurare niente.
 ANCORA = "T_NASCITA"
 # ### LE TRE SCENE DEL COMMIT 4, PIU' LA QUARTA senza `--mitosi-2lam` (mandato)
 SCENE = (("corta", 11, 72, True), ("lunga", 11, 150, True),
@@ -98,18 +109,82 @@ def costruisci(m, seme, dest, con_2lam=True):
     return m.net
 
 
-def stato(net):
-    """TUTTI gli ndarray e gli scalari di `__dict__`: non un insieme scelto da me.
+def _dig(x):
+    """Un digest di QUALUNQUE struttura picklabile."""
+    return hashlib.sha1(pickle.dumps(x, protocol=4)).hexdigest()[:16]
 
-    ### Nessuna copia: il confronto e' IMMEDIATO e i due stati vengono da oggetti
-    DIVERSI. Uno `stato()` non si puo' conservare fra i passi.
+
+def stato(net):
+    """### TUTTO cio' che sta in `__dict__`, non solo gli ndarray e gli scalari.
+
+    ### """ + STOP + """ **LA STESURA PRECEDENTE CONFRONTAVA SOLO ndarray E SCALARI, ED ERA
+    UN FALSO-ZERO STRUTTURALE** *(rilievo del guardiano, 2026-10-03, ed e' giusto)*: in
+    `net` ci sono ### **16 attributi** che ne restavano fuori -- fra cui `conc_nodi` e
+    `conc_archi` *(liste)*, `masse_info` *(dict)*, ### **`_S` (una matrice SPARSA)** e
+    ### **`rng` (lo stato del generatore)**. ### **Uno zero su un insieme scelto da me
+    non e' uno zero sulla legge.**
+
+    | classe | come si confronta |
+    |---|---|
+    | `ndarray`, scalari | ### **direttamente, al bit** |
+    | matrice ### **SPARSA** | `data`, `indices`, `indptr`, `shape` |
+    | ### **`rng`** | `bit_generator.state` |
+    | liste, tuple, dict, `None` | ### **digest pickle** |
+    | ### **non picklabile** | ### **DICHIARATO nel referto**, non saltato in silenzio |
+
+    ### UN'ECCEZIONE DICHIARATA: **`_calcpsi_origini`**. Le sue chiavi sono
+    `"funzione:RIGA"` con la ### **riga del chiamante**, che cambia ### **a ogni modifica
+    del codice** -- quindi un confronto diretto darebbe una differenza ### **garantita**
+    e non direbbe niente sulla fisica. ### **Si confronta AGGREGATO per nome di
+    funzione**, e il referto lo scrive.
     """
     fuori = {}
     for k, v in vars(net).items():
-        if isinstance(v, np.ndarray) or isinstance(
-                v, (int, float, bool, np.integer, np.floating)):
+        if isinstance(v, np.ndarray):
             fuori[k] = v
+        elif isinstance(v, (int, float, bool, np.integer, np.floating)):
+            fuori[k] = v
+        elif k == "_calcpsi_origini" and isinstance(v, dict):
+            agg = {}
+            for kk, vv in v.items():
+                nome = str(kk).split(":")[0]
+                agg[nome] = agg.get(nome, 0) + (
+                    float(vv) if isinstance(vv, (int, float)) else 1)
+            fuori[k] = "AGGREGATO:" + _dig(sorted(agg.items()))
+        elif hasattr(v, "bit_generator"):
+            fuori[k] = "RNG:" + _dig(v.bit_generator.state)
+        elif hasattr(v, "indptr") or hasattr(v, "tocsr"):
+            sp = v.tocsr() if hasattr(v, "tocsr") else v
+            fuori[k] = "SPARSA:" + _dig((sp.data, sp.indices, sp.indptr, sp.shape))
+        else:
+            try:
+                fuori[k] = "PICKLE:" + _dig(v)
+            except Exception as _e:
+                fuori[k] = "NON-CONFRONTABILE:%s:%s" % (type(v).__name__, _e)
     return fuori
+
+
+def classi_di(net):
+    """Quanti attributi per classe: serve al referto, perche' uno zero va letto
+    sapendo ### **su quante cose** e' stato calcolato."""
+    c = {"ndarray": 0, "scalare": 0, "sparsa": 0, "rng": 0, "pickle": 0,
+         "aggregato": 0, "NON-CONFRONTABILE": 0}
+    for v in stato(net).values():
+        if isinstance(v, np.ndarray):
+            c["ndarray"] += 1
+        elif isinstance(v, str) and v.startswith("SPARSA:"):
+            c["sparsa"] += 1
+        elif isinstance(v, str) and v.startswith("RNG:"):
+            c["rng"] += 1
+        elif isinstance(v, str) and v.startswith("PICKLE:"):
+            c["pickle"] += 1
+        elif isinstance(v, str) and v.startswith("AGGREGATO:"):
+            c["aggregato"] += 1
+        elif isinstance(v, str) and v.startswith("NON-CONFRONTABILE"):
+            c["NON-CONFRONTABILE"] += 1
+        else:
+            c["scalare"] += 1
+    return c
 
 
 def confronta(s1, s2):
@@ -145,9 +220,35 @@ class SpiaValori:
         self.m = m
         self.pre_nasce = {}
         self.ctx = {}
+        # ### LO SCATTO ALL'INGRESSO DI `mitosi`, e serve: `fm` si calcola PRIMA DEL
+        #   CALCIO ai genitori, quindi il `phi` letto all'ingresso di `nascita` e' GIA'
+        #   CALCIATO e `fm` NON si ricostruisce da li'.
+        #   ### MISURATO: con `MITOSI_DIR = 1.0`, ricostruendo `fm` dal `phi` di `nascita`
+        #   lo scarto massimo e' 4.96 -- il confronto fallirebbe PER IL MOTIVO SBAGLIATO.
+        #   Il fatto e' gia' nel repo: <<fm si calcola PRIMA del calcio, twp DOPO>>.
+        self.pre_mitosi = {}
         self._nasce_vero = m.Rete._nasce
         self._nascita_vera = m.nascita
+        self._mitosi_vera = m.Rete.mitosi
         spia = self
+
+        def _mitosi(selfr, *aa, **kk):
+            # ### SI SOVRASCRIVE A OGNI CHIAMATA, e non si tiene la PRIMA: `mitosi` gira
+            #   a ### **ogni passo**, e la nascita arriva al 42. ### Tenendo la prima si
+            #   ricostruirebbe `fm` dal `phi` del ### **passo 1** -- misurato: scarto 2.33.
+            #   ### Chi serve e' lo scatto della chiamata CHE PRODUCE la nascita, e
+            #   `_nascita` lo copia nel contesto quando l'evento scatta.
+            if True:
+                spia.pre_mitosi = {
+                    "phi": np.array(selfr.phi, dtype=float, copy=True),
+                    "tw": np.array(selfr.tw, dtype=float, copy=True),
+                    "i": np.array(selfr.i, dtype=int, copy=True),
+                    "j": np.array(selfr.j, dtype=int, copy=True),
+                    "deg": np.array(selfr._deg, dtype=float, copy=True),
+                    "n": int(selfr.n), "dphi": float(selfr._dphi())}
+            return spia._mitosi_vera(selfr, *aa, **kk)
+
+        m.Rete.mitosi = _mitosi
 
         def _nasce(selfr, v, dove="?", md=1, md0=1, meta=None):
             if dove not in spia.pre_nasce:
@@ -169,6 +270,9 @@ class SpiaValori:
                     d["dphi"] = float(net._dphi())
                     d["fm"] = np.array(c["fm"], dtype=float, copy=True)
                     d["dh"] = np.array(c["dh"], dtype=float, copy=True)
+                    # ### lo scatto PRE-CALCIO della chiamata CHE STA PRODUCENDO questa
+                    #   nascita: dopo, `mitosi` gira di nuovo e lo sovrascrive.
+                    d["pm"] = dict(spia.pre_mitosi)
                 else:
                     d["pos_aa"] = np.array(net.pos[c["aa"]], dtype=float, copy=True)
                     d["pos_bb"] = np.array(net.pos[c["bb"]], dtype=float, copy=True)
@@ -241,6 +345,14 @@ def principale():
             m2 = carica(SIM, "_s6a_nu_%s" % nome)
             n1 = costruisci(m1, seme, os.path.join(FUORI, "_sc1_%s" % nome), con2)
             n2 = costruisci(m2, seme, os.path.join(FUORI, "_sc2_%s" % nome), con2)
+        cls = classi_di(n2)
+        stampa("    attributi confrontati, per classe: %s"
+               % (" | ".join("%s %d" % (k, v)
+                               for k, v in sorted(cls.items()) if v)))
+        if cls["NON-CONFRONTABILE"]:
+            stampa("    ### %d NON CONFRONTABILI: un LIMITE DICHIARATO, non saltati in"
+                   % cls["NON-CONFRONTABILE"])
+            stampa("    ###   silenzio. Sono nel json.")
         d0 = confronta(stato(n1), stato(n2))
         primo = None
         for p in range(1, passi + 1):
@@ -316,8 +428,12 @@ def principale():
     stampa("")
     stampa("-" * 100)
     stampa("BRACCIO `C` -- t = %g, VERIFICATO SUI VALORI al primo evento di ciascun tipo" % T_PROVA)
+    # ### LA COPIA DI `C` ACCENDE `MITOSI_DIR`, cosi' il ramo del `bias` GIRA e `C` lo
+    #   raggiunge. ### La lezione del commit 5: il caso che serve SI COSTRUISCE.
+    #   ### Verificato PRIMA di scriverlo: con `MITOSI_DIR = 1.0` il ramo gira al PRIMO
+    #   evento di divisione e `|bias|` vale 0.1135, NON zero.
     p_c = copia_patchata(p_prima, os.path.join(FUORI, "_sim_t04.py"),
-                         ["--t=%g" % T_PROVA])
+                         ["--t=%g" % T_PROVA, "--mitosi-dir=1.0"])
     c_esito = misura_valori(p_c, "c", stampa, T_PROVA)
     esito["braccio_C"] = c_esito
 
@@ -327,8 +443,12 @@ def principale():
     stampa("BRACCIO `C-bis` -- SEI copie, una per sito al letterale. SEI bocciature.")
     cb = {}
     for sito in SITI:
-        pp = copia_patchata(p_prima, os.path.join(FUORI, "_sim_let_%s.py" % sito),
-                            ["--t=%g" % T_PROVA, "--letterale=%s" % sito])
+        # ### la copia `fm_bias` accende `MITOSI_DIR`, cosi' ANCHE `C` la raggiunge:
+        #   senza, sarebbe scoperta dal SOLO TESTO del braccio `B`.
+        _opz = ["--t=%g" % T_PROVA, "--letterale=%s" % sito]
+        if sito == "fm_bias":
+            _opz.append("--mitosi-dir=1.0")
+        pp = copia_patchata(p_prima, os.path.join(FUORI, "_sim_let_%s.py" % sito), _opz)
         # (B) il censimento sulla copia
         qb = subprocess.run([sys.executable, "-c", (
             "import ast,io,sys;sys.path.insert(0,r'%s');"
@@ -345,16 +465,16 @@ def principale():
         #   `--letterale=fm_bias` ### **non puo'** essere scoperta da `C`: la scopre
         #   ### **B**, che legge l'AST e vede anche i rami spenti.
         #   ### 📌 Non e' un'eccezione comoda: e' la ragione per cui `B` esiste.
-        irraggiungibile = (sito == "fm_bias")
-        scoperta = (letterali >= 1) and (bool(sbagliate) or irraggiungibile)
+        # ### NON C'E' PIU' UN SITO IRRAGGIUNGIBILE: la copia `fm_bias` accende
+        #   `MITOSI_DIR`, quindi ANCHE `C` deve scoprirla. ### Il criterio e' lo stesso
+        #   per tutti e sei, SENZA ECCEZIONI.
+        scoperta = (letterali >= 1) and bool(sbagliate)
         cb[sito] = {"letterali_B": letterali, "grandezze_sbagliate": sbagliate,
-                    "C_irraggiungibile": bool(irraggiungibile),
+                    "mitosi_dir_acceso": bool(sito == "fm_bias"),
                     "scoperta": bool(scoperta)}
         stampa("  %-9s B: %d letterale  ·  C: %s  ->  %s"
                % (sito, letterali,
-                  ("ramo SPENTO (MITOSI_DIR = 0): C non lo raggiunge, lo scopre B"
-                   if irraggiungibile else
-                   ("sbagliate %s" % sbagliate) if sbagliate else "NESSUNA sbagliata"),
+                  ("sbagliate %s" % sbagliate) if sbagliate else "NESSUNA sbagliata",
                   "SCOPERTA" if scoperta else "*** NON SCOPERTA ***"))
     tutte = all(cb[s]["scoperta"] for s in SITI)
     stampa("  ### %s" % ("PASSA: sei copie, sei bocciature." if tutte else
@@ -423,10 +543,30 @@ def misura_valori(percorso, nome, stampa, t):
         # ### `fm` SI RICOSTRUISCE, non si confronta con se stesso: `D` e'
         #   `_wphi(phi[a] - phi[b])` *(letto dal codice, `:8522`)*, e il ramo che gira
         #   con `MITOSI_DIR = 0` e' `fm = (phi[a] - t*D) % dphi`.
-        _D = np.asarray(m.Rete._wphi(cd["phi_a"] - cd["phi_b"]), dtype=float)
-        controlla("fm = (phi[a] - t*D) mod",
-                  (cd["phi_a"] - t * _D) % cd["dphi"], cd["fm"],
-                  "D = _wphi(phi[a]-phi[b]), ricostruito")
+        pm = cd.get("pm") or {}
+        if pm:
+            _phia = pm["phi"][cd["a"]]
+            _phib = pm["phi"][cd["b"]]
+            _D = np.asarray(m.Rete._wphi(_phia - _phib), dtype=float)
+            _md = float(getattr(m, "MITOSI_DIR", 0.0))
+            if _md != 0.0:
+                # ### il `bias` RICALCOLATO dal sigillo, non letto dal contesto:
+                #   `twn` e' la media di `|tw|` sugli archi del nodo, come in `mitosi`.
+                _n = pm["n"]
+                _twn = np.zeros(_n)
+                _ii, _jj, _tw = pm["i"], pm["j"], np.abs(pm["tw"])
+                np.add.at(_twn, _ii[_ii < _n], _tw[_ii < _n])
+                np.add.at(_twn, _jj[_jj < _n], _tw[_jj < _n])
+                _twn = _twn / np.maximum(pm["deg"][:_n], 1)
+                _bias = 0.5 * np.tanh(_md * (_twn[cd["a"]] - _twn[cd["b"]]))
+                controlla("fm = (phi[a]-(t+bias)*D)",
+                          (_phia - (t + _bias) * _D) % pm["dphi"], cd["fm"],
+                          "ramo MITOSI_DIR = %g ACCESO, bias ricalcolato" % _md)
+                fuori["_bias_non_nullo"] = bool(np.any(_bias != 0))
+            else:
+                controlla("fm = (phi[a] - t*D) mod",
+                          (_phia - t * _D) % pm["dphi"], cd["fm"],
+                          "ramo senza MITOSI_DIR")
     if cs is not None:
         nc = cs["quante"]
         L = np.linalg.norm(cs["pos_aa"] - cs["pos_bb"], axis=1)

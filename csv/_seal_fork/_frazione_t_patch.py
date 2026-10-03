@@ -9,8 +9,8 @@ unica *(`P1-quater`)*. ### E niente escape nei letterali: dove serve un caratter
 
 | | |
 |---|---|
-| *(nessuna)* | ### **la cura intera**: `T_NASCITA = 0.5` dichiarato una volta + i ### **sei siti** + `_fab` per meta' sui ### **due** percorsi + le ### **tre regole** che consumavano `dh`/`dd` due volte |
-| `--t=N` | ### **`T_NASCITA = N`** invece di `0.5` — il braccio `C` del sigillo |
+| *(nessuna)* | ### **la cura intera**: `FRAZ_NASCITA = 0.5` dichiarato una volta + i ### **sei siti** + `_fab` per meta' sui ### **due** percorsi + le ### **tre regole** che consumavano `dh`/`dd` due volte |
+| `--t=N` | ### **`FRAZ_NASCITA = N`** invece di `0.5` — il braccio `C` del sigillo |
 | `--letterale=<sito>` | ### **QUEL sito resta al letterale `0.5`** — il braccio `C-bis`. I sei nomi: `pos_div`, `dh`, `fm`, `fm_bias`, `pos_sch`, `dd` |
 
 ### ⛔ **E `--letterale` NON e' un comodo: e' il controllo del controllo.** Con `--t=0.4` e
@@ -38,12 +38,22 @@ NL = chr(10)
 P = None
 T = 0.5
 LETTERALE = None
+# ### `--mitosi-dir=N` ACCENDE il ramo del `bias`, e serve SOLO alle copie del sigillo.
+#   ### ⛔ PERCHE' ESISTE: con `MITOSI_DIR = 0.0` (il valore del sorgente, archiviato al
+#   commit 0 del riordino) il ramo `fm = (t + bias)*D` ### **NON GIRA MAI**, quindi il braccio
+#   `C` non lo raggiunge e la copia `--letterale=fm_bias` sarebbe scoperta ### **dal solo
+#   testo** (il braccio `B`). ### ✅ **La lezione del commit 5 e' che il caso che serve
+#   SI COSTRUISCE**, e questa opzione lo costruisce. ### ⚠ **Non tocca il sorgente: la
+#   usano soltanto le copie di `C` e della `C-bis fm_bias`.**
+MITOSI_DIR = None
 SITI = ("pos_div", "dh", "fm", "fm_bias", "pos_sch", "dd")
 for _a in sys.argv[1:]:
     if _a.startswith("--file="):
         P = _a.split("=", 1)[1]
     elif _a.startswith("--t="):
         T = float(_a.split("=", 1)[1])
+    elif _a.startswith("--mitosi-dir="):
+        MITOSI_DIR = float(_a.split("=", 1)[1])
     elif _a.startswith("--letterale="):
         LETTERALE = _a.split("=", 1)[1]
         if LETTERALE not in SITI:
@@ -68,19 +78,24 @@ def sost(ancora, nuovo, etichetta):
 
 
 def frazione(sito):
-    """La frazione da scrivere in QUEL sito: `T_NASCITA` oppure il letterale `0.5`."""
-    return "0.5" if LETTERALE == sito else "T_NASCITA"
+    """La frazione da scrivere in QUEL sito: `FRAZ_NASCITA` oppure il letterale `0.5`."""
+    return "0.5" if LETTERALE == sito else "FRAZ_NASCITA"
 
 
 def uno_meno(sito):
-    return "0.5" if LETTERALE == sito else "(1.0 - T_NASCITA)"
+    return "0.5" if LETTERALE == sito else "(1.0 - FRAZ_NASCITA)"
 
 
 # ============================================= 1. LA COSTANTE, DICHIARATA UNA VOLTA
 sost('''TAU_TW   = 20.0''',
      '''# ### LA FRAZIONE DELLA NASCITA, DICHIARATA UNA VOLTA SOLA (`COMMIT 6a`, decisione di
-#   Luca del 2026-10-03). ### Il figlio sta a `T_NASCITA * d` dal genitore `a` e a
-#   `(1 - T_NASCITA) * d` da `b`, ### **e lo STESSO valore vale per DOVE nasce (`pos`), per
+#   Luca del 2026-10-03). ### IL NOME E' `FRAZ_NASCITA` E NON `T_NASCITA`, per decisione
+#   di Luca: e' una ### **FRAZIONE dell'arco**, un numero puro in `[0,1]` misurato dal
+#   genitore `a`/`aa` -- e nel simulatore ### **`t` e `dt` sono TEMPI** (`dt_e`, il tempo
+#   proprio dell'arco). ### Chiamarla `t` avrebbe messo una lunghezza adimensionale nello
+#   stesso alfabeto dei tempi.
+#   Luca del 2026-10-03). ### Il figlio sta a `FRAZ_NASCITA * d` dal genitore `a` e a
+#   `(1 - FRAZ_NASCITA) * d` da `b`, ### **e lo STESSO valore vale per DOVE nasce (`pos`), per
 #   QUANTO sono lunghi i suoi archi (`d`, `d0`, `dd`) e per la sua FASE (`fm`).**
 #   ### ⛔ **NON E' UN FLAG, ed e' una scelta:** un flag renderebbe la frazione
 #   ### **un'opzione**, e dove nasce un figlio non e' un'opzione -- e' la legge. E' il
@@ -94,10 +109,10 @@ sost('''TAU_TW   = 20.0''',
 #   `rho_sel` del cancello resta com'e'. Si decidono nella ### **LEGGE** di
 #   `DIVISIONE-AUTOCONSISTENTE`, che viene ### **dopo la definizione dell'energia** perche'
 #   deve rispettare `A14`.
-T_NASCITA = %r
+FRAZ_NASCITA = %r
 
 TAU_TW   = 20.0''' % T,
-     "la costante `T_NASCITA = %r`, dichiarata una volta" % T)
+     "la costante `FRAZ_NASCITA = %r`, dichiarata una volta" % T)
 
 # ============================================= 2. `_nasce`: `_fab` PER META'
 sost('''    def _nasce(self, v, dove="?", md=1, md0=1):''',
@@ -132,7 +147,7 @@ sost('''            bias = 0.5 * np.tanh(MITOSI_DIR * (twn[a] - twn[b]))
             fm = (self.phi[a] - 0.5 * D) % self._dphi()
         pos_figlio = 0.5 * (self.pos[a] + self.pos[b])''',
      '''            bias = 0.5 * np.tanh(MITOSI_DIR * (twn[a] - twn[b]))
-            # ### IL `bias` E' UNO SCOSTAMENTO *SOPRA* `T_NASCITA`, e il suo `0.5` di
+            # ### IL `bias` E' UNO SCOSTAMENTO *SOPRA* `FRAZ_NASCITA`, e il suo `0.5` di
             #   AMPIEZZA (la riga qui sopra) ### **NON si tocca**: sono due `0.5` con
             #   ### **due ruoli diversi** sulla stessa legge, e distinguerli e' il punto.
             fm = (self.phi[a] - (%s + bias) * D) %% self._dphi()
@@ -206,8 +221,8 @@ sost('''                dd = self._nasce(np.maximum(
 
 # --- (d) `pos` dello Schwinger
 sost('''                 "self.pos = np.vstack([self.pos, 0.5 * (self.pos[aa] + self.pos[bb])])",''',
-     '''                 "self.pos = np.vstack([self.pos, (1-T_NASCITA) * self.pos[aa] + "
-                 "T_NASCITA * self.pos[bb]])",''',
+     '''                 "self.pos = np.vstack([self.pos, (1-FRAZ_NASCITA) * self.pos[aa] + "
+                 "FRAZ_NASCITA * self.pos[bb]])",''',
      "l'ancora dichiarata di `_rn_sch_pos`")
 
 sost('''def _rn_sch_pos(net, c):
@@ -301,11 +316,17 @@ sost('''                # `md=2, md0=2`: `concatenate([d, dd, dd])` E `concatena
                 #   calcolare `_fab` PER META'.''',
      "il commento dei moltiplicatori dello Schwinger")
 
+# ===================== 7. `--mitosi-dir`: ACCENDE il ramo del bias (solo nelle copie)
+if MITOSI_DIR is not None:
+    sost("MITOSI_DIR = 0.0        #",
+         "MITOSI_DIR = %r        #" % MITOSI_DIR,
+         "caso costruito: `MITOSI_DIR = %r`, cosi' il ramo del bias GIRA" % MITOSI_DIR)
+
 io.open(P, "w", encoding="utf-8", newline=NL).write(t)
 print("=" * 92)
 for f in fatte:
     print("  OK  " + f)
-print("  ### T_NASCITA = %r" % T)
+print("  ### FRAZ_NASCITA = %r" % T)
 if LETTERALE:
     print("  ### E IL SITO `%s` RESTA AL LETTERALE 0.5: e' il braccio C-bis, e DEVE essere"
           % LETTERALE)

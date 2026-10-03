@@ -1410,7 +1410,7 @@ casuali, e `6.08` è **peggio del caso**, cioè il segno che la statistica è sb
 
 <!-- SCHEDA nome=mitosi-schwinger funzioni=mitosi,decidi_divisione flag=MITOSI_DIR,ANTIFASE_ADD,COPPIA_MIT,PLAST_MIT,KICK_TW,REGIME,MITOSI_2LAM -->
 
-## ⭐ **E DAL `COMMIT 6a` CINQUE PUNTI DI `mitosi` LEGGONO `T_NASCITA`**
+## ⭐ **E DAL `COMMIT 6a` CINQUE PUNTI DI `mitosi` LEGGONO `FRAZ_NASCITA`**
 
 *(decisione di Luca del 2026-10-03. La frazione e' dichiarata in un solo posto, accanto a
 `PHI_CRIT`; la scheda del punto unico ne porta il quadro intero.)*
@@ -1668,15 +1668,21 @@ scelta di Luca.**
 
 ---
 
-<!-- SCHEDA nome=nascita-punto-unico funzioni=_derivazione_perc_geom,_nascita_collaudo_della_tabella,_nascita_collocata,_nascita_non_si_tocca,_nascita_regola,_ordine_di_nascita,_registra_regola,_rn_div_conc_nodi,_rn_div_cs_nodo_prev,_rn_div_d,_rn_div_d0,_rn_div_eta,_rn_div_i,_rn_div_j,_rn_div_mem_mot,_rn_div_nb,_rn_div_nb_prec,_rn_div_nb_ret,_rn_div_omega_s,_rn_div_peq,_rn_div_perc_chi,_rn_div_perc_geom,_rn_div_perc_tw,_rn_div_phi,_rn_div_phi0,_rn_div_phi_s,_rn_div_phivel,_rn_div_pos,_rn_div_psi,_rn_div_psi_prec,_rn_div_psi_spin,_rn_div_psi_spin_prec,_rn_div_psi_spinor,_rn_div_rep,_rn_div_rho_spin,_rn_div_spinor_lift,_rn_div_tw,_rn_div_twp,_rn_div_vd,_rn_sch_conc_nodi,_rn_sch_cs_nodo_prev,_rn_sch_d,_rn_sch_d0,_rn_sch_eta,_rn_sch_i,_rn_sch_j,_rn_sch_mem_mot,_rn_sch_nb,_rn_sch_nb_prec,_rn_sch_nb_ret,_rn_sch_omega_s,_rn_sch_peq,_rn_sch_peqn_idx,_rn_sch_perc_chi,_rn_sch_perc_geom,_rn_sch_perc_tw,_rn_sch_phi,_rn_sch_phi0,_rn_sch_phi_s,_rn_sch_phivel,_rn_sch_pos,_rn_sch_psi,_rn_sch_psi_prec,_rn_sch_psi_spin,_rn_sch_psi_spin_prec,_rn_sch_psi_spinor,_rn_sch_rep,_rn_sch_rho_spin,_rn_sch_spinor_lift,_rn_sch_tw,_rn_sch_twp,_rn_sch_vd,nascita flag=T_NASCITA,REGOLE_NASCITA,ORDINE_DI_NASCITA,EVENTI_DI_NASCITA,EVENTI_CONVERTITI -->
+<!-- SCHEDA nome=nascita-punto-unico funzioni=_derivazione_perc_geom,_nascita_collaudo_della_tabella,_nascita_collocata,_nascita_non_si_tocca,_nascita_regola,_ordine_di_nascita,_registra_regola,_rn_div_conc_nodi,_rn_div_cs_nodo_prev,_rn_div_d,_rn_div_d0,_rn_div_eta,_rn_div_i,_rn_div_j,_rn_div_mem_mot,_rn_div_nb,_rn_div_nb_prec,_rn_div_nb_ret,_rn_div_omega_s,_rn_div_peq,_rn_div_perc_chi,_rn_div_perc_geom,_rn_div_perc_tw,_rn_div_phi,_rn_div_phi0,_rn_div_phi_s,_rn_div_phivel,_rn_div_pos,_rn_div_psi,_rn_div_psi_prec,_rn_div_psi_spin,_rn_div_psi_spin_prec,_rn_div_psi_spinor,_rn_div_rep,_rn_div_rho_spin,_rn_div_spinor_lift,_rn_div_tw,_rn_div_twp,_rn_div_vd,_rn_sch_conc_nodi,_rn_sch_cs_nodo_prev,_rn_sch_d,_rn_sch_d0,_rn_sch_eta,_rn_sch_i,_rn_sch_j,_rn_sch_mem_mot,_rn_sch_nb,_rn_sch_nb_prec,_rn_sch_nb_ret,_rn_sch_omega_s,_rn_sch_peq,_rn_sch_peqn_idx,_rn_sch_perc_chi,_rn_sch_perc_geom,_rn_sch_perc_tw,_rn_sch_phi,_rn_sch_phi0,_rn_sch_phi_s,_rn_sch_phivel,_rn_sch_pos,_rn_sch_psi,_rn_sch_psi_prec,_rn_sch_psi_spin,_rn_sch_psi_spin_prec,_rn_sch_psi_spinor,_rn_sch_rep,_rn_sch_rho_spin,_rn_sch_spinor_lift,_rn_sch_tw,_rn_sch_twp,_rn_sch_vd,nascita flag=FRAZ_NASCITA,REGOLE_NASCITA,ORDINE_DI_NASCITA,EVENTI_DI_NASCITA,EVENTI_CONVERTITI -->
 
 # **`nascita-punto-unico` — IL PUNTO UNICO DI NASCITA, e le sue 72 regole**
 
-## ⭐ **E DAL `COMMIT 6a` LA FRAZIONE DELLA NASCITA E' UN VALORE DICHIARATO: `T_NASCITA`**
+## ⭐ **E DAL `COMMIT 6a` LA FRAZIONE DELLA NASCITA E' UN VALORE DICHIARATO: `FRAZ_NASCITA`**
+
+### ✅ **E IL NOME E' `FRAZ_NASCITA`, NON `t`, per decisione di Luca** *(2026-10-03)*:
+e' una ### **FRAZIONE dell'arco**, un numero puro in `[0,1]` misurato dal genitore
+`a`/`aa` — e nel simulatore ### **`t` e `dt` sono TEMPI** *(`dt_e`, il tempo proprio
+dell'arco)*. ### **Chiamarla `t` avrebbe messo una lunghezza adimensionale nello stesso
+alfabeto dei tempi.**
 
 *(decisione di Luca del 2026-10-03.)*
 
-> ### **Il figlio sta a `T_NASCITA * d` dal genitore `a` e a `(1 - T_NASCITA) * d` da `b`, e lo
+> ### **Il figlio sta a `FRAZ_NASCITA * d` dal genitore `a` e a `(1 - FRAZ_NASCITA) * d` da `b`, e lo
 > ### STESSO valore vale per DOVE nasce, per QUANTO sono lunghi i suoi archi, e per la sua FASE.**
 
 ### **I SEI SITI che lo leggono** *(prima erano sei formule indipendenti che per caso dicevano

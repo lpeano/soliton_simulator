@@ -558,8 +558,13 @@ PHI_CRIT = 2 * np.pi    # QUANTO DI OLONOMIA. Un giro, non due: il sistema e'
                         # spinoriale, risultata assente. A 4pi la mitosi non scattava MAI
                         # e il grafo restava al 100% oltre portata; a 2pi ripara.
 # ### LA FRAZIONE DELLA NASCITA, DICHIARATA UNA VOLTA SOLA (`COMMIT 6a`, decisione di
-#   Luca del 2026-10-03). ### Il figlio sta a `T_NASCITA * d` dal genitore `a` e a
-#   `(1 - T_NASCITA) * d` da `b`, ### **e lo STESSO valore vale per DOVE nasce (`pos`), per
+#   Luca del 2026-10-03). ### IL NOME E' `FRAZ_NASCITA` E NON `T_NASCITA`, per decisione
+#   di Luca: e' una ### **FRAZIONE dell'arco**, un numero puro in `[0,1]` misurato dal
+#   genitore `a`/`aa` -- e nel simulatore ### **`t` e `dt` sono TEMPI** (`dt_e`, il tempo
+#   proprio dell'arco). ### Chiamarla `t` avrebbe messo una lunghezza adimensionale nello
+#   stesso alfabeto dei tempi.
+#   Luca del 2026-10-03). ### Il figlio sta a `FRAZ_NASCITA * d` dal genitore `a` e a
+#   `(1 - FRAZ_NASCITA) * d` da `b`, ### **e lo STESSO valore vale per DOVE nasce (`pos`), per
 #   QUANTO sono lunghi i suoi archi (`d`, `d0`, `dd`) e per la sua FASE (`fm`).**
 #   ### ⛔ **NON E' UN FLAG, ed e' una scelta:** un flag renderebbe la frazione
 #   ### **un'opzione**, e dove nasce un figlio non e' un'opzione -- e' la legge. E' il
@@ -573,7 +578,7 @@ PHI_CRIT = 2 * np.pi    # QUANTO DI OLONOMIA. Un giro, non due: il sistema e'
 #   `rho_sel` del cancello resta com'e'. Si decidono nella ### **LEGGE** di
 #   `DIVISIONE-AUTOCONSISTENTE`, che viene ### **dopo la definizione dell'energia** perche'
 #   deve rispettare `A14`.
-T_NASCITA = 0.5
+FRAZ_NASCITA = 0.5
 
 TAU_TW   = 20.0
 def _tau_tw_locale(net):
@@ -2361,15 +2366,15 @@ def _rn_sch_phivel(net, c):
 
 
 @_nascita_regola("schwinger", "pos", "media dei genitori (punto medio)",
-                 "self.pos = np.vstack([self.pos, (1-T_NASCITA) * self.pos[aa] + "
-                 "T_NASCITA * self.pos[bb]])",
+                 "self.pos = np.vstack([self.pos, (1-FRAZ_NASCITA) * self.pos[aa] + "
+                 "FRAZ_NASCITA * self.pos[bb]])",
                  "l'anti-nodo e' collocato sul punto medio COME il nodo, cosi' i due "
                  "nascono SOVRAPPOSTI e la dinamica (antifase -> repulsione) li separa da "
                  "se'. ### NON si impone alcuna forza: solo la fase opposta")
 def _rn_sch_pos(net, c):
     # ### LA FORMA CONVESSA, come nella divisione.
     net.pos = np.vstack([net.pos,
-                         (1.0 - T_NASCITA) * net.pos[c["aa"]] + T_NASCITA * net.pos[c["bb"]]])
+                         (1.0 - FRAZ_NASCITA) * net.pos[c["aa"]] + FRAZ_NASCITA * net.pos[c["bb"]]])
 
 
 @_nascita_regola("schwinger", "psi", "media dei genitori (come `phi`)",
@@ -8541,16 +8546,16 @@ class Rete:
             twn = twn / np.maximum(self._deg, 1)
             # bias in [-0.5,0.5]: verso il genitore piu' teso. 0 = punto medio.
             bias = 0.5 * np.tanh(MITOSI_DIR * (twn[a] - twn[b]))
-            # ### IL `bias` E' UNO SCOSTAMENTO *SOPRA* `T_NASCITA`, e il suo `0.5` di
+            # ### IL `bias` E' UNO SCOSTAMENTO *SOPRA* `FRAZ_NASCITA`, e il suo `0.5` di
             #   AMPIEZZA (la riga qui sopra) ### **NON si tocca**: sono due `0.5` con
             #   ### **due ruoli diversi** sulla stessa legge, e distinguerli e' il punto.
-            fm = (self.phi[a] - (T_NASCITA + bias) * D) % self._dphi()
+            fm = (self.phi[a] - (FRAZ_NASCITA + bias) * D) % self._dphi()
         else:
-            fm = (self.phi[a] - T_NASCITA * D) % self._dphi()
+            fm = (self.phi[a] - FRAZ_NASCITA * D) % self._dphi()
         # ### LA FORMA CONVESSA, E NON LA LERP: `(1-t)*x + t*y` e' ### **identica al bit** a
         #   `0.5*(x+y)` a `t = 0.5` *(0 differenze su 2 000 000)*, mentre `x + t*(y-x)`
         #   ### **NO** *(576 135 su 2 000 000)*. ### Misurato prima di scrivere.
-        pos_figlio = (1.0 - T_NASCITA) * self.pos[a] + T_NASCITA * self.pos[b]
+        pos_figlio = (1.0 - FRAZ_NASCITA) * self.pos[a] + FRAZ_NASCITA * self.pos[b]
         # --- LEGGE DI STABILITA' (ANTIFASE DELLE AGGIUNTE, interruttore ANTIFASE_ADD) ---
         # Dove la densita' locale supera l'equilibrio, il NUOVO nodo nasce in ANTIFASE invece
         # che in fase, con probabilita' morbida tanh((rho-rho_eq)/rho_c). Cosi' l'aggiunta NON
@@ -8616,8 +8621,8 @@ class Rete:
         #   PRIMO blocco e' `a`-`m` e vale `t * d`**, il secondo e' `m`-`b` e vale
         #   `(1-t) * d`. ### A `t = 0.5` i due blocchi sono IDENTICI, ed e' per questo che
         #   oggi una sola `dh` bastava per entrambi.
-        dh_a = T_NASCITA * self.d[sel]
-        dh_b = (1.0 - T_NASCITA) * self.d[sel]
+        dh_a = FRAZ_NASCITA * self.d[sel]
+        dh_b = (1.0 - FRAZ_NASCITA) * self.d[sel]
         # lunghezza di riposo dei due nuovi archi. Di default meta' dell'arco (dh):
         # e' questo dimezzamento che produce la compressione degenere, perche' la
         # geometria di equilibrio si accorcia a ogni suddivisione.
@@ -8772,8 +8777,8 @@ class Rete:
                 #   divisione viene da `d`. ### **E' `SCHW-CORTI`, e il `6a` la DICHIARA
                 #   senza cambiarla.**
                 _L_sch = np.linalg.norm(self.pos[aa] - self.pos[bb], axis=1)
-                _dd_a = np.maximum(T_NASCITA * _L_sch, 0.05)
-                _dd_b = np.maximum((1.0 - T_NASCITA) * _L_sch, 0.05)
+                _dd_a = np.maximum(FRAZ_NASCITA * _L_sch, 0.05)
+                _dd_b = np.maximum((1.0 - FRAZ_NASCITA) * _L_sch, 0.05)
                 dd = self._nasce(np.concatenate([_dd_a, _dd_b]),
                                  'schwinger', 1, 1, meta=len(_dd_a))
                 # [PEQ_NASCITA_LOCALE, C2] `nan` = «da calibrare sulla `rho` del PROPRIO

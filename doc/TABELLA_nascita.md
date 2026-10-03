@@ -1,6 +1,6 @@
 # **LE REGOLE DI NASCITA** — *generato da `csv/_tabella_nascita.py`, NON a mano*
 
-> ### **La FONTE e' `REGOLE_NASCITA` in `soliton_simulator.py`** *(blob `d75a7378`, sha1 byte grezzi)*. ### **Questo file e' una VISTA: non si modifica a mano.**
+> ### **La FONTE e' `REGOLE_NASCITA` in `soliton_simulator.py`** *(blob `c18c9bf6`, sha1 byte grezzi)*. ### **Questo file e' una VISTA: non si modifica a mano.**
 
 ### 📌 **E IL PRESIDIO NON E' QUESTO DOCUMENTO, E' IL CODICE:** una grandezza del registro che non compare nella tabella dell'evento ### **ferma il run** con *«regola di nascita non dichiarata per `<nome>` all'evento `<evento>`»*. Il collaudo a secco gira ### **all'import**, cosi' una riga che manca ferma il processo ### **prima** che un run cominci.
 
@@ -132,7 +132,7 @@
 | 18 | **`phi0`** | ✅ regola | antifase (come `phi`) | `self.phi0 = np.concatenate([self.phi0, anti])` |
 | 19 | **`phi_s`** | ✅ regola | zero | `self.phi_s = np.concatenate([self.phi_s, np.zeros(nc)])` |
 | 20 | **`phivel`** | ✅ regola | media dei genitori | `self.phivel = np.concatenate([self.phivel, 0.5 * (self.phivel[aa] + self.phivel[bb])])` |
-| 21 | **`pos`** | ✅ regola | media dei genitori (punto medio) | `self.pos = np.vstack([self.pos, (1-T_NASCITA) * self.pos[aa] + T_NASCITA * self.pos[bb]])` |
+| 21 | **`pos`** | ✅ regola | media dei genitori (punto medio) | `self.pos = np.vstack([self.pos, (1-FRAZ_NASCITA) * self.pos[aa] + FRAZ_NASCITA * self.pos[bb]])` |
 | 22 | **`psi`** | ✅ regola | media dei genitori (come `phi`) | `self.psi = np.concatenate([cur[:n0], 0.5 * (cur[a] + cur[b])])` |
 | 23 | **`psi_spin`** | ✅ regola | eredita da `aa` (come `phi_s`... che qui e' zero) | `self.psi_spin = np.concatenate([cs[:n0], cs[a]])` |
 | 24 | **`rho_spin`** | ✅ regola | eredita da `aa` (come `psi_spin`) | `self.rho_spin = np.concatenate([np.asarray(rs)[:n0], np.asarray(rs)[a]])` |
