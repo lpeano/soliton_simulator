@@ -3470,3 +3470,41 @@ decide a memoria.** *(Le due recidive vere restano vere, e sono il motivo per cu
 esiste.)*
 
 ---
+
+## **DUE DIFETTI NEL PRESIDIO APPENA NATO, e hanno la STESSA radice**
+
+### ⛔ **Il commit che introduce `H-FILE` (`46432b4`) è passato senza essere controllato.** Il
+hook ha stampato *«eccezione DICHIARATA nel messaggio»* — perché il messaggio **citava** la
+stringa d'uscita due volte: nel riassunto di `CLAUDE.md` e nella tabella del collaudo.
+### **Cercare la stringa in tutto il testo rende la via d'uscita attivabile DESCRIVENDOLA, e
+un presidio che si disarma parlando di sé non è un presidio.**
+
+### ⛔ **E subito dopo, il secondo: il parser leggeva la sezione sbagliata.** Prendeva la
+**prima** riga che *conteneva* `FILE CAMBIATI`, che in quel messaggio era una menzione **in
+prosa** a riga 16; e leggeva come «lista dei file» le due righe di prosa che la seguivano —
+**2 voci invece di 4, e un rifiuto che non c'entrava niente.**
+
+> ### 📌 **LA RADICE È UNA SOLA: un marcatore riconosciuto per SOTTOSTRINGA invece che per
+> STRUTTURA.** Due volte nello stesso file, nella stessa ora. ### **E cade in entrambe le
+> direzioni:** la prima svista produceva **falsi passaggi** *(silenzio)*, la seconda **falsi
+> rifiuti** *(rumore)*. ### **Chi cerca solo il silenzio ne trova metà.**
+
+**Curati:** l'uscita vale solo a **inizio riga senza rientro**; l'intestazione deve stare a
+inizio riga e fra più intestazioni valide si prende **l'ultima**. ### ✅ **E il presidio ora
+conferma ciò che avevo verificato a mano: la lista di `46432b4` era giusta — 4 dichiarati, 4
+veri, nessun mancante, nessun inventato.**
+
+### ✅ **E UN TERZO DIFETTO, nel mio COLLAUDO, non nel presidio.** La prima batteria la
+lanciavo con file temporanei **contro l'indice di git**, e un'attesa è **scaduta fra due
+esecuzioni** perché nel frattempo avevo messo un file nell'indice: `msg_sbagliato` è passato
+da `1` a `0` **correttamente**, ed era l'attesa a essere vecchia. ### **Un collaudo che
+dipende dallo stato del mondo misura il mondo, non lo strumento.** ### **Ora è un comando:
+`python csv/_hook_file_cambiati.py --collaudo`**, otto casi, lista iniettata, e
+**attraversa il codice vero** — `principale()` chiama la stessa `confronta()` che la batteria
+esercita, perché un collaudo su un'implementazione parallela passerebbe anche col presidio
+rotto.
+
+**E `H-STASH` ha funzionato nel frattempo:** avevo infilato per sbaglio un `git stash list` in
+una catena di comandi, ed è stato **rifiutato**.
+
+---
