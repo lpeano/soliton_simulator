@@ -117,7 +117,7 @@ def _dig(x):
 def stato(net):
     """### TUTTO cio' che sta in `__dict__`, non solo gli ndarray e gli scalari.
 
-    ### """ + STOP + """ **LA STESURA PRECEDENTE CONFRONTAVA SOLO ndarray E SCALARI, ED ERA
+    ### ⛔ **LA STESURA PRECEDENTE CONFRONTAVA SOLO ndarray E SCALARI, ED ERA
     UN FALSO-ZERO STRUTTURALE** *(rilievo del guardiano, 2026-10-03, ed e' giusto)*: in
     `net` ci sono ### **16 attributi** che ne restavano fuori -- fra cui `conc_nodi` e
     `conc_archi` *(liste)*, `masse_info` *(dict)*, ### **`_S` (una matrice SPARSA)** e

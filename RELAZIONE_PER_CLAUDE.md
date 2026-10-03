@@ -3153,3 +3153,19 @@ arrivato fino al run.
 cercare LA CLASSE.** Adesso ho cercato la classe — nel file c'era **una sola** occorrenza rimasta.
 
 ---
+
+## ✅ **LA CORREZIONE — e ho cercato LA CLASSE, non il caso**
+
+Un controllo statico su **390 file** di `csv/`: *«il primo statement di un modulo, di una classe o
+di una funzione è una **concatenazione di stringhe**?»* — che è **esattamente** la forma del mio
+errore. ### **Risultato: ZERO.** La correzione ha tolto l'unica occorrenza, e nel repo non ce ne
+sono altre.
+
+### ⚠ **E IL PRIMO TENTATIVO DI QUEL CONTROLLO ERA SBAGLIATO, in modo istruttivo:** cercava *«il
+primo statement è un'espressione non costante»* e trovava ### **185 risultati** — ### **quasi tutti
+FALSI POSITIVI.** Un `Call` come primo statement è una funzione che **comincia con una chiamata**
+*(`print(...)`)*, non un docstring. ### ➜ **Avevo confuso *«il primo statement è un'espressione»*
+con *«è un docstring»*, e stavo per annunciare 185 difetti che non esistono.**
+### 📌 **Corretto prima di riportarlo: la forma giusta è la sola `BinOp` di stringhe.**
+
+---
