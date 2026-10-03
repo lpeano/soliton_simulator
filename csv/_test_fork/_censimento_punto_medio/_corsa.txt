@@ -2,7 +2,7 @@
 IL CENSIMENTO DELLA FRAZIONE DI NASCITA nel perimetro della mitosi
 ====================================================================================================
   simulatore .. c18c9bf6 (sha1 byte grezzi)
-  strumento ... ec0a03e3
+  strumento ... 6b9b6bba
   perimetro ... mitosi, decidi_divisione  +  _rn_div_*, _rn_sch_*
   il setaccio cerca IL NUMERO: ogni `0.5` letterale e ogni `/ 2`.
   ### NON le FORME, e il motivo e' un buco MISURATO: cercando `0.5*(x+y)`,
@@ -16,72 +16,231 @@ IL CENSIMENTO DELLA FRAZIONE DI NASCITA nel perimetro della mitosi
 ----------------------------------------------------------------------------------------------------
 TUTTE LE OCCORRENZE NEL PERIMETRO: 13
 
-  :1977   col 45   _rn_div_phivel       0.5 letterale  ?              ?
+  :1977   col 45   _rn_div_phivel       0.5 letterale  EREDITA-MEDIA  phivel
           net.phivel = np.concatenate([net.phivel, 0.5 * (net.phivel[c["a"]] + net.phivel[c["b"]])])
-          -> NON DICHIARATA
+          -> DIVISIONE: il figlio prende la media di phivel. Ed e' la regola che A14 segnala: la nascita CAMBIA la carica totale
 
-  :2007   col 49   _rn_div_psi          0.5 letterale  ?              ?
+  :2007   col 49   _rn_div_psi          0.5 letterale  EREDITA-MEDIA  psi
           net.psi = np.concatenate([cur[:c["n0"]], 0.5 * (cur[c["src_a"]] + cur[c["src_b"]])])
-          -> NON DICHIARATA
+          -> DIVISIONE: il figlio prende la media di psi
 
-  :2365   col 33   _rn_sch_phivel       0.5 letterale  ?              ?
+  :2365   col 33   _rn_sch_phivel       0.5 letterale  EREDITA-MEDIA  phivel
           0.5 * (net.phivel[c["aa"]] + net.phivel[c["bb"]])])
-          -> NON DICHIARATA
+          -> SCHWINGER: l'antinodo prende la media di phivel
 
-  :8312   col 17   decidi_divisione     0.5 letterale  ?              ?
+  :8312   col 17   decidi_divisione     0.5 letterale  ALTRO          soglia
           centro = 0.5 * (pos_soglia + pos_tetto)
-          -> NON DICHIARATA
+          -> decidi_divisione: il centro di un INTERVALLO DI SOGLIA, non una nascita
 
-  :8457   col 13   decidi_divisione     0.5 letterale  ?              ?
+  :8457   col 13   decidi_divisione     0.5 letterale  ALTRO          densita
           ok = 0.5 * (I[a] + I[b]) >= QMIN_M * float(np.median(self.peq))
-          -> NON DICHIARATA
+          -> decidi_divisione: 0.5*(I[a]+I[b]) e' la MEDIA DI DENSITA' del criterio
 
-  :8548   col 19   mitosi               0.5 letterale  ?              ?
+  :8548   col 19   mitosi               0.5 letterale  ALTRO          bias
           bias = 0.5 * np.tanh(MITOSI_DIR * (twn[a] - twn[b]))
-          -> NON DICHIARATA
+          -> mitosi: il 0.5 e' l'AMPIEZZA del bias (lo tiene in [-0.5,0.5]), NON la frazione: la frazione e' quella del ramo `fm`, che oggi e' FRAZ_NASCITA. DUE 0.
 
-  :8568   col 22   mitosi               0.5 letterale  ?              ?
+  :8568   col 22   mitosi               0.5 letterale  ALTRO          densita
           rho_sel = 0.5 * (I[a] + I[b])                       # densita' d'interferenza sull'arco
-          -> NON DICHIARATA
+          -> mitosi: media di densita' sull'arco, DUE VOLTE -- il ramo della divisione e il ramo Schwinger. *** E' LA CHIAVE NON UNICA: le due righe differiscono s
 
-  :8578   col 21   mitosi               / 2            ?              ?
+  :8578   col 21   mitosi               / 2            ALTRO          dominio
           _mezzo = self._dphi() / 2.0
-          -> NON DICHIARATA
+          -> mitosi: META' DEL DOMINIO della fase, non un punto medio fra due nodi
 
-  :8599   col 48   mitosi               0.5 letterale  ?              ?
+  :8599   col 48   mitosi               0.5 letterale  ALTRO          calcio
           comune = KICK_TW * sciolta * (mod - 0.5)
-          -> NON DICHIARATA
+          -> mitosi: il 0.5 e' un OFFSET che centra `mod` intorno a zero, non una frazione di nascita. *** E L'HA TROVATA SOLO IL SETACCIO CHE PARTE DAL NUMERO: ne
 
-  :8600   col 32   mitosi               0.5 letterale  ?              ?
+  :8600   col 32   mitosi               0.5 letterale  ALTRO          calcio
           calcio_a = comune + 0.5 * KICK_TW * sciolta * chi_a * mod
-          -> NON DICHIARATA
+          -> mitosi: l'ampiezza del calcio ripartita fra i due genitori
 
-  :8601   col 32   mitosi               0.5 letterale  ?              ?
+  :8601   col 32   mitosi               0.5 letterale  ALTRO          calcio
           calcio_b = comune - 0.5 * KICK_TW * sciolta * chi_b * mod
-          -> NON DICHIARATA
+          -> mitosi: idem, col segno opposto
 
-  :8735   col 26   mitosi               0.5 letterale  ?              ?
+  :8735   col 26   mitosi               0.5 letterale  ALTRO          densita
           rho_sel = 0.5 * (I[a] + I[b])                   # densita' d'interferenza sull'arco
-          -> NON DICHIARATA
+          -> mitosi: media di densita' sull'arco, DUE VOLTE -- il ramo della divisione e il ramo Schwinger. *** E' LA CHIAVE NON UNICA: le due righe differiscono s
 
-  :8764   col 35   mitosi               / 2            ?              ?
+  :8764   col 35   mitosi               / 2            ALTRO          dominio
           anti = (fm[pick] + self._dphi() / 2.0) % self._dphi()
-          -> NON DICHIARATA
+          -> mitosi: l'ANTIFASE (meta' del DOMINIO)
+
+----------------------------------------------------------------------------------------------------
+IL CONTROLLO POSITIVO -- i SEI siti curati dal 6a sono TORNATI?
+  dd        mitosi             0.5 * np.linalg.norm(self.pos[aa] - self.pos[bb],  trovate 0  OK: NON e' tornato
+  dh        mitosi             dh = self.d[sel] / 2                               trovate 0  OK: NON e' tornato
+  fm        mitosi             fm = (self.phi[a] - 0.5 * D) % self._dphi()        trovate 0  OK: NON e' tornato
+  fm_bias   mitosi             fm = (self.phi[a] - (0.5 + bias) * D) % self._dphi trovate 0  OK: NON e' tornato
+  pos_div   mitosi             pos_figlio = 0.5 * (self.pos[a] + self.pos[b])     trovate 0  OK: NON e' tornato
+  pos_sch   _rn_sch_pos        net.pos = np.vstack([net.pos, 0.5 * (net.pos[c["aa trovate 0  OK: NON e' tornato
+  ### nessuno dei 6 siti curati e' tornato: la cura del 6a TIENE.
+  ### ⚠ E QUESTO E' UN CONTROLLO, NON UNA TAUTOLOGIA: le sei righe sono
+  ###   quelle del blob 6d306976, cercate per (funzione, testo) sul file di OGGI.
 
 ====================================================================================================
-### 13 OCCORRENZE NON DICHIARATE: LO STRUMENTO FALLISCE.
-###   Un sito nuovo nel perimetro non puo' cambiare il conteggio in
-###   silenzio: si classifica o si DICHIARA (A9).
-###   :1977  _rn_div_phivel  net.phivel = np.concatenate([net.phivel, 0.5 * (net.phivel[c["a"]] + net.phivel[c["b"]])])
-###   :2007  _rn_div_psi  net.psi = np.concatenate([cur[:c["n0"]], 0.5 * (cur[c["src_a"]] + cur[c["src_b"]])])
-###   :2365  _rn_sch_phivel  0.5 * (net.phivel[c["aa"]] + net.phivel[c["bb"]])])
-###   :8312  decidi_divisione  centro = 0.5 * (pos_soglia + pos_tetto)
-###   :8457  decidi_divisione  ok = 0.5 * (I[a] + I[b]) >= QMIN_M * float(np.median(self.peq))
-###   :8548  mitosi  bias = 0.5 * np.tanh(MITOSI_DIR * (twn[a] - twn[b]))
-###   :8568  mitosi  rho_sel = 0.5 * (I[a] + I[b])                       # densita' d'interferenza sull'arco
-###   :8578  mitosi  _mezzo = self._dphi() / 2.0
-###   :8599  mitosi  comune = KICK_TW * sciolta * (mod - 0.5)
-###   :8600  mitosi  calcio_a = comune + 0.5 * KICK_TW * sciolta * chi_a * mod
-###   :8601  mitosi  calcio_b = comune - 0.5 * KICK_TW * sciolta * chi_b * mod
-###   :8735  mitosi  rho_sel = 0.5 * (I[a] + I[b])                   # densita' d'interferenza sull'arco
-###   :8764  mitosi  anti = (fm[pick] + self._dphi() / 2.0) % self._dphi()
+IL CONTROLLO DELLA MOLTEPLICITA' -- quante volte ogni chiave dichiarata
+  _rn_div_phivel     net.phivel = np.concatenate([net.phivel, 0.5 * (net.phivel[c[" attese 1  trovate 1  OK
+  _rn_div_psi        net.psi = np.concatenate([cur[:c["n0"]], 0.5 * (cur[c["src_a"] attese 1  trovate 1  OK
+  _rn_sch_phivel     0.5 * (net.phivel[c["aa"]] + net.phivel[c["bb"]])])            attese 1  trovate 1  OK
+  decidi_divisione   centro = 0.5 * (pos_soglia + pos_tetto)                        attese 1  trovate 1  OK
+  decidi_divisione   ok = 0.5 * (I[a] + I[b]) >= QMIN_M * float(np.median(self.peq) attese 1  trovate 1  OK
+  mitosi             _mezzo = self._dphi() / 2.0                                    attese 1  trovate 1  OK
+  mitosi             anti = (fm[pick] + self._dphi() / 2.0) % self._dphi()          attese 1  trovate 1  OK
+  mitosi             bias = 0.5 * np.tanh(MITOSI_DIR * (twn[a] - twn[b]))           attese 1  trovate 1  OK
+  mitosi             calcio_a = comune + 0.5 * KICK_TW * sciolta * chi_a * mod      attese 1  trovate 1  OK
+  mitosi             calcio_b = comune - 0.5 * KICK_TW * sciolta * chi_b * mod      attese 1  trovate 1  OK
+  mitosi             comune = KICK_TW * sciolta * (mod - 0.5)                       attese 1  trovate 1  OK
+  mitosi             rho_sel = 0.5 * (I[a] + I[b])                                  attese 2  trovate 2  OK
+  ### tutte le 12 chiavi dichiarate hanno la molteplicita' attesa.
+
+----------------------------------------------------------------------------------------------------
+LA CLASSIFICAZIONE
+  FRAZIONE      (DOVE sta il figlio, QUANTO sono lunghi i suoi archi) .. 0 siti
+  EREDITA-MEDIA (il figlio prende la MEDIA di una grandezza di STATO) . 3 siti
+      :1977   _rn_div_phivel       phivel       0.5 letterale
+      :2007   _rn_div_psi          psi          0.5 letterale
+      :2365   _rn_sch_phivel       phivel       0.5 letterale
+  ALTRO         (una meta' che fa altro) ............................. 10 siti
+
+  le GRANDEZZE della FRAZIONE .........   (0)
+  le GRANDEZZE dell'EREDITA-MEDIA ..... phivel, psi
+
+====================================================================================================
+### IL VERDETTO DEL CENSIMENTO
+###   occorrenze del numero nel perimetro .. 13
+###   di cui FRAZIONE ...................... 0 siti su 0 GRANDEZZE
+###   *** QUATTRO O MENO: si procede. ***
+====================================================================================================
+
+----------------------------------------------------------------------------------------------------
+PEZZO NUOVO -- L'EREDITA' DA UN SOLO GENITORE: UN `t = 0` IMPLICITO
+  ### E IL SETACCIO DEL NUMERO NON LO VEDE, perche' NON C'E' NESSUN NUMERO DA
+  ###   TROVARE: la frazione non e' scritta, e' nella SCELTA DELL'INDICE.
+  ###   E' FALSO-ZERO applicato alla decisione aperta di Luca -- cercando i
+  ###   `0.5` si conclude <<cinque siti>> e si perde UNA CLASSE INTERA di siti
+  ###   dove la frazione e' GIA' DECISA, A ZERO.
+  ### NON ENTRA NEL CONTEGGIO DEL CANCELLO DEL 6a: e' materiale per la
+  ###   decisione di Luca (DIVISIONE-AUTOCONSISTENTE), non un sito da curare.
+
+  COPIA-GENITORE: indicizza SOLO il lato `a`, E la forma dichiarata in
+  DOMINI ammette una frazione. Siti: 24
+    regola                   evento      grandezza     forma    delega   classe dichiarata
+    _rn_div_cs_nodo_prev     divisione   _cs_nodo_prev pos      -        eredita dal genitore `a`
+    _rn_div_mem_mot          divisione   mem_mot       finito   -        eredita dal genitore `a`
+    _rn_div_nb               divisione   _nb           unita    -        eredita dal genitore `a`
+    _rn_div_nb_prec          divisione   _nb_prec      unita    -        eredita dal genitore `a`
+    _rn_div_nb_ret           divisione   _nb_ret       unita    -        eredita dal genitore `a`
+    _rn_div_omega_s          divisione   omega_s       finito   -        eredita dal genitore `a`
+    _rn_div_phi_s            divisione   phi_s         finito   -        eredita dal genitore `a`
+    _rn_div_psi_prec         divisione   _psi_prec     finito   -        eredita dal genitore `a`
+    _rn_div_psi_spin         divisione   psi_spin      finito   -        eredita da `a` (come `phi_s`)
+    _rn_div_psi_spin_prec    divisione   _psi_spin_pre finito   -        eredita dal genitore `a`
+    _rn_div_psi_spinor       divisione   _psi_spinor   unita    -        eredita col SEGNO (regola D)
+    _rn_div_rho_spin         divisione   rho_spin      nonneg   -        eredita da `a` (come `psi_spin`)
+    _rn_div_spinor_lift      divisione   _spinor_lift  finito   -        eredita col SEGNO (regola D)
+    _rn_sch_cs_nodo_prev     schwinger   _cs_nodo_prev pos      si       eredita dal genitore `aa`
+    _rn_sch_nb               schwinger   _nb           unita    si       eredita dal genitore `aa`
+    _rn_sch_nb_prec          schwinger   _nb_prec      unita    si       eredita dal genitore `aa`
+    _rn_sch_nb_ret           schwinger   _nb_ret       unita    si       eredita dal genitore `aa`
+    _rn_sch_omega_s          schwinger   omega_s       finito   si       eredita dal genitore `aa`
+    _rn_sch_psi_prec         schwinger   _psi_prec     finito   si       eredita dal genitore `aa`
+    _rn_sch_psi_spin         schwinger   psi_spin      finito   si       eredita da `aa` (come `phi_s`... che qui
+    _rn_sch_psi_spin_prec    schwinger   _psi_spin_pre finito   si       eredita dal genitore `aa`
+    _rn_sch_psi_spinor       schwinger   _psi_spinor   unita    si       eredita INVERTITA (antichirale)
+    _rn_sch_rho_spin         schwinger   rho_spin      nonneg   si       eredita da `aa` (come `psi_spin`)
+    _rn_sch_spinor_lift      schwinger   _spinor_lift  finito   si       eredita INVERTITA (antichirale)
+
+  COPIA-GENITORE-FORMA-IGNOTA: indicizza SOLO il lato `a`, e la forma NON e'
+  dichiarata in DOMINI. SI ELENCANO, non si escludono. Siti: 2
+    regola                   evento      grandezza       delega   classe dichiarata
+    _rn_div_conc_nodi        divisione   conc_nodi       -        eredita la concorrenza del genitore `a`
+    _rn_sch_conc_nodi        schwinger   conc_nodi       -        eredita la concorrenza di `aa`, MARCATA `sch
+  ### ⛔ E LA STESURA PRECEDENTE LE ESCLUDEVA <<perche' la forma non e'
+  ###   dichiarata>>: ERA UN FALSO-ZERO. Una forma IGNOTA non e' una forma in
+  ###   cui la frazione non ha senso: escludere per IGNORANZA fa SCOMPARIRE
+  ###   regole che copiano da un solo genitore.
+  ### E C'ERA UN SECONDO FALSO-ZERO, UN LIVELLO PIU' SOTTO: il nome della
+  ###   grandezza lo DEDUCEVO dal nome della funzione, e `_rn_div_psi_spinor`
+  ###   dava `psi_spinor` mentre la grandezza si chiama `_psi_spinor`, COL
+  ###   TRATTINO BASSO. Cosi' la forma risultava <<non dichiarata>> per colpa
+  ###   del MIO nome, non del registro. Ora il nome si RISOLVE contro i
+  ###   registri, e delle 30 regole a un solo genitore ne restano 2 con forma
+  ###   ignota: solo `conc_nodi`, nei due eventi.
+
+  ESCLUSI, e solo questi hanno un MOTIVO DICHIARATO: 4
+    _rn_div_i                i               forma `indice`: una frazione NON ha senso
+    _rn_div_perc_chi         perc_chi        forma `segno`: una frazione NON ha senso
+    _rn_sch_i                i               forma `indice`: una frazione NON ha senso
+    _rn_sch_perc_chi         perc_chi        forma `segno`: una frazione NON ha senso
+  ### IL CRITERIO NON E' MIO: e' la FORMA che il registro DICHIARA.
+  ###   `indice` e' topologia, `segno` e' categoriale -- e per il `segno` il
+  ###   registro lo dice esplicitamente: sommare due decisioni darebbe
+  ###   +2, 0 o -2, che non sono valori ammessi.
+
+  IL TOTALE: 24 copie + 2 forma ignota + 4 esclusi = 30 regole che
+  indicizzano UN SOLO GENITORE.
+
+  *** IL FATTO PRINCIPALE, e lo fa emergere la terza classe: ***
+    LO SPINORE STESSO NASCE COME COPIA DI `a`, NON COME MEDIA.
+      divisione   _nb             eredita dal genitore `a`
+      schwinger   _nb             eredita dal genitore `aa`
+      divisione   _psi_spinor     eredita col SEGNO (regola D)
+      schwinger   _psi_spinor     eredita INVERTITA (antichirale)
+      divisione   _spinor_lift    eredita col SEGNO (regola D)
+      schwinger   _spinor_lift    eredita INVERTITA (antichirale)
+    MENTRE `psi` NASCE COME MEDIA DEI DUE GENITORI (:1984, EREDITA-MEDIA).
+    ### E nello Schwinger la copia dello spinore porta il SEGNO -1 (doppia
+    ###   copertura OPPOSTA), che e' una scelta dichiarata nel registro.
+    ### QUINDI: il campo `psi` interpola fra i genitori, LO SPINORE NO.
+    ###   Due descrizioni della stessa materia, DUE FRAZIONI DIVERSE.
+    ### Non e' un difetto dichiarato: e' la DOMANDA che la decisione di Luca
+    ###   deve chiudere -- e con gli esclusi per <<forma ignota>> NON SI
+    ###   VEDEVA AFFATTO.
+
+  IL CONFRONTO col conteggio del guardiano
+    ### E IL CONTEGGIO INIZIALE DEL GUARDIANO ERA SEI, e lui dichiara perche'
+    ###   era sbagliato: NON CONTAVA `c["src"]`, quindi perdeva `omega_s`,
+    ###   `mem_mot` e TUTTE le regole indicizzate da `src`. Errore del
+    ###   guardiano, dichiarato da lui. Con `src` contato come lato `a`
+    ###   (vale `a` a :8604 e `aa` a :8724) i due conteggi coincidono: 30.
+    nella MIA e non nella sua .. [('divisione', '_cs_nodo_prev'), ('divisione', '_nb'), ('divisione', '_nb_prec'), ('divisione', '_nb_ret'), ('divisione', '_psi_prec'), ('divisione', '_psi_spin_prec'), ('divisione', '_psi_spinor'), ('divisione', '_spinor_lift'), ('divisione', 'mem_mot'), ('divisione', 'omega_s'), ('schwinger', '_cs_nodo_prev'), ('schwinger', '_nb'), ('schwinger', '_nb_prec'), ('schwinger', '_nb_ret'), ('schwinger', '_psi_prec'), ('schwinger', '_psi_spin_prec'), ('schwinger', '_psi_spinor'), ('schwinger', '_spinor_lift'), ('schwinger', 'omega_s')]
+    nella SUA e non nella mia .. [('schwinger', 'phi_s')]
+      ('schwinger', 'phi_s') -> il guardiano la descrive come: zero (non da un genitore)
+
+  ### IL FATTO DA FAR EMERGERE, e il guardiano lo nomina:
+    `psi` nasce come MEDIA dei due genitori (classe EREDITA-MEDIA, trovata
+      1 volte in `_rn_div_psi`),
+    il suo COMPAGNO `psi_spin` nasce come COPIA di `a` (2 regole: _rn_div_psi_spin, _rn_sch_psi_spin).
+    ### DUE GRANDEZZE DELLA STESSA FAMIGLIA, DUE FRAZIONI DIVERSE: 0.5 e 0.
+    ### Non e' un difetto dichiarato: e' la DOMANDA che la decisione di Luca
+    ###   deve chiudere, e senza questo pezzo non si vedrebbe affatto.
+
+
+----------------------------------------------------------------------------------------------------
+IL CONFRONTO CON LA LISTA DEL GUARDIANO (rilievo del 2026-10-03)
+  ### NON SI RIFA', ED E' UN LIMITE DICHIARATO.
+  ###   la lista del guardiano si riferisce al blob .. 6d306976
+  ###   il file in esame e' ........................... c18c9bf6
+  ###   Quella lista e' indicizzata per NUMERO DI RIGA, e il commit `6a` ha
+  ###   spostato le righe: rifare il confronto darebbe un referto in cui
+  ###   OGNI riga risulta <<solo nella mia lista>>. Un numero calcolato su
+  ###   indici che non esistono piu' non e' una misura: e' RUMORE.
+  ### Il confronto COME FU FATTO sta nel referto del blob 6d306976.
+  ### CHE COSA SOPRAVVIVE AL CONFRONTO, E CHE COSA NO -- e sono due cose
+  ###   DIVERSE, che una frase di prima confondeva.
+  ### ✅ SOPRAVVIVE: i SEI SITI `FRAZIONE`, diventati le sei voci di
+  ###   `CURATI` e verificati qui sopra PER CHIAVE sul file di oggi. ### Su
+  ###   quei sei il guardiano e io eravamo D'ACCORDO: non erano il
+  ###   disaccordo, erano l'OGGETTO della cura.
+  ### ⛔ NON SOPRAVVIVE: il DISACCORDO sulle classi, che era su righe
+  ###   ALTRE -- `rho_sel` (:8509/:8665 sul blob 6d306976), che il guardiano
+  ###   metteva fra i siti <<oltre i quattro>> e io ho classificato
+  ###   `ALTRO`, piu' le `ALTRO` presenti SOLO nella mia lista. ### Quel
+  ###   disaccordo vive nel referto del blob 6d306976 e nel task history,
+  ###   NON in `CURATI`.
+  ### ⚠ E `rho_sel` NON E' SENZA PRESIDIO per questo: e' la chiave a
+  ###   MOLTEPLICITA' 2 del controllo qui sopra. ### Sorvegliata, ma
+  ###   dal controllo delle molteplicita', non da `CURATI`.

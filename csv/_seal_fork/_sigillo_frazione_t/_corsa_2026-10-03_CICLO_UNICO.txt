@@ -1,0 +1,210 @@
+[TIMBRO] _sigillo_frazione_t.py  sha1-BYTE 838fc5c9  committato e pulito
+====================================================================================================
+IL SIGILLO DEL COMMIT 6a: la frazione `t` esplicita
+====================================================================================================
+  simulatore di OGGI .. c18c9bf6
+  questo sigillo ...... 838fc5c9
+  la patch ............ 2b8f9d5e
+  piattaforma ......... Windows AMD64
+  Python .............. 3.13.2
+  numpy ............... 2.3.0
+  ### I CONTEGGI DEI RUN (`_sm_tr*`, numero di nascite, passi) VALGONO PER
+  ###   QUESTA PIATTAFORMA. Cio' che NON dipende dalla piattaforma e'
+  ###   l'IDENTITA' fra il *prima* e l'*oggi*, che e' quello che il sigillo
+  ###   misura. ### Su un'altra macchina i conteggi cambiano e l'identita' no.
+  il PRIMA ............ 6d306976  (dal PADRE di 8aa6bc20, che introduce `T_NASCITA`)
+
+----------------------------------------------------------------------------------------------------
+BRACCIO `0` -- LA CURA E' RIPRODUCIBILE DAL REPO?
+  il *prima* + la patch .. c18c9bf6
+  il simulatore di oggi .. c18c9bf6
+  ### PASSA: stesso blob. La cura e' recuperabile PER COSTRUZIONE (par.7).
+
+----------------------------------------------------------------------------------------------------
+BRACCIO `A` -- BYTE-IDENTICO su QUATTRO scene, stato E contatori
+  ### I due blob girano IN LOCKSTEP e si confrontano DOPO OGNI PASSO: cosi' la
+  ###   PRIMA differenza e' quella vera, non la prima che si nota a fine run.
+
+  ================================================================================================
+  SCENA `corta` -- seme 11, 72 passi, --mitosi-2lam: SI
+    attributi confrontati, per classe: ndarray 25 | pickle 14 | rng 1 | scalare 21 | sparsa 1
+    attributi confrontati ALL'ULTIMO PASSO (72): aggregato 1 | ndarray 43 | pickle 18 | rng 1 | scalare 219 | sparsa 1
+    ### ⚠ SONO 62 alla costruzione e 283 all'ultimo passo: `net`
+    ###   ACQUISTA attributi durante il run. Dichiararne uno solo
+    ###   descriverebbe un insieme che al passo 72 non e' piu' quello.
+    alla costruzione: 0 differenze
+    ### PASSA: ZERO differenze su 72 passi, su TUTTI gli attributi di
+    ###   `net` -- OGNI voce di `__dict__`, non solo gli ndarray e gli
+    ###   scalari: anche liste, dict, la matrice SPARSA e lo stato del
+    ###   generatore. CONTATORI COMPRESI.
+    ### ⛔ LA FRASE DI PRIMA DICEVA *<<ndarray e scalari di __dict__>>*
+    ###   ED ERA FALSA da quando `stato()` confronta anche pickle,
+    ###   sparse e `rng`: descriveva l'insieme VECCHIO, piu' piccolo.
+    ###   Un referto che dichiara un insieme piu' piccolo di quello
+    ###   davvero confrontato fa sembrare lo zero piu' DEBOLE di quanto
+    ###   sia -- e la volta prima era il contrario. Entrambe bugie.
+    I QUATTRO `_sm_tr*` (prima / oggi):
+      _sm_trd_mitosi                0 /        0
+      _sm_trd0_mitosi               0 /        0
+      _sm_trd_schwinger             0 /        0
+      _sm_trd0_schwinger            0 /        0
+
+  ================================================================================================
+  SCENA `lunga` -- seme 11, 150 passi, --mitosi-2lam: SI
+    attributi confrontati, per classe: ndarray 25 | pickle 14 | rng 1 | scalare 21 | sparsa 1
+    attributi confrontati ALL'ULTIMO PASSO (150): aggregato 1 | ndarray 44 | pickle 17 | rng 1 | scalare 219 | sparsa 1
+    ### ⚠ SONO 62 alla costruzione e 283 all'ultimo passo: `net`
+    ###   ACQUISTA attributi durante il run. Dichiararne uno solo
+    ###   descriverebbe un insieme che al passo 150 non e' piu' quello.
+    alla costruzione: 0 differenze
+    ### PASSA: ZERO differenze su 150 passi, su TUTTI gli attributi di
+    ###   `net` -- OGNI voce di `__dict__`, non solo gli ndarray e gli
+    ###   scalari: anche liste, dict, la matrice SPARSA e lo stato del
+    ###   generatore. CONTATORI COMPRESI.
+    ### ⛔ LA FRASE DI PRIMA DICEVA *<<ndarray e scalari di __dict__>>*
+    ###   ED ERA FALSA da quando `stato()` confronta anche pickle,
+    ###   sparse e `rng`: descriveva l'insieme VECCHIO, piu' piccolo.
+    ###   Un referto che dichiara un insieme piu' piccolo di quello
+    ###   davvero confrontato fa sembrare lo zero piu' DEBOLE di quanto
+    ###   sia -- e la volta prima era il contrario. Entrambe bugie.
+    I QUATTRO `_sm_tr*` (prima / oggi):
+      _sm_trd_mitosi                0 /        0
+      _sm_trd0_mitosi               0 /        0
+      _sm_trd_schwinger            42 /       42
+      _sm_trd0_schwinger           42 /       42
+
+  ================================================================================================
+  SCENA `altro_seme` -- seme 12, 72 passi, --mitosi-2lam: SI
+    attributi confrontati, per classe: ndarray 25 | pickle 14 | rng 1 | scalare 21 | sparsa 1
+    attributi confrontati ALL'ULTIMO PASSO (72): aggregato 1 | ndarray 43 | pickle 18 | rng 1 | scalare 219 | sparsa 1
+    ### ⚠ SONO 62 alla costruzione e 283 all'ultimo passo: `net`
+    ###   ACQUISTA attributi durante il run. Dichiararne uno solo
+    ###   descriverebbe un insieme che al passo 72 non e' piu' quello.
+    alla costruzione: 0 differenze
+    ### PASSA: ZERO differenze su 72 passi, su TUTTI gli attributi di
+    ###   `net` -- OGNI voce di `__dict__`, non solo gli ndarray e gli
+    ###   scalari: anche liste, dict, la matrice SPARSA e lo stato del
+    ###   generatore. CONTATORI COMPRESI.
+    ### ⛔ LA FRASE DI PRIMA DICEVA *<<ndarray e scalari di __dict__>>*
+    ###   ED ERA FALSA da quando `stato()` confronta anche pickle,
+    ###   sparse e `rng`: descriveva l'insieme VECCHIO, piu' piccolo.
+    ###   Un referto che dichiara un insieme piu' piccolo di quello
+    ###   davvero confrontato fa sembrare lo zero piu' DEBOLE di quanto
+    ###   sia -- e la volta prima era il contrario. Entrambe bugie.
+    I QUATTRO `_sm_tr*` (prima / oggi):
+      _sm_trd_mitosi                0 /        0
+      _sm_trd0_mitosi               0 /        0
+      _sm_trd_schwinger             0 /        0
+      _sm_trd0_schwinger            0 /        0
+
+  ================================================================================================
+  SCENA `senza_2lam` -- seme 11, 72 passi, --mitosi-2lam: NO
+    attributi confrontati, per classe: ndarray 25 | pickle 14 | rng 1 | scalare 21 | sparsa 1
+    attributi confrontati ALL'ULTIMO PASSO (72): aggregato 1 | ndarray 43 | pickle 18 | rng 1 | scalare 217 | sparsa 1
+    ### ⚠ SONO 62 alla costruzione e 281 all'ultimo passo: `net`
+    ###   ACQUISTA attributi durante il run. Dichiararne uno solo
+    ###   descriverebbe un insieme che al passo 72 non e' piu' quello.
+    alla costruzione: 0 differenze
+    ### PASSA: ZERO differenze su 72 passi, su TUTTI gli attributi di
+    ###   `net` -- OGNI voce di `__dict__`, non solo gli ndarray e gli
+    ###   scalari: anche liste, dict, la matrice SPARSA e lo stato del
+    ###   generatore. CONTATORI COMPRESI.
+    ### ⛔ LA FRASE DI PRIMA DICEVA *<<ndarray e scalari di __dict__>>*
+    ###   ED ERA FALSA da quando `stato()` confronta anche pickle,
+    ###   sparse e `rng`: descriveva l'insieme VECCHIO, piu' piccolo.
+    ###   Un referto che dichiara un insieme piu' piccolo di quello
+    ###   davvero confrontato fa sembrare lo zero piu' DEBOLE di quanto
+    ###   sia -- e la volta prima era il contrario. Entrambe bugie.
+    I QUATTRO `_sm_tr*` (prima / oggi):
+      _sm_trd_mitosi               14 /       14
+      _sm_trd0_mitosi              12 /       12
+      _sm_trd_schwinger             4 /        4
+      _sm_trd0_schwinger            4 /        4
+
+----------------------------------------------------------------------------------------------------
+BRACCIO `A-tr` -- I TRONCAMENTI: il braccio sui `_sm_lun` e' VUOTO o no?
+  _sm_trd_mitosi         somma su tutte le scene: 14
+  _sm_trd0_mitosi        somma su tutte le scene: 12
+  _sm_trd_schwinger      somma su tutte le scene: 46
+  _sm_trd0_schwinger     somma su tutte le scene: 46
+  ### NESSUNO e' zero dappertutto: il braccio `A` mette alla prova `_sm_lun`
+  ###   su tutti e quattro i siti.
+
+----------------------------------------------------------------------------------------------------
+BRACCIO `B` -- IL CENSIMENTO RIGIRATO: 0 letterali, 13 occorrenze, sei siti con `t`
+  l'artefatto letto viene dagli STESSI DUE blob? .. SI
+    blob_sim       dal json .. c18c9bf6   il file in esame .. c18c9bf6   OK
+    blob_strumento dal json .. 6b9b6bba   il censimento ..... 6b9b6bba   OK
+    ### E QUESTI DUE NUMERI FINISCONO NEL COMMIT DEL REFERTO INSIEME ALLA
+    ###   COPPIA che li dichiara: `_corsa.txt` E `_censimento.json`. ### Un
+    ###   referto che dichiara un blob e una coppia che ne dichiara un altro
+    ###   e' la stessa bugia, spostata di un file.
+  occorrenze del numero nel perimetro .. 13  (attese 13, erano 19)
+  siti di classe FRAZIONE col LETTERALE . 0  (attesi 0)
+  ### PASSA
+
+----------------------------------------------------------------------------------------------------
+BRACCIO `C` -- t = 0.4, VERIFICATO SUI VALORI al primo evento di ciascun tipo
+  --- COPIA `C0`: t = 0.4, MITOSI_DIR = 0 (il valore del sorgente)
+    dh_a = t*d[sel]            OK  (1 voci)
+    dh_b = (1-t)*d[sel]        OK  (1 voci)
+    pos_figlio convesso        OK  (3 voci)
+    fm = (phi[a] - t*D) mod    OK  (1 voci)
+    dd_a = max(t*L, 0.05)      OK  (1 voci)
+    dd_b = max((1-t)*L, 0.05)  OK  (1 voci)
+    pos antinodo convesso      OK  (3 voci)
+
+  --- COPIA `C1`: t = 0.4, MITOSI_DIR = 1.0 (il ramo del bias ACCESO)
+      ### Verificato PRIMA di scriverlo: il ramo gira al PRIMO evento di
+      ###   divisione e |bias| vale 0.1135, NON zero.
+    dh_a = t*d[sel]            OK  (1 voci)
+    dh_b = (1-t)*d[sel]        OK  (1 voci)
+    pos_figlio convesso        OK  (3 voci)
+    fm = (phi[a]-(t+bias)*D)   OK  (1 voci)
+    dd_a = max(t*L, 0.05)      OK  (1 voci)
+    dd_b = max((1-t)*L, 0.05)  OK  (1 voci)
+    pos antinodo convesso      OK  (3 voci)
+
+  LA COPERTURA PER SITO: chi ha verificato che cosa, sui VALORI
+    sito      chiave                       C0        C1        esito
+    pos_div   pos_figlio convesso          OK        OK        PASSA
+    dh        dh_a = t*d[sel], dh_b = (1-t OK        OK        PASSA
+    fm        fm = (phi[a] - t*D) mod      OK        -         PASSA
+    fm_bias   fm = (phi[a]-(t+bias)*D)     -         OK        PASSA
+    pos_sch   pos antinodo convesso        OK        OK        PASSA
+    dd        dd_a = max(t*L, 0.05), dd_b  OK        OK        PASSA
+    ### ogni sito e' verificato sui VALORI da almeno una copia.
+    ### E le due attese del mandato: `fm` in `C0` (True), `fm_bias` in `C1` (True).
+
+----------------------------------------------------------------------------------------------------
+CASO ROVESCIO -- il ramo normale di `fm` scritto `(1-t)*D`: `C0` deve BOCCIARLO
+  ### E' il controllo che PUO' fallire: se `C0` non lo boccia, non sta
+  ###   verificando la formula ma soltanto la sua presenza.
+  `D` massimo nella scena: 6.273266  ### la distinzione fra le due formule e' REALE
+  la chiave `fm = (phi[a] - t*D) mod`: DIVERSA (bocciato)
+  ### PASSA: `C0` boccia la formula rovesciata.
+
+----------------------------------------------------------------------------------------------------
+BRACCIO `C-bis` -- SEI copie, una per sito al letterale. SEI bocciature.
+  pos_div   B: 1 letterale  ·  C: sbagliate ['pos_figlio convesso', '_eventi']  ->  SCOPERTA
+  dh        B: 1 letterale  ·  C: sbagliate ['dh_a = t*d[sel]', 'dh_b = (1-t)*d[sel]', '_eventi']  ->  SCOPERTA
+  fm        B: 1 letterale  ·  C: sbagliate ['fm = (phi[a] - t*D) mod', '_eventi']  ->  SCOPERTA
+  fm_bias   B: 1 letterale  ·  C: sbagliate ['fm = (phi[a]-(t+bias)*D)', '_eventi']  ->  SCOPERTA
+  pos_sch   B: 1 letterale  ·  C: sbagliate ['pos antinodo convesso', '_eventi']  ->  SCOPERTA
+  dd        B: 1 letterale  ·  C: sbagliate ['dd_a = max(t*L, 0.05)', 'dd_b = max((1-t)*L, 0.05)', '_eventi']  ->  SCOPERTA
+  ### PASSA: sei copie, sei bocciature.
+
+====================================================================================================
+### IL RIEPILOGO
+###   braccio 0 ........ PASSA
+###   braccio A `corta      ` PASSA
+###   braccio A `lunga      ` PASSA
+###   braccio A `altro_seme ` PASSA
+###   braccio A `senza_2lam ` PASSA
+###   braccio A-tr .... PASSA
+###   braccio B ........ PASSA
+###   braccio C0+C1 .... PASSA  (siti scoperti: nessuno)
+###   caso ROVESCIO .... PASSA
+###   braccio C-bis .... PASSA
+====================================================================================================
+  referto .. C:\Users\lpeano\soliton_simulator\csv\_seal_fork\_sigillo_frazione_t

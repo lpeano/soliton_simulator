@@ -3403,3 +3403,34 @@ sul disco. Lo controllo periodicamente, e se si ferma per un motivo che non è u
 **un altro reperto**.
 
 ---
+
+## **IL SIGILLO DEL 6a PASSA, tutti i bracci. E la coppia è coerente NEL REPO, non sul disco**
+
+Il run staccato (PID `29608`) è andato dalle **18:19:42** alle **19:31:28** — `72` minuti,
+`210` righe, **stderr vuoto**. Terminazione verificata con **tre** metodi indipendenti
+*(`tasklist`, `Get-CimInstance`, e il file che non cresce più)*: dopo la bugia di `kill -0`
+non mi fido di una sola lettura.
+
+| braccio | esito | che cosa prova |
+|---|---|---|
+| **`0`** | ✅ | il *prima* `6d306976` + la patch = **`c18c9bf6`**: la cura è recuperabile per costruzione |
+| **`A`** × 4 | ✅ | zero differenze su `corta`, `lunga` (150 passi), `altro_seme`, `senza_2lam` — **`62`** attributi alla costruzione e **`283`** all'ultimo passo |
+| **`A-tr`** | ✅ | `14 / 12 / 46 / 46`: nessun contatore è zero dappertutto, `_sm_lun` è davvero messo alla prova |
+| **`B`** | ✅ | `13` occorrenze, `0` `FRAZIONE`, **e i due blob dell'artefatto coincidono**: `blob_sim c18c9bf6`, `blob_strumento 6b9b6bba` |
+| **`C0`+`C1`** | ✅ | **nessun sito scoperto**; `fm` verificato in **`C0`**, `fm_bias` in **`C1`**, come chiedevi |
+| **rovescio** | ✅ | `C0` **boccia** `(1-t)*D`, e `D` massimo è **`6.273266`** — la distinzione è reale, non fortuna |
+| **`C-bis`** | ✅ | sei copie, **sei bocciature** |
+
+### ✅ **I DUE NUMERI CHE AVEVI CHIESTO SONO NEL REFERTO E NELLA COPPIA COMMITTATA INSIEME.**
+Il json dichiara `blob_sim c18c9bf6` e `blob_strumento 6b9b6bba`; `_corsa.txt` dichiara
+`simulatore c18c9bf6` e `strumento 6b9b6bba`. ### **Stessi blob nei tre posti, e stavolta nel
+REPO**, perché la coppia è in questo commit.
+
+### ⚠ **E IL DOPPIO CONTEGGIO SPIEGA UN MIO NUMERO VECCHIO, senza assolverlo.** `net` passa da
+**`62`** attributi alla costruzione a **`283`** all'ultimo passo *(`281` in `senza_2lam`)*:
+acquista `_calcpsi_origini`, ndarray e scalari durante il run. Il **`263`** che avevo scritto
+era dunque **vicino al conteggio dell'ultimo passo**, non a quello della costruzione — ma
+**non coincide con nessuno dei due**. ### **Quindi la sua provenienza resta ignota e il numero
+resta ritirato:** «quasi giusto» non è una provenienza.
+
+---
