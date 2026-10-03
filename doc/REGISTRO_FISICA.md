@@ -1589,9 +1589,60 @@ scelta di Luca.**
 
 ---
 
-<!-- SCHEDA nome=nascita-punto-unico funzioni=_nascita_collaudo_della_tabella,_nascita_collocata,_nascita_non_si_tocca,_nascita_regola,_ordine_di_nascita,_registra_regola,_rn_div_conc_nodi,_rn_div_cs_nodo_prev,_rn_div_d,_rn_div_d0,_rn_div_eta,_rn_div_i,_rn_div_j,_rn_div_mem_mot,_rn_div_nb,_rn_div_nb_prec,_rn_div_nb_ret,_rn_div_omega_s,_rn_div_peq,_rn_div_perc_chi,_rn_div_perc_geom,_rn_div_perc_tw,_rn_div_phi,_rn_div_phi0,_rn_div_phi_s,_rn_div_phivel,_rn_div_pos,_rn_div_psi,_rn_div_psi_prec,_rn_div_psi_spin,_rn_div_psi_spin_prec,_rn_div_psi_spinor,_rn_div_rep,_rn_div_rho_spin,_rn_div_spinor_lift,_rn_div_tw,_rn_div_twp,_rn_div_vd,_rn_sch_conc_nodi,_rn_sch_cs_nodo_prev,_rn_sch_d,_rn_sch_d0,_rn_sch_eta,_rn_sch_i,_rn_sch_j,_rn_sch_mem_mot,_rn_sch_nb,_rn_sch_nb_prec,_rn_sch_nb_ret,_rn_sch_omega_s,_rn_sch_peq,_rn_sch_peqn_idx,_rn_sch_perc_chi,_rn_sch_perc_geom,_rn_sch_perc_tw,_rn_sch_phi,_rn_sch_phi0,_rn_sch_phi_s,_rn_sch_phivel,_rn_sch_pos,_rn_sch_psi,_rn_sch_psi_prec,_rn_sch_psi_spin,_rn_sch_psi_spin_prec,_rn_sch_psi_spinor,_rn_sch_rep,_rn_sch_rho_spin,_rn_sch_spinor_lift,_rn_sch_tw,_rn_sch_twp,_rn_sch_vd,nascita flag=REGOLE_NASCITA,ORDINE_DI_NASCITA,EVENTI_DI_NASCITA,EVENTI_CONVERTITI -->
+<!-- SCHEDA nome=nascita-punto-unico funzioni=_derivazione_perc_geom,_nascita_collaudo_della_tabella,_nascita_collocata,_nascita_non_si_tocca,_nascita_regola,_ordine_di_nascita,_registra_regola,_rn_div_conc_nodi,_rn_div_cs_nodo_prev,_rn_div_d,_rn_div_d0,_rn_div_eta,_rn_div_i,_rn_div_j,_rn_div_mem_mot,_rn_div_nb,_rn_div_nb_prec,_rn_div_nb_ret,_rn_div_omega_s,_rn_div_peq,_rn_div_perc_chi,_rn_div_perc_geom,_rn_div_perc_tw,_rn_div_phi,_rn_div_phi0,_rn_div_phi_s,_rn_div_phivel,_rn_div_pos,_rn_div_psi,_rn_div_psi_prec,_rn_div_psi_spin,_rn_div_psi_spin_prec,_rn_div_psi_spinor,_rn_div_rep,_rn_div_rho_spin,_rn_div_spinor_lift,_rn_div_tw,_rn_div_twp,_rn_div_vd,_rn_sch_conc_nodi,_rn_sch_cs_nodo_prev,_rn_sch_d,_rn_sch_d0,_rn_sch_eta,_rn_sch_i,_rn_sch_j,_rn_sch_mem_mot,_rn_sch_nb,_rn_sch_nb_prec,_rn_sch_nb_ret,_rn_sch_omega_s,_rn_sch_peq,_rn_sch_peqn_idx,_rn_sch_perc_chi,_rn_sch_perc_geom,_rn_sch_perc_tw,_rn_sch_phi,_rn_sch_phi0,_rn_sch_phi_s,_rn_sch_phivel,_rn_sch_pos,_rn_sch_psi,_rn_sch_psi_prec,_rn_sch_psi_spin,_rn_sch_psi_spin_prec,_rn_sch_psi_spinor,_rn_sch_rep,_rn_sch_rho_spin,_rn_sch_spinor_lift,_rn_sch_tw,_rn_sch_twp,_rn_sch_vd,nascita flag=REGOLE_NASCITA,ORDINE_DI_NASCITA,EVENTI_DI_NASCITA,EVENTI_CONVERTITI -->
 
 # **`nascita-punto-unico` — IL PUNTO UNICO DI NASCITA, e le sue 72 regole**
+
+## ✅ **E DAL `COMMIT 5` UNA REGOLA NON EREDITA PIU': `perc_geom` SI DERIVA**
+
+*(decisione di Luca del 2026-09-29, `doc/relazioni/2026-09-29.md` e `doc/MITOSI_storia.md`.)*
+
+### **LA LEGGE, ed e' la STESSA di `chi_basc`:** `perc_geom` del nato vale ### **`+1` se la media
+di `|tw|` sugli archi del nodo supera `PHI_CRIT`, altrimenti `-1`.** La scrive
+`_derivazione_perc_geom`, chiamata dalle due regole `_rn_div_perc_geom` e `_rn_sch_perc_geom`.
+
+### ⛔ **PRIMA EREDITAVA, E L'EREDITA' POTEVA CONTRADDIRE LA DEFINIZIONE.** Il nato prendeva il
+valore del genitore *(`a` per la divisione, `aa` per lo Schwinger, **non** coniugato)*, mentre i
+suoi archi nascono con `tw = 0` ### **⇒ la definizione dice `-1`.** E ### **quel valore entra
+nella dinamica per UN passo:** `PASSO_COMPOSIZIONE` mette `step` **prima** di `mitosi`, quindi al
+passo dopo il ### **frame-drag legge `perc_geom`** *(`:7368`, `chiralita_core_locale(…, geom=True)`)*
+### **PRIMA** che `chi_basc` *(`:7560`)* lo riporti alla definizione.
+
+### 📌 **PERCHE' UNA DERIVAZIONE E NON LA COSTANTE `-1`** *(ed e' il cuore della decisione)*:
+oggi i due numeri **coincidono**. ### **Ma `DIVISIONE-AUTOCONSISTENTE`, se dara' ai figli una
+torsione diversa da zero, cambierebbe la risposta** — e una costante resterebbe `-1`
+### **sbagliata in silenzio.**
+
+### ⚠ **E IL VINCOLO 4 DEL CONTRATTO NASCE DA QUI, e NON e' un riordino di comodo**
+
+| | |
+|---|---|
+| nell'ordine del registro | `perc_geom` cadeva al posto ### **17**, `tw` al ### **31** |
+| cioe' | ### **la derivazione avrebbe letto il `tw` dei nuovi archi PRIMA che esistesse** |
+| e avrebbe dato | `-1` ### **per il motivo sbagliato: la costante travestita da derivazione** |
+
+### ➜ **`perc_geom` si colloca DOPO `tw`** *(ora posto `31`, `tw` al `30`; l'ordine resta di
+**36** voci: ### **sposta, non aggiunge ne' toglie**)*, con la stessa forma del vincolo `2`
+*(`_peqn_idx` dopo `peq`)*. ### **E' una DIPENDENZA DI LETTURA**, e ha ### **due presidi** che
+sollevano se `perc_geom` o `tw` uscissero dai registri — perche' `A9`: **un vincolo scritto non e'
+un presidio.**
+
+### ⚠ **LE DUE DIFFERENZE DA `chi_basc`, DICHIARATE e non nascoste:**
+
+| | `chi_basc` | la derivazione alla nascita |
+|---|---|---|
+| il grado | `self._deg` | ### **RICALCOLATO da `i`/`j`** — `_grado()` e' `collocata` e gira **DOPO** `nascita()`, quindi dentro la nascita `_deg` e' **STANTIO** |
+| la torsione | `_tw_t`, uno ### **SNAPSHOT** preso prima nel passo | ### **`net.tw`** — alla nascita non esiste nessuno snapshot |
+
+### 📌 **E DUE CONTATORI, `_g_pgeom_der_m1` e `_g_pgeom_der_p1`:** dicono ### **quante volte la
+derivazione ha davvero DECISO** `-1` e `+1`. Esistono perche' un *«sempre `-1`»*
+### **non distingue una derivazione da una costante.**
+
+### ⛔ **E OGGI LA CURA E' BYTE-INERTE SULLE TRE SCENE DEL SIGILLO, ed e' MISURATO:** il
+censimento *(`csv/_test_fork/_censimento_perc_geom/`)* ha trovato ### **`1225` nati con eredita'
+`-1` E derivazione `-1`** ⇒ zero differenze. ### ⚠ **Ma e' una proprieta' DELLE SCENE, non della
+legge:** nella scena da **150** passi fino a ### **`103` nodi** stanno a `+1`, quindi un nato da un
+genitore a `+1` e' ### **possibile** — e la' le due regole ### **divergerebbero.**
 
 ## ✅ **E DAL `COMMIT 4` IL PUNTO UNICO FA UN'ULTIMA COSA: IL VELENO**
 

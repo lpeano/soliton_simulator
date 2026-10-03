@@ -55,6 +55,39 @@
 
 ---
 
+## `nascita`
+
+*(oggi a `soliton_simulator.py:1646` - **misurato dall'AST**. il punto unico: scorre
+`ORDINE_DI_NASCITA` e chiama la regola di ogni grandezza.)*
+
+- ### ⛔ **DENTRO `nascita()` IL GRADO `_deg` E' STANTIO, E IL NOME NON LO DICE.**
+  *(misurato il 2026-10-03, `COMMIT 5`.)* `_deg` compare in `ORDINE_DI_NASCITA` al posto **4**,
+  quindi ### **sembra scritto presto** — ma la sua classe e' ### **`collocata`**, cioe' lo scrive
+  `self._grado()`, ### **che gira DOPO `nascita()`.** ### ➜ **Una regola che legga `net._deg` per
+  un nodo NUOVO legge il grado di PRIMA, e per il nato non esiste affatto** *(l'array e' piu'
+  corto di `n`)*. ### **Chi ha bisogno del grado dentro la nascita se lo RICALCOLA**, come fa
+  `_derivazione_perc_geom`:
+  `np.maximum(np.bincount(i, minlength=n) + np.bincount(j, minlength=n), 1)` — che e' ciò che fa
+  `_grado()`. ### 📌 **La stessa trappola vale per OGNI voce `collocata`:** il posto nell'ordine
+  dice ### **dove la tabella la nomina**, non ### **quando il valore c'e'.**
+
+- ### ⚠ **E L'ORDINE DEL REGISTRO NON E' L'ORDINE DELLE DIPENDENZE.** `ORDINE_DI_NASCITA` si
+  deriva dai registri *(`METRI`, `STATO`, `FINESTRA`)*, che sono ordinati ### **alfabeticamente
+  dentro ogni blocco** — quindi due grandezze legate da una dipendenza di lettura possono
+  trovarsi nell'ordine ### **sbagliato** senza che nulla lo segnali. ### **E' successo:**
+  `perc_geom` *(posto 17)* contro `tw` *(posto 31)*, mentre la derivazione di `perc_geom`
+  ### **legge `tw`**. ### ➜ **I vincoli d'ordine sono QUATTRO e stanno in
+  `doc/CONTRATTO_nascita.md` par.5** *(prima non erano elencati da nessuna parte: vivevano solo
+  nei commenti del codice)*.
+
+- ### ✅ **LE REGOLE NON DEVONO LEGGERE `self.n`** *(vincolo 3)*: e' una `@property` su
+  `len(self.phi)`, e `phi` cresce al posto **0** — quindi a meta' della nascita `self.n`
+  ### **cambia sotto i piedi.** Il contesto porta ### **`c["n0"]`** *(i nodi PRIMA)* e
+  ### **`c["quante"]`** *(quanti nascono)*: il numero del DOPO e' ### **`n0 + quante`**, e non
+  richiede di leggere nulla di mutevole.
+
+---
+
 ## `rapporto_guardie`
 
 *(oggi a `soliton_simulator.py:606` - **misurato dall'AST**. i contatori delle guardie: quante volte un ramo e' stato saltato.)*

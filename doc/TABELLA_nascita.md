@@ -1,6 +1,6 @@
 # **LE REGOLE DI NASCITA** — *generato da `csv/_tabella_nascita.py`, NON a mano*
 
-> ### **La FONTE e' `REGOLE_NASCITA` in `soliton_simulator.py`** *(blob `dc10df7f`, sha1 byte grezzi)*. ### **Questo file e' una VISTA: non si modifica a mano.**
+> ### **La FONTE e' `REGOLE_NASCITA` in `soliton_simulator.py`** *(blob `6d306976`, sha1 byte grezzi)*. ### **Questo file e' una VISTA: non si modifica a mano.**
 
 ### 📌 **E IL PRESIDIO NON E' QUESTO DOCUMENTO, E' IL CODICE:** una grandezza del registro che non compare nella tabella dell'evento ### **ferma il run** con *«regola di nascita non dichiarata per `<nome>` all'evento `<evento>`»*. Il collaudo a secco gira ### **all'import**, cosi' una riga che manca ferma il processo ### **prima** che un run cominci.
 
@@ -47,21 +47,21 @@
 | 14 | **`mem_mot`** | ✅ regola | eredita dal genitore `a` | `self.mem_mot = np.vstack([self.mem_mot, self.mem_mot[a]]) if len(...) else np.zeros((len(sel), 3))` |
 | 15 | **`omega_s`** | ✅ regola | eredita dal genitore `a` | `self.omega_s = np.vstack([self.omega_s, self.omega_s[src]])` |
 | 16 | **`perc_chi`** | ✅ regola | eredita la chiralita' del genitore `a` | `self.perc_chi = np.concatenate([self.perc_chi, self.perc_chi[a]])` |
-| 17 | **`perc_geom`** | ✅ regola | eredita la geometria del genitore `a` | `self.perc_geom = np.concatenate([self.perc_geom, self.perc_geom[a]])` |
-| 18 | **`perc_tw`** | ✅ regola | zero | `self.perc_tw = np.concatenate([self.perc_tw, np.zeros(len(sel))])` |
-| 19 | **`phi0`** | ✅ regola | media (come `phi`) | `self.phi0 = np.concatenate([self.phi0, fm])` |
-| 20 | **`phi_s`** | ✅ regola | eredita dal genitore `a` | `self.phi_s = np.concatenate([self.phi_s, self.phi_s[a]])` |
-| 21 | **`phivel`** | ✅ regola | media dei genitori | `self.phivel = np.concatenate([self.phivel, 0.5 * (self.phivel[a] + self.phivel[b])])` |
-| 22 | **`pos`** | ✅ regola | media dei genitori (punto medio) | `self.pos = np.vstack([self.pos, pos_figlio])` |
-| 23 | **`psi`** | ✅ regola | media dei genitori (come `phi`) | `self.psi = np.concatenate([cur[:n0], 0.5 * (cur[a] + cur[b])])` |
-| 24 | **`psi_spin`** | ✅ regola | eredita da `a` (come `phi_s`) | `self.psi_spin = np.concatenate([cs[:n0], cs[a]])` |
-| 25 | **`rho_spin`** | ✅ regola | eredita da `a` (come `psi_spin`) | `self.rho_spin = np.concatenate([np.asarray(rs)[:n0], np.asarray(rs)[a]])` |
-| 26 | **`_rep`** | ✅ regola | eredita dall'arco che si spezza | `self._rep = np.concatenate([self._rep[keep], self._rep[sel], self._rep[sel]])` |
-| 27 | **`d`** | ✅ regola | meta' dell'arco (due tronconi) | `self.d = np.concatenate([self.d[keep], dh, dh])` |
-| 28 | **`d0`** | ✅ regola | meta' dell'arco, con offset plastico | `self.d0 = np.concatenate([self.d0[keep], d0new])` |
-| 29 | **`peq`** | ✅ regola | eredita dall'arco che si spezza | `self.peq = np.concatenate([self.peq[keep], self.peq[sel], self.peq[sel]])` |
-| 30 | **`_peqn_idx`** | — non si tocca | non si tocca | `(nessuna)` |
-| 31 | **`tw`** | ✅ regola | zero | `self.tw = np.concatenate([self.tw[keep], zz, zz])` |
+| 17 | **`perc_tw`** | ✅ regola | zero | `self.perc_tw = np.concatenate([self.perc_tw, np.zeros(len(sel))])` |
+| 18 | **`phi0`** | ✅ regola | media (come `phi`) | `self.phi0 = np.concatenate([self.phi0, fm])` |
+| 19 | **`phi_s`** | ✅ regola | eredita dal genitore `a` | `self.phi_s = np.concatenate([self.phi_s, self.phi_s[a]])` |
+| 20 | **`phivel`** | ✅ regola | media dei genitori | `self.phivel = np.concatenate([self.phivel, 0.5 * (self.phivel[a] + self.phivel[b])])` |
+| 21 | **`pos`** | ✅ regola | media dei genitori (punto medio) | `self.pos = np.vstack([self.pos, pos_figlio])` |
+| 22 | **`psi`** | ✅ regola | media dei genitori (come `phi`) | `self.psi = np.concatenate([cur[:n0], 0.5 * (cur[a] + cur[b])])` |
+| 23 | **`psi_spin`** | ✅ regola | eredita da `a` (come `phi_s`) | `self.psi_spin = np.concatenate([cs[:n0], cs[a]])` |
+| 24 | **`rho_spin`** | ✅ regola | eredita da `a` (come `psi_spin`) | `self.rho_spin = np.concatenate([np.asarray(rs)[:n0], np.asarray(rs)[a]])` |
+| 25 | **`_rep`** | ✅ regola | eredita dall'arco che si spezza | `self._rep = np.concatenate([self._rep[keep], self._rep[sel], self._rep[sel]])` |
+| 26 | **`d`** | ✅ regola | meta' dell'arco (due tronconi) | `self.d = np.concatenate([self.d[keep], dh, dh])` |
+| 27 | **`d0`** | ✅ regola | meta' dell'arco, con offset plastico | `self.d0 = np.concatenate([self.d0[keep], d0new])` |
+| 28 | **`peq`** | ✅ regola | eredita dall'arco che si spezza | `self.peq = np.concatenate([self.peq[keep], self.peq[sel], self.peq[sel]])` |
+| 29 | **`_peqn_idx`** | — non si tocca | non si tocca | `(nessuna)` |
+| 30 | **`tw`** | ✅ regola | zero | `self.tw = np.concatenate([self.tw[keep], zz, zz])` |
+| 31 | **`perc_geom`** | ✅ regola | DERIVATA dalla definizione (non eredita) | `self.perc_geom = np.concatenate([self.perc_geom, _derivazione_perc_geom(self, c)])` |
 | 32 | **`twp`** | ✅ regola | differenza di fase genitore-figlio | `self.twp = np.concatenate([self.twp[keep], self._wphi(self.phi[a] - fm), self._wphi(fm - self.phi[b])])` |
 | 33 | **`vd`** | ✅ regola | eredita dall'arco che si spezza | `self.vd = np.concatenate([self.vd[keep], self.vd[sel], self.vd[sel]])` |
 | 34 | **`_smp_d0`** | 🔧 collocata | collocata | `self._smp_chirurgia(keep=keep, nuovi=d0new)` |
@@ -86,7 +86,6 @@
 - **`mem_mot`** — *eredita dal genitore `a`*: la memoria di moto del padre; se la memoria non c'e' ancora, zeri
 - **`omega_s`** — *eredita dal genitore `a`*: il ritmo spinoriale del padre
 - **`perc_chi`** — *eredita la chiralita' del genitore `a`*: [CHI_COOP via 2 di 3] profilo dormiente, non ancora accoppiato. ### E QUESTO RAMO SPOSTA `N(+1) - N(-1)` DI `+segno(perc_chi[a])` PER FIGLIO: aggiunge un nodo dello STESSO segno del genitore. L'altro ramo (Schwinger) lo sposta nel verso OPPOSTO, e ### ⚠ I DUE SI CANCELLANO SOLO SUGLI ARCHI DOVE SCATTANO ENTRAMBI: la conservazione e' DELLA COPPIA, non della somma dei due rami. ### MISURATO: 9 contro 1 in 72 passi, cioe' +8. ### Per questo i nati si contano DUE volte e non una: un totale non direbbe da dove viene la carica.
-- **`perc_geom`** — *eredita la geometria del genitore `a`*: [CHI_COOP] la geometria NON e' coniugata: e' un giro compiuto o no, e si eredita tale
 - **`perc_tw`** — *zero*: salto a 0: il profilo di torsione percorso riparte
 - **`phi0`** — *media (come `phi`)*: la fase di riferimento nasce DOVE nasce la fase: lo stesso `fm`
 - **`phi_s`** — *eredita dal genitore `a`*: lo spinore di fase del padre -- ed e' il COMPAGNO di `psi_spin`, che eredita per la stessa ragione
@@ -101,6 +100,7 @@
 - **`peq`** — *eredita dall'arco che si spezza*: ### L'EREDITA' DELLA MITOSI NON SI TOCCA, e il perche' e' una frase di `PEQ_NASCITA_LOCALE`: *un arco che si spezza non NASCE, CONTINUA*. Per questo qui non c'e' `nan` e nello Schwinger si'
 - **`_peqn_idx`** — *non si tocca*: la marca degli archi nati con `peq = nan` esiste SOLO per lo Schwinger: la mitosi non ne crea (eredita `peq`, non lo lascia da calibrare). DICHIARATO, non omesso
 - **`tw`** — *zero*: i due tronconi nascono con `tw = 0`: la torsione dell'arco SPARISCE. ### IL CALCIO LA USA COME MISURA MA NON LA CONSERVA: `\|tw\|` decide QUANTO colpire i genitori, e l'avvolgimento NON viene trasferito -- MISURATO: `DIVISIONE-AUTOCONSISTENTE:M1`, ~1.2 giri persi per arco diviso, SENZA BILANCIO. Se debba conservarsi e' `DIVISIONE-AUTOCONSISTENTE`, APERTA. ### ⛔ E LA FRASE DI PRIMA ERA FALSA, e la lascio scritta perche' un errore non si cancella (par.8): diceva che la torsione era <<SCIOLTA dalla divisione, ed e' cio' che il calcio ha SPESO>>, cioe' DAVA PER RISOLTA una domanda aperta. Rilievo del guardiano, 2026-10-03.
+- **`perc_geom`** — *DERIVATA dalla definizione (non eredita)*: [COMMIT 5, decisione di Luca del 2026-09-29] ### NON SI EREDITA PIU': la geometria e' *<<il giro e' compiuto o no>>*, e questo si LEGGE dagli archi del nodo -- la media di `\|tw\|` contro `PHI_CRIT`, la STESSA definizione di `chi_basc`. Un valore EREDITATO poteva CONTRADDIRE la definizione, e per un passo il frame-drag lo leggeva. ### Il nato ha archi con `tw = 0`, quindi OGGI la derivazione da' `-1`; scritta come DERIVAZIONE e non come costante resta giusta quando `DIVISIONE-AUTOCONSISTENTE` dara' ai figli una torsione
 - **`twp`** — *differenza di fase genitore-figlio*: ### VINCOLO 1 DEL CONTRATTO: legge `phi[a]`/`phi[b]` DOPO il calcio, che e' una scrittura INDICIZZATA sui genitori -- quindi `phi` deve stare PRIMA, e nell'ordine del registro ci sta (`METRI` precede `STATO`)
 - **`vd`** — *eredita dall'arco che si spezza*: la velocita' metrica dell'arco si eredita come `_rep` e `peq`
 - **`_smp_d0`** — *collocata*: [SCALA_MIN_PASSO C3 / COES_CAUSALE C4] la fotografia di inizio passo subisce LE STESSE operazioni di `d0`, altrimenti un confronto `fine - inizio` per posizione confronterebbe ARCHI DIVERSI. NON e' una regola di nascita: e' una CHIRURGIA sullo snapshot, e si colloca nella preparazione perche' legge solo `keep` e `d0new`
@@ -128,21 +128,21 @@
 | 14 | **`mem_mot`** | ✅ regola | zero | `self.mem_mot = np.vstack([self.mem_mot, np.zeros((nc, 3))]) if len(...) else np.zeros((nc, 3))` |
 | 15 | **`omega_s`** | ✅ regola | eredita dal genitore `aa` | `self.omega_s = np.vstack([self.omega_s, self.omega_s[src]])` |
 | 16 | **`perc_chi`** | ✅ regola | eredita INVERTITA (la CARICA si coniuga) | `self.perc_chi = np.concatenate([self.perc_chi, -self.perc_chi[aa]])` |
-| 17 | **`perc_geom`** | ✅ regola | eredita NON invertita (la GEOMETRIA non si coniuga) | `self.perc_geom = np.concatenate([self.perc_geom, self.perc_geom[aa]])` |
-| 18 | **`perc_tw`** | ✅ regola | zero | `self.perc_tw = np.concatenate([self.perc_tw, np.zeros(nc)])` |
-| 19 | **`phi0`** | ✅ regola | antifase (come `phi`) | `self.phi0 = np.concatenate([self.phi0, anti])` |
-| 20 | **`phi_s`** | ✅ regola | zero | `self.phi_s = np.concatenate([self.phi_s, np.zeros(nc)])` |
-| 21 | **`phivel`** | ✅ regola | media dei genitori | `self.phivel = np.concatenate([self.phivel, 0.5 * (self.phivel[aa] + self.phivel[bb])])` |
-| 22 | **`pos`** | ✅ regola | media dei genitori (punto medio) | `self.pos = np.vstack([self.pos, 0.5 * (self.pos[aa] + self.pos[bb])])` |
-| 23 | **`psi`** | ✅ regola | media dei genitori (come `phi`) | `self.psi = np.concatenate([cur[:n0], 0.5 * (cur[a] + cur[b])])` |
-| 24 | **`psi_spin`** | ✅ regola | eredita da `aa` (come `phi_s`... che qui e' zero) | `self.psi_spin = np.concatenate([cs[:n0], cs[a]])` |
-| 25 | **`rho_spin`** | ✅ regola | eredita da `aa` (come `psi_spin`) | `self.rho_spin = np.concatenate([np.asarray(rs)[:n0], np.asarray(rs)[a]])` |
-| 26 | **`_rep`** | ✅ regola | zero (archi NUOVI) | `self._rep = np.concatenate([self._rep, np.zeros(2 * nc)])` |
-| 27 | **`d`** | ✅ regola | meta' della distanza fra i genitori | `self.d = np.concatenate([self.d, dd, dd])` |
-| 28 | **`d0`** | ✅ regola | meta' della distanza fra i genitori | `self.d0 = np.concatenate([self.d0, dd, dd])` |
-| 29 | **`peq`** | ✅ regola | `nan` = da calibrare sul PROPRIO arco | `self.peq = np.concatenate([self.peq, np.full(2 * nc, pmed)])` |
-| 30 | **`_peqn_idx`** | ✅ regola | la marca degli archi nati con `nan` | `self._peqn_idx = np.arange(len(self.peq) - 2 * nc, len(self.peq))` |
-| 31 | **`tw`** | ✅ regola | zero | `self.tw = np.concatenate([self.tw, zz2, zz2])` |
+| 17 | **`perc_tw`** | ✅ regola | zero | `self.perc_tw = np.concatenate([self.perc_tw, np.zeros(nc)])` |
+| 18 | **`phi0`** | ✅ regola | antifase (come `phi`) | `self.phi0 = np.concatenate([self.phi0, anti])` |
+| 19 | **`phi_s`** | ✅ regola | zero | `self.phi_s = np.concatenate([self.phi_s, np.zeros(nc)])` |
+| 20 | **`phivel`** | ✅ regola | media dei genitori | `self.phivel = np.concatenate([self.phivel, 0.5 * (self.phivel[aa] + self.phivel[bb])])` |
+| 21 | **`pos`** | ✅ regola | media dei genitori (punto medio) | `self.pos = np.vstack([self.pos, 0.5 * (self.pos[aa] + self.pos[bb])])` |
+| 22 | **`psi`** | ✅ regola | media dei genitori (come `phi`) | `self.psi = np.concatenate([cur[:n0], 0.5 * (cur[a] + cur[b])])` |
+| 23 | **`psi_spin`** | ✅ regola | eredita da `aa` (come `phi_s`... che qui e' zero) | `self.psi_spin = np.concatenate([cs[:n0], cs[a]])` |
+| 24 | **`rho_spin`** | ✅ regola | eredita da `aa` (come `psi_spin`) | `self.rho_spin = np.concatenate([np.asarray(rs)[:n0], np.asarray(rs)[a]])` |
+| 25 | **`_rep`** | ✅ regola | zero (archi NUOVI) | `self._rep = np.concatenate([self._rep, np.zeros(2 * nc)])` |
+| 26 | **`d`** | ✅ regola | meta' della distanza fra i genitori | `self.d = np.concatenate([self.d, dd, dd])` |
+| 27 | **`d0`** | ✅ regola | meta' della distanza fra i genitori | `self.d0 = np.concatenate([self.d0, dd, dd])` |
+| 28 | **`peq`** | ✅ regola | `nan` = da calibrare sul PROPRIO arco | `self.peq = np.concatenate([self.peq, np.full(2 * nc, pmed)])` |
+| 29 | **`_peqn_idx`** | ✅ regola | la marca degli archi nati con `nan` | `self._peqn_idx = np.arange(len(self.peq) - 2 * nc, len(self.peq))` |
+| 30 | **`tw`** | ✅ regola | zero | `self.tw = np.concatenate([self.tw, zz2, zz2])` |
+| 31 | **`perc_geom`** | ✅ regola | DERIVATA dalla definizione (non eredita) | `self.perc_geom = np.concatenate([self.perc_geom, _derivazione_perc_geom(self, c)])` |
 | 32 | **`twp`** | ✅ regola | differenza di fase genitore-antinodo | `self.twp = np.concatenate([self.twp, self._wphi(self.phi[aa] - anti), self._wphi(anti - self.phi[bb])])` |
 | 33 | **`vd`** | ✅ regola | zero (archi NUOVI) | `self.vd = np.concatenate([self.vd, np.zeros(2 * nc)])` |
 | 34 | **`_smp_d0`** | 🔧 collocata | collocata | `self._smp_chirurgia(nuovi=np.concatenate([dd, dd]))` |
@@ -167,7 +167,6 @@
 - **`mem_mot`** — *zero*: ### E QUI LA REGOLA E' DIVERSA DALLA MITOSI, ed e' dichiarata: il figlio della divisione EREDITA la memoria di moto del padre, l'antinodo nasce con memoria NULLA -- non continua un moto, comincia
 - **`omega_s`** — *eredita dal genitore `aa`*: il ritmo spinoriale del genitore
 - **`perc_chi`** — *eredita INVERTITA (la CARICA si coniuga)*: ### l'antiparticella nasce con chiralita' OPPOSTA al genitore: `-perc_chi[aa]`. ### QUINDI QUESTO SINGOLO NODO SPOSTA `N(+1) - N(-1)` DI `-segno(perc_chi[aa])`, non di zero. ### ⚠ LA CONSERVAZIONE E' DELLA COPPIA, NON DEL RAMO, E LA COPPIA NON SI FORMA SEMPRE: la mitosi aggiunge un figlio dello STESSO segno, lo Schwinger un antinodo OPPOSTO, e i due si cancellano SOLO sugli archi dove scattano ENTRAMBI -- e lo Schwinger scatta su un SOTTOINSIEME (`pick`). ### E I CONTATORI DEL REPO LO DICONO: 72 passi, seme 11 -> `_g_nati_mitosi = 9` contro `_g_nati_schwinger = 1`, cioe' `N(+1) - N(-1)` si e' spostato di +8 in quel run (`csv/_test_fork/_sonda_commit3/_sonda_commit3.json`, `nati_dopo`). ### ⛔ E LA FRASE DI PRIMA DICEVA <<E' IL RAMO CHE CONSERVA, la coppia e' NEUTRA e `N(+1) - N(-1)` NON cambia>>: era VERA DELLA COPPIA e FALSA DEL RAMO, e i due contatori esistono proprio per distinguerle. Rilievo del guardiano, 2026-10-03.
-- **`perc_geom`** — *eredita NON invertita (la GEOMETRIA non si coniuga)*: [CHI_COOP via 3 di 3] ### SCELTA DICHIARATA, NON OVVIA: la CARICA nasce opposta (e' antimateria); la GEOMETRIA no, copiata tale e quale, perche' non e' una carica e non si coniuga. E `chi_basc` la riscrive al passo dopo
 - **`perc_tw`** — *zero*: salto a 0
 - **`phi0`** — *antifase (come `phi`)*: la fase di riferimento nasce dove nasce la fase
 - **`phi_s`** — *zero*: ### E QUI PURE LA REGOLA E' DIVERSA DALLA MITOSI: il figlio della divisione EREDITA `phi_s` dal padre, l'antinodo nasce a ZERO -- inerte se lo spinore di fase e' spento
@@ -182,6 +181,7 @@
 - **`peq`** — *`nan` = da calibrare sul PROPRIO arco*: [PEQ_NASCITA_LOCALE, C2] `nan` significa *da calibrare sulla `rho` del PROPRIO arco*, ed e' la STESSA convenzione di `_allaccia`: `step` lo fa all'inizio del passo dopo, e da' `anom = 0` ESATTO alla nascita. ### Il ramo storico prendeva `median(self.peq)`, una statistica GLOBALE dentro una legge locale (`A2`)
 - **`_peqn_idx`** — *la marca degli archi nati con `nan`*: ### VINCOLO 2 DEL CONTRATTO: gli indici si riferiscono all'array FINALE, quindi questa regola DEVE girare DOPO `peq` -- ed e' per questo che `_peqn_idx`, che in nessun registro sta, e' DICHIARATO subito dopo `peq` in `ORDINE_DI_NASCITA`. Serve a distinguere QUESTI `nan` da quelli di `_allaccia`, che la SEMINA scrive su TUTTI gli archi al primo passo
 - **`tw`** — *zero*: gli archi della coppia nascono senza torsione
+- **`perc_geom`** — *DERIVATA dalla definizione (non eredita)*: [COMMIT 5, decisione di Luca del 2026-09-29] ### LA SCELTA VECCHIA ERA DICHIARATA E NON OVVIA -- la CARICA nasce opposta (e' antimateria), la GEOMETRIA copiata tale e quale -- e la decisione di Luca la SUPERA ALLA RADICE: la geometria non si EREDITA affatto, ne' diritta ne' coniugata, perche' si LEGGE dagli archi del nodo (media di `\|tw\|` contro `PHI_CRIT`, la definizione di `chi_basc`). ### Cosi' la domanda *<<si coniuga o no?>>* non si pone: non e' una carica, e' una MISURA sugli archi
 - **`twp`** — *differenza di fase genitore-antinodo*: legge `phi[aa]`/`phi[bb]`, che sono GENITORI: l'estensione di `phi` non li tocca, quindi qui l'arco e' INERTE (misurato). Ma l'ordine resta quello del registro, che e' lo stesso di prima
 - **`vd`** — *zero (archi NUOVI)*: come `_rep`: nascono fermi, non continuano un moto
 - **`_smp_d0`** — *collocata*: [SCALA_MIN_PASSO C3] lo snapshot segue anche lo Schwinger, e qui SENZA `keep`: la coppia aggiunge archi e non ne toglie

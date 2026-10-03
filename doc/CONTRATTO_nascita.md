@@ -140,3 +140,32 @@ La regola del braccio `B` *(letta da `csv/_seal_fork/_sig_controllo_unico.py`, `
 | **non dice che il commit 3 lo rispettera'** | dice ### **qual e' l'ordine.** La verifica e' il **sigillo**, e il criterio e' **byte-identico fino al 72, contatori compresi** |
 | ### **non copre un'altra CONFIGURAZIONE** | la sequenza delle estrazioni dipende dai flag: `ANTIFASE_ADD` spento, `COPPIA_MIT = 1.0`, `MITOSI_DIR = 0.0`, `REGIME` deterministico. ### **Con altri flag l'ordine cambia, e questo documento NON vale** |
 | ### **non copre le riduzioni del ramo spento** | `MITOSI_DIR = 0.0`: le due `add.at` non girano, e ### **il contratto di oggi non le descrive** |
+
+---
+
+## 5. I VINCOLI D'ORDINE — **e sono QUATTRO**
+
+### ⚠ **PRIMA DEL `COMMIT 5` QUESTO DOCUMENTO NON LI ELENCAVA.** I quattro vincoli erano nominati
+### **solo nei commenti del codice** *(«vincolo 2 del contratto», «vincolo 3 del contratto»)*, e
+chi leggeva **il contratto** non li trovava. ### **Un vincolo che vive solo nel codice che lo
+rispetta non e' un contratto: e' un'abitudine.** Elencarli e' il minimo, e il `4` nasce qui.
+
+| | il vincolo | dove vive nel codice | perche' |
+|---|---|---|---|
+| **1** | ### **`phi` PRIMA di `twp`** | `mitosi`, nella preparazione | `_rn_div_twp` legge `phi[a]`/`phi[b]` ### **DOPO il calcio**, che e' una scrittura indicizzata sui genitori |
+| **2** | ### **`_peqn_idx` subito DOPO `peq`** | `_ordine_di_nascita()` | l'indice segue la grandezza che indicizza |
+| **3** | ### **le regole NON leggono `self.n`** | `nascita()`, e il contesto porta `c["n0"]` | `self.n` e' una `@property` su `len(self.phi)`: leggerla ### **a META' della nascita** dava un valore che cambiava sotto i piedi |
+| ### **4** | ### **`perc_geom` DOPO `tw`** *(`COMMIT 5`, 2026-10-03)* | `_ordine_di_nascita()`, coi ### **due presidi** | ### **la derivazione di `perc_geom` LEGGE `tw`**: nell'ordine del registro cadeva al posto **17** contro il **31** di `tw`, cioe' ### **prima che i nuovi archi avessero una torsione** |
+
+### 📌 **E I VINCOLI `2` E `4` SONO LA STESSA FORMA:** una grandezza ### **si colloca** invece di
+stare dove la mette il registro, ### **e il motivo e' DICHIARATO.** Il `3` e' di natura diversa —
+non e' una collocazione, e' un ### **divieto di lettura**.
+
+### ⚠ **IL `4` HA DUE PRESIDI, e il `2` no:** se `perc_geom` o `tw` uscissero dai registri, il
+vincolo `4` romperebbe ### **in silenzio** e la derivazione tornerebbe a leggere un `tw` che non
+c'e' ancora — cioe' ### **tornerebbe a essere la costante `-1` travestita.** I due
+`raise RuntimeError` esistono per questo *(`A9`: un vincolo **scritto** non e' un presidio)*.
+### ➜ **E il `2` ne e' SCOPERTO: e' un difetto di simmetria, non curato qui.**
+
+### ✅ **E L'ORDINE RESTA DI `36` VOCI:** il vincolo `4` ### **SPOSTA**, non aggiunge ne' toglie —
+verificato dal modulo, non assunto.

@@ -1411,17 +1411,53 @@ EVENTI_CONVERTITI = ("divisione", "schwinger")
 def _ordine_di_nascita():
     """L'ORDINE in cui la nascita scrive, e si DERIVA dai registri.
 
-    L'ordine del REGISTRO -- `METRI`, poi `STATO`, poi `FINESTRA` -- con
-    ### `_peqn_idx` DICHIARATO subito dopo `peq`, che e' il vincolo 2 del
-    contratto. ### Si DERIVA e non si scrive a mano, cosi' una voce nuova nel
-    registro fa scattare il presidio invece di passare inosservata.
+    L'ordine del REGISTRO -- `METRI`, poi `STATO`, poi `FINESTRA` -- con DUE
+    grandezze COLLOCATE da un vincolo dichiarato:
+
+    | | il vincolo | perche' |
+    |---|---|---|
+    | **2** | `_peqn_idx` subito **dopo `peq`** | l'indice segue la grandezza che indicizza |
+    | **4** | `perc_geom` **dopo `tw`** | ### **la sua DERIVAZIONE LEGGE `tw`** |
+
+    ### IL VINCOLO 4, E PERCHE' NON E' UN RIORDINO DI COMODO (`COMMIT 5`, 2026-10-03):
+    `perc_geom` si DERIVA dalla sua definizione -- la media di `|tw|` sugli archi del
+    nodo contro `PHI_CRIT`, la stessa di `chi_basc`. Nell'ordine del registro
+    `perc_geom` cadeva **PRIMA di `tw`** (posto 17 contro 31), cioe' ### **prima che i
+    nuovi archi avessero una torsione**: una derivazione scritta la' avrebbe letto lo
+    stato VECCHIO e avrebbe dato `-1` ### **per il motivo sbagliato** -- la costante
+    `-1` travestita da derivazione. ### E' una DIPENDENZA DI LETTURA, non una manopola.
+
+    ### Si DERIVA e non si scrive a mano, cosi' una voce nuova nel registro fa scattare
+    il presidio invece di passare inosservata.
     """
     fuori = []
+    visto_pgeom = False
     for blocco in (REGISTRO_METRI, REGISTRO_STATO, REGISTRO_FINESTRA):
         for voce in blocco:
+            if voce[0] == "perc_geom":
+                # ### VINCOLO 4: `perc_geom` si colloca DOPO `tw`, non qui.
+                visto_pgeom = True
+                continue
             fuori.append(voce[0])
             if voce[0] == "peq":
                 fuori.append("_peqn_idx")   # vincolo 2: DOPO `peq`
+            if voce[0] == "tw":
+                fuori.append("perc_geom")   # vincolo 4: la DERIVAZIONE legge `tw`
+    # ### I DUE PRESIDI DEL VINCOLO 4, e non sono decorativi: senza di loro un cambio
+    #   nei registri romperebbe il vincolo IN SILENZIO, e la derivazione leggerebbe un
+    #   `tw` che non c'e' ancora -- cioe' tornerebbe a essere la costante `-1`
+    #   travestita. `A9`: un vincolo SCRITTO non e' un presidio.
+    if not visto_pgeom:
+        raise RuntimeError(
+            "`perc_geom` NON sta nei registri, ma il vincolo 4 la colloca dopo `tw`: "
+            "l'ordine di nascita conterrebbe una grandezza che il registro non "
+            "dichiara. Il vincolo 4 va rifatto insieme al registro.")
+    if "perc_geom" not in fuori:
+        raise RuntimeError(
+            "`tw` NON sta nei registri, quindi il vincolo 4 non ha dove collocare "
+            "`perc_geom`, e la grandezza SPARIREBBE dall'ordine di nascita -- cioe' il "
+            "presidio del punto unico la segnalerebbe come non dichiarata. Il vincolo 4 "
+            "va rifatto insieme al registro.")
     return tuple(fuori)
 
 
@@ -1558,6 +1594,53 @@ def _avvelena_derivate(net):
         _vreg[nome] = {"arr": _nuovo, "inizio": int(_inizio), "fine": int(bersaglio)}
         net._g_veleno_voci = getattr(net, "_g_veleno_voci", 0) + 1
         net._g_veleno_celle = getattr(net, "_g_veleno_celle", 0) + int(quanti)
+
+
+def _derivazione_perc_geom(net, c):
+    """### LA DERIVAZIONE DI `perc_geom` PER I NATI, DALLA SUA DEFINIZIONE.
+
+    ### `+1` se la media di `|tw|` sugli archi del nodo supera `PHI_CRIT`, altrimenti
+    `-1`. ### E' la STESSA definizione di `chi_basc`, non una regola parallela:
+    `chi_basc` la riapplica a TUTTA la rete al passo dopo, e ### **se il nato nascesse
+    con un valore che la definizione non da', il sistema si contraddirebbe per un
+    passo** -- e quel passo il frame-drag lo LEGGE.
+
+    ### PERCHE' UNA DERIVAZIONE E NON LA COSTANTE `-1` *(decisione di Luca, 2026-09-29)*:
+    oggi il nato ha archi con `tw = 0`, quindi la derivazione ### **da' `-1` sempre** --
+    e scrivere `-1` darebbe lo STESSO numero. ### Ma `DIVISIONE-AUTOCONSISTENTE`, se
+    decidera' che i figli nascono con una torsione, ### **cambierebbe la risposta**: una
+    costante resterebbe `-1` e sarebbe ### **sbagliata in silenzio**, una derivazione
+    segue. ### E i contatori `_g_pgeom_der_m1`/`_p1` esistono per questo: dicono
+    ### **quante volte la derivazione ha davvero DECISO**, invece di far credere a una
+    costante che ha deciso.
+
+    ### LE DUE DIFFERENZE DA `chi_basc`, DICHIARATE e non nascoste:
+
+    | | `chi_basc` | qui, alla nascita |
+    |---|---|---|
+    | il grado | `self._deg` | ### **RICALCOLATO da `i`/`j`** -- `_grado()` e' `collocata` e gira **DOPO** `nascita()`, quindi dentro la nascita `_deg` e' **STANTIO** |
+    | la torsione | `_tw_t`, uno ### **SNAPSHOT** preso prima nel passo | ### **`net.tw`** -- alla nascita non esiste nessuno snapshot |
+
+    ### E NON LEGGE `self.n` *(vincolo 3 del contratto)*: il numero dei nodi del DOPO si
+    ricava da `c["n0"] + c["quante"]`.
+    """
+    n0 = int(c["n0"])
+    quante = int(c["quante"])
+    n = n0 + quante
+    if quante <= 0 or n <= 0 or not len(net.i):
+        return np.zeros(0, dtype=net.perc_geom.dtype)
+    # il GRADO, come lo calcola `_grado()` -- che qui non e' ancora girato
+    deg = np.maximum(np.bincount(net.i, minlength=n) +
+                     np.bincount(net.j, minlength=n), 1)[:n]
+    twabs = np.abs(net.tw)
+    twn = np.zeros(n)
+    np.add.at(twn, net.i, twabs)
+    np.add.at(twn, net.j, twabs)
+    twn = twn / deg
+    nuovi = np.where(twn[n0:n] > PHI_CRIT, 1, -1).astype(net.perc_geom.dtype)
+    net._g_pgeom_der_m1 = getattr(net, "_g_pgeom_der_m1", 0) + int(np.sum(nuovi < 0))
+    net._g_pgeom_der_p1 = getattr(net, "_g_pgeom_der_p1", 0) + int(np.sum(nuovi > 0))
+    return nuovi
 
 
 def nascita(net, evento, c):
@@ -1825,12 +1908,18 @@ def _rn_div_perc_chi(net, c):
     net.perc_chi = np.concatenate([net.perc_chi, net.perc_chi[c["a"]]])
 
 
-@_nascita_regola("divisione", "perc_geom", "eredita la geometria del genitore `a`",
-                 "self.perc_geom = np.concatenate([self.perc_geom, self.perc_geom[a]])",
-                 "[CHI_COOP] la geometria NON e' coniugata: e' un giro compiuto o no, e si "
-                 "eredita tale")
+@_nascita_regola("divisione", "perc_geom", "DERIVATA dalla definizione (non eredita)",
+                 "self.perc_geom = np.concatenate([self.perc_geom, "
+                 "_derivazione_perc_geom(self, c)])",
+                 "[COMMIT 5, decisione di Luca del 2026-09-29] ### NON SI EREDITA PIU': la "
+                 "geometria e' *<<il giro e' compiuto o no>>*, e questo si LEGGE dagli archi "
+                 "del nodo -- la media di `|tw|` contro `PHI_CRIT`, la STESSA definizione di "
+                 "`chi_basc`. Un valore EREDITATO poteva CONTRADDIRE la definizione, e per un "
+                 "passo il frame-drag lo leggeva. ### Il nato ha archi con `tw = 0`, quindi "
+                 "OGGI la derivazione da' `-1`; scritta come DERIVAZIONE e non come costante "
+                 "resta giusta quando `DIVISIONE-AUTOCONSISTENTE` dara' ai figli una torsione")
 def _rn_div_perc_geom(net, c):
-    net.perc_geom = np.concatenate([net.perc_geom, net.perc_geom[c["a"]]])
+    net.perc_geom = np.concatenate([net.perc_geom, _derivazione_perc_geom(net, c)])
 
 
 @_nascita_regola("divisione", "perc_tw", "zero",
@@ -2199,14 +2288,18 @@ def _rn_sch_perc_chi(net, c):
     net.perc_chi = np.concatenate([net.perc_chi, -net.perc_chi[c["aa"]]])
 
 
-@_nascita_regola("schwinger", "perc_geom", "eredita NON invertita (la GEOMETRIA non si "
-                 "coniuga)",
-                 "self.perc_geom = np.concatenate([self.perc_geom, self.perc_geom[aa]])",
-                 "[CHI_COOP via 3 di 3] ### SCELTA DICHIARATA, NON OVVIA: la CARICA nasce "
-                 "opposta (e' antimateria); la GEOMETRIA no, copiata tale e quale, perche' "
-                 "non e' una carica e non si coniuga. E `chi_basc` la riscrive al passo dopo")
+@_nascita_regola("schwinger", "perc_geom", "DERIVATA dalla definizione (non eredita)",
+                 "self.perc_geom = np.concatenate([self.perc_geom, "
+                 "_derivazione_perc_geom(self, c)])",
+                 "[COMMIT 5, decisione di Luca del 2026-09-29] ### LA SCELTA VECCHIA ERA "
+                 "DICHIARATA E NON OVVIA -- la CARICA nasce opposta (e' antimateria), la "
+                 "GEOMETRIA copiata tale e quale -- e la decisione di Luca la SUPERA ALLA "
+                 "RADICE: la geometria non si EREDITA affatto, ne' diritta ne' coniugata, "
+                 "perche' si LEGGE dagli archi del nodo (media di `|tw|` contro `PHI_CRIT`, "
+                 "la definizione di `chi_basc`). ### Cosi' la domanda *<<si coniuga o no?>>* "
+                 "non si pone: non e' una carica, e' una MISURA sugli archi")
 def _rn_sch_perc_geom(net, c):
-    net.perc_geom = np.concatenate([net.perc_geom, net.perc_geom[c["aa"]]])
+    net.perc_geom = np.concatenate([net.perc_geom, _derivazione_perc_geom(net, c)])
 
 
 @_nascita_regola("schwinger", "perc_tw", "zero",

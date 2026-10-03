@@ -2488,3 +2488,70 @@ In un run piu' lungo, dove `103` nodi stanno a `+1`, un nato da un genitore a `+
 giusta INDIPENDENTEMENTE da questo`. Sono DUE affermazioni distinte**, come dici tu.
 
 ---
+
+## ✅ **`PASSO 3` DEL `COMMIT 5` — IL CODICE: `perc_geom` SI DERIVA, e il VINCOLO 4**
+
+*(simulatore `7ed56608` → **`6d306976`**, sha1 byte grezzi. Committato **prima** del sigillo
+*(par.5)*. Task history `ea3310d`, **antenato**.)*
+
+### **LA LEGGE, ed e' la STESSA di `chi_basc`:** `perc_geom` del nato vale **`+1` se la media di
+`|tw|` sugli archi del nodo supera `PHI_CRIT`, altrimenti `-1`**. La scrive
+`_derivazione_perc_geom`, chiamata dalle due regole.
+
+### ⛔ **E IL VERO CONTENUTO DEL COMMIT NON ERA NEL MANDATO: IL VINCOLO 4**
+
+| | |
+|---|---|
+| nell'ordine del registro | `perc_geom` stava al posto ### **17**, `tw` al ### **31** |
+| cioe' | ### **la derivazione avrebbe letto il `tw` dei nuovi archi PRIMA che esistesse** |
+| e avrebbe dato | `-1` ### **per il motivo sbagliato: la costante travestita da derivazione** |
+
+### ➜ **`perc_geom` si colloca DOPO `tw`** — ora posto `31`, `tw` al `30`, e l'ordine resta di
+### **36 voci: SPOSTA, non aggiunge ne' toglie** *(verificato dal modulo)*. Stessa forma del
+vincolo `2`. ### **E' una DIPENDENZA DI LETTURA, non una manopola.**
+
+### ✅ **E HA DUE PRESIDI che SOLLEVANO** se `perc_geom` o `tw` uscissero dai registri: senza di
+loro il vincolo romperebbe ### **in silenzio** e la derivazione tornerebbe alla costante
+travestita. ### **`A9`: un vincolo scritto non e' un presidio.**
+
+### ⚠ **E IL VINCOLO `2` NE E' SCOPERTO** — se `peq` uscisse dal registro, `_peqn_idx` finirebbe
+nell'ordine senza la sua grandezza e nessuno lo fermerebbe. ### **E' un difetto di simmetria che
+NON ho curato qui** *(un interruttore alla volta)*, e lo dico invece di lasciarlo implicito.
+
+### ✅ **NESSUN FLAG NUOVO, ed e' una scelta:** un flag renderebbe la derivazione
+### **un'opzione**, e la definizione di una grandezza non e' un'opzione — e' il difetto `E4-LAM`,
+gia' pagato una volta.
+
+### **LE DUE DIFFERENZE DA `chi_basc`, dichiarate nel codice:**
+
+| | `chi_basc` | la derivazione alla nascita |
+|---|---|---|
+| il grado | `self._deg` | ### **RICALCOLATO da `i`/`j`** — `_grado()` e' `collocata` e gira **DOPO** `nascita()` |
+| la torsione | `_tw_t`, uno ### **SNAPSHOT** | ### **`net.tw`** — alla nascita non c'e' nessuno snapshot |
+
+## 📌 **E TRE DOCUMENTI CHE NON ERANO NEL MANDATO**
+
+### **① `doc/CONTRATTO_nascita.md` NON ELENCAVA I VINCOLI.** I primi tre erano nominati
+### **solo nei commenti del codice** — *«vincolo 2 del contratto»*, *«vincolo 3 del contratto»* —
+e chi leggeva **il contratto** non li trovava. ### ➜ **Un vincolo che vive solo nel codice che lo
+rispetta non e' un contratto: e' un'abitudine.** Ora c'e' il par.5 con tutti e **quattro**, e dove
+ciascuno vive.
+
+### **② `doc/FATTI_dal_codice.md` ha una voce `nascita` nuova**, col fatto che chiunque tocchi una
+regola deve sapere: ### **dentro `nascita()` il grado `_deg` e' STANTIO, e il nome non lo dice.**
+Sta al posto `4` dell'ordine — quindi ### **sembra scritto presto** — ma la sua classe e'
+`collocata`: lo scrive `_grado()`, ### **che gira DOPO.** ### **La stessa trappola vale per OGNI
+voce `collocata`: il posto nell'ordine dice dove la tabella la NOMINA, non quando il valore C'E'.**
+### ⚠ **E l'ordine del registro NON e' l'ordine delle dipendenze** *(i blocchi sono ordinati
+alfabeticamente)*: ### **e' successo proprio qui.**
+
+### **③ `doc/TABELLA_nascita.md` e `doc/REGOLE_NASCITA_generata.tsv` RIGENERATE dal codice**
+*(`72` righe; divisione `regola=32`, schwinger `regola=33`)*. ### **Non scritte a mano:
+`csv/_tabella_nascita.py` le deriva.**
+
+### ⚠ **E UNA MIA SVISTA, trovata rileggendo:** avevo scritto `:1627` come riga di `nascita` in
+`FATTI_dal_codice.md`, ### **a memoria.** E' ### **`:1646`**, misurata. ### **In QUEL documento,
+che esiste per impedire i riferimenti scaduti, una riga a memoria e' la trappola che il documento
+stesso avverte di evitare.** Corretta nello stesso commit.
+
+---
