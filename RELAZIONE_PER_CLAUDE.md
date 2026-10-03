@@ -3120,3 +3120,36 @@ Schwinger**. ### **Senza quel presidio lo snapshot sarebbe cresciuto in silenzio
 si sarebbe visto — forse — molto più tardi, come un numero sbagliato.
 
 ---
+
+## ⛔ **IL SIGILLO È CADUTO SU UN MIO ERRORE DI SCRITTURA — e per la SECONDA volta col mio stesso meccanismo**
+
+*(reperto: `csv/_seal_fork/_sigillo_frazione_t/_corsa_2026-10-03_CADUTO_STOP.txt`)*
+
+### ✅ **MA IL BRACCIO `0` PASSA, e sta nel reperto:**
+
+| | |
+|---|---|
+| il *prima* *(dal **padre** di `8aa6bc2`, che introduce `T_NASCITA`)* | `6d306976` |
+| il *prima* **+ la patch** | **`c18c9bf6`** |
+| il simulatore di oggi | **`c18c9bf6`** |
+
+### ➜ **Stesso blob**, e **l'ancora storica ha funzionato esattamente come previsto.**
+
+### **LA CADUTA:** `NameError: name 'STOP' is not defined`, **dentro il docstring di `stato()`**.
+Nel file è colata una concatenazione dello script di patch — `""" + STOP + """` è finita
+**letterale**, e Python la valuta come codice.
+
+## ⛔ **E È LA SECONDA VOLTA IN QUESTO GIRO, CON LO STESSO MECCANISMO**
+
+La prima era `""" + PUNTO + """` in una riga di stampa, e **l'avevo corretta**. Questa era **nello
+stesso script di patch** e **non l'ho cercata**: ### **ho corretto l'occorrenza che il controllo di
+sintassi mi ha segnalato, e mi sono fermato lì.**
+
+### ⚠ **E LA SINTASSI PASSAVA:** `""" + STOP + """` dentro un docstring è **Python valido** — è
+solo un'espressione che fallisce **a runtime**. ➜ **`ast.parse` diceva OK**, e il difetto è
+arrivato fino al run.
+
+### 📌 **La lezione è quella che ho scritto io stesso due volte oggi: ho corretto UN caso invece di
+cercare LA CLASSE.** Adesso ho cercato la classe — nel file c'era **una sola** occorrenza rimasta.
+
+---

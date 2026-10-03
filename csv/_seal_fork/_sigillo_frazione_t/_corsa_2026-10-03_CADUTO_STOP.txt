@@ -1,0 +1,37 @@
+[TIMBRO] _sigillo_frazione_t.py  sha1-BYTE 411723e4  committato e pulito
+====================================================================================================
+IL SIGILLO DEL COMMIT 6a: la frazione `t` esplicita
+====================================================================================================
+  simulatore di OGGI .. c18c9bf6
+  questo sigillo ...... 411723e4
+  la patch ............ 6d956b0f
+  il PRIMA ............ 6d306976  (dal PADRE di 8aa6bc20, che introduce `T_NASCITA`)
+
+----------------------------------------------------------------------------------------------------
+BRACCIO `0` -- LA CURA E' RIPRODUCIBILE DAL REPO?
+  il *prima* + la patch .. c18c9bf6
+  il simulatore di oggi .. c18c9bf6
+  ### PASSA: stesso blob. La cura e' recuperabile PER COSTRUZIONE (par.7).
+
+----------------------------------------------------------------------------------------------------
+BRACCIO `A` -- BYTE-IDENTICO su QUATTRO scene, stato E contatori
+  ### I due blob girano IN LOCKSTEP e si confrontano DOPO OGNI PASSO: cosi' la
+  ###   PRIMA differenza e' quella vera, non la prima che si nota a fine run.
+
+  ================================================================================================
+  SCENA `corta` -- seme 11, 72 passi, --mitosi-2lam: SI
+Traceback (most recent call last):
+  File "C:\Users\lpeano\soliton_simulator\csv\_seal_fork\_sigillo_frazione_t.py", line 585, in <module>
+    principale()
+    ~~~~~~~~~~^^
+  File "C:\Users\lpeano\soliton_simulator\csv\_seal_fork\_sigillo_frazione_t.py", line 348, in principale
+    cls = classi_di(n2)
+  File "C:\Users\lpeano\soliton_simulator\csv\_seal_fork\_sigillo_frazione_t.py", line 172, in classi_di
+    for v in stato(net).values():
+             ~~~~~^^^^^
+  File "C:\Users\lpeano\soliton_simulator\csv\_seal_fork\_sigillo_frazione_t.py", line 120, in stato
+    ### """ + STOP + """ **LA STESURA PRECEDENTE CONFRONTAVA SOLO ndarray E SCALARI, ED ERA
+NameError: name 'STOP' is not defined
+esito=0
+
+[exited with code 0]
