@@ -3508,3 +3508,39 @@ rotto.
 una catena di comandi, ed è stato **rifiutato**.
 
 ---
+
+## **IL CRITERIO DI `C-bis` ERA VACUO, e il 6a non cade per questo**
+
+**Rilievo tuo, ed è un falso-uno.** `fuori["_eventi"]` è un dict **senza** la chiave `"ok"`,
+quindi `not x.get("ok")` è `not None` = `True`: ### **`_eventi` stava SEMPRE fra le
+sbagliate** — compare in tutte e sei le righe del referto. `bool(sbagliate)` era una costante
+vera, la parte *«scoperta da C»* sempre soddisfatta, e il verdetto si riduceva al solo
+controllo **testuale** di `B`.
+
+### ⚠ **E il 6a resta in piedi, per una ragione che va detta con precisione:** i **dati** del
+referto mostrano che `C` aveva colto la chiave giusta in ogni copia — per ciascuna delle sei,
+la chiave sbagliata è esattamente quella del suo sito — e tu hai rifatto una `C-bis`
+indipendente su `dd` e `pos_sch`. ### **Era il criterio a non verificare, non la misura a
+essere sbagliata. Un criterio che non verifica non è un criterio: è un commento.**
+
+**La cura, e una scelta di forma che vale oltre questo caso:** le chiavi di verifica si
+**elencano** invece di escludere le diagnostiche — *una lista di esclusioni va aggiornata a
+ogni voce nuova, e una voce dimenticata renderebbe il criterio vacuo nello stesso modo* — e
+«scoperta» pretende un'**uguaglianza** con le chiavi del sito, non un «almeno una sbagliata»,
+che si accontenta di qualunque differenza. Le attese si intersecano coi presenti, perché
+`fm` e `fm_bias` **non coesistono mai**.
+
+### ✅ **Il controllo che può fallire c'è, e calcola ENTRAMBE le regole sulla stessa copia
+pulita**, così il difetto si vede invece di essere raccontato.
+
+**`--solo-cbis`** rigira solo quel braccio, perché i bracci `0`…`C` di `1927b45` passano e li
+hai verificati in modo indipendente. ### ⚠ **Ma il riepilogo stampa `NON ESEGUITO` per
+ciascuno: un referto che non nomina i bracci che non ha girato si legge come un sigillo
+intero.**
+
+**Verificato prima di committare, con l'AST:** nel ramo `--solo-cbis` **nessun nome** letto
+dopo il cancello è assegnato soltanto nei bracci saltati — zero rischi di `NameError`.
+*(E il primo controllo che ho scritto per questo dava quattro falsi positivi, perché non
+contava ciò che viene assegnato DOPO il cancello: corretto prima di fidarmene.)*
+
+---

@@ -565,3 +565,42 @@ mio stesso strumento.**
 **Riarmata con `tasklist`**, che interroga i PID di Windows. ### ⚠ **E resta un limite
 dichiarato: non ho un presidio che impedisca di scrivere un'attesa nel namespace sbagliato.
 E' una regola scritta, cioe' `A9`.**
+
+---
+
+## **ANNOTAZIONE del 2026-10-03 — IL CRITERIO DI `C-bis` ERA VACUO *(`CBIS-CRITERIO-VACUO`)***
+
+**Rilievo del guardiano sul referto `1927b45`, ed è un falso-uno.** Il verdetto era
+
+```
+scoperta = (letterali >= 1) and bool(sbagliate)
+sbagliate = [k for k, x in v.items() if isinstance(x, dict) and not x.get("ok")]
+```
+
+e `fuori["_eventi"]` è un dict **senza** la chiave `"ok"`: `x.get("ok")` dà `None`,
+`not None` dà `True`, quindi ### **`_eventi` finiva SEMPRE fra le sbagliate** — compare
+infatti in **tutte e sei** le righe del referto. ### **`bool(sbagliate)` era dunque una
+costante vera: la parte *«scoperta da C»* era sempre soddisfatta, e il verdetto si riduceva
+al solo controllo TESTUALE di `B`.**
+
+### ⚠ **E IL 6a NON CADE.** I **dati** del referto mostrano che `C` aveva colto la chiave
+giusta in ogni copia — per ciascuna delle sei, la chiave sbagliata è esattamente quella del
+suo sito — e il guardiano ha rifatto una `C-bis` **indipendente** su `dd` e `pos_sch`.
+### **Era il CRITERIO a non verificare, non la misura a essere sbagliata. E un criterio che
+non verifica non è un criterio: è un commento.**
+
+### **LA CURA, e una scelta di forma che vale oltre questo caso**
+
+| | |
+|---|---|
+| **le chiavi di verifica si ELENCANO** | `CHIAVI_VERIFICA`, dall'unione di `CHIAVI_DEL_SITO`. ### **Non si escludono le diagnostiche:** una lista di esclusioni va aggiornata a ogni voce nuova, e **una voce dimenticata renderebbe il criterio vacuo nello stesso modo** |
+| **«scoperta» pretende un'UGUAGLIANZA** | fra le sbagliate ci devono essere **esattamente** le chiavi del sito al letterale, e tutte le altre OK. ### Un *«almeno una sbagliata»* si accontenta di **qualunque** differenza — ed è così che `_eventi` lo soddisfaceva da sola |
+| **le `attese` si intersecano coi PRESENTI** | la copia di `fm_bias` gira con `MITOSI_DIR = 1.0` e quella di `fm` senza: **le due chiavi non coesistono mai**, e pretendere quella assente boccerebbe una copia sana |
+| **il controllo che PUÒ fallire** | una copia **senza alcun letterale**, passata dallo stesso criterio come se fosse la copia di un sito, deve risultare **NON SCOPERTA**. ### ✅ **E il referto calcola ENTRAMBE le regole sulla STESSA copia, così il difetto si VEDE invece di essere raccontato** |
+
+### **E `--solo-cbis`, col suo limite dichiarato.** Rigira **solo** `C-bis` e il suo
+controllo, perché i bracci `0`…`C` del referto `1927b45` passano e sono stati verificati in
+modo indipendente: rigirarli costerebbe `70` minuti per riprodurre numeri che non sono in
+discussione. ### ⚠ **Ma il referto deve DIRLO:** il riepilogo stampa
+`NON ESEGUITO (--solo-cbis)` per ciascuno, perché **un referto che non nomina i bracci che
+non ha girato si legge come un sigillo intero.**
