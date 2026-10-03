@@ -59,6 +59,57 @@ su un array ### **gia' raddoppiato**, con `md` dimezzato:
 | `vis` | `2 · n` | ### **`2n`** |
 | `_g_sm_nascite` | `+1` | ### **`+1`** |
 
+### ⛔ **ANNOTAZIONE DEL 2026-10-03 — LA RIGA DI `_fab` QUI SOPRA E' SBAGLIATA**
+
+*(rilievo del guardiano. **La tabella RESTA come l'ho scritta** — par.8: un ragionamento non si
+riscrive quando si rivela sbagliato, **si ANNOTA con cio' che l'ha smentito.**)*
+
+Avevo concluso che *<<tutti e quattro i numeri coincidono a `t = 0.5`>>*.
+### **Vale per i TRE INTERI e NON per il FLOAT.**
+
+| il contatore | tipo | coincide? |
+|---|---|---|
+| `_g_sm_nascite` | ### **intero** | ### **SI'** |
+| `_sm_tr<q>_<sito>` | ### **intero** *(`md * ntr`)* | ### **SI'** |
+| `_sm_vis<q>_<sito>` | ### **intero** *(`md * v.size`)* | ### **SI'** |
+| ### **`_sm_lun<q>_<sito>`** | ### **FLOAT** *(`md * sum(LAM - v)` sui troncati)* | ### **NO** |
+
+### **LA CAUSA E' L'ASSOCIATIVITA':** `np.sum` su `2n` elementi somma in un ordine *(con una
+riduzione a coppie)* che ### **non e' `2 *` la somma su `n`**. ### **Gli interi non se ne
+accorgono, i float SI'.**
+
+### ✅ **RIMISURATO DA ME, con uno strumento committato** *(`csv/_test_fork/_somma_meta.py`,
+blob `e1eb2c18`; 2000 prove per sette taglie, seme `20261003`)*:
+
+| il confronto contro `2*np.sum(x)` | differenze |
+|---|---|
+| `np.sum(np.concatenate([x, x]))` | ### **4043 su 14000** |
+| `np.sum(x) + np.sum(x)` | ### **0 su 14000** |
+
+### ✅ **QUINDI LA FORMA CHE REGGE E' QUELLA CHE IL GUARDIANO INDICA:** `_fab` calcolata
+### **PER META'** e poi sommata — `fab_a + fab_b`. A `t = 0.5` le due meta' sono
+### **identiche**, quindi e' `s + s`, e ### **`s + s == 2*s` E' ESATTO** *(il raddoppio e' uno
+scalamento per una potenza di due)*.
+
+### ⚠ **E UN DETTAGLIO CHE VALE DA SE': a `n = 128` la forma concatenata NON diverge**
+*(la somma a coppie di numpy allinea i blocchi)*. ### **Un test su UNA SOLA taglia avrebbe dato
+un falso *<<identica>>*** — ed e' la stessa lezione di `FALSO-ZERO`. Per questo lo strumento
+prova ### **sette** taglie.
+
+### ⛔ **E IL BRACCIO `A` PASSEREBBE COMUNQUE, MA NON PROVEREBBE NIENTE SU `_fab`:** nelle tre
+scene `MITOSI_2LAM` e' ### **acceso** *(dal driver)* e la mitosi ### **non tronca nulla**, quindi
+`_fab` vale ### **zero da entrambe le parti**. ### ➜ **Il numero che lo dimostra e'
+`_sm_trd_mitosi` sulle tre scene, e NON L'HO ANCORA MISURATO:** richiede un run, e il mandato dice
+di fermarsi dopo il censimento. ### **Va nel referto del sigillo, e finche' non c'e' il braccio `A`
+su `_fab` e' VACUO.**
+
+### 📌 **E IL DIFETTO CONTA NEL `6b`, non qui:** con `t != 0.5` le due meta' sono
+### **diverse**, e `t*d` puo' scendere ### **sotto `LAM`** anche con `d >= 2 LAM`
+*(`0.4 * 1.6 = 0.64 < 0.8`)*. ### **Allora i troncamenti ci sono davvero, e `_fab` non e' piu'
+zero.**
+
+---
+
 ### ⭐ ② **LA FORMA DELL'INTERPOLAZIONE NON E' COSMETICA, ED E' MISURATA**
 
 Su **2 milioni** di coppie di `float64` casuali, contro `0.5·(x+y)`:

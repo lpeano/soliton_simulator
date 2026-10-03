@@ -364,11 +364,32 @@ def principale():
         x = [y for y in v.trovate if y["riga"] == r][0]
         stampa("      :%-6d %-20s %-14s %s" % (r, x["dentro"][:20], x["classe"],
                                                x["testo"][:60]))
-    stampa("  ### e sono TUTTE di classe ALTRO: %s"
-           % all(([y for y in v.trovate if y["riga"] == r][0]["classe"] == "ALTRO")
-                 for r in solo_mie))
-    stampa("  ###   cioe' la mia lista e' un SOVRAINSIEME, e la differenza non tocca")
-    stampa("  ###   ne' la FRAZIONE ne' l'EREDITA-MEDIA.")
+    # ### LA FRASE SI CALCOLA, NON SI AFFERMA. La prima stesura stampava il booleano
+    #   e POI diceva <<la differenza non tocca ne' la FRAZIONE ne' l'EREDITA-MEDIA>>:
+    #   ### il booleano diceva False e la frase diceva il contrario. E' il difetto
+    #   <<commento contro codice>> dentro il mio stesso strumento.
+    _cl = {}
+    for r in solo_mie:
+        _c = [y for y in v.trovate if y["riga"] == r][0]["classe"]
+        _cl.setdefault(_c, []).append(r)
+    stampa("  ### per CLASSE: %s"
+           % " · ".join("%s %d (%s)" % (k, len(x), ", ".join(":%d" % r for r in x))
+                        for k, x in sorted(_cl.items())))
+    _tocca = [k for k in _cl if k != "ALTRO"]
+    if not _tocca:
+        stampa("  ###   la mia lista e' un SOVRAINSIEME e la differenza e' TUTTA `ALTRO`:")
+        stampa("  ###   non tocca ne' la FRAZIONE ne' l'EREDITA-MEDIA.")
+    else:
+        stampa("  ###   *** LA DIFFERENZA TOCCA %s, non solo `ALTRO`. ***"
+               % ", ".join(sorted(_tocca)))
+        for k in sorted(_tocca):
+            for r in _cl[k]:
+                stampa("  ###     :%d e' %s e NON e' nella lista del guardiano" % (r, k))
+        stampa("  ###   E IL CASO E' :8496, la frazione `(0.5 + bias)` del ramo MITOSI_DIR:")
+        stampa("  ###   il guardiano cita quel ramo come :8489 (la riga del CANCELLO), non")
+        stampa("  ###   la riga del NUMERO. Quindi NON e' un sito che gli e' sfuggito: e'")
+        stampa("  ###   lo STESSO sito, citato con un'altra riga. Ma la differenza va")
+        stampa("  ###   detta per quello che e', e la frase NON si afferma: si CALCOLA.")
     stampa("")
     stampa("  SOLO NELLA SUA: %d" % len(solo_sue))
     for r in solo_sue:
