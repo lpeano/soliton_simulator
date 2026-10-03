@@ -88,13 +88,22 @@ class Scritture(ast.NodeVisitor):
         self.trovate = []
         self.pila = ["<modulo>"]
         self.setattr_variabile = []
+        # ### UNA MAPPA PER FUNZIONE, NON UNA GLOBALE -- e il collaudo ha provato che
+        #   serve: con una mappa globale, `setattr(self, _k, ...)` in `_nasce` (:6590)
+        #   risultava <<risolto>> da un `for _k in (...)` che sta IN UN'ALTRA FUNZIONE,
+        #   e lo strumento rispondeva ### NO su un'evidenza SBAGLIATA.
+        #   ### Una risoluzione FALSA e' peggio di una MANCANTE: la seconda si dichiara,
+        #   la prima passa per misura. E' la famiglia di `FALSO-ZERO`.
+        self.ambito = [{}]
 
     def _dentro(self):
         return self.pila[-1]
 
     def visit_FunctionDef(self, nodo):
         self.pila.append(nodo.name)
+        self.ambito.append({})
         self.generic_visit(nodo)
+        self.ambito.pop()
         self.pila.pop()
 
     visit_AsyncFunctionDef = visit_FunctionDef
@@ -105,6 +114,10 @@ class Scritture(ast.NodeVisitor):
                              "testo": testo[:160], "classe": _classifica(testo)})
 
     def visit_Assign(self, nodo):
+        # ### un assegnamento SEMPLICE a una variabile: serve a risolvere un `setattr`
+        #   il cui nome e' quella variabile (`_k = "_sm_%s..." % ...`, `key = '_ang_...'`).
+        if len(nodo.targets) == 1 and isinstance(nodo.targets[0], ast.Name):
+            self.ambito[-1][nodo.targets[0].id] = ("espressione", nodo.value)
         for t in nodo.targets:
             if isinstance(t, ast.Attribute) and t.attr == GRANDEZZA:
                 self._aggiungi(t.lineno, "attributo")
@@ -122,6 +135,70 @@ class Scritture(ast.NodeVisitor):
             self._aggiungi(t.value.lineno, "aumento in posto")
         self.generic_visit(nodo)
 
+    def visit_For(self, nodo):
+        """### Tiene traccia dei `for`: serve a RISOLVERE il nome di un `setattr`.
+
+        ### Un limite DICHIARATO non e' un limite RISOLTO, e qui si risolve: se il
+        nome e' la variabile di un `for` su una ### **tupla di costanti**, l'insieme
+        dei nomi possibili e' ### **enumerabile**.
+        """
+        if isinstance(nodo.target, ast.Name) and isinstance(nodo.iter, (ast.Tuple, ast.List)):
+            valori = [e.value for e in nodo.iter.elts if isinstance(e, ast.Constant)]
+            if len(valori) == len(nodo.iter.elts):
+                self.ambito[-1][nodo.target.id] = ("insieme", valori)
+        self.generic_visit(nodo)
+
+    def _risolvi(self, arg):
+        """Che nomi puo' valere il secondo argomento di `setattr`? Tre vie MACCHINA.
+
+        Restituisce `(verdetto, come)`. ### `verdetto` e' `"NO"` *(non puo' essere
+        `perc_geom`)*, `"SI"`, oppure `"?"` *(non risolto DALLA SORGENTE)*.
+        """
+        # (a) un FORMATO o una CONCATENAZIONE con un prefisso LETTERALE
+        if isinstance(arg, ast.BinOp) and isinstance(arg.op, (ast.Add, ast.Mod)):
+            s = arg.left
+            if isinstance(s, ast.Constant) and isinstance(s.value, str):
+                if isinstance(arg.op, ast.Mod):
+                    # `"_sm_%s%s_%s" % (...)`: il PREFISSO fino al primo `%`
+                    pre = s.value.split("%")[0]
+                else:
+                    pre = s.value
+                if pre and not GRANDEZZA.startswith(pre):
+                    return "NO", "prefisso letterale `%s`, e `%s` non comincia cosi'" % (
+                        pre, GRANDEZZA)
+                return "?", "prefisso letterale `%s`, COMPATIBILE: va guardato" % pre
+        # (b) una variabile LEGATA NELLA STESSA FUNZIONE -- e solo li': l'ambito
+        #     non si eredita, perche' un ambito ereditato e' cio' che produceva la
+        #     risoluzione FALSA.
+        if isinstance(arg, ast.Name):
+            voce = self.ambito[-1].get(arg.id)
+            if voce is None:
+                return "?", ("`%s` non e' legata in questa funzione (ambito `%s`): la "
+                             "sorgente sta altrove" % (arg.id, self._dentro()))
+            tipo, dato = voce
+            if tipo == "insieme":
+                if GRANDEZZA in dato:
+                    return "SI", "`for %s in %s`" % (arg.id, dato)
+                return "NO", "`for %s in %s`: insieme ENUMERATO, `%s` non c'e'" % (
+                    arg.id, dato, GRANDEZZA)
+            # un assegnamento: si segue UNA VOLTA (niente ricorsione: due salti sono
+            # gia' una deduzione, e una deduzione va DICHIARATA)
+            if isinstance(dato, ast.Constant) and isinstance(dato.value, str):
+                if dato.value == GRANDEZZA:
+                    return "SI", "`%s = %r`" % (arg.id, dato.value)
+                return "NO", "`%s = %r`, costante" % (arg.id, dato.value)
+            if isinstance(dato, ast.BinOp) and isinstance(dato.op, (ast.Add, ast.Mod)):
+                s = dato.left
+                if isinstance(s, ast.Constant) and isinstance(s.value, str):
+                    pre = (s.value.split("%")[0] if isinstance(dato.op, ast.Mod)
+                           else s.value)
+                    if pre and not GRANDEZZA.startswith(pre):
+                        return "NO", ("`%s = %r %% ...`: prefisso letterale `%s`, e `%s` "
+                                      "non comincia cosi'"
+                                      % (arg.id, s.value, pre, GRANDEZZA))
+            return "?", "`%s` legata a un'espressione non letterale" % arg.id
+        return "?", "non risolto dalla sorgente"
+
     def visit_Call(self, nodo):
         if (isinstance(nodo.func, ast.Name) and nodo.func.id == "setattr"
                 and len(nodo.args) >= 2):
@@ -129,8 +206,44 @@ class Scritture(ast.NodeVisitor):
             if isinstance(arg, ast.Constant) and arg.value == GRANDEZZA:
                 self._aggiungi(nodo.lineno, "setattr col nome scritto")
             elif not isinstance(arg, ast.Constant):
-                self.setattr_variabile.append({"riga": nodo.lineno, "dentro": self._dentro()})
+                verdetto, come = self._risolvi(arg)
+                self.setattr_variabile.append(
+                    {"riga": nodo.lineno, "dentro": self._dentro(),
+                     "verdetto": verdetto, "come": come,
+                     "testo": (self.righe[nodo.lineno - 1].strip()[:120]
+                               if 0 < nodo.lineno <= len(self.righe) else "?")})
         self.generic_visit(nodo)
+
+
+# ### I SITI CHE LA MACCHINA NON RISOLVE, DICHIARATI UNO PER UNO -- e la tabella e'
+#   un PRESIDIO, non una nota: `principale()` ASSERISCE che l'insieme non risolto sia
+#   ESATTAMENTE questo. ### Un sito nuovo FA FALLIRE lo strumento invece di comparire
+#   come *<<un limite in piu'>>* che nessuno guarda (`A9`).
+DICHIARATI = {
+    1557: ("NO", "`_avvelena_derivate`: `nome` scorre i nomi di REGISTRO_DERIVATE, e "
+                 "`perc_geom` NON e' fra loro -- e lo strumento lo VERIFICA dal modulo, "
+                 "non lo assume"),
+    6590: ("NO", "`_nasce`: il nome e' `_k = _b %% (_pre, _q, dove)` con "
+                 "`_b = \"_sm_%%s%%s_%%s\"` due righe sopra -- cioe' un CONTATORE col "
+                 "prefisso `_sm_`, e la scrittura e' un ACCUMULO (`getattr(...) + _val`), "
+                 "non un rebind di una grandezza. ### DICHIARATO e non risolto dalla "
+                 "macchina PERCHE' SERVIREBBERO DUE SALTI (`_k` -> `_b` -> la costante), e "
+                 "due salti sono gia' una DEDUZIONE: la regola di questo strumento e' che "
+                 "una deduzione si DICHIARA invece di passare per misura"),
+    6819: ("RESTORE", "`carica_stato`: `stato['attrs'].items()` PUO' contenere "
+                      "`perc_geom` (e' un ndarray di __dict__, e `salva_stato` li "
+                      "accetta). ### Ma e' un RIPRISTINO, non una nascita, e non gira "
+                      "nella configurazione del driver: nessun `--carica`"),
+    12687: ("RESTORE", "`batch_condensazione`: `_snap_fisica` e' uno SNAPSHOT ripristinato "
+                       "perche' il diaglog <<non lasci tracce sulla fisica>>. PUO' "
+                       "contenere `perc_geom`, ed e' NEUTRO AL BYTE per costruzione"),
+    12787: ("RESTORE", "`batch_condensazione`: `_snap_cond`, idem -- il ripristino esiste "
+                       "proprio perche' `--ogni` non contamini lo stream"),
+}
+# ### E I DUE DI `_diag_completa` LI RISOLVE LA MACCHINA (`key = '_ang_prec_%d' % mid`,
+#   `keyo = '_ang_orb_%d_%d' % ...`: prefisso letterale `_ang_`), quindi NON stanno qui.
+#   ### Se un giorno smettesse di risolverli, il presidio FERMA lo strumento invece di
+#   stampare un limite in piu' -- ed e' il punto della tabella.
 
 
 def _classifica(testo):
@@ -267,11 +380,26 @@ def una_scena(nome, seme, passi, stampa):
         sim._NMASSE_VIDEO["size"] = None
         sim.avvia_test("MASSE-COERENTI")()
         net = sim.net
+        soglia = {"piu1_max": 0, "passi_con_piu1": 0, "twn_max": 0.0, "passi": 0}
         for _ in range(passi):
             _passo.passo_pieno(sim, net)
+            # ### PEZZO 6: `perc_geom` ARRIVA MAI A `+1`? E' la domanda ESATTA, e si
+            #   risponde CONTANDO -- non ricostruendo cio' che `chi_basc` ha visto.
+            #   `chi_basc` ha appena riscritto TUTTI i nodi dentro questo passo.
+            pg = np.asarray(net.perc_geom)
+            k = int(np.sum(pg == 1))
+            soglia["piu1_max"] = max(soglia["piu1_max"], k)
+            soglia["passi_con_piu1"] += int(k > 0)
+            soglia["passi"] += 1
+            # ### e il MARGINE, dichiarato per cio' che e': `twn` ricalcolato DOPO il
+            #   passo, NON lo snapshot `_tw_t` che `chi_basc` ha usato. Serve a sapere
+            #   QUANTO lontana e' la soglia, non a rifare il confronto.
+            _d, twn_ora = derivazione(sim, net)
+            if len(twn_ora):
+                soglia["twn_max"] = max(soglia["twn_max"], float(np.max(twn_ora)))
     cont = {c: int(getattr(net, c, 0))
             for c in ("_g_chibasc_su_geom", "_g_chibasc_su_chi")}
-    return sim, diario, nati, cont
+    return sim, diario, nati, cont, soglia
 
 
 def principale():
@@ -326,7 +454,10 @@ def principale():
         stampa("    ###     NON ESISTE ANCORA. Una derivazione scritta LI' leggerebbe lo")
         stampa("    ###     stato VECCHIO e darebbe -1 PER IL MOTIVO SBAGLIATO: sarebbe la")
         stampa("    ###     COSTANTE -1 TRAVESTITA DA DERIVAZIONE.")
-        stampa("    ###     SERVE IL VINCOLO 3: `perc_geom` DOPO `tw`.")
+        stampa("    ###     SERVE IL VINCOLO 4: `perc_geom` DOPO `tw`.")
+        stampa("    ###     (e si chiama 4 e non 3 perche' 3 E' GIA' PRESO: il")
+        stampa("    ###      contratto ha 1 = `twp`, 2 = `_peqn_idx`, 3 = le regole")
+        stampa("    ###      NON leggono `self.n`. Par.9: un'etichetta non si ricicla.)")
     else:
         stampa("    ### l'ordine NON e' quello atteso: il disegno del commit 5 va rifatto.")
     stampa("")
@@ -341,15 +472,44 @@ def principale():
     for x in sorted(v.trovate, key=lambda y: y["riga"]):
         stampa("    :%-6d %-26s %s" % (x["riga"], x["dentro"][:26], x["classe"]))
         stampa("            %s" % x["testo"])
-    if v.setattr_variabile:
-        stampa("")
-        stampa("    ### LIMITE DICHIARATO: %d `setattr` col nome in una VARIABILE, non risolti:"
-               % len(v.setattr_variabile))
-        for x in v.setattr_variabile:
-            stampa("        :%-6d %s" % (x["riga"], x["dentro"]))
+    stampa("")
+    stampa("    ### I `setattr` COL NOME IN UNA VARIABILE: %d, e si RISOLVONO"
+           % len(v.setattr_variabile))
+    nomi_der = [x[0] for x in s0.REGISTRO_DERIVATE]
+    stampa("        (e `perc_geom` in REGISTRO_DERIVATE? %s -- VERIFICATO dal modulo)"
+           % (GRANDEZZA in nomi_der))
+    non_risolti = []
+    for x in sorted(v.setattr_variabile, key=lambda y: y["riga"]):
+        verdetto, come = x["verdetto"], x["come"]
+        if verdetto == "?":
+            if x["riga"] in DICHIARATI:
+                verdetto, come = DICHIARATI[x["riga"]]
+                come = "DICHIARATO: " + come
+            else:
+                non_risolti.append(x)
+        x["verdetto_finale"] = verdetto
+        x["come_finale"] = come
+        stampa("        :%-6d %-22s %-8s %s"
+               % (x["riga"], x["dentro"][:22], verdetto, come[:150]))
+    stampa("")
+    if non_risolti:
+        stampa("    ### \u26d4 %d SITI NON RISOLTI E NON DICHIARATI: lo strumento FALLISCE."
+               % len(non_risolti))
+        for x in non_risolti:
+            stampa("        :%d  %s" % (x["riga"], x["dentro"]))
+        raise RuntimeError(
+            "%d `setattr` col nome in una variabile NON sono ne' risolti dalla macchina ne' "
+            "elencati in DICHIARATI: %s. Un limite in piu' stampato in fondo e' un limite che "
+            "nessuno guarda (A9): si risolve o si DICHIARA."
+            % (len(non_risolti), [x["riga"] for x in non_risolti]))
+    quanti_si = len([x for x in v.setattr_variabile if x["verdetto_finale"] == "SI"])
+    quanti_rs = len([x for x in v.setattr_variabile if x["verdetto_finale"] == "RESTORE"])
+    stampa("    ### %d NON possono scriverla · %d sono RESTORE (non nascite) · %d SI'"
+           % (len(v.setattr_variabile) - quanti_si - quanti_rs, quanti_rs, quanti_si))
+    if quanti_si:
+        stampa("    ### \u26d4 UN SITO PUO' SCRIVERLA COME NASCITA: il censimento e' INCOMPLETO.")
     else:
-        stampa("")
-        stampa("    ### nessun `setattr` col nome in una variabile: niente da dichiarare.")
+        stampa("    ### \u2705 NESSUN QUARTO SITO DI NASCITA: i tre che estendono restano tre.")
     estendono = [x for x in v.trovate if x["classe"].startswith("ESTENDE")]
     stampa("")
     stampa("    ### LE SCRITTURE CHE FANNO NASCERE UN VALORE (estendono): %d" % len(estendono))
@@ -362,7 +522,7 @@ def principale():
     for nome, seme, passi in SCENE:
         stampa("-" * 100)
         stampa("SCENA `%s` -- seme %d, %d passi" % (nome, seme, passi))
-        sim, diario, nati, cont = una_scena(nome, seme, passi, stampa)
+        sim, diario, nati, cont, soglia = una_scena(nome, seme, passi, stampa)
         viste = {}
         for s in diario.scritture:
             k = (s["dove"], s["riga"])
@@ -426,7 +586,34 @@ def principale():
             stampa("  ###   ==> IL COMMIT 5 NON E' BYTE-IDENTICO in questa scena, e la PRIMA")
             stampa("  ###   differenza attesa e' `perc_geom` di quei nati.")
         stampa("")
+        stampa("")
+        stampa("  PEZZO 6 -- LA SOGLIA E' MAI RAGGIUNTA? (`perc_geom` arriva mai a +1?)")
+        stampa("    nodi a +1, MASSIMO su %d passi .......... %d"
+               % (soglia["passi"], soglia["piu1_max"]))
+        stampa("    passi con almeno un nodo a +1 ........... %d su %d"
+               % (soglia["passi_con_piu1"], soglia["passi"]))
+        stampa("    `twn` MAX visto (su tutti i nodi e passi)  %.6e" % soglia["twn_max"])
+        stampa("    PHI_CRIT ................................. %.6f" % sim.PHI_CRIT)
+        if soglia["twn_max"] > 0:
+            stampa("    ### la soglia sta %.1f VOLTE sopra il massimo misurato."
+                   % (sim.PHI_CRIT / soglia["twn_max"]))
+        if soglia["piu1_max"] == 0:
+            stampa("  ### \u26d4 `perc_geom` E' IDENTICAMENTE -1 PER TUTTO IL RUN.")
+            stampa("  ###   Allora il canale della GEOMETRIA non porta informazione, e lo")
+            stampa("  ###   zero del punto (d) ha una causa MOLTO PIU' FORTE di <<il nato")
+            stampa("  ###   ha tw = 0>>: la SOGLIA NON E' MAI RAGGIUNTA DA NESSUNO.")
+            stampa("  ###   E' la stessa famiglia di REGISTRO_FISICA:P5 (soglia")
+            stampa("  ###   irraggiungibile), vista da un'altra legge.")
+            stampa("  ### \u26a0 E NON TOGLIE NIENTE AL COMMIT 5: la derivazione resta la")
+            stampa("  ###   cosa giusta da scrivere. Dice che il CANALE che la porta e'")
+            stampa("  ###   inerte, e sono DUE COSE DIVERSE che non vanno confuse.")
+        else:
+            stampa("  ### la soglia E' raggiunta: fino a %d nodi a +1. Il canale lavora,"
+                   % soglia["piu1_max"])
+            stampa("  ###   e un nato che eredita +1 e' POSSIBILE: il punto (d) puo'")
+            stampa("  ###   essere diverso da zero in un'altra scena.")
         tutte[nome] = {"seme": seme, "passi": passi, "contatori_chibasc": cont,
+                       "soglia": soglia,
                        "scritture_runtime": [{"dove": k[0], "riga": k[1], **d}
                                              for k, d in sorted(viste.items(),
                                                                 key=lambda y: y[0][1])],
@@ -486,6 +673,7 @@ def principale():
              "PHI_CRIT": s0.PHI_CRIT, "posti_ordine_nascita": posti,
              "ordine_nascita": ordine,
              "ast": v.trovate, "ast_setattr_variabile": v.setattr_variabile,
+             "setattr_dichiarati": {str(k): list(x) for k, x in DICHIARATI.items()},
              "ast_estendono": estendono,
              "scene": tutte, "solo_ast": solo_ast, "solo_runtime": solo_rt,
              "punto_d_totale": dtot}
