@@ -1,7 +1,7 @@
 ====================================================================================================
 np.sum(concatenate([x, x])) E' IDENTICA AL BIT A 2 * np.sum(x)?
 ====================================================================================================
-  strumento .. fe9634ba (sha1 byte grezzi)
+  strumento .. 228ad404 (sha1 byte grezzi)
   2000 prove per taglia, seme 20261003, numpy 2.3.0
 
   LE TRE FORME messe a confronto, su x di taglia n:
@@ -52,4 +52,24 @@ np.sum(concatenate([x, x])) E' IDENTICA AL BIT A 2 * np.sum(x)?
 ###   E IL DIFETTO CONTA NEL 6b: con t != 0.5 le due meta' sono DIVERSE, e
 ###   t*d puo' scendere SOTTO LAM anche con d >= 2 LAM (0.4*1.6 = 0.64 < 0.8).
 ###   Allora i troncamenti CI SONO, e _fab non e' piu' zero.
+====================================================================================================
+
+====================================================================================================
+I QUATTRO CONTATORI DI `_nasce`, PER I TRE SITI, A t = 0.5
+====================================================================================================
+  La domanda del mandato: portando `_nasce` da UNA chiamata con md=2 su n voci a
+  UNA chiamata con md=1 su 2n voci, e calcolando `_fab` PER META', a t = 0.5
+  tutti e quattro i contatori restano IDENTICI AL BIT?
+
+  sito             md,md0       nascite        lun         tr        vis
+  ------------------------------------------------------------------------
+  mitosi/dh        2,0                0          0          0          0
+  mitosi/d0new     0,1                0          0          0          0
+  schwinger/dd     2,2                0          0          0          0
+
+  ### TUTTI E QUATTRO I CONTATORI, PER TUTTI E TRE I SITI: IDENTICI AL BIT
+  ###   su 2000 prove per sito, con taglie fra 1 e 39 e valori che INCLUDONO
+  ###   lunghezze sotto LAM (quindi `_ntr` e `_fab` NON sono zero per
+  ###   costruzione -- sarebbe un FALSO-ZERO della verifica).
+  ### ==> LA FORMA DEL CODICE REGGE, e si puo' scrivere.
 ====================================================================================================

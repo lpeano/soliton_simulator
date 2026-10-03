@@ -1,5 +1,35 @@
 {
- "strumento": "fe9634bada7e45a945e0d12bfe4a50dcd632857b",
+ "contatori_tre_siti": [
+  {
+   "sito": "mitosi/dh",
+   "md": 2,
+   "md0": 0,
+   "nascite": 0,
+   "lun": 0,
+   "tr": 0,
+   "vis": 0
+  },
+  {
+   "sito": "mitosi/d0new",
+   "md": 0,
+   "md0": 1,
+   "nascite": 0,
+   "lun": 0,
+   "tr": 0,
+   "vis": 0
+  },
+  {
+   "sito": "schwinger/dd",
+   "md": 2,
+   "md0": 2,
+   "nascite": 0,
+   "lun": 0,
+   "tr": 0,
+   "vis": 0
+  }
+ ],
+ "contatori_differenze": 0,
+ "strumento": "228ad4040da05086a45cec0a7ea5eccd3946bc2e",
  "numpy": "2.3.0",
  "seme": 20261003,
  "prove_per_taglia": 2000,
