@@ -1,0 +1,334 @@
+{
+ "blob_sim": "7ed5660856f51fa28478dd4d489ab88f3670081a",
+ "blob_strumento": "97791afc91ae93a3306fa77e3efa96e68845e389",
+ "PHI_CRIT": 6.283185307179586,
+ "posti_ordine_nascita": {
+  "i": 1,
+  "j": 2,
+  "_deg": 4,
+  "perc_chi": 16,
+  "perc_geom": 17,
+  "tw": 31,
+  "twp": 32
+ },
+ "ordine_nascita": [
+  "phi",
+  "i",
+  "j",
+  "_cs_nodo_prev",
+  "_deg",
+  "_nb",
+  "_nb_prec",
+  "_nb_ret",
+  "_psi_prec",
+  "_psi_spin_prec",
+  "_psi_spinor",
+  "_spinor_lift",
+  "conc_nodi",
+  "eta",
+  "mem_mot",
+  "omega_s",
+  "perc_chi",
+  "perc_geom",
+  "perc_tw",
+  "phi0",
+  "phi_s",
+  "phivel",
+  "pos",
+  "psi",
+  "psi_spin",
+  "rho_spin",
+  "_rep",
+  "d",
+  "d0",
+  "peq",
+  "_peqn_idx",
+  "tw",
+  "twp",
+  "vd",
+  "_smp_d0",
+  "_smp_d"
+ ],
+ "ast": [
+  {
+   "riga": 1833,
+   "dentro": "_rn_div_perc_geom",
+   "forma": "attributo",
+   "testo": "net.perc_geom = np.concatenate([net.perc_geom, net.perc_geom[c[\"a\"]]])",
+   "classe": "ESTENDE (nasce un valore per un nodo nuovo)"
+  },
+  {
+   "riga": 2209,
+   "dentro": "_rn_sch_perc_geom",
+   "forma": "attributo",
+   "testo": "net.perc_geom = np.concatenate([net.perc_geom, net.perc_geom[c[\"aa\"]]])",
+   "classe": "ESTENDE (nasce un valore per un nodo nuovo)"
+  },
+  {
+   "riga": 3709,
+   "dentro": "__init__",
+   "forma": "attributo",
+   "testo": "self.perc_geom = np.zeros(0, int)    # [CHI_COOP] geometria: giro compiuto o no (+1/-1)",
+   "classe": "inizializza (array VUOTO: nessun valore)"
+  },
+  {
+   "riga": 4779,
+   "dentro": "semina",
+   "forma": "attributo",
+   "testo": "self.perc_geom = np.concatenate([self.perc_geom, chi_nuovi])",
+   "classe": "ESTENDE (nasce un valore per un nodo nuovo)"
+  },
+  {
+   "riga": 7560,
+   "dentro": "step",
+   "forma": "in posto (slice)",
+   "testo": "self.perc_geom[:self.n] = np.where(twn > soglia, 1, -1).astype(self.perc_geom.dtype)",
+   "classe": "in posto (riscrive nodi che ESISTONO)"
+  }
+ ],
+ "ast_setattr_variabile": [
+  {
+   "riga": 1557,
+   "dentro": "_avvelena_derivate"
+  },
+  {
+   "riga": 6242,
+   "dentro": "_smorza"
+  },
+  {
+   "riga": 6492,
+   "dentro": "_smp_chirurgia"
+  },
+  {
+   "riga": 6590,
+   "dentro": "_nasce"
+  },
+  {
+   "riga": 6819,
+   "dentro": "carica_stato"
+  },
+  {
+   "riga": 12208,
+   "dentro": "_diag_completa"
+  },
+  {
+   "riga": 12234,
+   "dentro": "_diag_completa"
+  },
+  {
+   "riga": 12687,
+   "dentro": "batch_condensazione"
+  },
+  {
+   "riga": 12787,
+   "dentro": "batch_condensazione"
+  }
+ ],
+ "ast_estendono": [
+  {
+   "riga": 1833,
+   "dentro": "_rn_div_perc_geom",
+   "forma": "attributo",
+   "testo": "net.perc_geom = np.concatenate([net.perc_geom, net.perc_geom[c[\"a\"]]])",
+   "classe": "ESTENDE (nasce un valore per un nodo nuovo)"
+  },
+  {
+   "riga": 2209,
+   "dentro": "_rn_sch_perc_geom",
+   "forma": "attributo",
+   "testo": "net.perc_geom = np.concatenate([net.perc_geom, net.perc_geom[c[\"aa\"]]])",
+   "classe": "ESTENDE (nasce un valore per un nodo nuovo)"
+  },
+  {
+   "riga": 4779,
+   "dentro": "semina",
+   "forma": "attributo",
+   "testo": "self.perc_geom = np.concatenate([self.perc_geom, chi_nuovi])",
+   "classe": "ESTENDE (nasce un valore per un nodo nuovo)"
+  }
+ ],
+ "scene": {
+  "corta": {
+   "seme": 11,
+   "passi": 72,
+   "contatori_chibasc": {
+    "_g_chibasc_su_geom": 72,
+    "_g_chibasc_su_chi": 0
+   },
+   "scritture_runtime": [
+    {
+     "dove": "_rn_div_perc_geom",
+     "riga": 1833,
+     "n": 8,
+     "cresciute": 8,
+     "nuovi": 9
+    },
+    {
+     "dove": "_rn_sch_perc_geom",
+     "riga": 2209,
+     "n": 1,
+     "cresciute": 1,
+     "nuovi": 1
+    },
+    {
+     "dove": "__init__",
+     "riga": 3709,
+     "n": 1,
+     "cresciute": 0,
+     "nuovi": 0
+    },
+    {
+     "dove": "semina",
+     "riga": 4779,
+     "n": 1,
+     "cresciute": 1,
+     "nuovi": 12802
+    }
+   ],
+   "nati": 10,
+   "per_evento": {
+    "divisione": {
+     "n": 9,
+     "er_m1": 9,
+     "er_p1": 0,
+     "der_m1": 9,
+     "der_p1": 0,
+     "diversi": 0
+    },
+    "schwinger": {
+     "n": 1,
+     "er_m1": 1,
+     "er_p1": 0,
+     "der_m1": 1,
+     "der_p1": 0,
+     "diversi": 0
+    }
+   },
+   "twn_max_dei_nati": 0.0,
+   "diversi": 0
+  },
+  "lunga": {
+   "seme": 11,
+   "passi": 150,
+   "contatori_chibasc": {
+    "_g_chibasc_su_geom": 150,
+    "_g_chibasc_su_chi": 0
+   },
+   "scritture_runtime": [
+    {
+     "dove": "_rn_div_perc_geom",
+     "riga": 1833,
+     "n": 83,
+     "cresciute": 83,
+     "nuovi": 938
+    },
+    {
+     "dove": "_rn_sch_perc_geom",
+     "riga": 2209,
+     "n": 64,
+     "cresciute": 64,
+     "nuovi": 260
+    },
+    {
+     "dove": "__init__",
+     "riga": 3709,
+     "n": 1,
+     "cresciute": 0,
+     "nuovi": 0
+    },
+    {
+     "dove": "semina",
+     "riga": 4779,
+     "n": 1,
+     "cresciute": 1,
+     "nuovi": 12802
+    }
+   ],
+   "nati": 1198,
+   "per_evento": {
+    "divisione": {
+     "n": 938,
+     "er_m1": 938,
+     "er_p1": 0,
+     "der_m1": 938,
+     "der_p1": 0,
+     "diversi": 0
+    },
+    "schwinger": {
+     "n": 260,
+     "er_m1": 260,
+     "er_p1": 0,
+     "der_m1": 260,
+     "der_p1": 0,
+     "diversi": 0
+    }
+   },
+   "twn_max_dei_nati": 0.0,
+   "diversi": 0
+  },
+  "altro_seme": {
+   "seme": 12,
+   "passi": 72,
+   "contatori_chibasc": {
+    "_g_chibasc_su_geom": 72,
+    "_g_chibasc_su_chi": 0
+   },
+   "scritture_runtime": [
+    {
+     "dove": "_rn_div_perc_geom",
+     "riga": 1833,
+     "n": 10,
+     "cresciute": 10,
+     "nuovi": 13
+    },
+    {
+     "dove": "_rn_sch_perc_geom",
+     "riga": 2209,
+     "n": 4,
+     "cresciute": 4,
+     "nuovi": 4
+    },
+    {
+     "dove": "__init__",
+     "riga": 3709,
+     "n": 1,
+     "cresciute": 0,
+     "nuovi": 0
+    },
+    {
+     "dove": "semina",
+     "riga": 4779,
+     "n": 1,
+     "cresciute": 1,
+     "nuovi": 12765
+    }
+   ],
+   "nati": 17,
+   "per_evento": {
+    "divisione": {
+     "n": 13,
+     "er_m1": 13,
+     "er_p1": 0,
+     "der_m1": 13,
+     "der_p1": 0,
+     "diversi": 0
+    },
+    "schwinger": {
+     "n": 4,
+     "er_m1": 4,
+     "er_p1": 0,
+     "der_m1": 4,
+     "der_p1": 0,
+     "diversi": 0
+    }
+   },
+   "twn_max_dei_nati": 0.0,
+   "diversi": 0
+  }
+ },
+ "solo_ast": [
+  7560
+ ],
+ "solo_runtime": [],
+ "punto_d_totale": 0
+}

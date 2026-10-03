@@ -2277,3 +2277,92 @@ python -c "import numpy as np; LAM=0.8; f=0.609170287691728/LAM; s=1.0/f-1.0; L=
 ```
 
 ---
+
+## `PASSO 1` DEL `COMMIT 5` — **IL CENSIMENTO, e il punto `(d)` DA' ZERO SU TUTTE E TRE LE SCENE**
+
+*(referto: `csv/_test_fork/_censimento_perc_geom/`, strumento `97791afc`, simulatore `7ed56608`.*
+*Task history `ea3310d`, **antenato** dei commit del lavoro.)*
+
+### ✅ **I SITI SONO CINQUE, E TRE FANNO NASCERE UN VALORE** — e coincidono con quelli che
+avevo previsto leggendo, ### **compresi i due che avevo ESCLUSO**:
+
+| riga | dove | che cosa fa |
+|---|---|---|
+| `:1833` | `_rn_div_perc_geom` | ### **ESTENDE** *(eredita da `a`)* |
+| `:2209` | `_rn_sch_perc_geom` | ### **ESTENDE** *(eredita da `aa`)* |
+| `:4779` | `semina` | ### **ESTENDE** *(`chi_nuovi`, lo stesso array di `perc_chi`)* |
+| `:3709` | `Rete.__init__` | inizializza, **array vuoto: nessun valore nasce** |
+| `:7560` | `chi_basc` *(dentro `step`)* | ### **in posto: E' LA DEFINIZIONE** |
+
+### ➜ **`_allaccia` e `MASSE-COERENTI` NON compaiono, e lo strumento lo CONFERMA** invece della
+mia lettura: il primo scrive solo grandezze **d'arco**, la seconda **non aggiunge nodi**.
+
+### ✅ **E IL CONTATORE SPIEGA `:7560` invece di lasciarlo fra i morti:**
+`_g_chibasc_su_geom` = **`72`** / **`150`** / **`72`** — ### **esattamente UNA VOLTA PER PASSO.**
+
+### 📌 **E UN CRITERIO DEL REPO RISULTA SODDISFATTO, e non lo cercavo:** il commento di
+`chi_basc` dice che *«con la cooperazione `chi_basc` non deve toccare `perc_chi` **nemmeno una
+volta**»* — e' il criterio di `Z3`. ### **Misurato: `_g_chibasc_su_chi` = `0` su tutte e tre le
+scene.**
+
+## ⛔ **IL PUNTO `(d)` DA' ZERO. E IL MIO TASK HISTORY DICEVA COSA FARE IN QUEL CASO**
+
+| scena | nati | ered. `-1` | ered. `+1` | deriv. `-1` | deriv. `+1` | ### **DIVERSI** |
+|---|--:|--:|--:|--:|--:|--:|
+| `corta` *(72, seme 11)* | 10 | 10 | 0 | 10 | 0 | ### **0** |
+| `lunga` *(150, seme 11)* | 1198 | 1198 | 0 | 1198 | 0 | ### **0** |
+| `altro_seme` *(72, seme 12)* | 17 | 17 | 0 | 17 | 0 | ### **0** |
+
+### ➜ **`1225` nati, e NESSUNO ha l'ereditato diverso dalla derivazione.**
+### **QUINDI IL `COMMIT 5` SAREBBE BYTE-IDENTICO SULLE TRE SCENE**, e ### **i bracci `(a)`-`(c)`
+del mandato NON PROVEREBBERO NIENTE.** Il `twn` dei nati e' ### **esattamente `0`**.
+
+### 📌 **Non allento il criterio: cambio la FORMA del verdetto**, come il task history
+*(committato **prima**)* si era impegnato a fare. Il sigillo si appoggia al braccio **`E`**, il
+### **controllo positivo COSTRUITO** — un nato con un arco a `tw` **sopra** `PHI_CRIT` deve dare
+`+1`. ### **Senza quel braccio, un <<sempre `-1`>> non distingue una DERIVAZIONE da una COSTANTE**,
+ed e' `FALSO-ZERO`.
+
+## ⚠ **E LO ZERO APRE UNA DOMANDA PIU' GROSSA, CHE NON HO ANCORA MISURATO**
+
+L'ereditato e' `-1` perche' ### **il genitore era `-1`**. E il genitore e' `-1` perche' `chi_basc`
+riscrive **tutti** i nodi dalla definizione a **ogni passo**, confrontando la media di `|tw|` con
+### **`PHI_CRIT = 2π = 6.283185`**.
+
+> ### **SE QUELLA SOGLIA NON E' MAI RAGGIUNTA DA NESSUN NODO, allora `perc_geom` e'
+> ### IDENTICAMENTE `-1`** — cioe' il canale della geometria **non porta informazione**, e lo zero
+> del punto `(d)` ha una causa **molto piu' forte** di *«il nato ha `tw = 0`»*.
+
+### ⛔ **E SAREBBE LA STESSA FAMIGLIA DI ERRORE CHE HO APPENA DOCUMENTATO PER LA SCHERMATURA:**
+una **soglia irraggiungibile** *(`REGISTRO_FISICA:P5`)*. ### **NON L'HO MISURATO, e lo dico
+invece di dedurlo:** serve il massimo di `twn` **su tutti i nodi e tutti i passi**, e quanti nodi
+arrivano a `+1`. ### **Lo misuro prima di scrivere il codice**, perche' cambia **che cosa
+SIGNIFICA** il commit 5.
+
+## ⛔ **E DUE DIFETTI DEL MIO STRUMENTO, in questo referto**
+
+1. **L'ETICHETTA E' SCADUTA:** il referto stampa *«SERVE IL VINCOLO 3»*, ma ### **`3` e' GIA'
+   PRESO** — il contratto ha `1` *(`twp`)*, `2` *(`_peqn_idx`)*, `3` *(le regole non leggono
+   `self.n`)*. ### **Il mio e' il VINCOLO 4**, e l'ho scoperto **dopo** aver scritto lo strumento.
+   *(par.9: un'etichetta non si ricicla.)*
+2. **I `9` `setattr` COL NOME IN UNA VARIABILE SONO DICHIARATI, NON RISOLTI** — e uno si chiama
+   ### **`_nasce`**, cioe' un nome che **sembra** una via di nascita. ### **Un limite dichiarato
+   non e' un limite risolto**, e qui si poteva risolvere.
+
+### ✅ **RISOLTI A MANO, DALLA SORGENTE DELLA VARIABILE — e il risultato NON cambia il censimento:**
+
+| riga | la variabile viene da | puo' essere `perc_geom`? |
+|---|---|---|
+| `:1557` `_avvelena_derivate` | i nomi di ### **`REGISTRO_DERIVATE`** | ### **NO** — e `perc_geom` non e' li' *(verificato dal modulo)* |
+| `:6242` `_smorza` | `'_g_sm_' + quale` | ### **NO** — prefisso letterale |
+| `:6492` `_smp_chirurgia` | `for _nome in ('_smp_d0','_smp_d')` | ### **NO** — tupla esplicita |
+| `:6590` ### **`_nasce`** | `"_sm_%s%s_%s" % …` | ### **NO** — formato letterale, e' un **contatore** |
+| `:6819` `carica_stato` | `stato['attrs'].items()` | ### **SI'** — ma e' un ### **RESTORE**, non una nascita, e ### **non gira** nella configurazione del driver |
+| `:12208` · `:12234` | `'_ang_prec_%d'` · `'_ang_orb_%d_%d'` | ### **NO** — formati letterali |
+| `:12687` · `:12787` | `_snap_fisica` · `_snap_cond` | ### **SI'** — ma sono ### **RESTORE** di uno snapshot, **neutri al byte per costruzione** |
+
+### ➜ **Otto su nove non possono scriverla; uno puo', come RESTORE. NESSUN QUARTO SITO DI
+NASCITA**, quindi i tre che estendono restano tre. ### **Ma la risoluzione va DENTRO lo
+strumento**, non in questo paragrafo: la metto li' e rigiro.
+
+---
