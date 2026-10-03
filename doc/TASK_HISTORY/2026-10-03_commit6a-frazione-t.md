@@ -476,3 +476,51 @@ consentito a `7 200 000`. ### **Non un criterio fallito: un mio errore di stima*
 parziale e' committato come **reperto** *(`_corsa_2026-10-03_PARZIALE_fermato_dal_limite`)*
 con il motivo accanto. ### ✅ **`0`, `A` e `A-tr` erano passati, e la coppia del censimento e'
 tornata COERENTE** *(json e `_corsa.txt` entrambi su `c18c9bf6`)*.
+
+---
+
+## **ANNOTAZIONE del 2026-10-03 — UNA SOVRA-RIVENDICAZIONE: *«la coppia e' COERENTE»***
+
+**Rilievo del guardiano su `a1b0660`, ed e' giusto.** In quel commit ho scritto *«la coppia
+del censimento e' ora COERENTE»*. ### ⛔ **Valeva sul mio DISCO, non nel REPO** — e il repo e'
+la sola cosa che chi verifica puo' leggere *(par.4: chi legge il repo da fuori non ha la
+conversazione, ha solo i file)*.
+
+### **MISURATO su `HEAD` con `git show`, ed e' peggio di come il guardiano l'ha descritto:
+l'incoerenza committata e' DOPPIA.**
+
+| dove | `blob_sim` | `blob_strumento` | occorrenze |
+|---|---|---|---|
+| `_censimento.json` **committato** | **`6d306976`** *(il simulatore PRIMA della cura)* | **`ec0a03e3`** *(il censimento PRIMA della riparazione)* | **19** |
+| `_corsa.txt` **committato** | `c18c9bf6` | **`ec0a03e3`** | 13 |
+| il disco, adesso | `c18c9bf6` | *(da rigenerare col blob `6b9b6bba`)* | 13 |
+
+> ### 📌 **I DUE PEZZI DELLA COPPIA COMMITTATA VENGONO DA DUE CORSE DIVERSE, su due coppie
+> `(simulatore, strumento)` diverse.** E la cosa che non avevo visto: ### **controllare il
+> solo `blob_sim` avrebbe lasciato passare un json prodotto dallo STRUMENTO VECCHIO sul
+> simulatore giusto** — cioe' esattamente il caso in cui la tabella era ancora indicizzata
+> per riga. ### **Il guardiano chiede due numeri perche' uno solo non chiude il buco.**
+
+### **LA FORMA DELL'ERRORE:** ho verificato **cio' che avevo sotto mano** *(il file sul
+disco)* e ho scritto una frase **sul repo**. E' la stessa classe del falso-UNO del braccio
+`B` — *parlare di un oggetto avendone misurato un altro* — soltanto che qui l'oggetto sbagliato
+era **il mio disco invece dell'indice di git**. ### ⚠ **Un `git status` pulito non dice che un
+OUTPUT e' committato: dice che i file TRACCIATI non sono modificati. Un file mai aggiunto e'
+pulito e assente insieme.**
+
+### ✅ **LE DUE CURE, in questo commit:**
+
+1. il braccio `B` verifica **`blob_sim` E `blob_strumento`**, entrambi contro i file in
+   esame, e **li stampa nel referto** con il verdetto per ciascuno;
+2. ### **il commit del referto includera' la COPPIA** — `_corsa.txt` **e**
+   `_censimento.json` — cosi' il referto e i suoi artefatti dichiarano gli stessi blob.
+   ### **Un referto che dichiara un blob e una coppia che ne dichiara un altro e' la stessa
+   bugia, spostata di un file.**
+
+### **E IL LIMITE DI TEMPO: il run esce dallo strumento.** La corsa precedente ha chiesto
+`~110` minuti, il massimo dello strumento e' `120`, e i bracci ora sono **di piu'** (`C0`,
+`C1`, rovescio). ### **Quindi il run gira come processo INDIPENDENTE** *(`Start-Process`)*,
+**non bufferizzato** *(`PYTHONUNBUFFERED=1`: il `tee` bufferizzato aveva perso il braccio `C`
+dal reperto, pur avendolo eseguito — le copie `_sim_t04_md0.py` e `_sim_fm_rovescio.py` erano
+sul disco)*, e si controlla **periodicamente**. ### ⚠ **E se si ferma per un motivo che non e'
+un criterio, e' un altro REPERTO, non un referto.**

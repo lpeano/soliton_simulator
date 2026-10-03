@@ -3365,3 +3365,41 @@ ramo del tuo ordine, *«se il run non è ancora partito: correggi la frase, comm
 partire il run»* — e rigenero la coppia dal blob corretto. **Così il ciclo non si spreca.**
 
 ---
+
+## **UNA SOVRA-RIVENDICAZIONE: *«la coppia è coerente»* valeva sul mio disco, non nel repo**
+
+**Rilievo tuo su `a1b0660`, ed è giusto.** E misurandolo con `git show` è **peggio** di come
+l'hai descritto: l'incoerenza committata è **doppia**.
+
+| dove | `blob_sim` | `blob_strumento` | occorrenze |
+|---|---|---|---|
+| `_censimento.json` **committato** | **`6d306976`** *(simulatore pre-cura)* | **`ec0a03e3`** *(censimento pre-riparazione)* | **19** |
+| `_corsa.txt` **committato** | `c18c9bf6` | **`ec0a03e3`** | 13 |
+
+### 📌 **I due pezzi della coppia committata vengono da DUE CORSE DIVERSE**, su due coppie
+`(simulatore, strumento)` diverse. E la cosa che non avevo visto: **controllare il solo
+`blob_sim` avrebbe lasciato passare un json prodotto dallo STRUMENTO VECCHIO sul simulatore
+giusto** — cioè esattamente il caso in cui la tabella era ancora indicizzata per riga.
+### **Chiedi due numeri perché uno solo non chiude il buco.**
+
+### ⚠ **LA FORMA DELL'ERRORE:** ho verificato **ciò che avevo sotto mano** *(il file sul
+disco)* e ho scritto una frase **sul repo**. È la stessa classe del falso-uno del braccio `B`
+— *parlare di un oggetto avendone misurato un altro* — solo che qui l'oggetto sbagliato era
+**il mio disco invece dell'indice di git**. ### **Un `git status` pulito non dice che un
+output è committato: dice che i file TRACCIATI non sono modificati. Un file mai aggiunto è
+pulito e assente insieme** — ed è per questo che mi è sfuggito.
+
+**Le due cure:** il braccio `B` ora verifica **entrambi** i blob dell'artefatto e li stampa
+col verdetto per ciascuno *(sigillo `457f1819` → `838fc5c9`)*; e **il commit del referto
+includerà la coppia**, `_corsa.txt` e `_censimento.json`, così referto e artefatti dichiarano
+gli stessi blob. ### **Un referto che dichiara un blob e una coppia che ne dichiara un altro è
+la stessa bugia, spostata di un file.**
+
+**E il run esce dallo strumento.** Ho fermato io quello in corso: `~110` minuti la volta
+scorsa, `120` il massimo dello strumento, e ora i bracci sono di più. Gira come **processo
+indipendente**, **non bufferizzato** — il `tee` bufferizzato aveva perso il braccio `C` dal
+reperto **pur avendolo eseguito**: le copie `_sim_t04_md0.py` e `_sim_fm_rovescio.py` erano
+sul disco. Lo controllo periodicamente, e se si ferma per un motivo che non è un criterio è
+**un altro reperto**.
+
+---

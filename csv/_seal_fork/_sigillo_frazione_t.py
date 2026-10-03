@@ -499,10 +499,31 @@ def principale():
                 stampa("  ###   %s" % _r[:140])
         stampa("  ### Il json sul disco NON e' di questa corsa: non si legge.")
     cj = json.load(io.open(jj, encoding="utf-8"))
-    b_blob = (cj.get("blob_sim") == blob(SIM))
-    stampa("  l'artefatto letto e' dello STESSO blob? .. %s" % ("SI" if b_blob else "NO"))
-    stampa("    blob_sim dichiarato dal json .. %s" % str(cj.get("blob_sim"))[:8])
-    stampa("    blob del file in esame ........ %s" % blob(SIM)[:8])
+    # ### DUE BLOB, NON UNO, e il secondo l'ha chiesto il guardiano per una ragione
+    #   concreta: ### **la coppia COMMITTATA era incoerente in DUE modi, non uno.**
+    #   ### \u26d4 MISURATO su `HEAD` al 2026-10-03: il json committato dichiarava
+    #   `blob_sim 6d306976` *(il simulatore PRIMA della cura)* ### **e**
+    #   `blob_strumento ec0a03e3` *(il censimento PRIMA della riparazione)*, con `19`
+    #   occorrenze; e `_corsa.txt` committato dichiarava `strumento ec0a03e3` su
+    #   `simulatore c18c9bf6`. ### **Cioe' i due pezzi della coppia venivano da DUE
+    #   CORSE DIVERSE, su due coppie (simulatore, strumento) diverse.**
+    #   ### \u2705 **Controllare solo `blob_sim` avrebbe lasciato passare un json prodotto
+    #   dallo strumento VECCHIO sul simulatore giusto** -- cioe' esattamente il caso in
+    #   cui la tabella era ancora indicizzata per riga.
+    b_bsim = (cj.get("blob_sim") == blob(SIM))
+    b_bstr = (cj.get("blob_strumento") == blob(CENS))
+    b_blob = (b_bsim and b_bstr)
+    stampa("  l'artefatto letto viene dagli STESSI DUE blob? .. %s"
+           % ("SI" if b_blob else "NO"))
+    stampa("    blob_sim       dal json .. %s   il file in esame .. %s   %s"
+           % (str(cj.get("blob_sim"))[:8], blob(SIM)[:8], "OK" if b_bsim else "DIVERSO"))
+    stampa("    blob_strumento dal json .. %s   il censimento ..... %s   %s"
+           % (str(cj.get("blob_strumento"))[:8], blob(CENS)[:8],
+              "OK" if b_bstr else "DIVERSO"))
+    stampa("    ### E QUESTI DUE NUMERI FINISCONO NEL COMMIT DEL REFERTO INSIEME ALLA")
+    stampa("    ###   COPPIA che li dichiara: `_corsa.txt` E `_censimento.json`. ### Un")
+    stampa("    ###   referto che dichiara un blob e una coppia che ne dichiara un altro")
+    stampa("    ###   e' la stessa bugia, spostata di un file.")
     if not b_blob:
         stampa("  ### *** ARTEFATTO DI UN ALTRO BLOB: il braccio FALLISCE. ***")
         stampa("  ###   Qualunque numero preso da questo json parlerebbe di un altro")
@@ -520,7 +541,11 @@ def principale():
                           "passa": bool(b_ok),
                           "censimento_returncode": int(q.returncode),
                           "artefatto_stesso_blob": bool(b_blob),
+                          "artefatto_blob_sim_ok": bool(b_bsim),
+                          "artefatto_blob_strumento_ok": bool(b_bstr),
                           "blob_sim_artefatto": cj.get("blob_sim"),
+                          "blob_strumento_artefatto": cj.get("blob_strumento"),
+                          "blob_censimento_sul_disco": blob(CENS),
                           "righe_letterali": [x["riga"] for x in fraz]}
 
     # ======================================================== BRACCIO C
