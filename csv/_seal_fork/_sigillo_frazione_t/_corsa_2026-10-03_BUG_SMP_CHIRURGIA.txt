@@ -1,0 +1,37 @@
+IL BUG TROVATO DAL PRESIDIO DEL REPO, PRIMA DEL SIGILLO
+=======================================================
+
+Simulatore e46c7eb3 (il commit 6a, 8aa6bc2). Copia con --t=0.4, scena corta (seme 11), 72 passi.
+Trovato NON dal mio collaudo ma dal presidio `RIPIEGHI-ZERO` del simulatore stesso.
+
+L'ECCEZIONE, verbatim:
+
+_sm04.CacheLunga: [REGISTRO LUNGA] IL RUN SI FERMA (`RIPIEGHI-ZERO`, `A9`).
+  grandezza . _smp_d0
+  forma ..... 471575
+  attesa .... 471573
+  tipo ...... (non guardato)
+  dove ...... schedulatore: dopo la voce `mitosi`
+
+LA CAUSA, trovata dal codice
+  :8786   self._smp_chirurgia(nuovi=np.concatenate([dd, dd]))   # [C3] Schwinger
+
+Col commit 6a `dd` E' GIA' l'array dei DUE blocchi (aa-k e k-bb), quindi
+`np.concatenate([dd, dd])` da' 4n invece di 2n: lo snapshot _smp_d0 cresce del DOPPIO.
+E' LA QUARTA CONSUMATRICE DI `dd` CHE NON AVEVO VISTO: avevo curato le tre REGOLE
+(_rn_div_d, _rn_sch_d, _rn_sch_d0) e NON la CHIAMATA CON EFFETTO del ramo Schwinger.
+La sua ancora dichiarata sta a :2480 e dice la stessa cosa.
+
+PERCHE' IL MIO COLLAUDO NON POTEVA VEDERLO
+Ho collaudato 45 passi, scelti perche' la PRIMA MITOSI e' al passo 42. Ma IL PRIMO SCHWINGER
+E' AL PASSO 70 -- lo dice il referto del sigillo del commit 5 (il braccio D1, "eredita' nella
+DIVISIONE", ha il primo passo con derivazione al 70).
+QUINDI HO COPERTO UN TIPO DI EVENTO E L'HO TRATTATO COME SE COPRISSE ENTRAMBI.
+Un collaudo tarato sul primo evento di UN tipo non dice niente sull'altro, e la scelta del
+numero di passi era basata su UN solo evento.
+
+E IL PRESIDIO HA FATTO IL SUO LAVORO
+`_ferma_se_registro_incoerente` confronta la lunghezza di ogni grandezza del registro col
+bersaglio DOPO OGNI VOCE dello schedulatore, e si e' fermato al primo passo con uno Schwinger.
+Senza quel presidio lo snapshot sarebbe cresciuto in silenzio, e il difetto si sarebbe visto
+(forse) molto piu' tardi come un numero sbagliato.

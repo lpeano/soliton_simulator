@@ -3080,3 +3080,43 @@ stampa lo strumento, il messaggio l'ho scritto io.** ### 📌 **È `L-NUMERI` pr
 violato dove sembrava non contare.** Annotato nel task history.
 
 ---
+
+# ⛔ **IL `COMMIT 6a` HA UN BUG, e l'ha trovato IL PRESIDIO DEL REPO — non io**
+
+*(reperto: `csv/_seal_fork/_sigillo_frazione_t/_corsa_2026-10-03_BUG_SMP_CHIRURGIA.txt`.
+Committato **prima** della correzione, che è un commit a sé — par.5.)*
+
+```
+[REGISTRO LUNGA] IL RUN SI FERMA (`RIPIEGHI-ZERO`, `A9`).
+  grandezza . _smp_d0      forma 471575      attesa 471573
+  dove ...... schedulatore: dopo la voce `mitosi`
+```
+
+### **LA CAUSA:** `:8786` `self._smp_chirurgia(nuovi=np.concatenate([dd, dd]))`.
+Col `6a` **`dd` è GIÀ l'array dei due blocchi**, quindi quello dà **`4n` invece di `2n`**.
+
+### ⛔ **È LA QUARTA CONSUMATRICE DI `dd`, e ne avevo curate TRE.** Avevo trovato le tre
+**regole** *(`_rn_div_d`, `_rn_sch_d`, `_rn_sch_d0`)* e **non la CHIAMATA CON EFFETTO** del ramo
+Schwinger — che ha anche la sua **ancora dichiarata** a `:2480`.
+
+## ⛔ **E IL MIO COLLAUDO NON POTEVA VEDERLO: era tarato su UN SOLO tipo di evento**
+
+Ho collaudato **45 passi**, scelti perché **la prima mitosi è al 42**. Ma ### **il primo
+Schwinger è al 70** — e lo dice **il referto del sigillo del commit 5**, che avevo scritto io.
+
+### ➜ **Ho coperto un tipo di evento e l'ho trattato come se coprisse entrambi.** Il numero di
+passi l'ho scelto guardando **un solo evento**, e poi ho concluso *«zero differenze, la cura è
+byte-identica»* — ### **vero per quello che il test attraversava, falso per quello che non
+attraversava.**
+
+### 📌 **È la stessa forma di `FALSO-ZERO` sull'asse TEMPORALE** che il commit 4 ha già pagato
+una volta: **uno zero garantito dalla finestra, non dalla legge.**
+
+## ✅ **E IL PRESIDIO DEL REPO HA FATTO ESATTAMENTE IL SUO LAVORO**
+
+`_ferma_se_registro_incoerente` confronta la lunghezza di **ogni** grandezza del registro col
+bersaglio ### **dopo ogni voce dello schedulatore**, e si è fermato **al primo passo con uno
+Schwinger**. ### **Senza quel presidio lo snapshot sarebbe cresciuto in silenzio**, e il difetto
+si sarebbe visto — forse — molto più tardi, come un numero sbagliato.
+
+---
