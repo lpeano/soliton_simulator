@@ -63,6 +63,43 @@ voce `Z…` della `FASE A`, commit `9a82bfb`)*.
 <!-- SCHEDA nome=freno-scala-min funzioni=_smorza,_smp_apri,_smp_chiudi,_smp_snap,_sd0,_nasce flag=SCALA_MIN,SCALA_MIN_PASSO,PAV_COM -->
 # ① IL FRENO DI `SCALA_MIN` — **`SCALA_MIN_PASSO` / `_smorza` / `_smp_chiudi`**
 
+## ⭐ **E DAL `COMMIT 6a` `_nasce` SA SOMMARE PER META': `meta=`**
+
+*(decisione di Luca del 2026-10-03, e il motivo e' che ### **un contatore e' un FLOAT**.)*
+
+`_nasce(v, dove, md, md0, meta=None)`. Con `meta` dato — il numero di voci della ### **prima
+meta'** — il contatore `_fab` *(la lunghezza fabbricata, `sum(LAM - v)` sui troncati)* si calcola
+### **per meta' e poi si somma**, invece che con un `np.sum` sull'array intero.
+
+### **PERCHE' SERVE:** col `6a` la frazione della nascita e' esplicita, e i due tronconi diventano
+`t*d` e `(1-t)*d` — ### **due blocchi** invece di un valore usato due volte. Quindi `dh` passa da
+`_nasce` come array di ### **`2n`** con `md = 1`, dov'era `n` con `md = 2`.
+### ⛔ **E UNA SOLA CHIAMATA, di proposito:** `_g_sm_nascite` conta le ### **INVOCAZIONI**, e
+spezzarla in due lo farebbe salire di `2` invece di `1`.
+
+### ⛔ **MA `np.sum` SU `2n` NON E' IDENTICA AL BIT A `2 * np.sum` SU `n`, ed e' MISURATO:**
+### **4043 differenze su 14000** *(`csv/_test_fork/_somma_meta/`, 2000 prove per sette taglie)*.
+### ✅ **La somma per META' a `t = 0.5` e' `s + s`, e `s + s == 2*s` e' ESATTO** — il
+raddoppio e' uno scalamento per una potenza di due.
+
+### ⚠ **E UN DETTAGLIO CHE VALE DA SE': a `n = 128` la forma concatenata NON diverge** *(la
+somma a coppie di numpy allinea i blocchi)*. ### **Un test su UNA SOLA taglia avrebbe dato un falso
+*<<identica>>***: e' la lezione di `FALSO-ZERO`.
+
+### 📌 **E VALE SU DUE PERCORSI, non uno:** `dh` *(`mitosi`, `md` `2,0` → `1,0`)*
+### **e** `dd` *(`schwinger`, `2,2` → `1,1`)*. ### **`d0new` RESTA com'e'** *(`0,1`)*: e' gia'
+l'array dei due figli, e la sua somma e' gia' sull'array intero. ### **Il secondo percorso era
+sfuggito al rilievo del guardiano, che l'ha dichiarato.**
+
+### ✅ **VERIFICATO PRIMA DI SCRIVERE IL CODICE:** a `t = 0.5` tutti e ### **quattro** i
+contatori *(`_g_sm_nascite`, `_sm_lun`, `_sm_tr`, `_sm_vis`)*, per tutti e ### **tre** i siti,
+### **identici al bit** — zero differenze su 2000 prove per sito, con valori che
+### **includono lunghezze sotto `LAM`**, altrimenti `_ntr` e `_fab` sarebbero zero
+### **per costruzione** e la verifica sarebbe essa stessa un `FALSO-ZERO`.
+
+### ⚠ **E con `meta=None` il comportamento e' IDENTICO a prima:** gli altri siti di `_nasce`
+*(`semina`, `_allaccia`, `d0new`)* ### **non si accorgono di niente.**
+
 > ### 🔓 **(c)1, 2026-09-27: IL CONFINE DELLA FOTOGRAFIA SI SPOSTA A INIZIO PASSO**
  > **`(c)1` di `ETC-PASSO`, 2026-09-27: `_smp_apri()` e' IDEMPOTENTE e la chiamano TUTTE
 > e CINQUE le leggi**, in testa. **La prima che gira apre**, le altre quattro escono subito, e
@@ -1373,6 +1410,39 @@ casuali, e `6.08` è **peggio del caso**, cioè il segno che la statistica è sb
 
 <!-- SCHEDA nome=mitosi-schwinger funzioni=mitosi,decidi_divisione flag=MITOSI_DIR,ANTIFASE_ADD,COPPIA_MIT,PLAST_MIT,KICK_TW,REGIME,MITOSI_2LAM -->
 
+## ⭐ **E DAL `COMMIT 6a` CINQUE PUNTI DI `mitosi` LEGGONO `T_NASCITA`**
+
+*(decisione di Luca del 2026-10-03. La frazione e' dichiarata in un solo posto, accanto a
+`PHI_CRIT`; la scheda del punto unico ne porta il quadro intero.)*
+
+| dove, in `mitosi` | che cosa decide | come e' scritto ora |
+|---|---|---|
+| preparazione | ### **DOVE** nasce il figlio | `pos_figlio = (1-t)*pos[a] + t*pos[b]` |
+| preparazione | ### **QUANTO** sono lunghi i due tronconi | `dh_a = t*d[sel]` · `dh_b = (1-t)*d[sel]` |
+| ramo `MITOSI_DIR` | la ### **FASE** del figlio | `fm = phi[a] - (t + bias)*D` |
+| ramo senza `MITOSI_DIR` | la ### **FASE** del figlio | `fm = phi[a] - t*D` |
+| ramo ### **Schwinger** | ### **QUANTO** sono lunghi i due archi nuovi | `max(t*L, 0.05)` · `max((1-t)*L, 0.05)` |
+
+### ⚠ **E IL `bias` DI `MITOSI_DIR` RESTA UNO SCOSTAMENTO *SOPRA* `t`:** il suo `0.5` e'
+### **l'AMPIEZZA** *(lo tiene in `[-0.5, 0.5]`)*, non la frazione. ### **Due `0.5` con due ruoli
+diversi sulla stessa legge, e distinguerli e' il punto.**
+
+### 📌 **E L'ORDINE DEI DUE BLOCCHI NON E' ARBITRARIO:** segue `i = [keep, a, m]`, quindi
+### **il PRIMO blocco e' `a`-`m` e vale `t*d`**, il secondo e' `m`-`b` e vale `(1-t)*d`. Lo stesso
+nello Schwinger, dove `i = [.., aa, k]`. ### **A `t = 0.5` i due blocchi sono IDENTICI, ed e' per
+questo che prima UNA sola `dh` bastava per entrambi.**
+
+### ⚠ **E TRE REGOLE DELLA TABELLA SONO CAMBIATE DI CONSEGUENZA:** `_rn_div_d`, `_rn_sch_d`
+e `_rn_sch_d0` consumavano `dh`/`dd` ### **due volte** *(`concatenate([d[keep], dh, dh])`)*. Ora
+che sono ### **gia'** i due blocchi, le consumano ### **una volta sola** — con `dh, dh`
+darebbero ### **`4n` archi.**
+
+### ⚠ **`MITOSI_2LAM` e l'antifase NON sono toccati** *(e' il `6b`)*, e ### **`SCHW-CORTI` si
+DICHIARA e non si risolve**: nella divisione la lunghezza viene da ### **`d`**, nello Schwinger da
+### **`pos`**. Il `6a` mette `t` in entrambe ### **senza cambiare la sorgente**, e il pavimento
+`0.05` resta com'e' *(e' un `A11`)*.
+
+
 > ### ✅ **`NASCITA-PUNTO-UNICO` — LE REGOLE DI NASCITA SONO UNA TABELLA, E LA TABELLA E' IL CODICE** *(`COMMIT 3` del riordino, 2026-10-02)*
 >
 > ### **Non e' una legge nuova: e' il posto dove le leggi di nascita ABITANO.** E sta qui perche' ### **dove una legge si scrive e' un fatto di fisica**, non di programmazione: finche' le regole erano sparse in tre posti, ### **nessuno poteva elencarle** — e una legge che non si puo' elencare non si puo' nemmeno discutere.
@@ -1589,9 +1659,75 @@ scelta di Luca.**
 
 ---
 
-<!-- SCHEDA nome=nascita-punto-unico funzioni=_derivazione_perc_geom,_nascita_collaudo_della_tabella,_nascita_collocata,_nascita_non_si_tocca,_nascita_regola,_ordine_di_nascita,_registra_regola,_rn_div_conc_nodi,_rn_div_cs_nodo_prev,_rn_div_d,_rn_div_d0,_rn_div_eta,_rn_div_i,_rn_div_j,_rn_div_mem_mot,_rn_div_nb,_rn_div_nb_prec,_rn_div_nb_ret,_rn_div_omega_s,_rn_div_peq,_rn_div_perc_chi,_rn_div_perc_geom,_rn_div_perc_tw,_rn_div_phi,_rn_div_phi0,_rn_div_phi_s,_rn_div_phivel,_rn_div_pos,_rn_div_psi,_rn_div_psi_prec,_rn_div_psi_spin,_rn_div_psi_spin_prec,_rn_div_psi_spinor,_rn_div_rep,_rn_div_rho_spin,_rn_div_spinor_lift,_rn_div_tw,_rn_div_twp,_rn_div_vd,_rn_sch_conc_nodi,_rn_sch_cs_nodo_prev,_rn_sch_d,_rn_sch_d0,_rn_sch_eta,_rn_sch_i,_rn_sch_j,_rn_sch_mem_mot,_rn_sch_nb,_rn_sch_nb_prec,_rn_sch_nb_ret,_rn_sch_omega_s,_rn_sch_peq,_rn_sch_peqn_idx,_rn_sch_perc_chi,_rn_sch_perc_geom,_rn_sch_perc_tw,_rn_sch_phi,_rn_sch_phi0,_rn_sch_phi_s,_rn_sch_phivel,_rn_sch_pos,_rn_sch_psi,_rn_sch_psi_prec,_rn_sch_psi_spin,_rn_sch_psi_spin_prec,_rn_sch_psi_spinor,_rn_sch_rep,_rn_sch_rho_spin,_rn_sch_spinor_lift,_rn_sch_tw,_rn_sch_twp,_rn_sch_vd,nascita flag=REGOLE_NASCITA,ORDINE_DI_NASCITA,EVENTI_DI_NASCITA,EVENTI_CONVERTITI -->
+<!-- SCHEDA nome=nascita-punto-unico funzioni=_derivazione_perc_geom,_nascita_collaudo_della_tabella,_nascita_collocata,_nascita_non_si_tocca,_nascita_regola,_ordine_di_nascita,_registra_regola,_rn_div_conc_nodi,_rn_div_cs_nodo_prev,_rn_div_d,_rn_div_d0,_rn_div_eta,_rn_div_i,_rn_div_j,_rn_div_mem_mot,_rn_div_nb,_rn_div_nb_prec,_rn_div_nb_ret,_rn_div_omega_s,_rn_div_peq,_rn_div_perc_chi,_rn_div_perc_geom,_rn_div_perc_tw,_rn_div_phi,_rn_div_phi0,_rn_div_phi_s,_rn_div_phivel,_rn_div_pos,_rn_div_psi,_rn_div_psi_prec,_rn_div_psi_spin,_rn_div_psi_spin_prec,_rn_div_psi_spinor,_rn_div_rep,_rn_div_rho_spin,_rn_div_spinor_lift,_rn_div_tw,_rn_div_twp,_rn_div_vd,_rn_sch_conc_nodi,_rn_sch_cs_nodo_prev,_rn_sch_d,_rn_sch_d0,_rn_sch_eta,_rn_sch_i,_rn_sch_j,_rn_sch_mem_mot,_rn_sch_nb,_rn_sch_nb_prec,_rn_sch_nb_ret,_rn_sch_omega_s,_rn_sch_peq,_rn_sch_peqn_idx,_rn_sch_perc_chi,_rn_sch_perc_geom,_rn_sch_perc_tw,_rn_sch_phi,_rn_sch_phi0,_rn_sch_phi_s,_rn_sch_phivel,_rn_sch_pos,_rn_sch_psi,_rn_sch_psi_prec,_rn_sch_psi_spin,_rn_sch_psi_spin_prec,_rn_sch_psi_spinor,_rn_sch_rep,_rn_sch_rho_spin,_rn_sch_spinor_lift,_rn_sch_tw,_rn_sch_twp,_rn_sch_vd,nascita flag=T_NASCITA,REGOLE_NASCITA,ORDINE_DI_NASCITA,EVENTI_DI_NASCITA,EVENTI_CONVERTITI -->
 
 # **`nascita-punto-unico` — IL PUNTO UNICO DI NASCITA, e le sue 72 regole**
+
+## ⭐ **E DAL `COMMIT 6a` LA FRAZIONE DELLA NASCITA E' UN VALORE DICHIARATO: `T_NASCITA`**
+
+*(decisione di Luca del 2026-10-03.)*
+
+> ### **Il figlio sta a `T_NASCITA * d` dal genitore `a` e a `(1 - T_NASCITA) * d` da `b`, e lo
+> ### STESSO valore vale per DOVE nasce, per QUANTO sono lunghi i suoi archi, e per la sua FASE.**
+
+### **I SEI SITI che lo leggono** *(prima erano sei formule indipendenti che per caso dicevano
+tutte *<<meta'>>*)*:
+
+| dove | che cosa decide | la forma |
+|---|---|---|
+| `mitosi`, preparazione | ### **DOVE** nasce il figlio | `pos_figlio = (1-t)*pos[a] + t*pos[b]` |
+| `mitosi`, preparazione | ### **QUANTO** sono lunghi i due tronconi | `dh_a = t*d[sel]` · `dh_b = (1-t)*d[sel]` |
+| `mitosi`, ramo `MITOSI_DIR` | la ### **FASE** del figlio | `fm = phi[a] - (t + bias)*D` |
+| `mitosi`, ramo senza | la ### **FASE** del figlio | `fm = phi[a] - t*D` |
+| `_rn_sch_pos` | ### **DOVE** nasce l'antinodo | `(1-t)*pos[aa] + t*pos[bb]` |
+| `mitosi`, ramo Schwinger | ### **QUANTO** sono lunghi i due archi nuovi | `max(t*L, 0.05)` · `max((1-t)*L, 0.05)` |
+
+### ⛔ **NON E' UN FLAG, ed e' una scelta:** un flag renderebbe la frazione ### **un'opzione**,
+e ### **dove nasce un figlio non e' un'opzione: e' la legge.** E' il difetto `E4-LAM`, pagato una
+volta.
+
+### ⚠ **E LE EREDITA' DI STATO NON LA LEGGONO** *(decisione di Luca)*: `psi` e `phivel`
+restano ### **medie**, la famiglia dello ### **spinore** resta una ### **copia** *(col segno `-1`
+nello Schwinger)*, `rho_sel` del cancello resta com'e'. ### **Si decidono nella LEGGE di
+`DIVISIONE-AUTOCONSISTENTE`, che viene DOPO la definizione dell'energia perche' deve rispettare
+`A14`.**
+
+### ✅ **LA FORMA E' CONVESSA, E NON E' COSMETICA:** `(1-t)*x + t*y` e' ### **identica al
+bit** a `0.5*(x+y)` a `t = 0.5` *(0 differenze su 2 000 000)*, mentre la lerp `x + t*(y-x)`
+### **NO** *(576 135 su 2 000 000)*. ### **Misurato prima di scrivere**
+*(`csv/_test_fork/_somma_meta/`)*.
+
+### ⚠ **E `SCHW-CORTI` SI DICHIARA, non si risolve:** nella divisione la lunghezza viene da
+### **`d`**, nello Schwinger da ### **`pos`** *(`norm(pos[aa]-pos[bb])`)*. ### **Il `6a` mette `t`
+in entrambe SENZA cambiare la sorgente.** E il pavimento `0.05` dello Schwinger resta com'e': e'
+un `A11`, non del `6a`.
+
+## ⭐ **E `_nasce` IMPARA A SOMMARE PER META', perche' un contatore e' un FLOAT**
+
+`_nasce(v, dove, md, md0, meta=None)`. Con `meta` dato, `_fab` *(la lunghezza fabbricata,
+`sum(LAM - v)` sui troncati)* si calcola ### **per meta' e poi si somma.**
+
+### **PERCHE', e il motivo e' MISURATO:** `dh` passava da `_nasce` con ### **`md = 2` su `n`
+voci**; col `6a` e' un array di ### **`2n`** e passa con ### **`md = 1`** — e ### **una sola
+chiamata**, perche' `_g_sm_nascite` conta le ### **INVOCAZIONI** e spezzarla la farebbe salire di
+`2` invece di `1`.
+### ⛔ **Ma `np.sum` su `2n` NON e' identica al bit a `2 * np.sum` su `n`:** ### **4043
+differenze su 14000** *(misurato)*. ### ✅ **La somma per META' a `t = 0.5` e' `s + s`, e
+`s + s == 2*s` e' ESATTO** — il raddoppio e' uno scalamento per una potenza di due.
+
+### 📌 **E VALE SU DUE PERCORSI, non uno:** `dh` *(`mitosi`, `2,0` → `1,0`)* **e**
+`dd` *(`schwinger`, `2,2` → `1,1`)*. ### **`d0new` RESTA com'e'** *(`0,1`)*: e' gia' l'array
+dei due figli, e la sua somma e' gia' sull'array intero.
+### ✅ **VERIFICATO PRIMA DI SCRIVERE: a `t = 0.5` tutti e QUATTRO i contatori, per tutti e
+TRE i siti, identici al bit** — zero differenze su 2000 prove per sito, con valori che
+### **includono lunghezze sotto `LAM`** *(altrimenti `_ntr` e `_fab` sarebbero zero per
+costruzione, e la verifica sarebbe essa stessa un `FALSO-ZERO`)*.
+
+### ⚠ **E TRE REGOLE DELLA TABELLA SONO CAMBIATE, e non era nel mandato:** `_rn_div_d`,
+`_rn_sch_d` e `_rn_sch_d0` consumavano `dh`/`dd` ### **DUE volte**
+*(`concatenate([d[keep], dh, dh])`)*. Ora che `dh`/`dd` sono ### **gia'** i due blocchi, le
+consumano ### **una volta sola** — con `dh, dh` darebbero ### **`4n` archi.** Le loro
+### **ancore dichiarate** sono aggiornate insieme al corpo.
 
 ## ✅ **E DAL `COMMIT 5` UNA REGOLA NON EREDITA PIU': `perc_geom` SI DERIVA**
 

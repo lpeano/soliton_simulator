@@ -557,6 +557,24 @@ PHI_CRIT = 2 * np.pi    # QUANTO DI OLONOMIA. Un giro, non due: il sistema e'
                         # quindi il quanto naturale e' 2pi; il 4pi veniva dall'intuizione
                         # spinoriale, risultata assente. A 4pi la mitosi non scattava MAI
                         # e il grafo restava al 100% oltre portata; a 2pi ripara.
+# ### LA FRAZIONE DELLA NASCITA, DICHIARATA UNA VOLTA SOLA (`COMMIT 6a`, decisione di
+#   Luca del 2026-10-03). ### Il figlio sta a `T_NASCITA * d` dal genitore `a` e a
+#   `(1 - T_NASCITA) * d` da `b`, ### **e lo STESSO valore vale per DOVE nasce (`pos`), per
+#   QUANTO sono lunghi i suoi archi (`d`, `d0`, `dd`) e per la sua FASE (`fm`).**
+#   ### ⛔ **NON E' UN FLAG, ed e' una scelta:** un flag renderebbe la frazione
+#   ### **un'opzione**, e dove nasce un figlio non e' un'opzione -- e' la legge. E' il
+#   difetto `E4-LAM`, gia' pagato una volta.
+#   ### 📌 **PRIMA ERANO SEI FORMULE INDIPENDENTI che per caso dicevano tutte
+#   *<<meta'>>***, in tre funzioni diverse: `mitosi` (la preparazione e il ramo Schwinger)
+#   e la regola `_rn_sch_pos`. Con `0.5` ### **non cambia un bit**; cambia ### **dove
+#   vive**, e da li' una decisione di fisica potra' cambiarla ### **in un posto solo.**
+#   ### ⚠ **E le EREDITA' DI STATO NON la leggono** (decisione di Luca): `psi` e
+#   `phivel` restano ### **medie**, la famiglia dello spinore resta una ### **copia**, e
+#   `rho_sel` del cancello resta com'e'. Si decidono nella ### **LEGGE** di
+#   `DIVISIONE-AUTOCONSISTENTE`, che viene ### **dopo la definizione dell'energia** perche'
+#   deve rispettare `A14`.
+T_NASCITA = 0.5
+
 TAU_TW   = 20.0
 def _tau_tw_locale(net):
     """TAU_TW LOCALE = 2pi/|omega_i - omega_j| (inverso della dispersione di frequenza tra nodi
@@ -2032,12 +2050,15 @@ def _rn_div_rep(net, c):
 
 
 @_nascita_regola("divisione", "d", "meta' dell'arco (due tronconi)",
-                 "self.d = np.concatenate([self.d[keep], dh, dh])",
+                 "self.d = np.concatenate([self.d[keep], dh])  # `dh` e' GIA' i due "
+                 "blocchi",
                  "`dh = d[sel]/2`, passato per `_nasce('mitosi', 2, 0)` nella preparazione: "
                  "e' il dimezzamento che produce la compressione degenere, perche' la "
                  "geometria di equilibrio si accorcia a ogni suddivisione")
 def _rn_div_d(net, c):
-    net.d = np.concatenate([net.d[c["keep"]], c["dh"], c["dh"]])
+    # ### UNA VOLTA SOLA: `dh` e' GIA' l'array dei due blocchi (`a`-`m` e `m`-`b`). Con
+    #   `dh, dh` darebbe ### **4n archi**.
+    net.d = np.concatenate([net.d[c["keep"]], c["dh"]])
 
 
 @_nascita_regola("divisione", "d0", "meta' dell'arco, con offset plastico",
@@ -2336,12 +2357,15 @@ def _rn_sch_phivel(net, c):
 
 
 @_nascita_regola("schwinger", "pos", "media dei genitori (punto medio)",
-                 "self.pos = np.vstack([self.pos, 0.5 * (self.pos[aa] + self.pos[bb])])",
+                 "self.pos = np.vstack([self.pos, (1-T_NASCITA) * self.pos[aa] + "
+                 "T_NASCITA * self.pos[bb]])",
                  "l'anti-nodo e' collocato sul punto medio COME il nodo, cosi' i due "
                  "nascono SOVRAPPOSTI e la dinamica (antifase -> repulsione) li separa da "
                  "se'. ### NON si impone alcuna forza: solo la fase opposta")
 def _rn_sch_pos(net, c):
-    net.pos = np.vstack([net.pos, 0.5 * (net.pos[c["aa"]] + net.pos[c["bb"]])])
+    # ### LA FORMA CONVESSA, come nella divisione.
+    net.pos = np.vstack([net.pos,
+                         (1.0 - T_NASCITA) * net.pos[c["aa"]] + T_NASCITA * net.pos[c["bb"]]])
 
 
 @_nascita_regola("schwinger", "psi", "media dei genitori (come `phi`)",
@@ -2381,22 +2405,24 @@ def _rn_sch_rep(net, c):
 
 
 @_nascita_regola("schwinger", "d", "meta' della distanza fra i genitori",
-                 "self.d = np.concatenate([self.d, dd, dd])",
+                 "self.d = np.concatenate([self.d, dd])  # `dd` e' GIA' i due blocchi",
                  "`dd = max(0.5 * norm(pos[aa] - pos[bb]), 0.05)`, per `_nasce('schwinger', "
                  "2, 2)`. ### E la lunghezza viene da `pos`, non da `d`: e' la voce `A3` "
                  "della coda. `norm(..., axis=1)` somma TRE componenti in ordine FISSO, "
                  "quindi non dipende dall'ordine")
 def _rn_sch_d(net, c):
-    net.d = np.concatenate([net.d, c["dd"], c["dd"]])
+    # ### UNA VOLTA SOLA: `dd` e' GIA' i due blocchi (`aa`-`k` e `k`-`bb`).
+    net.d = np.concatenate([net.d, c["dd"]])
 
 
 @_nascita_regola("schwinger", "d0", "meta' della distanza fra i genitori",
-                 "self.d0 = np.concatenate([self.d0, dd, dd])",
+                 "self.d0 = np.concatenate([self.d0, dd])  # `dd` e' GIA' i due blocchi",
                  "### LO STESSO `dd` di `d`: e' il QUARTO SITO di `_nasce`, `x2` su "
                  "ENTRAMBE le grandezze -- l'arco della coppia nasce A RIPOSO, cioe' "
                  "`d == d0`, e quindi senza stress")
 def _rn_sch_d0(net, c):
-    net.d0 = np.concatenate([net.d0, c["dd"], c["dd"]])
+    # ### UNA VOLTA SOLA, come `_rn_sch_d`.
+    net.d0 = np.concatenate([net.d0, c["dd"]])
 
 
 @_nascita_regola("schwinger", "peq", "`nan` = da calibrare sul PROPRIO arco",
@@ -6624,7 +6650,7 @@ class Rete:
             return dx
         return self._smorza(self.d0 if mask is None else self.d0[mask], dx, 'd0')
 
-    def _nasce(self, v, dove="?", md=1, md0=1):
+    def _nasce(self, v, dove="?", md=1, md0=1, meta=None):
         """NASCITA (concatenazione): il troncone sotto `LAM` si porta A `LAM`. Da li' in poi
         vale lo smorzamento. Non e' una regola di arresto nuova: e' il punto di partenza."""
         # [C3] anche con `SCALA_MIN_PASSO`: una NASCITA e' una concatenazione, non una discesa,
@@ -6671,7 +6697,23 @@ class Rete:
         _v = np.asarray(v, dtype=float)
         _sotto = _v < LAM
         _ntr = int(_sotto.sum())
-        _fab = float(np.sum(LAM - _v[_sotto])) if _ntr else 0.0
+        if meta is None:
+            _fab = float(np.sum(LAM - _v[_sotto])) if _ntr else 0.0
+        else:
+            # ### `_fab` PER META', e non e' un'eleganza: `np.sum` su `2n` elementi
+            #   ### **NON e' identica al bit** a `2 * np.sum` su `n` -- MISURATO, 4043
+            #   differenze su 14000 *(`csv/_test_fork/_somma_meta/`)*. La somma calcolata
+            #   ### **per meta' e poi sommata** a `t = 0.5` e' `s + s`, e ### **`s + s ==
+            #   2*s` e' ESATTO** perche' il raddoppio e' uno scalamento per una potenza di
+            #   due. ### ➜ **Cosi' il contatore `_sm_lun` resta identico al bit quando
+            #   una chiamata con `md = 2` su `n` voci diventa una con `md = 1` su `2n`.**
+            #   ### ⚠ `meta` e' il numero di voci della PRIMA meta'.
+            _a = _v[:meta]
+            _b = _v[meta:]
+            _sa = _a < LAM
+            _sb = _b < LAM
+            _fab = ((float(np.sum(LAM - _a[_sa])) if _sa.any() else 0.0)
+                    + (float(np.sum(LAM - _b[_sb])) if _sb.any() else 0.0))
         for _q, _m in (("d", md), ("d0", md0)):
             if not _m:
                 continue
@@ -8493,10 +8535,16 @@ class Rete:
             twn = twn / np.maximum(self._deg, 1)
             # bias in [-0.5,0.5]: verso il genitore piu' teso. 0 = punto medio.
             bias = 0.5 * np.tanh(MITOSI_DIR * (twn[a] - twn[b]))
-            fm = (self.phi[a] - (0.5 + bias) * D) % self._dphi()
+            # ### IL `bias` E' UNO SCOSTAMENTO *SOPRA* `T_NASCITA`, e il suo `0.5` di
+            #   AMPIEZZA (la riga qui sopra) ### **NON si tocca**: sono due `0.5` con
+            #   ### **due ruoli diversi** sulla stessa legge, e distinguerli e' il punto.
+            fm = (self.phi[a] - (T_NASCITA + bias) * D) % self._dphi()
         else:
-            fm = (self.phi[a] - 0.5 * D) % self._dphi()
-        pos_figlio = 0.5 * (self.pos[a] + self.pos[b])
+            fm = (self.phi[a] - T_NASCITA * D) % self._dphi()
+        # ### LA FORMA CONVESSA, E NON LA LERP: `(1-t)*x + t*y` e' ### **identica al bit** a
+        #   `0.5*(x+y)` a `t = 0.5` *(0 differenze su 2 000 000)*, mentre `x + t*(y-x)`
+        #   ### **NO** *(576 135 su 2 000 000)*. ### Misurato prima di scrivere.
+        pos_figlio = (1.0 - T_NASCITA) * self.pos[a] + T_NASCITA * self.pos[b]
         # --- LEGGE DI STABILITA' (ANTIFASE DELLE AGGIUNTE, interruttore ANTIFASE_ADD) ---
         # Dove la densita' locale supera l'equilibrio, il NUOVO nodo nasce in ANTIFASE invece
         # che in fase, con probabilita' morbida tanh((rho-rho_eq)/rho_c). Cosi' l'aggiunta NON
@@ -8558,7 +8606,12 @@ class Rete:
         # ### 1-bis. PREPARAZIONE degli archi: `keep`, `dh`, `d0new`.
         # =====================================================================
         keep = np.ones(len(self.i), bool); keep[sel] = False
-        dh = self.d[sel] / 2
+        # ### `dh` SI SDOPPIA, e l'ordine e' quello di `i = [keep, a, m]`: ### **il
+        #   PRIMO blocco e' `a`-`m` e vale `t * d`**, il secondo e' `m`-`b` e vale
+        #   `(1-t) * d`. ### A `t = 0.5` i due blocchi sono IDENTICI, ed e' per questo che
+        #   oggi una sola `dh` bastava per entrambi.
+        dh_a = T_NASCITA * self.d[sel]
+        dh_b = (1.0 - T_NASCITA) * self.d[sel]
         # lunghezza di riposo dei due nuovi archi. Di default meta' dell'arco (dh):
         # e' questo dimezzamento che produce la compressione degenere, perche' la
         # geometria di equilibrio si accorcia a ogni suddivisione.
@@ -8571,16 +8624,22 @@ class Rete:
             stress_arco = np.abs(self.d[sel] - self.d0[sel]) / np.maximum(self.d0[sel], 1e-6)
             sciolta_ecc = np.abs(self.tw[sel]) / PHI_CRIT - 1.0
             fattore_plastico = np.tanh(np.maximum(sciolta_ecc * stress_arco, 0.0))
-            d0h = dh * (1.0 + fattore_plastico)
-            d0new = np.concatenate([d0h, d0h])
+            # ### `d0new` DERIVA DAI DUE MEZZI, con lo STESSO ordine, e resta calcolato
+            #   dai valori ### **PRIMA** della chiamata a `_nasce` su `dh` -- come oggi.
+            d0new = np.concatenate([dh_a * (1.0 + fattore_plastico),
+                                    dh_b * (1.0 + fattore_plastico)])
         elif PLAST_MIT > 0.0:
-            d0h = dh * (1.0 + PLAST_MIT * sciolta)   # sciolta = |tw|/PHI_CRIT >= 1
-            d0new = np.concatenate([d0h, d0h])
+            d0new = np.concatenate([dh_a * (1.0 + PLAST_MIT * sciolta),
+                                    dh_b * (1.0 + PLAST_MIT * sciolta)])
         else:
-            d0new = np.concatenate([dh, dh])
-        # `md=2, md0=0`: `dh` finisce in `concatenate([d[keep], dh, dh])`, quindi ogni voce
-        #   diventa DUE archi di `d`; su `d0` non entra (ci pensa `d0new`, gia' raddoppiato).
-        dh = self._nasce(dh, 'mitosi', 2, 0)   # [SCALA_MIN] i tronconi d/2 della mitosi
+            d0new = np.concatenate([dh_a, dh_b])
+        # ### `md=1, md0=0` E NON `2, 0`: `dh` e' ora GIA' l'array dei due blocchi, quindi
+        #   ogni voce e' ### **un arco vero** e non due. ### ⛔ **E la chiamata resta UNA,
+        #   di proposito:** `_g_sm_nascite` conta le INVOCAZIONI, e spezzarla in due lo
+        #   farebbe salire di 2 invece di 1. ### `meta` dice dove finisce il primo blocco,
+        #   cosi' `_fab` si calcola PER META' e `_sm_lun` resta identico al bit.
+        dh = np.concatenate([dh_a, dh_b])
+        dh = self._nasce(dh, 'mitosi', 1, 0, meta=len(dh_a))   # [SCALA_MIN] i due tronconi
         # `md=0, md0=1`: `d0new` e' GIA' `concatenate([d0h, d0h])`, cioe' i due figli.
         d0new = self._nasce(d0new, 'mitosi', 0, 1)
         # ### CHIAMATA CON EFFETTO 1 di 3, DICHIARATA (`_nascita_collocata`): la chirurgia
@@ -8697,9 +8756,18 @@ class Rete:
                 # `md=2, md0=2`: `concatenate([d, dd, dd])` E `concatenate([d0, dd, dd])`.
                 # ⚠ QUARTO SITO, non nei tre del rilievo: e' `x2` su ENTRAMBE le grandezze.
                 # ⚠ E la lunghezza viene da `pos`, non da `d`: e' la voce `A3` della coda.
-                dd = self._nasce(np.maximum(
-                    0.5 * np.linalg.norm(self.pos[aa] - self.pos[bb], axis=1), 0.05),
-                    'schwinger', 2, 2)
+                # ### `dd` SI SDOPPIA, e l'ordine e' quello di `i = [.., aa, k]`: il
+                #   PRIMO blocco e' `aa`-`k` e vale `max(t*L, 0.05)`, il secondo e' `k`-`bb`
+                #   e vale `max((1-t)*L, 0.05)`. ### ⚠ **Il pavimento `0.05` resta
+                #   com'e': e' un `A11` e NON e' del `6a`.**
+                #   ### ⚠ **E LA LUNGHEZZA VIENE DA `pos`, NON DA `d`** -- nella
+                #   divisione viene da `d`. ### **E' `SCHW-CORTI`, e il `6a` la DICHIARA
+                #   senza cambiarla.**
+                _L_sch = np.linalg.norm(self.pos[aa] - self.pos[bb], axis=1)
+                _dd_a = np.maximum(T_NASCITA * _L_sch, 0.05)
+                _dd_b = np.maximum((1.0 - T_NASCITA) * _L_sch, 0.05)
+                dd = self._nasce(np.concatenate([_dd_a, _dd_b]),
+                                 'schwinger', 1, 1, meta=len(_dd_a))
                 # [PEQ_NASCITA_LOCALE, C2] `nan` = «da calibrare sulla `rho` del PROPRIO
                 # arco», ed e' la STESSA convenzione di `_allaccia`: `:4189` lo fa
                 # all'inizio del passo dopo, e da' `anom = 0` ESATTO alla nascita.

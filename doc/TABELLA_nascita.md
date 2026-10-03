@@ -1,6 +1,6 @@
 # **LE REGOLE DI NASCITA** — *generato da `csv/_tabella_nascita.py`, NON a mano*
 
-> ### **La FONTE e' `REGOLE_NASCITA` in `soliton_simulator.py`** *(blob `6d306976`, sha1 byte grezzi)*. ### **Questo file e' una VISTA: non si modifica a mano.**
+> ### **La FONTE e' `REGOLE_NASCITA` in `soliton_simulator.py`** *(blob `e46c7eb3`, sha1 byte grezzi)*. ### **Questo file e' una VISTA: non si modifica a mano.**
 
 ### 📌 **E IL PRESIDIO NON E' QUESTO DOCUMENTO, E' IL CODICE:** una grandezza del registro che non compare nella tabella dell'evento ### **ferma il run** con *«regola di nascita non dichiarata per `<nome>` all'evento `<evento>`»*. Il collaudo a secco gira ### **all'import**, cosi' una riga che manca ferma il processo ### **prima** che un run cominci.
 
@@ -56,7 +56,7 @@
 | 23 | **`psi_spin`** | ✅ regola | eredita da `a` (come `phi_s`) | `self.psi_spin = np.concatenate([cs[:n0], cs[a]])` |
 | 24 | **`rho_spin`** | ✅ regola | eredita da `a` (come `psi_spin`) | `self.rho_spin = np.concatenate([np.asarray(rs)[:n0], np.asarray(rs)[a]])` |
 | 25 | **`_rep`** | ✅ regola | eredita dall'arco che si spezza | `self._rep = np.concatenate([self._rep[keep], self._rep[sel], self._rep[sel]])` |
-| 26 | **`d`** | ✅ regola | meta' dell'arco (due tronconi) | `self.d = np.concatenate([self.d[keep], dh, dh])` |
+| 26 | **`d`** | ✅ regola | meta' dell'arco (due tronconi) | `self.d = np.concatenate([self.d[keep], dh])  # `dh` e' GIA' i due blocchi` |
 | 27 | **`d0`** | ✅ regola | meta' dell'arco, con offset plastico | `self.d0 = np.concatenate([self.d0[keep], d0new])` |
 | 28 | **`peq`** | ✅ regola | eredita dall'arco che si spezza | `self.peq = np.concatenate([self.peq[keep], self.peq[sel], self.peq[sel]])` |
 | 29 | **`_peqn_idx`** | — non si tocca | non si tocca | `(nessuna)` |
@@ -132,13 +132,13 @@
 | 18 | **`phi0`** | ✅ regola | antifase (come `phi`) | `self.phi0 = np.concatenate([self.phi0, anti])` |
 | 19 | **`phi_s`** | ✅ regola | zero | `self.phi_s = np.concatenate([self.phi_s, np.zeros(nc)])` |
 | 20 | **`phivel`** | ✅ regola | media dei genitori | `self.phivel = np.concatenate([self.phivel, 0.5 * (self.phivel[aa] + self.phivel[bb])])` |
-| 21 | **`pos`** | ✅ regola | media dei genitori (punto medio) | `self.pos = np.vstack([self.pos, 0.5 * (self.pos[aa] + self.pos[bb])])` |
+| 21 | **`pos`** | ✅ regola | media dei genitori (punto medio) | `self.pos = np.vstack([self.pos, (1-T_NASCITA) * self.pos[aa] + T_NASCITA * self.pos[bb]])` |
 | 22 | **`psi`** | ✅ regola | media dei genitori (come `phi`) | `self.psi = np.concatenate([cur[:n0], 0.5 * (cur[a] + cur[b])])` |
 | 23 | **`psi_spin`** | ✅ regola | eredita da `aa` (come `phi_s`... che qui e' zero) | `self.psi_spin = np.concatenate([cs[:n0], cs[a]])` |
 | 24 | **`rho_spin`** | ✅ regola | eredita da `aa` (come `psi_spin`) | `self.rho_spin = np.concatenate([np.asarray(rs)[:n0], np.asarray(rs)[a]])` |
 | 25 | **`_rep`** | ✅ regola | zero (archi NUOVI) | `self._rep = np.concatenate([self._rep, np.zeros(2 * nc)])` |
-| 26 | **`d`** | ✅ regola | meta' della distanza fra i genitori | `self.d = np.concatenate([self.d, dd, dd])` |
-| 27 | **`d0`** | ✅ regola | meta' della distanza fra i genitori | `self.d0 = np.concatenate([self.d0, dd, dd])` |
+| 26 | **`d`** | ✅ regola | meta' della distanza fra i genitori | `self.d = np.concatenate([self.d, dd])  # `dd` e' GIA' i due blocchi` |
+| 27 | **`d0`** | ✅ regola | meta' della distanza fra i genitori | `self.d0 = np.concatenate([self.d0, dd])  # `dd` e' GIA' i due blocchi` |
 | 28 | **`peq`** | ✅ regola | `nan` = da calibrare sul PROPRIO arco | `self.peq = np.concatenate([self.peq, np.full(2 * nc, pmed)])` |
 | 29 | **`_peqn_idx`** | ✅ regola | la marca degli archi nati con `nan` | `self._peqn_idx = np.arange(len(self.peq) - 2 * nc, len(self.peq))` |
 | 30 | **`tw`** | ✅ regola | zero | `self.tw = np.concatenate([self.tw, zz2, zz2])` |
