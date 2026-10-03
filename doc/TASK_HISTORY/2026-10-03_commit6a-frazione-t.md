@@ -441,3 +441,38 @@ cancellano dalla tabella: passano in **`CURATI`**, e lo strumento asserisce che 
    **fa parte del referto**;
 3. tutti i bracci **da capo**: `0`, `A`, `A-tr`, `B`, `C0`, `C1`, `C-bis`, **rovescio**;
 4. ### ⛔ **se un criterio fallisce: FERMARSI E RIPORTARE, non aggiustare il criterio.**
+
+---
+
+## **ANNOTAZIONE del 2026-10-03 — UNA FRASE FALSA SUI `CURATI`, e perche' lo era**
+
+**Rilievo del guardiano, ed e' giusto.** Il censimento stampava — e il messaggio di `84b3e0a`
+ripeteva — che i `CURATI` sono *«le sei righe che il guardiano e io abbiamo classificato
+diversamente»*. ### ⛔ **E' FALSO.**
+
+| | che cos'e' davvero |
+|---|---|
+| **i `CURATI`** | i **sei siti `FRAZIONE`** — le quattro del mandato piu' le due che il censimento ha aggiunto. ### **Su quelli eravamo D'ACCORDO: erano l'OGGETTO della cura** |
+| **il disaccordo** | `rho_sel` *(`:8509`/`:8665` sul blob `6d306976`: il guardiano fra i siti «oltre i quattro», io `ALTRO`)* e le `ALTRO` presenti **solo nella mia lista** |
+
+### 📌 **LA FORMA DELL'ERRORE, ed e' quella che mi ripeto: ho unito due cose diverse perche'
+erano VICINE NEL TESTO.** La frase stava nel ramo che spiega *«il confronto per riga non si
+rifa'»*, e da li' ho concluso che cio' che sopravvive al confronto **sia** il contenuto del
+confronto. ### **Non lo e': `CURATI` salva l'OGGETTO della cura, non il DISACCORDO sulle
+classi.** E cosi' la frase **rivendicava una continuita' che non c'e'** — la forma di
+sovra-rivendicazione che il par.2 chiama *«non rivendicare un successo che non sai attribuire
+a un pezzo preciso»*.
+
+### ⚠ **E LA CORREZIONE DEVE DIRE ANCHE QUESTO, altrimenti si legge come un buco:**
+**`rho_sel` NON resta senza presidio.** E' la **chiave a molteplicita' `2`** del controllo
+nuovo — se sparisse da uno dei due rami, lo strumento **fallirebbe**. ### **Sorvegliata, ma
+da quel controllo, non da `CURATI`.** *(Il disaccordo sulla sua CLASSE, invece, resta aperto
+e vive nel referto del blob `6d306976` e qui: la domanda «se il nato eredita con peso `t`, la
+densita' del cancello lo segue?» la decide Luca.)*
+
+### **E UN SECONDO FATTO DELLO STESSO GIRO: il run e' stato fermato dal limite di tempo che
+avevo messo IO** — `3 000 000 ms` contro i `~110` minuti della corsa precedente, col massimo
+consentito a `7 200 000`. ### **Non un criterio fallito: un mio errore di stima**, e il
+parziale e' committato come **reperto** *(`_corsa_2026-10-03_PARZIALE_fermato_dal_limite`)*
+con il motivo accanto. ### ✅ **`0`, `A` e `A-tr` erano passati, e la coppia del censimento e'
+tornata COERENTE** *(json e `_corsa.txt` entrambi su `c18c9bf6`)*.

@@ -3312,9 +3312,19 @@ risponde `sito 'fm' È TORNATO`** — il nome del sito, che è ciò che il manda
 > numero di riga e si riferisce al blob `6d306976`: su un altro blob **non si rifà**, e lo
 > strumento **dichiara** che non si è rifatto, col perché *(«un numero calcolato su indici
 > che non esistono più non è una misura: è rumore»)*. ### **È un reperto, e un reperto non si
-> riscrive (par.9).** Il suo **contenuto** però non va perduto: le sei righe che io e te
-> classificavamo diversamente sono diventate le sei voci di `CURATI`, verificate **per
-> chiave** sul file di oggi. ### **Il confronto per riga muore, il suo contenuto no.**
+> riscrive (par.9).**
+>
+> ### ⛔ **CORREZIONE del 2026-10-03, su tuo rilievo: qui avevo scritto che i `CURATI`
+> sono *«le sei righe che io e te classificavamo diversamente»*. È FALSO**, e il messaggio di
+> `84b3e0a` lo ripete. I `CURATI` sono i **sei siti `FRAZIONE`**, e su quelli **eravamo
+> d'accordo**: erano l'**oggetto** della cura, non il disaccordo. ### **Il disaccordo era su
+> righe ALTRE:** `rho_sel` *(`:8509`/`:8665` sul vecchio blob — tu fra i siti «oltre i
+> quattro», io `ALTRO`)* e le `ALTRO` presenti **solo nella mia lista**. ### ⚠ **La frase
+> univa due cose diverse — ciò che il confronto DICEVA e ciò che `CURATI` SALVA — e così
+> rivendicava una continuità che non c'è: il disaccordo NON è stato salvato da `CURATI`, vive
+> nel referto del blob `6d306976` e nel task history.** ### ✅ **E `rho_sel` non è per questo
+> senza presidio: è la chiave a molteplicità `2` del controllo nuovo** — sorvegliata, ma da
+> quel controllo, non da `CURATI`.
 
 **Sulla riproducibilità:** hai ragione e lo scrivo nel referto. L'identità *prima / oggi* vale
 su ciascuna macchina; i **conteggi assoluti no**. L'intestazione ora dichiara piattaforma,

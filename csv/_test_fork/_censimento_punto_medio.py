@@ -761,10 +761,32 @@ def principale():
         stampa("  ###   indici che non esistono piu' non e' una misura: e' RUMORE.")
         stampa("  ### Il confronto COME FU FATTO sta nel referto del blob %s."
                % BLOB_LISTA_GUARDIANO[:8])
-        stampa("  ### \u2705 E IL SUO CONTENUTO NON VA PERDUTO: le sei righe che il")
-        stampa("  ###   guardiano e io abbiamo classificato diversamente sono diventate le")
-        stampa("  ###   sei voci di `CURATI`, verificate qui sopra PER CHIAVE sul file di")
-        stampa("  ###   oggi. ### Il confronto per riga muore, il suo CONTENUTO no.")
+        # ### \u26d4 QUI C'ERA UNA FRASE FALSA, e il guardiano l'ha presa: diceva che i
+        #   `CURATI` sono *<<le sei righe che il guardiano e io abbiamo classificato
+        #   diversamente>>*. ### **NO.** I `CURATI` sono i ### **sei siti `FRAZIONE`**, e su
+        #   quelli ### **eravamo D'ACCORDO**: erano le quattro del mandato piu' le due che
+        #   il censimento ha aggiunto. ### **Le righe su cui NON eravamo d'accordo sono
+        #   altre:** `rho_sel` *(`:8509`/`:8665` sul vecchio blob -- lui fra i siti <<oltre
+        #   i quattro>>, io `ALTRO`)* e le `ALTRO` presenti ### **solo nella mia lista**.
+        #   ### \u26a0 **La frase univa due cose diverse -- cio' che il confronto DICEVA e cio'
+        #   che `CURATI` SALVA -- e cosi' rivendicava una continuita' che non c'e'.**
+        stampa("  ### CHE COSA SOPRAVVIVE AL CONFRONTO, E CHE COSA NO -- e sono due cose")
+        stampa("  ###   DIVERSE, che una frase di prima confondeva.")
+        stampa("  ### \u2705 SOPRAVVIVE: i SEI SITI `FRAZIONE`, diventati le sei voci di")
+        stampa("  ###   `CURATI` e verificati qui sopra PER CHIAVE sul file di oggi. ### Su")
+        stampa("  ###   quei sei il guardiano e io eravamo D'ACCORDO: non erano il")
+        stampa("  ###   disaccordo, erano l'OGGETTO della cura.")
+        stampa("  ### \u26d4 NON SOPRAVVIVE: il DISACCORDO sulle classi, che era su righe")
+        stampa("  ###   ALTRE -- `rho_sel` (:8509/:8665 sul blob %s), che il guardiano"
+               % BLOB_LISTA_GUARDIANO[:8])
+        stampa("  ###   metteva fra i siti <<oltre i quattro>> e io ho classificato")
+        stampa("  ###   `ALTRO`, piu' le `ALTRO` presenti SOLO nella mia lista. ### Quel")
+        stampa("  ###   disaccordo vive nel referto del blob %s e nel task history,"
+               % BLOB_LISTA_GUARDIANO[:8])
+        stampa("  ###   NON in `CURATI`.")
+        stampa("  ### \u26a0 E `rho_sel` NON E' SENZA PRESIDIO per questo: e' la chiave a")
+        stampa("  ###   MOLTEPLICITA' 2 del controllo qui sopra. ### Sorvegliata, ma")
+        stampa("  ###   dal controllo delle molteplicita', non da `CURATI`.")
     else:
         # ---------------------------------------------- IL CONFRONTO CON LA LISTA DEL GUARDIANO
         stampa("")
