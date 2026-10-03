@@ -56,6 +56,8 @@ RADICE = os.path.abspath(os.path.join(_QUI, "..", ".."))
 SIM = os.path.join(RADICE, "soliton_simulator.py")
 FUORI = os.path.join(_QUI, "_censimento_punto_medio")
 NL = chr(10)
+CIT = chr(34)
+BSLASH = chr(92)
 
 # ### IL PERIMETRO, dichiarato: `mitosi` (che contiene la preparazione E il ramo
 #   Schwinger), `decidi_divisione` (dove vivono meta' che NON sono frazioni di nascita,
@@ -63,60 +65,140 @@ NL = chr(10)
 PERIMETRO_ESATTO = ("mitosi", "decidi_divisione")
 PERIMETRO_PREFISSI = ("_rn_div_", "_rn_sch_")
 
-DICHIARATI = {
-    # ---- FRAZIONE: dove sta il figlio, e quanto sono lunghi i suoi archi
-    8496: ("FRAZIONE", "DIVISIONE/fm (fase)",
-           "DIVISIONE, la FASE del figlio, ramo MITOSI_DIR: fm = (phi[a] - (0.5+bias)*D). "
-           "*** QUI UNA FRAZIONE DIVERSA DA 0.5 ESISTE GIA': "
-           "bias = 0.5*tanh(MITOSI_DIR*(twn[a]-twn[b])) sta in [-0.5,0.5], e il commento del "
-           "codice dice: <<verso il genitore piu' teso. 0 = punto medio>>"),
-    8498: ("FRAZIONE", "DIVISIONE/fm (fase)",
-           "DIVISIONE, la FASE del figlio, ramo SENZA MITOSI_DIR: fm = (phi[a] - 0.5*D)"),
-    8499: ("FRAZIONE", "DIVISIONE/pos",
-           "DIVISIONE, DOVE nasce il figlio: pos_figlio = 0.5*(pos[a] + pos[b])"),
-    8561: ("FRAZIONE", "DIVISIONE/d,d0",
-           "DIVISIONE, QUANTO sono lunghi i due tronconi: dh = self.d[sel]/2. La lunghezza "
-           "viene da `d` -- e nello Schwinger da `pos`: e' SCHW-CORTI"),
-    2344: ("FRAZIONE", "SCHWINGER/pos",
-           "SCHWINGER, DOVE nasce l'antinodo: 0.5*(pos[aa] + pos[bb]), nella regola "
-           "_rn_sch_pos"),
-    8701: ("FRAZIONE", "SCHWINGER/dd",
-           "SCHWINGER, QUANTO sono lunghi i due archi nuovi: 0.5*norm(pos[aa]-pos[bb]). La "
-           "lunghezza viene da `pos`, NON da `d`: e' SCHW-CORTI"),
+def normalizza(riga):
+    """### IL TESTO DI UNA RIGA, RIDOTTO A CIO' CHE NON CAMBIA QUANDO IL CODICE SI MUOVE.
+
+    ### \u26d4 PERCHE' ESISTE: la tabella `DICHIARATI` era indicizzata ### **PER NUMERO
+    DI RIGA**, e il commit `6a` ha ### **spostato le righe**. Risultato misurato: le 13
+    occorrenze superstiti sono diventate tutte ### **NON DICHIARATE**, lo strumento ha
+    ### **rifiutato di scrivere il json** -- giustamente -- e il sigillo, che non
+    controllava l'esito del sottoprocesso, ha letto ### **il json rimasto sul disco, di un
+    ALTRO BLOB.** ### **Un indice per numero di riga rende uno strumento impossibile da far
+    passare dopo qualunque cura.**
+
+    Collassa gli spazi ### **e toglie il commento in coda**, con uno scanner che tiene
+    conto delle virgolette: senza, un `#` dentro una stringa taglierebbe la riga a meta'.
+    ### **Il commento si toglie per scelta:** cambiare un commento non deve spostare una
+    voce della tabella -- e due righe che differiscono ### **solo** per il commento devono
+    cadere sulla ### **stessa** chiave, che e' il caso di `rho_sel`.
+    """
+    fuori = []
+    virg = None
+    i = 0
+    while i < len(riga):
+        c = riga[i]
+        if virg is None and c == "#":
+            break
+        if virg is None and (c == "'" or c == CIT):
+            virg = c
+        elif virg is not None and c == virg and riga[i - 1:i] != BSLASH:
+            virg = None
+        fuori.append(c)
+        i += 1
+    return " ".join("".join(fuori).split())
+
+
+def chiave(funzione, testo):
+    """### LA CHIAVE DI UNA VOCE: `(funzione, testo normalizzato)`.
+
+    Il `.strip()[:150]` ripete ### **esattamente** cio' che fa `_registra` quando
+    costruisce `testo`: se qui si normalizzasse la riga INTERA e li' la riga TRONCATA, le
+    chiavi non combacerebbero per le righe lunghe -- ### **e il difetto si vedrebbe solo
+    sulla riga lunga**, cioe' quasi mai.
+    """
+    return (funzione, normalizza(testo.strip()[:150]))
+
+
+# ### LE VOCI, scritte come (funzione, RIGA DI SORGENTE, quante, classe, grandezza, che
+#   cosa). ### **La riga si scrive GREZZA e la chiave la calcola `chiave()`**: cosi' non
+#   esiste una seconda normalizzazione fatta a mano che possa divergere da quella vera.
+#   ### \u26d4 **E C\'E' UNA MOLTEPLICITA', perche' la chiave NON E\' UNICA** -- misurato,
+#   non supposto: `rho_sel = 0.5 * (I[a] + I[b])` compare ### **DUE volte dentro `mitosi`**
+#   *(ramo divisione e ramo Schwinger)*, e le due righe differiscono ### **solo per lo
+#   spazio prima del commento**, che la normalizzazione collassa. ### **Lo strumento
+#   verifica che il numero di occorrenze per chiave sia ESATTAMENTE quello dichiarato: una
+#   chiave trovata 1 volta invece di 2 FALLISCE.**
+_VOCI = (
     # ---- EREDITA-MEDIA: il figlio prende la MEDIA di una grandezza di STATO.
     #      Lo STESSO numero, ma NON la stessa domanda: se la frazione cambia, questa media
     #      dovrebbe seguire la GEOMETRIA? Il 6a NON lo decide: lo DICHIARA.
-    1954: ("EREDITA-MEDIA", "phivel",
-           "DIVISIONE: il figlio prende la media di phivel. Ed e' la regola che A14 segnala: "
-           "la nascita CAMBIA la carica totale"),
-    1984: ("EREDITA-MEDIA", "psi", "DIVISIONE: il figlio prende la media di psi"),
-    2335: ("EREDITA-MEDIA", "phivel", "SCHWINGER: l'antinodo prende la media di phivel"),
+    ("_rn_div_phivel",
+     'net.phivel = np.concatenate([net.phivel, 0.5 * (net.phivel[c["a"]] + net.phivel[c["b"]])])',
+     1, "EREDITA-MEDIA", "phivel",
+     "DIVISIONE: il figlio prende la media di phivel. Ed e' la regola che A14 segnala: "
+     "la nascita CAMBIA la carica totale"),
+    ("_rn_div_psi",
+     'net.psi = np.concatenate([cur[:c["n0"]], 0.5 * (cur[c["src_a"]] + cur[c["src_b"]])])',
+     1, "EREDITA-MEDIA", "psi", "DIVISIONE: il figlio prende la media di psi"),
+    ("_rn_sch_phivel",
+     '0.5 * (net.phivel[c["aa"]] + net.phivel[c["bb"]])])',
+     1, "EREDITA-MEDIA", "phivel", "SCHWINGER: l'antinodo prende la media di phivel"),
     # ---- ALTRO
-    8259: ("ALTRO", "soglia",
-           "decidi_divisione: centro = 0.5*(pos_soglia + pos_tetto), il centro di un "
-           "INTERVALLO DI SOGLIA, non una nascita"),
-    8404: ("ALTRO", "densita",
-           "decidi_divisione: 0.5*(I[a]+I[b]) e' la MEDIA DI DENSITA' del criterio"),
-    8495: ("ALTRO", "bias",
-           "mitosi: bias = 0.5*tanh(...). Il 0.5 e' l'AMPIEZZA del bias (lo tiene in "
-           "[-0.5,0.5]), NON la frazione: la frazione e' il 0.5 di :8496. DUE 0.5 CON DUE "
-           "RUOLI DIVERSI SULLA STESSA LEGGE, e distinguerli e' il punto"),
-    8509: ("ALTRO", "densita", "mitosi: rho_sel = 0.5*(I[a]+I[b]), media di densita'"),
-    8519: ("ALTRO", "dominio",
-           "mitosi: _mezzo = self._dphi()/2.0, META' DEL DOMINIO della fase"),
-    8540: ("ALTRO", "calcio",
-           "mitosi: comune = KICK_TW*sciolta*(mod - 0.5). Il 0.5 e' un OFFSET che centra "
-           "`mod` intorno a zero, non una frazione di nascita. *** E L'HA TROVATA SOLO IL "
-           "SETACCIO CHE PARTE DAL NUMERO: nella forma `(mod - 0.5)` il 0.5 sta dentro un "
-           "Sub, quindi il setaccio delle FORME non la vedeva -- una conferma in piu' che "
-           "partire dalle forme era sbagliato"),
-    8541: ("ALTRO", "calcio",
-           "mitosi: 0.5*KICK_TW, l'ampiezza del calcio ripartita fra i due genitori"),
-    8542: ("ALTRO", "calcio", "mitosi: idem, col segno opposto"),
-    8665: ("ALTRO", "densita", "mitosi (ramo Schwinger): rho_sel = 0.5*(I[a]+I[b])"),
-    8694: ("ALTRO", "dominio",
-           "mitosi: anti = fm + _dphi()/2, l'ANTIFASE (meta' del DOMINIO)"),
-}
+    ("decidi_divisione", "centro = 0.5 * (pos_soglia + pos_tetto)", 1, "ALTRO", "soglia",
+     "decidi_divisione: il centro di un INTERVALLO DI SOGLIA, non una nascita"),
+    ("decidi_divisione",
+     "ok = 0.5 * (I[a] + I[b]) >= QMIN_M * float(np.median(self.peq))",
+     1, "ALTRO", "densita",
+     "decidi_divisione: 0.5*(I[a]+I[b]) e' la MEDIA DI DENSITA' del criterio"),
+    ("mitosi", "bias = 0.5 * np.tanh(MITOSI_DIR * (twn[a] - twn[b]))", 1, "ALTRO", "bias",
+     "mitosi: il 0.5 e' l'AMPIEZZA del bias (lo tiene in [-0.5,0.5]), NON la frazione: la "
+     "frazione e' quella del ramo `fm`, che oggi e' FRAZ_NASCITA. DUE 0.5 CON DUE RUOLI "
+     "DIVERSI SULLA STESSA LEGGE, e distinguerli e' il punto"),
+    ("mitosi", "rho_sel = 0.5 * (I[a] + I[b])", 2, "ALTRO", "densita",
+     "mitosi: media di densita' sull'arco, DUE VOLTE -- il ramo della divisione e il ramo "
+     "Schwinger. *** E' LA CHIAVE NON UNICA: le due righe differiscono solo per lo spazio "
+     "prima del commento. La molteplicita' e' DICHIARATA, non aggirata"),
+    ("mitosi", "_mezzo = self._dphi() / 2.0", 1, "ALTRO", "dominio",
+     "mitosi: META' DEL DOMINIO della fase, non un punto medio fra due nodi"),
+    ("mitosi", "comune = KICK_TW * sciolta * (mod - 0.5)", 1, "ALTRO", "calcio",
+     "mitosi: il 0.5 e' un OFFSET che centra `mod` intorno a zero, non una frazione di "
+     "nascita. *** E L'HA TROVATA SOLO IL SETACCIO CHE PARTE DAL NUMERO: nella forma "
+     "`(mod - 0.5)` il 0.5 sta dentro un Sub, quindi il setaccio delle FORME non la "
+     "vedeva -- una conferma in piu' che partire dalle forme era sbagliato"),
+    ("mitosi", "calcio_a = comune + 0.5 * KICK_TW * sciolta * chi_a * mod",
+     1, "ALTRO", "calcio",
+     "mitosi: l'ampiezza del calcio ripartita fra i due genitori"),
+    ("mitosi", "calcio_b = comune - 0.5 * KICK_TW * sciolta * chi_b * mod",
+     1, "ALTRO", "calcio", "mitosi: idem, col segno opposto"),
+    ("mitosi", "anti = (fm[pick] + self._dphi() / 2.0) % self._dphi()",
+     1, "ALTRO", "dominio", "mitosi: l'ANTIFASE (meta' del DOMINIO)"),
+)
+
+DICHIARATI = {}
+for _f, _r, _q, _cl, _gr, _ch in _VOCI:
+    _k = chiave(_f, _r)
+    assert _k not in DICHIARATI, "chiave DOPPIA nella tabella: %s" % (_k,)
+    DICHIARATI[_k] = (_cl, _gr, _q, _ch)
+
+# ### I SEI SITI CHE LA CURA HA TOLTO: un CONTROLLO POSITIVO, non una cancellazione.
+#   ### Le righe sono quelle del blob `6d306976`, PRIMA del commit `6a`, e lo strumento
+#   asserisce che siano trovate ### **ZERO volte**. ### \u2705 **Cosi' il censimento non dice
+#   solo *<<ci sono 13 occorrenze>>*: dice *<<le sei che la cura ha tolto NON SONO
+#   TORNATE>>*** -- e una regressione che rimettesse un `0.5` letterale fallirebbe
+#   ### **col NOME del sito**, non con un conteggio diverso.
+_CURATI_VOCI = (
+    ("mitosi", "fm = (self.phi[a] - (0.5 + bias) * D) % self._dphi()", "fm_bias",
+     "DIVISIONE, la FASE del figlio, ramo MITOSI_DIR"),
+    ("mitosi", "fm = (self.phi[a] - 0.5 * D) % self._dphi()", "fm",
+     "DIVISIONE, la FASE del figlio, ramo NORMALE"),
+    ("mitosi", "pos_figlio = 0.5 * (self.pos[a] + self.pos[b])", "pos_div",
+     "DIVISIONE, DOVE nasce il figlio"),
+    ("mitosi", "dh = self.d[sel] / 2", "dh",
+     "DIVISIONE, QUANTO sono lunghi i due tronconi"),
+    ("_rn_sch_pos",
+     'net.pos = np.vstack([net.pos, 0.5 * (net.pos[c["aa"]] + net.pos[c["bb"]])])',
+     "pos_sch", "SCHWINGER, DOVE nasce l'antinodo"),
+    ("mitosi", "0.5 * np.linalg.norm(self.pos[aa] - self.pos[bb], axis=1), 0.05),",
+     "dd", "SCHWINGER, QUANTO sono lunghi i due archi nuovi"),
+)
+CURATI = {chiave(_f, _r): (_s, _ch) for _f, _r, _s, _ch in _CURATI_VOCI}
+
+# ### IL BLOB A CUI SI RIFERISCE LA LISTA DEL GUARDIANO (sha1 dei byte GREZZI). Il
+#   confronto con quella lista e' indicizzato ### **per numero di riga**, quindi su un
+#   altro blob ### **non si rifa'**: si DICHIARA che non si e' rifatto. ### \u26d4 E' lo
+#   stesso principio che il sigillo ha violato -- ### **non si cita un artefatto di un
+#   altro blob** -- applicato a questo strumento.
+BLOB_LISTA_GUARDIANO = "6d30697619d2cafbf20a6466fbfbca210656111d"
 
 
 # ### LA LISTA DEL GUARDIANO (rilievo del 2026-10-03), per il CONFRONTO.
@@ -345,18 +427,48 @@ def principale():
     stampa("")
     non_dich = []
     for x in sorted(v.trovate, key=lambda y: (y["riga"], y["col"])):
-        d = DICHIARATI.get(x["riga"])
+        d = DICHIARATI.get(chiave(x["dentro"], x["testo"]))
         if d is None:
             x["classe"], x["grandezza"], x["che_cosa"] = "?", "?", "NON DICHIARATA"
             non_dich.append(x)
         else:
-            x["classe"], x["grandezza"], x["che_cosa"] = d
+            x["classe"], x["grandezza"], _q_att, x["che_cosa"] = d
         stampa("  :%-6d col %-4d %-20s %-14s %-14s %s"
                % (x["riga"], x["col"], x["dentro"][:20], x["forma"],
                   x["classe"], x["grandezza"]))
         stampa("          %s" % x["testo"])
         stampa("          -> %s" % x["che_cosa"][:150])
         stampa("")
+
+    _conta = {}
+    for x in v.trovate:
+        _k = chiave(x["dentro"], x["testo"])
+        _conta[_k] = _conta.get(_k, 0) + 1
+    # ### IL CONTROLLO POSITIVO: i sei siti che la cura ha TOLTO non devono tornare.
+    stampa("-" * 100)
+    stampa("IL CONTROLLO POSITIVO -- i SEI siti curati dal 6a sono TORNATI?")
+    _tornati = []
+    for _k, (_s, _ch) in sorted(CURATI.items(), key=lambda y: y[1][0]):
+        _n = _conta.get(_k, 0)
+        if _n:
+            _tornati.append((_s, _k, _n))
+        stampa("  %-9s %-18s %-50s trovate %d  %s"
+               % (_s, _k[0][:18], _k[1][:50], _n,
+                  "OK: NON e' tornato" if not _n else "*** E\' TORNATO ***"))
+    if _tornati:
+        stampa("### %d SITI CURATI SONO TORNATI AL LETTERALE: LO STRUMENTO FALLISCE."
+               % len(_tornati))
+        for _s, _k, _n in _tornati:
+            stampa("###   sito `%s` in `%s`, %d volte" % (_s, _k[0], _n))
+        io.open(os.path.join(FUORI, "_corsa.txt"), "w", encoding="utf-8",
+                newline=NL).write(NL.join(out) + NL)
+        raise RuntimeError("siti curati tornati al letterale: %s"
+                           % [s for s, _, _ in _tornati])
+    stampa("  ### nessuno dei %d siti curati e' tornato: la cura del 6a TIENE." % len(CURATI))
+    stampa("  ### \u26a0 E QUESTO E' UN CONTROLLO, NON UNA TAUTOLOGIA: le sei righe sono")
+    stampa("  ###   quelle del blob %s, cercate per (funzione, testo) sul file di OGGI."
+           % BLOB_LISTA_GUARDIANO[:8])
+    stampa("")
 
     if non_dich:
         stampa("=" * 100)
@@ -370,6 +482,29 @@ def principale():
         raise RuntimeError(
             "%d occorrenze NON dichiarate: %s. Si classifica o si dichiara."
             % (len(non_dich), sorted(set(x["riga"] for x in non_dich))))
+
+    # ### IL CONTROLLO DELLA MOLTEPLICITA': una chiave dichiarata 2 volte e trovata 1
+    #   e' un FATTO, non un dettaglio. ### Senza questo, la tabella direbbe <<tutto
+    #   dichiarato>> anche se `rho_sel` fosse sparito da uno dei due rami.
+    stampa("=" * 100)
+    stampa("IL CONTROLLO DELLA MOLTEPLICITA' -- quante volte ogni chiave dichiarata")
+    _mol = []
+    for _k, (_cl, _gr, _q, _ch) in sorted(DICHIARATI.items()):
+        _n = _conta.get(_k, 0)
+        if _n != _q:
+            _mol.append((_k, _q, _n))
+        stampa("  %-18s %-62s attese %d  trovate %d  %s"
+               % (_k[0][:18], _k[1][:62], _q, _n, "OK" if _n == _q else "*** DIVERSO ***"))
+    if _mol:
+        stampa("### %d CHIAVI CON MOLTEPLICITA' SBAGLIATA: LO STRUMENTO FALLISCE." % len(_mol))
+        for _k, _q, _n in _mol:
+            stampa("###   %s | %s : attese %d, trovate %d" % (_k[0], _k[1][:70], _q, _n))
+        io.open(os.path.join(FUORI, "_corsa.txt"), "w", encoding="utf-8",
+                newline=NL).write(NL.join(out) + NL)
+        raise RuntimeError("molteplicita' sbagliata su %d chiavi: %s"
+                           % (len(_mol), [k[0] for k, _, _ in _mol]))
+    stampa("  ### tutte le %d chiavi dichiarate hanno la molteplicita' attesa." % len(DICHIARATI))
+    stampa("")
 
     fraz = [x for x in v.trovate if x["classe"] == "FRAZIONE"]
     ered = [x for x in v.trovate if x["classe"] == "EREDITA-MEDIA"]
@@ -587,9 +722,13 @@ def principale():
                % (k, GUARDIANO_COPIA_GENITORE[k]))
     stampa("")
     stampa("  ### IL FATTO DA FAR EMERGERE, e il guardiano lo nomina:")
-    _psi = [x for x in v.trovate if x["riga"] == 1984]
-    stampa("    `psi` nasce come MEDIA dei due genitori (:1984, classe EREDITA-MEDIA%s),"
-           % ("" if _psi else " -- NON TROVATA, da verificare"))
+    # ### SI CERCA PER CHIAVE, non alla riga 1984: quella riga oggi e' un'altra.
+    _kpsi = [k for k, w in DICHIARATI.items() if w[1] == "psi"]
+    _psi = [x for x in v.trovate if chiave(x["dentro"], x["testo"]) in _kpsi]
+    stampa("    `psi` nasce come MEDIA dei due genitori (classe EREDITA-MEDIA, trovata")
+    stampa("      %d volte in `%s`%s),"
+           % (len(_psi), (_psi[0]["dentro"] if _psi else "?"),
+              "" if _psi else " -- NON TROVATA, da verificare"))
     _comp = [x for x in copie if x["grandezza"] == "psi_spin"]
     stampa("    il suo COMPAGNO `psi_spin` nasce come COPIA di `a` (%d regole: %s)."
            % (len(_comp), ", ".join(x["regola"] for x in _comp)))
@@ -598,81 +737,113 @@ def principale():
     stampa("    ###   deve chiudere, e senza questo pezzo non si vedrebbe affatto.")
     stampa("")
 
-    # ---------------------------------------------- IL CONFRONTO CON LA LISTA DEL GUARDIANO
+    # ### \u26d4 IL CONFRONTO E' INDICIZZATO PER NUMERO DI RIGA, e la lista del guardiano
+    #   si riferisce al blob `6d306976`. ### **Su un altro blob NON SI RIFA': si DICHIARA
+    #   che non si e' rifatto.** ### E' lo stesso principio che il sigillo ha violato
+    #   leggendo un json di un altro blob -- ### **non si cita un artefatto di un altro
+    #   blob** -- applicato a QUESTO strumento.
+    #   ### \u26a0 **E NON SI <<AGGIUSTA>> LA LISTA DEL GUARDIANO spostandone le righe:**
+    #   e' un REPERTO, e un reperto non si riscrive (par.9).
+    solo_mie, solo_sue = [], []
+    _blob_oggi = blob(SIM)
+    confronto_rifatto = (_blob_oggi == BLOB_LISTA_GUARDIANO)
     stampa("")
     stampa("-" * 100)
     stampa("IL CONFRONTO CON LA LISTA DEL GUARDIANO (rilievo del 2026-10-03)")
-    mie = {x["riga"] for x in v.trovate}
-    sue = (set(GUARDIANO_I_QUATTRO) | set(GUARDIANO_OLTRE_I_QUATTRO)
-           | set(GUARDIANO_FALSI_POSITIVI))
-    stampa("  righe nella MIA lista ......... %d" % len(mie))
-    stampa("  righe nella SUA lista ......... %d" % len(sue))
-    solo_mie = sorted(mie - sue)
-    solo_sue = sorted(sue - mie)
-    stampa("")
-    stampa("  SOLO NELLA MIA: %d" % len(solo_mie))
-    for r in solo_mie:
-        x = [y for y in v.trovate if y["riga"] == r][0]
-        stampa("      :%-6d %-20s %-14s %s" % (r, x["dentro"][:20], x["classe"],
-                                               x["testo"][:60]))
-    # ### LA FRASE SI CALCOLA, NON SI AFFERMA. La prima stesura stampava il booleano
-    #   e POI diceva <<la differenza non tocca ne' la FRAZIONE ne' l'EREDITA-MEDIA>>:
-    #   ### il booleano diceva False e la frase diceva il contrario. E' il difetto
-    #   <<commento contro codice>> dentro il mio stesso strumento.
-    _cl = {}
-    for r in solo_mie:
-        _c = [y for y in v.trovate if y["riga"] == r][0]["classe"]
-        _cl.setdefault(_c, []).append(r)
-    stampa("  ### per CLASSE: %s"
-           % " · ".join("%s %d (%s)" % (k, len(x), ", ".join(":%d" % r for r in x))
-                        for k, x in sorted(_cl.items())))
-    _tocca = [k for k in _cl if k != "ALTRO"]
-    if not _tocca:
-        stampa("  ###   la mia lista e' un SOVRAINSIEME e la differenza e' TUTTA `ALTRO`:")
-        stampa("  ###   non tocca ne' la FRAZIONE ne' l'EREDITA-MEDIA.")
+    if not confronto_rifatto:
+        stampa("  ### NON SI RIFA', ED E' UN LIMITE DICHIARATO.")
+        stampa("  ###   la lista del guardiano si riferisce al blob .. %s"
+               % BLOB_LISTA_GUARDIANO[:8])
+        stampa("  ###   il file in esame e' ........................... %s" % _blob_oggi[:8])
+        stampa("  ###   Quella lista e' indicizzata per NUMERO DI RIGA, e il commit `6a` ha")
+        stampa("  ###   spostato le righe: rifare il confronto darebbe un referto in cui")
+        stampa("  ###   OGNI riga risulta <<solo nella mia lista>>. Un numero calcolato su")
+        stampa("  ###   indici che non esistono piu' non e' una misura: e' RUMORE.")
+        stampa("  ### Il confronto COME FU FATTO sta nel referto del blob %s."
+               % BLOB_LISTA_GUARDIANO[:8])
+        stampa("  ### \u2705 E IL SUO CONTENUTO NON VA PERDUTO: le sei righe che il")
+        stampa("  ###   guardiano e io abbiamo classificato diversamente sono diventate le")
+        stampa("  ###   sei voci di `CURATI`, verificate qui sopra PER CHIAVE sul file di")
+        stampa("  ###   oggi. ### Il confronto per riga muore, il suo CONTENUTO no.")
     else:
-        # ### IL RAMO E' GENERICO: elenca le righe non-`ALTRO` con classe e TESTO, e
-        #   ### NESSUNA spiegazione scritta a mano su righe specifiche.
-        #   ### ⛔ La stesura precedente aveva qui una frase FISSA su `:8496` -- cioe'
-        #   lo STESSO difetto <<commento contro codice>> spostato di un livello: se la
-        #   differenza toccasse un'altra riga, quella frase la stamperebbe comunque.
-        #   ### La storia di `:8489`/`:8496` sta nel commento di `GUARDIANO_OLTRE_I_QUATTRO`
-        #   e nel task history, ### NON in un print che finge di essere calcolato.
-        stampa("  ###   *** LA DIFFERENZA TOCCA %s, non solo `ALTRO`. ***"
-               % ", ".join(sorted(_tocca)))
-        for k in sorted(_tocca):
-            for r in _cl[k]:
-                x = [y for y in v.trovate if y["riga"] == r][0]
-                stampa("  ###     :%-6d %-14s %-20s %s"
-                       % (r, k, x["dentro"][:20], x["testo"][:70]))
-        stampa("  ###   Ogni riga qui sopra e' un sito di classe non-`ALTRO` che NON sta")
-        stampa("  ###   nella lista del guardiano: va spiegata UNA PER UNA, e la")
-        stampa("  ###   spiegazione NON sta in questo print.")
-    stampa("")
-    stampa("  SOLO NELLA SUA: %d" % len(solo_sue))
-    for r in solo_sue:
-        stampa("      :%d" % r)
-    stampa("")
-    stampa("  E DOVE LE CLASSI NON COINCIDONO:")
-    stampa("    :8509 e :8665 (rho_sel) -- il guardiano le mette fra i siti <<oltre i")
-    stampa("      quattro>>, io le ho classificate ALTRO, perche' NON decidono dove nasce")
-    stampa("      il figlio: sono la MEDIA DI DENSITA' del cancello dell'antifase.")
-    stampa("      *** NON E' UNA DIFFERENZA DI MISURA, E' UNA DIFFERENZA DI CLASSE: la")
-    stampa("      domanda <<se il nato eredita con peso t, la densita' del cancello lo")
-    stampa("      segue?>> il guardiano la pone, e dice che LA DECIDE LUCA. Quindi la")
-    stampa("      lascio ALTRO e la DICHIARO come candidata in sospeso.")
-    stampa("    :8495 e :8496 -- il guardiano cita il ramo MITOSI_DIR come :8489, che e'")
-    stampa("      la riga del CANCELLO (if MITOSI_DIR != 0.0). Le righe del NUMERO,")
-    stampa("      misurate dall'AST, sono :8495 (l'ampiezza del bias) e :8496 (la")
-    stampa("      frazione (0.5 + bias)). Stessa cosa, righe diverse: uso le mie, che")
-    stampa("      sono misurate.")
-    stampa("")
-    stampa("  ### E UN FATTO IN PIU', verificato: `psi` ha UN SOLO sito (:1984) per")
-    stampa("  ###   ENTRAMBI gli eventi, perche' `_rn_sch_psi` CHIAMA `_rn_div_psi`.")
-    stampa("  ###   Il guardiano lo dice, e il codice lo conferma. ### Mentre `pos` e")
-    stampa("  ###   `phivel` hanno DUE siti ciascuna: la condivisione NON e' uniforme.")
-    stampa("")
-    esito = {"confronto_solo_mie": solo_mie, "confronto_solo_sue": solo_sue,
+        # ---------------------------------------------- IL CONFRONTO CON LA LISTA DEL GUARDIANO
+        stampa("")
+        stampa("-" * 100)
+        stampa("IL CONFRONTO CON LA LISTA DEL GUARDIANO (rilievo del 2026-10-03)")
+        mie = {x["riga"] for x in v.trovate}
+        sue = (set(GUARDIANO_I_QUATTRO) | set(GUARDIANO_OLTRE_I_QUATTRO)
+               | set(GUARDIANO_FALSI_POSITIVI))
+        stampa("  righe nella MIA lista ......... %d" % len(mie))
+        stampa("  righe nella SUA lista ......... %d" % len(sue))
+        solo_mie = sorted(mie - sue)
+        solo_sue = sorted(sue - mie)
+        stampa("")
+        stampa("  SOLO NELLA MIA: %d" % len(solo_mie))
+        for r in solo_mie:
+            x = [y for y in v.trovate if y["riga"] == r][0]
+            stampa("      :%-6d %-20s %-14s %s" % (r, x["dentro"][:20], x["classe"],
+                                                   x["testo"][:60]))
+        # ### LA FRASE SI CALCOLA, NON SI AFFERMA. La prima stesura stampava il booleano
+        #   e POI diceva <<la differenza non tocca ne' la FRAZIONE ne' l'EREDITA-MEDIA>>:
+        #   ### il booleano diceva False e la frase diceva il contrario. E' il difetto
+        #   <<commento contro codice>> dentro il mio stesso strumento.
+        _cl = {}
+        for r in solo_mie:
+            _c = [y for y in v.trovate if y["riga"] == r][0]["classe"]
+            _cl.setdefault(_c, []).append(r)
+        stampa("  ### per CLASSE: %s"
+               % " · ".join("%s %d (%s)" % (k, len(x), ", ".join(":%d" % r for r in x))
+                            for k, x in sorted(_cl.items())))
+        _tocca = [k for k in _cl if k != "ALTRO"]
+        if not _tocca:
+            stampa("  ###   la mia lista e' un SOVRAINSIEME e la differenza e' TUTTA `ALTRO`:")
+            stampa("  ###   non tocca ne' la FRAZIONE ne' l'EREDITA-MEDIA.")
+        else:
+            # ### IL RAMO E' GENERICO: elenca le righe non-`ALTRO` con classe e TESTO, e
+            #   ### NESSUNA spiegazione scritta a mano su righe specifiche.
+            #   ### ⛔ La stesura precedente aveva qui una frase FISSA su `:8496` -- cioe'
+            #   lo STESSO difetto <<commento contro codice>> spostato di un livello: se la
+            #   differenza toccasse un'altra riga, quella frase la stamperebbe comunque.
+            #   ### La storia di `:8489`/`:8496` sta nel commento di `GUARDIANO_OLTRE_I_QUATTRO`
+            #   e nel task history, ### NON in un print che finge di essere calcolato.
+            stampa("  ###   *** LA DIFFERENZA TOCCA %s, non solo `ALTRO`. ***"
+                   % ", ".join(sorted(_tocca)))
+            for k in sorted(_tocca):
+                for r in _cl[k]:
+                    x = [y for y in v.trovate if y["riga"] == r][0]
+                    stampa("  ###     :%-6d %-14s %-20s %s"
+                           % (r, k, x["dentro"][:20], x["testo"][:70]))
+            stampa("  ###   Ogni riga qui sopra e' un sito di classe non-`ALTRO` che NON sta")
+            stampa("  ###   nella lista del guardiano: va spiegata UNA PER UNA, e la")
+            stampa("  ###   spiegazione NON sta in questo print.")
+        stampa("")
+        stampa("  SOLO NELLA SUA: %d" % len(solo_sue))
+        for r in solo_sue:
+            stampa("      :%d" % r)
+        stampa("")
+        stampa("  E DOVE LE CLASSI NON COINCIDONO:")
+        stampa("    :8509 e :8665 (rho_sel) -- il guardiano le mette fra i siti <<oltre i")
+        stampa("      quattro>>, io le ho classificate ALTRO, perche' NON decidono dove nasce")
+        stampa("      il figlio: sono la MEDIA DI DENSITA' del cancello dell'antifase.")
+        stampa("      *** NON E' UNA DIFFERENZA DI MISURA, E' UNA DIFFERENZA DI CLASSE: la")
+        stampa("      domanda <<se il nato eredita con peso t, la densita' del cancello lo")
+        stampa("      segue?>> il guardiano la pone, e dice che LA DECIDE LUCA. Quindi la")
+        stampa("      lascio ALTRO e la DICHIARO come candidata in sospeso.")
+        stampa("    :8495 e :8496 -- il guardiano cita il ramo MITOSI_DIR come :8489, che e'")
+        stampa("      la riga del CANCELLO (if MITOSI_DIR != 0.0). Le righe del NUMERO,")
+        stampa("      misurate dall'AST, sono :8495 (l'ampiezza del bias) e :8496 (la")
+        stampa("      frazione (0.5 + bias)). Stessa cosa, righe diverse: uso le mie, che")
+        stampa("      sono misurate.")
+        stampa("")
+        stampa("  ### E UN FATTO IN PIU', verificato: `psi` ha UN SOLO sito (:1984) per")
+        stampa("  ###   ENTRAMBI gli eventi, perche' `_rn_sch_psi` CHIAMA `_rn_div_psi`.")
+        stampa("  ###   Il guardiano lo dice, e il codice lo conferma. ### Mentre `pos` e")
+        stampa("  ###   `phivel` hanno DUE siti ciascuna: la condivisione NON e' uniforme.")
+        stampa("")
+
+    esito = {"confronto_rifatto": bool(confronto_rifatto),
+             "blob_lista_guardiano": BLOB_LISTA_GUARDIANO,
+             "confronto_solo_mie": solo_mie, "confronto_solo_sue": solo_sue,
              "copia_genitore": copie, "copia_genitore_forma_ignota": ignote,
              "copia_genitore_esclusi": esclusi,
              "copia_genitore_totale": len(copie) + len(ignote) + len(esclusi),

@@ -46,12 +46,24 @@ LETTERALE = None
 #   SI COSTRUISCE**, e questa opzione lo costruisce. ### ⚠ **Non tocca il sorgente: la
 #   usano soltanto le copie di `C` e della `C-bis fm_bias`.**
 MITOSI_DIR = None
+# ### `--fm-rovescio` SCRIVE `(1 - FRAZ_NASCITA)` AL POSTO DI `FRAZ_NASCITA` nel ramo
+#   NORMALE di `fm`, ed e' ### **il caso che DEVE essere bocciato dal braccio `C0`.**
+#   ### \u26d4 PERCHE' SERVE, ed e' un BUCO che il rinforzo del guardiano ha aperto: la
+#   copia del braccio `C` gira ### **solo con `--mitosi-dir=1.0`**, quindi il ramo normale
+#   `fm = phi[a] - FRAZ_NASCITA*D` ### **non gira in NESSUNA copia con la formula giusta.**
+#   Un errore come `(1-t)*D` in quel ramo passerebbe ### **`B`** *(legge `FRAZ_NASCITA`)*,
+#   ### **`C`** *(ramo non eseguito)* e ### **`C-bis`** *(prova solo il letterale)*.
+#   ### \u2705 Il guardiano lo dichiara come ### **proprio errore**, e questa opzione
+#   costruisce il caso che lo scopre.
+FM_ROVESCIO = False
 SITI = ("pos_div", "dh", "fm", "fm_bias", "pos_sch", "dd")
 for _a in sys.argv[1:]:
     if _a.startswith("--file="):
         P = _a.split("=", 1)[1]
     elif _a.startswith("--t="):
         T = float(_a.split("=", 1)[1])
+    elif _a == "--fm-rovescio":
+        FM_ROVESCIO = True
     elif _a.startswith("--mitosi-dir="):
         MITOSI_DIR = float(_a.split("=", 1)[1])
     elif _a.startswith("--letterale="):
@@ -315,6 +327,12 @@ sost('''                # `md=2, md0=2`: `concatenate([d, dd, dd])` E `concatena
                 #   `concatenate([d, dd])` E `concatenate([d0, dd])` -- e `meta` fa
                 #   calcolare `_fab` PER META'.''',
      "il commento dei moltiplicatori dello Schwinger")
+
+# ===================== 8. `--fm-rovescio`: il caso che DEVE essere bocciato da `C0`
+if FM_ROVESCIO:
+    sost("""            fm = (self.phi[a] - FRAZ_NASCITA * D) % self._dphi()""",
+         """            fm = (self.phi[a] - (1.0 - FRAZ_NASCITA) * D) % self._dphi()""",
+         "caso ROVESCIO: il ramo normale di `fm` usa `(1 - FRAZ_NASCITA)`")
 
 # ===================== 7. `--mitosi-dir`: ACCENDE il ramo del bias (solo nelle copie)
 if MITOSI_DIR is not None:

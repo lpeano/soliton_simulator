@@ -3272,3 +3272,56 @@ tabella `DICHIARATI` non più indicizzata per riga, gli indici `a`/`b` nel conte
 tre commit a sé**, e si sommano a `C0` e al caso rovescio già in coda.
 
 ---
+
+## **LA RIPARAZIONE DEGLI STRUMENTI, committata prima di rigirare**
+
+Il guardiano ha **rimisurato `B` in modo indipendente** con un censimento AST su `c18c9bf6`:
+**13 occorrenze, 0 siti `FRAZIONE` al letterale, `FRAZ_NASCITA` letta in tutti e sei i
+siti.** Quindi la cura è buona e gli strumenti no. Sei riparazioni, e **il simulatore non è
+stato toccato** — solo i tre strumenti in `csv/`.
+
+| | riparazione |
+|---|---|
+| **①** | `DICHIARATI` per **`(funzione, testo normalizzato)`**, non per numero di riga, **con una molteplicità** |
+| **②** | il `returncode` di **ogni** sottoprocesso, e il **`blob_sim` di ogni artefatto letto** confrontato col file in esame |
+| **③** | gli indici `a`, `b` *(e `aa`, `bb`)* nel contesto di `SpiaValori` |
+| **④** | il braccio **`C0`**, la **copertura per sito**, **`--fm-rovescio`** e il **`_D_max`** dichiarato |
+| **⑤** | la frase falsa del braccio `A`, e gli attributi contati **anche all'ultimo passo** |
+| **⑥** | l'intestazione dichiara **piattaforma, Python e numpy** |
+
+### ⛔ **LA CHIAVE CHE IL MANDATO PROPONE NON È UNICA, e l'ho misurato prima di usarla.**
+`rho_sel = 0.5 * (I[a] + I[b])` compare **due volte dentro `mitosi`** — ramo divisione e ramo
+Schwinger — e le due righe differiscono **solo per lo spazio prima del commento**, che la
+normalizzazione collassa. ### **Cura: la tabella dichiara una MOLTEPLICITÀ, e lo strumento
+verifica che le occorrenze per chiave siano esattamente quelle attese.** Una chiave trovata
+1 volta invece di 2 **fallisce** — ed è il comportamento voluto: se `rho_sel` sparisse da uno
+dei due rami sarebbe un fatto, non un dettaglio.
+
+### ✅ **IL CENSIMENTO RIPARATO GIRA, e dà esattamente la tua rimisura:** **13** occorrenze,
+**0** `FRAZIONE`, **3** `EREDITA-MEDIA`, **10** `ALTRO`, e tutte e **12** le chiavi con la
+molteplicità attesa. *(12 chiavi per 13 occorrenze: la differenza è `rho_sel`.)*
+
+### ⛔ **E IL COLLAUDO HA TROVATO CHE IL CONTROLLO POSITIVO ERA OSCURATO — un `FALSO-ZERO`
+mio, preso prima del commit.** Ho iniettato la regressione `fm = (self.phi[a] - 0.5 * D)` in
+una copia per vedere se il controllo si accende. **Si accende, ma non era lui a parlare:** il
+controllo delle *«non dichiarate»* solleva **prima**, quindi `CURATI` non arrivava mai, e il
+suo *«trovate 0»* era vero **per costruzione**. ### ✅ **Spostato prima, lo stesso caso
+risponde `sito 'fm' È TORNATO`** — il nome del sito, che è ciò che il mandato chiede.
+
+> ### 📌 **E IL CONFRONTO CON LA TUA LISTA NON L'HO <<AGGIUSTATO>>.** È indicizzato per
+> numero di riga e si riferisce al blob `6d306976`: su un altro blob **non si rifà**, e lo
+> strumento **dichiara** che non si è rifatto, col perché *(«un numero calcolato su indici
+> che non esistono più non è una misura: è rumore»)*. ### **È un reperto, e un reperto non si
+> riscrive (par.9).** Il suo **contenuto** però non va perduto: le sei righe che io e te
+> classificavamo diversamente sono diventate le sei voci di `CURATI`, verificate **per
+> chiave** sul file di oggi. ### **Il confronto per riga muore, il suo contenuto no.**
+
+**Sulla riproducibilità:** hai ragione e lo scrivo nel referto. L'identità *prima / oggi* vale
+su ciascuna macchina; i **conteggi assoluti no**. L'intestazione ora dichiara piattaforma,
+Python e numpy, e dice a voce che i conteggi valgono per quella piattaforma.
+
+**Il run parte adesso, con l'output catturato INTERO** *(`tee`, mai `| tail`: l'intestazione
+coi blob fa parte del referto)*, e il referto del censimento si rigenera **come coppia**
+`_corsa.txt` + `_censimento.json` dallo stesso blob.
+
+---

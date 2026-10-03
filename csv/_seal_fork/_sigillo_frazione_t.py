@@ -23,6 +23,7 @@ import io
 import json
 import os
 import pickle
+import platform
 import subprocess
 import sys
 
@@ -58,6 +59,23 @@ ANCORA = "T_NASCITA"
 SCENE = (("corta", 11, 72, True), ("lunga", 11, 150, True),
          ("altro_seme", 12, 72, True), ("senza_2lam", 11, 72, False))
 SITI = ("pos_div", "dh", "fm", "fm_bias", "pos_sch", "dd")
+# ### QUALE CHIAVE DI `C` VERIFICA QUALE SITO, e in quale copia.
+#   ### Serve a rispondere a una domanda che il referto non poteva porre: *<<ogni sito e'
+#   stato verificato SUI VALORI da almeno una copia?>>*
+#   ### IL BUCO CHE L'HA RESA NECESSARIA (errore del guardiano, dichiarato da lui): la
+#   copia di `C` girava ### **SOLO con `--mitosi-dir=1.0`**, quindi il ramo normale
+#   `fm = phi[a] - FRAZ_NASCITA*D` *(`:8554`)* ### **non girava in NESSUNA copia con la
+#   formula giusta.** Un errore come `(1-t)*D` in quel ramo sarebbe passato: ### **`B`** lo
+#   vede leggere `FRAZ_NASCITA` *(e basta)*, ### **`C`** non esegue il ramo, ### **`C-bis`**
+#   prova solo che il LETTERALE viene scoperto -- ### **non che la formula sia giusta.**
+CHIAVI_DEL_SITO = {
+    "pos_div": ("pos_figlio convesso",),
+    "dh": ("dh_a = t*d[sel]", "dh_b = (1-t)*d[sel]"),
+    "fm": ("fm = (phi[a] - t*D) mod",),
+    "fm_bias": ("fm = (phi[a]-(t+bias)*D)",),
+    "pos_sch": ("pos antinodo convesso",),
+    "dd": ("dd_a = max(t*L, 0.05)", "dd_b = max((1-t)*L, 0.05)"),
+}
 TR = ("_sm_trd_mitosi", "_sm_trd0_mitosi", "_sm_trd_schwinger", "_sm_trd0_schwinger")
 T_PROVA = 0.4
 
@@ -261,6 +279,16 @@ class SpiaValori:
                 d = {"n0": int(c["n0"]), "quante": int(c["quante"])}
                 # ### il `d` dei genitori PRIMA che le regole scrivano
                 if evento == "divisione":
+                    # ### GLI INDICI, e senza di loro il braccio `C` CADE: `misura_valori`
+                    #   ricostruisce `fm` come `pm["phi"][cd["a"]]`, cioe' dal `phi`
+                    #   ### **pre-calcio** dello scatto `pm`, e per indicizzarlo servono
+                    #   gli INDICI. ### \u26d4 Il 2026-10-03 il contesto conteneva `phi_a`
+                    #   e `phi_b` ### **ma non `a` e `b`**, e il braccio e' morto con
+                    #   `KeyError: 'a'`. ### **E `phi_a` non serviva comunque: e' letto
+                    #   all'ingresso di `nascita`, cioe' DOPO il calcio** -- che e'
+                    #   esattamente il motivo per cui lo scatto `pm` esiste.
+                    d["a"] = np.array(c["a"], dtype=int, copy=True)
+                    d["b"] = np.array(c["b"], dtype=int, copy=True)
                     d["d_sel"] = np.array(net.d[c["sel"]], dtype=float, copy=True)
                     d["pos_a"] = np.array(net.pos[c["a"]], dtype=float, copy=True)
                     d["pos_b"] = np.array(net.pos[c["b"]], dtype=float, copy=True)
@@ -274,6 +302,11 @@ class SpiaValori:
                     #   nascita: dopo, `mitosi` gira di nuovo e lo sovrascrive.
                     d["pm"] = dict(spia.pre_mitosi)
                 else:
+                    # ### e gli indici dello Schwinger, per simmetria: il braccio li
+                    #   usa per ricostruire `L` dagli stessi indici che il codice ha usato,
+                    #   invece di fidarsi delle posizioni GIA' estratte.
+                    d["aa"] = np.array(c["aa"], dtype=int, copy=True)
+                    d["bb"] = np.array(c["bb"], dtype=int, copy=True)
                     d["pos_aa"] = np.array(net.pos[c["aa"]], dtype=float, copy=True)
                     d["pos_bb"] = np.array(net.pos[c["bb"]], dtype=float, copy=True)
                     d["dd"] = np.array(c["dd"], dtype=float, copy=True)
@@ -307,6 +340,22 @@ def principale():
     stampa("  simulatore di OGGI .. %s" % blob(SIM)[:8])
     stampa("  questo sigillo ...... %s" % blob(os.path.abspath(__file__))[:8])
     stampa("  la patch ............ %s" % blob(PATCH)[:8])
+    # ### LA PIATTAFORMA FA PARTE DEL REFERTO, e non e' burocrazia: il guardiano, su
+    #   Linux con numpy 2.5.3, misura sulla scena `senza_2lam` `_sm_tr* = 16/14/6/6`;
+    #   questa macchina, Windows con numpy 2.3.0, misura `14/12/4/4`.
+    #   ### \u26d4 **L'IDENTITA' *prima / dopo* VALE SU CIASCUNA MACCHINA; I CONTEGGI
+    #   ASSOLUTI NO.** Un referto che non dichiara la piattaforma invita a confrontare
+    #   due numeri che non sono confrontabili -- ed e' lo stesso errore del json di un
+    #   altro blob, spostato dal file alla macchina.
+    stampa("  piattaforma ......... %s %s" % (platform.system(), platform.machine()))
+    stampa("  Python .............. %s" % platform.python_version())
+    stampa("  numpy ............... %s" % np.__version__)
+    stampa("  ### I CONTEGGI DEI RUN (`_sm_tr*`, numero di nascite, passi) VALGONO PER")
+    stampa("  ###   QUESTA PIATTAFORMA. Cio' che NON dipende dalla piattaforma e'")
+    stampa("  ###   l'IDENTITA' fra il *prima* e l'*oggi*, che e' quello che il sigillo")
+    stampa("  ###   misura. ### Su un'altra macchina i conteggi cambiano e l'identita' no.")
+    esito["piattaforma"] = {"sistema": platform.system(), "macchina": platform.machine(),
+                            "python": platform.python_version(), "numpy": np.__version__}
 
     # ------------------------------------------------- il PRIMA, dal PADRE (H-P8)
     p_prima = os.path.join(FUORI, "_sim_prima.py")
@@ -346,6 +395,10 @@ def principale():
             n1 = costruisci(m1, seme, os.path.join(FUORI, "_sc1_%s" % nome), con2)
             n2 = costruisci(m2, seme, os.path.join(FUORI, "_sc2_%s" % nome), con2)
         cls = classi_di(n2)
+        # ### IL NUMERO DI ATTRIBUTI SI CONTA DUE VOLTE: alla costruzione E all'ultimo
+        #   passo. ### **`net` ne ACQUISTA durante il run** -- `_calcpsi_origini` non
+        #   esiste alla costruzione -- quindi un solo conteggio dichiara un insieme che
+        #   al passo N non e' piu' quello. ### Il referto riporta entrambi.
         stampa("    attributi confrontati, per classe: %s"
                % (" | ".join("%s %d" % (k, v)
                                for k, v in sorted(cls.items()) if v)))
@@ -362,11 +415,29 @@ def principale():
             d = confronta(stato(n1), stato(n2))
             if d and primo is None:
                 primo = (p, list(d))
+        cls_fine = classi_di(n2)
+        stampa("    attributi confrontati ALL'ULTIMO PASSO (%d): %s"
+               % (passi, " | ".join("%s %d" % (k, w)
+                                    for k, w in sorted(cls_fine.items()) if w)))
+        if sum(cls_fine.values()) != sum(cls.values()):
+            stampa("    ### \u26a0 SONO %d alla costruzione e %d all'ultimo passo: `net`"
+                   % (sum(cls.values()), sum(cls_fine.values())))
+            stampa("    ###   ACQUISTA attributi durante il run. Dichiararne uno solo")
+            stampa("    ###   descriverebbe un insieme che al passo %d non e' piu' quello."
+                   % passi)
         trs = {c: [int(getattr(n1, c, 0)), int(getattr(n2, c, 0))] for c in TR}
         stampa("    alla costruzione: %d differenze" % len(d0))
         if primo is None and not d0:
             stampa("    ### PASSA: ZERO differenze su %d passi, su TUTTI gli attributi di" % passi)
-            stampa("    ###   `net` (ndarray e scalari di `__dict__`), CONTATORI COMPRESI.")
+            stampa("    ###   `net` -- OGNI voce di `__dict__`, non solo gli ndarray e gli")
+            stampa("    ###   scalari: anche liste, dict, la matrice SPARSA e lo stato del")
+            stampa("    ###   generatore. CONTATORI COMPRESI.")
+            stampa("    ### \u26d4 LA FRASE DI PRIMA DICEVA *<<ndarray e scalari di __dict__>>*")
+            stampa("    ###   ED ERA FALSA da quando `stato()` confronta anche pickle,")
+            stampa("    ###   sparse e `rng`: descriveva l'insieme VECCHIO, piu' piccolo.")
+            stampa("    ###   Un referto che dichiara un insieme piu' piccolo di quello")
+            stampa("    ###   davvero confrontato fa sembrare lo zero piu' DEBOLE di quanto")
+            stampa("    ###   sia -- e la volta prima era il contrario. Entrambe bugie.")
         else:
             q = primo or (0, d0)
             stampa("    ### FALLISCE: prima differenza al passo %d, %d voci:" % (q[0], len(q[1])))
@@ -380,7 +451,9 @@ def principale():
                            "prima_differenza": (primo[0] if primo else None),
                            "differenze": ([[k, w] for k, w in primo[1]] if primo
                                           else [[k, w] for k, w in d0]),
-                           "sm_tr": trs}
+                           "sm_tr": trs,
+                           "attributi_costruzione": cls,
+                           "attributi_ultimo_passo": cls_fine}
     esito["scene"] = per_scena
 
     stampa("")
@@ -407,10 +480,33 @@ def principale():
     stampa("")
     stampa("-" * 100)
     stampa("BRACCIO `B` -- IL CENSIMENTO RIGIRATO: 0 letterali, 13 occorrenze, sei siti con `t`")
+    # ### \u26d4 DUE CONTROLLI CHE NON C'ERANO, E L'ASSENZA DEL SECONDO HA PRODOTTO UN
+    #   FALSO-UNO. ### Il 2026-10-03 questo braccio ha dichiarato ### **FALLISCE** con sei
+    #   siti <<al letterale>> che nel file in esame ### **non esistevano**: il censimento
+    #   aveva ### **rifiutato** di scrivere il json *(giustamente)*, `q.returncode` ### **non
+    #   era letto**, e il json rimasto sul disco era quello di ### **un altro blob**.
+    #   ### **Un braccio che legge un artefatto senza verificare su quale blob e' stato
+    #   prodotto non sta sigillando: sta CITANDO.** ### E il dato per smascherarlo era
+    #   DENTRO il json (`blob_sim`).
     q = subprocess.run([sys.executable, CENS], capture_output=True, text=True, cwd=RADICE)
     jj = os.path.join(RADICE, "csv", "_test_fork", "_censimento_punto_medio",
                       "_censimento.json")
+    b_rc = (q.returncode == 0)
+    if not b_rc:
+        stampa("  ### *** IL CENSIMENTO E' FALLITO: returncode %d ***" % q.returncode)
+        for _r in ((q.stdout or "").rstrip() + NL + (q.stderr or "").rstrip()).split(NL)[-12:]:
+            if _r.strip():
+                stampa("  ###   %s" % _r[:140])
+        stampa("  ### Il json sul disco NON e' di questa corsa: non si legge.")
     cj = json.load(io.open(jj, encoding="utf-8"))
+    b_blob = (cj.get("blob_sim") == blob(SIM))
+    stampa("  l'artefatto letto e' dello STESSO blob? .. %s" % ("SI" if b_blob else "NO"))
+    stampa("    blob_sim dichiarato dal json .. %s" % str(cj.get("blob_sim"))[:8])
+    stampa("    blob del file in esame ........ %s" % blob(SIM)[:8])
+    if not b_blob:
+        stampa("  ### *** ARTEFATTO DI UN ALTRO BLOB: il braccio FALLISCE. ***")
+        stampa("  ###   Qualunque numero preso da questo json parlerebbe di un altro")
+        stampa("  ###   file. Non si cita un artefatto rimasto sul disco.")
     occ = len(cj["trovate"])
     fraz = [x for x in cj["trovate"] if x.get("classe") == "FRAZIONE"]
     stampa("  occorrenze del numero nel perimetro .. %d  (attese 13, erano 19)" % occ)
@@ -418,24 +514,102 @@ def principale():
     for x in fraz:
         stampa("    ### RESTA UN LETTERALE: :%s  %s  %s"
                % (x["riga"], x["dentro"], x["testo"][:70]))
-    b_ok = (occ == 13 and not fraz)
+    b_ok = (occ == 13 and not fraz and b_rc and b_blob)
     stampa("  ### %s" % ("PASSA" if b_ok else "FALLISCE"))
     esito["braccio_B"] = {"occorrenze": occ, "frazione_letterali": len(fraz),
                           "passa": bool(b_ok),
+                          "censimento_returncode": int(q.returncode),
+                          "artefatto_stesso_blob": bool(b_blob),
+                          "blob_sim_artefatto": cj.get("blob_sim"),
                           "righe_letterali": [x["riga"] for x in fraz]}
 
     # ======================================================== BRACCIO C
     stampa("")
     stampa("-" * 100)
     stampa("BRACCIO `C` -- t = %g, VERIFICATO SUI VALORI al primo evento di ciascun tipo" % T_PROVA)
-    # ### LA COPIA DI `C` ACCENDE `MITOSI_DIR`, cosi' il ramo del `bias` GIRA e `C` lo
-    #   raggiunge. ### La lezione del commit 5: il caso che serve SI COSTRUISCE.
-    #   ### Verificato PRIMA di scriverlo: con `MITOSI_DIR = 1.0` il ramo gira al PRIMO
-    #   evento di divisione e `|bias|` vale 0.1135, NON zero.
+    # ### DUE COPIE, E SERVONO ENTRAMBE.
+    #   ### **`C0`** con `MITOSI_DIR = 0` *(il valore del sorgente)*: verifica il ramo
+    #     NORMALE di `fm`, che nessun'altra copia con la formula giusta esegue.
+    #   ### **`C1`** con `--mitosi-dir=1.0`: verifica il ramo del `bias`, che con il
+    #     valore del sorgente ### **non girerebbe mai.**
+    #   ### \u26d4 Con la sola `C1` il ramo normale restava SCOPERTO -- errore del
+    #     guardiano, dichiarato da lui.
+    stampa("  --- COPIA `C0`: t = %g, MITOSI_DIR = 0 (il valore del sorgente)" % T_PROVA)
+    p_c0 = copia_patchata(p_prima, os.path.join(FUORI, "_sim_t04_md0.py"),
+                          ["--t=%g" % T_PROVA])
+    c0 = misura_valori(p_c0, "c0", stampa, T_PROVA)
+    stampa("")
+    stampa("  --- COPIA `C1`: t = %g, MITOSI_DIR = 1.0 (il ramo del bias ACCESO)" % T_PROVA)
+    stampa("      ### Verificato PRIMA di scriverlo: il ramo gira al PRIMO evento di")
+    stampa("      ###   divisione e |bias| vale 0.1135, NON zero.")
     p_c = copia_patchata(p_prima, os.path.join(FUORI, "_sim_t04.py"),
                          ["--t=%g" % T_PROVA, "--mitosi-dir=1.0"])
-    c_esito = misura_valori(p_c, "c", stampa, T_PROVA)
+    c1 = misura_valori(p_c, "c1", stampa, T_PROVA)
+    # ### LA COPERTURA PER SITO: ogni sito deve essere verificato SUI VALORI da almeno
+    #   una delle due copie, e il referto dice DA QUALE.
+    stampa("")
+    stampa("  LA COPERTURA PER SITO: chi ha verificato che cosa, sui VALORI")
+    stampa("    %-9s %-28s %-9s %-9s %s" % ("sito", "chiave", "C0", "C1", "esito"))
+    cop = {}
+    for _s in SITI:
+        _ch = CHIAVI_DEL_SITO[_s]
+        _in0 = [k for k in _ch if isinstance(c0.get(k), dict)]
+        _in1 = [k for k in _ch if isinstance(c1.get(k), dict)]
+        _ok0 = all(c0[k]["ok"] for k in _in0) if _in0 else None
+        _ok1 = all(c1[k]["ok"] for k in _in1) if _in1 else None
+        cop[_s] = {"chiavi": list(_ch), "in_C0": _in0, "in_C1": _in1,
+                   "ok_C0": _ok0, "ok_C1": _ok1,
+                   "coperto": bool(_in0 or _in1),
+                   "passa": bool((_ok0 is not False) and (_ok1 is not False)
+                                 and (_in0 or _in1))}
+        stampa("    %-9s %-28s %-9s %-9s %s"
+               % (_s, ", ".join(_ch)[:28],
+                  ("OK" if _ok0 else "DIVERSO") if _in0 else "-",
+                  ("OK" if _ok1 else "DIVERSO") if _in1 else "-",
+                  "PASSA" if cop[_s]["passa"] else "*** FALLISCE ***"))
+    _scoperti = [s for s in SITI if not cop[s]["coperto"]]
+    if _scoperti:
+        stampa("    ### *** %d SITI NON VERIFICATI SUI VALORI DA NESSUNA COPIA: %s ***"
+               % (len(_scoperti), ", ".join(_scoperti)))
+        stampa("    ### Il braccio `C` NON copre quei siti, e va detto invece di")
+        stampa("    ###   dichiararlo passato.")
+    else:
+        stampa("    ### ogni sito e' verificato sui VALORI da almeno una copia.")
+    stampa("    ### E le due attese del mandato: `fm` in `C0` (%s), `fm_bias` in `C1` (%s)."
+           % (bool(cop["fm"]["in_C0"]), bool(cop["fm_bias"]["in_C1"])))
+    c_esito = {"C0": c0, "C1": c1, "copertura": cop,
+               "siti_scoperti": _scoperti,
+               "fm_in_C0": bool(cop["fm"]["in_C0"]),
+               "fm_bias_in_C1": bool(cop["fm_bias"]["in_C1"])}
     esito["braccio_C"] = c_esito
+
+    # ======================================================== IL CASO ROVESCIO
+    stampa("")
+    stampa("-" * 100)
+    stampa("CASO ROVESCIO -- il ramo normale di `fm` scritto `(1-t)*D`: `C0` deve BOCCIARLO")
+    stampa("  ### E' il controllo che PUO' fallire: se `C0` non lo boccia, non sta")
+    stampa("  ###   verificando la formula ma soltanto la sua presenza.")
+    p_rov = copia_patchata(p_prima, os.path.join(FUORI, "_sim_fm_rovescio.py"),
+                           ["--t=%g" % T_PROVA, "--fm-rovescio"])
+    rov = misura_valori(p_rov, "rovescio", None, T_PROVA)
+    _k = CHIAVI_DEL_SITO["fm"][0]
+    _bocciato = isinstance(rov.get(_k), dict) and not rov[_k]["ok"]
+    _dm = rov.get("_D_max")
+    stampa("  `D` massimo nella scena: %s  ### %s"
+           % ("%.6f" % _dm if _dm is not None else "NON MISURATO",
+              "la distinzione fra le due formule e' REALE"
+              if (_dm or 0.0) > 0 else
+              "*** D ~ 0: le due formule coincidono, la bocciatura NON "
+              "proverebbe nulla ***"))
+    esito.setdefault("caso_rovescio_D", _dm)
+    stampa("  la chiave `%s`: %s" % (_k, "DIVERSA (bocciato)" if _bocciato else
+                                     ("OK -- *** NON BOCCIATO ***"
+                                      if isinstance(rov.get(_k), dict)
+                                      else "*** ASSENTE: il ramo non e' stato eseguito ***")))
+    stampa("  ### %s" % ("PASSA: `C0` boccia la formula rovesciata." if _bocciato else
+                         "FALLISCE: `C0` non distingue la formula giusta da quella rovesciata."))
+    esito["caso_rovescio"] = {"chiave": _k, "bocciato": bool(_bocciato),
+                              "esito": rov.get(_k)}
 
     # ======================================================== BRACCIO C-bis
     stampa("")
@@ -456,7 +630,15 @@ def principale():
             "print(sum(1 for s in ('(0.5 + bias)','- 0.5 * D','0.5 * self.pos[a]',"
             "'0.5 * self.d[sel]','0.5 * _L_sch','0.5 * net.pos[c[') if s in src))"
             % (os.path.join(RADICE, "csv"), pp))], capture_output=True, text=True)
-        letterali = int((qb.stdout or "0").strip() or 0)
+        # ### ANCHE QUESTO returncode SI LEGGE: un sottoprocesso che muore darebbe
+        #   `letterali = 0`, cioe' ### **la copia sembrerebbe pulita** -- il falso-zero
+        #   piu' comodo possibile, proprio nel braccio che deve BOCCIARE.
+        if qb.returncode != 0:
+            stampa("    ### *** il conteggio dei letterali su `%s` e' FALLITO "
+                   "(returncode %d): il braccio non puo' concludere ***"
+                   % (sito, qb.returncode))
+            stampa("    ###   %s" % ((qb.stderr or "").strip().split(NL) or [""])[-1][:130])
+        letterali = int((qb.stdout or "0").strip() or 0) if qb.returncode == 0 else -1
         v = misura_valori(pp, "cbis_%s" % sito, None, T_PROVA)
         sbagliate = [k for k, x in v.items() if isinstance(x, dict) and not x.get("ok")]
         # ### ⛔ UN SITO CHE `C` NON PUO' RAGGIUNGERE, e si DICHIARA invece di
@@ -492,9 +674,13 @@ def principale():
     stampa("###   braccio A-tr .... %s"
            % ("PASSA" if not vuoti else "FERMA: %s a zero dappertutto" % ", ".join(vuoti)))
     stampa("###   braccio B ........ %s" % ("PASSA" if b_ok else "FALLISCE"))
-    stampa("###   braccio C ........ %s"
-           % ("PASSA" if all(x.get("ok") for x in c_esito.values()
-                             if isinstance(x, dict)) else "FALLISCE"))
+    _cpassa = (not c_esito["siti_scoperti"]
+               and all(c_esito["copertura"][s]["passa"] for s in SITI))
+    stampa("###   braccio C0+C1 .... %s  (siti scoperti: %s)"
+           % ("PASSA" if _cpassa else "FALLISCE",
+              c_esito["siti_scoperti"] or "nessuno"))
+    stampa("###   caso ROVESCIO .... %s"
+           % ("PASSA" if esito["caso_rovescio"]["bocciato"] else "FALLISCE"))
     stampa("###   braccio C-bis .... %s" % ("PASSA" if tutte else "FALLISCE"))
     stampa("=" * 100)
 
@@ -549,6 +735,11 @@ def misura_valori(percorso, nome, stampa, t):
             _phib = pm["phi"][cd["b"]]
             _D = np.asarray(m.Rete._wphi(_phia - _phib), dtype=float)
             _md = float(getattr(m, "MITOSI_DIR", 0.0))
+            # ### `D` VA DICHIARATO, e non e' un dettaglio: se `D` fosse ~0 le due
+            #   formule `phi[a] - t*D` e `phi[a] - (1-t)*D` ### **coinciderebbero**, e
+            #   sia il confronto di `C0` sia la bocciatura del caso ROVESCIO sarebbero
+            #   ### **veri per fortuna, non per la formula.** ### Un `FALSO-ZERO`.
+            fuori["_D_max"] = float(np.max(np.abs(_D))) if np.size(_D) else 0.0
             if _md != 0.0:
                 # ### il `bias` RICALCOLATO dal sigillo, non letto dal contesto:
                 #   `twn` e' la media di `|tw|` sugli archi del nodo, come in `mitosi`.
