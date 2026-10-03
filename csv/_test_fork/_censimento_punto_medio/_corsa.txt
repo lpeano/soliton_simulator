@@ -1,7 +1,7 @@
 ====================================================================================================
 IL CENSIMENTO DELLA FRAZIONE DI NASCITA nel perimetro della mitosi
 ====================================================================================================
-  simulatore .. 6d306976 (sha1 byte grezzi)
+  simulatore .. c18c9bf6 (sha1 byte grezzi)
   strumento ... ec0a03e3
   perimetro ... mitosi, decidi_divisione  +  _rn_div_*, _rn_sch_*
   il setaccio cerca IL NUMERO: ogni `0.5` letterale e ogni `/ 2`.
@@ -14,279 +14,74 @@ IL CENSIMENTO DELLA FRAZIONE DI NASCITA nel perimetro della mitosi
   ###   sito `dh` (self.d[sel] / 2) NON si troverebbe.
 
 ----------------------------------------------------------------------------------------------------
-TUTTE LE OCCORRENZE NEL PERIMETRO: 19
+TUTTE LE OCCORRENZE NEL PERIMETRO: 13
 
-  :1954   col 45   _rn_div_phivel       0.5 letterale  EREDITA-MEDIA  phivel
+  :1977   col 45   _rn_div_phivel       0.5 letterale  ?              ?
           net.phivel = np.concatenate([net.phivel, 0.5 * (net.phivel[c["a"]] + net.phivel[c["b"]])])
-          -> DIVISIONE: il figlio prende la media di phivel. Ed e' la regola che A14 segnala: la nascita CAMBIA la carica totale
+          -> NON DICHIARATA
 
-  :1984   col 49   _rn_div_psi          0.5 letterale  EREDITA-MEDIA  psi
+  :2007   col 49   _rn_div_psi          0.5 letterale  ?              ?
           net.psi = np.concatenate([cur[:c["n0"]], 0.5 * (cur[c["src_a"]] + cur[c["src_b"]])])
-          -> DIVISIONE: il figlio prende la media di psi
+          -> NON DICHIARATA
 
-  :2335   col 33   _rn_sch_phivel       0.5 letterale  EREDITA-MEDIA  phivel
+  :2365   col 33   _rn_sch_phivel       0.5 letterale  ?              ?
           0.5 * (net.phivel[c["aa"]] + net.phivel[c["bb"]])])
-          -> SCHWINGER: l'antinodo prende la media di phivel
+          -> NON DICHIARATA
 
-  :2344   col 34   _rn_sch_pos          0.5 letterale  FRAZIONE       SCHWINGER/pos
-          net.pos = np.vstack([net.pos, 0.5 * (net.pos[c["aa"]] + net.pos[c["bb"]])])
-          -> SCHWINGER, DOVE nasce l'antinodo: 0.5*(pos[aa] + pos[bb]), nella regola _rn_sch_pos
-
-  :8259   col 17   decidi_divisione     0.5 letterale  ALTRO          soglia
+  :8312   col 17   decidi_divisione     0.5 letterale  ?              ?
           centro = 0.5 * (pos_soglia + pos_tetto)
-          -> decidi_divisione: centro = 0.5*(pos_soglia + pos_tetto), il centro di un INTERVALLO DI SOGLIA, non una nascita
+          -> NON DICHIARATA
 
-  :8404   col 13   decidi_divisione     0.5 letterale  ALTRO          densita
+  :8457   col 13   decidi_divisione     0.5 letterale  ?              ?
           ok = 0.5 * (I[a] + I[b]) >= QMIN_M * float(np.median(self.peq))
-          -> decidi_divisione: 0.5*(I[a]+I[b]) e' la MEDIA DI DENSITA' del criterio
+          -> NON DICHIARATA
 
-  :8495   col 19   mitosi               0.5 letterale  ALTRO          bias
+  :8548   col 19   mitosi               0.5 letterale  ?              ?
           bias = 0.5 * np.tanh(MITOSI_DIR * (twn[a] - twn[b]))
-          -> mitosi: bias = 0.5*tanh(...). Il 0.5 e' l'AMPIEZZA del bias (lo tiene in [-0.5,0.5]), NON la frazione: la frazione e' il 0.5 di :8496. DUE 0.5 CON DUE
+          -> NON DICHIARATA
 
-  :8496   col 33   mitosi               0.5 letterale  FRAZIONE       DIVISIONE/fm (fase)
-          fm = (self.phi[a] - (0.5 + bias) * D) % self._dphi()
-          -> DIVISIONE, la FASE del figlio, ramo MITOSI_DIR: fm = (phi[a] - (0.5+bias)*D). *** QUI UNA FRAZIONE DIVERSA DA 0.5 ESISTE GIA': bias = 0.5*tanh(MITOSI_
-
-  :8498   col 32   mitosi               0.5 letterale  FRAZIONE       DIVISIONE/fm (fase)
-          fm = (self.phi[a] - 0.5 * D) % self._dphi()
-          -> DIVISIONE, la FASE del figlio, ramo SENZA MITOSI_DIR: fm = (phi[a] - 0.5*D)
-
-  :8499   col 21   mitosi               0.5 letterale  FRAZIONE       DIVISIONE/pos
-          pos_figlio = 0.5 * (self.pos[a] + self.pos[b])
-          -> DIVISIONE, DOVE nasce il figlio: pos_figlio = 0.5*(pos[a] + pos[b])
-
-  :8509   col 22   mitosi               0.5 letterale  ALTRO          densita
+  :8568   col 22   mitosi               0.5 letterale  ?              ?
           rho_sel = 0.5 * (I[a] + I[b])                       # densita' d'interferenza sull'arco
-          -> mitosi: rho_sel = 0.5*(I[a]+I[b]), media di densita'
+          -> NON DICHIARATA
 
-  :8519   col 21   mitosi               / 2            ALTRO          dominio
+  :8578   col 21   mitosi               / 2            ?              ?
           _mezzo = self._dphi() / 2.0
-          -> mitosi: _mezzo = self._dphi()/2.0, META' DEL DOMINIO della fase
+          -> NON DICHIARATA
 
-  :8540   col 48   mitosi               0.5 letterale  ALTRO          calcio
+  :8599   col 48   mitosi               0.5 letterale  ?              ?
           comune = KICK_TW * sciolta * (mod - 0.5)
-          -> mitosi: comune = KICK_TW*sciolta*(mod - 0.5). Il 0.5 e' un OFFSET che centra `mod` intorno a zero, non una frazione di nascita. *** E L'HA TROVATA SOL
+          -> NON DICHIARATA
 
-  :8541   col 32   mitosi               0.5 letterale  ALTRO          calcio
+  :8600   col 32   mitosi               0.5 letterale  ?              ?
           calcio_a = comune + 0.5 * KICK_TW * sciolta * chi_a * mod
-          -> mitosi: 0.5*KICK_TW, l'ampiezza del calcio ripartita fra i due genitori
+          -> NON DICHIARATA
 
-  :8542   col 32   mitosi               0.5 letterale  ALTRO          calcio
+  :8601   col 32   mitosi               0.5 letterale  ?              ?
           calcio_b = comune - 0.5 * KICK_TW * sciolta * chi_b * mod
-          -> mitosi: idem, col segno opposto
+          -> NON DICHIARATA
 
-  :8561   col 13   mitosi               / 2            FRAZIONE       DIVISIONE/d,d0
-          dh = self.d[sel] / 2
-          -> DIVISIONE, QUANTO sono lunghi i due tronconi: dh = self.d[sel]/2. La lunghezza viene da `d` -- e nello Schwinger da `pos`: e' SCHW-CORTI
-
-  :8665   col 26   mitosi               0.5 letterale  ALTRO          densita
+  :8735   col 26   mitosi               0.5 letterale  ?              ?
           rho_sel = 0.5 * (I[a] + I[b])                   # densita' d'interferenza sull'arco
-          -> mitosi (ramo Schwinger): rho_sel = 0.5*(I[a]+I[b])
+          -> NON DICHIARATA
 
-  :8694   col 35   mitosi               / 2            ALTRO          dominio
+  :8764   col 35   mitosi               / 2            ?              ?
           anti = (fm[pick] + self._dphi() / 2.0) % self._dphi()
-          -> mitosi: anti = fm + _dphi()/2, l'ANTIFASE (meta' del DOMINIO)
-
-  :8701   col 20   mitosi               0.5 letterale  FRAZIONE       SCHWINGER/dd
-          0.5 * np.linalg.norm(self.pos[aa] - self.pos[bb], axis=1), 0.05),
-          -> SCHWINGER, QUANTO sono lunghi i due archi nuovi: 0.5*norm(pos[aa]-pos[bb]). La lunghezza viene da `pos`, NON da `d`: e' SCHW-CORTI
-
-----------------------------------------------------------------------------------------------------
-LA CLASSIFICAZIONE
-  FRAZIONE      (DOVE sta il figlio, QUANTO sono lunghi i suoi archi) .. 6 siti
-      :2344   _rn_sch_pos          SCHWINGER/pos 0.5 letterale
-      :8496   mitosi               DIVISIONE/fm (fase) 0.5 letterale
-      :8498   mitosi               DIVISIONE/fm (fase) 0.5 letterale
-      :8499   mitosi               DIVISIONE/pos 0.5 letterale
-      :8561   mitosi               DIVISIONE/d,d0 / 2
-      :8701   mitosi               SCHWINGER/dd 0.5 letterale
-  EREDITA-MEDIA (il figlio prende la MEDIA di una grandezza di STATO) . 3 siti
-      :1954   _rn_div_phivel       phivel       0.5 letterale
-      :1984   _rn_div_psi          psi          0.5 letterale
-      :2335   _rn_sch_phivel       phivel       0.5 letterale
-  ALTRO         (una meta' che fa altro) ............................. 10 siti
-
-  le GRANDEZZE della FRAZIONE ......... DIVISIONE/d,d0, DIVISIONE/fm (fase), DIVISIONE/pos, SCHWINGER/dd, SCHWINGER/pos  (5)
-  le GRANDEZZE dell'EREDITA-MEDIA ..... phivel, psi
+          -> NON DICHIARATA
 
 ====================================================================================================
-### IL VERDETTO DEL CENSIMENTO
-###   occorrenze del numero nel perimetro .. 19
-###   di cui FRAZIONE ...................... 6 siti su 5 GRANDEZZE
-###
-###   *** PIU' DI QUATTRO: IL COMMIT 6a SI FERMA, come dice il mandato. ***
-###
-###   Il mandato elencava QUATTRO grandezze -- pos e d/d0 della DIVISIONE,
-###   pos e dd dello SCHWINGER -- e NON la FASE del figlio (`fm`), che e'
-###   la quinta e sta nella preparazione, con DUE rami.
-###
-###   E IL FATTO PIU' GRAVE NON E' IL NUMERO: a :8496 UNA FRAZIONE
-###   DIVERSA DA 0.5 ESISTE GIA'.
-###     bias = 0.5 * tanh(MITOSI_DIR * (twn[a] - twn[b]))
-###     fm   = (phi[a] - (0.5 + bias) * D) % dphi
-###   e il commento del codice dice: <<bias in [-0.5,0.5]: verso il
-###   genitore piu' teso. 0 = punto medio>>.
-###
-###   CIOE' IL SISTEMA HA GIA' UNA FRAZIONE GENERALE, MA SOLO PER LA FASE,
-###   E NON LA APPLICA A `pos`.
-###
-###   *** E NON E' UNA SVISTA: IL CODICE DICHIARA PERCHE'. *** Il commento
-###   a :8486-8488 dice: <<L'asimmetria e' nella FASE, dove vive la materia,
-###   non nella posizione (che il rilassamento geometrico riporterebbe
-###   indietro). Non e' una forza: e' l'orientamento della replicazione
-###   lungo il gradiente gia' presente>>.
-###   CORREGGO QUELLO CHE AVEVO SCRITTO: NON e' <<esattamente il difetto
-###   che il punto 2 del piano vuole impedire>>. Il punto 2 chiede che `pos`
-###   e `d`/`d0` dicano la STESSA cosa -- sono due descrizioni della
-###   GEOMETRIA. La fase e' un ALTRO asse, e il codice ha una RAGIONE
-###   SCRITTA per trattarlo diversamente.
-###
-###   MITOSI_DIR vale 0.0 nella configurazione del driver, quindi oggi
-###   bias = 0 e la fase sta nel mezzo.
-###   MA IL PUNTO RESTA, E NON E' IL NUMERO: se il 6a dichiarasse `t` in un
-###   posto solo per la GEOMETRIA, nel codice resterebbero DUE frazioni --
-###   `t` per la geometria e `0.5 + bias` per la fase -- e la seconda
-###   sarebbe l'unica a non leggere il valore dichiarato. ### SE LE DUE
-###   DEBBANO ESSERE LA STESSA E UNA DECISIONE DI LUCA, NON MIA.
-====================================================================================================
-
-----------------------------------------------------------------------------------------------------
-PEZZO NUOVO -- L'EREDITA' DA UN SOLO GENITORE: UN `t = 0` IMPLICITO
-  ### E IL SETACCIO DEL NUMERO NON LO VEDE, perche' NON C'E' NESSUN NUMERO DA
-  ###   TROVARE: la frazione non e' scritta, e' nella SCELTA DELL'INDICE.
-  ###   E' FALSO-ZERO applicato alla decisione aperta di Luca -- cercando i
-  ###   `0.5` si conclude <<cinque siti>> e si perde UNA CLASSE INTERA di siti
-  ###   dove la frazione e' GIA' DECISA, A ZERO.
-  ### NON ENTRA NEL CONTEGGIO DEL CANCELLO DEL 6a: e' materiale per la
-  ###   decisione di Luca (DIVISIONE-AUTOCONSISTENTE), non un sito da curare.
-
-  COPIA-GENITORE: indicizza SOLO il lato `a`, E la forma dichiarata in
-  DOMINI ammette una frazione. Siti: 24
-    regola                   evento      grandezza     forma    delega   classe dichiarata
-    _rn_div_cs_nodo_prev     divisione   _cs_nodo_prev pos      -        eredita dal genitore `a`
-    _rn_div_mem_mot          divisione   mem_mot       finito   -        eredita dal genitore `a`
-    _rn_div_nb               divisione   _nb           unita    -        eredita dal genitore `a`
-    _rn_div_nb_prec          divisione   _nb_prec      unita    -        eredita dal genitore `a`
-    _rn_div_nb_ret           divisione   _nb_ret       unita    -        eredita dal genitore `a`
-    _rn_div_omega_s          divisione   omega_s       finito   -        eredita dal genitore `a`
-    _rn_div_phi_s            divisione   phi_s         finito   -        eredita dal genitore `a`
-    _rn_div_psi_prec         divisione   _psi_prec     finito   -        eredita dal genitore `a`
-    _rn_div_psi_spin         divisione   psi_spin      finito   -        eredita da `a` (come `phi_s`)
-    _rn_div_psi_spin_prec    divisione   _psi_spin_pre finito   -        eredita dal genitore `a`
-    _rn_div_psi_spinor       divisione   _psi_spinor   unita    -        eredita col SEGNO (regola D)
-    _rn_div_rho_spin         divisione   rho_spin      nonneg   -        eredita da `a` (come `psi_spin`)
-    _rn_div_spinor_lift      divisione   _spinor_lift  finito   -        eredita col SEGNO (regola D)
-    _rn_sch_cs_nodo_prev     schwinger   _cs_nodo_prev pos      si       eredita dal genitore `aa`
-    _rn_sch_nb               schwinger   _nb           unita    si       eredita dal genitore `aa`
-    _rn_sch_nb_prec          schwinger   _nb_prec      unita    si       eredita dal genitore `aa`
-    _rn_sch_nb_ret           schwinger   _nb_ret       unita    si       eredita dal genitore `aa`
-    _rn_sch_omega_s          schwinger   omega_s       finito   si       eredita dal genitore `aa`
-    _rn_sch_psi_prec         schwinger   _psi_prec     finito   si       eredita dal genitore `aa`
-    _rn_sch_psi_spin         schwinger   psi_spin      finito   si       eredita da `aa` (come `phi_s`... che qui
-    _rn_sch_psi_spin_prec    schwinger   _psi_spin_pre finito   si       eredita dal genitore `aa`
-    _rn_sch_psi_spinor       schwinger   _psi_spinor   unita    si       eredita INVERTITA (antichirale)
-    _rn_sch_rho_spin         schwinger   rho_spin      nonneg   si       eredita da `aa` (come `psi_spin`)
-    _rn_sch_spinor_lift      schwinger   _spinor_lift  finito   si       eredita INVERTITA (antichirale)
-
-  COPIA-GENITORE-FORMA-IGNOTA: indicizza SOLO il lato `a`, e la forma NON e'
-  dichiarata in DOMINI. SI ELENCANO, non si escludono. Siti: 2
-    regola                   evento      grandezza       delega   classe dichiarata
-    _rn_div_conc_nodi        divisione   conc_nodi       -        eredita la concorrenza del genitore `a`
-    _rn_sch_conc_nodi        schwinger   conc_nodi       -        eredita la concorrenza di `aa`, MARCATA `sch
-  ### ⛔ E LA STESURA PRECEDENTE LE ESCLUDEVA <<perche' la forma non e'
-  ###   dichiarata>>: ERA UN FALSO-ZERO. Una forma IGNOTA non e' una forma in
-  ###   cui la frazione non ha senso: escludere per IGNORANZA fa SCOMPARIRE
-  ###   regole che copiano da un solo genitore.
-  ### E C'ERA UN SECONDO FALSO-ZERO, UN LIVELLO PIU' SOTTO: il nome della
-  ###   grandezza lo DEDUCEVO dal nome della funzione, e `_rn_div_psi_spinor`
-  ###   dava `psi_spinor` mentre la grandezza si chiama `_psi_spinor`, COL
-  ###   TRATTINO BASSO. Cosi' la forma risultava <<non dichiarata>> per colpa
-  ###   del MIO nome, non del registro. Ora il nome si RISOLVE contro i
-  ###   registri, e delle 30 regole a un solo genitore ne restano 2 con forma
-  ###   ignota: solo `conc_nodi`, nei due eventi.
-
-  ESCLUSI, e solo questi hanno un MOTIVO DICHIARATO: 4
-    _rn_div_i                i               forma `indice`: una frazione NON ha senso
-    _rn_div_perc_chi         perc_chi        forma `segno`: una frazione NON ha senso
-    _rn_sch_i                i               forma `indice`: una frazione NON ha senso
-    _rn_sch_perc_chi         perc_chi        forma `segno`: una frazione NON ha senso
-  ### IL CRITERIO NON E' MIO: e' la FORMA che il registro DICHIARA.
-  ###   `indice` e' topologia, `segno` e' categoriale -- e per il `segno` il
-  ###   registro lo dice esplicitamente: sommare due decisioni darebbe
-  ###   +2, 0 o -2, che non sono valori ammessi.
-
-  IL TOTALE: 24 copie + 2 forma ignota + 4 esclusi = 30 regole che
-  indicizzano UN SOLO GENITORE.
-
-  *** IL FATTO PRINCIPALE, e lo fa emergere la terza classe: ***
-    LO SPINORE STESSO NASCE COME COPIA DI `a`, NON COME MEDIA.
-      divisione   _nb             eredita dal genitore `a`
-      schwinger   _nb             eredita dal genitore `aa`
-      divisione   _psi_spinor     eredita col SEGNO (regola D)
-      schwinger   _psi_spinor     eredita INVERTITA (antichirale)
-      divisione   _spinor_lift    eredita col SEGNO (regola D)
-      schwinger   _spinor_lift    eredita INVERTITA (antichirale)
-    MENTRE `psi` NASCE COME MEDIA DEI DUE GENITORI (:1984, EREDITA-MEDIA).
-    ### E nello Schwinger la copia dello spinore porta il SEGNO -1 (doppia
-    ###   copertura OPPOSTA), che e' una scelta dichiarata nel registro.
-    ### QUINDI: il campo `psi` interpola fra i genitori, LO SPINORE NO.
-    ###   Due descrizioni della stessa materia, DUE FRAZIONI DIVERSE.
-    ### Non e' un difetto dichiarato: e' la DOMANDA che la decisione di Luca
-    ###   deve chiudere -- e con gli esclusi per <<forma ignota>> NON SI
-    ###   VEDEVA AFFATTO.
-
-  IL CONFRONTO col conteggio del guardiano
-    ### E IL CONTEGGIO INIZIALE DEL GUARDIANO ERA SEI, e lui dichiara perche'
-    ###   era sbagliato: NON CONTAVA `c["src"]`, quindi perdeva `omega_s`,
-    ###   `mem_mot` e TUTTE le regole indicizzate da `src`. Errore del
-    ###   guardiano, dichiarato da lui. Con `src` contato come lato `a`
-    ###   (vale `a` a :8604 e `aa` a :8724) i due conteggi coincidono: 30.
-    nella MIA e non nella sua .. [('divisione', '_cs_nodo_prev'), ('divisione', '_nb'), ('divisione', '_nb_prec'), ('divisione', '_nb_ret'), ('divisione', '_psi_prec'), ('divisione', '_psi_spin_prec'), ('divisione', '_psi_spinor'), ('divisione', '_spinor_lift'), ('divisione', 'mem_mot'), ('divisione', 'omega_s'), ('schwinger', '_cs_nodo_prev'), ('schwinger', '_nb'), ('schwinger', '_nb_prec'), ('schwinger', '_nb_ret'), ('schwinger', '_psi_prec'), ('schwinger', '_psi_spin_prec'), ('schwinger', '_psi_spinor'), ('schwinger', '_spinor_lift'), ('schwinger', 'omega_s')]
-    nella SUA e non nella mia .. [('schwinger', 'phi_s')]
-      ('schwinger', 'phi_s') -> il guardiano la descrive come: zero (non da un genitore)
-
-  ### IL FATTO DA FAR EMERGERE, e il guardiano lo nomina:
-    `psi` nasce come MEDIA dei due genitori (:1984, classe EREDITA-MEDIA),
-    il suo COMPAGNO `psi_spin` nasce come COPIA di `a` (2 regole: _rn_div_psi_spin, _rn_sch_psi_spin).
-    ### DUE GRANDEZZE DELLA STESSA FAMIGLIA, DUE FRAZIONI DIVERSE: 0.5 e 0.
-    ### Non e' un difetto dichiarato: e' la DOMANDA che la decisione di Luca
-    ###   deve chiudere, e senza questo pezzo non si vedrebbe affatto.
-
-
-----------------------------------------------------------------------------------------------------
-IL CONFRONTO CON LA LISTA DEL GUARDIANO (rilievo del 2026-10-03)
-  righe nella MIA lista ......... 19
-  righe nella SUA lista ......... 14
-
-  SOLO NELLA MIA: 5
-      :8259   decidi_divisione     ALTRO          centro = 0.5 * (pos_soglia + pos_tetto)
-      :8404   decidi_divisione     ALTRO          ok = 0.5 * (I[a] + I[b]) >= QMIN_M * float(np.median(self.pe
-      :8540   mitosi               ALTRO          comune = KICK_TW * sciolta * (mod - 0.5)
-      :8541   mitosi               ALTRO          calcio_a = comune + 0.5 * KICK_TW * sciolta * chi_a * mod
-      :8542   mitosi               ALTRO          calcio_b = comune - 0.5 * KICK_TW * sciolta * chi_b * mod
-  ### per CLASSE: ALTRO 5 (:8259, :8404, :8540, :8541, :8542)
-  ###   la mia lista e' un SOVRAINSIEME e la differenza e' TUTTA `ALTRO`:
-  ###   non tocca ne' la FRAZIONE ne' l'EREDITA-MEDIA.
-
-  SOLO NELLA SUA: 0
-
-  E DOVE LE CLASSI NON COINCIDONO:
-    :8509 e :8665 (rho_sel) -- il guardiano le mette fra i siti <<oltre i
-      quattro>>, io le ho classificate ALTRO, perche' NON decidono dove nasce
-      il figlio: sono la MEDIA DI DENSITA' del cancello dell'antifase.
-      *** NON E' UNA DIFFERENZA DI MISURA, E' UNA DIFFERENZA DI CLASSE: la
-      domanda <<se il nato eredita con peso t, la densita' del cancello lo
-      segue?>> il guardiano la pone, e dice che LA DECIDE LUCA. Quindi la
-      lascio ALTRO e la DICHIARO come candidata in sospeso.
-    :8495 e :8496 -- il guardiano cita il ramo MITOSI_DIR come :8489, che e'
-      la riga del CANCELLO (if MITOSI_DIR != 0.0). Le righe del NUMERO,
-      misurate dall'AST, sono :8495 (l'ampiezza del bias) e :8496 (la
-      frazione (0.5 + bias)). Stessa cosa, righe diverse: uso le mie, che
-      sono misurate.
-
-  ### E UN FATTO IN PIU', verificato: `psi` ha UN SOLO sito (:1984) per
-  ###   ENTRAMBI gli eventi, perche' `_rn_sch_psi` CHIAMA `_rn_div_psi`.
-  ###   Il guardiano lo dice, e il codice lo conferma. ### Mentre `pos` e
-  ###   `phivel` hanno DUE siti ciascuna: la condivisione NON e' uniforme.
-
+### 13 OCCORRENZE NON DICHIARATE: LO STRUMENTO FALLISCE.
+###   Un sito nuovo nel perimetro non puo' cambiare il conteggio in
+###   silenzio: si classifica o si DICHIARA (A9).
+###   :1977  _rn_div_phivel  net.phivel = np.concatenate([net.phivel, 0.5 * (net.phivel[c["a"]] + net.phivel[c["b"]])])
+###   :2007  _rn_div_psi  net.psi = np.concatenate([cur[:c["n0"]], 0.5 * (cur[c["src_a"]] + cur[c["src_b"]])])
+###   :2365  _rn_sch_phivel  0.5 * (net.phivel[c["aa"]] + net.phivel[c["bb"]])])
+###   :8312  decidi_divisione  centro = 0.5 * (pos_soglia + pos_tetto)
+###   :8457  decidi_divisione  ok = 0.5 * (I[a] + I[b]) >= QMIN_M * float(np.median(self.peq))
+###   :8548  mitosi  bias = 0.5 * np.tanh(MITOSI_DIR * (twn[a] - twn[b]))
+###   :8568  mitosi  rho_sel = 0.5 * (I[a] + I[b])                       # densita' d'interferenza sull'arco
+###   :8578  mitosi  _mezzo = self._dphi() / 2.0
+###   :8599  mitosi  comune = KICK_TW * sciolta * (mod - 0.5)
+###   :8600  mitosi  calcio_a = comune + 0.5 * KICK_TW * sciolta * chi_a * mod
+###   :8601  mitosi  calcio_b = comune - 0.5 * KICK_TW * sciolta * chi_b * mod
+###   :8735  mitosi  rho_sel = 0.5 * (I[a] + I[b])                   # densita' d'interferenza sull'arco
+###   :8764  mitosi  anti = (fm[pick] + self._dphi() / 2.0) % self._dphi()

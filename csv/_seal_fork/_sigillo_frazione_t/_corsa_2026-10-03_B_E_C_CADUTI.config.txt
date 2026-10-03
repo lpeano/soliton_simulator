@@ -1,0 +1,27 @@
+LA CONFIGURAZIONE INTERA di questa corsa, e PERCHE' sta in un file a parte.
+
+Il referto `_corsa_2026-10-03_B_E_C_CADUTI.txt` e' committato COSI' COM'E', senza
+essere toccato, come chiede il mandato. Ma e' TRONCATO: l'ho catturato con
+`| tail -95`, e la sua INTESTAZIONE -- che dichiarava i blob -- e' andata perduta
+nella pipe. Invece di modificare il referto, i blob si rimettono QUI, letti dal
+DISCO con uno script (L-NUMERI).
+
+I BLOB (sha1 dei byte GREZZI, non `git hash-object`):
+  soliton_simulator.py                           c18c9bf6
+  csv/_seal_fork/_sigillo_frazione_t.py          51a357b3
+  csv/_seal_fork/_frazione_t_patch.py            6d956b0f
+  csv/_test_fork/_censimento_punto_medio.py      ec0a03e3
+  il *prima*: 6d306976, estratto dal PADRE del commit che introduce `T_NASCITA`
+              (ora `FRAZ_NASCITA`), come dice il braccio `0` del referto.
+
+LE QUATTRO SCENE e le costanti, copiate dal sorgente del sigillo:
+  :56  ANCORA = "T_NASCITA"
+  :58  SCENE = (("corta", 11, 72, True), ("lunga", 11, 150, True),
+  :59           ("altro_seme", 12, 72, True), ("senza_2lam", 11, 72, False))
+  :60  SITI = ("pos_div", "dh", "fm", "fm_bias", "pos_sch", "dd")
+  :61  TR = ("_sm_trd_mitosi", "_sm_trd0_mitosi", "_sm_trd_schwinger", "_sm_trd0_schwinger")
+  :62  T_PROVA = 0.4
+
+L'argv del driver e' quello di `_cli_flag.argv_del_driver` -- nessun attributo
+configurato a mano (`H-P3`) -- meno `--mitosi-2lam` nella scena `senza_2lam`.
+Comando che la rigira verbatim:  python csv/_seal_fork/_sigillo_frazione_t.py

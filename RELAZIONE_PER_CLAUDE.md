@@ -3209,3 +3209,66 @@ senza toccarlo; ② il commit con `C0` e il caso rovescio, **strumenti committat
 ### ⚠ **E se il run in corso fallisce un criterio: mi fermo e riporto, non aggiusto il criterio.**
 
 ---
+
+## **IL SIGILLO DEL 6a: `0`, `A` e `A-tr` PASSANO · `B` FALLISCE · `C` CADE. MI FERMO.**
+
+**Il referto è committato così com'è, senza essere toccato** *(il mandato)*:
+`csv/_seal_fork/_sigillo_frazione_t/_corsa_2026-10-03_B_E_C_CADUTI.txt`.
+
+| braccio | esito | che cosa dice |
+|---|---|---|
+| **`0`** | ✅ **PASSA** | il *prima* `6d306976` + la patch = **`c18c9bf6`**, il simulatore di oggi: la cura è recuperabile **per costruzione** (par.7) |
+| **`A`** | ✅ **PASSA** | **ZERO differenze** su tutte e quattro le scene — `corta` 72 passi, `lunga` 150, `altro_seme` seme 12, `senza_2lam` 72 — su **62** attributi di `net` alla costruzione, **contatori compresi** |
+| **`A-tr`** | ✅ **PASSA** | i troncamenti ci sono: `_sm_trd_mitosi` **14**, `_sm_trd0_mitosi` **12**, `_sm_trd_schwinger` **46**, `_sm_trd0_schwinger` **46**. **Nessuno è zero dappertutto**, quindi il braccio `A` mette davvero alla prova `_sm_lun` e la somma per metà |
+| **`B`** | ⛔ **FALLISCE** | `19` occorrenze invece di `13`, e `6` siti ancora al letterale |
+| **`C`** | ⛔ **CADE** | `KeyError: 'a'` dentro `misura_valori` |
+| `C-bis` | — | **non raggiunto** |
+
+### ⛔ **E I DUE FALLIMENTI NON SONO DELLA CURA: SONO DEI MIEI STRUMENTI.** Lo verifico
+invece di asserirlo.
+
+**`B` HA LETTO UN JSON VECCHIO — di prima della cura.** Le sei righe che dichiara «al
+letterale» sono `:8496`, `:8498`, `:8499`, `:8561`, `:8701`, `:2344`, e le formule che cita
+— `dh = self.d[sel] / 2`, `pos_figlio = 0.5 * (self.pos[a] + self.pos[b])`,
+`fm = (self.phi[a] - 0.5 * D)` — **nel simulatore di oggi hanno ZERO occorrenze** *(contate
+con `grep -c`)*. **E la prova sta nel file stesso:** quel json dichiara
+`blob_sim = 6d306976…`, cioè **il simulatore PRIMA della cura**, non `c18c9bf6`.
+
+**La catena, e sono due difetti distinti:**
+
+1. **il censimento ha RIFIUTATO di scrivere** *(`### 13 OCCORRENZE NON DICHIARATE: LO
+   STRUMENTO FALLISCE`)*, perché la tabella `DICHIARATI` è indicizzata **per numero di
+   riga** e la cura ha **spostato le righe**. ### **Il presidio ha funzionato: ha rifiutato
+   invece di mentire.** Ma così **nessun censimento potrà più passare dopo una cura che
+   muove righe** — è un difetto di progetto del mio strumento;
+2. **il sigillo NON CONTROLLA l'esito del sottoprocesso**: `q = subprocess.run(...)` e `q`
+   **non è mai letto**. Quindi ha preso il json **rimasto sul disco dalle 13:48** e ha
+   emesso un verdetto **su un file che non è quello in esame**.
+
+> ### 📌 **E questo è peggio di un `FALSO-ZERO`: è un FALSO-UNO.** Uno zero garantito
+> dall'insieme scelto non dice nulla; qui un braccio ha **dichiarato un fallimento** che
+> riguardava **un altro file**. ### **Un sigillo che legge un artefatto senza verificare su
+> quale blob è stato prodotto non sta sigillando: sta citando.** ### ⚠ **Il dato per
+> smascherarlo era DENTRO il json** (`blob_sim`), e il sigillo non l'ha guardato.
+
+**`C` CADE PER UNA CHIAVE CHE NON HO MESSO.** `misura_valori` ricostruisce `fm` come
+`pm["phi"][cd["a"]]`, ma `SpiaValori` mette nel contesto della divisione `pos_a`, `pos_b`,
+`phi_a`, `phi_b` — **e non gli indici `a` e `b`**. E `phi_a` non serve: è letto all'ingresso
+di `nascita`, cioè **dopo il calcio**, che è esattamente il motivo per cui lo scatto `pm`
+esiste. ### **Servono gli indici, e non ci sono.** Il braccio è caduto **dopo** aver
+verificato `dh_a`, `dh_b` e `pos_figlio convesso` — tutti **OK**.
+
+### ⚠ **E UN NUMERO MIO CHE NON TORNA, corretto nello stesso commit:** l'inventario diceva
+**`263`** attributi confrontati *(`43`+`200`+`1`+`1`+`17`+`1`)*; il referto ne misura **`62`**
+alla costruzione *(`25` ndarray, `21` scalari, `14` pickle, `1` sparsa, `1` rng)*, uguale su
+tutte e quattro le scene. ### **Il `263` non viene da nessun referto** — era un numero di una
+corsa esplorativa di cui non ho tenuto il referto, **esattamente ciò che `L-NUMERI` vieta.**
+### **Corretto in `doc/INVENTARIO_strumenti.md`, col perché.**
+
+### 📌 **NON AGGIUSTO NIENTE E MI FERMO, come dice il mandato** *(«se il run in corso
+fallisce un criterio: FERMATI e riporta»)*. Le tre cure necessarie — l'esito del
+sottoprocesso controllato **e il `blob_sim` del json confrontato con quello in esame**, la
+tabella `DICHIARATI` non più indicizzata per riga, gli indici `a`/`b` nel contesto — **sono
+tre commit a sé**, e si sommano a `C0` e al caso rovescio già in coda.
+
+---
