@@ -255,6 +255,52 @@ sost('''def _rn_sch_d0(net, c):
     net.d0 = np.concatenate([net.d0, c["dd"]])''',
      "`_rn_sch_d0`: `dd` una volta sola")
 
+# ===================== 5. LA QUARTA CONSUMATRICE DI `dd`, e l'ha trovata IL PRESIDIO
+# ### \u26d4 IL BUG DEL PRIMO GIRO, e non era fra le tre REGOLE: la CHIAMATA CON EFFETTO
+#   del ramo Schwinger faceva `_smp_chirurgia(nuovi=np.concatenate([dd, dd]))` -- e con
+#   `dd` ### **gia' raddoppiato** dava ### **4n invece di 2n**, facendo crescere lo
+#   snapshot `_smp_d0` del DOPPIO. ### Il presidio `RIPIEGHI-ZERO` del simulatore si e'
+#   fermato al PRIMO passo con uno Schwinger *(reperto
+#   `_sigillo_frazione_t/_corsa_2026-10-03_BUG_SMP_CHIRURGIA.txt`)*.
+# ### \U0001f4cc E IL MIO COLLAUDO NON POTEVA VEDERLA: 45 passi, scelti perche' la prima
+#   MITOSI e' al 42 -- ma il primo SCHWINGER e' al 70. ### Un collaudo tarato sul primo
+#   evento di UN tipo non dice niente sull'altro.
+sost('''                self._smp_chirurgia(nuovi=np.concatenate([dd, dd]))   # [C3] Schwinger''',
+     '''                # ### UNA VOLTA SOLA: `dd` e' GIA' i due blocchi. Con
+                #   `concatenate([dd, dd])` lo snapshot crescerebbe del DOPPIO, e il
+                #   presidio `RIPIEGHI-ZERO` ferma il run -- lo ha fatto davvero.
+                self._smp_chirurgia(nuovi=dd)   # [C3] Schwinger''',
+     "la QUARTA consumatrice: `_smp_chirurgia` del ramo Schwinger")
+
+sost('''                       "self._smp_chirurgia(nuovi=np.concatenate([dd, dd]))",''',
+     '''                       "self._smp_chirurgia(nuovi=dd)  # `dd` e\' GIA\' i due blocchi",''',
+     "l'ancora dichiarata di quella chiamata con effetto")
+
+# ===================== 6. I COMMENTI SCADUTI DALLA PATCH STESSA
+sost('''                 "`dh = d[sel]/2`, passato per `_nasce('mitosi', 2, 0)` nella preparazione: "''',
+     '''                 "`dh` e\' ora i DUE BLOCCHI (`t*d[sel]` per `a`-`m` e `(1-t)*d[sel]` per "
+                 "`m`-`b`), passati per `_nasce(\'mitosi\', 1, 0, meta=len(dh_a))`: `md = 1` "
+                 "e non 2 perche\' ogni voce e\' ora UN arco vero, e `meta` fa calcolare "
+                 "`_fab` PER META\' cosi\' `_sm_lun` resta identico al bit. Nella preparazione: "''',
+     "la derivazione di `_rn_div_d`: i due blocchi, `md = 1`, `meta`")
+
+sost('''                 "altrimenti e' `dh` nudo. `d0new` e' GIA' `[d0h, d0h]`, cioe' i due "''',
+     '''                 "altrimenti e\' `dh` nudo. `d0new` e\' GIA\' i DUE BLOCCHI (dai due mezzi "
+                 "`dh_a` e `dh_b`, nello stesso ordine), cioe\' i due "''',
+     "la derivazione di `_rn_div_d0`: `d0h` non esiste piu', sono i due mezzi")
+
+sost('''                 "`dd = max(0.5 * norm(pos[aa] - pos[bb]), 0.05)`, per `_nasce('schwinger', "''',
+     '''                 "`dd` e\' ora i DUE BLOCCHI: `max(t*L, 0.05)` per `aa`-`k` e "
+                 "`max((1-t)*L, 0.05)` per `k`-`bb`, con `L = norm(pos[aa]-pos[bb])`, per "
+                 "`_nasce(\'schwinger\', "''',
+     "la derivazione di `_rn_sch_d`: i due blocchi")
+
+sost('''                # `md=2, md0=2`: `concatenate([d, dd, dd])` E `concatenate([d0, dd, dd])`.''',
+     '''                # ### `md=1, md0=1` E NON `2, 2`: `dd` e' ora GIA' i due blocchi, quindi
+                #   `concatenate([d, dd])` E `concatenate([d0, dd])` -- e `meta` fa
+                #   calcolare `_fab` PER META'.''',
+     "il commento dei moltiplicatori dello Schwinger")
+
 io.open(P, "w", encoding="utf-8", newline=NL).write(t)
 print("=" * 92)
 for f in fatte:

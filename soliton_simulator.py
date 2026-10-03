@@ -2052,7 +2052,10 @@ def _rn_div_rep(net, c):
 @_nascita_regola("divisione", "d", "meta' dell'arco (due tronconi)",
                  "self.d = np.concatenate([self.d[keep], dh])  # `dh` e' GIA' i due "
                  "blocchi",
-                 "`dh = d[sel]/2`, passato per `_nasce('mitosi', 2, 0)` nella preparazione: "
+                 "`dh` e' ora i DUE BLOCCHI (`t*d[sel]` per `a`-`m` e `(1-t)*d[sel]` per "
+                 "`m`-`b`), passati per `_nasce('mitosi', 1, 0, meta=len(dh_a))`: `md = 1` "
+                 "e non 2 perche' ogni voce e' ora UN arco vero, e `meta` fa calcolare "
+                 "`_fab` PER META' cosi' `_sm_lun` resta identico al bit. Nella preparazione: "
                  "e' il dimezzamento che produce la compressione degenere, perche' la "
                  "geometria di equilibrio si accorcia a ogni suddivisione")
 def _rn_div_d(net, c):
@@ -2065,7 +2068,8 @@ def _rn_div_d(net, c):
                  "self.d0 = np.concatenate([self.d0[keep], d0new])",
                  "con `PLAST_DIN` l'offset e' emergente (stress metrico per eccesso di "
                  "torsione, saturato); con `PLAST_MIT > 0` e' proporzionale a `sciolta`; "
-                 "altrimenti e' `dh` nudo. `d0new` e' GIA' `[d0h, d0h]`, cioe' i due "
+                 "altrimenti e' `dh` nudo. `d0new` e' GIA' i DUE BLOCCHI (dai due mezzi "
+                 "`dh_a` e `dh_b`, nello stesso ordine), cioe' i due "
                  "figli, e passa per `_nasce('mitosi', 0, 1)`. "
                  "### ⚠ E IL NOME `sciolta` PRESUPPONE UNA COSA NON MISURATA: `sciolta` "
                  "e' solo `|tw|/PHI_CRIT`, cioe' LA TORSIONE DELL'ARCO IN UNITA' DEL "
@@ -2406,7 +2410,9 @@ def _rn_sch_rep(net, c):
 
 @_nascita_regola("schwinger", "d", "meta' della distanza fra i genitori",
                  "self.d = np.concatenate([self.d, dd])  # `dd` e' GIA' i due blocchi",
-                 "`dd = max(0.5 * norm(pos[aa] - pos[bb]), 0.05)`, per `_nasce('schwinger', "
+                 "`dd` e' ora i DUE BLOCCHI: `max(t*L, 0.05)` per `aa`-`k` e "
+                 "`max((1-t)*L, 0.05)` per `k`-`bb`, con `L = norm(pos[aa]-pos[bb])`, per "
+                 "`_nasce('schwinger', "
                  "2, 2)`. ### E la lunghezza viene da `pos`, non da `d`: e' la voce `A3` "
                  "della coda. `norm(..., axis=1)` somma TRE componenti in ordine FISSO, "
                  "quindi non dipende dall'ordine")
@@ -2477,7 +2483,7 @@ def _rn_sch_vd(net, c):
 
 for _nome_smp in ("_smp_d0", "_smp_d"):
     _nascita_collocata("schwinger", _nome_smp,
-                       "self._smp_chirurgia(nuovi=np.concatenate([dd, dd]))",
+                       "self._smp_chirurgia(nuovi=dd)  # `dd` e' GIA' i due blocchi",
                        "[SCALA_MIN_PASSO C3] lo snapshot segue anche lo Schwinger, e qui "
                        "SENZA `keep`: la coppia aggiunge archi e non ne toglie")
 del _nome_smp
@@ -8753,7 +8759,9 @@ class Rete:
                 anti = (fm[pick] + self._dphi() / 2.0) % self._dphi()
                 nc = len(pick)   # fase opposta (fm+pi)
                 k = self.n + np.arange(nc)
-                # `md=2, md0=2`: `concatenate([d, dd, dd])` E `concatenate([d0, dd, dd])`.
+                # ### `md=1, md0=1` E NON `2, 2`: `dd` e' ora GIA' i due blocchi, quindi
+                #   `concatenate([d, dd])` E `concatenate([d0, dd])` -- e `meta` fa
+                #   calcolare `_fab` PER META'.
                 # ⚠ QUARTO SITO, non nei tre del rilievo: e' `x2` su ENTRAMBE le grandezze.
                 # ⚠ E la lunghezza viene da `pos`, non da `d`: e' la voce `A3` della coda.
                 # ### `dd` SI SDOPPIA, e l'ordine e' quello di `i = [.., aa, k]`: il
@@ -8783,7 +8791,10 @@ class Rete:
                 # ### CHIAMATA CON EFFETTO, DICHIARATA: lo snapshot segue anche lo
                 #   Schwinger, e qui SENZA `keep` (la coppia aggiunge archi, non ne toglie).
                 if TRACCIA_D0: _tr_pre = self.d0.copy()
-                self._smp_chirurgia(nuovi=np.concatenate([dd, dd]))   # [C3] Schwinger
+                # ### UNA VOLTA SOLA: `dd` e' GIA' i due blocchi. Con
+                #   `concatenate([dd, dd])` lo snapshot crescerebbe del DOPPIO, e il
+                #   presidio `RIPIEGHI-ZERO` ferma il run -- lo ha fatto davvero.
+                self._smp_chirurgia(nuovi=dd)   # [C3] Schwinger
                 # =============================================================
                 # ### 3-bis. LA NASCITA -- IL PUNTO UNICO, evento `schwinger`.
                 # =============================================================

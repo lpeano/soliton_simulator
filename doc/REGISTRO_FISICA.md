@@ -1432,6 +1432,15 @@ diversi sulla stessa legge, e distinguerli e' il punto.**
 nello Schwinger, dove `i = [.., aa, k]`. ### **A `t = 0.5` i due blocchi sono IDENTICI, ed e' per
 questo che prima UNA sola `dh` bastava per entrambi.**
 
+### ⛔ **E NON ERANO TRE, ERANO QUATTRO: la quarta l'ha trovata IL PRESIDIO.**
+`_smp_chirurgia(nuovi=np.concatenate([dd, dd]))` nel ramo Schwinger faceva crescere lo
+snapshot `_smp_d0` del ### **DOPPIO**, e `RIPIEGHI-ZERO` ha fermato il run al
+### **primo passo con uno Schwinger**. ### 📌 **E il mio collaudo non poteva
+vederla: 45 passi, scelti perche' la prima MITOSI e' al 42 — ma il primo SCHWINGER e'
+al 70.** ### **Un collaudo tarato sul primo evento di UN tipo non dice niente
+sull'altro**, ed e' `FALSO-ZERO` sull'asse temporale. ### ✅ **Curata, e il censimento
+sistematico di OGNI uso di `dh`/`dd` nel perimetro dice che non ce ne sono altre.**
+
 ### ⚠ **E TRE REGOLE DELLA TABELLA SONO CAMBIATE DI CONSEGUENZA:** `_rn_div_d`, `_rn_sch_d`
 e `_rn_sch_d0` consumavano `dh`/`dd` ### **due volte** *(`concatenate([d[keep], dh, dh])`)*. Ora
 che sono ### **gia'** i due blocchi, le consumano ### **una volta sola** — con `dh, dh`
@@ -1728,6 +1737,22 @@ costruzione, e la verifica sarebbe essa stessa un `FALSO-ZERO`)*.
 *(`concatenate([d[keep], dh, dh])`)*. Ora che `dh`/`dd` sono ### **gia'** i due blocchi, le
 consumano ### **una volta sola** — con `dh, dh` darebbero ### **`4n` archi.** Le loro
 ### **ancore dichiarate** sono aggiornate insieme al corpo.
+
+### ⛔ **E NON ERANO TRE: ERANO QUATTRO.** La quarta e' la ### **chiamata con effetto**
+`_smp_chirurgia(nuovi=np.concatenate([dd, dd]))` del ramo Schwinger, che faceva crescere
+lo snapshot `_smp_d0` del ### **doppio**. ### **L'ha trovata il presidio `RIPIEGHI-ZERO`**,
+non il mio collaudo — che era di ### **45 passi**, scelti perche' la prima **mitosi** e'
+al 42, ### **mentre il primo SCHWINGER e' al 70.**
+### 📌 **Un collaudo tarato sul primo evento di UN tipo non dice niente sull'altro:**
+e' `FALSO-ZERO` sull'asse temporale, la stessa forma che il commit 4 ha gia' pagato.
+
+### ⚠ **E CINQUE DERIVAZIONI DICHIARATE ERANO SCADUTE, scritte dalla patch stessa:**
+`_rn_div_d` diceva ancora `dh = d[sel]/2` e `_nasce('mitosi', 2, 0)`; `_rn_div_d0` citava
+`[d0h, d0h]`, e ### **`d0h` non esiste piu'**; `_rn_sch_d` diceva ancora
+`dd = max(0.5 * norm(...), 0.05)`. ### **Un'ancora dichiarata e' PARTE della regola, non un
+commento:** lasciarla scaduta e' il difetto che `H-P7` esiste per impedire.
+### ✅ **Corrette, e il censimento di OGNI uso di `dh`/`dd` nel perimetro dice che non ce
+ne sono altre.**
 
 ## ✅ **E DAL `COMMIT 5` UNA REGOLA NON EREDITA PIU': `perc_geom` SI DERIVA**
 
