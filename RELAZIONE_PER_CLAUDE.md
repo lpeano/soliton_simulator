@@ -2366,3 +2366,57 @@ NASCITA**, quindi i tre che estendono restano tre. ### **Ma la risoluzione va DE
 strumento**, non in questo paragrafo: la metto li' e rigiro.
 
 ---
+
+## ⚠ **IL DATO DEL GUARDIANO PER IL `6b`: archi a CINQUE GIRI che non si dividono**
+
+*(registrato su `MITOSI-2LAM-ACCESO`. **Solo indice e documenti**, nessuna riga di logica.
+E l'ho **verificato sul codice** invece di riportarlo.)*
+
+### **IL FATTO:** `|tw|` **massimo su un arco ≈ `30` rad**, cioe' **quasi cinque giri di fase**,
+contro una soglia di divisione locale di **`~7-8`**. ### **Archi molto piu' tesi della soglia NON
+si dividono.**
+
+### ✅ **CHE COSA DICE IL CODICE**, letto in `decidi_divisione`:
+
+| | |
+|---|---|
+| la grandezza del candidato | `avv = np.abs(self.tw)` — ### **il `\|tw\|` DELL'ARCO** |
+| la soglia | `soglia0 = PHI_CRIT + twist_max = 2π + π = ` ### **`3π ≈ 9.4248`** in un ramo, `2π ≈ 6.2832` nell'altro |
+| la modulazione | `soglia = soglia0 * (1 - 0.3*tanh(grad_modula))`, cioe' ### **`soglia0 × [0.7, 1.0]`** |
+
+### ➜ **Il tuo `~7-8` e' COERENTE col ramo `3π`** *(che da' `[6.60, 9.42]`)* **e NON col ramo
+`2π`** *(che darebbe `[4.40, 6.28]`)*. ### ⚠ **Quale dei due rami sia attivo nella configurazione
+del driver VA MISURATO nel `6b`: non l'ho misurato e non lo deduco.**
+
+### ⛔ **E IL CANCELLO CHE RIFIUTA NON E' DI TORSIONE, ED E' IL PUNTO:** `MITOSI_2LAM` applica
+`ok = ok & (d >= 2.0*LAM)`, cioe' ### **`d >= 1.6`** — ### **un criterio di DISTANZA.**
+### ➜ **Un arco puo' essere tesissimo e CORTO, e lo rifiuta la lunghezza: la torsione dice
+DIVIDI, la distanza dice NO.** Il commento motiva il criterio *(il figlio nasce a `d/2`, quindi
+`d/2 >= LAM` ⇔ `d >= 2 LAM`, ed e' `A13` alla nascita)*, ### **ma non dice dove va la torsione di
+un arco che supera la soglia di torsione e non quella di distanza.**
+
+## 📌 **E UNA COSA CHE AGGIUNGO ALLA MISURA DEL `6b`, perche' senza non e' attribuibile**
+
+### ⛔ **`self.negate` CONTA TUTTI I RIFIUTI** — sia il cancello di **densita'**
+*(`0.5*(I[a]+I[b]) >= QMIN_M * median(peq)`)* sia quello di `MITOSI_2LAM` — mentre
+**`_g_m2l_negati` conta SOLO i secondi.**
+
+### ➜ **Quindi la misura del `6b` deve portare TRE cose, non una:**
+
+| | |
+|---|---|
+| **1** | quanti archi ### **sopra soglia** vengono rifiutati, e con quale `\|tw\|` — ### **la distribuzione, non la media** |
+| **2** | ### **SEPARATI PER CANCELLO** — un conteggio letto da `negate` ### **mescolerebbe i due**, e direbbe *«`MITOSI_2LAM` rifiuta»* dove potrebbe essere la densita' |
+| **3** | ### **`_g_m2l_dmin` c'e' GIA'** *(il `d` minimo fra i candidati)*: va letto insieme, perche' dice ### **quanto corti** sono gli archi rifiutati |
+
+### ⚠ **PERCHE' CONTA, e non e' una curiosita':** se la torsione si accumula fino a **cinque
+giri** su archi che **non possono dividersi**, quella torsione ### **non si scarica dove il
+sistema prevede** — e va a finire nel tetto `TW_TETTO`, nel basculamento, o in niente.
+
+### 📌 **E SI LEGGE INSIEME A `GEOM-SENZA-VERSO`:** la **stessa `|tw|`** che non fa dividere
+l'arco e' quella che `perc_geom` **media sul nodo** per decidere se il giro e' compiuto — e la'
+la soglia `2π` ### **non e' quasi mai raggiunta.** ### **Due leggi, la stessa grandezza, due
+soglie che non si parlano.** ### ⚠ **Non lo registro come difetto: e' un sospetto col suo
+criterio di chiusura**, cioe' la misura `(1)+(2)+(3)`.
+
+---
