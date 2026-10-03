@@ -1,0 +1,133 @@
+[TIMBRO] _sigillo_frazione_t.py  sha1-BYTE 457f1819  committato e pulito
+====================================================================================================
+IL SIGILLO DEL COMMIT 6a: la frazione `t` esplicita
+====================================================================================================
+  simulatore di OGGI .. c18c9bf6
+  questo sigillo ...... 457f1819
+  la patch ............ 2b8f9d5e
+  piattaforma ......... Windows AMD64
+  Python .............. 3.13.2
+  numpy ............... 2.3.0
+  ### I CONTEGGI DEI RUN (`_sm_tr*`, numero di nascite, passi) VALGONO PER
+  ###   QUESTA PIATTAFORMA. Cio' che NON dipende dalla piattaforma e'
+  ###   l'IDENTITA' fra il *prima* e l'*oggi*, che e' quello che il sigillo
+  ###   misura. ### Su un'altra macchina i conteggi cambiano e l'identita' no.
+  il PRIMA ............ 6d306976  (dal PADRE di 8aa6bc20, che introduce `T_NASCITA`)
+
+----------------------------------------------------------------------------------------------------
+BRACCIO `0` -- LA CURA E' RIPRODUCIBILE DAL REPO?
+  il *prima* + la patch .. c18c9bf6
+  il simulatore di oggi .. c18c9bf6
+  ### PASSA: stesso blob. La cura e' recuperabile PER COSTRUZIONE (par.7).
+
+----------------------------------------------------------------------------------------------------
+BRACCIO `A` -- BYTE-IDENTICO su QUATTRO scene, stato E contatori
+  ### I due blob girano IN LOCKSTEP e si confrontano DOPO OGNI PASSO: cosi' la
+  ###   PRIMA differenza e' quella vera, non la prima che si nota a fine run.
+
+  ================================================================================================
+  SCENA `corta` -- seme 11, 72 passi, --mitosi-2lam: SI
+    attributi confrontati, per classe: ndarray 25 | pickle 14 | rng 1 | scalare 21 | sparsa 1
+    attributi confrontati ALL'ULTIMO PASSO (72): aggregato 1 | ndarray 43 | pickle 18 | rng 1 | scalare 219 | sparsa 1
+    ### ⚠ SONO 62 alla costruzione e 283 all'ultimo passo: `net`
+    ###   ACQUISTA attributi durante il run. Dichiararne uno solo
+    ###   descriverebbe un insieme che al passo 72 non e' piu' quello.
+    alla costruzione: 0 differenze
+    ### PASSA: ZERO differenze su 72 passi, su TUTTI gli attributi di
+    ###   `net` -- OGNI voce di `__dict__`, non solo gli ndarray e gli
+    ###   scalari: anche liste, dict, la matrice SPARSA e lo stato del
+    ###   generatore. CONTATORI COMPRESI.
+    ### ⛔ LA FRASE DI PRIMA DICEVA *<<ndarray e scalari di __dict__>>*
+    ###   ED ERA FALSA da quando `stato()` confronta anche pickle,
+    ###   sparse e `rng`: descriveva l'insieme VECCHIO, piu' piccolo.
+    ###   Un referto che dichiara un insieme piu' piccolo di quello
+    ###   davvero confrontato fa sembrare lo zero piu' DEBOLE di quanto
+    ###   sia -- e la volta prima era il contrario. Entrambe bugie.
+    I QUATTRO `_sm_tr*` (prima / oggi):
+      _sm_trd_mitosi                0 /        0
+      _sm_trd0_mitosi               0 /        0
+      _sm_trd_schwinger             0 /        0
+      _sm_trd0_schwinger            0 /        0
+
+  ================================================================================================
+  SCENA `lunga` -- seme 11, 150 passi, --mitosi-2lam: SI
+    attributi confrontati, per classe: ndarray 25 | pickle 14 | rng 1 | scalare 21 | sparsa 1
+    attributi confrontati ALL'ULTIMO PASSO (150): aggregato 1 | ndarray 44 | pickle 17 | rng 1 | scalare 219 | sparsa 1
+    ### ⚠ SONO 62 alla costruzione e 283 all'ultimo passo: `net`
+    ###   ACQUISTA attributi durante il run. Dichiararne uno solo
+    ###   descriverebbe un insieme che al passo 150 non e' piu' quello.
+    alla costruzione: 0 differenze
+    ### PASSA: ZERO differenze su 150 passi, su TUTTI gli attributi di
+    ###   `net` -- OGNI voce di `__dict__`, non solo gli ndarray e gli
+    ###   scalari: anche liste, dict, la matrice SPARSA e lo stato del
+    ###   generatore. CONTATORI COMPRESI.
+    ### ⛔ LA FRASE DI PRIMA DICEVA *<<ndarray e scalari di __dict__>>*
+    ###   ED ERA FALSA da quando `stato()` confronta anche pickle,
+    ###   sparse e `rng`: descriveva l'insieme VECCHIO, piu' piccolo.
+    ###   Un referto che dichiara un insieme piu' piccolo di quello
+    ###   davvero confrontato fa sembrare lo zero piu' DEBOLE di quanto
+    ###   sia -- e la volta prima era il contrario. Entrambe bugie.
+    I QUATTRO `_sm_tr*` (prima / oggi):
+      _sm_trd_mitosi                0 /        0
+      _sm_trd0_mitosi               0 /        0
+      _sm_trd_schwinger            42 /       42
+      _sm_trd0_schwinger           42 /       42
+
+  ================================================================================================
+  SCENA `altro_seme` -- seme 12, 72 passi, --mitosi-2lam: SI
+    attributi confrontati, per classe: ndarray 25 | pickle 14 | rng 1 | scalare 21 | sparsa 1
+    attributi confrontati ALL'ULTIMO PASSO (72): aggregato 1 | ndarray 43 | pickle 18 | rng 1 | scalare 219 | sparsa 1
+    ### ⚠ SONO 62 alla costruzione e 283 all'ultimo passo: `net`
+    ###   ACQUISTA attributi durante il run. Dichiararne uno solo
+    ###   descriverebbe un insieme che al passo 72 non e' piu' quello.
+    alla costruzione: 0 differenze
+    ### PASSA: ZERO differenze su 72 passi, su TUTTI gli attributi di
+    ###   `net` -- OGNI voce di `__dict__`, non solo gli ndarray e gli
+    ###   scalari: anche liste, dict, la matrice SPARSA e lo stato del
+    ###   generatore. CONTATORI COMPRESI.
+    ### ⛔ LA FRASE DI PRIMA DICEVA *<<ndarray e scalari di __dict__>>*
+    ###   ED ERA FALSA da quando `stato()` confronta anche pickle,
+    ###   sparse e `rng`: descriveva l'insieme VECCHIO, piu' piccolo.
+    ###   Un referto che dichiara un insieme piu' piccolo di quello
+    ###   davvero confrontato fa sembrare lo zero piu' DEBOLE di quanto
+    ###   sia -- e la volta prima era il contrario. Entrambe bugie.
+    I QUATTRO `_sm_tr*` (prima / oggi):
+      _sm_trd_mitosi                0 /        0
+      _sm_trd0_mitosi               0 /        0
+      _sm_trd_schwinger             0 /        0
+      _sm_trd0_schwinger            0 /        0
+
+  ================================================================================================
+  SCENA `senza_2lam` -- seme 11, 72 passi, --mitosi-2lam: NO
+    attributi confrontati, per classe: ndarray 25 | pickle 14 | rng 1 | scalare 21 | sparsa 1
+    attributi confrontati ALL'ULTIMO PASSO (72): aggregato 1 | ndarray 43 | pickle 18 | rng 1 | scalare 217 | sparsa 1
+    ### ⚠ SONO 62 alla costruzione e 281 all'ultimo passo: `net`
+    ###   ACQUISTA attributi durante il run. Dichiararne uno solo
+    ###   descriverebbe un insieme che al passo 72 non e' piu' quello.
+    alla costruzione: 0 differenze
+    ### PASSA: ZERO differenze su 72 passi, su TUTTI gli attributi di
+    ###   `net` -- OGNI voce di `__dict__`, non solo gli ndarray e gli
+    ###   scalari: anche liste, dict, la matrice SPARSA e lo stato del
+    ###   generatore. CONTATORI COMPRESI.
+    ### ⛔ LA FRASE DI PRIMA DICEVA *<<ndarray e scalari di __dict__>>*
+    ###   ED ERA FALSA da quando `stato()` confronta anche pickle,
+    ###   sparse e `rng`: descriveva l'insieme VECCHIO, piu' piccolo.
+    ###   Un referto che dichiara un insieme piu' piccolo di quello
+    ###   davvero confrontato fa sembrare lo zero piu' DEBOLE di quanto
+    ###   sia -- e la volta prima era il contrario. Entrambe bugie.
+    I QUATTRO `_sm_tr*` (prima / oggi):
+      _sm_trd_mitosi               14 /       14
+      _sm_trd0_mitosi              12 /       12
+      _sm_trd_schwinger             4 /        4
+      _sm_trd0_schwinger            4 /        4
+
+----------------------------------------------------------------------------------------------------
+BRACCIO `A-tr` -- I TRONCAMENTI: il braccio sui `_sm_lun` e' VUOTO o no?
+  _sm_trd_mitosi         somma su tutte le scene: 14
+  _sm_trd0_mitosi        somma su tutte le scene: 12
+  _sm_trd_schwinger      somma su tutte le scene: 46
+  _sm_trd0_schwinger     somma su tutte le scene: 46
+  ### NESSUNO e' zero dappertutto: il braccio `A` mette alla prova `_sm_lun`
+  ###   su tutti e quattro i siti.
+
+----------------------------------------------------------------------------------------------------

@@ -1,0 +1,26 @@
+QUESTO REFERTO E' PARZIALE, E IL MOTIVO NON E' UN CRITERIO FALLITO.
+
+Il run e' stato FERMATO DAL LIMITE DI TEMPO del processo in background, che ho
+impostato io a 3000000 ms (50 minuti). La corsa precedente dello stesso sigillo
+aveva richiesto circa 110 minuti (14:27 -> 16:17), quindi il limite era TROPPO
+CORTO: un mio errore di stima, non un esito del sigillo.
+
+DOVE E' ARRIVATO, e cio' che ha misurato VALE:
+  braccio 0     PASSA   il *prima* + la patch = il simulatore di oggi
+  braccio A     PASSA   quattro scene, ZERO differenze
+  braccio A-tr  PASSA   nessun contatore e' zero dappertutto
+  braccio B     interrotto DURANTE: il censimento era partito e ha rigenerato
+                la coppia, ma il verdetto del braccio non e' stato stampato
+  C0, C1, C-bis, rovescio   NON RAGGIUNTI
+
+### NON LO USO COME REFERTO DEL SIGILLO: e' un REPERTO. Il referto vero viene
+### dal run rifatto DA CAPO, con il limite di tempo al massimo consentito.
+
+I BLOB (sha1 dei byte GREZZI) e la piattaforma, dal disco:
+  soliton_simulator.py                           c18c9bf6
+  csv/_seal_fork/_sigillo_frazione_t.py          457f1819
+  csv/_seal_fork/_frazione_t_patch.py            2b8f9d5e
+  csv/_test_fork/_censimento_punto_medio.py      f6038353
+  piattaforma                                    Windows AMD64
+  Python                                         3.13.2
+  numpy                                          2.3.0

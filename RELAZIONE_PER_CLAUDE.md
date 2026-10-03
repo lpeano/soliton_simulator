@@ -3325,3 +3325,33 @@ coi blob fa parte del referto)*, e il referto del censimento si rigenera **come 
 `_corsa.txt` + `_censimento.json` dallo stesso blob.
 
 ---
+
+## **IL RUN E' STATO FERMATO DAL LIMITE DI TEMPO, e il limite l'ho messo io troppo corto**
+
+**Non è un criterio fallito.** Avevo dato al processo in background un limite di **3 000 000 ms
+(50 minuti)**, quando la corsa precedente dello stesso sigillo ne aveva richiesti **circa
+110** *(14:27 → 16:17)*. ### **Errore mio di stima, e lo dichiaro come tale:** il massimo
+consentito è `7 200 000 ms`, e avrei dovuto usare quello.
+
+**Dove è arrivato, e ciò che ha misurato vale** *(il parziale è committato come **reperto**,
+non come referto, con il motivo in un file accanto)*:
+
+| braccio | esito |
+|---|---|
+| **`0`** | ✅ **PASSA** |
+| **`A`** | ✅ **PASSA** — quattro scene, zero differenze, e la frase corretta è nel referto |
+| **`A-tr`** | ✅ **PASSA** — `14 / 12 / 46 / 46`, nessuno zero dappertutto |
+| `B` | interrotto **durante**: il censimento era partito e ha rigenerato la coppia, ma il verdetto non è stato stampato |
+| `C0`, `C1`, `C-bis`, rovescio | **non raggiunti** |
+
+### ✅ **UN FATTO UTILE CHE IL PARZIALE CONSEGNA: la coppia del censimento è ora COERENTE.**
+`_censimento.json` dichiara `blob_sim = c18c9bf6` con **13** occorrenze e **0** `FRAZIONE` —
+lo stesso blob di `_corsa.txt`. ### **L'incoerenza che avevi segnalato è chiusa**, e stavolta
+il json è stato scritto *perché* il censimento ha **passato** i suoi controlli, non perché
+fosse rimasto sul disco.
+
+**Siccome nessun run è più in corso, applico la correzione della frase ADESSO** — è il primo
+ramo del tuo ordine, *«se il run non è ancora partito: correggi la frase, committa, poi fai
+partire il run»* — e rigenero la coppia dal blob corretto. **Così il ciclo non si spreca.**
+
+---
