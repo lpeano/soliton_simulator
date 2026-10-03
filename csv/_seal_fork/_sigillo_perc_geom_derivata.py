@@ -150,9 +150,17 @@ def prima_del_flag(dest):
     return _cli_flag.sim_prima_del_flag(ANCORA, dest, radice=RADICE)
 
 
-def copia_patchata(dest, argomenti):
-    """Una COPIA del simulatore col patch applicato, e il patch e' COMMITTATO."""
-    byte = io.open(SIM, "rb").read()
+def copia_patchata(sorgente, dest, argomenti):
+    """Una COPIA col patch applicato, e il patch e' COMMITTATO.
+
+    ### ⛔ LA SORGENTE E' SEMPRE IL *PRIMA*, MAI IL SIMULATORE DI OGGI, e il primo
+    giro del sigillo e' caduto proprio su questo: ### **le ancore della patch
+    descrivono il codice PRIMA della cura**, quindi applicarla al simulatore ### **gia'
+    curato** non trova niente -- e l'`assert` dell'ancora unica ha fermato il sigillo
+    invece di produrre una copia a meta'. ### ✅ **Il presidio ha funzionato: era il
+    disegno a essere sbagliato.**
+    """
+    byte = io.open(sorgente, "rb").read()
     io.open(dest, "wb").write(byte)
     q = subprocess.run([sys.executable, PATCH, "--file=%s" % dest] + list(argomenti),
                        capture_output=True, text=True)
@@ -189,7 +197,32 @@ def principale():
     esito["commit_che_introduce"] = str(introduce)
 
     # --------------------------------------------------- il SOLO RIORDINO (braccio A)
-    p_ord = copia_patchata(os.path.join(FUORI, "_sim_solo_ordine.py"), ["--solo-ordine"])
+    # ======================== BRACCIO `0`: la cura e' RIPRODUCIBILE dal repo?
+    #   ### Non era nel disegno, e l'ha suggerito la caduta: se la patch COMMITTATA
+    #   applicata al *prima* COMMITTATO da' lo STESSO BLOB del simulatore di oggi,
+    #   allora ### **la cura e' recuperabile PER COSTRUZIONE** (par.7) -- e non per
+    #   la mia parola. Se i blob differissero, il simulatore committato conterrebbe
+    #   ### **qualcosa che la patch non produce**, ed e' un fatto da sapere PRIMA di
+    #   leggere qualunque altro braccio.
+    p_rifatta = copia_patchata(p_prima, os.path.join(FUORI, "_sim_rifatta.py"), [])
+    uguale = (blob(p_rifatta) == blob(SIM))
+    stampa("")
+    stampa("-" * 100)
+    stampa("BRACCIO `0` -- LA CURA E' RIPRODUCIBILE DAL REPO?")
+    stampa("  il *prima* committato + la patch committata .. %s" % blob(p_rifatta)[:8])
+    stampa("  il simulatore di oggi ........................ %s" % blob(SIM)[:8])
+    if uguale:
+        stampa("  ### \u2705 STESSO BLOB: la cura e' recuperabile PER COSTRUZIONE (par.7),")
+        stampa("  ###   non per la mia parola. Chiunque la rifa' con due comandi.")
+    else:
+        stampa("  ### \u26d4 BLOB DIVERSI: il simulatore committato contiene qualcosa che la")
+        stampa("  ###   patch NON produce. Va trovato PRIMA di leggere gli altri bracci.")
+    esito["braccio_0_riproducibile"] = bool(uguale)
+    esito["blob_rifatta"] = blob(p_rifatta)
+    stampa("")
+
+    p_ord = copia_patchata(p_prima, os.path.join(FUORI, "_sim_solo_ordine.py"),
+                           ["--solo-ordine"])
     stampa("  SOLO il vincolo 4 ............. %s  (eredita' INVARIATA)" % blob(p_ord)[:8])
     esito["blob_solo_ordine"] = blob(p_ord)
     stampa("")
@@ -318,7 +351,7 @@ def principale():
     de = {}
     for et, args in copie.items():
         nome_f = os.path.join(FUORI, "_sim_%s.py" % et.split()[0])
-        copia_patchata(nome_f, args)
+        copia_patchata(p_prima, nome_f, args)
         with contextlib.redirect_stdout(io.StringIO()):
             m = carica(nome_f, "_s5_de_%s" % et.split()[0])
             net = costruisci(m, 11, os.path.join(FUORI, "_sc_de_%s" % et.split()[0]))
@@ -365,6 +398,13 @@ def principale():
             stampa("      ### ⛔ NON VISTO: il sigillo non distingue l'evento lasciato")
             stampa("      ###   in eredita'. Il braccio `D` non discrimina.")
     stampa("")
+    stampa("=" * 100)
+    stampa("### IL RIEPILOGO")
+    stampa("###   braccio 0 (la cura e' riproducibile dal repo) ... %s"
+           % ("PASSA" if esito.get("braccio_0_riproducibile") else "FALLISCE"))
+    for _n in per_scena:
+        stampa("###   braccio A sulla scena `%s` ............. %s"
+               % (_n, "PASSA" if per_scena[_n]["A_passa"] else "FALLISCE"))
     stampa("=" * 100)
 
     io.open(os.path.join(FUORI, "_sigillo.json"), "w", encoding="utf-8",
