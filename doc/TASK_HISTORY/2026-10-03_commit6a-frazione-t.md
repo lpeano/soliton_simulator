@@ -389,3 +389,55 @@ invoca `_frazione_t_patch.py` **come sottoprocesso**, quindi durante il run e' u
 percorso in uso** — modificarlo violerebbe il par.5. **Sono state collaudate su COPIE** *(le
 cinque sostituzioni attaccano, l'AST di entrambi i file passa, e nessuna docstring e' una
 concatenazione** — la classe d'errore che ha ucciso il run precedente)*.
+
+---
+
+## **ANNOTAZIONE del 2026-10-03 — LA RIPARAZIONE DEGLI STRUMENTI, prima di rigirare**
+
+**Il sigillo e' caduto su `B` e `C`, e il guardiano ha rimisurato `B` in modo indipendente**
+con un censimento AST su `c18c9bf6`: **13 occorrenze, 0 siti `FRAZIONE` al letterale,
+`FRAZ_NASCITA` letta in tutti e sei i siti.** ### **Quindi la cura e' buona e gli strumenti
+no.** Questa annotazione fissa **che cosa riparo e perche'**, prima di toccare il codice.
+
+### **LE SEI RIPARAZIONI, e ciascuna nasce da un difetto MISURATO**
+
+| | riparazione | il difetto che la causa |
+|---|---|---|
+| **①** | `DICHIARATI` indicizzata per **`(funzione, testo normalizzato)`**, non per numero di riga | una cura che **sposta le righe** rendeva lo strumento **impossibile da far passare** |
+| **②** | il sigillo controlla il **returncode di OGNI sottoprocesso** **e** confronta il **`blob_sim` di OGNI artefatto letto** col blob del file in esame | ha citato un json di `6d306976` dichiarando un fallimento su `c18c9bf6`: **un falso-UNO** |
+| **③** | `SpiaValori` mette nel contesto **gli indici** `a`, `b` *(e `aa`, `bb`)* | `misura_valori` ricostruiva `fm` da `pm["phi"][cd["a"]]` e la chiave **non c'era** |
+| **④** | il braccio **`C0`** *(`MITOSI_DIR = 0`)*, la **copertura per sito**, e **`--fm-rovescio`** | il ramo normale di `fm` **non girava in nessuna copia con la formula giusta** |
+| **⑤** | la frase del braccio `A` e il **conteggio degli attributi anche all'ULTIMO passo** | *«ndarray e scalari di `__dict__`»* e' **falsa** da quando `stato()` confronta anche pickle, sparse e `rng` |
+| **⑥** | l'intestazione dichiara **piattaforma, Python e numpy**, e che i conteggi valgono **per quella piattaforma** | il guardiano su Linux/numpy 2.5.3 misura `_sm_tr* = 16/14/6/6`; il mio referto su Windows/numpy 2.3.0 dice `14/12/4/4` |
+
+### ⛔ **UN RILIEVO SULLA CHIAVE CHE IL MANDATO PROPONE, e va detto PRIMA di usarla:
+`(funzione, testo normalizzato)` NON E' UNICA.** Misurato sulle 13 occorrenze di `c18c9bf6`:
+
+```
+:8568  mitosi  rho_sel = 0.5 * (I[a] + I[b])      # densita' d'interferenza sull'arco
+:8735  mitosi  rho_sel = 0.5 * (I[a] + I[b])      # densita' d'interferenza sull'arco
+```
+
+**Stessa funzione, stesso testo** *(differiscono solo per lo spazio prima del commento, che
+la normalizzazione collassa)*. ### ✅ **Cura: la tabella non mappa una chiave su UNA voce, ma
+su una voce PIU' UNA MOLTEPLICITA'**, e lo strumento verifica **che il numero di occorrenze
+per chiave sia ESATTAMENTE quello dichiarato.** ### **Una chiave trovata 1 volta invece di 2
+fa FALLIRE lo strumento** — che e' il comportamento voluto: `rho_sel` compare **due volte**
+*(ramo divisione e ramo Schwinger)*, e se una sparisse sarebbe un fatto, non un dettaglio.
+
+### **E I SEI SITI CURATI DIVENTANO UN CONTROLLO POSITIVO.** Le sei voci `FRAZIONE` non si
+cancellano dalla tabella: passano in **`CURATI`**, e lo strumento asserisce che siano trovate
+### **ZERO volte**. ### 📌 **Cosi' il censimento non dice solo *«ci sono 13 occorrenze»*: dice
+*«le sei che la cura ha tolto NON SONO TORNATE»*** — e una regressione che rimettesse un
+`0.5` letterale **fallirebbe con il nome del sito**, non con un conteggio diverso.
+
+### **I CRITERI DEL RUN, fissati qui**
+
+1. il censimento, **dopo** la cura ①, su `c18c9bf6` deve dare **13 occorrenze** e **0
+   `FRAZIONE`**; `_corsa.txt` **e** `_censimento.json` si rigenerano **come COPPIA dallo
+   stesso blob** *(oggi nel repo sono **incoerenti**: `_corsa.txt` e' di `c18c9bf6`, il json
+   di `6d306976` — ed e' la prova visibile del difetto ②)*;
+2. l'output si cattura **INTERO** *(`tee` su file)*, **mai `| tail`**: l'intestazione coi blob
+   **fa parte del referto**;
+3. tutti i bracci **da capo**: `0`, `A`, `A-tr`, `B`, `C0`, `C1`, `C-bis`, **rovescio**;
+4. ### ⛔ **se un criterio fallisce: FERMARSI E RIPORTARE, non aggiustare il criterio.**
