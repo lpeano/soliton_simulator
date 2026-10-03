@@ -245,6 +245,75 @@ dice ### **`numpy 2.3.3`**, il referto committato dice ### **`numpy 2.3.0`**.
 da uno script* — ### **violato sul numero piu' innocuo che c'era.** Un numero ricopiato a mano
 non ha provenienza anche quando e' quasi giusto.
 
+## ⭐ **LE DECISIONI DI LUCA DEL 2026-10-03 (14:01), e il cancello si apre**
+
+*(par.8: registrate ### **PRIMA del codice**. `ASSIOMI.md` non si tocca.)*
+
+### ✅ **① LA FRAZIONE `t` VALE PER LA GEOMETRIA ***E*** LA FASE**
+
+| | chi legge `t` |
+|---|---|
+| ### **la GEOMETRIA** | `pos` e `d`/`d0` nella divisione · `pos` e `dd` nello Schwinger |
+| ### **la FASE** | `fm`, ### **in tutti e due i rami** *(con e senza `MITOSI_DIR`)* |
+
+### ⛔ **E LE EREDITA' DI STATO *NON* LEGGONO `t`:** `psi` e `phivel` come ### **media**, la
+famiglia dello ### **spinore** come ### **copia**, `rho_sel` del cancello dell'antifase.
+### **Restano come sono**, e si decidono nella ### **LEGGE** di `DIVISIONE-AUTOCONSISTENTE`.
+### 📌 **Quindi il censimento aveva ragione a tenerle in classi SEPARATE**, e la decisione
+dice ### **quale classe entra nel `6a`**: solo `FRAZIONE`. Le altre tre no.
+
+### ✅ **② `DIVISIONE-AUTOCONSISTENTE` SI DIVIDE IN DUE**
+
+| | che cosa | quando |
+|---|---|---|
+| le ### **MISURE** | torsione persa alla divisione · verso dell'arco · `pos` contro `d` · calcio non simmetrico `a`/`b` | ### **subito dopo il `6b`** |
+| la ### **LEGGE** | la frazione che il sistema SCEGLIE | ### **dopo la definizione dell'energia**, perche' ### **deve rispettare `A14`** |
+
+### ⚠ **E il passaggio di consegne del guardiano su questo punto era INCOERENTE: vale questa
+versione.** *(Lo scrivo perche' chi legge due versioni sappia quale.)*
+
+## **I SEI SITI, e la forma e' DECISA: sempre CONVESSA, mai la lerp**
+
+| riga | che cosa diventa |
+|---|---|
+| `:8499` | `pos_figlio = (1-t)*pos[a] + t*pos[b]` |
+| `:8561` | `dh` ### **si sdoppia**: il blocco `a`–`m` vale ### **`t*d[sel]`**, il blocco `m`–`b` vale ### **`(1-t)*d[sel]`**. ### **L'ordine e' quello di `i = [keep, a, m]` e `d = [keep, dh, dh]`: il PRIMO blocco e' `t`** |
+| `:8498` | `fm = phi[a] - t*D` |
+| `:8496` | `fm = phi[a] - (t + bias)*D` — il `bias` resta uno ### **scostamento SOPRA `t`**, e il suo `0.5` di ampiezza a `:8495` ### **NON si tocca** |
+| `:2344` | `pos` Schwinger `= (1-t)*pos[aa] + t*pos[bb]` |
+| `:8701` | `dd` ### **si sdoppia**: il blocco `aa`–`k` vale `max(t*L, 0.05)`, il blocco `k`–`bb` vale `max((1-t)*L, 0.05)`, con `L = norm(pos[aa]-pos[bb])`. ### **L'ordine e' quello di `i = [.., aa, k]`** |
+
+### 📌 **E `d0new` deriva dai DUE MEZZI, con lo stesso ordine**, e resta calcolato dai
+valori ### **PRIMA** della chiamata a `_nasce` su `dh`, ### **come oggi.**
+
+### ⚠ **`MITOSI_2LAM` e l'antifase NON si toccano. `SCHW-CORTI` SI DICHIARA, non si risolve.**
+
+## ⛔ **`_fab` PER META', E SU *DUE* PERCORSI — errore del guardiano, dichiarato da lui**
+
+Il suo rilievo copriva ### **solo `dh`**, ma ### **anche lo Schwinger passa `dd` a `_nasce` con
+`md = 2, md0 = 2`.**
+
+| il sito | `md`, `md0` | che cosa cambia |
+|---|---|---|
+| `dh` | `2, 0` → ### **`1, 0`** | ### **UNA sola chiamata** sull'array raddoppiato *(cosi' `_g_sm_nascite` non cambia)*, e `_sm_lun` = ### **somma della meta' `a` PIU' somma della meta' `b`** |
+| `dd` | `2, 2` → ### **`1, 1`** | ### **idem** |
+| `d0new` | `0, 1` | ### **RESTA com'e': somma unica su `2n`**, come oggi |
+
+### ✅ **E PRIMA DI SCRIVERE SI VERIFICA DALL'ARITMETICA** che a `t = 0.5` tutti e
+### **quattro** i contatori, per tutti e ### **tre** i siti, restino ### **identici al bit.**
+
+## **I CRITERI DEL SIGILLO, fissati QUI e prima di girare**
+
+| | che cosa |
+|---|---|
+| **`0`** | la patch committata, applicata al *prima* committato, da' ### **il blob di oggi** |
+| **`A`** | ### **identico al byte** sulle tre scene del commit 4: ### **stato E contatori**, coi contatori ### **separati per nome e riportati**. ### ➕ **PIU' UNA QUARTA SCENA: la stessa argv SENZA `--mitosi-2lam`.** Si riportano `_sm_trd_mitosi`, `_sm_trd0_mitosi`, `_sm_trd_schwinger`, `_sm_trd0_schwinger` per ### **TUTTE** le scene. ### ⛔ **Nessuno puo' essere zero dappertutto**: un `_fab` sempre nullo rende ### **VUOTO** il braccio sui `_sm_lun`. ### **Se uno lo e': FERMATI e dillo.** |
+| **`B`** | il censimento rigirato: ### **0 siti `FRAZIONE` col numero letterale**, ### **13 occorrenze invece di 19**, e tutte e sei le formule ### **leggono `t`**, dall'AST |
+| **`C`** | una copia con ### **`t = 0.4`**, verificata ### **sui VALORI** e non sul *<<differisce>>*, al ### **primo evento di ciascun tipo**: `a`–`m` = `0.4*d` e `m`–`b` = `0.6*d` *(sui valori che entrano in `_nasce`, ### **prima del pavimento**)* · `aa`–`k` = `max(0.4*L, 0.05)` e `k`–`bb` = `max(0.6*L, 0.05)` · `pos = 0.6*pos[a] + 0.4*pos[b]` *(e lo stesso per `aa`/`bb`)* · `fm = phi[a] - 0.4*D` (mod) · `i`, `j` ### **coerenti coi blocchi** · `_sm_lun` di ogni sito ### **uguale alla somma a meta' calcolata in modo INDIPENDENTE dal sigillo** |
+| **`C-bis`** | per ### **CIASCUNO dei sei siti**, una copia con `t = 0.4` in cui ### **QUEL sito resta al letterale `0.5`**. Deve essere scoperta ### **da `B`** *(con la riga)* e ### **da `C`** *(con la grandezza che manca)*. ### **Sei copie, sei bocciature: se anche una passa, il sigillo non discrimina.** |
+
+### ⛔ **E SE UN CRITERIO FALLISCE: FERMARSI E RIPORTARE, non aggiustare il criterio.**
+
 ## 3. TODO DEL NEXT STEP
 
 1. ☐ **committare e pushare QUESTO FILE** *(par.8: prima del lavoro)*

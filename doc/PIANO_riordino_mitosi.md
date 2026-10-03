@@ -91,6 +91,15 @@ in una ### **voce a se' (`DIVISIONE-AUTOCONSISTENTE`, nata come `FRAZIONE-DIVISI
 
 ## ✅ **Come la struttura si prepara** *(commit 6a)*
 
+> ### ✅ **DECISIONE DI LUCA DEL 2026-10-03: `t` VALE PER LA GEOMETRIA *E* LA FASE.**
+> `pos` e `d`/`d0` nella divisione, `pos` e `dd` nello Schwinger, e ### **`fm` in tutti e due i
+> rami** — ### **SEI siti**, non quattro.
+> ### ⛔ **E le eredita' di STATO NON leggono `t`**: restano come sono e si decidono nella
+> ### **LEGGE** di `DIVISIONE-AUTOCONSISTENTE`.
+> ### 📌 **Il *<<quattro>>* di questo paragrafo era un conteggio della sola GEOMETRIA**, e
+> il censimento del `6a` *(`csv/_test_fork/_censimento_punto_medio/`)* ne ha trovati ### **sei**:
+> ### **il paragrafo resta come e' scritto, e questa e' la correzione** *(par.8)*.
+
 | | |
 |---|---|
 | **1** | il figlio sta a ### **`t·d` da `a`** e a ### **`(1−t)·d` da `b`** |
@@ -618,6 +627,25 @@ decisione che non lo riguarda.**
 ---
 
 # ⭐ **LA VOCE: `DIVISIONE-AUTOCONSISTENTE`** *(fuori dal riordino, in coda)*
+
+> ### ✅ **DECISIONE DI LUCA DEL 2026-10-03: LA VOCE SI DIVIDE IN DUE, e l'ordine e' diverso
+> ### per le due parti.**
+>
+> | | che cosa | quando |
+> |---|---|---|
+> | le ### **MISURE** | torsione persa alla divisione · verso dell'arco · `pos` contro `d` · calcio non simmetrico `a`/`b` | ### **SUBITO DOPO IL `6b`** |
+> | la ### **LEGGE** | la frazione che il sistema ### **SCEGLIE** | ### **DOPO la definizione dell'ENERGIA**, perche' ### **deve rispettare `A14`** |
+>
+> ### ⚠ **E il passaggio di consegne del guardiano su questo punto era INCOERENTE: vale
+> questa versione** *(2026-10-03, 14:01)*.
+> ### 📌 **E la ragione per cui la LEGGE viene dopo l'energia non e' organizzativa:**
+> `A14` dice che la carica si conserva ### **anche globalmente, nascita compresa** — quindi una
+> legge che decide ### **dove nasce il figlio** non si puo' scrivere prima di sapere ### **che cosa
+> deve restare invariato.**
+>
+> ### ✅ **E DAL `6a` LE EREDITA' DI STATO SONO FUORI, per decisione di Luca:** `psi` e
+> `phivel` come ### **media**, la famiglia dello ### **spinore** come ### **copia**, `rho_sel` del
+> cancello. ### **NON leggono `t`**, e si decidono ### **qui**, nella LEGGE.
 
 > ### 🔁 **RINOMINATA il 2026-10-01**, e la ragione e' **di fisica, non di nome**: nata come
 > `FRAZIONE-DIVISIONE` *(«dove si rompe l'arco»)*, ### **la voce ha dovuto allargarsi** quando la
