@@ -524,3 +524,44 @@ pulito e assente insieme.**
 dal reperto, pur avendolo eseguito — le copie `_sim_t04_md0.py` e `_sim_fm_rovescio.py` erano
 sul disco)*, e si controlla **periodicamente**. ### ⚠ **E se si ferma per un motivo che non e'
 un criterio, e' un altro REPERTO, non un referto.**
+
+---
+
+## **ANNOTAZIONE del 2026-10-03 — LA SORVEGLIANZA HA MENTITO, non il run**
+
+**Il run staccato e' partito alle 18:19:42 (PID `29608`). Alle 18:20:11 la mia sorveglianza
+ha annunciato *«il sigillo e' terminato»*, con `29` righe di referto.** ### ⛔ **Era FALSO: il
+processo era — ed e' — VIVO.**
+
+**LA CAUSA, misurata e non supposta:** avevo scritto l'attesa come
+`until ! kill -0 29608; do sleep 60; done` dentro **Git Bash**. ### **Il `kill` di Git Bash
+lavora sui PID di MSYS, non su quelli di WINDOWS: sono due NAMESPACE DIVERSI.** Il PID
+`29608` e' un PID di Windows *(lo ha restituito `Start-Process`)*, in MSYS non esiste, e
+`kill -0` risponde *«non esiste»* — che il mio `until` ha letto come *«e' finito»*.
+
+**Il confronto, fatto sullo stesso PID nello stesso istante:**
+
+| verifica | risposta | giusta? |
+|---|---|---|
+| `kill -0 29608` *(Git Bash)* | **MORTO** | ⛔ **no** |
+| `tasklist /FI "PID eq 29608"` | **VIVO** | ✅ **si** |
+| `Get-CimInstance Win32_Process` | **VIVO**, creato 18:19:42 | ✅ **si** |
+
+> ### 📌 **E LA FORMA DELL'ERRORE E' LA TERZA VOLTA DELLA STESSA: UN'ASSENZA LETTA COME UN
+> FATTO.** ### ① Il sigillo leggeva un json **rimasto sul disco** e lo prendeva per quello
+> della corsa *(falso-UNO)*. ### ② Un `git status` pulito lo prendevo per *«l'output e'
+> committato»*, mentre un file **mai aggiunto** e' pulito e assente insieme. ### ③ Qui, un
+> PID **che non esiste in quel namespace** l'ho preso per un processo **terminato**.
+> ### **Tre volte: <<non lo vedo>> letto come <<non c'e' piu'>>, invece che come <<sto
+> guardando nel posto sbagliato>>.**
+
+### ✅ **E SE AVESSI CREDUTO ALLA SORVEGLIANZA avrei dichiarato il run FINITO a `29` righe —
+cioe' avrei committato come referto un file che si interrompe a meta' della prima scena**, e
+l'avrei fatto **senza accorgermene**, perche' il processo che lo stava ancora scrivendo non
+dava alcun segno nella chat. ### **Il presidio che l'ha preso non e' stato un hook: e' stato
+guardare il FILE** *(30 righe, non 29: era CRESCIUTO)* **e il processo, invece di fidarmi del
+mio stesso strumento.**
+
+**Riarmata con `tasklist`**, che interroga i PID di Windows. ### ⚠ **E resta un limite
+dichiarato: non ho un presidio che impedisca di scrivere un'attesa nel namespace sbagliato.
+E' una regola scritta, cioe' `A9`.**
