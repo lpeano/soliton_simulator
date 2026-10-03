@@ -2555,3 +2555,54 @@ che esiste per impedire i riferimenti scaduti, una riga a memoria e' la trappola
 stesso avverte di evitare.** Corretta nello stesso commit.
 
 ---
+
+## ⛔ **IL SIGILLO DEL `COMMIT 5` E' CADUTO AL PRIMO GIRO, e l'errore era di DISEGNO**
+
+*(reperto: `csv/_seal_fork/_sigillo_perc_geom_derivata/_corsa_2026-10-03_CADUTO.txt`.*
+*Committato **prima** della correzione, che e' un commit a se' — par.5.)*
+
+```
+AssertionError: ** vincolo 4: `perc_geom` DOPO `tw`, coi due presidi:
+                  ancora trovata 0 volte, non 1 **
+```
+
+### **IL MIO ERRORE:** `copia_patchata` partiva dal ### **simulatore di OGGI**, cioe' da quello
+### **gia' curato** — ma ### **le ancore della patch descrivono il codice PRIMA della cura.**
+Applicarla al file curato non trova niente.
+
+### ✅ **E IL PRESIDIO HA FUNZIONATO:** l'`assert` dell'### **ancora unica** *(`P1-quater`)* ha
+### **fermato il sigillo** invece di produrre una copia a meta' che avrebbe girato per un'ora e
+dato un verdetto su un blob sbagliato. ### **Era il disegno a essere sbagliato, non il presidio.**
+
+### **LA CURA:** la sorgente di ogni copia e' ### **il *PRIMA***, sempre — anche per i bracci
+`D` ed `E`, che applicano la cura intera piu' l'iniezione.
+
+## ✅ **E LA CADUTA HA SUGGERITO UN BRACCIO CHE MANCAVA: il BRACCIO `0`**
+
+> ### **Se la patch COMMITTATA applicata al *prima* COMMITTATO da' lo STESSO BLOB del simulatore
+> di oggi, allora la cura e' recuperabile PER COSTRUZIONE** *(par.7)* — **e non per la mia parola.**
+
+### **MISURATO SUBITO, e costa due secondi:**
+
+| | |
+|---|---|
+| il *prima* *(dal **PADRE** di `f8c206e`, `H-P8`)* | ### **`7ed56608`** |
+| il *prima* **+ la patch committata** | ### **`6d306976`** |
+| il simulatore di oggi | ### **`6d306976`** |
+
+### ➜ ### **STESSO BLOB. Chiunque rifa' la cura con due comandi**, e se un giorno i blob
+differissero significherebbe che il simulatore committato contiene ### **qualcosa che la patch
+non produce** — da sapere **prima** di leggere qualunque altro braccio.
+
+## ⚠ **E UNA MIA RICADUTA, la TERZA in questa sessione: ho allungato la mano su `git stash`**
+
+Per committare **solo** la caduta senza la correzione ho fatto `git stash push` — ### **che
+viola `L-PATCH`** *(«non si fa `git stash` con una patch in corso»)*. ### **Me ne sono accorto
+subito e l'ho annullato** *(`git stash pop`, blob verificato intatto)*, ### **ma la ricaduta
+conta piu' della correzione rapida.**
+
+### 📌 **E ERA INUTILE, come le due volte precedenti:** `git add <file>` + `git commit` committa
+### **solo l'indice**, e la modifica non messa in stage ### **resta dov'e'.** La voce `L-PATCH`
+porta già questa annotazione con la sua cura strutturale: ### **la conferma, non la sana.**
+
+---

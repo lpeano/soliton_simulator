@@ -1,0 +1,23 @@
+[TIMBRO] _sigillo_perc_geom_derivata.py  sha1-BYTE 2fc23645  committato e pulito
+====================================================================================================
+IL SIGILLO DEL COMMIT 5: `perc_geom` del nato come DERIVAZIONE
+====================================================================================================
+  simulatore di OGGI (la cura) .. 6d306976
+  questo sigillo ................ 2fc23645
+  il PRIMA ...................... 7ed56608  (dal PADRE di f8c206e8, che introduce `_derivazione_perc_geom`)
+  ### e NON da `HEAD`: dal commit della cura in poi `HEAD` LA CONTIENE, e il
+  ###   braccio <<prima>> diventerebbe il braccio OFF di se stesso (`H-P8`).
+Traceback (most recent call last):
+  File "C:\Users\lpeano\soliton_simulator\csv\_seal_fork\_sigillo_perc_geom_derivata.py", line 378, in <module>
+    principale()
+    ~~~~~~~~~~^^
+  File "C:\Users\lpeano\soliton_simulator\csv\_seal_fork\_sigillo_perc_geom_derivata.py", line 192, in principale
+    p_ord = copia_patchata(os.path.join(FUORI, "_sim_solo_ordine.py"), ["--solo-ordine"])
+  File "C:\Users\lpeano\soliton_simulator\csv\_seal_fork\_sigillo_perc_geom_derivata.py", line 159, in copia_patchata
+    assert q.returncode == 0, (q.stdout or "")[-2000:] + (q.stderr or "")[-2000:]
+           ^^^^^^^^^^^^^^^^^
+AssertionError: ** vincolo 4: `perc_geom` DOPO `tw`, coi due presidi: ancora trovata 0 volte, non 1 **
+
+esito=0
+
+[exited with code 0]
