@@ -3169,3 +3169,43 @@ con *«è un docstring»*, e stavo per annunciare 185 difetti che non esistono.*
 ### 📌 **Corretto prima di riportarlo: la forma giusta è la sola `BinOp` di stringhe.**
 
 ---
+
+## **IL BUCO NEL BRACCIO `C`, e perché il run in corso non lo chiude**
+
+Il guardiano, verificando `7a05322..5ec4ec5`, ha trovato un **buco aperto dal rinforzo che aveva
+chiesto lui**, e lo **dichiara come proprio errore**. Lo riformulo con le mie parole, per far
+vedere che l'ho capito e non solo ricopiato:
+
+> La copia del braccio `C` gira **solo con `--mitosi-dir=1.0`**. Quindi il ramo normale
+> `fm = (self.phi[a] - FRAZ_NASCITA * D) % self._dphi()` *(`:8554`)* **non è eseguito da nessuna
+> copia che abbia la formula giusta**: le sei copie `C-bis` provano che **un letterale viene
+> scoperto**, non che **la formula sia giusta**, e `B` vede la riga *leggere* `FRAZ_NASCITA` —
+> cosa vera anche se la combinazione fosse `(1 - t)`.
+
+### 📌 **E IL PUNTO GENERALE:** il referto **non diceva quale copia aveva verificato quale sito**.
+Un braccio che non sa dire *chi ha verificato cosa* non sa nemmeno dire **cosa è rimasto fuori**:
+lo zero era garantito **dall'insieme delle copie**, non dalla legge. ### **Famiglia `FALSO-ZERO`,
+e fa il paio con il `dd`/`dh` del commit 6a** — lì avevo coperto **un tipo di evento** e l'avevo
+trattato come se coprisse entrambi.
+
+**CHE COSA HO FATTO ADESSO, e che cosa NO.** Il sigillo è **ancora in corso** e invoca
+`_frazione_t_patch.py` **come sottoprocesso**: durante il run quei due file sono **del percorso in
+uso**, e il par.5 vieta di toccarli. Quindi **non li ho toccati**. Le due patch — `--fm-rovescio`
+nella patch, il braccio `C0` con la copertura per sito nel sigillo — sono scritte **nello
+scratchpad** e **collaudate su copie**: le cinque sostituzioni attaccano tutte, l'AST di entrambi
+i file passa, e **nessuna docstring è una concatenazione di stringhe** *(la classe d'errore che ha
+ucciso il run precedente con `NameError: name 'STOP' is not defined`, e che `ast.parse` **non**
+intercetta)*.
+
+### ⛔ **UN DIFETTO DEL CASO ROVESCIO, trovato collaudando e non girando:** se `D` fosse `~0`,
+`phi[a] - 0.4*D` e `phi[a] - 0.6*D` **coinciderebbero**; la copia rovesciata verrebbe bocciata
+comunque, ma **la bocciatura non proverebbe niente sulla formula** — e lo stesso vale per il
+confronto di `C0`. ### ✅ **Cura: `misura_valori` esporta `_D_max`, e il referto lo DICHIARA.**
+Un `PASSA` con `D ~ 0` si vede, invece di nascondersi.
+
+**L'ordine resta quello fissato dal guardiano:** ① il referto del run in corso **così com'è**,
+senza toccarlo; ② il commit con `C0` e il caso rovescio, **strumenti committati prima di girare**;
+③ il run dei soli `C0` + rovescio, **dichiarato come complemento** del referto principale.
+### ⚠ **E se il run in corso fallisce un criterio: mi fermo e riporto, non aggiusto il criterio.**
+
+---

@@ -325,3 +325,67 @@ Il suo rilievo copriva ### **solo `dh`**, ma ### **anche lo Schwinger passa `dd`
 6. ☐ **STOP** — e il guardiano verifica
 
 ### ⚠ **E `MITOSI_2LAM` NON SI TOCCA: e' il `6b`.**
+
+---
+
+## **ANNOTAZIONE del 2026-10-03, dopo `5ec4ec5` — UN BUCO NEL BRACCIO `C`**
+
+### ⚠ **Non riscrivo i criteri qui sopra** *(par.8: un ragionamento riscritto a posteriori e'
+una ricostruzione, non un impegno)*. **Il criterio `C` come e' scritto sopra ERA GIUSTO; e'
+stato il RINFORZO a bucarlo.**
+
+**CHE COS'E' IL BUCO.** Il rinforzo del guardiano su `10034c6..e69682b` chiedeva — a ragione —
+di far girare il ramo del `bias`, che con `MITOSI_DIR = 0` non gira mai; e la copia di `C` e'
+diventata **una sola copia, con `--mitosi-dir=1.0`**. Conseguenza non vista:
+
+> ### ⛔ **il ramo NORMALE `fm = (self.phi[a] - FRAZ_NASCITA * D) % self._dphi()`** *(`:8554`)*
+> ### **non gira in NESSUNA copia che abbia la formula giusta.**
+
+**E i tre bracci che sembravano coprirlo non lo coprono:**
+
+| braccio | che cosa vede davvero | perche' NON basta |
+|---|---|---|
+| **`B`** | che la riga **legge `FRAZ_NASCITA`** | legge la costante **anche** se la combinazione e' `(1-t)` |
+| **`C`** | i valori, ma **del ramo del `bias`** | il ramo normale **non viene eseguito** |
+| **`C-bis`** | che il **letterale `0.5`** viene scoperto | prova che un letterale si scopre, ### **non che la formula sia giusta** |
+
+### 📌 **LA FORMA DELL'ERRORE, e vale oltre questo caso:** *«il sito e' coperto»* e *«il sito
+e' coperto SUI VALORI da una copia con la formula giusta»* sono **due cose diverse**, e il
+referto non poteva distinguerle perche' **non riportava QUALE copia aveva verificato QUALE
+sito**. Un braccio che non sa dire *chi ha verificato cosa* non sa nemmeno dire *cosa e'
+rimasto fuori*. **E' della famiglia `FALSO-ZERO`: lo zero era garantito dall'insieme delle
+copie, non dalla legge.**
+
+### ✅ **DI CHI E' L'ERRORE: del guardiano, e lo dichiara lui** *(il rinforzo l'ha chiesto
+lui)*. **Lo scrivo come tale perche' il reperto dica da quale decisione e' nato, non per
+assegnare una colpa.**
+
+### **I CRITERI NUOVI, fissati dal guardiano PRIMA di scrivere il codice**
+
+| | che cosa |
+|---|---|
+| **`C0`** | una copia con **`--t=0.4` e `MITOSI_DIR = 0`** *(il valore del sorgente, **senza** `--mitosi-dir`)*, verificata **SUI VALORI** al primo evento di ciascun tipo come `C`: in particolare **`fm = phi[a] - 0.4*D` (mod `dphi`)** dallo scatto della chiamata che **produce** la nascita, e insieme `dh_a`, `dh_b`, `pos` e `dd` |
+| **copertura** | il referto dice **per ciascun sito QUALE copia** (`C0` o `C1`) lo ha verificato sui valori, e **ogni sito deve averne almeno una**: **`fm` in `C0`**, **`fm_bias` in `C1`** |
+| **rovescio** | **il controllo che PUO' fallire**: una copia con `t = 0.4` in cui il ramo normale e' scritto **`(1-t)*D`** deve essere **BOCCIATA da `C0`**. Opzione nuova della patch: **`--fm-rovescio`**, solo per questa copia |
+
+### ⛔ **E UN MODO IN CUI IL CASO ROVESCIO PASSEREBBE PER FORTUNA, trovato collaudando la
+patch prima di committarla:** se `D` fosse `~0`, allora `phi[a] - 0.4*D` e `phi[a] - 0.6*D`
+**coinciderebbero** — la bocciatura ci sarebbe comunque, ma **non proverebbe niente sulla
+formula**, e lo stesso vale per il confronto di `C0`. **Cura: `misura_valori` esporta
+`_D_max` e il referto lo DICHIARA**, cosi' un `PASSA` con `D ~ 0` si vede invece di
+nascondersi. *(E' la lezione del commit 6a ripetuta: uno zero su un insieme scelto da me non
+e' uno zero sulla legge.)*
+
+### **L'ORDINE, deciso dal guardiano** *(e il run era IN CORSO quando il rilievo e' arrivato:
+va in coda, `L-UN-PROMPT`)*:
+
+1. ☐ il run in corso finisce → **il suo referto si committa COSI' COM'E', senza toccarlo**
+2. ☐ **poi** un commit con `C0` e il caso rovescio — **strumento committato PRIMA di girare** (par.5)
+3. ☐ **poi** il run dei soli `C0` + rovescio, **dichiarato come COMPLEMENTO** del referto
+   principale, e il suo referto nel commit dopo
+
+### ⚠ **PERCHE' LE DUE PATCH SONO STATE SCRITTE NELLO SCRATCHPAD E NON NEL REPO:** il sigillo
+invoca `_frazione_t_patch.py` **come sottoprocesso**, quindi durante il run e' un file **del
+percorso in uso** — modificarlo violerebbe il par.5. **Sono state collaudate su COPIE** *(le
+cinque sostituzioni attaccano, l'AST di entrambi i file passa, e nessuna docstring e' una
+concatenazione** — la classe d'errore che ha ucciso il run precedente)*.
