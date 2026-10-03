@@ -1,0 +1,196 @@
+====================================================================================================
+IL CENSIMENTO DELLA FRAZIONE DI NASCITA nel perimetro della mitosi
+====================================================================================================
+  simulatore .. 6d306976 (sha1 byte grezzi)
+  strumento ... e68a8b0b
+  perimetro ... mitosi, decidi_divisione  +  _rn_div_*, _rn_sch_*
+  il setaccio cerca IL NUMERO: ogni `0.5` letterale e ogni `/ 2`.
+  ### NON le FORME, e il motivo e' un buco MISURATO: cercando `0.5*(x+y)`,
+  ###   `(x+y)/2` e `x*0.5` (le tre del mandato) si trovavano 17 siti e NON
+  ###   si vedeva `(0.5 + bias) * D` a :8496 -- dove il 0.5 sta dentro un
+  ###   Add. Ed era IL SITO PIU' IMPORTANTE. E' FALSO-ZERO: un setaccio che
+  ###   parte dalle forme trova le forme che ha pensato.
+  ### E la forma `x / 2` non era fra le tre del mandato: senza di lei il
+  ###   sito `dh` (self.d[sel] / 2) NON si troverebbe.
+
+----------------------------------------------------------------------------------------------------
+TUTTE LE OCCORRENZE NEL PERIMETRO: 19
+
+  :1954   col 45   _rn_div_phivel       0.5 letterale  EREDITA-MEDIA  phivel
+          net.phivel = np.concatenate([net.phivel, 0.5 * (net.phivel[c["a"]] + net.phivel[c["b"]])])
+          -> DIVISIONE: il figlio prende la media di phivel. Ed e' la regola che A14 segnala: la nascita CAMBIA la carica totale
+
+  :1984   col 49   _rn_div_psi          0.5 letterale  EREDITA-MEDIA  psi
+          net.psi = np.concatenate([cur[:c["n0"]], 0.5 * (cur[c["src_a"]] + cur[c["src_b"]])])
+          -> DIVISIONE: il figlio prende la media di psi
+
+  :2335   col 33   _rn_sch_phivel       0.5 letterale  EREDITA-MEDIA  phivel
+          0.5 * (net.phivel[c["aa"]] + net.phivel[c["bb"]])])
+          -> SCHWINGER: l'antinodo prende la media di phivel
+
+  :2344   col 34   _rn_sch_pos          0.5 letterale  FRAZIONE       SCHWINGER/pos
+          net.pos = np.vstack([net.pos, 0.5 * (net.pos[c["aa"]] + net.pos[c["bb"]])])
+          -> SCHWINGER, DOVE nasce l'antinodo: 0.5*(pos[aa] + pos[bb]), nella regola _rn_sch_pos
+
+  :8259   col 17   decidi_divisione     0.5 letterale  ALTRO          soglia
+          centro = 0.5 * (pos_soglia + pos_tetto)
+          -> decidi_divisione: centro = 0.5*(pos_soglia + pos_tetto), il centro di un INTERVALLO DI SOGLIA, non una nascita
+
+  :8404   col 13   decidi_divisione     0.5 letterale  ALTRO          densita
+          ok = 0.5 * (I[a] + I[b]) >= QMIN_M * float(np.median(self.peq))
+          -> decidi_divisione: 0.5*(I[a]+I[b]) e' la MEDIA DI DENSITA' del criterio
+
+  :8495   col 19   mitosi               0.5 letterale  ALTRO          bias
+          bias = 0.5 * np.tanh(MITOSI_DIR * (twn[a] - twn[b]))
+          -> mitosi: bias = 0.5*tanh(...). Il 0.5 e' l'AMPIEZZA del bias (lo tiene in [-0.5,0.5]), NON la frazione: la frazione e' il 0.5 di :8496. DUE 0.5 CON DUE
+
+  :8496   col 33   mitosi               0.5 letterale  FRAZIONE       DIVISIONE/fm (fase)
+          fm = (self.phi[a] - (0.5 + bias) * D) % self._dphi()
+          -> DIVISIONE, la FASE del figlio, ramo MITOSI_DIR: fm = (phi[a] - (0.5+bias)*D). *** QUI UNA FRAZIONE DIVERSA DA 0.5 ESISTE GIA': bias = 0.5*tanh(MITOSI_
+
+  :8498   col 32   mitosi               0.5 letterale  FRAZIONE       DIVISIONE/fm (fase)
+          fm = (self.phi[a] - 0.5 * D) % self._dphi()
+          -> DIVISIONE, la FASE del figlio, ramo SENZA MITOSI_DIR: fm = (phi[a] - 0.5*D)
+
+  :8499   col 21   mitosi               0.5 letterale  FRAZIONE       DIVISIONE/pos
+          pos_figlio = 0.5 * (self.pos[a] + self.pos[b])
+          -> DIVISIONE, DOVE nasce il figlio: pos_figlio = 0.5*(pos[a] + pos[b])
+
+  :8509   col 22   mitosi               0.5 letterale  ALTRO          densita
+          rho_sel = 0.5 * (I[a] + I[b])                       # densita' d'interferenza sull'arco
+          -> mitosi: rho_sel = 0.5*(I[a]+I[b]), media di densita'
+
+  :8519   col 21   mitosi               / 2            ALTRO          dominio
+          _mezzo = self._dphi() / 2.0
+          -> mitosi: _mezzo = self._dphi()/2.0, META' DEL DOMINIO della fase
+
+  :8540   col 48   mitosi               0.5 letterale  ALTRO          calcio
+          comune = KICK_TW * sciolta * (mod - 0.5)
+          -> mitosi: comune = KICK_TW*sciolta*(mod - 0.5). Il 0.5 e' un OFFSET che centra `mod` intorno a zero, non una frazione di nascita. *** E L'HA TROVATA SOL
+
+  :8541   col 32   mitosi               0.5 letterale  ALTRO          calcio
+          calcio_a = comune + 0.5 * KICK_TW * sciolta * chi_a * mod
+          -> mitosi: 0.5*KICK_TW, l'ampiezza del calcio ripartita fra i due genitori
+
+  :8542   col 32   mitosi               0.5 letterale  ALTRO          calcio
+          calcio_b = comune - 0.5 * KICK_TW * sciolta * chi_b * mod
+          -> mitosi: idem, col segno opposto
+
+  :8561   col 13   mitosi               / 2            FRAZIONE       DIVISIONE/d,d0
+          dh = self.d[sel] / 2
+          -> DIVISIONE, QUANTO sono lunghi i due tronconi: dh = self.d[sel]/2. La lunghezza viene da `d` -- e nello Schwinger da `pos`: e' SCHW-CORTI
+
+  :8665   col 26   mitosi               0.5 letterale  ALTRO          densita
+          rho_sel = 0.5 * (I[a] + I[b])                   # densita' d'interferenza sull'arco
+          -> mitosi (ramo Schwinger): rho_sel = 0.5*(I[a]+I[b])
+
+  :8694   col 35   mitosi               / 2            ALTRO          dominio
+          anti = (fm[pick] + self._dphi() / 2.0) % self._dphi()
+          -> mitosi: anti = fm + _dphi()/2, l'ANTIFASE (meta' del DOMINIO)
+
+  :8701   col 20   mitosi               0.5 letterale  FRAZIONE       SCHWINGER/dd
+          0.5 * np.linalg.norm(self.pos[aa] - self.pos[bb], axis=1), 0.05),
+          -> SCHWINGER, QUANTO sono lunghi i due archi nuovi: 0.5*norm(pos[aa]-pos[bb]). La lunghezza viene da `pos`, NON da `d`: e' SCHW-CORTI
+
+----------------------------------------------------------------------------------------------------
+LA CLASSIFICAZIONE
+  FRAZIONE      (DOVE sta il figlio, QUANTO sono lunghi i suoi archi) .. 6 siti
+      :2344   _rn_sch_pos          SCHWINGER/pos 0.5 letterale
+      :8496   mitosi               DIVISIONE/fm (fase) 0.5 letterale
+      :8498   mitosi               DIVISIONE/fm (fase) 0.5 letterale
+      :8499   mitosi               DIVISIONE/pos 0.5 letterale
+      :8561   mitosi               DIVISIONE/d,d0 / 2
+      :8701   mitosi               SCHWINGER/dd 0.5 letterale
+  EREDITA-MEDIA (il figlio prende la MEDIA di una grandezza di STATO) . 3 siti
+      :1954   _rn_div_phivel       phivel       0.5 letterale
+      :1984   _rn_div_psi          psi          0.5 letterale
+      :2335   _rn_sch_phivel       phivel       0.5 letterale
+  ALTRO         (una meta' che fa altro) ............................. 10 siti
+
+  le GRANDEZZE della FRAZIONE ......... DIVISIONE/d,d0, DIVISIONE/fm (fase), DIVISIONE/pos, SCHWINGER/dd, SCHWINGER/pos  (5)
+  le GRANDEZZE dell'EREDITA-MEDIA ..... phivel, psi
+
+====================================================================================================
+### IL VERDETTO DEL CENSIMENTO
+###   occorrenze del numero nel perimetro .. 19
+###   di cui FRAZIONE ...................... 6 siti su 5 GRANDEZZE
+###
+###   *** PIU' DI QUATTRO: IL COMMIT 6a SI FERMA, come dice il mandato. ***
+###
+###   Il mandato elencava QUATTRO grandezze -- pos e d/d0 della DIVISIONE,
+###   pos e dd dello SCHWINGER -- e NON la FASE del figlio (`fm`), che e'
+###   la quinta e sta nella preparazione, con DUE rami.
+###
+###   E IL FATTO PIU' GRAVE NON E' IL NUMERO: a :8496 UNA FRAZIONE
+###   DIVERSA DA 0.5 ESISTE GIA'.
+###     bias = 0.5 * tanh(MITOSI_DIR * (twn[a] - twn[b]))
+###     fm   = (phi[a] - (0.5 + bias) * D) % dphi
+###   e il commento del codice dice: <<bias in [-0.5,0.5]: verso il
+###   genitore piu' teso. 0 = punto medio>>.
+###
+###   CIOE' IL SISTEMA HA GIA' UNA FRAZIONE GENERALE, MA SOLO PER LA FASE,
+###   E NON LA APPLICA A `pos`.
+###
+###   *** E NON E' UNA SVISTA: IL CODICE DICHIARA PERCHE'. *** Il commento
+###   a :8486-8488 dice: <<L'asimmetria e' nella FASE, dove vive la materia,
+###   non nella posizione (che il rilassamento geometrico riporterebbe
+###   indietro). Non e' una forza: e' l'orientamento della replicazione
+###   lungo il gradiente gia' presente>>.
+###   CORREGGO QUELLO CHE AVEVO SCRITTO: NON e' <<esattamente il difetto
+###   che il punto 2 del piano vuole impedire>>. Il punto 2 chiede che `pos`
+###   e `d`/`d0` dicano la STESSA cosa -- sono due descrizioni della
+###   GEOMETRIA. La fase e' un ALTRO asse, e il codice ha una RAGIONE
+###   SCRITTA per trattarlo diversamente.
+###
+###   MITOSI_DIR vale 0.0 nella configurazione del driver, quindi oggi
+###   bias = 0 e la fase sta nel mezzo.
+###   MA IL PUNTO RESTA, E NON E' IL NUMERO: se il 6a dichiarasse `t` in un
+###   posto solo per la GEOMETRIA, nel codice resterebbero DUE frazioni --
+###   `t` per la geometria e `0.5 + bias` per la fase -- e la seconda
+###   sarebbe l'unica a non leggere il valore dichiarato. ### SE LE DUE
+###   DEBBANO ESSERE LA STESSA E UNA DECISIONE DI LUCA, NON MIA.
+====================================================================================================
+
+----------------------------------------------------------------------------------------------------
+IL CONFRONTO CON LA LISTA DEL GUARDIANO (rilievo del 2026-10-03)
+  righe nella MIA lista ......... 19
+  righe nella SUA lista ......... 12
+
+  SOLO NELLA MIA: 7
+      :8259   decidi_divisione     ALTRO          centro = 0.5 * (pos_soglia + pos_tetto)
+      :8404   decidi_divisione     ALTRO          ok = 0.5 * (I[a] + I[b]) >= QMIN_M * float(np.median(self.pe
+      :8495   mitosi               ALTRO          bias = 0.5 * np.tanh(MITOSI_DIR * (twn[a] - twn[b]))
+      :8496   mitosi               FRAZIONE       fm = (self.phi[a] - (0.5 + bias) * D) % self._dphi()
+      :8540   mitosi               ALTRO          comune = KICK_TW * sciolta * (mod - 0.5)
+      :8541   mitosi               ALTRO          calcio_a = comune + 0.5 * KICK_TW * sciolta * chi_a * mod
+      :8542   mitosi               ALTRO          calcio_b = comune - 0.5 * KICK_TW * sciolta * chi_b * mod
+  ### per CLASSE: ALTRO 6 (:8259, :8404, :8495, :8540, :8541, :8542) · FRAZIONE 1 (:8496)
+  ###   *** LA DIFFERENZA TOCCA FRAZIONE, non solo `ALTRO`. ***
+  ###     :8496 e' FRAZIONE e NON e' nella lista del guardiano
+  ###   E IL CASO E' :8496, la frazione `(0.5 + bias)` del ramo MITOSI_DIR:
+  ###   il guardiano cita quel ramo come :8489 (la riga del CANCELLO), non
+  ###   la riga del NUMERO. Quindi NON e' un sito che gli e' sfuggito: e'
+  ###   lo STESSO sito, citato con un'altra riga. Ma la differenza va
+  ###   detta per quello che e', e la frase NON si afferma: si CALCOLA.
+
+  SOLO NELLA SUA: 0
+
+  E DOVE LE CLASSI NON COINCIDONO:
+    :8509 e :8665 (rho_sel) -- il guardiano le mette fra i siti <<oltre i
+      quattro>>, io le ho classificate ALTRO, perche' NON decidono dove nasce
+      il figlio: sono la MEDIA DI DENSITA' del cancello dell'antifase.
+      *** NON E' UNA DIFFERENZA DI MISURA, E' UNA DIFFERENZA DI CLASSE: la
+      domanda <<se il nato eredita con peso t, la densita' del cancello lo
+      segue?>> il guardiano la pone, e dice che LA DECIDE LUCA. Quindi la
+      lascio ALTRO e la DICHIARO come candidata in sospeso.
+    :8495 e :8496 -- il guardiano cita il ramo MITOSI_DIR come :8489, che e'
+      la riga del CANCELLO (if MITOSI_DIR != 0.0). Le righe del NUMERO,
+      misurate dall'AST, sono :8495 (l'ampiezza del bias) e :8496 (la
+      frazione (0.5 + bias)). Stessa cosa, righe diverse: uso le mie, che
+      sono misurate.
+
+  ### E UN FATTO IN PIU', verificato: `psi` ha UN SOLO sito (:1984) per
+  ###   ENTRAMBI gli eventi, perche' `_rn_sch_psi` CHIAMA `_rn_div_psi`.
+  ###   Il guardiano lo dice, e il codice lo conferma. ### Mentre `pos` e
+  ###   `phivel` hanno DUE siti ciascuna: la condivisione NON e' uniforme.
+

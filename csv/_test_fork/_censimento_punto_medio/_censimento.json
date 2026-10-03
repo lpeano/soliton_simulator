@@ -1,0 +1,248 @@
+{
+ "confronto_solo_mie": [
+  8259,
+  8404,
+  8495,
+  8496,
+  8540,
+  8541,
+  8542
+ ],
+ "confronto_solo_sue": [],
+ "blob_sim": "6d30697619d2cafbf20a6466fbfbca210656111d",
+ "blob_strumento": "e68a8b0bef48c72fa36bcbcd864d0e2ea3360283",
+ "perimetro_esatto": [
+  "mitosi",
+  "decidi_divisione"
+ ],
+ "perimetro_prefissi": [
+  "_rn_div_",
+  "_rn_sch_"
+ ],
+ "trovate": [
+  {
+   "riga": 1954,
+   "col": 45,
+   "dentro": "_rn_div_phivel",
+   "forma": "0.5 letterale",
+   "bersaglio": "self.phivel",
+   "testo": "net.phivel = np.concatenate([net.phivel, 0.5 * (net.phivel[c[\"a\"]] + net.phivel[c[\"b\"]])])",
+   "classe": "EREDITA-MEDIA",
+   "grandezza": "phivel",
+   "che_cosa": "DIVISIONE: il figlio prende la media di phivel. Ed e' la regola che A14 segnala: la nascita CAMBIA la carica totale"
+  },
+  {
+   "riga": 1984,
+   "col": 49,
+   "dentro": "_rn_div_psi",
+   "forma": "0.5 letterale",
+   "bersaglio": "self.psi",
+   "testo": "net.psi = np.concatenate([cur[:c[\"n0\"]], 0.5 * (cur[c[\"src_a\"]] + cur[c[\"src_b\"]])])",
+   "classe": "EREDITA-MEDIA",
+   "grandezza": "psi",
+   "che_cosa": "DIVISIONE: il figlio prende la media di psi"
+  },
+  {
+   "riga": 2335,
+   "col": 33,
+   "dentro": "_rn_sch_phivel",
+   "forma": "0.5 letterale",
+   "bersaglio": "self.phivel",
+   "testo": "0.5 * (net.phivel[c[\"aa\"]] + net.phivel[c[\"bb\"]])])",
+   "classe": "EREDITA-MEDIA",
+   "grandezza": "phivel",
+   "che_cosa": "SCHWINGER: l'antinodo prende la media di phivel"
+  },
+  {
+   "riga": 2344,
+   "col": 34,
+   "dentro": "_rn_sch_pos",
+   "forma": "0.5 letterale",
+   "bersaglio": "self.pos",
+   "testo": "net.pos = np.vstack([net.pos, 0.5 * (net.pos[c[\"aa\"]] + net.pos[c[\"bb\"]])])",
+   "classe": "FRAZIONE",
+   "grandezza": "SCHWINGER/pos",
+   "che_cosa": "SCHWINGER, DOVE nasce l'antinodo: 0.5*(pos[aa] + pos[bb]), nella regola _rn_sch_pos"
+  },
+  {
+   "riga": 8259,
+   "col": 17,
+   "dentro": "decidi_divisione",
+   "forma": "0.5 letterale",
+   "bersaglio": "centro",
+   "testo": "centro = 0.5 * (pos_soglia + pos_tetto)",
+   "classe": "ALTRO",
+   "grandezza": "soglia",
+   "che_cosa": "decidi_divisione: centro = 0.5*(pos_soglia + pos_tetto), il centro di un INTERVALLO DI SOGLIA, non una nascita"
+  },
+  {
+   "riga": 8404,
+   "col": 13,
+   "dentro": "decidi_divisione",
+   "forma": "0.5 letterale",
+   "bersaglio": "ok",
+   "testo": "ok = 0.5 * (I[a] + I[b]) >= QMIN_M * float(np.median(self.peq))",
+   "classe": "ALTRO",
+   "grandezza": "densita",
+   "che_cosa": "decidi_divisione: 0.5*(I[a]+I[b]) e' la MEDIA DI DENSITA' del criterio"
+  },
+  {
+   "riga": 8495,
+   "col": 19,
+   "dentro": "mitosi",
+   "forma": "0.5 letterale",
+   "bersaglio": "bias",
+   "testo": "bias = 0.5 * np.tanh(MITOSI_DIR * (twn[a] - twn[b]))",
+   "classe": "ALTRO",
+   "grandezza": "bias",
+   "che_cosa": "mitosi: bias = 0.5*tanh(...). Il 0.5 e' l'AMPIEZZA del bias (lo tiene in [-0.5,0.5]), NON la frazione: la frazione e' il 0.5 di :8496. DUE 0.5 CON DUE RUOLI DIVERSI SULLA STESSA LEGGE, e distinguerli e' il punto"
+  },
+  {
+   "riga": 8496,
+   "col": 33,
+   "dentro": "mitosi",
+   "forma": "0.5 letterale",
+   "bersaglio": "fm",
+   "testo": "fm = (self.phi[a] - (0.5 + bias) * D) % self._dphi()",
+   "classe": "FRAZIONE",
+   "grandezza": "DIVISIONE/fm (fase)",
+   "che_cosa": "DIVISIONE, la FASE del figlio, ramo MITOSI_DIR: fm = (phi[a] - (0.5+bias)*D). *** QUI UNA FRAZIONE DIVERSA DA 0.5 ESISTE GIA': bias = 0.5*tanh(MITOSI_DIR*(twn[a]-twn[b])) sta in [-0.5,0.5], e il commento del codice dice: <<verso il genitore piu' teso. 0 = punto medio>>"
+  },
+  {
+   "riga": 8498,
+   "col": 32,
+   "dentro": "mitosi",
+   "forma": "0.5 letterale",
+   "bersaglio": "fm",
+   "testo": "fm = (self.phi[a] - 0.5 * D) % self._dphi()",
+   "classe": "FRAZIONE",
+   "grandezza": "DIVISIONE/fm (fase)",
+   "che_cosa": "DIVISIONE, la FASE del figlio, ramo SENZA MITOSI_DIR: fm = (phi[a] - 0.5*D)"
+  },
+  {
+   "riga": 8499,
+   "col": 21,
+   "dentro": "mitosi",
+   "forma": "0.5 letterale",
+   "bersaglio": "pos_figlio",
+   "testo": "pos_figlio = 0.5 * (self.pos[a] + self.pos[b])",
+   "classe": "FRAZIONE",
+   "grandezza": "DIVISIONE/pos",
+   "che_cosa": "DIVISIONE, DOVE nasce il figlio: pos_figlio = 0.5*(pos[a] + pos[b])"
+  },
+  {
+   "riga": 8509,
+   "col": 22,
+   "dentro": "mitosi",
+   "forma": "0.5 letterale",
+   "bersaglio": "rho_sel",
+   "testo": "rho_sel = 0.5 * (I[a] + I[b])                       # densita' d'interferenza sull'arco",
+   "classe": "ALTRO",
+   "grandezza": "densita",
+   "che_cosa": "mitosi: rho_sel = 0.5*(I[a]+I[b]), media di densita'"
+  },
+  {
+   "riga": 8519,
+   "col": 21,
+   "dentro": "mitosi",
+   "forma": "/ 2",
+   "bersaglio": "_mezzo",
+   "testo": "_mezzo = self._dphi() / 2.0",
+   "classe": "ALTRO",
+   "grandezza": "dominio",
+   "che_cosa": "mitosi: _mezzo = self._dphi()/2.0, META' DEL DOMINIO della fase"
+  },
+  {
+   "riga": 8540,
+   "col": 48,
+   "dentro": "mitosi",
+   "forma": "0.5 letterale",
+   "bersaglio": "comune",
+   "testo": "comune = KICK_TW * sciolta * (mod - 0.5)",
+   "classe": "ALTRO",
+   "grandezza": "calcio",
+   "che_cosa": "mitosi: comune = KICK_TW*sciolta*(mod - 0.5). Il 0.5 e' un OFFSET che centra `mod` intorno a zero, non una frazione di nascita. *** E L'HA TROVATA SOLO IL SETACCIO CHE PARTE DAL NUMERO: nella forma `(mod - 0.5)` il 0.5 sta dentro un Sub, quindi il setaccio delle FORME non la vedeva -- una conferma in piu' che partire dalle forme era sbagliato"
+  },
+  {
+   "riga": 8541,
+   "col": 32,
+   "dentro": "mitosi",
+   "forma": "0.5 letterale",
+   "bersaglio": "calcio_a",
+   "testo": "calcio_a = comune + 0.5 * KICK_TW * sciolta * chi_a * mod",
+   "classe": "ALTRO",
+   "grandezza": "calcio",
+   "che_cosa": "mitosi: 0.5*KICK_TW, l'ampiezza del calcio ripartita fra i due genitori"
+  },
+  {
+   "riga": 8542,
+   "col": 32,
+   "dentro": "mitosi",
+   "forma": "0.5 letterale",
+   "bersaglio": "calcio_b",
+   "testo": "calcio_b = comune - 0.5 * KICK_TW * sciolta * chi_b * mod",
+   "classe": "ALTRO",
+   "grandezza": "calcio",
+   "che_cosa": "mitosi: idem, col segno opposto"
+  },
+  {
+   "riga": 8561,
+   "col": 13,
+   "dentro": "mitosi",
+   "forma": "/ 2",
+   "bersaglio": "dh",
+   "testo": "dh = self.d[sel] / 2",
+   "classe": "FRAZIONE",
+   "grandezza": "DIVISIONE/d,d0",
+   "che_cosa": "DIVISIONE, QUANTO sono lunghi i due tronconi: dh = self.d[sel]/2. La lunghezza viene da `d` -- e nello Schwinger da `pos`: e' SCHW-CORTI"
+  },
+  {
+   "riga": 8665,
+   "col": 26,
+   "dentro": "mitosi",
+   "forma": "0.5 letterale",
+   "bersaglio": "rho_sel",
+   "testo": "rho_sel = 0.5 * (I[a] + I[b])                   # densita' d'interferenza sull'arco",
+   "classe": "ALTRO",
+   "grandezza": "densita",
+   "che_cosa": "mitosi (ramo Schwinger): rho_sel = 0.5*(I[a]+I[b])"
+  },
+  {
+   "riga": 8694,
+   "col": 35,
+   "dentro": "mitosi",
+   "forma": "/ 2",
+   "bersaglio": "anti",
+   "testo": "anti = (fm[pick] + self._dphi() / 2.0) % self._dphi()",
+   "classe": "ALTRO",
+   "grandezza": "dominio",
+   "che_cosa": "mitosi: anti = fm + _dphi()/2, l'ANTIFASE (meta' del DOMINIO)"
+  },
+  {
+   "riga": 8701,
+   "col": 20,
+   "dentro": "mitosi",
+   "forma": "0.5 letterale",
+   "bersaglio": "dd",
+   "testo": "0.5 * np.linalg.norm(self.pos[aa] - self.pos[bb], axis=1), 0.05),",
+   "classe": "FRAZIONE",
+   "grandezza": "SCHWINGER/dd",
+   "che_cosa": "SCHWINGER, QUANTO sono lunghi i due archi nuovi: 0.5*norm(pos[aa]-pos[bb]). La lunghezza viene da `pos`, NON da `d`: e' SCHW-CORTI"
+  }
+ ],
+ "frazione_siti": 6,
+ "frazione_grandezze": [
+  "DIVISIONE/d,d0",
+  "DIVISIONE/fm (fase)",
+  "DIVISIONE/pos",
+  "SCHWINGER/dd",
+  "SCHWINGER/pos"
+ ],
+ "eredita_siti": 3,
+ "eredita_grandezze": [
+  "phivel",
+  "psi"
+ ],
+ "altro_siti": 10,
+ "quattro_o_meno": false
+}

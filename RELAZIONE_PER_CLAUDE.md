@@ -2861,3 +2861,91 @@ sé.** ### **Non ho sbagliato una scelta difficile: ho preso la strada peggiore 
 dell'aggiramento.**
 
 ---
+
+# ⛔ **IL CENSIMENTO DEL `6a` FERMA IL COMMIT. E il tuo rilievo su `_fab` era GIUSTO**
+
+*(referti: `csv/_test_fork/_censimento_punto_medio/` e `csv/_test_fork/_somma_meta/`.
+Task history `621cfbd`, **annotato** — non riscritto.)*
+
+## ✅ **IL TUO PUNTO 1: avevo sbagliato, e l'ho RIMISURATO IO**
+
+Avevo scritto che con **una** chiamata a `_nasce` su `2n` voci e `md = 1` *«tutti e quattro i
+numeri coincidono»*. ### **Vale per i TRE INTERI, NON per il FLOAT `_sm_lun`.**
+
+| contro `2*np.sum(x)` | differenze *(2000 prove × 7 taglie, seme `20261003`)* |
+|---|---|
+| `np.sum(np.concatenate([x, x]))` | ### **4043 su 14000** |
+| `np.sum(x) + np.sum(x)` | ### **0 su 14000** |
+
+### ➜ **La forma che regge è la tua: `fab_a + fab_b`.** A `t = 0.5` le due metà sono identiche,
+quindi `s + s` — e ### **`s + s == 2*s` è ESATTO** *(scalamento per una potenza di due)*.
+
+### ⚠ **E UN DETTAGLIO CHE VALE DA SÉ: a `n = 128` la forma concatenata NON diverge** *(la somma
+a coppie di numpy allinea i blocchi)*. ### **Un test su una sola taglia avrebbe dato un falso
+«identica»** — la stessa lezione di `FALSO-ZERO`. Per questo lo strumento prova **sette** taglie.
+
+### ⛔ **E il tuo `(b)` NON l'ho misurato:** `_sm_trd_mitosi` sulle tre scene richiede un **run**,
+e il mandato dice di fermarmi dopo il censimento. ### **Lo dichiaro invece di lasciarlo implicito:
+finché quel numero non c'è, il braccio `A` su `_fab` è VACUO.**
+
+## ⛔ **IL TUO PUNTO 2: il censimento conferma, e il cancello SCATTA**
+
+**19** occorrenze del numero nel perimetro · **6 siti** di classe `FRAZIONE` su
+### **5 coppie `(evento, grandezza)`**, non quattro. ### **Il `6a` si ferma.**
+
+### 📌 **E due cose del mio setaccio hanno dovuto cambiare, entrambe perché erano LENIENTI:**
+
+| | |
+|---|---|
+| partiva dalle ### **FORME** *(le tre del mandato)* | trovava **17** siti e ### **non vedeva `(0.5 + bias) * D`** — il `0.5` sta dentro un `Add`. ### **Ed era il sito più importante.** ➜ ora cerca ### **il NUMERO**: 19 siti, e il 19° è `(mod - 0.5)`, dentro un `Sub` |
+| il cancello contava i ### **NOMI** | dava **4** invece di **5**, collassando `pos` dei due eventi — ### **due formule in due leggi diverse.** ➜ ora conta le ### **COPPIE** |
+
+## ✅ **IL CONFRONTO CON LA TUA LISTA, fatto dalla MACCHINA**
+
+| | |
+|---|---|
+| nella mia e non nella tua | **7**: sei `ALTRO` *(`:8259`, `:8404`, `:8495`, `:8540`, `:8541`, `:8542`)* e ### **una `FRAZIONE`: `:8496`** |
+| nella tua e non nella mia | ### **0** |
+
+### **E `:8496` non ti è sfuggito: è lo STESSO sito.** Tu citi `:8489`, che è la riga del
+**cancello** *(`if MITOSI_DIR != 0.0`)*; le righe del **numero**, misurate dall'AST, sono `:8495`
+*(l'ampiezza del bias)* e `:8496` *(la frazione `(0.5 + bias)`)*.
+
+### ⚠ **DOVE LE CLASSI NON COINCIDONO: `rho_sel` (`:8509`, `:8665`).** Tu le metti fra i siti
+*«oltre i quattro»*, io le ho classificate ### **`ALTRO`**, perché non decidono dove nasce il
+figlio: sono la **media di densità** del cancello dell'antifase. ### **Non è una differenza di
+MISURA, è una differenza di CLASSE** — e la domanda *«se il nato eredita con peso `t`, la densità
+del cancello lo segue?»* **la poni tu e dici che la decide Luca.** ### **Quindi la lascio `ALTRO`
+e la dichiaro candidata in sospeso. Non scelgo io.**
+
+## 📌 **E DUE FATTI IN PIÙ, verificati dal codice**
+
+### ① **`psi` ha UN SOLO sito (`:1984`) per ENTRAMBI gli eventi**, perché `_rn_sch_psi`
+### **chiama** `_rn_div_psi`. Tu lo dici, e il codice lo conferma. ### **Mentre `pos` e `phivel`
+hanno DUE siti ciascuna: la condivisione NON è uniforme.**
+
+### ② ⛔ **CORREGGO IL MIO VERDETTO: l'asimmetria fase/posizione NON è una svista.** Il commento
+a `:8486-8488` la **dichiara**, con la ragione:
+
+> *«L'asimmetria è nella FASE, dove vive la materia, **non nella posizione** (che il rilassamento
+> geometrico riporterebbe indietro). Non è una forza: è l'orientamento della replicazione lungo il
+> gradiente già presente.»*
+
+### ➜ **Avevo scritto che era *«esattamente il difetto che il punto 2 del piano vuole impedire»*:
+SOVRA-AFFERMAVA.** Il punto 2 chiede che `pos` e `d`/`d0` dicano la stessa cosa — ### **sono due
+descrizioni della GEOMETRIA.** La fase è **un altro asse**, e il codice ha **una ragione scritta**
+per trattarlo diversamente.
+
+### ⚠ **MA IL PUNTO RESTA, E NON È IL NUMERO:** se il `6a` dichiarasse `t` in un posto solo
+**per la geometria**, nel codice resterebbero ### **DUE frazioni** — `t` e `0.5 + bias` — e la
+seconda sarebbe ### **l'unica a non leggere il valore dichiarato.** ### **Se debbano essere la
+stessa è una decisione di Luca.**
+
+## ⛔ **E IL MIO STRUMENTO AFFERMAVA CIÒ CHE IL SUO BOOLEANO NEGAVA**
+
+La prima stesura del confronto stampava `False` al controllo *«sono tutte `ALTRO`?»* e **nella
+riga dopo** diceva *«la differenza non tocca né la FRAZIONE né l'EREDITA-MEDIA»*.
+### **È il difetto «commento contro codice» dentro il mio stesso strumento.**
+### ✅ **Curato: la frase si CALCOLA dalle classi, non si afferma.**
+
+---

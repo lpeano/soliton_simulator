@@ -1,0 +1,54 @@
+{
+ "strumento": "e1eb2c18f60d7999d595a84d348700e664ef44fd",
+ "numpy": "2.3.0",
+ "seme": 20261003,
+ "prove_per_taglia": 2000,
+ "righe": [
+  {
+   "n": 2,
+   "A_diverse": 163,
+   "C_diverse": 0,
+   "prove": 2000
+  },
+  {
+   "n": 3,
+   "A_diverse": 441,
+   "C_diverse": 0,
+   "prove": 2000
+  },
+  {
+   "n": 4,
+   "A_diverse": 365,
+   "C_diverse": 0,
+   "prove": 2000
+  },
+  {
+   "n": 9,
+   "A_diverse": 951,
+   "C_diverse": 0,
+   "prove": 2000
+  },
+  {
+   "n": 17,
+   "A_diverse": 1033,
+   "C_diverse": 0,
+   "prove": 2000
+  },
+  {
+   "n": 33,
+   "A_diverse": 1090,
+   "C_diverse": 0,
+   "prove": 2000
+  },
+  {
+   "n": 128,
+   "A_diverse": 0,
+   "C_diverse": 0,
+   "prove": 2000
+  }
+ ],
+ "A_diverse_totale": 4043,
+ "C_diverse_totale": 0,
+ "A_identica_al_bit": false,
+ "C_identica_al_bit": true
+}
