@@ -1,0 +1,137 @@
+====================================================================================================
+IL SIGILLO DEL COMMIT 5: `perc_geom` del nato come DERIVAZIONE
+====================================================================================================
+  simulatore di OGGI (la cura) .. 6d306976
+  questo sigillo ................ fdd2ead8
+  il PRIMA ...................... 7ed56608  (dal PADRE di f8c206e8, che introduce `_derivazione_perc_geom`)
+  ### e NON da `HEAD`: dal commit della cura in poi `HEAD` LA CONTIENE, e il
+  ###   braccio <<prima>> diventerebbe il braccio OFF di se stesso (`H-P8`).
+
+----------------------------------------------------------------------------------------------------
+BRACCIO `0` -- LA CURA E' RIPRODUCIBILE DAL REPO?
+  il *prima* committato + la patch committata .. 6d306976
+  il simulatore di oggi ........................ 6d306976
+  ### ✅ STESSO BLOB: la cura e' recuperabile PER COSTRUZIONE (par.7),
+  ###   non per la mia parola. Chiunque la rifa' con due comandi.
+
+  SOLO il vincolo 4 ............. cb17d832  (eredita' INVARIATA)
+
+----------------------------------------------------------------------------------------------------
+BRACCI `A`, `B`, `C` -- i tre blob girano IN LOCKSTEP, scena per scena
+  ### UN SOLO passo per scena invece di sei run: i tre moduli avanzano insieme
+  ###   e si confrontano DOPO OGNI PASSO, cosi' la PRIMA differenza e' quella
+  ###   vera e non la prima che si nota a fine run.
+
+  ================================================================================================
+  SCENA `corta` -- seme 11, 72 passi
+    alla COSTRUZIONE della scena:  `A` 0 differenze · `B` 0 differenze
+
+    BRACCIO `A` -- il RIORDINO DA SOLO deve essere BYTE-IDENTICO
+      ### ✅ PASSA: ZERO differenze su 72 passi, su TUTTI gli
+      ###   attributi di `net` (ndarray e scalari di `__dict__`).
+
+    BRACCIO `B` -- la CURA INTERA contro il PRIMA
+      prima differenza al passo 42: 2 voci (2 ATTESE, 0 INATTESE)
+        ATTESA   _g_pgeom_der_m1            SOLO NEL SECONDO
+        ATTESA   _g_pgeom_der_p1            SOLO NEL SECONDO
+      ### ✅ PASSA: le SOLE differenze sono i due contatori
+      ###   NUOVI dichiarati, `_g_pgeom_der_m1, _g_pgeom_der_p1`.
+      ### 📌 E IL PUNTO `(d)` DEL MANDATO: il censimento aveva
+      ###   misurato ZERO nati con eredita' diversa dalla derivazione,
+      ###   quindi la BYTE-IDENTITA' E' IL RISULTATO ATTESO -- e i bracci
+      ###   `D` e `E` sono quelli che DISCRIMINANO.
+
+    BRACCIO `C` -- il contatore della DERIVAZIONE, misurato
+      _g_pgeom_der_m1 (ha deciso -1) .. 10
+      _g_pgeom_der_p1 (ha deciso +1) .. 0
+      nati totali (la somma) .......... 10
+
+    LA MISURA CHIESTA DAL GUARDIANO -- `perc_geom` a fine run
+      nodi a +1 .. 1 su 12812
+
+  ================================================================================================
+  SCENA `lunga` -- seme 11, 150 passi
+    alla COSTRUZIONE della scena:  `A` 0 differenze · `B` 0 differenze
+
+    BRACCIO `A` -- il RIORDINO DA SOLO deve essere BYTE-IDENTICO
+      ### ✅ PASSA: ZERO differenze su 150 passi, su TUTTI gli
+      ###   attributi di `net` (ndarray e scalari di `__dict__`).
+
+    BRACCIO `B` -- la CURA INTERA contro il PRIMA
+      prima differenza al passo 42: 2 voci (2 ATTESE, 0 INATTESE)
+        ATTESA   _g_pgeom_der_m1            SOLO NEL SECONDO
+        ATTESA   _g_pgeom_der_p1            SOLO NEL SECONDO
+      ### ✅ PASSA: le SOLE differenze sono i due contatori
+      ###   NUOVI dichiarati, `_g_pgeom_der_m1, _g_pgeom_der_p1`.
+      ### 📌 E IL PUNTO `(d)` DEL MANDATO: il censimento aveva
+      ###   misurato ZERO nati con eredita' diversa dalla derivazione,
+      ###   quindi la BYTE-IDENTITA' E' IL RISULTATO ATTESO -- e i bracci
+      ###   `D` e `E` sono quelli che DISCRIMINANO.
+
+    BRACCIO `C` -- il contatore della DERIVAZIONE, misurato
+      _g_pgeom_der_m1 (ha deciso -1) .. 1198
+      _g_pgeom_der_p1 (ha deciso +1) .. 0
+      nati totali (la somma) .......... 1198
+
+    LA MISURA CHIESTA DAL GUARDIANO -- `perc_geom` a fine run
+      nodi a +1 .. 103 su 14000
+
+  ================================================================================================
+  SCENA `altro_seme` -- seme 12, 72 passi
+    alla COSTRUZIONE della scena:  `A` 0 differenze · `B` 0 differenze
+
+    BRACCIO `A` -- il RIORDINO DA SOLO deve essere BYTE-IDENTICO
+      ### ✅ PASSA: ZERO differenze su 72 passi, su TUTTI gli
+      ###   attributi di `net` (ndarray e scalari di `__dict__`).
+
+    BRACCIO `B` -- la CURA INTERA contro il PRIMA
+      prima differenza al passo 36: 2 voci (2 ATTESE, 0 INATTESE)
+        ATTESA   _g_pgeom_der_m1            SOLO NEL SECONDO
+        ATTESA   _g_pgeom_der_p1            SOLO NEL SECONDO
+      ### ✅ PASSA: le SOLE differenze sono i due contatori
+      ###   NUOVI dichiarati, `_g_pgeom_der_m1, _g_pgeom_der_p1`.
+      ### 📌 E IL PUNTO `(d)` DEL MANDATO: il censimento aveva
+      ###   misurato ZERO nati con eredita' diversa dalla derivazione,
+      ###   quindi la BYTE-IDENTITA' E' IL RISULTATO ATTESO -- e i bracci
+      ###   `D` e `E` sono quelli che DISCRIMINANO.
+
+    BRACCIO `C` -- il contatore della DERIVAZIONE, misurato
+      _g_pgeom_der_m1 (ha deciso -1) .. 17
+      _g_pgeom_der_p1 (ha deciso +1) .. 0
+      nati totali (la somma) .......... 17
+
+    LA MISURA CHIESTA DAL GUARDIANO -- `perc_geom` a fine run
+      nodi a +1 .. 2 su 12782
+
+----------------------------------------------------------------------------------------------------
+BRACCI `D` ed `E` -- IL CASO COSTRUITO: `tw = 20` sui nuovi archi
+  ### PERCHE' COSTRUITO: eredita' e derivazione danno LO STESSO valore oggi
+  ###   (1225 nati, tutti -1), quindi la forma del mandato NON PUO' fallire.
+  ###   Con `tw` sopra `PHI_CRIT` la derivazione da' +1 e l'eredita' resta -1:
+  ###   allora <<lasciare l'eredita'>> SI VEDE. E' l'ulp iniettato.
+  ### E SOLO SULLA SCENA CORTA (seme 11, 72 passi), DICHIARATO: il caso e'
+  ###   costruito, non statistico -- una scena basta a decidere.
+
+  E  derivazione, tw iniettato     blob 66f94ff8  der -1 = 0      der +1 = 7       primo passo 42
+  D1 eredita' nella DIVISIONE      blob 56336ca2  der -1 = 0      der +1 = 1       primo passo 70
+  D2 eredita' nello SCHWINGER      blob 198e69d1  der -1 = 0      der +1 = 6       primo passo 42
+
+  BRACCIO `E` -- IL CONTROLLO POSITIVO
+    ### ✅ PASSA: con `tw = 20` la derivazione ha deciso `+1` 7 volte
+    ###   e `-1` ZERO volte. ### QUINDI LEGGE `tw`: NON E' UNA COSTANTE.
+
+  BRACCIO `D` -- IL CASO CHE DEVE FALLIRE, per i DUE EVENTI SEPARATAMENTE
+    D1 eredita' nella DIVISIONE      der +1 = 1  (la CURA INTERA ne faceva 7)
+      ### ✅ VISTO: l'evento lasciato in eredita' NON passa piu'
+      ###   dalla derivazione, e il contatore lo DICE.
+    D2 eredita' nello SCHWINGER      der +1 = 6  (la CURA INTERA ne faceva 7)
+      ### ✅ VISTO: l'evento lasciato in eredita' NON passa piu'
+      ###   dalla derivazione, e il contatore lo DICE.
+
+====================================================================================================
+### IL RIEPILOGO
+###   braccio 0 (la cura e' riproducibile dal repo) ... PASSA
+###   braccio A sulla scena `corta` ............. PASSA
+###   braccio A sulla scena `lunga` ............. PASSA
+###   braccio A sulla scena `altro_seme` ............. PASSA
+====================================================================================================

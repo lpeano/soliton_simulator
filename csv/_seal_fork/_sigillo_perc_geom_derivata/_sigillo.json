@@ -1,0 +1,103 @@
+{
+ "blob_sim": "6d30697619d2cafbf20a6466fbfbca210656111d",
+ "blob_sigillo": "fdd2ead896116cc87c180bf4fd8fbc4ac316abc3",
+ "blob_prima": "7ed5660856f51fa28478dd4d489ab88f3670081a",
+ "commit_che_introduce": "f8c206e89c1b40b0d7f022b713d73822e65d3a89",
+ "braccio_0_riproducibile": true,
+ "blob_rifatta": "6d30697619d2cafbf20a6466fbfbca210656111d",
+ "blob_solo_ordine": "cb17d832f3cc9881b9920e076d7fd7cbcea90878",
+ "scene": {
+  "corta": {
+   "seme": 11,
+   "passi": 72,
+   "A_prima_differenza": null,
+   "A_differenze": [],
+   "A_passa": true,
+   "B_prima_differenza": 42,
+   "B_differenze": [
+    [
+     "_g_pgeom_der_m1",
+     "SOLO NEL SECONDO"
+    ],
+    [
+     "_g_pgeom_der_p1",
+     "SOLO NEL SECONDO"
+    ]
+   ],
+   "g_pgeom_der_m1": 10,
+   "g_pgeom_der_p1": 0,
+   "nati": 10,
+   "perc_geom_a_piu1_fine_run": 1,
+   "nodi": 12812
+  },
+  "lunga": {
+   "seme": 11,
+   "passi": 150,
+   "A_prima_differenza": null,
+   "A_differenze": [],
+   "A_passa": true,
+   "B_prima_differenza": 42,
+   "B_differenze": [
+    [
+     "_g_pgeom_der_m1",
+     "SOLO NEL SECONDO"
+    ],
+    [
+     "_g_pgeom_der_p1",
+     "SOLO NEL SECONDO"
+    ]
+   ],
+   "g_pgeom_der_m1": 1198,
+   "g_pgeom_der_p1": 0,
+   "nati": 1198,
+   "perc_geom_a_piu1_fine_run": 103,
+   "nodi": 14000
+  },
+  "altro_seme": {
+   "seme": 12,
+   "passi": 72,
+   "A_prima_differenza": null,
+   "A_differenze": [],
+   "A_passa": true,
+   "B_prima_differenza": 36,
+   "B_differenze": [
+    [
+     "_g_pgeom_der_m1",
+     "SOLO NEL SECONDO"
+    ],
+    [
+     "_g_pgeom_der_p1",
+     "SOLO NEL SECONDO"
+    ]
+   ],
+   "g_pgeom_der_m1": 17,
+   "g_pgeom_der_p1": 0,
+   "nati": 17,
+   "perc_geom_a_piu1_fine_run": 2,
+   "nodi": 12782
+  }
+ },
+ "D_E": {
+  "E  derivazione, tw iniettato": {
+   "blob": "66f94ff80d9e993315b05bfd7f8f66914d2fea8b",
+   "der_m1": 0,
+   "der_p1": 7,
+   "primo_passo_con_derivazione": 42,
+   "nodi_a_piu1_fine_run": 7
+  },
+  "D1 eredita' nella DIVISIONE": {
+   "blob": "56336ca2096faef21cf76f4681e78cc9dc3a4153",
+   "der_m1": 0,
+   "der_p1": 1,
+   "primo_passo_con_derivazione": 70,
+   "nodi_a_piu1_fine_run": 7
+  },
+  "D2 eredita' nello SCHWINGER": {
+   "blob": "198e69d15e29cc60d2eb722fd583a6c5615c5de3",
+   "der_m1": 0,
+   "der_p1": 6,
+   "primo_passo_con_derivazione": 42,
+   "nodi_a_piu1_fine_run": 7
+  }
+ }
+}

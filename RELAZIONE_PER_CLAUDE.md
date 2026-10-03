@@ -2606,3 +2606,111 @@ conta piu' della correzione rapida.**
 porta già questa annotazione con la sua cura strutturale: ### **la conferma, non la sana.**
 
 ---
+
+# ✅ **IL REFERTO DEL SIGILLO DEL `COMMIT 5`: PASSA SU SEI BRACCI SU SEI**
+
+*(referto: `csv/_seal_fork/_sigillo_perc_geom_derivata/`, sigillo `fdd2ead8`, simulatore
+`6d306976`. Task history `ea3310d`, **antenato** di tutti i commit del lavoro.)*
+
+## ✅ **BRACCIO `0` — LA CURA E' RIPRODUCIBILE DAL REPO**
+
+| | |
+|---|---|
+| il *prima*, dal ### **PADRE** di `f8c206e` *(`H-P8`)* | `7ed56608` |
+| il *prima* ### **+ la patch committata** | ### **`6d306976`** |
+| il simulatore di oggi | ### **`6d306976`** |
+
+### ➜ **STESSO BLOB.** ### **Non misura la fisica: misura che IL REPO BASTA A RIFARE LA CURA**
+*(par.7)*. Questo braccio ### **non era nel mandato ne' nel mio task history: l'ha suggerito la
+caduta del primo giro.**
+
+## ✅ **BRACCIO `A` — IL RIORDINO DA SOLO E' BYTE-IDENTICO, su tutte e tre le scene**
+
+**ZERO differenze** su `72` / `150` / `72` passi, su ### **TUTTI** gli attributi di `net`
+*(ndarray e scalari di `__dict__`, non un insieme scelto da me)*, ### **e zero anche alla
+costruzione della scena.**
+
+### ➜ **Quindi il `VINCOLO 4` SPOSTA e non cambia niente**, e *«ho spostato una riga»* e' separato
+da *«ho cambiato una legge»*. ### **Senza questo braccio i due effetti sarebbero mescolati.**
+
+## ✅ **BRACCIO `B` — LE SOLE DIFFERENZE SONO I DUE CONTATORI DICHIARATI**
+
+| scena | prima differenza | voci | ATTESE | ### **INATTESE** |
+|---|--:|--:|--:|--:|
+| `corta` | passo ### **42** | 2 | 2 | ### **0** |
+| `lunga` | passo ### **42** | 2 | 2 | ### **0** |
+| `altro_seme` | passo ### **36** | 2 | 2 | ### **0** |
+
+### ➜ **E il passo della prima differenza E' il primo passo con una nascita**: prima di quello
+### **zero differenze**, che e' il criterio `(a)` del mandato — ### **passa.**
+
+## ⚠ **E I CRITERI `(b)` E `(c)` SONO VACUI, PER UN MOTIVO MISURATO — non li dichiaro passati**
+
+Il mandato chiedeva: `(b)` *in quel passo la **prima** differenza e' `perc_geom` dei nati*;
+`(c)` *la **seconda** e' dove il frame-drag la legge, e si nomina con voce e riga*.
+
+### ⛔ **`perc_geom` NON DIFFERISCE**, perche' il censimento aveva misurato il punto `(d)` a
+### **ZERO**: eredita' e derivazione danno lo stesso valore. ### ➜ **Quindi non c'e' una prima
+differenza su `perc_geom`, e non c'e' una seconda da nominare.**
+### 📌 **Non e' un criterio soddisfatto: e' un criterio che la misura ha svuotato** — e il task
+history, **committato prima**, si era impegnato a dirlo cosi' invece di allentarlo.
+### **La discriminazione la portano `D` ed `E`.**
+
+## ✅ **BRACCIO `C` — I CONTATORI, e confermano il censimento INDIPENDENTEMENTE**
+
+| scena | `_g_pgeom_der_m1` *(ha deciso `-1`)* | `_g_pgeom_der_p1` *(ha deciso `+1`)* | nati |
+|---|--:|--:|--:|
+| `corta` | **10** | ### **0** | 10 |
+| `lunga` | **1198** | ### **0** | 1198 |
+| `altro_seme` | **17** | ### **0** | 17 |
+
+### ➜ **Gli stessi `10` / `1198` / `17` del censimento** *(`4405a1f`, strumento diverso, passo
+diverso)*: ### **due misure indipendenti che si chiudono.**
+
+## ✅ **BRACCIO `E` — IL CONTROLLO POSITIVO: NON E' UNA COSTANTE**
+
+Con `tw = 20` iniettato sui nuovi archi *(sopra `PHI_CRIT = 6.283`)*: la derivazione ha deciso
+### **`+1` SETTE volte e `-1` ZERO volte.**
+
+### ➜ ### **QUINDI LEGGE `tw`.** Senza questo braccio un *«sempre `-1`»* ### **non avrebbe
+distinto una DERIVAZIONE da una COSTANTE** — ed e' `FALSO-ZERO`.
+
+## ✅ **BRACCIO `D` — IL CASO CHE DEVE FALLIRE, VISTO PER I DUE EVENTI, e in piu' TORNA**
+
+| la copia | `+1` | la cura intera ne faceva |
+|---|--:|--:|
+| `D1` eredita' nella ### **DIVISIONE** *(solo lo Schwinger derivato)* | ### **1** | 7 |
+| `D2` eredita' nello ### **SCHWINGER** *(solo la divisione derivata)* | ### **6** | 7 |
+
+### ⭐ **E `1 + 6 = 7`, ESATTAMENTE: i due eventi si sommano senza sovrapporsi.** Non l'avevo
+previsto, ed e' un controllo in piu' che esce dai numeri: ### **ogni braccio ha isolato
+ESATTAMENTE il suo evento**, perche' se le copie avessero interferito la somma non tornerebbe.
+### 📌 **E dice anche che l'`1` viene dallo SCHWINGER e i `6` dalla DIVISIONE.**
+
+### ⚠ **E IL BRACCIO `D` E' QUELLO CHE HO RIFORMULATO**, e lo ripeto qui perche' il verdetto non
+si legga per quello che non e': nella forma del mandato ### **non poteva fallire** *(eredita' e
+derivazione danno lo stesso valore)*. ### **Il caso l'ho COSTRUITO** iniettando `tw` sopra soglia.
+
+## 📌 **E LA MISURA CHE AVEVI CHIESTO, dal sigillo: `perc_geom` a fine run**
+
+| scena | nodi a `+1` |
+|---|---|
+| `corta` *(72)* | ### **1** su `12812` |
+| `lunga` *(150)* | ### **103** su `14000` |
+| `altro_seme` *(72)* | ### **2** su `12782` |
+
+### ➜ **Conferma la correzione di `4405a1f`: l'inerzia del canale e' una proprieta' DELLA
+FINESTRA, non della legge.**
+
+## ⚠ **IL VERDETTO, NELLA FORMA CHE IL MANDATO PRETENDE — e sono DUE affermazioni distinte**
+
+> ### **① La cura e' BYTE-IDENTICA SU QUESTE TRE SCENE** — `1225` nati, `0` differenze oltre i due
+> contatori dichiarati.
+> ### **② La derivazione e' GIUSTA INDIPENDENTEMENTE da questo** — il braccio `E` lo prova:
+> con `tw` sopra soglia da' `+1`, quindi ### **legge la torsione e non la copia da nessuno.**
+
+### 📌 **E la `①` e' una proprieta' DELLE SCENE:** nella scena da `150` passi `103` nodi stanno a
+`+1`, quindi ### **un nato da un genitore a `+1` e' POSSIBILE** — e la' le due regole
+### **divergerebbero.**
+
+---
