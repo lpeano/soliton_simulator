@@ -2,15 +2,111 @@
  "confronto_solo_mie": [
   8259,
   8404,
-  8495,
-  8496,
   8540,
   8541,
   8542
  ],
  "confronto_solo_sue": [],
+ "copia_genitore": [
+  {
+   "regola": "_rn_div_mem_mot",
+   "evento": "divisione",
+   "grandezza": "mem_mot",
+   "chiavi_a": [
+    "a"
+   ],
+   "forma": "finito",
+   "delegata_a": null,
+   "classe_dichiarata": "eredita dal genitore `a`"
+  },
+  {
+   "regola": "_rn_div_omega_s",
+   "evento": "divisione",
+   "grandezza": "omega_s",
+   "chiavi_a": [
+    "src"
+   ],
+   "forma": "finito",
+   "delegata_a": null,
+   "classe_dichiarata": "eredita dal genitore `a`"
+  },
+  {
+   "regola": "_rn_div_phi_s",
+   "evento": "divisione",
+   "grandezza": "phi_s",
+   "chiavi_a": [
+    "a"
+   ],
+   "forma": "finito",
+   "delegata_a": null,
+   "classe_dichiarata": "eredita dal genitore `a`"
+  },
+  {
+   "regola": "_rn_div_psi_spin",
+   "evento": "divisione",
+   "grandezza": "psi_spin",
+   "chiavi_a": [
+    "src_a"
+   ],
+   "forma": "finito",
+   "delegata_a": null,
+   "classe_dichiarata": "eredita da `a` (come `phi_s`)"
+  },
+  {
+   "regola": "_rn_div_rho_spin",
+   "evento": "divisione",
+   "grandezza": "rho_spin",
+   "chiavi_a": [
+    "src_a"
+   ],
+   "forma": "nonneg",
+   "delegata_a": null,
+   "classe_dichiarata": "eredita da `a` (come `psi_spin`)"
+  },
+  {
+   "regola": "_rn_sch_omega_s",
+   "evento": "schwinger",
+   "grandezza": "omega_s",
+   "chiavi_a": [
+    "src"
+   ],
+   "forma": "finito",
+   "delegata_a": "_rn_div_omega_s",
+   "classe_dichiarata": "eredita dal genitore `aa`"
+  },
+  {
+   "regola": "_rn_sch_psi_spin",
+   "evento": "schwinger",
+   "grandezza": "psi_spin",
+   "chiavi_a": [
+    "src_a"
+   ],
+   "forma": "finito",
+   "delegata_a": "_rn_div_psi_spin",
+   "classe_dichiarata": "eredita da `aa` (come `phi_s`... che qui e' zero)"
+  },
+  {
+   "regola": "_rn_sch_rho_spin",
+   "evento": "schwinger",
+   "grandezza": "rho_spin",
+   "chiavi_a": [
+    "src_a"
+   ],
+   "forma": "nonneg",
+   "delegata_a": "_rn_div_rho_spin",
+   "classe_dichiarata": "eredita da `aa` (come `psi_spin`)"
+  }
+ ],
+ "copia_genitore_solo_mie": [
+  "divisione/mem_mot",
+  "divisione/omega_s",
+  "schwinger/omega_s"
+ ],
+ "copia_genitore_solo_sue": [
+  "schwinger/phi_s"
+ ],
  "blob_sim": "6d30697619d2cafbf20a6466fbfbca210656111d",
- "blob_strumento": "e68a8b0bef48c72fa36bcbcd864d0e2ea3360283",
+ "blob_strumento": "c2f7d634f3baed26dd781d580809f0b64027f029",
  "perimetro_esatto": [
   "mitosi",
   "decidi_divisione"
@@ -231,13 +327,7 @@
   }
  ],
  "frazione_siti": 6,
- "frazione_grandezze": [
-  "DIVISIONE/d,d0",
-  "DIVISIONE/fm (fase)",
-  "DIVISIONE/pos",
-  "SCHWINGER/dd",
-  "SCHWINGER/pos"
- ],
+ "frazione_grandezze": "spinor_lift",
  "eredita_siti": 3,
  "eredita_grandezze": [
   "phivel",

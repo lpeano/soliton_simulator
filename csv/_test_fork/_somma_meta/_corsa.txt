@@ -1,13 +1,25 @@
 ====================================================================================================
 np.sum(concatenate([x, x])) E' IDENTICA AL BIT A 2 * np.sum(x)?
 ====================================================================================================
-  strumento .. e1eb2c18 (sha1 byte grezzi)
+  strumento .. fe9634ba (sha1 byte grezzi)
   2000 prove per taglia, seme 20261003, numpy 2.3.0
 
   LE TRE FORME messe a confronto, su x di taglia n:
     (A)  np.sum(np.concatenate([x, x]))   <- UNA chiamata su 2n (md = 1)
     (B)  2.0 * np.sum(x)                  <- la chiamata di OGGI (md = 2)
     (C)  np.sum(x) + np.sum(x)            <- PER META' e sommate (la cura)
+
+  *** E LA COLONNA (C) NON E' UNA MISURA DELLA CURA: E' UN'IDENTITA'
+  ARITMETICA CHE NON PUO' FALLIRE. *** (rilievo del guardiano, 2026-10-03,
+  ed e' giusto.) `s + s` e `2 * s` sono lo STESSO numero in IEEE-754, perche'
+  il raddoppio e' uno scalamento per una POTENZA DI DUE: non c'e' niente da
+  misurare, c'e' da DIMOSTRARE -- e il conto e' di una riga.
+  Quindi lo ZERO della colonna (C) NON prova che la cura funziona: prova solo
+  che ho scritto l'identita' giusta. *** LA PROVA VERA SARA' IL BRACCIO A DEL
+  SIGILLO, SU UNA SCENA CON _sm_trd_mitosi > 0 *** -- cioe' dove i troncamenti
+  ESISTONO e le due meta' sono DIVERSE. Oggi quel numero NON c'e'.
+  E la colonna (C) sta qui comunque, per una ragione: se un giorno dasse
+  qualcosa di diverso da zero, la mia idea di IEEE-754 sarebbe sbagliata.
 
   n          (A) != (B)     (C) != (B)   verdetto
   ------------------------------------------------------------------------

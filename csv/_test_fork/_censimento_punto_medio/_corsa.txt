@@ -2,7 +2,7 @@
 IL CENSIMENTO DELLA FRAZIONE DI NASCITA nel perimetro della mitosi
 ====================================================================================================
   simulatore .. 6d306976 (sha1 byte grezzi)
-  strumento ... e68a8b0b
+  strumento ... c2f7d634
   perimetro ... mitosi, decidi_divisione  +  _rn_div_*, _rn_sch_*
   il setaccio cerca IL NUMERO: ogni `0.5` letterale e ogni `/ 2`.
   ### NON le FORME, e il motivo e' un buco MISURATO: cercando `0.5*(x+y)`,
@@ -152,26 +152,83 @@ LA CLASSIFICAZIONE
 ====================================================================================================
 
 ----------------------------------------------------------------------------------------------------
+PEZZO NUOVO -- L'EREDITA' DA UN SOLO GENITORE: UN `t = 0` IMPLICITO
+  ### E IL SETACCIO DEL NUMERO NON LO VEDE, perche' NON C'E' NESSUN NUMERO DA
+  ###   TROVARE: la frazione non e' scritta, e' nella SCELTA DELL'INDICE.
+  ###   E' FALSO-ZERO applicato alla decisione aperta di Luca -- cercando i
+  ###   `0.5` si conclude <<cinque siti>> e si perde UNA CLASSE INTERA di siti
+  ###   dove la frazione e' GIA' DECISA, A ZERO.
+  ### NON ENTRA NEL CONTEGGIO DEL CANCELLO DEL 6a: e' materiale per la
+  ###   decisione di Luca (DIVISIONE-AUTOCONSISTENTE), non un sito da curare.
+
+  COPIA-GENITORE: indicizza SOLO il lato `a`, E la forma dichiarata in
+  DOMINI ammette una frazione. Siti: 8
+    regola                   evento      grandezza     forma    delega   classe dichiarata
+    _rn_div_mem_mot          divisione   mem_mot       finito   -        eredita dal genitore `a`
+    _rn_div_omega_s          divisione   omega_s       finito   -        eredita dal genitore `a`
+    _rn_div_phi_s            divisione   phi_s         finito   -        eredita dal genitore `a`
+    _rn_div_psi_spin         divisione   psi_spin      finito   -        eredita da `a` (come `phi_s`)
+    _rn_div_rho_spin         divisione   rho_spin      nonneg   -        eredita da `a` (come `psi_spin`)
+    _rn_sch_omega_s          schwinger   omega_s       finito   si       eredita dal genitore `aa`
+    _rn_sch_psi_spin         schwinger   psi_spin      finito   si       eredita da `aa` (come `phi_s`... che qui
+    _rn_sch_rho_spin         schwinger   rho_spin      nonneg   si       eredita da `aa` (come `psi_spin`)
+
+  ESCLUSI, col MOTIVO letto da DOMINI: 22
+    _rn_div_conc_nodi        conc_nodi     forma NON DICHIARATA in DOMINI
+    _rn_div_cs_nodo_prev     cs_nodo_prev  forma NON DICHIARATA in DOMINI
+    _rn_div_i                i             forma `indice`: una frazione NON ha senso
+    _rn_div_nb               nb            forma NON DICHIARATA in DOMINI
+    _rn_div_nb_prec          nb_prec       forma NON DICHIARATA in DOMINI
+    _rn_div_nb_ret           nb_ret        forma NON DICHIARATA in DOMINI
+    _rn_div_perc_chi         perc_chi      forma `segno`: una frazione NON ha senso
+    _rn_div_psi_prec         psi_prec      forma NON DICHIARATA in DOMINI
+    _rn_div_psi_spin_prec    psi_spin_prec forma NON DICHIARATA in DOMINI
+    _rn_div_psi_spinor       psi_spinor    forma NON DICHIARATA in DOMINI
+    _rn_div_spinor_lift      spinor_lift   forma NON DICHIARATA in DOMINI
+    _rn_sch_conc_nodi        conc_nodi     forma NON DICHIARATA in DOMINI
+    _rn_sch_cs_nodo_prev     cs_nodo_prev  forma NON DICHIARATA in DOMINI
+    _rn_sch_i                i             forma `indice`: una frazione NON ha senso
+    _rn_sch_nb               nb            forma NON DICHIARATA in DOMINI
+    _rn_sch_nb_prec          nb_prec       forma NON DICHIARATA in DOMINI
+    _rn_sch_nb_ret           nb_ret        forma NON DICHIARATA in DOMINI
+    _rn_sch_perc_chi         perc_chi      forma `segno`: una frazione NON ha senso
+    _rn_sch_psi_prec         psi_prec      forma NON DICHIARATA in DOMINI
+    _rn_sch_psi_spin_prec    psi_spin_prec forma NON DICHIARATA in DOMINI
+    _rn_sch_psi_spinor       psi_spinor    forma NON DICHIARATA in DOMINI
+    _rn_sch_spinor_lift      spinor_lift   forma NON DICHIARATA in DOMINI
+  ### IL CRITERIO NON E' MIO: e' la FORMA che il registro DICHIARA.
+  ###   `indice` e' topologia, `segno` e' categoriale -- e per il `segno` il
+  ###   registro lo dice esplicitamente: sommare due decisioni darebbe
+  ###   +2, 0 o -2, che non sono valori ammessi. Una grandezza senza forma
+  ###   dichiarata la ESCLUDO col suo motivo, invece di contarla.
+
+  IL CONFRONTO col conteggio del guardiano
+    nella MIA e non nella sua .. [('divisione', 'mem_mot'), ('divisione', 'omega_s'), ('schwinger', 'omega_s')]
+    nella SUA e non nella mia .. [('schwinger', 'phi_s')]
+      ('schwinger', 'phi_s') -> il guardiano la descrive come: zero (non da un genitore)
+
+  ### IL FATTO DA FAR EMERGERE, e il guardiano lo nomina:
+    `psi` nasce come MEDIA dei due genitori (:1984, classe EREDITA-MEDIA),
+    il suo COMPAGNO `psi_spin` nasce come COPIA di `a` (2 regole: _rn_div_psi_spin, _rn_sch_psi_spin).
+    ### DUE GRANDEZZE DELLA STESSA FAMIGLIA, DUE FRAZIONI DIVERSE: 0.5 e 0.
+    ### Non e' un difetto dichiarato: e' la DOMANDA che la decisione di Luca
+    ###   deve chiudere, e senza questo pezzo non si vedrebbe affatto.
+
+
+----------------------------------------------------------------------------------------------------
 IL CONFRONTO CON LA LISTA DEL GUARDIANO (rilievo del 2026-10-03)
   righe nella MIA lista ......... 19
-  righe nella SUA lista ......... 12
+  righe nella SUA lista ......... 14
 
-  SOLO NELLA MIA: 7
+  SOLO NELLA MIA: 5
       :8259   decidi_divisione     ALTRO          centro = 0.5 * (pos_soglia + pos_tetto)
       :8404   decidi_divisione     ALTRO          ok = 0.5 * (I[a] + I[b]) >= QMIN_M * float(np.median(self.pe
-      :8495   mitosi               ALTRO          bias = 0.5 * np.tanh(MITOSI_DIR * (twn[a] - twn[b]))
-      :8496   mitosi               FRAZIONE       fm = (self.phi[a] - (0.5 + bias) * D) % self._dphi()
       :8540   mitosi               ALTRO          comune = KICK_TW * sciolta * (mod - 0.5)
       :8541   mitosi               ALTRO          calcio_a = comune + 0.5 * KICK_TW * sciolta * chi_a * mod
       :8542   mitosi               ALTRO          calcio_b = comune - 0.5 * KICK_TW * sciolta * chi_b * mod
-  ### per CLASSE: ALTRO 6 (:8259, :8404, :8495, :8540, :8541, :8542) · FRAZIONE 1 (:8496)
-  ###   *** LA DIFFERENZA TOCCA FRAZIONE, non solo `ALTRO`. ***
-  ###     :8496 e' FRAZIONE e NON e' nella lista del guardiano
-  ###   E IL CASO E' :8496, la frazione `(0.5 + bias)` del ramo MITOSI_DIR:
-  ###   il guardiano cita quel ramo come :8489 (la riga del CANCELLO), non
-  ###   la riga del NUMERO. Quindi NON e' un sito che gli e' sfuggito: e'
-  ###   lo STESSO sito, citato con un'altra riga. Ma la differenza va
-  ###   detta per quello che e', e la frase NON si afferma: si CALCOLA.
+  ### per CLASSE: ALTRO 5 (:8259, :8404, :8540, :8541, :8542)
+  ###   la mia lista e' un SOVRAINSIEME e la differenza e' TUTTA `ALTRO`:
+  ###   non tocca ne' la FRAZIONE ne' l'EREDITA-MEDIA.
 
   SOLO NELLA SUA: 0
 
