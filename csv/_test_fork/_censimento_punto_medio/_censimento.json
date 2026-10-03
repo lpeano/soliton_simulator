@@ -9,6 +9,17 @@
  "confronto_solo_sue": [],
  "copia_genitore": [
   {
+   "regola": "_rn_div_cs_nodo_prev",
+   "evento": "divisione",
+   "grandezza": "_cs_nodo_prev",
+   "chiavi_a": [
+    "src"
+   ],
+   "forma": "pos",
+   "delegata_a": null,
+   "classe_dichiarata": "eredita dal genitore `a`"
+  },
+  {
    "regola": "_rn_div_mem_mot",
    "evento": "divisione",
    "grandezza": "mem_mot",
@@ -16,6 +27,39 @@
     "a"
    ],
    "forma": "finito",
+   "delegata_a": null,
+   "classe_dichiarata": "eredita dal genitore `a`"
+  },
+  {
+   "regola": "_rn_div_nb",
+   "evento": "divisione",
+   "grandezza": "_nb",
+   "chiavi_a": [
+    "src"
+   ],
+   "forma": "unita",
+   "delegata_a": null,
+   "classe_dichiarata": "eredita dal genitore `a`"
+  },
+  {
+   "regola": "_rn_div_nb_prec",
+   "evento": "divisione",
+   "grandezza": "_nb_prec",
+   "chiavi_a": [
+    "src"
+   ],
+   "forma": "unita",
+   "delegata_a": null,
+   "classe_dichiarata": "eredita dal genitore `a`"
+  },
+  {
+   "regola": "_rn_div_nb_ret",
+   "evento": "divisione",
+   "grandezza": "_nb_ret",
+   "chiavi_a": [
+    "src"
+   ],
+   "forma": "unita",
    "delegata_a": null,
    "classe_dichiarata": "eredita dal genitore `a`"
   },
@@ -42,6 +86,17 @@
    "classe_dichiarata": "eredita dal genitore `a`"
   },
   {
+   "regola": "_rn_div_psi_prec",
+   "evento": "divisione",
+   "grandezza": "_psi_prec",
+   "chiavi_a": [
+    "src"
+   ],
+   "forma": "finito",
+   "delegata_a": null,
+   "classe_dichiarata": "eredita dal genitore `a`"
+  },
+  {
    "regola": "_rn_div_psi_spin",
    "evento": "divisione",
    "grandezza": "psi_spin",
@@ -51,6 +106,28 @@
    "forma": "finito",
    "delegata_a": null,
    "classe_dichiarata": "eredita da `a` (come `phi_s`)"
+  },
+  {
+   "regola": "_rn_div_psi_spin_prec",
+   "evento": "divisione",
+   "grandezza": "_psi_spin_prec",
+   "chiavi_a": [
+    "src"
+   ],
+   "forma": "finito",
+   "delegata_a": null,
+   "classe_dichiarata": "eredita dal genitore `a`"
+  },
+  {
+   "regola": "_rn_div_psi_spinor",
+   "evento": "divisione",
+   "grandezza": "_psi_spinor",
+   "chiavi_a": [
+    "src"
+   ],
+   "forma": "unita",
+   "delegata_a": null,
+   "classe_dichiarata": "eredita col SEGNO (regola D)"
   },
   {
    "regola": "_rn_div_rho_spin",
@@ -64,6 +141,61 @@
    "classe_dichiarata": "eredita da `a` (come `psi_spin`)"
   },
   {
+   "regola": "_rn_div_spinor_lift",
+   "evento": "divisione",
+   "grandezza": "_spinor_lift",
+   "chiavi_a": [
+    "src"
+   ],
+   "forma": "finito",
+   "delegata_a": null,
+   "classe_dichiarata": "eredita col SEGNO (regola D)"
+  },
+  {
+   "regola": "_rn_sch_cs_nodo_prev",
+   "evento": "schwinger",
+   "grandezza": "_cs_nodo_prev",
+   "chiavi_a": [
+    "src"
+   ],
+   "forma": "pos",
+   "delegata_a": "_rn_div_cs_nodo_prev",
+   "classe_dichiarata": "eredita dal genitore `aa`"
+  },
+  {
+   "regola": "_rn_sch_nb",
+   "evento": "schwinger",
+   "grandezza": "_nb",
+   "chiavi_a": [
+    "src"
+   ],
+   "forma": "unita",
+   "delegata_a": "_rn_div_nb",
+   "classe_dichiarata": "eredita dal genitore `aa`"
+  },
+  {
+   "regola": "_rn_sch_nb_prec",
+   "evento": "schwinger",
+   "grandezza": "_nb_prec",
+   "chiavi_a": [
+    "src"
+   ],
+   "forma": "unita",
+   "delegata_a": "_rn_div_nb_prec",
+   "classe_dichiarata": "eredita dal genitore `aa`"
+  },
+  {
+   "regola": "_rn_sch_nb_ret",
+   "evento": "schwinger",
+   "grandezza": "_nb_ret",
+   "chiavi_a": [
+    "src"
+   ],
+   "forma": "unita",
+   "delegata_a": "_rn_div_nb_ret",
+   "classe_dichiarata": "eredita dal genitore `aa`"
+  },
+  {
    "regola": "_rn_sch_omega_s",
    "evento": "schwinger",
    "grandezza": "omega_s",
@@ -72,6 +204,17 @@
    ],
    "forma": "finito",
    "delegata_a": "_rn_div_omega_s",
+   "classe_dichiarata": "eredita dal genitore `aa`"
+  },
+  {
+   "regola": "_rn_sch_psi_prec",
+   "evento": "schwinger",
+   "grandezza": "_psi_prec",
+   "chiavi_a": [
+    "src"
+   ],
+   "forma": "finito",
+   "delegata_a": "_rn_div_psi_prec",
    "classe_dichiarata": "eredita dal genitore `aa`"
   },
   {
@@ -86,6 +229,28 @@
    "classe_dichiarata": "eredita da `aa` (come `phi_s`... che qui e' zero)"
   },
   {
+   "regola": "_rn_sch_psi_spin_prec",
+   "evento": "schwinger",
+   "grandezza": "_psi_spin_prec",
+   "chiavi_a": [
+    "src"
+   ],
+   "forma": "finito",
+   "delegata_a": "_rn_div_psi_spin_prec",
+   "classe_dichiarata": "eredita dal genitore `aa`"
+  },
+  {
+   "regola": "_rn_sch_psi_spinor",
+   "evento": "schwinger",
+   "grandezza": "_psi_spinor",
+   "chiavi_a": [
+    "src"
+   ],
+   "forma": "unita",
+   "delegata_a": "_rn_div_psi_spinor",
+   "classe_dichiarata": "eredita INVERTITA (antichirale)"
+  },
+  {
    "regola": "_rn_sch_rho_spin",
    "evento": "schwinger",
    "grandezza": "rho_spin",
@@ -95,18 +260,122 @@
    "forma": "nonneg",
    "delegata_a": "_rn_div_rho_spin",
    "classe_dichiarata": "eredita da `aa` (come `psi_spin`)"
+  },
+  {
+   "regola": "_rn_sch_spinor_lift",
+   "evento": "schwinger",
+   "grandezza": "_spinor_lift",
+   "chiavi_a": [
+    "src"
+   ],
+   "forma": "finito",
+   "delegata_a": "_rn_div_spinor_lift",
+   "classe_dichiarata": "eredita INVERTITA (antichirale)"
   }
  ],
+ "copia_genitore_forma_ignota": [
+  {
+   "regola": "_rn_div_conc_nodi",
+   "evento": "divisione",
+   "grandezza": "conc_nodi",
+   "chiavi_a": [
+    "a"
+   ],
+   "forma": null,
+   "delegata_a": null,
+   "classe_dichiarata": "eredita la concorrenza del genitore `a`",
+   "nota": "forma non dichiarata in DOMINI"
+  },
+  {
+   "regola": "_rn_sch_conc_nodi",
+   "evento": "schwinger",
+   "grandezza": "conc_nodi",
+   "chiavi_a": [
+    "aa"
+   ],
+   "forma": null,
+   "delegata_a": null,
+   "classe_dichiarata": "eredita la concorrenza di `aa`, MARCATA `schwinger`",
+   "nota": "forma non dichiarata in DOMINI"
+  }
+ ],
+ "copia_genitore_esclusi": [
+  {
+   "regola": "_rn_div_i",
+   "evento": "divisione",
+   "grandezza": "i",
+   "chiavi_a": [
+    "a"
+   ],
+   "forma": "indice",
+   "delegata_a": null,
+   "classe_dichiarata": "topologia: l'arco si spezza in due",
+   "motivo_esclusione": "forma `indice`: una frazione NON ha senso"
+  },
+  {
+   "regola": "_rn_div_perc_chi",
+   "evento": "divisione",
+   "grandezza": "perc_chi",
+   "chiavi_a": [
+    "a"
+   ],
+   "forma": "segno",
+   "delegata_a": null,
+   "classe_dichiarata": "eredita la chiralita' del genitore `a`",
+   "motivo_esclusione": "forma `segno`: una frazione NON ha senso"
+  },
+  {
+   "regola": "_rn_sch_i",
+   "evento": "schwinger",
+   "grandezza": "i",
+   "chiavi_a": [
+    "aa"
+   ],
+   "forma": "indice",
+   "delegata_a": null,
+   "classe_dichiarata": "topologia: due archi nuovi verso i genitori",
+   "motivo_esclusione": "forma `indice`: una frazione NON ha senso"
+  },
+  {
+   "regola": "_rn_sch_perc_chi",
+   "evento": "schwinger",
+   "grandezza": "perc_chi",
+   "chiavi_a": [
+    "aa"
+   ],
+   "forma": "segno",
+   "delegata_a": null,
+   "classe_dichiarata": "eredita INVERTITA (la CARICA si coniuga)",
+   "motivo_esclusione": "forma `segno`: una frazione NON ha senso"
+  }
+ ],
+ "copia_genitore_totale": 30,
  "copia_genitore_solo_mie": [
+  "divisione/_cs_nodo_prev",
+  "divisione/_nb",
+  "divisione/_nb_prec",
+  "divisione/_nb_ret",
+  "divisione/_psi_prec",
+  "divisione/_psi_spin_prec",
+  "divisione/_psi_spinor",
+  "divisione/_spinor_lift",
   "divisione/mem_mot",
   "divisione/omega_s",
+  "schwinger/_cs_nodo_prev",
+  "schwinger/_nb",
+  "schwinger/_nb_prec",
+  "schwinger/_nb_ret",
+  "schwinger/_psi_prec",
+  "schwinger/_psi_spin_prec",
+  "schwinger/_psi_spinor",
+  "schwinger/_spinor_lift",
   "schwinger/omega_s"
  ],
  "copia_genitore_solo_sue": [
   "schwinger/phi_s"
  ],
  "blob_sim": "6d30697619d2cafbf20a6466fbfbca210656111d",
- "blob_strumento": "c2f7d634f3baed26dd781d580809f0b64027f029",
+ "blob_strumento": "ec0a03e362fb506affe03c77bba388a98c214987",
  "perimetro_esatto": [
   "mitosi",
   "decidi_divisione"
@@ -327,7 +596,13 @@
   }
  ],
  "frazione_siti": 6,
- "frazione_grandezze": "spinor_lift",
+ "frazione_grandezze": [
+  "DIVISIONE/d,d0",
+  "DIVISIONE/fm (fase)",
+  "DIVISIONE/pos",
+  "SCHWINGER/dd",
+  "SCHWINGER/pos"
+ ],
  "eredita_siti": 3,
  "eredita_grandezze": [
   "phivel",

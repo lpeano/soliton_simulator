@@ -2,7 +2,7 @@
 IL CENSIMENTO DELLA FRAZIONE DI NASCITA nel perimetro della mitosi
 ====================================================================================================
   simulatore .. 6d306976 (sha1 byte grezzi)
-  strumento ... c2f7d634
+  strumento ... ec0a03e3
   perimetro ... mitosi, decidi_divisione  +  _rn_div_*, _rn_sch_*
   il setaccio cerca IL NUMERO: ogni `0.5` letterale e ogni `/ 2`.
   ### NON le FORME, e il motivo e' un buco MISURATO: cercando `0.5*(x+y)`,
@@ -162,48 +162,87 @@ PEZZO NUOVO -- L'EREDITA' DA UN SOLO GENITORE: UN `t = 0` IMPLICITO
   ###   decisione di Luca (DIVISIONE-AUTOCONSISTENTE), non un sito da curare.
 
   COPIA-GENITORE: indicizza SOLO il lato `a`, E la forma dichiarata in
-  DOMINI ammette una frazione. Siti: 8
+  DOMINI ammette una frazione. Siti: 24
     regola                   evento      grandezza     forma    delega   classe dichiarata
+    _rn_div_cs_nodo_prev     divisione   _cs_nodo_prev pos      -        eredita dal genitore `a`
     _rn_div_mem_mot          divisione   mem_mot       finito   -        eredita dal genitore `a`
+    _rn_div_nb               divisione   _nb           unita    -        eredita dal genitore `a`
+    _rn_div_nb_prec          divisione   _nb_prec      unita    -        eredita dal genitore `a`
+    _rn_div_nb_ret           divisione   _nb_ret       unita    -        eredita dal genitore `a`
     _rn_div_omega_s          divisione   omega_s       finito   -        eredita dal genitore `a`
     _rn_div_phi_s            divisione   phi_s         finito   -        eredita dal genitore `a`
+    _rn_div_psi_prec         divisione   _psi_prec     finito   -        eredita dal genitore `a`
     _rn_div_psi_spin         divisione   psi_spin      finito   -        eredita da `a` (come `phi_s`)
+    _rn_div_psi_spin_prec    divisione   _psi_spin_pre finito   -        eredita dal genitore `a`
+    _rn_div_psi_spinor       divisione   _psi_spinor   unita    -        eredita col SEGNO (regola D)
     _rn_div_rho_spin         divisione   rho_spin      nonneg   -        eredita da `a` (come `psi_spin`)
+    _rn_div_spinor_lift      divisione   _spinor_lift  finito   -        eredita col SEGNO (regola D)
+    _rn_sch_cs_nodo_prev     schwinger   _cs_nodo_prev pos      si       eredita dal genitore `aa`
+    _rn_sch_nb               schwinger   _nb           unita    si       eredita dal genitore `aa`
+    _rn_sch_nb_prec          schwinger   _nb_prec      unita    si       eredita dal genitore `aa`
+    _rn_sch_nb_ret           schwinger   _nb_ret       unita    si       eredita dal genitore `aa`
     _rn_sch_omega_s          schwinger   omega_s       finito   si       eredita dal genitore `aa`
+    _rn_sch_psi_prec         schwinger   _psi_prec     finito   si       eredita dal genitore `aa`
     _rn_sch_psi_spin         schwinger   psi_spin      finito   si       eredita da `aa` (come `phi_s`... che qui
+    _rn_sch_psi_spin_prec    schwinger   _psi_spin_pre finito   si       eredita dal genitore `aa`
+    _rn_sch_psi_spinor       schwinger   _psi_spinor   unita    si       eredita INVERTITA (antichirale)
     _rn_sch_rho_spin         schwinger   rho_spin      nonneg   si       eredita da `aa` (come `psi_spin`)
+    _rn_sch_spinor_lift      schwinger   _spinor_lift  finito   si       eredita INVERTITA (antichirale)
 
-  ESCLUSI, col MOTIVO letto da DOMINI: 22
-    _rn_div_conc_nodi        conc_nodi     forma NON DICHIARATA in DOMINI
-    _rn_div_cs_nodo_prev     cs_nodo_prev  forma NON DICHIARATA in DOMINI
-    _rn_div_i                i             forma `indice`: una frazione NON ha senso
-    _rn_div_nb               nb            forma NON DICHIARATA in DOMINI
-    _rn_div_nb_prec          nb_prec       forma NON DICHIARATA in DOMINI
-    _rn_div_nb_ret           nb_ret        forma NON DICHIARATA in DOMINI
-    _rn_div_perc_chi         perc_chi      forma `segno`: una frazione NON ha senso
-    _rn_div_psi_prec         psi_prec      forma NON DICHIARATA in DOMINI
-    _rn_div_psi_spin_prec    psi_spin_prec forma NON DICHIARATA in DOMINI
-    _rn_div_psi_spinor       psi_spinor    forma NON DICHIARATA in DOMINI
-    _rn_div_spinor_lift      spinor_lift   forma NON DICHIARATA in DOMINI
-    _rn_sch_conc_nodi        conc_nodi     forma NON DICHIARATA in DOMINI
-    _rn_sch_cs_nodo_prev     cs_nodo_prev  forma NON DICHIARATA in DOMINI
-    _rn_sch_i                i             forma `indice`: una frazione NON ha senso
-    _rn_sch_nb               nb            forma NON DICHIARATA in DOMINI
-    _rn_sch_nb_prec          nb_prec       forma NON DICHIARATA in DOMINI
-    _rn_sch_nb_ret           nb_ret        forma NON DICHIARATA in DOMINI
-    _rn_sch_perc_chi         perc_chi      forma `segno`: una frazione NON ha senso
-    _rn_sch_psi_prec         psi_prec      forma NON DICHIARATA in DOMINI
-    _rn_sch_psi_spin_prec    psi_spin_prec forma NON DICHIARATA in DOMINI
-    _rn_sch_psi_spinor       psi_spinor    forma NON DICHIARATA in DOMINI
-    _rn_sch_spinor_lift      spinor_lift   forma NON DICHIARATA in DOMINI
+  COPIA-GENITORE-FORMA-IGNOTA: indicizza SOLO il lato `a`, e la forma NON e'
+  dichiarata in DOMINI. SI ELENCANO, non si escludono. Siti: 2
+    regola                   evento      grandezza       delega   classe dichiarata
+    _rn_div_conc_nodi        divisione   conc_nodi       -        eredita la concorrenza del genitore `a`
+    _rn_sch_conc_nodi        schwinger   conc_nodi       -        eredita la concorrenza di `aa`, MARCATA `sch
+  ### ⛔ E LA STESURA PRECEDENTE LE ESCLUDEVA <<perche' la forma non e'
+  ###   dichiarata>>: ERA UN FALSO-ZERO. Una forma IGNOTA non e' una forma in
+  ###   cui la frazione non ha senso: escludere per IGNORANZA fa SCOMPARIRE
+  ###   regole che copiano da un solo genitore.
+  ### E C'ERA UN SECONDO FALSO-ZERO, UN LIVELLO PIU' SOTTO: il nome della
+  ###   grandezza lo DEDUCEVO dal nome della funzione, e `_rn_div_psi_spinor`
+  ###   dava `psi_spinor` mentre la grandezza si chiama `_psi_spinor`, COL
+  ###   TRATTINO BASSO. Cosi' la forma risultava <<non dichiarata>> per colpa
+  ###   del MIO nome, non del registro. Ora il nome si RISOLVE contro i
+  ###   registri, e delle 30 regole a un solo genitore ne restano 2 con forma
+  ###   ignota: solo `conc_nodi`, nei due eventi.
+
+  ESCLUSI, e solo questi hanno un MOTIVO DICHIARATO: 4
+    _rn_div_i                i               forma `indice`: una frazione NON ha senso
+    _rn_div_perc_chi         perc_chi        forma `segno`: una frazione NON ha senso
+    _rn_sch_i                i               forma `indice`: una frazione NON ha senso
+    _rn_sch_perc_chi         perc_chi        forma `segno`: una frazione NON ha senso
   ### IL CRITERIO NON E' MIO: e' la FORMA che il registro DICHIARA.
   ###   `indice` e' topologia, `segno` e' categoriale -- e per il `segno` il
   ###   registro lo dice esplicitamente: sommare due decisioni darebbe
-  ###   +2, 0 o -2, che non sono valori ammessi. Una grandezza senza forma
-  ###   dichiarata la ESCLUDO col suo motivo, invece di contarla.
+  ###   +2, 0 o -2, che non sono valori ammessi.
+
+  IL TOTALE: 24 copie + 2 forma ignota + 4 esclusi = 30 regole che
+  indicizzano UN SOLO GENITORE.
+
+  *** IL FATTO PRINCIPALE, e lo fa emergere la terza classe: ***
+    LO SPINORE STESSO NASCE COME COPIA DI `a`, NON COME MEDIA.
+      divisione   _nb             eredita dal genitore `a`
+      schwinger   _nb             eredita dal genitore `aa`
+      divisione   _psi_spinor     eredita col SEGNO (regola D)
+      schwinger   _psi_spinor     eredita INVERTITA (antichirale)
+      divisione   _spinor_lift    eredita col SEGNO (regola D)
+      schwinger   _spinor_lift    eredita INVERTITA (antichirale)
+    MENTRE `psi` NASCE COME MEDIA DEI DUE GENITORI (:1984, EREDITA-MEDIA).
+    ### E nello Schwinger la copia dello spinore porta il SEGNO -1 (doppia
+    ###   copertura OPPOSTA), che e' una scelta dichiarata nel registro.
+    ### QUINDI: il campo `psi` interpola fra i genitori, LO SPINORE NO.
+    ###   Due descrizioni della stessa materia, DUE FRAZIONI DIVERSE.
+    ### Non e' un difetto dichiarato: e' la DOMANDA che la decisione di Luca
+    ###   deve chiudere -- e con gli esclusi per <<forma ignota>> NON SI
+    ###   VEDEVA AFFATTO.
 
   IL CONFRONTO col conteggio del guardiano
-    nella MIA e non nella sua .. [('divisione', 'mem_mot'), ('divisione', 'omega_s'), ('schwinger', 'omega_s')]
+    ### E IL CONTEGGIO INIZIALE DEL GUARDIANO ERA SEI, e lui dichiara perche'
+    ###   era sbagliato: NON CONTAVA `c["src"]`, quindi perdeva `omega_s`,
+    ###   `mem_mot` e TUTTE le regole indicizzate da `src`. Errore del
+    ###   guardiano, dichiarato da lui. Con `src` contato come lato `a`
+    ###   (vale `a` a :8604 e `aa` a :8724) i due conteggi coincidono: 30.
+    nella MIA e non nella sua .. [('divisione', '_cs_nodo_prev'), ('divisione', '_nb'), ('divisione', '_nb_prec'), ('divisione', '_nb_ret'), ('divisione', '_psi_prec'), ('divisione', '_psi_spin_prec'), ('divisione', '_psi_spinor'), ('divisione', '_spinor_lift'), ('divisione', 'mem_mot'), ('divisione', 'omega_s'), ('schwinger', '_cs_nodo_prev'), ('schwinger', '_nb'), ('schwinger', '_nb_prec'), ('schwinger', '_nb_ret'), ('schwinger', '_psi_prec'), ('schwinger', '_psi_spin_prec'), ('schwinger', '_psi_spinor'), ('schwinger', '_spinor_lift'), ('schwinger', 'omega_s')]
     nella SUA e non nella mia .. [('schwinger', 'phi_s')]
       ('schwinger', 'phi_s') -> il guardiano la descrive come: zero (non da un genitore)
 
