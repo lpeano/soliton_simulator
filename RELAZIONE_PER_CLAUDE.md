@@ -2714,3 +2714,96 @@ FINESTRA, non della legge.**
 ### **divergerebbero.**
 
 ---
+
+# ⭐ **`A14` — LE GRANDEZZE SI CONSERVANO LOCALMENTE E SI DISSIPANO GLOBALMENTE**
+
+*(decisione di Luca, 2026-10-03. **`doc/ASSIOMI.md` è intoccabile SALVO decisione di Luca:
+questa È la decisione di Luca, e il file la cita così.** Solo documenti e indice.)*
+
+### ✅ **IL NUMERO E' `A14`, e l'ho MISURATO invece di sceglierlo.** Lo script conta gli assiomi
+presenti e ### **si ferma se il prossimo libero non è `A14`** — e si è fermato davvero al primo
+giro: trovava `[1,2,3,4,5,6,7,**7**,8,**8**,9,10,11,12,13]`. ### **I duplicati sono i COROLLARI
+`A7b` e `A8b`.** Curato: la guardia ora de-duplica **e** verifica che ### **`A14` non esista
+già.**
+
+## ⚠ **PERCHE' NON E' `A7`, e lo scrivo DENTRO l'assioma**
+
+`A7` si chiama **CONSERVAZIONE E STATO**: *«una grandezza senza stato non può conservare nulla»*.
+
+| | |
+|---|---|
+| `A7` | un assioma sul ### **MECCANISMO** — *serve memoria per conservare* |
+| ### **`A14`** | un assioma sullo ### **SCOPO** — *dove la conservazione vale e dove no* |
+
+### ➜ **Complementari, non doppioni.** ### 📌 **E la distinzione è esplicita perché in questo repo
+un nome riciclato ha già fatto danni:** `A3` era ### **tre voci diverse**, e l'indice ha dovuto
+separarle.
+
+## ⭐ **E `A14` E' IL PRIMO ASSIOMA CHE PUNTA A RENDERE IL SISTEMA GENERATIVO**
+
+La chiusa di `ASSIOMI.md` dice che questi assiomi sono **RESTRITTIVI e non generativi**, e ne dà
+la ragione: *«finché non esiste l'azione unica da cui le leggi si derivano, questo è un **codice
+deontologico**, non un sistema assiomatico»*.
+
+### ➜ **Il punto `(4)` di `A14` NOMINA quell'azione:** il nucleo locale è ### **una lagrangiana**
+*(`ENERGIA-NON-DEFINITA`, che ne porta la forma)*, e la dissipazione globale è ### **la sua
+estensione di contatto.** ### **Non la costruisce — dice dove deve stare.**
+
+## ⛔ **LE SEI VIOLAZIONI NOTE, e la SESTA è quella che ho verificato riga per riga**
+
+| | la legge | che cosa viola |
+|---|---|---|
+| 1 | termostato *(Nosé-Hoover)* e scuotimento | scrivono `phivel` **dall'esterno**: energia **e** carica |
+| 2 | ### **`beta * vd`** — *verificato a `:7896` e `:7967`* | smorzamento del **primo ordine** nell'accelerazione dell'arco |
+| 3 | i rilassamenti `_rep`, `peq`, `mem_mot` | energia, localmente |
+| 4 | la memoria dove **vince l'ultimo** | non è un bilancio: è una **sostituzione** |
+| 5 | la divisione che fa **sparire la torsione** | `~1.2` giri per arco diviso, **senza bilancio** |
+| ### **6** | ### **LA REGOLA DI NASCITA DI `phivel`** | ### **LA NASCITA CAMBIA LA CARICA** |
+
+### ⛔ **LA `6` E' LA PIU' GRAVE, perché viola il punto che NON ammette eccezioni** — il `(3)` dice
+che la carica si conserva ### **anche globalmente, nascita compresa.** **Verificata sul codice,
+entrambe le regole:**
+
+```
+_rn_div_phivel:  net.phivel = np.concatenate([net.phivel, 0.5 * (net.phivel[a] + net.phivel[b])])
+_rn_sch_phivel:  net.phivel = np.concatenate([net.phivel, 0.5 * (net.phivel[aa] + net.phivel[bb])])
+```
+
+### ➜ **Il nato riceve la MEDIA e ai genitori NON SI TOGLIE NIENTE:** la somma ### **cresce** di
+`0.5*(pv[a]+pv[b])` a ogni nascita. ### ✅ **Ed è UNA RIGA da riprogettare, non una legge da
+riscrivere:** con la tabella di nascita la regola è ### **una voce.**
+
+## ⚠ **MA LA CURA OVVIA NON BASTA, e questo lo aggiungo io**
+
+La grandezza conservata è ### **`Q = Σ |psi|² w (ω − ω₀)`**, ### **non `Σ ω`.**
+
+### ➜ **Quindi *«prendere dai genitori ciò che si riceve»* conserva `Σ phivel` MA NON `Q`**,
+perché i pesi `|psi|² w` del nato e dei genitori ### **sono diversi** — e ### **il peso del nato
+non è noto prima che `psi` sia ricalcolato.**
+
+### 📌 **È un VINCOLO DI ORDINE, della stessa famiglia del `vincolo 4`** che il commit 5 ha appena
+introdotto *(`perc_geom` dopo `tw`, perché la sua derivazione legge `tw`)*. ### **Lo stesso tipo di
+problema, due volte in un giorno: una regola di nascita che ha bisogno di qualcosa che non esiste
+ancora quando tocca a lei.**
+
+## ✅ **E `A14` DA' UN BERSAGLIO PRECISO A DUE VOCI CHE NE AVEVANO UNO VAGO**
+
+| | prima | con `A14` |
+|---|---|---|
+| `LOSCHMIDT-ECO` | *«misurare la reversibilità»* | ### **il nucleo locale deve tornare, la crescita NO** — e il caso che deve fallire c'è: ### **se tornasse anche con le nascite, la crescita non sarebbe la freccia che `A14` dice** |
+| `DIVISIONE-AUTOCONSISTENTE:M1` | *«una domanda aperta se la torsione debba conservarsi»* | la domanda ha una ### **risposta di principio** *(sì, localmente)*: resta ### **COME, non SE** |
+
+## ⚠ **E IL PUNTO CHE `A14` NON CHIUDE, dichiarato**
+
+La crescita cambia ### **il numero dei gradi di libertà**, e una lagrangiana con un numero
+variabile di coordinate ### **non è il caso di scuola.** `A14` dice che il nucleo locale deve
+restare conservativo e che la carica deve sopravvivere alla nascita; ### **non dice come si scrive
+l'azione di un sistema che cresce.** ### **È lì che il modello deve inventare.**
+
+### 📌 **E il punto `(4)` è una FORMA, non una formula:** la geometria di contatto dice **in che
+linguaggio** si scrive la dissipazione, non quale sia la legge. ### **Ma dà un criterio
+MISURABILE:** il teorema di Noether di contatto dà quantità **dissipate** i cui ### **RAPPORTI si
+conservano** — cioè l'invariante non è la quantità, ### **è il rapporto. E si cerca, non si
+assume.**
+
+---

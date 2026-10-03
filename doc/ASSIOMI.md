@@ -2,6 +2,88 @@
 
 ---
 
+## `A14` — ❗ **LE GRANDEZZE SI CONSERVANO LOCALMENTE E SI DISSIPANO GLOBALMENTE** *(decisione di Luca, 2026-10-03)*
+
+> ### **«Le grandezze si conservano LOCALMENTE e si dissipano GLOBALMENTE.»**
+
+### **I QUATTRO PUNTI, come li ha dettati Luca:**
+
+| | |
+|---|---|
+| **(1)** | ### **ogni legge del passo conserva energia e carica LOCALMENTE**: bilancio ### **nodo per nodo e arco per arco** — *cio' che entra meno cio' che esce e' uguale a quanto cambia* |
+| **(2)** | ### **l'energia puo' cambiare GLOBALMENTE solo attraverso la CRESCITA** *(la nascita dei nodi)*, come nell'universo in espansione: ### **conservazione locale, nessuna conservazione globale** *(il redshift cosmologico, l'attrito di Hubble del campo scalare: `phi'' + 3H phi' + V' = 0`)* |
+| **(3)** | ### **la CARICA si conserva ANCHE GLOBALMENTE, nascita compresa** — il verso di rotazione collettivo, la carica di Noether della fase. ### **L'espansione DILUISCE LA DENSITA', NON IL TOTALE**, e ### **la regola di nascita deve lasciare invariata la carica totale** |
+| **(4)** | la descrizione ### **GLOBALE** della dissipazione indotta dalla crescita si scrive in ### **GEOMETRIA DI CONTATTO** *(hamiltoniana di contatto, principio variazionale di Herglotz)*: i sistemi cosmologici con attrito di Hubble e i termostati alla Nosé-Hoover ### **hanno forma di contatto**, e il ### **teorema di Noether di contatto** da' quantita' ### **DISSIPATE che decadono allo stesso ritmo e i cui RAPPORTI si conservano**. ### **Il NUCLEO LOCALE resta conservativo** — una lagrangiana, `ENERGIA-NON-DEFINITA` |
+
+### ⚠ **PERCHE' NON E' `A7`, e lo dico perche' i nomi si somigliano**
+
+`A7` si chiama **CONSERVAZIONE E STATO** e dice: *«una grandezza senza stato non puo' conservare
+nulla»*. ### **E' un assioma sul MECCANISMO** — *serve memoria per conservare*.
+### **`A14` e' un assioma sullo SCOPO** — *dove la conservazione vale e dove no*.
+### ➜ **Sono complementari, non doppioni:** `A7` dice ### **che cosa serve** per conservare,
+`A14` dice ### **che cosa si conserva, e a quale scala.**
+### 📌 **E la distinzione e' esplicita perche' in questo repo un nome riciclato ha gia'
+fatto danni** *(`A3` era tre voci diverse, e l'indice ha dovuto separarle)*.
+
+### ⭐ **E `A14` E' IL PRIMO ASSIOMA CHE PUNTA A RENDERE IL SISTEMA GENERATIVO**
+
+La chiusa di questo file dice che questi assiomi sono ### **RESTRITTIVI e non generativi**, e ne
+da' la ragione: *«finche' non esiste l'azione unica da cui le leggi si derivano, questo e' un
+CODICE DEONTOLOGICO, non un sistema assiomatico»*.
+### ➜ **Il punto `(4)` di `A14` NOMINA quell'azione:** il nucleo locale e' ### **una
+lagrangiana** *(`ENERGIA-NON-DEFINITA`, che ne porta la forma)*, e la dissipazione globale e'
+### **la sua estensione di contatto.** ### **Non la costruisce — dice dove deve stare.**
+
+### **COSA NE DISCENDE: IL CRITERIO DELLE TRE DOMANDE**
+
+Ogni legge, ### **presente e futura**, si giudica su tre domande:
+
+| | |
+|---|---|
+| **(a)** | conserva l'energia ### **LOCALMENTE**? |
+| **(b)** | conserva la carica ### **LOCALMENTE**? |
+| **(c)** | se cambia un ### **TOTALE**, lo fa ### **SOLO attraverso la nascita dei nodi**? |
+
+### ➜ **Una legge che risponde NO si dichiara come VIOLAZIONE NOTA, con la sua voce di cura.**
+### **Non si vieta: si DICHIARA** — ed e' la differenza fra un assioma e un divieto.
+### **La voce che tiene l'elenco e' `CONSERVAZIONE-LOCALE`.**
+
+### ⛔ **LE VIOLAZIONI NOTE DI OGGI, ELENCATE E NON CURATE**
+
+| | la legge | che cosa viola | la voce |
+|---|---|---|---|
+| **1** | il **termostato** *(Nosé-Hoover)* e lo **scuotimento del vuoto** | ### **scrivono `phivel` DALL'ESTERNO**: energia ### **e** carica | `VUOTO-LOCALE-DETERMINISTICO` |
+| **2** | ### **`beta * vd`** — *verificato a `:7896` e `:7967`*: `acc_t = cs_arco**2 * lap + src - beta * self.vd` | uno **smorzamento del primo ordine** nell'accelerazione dell'arco | `ENERGIA-NON-DEFINITA` |
+| **3** | i **rilassamenti** — `_rep`, `peq`, `mem_mot` | energia, localmente | `ENERGIA-NON-DEFINITA` |
+| **4** | la **memoria dove VINCE L'ULTIMO** | non e' un bilancio: e' una sostituzione | `MEM-HEBB-VERSO` |
+| **5** | la **divisione che fa SPARIRE la torsione** | `~1.2` giri persi per arco diviso, ### **SENZA BILANCIO** | `DIVISIONE-AUTOCONSISTENTE:M1` |
+| ### **6** | ### **LA REGOLA DI NASCITA DI `phivel`** | ### **LA NASCITA CAMBIA LA CARICA**, contro il punto `(3)` | `CARICA-PERCORSO` |
+
+### ⛔ **E LA `6` E' LA PIU' GRAVE, perche' viola il punto che NON ammette eccezioni** — il
+`(3)` dice che la carica si conserva ### **anche globalmente, nascita compresa.**
+### **VERIFICATA SUL CODICE, entrambe le regole:**
+
+```
+_rn_div_phivel:  net.phivel = np.concatenate([net.phivel, 0.5 * (net.phivel[a] + net.phivel[b])])
+_rn_sch_phivel:  net.phivel = np.concatenate([net.phivel, 0.5 * (net.phivel[aa] + net.phivel[bb])])
+```
+
+### ➜ **Il nato riceve la MEDIA dei genitori e ai genitori NON SI TOGLIE NIENTE**: la somma
+### **cresce** di `0.5*(pv[a]+pv[b])` a ogni nascita.
+### ✅ **Ed e' UNA RIGA DA RIPROGETTARE, non una legge da riscrivere:** con la tabella di
+nascita la regola e' ### **una voce**, e il nato deve nascere ### **conservando la carica totale**
+*(per esempio prendendo dai genitori cio' che riceve)*.
+
+### ⚠ **MA UN VINCOLO IN PIU', che aggiungo perche' la cura ovvia NON basta:** la grandezza
+conservata e' ### **`Q = somma |psi|^2 w (omega - omega_0)`**, ### **non `somma omega`**.
+### ➜ **Quindi *«prendere dai genitori cio' che si riceve»* conserva `somma phivel` ma NON `Q`**,
+perche' i pesi `|psi|^2 w` del nato e dei genitori ### **sono diversi.** La regola nuova deve
+bilanciare ### **la carica PESATA**, e il peso del nato non e' noto prima che `psi` sia
+ricalcolato: ### **e' un vincolo di ORDINE, della stessa famiglia del `vincolo 4` del contratto
+di nascita.**
+
+---
+
 ## `A13` — ❗ **`LAM` È LA SCALA DI PLANCK DEL SISTEMA** *(decisione di Luca, 2026-09-24)*
 
 > ### **«LAM è la scala di Planck del sistema.»**

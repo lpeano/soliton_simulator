@@ -5208,6 +5208,69 @@ numero di punti che **esistono** in `p`.
 > davvero** -- quella e' lo **stato del grafo**, archi compresi, che **non e' ancora stato toccato**.
 > **Ma e' un'allocazione che prima, col troncamento, non avveniva.**
 
+<!-- SCHEDA nome=conservazione-locale-dissipazione-globale funzioni=nascita,_rn_div_phivel,_rn_sch_phivel,scuoti_vuoto flag=A14 -->
+# ⭐ **`conservazione-locale-dissipazione-globale` — `A14`**
+
+*(assioma deciso da Luca il 2026-10-03; il testo intero sta in `doc/ASSIOMI.md`, `A14`.
+Questa scheda lo COLLEGA alla fisica del modello.)*
+
+> ### **Le grandezze si conservano LOCALMENTE e si dissipano GLOBALMENTE.** L'energia cambia
+> globalmente ### **solo attraverso la crescita**; la ### **carica si conserva anche
+> globalmente, nascita compresa.**
+
+## ✅ **IL LEGAME CON LA VISIONE DEL 2026-10-01**
+
+La revisione della visione dice gia' ### **«energia globale non conservata in espansione;
+bilancio locale»**. ### ➜ **`A14` ne fa un CRITERIO invece di una descrizione**: non
+*«cosi' va il modello»*, ma ### **«ogni legge si giudica su tre domande»** — `(a)` energia
+locale, `(b)` carica locale, `(c)` se cambia un totale, solo per nascita.
+
+## ✅ **IL LEGAME CON `REVERSIBILITA-LOCALE`: LA CRESCITA E' L'UNICA FRECCIA**
+
+`A14` dice ### **dove sta la freccia del tempo**: nel punto `(2)`, e ### **solo li'**. Il nucleo
+locale e' ### **conservativo e reversibile** *(una lagrangiana del second'ordine: `XY` /
+sine-Gordon, non Kuramoto)*; ### **l'irreversibilita' entra con la NASCITA DEI NODI**, che cambia
+il numero dei gradi di liberta'.
+### 📌 **E la tabella di nascita del riordino e' esattamente il posto dove quella freccia
+si legge**: `nascita()` e' ### **il punto unico** in cui il numero dei gradi di liberta' cambia.
+
+## ⛔ **E LA CARICA ALLA NASCITA E' GIA' VIOLATA, MISURATA SUL CODICE**
+
+```
+_rn_div_phivel:  net.phivel = np.concatenate([net.phivel, 0.5 * (net.phivel[a] + net.phivel[b])])
+_rn_sch_phivel:  net.phivel = np.concatenate([net.phivel, 0.5 * (net.phivel[aa] + net.phivel[bb])])
+```
+
+### ➜ **Il nato riceve la MEDIA dei genitori e ai genitori non si toglie niente:** la somma
+### **CRESCE**. ### **Contro il punto `(3)`, che non ammette eccezioni.**
+
+### ⚠ **E LA CURA OVVIA NON BASTA:** la grandezza conservata e'
+### **`Q = somma |psi|^2 w (omega - omega_0)`** *(par.②-bis)*, ### **non `somma omega`**. Quindi
+*«prendere dai genitori cio' che si riceve»* conserva `somma phivel` ### **ma non `Q`**, perche' i
+pesi `|psi|^2 w` del nato e dei genitori ### **sono diversi** — e ### **il peso del nato non e'
+noto prima che `psi` sia ricalcolato.
+### 📌 **E' un vincolo di ORDINE, della stessa famiglia del `vincolo 4`** del contratto di
+nascita *(`perc_geom` dopo `tw`, perche' la sua derivazione legge `tw`)*. ### **La voce che lo
+tiene e' `CARICA-PERCORSO`.**
+
+## ⚠ **IL PUNTO `(4)` E' UNA FORMA, NON UNA FORMULA: e dirlo e' il punto**
+
+La geometria di contatto dice ### **in che linguaggio** si scrive la dissipazione indotta dalla
+crescita — ### **non quale sia la legge.** Il teorema di Noether di contatto da' quantita'
+### **dissipate** che decadono allo stesso ritmo e i cui ### **RAPPORTI si conservano**: cioe'
+l'invariante non e' la quantita', ### **e' il rapporto.**
+### ➜ **Ed e' un criterio MISURABILE:** se due grandezze del modello decadono con lo stesso
+ritmo durante la crescita, il loro rapporto e' ### **una costante del moto** — e ### **si
+cerca**, non si assume.
+
+## ⛔ **IL PUNTO APERTO, che `A14` non chiude:** la crescita cambia ### **il numero dei gradi di
+liberta'**, e una lagrangiana con un numero variabile di coordinate ### **non e' il caso di
+scuola.** ### **`A14` dice che il nucleo locale deve restare conservativo e che la carica deve
+sopravvivere alla nascita; NON dice come si scrive l'azione di un sistema che cresce.**
+### **E' li' che il modello deve inventare** *(`ENERGIA-NON-DEFINITA`)*.
+
+---
+
 <!-- SCHEDA nome=schermatura-nucleo-nudo funzioni=lambda_nodi,_lam_archi,_eredita_psi_figli,massa_critica_adattiva,_ferma_se_cache_corta,_rho_sorgente,_nb_grav flag=SCHERMATURA,LAM -->
 # ㉛ LA SCHERMATURA, E PERCHE' LA MASSA CRITICA SI CALCOLA SUL NUCLEO NUDO
 
@@ -5781,6 +5844,169 @@ usava gia' come descrizione.** E per `9-ter` questo conta: ### **nessuna legge i
 *«lo spinore E' il tempo proprio della massa»*. ### **Un verso di rotazione della fase e' un
 orologio con un senso di marcia** — ed e' la forma in cui *«materia contro antimateria»* diventa
 **una proprieta' dello STATO COLLETTIVO** invece di un'etichetta per nodo.
+
+## ⭐ **②-bis LA CARICA DI UNA MASSA: LA DEFINIZIONE** *(decisione di Luca, 2026-10-03)*
+
+> ### **La carica di una massa e' il SEGNO PESATO COLLETTIVO che emerge dalla velocita' di fase
+> ### di tutti i solitoni che la compongono.** Il ### **SEGNO** distingue materia da antimateria,
+> il ### **VALORE** dice quanta carica.
+
+### ⛔ **E' EMERGENTE e COLLETTIVA: nessun solitone *<<ha>>* una carica, ce l'ha la MASSA.**
+Un nodo debole che ruota al contrario dentro una massa forte ### **non la rende antimateria.**
+
+## ⚠ **LE DUE FASI, e quindi DUE CANDIDATE — e non sono la stessa cosa**
+
+Ogni nodo ha ### **due** fasi, e il codice le tiene separate:
+
+| | | |
+|---|---|---|
+| `phi_k` | la fase ### **PROPRIA** del nodo | `REGISTRO_METRI`, dominio `[0, 4pi)` |
+| `theta_k = arg psi_k` | la fase del ### **CAMPO** nel nodo | e `psi_k = somma_j W_kj * amp * e^{i phi_j}` — ### **verificato dal codice**: `F = self._mat(w) @ (amp * np.exp(1j * self.phi))` |
+
+```
+Q_A = somma_k |psi_k|^2 * w_k * (phidot_k   - omega_vuoto)      intensita' del campo x rotazione PROPRIA
+Q_B = somma_k |psi_k|^2 * w_k * (thetadot_k - omega_vuoto)      intensita' del campo x rotazione del CAMPO
+```
+
+### ⭐ **E `Q_B` COMPONE LE DUE COSE** *(conto del guardiano, prima della saturazione e con `W` simmetrica)*
+
+```
+Q_B = somma_j phidot_j * c_j     con   c_j = Re( e^{i phi_j} * conj( somma_k W_jk psi_k ) )
+                                       c_j ~ intensita' del campo intorno a j  x  cos(phi_j - theta)
+```
+
+### ➜ **Cioe' la rotazione di ogni solitone PESATA PER QUANTO E' IN FASE COL CAMPO CHE LO
+CIRCONDA: il nucleo in fase conta A FAVORE, il GUSCIO IN ANTIFASE conta CONTRO.**
+
+### 📌 **Ed e' la STESSA FORMA dei pesi di `aggiorna_pesi_concorrenza`** *(`cos(phi_nodo -
+phi_massa)`)*: ### **risponde da se' alla domanda sui PESI NEGATIVI di
+`MASSE-PESI-SOVRAPPOSTE`** — il segno del guscio ### **non si decide, esce dalla formula.**
+
+### ✅ **LA VERIFICA CHIESTA DAL GUARDIANO, FATTA: `satura()` cambia SOLO IL MODULO**
+
+```
+satura(f) = f / (1.0 + GAMMA * np.sqrt(np.abs(f)**2 + 1e-9))
+```
+
+Il denominatore e' ### **reale e positivo**, quindi ### **`arg(satura(f)) = arg(f)` esattamente**
+*(in aritmetica esatta; nei float a meno dell'arrotondamento)*.
+
+| | |
+|---|---|
+| ### ➜ **la struttura del conto REGGE** | `theta = arg psi = arg F`: ### **`thetadot` NON e' toccato dalla saturazione** |
+| ### ➜ **cambiano SOLO i pesi `c_j`** | che prendono il `\|psi\|` ### **saturato** invece di `\|F\|`, come il guardiano prevedeva |
+
+### ⭐ **`Q_B` E' LA CANDIDATA PREFERITA**, perche' e' la carica del ### **campo complesso** —
+### **ma la scelta definitiva la da' la LAGRANGIANA** *(il par. qui sotto)* ### **oppure la misura
+di quale delle due si conserva** *(`CARICA-SIMMETRIA-FASE`, misura `(c)`)*.
+
+### ✅ **E LA PARTIZIONE DELL'UNITA' DA' UNA CONSERVAZIONE PER COSTRUZIONE**
+
+```
+somma_m Q_m = somma_k |psi_k|^2 (omega_k - omega_0) * (somma_m w_k^(m)) = somma_k |psi_k|^2 (omega_k - omega_0)
+```
+
+### ➜ **Non e' una proprieta' da verificare: e' un'IDENTITA'** — e vale per `Q_A` come per
+`Q_B`, perche' il peso `w_k` e' fuori dalla parentesi. Ed e' una delle ragioni per cui la decisione
+sui pesi viene ### **PRIMA** di `CARICA-ROTAZIONE`.
+
+### ⚠ **MA VALE SOLO SUI NODI CHE APPARTENGONO A UNA MASSA, e lo aggiungo perche' cambia come
+si legge il numero.** I nodi del ### **vuoto** hanno `w = 0` per ogni massa, quindi la loro carica
+### **non entra** nella somma: l'identita' e' *somma delle masse = carica della ### **PARTE
+MATERIA***, e il resto e' ### **il residuo del vuoto.**
+
+| | |
+|---|---|
+| quel residuo | ha media ### **~zero per costruzione** *(e' proprio `omega - omega_vuoto` sul vuoto)*, ### **ma non e' zero: FLUTTUA** |
+| ### ➜ **e' IL PAVIMENTO DI RUMORE della misura** | una `Q_massa` piccola ### **non si distingue dal residuo** finche' il residuo non e' misurato ### **accanto** |
+| ### ✅ **e la definizione lo sopprime da se'** | il peso `\|psi_k\|^2` ### **schiaccia i nodi di vuoto**, dove il campo e' debole — ### **un pregio della formula, non un caso**. Ma ### **quanto** lo sopprima e' un numero, e va misurato |
+
+### ✔ **E' DISTINTA DALLA CHIRALITA' SPINORIALE `perc_chi`, e la ragione e' FISICA:** in
+fisica la carica elettrica ### **non dipende dallo spin**; l'unico punto in cui *<<mano>>* e carica
+si toccano e' l'### **interazione debole** *(solo la chiralita' sinistra sente il `W`)*.
+### **Il codice di oggi usa `perc_chi` come carica: e' LA COSA DA SOSTITUIRE.**
+
+### ⛔ **E UNA FRASE DI QUESTA SCHEDA VA QUALIFICATA** *(la qualifico qui invece di lasciarla
+come sta)*
+
+La tabella del par.② dice: *«spostare tutte le fasi di una costante ### **non cambia il verso di
+rotazione**: `phivel` e' una derivata, e una traslazione rigida di `φ` la lascia identica»*.
+### **E' vero per `phivel` come derivata MATEMATICA, e non basta:**
+
+| | |
+|---|---|
+| **1** | la fase ### **ASSOLUTA e' AVVOLTA**: `self.phi = (…) % self._dphi()` *(`:7607`)*, e la semina avvolge *(`:4825-4826`)*. ### ➜ **Una traslazione rigida e' esattamente una traslazione SOLO se `c` e' un multiplo di `_dphi()`** — e quindi ### **`c = _dphi()` e' il CONTROLLO POSITIVO** del test, che deve dare ### **byte-identico** |
+| **2** | ### **`phivel` viene RISCRITTA ogni passo** come `_phivel_t + delta_phivel`, e `delta_phivel` lo calcolano leggi che leggono `phi`. ### ➜ **Se una usa la fase ASSOLUTA, dopo un passo `phivel` NON e' invariante** — e questa scheda dichiara gia' che ### **due leggi la scrivono** *(termostato e scuotimento)* |
+
+### ➜ **La frase conflonde l'invarianza CINEMATICA di `phivel` sotto uno spostamento rigido**
+*(vera nel continuo)* ### **con l'invarianza delle LEGGI che la aggiornano** *(non misurata)* —
+ed e' la seconda che `CARICA-SIMMETRIA-FASE` misura.
+
+### ⚠ **I LIMITI, DICHIARATI E ACCETTATI DA LUCA:** `Q` ### **non e' quantizzata** *(servirebbe
+un meccanismo topologico o quantistico)*; e una carica ### **GLOBALE non produce da sola una
+forza** *(servirebbe un campo di gauge ### **LOCALE** sugli archi; ### **se `tw` possa esserlo e'
+una DOMANDA APERTA, non una risposta**)*.
+
+## ⭐ **LA FORMA DELL'ENERGIA: UNA SOLA LAGRANGIANA** *(decisione di Luca, 2026-10-03)*
+
+> ### **Non *<<aggiungere un'energia al codice che c'e'>>*, ma RIFORMULARE il modello come UNA
+> ### SOLA LAGRANGIANA da cui escono TUTTE le leggi.**
+
+```
+L = somma_j  1/2 * I_j * phidot_j^2   -   V(phi, struttura della rete)
+```
+
+### **CON L'INTERFERENZA DENTRO `V`**, e il punto e' l'autoconsistenza: il campo collettivo
+`psi_k = somma_j W_kj e^{i phi_j}` e' ### **CALCOLATO dalle fasi** — ### **non e' un secondo
+campo indipendente** — ### **e agisce sulle fasi.** Un ### **CAMPO AUTOCONSISTENTE.**
+
+### **LA FAMIGLIA, e la scelta e' fra due:**
+
+| | | |
+|---|---|---|
+| ### **Kuramoto** | ### **DISSIPATIVO, primo ordine** | ### ⛔ **irreversibile PER COSTRUZIONE: NON e' la forma voluta** |
+| ### **XY / sine-Gordon su reticolo** | ### **SECONDO ordine, CON INERZIA** | ### ✅ **conservativo**: energia conservata, carica di Noether, ### **reversibile** |
+
+### ✅ **E IL SIMULATORE HA GIA' L'INERZIA — verificato: `phivel` E' IN `REGISTRO_STATO`.**
+### **Quindi PUO' stare nella seconda famiglia.** Oggi ne e' fuori per cose ### **elencate, non
+genericamente *<<dissipative>>***:
+
+| | che cosa rompe la forma conservativa | dove |
+|---|---|---|
+| **1** | ### **termostato e scuotimento SCRIVONO `phivel`** | `step` *(`self.phivel = _phivel_t + delta_phivel`)* e `scuoti_vuoto` |
+| **2** | ### **`beta * vd`** — uno smorzamento del primo ordine nell'accelerazione dell'arco | `:7896` `acc_t = cs_arco**2 * lap + src - beta * self.vd` e `:7967` |
+| **3** | ### **i rilassamenti**: `_rep`, `peq`, `mem_mot` | — |
+| **4** | ### **la memoria dove VINCE L'ULTIMO** | `MEM-HEBB-VERSO` |
+| **5** | ### **le soglie scritte a mano** | — |
+
+### ⭐ **E DA `L` ESCONO INSIEME, che e' il punto di farne UNA:**
+
+| | |
+|---|---|
+| le ### **equazioni del moto** | per variazione |
+| l'### **ENERGIA** | dalla traslazione nel tempo |
+| la ### **CARICA DI NOETHER** | dalla simmetria di fase — ### **e dice QUALE fra `Q_A` e `Q_B`** *(il par.②-bis)* |
+| la ### **REVERSIBILITA'** | ### **controllabile con `LOSCHMIDT-ECO`** |
+
+### **E il campo SPINORIALE sarebbe un SECONDO campo VERO**, accoppiato nella ### **stessa `L`** —
+non un'aggiunta a parte.
+
+### ⛔ **IL PUNTO APERTO, DICHIARATO DA LUCA: LA CRESCITA DELLA RETE.** La nascita dei nodi
+### **cambia il NUMERO dei gradi di liberta'**, e per questo ### **non c'e' una ricetta
+standard**: una lagrangiana con un numero variabile di coordinate non e' il caso di scuola.
+### ➜ **E' li' che il modello deve INVENTARE**, e dirlo e' meglio che nasconderlo dentro una
+formula che vale solo a rete fissa.
+
+### ⚠ **E UNA TENSIONE DA MISURARE, che aggiungo io:** nella lagrangiana `psi` e' ### **una
+FUNZIONE delle `phi`**; nel codice e' una ### **CACHE** — `self.psi = self.satura(F)` la
+ricalcola, ma ### **altre leggi la LEGGONO prima del ricalcolo** *(fra cui `lambda_nodi`)*.
+### ➜ **Le due cose coincidono SOLO SE nessuna legge legge una `psi` stantia**, e
+### **`PSI-FLASH` e' il caso MISURATO in cui una `psi` di lunghezza sbagliata cambiava la fisica**
+*(`lambda` da `~0.60` a `0.80`, `|psi|` ### **x1.62 per TUTTI**)*. ### **E' un vincolo
+VERIFICABILE della riformulazione, non una nota.**
+### ⚠ **E `psi` e' in `REGISTRO_STATO`:** per la lagrangiana e' ### **derivata**, per il codice
+e' ### **una cache letta come stato**. ### **Quale delle due classificazioni valga e' esattamente
+la domanda che `L` risolve** — e finche' non e' risolta, ### **le due letture convivono.**
 
 ## ⛔ **③ `perc_chi` NON E' QUESTA CARICA, e lo DICHIARO**
 
