@@ -1,0 +1,277 @@
+[TIMBRO] _sigillo_legge_2lam.py  sha1-BYTE d47ada1e  committato e pulito
+====================================================================================================
+IL SIGILLO DEL COMMIT 6b: `MITOSI_2LAM` diventa LEGGE, in forma GENERALE
+====================================================================================================
+  simulatore di OGGI .. 0f060670
+  questo sigillo ...... d47ada1e
+  la patch ............ 45de926f
+  piattaforma ......... Windows AMD64
+  Python .............. 3.13.2
+  numpy ............... 2.3.0
+  ### I CONTEGGI VALGONO PER QUESTA PIATTAFORMA. Cio' che NON dipende dalla
+  ###   piattaforma e' l'IDENTITA' fra il *prima* e l'*oggi*.
+  ### E su questa macchina il PRIMO CANDIDATO con il flag arriva al passo 74:
+  ###   le scene da 72 passi NON portano statistica del cancello, e i numeri
+  ###   del braccio B3 vengono da `lunga` (150 passi). MISURATO, non supposto.
+  il PRIMA ............ c18c9bf6  (dal PADRE di 5f034010, che introduce `_g_m2l_rif_solo_lam`)
+
+----------------------------------------------------------------------------------------------------
+BRACCIO `0` -- LA CURA E' RIPRODUCIBILE DAL REPO?
+  il *prima* + la patch .. 0f060670
+  il simulatore di oggi .. 0f060670
+  ### PASSA: stesso blob. La cura e' recuperabile PER COSTRUZIONE (par.7).
+
+----------------------------------------------------------------------------------------------------
+BRACCIO `A` -- BYTE-IDENTICO sulle TRE scene CON `--mitosi-2lam`
+  ### I due blob girano IN LOCKSTEP e si confrontano DOPO OGNI PASSO.
+  ### I contatori NUOVI si separano PER NOME ATTESO: _g_m2l_rif_solo_dens, _g_m2l_rif_solo_lam, _g_m2l_rif_entrambi, _g_m2l_tw_rif
+  ### ⛔ Un attributo nuovo NON PREVISTO fa FALLIRE il braccio: altrimenti
+  ###   l'esclusione sarebbe un buco in cui passa qualunque cosa.
+
+  ================================================================================================
+  SCENA `corta` -- seme 11, 72 passi, --mitosi-2lam: SI
+    la SCENA (oggi): nmasse 3 (argv 3) OK  sep 6.1158 (argv 6.1158) OK
+      alla costruzione: n = 12802, archi = 471564
+    la SCENA (prima): nmasse 3 (argv 3) OK  sep 6.1158 (argv 6.1158) OK
+      alla costruzione: n = 12802, archi = 471564
+    attributi solo nell'OGGI: ['_g_m2l_rif_entrambi', '_g_m2l_rif_solo_dens', '_g_m2l_rif_solo_lam', '_g_m2l_tw_rif']
+    di cui NON PREVISTI ....: nessuno
+    ### PASSA: ZERO differenze su 72 passi, su OGNI voce di `__dict__`
+    ###   (ndarray, scalari, liste, dict, matrice SPARSA, stato del
+    ###   generatore), CONTATORI COMPRESI -- meno i NUOVI, dichiarati.
+    i contatori, prima / oggi:
+      _g_m2l_dmin            1.4384450656167553 / 1.4384450656167553
+      _g_m2l_negati          2 / 2
+      _g_m2l_rif_entrambi    None / 0
+      _g_m2l_rif_solo_dens   None / 0
+      _g_m2l_rif_solo_lam    None / 2
+      _g_m2l_tot             11 / 11
+      _g_m2l_tw_rif          0 / 2 (lunghezza)
+      _sm_trd0_mitosi        0 / 0
+      _sm_trd0_schwinger     0 / 0
+      _sm_trd_mitosi         0 / 0
+      _sm_trd_schwinger      0 / 0
+      archi                  471575 / 471575
+      n                      12812 / 12812
+      negate                 2 / 2
+
+  ================================================================================================
+  SCENA `lunga` -- seme 11, 150 passi, --mitosi-2lam: SI
+    la SCENA (oggi): nmasse 3 (argv 3) OK  sep 6.1158 (argv 6.1158) OK
+      alla costruzione: n = 12802, archi = 471564
+    la SCENA (prima): nmasse 3 (argv 3) OK  sep 6.1158 (argv 6.1158) OK
+      alla costruzione: n = 12802, archi = 471564
+    attributi solo nell'OGGI: ['_g_m2l_rif_entrambi', '_g_m2l_rif_solo_dens', '_g_m2l_rif_solo_lam', '_g_m2l_tw_rif']
+    di cui NON PREVISTI ....: nessuno
+    ### PASSA: ZERO differenze su 150 passi, su OGNI voce di `__dict__`
+    ###   (ndarray, scalari, liste, dict, matrice SPARSA, stato del
+    ###   generatore), CONTATORI COMPRESI -- meno i NUOVI, dichiarati.
+    i contatori, prima / oggi:
+      _g_m2l_dmin            0.8 / 0.8
+      _g_m2l_negati          271 / 271
+      _g_m2l_rif_entrambi    None / 0
+      _g_m2l_rif_solo_dens   None / 0
+      _g_m2l_rif_solo_lam    None / 271
+      _g_m2l_tot             1209 / 1209
+      _g_m2l_tw_rif          0 / 271 (lunghezza)
+      _sm_trd0_mitosi        0 / 0
+      _sm_trd0_schwinger     42 / 42
+      _sm_trd_mitosi         0 / 0
+      _sm_trd_schwinger      42 / 42
+      archi                  473022 / 473022
+      n                      14000 / 14000
+      negate                 271 / 271
+
+  ================================================================================================
+  SCENA `altro_seme` -- seme 12, 72 passi, --mitosi-2lam: SI
+    la SCENA (oggi): nmasse 3 (argv 3) OK  sep 6.1158 (argv 6.1158) OK
+      alla costruzione: n = 12765, archi = 468042
+    la SCENA (prima): nmasse 3 (argv 3) OK  sep 6.1158 (argv 6.1158) OK
+      alla costruzione: n = 12765, archi = 468042
+    attributi solo nell'OGGI: ['_g_m2l_rif_entrambi', '_g_m2l_rif_solo_dens', '_g_m2l_rif_solo_lam', '_g_m2l_tw_rif']
+    di cui NON PREVISTI ....: nessuno
+    ### PASSA: ZERO differenze su 72 passi, su OGNI voce di `__dict__`
+    ###   (ndarray, scalari, liste, dict, matrice SPARSA, stato del
+    ###   generatore), CONTATORI COMPRESI -- meno i NUOVI, dichiarati.
+    i contatori, prima / oggi:
+      _g_m2l_dmin            1.0646664482106758 / 1.0646664482106758
+      _g_m2l_negati          1 / 1
+      _g_m2l_rif_entrambi    None / 0
+      _g_m2l_rif_solo_dens   None / 0
+      _g_m2l_rif_solo_lam    None / 1
+      _g_m2l_tot             14 / 14
+      _g_m2l_tw_rif          0 / 1 (lunghezza)
+      _sm_trd0_mitosi        0 / 0
+      _sm_trd0_schwinger     0 / 0
+      _sm_trd_mitosi         0 / 0
+      _sm_trd_schwinger      0 / 0
+      archi                  468063 / 468063
+      n                      12782 / 12782
+      negate                 1 / 1
+
+----------------------------------------------------------------------------------------------------
+BRACCIO `B` -- la scena SENZA `--mitosi-2lam`: NON identica, ed e' ATTESO
+  ### E qui si misura il CALO di `n`, che il piano prevedeva.
+  ### ⛔ E VA DETTO COME VA DETTO: quel calo e' IMPOSTO PER COSTRUZIONE --
+  ###   meno nascite ammesse, meno nodi -- e NON e' un fenomeno emergente.
+
+  SCENA `senza_2lam_corta` -- seme 11, 72 passi, senza il flag
+    B1  i troncamenti della MITOSI, prima / oggi:
+          _sm_trd_mitosi       14 / 0
+          _sm_trd0_mitosi      12 / 0
+        ### uno ZERO atteso vale solo se accanto c'e' un numero
+        ###   DIVERSO DA ZERO.
+        ### PASSA
+    B2  la legge EVENTO PER EVENTO, su 8 divisioni ammesse:
+           1 archi, d_min 2.353233, corto_min 1.176617, LAM 0.800000  OK
+           1 archi, d_min 2.056915, corto_min 1.028457, LAM 0.800000  OK
+           1 archi, d_min 1.612626, corto_min 0.806313, LAM 0.800000  OK
+           1 archi, d_min 1.809085, corto_min 0.904542, LAM 0.800000  OK
+           1 archi, d_min 2.287298, corto_min 1.143649, LAM 0.800000  OK
+           2 archi, d_min 2.234787, corto_min 1.117394, LAM 0.800000  OK
+           1 archi, d_min 2.115470, corto_min 1.057735, LAM 0.800000  OK
+           1 archi, d_min 2.167670, corto_min 1.083835, LAM 0.800000  OK
+        ### PASSA: min(t,1-t)*d >= LAM su OGNI evento.
+    B3  i numeri:
+          n al passo 72            12830 / 12812
+          archi                    471597 / 471575
+          _g_m2l_tot               23 / 11
+          _g_m2l_negati            None / 2
+          _g_m2l_dmin              None / 1.4384450656167553
+          _g_m2l_rif_solo_dens     None / 0
+          _g_m2l_rif_solo_lam      None / 2
+          _g_m2l_rif_entrambi      None / 0
+          negate                   0 / 2
+          |tw| dei rifiutati per LAM: 2 valori
+            min 7.451196  mediana 7.666327  max 7.881458
+            sopra PHI_CRIT (6.2832): 2   sopra 3*pi (9.4248): 0
+          le SOGLIE locali: da 6.913616 a 9.424778, su 72 chiamate
+          il ramo di soglia, DAI FLAG e non indovinato:
+            TORS_4PI = True   PHI_CRIT = 6.283185307179586
+
+  SCENA `senza_2lam_lunga` -- seme 11, 150 passi, senza il flag
+    B1  i troncamenti della MITOSI, prima / oggi:
+          _sm_trd_mitosi       536 / 0
+          _sm_trd0_mitosi      400 / 0
+        ### uno ZERO atteso vale solo se accanto c'e' un numero
+        ###   DIVERSO DA ZERO.
+        ### PASSA
+    B2  la legge EVENTO PER EVENTO, su 83 divisioni ammesse:
+           1 archi, d_min 2.353233, corto_min 1.176617, LAM 0.800000  OK
+           1 archi, d_min 2.056915, corto_min 1.028457, LAM 0.800000  OK
+           1 archi, d_min 1.612626, corto_min 0.806313, LAM 0.800000  OK
+           1 archi, d_min 1.809085, corto_min 0.904542, LAM 0.800000  OK
+           1 archi, d_min 2.287298, corto_min 1.143649, LAM 0.800000  OK
+           2 archi, d_min 2.234787, corto_min 1.117394, LAM 0.800000  OK
+           1 archi, d_min 2.115470, corto_min 1.057735, LAM 0.800000  OK
+           1 archi, d_min 2.167670, corto_min 1.083835, LAM 0.800000  OK
+          ... e altri 75 eventi
+        ### PASSA: min(t,1-t)*d >= LAM su OGNI evento.
+    B3  i numeri:
+          n al passo 150           14344 / 14000
+          archi                    473403 / 473022
+          _g_m2l_tot               1245 / 1209
+          _g_m2l_negati            None / 271
+          _g_m2l_dmin              None / 0.8
+          _g_m2l_rif_solo_dens     None / 0
+          _g_m2l_rif_solo_lam      None / 271
+          _g_m2l_rif_entrambi      None / 0
+          negate                   0 / 271
+          |tw| dei rifiutati per LAM: 271 valori
+            min 7.091088  mediana 8.102397  max 10.408357
+            sopra PHI_CRIT (6.2832): 271   sopra 3*pi (9.4248): 11
+          le SOGLIE locali: da 6.913577 a 9.424778, su 150 chiamate
+          il ramo di soglia, DAI FLAG e non indovinato:
+            TORS_4PI = True   PHI_CRIT = 6.283185307179586
+
+----------------------------------------------------------------------------------------------------
+BRACCIO `E` -- OGGI SENZA FLAG == PRIMA CON FLAG, identico al byte
+  ### E' LA PROVA PIU' DIRETTA CHE IL FLAG E' INERTE, e che la legge
+  ###   incondizionata e' ESATTAMENTE quella che il flag accendeva.
+  ### ⚠ I bracci `A` e `B` da soli NON lo dicono: `A` confronta
+  ###   *prima CON* contro *oggi CON*, `B` misura *oggi SENZA* contro
+  ###   *prima SENZA*. ### Nessuno dei due incrocia i due stati che
+  ###   DEVONO coincidere se il flag non fa piu' niente.
+
+  SCENA `corta` -- seme 11, 72 passi: PRIMA con flag / OGGI senza
+    n / archi:  12812 , 471575   contro  12812 , 471575
+    ### PASSA: ZERO differenze su 72 passi. Il flag e'
+    ###   INERTE, e lo dice il confronto piu' diretto.
+
+  SCENA `lunga` -- seme 11, 150 passi: PRIMA con flag / OGGI senza
+    n / archi:  14000 , 473022   contro  14000 , 473022
+    ### PASSA: ZERO differenze su 150 passi. Il flag e'
+    ###   INERTE, e lo dice il confronto piu' diretto.
+
+  SCENA `altro_seme` -- seme 12, 72 passi: PRIMA con flag / OGGI senza
+    n / archi:  12782 , 468063   contro  12782 , 468063
+    ### PASSA: ZERO differenze su 72 passi. Il flag e'
+    ###   INERTE, e lo dice il confronto piu' diretto.
+
+  ### PASSA: su tutte le scene, oggi-senza-flag e' identico a prima-con-flag.
+
+----------------------------------------------------------------------------------------------------
+BRACCIO `C` -- FRAZ_NASCITA = 0.4 su TUTTE le scene
+  corta        _sm_trd_mitosi = 0       divisioni ammesse: 4    OK
+                 d_min 2.353233  0.4*d_min 0.941293  LAM 0.800000  OK
+                 d_min 2.056934  0.4*d_min 0.822773  LAM 0.800000  OK
+                 d_min 2.044008  0.4*d_min 0.817603  LAM 0.800000  OK
+                 d_min 2.086056  0.4*d_min 0.834422  LAM 0.800000  OK
+  lunga        _sm_trd_mitosi = 0       divisioni ammesse: 76   OK
+                 d_min 2.353233  0.4*d_min 0.941293  LAM 0.800000  OK
+                 d_min 2.056934  0.4*d_min 0.822773  LAM 0.800000  OK
+                 d_min 2.044008  0.4*d_min 0.817603  LAM 0.800000  OK
+                 d_min 2.086056  0.4*d_min 0.834422  LAM 0.800000  OK
+  altro_seme   _sm_trd_mitosi = 0       divisioni ammesse: 11   OK
+                 d_min 2.061067  0.4*d_min 0.824427  LAM 0.800000  OK
+                 d_min 2.307756  0.4*d_min 0.923102  LAM 0.800000  OK
+                 d_min 2.093233  0.4*d_min 0.837293  LAM 0.800000  OK
+                 d_min 2.235636  0.4*d_min 0.894255  LAM 0.800000  OK
+  ### PASSA
+
+----------------------------------------------------------------------------------------------------
+LA FINESTRA DI `C-bis (i)`: esistono candidati con 1.6 <= d < 2.0?
+  ### SENZA DI LORO quel caso <<che deve fallire>> passerebbe PER ASSENZA DI
+  ###   MATERIA: un FALSO-ZERO. Si MISURA, e se manca si DICHIARA.
+  LAM = 0.800000   2*LAM = 1.600000   LAM/0.4 = 2.000000
+  _g_m2l_dmin sulla scena `lunga` con t=0.4: 0.8409961058494193
+  ### il `d` minimo cade nella finestra [2*LAM, LAM/t)? False
+  ### ⚠ QUESTO E' UN INDIZIO, NON LA MISURA: `_g_m2l_dmin` e' il MINIMO, e la
+  ###   finestra puo' contenere candidati anche se il minimo sta sotto. Il
+  ###   VERDETTO vero e' se `C-bis (i)` FALLISCE: se passa, la finestra era
+  ###   vuota e il caso va COSTRUITO.
+
+----------------------------------------------------------------------------------------------------
+BRACCIO `C-bis` -- TRE copie che DEVONO fallire
+  (i) cancello VECCHIO d >= 2*LAM    eventi 84   violazioni 69   troncamenti 437  ->  BOCCIATO
+        primo violato: d_min 1.612626  corto_min 0.645051  LAM 0.800000
+  (ii) solo (1-t)*d >= LAM           eventi 84   violazioni 79   troncamenti 635  ->  BOCCIATO
+        primo violato: d_min 1.473280  corto_min 0.589312  LAM 0.800000
+  (iii) solo t*d >= LAM              eventi 83   violazioni 77   troncamenti 633  ->  BOCCIATO
+        primo violato: d_min 1.473280  corto_min 0.589312  LAM 0.800000
+  ### PASSA: tre copie, tre bocciature.
+
+----------------------------------------------------------------------------------------------------
+BRACCIO `D` -- il flag fra i `[flag-inerti]`, e l'archivio VERBATIM
+  l'avvio stampa `MITOSI_2LAM` fra i [flag-inerti]? True
+    [flag-inerti]    - MITOSI_2LAM: il suo cancello e' diventato LEGGE INCONDIZIONATA nel commit `6b` (2026-10-04), e il ramo <<senza il flag>> 
+  e l'avviso `[cura5]` NON compare piu'? True
+  l'archivio contiene il cancello vecchio VERBATIM? True
+    if MITOSI_2LAM and len(c):                   c'e'
+    _conforme = _dc >= 2.0 * LAM                 c'e'
+    ok = ok & _conforme                          c'e'
+  ### PASSA
+
+====================================================================================================
+### IL RIEPILOGO
+###   braccio 0 ........ PASSA
+###   braccio A `corta      ` PASSA
+###   braccio A `lunga      ` PASSA
+###   braccio A `altro_seme ` PASSA
+###   braccio B ........ PASSA
+###   braccio E ........ PASSA
+###   braccio C ........ PASSA
+###   braccio C-bis .... PASSA
+###   braccio D ........ PASSA
+====================================================================================================
+  referto .. C:\Users\lpeano\soliton_simulator\csv\_seal_fork\_sigillo_legge_2lam

@@ -4014,3 +4014,65 @@ in `net.__dict__` che cresce senza limite** per tutto il run. Nelle scene misura
 stato**, e la forma si decide col commit della cura dei due difetti del censimento.
 
 ---
+
+## **IL SIGILLO DEL 6b SULLA SCENA GIUSTA: sette bracci, e i numeri combaciano coi tuoi**
+
+`nmasse 3 (argv 3)`, `sep 6.1158 (argv 6.1158)`, **`n = 12802`** e **`471564`** archi alla
+costruzione — e il controllo nuovo lo **stampa** e **fallirebbe** se non coincidessero.
+
+### ✅ **IL BRACCIO `E` PASSA SU TUTTE LE SCENE, ed era quello che mi mancava.**
+
+```
+corta       PRIMA con flag  12812 , 471575   contro  OGGI senza  12812 , 471575
+lunga       PRIMA con flag  14000 , 473022   contro  OGGI senza  14000 , 473022
+altro_seme  PRIMA con flag  12782 , 468063   contro  OGGI senza  12782 , 468063
+```
+
+**Zero differenze**, su tutti gli attributi. ### **Il flag è inerte, e la legge
+incondizionata è ESATTAMENTE quella che il flag accendeva** — e lo dice il confronto che
+né `A` né `B` facevano.
+
+### ✅ **E `B1` NON È PIÙ VACUO: ora ha materia su ENTRAMBE le scene.**
+
+| scena | `_sm_trd_mitosi` | `_sm_trd0_mitosi` |
+|---|---|---|
+| `corta` 72 passi | **`14 → 0`** | **`12 → 0`** |
+| `lunga` 150 passi | **`536 → 0`** | **`400 → 0`** |
+
+### 📌 **E I NUMERI COMBACIANO CON LA TUA RIMISURA INDIPENDENTE, in un modo che vale più
+di un PASSA:** `_g_m2l_tot` passa da **`23`** *(prima senza flag)* a **`11`** *(oggi senza
+flag)* — e tu misuravi **`23` candidati senza il flag** e **`11` con il flag**.
+### **Il mio «oggi senza» dà il tuo «con», e il mio «prima senza» dà il tuo «senza».**
+E `_g_m2l_negati = 2`, lo stesso tuo numero. ### **Due macchine, due piattaforme, gli
+stessi quattro numeri.**
+
+**Sui troncamenti la differenza di piattaforma resta e si vede:** io misuro `14/12` dove
+tu misuri `16/14` — ### **ed è lo stesso `14/12` che avevo misurato nel `6a` sulla stessa
+scena.** *(`ROBUSTEZZA-FISICA`: i conteggi assoluti dipendono dalla piattaforma,
+l'identità prima/dopo no.)*
+
+**`B2` su `8` e `83` divisioni ammesse, evento per evento:** `min(t,1−t)·d ≥ LAM` su ogni
+evento. Il caso più stretto è `d_min = 1.612626` con `corto_min = 0.806313` contro
+`LAM = 0.800000`: ### **passa per `0.006`, e il margine piccolo è il segno che il cancello
+lavora al limite giusto invece di tagliare largo.**
+
+**Il calo di `n`: `12830 → 12812`** al passo 72 — e lo ripeto come l'ho scritto prima: è
+**imposto per costruzione.**
+
+### **E `C-bis` sulla scena giusta porta QUATTRO VOLTE la materia:** `84`/`84`/`83` eventi
+con `69`/`79`/`77` violazioni e `437`/`635`/`633` troncamenti, contro i `19`/`39`/`42`
+eventi della scena sbagliata. ### **È un'altra misura di quanto l'errore della scena
+contasse: non cambiava solo i numeri, cambiava quanta materia i bracci avevano.**
+
+**Il dato per il `6c`:** `|tw|` dei `2` rifiutati su `corta` — min `7.451`, mediana
+`7.666`, max `7.881`, **entrambi sopra `PHI_CRIT`**, **nessuno sopra `3π`**. Soglie locali
+`6.914`–`9.425`, ramo `TORS_4PI = True`.
+
+### ⚠ **Due cose da dichiarare sul run.** La **sorveglianza** è stata fermata al suo
+limite di 2 ore **mentre il sigillo era ancora vivo** all'ultimo braccio: l'ho riarmata,
+e il processo staccato non è stato toccato. E lo **stderr non è vuoto** — `461` byte: un
+avviso di `matplotlib` *(«more than 20 figures have been opened»)* dalle molte costruzioni
+di scena. ### **Un avviso di risorse, non un errore — e lo dico perché nel referto
+precedente lo stderr vuoto era un dato che avevo citato.**
+
+---
