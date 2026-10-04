@@ -68,6 +68,13 @@ csv/_test_fork/_copertura_derivate/_sim_lettura_iniettata.py
 #   l'esenzione): le rigenera il sigillo a ogni giro, con le ancore
 #   ASSERITE uniche.
 csv/_seal_fork/_sigillo_veleno/_sim_*.py
+#   E le copie con `FRAZ_NASCITA != 0.5` del CONTROLLO di `_calcio_sotto_scambio`:
+#   lo strumento le RIGENERA a ogni giro dal simulatore di QUEL momento con UNA
+#   sostituzione asserita unica (`copia_con_frazione`), e il referto dichiara il blob
+#   della copia. Committarle sarebbe duplicare il simulatore per cambiare una riga, e
+#   una copia committata diventa STANTIA: direbbe di essere una copia e non lo sarebbe
+#   piu' (`SIM-PRIMA-STANTIO`). Il dato E' il comando che la produce.
+csv/_test_fork/_calcio_sotto_scambio/_sim_frazione_*.py
 
 # ============================================================================
 #  I NON TRACCIATI (decisione di Luca, 2026-10-04, strada (B)) -- referto 0b3b2a0
