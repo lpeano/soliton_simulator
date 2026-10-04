@@ -1,0 +1,97 @@
+========================================================================================================
+M2 -- IL VERSO DELL'ARCO ENTRA NELLA FISICA? La prova dello specchio su `(i, j)`
+========================================================================================================
+simulatore ..... 287154f3
+questo strumento 7c8b0200
+passi .......... 1
+
+====================================================================================================
+LA CONFIGURAZIONE INTERA (`P5`) -- non i flag toccati, TUTTI
+====================================================================================================
+  booleani di modulo confrontati con l'argv del DRIVER: 81
+  -> IN CONFIGURAZIONE DEL DRIVER: nessuna differenza. ZERO su 81.
+
+
+CONTROLLO ZERO: le due scene partono identiche?
+  grandezze per nodo confrontate: 16   DIVERSE: 0
+  -> IDENTICHE. La misura e' lecita.
+
+SPECCHIO applicato a B: 471564 archi invertiti, segno cambiato a tw, twp
+  (scrittura FUORI dal passo: le forme non cambiano, quindi il controllo del
+   registro non ha nulla da dire -- e lo si dichiara invece di tacerlo.)
+
+========================================================================================================
+IL VERDETTO SI LEGGE SUI NODI (invarianti per la trasformazione)
+========================================================================================================
+  grandezza        esito               scost.max fin.       relativo   elem. div.
+  phi              DIVERSA                 1.3031e+00     1.0372e-01        12801
+  phi0             IDENTICA                0.0000e+00     0.0000e+00            0
+  phi_s            DIVERSA                 8.8818e-16     2.8388e-16            1
+  phivel           DIVERSA                 1.1102e-16     5.9422e-17           41
+  psi              IDENTICA                0.0000e+00     0.0000e+00            0
+  psi_spin         IDENTICA                0.0000e+00     0.0000e+00            0
+  eta              IDENTICA                0.0000e+00     0.0000e+00            0
+  pos              IDENTICA                0.0000e+00     0.0000e+00            0
+  perc_tw          IDENTICA                0.0000e+00     0.0000e+00            0
+  perc_chi         IDENTICA                0.0000e+00     0.0000e+00            0
+  perc_geom        IDENTICA                0.0000e+00     0.0000e+00            0
+  mem_mot          DIVERSA                 8.0491e-16     2.9103e-15        37414
+  omega_s          DIVERSA                 6.9389e-18     4.0786e-16        19085
+  rho_spin         IDENTICA                0.0000e+00     0.0000e+00            0
+  _nb              DIVERSA                 3.3307e-16     3.3307e-16          298
+  _psi_spinor      DIVERSA                 2.2204e-16     2.2204e-16        10647
+
+  ### GRANDEZZE PER NODO DIVERSE: 7 su 16
+  ### ➜ IL VERSO DELL'ARCO ENTRA NELLA FISICA. La simulazione cambia, e non per
+        una rinumerazione: le grandezze per NODO non si trasformano affatto.
+
+========================================================================================================
+CONTROLLO sugli ARCHI, con la trasformazione DICHIARATA per ciascuna
+========================================================================================================
+  SIMMETRICHE (nessun segno):
+      d        IDENTICA            scost.max(fin)   0.0000e+00  relativo   0.0000e+00  elem.div 0
+      d0       DIVERSA             scost.max(fin)   6.4600e-02  relativo   2.6591e-02  elem.div 471564
+      vd       IDENTICA            scost.max(fin)   0.0000e+00  relativo   0.0000e+00  elem.div 0
+      peq      IDENTICA            scost.max(fin)   0.0000e+00  relativo   0.0000e+00  elem.div 0
+      _rep     IDENTICA            scost.max(fin)   0.0000e+00  relativo   0.0000e+00  elem.div 0
+  ANTISIMMETRICHE (riportate con -1):
+      tw       DIVERSA             scost.max(fin)   3.5527e-15  relativo   3.7696e-16  elem.div 105114
+      twp      DIVERSA             scost.max(fin)   3.5527e-15  relativo   3.7696e-16  elem.div 105114
+
+========================================================================================================
+DOVE, misurato: LA PRIMA VOCE DEL PASSO IN CUI UNA GRANDEZZA DIVERGE
+========================================================================================================
+  Si rifa' UN passo su due scene nuove, con la SPIA sui confini di voce
+  (il controllo del commit 1, che gira dopo OGNI voce), e si confronta voce per voce.
+
+  confine (dopo la voce)               d0             d           phi            tw            vd           peq
+  (prima delle leggi)           0.000e+00     0.000e+00     0.000e+00     0.000e+00     0.000e+00     0.000e+00
+  apri                          0.000e+00     0.000e+00     0.000e+00     0.000e+00     0.000e+00     0.000e+00
+  scuoti_vuoto                  0.000e+00     0.000e+00     0.000e+00     0.000e+00     0.000e+00     0.000e+00
+  step                          0.000e+00     0.000e+00     0.000e+00     3.553e-15     0.000e+00     0.000e+00
+  mitosi                        0.000e+00     0.000e+00     0.000e+00     3.553e-15     0.000e+00     0.000e+00
+  rilassa_disegno               0.000e+00     0.000e+00     0.000e+00     3.553e-15     0.000e+00     0.000e+00
+  memoria_hebbiana_moto         8.596e-02     0.000e+00     1.303e+00     3.553e-15     0.000e+00     0.000e+00
+  chiudi                        6.460e-02     0.000e+00     1.303e+00     3.553e-15     0.000e+00     0.000e+00
+  verifica_invarianti           6.460e-02     0.000e+00     1.303e+00     3.553e-15     0.000e+00     0.000e+00
+
+  ### LA PRIMA VOCE CHE FA DIVERGERE, per grandezza:
+      d0     -> dopo la voce `memoria_hebbiana_moto`   (scostamento 8.596e-02)
+      d      -> MAI, in questo passo
+      phi    -> dopo la voce `memoria_hebbiana_moto`   (scostamento 1.303e+00)
+      tw     -> dopo la voce `step`   (scostamento 3.553e-15)
+      vd     -> MAI, in questo passo
+      peq    -> MAI, in questo passo
+
+========================================================================================================
+DOVE: il primo sospetto era il CALCIO DELLA MITOSI, e si dice se ha agito
+========================================================================================================
+
+========================================================================================================
+DOVE: il primo sospetto e' il CALCIO DELLA MITOSI, e si dice se ha agito
+========================================================================================================
+  BASE      nati mitosi 0   nati Schwinger 0   n = 12802
+  SPECCHIO  nati mitosi 0   nati Schwinger 0   n = 12802
+  ⚠ Se in questi passi NON ci sono nascite, il calcio della mitosi NON HA AGITO:
+    allora una differenza sui nodi viene da ALTRO, e il referto non puo' attribuirla
+    al calcio. ### Il primo sospetto non e' l'unico, e questa riga lo tiene onesto.

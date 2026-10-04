@@ -1,0 +1,301 @@
+{
+ "blob_sim_sha1_byte": "287154f343c8bf27424a7d856dbd2a13ad7b1b34",
+ "blob_strumento": "edb2e3057f268349da1435aca079a9f53ed355db",
+ "passi": 1,
+ "tipi_non_leggi": [
+  "disegno",
+  "osservatore"
+ ],
+ "statica": {
+  "pos": {
+   "lettori": 20,
+   "come_legge": 5,
+   "non_legge_o_fuori_passo": 15,
+   "funzioni_legge": [
+    "chiralita_core_locale",
+    "memoria_hebbiana_moto",
+    "mitosi",
+    "pozzo_grafo",
+    "step"
+   ],
+   "funzioni_non_legge": [
+    "_allaccia",
+    "_diag_completa",
+    "_gusci_esterni",
+    "_ordine",
+    "_picchi_nuovi",
+    "_regione_centrale",
+    "_render_vista_rete_sola",
+    "_semina_lam",
+    "_semina_masse_coerenti",
+    "batch_condensazione",
+    "campo_spaziale",
+    "classifica_topologia",
+    "rilassa_disegno",
+    "semina",
+    "update"
+   ],
+   "scritture_dirette": {
+    "__init__": 1,
+    "semina": 1,
+    "mitosi": 2,
+    "rilassa_disegno": 3
+   },
+   "scritture_di_elemento": {}
+  },
+  "d": {
+   "lettori": 17,
+   "come_legge": 11,
+   "non_legge_o_fuori_passo": 6,
+   "funzioni_legge": [
+    "_pesi",
+    "_smp_apri",
+    "_tau_arco_causale",
+    "_tempo_luce_nodo",
+    "_traccia_d0",
+    "_traccia_vd",
+    "memoria_hebbiana_moto",
+    "mitosi",
+    "pozzo_grafo",
+    "scuoti_vuoto",
+    "step"
+   ],
+   "funzioni_non_legge": [
+    "_allaccia",
+    "_diag_completa",
+    "batch_condensazione",
+    "diagnostica",
+    "rilassa_disegno",
+    "verifica_invarianti"
+   ],
+   "scritture_dirette": {
+    "__init__": 1,
+    "_allaccia": 1,
+    "step": 4,
+    "mitosi": 2
+   },
+   "scritture_di_elemento": {}
+  },
+  "d0": {
+   "lettori": 15,
+   "come_legge": 9,
+   "non_legge_o_fuori_passo": 6,
+   "funzioni_legge": [
+    "_sd0",
+    "_smp_apri",
+    "_smp_chiudi",
+    "_traccia_d0",
+    "_traccia_vd",
+    "memoria_hebbiana_moto",
+    "mitosi",
+    "scuoti_vuoto",
+    "step"
+   ],
+   "funzioni_non_legge": [
+    "_allaccia",
+    "_big_bang",
+    "_diag_completa",
+    "batch_condensazione",
+    "diagnostica",
+    "update"
+   ],
+   "scritture_dirette": {
+    "__init__": 1,
+    "_allaccia": 1,
+    "_smp_chiudi": 1,
+    "step": 3,
+    "mitosi": 3
+   },
+   "scritture_di_elemento": {
+    "memoria_hebbiana_moto": 6
+   }
+  }
+ },
+ "runtime": {
+  "pos": {
+   "lettori": 5,
+   "letture_totali": 31,
+   "dentro_una_legge": [
+    {
+     "funzione": "memoria_hebbiana_moto",
+     "letture": 4
+    },
+    {
+     "funzione": "step",
+     "letture": 2
+    }
+   ],
+   "tutti": [
+    {
+     "funzione": "rilassa_disegno",
+     "letture": 15
+    },
+    {
+     "funzione": "_ferma_se_registro_incoerente",
+     "letture": 9
+    },
+    {
+     "funzione": "memoria_hebbiana_moto",
+     "letture": 4
+    },
+    {
+     "funzione": "step",
+     "letture": 2
+    },
+    {
+     "funzione": "verifica_invarianti",
+     "letture": 1
+    }
+   ]
+  },
+  "d": {
+   "lettori": 11,
+   "letture_totali": 91,
+   "dentro_una_legge": [
+    {
+     "funzione": "_pesi",
+     "letture": 39
+    },
+    {
+     "funzione": "_tempo_luce_nodo",
+     "letture": 15
+    },
+    {
+     "funzione": "step",
+     "letture": 15
+    },
+    {
+     "funzione": "memoria_hebbiana_moto",
+     "letture": 5
+    },
+    {
+     "funzione": "_smp_apri",
+     "letture": 1
+    },
+    {
+     "funzione": "scuoti_vuoto",
+     "letture": 1
+    },
+    {
+     "funzione": "_tau_arco_causale",
+     "letture": 1
+    },
+    {
+     "funzione": "pozzo_grafo",
+     "letture": 1
+    }
+   ],
+   "tutti": [
+    {
+     "funzione": "_pesi",
+     "letture": 39
+    },
+    {
+     "funzione": "_tempo_luce_nodo",
+     "letture": 15
+    },
+    {
+     "funzione": "step",
+     "letture": 15
+    },
+    {
+     "funzione": "_ferma_se_registro_incoerente",
+     "letture": 9
+    },
+    {
+     "funzione": "memoria_hebbiana_moto",
+     "letture": 5
+    },
+    {
+     "funzione": "rilassa_disegno",
+     "letture": 3
+    },
+    {
+     "funzione": "_smp_apri",
+     "letture": 1
+    },
+    {
+     "funzione": "scuoti_vuoto",
+     "letture": 1
+    },
+    {
+     "funzione": "_tau_arco_causale",
+     "letture": 1
+    },
+    {
+     "funzione": "pozzo_grafo",
+     "letture": 1
+    },
+    {
+     "funzione": "verifica_invarianti",
+     "letture": 1
+    }
+   ]
+  },
+  "d0": {
+   "lettori": 8,
+   "letture_totali": 44,
+   "dentro_una_legge": [
+    {
+     "funzione": "step",
+     "letture": 15
+    },
+    {
+     "funzione": "memoria_hebbiana_moto",
+     "letture": 13
+    },
+    {
+     "funzione": "scuoti_vuoto",
+     "letture": 2
+    },
+    {
+     "funzione": "_smp_chiudi",
+     "letture": 2
+    },
+    {
+     "funzione": "_smp_apri",
+     "letture": 1
+    },
+    {
+     "funzione": "mitosi",
+     "letture": 1
+    }
+   ],
+   "tutti": [
+    {
+     "funzione": "step",
+     "letture": 15
+    },
+    {
+     "funzione": "memoria_hebbiana_moto",
+     "letture": 13
+    },
+    {
+     "funzione": "_ferma_se_registro_incoerente",
+     "letture": 9
+    },
+    {
+     "funzione": "scuoti_vuoto",
+     "letture": 2
+    },
+    {
+     "funzione": "_smp_chiudi",
+     "letture": 2
+    },
+    {
+     "funzione": "_smp_apri",
+     "letture": 1
+    },
+    {
+     "funzione": "mitosi",
+     "letture": 1
+    },
+    {
+     "funzione": "verifica_invarianti",
+     "letture": 1
+    }
+   ]
+  }
+ },
+ "verdetto_pos_letta_da_una_legge": true
+}
