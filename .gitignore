@@ -68,3 +68,79 @@ csv/_test_fork/_copertura_derivate/_sim_lettura_iniettata.py
 #   l'esenzione): le rigenera il sigillo a ogni giro, con le ancore
 #   ASSERITE uniche.
 csv/_seal_fork/_sigillo_veleno/_sim_*.py
+
+# ============================================================================
+#  I NON TRACCIATI (decisione di Luca, 2026-10-04, strada (B)) -- referto 0b3b2a0
+# ----------------------------------------------------------------------------
+#  SCOPO: che `non tracciato` significhi `DIMENTICATO`. Il censimento ha trovato
+#  484 non tracciati, di cui 32 copie RIGENERABILI del simulatore, 212 stub e 85
+#  binari di stato: rumore che NASCONDEVA i candidati veri.
+#
+#  ### NIENTE REGOLE SUI NOMI GENERICI (_corsa.txt, _sigillo.json, ...): la
+#  strada (A) le prevedeva, e il controllo l'ha BOCCIATA -- 31 `_corsa.txt` sono
+#  TRACCIATI, il nome generico E' la convenzione committata, e ignorarlo avrebbe
+#  reso INVISIBILE un referto scritto nel posto giusto. I referti si COMMITTANO,
+#  e il presidio H-NON-TRACCIATI li rende impossibili da dimenticare.
+# ============================================================================
+
+# lo stato binario compresso: `*.pkl` c'era, `*.pkl.gz` NO -- e un pattern di
+# .gitignore combacia col NOME INTERO, quindi `x.pkl.gz` finisce in `.gz` e non
+# in `.pkl`. L'incoerenza ha GIA' agito: due .pkl.gz erano committati (4df94a7),
+# tolti dall'indice il 2026-10-04.
+*.pkl.gz
+*.pickle
+
+# gli STUB generati dentro `_tmp/`.
+# ### CON L'ASTERISCO E NON `csv/**/_tmp/`: una CARTELLA esclusa non si puo'
+# ri-includere, e le eccezioni qui sotto NON funzionerebbero. Con `/*` si
+# escludono le VOCI, non la cartella.
+csv/**/_tmp/*
+
+# le COPIE del simulatore e del driver, e le copie PATCHATE: contengono il
+# codice PER COSTRUZIONE e si rigenerano dalla patch.
+csv/**/_sim_*.py
+csv/**/_br_*.py
+csv/**/_driver_*.py
+
+# i fotogrammi del video.
+csv/_test_fork/_video_g6000/*.png
+
+# ----------------------------------------------------------------------------
+#  LE ECCEZIONI: i 31 file GIA' TRACCIATI che le regole qui sopra coprirebbero.
+#  ### SONO UNA PER UNA E PER PERCORSO, non un pattern: un pattern d'eccezione
+#  ri-includerebbe anche i file FUTURI, e lo scopo e' l'opposto -- una copia
+#  nuova deve nascere IGNORATA.
+#  ### E le copie accanto a un referto sono LECITE: par.7, stato 2 (`accanto ai
+#  dati resta una COPIA ESATTA del file che ha girato`).
+# ----------------------------------------------------------------------------
+!csv/_seal_fork/_guasto_ripieghi/_sim_precura.py
+!csv/_seal_fork/_sig_contrasto/_sim_diag_ci.py
+!csv/_seal_fork/_sig_contrasto_esteso/_sim_diag_est.py
+!csv/_seal_fork/_sig_controllo_unico/_sim_prima_5750.py
+!csv/_seal_fork/_sig_controllo_unico/_sim_prima_controllo.py
+!csv/_seal_fork/_sig_cura_A/_sim_A.py
+!csv/_seal_fork/_sig_guardie/_sim_prima_guardie.py
+!csv/_seal_fork/_sig_scena_ii/_driver_prima.py
+!csv/_seal_fork/_sig_traccia_d0/_sim_prima.py
+!csv/_seal_fork/_sig_traccia_peq/_sim_committato.py
+!csv/_test_fork/_a13_relazionale/_tmp/_br_s11.py
+!csv/_test_fork/_a13_relazionale/_tmp/_br_s12.py
+!csv/_test_fork/_a13_relazionale/_tmp/s11.json
+!csv/_test_fork/_a13_relazionale/_tmp/s12.json
+!csv/_test_fork/_figli_della_mitosi/_tmp/_br_s11.py
+!csv/_test_fork/_figli_della_mitosi/_tmp/_br_s12.py
+!csv/_test_fork/_figli_della_mitosi/_tmp/s11.json
+!csv/_test_fork/_figli_della_mitosi/_tmp/s12.json
+!csv/_test_fork/_limite_accoppiamento/_sim_diag.py
+!csv/_test_fork/_limite_accoppiamento/_tmp/_br_s11.py
+!csv/_test_fork/_limite_accoppiamento/_tmp/_br_s12.py
+!csv/_test_fork/_limite_accoppiamento/_tmp/s11.json
+!csv/_test_fork/_limite_accoppiamento/_tmp/s12.json
+!csv/_test_fork/_limite_accoppiamento2/_sim_diag2.py
+!csv/_test_fork/_scomposizione_figli/_sim_diag_scomp.py
+!csv/_test_fork/_video_g6000/frame_001.png
+!csv/_test_fork/_video_g6000/frame_011.png
+!csv/_test_fork/_video_g6000/frame_036.png
+!csv/_test_fork/_video_g6000/frame_039.png
+!csv/_test_fork/_video_g6000/frame_042.png
+!csv/_test_fork/_video_g6000/frame_045.png

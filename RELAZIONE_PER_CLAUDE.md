@@ -4299,3 +4299,47 @@ difetto nuovo. Con quella regola è una pulizia.** ### **Le due decisioni di Luc
 poche ore di distanza, si incastrano.**
 
 ---
+
+## **`COMMIT 1` ridotto: 486 → 100 non tracciati, e zero tracciati coperti**
+
+Sette regole nuove e **31 eccezioni `!`**, una per percorso. **Nessuna regola sui nomi
+generici** — la strada (B).
+
+### ✅ **IL CONTROLLO PASSA, e l'ho fatto riga per riga:** su **1732** file tracciati,
+### **ZERO sono coperti da una regola NUOVA.** *(Dodici lo sono da `*.log`, che è
+**preesistente** e non mia — un'incoerenza della stessa specie di quella dei `.pkl.gz`, che
+registro e non curo qui.)*
+
+**E un esempio per ogni regola, con `git check-ignore`:**
+
+```
+ACCESO/scena_000120.pkl.gz     IGNORATO   *.pkl.gz
+_tmp/_br_off_s11_corti.py      IGNORATO   csv/**/_br_*.py
+_sim_cbis_0.py                 IGNORATO   csv/**/_sim_*.py
+_tmp/qualunque.json            IGNORATO   csv/**/_tmp/*
+frame_002.png                  IGNORATO   csv/_test_fork/_video_g6000/*.png
+_altro.pickle                  IGNORATO   *.pickle
+_corsa.txt                     non ignorato          <-- la strada (B)
+_tmp/s11.json (TRACCIATO)      non ignorato          <-- l'eccezione ! funziona
+```
+
+### 📌 **E DUE COSE CHE HO IMPARATO FACENDO IL CONTROLLO, non leggendo la documentazione.**
+
+### ① **`csv/**/_tmp/` con la barra finale NON avrebbe funzionato:** esclude la **cartella**, e
+git **non può ri-includere un file se una cartella genitore è esclusa** — le 12 eccezioni
+sotto `_tmp/` sarebbero state inerti. ### **Con `csv/**/_tmp/*` si escludono le VOCI, e
+l'eccezione funziona: verificato, non assunto.**
+
+### ② ⛔ **IL MIO PRIMO CONTROLLO DICEVA «12 TRACCIATI COPERTI» ED ERA UN ARTEFATTO DELLA MIA
+PIPE.** `subprocess` con `text=True` su Windows traduce i newline **anche in scrittura**, e
+iniettava un `\r` in ogni percorso: il `\r` fa combaciare `*` e **non** fa combaciare
+`!<percorso>`. ### **Passando byte con `-z`, il conto è ZERO.** ### ⚠ **È il TERZO artefatto
+di pipe che in questa sessione mi produce un falso segnale** — dopo `kill -0` sui PID di
+Windows e il `tee` bufferizzato che perse un braccio. ### **Tre volte lo strumento di misura
+ha mentito, non la cosa misurata.**
+
+**Le 31 eccezioni sono una per percorso e non un pattern**, di proposito: un pattern
+d'eccezione ri-includerebbe anche i file **futuri**, e lo scopo è l'opposto — **una copia
+nuova deve nascere ignorata.**
+
+---
