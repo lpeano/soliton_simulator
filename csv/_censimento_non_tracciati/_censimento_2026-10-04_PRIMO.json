@@ -1,0 +1,4385 @@
+{
+ "strumento": "862755b4b5fcad6b95066779091633a335d9c694",
+ "non_tracciati": 484,
+ "blob_storici_simulatore": 206,
+ "conteggi": {
+  "(a) COPIA-SIMULATORE": 32,
+  "(b) STUB": 212,
+  "(c) STATO BINARIO": 85,
+  "(d) CANDIDATO OMISSIONE": 155
+ },
+ "classi": {
+  "(a) COPIA-SIMULATORE": [
+   "csv/_seal_fork/_ab_chibasc/_sim_prima.py",
+   "csv/_seal_fork/_c1_semina/_sim_vecchio.py",
+   "csv/_seal_fork/_sig_anom_simm/_sim_prima.py",
+   "csv/_seal_fork/_sig_chicoop/_sim_prima.py",
+   "csv/_seal_fork/_sig_coes_causale/_sim_prima.py",
+   "csv/_seal_fork/_sig_contatori/_sim_prima.py",
+   "csv/_seal_fork/_sig_contrasto/_tmp/_sim_prima.py",
+   "csv/_seal_fork/_sig_contrasto_esteso/_tmp/_sim_prima.py",
+   "csv/_seal_fork/_sig_cura2_strutturale/_sim_al_tag.py",
+   "csv/_seal_fork/_sig_cura4/_tmp/_sim_vecchio.py",
+   "csv/_seal_fork/_sig_cura5/_tmp/_sim_vecchio.py",
+   "csv/_seal_fork/_sig_cura_A/_tmp/_sim_prima_flag.py",
+   "csv/_seal_fork/_sig_cura_A/_tmp/_sim_su_W.py",
+   "csv/_seal_fork/_sig_d32_nomi/_sim_prima.py",
+   "csv/_seal_fork/_sig_decisione_separata/_sim_prima_decisione.py",
+   "csv/_seal_fork/_sig_dieci/_sim_prima.py",
+   "csv/_seal_fork/_sig_invarianti/_sim_prima.py",
+   "csv/_seal_fork/_sig_max_nodi/_sim_prima_della_cura.py",
+   "csv/_seal_fork/_sig_nascita_atomica/_sim_e203f9a8.py",
+   "csv/_seal_fork/_sig_nascita_psi/_sim_prima_della_cura.py",
+   "csv/_seal_fork/_sig_peq_esatto/_sim_prima.py",
+   "csv/_seal_fork/_sig_peq_nascita/_sim_prima.py",
+   "csv/_seal_fork/_sig_pozzo_d/_sim_prima.py",
+   "csv/_seal_fork/_sig_scala_min_passo/_sim_prima.py",
+   "csv/_seal_fork/_sig_scala_p/_sim_prima.py",
+   "csv/_seal_fork/_sig_u2/_tmp/_sim_vecchio.py",
+   "csv/_seal_fork/_sigillo_frazione_t/_sim_prima.py",
+   "csv/_seal_fork/_sigillo_frazione_t/_sim_rifatta.py",
+   "csv/_seal_fork/_sigillo_legge_2lam/_sim_prima.py",
+   "csv/_seal_fork/_sigillo_legge_2lam/_sim_rifatta.py",
+   "csv/_seal_fork/_sigillo_perc_geom_derivata/_sim_prima.py",
+   "csv/_seal_fork/_sigillo_perc_geom_derivata/_sim_rifatta.py"
+  ],
+  "(b) STUB": [
+   "csv/_seal_fork/_sig_contrasto/_tmp/_br_off_s11_corti.py",
+   "csv/_seal_fork/_sig_contrasto/_tmp/_br_off_s11_lunghi.py",
+   "csv/_seal_fork/_sig_contrasto/_tmp/_br_off_s12_corti.py",
+   "csv/_seal_fork/_sig_contrasto/_tmp/_br_off_s12_lunghi.py",
+   "csv/_seal_fork/_sig_contrasto/_tmp/_br_on_s11_corti.py",
+   "csv/_seal_fork/_sig_contrasto/_tmp/_br_on_s11_lunghi.py",
+   "csv/_seal_fork/_sig_contrasto/_tmp/_br_on_s12_corti.py",
+   "csv/_seal_fork/_sig_contrasto/_tmp/_br_on_s12_lunghi.py",
+   "csv/_seal_fork/_sig_contrasto/_tmp/_br_prima_s11_lunghi.py",
+   "csv/_seal_fork/_sig_contrasto/_tmp/_br_prima_s12_lunghi.py",
+   "csv/_seal_fork/_sig_contrasto/_tmp/_sim_prima_diag.py",
+   "csv/_seal_fork/_sig_contrasto/_tmp/off_s11_corti.json",
+   "csv/_seal_fork/_sig_contrasto/_tmp/off_s11_lunghi.json",
+   "csv/_seal_fork/_sig_contrasto/_tmp/off_s12_corti.json",
+   "csv/_seal_fork/_sig_contrasto/_tmp/off_s12_lunghi.json",
+   "csv/_seal_fork/_sig_contrasto/_tmp/on_s11_corti.json",
+   "csv/_seal_fork/_sig_contrasto/_tmp/on_s11_lunghi.json",
+   "csv/_seal_fork/_sig_contrasto/_tmp/on_s12_corti.json",
+   "csv/_seal_fork/_sig_contrasto/_tmp/on_s12_lunghi.json",
+   "csv/_seal_fork/_sig_contrasto/_tmp/prima_s11_lunghi.json",
+   "csv/_seal_fork/_sig_contrasto/_tmp/prima_s12_lunghi.json",
+   "csv/_seal_fork/_sig_contrasto_esteso/_tmp/_br_figli_s11.py",
+   "csv/_seal_fork/_sig_contrasto_esteso/_tmp/_br_figli_s12.py",
+   "csv/_seal_fork/_sig_contrasto_esteso/_tmp/_br_off_s11_corti.py",
+   "csv/_seal_fork/_sig_contrasto_esteso/_tmp/_br_off_s11_lunghi.py",
+   "csv/_seal_fork/_sig_contrasto_esteso/_tmp/_br_off_s12_corti.py",
+   "csv/_seal_fork/_sig_contrasto_esteso/_tmp/_br_off_s12_lunghi.py",
+   "csv/_seal_fork/_sig_contrasto_esteso/_tmp/_br_on_s11_corti.py",
+   "csv/_seal_fork/_sig_contrasto_esteso/_tmp/_br_on_s11_lunghi.py",
+   "csv/_seal_fork/_sig_contrasto_esteso/_tmp/_br_on_s12_corti.py",
+   "csv/_seal_fork/_sig_contrasto_esteso/_tmp/_br_on_s12_lunghi.py",
+   "csv/_seal_fork/_sig_contrasto_esteso/_tmp/_br_prima_s11_lunghi.py",
+   "csv/_seal_fork/_sig_contrasto_esteso/_tmp/_br_prima_s12_lunghi.py",
+   "csv/_seal_fork/_sig_contrasto_esteso/_tmp/_br_ril_s11_corti.py",
+   "csv/_seal_fork/_sig_contrasto_esteso/_tmp/_br_ril_s11_lunghi.py",
+   "csv/_seal_fork/_sig_contrasto_esteso/_tmp/_br_ril_s12_corti.py",
+   "csv/_seal_fork/_sig_contrasto_esteso/_tmp/_br_ril_s12_lunghi.py",
+   "csv/_seal_fork/_sig_contrasto_esteso/_tmp/_sim_prima_diag.py",
+   "csv/_seal_fork/_sig_contrasto_esteso/_tmp/figli_s11.json",
+   "csv/_seal_fork/_sig_contrasto_esteso/_tmp/figli_s12.json",
+   "csv/_seal_fork/_sig_contrasto_esteso/_tmp/off_s11_corti.json",
+   "csv/_seal_fork/_sig_contrasto_esteso/_tmp/off_s11_lunghi.json",
+   "csv/_seal_fork/_sig_contrasto_esteso/_tmp/off_s12_corti.json",
+   "csv/_seal_fork/_sig_contrasto_esteso/_tmp/off_s12_lunghi.json",
+   "csv/_seal_fork/_sig_contrasto_esteso/_tmp/on_s11_corti.json",
+   "csv/_seal_fork/_sig_contrasto_esteso/_tmp/on_s11_lunghi.json",
+   "csv/_seal_fork/_sig_contrasto_esteso/_tmp/on_s12_corti.json",
+   "csv/_seal_fork/_sig_contrasto_esteso/_tmp/on_s12_lunghi.json",
+   "csv/_seal_fork/_sig_contrasto_esteso/_tmp/prima_s11_lunghi.json",
+   "csv/_seal_fork/_sig_contrasto_esteso/_tmp/prima_s12_lunghi.json",
+   "csv/_seal_fork/_sig_contrasto_esteso/_tmp/ril_s11_corti.json",
+   "csv/_seal_fork/_sig_contrasto_esteso/_tmp/ril_s11_lunghi.json",
+   "csv/_seal_fork/_sig_contrasto_esteso/_tmp/ril_s12_corti.json",
+   "csv/_seal_fork/_sig_contrasto_esteso/_tmp/ril_s12_lunghi.json",
+   "csv/_seal_fork/_sig_cura4/_tmp/_br_lungo_off.py",
+   "csv/_seal_fork/_sig_cura4/_tmp/_br_lungo_on.py",
+   "csv/_seal_fork/_sig_cura4/_tmp/_br_mitosi.py",
+   "csv/_seal_fork/_sig_cura4/_tmp/_br_off.py",
+   "csv/_seal_fork/_sig_cura4/_tmp/_br_on.py",
+   "csv/_seal_fork/_sig_cura4/_tmp/_br_on_forzato.py",
+   "csv/_seal_fork/_sig_cura4/_tmp/_br_prima.py",
+   "csv/_seal_fork/_sig_cura4/_tmp/lungo_off.json",
+   "csv/_seal_fork/_sig_cura4/_tmp/lungo_on.json",
+   "csv/_seal_fork/_sig_cura4/_tmp/mitosi.json",
+   "csv/_seal_fork/_sig_cura4/_tmp/off.json",
+   "csv/_seal_fork/_sig_cura4/_tmp/on.json",
+   "csv/_seal_fork/_sig_cura4/_tmp/on_forzato.json",
+   "csv/_seal_fork/_sig_cura4/_tmp/prima.json",
+   "csv/_seal_fork/_sig_cura5/_tmp/_br_c8_s11.py",
+   "csv/_seal_fork/_sig_cura5/_tmp/_br_off_s11.py",
+   "csv/_seal_fork/_sig_cura5/_tmp/_br_off_s12.py",
+   "csv/_seal_fork/_sig_cura5/_tmp/_br_on_s11.py",
+   "csv/_seal_fork/_sig_cura5/_tmp/_br_on_s12.py",
+   "csv/_seal_fork/_sig_cura5/_tmp/_br_prima_s11.py",
+   "csv/_seal_fork/_sig_cura5/_tmp/_br_prima_s12.py",
+   "csv/_seal_fork/_sig_cura5/_tmp/off_s11.json",
+   "csv/_seal_fork/_sig_cura5/_tmp/off_s12.json",
+   "csv/_seal_fork/_sig_cura5/_tmp/on_s11.json",
+   "csv/_seal_fork/_sig_cura5/_tmp/on_s12.json",
+   "csv/_seal_fork/_sig_cura5/_tmp/prima_s11.json",
+   "csv/_seal_fork/_sig_cura5/_tmp/prima_s12.json",
+   "csv/_seal_fork/_sig_cura_A/_tmp/_br_figli_off_s11.py",
+   "csv/_seal_fork/_sig_cura_A/_tmp/_br_figli_off_s12.py",
+   "csv/_seal_fork/_sig_cura_A/_tmp/_br_figli_on_s11.py",
+   "csv/_seal_fork/_sig_cura_A/_tmp/_br_figli_on_s12.py",
+   "csv/_seal_fork/_sig_cura_A/_tmp/_br_off_s11_corti.py",
+   "csv/_seal_fork/_sig_cura_A/_tmp/_br_off_s11_lunghi.py",
+   "csv/_seal_fork/_sig_cura_A/_tmp/_br_off_s12_corti.py",
+   "csv/_seal_fork/_sig_cura_A/_tmp/_br_off_s12_lunghi.py",
+   "csv/_seal_fork/_sig_cura_A/_tmp/_br_off_s13_corti.py",
+   "csv/_seal_fork/_sig_cura_A/_tmp/_br_off_s13_lunghi.py",
+   "csv/_seal_fork/_sig_cura_A/_tmp/_br_off_s14_corti.py",
+   "csv/_seal_fork/_sig_cura_A/_tmp/_br_off_s14_lunghi.py",
+   "csv/_seal_fork/_sig_cura_A/_tmp/_br_on_s11_corti.py",
+   "csv/_seal_fork/_sig_cura_A/_tmp/_br_on_s11_lunghi.py",
+   "csv/_seal_fork/_sig_cura_A/_tmp/_br_on_s12_corti.py",
+   "csv/_seal_fork/_sig_cura_A/_tmp/_br_on_s12_lunghi.py",
+   "csv/_seal_fork/_sig_cura_A/_tmp/_br_on_s13_corti.py",
+   "csv/_seal_fork/_sig_cura_A/_tmp/_br_on_s13_lunghi.py",
+   "csv/_seal_fork/_sig_cura_A/_tmp/_br_on_s14_corti.py",
+   "csv/_seal_fork/_sig_cura_A/_tmp/_br_on_s14_lunghi.py",
+   "csv/_seal_fork/_sig_cura_A/_tmp/_br_pf_s11_lunghi.py",
+   "csv/_seal_fork/_sig_cura_A/_tmp/_br_pf_s12_lunghi.py",
+   "csv/_seal_fork/_sig_cura_A/_tmp/_br_suW_s11_corti.py",
+   "csv/_seal_fork/_sig_cura_A/_tmp/_br_suW_s11_lunghi.py",
+   "csv/_seal_fork/_sig_cura_A/_tmp/_br_suW_s12_corti.py",
+   "csv/_seal_fork/_sig_cura_A/_tmp/_br_suW_s12_lunghi.py",
+   "csv/_seal_fork/_sig_cura_A/_tmp/_br_suW_s13_corti.py",
+   "csv/_seal_fork/_sig_cura_A/_tmp/_br_suW_s13_lunghi.py",
+   "csv/_seal_fork/_sig_cura_A/_tmp/_br_suW_s14_corti.py",
+   "csv/_seal_fork/_sig_cura_A/_tmp/_br_suW_s14_lunghi.py",
+   "csv/_seal_fork/_sig_cura_A/_tmp/_sim_prima_flag_diag.py",
+   "csv/_seal_fork/_sig_cura_A/_tmp/_sim_su_W_diag.py",
+   "csv/_seal_fork/_sig_cura_A/_tmp/figli_off_s11.json",
+   "csv/_seal_fork/_sig_cura_A/_tmp/figli_off_s12.json",
+   "csv/_seal_fork/_sig_cura_A/_tmp/figli_on_s11.json",
+   "csv/_seal_fork/_sig_cura_A/_tmp/figli_on_s12.json",
+   "csv/_seal_fork/_sig_cura_A/_tmp/off_s11_corti.json",
+   "csv/_seal_fork/_sig_cura_A/_tmp/off_s11_lunghi.json",
+   "csv/_seal_fork/_sig_cura_A/_tmp/off_s12_corti.json",
+   "csv/_seal_fork/_sig_cura_A/_tmp/off_s12_lunghi.json",
+   "csv/_seal_fork/_sig_cura_A/_tmp/off_s13_corti.json",
+   "csv/_seal_fork/_sig_cura_A/_tmp/off_s13_lunghi.json",
+   "csv/_seal_fork/_sig_cura_A/_tmp/off_s14_corti.json",
+   "csv/_seal_fork/_sig_cura_A/_tmp/off_s14_lunghi.json",
+   "csv/_seal_fork/_sig_cura_A/_tmp/on_s11_corti.json",
+   "csv/_seal_fork/_sig_cura_A/_tmp/on_s11_lunghi.json",
+   "csv/_seal_fork/_sig_cura_A/_tmp/on_s12_corti.json",
+   "csv/_seal_fork/_sig_cura_A/_tmp/on_s12_lunghi.json",
+   "csv/_seal_fork/_sig_cura_A/_tmp/on_s13_corti.json",
+   "csv/_seal_fork/_sig_cura_A/_tmp/on_s13_lunghi.json",
+   "csv/_seal_fork/_sig_cura_A/_tmp/on_s14_corti.json",
+   "csv/_seal_fork/_sig_cura_A/_tmp/on_s14_lunghi.json",
+   "csv/_seal_fork/_sig_cura_A/_tmp/pf_s11_lunghi.json",
+   "csv/_seal_fork/_sig_cura_A/_tmp/pf_s12_lunghi.json",
+   "csv/_seal_fork/_sig_cura_A/_tmp/suW_s11_corti.json",
+   "csv/_seal_fork/_sig_cura_A/_tmp/suW_s11_lunghi.json",
+   "csv/_seal_fork/_sig_cura_A/_tmp/suW_s12_corti.json",
+   "csv/_seal_fork/_sig_cura_A/_tmp/suW_s12_lunghi.json",
+   "csv/_seal_fork/_sig_cura_A/_tmp/suW_s13_corti.json",
+   "csv/_seal_fork/_sig_cura_A/_tmp/suW_s13_lunghi.json",
+   "csv/_seal_fork/_sig_cura_A/_tmp/suW_s14_corti.json",
+   "csv/_seal_fork/_sig_cura_A/_tmp/suW_s14_lunghi.json",
+   "csv/_seal_fork/_sig_scena_ii/_tmp/_br_a_ctrl.py",
+   "csv/_seal_fork/_sig_scena_ii/_tmp/_br_a_s11.py",
+   "csv/_seal_fork/_sig_scena_ii/_tmp/_br_a_s12.py",
+   "csv/_seal_fork/_sig_scena_ii/_tmp/_br_a_s13.py",
+   "csv/_seal_fork/_sig_scena_ii/_tmp/_br_a_s14.py",
+   "csv/_seal_fork/_sig_scena_ii/_tmp/_br_b_ctrl.py",
+   "csv/_seal_fork/_sig_scena_ii/_tmp/_br_b_s11.py",
+   "csv/_seal_fork/_sig_scena_ii/_tmp/_br_b_s12.py",
+   "csv/_seal_fork/_sig_scena_ii/_tmp/_br_b_s13.py",
+   "csv/_seal_fork/_sig_scena_ii/_tmp/_br_b_s14.py",
+   "csv/_seal_fork/_sig_scena_ii/_tmp/a_ctrl.json",
+   "csv/_seal_fork/_sig_scena_ii/_tmp/a_s11.json",
+   "csv/_seal_fork/_sig_scena_ii/_tmp/a_s12.json",
+   "csv/_seal_fork/_sig_scena_ii/_tmp/a_s13.json",
+   "csv/_seal_fork/_sig_scena_ii/_tmp/a_s14.json",
+   "csv/_seal_fork/_sig_scena_ii/_tmp/b_ctrl.json",
+   "csv/_seal_fork/_sig_scena_ii/_tmp/b_s11.json",
+   "csv/_seal_fork/_sig_scena_ii/_tmp/b_s12.json",
+   "csv/_seal_fork/_sig_scena_ii/_tmp/b_s13.json",
+   "csv/_seal_fork/_sig_scena_ii/_tmp/b_s14.json",
+   "csv/_seal_fork/_sig_u2/_tmp/_br_nuovo_12.py",
+   "csv/_seal_fork/_sig_u2/_tmp/_br_nuovo_30.py",
+   "csv/_seal_fork/_sig_u2/_tmp/_br_vecchio_12.py",
+   "csv/_seal_fork/_sig_u2/_tmp/nuovo_12.json",
+   "csv/_seal_fork/_sig_u2/_tmp/nuovo_30.json",
+   "csv/_seal_fork/_sig_u2/_tmp/vecchio_12.json",
+   "csv/_test_fork/_chi_comprime_d0/_tmp/_br_mat_s11.py",
+   "csv/_test_fork/_chi_comprime_d0/_tmp/_br_mat_s12.py",
+   "csv/_test_fork/_chi_comprime_d0/_tmp/_br_spe_s11.py",
+   "csv/_test_fork/_chi_comprime_d0/_tmp/_br_spe_s12.py",
+   "csv/_test_fork/_chi_comprime_d0/_tmp/mat_s11.json",
+   "csv/_test_fork/_chi_comprime_d0/_tmp/mat_s12.json",
+   "csv/_test_fork/_chi_comprime_d0/_tmp/spe_s11.json",
+   "csv/_test_fork/_chi_comprime_d0/_tmp/spe_s12.json",
+   "csv/_test_fork/_diag_triangoli/_tmp/_br_s11.py",
+   "csv/_test_fork/_diag_triangoli/_tmp/_br_s12.py",
+   "csv/_test_fork/_diag_triangoli/_tmp/s11.json",
+   "csv/_test_fork/_dove_sta_omega/_tmp/_br_mat_s11.py",
+   "csv/_test_fork/_dove_sta_omega/_tmp/_br_mat_s12.py",
+   "csv/_test_fork/_dove_sta_omega/_tmp/_br_spe_s11.py",
+   "csv/_test_fork/_dove_sta_omega/_tmp/_br_spe_s12.py",
+   "csv/_test_fork/_dove_sta_omega/_tmp/mat_s11.json",
+   "csv/_test_fork/_dove_sta_omega/_tmp/mat_s12.json",
+   "csv/_test_fork/_dove_sta_omega/_tmp/spe_s11.json",
+   "csv/_test_fork/_dove_sta_omega/_tmp/spe_s12.json",
+   "csv/_test_fork/_limite_accoppiamento2/_tmp/_br_s11_corti.py",
+   "csv/_test_fork/_limite_accoppiamento2/_tmp/_br_s11_lunghi.py",
+   "csv/_test_fork/_limite_accoppiamento2/_tmp/_br_s12_corti.py",
+   "csv/_test_fork/_limite_accoppiamento2/_tmp/_br_s12_lunghi.py",
+   "csv/_test_fork/_limite_accoppiamento2/_tmp/s11_corti.json",
+   "csv/_test_fork/_limite_accoppiamento2/_tmp/s11_lunghi.json",
+   "csv/_test_fork/_limite_accoppiamento2/_tmp/s12_corti.json",
+   "csv/_test_fork/_limite_accoppiamento2/_tmp/s12_lunghi.json",
+   "csv/_test_fork/_rimisura_dxd/_tmp/_br_maturo.py",
+   "csv/_test_fork/_rimisura_dxd/_tmp/_br_spento.py",
+   "csv/_test_fork/_rimisura_dxd/_tmp/maturo.json",
+   "csv/_test_fork/_rimisura_dxd/_tmp/spento.json",
+   "csv/_test_fork/_scale_tw2/_tmp/_br_s11.py",
+   "csv/_test_fork/_scale_tw2/_tmp/_br_s12.py",
+   "csv/_test_fork/_scale_tw2/_tmp/_br_s13.py",
+   "csv/_test_fork/_scale_tw2/_tmp/_br_s14.py",
+   "csv/_test_fork/_scale_tw2/_tmp/s11.json",
+   "csv/_test_fork/_scale_tw2/_tmp/s12.json",
+   "csv/_test_fork/_scale_tw2/_tmp/s13.json",
+   "csv/_test_fork/_scale_tw2/_tmp/s14.json",
+   "csv/_test_fork/_scomposizione_figli/_tmp/_br_scomp_s11.py",
+   "csv/_test_fork/_scomposizione_figli/_tmp/_br_scomp_s12.py",
+   "csv/_test_fork/_scomposizione_figli/_tmp/scomp_s11.json",
+   "csv/_test_fork/_scomposizione_figli/_tmp/scomp_s12.json"
+  ],
+  "(c) STATO BINARIO": [
+   "csv/_seal_fork/_c1_semina/c1_nuovo/scena_000120.pkl.gz",
+   "csv/_seal_fork/_c1_semina/c1_vecchio/scena_000120.pkl.gz",
+   "csv/_seal_fork/_sig_cura1/inerte/scena_000120.pkl.gz",
+   "csv/_seal_fork/_sig_e4lam/inerte/scena_000120.pkl.gz",
+   "csv/_test_fork/_ab_B/scena_000120.pkl.gz",
+   "csv/_test_fork/_ab_B/scena_000240.pkl.gz",
+   "csv/_test_fork/_ab_B/scena_000360.pkl.gz",
+   "csv/_test_fork/_ab_D/scena_000120.pkl.gz",
+   "csv/_test_fork/_ab_D/scena_000240.pkl.gz",
+   "csv/_test_fork/_ab_D/scena_000360.pkl.gz",
+   "csv/_test_fork/_ab_D/scena_000480.pkl.gz",
+   "csv/_test_fork/_ab_D/scena_000600.pkl.gz",
+   "csv/_test_fork/_ab_D/scena_000720.pkl.gz",
+   "csv/_test_fork/_ab_D/scena_000840.pkl.gz",
+   "csv/_test_fork/_ab_D/scena_000960.pkl.gz",
+   "csv/_test_fork/_ab_D/scena_001080.pkl.gz",
+   "csv/_test_fork/_ab_D/scena_001200.pkl.gz",
+   "csv/_test_fork/_costo_sep4/P1/scena_000060.pkl.gz",
+   "csv/_test_fork/_costo_sep4/P2/scena_000060.pkl.gz",
+   "csv/_test_fork/_costo_sep4/S1/scena_000060.pkl.gz",
+   "csv/_test_fork/_cura1_corto/scena_000120.pkl.gz",
+   "csv/_test_fork/_cura2_corto/scena_000120.pkl.gz",
+   "csv/_test_fork/_d34_ritmo_wrap/scena_000120.pkl.gz",
+   "csv/_test_fork/_d34_ritmo_wrap/scena_000240.pkl.gz",
+   "csv/_test_fork/_d34_ritmo_wrap/scena_000360.pkl.gz",
+   "csv/_test_fork/_d34_ritmo_wrap/scena_000480.pkl.gz",
+   "csv/_test_fork/_d34_ritmo_wrap/scena_000600.pkl.gz",
+   "csv/_test_fork/_f2p_corto/scena_000120.pkl.gz",
+   "csv/_test_fork/_f2p_off/scena_000120.pkl.gz",
+   "csv/_test_fork/_f2p_on/scena_000120.pkl.gz",
+   "csv/_test_fork/_fin_A/scena_000006.pkl.gz",
+   "csv/_test_fork/_fin_A/scena_000012.pkl.gz",
+   "csv/_test_fork/_fin_A/scena_000018.pkl.gz",
+   "csv/_test_fork/_fin_A/scena_000024.pkl.gz",
+   "csv/_test_fork/_fin_A/scena_000030.pkl.gz",
+   "csv/_test_fork/_fin_A/scena_000036.pkl.gz",
+   "csv/_test_fork/_fin_A/scena_000042.pkl.gz",
+   "csv/_test_fork/_fin_A/scena_000048.pkl.gz",
+   "csv/_test_fork/_fin_A/scena_000054.pkl.gz",
+   "csv/_test_fork/_fin_A/scena_000060.pkl.gz",
+   "csv/_test_fork/_g3_controllo/scena_000120.pkl.gz",
+   "csv/_test_fork/_g3_senza_bifase/scena_000120.pkl.gz",
+   "csv/_test_fork/_g3_senza_bifase/scena_000240.pkl.gz",
+   "csv/_test_fork/_g3_senza_bifase/scena_000360.pkl.gz",
+   "csv/_test_fork/_g3_senza_bifase/scena_000480.pkl.gz",
+   "csv/_test_fork/_g3_senza_bifase/scena_000600.pkl.gz",
+   "csv/_test_fork/_g4_corto/scena_000012.pkl.gz",
+   "csv/_test_fork/_g4_riferimento/scena_000120.pkl.gz",
+   "csv/_test_fork/_g4_riferimento/scena_000240.pkl.gz",
+   "csv/_test_fork/_g4_riferimento/scena_000360.pkl.gz",
+   "csv/_test_fork/_g4_riferimento/scena_000480.pkl.gz",
+   "csv/_test_fork/_g4_riferimento/scena_000600.pkl.gz",
+   "csv/_test_fork/_g4_senza_memmoto/scena_000120.pkl.gz",
+   "csv/_test_fork/_g4_senza_memmoto/scena_000240.pkl.gz",
+   "csv/_test_fork/_g4_senza_memmoto/scena_000360.pkl.gz",
+   "csv/_test_fork/_g4_senza_memmoto/scena_000480.pkl.gz",
+   "csv/_test_fork/_g4_senza_memmoto/scena_000600.pkl.gz",
+   "csv/_test_fork/_g4bis_inerzia/scena_000120.pkl.gz",
+   "csv/_test_fork/_g4bis_senza_blocco/scena_000120.pkl.gz",
+   "csv/_test_fork/_g4bis_senza_blocco/scena_000240.pkl.gz",
+   "csv/_test_fork/_g4bis_senza_blocco/scena_000360.pkl.gz",
+   "csv/_test_fork/_g4bis_senza_blocco/scena_000480.pkl.gz",
+   "csv/_test_fork/_g4bis_senza_blocco/scena_000600.pkl.gz",
+   "csv/_test_fork/_pilota6000scena/scena_000120.pkl.gz",
+   "csv/_test_fork/_pilota6000scena/scena_000240.pkl.gz",
+   "csv/_test_fork/_pilota6000scena/scena_000360.pkl.gz",
+   "csv/_test_fork/_pilota_sep_4p0/pilota_000300.pkl.gz",
+   "csv/_test_fork/_ritmo_taglio/scena_000120.pkl.gz",
+   "csv/_test_fork/_run_K/scena_000060.pkl.gz",
+   "csv/_test_fork/_run_K/scena_000120.pkl.gz",
+   "csv/_test_fork/_run_K/scena_000180.pkl.gz",
+   "csv/_test_fork/_run_K/scena_000240.pkl.gz",
+   "csv/_test_fork/_run_K/scena_000300.pkl.gz",
+   "csv/_test_fork/_run_S/scena_000060.pkl.gz",
+   "csv/_test_fork/_run_S/scena_000120.pkl.gz",
+   "csv/_test_fork/_run_S/scena_000180.pkl.gz",
+   "csv/_test_fork/_run_S/scena_000240.pkl.gz",
+   "csv/_test_fork/_run_S/scena_000300.pkl.gz",
+   "csv/_test_fork/_rw_inerzia/scena_000120.pkl.gz",
+   "csv/_test_fork/_rw_on/scena_000120.pkl.gz",
+   "csv/_test_fork/_val600/scena_000120.pkl.gz",
+   "csv/_test_fork/_val600/scena_000240.pkl.gz",
+   "csv/_test_fork/_val600/scena_000360.pkl.gz",
+   "csv/_test_fork/_val600/scena_000480.pkl.gz",
+   "csv/_test_fork/_val600/scena_000600.pkl.gz"
+  ],
+  "(d) CANDIDATO OMISSIONE": [
+   "csv/_seal_fork/_c1_semina/c1_nuovo/CONFIGURAZIONE.json",
+   "csv/_seal_fork/_c1_semina/c1_vecchio/CONFIGURAZIONE.json",
+   "csv/_seal_fork/_c1_semina/collaudo_a/CONFIGURAZIONE.json",
+   "csv/_seal_fork/_c1_semina/collaudo_a/CONFIGURAZIONE.txt",
+   "csv/_seal_fork/_c1_semina/collaudo_b/CONFIGURAZIONE.json",
+   "csv/_seal_fork/_c1_semina/collaudo_b/CONFIGURAZIONE.txt",
+   "csv/_seal_fork/_c1_semina/d38_nuovo/CONFIGURAZIONE.json",
+   "csv/_seal_fork/_c1_semina/d38_vecchio/CONFIGURAZIONE.json",
+   "csv/_seal_fork/_c1_semina/driver/CONFIGURAZIONE.json",
+   "csv/_seal_fork/_c1_semina/driver/CONFIGURAZIONE.txt",
+   "csv/_seal_fork/_c1_semina/senza_scala_min_passo/CONFIGURAZIONE.json",
+   "csv/_seal_fork/_c1_semina/senza_scala_min_passo/CONFIGURAZIONE.txt",
+   "csv/_seal_fork/_sig_cura1/inerte/CONFIGURAZIONE.json",
+   "csv/_seal_fork/_sig_cura1/inerte/CONFIGURAZIONE.txt",
+   "csv/_seal_fork/_sig_cura2_strutturale/new_s11/_braccio.py",
+   "csv/_seal_fork/_sig_cura2_strutturale/new_s11/firme.json",
+   "csv/_seal_fork/_sig_cura2_strutturale/new_s12/_braccio.py",
+   "csv/_seal_fork/_sig_cura2_strutturale/new_s12/firme.json",
+   "csv/_seal_fork/_sig_cura2_strutturale/tag_off_s11/_braccio.py",
+   "csv/_seal_fork/_sig_cura2_strutturale/tag_off_s11/firme.json",
+   "csv/_seal_fork/_sig_cura2_strutturale/tag_on_s11/_braccio.py",
+   "csv/_seal_fork/_sig_cura2_strutturale/tag_on_s11/firme.json",
+   "csv/_seal_fork/_sig_cura2_strutturale/tag_on_s12/_braccio.py",
+   "csv/_seal_fork/_sig_cura2_strutturale/tag_on_s12/firme.json",
+   "csv/_seal_fork/_sig_d32_nomi/dopo/_braccio.py",
+   "csv/_seal_fork/_sig_d32_nomi/dopo/firme.json",
+   "csv/_seal_fork/_sig_d32_nomi/prima/_braccio.py",
+   "csv/_seal_fork/_sig_d32_nomi/prima/firme.json",
+   "csv/_seal_fork/_sig_e4lam/inerte/CONFIGURAZIONE.json",
+   "csv/_seal_fork/_sig_e4lam/inerte/CONFIGURAZIONE.txt",
+   "csv/_seal_fork/_sig_mem_moto_tutto/cap_HEBB.json",
+   "csv/_seal_fork/_sig_mem_moto_tutto/cap_OFF.json",
+   "csv/_seal_fork/_sig_mem_moto_tutto/cap_ON-bis.json",
+   "csv/_seal_fork/_sig_mem_moto_tutto/cap_ON.json",
+   "csv/_seal_fork/_sig_mem_moto_tutto/cap_SOLO-MEM.json",
+   "csv/_seal_fork/_sig_nascita_atomica/_corsa.txt",
+   "csv/_seal_fork/_sig_osservabile_p1/seme_11.json",
+   "csv/_seal_fork/_sig_osservabile_p1/seme_12.json",
+   "csv/_seal_fork/_sig_osservabile_p1/seme_13.json",
+   "csv/_seal_fork/_sig_osservabile_p1/seme_14.json",
+   "csv/_seal_fork/_sig_pozzo_d/dopo_off/_braccio.py",
+   "csv/_seal_fork/_sig_pozzo_d/dopo_off/firme.json",
+   "csv/_seal_fork/_sig_pozzo_d/prima/_braccio.py",
+   "csv/_seal_fork/_sig_pozzo_d/prima/firme.json",
+   "csv/_seal_fork/_sig_scena_ii/seme7a/CONFIGURAZIONE.json",
+   "csv/_seal_fork/_sig_scena_ii/seme7a/CONFIGURAZIONE.txt",
+   "csv/_seal_fork/_sig_scena_ii/seme7b/CONFIGURAZIONE.json",
+   "csv/_seal_fork/_sig_scena_ii/seme7b/CONFIGURAZIONE.txt",
+   "csv/_seal_fork/_sig_scena_ii/seme8/CONFIGURAZIONE.json",
+   "csv/_seal_fork/_sig_scena_ii/seme8/CONFIGURAZIONE.txt",
+   "csv/_seal_fork/_sigillo_frazione_t/_corsa.txt",
+   "csv/_seal_fork/_sigillo_frazione_t/_sigillo.json",
+   "csv/_seal_fork/_sigillo_frazione_t/_sim_fm_rovescio.py",
+   "csv/_seal_fork/_sigillo_frazione_t/_sim_let_dd.py",
+   "csv/_seal_fork/_sigillo_frazione_t/_sim_let_dh.py",
+   "csv/_seal_fork/_sigillo_frazione_t/_sim_let_fm.py",
+   "csv/_seal_fork/_sigillo_frazione_t/_sim_let_fm_bias.py",
+   "csv/_seal_fork/_sigillo_frazione_t/_sim_let_pos_div.py",
+   "csv/_seal_fork/_sigillo_frazione_t/_sim_let_pos_sch.py",
+   "csv/_seal_fork/_sigillo_frazione_t/_sim_pulita.py",
+   "csv/_seal_fork/_sigillo_frazione_t/_sim_t04.py",
+   "csv/_seal_fork/_sigillo_frazione_t/_sim_t04_md0.py",
+   "csv/_seal_fork/_sigillo_legge_2lam/_corsa.txt",
+   "csv/_seal_fork/_sigillo_legge_2lam/_sigillo.json",
+   "csv/_seal_fork/_sigillo_legge_2lam/_sim_cbis_0.py",
+   "csv/_seal_fork/_sigillo_legge_2lam/_sim_cbis_1.py",
+   "csv/_seal_fork/_sigillo_legge_2lam/_sim_cbis_2.py",
+   "csv/_seal_fork/_sigillo_legge_2lam/_sim_t04.py",
+   "csv/_seal_fork/_sigillo_perc_geom_derivata/_sim_D1.py",
+   "csv/_seal_fork/_sigillo_perc_geom_derivata/_sim_D2.py",
+   "csv/_seal_fork/_sigillo_perc_geom_derivata/_sim_E.py",
+   "csv/_seal_fork/_sigillo_perc_geom_derivata/_sim_solo_ordine.py",
+   "csv/_test_fork/_ab_A/prog.csv",
+   "csv/_test_fork/_ab_B/prog.csv",
+   "csv/_test_fork/_ab_C_solo_chicoop_FERMATO/prog.csv",
+   "csv/_test_fork/_ab_D/prog.csv",
+   "csv/_test_fork/_ab_D_log.txt",
+   "csv/_test_fork/_ab_pozzo_d/seme11_off/_braccio.py",
+   "csv/_test_fork/_ab_pozzo_d/seme11_off/misura.json",
+   "csv/_test_fork/_ab_pozzo_d/seme11_on/_braccio.py",
+   "csv/_test_fork/_ab_pozzo_d/seme11_on/misura.json",
+   "csv/_test_fork/_ab_pozzo_d/seme12_off/_braccio.py",
+   "csv/_test_fork/_ab_pozzo_d/seme12_off/misura.json",
+   "csv/_test_fork/_ab_pozzo_d/seme12_on/_braccio.py",
+   "csv/_test_fork/_ab_pozzo_d/seme12_on/misura.json",
+   "csv/_test_fork/_ab_pozzo_d/seme13_off/_braccio.py",
+   "csv/_test_fork/_ab_pozzo_d/seme13_off/misura.json",
+   "csv/_test_fork/_ab_pozzo_d/seme13_on/_braccio.py",
+   "csv/_test_fork/_ab_pozzo_d/seme13_on/misura.json",
+   "csv/_test_fork/_ab_pozzo_d/seme14_off/_braccio.py",
+   "csv/_test_fork/_ab_pozzo_d/seme14_off/misura.json",
+   "csv/_test_fork/_ab_pozzo_d/seme14_on/_braccio.py",
+   "csv/_test_fork/_ab_pozzo_d/seme14_on/misura.json",
+   "csv/_test_fork/_censimento_mitosi_2lam/_censimento.json",
+   "csv/_test_fork/_censimento_mitosi_2lam/_corsa.txt",
+   "csv/_test_fork/_diag_D/peq_dentro_log.txt",
+   "csv/_test_fork/_diag_D/rig1080_log.txt",
+   "csv/_test_fork/_diag_D/somma_d0_log.txt",
+   "csv/_test_fork/_diag_triangoli/DIAG_triangoli.txt",
+   "csv/_test_fork/_g3_senza_bifase/letture_log.txt",
+   "csv/_test_fork/_g4_corto/BILANCIO_d0.csv",
+   "csv/_test_fork/_g4_corto/BILANCIO_d0.txt",
+   "csv/_test_fork/_g4_corto/prog.csv",
+   "csv/_test_fork/_g6000/prog.csv",
+   "csv/_test_fork/_pilota_prova1/seme_11/log.txt",
+   "csv/_test_fork/_pilota_prova1/seme_12/log.txt",
+   "csv/_test_fork/_pilota_prova1/seme_13/log.txt",
+   "csv/_test_fork/_pilota_prova1/seme_14/log.txt",
+   "csv/_test_fork/_pos_contro_d/_corsa.txt",
+   "csv/_test_fork/_pos_contro_d/_pos_contro_d.json",
+   "csv/_test_fork/_run_K/prog.csv",
+   "csv/_test_fork/_run_K_log.txt",
+   "csv/_test_fork/_run_S/prog.csv",
+   "csv/_test_fork/_run_S_log.txt",
+   "csv/_test_fork/_scenaii_corto/CONFIGURAZIONE.json",
+   "csv/_test_fork/_scenaii_corto/CONFIGURAZIONE.txt",
+   "csv/_test_fork/_video_g6000/frame_002.png",
+   "csv/_test_fork/_video_g6000/frame_003.png",
+   "csv/_test_fork/_video_g6000/frame_004.png",
+   "csv/_test_fork/_video_g6000/frame_005.png",
+   "csv/_test_fork/_video_g6000/frame_006.png",
+   "csv/_test_fork/_video_g6000/frame_007.png",
+   "csv/_test_fork/_video_g6000/frame_008.png",
+   "csv/_test_fork/_video_g6000/frame_009.png",
+   "csv/_test_fork/_video_g6000/frame_010.png",
+   "csv/_test_fork/_video_g6000/frame_012.png",
+   "csv/_test_fork/_video_g6000/frame_013.png",
+   "csv/_test_fork/_video_g6000/frame_014.png",
+   "csv/_test_fork/_video_g6000/frame_015.png",
+   "csv/_test_fork/_video_g6000/frame_016.png",
+   "csv/_test_fork/_video_g6000/frame_017.png",
+   "csv/_test_fork/_video_g6000/frame_018.png",
+   "csv/_test_fork/_video_g6000/frame_019.png",
+   "csv/_test_fork/_video_g6000/frame_020.png",
+   "csv/_test_fork/_video_g6000/frame_021.png",
+   "csv/_test_fork/_video_g6000/frame_022.png",
+   "csv/_test_fork/_video_g6000/frame_023.png",
+   "csv/_test_fork/_video_g6000/frame_024.png",
+   "csv/_test_fork/_video_g6000/frame_025.png",
+   "csv/_test_fork/_video_g6000/frame_026.png",
+   "csv/_test_fork/_video_g6000/frame_027.png",
+   "csv/_test_fork/_video_g6000/frame_028.png",
+   "csv/_test_fork/_video_g6000/frame_029.png",
+   "csv/_test_fork/_video_g6000/frame_030.png",
+   "csv/_test_fork/_video_g6000/frame_031.png",
+   "csv/_test_fork/_video_g6000/frame_032.png",
+   "csv/_test_fork/_video_g6000/frame_033.png",
+   "csv/_test_fork/_video_g6000/frame_034.png",
+   "csv/_test_fork/_video_g6000/frame_035.png",
+   "csv/_test_fork/_video_g6000/frame_037.png",
+   "csv/_test_fork/_video_g6000/frame_038.png",
+   "csv/_test_fork/_video_g6000/frame_040.png",
+   "csv/_test_fork/_video_g6000/frame_041.png",
+   "csv/_test_fork/_video_g6000/frame_043.png",
+   "csv/_test_fork/_video_g6000/frame_044.png"
+  ]
+ },
+ "dettaglio": [
+  {
+   "file": "csv/_seal_fork/_ab_chibasc/_sim_prima.py",
+   "sha1": "27f1ab0388869e7200e84111ab9fce57a2b22c43",
+   "byte": 551256,
+   "classe": "(a) COPIA-SIMULATORE",
+   "oid_git": "3437e2603bb58f7d8007977c5359e1d8642e21e0",
+   "commit": "32c537980ca33b44895554b2a4b4b7608fb385c5",
+   "commit_quanti": 1
+  },
+  {
+   "file": "csv/_seal_fork/_c1_semina/_sim_vecchio.py",
+   "sha1": "49fc54d2260b51c6d12b3e6d914bb0b939199c2d",
+   "byte": 672772,
+   "classe": "(a) COPIA-SIMULATORE",
+   "oid_git": "67ea1a19bb47ebd0cf53ae2bf1fa136481ce2555",
+   "commit": "7a36ae57397a9c0cfd0a4d78bf645e370635addd",
+   "commit_quanti": 1
+  },
+  {
+   "file": "csv/_seal_fork/_c1_semina/c1_nuovo/CONFIGURAZIONE.json",
+   "sha1": "c3fa11ba0b6f8603d160aa508412e4a724922971",
+   "byte": 10399,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {
+    "DOC": "solo il nome",
+    "STRUMENTI": "solo il nome"
+   },
+   "e_uno_strumento": false,
+   "strumento_del_padre": null
+  },
+  {
+   "file": "csv/_seal_fork/_c1_semina/c1_nuovo/scena_000120.pkl.gz",
+   "sha1": "275187b8322a3c1b17a8329ccf1cea70d20a119f",
+   "byte": 36210047,
+   "classe": "(c) STATO BINARIO"
+  },
+  {
+   "file": "csv/_seal_fork/_c1_semina/c1_vecchio/CONFIGURAZIONE.json",
+   "sha1": "9a838b968c48ec1f53531cbfdb175cd986859720",
+   "byte": 10409,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {
+    "DOC": "solo il nome",
+    "STRUMENTI": "solo il nome"
+   },
+   "e_uno_strumento": false,
+   "strumento_del_padre": null
+  },
+  {
+   "file": "csv/_seal_fork/_c1_semina/c1_vecchio/scena_000120.pkl.gz",
+   "sha1": "77d88862754212b8dbf6a6874373565e1c7749e9",
+   "byte": 36210041,
+   "classe": "(c) STATO BINARIO"
+  },
+  {
+   "file": "csv/_seal_fork/_c1_semina/collaudo_a/CONFIGURAZIONE.json",
+   "sha1": "006758366feb11010fe0a67c8cb37974d849a499",
+   "byte": 10406,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {
+    "DOC": "solo il nome",
+    "STRUMENTI": "solo il nome"
+   },
+   "e_uno_strumento": false,
+   "strumento_del_padre": null
+  },
+  {
+   "file": "csv/_seal_fork/_c1_semina/collaudo_a/CONFIGURAZIONE.txt",
+   "sha1": "43c8e26732c2facf73c743ad6a449a05d4d9400c",
+   "byte": 15921,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {
+    "DOC": "solo il nome",
+    "STRUMENTI": "solo il nome",
+    "REFERTI": "solo il nome",
+    "INVENTARIO": "solo il nome"
+   },
+   "e_uno_strumento": false,
+   "strumento_del_padre": null
+  },
+  {
+   "file": "csv/_seal_fork/_c1_semina/collaudo_b/CONFIGURAZIONE.json",
+   "sha1": "a7e17d46f1ed77de7c8a042cd9c0b4a337293759",
+   "byte": 10406,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {
+    "DOC": "solo il nome",
+    "STRUMENTI": "solo il nome"
+   },
+   "e_uno_strumento": false,
+   "strumento_del_padre": null
+  },
+  {
+   "file": "csv/_seal_fork/_c1_semina/collaudo_b/CONFIGURAZIONE.txt",
+   "sha1": "07c80ef1c4c9367d3291e75764f90a55bb2eb2c3",
+   "byte": 15921,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {
+    "DOC": "solo il nome",
+    "STRUMENTI": "solo il nome",
+    "REFERTI": "solo il nome",
+    "INVENTARIO": "solo il nome"
+   },
+   "e_uno_strumento": false,
+   "strumento_del_padre": null
+  },
+  {
+   "file": "csv/_seal_fork/_c1_semina/d38_nuovo/CONFIGURAZIONE.json",
+   "sha1": "1b22c7c54766288f219a0edcafa28f6ef7333b09",
+   "byte": 10405,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {
+    "DOC": "solo il nome",
+    "STRUMENTI": "solo il nome"
+   },
+   "e_uno_strumento": false,
+   "strumento_del_padre": null
+  },
+  {
+   "file": "csv/_seal_fork/_c1_semina/d38_vecchio/CONFIGURAZIONE.json",
+   "sha1": "480943617cc0a9686d138175c4329e9e69961f99",
+   "byte": 10415,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {
+    "DOC": "solo il nome",
+    "STRUMENTI": "solo il nome"
+   },
+   "e_uno_strumento": false,
+   "strumento_del_padre": null
+  },
+  {
+   "file": "csv/_seal_fork/_c1_semina/driver/CONFIGURAZIONE.json",
+   "sha1": "d409ab89c02f7cb3dabeebc444310fefe9c18bfb",
+   "byte": 10381,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {
+    "DOC": "solo il nome",
+    "STRUMENTI": "solo il nome"
+   },
+   "e_uno_strumento": false,
+   "strumento_del_padre": null
+  },
+  {
+   "file": "csv/_seal_fork/_c1_semina/driver/CONFIGURAZIONE.txt",
+   "sha1": "77b93ef2626e3761f47c4521723bd838c394f7d4",
+   "byte": 15985,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {
+    "DOC": "solo il nome",
+    "STRUMENTI": "solo il nome",
+    "REFERTI": "solo il nome",
+    "INVENTARIO": "solo il nome"
+   },
+   "e_uno_strumento": false,
+   "strumento_del_padre": null
+  },
+  {
+   "file": "csv/_seal_fork/_c1_semina/senza_scala_min_passo/CONFIGURAZIONE.json",
+   "sha1": "db285b33ab484dd7cf63e560de3f2d28fbfe51c5",
+   "byte": 10401,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {
+    "DOC": "solo il nome",
+    "STRUMENTI": "solo il nome"
+   },
+   "e_uno_strumento": false,
+   "strumento_del_padre": null
+  },
+  {
+   "file": "csv/_seal_fork/_c1_semina/senza_scala_min_passo/CONFIGURAZIONE.txt",
+   "sha1": "9cea070b619ada6be0a85d4ea83eef1e76aa7e93",
+   "byte": 15921,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {
+    "DOC": "solo il nome",
+    "STRUMENTI": "solo il nome",
+    "REFERTI": "solo il nome",
+    "INVENTARIO": "solo il nome"
+   },
+   "e_uno_strumento": false,
+   "strumento_del_padre": null
+  },
+  {
+   "file": "csv/_seal_fork/_sig_anom_simm/_sim_prima.py",
+   "sha1": "e844871dacf7eae0b50cc1899d3ec4ffc6231ea4",
+   "byte": 625474,
+   "classe": "(a) COPIA-SIMULATORE",
+   "oid_git": "854c380bdc5bd6b72e04a0e30929d9582df427f3",
+   "commit": "1901cbbdedfbfebfbe91b05344aeab86bcb1417c",
+   "commit_quanti": 1
+  },
+  {
+   "file": "csv/_seal_fork/_sig_chicoop/_sim_prima.py",
+   "sha1": "b46835bd4af305fc8d6cd61b9d9a6891deda5733",
+   "byte": 565696,
+   "classe": "(a) COPIA-SIMULATORE",
+   "oid_git": "a8c9d36d6271c443588adfe7cd44784448a43960",
+   "commit": "d60cfeb0fe77ca35a348525844f7d459363f6476",
+   "commit_quanti": 1
+  },
+  {
+   "file": "csv/_seal_fork/_sig_coes_causale/_sim_prima.py",
+   "sha1": "716d43b934d9e419081a51135034ab6365701571",
+   "byte": 616527,
+   "classe": "(a) COPIA-SIMULATORE",
+   "oid_git": "6bf1ffde7ec5e3ccaa079ad20559dbef92de6d35",
+   "commit": "85ff3250a91a740bbdd6f33f5679be4602a16a7a",
+   "commit_quanti": 1
+  },
+  {
+   "file": "csv/_seal_fork/_sig_contatori/_sim_prima.py",
+   "sha1": "7e6b839b35dea2329495a950e80f52c4c04c0a2a",
+   "byte": 535041,
+   "classe": "(a) COPIA-SIMULATORE",
+   "oid_git": "09e258727f9a01523b0446701ff14abc2c17de26",
+   "commit": "dcb776a83937bcc0492ae8371d8c35b5bc271c91",
+   "commit_quanti": 1
+  },
+  {
+   "file": "csv/_seal_fork/_sig_contrasto/_tmp/_br_off_s11_corti.py",
+   "sha1": "a5dffc36fbd8d028820c84e0b067cff1889ed416",
+   "byte": 6000,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_seal_fork/_sig_contrasto/_tmp/_br_off_s11_lunghi.py",
+   "sha1": "31f26338c0c5192bb3e3f56c2b36a1a08cd754a2",
+   "byte": 6002,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_seal_fork/_sig_contrasto/_tmp/_br_off_s12_corti.py",
+   "sha1": "42e632df229beab434ed2f20cf228ab7c631382c",
+   "byte": 6000,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_seal_fork/_sig_contrasto/_tmp/_br_off_s12_lunghi.py",
+   "sha1": "7c1986abcf4edcd5439768e2ffccfaa5810000df",
+   "byte": 6002,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_seal_fork/_sig_contrasto/_tmp/_br_on_s11_corti.py",
+   "sha1": "6d48e3d4dfc3df101413afe5610068f048d67c07",
+   "byte": 6023,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_seal_fork/_sig_contrasto/_tmp/_br_on_s11_lunghi.py",
+   "sha1": "8cadb3e677a3bbaeb68cd020fab352875f5b4413",
+   "byte": 6025,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_seal_fork/_sig_contrasto/_tmp/_br_on_s12_corti.py",
+   "sha1": "51f9ff9fbd18cb81fe7441b84ec14fbb07fd891d",
+   "byte": 6023,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_seal_fork/_sig_contrasto/_tmp/_br_on_s12_lunghi.py",
+   "sha1": "5a35ed7d9c6e1eb53e1be83d0a55fdd8a3e1b2f8",
+   "byte": 6025,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_seal_fork/_sig_contrasto/_tmp/_br_prima_s11_lunghi.py",
+   "sha1": "165e1ac3465361c5b278a5281e443267c58a9a98",
+   "byte": 6013,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_seal_fork/_sig_contrasto/_tmp/_br_prima_s12_lunghi.py",
+   "sha1": "c98bc0b793a42f73c79787ca82e73cf24296e763",
+   "byte": 6013,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_seal_fork/_sig_contrasto/_tmp/_sim_prima.py",
+   "sha1": "81548e77ad5fd97bce24982ca0e783df6198e9cd",
+   "byte": 725144,
+   "classe": "(a) COPIA-SIMULATORE",
+   "oid_git": "80b71edcbe07d147737de37f91e6c4ccfcef7b6d",
+   "commit": "43d846c8a4bbd72ae63b60076fe18d59e5790afe",
+   "commit_quanti": 1
+  },
+  {
+   "file": "csv/_seal_fork/_sig_contrasto/_tmp/_sim_prima_diag.py",
+   "sha1": "17d4b26f31a8336d8f02c2680b3fa7f0622f7f02",
+   "byte": 725383,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_seal_fork/_sig_contrasto/_tmp/off_s11_corti.json",
+   "sha1": "314410073bc6a7b26f3c902d2754600fc1f036c9",
+   "byte": 7755,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_seal_fork/_sig_contrasto/_tmp/off_s11_lunghi.json",
+   "sha1": "6436bcfd2f25a00ba7a687102f2305fc66de6224",
+   "byte": 7750,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_seal_fork/_sig_contrasto/_tmp/off_s12_corti.json",
+   "sha1": "09121dab3a50081f0987225f93f2d353f40bbe8d",
+   "byte": 7757,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_seal_fork/_sig_contrasto/_tmp/off_s12_lunghi.json",
+   "sha1": "9153ad2b1253c1ab423248175595e63d0e166910",
+   "byte": 7749,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_seal_fork/_sig_contrasto/_tmp/on_s11_corti.json",
+   "sha1": "03ea5f776f18df33dff7123f72d3b44565aa1bfa",
+   "byte": 7887,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_seal_fork/_sig_contrasto/_tmp/on_s11_lunghi.json",
+   "sha1": "99a7cb25e0a7ad56566a27ad0cdea91267aa621d",
+   "byte": 7882,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_seal_fork/_sig_contrasto/_tmp/on_s12_corti.json",
+   "sha1": "cbbb10998c68e5b5065520668163e671386e48f9",
+   "byte": 7889,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_seal_fork/_sig_contrasto/_tmp/on_s12_lunghi.json",
+   "sha1": "e84e66e01bb9aa3db5427bccc42792fda6bc1fca",
+   "byte": 7874,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_seal_fork/_sig_contrasto/_tmp/prima_s11_lunghi.json",
+   "sha1": "47b782270447246de31ab1b254df5197ecd933f8",
+   "byte": 7757,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_seal_fork/_sig_contrasto/_tmp/prima_s12_lunghi.json",
+   "sha1": "2cb145bcf608a6aff730852f454bd57f2dafde43",
+   "byte": 7756,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_seal_fork/_sig_contrasto_esteso/_tmp/_br_figli_s11.py",
+   "sha1": "fc8b67ae7781f6ee27e15a8c4ae416a5368d15d1",
+   "byte": 9391,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_seal_fork/_sig_contrasto_esteso/_tmp/_br_figli_s12.py",
+   "sha1": "6040b0cd610b4185e1aa56777f1bcf2ac993f033",
+   "byte": 9391,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_seal_fork/_sig_contrasto_esteso/_tmp/_br_off_s11_corti.py",
+   "sha1": "9add3732db183e3b3706c45c1685d61c886fe5a7",
+   "byte": 9395,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_seal_fork/_sig_contrasto_esteso/_tmp/_br_off_s11_lunghi.py",
+   "sha1": "33fb370d8aa42a513e63771024656a8c7dda7ce3",
+   "byte": 9397,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_seal_fork/_sig_contrasto_esteso/_tmp/_br_off_s12_corti.py",
+   "sha1": "7cfd40c200146adbd397909b91880b4eb8674833",
+   "byte": 9395,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_seal_fork/_sig_contrasto_esteso/_tmp/_br_off_s12_lunghi.py",
+   "sha1": "c30dc004fad6c7d32322c856c87554e105d8fa7c",
+   "byte": 9397,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_seal_fork/_sig_contrasto_esteso/_tmp/_br_on_s11_corti.py",
+   "sha1": "66b9610b09b2db73bf39b260fa6004d9a2d7af0d",
+   "byte": 9418,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_seal_fork/_sig_contrasto_esteso/_tmp/_br_on_s11_lunghi.py",
+   "sha1": "bbac9e214221365a57e5a0f8a19681def54d94ed",
+   "byte": 9420,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_seal_fork/_sig_contrasto_esteso/_tmp/_br_on_s12_corti.py",
+   "sha1": "dd5849d564d3de7e19a67435a094cd4651cbe010",
+   "byte": 9418,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_seal_fork/_sig_contrasto_esteso/_tmp/_br_on_s12_lunghi.py",
+   "sha1": "49146a47e353331c30611068fed50af3cc674780",
+   "byte": 9420,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_seal_fork/_sig_contrasto_esteso/_tmp/_br_prima_s11_lunghi.py",
+   "sha1": "0e47b75b215e1d40138128c90be1ec8f8a366deb",
+   "byte": 9407,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_seal_fork/_sig_contrasto_esteso/_tmp/_br_prima_s12_lunghi.py",
+   "sha1": "bf312190f7b3b32668b61f995b443ad51af4657a",
+   "byte": 9407,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_seal_fork/_sig_contrasto_esteso/_tmp/_br_ril_s11_corti.py",
+   "sha1": "b339b2727b76896a6dc982ea334993c38fb1fb22",
+   "byte": 9396,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_seal_fork/_sig_contrasto_esteso/_tmp/_br_ril_s11_lunghi.py",
+   "sha1": "74f129007561e457f7750e1e13248601046b4db8",
+   "byte": 9398,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_seal_fork/_sig_contrasto_esteso/_tmp/_br_ril_s12_corti.py",
+   "sha1": "a89c55ad417bd36fbf75e4b6e71592d9befd89ea",
+   "byte": 9396,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_seal_fork/_sig_contrasto_esteso/_tmp/_br_ril_s12_lunghi.py",
+   "sha1": "bd874c97a15b636a0c2059604170d12571cbdaa2",
+   "byte": 9398,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_seal_fork/_sig_contrasto_esteso/_tmp/_sim_prima.py",
+   "sha1": "81548e77ad5fd97bce24982ca0e783df6198e9cd",
+   "byte": 725144,
+   "classe": "(a) COPIA-SIMULATORE",
+   "oid_git": "80b71edcbe07d147737de37f91e6c4ccfcef7b6d",
+   "commit": "43d846c8a4bbd72ae63b60076fe18d59e5790afe",
+   "commit_quanti": 1
+  },
+  {
+   "file": "csv/_seal_fork/_sig_contrasto_esteso/_tmp/_sim_prima_diag.py",
+   "sha1": "0d38758f189768a8978454bf2e8a11c3ec0ffc4d",
+   "byte": 725435,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_seal_fork/_sig_contrasto_esteso/_tmp/figli_s11.json",
+   "sha1": "34b4ac6869816b15ca1d3df154f081a1e9e02c92",
+   "byte": 544551,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_seal_fork/_sig_contrasto_esteso/_tmp/figli_s12.json",
+   "sha1": "a7261eccb6897587179dd0bbe7b74b9dd1fd52b3",
+   "byte": 535538,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_seal_fork/_sig_contrasto_esteso/_tmp/off_s11_corti.json",
+   "sha1": "b1662c18e4868710357629f8dd160cfbf37e7348",
+   "byte": 8208,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_seal_fork/_sig_contrasto_esteso/_tmp/off_s11_lunghi.json",
+   "sha1": "51b697d3570338a5114af581ead67862832d8c7a",
+   "byte": 8209,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_seal_fork/_sig_contrasto_esteso/_tmp/off_s12_corti.json",
+   "sha1": "ef89c7edfa33366fa926249960bc5fe74fa1af4b",
+   "byte": 8212,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_seal_fork/_sig_contrasto_esteso/_tmp/off_s12_lunghi.json",
+   "sha1": "174724da3c84b017e446b87eabe567573ce80cbb",
+   "byte": 8205,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_seal_fork/_sig_contrasto_esteso/_tmp/on_s11_corti.json",
+   "sha1": "70c49848e357a0a6eac9a567d803468a3c95cb22",
+   "byte": 8394,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_seal_fork/_sig_contrasto_esteso/_tmp/on_s11_lunghi.json",
+   "sha1": "3d09762bcfc19d0d83c6d512cdee00414a7f6807",
+   "byte": 8399,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_seal_fork/_sig_contrasto_esteso/_tmp/on_s12_corti.json",
+   "sha1": "a964689de3169f30555127343d7da3f8f63a16fb",
+   "byte": 8394,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_seal_fork/_sig_contrasto_esteso/_tmp/on_s12_lunghi.json",
+   "sha1": "2b4854ad1496331b20599428bcf3d78ed7f1dbac",
+   "byte": 8394,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_seal_fork/_sig_contrasto_esteso/_tmp/prima_s11_lunghi.json",
+   "sha1": "2f0066311a44259e2c8c648f1cb071d3f7ba5bab",
+   "byte": 8215,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_seal_fork/_sig_contrasto_esteso/_tmp/prima_s12_lunghi.json",
+   "sha1": "421d01a08d8b1950c26cdfc9d47564e2ad098462",
+   "byte": 8211,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_seal_fork/_sig_contrasto_esteso/_tmp/ril_s11_corti.json",
+   "sha1": "51b8b254172627d44d84883a39dd2292c521e544",
+   "byte": 3352,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_seal_fork/_sig_contrasto_esteso/_tmp/ril_s11_lunghi.json",
+   "sha1": "92b8fd5f3c10faff8c2eb65093905ac852516467",
+   "byte": 3357,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_seal_fork/_sig_contrasto_esteso/_tmp/ril_s12_corti.json",
+   "sha1": "cf53b099e34e36cb9ece47caed9e82cfacdb4f57",
+   "byte": 3346,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_seal_fork/_sig_contrasto_esteso/_tmp/ril_s12_lunghi.json",
+   "sha1": "1f4b21470e9c70dbb68e74c19aa544f1f0edfa86",
+   "byte": 3350,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_seal_fork/_sig_cura1/inerte/CONFIGURAZIONE.json",
+   "sha1": "af935ab42023790b1f0e26b709adaeb0663bebe3",
+   "byte": 10499,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {
+    "DOC": "solo il nome",
+    "STRUMENTI": "solo il nome"
+   },
+   "e_uno_strumento": false,
+   "strumento_del_padre": null
+  },
+  {
+   "file": "csv/_seal_fork/_sig_cura1/inerte/CONFIGURAZIONE.txt",
+   "sha1": "24340139c43308265a16e1eb9cbea397964834ff",
+   "byte": 15850,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {
+    "DOC": "solo il nome",
+    "STRUMENTI": "solo il nome",
+    "REFERTI": "solo il nome",
+    "INVENTARIO": "solo il nome"
+   },
+   "e_uno_strumento": false,
+   "strumento_del_padre": null
+  },
+  {
+   "file": "csv/_seal_fork/_sig_cura1/inerte/scena_000120.pkl.gz",
+   "sha1": "e672dea3e0a8bcab393a585b92e316b35ee46782",
+   "byte": 36204006,
+   "classe": "(c) STATO BINARIO"
+  },
+  {
+   "file": "csv/_seal_fork/_sig_cura2_strutturale/_sim_al_tag.py",
+   "sha1": "dd4f5ccfea9647b1eb636497d917c23af2ae1b38",
+   "byte": 740059,
+   "classe": "(a) COPIA-SIMULATORE",
+   "oid_git": "62042859a17653b569d2abb5d74acd22bf3a6356",
+   "commit": "77e888eace1d914bdb30bff1da629eea6f1d36d1",
+   "commit_quanti": 1
+  },
+  {
+   "file": "csv/_seal_fork/_sig_cura2_strutturale/new_s11/_braccio.py",
+   "sha1": "38702d63b21ab241cabcd15ad7c1703326e55495",
+   "byte": 1642,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {
+    "DOC": "solo il nome",
+    "STRUMENTI": "solo il nome",
+    "INVENTARIO": "solo il nome",
+    "TASK_HISTORY": "solo il nome"
+   },
+   "e_uno_strumento": true,
+   "strumento_del_padre": null
+  },
+  {
+   "file": "csv/_seal_fork/_sig_cura2_strutturale/new_s11/firme.json",
+   "sha1": "7c5294cd9285c23de54529cdbc7783c0d72606ea",
+   "byte": 6886,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {
+    "STRUMENTI": "solo il nome"
+   },
+   "e_uno_strumento": false,
+   "strumento_del_padre": null
+  },
+  {
+   "file": "csv/_seal_fork/_sig_cura2_strutturale/new_s12/_braccio.py",
+   "sha1": "2b341646df1f54f0cf780ac0ea66a8c4242b1e0c",
+   "byte": 1642,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {
+    "DOC": "solo il nome",
+    "STRUMENTI": "solo il nome",
+    "INVENTARIO": "solo il nome",
+    "TASK_HISTORY": "solo il nome"
+   },
+   "e_uno_strumento": true,
+   "strumento_del_padre": null
+  },
+  {
+   "file": "csv/_seal_fork/_sig_cura2_strutturale/new_s12/firme.json",
+   "sha1": "678d7cab090cc6e1cbcbb9b3dff0dddb03972470",
+   "byte": 6883,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {
+    "STRUMENTI": "solo il nome"
+   },
+   "e_uno_strumento": false,
+   "strumento_del_padre": null
+  },
+  {
+   "file": "csv/_seal_fork/_sig_cura2_strutturale/tag_off_s11/_braccio.py",
+   "sha1": "d9d87bb5fc23b79a72700ed9cff4a172a3f2cbb9",
+   "byte": 1701,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {
+    "DOC": "solo il nome",
+    "STRUMENTI": "solo il nome",
+    "INVENTARIO": "solo il nome",
+    "TASK_HISTORY": "solo il nome"
+   },
+   "e_uno_strumento": true,
+   "strumento_del_padre": null
+  },
+  {
+   "file": "csv/_seal_fork/_sig_cura2_strutturale/tag_off_s11/firme.json",
+   "sha1": "0b2db573931799cbd52ba20e4cb67a385bd17fb0",
+   "byte": 7763,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {
+    "STRUMENTI": "solo il nome"
+   },
+   "e_uno_strumento": false,
+   "strumento_del_padre": null
+  },
+  {
+   "file": "csv/_seal_fork/_sig_cura2_strutturale/tag_on_s11/_braccio.py",
+   "sha1": "3773a30b926cc2aab575bdb27b6e87a6aef1ad27",
+   "byte": 1680,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {
+    "DOC": "solo il nome",
+    "STRUMENTI": "solo il nome",
+    "INVENTARIO": "solo il nome",
+    "TASK_HISTORY": "solo il nome"
+   },
+   "e_uno_strumento": true,
+   "strumento_del_padre": null
+  },
+  {
+   "file": "csv/_seal_fork/_sig_cura2_strutturale/tag_on_s11/firme.json",
+   "sha1": "7c5294cd9285c23de54529cdbc7783c0d72606ea",
+   "byte": 6886,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {
+    "STRUMENTI": "solo il nome"
+   },
+   "e_uno_strumento": false,
+   "strumento_del_padre": null
+  },
+  {
+   "file": "csv/_seal_fork/_sig_cura2_strutturale/tag_on_s12/_braccio.py",
+   "sha1": "b34c4ac7e4e0a644301895a9c708d1007358d0ed",
+   "byte": 1680,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {
+    "DOC": "solo il nome",
+    "STRUMENTI": "solo il nome",
+    "INVENTARIO": "solo il nome",
+    "TASK_HISTORY": "solo il nome"
+   },
+   "e_uno_strumento": true,
+   "strumento_del_padre": null
+  },
+  {
+   "file": "csv/_seal_fork/_sig_cura2_strutturale/tag_on_s12/firme.json",
+   "sha1": "678d7cab090cc6e1cbcbb9b3dff0dddb03972470",
+   "byte": 6883,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {
+    "STRUMENTI": "solo il nome"
+   },
+   "e_uno_strumento": false,
+   "strumento_del_padre": null
+  },
+  {
+   "file": "csv/_seal_fork/_sig_cura4/_tmp/_br_lungo_off.py",
+   "sha1": "6f3d11cbeaf06deb0d0ae3e47ba4e48f97b6475a",
+   "byte": 3211,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_seal_fork/_sig_cura4/_tmp/_br_lungo_on.py",
+   "sha1": "890cf090e271b8515438d01510cecd95eb321a06",
+   "byte": 3209,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_seal_fork/_sig_cura4/_tmp/_br_mitosi.py",
+   "sha1": "87edf51441ed122114daa2dc4968c901993d5a6c",
+   "byte": 4620,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_seal_fork/_sig_cura4/_tmp/_br_off.py",
+   "sha1": "6c18bd1501f43a24a60e89ce96eb1d06acf102a7",
+   "byte": 5900,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_seal_fork/_sig_cura4/_tmp/_br_on.py",
+   "sha1": "9d0c711ab0010c97463db5e9ef9d2f7c121e8244",
+   "byte": 5898,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_seal_fork/_sig_cura4/_tmp/_br_on_forzato.py",
+   "sha1": "c1107b6878a400cc932a3941c69b208a253186f3",
+   "byte": 5907,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_seal_fork/_sig_cura4/_tmp/_br_prima.py",
+   "sha1": "9be231bd570abfb3769feac47a7d6655cf3b94e7",
+   "byte": 5932,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_seal_fork/_sig_cura4/_tmp/_sim_vecchio.py",
+   "sha1": "e76fa87257f3b65057dd9fb1f17487d71355582d",
+   "byte": 701656,
+   "classe": "(a) COPIA-SIMULATORE",
+   "oid_git": "5eda7266cbe1aec6c682bf14e717ed1321062700",
+   "commit": "8c20d162f84f4fc3d7cf6248d4f457cc716207f2",
+   "commit_quanti": 1
+  },
+  {
+   "file": "csv/_seal_fork/_sig_cura4/_tmp/lungo_off.json",
+   "sha1": "fb57080edc4132f66f5d8d40d7c9a7e633785ad3",
+   "byte": 655,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_seal_fork/_sig_cura4/_tmp/lungo_on.json",
+   "sha1": "7b05baaf3ed29b65ab98b745ee01c00393948b6d",
+   "byte": 556,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_seal_fork/_sig_cura4/_tmp/mitosi.json",
+   "sha1": "74ea32f6eea103e364bb95bd45383bbdd741a3f4",
+   "byte": 520,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_seal_fork/_sig_cura4/_tmp/off.json",
+   "sha1": "0c221b15f724ab46e270fe4164f46b451a1ebd94",
+   "byte": 5613,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_seal_fork/_sig_cura4/_tmp/on.json",
+   "sha1": "f38d88de6ef578dd4923ac69cf1837309ac1be2d",
+   "byte": 5720,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_seal_fork/_sig_cura4/_tmp/on_forzato.json",
+   "sha1": "d29541c116e645cc9df18537af5a0b3bb9771476",
+   "byte": 5741,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_seal_fork/_sig_cura4/_tmp/prima.json",
+   "sha1": "2f43e186dfcb62015d1d421734dd3c4a09469671",
+   "byte": 5627,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_seal_fork/_sig_cura5/_tmp/_br_c8_s11.py",
+   "sha1": "de48d8ea024924727efe43ae48cd0400bbb0b2eb",
+   "byte": 5228,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_seal_fork/_sig_cura5/_tmp/_br_off_s11.py",
+   "sha1": "557e0ba7802ead05f330a7d23b9ec4eac264a266",
+   "byte": 5739,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_seal_fork/_sig_cura5/_tmp/_br_off_s12.py",
+   "sha1": "5b67d951c7a7952ce78a151eb399d03dafde9505",
+   "byte": 5739,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_seal_fork/_sig_cura5/_tmp/_br_on_s11.py",
+   "sha1": "eb6be8fb67618225197d790ea8206f0154cd91ff",
+   "byte": 5737,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_seal_fork/_sig_cura5/_tmp/_br_on_s12.py",
+   "sha1": "c942aadaf7969bd494aeb1f86908833414734df8",
+   "byte": 5737,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_seal_fork/_sig_cura5/_tmp/_br_prima_s11.py",
+   "sha1": "57c2785a37dbd8a66af87a639f44f36b208ba84c",
+   "byte": 5771,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_seal_fork/_sig_cura5/_tmp/_br_prima_s12.py",
+   "sha1": "4645ba1d3df38908e9b555ed9b15724d5586d5fb",
+   "byte": 5771,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_seal_fork/_sig_cura5/_tmp/_sim_vecchio.py",
+   "sha1": "d9f113e9bedb2c2d709865a0a4c083e9e08347d5",
+   "byte": 717025,
+   "classe": "(a) COPIA-SIMULATORE",
+   "oid_git": "43a6abcc20d8f5478ae2e53715ea538bc0c99507",
+   "commit": "127cc115fa81ac33621f8c9337b43a4cc953b7a2",
+   "commit_quanti": 1
+  },
+  {
+   "file": "csv/_seal_fork/_sig_cura5/_tmp/off_s11.json",
+   "sha1": "c0e2d4963fe0edb0f43580b743774af7a983cba8",
+   "byte": 5608,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_seal_fork/_sig_cura5/_tmp/off_s12.json",
+   "sha1": "8996861d67879dbe1da5021403e7c9f8038c1a48",
+   "byte": 5612,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_seal_fork/_sig_cura5/_tmp/on_s11.json",
+   "sha1": "fafc331e558072743028ab81e81a98ccce749a5a",
+   "byte": 5575,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_seal_fork/_sig_cura5/_tmp/on_s12.json",
+   "sha1": "b8fb7629acfb52681f33816ecc6d63784b733769",
+   "byte": 5575,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_seal_fork/_sig_cura5/_tmp/prima_s11.json",
+   "sha1": "c0e2d4963fe0edb0f43580b743774af7a983cba8",
+   "byte": 5608,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_seal_fork/_sig_cura5/_tmp/prima_s12.json",
+   "sha1": "8996861d67879dbe1da5021403e7c9f8038c1a48",
+   "byte": 5612,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_seal_fork/_sig_cura_A/_tmp/_br_figli_off_s11.py",
+   "sha1": "5b5945be69704b697028e54b8d1a06daac8f9c2c",
+   "byte": 8841,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_seal_fork/_sig_cura_A/_tmp/_br_figli_off_s12.py",
+   "sha1": "cf389fbfab8749ddb0c73e878e2563337d8cec0c",
+   "byte": 8841,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_seal_fork/_sig_cura_A/_tmp/_br_figli_on_s11.py",
+   "sha1": "ce74c494e99d14d87c95ff67fd4200e48e420ca6",
+   "byte": 8864,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_seal_fork/_sig_cura_A/_tmp/_br_figli_on_s12.py",
+   "sha1": "491306489f5da1620ac9509e8c8ce93d8a8b5b99",
+   "byte": 8864,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_seal_fork/_sig_cura_A/_tmp/_br_off_s11_corti.py",
+   "sha1": "e0da7de517add7f3c86f0698eb0d2cb5461b5326",
+   "byte": 8816,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_seal_fork/_sig_cura_A/_tmp/_br_off_s11_lunghi.py",
+   "sha1": "eca29dfa02cc56ccc047fb0e3e9eae29d955c556",
+   "byte": 8818,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_seal_fork/_sig_cura_A/_tmp/_br_off_s12_corti.py",
+   "sha1": "d03c49430f695a7658fbd67f230cb37ec21cf598",
+   "byte": 8816,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_seal_fork/_sig_cura_A/_tmp/_br_off_s12_lunghi.py",
+   "sha1": "62b0a280aeaeff26ee8d661df652c2a86a74a184",
+   "byte": 8818,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_seal_fork/_sig_cura_A/_tmp/_br_off_s13_corti.py",
+   "sha1": "722ef3eb5fa2df881aa907b1a4b2d0cd642aded4",
+   "byte": 8816,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_seal_fork/_sig_cura_A/_tmp/_br_off_s13_lunghi.py",
+   "sha1": "8cf51975ebb320b7a31a5d6ddc1fa66edefc480e",
+   "byte": 8818,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_seal_fork/_sig_cura_A/_tmp/_br_off_s14_corti.py",
+   "sha1": "9f5b9ef9258914aa7d9069c8871d965c8eaacffc",
+   "byte": 8816,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_seal_fork/_sig_cura_A/_tmp/_br_off_s14_lunghi.py",
+   "sha1": "6bd3a6d64bef010ecb6288b7eaac320e7cd22687",
+   "byte": 8818,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_seal_fork/_sig_cura_A/_tmp/_br_on_s11_corti.py",
+   "sha1": "8e25da07854f0589e90d54fc614272def2184a5f",
+   "byte": 8864,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_seal_fork/_sig_cura_A/_tmp/_br_on_s11_lunghi.py",
+   "sha1": "ef99bd81d23b9341722e6ab9536dca8109e74559",
+   "byte": 8866,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_seal_fork/_sig_cura_A/_tmp/_br_on_s12_corti.py",
+   "sha1": "890e5a090a13e71bdd901759bcbd80d7926f85bd",
+   "byte": 8864,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_seal_fork/_sig_cura_A/_tmp/_br_on_s12_lunghi.py",
+   "sha1": "50f6f88f9ef32b6ecafd98ef1aeba07978384ae5",
+   "byte": 8866,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_seal_fork/_sig_cura_A/_tmp/_br_on_s13_corti.py",
+   "sha1": "5e36784dcdf26a39fac83fea1a574ef5ff2721cc",
+   "byte": 8864,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_seal_fork/_sig_cura_A/_tmp/_br_on_s13_lunghi.py",
+   "sha1": "add5a2d34e405ee0f2ee516d0273e4589954605e",
+   "byte": 8866,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_seal_fork/_sig_cura_A/_tmp/_br_on_s14_corti.py",
+   "sha1": "cfbf89b9c83a0673cc248743baf62a6977e96761",
+   "byte": 8864,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_seal_fork/_sig_cura_A/_tmp/_br_on_s14_lunghi.py",
+   "sha1": "5c9c0431dc428c69c4ee1b06c96c4aba15f84dc1",
+   "byte": 8866,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_seal_fork/_sig_cura_A/_tmp/_br_pf_s11_lunghi.py",
+   "sha1": "7f04fa0eefee15c671ee5ef8bcf8a4b907b9fe31",
+   "byte": 8862,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_seal_fork/_sig_cura_A/_tmp/_br_pf_s12_lunghi.py",
+   "sha1": "1b1463375ae1ff78166e7c9a52aa98d1e759d0ab",
+   "byte": 8862,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_seal_fork/_sig_cura_A/_tmp/_br_suW_s11_corti.py",
+   "sha1": "3f16200cd4ddbd43861d2f094ee87786e99bf6a0",
+   "byte": 8879,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_seal_fork/_sig_cura_A/_tmp/_br_suW_s11_lunghi.py",
+   "sha1": "e3402b55dc466466375020ac012635d63d7a4845",
+   "byte": 8881,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_seal_fork/_sig_cura_A/_tmp/_br_suW_s12_corti.py",
+   "sha1": "47bc8857bc5d96f6cf795e17727e2f1cd3442059",
+   "byte": 8879,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_seal_fork/_sig_cura_A/_tmp/_br_suW_s12_lunghi.py",
+   "sha1": "4b955ad6aa01e06ff0da69465a2c7da7b1d87cb4",
+   "byte": 8881,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_seal_fork/_sig_cura_A/_tmp/_br_suW_s13_corti.py",
+   "sha1": "7c3c1342058235422108e3bddc06f4a4c2ece505",
+   "byte": 8879,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_seal_fork/_sig_cura_A/_tmp/_br_suW_s13_lunghi.py",
+   "sha1": "6e9083c4ce3891a780e375ee0ab8897fa69ab9bb",
+   "byte": 8881,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_seal_fork/_sig_cura_A/_tmp/_br_suW_s14_corti.py",
+   "sha1": "1daed112b57ef136f512323a5928b7b253eb4692",
+   "byte": 8879,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_seal_fork/_sig_cura_A/_tmp/_br_suW_s14_lunghi.py",
+   "sha1": "958df28bf2c8c84e9638e4e0d405054cc8adaff5",
+   "byte": 8881,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_seal_fork/_sig_cura_A/_tmp/_sim_prima_flag.py",
+   "sha1": "81548e77ad5fd97bce24982ca0e783df6198e9cd",
+   "byte": 725144,
+   "classe": "(a) COPIA-SIMULATORE",
+   "oid_git": "80b71edcbe07d147737de37f91e6c4ccfcef7b6d",
+   "commit": "43d846c8a4bbd72ae63b60076fe18d59e5790afe",
+   "commit_quanti": 1
+  },
+  {
+   "file": "csv/_seal_fork/_sig_cura_A/_tmp/_sim_prima_flag_diag.py",
+   "sha1": "bba2644a74f04e56b08350066a5ba32ab7d1bc7c",
+   "byte": 725889,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_seal_fork/_sig_cura_A/_tmp/_sim_su_W.py",
+   "sha1": "1fc6a1c5b3419e142ab62af43d4be366b82bd707",
+   "byte": 735195,
+   "classe": "(a) COPIA-SIMULATORE",
+   "oid_git": "20702db79e5c293f6ce4c1a0797e30172bfb0e6a",
+   "commit": "4a5d085a4c0a0965c5765c1c2703f3af75a8b6af",
+   "commit_quanti": 1
+  },
+  {
+   "file": "csv/_seal_fork/_sig_cura_A/_tmp/_sim_su_W_diag.py",
+   "sha1": "8cc54a477087499304f9328428f0050ee8c58319",
+   "byte": 735940,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_seal_fork/_sig_cura_A/_tmp/figli_off_s11.json",
+   "sha1": "76032fbc6c722a1816aba722456cc5713057705f",
+   "byte": 811752,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_seal_fork/_sig_cura_A/_tmp/figli_off_s12.json",
+   "sha1": "4f81f7afda23120d6950728330c797ba7535343f",
+   "byte": 682972,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_seal_fork/_sig_cura_A/_tmp/figli_on_s11.json",
+   "sha1": "3dcfb8b559055818c9026a5532fdcfc226dd5079",
+   "byte": 811750,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_seal_fork/_sig_cura_A/_tmp/figli_on_s12.json",
+   "sha1": "052786f1aa5f8f6c3912459fa1b1feaaab943e4f",
+   "byte": 682970,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_seal_fork/_sig_cura_A/_tmp/off_s11_corti.json",
+   "sha1": "bc0e9e5ff73467050ec683a98cd1d226ab7a102f",
+   "byte": 7575,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_seal_fork/_sig_cura_A/_tmp/off_s11_lunghi.json",
+   "sha1": "4cdbcfdb19a9ffe0c44411df951c4cb5cfb07540",
+   "byte": 7567,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_seal_fork/_sig_cura_A/_tmp/off_s12_corti.json",
+   "sha1": "535874007038ad03d98586ae297c7415faa5c2b1",
+   "byte": 7576,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_seal_fork/_sig_cura_A/_tmp/off_s12_lunghi.json",
+   "sha1": "e86e16ea0e5b37ea99280457f826ac0d0ef97bfd",
+   "byte": 7566,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_seal_fork/_sig_cura_A/_tmp/off_s13_corti.json",
+   "sha1": "d31cc869cf549caa3de4fae22c4018559d66b16f",
+   "byte": 7580,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_seal_fork/_sig_cura_A/_tmp/off_s13_lunghi.json",
+   "sha1": "99418dbac15c6e89e264323f0f6a7eff842a7398",
+   "byte": 7573,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_seal_fork/_sig_cura_A/_tmp/off_s14_corti.json",
+   "sha1": "4aed21f4677944be062120c0aa20e08263c3eed4",
+   "byte": 7575,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_seal_fork/_sig_cura_A/_tmp/off_s14_lunghi.json",
+   "sha1": "c45fa3f0c4a94a33ea83fa626611ad4299ba60b1",
+   "byte": 7566,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_seal_fork/_sig_cura_A/_tmp/on_s11_corti.json",
+   "sha1": "e54e2aec64c9c823ef86ce27604c57e6ad24cc92",
+   "byte": 7564,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_seal_fork/_sig_cura_A/_tmp/on_s11_lunghi.json",
+   "sha1": "e0ecfd35961341e2dba502237e2d945c63a02a1c",
+   "byte": 7570,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_seal_fork/_sig_cura_A/_tmp/on_s12_corti.json",
+   "sha1": "1574789f91c8266db777dbd6b5b47299a4261def",
+   "byte": 7557,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_seal_fork/_sig_cura_A/_tmp/on_s12_lunghi.json",
+   "sha1": "b1b1aeabff3d04a5e00a642ddb6cdaf04c77c066",
+   "byte": 7559,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_seal_fork/_sig_cura_A/_tmp/on_s13_corti.json",
+   "sha1": "f108fa833d1e9ce43af98ecc3e213dd2636d08db",
+   "byte": 7565,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_seal_fork/_sig_cura_A/_tmp/on_s13_lunghi.json",
+   "sha1": "fbe35071b337192c69422c4bfd3b26eec41f4cca",
+   "byte": 7572,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_seal_fork/_sig_cura_A/_tmp/on_s14_corti.json",
+   "sha1": "9cb20781a7fb17fa2521dea5d4d7950954431fe3",
+   "byte": 7565,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_seal_fork/_sig_cura_A/_tmp/on_s14_lunghi.json",
+   "sha1": "51d9e11e302845d7e6dafd5324e694d40646a631",
+   "byte": 7565,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_seal_fork/_sig_cura_A/_tmp/pf_s11_lunghi.json",
+   "sha1": "3618e285b145daee7cd1707c77bac9be743910b7",
+   "byte": 7607,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_seal_fork/_sig_cura_A/_tmp/pf_s12_lunghi.json",
+   "sha1": "db41fedde6785037bf03da4875ab1fcc72935c65",
+   "byte": 7606,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_seal_fork/_sig_cura_A/_tmp/suW_s11_corti.json",
+   "sha1": "e0ea7393034fc85cc2fbba2f931c31ed579ac0af",
+   "byte": 7578,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_seal_fork/_sig_cura_A/_tmp/suW_s11_lunghi.json",
+   "sha1": "9bd0d081c68192d0b75ce4694f51ea1ec0507c53",
+   "byte": 7578,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_seal_fork/_sig_cura_A/_tmp/suW_s12_corti.json",
+   "sha1": "26c6b30ac62abae37ae4d3fce050eea10c128e02",
+   "byte": 7576,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_seal_fork/_sig_cura_A/_tmp/suW_s12_lunghi.json",
+   "sha1": "ba07ca09014de30a01b211cefe2aefcbaf0dd722",
+   "byte": 7572,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_seal_fork/_sig_cura_A/_tmp/suW_s13_corti.json",
+   "sha1": "6f019a9e8238758f7de2bb9f2f2d43f74e079fd4",
+   "byte": 7578,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_seal_fork/_sig_cura_A/_tmp/suW_s13_lunghi.json",
+   "sha1": "820510fe0299c2d77f04b8c9a52351dc4bd974b2",
+   "byte": 7578,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_seal_fork/_sig_cura_A/_tmp/suW_s14_corti.json",
+   "sha1": "af606a9b93b3806284de74dcceae47ce677aeda0",
+   "byte": 7577,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_seal_fork/_sig_cura_A/_tmp/suW_s14_lunghi.json",
+   "sha1": "f2506dd566022bab1fb4b5055905916ce28d64e4",
+   "byte": 7576,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_seal_fork/_sig_d32_nomi/_sim_prima.py",
+   "sha1": "437632bff472ed5e0e9c826d2f89b9d9c647c4f0",
+   "byte": 738801,
+   "classe": "(a) COPIA-SIMULATORE",
+   "oid_git": "d74baed2d4dfc520f32575fc3f37af4e20e6d290",
+   "commit": "2b273da58c680b9c9140700eec1d0a6492019635",
+   "commit_quanti": 1
+  },
+  {
+   "file": "csv/_seal_fork/_sig_d32_nomi/dopo/_braccio.py",
+   "sha1": "bdc2a055fb4cead2ec6d2f14332a6a1c52a11787",
+   "byte": 1748,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {
+    "DOC": "solo il nome",
+    "STRUMENTI": "solo il nome",
+    "INVENTARIO": "solo il nome",
+    "TASK_HISTORY": "solo il nome"
+   },
+   "e_uno_strumento": true,
+   "strumento_del_padre": null
+  },
+  {
+   "file": "csv/_seal_fork/_sig_d32_nomi/dopo/firme.json",
+   "sha1": "2d7b3f0f3d541589d952a6389d0668feb32e077b",
+   "byte": 6892,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {
+    "STRUMENTI": "solo il nome"
+   },
+   "e_uno_strumento": false,
+   "strumento_del_padre": null
+  },
+  {
+   "file": "csv/_seal_fork/_sig_d32_nomi/prima/_braccio.py",
+   "sha1": "d3a69149702f4f8ff0e0ee3c0d0a1cc6104206cb",
+   "byte": 1774,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {
+    "DOC": "solo il nome",
+    "STRUMENTI": "solo il nome",
+    "INVENTARIO": "solo il nome",
+    "TASK_HISTORY": "solo il nome"
+   },
+   "e_uno_strumento": true,
+   "strumento_del_padre": null
+  },
+  {
+   "file": "csv/_seal_fork/_sig_d32_nomi/prima/firme.json",
+   "sha1": "2d7b3f0f3d541589d952a6389d0668feb32e077b",
+   "byte": 6892,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {
+    "STRUMENTI": "solo il nome"
+   },
+   "e_uno_strumento": false,
+   "strumento_del_padre": null
+  },
+  {
+   "file": "csv/_seal_fork/_sig_decisione_separata/_sim_prima_decisione.py",
+   "sha1": "287154f343c8bf27424a7d856dbd2a13ad7b1b34",
+   "byte": 816498,
+   "classe": "(a) COPIA-SIMULATORE",
+   "oid_git": "616ea6f5ec1b3cad6e4b83fbc46fd60c20508a5f",
+   "commit": "0cf80574b8ff794d71db0c704f66ea3139278daa",
+   "commit_quanti": 1
+  },
+  {
+   "file": "csv/_seal_fork/_sig_dieci/_sim_prima.py",
+   "sha1": "f81c4fe1396f8d4505158cda51485d4259d64119",
+   "byte": 540128,
+   "classe": "(a) COPIA-SIMULATORE",
+   "oid_git": "af8a96f17b218f09b124c415d8820d7106374b6a",
+   "commit": "89aa275aa66e81654b5756401b7f572f8da12cc6",
+   "commit_quanti": 1
+  },
+  {
+   "file": "csv/_seal_fork/_sig_e4lam/inerte/CONFIGURAZIONE.json",
+   "sha1": "9cb2cb939e6a9d3d08d0e9a4663ddc9d6e3b9bd7",
+   "byte": 10498,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {
+    "DOC": "solo il nome",
+    "STRUMENTI": "solo il nome"
+   },
+   "e_uno_strumento": false,
+   "strumento_del_padre": null
+  },
+  {
+   "file": "csv/_seal_fork/_sig_e4lam/inerte/CONFIGURAZIONE.txt",
+   "sha1": "3879b7358618d1cdd8a1f017ea2214a580a2bb26",
+   "byte": 15933,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {
+    "DOC": "solo il nome",
+    "STRUMENTI": "solo il nome",
+    "REFERTI": "solo il nome",
+    "INVENTARIO": "solo il nome"
+   },
+   "e_uno_strumento": false,
+   "strumento_del_padre": null
+  },
+  {
+   "file": "csv/_seal_fork/_sig_e4lam/inerte/scena_000120.pkl.gz",
+   "sha1": "b6eb01c410a9bc24b08aa383966fd67df7728a4e",
+   "byte": 36217249,
+   "classe": "(c) STATO BINARIO"
+  },
+  {
+   "file": "csv/_seal_fork/_sig_invarianti/_sim_prima.py",
+   "sha1": "80ebcbc964368f2f005cc23002a8ba456eee487e",
+   "byte": 631036,
+   "classe": "(a) COPIA-SIMULATORE",
+   "oid_git": "b060bdbbd4151c01aafd3e100648223e6e0b38dc",
+   "commit": "94895870878cf69fb68640aff832fc742785c6f7",
+   "commit_quanti": 1
+  },
+  {
+   "file": "csv/_seal_fork/_sig_max_nodi/_sim_prima_della_cura.py",
+   "sha1": "1fc9235f749b10a113fd82e5781868afe5d3a04f",
+   "byte": 755595,
+   "classe": "(a) COPIA-SIMULATORE",
+   "oid_git": "a6ce610b8d597b92131889cf1ab25765a4d0f673",
+   "commit": "a51b24d2b8820d780f3b95678175734391d6bebf",
+   "commit_quanti": 1
+  },
+  {
+   "file": "csv/_seal_fork/_sig_mem_moto_tutto/cap_HEBB.json",
+   "sha1": "8debe177777a59c85027de875d2dfccfe612c89e",
+   "byte": 3005,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {},
+   "e_uno_strumento": false,
+   "strumento_del_padre": null
+  },
+  {
+   "file": "csv/_seal_fork/_sig_mem_moto_tutto/cap_OFF.json",
+   "sha1": "1686f55b9cb3bf9bb2f66ebb69e3f065e2be1258",
+   "byte": 4521,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {},
+   "e_uno_strumento": false,
+   "strumento_del_padre": null
+  },
+  {
+   "file": "csv/_seal_fork/_sig_mem_moto_tutto/cap_ON-bis.json",
+   "sha1": "2617ce36c24806511da1eb85b2f0031a8773493c",
+   "byte": 4923,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {},
+   "e_uno_strumento": false,
+   "strumento_del_padre": null
+  },
+  {
+   "file": "csv/_seal_fork/_sig_mem_moto_tutto/cap_ON.json",
+   "sha1": "f46dc2ec4d0aade38fa50b990ee50140847814c2",
+   "byte": 4919,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {},
+   "e_uno_strumento": false,
+   "strumento_del_padre": null
+  },
+  {
+   "file": "csv/_seal_fork/_sig_mem_moto_tutto/cap_SOLO-MEM.json",
+   "sha1": "8d84cf875fd97b0317a42986bdc5bbe9fb4457e0",
+   "byte": 4644,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {},
+   "e_uno_strumento": false,
+   "strumento_del_padre": null
+  },
+  {
+   "file": "csv/_seal_fork/_sig_nascita_atomica/_corsa.txt",
+   "sha1": "4111e2f8dcba75e333fa308d454a626bbe805363",
+   "byte": 2115,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {
+    "DOC": "solo il nome",
+    "STRUMENTI": "solo il nome",
+    "REFERTI": "solo il nome",
+    "INVENTARIO": "solo il nome",
+    "TASK_HISTORY": "solo il nome"
+   },
+   "e_uno_strumento": false,
+   "strumento_del_padre": null
+  },
+  {
+   "file": "csv/_seal_fork/_sig_nascita_atomica/_sim_e203f9a8.py",
+   "sha1": "e203f9a8b9b74278e610c6c0997f01659d6e9f6d",
+   "byte": 744148,
+   "classe": "(a) COPIA-SIMULATORE",
+   "oid_git": "c968d4d8582f9e39d8b45cd2cd3cdab8affbbc61",
+   "commit": "9ca9748639ec4d2d41a0a694c3d9ce276733852d",
+   "commit_quanti": 1
+  },
+  {
+   "file": "csv/_seal_fork/_sig_nascita_psi/_sim_prima_della_cura.py",
+   "sha1": "05691d41f3e86101da69c86767e9c218df0454ab",
+   "byte": 762399,
+   "classe": "(a) COPIA-SIMULATORE",
+   "oid_git": "fe44d93b77654f636daea9757e9d26dd0c4dbbae",
+   "commit": "c7b20842d0cc159a55659d057abbeca46bd5bdbd",
+   "commit_quanti": 1
+  },
+  {
+   "file": "csv/_seal_fork/_sig_osservabile_p1/seme_11.json",
+   "sha1": "cd370e1f6c846d80236cbbd7a42a43cf6fdcef0b",
+   "byte": 1426,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {},
+   "e_uno_strumento": false,
+   "strumento_del_padre": null
+  },
+  {
+   "file": "csv/_seal_fork/_sig_osservabile_p1/seme_12.json",
+   "sha1": "aca87787c8e814ddcda34e7277cba1975c884c4c",
+   "byte": 1430,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {},
+   "e_uno_strumento": false,
+   "strumento_del_padre": null
+  },
+  {
+   "file": "csv/_seal_fork/_sig_osservabile_p1/seme_13.json",
+   "sha1": "e6fbddb4ac8f0e112d2d31f97c286a8f988e63ce",
+   "byte": 1426,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {},
+   "e_uno_strumento": false,
+   "strumento_del_padre": null
+  },
+  {
+   "file": "csv/_seal_fork/_sig_osservabile_p1/seme_14.json",
+   "sha1": "66cb119727a0cdba55b33e180e35b24febd238b7",
+   "byte": 1428,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {},
+   "e_uno_strumento": false,
+   "strumento_del_padre": null
+  },
+  {
+   "file": "csv/_seal_fork/_sig_peq_esatto/_sim_prima.py",
+   "sha1": "3b9e75bf7b14bcdb5fe660a63370bccea2952221",
+   "byte": 593794,
+   "classe": "(a) COPIA-SIMULATORE",
+   "oid_git": "22c822d1331fac1598c5f2f698c623ddc7b77ae1",
+   "commit": "3058c478dd1481c61c97dce53e142fc9f9865567",
+   "commit_quanti": 1
+  },
+  {
+   "file": "csv/_seal_fork/_sig_peq_nascita/_sim_prima.py",
+   "sha1": "d972a517815bff432542e79acbf7b63e25c50b35",
+   "byte": 600619,
+   "classe": "(a) COPIA-SIMULATORE",
+   "oid_git": "aff0a4f697ae653279aff0e27bf59ec3c8528425",
+   "commit": "67424326110e36a80ace10db2328e55f109aaa0f",
+   "commit_quanti": 1
+  },
+  {
+   "file": "csv/_seal_fork/_sig_pozzo_d/_sim_prima.py",
+   "sha1": "83945ff9ae4677ccf25b3b9ecbf194e3fd74d03d",
+   "byte": 740759,
+   "classe": "(a) COPIA-SIMULATORE",
+   "oid_git": "e087b9893a67433b2e2f428e4c9a7f3192cc9179",
+   "commit": "3e265d2baf8a4c057c9688cb1741148469d3fcba",
+   "commit_quanti": 1
+  },
+  {
+   "file": "csv/_seal_fork/_sig_pozzo_d/dopo_off/_braccio.py",
+   "sha1": "87feb53adf8ef4e18e0833b4f74de4029b47c84e",
+   "byte": 1557,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {
+    "DOC": "solo il nome",
+    "STRUMENTI": "solo il nome",
+    "INVENTARIO": "solo il nome",
+    "TASK_HISTORY": "solo il nome"
+   },
+   "e_uno_strumento": true,
+   "strumento_del_padre": null
+  },
+  {
+   "file": "csv/_seal_fork/_sig_pozzo_d/dopo_off/firme.json",
+   "sha1": "1590615c010378076c1bee470b60feab95366c59",
+   "byte": 6839,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {
+    "STRUMENTI": "solo il nome"
+   },
+   "e_uno_strumento": false,
+   "strumento_del_padre": null
+  },
+  {
+   "file": "csv/_seal_fork/_sig_pozzo_d/prima/_braccio.py",
+   "sha1": "969d7851f66fba06fa2720b77dbe990100393de0",
+   "byte": 1578,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {
+    "DOC": "solo il nome",
+    "STRUMENTI": "solo il nome",
+    "INVENTARIO": "solo il nome",
+    "TASK_HISTORY": "solo il nome"
+   },
+   "e_uno_strumento": true,
+   "strumento_del_padre": null
+  },
+  {
+   "file": "csv/_seal_fork/_sig_pozzo_d/prima/firme.json",
+   "sha1": "1590615c010378076c1bee470b60feab95366c59",
+   "byte": 6839,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {
+    "STRUMENTI": "solo il nome"
+   },
+   "e_uno_strumento": false,
+   "strumento_del_padre": null
+  },
+  {
+   "file": "csv/_seal_fork/_sig_scala_min_passo/_sim_prima.py",
+   "sha1": "d30bb0b93356c35720248c9b3a34cc5d18826e84",
+   "byte": 607311,
+   "classe": "(a) COPIA-SIMULATORE",
+   "oid_git": "50940860aec1dfe0d7eab22fb7ee9115101f5d44",
+   "commit": "f9534782ab2553aa800e9d52eb2dc70d5abc59a0",
+   "commit_quanti": 1
+  },
+  {
+   "file": "csv/_seal_fork/_sig_scala_p/_sim_prima.py",
+   "sha1": "7aa72c4a50ed99676b3918ad03380358cac6f35b",
+   "byte": 530827,
+   "classe": "(a) COPIA-SIMULATORE",
+   "oid_git": "2a369526eda9bc5cb10ecf90b428bf5c505e3816",
+   "commit": "4edfab21a01a5e6d8df9bde425b2e6b790b46f99",
+   "commit_quanti": 1
+  },
+  {
+   "file": "csv/_seal_fork/_sig_scena_ii/_tmp/_br_a_ctrl.py",
+   "sha1": "6c027e4edeccc5873742fd651242bac6f6ec7e45",
+   "byte": 8730,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_seal_fork/_sig_scena_ii/_tmp/_br_a_s11.py",
+   "sha1": "610e5abeea4e82e0dda466c8f1de99c212267d98",
+   "byte": 8730,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_seal_fork/_sig_scena_ii/_tmp/_br_a_s12.py",
+   "sha1": "2c18b377534c2aa1571c5fae7dcc282cad246713",
+   "byte": 8730,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_seal_fork/_sig_scena_ii/_tmp/_br_a_s13.py",
+   "sha1": "0d8b8ab1023c84dfddade27a7b4c1aeb2eb59411",
+   "byte": 8730,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_seal_fork/_sig_scena_ii/_tmp/_br_a_s14.py",
+   "sha1": "623c28d41ceca45417d4703a2cf7ab5d5d3131ad",
+   "byte": 8730,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_seal_fork/_sig_scena_ii/_tmp/_br_b_ctrl.py",
+   "sha1": "3c8363125b14dea56f8608db4295ce9f3b82bbbb",
+   "byte": 8727,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_seal_fork/_sig_scena_ii/_tmp/_br_b_s11.py",
+   "sha1": "abbfbc64338e16b7875cd4cc8e65cfa310613a2f",
+   "byte": 8727,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_seal_fork/_sig_scena_ii/_tmp/_br_b_s12.py",
+   "sha1": "3fb57daf5333a0bf947a21d03c53ac188e05b0fe",
+   "byte": 8727,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_seal_fork/_sig_scena_ii/_tmp/_br_b_s13.py",
+   "sha1": "4840d6e7e711790b93b13e287e201c676922a06e",
+   "byte": 8727,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_seal_fork/_sig_scena_ii/_tmp/_br_b_s14.py",
+   "sha1": "92a1b6fa804844ba1e08c9665c4a765f59dd094b",
+   "byte": 8727,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_seal_fork/_sig_scena_ii/_tmp/a_ctrl.json",
+   "sha1": "435a4331271853ac56c31d3f0d650331cc12089b",
+   "byte": 2172,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_seal_fork/_sig_scena_ii/_tmp/a_s11.json",
+   "sha1": "e3e5885bd0939634837e485a9cc64c88d2a4fa25",
+   "byte": 2173,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_seal_fork/_sig_scena_ii/_tmp/a_s12.json",
+   "sha1": "0ca44dad4501587ed700156c516f82983ed3311c",
+   "byte": 2170,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_seal_fork/_sig_scena_ii/_tmp/a_s13.json",
+   "sha1": "1b253d02defa72ead694939b7d2e6b98873022f7",
+   "byte": 2171,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_seal_fork/_sig_scena_ii/_tmp/a_s14.json",
+   "sha1": "6cebb33768095a2db3a7bb6a2e2e755c8a98a4f5",
+   "byte": 2171,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_seal_fork/_sig_scena_ii/_tmp/b_ctrl.json",
+   "sha1": "f5ab62b013efad6ee98cdf43d177308af55a4973",
+   "byte": 2075,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_seal_fork/_sig_scena_ii/_tmp/b_s11.json",
+   "sha1": "f5056573c86d26ad16f8d6d5d31248b7ecda6a5d",
+   "byte": 2076,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_seal_fork/_sig_scena_ii/_tmp/b_s12.json",
+   "sha1": "5a73fd5528a7c7c97ce14c5dbbb89f856a48a25b",
+   "byte": 2102,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_seal_fork/_sig_scena_ii/_tmp/b_s13.json",
+   "sha1": "491ce86dfdd59602ba752657031fcfc17283c308",
+   "byte": 2105,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_seal_fork/_sig_scena_ii/_tmp/b_s14.json",
+   "sha1": "58c36110202a2be0d948e5fd6045ef963ece1bac",
+   "byte": 2095,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_seal_fork/_sig_scena_ii/seme7a/CONFIGURAZIONE.json",
+   "sha1": "6645338f2c5c6f77676a6fd247eedb93f0213e4a",
+   "byte": 10713,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {
+    "DOC": "solo il nome",
+    "STRUMENTI": "solo il nome"
+   },
+   "e_uno_strumento": false,
+   "strumento_del_padre": null
+  },
+  {
+   "file": "csv/_seal_fork/_sig_scena_ii/seme7a/CONFIGURAZIONE.txt",
+   "sha1": "0476dced2fabb7e3bd5b848b9fcdaf60906c711b",
+   "byte": 16682,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {
+    "DOC": "solo il nome",
+    "STRUMENTI": "solo il nome",
+    "REFERTI": "solo il nome",
+    "INVENTARIO": "solo il nome"
+   },
+   "e_uno_strumento": false,
+   "strumento_del_padre": null
+  },
+  {
+   "file": "csv/_seal_fork/_sig_scena_ii/seme7b/CONFIGURAZIONE.json",
+   "sha1": "9294ad45ffa1af957bcf93be0eea409dcc797c17",
+   "byte": 10713,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {
+    "DOC": "solo il nome",
+    "STRUMENTI": "solo il nome"
+   },
+   "e_uno_strumento": false,
+   "strumento_del_padre": null
+  },
+  {
+   "file": "csv/_seal_fork/_sig_scena_ii/seme7b/CONFIGURAZIONE.txt",
+   "sha1": "f4386b7cb07cb76d9314ef93b48247a68e46990c",
+   "byte": 16682,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {
+    "DOC": "solo il nome",
+    "STRUMENTI": "solo il nome",
+    "REFERTI": "solo il nome",
+    "INVENTARIO": "solo il nome"
+   },
+   "e_uno_strumento": false,
+   "strumento_del_padre": null
+  },
+  {
+   "file": "csv/_seal_fork/_sig_scena_ii/seme8/CONFIGURAZIONE.json",
+   "sha1": "a0978cb69cbb0651f90d84e57faf411b54472ae2",
+   "byte": 10712,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {
+    "DOC": "solo il nome",
+    "STRUMENTI": "solo il nome"
+   },
+   "e_uno_strumento": false,
+   "strumento_del_padre": null
+  },
+  {
+   "file": "csv/_seal_fork/_sig_scena_ii/seme8/CONFIGURAZIONE.txt",
+   "sha1": "99bb698c8a83f755a3b2f8d3de44fc51c4e6bcae",
+   "byte": 16681,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {
+    "DOC": "solo il nome",
+    "STRUMENTI": "solo il nome",
+    "REFERTI": "solo il nome",
+    "INVENTARIO": "solo il nome"
+   },
+   "e_uno_strumento": false,
+   "strumento_del_padre": null
+  },
+  {
+   "file": "csv/_seal_fork/_sig_u2/_tmp/_br_nuovo_12.py",
+   "sha1": "3abdc13bb7f8dadea715e0cdc5fc256269955344",
+   "byte": 4848,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_seal_fork/_sig_u2/_tmp/_br_nuovo_30.py",
+   "sha1": "4444b8dd00509db5b8cfe7c04bf525816c7df3f0",
+   "byte": 4848,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_seal_fork/_sig_u2/_tmp/_br_vecchio_12.py",
+   "sha1": "bc25bd081dbd13b21c9caedbf848f2c5f9a049f3",
+   "byte": 4877,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_seal_fork/_sig_u2/_tmp/_sim_vecchio.py",
+   "sha1": "283a9ae3f7f9a37e2ebf08eb9faf13fc0046670b",
+   "byte": 690202,
+   "classe": "(a) COPIA-SIMULATORE",
+   "oid_git": "561bd705dc1df5b647f3c365c660c3e93737ba2f",
+   "commit": "e84f4a92fdcc4d80f6b52d70d0807933f2409451",
+   "commit_quanti": 1
+  },
+  {
+   "file": "csv/_seal_fork/_sig_u2/_tmp/nuovo_12.json",
+   "sha1": "7c2e70e440e21476123db6bd88b20c59fe9c8517",
+   "byte": 809,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_seal_fork/_sig_u2/_tmp/nuovo_30.json",
+   "sha1": "d4c05dae951aabcebc3f58bd06117ac255b4cd20",
+   "byte": 807,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_seal_fork/_sig_u2/_tmp/vecchio_12.json",
+   "sha1": "7c2e70e440e21476123db6bd88b20c59fe9c8517",
+   "byte": 809,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_seal_fork/_sigillo_frazione_t/_corsa.txt",
+   "sha1": "ed301a322be2479be94365a3b6f076199be4bf8e",
+   "byte": 4605,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {
+    "DOC": "solo il nome",
+    "STRUMENTI": "solo il nome",
+    "REFERTI": "solo il nome",
+    "INVENTARIO": "solo il nome",
+    "TASK_HISTORY": "solo il nome"
+   },
+   "e_uno_strumento": false,
+   "strumento_del_padre": "csv/_seal_fork/_sigillo_frazione_t.py"
+  },
+  {
+   "file": "csv/_seal_fork/_sigillo_frazione_t/_sigillo.json",
+   "sha1": "34e94c5ea68cdcd9509a0909a1dd43430b1a6d5a",
+   "byte": 2731,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {
+    "DOC": "solo il nome",
+    "STRUMENTI": "solo il nome",
+    "TASK_HISTORY": "solo il nome"
+   },
+   "e_uno_strumento": false,
+   "strumento_del_padre": "csv/_seal_fork/_sigillo_frazione_t.py"
+  },
+  {
+   "file": "csv/_seal_fork/_sigillo_frazione_t/_sim_fm_rovescio.py",
+   "sha1": "f937555911f0977a29098015623f478bb6228e62",
+   "byte": 891202,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {
+    "DOC": "solo il nome",
+    "STRUMENTI": "solo il nome",
+    "REFERTI": "percorso",
+    "TASK_HISTORY": "solo il nome"
+   },
+   "e_uno_strumento": true,
+   "strumento_del_padre": "csv/_seal_fork/_sigillo_frazione_t.py"
+  },
+  {
+   "file": "csv/_seal_fork/_sigillo_frazione_t/_sim_let_dd.py",
+   "sha1": "64156a9c037ca4b5a407790d90eea89346c6900d",
+   "byte": 891168,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {
+    "REFERTI": "percorso"
+   },
+   "e_uno_strumento": true,
+   "strumento_del_padre": "csv/_seal_fork/_sigillo_frazione_t.py"
+  },
+  {
+   "file": "csv/_seal_fork/_sigillo_frazione_t/_sim_let_dh.py",
+   "sha1": "dfb072287e84187d41f4028f1e3d4ac09b37908b",
+   "byte": 891168,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {
+    "REFERTI": "percorso"
+   },
+   "e_uno_strumento": true,
+   "strumento_del_padre": "csv/_seal_fork/_sigillo_frazione_t.py"
+  },
+  {
+   "file": "csv/_seal_fork/_sigillo_frazione_t/_sim_let_fm.py",
+   "sha1": "62e19bed992705bdb711dbc93a29d25fbadf2699",
+   "byte": 891185,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {
+    "REFERTI": "percorso"
+   },
+   "e_uno_strumento": true,
+   "strumento_del_padre": "csv/_seal_fork/_sigillo_frazione_t.py"
+  },
+  {
+   "file": "csv/_seal_fork/_sigillo_frazione_t/_sim_let_fm_bias.py",
+   "sha1": "8ade0f93359e87f1f8c4f8eb557bfb4d08574193",
+   "byte": 891185,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {
+    "REFERTI": "percorso"
+   },
+   "e_uno_strumento": true,
+   "strumento_del_padre": "csv/_seal_fork/_sigillo_frazione_t.py"
+  },
+  {
+   "file": "csv/_seal_fork/_sigillo_frazione_t/_sim_let_pos_div.py",
+   "sha1": "f9dd16b1b10bceac2226b4079f53c2f748fd083a",
+   "byte": 891168,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {
+    "REFERTI": "percorso"
+   },
+   "e_uno_strumento": true,
+   "strumento_del_padre": "csv/_seal_fork/_sigillo_frazione_t.py"
+  },
+  {
+   "file": "csv/_seal_fork/_sigillo_frazione_t/_sim_let_pos_sch.py",
+   "sha1": "8ebe155de38c1dffba05b3189d59fc4c6c6be5ea",
+   "byte": 891168,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {
+    "REFERTI": "percorso"
+   },
+   "e_uno_strumento": true,
+   "strumento_del_padre": "csv/_seal_fork/_sigillo_frazione_t.py"
+  },
+  {
+   "file": "csv/_seal_fork/_sigillo_frazione_t/_sim_prima.py",
+   "sha1": "6d30697619d2cafbf20a6466fbfbca210656111d",
+   "byte": 885014,
+   "classe": "(a) COPIA-SIMULATORE",
+   "oid_git": "2e2ba263bef5118445584d4d42aad0a842b34186",
+   "commit": "f8c206e89c1b40b0d7f022b713d73822e65d3a89",
+   "commit_quanti": 1
+  },
+  {
+   "file": "csv/_seal_fork/_sigillo_frazione_t/_sim_pulita.py",
+   "sha1": "3831f684ed162d5f1e287df6cd236ed8d2eca0ab",
+   "byte": 891194,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {
+    "STRUMENTI": "solo il nome",
+    "REFERTI": "percorso"
+   },
+   "e_uno_strumento": true,
+   "strumento_del_padre": "csv/_seal_fork/_sigillo_frazione_t.py"
+  },
+  {
+   "file": "csv/_seal_fork/_sigillo_frazione_t/_sim_rifatta.py",
+   "sha1": "c18c9bf6f412c81b5a55eefbc8ee64eca85e4122",
+   "byte": 891194,
+   "classe": "(a) COPIA-SIMULATORE",
+   "oid_git": "aefa559c9ffaa0eb361002ad59a2369a99a84f83",
+   "commit": "7a0532228b19017873b88faafb9fee186594d89b",
+   "commit_quanti": 1
+  },
+  {
+   "file": "csv/_seal_fork/_sigillo_frazione_t/_sim_t04.py",
+   "sha1": "e011ef5abeeb06b90f143bbf3c26410b933940de",
+   "byte": 891194,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {
+    "STRUMENTI": "solo il nome",
+    "REFERTI": "percorso"
+   },
+   "e_uno_strumento": true,
+   "strumento_del_padre": "csv/_seal_fork/_sigillo_frazione_t.py"
+  },
+  {
+   "file": "csv/_seal_fork/_sigillo_frazione_t/_sim_t04_md0.py",
+   "sha1": "3831f684ed162d5f1e287df6cd236ed8d2eca0ab",
+   "byte": 891194,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {
+    "DOC": "solo il nome",
+    "STRUMENTI": "solo il nome",
+    "REFERTI": "percorso",
+    "TASK_HISTORY": "solo il nome"
+   },
+   "e_uno_strumento": true,
+   "strumento_del_padre": "csv/_seal_fork/_sigillo_frazione_t.py"
+  },
+  {
+   "file": "csv/_seal_fork/_sigillo_legge_2lam/_corsa.txt",
+   "sha1": "4b81049699e04b42cde860eee347748fba185356",
+   "byte": 15016,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {
+    "DOC": "solo il nome",
+    "STRUMENTI": "solo il nome",
+    "REFERTI": "solo il nome",
+    "INVENTARIO": "solo il nome",
+    "TASK_HISTORY": "solo il nome"
+   },
+   "e_uno_strumento": false,
+   "strumento_del_padre": "csv/_seal_fork/_sigillo_legge_2lam.py"
+  },
+  {
+   "file": "csv/_seal_fork/_sigillo_legge_2lam/_sigillo.json",
+   "sha1": "00450e29a7e4303951472f75744bab72d645e43c",
+   "byte": 67702,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {
+    "DOC": "solo il nome",
+    "STRUMENTI": "solo il nome",
+    "TASK_HISTORY": "solo il nome"
+   },
+   "e_uno_strumento": false,
+   "strumento_del_padre": "csv/_seal_fork/_sigillo_legge_2lam.py"
+  },
+  {
+   "file": "csv/_seal_fork/_sigillo_legge_2lam/_sim_cbis_0.py",
+   "sha1": "fb6e7330a69b8847d6ed7f9ceb580039074060ba",
+   "byte": 894597,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {},
+   "e_uno_strumento": true,
+   "strumento_del_padre": "csv/_seal_fork/_sigillo_legge_2lam.py"
+  },
+  {
+   "file": "csv/_seal_fork/_sigillo_legge_2lam/_sim_cbis_1.py",
+   "sha1": "31da067d0b2bae838e81c8398ddd6994b58a8a49",
+   "byte": 894615,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {},
+   "e_uno_strumento": true,
+   "strumento_del_padre": "csv/_seal_fork/_sigillo_legge_2lam.py"
+  },
+  {
+   "file": "csv/_seal_fork/_sigillo_legge_2lam/_sim_cbis_2.py",
+   "sha1": "b29ef25af7e36e97e876e0fe787eb09958dd409d",
+   "byte": 894608,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {},
+   "e_uno_strumento": true,
+   "strumento_del_padre": "csv/_seal_fork/_sigillo_legge_2lam.py"
+  },
+  {
+   "file": "csv/_seal_fork/_sigillo_legge_2lam/_sim_prima.py",
+   "sha1": "c18c9bf6f412c81b5a55eefbc8ee64eca85e4122",
+   "byte": 891194,
+   "classe": "(a) COPIA-SIMULATORE",
+   "oid_git": "aefa559c9ffaa0eb361002ad59a2369a99a84f83",
+   "commit": "7a0532228b19017873b88faafb9fee186594d89b",
+   "commit_quanti": 1
+  },
+  {
+   "file": "csv/_seal_fork/_sigillo_legge_2lam/_sim_rifatta.py",
+   "sha1": "0f060670567ac00a5b596918e58a3d0d6c644261",
+   "byte": 895184,
+   "classe": "(a) COPIA-SIMULATORE",
+   "oid_git": "2581d0cf6ca690b5e31791ce615f5705ad25b786",
+   "commit": "5f0340105309e1968654b09d4f638619cf4bf9c2",
+   "commit_quanti": 1
+  },
+  {
+   "file": "csv/_seal_fork/_sigillo_legge_2lam/_sim_t04.py",
+   "sha1": "59a1823fa93b2dca7b1b29df48c7fe8baf055a13",
+   "byte": 895184,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {
+    "STRUMENTI": "solo il nome",
+    "REFERTI": "percorso"
+   },
+   "e_uno_strumento": true,
+   "strumento_del_padre": "csv/_seal_fork/_sigillo_legge_2lam.py"
+  },
+  {
+   "file": "csv/_seal_fork/_sigillo_perc_geom_derivata/_sim_D1.py",
+   "sha1": "56336ca2096faef21cf76f4681e78cc9dc3a4153",
+   "byte": 884664,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {
+    "REFERTI": "percorso"
+   },
+   "e_uno_strumento": true,
+   "strumento_del_padre": "csv/_seal_fork/_sigillo_perc_geom_derivata.py"
+  },
+  {
+   "file": "csv/_seal_fork/_sigillo_perc_geom_derivata/_sim_D2.py",
+   "sha1": "198e69d15e29cc60d2eb722fd583a6c5615c5de3",
+   "byte": 884885,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {
+    "REFERTI": "percorso"
+   },
+   "e_uno_strumento": true,
+   "strumento_del_padre": "csv/_seal_fork/_sigillo_perc_geom_derivata.py"
+  },
+  {
+   "file": "csv/_seal_fork/_sigillo_perc_geom_derivata/_sim_E.py",
+   "sha1": "66f94ff80d9e993315b05bfd7f8f66914d2fea8b",
+   "byte": 885248,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {
+    "REFERTI": "percorso"
+   },
+   "e_uno_strumento": true,
+   "strumento_del_padre": "csv/_seal_fork/_sigillo_perc_geom_derivata.py"
+  },
+  {
+   "file": "csv/_seal_fork/_sigillo_perc_geom_derivata/_sim_prima.py",
+   "sha1": "7ed5660856f51fa28478dd4d489ab88f3670081a",
+   "byte": 879504,
+   "classe": "(a) COPIA-SIMULATORE",
+   "oid_git": "d96600d02e7c6cba4f7e275c8710b5496feebed3",
+   "commit": "4f6b315a5d13fed86f57a65a253cdd615d91966f",
+   "commit_quanti": 1
+  },
+  {
+   "file": "csv/_seal_fork/_sigillo_perc_geom_derivata/_sim_rifatta.py",
+   "sha1": "6d30697619d2cafbf20a6466fbfbca210656111d",
+   "byte": 885014,
+   "classe": "(a) COPIA-SIMULATORE",
+   "oid_git": "2e2ba263bef5118445584d4d42aad0a842b34186",
+   "commit": "f8c206e89c1b40b0d7f022b713d73822e65d3a89",
+   "commit_quanti": 1
+  },
+  {
+   "file": "csv/_seal_fork/_sigillo_perc_geom_derivata/_sim_solo_ordine.py",
+   "sha1": "cb17d832f3cc9881b9920e076d7fd7cbcea90878",
+   "byte": 881590,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {
+    "STRUMENTI": "solo il nome",
+    "REFERTI": "percorso"
+   },
+   "e_uno_strumento": true,
+   "strumento_del_padre": "csv/_seal_fork/_sigillo_perc_geom_derivata.py"
+  },
+  {
+   "file": "csv/_test_fork/_ab_A/prog.csv",
+   "sha1": "23f8a3168ed137b741bd04a820547e7ecd1cb51b",
+   "byte": 5781,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {
+    "DOC": "percorso",
+    "STRUMENTI": "solo il nome",
+    "REFERTI": "solo il nome",
+    "INVENTARIO": "percorso",
+    "TASK_HISTORY": "solo il nome"
+   },
+   "e_uno_strumento": false,
+   "strumento_del_padre": null
+  },
+  {
+   "file": "csv/_test_fork/_ab_B/prog.csv",
+   "sha1": "efea4a292bc4cfa2477ca80270ab1d86db4bed89",
+   "byte": 1168,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {
+    "DOC": "percorso",
+    "STRUMENTI": "solo il nome",
+    "REFERTI": "percorso",
+    "INVENTARIO": "percorso",
+    "TASK_HISTORY": "solo il nome"
+   },
+   "e_uno_strumento": false,
+   "strumento_del_padre": null
+  },
+  {
+   "file": "csv/_test_fork/_ab_B/scena_000120.pkl.gz",
+   "sha1": "fcf1f36bd518da35c71dea36177e3f70fc9f1a58",
+   "byte": 36645742,
+   "classe": "(c) STATO BINARIO"
+  },
+  {
+   "file": "csv/_test_fork/_ab_B/scena_000240.pkl.gz",
+   "sha1": "130daefb54a1be54a62431bbe85d730c320c8ea0",
+   "byte": 36628472,
+   "classe": "(c) STATO BINARIO"
+  },
+  {
+   "file": "csv/_test_fork/_ab_B/scena_000360.pkl.gz",
+   "sha1": "239e18c4896d8d8d631f5b85743d3879ab4569f5",
+   "byte": 36685221,
+   "classe": "(c) STATO BINARIO"
+  },
+  {
+   "file": "csv/_test_fork/_ab_C_solo_chicoop_FERMATO/prog.csv",
+   "sha1": "44274ac17a00c762f8927a08cac2154ba52ecc58",
+   "byte": 2608,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {
+    "DOC": "solo il nome",
+    "STRUMENTI": "solo il nome",
+    "REFERTI": "solo il nome",
+    "INVENTARIO": "solo il nome",
+    "TASK_HISTORY": "solo il nome"
+   },
+   "e_uno_strumento": false,
+   "strumento_del_padre": null
+  },
+  {
+   "file": "csv/_test_fork/_ab_D/prog.csv",
+   "sha1": "e65a279314a387c87feb634ff999ef6e7e8417ac",
+   "byte": 2684,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {
+    "DOC": "percorso",
+    "STRUMENTI": "solo il nome",
+    "REFERTI": "percorso",
+    "INVENTARIO": "solo il nome",
+    "TASK_HISTORY": "solo il nome"
+   },
+   "e_uno_strumento": false,
+   "strumento_del_padre": null
+  },
+  {
+   "file": "csv/_test_fork/_ab_D/scena_000120.pkl.gz",
+   "sha1": "2dac3318b8836a88a024fdcc91e206d7c6b607b8",
+   "byte": 36229607,
+   "classe": "(c) STATO BINARIO"
+  },
+  {
+   "file": "csv/_test_fork/_ab_D/scena_000240.pkl.gz",
+   "sha1": "919b9e5c1fcb99b4f78a4a63793ed1d66b4a8437",
+   "byte": 36471654,
+   "classe": "(c) STATO BINARIO"
+  },
+  {
+   "file": "csv/_test_fork/_ab_D/scena_000360.pkl.gz",
+   "sha1": "c7f70527c68add15471296f836801b35ec6d100f",
+   "byte": 36576001,
+   "classe": "(c) STATO BINARIO"
+  },
+  {
+   "file": "csv/_test_fork/_ab_D/scena_000480.pkl.gz",
+   "sha1": "397ad5cbdfe12c8a0a4c8e2b5418b7a4b17a5411",
+   "byte": 36633911,
+   "classe": "(c) STATO BINARIO"
+  },
+  {
+   "file": "csv/_test_fork/_ab_D/scena_000600.pkl.gz",
+   "sha1": "46e929063fcda344a18d77432408502afad8b531",
+   "byte": 36707091,
+   "classe": "(c) STATO BINARIO"
+  },
+  {
+   "file": "csv/_test_fork/_ab_D/scena_000720.pkl.gz",
+   "sha1": "d66162ae5c146137c36e549e5b265ed3a6783da4",
+   "byte": 36837750,
+   "classe": "(c) STATO BINARIO"
+  },
+  {
+   "file": "csv/_test_fork/_ab_D/scena_000840.pkl.gz",
+   "sha1": "bb0a5ffed574b1d254c57f8cae7b0aee4186c9c4",
+   "byte": 37004586,
+   "classe": "(c) STATO BINARIO"
+  },
+  {
+   "file": "csv/_test_fork/_ab_D/scena_000960.pkl.gz",
+   "sha1": "45478a3955475cfd8809370a1d4be540931f0ba5",
+   "byte": 37041379,
+   "classe": "(c) STATO BINARIO"
+  },
+  {
+   "file": "csv/_test_fork/_ab_D/scena_001080.pkl.gz",
+   "sha1": "eca429071967370b5d631bbd8d127c7540fb1377",
+   "byte": 37044132,
+   "classe": "(c) STATO BINARIO"
+  },
+  {
+   "file": "csv/_test_fork/_ab_D/scena_001200.pkl.gz",
+   "sha1": "c0d32db56dd05e2cb1b75b35aa3c13a7aac854a0",
+   "byte": 37117158,
+   "classe": "(c) STATO BINARIO"
+  },
+  {
+   "file": "csv/_test_fork/_ab_D_log.txt",
+   "sha1": "faeaba6405016d883c7c5eaedcd31105c5bec29f",
+   "byte": 11323,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {
+    "STRUMENTI": "solo il nome"
+   },
+   "e_uno_strumento": false,
+   "strumento_del_padre": null
+  },
+  {
+   "file": "csv/_test_fork/_ab_pozzo_d/seme11_off/_braccio.py",
+   "sha1": "417b14f852421869134ddd8d46d30bf8b85e5155",
+   "byte": 1697,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {
+    "DOC": "solo il nome",
+    "STRUMENTI": "solo il nome",
+    "INVENTARIO": "solo il nome",
+    "TASK_HISTORY": "solo il nome"
+   },
+   "e_uno_strumento": true,
+   "strumento_del_padre": "csv/_test_fork/_ab_pozzo_d.py"
+  },
+  {
+   "file": "csv/_test_fork/_ab_pozzo_d/seme11_off/misura.json",
+   "sha1": "072e0a9f8b0e082e779b24513baf1084637d506f",
+   "byte": 368,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {
+    "DOC": "solo il nome",
+    "STRUMENTI": "solo il nome",
+    "REFERTI": "solo il nome",
+    "INVENTARIO": "solo il nome",
+    "TASK_HISTORY": "solo il nome"
+   },
+   "e_uno_strumento": false,
+   "strumento_del_padre": "csv/_test_fork/_ab_pozzo_d.py"
+  },
+  {
+   "file": "csv/_test_fork/_ab_pozzo_d/seme11_on/_braccio.py",
+   "sha1": "e953f6a635c8e1625f67705ded3659e2b5fa3bba",
+   "byte": 1694,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {
+    "DOC": "solo il nome",
+    "STRUMENTI": "solo il nome",
+    "INVENTARIO": "solo il nome",
+    "TASK_HISTORY": "solo il nome"
+   },
+   "e_uno_strumento": true,
+   "strumento_del_padre": "csv/_test_fork/_ab_pozzo_d.py"
+  },
+  {
+   "file": "csv/_test_fork/_ab_pozzo_d/seme11_on/misura.json",
+   "sha1": "f52cf51496ed2dc88e56fab38b2672e6fc843f1b",
+   "byte": 365,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {
+    "DOC": "solo il nome",
+    "STRUMENTI": "solo il nome",
+    "REFERTI": "solo il nome",
+    "INVENTARIO": "solo il nome",
+    "TASK_HISTORY": "solo il nome"
+   },
+   "e_uno_strumento": false,
+   "strumento_del_padre": "csv/_test_fork/_ab_pozzo_d.py"
+  },
+  {
+   "file": "csv/_test_fork/_ab_pozzo_d/seme12_off/_braccio.py",
+   "sha1": "38e23767db210498945f0c5af448dcf22837df93",
+   "byte": 1697,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {
+    "DOC": "solo il nome",
+    "STRUMENTI": "solo il nome",
+    "INVENTARIO": "solo il nome",
+    "TASK_HISTORY": "solo il nome"
+   },
+   "e_uno_strumento": true,
+   "strumento_del_padre": "csv/_test_fork/_ab_pozzo_d.py"
+  },
+  {
+   "file": "csv/_test_fork/_ab_pozzo_d/seme12_off/misura.json",
+   "sha1": "5077527f71955eaa7db87bbdfd134a0fa633ea02",
+   "byte": 367,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {
+    "DOC": "solo il nome",
+    "STRUMENTI": "solo il nome",
+    "REFERTI": "solo il nome",
+    "INVENTARIO": "solo il nome",
+    "TASK_HISTORY": "solo il nome"
+   },
+   "e_uno_strumento": false,
+   "strumento_del_padre": "csv/_test_fork/_ab_pozzo_d.py"
+  },
+  {
+   "file": "csv/_test_fork/_ab_pozzo_d/seme12_on/_braccio.py",
+   "sha1": "f109c1284de5c4aaa596cab36f5010be7a5ce982",
+   "byte": 1694,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {
+    "DOC": "solo il nome",
+    "STRUMENTI": "solo il nome",
+    "INVENTARIO": "solo il nome",
+    "TASK_HISTORY": "solo il nome"
+   },
+   "e_uno_strumento": true,
+   "strumento_del_padre": "csv/_test_fork/_ab_pozzo_d.py"
+  },
+  {
+   "file": "csv/_test_fork/_ab_pozzo_d/seme12_on/misura.json",
+   "sha1": "ea79f5e7468999eb5279256a91f9f49ffcaf7993",
+   "byte": 365,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {
+    "DOC": "solo il nome",
+    "STRUMENTI": "solo il nome",
+    "REFERTI": "solo il nome",
+    "INVENTARIO": "solo il nome",
+    "TASK_HISTORY": "solo il nome"
+   },
+   "e_uno_strumento": false,
+   "strumento_del_padre": "csv/_test_fork/_ab_pozzo_d.py"
+  },
+  {
+   "file": "csv/_test_fork/_ab_pozzo_d/seme13_off/_braccio.py",
+   "sha1": "f634ddbb8395b5d43883b182d5c4a2a7a6afe562",
+   "byte": 1697,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {
+    "DOC": "solo il nome",
+    "STRUMENTI": "solo il nome",
+    "INVENTARIO": "solo il nome",
+    "TASK_HISTORY": "solo il nome"
+   },
+   "e_uno_strumento": true,
+   "strumento_del_padre": "csv/_test_fork/_ab_pozzo_d.py"
+  },
+  {
+   "file": "csv/_test_fork/_ab_pozzo_d/seme13_off/misura.json",
+   "sha1": "abf480024a57174f1278ef0f0242bbd8d6209f94",
+   "byte": 367,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {
+    "DOC": "solo il nome",
+    "STRUMENTI": "solo il nome",
+    "REFERTI": "solo il nome",
+    "INVENTARIO": "solo il nome",
+    "TASK_HISTORY": "solo il nome"
+   },
+   "e_uno_strumento": false,
+   "strumento_del_padre": "csv/_test_fork/_ab_pozzo_d.py"
+  },
+  {
+   "file": "csv/_test_fork/_ab_pozzo_d/seme13_on/_braccio.py",
+   "sha1": "8732603e8de5415e145a7ea5f30d3760edbf985b",
+   "byte": 1694,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {
+    "DOC": "solo il nome",
+    "STRUMENTI": "solo il nome",
+    "INVENTARIO": "solo il nome",
+    "TASK_HISTORY": "solo il nome"
+   },
+   "e_uno_strumento": true,
+   "strumento_del_padre": "csv/_test_fork/_ab_pozzo_d.py"
+  },
+  {
+   "file": "csv/_test_fork/_ab_pozzo_d/seme13_on/misura.json",
+   "sha1": "533e85ab061404c5be7ecd19eefd1f0566c89c9a",
+   "byte": 365,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {
+    "DOC": "solo il nome",
+    "STRUMENTI": "solo il nome",
+    "REFERTI": "solo il nome",
+    "INVENTARIO": "solo il nome",
+    "TASK_HISTORY": "solo il nome"
+   },
+   "e_uno_strumento": false,
+   "strumento_del_padre": "csv/_test_fork/_ab_pozzo_d.py"
+  },
+  {
+   "file": "csv/_test_fork/_ab_pozzo_d/seme14_off/_braccio.py",
+   "sha1": "17bb969d28fe347c237d7e9274d8f7d39e1a9703",
+   "byte": 1697,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {
+    "DOC": "solo il nome",
+    "STRUMENTI": "solo il nome",
+    "INVENTARIO": "solo il nome",
+    "TASK_HISTORY": "solo il nome"
+   },
+   "e_uno_strumento": true,
+   "strumento_del_padre": "csv/_test_fork/_ab_pozzo_d.py"
+  },
+  {
+   "file": "csv/_test_fork/_ab_pozzo_d/seme14_off/misura.json",
+   "sha1": "8c374d53a669d5887afced03852b71c3a7041c08",
+   "byte": 368,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {
+    "DOC": "solo il nome",
+    "STRUMENTI": "solo il nome",
+    "REFERTI": "solo il nome",
+    "INVENTARIO": "solo il nome",
+    "TASK_HISTORY": "solo il nome"
+   },
+   "e_uno_strumento": false,
+   "strumento_del_padre": "csv/_test_fork/_ab_pozzo_d.py"
+  },
+  {
+   "file": "csv/_test_fork/_ab_pozzo_d/seme14_on/_braccio.py",
+   "sha1": "97741b56c6a675aae3d52b37e40763fe9af26150",
+   "byte": 1694,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {
+    "DOC": "solo il nome",
+    "STRUMENTI": "solo il nome",
+    "INVENTARIO": "solo il nome",
+    "TASK_HISTORY": "solo il nome"
+   },
+   "e_uno_strumento": true,
+   "strumento_del_padre": "csv/_test_fork/_ab_pozzo_d.py"
+  },
+  {
+   "file": "csv/_test_fork/_ab_pozzo_d/seme14_on/misura.json",
+   "sha1": "032eeecc742dab1a95058351e50fd71a4b005bbc",
+   "byte": 367,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {
+    "DOC": "solo il nome",
+    "STRUMENTI": "solo il nome",
+    "REFERTI": "solo il nome",
+    "INVENTARIO": "solo il nome",
+    "TASK_HISTORY": "solo il nome"
+   },
+   "e_uno_strumento": false,
+   "strumento_del_padre": "csv/_test_fork/_ab_pozzo_d.py"
+  },
+  {
+   "file": "csv/_test_fork/_censimento_mitosi_2lam/_censimento.json",
+   "sha1": "97ee48090fd3cdc54f194097ae4a0132d97f6d9f",
+   "byte": 19083,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {
+    "DOC": "solo il nome",
+    "STRUMENTI": "solo il nome",
+    "REFERTI": "solo il nome",
+    "TASK_HISTORY": "solo il nome"
+   },
+   "e_uno_strumento": false,
+   "strumento_del_padre": "csv/_test_fork/_censimento_mitosi_2lam.py"
+  },
+  {
+   "file": "csv/_test_fork/_censimento_mitosi_2lam/_corsa.txt",
+   "sha1": "2298a5665bf036ba693dec8e70bfb59ad9a25170",
+   "byte": 9465,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {
+    "DOC": "solo il nome",
+    "STRUMENTI": "solo il nome",
+    "REFERTI": "solo il nome",
+    "INVENTARIO": "solo il nome",
+    "TASK_HISTORY": "solo il nome"
+   },
+   "e_uno_strumento": false,
+   "strumento_del_padre": "csv/_test_fork/_censimento_mitosi_2lam.py"
+  },
+  {
+   "file": "csv/_test_fork/_chi_comprime_d0/_tmp/_br_mat_s11.py",
+   "sha1": "7499773ad97c4f0f3338e5809d512b06c3ae39ab",
+   "byte": 8699,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_test_fork/_chi_comprime_d0/_tmp/_br_mat_s12.py",
+   "sha1": "cd993d80a550d670e6358c08563dcd821292f26f",
+   "byte": 8699,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_test_fork/_chi_comprime_d0/_tmp/_br_spe_s11.py",
+   "sha1": "58411995a7cceded46d3df82c0dd12682dc8262d",
+   "byte": 8700,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_test_fork/_chi_comprime_d0/_tmp/_br_spe_s12.py",
+   "sha1": "6bb64b95d123ff710557b92b2437abfb52c1e00d",
+   "byte": 8700,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_test_fork/_chi_comprime_d0/_tmp/mat_s11.json",
+   "sha1": "d2d5a30573f6c88607dbe46b3b9cbf44fd9fa7a3",
+   "byte": 3536,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_test_fork/_chi_comprime_d0/_tmp/mat_s12.json",
+   "sha1": "390551ffc0278ddb594872787b86e8ad6e2224d6",
+   "byte": 3540,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_test_fork/_chi_comprime_d0/_tmp/spe_s11.json",
+   "sha1": "cf5c05d376905abd1fa8f93a0b29662978ee9cb3",
+   "byte": 3537,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_test_fork/_chi_comprime_d0/_tmp/spe_s12.json",
+   "sha1": "102b42a02f6a00a745fd629e004482244756d4f5",
+   "byte": 3521,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_test_fork/_costo_sep4/P1/scena_000060.pkl.gz",
+   "sha1": "2691670f2f551be26d43545496dad1f73ae8a21b",
+   "byte": 36419063,
+   "classe": "(c) STATO BINARIO"
+  },
+  {
+   "file": "csv/_test_fork/_costo_sep4/P2/scena_000060.pkl.gz",
+   "sha1": "2691670f2f551be26d43545496dad1f73ae8a21b",
+   "byte": 36419063,
+   "classe": "(c) STATO BINARIO"
+  },
+  {
+   "file": "csv/_test_fork/_costo_sep4/S1/scena_000060.pkl.gz",
+   "sha1": "7c7c7c664c0a0069476045c41d02a7cbd8a7aadb",
+   "byte": 36419063,
+   "classe": "(c) STATO BINARIO"
+  },
+  {
+   "file": "csv/_test_fork/_cura1_corto/scena_000120.pkl.gz",
+   "sha1": "e52873d0a91203ccd26230e10096b229c7e86e1b",
+   "byte": 36217308,
+   "classe": "(c) STATO BINARIO"
+  },
+  {
+   "file": "csv/_test_fork/_cura2_corto/scena_000120.pkl.gz",
+   "sha1": "c9cb760ce2f0750f105cfead111786253dd1ec98",
+   "byte": 36210060,
+   "classe": "(c) STATO BINARIO"
+  },
+  {
+   "file": "csv/_test_fork/_d34_ritmo_wrap/scena_000120.pkl.gz",
+   "sha1": "62457cb65fd925b0b4cd2840978ab703433b3950",
+   "byte": 36217321,
+   "classe": "(c) STATO BINARIO"
+  },
+  {
+   "file": "csv/_test_fork/_d34_ritmo_wrap/scena_000240.pkl.gz",
+   "sha1": "1eb13ffd7d9b45a058a94c5a61cd04ac7b7ff39d",
+   "byte": 36405369,
+   "classe": "(c) STATO BINARIO"
+  },
+  {
+   "file": "csv/_test_fork/_d34_ritmo_wrap/scena_000360.pkl.gz",
+   "sha1": "8c9ba34ff420c296f455774fccd43a1afa4efec1",
+   "byte": 36487961,
+   "classe": "(c) STATO BINARIO"
+  },
+  {
+   "file": "csv/_test_fork/_d34_ritmo_wrap/scena_000480.pkl.gz",
+   "sha1": "c1a05434b0c4341590cfa1eeacecfef95bc54db7",
+   "byte": 36517619,
+   "classe": "(c) STATO BINARIO"
+  },
+  {
+   "file": "csv/_test_fork/_d34_ritmo_wrap/scena_000600.pkl.gz",
+   "sha1": "5451e5f1941a3f8aa2b8a92b471be16f7288275d",
+   "byte": 36724085,
+   "classe": "(c) STATO BINARIO"
+  },
+  {
+   "file": "csv/_test_fork/_diag_D/peq_dentro_log.txt",
+   "sha1": "f98997c47565d45577c4a60361c07a001bb0b34f",
+   "byte": 10977,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {},
+   "e_uno_strumento": false,
+   "strumento_del_padre": null
+  },
+  {
+   "file": "csv/_test_fork/_diag_D/rig1080_log.txt",
+   "sha1": "4e46533a42addd2fd66c26b21e2d03fa80e5b3b3",
+   "byte": 18769,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {},
+   "e_uno_strumento": false,
+   "strumento_del_padre": null
+  },
+  {
+   "file": "csv/_test_fork/_diag_D/somma_d0_log.txt",
+   "sha1": "17f377278b48b4b6df61b844045c9f6e9ad46d14",
+   "byte": 14175,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {},
+   "e_uno_strumento": false,
+   "strumento_del_padre": null
+  },
+  {
+   "file": "csv/_test_fork/_diag_triangoli/DIAG_triangoli.txt",
+   "sha1": "537690c0d5caa71ea838b64dde8ba6c20d53c335",
+   "byte": 747,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {
+    "STRUMENTI": "solo il nome"
+   },
+   "e_uno_strumento": false,
+   "strumento_del_padre": "csv/_test_fork/_diag_triangoli.py"
+  },
+  {
+   "file": "csv/_test_fork/_diag_triangoli/_tmp/_br_s11.py",
+   "sha1": "f882c29b811b8ede0b860db081970ef221a43931",
+   "byte": 6836,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_test_fork/_diag_triangoli/_tmp/_br_s12.py",
+   "sha1": "3dd7981410d1a0cc8346ff5b3d77a109cb182aaa",
+   "byte": 6836,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_test_fork/_diag_triangoli/_tmp/s11.json",
+   "sha1": "5c659a068ec1c598c55cb39d0651af3600299718",
+   "byte": 4295,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_test_fork/_dove_sta_omega/_tmp/_br_mat_s11.py",
+   "sha1": "985d05fbe86a585476ef99a2db5174de09dff7dc",
+   "byte": 3733,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_test_fork/_dove_sta_omega/_tmp/_br_mat_s12.py",
+   "sha1": "d2e15435b2c9f1fe9ff05f3482f741716139a38d",
+   "byte": 3733,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_test_fork/_dove_sta_omega/_tmp/_br_spe_s11.py",
+   "sha1": "700394c1af50be42d38f3861d02720699710f529",
+   "byte": 3734,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_test_fork/_dove_sta_omega/_tmp/_br_spe_s12.py",
+   "sha1": "58cd59e49319a9bf77a468de43605915e586dce5",
+   "byte": 3734,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_test_fork/_dove_sta_omega/_tmp/mat_s11.json",
+   "sha1": "d053eb9ec7945d0b4b9ab0fef2975f1d98dbeb0c",
+   "byte": 11273,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_test_fork/_dove_sta_omega/_tmp/mat_s12.json",
+   "sha1": "4bdab397fe4cdb54ddf141a1229d3aa9b4beba9b",
+   "byte": 11256,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_test_fork/_dove_sta_omega/_tmp/spe_s11.json",
+   "sha1": "c7a4adecec08841e230a04cb30dd74b8efd9d0f7",
+   "byte": 11189,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_test_fork/_dove_sta_omega/_tmp/spe_s12.json",
+   "sha1": "13bd9fd28201bc758c58d4f1904ae3e8b3282d33",
+   "byte": 11225,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_test_fork/_f2p_corto/scena_000120.pkl.gz",
+   "sha1": "46a158dc77707148c40de4ec664b426418d87e08",
+   "byte": 35591894,
+   "classe": "(c) STATO BINARIO"
+  },
+  {
+   "file": "csv/_test_fork/_f2p_off/scena_000120.pkl.gz",
+   "sha1": "a9d5ffd7b7001d43939464de8c25dae97bae6a51",
+   "byte": 36203964,
+   "classe": "(c) STATO BINARIO"
+  },
+  {
+   "file": "csv/_test_fork/_f2p_on/scena_000120.pkl.gz",
+   "sha1": "6f023ff58bd7fcd720bc680dcb4109195ffa51db",
+   "byte": 35591902,
+   "classe": "(c) STATO BINARIO"
+  },
+  {
+   "file": "csv/_test_fork/_fin_A/scena_000006.pkl.gz",
+   "sha1": "0aad7c3bd1f998aab54610e35ba7353ee557728b",
+   "byte": 28996956,
+   "classe": "(c) STATO BINARIO"
+  },
+  {
+   "file": "csv/_test_fork/_fin_A/scena_000012.pkl.gz",
+   "sha1": "c56b7d69ded8515b2eec63d648d1e65c3f432630",
+   "byte": 28884185,
+   "classe": "(c) STATO BINARIO"
+  },
+  {
+   "file": "csv/_test_fork/_fin_A/scena_000018.pkl.gz",
+   "sha1": "93e2d65b9f6f2f40ab49f45508fc97a43df31d0f",
+   "byte": 28771648,
+   "classe": "(c) STATO BINARIO"
+  },
+  {
+   "file": "csv/_test_fork/_fin_A/scena_000024.pkl.gz",
+   "sha1": "3b2b9af90dcb98a833d6427b72b022f9186884ef",
+   "byte": 28431070,
+   "classe": "(c) STATO BINARIO"
+  },
+  {
+   "file": "csv/_test_fork/_fin_A/scena_000030.pkl.gz",
+   "sha1": "8d113cb6dac12045c816af073d936cd53ea82719",
+   "byte": 28406124,
+   "classe": "(c) STATO BINARIO"
+  },
+  {
+   "file": "csv/_test_fork/_fin_A/scena_000036.pkl.gz",
+   "sha1": "1189516012852b3495279ce280fe7d70a6f13eb0",
+   "byte": 28348331,
+   "classe": "(c) STATO BINARIO"
+  },
+  {
+   "file": "csv/_test_fork/_fin_A/scena_000042.pkl.gz",
+   "sha1": "d801b027c8e403d7d58658700c454b00a6a25e83",
+   "byte": 28422320,
+   "classe": "(c) STATO BINARIO"
+  },
+  {
+   "file": "csv/_test_fork/_fin_A/scena_000048.pkl.gz",
+   "sha1": "67d60cff0c5482c3d1d2b9df5aebc20befed13e1",
+   "byte": 28443549,
+   "classe": "(c) STATO BINARIO"
+  },
+  {
+   "file": "csv/_test_fork/_fin_A/scena_000054.pkl.gz",
+   "sha1": "5ed069102d254d405a61b512c9708a40c046313d",
+   "byte": 28449283,
+   "classe": "(c) STATO BINARIO"
+  },
+  {
+   "file": "csv/_test_fork/_fin_A/scena_000060.pkl.gz",
+   "sha1": "dec5e3066e657afbea2733ff8040d89b3c6c4c8b",
+   "byte": 28520766,
+   "classe": "(c) STATO BINARIO"
+  },
+  {
+   "file": "csv/_test_fork/_g3_controllo/scena_000120.pkl.gz",
+   "sha1": "2beab0e969828efeb80f3bd6c0059730e93398e2",
+   "byte": 36203963,
+   "classe": "(c) STATO BINARIO"
+  },
+  {
+   "file": "csv/_test_fork/_g3_senza_bifase/letture_log.txt",
+   "sha1": "590db99e084a3b973552988bd7fcf5e3914c6495",
+   "byte": 3610,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {},
+   "e_uno_strumento": false,
+   "strumento_del_padre": null
+  },
+  {
+   "file": "csv/_test_fork/_g3_senza_bifase/scena_000120.pkl.gz",
+   "sha1": "44238f5a5e6369c0f18f06a9199316947c825600",
+   "byte": 32161289,
+   "classe": "(c) STATO BINARIO"
+  },
+  {
+   "file": "csv/_test_fork/_g3_senza_bifase/scena_000240.pkl.gz",
+   "sha1": "149a6505155bc11e43a0e2241db3bfa446ddfcfa",
+   "byte": 32157230,
+   "classe": "(c) STATO BINARIO"
+  },
+  {
+   "file": "csv/_test_fork/_g3_senza_bifase/scena_000360.pkl.gz",
+   "sha1": "4c645eb05c218058074f643f304f452734c59df7",
+   "byte": 32398581,
+   "classe": "(c) STATO BINARIO"
+  },
+  {
+   "file": "csv/_test_fork/_g3_senza_bifase/scena_000480.pkl.gz",
+   "sha1": "cebf0d8be42745db19d3d593f125aba51e7f09c7",
+   "byte": 32364732,
+   "classe": "(c) STATO BINARIO"
+  },
+  {
+   "file": "csv/_test_fork/_g3_senza_bifase/scena_000600.pkl.gz",
+   "sha1": "63b7e14afd6b0c48452542034e18affb23229f7d",
+   "byte": 32671523,
+   "classe": "(c) STATO BINARIO"
+  },
+  {
+   "file": "csv/_test_fork/_g4_corto/BILANCIO_d0.csv",
+   "sha1": "6148c4659b3fcf7f501e8f6a6552aaa62962ff11",
+   "byte": 2929,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {
+    "DOC": "percorso",
+    "STRUMENTI": "solo il nome",
+    "REFERTI": "solo il nome"
+   },
+   "e_uno_strumento": false,
+   "strumento_del_padre": null
+  },
+  {
+   "file": "csv/_test_fork/_g4_corto/BILANCIO_d0.txt",
+   "sha1": "c9e0a4b98240bf0270dd90075e25cc758f4934f5",
+   "byte": 3917,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {
+    "DOC": "percorso",
+    "STRUMENTI": "solo il nome",
+    "REFERTI": "solo il nome",
+    "INVENTARIO": "solo il nome"
+   },
+   "e_uno_strumento": false,
+   "strumento_del_padre": null
+  },
+  {
+   "file": "csv/_test_fork/_g4_corto/prog.csv",
+   "sha1": "00577387101573bebfcaa987502c21310ed95094",
+   "byte": 505,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {
+    "DOC": "percorso",
+    "STRUMENTI": "solo il nome",
+    "REFERTI": "percorso",
+    "INVENTARIO": "solo il nome",
+    "TASK_HISTORY": "solo il nome"
+   },
+   "e_uno_strumento": false,
+   "strumento_del_padre": null
+  },
+  {
+   "file": "csv/_test_fork/_g4_corto/scena_000012.pkl.gz",
+   "sha1": "b8b62340aad72117562a2a26c1ffeb7e31af6dff",
+   "byte": 35560750,
+   "classe": "(c) STATO BINARIO"
+  },
+  {
+   "file": "csv/_test_fork/_g4_riferimento/scena_000120.pkl.gz",
+   "sha1": "27d61add7ba9443d81b7a10e44a067646a2558d9",
+   "byte": 36203919,
+   "classe": "(c) STATO BINARIO"
+  },
+  {
+   "file": "csv/_test_fork/_g4_riferimento/scena_000240.pkl.gz",
+   "sha1": "4f383710980fd1c1eee57445b8898881586112bc",
+   "byte": 36366816,
+   "classe": "(c) STATO BINARIO"
+  },
+  {
+   "file": "csv/_test_fork/_g4_riferimento/scena_000360.pkl.gz",
+   "sha1": "42835cb0ebd8b491ccb6331dc8c722f6327638b6",
+   "byte": 36499350,
+   "classe": "(c) STATO BINARIO"
+  },
+  {
+   "file": "csv/_test_fork/_g4_riferimento/scena_000480.pkl.gz",
+   "sha1": "86a7ad82b2f6040b0b2fe56ab0ca71874ab82b52",
+   "byte": 36609328,
+   "classe": "(c) STATO BINARIO"
+  },
+  {
+   "file": "csv/_test_fork/_g4_riferimento/scena_000600.pkl.gz",
+   "sha1": "4eb3bde3cbd48cd219c619692e1e83a25f594e9e",
+   "byte": 36424166,
+   "classe": "(c) STATO BINARIO"
+  },
+  {
+   "file": "csv/_test_fork/_g4_senza_memmoto/scena_000120.pkl.gz",
+   "sha1": "49b155cbb227910689f2344fc723e8febd77d791",
+   "byte": 36073479,
+   "classe": "(c) STATO BINARIO"
+  },
+  {
+   "file": "csv/_test_fork/_g4_senza_memmoto/scena_000240.pkl.gz",
+   "sha1": "1a09976cadfae72918872bc100ee88a47ab583dd",
+   "byte": 36274403,
+   "classe": "(c) STATO BINARIO"
+  },
+  {
+   "file": "csv/_test_fork/_g4_senza_memmoto/scena_000360.pkl.gz",
+   "sha1": "ff32f6c87d641a8aff0e3aefa41098c54b9aca12",
+   "byte": 36395407,
+   "classe": "(c) STATO BINARIO"
+  },
+  {
+   "file": "csv/_test_fork/_g4_senza_memmoto/scena_000480.pkl.gz",
+   "sha1": "e8a9ca4b92d9213ba15e6ed2ceeb4f599fd4ad3d",
+   "byte": 36505303,
+   "classe": "(c) STATO BINARIO"
+  },
+  {
+   "file": "csv/_test_fork/_g4_senza_memmoto/scena_000600.pkl.gz",
+   "sha1": "f015725275b2dd6f76580bdf35c45622315b1bf5",
+   "byte": 36614553,
+   "classe": "(c) STATO BINARIO"
+  },
+  {
+   "file": "csv/_test_fork/_g4bis_inerzia/scena_000120.pkl.gz",
+   "sha1": "bd8bf296664627e3e027f63334c69df26353301c",
+   "byte": 36203962,
+   "classe": "(c) STATO BINARIO"
+  },
+  {
+   "file": "csv/_test_fork/_g4bis_senza_blocco/scena_000120.pkl.gz",
+   "sha1": "81f943fb5d1080f5c7226fb45c5c40d0b83ba4e6",
+   "byte": 36037952,
+   "classe": "(c) STATO BINARIO"
+  },
+  {
+   "file": "csv/_test_fork/_g4bis_senza_blocco/scena_000240.pkl.gz",
+   "sha1": "4376e461be28112afd0373c0e9cd061da6be5966",
+   "byte": 36280787,
+   "classe": "(c) STATO BINARIO"
+  },
+  {
+   "file": "csv/_test_fork/_g4bis_senza_blocco/scena_000360.pkl.gz",
+   "sha1": "f4b1e3a0680fad0ce3c1de662b3450f4dcd7142d",
+   "byte": 36363423,
+   "classe": "(c) STATO BINARIO"
+  },
+  {
+   "file": "csv/_test_fork/_g4bis_senza_blocco/scena_000480.pkl.gz",
+   "sha1": "ea06ebe42e5645d7d3200d37e8545a8230c97cc7",
+   "byte": 36382113,
+   "classe": "(c) STATO BINARIO"
+  },
+  {
+   "file": "csv/_test_fork/_g4bis_senza_blocco/scena_000600.pkl.gz",
+   "sha1": "0ca07c5f8fe41d22aca5c21aaab1b96525e213b2",
+   "byte": 36820169,
+   "classe": "(c) STATO BINARIO"
+  },
+  {
+   "file": "csv/_test_fork/_g6000/prog.csv",
+   "sha1": "7bbcc2a4f544ecda042dc573a7e70803547d1d02",
+   "byte": 5330,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {
+    "DOC": "percorso",
+    "STRUMENTI": "solo il nome",
+    "REFERTI": "solo il nome",
+    "INVENTARIO": "solo il nome",
+    "TASK_HISTORY": "solo il nome"
+   },
+   "e_uno_strumento": false,
+   "strumento_del_padre": null
+  },
+  {
+   "file": "csv/_test_fork/_limite_accoppiamento2/_tmp/_br_s11_corti.py",
+   "sha1": "b6672b032a916c35dc96681b6fbd67767199fe4e",
+   "byte": 5620,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_test_fork/_limite_accoppiamento2/_tmp/_br_s11_lunghi.py",
+   "sha1": "0df364827796bb4959fbf0d39e6c2310c44ebe31",
+   "byte": 5622,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_test_fork/_limite_accoppiamento2/_tmp/_br_s12_corti.py",
+   "sha1": "80d3946e2831bfc77bf77b1c3e8a0c27f3904698",
+   "byte": 5620,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_test_fork/_limite_accoppiamento2/_tmp/_br_s12_lunghi.py",
+   "sha1": "5e917464935da279bfb92758832d0189e58567a2",
+   "byte": 5622,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_test_fork/_limite_accoppiamento2/_tmp/s11_corti.json",
+   "sha1": "82c930e771531a573a2e657d53ad2a187001d555",
+   "byte": 2247,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_test_fork/_limite_accoppiamento2/_tmp/s11_lunghi.json",
+   "sha1": "7728a32c3913e61a891e3919f89f994608f2eaf0",
+   "byte": 2254,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_test_fork/_limite_accoppiamento2/_tmp/s12_corti.json",
+   "sha1": "688c37cbc2e8174e2624f067152594c90d89c806",
+   "byte": 2249,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_test_fork/_limite_accoppiamento2/_tmp/s12_lunghi.json",
+   "sha1": "c08bbfe727d8b96c1f63c4d164ab383b8dfd3dcb",
+   "byte": 2250,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_test_fork/_pilota6000scena/scena_000120.pkl.gz",
+   "sha1": "72a80a03b4890f22d1cb2875312b02c170278e5b",
+   "byte": 28674682,
+   "classe": "(c) STATO BINARIO"
+  },
+  {
+   "file": "csv/_test_fork/_pilota6000scena/scena_000240.pkl.gz",
+   "sha1": "aa0def7ac3d1e5d1d0d783b028c82edd084c4c95",
+   "byte": 29578022,
+   "classe": "(c) STATO BINARIO"
+  },
+  {
+   "file": "csv/_test_fork/_pilota6000scena/scena_000360.pkl.gz",
+   "sha1": "b4a6beb52fe33356e9126a3c84354223a76b4b73",
+   "byte": 29823769,
+   "classe": "(c) STATO BINARIO"
+  },
+  {
+   "file": "csv/_test_fork/_pilota_prova1/seme_11/log.txt",
+   "sha1": "2d99a3df24f66ccb9a1921b684300b61ddd964e1",
+   "byte": 9055,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {
+    "DOC": "solo il nome",
+    "STRUMENTI": "solo il nome"
+   },
+   "e_uno_strumento": false,
+   "strumento_del_padre": "csv/_test_fork/_pilota_prova1.py"
+  },
+  {
+   "file": "csv/_test_fork/_pilota_prova1/seme_12/log.txt",
+   "sha1": "6868ccdccf1d48a1c0cc67320b3e4f2b7dccb824",
+   "byte": 9055,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {
+    "DOC": "solo il nome",
+    "STRUMENTI": "solo il nome"
+   },
+   "e_uno_strumento": false,
+   "strumento_del_padre": "csv/_test_fork/_pilota_prova1.py"
+  },
+  {
+   "file": "csv/_test_fork/_pilota_prova1/seme_13/log.txt",
+   "sha1": "573d2fecacd0bf61eaa894f9a95372efb1d0fcf3",
+   "byte": 9055,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {
+    "DOC": "solo il nome",
+    "STRUMENTI": "solo il nome"
+   },
+   "e_uno_strumento": false,
+   "strumento_del_padre": "csv/_test_fork/_pilota_prova1.py"
+  },
+  {
+   "file": "csv/_test_fork/_pilota_prova1/seme_14/log.txt",
+   "sha1": "74184db8bdadbb848160036a7be543e5627ee45a",
+   "byte": 9055,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {
+    "DOC": "solo il nome",
+    "STRUMENTI": "solo il nome"
+   },
+   "e_uno_strumento": false,
+   "strumento_del_padre": "csv/_test_fork/_pilota_prova1.py"
+  },
+  {
+   "file": "csv/_test_fork/_pilota_sep_4p0/pilota_000300.pkl.gz",
+   "sha1": "2df73a866a5a3d4898ad5d76499bc29585a3f0a7",
+   "byte": 36396247,
+   "classe": "(c) STATO BINARIO"
+  },
+  {
+   "file": "csv/_test_fork/_pos_contro_d/_corsa.txt",
+   "sha1": "57a91580f6d7cf9c88a5c122fe381dbaf7c0da65",
+   "byte": 7948,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {
+    "DOC": "solo il nome",
+    "STRUMENTI": "solo il nome",
+    "REFERTI": "solo il nome",
+    "INVENTARIO": "solo il nome",
+    "TASK_HISTORY": "solo il nome"
+   },
+   "e_uno_strumento": false,
+   "strumento_del_padre": "csv/_test_fork/_pos_contro_d.py"
+  },
+  {
+   "file": "csv/_test_fork/_pos_contro_d/_pos_contro_d.json",
+   "sha1": "026cfcc2c3faa50684d894e58137baf27b17412b",
+   "byte": 5482,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {
+    "STRUMENTI": "percorso"
+   },
+   "e_uno_strumento": false,
+   "strumento_del_padre": "csv/_test_fork/_pos_contro_d.py"
+  },
+  {
+   "file": "csv/_test_fork/_rimisura_dxd/_tmp/_br_maturo.py",
+   "sha1": "0ba6b691498353bad4083a664be0154b67439f99",
+   "byte": 6185,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_test_fork/_rimisura_dxd/_tmp/_br_spento.py",
+   "sha1": "8e8de9140e904ed9ff5a9dbf2c1f885c0c1e7f77",
+   "byte": 6186,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_test_fork/_rimisura_dxd/_tmp/maturo.json",
+   "sha1": "dd120f3f4fa8812f85049aa40b5813a5652011c4",
+   "byte": 1448,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_test_fork/_rimisura_dxd/_tmp/spento.json",
+   "sha1": "65463d5fdf3ae74c815f96aaf7adc04a019ca1f0",
+   "byte": 1457,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_test_fork/_ritmo_taglio/scena_000120.pkl.gz",
+   "sha1": "37c9c5a87ea3f5f3f48fc9f95e9df6144167a74e",
+   "byte": 36203960,
+   "classe": "(c) STATO BINARIO"
+  },
+  {
+   "file": "csv/_test_fork/_run_K/prog.csv",
+   "sha1": "a565fc28c3cbc40b313fb57208e9ad94266760a1",
+   "byte": 1011,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {
+    "DOC": "percorso",
+    "STRUMENTI": "solo il nome",
+    "REFERTI": "solo il nome",
+    "INVENTARIO": "solo il nome",
+    "TASK_HISTORY": "solo il nome"
+   },
+   "e_uno_strumento": false,
+   "strumento_del_padre": null
+  },
+  {
+   "file": "csv/_test_fork/_run_K/scena_000060.pkl.gz",
+   "sha1": "0e41f2fb234527ce3b058444fe3a2d6a717aae90",
+   "byte": 36275871,
+   "classe": "(c) STATO BINARIO"
+  },
+  {
+   "file": "csv/_test_fork/_run_K/scena_000120.pkl.gz",
+   "sha1": "68cf823d90c2cc28d9eda7c3887eea7fb61646fe",
+   "byte": 36373992,
+   "classe": "(c) STATO BINARIO"
+  },
+  {
+   "file": "csv/_test_fork/_run_K/scena_000180.pkl.gz",
+   "sha1": "9e24266de7e2d43288ab4a88bfe2dc7ca8471081",
+   "byte": 36398284,
+   "classe": "(c) STATO BINARIO"
+  },
+  {
+   "file": "csv/_test_fork/_run_K/scena_000240.pkl.gz",
+   "sha1": "39723ae2625dda6da1a7b22c337c75995d841685",
+   "byte": 36221542,
+   "classe": "(c) STATO BINARIO"
+  },
+  {
+   "file": "csv/_test_fork/_run_K/scena_000300.pkl.gz",
+   "sha1": "335935cfa7183ae834e1fcb3ce076ad6a19c69be",
+   "byte": 36347585,
+   "classe": "(c) STATO BINARIO"
+  },
+  {
+   "file": "csv/_test_fork/_run_K_log.txt",
+   "sha1": "095c40d9b237775e8f83c577b02ea750490a0098",
+   "byte": 8030,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {},
+   "e_uno_strumento": false,
+   "strumento_del_padre": null
+  },
+  {
+   "file": "csv/_test_fork/_run_S/prog.csv",
+   "sha1": "ed90eb208a63d9c6756fda67e4fc4e323fb419d5",
+   "byte": 1001,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {
+    "DOC": "percorso",
+    "STRUMENTI": "solo il nome",
+    "REFERTI": "solo il nome",
+    "INVENTARIO": "solo il nome",
+    "TASK_HISTORY": "solo il nome"
+   },
+   "e_uno_strumento": false,
+   "strumento_del_padre": null
+  },
+  {
+   "file": "csv/_test_fork/_run_S/scena_000060.pkl.gz",
+   "sha1": "3c99f2355a7f7fe2ca60ce2f5c59c67d8efe8e4f",
+   "byte": 36081418,
+   "classe": "(c) STATO BINARIO"
+  },
+  {
+   "file": "csv/_test_fork/_run_S/scena_000120.pkl.gz",
+   "sha1": "3484fe091e4dc0a130a7f3631f951714d128751c",
+   "byte": 36029963,
+   "classe": "(c) STATO BINARIO"
+  },
+  {
+   "file": "csv/_test_fork/_run_S/scena_000180.pkl.gz",
+   "sha1": "ea7cc7601e4e94a18a52d6e1f106725a7443e373",
+   "byte": 36003528,
+   "classe": "(c) STATO BINARIO"
+  },
+  {
+   "file": "csv/_test_fork/_run_S/scena_000240.pkl.gz",
+   "sha1": "81c2f9aa8ab866bce27e587001bcd79e885c9f62",
+   "byte": 35939375,
+   "classe": "(c) STATO BINARIO"
+  },
+  {
+   "file": "csv/_test_fork/_run_S/scena_000300.pkl.gz",
+   "sha1": "da4e0790893e9728a80429731fdca1dfd0e2fa47",
+   "byte": 35905602,
+   "classe": "(c) STATO BINARIO"
+  },
+  {
+   "file": "csv/_test_fork/_run_S_log.txt",
+   "sha1": "8cbfa0441be68b9e55dafa2f53ee1075948d8453",
+   "byte": 8070,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {},
+   "e_uno_strumento": false,
+   "strumento_del_padre": null
+  },
+  {
+   "file": "csv/_test_fork/_rw_inerzia/scena_000120.pkl.gz",
+   "sha1": "ce2647aef7aa8b403a4a139b4788a55b2f833f46",
+   "byte": 36203921,
+   "classe": "(c) STATO BINARIO"
+  },
+  {
+   "file": "csv/_test_fork/_rw_on/scena_000120.pkl.gz",
+   "sha1": "4c66363f17766a2cfbe42b76714919ec036571c7",
+   "byte": 36217321,
+   "classe": "(c) STATO BINARIO"
+  },
+  {
+   "file": "csv/_test_fork/_scale_tw2/_tmp/_br_s11.py",
+   "sha1": "892381288ce18e51602bcbcf530b640a5b1f34d6",
+   "byte": 3093,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_test_fork/_scale_tw2/_tmp/_br_s12.py",
+   "sha1": "673a9871957e1a62ef0303fe9ac58953a4e2c051",
+   "byte": 3093,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_test_fork/_scale_tw2/_tmp/_br_s13.py",
+   "sha1": "c72b3f29573b0bbd0789486e9a0d0494123dc235",
+   "byte": 3093,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_test_fork/_scale_tw2/_tmp/_br_s14.py",
+   "sha1": "f4d14e8a21135710a70001ad62fc6804c2fecb23",
+   "byte": 3093,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_test_fork/_scale_tw2/_tmp/s11.json",
+   "sha1": "7ebfcec01cb1185992ce77adf1bccdb5dd39d68a",
+   "byte": 18688,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_test_fork/_scale_tw2/_tmp/s12.json",
+   "sha1": "131756249ca49fce670c9f4028da4ba483b3fe30",
+   "byte": 18522,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_test_fork/_scale_tw2/_tmp/s13.json",
+   "sha1": "259bd6d88edf76a217540c671a266e54739aaf99",
+   "byte": 18536,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_test_fork/_scale_tw2/_tmp/s14.json",
+   "sha1": "355ec0a2318ce3d2bb707c620541e29ceabc06c2",
+   "byte": 18646,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_test_fork/_scenaii_corto/CONFIGURAZIONE.json",
+   "sha1": "828061f9b7b54ddb9d281fcba794df87f05c7794",
+   "byte": 10616,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {
+    "DOC": "solo il nome",
+    "STRUMENTI": "solo il nome"
+   },
+   "e_uno_strumento": false,
+   "strumento_del_padre": null
+  },
+  {
+   "file": "csv/_test_fork/_scenaii_corto/CONFIGURAZIONE.txt",
+   "sha1": "b3d60bbdcbf635f9523363f2c70a469748d981d1",
+   "byte": 16577,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {
+    "DOC": "solo il nome",
+    "STRUMENTI": "solo il nome",
+    "REFERTI": "solo il nome",
+    "INVENTARIO": "solo il nome"
+   },
+   "e_uno_strumento": false,
+   "strumento_del_padre": null
+  },
+  {
+   "file": "csv/_test_fork/_scomposizione_figli/_tmp/_br_scomp_s11.py",
+   "sha1": "6a2b4bec58e78c658566fec11a1e68dfac180719",
+   "byte": 7431,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_test_fork/_scomposizione_figli/_tmp/_br_scomp_s12.py",
+   "sha1": "6a7d20d3f1519fc958fced7af4c4c69bdcd1c4b2",
+   "byte": 7431,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_test_fork/_scomposizione_figli/_tmp/scomp_s11.json",
+   "sha1": "81de83199c00bdb13a0f14470fa2645e11e12449",
+   "byte": 588384,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_test_fork/_scomposizione_figli/_tmp/scomp_s12.json",
+   "sha1": "63331b75e4b5fcbaca63ac0af2f5afbe72a074e9",
+   "byte": 608161,
+   "classe": "(b) STUB"
+  },
+  {
+   "file": "csv/_test_fork/_val600/scena_000120.pkl.gz",
+   "sha1": "5643f74dac8169176253a1d90b3bfc347dd758eb",
+   "byte": 36203963,
+   "classe": "(c) STATO BINARIO"
+  },
+  {
+   "file": "csv/_test_fork/_val600/scena_000240.pkl.gz",
+   "sha1": "e87b561849e5f6b87ebee140965e24dc533542e7",
+   "byte": 36366822,
+   "classe": "(c) STATO BINARIO"
+  },
+  {
+   "file": "csv/_test_fork/_val600/scena_000360.pkl.gz",
+   "sha1": "f9fc69d99e0e6dd4bd5420b8023f120e3a3679f4",
+   "byte": 36499329,
+   "classe": "(c) STATO BINARIO"
+  },
+  {
+   "file": "csv/_test_fork/_val600/scena_000480.pkl.gz",
+   "sha1": "34fe6bbfd4de38fc3f999b95b32ed9365c903009",
+   "byte": 36609371,
+   "classe": "(c) STATO BINARIO"
+  },
+  {
+   "file": "csv/_test_fork/_val600/scena_000600.pkl.gz",
+   "sha1": "676a7488f1c67e1469133f5ec515c9ce3f7b8d56",
+   "byte": 36424196,
+   "classe": "(c) STATO BINARIO"
+  },
+  {
+   "file": "csv/_test_fork/_video_g6000/frame_002.png",
+   "sha1": "1a30d82ce0da884eb878131df63454d8d1818069",
+   "byte": 188940,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {},
+   "e_uno_strumento": false,
+   "strumento_del_padre": null
+  },
+  {
+   "file": "csv/_test_fork/_video_g6000/frame_003.png",
+   "sha1": "9b90d80f1c8af9163f77688338f1cf10f680aebe",
+   "byte": 182082,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {},
+   "e_uno_strumento": false,
+   "strumento_del_padre": null
+  },
+  {
+   "file": "csv/_test_fork/_video_g6000/frame_004.png",
+   "sha1": "8b55a1196074e3e5faf52d4c0cd5f74c21116c5e",
+   "byte": 175976,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {},
+   "e_uno_strumento": false,
+   "strumento_del_padre": null
+  },
+  {
+   "file": "csv/_test_fork/_video_g6000/frame_005.png",
+   "sha1": "e29514f8196b01afbe2db0cd7500c9cab6db0542",
+   "byte": 180323,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {},
+   "e_uno_strumento": false,
+   "strumento_del_padre": null
+  },
+  {
+   "file": "csv/_test_fork/_video_g6000/frame_006.png",
+   "sha1": "3528c93de3b08e80050734ff19d7086386122cf2",
+   "byte": 191284,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {},
+   "e_uno_strumento": false,
+   "strumento_del_padre": null
+  },
+  {
+   "file": "csv/_test_fork/_video_g6000/frame_007.png",
+   "sha1": "d82af3d87cb55205f25fb6d93d0ad5e09a4a06c3",
+   "byte": 184244,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {},
+   "e_uno_strumento": false,
+   "strumento_del_padre": null
+  },
+  {
+   "file": "csv/_test_fork/_video_g6000/frame_008.png",
+   "sha1": "601a88c5b956147f499f997d7845a348a6631cfc",
+   "byte": 189823,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {},
+   "e_uno_strumento": false,
+   "strumento_del_padre": null
+  },
+  {
+   "file": "csv/_test_fork/_video_g6000/frame_009.png",
+   "sha1": "428305e2090a38c5fdbc1b5473d125e2754afabd",
+   "byte": 178033,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {},
+   "e_uno_strumento": false,
+   "strumento_del_padre": null
+  },
+  {
+   "file": "csv/_test_fork/_video_g6000/frame_010.png",
+   "sha1": "9c51ad56d33072fbdeb9933d18ae0b80f18e43a5",
+   "byte": 192685,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {},
+   "e_uno_strumento": false,
+   "strumento_del_padre": null
+  },
+  {
+   "file": "csv/_test_fork/_video_g6000/frame_012.png",
+   "sha1": "12c4d7db7183259cd4d5aa022d05ff7f16510883",
+   "byte": 194073,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {},
+   "e_uno_strumento": false,
+   "strumento_del_padre": null
+  },
+  {
+   "file": "csv/_test_fork/_video_g6000/frame_013.png",
+   "sha1": "53d0633300dec3dd42503dbbe2d86c66edad08aa",
+   "byte": 193906,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {},
+   "e_uno_strumento": false,
+   "strumento_del_padre": null
+  },
+  {
+   "file": "csv/_test_fork/_video_g6000/frame_014.png",
+   "sha1": "d90a9d58652b06e6059e942f4a60836e85ccb890",
+   "byte": 200877,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {},
+   "e_uno_strumento": false,
+   "strumento_del_padre": null
+  },
+  {
+   "file": "csv/_test_fork/_video_g6000/frame_015.png",
+   "sha1": "e985463fb828d1685d7614729c32c4e0ecd73dfd",
+   "byte": 204204,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {},
+   "e_uno_strumento": false,
+   "strumento_del_padre": null
+  },
+  {
+   "file": "csv/_test_fork/_video_g6000/frame_016.png",
+   "sha1": "138552b4b24b6e5aea5037f0a9bcb86641a59e3a",
+   "byte": 207365,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {},
+   "e_uno_strumento": false,
+   "strumento_del_padre": null
+  },
+  {
+   "file": "csv/_test_fork/_video_g6000/frame_017.png",
+   "sha1": "9a60343efa71c5d9cfc11e38756a13875362fb4d",
+   "byte": 203465,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {},
+   "e_uno_strumento": false,
+   "strumento_del_padre": null
+  },
+  {
+   "file": "csv/_test_fork/_video_g6000/frame_018.png",
+   "sha1": "da9b0bf900d760966a4c5b11fa0c6bb048f208fb",
+   "byte": 202283,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {},
+   "e_uno_strumento": false,
+   "strumento_del_padre": null
+  },
+  {
+   "file": "csv/_test_fork/_video_g6000/frame_019.png",
+   "sha1": "5393a9839132b809685a45e49b88cc8f74cd4cf0",
+   "byte": 207688,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {},
+   "e_uno_strumento": false,
+   "strumento_del_padre": null
+  },
+  {
+   "file": "csv/_test_fork/_video_g6000/frame_020.png",
+   "sha1": "ec85258d193559722977a5ba5bd3e7e377c60f76",
+   "byte": 209681,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {},
+   "e_uno_strumento": false,
+   "strumento_del_padre": null
+  },
+  {
+   "file": "csv/_test_fork/_video_g6000/frame_021.png",
+   "sha1": "1b9ca42609b03f0ee1e5e1fd09dd98e5a4b3fe22",
+   "byte": 207717,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {},
+   "e_uno_strumento": false,
+   "strumento_del_padre": null
+  },
+  {
+   "file": "csv/_test_fork/_video_g6000/frame_022.png",
+   "sha1": "603fe03a32b89a5cdf40579fba4757de02eecc7c",
+   "byte": 209990,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {},
+   "e_uno_strumento": false,
+   "strumento_del_padre": null
+  },
+  {
+   "file": "csv/_test_fork/_video_g6000/frame_023.png",
+   "sha1": "8c25c8f3631f5f7c08639091af64ac52ee226bec",
+   "byte": 214428,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {},
+   "e_uno_strumento": false,
+   "strumento_del_padre": null
+  },
+  {
+   "file": "csv/_test_fork/_video_g6000/frame_024.png",
+   "sha1": "f15a0aba4e5e6eec2ff1b591b9b3512e6dee6bab",
+   "byte": 215437,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {},
+   "e_uno_strumento": false,
+   "strumento_del_padre": null
+  },
+  {
+   "file": "csv/_test_fork/_video_g6000/frame_025.png",
+   "sha1": "e046c3d583a0dc499f5562fe43b6882ac07b95da",
+   "byte": 220613,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {},
+   "e_uno_strumento": false,
+   "strumento_del_padre": null
+  },
+  {
+   "file": "csv/_test_fork/_video_g6000/frame_026.png",
+   "sha1": "aad0d18cdc25acec4d07d455ff609dc5f16e428b",
+   "byte": 221186,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {},
+   "e_uno_strumento": false,
+   "strumento_del_padre": null
+  },
+  {
+   "file": "csv/_test_fork/_video_g6000/frame_027.png",
+   "sha1": "e2445e76049a1f212c95a00c33aebb4b30862f0f",
+   "byte": 223133,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {},
+   "e_uno_strumento": false,
+   "strumento_del_padre": null
+  },
+  {
+   "file": "csv/_test_fork/_video_g6000/frame_028.png",
+   "sha1": "696ec894a7a0982b29438d8fc8e3da7606b219cf",
+   "byte": 228725,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {},
+   "e_uno_strumento": false,
+   "strumento_del_padre": null
+  },
+  {
+   "file": "csv/_test_fork/_video_g6000/frame_029.png",
+   "sha1": "1ea4616e94592d40f095166fc89cc87ed2240e23",
+   "byte": 234184,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {},
+   "e_uno_strumento": false,
+   "strumento_del_padre": null
+  },
+  {
+   "file": "csv/_test_fork/_video_g6000/frame_030.png",
+   "sha1": "62f680aa707cfb7952ff71beee11d4d5f99d8174",
+   "byte": 233614,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {},
+   "e_uno_strumento": false,
+   "strumento_del_padre": null
+  },
+  {
+   "file": "csv/_test_fork/_video_g6000/frame_031.png",
+   "sha1": "72524afd9b522dc83a8ba67c76b1274223714c9b",
+   "byte": 237743,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {},
+   "e_uno_strumento": false,
+   "strumento_del_padre": null
+  },
+  {
+   "file": "csv/_test_fork/_video_g6000/frame_032.png",
+   "sha1": "91fcd1c76d1e3a0c4c36723ce9ebb8085c4f2c42",
+   "byte": 242692,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {},
+   "e_uno_strumento": false,
+   "strumento_del_padre": null
+  },
+  {
+   "file": "csv/_test_fork/_video_g6000/frame_033.png",
+   "sha1": "d1626aa4f67c38e2b5f0dffc8e7f359e86d64bc8",
+   "byte": 240944,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {},
+   "e_uno_strumento": false,
+   "strumento_del_padre": null
+  },
+  {
+   "file": "csv/_test_fork/_video_g6000/frame_034.png",
+   "sha1": "accbc40a9548543fd93acd14460a3ab70b374404",
+   "byte": 242440,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {},
+   "e_uno_strumento": false,
+   "strumento_del_padre": null
+  },
+  {
+   "file": "csv/_test_fork/_video_g6000/frame_035.png",
+   "sha1": "219a5972a0c62361311dfe28337916527904141d",
+   "byte": 242130,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {},
+   "e_uno_strumento": false,
+   "strumento_del_padre": null
+  },
+  {
+   "file": "csv/_test_fork/_video_g6000/frame_037.png",
+   "sha1": "d053321d5b8338df15813fe35665e520ef3b9f17",
+   "byte": 246866,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {},
+   "e_uno_strumento": false,
+   "strumento_del_padre": null
+  },
+  {
+   "file": "csv/_test_fork/_video_g6000/frame_038.png",
+   "sha1": "b82a59d585f428a5684fc362ca3e23b3c59a589c",
+   "byte": 249499,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {},
+   "e_uno_strumento": false,
+   "strumento_del_padre": null
+  },
+  {
+   "file": "csv/_test_fork/_video_g6000/frame_040.png",
+   "sha1": "2ceeedaf6aeced4197aabfaf7ce8bdea34b1788b",
+   "byte": 250844,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {},
+   "e_uno_strumento": false,
+   "strumento_del_padre": null
+  },
+  {
+   "file": "csv/_test_fork/_video_g6000/frame_041.png",
+   "sha1": "d1121992cc07c3d6243d63c291bc2b22e845db29",
+   "byte": 255259,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {},
+   "e_uno_strumento": false,
+   "strumento_del_padre": null
+  },
+  {
+   "file": "csv/_test_fork/_video_g6000/frame_043.png",
+   "sha1": "e51823f141d9c6587815710f9cf307dfe83a7cf3",
+   "byte": 256321,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {},
+   "e_uno_strumento": false,
+   "strumento_del_padre": null
+  },
+  {
+   "file": "csv/_test_fork/_video_g6000/frame_044.png",
+   "sha1": "8f98bfff3118d984da23b6c36f846898c3ae988f",
+   "byte": 257010,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {},
+   "e_uno_strumento": false,
+   "strumento_del_padre": null
+  }
+ ],
+ "binari_tracciati": [
+  {
+   "file": "csv/_seal_fork/_sig_cura2/inerte/ACCESO/scena_000120.pkl.gz",
+   "commit": "4df94a7"
+  },
+  {
+   "file": "csv/_seal_fork/_sig_cura2/inerte/SPENTO/scena_000120.pkl.gz",
+   "commit": "4df94a7"
+  }
+ ],
+ "gitignore_pkl": true,
+ "gitignore_pkl_gz": false
+}

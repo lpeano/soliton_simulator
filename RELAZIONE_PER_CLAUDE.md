@@ -4076,3 +4076,62 @@ di scena. ### **Un avviso di risorse, non un errore — e lo dico perché nel re
 precedente lo stderr vuoto era un dato che avevo citato.**
 
 ---
+
+## **I 484 FILE NON TRACCIATI: 57 omissioni vere su 484, e due `.pkl.gz` già committati**
+
+*(domanda di Luca, 2026-10-04. **Niente è stato cancellato e niente è stato ignorato:**
+nessun `git clean`, nessun `rm`, `.gitignore` non toccato.)*
+
+| classe | quanti | che cos'è |
+|---|--:|---|
+| **`(a)`** copia del simulatore | **32** | **rigenerabili**: lo sha1 dei byte grezzi coincide con un blob **storico** |
+| **`(b)`** stub sotto `_tmp/` | **212** | scarto |
+| **`(c)`** stato binario | **85** | non si committano *(decisione di Luca)* |
+| **`(d)`** candidato omissione | **155** | di cui **98 citati** e ### **57 citati da NESSUNO** |
+
+### 📌 **I 57 NON CITATI SONO IL NUMERO CHE CONTA**, e si leggono così: **39 sono `.png`**
+*(fotogrammi in `_test_fork/_video_g6000`)*, **9 `.json`**, **6 `.txt`** di log, e
+**3 `.py`**.
+
+### ⚠ **E I TRE `.py` SONO UN DIFETTO DEL MIO CLASSIFICATORE, non un'omissione:** sono
+`_sim_cbis_0/1/2.py` *(894 KB ciascuno)*, le copie **patchate** che il sigillo del `6b`
+ha appena creato. ### **Non coincidono con nessun blob storico — perché sono varianti che
+in git non sono MAI esistite — quindi la classe `(a)` non le riconosce**, pur essendo
+rigenerabili dalla patch. ### **Una copia PATCHATA è rigenerabile e non identica a niente:
+è una quinta classe che non ho previsto.**
+
+### ⛔ **L'INCOERENZA DEL `.gitignore` È CONFERMATA, E HA GIÀ AGITO.** `.gitignore` ha
+`*.pkl`, `*.npy`, `*.npz` ma **non** `*.pkl.gz` — un pattern combacia col **nome intero**,
+e `x.pkl.gz` finisce in `.gz`. ### **Risultato: DUE `.pkl.gz` sono GIÀ TRACCIATI**, da
+`4df94a7`:
+
+```
+csv/_seal_fork/_sig_cura2/inerte/ACCESO/scena_000120.pkl.gz   4df94a7
+csv/_seal_fork/_sig_cura2/inerte/SPENTO/scena_000120.pkl.gz   4df94a7
+```
+
+### **Non è un'ipotesi sul futuro: la decisione «i `.pkl` non si committano» è già stata
+violata due volte, in silenzio, dalla regola che non copriva la forma compressa.**
+
+### **I `CONFIGURAZIONE` CHE AVEVI NOMINATO: ne trovo 24, e sono citati SOLO PER NOME**
+*(mai per percorso)* — i `.txt` compaiono per nome anche nell'**inventario**. ### **Se
+descrivono il comando che produce dei dati, per il par.6 sono LA PROVA e vanno
+committati.** ### ⛔ **Non li committo: il mandato dice che la decisione è di Luca**, e il
+referto porta l'elenco con il percorso di ciascuno.
+
+### **LA PROPOSTA, nel referto e DA NON APPLICARE**, con due avvertenze che la rendono
+non banale: `csv/**/_sim_*.py` ignorerebbe anche **una copia che qualcuno vuole committare
+accanto ai dati** *(par.7, stato 2)*, e `*.gz` in generale ignorerebbe **un referto
+compresso** — si aggiunge `*.pkl.gz`, che è la cosa che manca. ### **E il presidio AVVISA,
+non blocca:** un blocco fermerebbe ogni commit fatto mentre un run scrive i suoi output,
+che qui è la norma. ### ⚠ **Ma un avviso che nessuno legge è `A9`, quindi la forma la
+decidi tu.**
+
+### ✅ **E UN PUNTO TECNICO CHE SENZA DICHIARARLO AVREBBE SVUOTATO LA CLASSE `(a)`:** l'
+`oid` di git è lo sha1 di `blob <len>  + contenuto`, l'identità dei presidî è lo sha1 dei
+**byte grezzi**. ### **L'oid NON si può confrontare con un file sul disco:** le **206**
+versioni storiche del simulatore vanno tirate fuori e **ri-hashate**. Senza quel passo
+`(a)` sarebbe stata **vuota** — un `FALSO-ZERO` prodotto dal confondere due convenzioni
+*(par.2)*.
+
+---

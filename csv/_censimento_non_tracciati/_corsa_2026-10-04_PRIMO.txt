@@ -1,0 +1,549 @@
+====================================================================================================
+IL CENSIMENTO DEI FILE NON TRACCIATI -- e' tutto persistito come deve?
+====================================================================================================
+  strumento ... 862755b4
+  ### QUESTO STRUMENTO NON CANCELLA E NON IGNORA NIENTE: legge e conta.
+  ###   Le decisioni su (c) e (d) le prende Luca leggendo i numeri.
+
+  file non tracciati (`git status --porcelain --untracked-files=all`): 484
+  ### con `--untracked-files=all`, perche' senza quel flag git RIASSUME una
+  ###   cartella in UNA riga e il conto sarebbe sbagliato PER DIFETTO.
+
+  i blob STORICI di soliton_simulator.py ...
+    206 versioni distinte, ri-hashate dai BYTE GREZZI
+    ### I DUE HASH NON SONO LO STESSO NUMERO (par.2): l'`oid` di git e' lo
+    ###   sha1 di `blob <len>\0` + contenuto, l'identita' dei presidi e' lo
+    ###   sha1 dei byte GREZZI. ### L'oid NON si confronta con un file su disco.
+
+  i corpora in cui si cerca la citazione: DOC (5748 KB), INVENTARIO (270 KB), REFERTI (3074 KB), STRUMENTI (23845 KB), TASK_HISTORY (776 KB)
+
+----------------------------------------------------------------------------------------------------
+I CONTEGGI PER CLASSE
+  (a) COPIA-SIMULATORE         32
+  (b) STUB                    212
+  (c) STATO BINARIO            85
+  (d) CANDIDATO OMISSIONE     155
+  TOTALE                      484
+
+----------------------------------------------------------------------------------------------------
+LA CLASSE `(c)`: l'incoerenza del `.gitignore`, e i binari GIA' TRACCIATI
+  `.gitignore` contiene `*.pkl    `? True
+  `.gitignore` contiene `*.pkl.gz `? False
+  `.gitignore` contiene `*.npy    `? True
+  `.gitignore` contiene `*.npz    `? True
+  `.gitignore` contiene `*.gz     `? False
+  ### ⛔ L'INCOERENZA, e il mandato chiede di dichiararla: `*.pkl` NON copre
+  ###   `x.pkl.gz`. Un pattern di `.gitignore` combacia col NOME INTERO, e
+  ###   `x.pkl.gz` finisce in `.gz`, non in `.pkl`. ### Quindi i `.pkl` sono
+  ###   ignorati e i `.pkl.gz` NO, pur essendo la stessa cosa compressa.
+  binari GIA' TRACCIATI: 2
+    csv/_seal_fork/_sig_cura2/inerte/ACCESO/scena_000120.pkl.gz            4df94a7
+    csv/_seal_fork/_sig_cura2/inerte/SPENTO/scena_000120.pkl.gz            4df94a7
+
+----------------------------------------------------------------------------------------------------
+LA CLASSE `(d)` -- CANDIDATI OMISSIONE: la lista INTERA, 155 file
+  ### Per ciascuno: chi lo cita, se e' uno strumento, e se la sua cartella
+  ###   porta il nome di uno strumento committato (INDIZIO di <<e' l'uscita
+  ###   di quello strumento>>, NON una prova).
+
+  csv/_seal_fork/_c1_semina/c1_nuovo/CONFIGURAZIONE.json
+      10399 byte   non e' un .py
+      citato da: DOC (solo il nome), STRUMENTI (solo il nome)
+  csv/_seal_fork/_c1_semina/c1_vecchio/CONFIGURAZIONE.json
+      10409 byte   non e' un .py
+      citato da: DOC (solo il nome), STRUMENTI (solo il nome)
+  csv/_seal_fork/_c1_semina/collaudo_a/CONFIGURAZIONE.json
+      10406 byte   non e' un .py
+      citato da: DOC (solo il nome), STRUMENTI (solo il nome)
+  csv/_seal_fork/_c1_semina/collaudo_a/CONFIGURAZIONE.txt
+      15921 byte   non e' un .py
+      citato da: DOC (solo il nome), INVENTARIO (solo il nome), REFERTI (solo il nome), STRUMENTI (solo il nome)
+  csv/_seal_fork/_c1_semina/collaudo_b/CONFIGURAZIONE.json
+      10406 byte   non e' un .py
+      citato da: DOC (solo il nome), STRUMENTI (solo il nome)
+  csv/_seal_fork/_c1_semina/collaudo_b/CONFIGURAZIONE.txt
+      15921 byte   non e' un .py
+      citato da: DOC (solo il nome), INVENTARIO (solo il nome), REFERTI (solo il nome), STRUMENTI (solo il nome)
+  csv/_seal_fork/_c1_semina/d38_nuovo/CONFIGURAZIONE.json
+      10405 byte   non e' un .py
+      citato da: DOC (solo il nome), STRUMENTI (solo il nome)
+  csv/_seal_fork/_c1_semina/d38_vecchio/CONFIGURAZIONE.json
+      10415 byte   non e' un .py
+      citato da: DOC (solo il nome), STRUMENTI (solo il nome)
+  csv/_seal_fork/_c1_semina/driver/CONFIGURAZIONE.json
+      10381 byte   non e' un .py
+      citato da: DOC (solo il nome), STRUMENTI (solo il nome)
+  csv/_seal_fork/_c1_semina/driver/CONFIGURAZIONE.txt
+      15985 byte   non e' un .py
+      citato da: DOC (solo il nome), INVENTARIO (solo il nome), REFERTI (solo il nome), STRUMENTI (solo il nome)
+  csv/_seal_fork/_c1_semina/senza_scala_min_passo/CONFIGURAZIONE.json
+      10401 byte   non e' un .py
+      citato da: DOC (solo il nome), STRUMENTI (solo il nome)
+  csv/_seal_fork/_c1_semina/senza_scala_min_passo/CONFIGURAZIONE.txt
+      15921 byte   non e' un .py
+      citato da: DOC (solo il nome), INVENTARIO (solo il nome), REFERTI (solo il nome), STRUMENTI (solo il nome)
+  csv/_seal_fork/_sig_cura1/inerte/CONFIGURAZIONE.json
+      10499 byte   non e' un .py
+      citato da: DOC (solo il nome), STRUMENTI (solo il nome)
+  csv/_seal_fork/_sig_cura1/inerte/CONFIGURAZIONE.txt
+      15850 byte   non e' un .py
+      citato da: DOC (solo il nome), INVENTARIO (solo il nome), REFERTI (solo il nome), STRUMENTI (solo il nome)
+  csv/_seal_fork/_sig_cura2_strutturale/new_s11/_braccio.py
+      1642 byte   E' UNO STRUMENTO (.py)
+      citato da: DOC (solo il nome), INVENTARIO (solo il nome), STRUMENTI (solo il nome), TASK_HISTORY (solo il nome)
+  csv/_seal_fork/_sig_cura2_strutturale/new_s11/firme.json
+      6886 byte   non e' un .py
+      citato da: STRUMENTI (solo il nome)
+  csv/_seal_fork/_sig_cura2_strutturale/new_s12/_braccio.py
+      1642 byte   E' UNO STRUMENTO (.py)
+      citato da: DOC (solo il nome), INVENTARIO (solo il nome), STRUMENTI (solo il nome), TASK_HISTORY (solo il nome)
+  csv/_seal_fork/_sig_cura2_strutturale/new_s12/firme.json
+      6883 byte   non e' un .py
+      citato da: STRUMENTI (solo il nome)
+  csv/_seal_fork/_sig_cura2_strutturale/tag_off_s11/_braccio.py
+      1701 byte   E' UNO STRUMENTO (.py)
+      citato da: DOC (solo il nome), INVENTARIO (solo il nome), STRUMENTI (solo il nome), TASK_HISTORY (solo il nome)
+  csv/_seal_fork/_sig_cura2_strutturale/tag_off_s11/firme.json
+      7763 byte   non e' un .py
+      citato da: STRUMENTI (solo il nome)
+  csv/_seal_fork/_sig_cura2_strutturale/tag_on_s11/_braccio.py
+      1680 byte   E' UNO STRUMENTO (.py)
+      citato da: DOC (solo il nome), INVENTARIO (solo il nome), STRUMENTI (solo il nome), TASK_HISTORY (solo il nome)
+  csv/_seal_fork/_sig_cura2_strutturale/tag_on_s11/firme.json
+      6886 byte   non e' un .py
+      citato da: STRUMENTI (solo il nome)
+  csv/_seal_fork/_sig_cura2_strutturale/tag_on_s12/_braccio.py
+      1680 byte   E' UNO STRUMENTO (.py)
+      citato da: DOC (solo il nome), INVENTARIO (solo il nome), STRUMENTI (solo il nome), TASK_HISTORY (solo il nome)
+  csv/_seal_fork/_sig_cura2_strutturale/tag_on_s12/firme.json
+      6883 byte   non e' un .py
+      citato da: STRUMENTI (solo il nome)
+  csv/_seal_fork/_sig_d32_nomi/dopo/_braccio.py
+      1748 byte   E' UNO STRUMENTO (.py)
+      citato da: DOC (solo il nome), INVENTARIO (solo il nome), STRUMENTI (solo il nome), TASK_HISTORY (solo il nome)
+  csv/_seal_fork/_sig_d32_nomi/dopo/firme.json
+      6892 byte   non e' un .py
+      citato da: STRUMENTI (solo il nome)
+  csv/_seal_fork/_sig_d32_nomi/prima/_braccio.py
+      1774 byte   E' UNO STRUMENTO (.py)
+      citato da: DOC (solo il nome), INVENTARIO (solo il nome), STRUMENTI (solo il nome), TASK_HISTORY (solo il nome)
+  csv/_seal_fork/_sig_d32_nomi/prima/firme.json
+      6892 byte   non e' un .py
+      citato da: STRUMENTI (solo il nome)
+  csv/_seal_fork/_sig_e4lam/inerte/CONFIGURAZIONE.json
+      10498 byte   non e' un .py
+      citato da: DOC (solo il nome), STRUMENTI (solo il nome)
+  csv/_seal_fork/_sig_e4lam/inerte/CONFIGURAZIONE.txt
+      15933 byte   non e' un .py
+      citato da: DOC (solo il nome), INVENTARIO (solo il nome), REFERTI (solo il nome), STRUMENTI (solo il nome)
+  csv/_seal_fork/_sig_mem_moto_tutto/cap_HEBB.json
+      3005 byte   non e' un .py
+      citato da: ### NESSUNO -- e' il caso che il mandato chiama OMISSIONE
+  csv/_seal_fork/_sig_mem_moto_tutto/cap_OFF.json
+      4521 byte   non e' un .py
+      citato da: ### NESSUNO -- e' il caso che il mandato chiama OMISSIONE
+  csv/_seal_fork/_sig_mem_moto_tutto/cap_ON-bis.json
+      4923 byte   non e' un .py
+      citato da: ### NESSUNO -- e' il caso che il mandato chiama OMISSIONE
+  csv/_seal_fork/_sig_mem_moto_tutto/cap_ON.json
+      4919 byte   non e' un .py
+      citato da: ### NESSUNO -- e' il caso che il mandato chiama OMISSIONE
+  csv/_seal_fork/_sig_mem_moto_tutto/cap_SOLO-MEM.json
+      4644 byte   non e' un .py
+      citato da: ### NESSUNO -- e' il caso che il mandato chiama OMISSIONE
+  csv/_seal_fork/_sig_nascita_atomica/_corsa.txt
+      2115 byte   non e' un .py
+      citato da: DOC (solo il nome), INVENTARIO (solo il nome), REFERTI (solo il nome), STRUMENTI (solo il nome), TASK_HISTORY (solo il nome)
+  csv/_seal_fork/_sig_osservabile_p1/seme_11.json
+      1426 byte   non e' un .py
+      citato da: ### NESSUNO -- e' il caso che il mandato chiama OMISSIONE
+  csv/_seal_fork/_sig_osservabile_p1/seme_12.json
+      1430 byte   non e' un .py
+      citato da: ### NESSUNO -- e' il caso che il mandato chiama OMISSIONE
+  csv/_seal_fork/_sig_osservabile_p1/seme_13.json
+      1426 byte   non e' un .py
+      citato da: ### NESSUNO -- e' il caso che il mandato chiama OMISSIONE
+  csv/_seal_fork/_sig_osservabile_p1/seme_14.json
+      1428 byte   non e' un .py
+      citato da: ### NESSUNO -- e' il caso che il mandato chiama OMISSIONE
+  csv/_seal_fork/_sig_pozzo_d/dopo_off/_braccio.py
+      1557 byte   E' UNO STRUMENTO (.py)
+      citato da: DOC (solo il nome), INVENTARIO (solo il nome), STRUMENTI (solo il nome), TASK_HISTORY (solo il nome)
+  csv/_seal_fork/_sig_pozzo_d/dopo_off/firme.json
+      6839 byte   non e' un .py
+      citato da: STRUMENTI (solo il nome)
+  csv/_seal_fork/_sig_pozzo_d/prima/_braccio.py
+      1578 byte   E' UNO STRUMENTO (.py)
+      citato da: DOC (solo il nome), INVENTARIO (solo il nome), STRUMENTI (solo il nome), TASK_HISTORY (solo il nome)
+  csv/_seal_fork/_sig_pozzo_d/prima/firme.json
+      6839 byte   non e' un .py
+      citato da: STRUMENTI (solo il nome)
+  csv/_seal_fork/_sig_scena_ii/seme7a/CONFIGURAZIONE.json
+      10713 byte   non e' un .py
+      citato da: DOC (solo il nome), STRUMENTI (solo il nome)
+  csv/_seal_fork/_sig_scena_ii/seme7a/CONFIGURAZIONE.txt
+      16682 byte   non e' un .py
+      citato da: DOC (solo il nome), INVENTARIO (solo il nome), REFERTI (solo il nome), STRUMENTI (solo il nome)
+  csv/_seal_fork/_sig_scena_ii/seme7b/CONFIGURAZIONE.json
+      10713 byte   non e' un .py
+      citato da: DOC (solo il nome), STRUMENTI (solo il nome)
+  csv/_seal_fork/_sig_scena_ii/seme7b/CONFIGURAZIONE.txt
+      16682 byte   non e' un .py
+      citato da: DOC (solo il nome), INVENTARIO (solo il nome), REFERTI (solo il nome), STRUMENTI (solo il nome)
+  csv/_seal_fork/_sig_scena_ii/seme8/CONFIGURAZIONE.json
+      10712 byte   non e' un .py
+      citato da: DOC (solo il nome), STRUMENTI (solo il nome)
+  csv/_seal_fork/_sig_scena_ii/seme8/CONFIGURAZIONE.txt
+      16681 byte   non e' un .py
+      citato da: DOC (solo il nome), INVENTARIO (solo il nome), REFERTI (solo il nome), STRUMENTI (solo il nome)
+  csv/_seal_fork/_sigillo_frazione_t/_corsa.txt
+      4605 byte   non e' un .py   cartella di `csv/_seal_fork/_sigillo_frazione_t.py`
+      citato da: DOC (solo il nome), INVENTARIO (solo il nome), REFERTI (solo il nome), STRUMENTI (solo il nome), TASK_HISTORY (solo il nome)
+  csv/_seal_fork/_sigillo_frazione_t/_sigillo.json
+      2731 byte   non e' un .py   cartella di `csv/_seal_fork/_sigillo_frazione_t.py`
+      citato da: DOC (solo il nome), STRUMENTI (solo il nome), TASK_HISTORY (solo il nome)
+  csv/_seal_fork/_sigillo_frazione_t/_sim_fm_rovescio.py
+      891202 byte   E' UNO STRUMENTO (.py)   cartella di `csv/_seal_fork/_sigillo_frazione_t.py`
+      citato da: DOC (solo il nome), REFERTI (percorso), STRUMENTI (solo il nome), TASK_HISTORY (solo il nome)
+  csv/_seal_fork/_sigillo_frazione_t/_sim_let_dd.py
+      891168 byte   E' UNO STRUMENTO (.py)   cartella di `csv/_seal_fork/_sigillo_frazione_t.py`
+      citato da: REFERTI (percorso)
+  csv/_seal_fork/_sigillo_frazione_t/_sim_let_dh.py
+      891168 byte   E' UNO STRUMENTO (.py)   cartella di `csv/_seal_fork/_sigillo_frazione_t.py`
+      citato da: REFERTI (percorso)
+  csv/_seal_fork/_sigillo_frazione_t/_sim_let_fm.py
+      891185 byte   E' UNO STRUMENTO (.py)   cartella di `csv/_seal_fork/_sigillo_frazione_t.py`
+      citato da: REFERTI (percorso)
+  csv/_seal_fork/_sigillo_frazione_t/_sim_let_fm_bias.py
+      891185 byte   E' UNO STRUMENTO (.py)   cartella di `csv/_seal_fork/_sigillo_frazione_t.py`
+      citato da: REFERTI (percorso)
+  csv/_seal_fork/_sigillo_frazione_t/_sim_let_pos_div.py
+      891168 byte   E' UNO STRUMENTO (.py)   cartella di `csv/_seal_fork/_sigillo_frazione_t.py`
+      citato da: REFERTI (percorso)
+  csv/_seal_fork/_sigillo_frazione_t/_sim_let_pos_sch.py
+      891168 byte   E' UNO STRUMENTO (.py)   cartella di `csv/_seal_fork/_sigillo_frazione_t.py`
+      citato da: REFERTI (percorso)
+  csv/_seal_fork/_sigillo_frazione_t/_sim_pulita.py
+      891194 byte   E' UNO STRUMENTO (.py)   cartella di `csv/_seal_fork/_sigillo_frazione_t.py`
+      citato da: REFERTI (percorso), STRUMENTI (solo il nome)
+  csv/_seal_fork/_sigillo_frazione_t/_sim_t04.py
+      891194 byte   E' UNO STRUMENTO (.py)   cartella di `csv/_seal_fork/_sigillo_frazione_t.py`
+      citato da: REFERTI (percorso), STRUMENTI (solo il nome)
+  csv/_seal_fork/_sigillo_frazione_t/_sim_t04_md0.py
+      891194 byte   E' UNO STRUMENTO (.py)   cartella di `csv/_seal_fork/_sigillo_frazione_t.py`
+      citato da: DOC (solo il nome), REFERTI (percorso), STRUMENTI (solo il nome), TASK_HISTORY (solo il nome)
+  csv/_seal_fork/_sigillo_legge_2lam/_corsa.txt
+      15016 byte   non e' un .py   cartella di `csv/_seal_fork/_sigillo_legge_2lam.py`
+      citato da: DOC (solo il nome), INVENTARIO (solo il nome), REFERTI (solo il nome), STRUMENTI (solo il nome), TASK_HISTORY (solo il nome)
+  csv/_seal_fork/_sigillo_legge_2lam/_sigillo.json
+      67702 byte   non e' un .py   cartella di `csv/_seal_fork/_sigillo_legge_2lam.py`
+      citato da: DOC (solo il nome), STRUMENTI (solo il nome), TASK_HISTORY (solo il nome)
+  csv/_seal_fork/_sigillo_legge_2lam/_sim_cbis_0.py
+      894597 byte   E' UNO STRUMENTO (.py)   cartella di `csv/_seal_fork/_sigillo_legge_2lam.py`
+      citato da: ### NESSUNO -- e' il caso che il mandato chiama OMISSIONE
+  csv/_seal_fork/_sigillo_legge_2lam/_sim_cbis_1.py
+      894615 byte   E' UNO STRUMENTO (.py)   cartella di `csv/_seal_fork/_sigillo_legge_2lam.py`
+      citato da: ### NESSUNO -- e' il caso che il mandato chiama OMISSIONE
+  csv/_seal_fork/_sigillo_legge_2lam/_sim_cbis_2.py
+      894608 byte   E' UNO STRUMENTO (.py)   cartella di `csv/_seal_fork/_sigillo_legge_2lam.py`
+      citato da: ### NESSUNO -- e' il caso che il mandato chiama OMISSIONE
+  csv/_seal_fork/_sigillo_legge_2lam/_sim_t04.py
+      895184 byte   E' UNO STRUMENTO (.py)   cartella di `csv/_seal_fork/_sigillo_legge_2lam.py`
+      citato da: REFERTI (percorso), STRUMENTI (solo il nome)
+  csv/_seal_fork/_sigillo_perc_geom_derivata/_sim_D1.py
+      884664 byte   E' UNO STRUMENTO (.py)   cartella di `csv/_seal_fork/_sigillo_perc_geom_derivata.py`
+      citato da: REFERTI (percorso)
+  csv/_seal_fork/_sigillo_perc_geom_derivata/_sim_D2.py
+      884885 byte   E' UNO STRUMENTO (.py)   cartella di `csv/_seal_fork/_sigillo_perc_geom_derivata.py`
+      citato da: REFERTI (percorso)
+  csv/_seal_fork/_sigillo_perc_geom_derivata/_sim_E.py
+      885248 byte   E' UNO STRUMENTO (.py)   cartella di `csv/_seal_fork/_sigillo_perc_geom_derivata.py`
+      citato da: REFERTI (percorso)
+  csv/_seal_fork/_sigillo_perc_geom_derivata/_sim_solo_ordine.py
+      881590 byte   E' UNO STRUMENTO (.py)   cartella di `csv/_seal_fork/_sigillo_perc_geom_derivata.py`
+      citato da: REFERTI (percorso), STRUMENTI (solo il nome)
+  csv/_test_fork/_ab_A/prog.csv
+      5781 byte   non e' un .py
+      citato da: DOC (percorso), INVENTARIO (percorso), REFERTI (solo il nome), STRUMENTI (solo il nome), TASK_HISTORY (solo il nome)
+  csv/_test_fork/_ab_B/prog.csv
+      1168 byte   non e' un .py
+      citato da: DOC (percorso), INVENTARIO (percorso), REFERTI (percorso), STRUMENTI (solo il nome), TASK_HISTORY (solo il nome)
+  csv/_test_fork/_ab_C_solo_chicoop_FERMATO/prog.csv
+      2608 byte   non e' un .py
+      citato da: DOC (solo il nome), INVENTARIO (solo il nome), REFERTI (solo il nome), STRUMENTI (solo il nome), TASK_HISTORY (solo il nome)
+  csv/_test_fork/_ab_D/prog.csv
+      2684 byte   non e' un .py
+      citato da: DOC (percorso), INVENTARIO (solo il nome), REFERTI (percorso), STRUMENTI (solo il nome), TASK_HISTORY (solo il nome)
+  csv/_test_fork/_ab_D_log.txt
+      11323 byte   non e' un .py
+      citato da: STRUMENTI (solo il nome)
+  csv/_test_fork/_ab_pozzo_d/seme11_off/_braccio.py
+      1697 byte   E' UNO STRUMENTO (.py)   cartella di `csv/_test_fork/_ab_pozzo_d.py`
+      citato da: DOC (solo il nome), INVENTARIO (solo il nome), STRUMENTI (solo il nome), TASK_HISTORY (solo il nome)
+  csv/_test_fork/_ab_pozzo_d/seme11_off/misura.json
+      368 byte   non e' un .py   cartella di `csv/_test_fork/_ab_pozzo_d.py`
+      citato da: DOC (solo il nome), INVENTARIO (solo il nome), REFERTI (solo il nome), STRUMENTI (solo il nome), TASK_HISTORY (solo il nome)
+  csv/_test_fork/_ab_pozzo_d/seme11_on/_braccio.py
+      1694 byte   E' UNO STRUMENTO (.py)   cartella di `csv/_test_fork/_ab_pozzo_d.py`
+      citato da: DOC (solo il nome), INVENTARIO (solo il nome), STRUMENTI (solo il nome), TASK_HISTORY (solo il nome)
+  csv/_test_fork/_ab_pozzo_d/seme11_on/misura.json
+      365 byte   non e' un .py   cartella di `csv/_test_fork/_ab_pozzo_d.py`
+      citato da: DOC (solo il nome), INVENTARIO (solo il nome), REFERTI (solo il nome), STRUMENTI (solo il nome), TASK_HISTORY (solo il nome)
+  csv/_test_fork/_ab_pozzo_d/seme12_off/_braccio.py
+      1697 byte   E' UNO STRUMENTO (.py)   cartella di `csv/_test_fork/_ab_pozzo_d.py`
+      citato da: DOC (solo il nome), INVENTARIO (solo il nome), STRUMENTI (solo il nome), TASK_HISTORY (solo il nome)
+  csv/_test_fork/_ab_pozzo_d/seme12_off/misura.json
+      367 byte   non e' un .py   cartella di `csv/_test_fork/_ab_pozzo_d.py`
+      citato da: DOC (solo il nome), INVENTARIO (solo il nome), REFERTI (solo il nome), STRUMENTI (solo il nome), TASK_HISTORY (solo il nome)
+  csv/_test_fork/_ab_pozzo_d/seme12_on/_braccio.py
+      1694 byte   E' UNO STRUMENTO (.py)   cartella di `csv/_test_fork/_ab_pozzo_d.py`
+      citato da: DOC (solo il nome), INVENTARIO (solo il nome), STRUMENTI (solo il nome), TASK_HISTORY (solo il nome)
+  csv/_test_fork/_ab_pozzo_d/seme12_on/misura.json
+      365 byte   non e' un .py   cartella di `csv/_test_fork/_ab_pozzo_d.py`
+      citato da: DOC (solo il nome), INVENTARIO (solo il nome), REFERTI (solo il nome), STRUMENTI (solo il nome), TASK_HISTORY (solo il nome)
+  csv/_test_fork/_ab_pozzo_d/seme13_off/_braccio.py
+      1697 byte   E' UNO STRUMENTO (.py)   cartella di `csv/_test_fork/_ab_pozzo_d.py`
+      citato da: DOC (solo il nome), INVENTARIO (solo il nome), STRUMENTI (solo il nome), TASK_HISTORY (solo il nome)
+  csv/_test_fork/_ab_pozzo_d/seme13_off/misura.json
+      367 byte   non e' un .py   cartella di `csv/_test_fork/_ab_pozzo_d.py`
+      citato da: DOC (solo il nome), INVENTARIO (solo il nome), REFERTI (solo il nome), STRUMENTI (solo il nome), TASK_HISTORY (solo il nome)
+  csv/_test_fork/_ab_pozzo_d/seme13_on/_braccio.py
+      1694 byte   E' UNO STRUMENTO (.py)   cartella di `csv/_test_fork/_ab_pozzo_d.py`
+      citato da: DOC (solo il nome), INVENTARIO (solo il nome), STRUMENTI (solo il nome), TASK_HISTORY (solo il nome)
+  csv/_test_fork/_ab_pozzo_d/seme13_on/misura.json
+      365 byte   non e' un .py   cartella di `csv/_test_fork/_ab_pozzo_d.py`
+      citato da: DOC (solo il nome), INVENTARIO (solo il nome), REFERTI (solo il nome), STRUMENTI (solo il nome), TASK_HISTORY (solo il nome)
+  csv/_test_fork/_ab_pozzo_d/seme14_off/_braccio.py
+      1697 byte   E' UNO STRUMENTO (.py)   cartella di `csv/_test_fork/_ab_pozzo_d.py`
+      citato da: DOC (solo il nome), INVENTARIO (solo il nome), STRUMENTI (solo il nome), TASK_HISTORY (solo il nome)
+  csv/_test_fork/_ab_pozzo_d/seme14_off/misura.json
+      368 byte   non e' un .py   cartella di `csv/_test_fork/_ab_pozzo_d.py`
+      citato da: DOC (solo il nome), INVENTARIO (solo il nome), REFERTI (solo il nome), STRUMENTI (solo il nome), TASK_HISTORY (solo il nome)
+  csv/_test_fork/_ab_pozzo_d/seme14_on/_braccio.py
+      1694 byte   E' UNO STRUMENTO (.py)   cartella di `csv/_test_fork/_ab_pozzo_d.py`
+      citato da: DOC (solo il nome), INVENTARIO (solo il nome), STRUMENTI (solo il nome), TASK_HISTORY (solo il nome)
+  csv/_test_fork/_ab_pozzo_d/seme14_on/misura.json
+      367 byte   non e' un .py   cartella di `csv/_test_fork/_ab_pozzo_d.py`
+      citato da: DOC (solo il nome), INVENTARIO (solo il nome), REFERTI (solo il nome), STRUMENTI (solo il nome), TASK_HISTORY (solo il nome)
+  csv/_test_fork/_censimento_mitosi_2lam/_censimento.json
+      19083 byte   non e' un .py   cartella di `csv/_test_fork/_censimento_mitosi_2lam.py`
+      citato da: DOC (solo il nome), REFERTI (solo il nome), STRUMENTI (solo il nome), TASK_HISTORY (solo il nome)
+  csv/_test_fork/_censimento_mitosi_2lam/_corsa.txt
+      9465 byte   non e' un .py   cartella di `csv/_test_fork/_censimento_mitosi_2lam.py`
+      citato da: DOC (solo il nome), INVENTARIO (solo il nome), REFERTI (solo il nome), STRUMENTI (solo il nome), TASK_HISTORY (solo il nome)
+  csv/_test_fork/_diag_D/peq_dentro_log.txt
+      10977 byte   non e' un .py
+      citato da: ### NESSUNO -- e' il caso che il mandato chiama OMISSIONE
+  csv/_test_fork/_diag_D/rig1080_log.txt
+      18769 byte   non e' un .py
+      citato da: ### NESSUNO -- e' il caso che il mandato chiama OMISSIONE
+  csv/_test_fork/_diag_D/somma_d0_log.txt
+      14175 byte   non e' un .py
+      citato da: ### NESSUNO -- e' il caso che il mandato chiama OMISSIONE
+  csv/_test_fork/_diag_triangoli/DIAG_triangoli.txt
+      747 byte   non e' un .py   cartella di `csv/_test_fork/_diag_triangoli.py`
+      citato da: STRUMENTI (solo il nome)
+  csv/_test_fork/_g3_senza_bifase/letture_log.txt
+      3610 byte   non e' un .py
+      citato da: ### NESSUNO -- e' il caso che il mandato chiama OMISSIONE
+  csv/_test_fork/_g4_corto/BILANCIO_d0.csv
+      2929 byte   non e' un .py
+      citato da: DOC (percorso), REFERTI (solo il nome), STRUMENTI (solo il nome)
+  csv/_test_fork/_g4_corto/BILANCIO_d0.txt
+      3917 byte   non e' un .py
+      citato da: DOC (percorso), INVENTARIO (solo il nome), REFERTI (solo il nome), STRUMENTI (solo il nome)
+  csv/_test_fork/_g4_corto/prog.csv
+      505 byte   non e' un .py
+      citato da: DOC (percorso), INVENTARIO (solo il nome), REFERTI (percorso), STRUMENTI (solo il nome), TASK_HISTORY (solo il nome)
+  csv/_test_fork/_g6000/prog.csv
+      5330 byte   non e' un .py
+      citato da: DOC (percorso), INVENTARIO (solo il nome), REFERTI (solo il nome), STRUMENTI (solo il nome), TASK_HISTORY (solo il nome)
+  csv/_test_fork/_pilota_prova1/seme_11/log.txt
+      9055 byte   non e' un .py   cartella di `csv/_test_fork/_pilota_prova1.py`
+      citato da: DOC (solo il nome), STRUMENTI (solo il nome)
+  csv/_test_fork/_pilota_prova1/seme_12/log.txt
+      9055 byte   non e' un .py   cartella di `csv/_test_fork/_pilota_prova1.py`
+      citato da: DOC (solo il nome), STRUMENTI (solo il nome)
+  csv/_test_fork/_pilota_prova1/seme_13/log.txt
+      9055 byte   non e' un .py   cartella di `csv/_test_fork/_pilota_prova1.py`
+      citato da: DOC (solo il nome), STRUMENTI (solo il nome)
+  csv/_test_fork/_pilota_prova1/seme_14/log.txt
+      9055 byte   non e' un .py   cartella di `csv/_test_fork/_pilota_prova1.py`
+      citato da: DOC (solo il nome), STRUMENTI (solo il nome)
+  csv/_test_fork/_pos_contro_d/_corsa.txt
+      7948 byte   non e' un .py   cartella di `csv/_test_fork/_pos_contro_d.py`
+      citato da: DOC (solo il nome), INVENTARIO (solo il nome), REFERTI (solo il nome), STRUMENTI (solo il nome), TASK_HISTORY (solo il nome)
+  csv/_test_fork/_pos_contro_d/_pos_contro_d.json
+      5482 byte   non e' un .py   cartella di `csv/_test_fork/_pos_contro_d.py`
+      citato da: STRUMENTI (percorso)
+  csv/_test_fork/_run_K/prog.csv
+      1011 byte   non e' un .py
+      citato da: DOC (percorso), INVENTARIO (solo il nome), REFERTI (solo il nome), STRUMENTI (solo il nome), TASK_HISTORY (solo il nome)
+  csv/_test_fork/_run_K_log.txt
+      8030 byte   non e' un .py
+      citato da: ### NESSUNO -- e' il caso che il mandato chiama OMISSIONE
+  csv/_test_fork/_run_S/prog.csv
+      1001 byte   non e' un .py
+      citato da: DOC (percorso), INVENTARIO (solo il nome), REFERTI (solo il nome), STRUMENTI (solo il nome), TASK_HISTORY (solo il nome)
+  csv/_test_fork/_run_S_log.txt
+      8070 byte   non e' un .py
+      citato da: ### NESSUNO -- e' il caso che il mandato chiama OMISSIONE
+  csv/_test_fork/_scenaii_corto/CONFIGURAZIONE.json
+      10616 byte   non e' un .py
+      citato da: DOC (solo il nome), STRUMENTI (solo il nome)
+  csv/_test_fork/_scenaii_corto/CONFIGURAZIONE.txt
+      16577 byte   non e' un .py
+      citato da: DOC (solo il nome), INVENTARIO (solo il nome), REFERTI (solo il nome), STRUMENTI (solo il nome)
+  csv/_test_fork/_video_g6000/frame_002.png
+      188940 byte   non e' un .py
+      citato da: ### NESSUNO -- e' il caso che il mandato chiama OMISSIONE
+  csv/_test_fork/_video_g6000/frame_003.png
+      182082 byte   non e' un .py
+      citato da: ### NESSUNO -- e' il caso che il mandato chiama OMISSIONE
+  csv/_test_fork/_video_g6000/frame_004.png
+      175976 byte   non e' un .py
+      citato da: ### NESSUNO -- e' il caso che il mandato chiama OMISSIONE
+  csv/_test_fork/_video_g6000/frame_005.png
+      180323 byte   non e' un .py
+      citato da: ### NESSUNO -- e' il caso che il mandato chiama OMISSIONE
+  csv/_test_fork/_video_g6000/frame_006.png
+      191284 byte   non e' un .py
+      citato da: ### NESSUNO -- e' il caso che il mandato chiama OMISSIONE
+  csv/_test_fork/_video_g6000/frame_007.png
+      184244 byte   non e' un .py
+      citato da: ### NESSUNO -- e' il caso che il mandato chiama OMISSIONE
+  csv/_test_fork/_video_g6000/frame_008.png
+      189823 byte   non e' un .py
+      citato da: ### NESSUNO -- e' il caso che il mandato chiama OMISSIONE
+  csv/_test_fork/_video_g6000/frame_009.png
+      178033 byte   non e' un .py
+      citato da: ### NESSUNO -- e' il caso che il mandato chiama OMISSIONE
+  csv/_test_fork/_video_g6000/frame_010.png
+      192685 byte   non e' un .py
+      citato da: ### NESSUNO -- e' il caso che il mandato chiama OMISSIONE
+  csv/_test_fork/_video_g6000/frame_012.png
+      194073 byte   non e' un .py
+      citato da: ### NESSUNO -- e' il caso che il mandato chiama OMISSIONE
+  csv/_test_fork/_video_g6000/frame_013.png
+      193906 byte   non e' un .py
+      citato da: ### NESSUNO -- e' il caso che il mandato chiama OMISSIONE
+  csv/_test_fork/_video_g6000/frame_014.png
+      200877 byte   non e' un .py
+      citato da: ### NESSUNO -- e' il caso che il mandato chiama OMISSIONE
+  csv/_test_fork/_video_g6000/frame_015.png
+      204204 byte   non e' un .py
+      citato da: ### NESSUNO -- e' il caso che il mandato chiama OMISSIONE
+  csv/_test_fork/_video_g6000/frame_016.png
+      207365 byte   non e' un .py
+      citato da: ### NESSUNO -- e' il caso che il mandato chiama OMISSIONE
+  csv/_test_fork/_video_g6000/frame_017.png
+      203465 byte   non e' un .py
+      citato da: ### NESSUNO -- e' il caso che il mandato chiama OMISSIONE
+  csv/_test_fork/_video_g6000/frame_018.png
+      202283 byte   non e' un .py
+      citato da: ### NESSUNO -- e' il caso che il mandato chiama OMISSIONE
+  csv/_test_fork/_video_g6000/frame_019.png
+      207688 byte   non e' un .py
+      citato da: ### NESSUNO -- e' il caso che il mandato chiama OMISSIONE
+  csv/_test_fork/_video_g6000/frame_020.png
+      209681 byte   non e' un .py
+      citato da: ### NESSUNO -- e' il caso che il mandato chiama OMISSIONE
+  csv/_test_fork/_video_g6000/frame_021.png
+      207717 byte   non e' un .py
+      citato da: ### NESSUNO -- e' il caso che il mandato chiama OMISSIONE
+  csv/_test_fork/_video_g6000/frame_022.png
+      209990 byte   non e' un .py
+      citato da: ### NESSUNO -- e' il caso che il mandato chiama OMISSIONE
+  csv/_test_fork/_video_g6000/frame_023.png
+      214428 byte   non e' un .py
+      citato da: ### NESSUNO -- e' il caso che il mandato chiama OMISSIONE
+  csv/_test_fork/_video_g6000/frame_024.png
+      215437 byte   non e' un .py
+      citato da: ### NESSUNO -- e' il caso che il mandato chiama OMISSIONE
+  csv/_test_fork/_video_g6000/frame_025.png
+      220613 byte   non e' un .py
+      citato da: ### NESSUNO -- e' il caso che il mandato chiama OMISSIONE
+  csv/_test_fork/_video_g6000/frame_026.png
+      221186 byte   non e' un .py
+      citato da: ### NESSUNO -- e' il caso che il mandato chiama OMISSIONE
+  csv/_test_fork/_video_g6000/frame_027.png
+      223133 byte   non e' un .py
+      citato da: ### NESSUNO -- e' il caso che il mandato chiama OMISSIONE
+  csv/_test_fork/_video_g6000/frame_028.png
+      228725 byte   non e' un .py
+      citato da: ### NESSUNO -- e' il caso che il mandato chiama OMISSIONE
+  csv/_test_fork/_video_g6000/frame_029.png
+      234184 byte   non e' un .py
+      citato da: ### NESSUNO -- e' il caso che il mandato chiama OMISSIONE
+  csv/_test_fork/_video_g6000/frame_030.png
+      233614 byte   non e' un .py
+      citato da: ### NESSUNO -- e' il caso che il mandato chiama OMISSIONE
+  csv/_test_fork/_video_g6000/frame_031.png
+      237743 byte   non e' un .py
+      citato da: ### NESSUNO -- e' il caso che il mandato chiama OMISSIONE
+  csv/_test_fork/_video_g6000/frame_032.png
+      242692 byte   non e' un .py
+      citato da: ### NESSUNO -- e' il caso che il mandato chiama OMISSIONE
+  csv/_test_fork/_video_g6000/frame_033.png
+      240944 byte   non e' un .py
+      citato da: ### NESSUNO -- e' il caso che il mandato chiama OMISSIONE
+  csv/_test_fork/_video_g6000/frame_034.png
+      242440 byte   non e' un .py
+      citato da: ### NESSUNO -- e' il caso che il mandato chiama OMISSIONE
+  csv/_test_fork/_video_g6000/frame_035.png
+      242130 byte   non e' un .py
+      citato da: ### NESSUNO -- e' il caso che il mandato chiama OMISSIONE
+  csv/_test_fork/_video_g6000/frame_037.png
+      246866 byte   non e' un .py
+      citato da: ### NESSUNO -- e' il caso che il mandato chiama OMISSIONE
+  csv/_test_fork/_video_g6000/frame_038.png
+      249499 byte   non e' un .py
+      citato da: ### NESSUNO -- e' il caso che il mandato chiama OMISSIONE
+  csv/_test_fork/_video_g6000/frame_040.png
+      250844 byte   non e' un .py
+      citato da: ### NESSUNO -- e' il caso che il mandato chiama OMISSIONE
+  csv/_test_fork/_video_g6000/frame_041.png
+      255259 byte   non e' un .py
+      citato da: ### NESSUNO -- e' il caso che il mandato chiama OMISSIONE
+  csv/_test_fork/_video_g6000/frame_043.png
+      256321 byte   non e' un .py
+      citato da: ### NESSUNO -- e' il caso che il mandato chiama OMISSIONE
+  csv/_test_fork/_video_g6000/frame_044.png
+      257010 byte   non e' un .py
+      citato da: ### NESSUNO -- e' il caso che il mandato chiama OMISSIONE
+
+----------------------------------------------------------------------------------------------------
+LA PROPOSTA, DA NON APPLICARE -- la decide Luca
+  ### L'OBIETTIVO: che `non tracciato` significhi `DIMENTICATO`. Oggi non lo
+  ###   significa, perche' fra i non tracciati ci sono 32 copie rigenerabili e
+  ###   212 stub -- rumore che NASCONDE i 155 candidati veri.
+
+  LE REGOLE che renderebbero non tracciata SOLO la classe (d):
+      csv/**/_tmp/
+      csv/**/_sim_*.py
+      csv/**/_br_*.py
+      csv/**/_driver_*.py
+      *.pkl.gz
+      *.pickle
+  ### ⚠ E DUE AVVERTENZE, perche' una regola di `.gitignore` e' una LEGGE che
+  ###   agisce in silenzio:
+  ###   ① `csv/**/_sim_*.py` ignorerebbe anche una copia che qualcuno vuole
+  ###     committare ACCANTO AI DATI (par.7, stato 2): servirebbe un `!` per
+  ###     le copie che stanno accanto a un referto committato.
+  ###   ② `*.gz` NON va aggiunto in generale: ignorerebbe anche un referto
+  ###     compresso. Si aggiunge `*.pkl.gz`, che e' la cosa che manca.
+
+  IL PRESIDIO che impedirebbe il caso `_sonda_scherm` (uno strumento girato
+    fuori dal repo, col referto committato e lo strumento no):
+      un hook `pre-commit` che AVVISA se esistono file non tracciati e NON
+      ignorati sotto `csv/` o `doc/`, elencandoli.
+  ### ⚠ AVVISA, non blocca: un blocco fermerebbe ogni commit fatto mentre un
+  ###   run sta scrivendo i suoi output, che e' la norma qui. ### E un avviso
+  ###   che nessuno legge e' `A9` -- quindi la forma la decide Luca.
+
+====================================================================================================
+### IL RIEPILOGO
+###   484 non tracciati: 32 copie del simulatore (RIGENERABILI), 212 stub,
+###   85 binari di stato, 155 CANDIDATI OMISSIONE.
+###   NIENTE E' STATO CANCELLATO, NIENTE E' STATO IGNORATO.
+====================================================================================================
