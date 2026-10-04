@@ -118,6 +118,14 @@ def carica(nome, sim=None):
 #   in un secondo invece che a meta' run.
 GLOBALI = ("FRAZ_NASCITA", "MITOSI_DIR", "ANTIFASE_ADD", "REGIME", "KICK_TW",
            "PHI_CRIT", "COPPIA_MIT", "LAM")
+# ### ASIMMETRIE ATTESE PER COSTRUZIONE DELLO SCAMBIO, non per fisica.
+#   Gli archi nuovi si accoppiano per INSIEME degli estremi, e sotto lo scambio i
+#   due archi nuovi si scambiano ORIENTAMENTO: `i` e `j` ### **DEVONO** differire.
+# ### Contarle fra le asimmetriche gonfia il numero con una TAUTOLOGIA DEL METODO.
+#   Si riportano, marcate, e si tengono FUORI dal conto -- e il conto si da' nei
+#   due modi, perche' nasconderle sarebbe l'errore opposto.
+TAUTOLOGICHE = {("i", "archi nuovi"), ("j", "archi nuovi")}
+
 DELLA_RETE = ("_wphi", "_dphi", "mitosi", "decidi_divisione", "i", "j", "tw",
               "phi", "pos", "perc_chi", "d", "n", "rng")
 
@@ -475,24 +483,44 @@ def misura(S, net, a_cli, t_dichiarato, max_passi, voce):
     stampa("  %-28s %-10s %-12s %12s %10s" % ("grandezza", "dove", "esito",
                                               "scarto max", "diversi"))
     riga()
-    asim = []
+    asim, tauto = [], []
     for r in res:
         if "simmetrica" not in r:
             stampa("  %-28s %-10s %-12s" % (r["grandezza"][:28], r["dove"][:10],
                                             r.get("stato", "?")[:12]))
             continue
-        et = "SIMMETRICA" if r["simmetrica"] else "ASIMMETRICA"
-        if not r["simmetrica"]:
+        chiave = (r["grandezza"], r["dove"])
+        att = chiave in TAUTOLOGICHE
+        r["attesa_per_costruzione"] = bool(att)
+        if r["simmetrica"]:
+            et = "SIMMETRICA"
+        elif att:
+            et = "ASIM(ATTESA)"
+            tauto.append(r)
+        else:
+            et = "ASIMMETRICA"
             asim.append(r)
         stampa("  %-28s %-10s %-12s %12.5e %10d"
                % (r["grandezza"][:28], r["dove"][:10], et, r["scarto_max"],
                   r["elementi_diversi"]))
     riga()
     out["n_asimmetriche"] = len(asim)
+    out["n_tautologiche"] = len(tauto)
     out["asimmetriche"] = [{"grandezza": r["grandezza"], "dove": r["dove"],
                             "scarto_max": r["scarto_max"],
                             "elementi_diversi": r["elementi_diversi"]} for r in asim]
+    out["tautologiche"] = [{"grandezza": r["grandezza"], "dove": r["dove"],
+                            "scarto_max": r["scarto_max"]} for r in tauto]
     stampa("  ASIMMETRICHE: %d su %d grandezze confrontate" % (len(asim), len(res)))
+    stampa("  + %d ASIM(ATTESA): asimmetriche PER COSTRUZIONE dello scambio, non per"
+           % len(tauto))
+    stampa("    fisica -- gli archi sono accoppiati per INSIEME degli estremi, quindi")
+    stampa("    sotto lo scambio `i` e `j` DEVONO differire. ### Le riporto marcate e")
+    stampa("    FUORI dal conto: tenerle dentro gonfierebbe il numero con una tautologia")
+    stampa("    del mio metodo; nasconderle sarebbe l'errore opposto.")
+    if tauto:
+        stampa("    le tautologiche: %s"
+               % ", ".join("%s(%s)" % (r["grandezza"], r["dove"]) for r in tauto))
     out["stato"] = "fatto"
 
     # --- il confronto fra lo scarto MISURATO su phi e quello ATTESO dal conto
@@ -675,21 +703,58 @@ def collaudo(max_passi):
         trovato_pos = "pos" in nomi
         trovato_phi = "phi" in nomi
         stampa()
-        stampa("  `pos` ASIMMETRICA trovata: %s     `phi` (cioe' `fm`) asimmetrica: %s"
-               % (trovato_pos, trovato_phi))
-        buono = bool(trovato_pos and trovato_phi)
-        esiti.append((t, buono, sorted(nomi)))
-        stampa("  ### %s" % ("OK: lo strumento VEDE l'asimmetria indotta."
-                             if buono else
-                             "*** CIECO: a t=%r doveva trovare pos E phi asimmetriche. ***" % t))
+        # ### TRE ESITI, NON DUE, e la distinzione e' un `FALSO-UNO` evitato:
+        #   se `misura` non e' ARRIVATA a un confronto (nessun candidato entro
+        #   `max_passi`, generatore diverso, selezione non invariante), allora
+        #   l'insieme delle asimmetriche e' vuoto ### **per un motivo che non
+        #   parla della vista dello strumento.** Chiamarlo `CIECO` sarebbe un
+        #   verdetto negativo garantito da qualcosa che non c'entra.
+        arrivato = (r.get("stato") == "fatto")
+        if not arrivato:
+            esito = "INCONCLUSO"
+            stampa("  ### INCONCLUSO, e NON <<cieco>>: `misura` non e' arrivata a un")
+            stampa("      confronto (stato = %r). <<Nessuna asimmetria trovata>> e"
+                   % r.get("stato"))
+            stampa("      <<nessun evento da guardare>> NON sono la stessa cosa: la")
+            stampa("      seconda non dice niente su cio' che lo strumento VEDE.")
+            if r.get("stato") == "nessun candidato":
+                stampa("      CHE FARE: alzare il budget con --max-passi=N. A t=%r il" % t)
+                stampa("      cancello di A13 e' `%r*d >= LAM E %r*d >= LAM`, e il ramo" % (t, round(1 - t, 10)))
+                stampa("      piu' STRETTO sposta i candidati PIU' AVANTI del passo 42,")
+                stampa("      che e' misurato a 0.5.")
+        elif trovato_pos and trovato_phi:
+            esito = "OK"
+            stampa("  `pos` ASIMMETRICA: %s     `phi` (cioe' `fm`) ASIMMETRICA: %s"
+                   % (trovato_pos, trovato_phi))
+            stampa("  ### OK: lo strumento VEDE l'asimmetria indotta.")
+        else:
+            esito = "CIECO"
+            stampa("  `pos` ASIMMETRICA: %s     `phi` (cioe' `fm`) ASIMMETRICA: %s"
+                   % (trovato_pos, trovato_phi))
+            stampa("  *** CIECO: a t=%r il confronto E' AVVENUTO e doveva trovare" % t)
+            stampa("      `pos` E `phi` asimmetriche. Questo e' un fallimento vero. ***")
+        buono = (esito == "OK")
+        esiti.append((t, esito, sorted(nomi)))
     stampa()
     riga("=")
-    ok = all(b for _t, b, _n in esiti)
-    for t, b, nomi in esiti:
-        stampa("  t=%-4s  %s   asimmetriche trovate: %s"
-               % (t, "OK " if b else "CIECO", ", ".join(nomi[:10]) or "nessuna"))
-    stampa("  ### %s" % ("i due controlli passano: lo strumento NON e' cieco."
-                         if ok else "*** CONTROLLO FALLITO: FERMATI (lo dice il mandato). ***"))
+    ok = all(e == "OK" for _t, e, _n in esiti)
+    quanti_ok = sum(1 for _t, e, _n in esiti if e == "OK")
+    ciechi = [t for t, e, _n in esiti if e == "CIECO"]
+    inconcl = [t for t, e, _n in esiti if e == "INCONCLUSO"]
+    for t, e, nomi in esiti:
+        stampa("  t=%-5s %-11s asimmetriche trovate: %s"
+               % (t, e, ", ".join(nomi[:10]) or "nessuna"))
+    if ok:
+        stampa("  ### i %d controlli passano: lo strumento NON e' cieco." % len(esiti))
+    elif ciechi:
+        stampa("  *** CONTROLLO FALLITO su t=%s: FERMATI (lo dice il mandato). ***"
+               % ", ".join(str(x) for x in ciechi))
+    else:
+        stampa("  ### %d su %d OK, e %s INCONCLUSO (non cieco: nessun evento da"
+               % (quanti_ok, len(esiti), ", ".join(str(x) for x in inconcl)))
+        stampa("      guardare). ### UN CONTROLLO CHE PASSA E UNO INCONCLUSO NON SONO")
+        stampa("      DUE CONTROLLI: alzare --max-passi, oppure dichiarare che la prova")
+        stampa("      della vista poggia su UN valore solo -- e allora dirlo nel referto.")
     riga("=")
     return 0 if ok else 1
 
