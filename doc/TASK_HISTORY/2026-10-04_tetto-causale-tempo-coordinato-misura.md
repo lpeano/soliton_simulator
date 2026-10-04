@@ -206,3 +206,122 @@ non e' un'identita')*.
 *«uguale in algebra»* e *«uguale al bit»*. ### **Ieri il conto su `fm` era giusto in algebra e
 sbagliato in aritmetica di `8.9e-16`.** Qui l'affermazione *«`DT*0.5*(1+1)` e' `DT` al bit»*
 e' un'affermazione **sull'aritmetica**, e il controllo la **verifica** invece di assumerla.
+
+---
+
+## STATO AL 2026-10-04 23:00:38
+
+*(richiesta di stato di Luca. **Niente e' stato interrotto**: la corsa in volo non e'
+stata fermata ne' rilanciata, e **nessuno dei suoi file di uscita e' stato toccato**.)*
+
+### 1. I PROCESSI, letti DAL SISTEMA e non a memoria
+
+**`Get-CimInstance Win32_Process -Filter "Name='python.exe'"`** e **`tasklist /v`**
+*(da PowerShell: in Git Bash `/v` viene convertito in un percorso e il comando
+**fallisce**)*.
+
+| | |
+|---|---|
+| **PID** | **`30712`** |
+| **CommandLine** | `C:\Users\lpeano\AppData\Local\Programs\Python\Python313\python.exe -u csv/_test_fork/_tetto_causale_tempo.py --passi=150` |
+| **avvio** | `2026-10-04 22:54:46` |
+| **trascorso** | `352 s` *(CPU `284 s`)* alle `23:00:38` |
+| **file di uscita** | `<scratchpad>/run150.log` *(fuori dal repo: e' il log del processo)* |
+| sessione / memoria | `Console 3` / `629 320 K` |
+
+**Le ultime 5 righe del file di uscita** *(35 righe in tutto)*:
+
+```
+  c_sistema*DT = 0.0113137085     CS_M*DT = 0.0200000000
+
+========================================================================================
+IL RUN: 150 passi (il referto riporta anche il taglio a 72)
+========================================================================================
+```
+
+### ⚠ **IL PASSO RAGGIUNTO E' UNA STIMA, NON UNA LETTURA, e il perche' e' un limite
+### del MIO strumento:** non stampa nessun battito per passo *(accumula in `P` e scrive
+`_corsa.txt` **solo alla fine**)*. ### **Quindi il log non dice a che passo sia, e lo
+dichiaro invece di presentare una stima come una misura.**
+
+**IL CONTO DA CUI RICAVO LA STIMA:**
+
+| | |
+|---|---|
+| costruzione della scena | **`17.8 s`** *(misurato dalla sonda di fattibilita')* |
+| un passo pieno **senza** i ganci | **`2.74 s`** *(misurato dalla stessa sonda)* |
+| i ganci | **non misurati a parte.** `q3` chiama `np.median`, e il simulatore dichiara `0.0053 s` per una mediana su `471564` float: con ~10 chiamate per passo sono `~0.05 s`, piu' i confronti -> **stimo `+0.1 .. 0.3 s` per passo** |
+| ### e gli archi **CRESCONO** | i nodi nascono, quindi ### **i passi tardi costano PIU' dei primi**: una stima lineare **sovrastima** i passi fatti |
+
+`(352 - 17.8) / 2.9 ~ 115` · `(352 - 17.8) / 3.3 ~ 101`
+
+> ### **PASSO STIMATO: fra `100` e `115` su `150`.**
+> ### **FINE STIMATA: fra le `23:02` e le `23:04`** *(`~40` passi a `~3.2 s`)*.
+> ### ⚠ **E la stima e' un intervallo perche' il termine che non ho misurato -- il
+> costo dei ganci -- entra al denominatore.**
+
+### ✅ **E UNA VERIFICA CHE CONFERMA CHE LA CORSA NON HA ANCORA SCRITTO NIENTE:** i file
+di referto in `csv/_test_fork/_tetto_causale_tempo/` portano `22:51:50`, cioe' **la sonda
+a 2 passi di prima**; solo `_sim_misura_tetto.py` porta `22:54:46`, ### **l'istante di
+avvio della corsa, perche' lo strumento RIGENERA la copia patchata a ogni giro.**
+### **Quindi il referto che e' committato ora e' della SONDA, non della corsa.**
+
+### 2. LO STATO DEL LAVORO
+
+| | |
+|---|---|
+| **mandato** | `TETTO-CAUSALE-TEMPO-COORDINATO`, **passo (1): LA MISURA** |
+| **passo raggiunto** | task history committato · strumento committato **due volte** *(la seconda col controllo rifatto)* · **corsa a 150 passi IN VOLO** · referto **da scrivere** |
+| **ultimo commit pushato** | **`0cfb460`** -- *IL CONTROLLO ERA UN FALSO-UNO, e l'ha trovato il guardiano* |
+| **in sincronia con origin** | si' *(`## fork-su2...origin/fork-su2`, senza divergenze)* |
+
+**`git status --short` INTERO:**
+
+```
+(vuoto)
+```
+
+### ✅ **Niente e' fatto-e-non-committato.** L'unica cosa non committata e' **cio' che la
+corsa non ha ancora scritto.**
+
+### **IL PROSSIMO PASSO, e la condizione che lo sblocca**
+
+| | |
+|---|---|
+| **prossimo passo** | il **referto** della corsa, in un commit a se' *(par.5)* |
+| **condizione** | ### **che la corsa finisca** *(il guardiano di sfondo `bw36s4vlz` notifica all'uscita del processo)* |
+
+### ⛔ **E UNA CONDIZIONE CHE PUO' FERMARMI, fissata PRIMA di vedere i numeri:**
+`(A)` del controllo deve trovare **zero differenze** sugli archi confrontati. Se ne trova,
+**la misura su quei passi e' INVALIDA**: dichiaro **quanti** passi e **quali**, e mi fermo
+### **prima di trarre conclusioni**, come il mandato prescrive.
+
+### ⚠ **E UN ESITO POSSIBILE CHE NON E' UN FALLIMENTO, e lo scrivo ora per non
+### interpretarlo dopo:** se `r == 1` su **ogni** passo, allora `(A)` e `(B)` sono
+**vacui** -- `dt_e` e' costante e nessuna permutazione e' rilevabile -- e lo strumento
+esce con **`FERMO`** dichiarando **due fatti distinti**: `(i)` l'allineamento **non e'
+verificabile** su questa traiettoria, e `(ii)` i due tetti **coincidono** perche'
+`dt_e == DT`, cioe' per **`r` degenere e non per la legge**.
+### **Sono due cose, e andranno scritte entrambe.**
+
+### 3. I MANDATI IN CODA, ricevuti e NON ancora iniziati
+
+| | mandato | la prima riga |
+|---|---|---|
+| **1** | **`MEM-HEBB-VERSO`, passo (1)** | *«MANDATO: MEM-HEBB-VERSO, PASSO (1): DECISIONE REGISTRATA E MISURA. Il simulatore 0f060670 NON si tocca.»* |
+
+### ✅ **E l'ordine non l'ho scelto io: lo dice quel mandato stesso** -- *«Se il mandato
+TETTO-CAUSALE passo (1) e' in coda prima di questo, fallo prima: sono due commit
+separati, in ordine»* -- e coincide con `L-UN-PROMPT`.
+
+**Nessun altro mandato e' in attesa.** Le altre voci aperte *(`VELENO-ORIENTATO`,
+`CONTA-RIGHE`, `PIATTAFORMA-NON-TIMBRATA`, `INVENTARIO-SIGILLI-SENZA-COMMIT`)* sono
+**voci d'indice**, non mandati, e stanno sotto **congelamento dell'infrastruttura**.
+
+### 4. I DEBITI DI QUESTO STRUMENTO, in coda e NON curati *(congelamento)*
+
+1. ### **nessun battito per passo**: il log non dice a che passo sia una corsa, ed e'
+   la ragione per cui il punto 1 di questo stato e' una **stima**;
+2. il costo dei **ganci** non e' misurato a parte, quindi la stima ha un intervallo;
+3. le **tautologiche** non classificate nella parte 2 dello strumento del *calcio*
+   *(debito di ieri, non di questo)*.
