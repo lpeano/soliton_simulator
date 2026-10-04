@@ -819,3 +819,23 @@
 
 ---
 
+---
+
+## `decidi_divisione`
+
+*(voce nata il 2026-10-04 col commit `6b`. **Prima NON ESISTEVA**, ne' per questa
+funzione ne' per `MITOSI_2LAM` — verificato con `grep`: il par.0 dice che questo file si
+legge prima di toccare una funzione, e qui **non c'era niente da leggere**.)*
+
+| fatto | dove |
+|---|---|
+| **il cancello di `A13` alla nascita e' INCONDIZIONATO dal `6b`** | accanto alla soglia di densita', dentro `decidi_divisione` |
+| **`ok` prima del cancello E' il criterio di densita'** `0.5*(I[a]+I[b]) >= QMIN_M * median(peq)` | e per questo i tre contatori separati sono calcolabili: `~ok` e' *«rifiutato per densita'»* |
+| ### ⚠ **il primo candidato arriva al passo `74`** *(Windows, numpy 2.3.0, seme 11, col flag)* | ### **non al 42**: le scene da 72 passi NON portano statistica del cancello |
+| `_g_m2l_tot` **dal `6b` gira SEMPRE** | prima girava solo a flag acceso: ### **la sua presenza NON dice piu' niente sul flag**, dice che ci sono stati candidati |
+| la funzione **esce PRESTO** se non ci sono candidati | `if not len(c): return None, {...}` — **prima** della riga dei contatori, ed e' per questo che restano assenti nelle scene corte |
+
+### ⛔ **UNA TRAPPOLA, e l'ho pagata:** il piano diceva *«calo di `n` al 72»*. ### **Quella
+previsione vale SOLO SENZA il flag**: col flag il cancello c'e' gia', quindi non puo'
+cambiare niente. ### **E su questa piattaforma, col flag, al passo 72 non c'e' ancora
+nemmeno UN candidato.**

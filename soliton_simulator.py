@@ -454,7 +454,7 @@ CALORE_VETTORIALE = True   # calcio termico: True=vettoriale+chirale DI DEFAULT 
                            # eccitato, phivel firmato da perc_chi). False=scalare isotropo. --calore-scal per tornare scalare
                        # rispetto a frequenze locali (invarianza per riparametrizzazione). IN VERIFICA.
                        # False = costanti fisse (comportamento precedente). Reversibile.
-MITOSI_2LAM = False     # [CURA 5, 2026-09-25] `MITOSI_2LAM`: `A13` ALLA NASCITA. Approvata
+MITOSI_2LAM = False     # ⛔⛔ `MITOSI_2LAM` E' INERTE DAL COMMIT `6b` (2026-10-04): il
                         # da Luca.
                         # OFF di default: un interruttore alla volta (par.1).
                         #
@@ -3468,7 +3468,7 @@ POZZO_D = False             # [D02, 2026-09-27] NEL POZZO DEL GRAFO `L` VIENE DA
                         # lunghezze, e sono `D03` -- un altro fronte. Un flag che le
                         # cambiasse insieme misurerebbe due cose (par.1).
                         # A flag acceso `L = self.d[mask]`, e il PAVIMENTO `1e-9` NON SERVE
-                        # PIU': con `SEMINA_LAM` e `MITOSI_2LAM` si ha `d >= LAM`. ⚠ MA E'
+                        # PIU': con `SEMINA_LAM` si ha `d >= LAM` alla semina, e dal `6b` ANCHE alla divisione — ### **senza condizione sul flag**. ⚠ MA E'
                         # UNA MISURA, NON UN'INVARIANTE DEL CODICE (`D11`), quindi i casi
                         # `d <= 0` si CONTANO (`A8`) invece di assumerli impossibili
                         # (`A11`): `_pozzo_d_nonpos`, creato SOLO nel ramo acceso, cosi' la
@@ -8462,9 +8462,49 @@ class Rete:
         #   PROBABILITA', e `A13` non e' una probabilita'), **NON in `_nasce`** (la' si RIPARA, e
         #   la cura e' proprio togliere la riparazione).
         self._g_m2l_tot = getattr(self, "_g_m2l_tot", 0) + int(np.size(c))
-        if MITOSI_2LAM and len(c):
+        # ### IL CANCELLO E' INCONDIZIONATO DAL COMMIT `6b`: `A13` ALLA NASCITA E' LEGGE.
+        #   ### **Non c'e' piu' un `if MITOSI_2LAM`**: il comportamento <<senza il flag>>
+        #   e' ### **uscito dal sorgente** e sta in `csv/_archivio/_rami_off_cura2.py`,
+        #   e il flag resta ### **INERTE come `PAV_COM`** (decisione 3 di Luca: si
+        #   conserva tutto), dichiarato fra i `[flag-inerti]`.
+        #   ### ⛔ **E IL CONTO DELLE LEGGI VA IN DIMINUZIONE** (`9-ter`): prima c'erano
+        #   ### **DUE comportamenti** (col flag e senza), ora ce n'e' ### **UNO**.
+        #   ### ✅ **E TOGLIE UNA VIOLAZIONE DI `A14`:** senza il cancello gli archi
+        #   sotto `LAM` nascono comunque e ### **`_nasce` li ALZA** -- cioe' modifica una
+        #   lunghezza DOPO averla creata, che e' una ### **proiezione** e viola `A14`
+        #   ### **per costruzione, qualunque sia il valore.** ### **Un cancello non
+        #   modifica lo stato: RIFIUTA un evento.** Non e' un taglio, e' un
+        #   ### **NON-ACCADIMENTO**.
+        #   ### ⚠ **E NON LA TOGLIE DOVE NON GUARDA:** lo Schwinger continua a produrre
+        #   archi sotto `LAM` -- e' `SCHW-SOTTO-LAM`, registrata e NON curata qui.
+        if len(c):
             _dc = np.asarray(self.d, float)[c]
-            _conforme = _dc >= 2.0 * LAM
+            # ### I DUE TRONCONI, ENTRAMBI: il figlio nasce a `FRAZ_NASCITA * d` da
+            #   `a` e a `(1 - FRAZ_NASCITA) * d` da `b`, quindi ### **servono DUE
+            #   disuguaglianze e non una.** A `t = 0.5` coincidono, e la congiunzione
+            #   si riduce a `0.5*d >= LAM` -- che e' `d >= 2*LAM` ### **al bit**,
+            #   perche' moltiplicare per `0.5` e per `2.0` e' ### **esatto in
+            #   IEEE-754** (potenze di due: la mantissa non cambia). ### **Per questo
+            #   il braccio `A` del sigillo e' IDENTICO AL BYTE con il flag acceso.**
+            _sx = FRAZ_NASCITA * _dc >= LAM
+            _dx = (1.0 - FRAZ_NASCITA) * _dc >= LAM
+            _conforme = _sx & _dx
+            # ### I RIFIUTI SEPARATI PER CANCELLO, e serve: `negate` li MESCOLA, quindi
+            #   un rifiuto per densita' e uno per `LAM` erano ### **indistinguibili**.
+            #   ### **Tre contatori, e la somma dei tre e' il totale dei rifiutati.**
+            _no_dens = ~ok
+            _no_lam = ~_conforme
+            self._g_m2l_rif_solo_dens = getattr(self, "_g_m2l_rif_solo_dens", 0) + int(np.sum(_no_dens & ~_no_lam))
+            self._g_m2l_rif_solo_lam = getattr(self, "_g_m2l_rif_solo_lam", 0) + int(np.sum(~_no_dens & _no_lam))
+            self._g_m2l_rif_entrambi = getattr(self, "_g_m2l_rif_entrambi", 0) + int(np.sum(_no_dens & _no_lam))
+            # ### `|tw|` DEGLI ARCHI RIFIUTATI PER `LAM`: una DIAGNOSTICA per il `6c`,
+            #   non una legge. ### Si tiene la LISTA e non la somma, perche' il mandato
+            #   chiede la ### **MEDIANA** -- e una mediana non si ricostruisce da una
+            #   somma. ### ⚠ Cresce, ma i rifiuti sono pochi (2 per scena nella misura
+            #   del guardiano), e ### **non entra in nessun calcolo di fisica.**
+            if np.any(_no_lam):
+                _tws = np.abs(np.asarray(self.tw, float)[c][_no_lam])
+                self._g_m2l_tw_rif = (getattr(self, "_g_m2l_tw_rif", []) + [float(x) for x in _tws])
             self._g_m2l_negati = getattr(self, "_g_m2l_negati", 0) + int(np.sum(~_conforme))
             self._g_m2l_dmin = min(getattr(self, "_g_m2l_dmin", float("inf")),
                                    float(_dc.min()) if _dc.size else float("inf"))
@@ -8926,7 +8966,7 @@ class Rete:
             # [D02] LA LUNGHEZZA E' `self.d`, NON `pos`: e' la distanza REALE dell'arco
             #   (`A3-DISEGNO`, NON `A13`), cioe' quella che il docstring di questa funzione
             #   dichiara GIA'.
-            #   NESSUN PAVIMENTO: `d >= LAM` con `SEMINA_LAM`/`MITOSI_2LAM`. E poiche' e'
+            #   NESSUN PAVIMENTO: `d >= LAM` con `SEMINA_LAM`, e alla divisione ### **SEMPRE dal commit `6b`** (non piu' <<con `MITOSI_2LAM`>>: il flag e' INERTE). E poiche' e'
             #   una MISURA e non un'invariante, i `d <= 0` si CONTANO (`A8`) -- il
             #   contatore nasce QUI, cosi' a flag spento lo snapshot non cambia.
             L = self.d[mask]
@@ -10729,9 +10769,11 @@ def _applica_flag(a):
               "rampa usa `_tempo_luce_nodo` invece di TAU_A (che resta la sola vita media "
               "spinoriale).")
     MITOSI_2LAM = bool(getattr(a, "mitosi_2lam", False))       # [CURA 5]
-    if MITOSI_2LAM:
-        print("[cura5] MITOSI_2LAM ON: un arco si divide SOLO se `d >= 2 LAM` (`A13` alla "
-              "nascita). Lo Schwinger NON e' toccato.")
+    # ### L'AVVISO `[cura5]` E' TOLTO, e il motivo e' che DIREBBE IL FALSO: annunciava
+    #   *<<MITOSI_2LAM ON: un arco si divide SOLO se d >= 2 LAM>>* ### **come se fosse il
+    #   flag a deciderlo.** Dal `6b` la legge vale ### **sempre**, e il flag e'
+    #   ### **inerte**: l'annuncio lo dà ora il blocco `[flag-inerti]`, che e' il posto
+    #   dove questo repo dichiara i flag che non fanno niente (come `PAV_COM`).
     CONTRASTO_INTENSIVO = bool(getattr(a, "contrasto_intensivo", False))  # [INERZIA-1(C)]
     if CONTRASTO_INTENSIVO:
         print("[inerzia-1C] IL CONTRASTO E' PER VICINO: rho_s normalizzato sullo STESSO "
@@ -13011,6 +13053,12 @@ def _avvisa_leggi_in_uso():
         _inerti.append("L_CONSERVA: il suo ramo e' ARCHIVIATO in "
               "csv/_archivio/_l_conserva.py (era marcato <<ERRATA, NON usare>>: "
               "azzerava la precessione fisica reale). Il flag NON FA NIENTE.")
+    if MITOSI_2LAM:
+        _inerti.append("MITOSI_2LAM: il suo cancello e' diventato LEGGE INCONDIZIONATA "
+              "nel commit `6b` (2026-10-04), e il ramo <<senza il flag>> e' "
+              "ARCHIVIATO in csv/_archivio/_rami_off_cura2.py. Il flag NON FA "
+              "NIENTE: un arco si divide SOLO se FRAZ_NASCITA*d >= LAM E "
+              "(1-FRAZ_NASCITA)*d >= LAM, con o senza di lui.")
     if PAV_COM:
         _inerti.append("PAV_COM: il pavimento di d0 e' ARCHIVIATO in "
               "csv/_archivio/_pavimenti_morti.py. La garanzia sulle lunghezze e' LAM.")

@@ -3856,3 +3856,53 @@ conto delle leggi va **in diminuzione** *(due comportamenti → uno)*, che è `9
 risposta è **verificabile dal censimento**, non asserita.
 
 ---
+
+## **IL CODICE DEL 6b: il cancello diventa legge, e un numero del piano era sbagliato**
+
+Simulatore **`c18c9bf6` → `0f060670`**. Sei sostituzioni, ognuna con l'ancora contata e
+unica. Il ramo <<senza il flag>> e' **uscito dal sorgente** e sta in
+`csv/_archivio/_rami_off_cura2.py` **verbatim**, estratto dal blob **committato**
+*(`716b3c0`)* e non ribattuto a memoria.
+
+### ✅ **COLLAUDATO PRIMA DI COMMITTARE: 45 passi in lockstep col flag acceso, ZERO
+differenze.** E' la conferma del ragionamento scritto nel task history: a `t = 0.5` la
+congiunzione si riduce a `0.5*d >= LAM`, che e' `d >= 2*LAM` **al bit**.
+
+### ⛔ **E UN NUMERO DEL PIANO ERA SBAGLIATO, misurato e non supposto.** Il piano parlava
+del passo **42**; su questa piattaforma, **col flag**, il primo candidato alla divisione
+arriva al passo **`74`**:
+
+```
+passo 74   primo candidato          _g_m2l_tot = 1
+passo 100  7 candidati, 1 rifiutato per LAM, _g_m2l_dmin = 0.973
+           solo_dens = 0 · solo_lam = 1 · entrambi = 0   (somma = _g_m2l_negati = 1)
+```
+
+### 📌 **CONSEGUENZA SUL SIGILLO, e la scrivo ora perche' dopo sarebbe una scusa: le scene
+da 72 passi NON portano statistica del cancello.** I numeri del braccio `B3` devono venire
+da **`lunga`** *(150 passi)*. ### **Il guardiano, su Linux/numpy 2.5.3, misurava `11`
+candidati a 72 passi: e' esattamente la differenza di piattaforma di
+`ROBUSTEZZA-FISICA`** — e qui non e' un dettaglio di conteggio, ### **cambia quali scene
+possono rispondere alla domanda.**
+
+**I tre contatori separati funzionano**, e la somma torna: `negate` mescolava i rifiuti,
+ora un candidato scartato per densita' e uno scartato per `LAM` sono distinguibili.
+### ➕ **Piu' `_g_m2l_tw_rif`**, la lista di `|tw|` dei rifiutati per `LAM`: si tiene la
+**lista** e non la somma, perche' **una mediana non si ricostruisce da una somma**.
+
+### ⚠ **L'AVVISO `[cura5]` L'HO TOLTO, e il motivo e' che DIREBBE IL FALSO:** annunciava
+*«MITOSI_2LAM ON: un arco si divide SOLO se `d >= 2 LAM`»* **come se fosse il flag a
+deciderlo**. Dal `6b` la legge vale **sempre** e il flag e' **inerte**: l'annuncio lo da'
+il blocco `[flag-inerti]`, che e' il posto dove questo repo dichiara i flag che non fanno
+niente.
+
+### ✅ **E DUE DOCUMENTI NON LI HO TOCCATI, con il perche':** `doc/TABELLA_nascita.md` e
+`doc/CONTRATTO_nascita.md` restano come sono, perche' il `6b` cambia **la DECISIONE**
+*(`decidi_divisione`)* e **non una regola di nascita**. ### **E questo e' verificabile, non
+asserito: il censimento di `a7ef047` non elenca NESSUN sito `_rn_*`.**
+
+**Il presidio dei commenti dei flag resta a `23` guasti preesistenti, e nessuno su
+`MITOSI_2LAM`** — misurato prima e dopo. E `doc/FATTI_dal_codice.md` ha ora una voce
+`decidi_divisione`, che **non esisteva**.
+
+---

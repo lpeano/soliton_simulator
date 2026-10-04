@@ -581,6 +581,17 @@ contro un nullo di `1.4e-03` — **da `140` a `310` volte il suo valore sotto ip
 
 <!-- SCHEDA nome=gravita-bifase funzioni=pozzo_grafo,_nb_grav flag=GRAV_BIFASE,VIRIALE,LS_AZIM,PHI_CRIT,K_FRANGE,POZZO_D -->
 
+### **AGGIORNAMENTO del 2026-10-04, commit `6b`** *(questa scheda possiede
+`pozzo_grafo`)*: **il commento sul pavimento `1e-9` e' stato corretto.** Diceva che
+`d >= LAM` vale *«con `SEMINA_LAM`/`MITOSI_2LAM`»*, cioe' ### **sotto condizione di un
+flag**; dal `6b` alla divisione vale **sempre** e `MITOSI_2LAM` e' **inerte**.
+### ⚠ **NIENTE CAMBIA NELLA LEGGE DI QUESTA SCHEDA:** cambia solo una frase che
+### **asseriva la legge di un'altra** — e un commento che resta condizionale dopo la cura
+### **sarebbe scaduto il giorno stesso.** ### ✅ **E resta vero cio' che il pavimento
+proteggeva:** `d <= 0` si **CONTA** *(`_pozzo_d_nonpos`, `A8`)* invece di assumerlo
+impossibile *(`A11`)*.
+
+
 > ### ⛔ **NOTA DEL 2026-09-28 (`PSI-FLASH`): `_nb_grav` NON RIPIEGA PIU' IN SILENZIO.**
 > Quando `psi_spin` era piu' corta di `n` restituiva **`self._nb`** invece del Bloch **nativo**
 > del campo emesso: ### **un'ALTRA DIREZIONE, e la direzione entra nella GRAVITA'**.
@@ -777,6 +788,14 @@ moto)*. **Tira GIÙ, come tutti gli scrittori fisici.**
 ---
 
 <!-- SCHEDA nome=tempo-proprio funzioni=ritmo,_cli,_applica_flag flag=TAU_LOC,TEMPO_SEGNO,TEMPO_PROPRIO_ORIENTATO,RITMO_WRAP_2PI -->
+
+### **AGGIORNAMENTO del 2026-10-04, commit `6b`** *(questa scheda possiede
+`_applica_flag`)*: **l'avviso `[cura5]` e' stato TOLTO da `_applica_flag`.** Annunciava
+*«`MITOSI_2LAM` ON: un arco si divide SOLO se `d >= 2 LAM`»* ### **come se fosse il flag a
+deciderlo**; dal `6b` la legge vale **sempre** e il flag e' **inerte**, quindi quell'avviso
+### **direbbe il falso.** L'annuncio lo da' ora il blocco `[flag-inerti]`
+*(scheda `leggi-in-uso`)*. ### **La legge e' nella scheda `mitosi-schwinger`.**
+
 
 > **→ NOTA DEL 2026-09-29, e sta qui perche' questa scheda POSSIEDE `_cli` e `_applica_flag`:**
 > un flag nuovo, ### **`CONTROLLO_REGISTRO`** *(`--senza-controllo-registro`)*, si parsa in
@@ -1409,6 +1428,85 @@ casuali, e `6.08` è **peggio del caso**, cioè il segno che la statistica è sb
 > `fase-phi` non deve poter credere che la legge sia ancora quella.**
 
 <!-- SCHEDA nome=mitosi-schwinger funzioni=mitosi,decidi_divisione flag=MITOSI_DIR,ANTIFASE_ADD,COPPIA_MIT,PLAST_MIT,KICK_TW,REGIME,MITOSI_2LAM -->
+
+### ⛔ **AGGIORNAMENTO del 2026-10-04, commit `6b`: IL CANCELLO DI `A13` ALLA NASCITA E'
+DIVENTATO LEGGE INCONDIZIONATA, e `MITOSI_2LAM` E' UN FLAG INERTE.**
+
+## `A13-NASCITA-LEGGE` — **un arco non nasce piu' corto della lunghezza d'onda**
+
+*(commit `6b`, 2026-10-04. **Era `CURA 5` dietro il flag `MITOSI_2LAM`; ora e' LEGGE.**)*
+
+### **LA FORMA**
+
+```
+un arco si divide  <=>  FRAZ_NASCITA * d >= LAM   AND   (1 - FRAZ_NASCITA) * d >= LAM
+```
+
+**senza condizione sul flag**, dentro `decidi_divisione`, accanto alla soglia di densita'.
+
+### **LA DERIVAZIONE, e non e' una scelta**
+
+Il figlio nasce a **`FRAZ_NASCITA * d`** dal genitore `a` e a **`(1 - FRAZ_NASCITA) * d`**
+da `b`. ### **Quindi i tronconi sono DUE, e ciascuno deve rispettare `A13`**: un arco non
+nasce piu' corto della lunghezza d'onda. ### **Due tronconi, due disuguaglianze.** Non c'e'
+un numero da scegliere: `LAM` e' la scala della teoria e `FRAZ_NASCITA` esiste dal `6a`.
+
+### **PERCHE' SOSTITUISCE `d >= 2*LAM`, e perche' a `t = 0.5` non cambia NIENTE**
+
+A `FRAZ_NASCITA = 0.5` i due rami **coincidono** e la congiunzione si riduce a
+`0.5*d >= LAM`, che e' `d >= 2*LAM` ### **al bit** — moltiplicare per `0.5` e per `2.0` e'
+### **esatto in IEEE-754** *(potenze di due: la mantissa non cambia, cambia l'esponente)*.
+### ⚠ **Limite dichiarato:** vale per `d` **finito e normale**; `d` ha un pavimento a
+`0.05`, quindi il caso subnormale non si presenta — **ma e' una premessa sul dominio.**
+
+### ⛔ **E CON UNA FRAZIONE DIVERSA DA META' IL CANCELLO VECCHIO GUARDA LA GRANDEZZA
+SBAGLIATA:** a `t = 0.4` il troncone corto e' `0.4*d`, e `d >= 2*LAM` lo ammette anche
+quando `0.4*d < LAM`. ### **Era corretto solo perche' la frazione era implicita.**
+
+### **CHE COSA TOGLIE, ed e' il punto `A14`**
+
+Senza il cancello gli archi sotto `LAM` **nascono comunque** e **`_nasce` li ALZA** —
+cioe' **modifica una lunghezza dopo averla creata**. ### **Quella e' una PROIEZIONE, e
+viola `A14` per costruzione QUALUNQUE SIA IL VALORE del pavimento.** Un cancello invece
+**non modifica lo stato: rifiuta un evento.** ### **Non e' un taglio, e' un
+NON-ACCADIMENTO.**
+
+### ⚠ **E NON LO TOGLIE DOVE NON GUARDA: lo SCHWINGER resta scoperto**
+*(`SCHW-SOTTO-LAM`, `46` troncamenti nel referto `1927b45`)*. La lunghezza dei suoi due
+archi viene da **`pos`**, non da `d`, e il solo limite e' `np.maximum(..., 0.05)` — un
+pavimento assoluto, non `LAM`. ### **`A11` applicato, `A13` no. La cura la decide Luca.**
+
+### **IL CONTO DELLE LEGGI VA IN DIMINUZIONE** *(`9-ter`)*: prima **due** comportamenti
+*(col flag e senza)*, ora **uno**. Il ramo <<senza>> e' **archiviato** in
+`csv/_archivio/_rami_off_cura2.py`, e il flag resta **inerte come `PAV_COM`**
+*(decisione 3 di Luca: si conserva tutto)*.
+
+### **I CONTATORI, e perche' sono TRE invece di uno**
+
+`negate` **mescolava** i rifiuti: un candidato scartato per densita' e uno scartato per
+`LAM` erano **indistinguibili**. Ora: `_g_m2l_rif_solo_dens`, `_g_m2l_rif_solo_lam`,
+`_g_m2l_rif_entrambi`, e la **somma dei tre** e' il totale dei rifiutati.
+### ➕ **Piu' `_g_m2l_tw_rif`**, la lista di `|tw|` degli archi rifiutati per `LAM`: una
+**diagnostica per il `6c`**, non una legge — e si tiene la **lista** e non la somma perche'
+una **mediana** non si ricostruisce da una somma.
+
+### 📌 **UN NUMERO MISURATO CHE CORREGGE IL PIANO:** su questa piattaforma
+*(Windows, numpy 2.3.0, seme 11, con il flag)* il **primo candidato** alla divisione
+arriva al passo **`74`**, non al 42 — e al passo `100` i candidati sono `7`, con `1`
+rifiutato per `LAM` e `_g_m2l_dmin = 0.973`. ### ⚠ **Quindi le scene da 72 passi NON
+portano statistica del cancello**, e i numeri del braccio `B3` vengono da `lunga` *(150
+passi)*. ### **Il guardiano, su Linux/numpy 2.5.3, misurava `11` candidati a 72 passi: e'
+la stessa differenza di piattaforma di `ROBUSTEZZA-FISICA`.**
+
+### 📌 **E LA SCHEDA NUOVA STA QUI, non in coda al file, per una ragione di presidio:**
+`H-REG-R` mappa le sezioni **da un marcatore al successivo**, quindi una scheda appesa in
+fondo cadrebbe dentro la sezione dell'**ultima** scheda — e si leggerebbe come un
+aggiornamento a `registro-grandezze`, che non ha niente a che vedere.
+### ⚠ **E non le ho dato un marcatore PROPRIO**, perche' dichiarare
+`funzioni=decidi_divisione` creerebbe **due schede proprietarie della stessa funzione** e
+la mappa del hook diventerebbe ambigua. ### **Una legge nuova su una funzione che ha gia'
+la sua scheda si scrive DENTRO quella scheda.**
+
 
 ## ⭐ **E DAL `COMMIT 6a` CINQUE PUNTI DI `mitosi` LEGGONO `FRAZ_NASCITA`**
 
@@ -5006,6 +5104,15 @@ di `H-ETC-1` non vada letto come «8 problemi vivi»**.
 ---
 
 <!-- SCHEDA nome=leggi-in-uso funzioni=_applica_regime,_avvisa_leggi_in_uso flag=VERLET,REGIME -->
+
+### **AGGIORNAMENTO del 2026-10-04, commit `6b`** *(questa scheda possiede
+`_avvisa_leggi_in_uso`)*: **`MITOSI_2LAM` entra fra i `[flag-inerti]`**, come `PAV_COM`,
+`L_CONSERVA` e `SYNC_UPDATE`. La voce dice **dove e' finito il suo ramo**
+*(`csv/_archivio/_rami_off_cura2.py`)*, perche' ### **un flag che non fa niente e che
+qualcuno accende e' un'ASPETTATIVA TRADITA**, non un dettaglio.
+### ⚠ **E il flag RESTA, non si toglie** *(decisione 3 di Luca: si conserva tutto)*: il
+driver continua a passarlo. ### **La legge e' nella scheda `mitosi-schwinger`.**
+
 # ㉘ LE LEGGI IN USO — **`VERLET` e il `REGIME` deterministico**, e l'avviso che le sorveglia
 
 > ### 🚩 **E ORA AVVISA ANCHE SUI FLAG INERTI ACCESI** *(2026-09-28)*

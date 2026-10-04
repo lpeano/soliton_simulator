@@ -50,8 +50,9 @@ commit**: cosi' non se ne accumulano di invisibili.)*
 | `csv/_test_fork/_scomposizione_tratti.py|H-P5` | non costruisce nessuna scena e non carica il simulatore. Legge i `misura.json` di un |
 | `csv/_test_fork/_tratti_cammino.py|H-P5` | non costruisce nessuna scena e non carica il simulatore. Il `--collaudo` gira su |
 | `csv/_test_fork/_v1_ripetizione.py|H-P5` | confronta due `misura.json` gia' prodotti, ciascuno da un run che ha dichiarato la |
+| `csv/_test_fork/_verifica_flag_accesi.py|H-P5` | non importa il simulatore e non lo fa girare. LEGGE i referti committati e |
 | `csv/_test_fork/_video_scena.py|H-P5` | non costruisce nessuna scena e non carica il simulatore: legge i fotogrammi `.npz` |
 
 ```
-esenzioni dichiarate   46
+esenzioni dichiarate   47
 ```

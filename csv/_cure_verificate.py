@@ -141,9 +141,10 @@ CURE = [
      "`TAU_A/DT = 5000` passi per accendersi — con il peso d'arco a `5.76e-04` al passo `120`. "
      "E **separa i due ruoli di `TAU_A`**, che restava insieme vita media e tempo di accensione",
      "VERIFICATA-SPENTA *(default `False`, accesa dal driver)*"),
-    ("MITOSI_2LAM", "**`CURA 5`** `A13` ALLA NASCITA: un arco si divide solo se `d >= 2 LAM`",
+    ("MITOSI_2LAM", "**`CURA 5`** `A13` ALLA NASCITA → **LEGGE nel `6b`**: `t*d >= LAM` E `(1-t)*d >= LAM`",
      "`8/8`", "csv/_seal_fork/_sig_cura5/SIGILLO_cura5_a13nascita.txt",
-     "in **ogni** run del fork *(`--mitosi-2lam`)*",
+     "**LEGGE INCONDIZIONATA dal commit `6b`** (2026-10-04): il flag e' INERTE, e il ramo "
+     "<<senza>> e' ARCHIVIATO in `csv/_archivio/_rami_off_cura2.py`",
      "`_sm_lund_mitosi` da `3.5`-`4.0` a **`0.0` ESATTO**: la mitosi non fabbrica piu' lunghezza. "
      "E **toglie una legge** invece di aggiungerla (`STANDARD 10`): `_nasce` non ha piu' niente "
      "da fare su quel sito. Lo Schwinger **non** e' toccato (resta `A3`)",

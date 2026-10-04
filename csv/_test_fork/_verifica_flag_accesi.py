@@ -26,6 +26,11 @@ funziona. **Ma «funziona» va MISURATO, non dedotto**, ed è esattamente il pun
 **Sola lettura sui file già committati. Nessun run.**
 """
 import ast
+# ESENTE-H-P5: non importa il simulatore e non lo fa girare. LEGGE i referti committati e
+#   stampa una tabella, quindi non esiste <<la configurazione>> di questa corsa: la
+#   configurazione da dichiarare e quella dei referti che legge, e sta DENTRO di loro.
+#   ### Il presidio ha scattato oggi (2026-10-04) perche' il commit `6b` ha TOCCATO questo
+#   file -- non perche' il difetto sia nuovo. Lo dichiaro invece di aggirarlo.
 import io
 import os
 import re
@@ -74,10 +79,20 @@ PROVE = {
         (r"ramp\s*==\s*1.*4252\s+su\s+4252", "`ramp == 1` su tutti i nodi"),
         (r"ramp1_iniz|ramp_fine_p50\s+1\.000000", "`ramp` a 1 nel referto"),
     ],
+    # ### ⛔ DAL COMMIT `6b` (2026-10-04) `MITOSI_2LAM` E' UN FLAG INERTE, e la
+    #   domanda <<il flag era acceso?>> ### **non ha piu' una risposta che conti**:
+    #   il suo cancello e' diventato ### **LEGGE INCONDIZIONATA**, e il ramo
+    #   <<senza>> e' ARCHIVIATO in `csv/_archivio/_rami_off_cura2.py`.
+    #   ### ⚠ **LE SPIE RESTANO, ma cambiano significato:** `_g_m2l_tot` ora gira
+    #   ### **SEMPRE**, non <<solo a flag acceso>>, quindi la sua presenza NON dice
+    #   piu' niente sul flag -- dice che ### **ci sono stati candidati**.
+    #   ### **Tenerla con la vecchia didascalia sarebbe un commento scaduto.**
     "MITOSI_2LAM": [
-        (r"_g_m2l_tot", "il contatore `_g_m2l_tot` esiste (gira SOLO a flag acceso)"),
+        (r"_g_m2l_tot", "il contatore `_g_m2l_tot` esiste (dal `6b` gira SEMPRE: "
+         "la sua presenza dice che ci sono stati CANDIDATI, non che il flag era acceso)"),
         (r"negati\s+\d+", "`negati` (candidati rifiutati dalla condizione)"),
-        (r"trd_mitosi\s*\[0,\s*0\]", "`_sm_trd_mitosi == 0` nel braccio ON"),
+        (r"trd_mitosi\s*\[0,\s*0\]", "`_sm_trd_mitosi == 0`: dal `6b` atteso in "
+         "OGNI braccio, non solo in quello ON"),
     ],
 }
 
