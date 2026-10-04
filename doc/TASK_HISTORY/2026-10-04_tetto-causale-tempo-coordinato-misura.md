@@ -325,3 +325,57 @@ separati, in ordine»* -- e coincide con `L-UN-PROMPT`.
 2. il costo dei **ganci** non e' misurato a parte, quindi la stima ha un intervallo;
 3. le **tautologiche** non classificate nella parte 2 dello strumento del *calcio*
    *(debito di ieri, non di questo)*.
+
+---
+
+## TODO ALLA RIPRESA
+
+*(Fine serata del 2026-10-04, su ordine di Luca. Il passo (1) di questa voce e' CHIUSO:
+referto `doc/REFERTO_tetto_causale_tempo_2026-10-04.md`, in `eeb54be`.)*
+
+### 1. IL PROSSIMO PASSO
+
+> ### **`MEM-HEBB-VERSO`, passo (1)** — il mandato e' **messo al sicuro, verbatim**, in
+> ### **`doc/TASK_HISTORY/2026-10-04_mem-hebb-verso-misura.md`**, con in testa
+> ### `STATO: NON INIZIATO`. ### **Si riparte da quel file, non da questo.**
+
+**Nessun lavoro e' stato fatto su quel mandato**, e `LA STELLA POLARE` **non** e' scritta:
+si scrive **quando il lavoro parte**. ### **Scritta ora sarebbe una risposta data prima di
+aver letto il codice — la ricostruzione che il par.8 esiste per impedire.**
+
+### 2. DOVE SI E' FERMATO IL TETTO CAUSALE, e che cosa decide il passo (2)
+
+### ⛔ **IL `FERMO` E' QUELLO FISSATO PRIMA DI GIRARE:** `(A)` trova differenze in `83`
+passi su `150`, quindi su quei passi la misura e' **invalida** e **non ho tratto
+conclusioni di fisica**.
+
+**IL FATTO MISURATO da cui ripartire** *(e non e' un'ipotesi)*: le `166` verifiche con
+differenze sono **ESATTAMENTE** le `166` in cui un nodo e' **nato in quel passo**
+*(uguaglianza fra insiemi, `True`)*, e il primo passo con differenze e' il **`42`**,
+### **il passo della prima divisione.**
+
+### ⚠ **E L'IPOTESI, che resta DA VERIFICARE e non va presa per misurata:** che
+`_dt_e_ultimo` **non sia ri-allineato** dalla ristrutturazione degli archi che `mitosi` fa
+*(`keep` + append)*. ### **Chi riprende deve VERIFICARLA, non assumerla.**
+
+### 3. I DEBITI ANNOTATI DELLO STRUMENTO, in coda e NON curati *(congelamento)*
+
+| | il debito | perche' e' costato |
+|---|---|---|
+| **1** | ### **nessun battito per passo** | accumula in `P` e scrive solo alla fine, quindi ### **il log non dice a che passo sia una corsa**: la richiesta di stato di Luca ha dovuto accontentarsi di una **stima** *(`100`–`115` su `150`)* invece di una lettura |
+| **2** | **il costo dei ganci non e' misurato a parte** | e' il termine che non conosco al denominatore della stima di cui sopra: per questo l'ETA era un **intervallo** e non un numero |
+| **3** | i contatori `_g_cct_*` erano letti **alla voce 2** invece che alla **5** | **curato** in `0cfb460`, e lo annoto perche' la forma dell'errore e' *«leggere un cumulativo nel posto sbagliato»* |
+| **4** | `_ritmo_med_assente` **non e' fra i contatori registrati** | per questo l'attribuzione del passo `2` e' **di Luca, verificata nel codice** *(`:5267`)* e **non dalla mia misura** |
+
+### 4. LASCIATO A META': **niente**
+
+`git status --short` e' **vuoto**, nessun processo python del repo e' vivo, e ogni file
+prodotto e' committato. ### **L'unica cosa aperta e' il passo (2) di questa voce, che non
+era di questo mandato.**
+
+### ⚠ **E DUE MIEI ERRORI DI PROVENIENZA, dichiarati nel referto e ripetuti qui perche'
+### chi riprende li deve sapere:** in `0cfb460` ho committato un referto che cita lo
+strumento **`75189105`**, ### **un blob che il repo non ha** *(era l'uscita della sonda a
+2 passi, da uno stato intermedio)*; e nel messaggio di `0b3af63` ho attribuito al
+`_collaudo.txt` un `[TIMBRO]` che in realta' sta nello **stdout**.
+### **Il referto del passo (1) dichiara `19d08753`, `tracciato = True`, `dirty = False`.**
