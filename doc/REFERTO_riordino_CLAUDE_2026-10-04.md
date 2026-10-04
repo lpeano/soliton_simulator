@@ -4,14 +4,15 @@
 con i dettagli fuori, in una struttura che NON puo' creare loop»*.
 **Task history** *(committato PRIMA, par.8)*:
 `doc/TASK_HISTORY/2026-10-04_claude-md-indice-delle-regole.md`, in `f32f235`.
-**Base di confronto:** `da79cc1` — `CLAUDE.md` a **392** righe, **8** sotto il tetto di `H-RIGHE`.
+**Base di confronto:** `da79cc1` — `CLAUDE.md` a **391** righe, **NOVE** sotto il tetto
+di `H-RIGHE`.
 
 ## IL VERDETTO IN UNA RIGA
 
-> ### ✅ **392 → 282 righe (`-110`, il 28% in meno), 12 file di dettaglio, i DUE CONTROLLI
+> ### ✅ **391 → 281 righe (`-110`, il 28% in meno), 12 file di dettaglio, i DUE CONTROLLI
 > ### PASSANO, e nessuna regola persa: `titoli 15/15`, `punti 11/11`, `dichiarate 17 → 18`.**
 
-### ⚠ **E L'OBIETTIVO DI LUCA ERA «CIRCA 250»: 282 E' SOPRA.** Non ho tagliato per arrivare
+### ⚠ **E L'OBIETTIVO DI LUCA ERA «CIRCA 250»: 281 E' SOPRA.** Non ho tagliato per arrivare
 al numero, e il perche' sta nel par.5 di questo referto.
 
 ## 1. CHE COSA DICE OGGI LA STRUTTURA
@@ -19,7 +20,7 @@ al numero, e il perche' sta nel par.5 di questo referto.
 | | |
 |---|---|
 | **livello 1** | **`CLAUDE.md`** — **solo le regole**, una riga o un punto ciascuna, col **tetto a 400** |
-| **livello 2** | **`doc/REGOLE/par<N>.md`** — il **perche'**, i casi, le trappole: **12 file, 757 righe** |
+| **livello 2** | **`doc/REGOLE/par<N>.md`** — il **perche'**, i casi, le trappole: **12 file, 745 righe** |
 | **gli archi** | **12** in giu' *(un rimando per paragrafo)*, **12** in su *(tutti nell'intestazione)*, ### **ZERO fra due file di dettaglio** |
 
 > ### 📌 **UN SOLO SALTO, SEMPRE.** Da `CLAUDE.md` si arriva al dettaglio in **un** passo,
@@ -36,17 +37,17 @@ al numero, e il perche' sta nel par.5 di questo referto.
 
 --- LA CURVA, commit per commit -----------------------------------------------------------
   commit     che cosa e' uscito         righe    delta
-  da79cc1    PRIMA del riordino           392         
-  61b8e5f    lo strumento                 392       +0
-  885d9a5    par.12                       369      -23
-  dc08221    par.0 + par.4                341      -28
-  d1df098    par.6 + par.7                327      -14
-  829b4a5    par.9 + par.9-ter            310      -17
-  b5e5e99    par.2,3,5,8,11               282      -28
-  HEAD       (il commit di oggi)          282       +0
-  (disco)    oggi                         282       +0
+  da79cc1    PRIMA del riordino           391         
+  61b8e5f    lo strumento                 391       +0
+  885d9a5    par.12                       368      -23
+  dc08221    par.0 + par.4                340      -28
+  d1df098    par.6 + par.7                326      -14
+  829b4a5    par.9 + par.9-ter            309      -17
+  b5e5e99    par.2,3,5,8,11               281      -28
+  HEAD       (il commit di oggi)          281       +0
+  (disco)    oggi                         281       +0
 
-  TOTALE: 392 -> 282 righe, -110 (28% in meno). Tetto 400, obiettivo ~250.
+  TOTALE: 391 -> 281 righe, -110 (28% in meno). Tetto 400, obiettivo ~250.
 
 --- PARAGRAFO PER PARAGRAFO ---------------------------------------------------------------
   paragrafo                                   prima   dopo   delta
@@ -68,25 +69,25 @@ al numero, e il perche' sta nel par.5 di questo referto.
   (somma dei risparmi)                                        -110
 
 --- I FILE DI DETTAGLIO -------------------------------------------------------------------
-  par0.md          72 righe
-  par2.md          37 righe
-  par3.md          44 righe
-  par4.md          64 righe
-  par5.md          48 righe
-  par6.md          92 righe
-  par7.md          62 righe
-  par8.md          31 righe
-  par9.md          91 righe
-  par11.md         82 righe
-  par12.md         84 righe
-  par9ter.md       50 righe
-  TOTALE          757 righe in 12 file
-  media 63.1, il piu' lungo 92, il piu' corto 31
+  par0.md          71 righe
+  par2.md          36 righe
+  par3.md          43 righe
+  par4.md          63 righe
+  par5.md          47 righe
+  par6.md          91 righe
+  par7.md          61 righe
+  par8.md          30 righe
+  par9.md          90 righe
+  par11.md         81 righe
+  par12.md         83 righe
+  par9ter.md       49 righe
+  TOTALE          745 righe in 12 file
+  media 62.1, il piu' lungo 91, il piu' corto 30
 
 --- IL BILANCIO: dove sono andate le righe ------------------------------------------------
   righe uscite da CLAUDE.md                     110
-  righe nei file di dettaglio                   757
-  rapporto (dettaglio / uscite)                6.88x
+  righe nei file di dettaglio                   745
+  rapporto (dettaglio / uscite)                6.77x
   ### il dettaglio e' PIU' LUNGO di cio' che e' uscito: non e' una perdita,
       e' il testo che in CLAUDE.md era COMPRESSO e qui e' scritto per esteso.
 
@@ -98,13 +99,13 @@ al numero, e il perche' sta nel par.5 di questo referto.
 ============================================================================================
 ```
 
-### 📌 **IL NUMERO CHE SPIEGA IL LAVORO E' `6.88x`.** Sono uscite **110** righe da
-`CLAUDE.md`, e nei file di dettaglio ce ne sono **757**. ### **Non e' gonfiatura e non e'
+### 📌 **IL NUMERO CHE SPIEGA IL LAVORO E' `6.77x`.** Sono uscite **110** righe da
+`CLAUDE.md`, e nei file di dettaglio ce ne sono **745**. ### **Non e' gonfiatura e non e'
 invenzione:** quelle righe in `CLAUDE.md` erano **compresse** — una subordinata dentro una
 cella di tabella, un *«(vedi il caso …)»* fra parentesi — e nel secondo livello sono
 **scritte per esteso**, col caso che le ha generate e la data.
 ### **Il primo livello ha perso 110 righe di TESTO e ZERO regole; il secondo ne ha guadagnate
-757 di SPIEGAZIONE.**
+745 di SPIEGAZIONE.**
 
 ## 3. I DUE CONTROLLI, come Luca li ha chiesti
 
@@ -112,7 +113,7 @@ cella di tabella, un *«(vedi il caso …)»* fra parentesi — e nel secondo li
 ====================================================================================================
 LA STRUTTURA DELLE REGOLE -- i due controlli
 ====================================================================================================
-  CLAUDE.md: 282 righe (tetto 400, obiettivo ~250)
+  CLAUDE.md: 281 righe (tetto 400, obiettivo ~250)
 
 ----------------------------------------------------------------------------------------------------
 (a) CONSERVAZIONE DELLE REGOLE, contro il blob committato da79cc1
@@ -167,7 +168,7 @@ di questo referto, perche' **un numero stampato male non ha provenienza**)*:
 
 ## 5. LE RIGHE CHE NON HO TOLTO, e perche'
 
-**`282` contro l'obiettivo `~250`: le ultime `32` righe le vedo, e NON le ho tagliate.**
+**`281` contro l'obiettivo `~250`: le ultime `31` righe le vedo, e NON le ho tagliate.**
 
 1. **par.1** *(13 righe)* e **par.10** *(12)* sono **CONTENUTO**, non dettaglio di una regola:
    il **bersaglio** del progetto e la frase che lo **guida**. Condensarli vuol dire
@@ -205,6 +206,31 @@ Luca.)*
 nessun hook l'ha fermata. **Sanata qui, con DUE voci** — lo strumento e il generatore dei
 numeri.
 
+## 8. IL DIFETTO DI QUESTO STESSO REFERTO, trovato dopo averlo committato
+
+> ### ⛔ **LA PRIMA VERSIONE DI QUESTO REFERTO (`accb897`) DICEVA `392 → 282`.
+> ### I NUMERI VERI SONO `391 → 281`: ogni conteggio di righe era di UNO troppo alto.**
+
+**LA CAUSA, letta dal codice:** i miei due strumenti contavano `testo.count(NL) + 1`.
+`H-RIGHE` — ### **il presidio che IMPONE il tetto** — conta in
+`csv/_presidio_righe.conta` i **fine-riga**, come `wc -l`: su un file che **termina** con
+un fine-riga le due formule differiscono di **uno**.
+
+### 📌 **E IL SEGNALE C'ERA, SCRITTO NEL MANDATO.** Luca aveva scritto
+*«CLAUDE.md e' a 391 righe su 400»*; io ho scritto **392** in sei messaggi e in cinque
+commit **senza fermarmi sulla differenza**. ### **Un numero che non coincide con quello di
+chi te l'ha dato non e' un arrotondamento: e' un conteggio diverso, e va trovato.**
+
+**LA CURA, e non e' una seconda formula corretta:** i due strumenti ora
+**`import _presidio_righe`** e chiamano `conta()`. ### ✅ **Il conteggio ha UNA SOLA
+definizione nel repo, quindi non puo' piu' divergere da chi impone il tetto.**
+
+### ⚠ **CHE COSA NON CAMBIA, e lo dico perche' e' la meta' onesta della correzione:**
+il **delta `-110`** e il **28%** sono gli stessi *(l'errore era identico sui due estremi e
+si cancella)*, i **confronti paragrafo per paragrafo** erano gia' giusti *(sono differenze
+fra indici di riga, non conteggi di file)*, e ### **nessun verdetto si ribalta** — i due
+controlli passavano e passano. ### **Era sbagliato il numero assoluto, non la misura.**
+
 ---
 
 ## GLI OTTO COMMIT DEL RIORDINO
@@ -213,12 +239,20 @@ numeri.
 |---|---|
 | `f32f235` | il **task history**, **prima** del lavoro *(par.8)* |
 | `61b8e5f` | **lo strumento**, committato **prima** di girare *(par.5)* |
-| `885d9a5` | **par.12** esce *(54 → 31)*, piu' i **tre difetti** dello strumento |
-| `dc08221` | **par.0 + par.4** escono *(79 → 51)* |
+| `885d9a5` | **par.12** esce *(54 → 30)*, piu' i **tre difetti** dello strumento |
+| `dc08221` | **par.0 + par.4** escono *(79 → 49)* |
 | `d1df098` | **par.6 + par.7** escono — e il controllo **mi ha bocciato**, con ragione |
 | `829b4a5` | **par.9 + par.9-ter** escono — e il controllo **mi ha preso** mentre riscrivevo Luca |
 | `b5e5e99` | **par.2, 3, 5, 8, 11** escono, e `L-PATCH` prende **una riga sua** |
-| *questo* | **il referto**, le due voci d'inventario, la relazione |
+| `accb897` | **il referto**, le due voci d'inventario, la relazione |
+| *questo* | la **CORREZIONE** dei conteggi: `392 → 282` era `391 → 281` |
 
-### ✅ **L'ORDINE E' VERIFICABILE DA GIT, non asserito da me:** `f32f235` e' **antenato** di
-tutti, e `61b8e5f` e' antenato di **ogni** commit che tocca `CLAUDE.md`.
+### ✅ **L'ORDINE E' VERIFICABILE DA GIT, non asserito da me**, e l'ho verificato con
+`git merge-base --is-ancestor`: `f32f235` *(il task history)* e' **antenato di tutti e
+sette**, e `61b8e5f` *(lo strumento)* e' antenato di **ognuno dei cinque commit del
+riordino che toccano `CLAUDE.md`**.
+
+### ⚠ **E UNA FORMA PIU' FORTE DI QUELLA FRASE SAREBBE FALSA, quindi non la scrivo:**
+`61b8e5f` **non** e' antenato di *ogni* commit che tocca `CLAUDE.md` — `b0f7361`
+*(`H-NON-TRACCIATI`)* lo tocca e **viene prima**. ### **La verifica l'ha trovato, e la frase
+si restringe al perimetro vero invece di arrotondare.**

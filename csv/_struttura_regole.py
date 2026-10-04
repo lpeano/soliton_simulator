@@ -42,6 +42,7 @@ import sys
 _QUI = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, _QUI)
 import _presidio   # noqa: E402
+import _presidio_righe   # noqa: E402
 
 # ### `_presidio.avvia` NON E' FACOLTATIVO (par.7): riconfigura `stdout` in UTF-8 e
 #   timbra il blob. ### ⛔ Senza, questo strumento e' MORTO al primo carattere non-ascii
@@ -211,7 +212,7 @@ def principale():
     print("=" * 100)
     print("LA STRUTTURA DELLE REGOLE -- i due controlli")
     print("=" * 100)
-    print("  CLAUDE.md: %d righe (tetto 400, obiettivo ~250)" % (t.count(NL) + 1))
+    print("  CLAUDE.md: %d righe (tetto 400, obiettivo ~250)" % _presidio_righe.conta(t))
     vecchio = da_git(PRIMA, CLAUDE)
     if vecchio is None:
         print("  ### il blob di riferimento %s non si legge: NON verifico (a)." % PRIMA)

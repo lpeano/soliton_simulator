@@ -12,6 +12,7 @@ import sys
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import _presidio
+import _presidio_righe
 
 _presidio.avvia(__file__)
 
@@ -56,16 +57,16 @@ print("  %-9s  %-24s  %6s  %7s" % ("commit", "che cosa e' uscito", "righe", "del
 prec = None
 for h, et in TAPPE:
     t = git("show", h + ":CLAUDE.md").decode("utf-8", "replace")
-    n = t.count(NL) + 1
+    n = _presidio_righe.conta(t)
     d = "" if prec is None else "%+d" % (n - prec)
     print("  %-9s  %-24s  %6d  %7s" % (h, et, n, d))
     prec = n
 oggi = io.open(os.path.join(RADICE, "CLAUDE.md"), encoding="utf-8").read()
-n_oggi = oggi.count(NL) + 1
+n_oggi = _presidio_righe.conta(oggi)
 print("  %-9s  %-24s  %6d  %7s" % ("(disco)", "oggi", n_oggi, "%+d" % (n_oggi - prec)))
 
 t0 = git("show", PRIMA + ":CLAUDE.md").decode("utf-8", "replace")
-n0 = t0.count(NL) + 1
+n0 = _presidio_righe.conta(t0)
 print(NL + "  TOTALE: %d -> %d righe, %+d (%.0f%% in meno). Tetto 400, obiettivo ~250."
       % (n0, n_oggi, n_oggi - n0, 100.0 * (n0 - n_oggi) / n0))
 
@@ -89,7 +90,7 @@ righe = {}
 for f in sorted(os.listdir(d)):
     if not f.endswith(".md"):
         continue
-    righe[f] = io.open(os.path.join(d, f), encoding="utf-8").read().count(NL) + 1
+    righe[f] = _presidio_righe.conta(io.open(os.path.join(d, f), encoding="utf-8").read())
 for f in sorted(righe, key=lambda x: (len(x), x)):
     print("  %-14s %4d righe" % (f, righe[f]))
 print("  %-14s %4d righe in %d file" % ("TOTALE", sum(righe.values()), len(righe)))

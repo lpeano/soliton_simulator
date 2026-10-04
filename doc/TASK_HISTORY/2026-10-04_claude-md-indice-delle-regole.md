@@ -98,7 +98,7 @@ posteriori.**
 
 ## 5. ANNOTAZIONE A LAVORO CHIUSO *(2026-10-04, dopo il riordino)*
 
-### ✅ **ESITO: `392 → 282` righe, `-110`. I due controlli PASSANO.** `titoli 15/15`,
+### ✅ **ESITO: `391 → 281` righe, `-110`. I due controlli PASSANO.** `titoli 15/15`,
 `punti 11/11`, `dichiarate 17 → 18`; **12** file in `doc/REGOLE/`, **12** archi in giu',
 **12** in su *(tutti nell'intestazione)*, **ZERO** fra due file di dettaglio.
 **Referto:** `doc/REFERTO_riordino_CLAUDE_2026-10-04.md`.
@@ -110,11 +110,11 @@ controllo **puo'** verificare su ogni futura modifica, e le altre quattro la pre
 ### ⛔ **CHE COSA NON AVEVA PREVISTO, e lo annoto perche' e' il tipo di errore che
 ritorna:** avevo scritto la progettazione come se **togliere dettaglio** riducesse il file
 **per costruzione**. Non e' vero. Dopo aver condensato gli ultimi cinque paragrafi il file
-era a **`316`** righe, **sei in PIU'** delle `310` di partenza: i rimandi su **tre righe**
+era a **`315`** righe, **sei in PIU'** delle `309` di partenza: i rimandi su **tre righe**
 *(12 blocchi = 36 righe)* e i separatori `---` costavano piu' del dettaglio uscito.
 ### **La progettazione non aveva un passo <<misura il file dopo>>, e senza quel passo avrei
 dichiarato <<condensato>> un file piu' lungo.** *(Cura: rimandi a UNA riga, separatori via
-— `282`.)*
+— `281`.)*
 
 ### ⛔ **E IL CONTROLLO HA FATTO CIO' PER CUI LUCA L'HA CHIESTO, due volte.** In
 `d1df098` mi ha **bocciato**. In `829b4a5` mi ha preso mentre **riscrivevo una citazione di
@@ -129,8 +129,8 @@ contava `###` come **titolo** *(falso allarme che avrebbe fermato il riordino)*;
 nel generatore dei numeri: una stringa di formato con un **`%2d` non sostituito**, corretto
 **prima** del referto perche' ### **un numero stampato male non ha provenienza**.
 
-### ⚠ **IL DEBITO CHE RESTA, dichiarato e non curato:** `282` e' **sopra** l'obiettivo
-*«circa 250»*. Le ultime `32` righe comprimibili sono **par.1**, **par.10**, **par.0** e
+### ⚠ **IL DEBITO CHE RESTA, dichiarato e non curato:** `281` e' **sopra** l'obiettivo
+*«circa 250»*. Le ultime `31` righe comprimibili sono **par.1**, **par.10**, **par.0** e
 **par.12**, e per toccarle bisogna **togliere una regola o accorciare una citazione**:
 ### **non e' una decisione che prendo io** *(`L-DOPO-STOP`)*. Il referto mette le opzioni
 sul tavolo col numero.
@@ -139,3 +139,21 @@ sul tavolo col numero.
 **a mano**. `H-RIGHE` guarda la **lunghezza**, non la **struttura** — ### **un terzo
 livello, o un rimando fra due file di dettaglio, aggiunto domani PASSEREBBE IL COMMIT.**
 Candidato a presidio; la decisione e' di Luca.
+
+### ⛔ **UN QUINTO DIFETTO, ed e' il piu' istruttivo perche' l'ho trovato DOPO aver
+### committato il referto** *(`accb897`, corretto nel commit dopo)*: i due strumenti
+contavano `count(NL) + 1`, mentre **`H-RIGHE` — il presidio che IMPONE il tetto —**
+conta i **fine-riga** (`csv/_presidio_righe.conta`, come `wc -l`). Su un file che
+**termina** con un fine-riga le due formule differiscono di **uno**: il referto diceva
+`392 → 282` dove il vero e' **`391 → 281`**.
+
+### 📌 **E IL SEGNALE ERA SCRITTO NEL MANDATO.** Luca aveva detto
+*«CLAUDE.md e' a 391 righe su 400»*; io ho scritto **392** in sei messaggi e cinque
+commit. ### **Un numero che non coincide con quello di chi te l'ha dato non e' un
+arrotondamento: e' un conteggio diverso, e andava trovato al primo messaggio, non al
+sesto.** *(Ed e' la stessa forma di `P1`: avevo un dato stabilito e non l'ho confrontato.)*
+
+**LA CURA, e non e' una seconda formula:** i due strumenti ora **importano**
+`_presidio_righe.conta`. ### ✅ **Il conteggio ha UNA SOLA definizione nel repo, quindi
+non puo' piu' divergere da chi impone il tetto.** *(Il delta `-110`, il `28%` e i due
+verdetti non cambiano: l'errore era identico sui due estremi e si cancella.)*

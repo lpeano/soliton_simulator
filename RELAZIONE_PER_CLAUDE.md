@@ -4482,12 +4482,12 @@ Luca è soddisfatto.
 
 ---
 
-## `CLAUDE.md` DIVENTA L'INDICE DELLE REGOLE — **392 → 282 righe, e il controllo mi ha
+## `CLAUDE.md` DIVENTA L'INDICE DELLE REGOLE — **391 → 281 righe, e il controllo mi ha
 preso due volte**
 
-**Mandato di Luca del 2026-10-04.** `CLAUDE.md` era a **392** righe su **400**: `H-RIGHE`
-era a **otto righe** dal fermare ogni commit che lo tocca. Oggi e' a **282**, con il
-dettaglio in **`doc/REGOLE/par<N>.md`** — **12 file, 757 righe**.
+**Mandato di Luca del 2026-10-04.** `CLAUDE.md` era a **391** righe su **400**: `H-RIGHE`
+era a **nove righe** dal fermare ogni commit che lo tocca. Oggi e' a **281**, con il
+dettaglio in **`doc/REGOLE/par<N>.md`** — **12 file, 745 righe**.
 
 **LA STRUTTURA, come Luca l'ha fissata:** **due livelli e non di piu'**; **un solo salto**
 *(da `CLAUDE.md` al dettaglio, e dal dettaglio non si parte)*; **una sola casa per ogni
@@ -4504,14 +4504,14 @@ file di dettaglio.
 > condensare.** Ripristinato **verbatim**.
 
 **E UNA COSA CHE NON ANDAVA COME CREDEVO, misurata invece di non guardare.** Condensando
-gli ultimi cinque paragrafi il file e' passato da `310` a **`316`** righe: **piu' lungo**.
+gli ultimi cinque paragrafi il file e' passato da `309` a **`315`** righe: **piu' lungo**.
 Il dettaglio era uscito, ma i rimandi scritti su **tre righe** *(12 blocchi = 36 righe)* e
 i separatori `---` costavano **piu'** di quanto il dettaglio uscito facesse risparmiare.
-### **Ogni rimando compresso a UNA riga, i separatori via: 282.**
+### **Ogni rimando compresso a UNA riga, i separatori via: 281.**
 ### ⚠ **Senza misurare avrei dichiarato <<condensato>> un file PIU' LUNGO di prima.**
 
-### ⚠ **L'OBIETTIVO DI LUCA ERA «CIRCA 250», E 282 E' SOPRA: lo dichiaro invece di
-arrotondare.** Le ultime `32` righe comprimibili sono **par.1** *(il bersaglio)*, **par.10**
+### ⚠ **L'OBIETTIVO DI LUCA ERA «CIRCA 250», E 281 E' SOPRA: lo dichiaro invece di
+arrotondare.** Le ultime `31` righe comprimibili sono **par.1** *(il bersaglio)*, **par.10**
 *(il principio guida)*, **par.0** *(le due tabelle dei file d'avvio)* e **par.12** *(la
 tabella degli undici presidi)*. ### **Per scendere a 250 bisogna togliere una REGOLA o
 accorciare una CITAZIONE, e nessuna delle due e' una decisione che prendo io**
@@ -4522,6 +4522,17 @@ era nell'inventario**. Il par.6 ① chiede la voce **nello stesso commit** del f
 commit dello strumento (`61b8e5f`) non l'ha scritta. ### **E' una regola SCRITTA e non un
 presidio** *(`A9`)*: nessun hook l'ha fermata. **Due voci aggiunte** — lo strumento e il
 generatore dei numeri.
+
+### ⛔ **E UNA CORREZIONE DI CIO' CHE HO SCRITTO UN'ORA PRIMA, nel commit `accb897`:
+### quel referto diceva `392 → 282`. I numeri veri sono `391 → 281`.** I miei due
+strumenti contavano `count(NL) + 1`; `H-RIGHE` — **il presidio che impone il tetto** —
+conta i **fine-riga**, come `wc -l`, e su un file che finisce con un fine-riga le due
+formule differiscono di **uno**.
+### 📌 **E IL SEGNALE ERA NEL MANDATO: Luca aveva scritto «391 righe su 400», e io
+ho scritto 392 per cinque commit senza fermarmi sulla differenza.** **Curato**
+importando `_presidio_righe.conta` nei due strumenti: ### **il conteggio ha ora UNA SOLA
+definizione nel repo.** *(Il delta `-110` e i due verdetti **non cambiano**: l'errore era
+identico sui due estremi.)*
 
 **Il referto completo, coi numeri generati:**
 `doc/REFERTO_riordino_CLAUDE_2026-10-04.md`.
