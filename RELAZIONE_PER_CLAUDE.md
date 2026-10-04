@@ -3639,3 +3639,67 @@ Luca**: se estendere il cancello allo Schwinger, e se la lunghezza da confrontar
 contatore questa voce sarebbe un'impressione invece di un fatto.
 
 ---
+
+## **IL CENSIMENTO DEL 6b SI FERMA — e nel SIMULATORE il cancello e' PASSATO**
+
+### ✅ **NEL SIMULATORE: ZERO siti di CODICE non previsti.** La tua lista e' giusta. Il
+mio AST trova `6` righe di codice — `457`, `8465`, `10636`, `10731`, `10732`, `11691` —
+e `:10733` risulta **`STRINGA`** nella mia classificazione *(e' il testo del `print`)*,
+coperto dal tuo intervallo `10731-10733`. ### **Nessuna differenza di sostanza.**
+
+### ⛔ **MA IL CENSIMENTO SI FERMA, e per due cose diverse.**
+
+### **① SEI COMMENTI fuori dalla tua lista, e DUE ASSERISCONO LA LEGGE**
+
+```
+:3471   # PIU': con `SEMINA_LAM` e `MITOSI_2LAM` si ha `d >= LAM`. MA E'...
+:8929   #   NESSUN PAVIMENTO: `d >= LAM` con `SEMINA_LAM`/`MITOSI_2LAM`. E poiche' e'...
+:10638  :10646  :11126  :11129   (storia dei flag inerti: non asseriscono la legge)
+```
+
+### **I primi due dicono *«`d >= LAM` CON `MITOSI_2LAM`»*, cioe' la legge SOTTO
+CONDIZIONE DEL FLAG.** Dopo la cura quell'affermazione e' vera **senza condizioni**, e un
+commento che resta condizionale ### **sarebbe scaduto il giorno stesso.** ### ⚠ **Non
+fanno scattare il tuo STOP** *(non sono codice)*, ### **ma vanno curati nello stesso
+commit**, altrimenti il `6b` nasce con due commenti che contraddicono la legge che
+introduce.
+
+### **② UNDICI STRUMENTI fuori dai tre che il mandato prevede.** ### **Questo e' lo STOP
+vero**, e tre voci contano piu' delle altre:
+
+| file | che cos'e' | perche' conta |
+|---|---|---|
+| **`csv/_seal_fork/_sigillo_cura5_a13nascita.py`** | ### **IL SIGILLO DI `CURA 5`, cioe' di QUESTO flag** | asserisce *«un arco si divide solo se `d >= 2 LAM`»* **quando il flag e' ON**. Dopo la cura quella condizione e' **incondizionata**: ### **il sigillo non e' piu' ri-girabile come e' scritto — e il par.6 dice che un sigillo non piu' ri-girabile e' UN DIFETTO NUOVO** |
+| **`csv/_seal_fork/_sigillo_frazione_t.py`** | il sigillo del `6a` | a `:135` **toglie** `--mitosi-2lam` dall'argv per costruire la scena `senza_2lam`. ### **Dopo la cura quella scena non differisce piu' nel cancello**, quindi il braccio `A-tr` perde la materia che lo rendeva non vuoto: i `14/12` troncamenti di mitosi ### **diventeranno zero** |
+| **`csv/_test_fork/_verifica_flag_accesi.py`** | la tabella *«il flag era acceso?»* | contiene una **riga su `MITOSI_2LAM`** che dopo la cura descrive un flag **inerte** |
+
+Gli altri otto sono **menzioni in docstring o in liste di nomi** *(`_cli_flag.py`,
+`_etc_lam_stati.py`, `_etc_pavimenti.py`, `_ordine_estrazioni.py`,
+`_punto_unico_fattibile.py`, `_sigillo_cura4_accensione.py`, piu' due reperti)*.
+
+### ⚠ **E DUE DIFETTI DEL MIO STRUMENTO, che dichiaro invece di correggere al volo:**
+### **(a)** il censimento ### **conta SE STESSO** fra gli strumenti — un censimento di un
+flag nomina quel flag **per costruzione**; ### **(b)** `csv/_seal_fork/_sig_scena_ii/`
+`_driver_prima.py` e' una **copia del DRIVER**, non del simulatore, quindi il mio
+marcatore strutturale non la riconosce come reperto. ### **Nessuno dei due cambia il
+verdetto** *(resterebbe `9` invece di `11`)*, e per questo li dichiaro e non li curo
+adesso: il mandato dice di fermarsi, non di aggiustare.
+
+### 📌 **E PRIMA DI QUESTO IL MIO PERIMETRO ERA LARGO: `142` «siti non previsti» dove non
+ce n'era nessuno.** `os.walk` su `csv/` raccoglieva le **copie del simulatore** salvate
+accanto ai sigilli *(par.7, stato 2)* e gli **stub** sotto `_tmp/`: contengono il flag
+**per costruzione**. ### **Contarle come siti trasforma un ARCHIVIO in un ALLARME.** Curato
+con un marcatore **strutturale e legato alla cosa censita** — *solo il simulatore
+definisce **sia** il default **sia** il CLI* — dopo che il primo marcatore che avevo
+provato *(«definisce `decidi_divisione`»)* ne riconosceva **30 su 46**, perche' nei blob
+piu' vecchi quella funzione ha **un altro nome**. ### **Un marcatore che dipende da un nome
+di funzione non e' stabile fra blob, e qui si confrontano blob di settimane diverse.**
+
+**MI FERMO QUI, come dice il mandato**, e non scrivo una riga di codice del `6b`.
+### **La domanda aperta e' una:** i tre strumenti che contano — il sigillo di `CURA 5`, il
+braccio `A-tr` del `6a`, la tabella dei flag accesi — ### **entrano nel commit del `6b` o
+sono lavoro a se'?** Il sigillo di `CURA 5` in particolare: ### **lo si riqualifica come
+reperto di una legge diventata incondizionata, o lo si riscrive perche' resti
+ri-girabile?** ### ⛔ **Non lo decido io.**
+
+---
