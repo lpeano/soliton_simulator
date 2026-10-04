@@ -1,0 +1,353 @@
+{
+ "blob_nuovo": "0f060670",
+ "blob_strumento": null,
+ "blob_vecchio": "287154f3",
+ "candidati_causa": [
+  {
+   "blob": "0f060670",
+   "commit": "5f03401",
+   "data": "2026-10-04",
+   "titolo": "IL CODICE DEL 6b: il cancello diventa LEGGE. E il piano diceva 42, ma il primo candidato e' al 74"
+  },
+  {
+   "blob": "c18c9bf6",
+   "commit": "7a05322",
+   "data": "2026-10-03",
+   "titolo": "IL SIGILLO RINFORZATO, la rinomina in FRAZ_NASCITA, e TRE modi di sbagliare lo stesso confronto"
+  },
+  {
+   "blob": "d75a7378",
+   "commit": "3d06dbf",
+   "data": "2026-10-03",
+   "titolo": "LA CORREZIONE DEL BUG: la QUARTA consumatrice di `dd`. E il collaudo ora attraversa DUE eventi"
+  },
+  {
+   "blob": "e46c7eb3",
+   "commit": "8aa6bc2",
+   "data": "2026-10-03",
+   "titolo": "IL COMMIT 6a: la frazione T_NASCITA dichiarata UNA volta, e i siti sono SEI"
+  },
+  {
+   "blob": "6d306976",
+   "commit": "f8c206e",
+   "data": "2026-10-03",
+   "titolo": "IL COMMIT 5: perc_geom SI DERIVA. E il vero contenuto era il VINCOLO 4, che non era nel mandato"
+  },
+  {
+   "blob": "7ed56608",
+   "commit": "4f6b315",
+   "data": "2026-10-03",
+   "titolo": "DUE VOCI SULLA SCHERMATURA, e la misura ha trovato DUE fatti che non erano nel mandato"
+  },
+  {
+   "blob": "41e4e107",
+   "commit": "308dd0a",
+   "data": "2026-10-02",
+   "titolo": "LA CURA DEI DUE CRITERI DEL BRACCIO A, e il braccio B ancorato alla derivata GIUSTA"
+  },
+  {
+   "blob": "b378491a",
+   "commit": "738ebc9",
+   "data": "2026-10-02",
+   "titolo": "VELENO-DOMINI, via (a): l'ESENZIONE PER CELLA ancorata al veleno. Il run arriva in fondo"
+  },
+  {
+   "blob": "7a1a21af",
+   "commit": "b9c109a",
+   "data": "2026-10-02",
+   "titolo": "COMMIT 4: il VELENO alle derivate (via A). E IL VELENO HA FATTO CADERE IL RUN: mi fermo"
+  },
+  {
+   "blob": "dc10df7f",
+   "commit": "3cc1653",
+   "data": "2026-10-02",
+   "titolo": "LE QUATTRO NOTE DEL GUARDIANO: cinque derivazioni FALSE riscritte, e nessuna riga di logica"
+  },
+  {
+   "blob": "f103989b",
+   "commit": "ff62420",
+   "data": "2026-10-02",
+   "titolo": "COMMIT 3 DEL RIORDINO: LA NASCITA E' UN EVENTO UNICO. Il codice, committato PRIMA del sigillo"
+  },
+  {
+   "blob": "3d78cfd2",
+   "commit": "f541261",
+   "data": "2026-10-02",
+   "titolo": "VIA (b) PASSO 2: _g_peqn_mediana ha un ISTANTE DICHIARATO, e il blocco al punto unico non c'e' piu'"
+  },
+  {
+   "blob": "3ddc56d9",
+   "commit": "2f129ba",
+   "data": "2026-10-01",
+   "titolo": "COMMIT 2 del riordino: la DECISIONE separata dall'ESECUZIONE. Il codice, col suo sigillo"
+  },
+  {
+   "blob": "287154f3",
+   "commit": "0cf8057",
+   "data": "2026-10-01",
+   "titolo": "COMMIT 0-bis: i commenti dicevano DEFAULT e canonico il regime che non gira mai. AST identico"
+  }
+ ],
+ "piattaforma": {
+  "macchina": "AMD64",
+  "numpy": "2.3.0",
+  "python": "3.13.2",
+  "sistema": "Windows 11"
+ },
+ "strumenti": {
+  "_misure_calore": {
+   "blob_sim_nuovo": "0f060670",
+   "blob_sim_vecchio": "287154f3",
+   "blob_strumento_nuovo": "a9944b1a",
+   "blob_strumento_vecchio": "a9944b1a",
+   "cambiate": 1,
+   "cambiate_dettaglio": [
+    {
+     "nuovo": "0f060670567ac00a5b596918e58a3d0d6c644261",
+     "percorso": "blob_sim_sha1_byte",
+     "vecchio": "287154f343c8bf27424a7d856dbd2a13ad7b1b34"
+    }
+   ],
+   "identiche": 3043,
+   "piattaforma_nel_referto_vecchio": false,
+   "solo_nuovo": 0,
+   "solo_nuovo_elenco": [],
+   "solo_vecchio": 0,
+   "solo_vecchio_elenco": []
+  },
+  "_pos_contro_d": {
+   "blob_sim_nuovo": "0f060670",
+   "blob_sim_vecchio": "287154f3",
+   "blob_strumento_nuovo": "edb2e305",
+   "blob_strumento_vecchio": "edb2e305",
+   "cambiate": 35,
+   "cambiate_dettaglio": [
+    {
+     "nuovo": "0f060670567ac00a5b596918e58a3d0d6c644261",
+     "percorso": "blob_sim_sha1_byte",
+     "vecchio": "287154f343c8bf27424a7d856dbd2a13ad7b1b34"
+    },
+    {
+     "nuovo": "decidi_divisione",
+     "percorso": "runtime.d0.dentro_una_legge[5].funzione",
+     "vecchio": "mitosi"
+    },
+    {
+     "nuovo": "decidi_divisione",
+     "percorso": "runtime.d0.tutti[6].funzione",
+     "vecchio": "mitosi"
+    },
+    {
+     "nuovo": 12,
+     "percorso": "statica.d.come_legge",
+     "vecchio": 11
+    },
+    {
+     "nuovo": "scuoti_vuoto",
+     "percorso": "statica.d.funzioni_legge[10]",
+     "vecchio": "step"
+    },
+    {
+     "nuovo": "decidi_divisione",
+     "percorso": "statica.d.funzioni_legge[6]",
+     "vecchio": "memoria_hebbiana_moto"
+    },
+    {
+     "nuovo": "memoria_hebbiana_moto",
+     "percorso": "statica.d.funzioni_legge[7]",
+     "vecchio": "mitosi"
+    },
+    {
+     "nuovo": "mitosi",
+     "percorso": "statica.d.funzioni_legge[8]",
+     "vecchio": "pozzo_grafo"
+    },
+    {
+     "nuovo": "pozzo_grafo",
+     "percorso": "statica.d.funzioni_legge[9]",
+     "vecchio": "scuoti_vuoto"
+    },
+    {
+     "nuovo": "_rn_div_d",
+     "percorso": "statica.d.funzioni_non_legge[2]",
+     "vecchio": "batch_condensazione"
+    },
+    {
+     "nuovo": "_rn_sch_d",
+     "percorso": "statica.d.funzioni_non_legge[3]",
+     "vecchio": "diagnostica"
+    },
+    {
+     "nuovo": "batch_condensazione",
+     "percorso": "statica.d.funzioni_non_legge[4]",
+     "vecchio": "rilassa_disegno"
+    },
+    {
+     "nuovo": "diagnostica",
+     "percorso": "statica.d.funzioni_non_legge[5]",
+     "vecchio": "verifica_invarianti"
+    },
+    {
+     "nuovo": 20,
+     "percorso": "statica.d.lettori",
+     "vecchio": 17
+    },
+    {
+     "nuovo": 8,
+     "percorso": "statica.d.non_legge_o_fuori_passo",
+     "vecchio": 6
+    },
+    {
+     "nuovo": 10,
+     "percorso": "statica.d0.come_legge",
+     "vecchio": 9
+    },
+    {
+     "nuovo": "decidi_divisione",
+     "percorso": "statica.d0.funzioni_legge[5]",
+     "vecchio": "memoria_hebbiana_moto"
+    },
+    {
+     "nuovo": "memoria_hebbiana_moto",
+     "percorso": "statica.d0.funzioni_legge[6]",
+     "vecchio": "mitosi"
+    },
+    {
+     "nuovo": "mitosi",
+     "percorso": "statica.d0.funzioni_legge[7]",
+     "vecchio": "scuoti_vuoto"
+    },
+    {
+     "nuovo": "scuoti_vuoto",
+     "percorso": "statica.d0.funzioni_legge[8]",
+     "vecchio": "step"
+    },
+    {
+     "nuovo": "_rn_div_d0",
+     "percorso": "statica.d0.funzioni_non_legge[3]",
+     "vecchio": "batch_condensazione"
+    },
+    {
+     "nuovo": "_rn_sch_d0",
+     "percorso": "statica.d0.funzioni_non_legge[4]",
+     "vecchio": "diagnostica"
+    },
+    {
+     "nuovo": "batch_condensazione",
+     "percorso": "statica.d0.funzioni_non_legge[5]",
+     "vecchio": "update"
+    },
+    {
+     "nuovo": 18,
+     "percorso": "statica.d0.lettori",
+     "vecchio": 15
+    },
+    {
+     "nuovo": 8,
+     "percorso": "statica.d0.non_legge_o_fuori_passo",
+     "vecchio": 6
+    },
+    {
+     "nuovo": "_semina_masse_coerenti",
+     "percorso": "statica.pos.funzioni_non_legge[10]",
+     "vecchio": "campo_spaziale"
+    },
+    {
+     "nuovo": "batch_condensazione",
+     "percorso": "statica.pos.funzioni_non_legge[11]",
+     "vecchio": "classifica_topologia"
+    },
+    {
+     "nuovo": "campo_spaziale",
+     "percorso": "statica.pos.funzioni_non_legge[12]",
+     "vecchio": "rilassa_disegno"
+    },
+    {
+     "nuovo": "classifica_topologia",
+     "percorso": "statica.pos.funzioni_non_legge[13]",
+     "vecchio": "semina"
+    },
+    {
+     "nuovo": "rilassa_disegno",
+     "percorso": "statica.pos.funzioni_non_legge[14]",
+     "vecchio": "update"
+    },
+    {
+     "nuovo": "_rn_div_pos",
+     "percorso": "statica.pos.funzioni_non_legge[7]",
+     "vecchio": "_semina_lam"
+    },
+    {
+     "nuovo": "_rn_sch_pos",
+     "percorso": "statica.pos.funzioni_non_legge[8]",
+     "vecchio": "_semina_masse_coerenti"
+    },
+    {
+     "nuovo": "_semina_lam",
+     "percorso": "statica.pos.funzioni_non_legge[9]",
+     "vecchio": "batch_condensazione"
+    },
+    {
+     "nuovo": 22,
+     "percorso": "statica.pos.lettori",
+     "vecchio": 20
+    },
+    {
+     "nuovo": 17,
+     "percorso": "statica.pos.non_legge_o_fuori_passo",
+     "vecchio": 15
+    }
+   ],
+   "identiche": 129,
+   "piattaforma_nel_referto_vecchio": false,
+   "solo_nuovo": 15,
+   "solo_nuovo_elenco": [
+    "statica.d.funzioni_legge[11]",
+    "statica.d.funzioni_non_legge[6]",
+    "statica.d.funzioni_non_legge[7]",
+    "statica.d.scritture_dirette._rn_div_d",
+    "statica.d.scritture_dirette._rn_sch_d",
+    "statica.d0.funzioni_legge[9]",
+    "statica.d0.funzioni_non_legge[6]",
+    "statica.d0.funzioni_non_legge[7]",
+    "statica.d0.scritture_dirette._rn_div_d0",
+    "statica.d0.scritture_dirette._rn_sch_d0",
+    "statica.d0.scritture_dirette.decidi_divisione",
+    "statica.pos.funzioni_non_legge[15]",
+    "statica.pos.funzioni_non_legge[16]",
+    "statica.pos.scritture_dirette._rn_div_pos",
+    "statica.pos.scritture_dirette._rn_sch_pos"
+   ],
+   "solo_vecchio": 3,
+   "solo_vecchio_elenco": [
+    "statica.d.scritture_dirette.mitosi",
+    "statica.d0.scritture_dirette.mitosi",
+    "statica.pos.scritture_dirette.mitosi"
+   ]
+  },
+  "_verso_archi": {
+   "blob_sim_nuovo": "0f060670",
+   "blob_sim_vecchio": "287154f3",
+   "blob_strumento_nuovo": "7c8b0200",
+   "blob_strumento_vecchio": "7c8b0200",
+   "cambiate": 1,
+   "cambiate_dettaglio": [
+    {
+     "nuovo": "0f060670567ac00a5b596918e58a3d0d6c644261",
+     "percorso": "blob_sim_sha1_byte",
+     "vecchio": "287154f343c8bf27424a7d856dbd2a13ad7b1b34"
+    }
+   ],
+   "identiche": 279,
+   "piattaforma_nel_referto_vecchio": false,
+   "solo_nuovo": 0,
+   "solo_nuovo_elenco": [],
+   "solo_vecchio": 0,
+   "solo_vecchio_elenco": []
+  }
+ },
+ "totale": {
+  "cambiate": 37,
+  "identiche": 3451
+ }
+}

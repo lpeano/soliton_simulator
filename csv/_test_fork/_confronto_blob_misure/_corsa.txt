@@ -1,0 +1,134 @@
+========================================================================================================
+CONFRONTO DEI REFERTI FRA DUE BLOB DEL SIMULATORE: 287154f3 -> 0f060670
+========================================================================================================
+
+### NON E' UN SIGILLO: nessun PASSA, nessun FALLISCE. Numeri e cause.
+
+LA PIATTAFORMA DI QUESTO CONFRONTO (par.5 della stella polare: i conteggi
+assoluti ne dipendono, l'identita' prima/dopo no)
+  python     3.13.2
+  numpy      2.3.0
+  sistema    Windows 11
+  macchina   AMD64
+
+--------------------------------------------------------------------------------------------------------
+I CANDIDATI ALLA CAUSA: i commit del simulatore fra i due blob
+--------------------------------------------------------------------------------------------------------
+  5f03401  2026-10-04  0f060670  IL CODICE DEL 6b: il cancello diventa LEGGE. E il pi   <-- il blob di OGGI
+  7a05322  2026-10-03  c18c9bf6  IL SIGILLO RINFORZATO, la rinomina in FRAZ_NASCITA, 
+  3d06dbf  2026-10-03  d75a7378  LA CORREZIONE DEL BUG: la QUARTA consumatrice di `dd
+  8aa6bc2  2026-10-03  e46c7eb3  IL COMMIT 6a: la frazione T_NASCITA dichiarata UNA v
+  f8c206e  2026-10-03  6d306976  IL COMMIT 5: perc_geom SI DERIVA. E il vero contenut
+  4f6b315  2026-10-03  7ed56608  DUE VOCI SULLA SCHERMATURA, e la misura ha trovato D
+  308dd0a  2026-10-02  41e4e107  LA CURA DEI DUE CRITERI DEL BRACCIO A, e il braccio 
+  738ebc9  2026-10-02  b378491a  VELENO-DOMINI, via (a): l'ESENZIONE PER CELLA ancora
+  b9c109a  2026-10-02  7a1a21af  COMMIT 4: il VELENO alle derivate (via A). E IL VELE
+  3cc1653  2026-10-02  dc10df7f  LE QUATTRO NOTE DEL GUARDIANO: cinque derivazioni FA
+  ff62420  2026-10-02  f103989b  COMMIT 3 DEL RIORDINO: LA NASCITA E' UN EVENTO UNICO
+  f541261  2026-10-02  3d78cfd2  VIA (b) PASSO 2: _g_peqn_mediana ha un ISTANTE DICHI
+  2f129ba  2026-10-01  3ddc56d9  COMMIT 2 del riordino: la DECISIONE separata dall'ES
+  0cf8057  2026-10-01  287154f3  COMMIT 0-bis: i commenti dicevano DEFAULT e canonico   <-- il blob dei referti VECCHI
+
+  14 commit fra i due blob (il primo e l'ultimo compresi).
+
+========================================================================================================
+_misure_calore
+========================================================================================================
+  blob_sim dichiarato NEL referto:  vecchio 287154f3   nuovo 0f060670
+  blob_strumento:                   vecchio a9944b1a   nuovo a9944b1a
+  la piattaforma e' dichiarata nel referto VECCHIO? NO -- quindi lo scarto dei CONTEGGI ASSOLUTI non si puo' attribuire al simulatore
+
+  foglie: 3043 identiche, 1 CAMBIATE, 0 solo nel vecchio, 0 solo nel nuovo
+
+  LE GRANDEZZE CAMBIATE, una per riga:
+  percorso                                               vecchio              nuovo               
+  blob_sim_sha1_byte                                     '287154f343c8bf27424 '0f060670567ac00a5b5
+
+========================================================================================================
+_pos_contro_d
+========================================================================================================
+  blob_sim dichiarato NEL referto:  vecchio 287154f3   nuovo 0f060670
+  blob_strumento:                   vecchio edb2e305   nuovo edb2e305
+  la piattaforma e' dichiarata nel referto VECCHIO? NO -- quindi lo scarto dei CONTEGGI ASSOLUTI non si puo' attribuire al simulatore
+
+  foglie: 129 identiche, 35 CAMBIATE, 3 solo nel vecchio, 15 solo nel nuovo
+
+  LE GRANDEZZE CAMBIATE, una per riga:
+  percorso                                               vecchio              nuovo               
+  blob_sim_sha1_byte                                     '287154f343c8bf27424 '0f060670567ac00a5b5
+  runtime.d0.dentro_una_legge[5].funzione                'mitosi'             'decidi_divisione'  
+  runtime.d0.tutti[6].funzione                           'mitosi'             'decidi_divisione'  
+  statica.d.come_legge                                   11                   12                  
+  statica.d.funzioni_legge[10]                           'step'               'scuoti_vuoto'      
+  statica.d.funzioni_legge[6]                            'memoria_hebbiana_mo 'decidi_divisione'  
+  statica.d.funzioni_legge[7]                            'mitosi'             'memoria_hebbiana_mo
+  statica.d.funzioni_legge[8]                            'pozzo_grafo'        'mitosi'            
+  statica.d.funzioni_legge[9]                            'scuoti_vuoto'       'pozzo_grafo'       
+  statica.d.funzioni_non_legge[2]                        'batch_condensazione '_rn_div_d'         
+  statica.d.funzioni_non_legge[3]                        'diagnostica'        '_rn_sch_d'         
+  statica.d.funzioni_non_legge[4]                        'rilassa_disegno'    'batch_condensazione
+  statica.d.funzioni_non_legge[5]                        'verifica_invarianti 'diagnostica'       
+  statica.d.lettori                                      17                   20                  
+  statica.d.non_legge_o_fuori_passo                      6                    8                   
+  statica.d0.come_legge                                  9                    10                  
+  statica.d0.funzioni_legge[5]                           'memoria_hebbiana_mo 'decidi_divisione'  
+  statica.d0.funzioni_legge[6]                           'mitosi'             'memoria_hebbiana_mo
+  statica.d0.funzioni_legge[7]                           'scuoti_vuoto'       'mitosi'            
+  statica.d0.funzioni_legge[8]                           'step'               'scuoti_vuoto'      
+  statica.d0.funzioni_non_legge[3]                       'batch_condensazione '_rn_div_d0'        
+  statica.d0.funzioni_non_legge[4]                       'diagnostica'        '_rn_sch_d0'        
+  statica.d0.funzioni_non_legge[5]                       'update'             'batch_condensazione
+  statica.d0.lettori                                     15                   18                  
+  statica.d0.non_legge_o_fuori_passo                     6                    8                   
+  statica.pos.funzioni_non_legge[10]                     'campo_spaziale'     '_semina_masse_coere
+  statica.pos.funzioni_non_legge[11]                     'classifica_topologi 'batch_condensazione
+  statica.pos.funzioni_non_legge[12]                     'rilassa_disegno'    'campo_spaziale'    
+  statica.pos.funzioni_non_legge[13]                     'semina'             'classifica_topologi
+  statica.pos.funzioni_non_legge[14]                     'update'             'rilassa_disegno'   
+  statica.pos.funzioni_non_legge[7]                      '_semina_lam'        '_rn_div_pos'       
+  statica.pos.funzioni_non_legge[8]                      '_semina_masse_coere '_rn_sch_pos'       
+  statica.pos.funzioni_non_legge[9]                      'batch_condensazione '_semina_lam'       
+  statica.pos.lettori                                    20                   22                  
+  statica.pos.non_legge_o_fuori_passo                    15                   17                  
+
+  CHIAVI PRESENTI DA UN SOLO LATO (non sono cambi: sono struttura)
+    solo VECCHIO  statica.d.scritture_dirette.mitosi                 = 2
+    solo VECCHIO  statica.d0.scritture_dirette.mitosi                = 3
+    solo VECCHIO  statica.pos.scritture_dirette.mitosi               = 2
+    solo NUOVO    statica.d.funzioni_legge[11]                       = 'step'
+    solo NUOVO    statica.d.funzioni_non_legge[6]                    = 'rilassa_disegno'
+    solo NUOVO    statica.d.funzioni_non_legge[7]                    = 'verifica_invarianti'
+    solo NUOVO    statica.d.scritture_dirette._rn_div_d              = 1
+    solo NUOVO    statica.d.scritture_dirette._rn_sch_d              = 1
+    solo NUOVO    statica.d0.funzioni_legge[9]                       = 'step'
+    solo NUOVO    statica.d0.funzioni_non_legge[6]                   = 'diagnostica'
+    solo NUOVO    statica.d0.funzioni_non_legge[7]                   = 'update'
+    solo NUOVO    statica.d0.scritture_dirette._rn_div_d0            = 1
+    solo NUOVO    statica.d0.scritture_dirette._rn_sch_d0            = 1
+    solo NUOVO    statica.d0.scritture_dirette.decidi_divisione      = 1
+    solo NUOVO    statica.pos.funzioni_non_legge[15]                 = 'semina'
+    solo NUOVO    statica.pos.funzioni_non_legge[16]                 = 'update'
+    solo NUOVO    statica.pos.scritture_dirette._rn_div_pos          = 1
+    solo NUOVO    statica.pos.scritture_dirette._rn_sch_pos          = 1
+
+========================================================================================================
+_verso_archi
+========================================================================================================
+  blob_sim dichiarato NEL referto:  vecchio 287154f3   nuovo 0f060670
+  blob_strumento:                   vecchio 7c8b0200   nuovo 7c8b0200
+  la piattaforma e' dichiarata nel referto VECCHIO? NO -- quindi lo scarto dei CONTEGGI ASSOLUTI non si puo' attribuire al simulatore
+
+  foglie: 279 identiche, 1 CAMBIATE, 0 solo nel vecchio, 0 solo nel nuovo
+
+  LE GRANDEZZE CAMBIATE, una per riga:
+  percorso                                               vecchio              nuovo               
+  blob_sim_sha1_byte                                     '287154f343c8bf27424 '0f060670567ac00a5b5
+
+========================================================================================================
+IL TOTALE
+========================================================================================================
+  3451 foglie identiche, 37 cambiate, su 3 strumenti.
+  ### E il verdetto NON lo da' questo strumento: il mandato dice CONFRONTO,
+      non sigillo. La causa di ogni scarto si attribuisce LEGGENDO i commit
+      elencati sopra, e l'attribuzione va nel referto a mano, con la riga.
+========================================================================================================

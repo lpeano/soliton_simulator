@@ -31,6 +31,7 @@ USCITA:   `csv/_test_fork/_confronto_blob_misure/_confronto.json` + `_corsa.txt`
 #   gia' scritti e li confronta. La configurazione di ciascun run e' dichiarata DENTRO
 #   il referto che confronta, e questo strumento la RIPORTA (blob_sim, blob_strumento).
 """
+import collections
 import hashlib
 import io
 import json
@@ -91,6 +92,45 @@ def uguali(a, b):
         except (TypeError, ValueError):
             return False
     return type(a) is type(b) and a == b
+
+
+def liste_di_scalari(v, pre="", fuori=None):
+    """{percorso: lista} per ogni lista i cui elementi sono TUTTI scalari."""
+    if fuori is None:
+        fuori = {}
+    if isinstance(v, dict):
+        for k in v:
+            liste_di_scalari(v[k], (pre + "." + str(k)) if pre else str(k), fuori)
+    elif isinstance(v, list):
+        if v and all(not isinstance(x, (dict, list)) for x in v):
+            fuori[pre] = list(v)
+        else:
+            for i, x in enumerate(v):
+                liste_di_scalari(x, "%s[%d]" % (pre, i), fuori)
+    return fuori
+
+
+def insiemi(vecchio, nuovo):
+    """Le liste di scalari confrontate come MULTINSIEMI.
+
+    ### PERCHE' SERVE, ed e' un difetto MISURATO del primo giro di questo
+    strumento: il confronto foglia-per-foglia indicizza le liste, quindi un
+    elemento INSERITO in una lista ordinata **sposta ogni indice successivo** e
+    ogni spostamento viene contato come un CAMBIO. Il primo giro dichiaro' `35`
+    cambiate su `_pos_contro_d` dove i valori davvero diversi erano pochissimi.
+    ### Un numero che conta gli spostamenti insieme ai cambi non si puo' leggere.
+    """
+    A, B = liste_di_scalari(vecchio), liste_di_scalari(nuovo)
+    fuori = {}
+    for k in sorted(set(A) | set(B)):
+        ca = collections.Counter(A.get(k, []))
+        cb = collections.Counter(B.get(k, []))
+        agg = sorted(map(repr, (cb - ca).elements()))
+        tol = sorted(map(repr, (ca - cb).elements()))
+        fuori[k] = {"n_vecchio": len(A.get(k, [])), "n_nuovo": len(B.get(k, [])),
+                    "aggiunti": agg, "tolti": tol,
+                    "solo_spostamento": (not agg and not tol)}
+    return fuori
 
 
 def confronta(vecchio, nuovo):
@@ -156,6 +196,8 @@ CASI = [
      {"L": [1, 2, 3]}, {"L": [1, 2]}, 2, 0, 1, 0),
     ("uno scarto float MINIMO e' un CAMBIO, non un arrotondamento",
      {"x": 1.0}, {"x": 1.0 + 1e-15}, 0, 1, 0, 0),
+    ("un ELEMENTO INSERITO in una lista ordinata sposta gli indici",
+     {"L": ["a", "c"]}, {"L": ["a", "b", "c"]}, 1, 1, 0, 1),
 ]
 
 
@@ -173,7 +215,26 @@ def collaudo():
         if not buono:
             stampa("      atteso ident=%d camb=%d solo_v=%d solo_n=%d" % (ni, nc, nv, nn))
     stampa()
-    stampa("  ### %s" % ("tutti e %d i casi passano." % len(CASI) if ok
+    # ### I CASI DEGLI INSIEMI: provano che lo strumento DISTINGUE un inserimento
+    #   da un cambio di valore -- che e' il difetto che il primo giro ha mostrato.
+    CASI_INS = [
+        ("un INSERIMENTO si legge come aggiunto, non come cambio",
+         {"L": ["a", "c"]}, {"L": ["a", "b", "c"]}, ["'b'"], [], False),
+        ("una SOSTITUZIONE da' un aggiunto E un tolto",
+         {"L": ["a", "c"]}, {"L": ["a", "z"]}, ["'z'"], ["'c'"], False),
+        ("un RIORDINO puro e' SOLO SPOSTAMENTO",
+         {"L": ["a", "b"]}, {"L": ["b", "a"]}, [], [], True),
+    ]
+    for et, a, b, agg, tol, solo in CASI_INS:
+        r = insiemi(a, b)["L"]
+        buono = (r["aggiunti"] == agg and r["tolti"] == tol
+                 and r["solo_spostamento"] == solo)
+        ok = ok and buono
+        stampa("  %-58s %s  agg=%s tolti=%s spost=%s"
+               % (et, "OK  " if buono else "FALLITO", r["aggiunti"],
+                  r["tolti"], r["solo_spostamento"]))
+    stampa()
+    stampa("  ### %s" % ("tutti e %d i casi passano." % (len(CASI) + len(CASI_INS)) if ok
                          else "*** COLLAUDO FALLITO ***"))
     riga("=")
     return 0 if ok else 1
@@ -214,8 +275,11 @@ def principale():
     stampa()
 
     fuori = {"blob_vecchio": VECCHIO, "blob_nuovo": NUOVO, "piattaforma": pf,
-             "blob_strumento": _presidio.blob(__file__)
-             if hasattr(_presidio, "blob") else None,
+             # ### IL TIMBRO INTERO, non solo lo sha1: dice anche se lo strumento era
+             #   TRACCIATO e PULITO quando ha girato. Un referto che dichiara solo
+             #   l'hash non dice se quei byte sono recuperabili dal repo (par.7).
+             "timbro_strumento": _presidio.timbro(__file__),
+             "blob_strumento": _presidio.timbro(__file__).get("sha1"),
              "candidati_causa": [{"commit": h, "data": d, "blob": s, "titolo": t}
                                  for h, d, s, t in cand],
              "strumenti": {}}
@@ -269,6 +333,26 @@ def principale():
                        % (k[:54], repr(A[k])[:20], repr(B[k])[:20]))
         else:
             stampa("  NESSUNA grandezza cambiata fra le foglie presenti in entrambi.")
+        ins = insiemi(V, N)
+        mosse = {k: v for k, v in ins.items() if v["aggiunti"] or v["tolti"]}
+        if ins:
+            spost = [k for k, v in ins.items() if v["solo_spostamento"]]
+            stampa("  LE LISTE CONFRONTATE COME INSIEMI -- %d liste di scalari, %d con"
+                   % (len(ins), len(mosse)))
+            stampa("  elementi aggiunti o tolti, %d identiche come insieme" % len(spost))
+            stampa("  ### E SERVE A NON LEGGERE MALE IL NUMERO DI SOPRA: un elemento")
+            stampa("      INSERITO in una lista ordinata sposta OGNI indice successivo,")
+            stampa("      e ogni spostamento conta come un <<cambio>> foglia-per-foglia.")
+            for k in sorted(mosse):
+                v = mosse[k]
+                stampa("    %-44s %d -> %d" % (k[:44], v["n_vecchio"], v["n_nuovo"]))
+                if v["aggiunti"]:
+                    stampa("        AGGIUNTI  %s" % ", ".join(v["aggiunti"])[:76])
+                if v["tolti"]:
+                    stampa("        TOLTI     %s" % ", ".join(v["tolti"])[:76])
+                else:
+                    stampa("        TOLTI     nessuno")
+            stampa()
         if solo_v or solo_n:
             stampa()
             stampa("  CHIAVI PRESENTI DA UN SOLO LATO (non sono cambi: sono struttura)")
@@ -290,6 +374,8 @@ def principale():
             "cambiate_dettaglio": [{"percorso": k, "vecchio": A[k], "nuovo": B[k]}
                                    for k in camb],
             "solo_vecchio_elenco": solo_v, "solo_nuovo_elenco": solo_n,
+            "liste_come_insiemi": ins,
+            "liste_con_elementi_mossi": sorted(mosse),
         }
 
     riga("=")
