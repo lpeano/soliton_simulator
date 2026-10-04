@@ -193,6 +193,20 @@ def vettori(net, n):
     return fuori
 
 
+def mostra(v):
+    """Un valore LEGGIBILE. ### `repr` di uno scalare numpy da' `np.float64(nan)`,
+    e troncato diventa `np.float64` -- cioe' il TIPO al posto del VALORE, che e'
+    esattamente cio' che non serve. ### Il valore si stampa come valore.
+    """
+    a = np.asarray(v)
+    if a.ndim == 0:
+        if a.dtype.kind == "f":
+            return "%.17g" % float(a)
+        return "%s" % (a.item(),)
+    with np.printoptions(precision=9, suppress=False, threshold=6):
+        return np.array2string(a, separator=",").replace(NL, " ")
+
+
 def stesso(x, y):
     """Uguaglianza fra ELEMENTI, non distanza.
 
@@ -212,7 +226,31 @@ def stesso(x, y):
         scarto = float(np.max(np.abs(x[fin] - y[fin]))) if np.any(fin) else 0.0
     else:
         scarto = float(diff)
-    return diff == 0, scarto, diff
+    # ### I VALORI CHE DIFFERISCONO SI NOMINANO, non si contano soltanto.
+    #   ### NASCE DA UN CASO MISURATO: `_sin2_vir` sugli archi nuovi risultava
+    #   `ASIMMETRICA` con **scarto `0.0`** e **2 elementi diversi** -- cioe' gli
+    #   elementi sono NON FINITI (il VELENO del `COMMIT 4` e' `NaN`) e lo `scarto`,
+    #   che si calcola **solo sui finiti**, non dice NIENTE.
+    #   ### Una differenza di cui non si sanno dire i valori e' riportata a META', e
+    #   il mandato chiede *<<con quale scarto>>*.
+    campioni = []
+    nonfin = 0
+    if diff:
+        # ### le RIGHE (primo asse) in cui ALMENO un elemento differisce.
+        #   La forma `~ug.any(...) == False` che avevo scritto prima e' sbagliata:
+        #   `~` lega piu' forte di `==`, quindi diceva un'altra cosa.
+        _d = (~ug)
+        idx = (np.flatnonzero(_d.reshape(len(x), -1).any(axis=1))
+               if _d.ndim > 1 else np.flatnonzero(_d))
+        for q in idx[:4]:
+            xa = x.reshape(len(x), -1)[q] if x.ndim > 1 else x[q]
+            yb = y.reshape(len(y), -1)[q] if y.ndim > 1 else y[q]
+            campioni.append({"posizione": int(q), "base": mostra(xa),
+                             "scambio": mostra(yb)})
+        if x.dtype.kind == "f":
+            nf = ~(np.isfinite(x) & np.isfinite(y))
+            nonfin = int(np.sum(nf & ~ug))
+    return diff == 0, scarto, diff, campioni, nonfin
 
 
 def confronta_nodi(A, B, indici, etichetta):
@@ -225,13 +263,14 @@ def confronta_nodi(A, B, indici, etichetta):
                           "dove": etichetta})
             continue
         try:
-            ok, scarto, nd = stesso(va[k][indici], vb[k][indici])
+            ok, scarto, nd, camp, nf = stesso(va[k][indici], vb[k][indici])
         except Exception as e:
             fuori.append({"grandezza": k, "stato": "non confrontabile: %r" % (e,),
                           "dove": etichetta})
             continue
         fuori.append({"grandezza": k, "dove": etichetta, "simmetrica": bool(ok),
-                      "scarto_max": scarto, "elementi_diversi": nd})
+                      "scarto_max": scarto, "elementi_diversi": nd,
+                      "campioni": camp, "diversi_non_finiti": nf})
     return fuori
 
 
@@ -299,13 +338,14 @@ def confronta_archi(A, B, coppie):
                           "dove": "archi nuovi"})
             continue
         try:
-            ok, scarto, nd = stesso(va[k][ia], vb[k][ib])
+            ok, scarto, nd, camp, nf = stesso(va[k][ia], vb[k][ib])
         except Exception as e:
             fuori.append({"grandezza": k, "stato": "non confrontabile: %r" % (e,),
                           "dove": "archi nuovi"})
             continue
         fuori.append({"grandezza": k, "dove": "archi nuovi", "simmetrica": bool(ok),
-                      "scarto_max": scarto, "elementi_diversi": nd})
+                      "scarto_max": scarto, "elementi_diversi": nd,
+                      "campioni": camp, "diversi_non_finiti": nf})
     return fuori, orient
 
 
@@ -554,9 +594,16 @@ def misura(S, net, a_cli, t_dichiarato, max_passi, voce):
         else:
             et = "ASIMMETRICA"
             asim.append(r)
-        stampa("  %-28s %-10s %-12s %12.5e %10d"
+        _nf = r.get("diversi_non_finiti", 0)
+        stampa("  %-28s %-10s %-12s %12.5e %10d%s"
                % (r["grandezza"][:28], r["dove"][:10], et, r["scarto_max"],
-                  r["elementi_diversi"]))
+                  r["elementi_diversi"],
+                  "" if not _nf else ("  <- %d su elementi NON FINITI: lo scarto"
+                                      " non li misura" % _nf)))
+        if _nf and r.get("campioni"):
+            for c in r["campioni"][:2]:
+                stampa("        pos %-6s BASE %-24s SCAMBIO %s"
+                       % (c["posizione"], c["base"][:24], c["scambio"][:24]))
     riga()
     out["n_asimmetriche"] = len(asim)
     out["n_tautologiche"] = len(tauto)
