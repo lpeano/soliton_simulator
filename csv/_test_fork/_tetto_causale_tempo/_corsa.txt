@@ -1,0 +1,152 @@
+========================================================================================================
+IL TETTO CAUSALE: tempo COORDINATO (DT) contro tempo PROPRIO (dt_e)
+========================================================================================================
+
+### E' UNA MISURA, NON UNA CURA: nessun PASSA/FALLISCE oltre al controllo.
+
+  python     3.13.2
+  numpy      2.3.0
+  sistema    Windows 11
+  macchina   AMD64
+  simulatore 0f060670  (sha1 dei byte grezzi, NON toccato)
+  copia patchata: _sim_misura_tetto.py  blob dda4e1e9  (4 ancore)
+
+--------------------------------------------------------------------------------------------------------
+LA CONFIGURAZIONE CHE DECIDE LA MISURA, letta dal CLI (mai a mano)
+--------------------------------------------------------------------------------------------------------
+  TAU_LOC        1.0
+  TEMPO_SEGNO    False
+  COES_CAUSALE   True
+  COES_ADIM      True
+  VIRIALE        True
+  GRAV_BIFASE    True
+  CS_DINAMICO    True
+  CS_M           2.0
+  LAM            0.8
+  K_C            2.0
+  DT             0.01
+  MEM_HEBB       True
+  scena: nmasse=3 sep=6.1158  ->  n = 12802, archi = 471564
+  c_sistema*DT = 0.0113137085     CS_M*DT = 0.0200000000
+
+========================================================================================================
+IL RUN: 2 passi (il referto riporta anche il taglio a 72)
+========================================================================================================
+  passi girati: 2    n finale = 12802, archi = 471564
+  chiamate del gancio per sito: {'clip_spinta (:9203)': 2, 'coes (:9340)': 2}
+
+========================================================================================================
+DA DOVE VIENE `r`: la FISICA o un RAMO DEGENERE GIA NOTO?
+========================================================================================================
+  passi con r == 1.0 ESATTO su OGNI nodo: 2 su 2
+  ### E CONTA: con r = 1 i due tetti sono IDENTICI, quindi un esito
+      <<la cura non cambia nulla>> NON sarebbe una proprieta della
+      legge, ma la conseguenza di un r degenere. Per questo si contano
+      i rami che producono r = 1 senza che sia fisica.
+      _ritmo_chiamate                       2  (cumulativo a fine corsa)
+      _ritmo_sicurezza                      1  (cumulativo a fine corsa)
+      _ritmo_snap_identico                  0  (cumulativo a fine corsa)
+      _ritmo_guard4pi_ko                    0  (cumulativo a fine corsa)
+      _ritmo_med_non_promosso               0  (cumulativo a fine corsa)
+  r sui nodi: min dei min 1.000000e+00, max dei max 1.000000e+00
+  primi passi in cui r NON e 1 ovunque: NESSUNO
+
+========================================================================================================
+IL CLIP DI `spinta` -- cono GLOBALE (:9203)
+========================================================================================================
+  --- 72 passi ---
+      passi con dato 2, archi-passo totali 943128
+      limitati_oggi                814649
+      limitati_cura                814649
+      da_lim_a_nonlim                   0
+      da_nonlim_a_lim                   0
+      stringe_archi                     0
+      allarga_archi                     0
+      uguali_archi                 943128
+      non_finiti                        0
+      rap_tutti              min 1.000000e+00  med 1.000000e+00  max 1.000000e+00
+      rap_sui_limitati_oggi  min 1.000000e+00  med 1.000000e+00  max 1.000000e+00
+      r_i_tutti              min 1.000000e+00  med 1.000000e+00  max 1.000000e+00
+      r_j_tutti              min 1.000000e+00  med 1.000000e+00  max 1.000000e+00
+      r_i_sui_limitati       min 1.000000e+00  med 1.000000e+00  max 1.000000e+00
+      spinta                 min 3.645630e-09  med 5.874678e-02  max 8.368970e-01
+      nan in dt_e: 0 su 0 passi   mask sempre vera: True
+  --- 2 passi ---
+      passi con dato 2, archi-passo totali 943128
+      limitati_oggi                814649
+      limitati_cura                814649
+      da_lim_a_nonlim                   0
+      da_nonlim_a_lim                   0
+      stringe_archi                     0
+      allarga_archi                     0
+      uguali_archi                 943128
+      non_finiti                        0
+      rap_tutti              min 1.000000e+00  med 1.000000e+00  max 1.000000e+00
+      rap_sui_limitati_oggi  min 1.000000e+00  med 1.000000e+00  max 1.000000e+00
+      r_i_tutti              min 1.000000e+00  med 1.000000e+00  max 1.000000e+00
+      r_j_tutti              min 1.000000e+00  med 1.000000e+00  max 1.000000e+00
+      r_i_sui_limitati       min 1.000000e+00  med 1.000000e+00  max 1.000000e+00
+      spinta                 min 3.645630e-09  med 5.874678e-02  max 8.368970e-01
+      nan in dt_e: 0 su 0 passi   mask sempre vera: True
+
+========================================================================================================
+LA SCALA DELLA COESIONE -- cono LOCALE (:9340)
+========================================================================================================
+  --- 72 passi ---
+      passi con dato 2, archi-passo totali 943128
+      stringe_archi                     0
+      allarga_archi                     0
+      uguali_archi                 943128
+      satura_F_099                      0
+      stringe_vs_glob              160981
+      allarga_vs_glob              782147
+      non_finiti                        0
+      rap_tutti              min 1.000000e+00  med 1.000000e+00  max 1.000000e+00
+      r_i_tutti              min 1.000000e+00  med 1.000000e+00  max 1.000000e+00
+      r_j_tutti              min 1.000000e+00  med 1.000000e+00  max 1.000000e+00
+      csa                    min 6.238297e-01  med 1.466521e+00  max 1.993315e+00
+      p_oggi                 min 6.238297e-03  med 1.466521e-02  max 1.993315e-02
+      p_cura                 min 6.238297e-03  med 1.466521e-02  max 1.993315e-02
+      glob_cura              min 1.131371e-02  med 1.131371e-02  max 1.131371e-02
+      nan in dt_e: 0 su 0 passi   mask sempre vera: True
+      ripieghi CS_M (cumulativo): 0
+  --- 2 passi ---
+      passi con dato 2, archi-passo totali 943128
+      stringe_archi                     0
+      allarga_archi                     0
+      uguali_archi                 943128
+      satura_F_099                      0
+      stringe_vs_glob              160981
+      allarga_vs_glob              782147
+      non_finiti                        0
+      rap_tutti              min 1.000000e+00  med 1.000000e+00  max 1.000000e+00
+      r_i_tutti              min 1.000000e+00  med 1.000000e+00  max 1.000000e+00
+      r_j_tutti              min 1.000000e+00  med 1.000000e+00  max 1.000000e+00
+      csa                    min 6.238297e-01  med 1.466521e+00  max 1.993315e+00
+      p_oggi                 min 6.238297e-03  med 1.466521e-02  max 1.993315e-02
+      p_cura                 min 6.238297e-03  med 1.466521e-02  max 1.993315e-02
+      glob_cura              min 1.131371e-02  med 1.131371e-02  max 1.131371e-02
+      nan in dt_e: 0 su 0 passi   mask sempre vera: True
+      ripieghi CS_M (cumulativo): 0
+
+========================================================================================================
+IL CONTROLLO: la LEGGE contro CIO CHE LA LEGGE HA SCRITTO
+========================================================================================================
+  (A) DT*0.5*(r[ii]+r[jj]), con gli r di `step` DELLO STESSO PASSO e gli
+      ii/jj di ADESSO al sito, confrontato AL BIT con _dt_e_ultimo[mask]
+      sugli STESSI archi. Controlla FONTE, ALLINEAMENTO e MASCHERA.
+  (B) lo stesso confronto con ii SPOSTATO DI UNO deve dare differenze.
+  (C) zero archi confrontabili = il passo NON PASSA.
+  ### E IL VECCHIO CONTROLLO ERA UN FALSO-UNO (guardiano, su 0b3af63):
+      ricalcolava DT*0.5*(1+1)*c contro c*DT, che in IEEE coincidono
+      SEMPRE, senza mai toccare _dt_e_ultimo.
+
+  verifiche 4   archi mascherati 1886256   CONFRONTATI 1886256
+  esclusi perche un estremo e oltre len(r) (nodo nato in mitosi): 0
+  esclusi perche dt_e NON e finito (il veleno del COMMIT 4):          0
+  verifiche con ZERO archi confrontabili (NON passano):               0
+  verifiche con DIFFERENZE in (A):                                   0
+  verifiche in cui (B) NON ha discriminato:                           4
+  ### FERMO: (B) non discrimina in 4 verifiche: il confronto (A)
+      non proverebbe niente, e sarebbe un altro FALSO-UNO.
+========================================================================================================

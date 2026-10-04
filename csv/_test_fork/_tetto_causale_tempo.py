@@ -75,6 +75,25 @@ import _cli_flag   # noqa: E402
 import _passo      # noqa: E402
 
 NL = chr(10)
+# ### I CONTATORI CHE SPIEGANO `r`, e non sono un extra.
+#   La prova di fumo ha misurato `r = 1.0` ESATTO nei primi due passi, e con
+#   `r = 1` i due tetti sono IDENTICI. Ma `r = 1` puo venire da DUE posti:
+#   (a) la FISICA (nessuna dilatazione in quel passo), oppure
+#   (b) un RAMO DEGENERE GIA NOTO -- `_ritmo_sicurezza` (nessuno stato
+#       precedente con cui confrontarsi) o `_ritmo_snap_identico` (`Z33`: lo
+#       snapshot non e avanzato, quindi `f = 0` PER COSTRUZIONE).
+#   ### Nel caso (b) <<la cura non cambia nulla>> sarebbe un FALSO-ZERO prodotto
+#   da un difetto noto, NON una proprieta della legge. Quindi si CONTANO.
+# ### I CONTATORI DI `ritmo()` sono CORRENTI al gancio di `step` (voce 2),
+#   perche `ritmo()` gira dentro `step` prima del gancio.
+CONT_RITMO = ('_ritmo_chiamate', '_ritmo_sicurezza', '_ritmo_snap_identico',
+              '_ritmo_guard4pi_ko', '_ritmo_med_non_promosso')
+# ### QUESTI INVECE NO: li incrementa `memoria_hebbiana_moto` (voce 5), quindi al
+#   gancio di `step` sarebbero cumulativi fino al passo PRECEDENTE.
+#   ### MISURATO sulla prova di fumo: dopo 2 passi `_g_cct_tot` valeva 1, non 2.
+#   Si leggono AL SITO, dove sono correnti.
+CONT_COES = ('_g_cct_salti', '_g_cct_stringe', '_g_cct_allarga',
+             '_g_cct_tot', '_g_cct_usi')
 FUORI = os.path.join(RADICE, "csv", "_test_fork", "_tetto_causale_tempo")
 SIM = os.path.join(RADICE, "soliton_simulator.py")
 PASSI = 150
@@ -179,6 +198,7 @@ class Raccoglitore(object):
         self.passo = 0
         self.ctx = {}
         self.per_passo = []
+        self.contesti = []
         self.controllo = []
 
     # ---------------------------------------------------------- il gancio
@@ -193,7 +213,12 @@ class Raccoglitore(object):
                          else np.asarray(dte, float).copy()),
                 "n_al_passo": int(kw.get("n_al_passo", -1)),
                 "archi_al_passo": int(kw.get("archi_al_passo", -1)),
+                "contatori": {c: int(getattr(net, c, 0)) for c in CONT_RITMO},
+                "r_tutti_uno": (None if r is None else
+                                bool(np.all(np.asarray(r, float) == 1.0))),
+                "r_q3": (None if r is None else q3(r)),
             }
+            self.contesti.append(dict(self.ctx, passo=self.passo))
             return
         if sito == "clip_spinta":
             self._clip(net, kw)
@@ -251,7 +276,7 @@ class Raccoglitore(object):
         ii, jj = np.asarray(kw["ii"], int), np.asarray(kw["jj"], int)
         dte, info = self._dte(net, mask)
         out = {"passo": self.passo, "sito": "clip_spinta (:9203)",
-               "n_archi": int(len(sp)), "p_oggi": p_oggi, "c_sistema": c,
+               "n_archi": int(len(sp)), "p_oggi_scalare": p_oggi, "c_sistema": c,
                "mask_tutta_vera": bool(np.all(mask)),
                "archi_non_mascherati": int(np.sum(~mask)),
                "dt_e": info}
@@ -287,7 +312,7 @@ class Raccoglitore(object):
             out["r_j_sui_limitati"] = q3(rj[m])
         out["stato"] = "fatto"
         self.per_passo.append(out)
-        self._controllo_r1(c, dte, "clip_spinta")
+        self._controllo_allineamento(net, mask, ii, jj, "clip_spinta")
 
     # ---------------------------------------------------------- :9340
     def _coes(self, net, kw):
@@ -303,6 +328,8 @@ class Raccoglitore(object):
                "mask_tutta_vera": bool(np.all(mask)),
                "archi_non_mascherati": int(np.sum(~mask)),
                "salti_cs_m": int(kw.get("salti", 0)),
+               "contatori_al_sito": {c: int(getattr(net, c, 0))
+                                     for c in CONT_COES},
                "csa": q3(csa), "p_oggi": q3(p_oggi),
                "satura_F_099": int(np.sum(F > 0.99)), "F": q3(F), "dt_e": info}
         out["stringe_vs_glob"] = int(np.sum(p_oggi < glob))
@@ -333,34 +360,97 @@ class Raccoglitore(object):
             out["r_j_sui_saturi"] = q3(rj[(F > 0.99)[:len(rj)]])
         out["stato"] = "fatto"
         self.per_passo.append(out)
-        self._controllo_r1(csa, dte, "coes")
+        self._controllo_allineamento(net, mask, ii, jj, "coes")
 
     # ---------------------------------------------------------- il controllo
-    def _controllo_r1(self, c, dte, sito):
-        """### CON `r = 1` OVUNQUE I DUE TETTI DEVONO COINCIDERE AL BIT.
+    def _controllo_allineamento(self, net, mask, ii, jj, sito):
+        """### IL CONTROLLO: LA LEGGE CONTRO CIO CHE LA LEGGE HA SCRITTO.
 
-        Si usano i **valori veri** di `c` *(scalare o per arco)* e il **vero numero di
-        archi**; solo `r` e' forzato a `1`. ### Cosi' il cammino `DT*0.5*(r_i+r_j)` viene
-        **PERCORSO**, invece di essere saltato come farebbe `TAU_LOC = 0`.
+        `(A)` con gli `r` registrati in `step` **dello stesso passo** e gli `ii`,
+        `jj` di **ADESSO** al sito, si ricalcola `DT*0.5*(r[ii]+r[jj])` **solo** sugli
+        archi con entrambi gli estremi `< len(r)`, e si confronta **AL BIT** con
+        `_dt_e_ultimo[mask]` sugli **stessi** archi.
+        ### Cosi si controllano la **FONTE**, l **ALLINEAMENTO** e la **MASCHERA** --
+        e non e una copia della legge usata come misura: e un confronto fra la legge
+        e **cio che la legge ha scritto**.
+
+        `(B)` **IL CASO CHE DEVE FALLIRE, nella stessa corsa:** lo stesso confronto
+        con `ii` spostato di uno *(`np.roll`)* deve dare **elementi diversi > 0**.
+        ### Se da `0`, il confronto `(A)` **non discrimina**.
+
+        `(C)` se gli archi confrontati sono **0**, quel passo ### **NON PASSA**: si
+        dichiara, e **non si conta come identita**.
+
+        ### PERCHE IL VECCHIO ERA UN FALSO-UNO *(rilievo del guardiano su `0b3af63`)*:
+        ricalcolava `DT*0.5*(1+1)*c` e lo confrontava con `c*DT`, e in IEEE
+        `0.5*(1+1)` e `1.0` e `DT*1.0` e `DT` -- quindi passava **sempre**, su
+        qualunque dato, senza mai toccare `_dt_e_ultimo`.
         """
-        n = int(len(np.asarray(dte)))
-        if not n:
-            self.controllo.append({"passo": self.passo, "sito": sito, "n_archi": 0,
-                                   "stato": "NESSUN ARCO: non e' un'identita'"})
+        out = {"passo": self.passo, "sito": sito}
+        r = self.ctx.get("r")
+        src = getattr(net, "_dt_e_ultimo", None)
+        L = int(len(np.asarray(net.i)))
+        if r is None:
+            out["archi_confrontati"] = 0
+            out["stato"] = "r e None (orologio globale): dt_e e DT scalare"
+            self.controllo.append(out)
             return
-        uno = np.ones(n, float)
-        dt_e_r1 = self.DT * 0.5 * (uno + uno)
-        a = np.asarray(c, float) * dt_e_r1
-        b = np.asarray(c, float) * self.DT
-        a, b = np.broadcast_arrays(a, b)
-        diversi = int(np.sum(a != b))
-        self.controllo.append({
-            "passo": self.passo, "sito": sito, "n_archi": n,
-            "dt_e_r1_uguale_DT": bool(np.all(dt_e_r1 == self.DT)),
-            "elementi_diversi": diversi,
-            "scarto_max": float(np.max(np.abs(a - b))) if n else 0.0,
-            "stato": "coincidono al bit" if diversi == 0 else "### NON COINCIDONO"})
-
+        if src is None or np.ndim(src) == 0:
+            out["archi_confrontati"] = 0
+            out["stato"] = "la fonte _dt_e_ultimo e assente o SCALARE"
+            self.controllo.append(out)
+            return
+        a = np.asarray(src, float)
+        if len(a) != L:
+            out["archi_confrontati"] = 0
+            out["stato"] = ("la fonte NON e lunga come gli archi di adesso: %d vs %d"
+                            % (len(a), L))
+            self.controllo.append(out)
+            return
+        dte = a[mask]
+        rr = np.asarray(r, float)
+        nr = int(len(rr))
+        I = np.asarray(ii, int)
+        J = np.asarray(jj, int)
+        in_range = (I < nr) & (J < nr)
+        finito = np.isfinite(dte)
+        ok = in_range & finito
+        out.update({"archi_mascherati": int(len(dte)), "len_r": nr,
+                    "n_ora": int(net.n),
+                    "esclusi_estremo_oltre_r": int(np.sum(~in_range)),
+                    "esclusi_dt_e_non_finito": int(np.sum(in_range & ~finito)),
+                    "archi_confrontati": int(np.sum(ok))})
+        if not np.any(ok):
+            out["stato"] = "ZERO archi confrontabili: questo passo NON PASSA"
+            self.controllo.append(out)
+            return
+        atteso = self.DT * 0.5 * (rr[I[ok]] + rr[J[ok]])
+        scritto = dte[ok]
+        diversi = int(np.sum(atteso != scritto))
+        out["elementi_diversi"] = diversi
+        out["scarto_max"] = float(np.max(np.abs(atteso - scritto)))
+        # ### (B) IL CASO CHE DEVE FALLIRE, nella STESSA corsa e sugli STESSI dati.
+        Ir = np.roll(I, 1)
+        okr = (Ir < nr) & (J < nr) & finito
+        if np.any(okr):
+            att_r = self.DT * 0.5 * (rr[Ir[okr]] + rr[J[okr]])
+            out["spostato_diversi"] = int(np.sum(att_r != dte[okr]))
+            out["spostato_archi"] = int(np.sum(okr))
+        else:
+            out["spostato_diversi"] = -1
+            out["spostato_archi"] = 0
+        # ### `r` ERA DEGENERE A QUESTO PASSO? La domanda decide se (A) e (B)
+        #   abbiano POTERE. Con `r == 1` ovunque, `dt_e` e un array COSTANTE pari
+        #   a `DT`: nessuna permutazione degli indici e rilevabile, quindi ne (A)
+        #   ne (B) provano niente. ### Si DICHIARA, non si spaccia per identita.
+        out["r_degenere"] = bool(np.all(rr == 1.0))
+        out["dt_e_costante"] = bool(np.all(scritto == scritto[0]))
+        out["potere"] = not (out["r_degenere"] or out["dt_e_costante"])
+        out["stato"] = ("coincide al bit" if diversi == 0
+                        else "### NON COINCIDE")
+        if not out["potere"]:
+            out["stato"] += " (ma INVERIFICABILE: dt_e e costante)"
+        self.controllo.append(out)
 
 # =============================================================== il collaudo
 def collaudo():
@@ -369,30 +459,64 @@ def collaudo():
     riga("=")
     ok = True
 
-    # (1) l'aritmetica del controllo, su dati sintetici
     DT = 0.01
+    # (1) ### ARITMETICA IEEE, NON UN CONTROLLO DELLO STRUMENTO.
+    #   Questa riga NON prova niente sullo strumento: `0.5*(1+1)` e `1.0` e `DT*1.0`
+    #   e `DT` **per definizione di IEEE-754**, quindi passa su qualunque dato.
+    #   ### ERA IL VECCHIO CONTROLLO, ed era un FALSO-UNO (rilievo del guardiano su
+    #   `0b3af63`): resta qui SOLO come promemoria di che cosa non e un controllo.
+    stampa("  (1) aritmetica IEEE, NON un controllo dello strumento:")
     for et, c in [("c scalare", 1.1313708498984762),
                   ("c per arco", np.array([0.566, 1.1313708498984762, 2.0]))]:
-        n = 3
-        uno_ = np.ones(n)
+        uno_ = np.ones(3)
         dte = DT * 0.5 * (uno_ + uno_)
         a = np.asarray(c, float) * dte
         b = np.broadcast_to(np.asarray(c, float) * DT, a.shape)
-        buono = bool(np.all(dte == DT)) and int(np.sum(a != b)) == 0
-        ok = ok and buono
-        stampa("  r=1: %-14s  dt_e==DT %-5s  tetti identici %-5s  %s"
-               % (et, bool(np.all(dte == DT)), int(np.sum(a != b)) == 0,
-                  "OK" if buono else "FALLITO"))
+        stampa("      %-12s dt_e==DT %-5s tetti identici %-5s  <- vero PER"
+               % (et, bool(np.all(dte == DT)), int(np.sum(a != b)) == 0))
+        stampa("                   DEFINIZIONE, non perche lo strumento funzioni")
 
-    # (2) ### il caso che DEVE fallire: con r != 1 i due tetti NON devono coincidere
-    r = np.array([0.5, 1.0, 1.4])
-    dte = DT * 0.5 * (r + r)
-    c = 1.1313708498984762
-    diversi = int(np.sum(c * dte != c * DT))
-    buono = diversi == 2
+    # (2) ### IL CONTROLLO VERO, su dati sintetici: la legge contro CIO CHE E SCRITTO.
+    #   `scritto` imita `_dt_e_ultimo`; se coincide con il ricalcolo, (A) passa.
+    rr = np.array([0.5, 1.0, 1.4, 0.8])
+    I = np.array([0, 1, 2, 3])
+    J = np.array([1, 2, 3, 0])
+    scritto = DT * 0.5 * (rr[I] + rr[J])
+    att = DT * 0.5 * (rr[I] + rr[J])
+    d0 = int(np.sum(att != scritto))
+    buono = d0 == 0
     ok = ok and buono
-    stampa("  r!=1: i tetti differiscono su %d archi su 3 (attesi 2)   %s"
-           % (diversi, "OK" if buono else "FALLITO"))
+    stampa("  (2) (A) allineato: %d elementi diversi su 4 (atteso 0)   %s"
+           % (d0, "OK" if buono else "FALLITO"))
+
+    # (3) ### IL CASO CHE DEVE FALLIRE: con `ii` spostato di uno, (A) DEVE trovare
+    #   differenze. Se non le trovasse, (A) non discriminerebbe -- cioe sarebbe
+    #   un altro FALSO-UNO, e non lo saprei.
+    Ir = np.roll(I, 1)
+    att_r = DT * 0.5 * (rr[Ir] + rr[J])
+    dr = int(np.sum(att_r != scritto))
+    buono = dr > 0
+    ok = ok and buono
+    stampa("  (3) (B) con ii spostato: %d elementi diversi su 4 (attesi > 0)   %s"
+           % (dr, "OK" if buono else "FALLITO -- (A) NON DISCRIMINA"))
+
+    # (4) ### UNA FONTE SBAGLIATA DEVE ESSERE SCOPERTA: se `scritto` venisse da un
+    #   `r` diverso (per esempio quello del passo precedente), (A) deve vederlo.
+    scritto_vecchio = DT * 0.5 * (np.array([0.6, 1.0, 1.4, 0.8])[I]
+                                  + np.array([0.6, 1.0, 1.4, 0.8])[J])
+    dv = int(np.sum(att != scritto_vecchio))
+    buono = dv > 0
+    ok = ok and buono
+    stampa("  (4) fonte di un ALTRO passo: %d elementi diversi (attesi > 0)   %s"
+           % (dv, "OK" if buono else "FALLITO"))
+
+    # (5) ### ZERO ARCHI NON E UN IDENTITA: lo stato deve dirlo.
+    vuoto = int(np.sum(np.array([], float) != np.array([], float)))
+    buono = vuoto == 0
+    ok = ok and buono
+    stampa("  (5) su 0 archi il confronto da %d differenze -- ed e proprio per questo"
+           % vuoto)
+    stampa("      che lo stato <<ZERO archi confrontabili>> NON conta come identita")
 
     # (3) ### `q3` di un insieme VUOTO non deve dare 0 (presidio di FATTI_dal_codice)
     v = q3([])
@@ -445,7 +569,8 @@ def aggrega(righe, sito, fino):
     def s(k):
         return [x[k] for x in r if k in x]
     def tot(k):
-        v = s(k)
+        v = [x for x in s(k) if isinstance(x, (int, float))
+             and not isinstance(x, bool)]
         return int(sum(v)) if v else 0
     out = {"passi": len(r), "archi_tot": tot("n_archi")}
     for k in ["limitati_oggi", "limitati_cura", "da_lim_a_nonlim", "da_nonlim_a_lim",
@@ -456,7 +581,13 @@ def aggrega(righe, sito, fino):
     for k in ["rap_tutti", "rap_sui_limitati_oggi", "rap_sui_saturi", "r_i_tutti",
               "r_j_tutti", "r_i_sui_limitati", "r_j_sui_limitati", "r_i_sui_saturi",
               "r_j_sui_saturi", "csa", "p_oggi", "p_cura", "glob_cura", "spinta"]:
-        v = [x[k] for x in r if k in x and x[k].get("min") is not None]
+        # ### SI CONTROLLA IL TIPO, non il nome: una chiave puo' portare uno
+        #   SCALARE in un sito e un dizionario di quantili in un altro, e
+        #   quella collisione ha fatto cadere la prova di fumo DOPO che la
+        #   misura era gia' fatta -- il modo peggiore di cadere.
+        v = [x[k] for x in r
+             if k in x and isinstance(x[k], dict)
+             and x[k].get("min") is not None]
         if v:
             out[k] = {"min": min(y["min"] for y in v),
                       "med_delle_mediane": float(np.median([y["med"] for y in v])),
@@ -547,8 +678,33 @@ def principale(passi):
                        "sep": getattr(a, "sep", None),
                        "n_iniziale": int(net.n), "passi": passi},
              "ancore_patch": fatte, "chiamate_per_sito": chiam,
-             "per_passo": R.per_passo, "controllo": R.controllo}
+             "per_passo": R.per_passo, "contesti": R.contesti,
+             "controllo": R.controllo}
 
+    riga("=")
+    stampa("DA DOVE VIENE `r`: la FISICA o un RAMO DEGENERE GIA NOTO?")
+    riga("=")
+    uno_sempre = [c for c in R.contesti if c.get("r_tutti_uno")]
+    stampa("  passi con r == 1.0 ESATTO su OGNI nodo: %d su %d"
+           % (len(uno_sempre), len(R.contesti)))
+    stampa("  ### E CONTA: con r = 1 i due tetti sono IDENTICI, quindi un esito")
+    stampa("      <<la cura non cambia nulla>> NON sarebbe una proprieta della")
+    stampa("      legge, ma la conseguenza di un r degenere. Per questo si contano")
+    stampa("      i rami che producono r = 1 senza che sia fisica.")
+    if R.contesti:
+        ult = R.contesti[-1]["contatori"]
+        for c in CONT_RITMO:
+            stampa("      %-26s %12d  (cumulativo a fine corsa)" % (c, ult[c]))
+        rq = [c["r_q3"] for c in R.contesti if c.get("r_q3")]
+        if rq:
+            stampa("  r sui nodi: min dei min %.6e, max dei max %.6e"
+                   % (min(x["min"] for x in rq), max(x["max"] for x in rq)))
+            div = [i + 1 for i, c in enumerate(R.contesti)
+                   if c.get("r_q3") and (c["r_q3"]["min"] != 1.0
+                                         or c["r_q3"]["max"] != 1.0)]
+            stampa("  primi passi in cui r NON e 1 ovunque: %s"
+                   % (div[:10] if div else "NESSUNO"))
+    stampa()
     for sito, et in [("clip_spinta", "IL CLIP DI `spinta` -- cono GLOBALE (:9203)"),
                      ("coes", "LA SCALA DELLA COESIONE -- cono LOCALE (:9340)")]:
         riga("=")
@@ -583,32 +739,95 @@ def principale(passi):
         stampa()
 
     riga("=")
-    stampa("IL CONTROLLO CHE PUO' FALLIRE: con r = 1 i due tetti coincidono AL BIT?")
+    stampa("IL CONTROLLO: la LEGGE contro CIO CHE LA LEGGE HA SCRITTO")
     riga("=")
+    stampa("  (A) DT*0.5*(r[ii]+r[jj]), con gli r di `step` DELLO STESSO PASSO e gli")
+    stampa("      ii/jj di ADESSO al sito, confrontato AL BIT con _dt_e_ultimo[mask]")
+    stampa("      sugli STESSI archi. Controlla FONTE, ALLINEAMENTO e MASCHERA.")
+    stampa("  (B) lo stesso confronto con ii SPOSTATO DI UNO deve dare differenze.")
+    stampa("  (C) zero archi confrontabili = il passo NON PASSA.")
+    stampa("  ### E IL VECCHIO CONTROLLO ERA UN FALSO-UNO (guardiano, su 0b3af63):")
+    stampa("      ricalcolava DT*0.5*(1+1)*c contro c*DT, che in IEEE coincidono")
+    stampa("      SEMPRE, senza mai toccare _dt_e_ultimo.")
+    stampa()
     tot = len(R.controllo)
-    vuoti = [x for x in R.controllo if x["n_archi"] == 0]
+    archi = int(sum(x.get("archi_confrontati", 0) for x in R.controllo))
+    vuoti = [x for x in R.controllo if x.get("archi_confrontati", 0) == 0]
     diff = [x for x in R.controllo if x.get("elementi_diversi", 0)]
-    archi = int(sum(x["n_archi"] for x in R.controllo))
-    stampa("  verifiche: %d   archi confrontati IN TOTALE: %d" % (tot, archi))
-    stampa("  ### E IL NUMERO DI ARCHI SI DICHIARA: <<0 differenze su 0 archi>> NON e'")
-    stampa("      un'identita' -- e' mancanza di confronto (presidio di FATTI_dal_codice).")
-    stampa("  verifiche con ZERO archi: %d" % len(vuoti))
-    stampa("  verifiche con differenze: %d" % len(diff))
-    fuori["controllo_riassunto"] = {"verifiche": tot, "archi_confrontati": archi,
-                                    "vuote": len(vuoti), "con_differenze": len(diff)}
+    # ### DUE INSIEMI DIVERSI, e tenerli insieme sarebbe l'errore:
+    #   `senza_potere` = (B) non discrimina perche `dt_e` e COSTANTE (r degenere):
+    #       nessun test di permutazione potrebbe, e il passo e INVERIFICABILE;
+    #   `nondisc` = (B) non discrimina MENTRE `dt_e` VARIA: li (A) non prova niente,
+    #       ed e un FERMO vero.
+    con_potere = [x for x in R.controllo if x.get("potere")]
+    senza_potere = [x for x in R.controllo
+                    if x.get("archi_confrontati", 0) and not x.get("potere", False)]
+    nondisc = [x for x in con_potere if x.get("spostato_diversi", 0) <= 0]
+    escl_r = int(sum(x.get("esclusi_estremo_oltre_r", 0) for x in R.controllo))
+    escl_n = int(sum(x.get("esclusi_dt_e_non_finito", 0) for x in R.controllo))
+    masch = int(sum(x.get("archi_mascherati", 0) for x in R.controllo))
+    stampa("  verifiche %d   archi mascherati %d   CONFRONTATI %d"
+           % (tot, masch, archi))
+    stampa("  esclusi perche un estremo e oltre len(r) (nodo nato in mitosi): %d"
+           % escl_r)
+    stampa("  esclusi perche dt_e NON e finito (il veleno del COMMIT 4):          %d"
+           % escl_n)
+    stampa("  verifiche con ZERO archi confrontabili (NON passano):               %d"
+           % len(vuoti))
+    stampa("  verifiche con DIFFERENZE in (A):                                   %d"
+           % len(diff))
+    stampa("  verifiche con POTERE (dt_e VARIA fra gli archi):                   %d"
+           % len(con_potere))
+    stampa("  verifiche INVERIFICABILI (dt_e COSTANTE: r degenere):              %d"
+           % len(senza_potere))
+    stampa("      ### su queste nessun test di permutazione puo discriminare, e NON")
+    stampa("          le conto come identita: lo dico. E il guardiano lo aveva")
+    stampa("          scritto nel mandato.")
+    stampa("  verifiche CON POTERE in cui (B) NON ha discriminato:                %d"
+           % len(nondisc))
+    fuori["controllo_riassunto"] = {
+        "verifiche": tot, "archi_mascherati": masch, "archi_confrontati": archi,
+        "esclusi_estremo_oltre_r": escl_r, "esclusi_dt_e_non_finito": escl_n,
+        "vuote": len(vuoti), "con_differenze": len(diff),
+        "con_potere": len(con_potere), "inverificabili": len(senza_potere),
+        "senza_discriminazione": len(nondisc)}
     if archi == 0:
-        stampa("  ### FERMO: nessun arco confrontato. Il controllo non ha avuto oggetto.")
+        stampa("  ### FERMO: ZERO archi confrontati in tutta la corsa. Il controllo")
+        stampa("      non ha avuto oggetto, e NON si legge come identita.")
         esito = 1
     elif diff:
-        stampa("  ### FERMO: i due tetti NON coincidono al bit con r = 1.")
+        stampa("  ### FERMO: (A) trova DIFFERENZE. Su quei passi la misura e INVALIDA.")
+        stampa("      passi con differenze: %s"
+               % sorted({x["passo"] for x in diff})[:20])
         for x in diff[:5]:
-            stampa("      passo %s sito %s: %d diversi, scarto max %.3e"
-                   % (x["passo"], x["sito"], x["elementi_diversi"], x["scarto_max"]))
-        stampa("      La misura confronterebbe DUE LEGGI, non due tempi.")
+            stampa("      passo %s sito %s: %d diversi su %d, scarto max %.3e"
+                   % (x["passo"], x["sito"], x["elementi_diversi"],
+                      x["archi_confrontati"], x["scarto_max"]))
         esito = 1
+    elif nondisc:
+        stampa("  ### FERMO: (B) non discrimina in %d verifiche IN CUI dt_e VARIA."
+               % len(nondisc))
+        stampa("      Li il confronto (A) non proverebbe niente: un altro FALSO-UNO.")
+        esito = 1
+    elif not con_potere:
+        stampa("  ### FERMO, e NON perche lo strumento sbagli: in TUTTE le %d verifiche"
+               % tot)
+        stampa("      dt_e e COSTANTE (r == 1 su ogni nodo), quindi l allineamento NON")
+        stampa("      E VERIFICABILE -- nessuna permutazione degli indici e rilevabile.")
+        stampa("      ### E DALLO STESSO FATTO SEGUE LA MISURA: con dt_e == DT i due")
+        stampa("          tetti COINCIDONO, quindi <<la cura non cambia nulla>> su")
+        stampa("          questa traiettoria -- ma per r DEGENERE, non per la legge.")
+        stampa("      ### Questo E un risultato, e va letto con i contatori di ritmo().")
+        esito = 1
+    elif vuoti:
+        stampa("  ### ATTENZIONE: %d verifiche con ZERO archi confrontabili." % len(vuoti))
+        stampa("      Quei passi NON passano, e li dichiaro invece di contarli come")
+        stampa("      identita. Le altre %d passano." % (tot - len(vuoti)))
+        esito = 0
     else:
-        stampa("  ### IL CONTROLLO PASSA: con r = 1 i due tetti coincidono AL BIT su tutti")
-        stampa("      i %d archi confrontati, in %d verifiche." % (archi, tot))
+        stampa("  ### IL CONTROLLO PASSA su tutte le %d verifiche: %d archi confrontati,"
+               % (tot, archi))
+        stampa("      ZERO differenze, e (B) ha discriminato ovunque.")
         esito = 0
     riga("=")
 

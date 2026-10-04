@@ -1,9 +1,16 @@
 ========================================================================================================
 COLLAUDO -- i casi che decidono se la misura e' leggibile
 ========================================================================================================
-  r=1: c scalare       dt_e==DT True   tetti identici True   OK
-  r=1: c per arco      dt_e==DT True   tetti identici True   OK
-  r!=1: i tetti differiscono su 2 archi su 3 (attesi 2)   OK
+  (1) aritmetica IEEE, NON un controllo dello strumento:
+      c scalare    dt_e==DT True  tetti identici True   <- vero PER
+                   DEFINIZIONE, non perche lo strumento funzioni
+      c per arco   dt_e==DT True  tetti identici True   <- vero PER
+                   DEFINIZIONE, non perche lo strumento funzioni
+  (2) (A) allineato: 0 elementi diversi su 4 (atteso 0)   OK
+  (3) (B) con ii spostato: 4 elementi diversi su 4 (attesi > 0)   OK
+  (4) fonte di un ALTRO passo: 2 elementi diversi (attesi > 0)   OK
+  (5) su 0 archi il confronto da 0 differenze -- ed e proprio per questo
+      che lo stato <<ZERO archi confrontabili>> NON conta come identita
   q3 di un insieme VUOTO -> min=None n=0 (atteso None, 0)   OK
   q3 con nan e inf -> n=2 max=3.0 (attesi 2, 3.0)   OK
   la patch attacca: 4 ancore, tutte uniche   OK
