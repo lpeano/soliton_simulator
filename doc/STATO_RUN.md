@@ -1405,3 +1405,55 @@ ramo B (chi_basc OFF):
 - **note** IL RUN UNICO che serve a TRE cose: (1) gli STATI del grafo ai checkpoint per la scomposizione del CAMMINO (TRATTI) e per MASSA-ID offline; (2) i FOTOGRAMMI ogni 2 passi sul seme 11 per il video (VIDEO-SCENA); (3) la ripetizione della misura del pilota. Tutti i .npz restano LOCALI (STATI-LOCALI, gia' in .gitignore). Strumenti committati in 0e7810b PRIMA del lancio (par.5).
 
 **chiuso 2026-09-27 11:29:11 — FINITO** 4 semi su 4 in fondo, 120 passi. Prodotti: 16 stati del grafo ai checkpoint (i, j, d, phi, pos, n), 61 fotogrammi pos/phi/phi_g/dpozzo/ii/jj sul seme 11, 4 file di coorti del passo 0 -- 81 .npz in tutto, TUTTI LOCALI (STATI-LOCALI, .gitignore). Piu' i 4 misura.json, committabili. kappa scelto 3. Il run serve a TRE cose: la scomposizione del CAMMINO (TRATTI), MASSA-ID-FISSO offline, e il video (VIDEO-SCENA). Strumenti committati in 0e7810b e c8b6dd9 PRIMA del lancio.
+
+---
+
+## `SCHW-SOTTO-LAM` — lo Schwinger fa nascere archi SOTTO `LAM`, e `_nasce` li alza
+
+*(aperto il 2026-10-04, su mandato del guardiano. **Da REGISTRARE, non da curare:** la
+cura la decide Luca.)*
+
+**IL FATTO, e viene da un referto committato**, non da un sospetto: nel sigillo del `6a`
+*(`1927b45`)* i contatori dicono **`_sm_trd_schwinger = 46`** e
+**`_sm_trd0_schwinger = 46`** sulla somma delle quattro scene. ### **Quarantasei archi
+nascono dallo Schwinger piu' corti di `LAM`, e `_nasce` li ALZA al pavimento.**
+
+> ### 📌 **QUINDI `A13` ALLA NASCITA — *un arco non nasce piu' corto della lunghezza
+> d'onda* — vale per la MITOSI e NON per lo SCHWINGER.** Ed e' proprio la legge che il
+> commit `6b` rende **incondizionata** sul sito della mitosi: rendere incondizionato quel
+> cancello ### **lascia lo Schwinger esattamente come e'.**
+
+### **PERCHE' ACCADE, letto dal codice** *(non dedotto)*: la lunghezza dei due archi
+nuovi dello Schwinger viene da **`pos`** — la distanza fra `aa` e `bb` —
+**non da `d`** come nella mitosi:
+
+```
+_L_sch = np.linalg.norm(self.pos[aa] - self.pos[bb], axis=1)
+_dd_a  = np.maximum(FRAZ_NASCITA * _L_sch, 0.05)
+_dd_b  = np.maximum((1.0 - FRAZ_NASCITA) * _L_sch, 0.05)
+```
+
+### **E nessun cancello confronta `_L_sch` con `LAM` prima di creare gli archi:** il solo
+limite e' il `np.maximum(..., 0.05)`, che e' ### **un pavimento assoluto, non `LAM`** —
+cioe' `A11` applicato, `A13` no.
+
+### **IL LEGAME CON `SCHW-CORTI`, e la differenza — che conta**
+
+| voce | che cosa guarda | che cosa dice |
+|---|---|---|
+| **`SCHW-CORTI`** | la **SOMMA** | il `39 %` delle coppie **accorcia il grafo** (`2*dd < d`) |
+| **`SCHW-SOTTO-LAM`** | il **SINGOLO ARCO** | `46` archi nascono **sotto `LAM`** e vengono alzati |
+
+### ⚠ **Sono due sintomi della STESSA origine** *(la lunghezza viene da `pos` e nessuno la
+confronta con `LAM`)*, ### **ma curare una non cura automaticamente l'altra:** un cancello
+su `LAM` per singolo arco non impedisce che la somma accorci, e un vincolo sulla somma non
+impedisce che un singolo arco nasca corto.
+
+### ✅ **E IL TRONCAMENTO NON E' INVISIBILE: `_nasce` lo CONTA.** E' per questo che il
+numero `46` esiste invece di essere un'impressione — ### **il contatore e' il motivo per
+cui questa voce si puo' scrivere con un numero.**
+
+**CRITERIO DI CHIUSURA** *(una voce senza criterio e' un desiderio, non un fronte)*: una
+**decisione di Luca** su ① se il cancello di `A13` alla nascita vada **esteso** al sito
+Schwinger, e ② se la lunghezza da confrontare con `LAM` sia quella da **`pos`** o una
+**derivata da `d`**. ### ⛔ **NON SI DECIDE AL SUO POSTO** *(`L-DOPO-STOP`)*.

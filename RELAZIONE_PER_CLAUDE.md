@@ -3585,3 +3585,57 @@ non ha distrutto nulla del referto `1927b45`: verificato con `git status` prima 
 committare.)*
 
 ---
+
+## **COMMIT 6b — il task history PRIMA del codice, e un censimento che gia' non torna**
+
+Il task history del `6b` e' committato prima di toccare il codice *(par.8)*, coi criteri
+del sigillo fissati **prima** di vedere i numeri.
+
+### **COSA CREDO, e perche' lo credo prima di girare.** A `t = 0.5` la legge nuova e il
+cancello vecchio sono **la stessa condizione, al bit**: `0.5*d >= LAM` equivale a
+`d >= 2*LAM` **esattamente**, perche' moltiplicare per `0.5` e per `2.0` e' esatto in
+IEEE-754 — potenze di due, la mantissa non cambia. ### **Quindi il braccio `A` con il flag
+deve essere IDENTICO AL BYTE, non <<quasi>>.** *(Limite dichiarato: vale per `d` finito e
+normale; `d` ha un pavimento a `0.05`, quindi il caso subnormale non si presenta — ma e'
+una premessa sul dominio, non un teorema sul codice.)*
+
+### 📌 **E una cosa che il mandato chiede di scrivere, perche' altrimenti si legge come una
+smentita:** il piano prevedeva un *«calo di `n` al 72»*. ### **Quella previsione vale SOLO
+SENZA il flag.** Con `--mitosi-2lam` il cancello c'e' gia', quindi non puo' cambiare
+niente: il calo si vedra' nel braccio `B`, sulla scena senza flag.
+
+### ⛔ **IL MIO `grep` TROVA GIA' TRE SITI CHE NON SONO NELLA TUA LISTA:** `:3471`, `:8929`,
+`:11129`. ### **Sono COMMENTI, non codice** — quindi non e' ancora lo STOP che il mandato
+prevede, e il censimento dall'AST decidera'. ### **Ma uno di loro conta:** `:8929` dice
+*«NESSUN PAVIMENTO: `d >= LAM` con `SEMINA_LAM`/`MITOSI_2LAM`»*, cioe' **asserisce la
+legge sotto condizione del flag**. Dopo la cura quell'asserzione e' vera **senza
+condizioni**, e un commento che resta condizionale ### **sarebbe scaduto il giorno stesso**
+— la classe di difetto che `doc/FATTI_dal_codice.md` elenca. ### **Lo dico ora e non dopo,
+perche' dopo sarebbe una scoperta e adesso e' una previsione.**
+
+### ⚠ **E `doc/FATTI_dal_codice.md` non ha una voce ne' per `decidi_divisione` ne' per
+`MITOSI_2LAM`.** Il par.0 dice che quel file si legge prima di toccare una funzione: qui
+**non c'era niente da leggere**, e va aggiunto col codice.
+
+## **E UNA VOCE APERTA, da registrare e NON curare: `SCHW-SOTTO-LAM`**
+
+Dal referto del `6a` *(`1927b45`)*: **`_sm_trd_schwinger = 46`** e
+**`_sm_trd0_schwinger = 46`**. ### **Quarantasei archi nascono dallo Schwinger piu' corti
+di `LAM`, e `_nasce` li alza.** Quindi `A13` alla nascita — *un arco non nasce piu' corto
+della lunghezza d'onda* — vale per la **mitosi** e non per lo **Schwinger**: ed e'
+esattamente la legge che il `6b` rende incondizionata **sul solo sito della mitosi.**
+
+**Letto dal codice, non dedotto:** la lunghezza dei due archi nuovi viene da **`pos`**
+*(la distanza fra `aa` e `bb`)*, non da `d`, e il solo limite e' `np.maximum(..., 0.05)`
+— ### **un pavimento assoluto, non `LAM`: `A11` applicato, `A13` no.**
+
+### **E' il gemello di `SCHW-CORTI`, ma non lo stesso difetto:** `SCHW-CORTI` guarda la
+**somma** *(il `39 %` delle coppie accorcia il grafo)*, questa il **singolo arco**.
+### ⚠ **Curare una non cura l'altra**, e il criterio di chiusura e' una **decisione di
+Luca**: se estendere il cancello allo Schwinger, e se la lunghezza da confrontare con
+`LAM` sia quella da `pos` o una derivata da `d`. ### **Non la decido io** *(`L-DOPO-STOP`)*.
+
+### ✅ **E il numero `46` esiste perche' `_nasce` CONTA i troncamenti:** senza quel
+contatore questa voce sarebbe un'impressione invece di un fatto.
+
+---
