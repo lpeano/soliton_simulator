@@ -4536,3 +4536,31 @@ identico sui due estremi.)*
 
 **Il referto completo, coi numeri generati:**
 `doc/REFERTO_riordino_CLAUDE_2026-10-04.md`.
+
+## `CONTA-RIGHE` — **e la frase sulla trappola dei CR conteneva un CR**
+
+Registrando come **fronte** il difetto del conteggio *(gli strumenti contavano uno in piu'
+di `H-RIGHE`)*, l'operazione di aggiunta ne ha scoperto un **secondo**, e merita una riga
+perche' e' esattamente la forma che il par.7 descrive.
+
+**Ho aggiunto la riga all'indice con un normale *leggi-testo, scrivi-testo*.**
+`git diff --numstat` ha risposto **`3 aggiunte, 1 tolta`** dove ne aggiungevo **UNA**:
+### ⛔ **il mio write aveva SPEZZATO UNA RIGA ESISTENTE.** In `657 KB` di
+`doc/INDICE_ID.tsv` c'era **UN CR isolato**, e le *universal newlines* di Python lo leggono
+come un **fine-riga**.
+
+### 📌 **E IL CR STAVA DENTRO LA FRASE CHE DESCRIVE L'INIEZIONE DI CR** — la nota
+di `H-NON-TRACCIATI`, *«con l'uscita testuale su Windows si infila un … in ogni riga»*:
+### **dove volevo scrivere il NOME del carattere ho scritto il CARATTERE.**
+
+**Curato:** byte ripristinati con **`git cat-file -p` in binario** *(par.7: **non**
+`git checkout`)*, il CR sostituito col suo nome, la voce nuova aggiunta in **append
+binario** con la verifica che i `657854` byte precedenti siano **identici**, e il
+validatore pulito su **913** voci.
+### ⚠ **LA REGOLA OPERATIVA: un TSV non si riscrive INTERO per aggiungere una riga** —
+si apre in `ab` e si appende, ### **cosi' un byte sporco altrove non puo' diventare un
+danno.**
+
+### ✅ **E IL DIFETTO L'HA TROVATO `--numstat`, non io:** `3 aggiunte` dove me ne
+aspettavo `1`. ### **Guardare il CONTEGGIO del diff e non solo il suo esito e' un controllo
+che costa un comando.**

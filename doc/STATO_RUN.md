@@ -1485,3 +1485,62 @@ aggiunto»*.
 stanno in `doc/TASK_HISTORY/2026-10-04_file-non-tracciati.md`.**
 ### ⛔ **La scelta fra (A) e (B) e' di Luca** *(`L-DOPO-STOP`)*, e i `COMMIT 2`…`7` non
 dipendono da quella regola.
+
+## `CONTA-RIGHE` — **due convenzioni per contare le righe, e una non e' quella del
+presidio** *(aperto il 2026-10-04)*
+
+**IL DIFETTO, curato:** i due strumenti del riordino di `CLAUDE.md` contavano
+`count(NL) + 1`; **`H-RIGHE`** — ### **il presidio che IMPONE il tetto delle 400 righe**
+— conta i **fine-riga** in `csv/_presidio_righe.conta`, come `wc -l`. Su un file che
+**termina** con un fine-riga le due formule differiscono di **uno**, e il referto del
+riordino dichiaro' **`392 → 282`** dove il vero era **`391 → 281`**.
+**Curati** in `12625c2` importando `_presidio_righe.conta`: ### **una sola definizione nel
+repo, non una seconda formula corretta** — che sarebbe **una legge in piu'** *(`9-ter`)*.
+
+### 📌 **IL SEGNALE ERA NEL MANDATO.** Luca aveva scritto *«CLAUDE.md e' a 391
+righe su 400»*; io ho scritto **392** in sei messaggi e cinque commit **senza fermarmi
+sulla differenza**. ### **Un numero che non coincide con quello di chi te l'ha dato non e'
+un arrotondamento: e' un conteggio diverso.** *(Stessa forma di `P1`: un dato stabilito,
+non confrontato col mio.)*
+
+**IL FRONTE CHE RESTA, e non e' quel difetto:** se **altri** strumenti del repo contino
+righe con una formula propria. ### ⚠ **NON LI HO CENSITI**, e il difetto e' per sua
+natura **ripetibile**: ogni script che stampa *«N righe»* in un referto puo' averlo.
+
+**PERCHE' CONTA:** un numero di righe compare nei referti e nei messaggi di commit, dove
+**serve a decidere** *(il tetto, il «quanto e' cresciuto»)*. ### **Due convenzioni che
+differiscono di uno producono numeri che NON SI POSSONO CONFRONTARE fra un referto e
+l'altro** — ed e' **la stessa specie** del difetto dei **due hash** del par.2, dove la
+cura fu *«quando si cita un blob si dice QUALE DELLE DUE»*.
+
+### ✅ **IL CRITERIO DI CHIUSURA** *(una voce senza criterio e' un desiderio — par.4)*:
+si chiude quando uno strumento ha **censito ogni punto del repo che conta righe di un
+file** — e la ricerca e' **per FORMA, non per nome**: `count(NL)`, `splitlines()`,
+`readlines()`, `wc -l`, `enumerate(open(...))` — e per ciascuno si e' detto **se usa
+`_presidio_righe.conta`** o **se la sua convenzione e' DICHIARATA sul posto**.
+### **Si chiude anche se il censimento trova ZERO altri punti:** il verdetto
+*«nessun altro»* **e' un risultato**, purche' **misurato e non supposto** — oggi non
+e' misurato, e per questo la voce e' **aperta**.
+
+### ⛔ **E UNA SECONDA COSA, trovata dalla STESSA operazione, della stessa specie e
+### GIA' CURATA.** Aggiungendo questa voce con un normale *leggi-testo, scrivi-testo*,
+`git diff --numstat` ha detto **`3 aggiunte, 1 tolta`** dove ne aggiungevo **una**: il mio
+write aveva **SPEZZATO UNA RIGA ESISTENTE**. ### **La causa: in 657 KB di `INDICE_ID.tsv`
+c'era UN CR isolato**, e leggere con le *universal newlines* di Python lo trasforma in un
+**fine-riga**.
+
+### 📌 **E IL CR STAVA DENTRO LA FRASE CHE DESCRIVE L'INIEZIONE DI CR** *(la nota di
+`H-NON-TRACCIATI`: «con l'uscita testuale su Windows si infila un … in ogni riga»)*:
+### **dove volevo scrivere il NOME del carattere avevo scritto il CARATTERE.** La frase
+sulla trappola **conteneva** la trappola.
+
+**Curato:** i byte ripristinati con **`git cat-file -p` in binario** *(par.7: **non**
+`git checkout`)*, il CR sostituito col suo **nome**, e la voce nuova aggiunta in
+### **APPEND BINARIO**, verificando che i **657854 byte precedenti siano identici**.
+### ⚠ **LA REGOLA OPERATIVA CHE NE ESCE: un TSV non si riscrive INTERO per aggiungere
+una riga.** Si apre in `ab` e si appende — ### **cosi' un byte sporco altrove non puo'
+diventare un danno.**
+
+### ⛔ **IL PRECEDENTE DA NON RIFARE:** la cura giusta e' l'**import** della definizione
+unica, **non** una seconda formula scritta bene. ### **Due formule corrette che vivono in
+due file tornano a divergere alla prima modifica di una delle due.**
