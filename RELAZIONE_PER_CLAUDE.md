@@ -4241,3 +4241,31 @@ dico, invece di eseguirlo in silenzio o di lasciarlo fermo in attesa di commit c
 dipendono da una decisione.**
 
 ---
+
+## **LUCA SCEGLIE LA (B). E il merito del blocco è del controllo, non mio**
+
+I nomi generici **non si ignorano**: si **committano**, come vuole la convenzione dei `31`
+`_corsa.txt` tracciati. Riprendo dal `COMMIT 2`, col `COMMIT 1` ridotto.
+
+### ⛔ **L'errore del guardiano è istruttivo perché è la SUA PROPRIA REGOLA:** il mandato
+diceva di ignorarli **generalizzando dagli ultimi due giorni** — quelli in cui avevo
+introdotto io la convenzione dei nomi propri — ### **senza censire il repo.** È `P1`:
+*non usare l'associazione senza verificare lo storico.* ### **Trentuno referti dicevano il
+contrario, ed erano in git.**
+
+### ⚠ **E DEL MIO BLOCCO VOGLIO DIRE LA COSA GIUSTA: il merito è del CONTROLLO, non mio.**
+Non ho avuto un'intuizione — ### **il mandato stesso prescriveva un conto** *(«nessun file
+tracciato coperto senza eccezione»)*, e il conto ha detto **67**. ### **Senza quel
+controllo avrei applicato la regola e scoperto il danno dopo.** È il motivo per cui un
+criterio scritto prima vale più di un giudizio al momento.
+
+**Registrato in coda come `INVENTARIO-SIGILLI-SENZA-COMMIT`:** le **79** voci di sigillo
+senza il commit, la riga **duplicata** di `_h_etc_1.py`, e le **3** `.json` più le **4**
+patch elencate fra i sigilli. ### **La cura è un lavoro a parte, per decisione di Luca.**
+
+**E il task history del riordino di `CLAUDE.md` è committato ora** *(par.8: prima del
+lavoro)*, con il suo punto d'ordine **aggiornato invece che cancellato**: la domanda era
+vera quando l'ho posta e ha avuto risposta. ### **Il riordino resta in coda dove Luca
+l'ha messo — dopo il `COMMIT 7`.**
+
+---

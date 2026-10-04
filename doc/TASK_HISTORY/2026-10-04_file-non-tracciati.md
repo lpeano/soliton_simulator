@@ -96,3 +96,40 @@ lo raggiunge committando, la `(A)` ignorando.** ### ⛔ **Non scelgo io** *(`L-D
 i `COMMIT 2`, `3`, `4`, `5`, `6` e `7` ### **non dipendono** dalla regola dei nomi generici.
 Il solo pezzo bloccato e' la parte del `COMMIT 1` che riguarda ### **`_corsa.txt`,
 `_sigillo.json`, `_censimento.json` e i `.png`.**
+
+---
+
+## **ANNOTAZIONE del 2026-10-04 — LUCA SCEGLIE LA (B), e il guardiano dichiara il suo errore**
+
+### **DECISIONE DI LUCA: strada `(B)`.** I nomi generici dei referti **NON si ignorano**: si
+**committano**, come vuole la convenzione storica — **i `31` `_corsa.txt` tracciati.**
+
+### ⛔ **ERRORE DEL GUARDIANO, che lui dichiara, ed e' istruttivo PERCHE' E' LA SUA PROPRIA
+REGOLA:** il mandato diceva di ignorare i nomi generici, **generalizzando dagli ultimi due
+giorni** *(in cui avevo introdotto io la convenzione dei nomi propri)* ### **senza censire il
+repo** — che e' esattamente cio' che `P1` chiede a me: *«non usare l'associazione senza
+verificare lo storico»*.
+
+> ### 📌 **E LA FORMA DELL'ERRORE E' LA PIU' COMUNE DI TUTTE: prendere le ultime due
+> osservazioni per la regola.** ### **Trentuno referti dicevano il contrario, ed erano in
+> git.** ### ⚠ **Il mio blocco e' stato giusto NON perche' avessi un'intuizione, ma perche' il
+> mandato stesso prescriveva un controllo — *«nessun file tracciato coperto senza
+> eccezione»* — e il controllo ha contato `67`.** ### **Il merito e' del controllo, non mio:
+> senza quel conto avrei applicato la regola e scoperto il danno dopo.**
+
+### **L'ORDINE NUOVO, come Luca l'ha fissato**
+
+| | |
+|---|---|
+| **`COMMIT 2` PRIMA del `COMMIT 1`** | come avevo proposto: `git rm --cached` dei due `.pkl.gz`, ### **cosi' il conflitto di `*.pkl.gz` si azzera da se'** |
+| **`COMMIT 1` RIDOTTO** | `*.pkl.gz`, `*.pickle`; `csv/**/_tmp/*` *(con l'asterisco, **verificato con `git check-ignore`**)*; le copie del simulatore e le copie **patchate** con le eccezioni `!` ### **solo per quelle gia' tracciate accanto a un referto**; i `39` `.png` del video. ### **NIENTE regole sui nomi generici** |
+| **`COMMIT 4`** | i referti con nome generico **citati e non tracciati** ### **SI COMMITTANO** |
+| **`COMMIT 6`** | durante un run il referto **in scrittura** si dichiara con la via d'uscita, e ### **si committa a run chiuso** |
+
+### **E IL CONTROLLO RESTA:** nessun file tracciato coperto senza eccezione, ### **altrimenti
+si FERMA.**
+
+### **IN CODA, NON ORA** *(registrato come `INVENTARIO-SIGILLI-SENZA-COMMIT`)*: le **79** voci
+d'inventario di sigillo senza il commit con cui rigirarle, la **riga duplicata** di
+`_h_etc_1.py`, e le **3** voci `.json` piu' le **4** patch elencate fra i sigilli.
+### **La cura e' un lavoro a parte.**
