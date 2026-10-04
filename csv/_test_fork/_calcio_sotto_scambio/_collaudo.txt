@@ -1,0 +1,135 @@
+========================================================================================================
+IL CONTROLLO CHE PUO' FALLIRE -- due frazioni, non una
+========================================================================================================
+
+--------------------------------------------------------------------------------------------------------
+  FRAZ_NASCITA = 0.4  (copia del sorgente, il simulatore NON si tocca)
+--------------------------------------------------------------------------------------------------------
+  copia: _sim_frazione_0_4.py  blob 59a1823f
+  scena: nmasse=3 sep=6.1158  ->  n = 12802, archi = 471564
+  FRAZ_NASCITA = 0.4   MITOSI_DIR = 0.0   ANTIFASE_ADD = False   REGIME = 'deterministico'
+  KICK_TW = 0.35   PHI_CRIT = 6.283185307179586   COPPIA_MIT = 1.0
+  nomi verificati PRIMA dei passi: 8 globali + 13 su `Rete`
+  primo passo con CANDIDATI: 60   (atteso dai fatti: 42)   archi selezionati: 1
+  ### IL PASSO NON E' QUELLO ATTESO, e lo dico invece di adattarmi: il
+      mandato dice <<il passo PRIMA della prima divisione (il 42)>>, cioe'
+      LO STATO DA CUI mitosi() divide. Questo e' quello stato, trovato
+      sondando. Se il numero differisce, differisce la SCENA o l'ISTANTE.
+
+  I GENITORI, arco per arco -- e `chi_a`/`chi_b` SI RIPORTANO, perche' se
+  fossero uguali l'asimmetria misurata sarebbe solo quella del SEGNO
+  arco   a       b                tw     chi_a     chi_b  d_phi atteso
+  81512  2810    8955    -8.0727e+00     1.000     1.000  3.127875e-01
+
+  chiralita' NON nulle fra i 2 genitori: 2
+  archi con chi_a == chi_b: 1 su 1  (dove sono uguali resta solo il SEGNO)
+  archi sul TAGLIO di _wphi (|D| = dphi/2 = 6.283185): 0
+
+  stato del generatore identico nelle due copie: True
+  la SELEZIONE e' invariante allo scambio: True   (1 archi contro 1)
+  mitosi(): nati BASE = 1, nati SCAMBIO = 1
+  figli nati: 2  (indici [12804, 12805])
+  archi nuovi: 3 in BASE, 3 in SCAMBIO, 2 ACCOPPIATI per estremi, 1+1 spaiati
+  archi accoppiati con lo STESSO orientamento (i==i): 0 su 2
+
+--------------------------------------------------------------------------------------------------------
+  grandezza                    dove       esito          scarto max    diversi
+--------------------------------------------------------------------------------------------------------
+  _chi_core_nodi               genitori   SIMMETRICA    0.00000e+00          0
+  _chi_core_raggio             genitori   SIMMETRICA    0.00000e+00          0
+  _chi_core_rho0               genitori   SIMMETRICA    0.00000e+00          0
+  _chi_geom_nodi               genitori   SIMMETRICA    0.00000e+00          0
+  _cs_nodo_prev                genitori   SIMMETRICA    0.00000e+00          0
+  _deg                         genitori   SIMMETRICA    0.00000e+00          0
+  _fatt_cs_ultimo              genitori   SIMMETRICA    0.00000e+00          0
+  _nb                          genitori   SIMMETRICA    0.00000e+00          0
+  _nb_prec                     genitori   SIMMETRICA    0.00000e+00          0
+  _nb_ret                      genitori   SIMMETRICA    0.00000e+00          0
+  _psi_prec                    genitori   SIMMETRICA    0.00000e+00          0
+  _psi_spin_prec               genitori   SIMMETRICA    0.00000e+00          0
+  _psi_spinor                  genitori   SIMMETRICA    0.00000e+00          0
+  _r_corrente                  genitori   SIMMETRICA    0.00000e+00          0
+  _spinor_lift                 genitori   SIMMETRICA    0.00000e+00          0
+  eta                          genitori   SIMMETRICA    0.00000e+00          0
+  mem_mot                      genitori   SIMMETRICA    0.00000e+00          0
+  omega_s                      genitori   SIMMETRICA    0.00000e+00          0
+  perc_chi                     genitori   SIMMETRICA    0.00000e+00          0
+  perc_geom                    genitori   SIMMETRICA    0.00000e+00          0
+  perc_tw                      genitori   SIMMETRICA    0.00000e+00          0
+  phi                          genitori   ASIMMETRICA   3.12788e-01          2
+  phi0                         genitori   SIMMETRICA    0.00000e+00          0
+  phi_s                        genitori   SIMMETRICA    0.00000e+00          0
+  phivel                       genitori   SIMMETRICA    0.00000e+00          0
+  pos                          genitori   SIMMETRICA    0.00000e+00          0
+  psi                          genitori   SIMMETRICA    0.00000e+00          0
+  psi_spin                     genitori   SIMMETRICA    0.00000e+00          0
+  rho_spin                     genitori   SIMMETRICA    0.00000e+00          0
+  _chi_core_nodi               figlio     SIMMETRICA    0.00000e+00          0
+  _chi_core_raggio             figlio     SIMMETRICA    0.00000e+00          0
+  _chi_core_rho0               figlio     SIMMETRICA    0.00000e+00          0
+  _chi_geom_nodi               figlio     SIMMETRICA    0.00000e+00          0
+  _cs_nodo_prev                figlio     ASIMMETRICA   7.88745e-01          2
+  _deg                         figlio     SIMMETRICA    0.00000e+00          0
+  _fatt_cs_ultimo              figlio     SIMMETRICA    0.00000e+00          0
+  _nb                          figlio     ASIMMETRICA   7.51546e-01          6
+  _nb_prec                     figlio     ASIMMETRICA   7.51546e-01          6
+  _nb_ret                      figlio     ASIMMETRICA   8.13281e-01          6
+  _psi_prec                    figlio     ASIMMETRICA   2.00000e+00          2
+  _psi_spin_prec               figlio     ASIMMETRICA   4.00000e+00          4
+  _psi_spinor                  figlio     ASIMMETRICA   4.00000e+00          4
+  _r_corrente                  figlio     SIMMETRICA    0.00000e+00          0
+  _spinor_lift                 figlio     ASIMMETRICA   4.00000e+00          4
+  eta                          figlio     SIMMETRICA    0.00000e+00          0
+  mem_mot                      figlio     ASIMMETRICA   1.44497e-01          3
+  omega_s                      figlio     ASIMMETRICA   5.75704e-01          6
+  perc_chi                     figlio     SIMMETRICA    0.00000e+00          0
+  perc_geom                    figlio     SIMMETRICA    0.00000e+00          0
+  perc_tw                      figlio     SIMMETRICA    0.00000e+00          0
+  phi                          figlio     ASIMMETRICA   1.20763e+00          2
+  phi0                         figlio     ASIMMETRICA   1.20763e+00          2
+  phi_s                        figlio     ASIMMETRICA   5.42823e-02          1
+  phivel                       figlio     SIMMETRICA    0.00000e+00          0
+  pos                          figlio     ASIMMETRICA   2.82311e-01          6
+  psi                          figlio     SIMMETRICA    0.00000e+00          0
+  psi_spin                     figlio     ASIMMETRICA   4.00000e+00          4
+  rho_spin                     figlio     ASIMMETRICA   3.58517e+00          2
+  _dt_e_ultimo                 archi nuov SIMMETRICA    0.00000e+00          0
+  _rep                         archi nuov SIMMETRICA    0.00000e+00          0
+  _sin2_vir                    archi nuov SIMMETRICA    0.00000e+00          0
+  d                            archi nuov ASIMMETRICA   4.20514e-01          2
+  d0                           archi nuov ASIMMETRICA   4.20514e-01          2
+  i                            archi nuov ASIMMETRICA   2.00000e+00          2
+  j                            archi nuov ASIMMETRICA   2.00000e+00          2
+  peq                          archi nuov SIMMETRICA    0.00000e+00          0
+  tw                           archi nuov SIMMETRICA    0.00000e+00          0
+  twp                          archi nuov ASIMMETRICA   6.70410e+00          2
+  vd                           archi nuov SIMMETRICA    0.00000e+00          0
+--------------------------------------------------------------------------------------------------------
+  ASIMMETRICHE: 22 su 69 grandezze confrontate
+
+  LO SCARTO DI `phi` SUI GENITORI: misurato contro ATTESO dal conto
+                     misurato           atteso      mis - att
+  slot a      3.127875258e-01  3.127875258e-01      3.886e-16
+  slot b      3.127875258e-01  3.127875258e-01      3.886e-16
+
+  `pos` ASIMMETRICA trovata: True     `phi` (cioe' `fm`) asimmetrica: True
+  ### OK: lo strumento VEDE l'asimmetria indotta.
+
+--------------------------------------------------------------------------------------------------------
+  FRAZ_NASCITA = 0.3  (copia del sorgente, il simulatore NON si tocca)
+--------------------------------------------------------------------------------------------------------
+  copia: _sim_frazione_0_3.py  blob 20865ec7
+  scena: nmasse=3 sep=6.1158  ->  n = 12802, archi = 471564
+  FRAZ_NASCITA = 0.3   MITOSI_DIR = 0.0   ANTIFASE_ADD = False   REGIME = 'deterministico'
+  KICK_TW = 0.35   PHI_CRIT = 6.283185307179586   COPPIA_MIT = 1.0
+  nomi verificati PRIMA dei passi: 8 globali + 13 su `Rete`
+  ### NESSUN CANDIDATO in 80 passi: la misura NON si puo' fare.
+
+  `pos` ASIMMETRICA trovata: False     `phi` (cioe' `fm`) asimmetrica: False
+  ### *** CIECO: a t=0.3 doveva trovare pos E phi asimmetriche. ***
+
+========================================================================================================
+  t=0.4   OK    asimmetriche trovate: _cs_nodo_prev, _nb, _nb_prec, _nb_ret, _psi_prec, _psi_spin_prec, _psi_spinor, _spinor_lift, d, d0
+  t=0.3   CIECO   asimmetriche trovate: nessuna
+  ### *** CONTROLLO FALLITO: FERMATI (lo dice il mandato). ***
+========================================================================================================
