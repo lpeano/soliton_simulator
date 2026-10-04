@@ -182,10 +182,27 @@ def principale():
     stampa("")
 
     # ---- i corpora in cui cercare le citazioni
+    # ### ⛔ IL REFERTO DI QUESTO CENSIMENTO ESCE DAL CORPUS, e la ragione e' un difetto
+    #   MISURATO il 2026-10-04: il referto `_corsa_2026-10-04_PRIMO.txt` ### **elenca TUTTI
+    #   i candidati PER PERCORSO**, e una volta committato il giro successivo
+    #   ### **TROVA SE STESSO** e dichiara ### **citati** anche i file che nessun altro
+    #   nomina. ### **I <<non citati>> passarono da 57 a ZERO senza che niente cambiasse
+    #   nel repo.**
+    #   ### ⚠ **E' UN AUTORIFERIMENTO: il corpus in cui cerco le citazioni conteneva IL
+    #   DOCUMENTO CHE ENUMERA LE COSE CERCATE.** ### **Un segnale che si autoalimenta non
+    #   e' una misura.**
+    #   ### ✅ Esce SOLO la cartella di questo strumento: che un ALTRO documento citi un
+    #   file per percorso e' ### **una citazione legittima**, ed e' precisamente cio' che
+    #   la misura vuole vedere.
+    MIO = os.path.relpath(FUORI, RADICE).replace(chr(92), "/")
     corpora = {}
+    saltati = 0
     for rel in gits("ls-files").split(NL):
         rel = rel.strip()
         if not rel:
+            continue
+        if rel.startswith(MIO + "/"):
+            saltati += 1
             continue
         if rel.endswith((".md", ".tsv", ".txt", ".py", ".json")):
             try:
@@ -203,6 +220,12 @@ def principale():
                 corpora["STRUMENTI"] = corpora.get("STRUMENTI", "") + corpora_testo
             elif rel.endswith(".txt"):
                 corpora["REFERTI"] = corpora.get("REFERTI", "") + corpora_testo
+    stampa("  ### dal corpus esclusi %d file di `%s`: il referto di questo censimento"
+           % (saltati, MIO))
+    stampa("  ###   elenca i candidati PER PERCORSO, e senza escluderlo il censimento")
+    stampa("  ###   TROVEREBBE SE STESSO. ### Misurato: i non citati passarono da 57 a")
+    stampa("  ###   ZERO senza che niente cambiasse nel repo. ### Un segnale che si")
+    stampa("  ###   autoalimenta non e' una misura.")
     stampa("  i corpora in cui si cerca la citazione: %s"
            % ", ".join("%s (%d KB)" % (k, len(v) // 1024) for k, v in sorted(corpora.items())))
     stampa("")
