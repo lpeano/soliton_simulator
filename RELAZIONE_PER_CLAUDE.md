@@ -3906,3 +3906,64 @@ asserito: il censimento di `a7ef047` non elenca NESSUN sito `_rn_*`.**
 `decidi_divisione`, che **non esisteva**.
 
 ---
+
+## **IL SIGILLO DEL 6b PASSA, tutti e sei i bracci**
+
+Run staccato (PID `37064`), **stderr vuoto**, terminazione verificata in tre modi.
+Simulatore **`0f060670`**, sigillo `498fa79e`, *prima* `c18c9bf6` dal **padre** di
+`5f03401`.
+
+| braccio | esito | che cosa prova |
+|---|---|---|
+| **`0`** | ✅ | il *prima* + la patch = il blob di oggi |
+| **`A`** ×3 | ✅ | **byte-identico** con il flag, su `corta`, `lunga`, `altro_seme` — e **zero attributi nuovi non previsti** |
+| **`B`** | ✅ | la scena senza il flag: non identica, **ed è atteso** |
+| **`C`** | ✅ | `t = 0.4` su tutte le scene |
+| **`C-bis`** | ✅ | **tre copie, tre bocciature** |
+| **`D`** | ✅ | il flag fra i `[flag-inerti]`, `[cura5]` sparito, archivio **verbatim** |
+
+### ✅ **IL NUMERO CHE IL 6b DOVEVA PRODURRE, e lo produce:** sulla scena `lunga` senza
+il flag, `_sm_trd_mitosi` passa da **`40` a `0`** e `_sm_trd0_mitosi` da **`32` a `0`**.
+### **È la misura dell'affermazione `A14` scritta nel task history: il troncamento di
+`_nasce` sulla mitosi è diventato IRRAGGIUNGIBILE.** E i numeri del *prima* sono accanto,
+non zero — **uno zero atteso vale solo se accanto c'è quello che era.**
+
+**`B2` su `34` divisioni ammesse, evento per evento:** `min(t,1-t)*d >= LAM` su **ogni**
+evento, con `LAM = 0.800000` e `corto_min` sempre sopra. **Non in media.**
+
+### 📌 **IL CALO DI `n`: `2208 → 2170` al passo 150** *(archi `70324 → 70274`)*.
+### ⛔ **E lo dico come l'ho scritto PRIMA: è IMPOSTO PER COSTRUZIONE** — meno nascite
+ammesse, meno nodi — **non è un fenomeno emergente.** È la conseguenza aritmetica del
+cancello.
+
+**I tre contatori separati sciolgono una domanda che `negate` non poteva porre:** dei
+`19` rifiuti, **`19` sono per `LAM` sola**, `0` per densità, `0` per entrambi. E `negate`
+passa da `0` a `19`: nel *prima*, senza il flag, **non si rifiutava nulla.**
+
+### **IL DATO PER IL `6c`, misurato e non usato:** `|tw|` dei `19` archi rifiutati per
+`LAM` — **min `7.33`, mediana `8.12`, max `10.87`**; **tutti e `19` sopra `PHI_CRIT`**
+*(`6.283`)*, **`2` sopra `3π`** *(`9.425`)*. Le soglie locali vanno da **`6.913`** a
+**`9.425`** su 150 chiamate, e il ramo è `TORS_4PI = True`. ### ⚠ **Riportato, non usato
+per cambiare una soglia** *(`A1`)*.
+
+### ✅ **E IL RAGIONAMENTO DICHIARATO SULLA FINESTRA SI È VERIFICATO, nel verso che
+avevo previsto.** L'indizio `_g_m2l_dmin = 0.973` diceva **`False`** — il minimo sta
+**sotto** la finestra `[1.6, 2.0)`. Ma `C-bis (i)` è **bocciato**, con il primo evento
+violato a **`d_min = 1.925315`**, che sta **dentro** la finestra. ### 📌 **Esattamente
+come scritto nel sigillo: `dmin` è il MINIMO, e la finestra può contenere candidati anche
+se il minimo sta sotto. L'indizio non era la misura, e il verdetto vero era la
+bocciatura.** ### **Il caso NON è stato costruito: la materia c'era.**
+
+**E le tre bocciature discriminano per la ragione giusta:** `(i)` `12` violazioni su `19`
+eventi, `(ii)` `28` su `39`, `(iii)` `30` su `42`, con `corto_min` a `0.77`, `0.62`,
+`0.62` contro `LAM = 0.80`. ### **I casi `(ii)` e `(iii)` cadono sul lato opposto, come
+previsto: con `t = 0.4` il corto è quello di `t`, con `t = 0.6` si scambia.**
+
+### ⚠ **UN LIMITE DEL REFERTO CHE DICHIARO INVECE DI LASCIARLO PASSARE: `B1` sulla scena
+`corta` è VACUO.** A 72 passi senza il flag non c'è **nessun** candidato *(`None/None`
+su tutti i contatori, `0` divisioni ammesse)*, e il sigillo stampa comunque `PASSA`.
+### **Quel `PASSA` non prova niente: è `lunga` che porta la prova.** *(`B2` lo dice da
+sé — «VUOTO: NON PROVA NULLA» — ma `B1` no, e la differenza fra i due è un difetto del
+mio criterio, non del codice.)*
+
+---
