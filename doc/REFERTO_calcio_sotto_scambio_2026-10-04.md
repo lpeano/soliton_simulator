@@ -201,29 +201,49 @@ lo strumento classifica le tautologiche **nella parte 1 e non nella parte 2**. Q
 con una divisione **pendente**, che e' l'**intenzione** del mandato.
 ### **Lo dichiaro invece di far passare `50` per `42`.**
 
-## IL CONTROLLO CHE PUO' FALLIRE
+## IL CONTROLLO CHE PUO' FALLIRE — **passa su DUE frazioni**
 
-| frazione | esito | che cosa ha trovato |
-|---|---|---|
-| **`0.4`** *(quella del mandato)* | ### ✅ **OK** | `pos` **e** `phi` asimmetriche — **lo strumento NON e' cieco** |
-| `0.3` *(aggiunta da me)* | ### ⚠ **INCONCLUSO** | **nessun candidato** entro 80 passi |
+| frazione | il cancello chiede | primo candidato | esito |
+|---|---|--:|---|
+| `0.5` *(la misura)* | `d >= 2.00*LAM` | **50** | — |
+| **`0.4`** *(quella del mandato)* | `d >= 2.50*LAM` | **60** | ### ✅ **OK** |
+| `0.3` *(aggiunta da me)* | `d >= 3.33*LAM` | **102** | ### ✅ **OK** |
 
-### ✅ **IL CRITERIO DEL MANDATO PASSA.** A `t = 0.4` `pos` risulta asimmetrica con
-**`2.82311e-01`** dove a `t = 0.5` e' **`0.0`**, e `d`/`d0` con **`4.20514e-01`** dove a
-`0.5` sono **`0.0`**. ### **Il controllo e la misura si parlano: la stessa grandezza e'
-simmetrica a `0.5` e asimmetrica a `0.4`, che e' esattamente la forma convessa.**
+### ✅ **LO STRUMENTO NON E' CIECO, e la prova poggia su DUE valori**: a entrambi trova
+`pos` **e** `phi` asimmetriche, che a `t = 0.5` sono rispettivamente **identica al bit** e
+**arrotondamento**.
 
-### ⛔ **E IL MIO PRIMO VERDETTO SU `0.3` ERA UN `FALSO-UNO`:** diceva **`CIECO`** dove la
-verita' e' *«nessun evento da guardare»*. ### **La causa non e' un'anomalia:** il cancello
-di `A13` e' `t*d >= LAM` **e** `(1-t)*d >= LAM`, quindi serve `d >= LAM/t` —
-**`2.00*LAM`** a `0.5`, **`2.50*LAM`** a `0.4`, **`3.33*LAM`** a `0.3`: ### **piu' stretto
-il cancello, piu' tardi il candidato**, e `MAX_PASSI = 80` era un numero che non veniva da
-questo conto. **Curato con tre esiti** — `OK`, `CIECO`, **`INCONCLUSO`**.
+### 📌 **E IL RISULTATO E' PIU' FORTE DI <<non e' cieco>>: l'asimmetria indotta CRESCE
+### con la distanza da `0.5`.**
 
-### ⚠ **QUINDI LA PROVA DELLA VISTA POGGIA SU UN VALORE SOLO, e lo dico invece di
-### presentare due controlli dove ce n'e' uno.** *(Voce di coda: rigirare `0.3` con
-`--max-passi` piu' alto.)*
+| grandezza | `t = 0.5` | `t = 0.4` | `t = 0.3` |
+|---|--:|--:|--:|
+| `pos` del figlio | **`0.00000e+00`** *(al bit)* | `2.82311e-01` | `9.17136e-01` |
+| `phi` del figlio *(`fm`)* | `8.88178e-16` *(arrotond.)* | `1.20763e+00` | `2.49530e+00` |
+| `d` degli archi nuovi | **`0.00000e+00`** | `4.20514e-01` | `1.11685e+00` |
+| `d0` degli archi nuovi | **`0.00000e+00`** | `4.34176e-01` | `1.18130e+00` |
 
+### ⚠ **E QUI MI FERMO AL QUALITATIVO, perche' il quantitativo NON regge:** la forma
+convessa predice uno scarto proporzionale a `|1 - 2t|`, cioe' un **rapporto 2** fra `0.3`
+e `0.4`. Il misurato su `pos` e' **`3.25x`**. ### **Non e' una smentita: sono DUE ARCHI
+DIVERSI** *(passo 102 contro 60)*, quindi `|pos[a] - pos[b]|` non e' lo stesso.
+### **Il rapporto si potrebbe verificare solo sullo STESSO arco, e questa misura non lo
+fa.** Cio' che regge e': **lo zero esatto a `0.5`** e la **crescita monotona**.
+
+### ⛔ **E IL MIO PRIMO VERDETTO SU `0.3` ERA UN `FALSO-UNO`**, da cui tutto questo:
+diceva **`CIECO`** dove la verita' era *«nessun evento da guardare»* — non c'erano
+candidati entro `80` passi. ### **La causa non e' un'anomalia:** il cancello di `A13` e'
+`t*d >= LAM` **e** `(1-t)*d >= LAM`, quindi serve `d >= LAM/t`, e ### **piu' stretto il
+cancello, piu' tardi il candidato** — `50`, `60`, `102`. **`MAX_PASSI = 80` era un numero
+che non veniva da questo conto.** **Curato con tre esiti** — `OK`, `CIECO`,
+**`INCONCLUSO`** — e il budget alzato a `140` **dal conto**, non a caso.
+
+### 📌 **E UN DETTAGLIO CHE CHIUDE UNA DELLE DUE DEVIAZIONI:** a `t = 0.3` le nascite
+avvenute avanzando sono **0** *(`n` resta `12802`)*, perche' il cancello e' cosi' stretto
+che in `102` passi **nessuna divisione e' scattata**. ### **Quindi li' lo stato misurato E'
+*<<prima della prima divisione>>* alla lettera** — e il controllo trova le asimmetrie
+**anche in quello stato**, cioe' la deviazione dichiarata per `t = 0.5` **non e'** cio'
+che fa funzionare la misura.
 ## LA CONFIGURAZIONE
 
 | | |

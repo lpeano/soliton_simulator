@@ -295,3 +295,33 @@ e' esattamente la distinzione che il par.8 esiste per rendere verificabile.**
 ### ⛔ **E IL PUNTO 3 DEL MANDATO RESTA: NIENTE CURE.** Le asimmetrie sono **materia
 per la LEGGE** di `DIVISIONE-AUTOCONSISTENTE`, che viene **dopo l'energia**.
 ### **La forma della cura la decide Luca.**
+
+### ✅ **ANNOTAZIONE 2, poche ore dopo: LA VOCE DI CODA 1 E' CHIUSA.**
+
+Il controllo e' stato rigirato con **`--max-passi=140`**, e il budget viene **dal conto**
+e non da un numero scelto: `d >= LAM/t` da' `2.00*LAM` a `0.5`, `2.50` a `0.4`, `3.33` a
+`0.3`. ### **A `t = 0.3` il primo candidato e' al passo `102`** — col `42` e il `60`
+degli altri due, i tre numeri stanno nell'ordine che il conto prevede.
+
+### ✅ **I DUE CONTROLLI PASSANO: la prova della vista NON poggia piu' su un valore
+### solo.** E il risultato e' **piu' forte** di *«non e' cieco»*: ### **l'asimmetria
+indotta CRESCE con la distanza da `0.5`** — `pos` del figlio passa da **`0.0` (al
+bit)** a `2.82e-01` a `9.17e-01`, e `d`/`d0` degli archi nuovi dallo **zero esatto** a
+`4.21e-01`/`4.34e-01` a `1.12e+00`/`1.18e+00`.
+
+### ⚠ **E MI FERMO AL QUALITATIVO, perche' il quantitativo non regge:** la forma convessa
+predice un rapporto **`2`** fra `0.3` e `0.4` *(proporzionale a `|1 - 2t|`)*, e il
+misurato su `pos` e' **`3.25x`**. ### **Non e' una smentita: sono DUE ARCHI DIVERSI**
+*(passo `102` contro `60`)*, quindi `|pos[a] - pos[b]|` non e' lo stesso.
+### **Il rapporto si verificherebbe solo sullo STESSO arco, e questa misura non lo fa.**
+Cio' che regge e' **lo zero esatto a `0.5`** e la **crescita monotona**.
+
+### 📌 **E UN DETTAGLIO CHE CHIUDE ANCHE META' DELL'ALTRA DEVIAZIONE:** a
+`t = 0.3` le nascite avvenute avanzando sono **ZERO** *(`n` resta `12802`)*, perche' il
+cancello e' cosi' stretto che in `102` passi **nessuna divisione e' scattata**.
+### **Quindi li' lo stato misurato E' *<<prima della prima divisione>>* ALLA LETTERA, e il
+controllo trova le asimmetrie ANCHE in quello stato** — cioe' la deviazione dichiarata
+per `t = 0.5` *(due nascite gia' avvenute)* **non e'** cio' che fa funzionare la misura.
+
+**Restano aperte la coda 2** *(le tautologiche non classificate nella parte 2)* **e la
+coda 3** *(`VELENO-ORIENTATO`)*.

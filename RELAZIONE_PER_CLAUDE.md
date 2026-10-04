@@ -4710,3 +4710,28 @@ della vista poggia su UN valore solo.**
 
 ### ⛔ **NIENTE CURE, come dice il punto 3:** le asimmetrie sono **materia per la LEGGE**
 di `DIVISIONE-AUTOCONSISTENTE`, che viene **dopo l'energia**. **La forma la decide Luca.**
+
+## IL CONTROLLO DEL PUNTO 2 PASSA SU **DUE** FRAZIONI, e dice piu' di <<non e' cieco>>
+
+Rigirato con **`--max-passi=140`**, e il budget viene **dal conto**: `d >= LAM/t` chiede
+`2.00*LAM` a `0.5`, `2.50` a `0.4`, `3.33` a `0.3`. ### **I tre primi candidati stanno
+nell'ordine che il conto prevede: `42`, `60`, `102`.**
+
+| grandezza | `t = 0.5` | `t = 0.4` | `t = 0.3` |
+|---|--:|--:|--:|
+| `pos` del figlio | **`0.00000e+00`** *(al bit)* | `2.82311e-01` | `9.17136e-01` |
+| `phi` *(`fm`)* | `8.88178e-16` *(arrotond.)* | `1.20763e+00` | `2.49530e+00` |
+| `d` archi nuovi | **`0.00000e+00`** | `4.20514e-01` | `1.11685e+00` |
+| `d0` archi nuovi | **`0.00000e+00`** | `4.34176e-01` | `1.18130e+00` |
+
+### ✅ **L'asimmetria indotta CRESCE con la distanza da `0.5`**, e la prova della vista
+**non poggia piu' su un valore solo**. ### ⚠ **Ma mi fermo al qualitativo:** la forma
+convessa predice un rapporto `2` fra `0.3` e `0.4`, e il misurato e' **`3.25x`** —
+### **non e' una smentita, sono DUE ARCHI DIVERSI** *(passo `102` contro `60`)*. Il
+rapporto si verificherebbe solo sullo stesso arco.
+
+### 📌 **E a `t = 0.3` le nascite avvenute avanzando sono ZERO** *(`n` resta
+`12802`)*: in `102` passi nessuna divisione e' scattata. ### **Quindi li' lo stato
+misurato e' *<<prima della prima divisione>>* ALLA LETTERA, e le asimmetrie si trovano
+anche in quello stato** — cioe' la deviazione che avevo dichiarato per `t = 0.5` **non
+e'** cio' che fa funzionare la misura.
