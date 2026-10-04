@@ -107,6 +107,44 @@ def carica(nome, sim=None):
     return S, S.net, a
 
 
+# --- i nomi che lo strumento usa, e DOVE vivono --------------------------------
+# ### NASCE DA UN MIO ERRORE, misurato: il collaudo e' caduto dopo ~4 minuti di run
+#   con `AttributeError: module 'sim_fraz_0_4' has no attribute '_wphi'`, perche'
+#   avevo chiamato `S._wphi(...)` sul MODULO. ### `_wphi` e `_dphi` sono METODI
+#   STATICI DI `Rete`. ### E l'errore nasce da una GENERALIZZAZIONE: `FRAZ_NASCITA`,
+#   `KICK_TW` e `PHI_CRIT` SONO davvero globali di modulo, e da quelle tre ho dedotto
+#   il resto senza guardare -- che e' `P1`.
+# ### -> LA VERIFICA COSTA ZERO E GIRA PRIMA DEI PASSI: un nome sbagliato si scopre
+#   in un secondo invece che a meta' run.
+GLOBALI = ("FRAZ_NASCITA", "MITOSI_DIR", "ANTIFASE_ADD", "REGIME", "KICK_TW",
+           "PHI_CRIT", "COPPIA_MIT", "LAM")
+DELLA_RETE = ("_wphi", "_dphi", "mitosi", "decidi_divisione", "i", "j", "tw",
+              "phi", "pos", "perc_chi", "d", "n", "rng")
+
+
+def verifica_api(S, net):
+    """I nomi esistono DOVE credo? Altrimenti FERMO, e subito.
+
+    ### Non e' una cortesia: e' il presidio contro l'errore che ha fatto cadere il
+    collaudo del blob `af05e86b` **dopo** aver speso i passi.
+    """
+    mancanti = []
+    for k in GLOBALI:
+        if not hasattr(S, k):
+            mancanti.append("modulo.%s" % k)
+    for k in DELLA_RETE:
+        if not hasattr(net, k):
+            mancanti.append("Rete.%s" % k)
+    # ### E il caso che conta: un nome della RETE cercato sul MODULO deve risultare
+    #   ASSENTE li'. Se un giorno esistesse in entrambi, la mia distinzione sarebbe
+    #   silenziosamente inutile, e lo voglio sapere.
+    doppi = [k for k in ("_wphi", "_dphi") if hasattr(S, k)]
+    if mancanti:
+        raise SystemExit("[FERMO] nomi assenti dove li cerco: %s" % ", ".join(mancanti))
+    return {"globali_verificate": len(GLOBALI), "della_rete_verificate": len(DELLA_RETE),
+            "anche_sul_modulo": doppi}
+
+
 def un_passo(S, net):
     with contextlib.redirect_stdout(io.StringIO()):
         _passo.passo_pieno(S, net)
@@ -279,6 +317,13 @@ def misura(S, net, a_cli, t_dichiarato, max_passi, voce):
            % (S.FRAZ_NASCITA, S.MITOSI_DIR, S.ANTIFASE_ADD, S.REGIME))
     stampa("  KICK_TW = %r   PHI_CRIT = %r   COPPIA_MIT = %r"
            % (S.KICK_TW, S.PHI_CRIT, S.COPPIA_MIT))
+    _api = verifica_api(S, net)
+    out["api"] = _api
+    stampa("  nomi verificati PRIMA dei passi: %d globali + %d su `Rete`%s"
+           % (_api["globali_verificate"], _api["della_rete_verificate"],
+              "" if not _api["anche_sul_modulo"] else
+              ("   ### ATTENZIONE: %s esiste ANCHE sul modulo"
+               % ", ".join(_api["anche_sul_modulo"]))))
 
     # --- si CERCA il passo, non si assume
     sel = None
@@ -343,10 +388,13 @@ def misura(S, net, a_cli, t_dichiarato, max_passi, voce):
            % (out["chi_uguali"], len(sel)))
 
     # --- il taglio di `_wphi`
-    D = S._wphi(np.asarray(net.phi, float)[a] - np.asarray(net.phi, float)[b])
-    sul_taglio = int(np.sum(np.abs(np.abs(D) - S._dphi() / 2.0) < 1e-12))
+    # ### `_wphi` e `_dphi` stanno su `Rete`, NON sul modulo: verificato con l'AST
+    #   (righe 6215 e 6224) dopo che il collaudo e' caduto con AttributeError.
+    D = net._wphi(np.asarray(net.phi, float)[a] - np.asarray(net.phi, float)[b])
+    sul_taglio = int(np.sum(np.abs(np.abs(D) - net._dphi() / 2.0) < 1e-12))
     out["archi_sul_taglio_wphi"] = sul_taglio
-    stampa("  archi sul TAGLIO di _wphi (|D| = dphi/2): %d" % sul_taglio)
+    stampa("  archi sul TAGLIO di _wphi (|D| = dphi/2 = %.6f): %d"
+           % (net._dphi() / 2.0, sul_taglio))
     if sul_taglio:
         stampa("  ### ⚠ SUL TAGLIO `fm` puo' differire di dphi senza che sia")
         stampa("      un'asimmetria fisica: e' una convenzione di wrap. DICHIARATO.")
@@ -450,8 +498,8 @@ def misura(S, net, a_cli, t_dichiarato, max_passi, voce):
     # --- il confronto fra lo scarto MISURATO su phi e quello ATTESO dal conto
     pa = np.asarray(BASE.phi, float)
     ps = np.asarray(SCA.phi, float)
-    dmis_a = np.abs(S._wphi(pa[a] - ps[a]))
-    dmis_b = np.abs(S._wphi(pa[b] - ps[b]))
+    dmis_a = np.abs(BASE._wphi(pa[a] - ps[a]))
+    dmis_b = np.abs(BASE._wphi(pa[b] - ps[b]))
     out["phi_misurato_vs_atteso"] = {
         "delta_a_misurato_max": float(np.max(dmis_a)) if len(dmis_a) else 0.0,
         "delta_a_atteso_max": float(np.max(np.abs(att["delta_a"]))) if len(sel) else 0.0,
