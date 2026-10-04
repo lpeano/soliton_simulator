@@ -4135,3 +4135,66 @@ versioni storiche del simulatore vanno tirate fuori e **ri-hashate**. Senza quel
 *(par.2)*.
 
 ---
+
+## **I NON TRACCIATI: avevo messo in rilievo il numero sbagliato, e il `COMMIT 1` blocca**
+
+### ⚠ **IL DISACCORDO HA RAGIONE, e la cosa da capire è PERCHÉ avevo guardato dalla parte
+sbagliata.** Avevo chiamato i **57 non citati** *«il numero che conta»*. Non lo è.
+
+> Un file **non citato e non tracciato** è **rumore**: nessuno lo cerca.
+> Un file **CITATO e non tracciato** è **un riferimento al vuoto** — un documento, un
+> referto o l'inventario lo nominano, e ### **chi verifica dal repo lo cerca e non lo
+> trova.** ### **È il caso `_sonda_scherm`.**
+
+### 📌 **La causa dell'errore di rilievo:** avevo cercato *«che cosa ho dimenticato di
+committare?»*, che è una domanda sul **disco**. La domanda giusta è *«che cosa promette il
+repo e non mantiene?»*, che è una domanda sulle **citazioni**. ### **Il mio censimento
+calcolava il numero giusto — 98 — e io ho messo in rilievo l'altro.**
+
+**Sulla tua correzione:** confermo dai dati del referto che i binari tracciati sono
+**due `.pkl.gz`**, dal commit `4df94a7`, non 27.
+
+### ⛔ **E IL `COMMIT 1` SI FERMA SUL CONTROLLO CHE LA DECISIONE STESSA PRESCRIVE: `67`
+file TRACCIATI** sarebbero coperti dalle regole nuove — non i soli casi del par.7.
+
+```
+*.pkl.gz                              2     csv/**/_corsa.txt            31   <-- decisivo
+csv/**/_tmp/*                        12     csv/**/_sigillo.json          1
+csv/**/_sim_*.py                     12     csv/**/_censimento.json       2
+csv/**/_driver_*.py                   1     _video_g6000/*.png            6
+                                              in tutto, distinti          67
+```
+
+### **I 31 `_corsa.txt` sono il caso che blocca: il nome generico È la convenzione
+committata.** Ignorarlo non li de-traccia, ma produrrebbe una lista di `!` che oggi ha
+**67 righe** e che **cresce a ogni sigillo nuovo** — e ### **un referto scritto nel posto
+giusto diventerebbe invisibile se qualcuno dimentica la sua riga.**
+
+> ### 📌 **E QUESTO È L'OPPOSTO DELLO SCOPO.** La decisione nasce per far significare
+> *«non tracciato» = «dimenticato»*. ### **Quella regola lo farebbe significare «coperto
+> da una riga `!` che nessuno ha aggiunto»** — nascondendo proprio la classe che si
+> voleva illuminare.
+
+**Un vincolo tecnico misurato:** `csv/**/_tmp/` con la barra finale esclude la
+**cartella**, e git **non può ri-includere un file se una cartella genitore è esclusa** —
+quindi le 12 eccezioni sotto `_tmp/` **non funzionerebbero**. Serve `csv/**/_tmp/*`.
+
+**E un'osservazione sull'ordine, utile:** `*.pkl.gz` ha 2 conflitti, e sono **esattamente
+i due file che il `COMMIT 2` toglie dall'indice.** ### **Facendo il `COMMIT 2` prima del
+`COMMIT 1`, quel conflitto si azzera da sé.**
+
+### **LE DUE STRADE, e non scelgo io**
+
+| | |
+|---|---|
+| **(A)** come scritto | `67` righe `!`, da mantenere a mano a ogni sigillo nuovo |
+| **(B)** | **non ignorare i nomi generici**, e lasciare che `H-NON-TRACCIATI` *(il `COMMIT 6`)* li faccia **committare**: `31` referti dimostrano che la convenzione è committarli, e il presidio li renderebbe impossibili da dimenticare |
+
+### ⚠ **La (B) non è un'obiezione alla decisione: è la stessa decisione ottenuta col
+presidio invece che con l'ignore.** Lo scopo lo raggiungono entrambe — la (B)
+committando, la (A) ignorando.
+
+### ✅ **E i `COMMIT 2`…`7` NON dipendono da quella regola:** se vuoi che proceda subito,
+il solo pezzo bloccato è la parte del `COMMIT 1` sui **nomi generici e i `.png`**.
+
+---

@@ -1457,3 +1457,31 @@ cui questa voce si puo' scrivere con un numero.**
 **decisione di Luca** su ① se il cancello di `A13` alla nascita vada **esteso** al sito
 Schwinger, e ② se la lunghezza da confrontare con `LAM` sia quella da **`pos`** o una
 **derivata da `d`**. ### ⛔ **NON SI DECIDE AL SUO POSTO** *(`L-DOPO-STOP`)*.
+
+---
+
+## `NON-TRACCIATI` — le decisioni di Luca del 2026-10-04, e il controllo che BLOCCA
+
+**Il censimento** *(`csv/_censimento_non_tracciati.py`, referto `0b3b2a0`)* ha classificato
+**484** file non tracciati: **32** copie rigenerabili del simulatore, **212** stub,
+**85** binari di stato, **155** candidati — di cui **98 citati** e **57 no**.
+
+### ⚠ **E IL NUMERO CHE CONTA SONO I 98, non i 57** *(disaccordo del guardiano col mio
+referto, accolto da Luca)*. Un file **non citato e non tracciato** e' **rumore**: nessuno
+lo cerca. Un file **CITATO e non tracciato** e' **un riferimento al vuoto** —
+### **chi verifica dal repo lo cerca e non lo trova.** ### **E' il caso `_sonda_scherm`.**
+
+### ⛔ **IL `COMMIT 1` E' BLOCCATO DAL SUO PROPRIO CONTROLLO: `67` file TRACCIATI**
+sarebbero coperti dalle regole nuove, non i soli casi del par.7 che la decisione
+prevedeva. ### **Il caso decisivo sono i `31` `_corsa.txt`: il nome generico E' la
+convenzione committata.**
+
+### 📌 **E l'effetto sarebbe l'OPPOSTO dello scopo:** la decisione nasce per far
+significare *«non tracciato» = «dimenticato»*; una regola che rende **invisibile un
+referto scritto correttamente** lo fa significare *«coperto da una riga `!` che nessuno ha
+aggiunto»*.
+
+**Il dettaglio, la tabella dei 67, il vincolo tecnico su `csv/**/_tmp/` e le due strade
+stanno in `doc/TASK_HISTORY/2026-10-04_file-non-tracciati.md`.**
+### ⛔ **La scelta fra (A) e (B) e' di Luca** *(`L-DOPO-STOP`)*, e i `COMMIT 2`…`7` non
+dipendono da quella regola.
