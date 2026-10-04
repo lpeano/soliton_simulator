@@ -4481,3 +4481,47 @@ coperti da `*.log` *(incoerenza **preesistente**, della stessa specie di quella 
 Luca è soddisfatto.
 
 ---
+
+## `CLAUDE.md` DIVENTA L'INDICE DELLE REGOLE — **392 → 282 righe, e il controllo mi ha
+preso due volte**
+
+**Mandato di Luca del 2026-10-04.** `CLAUDE.md` era a **392** righe su **400**: `H-RIGHE`
+era a **otto righe** dal fermare ogni commit che lo tocca. Oggi e' a **282**, con il
+dettaglio in **`doc/REGOLE/par<N>.md`** — **12 file, 757 righe**.
+
+**LA STRUTTURA, come Luca l'ha fissata:** **due livelli e non di piu'**; **un solo salto**
+*(da `CLAUDE.md` al dettaglio, e dal dettaglio non si parte)*; **una sola casa per ogni
+regola**. ### ✅ **E NON E' ASSERITO DA ME: `csv/_struttura_regole.py` lo MISURA** —
+`(a)` l'insieme delle regole prima e dopo coincide *(`titoli 15/15`, `punti 11/11`,
+`dichiarate 17 → 18`)* e **una copia con una regola tolta viene scoperta col nome**;
+`(b)` il grafo dei rimandi e' un **albero di profondita' 1**, con **zero** archi fra due
+file di dettaglio.
+
+> ### ⛔ **IL CONTROLLO MI HA FERMATO DUE VOLTE, ed e' il motivo per cui Luca l'ha
+> chiesto.** In `d1df098` mi ha **bocciato** su un punto. In `829b4a5` mi ha preso mentre
+> **RISCRIVEVO UNA CITAZIONE DI LUCA**: condensando il par.9-ter avevo reso il criterio del
+> 2026-09-25 in una forma mia. ### **Il testo fra virgolette non e' materiale da
+> condensare.** Ripristinato **verbatim**.
+
+**E UNA COSA CHE NON ANDAVA COME CREDEVO, misurata invece di non guardare.** Condensando
+gli ultimi cinque paragrafi il file e' passato da `310` a **`316`** righe: **piu' lungo**.
+Il dettaglio era uscito, ma i rimandi scritti su **tre righe** *(12 blocchi = 36 righe)* e
+i separatori `---` costavano **piu'** di quanto il dettaglio uscito facesse risparmiare.
+### **Ogni rimando compresso a UNA riga, i separatori via: 282.**
+### ⚠ **Senza misurare avrei dichiarato <<condensato>> un file PIU' LUNGO di prima.**
+
+### ⚠ **L'OBIETTIVO DI LUCA ERA «CIRCA 250», E 282 E' SOPRA: lo dichiaro invece di
+arrotondare.** Le ultime `32` righe comprimibili sono **par.1** *(il bersaglio)*, **par.10**
+*(il principio guida)*, **par.0** *(le due tabelle dei file d'avvio)* e **par.12** *(la
+tabella degli undici presidi)*. ### **Per scendere a 250 bisogna togliere una REGOLA o
+accorciare una CITAZIONE, e nessuna delle due e' una decisione che prendo io**
+*(`L-DOPO-STOP`)*. Il numero sta sul tavolo, con le opzioni.
+
+### ⛔ **E UNA MIA OMISSIONE, sanata in questo commit:** `csv/_struttura_regole.py` **non
+era nell'inventario**. Il par.6 ① chiede la voce **nello stesso commit** del file, e il
+commit dello strumento (`61b8e5f`) non l'ha scritta. ### **E' una regola SCRITTA e non un
+presidio** *(`A9`)*: nessun hook l'ha fermata. **Due voci aggiunte** — lo strumento e il
+generatore dei numeri.
+
+**Il referto completo, coi numeri generati:**
+`doc/REFERTO_riordino_CLAUDE_2026-10-04.md`.

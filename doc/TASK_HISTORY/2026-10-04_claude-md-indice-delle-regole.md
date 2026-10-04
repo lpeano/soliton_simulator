@@ -93,3 +93,49 @@ posteriori.**
 
 ### ⚠ **E NESSUN CONTENUTO SI PERDE:** cio' che esce da `CLAUDE.md` va in `doc/REGOLE/`,
 **verbatim** oppure riassunto **con il testo originale citato**.
+
+---
+
+## 5. ANNOTAZIONE A LAVORO CHIUSO *(2026-10-04, dopo il riordino)*
+
+### ✅ **ESITO: `392 → 282` righe, `-110`. I due controlli PASSANO.** `titoli 15/15`,
+`punti 11/11`, `dichiarate 17 → 18`; **12** file in `doc/REGOLE/`, **12** archi in giu',
+**12** in su *(tutti nell'intestazione)*, **ZERO** fra due file di dettaglio.
+**Referto:** `doc/REFERTO_riordino_CLAUDE_2026-10-04.md`.
+
+**CHE COSA IL RAGIONAMENTO PRELIMINARE AVEVA PREVISTO BENE:** che la ② *(niente catene
+ne' cicli)* fosse **la regola portante**. Lo e' stata: e' l'unica delle cinque che un
+controllo **puo'** verificare su ogni futura modifica, e le altre quattro la presuppongono.
+
+### ⛔ **CHE COSA NON AVEVA PREVISTO, e lo annoto perche' e' il tipo di errore che
+ritorna:** avevo scritto la progettazione come se **togliere dettaglio** riducesse il file
+**per costruzione**. Non e' vero. Dopo aver condensato gli ultimi cinque paragrafi il file
+era a **`316`** righe, **sei in PIU'** delle `310` di partenza: i rimandi su **tre righe**
+*(12 blocchi = 36 righe)* e i separatori `---` costavano piu' del dettaglio uscito.
+### **La progettazione non aveva un passo <<misura il file dopo>>, e senza quel passo avrei
+dichiarato <<condensato>> un file piu' lungo.** *(Cura: rimandi a UNA riga, separatori via
+— `282`.)*
+
+### ⛔ **E IL CONTROLLO HA FATTO CIO' PER CUI LUCA L'HA CHIESTO, due volte.** In
+`d1df098` mi ha **bocciato**. In `829b4a5` mi ha preso mentre **riscrivevo una citazione di
+Luca** *(il criterio del par.9-ter, del 2026-09-25)*: nessun controllo sulla LUNGHEZZA
+l'avrebbe visto, perche' la mia versione era **piu' corta e diceva quasi la stessa cosa**.
+### **<<Quasi>> non e' una citazione.** Ripristinato verbatim.
+
+**QUATTRO DIFETTI DELLO STRUMENTO, trovati usandolo** *(e tre sono nel commit `885d9a5`)*:
+mancava **`_presidio.avvia`** *(morto al primo giro utile, **ottava** volta — par.7)*;
+contava `###` come **titolo** *(falso allarme che avrebbe fermato il riordino)*; una
+**menzione** valeva come **rimando**; la chiave di un punto era la **prosa**. E un quarto
+nel generatore dei numeri: una stringa di formato con un **`%2d` non sostituito**, corretto
+**prima** del referto perche' ### **un numero stampato male non ha provenienza**.
+
+### ⚠ **IL DEBITO CHE RESTA, dichiarato e non curato:** `282` e' **sopra** l'obiettivo
+*«circa 250»*. Le ultime `32` righe comprimibili sono **par.1**, **par.10**, **par.0** e
+**par.12**, e per toccarle bisogna **togliere una regola o accorciare una citazione**:
+### **non e' una decisione che prendo io** *(`L-DOPO-STOP`)*. Il referto mette le opzioni
+sul tavolo col numero.
+
+### ⚠ **E IL PRESIDIO MANCA** *(`A9`, dichiarato)*: `csv/_struttura_regole.py` si lancia
+**a mano**. `H-RIGHE` guarda la **lunghezza**, non la **struttura** — ### **un terzo
+livello, o un rimando fra due file di dettaglio, aggiunto domani PASSEREBBE IL COMMIT.**
+Candidato a presidio; la decisione e' di Luca.
