@@ -43,6 +43,12 @@ _misure_calore
   LE GRANDEZZE CAMBIATE, una per riga:
   percorso                                               vecchio              nuovo               
   blob_sim_sha1_byte                                     '287154f343c8bf27424 '0f060670567ac00a5b5
+  LE LISTE CONFRONTATE COME INSIEMI -- 4 liste di scalari, 0 con
+  elementi aggiunti o tolti, 4 identiche come insieme
+  ### E SERVE A NON LEGGERE MALE IL NUMERO DI SOPRA: un elemento
+      INSERITO in una lista ordinata sposta OGNI indice successivo,
+      e ogni spostamento conta come un <<cambio>> foglia-per-foglia.
+
 
 ========================================================================================================
 _pos_contro_d
@@ -90,6 +96,27 @@ _pos_contro_d
   statica.pos.funzioni_non_legge[9]                      'batch_condensazione '_semina_lam'       
   statica.pos.lettori                                    20                   22                  
   statica.pos.non_legge_o_fuori_passo                    15                   17                  
+  LE LISTE CONFRONTATE COME INSIEMI -- 7 liste di scalari, 5 con
+  elementi aggiunti o tolti, 2 identiche come insieme
+  ### E SERVE A NON LEGGERE MALE IL NUMERO DI SOPRA: un elemento
+      INSERITO in una lista ordinata sposta OGNI indice successivo,
+      e ogni spostamento conta come un <<cambio>> foglia-per-foglia.
+    statica.d.funzioni_legge                     11 -> 12
+        AGGIUNTI  'decidi_divisione'
+        TOLTI     nessuno
+    statica.d.funzioni_non_legge                 6 -> 8
+        AGGIUNTI  '_rn_div_d', '_rn_sch_d'
+        TOLTI     nessuno
+    statica.d0.funzioni_legge                    9 -> 10
+        AGGIUNTI  'decidi_divisione'
+        TOLTI     nessuno
+    statica.d0.funzioni_non_legge                6 -> 8
+        AGGIUNTI  '_rn_div_d0', '_rn_sch_d0'
+        TOLTI     nessuno
+    statica.pos.funzioni_non_legge               15 -> 17
+        AGGIUNTI  '_rn_div_pos', '_rn_sch_pos'
+        TOLTI     nessuno
+
 
   CHIAVI PRESENTI DA UN SOLO LATO (non sono cambi: sono struttura)
     solo VECCHIO  statica.d.scritture_dirette.mitosi                 = 2
@@ -123,6 +150,12 @@ _verso_archi
   LE GRANDEZZE CAMBIATE, una per riga:
   percorso                                               vecchio              nuovo               
   blob_sim_sha1_byte                                     '287154f343c8bf27424 '0f060670567ac00a5b5
+  LE LISTE CONFRONTATE COME INSIEMI -- 2 liste di scalari, 0 con
+  elementi aggiunti o tolti, 2 identiche come insieme
+  ### E SERVE A NON LEGGERE MALE IL NUMERO DI SOPRA: un elemento
+      INSERITO in una lista ordinata sposta OGNI indice successivo,
+      e ogni spostamento conta come un <<cambio>> foglia-per-foglia.
+
 
 ========================================================================================================
 IL TOTALE

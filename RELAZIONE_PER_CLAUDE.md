@@ -4601,3 +4601,46 @@ Windows)*. Lo strumento del confronto **stampa questo limite**, non lo sottinten
 **ZERO** *(`_g_nati_mitosi` e `_g_nati_schwinger` a `0`, `n = 12802`)*, sia nel ramo BASE
 sia nello SPECCHIO. ### **Con zero nascite il calcio della mitosi NON HA AGITO**, e le `7`
 differenze per nodo che quel referto trova **non gli si possono attribuire**.
+
+## IL CONFRONTO `287154f3` → `0f060670`: **le due misure dinamiche sono IDENTICHE**
+
+**Referto:** `doc/REFERTO_misure_su_0f060670_2026-10-04.md`.
+
+| strumento | foglie identiche | cambiate |
+|---|--:|--:|
+| `_misure_calore` *(72 passi)* | **3043** | **1** |
+| `_verso_archi` *(1 passo)* | **279** | **1** |
+| `_pos_contro_d` *(censimento AST)* | **129** | **35** per indice, ### **0 elementi TOLTI** |
+
+### ✅ **L'UNICA FOGLIA CAMBIATA NELLE DUE MISURE DINAMICHE E' `blob_sim_sha1_byte`:
+### il timbro del referto stesso.** E conta perche' **TREDICI commit** hanno toccato il
+simulatore fra i due blob — fra loro il `COMMIT 3` *(la nascita e' un evento unico)*, il
+`4` *(il veleno)*, il `5` *(`perc_geom` derivato)*, il `6a`, la correzione del bug della
+quarta consumatrice di `dd`, e il `6b` *(il cancello che diventa legge)*.
+### **Su 72 passi di dinamica, coi flag a default, nessuna grandezza misurata cambia.**
+
+**E la spiegazione non e' *«nessun commit faceva niente»*:** a **`FRAZ_NASCITA = 0.5`**
+il cancello del `6b` e' `0.5*d >= LAM`, che in IEEE-754 e' **esattamente** `d >= 2*LAM`
+*(il fattore e' una potenza di due)*. ### **Il 6b e' byte-inerte alla frazione di default,
+e questo referto lo conferma su 72 passi — un controllo INDIPENDENTE dal suo sigillo.**
+
+### ⛔ **E LE `35` DI `_pos_contro_d` ERANO UN DIFETTO DEL MIO COMPARATORE.**
+Confrontava le liste **solo per indice**: un nome **inserito** in una lista ordinata sposta
+ogni indice successivo, e ogni spostamento contava come un *cambio*. ### **A multinsiemi,
+in nessuna lista e' stato TOLTO un elemento:** le 35 sono **quattro nomi nuovi** —
+`decidi_divisione` *(da `2f129ba`, la DECISIONE separata dall'ESECUZIONE)* e i sei
+`_rn_div_*`/`_rn_sch_*` *(da `ff62420`, LA NASCITA E' UN EVENTO UNICO)*, **attribuiti
+cercando il primo commit che contiene ciascun nome, non per analogia** *(`P1`)*.
+
+### ✅ **E LA PROVA CHE E' UN TRASLOCO E NON UN CAMBIO: le somme delle scritture dirette
+### si CONSERVANO** — `8→8`, `9→9`, `7→7`. Le scritture che stavano in `mitosi` stanno
+nei due esecutori della nascita, e per `d0` **una e' finita in `decidi_divisione`**: che e'
+**esattamente** il titolo del `COMMIT 2`. ### **E i lettori crescono dell'esatto numero dei
+nomi nuovi** *(`17→20`, `15→18`, `20→22`)*: **nessun lettore inatteso.**
+
+### ⚠ **UNA VOCE NUOVA, con criterio:** `PIATTAFORMA-NON-TIMBRATA`. I tre referti del
+2026-10-01 **non dichiarano la piattaforma**, e i conteggi assoluti ne dipendono. Oggi il
+limite **non ha morso** *(le misure sono identiche, e un limite che rende ambiguo uno
+SCARTO non rende ambigua un'IDENTITA')*, ### **ma la prossima volta che un conteggio cambia
+morde.** Si chiude quando gli strumenti timbrano la piattaforma **da una sola funzione di
+`_presidio`** — non ciascuno la sua.

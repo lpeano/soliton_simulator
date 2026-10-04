@@ -1544,3 +1544,34 @@ diventare un danno.**
 ### ⛔ **IL PRECEDENTE DA NON RIFARE:** la cura giusta e' l'**import** della definizione
 unica, **non** una seconda formula scritta bene. ### **Due formule corrette che vivono in
 due file tornano a divergere alla prima modifica di una delle due.**
+
+## `PIATTAFORMA-NON-TIMBRATA` — **i referti non dicono su che macchina sono nati**
+*(aperto il 2026-10-04)*
+
+I tre referti del 2026-10-01 dichiarano **`blob_sim_sha1_byte`** e **`blob_strumento`**, e
+### **non dichiarano la piattaforma:** ne' `python`, ne' `numpy`, ne' il sistema.
+
+**PERCHE' CONTA:** la stella polare documenta che i **conteggi assoluti** dipendono dalla
+piattaforma — sulla stessa scena **`16/14/6/6`** su Linux/numpy 2.5.3 contro
+**`14/12/4/4`** su Windows/numpy 2.3.0 — ### **mentre l'identita' prima/dopo no.**
+Quindi davanti a uno **scarto** fra due referti **non si puo' separare** *«e' cambiato il
+simulatore»* da *«e' cambiata la macchina»*, ### **e quella e' la prima cosa da
+escludere.**
+
+### ✅ **E IL CONFRONTO DEL 2026-10-04 NON NE HA SOFFERTO, il che va detto per non far
+### passare la voce come urgente:** le due misure **dinamiche** sono risultate
+**identiche** *(`3043` foglie su `3044` e `279` su `280`, e l'unica cambiata in ciascuna e'
+il **timbro del blob stesso**)*. ### **Un limite che renderebbe ambiguo uno SCARTO non
+rende ambigua un'IDENTITA'.** ### ⚠ **Ma la prossima volta che un conteggio cambia, il
+limite morde.**
+
+### ✅ **IL CRITERIO DI CHIUSURA:** si chiude quando **ogni** strumento che scrive un
+referto `json` mette nel referto `python`, `numpy`, `sistema` e `macchina` — **e** quando
+`csv/_presidio.py` offre **UNA** funzione che li produce, invece che ogni strumento se li
+costruisca. ### **Due costruzioni corrette che vivono in due file tornano a divergere**, ed
+e' appena successo col conteggio delle righe *(`CONTA-RIGHE`)*.
+
+### ⛔ **E IL MODO SBAGLIATO DI CHIUDERLA, da non fare:** aggiungere il campo e
+riempirlo con la piattaforma di **oggi** anche nei referti vecchi. ### **Sarebbe inventare
+un dato che nessuno ha misurato** — e **i reperti non si riscrivono** *(par.9)*: si chiude
+**sugli strumenti**, non sui referti gia' scritti.

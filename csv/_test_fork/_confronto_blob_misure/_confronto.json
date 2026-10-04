@@ -1,6 +1,6 @@
 {
  "blob_nuovo": "0f060670",
- "blob_strumento": null,
+ "blob_strumento": "98e93b3bac9b71faf84b26e561f89d2095f5c3df",
  "blob_vecchio": "287154f3",
  "candidati_causa": [
   {
@@ -109,6 +109,37 @@
     }
    ],
    "identiche": 3043,
+   "liste_come_insiemi": {
+    "M3.serie_E_cin": {
+     "aggiunti": [],
+     "n_nuovo": 72,
+     "n_vecchio": 72,
+     "solo_spostamento": true,
+     "tolti": []
+    },
+    "M3.serie_P_eq_fetta": {
+     "aggiunti": [],
+     "n_nuovo": 72,
+     "n_vecchio": 72,
+     "solo_spostamento": true,
+     "tolti": []
+    },
+    "M3.serie_P_eq_tutti": {
+     "aggiunti": [],
+     "n_nuovo": 72,
+     "n_vecchio": 72,
+     "solo_spostamento": true,
+     "tolti": []
+    },
+    "M3.serie_xi": {
+     "aggiunti": [],
+     "n_nuovo": 72,
+     "n_vecchio": 72,
+     "solo_spostamento": true,
+     "tolti": []
+    }
+   },
+   "liste_con_elementi_mossi": [],
    "piattaforma_nel_referto_vecchio": false,
    "solo_nuovo": 0,
    "solo_nuovo_elenco": [],
@@ -299,6 +330,77 @@
     }
    ],
    "identiche": 129,
+   "liste_come_insiemi": {
+    "statica.d.funzioni_legge": {
+     "aggiunti": [
+      "'decidi_divisione'"
+     ],
+     "n_nuovo": 12,
+     "n_vecchio": 11,
+     "solo_spostamento": false,
+     "tolti": []
+    },
+    "statica.d.funzioni_non_legge": {
+     "aggiunti": [
+      "'_rn_div_d'",
+      "'_rn_sch_d'"
+     ],
+     "n_nuovo": 8,
+     "n_vecchio": 6,
+     "solo_spostamento": false,
+     "tolti": []
+    },
+    "statica.d0.funzioni_legge": {
+     "aggiunti": [
+      "'decidi_divisione'"
+     ],
+     "n_nuovo": 10,
+     "n_vecchio": 9,
+     "solo_spostamento": false,
+     "tolti": []
+    },
+    "statica.d0.funzioni_non_legge": {
+     "aggiunti": [
+      "'_rn_div_d0'",
+      "'_rn_sch_d0'"
+     ],
+     "n_nuovo": 8,
+     "n_vecchio": 6,
+     "solo_spostamento": false,
+     "tolti": []
+    },
+    "statica.pos.funzioni_legge": {
+     "aggiunti": [],
+     "n_nuovo": 5,
+     "n_vecchio": 5,
+     "solo_spostamento": true,
+     "tolti": []
+    },
+    "statica.pos.funzioni_non_legge": {
+     "aggiunti": [
+      "'_rn_div_pos'",
+      "'_rn_sch_pos'"
+     ],
+     "n_nuovo": 17,
+     "n_vecchio": 15,
+     "solo_spostamento": false,
+     "tolti": []
+    },
+    "tipi_non_leggi": {
+     "aggiunti": [],
+     "n_nuovo": 2,
+     "n_vecchio": 2,
+     "solo_spostamento": true,
+     "tolti": []
+    }
+   },
+   "liste_con_elementi_mossi": [
+    "statica.d.funzioni_legge",
+    "statica.d.funzioni_non_legge",
+    "statica.d0.funzioni_legge",
+    "statica.d0.funzioni_non_legge",
+    "statica.pos.funzioni_non_legge"
+   ],
    "piattaforma_nel_referto_vecchio": false,
    "solo_nuovo": 15,
    "solo_nuovo_elenco": [
@@ -339,12 +441,37 @@
     }
    ],
    "identiche": 279,
+   "liste_come_insiemi": {
+    "per_nodo_diverse": {
+     "aggiunti": [],
+     "n_nuovo": 7,
+     "n_vecchio": 7,
+     "solo_spostamento": true,
+     "tolti": []
+    },
+    "specchio.antisimmetriche_cambiate_di_segno": {
+     "aggiunti": [],
+     "n_nuovo": 2,
+     "n_vecchio": 2,
+     "solo_spostamento": true,
+     "tolti": []
+    }
+   },
+   "liste_con_elementi_mossi": [],
    "piattaforma_nel_referto_vecchio": false,
    "solo_nuovo": 0,
    "solo_nuovo_elenco": [],
    "solo_vecchio": 0,
    "solo_vecchio_elenco": []
   }
+ },
+ "timbro_strumento": {
+  "blob_head": "39b90ba48a3afc9d67b72e951968605dd1f4dbd3",
+  "dirty": false,
+  "path": "C:\\Users\\lpeano\\soliton_simulator\\csv\\_test_fork\\_confronto_blob_misure.py",
+  "repo": "C:/Users/lpeano/soliton_simulator",
+  "sha1": "98e93b3bac9b71faf84b26e561f89d2095f5c3df",
+  "tracciato": true
  },
  "totale": {
   "cambiate": 37,
