@@ -30,103 +30,103 @@ LA CONFIGURAZIONE CHE DECIDE LA MISURA, letta dal CLI (mai a mano)
   c_sistema*DT = 0.0113137085     CS_M*DT = 0.0200000000
 
 ========================================================================================================
-IL RUN: 2 passi (il referto riporta anche il taglio a 72)
+IL RUN: 150 passi (il referto riporta anche il taglio a 72)
 ========================================================================================================
-  passi girati: 2    n finale = 12802, archi = 471564
-  chiamate del gancio per sito: {'clip_spinta (:9203)': 2, 'coes (:9340)': 2}
+  passi girati: 150    n finale = 14000, archi = 473022
+  chiamate del gancio per sito: {'clip_spinta (:9203)': 150, 'coes (:9340)': 150}
 
 ========================================================================================================
 DA DOVE VIENE `r`: la FISICA o un RAMO DEGENERE GIA NOTO?
 ========================================================================================================
-  passi con r == 1.0 ESATTO su OGNI nodo: 2 su 2
+  passi con r == 1.0 ESATTO su OGNI nodo: 2 su 150
   ### E CONTA: con r = 1 i due tetti sono IDENTICI, quindi un esito
       <<la cura non cambia nulla>> NON sarebbe una proprieta della
       legge, ma la conseguenza di un r degenere. Per questo si contano
       i rami che producono r = 1 senza che sia fisica.
-      _ritmo_chiamate                       2  (cumulativo a fine corsa)
+      _ritmo_chiamate                     150  (cumulativo a fine corsa)
       _ritmo_sicurezza                      1  (cumulativo a fine corsa)
       _ritmo_snap_identico                  0  (cumulativo a fine corsa)
       _ritmo_guard4pi_ko                    0  (cumulativo a fine corsa)
       _ritmo_med_non_promosso               0  (cumulativo a fine corsa)
-  r sui nodi: min dei min 1.000000e+00, max dei max 1.000000e+00
-  primi passi in cui r NON e 1 ovunque: NESSUNO
+  r sui nodi: min dei min 1.455472e-06, max dei max 1.414213e+00
+  primi passi in cui r NON e 1 ovunque: [3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
 
 ========================================================================================================
 IL CLIP DI `spinta` -- cono GLOBALE (:9203)
 ========================================================================================================
   --- 72 passi ---
-      passi con dato 2, archi-passo totali 943128
-      limitati_oggi                814649
-      limitati_cura                814649
-      da_lim_a_nonlim                   0
-      da_nonlim_a_lim                   0
-      stringe_archi                     0
-      allarga_archi                     0
+      passi con dato 72, archi-passo totali 33952696
+      limitati_oggi              29553586
+      limitati_cura              30391450
+      da_lim_a_nonlim              752546
+      da_nonlim_a_lim             1590421
+      stringe_archi              15001262
+      allarga_archi              18008295
       uguali_archi                 943128
-      non_finiti                        0
-      rap_tutti              min 1.000000e+00  med 1.000000e+00  max 1.000000e+00
-      rap_sui_limitati_oggi  min 1.000000e+00  med 1.000000e+00  max 1.000000e+00
-      r_i_tutti              min 1.000000e+00  med 1.000000e+00  max 1.000000e+00
-      r_j_tutti              min 1.000000e+00  med 1.000000e+00  max 1.000000e+00
-      r_i_sui_limitati       min 1.000000e+00  med 1.000000e+00  max 1.000000e+00
-      spinta                 min 3.645630e-09  med 5.874678e-02  max 8.368970e-01
-      nan in dt_e: 0 su 0 passi   mask sempre vera: True
-  --- 2 passi ---
-      passi con dato 2, archi-passo totali 943128
-      limitati_oggi                814649
-      limitati_cura                814649
-      da_lim_a_nonlim                   0
-      da_nonlim_a_lim                   0
-      stringe_archi                     0
-      allarga_archi                     0
+      non_finiti                       11
+      rap_tutti              min 1.532292e-06  med 1.000000e+00  max 1.414213e+00
+      rap_sui_limitati_oggi  min 1.532292e-06  med 1.000000e+00  max 1.414213e+00
+      r_i_tutti              min 1.455472e-06  med 1.054841e+00  max 1.414213e+00
+      r_j_tutti              min 1.455472e-06  med 1.060561e+00  max 1.414213e+00
+      r_i_sui_limitati       min 1.455472e-06  med 1.057988e+00  max 1.414213e+00
+      spinta                 min 1.492352e-13  med 5.491936e-02  max 8.760071e-01
+      nan in dt_e: 11 su 8 passi   mask sempre vera: True
+  --- 150 passi ---
+      passi con dato 150, archi-passo totali 70773112
+      limitati_oggi              61904233
+      limitati_cura              63342083
+      da_lim_a_nonlim             1216748
+      da_nonlim_a_lim             2656054
+      stringe_archi              35749751
+      allarga_archi              34078775
       uguali_archi                 943128
-      non_finiti                        0
-      rap_tutti              min 1.000000e+00  med 1.000000e+00  max 1.000000e+00
-      rap_sui_limitati_oggi  min 1.000000e+00  med 1.000000e+00  max 1.000000e+00
-      r_i_tutti              min 1.000000e+00  med 1.000000e+00  max 1.000000e+00
-      r_j_tutti              min 1.000000e+00  med 1.000000e+00  max 1.000000e+00
-      r_i_sui_limitati       min 1.000000e+00  med 1.000000e+00  max 1.000000e+00
-      spinta                 min 3.645630e-09  med 5.874678e-02  max 8.368970e-01
-      nan in dt_e: 0 su 0 passi   mask sempre vera: True
+      non_finiti                     1458
+      rap_tutti              min 1.532292e-06  med 8.778222e-01  max 1.414213e+00
+      rap_sui_limitati_oggi  min 1.532292e-06  med 8.773801e-01  max 1.414213e+00
+      r_i_tutti              min 1.455472e-06  med 1.109682e+00  max 1.414213e+00
+      r_j_tutti              min 1.455472e-06  med 1.121122e+00  max 1.414213e+00
+      r_i_sui_limitati       min 1.455472e-06  med 1.115977e+00  max 1.414213e+00
+      spinta                 min 1.492352e-13  med 5.518944e-02  max 9.444191e-01
+      nan in dt_e: 1458 su 83 passi   mask sempre vera: True
 
 ========================================================================================================
 LA SCALA DELLA COESIONE -- cono LOCALE (:9340)
 ========================================================================================================
   --- 72 passi ---
-      passi con dato 2, archi-passo totali 943128
-      stringe_archi                     0
-      allarga_archi                     0
+      passi con dato 72, archi-passo totali 33952696
+      stringe_archi              15001262
+      allarga_archi              18008295
       uguali_archi                 943128
       satura_F_099                      0
-      stringe_vs_glob              160981
-      allarga_vs_glob              782147
-      non_finiti                        0
-      rap_tutti              min 1.000000e+00  med 1.000000e+00  max 1.000000e+00
-      r_i_tutti              min 1.000000e+00  med 1.000000e+00  max 1.000000e+00
-      r_j_tutti              min 1.000000e+00  med 1.000000e+00  max 1.000000e+00
-      csa                    min 6.238297e-01  med 1.466521e+00  max 1.993315e+00
-      p_oggi                 min 6.238297e-03  med 1.466521e-02  max 1.993315e-02
-      p_cura                 min 6.238297e-03  med 1.466521e-02  max 1.993315e-02
-      glob_cura              min 1.131371e-02  med 1.131371e-02  max 1.131371e-02
-      nan in dt_e: 0 su 0 passi   mask sempre vera: True
+      stringe_vs_glob             6813428
+      allarga_vs_glob            27139268
+      non_finiti                       11
+      rap_tutti              min 1.532292e-06  med 1.000000e+00  max 1.414213e+00
+      r_i_tutti              min 1.455472e-06  med 1.054841e+00  max 1.414213e+00
+      r_j_tutti              min 1.455472e-06  med 1.060561e+00  max 1.414213e+00
+      csa                    min 6.112529e-01  med 1.375884e+00  max 1.996504e+00
+      p_oggi                 min 6.112529e-03  med 1.375884e-02  max 1.996504e-02
+      p_cura                 min 1.480807e-08  med 1.407918e-02  max 2.818114e-02
+      glob_cura              min 1.733591e-08  med 1.131371e-02  max 1.599999e-02
+      nan in dt_e: 11 su 8 passi   mask sempre vera: True
       ripieghi CS_M (cumulativo): 0
-  --- 2 passi ---
-      passi con dato 2, archi-passo totali 943128
-      stringe_archi                     0
-      allarga_archi                     0
+  --- 150 passi ---
+      passi con dato 150, archi-passo totali 70773112
+      stringe_archi              35749751
+      allarga_archi              34078775
       uguali_archi                 943128
       satura_F_099                      0
-      stringe_vs_glob              160981
-      allarga_vs_glob              782147
-      non_finiti                        0
-      rap_tutti              min 1.000000e+00  med 1.000000e+00  max 1.000000e+00
-      r_i_tutti              min 1.000000e+00  med 1.000000e+00  max 1.000000e+00
-      r_j_tutti              min 1.000000e+00  med 1.000000e+00  max 1.000000e+00
-      csa                    min 6.238297e-01  med 1.466521e+00  max 1.993315e+00
-      p_oggi                 min 6.238297e-03  med 1.466521e-02  max 1.993315e-02
-      p_cura                 min 6.238297e-03  med 1.466521e-02  max 1.993315e-02
-      glob_cura              min 1.131371e-02  med 1.131371e-02  max 1.131371e-02
-      nan in dt_e: 0 su 0 passi   mask sempre vera: True
+      stringe_vs_glob            15563361
+      allarga_vs_glob            55209751
+      non_finiti                     1458
+      rap_tutti              min 1.532292e-06  med 8.778222e-01  max 1.414213e+00
+      r_i_tutti              min 1.455472e-06  med 1.109682e+00  max 1.414213e+00
+      r_j_tutti              min 1.455472e-06  med 1.121122e+00  max 1.414213e+00
+      csa                    min 5.813377e-01  med 1.376060e+00  max 1.999638e+00
+      p_oggi                 min 5.813377e-03  med 1.376060e-02  max 1.999638e-02
+      p_cura                 min 1.480807e-08  med 1.135092e-02  max 2.821588e-02
+      glob_cura              min 1.733591e-08  med 9.931424e-03  max 1.599999e-02
+      nan in dt_e: 1458 su 83 passi   mask sempre vera: True
       ripieghi CS_M (cumulativo): 0
 
 ========================================================================================================
@@ -141,12 +141,22 @@ IL CONTROLLO: la LEGGE contro CIO CHE LA LEGGE HA SCRITTO
       ricalcolava DT*0.5*(1+1)*c contro c*DT, che in IEEE coincidono
       SEMPRE, senza mai toccare _dt_e_ultimo.
 
-  verifiche 4   archi mascherati 1886256   CONFRONTATI 1886256
-  esclusi perche un estremo e oltre len(r) (nodo nato in mitosi): 0
+  verifiche 300   archi mascherati 141546224   CONFRONTATI 141541432
+  esclusi perche un estremo e oltre len(r) (nodo nato in mitosi): 4792
   esclusi perche dt_e NON e finito (il veleno del COMMIT 4):          0
   verifiche con ZERO archi confrontabili (NON passano):               0
-  verifiche con DIFFERENZE in (A):                                   0
-  verifiche in cui (B) NON ha discriminato:                           4
-  ### FERMO: (B) non discrimina in 4 verifiche: il confronto (A)
-      non proverebbe niente, e sarebbe un altro FALSO-UNO.
+  verifiche con DIFFERENZE in (A):                                   166
+  verifiche con POTERE (dt_e VARIA fra gli archi):                   296
+  verifiche INVERIFICABILI (dt_e COSTANTE: r degenere):              4
+      ### su queste nessun test di permutazione puo discriminare, e NON
+          le conto come identita: lo dico. E il guardiano lo aveva
+          scritto nel mandato.
+  verifiche CON POTERE in cui (B) NON ha discriminato:                0
+  ### FERMO: (A) trova DIFFERENZE. Su quei passi la misura e INVALIDA.
+      passi con differenze: [42, 50, 65, 66, 69, 70, 71, 72, 73, 76, 77, 78, 79, 80, 81, 82, 83, 84, 86, 87]
+      passo 42 sito clip_spinta: 91992 diversi su 471563, scarto max 1.342e-02
+      passo 42 sito coes: 91992 diversi su 471563, scarto max 1.342e-02
+      passo 50 sito clip_spinta: 89722 diversi su 471564, scarto max 1.274e-02
+      passo 50 sito coes: 89722 diversi su 471564, scarto max 1.274e-02
+      passo 65 sito clip_spinta: 73280 diversi su 471565, scarto max 1.180e-02
 ========================================================================================================

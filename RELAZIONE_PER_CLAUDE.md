@@ -4735,3 +4735,45 @@ rapporto si verificherebbe solo sullo stesso arco.
 misurato e' *<<prima della prima divisione>>* ALLA LETTERA, e le asimmetrie si trovano
 anche in quello stato** — cioe' la deviazione che avevo dichiarato per `t = 0.5` **non
 e'** cio' che fa funzionare la misura.
+
+## `TETTO-CAUSALE`, passo (1): **il controllo ha trovato un disallineamento, e mi fermo**
+
+**Referto:** `doc/REFERTO_tetto_causale_tempo_2026-10-04.md`.
+
+### ⛔ **IL `FERMO`: `(A)` trova differenze in `166` verifiche su `300`, cioe' `83`
+### passi su `150` sono INVALIDI** *(da `42` a `150`; i validi sono `65`, da `3` a `85`;
+`1` e `2` sono **inverificabili**)*. **Non traggo conclusioni di fisica**, come il mandato
+prescrive.
+
+### 📌 **E IL FATTO MISURATO CHE RESTRINGE DOVE GUARDARE:** le `166` verifiche con
+differenze sono ### **ESATTAMENTE** le `166` in cui un nodo e' **nato in quel passo**
+*(uguaglianza fra insiemi di `(passo, sito)`, non conteggio)*. E il primo passo con
+differenze e' il **`42`**, ### **il passo della prima divisione** — i passi `1`–`41`
+sono **tutti puliti**. ### ⚠ **La CAUSA e' un'IPOTESI che NON ho verificato**, e la
+scrivo come tale; lo **scarto** invece e' misurato: `1.342e-02`, ### **piu' grande di
+`DT = 0.01`, quindi NON e' arrotondamento.**
+
+### ✅ **E IL CONTROLLO NON E' VUOTO: `(B)` ha discriminato in TUTTE le `296` verifiche
+### con potere** — sa vedere un disallineamento, e ne ha visto uno. *(Il controllo
+precedente era un `FALSO-UNO`, e l'ha trovato il guardiano.)*
+
+**`r` NON e' degenere:** `148` passi su `150` hanno `r` che varia, da **`1.455e-06`** a
+**`1.414`** — ### **sei ordini di grandezza**, piu' ampio del `2e-5 .. 1.41` della voce.
+`_ritmo_snap_identico = 0`, `_ritmo_sicurezza = 1` *(solo il passo `1`)*.
+
+### **E LA SEPARAZIONE CHE LA STELLA POLARE CHIEDEVA E' MISURATA:** `COES_CAUSALE` —
+la `c_s` locale, **la cura gia' fatta** — **allarga** su `24 476 351` archi-passo e
+**stringe** su `6 175 411`: ### **un fattore `4` a favore dell'allargamento, e questo e'
+l'effetto della `c_s`, non del TEMPO.**
+
+### ⚠ **Il ripiego `CS_M` non scatta mai** *(`0` su `150`)*, ma resta una toppa e
+**misurata**: `CS_M*DT = 0.02` contro `c_sistema*DT = 0.0113137085`, ### **quasi il DOPPIO
+del tetto che sostituisce.** Dichiarato, **non curato** *(congelamento)*.
+
+### ⛔ **E UN MIO ERRORE DI PROVENIENZA, da dichiarare:** in `0cfb460` ho committato un
+referto che cita lo strumento **`75189105`**, ### **un blob che il repo NON HA** — era
+l'uscita della sonda a 2 passi, prodotta da uno stato intermedio. ### **E' la specie
+`_sonda_scherm`: un referto che nomina uno strumento introvabile.**
+### ⚠ **E ci sono arrivato perche' `H-NON-TRACCIATI` mi ha bloccato e ho committato quel
+file per sbloccarmi, senza controllarne il timbro:** il presidio nato contro i riferimenti
+al vuoto me ne ha fatto creare uno.
