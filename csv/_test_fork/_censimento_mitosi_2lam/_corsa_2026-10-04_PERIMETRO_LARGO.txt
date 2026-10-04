@@ -1,0 +1,1202 @@
+====================================================================================================
+IL CENSIMENTO DI `MITOSI_2LAM` -- ogni sito, e di che TIPO e'
+====================================================================================================
+  simulatore .. c18c9bf6 (sha1 byte grezzi)
+  strumento ... 10daa53b
+  il setaccio: l'AST per il CODICE, `tokenize` per COMMENTI e STRINGHE.
+  ### L'AST NON VEDE I COMMENTI: con il solo AST questo censimento direbbe
+  ###   <<nessun altro sito>> mentre un commento continua ad asserire il
+  ###   contrario della legge. ### Sarebbe un FALSO-ZERO dello STRUMENTO.
+
+----------------------------------------------------------------------------------------------------
+NEL SIMULATORE: 16 riferimenti
+    riga    classe    come                     testo
+    :457    CODICE    assegnazione             MITOSI_2LAM = False     # [CURA 5, 2026-09-25] `MITOSI_2LAM`
+    :457    COMMENTO  commento                 MITOSI_2LAM = False     # [CURA 5, 2026-09-25] `MITOSI_2LAM`
+    :3471   COMMENTO  commento                 # PIU': con `SEMINA_LAM` e `MITOSI_2LAM` si ha `d >= LAM`. ⚠
+    :8465   CODICE    lettura                  if MITOSI_2LAM and len(c):
+    :8929   COMMENTO  commento                 #   NESSUN PAVIMENTO: `d >= LAM` con `SEMINA_LAM`/`MITOSI_2L
+    :10636  CODICE    global                   global MITOSI_2LAM     # [CURA 5] senza questo l'assegnazion
+    :10638  COMMENTO  commento                 #   ed e' esattamente come `--semina-matura` e `--mitosi-2la
+    :10646  COMMENTO  commento                 #   `--tau-a`, `--semina-matura` e `--mitosi-2lam`, inerti p
+    :10731  CODICE    assegnazione             MITOSI_2LAM = bool(getattr(a, "mitosi_2lam", False))       #
+    :10731  CODICE    stringa-chiave `mitosi_2 MITOSI_2LAM = bool(getattr(a, "mitosi_2lam", False))       #
+    :10732  CODICE    lettura                  if MITOSI_2LAM:
+    :10733  STRINGA   letterale o docstring    print("[cura5] MITOSI_2LAM ON: un arco si divide SOLO se `d 
+    :11126  COMMENTO  commento                 #   **`--semina-matura` e `--mitosi-2lam` NON FUNZIONAVANO D
+    :11129  COMMENTO  commento                 #   Trovato dal SIGILLO DEL DRIVER (`MITOSI_2LAM False/False
+    :11691  CODICE    stringa-chiave `--mitosi p.add_argument("--mitosi-2lam", action="store_true",
+    :11691  STRINGA   letterale o docstring    p.add_argument("--mitosi-2lam", action="store_true",
+
+----------------------------------------------------------------------------------------------------
+IL CONFRONTO CON LA LISTA DEL MANDATO (il guardiano, blob c18c9bf6)
+  righe di CODICE nella MIA lista .. 6  [457, 8465, 10636, 10731, 10732, 11691]
+  righe nella SUA lista ............ 7  [457, 8465, 10636, 10731, 10732, 10733, 11691]
+
+  SOLO NELLA MIA (codice NON previsto): 0
+  SOLO NELLA SUA (previsto e NON trovato): 1
+      :10733  il testo dell'avviso [cura5]
+
+  COMMENTI e STRINGHE fuori dalla lista del mandato: 6
+      :3471   COMMENTO  # PIU': con `SEMINA_LAM` e `MITOSI_2LAM` si ha `d >= LAM`. ⚠ MA E'
+      :8929   COMMENTO  #   NESSUN PAVIMENTO: `d >= LAM` con `SEMINA_LAM`/`MITOSI_2LAM`. E poi
+      :10638  COMMENTO  #   ed e' esattamente come `--semina-matura` e `--mitosi-2lam` sono st
+      :10646  COMMENTO  #   `--tau-a`, `--semina-matura` e `--mitosi-2lam`, inerti per un gior
+      :11126  COMMENTO  #   **`--semina-matura` e `--mitosi-2lam` NON FUNZIONAVANO DA RIGA DI 
+      :11129  COMMENTO  #   Trovato dal SIGILLO DEL DRIVER (`MITOSI_2LAM False/False` in NUDA 
+  ### NON sono CODICE, quindi NON fanno scattare lo STOP del mandato.
+  ### MA VANNO GUARDATI UNO PER UNO: un commento che ASSERISCE la legge
+  ###   sotto condizione del flag diventa FALSO il giorno della cura.
+
+----------------------------------------------------------------------------------------------------
+FUORI DAL SIMULATORE: ogni file di `csv/` che nomina il flag
+  csv/_cli_flag.py -- 1 riferimenti (STRINGA)
+      :2      STRINGA   """**IL PERCORSO VERO DI UN FLAG: `argv` -> `_cli()` -> `_applica_flag
+  csv/_cure_verificate.py -- 2 riferimenti (STRINGA)
+      :144    STRINGA   ("MITOSI_2LAM", "**`CURA 5`** `A13` ALLA NASCITA: un arco si divide so
+      :146    STRINGA   "in **ogni** run del fork *(`--mitosi-2lam`)*",
+  csv/_presidio_commenti_flag.py -- 2 riferimenti (STRINGA)
+      :2      STRINGA   """**`P7` — LA POSTCONDIZIONE: IL COMMENTO DI OGNI FLAG NOMINA QUEL FL
+      :94     STRINGA   """Restituisce `(guasti, quanti)`. Un guasto = `(flag, riga, motivo)`.
+  csv/_seal_fork/_sigillo_cura4_accensione.py -- 1 riferimenti (STRINGA)
+      :174    STRINGA   FIGLIO_MIT = r'''
+  csv/_seal_fork/_sigillo_cura5_a13nascita.py -- 4 riferimenti (STRINGA)
+      :2      STRINGA   """`CURA 5` -- **IL SIGILLO DI `A13` ALLA NASCITA** (`MITOSI_2LAM`).
+      :47     STRINGA   FIGLIO = r'''
+      :224    STRINGA   P("SIGILLO `CURA 5` -- `A13` ALLA NASCITA (`MITOSI_2LAM`): un arco si 
+      :336    STRINGA   + chr(10) + "  la condizione `MITOSI_2LAM` sta nella maschera `ok` del
+  csv/_seal_fork/_sigillo_frazione_t.py -- 7 riferimenti (CODICE, COMMENTO, STRINGA)
+      :2      STRINGA   """**IL SIGILLO DEL `COMMIT 6a`: la frazione `t` esplicita.**
+      :58     COMMENTO  # ### LE TRE SCENE DEL COMMIT 4, PIU' LA QUARTA senza `--mitosi-2lam` 
+      :126    STRINGA   """Scena `MASSE-COERENTI`, dal CLI del driver: nessun attributo a mano
+      :135    CODICE    argv = [x for x in argv if x != "--mitosi-2lam"]
+      :135    STRINGA   argv = [x for x in argv if x != "--mitosi-2lam"]
+      :433    STRINGA   stampa("  SCENA `%s` -- seme %d, %d passi, --mitosi-2lam: %s"
+      :492    CODICE    per_scena[nome] = {"seme": seme, "passi": passi, "mitosi_2lam": con2,
+  csv/_seal_fork/_guasto_ripieghi/_sim_precura.py -- 15 riferimenti (CODICE, COMMENTO, STRINGA)
+      :418    CODICE    MITOSI_2LAM = False     # [CURA 5, 2026-09-25] `MITOSI_2LAM`: `A13` AL
+      :418    COMMENTO  MITOSI_2LAM = False     # [CURA 5, 2026-09-25] `MITOSI_2LAM`: `A13` AL
+      :1597   COMMENTO  # PIU': con `SEMINA_LAM` e `MITOSI_2LAM` si ha `d >= LAM`. ⚠ MA E'
+      :6414   CODICE    if MITOSI_2LAM and len(c):
+      :6785   COMMENTO  #   NESSUN PAVIMENTO: `d >= LAM` con `SEMINA_LAM`/`MITOSI_2LAM`. E poi
+      :8492   CODICE    global MITOSI_2LAM     # [CURA 5] senza questo l'assegnazione sarebbe 
+      :8494   COMMENTO  #   ed e' esattamente come `--semina-matura` e `--mitosi-2lam` sono st
+      :8583   CODICE    MITOSI_2LAM = bool(getattr(a, "mitosi_2lam", False))       # [CURA 5]
+      :8583   CODICE    MITOSI_2LAM = bool(getattr(a, "mitosi_2lam", False))       # [CURA 5]
+      :8584   CODICE    if MITOSI_2LAM:
+      :8585   STRINGA   print("[cura5] MITOSI_2LAM ON: un arco si divide SOLO se `d >= 2 LAM` 
+      :8974   COMMENTO  #   **`--semina-matura` e `--mitosi-2lam` NON FUNZIONAVANO DA RIGA DI 
+      :8977   COMMENTO  #   Trovato dal SIGILLO DEL DRIVER (`MITOSI_2LAM False/False` in NUDA 
+      :9519   CODICE    p.add_argument("--mitosi-2lam", action="store_true",
+      :9519   STRINGA   p.add_argument("--mitosi-2lam", action="store_true",
+  csv/_seal_fork/_sigillo_confronto_esteso/_sim_prima_cura.py -- 16 riferimenti (CODICE, COMMENTO, STRINGA)
+      :441    CODICE    MITOSI_2LAM = False     # [CURA 5, 2026-09-25] `MITOSI_2LAM`: `A13` AL
+      :441    COMMENTO  MITOSI_2LAM = False     # [CURA 5, 2026-09-25] `MITOSI_2LAM`: `A13` AL
+      :2245   COMMENTO  # PIU': con `SEMINA_LAM` e `MITOSI_2LAM` si ha `d >= LAM`. ⚠ MA E'
+      :7259   CODICE    if MITOSI_2LAM and len(c):
+      :7670   COMMENTO  #   NESSUN PAVIMENTO: `d >= LAM` con `SEMINA_LAM`/`MITOSI_2LAM`. E poi
+      :9377   CODICE    global MITOSI_2LAM     # [CURA 5] senza questo l'assegnazione sarebbe 
+      :9379   COMMENTO  #   ed e' esattamente come `--semina-matura` e `--mitosi-2lam` sono st
+      :9387   COMMENTO  #   `--tau-a`, `--semina-matura` e `--mitosi-2lam`, inerti per un gior
+      :9472   CODICE    MITOSI_2LAM = bool(getattr(a, "mitosi_2lam", False))       # [CURA 5]
+      :9472   CODICE    MITOSI_2LAM = bool(getattr(a, "mitosi_2lam", False))       # [CURA 5]
+      :9473   CODICE    if MITOSI_2LAM:
+      :9474   STRINGA   print("[cura5] MITOSI_2LAM ON: un arco si divide SOLO se `d >= 2 LAM` 
+      :9867   COMMENTO  #   **`--semina-matura` e `--mitosi-2lam` NON FUNZIONAVANO DA RIGA DI 
+      :9870   COMMENTO  #   Trovato dal SIGILLO DEL DRIVER (`MITOSI_2LAM False/False` in NUDA 
+      :10432  CODICE    p.add_argument("--mitosi-2lam", action="store_true",
+      :10432  STRINGA   p.add_argument("--mitosi-2lam", action="store_true",
+  csv/_seal_fork/_sigillo_confronto_esteso/_sim_prima_punto_unico.py -- 16 riferimenti (CODICE, COMMENTO, STRINGA)
+      :441    CODICE    MITOSI_2LAM = False     # [CURA 5, 2026-09-25] `MITOSI_2LAM`: `A13` AL
+      :441    COMMENTO  MITOSI_2LAM = False     # [CURA 5, 2026-09-25] `MITOSI_2LAM`: `A13` AL
+      :2245   COMMENTO  # PIU': con `SEMINA_LAM` e `MITOSI_2LAM` si ha `d >= LAM`. ⚠ MA E'
+      :7259   CODICE    if MITOSI_2LAM and len(c):
+      :7704   COMMENTO  #   NESSUN PAVIMENTO: `d >= LAM` con `SEMINA_LAM`/`MITOSI_2LAM`. E poi
+      :9411   CODICE    global MITOSI_2LAM     # [CURA 5] senza questo l'assegnazione sarebbe 
+      :9413   COMMENTO  #   ed e' esattamente come `--semina-matura` e `--mitosi-2lam` sono st
+      :9421   COMMENTO  #   `--tau-a`, `--semina-matura` e `--mitosi-2lam`, inerti per un gior
+      :9506   CODICE    MITOSI_2LAM = bool(getattr(a, "mitosi_2lam", False))       # [CURA 5]
+      :9506   CODICE    MITOSI_2LAM = bool(getattr(a, "mitosi_2lam", False))       # [CURA 5]
+      :9507   CODICE    if MITOSI_2LAM:
+      :9508   STRINGA   print("[cura5] MITOSI_2LAM ON: un arco si divide SOLO se `d >= 2 LAM` 
+      :9901   COMMENTO  #   **`--semina-matura` e `--mitosi-2lam` NON FUNZIONAVANO DA RIGA DI 
+      :9904   COMMENTO  #   Trovato dal SIGILLO DEL DRIVER (`MITOSI_2LAM False/False` in NUDA 
+      :10466  CODICE    p.add_argument("--mitosi-2lam", action="store_true",
+      :10466  STRINGA   p.add_argument("--mitosi-2lam", action="store_true",
+  csv/_seal_fork/_sigillo_confronto_esteso/_sim_ulp.py -- 16 riferimenti (CODICE, COMMENTO, STRINGA)
+      :441    CODICE    MITOSI_2LAM = False     # [CURA 5, 2026-09-25] `MITOSI_2LAM`: `A13` AL
+      :441    COMMENTO  MITOSI_2LAM = False     # [CURA 5, 2026-09-25] `MITOSI_2LAM`: `A13` AL
+      :3121   COMMENTO  # PIU': con `SEMINA_LAM` e `MITOSI_2LAM` si ha `d >= LAM`. ⚠ MA E'
+      :8044   CODICE    if MITOSI_2LAM and len(c):
+      :8477   COMMENTO  #   NESSUN PAVIMENTO: `d >= LAM` con `SEMINA_LAM`/`MITOSI_2LAM`. E poi
+      :10184  CODICE    global MITOSI_2LAM     # [CURA 5] senza questo l'assegnazione sarebbe 
+      :10186  COMMENTO  #   ed e' esattamente come `--semina-matura` e `--mitosi-2lam` sono st
+      :10194  COMMENTO  #   `--tau-a`, `--semina-matura` e `--mitosi-2lam`, inerti per un gior
+      :10279  CODICE    MITOSI_2LAM = bool(getattr(a, "mitosi_2lam", False))       # [CURA 5]
+      :10279  CODICE    MITOSI_2LAM = bool(getattr(a, "mitosi_2lam", False))       # [CURA 5]
+      :10280  CODICE    if MITOSI_2LAM:
+      :10281  STRINGA   print("[cura5] MITOSI_2LAM ON: un arco si divide SOLO se `d >= 2 LAM` 
+      :10674  COMMENTO  #   **`--semina-matura` e `--mitosi-2lam` NON FUNZIONAVANO DA RIGA DI 
+      :10677  COMMENTO  #   Trovato dal SIGILLO DEL DRIVER (`MITOSI_2LAM False/False` in NUDA 
+      :11239  CODICE    p.add_argument("--mitosi-2lam", action="store_true",
+      :11239  STRINGA   p.add_argument("--mitosi-2lam", action="store_true",
+  csv/_seal_fork/_sigillo_frazione_t/_sim_fm_rovescio.py -- 16 riferimenti (CODICE, COMMENTO, STRINGA)
+      :457    CODICE    MITOSI_2LAM = False     # [CURA 5, 2026-09-25] `MITOSI_2LAM`: `A13` AL
+      :457    COMMENTO  MITOSI_2LAM = False     # [CURA 5, 2026-09-25] `MITOSI_2LAM`: `A13` AL
+      :3471   COMMENTO  # PIU': con `SEMINA_LAM` e `MITOSI_2LAM` si ha `d >= LAM`. ⚠ MA E'
+      :8465   CODICE    if MITOSI_2LAM and len(c):
+      :8929   COMMENTO  #   NESSUN PAVIMENTO: `d >= LAM` con `SEMINA_LAM`/`MITOSI_2LAM`. E poi
+      :10636  CODICE    global MITOSI_2LAM     # [CURA 5] senza questo l'assegnazione sarebbe 
+      :10638  COMMENTO  #   ed e' esattamente come `--semina-matura` e `--mitosi-2lam` sono st
+      :10646  COMMENTO  #   `--tau-a`, `--semina-matura` e `--mitosi-2lam`, inerti per un gior
+      :10731  CODICE    MITOSI_2LAM = bool(getattr(a, "mitosi_2lam", False))       # [CURA 5]
+      :10731  CODICE    MITOSI_2LAM = bool(getattr(a, "mitosi_2lam", False))       # [CURA 5]
+      :10732  CODICE    if MITOSI_2LAM:
+      :10733  STRINGA   print("[cura5] MITOSI_2LAM ON: un arco si divide SOLO se `d >= 2 LAM` 
+      :11126  COMMENTO  #   **`--semina-matura` e `--mitosi-2lam` NON FUNZIONAVANO DA RIGA DI 
+      :11129  COMMENTO  #   Trovato dal SIGILLO DEL DRIVER (`MITOSI_2LAM False/False` in NUDA 
+      :11691  CODICE    p.add_argument("--mitosi-2lam", action="store_true",
+      :11691  STRINGA   p.add_argument("--mitosi-2lam", action="store_true",
+  csv/_seal_fork/_sigillo_frazione_t/_sim_let_dd.py -- 16 riferimenti (CODICE, COMMENTO, STRINGA)
+      :457    CODICE    MITOSI_2LAM = False     # [CURA 5, 2026-09-25] `MITOSI_2LAM`: `A13` AL
+      :457    COMMENTO  MITOSI_2LAM = False     # [CURA 5, 2026-09-25] `MITOSI_2LAM`: `A13` AL
+      :3471   COMMENTO  # PIU': con `SEMINA_LAM` e `MITOSI_2LAM` si ha `d >= LAM`. ⚠ MA E'
+      :8465   CODICE    if MITOSI_2LAM and len(c):
+      :8929   COMMENTO  #   NESSUN PAVIMENTO: `d >= LAM` con `SEMINA_LAM`/`MITOSI_2LAM`. E poi
+      :10636  CODICE    global MITOSI_2LAM     # [CURA 5] senza questo l'assegnazione sarebbe 
+      :10638  COMMENTO  #   ed e' esattamente come `--semina-matura` e `--mitosi-2lam` sono st
+      :10646  COMMENTO  #   `--tau-a`, `--semina-matura` e `--mitosi-2lam`, inerti per un gior
+      :10731  CODICE    MITOSI_2LAM = bool(getattr(a, "mitosi_2lam", False))       # [CURA 5]
+      :10731  CODICE    MITOSI_2LAM = bool(getattr(a, "mitosi_2lam", False))       # [CURA 5]
+      :10732  CODICE    if MITOSI_2LAM:
+      :10733  STRINGA   print("[cura5] MITOSI_2LAM ON: un arco si divide SOLO se `d >= 2 LAM` 
+      :11126  COMMENTO  #   **`--semina-matura` e `--mitosi-2lam` NON FUNZIONAVANO DA RIGA DI 
+      :11129  COMMENTO  #   Trovato dal SIGILLO DEL DRIVER (`MITOSI_2LAM False/False` in NUDA 
+      :11691  CODICE    p.add_argument("--mitosi-2lam", action="store_true",
+      :11691  STRINGA   p.add_argument("--mitosi-2lam", action="store_true",
+  csv/_seal_fork/_sigillo_frazione_t/_sim_let_dh.py -- 16 riferimenti (CODICE, COMMENTO, STRINGA)
+      :457    CODICE    MITOSI_2LAM = False     # [CURA 5, 2026-09-25] `MITOSI_2LAM`: `A13` AL
+      :457    COMMENTO  MITOSI_2LAM = False     # [CURA 5, 2026-09-25] `MITOSI_2LAM`: `A13` AL
+      :3471   COMMENTO  # PIU': con `SEMINA_LAM` e `MITOSI_2LAM` si ha `d >= LAM`. ⚠ MA E'
+      :8465   CODICE    if MITOSI_2LAM and len(c):
+      :8929   COMMENTO  #   NESSUN PAVIMENTO: `d >= LAM` con `SEMINA_LAM`/`MITOSI_2LAM`. E poi
+      :10636  CODICE    global MITOSI_2LAM     # [CURA 5] senza questo l'assegnazione sarebbe 
+      :10638  COMMENTO  #   ed e' esattamente come `--semina-matura` e `--mitosi-2lam` sono st
+      :10646  COMMENTO  #   `--tau-a`, `--semina-matura` e `--mitosi-2lam`, inerti per un gior
+      :10731  CODICE    MITOSI_2LAM = bool(getattr(a, "mitosi_2lam", False))       # [CURA 5]
+      :10731  CODICE    MITOSI_2LAM = bool(getattr(a, "mitosi_2lam", False))       # [CURA 5]
+      :10732  CODICE    if MITOSI_2LAM:
+      :10733  STRINGA   print("[cura5] MITOSI_2LAM ON: un arco si divide SOLO se `d >= 2 LAM` 
+      :11126  COMMENTO  #   **`--semina-matura` e `--mitosi-2lam` NON FUNZIONAVANO DA RIGA DI 
+      :11129  COMMENTO  #   Trovato dal SIGILLO DEL DRIVER (`MITOSI_2LAM False/False` in NUDA 
+      :11691  CODICE    p.add_argument("--mitosi-2lam", action="store_true",
+      :11691  STRINGA   p.add_argument("--mitosi-2lam", action="store_true",
+  csv/_seal_fork/_sigillo_frazione_t/_sim_let_fm.py -- 16 riferimenti (CODICE, COMMENTO, STRINGA)
+      :457    CODICE    MITOSI_2LAM = False     # [CURA 5, 2026-09-25] `MITOSI_2LAM`: `A13` AL
+      :457    COMMENTO  MITOSI_2LAM = False     # [CURA 5, 2026-09-25] `MITOSI_2LAM`: `A13` AL
+      :3471   COMMENTO  # PIU': con `SEMINA_LAM` e `MITOSI_2LAM` si ha `d >= LAM`. ⚠ MA E'
+      :8465   CODICE    if MITOSI_2LAM and len(c):
+      :8929   COMMENTO  #   NESSUN PAVIMENTO: `d >= LAM` con `SEMINA_LAM`/`MITOSI_2LAM`. E poi
+      :10636  CODICE    global MITOSI_2LAM     # [CURA 5] senza questo l'assegnazione sarebbe 
+      :10638  COMMENTO  #   ed e' esattamente come `--semina-matura` e `--mitosi-2lam` sono st
+      :10646  COMMENTO  #   `--tau-a`, `--semina-matura` e `--mitosi-2lam`, inerti per un gior
+      :10731  CODICE    MITOSI_2LAM = bool(getattr(a, "mitosi_2lam", False))       # [CURA 5]
+      :10731  CODICE    MITOSI_2LAM = bool(getattr(a, "mitosi_2lam", False))       # [CURA 5]
+      :10732  CODICE    if MITOSI_2LAM:
+      :10733  STRINGA   print("[cura5] MITOSI_2LAM ON: un arco si divide SOLO se `d >= 2 LAM` 
+      :11126  COMMENTO  #   **`--semina-matura` e `--mitosi-2lam` NON FUNZIONAVANO DA RIGA DI 
+      :11129  COMMENTO  #   Trovato dal SIGILLO DEL DRIVER (`MITOSI_2LAM False/False` in NUDA 
+      :11691  CODICE    p.add_argument("--mitosi-2lam", action="store_true",
+      :11691  STRINGA   p.add_argument("--mitosi-2lam", action="store_true",
+  csv/_seal_fork/_sigillo_frazione_t/_sim_let_fm_bias.py -- 16 riferimenti (CODICE, COMMENTO, STRINGA)
+      :457    CODICE    MITOSI_2LAM = False     # [CURA 5, 2026-09-25] `MITOSI_2LAM`: `A13` AL
+      :457    COMMENTO  MITOSI_2LAM = False     # [CURA 5, 2026-09-25] `MITOSI_2LAM`: `A13` AL
+      :3471   COMMENTO  # PIU': con `SEMINA_LAM` e `MITOSI_2LAM` si ha `d >= LAM`. ⚠ MA E'
+      :8465   CODICE    if MITOSI_2LAM and len(c):
+      :8929   COMMENTO  #   NESSUN PAVIMENTO: `d >= LAM` con `SEMINA_LAM`/`MITOSI_2LAM`. E poi
+      :10636  CODICE    global MITOSI_2LAM     # [CURA 5] senza questo l'assegnazione sarebbe 
+      :10638  COMMENTO  #   ed e' esattamente come `--semina-matura` e `--mitosi-2lam` sono st
+      :10646  COMMENTO  #   `--tau-a`, `--semina-matura` e `--mitosi-2lam`, inerti per un gior
+      :10731  CODICE    MITOSI_2LAM = bool(getattr(a, "mitosi_2lam", False))       # [CURA 5]
+      :10731  CODICE    MITOSI_2LAM = bool(getattr(a, "mitosi_2lam", False))       # [CURA 5]
+      :10732  CODICE    if MITOSI_2LAM:
+      :10733  STRINGA   print("[cura5] MITOSI_2LAM ON: un arco si divide SOLO se `d >= 2 LAM` 
+      :11126  COMMENTO  #   **`--semina-matura` e `--mitosi-2lam` NON FUNZIONAVANO DA RIGA DI 
+      :11129  COMMENTO  #   Trovato dal SIGILLO DEL DRIVER (`MITOSI_2LAM False/False` in NUDA 
+      :11691  CODICE    p.add_argument("--mitosi-2lam", action="store_true",
+      :11691  STRINGA   p.add_argument("--mitosi-2lam", action="store_true",
+  csv/_seal_fork/_sigillo_frazione_t/_sim_let_pos_div.py -- 16 riferimenti (CODICE, COMMENTO, STRINGA)
+      :457    CODICE    MITOSI_2LAM = False     # [CURA 5, 2026-09-25] `MITOSI_2LAM`: `A13` AL
+      :457    COMMENTO  MITOSI_2LAM = False     # [CURA 5, 2026-09-25] `MITOSI_2LAM`: `A13` AL
+      :3471   COMMENTO  # PIU': con `SEMINA_LAM` e `MITOSI_2LAM` si ha `d >= LAM`. ⚠ MA E'
+      :8465   CODICE    if MITOSI_2LAM and len(c):
+      :8929   COMMENTO  #   NESSUN PAVIMENTO: `d >= LAM` con `SEMINA_LAM`/`MITOSI_2LAM`. E poi
+      :10636  CODICE    global MITOSI_2LAM     # [CURA 5] senza questo l'assegnazione sarebbe 
+      :10638  COMMENTO  #   ed e' esattamente come `--semina-matura` e `--mitosi-2lam` sono st
+      :10646  COMMENTO  #   `--tau-a`, `--semina-matura` e `--mitosi-2lam`, inerti per un gior
+      :10731  CODICE    MITOSI_2LAM = bool(getattr(a, "mitosi_2lam", False))       # [CURA 5]
+      :10731  CODICE    MITOSI_2LAM = bool(getattr(a, "mitosi_2lam", False))       # [CURA 5]
+      :10732  CODICE    if MITOSI_2LAM:
+      :10733  STRINGA   print("[cura5] MITOSI_2LAM ON: un arco si divide SOLO se `d >= 2 LAM` 
+      :11126  COMMENTO  #   **`--semina-matura` e `--mitosi-2lam` NON FUNZIONAVANO DA RIGA DI 
+      :11129  COMMENTO  #   Trovato dal SIGILLO DEL DRIVER (`MITOSI_2LAM False/False` in NUDA 
+      :11691  CODICE    p.add_argument("--mitosi-2lam", action="store_true",
+      :11691  STRINGA   p.add_argument("--mitosi-2lam", action="store_true",
+  csv/_seal_fork/_sigillo_frazione_t/_sim_let_pos_sch.py -- 16 riferimenti (CODICE, COMMENTO, STRINGA)
+      :457    CODICE    MITOSI_2LAM = False     # [CURA 5, 2026-09-25] `MITOSI_2LAM`: `A13` AL
+      :457    COMMENTO  MITOSI_2LAM = False     # [CURA 5, 2026-09-25] `MITOSI_2LAM`: `A13` AL
+      :3471   COMMENTO  # PIU': con `SEMINA_LAM` e `MITOSI_2LAM` si ha `d >= LAM`. ⚠ MA E'
+      :8465   CODICE    if MITOSI_2LAM and len(c):
+      :8929   COMMENTO  #   NESSUN PAVIMENTO: `d >= LAM` con `SEMINA_LAM`/`MITOSI_2LAM`. E poi
+      :10636  CODICE    global MITOSI_2LAM     # [CURA 5] senza questo l'assegnazione sarebbe 
+      :10638  COMMENTO  #   ed e' esattamente come `--semina-matura` e `--mitosi-2lam` sono st
+      :10646  COMMENTO  #   `--tau-a`, `--semina-matura` e `--mitosi-2lam`, inerti per un gior
+      :10731  CODICE    MITOSI_2LAM = bool(getattr(a, "mitosi_2lam", False))       # [CURA 5]
+      :10731  CODICE    MITOSI_2LAM = bool(getattr(a, "mitosi_2lam", False))       # [CURA 5]
+      :10732  CODICE    if MITOSI_2LAM:
+      :10733  STRINGA   print("[cura5] MITOSI_2LAM ON: un arco si divide SOLO se `d >= 2 LAM` 
+      :11126  COMMENTO  #   **`--semina-matura` e `--mitosi-2lam` NON FUNZIONAVANO DA RIGA DI 
+      :11129  COMMENTO  #   Trovato dal SIGILLO DEL DRIVER (`MITOSI_2LAM False/False` in NUDA 
+      :11691  CODICE    p.add_argument("--mitosi-2lam", action="store_true",
+      :11691  STRINGA   p.add_argument("--mitosi-2lam", action="store_true",
+  csv/_seal_fork/_sigillo_frazione_t/_sim_prima.py -- 16 riferimenti (CODICE, COMMENTO, STRINGA)
+      :457    CODICE    MITOSI_2LAM = False     # [CURA 5, 2026-09-25] `MITOSI_2LAM`: `A13` AL
+      :457    COMMENTO  MITOSI_2LAM = False     # [CURA 5, 2026-09-25] `MITOSI_2LAM`: `A13` AL
+      :3434   COMMENTO  # PIU': con `SEMINA_LAM` e `MITOSI_2LAM` si ha `d >= LAM`. ⚠ MA E'
+      :8412   CODICE    if MITOSI_2LAM and len(c):
+      :8845   COMMENTO  #   NESSUN PAVIMENTO: `d >= LAM` con `SEMINA_LAM`/`MITOSI_2LAM`. E poi
+      :10552  CODICE    global MITOSI_2LAM     # [CURA 5] senza questo l'assegnazione sarebbe 
+      :10554  COMMENTO  #   ed e' esattamente come `--semina-matura` e `--mitosi-2lam` sono st
+      :10562  COMMENTO  #   `--tau-a`, `--semina-matura` e `--mitosi-2lam`, inerti per un gior
+      :10647  CODICE    MITOSI_2LAM = bool(getattr(a, "mitosi_2lam", False))       # [CURA 5]
+      :10647  CODICE    MITOSI_2LAM = bool(getattr(a, "mitosi_2lam", False))       # [CURA 5]
+      :10648  CODICE    if MITOSI_2LAM:
+      :10649  STRINGA   print("[cura5] MITOSI_2LAM ON: un arco si divide SOLO se `d >= 2 LAM` 
+      :11042  COMMENTO  #   **`--semina-matura` e `--mitosi-2lam` NON FUNZIONAVANO DA RIGA DI 
+      :11045  COMMENTO  #   Trovato dal SIGILLO DEL DRIVER (`MITOSI_2LAM False/False` in NUDA 
+      :11607  CODICE    p.add_argument("--mitosi-2lam", action="store_true",
+      :11607  STRINGA   p.add_argument("--mitosi-2lam", action="store_true",
+  csv/_seal_fork/_sigillo_frazione_t/_sim_pulita.py -- 16 riferimenti (CODICE, COMMENTO, STRINGA)
+      :457    CODICE    MITOSI_2LAM = False     # [CURA 5, 2026-09-25] `MITOSI_2LAM`: `A13` AL
+      :457    COMMENTO  MITOSI_2LAM = False     # [CURA 5, 2026-09-25] `MITOSI_2LAM`: `A13` AL
+      :3471   COMMENTO  # PIU': con `SEMINA_LAM` e `MITOSI_2LAM` si ha `d >= LAM`. ⚠ MA E'
+      :8465   CODICE    if MITOSI_2LAM and len(c):
+      :8929   COMMENTO  #   NESSUN PAVIMENTO: `d >= LAM` con `SEMINA_LAM`/`MITOSI_2LAM`. E poi
+      :10636  CODICE    global MITOSI_2LAM     # [CURA 5] senza questo l'assegnazione sarebbe 
+      :10638  COMMENTO  #   ed e' esattamente come `--semina-matura` e `--mitosi-2lam` sono st
+      :10646  COMMENTO  #   `--tau-a`, `--semina-matura` e `--mitosi-2lam`, inerti per un gior
+      :10731  CODICE    MITOSI_2LAM = bool(getattr(a, "mitosi_2lam", False))       # [CURA 5]
+      :10731  CODICE    MITOSI_2LAM = bool(getattr(a, "mitosi_2lam", False))       # [CURA 5]
+      :10732  CODICE    if MITOSI_2LAM:
+      :10733  STRINGA   print("[cura5] MITOSI_2LAM ON: un arco si divide SOLO se `d >= 2 LAM` 
+      :11126  COMMENTO  #   **`--semina-matura` e `--mitosi-2lam` NON FUNZIONAVANO DA RIGA DI 
+      :11129  COMMENTO  #   Trovato dal SIGILLO DEL DRIVER (`MITOSI_2LAM False/False` in NUDA 
+      :11691  CODICE    p.add_argument("--mitosi-2lam", action="store_true",
+      :11691  STRINGA   p.add_argument("--mitosi-2lam", action="store_true",
+  csv/_seal_fork/_sigillo_frazione_t/_sim_rifatta.py -- 16 riferimenti (CODICE, COMMENTO, STRINGA)
+      :457    CODICE    MITOSI_2LAM = False     # [CURA 5, 2026-09-25] `MITOSI_2LAM`: `A13` AL
+      :457    COMMENTO  MITOSI_2LAM = False     # [CURA 5, 2026-09-25] `MITOSI_2LAM`: `A13` AL
+      :3471   COMMENTO  # PIU': con `SEMINA_LAM` e `MITOSI_2LAM` si ha `d >= LAM`. ⚠ MA E'
+      :8465   CODICE    if MITOSI_2LAM and len(c):
+      :8929   COMMENTO  #   NESSUN PAVIMENTO: `d >= LAM` con `SEMINA_LAM`/`MITOSI_2LAM`. E poi
+      :10636  CODICE    global MITOSI_2LAM     # [CURA 5] senza questo l'assegnazione sarebbe 
+      :10638  COMMENTO  #   ed e' esattamente come `--semina-matura` e `--mitosi-2lam` sono st
+      :10646  COMMENTO  #   `--tau-a`, `--semina-matura` e `--mitosi-2lam`, inerti per un gior
+      :10731  CODICE    MITOSI_2LAM = bool(getattr(a, "mitosi_2lam", False))       # [CURA 5]
+      :10731  CODICE    MITOSI_2LAM = bool(getattr(a, "mitosi_2lam", False))       # [CURA 5]
+      :10732  CODICE    if MITOSI_2LAM:
+      :10733  STRINGA   print("[cura5] MITOSI_2LAM ON: un arco si divide SOLO se `d >= 2 LAM` 
+      :11126  COMMENTO  #   **`--semina-matura` e `--mitosi-2lam` NON FUNZIONAVANO DA RIGA DI 
+      :11129  COMMENTO  #   Trovato dal SIGILLO DEL DRIVER (`MITOSI_2LAM False/False` in NUDA 
+      :11691  CODICE    p.add_argument("--mitosi-2lam", action="store_true",
+      :11691  STRINGA   p.add_argument("--mitosi-2lam", action="store_true",
+  csv/_seal_fork/_sigillo_frazione_t/_sim_t04.py -- 16 riferimenti (CODICE, COMMENTO, STRINGA)
+      :457    CODICE    MITOSI_2LAM = False     # [CURA 5, 2026-09-25] `MITOSI_2LAM`: `A13` AL
+      :457    COMMENTO  MITOSI_2LAM = False     # [CURA 5, 2026-09-25] `MITOSI_2LAM`: `A13` AL
+      :3471   COMMENTO  # PIU': con `SEMINA_LAM` e `MITOSI_2LAM` si ha `d >= LAM`. ⚠ MA E'
+      :8465   CODICE    if MITOSI_2LAM and len(c):
+      :8929   COMMENTO  #   NESSUN PAVIMENTO: `d >= LAM` con `SEMINA_LAM`/`MITOSI_2LAM`. E poi
+      :10636  CODICE    global MITOSI_2LAM     # [CURA 5] senza questo l'assegnazione sarebbe 
+      :10638  COMMENTO  #   ed e' esattamente come `--semina-matura` e `--mitosi-2lam` sono st
+      :10646  COMMENTO  #   `--tau-a`, `--semina-matura` e `--mitosi-2lam`, inerti per un gior
+      :10731  CODICE    MITOSI_2LAM = bool(getattr(a, "mitosi_2lam", False))       # [CURA 5]
+      :10731  CODICE    MITOSI_2LAM = bool(getattr(a, "mitosi_2lam", False))       # [CURA 5]
+      :10732  CODICE    if MITOSI_2LAM:
+      :10733  STRINGA   print("[cura5] MITOSI_2LAM ON: un arco si divide SOLO se `d >= 2 LAM` 
+      :11126  COMMENTO  #   **`--semina-matura` e `--mitosi-2lam` NON FUNZIONAVANO DA RIGA DI 
+      :11129  COMMENTO  #   Trovato dal SIGILLO DEL DRIVER (`MITOSI_2LAM False/False` in NUDA 
+      :11691  CODICE    p.add_argument("--mitosi-2lam", action="store_true",
+      :11691  STRINGA   p.add_argument("--mitosi-2lam", action="store_true",
+  csv/_seal_fork/_sigillo_frazione_t/_sim_t04_md0.py -- 16 riferimenti (CODICE, COMMENTO, STRINGA)
+      :457    CODICE    MITOSI_2LAM = False     # [CURA 5, 2026-09-25] `MITOSI_2LAM`: `A13` AL
+      :457    COMMENTO  MITOSI_2LAM = False     # [CURA 5, 2026-09-25] `MITOSI_2LAM`: `A13` AL
+      :3471   COMMENTO  # PIU': con `SEMINA_LAM` e `MITOSI_2LAM` si ha `d >= LAM`. ⚠ MA E'
+      :8465   CODICE    if MITOSI_2LAM and len(c):
+      :8929   COMMENTO  #   NESSUN PAVIMENTO: `d >= LAM` con `SEMINA_LAM`/`MITOSI_2LAM`. E poi
+      :10636  CODICE    global MITOSI_2LAM     # [CURA 5] senza questo l'assegnazione sarebbe 
+      :10638  COMMENTO  #   ed e' esattamente come `--semina-matura` e `--mitosi-2lam` sono st
+      :10646  COMMENTO  #   `--tau-a`, `--semina-matura` e `--mitosi-2lam`, inerti per un gior
+      :10731  CODICE    MITOSI_2LAM = bool(getattr(a, "mitosi_2lam", False))       # [CURA 5]
+      :10731  CODICE    MITOSI_2LAM = bool(getattr(a, "mitosi_2lam", False))       # [CURA 5]
+      :10732  CODICE    if MITOSI_2LAM:
+      :10733  STRINGA   print("[cura5] MITOSI_2LAM ON: un arco si divide SOLO se `d >= 2 LAM` 
+      :11126  COMMENTO  #   **`--semina-matura` e `--mitosi-2lam` NON FUNZIONAVANO DA RIGA DI 
+      :11129  COMMENTO  #   Trovato dal SIGILLO DEL DRIVER (`MITOSI_2LAM False/False` in NUDA 
+      :11691  CODICE    p.add_argument("--mitosi-2lam", action="store_true",
+      :11691  STRINGA   p.add_argument("--mitosi-2lam", action="store_true",
+  csv/_seal_fork/_sigillo_inerzia_commenti/_sim_prima.py -- 16 riferimenti (CODICE, COMMENTO, STRINGA)
+      :441    CODICE    MITOSI_2LAM = False     # [CURA 5, 2026-09-25] `MITOSI_2LAM`: `A13` AL
+      :441    COMMENTO  MITOSI_2LAM = False     # [CURA 5, 2026-09-25] `MITOSI_2LAM`: `A13` AL
+      :3121   COMMENTO  # PIU': con `SEMINA_LAM` e `MITOSI_2LAM` si ha `d >= LAM`. ⚠ MA E'
+      :8044   CODICE    if MITOSI_2LAM and len(c):
+      :8477   COMMENTO  #   NESSUN PAVIMENTO: `d >= LAM` con `SEMINA_LAM`/`MITOSI_2LAM`. E poi
+      :10184  CODICE    global MITOSI_2LAM     # [CURA 5] senza questo l'assegnazione sarebbe 
+      :10186  COMMENTO  #   ed e' esattamente come `--semina-matura` e `--mitosi-2lam` sono st
+      :10194  COMMENTO  #   `--tau-a`, `--semina-matura` e `--mitosi-2lam`, inerti per un gior
+      :10279  CODICE    MITOSI_2LAM = bool(getattr(a, "mitosi_2lam", False))       # [CURA 5]
+      :10279  CODICE    MITOSI_2LAM = bool(getattr(a, "mitosi_2lam", False))       # [CURA 5]
+      :10280  CODICE    if MITOSI_2LAM:
+      :10281  STRINGA   print("[cura5] MITOSI_2LAM ON: un arco si divide SOLO se `d >= 2 LAM` 
+      :10674  COMMENTO  #   **`--semina-matura` e `--mitosi-2lam` NON FUNZIONAVANO DA RIGA DI 
+      :10677  COMMENTO  #   Trovato dal SIGILLO DEL DRIVER (`MITOSI_2LAM False/False` in NUDA 
+      :11239  CODICE    p.add_argument("--mitosi-2lam", action="store_true",
+      :11239  STRINGA   p.add_argument("--mitosi-2lam", action="store_true",
+  csv/_seal_fork/_sigillo_perc_geom_derivata/_sim_D1.py -- 16 riferimenti (CODICE, COMMENTO, STRINGA)
+      :457    CODICE    MITOSI_2LAM = False     # [CURA 5, 2026-09-25] `MITOSI_2LAM`: `A13` AL
+      :457    COMMENTO  MITOSI_2LAM = False     # [CURA 5, 2026-09-25] `MITOSI_2LAM`: `A13` AL
+      :3431   COMMENTO  # PIU': con `SEMINA_LAM` e `MITOSI_2LAM` si ha `d >= LAM`. ⚠ MA E'
+      :8409   CODICE    if MITOSI_2LAM and len(c):
+      :8842   COMMENTO  #   NESSUN PAVIMENTO: `d >= LAM` con `SEMINA_LAM`/`MITOSI_2LAM`. E poi
+      :10549  CODICE    global MITOSI_2LAM     # [CURA 5] senza questo l'assegnazione sarebbe 
+      :10551  COMMENTO  #   ed e' esattamente come `--semina-matura` e `--mitosi-2lam` sono st
+      :10559  COMMENTO  #   `--tau-a`, `--semina-matura` e `--mitosi-2lam`, inerti per un gior
+      :10644  CODICE    MITOSI_2LAM = bool(getattr(a, "mitosi_2lam", False))       # [CURA 5]
+      :10644  CODICE    MITOSI_2LAM = bool(getattr(a, "mitosi_2lam", False))       # [CURA 5]
+      :10645  CODICE    if MITOSI_2LAM:
+      :10646  STRINGA   print("[cura5] MITOSI_2LAM ON: un arco si divide SOLO se `d >= 2 LAM` 
+      :11039  COMMENTO  #   **`--semina-matura` e `--mitosi-2lam` NON FUNZIONAVANO DA RIGA DI 
+      :11042  COMMENTO  #   Trovato dal SIGILLO DEL DRIVER (`MITOSI_2LAM False/False` in NUDA 
+      :11604  CODICE    p.add_argument("--mitosi-2lam", action="store_true",
+      :11604  STRINGA   p.add_argument("--mitosi-2lam", action="store_true",
+  csv/_seal_fork/_sigillo_perc_geom_derivata/_sim_D2.py -- 16 riferimenti (CODICE, COMMENTO, STRINGA)
+      :457    CODICE    MITOSI_2LAM = False     # [CURA 5, 2026-09-25] `MITOSI_2LAM`: `A13` AL
+      :457    COMMENTO  MITOSI_2LAM = False     # [CURA 5, 2026-09-25] `MITOSI_2LAM`: `A13` AL
+      :3433   COMMENTO  # PIU': con `SEMINA_LAM` e `MITOSI_2LAM` si ha `d >= LAM`. ⚠ MA E'
+      :8411   CODICE    if MITOSI_2LAM and len(c):
+      :8844   COMMENTO  #   NESSUN PAVIMENTO: `d >= LAM` con `SEMINA_LAM`/`MITOSI_2LAM`. E poi
+      :10551  CODICE    global MITOSI_2LAM     # [CURA 5] senza questo l'assegnazione sarebbe 
+      :10553  COMMENTO  #   ed e' esattamente come `--semina-matura` e `--mitosi-2lam` sono st
+      :10561  COMMENTO  #   `--tau-a`, `--semina-matura` e `--mitosi-2lam`, inerti per un gior
+      :10646  CODICE    MITOSI_2LAM = bool(getattr(a, "mitosi_2lam", False))       # [CURA 5]
+      :10646  CODICE    MITOSI_2LAM = bool(getattr(a, "mitosi_2lam", False))       # [CURA 5]
+      :10647  CODICE    if MITOSI_2LAM:
+      :10648  STRINGA   print("[cura5] MITOSI_2LAM ON: un arco si divide SOLO se `d >= 2 LAM` 
+      :11041  COMMENTO  #   **`--semina-matura` e `--mitosi-2lam` NON FUNZIONAVANO DA RIGA DI 
+      :11044  COMMENTO  #   Trovato dal SIGILLO DEL DRIVER (`MITOSI_2LAM False/False` in NUDA 
+      :11606  CODICE    p.add_argument("--mitosi-2lam", action="store_true",
+      :11606  STRINGA   p.add_argument("--mitosi-2lam", action="store_true",
+  csv/_seal_fork/_sigillo_perc_geom_derivata/_sim_E.py -- 16 riferimenti (CODICE, COMMENTO, STRINGA)
+      :457    CODICE    MITOSI_2LAM = False     # [CURA 5, 2026-09-25] `MITOSI_2LAM`: `A13` AL
+      :457    COMMENTO  MITOSI_2LAM = False     # [CURA 5, 2026-09-25] `MITOSI_2LAM`: `A13` AL
+      :3437   COMMENTO  # PIU': con `SEMINA_LAM` e `MITOSI_2LAM` si ha `d >= LAM`. ⚠ MA E'
+      :8415   CODICE    if MITOSI_2LAM and len(c):
+      :8848   COMMENTO  #   NESSUN PAVIMENTO: `d >= LAM` con `SEMINA_LAM`/`MITOSI_2LAM`. E poi
+      :10555  CODICE    global MITOSI_2LAM     # [CURA 5] senza questo l'assegnazione sarebbe 
+      :10557  COMMENTO  #   ed e' esattamente come `--semina-matura` e `--mitosi-2lam` sono st
+      :10565  COMMENTO  #   `--tau-a`, `--semina-matura` e `--mitosi-2lam`, inerti per un gior
+      :10650  CODICE    MITOSI_2LAM = bool(getattr(a, "mitosi_2lam", False))       # [CURA 5]
+      :10650  CODICE    MITOSI_2LAM = bool(getattr(a, "mitosi_2lam", False))       # [CURA 5]
+      :10651  CODICE    if MITOSI_2LAM:
+      :10652  STRINGA   print("[cura5] MITOSI_2LAM ON: un arco si divide SOLO se `d >= 2 LAM` 
+      :11045  COMMENTO  #   **`--semina-matura` e `--mitosi-2lam` NON FUNZIONAVANO DA RIGA DI 
+      :11048  COMMENTO  #   Trovato dal SIGILLO DEL DRIVER (`MITOSI_2LAM False/False` in NUDA 
+      :11610  CODICE    p.add_argument("--mitosi-2lam", action="store_true",
+      :11610  STRINGA   p.add_argument("--mitosi-2lam", action="store_true",
+  csv/_seal_fork/_sigillo_perc_geom_derivata/_sim_prima.py -- 16 riferimenti (CODICE, COMMENTO, STRINGA)
+      :457    CODICE    MITOSI_2LAM = False     # [CURA 5, 2026-09-25] `MITOSI_2LAM`: `A13` AL
+      :457    COMMENTO  MITOSI_2LAM = False     # [CURA 5, 2026-09-25] `MITOSI_2LAM`: `A13` AL
+      :3341   COMMENTO  # PIU': con `SEMINA_LAM` e `MITOSI_2LAM` si ha `d >= LAM`. ⚠ MA E'
+      :8319   CODICE    if MITOSI_2LAM and len(c):
+      :8752   COMMENTO  #   NESSUN PAVIMENTO: `d >= LAM` con `SEMINA_LAM`/`MITOSI_2LAM`. E poi
+      :10459  CODICE    global MITOSI_2LAM     # [CURA 5] senza questo l'assegnazione sarebbe 
+      :10461  COMMENTO  #   ed e' esattamente come `--semina-matura` e `--mitosi-2lam` sono st
+      :10469  COMMENTO  #   `--tau-a`, `--semina-matura` e `--mitosi-2lam`, inerti per un gior
+      :10554  CODICE    MITOSI_2LAM = bool(getattr(a, "mitosi_2lam", False))       # [CURA 5]
+      :10554  CODICE    MITOSI_2LAM = bool(getattr(a, "mitosi_2lam", False))       # [CURA 5]
+      :10555  CODICE    if MITOSI_2LAM:
+      :10556  STRINGA   print("[cura5] MITOSI_2LAM ON: un arco si divide SOLO se `d >= 2 LAM` 
+      :10949  COMMENTO  #   **`--semina-matura` e `--mitosi-2lam` NON FUNZIONAVANO DA RIGA DI 
+      :10952  COMMENTO  #   Trovato dal SIGILLO DEL DRIVER (`MITOSI_2LAM False/False` in NUDA 
+      :11514  CODICE    p.add_argument("--mitosi-2lam", action="store_true",
+      :11514  STRINGA   p.add_argument("--mitosi-2lam", action="store_true",
+  csv/_seal_fork/_sigillo_perc_geom_derivata/_sim_rifatta.py -- 16 riferimenti (CODICE, COMMENTO, STRINGA)
+      :457    CODICE    MITOSI_2LAM = False     # [CURA 5, 2026-09-25] `MITOSI_2LAM`: `A13` AL
+      :457    COMMENTO  MITOSI_2LAM = False     # [CURA 5, 2026-09-25] `MITOSI_2LAM`: `A13` AL
+      :3434   COMMENTO  # PIU': con `SEMINA_LAM` e `MITOSI_2LAM` si ha `d >= LAM`. ⚠ MA E'
+      :8412   CODICE    if MITOSI_2LAM and len(c):
+      :8845   COMMENTO  #   NESSUN PAVIMENTO: `d >= LAM` con `SEMINA_LAM`/`MITOSI_2LAM`. E poi
+      :10552  CODICE    global MITOSI_2LAM     # [CURA 5] senza questo l'assegnazione sarebbe 
+      :10554  COMMENTO  #   ed e' esattamente come `--semina-matura` e `--mitosi-2lam` sono st
+      :10562  COMMENTO  #   `--tau-a`, `--semina-matura` e `--mitosi-2lam`, inerti per un gior
+      :10647  CODICE    MITOSI_2LAM = bool(getattr(a, "mitosi_2lam", False))       # [CURA 5]
+      :10647  CODICE    MITOSI_2LAM = bool(getattr(a, "mitosi_2lam", False))       # [CURA 5]
+      :10648  CODICE    if MITOSI_2LAM:
+      :10649  STRINGA   print("[cura5] MITOSI_2LAM ON: un arco si divide SOLO se `d >= 2 LAM` 
+      :11042  COMMENTO  #   **`--semina-matura` e `--mitosi-2lam` NON FUNZIONAVANO DA RIGA DI 
+      :11045  COMMENTO  #   Trovato dal SIGILLO DEL DRIVER (`MITOSI_2LAM False/False` in NUDA 
+      :11607  CODICE    p.add_argument("--mitosi-2lam", action="store_true",
+      :11607  STRINGA   p.add_argument("--mitosi-2lam", action="store_true",
+  csv/_seal_fork/_sigillo_perc_geom_derivata/_sim_solo_ordine.py -- 16 riferimenti (CODICE, COMMENTO, STRINGA)
+      :457    CODICE    MITOSI_2LAM = False     # [CURA 5, 2026-09-25] `MITOSI_2LAM`: `A13` AL
+      :457    COMMENTO  MITOSI_2LAM = False     # [CURA 5, 2026-09-25] `MITOSI_2LAM`: `A13` AL
+      :3377   COMMENTO  # PIU': con `SEMINA_LAM` e `MITOSI_2LAM` si ha `d >= LAM`. ⚠ MA E'
+      :8355   CODICE    if MITOSI_2LAM and len(c):
+      :8788   COMMENTO  #   NESSUN PAVIMENTO: `d >= LAM` con `SEMINA_LAM`/`MITOSI_2LAM`. E poi
+      :10495  CODICE    global MITOSI_2LAM     # [CURA 5] senza questo l'assegnazione sarebbe 
+      :10497  COMMENTO  #   ed e' esattamente come `--semina-matura` e `--mitosi-2lam` sono st
+      :10505  COMMENTO  #   `--tau-a`, `--semina-matura` e `--mitosi-2lam`, inerti per un gior
+      :10590  CODICE    MITOSI_2LAM = bool(getattr(a, "mitosi_2lam", False))       # [CURA 5]
+      :10590  CODICE    MITOSI_2LAM = bool(getattr(a, "mitosi_2lam", False))       # [CURA 5]
+      :10591  CODICE    if MITOSI_2LAM:
+      :10592  STRINGA   print("[cura5] MITOSI_2LAM ON: un arco si divide SOLO se `d >= 2 LAM` 
+      :10985  COMMENTO  #   **`--semina-matura` e `--mitosi-2lam` NON FUNZIONAVANO DA RIGA DI 
+      :10988  COMMENTO  #   Trovato dal SIGILLO DEL DRIVER (`MITOSI_2LAM False/False` in NUDA 
+      :11550  CODICE    p.add_argument("--mitosi-2lam", action="store_true",
+      :11550  STRINGA   p.add_argument("--mitosi-2lam", action="store_true",
+  csv/_seal_fork/_sigillo_tre_casi/_sim_psi_eredita.py -- 16 riferimenti (CODICE, COMMENTO, STRINGA)
+      :441    CODICE    MITOSI_2LAM = False     # [CURA 5, 2026-09-25] `MITOSI_2LAM`: `A13` AL
+      :441    COMMENTO  MITOSI_2LAM = False     # [CURA 5, 2026-09-25] `MITOSI_2LAM`: `A13` AL
+      :3158   COMMENTO  # PIU': con `SEMINA_LAM` e `MITOSI_2LAM` si ha `d >= LAM`. ⚠ MA E'
+      :8081   CODICE    if MITOSI_2LAM and len(c):
+      :8514   COMMENTO  #   NESSUN PAVIMENTO: `d >= LAM` con `SEMINA_LAM`/`MITOSI_2LAM`. E poi
+      :10221  CODICE    global MITOSI_2LAM     # [CURA 5] senza questo l'assegnazione sarebbe 
+      :10223  COMMENTO  #   ed e' esattamente come `--semina-matura` e `--mitosi-2lam` sono st
+      :10231  COMMENTO  #   `--tau-a`, `--semina-matura` e `--mitosi-2lam`, inerti per un gior
+      :10316  CODICE    MITOSI_2LAM = bool(getattr(a, "mitosi_2lam", False))       # [CURA 5]
+      :10316  CODICE    MITOSI_2LAM = bool(getattr(a, "mitosi_2lam", False))       # [CURA 5]
+      :10317  CODICE    if MITOSI_2LAM:
+      :10318  STRINGA   print("[cura5] MITOSI_2LAM ON: un arco si divide SOLO se `d >= 2 LAM` 
+      :10711  COMMENTO  #   **`--semina-matura` e `--mitosi-2lam` NON FUNZIONAVANO DA RIGA DI 
+      :10714  COMMENTO  #   Trovato dal SIGILLO DEL DRIVER (`MITOSI_2LAM False/False` in NUDA 
+      :11276  CODICE    p.add_argument("--mitosi-2lam", action="store_true",
+      :11276  STRINGA   p.add_argument("--mitosi-2lam", action="store_true",
+  csv/_seal_fork/_sigillo_tre_casi/_sim_senza_peq.py -- 16 riferimenti (CODICE, COMMENTO, STRINGA)
+      :441    CODICE    MITOSI_2LAM = False     # [CURA 5, 2026-09-25] `MITOSI_2LAM`: `A13` AL
+      :441    COMMENTO  MITOSI_2LAM = False     # [CURA 5, 2026-09-25] `MITOSI_2LAM`: `A13` AL
+      :3158   COMMENTO  # PIU': con `SEMINA_LAM` e `MITOSI_2LAM` si ha `d >= LAM`. ⚠ MA E'
+      :8081   CODICE    if MITOSI_2LAM and len(c):
+      :8514   COMMENTO  #   NESSUN PAVIMENTO: `d >= LAM` con `SEMINA_LAM`/`MITOSI_2LAM`. E poi
+      :10221  CODICE    global MITOSI_2LAM     # [CURA 5] senza questo l'assegnazione sarebbe 
+      :10223  COMMENTO  #   ed e' esattamente come `--semina-matura` e `--mitosi-2lam` sono st
+      :10231  COMMENTO  #   `--tau-a`, `--semina-matura` e `--mitosi-2lam`, inerti per un gior
+      :10316  CODICE    MITOSI_2LAM = bool(getattr(a, "mitosi_2lam", False))       # [CURA 5]
+      :10316  CODICE    MITOSI_2LAM = bool(getattr(a, "mitosi_2lam", False))       # [CURA 5]
+      :10317  CODICE    if MITOSI_2LAM:
+      :10318  STRINGA   print("[cura5] MITOSI_2LAM ON: un arco si divide SOLO se `d >= 2 LAM` 
+      :10711  COMMENTO  #   **`--semina-matura` e `--mitosi-2lam` NON FUNZIONAVANO DA RIGA DI 
+      :10714  COMMENTO  #   Trovato dal SIGILLO DEL DRIVER (`MITOSI_2LAM False/False` in NUDA 
+      :11276  CODICE    p.add_argument("--mitosi-2lam", action="store_true",
+      :11276  STRINGA   p.add_argument("--mitosi-2lam", action="store_true",
+  csv/_seal_fork/_sigillo_tre_casi/_sim_sparsa.py -- 16 riferimenti (CODICE, COMMENTO, STRINGA)
+      :441    CODICE    MITOSI_2LAM = False     # [CURA 5, 2026-09-25] `MITOSI_2LAM`: `A13` AL
+      :441    COMMENTO  MITOSI_2LAM = False     # [CURA 5, 2026-09-25] `MITOSI_2LAM`: `A13` AL
+      :3158   COMMENTO  # PIU': con `SEMINA_LAM` e `MITOSI_2LAM` si ha `d >= LAM`. ⚠ MA E'
+      :8081   CODICE    if MITOSI_2LAM and len(c):
+      :8515   COMMENTO  #   NESSUN PAVIMENTO: `d >= LAM` con `SEMINA_LAM`/`MITOSI_2LAM`. E poi
+      :10222  CODICE    global MITOSI_2LAM     # [CURA 5] senza questo l'assegnazione sarebbe 
+      :10224  COMMENTO  #   ed e' esattamente come `--semina-matura` e `--mitosi-2lam` sono st
+      :10232  COMMENTO  #   `--tau-a`, `--semina-matura` e `--mitosi-2lam`, inerti per un gior
+      :10317  CODICE    MITOSI_2LAM = bool(getattr(a, "mitosi_2lam", False))       # [CURA 5]
+      :10317  CODICE    MITOSI_2LAM = bool(getattr(a, "mitosi_2lam", False))       # [CURA 5]
+      :10318  CODICE    if MITOSI_2LAM:
+      :10319  STRINGA   print("[cura5] MITOSI_2LAM ON: un arco si divide SOLO se `d >= 2 LAM` 
+      :10712  COMMENTO  #   **`--semina-matura` e `--mitosi-2lam` NON FUNZIONAVANO DA RIGA DI 
+      :10715  COMMENTO  #   Trovato dal SIGILLO DEL DRIVER (`MITOSI_2LAM False/False` in NUDA 
+      :11277  CODICE    p.add_argument("--mitosi-2lam", action="store_true",
+      :11277  STRINGA   p.add_argument("--mitosi-2lam", action="store_true",
+  csv/_seal_fork/_sigillo_veleno/_sim_cella_scritta.py -- 16 riferimenti (CODICE, COMMENTO, STRINGA)
+      :441    CODICE    MITOSI_2LAM = False     # [CURA 5, 2026-09-25] `MITOSI_2LAM`: `A13` AL
+      :441    COMMENTO  MITOSI_2LAM = False     # [CURA 5, 2026-09-25] `MITOSI_2LAM`: `A13` AL
+      :3328   COMMENTO  # PIU': con `SEMINA_LAM` e `MITOSI_2LAM` si ha `d >= LAM`. ⚠ MA E'
+      :8306   CODICE    if MITOSI_2LAM and len(c):
+      :8739   COMMENTO  #   NESSUN PAVIMENTO: `d >= LAM` con `SEMINA_LAM`/`MITOSI_2LAM`. E poi
+      :10446  CODICE    global MITOSI_2LAM     # [CURA 5] senza questo l'assegnazione sarebbe 
+      :10448  COMMENTO  #   ed e' esattamente come `--semina-matura` e `--mitosi-2lam` sono st
+      :10456  COMMENTO  #   `--tau-a`, `--semina-matura` e `--mitosi-2lam`, inerti per un gior
+      :10541  CODICE    MITOSI_2LAM = bool(getattr(a, "mitosi_2lam", False))       # [CURA 5]
+      :10541  CODICE    MITOSI_2LAM = bool(getattr(a, "mitosi_2lam", False))       # [CURA 5]
+      :10542  CODICE    if MITOSI_2LAM:
+      :10543  STRINGA   print("[cura5] MITOSI_2LAM ON: un arco si divide SOLO se `d >= 2 LAM` 
+      :10936  COMMENTO  #   **`--semina-matura` e `--mitosi-2lam` NON FUNZIONAVANO DA RIGA DI 
+      :10939  COMMENTO  #   Trovato dal SIGILLO DEL DRIVER (`MITOSI_2LAM False/False` in NUDA 
+      :11501  CODICE    p.add_argument("--mitosi-2lam", action="store_true",
+      :11501  STRINGA   p.add_argument("--mitosi-2lam", action="store_true",
+  csv/_seal_fork/_sigillo_veleno/_sim_prima_veleno.py -- 16 riferimenti (CODICE, COMMENTO, STRINGA)
+      :441    CODICE    MITOSI_2LAM = False     # [CURA 5, 2026-09-25] `MITOSI_2LAM`: `A13` AL
+      :441    COMMENTO  MITOSI_2LAM = False     # [CURA 5, 2026-09-25] `MITOSI_2LAM`: `A13` AL
+      :3158   COMMENTO  # PIU': con `SEMINA_LAM` e `MITOSI_2LAM` si ha `d >= LAM`. ⚠ MA E'
+      :8081   CODICE    if MITOSI_2LAM and len(c):
+      :8514   COMMENTO  #   NESSUN PAVIMENTO: `d >= LAM` con `SEMINA_LAM`/`MITOSI_2LAM`. E poi
+      :10221  CODICE    global MITOSI_2LAM     # [CURA 5] senza questo l'assegnazione sarebbe 
+      :10223  COMMENTO  #   ed e' esattamente come `--semina-matura` e `--mitosi-2lam` sono st
+      :10231  COMMENTO  #   `--tau-a`, `--semina-matura` e `--mitosi-2lam`, inerti per un gior
+      :10316  CODICE    MITOSI_2LAM = bool(getattr(a, "mitosi_2lam", False))       # [CURA 5]
+      :10316  CODICE    MITOSI_2LAM = bool(getattr(a, "mitosi_2lam", False))       # [CURA 5]
+      :10317  CODICE    if MITOSI_2LAM:
+      :10318  STRINGA   print("[cura5] MITOSI_2LAM ON: un arco si divide SOLO se `d >= 2 LAM` 
+      :10711  COMMENTO  #   **`--semina-matura` e `--mitosi-2lam` NON FUNZIONAVANO DA RIGA DI 
+      :10714  COMMENTO  #   Trovato dal SIGILLO DEL DRIVER (`MITOSI_2LAM False/False` in NUDA 
+      :11276  CODICE    p.add_argument("--mitosi-2lam", action="store_true",
+      :11276  STRINGA   p.add_argument("--mitosi-2lam", action="store_true",
+  csv/_seal_fork/_sigillo_veleno/_sim_senza_esenzione.py -- 16 riferimenti (CODICE, COMMENTO, STRINGA)
+      :441    CODICE    MITOSI_2LAM = False     # [CURA 5, 2026-09-25] `MITOSI_2LAM`: `A13` AL
+      :441    COMMENTO  MITOSI_2LAM = False     # [CURA 5, 2026-09-25] `MITOSI_2LAM`: `A13` AL
+      :3325   COMMENTO  # PIU': con `SEMINA_LAM` e `MITOSI_2LAM` si ha `d >= LAM`. ⚠ MA E'
+      :8303   CODICE    if MITOSI_2LAM and len(c):
+      :8736   COMMENTO  #   NESSUN PAVIMENTO: `d >= LAM` con `SEMINA_LAM`/`MITOSI_2LAM`. E poi
+      :10443  CODICE    global MITOSI_2LAM     # [CURA 5] senza questo l'assegnazione sarebbe 
+      :10445  COMMENTO  #   ed e' esattamente come `--semina-matura` e `--mitosi-2lam` sono st
+      :10453  COMMENTO  #   `--tau-a`, `--semina-matura` e `--mitosi-2lam`, inerti per un gior
+      :10538  CODICE    MITOSI_2LAM = bool(getattr(a, "mitosi_2lam", False))       # [CURA 5]
+      :10538  CODICE    MITOSI_2LAM = bool(getattr(a, "mitosi_2lam", False))       # [CURA 5]
+      :10539  CODICE    if MITOSI_2LAM:
+      :10540  STRINGA   print("[cura5] MITOSI_2LAM ON: un arco si divide SOLO se `d >= 2 LAM` 
+      :10933  COMMENTO  #   **`--semina-matura` e `--mitosi-2lam` NON FUNZIONAVANO DA RIGA DI 
+      :10936  COMMENTO  #   Trovato dal SIGILLO DEL DRIVER (`MITOSI_2LAM False/False` in NUDA 
+      :11498  CODICE    p.add_argument("--mitosi-2lam", action="store_true",
+      :11498  STRINGA   p.add_argument("--mitosi-2lam", action="store_true",
+  csv/_seal_fork/_sigillo_veleno/_sim_senza_registro.py -- 16 riferimenti (CODICE, COMMENTO, STRINGA)
+      :441    CODICE    MITOSI_2LAM = False     # [CURA 5, 2026-09-25] `MITOSI_2LAM`: `A13` AL
+      :441    COMMENTO  MITOSI_2LAM = False     # [CURA 5, 2026-09-25] `MITOSI_2LAM`: `A13` AL
+      :3325   COMMENTO  # PIU': con `SEMINA_LAM` e `MITOSI_2LAM` si ha `d >= LAM`. ⚠ MA E'
+      :8303   CODICE    if MITOSI_2LAM and len(c):
+      :8736   COMMENTO  #   NESSUN PAVIMENTO: `d >= LAM` con `SEMINA_LAM`/`MITOSI_2LAM`. E poi
+      :10443  CODICE    global MITOSI_2LAM     # [CURA 5] senza questo l'assegnazione sarebbe 
+      :10445  COMMENTO  #   ed e' esattamente come `--semina-matura` e `--mitosi-2lam` sono st
+      :10453  COMMENTO  #   `--tau-a`, `--semina-matura` e `--mitosi-2lam`, inerti per un gior
+      :10538  CODICE    MITOSI_2LAM = bool(getattr(a, "mitosi_2lam", False))       # [CURA 5]
+      :10538  CODICE    MITOSI_2LAM = bool(getattr(a, "mitosi_2lam", False))       # [CURA 5]
+      :10539  CODICE    if MITOSI_2LAM:
+      :10540  STRINGA   print("[cura5] MITOSI_2LAM ON: un arco si divide SOLO se `d >= 2 LAM` 
+      :10933  COMMENTO  #   **`--semina-matura` e `--mitosi-2lam` NON FUNZIONAVANO DA RIGA DI 
+      :10936  COMMENTO  #   Trovato dal SIGILLO DEL DRIVER (`MITOSI_2LAM False/False` in NUDA 
+      :11498  CODICE    p.add_argument("--mitosi-2lam", action="store_true",
+      :11498  STRINGA   p.add_argument("--mitosi-2lam", action="store_true",
+  csv/_seal_fork/_sig_contrasto/_sim_diag_ci.py -- 12 riferimenti (CODICE, COMMENTO, STRINGA)
+      :417    CODICE    MITOSI_2LAM = False
+      :6057   CODICE    if MITOSI_2LAM and len(c):
+      :8154   CODICE    global MITOSI_2LAM     # [CURA 5] senza questo l'assegnazione sarebbe 
+      :8156   COMMENTO  #   ed e' esattamente come `--semina-matura` e `--mitosi-2lam` sono st
+      :8237   CODICE    MITOSI_2LAM = bool(getattr(a, "mitosi_2lam", False))       # [CURA 5]
+      :8237   CODICE    MITOSI_2LAM = bool(getattr(a, "mitosi_2lam", False))       # [CURA 5]
+      :8238   CODICE    if MITOSI_2LAM:
+      :8239   STRINGA   print("[cura5] MITOSI_2LAM ON: un arco si divide SOLO se `d >= 2 LAM` 
+      :8610   COMMENTO  #   **`--semina-matura` e `--mitosi-2lam` NON FUNZIONAVANO DA RIGA DI 
+      :8613   COMMENTO  #   Trovato dal SIGILLO DEL DRIVER (`MITOSI_2LAM False/False` in NUDA 
+      :9143   CODICE    p.add_argument("--mitosi-2lam", action="store_true",
+      :9143   STRINGA   p.add_argument("--mitosi-2lam", action="store_true",
+  csv/_seal_fork/_sig_contrasto/_tmp/_br_off_s11_corti.py -- 2 riferimenti (CODICE, STRINGA)
+      :11     CODICE    ARGV = ['soliton_simulator.py', '--test', 'N-MASSE', '--nmasse', '3', 
+      :11     STRINGA   ARGV = ['soliton_simulator.py', '--test', 'N-MASSE', '--nmasse', '3', 
+  csv/_seal_fork/_sig_contrasto/_tmp/_br_off_s11_lunghi.py -- 2 riferimenti (CODICE, STRINGA)
+      :11     CODICE    ARGV = ['soliton_simulator.py', '--test', 'N-MASSE', '--nmasse', '3', 
+      :11     STRINGA   ARGV = ['soliton_simulator.py', '--test', 'N-MASSE', '--nmasse', '3', 
+  csv/_seal_fork/_sig_contrasto/_tmp/_br_off_s12_corti.py -- 2 riferimenti (CODICE, STRINGA)
+      :11     CODICE    ARGV = ['soliton_simulator.py', '--test', 'N-MASSE', '--nmasse', '3', 
+      :11     STRINGA   ARGV = ['soliton_simulator.py', '--test', 'N-MASSE', '--nmasse', '3', 
+  csv/_seal_fork/_sig_contrasto/_tmp/_br_off_s12_lunghi.py -- 2 riferimenti (CODICE, STRINGA)
+      :11     CODICE    ARGV = ['soliton_simulator.py', '--test', 'N-MASSE', '--nmasse', '3', 
+      :11     STRINGA   ARGV = ['soliton_simulator.py', '--test', 'N-MASSE', '--nmasse', '3', 
+  csv/_seal_fork/_sig_contrasto/_tmp/_br_on_s11_corti.py -- 2 riferimenti (CODICE, STRINGA)
+      :11     CODICE    ARGV = ['soliton_simulator.py', '--test', 'N-MASSE', '--nmasse', '3', 
+      :11     STRINGA   ARGV = ['soliton_simulator.py', '--test', 'N-MASSE', '--nmasse', '3', 
+  csv/_seal_fork/_sig_contrasto/_tmp/_br_on_s11_lunghi.py -- 2 riferimenti (CODICE, STRINGA)
+      :11     CODICE    ARGV = ['soliton_simulator.py', '--test', 'N-MASSE', '--nmasse', '3', 
+      :11     STRINGA   ARGV = ['soliton_simulator.py', '--test', 'N-MASSE', '--nmasse', '3', 
+  csv/_seal_fork/_sig_contrasto/_tmp/_br_on_s12_corti.py -- 2 riferimenti (CODICE, STRINGA)
+      :11     CODICE    ARGV = ['soliton_simulator.py', '--test', 'N-MASSE', '--nmasse', '3', 
+      :11     STRINGA   ARGV = ['soliton_simulator.py', '--test', 'N-MASSE', '--nmasse', '3', 
+  csv/_seal_fork/_sig_contrasto/_tmp/_br_on_s12_lunghi.py -- 2 riferimenti (CODICE, STRINGA)
+      :11     CODICE    ARGV = ['soliton_simulator.py', '--test', 'N-MASSE', '--nmasse', '3', 
+      :11     STRINGA   ARGV = ['soliton_simulator.py', '--test', 'N-MASSE', '--nmasse', '3', 
+  csv/_seal_fork/_sig_contrasto/_tmp/_br_prima_s11_lunghi.py -- 2 riferimenti (CODICE, STRINGA)
+      :11     CODICE    ARGV = ['soliton_simulator.py', '--test', 'N-MASSE', '--nmasse', '3', 
+      :11     STRINGA   ARGV = ['soliton_simulator.py', '--test', 'N-MASSE', '--nmasse', '3', 
+  csv/_seal_fork/_sig_contrasto/_tmp/_br_prima_s12_lunghi.py -- 2 riferimenti (CODICE, STRINGA)
+      :11     CODICE    ARGV = ['soliton_simulator.py', '--test', 'N-MASSE', '--nmasse', '3', 
+      :11     STRINGA   ARGV = ['soliton_simulator.py', '--test', 'N-MASSE', '--nmasse', '3', 
+  csv/_seal_fork/_sig_contrasto/_tmp/_sim_prima.py -- 11 riferimenti (CODICE, COMMENTO, STRINGA)
+      :417    CODICE    MITOSI_2LAM = False     # [CURA 5, 2026-09-25] `A13` ALLA NASCITA. App
+      :6002   CODICE    if MITOSI_2LAM and len(c):
+      :8099   CODICE    global MITOSI_2LAM     # [CURA 5] senza questo l'assegnazione sarebbe 
+      :8179   CODICE    MITOSI_2LAM = bool(getattr(a, "mitosi_2lam", False))       # [CURA 5]
+      :8179   CODICE    MITOSI_2LAM = bool(getattr(a, "mitosi_2lam", False))       # [CURA 5]
+      :8180   CODICE    if MITOSI_2LAM:
+      :8181   STRINGA   print("[cura5] MITOSI_2LAM ON: un arco si divide SOLO se `d >= 2 LAM` 
+      :8547   COMMENTO  #   **`--semina-matura` e `--mitosi-2lam` NON FUNZIONAVANO DA RIGA DI 
+      :8550   COMMENTO  #   Trovato dal SIGILLO DEL DRIVER (`MITOSI_2LAM False/False` in NUDA 
+      :9080   CODICE    p.add_argument("--mitosi-2lam", action="store_true",
+      :9080   STRINGA   p.add_argument("--mitosi-2lam", action="store_true",
+  csv/_seal_fork/_sig_contrasto/_tmp/_sim_prima_diag.py -- 11 riferimenti (CODICE, COMMENTO, STRINGA)
+      :417    CODICE    MITOSI_2LAM = False     # [CURA 5, 2026-09-25] `A13` ALLA NASCITA. App
+      :6007   CODICE    if MITOSI_2LAM and len(c):
+      :8104   CODICE    global MITOSI_2LAM     # [CURA 5] senza questo l'assegnazione sarebbe 
+      :8184   CODICE    MITOSI_2LAM = bool(getattr(a, "mitosi_2lam", False))       # [CURA 5]
+      :8184   CODICE    MITOSI_2LAM = bool(getattr(a, "mitosi_2lam", False))       # [CURA 5]
+      :8185   CODICE    if MITOSI_2LAM:
+      :8186   STRINGA   print("[cura5] MITOSI_2LAM ON: un arco si divide SOLO se `d >= 2 LAM` 
+      :8552   COMMENTO  #   **`--semina-matura` e `--mitosi-2lam` NON FUNZIONAVANO DA RIGA DI 
+      :8555   COMMENTO  #   Trovato dal SIGILLO DEL DRIVER (`MITOSI_2LAM False/False` in NUDA 
+      :9085   CODICE    p.add_argument("--mitosi-2lam", action="store_true",
+      :9085   STRINGA   p.add_argument("--mitosi-2lam", action="store_true",
+  csv/_seal_fork/_sig_contrasto_esteso/_sim_diag_est.py -- 13 riferimenti (CODICE, COMMENTO, STRINGA)
+      :417    CODICE    MITOSI_2LAM = False     # [CURA 5, 2026-09-25] `MITOSI_2LAM`: `A13` AL
+      :417    COMMENTO  MITOSI_2LAM = False     # [CURA 5, 2026-09-25] `MITOSI_2LAM`: `A13` AL
+      :6122   CODICE    if MITOSI_2LAM and len(c):
+      :8219   CODICE    global MITOSI_2LAM     # [CURA 5] senza questo l'assegnazione sarebbe 
+      :8221   COMMENTO  #   ed e' esattamente come `--semina-matura` e `--mitosi-2lam` sono st
+      :8302   CODICE    MITOSI_2LAM = bool(getattr(a, "mitosi_2lam", False))       # [CURA 5]
+      :8302   CODICE    MITOSI_2LAM = bool(getattr(a, "mitosi_2lam", False))       # [CURA 5]
+      :8303   CODICE    if MITOSI_2LAM:
+      :8304   STRINGA   print("[cura5] MITOSI_2LAM ON: un arco si divide SOLO se `d >= 2 LAM` 
+      :8675   COMMENTO  #   **`--semina-matura` e `--mitosi-2lam` NON FUNZIONAVANO DA RIGA DI 
+      :8678   COMMENTO  #   Trovato dal SIGILLO DEL DRIVER (`MITOSI_2LAM False/False` in NUDA 
+      :9208   CODICE    p.add_argument("--mitosi-2lam", action="store_true",
+      :9208   STRINGA   p.add_argument("--mitosi-2lam", action="store_true",
+  csv/_seal_fork/_sig_contrasto_esteso/_tmp/_br_figli_s11.py -- 2 riferimenti (CODICE, STRINGA)
+      :13     CODICE    ARGV = ['soliton_simulator.py', '--test', 'N-MASSE', '--nmasse', '3', 
+      :13     STRINGA   ARGV = ['soliton_simulator.py', '--test', 'N-MASSE', '--nmasse', '3', 
+  csv/_seal_fork/_sig_contrasto_esteso/_tmp/_br_figli_s12.py -- 2 riferimenti (CODICE, STRINGA)
+      :13     CODICE    ARGV = ['soliton_simulator.py', '--test', 'N-MASSE', '--nmasse', '3', 
+      :13     STRINGA   ARGV = ['soliton_simulator.py', '--test', 'N-MASSE', '--nmasse', '3', 
+  csv/_seal_fork/_sig_contrasto_esteso/_tmp/_br_off_s11_corti.py -- 2 riferimenti (CODICE, STRINGA)
+      :13     CODICE    ARGV = ['soliton_simulator.py', '--test', 'N-MASSE', '--nmasse', '3', 
+      :13     STRINGA   ARGV = ['soliton_simulator.py', '--test', 'N-MASSE', '--nmasse', '3', 
+  csv/_seal_fork/_sig_contrasto_esteso/_tmp/_br_off_s11_lunghi.py -- 2 riferimenti (CODICE, STRINGA)
+      :13     CODICE    ARGV = ['soliton_simulator.py', '--test', 'N-MASSE', '--nmasse', '3', 
+      :13     STRINGA   ARGV = ['soliton_simulator.py', '--test', 'N-MASSE', '--nmasse', '3', 
+  csv/_seal_fork/_sig_contrasto_esteso/_tmp/_br_off_s12_corti.py -- 2 riferimenti (CODICE, STRINGA)
+      :13     CODICE    ARGV = ['soliton_simulator.py', '--test', 'N-MASSE', '--nmasse', '3', 
+      :13     STRINGA   ARGV = ['soliton_simulator.py', '--test', 'N-MASSE', '--nmasse', '3', 
+  csv/_seal_fork/_sig_contrasto_esteso/_tmp/_br_off_s12_lunghi.py -- 2 riferimenti (CODICE, STRINGA)
+      :13     CODICE    ARGV = ['soliton_simulator.py', '--test', 'N-MASSE', '--nmasse', '3', 
+      :13     STRINGA   ARGV = ['soliton_simulator.py', '--test', 'N-MASSE', '--nmasse', '3', 
+  csv/_seal_fork/_sig_contrasto_esteso/_tmp/_br_on_s11_corti.py -- 2 riferimenti (CODICE, STRINGA)
+      :13     CODICE    ARGV = ['soliton_simulator.py', '--test', 'N-MASSE', '--nmasse', '3', 
+      :13     STRINGA   ARGV = ['soliton_simulator.py', '--test', 'N-MASSE', '--nmasse', '3', 
+  csv/_seal_fork/_sig_contrasto_esteso/_tmp/_br_on_s11_lunghi.py -- 2 riferimenti (CODICE, STRINGA)
+      :13     CODICE    ARGV = ['soliton_simulator.py', '--test', 'N-MASSE', '--nmasse', '3', 
+      :13     STRINGA   ARGV = ['soliton_simulator.py', '--test', 'N-MASSE', '--nmasse', '3', 
+  csv/_seal_fork/_sig_contrasto_esteso/_tmp/_br_on_s12_corti.py -- 2 riferimenti (CODICE, STRINGA)
+      :13     CODICE    ARGV = ['soliton_simulator.py', '--test', 'N-MASSE', '--nmasse', '3', 
+      :13     STRINGA   ARGV = ['soliton_simulator.py', '--test', 'N-MASSE', '--nmasse', '3', 
+  csv/_seal_fork/_sig_contrasto_esteso/_tmp/_br_on_s12_lunghi.py -- 2 riferimenti (CODICE, STRINGA)
+      :13     CODICE    ARGV = ['soliton_simulator.py', '--test', 'N-MASSE', '--nmasse', '3', 
+      :13     STRINGA   ARGV = ['soliton_simulator.py', '--test', 'N-MASSE', '--nmasse', '3', 
+  csv/_seal_fork/_sig_contrasto_esteso/_tmp/_br_prima_s11_lunghi.py -- 2 riferimenti (CODICE, STRINGA)
+      :13     CODICE    ARGV = ['soliton_simulator.py', '--test', 'N-MASSE', '--nmasse', '3', 
+      :13     STRINGA   ARGV = ['soliton_simulator.py', '--test', 'N-MASSE', '--nmasse', '3', 
+  csv/_seal_fork/_sig_contrasto_esteso/_tmp/_br_prima_s12_lunghi.py -- 2 riferimenti (CODICE, STRINGA)
+      :13     CODICE    ARGV = ['soliton_simulator.py', '--test', 'N-MASSE', '--nmasse', '3', 
+      :13     STRINGA   ARGV = ['soliton_simulator.py', '--test', 'N-MASSE', '--nmasse', '3', 
+  csv/_seal_fork/_sig_contrasto_esteso/_tmp/_br_ril_s11_corti.py -- 2 riferimenti (CODICE, STRINGA)
+      :13     CODICE    ARGV = ['soliton_simulator.py', '--test', 'N-MASSE', '--nmasse', '3', 
+      :13     STRINGA   ARGV = ['soliton_simulator.py', '--test', 'N-MASSE', '--nmasse', '3', 
+  csv/_seal_fork/_sig_contrasto_esteso/_tmp/_br_ril_s11_lunghi.py -- 2 riferimenti (CODICE, STRINGA)
+      :13     CODICE    ARGV = ['soliton_simulator.py', '--test', 'N-MASSE', '--nmasse', '3', 
+      :13     STRINGA   ARGV = ['soliton_simulator.py', '--test', 'N-MASSE', '--nmasse', '3', 
+  csv/_seal_fork/_sig_contrasto_esteso/_tmp/_br_ril_s12_corti.py -- 2 riferimenti (CODICE, STRINGA)
+      :13     CODICE    ARGV = ['soliton_simulator.py', '--test', 'N-MASSE', '--nmasse', '3', 
+      :13     STRINGA   ARGV = ['soliton_simulator.py', '--test', 'N-MASSE', '--nmasse', '3', 
+  csv/_seal_fork/_sig_contrasto_esteso/_tmp/_br_ril_s12_lunghi.py -- 2 riferimenti (CODICE, STRINGA)
+      :13     CODICE    ARGV = ['soliton_simulator.py', '--test', 'N-MASSE', '--nmasse', '3', 
+      :13     STRINGA   ARGV = ['soliton_simulator.py', '--test', 'N-MASSE', '--nmasse', '3', 
+  csv/_seal_fork/_sig_contrasto_esteso/_tmp/_sim_prima.py -- 11 riferimenti (CODICE, COMMENTO, STRINGA)
+      :417    CODICE    MITOSI_2LAM = False     # [CURA 5, 2026-09-25] `A13` ALLA NASCITA. App
+      :6002   CODICE    if MITOSI_2LAM and len(c):
+      :8099   CODICE    global MITOSI_2LAM     # [CURA 5] senza questo l'assegnazione sarebbe 
+      :8179   CODICE    MITOSI_2LAM = bool(getattr(a, "mitosi_2lam", False))       # [CURA 5]
+      :8179   CODICE    MITOSI_2LAM = bool(getattr(a, "mitosi_2lam", False))       # [CURA 5]
+      :8180   CODICE    if MITOSI_2LAM:
+      :8181   STRINGA   print("[cura5] MITOSI_2LAM ON: un arco si divide SOLO se `d >= 2 LAM` 
+      :8547   COMMENTO  #   **`--semina-matura` e `--mitosi-2lam` NON FUNZIONAVANO DA RIGA DI 
+      :8550   COMMENTO  #   Trovato dal SIGILLO DEL DRIVER (`MITOSI_2LAM False/False` in NUDA 
+      :9080   CODICE    p.add_argument("--mitosi-2lam", action="store_true",
+      :9080   STRINGA   p.add_argument("--mitosi-2lam", action="store_true",
+  csv/_seal_fork/_sig_contrasto_esteso/_tmp/_sim_prima_diag.py -- 11 riferimenti (CODICE, COMMENTO, STRINGA)
+      :417    CODICE    MITOSI_2LAM = False     # [CURA 5, 2026-09-25] `A13` ALLA NASCITA. App
+      :6007   CODICE    if MITOSI_2LAM and len(c):
+      :8104   CODICE    global MITOSI_2LAM     # [CURA 5] senza questo l'assegnazione sarebbe 
+      :8184   CODICE    MITOSI_2LAM = bool(getattr(a, "mitosi_2lam", False))       # [CURA 5]
+      :8184   CODICE    MITOSI_2LAM = bool(getattr(a, "mitosi_2lam", False))       # [CURA 5]
+      :8185   CODICE    if MITOSI_2LAM:
+      :8186   STRINGA   print("[cura5] MITOSI_2LAM ON: un arco si divide SOLO se `d >= 2 LAM` 
+      :8552   COMMENTO  #   **`--semina-matura` e `--mitosi-2lam` NON FUNZIONAVANO DA RIGA DI 
+      :8555   COMMENTO  #   Trovato dal SIGILLO DEL DRIVER (`MITOSI_2LAM False/False` in NUDA 
+      :9085   CODICE    p.add_argument("--mitosi-2lam", action="store_true",
+      :9085   STRINGA   p.add_argument("--mitosi-2lam", action="store_true",
+  csv/_seal_fork/_sig_controllo_unico/_sim_prima_5750.py -- 16 riferimenti (CODICE, COMMENTO, STRINGA)
+      :418    CODICE    MITOSI_2LAM = False     # [CURA 5, 2026-09-25] `MITOSI_2LAM`: `A13` AL
+      :418    COMMENTO  MITOSI_2LAM = False     # [CURA 5, 2026-09-25] `MITOSI_2LAM`: `A13` AL
+      :1846   COMMENTO  # PIU': con `SEMINA_LAM` e `MITOSI_2LAM` si ha `d >= LAM`. ⚠ MA E'
+      :6777   CODICE    if MITOSI_2LAM and len(c):
+      :7155   COMMENTO  #   NESSUN PAVIMENTO: `d >= LAM` con `SEMINA_LAM`/`MITOSI_2LAM`. E poi
+      :8862   CODICE    global MITOSI_2LAM     # [CURA 5] senza questo l'assegnazione sarebbe 
+      :8864   COMMENTO  #   ed e' esattamente come `--semina-matura` e `--mitosi-2lam` sono st
+      :8872   COMMENTO  #   `--tau-a`, `--semina-matura` e `--mitosi-2lam`, inerti per un gior
+      :8957   CODICE    MITOSI_2LAM = bool(getattr(a, "mitosi_2lam", False))       # [CURA 5]
+      :8957   CODICE    MITOSI_2LAM = bool(getattr(a, "mitosi_2lam", False))       # [CURA 5]
+      :8958   CODICE    if MITOSI_2LAM:
+      :8959   STRINGA   print("[cura5] MITOSI_2LAM ON: un arco si divide SOLO se `d >= 2 LAM` 
+      :9352   COMMENTO  #   **`--semina-matura` e `--mitosi-2lam` NON FUNZIONAVANO DA RIGA DI 
+      :9355   COMMENTO  #   Trovato dal SIGILLO DEL DRIVER (`MITOSI_2LAM False/False` in NUDA 
+      :9907   CODICE    p.add_argument("--mitosi-2lam", action="store_true",
+      :9907   STRINGA   p.add_argument("--mitosi-2lam", action="store_true",
+  csv/_seal_fork/_sig_controllo_unico/_sim_prima_controllo.py -- 15 riferimenti (CODICE, COMMENTO, STRINGA)
+      :418    CODICE    MITOSI_2LAM = False     # [CURA 5, 2026-09-25] `MITOSI_2LAM`: `A13` AL
+      :418    COMMENTO  MITOSI_2LAM = False     # [CURA 5, 2026-09-25] `MITOSI_2LAM`: `A13` AL
+      :1657   COMMENTO  # PIU': con `SEMINA_LAM` e `MITOSI_2LAM` si ha `d >= LAM`. ⚠ MA E'
+      :6588   CODICE    if MITOSI_2LAM and len(c):
+      :6966   COMMENTO  #   NESSUN PAVIMENTO: `d >= LAM` con `SEMINA_LAM`/`MITOSI_2LAM`. E poi
+      :8673   CODICE    global MITOSI_2LAM     # [CURA 5] senza questo l'assegnazione sarebbe 
+      :8675   COMMENTO  #   ed e' esattamente come `--semina-matura` e `--mitosi-2lam` sono st
+      :8764   CODICE    MITOSI_2LAM = bool(getattr(a, "mitosi_2lam", False))       # [CURA 5]
+      :8764   CODICE    MITOSI_2LAM = bool(getattr(a, "mitosi_2lam", False))       # [CURA 5]
+      :8765   CODICE    if MITOSI_2LAM:
+      :8766   STRINGA   print("[cura5] MITOSI_2LAM ON: un arco si divide SOLO se `d >= 2 LAM` 
+      :9155   COMMENTO  #   **`--semina-matura` e `--mitosi-2lam` NON FUNZIONAVANO DA RIGA DI 
+      :9158   COMMENTO  #   Trovato dal SIGILLO DEL DRIVER (`MITOSI_2LAM False/False` in NUDA 
+      :9700   CODICE    p.add_argument("--mitosi-2lam", action="store_true",
+      :9700   STRINGA   p.add_argument("--mitosi-2lam", action="store_true",
+  csv/_seal_fork/_sig_cura2_strutturale/_sim_al_tag.py -- 13 riferimenti (CODICE, COMMENTO, STRINGA)
+      :417    CODICE    MITOSI_2LAM = False     # [CURA 5, 2026-09-25] `MITOSI_2LAM`: `A13` AL
+      :417    COMMENTO  MITOSI_2LAM = False     # [CURA 5, 2026-09-25] `MITOSI_2LAM`: `A13` AL
+      :6160   CODICE    if MITOSI_2LAM and len(c):
+      :8257   CODICE    global MITOSI_2LAM     # [CURA 5] senza questo l'assegnazione sarebbe 
+      :8259   COMMENTO  #   ed e' esattamente come `--semina-matura` e `--mitosi-2lam` sono st
+      :8340   CODICE    MITOSI_2LAM = bool(getattr(a, "mitosi_2lam", False))       # [CURA 5]
+      :8340   CODICE    MITOSI_2LAM = bool(getattr(a, "mitosi_2lam", False))       # [CURA 5]
+      :8341   CODICE    if MITOSI_2LAM:
+      :8342   STRINGA   print("[cura5] MITOSI_2LAM ON: un arco si divide SOLO se `d >= 2 LAM` 
+      :8725   COMMENTO  #   **`--semina-matura` e `--mitosi-2lam` NON FUNZIONAVANO DA RIGA DI 
+      :8728   COMMENTO  #   Trovato dal SIGILLO DEL DRIVER (`MITOSI_2LAM False/False` in NUDA 
+      :9258   CODICE    p.add_argument("--mitosi-2lam", action="store_true",
+      :9258   STRINGA   p.add_argument("--mitosi-2lam", action="store_true",
+  csv/_seal_fork/_sig_cura4/_tmp/_br_lungo_off.py -- 2 riferimenti (CODICE, STRINGA)
+      :9      CODICE    ARGV = ['soliton_simulator.py', '--test', 'N-MASSE', '--nmasse', '3', 
+      :9      STRINGA   ARGV = ['soliton_simulator.py', '--test', 'N-MASSE', '--nmasse', '3', 
+  csv/_seal_fork/_sig_cura4/_tmp/_br_lungo_on.py -- 2 riferimenti (CODICE, STRINGA)
+      :9      CODICE    ARGV = ['soliton_simulator.py', '--test', 'N-MASSE', '--nmasse', '3', 
+      :9      STRINGA   ARGV = ['soliton_simulator.py', '--test', 'N-MASSE', '--nmasse', '3', 
+  csv/_seal_fork/_sig_cura4/_tmp/_br_mitosi.py -- 3 riferimenti (CODICE, COMMENTO, STRINGA)
+      :9      CODICE    ARGV = ['soliton_simulator.py', '--test', 'N-MASSE', '--nmasse', '3', 
+      :9      STRINGA   ARGV = ['soliton_simulator.py', '--test', 'N-MASSE', '--nmasse', '3', 
+      :35     COMMENTO  #   Dal CLI arriva **anche `--mitosi-2lam`** (e'e' obbligatoria), quin
+  csv/_seal_fork/_sig_cura4/_tmp/_br_off.py -- 2 riferimenti (CODICE, STRINGA)
+      :9      CODICE    ARGV = ['soliton_simulator.py', '--test', 'N-MASSE', '--nmasse', '3', 
+      :9      STRINGA   ARGV = ['soliton_simulator.py', '--test', 'N-MASSE', '--nmasse', '3', 
+  csv/_seal_fork/_sig_cura4/_tmp/_br_on.py -- 2 riferimenti (CODICE, STRINGA)
+      :9      CODICE    ARGV = ['soliton_simulator.py', '--test', 'N-MASSE', '--nmasse', '3', 
+      :9      STRINGA   ARGV = ['soliton_simulator.py', '--test', 'N-MASSE', '--nmasse', '3', 
+  csv/_seal_fork/_sig_cura4/_tmp/_br_on_forzato.py -- 2 riferimenti (CODICE, STRINGA)
+      :9      CODICE    ARGV = ['soliton_simulator.py', '--test', 'N-MASSE', '--nmasse', '3', 
+      :9      STRINGA   ARGV = ['soliton_simulator.py', '--test', 'N-MASSE', '--nmasse', '3', 
+  csv/_seal_fork/_sig_cura4/_tmp/_br_prima.py -- 2 riferimenti (CODICE, STRINGA)
+      :9      CODICE    ARGV = ['soliton_simulator.py', '--test', 'N-MASSE', '--nmasse', '3', 
+      :9      STRINGA   ARGV = ['soliton_simulator.py', '--test', 'N-MASSE', '--nmasse', '3', 
+  csv/_seal_fork/_sig_cura5/_tmp/_br_c8_s11.py -- 2 riferimenti (STRINGA)
+      :24     STRINGA   if hasattr(S, "MITOSI_2LAM"):
+      :26     STRINGA   if SOGLIA_ZERO and hasattr(S, "MITOSI_2LAM"):
+  csv/_seal_fork/_sig_cura5/_tmp/_br_off_s11.py -- 1 riferimenti (STRINGA)
+      :24     STRINGA   if hasattr(S, "MITOSI_2LAM"):
+  csv/_seal_fork/_sig_cura5/_tmp/_br_off_s12.py -- 1 riferimenti (STRINGA)
+      :24     STRINGA   if hasattr(S, "MITOSI_2LAM"):
+  csv/_seal_fork/_sig_cura5/_tmp/_br_on_s11.py -- 1 riferimenti (STRINGA)
+      :24     STRINGA   if hasattr(S, "MITOSI_2LAM"):
+  csv/_seal_fork/_sig_cura5/_tmp/_br_on_s12.py -- 1 riferimenti (STRINGA)
+      :24     STRINGA   if hasattr(S, "MITOSI_2LAM"):
+  csv/_seal_fork/_sig_cura5/_tmp/_br_prima_s11.py -- 1 riferimenti (STRINGA)
+      :24     STRINGA   if hasattr(S, "MITOSI_2LAM"):
+  csv/_seal_fork/_sig_cura5/_tmp/_br_prima_s12.py -- 1 riferimenti (STRINGA)
+      :24     STRINGA   if hasattr(S, "MITOSI_2LAM"):
+  csv/_seal_fork/_sig_cura5/_tmp/_sim_vecchio.py -- 9 riferimenti (CODICE, STRINGA)
+      :415    CODICE    MITOSI_2LAM = False     # [CURA 5, 2026-09-25] `A13` ALLA NASCITA. App
+      :5966   CODICE    if MITOSI_2LAM and len(c):
+      :8034   CODICE    global MITOSI_2LAM     # [CURA 5] senza questo l'assegnazione sarebbe 
+      :8461   CODICE    MITOSI_2LAM = bool(getattr(a, "mitosi_2lam", False))       # [CURA 5]
+      :8461   CODICE    MITOSI_2LAM = bool(getattr(a, "mitosi_2lam", False))       # [CURA 5]
+      :8462   CODICE    if MITOSI_2LAM:
+      :8463   STRINGA   print("[cura5] MITOSI_2LAM ON: un arco si divide SOLO se `d >= 2 LAM` 
+      :8994   CODICE    p.add_argument("--mitosi-2lam", action="store_true",
+      :8994   STRINGA   p.add_argument("--mitosi-2lam", action="store_true",
+  csv/_seal_fork/_sig_cura_A/_sim_A.py -- 13 riferimenti (CODICE, COMMENTO, STRINGA)
+      :417    CODICE    MITOSI_2LAM = False     # [CURA 5, 2026-09-25] `MITOSI_2LAM`: `A13` AL
+      :417    COMMENTO  MITOSI_2LAM = False     # [CURA 5, 2026-09-25] `MITOSI_2LAM`: `A13` AL
+      :6155   CODICE    if MITOSI_2LAM and len(c):
+      :8252   CODICE    global MITOSI_2LAM     # [CURA 5] senza questo l'assegnazione sarebbe 
+      :8254   COMMENTO  #   ed e' esattamente come `--semina-matura` e `--mitosi-2lam` sono st
+      :8335   CODICE    MITOSI_2LAM = bool(getattr(a, "mitosi_2lam", False))       # [CURA 5]
+      :8335   CODICE    MITOSI_2LAM = bool(getattr(a, "mitosi_2lam", False))       # [CURA 5]
+      :8336   CODICE    if MITOSI_2LAM:
+      :8337   STRINGA   print("[cura5] MITOSI_2LAM ON: un arco si divide SOLO se `d >= 2 LAM` 
+      :8708   COMMENTO  #   **`--semina-matura` e `--mitosi-2lam` NON FUNZIONAVANO DA RIGA DI 
+      :8711   COMMENTO  #   Trovato dal SIGILLO DEL DRIVER (`MITOSI_2LAM False/False` in NUDA 
+      :9241   CODICE    p.add_argument("--mitosi-2lam", action="store_true",
+      :9241   STRINGA   p.add_argument("--mitosi-2lam", action="store_true",
+  csv/_seal_fork/_sig_cura_A/_tmp/_br_figli_off_s11.py -- 2 riferimenti (CODICE, STRINGA)
+      :13     CODICE    ARGV = ['soliton_simulator.py', '--test', 'N-MASSE', '--nmasse', '3', 
+      :13     STRINGA   ARGV = ['soliton_simulator.py', '--test', 'N-MASSE', '--nmasse', '3', 
+  csv/_seal_fork/_sig_cura_A/_tmp/_br_figli_off_s12.py -- 2 riferimenti (CODICE, STRINGA)
+      :13     CODICE    ARGV = ['soliton_simulator.py', '--test', 'N-MASSE', '--nmasse', '3', 
+      :13     STRINGA   ARGV = ['soliton_simulator.py', '--test', 'N-MASSE', '--nmasse', '3', 
+  csv/_seal_fork/_sig_cura_A/_tmp/_br_figli_on_s11.py -- 2 riferimenti (CODICE, STRINGA)
+      :13     CODICE    ARGV = ['soliton_simulator.py', '--test', 'N-MASSE', '--nmasse', '3', 
+      :13     STRINGA   ARGV = ['soliton_simulator.py', '--test', 'N-MASSE', '--nmasse', '3', 
+  csv/_seal_fork/_sig_cura_A/_tmp/_br_figli_on_s12.py -- 2 riferimenti (CODICE, STRINGA)
+      :13     CODICE    ARGV = ['soliton_simulator.py', '--test', 'N-MASSE', '--nmasse', '3', 
+      :13     STRINGA   ARGV = ['soliton_simulator.py', '--test', 'N-MASSE', '--nmasse', '3', 
+  csv/_seal_fork/_sig_cura_A/_tmp/_br_off_s11_corti.py -- 2 riferimenti (CODICE, STRINGA)
+      :13     CODICE    ARGV = ['soliton_simulator.py', '--test', 'N-MASSE', '--nmasse', '3', 
+      :13     STRINGA   ARGV = ['soliton_simulator.py', '--test', 'N-MASSE', '--nmasse', '3', 
+  csv/_seal_fork/_sig_cura_A/_tmp/_br_off_s11_lunghi.py -- 2 riferimenti (CODICE, STRINGA)
+      :13     CODICE    ARGV = ['soliton_simulator.py', '--test', 'N-MASSE', '--nmasse', '3', 
+      :13     STRINGA   ARGV = ['soliton_simulator.py', '--test', 'N-MASSE', '--nmasse', '3', 
+  csv/_seal_fork/_sig_cura_A/_tmp/_br_off_s12_corti.py -- 2 riferimenti (CODICE, STRINGA)
+      :13     CODICE    ARGV = ['soliton_simulator.py', '--test', 'N-MASSE', '--nmasse', '3', 
+      :13     STRINGA   ARGV = ['soliton_simulator.py', '--test', 'N-MASSE', '--nmasse', '3', 
+  csv/_seal_fork/_sig_cura_A/_tmp/_br_off_s12_lunghi.py -- 2 riferimenti (CODICE, STRINGA)
+      :13     CODICE    ARGV = ['soliton_simulator.py', '--test', 'N-MASSE', '--nmasse', '3', 
+      :13     STRINGA   ARGV = ['soliton_simulator.py', '--test', 'N-MASSE', '--nmasse', '3', 
+  csv/_seal_fork/_sig_cura_A/_tmp/_br_off_s13_corti.py -- 2 riferimenti (CODICE, STRINGA)
+      :13     CODICE    ARGV = ['soliton_simulator.py', '--test', 'N-MASSE', '--nmasse', '3', 
+      :13     STRINGA   ARGV = ['soliton_simulator.py', '--test', 'N-MASSE', '--nmasse', '3', 
+  csv/_seal_fork/_sig_cura_A/_tmp/_br_off_s13_lunghi.py -- 2 riferimenti (CODICE, STRINGA)
+      :13     CODICE    ARGV = ['soliton_simulator.py', '--test', 'N-MASSE', '--nmasse', '3', 
+      :13     STRINGA   ARGV = ['soliton_simulator.py', '--test', 'N-MASSE', '--nmasse', '3', 
+  csv/_seal_fork/_sig_cura_A/_tmp/_br_off_s14_corti.py -- 2 riferimenti (CODICE, STRINGA)
+      :13     CODICE    ARGV = ['soliton_simulator.py', '--test', 'N-MASSE', '--nmasse', '3', 
+      :13     STRINGA   ARGV = ['soliton_simulator.py', '--test', 'N-MASSE', '--nmasse', '3', 
+  csv/_seal_fork/_sig_cura_A/_tmp/_br_off_s14_lunghi.py -- 2 riferimenti (CODICE, STRINGA)
+      :13     CODICE    ARGV = ['soliton_simulator.py', '--test', 'N-MASSE', '--nmasse', '3', 
+      :13     STRINGA   ARGV = ['soliton_simulator.py', '--test', 'N-MASSE', '--nmasse', '3', 
+  csv/_seal_fork/_sig_cura_A/_tmp/_br_on_s11_corti.py -- 2 riferimenti (CODICE, STRINGA)
+      :13     CODICE    ARGV = ['soliton_simulator.py', '--test', 'N-MASSE', '--nmasse', '3', 
+      :13     STRINGA   ARGV = ['soliton_simulator.py', '--test', 'N-MASSE', '--nmasse', '3', 
+  csv/_seal_fork/_sig_cura_A/_tmp/_br_on_s11_lunghi.py -- 2 riferimenti (CODICE, STRINGA)
+      :13     CODICE    ARGV = ['soliton_simulator.py', '--test', 'N-MASSE', '--nmasse', '3', 
+      :13     STRINGA   ARGV = ['soliton_simulator.py', '--test', 'N-MASSE', '--nmasse', '3', 
+  csv/_seal_fork/_sig_cura_A/_tmp/_br_on_s12_corti.py -- 2 riferimenti (CODICE, STRINGA)
+      :13     CODICE    ARGV = ['soliton_simulator.py', '--test', 'N-MASSE', '--nmasse', '3', 
+      :13     STRINGA   ARGV = ['soliton_simulator.py', '--test', 'N-MASSE', '--nmasse', '3', 
+  csv/_seal_fork/_sig_cura_A/_tmp/_br_on_s12_lunghi.py -- 2 riferimenti (CODICE, STRINGA)
+      :13     CODICE    ARGV = ['soliton_simulator.py', '--test', 'N-MASSE', '--nmasse', '3', 
+      :13     STRINGA   ARGV = ['soliton_simulator.py', '--test', 'N-MASSE', '--nmasse', '3', 
+  csv/_seal_fork/_sig_cura_A/_tmp/_br_on_s13_corti.py -- 2 riferimenti (CODICE, STRINGA)
+      :13     CODICE    ARGV = ['soliton_simulator.py', '--test', 'N-MASSE', '--nmasse', '3', 
+      :13     STRINGA   ARGV = ['soliton_simulator.py', '--test', 'N-MASSE', '--nmasse', '3', 
+  csv/_seal_fork/_sig_cura_A/_tmp/_br_on_s13_lunghi.py -- 2 riferimenti (CODICE, STRINGA)
+      :13     CODICE    ARGV = ['soliton_simulator.py', '--test', 'N-MASSE', '--nmasse', '3', 
+      :13     STRINGA   ARGV = ['soliton_simulator.py', '--test', 'N-MASSE', '--nmasse', '3', 
+  csv/_seal_fork/_sig_cura_A/_tmp/_br_on_s14_corti.py -- 2 riferimenti (CODICE, STRINGA)
+      :13     CODICE    ARGV = ['soliton_simulator.py', '--test', 'N-MASSE', '--nmasse', '3', 
+      :13     STRINGA   ARGV = ['soliton_simulator.py', '--test', 'N-MASSE', '--nmasse', '3', 
+  csv/_seal_fork/_sig_cura_A/_tmp/_br_on_s14_lunghi.py -- 2 riferimenti (CODICE, STRINGA)
+      :13     CODICE    ARGV = ['soliton_simulator.py', '--test', 'N-MASSE', '--nmasse', '3', 
+      :13     STRINGA   ARGV = ['soliton_simulator.py', '--test', 'N-MASSE', '--nmasse', '3', 
+  csv/_seal_fork/_sig_cura_A/_tmp/_br_pf_s11_lunghi.py -- 2 riferimenti (CODICE, STRINGA)
+      :13     CODICE    ARGV = ['soliton_simulator.py', '--test', 'N-MASSE', '--nmasse', '3', 
+      :13     STRINGA   ARGV = ['soliton_simulator.py', '--test', 'N-MASSE', '--nmasse', '3', 
+  csv/_seal_fork/_sig_cura_A/_tmp/_br_pf_s12_lunghi.py -- 2 riferimenti (CODICE, STRINGA)
+      :13     CODICE    ARGV = ['soliton_simulator.py', '--test', 'N-MASSE', '--nmasse', '3', 
+      :13     STRINGA   ARGV = ['soliton_simulator.py', '--test', 'N-MASSE', '--nmasse', '3', 
+  csv/_seal_fork/_sig_cura_A/_tmp/_br_suW_s11_corti.py -- 2 riferimenti (CODICE, STRINGA)
+      :13     CODICE    ARGV = ['soliton_simulator.py', '--test', 'N-MASSE', '--nmasse', '3', 
+      :13     STRINGA   ARGV = ['soliton_simulator.py', '--test', 'N-MASSE', '--nmasse', '3', 
+  csv/_seal_fork/_sig_cura_A/_tmp/_br_suW_s11_lunghi.py -- 2 riferimenti (CODICE, STRINGA)
+      :13     CODICE    ARGV = ['soliton_simulator.py', '--test', 'N-MASSE', '--nmasse', '3', 
+      :13     STRINGA   ARGV = ['soliton_simulator.py', '--test', 'N-MASSE', '--nmasse', '3', 
+  csv/_seal_fork/_sig_cura_A/_tmp/_br_suW_s12_corti.py -- 2 riferimenti (CODICE, STRINGA)
+      :13     CODICE    ARGV = ['soliton_simulator.py', '--test', 'N-MASSE', '--nmasse', '3', 
+      :13     STRINGA   ARGV = ['soliton_simulator.py', '--test', 'N-MASSE', '--nmasse', '3', 
+  csv/_seal_fork/_sig_cura_A/_tmp/_br_suW_s12_lunghi.py -- 2 riferimenti (CODICE, STRINGA)
+      :13     CODICE    ARGV = ['soliton_simulator.py', '--test', 'N-MASSE', '--nmasse', '3', 
+      :13     STRINGA   ARGV = ['soliton_simulator.py', '--test', 'N-MASSE', '--nmasse', '3', 
+  csv/_seal_fork/_sig_cura_A/_tmp/_br_suW_s13_corti.py -- 2 riferimenti (CODICE, STRINGA)
+      :13     CODICE    ARGV = ['soliton_simulator.py', '--test', 'N-MASSE', '--nmasse', '3', 
+      :13     STRINGA   ARGV = ['soliton_simulator.py', '--test', 'N-MASSE', '--nmasse', '3', 
+  csv/_seal_fork/_sig_cura_A/_tmp/_br_suW_s13_lunghi.py -- 2 riferimenti (CODICE, STRINGA)
+      :13     CODICE    ARGV = ['soliton_simulator.py', '--test', 'N-MASSE', '--nmasse', '3', 
+      :13     STRINGA   ARGV = ['soliton_simulator.py', '--test', 'N-MASSE', '--nmasse', '3', 
+  csv/_seal_fork/_sig_cura_A/_tmp/_br_suW_s14_corti.py -- 2 riferimenti (CODICE, STRINGA)
+      :13     CODICE    ARGV = ['soliton_simulator.py', '--test', 'N-MASSE', '--nmasse', '3', 
+      :13     STRINGA   ARGV = ['soliton_simulator.py', '--test', 'N-MASSE', '--nmasse', '3', 
+  csv/_seal_fork/_sig_cura_A/_tmp/_br_suW_s14_lunghi.py -- 2 riferimenti (CODICE, STRINGA)
+      :13     CODICE    ARGV = ['soliton_simulator.py', '--test', 'N-MASSE', '--nmasse', '3', 
+      :13     STRINGA   ARGV = ['soliton_simulator.py', '--test', 'N-MASSE', '--nmasse', '3', 
+  csv/_seal_fork/_sig_cura_A/_tmp/_sim_prima_flag.py -- 11 riferimenti (CODICE, COMMENTO, STRINGA)
+      :417    CODICE    MITOSI_2LAM = False     # [CURA 5, 2026-09-25] `A13` ALLA NASCITA. App
+      :6002   CODICE    if MITOSI_2LAM and len(c):
+      :8099   CODICE    global MITOSI_2LAM     # [CURA 5] senza questo l'assegnazione sarebbe 
+      :8179   CODICE    MITOSI_2LAM = bool(getattr(a, "mitosi_2lam", False))       # [CURA 5]
+      :8179   CODICE    MITOSI_2LAM = bool(getattr(a, "mitosi_2lam", False))       # [CURA 5]
+      :8180   CODICE    if MITOSI_2LAM:
+      :8181   STRINGA   print("[cura5] MITOSI_2LAM ON: un arco si divide SOLO se `d >= 2 LAM` 
+      :8547   COMMENTO  #   **`--semina-matura` e `--mitosi-2lam` NON FUNZIONAVANO DA RIGA DI 
+      :8550   COMMENTO  #   Trovato dal SIGILLO DEL DRIVER (`MITOSI_2LAM False/False` in NUDA 
+      :9080   CODICE    p.add_argument("--mitosi-2lam", action="store_true",
+      :9080   STRINGA   p.add_argument("--mitosi-2lam", action="store_true",
+  csv/_seal_fork/_sig_cura_A/_tmp/_sim_prima_flag_diag.py -- 11 riferimenti (CODICE, COMMENTO, STRINGA)
+      :417    CODICE    MITOSI_2LAM = False     # [CURA 5, 2026-09-25] `A13` ALLA NASCITA. App
+      :6012   CODICE    if MITOSI_2LAM and len(c):
+      :8109   CODICE    global MITOSI_2LAM     # [CURA 5] senza questo l'assegnazione sarebbe 
+      :8189   CODICE    MITOSI_2LAM = bool(getattr(a, "mitosi_2lam", False))       # [CURA 5]
+      :8189   CODICE    MITOSI_2LAM = bool(getattr(a, "mitosi_2lam", False))       # [CURA 5]
+      :8190   CODICE    if MITOSI_2LAM:
+      :8191   STRINGA   print("[cura5] MITOSI_2LAM ON: un arco si divide SOLO se `d >= 2 LAM` 
+      :8557   COMMENTO  #   **`--semina-matura` e `--mitosi-2lam` NON FUNZIONAVANO DA RIGA DI 
+      :8560   COMMENTO  #   Trovato dal SIGILLO DEL DRIVER (`MITOSI_2LAM False/False` in NUDA 
+      :9090   CODICE    p.add_argument("--mitosi-2lam", action="store_true",
+      :9090   STRINGA   p.add_argument("--mitosi-2lam", action="store_true",
+  csv/_seal_fork/_sig_cura_A/_tmp/_sim_su_W.py -- 13 riferimenti (CODICE, COMMENTO, STRINGA)
+      :417    CODICE    MITOSI_2LAM = False     # [CURA 5, 2026-09-25] `MITOSI_2LAM`: `A13` AL
+      :417    COMMENTO  MITOSI_2LAM = False     # [CURA 5, 2026-09-25] `MITOSI_2LAM`: `A13` AL
+      :6117   CODICE    if MITOSI_2LAM and len(c):
+      :8214   CODICE    global MITOSI_2LAM     # [CURA 5] senza questo l'assegnazione sarebbe 
+      :8216   COMMENTO  #   ed e' esattamente come `--semina-matura` e `--mitosi-2lam` sono st
+      :8297   CODICE    MITOSI_2LAM = bool(getattr(a, "mitosi_2lam", False))       # [CURA 5]
+      :8297   CODICE    MITOSI_2LAM = bool(getattr(a, "mitosi_2lam", False))       # [CURA 5]
+      :8298   CODICE    if MITOSI_2LAM:
+      :8299   STRINGA   print("[cura5] MITOSI_2LAM ON: un arco si divide SOLO se `d >= 2 LAM` 
+      :8670   COMMENTO  #   **`--semina-matura` e `--mitosi-2lam` NON FUNZIONAVANO DA RIGA DI 
+      :8673   COMMENTO  #   Trovato dal SIGILLO DEL DRIVER (`MITOSI_2LAM False/False` in NUDA 
+      :9203   CODICE    p.add_argument("--mitosi-2lam", action="store_true",
+      :9203   STRINGA   p.add_argument("--mitosi-2lam", action="store_true",
+  csv/_seal_fork/_sig_cura_A/_tmp/_sim_su_W_diag.py -- 13 riferimenti (CODICE, COMMENTO, STRINGA)
+      :417    CODICE    MITOSI_2LAM = False     # [CURA 5, 2026-09-25] `MITOSI_2LAM`: `A13` AL
+      :417    COMMENTO  MITOSI_2LAM = False     # [CURA 5, 2026-09-25] `MITOSI_2LAM`: `A13` AL
+      :6127   CODICE    if MITOSI_2LAM and len(c):
+      :8224   CODICE    global MITOSI_2LAM     # [CURA 5] senza questo l'assegnazione sarebbe 
+      :8226   COMMENTO  #   ed e' esattamente come `--semina-matura` e `--mitosi-2lam` sono st
+      :8307   CODICE    MITOSI_2LAM = bool(getattr(a, "mitosi_2lam", False))       # [CURA 5]
+      :8307   CODICE    MITOSI_2LAM = bool(getattr(a, "mitosi_2lam", False))       # [CURA 5]
+      :8308   CODICE    if MITOSI_2LAM:
+      :8309   STRINGA   print("[cura5] MITOSI_2LAM ON: un arco si divide SOLO se `d >= 2 LAM` 
+      :8680   COMMENTO  #   **`--semina-matura` e `--mitosi-2lam` NON FUNZIONAVANO DA RIGA DI 
+      :8683   COMMENTO  #   Trovato dal SIGILLO DEL DRIVER (`MITOSI_2LAM False/False` in NUDA 
+      :9213   CODICE    p.add_argument("--mitosi-2lam", action="store_true",
+      :9213   STRINGA   p.add_argument("--mitosi-2lam", action="store_true",
+  csv/_seal_fork/_sig_d32_nomi/_sim_prima.py -- 13 riferimenti (CODICE, COMMENTO, STRINGA)
+      :417    CODICE    MITOSI_2LAM = False     # [CURA 5, 2026-09-25] `MITOSI_2LAM`: `A13` AL
+      :417    COMMENTO  MITOSI_2LAM = False     # [CURA 5, 2026-09-25] `MITOSI_2LAM`: `A13` AL
+      :6145   CODICE    if MITOSI_2LAM and len(c):
+      :8242   CODICE    global MITOSI_2LAM     # [CURA 5] senza questo l'assegnazione sarebbe 
+      :8244   COMMENTO  #   ed e' esattamente come `--semina-matura` e `--mitosi-2lam` sono st
+      :8325   CODICE    MITOSI_2LAM = bool(getattr(a, "mitosi_2lam", False))       # [CURA 5]
+      :8325   CODICE    MITOSI_2LAM = bool(getattr(a, "mitosi_2lam", False))       # [CURA 5]
+      :8326   CODICE    if MITOSI_2LAM:
+      :8327   STRINGA   print("[cura5] MITOSI_2LAM ON: un arco si divide SOLO se `d >= 2 LAM` 
+      :8710   COMMENTO  #   **`--semina-matura` e `--mitosi-2lam` NON FUNZIONAVANO DA RIGA DI 
+      :8713   COMMENTO  #   Trovato dal SIGILLO DEL DRIVER (`MITOSI_2LAM False/False` in NUDA 
+      :9243   CODICE    p.add_argument("--mitosi-2lam", action="store_true",
+      :9243   STRINGA   p.add_argument("--mitosi-2lam", action="store_true",
+  csv/_seal_fork/_sig_decisione_separata/_sim_prima_decisione.py -- 16 riferimenti (CODICE, COMMENTO, STRINGA)
+      :441    CODICE    MITOSI_2LAM = False     # [CURA 5, 2026-09-25] `MITOSI_2LAM`: `A13` AL
+      :441    COMMENTO  MITOSI_2LAM = False     # [CURA 5, 2026-09-25] `MITOSI_2LAM`: `A13` AL
+      :2245   COMMENTO  # PIU': con `SEMINA_LAM` e `MITOSI_2LAM` si ha `d >= LAM`. ⚠ MA E'
+      :7216   CODICE    if MITOSI_2LAM and len(c):
+      :7603   COMMENTO  #   NESSUN PAVIMENTO: `d >= LAM` con `SEMINA_LAM`/`MITOSI_2LAM`. E poi
+      :9310   CODICE    global MITOSI_2LAM     # [CURA 5] senza questo l'assegnazione sarebbe 
+      :9312   COMMENTO  #   ed e' esattamente come `--semina-matura` e `--mitosi-2lam` sono st
+      :9320   COMMENTO  #   `--tau-a`, `--semina-matura` e `--mitosi-2lam`, inerti per un gior
+      :9405   CODICE    MITOSI_2LAM = bool(getattr(a, "mitosi_2lam", False))       # [CURA 5]
+      :9405   CODICE    MITOSI_2LAM = bool(getattr(a, "mitosi_2lam", False))       # [CURA 5]
+      :9406   CODICE    if MITOSI_2LAM:
+      :9407   STRINGA   print("[cura5] MITOSI_2LAM ON: un arco si divide SOLO se `d >= 2 LAM` 
+      :9800   COMMENTO  #   **`--semina-matura` e `--mitosi-2lam` NON FUNZIONAVANO DA RIGA DI 
+      :9803   COMMENTO  #   Trovato dal SIGILLO DEL DRIVER (`MITOSI_2LAM False/False` in NUDA 
+      :10365  CODICE    p.add_argument("--mitosi-2lam", action="store_true",
+      :10365  STRINGA   p.add_argument("--mitosi-2lam", action="store_true",
+  csv/_seal_fork/_sig_guardie/_sim_prima_guardie.py -- 16 riferimenti (CODICE, COMMENTO, STRINGA)
+      :418    CODICE    MITOSI_2LAM = False     # [CURA 5, 2026-09-25] `MITOSI_2LAM`: `A13` AL
+      :418    COMMENTO  MITOSI_2LAM = False     # [CURA 5, 2026-09-25] `MITOSI_2LAM`: `A13` AL
+      :1864   COMMENTO  # PIU': con `SEMINA_LAM` e `MITOSI_2LAM` si ha `d >= LAM`. ⚠ MA E'
+      :6806   CODICE    if MITOSI_2LAM and len(c):
+      :7184   COMMENTO  #   NESSUN PAVIMENTO: `d >= LAM` con `SEMINA_LAM`/`MITOSI_2LAM`. E poi
+      :8891   CODICE    global MITOSI_2LAM     # [CURA 5] senza questo l'assegnazione sarebbe 
+      :8893   COMMENTO  #   ed e' esattamente come `--semina-matura` e `--mitosi-2lam` sono st
+      :8901   COMMENTO  #   `--tau-a`, `--semina-matura` e `--mitosi-2lam`, inerti per un gior
+      :8986   CODICE    MITOSI_2LAM = bool(getattr(a, "mitosi_2lam", False))       # [CURA 5]
+      :8986   CODICE    MITOSI_2LAM = bool(getattr(a, "mitosi_2lam", False))       # [CURA 5]
+      :8987   CODICE    if MITOSI_2LAM:
+      :8988   STRINGA   print("[cura5] MITOSI_2LAM ON: un arco si divide SOLO se `d >= 2 LAM` 
+      :9381   COMMENTO  #   **`--semina-matura` e `--mitosi-2lam` NON FUNZIONAVANO DA RIGA DI 
+      :9384   COMMENTO  #   Trovato dal SIGILLO DEL DRIVER (`MITOSI_2LAM False/False` in NUDA 
+      :9946   CODICE    p.add_argument("--mitosi-2lam", action="store_true",
+      :9946   STRINGA   p.add_argument("--mitosi-2lam", action="store_true",
+  csv/_seal_fork/_sig_max_nodi/_sim_prima_della_cura.py -- 15 riferimenti (CODICE, COMMENTO, STRINGA)
+      :418    CODICE    MITOSI_2LAM = False     # [CURA 5, 2026-09-25] `MITOSI_2LAM`: `A13` AL
+      :418    COMMENTO  MITOSI_2LAM = False     # [CURA 5, 2026-09-25] `MITOSI_2LAM`: `A13` AL
+      :1549   COMMENTO  # PIU': con `SEMINA_LAM` e `MITOSI_2LAM` si ha `d >= LAM`. ⚠ MA E'
+      :6327   CODICE    if MITOSI_2LAM and len(c):
+      :6694   COMMENTO  #   NESSUN PAVIMENTO: `d >= LAM` con `SEMINA_LAM`/`MITOSI_2LAM`. E poi
+      :8401   CODICE    global MITOSI_2LAM     # [CURA 5] senza questo l'assegnazione sarebbe 
+      :8403   COMMENTO  #   ed e' esattamente come `--semina-matura` e `--mitosi-2lam` sono st
+      :8492   CODICE    MITOSI_2LAM = bool(getattr(a, "mitosi_2lam", False))       # [CURA 5]
+      :8492   CODICE    MITOSI_2LAM = bool(getattr(a, "mitosi_2lam", False))       # [CURA 5]
+      :8493   CODICE    if MITOSI_2LAM:
+      :8494   STRINGA   print("[cura5] MITOSI_2LAM ON: un arco si divide SOLO se `d >= 2 LAM` 
+      :8883   COMMENTO  #   **`--semina-matura` e `--mitosi-2lam` NON FUNZIONAVANO DA RIGA DI 
+      :8886   COMMENTO  #   Trovato dal SIGILLO DEL DRIVER (`MITOSI_2LAM False/False` in NUDA 
+      :9426   CODICE    p.add_argument("--mitosi-2lam", action="store_true",
+      :9426   STRINGA   p.add_argument("--mitosi-2lam", action="store_true",
+  csv/_seal_fork/_sig_nascita_atomica/_sim_e203f9a8.py -- 15 riferimenti (CODICE, COMMENTO, STRINGA)
+      :417    CODICE    MITOSI_2LAM = False     # [CURA 5, 2026-09-25] `MITOSI_2LAM`: `A13` AL
+      :417    COMMENTO  MITOSI_2LAM = False     # [CURA 5, 2026-09-25] `MITOSI_2LAM`: `A13` AL
+      :1360   COMMENTO  # PIU': con `SEMINA_LAM` e `MITOSI_2LAM` si ha `d >= LAM`. ⚠ MA E'
+      :6173   CODICE    if MITOSI_2LAM and len(c):
+      :6573   COMMENTO  #   NESSUN PAVIMENTO: `d >= LAM` con `SEMINA_LAM`/`MITOSI_2LAM`. E poi
+      :8282   CODICE    global MITOSI_2LAM     # [CURA 5] senza questo l'assegnazione sarebbe 
+      :8284   COMMENTO  #   ed e' esattamente come `--semina-matura` e `--mitosi-2lam` sono st
+      :8373   CODICE    MITOSI_2LAM = bool(getattr(a, "mitosi_2lam", False))       # [CURA 5]
+      :8373   CODICE    MITOSI_2LAM = bool(getattr(a, "mitosi_2lam", False))       # [CURA 5]
+      :8374   CODICE    if MITOSI_2LAM:
+      :8375   STRINGA   print("[cura5] MITOSI_2LAM ON: un arco si divide SOLO se `d >= 2 LAM` 
+      :8758   COMMENTO  #   **`--semina-matura` e `--mitosi-2lam` NON FUNZIONAVANO DA RIGA DI 
+      :8761   COMMENTO  #   Trovato dal SIGILLO DEL DRIVER (`MITOSI_2LAM False/False` in NUDA 
+      :9301   CODICE    p.add_argument("--mitosi-2lam", action="store_true",
+      :9301   STRINGA   p.add_argument("--mitosi-2lam", action="store_true",
+  csv/_seal_fork/_sig_nascita_psi/_sim_prima_della_cura.py -- 15 riferimenti (CODICE, COMMENTO, STRINGA)
+      :418    CODICE    MITOSI_2LAM = False     # [CURA 5, 2026-09-25] `MITOSI_2LAM`: `A13` AL
+      :418    COMMENTO  MITOSI_2LAM = False     # [CURA 5, 2026-09-25] `MITOSI_2LAM`: `A13` AL
+      :1597   COMMENTO  # PIU': con `SEMINA_LAM` e `MITOSI_2LAM` si ha `d >= LAM`. ⚠ MA E'
+      :6414   CODICE    if MITOSI_2LAM and len(c):
+      :6785   COMMENTO  #   NESSUN PAVIMENTO: `d >= LAM` con `SEMINA_LAM`/`MITOSI_2LAM`. E poi
+      :8492   CODICE    global MITOSI_2LAM     # [CURA 5] senza questo l'assegnazione sarebbe 
+      :8494   COMMENTO  #   ed e' esattamente come `--semina-matura` e `--mitosi-2lam` sono st
+      :8583   CODICE    MITOSI_2LAM = bool(getattr(a, "mitosi_2lam", False))       # [CURA 5]
+      :8583   CODICE    MITOSI_2LAM = bool(getattr(a, "mitosi_2lam", False))       # [CURA 5]
+      :8584   CODICE    if MITOSI_2LAM:
+      :8585   STRINGA   print("[cura5] MITOSI_2LAM ON: un arco si divide SOLO se `d >= 2 LAM` 
+      :8974   COMMENTO  #   **`--semina-matura` e `--mitosi-2lam` NON FUNZIONAVANO DA RIGA DI 
+      :8977   COMMENTO  #   Trovato dal SIGILLO DEL DRIVER (`MITOSI_2LAM False/False` in NUDA 
+      :9519   CODICE    p.add_argument("--mitosi-2lam", action="store_true",
+      :9519   STRINGA   p.add_argument("--mitosi-2lam", action="store_true",
+  csv/_seal_fork/_sig_pozzo_d/_sim_prima.py -- 13 riferimenti (CODICE, COMMENTO, STRINGA)
+      :417    CODICE    MITOSI_2LAM = False     # [CURA 5, 2026-09-25] `MITOSI_2LAM`: `A13` AL
+      :417    COMMENTO  MITOSI_2LAM = False     # [CURA 5, 2026-09-25] `MITOSI_2LAM`: `A13` AL
+      :6153   CODICE    if MITOSI_2LAM and len(c):
+      :8250   CODICE    global MITOSI_2LAM     # [CURA 5] senza questo l'assegnazione sarebbe 
+      :8252   COMMENTO  #   ed e' esattamente come `--semina-matura` e `--mitosi-2lam` sono st
+      :8340   CODICE    MITOSI_2LAM = bool(getattr(a, "mitosi_2lam", False))       # [CURA 5]
+      :8340   CODICE    MITOSI_2LAM = bool(getattr(a, "mitosi_2lam", False))       # [CURA 5]
+      :8341   CODICE    if MITOSI_2LAM:
+      :8342   STRINGA   print("[cura5] MITOSI_2LAM ON: un arco si divide SOLO se `d >= 2 LAM` 
+      :8725   COMMENTO  #   **`--semina-matura` e `--mitosi-2lam` NON FUNZIONAVANO DA RIGA DI 
+      :8728   COMMENTO  #   Trovato dal SIGILLO DEL DRIVER (`MITOSI_2LAM False/False` in NUDA 
+      :9258   CODICE    p.add_argument("--mitosi-2lam", action="store_true",
+      :9258   STRINGA   p.add_argument("--mitosi-2lam", action="store_true",
+  csv/_seal_fork/_sig_scena_ii/_driver_prima.py -- 2 riferimenti (CODICE, STRINGA)
+      :264    CODICE    "--mitosi-2lam",
+      :264    STRINGA   "--mitosi-2lam",
+  csv/_test_fork/_censimento_mitosi_2lam.py -- 7 riferimenti (CODICE, STRINGA)
+      :2      STRINGA   """IL CENSIMENTO DI `MITOSI_2LAM` — ogni sito, e di che TIPO e'.
+      :49     STRINGA   NOME = "MITOSI_2LAM"
+      :50     CODICE    CLI = "--mitosi-2lam"
+      :50     STRINGA   CLI = "--mitosi-2lam"
+      :51     CODICE    ATTR = "mitosi_2lam"
+      :63     STRINGA   10732: "il `if MITOSI_2LAM:` che stampa l'avviso [cura5]",
+      :75     STRINGA   "blocco [flag-inerti]": "il `6b` deve aggiungere `MITOSI_2LAM` fra i f
+  csv/_test_fork/_etc_lam_stati.py -- 1 riferimenti (STRINGA)
+      :2      STRINGA   """**SOLA LETTURA: `min(d)` e quanti archi stanno sotto `LAM`, nei 16 
+  csv/_test_fork/_etc_pavimenti.py -- 1 riferimenti (STRINGA)
+      :83     STRINGA   "MITOSI_2LAM", "POZZO_D")}
+  csv/_test_fork/_ordine_estrazioni.py -- 1 riferimenti (STRINGA)
+      :880    STRINGA   "PLAST_DIN", "PLAST_MIT", "MITOSI_2LAM", "REGIME", "SEMINA_LAM", "CHI_
+  csv/_test_fork/_punto_unico_fattibile.py -- 1 riferimenti (STRINGA)
+      :514    STRINGA   "ANTIFASE_ADD", "COPPIA_MIT", "REGIME", "MITOSI_2LAM"):
+  csv/_test_fork/_scena_video.py -- 2 riferimenti (CODICE, STRINGA)
+      :307    CODICE    "--mitosi-2lam",
+      :307    STRINGA   "--mitosi-2lam",
+  csv/_test_fork/_verifica_flag_accesi.py -- 4 riferimenti (STRINGA)
+      :2      STRINGA   """**IL FLAG ERA EFFETTIVAMENTE ACCESO?** — tabella, non deduzione *(L
+      :63     STRINGA   "csv/_seal_fork/_sig_cura5/SIGILLO_cura5_a13nascita.txt", ("MITOSI_2LA
+      :77     STRINGA   "MITOSI_2LAM": [
+      :113    STRINGA   P("  PERCHE' LA DOMANDA E' GIUSTA: `--semina-matura` e `--mitosi-2lam`
+  csv/_test_fork/_copertura_derivate/_sim_lettura_iniettata.py -- 16 riferimenti (CODICE, COMMENTO, STRINGA)
+      :441    CODICE    MITOSI_2LAM = False     # [CURA 5, 2026-09-25] `MITOSI_2LAM`: `A13` AL
+      :441    COMMENTO  MITOSI_2LAM = False     # [CURA 5, 2026-09-25] `MITOSI_2LAM`: `A13` AL
+      :3158   COMMENTO  # PIU': con `SEMINA_LAM` e `MITOSI_2LAM` si ha `d >= LAM`. ⚠ MA E'
+      :8081   CODICE    if MITOSI_2LAM and len(c):
+      :8515   COMMENTO  #   NESSUN PAVIMENTO: `d >= LAM` con `SEMINA_LAM`/`MITOSI_2LAM`. E poi
+      :10222  CODICE    global MITOSI_2LAM     # [CURA 5] senza questo l'assegnazione sarebbe 
+      :10224  COMMENTO  #   ed e' esattamente come `--semina-matura` e `--mitosi-2lam` sono st
+      :10232  COMMENTO  #   `--tau-a`, `--semina-matura` e `--mitosi-2lam`, inerti per un gior
+      :10317  CODICE    MITOSI_2LAM = bool(getattr(a, "mitosi_2lam", False))       # [CURA 5]
+      :10317  CODICE    MITOSI_2LAM = bool(getattr(a, "mitosi_2lam", False))       # [CURA 5]
+      :10318  CODICE    if MITOSI_2LAM:
+      :10319  STRINGA   print("[cura5] MITOSI_2LAM ON: un arco si divide SOLO se `d >= 2 LAM` 
+      :10712  COMMENTO  #   **`--semina-matura` e `--mitosi-2lam` NON FUNZIONAVANO DA RIGA DI 
+      :10715  COMMENTO  #   Trovato dal SIGILLO DEL DRIVER (`MITOSI_2LAM False/False` in NUDA 
+      :11277  CODICE    p.add_argument("--mitosi-2lam", action="store_true",
+      :11277  STRINGA   p.add_argument("--mitosi-2lam", action="store_true",
+  csv/_test_fork/_limite_accoppiamento2/_sim_diag2.py -- 11 riferimenti (CODICE, COMMENTO, STRINGA)
+      :417    CODICE    MITOSI_2LAM = False     # [CURA 5, 2026-09-25] `A13` ALLA NASCITA. App
+      :6007   CODICE    if MITOSI_2LAM and len(c):
+      :8104   CODICE    global MITOSI_2LAM     # [CURA 5] senza questo l'assegnazione sarebbe 
+      :8184   CODICE    MITOSI_2LAM = bool(getattr(a, "mitosi_2lam", False))       # [CURA 5]
+      :8184   CODICE    MITOSI_2LAM = bool(getattr(a, "mitosi_2lam", False))       # [CURA 5]
+      :8185   CODICE    if MITOSI_2LAM:
+      :8186   STRINGA   print("[cura5] MITOSI_2LAM ON: un arco si divide SOLO se `d >= 2 LAM` 
+      :8552   COMMENTO  #   **`--semina-matura` e `--mitosi-2lam` NON FUNZIONAVANO DA RIGA DI 
+      :8555   COMMENTO  #   Trovato dal SIGILLO DEL DRIVER (`MITOSI_2LAM False/False` in NUDA 
+      :9085   CODICE    p.add_argument("--mitosi-2lam", action="store_true",
+      :9085   STRINGA   p.add_argument("--mitosi-2lam", action="store_true",
+  csv/_test_fork/_limite_accoppiamento2/_tmp/_br_s11_corti.py -- 2 riferimenti (CODICE, STRINGA)
+      :11     CODICE    ARGV = ['soliton_simulator.py', '--test', 'N-MASSE', '--nmasse', '3', 
+      :11     STRINGA   ARGV = ['soliton_simulator.py', '--test', 'N-MASSE', '--nmasse', '3', 
+  csv/_test_fork/_limite_accoppiamento2/_tmp/_br_s11_lunghi.py -- 2 riferimenti (CODICE, STRINGA)
+      :11     CODICE    ARGV = ['soliton_simulator.py', '--test', 'N-MASSE', '--nmasse', '3', 
+      :11     STRINGA   ARGV = ['soliton_simulator.py', '--test', 'N-MASSE', '--nmasse', '3', 
+  csv/_test_fork/_limite_accoppiamento2/_tmp/_br_s12_corti.py -- 2 riferimenti (CODICE, STRINGA)
+      :11     CODICE    ARGV = ['soliton_simulator.py', '--test', 'N-MASSE', '--nmasse', '3', 
+      :11     STRINGA   ARGV = ['soliton_simulator.py', '--test', 'N-MASSE', '--nmasse', '3', 
+  csv/_test_fork/_limite_accoppiamento2/_tmp/_br_s12_lunghi.py -- 2 riferimenti (CODICE, STRINGA)
+      :11     CODICE    ARGV = ['soliton_simulator.py', '--test', 'N-MASSE', '--nmasse', '3', 
+      :11     STRINGA   ARGV = ['soliton_simulator.py', '--test', 'N-MASSE', '--nmasse', '3', 
+  csv/_test_fork/_scomposizione_figli/_sim_diag_scomp.py -- 13 riferimenti (CODICE, COMMENTO, STRINGA)
+      :417    CODICE    MITOSI_2LAM = False     # [CURA 5, 2026-09-25] `MITOSI_2LAM`: `A13` AL
+      :417    COMMENTO  MITOSI_2LAM = False     # [CURA 5, 2026-09-25] `MITOSI_2LAM`: `A13` AL
+      :6124   CODICE    if MITOSI_2LAM and len(c):
+      :8221   CODICE    global MITOSI_2LAM     # [CURA 5] senza questo l'assegnazione sarebbe 
+      :8223   COMMENTO  #   ed e' esattamente come `--semina-matura` e `--mitosi-2lam` sono st
+      :8304   CODICE    MITOSI_2LAM = bool(getattr(a, "mitosi_2lam", False))       # [CURA 5]
+      :8304   CODICE    MITOSI_2LAM = bool(getattr(a, "mitosi_2lam", False))       # [CURA 5]
+      :8305   CODICE    if MITOSI_2LAM:
+      :8306   STRINGA   print("[cura5] MITOSI_2LAM ON: un arco si divide SOLO se `d >= 2 LAM` 
+      :8677   COMMENTO  #   **`--semina-matura` e `--mitosi-2lam` NON FUNZIONAVANO DA RIGA DI 
+      :8680   COMMENTO  #   Trovato dal SIGILLO DEL DRIVER (`MITOSI_2LAM False/False` in NUDA 
+      :9210   CODICE    p.add_argument("--mitosi-2lam", action="store_true",
+      :9210   STRINGA   p.add_argument("--mitosi-2lam", action="store_true",
+  csv/_test_fork/_scomposizione_figli/_tmp/_br_scomp_s11.py -- 2 riferimenti (CODICE, STRINGA)
+      :10     CODICE    ARGV = ['soliton_simulator.py', '--test', 'N-MASSE', '--nmasse', '3', 
+      :10     STRINGA   ARGV = ['soliton_simulator.py', '--test', 'N-MASSE', '--nmasse', '3', 
+  csv/_test_fork/_scomposizione_figli/_tmp/_br_scomp_s12.py -- 2 riferimenti (CODICE, STRINGA)
+      :10     CODICE    ARGV = ['soliton_simulator.py', '--test', 'N-MASSE', '--nmasse', '3', 
+      :10     STRINGA   ARGV = ['soliton_simulator.py', '--test', 'N-MASSE', '--nmasse', '3', 
+
+  file ATTESI dal mandato ......... 3  ['csv/_test_fork/_scena_video.py', 'csv/_cure_verificate.py', 'csv/_presidio_commenti_flag.py']
+  file NON PREVISTI che lo nominano 142  ['csv/_cli_flag.py', 'csv/_seal_fork/_guasto_ripieghi/_sim_precura.py', 'csv/_seal_fork/_sig_contrasto/_sim_diag_ci.py', 'csv/_seal_fork/_sig_contrasto/_tmp/_br_off_s11_corti.py', 'csv/_seal_fork/_sig_contrasto/_tmp/_br_off_s11_lunghi.py', 'csv/_seal_fork/_sig_contrasto/_tmp/_br_off_s12_corti.py', 'csv/_seal_fork/_sig_contrasto/_tmp/_br_off_s12_lunghi.py', 'csv/_seal_fork/_sig_contrasto/_tmp/_br_on_s11_corti.py', 'csv/_seal_fork/_sig_contrasto/_tmp/_br_on_s11_lunghi.py', 'csv/_seal_fork/_sig_contrasto/_tmp/_br_on_s12_corti.py', 'csv/_seal_fork/_sig_contrasto/_tmp/_br_on_s12_lunghi.py', 'csv/_seal_fork/_sig_contrasto/_tmp/_br_prima_s11_lunghi.py', 'csv/_seal_fork/_sig_contrasto/_tmp/_br_prima_s12_lunghi.py', 'csv/_seal_fork/_sig_contrasto/_tmp/_sim_prima.py', 'csv/_seal_fork/_sig_contrasto/_tmp/_sim_prima_diag.py', 'csv/_seal_fork/_sig_contrasto_esteso/_sim_diag_est.py', 'csv/_seal_fork/_sig_contrasto_esteso/_tmp/_br_figli_s11.py', 'csv/_seal_fork/_sig_contrasto_esteso/_tmp/_br_figli_s12.py', 'csv/_seal_fork/_sig_contrasto_esteso/_tmp/_br_off_s11_corti.py', 'csv/_seal_fork/_sig_contrasto_esteso/_tmp/_br_off_s11_lunghi.py', 'csv/_seal_fork/_sig_contrasto_esteso/_tmp/_br_off_s12_corti.py', 'csv/_seal_fork/_sig_contrasto_esteso/_tmp/_br_off_s12_lunghi.py', 'csv/_seal_fork/_sig_contrasto_esteso/_tmp/_br_on_s11_corti.py', 'csv/_seal_fork/_sig_contrasto_esteso/_tmp/_br_on_s11_lunghi.py', 'csv/_seal_fork/_sig_contrasto_esteso/_tmp/_br_on_s12_corti.py', 'csv/_seal_fork/_sig_contrasto_esteso/_tmp/_br_on_s12_lunghi.py', 'csv/_seal_fork/_sig_contrasto_esteso/_tmp/_br_prima_s11_lunghi.py', 'csv/_seal_fork/_sig_contrasto_esteso/_tmp/_br_prima_s12_lunghi.py', 'csv/_seal_fork/_sig_contrasto_esteso/_tmp/_br_ril_s11_corti.py', 'csv/_seal_fork/_sig_contrasto_esteso/_tmp/_br_ril_s11_lunghi.py', 'csv/_seal_fork/_sig_contrasto_esteso/_tmp/_br_ril_s12_corti.py', 'csv/_seal_fork/_sig_contrasto_esteso/_tmp/_br_ril_s12_lunghi.py', 'csv/_seal_fork/_sig_contrasto_esteso/_tmp/_sim_prima.py', 'csv/_seal_fork/_sig_contrasto_esteso/_tmp/_sim_prima_diag.py', 'csv/_seal_fork/_sig_controllo_unico/_sim_prima_5750.py', 'csv/_seal_fork/_sig_controllo_unico/_sim_prima_controllo.py', 'csv/_seal_fork/_sig_cura2_strutturale/_sim_al_tag.py', 'csv/_seal_fork/_sig_cura4/_tmp/_br_lungo_off.py', 'csv/_seal_fork/_sig_cura4/_tmp/_br_lungo_on.py', 'csv/_seal_fork/_sig_cura4/_tmp/_br_mitosi.py', 'csv/_seal_fork/_sig_cura4/_tmp/_br_off.py', 'csv/_seal_fork/_sig_cura4/_tmp/_br_on.py', 'csv/_seal_fork/_sig_cura4/_tmp/_br_on_forzato.py', 'csv/_seal_fork/_sig_cura4/_tmp/_br_prima.py', 'csv/_seal_fork/_sig_cura5/_tmp/_br_c8_s11.py', 'csv/_seal_fork/_sig_cura5/_tmp/_br_off_s11.py', 'csv/_seal_fork/_sig_cura5/_tmp/_br_off_s12.py', 'csv/_seal_fork/_sig_cura5/_tmp/_br_on_s11.py', 'csv/_seal_fork/_sig_cura5/_tmp/_br_on_s12.py', 'csv/_seal_fork/_sig_cura5/_tmp/_br_prima_s11.py', 'csv/_seal_fork/_sig_cura5/_tmp/_br_prima_s12.py', 'csv/_seal_fork/_sig_cura5/_tmp/_sim_vecchio.py', 'csv/_seal_fork/_sig_cura_A/_sim_A.py', 'csv/_seal_fork/_sig_cura_A/_tmp/_br_figli_off_s11.py', 'csv/_seal_fork/_sig_cura_A/_tmp/_br_figli_off_s12.py', 'csv/_seal_fork/_sig_cura_A/_tmp/_br_figli_on_s11.py', 'csv/_seal_fork/_sig_cura_A/_tmp/_br_figli_on_s12.py', 'csv/_seal_fork/_sig_cura_A/_tmp/_br_off_s11_corti.py', 'csv/_seal_fork/_sig_cura_A/_tmp/_br_off_s11_lunghi.py', 'csv/_seal_fork/_sig_cura_A/_tmp/_br_off_s12_corti.py', 'csv/_seal_fork/_sig_cura_A/_tmp/_br_off_s12_lunghi.py', 'csv/_seal_fork/_sig_cura_A/_tmp/_br_off_s13_corti.py', 'csv/_seal_fork/_sig_cura_A/_tmp/_br_off_s13_lunghi.py', 'csv/_seal_fork/_sig_cura_A/_tmp/_br_off_s14_corti.py', 'csv/_seal_fork/_sig_cura_A/_tmp/_br_off_s14_lunghi.py', 'csv/_seal_fork/_sig_cura_A/_tmp/_br_on_s11_corti.py', 'csv/_seal_fork/_sig_cura_A/_tmp/_br_on_s11_lunghi.py', 'csv/_seal_fork/_sig_cura_A/_tmp/_br_on_s12_corti.py', 'csv/_seal_fork/_sig_cura_A/_tmp/_br_on_s12_lunghi.py', 'csv/_seal_fork/_sig_cura_A/_tmp/_br_on_s13_corti.py', 'csv/_seal_fork/_sig_cura_A/_tmp/_br_on_s13_lunghi.py', 'csv/_seal_fork/_sig_cura_A/_tmp/_br_on_s14_corti.py', 'csv/_seal_fork/_sig_cura_A/_tmp/_br_on_s14_lunghi.py', 'csv/_seal_fork/_sig_cura_A/_tmp/_br_pf_s11_lunghi.py', 'csv/_seal_fork/_sig_cura_A/_tmp/_br_pf_s12_lunghi.py', 'csv/_seal_fork/_sig_cura_A/_tmp/_br_suW_s11_corti.py', 'csv/_seal_fork/_sig_cura_A/_tmp/_br_suW_s11_lunghi.py', 'csv/_seal_fork/_sig_cura_A/_tmp/_br_suW_s12_corti.py', 'csv/_seal_fork/_sig_cura_A/_tmp/_br_suW_s12_lunghi.py', 'csv/_seal_fork/_sig_cura_A/_tmp/_br_suW_s13_corti.py', 'csv/_seal_fork/_sig_cura_A/_tmp/_br_suW_s13_lunghi.py', 'csv/_seal_fork/_sig_cura_A/_tmp/_br_suW_s14_corti.py', 'csv/_seal_fork/_sig_cura_A/_tmp/_br_suW_s14_lunghi.py', 'csv/_seal_fork/_sig_cura_A/_tmp/_sim_prima_flag.py', 'csv/_seal_fork/_sig_cura_A/_tmp/_sim_prima_flag_diag.py', 'csv/_seal_fork/_sig_cura_A/_tmp/_sim_su_W.py', 'csv/_seal_fork/_sig_cura_A/_tmp/_sim_su_W_diag.py', 'csv/_seal_fork/_sig_d32_nomi/_sim_prima.py', 'csv/_seal_fork/_sig_decisione_separata/_sim_prima_decisione.py', 'csv/_seal_fork/_sig_guardie/_sim_prima_guardie.py', 'csv/_seal_fork/_sig_max_nodi/_sim_prima_della_cura.py', 'csv/_seal_fork/_sig_nascita_atomica/_sim_e203f9a8.py', 'csv/_seal_fork/_sig_nascita_psi/_sim_prima_della_cura.py', 'csv/_seal_fork/_sig_pozzo_d/_sim_prima.py', 'csv/_seal_fork/_sig_scena_ii/_driver_prima.py', 'csv/_seal_fork/_sigillo_confronto_esteso/_sim_prima_cura.py', 'csv/_seal_fork/_sigillo_confronto_esteso/_sim_prima_punto_unico.py', 'csv/_seal_fork/_sigillo_confronto_esteso/_sim_ulp.py', 'csv/_seal_fork/_sigillo_cura4_accensione.py', 'csv/_seal_fork/_sigillo_cura5_a13nascita.py', 'csv/_seal_fork/_sigillo_frazione_t.py', 'csv/_seal_fork/_sigillo_frazione_t/_sim_fm_rovescio.py', 'csv/_seal_fork/_sigillo_frazione_t/_sim_let_dd.py', 'csv/_seal_fork/_sigillo_frazione_t/_sim_let_dh.py', 'csv/_seal_fork/_sigillo_frazione_t/_sim_let_fm.py', 'csv/_seal_fork/_sigillo_frazione_t/_sim_let_fm_bias.py', 'csv/_seal_fork/_sigillo_frazione_t/_sim_let_pos_div.py', 'csv/_seal_fork/_sigillo_frazione_t/_sim_let_pos_sch.py', 'csv/_seal_fork/_sigillo_frazione_t/_sim_prima.py', 'csv/_seal_fork/_sigillo_frazione_t/_sim_pulita.py', 'csv/_seal_fork/_sigillo_frazione_t/_sim_rifatta.py', 'csv/_seal_fork/_sigillo_frazione_t/_sim_t04.py', 'csv/_seal_fork/_sigillo_frazione_t/_sim_t04_md0.py', 'csv/_seal_fork/_sigillo_inerzia_commenti/_sim_prima.py', 'csv/_seal_fork/_sigillo_perc_geom_derivata/_sim_D1.py', 'csv/_seal_fork/_sigillo_perc_geom_derivata/_sim_D2.py', 'csv/_seal_fork/_sigillo_perc_geom_derivata/_sim_E.py', 'csv/_seal_fork/_sigillo_perc_geom_derivata/_sim_prima.py', 'csv/_seal_fork/_sigillo_perc_geom_derivata/_sim_rifatta.py', 'csv/_seal_fork/_sigillo_perc_geom_derivata/_sim_solo_ordine.py', 'csv/_seal_fork/_sigillo_tre_casi/_sim_psi_eredita.py', 'csv/_seal_fork/_sigillo_tre_casi/_sim_senza_peq.py', 'csv/_seal_fork/_sigillo_tre_casi/_sim_sparsa.py', 'csv/_seal_fork/_sigillo_veleno/_sim_cella_scritta.py', 'csv/_seal_fork/_sigillo_veleno/_sim_prima_veleno.py', 'csv/_seal_fork/_sigillo_veleno/_sim_senza_esenzione.py', 'csv/_seal_fork/_sigillo_veleno/_sim_senza_registro.py', 'csv/_test_fork/_censimento_mitosi_2lam.py', 'csv/_test_fork/_copertura_derivate/_sim_lettura_iniettata.py', 'csv/_test_fork/_etc_lam_stati.py', 'csv/_test_fork/_etc_pavimenti.py', 'csv/_test_fork/_limite_accoppiamento2/_sim_diag2.py', 'csv/_test_fork/_limite_accoppiamento2/_tmp/_br_s11_corti.py', 'csv/_test_fork/_limite_accoppiamento2/_tmp/_br_s11_lunghi.py', 'csv/_test_fork/_limite_accoppiamento2/_tmp/_br_s12_corti.py', 'csv/_test_fork/_limite_accoppiamento2/_tmp/_br_s12_lunghi.py', 'csv/_test_fork/_ordine_estrazioni.py', 'csv/_test_fork/_punto_unico_fattibile.py', 'csv/_test_fork/_scomposizione_figli/_sim_diag_scomp.py', 'csv/_test_fork/_scomposizione_figli/_tmp/_br_scomp_s11.py', 'csv/_test_fork/_scomposizione_figli/_tmp/_br_scomp_s12.py', 'csv/_test_fork/_verifica_flag_accesi.py']
+  file previsti e NON trovati ..... 0  nessuno
+
+----------------------------------------------------------------------------------------------------
+I SITI `ATTESO-ASSENTE` -- previsti dal mandato e oggi INESISTENTI
+  ### <<non trovato>> e <<non previsto>> sono DUE COSE DIVERSE, e confonderle
+  ###   farebbe sembrare un lavoro da fare un difetto del censimento.
+  blocco [flag-inerti]     il `6b` deve aggiungere `MITOSI_2LAM` fra i flag inerti, come `PAV_COM`
+
+====================================================================================================
+### IL RIEPILOGO
+###   nel simulatore: 7 CODICE, 7 COMMENTO, 2 STRINGA
+###   file di csv/ che lo nominano: 145
+###   *** SI FERMA: ci sono siti non previsti. ***
+====================================================================================================

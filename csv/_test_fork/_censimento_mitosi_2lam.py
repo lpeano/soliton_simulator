@@ -77,6 +77,45 @@ ATTESI_ASSENTI = {
 }
 
 
+def che_cos_e(percorso):
+    """### UN REPERTO O UNO STRUMENTO? ### **La domanda che il primo perimetro non si
+    poneva**, e che gli ha fatto dichiarare ### **142 siti nuovi** dove non ce n'era
+    nessuno.
+
+    ### \u26d4 IL DIFETTO MISURATO: `os.walk` su `csv/` raccoglie anche le
+    ### **COPIE DEL SIMULATORE** salvate accanto ai sigilli *(par.7, stato 2)* e gli
+    ### **STUB generati** sotto `_tmp/`. Quelle copie contengono il flag ### **per
+    costruzione**: sono fotografie del simulatore, non posti dove qualcuno lo usa.
+    ### **Contarle come <<siti non previsti>> trasforma un archivio in un allarme.**
+
+    | classe | come si riconosce | che cos'e' |
+    |---|---|---|
+    | `COPIA-SIMULATORE` | definisce ### **a livello di modulo** il default `MITOSI_2LAM`
+      ### **E** contiene il sito del CLI `--mitosi-2lam` | un ### **REPERTO** |
+    | `STUB-DI-RUN` | sta sotto una cartella `_tmp/` | un ### **REPERTO** |
+    | `STRUMENTO` | tutto il resto | ### **un SITO, e va guardato** |
+
+    ### \u2705 **IL MARCATORE E' STRUTTURALE E LEGATO ALLA COSA CENSITA: solo il
+    simulatore definisce SIA il default SIA il CLI.** ### \u26a0 Il primo marcatore che
+    avevo provato -- *<<definisce `decidi_divisione`>>* -- ne riconosceva ### **30 su
+    46**, perche' nei blob piu' vecchi quella funzione ha un ### **altro nome**: un
+    marcatore che dipende da un nome di funzione ### **non e' stabile fra blob**, e qui si
+    confrontano blob di settimane diverse.
+    """
+    if (chr(47) + "_tmp" + chr(47)) in percorso.replace(chr(92), chr(47)):
+        return "STUB-DI-RUN"
+    try:
+        a = ast.parse(io.open(percorso, encoding="utf-8").read())
+    except (SyntaxError, OSError, UnicodeDecodeError):
+        return "STRUMENTO"
+    default = any(isinstance(n, ast.Assign)
+                  and any(isinstance(x, ast.Name) and x.id == NOME
+                          for x in n.targets)
+                  for n in a.body)
+    cli = any(isinstance(n, ast.Constant) and n.value == CLI for n in ast.walk(a))
+    return "COPIA-SIMULATORE" if (default and cli) else "STRUMENTO"
+
+
 def blob(p):
     return hashlib.sha1(io.open(p, "rb").read()).hexdigest()
 
@@ -232,8 +271,13 @@ def principale():
 
     # ---- fuori dal simulatore
     stampa("-" * 100)
-    stampa("FUORI DAL SIMULATORE: ogni file di `csv/` che nomina il flag")
+    stampa("FUORI DAL SIMULATORE: solo gli STRUMENTI, non i REPERTI")
+    stampa("  ### Le COPIE DEL SIMULATORE salvate accanto ai sigilli e gli STUB")
+    stampa("  ###   sotto `_tmp/` contengono il flag PER COSTRUZIONE: sono")
+    stampa("  ###   fotografie, non posti dove qualcuno lo usa. Si CONTANO e si")
+    stampa("  ###   DICHIARANO, ma non sono siti.")
     altrove = {}
+    reperti = {}
     for base, _d, files in os.walk(os.path.join(RADICE, "csv")):
         if "_archivio" in base or "__pycache__" in base:
             continue
@@ -248,6 +292,11 @@ def principale():
             if NOME not in s and CLI not in s:
                 continue
             rel = os.path.relpath(pf, RADICE).replace(chr(92), "/")
+            # ### SI CLASSIFICA PRIMA DI CONTARE: un reperto non e' un sito.
+            tipo = che_cos_e(pf)
+            reperti.setdefault(tipo, []).append(rel)
+            if tipo != "STRUMENTO":
+                continue
             v = raccogli(pf, s.split(NL))
             altrove[rel] = v
             stampa("  %s -- %d riferimenti (%s)"
@@ -255,6 +304,10 @@ def principale():
                       ", ".join(sorted(set(x["classe"] for x in v)))))
             for x in v:
                 stampa("      :%-6d %-9s %s" % (x["riga"], x["classe"], x["testo"][:70]))
+    stampa("")
+    stampa("  I REPERTI, contati e non confusi coi siti:")
+    for _k in sorted(reperti):
+        stampa("    %-18s %d file" % (_k, len(reperti[_k])))
     non_previsti = sorted(k for k in altrove if k not in ATTESI_ALTROVE)
     previsti_assenti = sorted(k for k in ATTESI_ALTROVE if k not in altrove)
     stampa("")
@@ -282,6 +335,7 @@ def principale():
              "altrove_non_previsti": non_previsti,
              "altrove_previsti_assenti": previsti_assenti,
              "attesi_assenti": ATTESI_ASSENTI,
+             "reperti": {k: sorted(v) for k, v in reperti.items()},
              "codice": len([x for x in nel_sim if x["classe"] == "CODICE"]),
              "commenti": len([x for x in nel_sim if x["classe"] == "COMMENTO"]),
              "stringhe": len([x for x in nel_sim if x["classe"] == "STRINGA"])}
