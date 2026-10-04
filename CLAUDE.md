@@ -171,7 +171,14 @@ sapendo gia' cosa cercare.
    *(sha1 dei byte grezzi, **non** `git hash-object`)*.
    **E il triage conta:** un **SIGILLO** ha la voce completa; una **SONDA usa-e-getta** una riga
    che dice **dove sta il referto**; una sonda **senza** referto e' **un reperto**, non
-   un'omissione; un sigillo **non piu' ri-girabile** e' **un difetto nuovo**.
+   un'omissione; un sigillo **non piu' ri-girabile AL SUO COMMIT** e' **un difetto nuovo**.
+   > ### 📌 **E <<AL SUO COMMIT>> NON E' UNA SFUMATURA** *(decisione di Luca, 2026-10-04)*:
+   > **un sigillo si rigira con `git checkout` del commit che ha sigillato**, e l'inventario
+   > ne registra **il commit e il blob**. ### **Un sigillo vecchio che non passa sul
+   > simulatore di OGGI NON e' un difetto** — **72 sigilli su 79 leggono il simulatore dal
+   > DISCO**, quindi senza questa precisazione **ogni cura trasformerebbe TUTTI i sigilli
+   > precedenti in difetti**. ### ⚠ **E' una REGOLA SCRITTA, non un presidio** (`A9`):
+   > nessun hook verifica che una voce di sigillo porti il suo commit.
    **Lo stesso vale per ogni `.pkl`:** i `.pkl` non si committano (binari, ~18 MB), ma il sistema e'
    deterministico e **il dato E' il comando che lo produce** — nome, riga di comando completa,
    blob del simulatore, blob dello script, seme, passi, data.

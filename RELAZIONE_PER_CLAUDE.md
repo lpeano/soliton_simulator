@@ -4198,3 +4198,46 @@ committando, la (A) ignorando.
 il solo pezzo bloccato è la parte del `COMMIT 1` sui **nomi generici e i `.png`**.
 
 ---
+
+## **«UN SIGILLO SI RIGIRA AL SUO COMMIT» È ORA IN `CLAUDE.md` — e nasce quasi inapplicata**
+
+**Decisione di Luca.** La frase del par.6 diceva *«un sigillo non più ri-girabile è un
+difetto nuovo»*, e **la mia conclusione sbagliata ha dimostrato che era incompleta**: con
+quella lettura avevo concluso che il sigillo di `CURA 5` diventasse un difetto per effetto
+del `6b` — e ### **così OGNI cura trasformerebbe tutti i 79 sigilli precedenti in
+difetti.** Ora dice **«al suo commit»**, col perché accanto. `CLAUDE.md` è a **390** righe
+*(tetto 400)*.
+
+### ⛔ **E IL CONTROLLO CHE PUÒ FALLIRE, FALLISCE — in modo che va letto accanto alla
+regola:**
+
+| | |
+|---|--:|
+| righe d'inventario sotto `csv/_seal_fork/` | **82** |
+| con un commit con cui rigirarle | **3** |
+| ### **senza** | ### **79** |
+| senza il **blob** | **0** |
+
+### 📌 **Il blob c'è sempre, il commit quasi mai.** Le tre che l'hanno sono
+`_sigillo_cura5_a13nascita.py`, `_sigillo_frazione_t.py` *(le due di ieri)* e
+`_perc_geom_patch.py`. ### ⚠ **Quindi la regola entra in `CLAUDE.md` VERA e per il `96 %`
+NON APPLICATA** — e questo è il fatto che rende il suo essere **una regola scritta e non un
+presidio** *(`A9`)* una cosa concreta e non una formula: ### **nessun hook verifica che una
+voce di sigillo porti il suo commit, e 79 voci su 82 non lo portano.**
+
+**Non le correggo qui**, come dice il mandato: sono un lavoro a parte.
+
+### ✅ **E il controllo ha trovato due cose che non cercava:** delle 82 righe, **3 hanno in
+prima colonna un `.json`** *(non uno strumento)* e **4 sono patch e non sigilli** — quindi
+«82 sigilli» è approssimato per eccesso; e ### **`csv/_seal_fork/_h_etc_1.py` compare DUE
+VOLTE: una riga duplicata nell'inventario.** Nemmeno questa la correggo qui.
+
+### ⚠ **UN PUNTO D'ORDINE, da dichiarare:** il mandato diceva *«in coda dopo il commit 7
+dei file non tracciati»*. ### **Quei commit non ci sono: il lavoro è FERMO al `COMMIT 1`**,
+che si è bloccato sul proprio controllo *(67 file tracciati coperti)* in attesa della
+scelta fra (A) e (B). ### **Non è «in corso», è sospeso** — e questo mandato toccava solo
+`CLAUDE.md` e il task history del `6b`, che quel lavoro non tocca. ### **L'ho eseguito e lo
+dico, invece di eseguirlo in silenzio o di lasciarlo fermo in attesa di commit che
+dipendono da una decisione.**
+
+---

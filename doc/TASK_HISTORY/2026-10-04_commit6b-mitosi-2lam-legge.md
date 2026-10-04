@@ -296,3 +296,46 @@ run. Nelle scene misurate sono `19` valori, quindi non e' un problema **oggi** �
 ### **una struttura non limitata dentro `net.__dict__`**, e un run lungo la farebbe crescere
 con ogni rifiuto. ### **La forma si decide nel commit della cura dei due difetti del
 censimento**, che e' il prossimo in coda.
+
+---
+
+## **ANNOTAZIONE del 2026-10-04 — LA NOTA E' DIVENTATA UNA REGOLA SCRITTA**
+
+**Decisione di Luca:** la regola *«un sigillo si rigira al suo commit»* — che il
+guardiano mi aveva fatto registrare **qui, come nota**, dicendo esplicitamente che
+metterla in `CLAUDE.md` *«e' una decisione di Luca, non tua e non del guardiano»* —
+### **e' entrata in `CLAUDE.md`, par.6, punto 1.**
+
+### **LA FRASE DI PRIMA ERA INCOMPLETA, e la mia conclusione sbagliata lo ha dimostrato:**
+*«un sigillo non piu' ri-girabile e' un difetto nuovo»*. Letta cosi', avevo concluso che il
+sigillo di `CURA 5` diventasse **un difetto** per effetto del `6b`. ### ⛔ **E con quella
+lettura OGNI cura del simulatore trasformerebbe TUTTI i sigilli precedenti in difetti** —
+il repo ne ha **79**.
+
+### ✅ **Ora dice *«non piu' ri-girabile AL SUO COMMIT»***, con il perche' accanto: un
+sigillo si rigira con `git checkout` del commit che ha sigillato, l'inventario ne registra
+**commit e blob**, e ### **72 sigilli su 79 leggono il simulatore dal DISCO** — che e' la
+ragione per cui il blob nell'inventario non e' una decorazione ma ### **la coordinata che
+rende il sigillo ri-eseguibile.**
+
+### ⛔ **E RESTA UNA REGOLA SCRITTA, NON UN PRESIDIO** *(`A9`, e il mandato chiede di
+dichiararlo)*: **nessun hook verifica che una voce di sigillo porti il suo commit.**
+### **E il controllo fatto oggi dice quanto quel limite pesa: `79` voci su `82` sotto
+`csv/_seal_fork/` NON hanno un commit con cui rigirarle.** ### ⚠ **Quindi la regola nasce
+vera e quasi interamente NON APPLICATA** — e questo e' un fatto da leggere accanto alla
+regola, non un dettaglio.
+
+### **IL CONTROLLO, e NON si corregge qui** *(il mandato: se ce ne sono, sono un lavoro a
+parte)*:
+
+| | |
+|---|--:|
+| righe d'inventario sotto `csv/_seal_fork/` | **82** |
+| con un commit con cui rigirarle | **3** *(`_sigillo_cura5_a13nascita.py`, `_sigillo_frazione_t.py`, `_perc_geom_patch.py`)* |
+| ### **senza** | ### **79** |
+| senza il **blob** nella colonna 2 | **0** — ### **il blob c'e' sempre, il commit quasi mai** |
+
+### 📌 **E DUE COSE CHE IL CONTROLLO HA TROVATO SENZA CERCARLE:** delle `82` righe,
+**`3` hanno in prima colonna un `.json`** *(non uno strumento)* e **`4` sono patch e non
+sigilli**; e ### **`csv/_seal_fork/_h_etc_1.py` compare DUE VOLTE** — ### **una riga
+duplicata nell'inventario.** *(Anche questa non si corregge qui.)*
