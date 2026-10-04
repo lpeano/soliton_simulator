@@ -3750,3 +3750,48 @@ il testo sotto cita *«i passi 3 e 5»* e *«la decisione 5»*, e rinumerare ###
 false quelle frasi senza toccarle.**
 
 ---
+
+## **LA STELLA POLARE: cinque domande che non decidono, ma obbligano a rispondere**
+
+**Decisione di Luca, 2026-10-04.** Sei voci nuove nell'indice *(`908` in tutto)*,
+`doc/STELLA_POLARE.md` a **55** righe *(tetto 60)*, e **una** riga in `CLAUDE.md`
+*(`383`, tetto 400)*.
+
+### ✅ **IL CONTROLLO CHE IL MANDATO CHIEDE PRIMA DEL LAVORO: cercate per CONCETTO, non
+per nome proposto.** `bidirezional`, `modello minimo`, `taglia finita`, `coomolog`,
+`Fock`: ### **zero riscontri su 902 voci.** Una sola confina davvero:
+
+> ### ⚠ **`A1-COSTANTI` si intitola *«AUDIT DELLE COSTANTI TARATE»*** — quindi il rischio
+> di doppione con `AUDIT-CURE` era reale e l'ho guardato. ### **Sono due domande diverse
+> sullo stesso oggetto:** `A1-COSTANTI` chiede *«il NUMERO e' tarato?»*, `AUDIT-CURE`
+> chiede *«la LEGGE serve ancora?»*. ### **E la seconda puo' avere risposta NO anche
+> quando il numero e' perfetto**, perche' una legge che compensava un difetto curato va
+> **tolta intera, non ritarata.** Registrata come voce a se', col confine scritto dentro.
+
+**Le cinque domande** *(`A14` locale · a quale dei tre gradini · quale tipo di numero ·
+quale verso dell'accoppiamento · emergente o imposto)* non sono un riassunto delle
+regole: ### **sono i cinque modi in cui un risultato puo' SEMBRARE fisica senza esserlo.**
+E il documento dice a voce che **non contiene decisioni di fisica**: le domande
+obbligano a rispondere, non rispondono.
+
+### ⛔ **E L'HO DICHIARATA COME REGOLA SCRITTA, NON COME PRESIDIO** *(`A9`, come il
+mandato chiede)*. Nessun hook controlla che le cinque domande siano nel task history:
+### **oggi lo controlla soltanto chi legge** — e in questo repo una regola scritta e'
+stata violata **tre volte** prima di diventare una macchina *(`L-PATCH` → `H-STASH`, la
+lista dei file → `H-FILE`)*. **Lo scrivo perche' il limite si veda, non perche' sia una
+scusa.**
+
+### 📌 **DUE COSE CHE HO DECISO IO e che vale la pena vedere.** ### **①** Il mandato dice
+*«UNA riga in `CLAUDE.md`»*: la riga `L-STELLA` nel par.11 fa **entrambe** le cose
+— rimanda al documento **e** dichiara l'obbligo — quindi ### **non ne ho aggiunta una
+seconda nella tabella del par.0**, che avrebbe fatto due righe. ### **②** `famiglia = ?`
+su tutte e sei: ### **l'assegnazione delle famiglie non e' mia da inventare**, e un `?`
+dichiarato e' meglio di una lettera scelta a caso.
+
+**E un presidio del mio script ha funzionato prima di scrivere:** il titolo di
+`GEOMETRIA-DELLA-CRESCITA` era **101** caratteri contro il tetto di **100**, e lo script
+### **ha rifiutato tutte e sei le righe** invece di scriverne cinque e fallire sulla
+sesta — ### **un inserimento a metà avrebbe lasciato l'indice in uno stato che nessuno
+ha dichiarato.**
+
+---
