@@ -4644,3 +4644,69 @@ limite **non ha morso** *(le misure sono identiche, e un limite che rende ambigu
 SCARTO non rende ambigua un'IDENTITA')*, ### **ma la prossima volta che un conteggio cambia
 morde.** Si chiude quando gli strumenti timbrano la piattaforma **da una sola funzione di
 `_presidio`** — non ciascuno la sua.
+
+## IL CALCIO SOTTO LO SCAMBIO `a<->b`: **asimmetrico, e l'attesa torna a `3.9e-16`**
+*(punto 2 del mandato)*
+
+**Referto:** `doc/REFERTO_calcio_sotto_scambio_2026-10-04.md`.
+
+```
+LO SCARTO DI phi SUI GENITORI, sotto lo scambio a<->b
+                   misurato           atteso      mis - att
+slot a      2.946490470e-01  2.946490470e-01      3.886e-16
+slot b      2.946490470e-01  2.946490470e-01      3.886e-16
+```
+
+L'attesa **`delta_phi = KICK_TW * sciolta * chi * mod`** stava nel task history `8cc578b`,
+committato **prima** dello strumento e **prima** del run: ### **l'ordine e' verificabile da
+git, non asserito da me.** ### 📌 **E non scopre niente: QUANTIFICA.** Il difetto `(iii)`
+di `DIVISIONE-AUTOCONSISTENTE` lo dichiarava gia' dalla **lettura** del codice.
+
+### 📌 **LA COSA CHE VALE PIU' DEL NUMERO, e non l'avevo prevista:** una
+**regolarita' esatta** fra la **regola di nascita** e l'esito, con la regola **letta
+dall'AST** e messa accanto alla misura.
+
+> ### **Una grandezza del figlio e' SIMMETRICA se la sua regola e' simmetrica nei due
+> ### genitori** *(media, derivazione, zero)*; ### **ASIMMETRICA se la regola NE SCEGLIE
+> ### UNO.** **13 su 15 asimmetriche dichiarano *eredita dal genitore `a`*.**
+
+### ⛔ **E L'UNICA ECCEZIONE APPARENTE LA SMENTISCE IL MIO STRUMENTO:** `perc_chi`
+eredita da `a` e risulta **simmetrica**, perche' in questo evento `chi_a == chi_b == 1.000`.
+### **E' un `FALSO-ZERO`**, e lo so solo perche' lo strumento riporta `chi_a`/`chi_b`
+**arco per arco**. ### ⚠ **E la stessa riserva vale sul numero del calcio: con le
+chiralita' uguali misura il SEGNO, non la chiralita' letta.**
+
+### ⛔ **UNA MIA PREVISIONE SBAGLIATA, e la correzione e' una distinzione che non
+### avevo:** avevo scritto *«`fm` a `t = 0.5`: SIMMETRICO»* col suo conto. `fm` risulta
+asimmetrica di **`8.88178e-16`**: ### **il conto e' giusto in ALGEBRA e sbagliato in
+ARITMETICA**, perche' `(phi[a] - 0.5*D) % dphi` e `(phi[b] + 0.5*D) % dphi` sono due
+**cammini di arrotondamento** diversi. ### ✅ **E `pos` lo dimostra: a `t = 0.5` e'
+IDENTICA AL BIT**, perche' `0.5x + 0.5y` contro `0.5y + 0.5x` e' **la stessa somma**.
+### ⚠ **Un sigillo che chiedesse l'identita' AL BIT su `fm` fallirebbe, per arrotondamento
+e non per fisica.**
+
+### **UNA VOCE NUOVA, misurata: `VELENO-ORIENTATO`.** Sui due archi figli, tre grandezze
+hanno valori **non finiti scambiati**: uno eredita un valore finito, l'altro riceve il
+veleno `NaN`, e ### **quale dei due dipende dall'orientamento `(i,j)`.**
+### ✅ **Non va sopravvalutata** — il simulatore **dichiara il veleno inerte** per
+quelle grandezze, riscritte nello stesso passo — ### **ma l'inerzia e' una proprieta'
+dell'ORDINE DELLE VOCI, non della legge**, e il criterio di chiusura chiede di decidere se
+sia una **regola** o un **buco del veleno**.
+
+### ⛔ **CINQUE DIFETTI DEL MIO STRUMENTO, ciascuno col suo reperto, e TRE HANNO LA
+### STESSA FORMA:** una regola **per POSIZIONE** applicata a una struttura che si
+**riordina** — gli archi per indice, le liste del comparatore per indice *(`a043549`,
+lo stesso giorno)*, un nome riusato nella stessa funzione. ### **La forma che tiene e'
+identificare per PROPRIETA': tocca un nodo nuovo, appartiene all'insieme, ha questo nome
+unico.**
+
+### ⚠ **E DUE LIMITI CHE IL REFERTO DICHIARA invece di lasciar dedurre:** il passo e'
+**50** e non `42` *(e lo Schwinger **60** e non `70`)* perche' `passo_pieno` esegue il
+passo **intero** — `mitosi()` compresa — quindi lo stato misurato ha una divisione
+**pendente** ma **non e'** *«prima della prima divisione»* *(`n` era gia' `12802 →
+12804`)*; e il controllo a **`0.3`** e' **INCONCLUSO** *(nessun candidato in 80 passi:
+`0.3*d >= LAM` chiede `d >= 3.33*LAM` contro `2.00*LAM` a `0.5`)*, quindi ### **la prova
+della vista poggia su UN valore solo.**
+
+### ⛔ **NIENTE CURE, come dice il punto 3:** le asimmetrie sono **materia per la LEGGE**
+di `DIVISIONE-AUTOCONSISTENTE`, che viene **dopo l'energia**. **La forma la decide Luca.**

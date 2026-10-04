@@ -209,3 +209,89 @@ una.**
 quella del driver da `~12800`, e il numero sbagliato (`74` invece di `42`) e' arrivato fino a
 `FATTI_dal_codice.md`.** ### **La scena si legge dall'argv, e lo strumento STAMPA `n` perche'
 chi legge possa riconoscere la scena sbagliata.**
+
+---
+
+## 5. ANNOTAZIONE A LAVORO CHIUSO *(2026-10-04)*
+
+*(Il par.8 dice che il ragionamento preliminare **non si riscrive**: si **annota**. Quello
+che segue non tocca una riga di cio' che sta sopra.)*
+
+### ✅ **CHE COSA L'ATTESA HA PREVISTO BENE, e con che precisione**
+
+L'attesa quantitativa **`delta_phi = KICK_TW * sciolta * chi * mod`** torna a
+**`3.886e-16`**: `2.946490470e-01` misurato contro `2.946490470e-01` atteso.
+### **Il conto a mano non era un'approssimazione.**
+
+E ha previsto bene anche **`pos` simmetrica a `t = 0.5`**: risulta **identica al bit**
+*(`0.0`)*, e il controllo a `t = 0.4` la trova asimmetrica con `2.82311e-01`.
+
+### ⛔ **CHE COSA HA PREVISTO MALE, e la correzione e' una distinzione che non avevo**
+
+Avevo scritto *«`fm` a `t = 0.5`: SIMMETRICO»*, col conto `fm' = phi[a] - 0.5*D = fm`.
+### **Il conto e' giusto in ALGEBRA e SBAGLIATO in ARITMETICA:** `fm` risulta asimmetrica
+di **`8.88178e-16`**, perche' `(phi[a] - 0.5*D) % dphi` e `(phi[b] + 0.5*D) % dphi` sono
+**due cammini di arrotondamento diversi**.
+
+### 📌 **E LA DISTINZIONE CHE MI MANCAVA, misurata e non supposta:** `pos` E' identica al
+bit perche' `0.5*x + 0.5*y` contro `0.5*y + 0.5*x` e' **la stessa somma** *(l'addizione
+IEEE-754 e' commutativa)*; `fm` **no**, perche' le due forme non sono la stessa
+espressione. ### **Avevo trattato <<uguale in algebra>> e <<uguale al bit>> come la stessa
+cosa, e il simulatore lo dichiara da se' per `pos` (<<0 differenze su 2 000 000>>) --
+cioe' l'informazione c'era e non l'ho usata** *(`P1`)*.
+### ⚠ **E IL COSTO POTENZIALE E' CONCRETO: un sigillo che chiedesse l'identita' AL BIT su
+`fm` FALLIREBBE, per arrotondamento e non per fisica.**
+
+### ✅ **CHE COSA IL TASK HISTORY HA PREVISTO E CHE SI E' AVVERATO: il `FALSO-ZERO`**
+
+Avevo scritto, fra le cose che **non sapevo**: *«se `perc_chi` fosse zero su tutti,
+l'attesa darebbe `0` e il calcio risulterebbe simmetrico per un motivo che non e' la
+simmetria della legge»*, e *«se risultasse `chi_a == chi_b`, l'asimmetria misurata sarebbe
+solo quella del SEGNO»*.
+### ⛔ **IL SECONDO CASO SI E' AVVERATO:** `chi_a == chi_b == 1.000` su **1 arco su 1**.
+Quindi il numero misura il **SEGNO** e **non** la chiralita' letta. ### **E la tabella
+arco-per-arco, che esisteva per questo, e' cio' che me l'ha fatto sapere.**
+
+### 📌 **E HA PRODOTTO UN RISULTATO CHE NON AVEVO PREVISTO AFFATTO:** la
+**regolarita'** fra la **regola di nascita** e l'esito — ### **asimmetrica se la regola
+SCEGLIE un genitore, simmetrica se fa la media, deriva, o mette zero** — con l'unica
+eccezione apparente *(`perc_chi`, che eredita da `a` e risulta simmetrica)* spiegata dal
+`FALSO-ZERO` di sopra. **13 grandezze su 15 asimmetriche dichiarano *eredita dal genitore
+`a`*.** *(Letto dall'AST, non a occhio.)*
+
+### ⛔ **I CINQUE DIFETTI DELLO STRUMENTO, e la forma che hanno in comune**
+
+| | il difetto | il reperto |
+|---|---|---|
+| **①** | `_wphi`/`_dphi` cercate sul **modulo**: sono metodi di `Rete` | `_collaudo.FALLITO.strumento-af05e86b.txt` |
+| **②** | verdetto `CIECO` dove era **`INCONCLUSO`** *(`FALSO-UNO`)* | `_collaudo.strumento-611fb08b.txt` |
+| **③** | archi nuovi cercati **per indice**: `keep` shifta | `_misura.FALLITA.strumento-995b77a1.txt` |
+| **④** | `att` **oscurato** da una mia cura precedente | *(stesso reperto)* |
+| **⑤** | differenza su elementi **non finiti** non nominata | il referto del giro riuscito |
+
+> ### 📌 **TRE SU CINQUE SONO LA STESSA FORMA: una regola PER POSIZIONE applicata a una
+> ### struttura che si RIORDINA.** Gli archi per indice, le liste del comparatore per
+> indice *(`a043549`, lo stesso giorno)*, il nome riusato nella stessa funzione.
+> ### **La forma che tiene e' identificare per PROPRIETA':** *tocca un nodo nuovo*,
+> *appartiene all'insieme*, *ha questo nome unico*.
+
+### ⚠ **E UNA COSA CHE DICHIARO PERCHE' NON E' VERIFICABILE DA GIT:** il `FALSO-UNO`
+del `(2)` l'avevo **previsto a run aperto** e avevo preparato la cura in uno script di
+scratchpad, **senza committarla** *(il par.5 vieta di toccare un file che il processo ha
+importato)*. ### **Quindi *<<l'avevo previsto>>* poggia sulla mia parola, non su git — ed
+e' esattamente la distinzione che il par.8 esiste per rendere verificabile.**
+
+### **LA CODA, registrata e non curata**
+
+1. ### **`t = 0.3` e' INCONCLUSO**, non cieco: serve `--max-passi` piu' alto. **Finche'
+   non gira, la prova della vista poggia su UN valore solo**, e il referto lo dice.
+2. ### **Lo strumento classifica le tautologiche nella parte 1 e NON nella parte 2**:
+   il `21` dello Schwinger comprende `i` e `j`, e il confrontabile col `18` della
+   divisione e' `19`.
+3. ### **`VELENO-ORIENTATO`**, voce nuova: il veleno cade su **uno** dei due archi figli e
+   **quale dipende dall'orientamento** — col sospetto, dichiarato, che possa essere un
+   **buco del veleno** della stessa forma dello shift di `keep`.
+
+### ⛔ **E IL PUNTO 3 DEL MANDATO RESTA: NIENTE CURE.** Le asimmetrie sono **materia
+per la LEGGE** di `DIVISIONE-AUTOCONSISTENTE`, che viene **dopo l'energia**.
+### **La forma della cura la decide Luca.**

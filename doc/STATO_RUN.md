@@ -1575,3 +1575,47 @@ e' appena successo col conteggio delle righe *(`CONTA-RIGHE`)*.
 riempirlo con la piattaforma di **oggi** anche nei referti vecchi. ### **Sarebbe inventare
 un dato che nessuno ha misurato** — e **i reperti non si riscrivono** *(par.9)*: si chiude
 **sugli strumenti**, non sui referti gia' scritti.
+
+## `VELENO-ORIENTATO` — **il veleno cade su UNO dei due archi figli, e quale dipende
+dall'orientamento** *(aperto il 2026-10-04)*
+
+**MISURATO**, non letto: confrontando `BASE` e `SCAMBIO` sui due archi figli di una
+divisione — accoppiati **per insieme degli estremi** — tre grandezze danno elementi
+**non finiti diversi**, e ### **i valori sono SCAMBIATI fra i due archi:**
+
+| evento | grandezza | primo arco | secondo arco |
+|---|---|---|---|
+| divisione | `_sin2_vir` | BASE `0.0057085209267975336` / SCAMBIO `nan` | BASE `nan` / SCAMBIO `0.0057085209267975336` |
+| schwinger | `_dt_e_ultimo` | BASE `0.0062105321832223361` / SCAMBIO `nan` | BASE `nan` / SCAMBIO `0.0062105321832223361` |
+| schwinger | `_sin2_vir` | BASE `0.14077152702241497` / SCAMBIO `nan` | BASE `nan` / SCAMBIO `0.14077152702241497` |
+
+### **Quindi uno dei due archi figli EREDITA un valore finito e l'altro riceve il
+veleno, e QUALE DEI DUE dipende dall'orientamento `(i,j)` dell'arco genitore.**
+### ⚠ **E' la stessa famiglia del difetto `(iii)` di `DIVISIONE-AUTOCONSISTENTE`:**
+un'orientazione arbitraria che **decide** qualcosa.
+
+### ✅ **E NON VA SOPRAVVALUTATA, e lo dico subito invece di lasciarlo scoprire:** il
+simulatore **dichiara il veleno INERTE** per queste grandezze —
+`memoria_hebbiana_moto` riscrive `_sin2_vir` **intera** nello stesso passo, **dopo**
+`mitosi`, e `step` riscrive `_dt_e_ultimo`. ### **E' un'asimmetria della CONTABILITA' su
+un valore sovrascritto prima di essere letto, non della dinamica.**
+
+### 📌 **PERCHE' ALLORA APRIRLA:** perche' quell'inerzia e' una proprieta'
+**dell'ORDINE DELLE VOCI di un passo**, non della legge. ### **Se un giorno una voce
+leggesse `_sin2_vir` fra `mitosi` e `memoria_hebbiana_moto`, l'orientamento entrerebbe
+nella dinamica senza che nessuno abbia toccato la nascita.**
+
+### ✅ **IL CRITERIO DI CHIUSURA:** si chiude quando si e' detto, **per ciascuna** delle
+tre grandezze, se il valore finito del primo arco figlio sia **VOLUTO** *(eredita dal
+genitore `a`, come le altre 12 grandezze asimmetriche)* oppure un **RESIDUO dello shift
+di `keep`** — cioe' se il veleno **non l'abbia coperto**.
+### ⛔ **LA DIFFERENZA E' SOSTANZIALE:** nel primo caso e' una regola di nascita come le
+altre, e la tratta la **legge**; nel secondo e' un **BUCO DEL VELENO**, e ### **il veleno
+esiste proprio per non avere buchi.**
+
+### 📌 **E COME SI DECIDE, con un sospetto preciso:** si legge `_avvelena_derivate` e si
+guarda se avvelena **tutti** gli archi nuovi o **solo quelli con indice `>=` la lunghezza
+vecchia**. ### **Quella seconda forma e' ESATTAMENTE la trappola dello shift di `keep`
+che ha fatto sbagliare lo strumento di questa misura** *(gli archi nuovi NON sono quelli
+con indice `>= A`, perche' `keep` ne toglie uno)*. ### **Se il veleno usasse quella
+regola, il buco sarebbe della stessa forma.** **NON MISURATO, e non lo suppongo.**
