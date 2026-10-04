@@ -12,4 +12,8 @@
 # `H-FILE` gira PRIMO, e di proposito: se la lista dei file e' sbagliata, il messaggio va
 # riscritto comunque, e saperlo subito evita di sistemare la relazione per poi rifare tutto.
 python csv/_hook_file_cambiati.py --controlla "$1" || exit 1
+# `H-NON-TRACCIATI` (decisione di Luca, 2026-10-04): blocca se esistono file non
+# tracciati e NON ignorati sotto csv/ o doc/. Via d'uscita a INIZIO RIGA:
+#   [SENZA-NON-TRACCIATI: <motivo>]
+python csv/_hook_non_tracciati.py --controlla "$1" || exit 1
 exec python csv/_hook_relazione.py --controlla "$1"

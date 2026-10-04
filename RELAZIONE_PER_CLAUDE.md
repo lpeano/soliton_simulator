@@ -4414,3 +4414,36 @@ blob in testa a ogni uscita**.
 `INVENTARIO-SIGILLI-SENZA-COMMIT`.
 
 ---
+
+## **`COMMIT 6`: `H-NON-TRACCIATI` — l'undicesimo hook, e BLOCCA**
+
+Dopo i `COMMIT 3`, `4` e `5` i non tracciati sotto `csv/` e `doc/` sono **zero**: il presidio
+**nasce in un repo pulito**. ### **Ed è per questo che il collaudo ha la lista INIETTATA: il
+caso «ce n'è uno» non si può provare sul repo di oggi.**
+
+**Sei casi, tutti passano:** lista vuota passa · un non tracciato **blocca** · tre bloccano ·
+uscita a inizio riga passa · ### **uscita CITATA e rientrata BLOCCA** · uscita a inizio riga
+con lista vuota passa.
+
+### 📌 **DUE SCELTE CHE VENGONO DA DIFETTI MIEI, non dalla documentazione.**
+
+### ① **La via d'uscita vale solo a INIZIO RIGA**, perché su `H-FILE` cercarla in *tutto* il
+testo fece passare **senza controllo** proprio il commit che introduceva quel presidio — il
+messaggio la **citava** nella tabella del collaudo. ### **Un presidio che si disarma parlando
+di sé non è un presidio.**
+
+### ② **I percorsi si leggono a BYTE con `-z`**, perché con l'uscita testuale su Windows si
+infila un `\r` in ogni riga e il confronto col prefisso **sbaglia in silenzio** — misurato
+ieri sul controllo del `.gitignore`, dove diceva `12` e il vero era `0`.
+
+### ⚠ **E IL COLLAUDO NON LEGGE GIT, di proposito:** la prima batteria di `H-FILE` dipendeva
+dall'indice, e **un'attesa scadde fra due esecuzioni** perché nel frattempo avevo messo un
+file nell'indice. ### **Un collaudo che dipende dallo stato del mondo misura il mondo, non lo
+strumento.**
+
+### ✅ **E NON HO AGGIUNTO UNA VOCE D'INVENTARIO, con il perché: nessun hook ne ha una**, e il
+par.6 punto ① copre `csv/_test_fork/` e `csv/_seal_fork/` — i hook stanno nella **radice** di
+`csv/`, fuori da quel perimetro. ### **Inventare una voce avrebbe creato una convenzione
+nuova senza che nessuno l'abbia decisa.**
+
+---
