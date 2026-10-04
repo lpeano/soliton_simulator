@@ -66,6 +66,28 @@ history e referti**, che non contengono regole.
 > ### **Il tetto di 400 righe protegge la LUNGHEZZA; la ② protegge la LEGGIBILITA', che il
 > tetto da solo non da'.**
 
+## DOV'E' IL TESTO DI PRIMA DEL RIORDINO
+
+> ### 📌 **IL `CLAUDE.md` DI PRIMA DEL RIORDINO DEL 2026-10-04 STA IN
+> ### `da79cc1:CLAUDE.md`** *(391 righe)*. Si legge con
+> `git show da79cc1:CLAUDE.md`, e ### **si va a prenderlo quando una frase di oggi sembra
+> aver perso una sfumatura:** meta' del testo uscito e' **riassunto**, non trasferito.
+
+**E «riassunto» ha due numeri, non uno, perche' i due modi di contare dicono cose
+diverse** *(misurati il 2026-10-04 sulle 282 righe di contenuto di `da79cc1`)*:
+
+| come si conta | ritrovato oggi *(in `CLAUDE.md` + `doc/REGOLE/`)* | che cosa significa |
+|---|---|---|
+| **per RIGA, verbatim** | **86 su 282, il 30%** | il numero **sovrastima la perdita**: riavvolgere un paragrafo cambia **ogni** riga anche a contenuto identico |
+| **per PAROLA, con molteplicita'** | **2914 su 2951, il 99%** | il contenuto **c'e'**: e' **riformulato**, non perso |
+
+### ⚠ **E LE `37` OCCORRENZE DAVVERO USCITE SONO UN ELENCO DI ESEMPIO, non una
+### regola.** La riga 99 di `da79cc1` diceva *«le leggi fisiche da non violare (SU(2)
+nell'algebra di Lie, **Verlet solo sul second'ordine**, niente medie globali …)»*; oggi
+il par.3 **rimanda a `doc/REGISTRO_FISICA.md`**, dove *Verlet* compare **15** volte e
+*second'ordine* **4**. ### **L'esempio e' uscito dal flusso di lavoro ed e' rimasto dove
+la legge e' autorevole — che era lo scopo del riordino, non un effetto collaterale.**
+
 ### ✅ **E IL PRESIDIO C'E':** `python csv/_struttura_regole.py` verifica che **l'insieme delle
 regole si conservi** e che **il grafo sia un albero di profondita' 1**. Si rigira a ogni
 modifica di `CLAUDE.md`.
