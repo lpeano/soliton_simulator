@@ -1,0 +1,74 @@
+[TIMBRO] _scena_video.py  sha1-BYTE 5544f3b9  committato e pulito
+================================================================================================================
+SCENA DEL VIDEO senza rendering -- 50 frame x 6 passi = 300 passi di motore
+================================================================================================================
+[calore] calcio termico SCALARE isotropo forzato (vettoriale spento per confronto)
+[spinore-corretto] MASTER: orologio proprio de Broglie + spinore primario complesso _psi_spinor (evaluate-then-commit, |psi|=1)
+[coes-adim] COESIONE ADIMENSIONALE: i tre addendi normalizzati sulla densita' LOCALE dell'arco (I_med sparisce, era una media globale), e lo spostamento e' passo_causale * tanh(...) * filtro_portata, con |F| <= 1 PER COSTRUZIONE. Sostituisce il clip tanh(stress)*d0.
+[chi-coop] COOPERAZIONE: chi_basc SCRIVE perc_geom (geometria, letta dalla catena della torsione) e lo spinore scrive perc_chi (carica, letta dal campo B, dalla mitosi e da Schwinger). L'anello carica -> campo -> spinore -> carica e' quello NORMALE della fisica, sfasato di un passo.
+[deparam-orologio] orologio RELAZIONALE: freq = coerenza d'arco intensiva (no |Psi|^2 estensiva, no rho_c globale, no volume)
+[campo-spinoriale] FASI 1-3: campo Psi EMESSO dallo spinore (n,2) in calcola_psi; densita'/gravita' native (rho_spin, nb); FORZE = OVERLAP SPINORIALE <psi_i|psi_j> (coppia in step). Mitosi/coppie = Fase 4, ancora scalari. Riduzione-al-limite: spinore (e^{i phi},0) -> tutto scalare (sigilli 0.000e+00)
+[fork-su2] STRATO 0: la forza trasporta con N_ij/2 = cos(chi/2) U_ij in SU(2) (MESCOLA a,b -> non-abeliano). Peso = overlap di spin |<n_i|n_j>|, non una manopola. Allineati -> N/2=I -> riduzione ESATTA allo scalare; antipodali -> N=0. Bloch presi da _psi_spinor (gli stessi stati trasportati: connessione di Berry DI quegli stati).
+[fork-su2-mem] STRATO 1: la connessione N nasce dai Bloch RITARDATI n(t-tau), tau = d/cs (tempo-luce d'arco, zero parametri nuovi). ROMPE IL TEOREMA DI INERZIA dello Strato 0: psi(t) non e' autovettore di n(t-tau).sigma, quindi <psi_i|N|psi_j> != 2<psi_i|psi_j> e la FORZA CAMBIA. Rilassamento ESATTO alpha=1-exp(-dt/tau) con slerp geodetico sulla sfera (primo ordine, mai Verlet). A riposo o per tau->0 il ritardato torna al corrente -> riduzione allo Strato 0. Il TRASPORTO resta sugli spinori correnti.
+[step2-orologio] STEP 2: omega_clk *= (cs/CS_M)^2 = OROLOGIO DI COMPTON (omega = m c^2/hbar, e nel modello c e' cs). Aggancia il tempo proprio dell'OROLOGIO a quello della METRICA, che erano scollegati. Zero parametri: a cs=CS_M il fattore e' 1 esatto. cs dal passo precedente (il settore metrico gira dopo). Tocca la MAGNITUDINE, mai il segno. NB: agisce sulla FASE (U(1)), NON sul Bloch: non organizza lo spin, e non deve.
+[rumore-colorato] TAGLIO SPETTRALE: il calcio del vuoto non e' piu' bianco ma correlato su tau_c = LAM/CS_M = 0.4 (= 40 passi), con un processo di Ornstein-Uhlenbeck sul rumore stesso e `dt_n = DT*r` (non DT: e' un processo LOCALE). `amp` INVARIATA. MOTIVO: il rumore bianco discreto inietta a tutte le frequenze fino a Nyquist, incluse quelle che il passo non risolve; in natura non esiste. ZERO coefficienti: LAM e CS_M sono gia' nel sistema. ATTENZIONE: la ricorsione PRESERVA LA VARIANZA, quindi NON abbassa theta - se lo muove lo fa SALIRE (<=5%). Si cabla perche' il rumore bianco e' SBAGLIATO, non perche' risolva l'aliasing (doc/PREDIZIONE_taglio_spettrale.md).
+[tau-luce] Il rilassamento di omega_s usa tau = d_nodo/cs_nodo (`_tempo_luce_nodo`), lo STESSO tau dello Strato 1, al posto di TAU_A*max(dens/dens_rif, 0.05). MOTIVO: inerzia = T^2 = (d/cs)^2, quindi il tempo che COSTRUISCE l'inerzia e quello che la RILASSA devono essere lo stesso; oggi sono due diversi nella stessa equazione. Zero coefficienti, zero floor nuovi. NB: |omega|_eq va come sqrt(tau), quindi theta cala di ~13x: UN ORDINE DI GRANDEZZA, NON la soluzione dell'aliasing.
+[spin-feedback] ON di default (2026-09-18): prerequisiti presenti, il ramo GIRA. Acceso PER DECISIONE e su basi di FORMA (cricchetto curato 1.112 -> 6.5e-16; G6: fase CUCITA, cambi di segno 0.0035 contro nullo 0.50; sigillo 12/12), NON perche' una misura lo abbia mostrato migliore: l'A/B a quattro semi NON ha mostrato effetto.
+[verlet] integratore metrico Velocity-Verlet (2 ordine) attivo
+[olon-part] la partizione tangenziale usa curl + twist coerente (verso -> conversione)
+[pav-com] pavimento comovente attivo: d0 >= median(d0)-MAD(d0) invece di 0.05 assoluto
+[zeta-vir] freno anisotropo attivo: beta *= cos2 della viriale (dissipa radiale, libera tangenziale)
+[chi-basc] basculamento chirale attivo: perc_chi vira secondo la torsione locale vs PHI_CRIT (2pi)
+[chi-core] frame-dragging guidato dalla chiralità emergente del core locale
+[cs-dinamico] velocità metrica locale cs_eff(rho) con profilo tanh e CFL dinamico
+
+  FLAG ATTIVI, letti dal MODULO dopo `_applica_flag` (P6: dai dati, non dal comando):
+    CAMPO_SPINORIALE     True
+    SPINORE_VIVO         True
+    SPINORE_CORRETTO     True
+    CHI_CORE             True
+    CS_DINAMICO          True
+    TAU_LUCE             True
+    CHI_BASC             True
+    CHI_COOP             True
+    SCALA_MIN            False
+    COES_ADIM            True
+    FORK_SU2             True
+    FORK_SU2_MEM         True
+    STEP2_OROLOGIO       True
+    SPIN_FEEDBACK        True
+    CALORE_VETTORIALE    False
+    PLAST_DIN            True
+    VERLET               True
+    TAU_LOC              1.0
+  PASSI_PER_FRAME = 6   DT = 0.01   TAU_A = 50.0   N_c(collasso) = 621
+  ⚠ `--tau-luce` ha il SIGILLO FALLITO (CLAUDE.md par.0): ramo NON CERTIFICATO.
+  ⚠ `--chi-basc` RISCRIVE `perc_chi` a ogni passo: non e' un'etichetta di lignaggio.
+
+  scena avviata: n = 2391 nodi alla semina (N_c*0.8 per massa, 3 masse)
+
+  SEME EFFETTIVO (letto da Rete.__init__): 42    BLOB: 26fa354d0a42e9147a0143409e9b0805e234d79f
+  SERIE ATTIVA: uno snapshot ogni 10 frame = 60 passi di motore -> csv/_test_fork/_run_K\scena.pkl.gz
+  frame 1     n=2487    archi=526092   coer_l=0.5844   dil= +0.931%   [22.9 s, 22.893 s/frame]
+  frame 5     n=2543    archi=526157   coer_l=0.3474   dil= +7.373%   [106.3 s, 21.256 s/frame]
+  SNAPSHOT passo 60      n=2584       36.28 MB in   1.4 s -> scena_000060.pkl.gz
+  frame 10    n=2584    archi=526208   coer_l=0.36     dil=+16.090%   [210.8 s, 21.079 s/frame]
+  frame 15    n=2602    archi=526231   coer_l=0.2768   dil=+21.099%   [306.1 s, 20.409 s/frame]
+  SNAPSHOT passo 120     n=2611       36.37 MB in   1.7 s -> scena_000120.pkl.gz
+  frame 20    n=2611    archi=526243   coer_l=0.2566   dil=+23.462%   [402.4 s, 20.121 s/frame]
+  frame 25    n=2618    archi=526251   coer_l=0.3146   dil=+23.238%   [522.3 s, 20.893 s/frame]
+  SNAPSHOT passo 180     n=2627       36.40 MB in   2.2 s -> scena_000180.pkl.gz
+  frame 30    n=2627    archi=526262   coer_l=0.3102   dil=+22.318%   [624.3 s, 20.809 s/frame]
+  frame 35    n=2638    archi=526276   coer_l=0.3634   dil=+21.982%   [722.6 s, 20.647 s/frame]
+  SNAPSHOT passo 240     n=2654       36.22 MB in   1.4 s -> scena_000240.pkl.gz
+  frame 40    n=2654    archi=526298   coer_l=0.3314   dil=+20.840%   [826.3 s, 20.657 s/frame]
+  frame 45    n=2662    archi=526306   coer_l=0.3613   dil=+18.756%   [930.2 s, 20.672 s/frame]
+  SNAPSHOT passo 300     n=2682       36.35 MB in   1.5 s -> scena_000300.pkl.gz
+  frame 50    n=2682    archi=526333   coer_l=0.3504   dil=+16.600%   [1035.6 s, 20.711 s/frame]
+
+  TOTALE 1035.6 s per 50 frame (dal 1 al 50) -> 20.711 s/frame medio
+  n da 2487 a 2682;  costo per frame da 22.893 a 20.667 s  (x0.90)
+  ⚠ IL COSTO CRESCE COL NUMERO DI NODI: un'estrapolazione LINEARE SOTTOSTIMA.
+  progresso CSV -> csv/_test_fork/_run_K/prog.csv
+  ARCHIVIO: 5 snapshot scritti, 0 saltati, 0 FALLITI   (0.18 GB in totale)
+================================================================================================================

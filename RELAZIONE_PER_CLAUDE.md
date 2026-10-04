@@ -4384,3 +4384,33 @@ presenta: tutti e 61 si committano.**
 nominati e introvabili.
 
 ---
+
+## **`COMMIT 5`: i 15 non citati sono TUTTI uscite di strumenti committati — e il `[TIMBRO]` lo prova**
+
+**Il ramo «altrimenti va in `.gitignore`» NON SCATTA: zero file ignorati.** Tutti e 15 sono
+uscite di strumenti committati, e l'attribuzione **non è un'ipotesi**:
+
+| | chi li scrive | come l'ho saputo |
+|---|---|---|
+| `_sig_mem_moto_tutto/cap_*.json` *(5)* | `_sigillo_mem_moto_tutto.py:414` | `"cap_%s.json" % nome` |
+| `_sig_osservabile_p1/seme_*.json` *(4)* | `_sigillo_osservabile_p1.py:190` | `"seme_%d.json" % s` |
+| i **6** `*_log.txt` | `_peq_dentro_1126.py`, `_rigiocata_1200_1230.py`, `_somma_per_scrittore_d0.py`, `_letture_validazione.py`, `_scena_video.py` ×2 | ### **il `[TIMBRO]` di `_presidio` nella PRIMA RIGA del file**, che nomina lo strumento **e il blob** |
+
+### 📌 **E QUESTA È LA COSA CHE VALE PIÙ DEL COMMIT: i 6 log non sono SCRITTI da nessuno
+strumento — sono CATTURE DI STDOUT redirette a mano**, e nessun `grep` sul codice le avrebbe
+attribuite. ### **Li ha resi attribuibili il presidio dell'ENCODING** *(par.7)*, che esiste per
+una ragione completamente diversa — lo `stdout` di Windows in `cp1252` — e che **timbra il
+blob in testa a ogni uscita**.
+
+> ### **Un presidio nato per una cosa ha reso decidibile un'altra, due settimane dopo.** È
+> l'argomento più concreto che ho visto a favore del «timbrare tutto»: ### **la provenienza
+> serve quando non te la ricordi più, cioè esattamente quando non puoi più ricostruirla.**
+
+### ⛔ **E DUE OMISSIONI DELL'INVENTARIO TROVATE STRADA FACENDO:**
+### **`_sigillo_mem_moto_tutto.py` non aveva NESSUNA voce** — la **seconda** dopo
+`_sigillo_cura5_a13nascita.py`, e la voce nasce ora col blob `26a1172b`; e
+### **`_scena_video.py` non ha una riga propria**, compare solo dentro due righe «driver»
+— la citazione sta dove lo strumento è documentato, e la riga mancante va col debito
+`INVENTARIO-SIGILLI-SENZA-COMMIT`.
+
+---

@@ -1,0 +1,63 @@
+{
+ "semi": {
+  "14": {
+   "archi": 468985,
+   "centri": {
+    "massa_0": 1127,
+    "massa_1": 5786,
+    "massa_2": 4039
+   },
+   "controlli": {
+    "massa_0|massa_1": {
+     "bersaglio": 10.720378623167338,
+     "distanza": 10.722879171412401,
+     "entro_toll": true,
+     "nodo_a": 8562,
+     "nodo_b": 7433,
+     "scarto_relativo": 0.0002332518591889327
+    },
+    "massa_0|massa_2": {
+     "bersaglio": 10.751834001879082,
+     "distanza": 10.751212729017759,
+     "entro_toll": true,
+     "nodo_a": 362,
+     "nodo_b": 7008,
+     "scarto_relativo": 5.778296625626285e-05
+    },
+    "massa_1|massa_2": {
+     "bersaglio": 11.116220632824524,
+     "distanza": 11.115389660602938,
+     "entro_toll": true,
+     "nodo_a": 7748,
+     "nodo_b": 7497,
+     "scarto_relativo": 7.47531241986897e-05
+    }
+   },
+   "coppie": {
+    "massa_0|massa_1": {
+     "centro_centro": 10.720378623167338,
+     "insieme_insieme": 2.7871965948120563,
+     "stessa_componente": true
+    },
+    "massa_0|massa_2": {
+     "centro_centro": 10.751834001879082,
+     "insieme_insieme": 3.0038349410884435,
+     "stessa_componente": true
+    },
+    "massa_1|massa_2": {
+     "centro_centro": 11.116220632824524,
+     "insieme_insieme": 2.9755592069048866,
+     "stessa_componente": true
+    }
+   },
+   "n": 12771,
+   "pari_medoide": {
+    "massa_0": 1,
+    "massa_1": 1,
+    "massa_2": 1
+   },
+   "r_regione": 4.096438164464869
+  }
+ },
+ "sep": 6.1158
+}
