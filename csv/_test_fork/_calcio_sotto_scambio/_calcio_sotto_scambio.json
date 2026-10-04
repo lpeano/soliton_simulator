@@ -1,0 +1,1384 @@
+{
+ "blob_sim": "0f060670567ac00a5b596918e58a3d0d6c644261",
+ "divisione": {
+  "api": {
+   "anche_sul_modulo": [],
+   "della_rete_verificate": 13,
+   "globali_verificate": 8
+  },
+  "archi_iniziali": 471564,
+  "archi_nuovi": {
+   "accoppiati": 2,
+   "base": 2,
+   "scambio": 2,
+   "spaiati_base": 0,
+   "spaiati_scambio": 0
+  },
+  "archi_nuovi_attesi_se_sola_divisione": 2,
+  "archi_selezionati": 1,
+  "archi_sul_taglio_wphi": 0,
+  "asimmetriche": [
+   {
+    "dove": "genitori",
+    "elementi_diversi": 2,
+    "grandezza": "phi",
+    "scarto_max": 0.29464904702372374
+   },
+   {
+    "dove": "figlio",
+    "elementi_diversi": 1,
+    "grandezza": "_cs_nodo_prev",
+    "scarto_max": 0.48368981866336647
+   },
+   {
+    "dove": "figlio",
+    "elementi_diversi": 3,
+    "grandezza": "_nb",
+    "scarto_max": 1.3529422496023795
+   },
+   {
+    "dove": "figlio",
+    "elementi_diversi": 3,
+    "grandezza": "_nb_prec",
+    "scarto_max": 1.3529422496023795
+   },
+   {
+    "dove": "figlio",
+    "elementi_diversi": 3,
+    "grandezza": "_nb_ret",
+    "scarto_max": 1.1836795361892525
+   },
+   {
+    "dove": "figlio",
+    "elementi_diversi": 1,
+    "grandezza": "_psi_prec",
+    "scarto_max": 1.0
+   },
+   {
+    "dove": "figlio",
+    "elementi_diversi": 2,
+    "grandezza": "_psi_spin_prec",
+    "scarto_max": 2.0
+   },
+   {
+    "dove": "figlio",
+    "elementi_diversi": 2,
+    "grandezza": "_psi_spinor",
+    "scarto_max": 2.0
+   },
+   {
+    "dove": "figlio",
+    "elementi_diversi": 2,
+    "grandezza": "_spinor_lift",
+    "scarto_max": 2.0
+   },
+   {
+    "dove": "figlio",
+    "elementi_diversi": 3,
+    "grandezza": "mem_mot",
+    "scarto_max": 0.13567945307173573
+   },
+   {
+    "dove": "figlio",
+    "elementi_diversi": 3,
+    "grandezza": "omega_s",
+    "scarto_max": 1.1118975825579116
+   },
+   {
+    "dove": "figlio",
+    "elementi_diversi": 1,
+    "grandezza": "phi",
+    "scarto_max": 8.881784197001252e-16
+   },
+   {
+    "dove": "figlio",
+    "elementi_diversi": 1,
+    "grandezza": "phi0",
+    "scarto_max": 8.881784197001252e-16
+   },
+   {
+    "dove": "figlio",
+    "elementi_diversi": 1,
+    "grandezza": "phi_s",
+    "scarto_max": 0.7138764189505765
+   },
+   {
+    "dove": "figlio",
+    "elementi_diversi": 2,
+    "grandezza": "psi_spin",
+    "scarto_max": 2.0
+   },
+   {
+    "dove": "figlio",
+    "elementi_diversi": 1,
+    "grandezza": "rho_spin",
+    "scarto_max": 11.423875786623903
+   },
+   {
+    "dove": "archi nuovi",
+    "elementi_diversi": 2,
+    "grandezza": "_sin2_vir",
+    "scarto_max": 0.0
+   },
+   {
+    "dove": "archi nuovi",
+    "elementi_diversi": 2,
+    "grandezza": "twp",
+    "scarto_max": 6.194080176785947
+   }
+  ],
+  "atteso": 42,
+  "chi_non_nulle": 2,
+  "chi_uguali": 1,
+  "confronti": [
+   {
+    "attesa_per_costruzione": false,
+    "dove": "genitori",
+    "elementi_diversi": 0,
+    "grandezza": "_chi_core_nodi",
+    "scarto_max": 0.0,
+    "simmetrica": true
+   },
+   {
+    "attesa_per_costruzione": false,
+    "dove": "genitori",
+    "elementi_diversi": 0,
+    "grandezza": "_chi_core_raggio",
+    "scarto_max": 0.0,
+    "simmetrica": true
+   },
+   {
+    "attesa_per_costruzione": false,
+    "dove": "genitori",
+    "elementi_diversi": 0,
+    "grandezza": "_chi_core_rho0",
+    "scarto_max": 0.0,
+    "simmetrica": true
+   },
+   {
+    "attesa_per_costruzione": false,
+    "dove": "genitori",
+    "elementi_diversi": 0,
+    "grandezza": "_chi_geom_nodi",
+    "scarto_max": 0.0,
+    "simmetrica": true
+   },
+   {
+    "attesa_per_costruzione": false,
+    "dove": "genitori",
+    "elementi_diversi": 0,
+    "grandezza": "_cs_nodo_prev",
+    "scarto_max": 0.0,
+    "simmetrica": true
+   },
+   {
+    "attesa_per_costruzione": false,
+    "dove": "genitori",
+    "elementi_diversi": 0,
+    "grandezza": "_deg",
+    "scarto_max": 0.0,
+    "simmetrica": true
+   },
+   {
+    "attesa_per_costruzione": false,
+    "dove": "genitori",
+    "elementi_diversi": 0,
+    "grandezza": "_fatt_cs_ultimo",
+    "scarto_max": 0.0,
+    "simmetrica": true
+   },
+   {
+    "attesa_per_costruzione": false,
+    "dove": "genitori",
+    "elementi_diversi": 0,
+    "grandezza": "_nb",
+    "scarto_max": 0.0,
+    "simmetrica": true
+   },
+   {
+    "attesa_per_costruzione": false,
+    "dove": "genitori",
+    "elementi_diversi": 0,
+    "grandezza": "_nb_prec",
+    "scarto_max": 0.0,
+    "simmetrica": true
+   },
+   {
+    "attesa_per_costruzione": false,
+    "dove": "genitori",
+    "elementi_diversi": 0,
+    "grandezza": "_nb_ret",
+    "scarto_max": 0.0,
+    "simmetrica": true
+   },
+   {
+    "attesa_per_costruzione": false,
+    "dove": "genitori",
+    "elementi_diversi": 0,
+    "grandezza": "_psi_prec",
+    "scarto_max": 0.0,
+    "simmetrica": true
+   },
+   {
+    "attesa_per_costruzione": false,
+    "dove": "genitori",
+    "elementi_diversi": 0,
+    "grandezza": "_psi_spin_prec",
+    "scarto_max": 0.0,
+    "simmetrica": true
+   },
+   {
+    "attesa_per_costruzione": false,
+    "dove": "genitori",
+    "elementi_diversi": 0,
+    "grandezza": "_psi_spinor",
+    "scarto_max": 0.0,
+    "simmetrica": true
+   },
+   {
+    "attesa_per_costruzione": false,
+    "dove": "genitori",
+    "elementi_diversi": 0,
+    "grandezza": "_r_corrente",
+    "scarto_max": 0.0,
+    "simmetrica": true
+   },
+   {
+    "attesa_per_costruzione": false,
+    "dove": "genitori",
+    "elementi_diversi": 0,
+    "grandezza": "_spinor_lift",
+    "scarto_max": 0.0,
+    "simmetrica": true
+   },
+   {
+    "attesa_per_costruzione": false,
+    "dove": "genitori",
+    "elementi_diversi": 0,
+    "grandezza": "eta",
+    "scarto_max": 0.0,
+    "simmetrica": true
+   },
+   {
+    "attesa_per_costruzione": false,
+    "dove": "genitori",
+    "elementi_diversi": 0,
+    "grandezza": "mem_mot",
+    "scarto_max": 0.0,
+    "simmetrica": true
+   },
+   {
+    "attesa_per_costruzione": false,
+    "dove": "genitori",
+    "elementi_diversi": 0,
+    "grandezza": "omega_s",
+    "scarto_max": 0.0,
+    "simmetrica": true
+   },
+   {
+    "attesa_per_costruzione": false,
+    "dove": "genitori",
+    "elementi_diversi": 0,
+    "grandezza": "perc_chi",
+    "scarto_max": 0.0,
+    "simmetrica": true
+   },
+   {
+    "attesa_per_costruzione": false,
+    "dove": "genitori",
+    "elementi_diversi": 0,
+    "grandezza": "perc_geom",
+    "scarto_max": 0.0,
+    "simmetrica": true
+   },
+   {
+    "attesa_per_costruzione": false,
+    "dove": "genitori",
+    "elementi_diversi": 0,
+    "grandezza": "perc_tw",
+    "scarto_max": 0.0,
+    "simmetrica": true
+   },
+   {
+    "attesa_per_costruzione": false,
+    "dove": "genitori",
+    "elementi_diversi": 2,
+    "grandezza": "phi",
+    "scarto_max": 0.29464904702372374,
+    "simmetrica": false
+   },
+   {
+    "attesa_per_costruzione": false,
+    "dove": "genitori",
+    "elementi_diversi": 0,
+    "grandezza": "phi0",
+    "scarto_max": 0.0,
+    "simmetrica": true
+   },
+   {
+    "attesa_per_costruzione": false,
+    "dove": "genitori",
+    "elementi_diversi": 0,
+    "grandezza": "phi_s",
+    "scarto_max": 0.0,
+    "simmetrica": true
+   },
+   {
+    "attesa_per_costruzione": false,
+    "dove": "genitori",
+    "elementi_diversi": 0,
+    "grandezza": "phivel",
+    "scarto_max": 0.0,
+    "simmetrica": true
+   },
+   {
+    "attesa_per_costruzione": false,
+    "dove": "genitori",
+    "elementi_diversi": 0,
+    "grandezza": "pos",
+    "scarto_max": 0.0,
+    "simmetrica": true
+   },
+   {
+    "attesa_per_costruzione": false,
+    "dove": "genitori",
+    "elementi_diversi": 0,
+    "grandezza": "psi",
+    "scarto_max": 0.0,
+    "simmetrica": true
+   },
+   {
+    "attesa_per_costruzione": false,
+    "dove": "genitori",
+    "elementi_diversi": 0,
+    "grandezza": "psi_spin",
+    "scarto_max": 0.0,
+    "simmetrica": true
+   },
+   {
+    "attesa_per_costruzione": false,
+    "dove": "genitori",
+    "elementi_diversi": 0,
+    "grandezza": "rho_spin",
+    "scarto_max": 0.0,
+    "simmetrica": true
+   },
+   {
+    "attesa_per_costruzione": false,
+    "dove": "figlio",
+    "elementi_diversi": 0,
+    "grandezza": "_chi_core_nodi",
+    "scarto_max": 0.0,
+    "simmetrica": true
+   },
+   {
+    "attesa_per_costruzione": false,
+    "dove": "figlio",
+    "elementi_diversi": 0,
+    "grandezza": "_chi_core_raggio",
+    "scarto_max": 0.0,
+    "simmetrica": true
+   },
+   {
+    "attesa_per_costruzione": false,
+    "dove": "figlio",
+    "elementi_diversi": 0,
+    "grandezza": "_chi_core_rho0",
+    "scarto_max": 0.0,
+    "simmetrica": true
+   },
+   {
+    "attesa_per_costruzione": false,
+    "dove": "figlio",
+    "elementi_diversi": 0,
+    "grandezza": "_chi_geom_nodi",
+    "scarto_max": 0.0,
+    "simmetrica": true
+   },
+   {
+    "attesa_per_costruzione": false,
+    "dove": "figlio",
+    "elementi_diversi": 1,
+    "grandezza": "_cs_nodo_prev",
+    "scarto_max": 0.48368981866336647,
+    "simmetrica": false
+   },
+   {
+    "attesa_per_costruzione": false,
+    "dove": "figlio",
+    "elementi_diversi": 0,
+    "grandezza": "_deg",
+    "scarto_max": 0.0,
+    "simmetrica": true
+   },
+   {
+    "attesa_per_costruzione": false,
+    "dove": "figlio",
+    "elementi_diversi": 0,
+    "grandezza": "_fatt_cs_ultimo",
+    "scarto_max": 0.0,
+    "simmetrica": true
+   },
+   {
+    "attesa_per_costruzione": false,
+    "dove": "figlio",
+    "elementi_diversi": 3,
+    "grandezza": "_nb",
+    "scarto_max": 1.3529422496023795,
+    "simmetrica": false
+   },
+   {
+    "attesa_per_costruzione": false,
+    "dove": "figlio",
+    "elementi_diversi": 3,
+    "grandezza": "_nb_prec",
+    "scarto_max": 1.3529422496023795,
+    "simmetrica": false
+   },
+   {
+    "attesa_per_costruzione": false,
+    "dove": "figlio",
+    "elementi_diversi": 3,
+    "grandezza": "_nb_ret",
+    "scarto_max": 1.1836795361892525,
+    "simmetrica": false
+   },
+   {
+    "attesa_per_costruzione": false,
+    "dove": "figlio",
+    "elementi_diversi": 1,
+    "grandezza": "_psi_prec",
+    "scarto_max": 1.0,
+    "simmetrica": false
+   },
+   {
+    "attesa_per_costruzione": false,
+    "dove": "figlio",
+    "elementi_diversi": 2,
+    "grandezza": "_psi_spin_prec",
+    "scarto_max": 2.0,
+    "simmetrica": false
+   },
+   {
+    "attesa_per_costruzione": false,
+    "dove": "figlio",
+    "elementi_diversi": 2,
+    "grandezza": "_psi_spinor",
+    "scarto_max": 2.0,
+    "simmetrica": false
+   },
+   {
+    "attesa_per_costruzione": false,
+    "dove": "figlio",
+    "elementi_diversi": 0,
+    "grandezza": "_r_corrente",
+    "scarto_max": 0.0,
+    "simmetrica": true
+   },
+   {
+    "attesa_per_costruzione": false,
+    "dove": "figlio",
+    "elementi_diversi": 2,
+    "grandezza": "_spinor_lift",
+    "scarto_max": 2.0,
+    "simmetrica": false
+   },
+   {
+    "attesa_per_costruzione": false,
+    "dove": "figlio",
+    "elementi_diversi": 0,
+    "grandezza": "eta",
+    "scarto_max": 0.0,
+    "simmetrica": true
+   },
+   {
+    "attesa_per_costruzione": false,
+    "dove": "figlio",
+    "elementi_diversi": 3,
+    "grandezza": "mem_mot",
+    "scarto_max": 0.13567945307173573,
+    "simmetrica": false
+   },
+   {
+    "attesa_per_costruzione": false,
+    "dove": "figlio",
+    "elementi_diversi": 3,
+    "grandezza": "omega_s",
+    "scarto_max": 1.1118975825579116,
+    "simmetrica": false
+   },
+   {
+    "attesa_per_costruzione": false,
+    "dove": "figlio",
+    "elementi_diversi": 0,
+    "grandezza": "perc_chi",
+    "scarto_max": 0.0,
+    "simmetrica": true
+   },
+   {
+    "attesa_per_costruzione": false,
+    "dove": "figlio",
+    "elementi_diversi": 0,
+    "grandezza": "perc_geom",
+    "scarto_max": 0.0,
+    "simmetrica": true
+   },
+   {
+    "attesa_per_costruzione": false,
+    "dove": "figlio",
+    "elementi_diversi": 0,
+    "grandezza": "perc_tw",
+    "scarto_max": 0.0,
+    "simmetrica": true
+   },
+   {
+    "attesa_per_costruzione": false,
+    "dove": "figlio",
+    "elementi_diversi": 1,
+    "grandezza": "phi",
+    "scarto_max": 8.881784197001252e-16,
+    "simmetrica": false
+   },
+   {
+    "attesa_per_costruzione": false,
+    "dove": "figlio",
+    "elementi_diversi": 1,
+    "grandezza": "phi0",
+    "scarto_max": 8.881784197001252e-16,
+    "simmetrica": false
+   },
+   {
+    "attesa_per_costruzione": false,
+    "dove": "figlio",
+    "elementi_diversi": 1,
+    "grandezza": "phi_s",
+    "scarto_max": 0.7138764189505765,
+    "simmetrica": false
+   },
+   {
+    "attesa_per_costruzione": false,
+    "dove": "figlio",
+    "elementi_diversi": 0,
+    "grandezza": "phivel",
+    "scarto_max": 0.0,
+    "simmetrica": true
+   },
+   {
+    "attesa_per_costruzione": false,
+    "dove": "figlio",
+    "elementi_diversi": 0,
+    "grandezza": "pos",
+    "scarto_max": 0.0,
+    "simmetrica": true
+   },
+   {
+    "attesa_per_costruzione": false,
+    "dove": "figlio",
+    "elementi_diversi": 0,
+    "grandezza": "psi",
+    "scarto_max": 0.0,
+    "simmetrica": true
+   },
+   {
+    "attesa_per_costruzione": false,
+    "dove": "figlio",
+    "elementi_diversi": 2,
+    "grandezza": "psi_spin",
+    "scarto_max": 2.0,
+    "simmetrica": false
+   },
+   {
+    "attesa_per_costruzione": false,
+    "dove": "figlio",
+    "elementi_diversi": 1,
+    "grandezza": "rho_spin",
+    "scarto_max": 11.423875786623903,
+    "simmetrica": false
+   },
+   {
+    "attesa_per_costruzione": false,
+    "dove": "archi nuovi",
+    "elementi_diversi": 0,
+    "grandezza": "_dt_e_ultimo",
+    "scarto_max": 0.0,
+    "simmetrica": true
+   },
+   {
+    "attesa_per_costruzione": false,
+    "dove": "archi nuovi",
+    "elementi_diversi": 0,
+    "grandezza": "_rep",
+    "scarto_max": 0.0,
+    "simmetrica": true
+   },
+   {
+    "attesa_per_costruzione": false,
+    "dove": "archi nuovi",
+    "elementi_diversi": 2,
+    "grandezza": "_sin2_vir",
+    "scarto_max": 0.0,
+    "simmetrica": false
+   },
+   {
+    "attesa_per_costruzione": false,
+    "dove": "archi nuovi",
+    "elementi_diversi": 0,
+    "grandezza": "d",
+    "scarto_max": 0.0,
+    "simmetrica": true
+   },
+   {
+    "attesa_per_costruzione": false,
+    "dove": "archi nuovi",
+    "elementi_diversi": 0,
+    "grandezza": "d0",
+    "scarto_max": 0.0,
+    "simmetrica": true
+   },
+   {
+    "attesa_per_costruzione": true,
+    "dove": "archi nuovi",
+    "elementi_diversi": 2,
+    "grandezza": "i",
+    "scarto_max": 2.0,
+    "simmetrica": false
+   },
+   {
+    "attesa_per_costruzione": true,
+    "dove": "archi nuovi",
+    "elementi_diversi": 2,
+    "grandezza": "j",
+    "scarto_max": 2.0,
+    "simmetrica": false
+   },
+   {
+    "attesa_per_costruzione": false,
+    "dove": "archi nuovi",
+    "elementi_diversi": 0,
+    "grandezza": "peq",
+    "scarto_max": 0.0,
+    "simmetrica": true
+   },
+   {
+    "attesa_per_costruzione": false,
+    "dove": "archi nuovi",
+    "elementi_diversi": 0,
+    "grandezza": "tw",
+    "scarto_max": 0.0,
+    "simmetrica": true
+   },
+   {
+    "attesa_per_costruzione": false,
+    "dove": "archi nuovi",
+    "elementi_diversi": 2,
+    "grandezza": "twp",
+    "scarto_max": 6.194080176785947,
+    "simmetrica": false
+   },
+   {
+    "attesa_per_costruzione": false,
+    "dove": "archi nuovi",
+    "elementi_diversi": 0,
+    "grandezza": "vd",
+    "scarto_max": 0.0,
+    "simmetrica": true
+   }
+  ],
+  "figli": [
+   12804
+  ],
+  "frazione": 0.5,
+  "generatore_identico": true,
+  "genitori": [
+   {
+    "a": 3415,
+    "arco": 388255,
+    "b": 3430,
+    "chi_a": 1.0,
+    "chi_b": 1.0,
+    "d": 1.7060733894882905,
+    "delta_phi_atteso_a": 0.2946490470237237,
+    "delta_phi_atteso_b": 0.2946490470237237,
+    "mod": 0.6895289615268166,
+    "sciolta": 1.2209123431214153,
+    "tw": -7.671218495654678
+   }
+  ],
+  "n_asimmetriche": 18,
+  "n_dopo_base": 12805,
+  "n_dopo_scambio": 12805,
+  "n_iniziale": 12802,
+  "n_tautologiche": 2,
+  "nati_base": 1,
+  "nati_durante_avanzamento": {
+   "mitosi": 2,
+   "n_alla_semina": 12802,
+   "n_ora": 12804,
+   "schwinger": 0
+  },
+  "nati_scambio": 1,
+  "nmasse": 3,
+  "orientamento_conservato": 0,
+  "passo_trovato": 50,
+  "per_arco_valido": true,
+  "phi_misurato_vs_atteso": {
+   "delta_a_atteso_max": 0.2946490470237237,
+   "delta_a_misurato_max": 0.2946490470237233,
+   "delta_b_atteso_max": 0.2946490470237237,
+   "delta_b_misurato_max": 0.2946490470237233,
+   "scarto_relativo_a": [
+    -3.885780586188048e-16
+   ]
+  },
+  "scambio": {
+   "archi_invertiti": 1,
+   "grandezze_cambiate_di_segno": [
+    "tw"
+   ]
+  },
+  "selezione_invariante": true,
+  "sep": 6.1158,
+  "stato": "fatto",
+  "tautologiche": [
+   {
+    "dove": "archi nuovi",
+    "grandezza": "i",
+    "scarto_max": 2.0
+   },
+   {
+    "dove": "archi nuovi",
+    "grandezza": "j",
+    "scarto_max": 2.0
+   }
+  ]
+ },
+ "piattaforma": {
+  "macchina": "AMD64",
+  "numpy": "2.3.0",
+  "python": "3.13.2",
+  "sistema": "Windows 11"
+ },
+ "schwinger": {
+  "archi_nuovi": {
+   "accoppiati": 4,
+   "base": 4,
+   "scambio": 4
+  },
+  "asimmetriche": [
+   {
+    "dove": "genitori",
+    "grandezza": "phi",
+    "scarto_max": 0.31277594703414247
+   },
+   {
+    "dove": "nati",
+    "grandezza": "_cs_nodo_prev",
+    "scarto_max": 0.7889216244563196
+   },
+   {
+    "dove": "nati",
+    "grandezza": "_nb",
+    "scarto_max": 0.7515462459835626
+   },
+   {
+    "dove": "nati",
+    "grandezza": "_nb_prec",
+    "scarto_max": 0.7515462459835626
+   },
+   {
+    "dove": "nati",
+    "grandezza": "_nb_ret",
+    "scarto_max": 0.8132812794940825
+   },
+   {
+    "dove": "nati",
+    "grandezza": "_psi_prec",
+    "scarto_max": 2.0
+   },
+   {
+    "dove": "nati",
+    "grandezza": "_psi_spin_prec",
+    "scarto_max": 4.0
+   },
+   {
+    "dove": "nati",
+    "grandezza": "_psi_spinor",
+    "scarto_max": 4.0
+   },
+   {
+    "dove": "nati",
+    "grandezza": "_spinor_lift",
+    "scarto_max": 4.0
+   },
+   {
+    "dove": "nati",
+    "grandezza": "mem_mot",
+    "scarto_max": 0.14449468262240672
+   },
+   {
+    "dove": "nati",
+    "grandezza": "omega_s",
+    "scarto_max": 0.5757629672634033
+   },
+   {
+    "dove": "nati",
+    "grandezza": "phi",
+    "scarto_max": 4.440892098500626e-16
+   },
+   {
+    "dove": "nati",
+    "grandezza": "phi0",
+    "scarto_max": 4.440892098500626e-16
+   },
+   {
+    "dove": "nati",
+    "grandezza": "phi_s",
+    "scarto_max": 0.05428119041004287
+   },
+   {
+    "dove": "nati",
+    "grandezza": "psi_spin",
+    "scarto_max": 4.0
+   },
+   {
+    "dove": "nati",
+    "grandezza": "rho_spin",
+    "scarto_max": 3.5853031929128676
+   },
+   {
+    "dove": "archi nuovi",
+    "grandezza": "_dt_e_ultimo",
+    "scarto_max": 0.0
+   },
+   {
+    "dove": "archi nuovi",
+    "grandezza": "_sin2_vir",
+    "scarto_max": 0.0
+   },
+   {
+    "dove": "archi nuovi",
+    "grandezza": "i",
+    "scarto_max": 4.0
+   },
+   {
+    "dove": "archi nuovi",
+    "grandezza": "j",
+    "scarto_max": 4.0
+   },
+   {
+    "dove": "archi nuovi",
+    "grandezza": "twp",
+    "scarto_max": 6.7044494252606714
+   }
+  ],
+  "atteso": 70,
+  "confronti": [
+   {
+    "dove": "genitori",
+    "elementi_diversi": 0,
+    "grandezza": "_chi_core_nodi",
+    "scarto_max": 0.0,
+    "simmetrica": true
+   },
+   {
+    "dove": "genitori",
+    "elementi_diversi": 0,
+    "grandezza": "_chi_core_raggio",
+    "scarto_max": 0.0,
+    "simmetrica": true
+   },
+   {
+    "dove": "genitori",
+    "elementi_diversi": 0,
+    "grandezza": "_chi_core_rho0",
+    "scarto_max": 0.0,
+    "simmetrica": true
+   },
+   {
+    "dove": "genitori",
+    "elementi_diversi": 0,
+    "grandezza": "_chi_geom_nodi",
+    "scarto_max": 0.0,
+    "simmetrica": true
+   },
+   {
+    "dove": "genitori",
+    "elementi_diversi": 0,
+    "grandezza": "_cs_nodo_prev",
+    "scarto_max": 0.0,
+    "simmetrica": true
+   },
+   {
+    "dove": "genitori",
+    "elementi_diversi": 0,
+    "grandezza": "_deg",
+    "scarto_max": 0.0,
+    "simmetrica": true
+   },
+   {
+    "dove": "genitori",
+    "elementi_diversi": 0,
+    "grandezza": "_fatt_cs_ultimo",
+    "scarto_max": 0.0,
+    "simmetrica": true
+   },
+   {
+    "dove": "genitori",
+    "elementi_diversi": 0,
+    "grandezza": "_nb",
+    "scarto_max": 0.0,
+    "simmetrica": true
+   },
+   {
+    "dove": "genitori",
+    "elementi_diversi": 0,
+    "grandezza": "_nb_prec",
+    "scarto_max": 0.0,
+    "simmetrica": true
+   },
+   {
+    "dove": "genitori",
+    "elementi_diversi": 0,
+    "grandezza": "_nb_ret",
+    "scarto_max": 0.0,
+    "simmetrica": true
+   },
+   {
+    "dove": "genitori",
+    "elementi_diversi": 0,
+    "grandezza": "_psi_prec",
+    "scarto_max": 0.0,
+    "simmetrica": true
+   },
+   {
+    "dove": "genitori",
+    "elementi_diversi": 0,
+    "grandezza": "_psi_spin_prec",
+    "scarto_max": 0.0,
+    "simmetrica": true
+   },
+   {
+    "dove": "genitori",
+    "elementi_diversi": 0,
+    "grandezza": "_psi_spinor",
+    "scarto_max": 0.0,
+    "simmetrica": true
+   },
+   {
+    "dove": "genitori",
+    "elementi_diversi": 0,
+    "grandezza": "_r_corrente",
+    "scarto_max": 0.0,
+    "simmetrica": true
+   },
+   {
+    "dove": "genitori",
+    "elementi_diversi": 0,
+    "grandezza": "_spinor_lift",
+    "scarto_max": 0.0,
+    "simmetrica": true
+   },
+   {
+    "dove": "genitori",
+    "elementi_diversi": 0,
+    "grandezza": "eta",
+    "scarto_max": 0.0,
+    "simmetrica": true
+   },
+   {
+    "dove": "genitori",
+    "elementi_diversi": 0,
+    "grandezza": "mem_mot",
+    "scarto_max": 0.0,
+    "simmetrica": true
+   },
+   {
+    "dove": "genitori",
+    "elementi_diversi": 0,
+    "grandezza": "omega_s",
+    "scarto_max": 0.0,
+    "simmetrica": true
+   },
+   {
+    "dove": "genitori",
+    "elementi_diversi": 0,
+    "grandezza": "perc_chi",
+    "scarto_max": 0.0,
+    "simmetrica": true
+   },
+   {
+    "dove": "genitori",
+    "elementi_diversi": 0,
+    "grandezza": "perc_geom",
+    "scarto_max": 0.0,
+    "simmetrica": true
+   },
+   {
+    "dove": "genitori",
+    "elementi_diversi": 0,
+    "grandezza": "perc_tw",
+    "scarto_max": 0.0,
+    "simmetrica": true
+   },
+   {
+    "dove": "genitori",
+    "elementi_diversi": 2,
+    "grandezza": "phi",
+    "scarto_max": 0.31277594703414247,
+    "simmetrica": false
+   },
+   {
+    "dove": "genitori",
+    "elementi_diversi": 0,
+    "grandezza": "phi0",
+    "scarto_max": 0.0,
+    "simmetrica": true
+   },
+   {
+    "dove": "genitori",
+    "elementi_diversi": 0,
+    "grandezza": "phi_s",
+    "scarto_max": 0.0,
+    "simmetrica": true
+   },
+   {
+    "dove": "genitori",
+    "elementi_diversi": 0,
+    "grandezza": "phivel",
+    "scarto_max": 0.0,
+    "simmetrica": true
+   },
+   {
+    "dove": "genitori",
+    "elementi_diversi": 0,
+    "grandezza": "pos",
+    "scarto_max": 0.0,
+    "simmetrica": true
+   },
+   {
+    "dove": "genitori",
+    "elementi_diversi": 0,
+    "grandezza": "psi",
+    "scarto_max": 0.0,
+    "simmetrica": true
+   },
+   {
+    "dove": "genitori",
+    "elementi_diversi": 0,
+    "grandezza": "psi_spin",
+    "scarto_max": 0.0,
+    "simmetrica": true
+   },
+   {
+    "dove": "genitori",
+    "elementi_diversi": 0,
+    "grandezza": "rho_spin",
+    "scarto_max": 0.0,
+    "simmetrica": true
+   },
+   {
+    "dove": "nati",
+    "elementi_diversi": 0,
+    "grandezza": "_chi_core_nodi",
+    "scarto_max": 0.0,
+    "simmetrica": true
+   },
+   {
+    "dove": "nati",
+    "elementi_diversi": 0,
+    "grandezza": "_chi_core_raggio",
+    "scarto_max": 0.0,
+    "simmetrica": true
+   },
+   {
+    "dove": "nati",
+    "elementi_diversi": 0,
+    "grandezza": "_chi_core_rho0",
+    "scarto_max": 0.0,
+    "simmetrica": true
+   },
+   {
+    "dove": "nati",
+    "elementi_diversi": 0,
+    "grandezza": "_chi_geom_nodi",
+    "scarto_max": 0.0,
+    "simmetrica": true
+   },
+   {
+    "dove": "nati",
+    "elementi_diversi": 2,
+    "grandezza": "_cs_nodo_prev",
+    "scarto_max": 0.7889216244563196,
+    "simmetrica": false
+   },
+   {
+    "dove": "nati",
+    "elementi_diversi": 0,
+    "grandezza": "_deg",
+    "scarto_max": 0.0,
+    "simmetrica": true
+   },
+   {
+    "dove": "nati",
+    "elementi_diversi": 0,
+    "grandezza": "_fatt_cs_ultimo",
+    "scarto_max": 0.0,
+    "simmetrica": true
+   },
+   {
+    "dove": "nati",
+    "elementi_diversi": 6,
+    "grandezza": "_nb",
+    "scarto_max": 0.7515462459835626,
+    "simmetrica": false
+   },
+   {
+    "dove": "nati",
+    "elementi_diversi": 6,
+    "grandezza": "_nb_prec",
+    "scarto_max": 0.7515462459835626,
+    "simmetrica": false
+   },
+   {
+    "dove": "nati",
+    "elementi_diversi": 6,
+    "grandezza": "_nb_ret",
+    "scarto_max": 0.8132812794940825,
+    "simmetrica": false
+   },
+   {
+    "dove": "nati",
+    "elementi_diversi": 2,
+    "grandezza": "_psi_prec",
+    "scarto_max": 2.0,
+    "simmetrica": false
+   },
+   {
+    "dove": "nati",
+    "elementi_diversi": 4,
+    "grandezza": "_psi_spin_prec",
+    "scarto_max": 4.0,
+    "simmetrica": false
+   },
+   {
+    "dove": "nati",
+    "elementi_diversi": 4,
+    "grandezza": "_psi_spinor",
+    "scarto_max": 4.0,
+    "simmetrica": false
+   },
+   {
+    "dove": "nati",
+    "elementi_diversi": 0,
+    "grandezza": "_r_corrente",
+    "scarto_max": 0.0,
+    "simmetrica": true
+   },
+   {
+    "dove": "nati",
+    "elementi_diversi": 4,
+    "grandezza": "_spinor_lift",
+    "scarto_max": 4.0,
+    "simmetrica": false
+   },
+   {
+    "dove": "nati",
+    "elementi_diversi": 0,
+    "grandezza": "eta",
+    "scarto_max": 0.0,
+    "simmetrica": true
+   },
+   {
+    "dove": "nati",
+    "elementi_diversi": 3,
+    "grandezza": "mem_mot",
+    "scarto_max": 0.14449468262240672,
+    "simmetrica": false
+   },
+   {
+    "dove": "nati",
+    "elementi_diversi": 6,
+    "grandezza": "omega_s",
+    "scarto_max": 0.5757629672634033,
+    "simmetrica": false
+   },
+   {
+    "dove": "nati",
+    "elementi_diversi": 0,
+    "grandezza": "perc_chi",
+    "scarto_max": 0.0,
+    "simmetrica": true
+   },
+   {
+    "dove": "nati",
+    "elementi_diversi": 0,
+    "grandezza": "perc_geom",
+    "scarto_max": 0.0,
+    "simmetrica": true
+   },
+   {
+    "dove": "nati",
+    "elementi_diversi": 0,
+    "grandezza": "perc_tw",
+    "scarto_max": 0.0,
+    "simmetrica": true
+   },
+   {
+    "dove": "nati",
+    "elementi_diversi": 1,
+    "grandezza": "phi",
+    "scarto_max": 4.440892098500626e-16,
+    "simmetrica": false
+   },
+   {
+    "dove": "nati",
+    "elementi_diversi": 1,
+    "grandezza": "phi0",
+    "scarto_max": 4.440892098500626e-16,
+    "simmetrica": false
+   },
+   {
+    "dove": "nati",
+    "elementi_diversi": 1,
+    "grandezza": "phi_s",
+    "scarto_max": 0.05428119041004287,
+    "simmetrica": false
+   },
+   {
+    "dove": "nati",
+    "elementi_diversi": 0,
+    "grandezza": "phivel",
+    "scarto_max": 0.0,
+    "simmetrica": true
+   },
+   {
+    "dove": "nati",
+    "elementi_diversi": 0,
+    "grandezza": "pos",
+    "scarto_max": 0.0,
+    "simmetrica": true
+   },
+   {
+    "dove": "nati",
+    "elementi_diversi": 0,
+    "grandezza": "psi",
+    "scarto_max": 0.0,
+    "simmetrica": true
+   },
+   {
+    "dove": "nati",
+    "elementi_diversi": 4,
+    "grandezza": "psi_spin",
+    "scarto_max": 4.0,
+    "simmetrica": false
+   },
+   {
+    "dove": "nati",
+    "elementi_diversi": 2,
+    "grandezza": "rho_spin",
+    "scarto_max": 3.5853031929128676,
+    "simmetrica": false
+   },
+   {
+    "dove": "archi nuovi",
+    "elementi_diversi": 2,
+    "grandezza": "_dt_e_ultimo",
+    "scarto_max": 0.0,
+    "simmetrica": false
+   },
+   {
+    "dove": "archi nuovi",
+    "elementi_diversi": 0,
+    "grandezza": "_rep",
+    "scarto_max": 0.0,
+    "simmetrica": true
+   },
+   {
+    "dove": "archi nuovi",
+    "elementi_diversi": 2,
+    "grandezza": "_sin2_vir",
+    "scarto_max": 0.0,
+    "simmetrica": false
+   },
+   {
+    "dove": "archi nuovi",
+    "elementi_diversi": 0,
+    "grandezza": "d",
+    "scarto_max": 0.0,
+    "simmetrica": true
+   },
+   {
+    "dove": "archi nuovi",
+    "elementi_diversi": 0,
+    "grandezza": "d0",
+    "scarto_max": 0.0,
+    "simmetrica": true
+   },
+   {
+    "dove": "archi nuovi",
+    "elementi_diversi": 4,
+    "grandezza": "i",
+    "scarto_max": 4.0,
+    "simmetrica": false
+   },
+   {
+    "dove": "archi nuovi",
+    "elementi_diversi": 4,
+    "grandezza": "j",
+    "scarto_max": 4.0,
+    "simmetrica": false
+   },
+   {
+    "dove": "archi nuovi",
+    "elementi_diversi": 0,
+    "grandezza": "peq",
+    "scarto_max": 0.0,
+    "simmetrica": true
+   },
+   {
+    "dove": "archi nuovi",
+    "elementi_diversi": 0,
+    "grandezza": "tw",
+    "scarto_max": 0.0,
+    "simmetrica": true
+   },
+   {
+    "dove": "archi nuovi",
+    "elementi_diversi": 4,
+    "grandezza": "twp",
+    "scarto_max": 6.7044494252606714,
+    "simmetrica": false
+   },
+   {
+    "dove": "archi nuovi",
+    "elementi_diversi": 0,
+    "grandezza": "vd",
+    "scarto_max": 0.0,
+    "simmetrica": true
+   }
+  ],
+  "da_passo": 50,
+  "generatore_identico": true,
+  "n_asimmetriche": 21,
+  "nati_schwinger": 1,
+  "passo_trovato": 60,
+  "scambio": {
+   "archi_invertiti": 1,
+   "grandezze_cambiate_di_segno": [
+    "tw"
+   ]
+  },
+  "schwinger_base": 1,
+  "schwinger_scambio": 1,
+  "selezione_invariante": true,
+  "stato": "fatto"
+ },
+ "timbro_strumento": {
+  "blob_head": "fb27064eef3dfb6627e9a404e754b0928febc8a3",
+  "dirty": false,
+  "path": "C:\\Users\\lpeano\\soliton_simulator\\csv\\_test_fork\\_calcio_sotto_scambio.py",
+  "repo": "C:/Users/lpeano/soliton_simulator",
+  "sha1": "ac999d9aa6813111dc6f674b97c13621a84e79fc",
+  "tracciato": true
+ }
+}

@@ -1,0 +1,213 @@
+========================================================================================================
+IL CALCIO DELLA MITOSI SOTTO LO SCAMBIO a<->b, ISOLATO
+========================================================================================================
+
+### NON E' UN SIGILLO: il mandato dice SOLO MISURE, e il punto 3 dice NIENTE CURE.
+
+  python     3.13.2
+  numpy      2.3.0
+  sistema    Windows 11
+  macchina   AMD64
+  simulatore 0f060670  (sha1 dei byte grezzi, NON toccato)
+
+========================================================================================================
+PARTE 1 -- LA DIVISIONE
+========================================================================================================
+  scena: nmasse=3 sep=6.1158  ->  n = 12802, archi = 471564
+  FRAZ_NASCITA = 0.5   MITOSI_DIR = 0.0   ANTIFASE_ADD = False   REGIME = 'deterministico'
+  KICK_TW = 0.35   PHI_CRIT = 6.283185307179586   COPPIA_MIT = 1.0
+  nomi verificati PRIMA dei passi: 8 globali + 13 su `Rete`
+  nascite GIA' avvenute avanzando: mitosi 2, schwinger 0   (n 12802 -> 12804)
+  ### QUINDI LO STATO MISURATO NON E' <<PRIMA DELLA PRIMA DIVISIONE>>: e'
+      uno stato con una divisione PENDENTE, che e' l'intenzione del
+      mandato. `passo_pieno` esegue il passo INTERO, mitosi() compresa.
+  primo passo con CANDIDATI: 50   (atteso dai fatti: 42)   archi selezionati: 1
+  ### IL PASSO NON E' QUELLO ATTESO, e lo dico invece di adattarmi: il
+      mandato dice <<il passo PRIMA della prima divisione (il 42)>>, cioe'
+      LO STATO DA CUI mitosi() divide. Questo e' quello stato, trovato
+      sondando. Se il numero differisce, differisce la SCENA o l'ISTANTE.
+
+  I GENITORI, arco per arco -- e `chi_a`/`chi_b` SI RIPORTANO, perche' se
+  fossero uguali l'asimmetria misurata sarebbe solo quella del SEGNO
+  arco   a       b                tw     chi_a     chi_b  d_phi atteso
+  388255 3415    3430    -7.6712e+00     1.000     1.000  2.946490e-01
+
+  chiralita' NON nulle fra i 2 genitori: 2
+  archi con chi_a == chi_b: 1 su 1  (dove sono uguali resta solo il SEGNO)
+  archi sul TAGLIO di _wphi (|D| = dphi/2 = 6.283185): 0
+
+  stato del generatore identico nelle due copie: True
+  la SELEZIONE e' invariante allo scambio: True   (1 archi contro 1)
+  mitosi(): nati BASE = 1, nati SCAMBIO = 1
+  figli nati: 1  (indici [12804])
+  archi nuovi: 2 in BASE, 2 in SCAMBIO, 2 ACCOPPIATI per estremi, 0+0 spaiati
+  attesi se SOLA divisione: 2 (= 2 * archi selezionati)
+  archi accoppiati con lo STESSO orientamento (i==i): 0 su 2
+
+--------------------------------------------------------------------------------------------------------
+  grandezza                    dove       esito          scarto max    diversi
+--------------------------------------------------------------------------------------------------------
+  _chi_core_nodi               genitori   SIMMETRICA    0.00000e+00          0
+  _chi_core_raggio             genitori   SIMMETRICA    0.00000e+00          0
+  _chi_core_rho0               genitori   SIMMETRICA    0.00000e+00          0
+  _chi_geom_nodi               genitori   SIMMETRICA    0.00000e+00          0
+  _cs_nodo_prev                genitori   SIMMETRICA    0.00000e+00          0
+  _deg                         genitori   SIMMETRICA    0.00000e+00          0
+  _fatt_cs_ultimo              genitori   SIMMETRICA    0.00000e+00          0
+  _nb                          genitori   SIMMETRICA    0.00000e+00          0
+  _nb_prec                     genitori   SIMMETRICA    0.00000e+00          0
+  _nb_ret                      genitori   SIMMETRICA    0.00000e+00          0
+  _psi_prec                    genitori   SIMMETRICA    0.00000e+00          0
+  _psi_spin_prec               genitori   SIMMETRICA    0.00000e+00          0
+  _psi_spinor                  genitori   SIMMETRICA    0.00000e+00          0
+  _r_corrente                  genitori   SIMMETRICA    0.00000e+00          0
+  _spinor_lift                 genitori   SIMMETRICA    0.00000e+00          0
+  eta                          genitori   SIMMETRICA    0.00000e+00          0
+  mem_mot                      genitori   SIMMETRICA    0.00000e+00          0
+  omega_s                      genitori   SIMMETRICA    0.00000e+00          0
+  perc_chi                     genitori   SIMMETRICA    0.00000e+00          0
+  perc_geom                    genitori   SIMMETRICA    0.00000e+00          0
+  perc_tw                      genitori   SIMMETRICA    0.00000e+00          0
+  phi                          genitori   ASIMMETRICA   2.94649e-01          2
+  phi0                         genitori   SIMMETRICA    0.00000e+00          0
+  phi_s                        genitori   SIMMETRICA    0.00000e+00          0
+  phivel                       genitori   SIMMETRICA    0.00000e+00          0
+  pos                          genitori   SIMMETRICA    0.00000e+00          0
+  psi                          genitori   SIMMETRICA    0.00000e+00          0
+  psi_spin                     genitori   SIMMETRICA    0.00000e+00          0
+  rho_spin                     genitori   SIMMETRICA    0.00000e+00          0
+  _chi_core_nodi               figlio     SIMMETRICA    0.00000e+00          0
+  _chi_core_raggio             figlio     SIMMETRICA    0.00000e+00          0
+  _chi_core_rho0               figlio     SIMMETRICA    0.00000e+00          0
+  _chi_geom_nodi               figlio     SIMMETRICA    0.00000e+00          0
+  _cs_nodo_prev                figlio     ASIMMETRICA   4.83690e-01          1
+  _deg                         figlio     SIMMETRICA    0.00000e+00          0
+  _fatt_cs_ultimo              figlio     SIMMETRICA    0.00000e+00          0
+  _nb                          figlio     ASIMMETRICA   1.35294e+00          3
+  _nb_prec                     figlio     ASIMMETRICA   1.35294e+00          3
+  _nb_ret                      figlio     ASIMMETRICA   1.18368e+00          3
+  _psi_prec                    figlio     ASIMMETRICA   1.00000e+00          1
+  _psi_spin_prec               figlio     ASIMMETRICA   2.00000e+00          2
+  _psi_spinor                  figlio     ASIMMETRICA   2.00000e+00          2
+  _r_corrente                  figlio     SIMMETRICA    0.00000e+00          0
+  _spinor_lift                 figlio     ASIMMETRICA   2.00000e+00          2
+  eta                          figlio     SIMMETRICA    0.00000e+00          0
+  mem_mot                      figlio     ASIMMETRICA   1.35679e-01          3
+  omega_s                      figlio     ASIMMETRICA   1.11190e+00          3
+  perc_chi                     figlio     SIMMETRICA    0.00000e+00          0
+  perc_geom                    figlio     SIMMETRICA    0.00000e+00          0
+  perc_tw                      figlio     SIMMETRICA    0.00000e+00          0
+  phi                          figlio     ASIMMETRICA   8.88178e-16          1
+  phi0                         figlio     ASIMMETRICA   8.88178e-16          1
+  phi_s                        figlio     ASIMMETRICA   7.13876e-01          1
+  phivel                       figlio     SIMMETRICA    0.00000e+00          0
+  pos                          figlio     SIMMETRICA    0.00000e+00          0
+  psi                          figlio     SIMMETRICA    0.00000e+00          0
+  psi_spin                     figlio     ASIMMETRICA   2.00000e+00          2
+  rho_spin                     figlio     ASIMMETRICA   1.14239e+01          1
+  _dt_e_ultimo                 archi nuov SIMMETRICA    0.00000e+00          0
+  _rep                         archi nuov SIMMETRICA    0.00000e+00          0
+  _sin2_vir                    archi nuov ASIMMETRICA   0.00000e+00          2
+  d                            archi nuov SIMMETRICA    0.00000e+00          0
+  d0                           archi nuov SIMMETRICA    0.00000e+00          0
+  i                            archi nuov ASIM(ATTESA)  2.00000e+00          2
+  j                            archi nuov ASIM(ATTESA)  2.00000e+00          2
+  peq                          archi nuov SIMMETRICA    0.00000e+00          0
+  tw                           archi nuov SIMMETRICA    0.00000e+00          0
+  twp                          archi nuov ASIMMETRICA   6.19408e+00          2
+  vd                           archi nuov SIMMETRICA    0.00000e+00          0
+--------------------------------------------------------------------------------------------------------
+  ASIMMETRICHE: 18 su 69 grandezze confrontate
+  + 2 ASIM(ATTESA): asimmetriche PER COSTRUZIONE dello scambio, non per
+    fisica -- gli archi sono accoppiati per INSIEME degli estremi, quindi
+    sotto lo scambio `i` e `j` DEVONO differire. ### Le riporto marcate e
+    FUORI dal conto: tenerle dentro gonfierebbe il numero con una tautologia
+    del mio metodo; nasconderle sarebbe l'errore opposto.
+    le tautologiche: i(archi nuovi), j(archi nuovi)
+
+  LO SCARTO DI `phi` SUI GENITORI: misurato contro ATTESO dal conto
+                     misurato           atteso      mis - att
+  slot a      2.946490470e-01  2.946490470e-01      3.886e-16
+  slot b      2.946490470e-01  2.946490470e-01      3.886e-16
+
+========================================================================================================
+PARTE 2 -- LO SCHWINGER, con `aa` e `bb`
+========================================================================================================
+  primo evento SCHWINGER al passo 60   (atteso dal mandato: 70)   nati: 1
+  generatore identico: True   selezione invariante: True
+  nati Schwinger: BASE = 1, SCAMBIO = 1
+  archi nuovi: 4 / 4, accoppiati 4, spaiati 0+0
+
+  grandezza                    dove       esito          scarto max
+--------------------------------------------------------------------------------------------------------
+  _chi_core_nodi               genitori   SIMMETRICA    0.00000e+00
+  _chi_core_raggio             genitori   SIMMETRICA    0.00000e+00
+  _chi_core_rho0               genitori   SIMMETRICA    0.00000e+00
+  _chi_geom_nodi               genitori   SIMMETRICA    0.00000e+00
+  _cs_nodo_prev                genitori   SIMMETRICA    0.00000e+00
+  _deg                         genitori   SIMMETRICA    0.00000e+00
+  _fatt_cs_ultimo              genitori   SIMMETRICA    0.00000e+00
+  _nb                          genitori   SIMMETRICA    0.00000e+00
+  _nb_prec                     genitori   SIMMETRICA    0.00000e+00
+  _nb_ret                      genitori   SIMMETRICA    0.00000e+00
+  _psi_prec                    genitori   SIMMETRICA    0.00000e+00
+  _psi_spin_prec               genitori   SIMMETRICA    0.00000e+00
+  _psi_spinor                  genitori   SIMMETRICA    0.00000e+00
+  _r_corrente                  genitori   SIMMETRICA    0.00000e+00
+  _spinor_lift                 genitori   SIMMETRICA    0.00000e+00
+  eta                          genitori   SIMMETRICA    0.00000e+00
+  mem_mot                      genitori   SIMMETRICA    0.00000e+00
+  omega_s                      genitori   SIMMETRICA    0.00000e+00
+  perc_chi                     genitori   SIMMETRICA    0.00000e+00
+  perc_geom                    genitori   SIMMETRICA    0.00000e+00
+  perc_tw                      genitori   SIMMETRICA    0.00000e+00
+  phi                          genitori   ASIMMETRICA   3.12776e-01
+  phi0                         genitori   SIMMETRICA    0.00000e+00
+  phi_s                        genitori   SIMMETRICA    0.00000e+00
+  phivel                       genitori   SIMMETRICA    0.00000e+00
+  pos                          genitori   SIMMETRICA    0.00000e+00
+  psi                          genitori   SIMMETRICA    0.00000e+00
+  psi_spin                     genitori   SIMMETRICA    0.00000e+00
+  rho_spin                     genitori   SIMMETRICA    0.00000e+00
+  _chi_core_nodi               nati       SIMMETRICA    0.00000e+00
+  _chi_core_raggio             nati       SIMMETRICA    0.00000e+00
+  _chi_core_rho0               nati       SIMMETRICA    0.00000e+00
+  _chi_geom_nodi               nati       SIMMETRICA    0.00000e+00
+  _cs_nodo_prev                nati       ASIMMETRICA   7.88922e-01
+  _deg                         nati       SIMMETRICA    0.00000e+00
+  _fatt_cs_ultimo              nati       SIMMETRICA    0.00000e+00
+  _nb                          nati       ASIMMETRICA   7.51546e-01
+  _nb_prec                     nati       ASIMMETRICA   7.51546e-01
+  _nb_ret                      nati       ASIMMETRICA   8.13281e-01
+  _psi_prec                    nati       ASIMMETRICA   2.00000e+00
+  _psi_spin_prec               nati       ASIMMETRICA   4.00000e+00
+  _psi_spinor                  nati       ASIMMETRICA   4.00000e+00
+  _r_corrente                  nati       SIMMETRICA    0.00000e+00
+  _spinor_lift                 nati       ASIMMETRICA   4.00000e+00
+  eta                          nati       SIMMETRICA    0.00000e+00
+  mem_mot                      nati       ASIMMETRICA   1.44495e-01
+  omega_s                      nati       ASIMMETRICA   5.75763e-01
+  perc_chi                     nati       SIMMETRICA    0.00000e+00
+  perc_geom                    nati       SIMMETRICA    0.00000e+00
+  perc_tw                      nati       SIMMETRICA    0.00000e+00
+  phi                          nati       ASIMMETRICA   4.44089e-16
+  phi0                         nati       ASIMMETRICA   4.44089e-16
+  phi_s                        nati       ASIMMETRICA   5.42812e-02
+  phivel                       nati       SIMMETRICA    0.00000e+00
+  pos                          nati       SIMMETRICA    0.00000e+00
+  psi                          nati       SIMMETRICA    0.00000e+00
+  psi_spin                     nati       ASIMMETRICA   4.00000e+00
+  rho_spin                     nati       ASIMMETRICA   3.58530e+00
+  _dt_e_ultimo                 archi nuov ASIMMETRICA   0.00000e+00
+  _rep                         archi nuov SIMMETRICA    0.00000e+00
+  _sin2_vir                    archi nuov ASIMMETRICA   0.00000e+00
+  d                            archi nuov SIMMETRICA    0.00000e+00
+  d0                           archi nuov SIMMETRICA    0.00000e+00
+  i                            archi nuov ASIMMETRICA   4.00000e+00
+  j                            archi nuov ASIMMETRICA   4.00000e+00
+  peq                          archi nuov SIMMETRICA    0.00000e+00
+  tw                           archi nuov SIMMETRICA    0.00000e+00
+  twp                          archi nuov ASIMMETRICA   6.70445e+00
+  vd                           archi nuov SIMMETRICA    0.00000e+00
+--------------------------------------------------------------------------------------------------------
+  ASIMMETRICHE: 21 su 69
