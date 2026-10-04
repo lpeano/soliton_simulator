@@ -135,36 +135,27 @@ domanda aperta ha un **criterio di chiusura**. **ANCHE A META' RUN.**
 
 ## 6. LE TRE COSE CHE SI AGGIORNANO **NELLO STESSO COMMIT**
 
-> **① INVENTARIO · ② README · ③ FISICA.** Nello stesso commit del cambiamento, **mai «poi»**.
+> **① INVENTARIO · ② README · ③ FISICA.** Nello stesso commit del cambiamento, **mai
+> «poi»**.
 
-1. **INVENTARIO** — ogni file nuovo o modificato in `csv/_test_fork/` e `csv/_seal_fork/` aggiorna
-   la sua voce in **`doc/INVENTARIO_strumenti.md`** con **quattro** cose: il **file**, il
-   **COMANDO che lo rigira verbatim**, **cosa misura**, il **BLOB** su cui e' girato l'ultima volta
-   *(sha1 dei byte grezzi, **non** `git hash-object`)*.
-   **E il triage conta:** un **SIGILLO** ha la voce completa; una **SONDA usa-e-getta** una riga
-   che dice **dove sta il referto**; una sonda **senza** referto e' **un reperto**, non
-   un'omissione; un sigillo **non piu' ri-girabile AL SUO COMMIT** e' **un difetto nuovo**.
-   > ### 📌 **E <<AL SUO COMMIT>> NON E' UNA SFUMATURA** *(decisione di Luca, 2026-10-04)*:
-   > **un sigillo si rigira con `git checkout` del commit che ha sigillato**, e l'inventario
-   > ne registra **il commit e il blob**. ### **Un sigillo vecchio che non passa sul
-   > simulatore di OGGI NON e' un difetto** — **72 sigilli su 79 leggono il simulatore dal
-   > DISCO**, quindi senza questa precisazione **ogni cura trasformerebbe TUTTI i sigilli
-   > precedenti in difetti**. ### ⚠ **E' una REGOLA SCRITTA, non un presidio** (`A9`):
-   > nessun hook verifica che una voce di sigillo porti il suo commit.
-   **Lo stesso vale per ogni `.pkl`:** i `.pkl` non si committano (binari, ~18 MB), ma il sistema e'
-   deterministico e **il dato E' il comando che lo produce** — nome, riga di comando completa,
-   blob del simulatore, blob dello script, seme, passi, data.
-2. **README** — ogni flag o switch nuovo o modificato: **cosa fa**, **il DEFAULT**, e **se e'
-   byte-inerte a default spento**. **Il default conta piu' della descrizione:** quando un default si
-   ribalta, *«l'assenza del flag»* smette di significare OFF — e i rami di controllo diventano
-   **duplicati del ramo di prova**. **Quando si ribalta un default si cercano, nello stesso commit,
-   TUTTI i punti che ottenevano il vecchio comportamento per OMISSIONE.**
-3. **FISICA** — ogni legge nuova, curata o riqualificata si riflette in **`doc/REGISTRO_FISICA.md`**:
-   **la forma, la derivazione, il perche'** — non solo il registro dei difetti. *(Questa terza e'
-   **gia' automatica**: la impedisce il hook `H-REG-R`.)*
+1. **INVENTARIO** — ogni file nuovo o modificato in `csv/_test_fork/` e `csv/_seal_fork/`
+   aggiorna la sua voce in **`doc/INVENTARIO_strumenti.md`** con **quattro** cose: il **file**,
+   il **COMANDO che lo rigira verbatim**, **cosa misura**, il **BLOB** *(sha1 dei byte grezzi,*
+   ***non*** *`git hash-object`)*. Un sigillo **non piu' ri-girabile AL SUO COMMIT** e'
+   **un difetto nuovo** — e **un sigillo si rigira con `git checkout` del commit che ha
+   sigillato**. **I `.pkl` non si committano:** il dato **E' il comando che lo produce**.
+2. **README** — ogni flag nuovo o modificato: **cosa fa**, **il DEFAULT**, e **se e'
+   byte-inerte a default spento**. **Quando si ribalta un default si cercano, nello stesso
+   commit, TUTTI i punti che ottenevano il vecchio comportamento per OMISSIONE.**
+3. **FISICA** — ogni legge nuova, curata o riqualificata si riflette in
+   **`doc/REGISTRO_FISICA.md`**: **la forma, la derivazione, il perche'**. *(Questa e' **gia'
+   automatica**: la impedisce `H-REG-R`, che pretende la diff **dentro la sezione** della
+   legge toccata.)*
 
-**⚠ ①  e ② SONO REGOLE SCRITTE, NON PRESIDI: oggi non impediscono nulla** (`A9`). Il meccanismo
-che le renderebbe presidi e' proposto e **non cablato**: `doc/PROPOSTA_presidi_inventario.md`.
+### ⚠ **① e ② SONO REGOLE SCRITTE, NON PRESIDI: oggi non impediscono nulla** (`A9`).
+
+> **IL DETTAGLIO** — le due convenzioni di hash, il triage, il `.pkl.gz` che la regola non
+> copriva, e le tre omissioni trovate in due giorni: **`doc/REGOLE/par6.md`**.
 
 ---
 
@@ -172,28 +163,23 @@ che le renderebbe presidi e' proposto e **non cablato**: `doc/PROPOSTA_presidi_i
 
 `soliton_simulator.py` deve **sempre** stare in uno di questi due stati, mai fuori:
 
-1. **il blob sul disco coincide con quello COMMITTATO** nel branch su cui si lavora — *il caso
-   normale, e quello da preferire*; **oppure**
-2. **accanto ai dati resta una COPIA ESATTA** del file che ha girato, **committata insieme a quei dati**.
+1. **il blob sul disco coincide con quello COMMITTATO** — *il caso da preferire*; **oppure**
+2. **accanto ai dati resta una COPIA ESATTA** del file che ha girato, **committata insieme
+   a quei dati**.
 
-**Non e' una raccomandazione: e' CABLATA.** `csv/_test_fork/_osserva_vuoto.py` confronta il proprio
-blob con `git rev-parse HEAD:soliton_simulator.py` e, se differiscono, scrive da solo
-`<base>._sim.py` accanto all'output, col motivo in `<base>._sim.motivo.txt` — **su file e non solo
-a stdout**, perche' dentro un sigillo lo stdout e' **catturato**.
+### **Non e' una raccomandazione: e' CABLATA** *(`csv/_test_fork/_osserva_vuoto.py`)*.
 
-**Si confronta col BLOB a `HEAD`, mai con `git status`.** ⚠ E **gli stati sono TRE, non due:**
-esiste *stesso CONTENUTO, byte DIVERSI* (la trappola CRLF). **Per ripristinare i byte esatti non si
-usa `git checkout`:** si usa `git cat-file -p <commit>:<path>`, scritto **in binario**.
-*(Il `.gitattributes` c'e' dal 2026-09-16 e copre anche `.githooks/*` con `text eol=lf`: su Linux
-un hook coi `^M` muore con `bad interpreter`, e **un presidio che non parte e' peggio di uno assente**.)*
+**Si confronta col BLOB a `HEAD`, mai con `git status`:** ### ⚠ **gli stati sono TRE** —
+esiste *stesso CONTENUTO, byte DIVERSI* **(la trappola CRLF)**. Per ripristinare i byte
+esatti **non** si usa `git checkout`: si usa `git cat-file -p <commit>:<path>`, **in binario**.
 
-**PRESIDIO ENCODING — lo stdout di Windows e' `cp1252` e uccide gli script.** Ogni script di
-sigillo o di misura comincia con **`_presidio.avvia(__file__)`** (`csv/_presidio.py`), che
-riconfigura `stdout`/`stderr` in UTF-8 **e** timbra il blob dello script. `# -*- coding: utf-8 -*-`
-**NON BASTA**: riguarda il **sorgente**, non lo **stdout**. *(E' successo **sette** volte, la
-settima allo script che stava contando le precedenti.)*
+> ### 📌 **PRESIDIO ENCODING:** ogni script di sigillo o di misura comincia con
+> **`_presidio.avvia(__file__)`** *(`csv/_presidio.py`)*, che riconfigura `stdout` in UTF-8
+> **e timbra il blob**. ### **`# -*- coding: utf-8 -*-` NON BASTA:** riguarda il **sorgente**,
+> non lo **stdout**. ### **E' successo OTTO volte.**
 
----
+> **IL DETTAGLIO** — perche' su file e non a stdout, il `.gitattributes`, e la volta in cui
+> il timbro ha attribuito sei catture di stdout: **`doc/REGOLE/par7.md`**.
 
 ## 8. IL TASK HISTORY — **il ragionamento si scrive PRIMA, e si committa PRIMA**
 

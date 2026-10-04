@@ -77,8 +77,21 @@ def regole_di(testo):
             prima_cella = s.split("|")[1] if len(s.split("|")) > 1 else ""
             for m in ID.findall(prima_cella):
                 dichiarate.add(m)
-        if re.match(r"^[0-9]+\.", s):
-            punti.add(re.sub(r"\s+", " ", s)[:70])
+        # ### LA CHIAVE DI UN PUNTO E' <numero + ETICHETTA>, NON LA SUA PROSA.
+        #   ### ⛔ Misurato condensando il par.6: la riga `2. **README** -- ogni flag o
+        #   switch nuovo...` diventata `2. **README** -- ogni flag nuovo...` risultava
+        #   ### **una regola PERSA e una AGGIUNTA** -- la stessa regola, riscritta piu'
+        #   corta. ### **Un controllo che si accende quando accorcio una frase non
+        #   distingue una perdita da una riscrittura, ed e' esattamente cio' che il
+        #   riordino fa.**
+        #   ### ✅ **E NON LO INDEBOLISCE DOVE CONTA:** un punto CANCELLATO perde la sua
+        #   etichetta, e un punto RINUMERATO cambia chiave. ### **Si perde solo la
+        #   sensibilita' alla PROSA, che non e' la regola.**
+        m = re.match(r"^([0-9]+)\.\s*\*\*([^*]+)\*\*", s)
+        if m:
+            punti.add("%s. %s" % (m.group(1), m.group(2).strip()))
+        elif re.match(r"^[0-9]+\.", s):
+            punti.add(re.sub(r"\s+", " ", s)[:40])
     return {"titoli": titoli, "dichiarate": dichiarate, "punti": punti}
 
 
