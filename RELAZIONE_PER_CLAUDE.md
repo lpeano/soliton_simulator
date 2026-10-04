@@ -4269,3 +4269,33 @@ vera quando l'ho posta e ha avuto risposta. ### **Il riordino resta in coda dove
 l'ha messo — dopo il `COMMIT 7`.**
 
 ---
+
+## **`COMMIT 2`: i due `.pkl.gz` fuori dall'indice — e il comando che li rigenera è `git`**
+
+`git rm --cached` dei due snapshot *(36 MB ciascuno, **72 MB** in git)*. **Restano sul disco**,
+e la storia **non si riscrive**: erano tracciati da `4df94a7`.
+
+### ⛔ **MA LA REGOLA DEL PAR.6 CHIEDE «IL COMANDO CHE LI RIGENERA», E QUELLO DEL DRIVER NON
+ESISTE.** ### **Nessuno strumento committato SCRIVE quel percorso.** Due lo **leggono** —
+`_involucro_g4.py` e `_riverifica_t4.py`, e il secondo dice a voce *«NESSUN RUN NUOVO: si
+rileggono gli snapshot già scritti dai due bracci»*. ### **Quei bracci sono di un sigillo
+dell'epoca `T4`, e la loro invocazione non si ricostruisce dal repo.**
+
+### ✅ **Quindi il comando è `git`, e l'ho VERIFICATO invece di scriverlo plausibile:**
+
+```
+git cat-file -p 4df94a7:<percorso>   ->  9c41f98b (36 210 058 byte)   ACCESO
+                                         37a634d9 (36 217 362 byte)   SPENTO
+```
+
+**gli stessi sha1 dei byte grezzi dei file sul disco.** *(E si scrive in binario: par.7, «per
+ripristinare i byte esatti non si usa `git checkout`».)*
+
+### 📌 **E C'È UN LEGAME CHE VALE LA PENA VEDERE: è la regola di ieri che rende questa
+rimozione sicura.** I due lettori restano ri-girabili **al loro commit**, dove i `.pkl.gz`
+**sono in git**. ### **Senza la precisazione «al suo commit» entrata in `CLAUDE.md` il
+2026-10-04, togliere quei due file sarebbe stato «un sigillo non più ri-girabile», cioè un
+difetto nuovo. Con quella regola è una pulizia.** ### **Le due decisioni di Luca, prese a
+poche ore di distanza, si incastrano.**
+
+---
