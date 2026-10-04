@@ -4366,3 +4366,21 @@ citati» sono diventati ZERO, e non perché qualcuno li citi.** ### **Il referto
 > fare»* e **nasconderebbe i 15 che richiedono una decisione.**
 
 ---
+
+## **`COMMIT 4`: i 61 citati e non tracciati — i riferimenti al vuoto si chiudono**
+
+**La cura dell'autoriferimento ha restituito il numero vero:** dei **76** non tracciati
+rimasti, **61 citati** e **15 no** — ### **esattamente i 15 che il mandato prevedeva (9 json
++ 6 log).** *(Col censimento contaminato erano `100` e `0`: il segnale si autoalimentava.)*
+
+**Controllati prima di committare:** **347.9 KB** in tutto, il più grande **67 702** byte
+*(`_sigillo_legge_2lam/_sigillo.json`)*, **zero** non-testo, **zero** sopra 5 MB.
+### **Quindi nessuno dei casi che il mandato riservava a Luca — sopra 5 MB o binari — si
+presenta: tutti e 61 si committano.**
+
+### 📌 **E fra loro ci sono i referti con NOME GENERICO** *(`_corsa.txt`, `_sigillo.json`,
+`_censimento.json`)*, che la strada (B) vuole **committati**: era il punto su cui il
+`COMMIT 1` si era fermato, e ora quei file **esistono** per chi legge il repo invece di essere
+nominati e introvabili.
+
+---

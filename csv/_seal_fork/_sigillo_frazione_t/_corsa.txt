@@ -1,0 +1,75 @@
+====================================================================================================
+IL SIGILLO DEL COMMIT 6a: la frazione `t` esplicita
+====================================================================================================
+  simulatore di OGGI .. c18c9bf6
+  questo sigillo ...... 94224cb7
+  la patch ............ 2b8f9d5e
+  piattaforma ......... Windows AMD64
+  Python .............. 3.13.2
+  numpy ............... 2.3.0
+  ### I CONTEGGI DEI RUN (`_sm_tr*`, numero di nascite, passi) VALGONO PER
+  ###   QUESTA PIATTAFORMA. Cio' che NON dipende dalla piattaforma e'
+  ###   l'IDENTITA' fra il *prima* e l'*oggi*, che e' quello che il sigillo
+  ###   misura. ### Su un'altra macchina i conteggi cambiano e l'identita' no.
+  il PRIMA ............ 6d306976  (dal PADRE di 8aa6bc20, che introduce `T_NASCITA`)
+
+----------------------------------------------------------------------------------------------------
+--solo-cbis: I BRACCI `0`, `A`, `A-tr`, `B`, `C0`, `C1` E IL ROVESCIO
+  NON SONO STATI GIRATI. Questo referto e' il COMPLEMENTO di quello
+  committato in `1927b45`, dove quei bracci PASSANO -- e dove il
+  guardiano li ha verificati in modo INDIPENDENTE.
+  ### Cio' che si rigira qui e' SOLO `C-bis`, perche' il suo CRITERIO
+  ###   era vacuo, piu' il controllo che lo dimostra.
+
+----------------------------------------------------------------------------------------------------
+BRACCIO `C-bis` -- SEI copie, una per sito al letterale. SEI bocciature.
+  pos_div   B: 1 letterale  ·  C: SI  ->  SCOPERTA
+            chiavi ATTESE sbagliate .. ['pos_figlio convesso']
+            chiavi DAVVERO sbagliate . ['pos_figlio convesso']
+  dh        B: 1 letterale  ·  C: SI  ->  SCOPERTA
+            chiavi ATTESE sbagliate .. ['dh_a = t*d[sel]', 'dh_b = (1-t)*d[sel]']
+            chiavi DAVVERO sbagliate . ['dh_a = t*d[sel]', 'dh_b = (1-t)*d[sel]']
+  fm        B: 1 letterale  ·  C: SI  ->  SCOPERTA
+            chiavi ATTESE sbagliate .. ['fm = (phi[a] - t*D) mod']
+            chiavi DAVVERO sbagliate . ['fm = (phi[a] - t*D) mod']
+  fm_bias   B: 1 letterale  ·  C: SI  ->  SCOPERTA
+            chiavi ATTESE sbagliate .. ['fm = (phi[a]-(t+bias)*D)']
+            chiavi DAVVERO sbagliate . ['fm = (phi[a]-(t+bias)*D)']
+  pos_sch   B: 1 letterale  ·  C: SI  ->  SCOPERTA
+            chiavi ATTESE sbagliate .. ['pos antinodo convesso']
+            chiavi DAVVERO sbagliate . ['pos antinodo convesso']
+  dd        B: 1 letterale  ·  C: SI  ->  SCOPERTA
+            chiavi ATTESE sbagliate .. ['dd_a = max(t*L, 0.05)', 'dd_b = max((1-t)*L, 0.05)']
+            chiavi DAVVERO sbagliate . ['dd_a = max(t*L, 0.05)', 'dd_b = max((1-t)*L, 0.05)']
+
+----------------------------------------------------------------------------------------------------
+IL CONTROLLO DI `C-bis` -- una copia PULITA deve risultare NON SCOPERTA
+  ### E' il controllo che PUO' fallire: se una copia senza letterali
+  ###   risulta <<scoperta>>, il criterio non sta guardando niente.
+  chiavi di verifica sbagliate, regola NUOVA .. NESSUNA
+  voci sbagliate, regola VECCHIA .............. ['_eventi']
+    sito      regola NUOVA                   regola VECCHIA
+    pos_div   NON scoperta  OK               SCOPERTA  <- il difetto
+    dh        NON scoperta  OK               SCOPERTA  <- il difetto
+    fm        NON scoperta  OK               SCOPERTA  <- il difetto
+    fm_bias   NON scoperta  OK               SCOPERTA  <- il difetto
+    pos_sch   NON scoperta  OK               SCOPERTA  <- il difetto
+    dd        NON scoperta  OK               SCOPERTA  <- il difetto
+  ### PASSA: la copia pulita non e' scoperta da nessun criterio di sito.
+  ### E IL DIFETTO ERA REALE, misurato e non raccontato: con la regola
+  ###   VECCHIA la stessa copia risultava scoperta da `C` per TUTTI e sei i siti.
+  ### PASSA: sei copie, sei bocciature.
+
+====================================================================================================
+### IL RIEPILOGO
+###   braccio 0                  NON ESEGUITO (--solo-cbis)
+###   braccio A (quattro scene)  NON ESEGUITO (--solo-cbis)
+###   braccio A-tr               NON ESEGUITO (--solo-cbis)
+###   braccio B                  NON ESEGUITO (--solo-cbis)
+###   braccio C0+C1              NON ESEGUITO (--solo-cbis)
+###   braccio ROVESCIO           NON ESEGUITO (--solo-cbis)
+###   ### il loro esito e quello del referto 1927b45,
+###   ###   dove PASSANO, verificati anche dal
+###   ###   guardiano in modo indipendente.
+###   braccio C-bis .... PASSA
+====================================================================================================

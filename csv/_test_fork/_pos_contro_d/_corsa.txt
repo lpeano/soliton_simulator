@@ -1,0 +1,118 @@
+========================================================================================================
+M5 -- QUALI LEGGI LEGGONO `pos` E QUALI SOLO `d`
+========================================================================================================
+simulatore ..... 287154f3
+questo strumento edb2e305
+
+====================================================================================================
+LA CONFIGURAZIONE INTERA (`P5`) -- non i flag toccati, TUTTI
+====================================================================================================
+  booleani di modulo confrontati con l'argv del DRIVER: 81
+  -> IN CONFIGURAZIONE DEL DRIVER: nessuna differenza. ZERO su 81.
+
+
+tipi dei lettori presi da `_PASSO_TIPI` (tabella del simulatore): 62 funzioni mappate
+tipi che NON sono leggi: ['disegno', 'osservatore']
+
+========================================================================================================
+STATICA (AST + grafo delle chiamate): CHI PUO' LEGGERE
+========================================================================================================
+  `pos`: 20 funzioni la LEGGONO -- 5 dentro una LEGGE, 15 osservatore/disegno o fuori dal passo
+      LEGGE    chiralita_core_locale              [dinamica]
+      LEGGE    memoria_hebbiana_moto              [dinamica]
+      LEGGE    mitosi                             [AMBIGUA]
+      LEGGE    pozzo_grafo                        [dinamica]
+      LEGGE    step                               [dinamica]
+      altro    _allaccia                          [(non raggiungibile da una voce del passo)]
+      altro    _diag_completa                     [(non raggiungibile da una voce del passo)]
+      altro    _gusci_esterni                     [(non raggiungibile da una voce del passo)]
+      altro    _ordine                            [(non raggiungibile da una voce del passo)]
+      altro    _picchi_nuovi                      [(non raggiungibile da una voce del passo)]
+      altro    _regione_centrale                  [(non raggiungibile da una voce del passo)]
+      altro    _render_vista_rete_sola            [(non raggiungibile da una voce del passo)]
+      altro    _semina_lam                        [(non raggiungibile da una voce del passo)]
+      altro    _semina_masse_coerenti             [(non raggiungibile da una voce del passo)]
+      altro    batch_condensazione                [(non raggiungibile da una voce del passo)]
+      altro    campo_spaziale                     [(non raggiungibile da una voce del passo)]
+      altro    classifica_topologia               [(non raggiungibile da una voce del passo)]
+      altro    rilassa_disegno                    [disegno]
+      altro    semina                             [(non raggiungibile da una voce del passo)]
+      ... e altre 1
+
+  `d`: 17 funzioni la LEGGONO -- 11 dentro una LEGGE, 6 osservatore/disegno o fuori dal passo
+      LEGGE    _pesi                              [dinamica]
+      LEGGE    _smp_apri                          [fase]
+      LEGGE    _tau_arco_causale                  [AMBIGUA]
+      LEGGE    _tempo_luce_nodo                   [dinamica]
+      LEGGE    _traccia_d0                        [AMBIGUA,dinamica]
+      LEGGE    _traccia_vd                        [dinamica]
+      LEGGE    memoria_hebbiana_moto              [dinamica]
+      LEGGE    mitosi                             [AMBIGUA]
+      LEGGE    pozzo_grafo                        [dinamica]
+      LEGGE    scuoti_vuoto                       [dinamica]
+      LEGGE    step                               [dinamica]
+      altro    _allaccia                          [(non raggiungibile da una voce del passo)]
+      altro    _diag_completa                     [(non raggiungibile da una voce del passo)]
+      altro    batch_condensazione                [(non raggiungibile da una voce del passo)]
+      altro    diagnostica                        [(non raggiungibile da una voce del passo)]
+      altro    rilassa_disegno                    [disegno]
+      altro    verifica_invarianti                [osservatore]
+
+  `d0`: 15 funzioni la LEGGONO -- 9 dentro una LEGGE, 6 osservatore/disegno o fuori dal passo
+      LEGGE    _sd0                               [AMBIGUA,dinamica]
+      LEGGE    _smp_apri                          [fase]
+      LEGGE    _smp_chiudi                        [vincolo]
+      LEGGE    _traccia_d0                        [AMBIGUA,dinamica]
+      LEGGE    _traccia_vd                        [dinamica]
+      LEGGE    memoria_hebbiana_moto              [dinamica]
+      LEGGE    mitosi                             [AMBIGUA]
+      LEGGE    scuoti_vuoto                       [dinamica]
+      LEGGE    step                               [dinamica]
+      altro    _allaccia                          [(non raggiungibile da una voce del passo)]
+      altro    _big_bang                          [(non raggiungibile da una voce del passo)]
+      altro    _diag_completa                     [(non raggiungibile da una voce del passo)]
+      altro    batch_condensazione                [(non raggiungibile da una voce del passo)]
+      altro    diagnostica                        [(non raggiungibile da una voce del passo)]
+      altro    update                             [(non raggiungibile da una voce del passo)]
+
+========================================================================================================
+A RUNTIME: CHI HA LETTO DAVVERO, in 1 passo/i di questa scena
+========================================================================================================
+  `pos`: 5 lettori distinti, 31 letture in totale
+      rilassa_disegno                          15   [disegno]
+      _ferma_se_registro_incoerente             9   [fuori dal passo]
+      memoria_hebbiana_moto                     4   [LEGGE]
+      step                                      2   [LEGGE]
+      verifica_invarianti                       1   [osservatore]
+
+  `d`: 11 lettori distinti, 91 letture in totale
+      _pesi                                    39   [LEGGE]
+      _tempo_luce_nodo                         15   [LEGGE]
+      step                                     15   [LEGGE]
+      _ferma_se_registro_incoerente             9   [fuori dal passo]
+      memoria_hebbiana_moto                     5   [LEGGE]
+      rilassa_disegno                           3   [disegno]
+      _smp_apri                                 1   [LEGGE]
+      scuoti_vuoto                              1   [LEGGE]
+      _tau_arco_causale                         1   [LEGGE]
+      pozzo_grafo                               1   [LEGGE]
+      verifica_invarianti                       1   [osservatore]
+
+  `d0`: 8 lettori distinti, 44 letture in totale
+      step                                     15   [LEGGE]
+      memoria_hebbiana_moto                    13   [LEGGE]
+      _ferma_se_registro_incoerente             9   [fuori dal passo]
+      scuoti_vuoto                              2   [LEGGE]
+      _smp_chiudi                               2   [LEGGE]
+      _smp_apri                                 1   [LEGGE]
+      mitosi                                    1   [LEGGE]
+      verifica_invarianti                       1   [osservatore]
+
+========================================================================================================
+IL VERDETTO: la posizione del figlio e' FISICA o solo DISEGNO?
+========================================================================================================
+  `pos` letta DENTRO UNA LEGGE (statica): 5 funzioni
+  `pos` letta dentro una legge (runtime): 2 funzioni
+  ### ➜ `pos` E' FISICA, non solo disegno: ci sono leggi che la leggono.
+        Allora la frazione `t` decide ANCHE una posizione, non solo una lunghezza,
+        e `DIVISIONE-AUTOCONSISTENTE` non puo' trattarla come un dettaglio di resa.

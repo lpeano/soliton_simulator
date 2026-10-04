@@ -1,0 +1,129 @@
+====================================================================================================
+IL CENSIMENTO DI `MITOSI_2LAM` -- ogni sito, e di che TIPO e'
+====================================================================================================
+  simulatore .. c18c9bf6 (sha1 byte grezzi)
+  strumento ... 9ba7df64
+  il setaccio: l'AST per il CODICE, `tokenize` per COMMENTI e STRINGHE.
+  ### L'AST NON VEDE I COMMENTI: con il solo AST questo censimento direbbe
+  ###   <<nessun altro sito>> mentre un commento continua ad asserire il
+  ###   contrario della legge. ### Sarebbe un FALSO-ZERO dello STRUMENTO.
+
+----------------------------------------------------------------------------------------------------
+NEL SIMULATORE: 16 riferimenti
+    riga    classe    come                     testo
+    :457    CODICE    assegnazione             MITOSI_2LAM = False     # [CURA 5, 2026-09-25] `MITOSI_2LAM`
+    :457    COMMENTO  commento                 MITOSI_2LAM = False     # [CURA 5, 2026-09-25] `MITOSI_2LAM`
+    :3471   COMMENTO  commento                 # PIU': con `SEMINA_LAM` e `MITOSI_2LAM` si ha `d >= LAM`. ⚠
+    :8465   CODICE    lettura                  if MITOSI_2LAM and len(c):
+    :8929   COMMENTO  commento                 #   NESSUN PAVIMENTO: `d >= LAM` con `SEMINA_LAM`/`MITOSI_2L
+    :10636  CODICE    global                   global MITOSI_2LAM     # [CURA 5] senza questo l'assegnazion
+    :10638  COMMENTO  commento                 #   ed e' esattamente come `--semina-matura` e `--mitosi-2la
+    :10646  COMMENTO  commento                 #   `--tau-a`, `--semina-matura` e `--mitosi-2lam`, inerti p
+    :10731  CODICE    assegnazione             MITOSI_2LAM = bool(getattr(a, "mitosi_2lam", False))       #
+    :10731  CODICE    stringa-chiave `mitosi_2 MITOSI_2LAM = bool(getattr(a, "mitosi_2lam", False))       #
+    :10732  CODICE    lettura                  if MITOSI_2LAM:
+    :10733  STRINGA   letterale o docstring    print("[cura5] MITOSI_2LAM ON: un arco si divide SOLO se `d 
+    :11126  COMMENTO  commento                 #   **`--semina-matura` e `--mitosi-2lam` NON FUNZIONAVANO D
+    :11129  COMMENTO  commento                 #   Trovato dal SIGILLO DEL DRIVER (`MITOSI_2LAM False/False
+    :11691  CODICE    stringa-chiave `--mitosi p.add_argument("--mitosi-2lam", action="store_true",
+    :11691  STRINGA   letterale o docstring    p.add_argument("--mitosi-2lam", action="store_true",
+
+----------------------------------------------------------------------------------------------------
+IL CONFRONTO CON LA LISTA DEL MANDATO (il guardiano, blob c18c9bf6)
+  righe di CODICE nella MIA lista .. 6  [457, 8465, 10636, 10731, 10732, 11691]
+  righe nella SUA lista ............ 7  [457, 8465, 10636, 10731, 10732, 10733, 11691]
+
+  SOLO NELLA MIA (codice NON previsto): 0
+  SOLO NELLA SUA (previsto e NON trovato): 1
+      :10733  il testo dell'avviso [cura5]
+
+  COMMENTI e STRINGHE fuori dalla lista del mandato: 6
+      :3471   COMMENTO  # PIU': con `SEMINA_LAM` e `MITOSI_2LAM` si ha `d >= LAM`. ⚠ MA E'
+      :8929   COMMENTO  #   NESSUN PAVIMENTO: `d >= LAM` con `SEMINA_LAM`/`MITOSI_2LAM`. E poi
+      :10638  COMMENTO  #   ed e' esattamente come `--semina-matura` e `--mitosi-2lam` sono st
+      :10646  COMMENTO  #   `--tau-a`, `--semina-matura` e `--mitosi-2lam`, inerti per un gior
+      :11126  COMMENTO  #   **`--semina-matura` e `--mitosi-2lam` NON FUNZIONAVANO DA RIGA DI 
+      :11129  COMMENTO  #   Trovato dal SIGILLO DEL DRIVER (`MITOSI_2LAM False/False` in NUDA 
+  ### NON sono CODICE, quindi NON fanno scattare lo STOP del mandato.
+  ### MA VANNO GUARDATI UNO PER UNO: un commento che ASSERISCE la legge
+  ###   sotto condizione del flag diventa FALSO il giorno della cura.
+
+----------------------------------------------------------------------------------------------------
+FUORI DAL SIMULATORE: solo gli STRUMENTI, non i REPERTI
+  ### Le COPIE DEL SIMULATORE salvate accanto ai sigilli e gli STUB
+  ###   sotto `_tmp/` contengono il flag PER COSTRUZIONE: sono
+  ###   fotografie, non posti dove qualcuno lo usa. Si CONTANO e si
+  ###   DICHIARANO, ma non sono siti.
+  csv/_cli_flag.py -- 1 riferimenti (STRINGA)
+      :2      STRINGA   """**IL PERCORSO VERO DI UN FLAG: `argv` -> `_cli()` -> `_applica_flag
+  csv/_cure_verificate.py -- 2 riferimenti (STRINGA)
+      :144    STRINGA   ("MITOSI_2LAM", "**`CURA 5`** `A13` ALLA NASCITA: un arco si divide so
+      :146    STRINGA   "in **ogni** run del fork *(`--mitosi-2lam`)*",
+  csv/_presidio_commenti_flag.py -- 2 riferimenti (STRINGA)
+      :2      STRINGA   """**`P7` — LA POSTCONDIZIONE: IL COMMENTO DI OGNI FLAG NOMINA QUEL FL
+      :94     STRINGA   """Restituisce `(guasti, quanti)`. Un guasto = `(flag, riga, motivo)`.
+  csv/_seal_fork/_sigillo_cura4_accensione.py -- 1 riferimenti (STRINGA)
+      :174    STRINGA   FIGLIO_MIT = r'''
+  csv/_seal_fork/_sigillo_cura5_a13nascita.py -- 4 riferimenti (STRINGA)
+      :2      STRINGA   """`CURA 5` -- **IL SIGILLO DI `A13` ALLA NASCITA** (`MITOSI_2LAM`).
+      :47     STRINGA   FIGLIO = r'''
+      :224    STRINGA   P("SIGILLO `CURA 5` -- `A13` ALLA NASCITA (`MITOSI_2LAM`): un arco si 
+      :336    STRINGA   + chr(10) + "  la condizione `MITOSI_2LAM` sta nella maschera `ok` del
+  csv/_seal_fork/_sigillo_frazione_t.py -- 7 riferimenti (CODICE, COMMENTO, STRINGA)
+      :2      STRINGA   """**IL SIGILLO DEL `COMMIT 6a`: la frazione `t` esplicita.**
+      :58     COMMENTO  # ### LE TRE SCENE DEL COMMIT 4, PIU' LA QUARTA senza `--mitosi-2lam` 
+      :126    STRINGA   """Scena `MASSE-COERENTI`, dal CLI del driver: nessun attributo a mano
+      :135    CODICE    argv = [x for x in argv if x != "--mitosi-2lam"]
+      :135    STRINGA   argv = [x for x in argv if x != "--mitosi-2lam"]
+      :433    STRINGA   stampa("  SCENA `%s` -- seme %d, %d passi, --mitosi-2lam: %s"
+      :492    CODICE    per_scena[nome] = {"seme": seme, "passi": passi, "mitosi_2lam": con2,
+  csv/_seal_fork/_sig_scena_ii/_driver_prima.py -- 2 riferimenti (CODICE, STRINGA)
+      :264    CODICE    "--mitosi-2lam",
+      :264    STRINGA   "--mitosi-2lam",
+  csv/_test_fork/_censimento_mitosi_2lam.py -- 8 riferimenti (CODICE, STRINGA)
+      :2      STRINGA   """IL CENSIMENTO DI `MITOSI_2LAM` — ogni sito, e di che TIPO e'.
+      :49     STRINGA   NOME = "MITOSI_2LAM"
+      :50     CODICE    CLI = "--mitosi-2lam"
+      :50     STRINGA   CLI = "--mitosi-2lam"
+      :51     CODICE    ATTR = "mitosi_2lam"
+      :63     STRINGA   10732: "il `if MITOSI_2LAM:` che stampa l'avviso [cura5]",
+      :75     STRINGA   "blocco [flag-inerti]": "il `6b` deve aggiungere `MITOSI_2LAM` fra i f
+      :81     STRINGA   """### UN REPERTO O UNO STRUMENTO? ### **La domanda che il primo perim
+  csv/_test_fork/_etc_lam_stati.py -- 1 riferimenti (STRINGA)
+      :2      STRINGA   """**SOLA LETTURA: `min(d)` e quanti archi stanno sotto `LAM`, nei 16 
+  csv/_test_fork/_etc_pavimenti.py -- 1 riferimenti (STRINGA)
+      :83     STRINGA   "MITOSI_2LAM", "POZZO_D")}
+  csv/_test_fork/_ordine_estrazioni.py -- 1 riferimenti (STRINGA)
+      :880    STRINGA   "PLAST_DIN", "PLAST_MIT", "MITOSI_2LAM", "REGIME", "SEMINA_LAM", "CHI_
+  csv/_test_fork/_punto_unico_fattibile.py -- 1 riferimenti (STRINGA)
+      :514    STRINGA   "ANTIFASE_ADD", "COPPIA_MIT", "REGIME", "MITOSI_2LAM"):
+  csv/_test_fork/_scena_video.py -- 2 riferimenti (CODICE, STRINGA)
+      :307    CODICE    "--mitosi-2lam",
+      :307    STRINGA   "--mitosi-2lam",
+  csv/_test_fork/_verifica_flag_accesi.py -- 4 riferimenti (STRINGA)
+      :2      STRINGA   """**IL FLAG ERA EFFETTIVAMENTE ACCESO?** — tabella, non deduzione *(L
+      :63     STRINGA   "csv/_seal_fork/_sig_cura5/SIGILLO_cura5_a13nascita.txt", ("MITOSI_2LA
+      :77     STRINGA   "MITOSI_2LAM": [
+      :113    STRINGA   P("  PERCHE' LA DOMANDA E' GIUSTA: `--semina-matura` e `--mitosi-2lam`
+
+  I REPERTI, contati e non confusi coi siti:
+    COPIA-SIMULATORE   46 file
+    STRUMENTO          14 file
+    STUB-DI-RUN        85 file
+
+  file ATTESI dal mandato ......... 3  ['csv/_test_fork/_scena_video.py', 'csv/_cure_verificate.py', 'csv/_presidio_commenti_flag.py']
+  file NON PREVISTI che lo nominano 11  ['csv/_cli_flag.py', 'csv/_seal_fork/_sig_scena_ii/_driver_prima.py', 'csv/_seal_fork/_sigillo_cura4_accensione.py', 'csv/_seal_fork/_sigillo_cura5_a13nascita.py', 'csv/_seal_fork/_sigillo_frazione_t.py', 'csv/_test_fork/_censimento_mitosi_2lam.py', 'csv/_test_fork/_etc_lam_stati.py', 'csv/_test_fork/_etc_pavimenti.py', 'csv/_test_fork/_ordine_estrazioni.py', 'csv/_test_fork/_punto_unico_fattibile.py', 'csv/_test_fork/_verifica_flag_accesi.py']
+  file previsti e NON trovati ..... 0  nessuno
+
+----------------------------------------------------------------------------------------------------
+I SITI `ATTESO-ASSENTE` -- previsti dal mandato e oggi INESISTENTI
+  ### <<non trovato>> e <<non previsto>> sono DUE COSE DIVERSE, e confonderle
+  ###   farebbe sembrare un lavoro da fare un difetto del censimento.
+  blocco [flag-inerti]     il `6b` deve aggiungere `MITOSI_2LAM` fra i flag inerti, come `PAV_COM`
+
+====================================================================================================
+### IL RIEPILOGO
+###   nel simulatore: 7 CODICE, 7 COMMENTO, 2 STRINGA
+###   file di csv/ che lo nominano: 14
+###   *** SI FERMA: ci sono siti non previsti. ***
+====================================================================================================

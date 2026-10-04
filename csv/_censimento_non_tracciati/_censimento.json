@@ -1,0 +1,1063 @@
+{
+ "strumento": "517e21c4632166fb44acb99b0d0adcb655bd920c",
+ "non_tracciati": 76,
+ "blob_storici_simulatore": 206,
+ "conteggi": {
+  "(a) COPIA-SIMULATORE": 0,
+  "(b) STUB": 0,
+  "(c) STATO BINARIO": 0,
+  "(d) CANDIDATO OMISSIONE": 76
+ },
+ "classi": {
+  "(a) COPIA-SIMULATORE": [],
+  "(b) STUB": [],
+  "(c) STATO BINARIO": [],
+  "(d) CANDIDATO OMISSIONE": [
+   "csv/_censimento_non_tracciati/_censimento.json",
+   "csv/_censimento_non_tracciati/_corsa.txt",
+   "csv/_seal_fork/_sig_cura2_strutturale/new_s11/_braccio.py",
+   "csv/_seal_fork/_sig_cura2_strutturale/new_s11/firme.json",
+   "csv/_seal_fork/_sig_cura2_strutturale/new_s12/_braccio.py",
+   "csv/_seal_fork/_sig_cura2_strutturale/new_s12/firme.json",
+   "csv/_seal_fork/_sig_cura2_strutturale/tag_off_s11/_braccio.py",
+   "csv/_seal_fork/_sig_cura2_strutturale/tag_off_s11/firme.json",
+   "csv/_seal_fork/_sig_cura2_strutturale/tag_on_s11/_braccio.py",
+   "csv/_seal_fork/_sig_cura2_strutturale/tag_on_s11/firme.json",
+   "csv/_seal_fork/_sig_cura2_strutturale/tag_on_s12/_braccio.py",
+   "csv/_seal_fork/_sig_cura2_strutturale/tag_on_s12/firme.json",
+   "csv/_seal_fork/_sig_d32_nomi/dopo/_braccio.py",
+   "csv/_seal_fork/_sig_d32_nomi/dopo/firme.json",
+   "csv/_seal_fork/_sig_d32_nomi/prima/_braccio.py",
+   "csv/_seal_fork/_sig_d32_nomi/prima/firme.json",
+   "csv/_seal_fork/_sig_mem_moto_tutto/cap_HEBB.json",
+   "csv/_seal_fork/_sig_mem_moto_tutto/cap_OFF.json",
+   "csv/_seal_fork/_sig_mem_moto_tutto/cap_ON-bis.json",
+   "csv/_seal_fork/_sig_mem_moto_tutto/cap_ON.json",
+   "csv/_seal_fork/_sig_mem_moto_tutto/cap_SOLO-MEM.json",
+   "csv/_seal_fork/_sig_nascita_atomica/_corsa.txt",
+   "csv/_seal_fork/_sig_osservabile_p1/seme_11.json",
+   "csv/_seal_fork/_sig_osservabile_p1/seme_12.json",
+   "csv/_seal_fork/_sig_osservabile_p1/seme_13.json",
+   "csv/_seal_fork/_sig_osservabile_p1/seme_14.json",
+   "csv/_seal_fork/_sig_pozzo_d/dopo_off/_braccio.py",
+   "csv/_seal_fork/_sig_pozzo_d/dopo_off/firme.json",
+   "csv/_seal_fork/_sig_pozzo_d/prima/_braccio.py",
+   "csv/_seal_fork/_sig_pozzo_d/prima/firme.json",
+   "csv/_seal_fork/_sigillo_frazione_t/_corsa.txt",
+   "csv/_seal_fork/_sigillo_frazione_t/_sigillo.json",
+   "csv/_seal_fork/_sigillo_legge_2lam/_corsa.txt",
+   "csv/_seal_fork/_sigillo_legge_2lam/_sigillo.json",
+   "csv/_test_fork/_ab_A/prog.csv",
+   "csv/_test_fork/_ab_B/prog.csv",
+   "csv/_test_fork/_ab_C_solo_chicoop_FERMATO/prog.csv",
+   "csv/_test_fork/_ab_D/prog.csv",
+   "csv/_test_fork/_ab_D_log.txt",
+   "csv/_test_fork/_ab_pozzo_d/seme11_off/_braccio.py",
+   "csv/_test_fork/_ab_pozzo_d/seme11_off/misura.json",
+   "csv/_test_fork/_ab_pozzo_d/seme11_on/_braccio.py",
+   "csv/_test_fork/_ab_pozzo_d/seme11_on/misura.json",
+   "csv/_test_fork/_ab_pozzo_d/seme12_off/_braccio.py",
+   "csv/_test_fork/_ab_pozzo_d/seme12_off/misura.json",
+   "csv/_test_fork/_ab_pozzo_d/seme12_on/_braccio.py",
+   "csv/_test_fork/_ab_pozzo_d/seme12_on/misura.json",
+   "csv/_test_fork/_ab_pozzo_d/seme13_off/_braccio.py",
+   "csv/_test_fork/_ab_pozzo_d/seme13_off/misura.json",
+   "csv/_test_fork/_ab_pozzo_d/seme13_on/_braccio.py",
+   "csv/_test_fork/_ab_pozzo_d/seme13_on/misura.json",
+   "csv/_test_fork/_ab_pozzo_d/seme14_off/_braccio.py",
+   "csv/_test_fork/_ab_pozzo_d/seme14_off/misura.json",
+   "csv/_test_fork/_ab_pozzo_d/seme14_on/_braccio.py",
+   "csv/_test_fork/_ab_pozzo_d/seme14_on/misura.json",
+   "csv/_test_fork/_censimento_mitosi_2lam/_censimento.json",
+   "csv/_test_fork/_censimento_mitosi_2lam/_corsa.txt",
+   "csv/_test_fork/_diag_D/peq_dentro_log.txt",
+   "csv/_test_fork/_diag_D/rig1080_log.txt",
+   "csv/_test_fork/_diag_D/somma_d0_log.txt",
+   "csv/_test_fork/_diag_triangoli/DIAG_triangoli.txt",
+   "csv/_test_fork/_g3_senza_bifase/letture_log.txt",
+   "csv/_test_fork/_g4_corto/BILANCIO_d0.csv",
+   "csv/_test_fork/_g4_corto/BILANCIO_d0.txt",
+   "csv/_test_fork/_g4_corto/prog.csv",
+   "csv/_test_fork/_g6000/prog.csv",
+   "csv/_test_fork/_pilota_prova1/seme_11/log.txt",
+   "csv/_test_fork/_pilota_prova1/seme_12/log.txt",
+   "csv/_test_fork/_pilota_prova1/seme_13/log.txt",
+   "csv/_test_fork/_pilota_prova1/seme_14/log.txt",
+   "csv/_test_fork/_pos_contro_d/_corsa.txt",
+   "csv/_test_fork/_pos_contro_d/_pos_contro_d.json",
+   "csv/_test_fork/_run_K/prog.csv",
+   "csv/_test_fork/_run_K_log.txt",
+   "csv/_test_fork/_run_S/prog.csv",
+   "csv/_test_fork/_run_S_log.txt"
+  ]
+ },
+ "dettaglio": [
+  {
+   "file": "csv/_censimento_non_tracciati/_censimento.json",
+   "sha1": "2365dbdb4ba378667d3523bff695b4d9f9a3ebfe",
+   "byte": 44255,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {
+    "DOC": "solo il nome",
+    "STRUMENTI": "solo il nome",
+    "REFERTI": "solo il nome",
+    "TASK_HISTORY": "solo il nome"
+   },
+   "e_uno_strumento": false,
+   "strumento_del_padre": "csv/_censimento_non_tracciati.py"
+  },
+  {
+   "file": "csv/_censimento_non_tracciati/_corsa.txt",
+   "sha1": "4382b11ffdb1fa0c9fd22a935d341c3db460e418",
+   "byte": 24234,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {
+    "DOC": "solo il nome",
+    "STRUMENTI": "solo il nome",
+    "REFERTI": "solo il nome",
+    "INVENTARIO": "solo il nome",
+    "TASK_HISTORY": "solo il nome"
+   },
+   "e_uno_strumento": false,
+   "strumento_del_padre": "csv/_censimento_non_tracciati.py"
+  },
+  {
+   "file": "csv/_seal_fork/_sig_cura2_strutturale/new_s11/_braccio.py",
+   "sha1": "38702d63b21ab241cabcd15ad7c1703326e55495",
+   "byte": 1642,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {
+    "DOC": "solo il nome",
+    "STRUMENTI": "solo il nome",
+    "INVENTARIO": "solo il nome",
+    "TASK_HISTORY": "solo il nome"
+   },
+   "e_uno_strumento": true,
+   "strumento_del_padre": null
+  },
+  {
+   "file": "csv/_seal_fork/_sig_cura2_strutturale/new_s11/firme.json",
+   "sha1": "7c5294cd9285c23de54529cdbc7783c0d72606ea",
+   "byte": 6886,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {
+    "STRUMENTI": "solo il nome"
+   },
+   "e_uno_strumento": false,
+   "strumento_del_padre": null
+  },
+  {
+   "file": "csv/_seal_fork/_sig_cura2_strutturale/new_s12/_braccio.py",
+   "sha1": "2b341646df1f54f0cf780ac0ea66a8c4242b1e0c",
+   "byte": 1642,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {
+    "DOC": "solo il nome",
+    "STRUMENTI": "solo il nome",
+    "INVENTARIO": "solo il nome",
+    "TASK_HISTORY": "solo il nome"
+   },
+   "e_uno_strumento": true,
+   "strumento_del_padre": null
+  },
+  {
+   "file": "csv/_seal_fork/_sig_cura2_strutturale/new_s12/firme.json",
+   "sha1": "678d7cab090cc6e1cbcbb9b3dff0dddb03972470",
+   "byte": 6883,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {
+    "STRUMENTI": "solo il nome"
+   },
+   "e_uno_strumento": false,
+   "strumento_del_padre": null
+  },
+  {
+   "file": "csv/_seal_fork/_sig_cura2_strutturale/tag_off_s11/_braccio.py",
+   "sha1": "d9d87bb5fc23b79a72700ed9cff4a172a3f2cbb9",
+   "byte": 1701,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {
+    "DOC": "solo il nome",
+    "STRUMENTI": "solo il nome",
+    "INVENTARIO": "solo il nome",
+    "TASK_HISTORY": "solo il nome"
+   },
+   "e_uno_strumento": true,
+   "strumento_del_padre": null
+  },
+  {
+   "file": "csv/_seal_fork/_sig_cura2_strutturale/tag_off_s11/firme.json",
+   "sha1": "0b2db573931799cbd52ba20e4cb67a385bd17fb0",
+   "byte": 7763,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {
+    "STRUMENTI": "solo il nome"
+   },
+   "e_uno_strumento": false,
+   "strumento_del_padre": null
+  },
+  {
+   "file": "csv/_seal_fork/_sig_cura2_strutturale/tag_on_s11/_braccio.py",
+   "sha1": "3773a30b926cc2aab575bdb27b6e87a6aef1ad27",
+   "byte": 1680,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {
+    "DOC": "solo il nome",
+    "STRUMENTI": "solo il nome",
+    "INVENTARIO": "solo il nome",
+    "TASK_HISTORY": "solo il nome"
+   },
+   "e_uno_strumento": true,
+   "strumento_del_padre": null
+  },
+  {
+   "file": "csv/_seal_fork/_sig_cura2_strutturale/tag_on_s11/firme.json",
+   "sha1": "7c5294cd9285c23de54529cdbc7783c0d72606ea",
+   "byte": 6886,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {
+    "STRUMENTI": "solo il nome"
+   },
+   "e_uno_strumento": false,
+   "strumento_del_padre": null
+  },
+  {
+   "file": "csv/_seal_fork/_sig_cura2_strutturale/tag_on_s12/_braccio.py",
+   "sha1": "b34c4ac7e4e0a644301895a9c708d1007358d0ed",
+   "byte": 1680,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {
+    "DOC": "solo il nome",
+    "STRUMENTI": "solo il nome",
+    "INVENTARIO": "solo il nome",
+    "TASK_HISTORY": "solo il nome"
+   },
+   "e_uno_strumento": true,
+   "strumento_del_padre": null
+  },
+  {
+   "file": "csv/_seal_fork/_sig_cura2_strutturale/tag_on_s12/firme.json",
+   "sha1": "678d7cab090cc6e1cbcbb9b3dff0dddb03972470",
+   "byte": 6883,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {
+    "STRUMENTI": "solo il nome"
+   },
+   "e_uno_strumento": false,
+   "strumento_del_padre": null
+  },
+  {
+   "file": "csv/_seal_fork/_sig_d32_nomi/dopo/_braccio.py",
+   "sha1": "bdc2a055fb4cead2ec6d2f14332a6a1c52a11787",
+   "byte": 1748,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {
+    "DOC": "solo il nome",
+    "STRUMENTI": "solo il nome",
+    "INVENTARIO": "solo il nome",
+    "TASK_HISTORY": "solo il nome"
+   },
+   "e_uno_strumento": true,
+   "strumento_del_padre": null
+  },
+  {
+   "file": "csv/_seal_fork/_sig_d32_nomi/dopo/firme.json",
+   "sha1": "2d7b3f0f3d541589d952a6389d0668feb32e077b",
+   "byte": 6892,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {
+    "STRUMENTI": "solo il nome"
+   },
+   "e_uno_strumento": false,
+   "strumento_del_padre": null
+  },
+  {
+   "file": "csv/_seal_fork/_sig_d32_nomi/prima/_braccio.py",
+   "sha1": "d3a69149702f4f8ff0e0ee3c0d0a1cc6104206cb",
+   "byte": 1774,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {
+    "DOC": "solo il nome",
+    "STRUMENTI": "solo il nome",
+    "INVENTARIO": "solo il nome",
+    "TASK_HISTORY": "solo il nome"
+   },
+   "e_uno_strumento": true,
+   "strumento_del_padre": null
+  },
+  {
+   "file": "csv/_seal_fork/_sig_d32_nomi/prima/firme.json",
+   "sha1": "2d7b3f0f3d541589d952a6389d0668feb32e077b",
+   "byte": 6892,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {
+    "STRUMENTI": "solo il nome"
+   },
+   "e_uno_strumento": false,
+   "strumento_del_padre": null
+  },
+  {
+   "file": "csv/_seal_fork/_sig_mem_moto_tutto/cap_HEBB.json",
+   "sha1": "8debe177777a59c85027de875d2dfccfe612c89e",
+   "byte": 3005,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {},
+   "e_uno_strumento": false,
+   "strumento_del_padre": null
+  },
+  {
+   "file": "csv/_seal_fork/_sig_mem_moto_tutto/cap_OFF.json",
+   "sha1": "1686f55b9cb3bf9bb2f66ebb69e3f065e2be1258",
+   "byte": 4521,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {},
+   "e_uno_strumento": false,
+   "strumento_del_padre": null
+  },
+  {
+   "file": "csv/_seal_fork/_sig_mem_moto_tutto/cap_ON-bis.json",
+   "sha1": "2617ce36c24806511da1eb85b2f0031a8773493c",
+   "byte": 4923,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {},
+   "e_uno_strumento": false,
+   "strumento_del_padre": null
+  },
+  {
+   "file": "csv/_seal_fork/_sig_mem_moto_tutto/cap_ON.json",
+   "sha1": "f46dc2ec4d0aade38fa50b990ee50140847814c2",
+   "byte": 4919,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {},
+   "e_uno_strumento": false,
+   "strumento_del_padre": null
+  },
+  {
+   "file": "csv/_seal_fork/_sig_mem_moto_tutto/cap_SOLO-MEM.json",
+   "sha1": "8d84cf875fd97b0317a42986bdc5bbe9fb4457e0",
+   "byte": 4644,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {},
+   "e_uno_strumento": false,
+   "strumento_del_padre": null
+  },
+  {
+   "file": "csv/_seal_fork/_sig_nascita_atomica/_corsa.txt",
+   "sha1": "4111e2f8dcba75e333fa308d454a626bbe805363",
+   "byte": 2115,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {
+    "DOC": "solo il nome",
+    "STRUMENTI": "solo il nome",
+    "REFERTI": "solo il nome",
+    "INVENTARIO": "solo il nome",
+    "TASK_HISTORY": "solo il nome"
+   },
+   "e_uno_strumento": false,
+   "strumento_del_padre": null
+  },
+  {
+   "file": "csv/_seal_fork/_sig_osservabile_p1/seme_11.json",
+   "sha1": "cd370e1f6c846d80236cbbd7a42a43cf6fdcef0b",
+   "byte": 1426,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {},
+   "e_uno_strumento": false,
+   "strumento_del_padre": null
+  },
+  {
+   "file": "csv/_seal_fork/_sig_osservabile_p1/seme_12.json",
+   "sha1": "aca87787c8e814ddcda34e7277cba1975c884c4c",
+   "byte": 1430,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {},
+   "e_uno_strumento": false,
+   "strumento_del_padre": null
+  },
+  {
+   "file": "csv/_seal_fork/_sig_osservabile_p1/seme_13.json",
+   "sha1": "e6fbddb4ac8f0e112d2d31f97c286a8f988e63ce",
+   "byte": 1426,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {},
+   "e_uno_strumento": false,
+   "strumento_del_padre": null
+  },
+  {
+   "file": "csv/_seal_fork/_sig_osservabile_p1/seme_14.json",
+   "sha1": "66cb119727a0cdba55b33e180e35b24febd238b7",
+   "byte": 1428,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {},
+   "e_uno_strumento": false,
+   "strumento_del_padre": null
+  },
+  {
+   "file": "csv/_seal_fork/_sig_pozzo_d/dopo_off/_braccio.py",
+   "sha1": "87feb53adf8ef4e18e0833b4f74de4029b47c84e",
+   "byte": 1557,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {
+    "DOC": "solo il nome",
+    "STRUMENTI": "solo il nome",
+    "INVENTARIO": "solo il nome",
+    "TASK_HISTORY": "solo il nome"
+   },
+   "e_uno_strumento": true,
+   "strumento_del_padre": null
+  },
+  {
+   "file": "csv/_seal_fork/_sig_pozzo_d/dopo_off/firme.json",
+   "sha1": "1590615c010378076c1bee470b60feab95366c59",
+   "byte": 6839,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {
+    "STRUMENTI": "solo il nome"
+   },
+   "e_uno_strumento": false,
+   "strumento_del_padre": null
+  },
+  {
+   "file": "csv/_seal_fork/_sig_pozzo_d/prima/_braccio.py",
+   "sha1": "969d7851f66fba06fa2720b77dbe990100393de0",
+   "byte": 1578,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {
+    "DOC": "solo il nome",
+    "STRUMENTI": "solo il nome",
+    "INVENTARIO": "solo il nome",
+    "TASK_HISTORY": "solo il nome"
+   },
+   "e_uno_strumento": true,
+   "strumento_del_padre": null
+  },
+  {
+   "file": "csv/_seal_fork/_sig_pozzo_d/prima/firme.json",
+   "sha1": "1590615c010378076c1bee470b60feab95366c59",
+   "byte": 6839,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {
+    "STRUMENTI": "solo il nome"
+   },
+   "e_uno_strumento": false,
+   "strumento_del_padre": null
+  },
+  {
+   "file": "csv/_seal_fork/_sigillo_frazione_t/_corsa.txt",
+   "sha1": "ed301a322be2479be94365a3b6f076199be4bf8e",
+   "byte": 4605,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {
+    "DOC": "solo il nome",
+    "STRUMENTI": "solo il nome",
+    "REFERTI": "solo il nome",
+    "INVENTARIO": "solo il nome",
+    "TASK_HISTORY": "solo il nome"
+   },
+   "e_uno_strumento": false,
+   "strumento_del_padre": "csv/_seal_fork/_sigillo_frazione_t.py"
+  },
+  {
+   "file": "csv/_seal_fork/_sigillo_frazione_t/_sigillo.json",
+   "sha1": "34e94c5ea68cdcd9509a0909a1dd43430b1a6d5a",
+   "byte": 2731,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {
+    "DOC": "solo il nome",
+    "STRUMENTI": "solo il nome",
+    "TASK_HISTORY": "solo il nome"
+   },
+   "e_uno_strumento": false,
+   "strumento_del_padre": "csv/_seal_fork/_sigillo_frazione_t.py"
+  },
+  {
+   "file": "csv/_seal_fork/_sigillo_legge_2lam/_corsa.txt",
+   "sha1": "4b81049699e04b42cde860eee347748fba185356",
+   "byte": 15016,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {
+    "DOC": "solo il nome",
+    "STRUMENTI": "solo il nome",
+    "REFERTI": "solo il nome",
+    "INVENTARIO": "solo il nome",
+    "TASK_HISTORY": "solo il nome"
+   },
+   "e_uno_strumento": false,
+   "strumento_del_padre": "csv/_seal_fork/_sigillo_legge_2lam.py"
+  },
+  {
+   "file": "csv/_seal_fork/_sigillo_legge_2lam/_sigillo.json",
+   "sha1": "00450e29a7e4303951472f75744bab72d645e43c",
+   "byte": 67702,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {
+    "DOC": "solo il nome",
+    "STRUMENTI": "solo il nome",
+    "TASK_HISTORY": "solo il nome"
+   },
+   "e_uno_strumento": false,
+   "strumento_del_padre": "csv/_seal_fork/_sigillo_legge_2lam.py"
+  },
+  {
+   "file": "csv/_test_fork/_ab_A/prog.csv",
+   "sha1": "23f8a3168ed137b741bd04a820547e7ecd1cb51b",
+   "byte": 5781,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {
+    "DOC": "percorso",
+    "STRUMENTI": "solo il nome",
+    "REFERTI": "solo il nome",
+    "INVENTARIO": "percorso",
+    "TASK_HISTORY": "solo il nome"
+   },
+   "e_uno_strumento": false,
+   "strumento_del_padre": null
+  },
+  {
+   "file": "csv/_test_fork/_ab_B/prog.csv",
+   "sha1": "efea4a292bc4cfa2477ca80270ab1d86db4bed89",
+   "byte": 1168,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {
+    "DOC": "percorso",
+    "STRUMENTI": "solo il nome",
+    "REFERTI": "percorso",
+    "INVENTARIO": "percorso",
+    "TASK_HISTORY": "solo il nome"
+   },
+   "e_uno_strumento": false,
+   "strumento_del_padre": null
+  },
+  {
+   "file": "csv/_test_fork/_ab_C_solo_chicoop_FERMATO/prog.csv",
+   "sha1": "44274ac17a00c762f8927a08cac2154ba52ecc58",
+   "byte": 2608,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {
+    "DOC": "solo il nome",
+    "STRUMENTI": "solo il nome",
+    "REFERTI": "solo il nome",
+    "INVENTARIO": "solo il nome",
+    "TASK_HISTORY": "solo il nome"
+   },
+   "e_uno_strumento": false,
+   "strumento_del_padre": null
+  },
+  {
+   "file": "csv/_test_fork/_ab_D/prog.csv",
+   "sha1": "e65a279314a387c87feb634ff999ef6e7e8417ac",
+   "byte": 2684,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {
+    "DOC": "percorso",
+    "STRUMENTI": "solo il nome",
+    "REFERTI": "percorso",
+    "INVENTARIO": "solo il nome",
+    "TASK_HISTORY": "solo il nome"
+   },
+   "e_uno_strumento": false,
+   "strumento_del_padre": null
+  },
+  {
+   "file": "csv/_test_fork/_ab_D_log.txt",
+   "sha1": "faeaba6405016d883c7c5eaedcd31105c5bec29f",
+   "byte": 11323,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {
+    "STRUMENTI": "solo il nome"
+   },
+   "e_uno_strumento": false,
+   "strumento_del_padre": null
+  },
+  {
+   "file": "csv/_test_fork/_ab_pozzo_d/seme11_off/_braccio.py",
+   "sha1": "417b14f852421869134ddd8d46d30bf8b85e5155",
+   "byte": 1697,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {
+    "DOC": "solo il nome",
+    "STRUMENTI": "solo il nome",
+    "INVENTARIO": "solo il nome",
+    "TASK_HISTORY": "solo il nome"
+   },
+   "e_uno_strumento": true,
+   "strumento_del_padre": "csv/_test_fork/_ab_pozzo_d.py"
+  },
+  {
+   "file": "csv/_test_fork/_ab_pozzo_d/seme11_off/misura.json",
+   "sha1": "072e0a9f8b0e082e779b24513baf1084637d506f",
+   "byte": 368,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {
+    "DOC": "solo il nome",
+    "STRUMENTI": "solo il nome",
+    "REFERTI": "solo il nome",
+    "INVENTARIO": "solo il nome",
+    "TASK_HISTORY": "solo il nome"
+   },
+   "e_uno_strumento": false,
+   "strumento_del_padre": "csv/_test_fork/_ab_pozzo_d.py"
+  },
+  {
+   "file": "csv/_test_fork/_ab_pozzo_d/seme11_on/_braccio.py",
+   "sha1": "e953f6a635c8e1625f67705ded3659e2b5fa3bba",
+   "byte": 1694,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {
+    "DOC": "solo il nome",
+    "STRUMENTI": "solo il nome",
+    "INVENTARIO": "solo il nome",
+    "TASK_HISTORY": "solo il nome"
+   },
+   "e_uno_strumento": true,
+   "strumento_del_padre": "csv/_test_fork/_ab_pozzo_d.py"
+  },
+  {
+   "file": "csv/_test_fork/_ab_pozzo_d/seme11_on/misura.json",
+   "sha1": "f52cf51496ed2dc88e56fab38b2672e6fc843f1b",
+   "byte": 365,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {
+    "DOC": "solo il nome",
+    "STRUMENTI": "solo il nome",
+    "REFERTI": "solo il nome",
+    "INVENTARIO": "solo il nome",
+    "TASK_HISTORY": "solo il nome"
+   },
+   "e_uno_strumento": false,
+   "strumento_del_padre": "csv/_test_fork/_ab_pozzo_d.py"
+  },
+  {
+   "file": "csv/_test_fork/_ab_pozzo_d/seme12_off/_braccio.py",
+   "sha1": "38e23767db210498945f0c5af448dcf22837df93",
+   "byte": 1697,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {
+    "DOC": "solo il nome",
+    "STRUMENTI": "solo il nome",
+    "INVENTARIO": "solo il nome",
+    "TASK_HISTORY": "solo il nome"
+   },
+   "e_uno_strumento": true,
+   "strumento_del_padre": "csv/_test_fork/_ab_pozzo_d.py"
+  },
+  {
+   "file": "csv/_test_fork/_ab_pozzo_d/seme12_off/misura.json",
+   "sha1": "5077527f71955eaa7db87bbdfd134a0fa633ea02",
+   "byte": 367,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {
+    "DOC": "solo il nome",
+    "STRUMENTI": "solo il nome",
+    "REFERTI": "solo il nome",
+    "INVENTARIO": "solo il nome",
+    "TASK_HISTORY": "solo il nome"
+   },
+   "e_uno_strumento": false,
+   "strumento_del_padre": "csv/_test_fork/_ab_pozzo_d.py"
+  },
+  {
+   "file": "csv/_test_fork/_ab_pozzo_d/seme12_on/_braccio.py",
+   "sha1": "f109c1284de5c4aaa596cab36f5010be7a5ce982",
+   "byte": 1694,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {
+    "DOC": "solo il nome",
+    "STRUMENTI": "solo il nome",
+    "INVENTARIO": "solo il nome",
+    "TASK_HISTORY": "solo il nome"
+   },
+   "e_uno_strumento": true,
+   "strumento_del_padre": "csv/_test_fork/_ab_pozzo_d.py"
+  },
+  {
+   "file": "csv/_test_fork/_ab_pozzo_d/seme12_on/misura.json",
+   "sha1": "ea79f5e7468999eb5279256a91f9f49ffcaf7993",
+   "byte": 365,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {
+    "DOC": "solo il nome",
+    "STRUMENTI": "solo il nome",
+    "REFERTI": "solo il nome",
+    "INVENTARIO": "solo il nome",
+    "TASK_HISTORY": "solo il nome"
+   },
+   "e_uno_strumento": false,
+   "strumento_del_padre": "csv/_test_fork/_ab_pozzo_d.py"
+  },
+  {
+   "file": "csv/_test_fork/_ab_pozzo_d/seme13_off/_braccio.py",
+   "sha1": "f634ddbb8395b5d43883b182d5c4a2a7a6afe562",
+   "byte": 1697,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {
+    "DOC": "solo il nome",
+    "STRUMENTI": "solo il nome",
+    "INVENTARIO": "solo il nome",
+    "TASK_HISTORY": "solo il nome"
+   },
+   "e_uno_strumento": true,
+   "strumento_del_padre": "csv/_test_fork/_ab_pozzo_d.py"
+  },
+  {
+   "file": "csv/_test_fork/_ab_pozzo_d/seme13_off/misura.json",
+   "sha1": "abf480024a57174f1278ef0f0242bbd8d6209f94",
+   "byte": 367,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {
+    "DOC": "solo il nome",
+    "STRUMENTI": "solo il nome",
+    "REFERTI": "solo il nome",
+    "INVENTARIO": "solo il nome",
+    "TASK_HISTORY": "solo il nome"
+   },
+   "e_uno_strumento": false,
+   "strumento_del_padre": "csv/_test_fork/_ab_pozzo_d.py"
+  },
+  {
+   "file": "csv/_test_fork/_ab_pozzo_d/seme13_on/_braccio.py",
+   "sha1": "8732603e8de5415e145a7ea5f30d3760edbf985b",
+   "byte": 1694,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {
+    "DOC": "solo il nome",
+    "STRUMENTI": "solo il nome",
+    "INVENTARIO": "solo il nome",
+    "TASK_HISTORY": "solo il nome"
+   },
+   "e_uno_strumento": true,
+   "strumento_del_padre": "csv/_test_fork/_ab_pozzo_d.py"
+  },
+  {
+   "file": "csv/_test_fork/_ab_pozzo_d/seme13_on/misura.json",
+   "sha1": "533e85ab061404c5be7ecd19eefd1f0566c89c9a",
+   "byte": 365,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {
+    "DOC": "solo il nome",
+    "STRUMENTI": "solo il nome",
+    "REFERTI": "solo il nome",
+    "INVENTARIO": "solo il nome",
+    "TASK_HISTORY": "solo il nome"
+   },
+   "e_uno_strumento": false,
+   "strumento_del_padre": "csv/_test_fork/_ab_pozzo_d.py"
+  },
+  {
+   "file": "csv/_test_fork/_ab_pozzo_d/seme14_off/_braccio.py",
+   "sha1": "17bb969d28fe347c237d7e9274d8f7d39e1a9703",
+   "byte": 1697,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {
+    "DOC": "solo il nome",
+    "STRUMENTI": "solo il nome",
+    "INVENTARIO": "solo il nome",
+    "TASK_HISTORY": "solo il nome"
+   },
+   "e_uno_strumento": true,
+   "strumento_del_padre": "csv/_test_fork/_ab_pozzo_d.py"
+  },
+  {
+   "file": "csv/_test_fork/_ab_pozzo_d/seme14_off/misura.json",
+   "sha1": "8c374d53a669d5887afced03852b71c3a7041c08",
+   "byte": 368,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {
+    "DOC": "solo il nome",
+    "STRUMENTI": "solo il nome",
+    "REFERTI": "solo il nome",
+    "INVENTARIO": "solo il nome",
+    "TASK_HISTORY": "solo il nome"
+   },
+   "e_uno_strumento": false,
+   "strumento_del_padre": "csv/_test_fork/_ab_pozzo_d.py"
+  },
+  {
+   "file": "csv/_test_fork/_ab_pozzo_d/seme14_on/_braccio.py",
+   "sha1": "97741b56c6a675aae3d52b37e40763fe9af26150",
+   "byte": 1694,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {
+    "DOC": "solo il nome",
+    "STRUMENTI": "solo il nome",
+    "INVENTARIO": "solo il nome",
+    "TASK_HISTORY": "solo il nome"
+   },
+   "e_uno_strumento": true,
+   "strumento_del_padre": "csv/_test_fork/_ab_pozzo_d.py"
+  },
+  {
+   "file": "csv/_test_fork/_ab_pozzo_d/seme14_on/misura.json",
+   "sha1": "032eeecc742dab1a95058351e50fd71a4b005bbc",
+   "byte": 367,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {
+    "DOC": "solo il nome",
+    "STRUMENTI": "solo il nome",
+    "REFERTI": "solo il nome",
+    "INVENTARIO": "solo il nome",
+    "TASK_HISTORY": "solo il nome"
+   },
+   "e_uno_strumento": false,
+   "strumento_del_padre": "csv/_test_fork/_ab_pozzo_d.py"
+  },
+  {
+   "file": "csv/_test_fork/_censimento_mitosi_2lam/_censimento.json",
+   "sha1": "97ee48090fd3cdc54f194097ae4a0132d97f6d9f",
+   "byte": 19083,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {
+    "DOC": "solo il nome",
+    "STRUMENTI": "solo il nome",
+    "REFERTI": "solo il nome",
+    "TASK_HISTORY": "solo il nome"
+   },
+   "e_uno_strumento": false,
+   "strumento_del_padre": "csv/_test_fork/_censimento_mitosi_2lam.py"
+  },
+  {
+   "file": "csv/_test_fork/_censimento_mitosi_2lam/_corsa.txt",
+   "sha1": "2298a5665bf036ba693dec8e70bfb59ad9a25170",
+   "byte": 9465,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {
+    "DOC": "solo il nome",
+    "STRUMENTI": "solo il nome",
+    "REFERTI": "solo il nome",
+    "INVENTARIO": "solo il nome",
+    "TASK_HISTORY": "solo il nome"
+   },
+   "e_uno_strumento": false,
+   "strumento_del_padre": "csv/_test_fork/_censimento_mitosi_2lam.py"
+  },
+  {
+   "file": "csv/_test_fork/_diag_D/peq_dentro_log.txt",
+   "sha1": "f98997c47565d45577c4a60361c07a001bb0b34f",
+   "byte": 10977,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {},
+   "e_uno_strumento": false,
+   "strumento_del_padre": null
+  },
+  {
+   "file": "csv/_test_fork/_diag_D/rig1080_log.txt",
+   "sha1": "4e46533a42addd2fd66c26b21e2d03fa80e5b3b3",
+   "byte": 18769,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {},
+   "e_uno_strumento": false,
+   "strumento_del_padre": null
+  },
+  {
+   "file": "csv/_test_fork/_diag_D/somma_d0_log.txt",
+   "sha1": "17f377278b48b4b6df61b844045c9f6e9ad46d14",
+   "byte": 14175,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {},
+   "e_uno_strumento": false,
+   "strumento_del_padre": null
+  },
+  {
+   "file": "csv/_test_fork/_diag_triangoli/DIAG_triangoli.txt",
+   "sha1": "537690c0d5caa71ea838b64dde8ba6c20d53c335",
+   "byte": 747,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {
+    "STRUMENTI": "solo il nome"
+   },
+   "e_uno_strumento": false,
+   "strumento_del_padre": "csv/_test_fork/_diag_triangoli.py"
+  },
+  {
+   "file": "csv/_test_fork/_g3_senza_bifase/letture_log.txt",
+   "sha1": "590db99e084a3b973552988bd7fcf5e3914c6495",
+   "byte": 3610,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {},
+   "e_uno_strumento": false,
+   "strumento_del_padre": null
+  },
+  {
+   "file": "csv/_test_fork/_g4_corto/BILANCIO_d0.csv",
+   "sha1": "6148c4659b3fcf7f501e8f6a6552aaa62962ff11",
+   "byte": 2929,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {
+    "DOC": "percorso",
+    "STRUMENTI": "solo il nome",
+    "REFERTI": "solo il nome"
+   },
+   "e_uno_strumento": false,
+   "strumento_del_padre": null
+  },
+  {
+   "file": "csv/_test_fork/_g4_corto/BILANCIO_d0.txt",
+   "sha1": "c9e0a4b98240bf0270dd90075e25cc758f4934f5",
+   "byte": 3917,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {
+    "DOC": "percorso",
+    "STRUMENTI": "solo il nome",
+    "REFERTI": "solo il nome",
+    "INVENTARIO": "solo il nome"
+   },
+   "e_uno_strumento": false,
+   "strumento_del_padre": null
+  },
+  {
+   "file": "csv/_test_fork/_g4_corto/prog.csv",
+   "sha1": "00577387101573bebfcaa987502c21310ed95094",
+   "byte": 505,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {
+    "DOC": "percorso",
+    "STRUMENTI": "solo il nome",
+    "REFERTI": "percorso",
+    "INVENTARIO": "solo il nome",
+    "TASK_HISTORY": "solo il nome"
+   },
+   "e_uno_strumento": false,
+   "strumento_del_padre": null
+  },
+  {
+   "file": "csv/_test_fork/_g6000/prog.csv",
+   "sha1": "7bbcc2a4f544ecda042dc573a7e70803547d1d02",
+   "byte": 5330,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {
+    "DOC": "percorso",
+    "STRUMENTI": "solo il nome",
+    "REFERTI": "solo il nome",
+    "INVENTARIO": "solo il nome",
+    "TASK_HISTORY": "solo il nome"
+   },
+   "e_uno_strumento": false,
+   "strumento_del_padre": null
+  },
+  {
+   "file": "csv/_test_fork/_pilota_prova1/seme_11/log.txt",
+   "sha1": "2d99a3df24f66ccb9a1921b684300b61ddd964e1",
+   "byte": 9055,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {
+    "DOC": "solo il nome",
+    "STRUMENTI": "solo il nome"
+   },
+   "e_uno_strumento": false,
+   "strumento_del_padre": "csv/_test_fork/_pilota_prova1.py"
+  },
+  {
+   "file": "csv/_test_fork/_pilota_prova1/seme_12/log.txt",
+   "sha1": "6868ccdccf1d48a1c0cc67320b3e4f2b7dccb824",
+   "byte": 9055,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {
+    "DOC": "solo il nome",
+    "STRUMENTI": "solo il nome"
+   },
+   "e_uno_strumento": false,
+   "strumento_del_padre": "csv/_test_fork/_pilota_prova1.py"
+  },
+  {
+   "file": "csv/_test_fork/_pilota_prova1/seme_13/log.txt",
+   "sha1": "573d2fecacd0bf61eaa894f9a95372efb1d0fcf3",
+   "byte": 9055,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {
+    "DOC": "solo il nome",
+    "STRUMENTI": "solo il nome"
+   },
+   "e_uno_strumento": false,
+   "strumento_del_padre": "csv/_test_fork/_pilota_prova1.py"
+  },
+  {
+   "file": "csv/_test_fork/_pilota_prova1/seme_14/log.txt",
+   "sha1": "74184db8bdadbb848160036a7be543e5627ee45a",
+   "byte": 9055,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {
+    "DOC": "solo il nome",
+    "STRUMENTI": "solo il nome"
+   },
+   "e_uno_strumento": false,
+   "strumento_del_padre": "csv/_test_fork/_pilota_prova1.py"
+  },
+  {
+   "file": "csv/_test_fork/_pos_contro_d/_corsa.txt",
+   "sha1": "57a91580f6d7cf9c88a5c122fe381dbaf7c0da65",
+   "byte": 7948,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {
+    "DOC": "solo il nome",
+    "STRUMENTI": "solo il nome",
+    "REFERTI": "solo il nome",
+    "INVENTARIO": "solo il nome",
+    "TASK_HISTORY": "solo il nome"
+   },
+   "e_uno_strumento": false,
+   "strumento_del_padre": "csv/_test_fork/_pos_contro_d.py"
+  },
+  {
+   "file": "csv/_test_fork/_pos_contro_d/_pos_contro_d.json",
+   "sha1": "026cfcc2c3faa50684d894e58137baf27b17412b",
+   "byte": 5482,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {
+    "STRUMENTI": "percorso"
+   },
+   "e_uno_strumento": false,
+   "strumento_del_padre": "csv/_test_fork/_pos_contro_d.py"
+  },
+  {
+   "file": "csv/_test_fork/_run_K/prog.csv",
+   "sha1": "a565fc28c3cbc40b313fb57208e9ad94266760a1",
+   "byte": 1011,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {
+    "DOC": "percorso",
+    "STRUMENTI": "solo il nome",
+    "REFERTI": "solo il nome",
+    "INVENTARIO": "solo il nome",
+    "TASK_HISTORY": "solo il nome"
+   },
+   "e_uno_strumento": false,
+   "strumento_del_padre": null
+  },
+  {
+   "file": "csv/_test_fork/_run_K_log.txt",
+   "sha1": "095c40d9b237775e8f83c577b02ea750490a0098",
+   "byte": 8030,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {},
+   "e_uno_strumento": false,
+   "strumento_del_padre": null
+  },
+  {
+   "file": "csv/_test_fork/_run_S/prog.csv",
+   "sha1": "ed90eb208a63d9c6756fda67e4fc4e323fb419d5",
+   "byte": 1001,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {
+    "DOC": "percorso",
+    "STRUMENTI": "solo il nome",
+    "REFERTI": "solo il nome",
+    "INVENTARIO": "solo il nome",
+    "TASK_HISTORY": "solo il nome"
+   },
+   "e_uno_strumento": false,
+   "strumento_del_padre": null
+  },
+  {
+   "file": "csv/_test_fork/_run_S_log.txt",
+   "sha1": "8cbfa0441be68b9e55dafa2f53ee1075948d8453",
+   "byte": 8070,
+   "classe": "(d) CANDIDATO OMISSIONE",
+   "citato_da": {},
+   "e_uno_strumento": false,
+   "strumento_del_padre": null
+  }
+ ],
+ "binari_tracciati": [],
+ "gitignore_pkl": true,
+ "gitignore_pkl_gz": true
+}

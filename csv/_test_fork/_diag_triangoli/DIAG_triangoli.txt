@@ -1,0 +1,14 @@
+======================================================================================================================
+`2b` CORSA DIAGNOSTICA SUI TRIANGOLI -- **NON E' IL TEST**. Campo MATURO (CURA 4).
+======================================================================================================================
+
+LA MITOSI RESTA QUELLA DI OGGI, CIOE' MORTA (SCALE-TW: max|tw| = 2.8991 pi contro 3 pi,
+frazione raggiunta 0.000000). In questa corsa IL GRAFO NON ACQUISTA NODI PER MITOSI.
+
+[s11] rc=0 02  raggio_vuoto 8.664102  R_CONN 2.400000
+[scena-ii] n = 4252   dentro le regioni = 206   QUOTA = 0.0484   fasi_casuali = False
+OK s11  istanti [0, 1, 60, 150, 300]  n finale 4252
+[s12] rc=143 
+
+
+STOP: un braccio non e' arrivato in fondo.

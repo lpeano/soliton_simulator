@@ -1,0 +1,104 @@
+[TIMBRO] _scena_video.py  sha1-BYTE 5544f3b9  committato e pulito
+================================================================================================================
+SCENA DEL VIDEO senza rendering -- 500 frame x 6 passi = 3000 passi di motore
+================================================================================================================
+[calore] calcio termico SCALARE isotropo forzato (vettoriale spento per confronto)
+[spinore-corretto] MASTER: orologio proprio de Broglie + spinore primario complesso _psi_spinor (evaluate-then-commit, |psi|=1)
+[scala-min] NESSUNA LUNGHEZZA SOTTO LAM: non si rimappa il valore, si SMORZA LA DISCESA -- incremento >= 0 intatto bit per bit, incremento < 0 moltiplicato per max(0, 1-LAM/x). I sette pavimenti di d0 SPARISCONO; le nascite partono da LAM; per d la regola va sull incremento del Verlet. Zero coefficienti.
+[coes-adim] COESIONE ADIMENSIONALE: i tre addendi normalizzati sulla densita' LOCALE dell'arco (I_med sparisce, era una media globale), e lo spostamento e' passo_causale * tanh(...) * filtro_portata, con |F| <= 1 PER COSTRUZIONE. Sostituisce il clip tanh(stress)*d0.
+[chi-coop] COOPERAZIONE: chi_basc SCRIVE perc_geom (geometria, letta dalla catena della torsione) e lo spinore scrive perc_chi (carica, letta dal campo B, dalla mitosi e da Schwinger). L'anello carica -> campo -> spinore -> carica e' quello NORMALE della fisica, sfasato di un passo.
+[deparam-orologio] orologio RELAZIONALE: freq = coerenza d'arco intensiva (no |Psi|^2 estensiva, no rho_c globale, no volume)
+[campo-spinoriale] FASI 1-3: campo Psi EMESSO dallo spinore (n,2) in calcola_psi; densita'/gravita' native (rho_spin, nb); FORZE = OVERLAP SPINORIALE <psi_i|psi_j> (coppia in step). Mitosi/coppie = Fase 4, ancora scalari. Riduzione-al-limite: spinore (e^{i phi},0) -> tutto scalare (sigilli 0.000e+00)
+[fork-su2] STRATO 0: la forza trasporta con N_ij/2 = cos(chi/2) U_ij in SU(2) (MESCOLA a,b -> non-abeliano). Peso = overlap di spin |<n_i|n_j>|, non una manopola. Allineati -> N/2=I -> riduzione ESATTA allo scalare; antipodali -> N=0. Bloch presi da _psi_spinor (gli stessi stati trasportati: connessione di Berry DI quegli stati).
+[fork-su2-mem] STRATO 1: la connessione N nasce dai Bloch RITARDATI n(t-tau), tau = d/cs (tempo-luce d'arco, zero parametri nuovi). ROMPE IL TEOREMA DI INERZIA dello Strato 0: psi(t) non e' autovettore di n(t-tau).sigma, quindi <psi_i|N|psi_j> != 2<psi_i|psi_j> e la FORZA CAMBIA. Rilassamento ESATTO alpha=1-exp(-dt/tau) con slerp geodetico sulla sfera (primo ordine, mai Verlet). A riposo o per tau->0 il ritardato torna al corrente -> riduzione allo Strato 0. Il TRASPORTO resta sugli spinori correnti.
+[step2-orologio] STEP 2: omega_clk *= (cs/CS_M)^2 = OROLOGIO DI COMPTON (omega = m c^2/hbar, e nel modello c e' cs). Aggancia il tempo proprio dell'OROLOGIO a quello della METRICA, che erano scollegati. Zero parametri: a cs=CS_M il fattore e' 1 esatto. cs dal passo precedente (il settore metrico gira dopo). Tocca la MAGNITUDINE, mai il segno. NB: agisce sulla FASE (U(1)), NON sul Bloch: non organizza lo spin, e non deve.
+[rumore-colorato] TAGLIO SPETTRALE: il calcio del vuoto non e' piu' bianco ma correlato su tau_c = LAM/CS_M = 0.4 (= 40 passi), con un processo di Ornstein-Uhlenbeck sul rumore stesso e `dt_n = DT*r` (non DT: e' un processo LOCALE). `amp` INVARIATA. MOTIVO: il rumore bianco discreto inietta a tutte le frequenze fino a Nyquist, incluse quelle che il passo non risolve; in natura non esiste. ZERO coefficienti: LAM e CS_M sono gia' nel sistema. ATTENZIONE: la ricorsione PRESERVA LA VARIANZA, quindi NON abbassa theta - se lo muove lo fa SALIRE (<=5%). Si cabla perche' il rumore bianco e' SBAGLIATO, non perche' risolva l'aliasing (doc/PREDIZIONE_taglio_spettrale.md).
+[tau-luce] Il rilassamento di omega_s usa tau = d_nodo/cs_nodo (`_tempo_luce_nodo`), lo STESSO tau dello Strato 1, al posto di TAU_A*max(dens/dens_rif, 0.05). MOTIVO: inerzia = T^2 = (d/cs)^2, quindi il tempo che COSTRUISCE l'inerzia e quello che la RILASSA devono essere lo stesso; oggi sono due diversi nella stessa equazione. Zero coefficienti, zero floor nuovi. NB: |omega|_eq va come sqrt(tau), quindi theta cala di ~13x: UN ORDINE DI GRANDEZZA, NON la soluzione dell'aliasing.
+[spin-feedback] ON di default (2026-09-18): prerequisiti presenti, il ramo GIRA. Acceso PER DECISIONE e su basi di FORMA (cricchetto curato 1.112 -> 6.5e-16; G6: fase CUCITA, cambi di segno 0.0035 contro nullo 0.50; sigillo 12/12), NON perche' una misura lo abbia mostrato migliore: l'A/B a quattro semi NON ha mostrato effetto.
+[verlet] integratore metrico Velocity-Verlet (2 ordine) attivo
+[olon-part] la partizione tangenziale usa curl + twist coerente (verso -> conversione)
+[pav-com] pavimento comovente attivo: d0 >= median(d0)-MAD(d0) invece di 0.05 assoluto
+[zeta-vir] freno anisotropo attivo: beta *= cos2 della viriale (dissipa radiale, libera tangenziale)
+[chi-basc] basculamento chirale attivo: perc_chi vira secondo la torsione locale vs PHI_CRIT (2pi)
+[chi-core] frame-dragging guidato dalla chiralità emergente del core locale
+[cs-dinamico] velocità metrica locale cs_eff(rho) con profilo tanh e CFL dinamico
+
+  FLAG ATTIVI, letti dal MODULO dopo `_applica_flag` (P6: dai dati, non dal comando):
+    CAMPO_SPINORIALE     True
+    SPINORE_VIVO         True
+    SPINORE_CORRETTO     True
+    CHI_CORE             True
+    CS_DINAMICO          True
+    TAU_LUCE             True
+    CHI_BASC             True
+    CHI_COOP             True
+    SCALA_MIN            True
+    COES_ADIM            True
+    FORK_SU2             True
+    FORK_SU2_MEM         True
+    STEP2_OROLOGIO       True
+    SPIN_FEEDBACK        True
+    CALORE_VETTORIALE    False
+    PLAST_DIN            True
+    VERLET               True
+    TAU_LOC              1.0
+  PASSI_PER_FRAME = 6   DT = 0.01   TAU_A = 50.0   N_c(collasso) = 621
+  ⚠ `--tau-luce` ha il SIGILLO FALLITO (CLAUDE.md par.0): ramo NON CERTIFICATO.
+  ⚠ `--chi-basc` RISCRIVE `perc_chi` a ogni passo: non e' un'etichetta di lignaggio.
+
+  scena avviata: n = 2391 nodi alla semina (N_c*0.8 per massa, 3 masse)
+
+  SEME EFFETTIVO (letto da Rete.__init__): 42    BLOB: 26fa354d0a42e9147a0143409e9b0805e234d79f
+  SERIE ATTIVA: uno snapshot ogni 20 frame = 120 passi di motore -> csv/_test_fork/_ab_D\scena.pkl.gz
+  frame 1     n=2491    archi=526097   coer_l=0.5761   dil= -2.931%   [19.7 s, 19.720 s/frame]
+  frame 5     n=2586    archi=526213   coer_l=0.346    dil=-13.318%   [100.0 s, 20.002 s/frame]
+  frame 10    n=2626    archi=526260   coer_l=0.3028   dil=-22.534%   [198.4 s, 19.844 s/frame]
+  frame 15    n=2647    archi=526287   coer_l=0.4258   dil=-28.473%   [296.5 s, 19.767 s/frame]
+  SNAPSHOT passo 120     n=2663       36.23 MB in   1.4 s -> scena_000120.pkl.gz
+  frame 20    n=2663    archi=526306   coer_l=0.4704   dil=-33.594%   [392.8 s, 19.641 s/frame]
+  frame 25    n=2676    archi=526323   coer_l=0.4947   dil=-37.965%   [487.3 s, 19.491 s/frame]
+  frame 30    n=2691    archi=526344   coer_l=0.5137   dil=-41.471%   [585.9 s, 19.531 s/frame]
+  frame 35    n=2701    archi=526356   coer_l=0.5177   dil=-44.449%   [683.5 s, 19.529 s/frame]
+  SNAPSHOT passo 240     n=2713       36.47 MB in   1.4 s -> scena_000240.pkl.gz
+  frame 40    n=2713    archi=526370   coer_l=0.5292   dil=-46.987%   [783.2 s, 19.579 s/frame]
+  frame 45    n=2728    archi=526389   coer_l=0.5028   dil=-49.203%   [879.6 s, 19.547 s/frame]
+  frame 50    n=2736    archi=526400   coer_l=0.4895   dil=-50.714%   [976.5 s, 19.530 s/frame]
+  frame 55    n=2748    archi=526414   coer_l=0.4953   dil=-50.859%   [1085.9 s, 19.743 s/frame]
+  SNAPSHOT passo 360     n=2760       36.58 MB in   1.6 s -> scena_000360.pkl.gz
+  frame 60    n=2760    archi=526429   coer_l=0.4933   dil=-50.043%   [1193.9 s, 19.899 s/frame]
+  frame 65    n=2769    archi=526440   coer_l=0.4862   dil=-48.101%   [1297.7 s, 19.965 s/frame]
+  frame 70    n=2778    archi=526450   coer_l=0.5009   dil=-45.603%   [1392.9 s, 19.898 s/frame]
+  frame 75    n=2805    archi=526483   coer_l=0.4687   dil=-42.673%   [1488.4 s, 19.845 s/frame]
+  SNAPSHOT passo 480     n=2817       36.63 MB in   1.5 s -> scena_000480.pkl.gz
+  frame 80    n=2817    archi=526496   coer_l=0.4432   dil=-39.574%   [1588.0 s, 19.850 s/frame]
+  frame 85    n=2853    archi=526543   coer_l=0.5325   dil=-37.033%   [1694.8 s, 19.939 s/frame]
+  frame 90    n=2899    archi=526602   coer_l=0.5161   dil=-34.593%   [1808.1 s, 20.090 s/frame]
+  frame 95    n=2932    archi=526643   coer_l=0.4954   dil=-32.586%   [1915.8 s, 20.166 s/frame]
+  SNAPSHOT passo 600     n=2986       36.71 MB in   1.5 s -> scena_000600.pkl.gz
+  frame 100   n=2986    archi=526709   coer_l=0.4629   dil=-30.307%   [2020.7 s, 20.207 s/frame]
+  frame 105   n=3068    archi=526810   coer_l=0.4518   dil=-28.324%   [2122.9 s, 20.218 s/frame]
+  frame 110   n=3143    archi=526905   coer_l=0.4292   dil=-26.133%   [2223.6 s, 20.214 s/frame]
+  frame 115   n=3236    archi=527020   coer_l=0.4181   dil=-23.884%   [2321.1 s, 20.184 s/frame]
+  SNAPSHOT passo 720     n=3346       36.84 MB in   1.6 s -> scena_000720.pkl.gz
+  frame 120   n=3346    archi=527163   coer_l=0.4109   dil=-22.151%   [2428.4 s, 20.236 s/frame]
+  frame 125   n=3452    archi=527295   coer_l=0.4004   dil=-20.611%   [2540.3 s, 20.323 s/frame]
+  frame 130   n=3563    archi=527440   coer_l=0.4107   dil=-19.686%   [2645.8 s, 20.352 s/frame]
+  frame 135   n=3657    archi=527560   coer_l=0.4218   dil=-18.814%   [2751.4 s, 20.381 s/frame]
+  SNAPSHOT passo 840     n=3737       37.00 MB in   1.4 s -> scena_000840.pkl.gz
+  frame 140   n=3737    archi=527663   coer_l=0.4388   dil=-18.024%   [2853.4 s, 20.382 s/frame]
+  frame 145   n=3808    archi=527754   coer_l=0.4354   dil=-17.038%   [2956.0 s, 20.386 s/frame]
+  frame 150   n=3903    archi=527879   coer_l=0.4312   dil=-15.864%   [3064.5 s, 20.430 s/frame]
+  frame 155   n=3958    archi=527948   coer_l=0.4385   dil=-14.942%   [3168.1 s, 20.439 s/frame]
+  SNAPSHOT passo 960     n=4020       37.04 MB in   1.4 s -> scena_000960.pkl.gz
+  frame 160   n=4020    archi=528027   coer_l=0.439    dil=-14.586%   [3275.8 s, 20.474 s/frame]
+  frame 165   n=4084    archi=528108   coer_l=0.4594   dil=-14.025%   [3384.1 s, 20.510 s/frame]
+  frame 170   n=4147    archi=528187   coer_l=0.4584   dil=-14.352%   [3488.9 s, 20.523 s/frame]
+  frame 175   n=4212    archi=528270   coer_l=0.4366   dil=-14.726%   [3600.3 s, 20.573 s/frame]
+  SNAPSHOT passo 1080    n=4261       37.04 MB in   1.4 s -> scena_001080.pkl.gz
+  frame 180   n=4261    archi=528331   coer_l=0.4336   dil=-13.978%   [3700.5 s, 20.558 s/frame]
+  frame 185   n=4322    archi=528408   coer_l=0.444    dil=-13.379%   [3799.4 s, 20.537 s/frame]
+  frame 190   n=4375    archi=528475   coer_l=0.4388   dil=-13.770%   [5517.4 s, 29.039 s/frame]
+  frame 195   n=4454    archi=528576   coer_l=0.4396   dil=-13.801%   [5631.5 s, 28.879 s/frame]
+  SNAPSHOT passo 1200    n=4499       37.12 MB in   1.4 s -> scena_001200.pkl.gz
+  frame 200   n=4499    archi=528638   coer_l=0.4404   dil=-12.758%   [5741.4 s, 28.707 s/frame]
+  frame 205   n=4548    archi=528701   coer_l=0.4461   dil=-12.872%   [5838.9 s, 28.482 s/frame]

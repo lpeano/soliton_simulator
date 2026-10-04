@@ -1,0 +1,548 @@
+{
+ "blob_sim": "c18c9bf6f412c81b5a55eefbc8ee64eca85e4122",
+ "blob_strumento": "9ba7df64b6536031513ed1720b3269fe6a700b02",
+ "nel_simulatore": [
+  {
+   "riga": 457,
+   "classe": "CODICE",
+   "come": "assegnazione",
+   "testo": "MITOSI_2LAM = False     # [CURA 5, 2026-09-25] `MITOSI_2LAM`: `A13` ALLA NASCITA. Approvata"
+  },
+  {
+   "riga": 457,
+   "classe": "COMMENTO",
+   "come": "commento",
+   "testo": "MITOSI_2LAM = False     # [CURA 5, 2026-09-25] `MITOSI_2LAM`: `A13` ALLA NASCITA. Approvata"
+  },
+  {
+   "riga": 3471,
+   "classe": "COMMENTO",
+   "come": "commento",
+   "testo": "# PIU': con `SEMINA_LAM` e `MITOSI_2LAM` si ha `d >= LAM`. ⚠ MA E'"
+  },
+  {
+   "riga": 8465,
+   "classe": "CODICE",
+   "come": "lettura",
+   "testo": "if MITOSI_2LAM and len(c):"
+  },
+  {
+   "riga": 8929,
+   "classe": "COMMENTO",
+   "come": "commento",
+   "testo": "#   NESSUN PAVIMENTO: `d >= LAM` con `SEMINA_LAM`/`MITOSI_2LAM`. E poiche' e'"
+  },
+  {
+   "riga": 10636,
+   "classe": "CODICE",
+   "come": "global",
+   "testo": "global MITOSI_2LAM     # [CURA 5] senza questo l'assegnazione sarebbe una LOCALE, inerte"
+  },
+  {
+   "riga": 10638,
+   "classe": "COMMENTO",
+   "come": "commento",
+   "testo": "#   ed e' esattamente come `--semina-matura` e `--mitosi-2lam` sono stati inerti per un"
+  },
+  {
+   "riga": 10646,
+   "classe": "COMMENTO",
+   "come": "commento",
+   "testo": "#   `--tau-a`, `--semina-matura` e `--mitosi-2lam`, inerti per un giorno intero coi"
+  },
+  {
+   "riga": 10731,
+   "classe": "CODICE",
+   "come": "assegnazione",
+   "testo": "MITOSI_2LAM = bool(getattr(a, \"mitosi_2lam\", False))       # [CURA 5]"
+  },
+  {
+   "riga": 10731,
+   "classe": "CODICE",
+   "come": "stringa-chiave `mitosi_2lam`",
+   "testo": "MITOSI_2LAM = bool(getattr(a, \"mitosi_2lam\", False))       # [CURA 5]"
+  },
+  {
+   "riga": 10732,
+   "classe": "CODICE",
+   "come": "lettura",
+   "testo": "if MITOSI_2LAM:"
+  },
+  {
+   "riga": 10733,
+   "classe": "STRINGA",
+   "come": "letterale o docstring",
+   "testo": "print(\"[cura5] MITOSI_2LAM ON: un arco si divide SOLO se `d >= 2 LAM` (`A13` alla \""
+  },
+  {
+   "riga": 11126,
+   "classe": "COMMENTO",
+   "come": "commento",
+   "testo": "#   **`--semina-matura` e `--mitosi-2lam` NON FUNZIONAVANO DA RIGA DI COMANDO.**"
+  },
+  {
+   "riga": 11129,
+   "classe": "COMMENTO",
+   "come": "commento",
+   "testo": "#   Trovato dal SIGILLO DEL DRIVER (`MITOSI_2LAM False/False` in NUDA e CAMPAGNA)."
+  },
+  {
+   "riga": 11691,
+   "classe": "CODICE",
+   "come": "stringa-chiave `--mitosi-2lam`",
+   "testo": "p.add_argument(\"--mitosi-2lam\", action=\"store_true\","
+  },
+  {
+   "riga": 11691,
+   "classe": "STRINGA",
+   "come": "letterale o docstring",
+   "testo": "p.add_argument(\"--mitosi-2lam\", action=\"store_true\","
+  }
+ ],
+ "altrove": {
+  "csv/_cli_flag.py": [
+   {
+    "riga": 2,
+    "classe": "STRINGA",
+    "come": "letterale o docstring",
+    "testo": "\"\"\"**IL PERCORSO VERO DI UN FLAG: `argv` -> `_cli()` -> `_applica_flag()` -> MODULO.**"
+   }
+  ],
+  "csv/_cure_verificate.py": [
+   {
+    "riga": 144,
+    "classe": "STRINGA",
+    "come": "letterale o docstring",
+    "testo": "(\"MITOSI_2LAM\", \"**`CURA 5`** `A13` ALLA NASCITA: un arco si divide solo se `d >= 2 LAM`\","
+   },
+   {
+    "riga": 146,
+    "classe": "STRINGA",
+    "come": "letterale o docstring",
+    "testo": "\"in **ogni** run del fork *(`--mitosi-2lam`)*\","
+   }
+  ],
+  "csv/_presidio_commenti_flag.py": [
+   {
+    "riga": 2,
+    "classe": "STRINGA",
+    "come": "letterale o docstring",
+    "testo": "\"\"\"**`P7` — LA POSTCONDIZIONE: IL COMMENTO DI OGNI FLAG NOMINA QUEL FLAG.**"
+   },
+   {
+    "riga": 94,
+    "classe": "STRINGA",
+    "come": "letterale o docstring",
+    "testo": "\"\"\"Restituisce `(guasti, quanti)`. Un guasto = `(flag, riga, motivo)`."
+   }
+  ],
+  "csv/_seal_fork/_sigillo_cura4_accensione.py": [
+   {
+    "riga": 174,
+    "classe": "STRINGA",
+    "come": "letterale o docstring",
+    "testo": "FIGLIO_MIT = r'''"
+   }
+  ],
+  "csv/_seal_fork/_sigillo_cura5_a13nascita.py": [
+   {
+    "riga": 2,
+    "classe": "STRINGA",
+    "come": "letterale o docstring",
+    "testo": "\"\"\"`CURA 5` -- **IL SIGILLO DI `A13` ALLA NASCITA** (`MITOSI_2LAM`)."
+   },
+   {
+    "riga": 47,
+    "classe": "STRINGA",
+    "come": "letterale o docstring",
+    "testo": "FIGLIO = r'''"
+   },
+   {
+    "riga": 224,
+    "classe": "STRINGA",
+    "come": "letterale o docstring",
+    "testo": "P(\"SIGILLO `CURA 5` -- `A13` ALLA NASCITA (`MITOSI_2LAM`): un arco si divide SOLO se `d >= 2 LAM`\")"
+   },
+   {
+    "riga": 336,
+    "classe": "STRINGA",
+    "come": "letterale o docstring",
+    "testo": "+ chr(10) + \"  la condizione `MITOSI_2LAM` sta nella maschera `ok` della DIVISIONE,\""
+   }
+  ],
+  "csv/_seal_fork/_sigillo_frazione_t.py": [
+   {
+    "riga": 2,
+    "classe": "STRINGA",
+    "come": "letterale o docstring",
+    "testo": "\"\"\"**IL SIGILLO DEL `COMMIT 6a`: la frazione `t` esplicita.**"
+   },
+   {
+    "riga": 58,
+    "classe": "COMMENTO",
+    "come": "commento",
+    "testo": "# ### LE TRE SCENE DEL COMMIT 4, PIU' LA QUARTA senza `--mitosi-2lam` (mandato)"
+   },
+   {
+    "riga": 126,
+    "classe": "STRINGA",
+    "come": "letterale o docstring",
+    "testo": "\"\"\"Scena `MASSE-COERENTI`, dal CLI del driver: nessun attributo a mano *(`H-P3`)*."
+   },
+   {
+    "riga": 135,
+    "classe": "CODICE",
+    "come": "stringa-chiave `--mitosi-2lam`",
+    "testo": "argv = [x for x in argv if x != \"--mitosi-2lam\"]"
+   },
+   {
+    "riga": 135,
+    "classe": "STRINGA",
+    "come": "letterale o docstring",
+    "testo": "argv = [x for x in argv if x != \"--mitosi-2lam\"]"
+   },
+   {
+    "riga": 433,
+    "classe": "STRINGA",
+    "come": "letterale o docstring",
+    "testo": "stampa(\"  SCENA `%s` -- seme %d, %d passi, --mitosi-2lam: %s\""
+   },
+   {
+    "riga": 492,
+    "classe": "CODICE",
+    "come": "stringa-chiave `mitosi_2lam`",
+    "testo": "per_scena[nome] = {\"seme\": seme, \"passi\": passi, \"mitosi_2lam\": con2,"
+   }
+  ],
+  "csv/_seal_fork/_sig_scena_ii/_driver_prima.py": [
+   {
+    "riga": 264,
+    "classe": "CODICE",
+    "come": "stringa-chiave `--mitosi-2lam`",
+    "testo": "\"--mitosi-2lam\","
+   },
+   {
+    "riga": 264,
+    "classe": "STRINGA",
+    "come": "letterale o docstring",
+    "testo": "\"--mitosi-2lam\","
+   }
+  ],
+  "csv/_test_fork/_censimento_mitosi_2lam.py": [
+   {
+    "riga": 2,
+    "classe": "STRINGA",
+    "come": "letterale o docstring",
+    "testo": "\"\"\"IL CENSIMENTO DI `MITOSI_2LAM` — ogni sito, e di che TIPO e'."
+   },
+   {
+    "riga": 49,
+    "classe": "STRINGA",
+    "come": "letterale o docstring",
+    "testo": "NOME = \"MITOSI_2LAM\""
+   },
+   {
+    "riga": 50,
+    "classe": "CODICE",
+    "come": "stringa-chiave `--mitosi-2lam`",
+    "testo": "CLI = \"--mitosi-2lam\""
+   },
+   {
+    "riga": 50,
+    "classe": "STRINGA",
+    "come": "letterale o docstring",
+    "testo": "CLI = \"--mitosi-2lam\""
+   },
+   {
+    "riga": 51,
+    "classe": "CODICE",
+    "come": "stringa-chiave `mitosi_2lam`",
+    "testo": "ATTR = \"mitosi_2lam\""
+   },
+   {
+    "riga": 63,
+    "classe": "STRINGA",
+    "come": "letterale o docstring",
+    "testo": "10732: \"il `if MITOSI_2LAM:` che stampa l'avviso [cura5]\","
+   },
+   {
+    "riga": 75,
+    "classe": "STRINGA",
+    "come": "letterale o docstring",
+    "testo": "\"blocco [flag-inerti]\": \"il `6b` deve aggiungere `MITOSI_2LAM` fra i flag inerti, \""
+   },
+   {
+    "riga": 81,
+    "classe": "STRINGA",
+    "come": "letterale o docstring",
+    "testo": "\"\"\"### UN REPERTO O UNO STRUMENTO? ### **La domanda che il primo perimetro non si"
+   }
+  ],
+  "csv/_test_fork/_etc_lam_stati.py": [
+   {
+    "riga": 2,
+    "classe": "STRINGA",
+    "come": "letterale o docstring",
+    "testo": "\"\"\"**SOLA LETTURA: `min(d)` e quanti archi stanno sotto `LAM`, nei 16 stati del pilota.**"
+   }
+  ],
+  "csv/_test_fork/_etc_pavimenti.py": [
+   {
+    "riga": 83,
+    "classe": "STRINGA",
+    "come": "letterale o docstring",
+    "testo": "\"MITOSI_2LAM\", \"POZZO_D\")}"
+   }
+  ],
+  "csv/_test_fork/_ordine_estrazioni.py": [
+   {
+    "riga": 880,
+    "classe": "STRINGA",
+    "come": "letterale o docstring",
+    "testo": "\"PLAST_DIN\", \"PLAST_MIT\", \"MITOSI_2LAM\", \"REGIME\", \"SEMINA_LAM\", \"CHI_COOP\"):"
+   }
+  ],
+  "csv/_test_fork/_punto_unico_fattibile.py": [
+   {
+    "riga": 514,
+    "classe": "STRINGA",
+    "come": "letterale o docstring",
+    "testo": "\"ANTIFASE_ADD\", \"COPPIA_MIT\", \"REGIME\", \"MITOSI_2LAM\"):"
+   }
+  ],
+  "csv/_test_fork/_scena_video.py": [
+   {
+    "riga": 307,
+    "classe": "CODICE",
+    "come": "stringa-chiave `--mitosi-2lam`",
+    "testo": "\"--mitosi-2lam\","
+   },
+   {
+    "riga": 307,
+    "classe": "STRINGA",
+    "come": "letterale o docstring",
+    "testo": "\"--mitosi-2lam\","
+   }
+  ],
+  "csv/_test_fork/_verifica_flag_accesi.py": [
+   {
+    "riga": 2,
+    "classe": "STRINGA",
+    "come": "letterale o docstring",
+    "testo": "\"\"\"**IL FLAG ERA EFFETTIVAMENTE ACCESO?** — tabella, non deduzione *(Luca, 2026-09-25)*."
+   },
+   {
+    "riga": 63,
+    "classe": "STRINGA",
+    "come": "letterale o docstring",
+    "testo": "\"csv/_seal_fork/_sig_cura5/SIGILLO_cura5_a13nascita.txt\", (\"MITOSI_2LAM\",)),"
+   },
+   {
+    "riga": 77,
+    "classe": "STRINGA",
+    "come": "letterale o docstring",
+    "testo": "\"MITOSI_2LAM\": ["
+   },
+   {
+    "riga": 113,
+    "classe": "STRINGA",
+    "come": "letterale o docstring",
+    "testo": "P(\"  PERCHE' LA DOMANDA E' GIUSTA: `--semina-matura` e `--mitosi-2lam` ERANO MORTI DAL CLI\")"
+   }
+  ]
+ },
+ "confronto": {
+  "rifatto": true,
+  "solo_mie_codice": [],
+  "solo_sue": [
+   10733
+  ],
+  "testo_fuori_lista": [
+   3471,
+   8929,
+   10638,
+   10646,
+   11126,
+   11129
+  ]
+ },
+ "attesi_altrove": [
+  "csv/_test_fork/_scena_video.py",
+  "csv/_cure_verificate.py",
+  "csv/_presidio_commenti_flag.py"
+ ],
+ "altrove_non_previsti": [
+  "csv/_cli_flag.py",
+  "csv/_seal_fork/_sig_scena_ii/_driver_prima.py",
+  "csv/_seal_fork/_sigillo_cura4_accensione.py",
+  "csv/_seal_fork/_sigillo_cura5_a13nascita.py",
+  "csv/_seal_fork/_sigillo_frazione_t.py",
+  "csv/_test_fork/_censimento_mitosi_2lam.py",
+  "csv/_test_fork/_etc_lam_stati.py",
+  "csv/_test_fork/_etc_pavimenti.py",
+  "csv/_test_fork/_ordine_estrazioni.py",
+  "csv/_test_fork/_punto_unico_fattibile.py",
+  "csv/_test_fork/_verifica_flag_accesi.py"
+ ],
+ "altrove_previsti_assenti": [],
+ "attesi_assenti": {
+  "blocco [flag-inerti]": "il `6b` deve aggiungere `MITOSI_2LAM` fra i flag inerti, come `PAV_COM`"
+ },
+ "reperti": {
+  "STRUMENTO": [
+   "csv/_cli_flag.py",
+   "csv/_cure_verificate.py",
+   "csv/_presidio_commenti_flag.py",
+   "csv/_seal_fork/_sig_scena_ii/_driver_prima.py",
+   "csv/_seal_fork/_sigillo_cura4_accensione.py",
+   "csv/_seal_fork/_sigillo_cura5_a13nascita.py",
+   "csv/_seal_fork/_sigillo_frazione_t.py",
+   "csv/_test_fork/_censimento_mitosi_2lam.py",
+   "csv/_test_fork/_etc_lam_stati.py",
+   "csv/_test_fork/_etc_pavimenti.py",
+   "csv/_test_fork/_ordine_estrazioni.py",
+   "csv/_test_fork/_punto_unico_fattibile.py",
+   "csv/_test_fork/_scena_video.py",
+   "csv/_test_fork/_verifica_flag_accesi.py"
+  ],
+  "COPIA-SIMULATORE": [
+   "csv/_seal_fork/_guasto_ripieghi/_sim_precura.py",
+   "csv/_seal_fork/_sig_contrasto/_sim_diag_ci.py",
+   "csv/_seal_fork/_sig_contrasto_esteso/_sim_diag_est.py",
+   "csv/_seal_fork/_sig_controllo_unico/_sim_prima_5750.py",
+   "csv/_seal_fork/_sig_controllo_unico/_sim_prima_controllo.py",
+   "csv/_seal_fork/_sig_cura2_strutturale/_sim_al_tag.py",
+   "csv/_seal_fork/_sig_cura_A/_sim_A.py",
+   "csv/_seal_fork/_sig_d32_nomi/_sim_prima.py",
+   "csv/_seal_fork/_sig_decisione_separata/_sim_prima_decisione.py",
+   "csv/_seal_fork/_sig_guardie/_sim_prima_guardie.py",
+   "csv/_seal_fork/_sig_max_nodi/_sim_prima_della_cura.py",
+   "csv/_seal_fork/_sig_nascita_atomica/_sim_e203f9a8.py",
+   "csv/_seal_fork/_sig_nascita_psi/_sim_prima_della_cura.py",
+   "csv/_seal_fork/_sig_pozzo_d/_sim_prima.py",
+   "csv/_seal_fork/_sigillo_confronto_esteso/_sim_prima_cura.py",
+   "csv/_seal_fork/_sigillo_confronto_esteso/_sim_prima_punto_unico.py",
+   "csv/_seal_fork/_sigillo_confronto_esteso/_sim_ulp.py",
+   "csv/_seal_fork/_sigillo_frazione_t/_sim_fm_rovescio.py",
+   "csv/_seal_fork/_sigillo_frazione_t/_sim_let_dd.py",
+   "csv/_seal_fork/_sigillo_frazione_t/_sim_let_dh.py",
+   "csv/_seal_fork/_sigillo_frazione_t/_sim_let_fm.py",
+   "csv/_seal_fork/_sigillo_frazione_t/_sim_let_fm_bias.py",
+   "csv/_seal_fork/_sigillo_frazione_t/_sim_let_pos_div.py",
+   "csv/_seal_fork/_sigillo_frazione_t/_sim_let_pos_sch.py",
+   "csv/_seal_fork/_sigillo_frazione_t/_sim_prima.py",
+   "csv/_seal_fork/_sigillo_frazione_t/_sim_pulita.py",
+   "csv/_seal_fork/_sigillo_frazione_t/_sim_rifatta.py",
+   "csv/_seal_fork/_sigillo_frazione_t/_sim_t04.py",
+   "csv/_seal_fork/_sigillo_frazione_t/_sim_t04_md0.py",
+   "csv/_seal_fork/_sigillo_inerzia_commenti/_sim_prima.py",
+   "csv/_seal_fork/_sigillo_perc_geom_derivata/_sim_D1.py",
+   "csv/_seal_fork/_sigillo_perc_geom_derivata/_sim_D2.py",
+   "csv/_seal_fork/_sigillo_perc_geom_derivata/_sim_E.py",
+   "csv/_seal_fork/_sigillo_perc_geom_derivata/_sim_prima.py",
+   "csv/_seal_fork/_sigillo_perc_geom_derivata/_sim_rifatta.py",
+   "csv/_seal_fork/_sigillo_perc_geom_derivata/_sim_solo_ordine.py",
+   "csv/_seal_fork/_sigillo_tre_casi/_sim_psi_eredita.py",
+   "csv/_seal_fork/_sigillo_tre_casi/_sim_senza_peq.py",
+   "csv/_seal_fork/_sigillo_tre_casi/_sim_sparsa.py",
+   "csv/_seal_fork/_sigillo_veleno/_sim_cella_scritta.py",
+   "csv/_seal_fork/_sigillo_veleno/_sim_prima_veleno.py",
+   "csv/_seal_fork/_sigillo_veleno/_sim_senza_esenzione.py",
+   "csv/_seal_fork/_sigillo_veleno/_sim_senza_registro.py",
+   "csv/_test_fork/_copertura_derivate/_sim_lettura_iniettata.py",
+   "csv/_test_fork/_limite_accoppiamento2/_sim_diag2.py",
+   "csv/_test_fork/_scomposizione_figli/_sim_diag_scomp.py"
+  ],
+  "STUB-DI-RUN": [
+   "csv/_seal_fork/_sig_contrasto/_tmp/_br_off_s11_corti.py",
+   "csv/_seal_fork/_sig_contrasto/_tmp/_br_off_s11_lunghi.py",
+   "csv/_seal_fork/_sig_contrasto/_tmp/_br_off_s12_corti.py",
+   "csv/_seal_fork/_sig_contrasto/_tmp/_br_off_s12_lunghi.py",
+   "csv/_seal_fork/_sig_contrasto/_tmp/_br_on_s11_corti.py",
+   "csv/_seal_fork/_sig_contrasto/_tmp/_br_on_s11_lunghi.py",
+   "csv/_seal_fork/_sig_contrasto/_tmp/_br_on_s12_corti.py",
+   "csv/_seal_fork/_sig_contrasto/_tmp/_br_on_s12_lunghi.py",
+   "csv/_seal_fork/_sig_contrasto/_tmp/_br_prima_s11_lunghi.py",
+   "csv/_seal_fork/_sig_contrasto/_tmp/_br_prima_s12_lunghi.py",
+   "csv/_seal_fork/_sig_contrasto/_tmp/_sim_prima.py",
+   "csv/_seal_fork/_sig_contrasto/_tmp/_sim_prima_diag.py",
+   "csv/_seal_fork/_sig_contrasto_esteso/_tmp/_br_figli_s11.py",
+   "csv/_seal_fork/_sig_contrasto_esteso/_tmp/_br_figli_s12.py",
+   "csv/_seal_fork/_sig_contrasto_esteso/_tmp/_br_off_s11_corti.py",
+   "csv/_seal_fork/_sig_contrasto_esteso/_tmp/_br_off_s11_lunghi.py",
+   "csv/_seal_fork/_sig_contrasto_esteso/_tmp/_br_off_s12_corti.py",
+   "csv/_seal_fork/_sig_contrasto_esteso/_tmp/_br_off_s12_lunghi.py",
+   "csv/_seal_fork/_sig_contrasto_esteso/_tmp/_br_on_s11_corti.py",
+   "csv/_seal_fork/_sig_contrasto_esteso/_tmp/_br_on_s11_lunghi.py",
+   "csv/_seal_fork/_sig_contrasto_esteso/_tmp/_br_on_s12_corti.py",
+   "csv/_seal_fork/_sig_contrasto_esteso/_tmp/_br_on_s12_lunghi.py",
+   "csv/_seal_fork/_sig_contrasto_esteso/_tmp/_br_prima_s11_lunghi.py",
+   "csv/_seal_fork/_sig_contrasto_esteso/_tmp/_br_prima_s12_lunghi.py",
+   "csv/_seal_fork/_sig_contrasto_esteso/_tmp/_br_ril_s11_corti.py",
+   "csv/_seal_fork/_sig_contrasto_esteso/_tmp/_br_ril_s11_lunghi.py",
+   "csv/_seal_fork/_sig_contrasto_esteso/_tmp/_br_ril_s12_corti.py",
+   "csv/_seal_fork/_sig_contrasto_esteso/_tmp/_br_ril_s12_lunghi.py",
+   "csv/_seal_fork/_sig_contrasto_esteso/_tmp/_sim_prima.py",
+   "csv/_seal_fork/_sig_contrasto_esteso/_tmp/_sim_prima_diag.py",
+   "csv/_seal_fork/_sig_cura4/_tmp/_br_lungo_off.py",
+   "csv/_seal_fork/_sig_cura4/_tmp/_br_lungo_on.py",
+   "csv/_seal_fork/_sig_cura4/_tmp/_br_mitosi.py",
+   "csv/_seal_fork/_sig_cura4/_tmp/_br_off.py",
+   "csv/_seal_fork/_sig_cura4/_tmp/_br_on.py",
+   "csv/_seal_fork/_sig_cura4/_tmp/_br_on_forzato.py",
+   "csv/_seal_fork/_sig_cura4/_tmp/_br_prima.py",
+   "csv/_seal_fork/_sig_cura5/_tmp/_br_c8_s11.py",
+   "csv/_seal_fork/_sig_cura5/_tmp/_br_off_s11.py",
+   "csv/_seal_fork/_sig_cura5/_tmp/_br_off_s12.py",
+   "csv/_seal_fork/_sig_cura5/_tmp/_br_on_s11.py",
+   "csv/_seal_fork/_sig_cura5/_tmp/_br_on_s12.py",
+   "csv/_seal_fork/_sig_cura5/_tmp/_br_prima_s11.py",
+   "csv/_seal_fork/_sig_cura5/_tmp/_br_prima_s12.py",
+   "csv/_seal_fork/_sig_cura5/_tmp/_sim_vecchio.py",
+   "csv/_seal_fork/_sig_cura_A/_tmp/_br_figli_off_s11.py",
+   "csv/_seal_fork/_sig_cura_A/_tmp/_br_figli_off_s12.py",
+   "csv/_seal_fork/_sig_cura_A/_tmp/_br_figli_on_s11.py",
+   "csv/_seal_fork/_sig_cura_A/_tmp/_br_figli_on_s12.py",
+   "csv/_seal_fork/_sig_cura_A/_tmp/_br_off_s11_corti.py",
+   "csv/_seal_fork/_sig_cura_A/_tmp/_br_off_s11_lunghi.py",
+   "csv/_seal_fork/_sig_cura_A/_tmp/_br_off_s12_corti.py",
+   "csv/_seal_fork/_sig_cura_A/_tmp/_br_off_s12_lunghi.py",
+   "csv/_seal_fork/_sig_cura_A/_tmp/_br_off_s13_corti.py",
+   "csv/_seal_fork/_sig_cura_A/_tmp/_br_off_s13_lunghi.py",
+   "csv/_seal_fork/_sig_cura_A/_tmp/_br_off_s14_corti.py",
+   "csv/_seal_fork/_sig_cura_A/_tmp/_br_off_s14_lunghi.py",
+   "csv/_seal_fork/_sig_cura_A/_tmp/_br_on_s11_corti.py",
+   "csv/_seal_fork/_sig_cura_A/_tmp/_br_on_s11_lunghi.py",
+   "csv/_seal_fork/_sig_cura_A/_tmp/_br_on_s12_corti.py",
+   "csv/_seal_fork/_sig_cura_A/_tmp/_br_on_s12_lunghi.py",
+   "csv/_seal_fork/_sig_cura_A/_tmp/_br_on_s13_corti.py",
+   "csv/_seal_fork/_sig_cura_A/_tmp/_br_on_s13_lunghi.py",
+   "csv/_seal_fork/_sig_cura_A/_tmp/_br_on_s14_corti.py",
+   "csv/_seal_fork/_sig_cura_A/_tmp/_br_on_s14_lunghi.py",
+   "csv/_seal_fork/_sig_cura_A/_tmp/_br_pf_s11_lunghi.py",
+   "csv/_seal_fork/_sig_cura_A/_tmp/_br_pf_s12_lunghi.py",
+   "csv/_seal_fork/_sig_cura_A/_tmp/_br_suW_s11_corti.py",
+   "csv/_seal_fork/_sig_cura_A/_tmp/_br_suW_s11_lunghi.py",
+   "csv/_seal_fork/_sig_cura_A/_tmp/_br_suW_s12_corti.py",
+   "csv/_seal_fork/_sig_cura_A/_tmp/_br_suW_s12_lunghi.py",
+   "csv/_seal_fork/_sig_cura_A/_tmp/_br_suW_s13_corti.py",
+   "csv/_seal_fork/_sig_cura_A/_tmp/_br_suW_s13_lunghi.py",
+   "csv/_seal_fork/_sig_cura_A/_tmp/_br_suW_s14_corti.py",
+   "csv/_seal_fork/_sig_cura_A/_tmp/_br_suW_s14_lunghi.py",
+   "csv/_seal_fork/_sig_cura_A/_tmp/_sim_prima_flag.py",
+   "csv/_seal_fork/_sig_cura_A/_tmp/_sim_prima_flag_diag.py",
+   "csv/_seal_fork/_sig_cura_A/_tmp/_sim_su_W.py",
+   "csv/_seal_fork/_sig_cura_A/_tmp/_sim_su_W_diag.py",
+   "csv/_test_fork/_limite_accoppiamento2/_tmp/_br_s11_corti.py",
+   "csv/_test_fork/_limite_accoppiamento2/_tmp/_br_s11_lunghi.py",
+   "csv/_test_fork/_limite_accoppiamento2/_tmp/_br_s12_corti.py",
+   "csv/_test_fork/_limite_accoppiamento2/_tmp/_br_s12_lunghi.py",
+   "csv/_test_fork/_scomposizione_figli/_tmp/_br_scomp_s11.py",
+   "csv/_test_fork/_scomposizione_figli/_tmp/_br_scomp_s12.py"
+  ]
+ },
+ "codice": 7,
+ "commenti": 7,
+ "stringhe": 2,
+ "si_ferma": true
+}
