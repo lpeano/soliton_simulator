@@ -339,53 +339,30 @@ sta in `doc/PATTERN_DI_PROVA.md`, che si legge prima di scrivere un sigillo o un
 ## 12. I PRESIDI AUTOMATICI — **i hook, e sono UNDICI**
 
 > ### ⚠ **UN COMANDO, UNA VOLTA PER CLONE, PRIMA DI LAVORARE:**
-> ```
-> git config core.hooksPath .githooks        # oppure: python csv/_hook_presidi.py --installa
-> ```
-> **Finche' quel comando non e' dato, i presidi NON impediscono niente** — e
-> `python csv/_hook_presidi.py` **lo dice a ogni invocazione** (`A9`).
-
-Gli script stanno in **`.githooks/`**, che **e' TRACCIATO da git**; `.git/hooks/` **non lo e'** e
-non viaggia col repo. `core.hooksPath` **SOSTITUISCE** quella cartella.
+> `git config core.hooksPath .githooks`. **Finche' non e' dato, i presidi NON impediscono
+> niente** (`A9`).
 
 | id | stadio | che cosa **impedisce** |
 |---|---|---|
 | **`H-P3`** | `pre-commit` | un **sigillo** che configura il modulo **a mano** invece di passare dal CLI |
 | **`H-P5`** | `pre-commit` | un **referto** che non dichiara **la configurazione INTERA** |
 | **`H-P7`** | `pre-commit` | un **flag** il cui commento cambia senza nominare quel flag |
-| **`H-P8`** | `pre-commit` | un confronto che prende **«il codice di prima» da `HEAD`** invece che dal PADRE |
-| **`H-VALIDATORE`** | `pre-commit` | un **indice** mal formato, o con una voce persa rispetto al tag |
+| **`H-P8`** | `pre-commit` | un confronto che prende **il codice di prima da `HEAD`** invece che dal PADRE |
+| **`H-VALIDATORE`** | `pre-commit` | un **indice** mal formato, o con una voce persa |
+| **`H-RIGHE`** | `pre-commit` | **`CLAUDE.md` oltre le 400 righe** |
 | **`H-P1-bis`** | `commit-msg` | un **referto** committato **senza toccare la relazione** |
 | **`H-REG-R`** | `commit-msg` | una **legge** che cambia **senza la sua scheda** in `REGISTRO_FISICA` |
-| **`H-INDICE`** | `commit-msg` | un **ID** aggiunto a un documento vivo o citato nel messaggio **che non e' nell'indice** |
-| **`H-RIGHE`** | `pre-commit` | **`CLAUDE.md` oltre le 400 righe** |
-| **`H-NON-TRACCIATI`** | `commit-msg` | **file NON TRACCIATI e NON ignorati** sotto `csv/` o `doc/` *(decisione di Luca, 2026-10-04)*. ### **BLOCCA, non avvisa:** un file **citato** e non tracciato e' **un riferimento al vuoto** — il caso `_sonda_scherm`, e il censimento ne ha contati **98** |
-| **`H-FILE`** | `commit-msg` | una lista **`FILE CAMBIATI`** che **non coincide** con `git diff --cached --name-only`, **o che manca** *(decisione di Luca, 2026-10-03: la regola era scritta da due recidive, e **una regola scritta non e' un presidio**)* |
+| **`H-INDICE`** | `commit-msg` | un **ID** citato **che non e' nell'indice** |
+| **`H-FILE`** | `commit-msg` | una lista **`FILE CAMBIATI`** che **non coincide** con `git diff --cached --name-only`, o che **manca** |
+| **`H-NON-TRACCIATI`** | `commit-msg` | **file NON TRACCIATI e NON ignorati** sotto `csv/` o `doc/`. **BLOCCA, non avvisa** |
+| **`H-STASH`** | `permissions.deny` | **`git stash`**, qualunque forma. **Non e' un hook:** impedisce **prima** che il comando parta, e **non ha via d'uscita** |
 
-> **Il prefisso `H-` dice *«questo lo impedisce una macchina»*, e cura una collisione reale:**
-> `P3` e `P5` erano **due regole diverse** con lo stesso nome — la regola di metodo e il presidio
-> del hook. **Lo stesso difetto che l'indice ha curato per i difetti** *(`A3` era tre voci)*.
-> **I nomi vecchi restano nell'indice** come righe di rinomina, col rimando.
+**LE VIE D'USCITA OBBLIGANO A DICHIARARE:** `[SENZA-RELAZIONE: …]` ·
+`[SENZA-INDICE: …]` · `[CLAUDE-OLTRE-400: …]` · `[SENZA-FILE-CAMBIATI: …]` ·
+`[SENZA-NON-TRACCIATI: …]` nel **messaggio**, ### **a INIZIO RIGA**; `# ESENTE-H-P5: …`
+in un **commento del file**, **e** elencata in `doc/ESENZIONI_presidi.md`.
 
-**LE VIE D'USCITA ESISTONO E OBBLIGANO A DICHIARARE**, cosi' un'eccezione lascia una traccia
-leggibile invece di passare in silenzio:
+### ⚠ **IL LIMITE, per `A9`:** i hook non impediscono cio' che **non guardano**.
 
-| via d'uscita | dove si scrive |
-|---|---|
-| `[SENZA-RELAZIONE: <motivo>]` · `[SENZA-INDICE: <motivo>]` · `[CLAUDE-OLTRE-400: <motivo>]` · `[SENZA-FILE-CAMBIATI: <motivo>]` · `[SENZA-NON-TRACCIATI: <motivo>]` | nel **messaggio** di commit, ### **a INIZIO RIGA** |
-| `# ESENTE-H-P5: <motivo>` *(e simili)* | in un **commento del file**, **e** dev'essere **elencata** in `doc/ESENZIONI_presidi.md` (`python csv/_hook_presidi.py --elenca`): **un'esenzione non elencata fa fallire il commit comunque** |
-
-### ⛔ **E C'E' UN DECIMO PRESIDIO, E NON E' UN HOOK** *(decisione di Luca, 2026-10-03)*
-
-| id | dove | che cosa **impedisce** |
-|---|---|---|
-| **`H-STASH`** | `.claude/settings.json` — `permissions.deny` | ### **`git stash`**, qualunque sua forma |
-
-**Non ha il prefisso di un hook per caso: non e' un hook.** E' una regola di **permesso**, quindi
-impedisce **prima** che il comando parta, non al commit. ### **E non ha via d'uscita dichiarabile:**
-se serve davvero, lo toglie **Luca**. ### **Caso che deve fallire, provato:** `git stash list`
-risponde *<<Permission to use Bash with command git stash list has been denied>>*.
-
-**⚠ E IL LIMITE, per `A9`:** i hook **non impediscono** cio' che non guardano. `H-P1-bis` guarda
-**i file toccati**, non la chat: sulla forma allargata del par.4 **non puo' impedire nulla** — il
-presidio li' e' la riga **`PUSHATO:`**, che Luca vede a colpo d'occhio.
+> **IL DETTAGLIO** — da quale errore e' nato ciascun presidio, le vie d'uscita per esteso,
+> `H-STASH` e il limite: **`doc/REGOLE/par12.md`**.

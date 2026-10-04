@@ -40,6 +40,16 @@ import subprocess
 import sys
 
 _QUI = os.path.dirname(os.path.abspath(__file__))
+sys.path.insert(0, _QUI)
+import _presidio   # noqa: E402
+
+# ### `_presidio.avvia` NON E' FACOLTATIVO (par.7): riconfigura `stdout` in UTF-8 e
+#   timbra il blob. ### ⛔ Senza, questo strumento e' MORTO al primo carattere non-ascii
+#   del suo stesso referto -- `UnicodeEncodeError: 'charmap' codec can't encode ⛔`.
+#   ### **E' successo QUI, al primo giro utile**, ed e' l'ottava volta nel repo: la
+#   settima fu allo script che stava CONTANDO le precedenti.
+_presidio.avvia(__file__)
+
 RADICE = os.path.abspath(os.path.join(_QUI, ".."))
 NL = chr(10)
 CLAUDE = "CLAUDE.md"
@@ -56,7 +66,12 @@ def regole_di(testo):
     titoli, dichiarate, punti = set(), set(), set()
     for r in testo.split(NL):
         s = r.strip()
-        if s.startswith("#"):
+        # ### SOLO `#` e `##`, e non `###`: in questo repo `###` e' ENFASI IN MEZZO
+        #   ALLA PROSA, non un titolo strutturale. ### ⛔ Misurato al primo giro utile:
+        #   condensando il par.12 il controllo ha dichiarato <<regola persa>> la riga
+        #   `### E C'E' UN DECIMO PRESIDIO...`, che ### **non era un titolo ma una frase
+        #   in grassetto.** ### **Un falso allarme che avrebbe fermato il riordino.**
+        if re.match(r"^#{1,2} ", s):
             titoli.add(re.sub(r"\s+", " ", s))
         if s.startswith("|"):
             prima_cella = s.split("|")[1] if len(s.split("|")) > 1 else ""
@@ -111,7 +126,14 @@ def grafo():
             for g in files:
                 if g != f and (REGOLE + "/" + g) in r:
                     vietati.append((REGOLE + "/" + f, REGOLE + "/" + g, i + 1))
-            if CLAUDE in r:
+            # ### UN RIMANDO, NON UNA MENZIONE: serve `CLAUDE.md` ### **e** `par.`.
+            #   ### ⛔ Misurato: la riga della regola `H-RIGHE` -- *<<`CLAUDE.md` oltre le
+            #   400 righe>>* -- ### **nomina** `CLAUDE.md` senza rimandarci, e la prima
+            #   stesura la contava come un arco fuori dall'intestazione.
+            #   ### ⚠ **IL LIMITE, dichiarato:** un rimando scritto senza `par.`
+            #   ### **non viene visto**. E' il prezzo di non avere falsi allarmi, e la
+            #   forma `CLAUDE.md par.N` e' quella che l'intestazione impone.
+            if CLAUDE in r and "par." in r:
                 archi.append((REGOLE + "/" + f, CLAUDE))
                 # ### L'INTESTAZIONE: le prime 6 righe. Oltre, e' una CATENA travestita.
                 if i > 5:
