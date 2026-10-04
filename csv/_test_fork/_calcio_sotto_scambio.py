@@ -235,14 +235,30 @@ def confronta_nodi(A, B, indici, etichetta):
     return fuori
 
 
-def archi_nuovi(net, n0, archi0):
-    """Gli archi nati in questo `mitosi`: indice >= `archi0`, con i loro estremi."""
+def archi_nuovi(net, n0, archi0=None):
+    """Gli archi nati in questo `mitosi`: ### quelli che TOCCANO UN NODO NUOVO.
+
+    ### ⛔ **E NON PER INDICE, ed e' un difetto MISURATO del 2026-10-04.** La regola
+    *<<indice >= lunghezza vecchia>>* e' SBAGLIATA: la divisione scrive
+    `i = [i[keep], a, m]`, cioe' ### **TOGLIE un arco e ne AGGIUNGE due** -- la
+    lunghezza passa da `A` ad `A+1`, quindi l'indice `>= A` ne vede ### **UNO SOLO**, e
+    l'altro resta mascherato dallo **shift di `keep`**.
+    ### **IL SEGNALE FU `0 ACCOPPIATI per estremi`**, perche' l'unico arco visto in BASE
+    aveva estremi `{a, m}` e quello in SCAMBIO `{b, m}`.
+
+    ### ✅ **LA REGOLA GIUSTA E' STRUTTURALE e non dipende dall'ordine delle
+    ### concatenazioni:** un arco nuovo **tocca un nodo nuovo** *(indice `>= n0`)*.
+    Vale per la **divisione** *(`a-m` e `m-b` toccano `m`)* **e** per lo **Schwinger**
+    *(`aa-k` e `k-bb` toccano `k`)*, e ### **nessun arco VECCHIO tocca un nodo nuovo**,
+    perche' gli archi vecchi collegano solo nodi che esistevano.
+    """
     i = np.asarray(net.i)
     j = np.asarray(net.j)
     out = []
-    for k in range(archi0, len(i)):
-        out.append({"idx": k, "i": int(i[k]), "j": int(j[k]),
-                    "estremi": frozenset((int(i[k]), int(j[k])))})
+    for k in range(len(i)):
+        if int(i[k]) >= n0 or int(j[k]) >= n0:
+            out.append({"idx": k, "i": int(i[k]), "j": int(j[k]),
+                        "estremi": frozenset((int(i[k]), int(j[k])))})
     return out
 
 
@@ -348,6 +364,21 @@ def misura(S, net, a_cli, t_dichiarato, max_passi, voce):
         return out
     out["passo_trovato"] = k
     out["atteso"] = PASSO_ATTESO_DIV
+    # ### LE NASCITE GIA' AVVENUTE DURANTE L'AVANZAMENTO, e vanno DICHIARATE: il
+    #   mandato dice <<il passo PRIMA della prima divisione>>, ma `passo_pieno` esegue
+    #   il passo INTERO, `mitosi()` compresa. Quindi le divisioni AVVENGONO mentre si
+    #   avanza, e lo stato misurato NON e' <<prima della prima divisione>>: e' uno
+    #   stato con una divisione PENDENTE. ### Lo stampo invece di lasciarlo dedurre.
+    out["nati_durante_avanzamento"] = {
+        "mitosi": int(getattr(net, "_g_nati_mitosi", 0)),
+        "schwinger": int(getattr(net, "_g_nati_schwinger", 0)),
+        "n_ora": int(net.n), "n_alla_semina": out["n_iniziale"]}
+    _nd = out["nati_durante_avanzamento"]
+    stampa("  nascite GIA' avvenute avanzando: mitosi %d, schwinger %d   (n %d -> %d)"
+           % (_nd["mitosi"], _nd["schwinger"], _nd["n_alla_semina"], _nd["n_ora"]))
+    stampa("  ### QUINDI LO STATO MISURATO NON E' <<PRIMA DELLA PRIMA DIVISIONE>>: e'")
+    stampa("      uno stato con una divisione PENDENTE, che e' l'intenzione del")
+    stampa("      mandato. `passo_pieno` esegue il passo INTERO, mitosi() compresa.")
     out["archi_selezionati"] = int(len(sel))
     stampa("  primo passo con CANDIDATI: %d   (atteso dai fatti: %d)   archi selezionati: %d"
            % (k, PASSO_ATTESO_DIV, len(sel)))
@@ -461,14 +492,33 @@ def misura(S, net, a_cli, t_dichiarato, max_passi, voce):
     res += confronta_nodi(BASE, SCA, np.concatenate([a, b]), "genitori")
     if figli:
         res += confronta_nodi(BASE, SCA, np.asarray(figli), "figlio")
-    na = archi_nuovi(BASE, n0, archi0)
-    nbq = archi_nuovi(SCA, n0, archi0)
+    na = archi_nuovi(BASE, n0)
+    nbq = archi_nuovi(SCA, n0)
     coppie, sp_a, sp_b = accoppia(na, nbq)
     out["archi_nuovi"] = {"base": len(na), "scambio": len(nbq),
                           "accoppiati": len(coppie),
                           "spaiati_base": len(sp_a), "spaiati_scambio": len(sp_b)}
     stampa("  archi nuovi: %d in BASE, %d in SCAMBIO, %d ACCOPPIATI per estremi, "
            "%d+%d spaiati" % (len(na), len(nbq), len(coppie), len(sp_a), len(sp_b)))
+    # ### IL CONTROLLO CHE RENDE IMPOSSIBILE PRESENTARE UN PER-ARCO INVALIDO, e nasce
+    #   da un difetto MISURATO: con gli archi nuovi contati PER INDICE il confronto
+    #   dava `0 ACCOPPIATI` e il referto avrebbe potuto riportare le grandezze per
+    #   arco come se fossero un risultato. ### Un per-arco con SPAIATI non e' un
+    #   risultato negativo: e' un confronto che non e' avvenuto.
+    atteso_nuovi = 2 * int(len(sel))
+    out["archi_nuovi_attesi_se_sola_divisione"] = atteso_nuovi
+    out["per_arco_valido"] = bool(len(na) == len(nbq) == len(coppie)
+                                  and len(na) > 0 and not sp_a and not sp_b)
+    stampa("  attesi se SOLA divisione: %d (= 2 * archi selezionati)" % atteso_nuovi)
+    if not out["per_arco_valido"]:
+        stampa("  ### ⛔ IL CONFRONTO PER ARCO NON E' VALIDO e NON va letto come un")
+        stampa("      risultato: ci sono archi SPAIATI, cioe' un arco nuovo di un ramo")
+        stampa("      non ha un corrispondente con gli STESSI ESTREMI nell'altro.")
+        stampa("      Le righe <<archi nuovi>> della tabella sono DA SCARTARE.")
+    elif len(na) != atteso_nuovi:
+        stampa("  ### ⚠ gli archi nuovi sono %d e non %d: oltre alla divisione ha"
+               % (len(na), atteso_nuovi))
+        stampa("      agito un ALTRO evento di nascita (lo Schwinger), e lo dico.")
     if coppie:
         ra, orient = confronta_archi(BASE, SCA, coppie)
         res += ra
@@ -490,11 +540,15 @@ def misura(S, net, a_cli, t_dichiarato, max_passi, voce):
                                             r.get("stato", "?")[:12]))
             continue
         chiave = (r["grandezza"], r["dove"])
-        att = chiave in TAUTOLOGICHE
-        r["attesa_per_costruzione"] = bool(att)
+        # ### IL NOME NON PUO' ESSERE `att`: in questa funzione `att` E' GIA' il
+        #   dizionario di `attesa_calcio`, e chiamarlo cosi' lo OSCURAVA -- la misura
+        #   cadeva poi con `TypeError: 'bool' object is not subscriptable`.
+        #   ### Una cura che introduce un difetto: e' successo, e resta scritto.
+        e_tautologica = chiave in TAUTOLOGICHE
+        r["attesa_per_costruzione"] = bool(e_tautologica)
         if r["simmetrica"]:
             et = "SIMMETRICA"
-        elif att:
+        elif e_tautologica:
             et = "ASIM(ATTESA)"
             tauto.append(r)
         else:
@@ -625,7 +679,7 @@ def misura_schwinger(S, net, max_passi, da_passo):
     figli = list(range(n0, int(BASE.n)))
     if figli:
         res += confronta_nodi(BASE, SCA, np.asarray(figli), "nati")
-    na, nbq = archi_nuovi(BASE, n0, archi0), archi_nuovi(SCA, n0, archi0)
+    na, nbq = archi_nuovi(BASE, n0), archi_nuovi(SCA, n0)
     coppie, sp_a, sp_b = accoppia(na, nbq)
     stampa("  archi nuovi: %d / %d, accoppiati %d, spaiati %d+%d"
            % (len(na), len(nbq), len(coppie), len(sp_a), len(sp_b)))
