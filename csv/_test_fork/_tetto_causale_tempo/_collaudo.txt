@@ -1,0 +1,19 @@
+========================================================================================================
+COLLAUDO -- i casi che decidono se la misura e' leggibile
+========================================================================================================
+  r=1: c scalare       dt_e==DT True   tetti identici True   OK
+  r=1: c per arco      dt_e==DT True   tetti identici True   OK
+  r!=1: i tetti differiscono su 2 archi su 3 (attesi 2)   OK
+  q3 di un insieme VUOTO -> min=None n=0 (atteso None, 0)   OK
+  q3 con nan e inf -> n=2 max=3.0 (attesi 2, 3.0)   OK
+  la patch attacca: 4 ancore, tutte uniche   OK
+      il gancio di modulo `_MIS`
+      `r` e `dt_e` registrati in `step`
+      il clip di `spinta` al sito :9203
+      la scala della coesione al sito :9340
+  copia: _sim_misura_tetto.py  blob dda4e1e9
+  (il caso <<il gancio e' chiamato>> si prova nel run, e il referto riporta
+   il numero di chiamate per sito: se fosse 0, NON e' un risultato)
+
+  ### tutti i casi passano.
+========================================================================================================
