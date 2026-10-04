@@ -3703,3 +3703,50 @@ reperto di una legge diventata incondizionata, o lo si riscrive perche' resti
 ri-girabile?** ### ⛔ **Non lo decido io.**
 
 ---
+
+## **I NUMERI A MANO: tre TIPI, non tre gradi dello stesso difetto**
+
+**Domanda di Luca, 2026-10-04**, e il mandato ha ragione su una cosa che avrei potuto
+sbagliare: **non si apre una voce nuova.** Il lavoro esiste in `A1-COSTANTI` e
+`CLIP-INVENTARIO`, e una terza voce sarebbe stata **un doppione**. Le due sono
+**annotate** *(par.8: si annota, non si riscrive)*, e il collegamento e' scritto in
+entrambe.
+
+| tipo | che cos'e' | che fine fa |
+|---|---|---|
+| **(1)** costante di accoppiamento | dice quanto e' **forte** un'interazione | entra nella lagrangiana come **parametro DICHIARATO** · candidato `KICK_TW` |
+| **(2)** toppa | sostituisce una legge che **manca** | va **DERIVATA** · `FRAZ_NASCITA = 0.5`, i tre numeri di `MITOSI_DIR` |
+| **(3)** proiezione / pavimento / clip | **taglia lo stato** | ### **viola `A14` per costruzione QUALUNQUE SIA IL VALORE: va TOLTA** · il pavimento `0.05` dello Schwinger, i clip `±π/4` e `±2` su `xi`, il troncamento di `_nasce` |
+
+### 📌 **PERCHE' NON SONO TRE GRADI DELLO STESSO DIFETTO, e il punto e' operativo:** un
+tipo **(1)** e' **legittimo** e va solo dichiarato; un tipo **(2)** e' un **debito**, e la
+cura e' una **derivazione**; un tipo **(3)** ### **non si puo' sanare scegliendo meglio il
+numero, perche' il difetto e' la FORMA — tagliare lo stato — e non il valore.**
+### ⚠ **Confonderli porterebbe a TARARE un clip invece di TOGLIERLO**, che e' la mossa
+sbagliata travestita da cura.
+
+**E la stessa distinzione decide a chi si applica il criterio d'inquinamento:** un
+risultato e' sospetto se cambia **qualitativamente** variando un numero di tipo **(1)** o
+**(2)** di `0.5x` e `2x` — *un fenomeno che vive solo in una finestra stretta e' **imposto**,
+non emergente* (`A1`). ### ⛔ **Al tipo (3) il criterio NON si applica: un clip non si fa
+variare, si toglie.** Farlo variare suggerirebbe di **tararlo**.
+
+**La precondizione in `ENERGIA-NON-DEFINITA`:** l'inventario e' il **primo passo prima**
+di scrivere la lagrangiana, perche' un numero a mano dentro una legge del passo **entra
+nella lagrangiana senza dichiararsi** — e i tipi **(3)** la rompono in modo diverso:
+**non sono parametri**, quindi non esiste una forma che li contenga. Metodo fissato:
+censimento **dall'AST** del percorso vivo del passo pieno, con la forma del censimento
+del punto medio, ### **e un controllo che DEVE fallire — un numero iniettato in una copia
+deve essere trovato.** *(Senza quel controllo, un censimento che non trova niente non si
+distingue da uno che non guarda: e' `FALSO-ZERO`, e nel `6a` il controllo positivo era
+perfino **oscurato** dal controllo vicino.)*
+
+### ⛔ **E UNA COSA DEL MANDATO NON L'HO POTUTA ESEGUIRE COME DETTA, quindi la dichiaro:**
+*«nel PIANO, dopo `MEM-HEBB-VERSO` e `TETTO-CAUSALE`»*. ### **`TETTO-CAUSALE` NON compare
+nella tabella dell'ordine di lavoro.** Non gli invento una posizione — un ordine inventato
+si leggerebbe come una decisione di Luca che non c'e' — quindi l'inventario e' il passo
+**`2-bis`**, dopo il **2**, e la cosa e' scritta accanto. ### **E non ho rinumerato `3`…`6`:**
+il testo sotto cita *«i passi 3 e 5»* e *«la decisione 5»*, e rinumerare ### **renderebbe
+false quelle frasi senza toccarle.**
+
+---
