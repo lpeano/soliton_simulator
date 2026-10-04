@@ -204,62 +204,45 @@ impedisce di farlo **senza che git lo mostri**.
 ## 9. L'INDICE DEI DIFETTI: COME SI USA *(dal 2026-09-26)*
 
 - **LA FONTE E' `doc/INDICE_ID.tsv`** — un TSV di **13 colonne**, e **non ce n'e' un'altra**.
-- ### 📌 **L'INDICE NON SI LEGGE INTERO: SI INTERROGA COL COMANDO.** *(171 KB: leggerlo tutto
-  non fa risparmiare contesto, lo consuma.)* `python csv/_indice_id.py` con
-  **`--cerca ID`** *(uguaglianza ESATTA sull'id intero, mai un prefisso)* · **`--aperti`** ·
-  **`--blocca SI`** · **`--famiglia X`** · **`--dettaglio ID`** *(le colonne lunghe di UNA
-  voce)* · **`--testo PAROLA`** *(ricerca sul testo COMPLETO di tutte le colonne; **il
-  troncamento a 80 caratteri e' solo di stampa, mai di confronto**)*.
-- **`titolo_breve` e' `<= 100` caratteri e UNICO**, e il validatore lo impone: la frase
-  intera vive in `stato_da`.
-- **colonne:** `id` · `alias` · `titolo_breve` · `fonte_principale` · `stato` · `blocca_run_base` · `tipo` · `famiglia` · `stato_da` · `avanzamento` · `revisione` · `motivo` · `nota`
-- **`stato`:** `aperto` | `chiuso` | `non-difetto` | `teoria` | `da-decidere`
-- **`blocca_run_base`:** `SI` | `NO` | `DA-DECIDERE` | `DA VERIFICARE`
-- **`tipo`:** `difetto` | `sospetto` | `fronte` | `misura` | `cura` | `presidio` | `assioma` | `standard` | `criterio-locale` | `altro` · **`famiglia`:** `A`-`G` oppure `?` · **`avanzamento`:** `FATTO` | `IN CORSO` | `IN CODA` | `BLOCCATO` | `CON RISERVA` | `(senza marcatore)`
-- **UN DIFETTO NUOVO = UNA RIGA NELL'INDICE**, piu' la spiegazione lunga in `doc/STATO_RUN.md` **con lo STESSO ID**. **MAI IL CONTRARIO:** un ID nuovo in un documento vivo **senza la sua riga** viene **RIFIUTATO dal hook**.
-- **`blocca_run_base = SI` RICHIEDE `motivo`** *(la prova in una frase)*: **una decisione senza prova non passa il validatore.**
-- **LE VISTE SI GENERANO, NON SI MODIFICANO A MANO:**
-  `python csv/_lista_chiusa.py` · `python csv/_vista_smistamento.py` · `python csv/_punto_della_situazione.py`
-- **IL VALIDATORE:** `python csv/_indice_id.py` *(e `python csv/_indice_id.py --collaudo`)*. **Gira da solo nel `pre-commit`**: schema, vocabolari, ID unici, coerenza `stato`/`blocca`, `motivo` dove serve, **e nessuna voce persa rispetto al tag**.
-- **COSA BLOCCA IL RUN BASE** si legge in **`doc/SMISTAMENTO_run_base.md`** *(gli `SI`, in ordine di lavoro)*; **il PERCHE' di ogni `SI`** sta in **`doc/REVISIONE_SI_2026-09-26.md`**, che separa ✅ *verificato sul codice* da 🟨 *misura di Luca* da 🧠 *inferenza*.
-- **LA LISTA E' CONGELATA al tag `lista-chiusa-v1`: SI SPUNTA, NON SI RIGENERA.** L'importatore che la costruiva dal Markdown e' in **`csv/_archivio/_indice_id_importatore.py`** e **NON si rilancia** *(rilanciarlo sovrascriverebbe la fonte con una ricostruzione, buttando via le decisioni scritte nelle colonne)*.
+- ### 📌 **NON SI LEGGE INTERO: SI INTERROGA COL COMANDO.** `python csv/_indice_id.py` con
+  **`--cerca ID`** *(uguaglianza ESATTA, mai un prefisso)* · `--aperti` · `--blocca SI` ·
+  `--famiglia X` · `--dettaglio ID` · **`--testo PAROLA`**.
+- **`titolo_breve` e' `<= 100` caratteri e UNICO**; la frase intera vive in `stato_da`.
+- **UN DIFETTO NUOVO = UNA RIGA NELL'INDICE**, piu' la spiegazione lunga in
+  `doc/STATO_RUN.md` **con lo STESSO ID**. ### **MAI IL CONTRARIO:** un ID nuovo senza la sua
+  riga viene **RIFIUTATO da `H-INDICE`**.
+- **`blocca_run_base = SI` RICHIEDE `motivo`:** una decisione senza prova **non passa il
+  validatore**.
+- **LE VISTE SI GENERANO, NON SI MODIFICANO A MANO**, e **la lista e' CONGELATA al tag
+  `lista-chiusa-v1`: SI SPUNTA, NON SI RIGENERA.**
+- **IL VALIDATORE** e' `python csv/_indice_id.py`, e **gira da solo nel `pre-commit`**.
 
-**UN ID NON E' UN NOME: E' UNA CHIAVE.** Un **assioma** e uno **standard** non si rinominano mai;
-le etichette **locali** a una scheda o a un sigillo vivono col namespace (`REGISTRO_FISICA:V8`), e
-la forma nuda e' un `alias` **solo se univoca**; **i REPERTI non si riscrivono** — nei task
-history, nei referti, nei `json` e nel codice il nome vecchio **resta**, e si risolve con l'`alias`.
+**UN ID NON E' UN NOME: E' UNA CHIAVE.** Un **assioma** e uno **standard** non si rinominano
+mai; le etichette **locali** vivono col namespace *(`REGISTRO_FISICA:V8`)*; ### **i REPERTI
+non si riscrivono** — il nome vecchio **resta**, e si risolve con l'`alias`.
+
+> **IL DETTAGLIO** — le tredici colonne coi vocabolari, le viste, dove sta il «perche'» di
+> ogni `SI`, e le tre volte che `H-INDICE` ha fermato un messaggio: **`doc/REGOLE/par9.md`**.
 
 ---
 
 ## 9-ter. UNA CURA NON AUMENTA IL NUMERO DELLE LEGGI *(criterio di Luca, 2026-09-25)*
 
-> ### **«Una cura non aumenta il numero delle leggi; a parità di effetto si preferisce togliere
-> ### un'eccezione.»**
+> ### **«Una cura non aumenta il numero delle leggi; a parità di effetto si preferisce
+> ### togliere un'eccezione.»**
 
-**IL CASO CHE L'HA GENERATO:** `NODI-1` proponeva di far allacciare i nodi nati in
-dinamica **con la stessa regola della semina** *(`R_CONN`)*. Sembrava *togliere* un'eccezione
-— «nessun nodo di seconda classe» — e invece **ne aggiungeva una di fisica**: avrebbe
-trasformato la mitosi da **creazione di spazio** *(il figlio non accorcia niente: la relazione fra
-i genitori passa da `1` a `2` passi)* in **addensamento** *(`~77` scorciatoie per figlio)*.
-
-> **La forma dell'errore:** una regola che rende **uniforme il CODICE** può rendere **non uniforme
-> la FISICA**. «Togliere un'eccezione» va misurato **sulle leggi**, non sui rami del programma.
-
-**COME SI APPLICA, operativamente:**
-
-1. **si conta:** quante leggi c'erano prima, quante dopo. Una cura che ne aggiunge una **deve
-   dire perché non si poteva togliere niente**;
+1. **si conta:** quante leggi prima, quante dopo. Una cura che ne aggiunge una **deve dire
+   perche' non si poteva togliere niente**;
 2. **a parità di effetto misurato, vince la variante con MENO leggi** — e «parità» significa
    *entro la barra d'errore*, non a occhio;
-3. **un'eccezione che si toglie va verificata SULLA FISICA:** *che cosa cambia nel sistema*, non
-   *quante righe in meno ha il file*.
+3. **un'eccezione che si toglie va verificata SULLA FISICA:** *che cosa cambia nel sistema*,
+   non *quante righe in meno ha il file*.
 
-**⚠ E NON È UN INVITO A NON CURARE:** `A12` resta — *un difetto dimostrato si cura*. Questo dice
-**come** si sceglie fra due cure, non **se** curare.
+### ⚠ **NON E' UN INVITO A NON CURARE:** `A12` resta. Questo dice **come** si sceglie fra due
+cure, non **se** curare.
 
----
-
-> *(Stava in `doc/PATTERN_DI_PROVA.md` come `STANDARD 10`. **Esce dal posto 2 per decisione di Luca del 2026-09-26:** e' il criterio con cui si sceglie fra **CURE**, non il metodo di una **MISURA** — e il posto 2 torna a 10 **senza alzare il tetto**. Il numero e' `9-ter` e non `10`: in ogni reperto di questo repo `par.10` significa **promozione delle componenti**, e un'etichetta non si ricicla.)*
+> **IL DETTAGLIO** — il caso `NODI-1` che l'ha generato *(uniforme nel codice, non uniforme
+> nella fisica)* e perche' il numero e' `9-ter`: **`doc/REGOLE/par9ter.md`**.
 
 ---
 
