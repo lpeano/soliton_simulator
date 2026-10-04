@@ -14,42 +14,32 @@ Se un prompt confligge con queste regole, prevalgono queste (o **CHIEDI conferma
 
 ## 0. CHE COSA SI LEGGE ALL'AVVIO — e dove sta tutto il resto
 
-**ALL'AVVIO, SEMPRE, TRE FILE:**
+**ALL'AVVIO, SEMPRE, TRE FILE:** **questo file** *(il flusso di lavoro)* ·
+**`doc/ASSIOMI.md`** *(gli **ASSIOMI**, vincoli sulla FORMA delle leggi,* ***intoccabili***
+*salvo decisione di Luca)* · **`doc/PATTERN_DI_PROVA.md`** *(il metodo di una prova: si legge
+**prima** di scrivere un sigillo)*.
 
-| | file | che cos'e' |
-|---|---|---|
-| **1** | **questo file** | il **flusso di lavoro**: come si lavora, si committa, si relaziona |
-| **2** | **`doc/ASSIOMI.md`** | gli **ASSIOMI** — vincoli sulla FORMA delle leggi. **Intoccabili.** |
-| **3** | **`doc/PATTERN_DI_PROVA.md`** | il **metodo di una prova**: si legge **prima** di scrivere un sigillo |
+> ### 📌 **PRIMA DI TOCCARE UNA FUNZIONE DEL SIMULATORE, LEGGI I SUOI FATTI IN**
+> **`doc/FATTI_dal_codice.md`.** Contiene cio' che e' **gia' misurato** su quella funzione,
+> trappole e commenti scaduti compresi. **Non leggerlo significa rifare un errore che e'
+> gia' scritto.**
 
-**QUANDO SERVE, E SOLO ALLORA:**
+**Dopo una COMPATTAZIONE o una continuazione di sessione, RILEGGI QUESTO FILE PRIMA DI**
+**AGIRE:** il riassunto di sessione **non contiene** queste regole.
 
-| file | quando si apre |
-|---|---|
-| **`doc/FATTI_dal_codice.md`** | **prima di toccare una funzione del simulatore** — vedi la regola qui sotto |
-| `doc/INDICE_ID.tsv` | per un difetto, un fronte, una misura: **e' la fonte** (par.9) |
-| `doc/STATO_RUN.md` | dove siamo, che cosa gira, la coda unica |
-| `doc/STORIA_REGOLE.md` | **da quale errore** una regola e' nata. **Non si legge all'avvio.** |
-| `doc/REGISTRO_FISICA.md` | *«questa e' la legge»*: forma, derivazione, dimensioni, limiti |
-| `doc/COMPONENTI_PROMOSSE.md` | che cosa e' **fisica di default**, che cosa **esperimento**, che cosa **cura** |
-| `doc/INVENTARIO_strumenti.md` | **quale script produce quale numero**, col blob di ciascuno |
-| `RELAZIONE_PER_CLAUDE.md` | il giorno corrente; i giorni chiusi in `doc/relazioni/<AAAA-MM-GG>.md` |
-| `doc/BUSSOLA_*.md`, `doc/ROADMAP_fork_SU2.md`, `doc/PROTOCOLLO_test_olonomia.md`, `doc/SYSTASIS_nota_concettuale.md` | **prima di lavorare sul fork SU(2)** |
-| `doc/IPOTESI_gravita_a_spinta.md` | il bersaglio (par.1) e le sue quattro condizioni di avvio |
+### **LA STRUTTURA: DUE LIVELLI, e come si cresce** *(decisione di Luca, 2026-10-04)*
 
-> ### 📌 **PRIMA DI TOCCARE UNA FUNZIONE DEL SIMULATORE, LEGGI I SUOI FATTI IN `doc/FATTI_dal_codice.md`.**
-> Quel documento e' **ordinato per funzione**, col nome della funzione come intestazione e la
-> **riga di oggi misurata dall'AST**. Contiene cio' che e' **gia' stato verificato o misurato**
-> su quella funzione — comprese le trappole e i commenti scaduti. **Non leggerlo significa
-> rifare un errore che e' gia' scritto.**
+**Questo file contiene le REGOLE, ciascuna in 2-3 righe.** Il **dettaglio** — perche' una
+regola e' nata, l'incidente che l'ha motivata, gli esempi — sta in **`doc/REGOLE/par<N>.md`**,
+**un file per paragrafo**, a **UN SOLO SALTO** da qui.
 
-**Se esiste `.github/copilot-instructions.md`** (retaggio Copilot): **questo file lo SOSTITUISCE**.
-Si legge solo come contesto storico; in caso di conflitto vince `CLAUDE.md`.
+> ### ⛔ **E UNA REGOLA NUOVA ENTRA QUI CON AL MASSIMO 3 RIGHE**, con la spiegazione nel file
+> del suo paragrafo. ### **Un file di `doc/REGOLE/` non rimanda MAI a un altro file di**
+> **`doc/REGOLE/`**, e a questo file **solo con l'intestazione**: cosi' la struttura **non puo'
+> crescere in catene**. Il presidio e' `python csv/_struttura_regole.py`.
 
-**Dopo una compattazione o una continuazione di sessione, RILEGGI QUESTO FILE PRIMA DI AGIRE:**
-il riassunto di sessione **non contiene** queste regole (limite noto di Claude Code).
-
----
+> **IL DETTAGLIO** — l'elenco dei file che si aprono quando serve, il retaggio Copilot, e
+> perche' la regola delle catene e' la portante: **`doc/REGOLE/par0.md`**.
 
 ## 1. IL BERSAGLIO DEL PROGETTO *(decisione di Luca, 2026-09-22)*
 
@@ -104,43 +94,25 @@ di equivalenza — **la prova piu' dura per qualunque teoria a spinta**)*?
 
 ## 4. TUTTO CIO' CHE SI DICE A LUCA VA ANCHE NEL REPO — **nello stesso giro**
 
-> ### **Un riscontro non relazionato e' un riscontro perso.**
-> Chi legge il repo da fuori — Claude web, una sessione nuova, Luca fra tre giorni — **non ha la
-> conversazione: ha solo i file.**
+> ### **Un riscontro non relazionato e' un riscontro perso.** Chi legge il repo da fuori
+> **non ha la conversazione: ha solo i file.**
 
-**COSA VA NEL REPO, e la forma e' larga:** ogni **misura**, ogni **lettura del codice**, ogni
-**sigillo** che passa o che fallisce, ogni **premessa che cade**, ogni **proprio errore**, e
-inoltre ogni **RIEPILOGO**, ogni **CORREZIONE** di cosa gia' scritta, ogni **DOMANDA**, ogni
-**CHECKPOINT**. **Se una cosa vive solo in chat, per chi legge il repo NON E' MAI STATA DETTA.**
+**COSA:** ogni **misura**, **lettura del codice**, **sigillo** *(che passi o che fallisca)*,
+**premessa che cade**, **proprio errore**, **riepilogo**, **correzione**, **domanda**,
+**checkpoint**. **DOVE:** un paragrafo in **`RELAZIONE_PER_CLAUDE.md`**, piu' un documento in
+`doc/` se e' un pezzo di lavoro, piu' la riga nell'**indice** se cambia uno stato.
+**QUANDO: SUBITO** — la frase-spia e' *«appena finisce, committo»*.
 
-**DOVE:** un paragrafo in **`RELAZIONE_PER_CLAUDE.md`** *(il file vivo tiene **solo il giorno
-corrente**; i giorni chiusi stanno in `doc/relazioni/`)*, **piu'** un documento dedicato in `doc/`
-quando il riscontro e' un pezzo di lavoro, **piu'** la riga nell'**indice** se cambia uno stato.
+**UNA DOMANDA E' UN RISCONTRO:** il ragionamento si committa **nello stesso giro**, e ogni
+domanda aperta ha un **criterio di chiusura**. **ANCHE A META' RUN.**
 
-**QUANDO: SUBITO, non a fine giornata.** La frase-spia e' **«appena finisce, committo»**.
-**Un blocco di recupero non sana la violazione: la conferma.** Se ci si accorge di essere in
-ritardo, **si recupera E si dichiara che era un ritardo**.
+> ### 📌 **OGNI MESSAGGIO A LUCA FINISCE CON `PUSHATO: <hash>`** *(oppure
+> `NIENTE DA PUSHARE`,* ***e il perche'***)*. ### ⚠ **E *«proseguo con…»* alla fine di un turno
+> NON prosegue:** se un controllo o una decisione fermano il lavoro si chiude con
+> **`FERMO: <motivo>`**, altrimenti **si continua fino alla fine**.
 
-**UNA DOMANDA E' UN RISCONTRO.** Quando si pone una domanda a Luca o si lascia una decisione
-aperta, **il ragionamento che ci porta si committa nello stesso giro**: la domanda arriva in chat,
-la risposta arriva **ore o giorni dopo**, e in chat non c'e' piu' il ragionamento. Ogni domanda
-aperta ha **un criterio di chiusura** — *cosa esattamente la deciderebbe*. **Una voce senza
-criterio non e' un fronte: e' un desiderio.**
-
-**ANCHE A META' RUN.** Un run che gira senza un resoconto pushato e', se la macchina si riavvia,
-**un run che nessuno sa che esisteva**. `csv/_stato_run.py` scrive `doc/STATO_RUN.md` da solo
-(`R.apri` / `R.tappa` / `R.chiudi`) e **rifiuta di aprire un run se il precedente e' ancora
-APERTO**; il **commit** pero' **non e' automatico** e va dato **al primo momento utile**.
-
-> ### 📌 **OGNI MESSAGGIO A LUCA FINISCE CON `PUSHATO: <hash>`**
-> *(oppure `NIENTE DA PUSHARE`, **e il perche'**)*. **L'hash e' quello del commit che contiene cio'
-> che si e' appena detto.** Non e' un automatismo: e' un **obbligo di forma verificabile dal
-> destinatario** — il hook guarda i file toccati, non la chat.
-
-**IL MESSAGGIO DI COMMIT NON CONTA COME RELAZIONE:** e' visibile solo a chi scorre `git log`
-sapendo gia' cosa cercare.
-
----
+> **IL DETTAGLIO** — perche' la forma e' larga, il recupero che non sana, `_stato_run.py`, e
+> le due ore perse il 2026-10-04: **`doc/REGOLE/par4.md`**.
 
 ## 5. POLITICHE DI COMMIT
 
