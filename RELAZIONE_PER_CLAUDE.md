@@ -4447,3 +4447,37 @@ par.6 punto ① copre `csv/_test_fork/` e `csv/_seal_fork/` — i hook stanno ne
 nuova senza che nessuno l'abbia decisa.**
 
 ---
+
+## **`COMMIT 7`, la verifica: ZERO non tracciati in tutto il repo, e la classe (d) VUOTA**
+
+Censimento rigirato dal blob committato `517e21c4`.
+
+| | prima *(referto `0b3b2a0`)* | dopo |
+|---|--:|--:|
+| non tracciati | **484** | ### **0** |
+| `(a)` copie del simulatore | 32 | 0 |
+| `(b)` stub | 212 | 0 |
+| `(c)` stato binario | 85 | 0 |
+| ### **`(d)` candidati omissione** | ### **155** | ### **0** |
+
+### ✅ **Il criterio del `COMMIT 7` è soddisfatto nella forma forte: la classe `(d)` è VUOTA,
+non «elencata col suo motivo».**
+
+**Come i 484 sono finiti a zero:** `386` ignorati come **rigenerabili o scarto** *(`COMMIT 1`)*,
+`24` CONFIGURAZIONE committati *(`COMMIT 3`)*, `61` citati committati *(`COMMIT 4`)*, `15` non
+citati committati *(`COMMIT 5`)* — e **2** `.pkl.gz` usciti dall'indice restando sul disco
+*(`COMMIT 2`)*.
+
+### 📌 **E ADESSO «NON TRACCIATO» SIGNIFICA «DIMENTICATO», che era lo scopo.** Prima non lo
+significava: fra i 484 c'erano 32 copie rigenerabili e 212 stub — **rumore che nascondeva i
+candidati veri.** ### **Oggi un file non tracciato sotto `csv/` o `doc/` è un'anomalia, e
+`H-NON-TRACCIATI` la blocca al commit.**
+
+### ⚠ **I DEBITI CHE RESTANO, registrati e non curati** *(in coda, per decisione di Luca)*:
+le **79** voci d'inventario di sigillo senza il commit; la riga **duplicata** di
+`_h_etc_1.py`; le **3** `.json` e **4** patch elencate fra i sigilli; i **12** file tracciati
+coperti da `*.log` *(incoerenza **preesistente**, della stessa specie di quella dei
+`.pkl.gz`)*; e il riordino di `CLAUDE.md`, che ora può partire perché l'ordine fissato da
+Luca è soddisfatto.
+
+---
