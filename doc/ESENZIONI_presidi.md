@@ -42,6 +42,7 @@ commit**: cosi' non se ne accumulano di invisibili.)*
 | `csv/_archivio/_indice_id_importatore.py|H-P5` | non importa il simulatore e non lo fa girare. Genera due indici da documenti. |
 | `csv/_archivio/rami_off_cura2.py|H-P5` | e' un ARCHIVIO. Non importa il simulatore, non gira, non scrive referti. |
 | `csv/_seal_fork/_c1_col_segno.py|H-P5` | legge JSON gia' scritti e non fa girare il simulatore. La configurazione di quei dati |
+| `csv/_test_fork/_confronto_blob_misure.py|H-P5` | non importa il simulatore e non lo fa girare. Legge due referti json |
 | `csv/_test_fork/_confronto_previsione.py|H-P5` | non costruisce nessuna scena e non carica il simulatore: legge i `json` di un run |
 | `csv/_test_fork/_esponenti_figli.py|H-P5` | legge JSON gia' scritti, non fa girare il simulatore. La configurazione di quei dati |
 | `csv/_test_fork/_massa_id.py|H-P5` | non costruisce nessuna scena e non carica il simulatore. Il `--collaudo` gira su un |
@@ -54,5 +55,5 @@ commit**: cosi' non se ne accumulano di invisibili.)*
 | `csv/_test_fork/_video_scena.py|H-P5` | non costruisce nessuna scena e non carica il simulatore: legge i fotogrammi `.npz` |
 
 ```
-esenzioni dichiarate   47
+esenzioni dichiarate   48
 ```

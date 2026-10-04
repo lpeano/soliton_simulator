@@ -4564,3 +4564,40 @@ danno.**
 ### ✅ **E IL DIFETTO L'HA TROVATO `--numstat`, non io:** `3 aggiunte` dove me ne
 aspettavo `1`. ### **Guardare il CONTEGGIO del diff e non solo il suo esito e' un controllo
 che costa un comando.**
+
+## LE TRE MISURE DEL 2026-10-01, RIGIRATE SUL SIMULATORE DI OGGI *(punto 1 del mandato)*
+
+### ⛔ **ERRORE DEL GUARDIANO, da dichiarare perche' il mandato lo chiede:** aveva
+presentato a Luca **`M1`, `M2`, `M5` e `M4` come lavoro da fare**. ### **Sono gia' fatte
+dal 2026-10-01**, sul blob `287154f3`, coi referti in `csv/_test_fork/_misure_calore/`,
+`_verso_archi/` e `_pos_contro_d/`. ### **Il buco vero e' un altro, ed e' il punto 2:
+il calcio sotto lo scambio `a<->b`, ISOLATO.**
+
+**CHE COSA HO FATTO:** rigirato i tre strumenti **dai blob committati e senza
+modificarli** sul simulatore **`0f060670`**. ### ⚠ **I tre scrivono su un NOME FISSO e
+non hanno un'opzione di CLI per l'uscita** *(verificato: nessun `argparse`, il percorso e'
+costruito alla riga della scrittura)*. ### **Quindi i reperti del 2026-10-01 hanno preso il
+nome del loro blob PRIMA del run**, in un commit a se' *(`5ae1aa4`)*, e i sei `oid` sono
+stati verificati **identici** a quelli di `HEAD`: la salvaguardia e' fedele, non asserita.
+
+**IL CRITERIO E' DEL MANDATO: e' un CONFRONTO, non un sigillo.** Nessun `PASSA`, nessun
+`FALLISCE` — numeri, e per cio' che cambia i **candidati alla causa**.
+
+**LA PIATTAFORMA DI OGGI** *(e si dichiara perche' i conteggi assoluti ne dipendono)*:
+**python 3.13.2 / numpy 2.3.0 / Windows 11 / AMD64**.
+
+### ⚠ **E UN LIMITE DEL CONFRONTO, trovato guardando i referti vecchi invece di
+### supporlo: NESSUNO DEI TRE DICHIARA LA PIATTAFORMA.** Hanno `blob_sim` e
+`blob_strumento`, non python/numpy/sistema. ### **Quindi per le grandezze sensibili alla
+piattaforma uno scarto NON si puo' attribuire al simulatore**, e la stella polare
+documenta che i **conteggi assoluti** lo sono *(`16/14/6/6` su Linux contro `14/12/4/4` su
+Windows)*. Lo strumento del confronto **stampa questo limite**, non lo sottintende.
+
+**TREDICI commit** hanno toccato il simulatore fra `287154f3` e `0f060670`, e sono i
+**candidati** di ogni scarto: il comparatore li **legge da git**, non li ricopia.
+
+### 📌 **E UNA COSA CHE IL REFERTO DI `_verso_archi` DICHIARA DA SE', ed e' il
+### motivo per cui il punto 2 del mandato esiste:** a **un passo** le nascite sono
+**ZERO** *(`_g_nati_mitosi` e `_g_nati_schwinger` a `0`, `n = 12802`)*, sia nel ramo BASE
+sia nello SPECCHIO. ### **Con zero nascite il calcio della mitosi NON HA AGITO**, e le `7`
+differenze per nodo che quel referto trova **non gli si possono attribuire**.
