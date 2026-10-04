@@ -89,11 +89,67 @@ def costruisci(m, seme, dest, con_2lam=True):
     finally:
         sys.argv = vecchia
     m._applica_regime(a)
-    m._NMASSE_VIDEO["n"] = 2
-    m._NMASSE_VIDEO["sep"] = 3.0
+    # ### ⛔ QUI C'ERANO DUE ATTRIBUTI SCRITTI A MANO -- `n = 2` e `sep = 3.0` -- ed e'
+    #   un'infrazione di `H-P3` che ha fatto girare il sigillo del `6b` su una
+    #   ### **SCENA DIVERSA DA QUELLA DEL DRIVER.** Il driver passa
+    #   ### **`--nmasse 3` e `--sep 6.1158`**; con `2` e `3.0` la scena ha
+    #   ### **`2208` nodi al passo 150 invece di circa `12800`.**
+    #   ### ⚠ **E LE CONSEGUENZE SONO NEL REFERTO `f94ff2c`:** il *<<primo candidato al
+    #   passo 74>>* e' di QUELLA scena *(su quella del driver e' al ### **42**, come
+    #   misurato nel `6a`)*; la frase *<<le scene da 72 passi non portano statistica del
+    #   cancello>>* e' ### **FALSA** per la scena del driver; e `B1` sulla scena corta era
+    #   vuoto ### **per questo.**
+    #   ### ✅ **Ora si leggono dal CLI, come fanno i sigilli del 4, del 5 e del `6a`.**
+    m._NMASSE_VIDEO["n"] = max(2, int(getattr(a, "nmasse", 2)))
+    m._NMASSE_VIDEO["sep"] = float(getattr(a, "sep", 3.0))
     m._NMASSE_VIDEO["size"] = None
     m.avvia_test("MASSE-COERENTI")()
     return m.net
+
+
+def riferimento_scena(seme):
+    """### I NUMERI DELLA SCENA DEL DRIVER, letti DALL'ARGV e non da `costruisci`.
+
+    ### ⛔ **PERCHE' NON LI PRENDO DA `costruisci`:** e' proprio `costruisci` che aveva
+    il difetto. Un riferimento calcolato ### **dalla stessa funzione che si vuole
+    controllare** sarebbe sempre d'accordo con lei -- ### **un `FALSO-ZERO`, e della
+    specie peggiore: il controllo del controllore fatto dal controllore.**
+    ### ✅ Qui i valori si estraggono ### **dai token dell'argv**, che e' la sola fonte
+    che `costruisci` ### **deve** rispettare.
+    """
+    _S0, argv = _cli_flag.argv_del_driver(extra=["--seme=%d" % seme], dest=os.path.join(FUORI, "_sc_rif"))
+    a = list(argv)
+    fuori = {}
+    for chiave, nome, conv in (("--nmasse", "n", int), ("--sep", "sep", float)):
+        if chiave not in a:
+            fuori[nome] = None
+            continue
+        fuori[nome] = conv(a[a.index(chiave) + 1])
+    return fuori
+
+
+def controlla_scena(m, net, seme, stampa, dove):
+    """### LA SCENA E' QUELLA DEL DRIVER? Si STAMPA e si FALLISCE se no."""
+    rif = riferimento_scena(seme)
+    vis = dict(m._NMASSE_VIDEO)
+    n_ok = (rif["n"] is None
+            or int(vis.get("n", -1)) == max(2, int(rif["n"])))
+    s_ok = (rif["sep"] is None
+            or abs(float(vis.get("sep", -1)) - float(rif["sep"])) < 1e-12)
+    stampa("    la SCENA (%s): nmasse %s (argv %s) %s  sep %s (argv %s) %s"
+           % (dove, vis.get("n"), rif["n"],
+              "OK" if n_ok else "*** DIVERSO ***",
+              vis.get("sep"), rif["sep"],
+              "OK" if s_ok else "*** DIVERSO ***"))
+    stampa("      alla costruzione: n = %d, archi = %d"
+           % (int(net.n), int(np.size(net.i))))
+    return bool(n_ok and s_ok), {"nmasse": vis.get("n"),
+                                 "sep": vis.get("sep"),
+                                 "argv_nmasse": rif["n"],
+                                 "argv_sep": rif["sep"],
+                                 "n0": int(net.n),
+                                 "archi0": int(np.size(net.i)),
+                                 "ok": bool(n_ok and s_ok)}
 
 
 def _dig(x):
@@ -286,6 +342,11 @@ def principale():
             m2 = carica(SIM, "_s6b_nu_%s" % nome)
             n1 = costruisci(m1, seme, os.path.join(FUORI, "_sc1_%s" % nome), True)
             n2 = costruisci(m2, seme, os.path.join(FUORI, "_sc2_%s" % nome), True)
+        # ### IL CONTROLLO DELLA SCENA, e NON e' una formalita': il referto `f94ff2c`
+        #   e' girato su una scena con `2208` nodi invece di circa `12800`, perche'
+        #   `costruisci` scriveva `nmasse` e `sep` ### **a mano**.
+        sc_ok, sc = controlla_scena(m2, n2, seme, stampa, "oggi")
+        sc1_ok, _sc1 = controlla_scena(m1, n1, seme, stampa, "prima")
         d0 = confronta(stato(n1), stato(n2, senza=NUOVI_ATTESI))
         primo = None
         for p in range(1, passi + 1):
@@ -300,7 +361,8 @@ def principale():
         imprevisti = [k for k in soli_oggi if k not in NUOVI_ATTESI]
         stampa("    attributi solo nell'OGGI: %s" % (sorted(soli_oggi) or "nessuno"))
         stampa("    di cui NON PREVISTI ....: %s" % (sorted(imprevisti) or "nessuno"))
-        passa = bool(primo is None and not d0 and not imprevisti)
+        passa = bool(primo is None and not d0 and not imprevisti
+                     and sc_ok and sc1_ok)
         if passa:
             stampa("    ### PASSA: ZERO differenze su %d passi, su OGNI voce di `__dict__`"
                    % passi)
@@ -328,7 +390,8 @@ def principale():
                                           else [[k, w] for k, w in d0]),
                            "attributi_solo_oggi": sorted(soli_oggi),
                            "attributi_imprevisti": sorted(imprevisti),
-                           "contatori_prima": c1, "contatori_oggi": c2}
+                           "contatori_prima": c1, "contatori_oggi": c2,
+                           "scena": sc, "scena_ok": bool(sc_ok and sc1_ok)}
     esito["scene"] = per_scena
 
     # ======================================================== BRACCIO B
@@ -346,12 +409,28 @@ def principale():
         n2, m2, s2 = gira(SIM, "nu_%s" % nome, seme, passi, False, 0.5)
         c1, c2 = conta(n1), conta(n2)
         # B1
-        b1 = (c2["_sm_trd_mitosi"] in (0, None)) and (c2["_sm_trd0_mitosi"] in (0, None))
+        # ### ⛔ `B1` NON PASSA PIU' A VUOTO. La prima stesura chiedeva solo
+        #   *<<nell'oggi sono zero>>*, e su una scena senza candidati ### **lo sono per
+        #   ASSENZA DI MATERIA**: il referto `f94ff2c` stampa `PASSA` sulla scena `corta`
+        #   dove i contatori sono ### **`None/None`** e le divisioni ammesse sono
+        #   ### **zero**. ### **Quel `PASSA` non provava niente.**
+        #   ### ✅ Ora serve che nel ### **PRIMA** i troncamenti siano ### **diversi da
+        #   zero**: uno zero atteso vale solo se accanto c'e' un numero che non e' zero.
+        #   ### Altrimenti si stampa ### **VUOTO** e il braccio ### **NON PASSA.**
+        _pr = [c1["_sm_trd_mitosi"], c1["_sm_trd0_mitosi"]]
+        _og = [c2["_sm_trd_mitosi"], c2["_sm_trd0_mitosi"]]
+        _materia = any((x or 0) > 0 for x in _pr)
+        _zeri = all((x or 0) == 0 for x in _og)
+        b1 = bool(_materia and _zeri)
+        b1_vuoto = (not _materia)
         stampa("    B1  i troncamenti della MITOSI, prima / oggi:")
         for k in ("_sm_trd_mitosi", "_sm_trd0_mitosi"):
             stampa("          %-20s %s / %s" % (k, c1.get(k), c2.get(k)))
-        stampa("        ### uno ZERO atteso vale solo se accanto c'e' il numero che ERA.")
-        stampa("        ### %s" % ("PASSA" if b1 else "FALLISCE"))
+        stampa("        ### uno ZERO atteso vale solo se accanto c'e' un numero")
+        stampa("        ###   DIVERSO DA ZERO.")
+        stampa("        ### %s"
+               % ("VUOTO: nel PRIMA i troncamenti sono gia' zero -- NON PASSA, e non prova nulla"
+                  if b1_vuoto else ("PASSA" if b1 else "FALLISCE")))
         # B2
         tutti = s2.eventi
         b2 = all(e["ok"] for e in tutti) if tutti else None
@@ -392,11 +471,72 @@ def principale():
         stampa("          il ramo di soglia, DAI FLAG e non indovinato:")
         stampa("            TORS_4PI = %s   PHI_CRIT = %s"
                % (getattr(m2, "TORS_4PI", "ASSENTE"), getattr(m2, "PHI_CRIT", "ASSENTE")))
-        b[nome] = {"B1": bool(b1), "B2": b2, "eventi": tutti,
+        b[nome] = {"B1": bool(b1), "B1_vuoto": bool(b1_vuoto), "B2": b2,
+                   "eventi": tutti,
                    "contatori_prima": c1, "contatori_oggi": c2,
                    "soglie": s2.soglie[:200]}
     esito["braccio_B"] = b
     b_ok = all(v["B1"] and (v["B2"] is not False) for v in b.values())
+
+    # ======================================================== BRACCIO E
+    stampa("")
+    stampa("-" * 100)
+    stampa("BRACCIO `E` -- OGGI SENZA FLAG == PRIMA CON FLAG, identico al byte")
+    stampa("  ### E' LA PROVA PIU' DIRETTA CHE IL FLAG E' INERTE, e che la legge")
+    stampa("  ###   incondizionata e' ESATTAMENTE quella che il flag accendeva.")
+    stampa("  ### \u26a0 I bracci `A` e `B` da soli NON lo dicono: `A` confronta")
+    stampa("  ###   *prima CON* contro *oggi CON*, `B` misura *oggi SENZA* contro")
+    stampa("  ###   *prima SENZA*. ### Nessuno dei due incrocia i due stati che")
+    stampa("  ###   DEVONO coincidere se il flag non fa piu' niente.")
+    ee = {}
+    for nome, seme, passi in SCENE:
+        stampa("")
+        stampa("  SCENA `%s` -- seme %d, %d passi: PRIMA con flag / OGGI senza" % (nome, seme, passi))
+        with contextlib.redirect_stdout(io.StringIO()):
+            me1 = carica(p_prima, "_s6b_epr_%s" % nome)
+            me2 = carica(SIM, "_s6b_enu_%s" % nome)
+            ne1 = costruisci(me1, seme, os.path.join(FUORI, "_sce1_%s" % nome), True)
+            ne2 = costruisci(me2, seme, os.path.join(FUORI, "_sce2_%s" % nome), False)
+        de0 = confronta(stato(ne1), stato(ne2, senza=NUOVI_ATTESI))
+        pe = None
+        for p in range(1, passi + 1):
+            with contextlib.redirect_stdout(io.StringIO()):
+                _passo.passo_pieno(me1, ne1)
+                _passo.passo_pieno(me2, ne2)
+            d = confronta(stato(ne1), stato(ne2, senza=NUOVI_ATTESI))
+            if d and pe is None:
+                pe = (p, list(d))
+        sole = [k for k in vars(ne2) if k not in vars(ne1)]
+        impr = [k for k in sole if k not in NUOVI_ATTESI]
+        ok = bool(pe is None and not de0 and not impr)
+        ce1, ce2 = conta(ne1), conta(ne2)
+        stampa("    n / archi:  %d , %d   contro  %d , %d"
+               % (ce1["n"], ce1["archi"],
+                  ce2["n"], ce2["archi"]))
+        if ok:
+            stampa("    ### PASSA: ZERO differenze su %d passi. Il flag e'" % passi)
+            stampa("    ###   INERTE, e lo dice il confronto piu' diretto.")
+        else:
+            q = pe or (0, de0)
+            stampa("    ### FALLISCE: prima differenza al passo %d, %d voci:"
+                   % (q[0], len(q[1])))
+            for k, w in q[1][:12]:
+                stampa("    ###   %-30s %s" % (k, w))
+            if impr:
+                stampa("    ### *** %d attributi nuovi NON PREVISTI: %s ***" % (len(impr), impr))
+        ee[nome] = {"passa": ok,
+                    "prima_differenza": (pe[0] if pe else None),
+                    "differenze": ([[k, w] for k, w in pe[1]] if pe
+                                    else [[k, w] for k, w in de0]),
+                    "attributi_imprevisti": sorted(impr),
+                    "contatori_prima_con": ce1,
+                    "contatori_oggi_senza": ce2}
+    e_ok = all(v["passa"] for v in ee.values())
+    stampa("")
+    stampa("  ### %s"
+           % ("PASSA: su tutte le scene, oggi-senza-flag e' identico a prima-con-flag."
+              if e_ok else "FALLISCE: il flag NON e' inerte, o la legge non e' quella che era."))
+    esito["braccio_E"] = ee
 
     # ======================================================== BRACCIO C
     stampa("")
@@ -514,11 +654,13 @@ def principale():
         stampa("###   braccio A `%-11s` %s"
                % (n, "PASSA" if per_scena[n]["passa"] else "FALLISCE"))
     stampa("###   braccio B ........ %s" % ("PASSA" if b_ok else "FALLISCE"))
+    stampa("###   braccio E ........ %s" % ("PASSA" if e_ok else "FALLISCE"))
     stampa("###   braccio C ........ %s" % ("PASSA" if c_ok else "FALLISCE"))
     stampa("###   braccio C-bis .... %s" % ("PASSA" if cb_ok else "FALLISCE"))
     stampa("###   braccio D ........ %s" % ("PASSA" if d_ok else "FALLISCE"))
     stampa("=" * 100)
-    esito["riepilogo"] = {"0": esito["braccio_0"], "A": a_ok, "B": b_ok, "C": c_ok,
+    esito["riepilogo"] = {"0": esito["braccio_0"], "A": a_ok, "B": b_ok, "E": e_ok,
+                          "C": c_ok,
                           "C-bis": cb_ok, "D": d_ok}
 
     io.open(os.path.join(FUORI, "_sigillo.json"), "w", encoding="utf-8",

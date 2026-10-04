@@ -237,3 +237,62 @@ complemento girarono da ### **blob diversi dello stesso sigillo** *(`838fc5c9` e
 ### **③ I DUE DIFETTI DEL MIO CENSIMENTO restano in CODA**, per decisione del guardiano: si
 contava da solo, e non riconosceva `_driver_prima.py` come reperto *(e' una copia del
 **driver**, non del simulatore)*. ### **Un commit a se', DOPO il `6b`.**
+
+---
+
+## **ANNOTAZIONE del 2026-10-04 — IL SIGILLO DEL `6b` E' GIRATO SU UNA SCENA SBAGLIATA**
+
+*(rilievo del guardiano su `f94ff2c`. **Si ANNOTA, non si riscrive**: par.8.)*
+
+### ⛔ **LA CAUSA, letta dal codice e non dedotta:** in `_sigillo_legge_2lam.py` la funzione
+`costruisci()` **scriveva A MANO** due attributi:
+
+```python
+m._NMASSE_VIDEO["n"]   = 2        # <- a mano
+m._NMASSE_VIDEO["sep"] = 3.0      # <- a mano
+```
+
+mentre i sigilli del **4**, del **5** e del **`6a`** li **LEGGONO dal CLI del driver**:
+`max(2, int(getattr(a, "nmasse", 2)))` e `float(getattr(a, "sep", 3.0))`.
+### **E' un attributo a mano: `H-P3`.** ### **E il driver passa `--nmasse 3` e
+`--sep 6.1158`** *(verificato stampando i token dell'argv)*, quindi la mia scena aveva
+**`2208` nodi al passo 150** invece dei **`~12800`** della scena vera.
+
+### **LE TRE CONSEGUENZE, tutte nel referto `f94ff2c`**
+
+| cosa avevo scritto | che cos'e' davvero |
+|---|---|
+| *«il primo candidato arriva al passo **74**»* *(in `5f03401`, e anche in `REGISTRO_FISICA` e `FATTI_dal_codice`)* | ### **e' il 74 DI QUELLA SCENA.** Sulla scena del driver il primo candidato e' al **`42`** — ### **come avevo misurato IO nel `6a`** |
+| *«le scene da 72 passi NON portano statistica del cancello»* | ### **FALSO** per la scena del driver |
+| `B1` sulla scena `corta` **vuoto** | era vuoto ### **per questo**, non per una proprieta' della legge |
+
+### 📌 **E LA COSA PEGGIORE NON E' IL NUMERO SBAGLIATO: e' che l'avevo CONTRADDETTO IO.** Nel
+`6a` avevo misurato il primo evento al **42**, e nel `6b` ho scritto **74** ### **senza
+accorgermi che i due numeri non potevano stare insieme** — stessa scena nominale, stesso seme.
+### **Due misure incompatibili sullo stesso oggetto, e non ho fatto la domanda.** *(`P1`: non
+usare l'associazione senza verificare lo storico.)*
+
+### **LA RIMISURA INDIPENDENTE DEL GUARDIANO** *(Linux, numpy 2.5.3, seme 11, 72 passi,
+lockstep su **tutti** gli attributi)*:
+
+| | |
+|---|---|
+| **con** `--mitosi-2lam` | *prima* e *oggi* **identici** salvo i 4 contatori nuovi · `n = 12812`, archi `471575` |
+| **senza** | `_sm_trd_mitosi` **`16 → 0`**, `_sm_trd0_mitosi` **`14 → 0`**, prima differenza al passo **`42`** |
+| ### **e OGGI SENZA FLAG** | da' `n = 12812`, archi `471575`, `_g_sm_nascite = 18`: ### **gli stessi numeri del PRIMA CON FLAG** |
+
+### **LA CURA, in quattro punti**
+
+| | |
+|---|---|
+| **①** | `costruisci()` legge `nmasse` e `sep` **dal CLI**, piu' un **controllo che PUO' fallire**: il sigillo stampa `n` e gli archi alla costruzione e **FALLISCE** se `nmasse`/`sep` non coincidono con quelli dell'**argv**. ### ⚠ **E il riferimento si estrae DAI TOKEN DELL'ARGV, non da `costruisci`:** un controllo calcolato dalla funzione che deve controllare sarebbe ### **sempre d'accordo con lei** — il controllo del controllore fatto dal controllore |
+| **②** | **braccio `E`, nuovo:** ### **OGGI SENZA FLAG deve essere IDENTICO AL BYTE a PRIMA CON FLAG**, su tutte le scene. ### **E' la prova piu' diretta che il flag e' inerte**, e ### **ne' `A` ne' `B` la danno:** `A` confronta *prima CON* contro *oggi CON*, `B` misura *oggi SENZA* contro *prima SENZA*. ### **Nessuno dei due incrocia i due stati che DEVONO coincidere.** |
+| **③** | `B1` corretto: se nel ### **PRIMA** i troncamenti sono **gia' zero**, il braccio stampa ### **VUOTO e NON PASSA.** Uno zero atteso vale solo se accanto c'e' un numero **diverso da zero** |
+| **④** | il sigillo intero **rigirato sulla scena giusta**, referto con un **nome proprio nuovo**. ### **Il referto `f94ff2c` resta come REPERTO: non si cancella e non si riscrive** |
+
+### ⚠ **UN LIMITE MINORE, da registrare e non curare qui** *(il guardiano lo mette in coda)*:
+**`_g_m2l_tw_rif` e' una LISTA nello stato della rete che CRESCE SENZA LIMITE** per tutto il
+run. Nelle scene misurate sono `19` valori, quindi non e' un problema **oggi** — ma e'
+### **una struttura non limitata dentro `net.__dict__`**, e un run lungo la farebbe crescere
+con ogni rifiuto. ### **La forma si decide nel commit della cura dei due difetti del
+censimento**, che e' il prossimo in coda.

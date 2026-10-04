@@ -1490,7 +1490,16 @@ pavimento assoluto, non `LAM`. ### **`A11` applicato, `A13` no. La cura la decid
 **diagnostica per il `6c`**, non una legge — e si tiene la **lista** e non la somma perche'
 una **mediana** non si ricostruisce da una somma.
 
-### 📌 **UN NUMERO MISURATO CHE CORREGGE IL PIANO:** su questa piattaforma
+### ⛔ **RITIRATO il 2026-10-04: IL NUMERO QUI SOTTO VIENE DA UNA SCENA SBAGLIATA.**
+Il sigillo del `6b` costruiva la scena con `nmasse = 2` e `sep = 3.0` **scritti a
+mano** *(`H-P3`)*, mentre il driver passa **`--nmasse 3`** e **`--sep 6.1158`**:
+`2208` nodi al passo 150 invece di `~12800`. ### **Sulla scena del driver il primo
+candidato e' al passo `42`** — ### **come avevo misurato IO nel `6a`.**
+### ⚠ **E la frase *«le scene da 72 passi non portano statistica del cancello»* e'
+FALSA per la scena del driver.** ### **Il paragrafo resta visibile perche' il
+reperto non si riscrive, ma NON si cita come misura.**
+
+> ### 📌 **UN NUMERO MISURATO CHE CORREGGE IL PIANO:** su questa piattaforma
 *(Windows, numpy 2.3.0, seme 11, con il flag)* il **primo candidato** alla divisione
 arriva al passo **`74`**, non al 42 — e al passo `100` i candidati sono `7`, con `1`
 rifiutato per `LAM` e `_g_m2l_dmin = 0.973`. ### ⚠ **Quindi le scene da 72 passi NON

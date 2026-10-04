@@ -3967,3 +3967,50 @@ sé — «VUOTO: NON PROVA NULLA» — ma `B1` no, e la differenza fra i due è 
 mio criterio, non del codice.)*
 
 ---
+
+## **IL SIGILLO DEL 6b E' GIRATO SU UNA SCENA SBAGLIATA — e la spia era mia**
+
+**Rilievo tuo su `f94ff2c`, ed è giusto.** `costruisci()` scriveva **a mano**
+`_NMASSE_VIDEO["n"] = 2` e `["sep"] = 3.0`, mentre i sigilli del 4, del 5 e del `6a` li
+**leggono dal CLI**. ### **È `H-P3`.** E il driver passa **`--nmasse 3`** e
+**`--sep 6.1158`** *(verificato stampando i token dell'argv)*: la mia scena aveva
+**`2208`** nodi al passo 150 invece dei **`~12800`** di quella vera.
+
+### ⛔ **MA LA COSA PEGGIORE NON È IL NUMERO SBAGLIATO: È CHE L'AVEVO CONTRADDETTO IO.**
+Nel `6a` avevo misurato il primo evento al passo **`42`**. Nel `6b` ho scritto **`74`**,
+### **stessa scena nominale, stesso seme** — e l'ho scritto in `5f03401`, in
+`REGISTRO_FISICA` e in `FATTI_dal_codice` come un *«numero misurato che corregge il
+piano»*. ### **Due misure incompatibili sullo stesso oggetto, e non ho fatto la
+domanda.** *(`P1`.)* ### **La spia non era nascosta: era nel mio referto di ieri.**
+
+**Le tre conseguenze, tutte nel referto `f94ff2c`:** il `74` è di quella scena; *«le
+scene da 72 passi non portano statistica del cancello»* è **falso** per la scena del
+driver; e `B1` sulla `corta` era vuoto **per questo** — non per una proprietà della
+legge. ### **Ritirato in entrambi i documenti vivi, col perché, e il reperto resta.**
+
+### **LA CURA, e il punto ② è quello che mi mancava davvero**
+
+**①** `nmasse` e `sep` dal CLI, più un **controllo che può fallire**. ### ⚠ **E il
+riferimento si estrae DAI TOKEN DELL'ARGV, non da `costruisci`:** un controllo calcolato
+dalla funzione che deve controllare sarebbe **sempre d'accordo con lei** — il controllo
+del controllore fatto dal controllore.
+
+**②** **braccio `E`: OGGI SENZA FLAG identico al byte a PRIMA CON FLAG.** ### **È la
+prova più diretta che il flag è inerte, e né `A` né `B` la danno:** `A` confronta *prima
+CON* contro *oggi CON*, `B` misura *oggi SENZA* contro *prima SENZA*. ### **Nessuno dei
+due incrocia i due stati che DEVONO coincidere se il flag non fa più niente.** Avevo
+costruito sei bracci e **non avevo messo quello che prova la cosa principale.**
+
+**③** `B1` non passa più a vuoto: se nel *prima* i troncamenti sono già zero, stampa
+**VUOTO** e **non passa**. *(Era il limite che avevo dichiarato io nel referto — e la
+dichiarazione non bastava: `B2` diceva «VUOTO: NON PROVA NULLA», `B1` stampava `PASSA`.)*
+
+**④** il sigillo rigirato sulla scena giusta, referto con nome nuovo, e **`f94ff2c` resta
+come reperto**: non si cancella e non si riscrive.
+
+### ⚠ **E IL LIMITE MINORE, registrato e non curato qui:** `_g_m2l_tw_rif` è una **lista
+in `net.__dict__` che cresce senza limite** per tutto il run. Nelle scene misurate sono
+`19` valori, quindi non è un problema **oggi** — ma è **una struttura non limitata nello
+stato**, e la forma si decide col commit della cura dei due difetti del censimento.
+
+---

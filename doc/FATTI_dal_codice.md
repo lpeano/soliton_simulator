@@ -831,11 +831,20 @@ legge prima di toccare una funzione, e qui **non c'era niente da leggere**.)*
 |---|---|
 | **il cancello di `A13` alla nascita e' INCONDIZIONATO dal `6b`** | accanto alla soglia di densita', dentro `decidi_divisione` |
 | **`ok` prima del cancello E' il criterio di densita'** `0.5*(I[a]+I[b]) >= QMIN_M * median(peq)` | e per questo i tre contatori separati sono calcolabili: `~ok` e' *«rifiutato per densita'»* |
-| ### ⚠ **il primo candidato arriva al passo `74`** *(Windows, numpy 2.3.0, seme 11, col flag)* | ### **non al 42**: le scene da 72 passi NON portano statistica del cancello |
+| ### ⛔ **il primo candidato arriva al passo `42`** *(scena del DRIVER: `--nmasse 3`, `--sep 6.1158`, seme 11, col flag)* | ### **RETTIFICA del 2026-10-04:** qui c'era scritto **`74`**, misurato su una scena con `nmasse = 2` e `sep = 3.0` ### **scritti a mano nel sigillo** *(`H-P3`)* — `2208` nodi invece di `~12800`. ### **Il `42` e' la mia stessa misura del `6a`, e i due numeri non potevano stare insieme: non ho fatto la domanda** |
 | `_g_m2l_tot` **dal `6b` gira SEMPRE** | prima girava solo a flag acceso: ### **la sua presenza NON dice piu' niente sul flag**, dice che ci sono stati candidati |
-| la funzione **esce PRESTO** se non ci sono candidati | `if not len(c): return None, {...}` — **prima** della riga dei contatori, ed e' per questo che restano assenti nelle scene corte |
+| la funzione **esce PRESTO** se non ci sono candidati | `if not len(c): return None, {...}` — **prima** della riga dei contatori. ### ⚠ **E questo spiega perche' i contatori erano assenti nelle mie scene corte: NON perche' le scene da 72 passi siano troppo brevi, ma perche' la scena era SBAGLIATA** |
 
 ### ⛔ **UNA TRAPPOLA, e l'ho pagata:** il piano diceva *«calo di `n` al 72»*. ### **Quella
 previsione vale SOLO SENZA il flag**: col flag il cancello c'e' gia', quindi non puo'
-cambiare niente. ### **E su questa piattaforma, col flag, al passo 72 non c'e' ancora
-nemmeno UN candidato.**
+cambiare niente.
+
+### ⛔ **E LA FRASE CHE STAVA QUI -- *«su questa piattaforma, col flag, al passo 72 non
+c'e' ancora nemmeno UN candidato»* -- E' RITIRATA il 2026-10-04: era vera per una SCENA
+SBAGLIATA** *(`nmasse = 2`, `sep = 3.0` scritti a mano nel sigillo, `H-P3`)*.
+### **Sulla scena del driver il primo candidato e' al passo `42`.**
+
+### ⛔ **ED E' UNA SECONDA TRAPPOLA, pagata il giorno dopo la prima: LA SPIA C'ERA E NON
+L'HO LETTA.** Il `6a` diceva **`42`**, il `6b` diceva **`74`**, ### **stessa scena
+nominale e stesso seme.** ### **Due misure incompatibili sullo stesso oggetto, e nessuna
+domanda** *(`P1`: non usare l'associazione senza verificare lo storico)*.
