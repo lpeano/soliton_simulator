@@ -3795,3 +3795,64 @@ sesta — ### **un inserimento a metà avrebbe lasciato l'indice in uno stato ch
 ha dichiarato.**
 
 ---
+
+## **IL 6b SI SBLOCCA — e lo STOP era del mandato, non del codice**
+
+**Il guardiano dichiara il proprio errore**, e lo registro come tale: il mandato elencava
+**tre** file fuori dal simulatore, lui ne aveva **già visti molti di più** in una ricerca
+precedente, e la lista di tre era la sua omissione. ### ✅ **Quindi: `0` siti di CODICE
+non previsti, e lo STOP è dovuto AL MANDATO.** Il suo censimento indipendente coincide col
+mio — `7` righe di codice tutte previste, `6` commenti fuori lista — e sui file fuori lui
+conta `15` dove io conto `14`: ### **la differenza sono i due difetti del mio strumento**,
+già dichiarati e in coda.
+
+### 📌 **LA REGOLA CHE MI MANCAVA, e cambia come si legge il par.6:**
+
+> **`72` sigilli su `79` leggono il simulatore DAL DISCO.** Quindi *«ri-girabile»* non
+> significa *«gira sull'`HEAD` di oggi»*: significa ### **ri-girabile AL SUO COMMIT.**
+> ### **Ed è per questo che l'inventario registra IL BLOB** — il blob non è una
+> decorazione, è **la coordinata che rende il sigillo ri-eseguibile.**
+
+### ⚠ **Senza questa regola la mia conclusione era sbagliata:** avevo scritto che il
+sigillo di `CURA 5` diventa *«un difetto nuovo»* per il par.6. ### **Letta così, OGNI cura
+che cambia il simulatore trasformerebbe TUTTI i sigilli precedenti in difetti** — e il
+repo ne ha 79. ### **La frase del par.6 va letta con questa regola accanto.**
+### ⛔ **E metterla in `CLAUDE.md` è una decisione di Luca, non mia e non del guardiano:**
+sta nel task history del `6b`, e il par.6 resta come è.
+
+**Quindi i due sigilli NON si toccano**, e nelle loro voci d'inventario c'è la riga del
+commit. ### **E `_sigillo_cura5_a13nascita.py` non aveva NESSUNA voce d'inventario**
+*(verificato con `grep`)*: ### **un'omissione del par.6 punto ① scoperta dal censimento**,
+e la voce nasce oggi col comando, i blob e il commit.
+
+### ⚠ **E IL SIGILLO DEL `6a` HA DUE PUNTI DI SIGILLATURA, non uno:** `1927b45` per il
+referto intero *(sigillo `838fc5c9`)* e `f288eff` per il complemento di `C-bis`
+*(sigillo `94224cb7`)* — **blob diversi dello stesso sigillo**. ### **Registrarne uno solo
+renderebbe non ri-girabile metà del lavoro.** *(Numeri letti da `git show`, non a
+memoria.)*
+
+## **LE CINQUE RISPOSTE DELLA STELLA POLARE, scritte PRIMA del codice**
+
+È il primo commit che le usa, e due sono interessanti:
+
+### **① `A14` — il `6b` non si limita a conservare: TOGLIE UNA VIOLAZIONE.** Il cancello
+**non modifica lo stato, rifiuta un evento** — non è un taglio, è un **non-accadimento**.
+E oggi gli archi sotto `LAM` nascono comunque e **`_nasce` li ALZA**, cioè modifica una
+lunghezza dopo averla creata: ### **un tipo (3), che viola `A14` per costruzione qualunque
+sia il valore.** ### **Il `6b` rende quel troncamento IRRAGGIUNGIBILE sulla mitosi**, e il
+criterio `B1` è esattamente la misura di quell'affermazione.
+
+### **⑤ IMPOSTO, di proposito — e qui c'è la trappola che scrivo PRIMA perché dopo
+sarebbe una scusa:** il piano prevede un **calo di `n` al passo 72** senza il flag.
+### ⛔ **Quel calo è IMPOSTO PER COSTRUZIONE** — meno nascite ammesse, meno nodi —
+### **e non va presentato come un fenomeno emergente.** È la conseguenza aritmetica del
+cancello, e il referto lo dirà con queste parole.
+
+Le altre tre, in breve: **②** nessun gradino, perché il `6b` **non afferma un risultato di
+fisica** — afferma un'**identità** e una **conseguenza misurata**, e i gradini (b) e (c)
+**non si applicano**, perché *il fenomeno È la legge*; **③** **nessun numero nuovo**, e il
+conto delle leggi va **in diminuzione** *(due comportamenti → uno)*, che è `9-ter`;
+**④** **no**, il cancello legge `d` e `LAM` — non `rho`, non `c_s`, non il segno — e la
+risposta è **verificabile dal censimento**, non asserita.
+
+---

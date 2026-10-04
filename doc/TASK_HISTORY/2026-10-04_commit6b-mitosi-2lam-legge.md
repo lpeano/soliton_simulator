@@ -122,3 +122,118 @@ ENTRAMBI I LATI, e una sola proverebbe meta' della legge.**
 
 ### ⚠ **E IL `6c` NON SI TOCCA:** la distribuzione di `|tw|` si **misura e si riporta**, non si
 usa per cambiare una soglia. *(`A1`: la legge, non il numero.)*
+
+---
+
+## **LA STELLA POLARE — le cinque risposte, scritte PRIMA del codice**
+
+*(`L-STELLA`, `doc/STELLA_POLARE.md`. **Il «perche'» e' parte della risposta.**)*
+
+### **① `A14`: questa legge conserva energia e carica LOCALMENTE?**
+
+### ✅ **SI, e fa di piu': NE TOGLIE UNA VIOLAZIONE.** Il cancello **non modifica lo stato**:
+**rifiuta un evento**. Una decisione a monte non muove ne' energia ne' carica — ### **non e'
+un taglio, e' un NON-ACCADIMENTO.**
+### 📌 **E IL PUNTO CHE CONTA:** oggi gli archi piu' corti di `LAM` nascono comunque e
+### **`_nasce` li ALZA** — cioe' **modifica una lunghezza dopo averla creata**, che e' un
+### **tipo (3)** della classificazione dei numeri a mano *(proiezione/pavimento/clip)* e
+### **viola `A14` per costruzione, qualunque sia il valore.** ### **Il `6b` rende quel
+troncamento IRRAGGIUNGIBILE sul sito della mitosi**, e il criterio `B1`
+*(`_sm_trd_mitosi == 0` e `_sm_trd0_mitosi == 0`)* ### **e' esattamente la misura di quella
+affermazione.**
+### ⚠ **E NON LA TOGLIE DOVE NON GUARDA:** lo Schwinger continua a produrre archi sotto `LAM`
+*(`46` nel referto `1927b45`)*, ed e' `SCHW-SOTTO-LAM`, ### **registrata e NON curata dal 6b.**
+
+### **② A quale dei TRE GRADINI di `ROBUSTEZZA-FISICA` arriva?**
+
+### ⛔ **A NESSUNO, e si applica solo per una parte — perche' il `6b` NON AFFERMA UN RISULTATO
+DI FISICA:** rende **incondizionata una legge**. Non c'e' un fenomeno di cui dire *«e'
+emergente»*.
+### **Cio' che il `6b` afferma sono due cose, e si misurano diversamente:** ### **(a)** una
+### **IDENTITA'** *(con il flag, byte-identico)*, e per quella il gradino **(a)** e' il
+criterio giusto — ### **tre scene, due semi, confronto DOPO OGNI PASSO**; ### **(b)** una
+### **CONSEGUENZA MISURATA** *(i troncamenti vanno a zero senza il flag)*, che e' un fatto sul
+codice, non una conclusione di fisica.
+### ⚠ **I gradini (b) e (c) NON SI APPLICANO, e dirlo e' la risposta:** non c'e' nessuna legge
+pratica da spegnere per vedere se il fenomeno resta, perche' ### **il fenomeno E' la legge.**
+
+### **③ Aggiunge un numero o una legge? Di che TIPO? Compensa un difetto?**
+
+### ✅ **NON AGGIUNGE NESSUN NUMERO.** Usa `FRAZ_NASCITA` — che esiste dal `6a` ed e' un
+### **tipo (2), una TOPPA** da derivare — e `LAM`, che e' la scala della teoria.
+### 📌 **E SULLE LEGGI IL CONTO VA IN DIMINUZIONE, che e' il criterio `9-ter`:** oggi ci sono
+### **DUE comportamenti** *(col flag e senza)*; dopo il `6b` ce n'e' ### **UNO**. Il ramo
+«senza» ### **esce dal sorgente e va in archivio**, e il flag resta ### **inerte come
+`PAV_COM`** *(decisione 3 di Luca: si conserva tutto)*.
+### ⛔ **E NON COMPENSA UN DIFETTO: lo TOGLIE.** Il `6b` non mette una legge davanti a un
+problema — ### **rende irraggiungibile un tipo (3)**, cioe' fa l'opposto di cio' che
+`AUDIT-CURE` cerca.
+
+### **④ Tocca `rho`, `c_s` o il SEGNO? In quale VERSO dell'accoppiamento?**
+
+### ✅ **NO, e la risposta e' MISURATA e non asserita.** Il cancello legge `d` *(lunghezza
+d'arco)* e `LAM`. ### **Non legge `rho`, non legge `c_s`, non legge il segno.**
+### 📌 **E CIO' CHE LO RENDE VERIFICABILE E' IL CENSIMENTO:** `a7ef047` elenca
+### **ogni** sito di `MITOSI_2LAM` dall'AST, e il perimetro del `6b` e' quello. ### **Dentro
+`decidi_divisione` esiste un criterio di densita'** *(`0.5*(I[a]+I[b]) >= QMIN_M *
+median(peq)`)*, ### **e il `6b` NON LO TOCCA** — e' una riga `ALTRO` del censimento del punto
+medio, non un sito del flag.
+### ⚠ **Quindi `EM-CURVATURA-BIDIREZIONALE` non si applica, e il *«perche'»* e' che il sito
+cambiato non sta su quel percorso.**
+
+### **⑤ Emergente o imposto?**
+
+### ⛔ **IMPOSTO, DI PROPOSITO, E DICHIARATO: e' una LEGGE, non una misura.** `A13` alla
+nascita e' un vincolo che **si mette**, e il `6b` esiste per metterlo **senza condizioni**.
+> ### 📌 **E QUI STA LA TRAPPOLA DA SCRIVERE PRIMA, perche' dopo sarebbe una scusa:** il
+> piano prevede un **calo di `n` al passo 72** nella scena senza flag. ### **Quel calo e'
+> IMPOSTO PER COSTRUZIONE** — meno nascite ammesse, meno nodi — ### **e NON va presentato
+> come un fenomeno emergente.** ### **E' la conseguenza aritmetica del cancello, e il referto
+> deve dirlo con queste parole.**
+
+---
+
+## **ANNOTAZIONE del 2026-10-04 — DUE NOTE DAL GUARDIANO, e lo STOP era del MANDATO**
+
+### **① LO STOP NON ERA DEL CODICE, ed e' il guardiano a dichiararlo.** Il mandato del `6b`
+elencava ### **tre** file fuori dal simulatore; il censimento ne ha trovati ### **undici in
+piu'**, e il guardiano dichiara che ### **li aveva gia' visti in una ricerca precedente** e
+che la lista di tre era ### **la sua omissione.** ### ✅ **Quindi: `0` siti di CODICE non
+previsti, e lo STOP e' dovuto AL MANDATO, non al codice.** *(Il suo censimento indipendente
+coincide col mio: `7` righe di codice tutte previste, `6` commenti fuori lista, `15` file
+fuori — dove io ne conto `14`, e la differenza e' nei due difetti del mio strumento,
+dichiarati e in coda.)*
+
+### **② «UN SIGILLO SI RIGIRA AL SUO COMMIT», e questa regola NON E' SCRITTA in `CLAUDE.md`.**
+
+> **`72` sigilli su `79` leggono il simulatore DAL DISCO.** Quindi *«ri-girabile»* non vuol
+> dire *«gira sull'`HEAD` di oggi»*: vuol dire ### **ri-girabile AL SUO COMMIT**. ### **Ed e'
+> per questo che l'inventario registra IL BLOB** — il blob non e' una decorazione, e' ### **la
+> coordinata che rende il sigillo ri-eseguibile.**
+
+### ⚠ **CONSEGUENZA SUL PAR.6, e non la scrivo in `CLAUDE.md`:** la frase *«un sigillo non
+piu' ri-girabile e' un difetto nuovo»* ### **va letta con questa regola accanto**, altrimenti
+ogni cura che cambia il simulatore trasformerebbe **tutti** i sigilli precedenti in difetti.
+### ⛔ **Ma metterla in `CLAUDE.md` e' una DECISIONE DI LUCA, non mia e non del guardiano:**
+sta qui come nota, e il par.6 resta come e'.
+
+### ✅ **E PERCIO' `_sigillo_cura5_a13nascita.py` E `_sigillo_frazione_t.py` NON SI TOCCANO.**
+Nelle loro voci d'inventario va **una riga** che dice a quale commit si rigirano e che dal
+`6b` il cancello e' incondizionato. ### **`_sigillo_cura5_a13nascita.py` non aveva NESSUNA
+voce d'inventario** *(verificato con `grep`)*: va creata, col commit e i blob.
+
+### **I NUMERI DEI DUE SIGILLI, letti da `git` e non a memoria**
+
+| sigillo | commit | blob del sigillo | blob del simulatore |
+|---|---|---|---|
+| `_sigillo_cura5_a13nascita.py` | **`7fcd9c7`** *(2026-09-25)* | `06c6b3f4` | **`d9f113e9`** |
+| `_sigillo_frazione_t.py` *(referto intero)* | **`1927b45`** | `838fc5c9` | **`c18c9bf6`** |
+| `_sigillo_frazione_t.py` *(complemento `C-bis`)* | **`f288eff`** | `94224cb7` | `c18c9bf6` |
+
+### ⚠ **E il sigillo del `6a` ha DUE punti di sigillatura, non uno:** il referto intero e il
+complemento girarono da ### **blob diversi dello stesso sigillo** *(`838fc5c9` e
+`94224cb7`)*. ### **Registrarne uno solo renderebbe non ri-girabile metà del lavoro.**
+
+### **③ I DUE DIFETTI DEL MIO CENSIMENTO restano in CODA**, per decisione del guardiano: si
+contava da solo, e non riconosceva `_driver_prima.py` come reperto *(e' una copia del
+**driver**, non del simulatore)*. ### **Un commit a se', DOPO il `6b`.**
