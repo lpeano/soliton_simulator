@@ -4343,3 +4343,26 @@ d'eccezione ri-includerebbe anche i file **futuri**, e lo scopo è l'opposto —
 nuova deve nascere ignorata.**
 
 ---
+
+## **`COMMIT 3`: i 24 `CONFIGURAZIONE` — la prova di come sono nati i dati**
+
+**Controllato prima di committare, come chiedeva il mandato:** tutti **testo UTF-8**, il più
+grande **16 682** byte, **302 KB** in tutto. *(Il controllo non era formale: un
+`CONFIGURAZIONE` binario o enorme avrebbe voluto un'altra decisione.)*
+
+**Perché si committano:** altri **15** dello stesso tipo sono **già tracciati**, e questi
+descrivono **come sono stati prodotti i dati** — ### **per il par.6 sono LA PROVA**, non un
+accessorio. Un referto che cita dei dati prodotti da una configurazione che il repo non ha
+è un riferimento al vuoto.
+
+### ⛔ **E UN DIFETTO DEL MIO CENSIMENTO, trovato rigirandolo dopo il `COMMIT 1`: i «non
+citati» sono diventati ZERO, e non perché qualcuno li citi.** ### **Il referto
+`_corsa_2026-10-04_PRIMO.txt`, che ho committato io, elenca TUTTI i candidati per percorso**
+— quindi al giro successivo il censimento **trova sé stesso** e li dichiara citati.
+
+> ### 📌 **È un autoriferimento, e rende il segnale «citato» inutile da qui in avanti:** il
+> corpus in cui cerco le citazioni contiene **il documento che enumera le cose cercate.**
+> ### **Lo curo PRIMA del `COMMIT 5`**, che altrimenti direbbe *«zero non citati, niente da
+> fare»* e **nasconderebbe i 15 che richiedono una decisione.**
+
+---
