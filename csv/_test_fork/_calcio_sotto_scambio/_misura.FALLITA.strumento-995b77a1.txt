@@ -1,0 +1,119 @@
+[TIMBRO] _calcio_sotto_scambio.py  sha1-BYTE 995b77a1  committato e pulito
+========================================================================================================
+IL CALCIO DELLA MITOSI SOTTO LO SCAMBIO a<->b, ISOLATO
+========================================================================================================
+
+### NON E' UN SIGILLO: il mandato dice SOLO MISURE, e il punto 3 dice NIENTE CURE.
+
+  python     3.13.2
+  numpy      2.3.0
+  sistema    Windows 11
+  macchina   AMD64
+  simulatore 0f060670  (sha1 dei byte grezzi, NON toccato)
+
+========================================================================================================
+PARTE 1 -- LA DIVISIONE
+========================================================================================================
+  scena: nmasse=3 sep=6.1158  ->  n = 12802, archi = 471564
+  FRAZ_NASCITA = 0.5   MITOSI_DIR = 0.0   ANTIFASE_ADD = False   REGIME = 'deterministico'
+  KICK_TW = 0.35   PHI_CRIT = 6.283185307179586   COPPIA_MIT = 1.0
+  nomi verificati PRIMA dei passi: 8 globali + 13 su `Rete`
+  primo passo con CANDIDATI: 50   (atteso dai fatti: 42)   archi selezionati: 1
+  ### IL PASSO NON E' QUELLO ATTESO, e lo dico invece di adattarmi: il
+      mandato dice <<il passo PRIMA della prima divisione (il 42)>>, cioe'
+      LO STATO DA CUI mitosi() divide. Questo e' quello stato, trovato
+      sondando. Se il numero differisce, differisce la SCENA o l'ISTANTE.
+
+  I GENITORI, arco per arco -- e `chi_a`/`chi_b` SI RIPORTANO, perche' se
+  fossero uguali l'asimmetria misurata sarebbe solo quella del SEGNO
+  arco   a       b                tw     chi_a     chi_b  d_phi atteso
+  388255 3415    3430    -7.6712e+00     1.000     1.000  2.946490e-01
+
+  chiralita' NON nulle fra i 2 genitori: 2
+  archi con chi_a == chi_b: 1 su 1  (dove sono uguali resta solo il SEGNO)
+  archi sul TAGLIO di _wphi (|D| = dphi/2 = 6.283185): 0
+
+  stato del generatore identico nelle due copie: True
+  la SELEZIONE e' invariante allo scambio: True   (1 archi contro 1)
+  mitosi(): nati BASE = 1, nati SCAMBIO = 1
+  figli nati: 1  (indici [12804])
+  archi nuovi: 1 in BASE, 1 in SCAMBIO, 0 ACCOPPIATI per estremi, 1+1 spaiati
+
+--------------------------------------------------------------------------------------------------------
+  grandezza                    dove       esito          scarto max    diversi
+--------------------------------------------------------------------------------------------------------
+  _chi_core_nodi               genitori   SIMMETRICA    0.00000e+00          0
+  _chi_core_raggio             genitori   SIMMETRICA    0.00000e+00          0
+  _chi_core_rho0               genitori   SIMMETRICA    0.00000e+00          0
+  _chi_geom_nodi               genitori   SIMMETRICA    0.00000e+00          0
+  _cs_nodo_prev                genitori   SIMMETRICA    0.00000e+00          0
+  _deg                         genitori   SIMMETRICA    0.00000e+00          0
+  _fatt_cs_ultimo              genitori   SIMMETRICA    0.00000e+00          0
+  _nb                          genitori   SIMMETRICA    0.00000e+00          0
+  _nb_prec                     genitori   SIMMETRICA    0.00000e+00          0
+  _nb_ret                      genitori   SIMMETRICA    0.00000e+00          0
+  _psi_prec                    genitori   SIMMETRICA    0.00000e+00          0
+  _psi_spin_prec               genitori   SIMMETRICA    0.00000e+00          0
+  _psi_spinor                  genitori   SIMMETRICA    0.00000e+00          0
+  _r_corrente                  genitori   SIMMETRICA    0.00000e+00          0
+  _spinor_lift                 genitori   SIMMETRICA    0.00000e+00          0
+  eta                          genitori   SIMMETRICA    0.00000e+00          0
+  mem_mot                      genitori   SIMMETRICA    0.00000e+00          0
+  omega_s                      genitori   SIMMETRICA    0.00000e+00          0
+  perc_chi                     genitori   SIMMETRICA    0.00000e+00          0
+  perc_geom                    genitori   SIMMETRICA    0.00000e+00          0
+  perc_tw                      genitori   SIMMETRICA    0.00000e+00          0
+  phi                          genitori   ASIMMETRICA   2.94649e-01          2
+  phi0                         genitori   SIMMETRICA    0.00000e+00          0
+  phi_s                        genitori   SIMMETRICA    0.00000e+00          0
+  phivel                       genitori   SIMMETRICA    0.00000e+00          0
+  pos                          genitori   SIMMETRICA    0.00000e+00          0
+  psi                          genitori   SIMMETRICA    0.00000e+00          0
+  psi_spin                     genitori   SIMMETRICA    0.00000e+00          0
+  rho_spin                     genitori   SIMMETRICA    0.00000e+00          0
+  _chi_core_nodi               figlio     SIMMETRICA    0.00000e+00          0
+  _chi_core_raggio             figlio     SIMMETRICA    0.00000e+00          0
+  _chi_core_rho0               figlio     SIMMETRICA    0.00000e+00          0
+  _chi_geom_nodi               figlio     SIMMETRICA    0.00000e+00          0
+  _cs_nodo_prev                figlio     ASIMMETRICA   4.83690e-01          1
+  _deg                         figlio     SIMMETRICA    0.00000e+00          0
+  _fatt_cs_ultimo              figlio     SIMMETRICA    0.00000e+00          0
+  _nb                          figlio     ASIMMETRICA   1.35294e+00          3
+  _nb_prec                     figlio     ASIMMETRICA   1.35294e+00          3
+  _nb_ret                      figlio     ASIMMETRICA   1.18368e+00          3
+  _psi_prec                    figlio     ASIMMETRICA   1.00000e+00          1
+  _psi_spin_prec               figlio     ASIMMETRICA   2.00000e+00          2
+  _psi_spinor                  figlio     ASIMMETRICA   2.00000e+00          2
+  _r_corrente                  figlio     SIMMETRICA    0.00000e+00          0
+  _spinor_lift                 figlio     ASIMMETRICA   2.00000e+00          2
+  eta                          figlio     SIMMETRICA    0.00000e+00          0
+  mem_mot                      figlio     ASIMMETRICA   1.35679e-01          3
+  omega_s                      figlio     ASIMMETRICA   1.11190e+00          3
+  perc_chi                     figlio     SIMMETRICA    0.00000e+00          0
+  perc_geom                    figlio     SIMMETRICA    0.00000e+00          0
+  perc_tw                      figlio     SIMMETRICA    0.00000e+00          0
+  phi                          figlio     ASIMMETRICA   8.88178e-16          1
+  phi0                         figlio     ASIMMETRICA   8.88178e-16          1
+  phi_s                        figlio     ASIMMETRICA   7.13876e-01          1
+  phivel                       figlio     SIMMETRICA    0.00000e+00          0
+  pos                          figlio     SIMMETRICA    0.00000e+00          0
+  psi                          figlio     SIMMETRICA    0.00000e+00          0
+  psi_spin                     figlio     ASIMMETRICA   2.00000e+00          2
+  rho_spin                     figlio     ASIMMETRICA   1.14239e+01          1
+--------------------------------------------------------------------------------------------------------
+  ASIMMETRICHE: 16 su 58 grandezze confrontate
+  + 0 ASIM(ATTESA): asimmetriche PER COSTRUZIONE dello scambio, non per
+    fisica -- gli archi sono accoppiati per INSIEME degli estremi, quindi
+    sotto lo scambio `i` e `j` DEVONO differire. ### Le riporto marcate e
+    FUORI dal conto: tenerle dentro gonfierebbe il numero con una tautologia
+    del mio metodo; nasconderle sarebbe l'errore opposto.
+Traceback (most recent call last):
+  File "C:\Users\lpeano\soliton_simulator\csv\_test_fork\_calcio_sotto_scambio.py", line 825, in <module>
+    sys.exit(principale(mp))
+             ~~~~~~~~~~^^^^
+  File "C:\Users\lpeano\soliton_simulator\csv\_test_fork\_calcio_sotto_scambio.py", line 784, in principale
+    div = misura(S, net, a, float(S.FRAZ_NASCITA), max_passi, "divisione")
+  File "C:\Users\lpeano\soliton_simulator\csv\_test_fork\_calcio_sotto_scambio.py", line 533, in misura
+    "delta_a_atteso_max": float(np.max(np.abs(att["delta_a"]))) if len(sel) else 0.0,
+                                              ~~~^^^^^^^^^^^
+TypeError: 'bool' object is not subscriptable
