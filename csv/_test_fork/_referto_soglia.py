@@ -146,7 +146,7 @@ def main():
       % n(rB))
     w()
     w("> ### ⛔ **E LA SECONDA PREVISIONE SBAGLIA PER LA RAGIONE CHE LA MOTIVAVA:** era "
-      "*<<in `B` la modulazione morde solo il `5`-`10 %` sugli archi che passano>>*. ### **Il "
+      "*<<in `B` la modulazione morde solo il `5`-`10 per cento` sugli archi che passano>>*. ### **Il "
       "morso sulla SOGLIA e' davvero piccolo, ma l'effetto sulle NASCITE non lo e':** `%s`. "
       "### **Un morso piccolo su una soglia non da' un effetto piccolo sulle nascite, se la "
       "popolazione sopra soglia e' ripida.**" % n(rB))

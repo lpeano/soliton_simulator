@@ -5888,3 +5888,75 @@ misura `(2)` l'incremento di `|tw|` si ### **separa nei suoi DUE termini** — l
 `_w8(dph + twist_dip - twp)` e la **SCARICA** `dt_e*tw/_ttw` — con la **Spearman per
 ciascuno**. ### **L'ipotesi del doppio conteggio riguarda la SPINTA:** e' quella che deve
 crescere col gradiente.
+
+---
+
+## 2026-10-06 — `MITOSI-SOGLIA-GRAD` **a ampiezza zero**: la modulazione e' **PORTANTE**, e legge **la grandezza sbagliata**
+
+**Referto:** `doc/REFERTO_mitosi_soglia_grad_2026-10-06.md`, **generato** *(`L-NUMERI`)*.
+Strumento `6b26f173`, generatore `ada3b197`, `150` passi, seme `11`, quattro bracci.
+### **I CINQUE CONTROLLI PASSANO.**
+
+| braccio | divisioni | `nati` |
+|---|--:|--:|
+| `Ap0` *(`PARTE A`, ampiezza `0`)* | **`2`** | `2` |
+| `Bp0` *(`PARTE B`, ampiezza `0`)* | **`2`** | `3` |
+| `B03` / `Bg` *(controlli)* | `18` | `25` |
+| `Ap` *(riferimento)* | `1219` | `1526` |
+| `Bp` *(riferimento)* | `18` | `25` |
+
+### ✔ **`K1`: L'IPOTESI NON E' REFUTATA, E DI MOLTO** — `Ap0/Ap = 0.0016` contro una soglia
+di `0.8`. Togliere il `0.3` porta le divisioni di `A` da `1219` a `2`: ### **un fattore
+`610`.**
+
+### ✔ **E IL FATTO PIU' NETTO: SENZA LA MODULAZIONE I DUE BRACCI DANNO LO STESSO NUMERO DI
+### DIVISIONI** — `2` e `2`. ### **Quindi il fattore `67.7` fra `Ap` e `Bp` del referto
+`12e2ca7` passava TUTTO per la MODULAZIONE:** non per `_ft`, non per la scarica, ### **per
+il `0.3`.**
+### ⚠ **E questo NON dimostra che la modulazione sia GIUSTA: dimostra che e' PORTANTE.**
+*<<Portante>>* e *<<corretta>>* sono due cose diverse, e la seconda non la decide una misura
+di conteggi.
+
+### ⛔ **UNA PREVISIONE DEL GUARDIANO E' SBAGLIATA, e sbaglia per la ragione che la
+### motivava**
+
+Diceva `Bp0` fra `0.5x` e `1.0x` di `Bp`, *<<perche' in `B` la modulazione morde solo il
+`5`-`10 per cento` sugli archi che passano>>*. ### **Misurato: `0.111x`, sotto la banda.**
+### ✔ **Il morso sulla SOGLIA e' davvero piccolo — ma l'effetto sulle NASCITE non lo e':**
+un morso piccolo su una soglia non da' un effetto piccolo sulle nascite ### **se la
+popolazione sopra soglia e' ripida.**
+
+### ✔ **IL RISULTATO PIU' INFORMATIVO NON E' `K2`: E' IL CONFRONTO FRA I PREDITTORI**
+
+Spearman della **`SPINTA`**, ai passi `50`/`100`/`140`:
+
+| predittore | `rho` |
+|---|---|
+| `|r_i - r_j|` — ### **il gradiente NUDO, quello che la soglia legge** | `0.068` / `0.032` / `0.012` |
+| `|r_i - r_j| * |phivel|` medio — la **proxy** del mandato | `0.391` / `0.360` / `0.311` |
+| `|r_i*phivel_i - r_j*phivel_j|` — ### **la forma ESATTA** *(mia aggiunta)* | ### **`0.826` / `0.884` / `0.857`** |
+
+### ⛔ **QUINDI LA MODULAZIONE LEGGE LA GRANDEZZA SBAGLIATA:** la torsione e' guidata dalla
+forma esatta *(`rho ~ 0.86`)* e la soglia si modula sul gradiente nudo *(`rho ~ 0.04`)*.
+### **Sono la stessa cosa SOLO se `phivel` e' uniforme sull'arco, e non lo e'.**
+### ✔ **Ed e' il limite che il guardiano aveva dichiarato** — *<<dove `phivel ~ 0` il
+gradiente non produce torsione>>* — ### **qui con un numero.** La forma esatta era una **mia
+aggiunta** alla proxy chiesta: ### **senza di lei questo confronto non ci sarebbe.**
+
+### `K2` e `K2b`: ### ⛔ **PROVVISORI**, e il referto lo dichiara **leggendolo dal dato**
+
+Il predittore e' **sfasato di un passo** *(`99782e1`)*. Prima lettura: `K2` **non** refutato
+*(`|rho|` `0.068`/`0.032`/`0.012` — e ### **solo il primo supera `0.05`: passa per un pelo,
+su un passo solo**)*; `K2b` **non** rilevante *(`q5/q1` `1.32`/`1.14`/`1.05`, mai `>= 2`)*.
+### **Lettura combinata dalla tavola fissata prima: <<il doppio conteggio esiste ma e'
+piccolo>>**, e la decisione sul `0.3` si legge da `K1` e da `Bp0` — ### **che dicono la
+stessa cosa, forte.**
+
+### ✔ **E `C0`/`C0-tw` PROVANO LA PATCH SU TUTTO, non su un numero:** `B03` *(ampiezza
+`0.3`)* e `Bg` *(i due termini di `tw` con un nome)* riproducono `Bp` con ### **ZERO
+differenze sui conteggi dei cancelli, a tutti e `150` i passi.**
+
+### UNA DOMANDA CHE LA MISURA APRE, **nominata e non proposta**
+
+Una modulazione **derivata** leggerebbe `|r_i*phivel_i - r_j*phivel_j|`, non `|r_i - r_j|`.
+### ⛔ **Ma sarebbe una LEGGE NUOVA, e la forma la decide Luca.**
