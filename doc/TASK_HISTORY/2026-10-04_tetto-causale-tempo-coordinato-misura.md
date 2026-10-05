@@ -335,6 +335,18 @@ referto `doc/REFERTO_tetto_causale_tempo_2026-10-04.md`, in `eeb54be`.)*
 
 ### 1. IL PROSSIMO PASSO
 
+> ### 📌 **AGGIORNATO IL 2026-10-05, ORDINE DECISO DA LUCA:**
+> ### **① `VELENO-ARCHI-KEEP` passo (1)** — task history
+> ### `doc/TASK_HISTORY/2026-10-05_veleno-archi-keep-misura.md`;
+> ### **② POI `MEM-HEBB-VERSO` passo (1)**, dal suo file.
+>
+> ### **E il motivo dell'ordine e' di merito, non di comodo:** `VELENO-ARCHI-KEEP` e' un
+> difetto d'**infrastruttura** che ### **falserebbe la cura di QUESTA voce al passo (2)**,
+> quindi va misurato prima. *(Rientra nell'eccezione al congelamento per la stessa
+> ragione.)*
+
+**La riga di prima resta leggibile, come vuole il par.8:**
+
 > ### **`MEM-HEBB-VERSO`, passo (1)** — il mandato e' **messo al sicuro, verbatim**, in
 > ### **`doc/TASK_HISTORY/2026-10-04_mem-hebb-verso-misura.md`**, con in testa
 > ### `STATO: NON INIZIATO`. ### **Si riparte da quel file, non da questo.**

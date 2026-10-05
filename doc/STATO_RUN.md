@@ -1619,3 +1619,62 @@ vecchia**. ### **Quella seconda forma e' ESATTAMENTE la trappola dello shift di 
 che ha fatto sbagliare lo strumento di questa misura** *(gli archi nuovi NON sono quelli
 con indice `>= A`, perche' `keep` ne toglie uno)*. ### **Se il veleno usasse quella
 regola, il buco sarebbe della stessa forma.** **NON MISURATO, e non lo suppongo.**
+
+## `VELENO-ARCHI-KEEP` — **il veleno allunga in coda e non applica `keep`**
+*(aperto il 2026-10-05; `IN CORSO`, passo (1) = la misura)*
+
+### **IL DIFETTO, letto dal codice e NON ancora misurato** *(il passo (1) lo misura)*
+
+Alla nascita la mitosi ricostruisce le colonne d'arco con
+**`i = concat(i[keep], a, m)`** *(`:1743`, e `:1750` per `j`)*: ### **toglie archi e ne
+aggiunge in coda.** `_avvelena_derivate` *(`:1521`, chiamata a `:1707`)* allunga in coda
+le derivate d'arco con `NaN` quando `len(v) < bersaglio`, e ### **NON applica `keep`** —
+la parola non compare **mai** in quella funzione.
+### ⛔ **Quindi, dopo il primo arco tolto, ogni arco legge il valore di UN ALTRO arco:
+un valore FINITO, che il veleno non segnala.**
+
+### ⚠ **E L'ORDINE E' DELIBERATO**, lo dice il commento del codice: il veleno sta
+**dopo** le regole perche' deve conoscere le **lunghezze nuove**.
+### **E' proprio questo a far mordere l'omissione.**
+
+### 📌 **IL CONTO CHE RENDE IL DIFETTO SILENZIOSO**
+
+Con `s` archi divisi: tolti `s`, aggiunti `2s`, quindi il veleno appende
+`quanti = (m+s) - m = `**`s`** celle `NaN` — ### **mentre gli archi NUOVI sono `2s`.**
+### **Il veleno copre META' degli archi nuovi, e l'altra meta' riceve un valore FINITO
+preso da un arco vecchio.** ### **Un valore finito non fa scattare nessun controllo.**
+
+**Le derivate d'arco con classe `avvelena` sono DUE**, censite dall'AST sul
+`REGISTRO_DERIVATE` *(`:1300`)*: **`_dt_e_ultimo`** e **`_sin2_vir`**.
+
+### ✅ **IL FATTO CHE SOSTIENE L'IPOTESI**, dal referto `eeb54be`: le `166` verifiche con
+differenze sono **esattamente** quelle dei passi con **una nascita**, e la prima e' al
+passo **`42`** — il passo della **prima divisione**.
+
+### ✅ **IL CASO CHE DISCRIMINA, e viene gratis dalla stessa corsa:** la **divisione** usa
+`keep`, lo **Schwinger NO** *(`concat(net.i, aa, k)`, `:2171`)*. ### **Negli eventi
+Schwinger le differenze DEVONO essere ZERO** — e se comparissero, l'ipotesi e'
+**sbagliata** e la cura **non si propone**.
+
+### **LE DUE VIE, riportate SENZA sceglierne una** *(decisione di Luca dopo il referto)*
+
+| | la via | il conto delle leggi |
+|---|---|---|
+| **`(i)`** | la nascita applica `keep` a **tutte** le derivate d'arco **prima** del veleno | ### **non aggiunge leggi: ne RIPARA una**, e per `9-ter` **toglie un'eccezione** — oggi le colonne d'arco si riallineano e le derivate no |
+| **`(ii)`** | chi deve leggere `dt_e` dopo la mitosi lo **ricalcola** da `r` | ### **aggiunge una SECONDA SCRITTURA della stessa legge** — cio' che il simulatore dichiara di non voler fare, accanto a `_dt_e_ultimo` |
+
+### ⚠ **E UNA COSA SUL SIGILLO:** *byte-identico sullo **STATO*** si puo' chiedere,
+*byte-identico sulle **DERIVATE*** **no** — il `COMMIT 4` lo ha gia' dichiarato per se
+stesso, e ### **una cura che riallinea le derivate le cambia PER DEFINIZIONE.**
+
+### **PERCHE' RIENTRA NELL'ECCEZIONE AL CONGELAMENTO:** e' un difetto d'**infrastruttura**
+che **falserebbe la cura di `TETTO-CAUSALE-TEMPO-COORDINATO` passo (2)**, la quale vuole
+far leggere `dt_e` a `memoria_hebbiana_moto`.
+### **E la voce sorella e' `VELENO-ORIENTATO`:** li' il veleno risultava cadere su **uno**
+dei due archi figli e non sull'altro, e il criterio di chiusura chiedeva di decidere se
+fosse **una regola** o **un buco del veleno**. ### **Questa voce e' la risposta a quella
+domanda, se la misura confermera'.**
+
+### **`blocca_run_base = NO`, e il perche':** oggi il difetto e' sui **valori di due
+cache**, e se nessun lettore vivo le legge dopo la nascita **non muove la dinamica**.
+### ⚠ **Ma blocca la CURA del tetto causale, ed e' per questo che viene prima.**
