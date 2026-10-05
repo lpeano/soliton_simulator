@@ -390,9 +390,10 @@ def main():
     w("**L'ACCOPPIAMENTO E' SFASATO DI UNO, E DEVE ESSERLO:** `r_t = cs_(t-1)/CS_M`, e "
       "`cs_(t-1)` viene da `I_(t-1)`. Le **maschere** materia *(top `5 %` di `abs(psi)^2`)* "
       "e vuoto *(bottom `25 %`)* vengono da `I` del passo `t`, e il `r` dal passo `t+1`. "
-      "### **Le maschere si CONSERVANO** *(due bool per nodo, `3.8` MB su `%d` passi)*, "
+      "Su " + str(d["passi"]) + " passi. "
+      "### **Le maschere si CONSERVANO** *(due bool per nodo, 3.8 MB su %d passi)*, "
       "cosi' **non c'e' nessun limite da dichiarare** -- e la prima versione dello strumento "
-      "uno ce l'aveva, evitabile con `4` MB." % d["passi"])
+      "uno ce l'aveva, evitabile con 4 MB.")
     w()
     w("## CRITERIO `6` -- **IL CASO CHE DEVE FALLIRE**")
     w()
