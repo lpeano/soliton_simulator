@@ -254,6 +254,7 @@ class Misura(object):
         self._cat = None
         self._fin = None
         self.corr = {}          # passo -> le correlazioni
+        self._prec = None       # la FOTOGRAFIA di r e phivel del passo PRECEDENTE (COPIE)
 
     def modulazione(self, net, rn, grad, soglia0, soglia):
         g = np.asarray(grad, float)
@@ -297,35 +298,75 @@ class Misura(object):
 
     # ---- LA MISURA (2): i due termini della torsione contro il gradiente
     def torsione(self, net, spinta, scarica, r, i, j):
-        if self.passo not in PASSI_CORR:
-            return
+        """### IL PREDITTORE CAUSALE E' QUELLO DEL PASSO `t-1`, e la prima corsa lo leggeva
+        al passo `t` *(difetto annotato in `99782e1`)*.
+
+        ### **IL PERCHE', verificato sull'ordine delle righe di `step()`:** `:7772` calcola
+        `dph` dalla **fotografia** `_phi_t`, cioe' dallo stato di **INIZIO** passo, e
+        `twp` viene dal passo prima. Quindi
+        `spinta_t = _w8(dph_t + twist_dip_t - twp_{t-1})` misura l'avanzamento di fase
+        prodotto ### **DURANTE il passo `t-1`** (a `:7769`, con l'`r` e la `phivel` di
+        allora). ### **Si salvano le COPIE e si correla col passo dopo.**
+
+        ### ⚠ **COPIE, NON RIFERIMENTI:** un riferimento verrebbe mutato dal passo
+        successivo, ed e' esattamente la classe `A8b` di questo repo.
+        ### ✔ **E la versione ALLO STESSO PASSO resta, per confronto:** se le due dessero
+        risposte diverse, vale solo quella causale -- e il referto mostra entrambe.
+        """
         n = int(net.n)
         rr = np.asarray(r, float)
-        ii, jj = np.asarray(i, int), np.asarray(j, int)
         pv = np.asarray(getattr(net, "phivel", np.zeros(n)), float)
+        ii, jj = np.asarray(i, int), np.asarray(j, int)
+        # ### LA FOTOGRAFIA PER IL PASSO DOPO: si salva SEMPRE, non solo ai passi di misura.
+        #   `self.phivel` qui e' GIA' quella aggiornata (il gancio sta a `:7795`, dopo
+        #   `:7768`), cioe' ESATTAMENTE quella che ha prodotto l'avanzamento a `:7769`.
+        prec = self._prec
+        self._prec = {"passo": self.passo, "n": n,
+                      "r": rr.copy(), "phivel": pv.copy()}
+        if self.passo not in PASSI_CORR:
+            return
         m = (ii < n) & (jj < n) & (ii < len(rr)) & (jj < len(rr)) \
             & (ii < len(pv)) & (jj < len(pv))
         sp = np.abs(np.asarray(spinta, float))[m]
         sc = np.abs(np.asarray(scarica, float))[m]
         tot = np.abs(np.asarray(spinta, float) - np.asarray(scarica, float))[m]
         a_, b_ = ii[m], jj[m]
-        # ### I TRE PREDITTORI
-        g_nudo = np.abs(rr[a_] - rr[b_])
-        g_proxy = g_nudo * 0.5 * (np.abs(pv[a_]) + np.abs(pv[b_]))
-        g_esatto = np.abs(rr[a_] * pv[a_] - rr[b_] * pv[b_])
-        PRED = (("gradiente_nudo", g_nudo),
-                ("proxy_grad_per_phivel", g_proxy),
-                ("forma_esatta", g_esatto))
         BERS = (("incremento_TOTALE", tot), ("SPINTA", sp), ("SCARICA", sc))
-        d = {"archi": int(sp.size),
-             "q_spinta": q(sp), "q_scarica": q(sc), "q_totale": q(tot),
-             "q_grad_nudo": q(g_nudo), "q_proxy": q(g_proxy), "q_esatto": q(g_esatto),
-             "spearman": {}, "quintili": {}}
-        for np_, pv_ in PRED:
+
+        def _pred(rv, pvv):
+            g = np.abs(rv[a_] - rv[b_])
+            return (("gradiente_nudo", g),
+                    ("proxy_grad_per_phivel", g * 0.5 * (np.abs(pvv[a_]) + np.abs(pvv[b_]))),
+                    ("forma_esatta", np.abs(rv[a_] * pvv[a_] - rv[b_] * pvv[b_])))
+
+        d = {"archi": int(sp.size), "q_spinta": q(sp), "q_scarica": q(sc),
+             "q_totale": q(tot), "spearman": {}, "quintili": {},
+             "spearman_stesso_passo": {}, "quintili_stesso_passo": {}}
+        # --- (a) LO STESSO PASSO: la versione della prima corsa, tenuta per CONFRONTO
+        for np_, pv_ in _pred(rr, pv):
             for nb_, bv_ in BERS:
                 rho, nn = spearman(pv_, bv_)
-                d["spearman"]["%s|%s" % (np_, nb_)] = {"rho": rho, "n": nn}
-                d["quintili"]["%s|%s" % (np_, nb_)] = quintili(pv_, bv_)
+                d["spearman_stesso_passo"]["%s|%s" % (np_, nb_)] = {"rho": rho, "n": nn}
+                d["quintili_stesso_passo"]["%s|%s" % (np_, nb_)] = quintili(pv_, bv_)
+        # --- (b) IL PASSO PRECEDENTE: ### IL PREDITTORE CAUSALE
+        if (prec is not None and prec["passo"] == self.passo - 1
+                and prec["n"] == n and len(prec["r"]) >= n and len(prec["phivel"]) >= n):
+            d["causale"] = True
+            d["passo_del_predittore"] = prec["passo"]
+            for np_, pv_ in _pred(prec["r"], prec["phivel"]):
+                for nb_, bv_ in BERS:
+                    rho, nn = spearman(pv_, bv_)
+                    d["spearman"]["%s|%s" % (np_, nb_)] = {"rho": rho, "n": nn}
+                    d["quintili"]["%s|%s" % (np_, nb_)] = quintili(pv_, bv_)
+        else:
+            # ### SI DICHIARA invece di cadere in silenzio sul passo sbagliato (A8).
+            d["causale"] = False
+            d["perche_non_causale"] = (
+                "la fotografia del passo precedente non e' allineata: prec=%s, n=%s contro %s"
+                % (None if prec is None else prec["passo"],
+                   None if prec is None else prec["n"], n))
+            d["spearman"] = dict(d["spearman_stesso_passo"])
+            d["quintili"] = dict(d["quintili_stesso_passo"])
         self.corr[self.passo] = d
 
     def chiudi(self, net, n_prec):
@@ -364,14 +405,20 @@ def carica(nome, sim):
 def _scrivi(d):
     if not os.path.isdir(FUORI):
         os.makedirs(FUORI)
-    io.open(os.path.join(FUORI, "soglia.json"), "w", encoding="utf-8").write(
+    # ### CON `--solo-bg` SI SCRIVE UN FILE A PARTE: il `soglia.json` della corsa a
+    #   quattro bracci e' COMMITTATO (`dd86933`), e sovrascriverlo cancellerebbe `K1` e i
+    #   controlli. ### **Un dato committato non si sovrascrive con una corsa parziale.**
+    _nome = "soglia_bg.json" if d.get("solo_bg") else "soglia.json"
+    _txt = "soglia_bg.txt" if d.get("solo_bg") else "soglia.txt"
+    io.open(os.path.join(FUORI, _nome), "w", encoding="utf-8").write(
         json.dumps(d, indent=1, default=str))
-    io.open(os.path.join(FUORI, "soglia.txt"), "w", encoding="utf-8").write(
+    io.open(os.path.join(FUORI, _txt), "w", encoding="utf-8").write(
         NL.join(P) + NL)
 
 
 def main(argv):
     passi = PASSI
+    solo_bg = "--solo-bg" in argv[1:]
     if "--collaudo" in argv[1:]:
         riga("=")
         stampa("IL COLLAUDO DI _mitosi_soglia_grad.py")
@@ -430,6 +477,13 @@ def main(argv):
 
     BR = [("Ap0", sa, 0.0, False), ("Bp0", SIM, 0.0, False),
           ("B03", SIM, 0.3, False), ("Bg", SIM, None, True)]
+    # ### `--solo-bg`: si rigira SOLO il braccio della misura (2). Gli altri tre non
+    #   c'entrano col predittore sfasato, e rigirarli sarebbero due ore buttate.
+    if solo_bg:
+        BR = [("Bg", SIM, None, True)]
+        stampa("  ### SOLO IL BRACCIO Bg: gli altri tre non usano il gancio `torsione`,")
+        stampa("      quindi il difetto del predittore non li tocca e i loro numeri")
+        stampa("      restano quelli committati in dd86933.")
     sorg, mis, S_, N_, anc = {}, {}, {}, {}, {}
     for nome, src, amp, tws in BR:
         dst = os.path.join(FUORI, "_sim_%s.py" % nome.lower())
@@ -458,6 +512,10 @@ def main(argv):
 
     def _istantanea(stato, k, err=None):
         d = {"piattaforma": pf, "passi": passi, "passi_girati": k, "stato": stato,
+             "solo_bg": bool(solo_bg),
+             "predittore_causale": all(
+                 (mis["Bg"].corr.get(p) or {}).get("causale", False) for p in PASSI_CORR)
+             if ("Bg" in mis and mis["Bg"].corr) else False,
              "blob_sim_b": blob(SIM), "blob_sim_a": blob(sa),
              "blob_strumento": blob(__file__), "ancore": anc, "n0": n0,
              "in_configurazione_del_driver": bool(in_conf),
@@ -513,6 +571,19 @@ def main(argv):
     comune = _istantanea("DATI SALVATI, rapporto NON ancora girato", passi)
     stampa("  ### I DATI SONO GIA' SALVATI in soglia.json, PRIMA del rapporto.")
     stampa()
+    if solo_bg:
+        stampa("  ### CON --solo-bg NON SI STAMPA IL RAPPORTO: K1 e i controlli vivono")
+        stampa("      nella corsa a quattro bracci (dd86933), e il referto li legge DA LI'.")
+        stampa("      Qui si producono SOLO le correlazioni del braccio Bg col predittore")
+        stampa("      CAUSALE, e il referto le unisce.")
+        for p in PASSI_CORR:
+            c = mis["Bg"].corr.get(p) or {}
+            stampa("      passo %-4d causale=%-6s predittore dal passo %s"
+                   % (p, c.get("causale"), c.get("passo_del_predittore")))
+        d = dict(comune)
+        d.update({"esito": 0, "guasti": [], "stato": "fatto (solo Bg)"})
+        _scrivi(d)
+        return 0
     try:
         esito, guasti = rapporto(mis, N_, n0, cre, rifA, rifB, divA, divB, in_conf, passi)
     except Exception as e:
@@ -882,6 +953,63 @@ def collaudo():
                     m.torsione(FintaRete(), np.ones(3), np.ones(3),
                                np.ones(4), np.asarray([0, 1, 2]), np.asarray([1, 2, 3])),
                     7 not in m.corr)[-1])())
+
+    # --- 7. IL PREDITTORE CAUSALE: deve venire dal passo t-1
+    # ### LA PROVA E' COSTRUITA PERCHE' LE DUE VERSIONI DIANO SEGNI OPPOSTI: al passo `t-1`
+    #   il gradiente CRESCE con l'indice dell'arco, al passo `t` DECRESCE, e la `spinta`
+    #   cresce. ### **Quindi il predittore causale da' Spearman +1 e quello allo stesso
+    #   passo -1:** se il gancio leggesse il passo sbagliato, ### **il SEGNO si
+    #   rovescerebbe**, e nessun valore intermedio puo' confondere i due casi.
+    # ### ⚠ **E I QUINTILI VOGLIONO UN PREDITTORE NON COSTANTE:** con un gradiente costante
+    #   i cinque bordi coincidono e i primi quattro quintili restano VUOTI. La prima
+    #   versione di questa prova usava un gradiente costante e `pred_mediano` veniva `None`.
+    _NA = 30
+    class R2(object):
+        n = _NA + 1
+        phivel = np.ones(_NA + 1)
+    m2 = Misura("causale")
+    _i = np.arange(_NA)
+    _j = np.arange(1, _NA + 1)
+    _sp = 1.0 + np.arange(_NA, dtype=float)                 # la spinta CRESCE
+    # passo t-1: i salti sono 1, 2, 3, ... -> il gradiente CRESCE con l'indice
+    r_prec = np.concatenate([[0.0], np.cumsum(1.0 + np.arange(_NA, dtype=float))])
+    m2.passo = PASSI_CORR[0] - 1
+    m2.torsione(R2(), spinta=_sp, scarica=np.zeros(_NA), r=r_prec, i=_i, j=_j)
+    prova("causale: al passo t-1 salva la fotografia e NON registra la correlazione",
+          m2._prec is not None and (PASSI_CORR[0] - 1) not in m2.corr,
+          "prec al passo %s" % m2._prec["passo"])
+    prova("causale: ### e la fotografia e' una COPIA, non un riferimento",
+          m2._prec["r"] is not r_prec and bool(np.all(m2._prec["r"] == r_prec)))
+    # passo t: i salti sono 30, 29, 28, ... -> il gradiente DECRESCE
+    r_ora = np.concatenate([[0.0], np.cumsum(float(_NA) - np.arange(_NA, dtype=float))])
+    m2.passo = PASSI_CORR[0]
+    m2.torsione(R2(), spinta=_sp, scarica=np.zeros(_NA), r=r_ora, i=_i, j=_j)
+    c2 = m2.corr[PASSI_CORR[0]]
+    prova("causale: al passo di misura registra, e DICHIARA di essere causale",
+          c2.get("causale") is True
+          and c2.get("passo_del_predittore") == PASSI_CORR[0] - 1,
+          "predittore dal passo %s" % c2.get("passo_del_predittore"))
+    prova("causale: ### e tiene ENTRAMBE le versioni, per confronto",
+          bool(c2.get("spearman")) and bool(c2.get("spearman_stesso_passo")))
+    _rc = c2["spearman"]["gradiente_nudo|SPINTA"]["rho"]
+    _rs = c2["spearman_stesso_passo"]["gradiente_nudo|SPINTA"]["rho"]
+    prova("causale: ### il predittore CAUSALE (passo t-1) da' Spearman +1",
+          _rc is not None and abs(_rc - 1.0) < 1e-12, "%.17g" % _rc)
+    prova("causale: ### e quello ALLO STESSO PASSO da' -1: IL SEGNO SI ROVESCIA",
+          _rs is not None and abs(_rs + 1.0) < 1e-12, "%.17g" % _rs)
+    prova("causale: ### quindi un gancio sul passo sbagliato sarebbe VISIBILE dal segno",
+          _rc * _rs < 0, "+1 contro -1")
+    # il caso che DEVE dichiararsi NON causale: fotografia non allineata
+    m3 = Misura("salto")
+    m3.passo = PASSI_CORR[0]
+    m3.torsione(R2(), spinta=_sp, scarica=np.zeros(_NA), r=r_ora, i=_i, j=_j)
+    prova("causale: ### senza la fotografia del passo prima si DICHIARA non causale",
+          m3.corr[PASSI_CORR[0]].get("causale") is False
+          and "perche_non_causale" in m3.corr[PASSI_CORR[0]],
+          m3.corr[PASSI_CORR[0]].get("perche_non_causale", "")[:46])
+    prova("causale: ### e in quel caso ricade sullo STESSO PASSO, dichiarandolo",
+          m3.corr[PASSI_CORR[0]]["spearman"]
+          == m3.corr[PASSI_CORR[0]]["spearman_stesso_passo"])
 
     riga("=")
     ko = [n for n, o, _d in esiti if not o]
