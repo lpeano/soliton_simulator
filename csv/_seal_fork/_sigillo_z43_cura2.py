@@ -69,6 +69,34 @@ PRIMA** di chiamarla, e il contatore si **salva e si ripristina** comunque.
 `t+1`**, e confrontarli nello stesso passo sarebbe ### **sfasare di uno la misura del
 segno.**
 
+### ⛔ LA PRIMA CORSA DI QUESTO STRUMENTO E' CADUTA, E A CADERE E' LO STRUMENTO
+*(`aafb3eb`, strumento `91553eda`)*. **150 passi girati**, braccio `0` coincidente, criterio
+`1` a **zero** differenze a ogni passo -- **e poi `IndexError` nel criterio `5`**. Le tre
+correzioni sono cablate qui, e le dichiaro perche' **sono difetti di DISEGNO, non incidenti**:
+
+1. ### **IL `json` SI SCRIVE PRIMA DEL RAPPORTO.** Lo scrivevo **dopo**, quindi una caduta
+   nella post-elaborazione ### **ha distrutto 150 passi di dati buoni** -- i confronti e la
+   fedelta' c'erano **tutti**, e li ho persi **per l'ordine di due righe**. ### **E' la
+   correzione piu' importante delle tre.**
+2. ### **IL CRITERIO `5` SI MISURA DENTRO IL PASSO, DAL GANCIO.** Catturava `I` e `w` e
+   chiamava `net._cs_nodo(I, w)` **a corsa finita**, ma `_mat` tiene una **permutazione in
+   cache** legata al numero di archi di **adesso**, e fra la cattura e la chiamata la rete e'
+   **cresciuta** *(`2*471594` contro `2*471596`: **due archi**)*. ### **Chiamare la legge
+   invece di riscriverla era giusto; chiamarla FUORI DAL PASSO no.**
+   ### ⚠ **E il collaudo non poteva prenderlo:** le `25` prove girano su una `FintaRete` il
+   cui `_cs_nodo` **non ha cache**. ### **Un collaudo su un finto prova la mia logica, non la
+   mia interfaccia col simulatore vero.**
+3. ### **LE STATISTICHE DI `r` ESCLUDONO LE CELLE AVVELENATE, E LE CONTANO.** La prima corsa
+   dava `r_med = nan` su **13** passi, ### **esattamente i 13 in cui `n` CRESCE**:
+   `_r_corrente` sta nel `REGISTRO_DERIVATE` con classe **`avvelena`** *(`:1312`,
+   <<la legge la trova GIA RISCRITTA (step)>>)*, e ai nodi **nati** il veleno mette `NaN`
+   **di proposito**, perche' una lettura **stale** sia **rumorosa**.
+   ### ✔ **Quindi il `NaN` era il mio strumento che leggeva un registro avvelenato, non la
+   cura -- ed e' una PROVA CHE IL VELENO FUNZIONA.**
+   ### ⛔ **E la correzione NON E' MASCHERARE:** la mediana si calcola sulle celle **non
+   avvelenate**, quelle avvelenate si **contano** e si **attribuiscono alla nascita**.
+   ### **Mascherare in silenzio sarebbe il difetto che il veleno esiste per impedire.**
+
 # ESENTE-H-P8: le occorrenze di `HEAD` in questo file stanno nella DOCSTRING di `braccio0()`
 #   e dicono il CONTRARIO di cio' che il presidio teme: spiegano perche' il *prima* NON si
 #   prende da `HEAD~1` ma dal PADRE DEL COMMIT CHE HA CAMBIATO IL SIMULATORE. Potevo
@@ -109,6 +137,11 @@ PASSI = 150
 SOGLIA_ALTALENA = 1.2          # il criterio di Luca, a UN lato
 SOGLIA_AUTOCORR = -0.5         # LA SCELGO IO, e lo dichiaro nella docstring
 PASSI_COPPIA = (4, 10, 20, 30, 40, 60, 100, 140)   # quelli chiesti dalla correzione
+# ### IL PASSO DEL CRITERIO 5, scelto PRIMA e non dai dati: il PRIMO passo in cui la cache di
+#   `cs` e' allineata e la legge gira sul transitorio gia' avviato. `10` sta dopo il raccordo
+#   (i passi con `r = 1` per sicurezza) e prima della prima nascita (misurata al passo `99`),
+#   quindi il grafo NON cresce fra la cattura e la misura.
+PASSO_LOCALITA = 10
 
 P = []
 
@@ -306,9 +339,10 @@ class Misura(object):
         self.chiamate_diverse = 0
         self.max_scarto = 0.0
         self.peggiore = None
-        self.ultimo_I = None
-        self.ultimo_w = None
         self.ultimo_I_passo = None
+        # ### il criterio 5 si misura a UN passo scelto PRIMA, e DENTRO il passo
+        self.passo_localita = PASSO_LOCALITA
+        self.localita = None
 
     def ritmo(self, net, csp, r):
         self.chiamate += 1
@@ -331,10 +365,16 @@ class Misura(object):
                                  "nodi": int(len(o)), "max_scarto": sc}
 
     def densita(self, net, I, w, cs_nodo):
-        # si tiene SOLO l'ultimo: serve al criterio 5, che gira a corsa finita
-        self.ultimo_I = np.array(I, float, copy=True)
-        self.ultimo_w = np.array(w, float, copy=True)
+        """### IL CRITERIO 5 SI MISURA QUI, DENTRO IL PASSO, e la prima corsa ha provato
+        perche': `_mat` tiene una PERMUTAZIONE IN CACHE legata al numero di archi di ADESSO,
+        quindi chiamare `_cs_nodo` a corsa finita con `I`/`w` catturati ALZA appena la rete
+        e' cresciuta (`IndexError`, `aafb3eb`). ### QUI `I`, `w` e il grafo sono COERENTI
+        PER COSTRUZIONE: e' il momento in cui la legge gira davvero."""
         self.ultimo_I_passo = self.passo
+        if self.passo != self.passo_localita or self.localita is not None:
+            return
+        self.localita = localita(net, I, w, self.CS_M)
+        self.localita["passo_di_I"] = self.passo
 
 
 # =============================================================== BRACCIO 0
@@ -559,6 +599,7 @@ def main(argv):
     riga("=")
     per_passo = []
     mat_prec = vuo_prec = None       # le maschere materia/vuoto del passo PRECEDENTE
+    n_prec = int(nB.n)                # per attribuire le celle avvelenate alle NASCITE
     for k in range(1, passi + 1):
         mis.passo = k
         with contextlib.redirect_stdout(io.StringIO()):
@@ -574,7 +615,25 @@ def main(argv):
                "chiamate": int(getattr(nB, "_ritmo_chiamate", 0)),
                "n": int(nB.n), "archi": int(len(nB.i))}
         if rB is not None and len(np.atleast_1d(rB)) >= nB.n:
-            rr = np.asarray(rB, float)[:nB.n]
+            rtot = np.asarray(rB, float)[:nB.n]
+            # ### LE CELLE AVVELENATE ESCONO, E SI CONTANO. `_r_corrente` sta nel
+            #   `REGISTRO_DERIVATE` con classe `avvelena` (`:1312`): ai nodi NATI il veleno
+            #   mette `NaN` DI PROPOSITO, perche' una lettura STALE sia RUMOROSA. La prima
+            #   corsa dava `r_med = nan` su 13 passi, ESATTAMENTE i 13 in cui `n` cresce.
+            #   ### NON SI MASCHERA: si conta, e si attribuisce alla NASCITA.
+            _vel = ~np.isfinite(rtot)
+            rec["r_avvelenati"] = int(np.sum(_vel))
+            rec["nati_nel_passo"] = int(nB.n - n_prec)
+            rec["r_avvelenati_sono_i_nati"] = bool(int(np.sum(_vel))
+                                                   == int(nB.n - n_prec))
+            rr = rtot[~_vel]
+            if not len(rr):
+                rec["r_mediana"] = None
+                mat_prec = vuo_prec = None
+                n_prec = int(nB.n)
+                per_passo.append(rec)
+                continue
+            IB = IB[~_vel]
             rec["r_mediana"] = float(np.median(rr))
             rec["r_min"] = float(np.min(rr))
             rec["r_max"] = float(np.max(rr))
@@ -622,11 +681,17 @@ def main(argv):
         else:
             rec["r_mediana"] = None
             mat_prec = vuo_prec = None
+        n_prec = int(nB.n)
         per_passo.append(rec)
         print("[battito] passo %d/%d  n=%d archi=%d  diff=%d  r_med=%s  fedelta_diverse=%d"
               % (k, passi, nB.n, len(nB.i), len(d),
                  ("%.6f" % rec["r_mediana"]) if rec.get("r_mediana") is not None else "n/d",
                  mis.diversi), flush=True)
+        if rec.get("r_avvelenati"):
+            print("          [veleno] %d celle di _r_corrente AVVELENATE, nati nel passo %d"
+                  "  -> coincidono: %s"
+                  % (rec["r_avvelenati"], rec["nati_nel_passo"],
+                     rec["r_avvelenati_sono_i_nati"]), flush=True)
 
     stampa("  passi girati: %d   n finale: A=%d  B=%d  C=%d   archi: A=%d  B=%d"
            % (passi, nA.n, nB.n, nC.n, len(nA.i), len(nB.i)))
@@ -636,11 +701,9 @@ def main(argv):
     riga("=")
     stampa("CRITERIO 5: LOCALITA', MISURATA chiamando LA LEGGE STESSA due volte")
     riga("=")
-    if mis.ultimo_I is None:
-        loc = {"stato": "NON MISURATO: il gancio di `_cs_nodo` non e' mai scattato"}
-    else:
-        loc = localita(nC, mis.ultimo_I, mis.ultimo_w, SC.CS_M)
-        loc["passo_di_I"] = mis.ultimo_I_passo
+    loc = (mis.localita if mis.localita is not None
+           else {"stato": "NON MISURATO: il gancio di `_cs_nodo` non e' scattato al passo %d"
+                 % mis.passo_localita})
     for k in ["stato", "passo_di_I", "n", "uno_su_n", "mean_I", "nodo_perturbato",
               "I_del_nodo", "perturbazione", "contatore_prima", "contatore_dopo",
               "contatore_mosso", "contatore_ripristinato"]:
@@ -662,23 +725,47 @@ def main(argv):
                           r["max_cambio_rel"], r["rapporto_su_1_su_n"]))
     stampa()
 
-    esito, guasti = rapporto(b0, per_passo, mis, loc, in_conf, nA, nB, passi)
-    _scrivi({"braccio0": b0, "esito": esito, "guasti": guasti, "piattaforma": pf,
-             "passi": passi, "blob_sim_oggi": blob(SIM), "blob_patch": blob(PATCH),
-             "blob_copia": blob(dst), "ancore_patch": fatte,
-             "in_configurazione_del_driver": bool(in_conf),
-             "soglia_altalena": SOGLIA_ALTALENA, "soglia_autocorr": SOGLIA_AUTOCORR,
-             "criterio1_fedelta": {"chiamate": mis.chiamate, "nodi": mis.nodi,
-                                   "diversi": mis.diversi,
-                                   "chiamate_diverse": mis.chiamate_diverse,
-                                   "max_scarto": mis.max_scarto,
-                                   "peggiore": mis.peggiore},
-             "criterio5_localita": loc,
-             "per_passo": [{k: v for k, v in r.items() if not k.startswith("_")}
-                           for r in per_passo],
-             "a_valle": {"n_A": int(nA.n), "n_B": int(nB.n), "n_C": int(nC.n),
-                         "archi_A": int(len(nA.i)), "archi_B": int(len(nB.i))},
-             "timbro_strumento": _timbro()})
+    # ### IL json SI SCRIVE PRIMA DEL RAPPORTO. Nella prima corsa lo scrivevo DOPO, e una
+    #   caduta nella post-elaborazione ha distrutto 150 passi di dati buoni (`aafb3eb`).
+    #   ### I DATI DI UNA CORSA NON DIPENDONO DA SE IL RAPPORTO RIESCE A STAMPARLI.
+    _comune = {"braccio0": b0, "piattaforma": pf,
+               "passi": passi, "blob_sim_oggi": blob(SIM), "blob_patch": blob(PATCH),
+               "blob_copia": blob(dst), "ancore_patch": fatte,
+               "in_configurazione_del_driver": bool(in_conf),
+               "soglia_altalena": SOGLIA_ALTALENA, "soglia_autocorr": SOGLIA_AUTOCORR,
+               "criterio1_fedelta": {"chiamate": mis.chiamate, "nodi": mis.nodi,
+                                     "diversi": mis.diversi,
+                                     "chiamate_diverse": mis.chiamate_diverse,
+                                     "max_scarto": mis.max_scarto,
+                                     "peggiore": mis.peggiore},
+               "criterio5_localita": loc,
+               "per_passo": [{k: v for k, v in r.items() if not k.startswith("_")}
+                             for r in per_passo],
+               "a_valle": {"n_A": int(nA.n), "n_B": int(nB.n), "n_C": int(nC.n),
+                           "archi_A": int(len(nA.i)), "archi_B": int(len(nB.i))},
+               "timbro_strumento": _timbro()}
+    _d = dict(_comune)
+    _d.update({"esito": None, "guasti": None,
+               "stato": "DATI SALVATI, rapporto NON ancora girato"})
+    _scrivi(_d)
+    stampa("  ### I DATI SONO GIA' SALVATI in sigillo.json, PRIMA del rapporto: se il")
+    stampa("      rapporto cade, la corsa NON si perde. (La prima corsa si perse cosi'.)")
+    stampa()
+    try:
+        esito, guasti = rapporto(b0, per_passo, mis, loc, in_conf, nA, nB, passi)
+    except Exception as e:
+        import traceback
+        stampa("### IL RAPPORTO E' CADUTO, MA I DATI CI SONO: %r" % (e,))
+        stampa(traceback.format_exc())
+        _d = dict(_comune)
+        _d.update({"esito": 1, "guasti": ["il rapporto e' caduto: %r" % (e,)],
+                   "stato": "DATI SALVATI, rapporto CADUTO",
+                   "traccia": traceback.format_exc()})
+        _scrivi(_d)
+        return 1
+    _d = dict(_comune)
+    _d.update({"esito": esito, "guasti": guasti, "stato": "fatto"})
+    _scrivi(_d)
     return esito
 
 
@@ -942,6 +1029,20 @@ def rapporto(b0, pp, mis, loc, in_conf, nA, nB, passi):
                   if u.get("varia_q95_su_q05") is not None else "n/d"))
         stampa("  ### E r > 1 su %d nodi: se non e' ZERO, la forma e' violata."
                % u.get("r_sopra_1", -1))
+    _vel = [r for r in pp if r.get("r_avvelenati")]
+    stampa()
+    stampa("  ### LE CELLE AVVELENATE DI `_r_corrente`, contate e ATTRIBUITE alla NASCITA:")
+    stampa("      passi con almeno una cella avvelenata: %d su %d" % (len(_vel), len(pp)))
+    stampa("      e in TUTTI il numero coincide coi NATI nel passo: %s"
+           % all(r.get("r_avvelenati_sono_i_nati") for r in _vel))
+    for r in _vel[:20]:
+        stampa("      passo %-4d avvelenate %-4d nati %-4d coincidono %s"
+               % (r["passo"], r["r_avvelenati"], r["nati_nel_passo"],
+                  r["r_avvelenati_sono_i_nati"]))
+    stampa("  ### NON E' UN DIFETTO DELLA CURA: `_r_corrente` sta nel REGISTRO_DERIVATE con")
+    stampa("      classe `avvelena` (:1312), e ai nodi NATI il veleno mette NaN DI PROPOSITO")
+    stampa("      perche' una lettura STALE sia RUMOROSA. ### LA PRIMA CORSA DI QUESTO")
+    stampa("      STRUMENTO LO LEGGEVA SPORCO, e il veleno l'ha reso visibile al primo giro.")
     stampa()
     riga("=")
     stampa("CRITERIO 6 -- IL CASO CHE DEVE FALLIRE: lo stato DEVE divergere dalla PARTE A")
@@ -1157,6 +1258,60 @@ def collaudo():
     prova("classe: `_ritmo_cs_forma` e' un contatore",
           classe("_ritmo_cs_forma") == "contatore/registro")
     prova("classe: `psi` e' STATO", classe("psi") == "STATO")
+
+    # --- 10. I DUE DIFETTI DELLA PRIMA CORSA, E ORA IL COLLAUDO LI PRENDE
+    # ### Erano INVISIBILI alle prove qui sopra perche' sono difetti di ORDINE e di
+    #   INTERFACCIA, non di logica. Si provano SULLA STRUTTURA DEL FILE, che e' l'unico
+    #   posto dove vivono.
+    # ### SI CERCA SOLO NELLA PARTE DI PRODUZIONE, non in questo collaudo: il primo giro di
+    #   queste tre prove e' FALLITO perche' il literal cercato COMPARIVA NELLA PROVA STESSA.
+    #   Una prova strutturale che trova se stessa non prova niente.
+    _tutto = io.open(os.path.abspath(__file__), encoding="utf-8").read()
+    _mk = "# " + "=" * 63 + " IL COLLAUDO"
+    assert _tutto.count(_mk) == 1, "il marcatore del collaudo non e' unico"
+    _src = _tutto.split(_mk)[0]
+    _i_scrivi = _src.index("    _scrivi(_d)")
+    _i_rapp = _src.index("        esito, guasti = rapporto(")
+    prova("ordine: il `_scrivi` del json viene PRIMA della chiamata a `rapporto`",
+          _i_scrivi < _i_rapp,
+          "scrivi a %d, rapporto a %d" % (_i_scrivi, _i_rapp))
+    prova("ordine: `rapporto` gira dentro un `try`, e una caduta salva comunque i dati",
+          "except Exception as e:" in _src and "rapporto CADUTO" in _src)
+    prova("interfaccia: la chiamata a `localita` DOPO la corsa NON esiste piu'",
+          "localita(nC" not in _src, "era `localita(nC, mis.ultimo_I, ...)`")
+    prova("interfaccia: `localita` si chiama SOLO dal gancio `densita`",
+          _src.count("self.localita = localita(net, I, w, self.CS_M)") == 1
+          and _src.count("= localita(") == 1)
+
+    # --- 11. E LA CACHE LEGATA AGLI ARCHI: la forma che ha fatto cadere la prima corsa
+    class ReteConCache(object):
+        """### Riproduce `_mat`: una PERMUTAZIONE IN CACHE legata al numero di archi di
+        ADESSO. Con dati COERENTI funziona; con dati STALE ALZA -- ed e' esattamente
+        l'`IndexError` della prima corsa."""
+
+        def __init__(self, n, archi):
+            self.n = n
+            self.i = np.arange(archi) % n
+            self.j = (np.arange(archi) + 1) % n
+            self._perm = np.arange(2 * archi)
+
+        def _cs_nodo(self, I, w):
+            dati = np.concatenate([w, w])[self._perm]      # ### come `_mat`
+            return np.full(self.n, 2.0) - np.asarray(I, float)[:self.n] * 1e-3 * dati[0]
+
+    rc = ReteConCache(5, 7)
+    o = localita(rc, np.asarray([1.0, 2, 3, 4, 5]), np.ones(7), 2.0, salti=3)
+    prova("cache: con `I` e `w` COERENTI col grafo la misura riesce",
+          o.get("stato") == "fatto", str(o.get("stato")))
+    rc2 = ReteConCache(5, 8)          # il grafo e' CRESCIUTO: `w` di 7 e' STALE
+    try:
+        localita(rc2, np.asarray([1.0, 2, 3, 4, 5]), np.ones(7), 2.0, salti=3)
+        alzato = False
+    except IndexError:
+        alzato = True
+    prova("cache: ### con `w` STALE ALZA IndexError -- e' il difetto della prima corsa",
+          alzato is True,
+          "ed e' per questo che il criterio 5 ora si misura DENTRO il passo")
 
     riga("=")
     ko = [n for n, o, _d in esiti if not o]
