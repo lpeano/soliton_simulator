@@ -89,6 +89,11 @@ def main():
     ultimo = [r for r in pp if "uniforme_r_mediano" in r]
     ult = ultimo[-1] if ultimo else {}
     prima_div = next((r["passo"] for r in pp if r["diff"]), None)
+    # ### IL CRITERIO 6 E' SULLO STATO, non su un contatore: al passo 1 le differenze sono
+    #   TUTTE contatori (i nomi che la cura cambia), e lo stato e' IDENTICO -- come DEVE
+    #   essere, perche' li' `r = 1` in ENTRAMBE le leggi.
+    prima_stato = next((r["passo"] for r in pp
+                        if any(x["classe"] == "STATO" for x in r["diff"])), None)
     # ### L'AUTOCORRELAZIONE NON E' NEL json: si RICALCOLA qui con la STESSA formula e la
     #   STESSA esclusione del sigillo (la coda iniziale con la cache non allineata). Non e'
     #   un numero ricopiato: e' lo stesso conto sugli stessi dati.
@@ -148,7 +153,8 @@ def main():
     w("| **`4`** | `r` materia `<` `r` vuoto -- ### **FEDELTA', non fisica** | si riporta |")
     w("| **`5`** | localita', **misurata** | si riporta |")
     w("| **`6`** | lo stato **DEVE** divergere dalla `PARTE A` | **%s** |"
-      % ("PASSA (dal passo %s)" % prima_div if prima_div else "### FALLISCE"))
+      % ("PASSA (lo STATO dal passo %s)" % prima_stato if prima_stato
+         else "### FALLISCE"))
     w("| **`7`** | `%d` passi senza `FERMO` | **PASSA** |" % d["passi"])
     w()
     w("> ### **ESITO COMPLESSIVO: `%s`**%s"
@@ -399,7 +405,24 @@ def main():
     w()
     w("| | |")
     w("|---|---|")
-    w("| primo passo con una differenza dalla `PARTE A` | **`%s`** |" % prima_div)
+    w("| primo passo con una differenza **qualsiasi** | `%s` |" % prima_div)
+    w("| primo passo in cui diverge lo **STATO** | **`%s`** |" % prima_stato)
+    w()
+    _p1 = pp[0]["diff"] if pp else []
+    w("> ### AL PASSO `%s` LE DIFFERENZE SONO `%d`, E **NESSUNA E' STATO**: sono i "
+      "**contatori** che la cura rinomina -- %s. ### **Lo stato e' IDENTICO, e DEVE "
+      "esserlo: al passo `1` `r = 1` in ENTRAMBE le leggi** *(la vecchia perche' `_psi_prec` "
+      "non esiste, la nuova perche' la cache di `cs` non esiste)*. ### **E' il criterio `1` "
+      "della `PARTE A` che si ripresenta da solo: dove le due leggi coincidono, coincide "
+      "tutto.**"
+      % (pp[0]["passo"], len(_p1),
+         ", ".join("`%s`" % x["nome"] for x in _p1)) if _p1 else "")
+    w()
+    w("> ### E DUE DI QUELLE DIFFERENZE, DAL PASSO `2`, SONO `_med_f_prec` e "
+      "`_med_f_ultimo`, classificate **STATO**: differiscono **per costruzione**, perche' la "
+      "legge **vecchia** li scrive e la **nuova** no. ### **Sono i due registri morti della "
+      "cura, e vederli qui e' la conferma che la promozione del gauge e' uscita** "
+      "*(`RITMO-FLAG-SENZA-OGGETTO`)*.")
     w()
     w("| passo | differenze | di cui **STATO** | `cs_assente` *(cumulato)* | forma | "
       "`r` mediano | `r == 1` su |")
@@ -421,6 +444,29 @@ def main():
     w("| `n` | `%d` | `%d` | `%d` |" % (av["n_A"], av["n_B"], av["n_B"] - av["n_A"]))
     w("| archi | `%d` | `%d` | `%d` |"
       % (av["archi_A"], av["archi_B"], av["archi_B"] - av["archi_A"]))
+    w()
+    w("## L'ASPETTATIVA CHE AVEVO SCRITTO **PRIMA** DELLA CORSA")
+    w()
+    w("Nel task history, committato **prima del codice** *(`012f419`)*, avevo scritto:")
+    w()
+    w("> *<<Mi aspetto che l'altalena SPARISCA (rapporto per coppia `<= 1.2` da subito, "
+      "cioe' dal passo `3`), e NON mi aspetto che l'anello `cs <-> r` oscilli.>>*")
+    w()
+    w("### **CONFERMATA, su entrambi i punti:** il rapporto per coppia resta `<= 1.2` "
+      "**dalla PRIMA coppia valutabile** *(la `4`, cioe' i passi `3`-`4`: la coppia `2` e' "
+      "esclusa perche' li' `r = 1` per sicurezza)*, col massimo a **`%s`**; e "
+      "l'autocorrelazione e' **`%s`**, cioe' ### **fortemente POSITIVA** -- una serie che "
+      "scende e risale **liscia**, non un'alternanza."
+      % (n(max((c["rapporto"] for c in vive), default=None)), n(ac)))
+    w()
+    w("> ### ⚠ **E LO SCRIVO CON LA RISERVA CHE MERITA: nella `PARTE A` LA STESSA "
+      "### PREVISIONE ERA SBAGLIATA.** Avevo scritto che il rapporto <<sarebbe calato ma non "
+      "crollato>> e invece **crollo'** *(`BRACCIO A`, `66a798d`)*. ### **Una previsione "
+      "indovinata non rende affidabile chi la fa: rende verificata QUESTA.** Il motivo che "
+      "avevo dato -- *<<l'anello vecchio passava per una DIVISIONE PER UNA MEDIANA, che "
+      "AMPLIFICA; il nuovo per una `tanh` SATURA e per `dt_e`, che e' una catena "
+      "CONTRATTIVA>>* -- e' **coerente** col numero misurato, ### **ma il numero non "
+      "dimostra il meccanismo: dimostra solo che non oscilla.**")
     w()
     w("## LA DOMANDA APERTA PER LUCA -- e **non la risolvo io**")
     w()
