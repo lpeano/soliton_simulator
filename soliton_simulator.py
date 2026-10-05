@@ -5936,6 +5936,15 @@ class Rete:
             # (materia, snapshot t), rho_c=massa critica adattiva (legge di stato), r=ritmo proprio
             # RIUSATO (dt_n=DT*r, nessuna nuova chiamata a ritmo() -> nessuna mutazione di _psi_prec,
             # regola C). Nessun coefficiente libero.
+            # [Z43 CURA (1), 2026-10-05] ⛔ `r_node` NON E' PIU' LETTO DA NESSUNO, e NON e'
+            #   un residuo da pulire: e' il RISULTATO della cura. Prima moltiplicava
+            #   `omega_clk` in ENTRAMBI i rami (`:5970` e `:5982`), e quello era il DOPPIO
+            #   CONTEGGIO di `r` -- la fase avanza di `omega_clk * _dts` con `_dts = DT*r`.
+            #   ⚠ CHI LA TOGLIE DEVE SAPERE CHE NON STA PULENDO: sta cancellando la traccia
+            #   di una legge che c'era. La decisione di Luca era <<si toglie `r_node` DALLA
+            #   FREQUENZA>>, non <<si toglie `r_node`>>: l'assegnazione resta, e questo
+            #   commento e' la ragione per cui resta.
+            #   E `r` vive dove deve: in `_dts`, cioe' nel TEMPO.
             r_node = (np.asarray(dtn) / DT if not np.isscalar(dtn) else np.full(n, dtn / DT))
             if psi_snapshot is not None and len(psi_snapshot) >= n:
                 rho = np.abs(psi_snapshot[:n]) ** 2
@@ -5958,12 +5967,28 @@ class Rete:
                 _num = np.zeros(n); _den = np.zeros(n)
                 np.add.at(_num, _ii, _wc * _cij); np.add.at(_num, _jj, _wc * _cij)
                 np.add.at(_den, _ii, _wc);        np.add.at(_den, _jj, _wc)
-                omega_clk = (_num / np.maximum(_den, 1e-12)) * r_node   # coerenza d'arco [-1,1] * ritmo proprio
+                # [Z43 CURA (1), decisione di Luca del 2026-10-05] `r` VA UNA VOLTA SOLA.
+                # ⛔ PRIMA ERA `* r_node`, e la fase avanzava di `omega_clk * _dts` con
+                #   `_dts = DT*r`: quindi `r` AL QUADRATO. Un orologio avanza di FREQUENZA
+                #   PROPRIA per TEMPO PROPRIO -- contare il ritmo anche nella frequenza e'
+                #   contare lo stesso fattore DUE VOLTE (analisi dimensionale, non estetica).
+                # ⛔ IL MOTIVO E' MISURATO: il `BRACCIO A` del referto `66a798d` ha tolto
+                #   PROPRIO questo fattore su una copia, e l'altalena e' CROLLATA --
+                #   `|f|` da 5.283 a 1.034, `C0` da 7.185 a 1.031.
+                # `r` resta dov'e' deve stare: in `_dts`, qui sotto.
+                omega_clk = (_num / np.maximum(_den, 1e-12))   # coerenza d'arco [-1,1]
                 # PURA FASE: l'orologio NON entra nell'asse di rotazione (non inclina nb -> non tocca la
                 # gravita' grav*=nb.nb); e' applicato SOTTO come fase globale e^{-i omega_clk dt/2}.
                 omega_tot = omega_new if omega_sync is None else (omega_new + omega_sync)
             else:
-                omega_clk = (rho / max(rho_c, 1e-12)) * r_node          # legacy: densita' estensiva / rho_c globale
+                # [Z43 CURA (1)] LA STESSA CORREZIONE NEL RAMO LEGACY, e il mandato lo dice
+                # esplicitamente: <<e' la stessa legge>>. Qui il doppio conteggio passava
+                # per un'altra via -- `omega_tot += omega_clk*nb` e poi
+                # `theta = norm(omega_tot)*_dts` -- ma era LO STESSO ERRORE in due forme.
+                # ⚠ E VA DICHIARATO: QUESTO RAMO NON GIRA (`DEPARAM_OROLOGIO = True`),
+                #   quindi NESSUN SIGILLO PUO' MISURARE QUESTA RIGA GIRANDO. La sua cura e'
+                #   verificabile solo dall'AST e dalla lettura, NON da un numero.
+                omega_clk = (rho / max(rho_c, 1e-12))          # legacy: densita' / rho_c globale
                 omega_tot = omega_new + omega_clk[:, None] * nb         # lungo l'asse PROPRIO (nb unitario)
                 if omega_sync is not None:
                     omega_tot = omega_tot + omega_sync                  # torque di allineamento SU(2) (istantaneo)

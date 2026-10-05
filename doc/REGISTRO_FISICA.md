@@ -2712,6 +2712,60 @@ cambiato **il campo**; normalizzarlo **dentro `_contrasto`** cambia **l'inerzia*
 **nessuna vede la normalizzazione** — quattro di esse si trovano **solo cercando le
 STRINGHE**, ed e' la lezione che l'audit di `eta` ha pagato lo stesso giorno.
 
+## ⭐ **LA CURA DEL 2026-10-05 — `Z43` CURA (1): `r` VA UNA VOLTA SOLA**
+*(decisione di Luca; sigillo `csv/_seal_fork/_sigillo_z43_cura1.py`)*
+
+> ### ⛔ **L'OROLOGIO DI COMPTON CONTAVA `r` DUE VOLTE.**
+
+**LA FORMA, PRIMA** *(e le righe sono di `1feb9b0a`)*:
+
+```
+r_node    = dtn/DT                      = r                        :5939
+omega_clk = coerenza_arco * r_node                                 :5970
+omega_clk = omega_clk * (cs_prec/CS_M)^2                           :5994
+_phc      = exp(-0.5j * s_k * omega_clk * _dts)   _dts = DT*r      :5995
+```
+
+### ⛔ **L'incremento di fase era `-0.5*coerenza*(cs/CS_M)^2*DT*r^2`: `r` AL QUADRATO**
+— una volta nella **frequenza**, una volta nel **tempo**.
+
+**LA FORMA, DOPO:** `omega_clk = coerenza_arco` *(e poi `* (cs/CS_M)^2`)*, e `r` resta
+### **solo in `_dts`.**
+
+### **PERCHE' E' UN DIFETTO E NON UNA SCELTA: e' ANALISI DIMENSIONALE.** L'incremento
+di fase e' **frequenza x tempo**. ### **Una frequenza PROPRIA non contiene il ritmo del
+proprio tempo:** contenerlo e' ### **contare lo stesso fattore due volte.**
+
+### ✅ **E IL MOTIVO E' MISURATO, non argomentato:** il `BRACCIO A` del referto
+`66a798d` ha tolto ### **proprio questo fattore** su una copia, e l'altalena e'
+### **crollata:**
+
+| | prima | col fattore tolto |
+|---|--:|--:|
+| rapporto dispari/pari di `abs(f)` | `5.283` | ### **`1.034`** |
+| rapporto dispari/pari di `C0` *(il `r` di oggi)* | `7.185` | ### **`1.031`** |
+
+### **LA CURA TOCCA DUE RIGHE, e il censimento dall'AST dice che sono tutte:**
+`:5970` *(il ramo `DEPARAM_OROLOGIO`, **che gira**)* e `:5982` *(il ramo **legacy**,
+che ### **non gira** — `DEPARAM_OROLOGIO = True`)*.
+### ⚠ **Il legacy si cura perche' e' LA STESSA LEGGE, ma NESSUN SIGILLO PUO'
+MISURARLO GIRANDO:** la sua cura e' verificabile ### **solo dall'AST e dalla
+lettura.**
+
+### 📌 **E `r_node` NON E' PIU' LETTO DA NESSUNO** *(verificato dall'AST: scritture
+`[5939]`, letture `[]`)*. ### **L'assegnazione RESTA, col suo commento:** la decisione
+era *«si toglie `r_node` DALLA FREQUENZA»*, non *«si toglie `r_node»*, e
+### **chi la togliesse domani non starebbe pulendo: starebbe cancellando la traccia di
+una legge che c'era.**
+
+### **`9-ter`: il conto delle leggi NON cambia** — una legge ### **perde un fattore**,
+e nessuna entra. ### ✅ **E toglie un'ECCEZIONE alla regola <<frequenza propria per
+tempo proprio>>**, che il resto del simulatore rispetta.
+
+### ⚠ **E IL SEGNO NON CAMBIA, e va detto perche' e' facile sbagliarsi:** `r_node` e'
+`dtn/DT`, cioe' ### **non negativo** *(`r` sta in `[1.414e-06, 1.414212977]`)*.
+### **Togliere un fattore positivo non cambia il segno di `omega_clk`.**
+
 ## `A11` — IL PAVIMENTO `1e-6`
 
 **Resta, e deve diventare INERTE.** Misurato **prima** della cura: `0/20` — **non morde mai**,
