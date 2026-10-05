@@ -5762,3 +5762,85 @@ confrontabili ### **per costruzione e non per fortuna.**
 > affinata: ### **il collaudo prova la mia LOGICA; la corsa prova le mie ASSUNZIONI SULLE
 > SEMANTICHE DEL SIMULATORE.** ### **E un caso di prova in cui due dimensioni coincidono --
 > tre archi e tre nodi -- non prova NIENTE su quale delle due stai indicizzando.**
+
+---
+
+## 2026-10-05 — `CRESCITA-DOPO-Z43`, **IL REFERTO**: dove sta il fattore `67.7`, e **due mie conclusioni corrette**
+
+**Referto:** `doc/REFERTO_crescita_dopo_z43_2026-10-05.md`, **generato** dal `crescita.json`
+*(`L-NUMERI`)*. Strumento `a3db21b2`, generatore `91fe3e51`, `150` passi, seme `11`.
+### **`C1` e `C3` PASSANO.**
+
+| | `Ap` *(`PARTE A`)* | `Bp` *(`PARTE B`)* | `Bc` *(controfatt.)* |
+|---|--:|--:|--:|
+| **divisioni** | `1219` | `18` | `70` |
+| Schwinger | `307` | `7` | `19` |
+| `nati` | `1526` | `25` | `89` |
+
+### **IL FATTORE E' `67.72`, E LA SCOMPOSIZIONE DICE DOVE STA**
+
+| | fattore |
+|---|--:|
+| **(a)** popolazione nella finestra `soglia < \|tw\| < 4pi` col segno di creazione | **`x16.79`** |
+| **(b)** tasso di estrazione **per arco** nella finestra *(dove vive `_ft`)* | `x3.33` |
+| **(c)** cancello `A13`/`2LAM` | `x1.21` |
+| **prodotto** | **`x67.72`** |
+
+### ⛔ **E IL PRODOTTO TORNA PER ALGEBRA, NON PER VERIFICA:** i denominatori si cancellano a
+due a due. ### **Quindi non e' un controllo superato: e' DOVE sta il fattore.** Spacciarlo per
+una verifica sarebbe un `FALSO-UNO`.
+### ✔ **IL CANALE DOMINANTE E' (a): la POPOLAZIONE che entra nella finestra.**
+
+### ✖ **DUE CONCLUSIONI MIE, CORRETTE DAL GUARDIANO**
+
+**(1) <<la separazione cade su TRE cancelli>>** *(`92da889`)* ### **era sbagliato: il
+cancello `2` NON e' un canale.** Gli archi che passano `1` e non `2` sono **esattamente**
+quelli con `|tw| >= 4pi` *(identita')*, e sono una popolazione **FISSA**: `0` al passo `1`,
+**`109` al passo `2`**, poi quasi costante, e con **pesi quasi uguali nei tre bracci**
+*(`14981` / `14338` / `14153`)* — ### **quindi indipendente dalla legge del tempo proprio.**
+### ✔ **Togliendola, il salto NETTO del cancello `2` vale `1.0000` in TUTTI E TRE i bracci.**
+Le frazioni diversissime *(`10.2 %` in `Ap`, `61.8 %` in `Bp`)* vengono dal **denominatore**.
+### **Registrata come `ARCHI-OLTRE-4PI`, NON indagata.**
+
+**(2) <<lacuna della misura>>** sulle distribuzioni tardive ### **era una frase troppo
+larga:** i **quantili** c'erano a **ogni** passo, `soglia_su_g1` compreso. La lacuna
+riguardava le **distribuzioni piene** *(il blocco `mod`)*. ### **L'errore di ampiezza era
+mio.**
+
+### LA SOGLIA **SUGLI ARCHI CHE PASSANO**, e perche' e' una **correlazione**
+
+| passo | `Ap` q50 | `Bp` q50 | `Bc` q50 |
+|--:|--:|--:|--:|
+| `50` | `8.2921` | `8.9827` | `8.8730` |
+| `100` | `7.3891` | `8.7710` | `8.4215` |
+| `140` | `7.4327` | `8.5111` | `8.2711` |
+
+`soglia0 = 9.4248`, pavimento `6.9129`. Il `q05` piu' basso osservato e' `6.9900`, cioe'
+### **`0.0771` sopra il pavimento: in `Ap` gli archi che entrano nella finestra stanno
+PRATICAMENTE AL MINIMO della soglia.**
+
+> ### LO STATO DELL'IPOTESI DEL GUARDIANO: ### **<<FALSA al mediano della rete** *(errore
+> suo, che lui dichiara)*, ### **SOSTENUTA sugli archi che entrano nella finestra.>>**
+>
+> ### ⛔ **ED E' UNA CORRELAZIONE, NON UNA CAUSA, e il meccanismo si puo' nominare:**
+> l'insieme e' **definito** da `avv > soglia`, cioe' ### **si seleziona condizionando su una
+> soglia BASSA.** Un insieme scelto perche' la sua soglia e' stata superata ### **ha per
+> costruzione soglie piu' basse della rete, in QUALUNQUE braccio e con QUALUNQUE
+> meccanismo.** ### **Separarlo vuole un INTERVENTO sulla soglia, non un'osservazione** — ed
+> e' esattamente la misura che Luca ha ordinato subito dopo.
+
+### IL CONTROFATTUALE: **lettura INTERMEDIA**, come il criterio fissato prima
+
+`Bc = 70` contro `Bp = 18` e `Ap = 1219`: le nascite risalgono di `x3.9` ma restano al
+`5.7 %` di `Ap`. ### **Il controfattuale NON separa le due cause.**
+### ✔ **E un'inferenza, scritta COME inferenza:** togliere il rallentamento uniforme da' al
+massimo `x1.23` sugli eventi attesi *(entra una volta sola, in `(b)`)*, e le divisioni fanno
+`x3.9`. ### **Quindi la parte del leone viene dall'altro effetto del riscalamento, cioe' dal
+GRADIENTE.** ### ⛔ **Ma e' un'inferenza su DUE punti:** con un solo valore del fattore non si
+separa una dipendenza lineare da una ripida.
+
+### E IL CANCELLO DELLA DENSITA' NON CHIUDE NIENTE
+
+`0` rifiutati per densita' **sui tre bracci**, e ### **era dichiarato quasi-inerte PRIMA di
+misurarlo** *(`QMIN_M = 0.0`)*. ### **Dichiararlo prima e' l'unico motivo per cui questo non
+e' una scoperta.**

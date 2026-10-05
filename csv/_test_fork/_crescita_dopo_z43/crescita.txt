@@ -6,14 +6,14 @@ CRESCITA-DOPO-Z43: perche' la rete quasi non cresce piu' con r = cs/CS_M
   numpy      2.3.0
   sistema    Windows 11
   macchina   AMD64
-  simulatore OGGI (PARTE B) f7237563   strumento 7dafd004
+  simulatore OGGI (PARTE B) f7237563   strumento a3db21b2
 
   braccio A dal tag pre-z43-cura2-r-da-cs: blob 062172d3  (atteso 062172d3)
-  Ap 4268d47e (4 ancore)   Bp a7beeb84 (4)   Bc 45d40a3d (5)
+  Ap e7b5a83e (4 ancore)   Bp 75bd9935 (4)   Bc d947faf6 (5)
       - il gancio di modulo `_MIS`
       - H1: la modulazione della soglia dal gradiente di `r`
       - H2: la catena dei cancelli fino all'estrazione
-      - H3: i cancelli della densita' e di `2LAM`
+      - H3: i cancelli della densita' e di `2LAM`, DOPO la congiunzione
       - Bc: il riscalamento DICHIARATO FINTO di `r`
 
 ====================================================================================================
@@ -49,7 +49,7 @@ LA CORSA: 150 passi, TRE bracci, col BATTITO per passo
   5 dopo MITMAX                            1508             27             83
   6 la densita'                            1508             27             83
   7 A13/2LAM                               1219             18             70
-  -> AMMESSI (divisioni)                   1508             27             83
+  -> AMMESSI (divisioni)                   1219             18             70
   (c) nascite SCHWINGER                     307              7             19
 
 ========================================================================================================
@@ -72,13 +72,13 @@ LA CORSA: 150 passi, TRE bracci, col BATTITO per passo
       nominarne uno solo.
 
 ========================================================================================================
-(b) LE GRANDEZZE CHE I CANCELLI LEGGONO, al passo 10
+(b) LE GRANDEZZE CHE I CANCELLI LEGGONO, ai passi 10, 50, 100, 140
 ========================================================================================================
   ### E SI RIPORTANO COME DISTRIBUZIONI E NON COME MEDIANE: una mediana NON
       distingue una distribuzione RIPIDA da una PIATTA, ed e' esattamente la
       cosa da cui dipende se l'ipotesi del gradiente tiene.
 
-  --- braccio Ap ---
+  --- braccio Ap, passo 10 ---
       soglia0 = 9.424777961
       r_nodo       q01=2.635982e-04 q25=7.609118e-03 q50=2.109232e-02 q75=1.675064e-01 q99=1.410281e+00 max=1.412440e+00
       grad         q01=2.046821e-04 q25=6.157730e-03 q50=1.869556e-02 q75=1.191110e-01 q99=1.158268e+00 max=1.388246e+00
@@ -93,7 +93,7 @@ LA CORSA: 150 passi, TRE bracci, col BATTITO per passo
       avv_su_g1            q01=1.863701e+01 q25=1.873764e+01 q50=1.880800e+01 q75=1.885710e+01 q99=1.894640e+01
       cancelli al passo 10: archi=471564 g1=109 g1+2=0 g1+2+3=0 nasce=0
 
-  --- braccio Bp ---
+  --- braccio Bp, passo 10 ---
       soglia0 = 9.424777961
       r_nodo       q01=4.455227e-01 q25=6.623419e-01 q50=8.207982e-01 q75=9.222849e-01 q99=9.900097e-01 max=9.996447e-01
       grad         q01=1.830975e-03 q25=5.099848e-02 q50=1.252318e-01 q75=2.381408e-01 q99=4.878050e-01 max=6.790168e-01
@@ -108,7 +108,7 @@ LA CORSA: 150 passi, TRE bracci, col BATTITO per passo
       avv_su_g1            q01=1.853384e+01 q25=1.871841e+01 q50=1.878224e+01 q75=1.884585e+01 q99=3.130052e+01
       cancelli al passo 10: archi=471564 g1=109 g1+2=0 g1+2+3=0 nasce=0
 
-  --- braccio Bc ---
+  --- braccio Bc, passo 10 ---
       soglia0 = 9.424777961
       r_nodo       q01=5.427920e-01 q25=8.069485e-01 q50=1.000000e+00 q75=1.123644e+00 q99=1.206155e+00 max=1.217893e+00
       grad         q01=2.230723e-03 q25=6.213279e-02 q50=1.525731e-01 q75=2.901332e-01 q99=5.943056e-01 max=8.272640e-01
@@ -123,12 +123,152 @@ LA CORSA: 150 passi, TRE bracci, col BATTITO per passo
       avv_su_g1            q01=1.853384e+01 q25=1.871841e+01 q50=1.878224e+01 q75=1.884585e+01 q99=3.130052e+01
       cancelli al passo 10: archi=471564 g1=109 g1+2=0 g1+2+3=0 nasce=0
 
+  --- braccio Ap, passo 50 ---
+      soglia0 = 9.424777961
+      r_nodo       q01=5.279005e-03 q25=3.678189e-01 q50=9.622839e-01 q75=1.294964e+00 q99=1.406616e+00 max=1.413896e+00
+      grad         q01=6.395295e-04 q25=4.460211e-02 q50=1.627177e-01 q75=4.068460e-01 q99=1.126263e+00 max=1.396708e+00
+      tanh_grad    q01=6.395294e-04 q25=4.457256e-02 q50=1.612967e-01 q75=3.857914e-01 q99=8.097365e-01 max=8.846380e-01
+      soglia       q01=7.135302e+00 q25=8.333978e+00 q50=8.968722e+00 q75=9.298752e+00 q99=9.422970e+00 max=9.424778e+00
+      morso        q01=1.918588e-04 q25=1.337177e-02 q50=4.838900e-02 q75=1.157374e-01 q99=2.429209e-01 max=2.653914e-01
+      avv                  q01=3.661347e-02 q25=1.006843e+00 q50=2.525516e+00 q75=4.206887e+00 q99=6.597015e+00
+      soglia               q01=7.135302e+00 q25=8.333978e+00 q50=8.968722e+00 q75=9.298752e+00 q99=9.422970e+00
+      rapporto_avv_soglia  q01=4.111966e-03 q25=1.146313e-01 q50=2.917224e-01 q75=4.837900e-01 q99=7.775916e-01
+      ft                   q01=1.928271e-02 q25=4.813496e-01 q50=9.236366e-01 q75=1.268150e+00 q99=1.405963e+00
+      segno                q01=9.563240e-01 q25=9.956779e-01 q50=9.991123e-01 q75=9.998019e-01 q99=9.999398e-01
+      avv_su_g1            q01=7.136748e+00 q25=8.086412e+00 q50=1.724275e+01 q75=1.828754e+01 q99=2.957658e+01
+      cancelli al passo 50: archi=471568 g1=155 g1+2=45 g1+2+3=45 nasce=2
+      finali: candidati=2 densita'=2 2LAM=2 ammessi=2
+
+  --- braccio Bp, passo 50 ---
+      soglia0 = 9.424777961
+      r_nodo       q01=4.648447e-01 q25=6.646098e-01 q50=7.975044e-01 q75=9.020393e-01 q99=9.870519e-01 max=9.990253e-01
+      grad         q01=1.827626e-03 q25=4.953177e-02 q50=1.172565e-01 q75=2.157627e-01 q99=4.601719e-01 max=6.255217e-01
+      tanh_grad    q01=1.827624e-03 q25=4.949130e-02 q50=1.167220e-01 q75=2.124757e-01 q99=4.302243e-01 max=5.549609e-01
+      soglia       q01=8.208347e+00 q25=8.824017e+00 q50=9.094754e+00 q75=9.284845e+00 q99=9.419610e+00 max=9.424777e+00
+      morso        q01=5.482872e-04 q25=1.484739e-02 q50=3.501661e-02 q75=6.374272e-02 q99=1.290673e-01 max=1.664883e-01
+      avv                  q01=2.409209e-02 q25=9.884190e-01 q50=2.531079e+00 q75=4.193699e+00 q99=6.609403e+00
+      soglia               q01=8.208347e+00 q25=8.824017e+00 q50=9.094754e+00 q75=9.284845e+00 q99=9.419610e+00
+      rapporto_avv_soglia  q01=2.621251e-03 q25=1.095198e-01 q50=2.810771e-01 q75=4.658632e-01 q99=7.380169e-01
+      ft                   q01=5.385049e-01 q25=6.952814e-01 q50=7.793609e-01 q75=8.582740e-01 q99=9.669575e-01
+      segno                q01=9.628974e-01 q25=9.963080e-01 q50=9.992451e-01 q75=9.998284e-01 q99=9.999403e-01
+      avv_su_g1            q01=1.499050e+01 q25=1.706743e+01 q50=1.783264e+01 q75=1.868634e+01 q99=2.990162e+01
+      cancelli al passo 50: archi=471564 g1=109 g1+2=0 g1+2+3=0 nasce=0
+
+  --- braccio Bc, passo 50 ---
+      soglia0 = 9.424777961
+      r_nodo       q01=5.828728e-01 q25=8.333606e-01 q50=1.000000e+00 q75=1.131076e+00 q99=1.237674e+00 max=1.252687e+00
+      grad         q01=2.291358e-03 q25=6.210939e-02 q50=1.470282e-01 q75=2.705470e-01 q99=5.770138e-01 max=7.843484e-01
+      tanh_grad    q01=2.291354e-03 q25=6.202965e-02 q50=1.459778e-01 q75=2.641337e-01 q99=5.204916e-01 max=6.551955e-01
+      soglia       q01=7.953123e+00 q25=8.677958e+00 q50=9.012035e+00 q75=9.249393e+00 q99=9.418299e+00 max=9.424776e+00
+      morso        q01=6.874062e-04 q25=1.860889e-02 q50=4.379334e-02 q75=7.924011e-02 q99=1.561475e-01 max=1.965587e-01
+      avv                  q01=2.409657e-02 q25=9.884123e-01 q50=2.531072e+00 q75=4.193696e+00 q99=6.609400e+00
+      soglia               q01=7.953123e+00 q25=8.677958e+00 q50=9.012035e+00 q75=9.249393e+00 q99=9.418299e+00
+      rapporto_avv_soglia  q01=2.632794e-03 q25=1.107314e-01 q50=2.843310e-01 q75=4.711519e-01 q99=7.479753e-01
+      ft                   q01=5.385051e-01 q25=6.952821e-01 q50=7.793614e-01 q75=8.582739e-01 q99=9.669575e-01
+      segno                q01=9.608752e-01 q25=9.961257e-01 q50=9.992078e-01 q75=9.998202e-01 q99=9.999398e-01
+      avv_su_g1            q01=1.499044e+01 q25=1.706744e+01 q50=1.783266e+01 q75=1.868635e+01 q99=2.990162e+01
+      cancelli al passo 50: archi=471564 g1=109 g1+2=0 g1+2+3=0 nasce=0
+
+  --- braccio Ap, passo 100 ---
+      soglia0 = 9.424777961
+      r_nodo       q01=1.316271e-02 q25=4.505270e-01 q50=1.012220e+00 q75=1.316309e+00 q99=1.411206e+00 max=1.414212e+00
+      grad         q01=1.975902e-03 q25=8.046988e-02 q50=2.542336e-01 q75=5.674571e-01 q99=1.258754e+00 max=1.408815e+00
+      tanh_grad    q01=1.975900e-03 q25=8.029664e-02 q50=2.488942e-01 q75=5.134893e-01 q99=8.507202e-01 max=8.872422e-01
+      soglia       q01=7.019423e+00 q25=7.972921e+00 q50=8.721046e+00 q75=9.197745e+00 q99=9.419191e+00 max=9.424778e+00
+      morso        q01=5.927699e-04 q25=2.408899e-02 q50=7.466825e-02 q75=1.540468e-01 q99=2.552161e-01 max=2.661726e-01
+      avv                  q01=4.226020e-02 q25=1.042414e+00 q50=2.179852e+00 q75=3.715074e+00 q99=7.449315e+00
+      soglia               q01=7.019423e+00 q25=7.972921e+00 q50=8.721046e+00 q75=9.197745e+00 q99=9.419191e+00
+      rapporto_avv_soglia  q01=4.916643e-03 q25=1.217070e-01 q50=2.561993e-01 q75=4.372323e-01 q99=8.990317e-01
+      ft                   q01=5.969544e-02 q25=5.744422e-01 q50=9.163649e-01 q75=1.237366e+00 q99=1.400438e+00
+      segno                q01=8.951100e-01 q25=9.970205e-01 q50=9.993131e-01 q75=9.997757e-01 q99=9.999342e-01
+      avv_su_g1            q01=7.065006e+00 q25=7.576668e+00 q50=7.936875e+00 q75=8.362300e+00 q99=2.509562e+01
+      cancelli al passo 100: archi=471961 g1=1410 g1+2=1312 g1+2+3=1294 nasce=15
+      finali: candidati=15 densita'=15 2LAM=12 ammessi=12
+
+  --- braccio Bp, passo 100 ---
+      soglia0 = 9.424777961
+      r_nodo       q01=4.583283e-01 q25=6.737032e-01 q50=8.103005e-01 q75=9.091039e-01 q99=9.875709e-01 max=9.994106e-01
+      grad         q01=1.782308e-03 q25=4.810516e-02 q50=1.123392e-01 q75=2.098470e-01 q99=4.600909e-01 max=6.461775e-01
+      tanh_grad    q01=1.782306e-03 q25=4.806809e-02 q50=1.118690e-01 q75=2.068201e-01 q99=4.301583e-01 max=5.690911e-01
+      soglia       q01=8.208534e+00 q25=8.840008e+00 q50=9.108476e+00 q75=9.288869e+00 q99=9.419739e+00 max=9.424778e+00
+      morso        q01=5.346917e-04 q25=1.442043e-02 q50=3.356070e-02 q75=6.204602e-02 q99=1.290475e-01 max=1.707273e-01
+      avv                  q01=3.414510e-02 q25=9.131005e-01 q50=2.159339e+00 q75=3.723642e+00 q99=7.565589e+00
+      soglia               q01=8.208534e+00 q25=8.840008e+00 q50=9.108476e+00 q75=9.288869e+00 q99=9.419739e+00
+      rapporto_avv_soglia  q01=3.748128e-03 q25=1.008568e-01 q50=2.396178e-01 q75=4.133480e-01 q99=8.420047e-01
+      ft                   q01=5.370047e-01 q25=7.019296e-01 q50=7.890323e-01 q75=8.685269e-01 q99=9.692592e-01
+      segno                q01=9.116251e-01 q25=9.976508e-01 q50=9.994727e-01 q75=9.998425e-01 q99=9.999381e-01
+      avv_su_g1            q01=8.222978e+00 q25=8.771737e+00 q50=1.427488e+01 q75=1.633444e+01 q99=2.664179e+01
+      cancelli al passo 100: archi=471565 g1=151 g1+2=54 g1+2+3=49 nasce=0
+
+  --- braccio Bc, passo 100 ---
+      soglia0 = 9.424777961
+      r_nodo       q01=5.677688e-01 q25=8.322103e-01 q50=1.000000e+00 q75=1.121169e+00 q99=1.218207e+00 max=1.231954e+00
+      grad         q01=2.215170e-03 q25=5.925209e-02 q50=1.389613e-01 q75=2.600843e-01 q99=5.647522e-01 max=7.842718e-01
+      tanh_grad    q01=2.215166e-03 q25=5.918285e-02 q50=1.380737e-01 q75=2.543744e-01 q99=5.114949e-01 max=6.551518e-01
+      soglia       q01=7.978560e+00 q25=8.705551e+00 q50=9.034384e+00 q75=9.257442e+00 q99=9.418515e+00 max=9.424778e+00
+      morso        q01=6.645498e-04 q25=1.775485e-02 q50=4.142211e-02 q75=7.631231e-02 q99=1.534485e-01 max=1.965455e-01
+      avv                  q01=3.471130e-02 q25=9.125777e-01 q50=2.156651e+00 q75=3.723013e+00 q99=7.569436e+00
+      soglia               q01=7.978560e+00 q25=8.705551e+00 q50=9.034384e+00 q75=9.257442e+00 q99=9.418515e+00
+      rapporto_avv_soglia  q01=3.831676e-03 q25=1.016749e-01 q50=2.416987e-01 q75=4.171819e-01 q99=8.538962e-01
+      ft                   q01=5.362923e-01 q25=7.018030e-01 q50=7.891155e-01 q75=8.692432e-01 q99=9.717708e-01
+      segno                q01=9.066742e-01 q25=9.975544e-01 q50=9.994514e-01 q75=9.998358e-01 q99=9.999374e-01
+      avv_su_g1            q01=7.950065e+00 q25=8.423017e+00 q50=8.738801e+00 q75=1.470478e+01 q99=2.732342e+01
+      cancelli al passo 100: archi=471576 g1=237 g1+2=145 g1+2+3=133 nasce=0
+
+  --- braccio Ap, passo 140 ---
+      soglia0 = 9.424777961
+      r_nodo       q01=8.075608e-03 q25=3.830015e-01 q50=1.031936e+00 q75=1.355817e+00 q99=1.414155e+00 max=1.414213e+00
+      grad         q01=5.366354e-04 q25=6.618843e-02 q50=2.353333e-01 q75=5.682258e-01 q99=1.277667e+00 max=1.412140e+00
+      tanh_grad    q01=5.366353e-04 q25=6.609194e-02 q50=2.310831e-01 q75=5.140551e-01 q99=8.558620e-01 max=8.879477e-01
+      soglia       q01=7.004885e+00 q25=7.971321e+00 q50=8.771406e+00 q75=9.237907e+00 q99=9.423261e+00 max=9.424778e+00
+      morso        q01=1.609906e-04 q25=1.982758e-02 q50=6.932492e-02 q75=1.542165e-01 q99=2.567586e-01 max=2.663843e-01
+      avv                  q01=4.078163e-02 q25=1.022145e+00 q50=2.130122e+00 q75=3.602484e+00 q99=7.755571e+00
+      soglia               q01=7.004885e+00 q25=7.971321e+00 q50=8.771406e+00 q75=9.237907e+00 q99=9.423261e+00
+      rapporto_avv_soglia  q01=4.721020e-03 q25=1.194156e-01 q50=2.496014e-01 q75=4.221878e-01 q99=9.309851e-01
+      ft                   q01=2.578588e-02 q25=5.065068e-01 q50=8.947367e-01 q75=1.257510e+00 q99=1.412948e+00
+      segno                q01=8.656632e-01 q25=9.973745e-01 q50=9.993472e-01 q75=9.997799e-01 q99=9.999349e-01
+      avv_su_g1            q01=7.091529e+00 q25=7.652799e+00 q50=8.032585e+00 q75=8.434573e+00 q99=1.864462e+01
+      cancelli al passo 140: archi=473029 g1=2320 g1+2=2234 g1+2+3=2194 nasce=34
+      finali: candidati=34 densita'=34 2LAM=29 ammessi=29
+
+  --- braccio Bp, passo 140 ---
+      soglia0 = 9.424777961
+      r_nodo       q01=4.347555e-01 q25=6.769662e-01 q50=8.144660e-01 q75=9.123100e-01 q99=9.888203e-01 max=9.991117e-01
+      grad         q01=1.844405e-03 q25=5.040434e-02 q50=1.168423e-01 q75=2.191077e-01 q99=4.814883e-01 max=6.742386e-01
+      tanh_grad    q01=1.844403e-03 q25=5.036170e-02 q50=1.163134e-01 q75=2.156674e-01 q99=4.474347e-01 max=5.877611e-01
+      soglia       q01=8.159686e+00 q25=8.814993e+00 q50=9.095909e+00 q75=9.282384e+00 q99=9.419563e+00 max=9.424778e+00
+      morso        q01=5.533209e-04 q25=1.510851e-02 q50=3.489403e-02 q75=6.470023e-02 q99=1.342304e-01 max=1.763283e-01
+      avv                  q01=3.788866e-02 q25=9.614072e-01 q50=2.109342e+00 q75=3.582970e+00 q99=7.849042e+00
+      soglia               q01=8.159686e+00 q25=8.814993e+00 q50=9.095909e+00 q75=9.282384e+00 q99=9.419563e+00
+      rapporto_avv_soglia  q01=4.174468e-03 q25=1.063770e-01 q50=2.343713e-01 q75=3.977773e-01 q99=8.760126e-01
+      ft                   q01=5.215101e-01 q25=7.004036e-01 q50=7.904558e-01 q75=8.717284e-01 q99=9.717266e-01
+      segno                q01=8.845117e-01 q25=9.979431e-01 q50=9.994956e-01 q75=9.998340e-01 q99=9.999371e-01
+      avv_su_g1            q01=8.119872e+00 q25=8.518885e+00 q50=8.731456e+00 q75=1.210508e+01 q99=2.277157e+01
+      cancelli al passo 140: archi=471577 g1=280 g1+2=216 g1+2+3=191 nasce=3
+      finali: candidati=3 densita'=3 2LAM=3 ammessi=3
+
+  --- braccio Bc, passo 140 ---
+      soglia0 = 9.424777961
+      r_nodo       q01=5.430359e-01 q25=8.280304e-01 q50=1.000000e+00 q75=1.118437e+00 q99=1.213531e+00 max=1.225924e+00
+      grad         q01=2.237203e-03 q25=6.142537e-02 q50=1.425530e-01 q75=2.674253e-01 q99=5.851065e-01 max=7.821355e-01
+      tanh_grad    q01=2.237200e-03 q25=6.134824e-02 q50=1.415952e-01 q75=2.612274e-01 q99=5.263670e-01 max=6.539307e-01
+      soglia       q01=7.936510e+00 q25=8.686175e+00 q50=9.024427e+00 q75=9.251320e+00 q99=9.418452e+00 max=9.424775e+00
+      morso        q01=6.711599e-04 q25=1.840447e-02 q50=4.247856e-02 q75=7.836823e-02 q99=1.579101e-01 max=1.961792e-01
+      avv                  q01=3.916795e-02 q25=9.685309e-01 q50=2.116762e+00 q75=3.585385e+00 q99=7.861179e+00
+      soglia               q01=7.936510e+00 q25=8.686175e+00 q50=9.024427e+00 q75=9.251320e+00 q99=9.418452e+00
+      rapporto_avv_soglia  q01=4.380616e-03 q25=1.080683e-01 q50=2.374225e-01 q75=4.022523e-01 q99=8.867594e-01
+      ft                   q01=5.236644e-01 q25=7.008546e-01 q50=7.897804e-01 q75=8.705677e-01 q99=9.698954e-01
+      segno                q01=8.781662e-01 q25=9.978440e-01 q50=9.994699e-01 q75=9.998263e-01 q99=9.999361e-01
+      avv_su_g1            q01=7.917270e+00 q25=8.323855e+00 q50=8.586616e+00 q75=9.045209e+00 q99=2.284410e+01
+      cancelli al passo 140: archi=471639 g1=438 g1+2=377 g1+2+3=352 nasce=2
+      finali: candidati=2 densita'=2 2LAM=2 ammessi=2
+
 ========================================================================================================
 (d) IL CONTROFATTUALE: il rallentamento uniforme contro il gradiente
 ========================================================================================================
-  divisioni:  Ap=1508  Bp=27  Bc=83
+  divisioni:  Ap=1219  Bp=18  Bc=70
   schwinger:  Ap=307  Bp=7  Bc=19
-  Bp/Ap = 0.0179     Bc/Ap = 0.0550     Bc/Bp = 3.0741
+  Bp/Ap = 0.0148     Bc/Ap = 0.0574     Bc/Bp = 3.8889
   il fattore 1/mediana(r) applicato: q01=1.183934 q50=1.233014 q99=1.254150
       ### e QUINDI il gradiente del braccio Bc e' maggiorato di quel
       fattore: NON e' intatto, e la direzione dell'errore e' VERSO PIU'
@@ -141,9 +281,12 @@ LA CORSA: 150 passi, TRE bracci, col BATTITO per passo
 ========================================================================================================
 I CONTROLLI CHE POSSONO FALLIRE
 ========================================================================================================
-  C1 Ap   divisioni   1508 + schwinger    307 =   1815   n_fin - n_0 =   1526   ### NON COINCIDE
-  C1 Bp   divisioni     27 + schwinger      7 =     34   n_fin - n_0 =     25   ### NON COINCIDE
-  C1 Bc   divisioni     83 + schwinger     19 =    102   n_fin - n_0 =     89   ### NON COINCIDE
+  C1 Ap   divisioni   1219 + schwinger    307 =   1526   nati (DAL SIMULATORE) =   1526   COINCIDE
+          e n_fin - n_0 =   1526   uguale a nati: nessun nodo muore
+  C1 Bp   divisioni     18 + schwinger      7 =     25   nati (DAL SIMULATORE) =     25   COINCIDE
+          e n_fin - n_0 =     25   uguale a nati: nessun nodo muore
+  C1 Bc   divisioni     70 + schwinger     19 =     89   nati (DAL SIMULATORE) =     89   COINCIDE
+          e n_fin - n_0 =     89   uguale a nati: nessun nodo muore
   C2 Ap   candidati su tutta la corsa: 1508   ok
   C2 Bp   candidati su tutta la corsa: 27   ok
   C2 Bc   candidati su tutta la corsa: 83   ok
@@ -159,7 +302,6 @@ I CONTROLLI CHE POSSONO FALLIRE
 IL VERDETTO
 ========================================================================================================
   configurazione del driver dichiarata INTERA (braccio Bp): True
-  ### FERMO. I GUASTI:
-      - C1 Ap: ricostruzione 1815 contro 1526
-      - C1 Bp: ricostruzione 34 contro 25
-      - C1 Bc: ricostruzione 102 contro 89
+  ### I CONTROLLI CHE FERMANO (C1, C3) PASSANO.
+  ### E QUESTO E' UNA MISURA, NON UN SIGILLO: non c'e' niente da promuovere.
+      La crescita e la soglia di mitosi sono DECISIONI DI LUCA.
