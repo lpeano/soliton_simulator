@@ -1933,3 +1933,52 @@ LOCALITA' che MISURA** di quanto cambia `r` di un nodo quando si perturba un nod
 **lontano**, con atteso ### **`~1/n` e NON zero.**
 
 **Collegata a:** `INVARIANZA-LOCALE-CS`, `Z43`, `VUOTO-LOCALE-DETERMINISTICO`.
+
+## `PHI-FUORI-DOMINIO` — **una delle dieci scritture di `phi` NON normalizza, e il
+## sito della fase lo copriva PER CASO**
+
+*(Aperta il 2026-10-05 dal sigillo di `MEM_FASE` — `fddb6a5`. ### ⛔ **Da NON cercare
+ora: in coda DOPO `Z43`**, decisione di Luca.)*
+
+### ✅ **IL FATTO, ed e' un numero**
+
+Col flag `MEM_FASE` **spento**, al **passo 1**, l'unica differenza era `phi` — e il
+**massimo scarto** era:
+
+| | |
+|---|--:|
+| max scarto su `phi` | `1.256349e+01` |
+| `4*pi`, cioe' `_dphi()` | `1.256637e+01` |
+| ### **rapporto** | ### **`0.999770`** |
+| mediana di `abs(shift)` *(referto `2717308`)* | `4.262912e-03` |
+| ### **quante volte lo scarto e' piu' grande** | ### **`2947`** |
+
+### ⛔ **LO SCARTO E' QUASI ESATTAMENTE `4pi`: E' IL MODULO, NON LO SHIFT.** Su almeno
+un nodo l'effetto dominante del sito ### **non era il trascinamento di fase: era la
+NORMALIZZAZIONE.** Quel nodo aveva `phi` ### **fuori dal dominio**, e il `% _dphi()` lo
+riportava dentro ### **a ogni passo.**
+
+### 📌 **CHE COSA NE SEGUE, e non e' un'ipotesi: e' aritmetica.** Se il sito della fase
+era l'unica cosa che riportava `phi` nel dominio, allora ### **c'e' una scrittura di
+`phi` che lo lascia uscire.** ### **Le scritture sono DIECI**, censite dall'AST nel task
+history della cura (2) di `MEM-HEBB-VERSO`: `:1832` e `:2261` *(regole di nascita)*,
+`:3888` *(`__init__`)*, `:4959` *(`semina`)*, `:7757` *(`step`)*, `:8739-8751`
+*(`mitosi`, tre siti)*, `:9881` *(`_semina_masse_coerenti`)*, e il sito della fase.
+### **QUALE LASCIA IL DOMINIO? Non lo so, e non l'ho cercato.**
+
+### ⛔ **E IL FATTO CHE LA RENDE URGENTE SENZA RENDERLA PRIORITARIA**
+
+> ### **La cura di `MEM_FASE` HA SPENTO quel `% _dphi()`** *(`7a03063`, default
+> ### `MEM_FASE = False`)*.
+> ### **Quindi da quel commit il buco NON e' piu' coperto**, e se `phi` esce dal dominio
+> ### **ci resta.**
+> ### ⚠ **Lo scrivo perche' e' il tipo di cosa che si scopre due mesi dopo come un
+> ### <<difetto nuovo>>, e non lo sarebbe: sarebbe QUESTO, non cercato.**
+
+### ⚠ **E UNA COSA CHE QUESTA VOCE NON DICE:** ### **non dice che sia un difetto
+GRAVE.** `phi` fuori dal dominio puo' essere innocuo per le leggi che la leggono
+*(molte usano `cos`, `sin` o `exp(i phi)`, che sono periodiche)*. ### **Dice che c'e' una
+scrittura che non rispetta un'invariante che il resto del codice assume**, e che
+### **finora era coperta da un sito che oggi e' spento.**
+
+**Collegata a:** `MEM-HEBB-VERSO`, `FASE-TRASCINAMENTO-3D`.

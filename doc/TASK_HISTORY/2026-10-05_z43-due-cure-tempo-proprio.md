@@ -137,3 +137,61 @@ il mandato della `PARTE B` dice gia' che ### **se la cache non esiste o non e' a
 in cui `r` vale `1` per sicurezza e non per legge** — e un rapporto fra due `1`
 ### **non dice niente sull'altalena.** ### **Ma il loro NUMERO si', e per questo si
 conta.**
+
+## ⭐ ANNOTAZIONE DEL 2026-10-05: **DUE VOCI DECISE DA LUCA**
+
+> ### ⛔ **Sono DECISIONI, non proposte mie.** Scritte qui perche' e' il task history
+> della `PARTE B`, e la prima si esegue ### **DOPO il suo sigillo.**
+
+## ① **DOPO IL SIGILLO DELLA `PARTE B`: LA MISURA CON `DT` DIMEZZATO**
+
+**LO SCOPO:** distinguere un ### **TRANSITORIO FISICO** iniziale *(atteso da Luca: un
+impulso alla partenza)* da un ### **ARTEFATTO NUMERICO.**
+
+### ✅ **IL CRITERIO, FISSATO ORA — PRIMA DI VEDERE I DATI**
+
+| | |
+|---|---|
+| un **transitorio FISICO** | dura lo stesso ### **TEMPO**: con `DT/2` occupa circa il ### **DOPPIO dei passi**, e la sua eventuale frequenza ### **resta la stessa in unita' di tempo** |
+| un **ARTEFATTO** | resta a ### **periodo 2 PASSI** qualunque sia `DT`: ### **si attacca alla GRIGLIA e non al TEMPO** |
+
+### 📌 **E QUESTO E' UN CRITERIO CHE DISCRIMINA DAVVERO, non una preferenza:** le due
+ipotesi fanno predizioni ### **opposte e misurabili** sullo stesso dato. ### **Fissarlo
+PRIMA e' cio' che lo rende una prova** *(par.8)*.
+
+**LA MISURA:** stessa scena del driver, **seme 11**, un orizzonte di ### **TEMPO uguale**
+*(con `DT/2`, il **doppio** dei passi)*. Si riporta ### **`r` mediano, materia e vuoto,
+in funzione del TEMPO e non del passo.**
+
+### ⛔ **L'ECCEZIONE, scritta TALE E QUALE come Luca l'ha data:**
+
+> *se il sigillo della `PARTE B` mostra rapporti dispari/pari grandi nei primi passi,
+> questa misura si ANTICIPA come diagnosi, prima di concludere che l'altalena sia
+> eliminata.*
+
+### ⚠ **E UNA COSA DA DICHIARARE, che Luca mette nero su bianco:** ### **all'inizio
+### la simulazione NON parte dal nulla.** Parte da una ### **scena costruita**
+*(`MASSE-COERENTI`)* e da ### **due passi con `r = 1` per costruzione**:
+### **parte dell'impulso puo' venire da quel RACCORDO.**
+
+### 📌 **E IL PERCHE' QUESTO CONTA PER IL CRITERIO:** un raccordo ### **non e' ne' un
+transitorio fisico ne' un artefatto di griglia** — e' ### **una condizione iniziale.**
+### **Con `DT/2` i due passi a `r = 1` restano DUE PASSI ma coprono META' DEL TEMPO**,
+quindi ### **il raccordo si distingue da entrambi:** si accorcia nel tempo, non nei
+passi. ### **Tre ipotesi, non due, e il criterio le separa tutte.**
+
+## ② **LA DOMANDA APERTA DEL SIGILLO DI `MEM_FASE`** *(`fddb6a5`)*
+
+> ### ⛔ **Su almeno un nodo `phi` era FUORI DAL DOMINIO** *(scarto
+> ### **`0.99977 * 4pi`**)*, e il `% _dphi()` del sito della fase ### **lo riportava
+> ### dentro PER CASO.**
+> ### **Quindi UNA delle 10 scritture di `phi` NON NORMALIZZA.**
+
+### **Registrata come voce: `PHI-FUORI-DOMINIO`.**
+### ⛔ **NON SI CERCA ORA: e' in coda DOPO `Z43`** *(decisione di Luca)*.
+
+### 📌 **E IL FATTO CHE LA RENDE URGENTE SENZA RENDERLA PRIORITARIA:** la cura di
+`MEM_FASE` ### **ha SPENTO quel `% _dphi()`.** ### **Quindi da `7a03063` il buco NON e'
+piu' coperto**, e se `phi` esce dal dominio ### **ci resta.**
+### ⚠ **Lo scrivo perche' e' il tipo di cosa che si scopre due mesi dopo come un
+### <<difetto nuovo>>, e non lo sarebbe: sarebbe questo, non cercato.**
