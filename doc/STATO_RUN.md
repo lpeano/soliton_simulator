@@ -2084,3 +2084,111 @@ mettono **in coda**)*.
    la ragione per cui non l'ho toccata di mia iniziativa.
 
 **Collegata a:** `Z43` *(l'ho trovata lavorandoci)*.
+
+---
+
+## `GRAVITA-POTENZIALE` — **due potenziali nel codice, e Poisson e' un VINCOLO DI SCALA**
+
+*(APERTA il 2026-10-05 per **decisione di Luca**, **da curare DOPO**. ### **Direzione
+discussa, NON decisa.**)*
+
+### I DUE POTENZIALI, **verificati dal sorgente** sul blob `f7237563`
+
+| | dove | la forma | chi lo usa | la coda |
+|---|---|---|---|---|
+| **1** | `pozzo_grafo` *(`:9058`)* | `np.add.at(phi_g, ii, I[jj]/L)`, simmetrico su `jj`: la somma di `I/L` sui **SOLI VICINI DIRETTI** del grafo | la **FORZA** di `GRAV_BIFASE` | ### **NESSUNA** |
+| **2** | il blocco Kuramoto *(`K_SYNC`, `:7705`-`:7727`)* | `cmv` = centro di massa pesato da `I2`; `r_cm = |pos - cmv| + LAM*0.5`; `pozzo = I2.sum()/r_cm` | **SOLO le FASI** | ### **`M/d` GLOBALE**, con addolcimento |
+
+### ✔ **E UNA PRECISAZIONE CHE IL SORGENTE AGGIUNGE, e cambia il peso del fatto (2):**
+quel pozzo entra nella legge **solo** attraverso `prof_rel = pozzo / media_p`, un
+### **RAPPORTO LOCALE** sui vicini topologici. ### **Quindi la coda `M/d` viene in gran parte
+NORMALIZZATA VIA prima di diventare forza:** il potenziale globale **c'e'**, ma il suo
+**gradiente a lungo raggio** no.
+
+### ⛔ **DOVE E' POISSON NEL SISTEMA** — e Luca ricorda di averlo gia' messo: ### **non come
+### equazione risolta**
+
+Le **cinque** occorrenze della parola nel simulatore sono **due cose sole**:
+
+1. ### **LA FORMA DI PROBABILITA' DELLA MITOSI** *(`:8448`, `:11565`)*: `1 - exp(-lambda)`.
+   E' un **processo** di Poisson, ### **non l'equazione** di Poisson.
+2. ### **UN VINCOLO DI SCALA DEL COARSE-GRAINING** *(`:331`-`:336` e `:6238`-`:6240`)*: le
+   regole di scala di `SCALA_B` sono state **derivate imponendo la conservazione di tre
+   leggi al continuo**, e ### **Poisson e' una delle tre** --
+   *«`massa/solitone = SCALA_B * massa_fine` (ogni blocco pesa `SCALA_B` fini: **preserva
+   Poisson**)»*, perche' *«la sorgente e' `rho = |Psi|^2`»*.
+
+> ### ✔ **QUINDI: Poisson entra come VINCOLO SU COME SI CAMBIA SCALA, non come legge
+> ### risolta sul grafo.** ### ⚠ **E oggi e' INERTE: `SCALA_B = 1.0`**, quindi quelle
+> regole di scala sono **l'identita'**. ### **Questa e' la risposta al <<da chiarire
+> dove>>, e va riletta da qui prima di cercarlo altrove.**
+
+### CHE COSA CAMBIA CON `r = cs/CS_M`
+
+Il tempo proprio segue la **densita' LOCALE**: ### **niente coda `M/d` fuori dalle masse**, e
+e' previsto un **alone di orologi piu' VELOCI al bordo** *(`u < 1`, dove la transizione di
+`_cs_nodo` sale verso `0.880797`)*.
+### ✔ **E il criterio `5` del sigillo della `PARTE B` lo ha MISURATO:** oltre due salti il
+cambiamento relativo di `cs` e' un **pavimento piatto** a `0.40`-`0.51` volte `1/n` che
+**non decade con la distanza** -- cioe' ### **una coda GLOBALE di ampiezza `1/n`, non una
+coda `1/d`.**
+
+### LA DIREZIONE, **discussa e NON decisa**
+
+Un potenziale ### **PROPAGATO sul grafo a velocita' `cs`** *(limite statico Poisson, coda
+`1/d`)* che entri ### **nella FORZA e in `cs`**.
+
+**Collegata a:** `Z43`, `CS-LAMBDA-GLOBALE`, `TETTO-CAUSALE-TEMPO-COORDINATO`, `Z47`.
+
+---
+
+## `CRESCITA-DOPO-Z43` — **con `r = cs/CS_M` la rete quasi non cresce piu'**
+
+*(APERTA il 2026-10-05 dal mandato di Luca, dopo il sigillo della `PARTE B` di `Z43`
+*(`9731201`)*. La misura e' in
+`doc/TASK_HISTORY/2026-10-05_crescita-dopo-z43-misura.md`.)*
+
+### IL FATTO, **misurato su due piattaforme**
+
+Dal criterio `7` del referto `9731201` e da una misura **indipendente** del guardiano su
+Linux: al passo `150`, `n = 12827` nella `PARTE B` contro **`14328`** nella `PARTE A`, da una
+partenza di `12802`. Cioe' ### **~25 nascite contro ~1500**, e nella `PARTE B` concentrate in
+**13 passi su 150**.
+
+### ⚠ **E IL RALLENTAMENTO UNIFORME NON LO SPIEGA**
+
+`r` mediano e' `0.815126`, e il fattore di tempo entra nella probabilita' **UNA volta sola**
+*(`ampiezza = ampiezza_int * dt_e/DT`)*: gli eventi attesi scalano di **`~0.815`**.
+### **Un fattore `0.815` non fa un fattore `~60`.**
+
+### L'IPOTESI DEL GUARDIANO — **da verificare, non da assumere**
+
+```
+grad_modula = |r[i] - r[j]|
+soglia      = soglia0 * (1.0 - 0.3 * tanh(grad_modula))
+```
+
+Con l'altalena, `r` spaziava su `[1.4142e-06, 1.4142]`: il gradiente fra vicini era
+**enorme**, `tanh -> ~0.888`, e la soglia **crollava** fino a `~0.73 * soglia0`. Con `r`
+liscio il gradiente e' piccolo e la soglia **resta `soglia0`**.
+### ⛔ **Se e' cosi', gran parte della crescita misurata finora era alimentata
+### DALL'ARTEFATTO DELL'OROLOGIO.**
+
+### ✔ **E UNA TERZA CAUSA POSSIBILE CHE IL MANDATO NON NOMINA, registrata qui**
+
+`avv = |tw|` ### **non e' un dato esterno:** la torsione si integra in `dt_e`, cioe' **nel
+tempo proprio**. Con `r` diverso, ### **`|tw|` al passo `k` E' UNA GRANDEZZA DIVERSA.** I
+bracci potrebbero separarsi **non perche' la soglia e' piu' alta, ma perche' `avv` e' piu'
+bassa** — e il censimento dei cancelli **da solo non distingue i due casi**: li distingue il
+confronto fra la **distribuzione di `avv`** e quella di **`soglia`**.
+
+### ⚠ **E UN LIMITE DEL CONTROFATTUALE, dichiarato PRIMA di girarlo**
+
+Riscalare `r` per `1/mediana(r) ~ 1.227` moltiplica **anche** `|r_i - r_j|` per `1.227`:
+### **i gradienti NON restano intatti, crescono del 23 %.** Questo rende la conclusione
+*<<non e' il rallentamento>>* ### **piu' forte, non piu' debole** — ma se le nascite
+**risalissero**, quel `23 %` sarebbe una **causa confondente** da dichiarare.
+
+> ### ⛔ **SOLO NUMERI: la crescita e la soglia di mitosi sono DECISIONI DI LUCA.**
+
+**Collegata a:** `Z43`, `MITOSI-SOGLIA-GRAD`, `Z47`.
