@@ -5709,3 +5709,56 @@ Qui no: `csv/_test_fork/_z43_tempo_proprio.py` esce dal suo `_ritmo_in` appena
 `_med_f_prec is None`, e da questa cura **lo e' sempre** -- ### **quello strumento misura la
 legge VECCHIA.** ### **Non l'ho rigirato, e non spaccio il criterio per confermato due
 volte.**
+
+---
+
+## 2026-10-05 — `CRESCITA-DOPO-Z43`: **la corsa e' caduta al passo 42, e l'errore e' MIO**
+
+`IndexError: index 366335 is out of bounds for axis 0 with size 12802`, nel **mio** gancio
+`H3`, sul braccio `Ap`.
+
+### L'ERRORE, e **e' esattamente la classe che avevo appena dichiarato di evitare**
+
+Ho scritto `I[c]`. ### **Ma `c` contiene indici di ARCO e `I` e' per NODO.** La legge non fa
+mai `I[c]`: fa
+
+```
+a, b = self.i[c], self.j[c]
+ok = 0.5 * (I[a] + I[b]) >= QMIN_M * median(peq)
+```
+
+cioe' la densita' che il cancello legge e' ### **la media dei DUE ESTREMI dell'arco**, non un
+valore nodale indicizzato dall'arco. ### ⛔ **Ho INDOVINATO la semantica di una variabile
+invece di LEGGERLA** -- ed e' `P1`, la mia stessa regola: *<<non usare l'associazione senza
+verificare lo storico>>*. ### **Il nome `c` mi ha suggerito <<candidati>>, e ho dedotto
+<<nodi>>.**
+
+### ⚠ **E IL COLLAUDO NON POTEVA PRENDERLO**, per la seconda volta di fila
+
+Nel collaudo avevo passato `c=[0,1,2]` e `I=[1.0,2.0,3.0]`: **con tre archi e tre nodi
+l'indicizzazione sbagliata e' INDISTINGUIBILE da quella giusta.** ### **Un caso in cui due
+dimensioni coincidono non prova quale delle due stai usando.**
+
+### ⛔ **E UN SECONDO DIFETTO, PIU' GRAVE: HO PERSO 42 PASSI PERCHE' LA PROTEZIONE CHE AVEVO
+### MESSO NON COPRIVA QUESTO CASO**
+
+Nel sigillo della `PARTE B` avevo imparato a **scrivere il `json` PRIMA del rapporto**
+*(`41bc41f`)*, e questo strumento nasce con quella correzione dentro. ### **Ma protegge solo
+la POST-ELABORAZIONE:** una caduta **dentro il ciclo dei passi** non trova nessun `json`
+scritto, e infatti ### **non c'e'.** ### **Avevo curato il sintomo di `aafb3eb`, non la sua
+classe** -- e la classe e' *<<i dati di una corsa non devono dipendere dal fatto che la corsa
+finisca>>*.
+
+### CHE COSA LA CORSA HA GIA' FATTO VEDERE, e **un battito non e' un verdetto**
+
+### ✔ **ZERO nascite in TUTTI E TRE i bracci fino al passo `42`**, `Ap` compreso. Quindi i
+**~1500** nati della `PARTE A` arrivano **tutti dopo il passo 42**, e il confronto fra i
+bracci ### **vive nella seconda meta' della corsa.**
+### ✔ **E questo CONFERMA la scelta di `PASSO_DIST = 10`**, fissata *prima* dei dati: a quel
+passo la rete non e' cresciuta **in nessun braccio**, quindi le distribuzioni sono
+confrontabili ### **per costruzione e non per fortuna.**
+
+> ### 📌 **QUATTRO DIFETTI DEI MIEI STRUMENTI IN DUE GIORNI**, e la regolarita' si e'
+> affinata: ### **il collaudo prova la mia LOGICA; la corsa prova le mie ASSUNZIONI SULLE
+> SEMANTICHE DEL SIMULATORE.** ### **E un caso di prova in cui due dimensioni coincidono --
+> tre archi e tre nodi -- non prova NIENTE su quale delle due stai indicizzando.**
