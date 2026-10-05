@@ -252,6 +252,75 @@ un intervento invece di un'osservazione:** il referto `12e2ca7` ha detto che la 
 sugli archi che nascono è una **CORRELAZIONE** con un effetto di **selezione**, e che
 separarla ### **vuole un INTERVENTO sulla soglia.** ### **Questo mandato È quell'intervento.**
 
+## ⛔ ANNOTAZIONE DEL 2026-10-06 — **IL PREDITTORE DELLA MISURA `(2)` E' SFASATO DI UN
+## PASSO**, e la corsa era GIA' PARTITA
+
+*(Difetto trovato dal guardiano sul blob `6b26f173`. ### **L'ho verificato IO sull'ordine
+delle righe di `step()` prima di accettarlo**, come il mandato chiede.)*
+
+### LA VERIFICA, riga per riga — **e il guardiano ha ragione**
+
+| riga | che cosa fa |
+|---|---|
+| `:7430` | `_phi_t = self.phi.copy()` — la **fotografia** all'INIZIO del passo `t` |
+| `:7432` | `_phivel_t = self.phivel.copy()` |
+| `:7768` | `self.phivel = _phivel_t + delta_phivel` — **`phivel` AGGIORNATA** |
+| `:7769` | `self.phi = (_phi_t + (dt_n_s * self.phivel) + delta_sync_phi) % _dphi()` — la fase avanza con la `phivel` **NUOVA** |
+| `:7772` | `dph = self._wphi(_phi_t[i] - _phi_t[j])` — ### **DALLA FOTOGRAFIA, non da `self.phi`** |
+
+### ✔ **E IL COMMENTO A `:7771` LO DICE DA SE':** *«Calcolo della differenza di fase
+sull'arco basato rigorosamente sullo stato al tempo `t`»* — cioe' su `_phi_t`, lo stato
+### **di INIZIO passo.**
+
+### ➜ **QUINDI:** `dph_t` riflette la fase **committata alla FINE del passo `t-1`**, e
+
+```
+spinta_t = _w8(dph_t + twist_dip_t - twp_{t-1})
+```
+
+misura la variazione della differenza di fase prodotta ### **DURANTE il passo `t-1`**, da
+`dt_n_s * self.phivel` con l'`r` e la `phivel` **di allora**.
+### ⛔ **Il mio gancio li leggeva al passo `t`: il predittore e' SFASATO DI UN PASSO.**
+
+> ### ✔ **UN DETTAGLIO CHE TORNA A FAVORE, e lo scrivo perche' semplifica la cura:** il
+> gancio scatta a `:7795`, cioe' **DOPO** `:7768`. ### **Quindi la `phivel` che il gancio
+> legge e' GIA' quella aggiornata** — esattamente la stessa che ha prodotto l'avanzamento a
+> `:7769`. ### **Basta CONSERVARNE UNA COPIA e usarla al passo dopo:** non serve nessun
+> gancio nuovo.
+
+### CHE COSA RESTA VALIDO, e che cosa no
+
+| | |
+|---|---|
+| **`Ap0`, `Bp0`, `B03`** | ### **NON toccati dal difetto:** non usano il gancio `torsione` |
+| **`K1`** | ### **VALIDO** |
+| **`C0`, `C-fallisce`, `C1`, `C-rng`, `C0-tw`** | ### **VALIDI** |
+| **`K2`, `K2b`** | ### ⛔ **PROVVISORI:** il predittore e' sfasato di un passo |
+
+### LA STRADA, **(B)** del mandato — la corsa era **GIA' PARTITA** *(era al passo `115` di
+`150` quando ho scritto questa riga)*
+
+1. ### **NON la fermo.** Al termine: uscite e referto come previsto, con ### **`K2` e `K2b`
+   marcati <<PREDITTORE SFASATO DI UN PASSO: provvisori>>**;
+2. poi **correggo il gancio** — copie *(non riferimenti)* di `r` e `phivel` al passo `t-1`,
+   correlate con la **spinta** al passo `t` — e ### **riporto ANCHE la versione allo stesso
+   passo, per confronto**;
+3. **commit dello strumento corretto**, e ### **rigiro SOLO il braccio `Bg`**;
+4. **aggiorno il referto** con `K2` e `K2b` sul **predittore causale** e la tabella che
+   confronta ### **stesso passo contro passo precedente.**
+
+### ⛔ **E `K2` E `K2b` RESTANO FISSATI COM'ERANO** *(`bb1fece`, `1362672`)*: **cambia solo
+l'ALLINEAMENTO TEMPORALE del predittore.** ### **Questa riga e' scritta PRIMA della corsa di
+`Bg`**, come il mandato pretende, e le soglie — `|rho| <= 0.05` per `K2`, `q5/q1 >= 2x` a
+due passi su tre per `K2b` — ### **non si toccano.**
+
+### ⚠ **E UNA COSA CHE IL CONFRONTO DIRA' E CHE NON SO PREVEDERE**
+
+Se le due versioni *(stesso passo e passo precedente)* dessero ### **la stessa risposta su
+`K2`/`K2b`**, il difetto sarebbe **innocuo in questo caso** — ma resterebbe un difetto.
+### **Se dessero risposte DIVERSE, vale solo quella causale.** ### ⛔ **Non lo so in
+anticipo, e non lo decido dopo: la tabella del confronto e' nel referto definitivo.**
+
 ## 3. TODO DEL NEXT STEP
 
 1. **commit di questo task history**, prima dello strumento;
