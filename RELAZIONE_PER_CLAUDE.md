@@ -5614,3 +5614,98 @@ impedire.**
 > nel sigillo di `MEM_FASE`, e questi due. ### **La regolarita' e' che il collaudo prova la
 > mia logica e la CORSA prova la mia interfaccia col simulatore vero** — e le due cose non
 > si coprono a vicenda.
+
+---
+
+## 2026-10-05 — `Z43` **PARTE B SIGILLATA**: **tutti e sette i criteri passano**, e **l'altalena non c'e' piu'**
+
+**Referto:** `doc/REFERTO_z43_cura2_2026-10-05.md`, **generato** da `sigillo.json`
+*(`L-NUMERI`)*. Simulatore **`f7237563`**, strumento **`5461b850`**, `150` passi.
+
+| criterio | esito |
+|---|---|
+| `0` braccio `0` *(il *prima* + la patch = il blob di oggi, al byte)* | **PASSA** |
+| `1` **fedelta' AL BIT**: `0` nodi diversi su **`1 907 888`** e `149` chiamate | **PASSA** |
+| `2` **niente altalena, PER COPPIA**: `0` coppie sopra `1.2` su `74` | **PASSA** |
+| `3` autocorrelazione a ritardo `1` = **`+0.891635`** | **PASSA** |
+| `4` segno *(**fedelta'**, non fisica)*: `137` su `137` | si riporta |
+| `5` **localita', MISURATA** | si riporta |
+| `6` lo **STATO** diverge dal passo **`2`** | **PASSA** |
+| `7` `150` passi senza `FERMO` | **PASSA** |
+
+### ✔ **L'ALTALENA NON E' SMORZATA: NON C'E'**
+
+| | `PARTE A` | `PARTE B` |
+|---|--:|--:|
+| rapporto alla coppia `4` | `1.463e+04` | **`1.007756`** |
+| coppie sopra `1.2` | `19` su `74` | **`0` su `74`** |
+| primo passo stabile | `42` | **`4`** *(la prima coppia valutabile)* |
+
+**Il massimo su tutta la corsa e' `1.007756`**, e ### **la lettura a DUE lati da' lo stesso
+numero**: non e' un'alternanza nascosta dal criterio a un lato.
+
+### ✔ **E L'ANELLO `cs <-> r` NON OSCILLA:** autocorrelazione **`+0.891635`**, cioe'
+**fortemente POSITIVA** -- una serie che scende e risale **liscia**.
+### ⚠ **L'avevo scritto PRIMA della corsa, nel task history** *(`012f419`)*, **ed e'
+confermato su entrambi i punti.** ### **Ma nella `PARTE A` la stessa previsione era
+SBAGLIATA** *(dicevo <<cala ma non crolla>>, e crollo')*: ### **una previsione indovinata non
+rende affidabile chi la fa, rende verificata QUESTA.** E il meccanismo che avevo dato
+*(mediana che amplifica contro `tanh` che contrae)* e' **coerente** col numero,
+### **ma il numero non dimostra il meccanismo: dimostra che non oscilla.**
+
+### ✔ **IL CRITERIO `5` HA DATO LA RISPOSTA CHE SOLO UNA CURVA PUO' DARE**
+
+Perturbando `I` di **UN** nodo *(il piu' denso, raddoppiato)* e chiamando **`_cs_nodo` -- la
+legge stessa** -- due volte:
+
+| distanza | nodi | mediana `\|dcs\|/cs` | **mediana / (1/n)** |
+|--:|--:|--:|--:|
+| `0` | `1` | `5.53e-01` | `7074.65` |
+| `1` | `87` | `7.78e-03` | `99.59` |
+| `2` | `448` | `5.39e-05` | **`0.69`** |
+| `3` | `1178` | `3.12e-05` | **`0.40`** |
+| `6` | `2375` | `3.96e-05` | **`0.51`** |
+| oltre `6` salti | `4746` | `3.30e-05` | **`0.42`** |
+
+### **LOCALE PER DUE SALTI, E POI UN PAVIMENTO PIATTO A `0.40`-`0.51` VOLTE `1/n` CHE NON
+### DECADE PIU' CON LA DISTANZA.** Quel pavimento ### **E' la coda globale di
+`_Lam = mean(abs(psi)^2)`** *(`CS-LAMBDA-GLOBALE`)*, ed e' ### **dell'ordine atteso `1/n` e
+NON zero**, come il mandato aveva previsto.
+### ✔ **ED E' ESATTAMENTE PERCHE' IL CRITERIO CHIEDEVA UNA CURVA E NON UN NUMERO:** un
+numero solo **non distingue** <<locale piu' una coda globale>> da <<globale>>.
+### **La forma lo fa, e la risposta e' la prima.**
+### ✔ **E la misura NON ha mosso cio' che misura:** `contatore_mosso = False`.
+
+### LA DISTRIBUZIONE DI `r`, e la **separazione** che il guardiano ha chiesto
+
+* **la parte UNIFORME** e' `r` mediano **`0.815126`** al passo `150`: ### **il passo medio
+  rallenta di quel fattore, ed e' UN CAMBIO DI UNITA' DI TEMPO -- NON E' FISICA**;
+* **la parte FISICA e' la DISPERSIONE:** `CV = 0.186746`, `q95/q05 = 1.875136`,
+  `max/min = 3.176363`;
+* ### **`r > 1` su `0` nodi in tutta la corsa:** la forma `r ∈ (0, 1]` **tiene**;
+* **l'atteso era `~0.8035`** *(da `C5` di `66a798d`: `(cs/CS_M)^2` mediano `0.6457`)*, e
+  ### **misurato `0.815126`: scarto `1.4 %`.** ### **Scritto PRIMA della corsa.**
+
+### ✔ **E LE CELLE AVVELENATE SONO ESATTAMENTE LE NASCITE, SU TUTTI E 13 I PASSI**
+
+`13` passi su `150` hanno almeno una cella di `_r_corrente` avvelenata, e ### **in TUTTI il
+numero coincide col numero dei NATI nel passo.** ### **Il `NaN` della prima corsa era il mio
+strumento che leggeva un registro avvelenato, e ora e' CONTATO e ATTRIBUITO invece che
+mascherato.**
+
+### CHE COSA PORTO A LUCA, e **non lo risolvo io**
+
+> ### IL MANDATO HA **DUE LETTURE** su un punto: la differenza e' il ramo `TEMPO_SEGNO`
+> *(`:5303`-`:5312`)*, che **non legge la fase** -- legge `tw`. ### **Ho scelto la lettura
+> MINIMA** *(esce solo il ramo della fase)*, perche' il par.2 dice di **non estendere una
+> cura da soli** e `TEMPO_SEGNO` **non e' nominato**. ### **Oggi le due letture sono
+> INDISTINGUIBILI** *(`TEMPO_SEGNO = False`: byte-inerte)*, **ma se venisse acceso darebbero
+> `r` diversi.**
+
+### ⚠ **E UNA COSA IN MENO RISPETTO ALLA `PARTE A`, che dico invece di lasciar credere:**
+### **per la `PARTE B` c'e' UN SOLO STRUMENTO.** Nella `PARTE A` il rapporto per coppia era
+misurato **da due strumenti su due piattaforme**, e coincidevano **fino alla terza cifra**.
+Qui no: `csv/_test_fork/_z43_tempo_proprio.py` esce dal suo `_ritmo_in` appena
+`_med_f_prec is None`, e da questa cura **lo e' sempre** -- ### **quello strumento misura la
+legge VECCHIA.** ### **Non l'ho rigirato, e non spaccio il criterio per confermato due
+volte.**

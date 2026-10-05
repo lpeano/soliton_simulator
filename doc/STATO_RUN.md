@@ -2035,3 +2035,52 @@ criterio con cui `r_node` e' rimasto nella `CURA (1)`:** chi li togliesse **non 
 pulendo**, starebbe **cancellando la traccia di una legge che c'era**.
 
 **Collegata a:** `Z43`, `CS-LAMBDA-GLOBALE`.
+
+---
+
+## `RELAZIONE-BINARIA` — **un NUL letterale rende la relazione binaria per git**
+
+*(APERTA il 2026-10-05 scrivendo il referto della `PARTE B` di `Z43`. ### **Il difetto
+PREESISTE a quel commit**, e l'ho trovato perche' `grep` ha risposto *<<Binary file
+RELAZIONE_PER_CLAUDE.md matches>>* mentre controllavo una cosa d'altro.)*
+
+### IL FATTO, **misurato**
+
+`RELAZIONE_PER_CLAUDE.md` contiene **UN** byte `NUL` *(`0x00`)* all'offset **`294368`**,
+**dentro una frase che spiega il formato dell'`oid` di git** -- *<<l'`oid` di git e' lo sha1
+di `blob <len>`+`NUL`+`contenuto`>>* -- dove e' stato scritto ### **un `NUL` LETTERALE invece
+del testo che lo rappresenta.**
+
+### LA CONSEGUENZA, e non e' estetica
+
+**git classifica il file come BINARIO.** Quindi:
+* `git diff RELAZIONE_PER_CLAUDE.md` ### **non mostra le righe**, dice solo che il file e'
+  cambiato;
+* `grep` risponde *<<Binary file matches>>* invece delle righe.
+
+### ⚠ **E questo e' il documento che chi legge il repo DA FUORI usa per primo** *(par.4: <<chi
+legge il repo non ha la conversazione, ha solo i file>>)*. ### **Un suo diff illeggibile e'
+un costo di REVISIONE**, non un dettaglio.
+
+### CHE COSA **NON** ROMPE, e va detto per non gonfiarlo
+
+* ### **non falsa nessuna misura:** nessun numero di nessun referto passa da qui;
+* ### **`H-P1-bis` continua a funzionare:** git rileva comunque la modifica, quindi il
+  presidio che pretende la relazione **non e' disarmato**.
+
+### PERCHE' NON L'HO CURATA
+
+**La cura sarebbe di UN byte** -- sostituire il `NUL` letterale col testo che lo rappresenta,
+lasciando la frase **piu' corretta di prima**. ### **Non l'ho fatto perche' e' una modifica a
+un paragrafo STORICO, fuori dal mandato in corso** *(congelamento dell'infrastruttura del
+2026-10-04: i difetti degli strumenti che non falsano il risultato si **annotano** e si
+mettono **in coda**)*.
+
+### DA VERIFICARE SE SI DECIDE DI CURARLA
+
+1. che **nessun altro documento** abbia lo stesso problema;
+2. che quel byte **non sia citato** da un presidio o da un sigillo come parte di una misura
+   sull'identita' dei blob — ### **la frase in cui vive parla ESATTAMENTE di quello**, ed e'
+   la ragione per cui non l'ho toccata di mia iniziativa.
+
+**Collegata a:** `Z43` *(l'ho trovata lavorandoci)*.
