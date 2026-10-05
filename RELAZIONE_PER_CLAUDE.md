@@ -4777,3 +4777,70 @@ l'uscita della sonda a 2 passi, prodotta da uno stato intermedio. ### **E' la sp
 ### ⚠ **E ci sono arrivato perche' `H-NON-TRACCIATI` mi ha bloccato e ho committato quel
 file per sbloccarmi, senza controllarne il timbro:** il presidio nato contro i riferimenti
 al vuoto me ne ha fatto creare uno.
+
+## `VELENO-ARCHI-KEEP`: **l'ipotesi e' CONFERMATA, e il difetto e' LATENTE**
+
+**Referto:** `doc/REFERTO_veleno_archi_keep_2026-10-05.md`.
+
+### ✅ **I DUE CONTROLLI PASSANO:** il **positivo** da' `0` errori, e gli eventi
+**senza archi tolti** danno `0` differenze su `128` confronti.
+### **Quindi le differenze compaiono SOLO dove ci sono archi tolti**, che e' il caso che
+discrimina la causa.
+
+> ### 📌 **E LA PRIMA POSIZIONE DIVERSA COINCIDE COL PRIMO ARCO TOLTO IN `166`
+> ### CONFRONTI SU `166`.** ### **Non in media: in TUTTI.**
+
+**LA SEPARAZIONE FRA I DUE EVENTI e' la prova:**
+
+| | divisione *(usa `keep`)* | schwinger *(NON lo usa)* |
+|---|--:|--:|
+| eventi | **83** | **64** |
+| archi tolti | **938** | ### **0** |
+| ### copertura del veleno | ### **`0.5000`** *(min = max)* | ### **`1.0000`** *(min = max)* |
+| confronti con differenze | ### **166 / 166** | ### **0 / 128** |
+| archi sbagliati | **63 802 623 / 78 351 652 = 81.43%** | **0.00%** |
+
+### ⛔ **LA COPERTURA NON E' UNA MEDIA, E' UN'IDENTITA':** `min = max` in entrambi i
+casi, su `294` misure. ### **Il veleno copre META' degli archi nuovi quando si toglie un
+arco e TUTTI quando non si toglie niente — e l'unica differenza fra i due casi e'
+`keep`.**
+
+### ⛔ **E IL DANNO HA UNA MEDIANA DEL `93%`:** nella meta' degli eventi di divisione,
+piu' del **93%** degli archi conservati legge il valore di **un altro arco**. Il minimo e'
+`0.0117`, cioe' ### **non esiste un evento in cui il danno sia nullo** — esiste solo un
+evento in cui il primo arco tolto cade **vicino alla fine**. ### **Il perche' e'
+geometrico: la frazione danneggiata e' `1 - primo_tolto/m`.**
+
+### ✅ **IL DIFETTO E' LATENTE, NON ATTIVO OGGI**, e l'ho dichiarato **in testa** al
+referto come il mandato chiede: `_dt_e_ultimo` e' letta **solo** da `_fattore_tempo_arco`
+→ `decidi_divisione` → `mitosi`, e `decidi_divisione` gira **all'inizio** di `mitosi`,
+**prima** della nascita; `_sin2_vir` e' letta a **voce 2** e in `batch_condensazione`, che
+gira **solo** sotto `if a.batch` — e il driver usa `--test`.
+### ⛔ **E DIVENTA ATTIVO CON LA CURA DEL TETTO CAUSALE**, che vuole far leggere `dt_e`
+a `memoria_hebbiana_moto`: **voce 5, dopo la nascita.** ### **E' per questo che questa
+voce viene prima.**
+### ⚠ **E lo scrivo come l'avevo PREVISTO, non come una scoperta:** il task history lo
+diceva prima di misurare. ### **Non mi sono sbagliato, e questo vale MENO che se mi fossi
+sbagliato.**
+
+### ✅ **I NODI SONO CORRETTI:** solo **aggiunti**, mai tolti ne' riordinati, su `147`
+eventi — `0` teste di `phi` cambiate, `0` derivate di nodo con la testa cambiata.
+### **Il difetto e' SOLO degli archi, e la ragione e' che solo gli archi si TOLGONO.**
+
+### 📌 **E LA COINCIDENZA COL REFERTO `eeb54be` NON E' UN CASO:** `83` eventi di
+divisione x `2` derivate d'arco = **`166`** confronti, e la' erano `83` passi x `2` siti
+del tetto = **`166`** verifiche. ### **Lo stesso numero, per la stessa ragione
+strutturale.** ### **L'ipotesi che quel referto lasciava APERTA e' ora MISURATA.**
+
+### ⛔ **LA CURA NON SI SCRIVE** *(decisione di Luca)*. Le due vie, col **conto delle
+leggi**: `(i)` applicare `keep` a tutte le derivate d'arco prima del veleno ### **non
+aggiunge leggi, ne RIPARA una, e toglie un'eccezione**; `(ii)` ricalcolare `dt_e` da `r`
+### **aggiunge una SECONDA SCRITTURA della stessa legge** — cio' che il simulatore
+dichiara di non voler fare, **accanto a `_dt_e_ultimo`**.
+### ⚠ **E due fatti sul PERIMETRO, che non sono una scelta:** la via `(ii)` cura **un
+lettore** e ### **non copre `_sin2_vir`, che ha lo stesso difetto**; la via `(i)` cura la
+causa **una volta** per entrambe le derivate.
+
+### ✅ **E LO STRUMENTO STAMPA UN BATTITO PER PASSO** *(`150` battiti)*: ### **una
+richiesta di stato LEGGE il passo invece di stimarlo** — era un debito che avevo
+annotato io stesso ieri.

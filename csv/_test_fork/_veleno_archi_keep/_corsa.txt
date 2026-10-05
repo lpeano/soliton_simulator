@@ -1,0 +1,115 @@
+========================================================================================================
+IL VELENO E `keep`: le derivate d'arco si riallineano, o leggono un altro arco?
+========================================================================================================
+
+### E' UNA MISURA, NON UNA CURA: nessun PASSA/FALLISCE fuori dai controlli.
+
+  python     3.13.2
+  numpy      2.3.0
+  sistema    Windows 11
+  macchina   AMD64
+  simulatore 0f060670  (sha1 dei byte grezzi, NON toccato)
+  copia patchata: _sim_veleno_keep.py  blob e6a69e7c  (3 ancore)
+
+--------------------------------------------------------------------------------------------------------
+IL CENSIMENTO, dal REGISTRO_DERIVATE del modulo caricato (non un elenco mio)
+--------------------------------------------------------------------------------------------------------
+  derivate d'ARCO con classe `avvelena`: 2  ->  _dt_e_ultimo, _sin2_vir
+  derivate di NODO con classe `avvelena`: 6
+  scena: nmasse=3 sep=6.1158  ->  n = 12802, archi = 471564
+
+========================================================================================================
+IL RUN: 150 passi, col BATTITO per passo
+========================================================================================================
+  passi girati: 150   n finale = 14000, archi = 473022
+  EVENTI DI NASCITA registrati: 147
+  per tipo: {'divisione': 83, 'schwinger': 64}
+
+========================================================================================================
+GLI EVENTI, e la geometria di `keep`
+========================================================================================================
+  passo  evento      m_prima   m_dopo   tolti aggiunti 1o_tolto keep_assente
+  42     divisione    471564   471565       1       2   379571        False
+  50     divisione    471565   471566       1       2   381842        False
+  65     divisione    471566   471567       1       2   398285        False
+  66     divisione    471567   471568       1       2    92616        False
+  69     divisione    471568   471569       1       2   320721        False
+  70     divisione    471569   471571       2       4    73528        False
+  70     schwinger    471571   471573       0       2     None         True
+  71     divisione    471573   471574       1       2   432947        False
+  72     divisione    471574   471575       1       2   354776        False
+  73     divisione    471575   471576       1       2   466057        False
+  76     divisione    471576   471577       1       2   273611        False
+  77     divisione    471577   471578       1       2   167447        False
+  78     divisione    471578   471579       1       2     1767        False
+  79     divisione    471579   471580       1       2   380738        False
+  80     divisione    471580   471583       3       6   246128        False
+  81     divisione    471583   471584       1       2    10788        False
+  82     divisione    471584   471587       3       6   266808        False
+  82     schwinger    471587   471589       0       2     None         True
+  83     divisione    471589   471592       3       6   113737        False
+  84     divisione    471592   471597       5      10    31589        False
+  84     schwinger    471597   471599       0       2     None         True
+  86     divisione    471599   471603       4       8   169479        False
+  86     schwinger    471603   471605       0       2     None         True
+  87     divisione    471605   471608       3       6   134846        False
+  ... e altri 123 eventi (tutti nel json)
+
+========================================================================================================
+IL CONFRONTO, per derivata d'arco e per evento
+========================================================================================================
+  confronti con esito: 294   archi confrontati IN TOTALE: 138784360
+  ### E IL NUMERO SI DICHIARA: zero archi NON e' un'identita'.
+  elementi diversi IN TOTALE: 63802623
+
+  --- eventi CON archi tolti (la divisione) ---
+  confronti: 166
+  con DIFFERENZE: 166 su 166
+  la prima posizione diversa COINCIDE col primo arco tolto in 166 confronti
+     passo 42   _dt_e_ultimo   diversi   91992 /  471563  1a_pos 379571  primo_tolto 379571 
+            coda 2 celle, non finite 1, archi nuovi 2  ->  copertura 0.500
+     passo 42   _sin2_vir      diversi   91992 /  471563  1a_pos 379571  primo_tolto 379571 
+            coda 2 celle, non finite 1, archi nuovi 2  ->  copertura 0.500
+     passo 50   _dt_e_ultimo   diversi   89722 /  471564  1a_pos 381842  primo_tolto 381842 
+            coda 2 celle, non finite 1, archi nuovi 2  ->  copertura 0.500
+     passo 50   _sin2_vir      diversi   89722 /  471564  1a_pos 381842  primo_tolto 381842 
+            coda 2 celle, non finite 1, archi nuovi 2  ->  copertura 0.500
+     passo 65   _dt_e_ultimo   diversi   73280 /  471565  1a_pos 398285  primo_tolto 398285 
+            coda 2 celle, non finite 1, archi nuovi 2  ->  copertura 0.500
+     passo 65   _sin2_vir      diversi   73280 /  471565  1a_pos 398285  primo_tolto 398285 
+            coda 2 celle, non finite 1, archi nuovi 2  ->  copertura 0.500
+     passo 66   _dt_e_ultimo   diversi  378950 /  471566  1a_pos 92616   primo_tolto 92616  
+            coda 2 celle, non finite 1, archi nuovi 2  ->  copertura 0.500
+     passo 66   _sin2_vir      diversi  378950 /  471566  1a_pos 92616   primo_tolto 92616  
+            coda 2 celle, non finite 1, archi nuovi 2  ->  copertura 0.500
+     passo 69   _dt_e_ultimo   diversi  150846 /  471567  1a_pos 320721  primo_tolto 320721 
+            coda 2 celle, non finite 1, archi nuovi 2  ->  copertura 0.500
+     passo 69   _sin2_vir      diversi  150846 /  471567  1a_pos 320721  primo_tolto 320721 
+            coda 2 celle, non finite 1, archi nuovi 2  ->  copertura 0.500
+
+  --- eventi SENZA archi tolti: IL CASO CHE DISCRIMINA ---
+  confronti: 128
+  con DIFFERENZE: 0   (devono essere ZERO)
+     passo 70   _dt_e_ultimo   diversi 0 / 471571   evento schwinger
+     passo 70   _sin2_vir      diversi 0 / 471571   evento schwinger
+     passo 82   _dt_e_ultimo   diversi 0 / 471587   evento schwinger
+     passo 82   _sin2_vir      diversi 0 / 471587   evento schwinger
+     passo 84   _dt_e_ultimo   diversi 0 / 471597   evento schwinger
+     passo 84   _sin2_vir      diversi 0 / 471597   evento schwinger
+
+========================================================================================================
+I NODI: solo AGGIUNTI, mai tolti o riordinati?
+========================================================================================================
+  eventi con la testa di `phi` verificata: 147
+  eventi in cui la testa di `phi` E' CAMBIATA: 0
+  eventi in cui `n` NON e' solo cresciuto: 0
+  derivate di NODO con la testa cambiata: 0
+
+========================================================================================================
+I CONTROLLI CHE POSSONO FALLIRE
+========================================================================================================
+  (positivo) confronti in cui l'allineamento CORRETTO non da' zero: 0
+  (discrimina) eventi SENZA archi tolti con differenze: 0
+  ### I CONTROLLI PASSANO: il positivo da' zero, e le differenze
+      compaiono SOLO dove ci sono archi tolti.
+========================================================================================================
