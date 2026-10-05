@@ -358,3 +358,48 @@ patchata.
 
 ### ⛔ **E CIO' CHE NON SI FA IN QUESTO PASSO:** ### **la cura.** Ne' la forma di
 `proj`, ne' il flag nuovo, ne' `FASE-TRASCINAMENTO-3D`. ### **Il passo (1) MISURA.**
+
+## TODO ALLA RIPRESA — **IL PROGRAMMA, deciso da Luca il 2026-10-05**
+
+> ### ⛔ **E' L'ORDINE DEI LAVORI, e non lo decido io.** Ogni voce ha il suo task
+> ### history, il suo sigillo coi criteri committati **prima**, e i suoi commit.
+
+| | il lavoro | dove vive |
+|--:|---|---|
+| **1** | ### ✅ **`Z43` passo (1), la misura del tempo proprio `r`** | ### **FATTA** — `doc/REFERTO_z43_tempo_proprio_2026-10-05.md` *(`66a798d`)* e `doc/REFERTO_z43_compton_C2_2026-10-05.md` *(`9cec5d8`)* |
+| **2** | **`MEM-HEBB-VERSO` passo (2):** lo **spegnimento** del sito della fase | `doc/TASK_HISTORY/2026-10-05_mem-hebb-verso-cura2-fase.md` |
+| **3** | la **decisione di Luca sulla definizione di `r`**, dopo il referto di `Z43`; poi **la cura di `r`** col suo sigillo | ### ✅ **DECISA** il 2026-10-05 — `doc/TASK_HISTORY/2026-10-05_z43-due-cure-tempo-proprio.md` |
+| **4** | **`TETTO-CAUSALE-TEMPO-COORDINATO` passo (2)** *(il mandato lo abbrevia in `TETTO-CAUSALE`; ### **la chiave intera e' questa** — par.9: **un ID non e' un nome, e' una CHIAVE**)* e la **cura (1) di `MEM-HEBB-VERSO`** *(la forma di `proj`)*, ### **PENSATI INSIEME** perche' toccano la stessa funzione, ### **ma in commit separati, ciascuno col suo sigillo** | da aprire |
+
+### **L'IDEA DA VALUTARE AL PUNTO 4, e la decisione e' di Luca ALLORA**
+
+> Il taglio `passo_max = 0.01*mediana(d0)` — ### **numero a mano, mediana globale, e
+> comanda sul `40-55%` degli archi** *(misurato in `2717308`)* — ### **sostituito dal
+> limite causale `c_s*dt_e` dell'arco.**
+> ### ⛔ **DECISIONE DI LUCA, da prendere ALLORA.**
+
+## ⛔ IN SOSPESO: **la decisione (1) va RICONFERMATA da Luca prima della sua cura**
+
+*(Scritto tale e quale come Luca lo ha dato.)*
+
+> La decisione (1) — `proj = 0.5*(I_i+I_j)/Imed*(m_j-m_i).dir` — va **RICONFERMATA**
+> da Luca prima della sua cura, ### **alla luce di DUE FATTI EMERSI DOPO:**
+
+1. ### ⛔ **`mem_mot` NON e' una velocita':** rilassa verso `grad_tw` *(`:9130` su
+   `e2940b3c`)*, quindi ### **`(m_j - m_i).dir` e' circa la CURVATURA DELLA TORSIONE
+   lungo l'arco, non un moto relativo.** *(Le **simmetrie restano valide**.)*
+2. ### ⛔ **la forma decisa satura al taglio sul `55%` degli archi** e ### **cambia la
+   somma di `Delta d0` da `+6.7e3` a `-9.2e4`** *(referto `2717308`)*.
+
+### 📌 **IL PRIMO FATTO E' UNA LETTURA DEL GUARDIANO, e lo registro come SUA:** non era
+nel mio referto. ### **Io avevo misurato le SIMMETRIE della forma decisa e le avevo
+trovate; non mi ero chiesto CHE COSA `mem_mot` SIA.** ### **E' una domanda che il mio
+referto non ha posto.**
+
+## L'OSSERVAZIONE DEL GUARDIANO sul tempo proprio dentro `memoria_hebbiana_moto`
+
+> ### **Dentro `memoria_hebbiana_moto` NESSUN PASSO USA IL TEMPO PROPRIO:** `mem_mot`
+> si aggiorna **per passo senza `dt`**, il taglio su `d0` ### **non ha tempo**, e i
+> tetti usano ### **`DT`**.
+
+### **Va nella voce `TETTO-CAUSALE-TEMPO-COORDINATO`**, ed e' li' che l'ho registrata.
