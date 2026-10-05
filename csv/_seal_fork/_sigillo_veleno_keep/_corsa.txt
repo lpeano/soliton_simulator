@@ -1,0 +1,63 @@
+========================================================================================================
+IL SIGILLO DELLA CURA DI `VELENO-ARCHI-KEEP`, via (i)
+========================================================================================================
+
+  python     3.13.2
+  numpy      2.3.0
+  sistema    Windows 11
+  macchina   AMD64
+
+========================================================================================================
+BRACCIO 0 -- il *prima* dal PADRE del commit, + la patch committata
+========================================================================================================
+  padre              b17caecbb63b13f9fde1bf0ea084f80ebd39d963
+  blob_prima         0f060670
+  blob_patch         14066458
+  blob_patchato      e2940b3c
+  blob_oggi          e2940b3c
+  patch_returncode   0
+  coincide           True
+  ### IL BRACCIO 0 TORNA: il punto di partenza non e' asserito, e' verificato.
+
+========================================================================================================
+IL LOCKSTEP: 2 passi, TUTTI gli attributi di `net` dopo OGNI passo
+========================================================================================================
+  scena: nmasse=3 sep=6.1158
+  PRIMA: n=12802 archi=471564    DOPO: n=12802 archi=471564
+  passi girati: 2
+  attributi confrontati per passo: 238
+
+========================================================================================================
+LE DIFFERENZE, PER CLASSE
+========================================================================================================
+  STATO                       4 confronti diversi
+  derivata ammessa            0 confronti diversi
+  contatore/registro          0 confronti diversi
+
+  attributo                  classe                  passi
+--------------------------------------------------------------------------------------------------------
+  _S                         STATO                       2
+  rng                        STATO                       2
+--------------------------------------------------------------------------------------------------------
+
+========================================================================================================
+I CRITERI 0, 1, 2
+========================================================================================================
+  (0) braccio 0: TORNA
+  (1) STATO identico al byte: differenze di STATO = 4
+  ### FERMO: lo STATO DIVERGE. E non e' un difetto di questa cura: vuol
+      dire che la conclusione di cb24b95 -- <<nessun lettore vivo legge
+      queste derivate dopo la nascita>> -- ERA SBAGLIATA.
+      passo 1    _S                       non confrontabile: ValueError('The truth value of an array with more than one element is ambiguous. Use a.any() or a.all().')
+      passo 1    rng                      1 elementi diversi
+      passo 2    _S                       non confrontabile: ValueError('The truth value of an array with more than one element is ambiguous. Use a.any() or a.all().')
+      passo 2    rng                      1 elementi diversi
+  (2) derivate che differiscono: nessuna
+      e le eccezioni AMMESSE dal criterio 2 sono: ['_dt_e_ultimo', '_sin2_vir']
+
+  ### E GLI ATTRIBUTI DI CONTABILITA' CHE DIFFERISCONO, dichiarati nel task
+      history PRIMA di misurare e NON compresi fra le eccezioni del mandato:
+      ### Nessuno di questi e' STATO. ### L'elenco delle eccezioni del
+          criterio 2 li comprenda o no e' UNA DECISIONE DI LUCA, e questo
+          referto gliela mette davanti coi numeri.
+========================================================================================================

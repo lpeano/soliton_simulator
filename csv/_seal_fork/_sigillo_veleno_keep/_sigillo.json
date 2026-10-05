@@ -1,0 +1,82 @@
+{
+ "ammesse": [
+  "_dt_e_ultimo",
+  "_sin2_vir"
+ ],
+ "attributi_per_passo": 238,
+ "blob_patch": "14066458076cd82775c4153f4de5fe2bf273c872",
+ "blob_sim_oggi": "e2940b3c4c57e188de506504ce8fc6e6119f229a",
+ "braccio0": {
+  "blob_oggi": "e2940b3c",
+  "blob_patch": "14066458",
+  "blob_patchato": "e2940b3c",
+  "blob_prima": "0f060670",
+  "coincide": true,
+  "dove": "il PADRE del commit (H-P8)",
+  "padre": "b17caecbb63b13f9fde1bf0ea084f80ebd39d963",
+  "patch_returncode": 0,
+  "stato": "fatto"
+ },
+ "contabilita_diversa": [],
+ "derivate_diverse": [],
+ "esito": 1,
+ "n_stato_divergenze": 4,
+ "passi": 2,
+ "per_classe": {
+  "STATO": 4
+ },
+ "per_nome": {
+  "_S": {
+   "classe": "STATO",
+   "passi": 2
+  },
+  "rng": {
+   "classe": "STATO",
+   "passi": 2
+  }
+ },
+ "piattaforma": {
+  "macchina": "AMD64",
+  "numpy": "2.3.0",
+  "python": "3.13.2",
+  "sistema": "Windows 11"
+ },
+ "stato_divergenze": [
+  {
+   "classe": "STATO",
+   "diversi": -1,
+   "nome": "_S",
+   "nota": "non confrontabile: ValueError('The truth value of an array with more than one element is ambiguous. Use a.any() or a.all().')",
+   "passo": 1
+  },
+  {
+   "classe": "STATO",
+   "diversi": 1,
+   "nome": "rng",
+   "nota": "",
+   "passo": 1
+  },
+  {
+   "classe": "STATO",
+   "diversi": -1,
+   "nome": "_S",
+   "nota": "non confrontabile: ValueError('The truth value of an array with more than one element is ambiguous. Use a.any() or a.all().')",
+   "passo": 2
+  },
+  {
+   "classe": "STATO",
+   "diversi": 1,
+   "nome": "rng",
+   "nota": "",
+   "passo": 2
+  }
+ ],
+ "timbro_strumento": {
+  "blob_head": "a864bc464931677445149f5170df4d5d5817669d",
+  "dirty": false,
+  "path": "C:\\Users\\lpeano\\soliton_simulator\\csv\\_seal_fork\\_sigillo_veleno_keep.py",
+  "repo": "C:/Users/lpeano/soliton_simulator",
+  "sha1": "2982d50df8b9ef4b69389adeb0a02b2f92894914",
+  "tracciato": true
+ }
+}

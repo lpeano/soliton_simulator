@@ -106,6 +106,22 @@ def git(*a):
     return subprocess.run(["git", "-C", RADICE] + list(a), capture_output=True)
 
 
+def _stato_rng_uguale(a, b):
+    """Lo stato di un `bit_generator` e un dizionario annidato: si confronta a fondo."""
+    if type(a) is not type(b):
+        return False
+    if isinstance(a, dict):
+        if set(a) != set(b):
+            return False
+        return all(_stato_rng_uguale(a[k], b[k]) for k in a)
+    if isinstance(a, np.ndarray):
+        return bool(a.shape == b.shape and np.array_equal(a, b))
+    if isinstance(a, (list, tuple)):
+        return (len(a) == len(b)
+                and all(_stato_rng_uguale(x, y) for x, y in zip(a, b)))
+    return bool(a == b)
+
+
 def classe(nome):
     """### STATO, derivata ammessa, o contabilita' del veleno?"""
     if nome in AMMESSE:
@@ -115,8 +131,48 @@ def classe(nome):
     return "STATO"
 
 
+def _vettori_di(v):
+    """Gli array che DEFINISCONO un oggetto non-ndarray, o `None`.
+
+    ### NASCE DA UN DIFETTO DEL PRIMO GIRO: il comparatore cadeva su `_S` con
+    `ValueError: the truth value of an array ... is ambiguous`, e su `rng`
+    dichiarava **1 elemento diverso** -- e li classificava **STATO**, cioe
+    ### **un FALLIMENTO del sigillo che era solo una MIA incapacita di
+    confrontarli.**
+    ### ⛔ **E NON SI ESENTANO, perche non sono dettagli:** `_S` e l **ADIACENZA**
+    *(`csr_matrix`)*, cioe STATO vero; `rng` e il **generatore**, e se i due flussi
+    divergessero le traiettorie divergerebbero **per quello e non per la cura**.
+    """
+    if hasattr(v, "bit_generator"):
+        # ### il GENERATORE si confronta sullo STATO, non sull oggetto: due
+        #   `Generator` sono due oggetti distinti PER COSTRUZIONE.
+        return ("rng", v.bit_generator.state)
+    if all(hasattr(v, k) for k in ("data", "indices", "indptr", "shape")):
+        # ### la MATRICE SPARSA si confronta sui suoi TRE array piu la forma.
+        return ("sparsa", (tuple(v.shape), np.asarray(v.data),
+                           np.asarray(v.indices), np.asarray(v.indptr)))
+    return None
+
+
 def confronta(x, y):
     """-> (uguale, quanti_diversi, nota). `NaN` contro `NaN` e' UGUALE."""
+    vx, vy = _vettori_di(x), _vettori_di(y)
+    if vx is not None or vy is not None:
+        if vx is None or vy is None or vx[0] != vy[0]:
+            return False, -1, "tipi strutturati diversi"
+        if vx[0] == "rng":
+            a, b = vx[1], vy[1]
+            ug = _stato_rng_uguale(a, b)
+            return ug, (0 if ug else 1), ("" if ug else "stato del generatore diverso")
+        fa, fb = vx[1], vy[1]
+        if fa[0] != fb[0]:
+            return False, -1, "forme diverse: %s contro %s" % (fa[0], fb[0])
+        tot = 0
+        for ca, cb in zip(fa[1:], fb[1:]):
+            ug, nd, nota = confronta(ca, cb)
+            if not ug:
+                tot += (nd if nd >= 0 else 1)
+        return tot == 0, tot, ("" if tot == 0 else "la matrice sparsa differisce")
     if isinstance(x, np.ndarray) or isinstance(y, np.ndarray):
         if not (isinstance(x, np.ndarray) and isinstance(y, np.ndarray)):
             return False, -1, "uno e' ndarray e l'altro no"
@@ -286,7 +342,15 @@ def principale(passi):
     riga("=")
     esito = 0
     stampa("  (0) braccio 0: %s" % ("TORNA" if b0.get("coincide") else "### NON TORNA"))
+    nonconf = [d for r in per_passo for d in r["diff"]
+               if "non confrontabile" in (d.get("nota") or "")]
     stampa("  (1) STATO identico al byte: differenze di STATO = %d" % len(stato_div))
+    stampa("      attributi NON CONFRONTABILI: %d" % len(nonconf))
+    if nonconf:
+        stampa("      ### E un attributo non confrontabile NON e un attributo uguale:")
+        stampa("          il sigillo lo conta fra le differenze, non fra i silenzi.")
+        for d in nonconf[:5]:
+            stampa("          %-24s %s" % (d["nome"], d.get("nota")))
     if stato_div:
         stampa("  ### FERMO: lo STATO DIVERGE. E non e' un difetto di questa cura: vuol")
         stampa("      dire che la conclusione di cb24b95 -- <<nessun lettore vivo legge")
