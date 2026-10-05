@@ -3945,10 +3945,15 @@ class Rete:
         self._cs_chiamate = 0
         self._cs_fallback = 0
         self._cs_fallback_ultimo = None
-        # [CURA DELL'ANELLO ISTANTANEO, 2026-09-18] il gauge di `ritmo()` del passo PRECEDENTE (uno
-        # SCALARE: niente lunghezza, niente estensione alla mitosi, A8b chiusa per costruzione).
-        # Nasce DICHIARATO a None, non implicito (A7b: uno stato non nasce indefinito); `_med_f_ultimo`
-        # e' il registro che `ritmo()` scrive e che SOLO `step()` promuove.
+        # [Z43 CURA (2), 2026-10-05] DUE REGISTRI MORTI, e lo dico qui perche' il commento di
+        # prima -- "il registro che `ritmo()` scrive e che SOLO `step()` promuove" -- da oggi
+        # SAREBBE FALSO. `ritmo()` non scrive piu' `_med_f_ultimo` e `step()` non promuove piu'
+        # `_med_f_prec`: il gauge era la MEDIANA GLOBALE DELLA FASE, ed e' uscito con la fase.
+        # RESTANO DICHIARATI (A7b: uno stato non nasce indefinito) e VALGONO `None` PER SEMPRE.
+        # Non li tolgo in questa cura: sono letti da strumenti di misura (`_f_e_median.py`,
+        # `_z43_tempo_proprio.py`) che leggerebbero un attributo INESISTENTE invece di `None`,
+        # e toglierli e' una pulizia a se' -- lo stesso criterio con cui `r_node` e' rimasto
+        # nella CURA (1). Chi li togliesse domani deve sapere di toccare anche quegli strumenti.
         self._med_f_prec = None
         self._med_f_ultimo = None
         # ritmo del tempo proprio locale del passo corrente (None = orologio globale), esposto da
