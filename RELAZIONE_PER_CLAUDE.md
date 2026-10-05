@@ -5447,3 +5447,54 @@ fatta non e' una misura.**
 
 ### ⛔ **IL SIGILLO VA RIGIRATO DA ZERO**, e ### **la `PARTE B` del mandato parte SOLO
 se questo sigillo passa.** Finche' non passa, ### **non si tocca.**
+
+## 2026-10-05 — **`Z43` PARTE A, IL REFERTO: tutti e SEI i criteri passano, e
+## l'altalena e' SPARITA sul simulatore vero**
+
+Referto: `doc/REFERTO_z43_cura1_2026-10-05.md`. Sigillo `753e6275`, simulatore `1feb9b0a` -> **`062172d3`**, patch `be92dde8`. I **sei criteri**
+erano fissati **prima del codice** in `45e7130`.
+
+| criterio | numero | esito |
+|---|--:|---|
+| **0** braccio 0 | `True` | ### **PASSA** |
+| **1** identita' al byte ai passi 1 e 2 | ### **`0`** e **`0`** | ### **PASSA** |
+| **2** ### **il caso che DEVE fallire** | prima divergenza al passo `3` | ### **PASSA** |
+| **3** `STEP2` intatto al bit | ### **`0`** su `1 970 507` nodi | ### **PASSA** |
+| **4** l'altalena sparisce *(`<= 1.2`)* | ### **`1.0411`** e **`1.0100`** | ### **PASSA** |
+| **5** `150` passi senza `FERMO` | `150` | ### **PASSA** |
+
+### ✅ **IL NUMERO CHE CHIUDE `Z43` PASSO (1): L'ALTALENA E' SPARITA**
+
+| | PRIMA | DOPO | il `BRACCIO A` di `66a798d` |
+|---|--:|--:|--:|
+| rapporto dispari/pari di `abs(f)` | `5.283` | ### **`1.0411`** | `1.034` |
+| rapporto dispari/pari di `C0` | `7.185` | ### **`1.0100`** | `1.031` |
+
+> ### ✅ **E COINCIDE COL `BRACCIO A`:** la cura sul simulatore **vero** riproduce la
+> misura fatta su una **copia**. ### **Due strade diverse, lo stesso numero** -- ed e'
+> ### il controllo positivo piu' forte di tutto il mandato.
+
+### ✅ **E `FEDELTA'` PASSA ANCHE SUL BLOB NUOVO** *(`0` differenze su `1 944 903` nodi)*: ### **`ritmo()` e' INTATTO**, la
+cura non l'ha toccato, e il confronto fra prima e dopo e' fra ### **due misure buone.**
+
+### ⚠ **UN NUMERO CHE NON E' SPARITO, e lo riporto:** la frazione di nodi col `r`
+**al tetto** ha mediana `0.000233` ma
+### **massimo `0.455476`.**
+### **L'altalena e' sparita; la SATURAZIONE in qualche passo NO.** Il gradino (b) della
+stella polare diceva che ### **se il tetto morde, cio' che si osserva e' il tetto** --
+e questo numero ### **resta aperto.**
+
+### **CHE COSA CAMBIA A VALLE, riportato e non giudicato**
+
+`n` finale `14 124` -> `14 328` *(`+204`)*, archi `473 143` -> `473 397` *(`+254`)*.
+### ⛔ **Non lo giudico: questo repo non ha un criterio su quanto la rete DEBBA
+crescere.**
+
+### ⛔ **E IL RAMO LEGACY E' CURATO MA NON MISURABILE GIRANDO:** `DEPARAM_OROLOGIO`
+e' `True`, quindi quella riga ### **non viene eseguita.** La sua cura e' verificabile
+### **solo dall'AST e dalla lettura, non da un numero** -- e il mandato chiedeva di
+applicarla *<<dichiarandolo>>*: ### **questo e' il punto in cui lo dichiaro.**
+
+> ### ✅ **E QUINDI LA `PARTE B` E' AUTORIZZATA:** il mandato diceva *<<La `PARTE B`
+> ### parte SOLO se il sigillo della `PARTE A` passa: altrimenti `FERMO`>>*.
+> ### **Passa.**

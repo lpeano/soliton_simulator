@@ -1,0 +1,105 @@
+========================================================================================================
+IL SIGILLO DI Z43 CURA (1): `r` va UNA VOLTA SOLA, e nella FREQUENZA no
+========================================================================================================
+
+  python     3.13.2
+  numpy      2.3.0
+  sistema    Windows 11
+  macchina   AMD64
+  simulatore OGGI 062172d3   patch be92dde8
+
+========================================================================================================
+BRACCIO 0: il *prima* NON si asserisce, SI RICOSTRUISCE
+========================================================================================================
+  commit_che_ha_cambiato_il_simulatore   b7c5ae3bf4dd81d10f6af970bab5af5b12329911
+  padre                                  45e7130c97edaed9ba1f05a69733b6c5b34c1e4c
+  blob_prima                             1feb9b0a
+  blob_prima_atteso                      1feb9b0a
+  prima_e_quello_atteso                  True
+  blob_patch                             be92dde8
+  blob_patchato                          062172d3
+  blob_oggi                              062172d3
+  patch_returncode                       0
+  coincide                               True
+  stato                                  fatto
+
+  copia patchata per il criterio 3: _sim_step2.py  blob a5dec4c5  (2 ancore)
+      - il gancio di modulo `_MIS`
+      - il punto di verifica di `STEP2`, dopo la moltiplicazione
+
+====================================================================================================
+LA CONFIGURAZIONE INTERA (`P5`) -- non i flag toccati, TUTTI
+====================================================================================================
+  booleani di modulo confrontati con l'argv del DRIVER: 82
+  -> IN CONFIGURAZIONE DEL DRIVER: nessuna differenza. ZERO su 82.
+
+  scena: nmasse=3 sep=6.1158  ->  n = 12802, archi = 471564
+  ### TRE BRACCI: A il VECCHIO (non patchato), B il CURATO (non
+      patchato), C il curato PATCHATO col gancio del criterio 3.
+      I criteri 1, 2 e 5 confrontano A con B: DUE NON PATCHATI.
+      ### E IL PERCHE' L'HA TROVATO IL PRIMO GIRO: con A non patchato e
+          B patchato, `_calcpsi_origini` differiva ai passi 1-2 --
+          e' un dizionario che registra <<funzione:NUMERO_DI_RIGA>> di
+          chi chiama calcola_psi (:6271-6279), e il gancio sposta le
+          righe. NON era la cura: era lo strumento che si misurava
+          addosso.
+  ### E IL RAMO LEGACY NON E' MISURABILE GIRANDO: DEPARAM_OROLOGIO = True,
+      quindi `:5982` NON viene eseguito. La sua cura e' verificabile solo
+      dall'AST e dalla lettura, NON da un numero. LO DICHIARO.
+
+========================================================================================================
+IL LOCKSTEP: 150 passi, DUE bracci, col BATTITO per passo
+========================================================================================================
+  passi girati: 150   n finale: A=14124  B=14328   archi: A=473143  B=473397
+
+========================================================================================================
+CRITERIO 1: IDENTITA' AL BYTE ai passi 1 e 2 (li' r = 1 ESATTO)
+========================================================================================================
+  passo 1: differenze 0   (attributi per passo: 236)
+  passo 2: differenze 0   (attributi per passo: 238)
+
+========================================================================================================
+CRITERIO 2 -- IL CASO CHE DEVE FALLIRE: dal passo 3 lo stato DEVE divergere
+========================================================================================================
+  primo passo con una differenza: 3
+      passo 3     differenze 5
+      passo 4     differenze 26
+      passo 5     differenze 49
+      passo 10    differenze 51
+      passo 20    differenze 51
+      passo 50    differenze 131
+      passo 100   differenze 153
+      passo 150   differenze 152
+
+========================================================================================================
+CRITERIO 3: STEP2 intatto -- omega_clk == coerenza * (cs_prec/CS_M)**2 AL BIT
+========================================================================================================
+  chiamate verificate: 150   nodi confrontati: 1970507
+  nodi DIVERSI: 0   chiamate con differenze: 0   max scarto: 0.000e+00
+  ### NON E' UNA DIVISIONE: in IEEE (a*b)/a != b, quindi si verifica LA
+      MOLTIPLICAZIONE nello stesso ordine della legge. Chiedere la divisione
+      sarebbe un FALSO-ZERO garantito dall'aritmetica.
+
+========================================================================================================
+CRITERIO 5: 150 passi, e CHE COSA CAMBIA A VALLE (riportato, non giudicato)
+========================================================================================================
+  passi girati: 150   SENZA eccezioni di invarianti: True
+                             A (vecchio)    B (curato)    
+      n finale               14124          14328         
+      archi finali           473143         473397        
+
+  ### IL CRITERIO 4 (l'altalena) NON LO FA QUESTO SIGILLO: lo misura lo
+      strumento di Z43 (7b71aa48), rigirato sul blob nuovo. E' una corsa a se'.
+
+========================================================================================================
+L'ESITO
+========================================================================================================
+  ### I CINQUE CRITERI DI QUESTO SIGILLO PASSANO:
+      0: la patch su 1feb9b0a ridA' 062172d3 AL BYTE
+      1: ZERO differenze ai passi 1 e 2
+      2: la prima divergenza e' al passo 3 -- la cura AGISCE
+      3: STEP2 intatto su 1970507 nodi in 150 chiamate
+      5: 150 passi girati, e il valle e' riportato sopra
+  ### E IL CRITERIO 4 RESTA DA MISURARE con lo strumento di Z43.
+========================================================================================================
+scritto: C:\Users\lpeano\soliton_simulator\csv\_seal_fork\_sigillo_z43_cura1\_sigillo.json
