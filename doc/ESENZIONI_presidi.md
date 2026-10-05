@@ -53,9 +53,10 @@ commit**: cosi' non se ne accumulano di invisibili.)*
 | `csv/_test_fork/_tetto_causale_tempo.py|H-P3` | la misura NON configura il modulo a mano -- la scena passa TUTTA dal CLI |
 | `csv/_test_fork/_tratti_cammino.py|H-P5` | non costruisce nessuna scena e non carica il simulatore. Il `--collaudo` gira su |
 | `csv/_test_fork/_v1_ripetizione.py|H-P5` | confronta due `misura.json` gia' prodotti, ciascuno da un run che ha dichiarato la |
+| `csv/_test_fork/_veleno_archi_keep.py|H-P3` | la scena passa TUTTA dal CLI (`nmasse` e `sep` da `argv`). La COPIA PATCHATA |
 | `csv/_test_fork/_verifica_flag_accesi.py|H-P5` | non importa il simulatore e non lo fa girare. LEGGE i referti committati e |
 | `csv/_test_fork/_video_scena.py|H-P5` | non costruisce nessuna scena e non carica il simulatore: legge i fotogrammi `.npz` |
 
 ```
-esenzioni dichiarate   50
+esenzioni dichiarate   51
 ```

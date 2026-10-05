@@ -1,0 +1,17 @@
+========================================================================================================
+COLLAUDO -- i casi che decidono se la misura e' leggibile
+========================================================================================================
+  (1) il difetto su un caso costruito: 2 diversi (attesi 2), prima pos 2
+      (atteso 2 = il primo arco tolto)   OK
+  (2) controllo POSITIVO: l'allineamento corretto da' 0 differenze (atteso 0)   OK
+  (3) CASO CHE DISCRIMINA (keep tutto vero): 0 differenze (atteso 0)   OK
+  (4) NaN contro NaN: uguale True, mentre la DISTANZA direbbe diverso   OK
+  (5) copertura del veleno con s=3: 0.500 (atteso 0.500)   OK
+  (6) la patch attacca: 3 ancore, tutte uniche   OK
+        il gancio di modulo `_MIS`
+        il PRIMA, dentro `nascita` e davanti alle regole
+        il DOPO, subito dopo `_avvelena_derivate`
+      copia: _sim_veleno_keep.py  blob e6a69e7c
+
+  ### tutti i casi passano.
+========================================================================================================
