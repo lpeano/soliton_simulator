@@ -1,0 +1,174 @@
+========================================================================================================
+Z43 passo (1): LA DEFINIZIONE DEL TEMPO PROPRIO `r`, MISURATA A LATO   [BRACCIO A]
+========================================================================================================
+
+### E' UNA MISURA, NON UNA CURA: nessun PASSA/FALLISCE fuori dai controlli,
+    e NESSUNA LEGGE NUOVA. La forma la decide Luca dopo il referto.
+
+  python     3.13.2
+  numpy      2.3.0
+  sistema    Windows 11
+  macchina   AMD64
+  simulatore e2940b3c  (sha1 dei byte grezzi, NON toccato)
+  copia patchata: _sim_z43_braccioA.py  blob 2fb32f5f  (5 ancore)
+  ### BRACCIO A: `omega_clk` con `r_node` -> 1. TOGLIE UNA POTENZA di `r`,
+      da r^2 a r^1. NON spezza l'anello: `r` resta in `_dts` (:5939).
+
+====================================================================================================
+LA CONFIGURAZIONE INTERA (`P5`) -- non i flag toccati, TUTTI
+====================================================================================================
+  booleani di modulo confrontati con l'argv del DRIVER: 81
+  -> IN CONFIGURAZIONE DEL DRIVER: nessuna differenza. ZERO su 81.
+
+--------------------------------------------------------------------------------------------------------
+IL CENSIMENTO DALL'AST: i consumatori del RITMO, per PROVENIENZA
+--------------------------------------------------------------------------------------------------------
+  consumatori VERI: 13     scartati perche' NON sono il ritmo: 12
+      dt_e@_peq_esatto               nome di tempo    righe [6851]
+      dt_e@_traccia_peq              nome di tempo    righe [6890]
+      dt_e@step                      nome di tempo    righe [7426, 7429, 7467, 7788, 7792, 7919]
+      dt_n@_bloch_ritardato          nome di tempo    righe [7176, 7178, 7179]
+      dt_n@_passo_spinoriale         nome di tempo    righe [5434, 5434, 5434, 5800, 5800, 5800]
+      dt_n@step                      nome di tempo    righe [7426, 7428, 7478, 7484, 7489, 7492]
+      dte@_fattore_tempo_arco        nome di tempo    righe [7254, 7255, 7255]
+      dte@_peq_esatto                nome di tempo    righe [6851, 6852, 6855, 6863]
+      dte@_traccia_peq               nome di tempo    righe [6890, 6892, 6898, 6899, 6900, 6916]
+      dtn@_passo_spinoriale          nome di tempo    righe [5800, 5801, 5801, 5801, 5907, 5907]
+      r@_r_nodo_mitosi               _r_corrente      righe [7238, 7239, 7239, 7241, 7241, 7244]
+      r@step                         ritmo()          righe [7422, 7424, 7425, 7428, 7429, 7429]
+      r_node@_passo_spinoriale       nome di tempo    righe [5907, 5929, 5934]
+  ### E GLI SCARTATI SONO LA RAGIONE PER CUI NON SI CENSISCE PER NOME:
+      r@_accresci                    NON ASSEGNATO qui
+      r@_celle_vive                  NON ASSEGNATO qui
+      r@_diag_completa               ALTRO (non il ritmo)
+      r@_git                         ALTRO (non il ritmo)
+      r@_gusci_esterni               ALTRO (non il ritmo)
+      r@_massa                       NON ASSEGNATO qui
+      r@_semina_lam                  NON ASSEGNATO qui
+      r@_semina_masse_coerenti       ALTRO (non il ritmo)
+      r@batch_condensazione          NON ASSEGNATO qui
+      r@chiralita_core_locale        ALTRO (non il ritmo)
+      r@ritmo                        ALTRO (non il ritmo)
+      r@semina                       ALTRO (non il ritmo)
+
+  CAMPO_SPINORIALE           True
+  CS_DINAMICO                True
+  CS_M                       2.0
+  DEPARAM_OROLOGIO           True
+  DT                         0.01
+  FORK_SU2_MEM               True
+  GAMMA                      0.05
+  GAMMA_TURBO                1.0
+  OROLOGIO_SEGNO             False
+  PHI_CRIT                   6.283185307179586
+  RITMO_WRAP_2PI             True
+  SPINORE_CORRETTO           True
+  STEP2_OROLOGIO             True
+  TAU_LOC                    1.0
+  TEMPO_PROPRIO_ORIENTATO    False
+  TEMPO_SEGNO                False
+  scena: nmasse=3 sep=6.1158  ->  n = 12802, archi = 471564
+
+========================================================================================================
+IL RUN: 150 passi, col BATTITO per passo
+========================================================================================================
+  passi girati: 150   n finale = 14151, archi = 473168
+  passi registrati: 150   di cui MISURATI: 148
+
+========================================================================================================
+L'ALTALENA: la mediana di |f| per passo
+========================================================================================================
+  mediana sui passi DISPARI  1.7173e-02
+  mediana sui passi PARI     1.6603e-02
+  rapporto dispari/pari      1.03
+
+  IL RAPPORTO CONSECUTIVO, e l'ANDAMENTO e' cio' che conta (non la 3a cifra):
+      passo 3     med|f|(k)/med|f|(k+1) = 1.487e+04
+      passo 4     med|f|(k)/med|f|(k+1) = 1.028e+00
+      passo 20    med|f|(k)/med|f|(k+1) = 3.554e-01
+      passo 40    med|f|(k)/med|f|(k+1) = 8.127e-01
+      passo 60    med|f|(k)/med|f|(k+1) = 9.830e-01
+      passo 80    med|f|(k)/med|f|(k+1) = 9.872e-01
+      passo 100   med|f|(k)/med|f|(k+1) = 9.761e-01
+      passo 120   med|f|(k)/med|f|(k+1) = 9.871e-01
+      passo 140   med|f|(k)/med|f|(k+1) = 9.868e-01
+
+========================================================================================================
+LE GRANDEZZE, mediana sui passi -- e il rapporto PARI/DISPARI
+========================================================================================================
+             sui passi      dispari        pari           disp/pari  materia      vuoto       
+  C0         1.005e+00      1.016e+00      9.850e-01      1.03       1.31e+00     9.95e-01    
+  C1         1.359e-01      1.358e-01      1.364e-01      1.00       1.17e-01     1.37e-01    
+  C2_abs     1.753e-02      1.776e-02      1.723e-02      1.03       4.39e-02     1.66e-02    
+  S1         3.973e-01      3.973e-01      3.960e-01      1.00       5.01e-01     3.92e-01    
+  V1         1.031e+00      1.031e+00      1.030e+00      1.00       8.98e-01     1.04e+00    
+  C6         2.166e-02      2.361e-02      1.984e-02      1.19       4.11e-02     2.13e-02    
+  C3_comp0   -1.217e-02     -1.286e-02     -1.135e-02     1.13       -4.41e-02    -1.17e-02   
+  C3_comp1   -1.436e-02     -1.468e-02     -1.363e-02     1.08       -7.14e-02    -1.21e-02   
+
+  C0     nodi NEL LORO PRIMO PASSO: mediana 9.811e-01
+  C1     nodi NEL LORO PRIMO PASSO: mediana 2.346e-01
+  V1     nodi NEL LORO PRIMO PASSO: mediana 9.866e-01
+
+========================================================================================================
+LE DUE LEGGI PRATICHE: quanto MORDONO
+========================================================================================================
+  frazione di nodi col `r` AL TETTO (1.414212977)   mediana 0.000154   max 0.295423
+  frazione di nodi col `r` AL PAVIMENTO (1.414e-06) mediana 0.000000   max 0.052804
+  frazione di nodi con x > 1 (oltre il gauge)        mediana 0.502781
+
+========================================================================================================
+COERENZA DI COMPTON: `C1 / C4s` e' COSTANTE nel tempo?
+========================================================================================================
+  nodi con almeno 3 misure di C1: 14066    del rapporto: 12806
+  CV(C1) mediana          3.5075
+  CV(C1/C4s) mediana      4.6585
+  CV(rapporto)/CV(C1)     1.3281
+  ### L'IPOTESI NULLA, SCRITTA PRIMA (task history 12ab7f4): se C1 e C4s sono
+      indipendenti, CV(rapporto)^2 ~ CV(C1)^2 + CV(C4s)^2, quindi il rapporto
+      delle due CV e' >= 1. << 1 vorrebbe dire che la divisione CANCELLA
+      varianza, cioe' un candidato f0.
+
+========================================================================================================
+LA CAUSA DELL'ALTALENA: autocorrelazione a ritardo 1, e `psi_spin`
+========================================================================================================
+  autocorr lag-1 degli incrementi di fase (C3 comp 0), per nodo:
+      nodi 14041   mediana -0.0068   p5 -0.0873   p95 0.1630   frazione NEGATIVA 0.8920
+      ### UN'AUTOCORRELAZIONE NEGATIVA A RITARDO 1 E' LA FIRMA DI UN
+          PERIODO 2: il segno si alterna fra passi consecutivi.
+  `psi_spin` alterna fra passi consecutivi?
+      distanza mediana a 1 passo  7.4950e-03
+      distanza mediana a 2 passi  1.3199e-02
+      rapporto 2 passi / 1 passo  1.7610
+      ### UN RAPPORTO << 1 VORREBBE DIRE CHE psi_spin TORNA INDIETRO: lo
+          stato a t somiglia a quello a t-2 piu' che a quello a t-1.
+
+========================================================================================================
+LA RELAZIONE DI MASSA: pendenza log-log
+========================================================================================================
+  C1_vs_psi2         mediana -0.1258   p5 -0.1705   p95 -0.0644   (su 148 passi)
+  C1_vs_rho_spin     mediana -0.3787   p5 -1.3350   p95 -0.2740   (su 148 passi)
+  C2_vs_psi2         mediana 0.1786   p5 -0.1683   p95 0.5812   (su 148 passi)
+  C2_vs_rho_spin     mediana -0.3134   p5 -0.4712   p95 -0.0140   (su 148 passi)
+
+  dispersione di C1 fra VICINI (il rischio `Z37`): 7.1307e-02
+      ### SE FOSSE ~0, `V1` darebbe ~1 per tutti e IL SEGNALE SPARIREBBE --
+          che e' esattamente il 98% di `Z37`.
+
+========================================================================================================
+I CONTROLLI CHE POSSONO FALLIRE
+========================================================================================================
+  FEDELTA'  il mio C0 contro il `r` di ritmo(), AL BIT
+      confronti 148   con DIFFERENZE 0   nodi confrontati 1937298   max scarto 0.000e+00
+      passi SALTATI perche' un ramo di sicurezza e' scattato: 2
+  CONTEGGIO  passi misurati 148   (zero NON e' un'identita')
+  POSITIVO / BASE / FASE GLOBALE: nel --collaudo, su dati sintetici
+
+  ### I CONTROLLI PASSANO: il mio C0 coincide AL BIT col `r` del simulatore
+      su 1937298 nodi, in 148 passi.
+========================================================================================================
+
+### LE SEI VIE NON SI SCELGONO QUI: il referto le riporta tutte, e la forma
+    la decide Luca. Questo strumento MISURA.
+========================================================================================================
+scritto: C:\Users\lpeano\soliton_simulator\csv\_test_fork\_z43_tempo_proprio\_z43_tempo_proprio_braccioA.json

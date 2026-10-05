@@ -5138,3 +5138,108 @@ numeri di riga di un blob diverso -- commesso dal mio strumento su se stesso.**
 con una frazione di saturi del `0.40`-`0.55` ### **diventa un candidato per `A11` e
 `CLIP-INVENTARIO`.** ### **Non lo tocco** *(non e' in questo mandato)*, ma il numero
 ora c'e'.
+
+## 2026-10-05 — **`Z43` passo (1), IL REFERTO: l'altalena NON e' nella rotazione,
+## e `BRACCIO A` HA SMENTITO LA MIA PREVISIONE**
+
+Referto: `doc/REFERTO_z43_tempo_proprio_2026-10-05.md`. Strumento `c5ab986a`, blob
+`e2940b3c`, **150** passi, seme `11`, **due** corse *(principale e
+`BRACCIO A`)*, `81` booleani di configurazione con ### **`ZERO` differenze dal driver**.
+
+### ✅ **`FEDELTA'`: il mio `C0` coincide AL BIT col `r` di `ritmo()`**
+
+`0` differenze su `148` passi e
+### **`1 925 384` nodi**, max scarto `0.000e+00`. I `2` passi saltati sono i **rami di
+sicurezza**, riconosciuti ### **dai contatori e non dal numero del passo.**
+### **Senza questo, ogni altro numero sarebbe un confronto con un modello MIO.**
+
+### ✅ **IL FATTO DEL GUARDIANO E' RIPRODOTTO, su un'ALTRA PIATTAFORMA**
+
+| passo | il mio rapporto alto/basso | il guardiano, su Linux |
+|--:|--:|--:|
+| `3` | `1.487e+04` | `~1.5e4` |
+| `20` | `2.195e+01` | `~18` |
+| `60` | `1.124e+01` | `~10` |
+| `100` | `3.011e+00` | `~3` |
+| `140` | `1.018e+00` | `~1` |
+
+### ⛔ **IL RISULTATO CENTRALE: l'altalena vive nella BASE, non nella ROTAZIONE**
+
+| | rapporto dispari/pari |
+|---|--:|
+| `C0` *(il `r` di oggi)* | ### **`7.185`** |
+| `C1` *(spostamento del Bloch, **invariante**)* | ### **`1.081`** |
+| `C2` *(fase globale)* | `4.276` |
+| `C3` *(fase della componente 0 -- cio' che `ritmo()` USA)* | `9.245` |
+| `S1` / `V1` | `1.068` / `1.006` |
+| `C6` *(la via di `Z41`)* | ### **`35.67`, il PEGGIORE** |
+
+### **`C1` non alterna** *(`1.081`)*, **`C0` alterna `7.19` e la fase della componente 0 `9.24`.** ### **E' il difetto `(D3)` del mandato -- *<<dipende dalla BASE e contiene la
+fase globale>>* -- MISURATO invece che argomentato.** E due riscontri indipendenti
+dicono la stessa cosa: `psi_spin` ### **non torna indietro** *(distanza a 2 passi / a 1
+passo = `2.33`, quindi `> 1`)*, e l'autocorrelazione a ritardo 1 e' **negativa nel `89.5%` dei nodi**
+ma con mediana `-0.0068`: ### **sistematica nel SEGNO, debole per NODO, forte nella MEDIANA GLOBALE** --
+coerente col fatto che il gauge ### **E' una mediana globale** *(`(D2)`)*.
+
+### ⛔ **`BRACCIO A`: LA MIA PREVISIONE ERA SBAGLIATA, e lo dico per primo**
+
+Avevo scritto nel task history, **prima di girare**: *<<mi aspetto che il rapporto CALI
+MA NON CROLLI>>*, e *<<se mi sbaglio, lo scrivo>>*.
+
+| | PRINCIPALE | `BRACCIO A` |
+|---|--:|--:|
+| rapporto dispari/pari di `abs(f)` | `5.283` | ### **`1.034`** |
+| `C0` | `7.185` | ### **`1.031`** |
+| al passo 20 | `2.195e+01` | ### **`2.814e+00`** |
+
+### **E' CROLLATO. L'ipotesi dell'anello e' CONFERMATA come causa dominante.**
+
+> ### **PERCHE' IL MIO RAGIONAMENTO ERA SBAGLIATO, e vale piu' del numero:** avevo
+> scritto che *<<il gauge sfasato basta da solo a produrre periodo 2>>*. ### **Nel
+> braccio il gauge sfasato e' IDENTICO -- non l'ho toccato -- e l'altalena non c'e'.**
+> ### **L'errore:** una retroazione che **normalizza** e' **contrattiva**: da sola
+> ### **CONVERGE**, non oscilla. Perche' oscilli serve ### **un'AMPLIFICAZIONE**, e
+> l'amplificazione e' la potenza `r^2` dell'orologio. ### **Avevo confuso <<ritardo>>
+> con <<instabilita'>>: un ritardo di uno e' NECESSARIO per un periodo 2, non
+> SUFFICIENTE.**
+
+### ✅ **E UN CONTROLLO POSITIVO E' VENUTO GRATIS:** al passo 3 il rapporto e'
+### **identico nei due rami** *(`1.4872e+04`)*, e **deve** esserlo
+perche' ai passi 1-2 `r = 1` per tutti. ### **Se il passo 3 fosse differito, la patch
+del braccio avrebbe toccato qualcosa che non doveva.** E `FEDELTA'` passa anche nel
+braccio *(`0` differenze su `1 937 298` nodi)*.
+
+### ⛔ **LA CORREZIONE DEL GUARDIANO, arrivata a corsa finita, e la registro come
+### SUA**
+
+> Il mandato chiamava `C1` *<<l'angolo di rotazione>>*. ### **E' sbagliato, e l'ha
+> scoperto il MIO COLLAUDO** *(`d190dd5`)*: `C1` misura lo ### **spostamento del
+> VETTORE DI BLOCH**, e una rotazione **attorno al Bloch stesso** e' ### **pura FASE e
+> lascia `C1` a ZERO.**
+> ### ⛔ **E l'orologio di Compton E' una fase** *(`_phc = exp(-0.5j*s_k*omega_clk*dt)`,
+> `:5971`)*: ### **vive in `C2`, NON in `C1`.**
+
+**LA CONSEGUENZA SUL MIO RISULTATO, e non la ammorbidisco:** il test di coerenza ha dato
+`CV(C1/C4s)/CV(C1) = ` **`1.3104`**, cioe' `>= 1`,
+l'**ipotesi nulla** che avevo scritto prima. ### ⚠ **MA NON SMENTISCE L'IPOTESI DI
+COMPTON: la smentisce PER `C1`, che e' il posto SBAGLIATO dove cercarla.**
+### **Nel referto e' ANNOTATO cosi', e la misura con `C2` e' il commit successivo.**
+### **Il referto non si butta.**
+
+### **GLI ALTRI NUMERI, in breve**
+
+| | |
+|---|---|
+| `cs` da `|psi|^2` contro `rho_spin` | dispersione `p95/p5` ### **`1.871` contro `1.242`**: la densita' spinoriale da' un `cs` molto piu' uniforme |
+| i due esponenti `C5` | `0.6457` *(esp. `2`, `STEP2`)* e `0.8964` *(esp. `0.5`)*. ### **NON scelgo: e' una DECISIONE DI LUCA** |
+| pendenza log-log di `C1` | `-0.1421` contro `|psi|^2`, `-0.4988` contro `rho_spin`. ### **Negative: la via `(c)` NON e' sostenuta** |
+| `V1` e il rischio `Z37` | mediana `1.0273` **ma `p95/p5 = `** ### **`14.01`**: ### **NON e' il caso `Z37`** |
+| le due leggi pratiche | in **mediana** non mordono, ### **ma in qualche passo il `38.4%` dei nodi e' AL TETTO** |
+| il censimento | `13` consumatori **veri** contro `12` scartati: ### **per nome ne avrei contati `25`** |
+
+### ⛔ **LE SEI VIE SONO RIPORTATE TUTTE, E NESSUNA E' SCELTA.** La forma di `r` e'
+### **una decisione di Luca** *(`Z43` e' `da-decidere` dal 2026-09-18 per questo)*.
+
+### ⚠ **E UN DIFETTO MIO, in coda:** la copia di `cs` del mio gancio ### **non si
+estende con la mitosi**, quindi `C4`/`C4s` allo stesso istante escono su `66` passi su `148`. ### **Stessa classe di
+`_cs_nodo_prev` e `_psi_spin_prec`** -- l'ho fatta io, in piccolo, e la dichiaro.

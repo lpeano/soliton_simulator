@@ -1,0 +1,172 @@
+========================================================================================================
+Z43 passo (1): LA DEFINIZIONE DEL TEMPO PROPRIO `r`, MISURATA A LATO
+========================================================================================================
+
+### E' UNA MISURA, NON UNA CURA: nessun PASSA/FALLISCE fuori dai controlli,
+    e NESSUNA LEGGE NUOVA. La forma la decide Luca dopo il referto.
+
+  python     3.13.2
+  numpy      2.3.0
+  sistema    Windows 11
+  macchina   AMD64
+  simulatore e2940b3c  (sha1 dei byte grezzi, NON toccato)
+  copia patchata: _sim_z43.py  blob 7dd1e336  (4 ancore)
+
+====================================================================================================
+LA CONFIGURAZIONE INTERA (`P5`) -- non i flag toccati, TUTTI
+====================================================================================================
+  booleani di modulo confrontati con l'argv del DRIVER: 81
+  -> IN CONFIGURAZIONE DEL DRIVER: nessuna differenza. ZERO su 81.
+
+--------------------------------------------------------------------------------------------------------
+IL CENSIMENTO DALL'AST: i consumatori del RITMO, per PROVENIENZA
+--------------------------------------------------------------------------------------------------------
+  consumatori VERI: 13     scartati perche' NON sono il ritmo: 12
+      dt_e@_peq_esatto               nome di tempo    righe [6851]
+      dt_e@_traccia_peq              nome di tempo    righe [6890]
+      dt_e@step                      nome di tempo    righe [7426, 7429, 7467, 7788, 7792, 7919]
+      dt_n@_bloch_ritardato          nome di tempo    righe [7176, 7178, 7179]
+      dt_n@_passo_spinoriale         nome di tempo    righe [5434, 5434, 5434, 5800, 5800, 5800]
+      dt_n@step                      nome di tempo    righe [7426, 7428, 7478, 7484, 7489, 7492]
+      dte@_fattore_tempo_arco        nome di tempo    righe [7254, 7255, 7255]
+      dte@_peq_esatto                nome di tempo    righe [6851, 6852, 6855, 6863]
+      dte@_traccia_peq               nome di tempo    righe [6890, 6892, 6898, 6899, 6900, 6916]
+      dtn@_passo_spinoriale          nome di tempo    righe [5800, 5801, 5801, 5801, 5907, 5907]
+      r@_r_nodo_mitosi               _r_corrente      righe [7238, 7239, 7239, 7241, 7241, 7244]
+      r@step                         ritmo()          righe [7422, 7424, 7425, 7428, 7429, 7429]
+      r_node@_passo_spinoriale       nome di tempo    righe [5907, 5929, 5934]
+  ### E GLI SCARTATI SONO LA RAGIONE PER CUI NON SI CENSISCE PER NOME:
+      r@_accresci                    NON ASSEGNATO qui
+      r@_celle_vive                  NON ASSEGNATO qui
+      r@_diag_completa               ALTRO (non il ritmo)
+      r@_git                         ALTRO (non il ritmo)
+      r@_gusci_esterni               ALTRO (non il ritmo)
+      r@_massa                       NON ASSEGNATO qui
+      r@_semina_lam                  NON ASSEGNATO qui
+      r@_semina_masse_coerenti       ALTRO (non il ritmo)
+      r@batch_condensazione          NON ASSEGNATO qui
+      r@chiralita_core_locale        ALTRO (non il ritmo)
+      r@ritmo                        ALTRO (non il ritmo)
+      r@semina                       ALTRO (non il ritmo)
+
+  CAMPO_SPINORIALE           True
+  CS_DINAMICO                True
+  CS_M                       2.0
+  DEPARAM_OROLOGIO           True
+  DT                         0.01
+  FORK_SU2_MEM               True
+  GAMMA                      0.05
+  GAMMA_TURBO                1.0
+  OROLOGIO_SEGNO             False
+  PHI_CRIT                   6.283185307179586
+  RITMO_WRAP_2PI             True
+  SPINORE_CORRETTO           True
+  STEP2_OROLOGIO             True
+  TAU_LOC                    1.0
+  TEMPO_PROPRIO_ORIENTATO    False
+  TEMPO_SEGNO                False
+  scena: nmasse=3 sep=6.1158  ->  n = 12802, archi = 471564
+
+========================================================================================================
+IL RUN: 150 passi, col BATTITO per passo
+========================================================================================================
+  passi girati: 150   n finale = 14000, archi = 473022
+  passi registrati: 150   di cui MISURATI: 148
+
+========================================================================================================
+L'ALTALENA: la mediana di |f| per passo
+========================================================================================================
+  mediana sui passi DISPARI  3.0010e-02
+  mediana sui passi PARI     5.6808e-03
+  rapporto dispari/pari      5.28
+
+  IL RAPPORTO CONSECUTIVO, e l'ANDAMENTO e' cio' che conta (non la 3a cifra):
+      passo 3     med|f|(k)/med|f|(k+1) = 1.487e+04
+      passo 4     med|f|(k)/med|f|(k+1) = 7.718e-01
+      passo 20    med|f|(k)/med|f|(k+1) = 4.556e-02
+      passo 40    med|f|(k)/med|f|(k+1) = 5.799e-02
+      passo 60    med|f|(k)/med|f|(k+1) = 8.896e-02
+      passo 80    med|f|(k)/med|f|(k+1) = 1.477e-01
+      passo 100   med|f|(k)/med|f|(k+1) = 3.322e-01
+      passo 120   med|f|(k)/med|f|(k+1) = 7.381e-01
+      passo 140   med|f|(k)/med|f|(k+1) = 9.825e-01
+
+========================================================================================================
+LE GRANDEZZE, mediana sui passi -- e il rapporto PARI/DISPARI
+========================================================================================================
+             sui passi      dispari        pari           disp/pari  materia      vuoto       
+  C0         1.008e+00      1.400e+00      1.949e-01      7.19       1.35e+00     1.01e+00    
+  C1         1.412e-01      1.498e-01      1.386e-01      1.08       9.64e-02     1.44e-01    
+  C2_abs     2.304e-02      2.996e-02      7.007e-03      4.28       5.89e-02     2.25e-02    
+  S1         4.150e-01      4.276e-01      4.002e-01      1.07       5.08e-01     4.10e-01    
+  V1         1.027e+00      1.030e+00      1.024e+00      1.01       8.65e-01     1.04e+00    
+  C6         3.755e-02      1.567e-01      4.394e-03      35.67      8.18e-02     3.75e-02    
+  C3_comp0   -1.309e-02     -2.652e-02     -2.869e-03     9.24       -5.88e-02    -1.28e-02   
+  C3_comp1   -3.192e-02     -4.344e-02     -7.505e-03     5.79       -9.04e-02    -2.93e-02   
+
+  C0     nodi NEL LORO PRIMO PASSO: mediana 1.060e+00
+  C1     nodi NEL LORO PRIMO PASSO: mediana 2.533e-01
+  V1     nodi NEL LORO PRIMO PASSO: mediana 1.090e+00
+
+========================================================================================================
+LE DUE LEGGI PRATICHE: quanto MORDONO
+========================================================================================================
+  frazione di nodi col `r` AL TETTO (1.414212977)   mediana 0.000078   max 0.383768
+  frazione di nodi col `r` AL PAVIMENTO (1.414e-06) mediana 0.000000   max 0.052804
+  frazione di nodi con x > 1 (oltre il gauge)        mediana 0.504553
+
+========================================================================================================
+COERENZA DI COMPTON: `C1 / C4s` e' COSTANTE nel tempo?
+========================================================================================================
+  nodi con almeno 3 misure di C1: 13912    del rapporto: 12813
+  CV(C1) mediana          3.5824
+  CV(C1/C4s) mediana      4.6944
+  CV(rapporto)/CV(C1)     1.3104
+  ### L'IPOTESI NULLA, SCRITTA PRIMA (task history 12ab7f4): se C1 e C4s sono
+      indipendenti, CV(rapporto)^2 ~ CV(C1)^2 + CV(C4s)^2, quindi il rapporto
+      delle due CV e' >= 1. << 1 vorrebbe dire che la divisione CANCELLA
+      varianza, cioe' un candidato f0.
+
+========================================================================================================
+LA CAUSA DELL'ALTALENA: autocorrelazione a ritardo 1, e `psi_spin`
+========================================================================================================
+  autocorr lag-1 degli incrementi di fase (C3 comp 0), per nodo:
+      nodi 13884   mediana -0.0068   p5 -0.0354   p95 0.1531   frazione NEGATIVA 0.8948
+      ### UN'AUTOCORRELAZIONE NEGATIVA A RITARDO 1 E' LA FIRMA DI UN
+          PERIODO 2: il segno si alterna fra passi consecutivi.
+  `psi_spin` alterna fra passi consecutivi?
+      distanza mediana a 1 passo  5.8988e-03
+      distanza mediana a 2 passi  1.3767e-02
+      rapporto 2 passi / 1 passo  2.3339
+      ### UN RAPPORTO << 1 VORREBBE DIRE CHE psi_spin TORNA INDIETRO: lo
+          stato a t somiglia a quello a t-2 piu' che a quello a t-1.
+
+========================================================================================================
+LA RELAZIONE DI MASSA: pendenza log-log
+========================================================================================================
+  C1_vs_psi2         mediana -0.1421   p5 -0.1717   p95 -0.1112   (su 148 passi)
+  C1_vs_rho_spin     mediana -0.4988   p5 -1.3152   p95 -0.2312   (su 148 passi)
+  C2_vs_psi2         mediana 0.1732   p5 -0.1664   p95 0.5467   (su 148 passi)
+  C2_vs_rho_spin     mediana -0.2240   p5 -0.6666   p95 0.3749   (su 148 passi)
+
+  dispersione di C1 fra VICINI (il rischio `Z37`): 7.0263e-02
+      ### SE FOSSE ~0, `V1` darebbe ~1 per tutti e IL SEGNALE SPARIREBBE --
+          che e' esattamente il 98% di `Z37`.
+
+========================================================================================================
+I CONTROLLI CHE POSSONO FALLIRE
+========================================================================================================
+  FEDELTA'  il mio C0 contro il `r` di ritmo(), AL BIT
+      confronti 148   con DIFFERENZE 0   nodi confrontati 1925384   max scarto 0.000e+00
+      passi SALTATI perche' un ramo di sicurezza e' scattato: 2
+  CONTEGGIO  passi misurati 148   (zero NON e' un'identita')
+  POSITIVO / BASE / FASE GLOBALE: nel --collaudo, su dati sintetici
+
+  ### I CONTROLLI PASSANO: il mio C0 coincide AL BIT col `r` del simulatore
+      su 1925384 nodi, in 148 passi.
+========================================================================================================
+
+### LE SEI VIE NON SI SCELGONO QUI: il referto le riporta tutte, e la forma
+    la decide Luca. Questo strumento MISURA.
+========================================================================================================
+scritto: C:\Users\lpeano\soliton_simulator\csv\_test_fork\_z43_tempo_proprio\_z43_tempo_proprio.json
