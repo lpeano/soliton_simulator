@@ -5243,3 +5243,83 @@ COMPTON: la smentisce PER `C1`, che e' il posto SBAGLIATO dove cercarla.**
 ### ⚠ **E UN DIFETTO MIO, in coda:** la copia di `cs` del mio gancio ### **non si
 estende con la mitosi**, quindi `C4`/`C4s` allo stesso istante escono su `66` passi su `148`. ### **Stessa classe di
 `_cs_nodo_prev` e `_psi_spin_prec`** -- l'ho fatta io, in piccolo, e la dichiaro.
+
+## 2026-10-05 — **`Z43` / COMPTON SU `C2`: il guardiano aveva ragione, e cambiare
+## la grandezza RIBALTA il risultato**
+
+Referto: `doc/REFERTO_z43_compton_C2_2026-10-05.md`. Strumento `7b71aa48`,
+committato **prima di girare** in `6bc1cd9`. ### **Il referto del passo (1) NON e'
+stato buttato: e' ANNOTATO** *(`66a798d`)*.
+
+### ✅ **L'IPOTESI NULLA E' RIFIUTATA SU `C2`, ed era ACCETTATA su `C1`**
+
+| | `C1` *(il posto SBAGLIATO)* | `C2` *(il posto GIUSTO)* |
+|---|--:|--:|
+| `CV(rapporto)/CV(grandezza)` | `1.3104` | ### **`0.6813`** |
+| l'ipotesi nulla *(`>= 1`)* | **ACCETTATA** | ### **RIFIUTATA** |
+
+### **Dividere `C2` per `cs` CANCELLA varianza** *(una riduzione del `31.9%`)*, mentre dividere `C1` la **aggiungeva**. ### **La fase e `cs` raccontano, in
+parte, la stessa storia; lo spostamento del Bloch no.**
+
+### ⚠ **MA NON SCRIVO <<ECCO LA `f0`>>, e il perche' e' nel numero stesso:** la
+tabella che avevo fissato **prima** aveva tre casi, e `0.6813` ### **non e' `<< 1`.** Una `f0` vera darebbe
+una `CV` quasi nulla; qui la `CV` del rapporto resta `7.99`, ### **enorme in assoluto.**
+### **L'indipendenza e' ESCLUSA, la proporzionalita' NON e' dimostrata.**
+### ✅ **E l'avvertenza sulla saturazione, scritta prima, e' esclusa dai numeri:** le
+frazioni al tetto sono `~0` e la `CV` del rapporto non e' vicina a zero.
+
+### ⛔ **LE DUE DENSITA' DANNO LO STESSO RISULTATO, ed e' un dato per `(d)` e `(d')`**
+
+`cs` da `|psi|^2` da' `0.6809`, `cs` da
+`rho_spin` da' `0.6813`: differiscono di `4.6e-04`.
+### **QUALE densita' si usi per `cs` NON cambia la coerenza con la fase.**
+### 📌 **E si incrocia con un numero del passo (1):** li' le due densita' davano `cs`
+con **dispersioni molto diverse** *(`1.871` contro `1.242`)*. ### **Quindi `rho_spin`
+da' un `cs` piu' UNIFORME ma non piu' LEGATO alla fase: per la via `(d')` sono DUE
+FATTI SEPARATI, e vanno pesati separatamente.**
+
+### ✅ **E QUANTO `C2` SEGUE LA LEGGE CHE L'OROLOGIO GIA' SCRIVE**
+
+`attesa = -0.5*_sk*omega_clk*_dts/DT = -0.5*coerenza*(cs/CS_M)^2*r^2`,
+### **LETTA dalle variabili della legge a `:5971` e NON ricalcolata** *(ricalcolarla
+sarebbe una seconda scrittura, `9-ter`)*.
+
+| | correlazione | pendenza |
+|---|--:|--:|
+| per nodo | `0.5249` | `0.3489` |
+| ### **in MEDIA LOCALE** *(la riga pertinente)* | ### **`0.8668`** | ### **`0.6526`** |
+
+### **La media locale e' l'unico confronto sensato, e l'avevo dichiarato prima di
+misurare:** `psi_spin` e' ### **il campo EMESSO** *(somma sui vicini, `:6240`)*, quindi
+### **la fase che un nodo mostra non e' la sua.**
+### ✅ **Correlazione `0.867`: l'orologio spiega la maggior parte della fase.**
+### ⚠ **Pendenza `0.653`, NON `1`: contribuisce, e non e' tutto.** L'altro contributo sta nella **rotazione
+`SU(2)`** *(`omega_tot`)*, che questa misura ### **non separa.**
+### ✅ **E DUE VIE INDIPENDENTI DANNO LO STESSO FATTORE:** le mediane dicono che `C2`
+e' il `45.0%` dell'attesa, coerente con la pendenza. ### **Non e' un
+artefatto della regressione.**
+
+### ✅ **E L'AGGIUNTA E' INERTE SU CIO' CHE NON TOCCA, verificato**
+
+`FEDELTA'` da' `0` differenze su
+### **`1 925 384` nodi**, lo stesso numero del
+referto `66a798d`, e i rapporti dispari/pari di `C0`, `C1` e `C2` sono ### **identici.**
+### **Non e' una formalita': se l'aggiunta avesse mosso un bit, <<cambiare la grandezza
+ribalta il risultato>> sarebbe stato indistinguibile da <<cambiare lo strumento ribalta
+il risultato>>.**
+
+### ⛔ **E I TRE PEZZI COMBACIANO**
+
+> l'altalena **non** e' nella rotazione del Bloch *(`1.08`)*, e' nella **fase** *(`4.28`)*; togliere **una potenza** di `r`
+> dall'orologio la fa **sparire** *(`BRACCIO A`)*; e la fase ### **segue l'orologio in
+> media locale** *(`0.867`)*.
+> ### **L'orologio scrive la fase, la fase e' cio' che alterna, e `ritmo()` legge la
+> ### fase.**
+> ### ⚠ **MA <<combaciano>> NON e' <<quindi la cura e' X>>:** la forma di `r` resta
+> ### **una DECISIONE DI LUCA**, e le sei vie restano riportate ### **senza che io ne
+> ### scelga una.**
+
+### ⚠ **E UN DIFETTO MIO CHE SI RIPETE, e lo dico cosi':** gli array che il mio
+gancio conserva *(la copia di `cs`, e ora l'attesa della fase)* ### **non si estendono
+con la mitosi**, quindi il confronto esce su `66` passi su `148`. ### **E' la stessa classe di `_cs_nodo_prev` e
+`_psi_spin_prec` -- l'ho fatta DUE VOLTE, e ora e' un difetto che si ripete.** In coda.
