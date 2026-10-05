@@ -5550,3 +5550,67 @@ sfasato.** La `PARTE A` ha tolto **una** delle due potenze di `r`; la seconda vi
 ### **ogni** coppia dal passo `3`, escluse solo quelle in cui la cache di `cs` non e'
 allineata — ### **contate e dichiarate.** Registrato nel task history della `PARTE B`,
 perche' e' dove il criterio nasce.
+
+---
+
+## 2026-10-05 — `Z43` **PARTE B**: la cura e' dentro, e **la prima corsa del sigillo e' caduta per colpa mia**
+
+**LA CURA E' COMMITTATA** *(`0f11d42`)*: `r = cs_nodo / CS_M`, l'orologio a luce. Il
+simulatore va da `ca3cdd8a` a **`f7237563`**, e `ca3cdd8a` e' la `PARTE A` *(`062172d3`)*
+**piu' un solo commento** — il commento di `__init__` e' andato in un commit suo e **PRIMA**
+*(`19f9d68`)*, perche' `H-REG-R` lo pretendeva e le altre due uscite erano **aprire una
+scheda per `__init__`** *(decisione di struttura fuori dal mio mandato)* o **dichiarare
+`[SENZA-FISICA]` su un commit che cambia la legge del tempo** *(falso)*.
+
+### LA CORSA HA GIRATO TUTTI E `150` I PASSI, E POI E' CADUTO IL MIO CRITERIO `5`
+
+`IndexError: index 943190 is out of bounds for axis 0 with size 943188`, dentro
+`_cs_nodo -> _mat(w)`. **Il criterio `5` catturava `I` e `w` dal sito della legge e poi
+chiamava `net._cs_nodo(I, w)` A CORSA FINITA** — ma `_mat` tiene una **permutazione in
+cache** legata al numero di archi di **adesso**, e fra la cattura e la chiamata la rete e'
+**cresciuta** *(`2*471594` contro `2*471596`: **due archi**)*.
+### **Chiamare la legge invece di riscriverla era giusto; chiamarla FUORI DAL PASSO no.**
+### ⚠ **E il collaudo non poteva prenderlo:** le mie `25` prove girano su una `FintaRete`
+il cui `_cs_nodo` **non ha nessuna cache**. ### **Un collaudo su un finto non prova
+l'interfaccia col vero.**
+
+### ⛔ **E UN SECONDO DIFETTO MIO, PEGGIORE: HO PERSO `150` PASSI DI DATI BUONI**
+
+Scrivevo il `sigillo.json` **DOPO** il rapporto. Quindi una caduta nella post-elaborazione
+**distrugge una corsa intera**: i dati c'erano tutti — i confronti, la fedelta' a ogni passo
+— ### **e li ho persi per l'ordine di due righe.** **Si scrive PRIMA, sempre**, ed e' la
+correzione piu' importante delle due.
+
+### CHE COSA LA CORSA HA FATTO VEDERE PRIMA DI CADERE, e un battito **non e' un verdetto**
+
+* **braccio `0`: COINCIDE.** `ca3cdd8a` + patch `b343e354` = `f7237563`, **al byte**;
+* **criterio `1` (fedelta' AL BIT): `0` nodi diversi a OGNI passo**, fino al `150`;
+* **criterio `6`: lo stato diverge** dalla `PARTE A` *(da `61` a `163` differenze)*;
+* **`r` mediano `~0.805`-`0.825`**, contro l'atteso **`~0.8035`** scritto **prima** della
+  corsa *(dalla misura `C5` di `66a798d`)*.
+
+### ⚠ **I criteri `2`, `3`, `4`, `5`, `6` e `7` NON HANNO UN VERDETTO:** il rapporto non e'
+mai stato stampato, e ### **non spaccio i battiti per un esito.**
+
+### ✔ **E UNA TERZA COSA, CHE NON E' UN DIFETTO DELLA CURA — ed e' il veleno che funziona**
+
+`r_med = nan` su **13** passi: `99, 111, 116, 120, 126, 127, 136, 139, 140, 143, 147, 148,
+150`. ### **LA CORRELAZIONE E' ESATTA: sono ESATTAMENTE i 13 passi in cui `n` CRESCE.**
+**Verificato dal codice e non supposto:** `_r_corrente` sta nel `REGISTRO_DERIVATE` con
+classe **`avvelena`** e motivo *<<la legge la trova GIA RISCRITTA (step)>>* *(`:1312`)*. Ai
+nodi **nati** il veleno mette `NaN` **di proposito**, perche' una lettura **stale** sia
+**rumorosa** invece che silenziosa.
+### **Quindi il `NaN` e' il MIO strumento che legge un registro avvelenato. Non e' la cura.**
+### ✔ **ED E' UNA PROVA CHE IL VELENO FUNZIONA:** ha reso visibile la mia lettura sporca
+**al primo giro**. Senza, avrei pubblicato una mediana calcolata su valori stantii
+### **e non l'avrei saputo.**
+### ⛔ **E LA CORREZIONE NON E' MASCHERARE I `NaN`:** e' calcolare la mediana sulle celle
+**non avvelenate**, **contare** quelle avvelenate e **attribuirle alla nascita**.
+### **Mascherare in silenzio sarebbe esattamente il difetto che il veleno esiste per
+impedire.**
+
+> ### 📌 **TRE DIFETTI DEI MIEI STRUMENTI IN DUE GIORNI, E TUTTI E TRE TROVATI DALLA
+> ### CORSA, NON DA ME:** il `FALSO-UNO` di `_calcpsi_origini` nella `PARTE A`, `inf - inf`
+> nel sigillo di `MEM_FASE`, e questi due. ### **La regolarita' e' che il collaudo prova la
+> mia logica e la CORSA prova la mia interfaccia col simulatore vero** — e le due cose non
+> si coprono a vicenda.
