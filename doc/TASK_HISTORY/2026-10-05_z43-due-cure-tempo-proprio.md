@@ -109,3 +109,31 @@ nominava** — le `C5` misurate erano `p = 2` *(`STEP2`)* e `p = 0.5` *(coordina
 ### **`p = 1` e' una DECISIONE, col suo motivo scritto: <<orologio a luce, un tic e' il
 tempo di attraversamento, la stessa legge del tempo-luce `d/cs`>>.** ### **Non l'ho
 proposta io e non la reinterpreto.**
+
+## ⛔ CORREZIONE DEL GUARDIANO AL CRITERIO DELL'ALTALENA *(2026-10-05)*
+
+> ### **IL CRITERIO <<NIENTE ALTALENA>> DELLA `PARTE B` SI LEGGE PER COPPIA DI PASSI,
+> ### NON IN AGGREGATO.**
+
+**COME VA LETTO**, parola del guardiano:
+
+1. ### **rapporto `<= 1.2` su OGNI coppia dal passo `3` in poi**;
+2. ### **escluse SOLO le coppie in cui la cache di `cs` non e' allineata** — e quelle
+   ### **si CONTANO e si DICHIARANO**;
+3. il rapporto **aggregato** ### **si riporta, ma NON basta da solo.**
+
+**IL PERCHE', misurato sulla `PARTE A`:** il criterio aggregato ### **passava**
+*(`1.0100` contro `1.2`)*, ma per
+coppia il rapporto restava ### **sopra `1.2` fino al passo `42`** — `67.05` alla coppia `10`, `3.215` alla `20`, `1.554` alla `30`.
+### ⛔ **La `PARTE A` SMORZA l'altalena** *(da ~`130` passi a ~`42`)*, ### **non la elimina.**
+
+### ✅ **E LA `PARTE B` E' QUELLA CHE DEVE ELIMINARLA:** `r = cs_nodo_prev / CS_M`
+### **non legge piu' la fase**, quindi l'anello `f -> r -> f` ### **sparisce per
+costruzione.** ### **Il criterio per coppia e' il modo di verificarlo davvero.**
+
+### ⚠ **E L'ESCLUSIONE DELLE COPPIE NON ALLINEATE NON E' UNA SCAPPATOIA, se si conta:**
+il mandato della `PARTE B` dice gia' che ### **se la cache non esiste o non e' allineata,
+`r = 1`, CONTATO e dichiarato.** ### **Quindi le coppie escluse sono esattamente quelle
+in cui `r` vale `1` per sicurezza e non per legge** — e un rapporto fra due `1`
+### **non dice niente sull'altalena.** ### **Ma il loro NUMERO si', e per questo si
+conta.**

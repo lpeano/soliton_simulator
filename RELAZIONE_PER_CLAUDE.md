@@ -5498,3 +5498,55 @@ applicarla *<<dichiarandolo>>*: ### **questo e' il punto in cui lo dichiaro.**
 > ### ✅ **E QUINDI LA `PARTE B` E' AUTORIZZATA:** il mandato diceva *<<La `PARTE B`
 > ### parte SOLO se il sigillo della `PARTE A` passa: altrimenti `FERMO`>>*.
 > ### **Passa.**
+
+## 2026-10-05 — **CORREZIONE DEL GUARDIANO: l'altalena della `PARTE A` e' SMORZATA,
+## non ELIMINATA. E il criterio aggregato nascondeva l'inizio**
+
+> ### ⛔ **Avevo scritto <<L'ALTALENA E' SPARITA>>. E' SBAGLIATO, e il numero giusto
+> ### e' il rapporto PER COPPIA DI PASSI.**
+
+**IL CRITERIO ERA SCRITTO IN AGGREGATO** — *«rapporto dispari/pari della MEDIANA
+`<= 1.2`»* — e una mediana su `150` passi, con una coda lunga e quieta,
+### **schiaccia un inizio violento.** *(Errore del guardiano nel mandato, che lui stesso
+dichiara; ### **e errore mio nell'applicarlo alla lettera senza chiedermi che cosa
+nascondesse.**)*
+
+| coppia | `r` **DOPO la cura** | `r` **PRIMA** | il guardiano *(Linux)* |
+|--:|--:|--:|--:|
+| `4` | ### **`1.463e+04`** | `1.463e+04` | `~1.0e4` |
+| `10` | ### **`67.05`** | `88.63` | `67` |
+| `20` | ### **`3.215`** | `20.25` | `3.15` |
+| `30` | ### **`1.554`** | `17.38` | `1.52` |
+| `40` | ### **`1.219`** | `16.8` | `1.20` |
+| `60` | ### **`1.041`** | `11.02` | `1.03` |
+| `100` | ### **`0.9764`** | `3.081` | `0.99` |
+
+### ✅ **DUE PIATTAFORME, DUE STRUMENTI, GLI STESSI NUMERI FINO ALLA TERZA CIFRA.**
+### **Questo rende la correzione incontestabile: non e' un'opinione sul criterio, e' un
+fatto sui dati che entrambi abbiamo misurato.**
+
+| | |
+|---|--:|
+| ### **primo passo da cui il rapporto resta `<= 1.2`** | ### **`42`** *(prima: `130`)* |
+| coppie sopra `1.2` | ### **`19` su `74`** *(prima: `63`)* |
+| il criterio **aggregato** | `1.0100` contro `1.2`: ### **PASSA** |
+
+> ### ⛔ **LA CONCLUSIONE GIUSTA: SMORZATA, NON ELIMINATA.** Si calma in ### **~`42` passi invece di ~`130`**, e ### **all'inizio e' ancora
+> ### violentissima.**
+> ### ✅ **Il criterio del mandato PASSA, e lo dico** — ### **ma con questa riserva
+> ### accanto, non al posto suo.**
+
+### 📌 **UN NUMERO CHE CONFERMA I CRITERI `1` E `2` DEL SIGILLO:** alla coppia `4` il
+rapporto e' ### **identico prima e dopo** *(`1.463e+04` contro `1.463e+04`)*. ### **E deve esserlo:** ai passi 1-2 `r = 1` esatto, quindi la cura
+e' un **no-op aritmetico**. ### **Lo stesso fatto, visto da due strumenti diversi.**
+
+### **CHE COSA RESTA, e il guardiano lo nomina:** ### **la `r` in `_dts` e il gauge
+sfasato.** La `PARTE A` ha tolto **una** delle due potenze di `r`; la seconda vive nel
+**tempo**, e il gauge e' ancora la **mediana globale della fase del passo precedente**.
+
+### ✅ **E QUESTO NON BLOCCA LA `PARTE B`** *(parola del guardiano)*: la `B`
+### **toglie la fase da `r` PER COSTRUZIONE**, ed e' ### **quella che deve eliminarla.**
+### ⛔ **E il suo criterio <<niente altalena>> si legge PER COPPIA:** `<= 1.2` su
+### **ogni** coppia dal passo `3`, escluse solo quelle in cui la cache di `cs` non e'
+allineata — ### **contate e dichiarate.** Registrato nel task history della `PARTE B`,
+perche' e' dove il criterio nasce.

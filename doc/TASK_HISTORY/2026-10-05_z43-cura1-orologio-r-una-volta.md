@@ -210,3 +210,50 @@ e' misurabile girando.**
 `PARTE B` e parte ### **solo se questo sigillo passa**; ### **l'unificazione delle
 densita'** *(la decisione (3) la rinvia esplicitamente)*; e ### **la cura di
 `CS-LAMBDA-GLOBALE`**, che si registra e ### **si cura dopo.**
+
+## ⛔ ANNOTAZIONE DEL 2026-10-05: **IL CRITERIO `4` NASCONDEVA L'INIZIO**
+## *(correzione del guardiano — un suo errore nel mandato, che lui stesso dichiara)*
+
+> ### **Il criterio come era scritto qui sopra — *«rapporto dispari/pari della MEDIANA
+> ### `<= 1.2`»* — e' calcolato sulle mediane di TUTTA la corsa, e
+> ### **NASCONDE L'INIZIO.**
+> ### ⚠ **NON LO RISCRIVO: lo ANNOTO** *(par.8)*. Il criterio resta come era, perche'
+> e' quello che era stato fissato prima; ### **e qui c'e' che cosa non vedeva.**
+
+**IL RAPPORTO PER COPPIA DI PASSI**, dai miei dati *(`r(dispari)/r(pari)` per la coppia
+`(2k-1, 2k)`, etichettata dal passo pari)*:
+
+| coppia | `r` **DOPO la cura** | `r` **PRIMA** |
+|--:|--:|--:|
+| `4` | ### **`1.463e+04`** | `1.463e+04` |
+| `10` | ### **`67.05`** | `88.63` |
+| `20` | ### **`3.215`** | `20.25` |
+| `30` | ### **`1.554`** | `17.38` |
+| `40` | ### **`1.219`** | `16.8` |
+| `60` | ### **`1.041`** | `11.02` |
+| `100` | ### **`0.9764`** | `3.081` |
+| `140` | ### **`0.9666`** | `1.027` |
+
+> ### ⛔ **LA CONCLUSIONE GIUSTA: L'ALTALENA E' SMORZATA, NON ELIMINATA.**
+> Si calma in ### **~`42` passi invece di ~`130`**, e
+> all'inizio e' ### **ancora violentissima.** Coppie sopra `1.2`: ### **`19` su `74`** *(prima: `63`)*.
+> ### ✅ **E IL CRITERIO AGGREGATO PASSA DAVVERO** *(`1.0100` contro `1.2`)*: ### **lo dico, e
+> ### accanto ci metto la riserva.**
+
+### 📌 **UN NUMERO CHE CONFERMA I CRITERI `1` E `2` DI QUESTO SIGILLO:** alla coppia
+`4` il rapporto e' ### **IDENTICO prima e dopo** *(`1.463e+04` contro `1.463e+04`)*. ### **E deve esserlo:** ai passi 1-2 `r = 1` esatto, quindi la cura
+e' un **no-op aritmetico** e al passo 3-4 non c'e' ancora divergenza accumulata.
+### **Lo stesso fatto, visto da due strumenti diversi.**
+
+### **CHE COSA RESTA:** ### **la `r` in `_dts` e il gauge sfasato.** La `PARTE A` ha
+tolto **una** delle due potenze di `r` dall'orologio; la seconda vive nel **tempo**, e il
+gauge e' ancora **la mediana globale della fase del passo precedente**.
+### ✅ **E LA `PARTE B` E' QUELLA CHE DEVE ELIMINARLA**, perche' ### **toglie la fase
+da `r` per costruzione.** ### **Questa annotazione NON blocca la `PARTE B`:** il
+guardiano lo dice esplicitamente.
+
+### ⚠ **E L'ERRORE MIO, in questa storia, va detto:** il criterio aggregato l'ho
+### **applicato alla lettera**, e ### **non mi sono chiesto che cosa nascondesse.** Una
+mediana su `150` passi con una coda lunga e quieta ### **schiaccia un inizio violento**,
+e questo lo sapevo — l'ho scritto io stesso sul gradino (b) della stella polare, a
+proposito del tetto. ### **Non l'ho applicato al criterio che stavo per usare.**

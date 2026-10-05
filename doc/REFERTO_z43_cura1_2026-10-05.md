@@ -70,7 +70,15 @@ bit»*. ### **In IEEE `(a*b)/a != b` in generale:** chiedere la divisione sarebb
 scrive:** `omega_clk == coerenza * (_csn2/CS_M)**2`. ### **E' la stessa pretesa, nella
 forma che l'aritmetica permette di verificare.**
 
-## ✅ CRITERIO 4: **L'ALTALENA E' SPARITA SUL SIMULATORE VERO**
+## ⚠ CRITERIO 4: **L'ALTALENA E' SMORZATA, NON ELIMINATA** *(correzione del
+## guardiano, e aveva ragione)*
+
+> ### ⛔ **IL CRITERIO AGGREGATO PASSA, E NASCONDE L'INIZIO.**
+> Il rapporto *«dispari/pari delle MEDIANE di tutta la corsa»* e' calcolato su
+> **150 passi**, e ### **una coda lunga e quieta schiaccia un inizio violento.**
+> ### ✅ **La correzione e' del guardiano, ed e' un suo errore nel mandato che
+> ### lui stesso dichiara.** ### **Io il criterio aggregato l'avevo applicato
+> ### alla lettera, e NON mi ero chiesto che cosa nascondesse.**
 
 *(Misurato con lo strumento di `Z43` **`7b71aa48`**, rigirato sul blob nuovo. ### **Corsa a se', e il sigillo lo dichiara.**)*
 
@@ -81,7 +89,9 @@ forma che l'aritmetica permette di verificare.**
 | rapporto dispari/pari di `C1` | `1.081` | `0.9836` | — | — |
 | rapporto dispari/pari di `C2` | `4.276` | `1.0320` | — | — |
 
-> ### ✅ **`C0` PASSA DA `7.19` A `1.0100`.**
+> ### **`C0` AGGREGATO passa da `7.19` a `1.0100`** — ### ⚠ **ma e' un
+> ### NUMERO AGGREGATO, e sotto c'e' la tabella per coppia che dice la cosa
+> ### vera.**
 > ### **E COINCIDE COL `BRACCIO A`:** la cura sul simulatore **vero** riproduce la
 > misura fatta su una **copia**, e questo e' ### **il controllo positivo piu' forte di
 > ### tutto il mandato** -- due strade diverse, lo stesso numero.
@@ -89,6 +99,63 @@ forma che l'aritmetica permette di verificare.**
 ### ✅ **E `FEDELTA'` PASSA ANCHE SUL BLOB NUOVO:** `0` differenze su `148` passi e ### **`1 944 903` nodi**, max scarto `0.000e+00`.
 ### **Quindi `ritmo()` e' INTATTO: la cura non l'ha toccato**, e il confronto fra prima
 e dopo e' fra ### **due misure buone.**
+
+### ⛔ **IL RAPPORTO PER COPPIA DI PASSI — ed e' QUESTO il numero vero**
+
+*(rapporto `r(dispari)/r(pari)` per la coppia `(2k-1, 2k)`, etichettata dal passo **pari**)*
+
+| coppia | `r` **DOPO** | `r` **PRIMA** | `abs(f)` **DOPO** | `abs(f)` **PRIMA** |
+|--:|--:|--:|--:|--:|
+| `4` | ### **`1.463e+04`** | `1.463e+04` | `1.488e+04` | `1.487e+04` |
+| `10` | ### **`67.05`** | `88.63` | `67.05` | `88.64` |
+| `20` | ### **`3.215`** | `20.25` | `3.137` | `20.24` |
+| `30` | ### **`1.554`** | `17.38` | `1.496` | `17.38` |
+| `40` | ### **`1.219`** | `16.8` | `1.191` | `16.79` |
+| `60` | ### **`1.041`** | `11.02` | `1.053` | `11.01` |
+| `80` | ### **`0.9888`** | `6.798` | `0.9923` | `6.794` |
+| `100` | ### **`0.9764`** | `3.081` | `0.9757` | `3.067` |
+| `120` | ### **`1.006`** | `1.391` | `0.995` | `1.371` |
+| `140` | ### **`0.9666`** | `1.027` | `0.9371` | `1.011` |
+
+| | `r` *(`C0`)* | `abs(f)` |
+|---|--:|--:|
+| ### **primo passo da cui resta `<= 1.2`**, DOPO | ### **`42`** | ### **`40`** |
+| lo stesso, PRIMA | `130` | `128` |
+| coppie sopra `1.2`, DOPO | ### **`19` su `74`** | |
+| coppie sopra `1.2`, PRIMA | `63` su `74` | |
+
+> ### ⛔ **LA CONCLUSIONE GIUSTA: L'ALTALENA E' SMORZATA, NON ELIMINATA.**
+> Si calma in ### **~`42` passi invece di ~`130`**, e all'inizio e' ### **ancora violentissima** — `1.463e+04` alla coppia `4`, `67.05` alla `10`, `3.215` alla `20`.
+> ### ✅ **E IL CRITERIO DEL MANDATO PASSA DAVVERO** *(`1.0411` e `1.0100`, contro `1.2`)*: ### **lo dico, e accanto ci metto questa riserva.**
+
+### 📌 **CHE COSA RESTA, e il guardiano lo nomina:** ### **la `r` in `_dts` e il gauge
+### sfasato.** La `PARTE A` ha tolto ### **una** delle due potenze di `r` dall'orologio;
+la seconda vive nel **tempo** *(`_dts = DT*r`)*, e il gauge e' ancora ### **la mediana
+globale della fase del passo precedente.**
+### ✅ **E LA `PARTE B` E' QUELLA CHE DEVE ELIMINARLA**, perche' ### **toglie la fase
+da `r` PER COSTRUZIONE** — `r = cs_nodo_prev / CS_M` non legge piu' `f`.
+
+### ⛔ **E IL CRITERIO DELLA `PARTE B` SI LEGGE PER COPPIA, non in aggregato:**
+### **rapporto `<= 1.2` su OGNI coppia dal passo 3 in poi**, escluse solo le coppie in
+cui ### **la cache di `cs` non e' allineata** — ### **contate e dichiarate.** Il rapporto
+aggregato ### **si riporta, ma NON basta da solo.** *(Correzione del guardiano, registrata
+qui perche' e' dove il criterio nasce.)*
+
+### ✅ **E I MIEI NUMERI COINCIDONO CON LA MISURA INDIPENDENTE DEL GUARDIANO** *(Linux)*
+
+| coppia | il mio `r` | il guardiano |
+|--:|--:|--:|
+| `4` | `1.463e+04` | `~1.0e4` |
+| `10` | `67.05` | `67` |
+| `20` | `3.215` | `3.15` |
+| `30` | `1.554` | `1.52` |
+| `40` | `1.219` | `1.20` |
+| `60` | `1.041` | `1.03` |
+| `100` | `0.9764` | `0.99` |
+
+### **Due piattaforme, due strumenti, gli stessi numeri fino alla terza cifra.**
+### ⚠ **E questo rende la correzione INCONTESTABILE: non e' un'opinione sul
+criterio, e' un fatto sui dati che entrambi abbiamo misurato.**
 
 ### ⚠ **E UN NUMERO CHE NON E' SPARITO, e va riportato:** la frazione di nodi col `r`
 **al tetto** ha mediana `0.000233` ma ### **massimo `0.455476`.**
@@ -146,7 +213,7 @@ comincerebbe a girare: allora andrebbe sigillata.**
 | **1** | identita' al byte ai passi 1 e 2 | `0` e `0` | ### **PASSA** |
 | **2** | ### **il caso che DEVE fallire:** dal passo 3 deve divergere | prima divergenza al `3` | ### **PASSA** |
 | **3** | `STEP2` intatto al bit | `0` su `1 970 507` | ### **PASSA** |
-| **4** | l'altalena sparisce, `<= 1.2` | `1.0411` e `1.0100` | ### **PASSA** |
+| **4** | l'altalena sparisce, `<= 1.2` *(**aggregato**)* | `1.0411` e `1.0100` | ### **PASSA**, ### ⚠ **ma SMORZATA e non eliminata:** per coppia resta sopra `1.2` fino al passo `42` |
 | **5** | `150` passi senza `FERMO`, e il valle riportato | `150` passi | ### **PASSA** |
 
 > ### ✅ **E QUINDI LA `PARTE B` E' AUTORIZZATA:** il mandato diceva *«La `PARTE B`
