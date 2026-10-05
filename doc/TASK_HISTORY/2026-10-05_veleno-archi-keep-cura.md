@@ -188,6 +188,11 @@ e ### **una cura che riallinea le derivate le cambia PER DEFINIZIONE.** Il crite
 
 ## 5. L'ESITO — **ANNOTATO, non riscritto** *(par.8)*
 
+> ### ✅ **E IL SIGILLO E' APPROVATO: decisione di Luca del 2026-10-05 su
+> ### `c4e9fd5`.** La classificazione dei sei contatori e' **approvata**, e il
+> guardiano l'ha verificata con un **lockstep indipendente su Linux**.
+> ### **Quindi il criterio 1 resta `0`, e quello zero vale su DUE piattaforme.**
+
 > ### **GLI OTTO CRITERI PASSANO. Il numero e' `0`: le divergenze di
 > ### STATO su 150 passi, 290 attributi per passo.**
 > Il referto e' `doc/REFERTO_veleno_archi_keep_cura_2026-10-05.md`.
@@ -252,5 +257,11 @@ ERANO POSITIVI PER CASO>>.**
    le `6` differenze che restano sono **contatori e un registro**. Io li ho
    classificati `contatore/registro` e **non** `STATO`, ### **ma la classificazione l'ho
    scritta io** — va approvata o corretta.
+   ### ✅ **APPROVATA da Luca il 2026-10-05**, sul sigillo `c4e9fd5`, con DUE motivi:
+   ### **ogni altro attributo resta identico al byte** *(quindi nessuno dei sei rientra
+   in una legge)* e ### **`_veleno_registro` e' letto solo da `verifica_invarianti`,
+   che e' un PRESIDIO**. ### **E verificato dal guardiano con un lockstep INDIPENDENTE
+   su LINUX** *(150 passi, tutti gli attributi di `net`)*: ### **una seconda misura su
+   un'altra piattaforma, non un'approvazione sulla parola.**
 2. ### **La regola per gli archi nati** nel passo (2) del tetto causale, che ora hanno
    `dt_e = NaN`: ### **registrata, non decisa.**

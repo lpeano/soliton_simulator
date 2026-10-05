@@ -4904,3 +4904,40 @@ falsa il risultato, e per ciascuno il referto dice PERCHE'.**
 *(il criterio nomina due **derivate**; le differenze che restano sono **contatori e un
 registro**, e la classificazione l'ho scritta io)* e ### **la regola per gli archi nati
 col `dt_e = NaN`** nel passo (2) del tetto — **registrata, non decisa**.
+
+## 2026-10-05 — **LA DECISIONE DI LUCA SUL SIGILLO `c4e9fd5`: la classificazione dei
+## sei contatori e' APPROVATA**
+
+> ### **E non e' un'approvazione sulla parola: e' una SECONDA MISURA.**
+
+La domanda che avevo messo davanti a Luca era: il criterio 2 del mandato nomina **due
+derivate**, ma le `6` differenze che restavano erano **contatori e un registro**, e il
+criterio non li nominava ne' per ammetterli ne' per escluderli. ### **La classificazione
+`contatore/registro` e non `STATO` l'avevo scritta io.**
+
+**LA RISPOSTA: APPROVATA**, per i sei nomi `_g_inv_veleno_ok`, `_g_keep_celle_tolte`,
+`_g_keep_riallineate`, `_g_keep_senza`, `_g_veleno_celle`, `_veleno_registro`, con
+**due motivi**:
+
+1. ### **ogni ALTRO attributo resta identico al byte**, quindi nessuno dei sei rientra
+   in una legge — ### **se uno vi rientrasse, quella legge produrrebbe un valore
+   diverso DA QUALCHE PARTE, e quel qualche parte sarebbe uno degli attributi che
+   invece NON SI MUOVONO**;
+2. ### **`_veleno_registro` e' letto SOLO da `verifica_invarianti`**, che e' un
+   ### **presidio**, non una legge. *(Ed e' coerente con cio' che il sigillo aveva
+   misurato: `_g_inv_veleno_ok`, l'unico dei sei che non avevo previsto, e' il
+   contatore di quel presidio.)*
+
+### ✅ **E IL GUARDIANO L'HA VERIFICATO CON UN LOCKSTEP INDIPENDENTE SU LINUX**
+*(150 passi, tutti gli attributi di `net`)*. ### **Il sigillo di `c4e9fd5` era girato su
+Windows 11 / `python 3.13.2` / `numpy 2.3.0`** — timbrati nel json, ed e' la cura di
+`PIATTAFORMA-NON-TIMBRATA`. ### **Un risultato confermato su DUE piattaforme da DUE
+strumenti diversi non e' il risultato di uno strumento: e' il risultato del SISTEMA.**
+
+### ⚠ **E LA DOMANDA NON L'HO CANCELLATA**, ne' nel referto ne' nel task history:
+### **una domanda cancellata dopo la risposta fa sparire il fatto che ANDAVA CHIESTA.**
+Il criterio del mandato non nominava quei sei nomi, e ### **questo resta vero anche ora
+che la classificazione e' approvata.**
+
+**Restava anche una seconda cosa a Luca, e resta:** ### **la regola per gli archi nati
+col `dt_e = NaN`** nel passo (2) del tetto causale — **registrata, non decisa.**

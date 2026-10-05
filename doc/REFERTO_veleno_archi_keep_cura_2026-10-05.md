@@ -142,6 +142,40 @@ un attributo uguale>>*. Resta **in coda** come difetto dello strumento, dichiara
 > contare come stato, il criterio 1 darebbe `600` e non `0`.
 > ### **IL NUMERO NON CAMBIA: cambia che cosa si chiama STATO.**
 
+### ✅ **LA RISPOSTA: APPROVATA.** *(Decisione di Luca del 2026-10-05 sul sigillo
+`c4e9fd5`.)*
+
+> ### **La classificazione <<contatore/registro, NON stato>> dei sei nomi e'
+> ### APPROVATA**, e i sei sono: `_g_inv_veleno_ok`, `_g_keep_celle_tolte`,
+> `_g_keep_riallineate`, `_g_keep_senza`, `_g_veleno_celle`, `_veleno_registro`.
+
+**IL MOTIVO, come Luca lo ha dato — e non e' <<mi fido>>, sono due fatti:**
+
+1. ### **ogni ALTRO attributo resta identico al byte**, quindi ### **nessuno dei sei
+   rientra in una legge**: se uno di loro entrasse in una legge, quella legge
+   produrrebbe un valore diverso **da qualche parte**, e quel qualche parte
+   ### **sarebbe uno degli attributi che invece non si muovono.**
+2. ### **`_veleno_registro` e' letto SOLO da `verifica_invarianti`**, che e' un
+   ### **PRESIDIO** — non una legge. *(Ed e' coerente col fatto misurato dal
+   sigillo: `_g_inv_veleno_ok`, l'unico dei sei che non avevo previsto, e' il
+   contatore di quel presidio.)*
+
+### ✅ **E IL GUARDIANO LO HA VERIFICATO CON UN LOCKSTEP INDIPENDENTE SU LINUX**
+*(150 passi, tutti gli attributi di `net`)*.
+
+> ### 📌 **E QUESTO E' PIU' DI UN'APPROVAZIONE: e' una SECONDA MISURA, su un'ALTRA
+> ### PIATTAFORMA, con uno strumento che non e' il mio.**
+> Il sigillo di questo referto e' girato su **Windows 11 / `python 3.13.2` /
+> `numpy 2.3.0`**, e la piattaforma e' **timbrata** nel json *(e' la cura di
+> `PIATTAFORMA-NON-TIMBRATA`)*. ### **Un risultato confermato su DUE piattaforme da
+> DUE strumenti diversi non e' il risultato di uno strumento: e' il risultato del
+> SISTEMA.**
+
+### ⚠ **E LA DOMANDA RESTA SCRITTA QUI SOPRA, non l'ho cancellata:** una domanda
+cancellata dopo la risposta ### **fa sparire il fatto che ANDAVA CHIESTA**, e il
+criterio del mandato non nominava quei sei nomi — ### **la classificazione l'avevo
+scritta io, e questo resta vero anche ora che e' approvata.**
+
 ## CRITERI 3, 4, 5 -- lo strumento del passo (1) `425b8d47`, RIGIRATO
 
 | | sul VECCHIO `0f060670` | sul CURATO `e2940b3c` |
@@ -260,7 +294,7 @@ che il `NaN` non c'e'.**
 |---|---|--:|---|
 | **0** | la patch su `0f060670` ridA' `e2940b3c` al byte | `True` | ### **PASSA** |
 | **1** | STATO identico al byte su 150 passi | **`0`** | ### **PASSA** |
-| **2** | le sole eccezioni sono `_dt_e_ultimo` e `_sin2_vir` | `83` su 1 nome | ### **PASSA**, con la domanda per Luca |
+| **2** | le sole eccezioni sono `_dt_e_ultimo` e `_sin2_vir` | `83` su 1 nome | ### **PASSA**, e la classificazione dei 6 contatori e' ### **APPROVATA DA LUCA** *(2026-10-05)* |
 | **3** | Schwinger: identiche al byte | `0` su `128` | ### **PASSA** |
 | **4** | lo strumento sul blob nuovo da' `0` sui 166 | `0` | ### **PASSA** |
 | **5** | copertura `2s`, non `s` | `1.0000` = `1.0000` | ### **PASSA** |
@@ -319,4 +353,6 @@ strumenti che non falsano il risultato si annotano e si mettono in coda.)*
    che contiene array)*: ### **contato fra le differenze, non taciuto.**
 2. **`celle_nan_appese` e' un NOME SCADUTO** nello strumento `425b8d47`: misura
    `len_dopo - len_prima`, che coincideva col veleno **solo prima della cura**.
-3. La **domanda per Luca** sulla lista di eccezioni del criterio 2 *(sopra)*.
+3. ~~La **domanda per Luca** sulla lista di eccezioni del criterio 2.~~
+   ### ✅ **CHIUSA il 2026-10-05: la classificazione e' APPROVATA**, col motivo e
+   con un lockstep indipendente su Linux. ### **Non e' piu' in coda.**
