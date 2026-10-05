@@ -299,6 +299,51 @@ il `x3.89` osservato in `Bc` venisse ### **dal gradiente.**
 | `:8231` | il **tetto `CFL`** |
 | `:7259`-`:7266` | **`_ft = dt_e/DT`**, cioe' il fattore `(b)` — ### **l'unico che avevo contato** |
 
+### ⛔ **E ANCHE QUESTO CENSIMENTO ERA INCOMPLETO** — *annotazione del 2026-10-05, sulla
+### stessa riga, come il guardiano chiede*
+
+**Il guardiano ne ha trovato uno che mi mancava**, e ### **rifacendo la `grep` su `dt_e`,
+`_dt_e_ultimo` e `_dte` ne ho trovato UN ALTRO che lui non nomina.** ### **Quindi non ne
+mancava uno: ne mancavano DUE.**
+
+**IL CENSIMENTO GIUSTO — `dt_e` entra in SETTE LEGGI:**
+
+| # | riga | la legge |
+|--:|---|---|
+| `1` | `:7795` / `:7799` | la **SCARICA della torsione** |
+| `2` | `:7924`-`:7934` | **`peq`** *(quattro rami: esatto/Eulero x tau locale/globale)* |
+| `3` | `:8044` | **`dts = dt_e / nsub`**, i sotto-passi della metrica |
+| `4` | `:8234` / `:8249` | il **rilassamento viscoso di `d0`** *(due rami: tau locale/`TAU_P`)* |
+| `5` | `:8243`-`:8245` | ### **il LAPLACIANO di `d0` col suo clip `CFL`** — `_cfl = cs_taup*dt_e`, e `dt_e` e' **anche** nel termine: `clip(dt_e*cs_taup*d_arco*_lap_d0, -_cfl, +_cfl)`. ### **MANCAVA A ME E AL GUARDIANO** |
+| `6` | `:8432` | **`_ft = dt_e/DT`** → la probabilita' di mitosi, cioe' il fattore `(b)` |
+| `7` | `:8489`-`:8519` | ### **LA MEMORIA DI REPULSIONE, dentro `decidi_divisione`** — `_dte = _dt_e_ultimo`, `_rap = _dte/_tau_a`, `self._rep = rep + (self._rep - rep)*exp(-_rap)`, e poi `_rep` **spinge `d0`**: `spinta = 0.02*self.d0*_rep_mem` *(`:8551`)*. ### **IL SETTIMO DEL GUARDIANO** |
+
+**Piu' il contorno, che NON sono leggi:** `:7439` la **definizione**
+*(`dt_e = DT*0.5*(r_i+r_j)`)*, `:7474` il **riporto** in `_dt_e_ultimo`, `:8231` il **tetto
+`CFL`** *(un registro diagnostico)*.
+
+### ⚠ **E IL MIO <<SEI>> ERA SBAGLIATO IN DUE MODI, non in uno:** contava il tetto `CFL`
+*(un diagnostico)* **come se fosse una legge**, e ### **ometteva sia il laplaciano di `d0`
+che la memoria di repulsione.**
+
+> ### ✔ **IL RITIRO DELL'INFERENZA RESTA COM'E': QUESTO LO RAFFORZA.** Con **sette** leggi
+> invece di una, *<<`dt_e` entra una volta sola>>* non e' solo falso: ### **e' falso di
+> un fattore sette.**
+>
+> ### ⛔ **E IL SETTIMO E' IL PIU' SCOMODO DI TUTTI, e va detto perche':** vive
+> ### **DENTRO `decidi_divisione`**, cioe' **dentro la funzione che la misura stava
+> analizzando**, e da li' **spinge `d0`** — che e' la lunghezza che il cancello `A13`/`2LAM`
+> legge *(il fattore `(c)`)*. ### **Quindi `dt_e` tocca TUTTI E TRE i fattori della mia
+> scomposizione**, non due: `(a)` per la scarica e il laplaciano, `(b)` per `_ft`, `(c)` per
+> `_rep` → `d0`.
+
+### LA LEZIONE, aggiornata
+
+La prima volta avevo contato **uno**. La seconda, **sei** — ### **e due dei sei erano
+sbagliati** *(uno di troppo, due di meno)*. ### **Un censimento si fa con lo strumento
+(`grep`) e si RIFA quando qualcuno ne trova un pezzo**, perche' se ne manca uno
+### **probabilmente ne manca un altro.**
+
 ### ⛔ **E LA SCARICA HA IL SEGNO OPPOSTO**
 
 Un `dt_e` **piu' grande** rende `- dt_e*tw/_ttw` **piu' negativo**, cioe' ### **scarica la

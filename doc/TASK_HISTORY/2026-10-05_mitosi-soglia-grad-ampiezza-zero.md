@@ -96,6 +96,36 @@ una previsione per una deduzione.**
 |---|---|---|
 | **`K1`** | `Ap0 >= 0.8x Ap` | ### **l'ipotesi <<le nascite di `A` si reggevano sul `0.3`>> è REFUTATA** |
 | **`K2`** | la Spearman di `(2)` è `<= 0.05` **in valore assoluto a TUTTI E TRE i passi** | ### **l'ipotesi del DOPPIO CONTEGGIO è REFUTATA** — e allora ### **togliere la modulazione toglierebbe DEL TUTTO l'effetto del gradiente sulla mitosi**, e ### **va scritto così** |
+| **`K2b`** | l'incremento mediano della **SPINTA** nel **quintile piu' alto** di `|r_i - r_j|` è **almeno `2x`** quello del quintile piu' basso, ### **ad almeno DUE dei tre passi** *(`50`, `100`, `140`)* | ### **il doppio conteggio è RILEVANTE.** Se `K2` passa e `K2b` no: ### **<<il doppio conteggio esiste ma è piccolo>>**, e la decisione sul `0.3` si legge da `K1` e dalle nascite di `Bp0` |
+
+### ⛔ **PERCHE' `K2` DA SOLO E' DEBOLE, e il difetto e' del guardiano che lo dichiara**
+
+*(Annotazione aggiunta **PRIMA della corsa**: questa riga e' stata scritta il **2026-10-05 21:31:59Z** (UTC) e committata **prima** che lo strumento esistesse. ### **La corsa NON era partita.**)*
+
+Con **~470 mila archi**, `|Spearman| > 0.05` dice solo che una correlazione ### **ESISTE**,
+**non che PESA**: ### **un `0.06` supererebbe `K2` pur essendo trascurabile.** Su `N` cosi'
+grande l'errore standard di una Spearman nulla e' `~1/sqrt(N) ~ 0.0015`, quindi
+### **`0.05` sta a oltre trenta deviazioni standard dallo zero: `K2` e' un test di ESISTENZA
+con una potenza enorme, e per questo dice poco sull'ENTITA'.**
+
+> ### ✔ **`K2` RESTA COM'E', come criterio di ESISTENZA.** ### **`K2b` e' il criterio di
+> ENTITA', e i due si leggono INSIEME:**
+>
+> | `K2` | `K2b` | che cosa scrive il referto |
+> |---|---|---|
+> | refutato | — | ### **l'ipotesi del doppio conteggio e' REFUTATA**, e togliere la modulazione toglierebbe **del tutto** l'effetto del gradiente sulla mitosi |
+> | passa | passa | ### **il doppio conteggio esiste ED E' RILEVANTE** |
+> | passa | **non** passa | ### **<<il doppio conteggio esiste ma e' piccolo>>**, e la decisione sul `0.3` si legge da ### **`K1` e dalle nascite di `Bp0`** |
+>
+> ### ⚠ **E `K2b` si applica alla SPINTA**, non al totale e non alla scarica: e' l'unico dei
+> tre bersagli su cui l'ipotesi del doppio conteggio dice qualcosa.
+
+### ✔ **E I QUINTILI SI CALCOLANO SU `|r_i - r_j|`, il PREDITTORE, non sul bersaglio**
+
+Altrimenti il rapporto fra quintile alto e basso sarebbe ### **vero per costruzione**
+*(ordinando per la grandezza che si misura)*. ### **Si ordina per il gradiente e si guarda
+la SPINTA**, che e' l'unico modo in cui quel rapporto dice qualcosa.
+
 
 ### LA PATCH — **UNA SOLA RIGA, e il controllo `C0` lo dimostra**
 
