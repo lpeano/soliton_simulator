@@ -776,9 +776,16 @@ moto)*. **Tira GIÙ, come tutti gli scrittori fisici.**
 
 ## LE DOMANDE APERTE
 
-1. **Quante volte il tetto causale morde?** I contatori ci sono, **nessuno li ha letti**. Finché
-   non lo si fa, non si può dire se `A11` cor.6 sia rispettato. **È lo stesso lavoro residuo del
-   freno.**
+1. **Quante volte il tetto causale morde?** ### ✅ **MISURATO il 2026-10-04**,
+   `doc/REFERTO_tetto_causale_tempo_2026-10-04.md`: il clip di `spinta` limita
+   **`26 666 143`** archi-passo su **`30 651 762`**, e il tetto locale della coesione
+   **allarga** su `24 476 351` e **stringe** su `6 175 411` rispetto al globale.
+   ### ⚠ **Ma su `83` passi su `150` quella misura e' INVALIDA**, e la causa e'
+   `VELENO-ARCHI-KEEP` — ### **curata il 2026-10-05**.
+   ### 📌 **E DOPO LA CURA GLI ARCHI NATI NEL PASSO HANNO `dt_e = NaN`:** il passo (2)
+   del tetto, che vuole far leggere `dt_e` a `memoria_hebbiana_moto` *(voce 5, DOPO la
+   nascita)*, ### **avra' bisogno di una REGOLA per loro — DECISIONE DI LUCA, da
+   prendere ALLORA e non adesso.**
 2. **`scala_statale`, `forza_campo`, `richiamo_elastico`: da dove vengono?** **`NON RICOSTRUITO`**
    in questa scheda — vanno lette dal codice che le costruisce, e non l'ho fatto.
 3. **Il ramo storico** *(`COES_ADIM = False`)* **è ancora raggiungibile.** Se non serve più,
@@ -1621,7 +1628,7 @@ DICHIARA e non si risolve**: nella divisione la lunghezza viene da ### **`d`**, 
 > ### cancella, si ANNOTA** (par.8). ### **Trovate col setaccio** *(`csv/_test_fork/_setaccio_derivazioni.py`: 9 segnalate su 72, e il giudizio e' 5 da
 > riscrivere e 4 non-fisica)*.
 
-<!-- SCHEDA nome=veleno-derivate funzioni=_avvelena_derivate flag=NASCITA_DERIVATA,REGISTRO_DERIVATE -->
+<!-- SCHEDA nome=veleno-derivate funzioni=_avvelena_derivate,_riallinea_derivate_arco flag=NASCITA_DERIVATA,REGISTRO_DERIVATE -->
 
 # **`veleno-derivate` — IL VELENO: le derivate dei nati nascono `NaN`**
 
@@ -1764,6 +1771,74 @@ dominio per le derivate AVVELENATE**, che ammetta `nan` ### **dove il veleno l'h
 solo la'.** ### ⛔ **NON implementata: tocca il presidio centrale, e la forma e' una
 scelta di Luca.**
 
+## ⭐ **LA CURA DI `VELENO-ARCHI-KEEP`: `keep` SI APPLICA ANCHE ALLE DERIVATE D'ARCO**
+*(decisione di Luca del 2026-10-05, **VIA (i)**; misura del passo (1) in
+`doc/REFERTO_veleno_archi_keep_2026-10-05.md`)*
+
+> ### **IL VELENO ERA MEZZO-CIECO, e il numero che lo dice e' `0.5000`.**
+
+**IL DIFETTO, misurato e non letto.** La nascita ricostruisce le colonne d'arco con
+`concat(x[keep], ...)`: **toglie** archi e ne **aggiunge** in coda. `_avvelena_derivate`
+allungava **solo in coda** con `NaN`, e ### **non applicava `keep`** — la parola non
+compariva **mai** in quella funzione. ### **Quindi dal primo arco tolto in poi ogni arco
+leggeva il valore di UN ALTRO arco: un valore FINITO, che il veleno non segnala.**
+
+**IL CONTO, e il numero:** con `s` archi divisi, tolti `s` e aggiunti `2s`, il veleno
+appendeva `(m+s) - m = s` celle su `2s` archi nuovi.
+
+| | copertura del veleno | misurata |
+|---|--:|---|
+| eventi di **divisione** *(usano `keep`)* | ### **`0.5000`** | `min = max` su 166 confronti |
+| eventi **Schwinger** *(non lo usano)* | **`1.0000`** | `min = max` |
+
+### ⛔ **E L'UNICA DIFFERENZA FRA I DUE CASI ERA `keep`.** La prima posizione diversa
+coincideva col **primo arco tolto** in **`166` confronti su `166`** — non in media, in
+tutti. E la frazione di archi conservati che leggeva il valore di un altro arco aveva
+**mediana `0.9306`**: ### **nella meta' degli eventi, piu' del 93%.**
+
+**LA FORMA DELLA CURA:** `_riallinea_derivate_arco(net, evento, c)`, chiamata
+**immediatamente prima** di `_avvelena_derivate`. ### **Il veleno resta dov'e': la cura
+sta PRIMA di lui.**
+
+### **PERCHE' PRIMA, e non dentro il veleno:** il veleno allunga fino alla lunghezza
+**NUOVA** *(e il suo commento lo dichiara)*; il riallineamento vuole quella **VECCHIA**,
+cioe' `len(keep)`. ### **Sono due istanti diversi, e metterli nella stessa funzione
+vorrebbe dire darle due bersagli.**
+
+### **E DOPO LA CURA:** `len(v) = sum(keep) = m - s`, quindi il veleno appende
+`(m+s) - (m-s) = `**`2s`** celle — ### **copertura `1.0000` in ENTRAMBI i casi.**
+### **La cura non aggiunge un comportamento: estende al caso che gli sfuggiva quello che
+il veleno faceva GIA' nell'altro** — e per `9-ter` ### **toglie un'eccezione**, perche'
+oggi le colonne d'arco si riallineano e le derivate d'arco **no**.
+
+**I VINCOLI, come la decisione di Luca li fissa:** `keep` dal **contesto** `c['keep']`
+e ### **mai ricostruito**; solo le derivate d'**arco** con classe **`avvelena`**, lette
+dal **`REGISTRO_DERIVATE`** e ### **non da un elenco a mano**; solo gli eventi che
+**hanno** `keep`; e se la lunghezza non e' quella degli archi di **prima**,
+### **`_ferma_registro`** — ### **non si indovina** *(`RIPIEGHI-ZERO`, `A9`)*.
+**Nessun flag:** *«il veleno agisce sempre»*, e ### **questa e' la riparazione di un
+difetto, non un esperimento.**
+
+### ⚠ **LA VIA SCARTATA, e il perche':** la via `(ii)` — far **ricalcolare** `dt_e` a
+chi lo legge — curava ### **un lettore solo**, lasciava `_sin2_vir` col difetto, e
+### **aggiungeva una SECONDA SCRITTURA** della legge di `dt_e`. *(Decisione di Luca.)*
+
+### 📌 **E UNA CONSEGUENZA CHE IL PASSO (2) DI `TETTO-CAUSALE-TEMPO-COORDINATO` DEVE
+### AFFRONTARE, e NON si decide adesso**
+
+> ### ⛔ **Dopo questa cura, gli archi NATI nel passo hanno `dt_e = NaN`** — prima
+> avevano un valore **finito preso da un altro arco**, che e' peggio ma **non si
+> vedeva**.
+> ### **Quindi il passo (2) del tetto causale — che vuole far leggere `dt_e` a
+> `memoria_hebbiana_moto`, cioe' alla voce 5, DOPO la nascita — avra' bisogno di una
+> REGOLA per gli archi nati in quel passo.**
+> ### ⚠ **E' una DECISIONE DI LUCA, da prendere ALLORA e non adesso.** Qui si registra
+> **che serve**, non **quale**.
+
+**IL SIGILLO:** `csv/_seal_fork/_sigillo_veleno_keep.py`; la patch del braccio 0 e'
+`csv/_seal_fork/_veleno_keep_patch.py`. **Simulatore curato: `e2940b3c`**
+*(da `0f060670`)*.
+
 ## **Criteri, fissati PRIMA dei numeri** *(il sigillo e' `csv/_seal_fork/_sigillo_veleno.py`)*
 
 | | |
@@ -1777,6 +1852,28 @@ scelta di Luca.**
 
 <!-- SCHEDA nome=nascita-punto-unico funzioni=_derivazione_perc_geom,_nascita_collaudo_della_tabella,_nascita_collocata,_nascita_non_si_tocca,_nascita_regola,_ordine_di_nascita,_registra_regola,_rn_div_conc_nodi,_rn_div_cs_nodo_prev,_rn_div_d,_rn_div_d0,_rn_div_eta,_rn_div_i,_rn_div_j,_rn_div_mem_mot,_rn_div_nb,_rn_div_nb_prec,_rn_div_nb_ret,_rn_div_omega_s,_rn_div_peq,_rn_div_perc_chi,_rn_div_perc_geom,_rn_div_perc_tw,_rn_div_phi,_rn_div_phi0,_rn_div_phi_s,_rn_div_phivel,_rn_div_pos,_rn_div_psi,_rn_div_psi_prec,_rn_div_psi_spin,_rn_div_psi_spin_prec,_rn_div_psi_spinor,_rn_div_rep,_rn_div_rho_spin,_rn_div_spinor_lift,_rn_div_tw,_rn_div_twp,_rn_div_vd,_rn_sch_conc_nodi,_rn_sch_cs_nodo_prev,_rn_sch_d,_rn_sch_d0,_rn_sch_eta,_rn_sch_i,_rn_sch_j,_rn_sch_mem_mot,_rn_sch_nb,_rn_sch_nb_prec,_rn_sch_nb_ret,_rn_sch_omega_s,_rn_sch_peq,_rn_sch_peqn_idx,_rn_sch_perc_chi,_rn_sch_perc_geom,_rn_sch_perc_tw,_rn_sch_phi,_rn_sch_phi0,_rn_sch_phi_s,_rn_sch_phivel,_rn_sch_pos,_rn_sch_psi,_rn_sch_psi_prec,_rn_sch_psi_spin,_rn_sch_psi_spin_prec,_rn_sch_psi_spinor,_rn_sch_rep,_rn_sch_rho_spin,_rn_sch_spinor_lift,_rn_sch_tw,_rn_sch_twp,_rn_sch_vd,nascita flag=FRAZ_NASCITA,REGOLE_NASCITA,ORDINE_DI_NASCITA,EVENTI_DI_NASCITA,EVENTI_CONVERTITI -->
 
+
+## ⭐ **E DAL 2026-10-05 `nascita` HA UNA CHIAMATA IN PIU', PRIMA DEL VELENO**
+*(cura di `VELENO-ARCHI-KEEP`, **VIA (i)**, decisione di Luca)*
+
+L'ordine dentro `nascita` e' ora: **le regole** -> **`_riallinea_derivate_arco`** ->
+**`_avvelena_derivate`**.
+
+### **PERCHE' LA NUOVA CHIAMATA STA FRA LE DUE, e non altrove:** le **regole** lasciano
+le colonne d'arco alla lunghezza **NUOVA** *(`concat(x[keep], ...)`)* e le **derivate**
+d'arco a quella **VECCHIA**; il **veleno** allunga fino alla nuova.
+### ⛔ **In quella finestra le derivate d'arco sono DISALLINEATE, e fino al 2026-10-05
+ci restavano:** il veleno appendeva `NaN` in coda **senza applicare `keep`**, quindi
+ogni arco dopo il primo tolto leggeva il valore di **un altro arco** — un valore
+**finito**, che il veleno non segnala.
+### ✅ **La chiamata nuova chiude quella finestra**, e la misura del passo (1) dice di
+quanto: copertura del veleno da **`0.5000`** a **`1.0000`** negli eventi di divisione.
+### **Il dettaglio della cura vive nella scheda `veleno-derivate`**, che e' la sua casa.
+
+### ⚠ **E LA TABELLA DELLE REGOLE NON CAMBIA:** la cura **non e'** una regola di
+nascita, e non compare in `REGOLE_NASCITA`. ### **Agisce su una CACHE, non su una
+grandezza del registro** — ed e' per questo che non vuole una riga nella tabella e non
+fa scattare il presidio delle grandezze non dichiarate.
 # **`nascita-punto-unico` — IL PUNTO UNICO DI NASCITA, e le sue 72 regole**
 
 ## ⭐ **E DAL `COMMIT 6a` LA FRAZIONE DELLA NASCITA E' UN VALORE DICHIARATO: `FRAZ_NASCITA`**

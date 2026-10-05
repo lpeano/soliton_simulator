@@ -1518,6 +1518,92 @@ def _nascita_non_si_tocca(evento, grandezza, perche):
                                            "ancora": "(nessuna)", "derivazione": perche}
 
 
+def _riallinea_derivate_arco(net, evento, c):
+    """### `keep` SI APPLICA ANCHE ALLE DERIVATE D ARCO, e non solo alle colonne.
+
+    *(`VELENO-ARCHI-KEEP`, cura del 2026-10-05. **VIA (i), DECISIONE DI LUCA**: la
+    nascita applica `keep` a TUTTE le derivate d arco PRIMA del veleno. La via (ii)
+    -- far ricalcolare `dt_e` a chi lo legge -- e' SCARTATA: curava **un lettore
+    solo**, lasciava `_sin2_vir` col difetto, e aggiungeva **una seconda scrittura**
+    della legge di `dt_e`.)*
+
+    ### IL DIFETTO CHE CURA, MISURATO (passo (1), `doc/REFERTO_veleno_archi_keep_2026-10-05.md`)
+    La nascita ricostruisce le colonne d arco con `concat(x[keep], ...)`: **toglie**
+    archi e ne **aggiunge** in coda. `_avvelena_derivate` allungava **solo in coda**
+    con `NaN`, e ### **non applicava `keep`**. Quindi dal primo arco tolto in poi
+    ### **ogni arco leggeva il valore di UN ALTRO arco** -- un valore **FINITO**, che
+    il veleno non segnala.
+
+    ### IL CONTO, e il numero misurato
+    Con `s` archi divisi: tolti `s`, aggiunti `2s`, quindi il veleno appendeva
+    `(m+s) - m = s` celle su `2s` archi nuovi -- ### **copertura `0.5000`, misurata
+    `min = max` su 166 confronti.** Negli eventi **Schwinger**, che non hanno `keep`,
+    la copertura era ### **`1.0000`** -- e l unica differenza fra i due casi era `keep`.
+    ### ➜ Dopo questa cura `len(v) = sum(keep) = m - s`, quindi il veleno appende
+    `(m+s) - (m-s) = 2s` celle: ### **copertura `1.0000` in ENTRAMBI i casi.**
+    ### **La cura non aggiunge un comportamento: estende al caso che gli sfuggiva
+    quello che il veleno faceva GIA' nell altro.**
+
+    ### PERCHE' QUI E NON DENTRO IL VELENO
+    Il veleno sta **dopo le regole** perche' deve conoscere le lunghezze NUOVE, e il
+    suo commento lo dichiara. ### **Il riallineamento invece vuole la lunghezza
+    VECCHIA**, che e' `len(keep)`: sono due istanti diversi, e metterli nella stessa
+    funzione vorrebbe dire darle due bersagli. ### **Restano due funzioni, in fila.**
+
+    ### NESSUN FLAG, ED E' LA STESSA SCELTA DEL VELENO
+    *<<Il veleno agisce sempre>>*: un flag renderebbe un **presidio** un **opzione**,
+    ed e' il difetto che `E4-LAM` ha curato. ### **Questa e' la riparazione di un
+    difetto, non un esperimento: agisce sempre.**
+
+    ### E SE LA LUNGHEZZA NON TORNA, NON SI INDOVINA
+    Una derivata d arco **deve** avere la lunghezza degli archi di **PRIMA** della
+    nascita, cioe' `len(keep)`. ### **Se non l ha, si ferma il run con
+    `_ferma_registro`** -- le stesse eccezioni delle guardie esistenti.
+    ### **Allungare o troncare qui sarebbe IL RIPIEGO che quel controllo esiste per
+    impedire** (`RIPIEGHI-ZERO`, `A9`).
+    """
+    keep = None if c is None else c.get("keep")
+    if keep is None:
+        # ### L EVENTO NON TOGLIE ARCHI (e' lo Schwinger: `concat(net.i, aa, k)`).
+        #   Niente da riallineare, e il veleno gia' copriva tutto: misurato `1.0000`.
+        net._g_keep_senza = getattr(net, "_g_keep_senza", 0) + 1
+        return
+    keep = np.asarray(keep)
+    if keep.dtype != bool:
+        keep = keep.astype(bool)
+    tenuti = np.flatnonzero(keep)
+    for nome, dove, classe, _motivo in REGISTRO_DERIVATE:
+        if dove != "arco" or classe != "avvelena":
+            continue
+        v = getattr(net, nome, None)
+        if v is None:
+            # ### non esiste ANCORA: per lei il difetto non c e' ancora, e si conta.
+            net._g_keep_assenti = getattr(net, "_g_keep_assenti", 0) + 1
+            continue
+        v = np.asarray(v)
+        if v.ndim != 1 or v.dtype.kind != "f":
+            # ### LE STESSE DUE GUARDIE DEL VELENO, e per la stessa ragione: non si
+            #   riallinea cio' che il veleno non sa avvelenare. Se una diventasse
+            #   multiasse o intera, questo contatore salirebbe invece di far passare
+            #   la cosa in silenzio (`A8`).
+            net._g_keep_salti = getattr(net, "_g_keep_salti", 0) + 1
+            continue
+        if len(v) != len(keep):
+            # ### NON SI INDOVINA: `_ferma_registro`, come le guardie esistenti.
+            _ferma_registro(CacheCorta if len(v) < len(keep) else CacheLunga,
+                             "CORTA" if len(v) < len(keep) else "LUNGA",
+                             # ### `_scrivi_forma` ITERA l argomento: gli si passa la
+                             #   FORMA, non l array -- altrimenti il messaggio
+                             #   stamperebbe i VALORI. Una guardia che stampa
+                             #   spazzatura e una guardia a meta.
+                             nome, (len(keep),), v.shape,
+                             "_riallinea_derivate_arco, evento `%s`" % evento)
+        setattr(net, nome, v[tenuti])
+        net._g_keep_riallineate = getattr(net, "_g_keep_riallineate", 0) + 1
+        net._g_keep_celle_tolte = (getattr(net, "_g_keep_celle_tolte", 0)
+                                   + int(len(v) - len(tenuti)))
+
+
 def _avvelena_derivate(net):
     """### IL VELENO: le derivate dei nodi/archi NUOVI si riempiono di `NaN`.
 
@@ -1704,6 +1790,17 @@ def nascita(net, evento, c):
     #   regole di `phi` e di `i`. Prima del blocco non esisterebbero ancora.
     #   ### E PER EVENTO, non per passo: ogni chiamata a `nascita` aggiunge nodi o
     #   archi, quindi ogni chiamata avvelena cio' che ha appena allungato.
+    # ### [VELENO-ARCHI-KEEP, cura del 2026-10-05, VIA (i), DECISIONE DI LUCA]
+    #   `keep` SI APPLICA ANCHE ALLE DERIVATE D ARCO, e PRIMA del veleno.
+    #   ### PERCHE PRIMA: il veleno allunga fino alla lunghezza NUOVA; il
+    #   riallineamento vuole quella VECCHIA (`len(keep)`). Sono due istanti, e
+    #   l ordine fra loro E la cura: riallinea, POI avvelena il resto.
+    #   ### IL DIFETTO MISURATO (passo (1)): senza questo, dal primo arco tolto
+    #   in poi ogni arco leggeva il valore di UN ALTRO arco -- un valore FINITO,
+    #   che il veleno non segnala -- e la copertura del veleno era `0.5000` nelle
+    #   divisioni contro `1.0000` negli Schwinger, con `keep` come UNICA
+    #   differenza. Misurato `min = max` su 166 confronti.
+    _riallinea_derivate_arco(net, evento, c)
     _avvelena_derivate(net)
     # ### E QUI NON C'E' UN CONTATORE DELLE NASCITE, ED E' UNA SCELTA.
     #   La prima stesura ne aveva uno (`_g_nascite`). L'ho tolto per due ragioni:
