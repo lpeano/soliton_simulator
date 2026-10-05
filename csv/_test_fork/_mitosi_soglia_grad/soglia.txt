@@ -1,0 +1,133 @@
+========================================================================================================
+MITOSI-SOGLIA-GRAD a ampiezza zero: il 0.3 serve o no?
+========================================================================================================
+
+  python     3.13.2
+  numpy      2.3.0
+  sistema    Windows 11
+  macchina   AMD64
+  simulatore (PARTE B) f7237563   strumento 6b26f173
+
+  I RIFERIMENTI, dal crescita.json committato (12e2ca7):
+      Ap: divisioni 1219  schwinger 307  nati 1526  n_fin 14328  archi 473397
+      Bp: divisioni 18  schwinger 7  nati 25  n_fin 12827  archi 471596
+  ### E NON SI RIGIRANO: confrontare con numeri GIA' COMMITTATI e' piu' forte
+      che rigirarli, e rende C0 severo -- il confronto e' su TUTTI i conteggi
+      dei cancelli, a TUTTI i passi, non sul solo n finale.
+
+  braccio A dal tag pre-z43-cura2-r-da-cs: blob 062172d3
+  Ap0   da _sim_a.py  ampiezza 0.0   tw_split False -> blob 01d7ed9d  (4 ancore)
+  Bp0   da soliton_simulator.py ampiezza 0.0   tw_split False -> blob 71a2156b  (4 ancore)
+  B03   da soliton_simulator.py ampiezza 0.3   tw_split False -> blob aab6a9e8  (4 ancore)
+  Bg    da soliton_simulator.py ampiezza None  tw_split True  -> blob e3a8f767  (5 ancore)
+
+      Bg: il gancio di modulo `_MIS`
+      Bg: H1 (ampiezza INVARIATA)
+      Bg: H2: la catena dei cancelli
+      Bg: H3: i cancelli finali, DOPO la congiunzione
+      Bg: ### **la SEPARAZIONE SPINTA / SCARICA** del ramo `4pi`
+
+====================================================================================================
+LA CONFIGURAZIONE INTERA (`P5`) -- non i flag toccati, TUTTI
+====================================================================================================
+  booleani di modulo confrontati con l'argv del DRIVER: 82
+  -> IN CONFIGURAZIONE DEL DRIVER: nessuna differenza. ZERO su 82.
+
+  ### LA CONFIGURAZIONE SI DICHIARA SU `Bg`: e' la PARTE B con la SOLA
+      separazione dei nomi, quindi l'unico braccio IN configurazione per
+      costruzione. Ap0, Bp0 e B03 hanno l'ampiezza CAMBIATA DI PROPOSITO.
+  scena: n = 12802, archi = 471564
+
+========================================================================================================
+LA CORSA: 150 passi, QUATTRO bracci
+========================================================================================================
+  ### I DATI SONO GIA' SALVATI in soglia.json, PRIMA del rapporto.
+
+========================================================================================================
+LE NASCITE: i bracci a ampiezza ZERO contro i riferimenti committati
+========================================================================================================
+            divisioni    schwinger         nati     n finale
+  Ap0               2            0            2        12804
+  Bp0               2            1            3        12805
+  B03              18            7           25        12827
+  Bg               18            7           25        12827
+  Ap             1219          307         1526        14328  (RIFERIMENTO, da 12e2ca7)
+  Bp               18            7           25        12827  (RIFERIMENTO, da 12e2ca7)
+
+  Ap0/Ap = 0.0016        Bp0/Bp = 0.1111
+
+========================================================================================================
+K1 -- se Ap0 >= 0.8x Ap, l'ipotesi <<le nascite di A si reggevano sul 0.3>>
+      e' REFUTATA
+========================================================================================================
+  Ap0/Ap = 0.0016   soglia 0.8
+  ### K1: l'ipotesi NON e' refutata: togliere il 0.3 ABBATTE le nascite di A
+  ### E LA PREVISIONE DEL GUARDIANO era Ap0 < 0.5x Ap: CONFERMATA
+  ### E quella su Bp0 era fra 0.5x e 1.0x di Bp: ### NON confermata
+
+========================================================================================================
+K2 (ESISTENZA) e K2b (ENTITA') -- la misura (2) sul braccio Bg
+========================================================================================================
+  ### K2 DA SOLO E' DEBOLE, e il task history lo dichiara: con ~470 mila archi
+      l'errore standard di una Spearman nulla e' ~1/sqrt(N) ~ 0.0015, quindi
+      0.05 sta a oltre TRENTA deviazioni standard dallo zero. K2 e' un test di
+      ESISTENZA con potenza enorme. ### K2b e' il criterio di ENTITA'.
+
+  LE SPEARMAN, per passo (3 predittori x 3 bersagli):
+  predittore               bersaglio                passo 50  passo 100  passo 140
+  gradiente_nudo           incremento_TOTALE        0.070811   0.044684   0.027131
+  gradiente_nudo           SPINTA                   0.068092   0.032211   0.011504
+  gradiente_nudo           SCARICA                  0.081486   0.042334   0.024453
+  proxy_grad_per_phivel    incremento_TOTALE        0.340313   0.326425   0.280385
+  proxy_grad_per_phivel    SPINTA                   0.390527   0.359655   0.311442
+  proxy_grad_per_phivel    SCARICA                  0.350229   0.297112   0.266800
+  forma_esatta             incremento_TOTALE        0.696757   0.763768   0.727380
+  forma_esatta             SPINTA                   0.826367   0.884193   0.856539
+  forma_esatta             SCARICA                  0.734510   0.727205   0.727438
+
+  ### K2 si applica alla SPINTA contro il GRADIENTE NUDO -- il predittore che
+      la soglia legge. |rho| ai tre passi: 0.068092, 0.032211, 0.011504
+  ### K2: l'ipotesi NON e' refutata: la correlazione ESISTE
+
+  I QUINTILI DELLA SPINTA per quintile del GRADIENTE NUDO (il predittore):
+      passo 50    q1=1.752733e-02  q2=1.902165e-02  q3=2.011013e-02  q4=2.077395e-02  q5=2.316751e-02   q5/q1 = 1.3218
+      passo 100   q1=2.440096e-02  q2=2.468682e-02  q3=2.599936e-02  q4=2.653160e-02  q5=2.788262e-02   q5/q1 = 1.1427
+      passo 140   q1=2.274405e-02  q2=2.161393e-02  q3=2.183385e-02  q4=2.268955e-02  q5=2.384242e-02   q5/q1 = 1.0483
+
+  ### K2b: il rapporto q5/q1 della SPINTA e' >= 2.0 in 0 passi su 3
+  ### K2b: il doppio conteggio NON e' rilevante
+
+  ### LA LETTURA COMBINATA, dalla tavola fissata PRIMA:
+      K2 passa, K2b NON passa -> ### <<IL DOPPIO CONTEGGIO ESISTE MA E'
+      PICCOLO>>, e la decisione sul 0.3 si legge da K1 e dalle nascite di Bp0.
+
+========================================================================================================
+I CINQUE CONTROLLI
+========================================================================================================
+  C0     B03   differenze dai conteggi di Bp su 150 passi: 0
+          n finale 12827 contro 12827   archi 471596 contro 471596
+          ### C0: PASSA
+  C0-tw  Bg    differenze dai conteggi di Bp su 150 passi: 0
+          n finale 12827 contro 12827   archi 471596 contro 471596
+          ### C0-tw: PASSA
+  C-fallisce  Bp0 DEVE differire da Bp: differenze 485, n 12805 contro 12827  -> DIFFERISCE (giusto)
+              la PRIMA differenza: passo 59, g1_sopra_soglia: 109 contro 110
+  C1 Ap0   divisioni      2 + schwinger     0 =      2   nati      2   COINCIDE   (n_fin - n_0 = 2)
+  C1 Bp0   divisioni      2 + schwinger     1 =      3   nati      3   COINCIDE   (n_fin - n_0 = 3)
+  C1 B03   divisioni     18 + schwinger     7 =     25   nati     25   COINCIDE   (n_fin - n_0 = 25)
+  C1 Bg    divisioni     18 + schwinger     7 =     25   nati     25   COINCIDE   (n_fin - n_0 = 25)
+  C-rng  len(avv) per passo, contro Bp committato:
+          Ap0   primo passo con len(avv) DIVERSO da Bp: 100
+          Bp0   primo passo con len(avv) DIVERSO da Bp: 100
+          B03   primo passo con len(avv) DIVERSO da Bp: nessuno
+          Bg    primo passo con len(avv) DIVERSO da Bp: nessuno
+  ### C-rng NON dice <<stesso dado per sempre>>: dice <<stesso dado finche' la
+      topologia e' la stessa>>. Il passo in cui divergono E' il numero sopra.
+
+========================================================================================================
+IL VERDETTO
+========================================================================================================
+  configurazione dichiarata INTERA (braccio Bg): True
+  ### I CONTROLLI PASSANO.
+  ### E QUESTA E' UNA MISURA, NON UN SIGILLO: la rimozione del 0.3 dal
+      simulatore e' UNA DECISIONE DI LUCA, e sara' un prompt a parte.

@@ -66,6 +66,7 @@ commit**: cosi' non se ne accumulano di invisibili.)*
 | `csv/_test_fork/_mitosi_soglia_grad.py|H-P5` | la configurazione si dichiara sul braccio `Bg`, che e' la `PARTE B` con la |
 | `csv/_test_fork/_partecipazioni.py|H-P5` | legge le coorti e i `misura.json` di un run che ha gia' dichiarato la propria |
 | `csv/_test_fork/_referto_crescita.py|H-P5` | non importa il simulatore e non lo fa girare. Legge il `crescita.json` di una |
+| `csv/_test_fork/_referto_soglia.py|H-P5` | non importa il simulatore e non lo fa girare. Legge il `soglia.json` di una |
 | `csv/_test_fork/_scomposizione_tratti.py|H-P5` | non costruisce nessuna scena e non carica il simulatore. Legge i `misura.json` di un |
 | `csv/_test_fork/_tetto_causale_tempo.py|H-P3` | la misura NON configura il modulo a mano -- la scena passa TUTTA dal CLI |
 | `csv/_test_fork/_tratti_cammino.py|H-P5` | non costruisce nessuna scena e non carica il simulatore. Il `--collaudo` gira su |
@@ -76,5 +77,5 @@ commit**: cosi' non se ne accumulano di invisibili.)*
 | `csv/_test_fork/_z43_tempo_proprio.py|H-P3` | la scena passa TUTTA dal CLI (`nmasse` e `sep` da `argv`), e la |
 
 ```
-esenzioni dichiarate   69
+esenzioni dichiarate   70
 ```
