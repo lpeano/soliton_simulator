@@ -38,6 +38,7 @@ commit**: cosi' non se ne accumulano di invisibili.)*
 | `csv/_riordino_storia.py|H-P5` | non importa il simulatore e non lo fa girare. Archivia prosa da un tag di git. |
 | `csv/_sposta_standard10.py|H-P5` | non importa il simulatore e non lo fa girare. Sposta prosa fra due documenti. |
 | `csv/_test_fork/_mem_hebb_verso.py|H-P3` | la scena passa TUTTA dal CLI (`nmasse` e `sep` da `argv`), e la configurazione INTERA si DICHIARA (`_cli_flag.dichiara_configurazione`). La COPIA PATCHATA serve perche' `ii`, `jj`, `dirarc`, `I`, `Imed` e `proj` vivono SOLO dentro `memoria_hebbiana_moto`: ricostruirli fuori sarebbe una SECONDA scrittura della stessa legge, cioe' le <<due leggi>> che `9-ter` vieta. |
+| `csv/_test_fork/_z43_tempo_proprio.py|H-P3` | la scena passa TUTTA dal CLI (`nmasse` e `sep` da `argv`), e la configurazione INTERA si DICHIARA (`_cli_flag.dichiara_configurazione`). La COPIA PATCHATA serve perche' `psi_spin`, `_psi_spin_prec` e `_med_f_prec` vanno letti ESATTAMENTE dove `ritmo()` li legge, e `I`/`w`/`cs_nodo` dove il settore metrico li calcola: ricostruirli fuori sarebbe una SECONDA scrittura delle stesse leggi, cioe' le <<due leggi>> che `9-ter` vieta. |
 | `csv/_titoli_brevi.py|H-P5` | non importa il simulatore e non lo fa girare. Accorcia titoli in un TSV. |
 | `csv/_vista_smistamento.py|H-P5` | non importa il simulatore e non lo fa girare. Legge due TSV e scrive un documento. |
 | `csv/_archivio/_indice_id_importatore.py|H-P5` | non importa il simulatore e non lo fa girare. Genera due indici da documenti. |
@@ -62,5 +63,5 @@ commit**: cosi' non se ne accumulano di invisibili.)*
 | `csv/_test_fork/_video_scena.py|H-P5` | non costruisce nessuna scena e non carica il simulatore: legge i fotogrammi `.npz` |
 
 ```
-esenzioni dichiarate   55
+esenzioni dichiarate   56
 ```
