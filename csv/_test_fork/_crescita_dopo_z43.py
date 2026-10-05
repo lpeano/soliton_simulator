@@ -102,7 +102,12 @@ TW_TETTO = 4.0 * np.pi
 #   DOPO il raccordo (i passi con `r = 1` per sicurezza) e PRIMA della prima nascita della
 #   `PARTE B` (misurata al passo `99` nel sigillo), quindi la rete NON e' ancora cresciuta.
 PASSO_DIST = 10
+# ### ogni quanti passi si salva l'istantanea dei dati: una caduta costa al massimo questo.
+PASSI_SALVA = 10
 QUANTILI = (0, 1, 5, 25, 50, 75, 95, 99, 100)
+# ### la soglia del cancello `6`, LETTA dal modulo del braccio e non ricalcolata: la riempie
+#   `main` dopo il caricamento. E' una LISTA perche' serve mutabile da `Misura`.
+QMIN_M_SOGLIA = [None]
 
 P = []
 
@@ -178,7 +183,7 @@ def copia_patchata(sorgente, dst, controfattuale=False):
     uno("            ok = ok & _conforme" + NL,
         "            if _MIS is not None:" + NL
         + "                _MIS.finali(self, c=c, ok=ok, no_dens=_no_dens," + NL
-        + "                            no_lam=_no_lam, I=I, dc=_dc)" + NL
+        + "                            no_lam=_no_lam, I=I, dc=_dc, a=a, b=b)" + NL
         + "            ok = ok & _conforme" + NL,
         "H3: i cancelli della densita' e di `2LAM`")
     if controfattuale:
@@ -276,8 +281,21 @@ class Misura(object):
             self.cand_avv.append(avv[ns])
 
     # ---- H3: i cancelli finali
-    def finali(self, net, c, ok, no_dens, no_lam, I, dc):
+    def finali(self, net, c, ok, no_dens, no_lam, I, dc, a, b):
+        """### LA DENSITA' DEL CANCELLO `6` E' `0.5*(I[a] + I[b])`, NON `I[c]`.
+
+        ### ⛔ **La prima corsa e' caduta QUI** *(`b0f446a`)*: avevo scritto `I[c]`, ma
+        ### **`c` contiene indici di ARCO e `I` e' per NODO**. La legge fa
+        `a, b = self.i[c], self.j[c]` e poi `0.5*(I[a] + I[b])`: ### **la media dei DUE
+        ESTREMI.** ### **Avevo INDOVINATO la semantica invece di leggerla** -- ed e' `P1`.
+        Ora `a` e `b` arrivano **dalla legge**, e la densita' d'arco si costruisce con la
+        **sua** formula.
+        """
         o = np.asarray(ok, bool)
+        _ia = np.asarray(a, int)
+        _ib = np.asarray(b, int)
+        _In = np.asarray(I, float)
+        rho_arco = 0.5 * (_In[_ia] + _In[_ib]) if _ia.size else np.zeros(0)
         self._fin = {
             "g5_candidati_dopo_mitmax": int(np.size(c)),
             "g6_passa_densita": int(np.sum(~np.asarray(no_dens, bool))),
@@ -289,12 +307,14 @@ class Misura(object):
             "rifiutati_entrambi": int(np.sum(np.asarray(no_dens, bool)
                                              & np.asarray(no_lam, bool))),
             "ammessi": int(np.sum(o)),
-            "I_candidati": q(np.asarray(I, float)[np.asarray(c, int)]
-                             if np.size(c) else []),
+            # ### `rho_arco`, NON `I[c]`: e' la grandezza che il cancello legge.
+            "rho_arco_candidati": q(rho_arco),
+            "soglia_densita": (float(QMIN_M_SOGLIA[0])
+                               if QMIN_M_SOGLIA[0] is not None else None),
             "d_candidati": q(dc),
         }
         if np.size(c):
-            self.cand_I.append(np.asarray(I, float)[np.asarray(c, int)])
+            self.cand_I.append(rho_arco)
             self.cand_d.append(np.asarray(dc, float))
 
     # ---- fine passo
@@ -407,6 +427,10 @@ def main(argv):
     SB, nB, _ = carica("cre_Bp", bp)
     SC, nC, _ = carica("cre_Bc", bc)
     in_conf = _cli_flag.dichiara_configurazione(SB, stampa)
+    # ### LA SOGLIA DEL CANCELLO 6, LETTA dal modulo e non ricalcolata: `QMIN_M` e
+    #   `median(peq)`. Si legge QMIN_M, che e' la costante; la mediana di `peq` cambia a
+    #   ogni passo ed e' la legge a prenderla.
+    QMIN_M_SOGLIA[0] = float(getattr(SB, "QMIN_M", float("nan")))
     mA, mB, mC = Misura("Ap"), Misura("Bp"), Misura("Bc")
     SA._MIS, SB._MIS, SC._MIS = mA, mB, mC
     n0 = {"Ap": int(nA.n), "Bp": int(nB.n), "Bc": int(nC.n)}
@@ -425,39 +449,65 @@ def main(argv):
     stampa("LA CORSA: %d passi, TRE bracci, col BATTITO per passo" % passi)
     riga("=")
     npA, npB, npC = int(nA.n), int(nB.n), int(nC.n)
+
+    def _istantanea(stato, k, err=None):
+        """### I DATI DI UNA CORSA NON DEVONO DIPENDERE DAL FATTO CHE LA CORSA FINISCA.
+
+        ### ⛔ **La prima corsa e' caduta al passo `42` e ha perso TUTTO** *(`b0f446a`)*:
+        avevo imparato a scrivere il `json` **prima del rapporto** *(`41bc41f`)*, ma quella
+        protezione copre **solo la post-elaborazione**. ### **Avevo curato il SINTOMO, non la
+        CLASSE.** Ora si salva **dentro il ciclo**, ogni `PASSI_SALVA` passi e **a ogni
+        caduta**.
+        """
+        d = {"piattaforma": pf, "passi": passi, "passi_girati": k,
+             "stato": stato, "blob_sim_b": blob(SIM), "blob_sim_a": blob(sa),
+             "blob_strumento": blob(__file__),
+             "ancore": {"Ap": f_ap, "Bp": f_bp, "Bc": f_bc},
+             "in_configurazione_del_driver": bool(in_conf),
+             "passo_dist": PASSO_DIST, "n0": n0, "soglia_densita": QMIN_M_SOGLIA[0],
+             "bracci": {m.nome: {"passi": m.passi, "totali": m.totali(),
+                                 "dist_piene": m.dist_piene,
+                                 "riscalamenti": (q(m.riscalamenti) if m.riscalamenti
+                                                  else None)}
+                        for m in (mA, mB, mC)},
+             "a_valle": {"n_Ap": int(nA.n), "n_Bp": int(nB.n), "n_Bc": int(nC.n),
+                         "archi_Ap": int(len(nA.i)), "archi_Bp": int(len(nB.i)),
+                         "archi_Bc": int(len(nC.i))}}
+        if err is not None:
+            d["errore"] = err
+        _scrivi(d)
+        return d
+
     for k in range(1, passi + 1):
         mA.passo = mB.passo = mC.passo = k
-        with contextlib.redirect_stdout(io.StringIO()):
-            _passo.passo_pieno(SA, nA)
-            _passo.passo_pieno(SB, nB)
-            _passo.passo_pieno(SC, nC)
-        mA.chiudi(nA, npA)
-        mB.chiudi(nB, npB)
-        mC.chiudi(nC, npC)
+        try:
+            with contextlib.redirect_stdout(io.StringIO()):
+                _passo.passo_pieno(SA, nA)
+                _passo.passo_pieno(SB, nB)
+                _passo.passo_pieno(SC, nC)
+            mA.chiudi(nA, npA)
+            mB.chiudi(nB, npB)
+            mC.chiudi(nC, npC)
+        except Exception as e:
+            import traceback
+            stampa("### LA CORSA E' CADUTA AL PASSO %d: %r" % (k, e))
+            stampa(traceback.format_exc())
+            stampa("### MA I DATI DEI %d PASSI PRIMA SONO SALVATI." % (k - 1))
+            _istantanea("CADUTA al passo %d" % k, k - 1,
+                        err={"passo": k, "errore": repr(e),
+                             "traccia": traceback.format_exc()})
+            return 1
         npA, npB, npC = int(nA.n), int(nB.n), int(nC.n)
         print("[battito] passo %d/%d  n: A=%d B=%d C=%d  nasce: A=%d B=%d C=%d"
               % (k, passi, nA.n, nB.n, nC.n,
                  mA.passi[-1].get("g4_nasce", 0), mB.passi[-1].get("g4_nasce", 0),
                  mC.passi[-1].get("g4_nasce", 0)), flush=True)
+        if k % PASSI_SALVA == 0:
+            _istantanea("IN CORSO", k)
 
     # ### I DATI SI SCRIVONO PRIMA DEL RAPPORTO: una caduta nella post-elaborazione non
     #   deve costare la corsa. E' la lezione di `aafb3eb`, pagata con 150 passi.
-    comune = {"piattaforma": pf, "passi": passi, "blob_sim_b": blob(SIM),
-              "blob_sim_a": blob(sa), "blob_strumento": blob(__file__),
-              "ancore": {"Ap": f_ap, "Bp": f_bp, "Bc": f_bc},
-              "in_configurazione_del_driver": bool(in_conf),
-              "passo_dist": PASSO_DIST, "n0": n0,
-              "bracci": {m.nome: {"passi": m.passi, "totali": m.totali(),
-                                  "dist_piene": m.dist_piene,
-                                  "riscalamenti": q(m.riscalamenti) if m.riscalamenti
-                                  else None,
-                                  "n_fin": None} for m in (mA, mB, mC)},
-              "a_valle": {"n_Ap": int(nA.n), "n_Bp": int(nB.n), "n_Bc": int(nC.n),
-                          "archi_Ap": int(len(nA.i)), "archi_Bp": int(len(nB.i)),
-                          "archi_Bc": int(len(nC.i))}}
-    d = dict(comune)
-    d.update({"esito": None, "stato": "DATI SALVATI, rapporto NON ancora girato"})
-    _scrivi(d)
+    comune = _istantanea("DATI SALVATI, rapporto NON ancora girato", passi)
     stampa("  ### I DATI SONO GIA' SALVATI in crescita.json, PRIMA del rapporto.")
     stampa()
     try:
@@ -751,11 +801,33 @@ def collaudo():
              s0 * (1 - m2._mod["morso"]["q050"]), s0))
 
     # --- 4. i cancelli finali
+    # ### ARCHI E NODI IN NUMERO DIVERSO, E NON E' UN DETTAGLIO DEL CASO DI PROVA:
+    #   la prima corsa e' caduta perche' avevo scritto `I[c]` con `c` di ARCO e `I` di NODO
+    #   (`b0f446a`), e il collaudo di allora passava `c=[0,1,2]` con `I` di TRE elementi --
+    #   ### con tre archi e tre nodi l'indicizzazione sbagliata e' INDISTINGUIBILE da
+    #   ### quella giusta. Qui: 6 NODI, 3 ARCHI, e gli indici di arco sono 300, 301, 302,
+    #   che su un array di 6 nodi ALZEREBBERO.
     m3 = Misura("fin")
-    m3.finali(None, c=np.asarray([0, 1, 2]), ok=np.asarray([True, False, True]),
+    _I6 = np.asarray([1.0, 2.0, 3.0, 4.0, 5.0, 6.0])          # 6 NODI
+    _c = np.asarray([300, 301, 302])                           # 3 indici di ARCO
+    _a = np.asarray([0, 2, 4])                                 # gli estremi: nodi
+    _b = np.asarray([1, 3, 5])
+    try:
+        _I6[_c]
+        alzato = False
+    except IndexError:
+        alzato = True
+    prova("### gli indici di ARCO su un array di NODI ALZEREBBERO: e' il difetto di b0f446a",
+          alzato is True, "e per questo il caso di prova NON ha archi = nodi")
+    m3.finali(None, c=_c, ok=np.asarray([True, False, True]),
               no_dens=np.asarray([False, True, False]),
               no_lam=np.asarray([False, False, True]),
-              I=np.asarray([1.0, 2.0, 3.0]), dc=np.asarray([2.0, 2.0, 1.0]))
+              I=_I6, dc=np.asarray([2.0, 2.0, 1.0]), a=_a, b=_b)
+    _att = 0.5 * (_I6[_a] + _I6[_b])                           # 1.5, 3.5, 5.5
+    prova("finali: `rho_arco` e' 0.5*(I[a]+I[b]), la formula DELLA LEGGE",
+          abs(m3._fin["rho_arco_candidati"]["q050"] - float(np.median(_att))) < 1e-15,
+          "q50 = %.6f, atteso %.6f"
+          % (m3._fin["rho_arco_candidati"]["q050"], float(np.median(_att))))
     prova("finali: i rifiuti si SEPARANO per cancello",
           m3._fin["rifiutati_solo_densita"] == 1
           and m3._fin["rifiutati_solo_2lam"] == 1
