@@ -371,13 +371,36 @@ def main(argv):
         stampa("      - " + f)
     stampa()
 
-    SA, nA, a = carica("sim_z43_A", vecchio)      # il blob VECCHIO
-    SB, nB, _ = carica("sim_z43_B", dst)          # il CURATO, patchato col gancio
+    # ### ⛔ TRE BRACCI, E LA RAGIONE L HA TROVATA IL PRIMO GIRO DI QUESTO SIGILLO:
+    #   con DUE bracci (vecchio NON patchato contro curato PATCHATO) il criterio 1 dava
+    #   1 differenza ai passi 1 e 2, su `_calcpsi_origini`, con la nota <<chiavi diverse>>.
+    #   ### NON ERA LA CURA: `_calcpsi_origini` e' un dizionario che registra
+    #   ### **"nome_funzione:NUMERO_DI_RIGA"** di chi chiama `calcola_psi()` senza `w`
+    #   (`:6271-6279`). Il mio gancio aggiunge QUATTRO righe, quindi i numeri di riga dei
+    #   chiamanti SI SPOSTANO e le chiavi differiscono -- ### PER COSTRUZIONE.
+    #   ⚠ E L HO VERIFICATO IN MODO INDIPENDENTE prima di cambiare lo strumento: due passi,
+    #   vecchio contro curato SENZA gancio, ### ZERO differenze su tutti gli attributi.
+    # ➜ LA FORMA GIUSTA: i criteri 1, 2 e 5 confrontano DUE SORGENTI NON PATCHATI (`A` il
+    #   vecchio, `B` il curato), e il criterio 3 gira su un TERZO braccio `C`, il curato
+    #   PATCHATO col gancio. ### Cosi' nessun criterio confronta un patchato con un
+    #   ### non-patchato, e il registro delle righe non puo' mentire.
+    SA, nA, a = carica("sim_z43_A", vecchio)      # il blob VECCHIO, NON patchato
+    SB, nB, _ = carica("sim_z43_B", SIM)          # il CURATO, NON patchato
+    SC, nC, _ = carica("sim_z43_C", dst)          # il CURATO, patchato col gancio
     in_conf = _cli_flag.dichiara_configurazione(SB, stampa)
-    st2 = Step2(SB.CS_M)
-    SB._MIS = st2
+    st2 = Step2(SC.CS_M)
+    SC._MIS = st2
     stampa("  scena: nmasse=%s sep=%s  ->  n = %d, archi = %d"
            % (getattr(a, "nmasse", "?"), getattr(a, "sep", "?"), nA.n, len(nA.i)))
+    stampa("  ### TRE BRACCI: A il VECCHIO (non patchato), B il CURATO (non")
+    stampa("      patchato), C il curato PATCHATO col gancio del criterio 3.")
+    stampa("      I criteri 1, 2 e 5 confrontano A con B: DUE NON PATCHATI.")
+    stampa("      ### E IL PERCHE' L'HA TROVATO IL PRIMO GIRO: con A non patchato e")
+    stampa("          B patchato, `_calcpsi_origini` differiva ai passi 1-2 --")
+    stampa("          e' un dizionario che registra <<funzione:NUMERO_DI_RIGA>> di")
+    stampa("          chi chiama calcola_psi (:6271-6279), e il gancio sposta le")
+    stampa("          righe. NON era la cura: era lo strumento che si misurava")
+    stampa("          addosso.")
     stampa("  ### E IL RAMO LEGACY NON E' MISURABILE GIRANDO: DEPARAM_OROLOGIO = %s,"
            % getattr(SB, "DEPARAM_OROLOGIO", "?"))
     stampa("      quindi `:5982` NON viene eseguito. La sua cura e' verificabile solo")
@@ -392,6 +415,7 @@ def main(argv):
         with contextlib.redirect_stdout(io.StringIO()):
             _passo.passo_pieno(SA, nA)
             _passo.passo_pieno(SB, nB)
+            _passo.passo_pieno(SC, nC)
         d = confronta_reti(nA, nB)
         per_passo.append({"passo": k, "diff": d, "attributi": len(vars(nB))})
         print("[battito] passo %d/%d  n=%d archi=%d  diff=%d  step2_diversi=%d"
@@ -412,7 +436,7 @@ def main(argv):
                                  "chiamate_diverse": st2.chiamate_diverse,
                                  "max_scarto": st2.max_scarto,
                                  "peggiore": st2.peggiore},
-             "a_valle": {"n_A": int(nA.n), "n_B": int(nB.n),
+             "a_valle": {"n_A": int(nA.n), "n_B": int(nB.n), "n_C": int(nC.n),
                          "archi_A": int(len(nA.i)), "archi_B": int(len(nB.i))},
              "timbro_strumento": _timbro()})
     return esito

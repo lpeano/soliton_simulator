@@ -5379,3 +5379,71 @@ comparatore — ### **l'ha smentita la verifica: quel comparatore non sottrae ni
 
 ### ⛔ **E SPEGNERE NON E' CURARE:** `FASE-TRASCINAMENTO-3D` ### **RESTA APERTA**, e la
 legge in 3D ### **non si scrive ora** *(decisione di Luca)*.
+
+## 2026-10-05 — **UN FALSO-UNO DEL MIO SIGILLO: `_calcpsi_origini` registra i NUMERI
+## DI RIGA, e il mio gancio li sposta**
+
+> ### ⛔ **Il terzo difetto del mio strumentario trovato OGGI da un run, e lo dico
+> ### cosi' perche' tre volte in un giorno non e' sfortuna: e' uno SCHEMA.**
+
+**IL FATTO:** il primo giro del sigillo di `Z43` CURA (1) ha dato **esito 1**. Il
+criterio 1 *(identita' AL BYTE ai passi 1 e 2)* trovava **1 differenza**, su
+### **`_calcpsi_origini`**, con la nota *«chiavi diverse»*.
+
+### ⛔ **NON ERA LA CURA: era il mio strumento che si misurava addosso.**
+`_calcpsi_origini` e' un dizionario che registra
+### **`"nome_funzione:NUMERO_DI_RIGA"`** di chi chiama `calcola_psi()` senza `w`
+*(`:6271-6279`)*. Il mio gancio per il criterio 3 aggiunge ### **quattro righe** dentro
+`_passo_spinoriale`, quindi i numeri di riga dei chiamanti ### **si spostano**, e le
+chiavi differiscono ### **PER COSTRUZIONE.**
+
+### ✅ **E L'HO VERIFICATO IN MODO INDIPENDENTE PRIMA DI TOCCARE LO STRUMENTO**
+
+Una diagnosi a **due passi**, in cartelle **separate** per non toccare il run in volo
+*(par.5)*: vecchio *(`45e7130`)* contro curato *(`062172d3`)*, ### **senza gancio**, su
+tutti gli attributi di `net`.
+
+> ### **ZERO DIFFERENZE AI PASSI 1 E 2.**
+> ### **Quindi il criterio 1 TIENE nella sostanza che il mandato chiede**, e la
+> differenza era ### **interamente del gancio.**
+> ### ✅ **Non ho cambiato lo strumento sulla base di un'ipotesi: l'ho cambiato dopo
+> ### averla VERIFICATA.**
+
+**LA FORMA GIUSTA, ora cablata: TRE BRACCI** — `A` il vecchio *(non patchato)*, `B` il
+curato *(non patchato)* per i criteri `1`, `2`, `5`, e `C` il curato **patchato** solo
+per il criterio `3`. ### **Cosi' nessun criterio confronta un patchato con un
+non-patchato, e il registro delle righe non puo' mentire.**
+
+### 📌 **E LA LEZIONE E' GENERALE, non un dettaglio di questo sigillo**
+
+### **Qualunque sigillo che confronti `vars(net)` fra un braccio PATCHATO e uno NON
+PATCHATO vedra' `_calcpsi_origini` differire.** Nei sigilli precedenti **non si vedeva**
+— e ### **non perche' fossero migliori: perche' ENTRAMBI i bracci erano patchati con lo
+stesso numero di righe.**
+
+### ⛔ **I TRE DIFETTI DEL MIO STRUMENTARIO TROVATI OGGI, e sono la STESSA FAMIGLIA:**
+
+| | il difetto | come l'ha trovato |
+|---|---|---|
+| **1** | il comparatore alzava su `inf - inf` *(`np.seterr` a **raise**)* | ### **il run e' MORTO** al passo 61 |
+| **2** | la configurazione dichiarata sul braccio **sbagliato** *(fuori configurazione per costruzione)* | ### **leggendo l'uscita del run morto** |
+| **3** | `_calcpsi_origini` differisce perche' il gancio **sposta le righe** | ### **il criterio 1 ha dato un FALSO-UNO** |
+
+> ### **E' SEMPRE LO STRUMENTO CHE ENTRA NELLA MISURA.** ### **Tre volte in un giorno,
+> e ogni volta il run me l'ha detto prima che io lo capissi.**
+
+### **CHE COSA IL PRIMO GIRO HA GIA' MISURATO, e che resta valido**
+
+| | |
+|---|---|
+| **criterio 3** *(`STEP2` intatto)* | ### **`0` nodi diversi su `1 970 507`**, max scarto `0.000e+00`, su `150` chiamate. ### **Il gancio NON falsa questo criterio: lo SERVE** |
+| **criterio 5** | `150` passi ### **senza eccezioni di invarianti** |
+| **criterio 2** | le differenze **vere** cominciano al **passo 3** *(`6` attributi)*, poi `27` al `4` e `50` al `5` |
+| a valle | `n` `14 124` *(vecchio)* contro `14 328` *(curato)*; archi `473 143` contro `473 397` |
+
+### ⚠ **E LA CORSA DEL FALSO-UNO E' CONSERVATA col nome che lo dice** e col **blob
+dello strumento** che l'ha prodotta: ### **un'uscita che non dice quale strumento l'ha
+fatta non e' una misura.**
+
+### ⛔ **IL SIGILLO VA RIGIRATO DA ZERO**, e ### **la `PARTE B` del mandato parte SOLO
+se questo sigillo passa.** Finche' non passa, ### **non si tocca.**
