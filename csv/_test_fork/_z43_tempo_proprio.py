@@ -30,6 +30,19 @@ dipende dalla **BASE** dello spinore *(componente `0`)* e **contiene la fase glo
 ### **Sfasato di un passo** *(`_psi_spin_prec` e `_med_f_prec` sono snapshot)*: non viola
 `A6`, ed e' il candidato all'**altalena**.
 
+### ⛔ L'OROLOGIO DI COMPTON VIVE IN `C2`, NON IN `C1`
+*(correzione del guardiano del 2026-10-05.)* `_phc = exp(-0.5j*_sk*omega_clk*_dts)`
+*(`:5971`)* e' una **fase globale**, e `C1` e' ### **cio' che una fase LASCIA INVARIATO.**
+### **Quindi la coerenza di Compton si misura su `C2`**, e si misura anche
+### **quanto `C2` segue la legge che l'orologio GIA' scrive:**
+
+    attesa = -0.5*_sk*omega_clk*_dts/DT = -0.5*coerenza*(cs/CS_M)^2*r^2
+
+### **E l'attesa NON si ricalcola: si LEGGE dalle variabili della legge stessa** al sito
+di `:5971` — ricostruirla sarebbe una **seconda scrittura**.
+### ⚠ **E `psi_spin` e' il campo EMESSO** *(somma sui vicini, `:6240`)*, quindi
+### **la relazione puo' valere solo IN MEDIA LOCALE, non per nodo.**
+
 ### I CINQUE CONTROLLI CHE POSSONO FALLIRE
 | | |
 |---|---|
@@ -143,8 +156,13 @@ def angolo_invariante(ps, psp, DT):
     """`C1`: l'angolo di Fubini-Study fra due spinori, diviso `DT`.
 
     ### **E' INVARIANTE per fase globale E per una rotazione `SU(2)` COMUNE**, perche'
-    `<U a|U b> = <a|b>` e `|e^{i al} z| = |z|`. ### **E' il senso di `C1`:** misura
-    **quanto** lo spinore e' ruotato, non **in che base**.
+    `<U a|U b> = <a|b>` e `|e^{i al} z| = |z|`.
+    ### ⛔ **E MISURA LO SPOSTAMENTO DEL VETTORE DI BLOCH, NON L'ANGOLO DI UNA
+    ### ROTAZIONE:** una rotazione **attorno al Bloch stesso** e' pura **FASE** e
+    ### **lascia `C1` a ZERO.** *(Correzione del guardiano del 2026-10-05, scoperta dal
+    collaudo di `d190dd5`.)*
+    ### ⛔ **E L'OROLOGIO DI COMPTON E' UNA FASE** *(`_phc`, `:5971`)*: ### **vive in
+    ### `C2`, NON qui.**
     """
     ov = np.sum(np.conj(psp) * ps, axis=1)
     na = np.sqrt(np.sum(np.abs(psp) ** 2, axis=1))
@@ -255,6 +273,14 @@ def copia_patchata(braccio_a=False):
         + "                _MIS(self, 'cs', I=I, w=w, cs_nodo=cs_nodo)" + NL,
         "al sito di `cs`, con `I` e `w` dello stesso istante")
 
+    # --- l'ATTESA DELL'OROLOGIO, letta dalle variabili della legge stessa
+    uno("                _phc = np.exp(-0.5j * _sk * omega_clk * _dts)" + NL,
+        "                _phc = np.exp(-0.5j * _sk * omega_clk * _dts)" + NL
+        + "                if _MIS is not None:" + NL
+        + "                    _MIS(self, 'fase_attesa', omega_clk=omega_clk," + NL
+        + "                         dts=_dts, sk=_sk)" + NL,
+        "al sito di `_phc`: l'attesa dell'orologio")
+
     if braccio_a:
         # ### BRACCIO A: `r_node` -> 1 in `omega_clk`. TOGLIE UNA POTENZA di `r`, da
         #   `r^2` a `r^1`. ### NON spezza l'anello: `r` resta in `_dts` (`:5939`).
@@ -295,6 +321,14 @@ class Raccoglitore(object):
         self.cs_corrente = None     # da `cs`: `cs_nodo` e `cs_spin` dello stesso istante
         self.cs_spin = None
         self.cs_salti_lam = 0
+        # ### L'ATTESA DELL'OROLOGIO, e LO SFASAMENTO DI UN PASSO, dichiarato:
+        #   `_phc` del passo `t-1` muove `_psi_spinor` nell'intervallo che `C2` misura al
+        #   `ritmo_in` del passo `t`. Quindi l'attesa si CONSERVA e si confronta DOPO.
+        self.attesa_fase = None
+        self.c2_vs_attesa = []
+        for k in ["c2_somma", "c2_conta", "c2_q", "r2_somma", "r2_conta", "r2_q",
+                  "r2s_somma", "r2s_conta", "r2s_q"]:
+            self.acc[k] = np.zeros(0)
 
     def _estendi(self, n):
         for k, a in self.acc.items():
@@ -303,6 +337,23 @@ class Raccoglitore(object):
 
     def __call__(self, net, quando, **kw):
         getattr(self, "_" + quando)(net, **kw)
+
+    # --------------------------------------------------- l'attesa dell'orologio
+    def _fase_attesa(self, net, omega_clk, dts, sk):
+        """L'incremento di fase che l'OROLOGIO scrive, LETTO dalla legge stessa.
+
+        ### `_phc = exp(-0.5j*_sk*omega_clk*_dts)` *(`:5971`)*, quindi l'incremento e'
+        ### `-0.5*_sk*omega_clk*_dts`, e il RITMO corrispondente e' quello diviso `DT` --
+        ### le stesse unita' di `C2 = arg(<psi_prec|psi>)/DT`.
+        ### **NON si ricalcola da `coerenza`, `cs` e `r`: sarebbe una SECONDA scrittura
+        ### della stessa legge** *(`9-ter`)*.
+        """
+        o = np.asarray(omega_clk, float)
+        d = (np.asarray(dts, float) if not np.isscalar(dts)
+             else np.full(len(o), float(dts)))
+        s = (np.asarray(sk, float) if not np.isscalar(sk)
+             else np.full(len(o), float(sk)))
+        self.attesa_fase = (-0.5 * s * o * d) / self.DT
 
     # ------------------------------------------------------------- il sito di `cs`
     def _cs(self, net, I, w, cs_nodo):
@@ -439,12 +490,67 @@ class Raccoglitore(object):
                 "C2_vs_rho_spin": pendenza_loglog(np.abs(c2), RS)},
         })
 
+        # --- `C2` CONTRO L'ATTESA DELL'OROLOGIO, con lo SFASAMENTO DI UN PASSO
+        att = self.attesa_fase
+        self.attesa_fase = None
+        if att is not None and len(att) >= n:
+            aa = att[:n]
+            m2 = np.isfinite(aa) & np.isfinite(c2)
+            if int(np.sum(m2)) >= 10:
+                x_, y_ = aa[m2], c2[m2]
+                sx, sy = x_ - x_.mean(), y_ - y_.mean()
+                den = float(np.sqrt(np.sum(sx * sx) * np.sum(sy * sy)))
+                cor = (float(np.sum(sx * sy) / den) if den > 0 else None)
+                dd = float(np.sum(sx * sx))
+                pen = (float(np.sum(sx * sy) / dd) if dd > 0 else None)
+                # ### E IN MEDIA LOCALE, perche' `psi_spin` e' il campo EMESSO (somma sui
+                #   vicini, `:6240`): la relazione puo' valere SOLO in media locale, e la
+                #   media locale e' la STESSA mediana-sui-vicini che usa `V1`.
+                av, _ = mediana_sui_vicini(aa, ii[m], jj[m], n)
+                cvv, _ = mediana_sui_vicini(c2, ii[m], jj[m], n)
+                ml = np.isfinite(av) & np.isfinite(cvv)
+                corl = penl = None
+                if int(np.sum(ml)) >= 10:
+                    xl, yl = av[ml], cvv[ml]
+                    sxl, syl = xl - xl.mean(), yl - yl.mean()
+                    dl = float(np.sqrt(np.sum(sxl * sxl) * np.sum(syl * syl)))
+                    corl = (float(np.sum(sxl * syl) / dl) if dl > 0 else None)
+                    ddl = float(np.sum(sxl * sxl))
+                    penl = (float(np.sum(sxl * syl) / ddl) if ddl > 0 else None)
+                d["C2_contro_attesa"] = {
+                    "nodi": int(np.sum(m2)), "correlazione": cor, "pendenza": pen,
+                    "correlazione_media_locale": corl, "pendenza_media_locale": penl,
+                    "attesa": q(aa[m2]), "C2": q(c2[m2])}
+                self.c2_vs_attesa.append(d["C2_contro_attesa"])
+
         # --- gli accumulatori PER NODO
         fin1 = np.isfinite(c1)
         self.acc["c1_somma"][:n] = np.where(fin1, somma + c1, somma)
         self.acc["c1_conta"][:n] = np.where(fin1, conta + 1, conta)
         self.acc["c1_q"][:n] = np.where(fin1, self.acc["c1_q"][:n] + c1 * c1,
                                         self.acc["c1_q"][:n])
+        # ### `C2`: LA COERENZA DI COMPTON NEL POSTO GIUSTO (correzione del guardiano)
+        a2 = np.abs(c2)
+        f2 = np.isfinite(a2)
+        self.acc["c2_somma"][:n] = np.where(f2, self.acc["c2_somma"][:n] + a2,
+                                            self.acc["c2_somma"][:n])
+        self.acc["c2_conta"][:n] = np.where(f2, self.acc["c2_conta"][:n] + 1,
+                                            self.acc["c2_conta"][:n])
+        self.acc["c2_q"][:n] = np.where(f2, self.acc["c2_q"][:n] + a2 * a2,
+                                        self.acc["c2_q"][:n])
+        for ch, sorg in [("r2", self.cs_corrente), ("r2s", self.cs_spin)]:
+            if sorg is None or len(sorg) < n:
+                continue
+            cc2 = sorg[:n]
+            rp = a2 / np.where(cc2 > 0, cc2, np.nan)
+            fp = np.isfinite(rp)
+            self.acc[ch + "_somma"][:n] = np.where(fp, self.acc[ch + "_somma"][:n] + rp,
+                                                   self.acc[ch + "_somma"][:n])
+            self.acc[ch + "_conta"][:n] = np.where(fp, self.acc[ch + "_conta"][:n] + 1,
+                                                   self.acc[ch + "_conta"][:n])
+            self.acc[ch + "_q"][:n] = np.where(fp, self.acc[ch + "_q"][:n] + rp * rp,
+                                               self.acc[ch + "_q"][:n])
+
         if c4s is not None and self.cs_spin is not None:
             rap = c1 / np.where(self.cs_spin[:n] > 0, self.cs_spin[:n], np.nan)
             fr = np.isfinite(rap)
@@ -926,6 +1032,33 @@ def aggrega(R):
         "CV_C1_mediana": cv_c1, "CV_rapporto_mediana": cv_rap,
         "CV_rapporto_su_CV_C1": (float(cv_rap / cv_c1)
                                  if (cv_c1 and cv_rap and cv_c1 > 0) else None)}
+    # ### LA COERENZA DI COMPTON NEL POSTO GIUSTO: `C2`, non `C1`.
+    cv_c2, nc2 = cv(R.acc["c2_somma"], R.acc["c2_q"], R.acc["c2_conta"])
+    out["compton_C2"] = {"nodi_con_C2": nc2, "CV_C2_mediana": cv_c2}
+    for ch, et in [("r2", "C2_su_C4"), ("r2s", "C2_su_C4s")]:
+        cvr, nnr = cv(R.acc[ch + "_somma"], R.acc[ch + "_q"], R.acc[ch + "_conta"])
+        out["compton_C2"][et] = {
+            "nodi": nnr, "CV_mediana": cvr,
+            "CV_su_CV_C2": (float(cvr / cv_c2) if (cv_c2 and cvr and cv_c2 > 0)
+                            else None)}
+    # ### E QUANTO `C2` SEGUE LA LEGGE CHE L'OROLOGIO GIA' SCRIVE
+    if R.c2_vs_attesa:
+        v = R.c2_vs_attesa
+
+        def medv(k):
+            x = [a[k] for a in v if a.get(k) is not None]
+            return float(np.median(x)) if x else None
+
+        out["C2_contro_attesa"] = {
+            "passi": len(v),
+            "correlazione_mediana": medv("correlazione"),
+            "pendenza_mediana": medv("pendenza"),
+            "correlazione_media_locale_mediana": medv("correlazione_media_locale"),
+            "pendenza_media_locale_mediana": medv("pendenza_media_locale"),
+            "attesa_mediana_delle_mediane": float(np.median(
+                [a["attesa"]["mediana"] for a in v if a["attesa"].get("n")])),
+            "C2_mediana_delle_mediane": float(np.median(
+                [a["C2"]["mediana"] for a in v if a["C2"].get("n")]))}
     # --- autocorrelazione a ritardo 1, per nodo
     m = R.acc["inc_conta"] >= 4
     if np.any(m):
@@ -1027,6 +1160,48 @@ def rapporto(R, agg, cens, in_conf, braccio_a):
     stampa("      delle due CV e' >= 1. << 1 vorrebbe dire che la divisione CANCELLA")
     stampa("      varianza, cioe' un candidato f0.")
     stampa()
+    riga("=")
+    stampa("COERENZA DI COMPTON NEL POSTO GIUSTO: `C2`, non `C1`")
+    stampa("### correzione del guardiano del 2026-10-05: l'orologio e' una FASE (`_phc`,")
+    stampa("### :5971), e `C1` e' cio' che una fase LASCIA INVARIATO.")
+    riga("=")
+    cc = agg.get("compton_C2") or {}
+    stampa("  nodi con almeno 3 misure di |C2|: %s" % cc.get("nodi_con_C2"))
+    stampa("  CV(|C2|) mediana          %s" % _f(cc.get("CV_C2_mediana"), 4))
+    for et, nome in [("C2_su_C4", "|C2|/C4   (cs da |psi|^2) "),
+                     ("C2_su_C4s", "|C2|/C4s  (cs da rho_spin)")]:
+        d = cc.get(et) or {}
+        stampa("  CV(%s) mediana %s   su %s nodi"
+               % (nome, _f(d.get("CV_mediana"), 4), d.get("nodi")))
+        stampa("      ### CV(rapporto)/CV(|C2|) = %s" % _f(d.get("CV_su_CV_C2"), 4))
+    stampa("  ### L'IPOTESI NULLA E' LA STESSA scritta per C1 (task history 12ab7f4): se")
+    stampa("      le due grandezze sono indipendenti il rapporto delle CV e' >= 1, e << 1")
+    stampa("      vorrebbe dire che la divisione CANCELLA varianza, cioe' una f0.")
+    stampa("  ### E LA STESSA AVVERTENZA SULLA SATURAZIONE: una CV bassa per saturazione")
+    stampa("      sarebbe un FALSO-UNO, e le frazioni al tetto sono riportate sopra.")
+    stampa()
+    ca = agg.get("C2_contro_attesa")
+    if ca:
+        riga("=")
+        stampa("QUANTO `C2` SEGUE LA LEGGE CHE L'OROLOGIO GIA' SCRIVE")
+        riga("=")
+        stampa("  attesa = -0.5*_sk*omega_clk*_dts/DT = -0.5*coerenza*(cs/CS_M)^2*r^2")
+        stampa("  ### LETTA dalle variabili della legge (:5971), NON ricalcolata.")
+        stampa("  ### E SFASATA DI UN PASSO, dichiarato: `_phc` del passo t-1 muove lo")
+        stampa("      spinore nell'intervallo che `C2` misura al ritmo_in del passo t.")
+        stampa("  passi confrontati: %d" % ca["passi"])
+        stampa("  PER NODO        correlazione %s   pendenza %s"
+               % (_f(ca["correlazione_mediana"], 4), _f(ca["pendenza_mediana"], 4)))
+        stampa("  IN MEDIA LOCALE correlazione %s   pendenza %s"
+               % (_f(ca["correlazione_media_locale_mediana"], 4),
+                  _f(ca["pendenza_media_locale_mediana"], 4)))
+        stampa("      ### `psi_spin` E' IL CAMPO EMESSO (somma sui vicini, :6240), quindi")
+        stampa("          la relazione puo' valere SOLO in media locale: le due righe si")
+        stampa("          leggono INSIEME, e la SECONDA e' quella pertinente.")
+        stampa("  attesa mediana %s   contro C2 mediano %s"
+               % (_e(ca["attesa_mediana_delle_mediane"]),
+                  _e(ca["C2_mediana_delle_mediane"])))
+        stampa()
     riga("=")
     stampa("LA CAUSA DELL'ALTALENA: autocorrelazione a ritardo 1, e `psi_spin`")
     riga("=")
