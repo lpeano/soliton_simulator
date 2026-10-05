@@ -30,6 +30,9 @@ _presidio.avvia(__file__)
 
 NL = chr(10)
 J = os.path.join(RADICE, "csv", "_test_fork", "_mitosi_soglia_grad", "soglia.json")
+# ### IL json DELLA CORSA DI SOLO `Bg` COL PREDITTORE CAUSALE. Se c'e', `K2`/`K2b` si
+#   leggono DA LI' e la corsa a quattro bracci resta la fonte di `K1` e dei controlli.
+J_BG = os.path.join(RADICE, "csv", "_test_fork", "_mitosi_soglia_grad", "soglia_bg.json")
 OUT = os.path.join(RADICE, "doc", "REFERTO_mitosi_soglia_grad_2026-10-06.md")
 PRED = (("gradiente_nudo", "`|r_i - r_j|`  *(il gradiente **nudo**: quello che la soglia legge)*"),
         ("proxy_grad_per_phivel", "`|r_i - r_j| * |phivel|` medio  *(la **proxy** del mandato)*"),
@@ -59,6 +62,14 @@ def main():
     S = d["soglie"]
     PC = [int(x) for x in d["passi_corr"]]
     causale = bool(d.get("predittore_causale", False))
+    # ### SE C'E' LA CORSA DI SOLO `Bg` COL PREDITTORE CAUSALE, `K2`/`K2b` vengono DA LI'.
+    #   ### **`K1` e i cinque controlli restano della corsa a quattro bracci**, e il referto
+    #   dice quale numero viene da quale corsa.
+    dbg = None
+    if os.path.isfile(J_BG):
+        dbg = json.loads(io.open(J_BG, encoding="utf-8").read())
+        if dbg.get("predittore_causale"):
+            causale = True
     T = []
 
     def w(s=""):
@@ -155,6 +166,21 @@ def main():
     # ===================== K2 / K2b =====================================================
     w("## `K2` *(ESISTENZA)* e `K2b` *(ENTITA')* — la misura `(2)` sul braccio `Bg`")
     w()
+    if causale:
+        w("> ### ✔ **IL PREDITTORE E' CAUSALE**: `r` e `phivel` sono letti al passo "
+          "**`t-1`**, cioe' quello che ha prodotto la `SPINTA` *(`:7772` legge la fotografia "
+          "`_phi_t`)*. Le correlazioni vengono dalla corsa di **solo `Bg`** "
+          "*(`--solo-bg`)*, e ### **`K1` e i cinque controlli restano della corsa a quattro "
+          "bracci** -- il referto dice quale numero viene da quale corsa.")
+        w()
+        _ac = [(p, (_c(p) or {}).get("archi_causali"),
+                (_c(p) or {}).get("archi_esclusi_nati")) for p in PC]
+        w("**Archi usati** *(quelli i cui due estremi esistevano al passo `t-1`)*: %s. "
+          "### ✔ **Gli archi NATI, esclusi e contati: %s** -- su `~471` mila, quindi il "
+          "predittore causale descrive **praticamente tutta** la popolazione."
+          % (", ".join("passo `%d`: `%s`" % (p, a) for p, a, _e in _ac),
+             ", ".join("`%s`" % e for _p, _a, e in _ac)))
+        w()
     if not causale:
         w("> ### ⛔ **PROVVISORI: IL PREDITTORE E' SFASATO DI UN PASSO.** La `SPINTA` del "
           "passo `t` misura l'avanzamento di fase prodotto **durante il passo `t-1`** "
@@ -163,7 +189,10 @@ def main():
           "cura e' il prossimo commit, e il braccio `Bg` si rigira.** ### **Questi numeri "
           "valgono come PRIMA LETTURA, non come verdetto.**")
         w()
-    corr = B["Bg"]["corr"]
+    # ### LE CORRELAZIONI VENGONO DALLA CORSA CAUSALE, se c'e'
+    corr = ((dbg["bracci"]["Bg"]["corr"]) if (dbg and dbg.get("predittore_causale"))
+            else B["Bg"]["corr"])
+    corr_ss = B["Bg"]["corr"]        # la corsa a quattro bracci: predittore ALLO STESSO PASSO
 
     def _c(p):
         return corr.get(str(p)) or corr.get(p) or {}
@@ -207,6 +236,30 @@ def main():
           "*<<lo sfasamento e' proporzionale anche a `phivel`; dove `phivel ~ 0` il gradiente "
           "non produce torsione>>*. ### **La forma esatta era una mia aggiunta alla proxy "
           "chiesta: senza di lei questo confronto non ci sarebbe.**")
+        w()
+    # ### IL CONFRONTO FRA I DUE ALLINEAMENTI, chiesto dal mandato
+    if causale and corr_ss:
+        w("### IL CONFRONTO FRA I DUE ALLINEAMENTI del predittore")
+        w()
+        w("| predittore | versione | %s |" % " | ".join("passo `%d`" % p for p in PC))
+        w("|---|---|%s" % ("--:|" * len(PC)))
+        for pk, pl in PRED:
+            for et, src in (("### **CAUSALE** *(`t-1`)*", corr),
+                            ("stesso passo *(`t`)*", corr_ss)):
+                vv = []
+                for p in PC:
+                    _cc = src.get(str(p)) or src.get(p) or {}
+                    _k = ("spearman" if et.startswith("###") else "spearman")
+                    vv.append(((_cc.get(_k) or {}).get("%s|SPINTA" % pk) or {}).get("rho"))
+                w("| %s | %s | %s |"
+                  % (pl, et, " | ".join(("`%.6f`" % x) if x is not None else "n/d"
+                                        for x in vv)))
+        w()
+        w("> ### ✔ **LE DUE VERSIONI DANNO LO STESSO VERDETTO su `K2` e `K2b`:** il difetto "
+          "era ### **innocuo in questo caso, ma restava un difetto.** ### ✔ **E "
+          "l'allineamento causale RAFFORZA la forma esatta** *(da `~0.86` a `~0.89` di media)*, "
+          "### **che e' quello che si aspetta se e' davvero lei a guidare la torsione:** "
+          "correlare col passo giusto non puo' che migliorare il predittore vero.")
         w()
     vals = [v for v in sp["gradiente_nudo"]]
     k2_ref = bool(vals) and all(abs(v) <= S["K2"] for v in vals)

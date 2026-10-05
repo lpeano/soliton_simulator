@@ -1,0 +1,52 @@
+========================================================================================================
+MITOSI-SOGLIA-GRAD a ampiezza zero: il 0.3 serve o no?
+========================================================================================================
+
+  python     3.13.2
+  numpy      2.3.0
+  sistema    Windows 11
+  macchina   AMD64
+  simulatore (PARTE B) f7237563   strumento e5b9cc20
+
+  I RIFERIMENTI, dal crescita.json committato (12e2ca7):
+      Ap: divisioni 1219  schwinger 307  nati 1526  n_fin 14328  archi 473397
+      Bp: divisioni 18  schwinger 7  nati 25  n_fin 12827  archi 471596
+  ### E NON SI RIGIRANO: confrontare con numeri GIA' COMMITTATI e' piu' forte
+      che rigirarli, e rende C0 severo -- il confronto e' su TUTTI i conteggi
+      dei cancelli, a TUTTI i passi, non sul solo n finale.
+
+  braccio A dal tag pre-z43-cura2-r-da-cs: blob 062172d3
+  ### SOLO IL BRACCIO Bg: gli altri tre non usano il gancio `torsione`,
+      quindi il difetto del predittore non li tocca e i loro numeri
+      restano quelli committati in dd86933.
+  Bg    da soliton_simulator.py ampiezza None  tw_split True  -> blob e3a8f767  (5 ancore)
+
+      Bg: il gancio di modulo `_MIS`
+      Bg: H1 (ampiezza INVARIATA)
+      Bg: H2: la catena dei cancelli
+      Bg: H3: i cancelli finali, DOPO la congiunzione
+      Bg: ### **la SEPARAZIONE SPINTA / SCARICA** del ramo `4pi`
+
+====================================================================================================
+LA CONFIGURAZIONE INTERA (`P5`) -- non i flag toccati, TUTTI
+====================================================================================================
+  booleani di modulo confrontati con l'argv del DRIVER: 82
+  -> IN CONFIGURAZIONE DEL DRIVER: nessuna differenza. ZERO su 82.
+
+  ### LA CONFIGURAZIONE SI DICHIARA SU `Bg`: e' la PARTE B con la SOLA
+      separazione dei nomi, quindi l'unico braccio IN configurazione per
+      costruzione. Ap0, Bp0 e B03 hanno l'ampiezza CAMBIATA DI PROPOSITO.
+  scena: n = 12802, archi = 471564
+
+========================================================================================================
+LA CORSA: 150 passi, 1 bracci (Bg)
+========================================================================================================
+  ### I DATI SONO GIA' SALVATI in soglia.json, PRIMA del rapporto.
+
+  ### CON --solo-bg NON SI STAMPA IL RAPPORTO: K1 e i controlli vivono
+      nella corsa a quattro bracci (dd86933), e il referto li legge DA LI'.
+      Qui si producono SOLO le correlazioni del braccio Bg col predittore
+      CAUSALE, e il referto le unisce.
+      passo 50   causale=True   predittore dal passo 49
+      passo 100  causale=True   predittore dal passo 99
+      passo 140  causale=True   predittore dal passo 139
