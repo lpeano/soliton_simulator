@@ -4941,3 +4941,87 @@ che la classificazione e' approvata.**
 
 **Restava anche una seconda cosa a Luca, e resta:** ### **la regola per gli archi nati
 col `dt_e = NaN`** nel passo (2) del tetto causale — **registrata, non decisa.**
+
+## 2026-10-05 — **`MEM-HEBB-VERSO` passo (1): le due decisioni registrate, `LA STELLA
+## POLARE` scritta PRIMA, e le righe vere sul blob nuovo MISURATE**
+
+> ### **Questo commit e' il RITO del par.8: si pusha PRIMA del lavoro, cosi' l'ordine
+> ### e' verificabile da git invece che asserito da me.**
+
+### **LE RIGHE VERE, e il numero di Luca e' giusto**
+
+Il mandato cita righe di `0f060670`, e il simulatore di partenza ora e' **`e2940b3c`**.
+Luca dice **`+97` righe**. ### **L'ho MISURATO invece di fidarmi:** estratto `0f060670`
+da `b17caec`, cercati **gli stessi ancoraggi PER NOME** nei due blob, confrontate le
+righe. ### **Delta `+97` su TUTTI gli 11 ancoraggi**, e le righe totali passano da
+`13 135` a `13 232`, cioe' **esattamente `+97`**.
+
+| | `0f060670` | `e2940b3c` |
+|---|--:|--:|
+| `proj` *(il sito di `d0`)* | `9035-9037` | **`9132-9134`** |
+| il taglio `passo_max` | `9047-9048` | **`9144-9145`** |
+| i gate del sito della fase | `9391` / `9393` | **`9488`** / **`9490`** |
+| il sito della fase | `9409-9434` | **`9506-9531`** |
+| i nodi in 3D | `4843` | **`4940`** |
+
+### ⚠ **E UNA CITAZIONE DEL MANDATO NON COINCIDE, e la dichiaro invece di
+### aggiustarla in silenzio:** il mandato dice che il taglio sta a **`:9050`** su
+`0f060670`, ### **ma quella riga e' un COMMENTO** — il taglio sta a **`:9047`** *(il
+`passo_max`)* e **`:9048`** *(il `clip`)*. ### **Lo scostamento e' di 3 righe NEL
+MANDATO, non fra i due blob**, ed e' esattamente cio' che il par.2 dice: ### **i numeri
+di riga nei documenti sono di blob vecchi e SONO SHIFTATI — si cerca per NOME.**
+### **Non e' un'ambiguita' da risolvere con Luca:** il mandato nomina la **grandezza**,
+e quella grandezza ha **un solo sito**.
+
+### ✅ **LE QUATTRO AFFERMAZIONI DELLA DECISIONE (1), VERIFICATE NUMERICAMENTE PRIMA
+### DI SCRIVERE UNA RIGA DI STRUMENTO** *(dati sintetici, 40 nodi, 118 archi, seme 7)*
+
+| | la forma vecchia | la forma decisa |
+|---|--:|--:|
+| scambio `i<->j`: `max abs(p(i,j) - p(j,i))` | `5.943e+00` | ### **`0.000e+00`** |
+| scambio `i<->j`: `max abs(p(i,j) + p(j,i))` | ### **`0.000e+00`** | — |
+| traslazione rigida: `max abs(proj)` | `5.645e+00` | ### **`0.000e+00`** |
+| *(il peso PER NODO)* traslazione rigida | ### **`3.724e+00`** | — |
+
+La seconda riga dice che la forma vecchia ### **cambia segno ESATTAMENTE** invertendo
+l'arco — ### **un'identita', non un'approssimazione.** L'ultima dice perche' il peso
+### **DEVE stare sull'ARCO:** col peso per nodo resta `0.5*m*(I_j - I_i)/Imed . dir`,
+e le `I` sono diverse. ### **Il mandato lo afferma, e il numero lo conferma.**
+
+### ⛔ **E QUESTO NON E' UN CONTROLLO DELLA MISURA: E' UN CONTROLLO DELLA MIA LETTURA
+### DELLA DECISIONE.** L'ho fatto a lato, su dati finti, **prima** dello strumento,
+### **perche' se avessi letto male la formula misurerei un'altra legge.** I tre
+controlli del mandato restano, e girano sul simulatore vero.
+
+### **`LA STELLA POLARE`, e la risposta che mi espone piu' di tutte**
+
+Le cinque risposte stanno nel task history, scritte **ora**. ### **La piu' scomoda e' il
+gradino (b):** la legge pratica di questo sito e' il `clip` a
+`passo_max = 0.01*mediana(d0)`.
+
+> ### ⛔ **Se quasi tutti gli archi SATURANO, cio' che si osserva non e' la legge: e'
+> ### IL TAGLIO** — e cambiare la forma di `proj` cambierebbe **solo il segno** di una
+> quantita' che vale comunque `+/- passo_max`. ### **Lo scrivo PRIMA di vedere il numero,
+> perche' detto DOPO sarebbe una scusa.** Se la frazione di saturi e' alta, il referto
+> deve dirlo come ### **risultato principale**, non come nota.
+
+E il `0.01` ### **e' un numero scelto**: lo dichiaro come tale *(domanda 3)*,
+### **non lo tolgo di mia iniziativa** — `A11` chiederebbe da quale **errore**
+protegge — ma ### **la misura lo PESA**, e se mordesse quasi sempre sarebbe un
+candidato per `CLIP-INVENTARIO`, da portare a Luca **col numero**.
+
+### **LE DUE DECISIONI, REGISTRATE E NON REINTERPRETATE**
+
+1. **la forma di `proj`** — `0.5*(I_i+I_j)/Imed * (m_j - m_i) . dir(i->j)`;
+2. **il sito della fase si SPEGNE con un flag proprio**, e `MEM_MOTO_TUTTO` e
+   `MEM_MOTO` ### **restano come sono**. Si apre ### **`FASE-TRASCINAMENTO-3D`**
+   *(aperta, difetto)*: ### **e' legge nuova, non una riparazione**, e per questo
+   ### **non si scrive adesso.**
+
+### **E TRE DIFETTI NELLO STESSO SITO, in TRE voci distinte** *(le cure sono diverse)*:
+<<solo `ii` riceve>> e <<l'ultimo vince>> restano in `MEM-HEBB-VERSO`; l'asse `z` del
+laboratorio va in `FASE-TRASCINAMENTO-3D`.
+
+### ⚠ **E `blocca_run_base` di `MEM-HEBB-VERSO` RESTA `DA-DECIDERE`:** la decisione
+di Luca riguarda ### **la FORMA della cura**, non il blocco del run base,
+### **e non la estendo io.**

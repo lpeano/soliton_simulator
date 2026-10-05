@@ -1784,3 +1784,55 @@ che e' ### **LETTA DALL'ARRAY** e non dedotta dalle lunghezze, ed e' quella che 
 ### ⛔ **E LO STRUMENTO `425b8d47` NON SI MODIFICA:** e' il blob con cui sono state
 prese **le misure del passo (1)** e **i criteri 3-6 del sigillo**, e
 ### **un sigillo si rigira con `git checkout` del commit che ha sigillato** *(par.6)*.
+
+## `FASE-TRASCINAMENTO-3D` — **la direzione trasversale privilegia l'asse `z` del
+## LABORATORIO, e i nodi stanno in 3D**
+
+> ### ⛔ **E' LEGGE NUOVA, NON UNA RIPARAZIONE** — il mandato di Luca lo dice con
+> queste parole, ### **e per questo la legge NON si scrive adesso.**
+
+*(Aperta il 2026-10-05 su **decisione di Luca del 2026-10-04**, col passo (1) di
+`MEM-HEBB-VERSO`.)*
+
+**IL FATTO, letto dal codice sul blob `e2940b3c`** *(`:9506`)*:
+
+```python
+dir_laterale = np.stack([-dir_radiale[:, 1], dir_radiale[:, 0],
+                         np.zeros_like(dir_radiale[:, 0])], axis=1)
+```
+
+La direzione trasversale si costruisce ### **ruotando di 90 gradi NEL PIANO `xy`** e
+### **azzerando la terza componente.** ### ⛔ **Questo privilegia l'asse `z` del
+### laboratorio, che NON e' una grandezza del sistema:** i nodi stanno in **3D**
+*(`:4940`, `u = self.rng.normal(size=(n, 3))`)*, e ### **nessuna legge del modello
+distingue `z` da `x` o da `y`.**
+
+**CHE COSA SERVE:** ### **un asse FISICO LOCALE al posto di `z`.**
+
+### ⚠ **E UNA COSA CHE HO VERIFICATO INVECE DI SOSPETTARLA:** `dir_laterale` e'
+### **SIMMETRICO per scambio `i<->j`** — nasce da `dir_radiale`, che **si inverte**, e
+la rotazione e' **lineare**, quindi anche `dir_laterale` si inverte e il prodotto con
+una grandezza d'arco e' invariante. ### **Quindi NON e' uno dei siti del verso: e' un
+difetto DIVERSO**, ed e' per questo che ha una voce propria invece di stare dentro
+`MEM-HEBB-VERSO`.
+
+### 📌 **TRE DIFETTI NELLO STESSO SITO, TRE VOCI DISTINTE, perche' le cure sono
+### diverse**
+
+| difetto | dove vive |
+|---|---|
+| solo l'estremo `ii` riceve | `MEM-HEBB-VERSO` |
+| `phi[ii] = ...` con indici ripetuti tiene l'**ultima** scrittura | `MEM-HEBB-VERSO` |
+| `dir_laterale` privilegia l'asse `z` del laboratorio | ### **questa voce** |
+
+**LA DECISIONE DI LUCA, non reinterpretata:** il sito ### **si SPEGNE con un flag
+proprio**, e ### **`MEM_MOTO_TUTTO` e `MEM_MOTO` restano come sono.** Questa voce resta
+**aperta** come difetto da curare con una **legge nuova**, ### **dopo.**
+
+**I CRITERI DEL SIGILLO dello spegnimento** sono gia' fissati nel task history:
+
+1. con il flag nuovo ### **ACCESO**: ### **identita' AL BYTE col blob di oggi**
+   *(`e2940b3c`)* — e' il controllo che il flag e' **byte-inerte a default**;
+2. con il flag ### **SPENTO**: ### **le differenze devono stare SOLO in `phi` e a
+   valle.** ### ⚠ **Se una differenza comparisse altrove, lo spegnimento non e'
+   recintato dove credo.**
