@@ -101,7 +101,16 @@ TW_TETTO = 4.0 * np.pi
 # ### IL PASSO A CUI SI SALVANO LE DISTRIBUZIONI PIENE, scelto QUI e non dai dati: `10` sta
 #   DOPO il raccordo (i passi con `r = 1` per sicurezza) e PRIMA della prima nascita della
 #   `PARTE B` (misurata al passo `99` nel sigillo), quindi la rete NON e' ancora cresciuta.
-PASSO_DIST = 10
+# ### E I PASSI SONO QUATTRO, NON UNO, e la prima corsa ha provato perche': al passo `10`
+#   i due bracci ### **non si sono ancora separati** -- `avv` q50 `2.873` contro `2.870`,
+#   `avv/soglia` `0.3174` contro `0.3198`, e i cancelli danno gli STESSI numeri
+#   (`g1 = 109`, `nasce = 0` in tutti e tre). ### **La scelta era giusta come criterio e
+#   cieca come risposta:** il punto `(b)` del mandato chiede le grandezze DOVE i bracci si
+#   separano, e la separazione si costruisce DOPO. I passi tardivi sono scelti **prima**:
+#   `50` *(ben dentro il transitorio)*, `100` *(dopo la prima nascita della `PARTE B`, al
+#   `99`)* e `140` *(a regime)*.
+PASSI_DIST = (10, 50, 100, 140)
+PASSO_DIST = PASSI_DIST[0]      # tenuto per il referto, che cita il primo
 # ### ogni quanti passi si salva l'istantanea dei dati: una caduta costa al massimo questo.
 PASSI_SALVA = 10
 QUANTILI = (0, 1, 5, 25, 50, 75, 95, 99, 100)
@@ -180,12 +189,18 @@ def copia_patchata(sorgente, dst, controfattuale=False):
         + "        c = np.where(nasce)[0]" + NL,
         "H2: la catena dei cancelli fino all'estrazione")
     # --- H3: i due cancelli finali (densita' e `2LAM`)
+    # ### IL GANCIO VA **DOPO** LA CONGIUNZIONE, e la prima corsa ha provato perche':
+    #   ancorato PRIMA, l'`ok` che riceveva era quello del SOLO cancello della densita', e
+    #   ### **ho chiamato <<ammessi>> un conteggio che non lo era** -- `C1` ha sbagliato di
+    #   289/9/13, cioe' ESATTAMENTE i rifiutati dal cancello `2LAM` (`92da889`).
+    #   ### `_no_dens` e `_no_lam` restano quelli di PRIMA della congiunzione, e DEVONO:
+    #   sono i due rifiuti SEPARATI, e separarli e' il loro motivo.
     uno("            ok = ok & _conforme" + NL,
-        "            if _MIS is not None:" + NL
+        "            ok = ok & _conforme" + NL
+        + "            if _MIS is not None:" + NL
         + "                _MIS.finali(self, c=c, ok=ok, no_dens=_no_dens," + NL
-        + "                            no_lam=_no_lam, I=I, dc=_dc, a=a, b=b)" + NL
-        + "            ok = ok & _conforme" + NL,
-        "H3: i cancelli della densita' e di `2LAM`")
+        + "                            no_lam=_no_lam, I=I, dc=_dc, a=a, b=b)" + NL,
+        "H3: i cancelli della densita' e di `2LAM`, DOPO la congiunzione")
     if controfattuale:
         # ### IL BRACCIO `Bc`, DICHIARATO FINTO: `r` moltiplicato per `1/mediana(r)`. Si
         #   applica SUBITO DOPO che `ritmo()` ha restituito `r`, cosi' TUTTO cio' che sta a
@@ -335,9 +350,9 @@ class Misura(object):
             #   di apparire come un dato mancante.
             d["fin"] = {"ammessi": 0, "stato": "nessun candidato: H3 non scatta"}
         self.passi.append(d)
-        if self.passo == PASSO_DIST:
-            self.dist_piene = {"mod": self._mod, "catena": self._cat,
-                               "finali": getattr(self, "_fin", None)}
+        if self.passo in PASSI_DIST:
+            self.dist_piene[self.passo] = {"mod": self._mod, "catena": self._cat,
+                                           "finali": getattr(self, "_fin", None)}
         self._mod = None
         self._cat = None
         self._fin = None
@@ -464,7 +479,8 @@ def main(argv):
              "blob_strumento": blob(__file__),
              "ancore": {"Ap": f_ap, "Bp": f_bp, "Bc": f_bc},
              "in_configurazione_del_driver": bool(in_conf),
-             "passo_dist": PASSO_DIST, "n0": n0, "soglia_densita": QMIN_M_SOGLIA[0],
+             "passo_dist": PASSO_DIST, "passi_dist": list(PASSI_DIST),
+             "n0": n0, "soglia_densita": QMIN_M_SOGLIA[0],
              "bracci": {m.nome: {"passi": m.passi, "totali": m.totali(),
                                  "dist_piene": m.dist_piene,
                                  "riscalamenti": (q(m.riscalamenti) if m.riscalamenti
@@ -596,15 +612,17 @@ def rapporto(mA, mB, mC, nA, nB, nC, n0, in_conf, passi):
 
     # --- (b) LE DISTRIBUZIONI
     riga("=")
-    stampa("(b) LE GRANDEZZE CHE I CANCELLI LEGGONO, al passo %d" % PASSO_DIST)
+    stampa("(b) LE GRANDEZZE CHE I CANCELLI LEGGONO, ai passi %s"
+           % ", ".join(str(x) for x in PASSI_DIST))
     riga("=")
     stampa("  ### E SI RIPORTANO COME DISTRIBUZIONI E NON COME MEDIANE: una mediana NON")
     stampa("      distingue una distribuzione RIPIDA da una PIATTA, ed e' esattamente la")
     stampa("      cosa da cui dipende se l'ipotesi del gradiente tiene.")
     stampa()
-    for m, _n, et in bracci:
-        dp = m.dist_piene or {}
-        stampa("  --- braccio %s ---" % et)
+    for _pd in PASSI_DIST:
+      for m, _n, et in bracci:
+        dp = (m.dist_piene or {}).get(_pd) or {}
+        stampa("  --- braccio %s, passo %d ---" % (et, _pd))
         mod = dp.get("mod")
         if mod:
             stampa("      soglia0 = %.9f" % mod["soglia0"])
@@ -624,7 +642,7 @@ def rapporto(mA, mB, mC, nA, nB, nC, n0, in_conf, passi):
                            % (nome, _q["q001"], _q["q025"], _q["q050"], _q["q075"],
                               _q["q099"]))
             stampa("      cancelli al passo %d: archi=%d g1=%d g1+2=%d g1+2+3=%d nasce=%d"
-                   % (PASSO_DIST, cat["archi"], cat["g1_sopra_soglia"], cat["g1_e_g2"],
+                   % (_pd, cat["archi"], cat["g1_sopra_soglia"], cat["g1_e_g2"],
                       cat["g1_e_g2_e_g3"], cat["g4_nasce"]))
         fin = dp.get("finali")
         if fin:
@@ -674,17 +692,25 @@ def rapporto(mA, mB, mC, nA, nB, nC, n0, in_conf, passi):
     riga("=")
     stampa("I CONTROLLI CHE POSSONO FALLIRE")
     riga("=")
-    # C1
+    # ### C1 SI CONFRONTA CON `nati` DEL SIMULATORE, non con `n_fin - n_0`, e la prima
+    #   corsa ha mostrato perche' conta: il mandato chiede di ricostruire ### **le nascite
+    #   OSSERVATE**, e `nati` E' quel contatore. `n_fin - n_0` ci coincide **solo se nessun
+    #   nodo muore** -- oggi e' vero *(verificato: `1526`, `25`, `89` in entrambe le forme)*,
+    #   ### **ma e' un'assunzione, e `nati` non ne ha bisogno.** Si riportano ENTRAMBI.
     for m, net, et in bracci:
         t = m.totali()
-        atteso = int(net.n) - int(n0[et])
+        atteso = t["nati_tot"]
+        per_n = int(net.n) - int(n0[et])
         ric = t["divisioni"] + t["schwinger"]
         ok = (ric == atteso)
-        stampa("  C1 %-4s divisioni %6d + schwinger %6d = %6d   n_fin - n_0 = %6d   %s"
-               % (et, t["divisioni"], t["schwinger"], ric, atteso,
-                  "COINCIDE" if ok else "### NON COINCIDE"))
+        stampa("  C1 %-4s divisioni %6d + schwinger %6d = %6d   nati (DAL SIMULATORE) = %6d"
+               "   %s" % (et, t["divisioni"], t["schwinger"], ric, atteso,
+                          "COINCIDE" if ok else "### NON COINCIDE"))
+        stampa("          e n_fin - n_0 = %6d   %s" % (per_n,
+               "uguale a nati: nessun nodo muore" if per_n == atteso
+               else "### DIVERSO da nati: QUALCHE NODO MUORE"))
         if not ok:
-            guasti.append("C1 %s: ricostruzione %d contro %d" % (et, ric, atteso))
+            guasti.append("C1 %s: ricostruzione %d contro nati %d" % (et, ric, atteso))
     # C2
     for m, _net, et in bracci:
         cand = sum(r["fin"].get("g5_candidati_dopo_mitmax", 0) for r in m.passi)
@@ -886,6 +912,28 @@ def collaudo():
     prova("controfattuale: ### il GRADIENTE NON resta intatto, cresce di 1/mediana",
           abs(g1 / g0 - 1.0 / mm) < 1e-12,
           "x%.6f (1/mediana = %.6f)" % (g1 / g0, 1.0 / mm))
+
+    # --- 8. IL GANCIO H3 STA DOPO LA CONGIUNZIONE, e la prima corsa ha provato perche'
+    # ### Si prova SULLA STRUTTURA del testo di patch, che e' l'unico posto dove un difetto
+    #   di ORDINE vive. E si cerca SOLO nella parte di produzione: una prova strutturale che
+    #   trova se stessa non prova niente.
+    _tutto = io.open(os.path.abspath(__file__), encoding="utf-8").read()
+    _mk = "# " + "=" * 63 + " IL COLLAUDO"
+    prova("il marcatore del collaudo e' unico (serve a tagliare il sorgente)",
+          _tutto.count(_mk) == 1, "%d" % _tutto.count(_mk))
+    _src = _tutto.split(_mk)[0]
+    _i_conf = _src.index('"            ok = ok & _conforme" + NL' + chr(10))
+    _i_hook = _src.index('"                _MIS.finali(self, c=c, ok=ok')
+    prova("### il gancio H3 e' inserito DOPO `ok = ok & _conforme`, non prima",
+          _i_conf < _i_hook, "conforme a %d, gancio a %d" % (_i_conf, _i_hook))
+    prova("e il gancio riceve ANCORA `_no_dens` e `_no_lam` di PRIMA della congiunzione",
+          "no_lam=_no_lam, I=I, dc=_dc, a=a, b=b" in _src,
+          "sono i due rifiuti SEPARATI, e separarli e' il loro motivo")
+    prova("C1 si confronta con `nati` del simulatore, non con `n_fin - n_0`",
+          'atteso = t["nati_tot"]' in _src)
+    prova("le distribuzioni si registrano a QUATTRO passi, non a uno",
+          len(PASSI_DIST) == 4 and PASSI_DIST[0] == 10 and PASSI_DIST[-1] == 140,
+          str(PASSI_DIST))
 
     riga("=")
     ko = [n for n, o, _d in esiti if not o]
