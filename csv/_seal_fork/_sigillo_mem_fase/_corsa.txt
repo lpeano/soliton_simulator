@@ -1,0 +1,89 @@
+========================================================================================================
+IL SIGILLO DELLA CURA (2) DI MEM-HEBB-VERSO: il flag `MEM_FASE`
+========================================================================================================
+
+  python     3.13.2
+  numpy      2.3.0
+  sistema    Windows 11
+  macchina   AMD64
+  simulatore OGGI 1feb9b0a
+  patch          8b9c0c1a
+
+====================================================================================================
+LA CONFIGURAZIONE INTERA (`P5`) -- non i flag toccati, TUTTI
+====================================================================================================
+  booleani di modulo confrontati con l'argv del DRIVER: 82
+  -> IN CONFIGURAZIONE DEL DRIVER: nessuna differenza. ZERO su 82.
+
+  ### E LA CONFIGURAZIONE SI DICHIARA SU `C` (il DEFAULT), non su `B`:
+      `B` ha MEM_FASE = True, quindi e' FUORI configurazione PER COSTRUZIONE.
+      Dichiararla su `B` avrebbe dato 1 differenza su 82, e il mio esito
+      l'avrebbe letta come un GUASTO: un FERMO per la ragione sbagliata.
+  flag sul modulo: A (vecchio) non ha MEM_FASE;  B = True;  C = False
+  scena: nmasse=3 sep=6.1158  ->  n = 12802, archi = 471564
+
+========================================================================================================
+IL LOCKSTEP: 150 passi, TRE bracci, col BATTITO per passo
+========================================================================================================
+========================================================================================================
+BRACCIO 0: il *prima* NON si asserisce, SI RICOSTRUISCE
+========================================================================================================
+  commit_che_ha_cambiato_il_simulatore   7a0306396726fbec4dab30851dabff781a9e5486
+  padre                                  634762cfee4995e678a649b02fa96c8e003d3e36
+  blob_prima                             e2940b3c
+  blob_prima_atteso                      e2940b3c
+  prima_e_quello_atteso                  True
+  blob_patch                             8b9c0c1a
+  blob_patchato                          1feb9b0a
+  blob_oggi                              1feb9b0a
+  patch_returncode                       0
+  coincide                               True
+
+========================================================================================================
+CRITERIO 1: A (blob VECCHIO) contro B (nuovo, MEM_FASE = True) -- AL BYTE
+========================================================================================================
+  passi confrontati: 150   attributi per passo: 236
+  differenze IN TOTALE: 0   di cui di STATO: 0
+
+========================================================================================================
+CRITERI 2 e 3: B contro C (nuovo, DEFAULT = spento) -- AL PASSO 1
+========================================================================================================
+  differenze al passo 1: 1
+      phi                        phi                  quanti=12623      max_scarto=1.256349e+01  
+  `phi` differisce al passo 1: True
+  ALTRO che differisce al passo 1: 0
+
+========================================================================================================
+CRITERIO 4: la CRESCITA delle differenze per attributo, dal passo 2
+========================================================================================================
+  ### SI RIPORTA, NON SI GIUDICA (il mandato lo dice).
+  passo  attributi  i primi dieci nomi
+  1      1          phi
+  2      46         _S, _chi_core_rho0, _chi_core_rhoc, _cs_nodo_prev, _diag_amp_med, _diag_sin2_med, _diag_sin2_p95, _g_as_max, _g_cc_scarto_d0, _g_cct_allarga ...
+  3      56         _S, _chi_core_rho0, _chi_core_rhoc, _cs_nodo_prev, _diag_amp_med, _diag_sin2_med, _diag_sin2_p95, _dt_e_ultimo, _fatt_cs_ultimo, _g_as_max ...
+  5      57         _S, _chi_core_rho0, _chi_core_rhoc, _cs_nodo_prev, _diag_amp_med, _diag_sin2_med, _diag_sin2_p95, _dt_e_ultimo, _fatt_cs_ultimo, _g_as_max ...
+  10     58         _S, _chi_core_rho0, _chi_core_rhoc, _cs_nodo_prev, _diag_amp_med, _diag_sin2_med, _diag_sin2_p95, _dt_e_ultimo, _fatt_cs_ultimo, _g_as_max ...
+  20     58         _S, _chi_core_rho0, _chi_core_rhoc, _cs_nodo_prev, _diag_amp_med, _diag_sin2_med, _diag_sin2_p95, _dt_e_ultimo, _fatt_cs_ultimo, _g_as_max ...
+  40     59         _S, _chi_core_rho0, _chi_core_rhoc, _cs_nodo_prev, _diag_amp_med, _diag_sin2_med, _diag_sin2_p95, _dt_e_ultimo, _fatt_cs_ultimo, _g_as_max ...
+  60     132        _S, _chi_core_nodi, _chi_core_raggio, _chi_core_rho0, _chi_core_rhoc, _chi_geom_nodi, _cs_nodo_prev, _deg, _diag_amp_med, _diag_sin2_med ...
+  80     144        _S, _chi_core_nodi, _chi_core_raggio, _chi_core_rho0, _chi_core_rhoc, _chi_geom_nodi, _cs_nodo_prev, _deg, _diag_amp_med, _diag_sin2_med ...
+  100    148        _S, _chi_core_nodi, _chi_core_raggio, _chi_core_rho0, _chi_core_rhoc, _chi_geom_nodi, _cs_nodo_prev, _deg, _diag_amp_med, _diag_sin2_med ...
+  120    146        _S, _chi_core_nodi, _chi_core_raggio, _chi_core_rho0, _chi_core_rhoc, _chi_geom_nodi, _cs_nodo_prev, _deg, _diag_amp_med, _diag_sin2_med ...
+  150    145        _S, _chi_core_nodi, _chi_core_raggio, _chi_core_rho0, _chi_core_rhoc, _chi_geom_nodi, _cs_nodo_prev, _deg, _diag_amp_med, _diag_sin2_med ...
+
+  E CHE COSA CAMBIA A VALLE, riportato e non giudicato:
+                             B (acceso)     C (DEFAULT)   
+      n finale               14000          14124         
+      archi finali           473022         473143        
+
+========================================================================================================
+L'ESITO
+========================================================================================================
+  ### IL SIGILLO PASSA:
+      braccio 0: la patch su e2940b3c ridA' 1feb9b0a AL BYTE
+      criterio 1: ZERO differenze fra A e B su 150 passi e 236 attributi
+      criterio 2: al passo 1 differisce SOLO `phi`
+      criterio 3: e `phi` DIFFERISCE -- lo spegnimento spegne
+      criterio 4: la crescita e' riportata sopra, senza giudizio
+========================================================================================================
+scritto: C:\Users\lpeano\soliton_simulator\csv\_seal_fork\_sigillo_mem_fase\_sigillo.json

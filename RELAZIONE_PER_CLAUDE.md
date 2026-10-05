@@ -5323,3 +5323,59 @@ il risultato>>.**
 gancio conserva *(la copia di `cs`, e ora l'attesa della fase)* ### **non si estendono
 con la mitosi**, quindi il confronto esce su `66` passi su `148`. ### **E' la stessa classe di `_cs_nodo_prev` e
 `_psi_spin_prec` -- l'ho fatta DUE VOLTE, e ora e' un difetto che si ripete.** In coda.
+
+## 2026-10-05 — **IL SIGILLO DI `MEM_FASE`: passa, e un numero conferma una trappola
+## che avevo dichiarato PRIMA**
+
+Referto: `doc/REFERTO_mem_fase_2026-10-05.md`. Sigillo `a5cb4c60`, simulatore
+`e2940b3c` -> **`1feb9b0a`**, patch `8b9c0c1a`. I **cinque criteri** erano fissati **prima del codice** in `634762c`.
+
+| criterio | numero | esito |
+|---|--:|---|
+| **0** braccio 0 | `True` | ### **PASSA** |
+| **1** `A` contro `B`, al byte su `150` passi e `236` attributi | ### **`0`** | ### **PASSA** |
+| **2** al passo 1 differisce **solo** `phi` | `1` differenza | ### **PASSA** |
+| **3** ### **il caso che DEVE fallire:** `phi` deve differire | `12 623` nodi | ### **PASSA** |
+| **4** la crescita, riportata e non giudicata | da `1` a `145` | ### **FATTO** |
+
+### ⛔ **IL NUMERO CHE NON MI ASPETTAVO COSI' PRECISO**
+
+Nel task history, **prima del codice**, avevo scritto che il gate toglie **anche** il
+`% _dphi()` e che *<<se `phi` uscisse dal dominio la differenza al passo 1 sarebbe PIU'
+GRANDE di `shift`, e il sigillo deve RIPORTARE la differenza, non solo contarla>>*.
+
+> ### **Max scarto su `phi`: `1.256349e+01`, cioe' `0.999770` volte `4pi`.**
+> ### **E' `2947` VOLTE la mediana di `abs(shift)`** *(`4.262912e-03`,
+> referto `2717308`)*.
+> ### **Su almeno un nodo l'effetto dominante del sito NON era il trascinamento di
+> ### fase: era la NORMALIZZAZIONE.**
+
+### 📌 **E QUESTO APRE UNA DOMANDA NUOVA, che porto a Luca col numero e non decido:**
+se `phi` esce dal dominio, allora ### **c'e' una scrittura di `phi` che non
+normalizza**, e il `% _dphi()` del sito della fase la stava ### **coprendo per caso.**
+### **Spegnere il sito ha SCOPERTO il buco, non lo ha creato.** Le scritture di `phi`
+sono **`10`**, censite dall'AST: ### **quale lascia il dominio?**
+
+### **CHE COSA CAMBIA A VALLE, riportato e non giudicato**
+
+| | `B` *(acceso)* | `C` *(il DEFAULT)* |
+|---|--:|--:|
+| `n` finale | `14 000` | `14 124` *(`+124`)* |
+| archi finali | `473 022` | `473 143` *(`+121`)* |
+
+### **Col sito spento la rete cresce di PIU'.** ### ⛔ **Non lo giudico, e il mandato
+lo dice: <<riportane la crescita, senza giudicarla>>.** ### **Non so se sia un bene:
+questo repo non ha un criterio su quanto la rete DEBBA crescere.**
+
+### ⚠ **E IL SIGILLO E' MORTO UNA VOLTA, per DUE difetti MIEI e non per la fisica**
+
+Al passo **61**, con `FloatingPointError` ### **dentro il mio comparatore** *(`inf - inf`
+alza, perche' il simulatore mette `np.seterr` a **raise**)*. E un secondo difetto avrebbe
+dato ### **un FERMO per la ragione sbagliata:** dichiaravo la configurazione su `B`, che
+e' fuori configurazione **per costruzione**. ### **Curati entrambi in `13fe302`.**
+### **E una mia affermazione FALSA** — che il difetto fosse latente anche nell'altro
+comparatore — ### **l'ha smentita la verifica: quel comparatore non sottrae niente.**
+### **Il difetto era mio soltanto**, e la correzione e' **scritta, non cancellata.**
+
+### ⛔ **E SPEGNERE NON E' CURARE:** `FASE-TRASCINAMENTO-3D` ### **RESTA APERTA**, e la
+legge in 3D ### **non si scrive ora** *(decisione di Luca)*.
