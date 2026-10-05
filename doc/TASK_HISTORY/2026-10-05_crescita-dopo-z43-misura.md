@@ -205,6 +205,76 @@ risposta può essere NO.** ### ⚠ **E se è NO, la conclusione non è <<la cura
 crescita>>: è <<la crescita di prima era in parte IMPOSTA>>** — e distinguere le due frasi
 è l'unica ragione per cui questa misura vale la pena.
 
+## ⚠ ANNOTAZIONE DEL 2026-10-05 — **LE QUATTRO VERIFICHE DEL GUARDIANO, e la mia
+## previsione REFUTATA**
+
+> ### **PAR.8: IL RAGIONAMENTO PRELIMINARE NON SI RISCRIVE QUANDO SI RIVELA SBAGLIATO, SI
+> ### ANNOTA.** Cio' che ho scritto prima dei dati **resta dov'e'**; qui c'e' che cosa non
+> vedeva. ### **Ogni verifica l'ho RIFATTA sui dati, non ricopiata dal messaggio del
+> guardiano.**
+
+### ✖ **(1) LA MIA PREVISIONE ERA SBAGLIATA, E DUE VOLTE**
+
+Avevo scritto: *<<mi aspetto che i due bracci si separino sul PRIMO cancello>>*.
+**Primo errore:** si separano su **piu' di uno**. ### **Secondo errore, e l'ha trovato il
+guardiano: avevo contato fra i canali il cancello `2`, CHE NON E' UN CANALE.**
+
+Gli archi che passano il cancello `1` e **non** il `2` sono ### **esattamente quelli con
+`|tw| >= 4pi`** *(identita', non stima: il cancello `2` e' `avv < 4pi`)*. Sono una
+popolazione ### **FISSA**: `0` al passo `1`, **`109` al passo `2`**, poi quasi costante, e
+### **pesa quasi uguale nei TRE bracci** *(`~14981` / `~14338` / `~14153` passi-arco)* --
+quindi ### **non dipende dalla legge del tempo proprio.**
+### ✔ **Togliendola, il salto NETTO del cancello `2` vale `1.0000` in ENTRAMBI i bracci.**
+Il *<<`x0.425`>>* era ### **la diluizione di una popolazione fissa**, e le frazioni
+diversissime *(`10 %` in `Ap`, `62 %` in `Bp`)* vengono dal **denominatore**, non dalla
+popolazione. ### **Registrata come voce nuova `ARCHI-OLTRE-4PI`, da NON indagare ora.**
+
+### ✔ **(2) LA SCOMPOSIZIONE GIUSTA E' IN TRE FATTORI, e il prodotto E' il fattore**
+
+Non *<<tre cancelli con tre salti>>*, ma **tre rapporti moltiplicativi**:
+**(a)** la popolazione nella finestra `Sum g1^g2^g3`; **(b)** il tasso di estrazione **per
+arco** `Sum g4 / Sum g1^g2^g3` *(dove vive `_ft`, cioe' il rallentamento)*; **(c)** il
+cancello `2LAM`.
+### **E il loro prodotto e' il fattore sulle divisioni PER COSTRUZIONE ALGEBRICA** -- i
+denominatori si cancellano a due a due. ### **Quindi il suo valore non e' <<tornare>>: e'
+DOVE sta il fattore**, e il referto lo riporta anche **per finestre di passi**.
+### ⚠ **Con una riserva che aggiungo io:** nella finestra `60`-`100` la `PARTE B` ha **un
+numero di divisioni dell'ordine dell'unita'**, quindi ### **quel rapporto non ha peso
+statistico** e va letto come tale.
+
+### ✖ **(3) LA SOGLIA VA GUARDATA SUGLI ARCHI CHE PASSANO, non sul mediano della rete**
+
+`soglia_su_g1`. E lo stato dell'ipotesi del guardiano si scrive ### **cosi', e non in un
+altro modo:**
+
+> ### **<<FALSA al mediano della rete** *(l'errore e' del guardiano e lui lo dichiara)*,
+> ### **SOSTENUTA sugli archi che entrano nella finestra.>>**
+
+### ⛔ **ED E' UNA CORRELAZIONE, NON UNA CAUSA -- e il meccanismo per cui lo e' si puo'
+### nominare:** l'insieme `g1` e' **definito** da `avv > soglia`, cioe' ### **si seleziona
+condizionando su una soglia BASSA.** Un insieme scelto perche' la sua soglia e' stata
+superata ### **ha per costruzione soglie piu' basse della rete, in QUALUNQUE braccio e con
+QUALUNQUE meccanismo.** ### **Quindi <<la soglia e' bassa dove nascono>> non dimostra
+<<nascono perche' la soglia e' bassa>>:** e' un effetto di **SELEZIONE**, e separarlo vuole
+un **intervento** sulla soglia, non un'osservazione.
+
+### ✖ **(4) LE DISTRIBUZIONI TARDIVE C'ERANO GIA', e la frase larga era MIA**
+
+Avevo chiamato *<<lacuna della misura>>* l'assenza delle distribuzioni tardive.
+### **I QUANTILI C'ERANO A OGNI PASSO** -- `avv`, `soglia`, **`soglia_su_g1`**, `ft`,
+`segno`, `rapporto_avv_soglia`, `prob_su_g123` -- e la tabella della soglia ai passi `50`,
+`70`, `100`, `140` ne e' la prova. ### **La lacuna riguardava le DISTRIBUZIONI PIENE** *(il
+blocco `mod` col gradiente, il morso e `r` per nodo)*, **non i quantili**.
+### ✔ **E l'aggiunta dei quattro passi resta utile** -- serve al blocco `mod`, che davvero
+c'era a un passo solo -- ### **ma non era una lacuna sui quantili, e dirlo era un errore mio
+di ampiezza.**
+
+### CHE COSA RESTA A LUCA, e **non lo decido io**
+
+**il peso `0.3`** della modulazione *(un numero **scelto**, che `A1` condanna)*, e
+### **se le nascite della `PARTE A` fossero un ARTEFATTO.** ### ⛔ **E la misura con `DT`
+dimezzato NON si avvia finche' Luca non lo dice.**
+
 ## 3. TODO DEL NEXT STEP — **operativo**
 
 1. **commit di questo task history**, prima dello strumento;

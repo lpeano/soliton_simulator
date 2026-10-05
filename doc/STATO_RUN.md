@@ -2192,3 +2192,61 @@ Riscalare `r` per `1/mediana(r) ~ 1.227` moltiplica **anche** `|r_i - r_j|` per 
 > ### ⛔ **SOLO NUMERI: la crescita e la soglia di mitosi sono DECISIONI DI LUCA.**
 
 **Collegata a:** `Z43`, `MITOSI-SOGLIA-GRAD`, `Z47`.
+
+---
+
+## `ARCHI-OLTRE-4PI` — **~109 archi oltre il tetto dal passo `2`, e non rilassano**
+
+*(APERTA il 2026-10-05 da una **verifica del guardiano** sui dati di `CRESCITA-DOPO-Z43`.
+### ⛔ **DA NON INDAGARE ORA** — decisione di Luca.)*
+
+### IL FATTO, e **e' un'identita', non una stima**
+
+Nel censimento dei cancelli di `decidi_divisione`, gli archi che passano il cancello `1`
+*(`avv > soglia`)* e **non** il cancello `2` *(`avv < 4pi`)* sono ### **esattamente quelli
+con `|tw| >= 4pi`.**
+
+**Contati per passo:** ### **ZERO al passo `1`, `109` AL PASSO `2`**, e da li' una
+popolazione **quasi costante** per tutta la corsa *(mediana per passo `~105`, massimo
+`110`)*.
+
+| braccio | passi-arco oltre `4pi` | frazione di `Sum g1` |
+|---|--:|--:|
+| `Ap` *(la `PARTE A`)* | `~14981` | `~10 %` |
+| `Bp` *(la `PARTE B`)* | `~14338` | `~62 %` |
+| `Bc` *(il controfattuale)* | `~14153` | `~45 %` |
+
+> ### ✔ **E I PESI SONO QUASI UGUALI NEI TRE BRACCI: QUINDI NON DIPENDONO DALLA LEGGE DEL
+> ### TEMPO PROPRIO.** Ci sono con `r` dalla fase e con `r = cs/CS_M` **allo stesso modo**.
+> ### **Le frazioni diversissime vengono dal DENOMINATORE** *(`Sum g1` e' molto piu' piccolo
+> nella `PARTE B`)*, **non dalla popolazione.**
+
+### PERCHE' E' UN DIFETTO
+
+Il cancello `2` esiste per ### **SPEGNERE la mitosi verso il tetto** *(omeostasi: la campana
+si azzera a `4pi`)*. Un arco che **nasce** oltre il tetto e **non rilassa** e' un arco
+**permanentemente nel regime di spegnimento** — cioe' ### **una legge di omeostasi che su
+quella popolazione non ha niente da regolare.**
+
+### E FALSA UN SALTO DEL CENSIMENTO, ed e' per questo che e' stata trovata
+
+Il salto `x0.425` che avevo attribuito al cancello `2` e' ### **INTERAMENTE la diluizione di
+questa popolazione fissa:** il salto **NETTO** del cancello `2`, togliendola, vale
+### **`1.0000` in entrambi i bracci.** ### **Il cancello `2` non e' un canale.**
+
+### ⛔ NON INDAGATA, e lo dico: **non so da dove vengano, ne' perche' non rilassino**
+
+**DUE STRADE DA GUARDARE**, scritte per chi la prendera' e ### **non verificate:**
+1. la **scena iniziale `MASSE-COERENTI`** potrebbe costruire archi che arrivano oltre `4pi`
+   al primo passo di dinamica — ### **la popolazione e' zero al passo `1` e `109` al passo
+   `2`, quindi nasce nel PRIMO passo di evoluzione e non dalla semina**;
+2. il **wrapping della torsione**: `TORS_4PI` mette `tw` sul dominio doppio e
+   `TW_TETTO = 4pi` ne e' l'estremo, quindi un arco che arriva **al bordo** potrebbe non
+   avere nessuna legge che lo riporti dentro.
+
+**IL MODO PIU' DIRETTO DI CERCARLA:** un controllo d'invariante su `|tw|` a fine passo **con
+gli INDICI** degli archi che superano `4pi`, girato per i **primi tre** passi.
+### **Se sono sempre gli stessi `109` indici e' una popolazione FISSA; se cambiano e' un
+FLUSSO**, e sono due difetti diversi.
+
+**Collegata a:** `CRESCITA-DOPO-Z43`, `MITOSI-SOGLIA-GRAD`, `Z43`.
