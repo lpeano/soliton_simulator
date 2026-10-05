@@ -1836,3 +1836,45 @@ proprio**, e ### **`MEM_MOTO_TUTTO` e `MEM_MOTO` restano come sono.** Questa voc
 2. con il flag ### **SPENTO**: ### **le differenze devono stare SOLO in `phi` e a
    valle.** ### ⚠ **Se una differenza comparisse altrove, lo spegnimento non e'
    recintato dove credo.**
+
+## `SIGILLO-COMPARATORE-DUPLICATO` — **il comparatore del lockstep esiste in DUE
+## COPIE, e la seconda l'ho fatta io**
+
+*(Aperta il 2026-10-05 scrivendo il sigillo della cura (2) di `MEM-HEBB-VERSO`.)*
+
+**IL FATTO:** il comparatore che confronta **due reti attributo per attributo** — quello
+che sa confrontare una `csr_matrix`, un `Generator` e un **dizionario di array**, e che
+### **CONTA fra le differenze cio' che non sa confrontare** — esiste ora in
+### **DUE COPIE:**
+
+| dove | blob |
+|---|---|
+| `csv/_seal_fork/_sigillo_veleno_keep.py` | `ee1df224` |
+| `csv/_seal_fork/_sigillo_mem_fase.py` | `3a9de230` |
+
+### ⛔ **PERCHE' E' UN DIFETTO: due copie possono divergere, ed e' la STESSA OBIEZIONE
+### che `9-ter` fa alle leggi.** Se una delle due imparasse a confrontare un tipo nuovo e
+l'altra no, ### **due sigilli darebbero verdetti diversi sugli stessi dati.**
+
+### ⚠ **E NON E' UN RISCHIO TEORICO: IL PRIMO COMPARATORE HA GIA' DOVUTO IMPARARE.**
+Il 2026-10-05, in `a5c2bfb`, ha imparato `csr_matrix` e `Generator` ### **dopo un
+FALSO-UNO** che mi avrebbe fatto concludere che la cura di `VELENO-ARCHI-KEEP` era
+sbagliata. ### **Quella lezione vive in UNA delle due copie per costruzione, e l'altra la
+ha solo perche' l'ho copiata A MANO.**
+
+**PERCHE' NON FALSA IL SIGILLO DI OGGI:** la copia e' stata fatta **ora** e le due sono
+identiche nella sostanza. ### **Il difetto e' il RISCHIO FUTURO, non un errore presente.**
+
+**CHE COSA MANCA:** estrarlo in un **modulo comune** sotto `csv/`, e farlo **importare**
+dai due sigilli. ### ✅ **E L'HO DICHIARATO NEL COMMENTO DEL CODICE invece di
+nasconderlo**, nel punto esatto in cui la copia comincia.
+
+**IN CODA** per il **congelamento dell'infrastruttura** *(decisione di Luca del
+2026-10-04)*: estrarre un modulo comune e' un **riordino**, e il congelamento lo vieta
+salvo che un difetto falsi **la misura in corso** — e questo ### **non la falsa.**
+
+### ⚠ **E UNA NOTA SU COME ANDRA' FATTA, perche' non e' un riordino gratuito:**
+l'estrazione ### **andra' fatta CON UN SIGILLO**, perche' i due sigilli esistenti devono
+restare ### **RI-GIRABILI ai loro commit** *(par.6: un sigillo si rigira con
+`git checkout` del commit che ha sigillato)*. ### **E' una cura che tocca DUE STRUMENTI
+DI CERTIFICAZIONE, e va fatta con la stessa cura di una legge.**

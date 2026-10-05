@@ -294,6 +294,63 @@ proprio questa forma e non un'altra che rispetti l'obbligo (b).**
 | **7(b) — nessuna deriva su spinte simmetriche** | ❌ **VIOLATO, ed è il punto.** |
 | **7(c) — larghezza dalla fisica** | ✅ la larghezza **è** `LAM` |
 
+## ⭐ **LA CURA (2): IL SITO DELLA FASE SI SPEGNE** *(`MEM_FASE`, decisione di Luca
+## del 2026-10-04, sigillata il 2026-10-05)*
+
+> ### ⛔ **IL NUMERO CHE L'HA DECISA: il sito SCARTAVA IL `97.3%` DEI CONTRIBUTI CHE
+> ### CALCOLAVA.**
+
+**IL DIFETTO, misurato e non letto** *(`doc/REFERTO_mem_hebb_verso_2026-10-05.md`,
+commit `2717308`)*: `phi[ii] = (phi[ii] + shift) % _dphi()` con `ii` che
+### **contiene ripetizioni** — un nodo e' primo estremo di **fino a `90`** archi — e in
+numpy l'indicizzazione **fancy in scrittura** fa ### **VINCERE L'ULTIMO.**
+
+| | |
+|---|--:|
+| contributi **applicati** | `1 925 336` |
+| contributi ### **SCARTATI** | ### **`68 847 776`** |
+| frazione scartati | ### **`0.9728`** |
+| somma dei **moduli** applicati | `3.4531e+04` |
+| somma dei **moduli** scartati | ### **`1.2514e+06`** |
+| ### **rapporto scartati/applicati** | ### **`36.24`** |
+
+### ⛔ **E NON E' UNA SOMMA MANCATA: E' UNA SCELTA FATTA DALL'ORDINE DELL'ARRAY.** Se
+la legge volesse **sommare** servirebbe `np.add.at`, che il file ### **usa altrove**, a
+`:9115`, ### **nella stessa funzione.**
+### **Un fenomeno che cambia se riordini un array NON e' un fenomeno del sistema**, ed e'
+la risposta alla **domanda 5** della stella polare.
+
+### ✅ **E IL TAGLIO `pi/4` NON C'ENTRA, e questo chiude una domanda aperta di questa
+### scheda:** morde sullo ### **`0.0011`**. ### **Due distorsori possibili, e il
+colpevole e' l'altro.**
+
+**LA FORMA DELLA CURA:** un `if MEM_FASE:` attorno a ### **quella riga e basta.**
+`mem_mot` continua ad aggiornarsi, `proiezione_trasversale` e `shift_fase_dinamico`
+restano **calcolati**, e il taglio `pi/4` resta **applicato**: ### **si toglie SOLO il
+contributo a `phi`**, com'e' per `MEM_MOTO` sul contributo a `d0`.
+
+### ⛔ **IL DEFAULT E' `False`, E NON E' UN FLAG BYTE-INERTE:** spento,
+### **LA FISICA CAMBIA.** E' la fisica **decisa**. ### **E' il PRIMO flag di questo repo
+il cui default cambia la fisica** — tutti gli altri nascono *OFF e inerti* oppure *ON*.
+
+### ⚠ **E TOGLIE ANCHE IL `% _dphi()`, non solo la somma:** il commento del codice
+dichiara che `(phi + 0) % (4 pi)` e' un NO-OP ### **solo se `phi` sta gia' nel dominio.**
+
+### ⛔ **GLI ALTRI DUE DIFETTI DEL SITO NON SONO CURATI, e spegnere NON E' CURARE**
+
+| difetto | dove vive |
+|---|---|
+| solo l'estremo `ii` riceve | `MEM-HEBB-VERSO` |
+| `phi[ii] = ...` con indici ripetuti: vince l'**ultimo** | ### **curato QUI, spegnendo** |
+| `dir_laterale = (-y, x, 0)` privilegia l'asse `z` del **laboratorio** | ### **`FASE-TRASCINAMENTO-3D`, che RESTA APERTA** |
+
+### **La legge in 3D NON si scrive ora** *(decisione di Luca)*, e la voce ### **non si
+chiude.**
+
+**IL SIGILLO:** `csv/_seal_fork/_sigillo_mem_fase.py` *(`3a9de230`)*; la patch del
+braccio 0 e' `csv/_seal_fork/_mem_fase_patch.py` *(`8b9c0c1a`)*.
+**Simulatore curato: `1feb9b0a`** *(da `e2940b3c`)*.
+
 ## LO STATO: `DIFETTOSA` — **e quanto pesa, misurato**
 
 | | `Z108` *(braccio acceso, 600 passi)* | `Z109` *(senza memoria del moto)* |
@@ -403,7 +460,7 @@ la formula vecchia, sullo stesso evento, dava `0.4 LAM` su `d` e una somma mesco
 **⚠ `_g_sm_nascite` RESTA, e misura un'altra cosa:** le **INVOCAZIONI**. Una chiamata che non
 tronca nulla lo fa salire ugualmente — è il presidio di `D38`, non una misura del troncamento.
 
-<!-- SCHEDA nome=memoria-del-moto funzioni=memoria_hebbiana_moto flag=MEM_HEBB,MEM_MOTO,MEM_MOTO_TUTTO,SCALA_P_MEDIANA,ZETA_VIR -->
+<!-- SCHEDA nome=memoria-del-moto funzioni=memoria_hebbiana_moto flag=MEM_HEBB,MEM_MOTO,MEM_FASE,MEM_MOTO_TUTTO,SCALA_P_MEDIANA,ZETA_VIR -->
 # ② LA MEMORIA DEL MOTO — **`memoria_hebbiana_moto` / `S08_proj` / `mem_mot`**
 
 > ### 🏗 **T1: escono da questa legge l'apertura, LE DUE CHIUSURE e il controllo degli invarianti**
@@ -473,8 +530,12 @@ d0[mask]   += _sd0(proj, mask)                                <- il sito `S08_pr
 ```
 proiezione_trasversale = SUM(mem_mot[ii] * dir_laterale)
 shift_fase_dinamico    = accoppiamento_dinamico * proiezione_trasversale * (d_archi/d0_archi)
-phi[ii] = (phi[ii] + clip(shift_fase_dinamico, -pi/4, +pi/4)) % 4pi
+if MEM_FASE:                             # <- IL GATE, dal 2026-10-05 (default SPENTO)
+    phi[ii] = (phi[ii] + clip(shift_fase_dinamico, -pi/4, +pi/4)) % 4pi
 ```
+### ⛔ **E DAL 2026-10-05 QUESTO PUNTO E' SPENTO DI DEFAULT** *(`MEM_FASE = False`,
+decisione di Luca del 2026-10-04)*: la riga **non gira**. Il **perche'** sta sotto,
+### **ed e' un numero.**
 
 ## DA DOVE VIENE
 
@@ -506,8 +567,10 @@ non un'altra forma; e perché il tetto sia `0.01`.
   `A2`, `D03`)*, `_deg`, `d0`.
 - **scrive:** `mem_mot` *(stato per nodo)* · `d0` al sito **`S08_proj`** · **`phi`** al
   punto `:6033`.
-- **flag:** **`MEM_MOTO`** recinta la **sola** scrittura su `d0`; **`MEM_MOTO_TUTTO`** recinta
-  **tutti e quattro** i punti *(sigillo `10/10`, blob `21e3a3dc`)*.
+- **flag:** **`MEM_MOTO`** recinta la **sola** scrittura su `d0`; ### **`MEM_FASE`**
+  *(dal 2026-10-05)* recinta la **sola** scrittura su **`phi`**, ed e'
+  ### **SPENTO di default**; **`MEM_MOTO_TUTTO`** recinta **tutti e quattro** i punti
+  *(sigillo `10/10`, blob `21e3a3dc`)*.
 
 ## I LIMITI, CLASSIFICATI CON `A11`
 
@@ -518,7 +581,7 @@ non un'altra forma; e perché il tetto sia `0.01`.
 | | **6** | ❌ **saturo nel `78 %`–`89 %`**: *«non è un limite, è la legge»* |
 | `max(median(I), 1e-9)` | **1** | ⚠ difesa dalla divisione, non vincolo fisico |
 | `max(|v|, 1e-9)` su `L` | **1** | ⚠ idem |
-| `clip(shift_fase, ±π/4)` | **1** | ⚠ dichiarato *«limite geometrico causale»*: **da verificare se satura** — **non misurato** |
+| `clip(shift_fase, ±π/4)` | **1** | ### ✅ **MISURATO il 2026-10-05: satura sullo `0.0011`** *(`doc/REFERTO_mem_hebb_verso_2026-10-05.md`)*. ### **NON e' lui il distorsore del sito:** il distorsore e' ### **<<l'ultimo vince>>**, che morde sullo `0.973` |
 
 ## LO STATO: `DIFETTOSA` — **e quanto pesa, misurato**
 

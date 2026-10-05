@@ -3237,6 +3237,41 @@ MEM_MOTO_TUTTO = True    # [G4-bis, 2026-09-22] SPEGNE L'INTERO BLOCCO DELLA MEM
                          # ⚠ COSA NON TOCCA, di proposito: i pavimenti `P3` e `P7`, la gravita'
                          #   bifase, la coesione, e `_smp_chiudi`. Non sono memoria del moto.
                          # Come `MEM_MOTO`: nessun flag da riga di comando, si imposta SUL MODULO.
+MEM_FASE = False         # `MEM_FASE` [MEM-HEBB-VERSO, cura (2), decisione di Luca del
+                         # 2026-10-04] recinta LA SCRITTURA DELLA MEMORIA DEL MOTO SU `phi`
+                         # (il sito del TRASCINAMENTO DI FASE, qui sotto nella stessa
+                         # funzione). `MEM_FASE` e' il nome, e questo commento lo NOMINA
+                         # perche' `H-P7` lo pretende: un commento che non nomina il suo
+                         # flag resta MUTO se una patch si inserisce fra i due.
+                         # ⛔ IL DEFAULT E' `False`, E NON E' UN FLAG BYTE-INERTE: spento,
+                         #   LA FISICA CAMBIA. E' la fisica DECISA -- il sito NON scrive piu'
+                         #   `phi`. Acceso riproduce il comportamento storico, BYTE-IDENTICO.
+                         #   E' il CONTRARIO del caso normale di questo repo, dove un flag
+                         #   nuovo nasce OFF **e inerte**: qui OFF toglie una legge.
+                         # IL PERCHE', MISURATO (`doc/REFERTO_mem_hebb_verso_2026-10-05.md`,
+                         #   commit `2717308`): il sito SCARTAVA IL 97.3% dei contributi che
+                         #   calcolava -- `phi[ii] = ...` con `ii` CHE CONTIENE RIPETIZIONI, e
+                         #   in numpy l'indicizzazione fancy IN SCRITTURA fa VINCERE L'ULTIMO.
+                         #   Rapporto dei moduli scartati/applicati: 36.2. Un nodo e' primo
+                         #   estremo di fino a 90 archi, e 89 contributi su 90 sparivano IN
+                         #   SILENZIO. ⛔ QUALE sopravvivesse dipendeva dall'ORDINE DELL'ARRAY:
+                         #   non e' una legge, e' un artefatto dell'ordine.
+                         # ⚠ SPEGNE SOLO LA SCRITTURA SU `phi`. `mem_mot` continua ad
+                         #   aggiornarsi, `proiezione_trasversale` e `shift_fase_dinamico`
+                         #   restano CALCOLATI, e il taglio `pi/4` resta applicato a
+                         #   `shift_fase_dinamico`: si toglie SOLO il contributo a `phi`,
+                         #   com'e' per `MEM_MOTO` sul contributo a `d0`.
+                         # ⚠ E TOGLIE ANCHE IL `% self._dphi()` su `phi[ii]`, non solo la
+                         #   somma: il commento di `:9516` dichiara che `(phi + 0) % (4 pi)`
+                         #   e' un NO-OP **solo se `phi` sta gia' nel dominio**.
+                         # ⛔ GLI ALTRI DUE DIFETTI DEL SITO NON SONO CURATI QUI, e spegnere
+                         #   NON E' CURARE: <<solo l'estremo `ii` riceve>> resta in
+                         #   `MEM-HEBB-VERSO`, e `dir_laterale = (-y, x, 0)` -- che privilegia
+                         #   l'asse `z` del LABORATORIO mentre i nodi stanno in 3D -- e' la
+                         #   voce `FASE-TRASCINAMENTO-3D`, che RESTA APERTA: la legge in 3D
+                         #   NON si scrive ora (decisione di Luca).
+                         # Come `MEM_MOTO` e `MEM_MOTO_TUTTO`: nessun flag da riga di comando,
+                         # si imposta SUL MODULO. E' la TERZA volta della stessa forma.
 # SETTORE SPINORIALE a 4pi. Ogni nodo porta una SECONDA componente di fase che, accoppiata
 # alle antichiralita' (perc_chi, i +-pi gia' nel sistema), trasforma come uno spinore sotto
 # 4pi (doppia copertura). Quando SPENTO (SPINORE=False) il sistema e' IDENTICO all'U(1)
@@ -9528,7 +9563,19 @@ class Rete:
                     shift_fase_dinamico = np.clip(shift_fase_dinamico, -np.pi * 0.25, np.pi * 0.25)
 
                     # Applica lo shift al campo di fase senza alterare le coordinate fisse dei puntatori (net.pos)
-                    self.phi[ii] = (self.phi[ii] + shift_fase_dinamico) % self._dphi()
+                    # [MEM_FASE, cura (2) di MEM-HEBB-VERSO, decisione di Luca del 2026-10-04]
+                    # IL SITO SI SPEGNE CON UN FLAG PROPRIO, e il DEFAULT lo tiene SPENTO.
+                    # ⛔ MISURATO: scartava il 97.3% dei contributi, perche' `ii` CONTIENE
+                    #   RIPETIZIONI e l'indicizzazione fancy in scrittura FA VINCERE L'ULTIMO.
+                    #   Rapporto dei moduli scartati/applicati 36.2 (referto `2717308`).
+                    #   QUALE contributo sopravvivesse dipendeva dall'ORDINE DELL'ARRAY.
+                    # ⚠ E QUESTO `if` TOGLIE ANCHE IL `% self._dphi()`, non solo la somma:
+                    #   vedi il commento otto righe sopra. Se `phi` uscisse dal dominio la
+                    #   differenza sarebbe piu' grande di `shift_fase_dinamico`.
+                    # `MEM_MOTO` e `MEM_MOTO_TUTTO` NON cambiano, e `mem_mot` continua ad
+                    # aggiornarsi: si recinta QUESTA scrittura e nient'altro.
+                    if MEM_FASE:
+                        self.phi[ii] = (self.phi[ii] + shift_fase_dinamico) % self._dphi()
                 if TRACCIA_D0: _tr_pre = self.d0.copy()
                 if TRACCIA_D0: self._traccia_d0('P7_dopo_4917', _tr_pre)
         # [SCALA_MIN_PASSO, C3] IL FRENO SU `d0`, UNA VOLTA SOLA, a fine ciclo. `memoria_

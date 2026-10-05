@@ -469,7 +469,19 @@ per sbaglio da un comando.
 |---|:-:|---|---|
 | `GRAV_BIFASE` | `True` | la legge gravitazionale bifase: il sito `S09_spinta_med` che scrive `d0` | — (e' il comportamento storico) |
 | `MEM_MOTO` | `True` | **la scrittura della memoria del moto su `d0`**, cioe' il sito `S08_proj`. Spenta, `proj` resta calcolato *(il ramo della gravita' ne usa `len(proj)`)*, `mem_mot` resta aggiornato e il pavimento `P3` continua a girare: si toglie **solo** il contributo a `d0` | **si', MISURATO**: `206` campi identici e `0` diversi contro `_val600`, prodotto dal blob PRIMA del flag *(sigillo `T7`)* |
+| ### **`MEM_FASE`** | ### **`False`** | ### **la scrittura della memoria del moto su `phi`**, cioe' il **trascinamento di fase** in `memoria_hebbiana_moto`. Acceso riproduce il comportamento storico; ### **spento (il DEFAULT) il sito NON scrive `phi`.** `mem_mot`, `proiezione_trasversale` e `shift_fase_dinamico` restano **calcolati**, e il taglio `pi/4` resta applicato: si toglie **solo** il contributo a `phi`. ### ⚠ **Toglie ANCHE il `% _dphi()`**, non solo la somma | ### ⛔ **NO, E IL DEFAULT NON E' IL COMPORTAMENTO STORICO:** spento ### **la fisica CAMBIA.** E' la fisica **decisa** *(Luca, 2026-10-04)*. **Acceso** e' byte-identico a `e2940b3c` *(sigillo `csv/_seal_fork/_sigillo_mem_fase.py`)* |
 | `TRACCIA_D0` | `False` | i diciannove punti di traccia degli scrittori di `d0` | si' |
+
+### ⛔ **E UNA COSA NUOVA IN QUESTO PARAGRAFO, dal 2026-10-05: `MEM_FASE` E' IL PRIMO
+### FLAG IL CUI DEFAULT CAMBIA LA FISICA.**
+Tutti gli altri qui nascono **OFF e inerti**, oppure **ON** *(il comportamento
+storico)*. ### **`MEM_FASE` nasce OFF E TOGLIE UNA LEGGE**, perche' quella legge era
+### **un artefatto dell'ordine dell'array** *(misurato: scartava il **`97.3%`** dei
+contributi, rapporto dei moduli scartati/applicati **`36.2`**;
+`doc/REFERTO_mem_hebb_verso_2026-10-05.md`)*.
+### 📌 **LA CONSEGUENZA:** da quel commit, ### **ogni sigillo e ogni rigiocata che
+ri-esegue il simulatore da' numeri diversi dai suoi referti** -- e non e' un difetto:
+### **i referti sono legati al loro BLOB** *(par.6)*.
 
 **⚠ `MEM_HEBB = False` NON e' il modo di spegnere la memoria del moto:** spegne l'**intera**
 funzione, gravita' e coesione comprese. **Misurato: toglie cinque siti oltre la gravita'**
