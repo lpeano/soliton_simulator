@@ -349,12 +349,39 @@ class Misura(object):
                 d["spearman_stesso_passo"]["%s|%s" % (np_, nb_)] = {"rho": rho, "n": nn}
                 d["quintili_stesso_passo"]["%s|%s" % (np_, nb_)] = quintili(pv_, bv_)
         # --- (b) IL PASSO PRECEDENTE: ### IL PREDITTORE CAUSALE
+        # ### LA GUARDIA E' PER ARCO, NON PER RETE, e la prima corsa ha mostrato perche':
+        #   pretendendo `prec["n"] == n` il predittore causale e' uscito SOLO al passo `50`
+        #   -- ai passi `100` e `140` la rete era cresciuta nel passo prima e la fotografia
+        #   risultava <<non allineata>>, pur essendo valida per quasi tutti gli archi.
+        # ### ✔ **ED E' VALIDA, e il perche' si legge dalle regole di nascita:** i NODI si
+        #   APPENDONO (`self.phi = concatenate([self.phi, fm])`, `self.phivel` idem:
+        #   **nessun `keep` sulle colonne di nodo**), quindi ### **gli indici dei nodi che
+        #   c'erano restano QUELLI**. Gli ARCHI invece si filtrano
+        #   (`self.i = concatenate([self.i[keep], a, m])`), ma qui non importa: il
+        #   predittore indicizza `prec["r"]` con gli indici di NODO CORRENTI, e per un nodo
+        #   che esisteva quel valore e' esattamente il suo di allora.
+        # ### ⚠ **QUINDI SI USANO GLI ARCHI I CUI DUE ESTREMI ESISTEVANO**, e quelli
+        #   esclusi si CONTANO (A8).
+        _lp = 0 if prec is None else min(len(prec["r"]), len(prec["phivel"]))
+        _vive = ((a_ < _lp) & (b_ < _lp)) if _lp else np.zeros(a_.size, bool)
         if (prec is not None and prec["passo"] == self.passo - 1
-                and prec["n"] == n and len(prec["r"]) >= n and len(prec["phivel"]) >= n):
+                and int(np.sum(_vive)) >= 10):
             d["causale"] = True
             d["passo_del_predittore"] = prec["passo"]
-            for np_, pv_ in _pred(prec["r"], prec["phivel"]):
-                for nb_, bv_ in BERS:
+            d["archi_causali"] = int(np.sum(_vive))
+            d["archi_esclusi_nati"] = int(a_.size - np.sum(_vive))
+            d["n_al_passo_prec"] = int(prec["n"])
+            _a2, _b2 = a_[_vive], b_[_vive]
+            _rp, _pp = prec["r"], prec["phivel"]
+            _g = np.abs(_rp[_a2] - _rp[_b2])
+            _PR = (("gradiente_nudo", _g),
+                   ("proxy_grad_per_phivel",
+                    _g * 0.5 * (np.abs(_pp[_a2]) + np.abs(_pp[_b2]))),
+                   ("forma_esatta", np.abs(_rp[_a2] * _pp[_a2] - _rp[_b2] * _pp[_b2])))
+            _BE = (("incremento_TOTALE", tot[_vive]), ("SPINTA", sp[_vive]),
+                   ("SCARICA", sc[_vive]))
+            for np_, pv_ in _PR:
+                for nb_, bv_ in _BE:
                     rho, nn = spearman(pv_, bv_)
                     d["spearman"]["%s|%s" % (np_, nb_)] = {"rho": rho, "n": nn}
                     d["quintili"]["%s|%s" % (np_, nb_)] = quintili(pv_, bv_)
@@ -362,9 +389,10 @@ class Misura(object):
             # ### SI DICHIARA invece di cadere in silenzio sul passo sbagliato (A8).
             d["causale"] = False
             d["perche_non_causale"] = (
-                "la fotografia del passo precedente non e' allineata: prec=%s, n=%s contro %s"
+                "fotografia assente o troppo pochi archi con due estremi preesistenti: "
+                "prec=%s, archi vivi=%s su %d"
                 % (None if prec is None else prec["passo"],
-                   None if prec is None else prec["n"], n))
+                   int(np.sum(_vive)) if _lp else 0, int(a_.size)))
             d["spearman"] = dict(d["spearman_stesso_passo"])
             d["quintili"] = dict(d["quintili_stesso_passo"])
         self.corr[self.passo] = d
@@ -1001,6 +1029,34 @@ def collaudo():
           _rs is not None and abs(_rs + 1.0) < 1e-12, "%.17g" % _rs)
     prova("causale: ### quindi un gancio sul passo sbagliato sarebbe VISIBILE dal segno",
           _rc * _rs < 0, "+1 contro -1")
+    # ### E IL CASO CHE LA PRIMA CORSA HA TROVATO: LA RETE CRESCE FRA t-1 e t.
+    #   La guardia e' PER ARCO, quindi gli archi i cui due estremi esistevano restano
+    #   causali, e quelli nati si CONTANO.
+    m4 = Misura("crescita")
+    m4.passo = PASSI_CORR[0] - 1
+    m4.torsione(R2(), spinta=_sp, scarica=np.zeros(_NA), r=r_prec, i=_i, j=_j)
+
+    class R3(object):          # un nodo IN PIU' al passo dopo
+        n = _NA + 2
+        phivel = np.ones(_NA + 2)
+    _i3 = np.concatenate([_i, [_NA]])
+    _j3 = np.concatenate([_j, [_NA + 1]])      # un arco NUOVO verso il nodo nato
+    r_ora3 = np.concatenate([r_ora, [r_ora[-1] + 1.0]])
+    m4.passo = PASSI_CORR[0]
+    m4.torsione(R3(), spinta=np.concatenate([_sp, [1.0]]),
+                scarica=np.zeros(_NA + 1), r=r_ora3, i=_i3, j=_j3)
+    c4 = m4.corr[PASSI_CORR[0]]
+    prova("crescita: ### con la rete CRESCIUTA il predittore resta CAUSALE",
+          c4.get("causale") is True, "archi causali %s" % c4.get("archi_causali"))
+    prova("crescita: ### e l'arco NATO si ESCLUDE e si CONTA",
+          c4.get("archi_causali") == _NA and c4.get("archi_esclusi_nati") == 1,
+          "%s causali, %s esclusi" % (c4.get("archi_causali"),
+                                      c4.get("archi_esclusi_nati")))
+    prova("crescita: ### e il segno resta quello causale (+1), non quello sfasato",
+          c4["spearman"]["gradiente_nudo|SPINTA"]["rho"] is not None
+          and c4["spearman"]["gradiente_nudo|SPINTA"]["rho"] > 0.9,
+          "%.6f" % c4["spearman"]["gradiente_nudo|SPINTA"]["rho"])
+
     # il caso che DEVE dichiararsi NON causale: fotografia non allineata
     m3 = Misura("salto")
     m3.passo = PASSI_CORR[0]
