@@ -347,7 +347,7 @@ dichiara che `(phi + 0) % (4 pi)` e' un NO-OP ### **solo se `phi` sta gia' nel d
 ### **La legge in 3D NON si scrive ora** *(decisione di Luca)*, e la voce ### **non si
 chiude.**
 
-**IL SIGILLO:** `csv/_seal_fork/_sigillo_mem_fase.py` *(`3a9de230`)*; la patch del
+**IL SIGILLO:** `csv/_seal_fork/_sigillo_mem_fase.py` *(`a5cb4c60`)*; la patch del
 braccio 0 e' `csv/_seal_fork/_mem_fase_patch.py` *(`8b9c0c1a`)*.
 **Simulatore curato: `1feb9b0a`** *(da `e2940b3c`)*.
 

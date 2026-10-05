@@ -1850,7 +1850,7 @@ che sa confrontare una `csr_matrix`, un `Generator` e un **dizionario di array**
 | dove | blob |
 |---|---|
 | `csv/_seal_fork/_sigillo_veleno_keep.py` | `ee1df224` |
-| `csv/_seal_fork/_sigillo_mem_fase.py` | `3a9de230` |
+| `csv/_seal_fork/_sigillo_mem_fase.py` | `a5cb4c60` |
 
 ### ⛔ **PERCHE' E' UN DIFETTO: due copie possono divergere, ed e' la STESSA OBIEZIONE
 ### che `9-ter` fa alle leggi.** Se una delle due imparasse a confrontare un tipo nuovo e

@@ -158,8 +158,32 @@ def confronta(x, y):
             af, bf = np.asarray(a, complex), np.asarray(b, complex)
             ug = (af == bf) | (np.isnan(af) & np.isnan(bf))
             nd = int(np.sum(~ug))
-            mx = (float(np.nanmax(np.abs(af - bf))) if nd else 0.0)
-            return nd == 0, nd, "", mx
+            # ### ⛔ LA SOTTRAZIONE NON SI FA ALLA CIECA, e questo l'ha trovato IL RUN:
+            #   `np.nanmax(np.abs(af - bf))` ALZA `FloatingPointError: invalid value
+            #   encountered in subtract` quando entrambi valgono `inf` (`inf - inf`), perche'
+            #   il simulatore mette `np.seterr` a RAISE sull'invalido (gli invarianti
+            #   NUMERICI). ### Il sigillo e' morto al passo 61 per QUESTO, non per la fisica.
+            #   ⚠ AVEVO SCRITTO QUI che il difetto era latente anche in
+            #   `_sigillo_veleno_keep.py`. ### **HO VERIFICATO, E NON E' VERO:** quel
+            #   comparatore NON calcola lo scarto massimo -- conta le celle diverse e
+            #   torna `(d == 0, d, "")` SENZA sottrarre (`:183-188`). ### **Il difetto
+            #   e' MIO soltanto, e nasce dall'aver AGGIUNTO `max_scarto`.** Lo lascio
+            #   scritto perche' l'avevo affermato senza verificarlo (`P1`), e la
+            #   verifica mi ha smentito. Registrato in `SIGILLO-COMPARATORE-DUPLICATO`.
+            # ➜ LA FORMA GIUSTA: il massimo scarto si misura SOLO dove entrambi sono
+            #   FINITI, e le celle non finite che differiscono si CONTANO a parte --
+            #   perche' `inf` contro `1e300` e' una differenza vera, e non ha uno scarto.
+            mx, nonfin = 0.0, 0
+            if nd:
+                fin = np.isfinite(af) & np.isfinite(bf)
+                sel = fin & ~ug
+                nonfin = int(np.sum(~fin & ~ug))
+                with np.errstate(all="ignore"):
+                    mx = (float(np.max(np.abs(af[sel] - bf[sel])))
+                          if bool(np.any(sel)) else None)
+            nota = ("" if not nonfin
+                    else "%d celle diverse NON FINITE (inf/nan contro altro)" % nonfin)
+            return nd == 0, nd, nota, mx
         ug = (a == b)
         nd = int(np.sum(~np.asarray(ug)))
         return nd == 0, nd, "", None
@@ -225,6 +249,13 @@ def braccio0():
     ### **E il *prima* si verifica contro quello che LA PATCH DICHIARA**, non contro un
     numero scritto qui: due numeri in due posti sarebbero due leggi (`9-ter`).
     """
+    # ### I NOMI COMINCIANO CON `_sim_` DI PROPOSITO: `.gitignore` copre gia'
+    #   `csv/**/_sim_*.py`, perche' un sorgente ESTRATTO o PATCHATO si ri-ottiene a
+    #   ogni giro da git e dalla patch -- ### **il dato E' il comando che lo produce**
+    #   (par.6). ### Seguo la convenzione invece di aggiungere una regola nuova, che
+    #   sarebbe infrastruttura in tempo di CONGELAMENTO.
+    #   ⚠ L'ho imparato da `H-FILE`, che ha rifiutato il commit quando i due file
+    #   intermedi del run morto sono finiti nell'indice.
     out = {"dove": "il PADRE del commit CHE HA CAMBIATO IL SIMULATORE (H-P8)"}
     rc = git("log", "-1", "--format=%H", "--", "soliton_simulator.py")
     commit_cura = rc.stdout.decode().strip()
@@ -234,7 +265,7 @@ def braccio0():
     out["padre"] = padre
     if not os.path.isdir(FUORI):
         os.makedirs(FUORI)
-    dst = os.path.join(FUORI, "_prima.py")
+    dst = os.path.join(FUORI, "_sim_prima.py")
     g = git("cat-file", "-p", padre + ":soliton_simulator.py")
     if g.returncode != 0:
         out["stato"] = "non estratto: %r" % (g.stderr[:200],)
@@ -251,7 +282,7 @@ def braccio0():
                         % (out["blob_prima"], out["blob_prima_atteso"]))
         return None, out
     out["blob_patch"] = blob(PATCH)[:8]
-    patchato = os.path.join(FUORI, "_patchato.py")
+    patchato = os.path.join(FUORI, "_sim_patchato.py")
     pr = subprocess.run([sys.executable, PATCH, dst, patchato],
                         capture_output=True, cwd=RADICE)
     out["patch_returncode"] = pr.returncode
@@ -268,7 +299,17 @@ def lockstep(passi, vecchio):
     SA, nA, a = carica("sim_mf_A", vecchio, None)          # il blob VECCHIO
     SB, nB, _ = carica("sim_mf_B", SIM, True)              # il nuovo, flag ACCESO
     SC, nC, _ = carica("sim_mf_C", SIM, False)             # il nuovo, DEFAULT (spento)
-    in_conf = _cli_flag.dichiara_configurazione(SB, stampa)
+    # ### ⛔ LA CONFIGURAZIONE SI DICHIARA SU `C`, NON SU `B`, E IL PERCHE' E' IL PUNTO:
+    #   `B` ha `MEM_FASE = True`, cioe' e' FUORI dalla configurazione del driver PER
+    #   COSTRUZIONE -- accenderlo e' tutto il senso del braccio. Dichiararla su `B` darebbe
+    #   <<1 differenza su 82>> e il mio esito l'avrebbe letta come un GUASTO: ### **un
+    #   FERMO per la ragione sbagliata.** ### `C` E' IL BRACCIO AL DEFAULT, cioe' LA FISICA
+    #   DECISA, ed e' su quello che la domanda <<dove si e' misurato>> ha senso.
+    in_conf = _cli_flag.dichiara_configurazione(SC, stampa)
+    stampa("  ### E LA CONFIGURAZIONE SI DICHIARA SU `C` (il DEFAULT), non su `B`:")
+    stampa("      `B` ha MEM_FASE = True, quindi e' FUORI configurazione PER COSTRUZIONE.")
+    stampa("      Dichiararla su `B` avrebbe dato 1 differenza su 82, e il mio esito")
+    stampa("      l'avrebbe letta come un GUASTO: un FERMO per la ragione sbagliata.")
     stampa("  flag sul modulo: A (vecchio) non ha MEM_FASE;  B = %s;  C = %s"
            % (getattr(SB, "MEM_FASE", "<assente>"), getattr(SC, "MEM_FASE", "<assente>")))
     stampa("  scena: nmasse=%s sep=%s  ->  n = %d, archi = %d"
