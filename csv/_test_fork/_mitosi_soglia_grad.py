@@ -507,7 +507,8 @@ def main(argv):
     stampa("  scena: n = %d, archi = %d" % (N_["Bg"].n, len(N_["Bg"].i)))
     stampa()
     riga("=")
-    stampa("LA CORSA: %d passi, QUATTRO bracci" % passi)
+    stampa("LA CORSA: %d passi, %d bracci (%s)"
+           % (passi, len(BR), ", ".join(x[0] for x in BR)))
     riga("=")
 
     def _istantanea(stato, k, err=None):
@@ -560,11 +561,12 @@ def main(argv):
                              "traccia": traceback.format_exc()})
             return 1
         npre = {kk: int(N_[kk].n) for kk in N_}
+        _nomi = [x[0] for x in BR]
         print("[battito] passo %d/%d  n: %s  nasce: %s"
               % (k, passi,
-                 " ".join("%s=%d" % (x, N_[x].n) for x in ("Ap0", "Bp0", "B03", "Bg")),
+                 " ".join("%s=%d" % (x, N_[x].n) for x in _nomi),
                  " ".join("%s=%d" % (x, mis[x].passi[-1].get("g4_nasce", 0))
-                          for x in ("Ap0", "Bp0", "B03", "Bg"))), flush=True)
+                          for x in _nomi)), flush=True)
         if k % PASSI_SALVA == 0:
             _istantanea("IN CORSO", k)
 
@@ -1010,6 +1012,24 @@ def collaudo():
     prova("causale: ### e in quel caso ricade sullo STESSO PASSO, dichiarandolo",
           m3.corr[PASSI_CORR[0]]["spearman"]
           == m3.corr[PASSI_CORR[0]]["spearman_stesso_passo"])
+
+    # --- 8. IL BATTITO: i nomi vengono da `BR`, non da una tupla scritta a mano
+    # ### LA PRIMA CORSA CON `--solo-bg` E' CADUTA AL PASSO 1 PER QUESTO: la tupla
+    #   `("Ap0", "Bp0", "B03", "Bg")` era fissa, e con un braccio solo `N_["Ap0"]` ALZAVA
+    #   `KeyError`. ### **Una prova STRUTTURALE, perche' e' li' che il difetto vive.**
+    _tutto = io.open(os.path.abspath(__file__), encoding="utf-8").read()
+    _mk = "# " + "=" * 63 + " IL COLLAUDO"
+    prova("il marcatore del collaudo e' unico", _tutto.count(_mk) == 1)
+    _src = _tutto.split(_mk)[0]
+    # ### E L'ASSERZIONE SI LIMITA AL CICLO DEI PASSI: la tupla fissa resta -- e DEVE --
+    #   dentro `rapporto()`, che gira SOLO sulla corsa a quattro bracci e li elenca tutti.
+    #   ### **La prima versione di questa prova la cercava in TUTTO il sorgente e falliva su
+    #   ### un uso LEGITTIMO.**
+    _ciclo = _src.split("for k in range(1, passi + 1):")[1].split("comune = _istantanea")[0]
+    prova("battito: ### nel CICLO DEI PASSI i nomi vengono da `BR`, non da una tupla fissa",
+          "_nomi = [x[0] for x in BR]" in _ciclo
+          and '("Ap0", "Bp0", "B03", "Bg")' not in _ciclo,
+          "con --solo-bg i bracci sono UNO")
 
     riga("=")
     ko = [n for n, o, _d in esiti if not o]
