@@ -275,6 +275,57 @@ di ampiezza.**
 ### **se le nascite della `PARTE A` fossero un ARTEFATTO.** ### ⛔ **E la misura con `DT`
 dimezzato NON si avvia finche' Luca non lo dice.**
 
+## ⛔ ANNOTAZIONE DEL 2026-10-05 — **UN'INFERENZA MIA E' RITIRATA: `dt_e` non entra
+## una volta sola**
+
+> ### **PAR.8: SI ANNOTA, NON SI RISCRIVE.** *(Obiezione del guardiano. ### **L'inferenza va
+> RITIRATA, non riformulata** — e la lettura del codice l'ho **rifatta io**, non ricopiata.)*
+
+### CHE COSA AVEVO SCRITTO, e perche' era sbagliato
+
+Nel referto *(`12e2ca7`)*: *<<togliere il rallentamento uniforme da' **al massimo `x1.23`**
+sugli eventi attesi **perche' entra una volta sola, nel fattore `(b)`**>>*, e ne deducevo che
+il `x3.89` osservato in `Bc` venisse ### **dal gradiente.**
+### ⛔ **LA PREMESSA E' FALSA.**
+
+### IL CENSIMENTO DI `dt_e`, **rifatto sul codice, per riga**
+
+| riga | dove entra |
+|---|---|
+| `:7795` / `:7799` | ### **LA SCARICA DELLA TORSIONE:** `self.tw += _w8(dph + twist_dip - twp) - dt_e * self.tw / _ttw` |
+| `:7926`-`:7934` | il rilassamento di **`peq`** |
+| `:8044` | **`dts = dt_e / nsub`**, il sotto-passo della metrica |
+| `:8234` | il rilassamento viscoso di **`d0`** |
+| `:8231` | il **tetto `CFL`** |
+| `:7259`-`:7266` | **`_ft = dt_e/DT`**, cioe' il fattore `(b)` — ### **l'unico che avevo contato** |
+
+### ⛔ **E LA SCARICA HA IL SEGNO OPPOSTO**
+
+Un `dt_e` **piu' grande** rende `- dt_e*tw/_ttw` **piu' negativo**, cioe' ### **scarica la
+torsione PIU' IN FRETTA** — **contro** le nascite. Quindi riscalare `r` cambia ### **anche
+la popolazione che arriva nella finestra, cioe' il fattore `(a)`** — che e' il canale
+**dominante**.
+
+### ➜ **NEL BRACCIO `Bc` SI MUOVONO TRE COSE INSIEME**
+
+il **gradiente** *(`+23 per cento`)*; la **probabilita' per arco** *(`ft` piu' grande,
+**pro** nascite)*; la **velocita' di scarica della torsione** *(piu' veloce, **contro** le
+nascite)*.
+### **Da quel braccio NON SI SEPARANO**, e il `x3.89` ### **non si puo' attribuire a nessuno
+dei tre.**
+
+### ✔ **CHE COSA IL CONTROFATTUALE DICE ANCORA, e non e' poco**
+
+### **Togliere il rallentamento uniforme NON riporta le nascite verso `Ap`** *(restano al
+`5.7 %`)*. ### **PERCHE' no, questo braccio non lo dice.**
+
+### E LA LEZIONE, che e' la stessa di tre volte in due giorni
+
+Avevo contato **un** consumatore di `dt_e` e concluso **<<una volta sola>>**.
+### ⛔ **Un'inferenza che poggia su un censimento NON FATTO e' un'asserzione travestita** —
+e `P1` dice esattamente questo: *non usare l'associazione senza verificare*.
+### **Il censimento costa una `grep`.**
+
 ## 3. TODO DEL NEXT STEP — **operativo**
 
 1. **commit di questo task history**, prima dello strumento;

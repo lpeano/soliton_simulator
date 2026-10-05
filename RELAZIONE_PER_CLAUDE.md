@@ -5844,3 +5844,47 @@ separa una dipendenza lineare da una ripida.
 `0` rifiutati per densita' **sui tre bracci**, e ### **era dichiarato quasi-inerte PRIMA di
 misurarlo** *(`QMIN_M = 0.0`)*. ### **Dichiararlo prima e' l'unico motivo per cui questo non
 e' una scoperta.**
+
+---
+
+## 2026-10-05 — **RITIRO UN'INFERENZA DEL REFERTO DI `CRESCITA-DOPO-Z43`: `dt_e` non entra una volta sola**
+
+*(Obiezione del guardiano. ### **L'inferenza si RITIRA, non si riformula** — e il censimento
+l'ho **rifatto dal codice**.)*
+
+**Avevo scritto** *(`12e2ca7`)* che togliere il rallentamento uniforme da' **al massimo
+`x1.23`** sugli eventi attesi ### **<<perche' entra una volta sola, nel fattore `(b)`>>**, e
+che quindi il `x3.89` di `Bc` venisse **dal gradiente**. ### ⛔ **LA PREMESSA E' FALSA.**
+
+### `dt_e` ENTRA IN **SEI** PUNTI, censiti per riga
+
+| riga | dove |
+|---|---|
+| `:7795` / `:7799` | ### **la SCARICA della torsione:** `tw += _w8(...) - dt_e*tw/_ttw` |
+| `:7926`-`:7934` | il rilassamento di `peq` |
+| `:8044` | `dts = dt_e / nsub`, il sotto-passo della metrica |
+| `:8234` | il rilassamento viscoso di `d0` |
+| `:8231` | il tetto `CFL` |
+| `:7259`-`:7266` | `_ft = dt_e/DT`, il fattore `(b)` — ### **l'unico che avevo contato** |
+
+### ⛔ **E LA SCARICA HA IL SEGNO OPPOSTO:** `dt_e` piu' grande → `- dt_e*tw/_ttw` piu'
+negativo → ### **torsione scaricata piu' in fretta** → **contro** le nascite. Quindi
+riscalare `r` sposta ### **anche il fattore `(a)`**, che e' il canale dominante.
+
+### ➜ In `Bc` si muovono **TRE** cose insieme — gradiente `+23 per cento`, `ft` piu' grande
+*(pro)*, scarica piu' veloce *(contro)*. ### **Non si separano, e il `x3.89` non si attribuisce
+a nessuno dei tre.**
+
+### ✔ **Quello che il controfattuale dice ancora:** togliere il rallentamento uniforme
+### **NON riporta le nascite verso `Ap`** *(restano al `5.7 %`)*. ### **Perche' no, quel
+braccio non lo dice.**
+
+> ### 📌 **LA LEZIONE:** avevo contato **un** consumatore di `dt_e` e concluso **<<una volta
+> sola>>**. ### **Un'inferenza che poggia su un censimento NON FATTO e' un'asserzione
+> travestita**, ed e' `P1`. ### **Il censimento costa una `grep`.**
+
+### ✔ **E L'OBIEZIONE ENTRA ANCHE NEL TEST SUL `0.3`, che non era ancora partito:** nella
+misura `(2)` l'incremento di `|tw|` si ### **separa nei suoi DUE termini** — la **SPINTA**
+`_w8(dph + twist_dip - twp)` e la **SCARICA** `dt_e*tw/_ttw` — con la **Spearman per
+ciascuno**. ### **L'ipotesi del doppio conteggio riguarda la SPINTA:** e' quella che deve
+crescere col gradiente.

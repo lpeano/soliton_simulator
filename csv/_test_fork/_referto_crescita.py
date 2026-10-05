@@ -373,15 +373,39 @@ def main():
           "l'alto**.")
         w(">")
         if dB and dC:
-            _att = 1.0 / _r["q050"]
-            w("> ### ✔ **E C'E' UN'INFERENZA, che scrivo COME inferenza:** togliere il "
-              "rallentamento uniforme dovrebbe dare **al massimo `x%.3f`** sugli eventi "
-              "attesi *(entra una volta sola, in `(b)`)*. Le divisioni fanno ### **`x%.2f`**. "
-              "### **Quindi la parte del leone NON viene dal rallentamento: viene dall'altro "
-              "effetto del riscalamento, cioe' DAL GRADIENTE.** ### ⛔ **E' un'inferenza su "
-              "DUE punti, non una misura:** con un solo valore del fattore non si separa una "
-              "dipendenza lineare da una ripida."
-              % (_att, dC / dB))
+            w("> ### ⛔ **UN'INFERENZA CHE AVEVO SCRITTO QUI E' RITIRATA, non riformulata** "
+              "*(obiezione del guardiano, 2026-10-05)*. Avevo scritto che togliere il "
+              "rallentamento uniforme da' **al massimo `x1.23`** sugli eventi attesi "
+              "*<<perche' entra una volta sola, nel fattore `(b)`>>*, e ne avevo dedotto che "
+              "il `x%.2f` osservato venisse **dal gradiente**. ### **LA PREMESSA E' FALSA.**"
+              % (dC / dB))
+            w(">")
+            w("> ### **`dt_e` NON ENTRA UNA VOLTA SOLA. Censito dal codice, per riga:**")
+            w("> * `:7795` / `:7799` ### **LA SCARICA DELLA TORSIONE:** "
+              "`self.tw += _w8(dph + twist_dip - twp) - dt_e * self.tw / _ttw`;")
+            w("> * `:7926`-`:7934` il rilassamento di **`peq`**;")
+            w("> * `:8044` **`dts = dt_e / nsub`**, il sotto-passo della metrica;")
+            w("> * `:8234` il rilassamento viscoso di **`d0`**;")
+            w("> * `:8231` il **tetto `CFL`**;")
+            w("> * `:7259`-`:7266` **`_ft = dt_e/DT`**, cioe' il fattore `(b)` -- "
+              "**l'unico che avevo contato**.")
+            w(">")
+            w("> ### ⛔ **E LA SCARICA HA IL SEGNO OPPOSTO:** un `dt_e` piu' grande rende "
+              "`- dt_e*tw/_ttw` **piu' negativo**, cioe' **scarica la torsione PIU' IN "
+              "FRETTA** -- ### **contro le nascite.** Quindi riscalare `r` cambia **anche la "
+              "popolazione che arriva nella finestra**, cioe' ### **il fattore `(a)`**, che "
+              "e' il canale dominante.")
+            w(">")
+            w("> ### **NEL BRACCIO `Bc` SI MUOVONO TRE COSE INSIEME:** il **gradiente** "
+              "*(`+23 per cento`)*, la **probabilita' per arco** *(`ft` piu' grande, **pro** "
+              "nascite)* e la **velocita' di scarica della torsione** *(piu' veloce, "
+              "**contro** le nascite)*. ### **Da quel braccio NON SI SEPARANO**, e il "
+              "`x%.2f` non si puo' attribuire a nessuno dei tre." % (dC / dB))
+            w(">")
+            w("> ### ✔ **Quindi il controfattuale dice UNA cosa sola, e non e' poco:** "
+              "### **togliere il rallentamento uniforme NON riporta le nascite verso `Ap`** "
+              "*(restano al `%.1f %%`)*. ### **Perche' no, questo braccio non lo dice.**"
+              % (100.0 * dC / dA))
     w()
     if dA and dC:
         if dC >= 0.5 * dA:
