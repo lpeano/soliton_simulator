@@ -1,0 +1,165 @@
+========================================================================================================
+CRESCITA-DOPO-Z43: perche' la rete quasi non cresce piu' con r = cs/CS_M
+========================================================================================================
+
+  python     3.13.2
+  numpy      2.3.0
+  sistema    Windows 11
+  macchina   AMD64
+  simulatore OGGI (PARTE B) f7237563   strumento 7dafd004
+
+  braccio A dal tag pre-z43-cura2-r-da-cs: blob 062172d3  (atteso 062172d3)
+  Ap 4268d47e (4 ancore)   Bp a7beeb84 (4)   Bc 45d40a3d (5)
+      - il gancio di modulo `_MIS`
+      - H1: la modulazione della soglia dal gradiente di `r`
+      - H2: la catena dei cancelli fino all'estrazione
+      - H3: i cancelli della densita' e di `2LAM`
+      - Bc: il riscalamento DICHIARATO FINTO di `r`
+
+====================================================================================================
+LA CONFIGURAZIONE INTERA (`P5`) -- non i flag toccati, TUTTI
+====================================================================================================
+  booleani di modulo confrontati con l'argv del DRIVER: 82
+  -> IN CONFIGURAZIONE DEL DRIVER: nessuna differenza. ZERO su 82.
+
+  scena: nmasse=3 sep=6.1158  ->  n = 12802, archi = 471564
+  ### TRE BRACCI: Ap la PARTE A (062172d3) patchata, Bp la PARTE B (f7237563)
+      patchata, Bc il CONTROFATTUALE -- r moltiplicato per 1/mediana(r),
+      ### DICHIARATO FINTO: non e' una cura e non entra nel simulatore.
+  ### E I GRADIENTI DEL CONTROFATTUALE NON RESTANO INTATTI: crescono del 23 %,
+      perche' riscalare r per 1/mediana(r) riscala anche |r_i - r_j|.
+      ### E' CONSERVATIVO NELLA DIREZIONE GIUSTA: un gradiente maggiorato
+      ABBASSA la soglia, quindi spinge le nascite VERSO L'ALTO.
+
+========================================================================================================
+LA CORSA: 150 passi, TRE bracci, col BATTITO per passo
+========================================================================================================
+  ### I DATI SONO GIA' SALVATI in crescita.json, PRIMA del rapporto.
+
+========================================================================================================
+(a) LA CATENA DEI CANCELLI, per braccio -- TOTALI sui 150 passi
+========================================================================================================
+  cancello                         Ap (PARTE A)   Bp (PARTE B) Bc (controfatt.)
+  archi                                70794938       70735095       70737183
+  1 sopra soglia                         146907          23190          31534
+  1+2 sotto il tetto 4pi                 131926           8852          17381
+  1+2+3 segno di CREAZIONE               129918           7738          16162
+  prob > 0                               129918           7738          16162
+  4 l'estrazione                           1508             27             83
+  5 dopo MITMAX                            1508             27             83
+  6 la densita'                            1508             27             83
+  7 A13/2LAM                               1219             18             70
+  -> AMMESSI (divisioni)                   1508             27             83
+  (c) nascite SCHWINGER                     307              7             19
+
+========================================================================================================
+(a) DOVE I BRACCI SI SEPARANO -- il cancello, non <<piu' o meno tutti>>
+========================================================================================================
+  cancello                                 Ap           Bp      Bp/Ap il salto rispetto al cancello prima
+  archi                              70794938     70735095     0.9992 -
+  1 sopra soglia                       146907        23190     0.1579 x0.1580
+  1+2 sotto il tetto 4pi               131926         8852     0.0671 x0.4251
+  1+2+3 segno di CREAZIONE             129918         7738     0.0596 x0.8877
+  prob > 0                             129918         7738     0.0596 x1.0000
+  4 l'estrazione                         1508           27     0.0179 x0.3006
+
+  ### I CANCELLI SU CUI IL RAPPORTO Bp/Ap CROLLA (fattore < 0.5 rispetto al
+      cancello precedente):
+      - 1 sopra soglia                   x0.1580
+      - 1+2 sotto il tetto 4pi           x0.4251
+      - 4 l'estrazione                   x0.3006
+  ### C4: LA SEPARAZIONE CADE SU 3 CANCELLI, e LO DICO invece di
+      nominarne uno solo.
+
+========================================================================================================
+(b) LE GRANDEZZE CHE I CANCELLI LEGGONO, al passo 10
+========================================================================================================
+  ### E SI RIPORTANO COME DISTRIBUZIONI E NON COME MEDIANE: una mediana NON
+      distingue una distribuzione RIPIDA da una PIATTA, ed e' esattamente la
+      cosa da cui dipende se l'ipotesi del gradiente tiene.
+
+  --- braccio Ap ---
+      soglia0 = 9.424777961
+      r_nodo       q01=2.635982e-04 q25=7.609118e-03 q50=2.109232e-02 q75=1.675064e-01 q99=1.410281e+00 max=1.412440e+00
+      grad         q01=2.046821e-04 q25=6.157730e-03 q50=1.869556e-02 q75=1.191110e-01 q99=1.158268e+00 max=1.388246e+00
+      tanh_grad    q01=2.046821e-04 q25=6.157653e-03 q50=1.869338e-02 q75=1.185509e-01 q99=8.204747e-01 max=8.827844e-01
+      soglia       q01=7.104941e+00 q25=9.089583e+00 q50=9.371924e+00 q75=9.407368e+00 q99=9.424199e+00 max=9.424778e+00
+      morso        q01=6.140462e-05 q25=1.847296e-03 q50=5.608014e-03 q75=3.556527e-02 q99=2.461424e-01 max=2.648353e-01
+      avv                  q01=1.137820e-02 q25=1.185705e+00 q50=2.873124e+00 q75=4.575192e+00 q99=6.184791e+00
+      soglia               q01=7.104941e+00 q25=9.089583e+00 q50=9.371924e+00 q75=9.407368e+00 q99=9.424199e+00
+      rapporto_avv_soglia  q01=1.225378e-03 q25=1.308535e-01 q50=3.174271e-01 q75=5.051073e-01 q99=7.532977e-01
+      ft                   q01=1.497812e-03 q25=1.000630e-02 q50=2.531137e-02 q75=3.625424e-01 q99=1.408915e+00
+      segno                q01=9.685825e-01 q25=9.948337e-01 q50=9.989758e-01 q75=9.997958e-01 q99=9.999432e-01
+      avv_su_g1            q01=1.863701e+01 q25=1.873764e+01 q50=1.880800e+01 q75=1.885710e+01 q99=1.894640e+01
+      cancelli al passo 10: archi=471564 g1=109 g1+2=0 g1+2+3=0 nasce=0
+
+  --- braccio Bp ---
+      soglia0 = 9.424777961
+      r_nodo       q01=4.455227e-01 q25=6.623419e-01 q50=8.207982e-01 q75=9.222849e-01 q99=9.900097e-01 max=9.996447e-01
+      grad         q01=1.830975e-03 q25=5.099848e-02 q50=1.252318e-01 q75=2.381408e-01 q99=4.878050e-01 max=6.790168e-01
+      tanh_grad    q01=1.830973e-03 q25=5.095431e-02 q50=1.245812e-01 q75=2.337389e-01 q99=4.524725e-01 max=5.908798e-01
+      soglia       q01=8.145442e+00 q25=8.763897e+00 q50=9.072533e+00 q75=9.280708e+00 q99=9.419601e+00 max=9.424777e+00
+      morso        q01=5.492918e-04 q25=1.528629e-02 q50=3.737435e-02 q75=7.012167e-02 q99=1.357418e-01 max=1.772640e-01
+      avv                  q01=1.096312e-02 q25=1.183309e+00 q50=2.869503e+00 q75=4.567681e+00 q99=6.179080e+00
+      soglia               q01=8.145442e+00 q25=8.763897e+00 q50=9.072533e+00 q75=9.280708e+00 q99=9.419601e+00
+      rapporto_avv_soglia  q01=1.189909e-03 q25=1.316542e-01 q50=3.197800e-01 q75=5.093108e-01 q99=7.056717e-01
+      ft                   q01=5.218894e-01 q25=7.020861e-01 q50=7.933018e-01 q75=8.785106e-01 q99=9.735265e-01
+      segno                q01=9.735302e-01 q25=9.946428e-01 q50=9.989410e-01 q75=9.997902e-01 q99=9.999420e-01
+      avv_su_g1            q01=1.853384e+01 q25=1.871841e+01 q50=1.878224e+01 q75=1.884585e+01 q99=3.130052e+01
+      cancelli al passo 10: archi=471564 g1=109 g1+2=0 g1+2+3=0 nasce=0
+
+  --- braccio Bc ---
+      soglia0 = 9.424777961
+      r_nodo       q01=5.427920e-01 q25=8.069485e-01 q50=1.000000e+00 q75=1.123644e+00 q99=1.206155e+00 max=1.217893e+00
+      grad         q01=2.230723e-03 q25=6.213279e-02 q50=1.525731e-01 q75=2.901332e-01 q99=5.943056e-01 max=8.272640e-01
+      tanh_grad    q01=2.230720e-03 q25=6.205296e-02 q50=1.514002e-01 q75=2.822574e-01 q99=5.329852e-01 max=6.790042e-01
+      soglia       q01=7.917798e+00 q25=8.626714e+00 q50=8.996704e+00 q75=9.249327e+00 q99=9.418471e+00 max=9.424777e+00
+      morso        q01=6.692159e-04 q25=1.861589e-02 q50=4.542005e-02 q75=8.467722e-02 q99=1.598956e-01 max=2.037013e-01
+      avv                  q01=1.096312e-02 q25=1.183309e+00 q50=2.869503e+00 q75=4.567681e+00 q99=6.179080e+00
+      soglia               q01=7.917798e+00 q25=8.626714e+00 q50=8.996704e+00 q75=9.249327e+00 q99=9.418471e+00
+      rapporto_avv_soglia  q01=1.195950e-03 q25=1.329336e-01 q50=3.231538e-01 q75=5.148405e-01 q99=7.204299e-01
+      ft                   q01=5.218894e-01 q25=7.020861e-01 q50=7.933018e-01 q75=8.785106e-01 q99=9.735265e-01
+      segno                q01=9.714529e-01 q25=9.943975e-01 q50=9.988919e-01 q75=9.997812e-01 q99=9.999416e-01
+      avv_su_g1            q01=1.853384e+01 q25=1.871841e+01 q50=1.878224e+01 q75=1.884585e+01 q99=3.130052e+01
+      cancelli al passo 10: archi=471564 g1=109 g1+2=0 g1+2+3=0 nasce=0
+
+========================================================================================================
+(d) IL CONTROFATTUALE: il rallentamento uniforme contro il gradiente
+========================================================================================================
+  divisioni:  Ap=1508  Bp=27  Bc=83
+  schwinger:  Ap=307  Bp=7  Bc=19
+  Bp/Ap = 0.0179     Bc/Ap = 0.0550     Bc/Bp = 3.0741
+  il fattore 1/mediana(r) applicato: q01=1.183934 q50=1.233014 q99=1.254150
+      ### e QUINDI il gradiente del braccio Bc e' maggiorato di quel
+      fattore: NON e' intatto, e la direzione dell'errore e' VERSO PIU'
+      NASCITE.
+
+  ### LETTURA: INTERMEDIA -- le nascite risalgono ma non tornano alla
+      PARTE A. ### Il controfattuale NON separa le due cause, e il
+      23 %% di gradiente in piu' e' una causa confondente DICHIARATA.
+
+========================================================================================================
+I CONTROLLI CHE POSSONO FALLIRE
+========================================================================================================
+  C1 Ap   divisioni   1508 + schwinger    307 =   1815   n_fin - n_0 =   1526   ### NON COINCIDE
+  C1 Bp   divisioni     27 + schwinger      7 =     34   n_fin - n_0 =     25   ### NON COINCIDE
+  C1 Bc   divisioni     83 + schwinger     19 =    102   n_fin - n_0 =     89   ### NON COINCIDE
+  C2 Ap   candidati su tutta la corsa: 1508   ok
+  C2 Bp   candidati su tutta la corsa: 27   ok
+  C2 Bc   candidati su tutta la corsa: 83   ok
+  C3 Ap   n      questo strumento    14328   il sigillo committato    14328   COINCIDE
+  C3 Ap   archi  questo strumento   473397   il sigillo committato   473397   COINCIDE
+  C3 Bp   n      questo strumento    12827   il sigillo committato    12827   COINCIDE
+  C3 Bp   archi  questo strumento   471596   il sigillo committato   471596   COINCIDE
+      ### E' UN CONFRONTO FRA DUE CORSE DIVERSE, quindi piu' forte di un
+          auto-confronto: se i ganci cambiassero la fisica, questi numeri
+          non coinciderebbero.
+
+========================================================================================================
+IL VERDETTO
+========================================================================================================
+  configurazione del driver dichiarata INTERA (braccio Bp): True
+  ### FERMO. I GUASTI:
+      - C1 Ap: ricostruzione 1815 contro 1526
+      - C1 Bp: ricostruzione 34 contro 25
+      - C1 Bc: ricostruzione 102 contro 89
