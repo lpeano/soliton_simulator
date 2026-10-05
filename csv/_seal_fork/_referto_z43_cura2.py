@@ -15,6 +15,8 @@ import json
 import os
 import sys
 
+import numpy as np
+
 _QUI = os.path.dirname(os.path.abspath(__file__))
 RADICE = os.path.abspath(os.path.join(_QUI, "..", ".."))
 sys.path.insert(0, os.path.join(RADICE, "csv"))
@@ -87,6 +89,25 @@ def main():
     ultimo = [r for r in pp if "uniforme_r_mediano" in r]
     ult = ultimo[-1] if ultimo else {}
     prima_div = next((r["passo"] for r in pp if r["diff"]), None)
+    # ### L'AUTOCORRELAZIONE NON E' NEL json: si RICALCOLA qui con la STESSA formula e la
+    #   STESSA esclusione del sigillo (la coda iniziale con la cache non allineata). Non e'
+    #   un numero ricopiato: e' lo stesso conto sugli stessi dati.
+    serie, da = [], None
+    for k, r in enumerate(pp):
+        if r.get("r_mediana") is None:
+            continue
+        if r["cs_assente"] - (pp[k - 1]["cs_assente"] if k else 0) > 0:
+            serie, da = [], None
+            continue
+        if da is None:
+            da = r["passo"]
+        serie.append(r["r_mediana"])
+    ac = None
+    if len(serie) >= 4:
+        x = np.asarray(serie, float)
+        x = x - np.mean(x)
+        den = float(np.sum(x * x))
+        ac = (float(np.sum(x[:-1] * x[1:]) / den) if den > 0 else None)
     sopra1 = sum(int(r.get("r_sopra_1", 0) or 0) for r in pp)
 
     w("# REFERTO -- `Z43` CURA (2): **il tempo proprio viene da `cs`**")
@@ -122,7 +143,8 @@ def main():
       % (SOGLIA, "PASSA" if (not sopra and vive) else "### FALLISCE"))
     w("| **`3`** | autocorrelazione a ritardo `1` **`>= %.2f`** | **%s** |"
       % (d["soglia_autocorr"],
-         "PASSA" if d.get("esito") == 0 or True else ""))
+         ("PASSA" if (ac is not None and ac >= d["soglia_autocorr"])
+          else "### FALLISCE")))
     w("| **`4`** | `r` materia `<` `r` vuoto -- ### **FEDELTA', non fisica** | si riporta |")
     w("| **`5`** | localita', **misurata** | si riporta |")
     w("| **`6`** | lo stato **DEVE** divergere dalla `PARTE A` | **%s** |"
@@ -219,6 +241,13 @@ def main():
     w()
     w("### E L'AUTOCORRELAZIONE **LI VEDE SOMMATI, non li distingue:** se oscillasse, il "
       "passo dopo sarebbe **capire quale dei due**.")
+    w()
+    w("| | |")
+    w("|---|---|")
+    w("| serie usata | dal passo `%s`, `%d` punti *(esclusa la coda iniziale con la cache "
+      "non allineata)* |" % (da, len(serie)))
+    w("| **autocorrelazione a ritardo `1`** | **`%s`** |" % n(ac))
+    w("| soglia *(**la scelgo io**)* | `%.2f` |" % d["soglia_autocorr"])
     w()
     w("**La soglia `>= %.2f` l'ho scelta io**, e lo dichiaro: il mandato diceva <<non "
       "fortemente negativa>> **senza un numero**. L'ho fissata **prima di vedere i dati** "

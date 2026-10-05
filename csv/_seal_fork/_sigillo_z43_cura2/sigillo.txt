@@ -1,0 +1,272 @@
+========================================================================================================
+IL SIGILLO DI Z43 CURA (2): r = cs_nodo / CS_M, l'orologio a luce
+========================================================================================================
+
+  python     3.13.2
+  numpy      2.3.0
+  sistema    Windows 11
+  macchina   AMD64
+  simulatore OGGI f7237563   patch b343e354   strumento 5461b850
+
+========================================================================================================
+BRACCIO 0: il *prima* NON si asserisce, SI RICOSTRUISCE
+========================================================================================================
+  commit_che_ha_cambiato_il_simulatore   0f11d42bafc6d85bdf7dab464a61d1c6f9777f50
+  padre                                  19f9d6884cac09c6526544d40494f0607aa45786
+  blob_prima                             ca3cdd8a
+  blob_prima_atteso                      ca3cdd8a
+  prima_e_quello_atteso                  True
+  blob_patch                             b343e354
+  blob_patchato                          f7237563
+  blob_oggi                              f7237563
+  patch_returncode                       0
+  coincide                               True
+  stato                                  fatto
+
+  copia col gancio per i criteri 1 e 5: _sim_gancio.py  blob 37508838  (3 ancore)
+      - il gancio di modulo `_MIS`
+      - il punto di verifica di `ritmo()`, sul valore RESTITUITO
+      - il punto di cattura di `I` e `w`, al sito di `_cs_nodo`
+
+====================================================================================================
+LA CONFIGURAZIONE INTERA (`P5`) -- non i flag toccati, TUTTI
+====================================================================================================
+  booleani di modulo confrontati con l'argv del DRIVER: 82
+  -> IN CONFIGURAZIONE DEL DRIVER: nessuna differenza. ZERO su 82.
+
+  scena: nmasse=3 sep=6.1158  ->  n = 12802, archi = 471564
+  ### TRE BRACCI: A la PARTE A (blob ca3cdd8a, non patchato), B il CURATO
+      (non patchato), C il curato PATCHATO col gancio dei criteri 1 e 5.
+      I criteri 2, 3, 4, 6 e 7 confrontano A con B: DUE NON PATCHATI.
+      ### E IL PERCHE' L'HA TROVATO IL SIGILLO DELLA PARTE A:
+          `_calcpsi_origini` registra <<funzione:NUMERO_DI_RIGA>>, e un
+          gancio SPOSTA le righe. Era lo strumento che si misurava addosso.
+
+========================================================================================================
+IL LOCKSTEP: 150 passi, TRE bracci, col BATTITO per passo
+========================================================================================================
+  passi girati: 150   n finale: A=14328  B=12827  C=12827   archi: A=473397  B=471596
+
+========================================================================================================
+CRITERIO 5: LOCALITA', MISURATA chiamando LA LEGGE STESSA due volte
+========================================================================================================
+  stato                        fatto
+  passo_di_I                   10
+  n                            12802
+  uno_su_n                     7.811279487580065e-05
+  mean_I                       2.688007332224694
+  nodo_perturbato              11316
+  I_del_nodo                   20.131765297140973
+  perturbazione                I del nodo piu' denso RADDOPPIATO (x2: un fattore, non un numero)
+  contatore_prima              None
+  contatore_dopo               None
+  contatore_mosso              False
+  contatore_ripristinato       None
+
+  distanza   nodi      mediana |dcs|/cs max |dcs|/cs     mediana / (1/n)
+  0          1         5.526207e-01     5.526207e-01     7074.6498
+  1          87        7.778896e-03     4.645756e-02     99.5854
+  2          448       5.392324e-05     1.770860e-04     0.6903
+  3          1178      3.120080e-05     1.685825e-04     0.3994
+  4          1799      3.476554e-05     1.827623e-04     0.4451
+  5          2168      3.871237e-05     1.796703e-04     0.4956
+  6          2375      3.959716e-05     1.805882e-04     0.5069
+  >6_salti   4746      3.295734e-05     1.793079e-04     0.4219
+
+  ### I DATI SONO GIA' SALVATI in sigillo.json, PRIMA del rapporto: se il
+      rapporto cade, la corsa NON si perde. (La prima corsa si perse cosi'.)
+
+========================================================================================================
+CRITERIO 1 -- FEDELTA': il r restituito == _cs_nodo_prev / CS_M AL BIT
+========================================================================================================
+  chiamate col ramo di legge: 149   nodi confrontati: 1907888
+  nodi DIVERSI: 0   chiamate con almeno una differenza: 0
+  max scarto: 0.000000e+00   peggiore: None
+  ### CRITERIO 1: PASSA
+
+========================================================================================================
+CRITERIO 2 -- NIENTE ALTALENA, PER COPPIA DI PASSI (correzione del guardiano)
+========================================================================================================
+  coppie totali: 75   ESCLUSE: 1   valutate: 74
+      ESCLUSA coppia 2     la cache di cs NON e' allineata: r = 1 per SICUREZZA, non per legge
+
+  LA TABELLA CHIESTA DALLA CORREZIONE (passi 4, 10, 20, 30, 40, 60, 100, 140):
+  coppia   r dispari      r pari         rapporto       due lati
+  4        8.355026e-01   8.290727e-01   1.007756       1.007756
+  10       8.224743e-01   8.207982e-01   1.002042       1.002042
+  20       8.124330e-01   8.112945e-01   1.001403       1.001403
+  30       8.039747e-01   8.031230e-01   1.001061       1.001061
+  40       7.985503e-01   7.985382e-01   1.000015       1.000015
+  60       7.976762e-01   7.978742e-01   0.999752       1.000248
+  100      8.099757e-01   8.103005e-01   0.999599       1.000401
+  140      8.145234e-01   8.144660e-01   1.000070       1.000070
+
+  coppie dal passo 3 in poi (etichetta >= 4) valutate: 74
+  coppie SOPRA 1.2: 0
+  primo passo da cui il rapporto resta <= 1.2: 4
+  rapporto MASSIMO fra le coppie valutate: 1.007756 (coppia 4)
+  ### E A DUE LATI, che il criterio di Luca non vede: max(r, 1/r) = 1.007756 (coppia 4)
+      sopra 1.2 a due lati: 0 coppie
+  l'AGGREGATO su tutta la corsa: 1.000442   ### si riporta, MA NON BASTA DA SOLO
+  ### CRITERIO 2: PASSA
+
+========================================================================================================
+CRITERIO 3 -- AUTOCORRELAZIONE A RITARDO 1 della mediana di r
+========================================================================================================
+  serie usata: dal passo 2, 149 punti (escluso l'inizio con cache non allineata)
+  autocorrelazione a ritardo 1: 0.891635   soglia (LA SCELGO IO): -0.50
+  ### CRITERIO 3: PASSA
+
+========================================================================================================
+CRITERIO 4 -- SEGNO: r mediano nella MATERIA minore che nel VUOTO
+========================================================================================================
+  ### E' UN CONTROLLO DI FEDELTA', NON UN RISULTATO DI FISICA, e lo correggo qui
+      su annotazione del guardiano (2026-10-05): r materia < r vuoto ### SEGUE
+      DALLA FORMULA di `_cs_nodo` -- cs_floor = CS_M/(1 + sqrt(I)*sqrt(1/scala))
+      DECRESCE in I, e la transizione 0.5*(1 + tanh(1 - u)) pure. ### QUINDI PUO'
+      FALLIRE SOLO SE IL CODICE E' SBAGLIATO: e' un FALSO-UNO in attesa, non una
+      predizione messa alla prova. ### NON SI RIVENDICA COME CONFERMA DELLA
+      FISICA.
+  ### L'ACCOPPIAMENTO E' SFASATO DI UNO, E DEVE ESSERLO: r_t = cs_(t-1)/CS_M,
+      e cs_(t-1) viene da I_(t-1). Confrontarli nello stesso passo sarebbe
+      sfasare la misura del segno. Qui: le MASCHERE materia/vuoto vengono da
+      `I` del passo t, e il `r` dal passo t+1. Le maschere si CONSERVANO.
+
+  r al     nodi mat r mediano MATERIA r mediano VUOTO  rapporto   materia < vuoto
+  3        641      0.559663297      0.962150262      0.581680   SI
+  4        641      0.565691842      0.959483385      0.589580   SI
+  5        641      0.566790000      0.959141828      0.590935   SI
+  10       641      0.572574991      0.957296075      0.598117   SI
+  20       641      0.582729846      0.952603066      0.611724   SI
+  50       641      0.604579324      0.944501842      0.640104   SI
+  150      642      0.587524306      0.951865208      0.617235   SI
+
+  passi in cui materia < vuoto: 137 su 137   (100.00 %)
+  ### CRITERIO 4: si RIPORTA, non ferma. ### ED E' FEDELTA': se NON torna, il
+      codice e' sbagliato -- non e' la fisica a smentire un'attesa.
+
+========================================================================================================
+LA DISTRIBUZIONE DI r, e la SEPARAZIONE fra la parte UNIFORME e quella che VARIA
+========================================================================================================
+  ### ANNOTAZIONE DEL GUARDIANO (2026-10-05), e correggeva una riga FALSA del mio
+      task history: <<cs = CS_M -> r = 1 dove la metrica non e' deformata>>.
+      ### E' FALSO. Da `_cs_nodo`, cs = CS_M SOLO se I = 0: per ogni I > 0 si ha
+      cs_floor = CS_M/(1 + sqrt(I)*sqrt(1/scala)) < CS_M, e la transizione
+      0.5*(1 + tanh(1 - u)) vale <= 0.880797 a u = 0 e 0.5 a u = 1 (vuoto
+      uniforme). ### QUINDI NESSUN NODO CON CAMPO HA r = 1: il limite r = 1 e'
+      L'ASSENZA DI CAMPO, non la metrica non deformata.
+  ### E LA SEPARAZIONE CHE CHIEDE: la parte UNIFORME di r e' un CAMBIO DI UNITA'
+      DI TEMPO -- fisicamente IRRILEVANTE, dice solo di quanto rallenta il passo
+      medio -- e solo la parte che VARIA fra nodi e' FISICA.
+
+  passo  r q01      r q25      r MEDIANO  r q75      r q99      r max      r > 1
+  2      0.497257   0.705016   0.853423   0.938849   0.992533   0.998982   0
+  3      0.457769   0.679477   0.835503   0.931092   0.991036   0.999720   0
+  4      0.444945   0.662943   0.829073   0.926087   0.990115   0.998981   0
+  5      0.445182   0.663725   0.828354   0.925817   0.990336   0.999418   0
+  10     0.445523   0.662342   0.820798   0.922285   0.990010   0.999645   0
+  20     0.447493   0.660504   0.811295   0.915230   0.989201   0.999051   0
+  50     0.464845   0.664610   0.797504   0.902039   0.987052   0.999025   0
+  100    0.458328   0.673703   0.810300   0.909104   0.987571   0.999411   0
+  150    0.433408   0.676198   0.815126   0.912862   0.988441   1.000000   0
+
+  LA SEPARAZIONE, passo per passo:
+  passo  UNIFORME (r mediano)   VARIA: CV      q95/q05        max/min
+  2      0.853422599            0.176883       1.809270       2.417668
+  3      0.835502596            0.188237       1.855332       3.208931
+  4      0.829072668            0.195317       1.880329       3.281319
+  5      0.828353877            0.194750       1.873493       3.270809
+  10     0.820798176            0.193392       1.865670       3.211570
+  20     0.811294520            0.190007       1.843831       3.088452
+  50     0.797504429            0.179946       1.801668       2.792407
+  100    0.810300492            0.178567       1.792621       2.879259
+  150    0.815126366            0.186746       1.875136       3.176363
+
+  ### IL PASSO MEDIO RALLENTA DI UN FATTORE 0.815126 (al passo 150): e' la parte
+      UNIFORME, cioe' UN CAMBIO DI UNITA' DI TEMPO. ### NON E' FISICA.
+  ### LA PARTE FISICA e' la DISPERSIONE: CV = 0.186746, q95/q05 = 1.875136.
+  ### E r > 1 su 0 nodi: se non e' ZERO, la forma e' violata.
+
+  ### LE CELLE AVVELENATE DI `_r_corrente`, contate e ATTRIBUITE alla NASCITA:
+      passi con almeno una cella avvelenata: 13 su 150
+      e in TUTTI il numero coincide coi NATI nel passo: True
+      passo 99   avvelenate 1    nati 1    coincidono True
+      passo 111  avvelenate 2    nati 2    coincidono True
+      passo 116  avvelenate 2    nati 2    coincidono True
+      passo 120  avvelenate 1    nati 1    coincidono True
+      passo 126  avvelenate 1    nati 1    coincidono True
+      passo 127  avvelenate 1    nati 1    coincidono True
+      passo 136  avvelenate 2    nati 2    coincidono True
+      passo 139  avvelenate 1    nati 1    coincidono True
+      passo 140  avvelenate 5    nati 5    coincidono True
+      passo 143  avvelenate 2    nati 2    coincidono True
+      passo 147  avvelenate 3    nati 3    coincidono True
+      passo 148  avvelenate 2    nati 2    coincidono True
+      passo 150  avvelenate 2    nati 2    coincidono True
+  ### NON E' UN DIFETTO DELLA CURA: `_r_corrente` sta nel REGISTRO_DERIVATE con
+      classe `avvelena` (:1312), e ai nodi NATI il veleno mette NaN DI PROPOSITO
+      perche' una lettura STALE sia RUMOROSA. ### LA PRIMA CORSA DI QUESTO
+      STRUMENTO LO LEGGEVA SPORCO, e il veleno l'ha reso visibile al primo giro.
+
+========================================================================================================
+CRITERIO 6 -- IL CASO CHE DEVE FALLIRE: lo stato DEVE divergere dalla PARTE A
+========================================================================================================
+  primo passo con una differenza: 1
+  primi passi in cui la cache di cs NON era allineata (r = 1 per sicurezza):
+      passo 1    cs_assente +1 (totale 1)  forma [-1, 12802]  r_med 1.000000  r==1 su 12802 nodi
+      passo 2    cs_assente +0 (totale 1)  forma [-1, 12802]  r_med 0.853423  r==1 su 0 nodi
+      passo 3    cs_assente +0 (totale 1)  forma [-1, 12802]  r_med 0.835503  r==1 su 0 nodi
+      passo 4    cs_assente +0 (totale 1)  forma [-1, 12802]  r_med 0.829073  r==1 su 0 nodi
+      passo 5    cs_assente +0 (totale 1)  forma [-1, 12802]  r_med 0.828354  r==1 su 0 nodi
+      passo 6    cs_assente +0 (totale 1)  forma [-1, 12802]  r_med 0.826854  r==1 su 0 nodi
+      passo 7    cs_assente +0 (totale 1)  forma [-1, 12802]  r_med 0.825464  r==1 su 0 nodi
+      passo 8    cs_assente +0 (totale 1)  forma [-1, 12802]  r_med 0.823918  r==1 su 0 nodi
+  passo 1    differenze 4     di cui STATO 0    
+  passo 2    differenze 43    di cui STATO 28   
+  passo 3    differenze 59    di cui STATO 41   
+  passo 4    differenze 61    di cui STATO 42   
+  passo 5    differenze 61    di cui STATO 42   
+  passo 10   differenze 61    di cui STATO 42   
+  passo 20   differenze 62    di cui STATO 42   
+  passo 50   differenze 140   di cui STATO 81   
+  passo 100  differenze 160   di cui STATO 89   
+  passo 150  differenze 163   di cui STATO 91   
+  ### CRITERIO 6: PASSA
+
+========================================================================================================
+CRITERIO 7 -- 150 PASSI SENZA FERMO, e che cosa cambia A VALLE
+========================================================================================================
+  passi girati: 150 (nessuna eccezione: se ne fosse alzata una non sarei qui)
+  n:     A = 14328    B = 12827     scarto -1501
+  archi: A = 473397   B = 471596    scarto -1801
+  _ritmo_chiamate        A = 150            B = 150
+  _ritmo_cs_assente      A = assente        B = 1
+  _cs_lam_degenere       A = assente        B = assente
+  _cs_in_chiamate        A = 150            B = 150
+  _cs_in_fallback        A = 1              B = 1
+  _tum_tetto_colpi       A = assente        B = assente
+  _tum_tetto_nodi        A = assente        B = assente
+  ### E DUE CONTATORI DELLA PARTE A SONO SPARITI DA B, e DEVONO:
+      _ritmo_sicurezza           A = 1                B = assente
+      _ritmo_med_assente         A = 1                B = assente
+      _ritmo_med_identico        A = assente          B = assente
+      _ritmo_med_non_promosso    A = assente          B = assente
+      _ritmo_f_tutto_nullo       A = assente          B = assente
+      _ritmo_med_sul_pavimento   A = assente          B = assente
+      _med_f_prec                A = 0.04373448378747202 B = None
+      _med_f_ultimo              A = 0.04373448378747202 B = None
+
+========================================================================================================
+IL VERDETTO
+========================================================================================================
+  configurazione del driver dichiarata INTERA sul braccio B (il CURATO): True
+  criterio 0 (braccio 0):            PASSA
+  criterio 1 (fedelta' al bit):      PASSA
+  criterio 2 (altalena per coppia):  PASSA
+  criterio 3 (autocorrelazione):     PASSA
+  criterio 4 (segno): FEDELTA', non fisica  SI RIPORTA (137 su 137)
+  criterio 5 (localita'):            SI RIPORTA (fatto)
+  criterio 6 (deve divergere):       PASSA
+  criterio 7 (150 passi):            PASSA
+
+  ### TUTTI I CRITERI CHE FERMANO PASSANO.
