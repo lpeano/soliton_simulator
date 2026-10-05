@@ -173,8 +173,11 @@ def main():
           "*(`--solo-bg`)*, e ### **`K1` e i cinque controlli restano della corsa a quattro "
           "bracci** -- il referto dice quale numero viene da quale corsa.")
         w()
-        _ac = [(p, (_c(p) or {}).get("archi_causali"),
-                (_c(p) or {}).get("archi_esclusi_nati")) for p in PC]
+        # ### si legge dal dizionario del braccio, perche' `_c` e' definito piu' sotto
+        _src = (dbg["bracci"]["Bg"]["corr"] if dbg else B["Bg"]["corr"])
+        _ac = [(p, (_src.get(str(p)) or _src.get(p) or {}).get("archi_causali"),
+                (_src.get(str(p)) or _src.get(p) or {}).get("archi_esclusi_nati"))
+               for p in PC]
         w("**Archi usati** *(quelli i cui due estremi esistevano al passo `t-1`)*: %s. "
           "### ✔ **Gli archi NATI, esclusi e contati: %s** -- su `~471` mila, quindi il "
           "predittore causale descrive **praticamente tutta** la popolazione."

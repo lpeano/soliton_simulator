@@ -5960,3 +5960,40 @@ differenze sui conteggi dei cancelli, a tutti e `150` i passi.**
 
 Una modulazione **derivata** leggerebbe `|r_i*phivel_i - r_j*phivel_j|`, non `|r_i - r_j|`.
 ### ⛔ **Ma sarebbe una LEGGE NUOVA, e la forma la decide Luca.**
+
+---
+
+## 2026-10-06 — `MITOSI-SOGLIA-GRAD`, **IL REFERTO DEFINITIVO**: il predittore causale **conferma** i verdetti e **rafforza** la forma esatta
+
+**Referto:** `doc/REFERTO_mitosi_soglia_grad_2026-10-06.md` *(blob `0f224b48`)*, **generato**
+*(`L-NUMERI`)*. Strumento `e5b9cc20`, generatore `8f587b33`.
+### ✔ **Tutti e tre i passi sono CAUSALI**, con `0`/`2`/`2` archi esclusi su `~471` mila.
+
+### LE SPEARMAN DELLA `SPINTA`, causale contro stesso passo
+
+| predittore | causale | stesso passo |
+|---|---|---|
+| `|r_i - r_j|` — ### **quello che la soglia legge** | `0.068` / `0.033` / `0.012` | `0.068` / `0.032` / `0.012` |
+| `|r_i - r_j| * |phivel|` | `0.403` / `0.370` / `0.319` | `0.391` / `0.360` / `0.311` |
+| ### **`|r_i*phivel_i - r_j*phivel_j|`** | ### **`0.870` / `0.915` / `0.887`** | `0.826` / `0.884` / `0.857` |
+
+### ✔ **LE DUE VERSIONI DANNO LO STESSO VERDETTO su `K2` e `K2b`:** il difetto era
+### **innocuo in questo caso, ma restava un difetto** — e *<<innocuo>>* si puo' dire **solo
+dopo** averlo misurato.
+
+### ✔ **E L'ALLINEAMENTO CAUSALE RAFFORZA LA FORMA ESATTA** *(media da `~0.856` a
+`~0.891`)*, ### **che e' quello che si aspetta se e' davvero lei a guidare la torsione:**
+correlare col passo **giusto** non puo' che migliorare il predittore **vero**.
+### ✔ **E il gradiente NUDO non si muove** *(`0.0681` → `0.0684`)*: la sua debolezza
+### **non era un artefatto dello sfasamento.**
+
+### IL VERDETTO, dalla tavola fissata prima
+
+`K2` **non** refutato *(solo il passo `50` supera `0.05`, e di poco)*; `K2b` **non** rilevante
+*(`q5/q1` `1.33`/`1.15`/`1.05`)*. ### **<<Il doppio conteggio esiste ma e' piccolo>>**, e la
+decisione sul `0.3` si legge da `K1` e da `Bp0`: ### **togliere la modulazione porta le
+divisioni da `1219` a `2` in `A` e da `18` a `2` in `B`.**
+
+> ### ⛔ **LA MODULAZIONE E' PORTANTE, E LEGGE LA GRANDEZZA SBAGLIATA.** Sono due fatti
+> separati, misurati separatamente, e ### **nessuno dei due dice che cosa farne: quello e'
+> una decisione di Luca.**

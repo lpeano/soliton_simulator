@@ -10,7 +10,7 @@
 | **piattaforma** | Windows 11, python `3.13.2`, numpy `2.3.0`, `AMD64` |
 | **passi** | `150`, seme `11`, scena del driver |
 | **configurazione dichiarata INTERA** | `True` *(braccio `Bg`)* |
-| **predittore della misura `(2)`** | ### ⛔ **SFASATO DI UN PASSO** *(letto al passo `t`)*: `K2` e `K2b` sono **PROVVISORI** |
+| **predittore della misura `(2)`** | ### **CAUSALE** *(letto al passo `t-1`)* |
 
 ## IL RISULTATO: **togliere il `0.3` ANNIENTA le nascite, in ENTRAMBI i bracci**
 
@@ -52,43 +52,58 @@
 
 ## `K2` *(ESISTENZA)* e `K2b` *(ENTITA')* — la misura `(2)` sul braccio `Bg`
 
-> ### ⛔ **PROVVISORI: IL PREDITTORE E' SFASATO DI UN PASSO.** La `SPINTA` del passo `t` misura l'avanzamento di fase prodotto **durante il passo `t-1`** *(`:7772` legge la fotografia `_phi_t`)*, e questo strumento correla con `r` e `phivel` letti **al passo `t`**. ### **Il difetto e' annotato in `99782e1`, la cura e' il prossimo commit, e il braccio `Bg` si rigira.** ### **Questi numeri valgono come PRIMA LETTURA, non come verdetto.**
+> ### ✔ **IL PREDITTORE E' CAUSALE**: `r` e `phivel` sono letti al passo **`t-1`**, cioe' quello che ha prodotto la `SPINTA` *(`:7772` legge la fotografia `_phi_t`)*. Le correlazioni vengono dalla corsa di **solo `Bg`** *(`--solo-bg`)*, e ### **`K1` e i cinque controlli restano della corsa a quattro bracci** -- il referto dice quale numero viene da quale corsa.
+
+**Archi usati** *(quelli i cui due estremi esistevano al passo `t-1`)*: passo `50`: `471564`, passo `100`: `471563`, passo `140`: `471575`. ### ✔ **Gli archi NATI, esclusi e contati: `0`, `2`, `2`** -- su `~471` mila, quindi il predittore causale descrive **praticamente tutta** la popolazione.
 
 ### LE SPEARMAN — `3` predittori x `3` bersagli
 
 | predittore | bersaglio | passo `50` | passo `100` | passo `140` |
 |---|---|--:|--:|--:|
-| `|r_i - r_j|`  *(il gradiente **nudo**: quello che la soglia legge)* | incremento **TOTALE** | `0.070811` | `0.044684` | `0.027131` |
-| `|r_i - r_j|`  *(il gradiente **nudo**: quello che la soglia legge)* | ### **SPINTA** | `0.068092` | `0.032211` | `0.011504` |
-| `|r_i - r_j|`  *(il gradiente **nudo**: quello che la soglia legge)* | **SCARICA** | `0.081486` | `0.042334` | `0.024453` |
-| `|r_i - r_j| * |phivel|` medio  *(la **proxy** del mandato)* | incremento **TOTALE** | `0.340313` | `0.326425` | `0.280385` |
-| `|r_i - r_j| * |phivel|` medio  *(la **proxy** del mandato)* | ### **SPINTA** | `0.390527` | `0.359655` | `0.311442` |
-| `|r_i - r_j| * |phivel|` medio  *(la **proxy** del mandato)* | **SCARICA** | `0.350229` | `0.297112` | `0.266800` |
-| `|r_i*phivel_i - r_j*phivel_j|`  *(la **forma esatta**: quella che il codice produce)* | incremento **TOTALE** | `0.696757` | `0.763768` | `0.727380` |
-| `|r_i*phivel_i - r_j*phivel_j|`  *(la **forma esatta**: quella che il codice produce)* | ### **SPINTA** | `0.826367` | `0.884193` | `0.856539` |
-| `|r_i*phivel_i - r_j*phivel_j|`  *(la **forma esatta**: quella che il codice produce)* | **SCARICA** | `0.734510` | `0.727205` | `0.727438` |
+| `|r_i - r_j|`  *(il gradiente **nudo**: quello che la soglia legge)* | incremento **TOTALE** | `0.071002` | `0.045910` | `0.027752` |
+| `|r_i - r_j|`  *(il gradiente **nudo**: quello che la soglia legge)* | ### **SPINTA** | `0.068427` | `0.033277` | `0.011997` |
+| `|r_i - r_j|`  *(il gradiente **nudo**: quello che la soglia legge)* | **SCARICA** | `0.081700` | `0.042904` | `0.024617` |
+| `|r_i - r_j| * |phivel|` medio  *(la **proxy** del mandato)* | incremento **TOTALE** | `0.351520` | `0.336760` | `0.288001` |
+| `|r_i - r_j| * |phivel|` medio  *(la **proxy** del mandato)* | ### **SPINTA** | `0.402846` | `0.369878` | `0.318859` |
+| `|r_i - r_j| * |phivel|` medio  *(la **proxy** del mandato)* | **SCARICA** | `0.339056` | `0.292211` | `0.261092` |
+| `|r_i*phivel_i - r_j*phivel_j|`  *(la **forma esatta**: quella che il codice produce)* | incremento **TOTALE** | `0.732879` | `0.792027` | `0.754567` |
+| `|r_i*phivel_i - r_j*phivel_j|`  *(la **forma esatta**: quella che il codice produce)* | ### **SPINTA** | `0.869942` | `0.915141` | `0.887105` |
+| `|r_i*phivel_i - r_j*phivel_j|`  *(la **forma esatta**: quella che il codice produce)* | **SCARICA** | `0.687912` | `0.698127` | `0.699019` |
 
-> ### ✔ **IL RISULTATO PIU' INFORMATIVO DELLA MISURA, e non e' `K2`:** la correlazione della `SPINTA` col ### **gradiente NUDO e' `0.012`-`0.068`**, con la **proxy** `0.311`-`0.391`, e con la ### **FORMA ESATTA `0.826`-`0.884`.**
+> ### ✔ **IL RISULTATO PIU' INFORMATIVO DELLA MISURA, e non e' `K2`:** la correlazione della `SPINTA` col ### **gradiente NUDO e' `0.012`-`0.068`**, con la **proxy** `0.319`-`0.403`, e con la ### **FORMA ESATTA `0.870`-`0.915`.**
 >
-> ### ⛔ **QUINDI LA MODULAZIONE LEGGE LA GRANDEZZA SBAGLIATA.** La torsione e' guidata da `|r_i*phivel_i - r_j*phivel_j|` *(`rho ~ 0.86`)*, e la soglia si modula su `|r_i - r_j|` *(`rho ~ 0.04`)*. ### **Sono la stessa cosa solo se `phivel` e' uniforme sull'arco, e NON lo e'.**
+> ### ⛔ **QUINDI LA MODULAZIONE LEGGE LA GRANDEZZA SBAGLIATA.** La torsione e' guidata da `|r_i*phivel_i - r_j*phivel_j|` *(`rho ~ 0.89`)*, e la soglia si modula su `|r_i - r_j|` *(`rho ~ 0.04`)*. ### **Sono la stessa cosa solo se `phivel` e' uniforme sull'arco, e NON lo e'.**
 >
 > ### ✔ **ED E' IL LIMITE CHE IL GUARDIANO AVEVA DICHIARATO**, qui con un numero: *<<lo sfasamento e' proporzionale anche a `phivel`; dove `phivel ~ 0` il gradiente non produce torsione>>*. ### **La forma esatta era una mia aggiunta alla proxy chiesta: senza di lei questo confronto non ci sarebbe.**
 
+### IL CONFRONTO FRA I DUE ALLINEAMENTI del predittore
+
+| predittore | versione | passo `50` | passo `100` | passo `140` |
+|---|---|--:|--:|--:|
+| `|r_i - r_j|`  *(il gradiente **nudo**: quello che la soglia legge)* | ### **CAUSALE** *(`t-1`)* | `0.068427` | `0.033277` | `0.011997` |
+| `|r_i - r_j|`  *(il gradiente **nudo**: quello che la soglia legge)* | stesso passo *(`t`)* | `0.068092` | `0.032211` | `0.011504` |
+| `|r_i - r_j| * |phivel|` medio  *(la **proxy** del mandato)* | ### **CAUSALE** *(`t-1`)* | `0.402846` | `0.369878` | `0.318859` |
+| `|r_i - r_j| * |phivel|` medio  *(la **proxy** del mandato)* | stesso passo *(`t`)* | `0.390527` | `0.359655` | `0.311442` |
+| `|r_i*phivel_i - r_j*phivel_j|`  *(la **forma esatta**: quella che il codice produce)* | ### **CAUSALE** *(`t-1`)* | `0.869942` | `0.915141` | `0.887105` |
+| `|r_i*phivel_i - r_j*phivel_j|`  *(la **forma esatta**: quella che il codice produce)* | stesso passo *(`t`)* | `0.826367` | `0.884193` | `0.856539` |
+
+> ### ✔ **LE DUE VERSIONI DANNO LO STESSO VERDETTO su `K2` e `K2b`:** il difetto era ### **innocuo in questo caso, ma restava un difetto.** ### ✔ **E l'allineamento causale RAFFORZA la forma esatta** *(da `~0.86` a `~0.89` di media)*, ### **che e' quello che si aspetta se e' davvero lei a guidare la torsione:** correlare col passo giusto non puo' che migliorare il predittore vero.
+
 ### `K2`: la `SPINTA` contro il **gradiente nudo** — il predittore che la soglia legge
 
-`|rho|` ai tre passi: `0.068092`, `0.032211`, `0.011504`. Soglia `K2`: `<= 0.05` **a tutti e tre**.
+`|rho|` ai tre passi: `0.068427`, `0.033277`, `0.011997`. Soglia `K2`: `<= 0.05` **a tutti e tre**.
 
 ### **`K2`: l'ipotesi **NON** e' refutata: la correlazione **ESISTE****
 
-> ### ⚠ **E PASSA PER UN PELO, SU UN PASSO SOLO:** `1` dei tre passi supera la soglia *(`0.068092`)*, gli altri due stanno **sotto** *(`0.032211`, `0.011504`)*. ### **Un criterio <<a tutti e tre>> deciso da un passo e' fragile, e lo dico invece di presentarlo come netto.**
+> ### ⚠ **E PASSA PER UN PELO, SU UN PASSO SOLO:** `1` dei tre passi supera la soglia *(`0.068427`)*, gli altri due stanno **sotto** *(`0.033277`, `0.011997`)*. ### **Un criterio <<a tutti e tre>> deciso da un passo e' fragile, e lo dico invece di presentarlo come netto.**
 
 ### `K2b`: gli incrementi mediani della `SPINTA` per **quintile del gradiente nudo**
 
 | passo | `q1` | `q2` | `q3` | `q4` | `q5` | **`q5/q1`** |
 |--:|--:|--:|--:|--:|--:|--:|
-| `50` | `1.7527e-02` | `1.9022e-02` | `2.0110e-02` | `2.0774e-02` | `2.3168e-02` | **`1.3218`** |
-| `100` | `2.4401e-02` | `2.4687e-02` | `2.5999e-02` | `2.6532e-02` | `2.7883e-02` | **`1.1427`** |
-| `140` | `2.2744e-02` | `2.1614e-02` | `2.1834e-02` | `2.2690e-02` | `2.3842e-02` | **`1.0483`** |
+| `50` | `1.7490e-02` | `1.9037e-02` | `2.0101e-02` | `2.0775e-02` | `2.3177e-02` | **`1.3251`** |
+| `100` | `2.4333e-02` | `2.4743e-02` | `2.5964e-02` | `2.6512e-02` | `2.7933e-02` | **`1.1480`** |
+| `140` | `2.2729e-02` | `2.1582e-02` | `2.1838e-02` | `2.2687e-02` | `2.3911e-02` | **`1.0520`** |
 
 **Il rapporto `q5/q1` e' `>= 2.0` in `0` passi su `3`.** Soglia `K2b`: **almeno due su tre**.
 
@@ -122,10 +137,9 @@
 
 ## CHE COSA RESTA APERTO
 
-1. ### ⛔ **`K2` e `K2b` SONO PROVVISORI:** il predittore e' sfasato di un passo. La cura e' il prossimo commit, e il braccio `Bg` si rigira. ### **Questo referto verra' AGGIORNATO col predittore causale e con la tabella che confronta i due allineamenti.**
-2. **il `0.3`**: un numero **scelto**, che `A1` condanna e che `REGOLE_composizione_T3.md` §6.3 dice **<<va derivata>>**, legandolo al **principio di equivalenza**. ### **Questa misura dice che e' PORTANTE, non che e' giusto.**
-3. ### **E la domanda che la misura APRE:** la modulazione si modula su `|r_i - r_j|`, ma la torsione e' guidata da `|r_i*phivel_i - r_j*phivel_j|`. ### **Una modulazione DERIVATA leggerebbe la seconda, non la prima** — ma sarebbe una legge nuova, e ### **non la propongo: la nomino.**
-4. **`ARCHI-OLTRE-4PI`**, **`GRAVITA-POTENZIALE`**, e la **misura con `DT` dimezzato**, ### **che NON si avvia finche' Luca non lo dice.**
+1. **il `0.3`**: un numero **scelto**, che `A1` condanna e che `REGOLE_composizione_T3.md` §6.3 dice **<<va derivata>>**, legandolo al **principio di equivalenza**. ### **Questa misura dice che e' PORTANTE, non che e' giusto.**
+2. ### **E la domanda che la misura APRE:** la modulazione si modula su `|r_i - r_j|`, ma la torsione e' guidata da `|r_i*phivel_i - r_j*phivel_j|`. ### **Una modulazione DERIVATA leggerebbe la seconda, non la prima** — ma sarebbe una legge nuova, e ### **non la propongo: la nomino.**
+3. **`ARCHI-OLTRE-4PI`**, **`GRAVITA-POTENZIALE`**, e la **misura con `DT` dimezzato**, ### **che NON si avvia finche' Luca non lo dice.**
 
 ---
 
