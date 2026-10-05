@@ -641,3 +641,44 @@ dalla schermatura stessa*. **Ora è contata** *(`_g_scherm_ricorsione`)*: **sett
 
 > ### 📌 **E il `2.6×` sul pozzo non era fisica:** era l'assenza della schermatura. **Ogni numero
 > misurato in un passo CON nascite, prima di questa cura, viene da un campo gonfiato di `~1.6×`.**
+
+
+---
+
+## 🆕 `Z43` CURA (2) dal 2026-10-05: **il tempo proprio viene da `cs`**, e **DUE flag diventano INERTI**
+
+**LA LEGGE NUOVA:** `r = cs_nodo(t-1) / CS_M` *(esponente `p = 1`, <<orologio a luce>>)*.
+**Prima** `r` veniva dalla **frequenza d'interferenza della fase**, normalizzata sulla
+**mediana globale** di `|f|`. *(Decisione di Luca; scheda in `doc/REGISTRO_FISICA.md` ⑤;
+ramo archiviato in `csv/_archivio/_rami_off_z43_cura2.py`, tag `pre-z43-cura2-r-da-cs`.)*
+
+### ⚠ **`--tauloc` CAMBIA SIGNIFICATO, e il default NON cambia**
+
+| | |
+|---|---|
+| **cosa faceva** | era **l'AMPIEZZA** della dilatazione: `r = 1 + TAU_LOC*(r_norm - 1)` |
+| **cosa fa da oggi** | e' **solo un INTERRUTTORE**: `TAU_LOC == 0.0` → orologio **globale** *(`r = None`)*; qualunque altro valore → la legge `cs/CS_M`, **che non lo legge** |
+| **default** | `1.0`, **invariato**, e il driver lo passa cosi' |
+| **byte-inerte a default?** | ### **SI', ed e' misurato dall'ARITMETICA:** a `TAU_LOC = 1.0` la forma vecchia era `1 + 1.0*(x - 1) = x` — ### **un PASSANTE.** Quindi la cura **non toglie un'ampiezza in uso**: toglie **una manopola che valeva `1`** *(`A1`)* |
+| **⚠ e che cosa cambia DAVVERO** | con `--tauloc` **diverso da `0` e da `1`** — una configurazione che **il driver non usa** — prima il valore **scalava** la dilatazione e ora ### **non fa piu' niente.** Non e' una regressione nascosta: e' il senso della cura, e si ritrova nel tag |
+
+### ⚠ **`--ritmo-wrap-2pi` e `--tempo-proprio-orientato` sono INERTI dal 2026-10-05**
+
+| | |
+|---|---|
+| **cosa facevano** | `--ritmo-wrap-2pi`: la cura **`D34`**, il wrapping su `2pi` *(invece di `4pi`)* della differenza di `np.angle` dentro `ritmo()`. `--tempo-proprio-orientato`: teneva il **SEGNO** di `f` invece del modulo |
+| **default** | `False` entrambi; **il driver accende `--ritmo-wrap-2pi`** e non accende l'altro. **Da oggi il default non conta piu'**: non fanno niente in nessuno dei due stati |
+| **byte-inerte a default spento?** | ### **sono inerti in ENTRAMBI gli stati**, acceso o spento |
+| **perche'** | ### **agivano SOLO sulla fase dentro `ritmo()`**, e `r` **non legge piu' la fase**: non c'e' piu' niente da avvolgere ne' da orientare. Censito: fuori da `ritmo()` restavano **solo** la `global`, l'assegnazione dal CLI e *(per `--tempo-proprio-orientato`)* un `print` d'avviso |
+| **non sono stati TOLTI** | ### **toglierli sarebbe ESTENDERE LA CURA DA SOLI** *(par.2)*. Restano **accettati dal CLI**, e la loro sorte e' **una decisione di Luca** |
+
+> ### ⚠ **E `D34` ERA UNA CURA SIGILLATA** *(`csv/_seal_fork/_sigillo_ritmo_wrap.py`, 4/4,
+> piu' la prova a 600 passi `Z123`)*. ### **La sua misura resta vera** — diceva che un wrap su
+> `4pi` applicato a una differenza di `np.angle` *(periodo `2pi`)* e' **l'identita'**, con
+> `max|w4(a) - a| = 0.000e+00` su 100 001 punti. ### **Ma la legge che curava non c'e' piu':
+> non e' il sigillo a essere sbagliato, e' il suo OGGETTO a essere uscito.**
+
+> ### 📌 **E un terzo sigillo diventa STORICO:** `csv/_seal_fork/_sigillo_anello.py`
+> **asserisce che `step()` PROMUOVA il gauge `_med_f_prec`.** Da questa cura **FALLISCE a
+> `HEAD`, e DEVE.** ### **Si rigira AL SUO COMMIT**, come il par.6 prescrive — **un sigillo
+> non si giudica su un codice che non ha sigillato.**

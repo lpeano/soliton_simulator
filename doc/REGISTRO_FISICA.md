@@ -926,6 +926,85 @@ deciderlo**; dal `6b` la legge vale **sempre** e il flag e' **inerte**, quindi q
 > vuole il braccio di confronto **omette il flag**, e il referto lo mostra.
 # ⑤ IL TEMPO PROPRIO — **`ritmo()` / `r` / `dt_n = DT·r`**, e il surrogato **`tau_pp`**
 
+> ## ✔ **LA LEGGE DI OGGI, dal 2026-10-05:** `r = cs_nodo / CS_M`
+>
+> ### **LA FORMA**
+> ```
+> r_i(t) = cs_i(t-1) / CS_M                  esponente p = 1
+> ```
+> dove `cs_i` e' la **velocita' delle onde metriche** nel nodo, quella che `_cs_nodo` gia'
+> calcola come **unica fonte** della legge `cs_eff(rho)`, letta dalla **cache del passo
+> PRECEDENTE** *(`_cs_nodo_prev`)*.
+>
+> ### **LA DERIVAZIONE** *(non una taratura: `A1`)*
+> **Un tic e' il TEMPO DI ATTRAVERSAMENTO.** Il modello ha gia' un tempo costruito cosi' --
+> il **tempo-luce** `tau = d/cs` -- e il tempo proprio e' **la stessa cosa adimensionata**:
+> il rapporto fra la velocita' di propagazione nel luogo e quella nel vuoto.
+> ### **L'esponente `p = 1` NON E' SCELTO: e' quello che rende `r` e `tau` LA STESSA
+> ### GRANDEZZA.** Con `p != 1` sarebbero due tempi diversi costruiti da due leggi diverse,
+> ed e' esattamente l'eccezione che questa cura **toglie** *(`9-ter`)*.
+>
+> ### **IL PERCHE'** *(e il perche' la legge di prima era sbagliata)*
+> La legge di prima prendeva `r` dalla **frequenza d'interferenza della fase**, normalizzata
+> sulla **MEDIANA GLOBALE** di `|f|`. Tre cose non tornavano:
+> 1. ### **un gauge GLOBALE in un modello RELAZIONALE:** la mediana su tutta la rete decideva
+>    il ritmo di ogni nodo;
+> 2. ### **la fase non e' un orologio:** `Delta(angle psi)/DT` e' una frequenza
+>    d'**interferenza**, e il campo che la porta e' quello **EMESSO** dai vicini;
+> 3. ### **un ANELLO:** `f -> r -> f`. Curato nel 2026-09-18 **sfasandolo di un passo**, ma
+>    ### **lo sfasamento non ha eliminato l'altalena: l'ha SMORZATA** *(referto `3edb7dd`,
+>    corretto in `b337ec1`: il rapporto per coppia resta sopra `1.2` fino al passo `42`)*.
+>
+> ### **I LIMITI, che la forma garantisce**
+> * `r ∈ (0, 1]`, e **non per un clip**: `_cs_nodo` restituisce
+>   `cs_floor + (CS_M - cs_floor)*transizione` con `transizione = 0.5*(1 + tanh(1 - u))` e
+>   `u = I/media_vicini >= 0`, quindi ### **`transizione <= 0.880797` e NON PUO' ARRIVARE A 1**;
+> * da cui `cs = CS_M`, cioe' **`r = 1` ESATTO**, ### **SOLO dove `I = 0`** -- in una rete di
+>   materia **non esistono nodi con `r = 1`**, e il tempo proprio e' **piu' lento** di quello
+>   coordinato **ovunque ci sia qualcosa**. ### **E' il verso giusto.**
+>
+> ### **CHE COSA QUESTA LEGGE TOGLIE** *(il conto di `9-ter`: scende)*
+> **QUATTRO leggi pratiche:** la saturazione `x/sqrt(1+x^2)`, il tetto `1.414212977`, il
+> pavimento `1.414e-06`, il pavimento `1e-9` sul gauge. **UNA manopola:** `TAU_LOC` come
+> **ampiezza** *(a `1.0` era un **passante**: `1 + 1.0*(x-1) = x`)*. **UN gauge globale.**
+> **E UN'ECCEZIONE:** `r` e `tau` non sono piu' due tempi costruiti in due modi.
+>
+> ### ⚠ **MA NE APRE UNA CHE VA DETTA, ed e' il punto scomodo:** `cs` porta
+> `_Lam = mean(|psi|^2)` su **TUTTA la rete** *(`CS-LAMBDA-GLOBALE`)*. ### **Quindi da questa
+> cura IL TEMPO DI OGNI LEGGE LOCALE LEGGE UNA MEDIA GLOBALE** -- non piu' una **mediana**
+> di fasi, ma ancora una media. ### **Il criterio di LOCALITA' del sigillo lo MISURA invece di
+> presumerlo**, con atteso `~1/n` e **non zero**.
+>
+> ### **L'ANELLO, che resta e si sposta**
+> `cs -> r -> dt_e -> cs`: `cs` dipende da `r` attraverso i sotto-passi della metrica, e ora
+> `r` dipende da `cs`. ### **Passa per la cache del passo PRECEDENTE**, quindi e' sfasato di
+> uno e **non viola `A6`** -- ed e' **la stessa forma che produceva l'altalena**. Per questo il
+> sigillo misura l'**autocorrelazione a ritardo 1** della mediana di `r`: se quell'anello
+> oscilla, ### **si ferma e si riporta.**
+>
+> **DOVE:** `ritmo()` del simulatore. **IL RAMO DI PRIMA:**
+> `csv/_archivio/_rami_off_z43_cura2.py`, tag `pre-z43-cura2-r-da-cs`, blob `062172d3`.
+> **IL SIGILLO:** `csv/_seal_fork/_sigillo_z43_cura2.py`, **sette criteri**.
+> **LA DECISIONE:** di Luca, 2026-10-05, in
+> `doc/TASK_HISTORY/2026-10-05_z43-cura2-r-da-cs.md`.
+>
+> ### ⚠ **E DUE FLAG PERDONO QUI IL LORO UNICO CONSUMATORE FISICO**, e **non sono stati
+> ### tolti**, perche' toglierli sarebbe estendere la cura da soli:
+> * **`RITMO_WRAP_2PI`** -- la cura `D34`, che avvolgeva su `2pi` la differenza di `np.angle`.
+>   ### **Era una cura SIGILLATA** *(`_sigillo_ritmo_wrap.py`, 4/4)*, e **la sua misura resta
+>   vera**: diceva che il wrap su `4pi` era l'identita'. ### **Ma la legge che curava non c'e'
+>   piu'.**
+> * **`TEMPO_PROPRIO_ORIENTATO`** -- il segno di `f`.
+>
+> **Dopo questa cura `r` NON LEGGE LA FASE**, quindi non c'e' piu' niente da avvolgere ne' da
+> orientare: restano **accettati dal CLI** e **INERTI nella fisica**. ### **La loro sorte e'
+> una decisione di Luca, non mia.**
+>
+> ### ⚠ **E UN SIGILLO DIVENTA STORICO:** `csv/_seal_fork/_sigillo_anello.py` **asserisce
+> ### che `step()` PROMUOVA il gauge**. Da questo commit **FALLISCE a `HEAD`, e DEVE** --
+> sigilla una legge che non esiste piu'. **Si rigira AL SUO COMMIT** *(par.6)*.
+
+
 > ### 🗄 **(b)2, 2026-09-27: `--sync` si dichiara no-op, e un avviso cade**
 >
 > **`SYNC_UPDATE` e' un NO-OP ACCETTATO dal 2026-09-27** *(passo `(b)2` di `ETC-PASSO`)*: i
@@ -1154,6 +1233,27 @@ distanza minima **la saturazione non esiste** — e `semina` lo dice da sé rifi
 **La legge sta nella scheda `mitosi-schwinger`.**
 
 <!-- SCHEDA nome=fase-phi funzioni=_w4,_w8,_wphi,_dphi,circolazione_topologica,semina,step flag=FASE_2PI,TORS_4PI -->
+
+> ## ⚠ **2026-10-05, `Z43` CURA (2): `step()` NON PROMUOVE PIU' IL GAUGE DI `ritmo()`**
+>
+> **Era, dentro `step()`:** `_med_f_prec = _med_f_ultimo`, con il ramo che **non** promuoveva
+> un `med` finito sul pavimento `1e-9`.
+> ### **ESCE** perche' quel gauge **era la MEDIANA GLOBALE DELLA FASE**, e la legge nuova
+> `r = cs_nodo/CS_M` ### **non legge piu' la fase:** non c'e' piu' niente da promuovere.
+> **La scheda della legge e' `tempo-proprio`** *(sezione ⑤)*; qui si registra **l'effetto su
+> `step()`**, che e' dove la promozione viveva.
+>
+> ### ✔ **E QUELLA PROMOZIONE ERA UN PRESIDIO, non un dettaglio -- va detto perche' chi
+> ### legge non creda che fosse codice di servizio:** stava in `step()` e **non** in
+> `ritmo()` proprio perche' `ritmo()` ha **TRE call-site e DUE sono DIAGNOSTICI**. Se lo
+> snapshot fosse avanzato dentro `ritmo()`, ogni chiamata diagnostica avrebbe fatto avanzare
+> lo **stato fisico**. ### **Quel presidio esce INSIEME alla cosa che proteggeva**, e il
+> ragionamento resta in `csv/_archivio/_rami_off_z43_cura2.py`.
+>
+> **E `_med_f_prec`/`_med_f_ultimo` restano DICHIARATI a `None`** *(`A7b`)* **e da oggi
+> nessuno li scrive:** due registri morti, non tolti perche' **due strumenti di misura li
+> leggono** *(`_f_e_median.py`, `_z43_tempo_proprio.py`)*. Voce `RITMO-FLAG-SENZA-OGGETTO`.
+
 
 > ### ⚠ **COMMIT 0-bis — L'IMPULSO INIZIALE DI FASE DELLA SEMINA: quale ramo gira** *(2026-10-01)*
 >

@@ -1982,3 +1982,56 @@ scrittura che non rispetta un'invariante che il resto del codice assume**, e che
 ### **finora era coperta da un sito che oggi e' spento.**
 
 **Collegata a:** `MEM-HEBB-VERSO`, `FASE-TRASCINAMENTO-3D`.
+---
+
+## `RITMO-FLAG-SENZA-OGGETTO` — **due flag e due sigilli perdono il loro OGGETTO**
+
+*(APERTA il 2026-10-05 dalla `CURA (2)` di `Z43`: `r = cs_nodo / CS_M`. **Non e' un difetto**,
+e il tipo nell'indice e' `altro`: e' una **conseguenza misurata** di una cura, e la decisione
+su che farne **e' di Luca**.)*
+
+### IL FATTO, **censito dal sorgente e non supposto**
+
+Dopo la cura `r` **non legge piu' la fase**. Cercando i lettori dei due flag **fuori** da
+`ritmo()`, resta:
+
+| flag | che cosa resta fuori da `ritmo()` | nella fisica |
+|---|---|---|
+| `RITMO_WRAP_2PI` | la dichiarazione *(`:3631`)*, la `global` e l'assegnazione dal CLI *(`:10923`)* | ### **NIENTE** |
+| `TEMPO_PROPRIO_ORIENTATO` | gli stessi tre, **piu' un `print` d'avviso** *(`:11084`)* | ### **NIENTE** |
+
+### **E NON SONO STATI TOLTI**, ed e' una scelta che dichiaro invece di nasconderla
+
+**Toglierli sarebbe estendere la cura da soli** *(par.2)*. Il mandato nominava i rami che
+escono, e **questi due flag non c'erano**. Restano **accettati dal CLI** e **inerti**, e
+### **la loro sorte e' una decisione di Luca.**
+**NB:** il driver **accende** `--ritmo-wrap-2pi`. Da oggi quell'accensione **non fa niente**,
+ed e' scritto nel `README` perche' chi legge il comando non creda il contrario.
+
+### ⚠ **E DUE SIGILLI PERDONO IL LORO OGGETTO. NESSUNO DEI DUE E' SBAGLIATO**
+
+* **`csv/_seal_fork/_sigillo_ritmo_wrap.py`** — la cura **`D34`**, `4/4`, piu' la prova a 600
+  passi `Z123`. **La sua misura resta vera:** un wrap su `4pi` applicato a una differenza di
+  `np.angle` *(periodo `2pi`)* e' **l'identita'**, con `max|w4(a) - a| = 0.000e+00` su
+  **100 001** punti. ### **Ma la legge che curava non c'e' piu'.**
+* **`csv/_seal_fork/_sigillo_anello.py`** — asserisce *(`:201`-`:204`)* che `ritmo()` **non**
+  scriva `_med_f_prec` e che `step()` **lo promuova**. ### **Da questa cura FALLISCE a `HEAD`,
+  e DEVE:** la promozione e' uscita.
+
+> ### 📌 **E QUESTO NON E' UN DIFETTO DI PAR.6**, e la distinzione conta: la regola dice che
+> un sigillo ### **non piu' ri-girabile AL SUO COMMIT** e' un difetto nuovo. ### **Questi due
+> si rigirano al loro commit senza cambiare una virgola.** ### **Un sigillo non si giudica su
+> un codice che non ha sigillato.**
+
+### **E DUE REGISTRI MORTI DELLA STESSA CURA**, da aprire come voce a parte
+
+`_med_f_prec` e `_med_f_ultimo` restano **dichiarati a `None`** in `__init__` *(`A7b`)* e
+### **da oggi nessuno li scrive**; `_psi_prec` resta **promosso** da `step()` e **non e' piu'
+letto dalla fisica**.
+**NON si tolgono in questa cura**, e il perche' e' concreto: `_med_f_*` sono letti da **due
+strumenti di misura** — `csv/_test_fork/_f_e_median.py` e `csv/_test_fork/_z43_tempo_proprio.py`
+— che leggerebbero **un attributo INESISTENTE invece di `None`**. ### **Ed e' lo stesso
+criterio con cui `r_node` e' rimasto nella `CURA (1)`:** chi li togliesse **non starebbe
+pulendo**, starebbe **cancellando la traccia di una legge che c'era**.
+
+**Collegata a:** `Z43`, `CS-LAMBDA-GLOBALE`.
