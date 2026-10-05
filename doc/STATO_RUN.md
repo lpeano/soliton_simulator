@@ -1678,3 +1678,109 @@ domanda, se la misura confermera'.**
 ### **`blocca_run_base = NO`, e il perche':** oggi il difetto e' sui **valori di due
 cache**, e se nessun lettore vivo le legge dopo la nascita **non muove la dinamica**.
 ### ⚠ **Ma blocca la CURA del tetto causale, ed e' per questo che viene prima.**
+
+## `VELENO-ARCHI-KEEP` — **CHIUSA: il sigillo della cura, 2026-10-05**
+
+> ### **La cura e' sigillata, e il numero e' `0`: le divergenze di STATO
+> ### su 150 passi, 290 attributi per passo, confrontando
+> ### `vars(net)` INTERO.**
+
+**LA CURA, decisione di Luca del 2026-10-05, VIA (i):** la nascita applica `keep` a
+**tutte** le derivate d'arco **prima** del veleno — `_riallinea_derivate_arco`,
+chiamata immediatamente prima di `_avvelena_derivate`. Simulatore `0f060670` ->
+**`e2940b3c`**. **La via `(ii)` e' stata scartata** *(curava un lettore solo, lasciava
+`_sin2_vir` col difetto, e aggiungeva una seconda scrittura della legge di `dt_e`)*.
+
+**GLI OTTO CRITERI, fissati prima del codice in `b17caec`, PASSANO TUTTI** — il
+referto e' `doc/REFERTO_veleno_archi_keep_cura_2026-10-05.md`. I due numeri che contano:
+
+| | prima | dopo |
+|---|--:|--:|
+| confronti di divisione **con differenze** | `166` su `166` | ### **`0`** |
+| elementi diversi in totale | `63 802 623` | ### **`0`** |
+| copertura del veleno *(min = max su 166)* | `0.5000` | ### **`1.0000`** |
+| il tetto causale: verifiche (A) con differenze | `166` su `300` | ### **`0`** |
+
+### ✅ **E QUESTA VOCE E' LA RISPOSTA ALLA DOMANDA DI `VELENO-ORIENTATO`:** li' il
+veleno risultava cadere su **uno** dei due archi figli e non sull'altro, e il criterio di
+chiusura chiedeva di decidere se fosse **una regola** o **un buco del veleno**.
+### **Era un buco del veleno**, e la misura lo ha detto con `0.5000` esatto.
+
+### ⛔ **E RESTA UNA CONSEGUENZA, registrata e NON decisa:** dopo la cura gli archi
+**nati** nel passo hanno `dt_e = NaN` — prima avevano un valore **finito preso da un
+altro arco**, che e' peggio ma **non si vedeva**. ### **Il passo (2) di
+`TETTO-CAUSALE-TEMPO-COORDINATO` avra' bisogno di una REGOLA per loro, e quella e' una
+DECISIONE DI LUCA da prendere ALLORA.**
+
+## `SIGILLO-REGISTRO-NON-CONFRONTABILE` — **il comparatore del sigillo non sa
+## confrontare un dizionario di array**
+
+**IL FATTO, misurato:** `_veleno_registro` e' un **dizionario che contiene array**, e il
+comparatore di `csv/_seal_fork/_sigillo_veleno_keep.py` lo classifica
+**<<non confrontabile>>** in **`83` passi su 150**.
+
+### ⚠ **E NON E' ESENTATO: il sigillo lo CONTA FRA LE DIFFERENZE**, perche'
+### **un attributo non confrontabile non e' un attributo uguale.** La via dell'esenzione
+era disponibile e non l'ho presa: lo stesso comparatore, lo stesso giorno, ha
+**imparato** `_S` *(una `csr_matrix`)* e `rng` *(un `Generator`)* invece di esentarseli
+*(`a5c2bfb`)*, e quei due avevano prodotto ### **un FALSO-UNO che mi avrebbe fatto
+concludere che la cura era sbagliata.**
+
+**PERCHE' NON FALSA IL RISULTATO:** e' classificato `contatore/registro` e **non**
+`STATO`, e il criterio 1 del sigillo *(stato identico al byte)* da' `0`
+comunque.
+
+**CHE COSA MANCA:** insegnare al comparatore i **dizionari di array**, nello stesso modo
+in cui gli si sono insegnate la matrice sparsa e il generatore.
+
+**IN CODA** per il **congelamento dell'infrastruttura** *(decisione di Luca del
+2026-10-04)*: i difetti degli strumenti che non falsano il risultato **si annotano e si
+mettono in coda**.
+
+## `SIGILLO-SENZA-CONFIGURAZIONE` — **il sigillo non TIMBRA la configurazione con cui
+## ha girato**
+
+**IL FATTO:** `csv/_seal_fork/_sigillo_veleno_keep.py` configura il modulo **passando
+dal CLI del driver** *(`_cli_flag.argv_del_driver`, `:204`)* — quindi **non e'
+configurato a mano** e `H-P3` e' rispettato — ### **ma non scrive la configurazione
+nel suo json.**
+
+**LA CONSEGUENZA, e l'ho dovuta dichiarare nel referto:** il referto ha dovuto
+**RICOSTRUIRE** la dichiarazione di `P5` chiamando **lo stesso helper sullo stesso
+driver**, *dopo* la corsa. Quella ricostruzione vale **solo** perche' il blob del driver
+e' quello di `HEAD` *(`42ed4904`, non sporco)* — ### **verificato, e scritto nel
+referto.** ### ⛔ **Se il driver fosse cambiato fra la corsa e il referto, la
+ricostruzione MENTIREBBE.**
+
+### ⚠ **E IL PRESIDIO NON LO PRENDE, per `A9`:** `H-P5` guarda i file sotto `csv/`
+che **scrivono un referto** *(una `write` su un `DEST`/`REFERTO`)*, e questo sigillo
+scrive un **json**. ### **I hook non impediscono cio' che non guardano.**
+
+**CHE COSA MANCA:** il sigillo deve **timbrare** la sua configurazione nel json, come
+fanno gli strumenti del tetto causale e del passo (1).
+
+## `CELLE-NAN-APPESE-NOME-SCADUTO` — **un campo che misurava la cosa giusta solo
+## finche' la cura non esisteva**
+
+**IL FATTO, misurato rigirando lo strumento:** il campo `celle_nan_appese` di
+`csv/_test_fork/_veleno_archi_keep.py` *(`425b8d47`)* e' calcolato come
+`len_dopo - len_prima`, dove `len_prima` e' la lunghezza **prima delle regole di
+nascita**. Quella quantita' coincideva con *<<quante celle appende il veleno>>*
+### **solo finche' la cura non esisteva**: dopo la cura il veleno appende `2s` celle, ma
+il campo continua a dire `s`.
+
+| | sul VECCHIO `0f060670` | sul CURATO `e2940b3c` |
+|---|---|---|
+| `celle_nan_appese`, valori distinti | `1 … 32` | `1 … 32` — ### **invariato** |
+| `non_finite_in_coda`, valori distinti | `1 … 32` | ### **`2 … 64`** |
+
+**PERCHE' NON FALSA IL RISULTATO:** la misura del criterio 5 usa `non_finite_in_coda`,
+che e' ### **LETTA DALL'ARRAY** e non dedotta dalle lunghezze, ed e' quella che da' `2s`.
+
+> ### **E' UN NOME SCADUTO, NON UN NUMERO SBAGLIATO** — ed e' esattamente la classe
+> di difetto che il par.2 di `CLAUDE.md` nomina: ### **i commenti, e i nomi, possono
+> essere scaduti, e in questo repo lo sono stati.**
+
+### ⛔ **E LO STRUMENTO `425b8d47` NON SI MODIFICA:** e' il blob con cui sono state
+prese **le misure del passo (1)** e **i criteri 3-6 del sigillo**, e
+### **un sigillo si rigira con `git checkout` del commit che ha sigillato** *(par.6)*.

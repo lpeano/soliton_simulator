@@ -185,3 +185,72 @@ e ### **una cura che riallinea le derivate le cambia PER DEFINIZIONE.** Il crite
    adesso**;
 5. **il sigillo gira DOPO il commit del codice**, e il referto e' un commit a se';
 6. ### **se un criterio fallisce: si committa lo stato + il fallimento e si FERMA** *(par.5)*.
+
+## 5. L'ESITO — **ANNOTATO, non riscritto** *(par.8)*
+
+> ### **GLI OTTO CRITERI PASSANO. Il numero e' `0`: le divergenze di
+> ### STATO su 150 passi, 290 attributi per passo.**
+> Il referto e' `doc/REFERTO_veleno_archi_keep_cura_2026-10-05.md`.
+
+### **LE PREVISIONI DELLA SEZIONE 2, UNA PER UNA — e una NON ha tenuto**
+
+| previsto in sezione 2 | misurato | |
+|---|---|---|
+| tutto lo **STATO** identico al byte | ### **`0` divergenze** | ✅ **TENUTA** |
+| `_g_veleno_celle` cambia | `109` passi | ✅ **TENUTA** |
+| `_veleno_registro` cambia | `83` passi | ✅ **TENUTA** |
+| `_g_keep_riallineate` cambia | `109` passi | ✅ **TENUTA** |
+| `_g_keep_salti` cambia | ### **`0` — mai** | ⚠ **PREVISTA E NON AVVENUTA** |
+| *(non previsti per nome)* `_g_keep_celle_tolte`, `_g_keep_senza` | `109` e `81` passi | ⚠ **sono contatori MIEI, nella classe che avevo previsto, ma non li avevo NOMINATI** |
+| — | ### **`_g_inv_veleno_ok`, `109` passi** | ### ⛔ **NON PREVISTO** |
+
+### ⚠ **`_g_keep_salti` PREVISTO E MAI SCATTATO, e vuol dire una cosa precisa:**
+quel contatore cresce quando una derivata d'arco **non e'** un `float` a una dimensione
+e la cura la **salta**. ### **Zero su 150 passi significa che tutte e due le
+derivate d'arco sono sempre state `float64` monodimensionali** — cioe' che il
+**ripiego** che avevo messo nella cura ### **non e' mai servito.** Lo dichiaro perche'
+un ramo che non gira mai e' `A11`: se protegge da un **errore**, l'errore va cercato.
+### **Qui protegge da una FORMA che il `REGISTRO_DERIVATE` non garantisce**, quindi
+resta; ma il numero e' `0`, e va saputo.
+### **E LO STESSO VALE PER `_g_keep_assenti`**, l'altro ripiego della cura *(una
+derivata del registro che non esiste sulla rete)*: ### **non compare fra gli attributi
+diversi, quindi non e' mai stato creato — `0`.** ### **I DUE RIPIEGHI DELLA CURA SONO
+### ENTRAMBI A ZERO**, e lo dico insieme invece di nominarne uno solo.
+
+### ⛔ **`_g_inv_veleno_ok` E' LA PREVISIONE CHE MI E' MANCATA, e il suo significato
+### e' il risultato migliore di questo sigillo**
+
+Conta le celle **avvelenate E `nan`**, cioe' quelle che il controllo d'invariante
+**ESENTA** dal dominio *(`:6647`)*. Cresce perche' le celle avvelenate sono passate da
+`s` a `2s`. ### **E il commento a `:6612` dice che, prima del veleno, l'invariante
+<<verificava il dominio di derivate che portavano VALORI VECCHI, e che passavano PERCHE'
+ERANO POSITIVI PER CASO>>.**
+
+> ### **Quindi fino a ieri META' DEGLI ARCHI NUOVI DI OGNI DIVISIONE era ANCORA in quel
+> ### caso**, e nessuno lo sapeva. ### **Ora il veleno li copre tutti e l'invariante li
+> ### esenta tutti: il presidio e' diventato ONESTO sul doppio delle celle.**
+> ### ⚠ **Non l'avevo previsto perche' avevo elencato i contatori DELLA CURA, e non
+> ### mi ero chiesto chi LEGGE il registro del veleno.**
+
+### **LE TRE ATTESE SUI CONTROLLI INCROCIATI: TUTTE E TRE TENUTE**
+
+| | attesa | misurato |
+|---|---|---|
+| `425b8d47` sul blob **nuovo** | `0` su `166` | ### **`0`**, e `63 802 623` -> **`0`** elementi |
+| `425b8d47` sul blob **vecchio** | `166`, come prima | ### **`166` su `166`**, numeri identici a `cb24b95` |
+| `19d08753` sul blob **nuovo** | `0` passi invalidi in (A) | ### **`0` su `300` verifiche** |
+
+### ✅ **E IL TERZO, che avevo dichiarato <<il piu' informativo perche' puo' SMENTIRE
+### una conclusione mia>>, NON l'ha smentita:** ogni numero del controllo del tetto e'
+**identico** fra blob vecchio e nuovo — archi confrontati `141 541 432`, esclusi
+`4 792`, inverificabili `4` — ### **tranne `con_differenze`, che passa da `166` a
+`0`**. ### **Il `FERMO` di `eeb54be` nasceva da qui, e da nient'altro.**
+
+### **CHE COSA RESTA DAVANTI A LUCA, e non lo decido io**
+
+1. ### **La lista delle eccezioni del criterio 2:** il criterio nomina due **derivate**;
+   le `6` differenze che restano sono **contatori e un registro**. Io li ho
+   classificati `contatore/registro` e **non** `STATO`, ### **ma la classificazione l'ho
+   scritta io** — va approvata o corretta.
+2. ### **La regola per gli archi nati** nel passo (2) del tetto causale, che ora hanno
+   `dt_e = NaN`: ### **registrata, non decisa.**

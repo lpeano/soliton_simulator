@@ -8,8 +8,8 @@ IL VELENO E `keep`: le derivate d'arco si riallineano, o leggono un altro arco?
   numpy      2.3.0
   sistema    Windows 11
   macchina   AMD64
-  simulatore e2940b3c  (sha1 dei byte grezzi, NON toccato)
-  copia patchata: _sim_veleno_keep.py  blob 4a5ce8fe  (3 ancore)
+  simulatore 0f060670  (sha1 dei byte grezzi, NON toccato)
+  copia patchata: _sim_veleno_keep.py  blob e6a69e7c  (3 ancore)
 
 --------------------------------------------------------------------------------------------------------
 IL CENSIMENTO, dal REGISTRO_DERIVATE del modulo caricato (non un elenco mio)
@@ -60,32 +60,32 @@ IL CONFRONTO, per derivata d'arco e per evento
 ========================================================================================================
   confronti con esito: 294   archi confrontati IN TOTALE: 138784360
   ### E IL NUMERO SI DICHIARA: zero archi NON e' un'identita'.
-  elementi diversi IN TOTALE: 0
+  elementi diversi IN TOTALE: 63802623
 
   --- eventi CON archi tolti (la divisione) ---
   confronti: 166
-  con DIFFERENZE: 0 su 166
-  la prima posizione diversa COINCIDE col primo arco tolto in 0 confronti
-     passo 42   _dt_e_ultimo   diversi       0 /  471563  1a_pos None    primo_tolto 379571 
-            coda 2 celle, non finite 2, archi nuovi 2  ->  copertura 1.000
-     passo 42   _sin2_vir      diversi       0 /  471563  1a_pos None    primo_tolto 379571 
-            coda 2 celle, non finite 2, archi nuovi 2  ->  copertura 1.000
-     passo 50   _dt_e_ultimo   diversi       0 /  471564  1a_pos None    primo_tolto 381842 
-            coda 2 celle, non finite 2, archi nuovi 2  ->  copertura 1.000
-     passo 50   _sin2_vir      diversi       0 /  471564  1a_pos None    primo_tolto 381842 
-            coda 2 celle, non finite 2, archi nuovi 2  ->  copertura 1.000
-     passo 65   _dt_e_ultimo   diversi       0 /  471565  1a_pos None    primo_tolto 398285 
-            coda 2 celle, non finite 2, archi nuovi 2  ->  copertura 1.000
-     passo 65   _sin2_vir      diversi       0 /  471565  1a_pos None    primo_tolto 398285 
-            coda 2 celle, non finite 2, archi nuovi 2  ->  copertura 1.000
-     passo 66   _dt_e_ultimo   diversi       0 /  471566  1a_pos None    primo_tolto 92616  
-            coda 2 celle, non finite 2, archi nuovi 2  ->  copertura 1.000
-     passo 66   _sin2_vir      diversi       0 /  471566  1a_pos None    primo_tolto 92616  
-            coda 2 celle, non finite 2, archi nuovi 2  ->  copertura 1.000
-     passo 69   _dt_e_ultimo   diversi       0 /  471567  1a_pos None    primo_tolto 320721 
-            coda 2 celle, non finite 2, archi nuovi 2  ->  copertura 1.000
-     passo 69   _sin2_vir      diversi       0 /  471567  1a_pos None    primo_tolto 320721 
-            coda 2 celle, non finite 2, archi nuovi 2  ->  copertura 1.000
+  con DIFFERENZE: 166 su 166
+  la prima posizione diversa COINCIDE col primo arco tolto in 166 confronti
+     passo 42   _dt_e_ultimo   diversi   91992 /  471563  1a_pos 379571  primo_tolto 379571 
+            coda 2 celle, non finite 1, archi nuovi 2  ->  copertura 0.500
+     passo 42   _sin2_vir      diversi   91992 /  471563  1a_pos 379571  primo_tolto 379571 
+            coda 2 celle, non finite 1, archi nuovi 2  ->  copertura 0.500
+     passo 50   _dt_e_ultimo   diversi   89722 /  471564  1a_pos 381842  primo_tolto 381842 
+            coda 2 celle, non finite 1, archi nuovi 2  ->  copertura 0.500
+     passo 50   _sin2_vir      diversi   89722 /  471564  1a_pos 381842  primo_tolto 381842 
+            coda 2 celle, non finite 1, archi nuovi 2  ->  copertura 0.500
+     passo 65   _dt_e_ultimo   diversi   73280 /  471565  1a_pos 398285  primo_tolto 398285 
+            coda 2 celle, non finite 1, archi nuovi 2  ->  copertura 0.500
+     passo 65   _sin2_vir      diversi   73280 /  471565  1a_pos 398285  primo_tolto 398285 
+            coda 2 celle, non finite 1, archi nuovi 2  ->  copertura 0.500
+     passo 66   _dt_e_ultimo   diversi  378950 /  471566  1a_pos 92616   primo_tolto 92616  
+            coda 2 celle, non finite 1, archi nuovi 2  ->  copertura 0.500
+     passo 66   _sin2_vir      diversi  378950 /  471566  1a_pos 92616   primo_tolto 92616  
+            coda 2 celle, non finite 1, archi nuovi 2  ->  copertura 0.500
+     passo 69   _dt_e_ultimo   diversi  150846 /  471567  1a_pos 320721  primo_tolto 320721 
+            coda 2 celle, non finite 1, archi nuovi 2  ->  copertura 0.500
+     passo 69   _sin2_vir      diversi  150846 /  471567  1a_pos 320721  primo_tolto 320721 
+            coda 2 celle, non finite 1, archi nuovi 2  ->  copertura 0.500
 
   --- eventi SENZA archi tolti: IL CASO CHE DISCRIMINA ---
   confronti: 128

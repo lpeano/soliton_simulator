@@ -4844,3 +4844,63 @@ causa **una volta** per entrambe le derivate.
 ### ✅ **E LO STRUMENTO STAMPA UN BATTITO PER PASSO** *(`150` battiti)*: ### **una
 richiesta di stato LEGGE il passo invece di stimarlo** — era un debito che avevo
 annotato io stesso ieri.
+
+## 2026-10-05 — **IL SIGILLO DELLA CURA DI `VELENO-ARCHI-KEEP`: gli otto criteri
+## passano, e il numero e' `0`**
+
+> ### **`0` divergenze di STATO su 150 passi**, confrontando
+> ### `vars(net)` INTERO — 290 attributi per passo, non un elenco scelto
+> ### da me.
+
+Il referto e' `doc/REFERTO_veleno_archi_keep_cura_2026-10-05.md`; il sigillo e'
+`csv/_seal_fork/_sigillo_veleno_keep.py` *(`ee1df224`)*; simulatore `0f060670` -> **`e2940b3c`**.
+
+| criterio | numero |
+|---|--:|
+| **0** la patch su `0f060670` ridA' il blob di oggi al byte | `True` |
+| **1** STATO identico al byte | ### **`0`** |
+| **2** le sole eccezioni sono `_dt_e_ultimo` e `_sin2_vir` | `83`, su **una sola** |
+| **3** Schwinger identici al byte | `0` su `128` |
+| **4** lo strumento sul blob nuovo | `0` su `166`, da `63 802 623` elementi a **`0`** |
+| **5** copertura `2s` e non `s` | `1.0000` = `1.0000` su `166` |
+| **6** il caso che DEVE fallire | `166` su `166`, **lo strumento vede ancora** |
+| **7** il tetto causale | `0` su `300` verifiche |
+
+### ✅ **IL CRITERIO 7 CHIUDE IL `FERMO` DI `eeb54be`, e lo chiude con precisione:**
+ogni numero del controllo del tetto e' **identico** fra blob vecchio e curato — archi
+confrontati `141 541 432`, esclusi `4 792`, inverificabili `4` —
+### **tranne `con_differenze`, che passa da `166` a `0`.** ### **Quel `FERMO` nasceva
+da qui, e da nient'altro.**
+
+### ⛔ **UNA PREVISIONE CHE MI E' MANCATA, e la dico perche' e' un dato:**
+`_g_inv_veleno_ok` **non era** fra le tre conseguenze che avevo dichiarato in `b17caec`.
+Conta le celle **avvelenate E `nan`**, cioe' quelle che il controllo d'invariante
+**esenta**. ### **E il suo significato e' la cosa migliore che questo sigillo dice:**
+fino a ieri **meta' degli archi nuovi di ogni divisione** portava valori finiti copiati
+da altri archi, e l'invariante li verificava **come se validi**.
+### **Ora il veleno li copre tutti: il presidio e' diventato ONESTO sul doppio delle
+celle.**
+
+### ⚠ **E UNA PREVISIONE CHE NON E' AVVENUTA:** `_g_keep_salti` — il ripiego della
+cura per una derivata che non sia `float` monodimensionale — ### **e' `0` su 150
+### passi: non e' mai servito.** Per `A11` lo dichiaro: resta perche' protegge da una
+**forma** che il `REGISTRO_DERIVATE` non garantisce, ma il numero e' zero.
+### **E l'altro ripiego, `_g_keep_assenti`, e' anch'esso `0`: i DUE ripieghi della
+cura non sono mai serviti.**
+
+### **COME HO RIGIRATO IL CASO CHE DEVE FALLIRE, dichiarato:** i byte del simulatore
+vecchio presi con `git cat-file -p b17caec:soliton_simulator.py` ### **in binario, non
+con `git checkout`** *(par.7)*, lo scambio ### **fra due corse e mai durante una**
+*(par.5)*, e il ripristino **verificato col blob**. Le uscite restano nel repo
+### **col blob nel nome**, perche' un'uscita che non dice quale blob l'ha prodotta
+**non e' una misura**.
+
+### **TRE DIFETTI DI STRUMENTO, registrati e messi in coda** *(congelamento
+dell'infrastruttura)*: `SIGILLO-REGISTRO-NON-CONFRONTABILE`,
+`SIGILLO-SENZA-CONFIGURAZIONE`, `CELLE-NAN-APPESE-NOME-SCADUTO`. ### **Nessuno dei tre
+falsa il risultato, e per ciascuno il referto dice PERCHE'.**
+
+### ⛔ **DUE COSE RESTANO A LUCA:** ### **la lista delle eccezioni del criterio 2**
+*(il criterio nomina due **derivate**; le differenze che restano sono **contatori e un
+registro**, e la classificazione l'ho scritta io)* e ### **la regola per gli archi nati
+col `dt_e = NaN`** nel passo (2) del tetto — **registrata, non decisa**.
