@@ -216,8 +216,17 @@ def braccio0():
     in BINARIO (par.7: `git cat-file -p`, non `git checkout`)."""
     if not os.path.isdir(FUORI):
         os.makedirs(FUORI)
-    out = {"dove": "il PADRE del commit (H-P8)"}
-    r = git("rev-parse", "HEAD~1")
+    out = {"dove": "il PADRE del commit CHE HA CAMBIATO IL SIMULATORE (H-P8)"}
+    # ### NON `HEAD~1`, E L HA TROVATO QUESTO SIGILLO rifiutandosi di proseguire:
+    #   dopo il commit della cura ne e arrivato un altro (la cura del comparatore),
+    #   quindi `HEAD~1` era diventato IL COMMIT DELLA CURA e il *prima* estratto era
+    #   ### **GIA CURATO** (`e2940b3c` invece di `0f060670`).
+    # ### ➜ Il riferimento giusto e IL PADRE DEL COMMIT CHE HA CAMBIATO IL
+    #   SIMULATORE: cosi NON SLITTA per i commit che vengono dopo.
+    rc = git("log", "-1", "--format=%H", "--", "soliton_simulator.py")
+    commit_cura = rc.stdout.decode().strip()
+    out["commit_che_ha_cambiato_il_simulatore"] = commit_cura
+    r = git("rev-parse", commit_cura + "^")
     padre = r.stdout.decode().strip()
     out["padre"] = padre
     q = git("cat-file", "-p", padre + ":soliton_simulator.py")
@@ -227,6 +236,19 @@ def braccio0():
     dst = os.path.join(FUORI, "_sim_prima.py")
     io.open(dst, "wb").write(q.stdout)
     out["blob_prima"] = blob(dst)[:8]
+    # ### E IL *PRIMA* SI VERIFICA CONTRO QUELLO CHE LA PATCH DICHIARA, non contro un
+    #   numero scritto qui: la patch e la FONTE del braccio 0, e due numeri in due
+    #   posti sarebbero due leggi (`9-ter`).
+    _ps = io.open(PATCH, encoding="utf-8").read()
+    _m = [x for x in _ps.split(NL) if x.startswith("BLOB_PRIMA = ")]
+    out["blob_prima_atteso"] = (_m[0].split("=", 1)[1].strip().strip(chr(34))
+                                if _m else None)
+    out["prima_e_quello_atteso"] = bool(out["blob_prima"]
+                                        == out["blob_prima_atteso"])
+    if not out["prima_e_quello_atteso"]:
+        out["stato"] = ("il *prima* estratto (%s) non e quello che la patch dichiara (%s)"
+                        % (out["blob_prima"], out["blob_prima_atteso"]))
+        return None, out
     # la patch committata, applicata alla copia
     cop = os.path.join(FUORI, "_sim_prima_patchato.py")
     io.open(cop, "wb").write(q.stdout)
@@ -257,8 +279,9 @@ def principale(passi):
     stampa("BRACCIO 0 -- il *prima* dal PADRE del commit, + la patch committata")
     riga("=")
     prima_file, b0 = braccio0()
-    for k in ["padre", "blob_prima", "blob_patch", "blob_patchato", "blob_oggi",
-              "patch_returncode", "coincide"]:
+    for k in ["commit_che_ha_cambiato_il_simulatore", "padre", "blob_prima",
+              "blob_prima_atteso", "prima_e_quello_atteso", "blob_patch",
+              "blob_patchato", "blob_oggi", "patch_returncode", "coincide"]:
         if k in b0:
             stampa("  %-18s %s" % (k, b0[k]))
     if prima_file is None or not b0.get("coincide"):

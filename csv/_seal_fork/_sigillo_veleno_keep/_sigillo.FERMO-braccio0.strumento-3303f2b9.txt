@@ -1,0 +1,23 @@
+[TIMBRO] _sigillo_veleno_keep.py  sha1-BYTE 3303f2b9  committato e pulito
+========================================================================================================
+IL SIGILLO DELLA CURA DI `VELENO-ARCHI-KEEP`, via (i)
+========================================================================================================
+
+  python     3.13.2
+  numpy      2.3.0
+  sistema    Windows 11
+  macchina   AMD64
+
+========================================================================================================
+BRACCIO 0 -- il *prima* dal PADRE del commit, + la patch committata
+========================================================================================================
+  padre              92ecb041ac027d18064e696bf918486ab609428b
+  blob_prima         e2940b3c
+  blob_patch         14066458
+  blob_patchato      0294cf67
+  blob_oggi          e2940b3c
+  patch_returncode   1
+  coincide           False
+  ### FERMO: il braccio 0 NON torna. Senza di lui il confronto che segue
+      non parte da un punto verificabile.
+========================================================================================================
