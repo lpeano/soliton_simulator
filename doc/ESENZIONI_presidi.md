@@ -62,6 +62,8 @@ commit**: cosi' non se ne accumulano di invisibili.)*
 | `csv/_test_fork/_massa_id.py|H-P5` | non costruisce nessuna scena e non carica il simulatore. Il `--collaudo` gira su un |
 | `csv/_test_fork/_massa_id_fisso.py|H-P5` | non costruisce nessuna scena e non carica il simulatore. Legge gli `.npz` di un run |
 | `csv/_test_fork/_mem_hebb_verso.py|H-P3` | la scena passa TUTTA dal CLI (`nmasse` e `sep` da `argv`), e la |
+| `csv/_test_fork/_mitosi_soglia_grad.py|H-P3` | le COPIE PATCHATE servono perche' `grad_modula`, `soglia`, `_ft`, `nasce`, |
+| `csv/_test_fork/_mitosi_soglia_grad.py|H-P5` | la configurazione si dichiara sul braccio `Bg`, che e' la `PARTE B` con la |
 | `csv/_test_fork/_partecipazioni.py|H-P5` | legge le coorti e i `misura.json` di un run che ha gia' dichiarato la propria |
 | `csv/_test_fork/_referto_crescita.py|H-P5` | non importa il simulatore e non lo fa girare. Legge il `crescita.json` di una |
 | `csv/_test_fork/_scomposizione_tratti.py|H-P5` | non costruisce nessuna scena e non carica il simulatore. Legge i `misura.json` di un |
@@ -74,5 +76,5 @@ commit**: cosi' non se ne accumulano di invisibili.)*
 | `csv/_test_fork/_z43_tempo_proprio.py|H-P3` | la scena passa TUTTA dal CLI (`nmasse` e `sep` da `argv`), e la |
 
 ```
-esenzioni dichiarate   67
+esenzioni dichiarate   69
 ```
