@@ -1878,3 +1878,58 @@ l'estrazione ### **andra' fatta CON UN SIGILLO**, perche' i due sigilli esistent
 restare ### **RI-GIRABILI ai loro commit** *(par.6: un sigillo si rigira con
 `git checkout` del commit che ha sigillato)*. ### **E' una cura che tocca DUE STRUMENTI
 DI CERTIFICAZIONE, e va fatta con la stessa cura di una legge.**
+
+## `CS-LAMBDA-GLOBALE` — **`_cs_nodo` non e' del tutto locale: il PAVIMENTO legge una
+## media su TUTTA la rete**
+
+*(Aperta il 2026-10-05 su **decisione di Luca**, dal **fatto del guardiano**. ### ⛔ **E
+da NON curare ora: si cura DOPO.**)*
+
+### ✅ **VERIFICATO DALL'AST, e il numero e' UNO**
+
+`_cs_nodo` *(`:7107-7160`)* contiene ### **esattamente UNA** riduzione su tutta la rete:
+
+```
+:7151   _Lam = float(np.mean(_I))        # _I = max(I[:n], 0.0)
+```
+
+| | |
+|---|---|
+| la **transizione** | `u_nodo = I / media dei VICINI` *(`W_loc @ I / W_loc @ 1`)* — ### ✅ **LOCALE** |
+| il **pavimento** | `_scala = max(_Lam, 1e-30)/GAMMA_TURBO^2`, `cs_floor = CS_M/(1 + sqrt(_I)*sqrt(1/_scala))` — ### ⛔ **porta `_Lam`, GLOBALE** |
+
+### ⛔ **QUINDI `cs` PORTA UN RIFERIMENTO GLOBALE**, e con la decisione `(2)` di `Z43`
+*(`r = cs/CS_M`)* lo porterebbe ### **anche `r`.** E lo stesso termine tocca **gia'
+oggi** il **tetto causale**, il **tempo-luce** e l'**orologio**.
+
+## 📌 LA STORIA: **e' uno SCHEMA RICORRENTE, non un incidente**
+
+`48d5ce2`, del **2026-09-16**: *«`cs_floor` RELAZIONALE cablato come CORREZIONE DI
+DIFETTO (categoria D, NESSUN FLAG). Sigillo 16/16 PASS, R1 byte-identico»*.
+Tolse la **densita' critica ASSOLUTA** *(`GAMMA = 0.05`, cioe' `400`)* e la sostitui'
+con **`Lam`, l'energia del vuoto che il sistema CALCOLA da se'**.
+
+> ### ⛔ **TOLSE UN NUMERO A MANO E INTRODUSSE UN RIFERIMENTO GLOBALE.**
+> ### **E' LO STESSO SCAMBIO fatto per il gauge di `r`** — la mediana **globale** di
+> `abs(f)`.
+> ### ✅ **E nessuna delle due era sbagliata DA SOLA:** entrambe togliavano una
+> ### **COSTANTE ARBITRARIA**, che e' il difetto peggiore *(`A1`: la legge, non il
+> numero)*.
+> ### 📌 **MA IL PREZZO E' LO STESSO OGNI VOLTA, e ora si vede: una legge LOCALE che
+> ### legge una MEDIA GLOBALE non e' piu' locale.**
+
+**LA CURA NATURALE**, nominata dal mandato: ### **un vuoto LOCALE per nodo** — la
+proposta di Luca del **2026-10-02**, `VUOTO-LOCALE-DETERMINISTICO`.
+### ⚠ **E richiede PRIMA un'energia definita** *(`ENERGIA-NON-DEFINITA`)*: ### **per
+questo `blocca_run_base` e' `DA-DECIDERE` e non `NO` — non e' una cura che si possa
+scegliere oggi.**
+
+### 📌 **NB PER CHI LA CURERA': il termine globale NON e' un dettaglio del pavimento**
+
+La **`PARTE B`** di `Z43` *(`r = cs_nodo_prev / CS_M`)* fa di `cs` la ### **DEFINIZIONE
+del tempo proprio.** ### **Dopo quella cura `_Lam` entra nel TEMPO di ogni legge
+locale.** ### ✅ **Ed e' per questo che il sigillo della `PARTE B` ha un criterio di
+LOCALITA' che MISURA** di quanto cambia `r` di un nodo quando si perturba un nodo
+**lontano**, con atteso ### **`~1/n` e NON zero.**
+
+**Collegata a:** `INVARIANZA-LOCALE-CS`, `Z43`, `VUOTO-LOCALE-DETERMINISTICO`.
