@@ -1,0 +1,4459 @@
+{
+ "aggregati": {
+  "abs_proj_decisa": {
+   "max_dei_max": 8.223916668945114,
+   "mediana_dei_p99": 2.3629542937427797,
+   "mediana_delle_mediane": 0.022957951201149143,
+   "min_dei_min": 2.686972721216089e-11
+  },
+  "abs_proj_simulatore": {
+   "max_dei_max": 7.560672443705637,
+   "mediana_dei_p99": 1.6345664704265377,
+   "mediana_delle_mediane": 0.011974713522978901,
+   "min_dei_min": 1.2286181219536146e-10
+  },
+  "abs_proj_vecchia": {
+   "max_dei_max": 7.560672443705637,
+   "mediana_dei_p99": 1.6345664704265377,
+   "mediana_delle_mediane": 0.011974713522978901,
+   "min_dei_min": 1.2286181219536146e-10
+  },
+  "archi_passo_totali": 33952696,
+  "archi_vivi": 33952696,
+  "fase": {
+   "archi_passo_totali": 33952696,
+   "contributi_applicati": 908941,
+   "contributi_scartati": 33043755,
+   "dir_laterale_z_max": 0.0,
+   "frazione_saturati_pi4": 0.0013219568778868106,
+   "frazione_scartati": 0.9732291951131068,
+   "max_archi_su_un_nodo": 90,
+   "nodi_con_piu_di_un_arco_max": 12442,
+   "nodi_con_piu_di_un_arco_min": 12442,
+   "passi": 72,
+   "saturati_pi4": 44884,
+   "shift_max_dei_max": 0.7853981633974483,
+   "shift_mediana_delle_mediane": 0.004782310409757836,
+   "somma_moduli_applicati": 18376.468349620143,
+   "somma_moduli_scartati": 676605.7311152943
+  },
+  "frazione_saturi_decisa": 0.5192979962474851,
+  "frazione_saturi_vecchia": 0.3874305003643893,
+  "frazione_segno_cambia": 0.495369115901724,
+  "passi_registrati": 72,
+  "passo_max_max": 0.019192619295011048,
+  "passo_max_min": 0.018765240514968813,
+  "saturi_decisa": 17631567,
+  "saturi_vecchia": 13154310,
+  "segno_cambia": 16819117,
+  "somma_segnata_dd0_decisa": -50866.34457033183,
+  "somma_segnata_dd0_vecchia": 1526.817298955753
+ },
+ "ancore_patch": [
+  "il gancio di modulo `_MIS`",
+  "il sito di `d0`, attorno al taglio `passo_max`",
+  "il sito della FASE, attorno al taglio pi/4"
+ ],
+ "blob_copia": "7a12c21b8b89cadb9c4a8f6af6af8e7d029159a1",
+ "blob_sim": "e2940b3c4c57e188de506504ce8fc6e6119f229a",
+ "censimento_ast": {
+  "K_FRANGE": 0.0,
+  "MEM_HEBB": true,
+  "MEM_MOTO": true,
+  "MEM_MOTO_TUTTO": true,
+  "SCALA_MIN": false,
+  "SCALA_MIN_PASSO": true,
+  "TRACCIA_D0": false,
+  "quanti": 3,
+  "siti_con_MEM_MOTO": [
+   {
+    "flag_nel_test": [
+     "MEM_MOTO_TUTTO"
+    ],
+    "riga": 9130
+   },
+   {
+    "flag_nel_test": [
+     "MEM_MOTO",
+     "MEM_MOTO_TUTTO"
+    ],
+    "riga": 9160
+   },
+   {
+    "flag_nel_test": [
+     "MEM_MOTO_TUTTO"
+    ],
+    "riga": 9524
+   }
+  ]
+ },
+ "controlli": {
+  "C1": {
+   "archi": 33952696,
+   "confronti": 72,
+   "diversi": 0,
+   "max_scarto": 0.0,
+   "peggiore": null
+  },
+  "C2": {
+   "archi": 33952696,
+   "confronti": 72,
+   "decisa_non_zero": 0,
+   "max_decisa": 0.0,
+   "min_vecchia_max": 4.3153821504311445,
+   "vecchia_zero": 0
+  },
+  "C3": {
+   "archi": 33952696,
+   "confronti": 72,
+   "decisa_diversa": 0,
+   "max_scarto_decisa": 0.0,
+   "max_scarto_vecchia": 0.0,
+   "vecchia_non_opposta": 0
+  }
+ },
+ "in_configurazione_del_driver": true,
+ "passi": 72,
+ "per_passo": [
+  {
+   "archi": 471564,
+   "archi_vivi": 471564,
+   "decisa_prima": {
+    "max": 5.422946333077982,
+    "mediana": 0.0021174748727715983,
+    "min": 5.5994651772648544e-09,
+    "n": 471564,
+    "non_finiti": 0,
+    "p99": 2.7044511750092006
+   },
+   "fase": {
+    "archi": 471564,
+    "contributi_applicati": 12623,
+    "contributi_scartati": 458941,
+    "dir_laterale_z_max": 0.0,
+    "frazione_saturati_pi4": 0.0004177587771755265,
+    "max_archi_su_un_nodo": 90,
+    "nodi_con_piu_di_un_arco": 12442,
+    "nodi_primo_estremo": 12623,
+    "passo": 1,
+    "saturati_pi4": 197,
+    "shift_assoluto": {
+     "max": 0.7853981633974483,
+     "mediana": 0.0008702766148733559,
+     "min": 1.5728497920268118e-10,
+     "n": 471564,
+     "non_finiti": 0,
+     "p99": 0.10136189100973786
+    },
+    "somma_moduli_applicati": 118.37712283630468,
+    "somma_moduli_scartati": 3222.421801570275
+   },
+   "frazione_saturi_decisa": 0.25060649243792993,
+   "frazione_saturi_vecchia": 0.21719427267560712,
+   "frazione_segno_cambia": 0.49378875401854255,
+   "passo": 1,
+   "passo_max": 0.018899983423922028,
+   "proj_simulatore_prima": {
+    "max": 4.641270120192292,
+    "mediana": 0.0010419624941950209,
+    "min": 1.2286181219536146e-10,
+    "n": 471564,
+    "non_finiti": 0,
+    "p99": 1.7245212760700337
+   },
+   "saturi_decisa": 118177,
+   "saturi_vecchia": 102421,
+   "segno_cambia": 232853,
+   "somma_segnata_dd0_decisa": -281.5252547035256,
+   "somma_segnata_dd0_vecchia": 18.240381201575687,
+   "vecchia_prima": {
+    "max": 4.641270120192292,
+    "mediana": 0.0010419624941950209,
+    "min": 1.2286181219536146e-10,
+    "n": 471564,
+    "non_finiti": 0,
+    "p99": 1.7245212760700337
+   }
+  },
+  {
+   "archi": 471564,
+   "archi_vivi": 471564,
+   "decisa_prima": {
+    "max": 7.589250889369013,
+    "mediana": 0.00381314736472249,
+    "min": 2.1299734016466487e-09,
+    "n": 471564,
+    "non_finiti": 0,
+    "p99": 4.515835070425241
+   },
+   "fase": {
+    "archi": 471564,
+    "contributi_applicati": 12623,
+    "contributi_scartati": 458941,
+    "dir_laterale_z_max": 0.0,
+    "frazione_saturati_pi4": 0.0004941004826492268,
+    "max_archi_su_un_nodo": 90,
+    "nodi_con_piu_di_un_arco": 12442,
+    "nodi_primo_estremo": 12623,
+    "passo": 2,
+    "saturati_pi4": 233,
+    "shift_assoluto": {
+     "max": 0.7853981633974483,
+     "mediana": 0.0010394223367658838,
+     "min": 5.2988224307821964e-11,
+     "n": 471564,
+     "non_finiti": 0,
+     "p99": 0.13958938794056355
+    },
+    "somma_moduli_applicati": 158.0970496224336,
+    "somma_moduli_scartati": 4626.4799028367015
+   },
+   "frazione_saturi_decisa": 0.3076167816033455,
+   "frazione_saturi_vecchia": 0.260397316164932,
+   "frazione_segno_cambia": 0.4927878294356651,
+   "passo": 2,
+   "passo_max": 0.01891488695915965,
+   "proj_simulatore_prima": {
+    "max": 6.626469918013791,
+    "mediana": 0.0018411625869550927,
+    "min": 5.749922664857591e-09,
+    "n": 471564,
+    "non_finiti": 0,
+    "p99": 2.989776915345009
+   },
+   "saturi_decisa": 145061,
+   "saturi_vecchia": 122794,
+   "segno_cambia": 232381,
+   "somma_segnata_dd0_decisa": -439.7974803252803,
+   "somma_segnata_dd0_vecchia": 24.57119717681845,
+   "vecchia_prima": {
+    "max": 6.626469918013791,
+    "mediana": 0.0018411625869550927,
+    "min": 5.749922664857591e-09,
+    "n": 471564,
+    "non_finiti": 0,
+    "p99": 2.989776915345009
+   }
+  },
+  {
+   "archi": 471564,
+   "archi_vivi": 471564,
+   "decisa_prima": {
+    "max": 7.657979418675714,
+    "mediana": 0.005351386804126102,
+    "min": 4.455200316326486e-09,
+    "n": 471564,
+    "non_finiti": 0,
+    "p99": 4.554807350460035
+   },
+   "fase": {
+    "archi": 471564,
+    "contributi_applicati": 12623,
+    "contributi_scartati": 458941,
+    "dir_laterale_z_max": 0.0,
+    "frazione_saturati_pi4": 0.0007167637902808526,
+    "max_archi_su_un_nodo": 90,
+    "nodi_con_piu_di_un_arco": 12442,
+    "nodi_primo_estremo": 12623,
+    "passo": 3,
+    "saturati_pi4": 338,
+    "shift_assoluto": {
+     "max": 0.7853981633974483,
+     "mediana": 0.0013125659830909237,
+     "min": 4.692093945234851e-10,
+     "n": 471564,
+     "non_finiti": 0,
+     "p99": 0.17728429039831747
+    },
+    "somma_moduli_applicati": 192.3276193943251,
+    "somma_moduli_scartati": 5817.844555072446
+   },
+   "frazione_saturi_decisa": 0.33934736324231707,
+   "frazione_saturi_vecchia": 0.2821695464454454,
+   "frazione_segno_cambia": 0.4930910756546301,
+   "passo": 3,
+   "passo_max": 0.018918295823323654,
+   "proj_simulatore_prima": {
+    "max": 6.4041445650211495,
+    "mediana": 0.0025888734120565584,
+    "min": 1.0393760077234327e-09,
+    "n": 471564,
+    "non_finiti": 0,
+    "p99": 3.0903436275833918
+   },
+   "saturi_decisa": 160024,
+   "saturi_vecchia": 133061,
+   "segno_cambia": 232524,
+   "somma_segnata_dd0_decisa": -485.5950711758967,
+   "somma_segnata_dd0_vecchia": 23.07997995967845,
+   "vecchia_prima": {
+    "max": 6.4041445650211495,
+    "mediana": 0.0025888734120565584,
+    "min": 1.0393760077234327e-09,
+    "n": 471564,
+    "non_finiti": 0,
+    "p99": 3.0903436275833918
+   }
+  },
+  {
+   "archi": 471564,
+   "archi_vivi": 471564,
+   "decisa_prima": {
+    "max": 8.189523040809956,
+    "mediana": 0.006781749031189014,
+    "min": 1.0490218093742625e-08,
+    "n": 471564,
+    "non_finiti": 0,
+    "p99": 5.129494960309757
+   },
+   "fase": {
+    "archi": 471564,
+    "contributi_applicati": 12623,
+    "contributi_scartati": 458941,
+    "dir_laterale_z_max": 0.0,
+    "frazione_saturati_pi4": 0.0010475778473335539,
+    "max_archi_su_un_nodo": 90,
+    "nodi_con_piu_di_un_arco": 12442,
+    "nodi_primo_estremo": 12623,
+    "passo": 4,
+    "saturati_pi4": 494,
+    "shift_assoluto": {
+     "max": 0.7853981633974483,
+     "mediana": 0.0016848904284186934,
+     "min": 1.9941928123256303e-10,
+     "n": 471564,
+     "non_finiti": 0,
+     "p99": 0.21514042268678016
+    },
+    "somma_moduli_applicati": 230.94258109095205,
+    "somma_moduli_scartati": 7074.729051374954
+   },
+   "frazione_saturi_decisa": 0.3627800256168834,
+   "frazione_saturi_vecchia": 0.2979510734492031,
+   "frazione_segno_cambia": 0.4933964424765249,
+   "passo": 4,
+   "passo_max": 0.018957776661910154,
+   "proj_simulatore_prima": {
+    "max": 7.225367640386765,
+    "mediana": 0.0032782013787107855,
+    "min": 4.5869253333894475e-09,
+    "n": 471564,
+    "non_finiti": 0,
+    "p99": 3.5314142283827685
+   },
+   "saturi_decisa": 171074,
+   "saturi_vecchia": 140503,
+   "segno_cambia": 232668,
+   "somma_segnata_dd0_decisa": -500.36223988725976,
+   "somma_segnata_dd0_vecchia": 20.483427798259385,
+   "vecchia_prima": {
+    "max": 7.225367640386765,
+    "mediana": 0.0032782013787107855,
+    "min": 4.5869253333894475e-09,
+    "n": 471564,
+    "non_finiti": 0,
+    "p99": 3.5314142283827685
+   }
+  },
+  {
+   "archi": 471564,
+   "archi_vivi": 471564,
+   "decisa_prima": {
+    "max": 8.075506286349087,
+    "mediana": 0.00809198260341584,
+    "min": 2.631200561172624e-09,
+    "n": 471564,
+    "non_finiti": 0,
+    "p99": 5.212631464282841
+   },
+   "fase": {
+    "archi": 471564,
+    "contributi_applicati": 12623,
+    "contributi_scartati": 458941,
+    "dir_laterale_z_max": 0.0,
+    "frazione_saturati_pi4": 0.0012490351256669297,
+    "max_archi_su_un_nodo": 90,
+    "nodi_con_piu_di_un_arco": 12442,
+    "nodi_primo_estremo": 12623,
+    "passo": 5,
+    "saturati_pi4": 589,
+    "shift_assoluto": {
+     "max": 0.7853981633974483,
+     "mediana": 0.0020020742315039206,
+     "min": 1.8693080363922294e-09,
+     "n": 471564,
+     "non_finiti": 0,
+     "p99": 0.24173704140254074
+    },
+    "somma_moduli_applicati": 255.04568510057038,
+    "somma_moduli_scartati": 7926.977258770448
+   },
+   "frazione_saturi_decisa": 0.3816321856630277,
+   "frazione_saturi_vecchia": 0.31039477144141625,
+   "frazione_segno_cambia": 0.4939350756207005,
+   "passo": 5,
+   "passo_max": 0.018962290539180703,
+   "proj_simulatore_prima": {
+    "max": 7.379250453442438,
+    "mediana": 0.003921408251651194,
+    "min": 8.326143812154308e-10,
+    "n": 471564,
+    "non_finiti": 0,
+    "p99": 3.64940171801521
+   },
+   "saturi_decisa": 179964,
+   "saturi_vecchia": 146371,
+   "segno_cambia": 232922,
+   "somma_segnata_dd0_decisa": -505.3216690885871,
+   "somma_segnata_dd0_vecchia": 20.012547251257338,
+   "vecchia_prima": {
+    "max": 7.379250453442438,
+    "mediana": 0.003921408251651194,
+    "min": 8.326143812154308e-10,
+    "n": 471564,
+    "non_finiti": 0,
+    "p99": 3.64940171801521
+   }
+  },
+  {
+   "archi": 471564,
+   "archi_vivi": 471564,
+   "decisa_prima": {
+    "max": 8.223916668945114,
+    "mediana": 0.00934668187242876,
+    "min": 2.2629897571171205e-09,
+    "n": 471564,
+    "non_finiti": 0,
+    "p99": 5.317988417792934
+   },
+   "fase": {
+    "archi": 471564,
+    "contributi_applicati": 12623,
+    "contributi_scartati": 458941,
+    "dir_laterale_z_max": 0.0,
+    "frazione_saturati_pi4": 0.0014610954186494304,
+    "max_archi_su_un_nodo": 90,
+    "nodi_con_piu_di_un_arco": 12442,
+    "nodi_primo_estremo": 12623,
+    "passo": 6,
+    "saturati_pi4": 689,
+    "shift_assoluto": {
+     "max": 0.7853981633974483,
+     "mediana": 0.0023139300386706358,
+     "min": 6.035086199818149e-10,
+     "n": 471564,
+     "non_finiti": 0,
+     "p99": 0.2604850350159823
+    },
+    "somma_moduli_applicati": 272.46269411426306,
+    "somma_moduli_scartati": 8629.85444393638
+   },
+   "frazione_saturi_decisa": 0.397515501607417,
+   "frazione_saturi_vecchia": 0.32106564538429566,
+   "frazione_segno_cambia": 0.49442281429456025,
+   "passo": 6,
+   "passo_max": 0.018998682675227113,
+   "proj_simulatore_prima": {
+    "max": 7.560672443705637,
+    "mediana": 0.004520472796630681,
+    "min": 1.6218670135400138e-08,
+    "n": 471564,
+    "non_finiti": 0,
+    "p99": 3.7638708000885743
+   },
+   "saturi_decisa": 187454,
+   "saturi_vecchia": 151403,
+   "segno_cambia": 233152,
+   "somma_segnata_dd0_decisa": -508.10489167031875,
+   "somma_segnata_dd0_vecchia": 20.97040767804306,
+   "vecchia_prima": {
+    "max": 7.560672443705637,
+    "mediana": 0.004520472796630681,
+    "min": 1.6218670135400138e-08,
+    "n": 471564,
+    "non_finiti": 0,
+    "p99": 3.7638708000885743
+   }
+  },
+  {
+   "archi": 471564,
+   "archi_vivi": 471564,
+   "decisa_prima": {
+    "max": 8.03677889134889,
+    "mediana": 0.010518601058510546,
+    "min": 2.8219804186365467e-08,
+    "n": 471564,
+    "non_finiti": 0,
+    "p99": 5.150721764518546
+   },
+   "fase": {
+    "archi": 471564,
+    "contributi_applicati": 12623,
+    "contributi_scartati": 458941,
+    "dir_laterale_z_max": 0.0,
+    "frazione_saturati_pi4": 0.0015671255651406807,
+    "max_archi_su_un_nodo": 90,
+    "nodi_con_piu_di_un_arco": 12442,
+    "nodi_primo_estremo": 12623,
+    "passo": 7,
+    "saturati_pi4": 739,
+    "shift_assoluto": {
+     "max": 0.7853981633974483,
+     "mediana": 0.0025534432871303463,
+     "min": 5.765419291957873e-10,
+     "n": 471564,
+     "non_finiti": 0,
+     "p99": 0.26950055195877143
+    },
+    "somma_moduli_applicati": 284.50646093842437,
+    "somma_moduli_scartati": 9053.282183557018
+   },
+   "frazione_saturi_decisa": 0.41139908898898137,
+   "frazione_saturi_vecchia": 0.3301948409971923,
+   "frazione_segno_cambia": 0.49489358814498136,
+   "passo": 7,
+   "passo_max": 0.018984901233068632,
+   "proj_simulatore_prima": {
+    "max": 7.345059252819355,
+    "mediana": 0.005093231262874625,
+    "min": 1.1201205040649136e-08,
+    "n": 471564,
+    "non_finiti": 0,
+    "p99": 3.6828101281504253
+   },
+   "saturi_decisa": 194001,
+   "saturi_vecchia": 155708,
+   "segno_cambia": 233374,
+   "somma_segnata_dd0_decisa": -509.38000557270675,
+   "somma_segnata_dd0_vecchia": 22.567697737913257,
+   "vecchia_prima": {
+    "max": 7.345059252819355,
+    "mediana": 0.005093231262874625,
+    "min": 1.1201205040649136e-08,
+    "n": 471564,
+    "non_finiti": 0,
+    "p99": 3.6828101281504253
+   }
+  },
+  {
+   "archi": 471564,
+   "archi_vivi": 471564,
+   "decisa_prima": {
+    "max": 8.138672428151569,
+    "mediana": 0.011571705645333982,
+    "min": 3.363418086262404e-08,
+    "n": 471564,
+    "non_finiti": 0,
+    "p99": 5.163629086660682
+   },
+   "fase": {
+    "archi": 471564,
+    "contributi_applicati": 12623,
+    "contributi_scartati": 458941,
+    "dir_laterale_z_max": 0.0,
+    "frazione_saturati_pi4": 0.0017304119907372063,
+    "max_archi_su_un_nodo": 90,
+    "nodi_con_piu_di_un_arco": 12442,
+    "nodi_primo_estremo": 12623,
+    "passo": 8,
+    "saturati_pi4": 816,
+    "shift_assoluto": {
+     "max": 0.7853981633974483,
+     "mediana": 0.0028189969822135404,
+     "min": 3.812111275749032e-10,
+     "n": 471564,
+     "non_finiti": 0,
+     "p99": 0.2817102006813376
+    },
+    "somma_moduli_applicati": 299.1393238388302,
+    "somma_moduli_scartati": 9508.0210712521
+   },
+   "frazione_saturi_decisa": 0.42351409352707164,
+   "frazione_saturi_vecchia": 0.33787354420608867,
+   "frazione_segno_cambia": 0.49495720623287615,
+   "passo": 8,
+   "passo_max": 0.01901471015038563,
+   "proj_simulatore_prima": {
+    "max": 7.382593020707002,
+    "mediana": 0.005625783885935619,
+    "min": 9.622934922997673e-09,
+    "n": 471564,
+    "non_finiti": 0,
+    "p99": 3.7074508037880785
+   },
+   "saturi_decisa": 199714,
+   "saturi_vecchia": 159329,
+   "segno_cambia": 233404,
+   "somma_segnata_dd0_decisa": -513.5813196673897,
+   "somma_segnata_dd0_vecchia": 24.58002235107827,
+   "vecchia_prima": {
+    "max": 7.382593020707002,
+    "mediana": 0.005625783885935619,
+    "min": 9.622934922997673e-09,
+    "n": 471564,
+    "non_finiti": 0,
+    "p99": 3.7074508037880785
+   }
+  },
+  {
+   "archi": 471564,
+   "archi_vivi": 471564,
+   "decisa_prima": {
+    "max": 7.78567538036834,
+    "mediana": 0.01247046130463524,
+    "min": 1.2910369130114959e-08,
+    "n": 471564,
+    "non_finiti": 0,
+    "p99": 4.914505239106526
+   },
+   "fase": {
+    "archi": 471564,
+    "contributi_applicati": 12623,
+    "contributi_scartati": 458941,
+    "dir_laterale_z_max": 0.0,
+    "frazione_saturati_pi4": 0.0016646732999126312,
+    "max_archi_su_un_nodo": 90,
+    "nodi_con_piu_di_un_arco": 12442,
+    "nodi_primo_estremo": 12623,
+    "passo": 9,
+    "saturati_pi4": 785,
+    "shift_assoluto": {
+     "max": 0.7853981633974483,
+     "mediana": 0.0030107089785866015,
+     "min": 1.169067237504762e-09,
+     "n": 471564,
+     "non_finiti": 0,
+     "p99": 0.2836864422143475
+    },
+    "somma_moduli_applicati": 306.4327122270968,
+    "somma_moduli_scartati": 9714.140382517371
+   },
+   "frazione_saturi_decisa": 0.4330928569610912,
+   "frazione_saturi_vecchia": 0.3437094434689671,
+   "frazione_segno_cambia": 0.4953961710393499,
+   "passo": 9,
+   "passo_max": 0.019000159142556376,
+   "proj_simulatore_prima": {
+    "max": 7.04349078055355,
+    "mediana": 0.006081099267792068,
+    "min": 2.476589523465588e-10,
+    "n": 471564,
+    "non_finiti": 0,
+    "p99": 3.546490685390117
+   },
+   "saturi_decisa": 204231,
+   "saturi_vecchia": 162081,
+   "segno_cambia": 233611,
+   "somma_segnata_dd0_decisa": -517.260594985733,
+   "somma_segnata_dd0_vecchia": 26.053070477164717,
+   "vecchia_prima": {
+    "max": 7.04349078055355,
+    "mediana": 0.006081099267792068,
+    "min": 2.476589523465588e-10,
+    "n": 471564,
+    "non_finiti": 0,
+    "p99": 3.546490685390117
+   }
+  },
+  {
+   "archi": 471564,
+   "archi_vivi": 471564,
+   "decisa_prima": {
+    "max": 7.791403681796178,
+    "mediana": 0.01340808977385112,
+    "min": 4.699692046739124e-08,
+    "n": 471564,
+    "non_finiti": 0,
+    "p99": 4.89571724094529
+   },
+   "fase": {
+    "archi": 471564,
+    "contributi_applicati": 12623,
+    "contributi_scartati": 458941,
+    "dir_laterale_z_max": 0.0,
+    "frazione_saturati_pi4": 0.0016773969174915812,
+    "max_archi_su_un_nodo": 90,
+    "nodi_con_piu_di_un_arco": 12442,
+    "nodi_primo_estremo": 12623,
+    "passo": 10,
+    "saturati_pi4": 791,
+    "shift_assoluto": {
+     "max": 0.7853981633974483,
+     "mediana": 0.003245004751954594,
+     "min": 6.390964708595858e-11,
+     "n": 471564,
+     "non_finiti": 0,
+     "p99": 0.2897199293127842
+    },
+    "somma_moduli_applicati": 311.56030603628324,
+    "somma_moduli_scartati": 9999.646934321172
+   },
+   "frazione_saturi_decisa": 0.4427967359679704,
+   "frazione_saturi_vecchia": 0.3492823879685472,
+   "frazione_segno_cambia": 0.49568881424366573,
+   "passo": 10,
+   "passo_max": 0.01902653090164642,
+   "proj_simulatore_prima": {
+    "max": 7.036145684723002,
+    "mediana": 0.0065570493792188305,
+    "min": 9.539042396106948e-09,
+    "n": 471564,
+    "non_finiti": 0,
+    "p99": 3.5402768350332505
+   },
+   "saturi_decisa": 208807,
+   "saturi_vecchia": 164709,
+   "segno_cambia": 233749,
+   "somma_segnata_dd0_decisa": -523.9186801187482,
+   "somma_segnata_dd0_vecchia": 26.0036271698649,
+   "vecchia_prima": {
+    "max": 7.036145684723002,
+    "mediana": 0.0065570493792188305,
+    "min": 9.539042396106948e-09,
+    "n": 471564,
+    "non_finiti": 0,
+    "p99": 3.5402768350332505
+   }
+  },
+  {
+   "archi": 471564,
+   "archi_vivi": 471564,
+   "decisa_prima": {
+    "max": 7.441018815277451,
+    "mediana": 0.0142389002029718,
+    "min": 1.322324569701637e-08,
+    "n": 471564,
+    "non_finiti": 0,
+    "p99": 4.6685164558785335
+   },
+   "fase": {
+    "archi": 471564,
+    "contributi_applicati": 12623,
+    "contributi_scartati": 458941,
+    "dir_laterale_z_max": 0.0,
+    "frazione_saturati_pi4": 0.0015756079768599808,
+    "max_archi_su_un_nodo": 90,
+    "nodi_con_piu_di_un_arco": 12442,
+    "nodi_primo_estremo": 12623,
+    "passo": 11,
+    "saturati_pi4": 743,
+    "shift_assoluto": {
+     "max": 0.7853981633974483,
+     "mediana": 0.003385624043458417,
+     "min": 1.409101501913679e-09,
+     "n": 471564,
+     "non_finiti": 0,
+     "p99": 0.2899425236265493
+    },
+    "somma_moduli_applicati": 313.0700455827873,
+    "somma_moduli_scartati": 10095.92506591318
+   },
+   "frazione_saturi_decisa": 0.45158663511209507,
+   "frazione_saturi_vecchia": 0.3540897948104605,
+   "frazione_segno_cambia": 0.49571426147882364,
+   "passo": 11,
+   "passo_max": 0.019006200111097372,
+   "proj_simulatore_prima": {
+    "max": 6.740635165254712,
+    "mediana": 0.0070104848522479345,
+    "min": 1.579996869352073e-08,
+    "n": 471564,
+    "non_finiti": 0,
+    "p99": 3.3846732801718096
+   },
+   "saturi_decisa": 212952,
+   "saturi_vecchia": 166976,
+   "segno_cambia": 233761,
+   "somma_segnata_dd0_decisa": -531.9919650373965,
+   "somma_segnata_dd0_vecchia": 26.36957952582144,
+   "vecchia_prima": {
+    "max": 6.740635165254712,
+    "mediana": 0.0070104848522479345,
+    "min": 1.579996869352073e-08,
+    "n": 471564,
+    "non_finiti": 0,
+    "p99": 3.3846732801718096
+   }
+  },
+  {
+   "archi": 471564,
+   "archi_vivi": 471564,
+   "decisa_prima": {
+    "max": 7.424518046426045,
+    "mediana": 0.015031943859699812,
+    "min": 1.730704078006332e-09,
+    "n": 471564,
+    "non_finiti": 0,
+    "p99": 4.654031734193701
+   },
+   "fase": {
+    "archi": 471564,
+    "contributi_applicati": 12623,
+    "contributi_scartati": 458941,
+    "dir_laterale_z_max": 0.0,
+    "frazione_saturati_pi4": 0.0016837587262810562,
+    "max_archi_su_un_nodo": 90,
+    "nodi_con_piu_di_un_arco": 12442,
+    "nodi_primo_estremo": 12623,
+    "passo": 12,
+    "saturati_pi4": 794,
+    "shift_assoluto": {
+     "max": 0.7853981633974483,
+     "mediana": 0.003585252208673155,
+     "min": 4.8498321734726895e-11,
+     "n": 471564,
+     "non_finiti": 0,
+     "p99": 0.29585873669303936
+    },
+    "somma_moduli_applicati": 321.0821088575483,
+    "somma_moduli_scartati": 10368.491485861905
+   },
+   "frazione_saturi_decisa": 0.459415901129009,
+   "frazione_saturi_vecchia": 0.35887599562307554,
+   "frazione_segno_cambia": 0.49582665343410437,
+   "passo": 12,
+   "passo_max": 0.019022965636377957,
+   "proj_simulatore_prima": {
+    "max": 6.774679882997704,
+    "mediana": 0.007411717701439873,
+    "min": 1.565242540397735e-08,
+    "n": 471564,
+    "non_finiti": 0,
+    "p99": 3.3711621495270463
+   },
+   "saturi_decisa": 216644,
+   "saturi_vecchia": 169233,
+   "segno_cambia": 233814,
+   "somma_segnata_dd0_decisa": -541.555279553648,
+   "somma_segnata_dd0_vecchia": 26.478268937960117,
+   "vecchia_prima": {
+    "max": 6.774679882997704,
+    "mediana": 0.007411717701439873,
+    "min": 1.565242540397735e-08,
+    "n": 471564,
+    "non_finiti": 0,
+    "p99": 3.3711621495270463
+   }
+  },
+  {
+   "archi": 471564,
+   "archi_vivi": 471564,
+   "decisa_prima": {
+    "max": 7.086482520309948,
+    "mediana": 0.015677931860337238,
+    "min": 2.0157037637135038e-08,
+    "n": 471564,
+    "non_finiti": 0,
+    "p99": 4.446835514100939
+   },
+   "fase": {
+    "archi": 471564,
+    "contributi_applicati": 12623,
+    "contributi_scartati": 458941,
+    "dir_laterale_z_max": 0.0,
+    "frazione_saturati_pi4": 0.0017410150053863314,
+    "max_archi_su_un_nodo": 90,
+    "nodi_con_piu_di_un_arco": 12442,
+    "nodi_primo_estremo": 12623,
+    "passo": 13,
+    "saturati_pi4": 821,
+    "shift_assoluto": {
+     "max": 0.7853981633974483,
+     "mediana": 0.0037031180065685513,
+     "min": 2.0482071792991525e-10,
+     "n": 471564,
+     "non_finiti": 0,
+     "p99": 0.2965281656162959
+    },
+    "somma_moduli_applicati": 321.1950555377051,
+    "somma_moduli_scartati": 10478.186534079727
+   },
+   "frazione_saturi_decisa": 0.4664647852677473,
+   "frazione_saturi_vecchia": 0.36211203569398853,
+   "frazione_segno_cambia": 0.4959963016684904,
+   "passo": 13,
+   "passo_max": 0.01899997972015835,
+   "proj_simulatore_prima": {
+    "max": 6.5499295590600415,
+    "mediana": 0.007743961322840801,
+    "min": 2.3196862854993252e-08,
+    "n": 471564,
+    "non_finiti": 0,
+    "p99": 3.21593088056597
+   },
+   "saturi_decisa": 219968,
+   "saturi_vecchia": 170759,
+   "segno_cambia": 233894,
+   "somma_segnata_dd0_decisa": -549.920463594113,
+   "somma_segnata_dd0_vecchia": 27.498207600291785,
+   "vecchia_prima": {
+    "max": 6.5499295590600415,
+    "mediana": 0.007743961322840801,
+    "min": 2.3196862854993252e-08,
+    "n": 471564,
+    "non_finiti": 0,
+    "p99": 3.21593088056597
+   }
+  },
+  {
+   "archi": 471564,
+   "archi_vivi": 471564,
+   "decisa_prima": {
+    "max": 7.084777936536526,
+    "mediana": 0.0163652436321409,
+    "min": 7.352673208297117e-10,
+    "n": 471564,
+    "non_finiti": 0,
+    "p99": 4.444903704051188
+   },
+   "fase": {
+    "archi": 471564,
+    "contributi_applicati": 12623,
+    "contributi_scartati": 458941,
+    "dir_laterale_z_max": 0.0,
+    "frazione_saturati_pi4": 0.0018640099753161818,
+    "max_archi_su_un_nodo": 90,
+    "nodi_con_piu_di_un_arco": 12442,
+    "nodi_primo_estremo": 12623,
+    "passo": 14,
+    "saturati_pi4": 879,
+    "shift_assoluto": {
+     "max": 0.7853981633974483,
+     "mediana": 0.003880957511644999,
+     "min": 1.5711901951448347e-09,
+     "n": 471564,
+     "non_finiti": 0,
+     "p99": 0.3027040558032562
+    },
+    "somma_moduli_applicati": 321.8419324703011,
+    "somma_moduli_scartati": 10682.056590492159
+   },
+   "frazione_saturi_decisa": 0.4736112171412576,
+   "frazione_saturi_vecchia": 0.3663193119067613,
+   "frazione_segno_cambia": 0.4959878192567711,
+   "passo": 14,
+   "passo_max": 0.019005963023473328,
+   "proj_simulatore_prima": {
+    "max": 6.626983661013792,
+    "mediana": 0.008103369968682396,
+    "min": 1.2107411492649767e-09,
+    "n": 471564,
+    "non_finiti": 0,
+    "p99": 3.2089558300608605
+   },
+   "saturi_decisa": 223338,
+   "saturi_vecchia": 172743,
+   "segno_cambia": 233890,
+   "somma_segnata_dd0_decisa": -560.4518831686046,
+   "somma_segnata_dd0_vecchia": 27.20878561818907,
+   "vecchia_prima": {
+    "max": 6.626983661013792,
+    "mediana": 0.008103369968682396,
+    "min": 1.2107411492649767e-09,
+    "n": 471564,
+    "non_finiti": 0,
+    "p99": 3.2089558300608605
+   }
+  },
+  {
+   "archi": 471564,
+   "archi_vivi": 471564,
+   "decisa_prima": {
+    "max": 6.813560123185361,
+    "mediana": 0.016918494787872673,
+    "min": 3.1939440816670774e-08,
+    "n": 471564,
+    "non_finiti": 0,
+    "p99": 4.231577196995802
+   },
+   "fase": {
+    "archi": 471564,
+    "contributi_applicati": 12623,
+    "contributi_scartati": 458941,
+    "dir_laterale_z_max": 0.0,
+    "frazione_saturati_pi4": 0.0018618893723863568,
+    "max_archi_su_un_nodo": 90,
+    "nodi_con_piu_di_un_arco": 12442,
+    "nodi_primo_estremo": 12623,
+    "passo": 15,
+    "saturati_pi4": 878,
+    "shift_assoluto": {
+     "max": 0.7853981633974483,
+     "mediana": 0.003970019279010555,
+     "min": 3.499445154245814e-10,
+     "n": 471564,
+     "non_finiti": 0,
+     "p99": 0.3025250303530273
+    },
+    "somma_moduli_applicati": 322.69889705318656,
+    "somma_moduli_scartati": 10712.976767263295
+   },
+   "frazione_saturi_decisa": 0.47910145812657456,
+   "frazione_saturi_vecchia": 0.3692499851557795,
+   "frazione_segno_cambia": 0.49589875393371846,
+   "passo": 15,
+   "passo_max": 0.018979862669195713,
+   "proj_simulatore_prima": {
+    "max": 6.3992594527204645,
+    "mediana": 0.008381331549669743,
+    "min": 8.117659922621083e-10,
+    "n": 471564,
+    "non_finiti": 0,
+    "p99": 3.0594201366288343
+   },
+   "saturi_decisa": 225927,
+   "saturi_vecchia": 174125,
+   "segno_cambia": 233848,
+   "somma_segnata_dd0_decisa": -570.5677057687234,
+   "somma_segnata_dd0_vecchia": 26.100309817309995,
+   "vecchia_prima": {
+    "max": 6.3992594527204645,
+    "mediana": 0.008381331549669743,
+    "min": 8.117659922621083e-10,
+    "n": 471564,
+    "non_finiti": 0,
+    "p99": 3.0594201366288343
+   }
+  },
+  {
+   "archi": 471564,
+   "archi_vivi": 471564,
+   "decisa_prima": {
+    "max": 6.81869521182359,
+    "mediana": 0.01751339287874533,
+    "min": 1.0399774314728947e-07,
+    "n": 471564,
+    "non_finiti": 0,
+    "p99": 4.202737063185193
+   },
+   "fase": {
+    "archi": 471564,
+    "contributi_applicati": 12623,
+    "contributi_scartati": 458941,
+    "dir_laterale_z_max": 0.0,
+    "frazione_saturati_pi4": 0.001872492387035482,
+    "max_archi_su_un_nodo": 90,
+    "nodi_con_piu_di_un_arco": 12442,
+    "nodi_primo_estremo": 12623,
+    "passo": 16,
+    "saturati_pi4": 883,
+    "shift_assoluto": {
+     "max": 0.7853981633974483,
+     "mediana": 0.004124272778923753,
+     "min": 2.8475304529450386e-09,
+     "n": 471564,
+     "non_finiti": 0,
+     "p99": 0.30460980425203155
+    },
+    "somma_moduli_applicati": 325.15345869538453,
+    "somma_moduli_scartati": 10844.663114095007
+   },
+   "frazione_saturi_decisa": 0.48510700562383896,
+   "frazione_saturi_vecchia": 0.37311584429685046,
+   "frazione_segno_cambia": 0.4957269850964026,
+   "passo": 16,
+   "passo_max": 0.018981214873643588,
+   "proj_simulatore_prima": {
+    "max": 6.436635441324108,
+    "mediana": 0.008683243201891198,
+    "min": 1.3841533478008193e-08,
+    "n": 471564,
+    "non_finiti": 0,
+    "p99": 3.0322984599219094
+   },
+   "saturi_decisa": 228759,
+   "saturi_vecchia": 175948,
+   "segno_cambia": 233767,
+   "somma_segnata_dd0_decisa": -580.7844545447898,
+   "somma_segnata_dd0_vecchia": 24.392436101028814,
+   "vecchia_prima": {
+    "max": 6.436635441324108,
+    "mediana": 0.008683243201891198,
+    "min": 1.3841533478008193e-08,
+    "n": 471564,
+    "non_finiti": 0,
+    "p99": 3.0322984599219094
+   }
+  },
+  {
+   "archi": 471564,
+   "archi_vivi": 471564,
+   "decisa_prima": {
+    "max": 6.5536592870962185,
+    "mediana": 0.01804805146412089,
+    "min": 4.499541059135999e-09,
+    "n": 471564,
+    "non_finiti": 0,
+    "p99": 4.00047585839827
+   },
+   "fase": {
+    "archi": 471564,
+    "contributi_applicati": 12623,
+    "contributi_scartati": 458941,
+    "dir_laterale_z_max": 0.0,
+    "frazione_saturati_pi4": 0.001851286357737232,
+    "max_archi_su_un_nodo": 90,
+    "nodi_con_piu_di_un_arco": 12442,
+    "nodi_primo_estremo": 12623,
+    "passo": 17,
+    "saturati_pi4": 873,
+    "shift_assoluto": {
+     "max": 0.7853981633974483,
+     "mediana": 0.004185026785589418,
+     "min": 2.035276249421745e-09,
+     "n": 471564,
+     "non_finiti": 0,
+     "p99": 0.30468456781039743
+    },
+    "somma_moduli_applicati": 318.9842400381858,
+    "somma_moduli_scartati": 10820.128915615389
+   },
+   "frazione_saturi_decisa": 0.49089413101933144,
+   "frazione_saturi_vecchia": 0.3764282260732371,
+   "frazione_segno_cambia": 0.4957078996700342,
+   "passo": 17,
+   "passo_max": 0.018949670746738496,
+   "proj_simulatore_prima": {
+    "max": 6.208001756587096,
+    "mediana": 0.008967571488581341,
+    "min": 8.133198443645696e-09,
+    "n": 471564,
+    "non_finiti": 0,
+    "p99": 2.8895170963668577
+   },
+   "saturi_decisa": 231488,
+   "saturi_vecchia": 177510,
+   "segno_cambia": 233758,
+   "somma_segnata_dd0_decisa": -589.9641308559226,
+   "somma_segnata_dd0_vecchia": 22.69880604567073,
+   "vecchia_prima": {
+    "max": 6.208001756587096,
+    "mediana": 0.008967571488581341,
+    "min": 8.133198443645696e-09,
+    "n": 471564,
+    "non_finiti": 0,
+    "p99": 2.8895170963668577
+   }
+  },
+  {
+   "archi": 471564,
+   "archi_vivi": 471564,
+   "decisa_prima": {
+    "max": 6.575031359280222,
+    "mediana": 0.018648294092075364,
+    "min": 4.889056294676007e-08,
+    "n": 471564,
+    "non_finiti": 0,
+    "p99": 3.9756162715733576
+   },
+   "fase": {
+    "archi": 471564,
+    "contributi_applicati": 12623,
+    "contributi_scartati": 458941,
+    "dir_laterale_z_max": 0.0,
+    "frazione_saturati_pi4": 0.0019085426368425072,
+    "max_archi_su_un_nodo": 90,
+    "nodi_con_piu_di_un_arco": 12442,
+    "nodi_primo_estremo": 12623,
+    "passo": 18,
+    "saturati_pi4": 900,
+    "shift_assoluto": {
+     "max": 0.7853981633974483,
+     "mediana": 0.004312743332815788,
+     "min": 5.046277421933585e-10,
+     "n": 471564,
+     "non_finiti": 0,
+     "p99": 0.30499212808186843
+    },
+    "somma_moduli_applicati": 317.28073845672293,
+    "somma_moduli_scartati": 10907.032254006175
+   },
+   "frazione_saturi_decisa": 0.49702055288359587,
+   "frazione_saturi_vecchia": 0.38086240679950123,
+   "frazione_segno_cambia": 0.49576515594913945,
+   "passo": 18,
+   "passo_max": 0.01894290470173833,
+   "proj_simulatore_prima": {
+    "max": 6.242291584917347,
+    "mediana": 0.009308521655690297,
+    "min": 1.8616740765834116e-08,
+    "n": 471564,
+    "non_finiti": 0,
+    "p99": 2.8641203086316804
+   },
+   "saturi_decisa": 234377,
+   "saturi_vecchia": 179601,
+   "segno_cambia": 233785,
+   "somma_segnata_dd0_decisa": -600.7037919140481,
+   "somma_segnata_dd0_vecchia": 20.87113791291883,
+   "vecchia_prima": {
+    "max": 6.242291584917347,
+    "mediana": 0.009308521655690297,
+    "min": 1.8616740765834116e-08,
+    "n": 471564,
+    "non_finiti": 0,
+    "p99": 2.8641203086316804
+   }
+  },
+  {
+   "archi": 471564,
+   "archi_vivi": 471564,
+   "decisa_prima": {
+    "max": 6.310764213460677,
+    "mediana": 0.019048918140232934,
+    "min": 5.2154253742730054e-08,
+    "n": 471564,
+    "non_finiti": 0,
+    "p99": 3.781336860834018
+   },
+   "fase": {
+    "archi": 471564,
+    "contributi_applicati": 12623,
+    "contributi_scartati": 458941,
+    "dir_laterale_z_max": 0.0,
+    "frazione_saturati_pi4": 0.0017685828434740565,
+    "max_archi_su_un_nodo": 90,
+    "nodi_con_piu_di_un_arco": 12442,
+    "nodi_primo_estremo": 12623,
+    "passo": 19,
+    "saturati_pi4": 834,
+    "shift_assoluto": {
+     "max": 0.7853981633974483,
+     "mediana": 0.004356970586593676,
+     "min": 1.0810227275906677e-10,
+     "n": 471564,
+     "non_finiti": 0,
+     "p99": 0.2980360212180712
+    },
+    "somma_moduli_applicati": 311.47254156107675,
+    "somma_moduli_scartati": 10802.85348155189
+   },
+   "frazione_saturi_decisa": 0.5014738190362283,
+   "frazione_saturi_vecchia": 0.3836149494024141,
+   "frazione_segno_cambia": 0.4958521006692623,
+   "passo": 19,
+   "passo_max": 0.018911249388622816,
+   "proj_simulatore_prima": {
+    "max": 6.003907542948876,
+    "mediana": 0.009568647683141002,
+    "min": 8.413116547970106e-10,
+    "n": 471564,
+    "non_finiti": 0,
+    "p99": 2.7204014580443268
+   },
+   "saturi_decisa": 236477,
+   "saturi_vecchia": 180899,
+   "segno_cambia": 233826,
+   "somma_segnata_dd0_decisa": -609.0933019406053,
+   "somma_segnata_dd0_vecchia": 20.06324636074691,
+   "vecchia_prima": {
+    "max": 6.003907542948876,
+    "mediana": 0.009568647683141002,
+    "min": 8.413116547970106e-10,
+    "n": 471564,
+    "non_finiti": 0,
+    "p99": 2.7204014580443268
+   }
+  },
+  {
+   "archi": 471564,
+   "archi_vivi": 471564,
+   "decisa_prima": {
+    "max": 6.316650112083091,
+    "mediana": 0.019530812495884703,
+    "min": 7.454566734024033e-09,
+    "n": 471564,
+    "non_finiti": 0,
+    "p99": 3.747744695019551
+   },
+   "fase": {
+    "archi": 471564,
+    "contributi_applicati": 12623,
+    "contributi_scartati": 458941,
+    "dir_laterale_z_max": 0.0,
+    "frazione_saturati_pi4": 0.0018025124903512566,
+    "max_archi_su_un_nodo": 90,
+    "nodi_con_piu_di_un_arco": 12442,
+    "nodi_primo_estremo": 12623,
+    "passo": 20,
+    "saturati_pi4": 850,
+    "shift_assoluto": {
+     "max": 0.7853981633974483,
+     "mediana": 0.0044694124536132,
+     "min": 2.4024342701938747e-09,
+     "n": 471564,
+     "non_finiti": 0,
+     "p99": 0.29765040823076205
+    },
+    "somma_moduli_applicati": 308.1441157080026,
+    "somma_moduli_scartati": 10847.206059840773
+   },
+   "frazione_saturi_decisa": 0.5063639293924048,
+   "frazione_saturi_vecchia": 0.387493532161064,
+   "frazione_segno_cambia": 0.4959920604626307,
+   "passo": 20,
+   "passo_max": 0.018906094228978185,
+   "proj_simulatore_prima": {
+    "max": 6.014535125170375,
+    "mediana": 0.009855263792299031,
+    "min": 4.39394513711264e-08,
+    "n": 471564,
+    "non_finiti": 0,
+    "p99": 2.6929321714566234
+   },
+   "saturi_decisa": 238783,
+   "saturi_vecchia": 182728,
+   "segno_cambia": 233892,
+   "somma_segnata_dd0_decisa": -617.9867832780458,
+   "somma_segnata_dd0_vecchia": 20.27603187009253,
+   "vecchia_prima": {
+    "max": 6.014535125170375,
+    "mediana": 0.009855263792299031,
+    "min": 4.39394513711264e-08,
+    "n": 471564,
+    "non_finiti": 0,
+    "p99": 2.6929321714566234
+   }
+  },
+  {
+   "archi": 471564,
+   "archi_vivi": 471564,
+   "decisa_prima": {
+    "max": 6.070842908882218,
+    "mediana": 0.019908713819434817,
+    "min": 1.0688774514495759e-09,
+    "n": 471564,
+    "non_finiti": 0,
+    "p99": 3.564918468122698
+   },
+   "fase": {
+    "archi": 471564,
+    "contributi_applicati": 12623,
+    "contributi_scartati": 458941,
+    "dir_laterale_z_max": 0.0,
+    "frazione_saturati_pi4": 0.0017113265643687813,
+    "max_archi_su_un_nodo": 90,
+    "nodi_con_piu_di_un_arco": 12442,
+    "nodi_primo_estremo": 12623,
+    "passo": 21,
+    "saturati_pi4": 807,
+    "shift_assoluto": {
+     "max": 0.7853981633974483,
+     "mediana": 0.0044944331207449045,
+     "min": 1.5790512983365367e-09,
+     "n": 471564,
+     "non_finiti": 0,
+     "p99": 0.2931006141835448
+    },
+    "somma_moduli_applicati": 300.09661711037785,
+    "somma_moduli_scartati": 10733.965762209536
+   },
+   "frazione_saturi_decisa": 0.5103040096360197,
+   "frazione_saturi_vecchia": 0.38963322051725746,
+   "frazione_segno_cambia": 0.49609597000619216,
+   "passo": 21,
+   "passo_max": 0.018875218385169805,
+   "proj_simulatore_prima": {
+    "max": 5.786275370360992,
+    "mediana": 0.010050346323607667,
+    "min": 9.63084750391259e-08,
+    "n": 471564,
+    "non_finiti": 0,
+    "p99": 2.5581021095141807
+   },
+   "saturi_decisa": 240641,
+   "saturi_vecchia": 183737,
+   "segno_cambia": 233941,
+   "somma_segnata_dd0_decisa": -627.4127123114981,
+   "somma_segnata_dd0_vecchia": 20.3902211913488,
+   "vecchia_prima": {
+    "max": 5.786275370360992,
+    "mediana": 0.010050346323607667,
+    "min": 9.63084750391259e-08,
+    "n": 471564,
+    "non_finiti": 0,
+    "p99": 2.5581021095141807
+   }
+  },
+  {
+   "archi": 471564,
+   "archi_vivi": 471564,
+   "decisa_prima": {
+    "max": 6.056752172344963,
+    "mediana": 0.020260910082351417,
+    "min": 6.789788319093829e-08,
+    "n": 471564,
+    "non_finiti": 0,
+    "p99": 3.525455370129043
+   },
+   "fase": {
+    "archi": 471564,
+    "contributi_applicati": 12623,
+    "contributi_scartati": 458941,
+    "dir_laterale_z_max": 0.0,
+    "frazione_saturati_pi4": 0.0017176883731582564,
+    "max_archi_su_un_nodo": 90,
+    "nodi_con_piu_di_un_arco": 12442,
+    "nodi_primo_estremo": 12623,
+    "passo": 22,
+    "saturati_pi4": 810,
+    "shift_assoluto": {
+     "max": 0.7853981633974483,
+     "mediana": 0.004593716458359501,
+     "min": 2.053442320447473e-09,
+     "n": 471564,
+     "non_finiti": 0,
+     "p99": 0.29122471876064054
+    },
+    "somma_moduli_applicati": 296.91547108893036,
+    "somma_moduli_scartati": 10745.883343645533
+   },
+   "frazione_saturi_decisa": 0.5140129441602836,
+   "frazione_saturi_vecchia": 0.3923073008117668,
+   "frazione_segno_cambia": 0.49617867352045536,
+   "passo": 22,
+   "passo_max": 0.01886702219823951,
+   "proj_simulatore_prima": {
+    "max": 5.768800911215591,
+    "mediana": 0.010255192169764267,
+    "min": 5.794454021869301e-08,
+    "n": 471564,
+    "non_finiti": 0,
+    "p99": 2.5182553326758517
+   },
+   "saturi_decisa": 242390,
+   "saturi_vecchia": 184998,
+   "segno_cambia": 233980,
+   "somma_segnata_dd0_decisa": -637.8844875874668,
+   "somma_segnata_dd0_vecchia": 20.231674961667327,
+   "vecchia_prima": {
+    "max": 5.768800911215591,
+    "mediana": 0.010255192169764267,
+    "min": 5.794454021869301e-08,
+    "n": 471564,
+    "non_finiti": 0,
+    "p99": 2.5182553326758517
+   }
+  },
+  {
+   "archi": 471564,
+   "archi_vivi": 471564,
+   "decisa_prima": {
+    "max": 5.829592906203779,
+    "mediana": 0.020570227915391967,
+    "min": 4.84055961862859e-08,
+    "n": 471564,
+    "non_finiti": 0,
+    "p99": 3.3592023329682132
+   },
+   "fase": {
+    "archi": 471564,
+    "contributi_applicati": 12623,
+    "contributi_scartati": 458941,
+    "dir_laterale_z_max": 0.0,
+    "frazione_saturati_pi4": 0.0017155677702284313,
+    "max_archi_su_un_nodo": 90,
+    "nodi_con_piu_di_un_arco": 12442,
+    "nodi_primo_estremo": 12623,
+    "passo": 23,
+    "saturati_pi4": 809,
+    "shift_assoluto": {
+     "max": 0.7853981633974483,
+     "mediana": 0.004607338089347612,
+     "min": 6.894064926404981e-10,
+     "n": 471564,
+     "non_finiti": 0,
+     "p99": 0.28607919815183414
+    },
+    "somma_moduli_applicati": 292.194459382159,
+    "somma_moduli_scartati": 10668.86652858365
+   },
+   "frazione_saturi_decisa": 0.5175522304501616,
+   "frazione_saturi_vecchia": 0.3938829087886268,
+   "frazione_segno_cambia": 0.4961256584472097,
+   "passo": 23,
+   "passo_max": 0.018839178396567898,
+   "proj_simulatore_prima": {
+    "max": 5.541247055164382,
+    "mediana": 0.010428418578927661,
+    "min": 1.9426657665118016e-08,
+    "n": 471564,
+    "non_finiti": 0,
+    "p99": 2.394696332427217
+   },
+   "saturi_decisa": 244059,
+   "saturi_vecchia": 185741,
+   "segno_cambia": 233955,
+   "somma_segnata_dd0_decisa": -647.6996934970881,
+   "somma_segnata_dd0_vecchia": 20.070172303000813,
+   "vecchia_prima": {
+    "max": 5.541247055164382,
+    "mediana": 0.010428418578927661,
+    "min": 1.9426657665118016e-08,
+    "n": 471564,
+    "non_finiti": 0,
+    "p99": 2.394696332427217
+   }
+  },
+  {
+   "archi": 471564,
+   "archi_vivi": 471564,
+   "decisa_prima": {
+    "max": 5.830589504046859,
+    "mediana": 0.020895307396655283,
+    "min": 3.731627174889393e-08,
+    "n": 471564,
+    "non_finiti": 0,
+    "p99": 3.3296919534641702
+   },
+   "fase": {
+    "archi": 471564,
+    "contributi_applicati": 12623,
+    "contributi_scartati": 458941,
+    "dir_laterale_z_max": 0.0,
+    "frazione_saturati_pi4": 0.0017770652551933567,
+    "max_archi_su_un_nodo": 90,
+    "nodi_con_piu_di_un_arco": 12442,
+    "nodi_primo_estremo": 12623,
+    "passo": 24,
+    "saturati_pi4": 838,
+    "shift_assoluto": {
+     "max": 0.7853981633974483,
+     "mediana": 0.004698278107921389,
+     "min": 2.2997357571960837e-10,
+     "n": 471564,
+     "non_finiti": 0,
+     "p99": 0.2898065535028454
+    },
+    "somma_moduli_applicati": 289.4534666392083,
+    "somma_moduli_scartati": 10736.298886595003
+   },
+   "frazione_saturi_decisa": 0.5208094765503728,
+   "frazione_saturi_vecchia": 0.39599927051259215,
+   "frazione_segno_cambia": 0.4962126031673325,
+   "passo": 24,
+   "passo_max": 0.018833726106019976,
+   "proj_simulatore_prima": {
+    "max": 5.526213172729183,
+    "mediana": 0.010624519396617637,
+    "min": 2.0818147501450862e-08,
+    "n": 471564,
+    "non_finiti": 0,
+    "p99": 2.363295643459095
+   },
+   "saturi_decisa": 245595,
+   "saturi_vecchia": 186739,
+   "segno_cambia": 233996,
+   "somma_segnata_dd0_decisa": -658.2917714354963,
+   "somma_segnata_dd0_vecchia": 19.639097552858168,
+   "vecchia_prima": {
+    "max": 5.526213172729183,
+    "mediana": 0.010624519396617637,
+    "min": 2.0818147501450862e-08,
+    "n": 471564,
+    "non_finiti": 0,
+    "p99": 2.363295643459095
+   }
+  },
+  {
+   "archi": 471564,
+   "archi_vivi": 471564,
+   "decisa_prima": {
+    "max": 5.602523200699765,
+    "mediana": 0.021079278145687302,
+    "min": 8.582868226611494e-08,
+    "n": 471564,
+    "non_finiti": 0,
+    "p99": 3.1732435148652183
+   },
+   "fase": {
+    "archi": 471564,
+    "contributi_applicati": 12623,
+    "contributi_scartati": 458941,
+    "dir_laterale_z_max": 0.0,
+    "frazione_saturati_pi4": 0.0018428039460179318,
+    "max_archi_su_un_nodo": 90,
+    "nodi_con_piu_di_un_arco": 12442,
+    "nodi_primo_estremo": 12623,
+    "passo": 25,
+    "saturati_pi4": 869,
+    "shift_assoluto": {
+     "max": 0.7853981633974483,
+     "mediana": 0.004708727625741668,
+     "min": 4.000242881735304e-10,
+     "n": 471564,
+     "non_finiti": 0,
+     "p99": 0.28715791042554256
+    },
+    "somma_moduli_applicati": 286.3194228485273,
+    "somma_moduli_scartati": 10689.401952149625
+   },
+   "frazione_saturi_decisa": 0.5232990643899874,
+   "frazione_saturi_vecchia": 0.3966884664647853,
+   "frazione_segno_cambia": 0.4962444122112799,
+   "passo": 25,
+   "passo_max": 0.018808784500670823,
+   "proj_simulatore_prima": {
+    "max": 5.293769050913496,
+    "mediana": 0.010732906420806168,
+    "min": 2.3147651352661315e-08,
+    "n": 471564,
+    "non_finiti": 0,
+    "p99": 2.245303377801488
+   },
+   "saturi_decisa": 246769,
+   "saturi_vecchia": 187064,
+   "segno_cambia": 234011,
+   "somma_segnata_dd0_decisa": -667.4978928431427,
+   "somma_segnata_dd0_vecchia": 19.510559958980124,
+   "vecchia_prima": {
+    "max": 5.293769050913496,
+    "mediana": 0.010732906420806168,
+    "min": 2.3147651352661315e-08,
+    "n": 471564,
+    "non_finiti": 0,
+    "p99": 2.245303377801488
+   }
+  },
+  {
+   "archi": 471564,
+   "archi_vivi": 471564,
+   "decisa_prima": {
+    "max": 5.585449299278946,
+    "mediana": 0.021316706430373776,
+    "min": 1.6928710545829185e-08,
+    "n": 471564,
+    "non_finiti": 0,
+    "p99": 3.1446509138443854
+   },
+   "fase": {
+    "archi": 471564,
+    "contributi_applicati": 12623,
+    "contributi_scartati": 458941,
+    "dir_laterale_z_max": 0.0,
+    "frazione_saturati_pi4": 0.0018618893723863568,
+    "max_archi_su_un_nodo": 90,
+    "nodi_con_piu_di_un_arco": 12442,
+    "nodi_primo_estremo": 12623,
+    "passo": 26,
+    "saturati_pi4": 878,
+    "shift_assoluto": {
+     "max": 0.7853981633974483,
+     "mediana": 0.004783452741477814,
+     "min": 8.573505822769269e-10,
+     "n": 471564,
+     "non_finiti": 0,
+     "p99": 0.28481119571994806
+    },
+    "somma_moduli_applicati": 284.5772049239632,
+    "somma_moduli_scartati": 10701.364696793113
+   },
+   "frazione_saturi_decisa": 0.5255172150545844,
+   "frazione_saturi_vecchia": 0.3984888583522067,
+   "frazione_segno_cambia": 0.4961511056823676,
+   "passo": 26,
+   "passo_max": 0.018802645226925936,
+   "proj_simulatore_prima": {
+    "max": 5.260308440067831,
+    "mediana": 0.010892875393173806,
+    "min": 1.4813644852234784e-08,
+    "n": 471564,
+    "non_finiti": 0,
+    "p99": 2.21889335331168
+   },
+   "saturi_decisa": 247815,
+   "saturi_vecchia": 187913,
+   "segno_cambia": 233967,
+   "somma_segnata_dd0_decisa": -677.0858823819807,
+   "somma_segnata_dd0_vecchia": 19.294031286291432,
+   "vecchia_prima": {
+    "max": 5.260308440067831,
+    "mediana": 0.010892875393173806,
+    "min": 1.4813644852234784e-08,
+    "n": 471564,
+    "non_finiti": 0,
+    "p99": 2.21889335331168
+   }
+  },
+  {
+   "archi": 471564,
+   "archi_vivi": 471564,
+   "decisa_prima": {
+    "max": 5.359890312459877,
+    "mediana": 0.0214988792381589,
+    "min": 5.291736359867705e-09,
+    "n": 471564,
+    "non_finiti": 0,
+    "p99": 3.001220907675732
+   },
+   "fase": {
+    "archi": 471564,
+    "contributi_applicati": 12623,
+    "contributi_scartati": 458941,
+    "dir_laterale_z_max": 0.0,
+    "frazione_saturati_pi4": 0.0017749446522635315,
+    "max_archi_su_un_nodo": 90,
+    "nodi_con_piu_di_un_arco": 12442,
+    "nodi_primo_estremo": 12623,
+    "passo": 27,
+    "saturati_pi4": 837,
+    "shift_assoluto": {
+     "max": 0.7853981633974483,
+     "mediana": 0.004781168078037858,
+     "min": 3.4053655492612242e-12,
+     "n": 471564,
+     "non_finiti": 0,
+     "p99": 0.2775409486124516
+    },
+    "somma_moduli_applicati": 280.64312434713145,
+    "somma_moduli_scartati": 10537.090161008327
+   },
+   "frazione_saturi_decisa": 0.5277968632041462,
+   "frazione_saturi_vecchia": 0.3992437929952244,
+   "frazione_segno_cambia": 0.4961256584472097,
+   "passo": 27,
+   "passo_max": 0.01878266578153014,
+   "proj_simulatore_prima": {
+    "max": 5.034817050593354,
+    "mediana": 0.010994565149899736,
+    "min": 8.752787511705912e-09,
+    "n": 471564,
+    "non_finiti": 0,
+    "p99": 2.1148453409635466
+   },
+   "saturi_decisa": 248890,
+   "saturi_vecchia": 188269,
+   "segno_cambia": 233955,
+   "somma_segnata_dd0_decisa": -685.0937235206652,
+   "somma_segnata_dd0_vecchia": 19.544059291028496,
+   "vecchia_prima": {
+    "max": 5.034817050593354,
+    "mediana": 0.010994565149899736,
+    "min": 8.752787511705912e-09,
+    "n": 471564,
+    "non_finiti": 0,
+    "p99": 2.1148453409635466
+   }
+  },
+  {
+   "archi": 471564,
+   "archi_vivi": 471564,
+   "decisa_prima": {
+    "max": 5.368629163590097,
+    "mediana": 0.021779234256552853,
+    "min": 6.378293317322769e-08,
+    "n": 471564,
+    "non_finiti": 0,
+    "p99": 2.981432578795628
+   },
+   "fase": {
+    "archi": 471564,
+    "contributi_applicati": 12623,
+    "contributi_scartati": 458941,
+    "dir_laterale_z_max": 0.0,
+    "frazione_saturati_pi4": 0.0016901205350705313,
+    "max_archi_su_un_nodo": 90,
+    "nodi_con_piu_di_un_arco": 12442,
+    "nodi_primo_estremo": 12623,
+    "passo": 28,
+    "saturati_pi4": 797,
+    "shift_assoluto": {
+     "max": 0.7853981633974483,
+     "mediana": 0.004855887936329661,
+     "min": 3.915299847497877e-10,
+     "n": 471564,
+     "non_finiti": 0,
+     "p99": 0.27485434295944144
+    },
+    "somma_moduli_applicati": 279.78521604421996,
+    "somma_moduli_scartati": 10471.626129169323
+   },
+   "frazione_saturi_decisa": 0.5309035464963399,
+   "frazione_saturi_vecchia": 0.40108871754417214,
+   "frazione_segno_cambia": 0.4960387137270869,
+   "passo": 28,
+   "passo_max": 0.018781630741482938,
+   "proj_simulatore_prima": {
+    "max": 5.011592539336529,
+    "mediana": 0.011151728632355234,
+    "min": 4.874051788908429e-09,
+    "n": 471564,
+    "non_finiti": 0,
+    "p99": 2.0973364400091508
+   },
+   "saturi_decisa": 250355,
+   "saturi_vecchia": 189139,
+   "segno_cambia": 233914,
+   "somma_segnata_dd0_decisa": -693.4178775351766,
+   "somma_segnata_dd0_vecchia": 20.930099456152615,
+   "vecchia_prima": {
+    "max": 5.011592539336529,
+    "mediana": 0.011151728632355234,
+    "min": 4.874051788908429e-09,
+    "n": 471564,
+    "non_finiti": 0,
+    "p99": 2.0973364400091508
+   }
+  },
+  {
+   "archi": 471564,
+   "archi_vivi": 471564,
+   "decisa_prima": {
+    "max": 5.19814992917172,
+    "mediana": 0.022009141897520245,
+    "min": 1.4115431774495948e-08,
+    "n": 471564,
+    "non_finiti": 0,
+    "p99": 2.860988764910543
+   },
+   "fase": {
+    "archi": 471564,
+    "contributi_applicati": 12623,
+    "contributi_scartati": 458941,
+    "dir_laterale_z_max": 0.0,
+    "frazione_saturati_pi4": 0.0015459195358424307,
+    "max_archi_su_un_nodo": 90,
+    "nodi_con_piu_di_un_arco": 12442,
+    "nodi_primo_estremo": 12623,
+    "passo": 29,
+    "saturati_pi4": 729,
+    "shift_assoluto": {
+     "max": 0.7853981633974483,
+     "mediana": 0.004846712654446662,
+     "min": 1.1477102480393363e-09,
+     "n": 471564,
+     "non_finiti": 0,
+     "p99": 0.2687737953986959
+    },
+    "somma_moduli_applicati": 277.6544152395942,
+    "somma_moduli_scartati": 10315.482938422687
+   },
+   "frazione_saturi_decisa": 0.5337091041724983,
+   "frazione_saturi_vecchia": 0.40202602403915483,
+   "frazione_segno_cambia": 0.49617019110873606,
+   "passo": 29,
+   "passo_max": 0.018767144632832265,
+   "proj_simulatore_prima": {
+    "max": 4.824139262831554,
+    "mediana": 0.011300955096595004,
+    "min": 1.7671038215170964e-08,
+    "n": 471564,
+    "non_finiti": 0,
+    "p99": 2.0122146841057416
+   },
+   "saturi_decisa": 251678,
+   "saturi_vecchia": 189581,
+   "segno_cambia": 233976,
+   "somma_segnata_dd0_decisa": -701.5914864458952,
+   "somma_segnata_dd0_vecchia": 20.759460295216783,
+   "vecchia_prima": {
+    "max": 4.824139262831554,
+    "mediana": 0.011300955096595004,
+    "min": 1.7671038215170964e-08,
+    "n": 471564,
+    "non_finiti": 0,
+    "p99": 2.0122146841057416
+   }
+  },
+  {
+   "archi": 471564,
+   "archi_vivi": 471564,
+   "decisa_prima": {
+    "max": 5.216711208119659,
+    "mediana": 0.0222623656172874,
+    "min": 1.718604878317828e-08,
+    "n": 471564,
+    "non_finiti": 0,
+    "p99": 2.842413667066034
+   },
+   "fase": {
+    "archi": 471564,
+    "contributi_applicati": 12623,
+    "contributi_scartati": 458941,
+    "dir_laterale_z_max": 0.0,
+    "frazione_saturati_pi4": 0.0014929044625968055,
+    "max_archi_su_un_nodo": 90,
+    "nodi_con_piu_di_un_arco": 12442,
+    "nodi_primo_estremo": 12623,
+    "passo": 30,
+    "saturati_pi4": 704,
+    "shift_assoluto": {
+     "max": 0.7853981633974483,
+     "mediana": 0.004907971612661684,
+     "min": 8.803912776840255e-10,
+     "n": 471564,
+     "non_finiti": 0,
+     "p99": 0.2681375795619519
+    },
+    "somma_moduli_applicati": 276.29032530339316,
+    "somma_moduli_scartati": 10324.585100784396
+   },
+   "frazione_saturi_decisa": 0.5364001492904462,
+   "frazione_saturi_vecchia": 0.4040257526019798,
+   "frazione_segno_cambia": 0.4962656182405782,
+   "passo": 30,
+   "passo_max": 0.01876897746411073,
+   "proj_simulatore_prima": {
+    "max": 4.810160676241684,
+    "mediana": 0.011446881531539242,
+    "min": 1.046864558961521e-09,
+    "n": 471564,
+    "non_finiti": 0,
+    "p99": 1.9972115909867474
+   },
+   "saturi_decisa": 252947,
+   "saturi_vecchia": 190524,
+   "segno_cambia": 234021,
+   "somma_segnata_dd0_decisa": -708.9684928517795,
+   "somma_segnata_dd0_vecchia": 20.541183107916943,
+   "vecchia_prima": {
+    "max": 4.810160676241684,
+    "mediana": 0.011446881531539242,
+    "min": 1.046864558961521e-09,
+    "n": 471564,
+    "non_finiti": 0,
+    "p99": 1.9972115909867474
+   }
+  },
+  {
+   "archi": 471564,
+   "archi_vivi": 471564,
+   "decisa_prima": {
+    "max": 5.035137816430081,
+    "mediana": 0.02236759171592253,
+    "min": 4.423526994905847e-08,
+    "n": 471564,
+    "non_finiti": 0,
+    "p99": 2.7170745508063816
+   },
+   "fase": {
+    "archi": 471564,
+    "contributi_applicati": 12623,
+    "contributi_scartati": 458941,
+    "dir_laterale_z_max": 0.0,
+    "frazione_saturati_pi4": 0.0014335275805617052,
+    "max_archi_su_un_nodo": 90,
+    "nodi_con_piu_di_un_arco": 12442,
+    "nodi_primo_estremo": 12623,
+    "passo": 31,
+    "saturati_pi4": 676,
+    "shift_assoluto": {
+     "max": 0.7853981633974483,
+     "mediana": 0.004883139149597957,
+     "min": 2.8379420835880697e-10,
+     "n": 471564,
+     "non_finiti": 0,
+     "p99": 0.26288927880992385
+    },
+    "somma_moduli_applicati": 270.93589055787606,
+    "somma_moduli_scartati": 10201.063204593062
+   },
+   "frazione_saturi_decisa": 0.538221747207166,
+   "frazione_saturi_vecchia": 0.4041635917924184,
+   "frazione_segno_cambia": 0.49643526647496417,
+   "passo": 31,
+   "passo_max": 0.018765240514968813,
+   "proj_simulatore_prima": {
+    "max": 4.614234216039079,
+    "mediana": 0.011527400276540256,
+    "min": 3.15126159613707e-09,
+    "n": 471564,
+    "non_finiti": 0,
+    "p99": 1.9057432029888857
+   },
+   "saturi_decisa": 253806,
+   "saturi_vecchia": 190589,
+   "segno_cambia": 234101,
+   "somma_segnata_dd0_decisa": -715.7618244006386,
+   "somma_segnata_dd0_vecchia": 19.82596673017002,
+   "vecchia_prima": {
+    "max": 4.614234216039079,
+    "mediana": 0.011527400276540256,
+    "min": 3.15126159613707e-09,
+    "n": 471564,
+    "non_finiti": 0,
+    "p99": 1.9057432029888857
+   }
+  },
+  {
+   "archi": 471564,
+   "archi_vivi": 471564,
+   "decisa_prima": {
+    "max": 5.045227264474645,
+    "mediana": 0.022579072924187805,
+    "min": 7.318543390053876e-08,
+    "n": 471564,
+    "non_finiti": 0,
+    "p99": 2.6978783446205954
+   },
+   "fase": {
+    "archi": 471564,
+    "contributi_applicati": 12623,
+    "contributi_scartati": 458941,
+    "dir_laterale_z_max": 0.0,
+    "frazione_saturati_pi4": 0.001374150698526605,
+    "max_archi_su_un_nodo": 90,
+    "nodi_con_piu_di_un_arco": 12442,
+    "nodi_primo_estremo": 12623,
+    "passo": 32,
+    "saturati_pi4": 648,
+    "shift_assoluto": {
+     "max": 0.7853981633974483,
+     "mediana": 0.004931434964645662,
+     "min": 6.541730202330091e-10,
+     "n": 471564,
+     "non_finiti": 0,
+     "p99": 0.26486851445678844
+    },
+    "somma_moduli_applicati": 270.95512981693633,
+    "somma_moduli_scartati": 10216.234451045886
+   },
+   "frazione_saturi_decisa": 0.5405183601801664,
+   "frazione_saturi_vecchia": 0.4057052701224012,
+   "frazione_segno_cambia": 0.49641406044566594,
+   "passo": 32,
+   "passo_max": 0.018771743452424175,
+   "proj_simulatore_prima": {
+    "max": 4.5898397553586205,
+    "mediana": 0.011657044909209765,
+    "min": 7.114003442667443e-09,
+    "n": 471564,
+    "non_finiti": 0,
+    "p99": 1.8862806992967027
+   },
+   "saturi_decisa": 254889,
+   "saturi_vecchia": 191316,
+   "segno_cambia": 234091,
+   "somma_segnata_dd0_decisa": -722.3931346491363,
+   "somma_segnata_dd0_vecchia": 19.120916040181953,
+   "vecchia_prima": {
+    "max": 4.5898397553586205,
+    "mediana": 0.011657044909209765,
+    "min": 7.114003442667443e-09,
+    "n": 471564,
+    "non_finiti": 0,
+    "p99": 1.8862806992967027
+   }
+  },
+  {
+   "archi": 471564,
+   "archi_vivi": 471564,
+   "decisa_prima": {
+    "max": 4.847241380289321,
+    "mediana": 0.02260598769394922,
+    "min": 1.8136896226180024e-08,
+    "n": 471564,
+    "non_finiti": 0,
+    "p99": 2.565006281047259
+   },
+   "fase": {
+    "archi": 471564,
+    "contributi_applicati": 12623,
+    "contributi_scartati": 458941,
+    "dir_laterale_z_max": 0.0,
+    "frazione_saturati_pi4": 0.0013635476838774801,
+    "max_archi_su_un_nodo": 90,
+    "nodi_con_piu_di_un_arco": 12442,
+    "nodi_primo_estremo": 12623,
+    "passo": 33,
+    "saturati_pi4": 643,
+    "shift_assoluto": {
+     "max": 0.7853981633974483,
+     "mediana": 0.0048896358855545,
+     "min": 8.834508097740748e-12,
+     "n": 471564,
+     "non_finiti": 0,
+     "p99": 0.26301674143074927
+    },
+    "somma_moduli_applicati": 266.84504577520624,
+    "somma_moduli_scartati": 10114.905571283565
+   },
+   "frazione_saturi_decisa": 0.5412923802495525,
+   "frazione_saturi_vecchia": 0.40521753144854145,
+   "frazione_segno_cambia": 0.49629106547573604,
+   "passo": 33,
+   "passo_max": 0.01877045647115572,
+   "proj_simulatore_prima": {
+    "max": 4.3780346097429135,
+    "mediana": 0.01168809650200113,
+    "min": 9.4846770151355e-10,
+    "n": 471564,
+    "non_finiti": 0,
+    "p99": 1.791231739926207
+   },
+   "saturi_decisa": 255254,
+   "saturi_vecchia": 191086,
+   "segno_cambia": 234033,
+   "somma_segnata_dd0_decisa": -728.1167841249804,
+   "somma_segnata_dd0_vecchia": 18.887952932742152,
+   "vecchia_prima": {
+    "max": 4.3780346097429135,
+    "mediana": 0.01168809650200113,
+    "min": 9.4846770151355e-10,
+    "n": 471564,
+    "non_finiti": 0,
+    "p99": 1.791231739926207
+   }
+  },
+  {
+   "archi": 471564,
+   "archi_vivi": 471564,
+   "decisa_prima": {
+    "max": 4.8407405144979965,
+    "mediana": 0.02270376406616622,
+    "min": 3.7945615235921626e-08,
+    "n": 471564,
+    "non_finiti": 0,
+    "p99": 2.5366227953022977
+   },
+   "fase": {
+    "archi": 471564,
+    "contributi_applicati": 12623,
+    "contributi_scartati": 458941,
+    "dir_laterale_z_max": 0.0,
+    "frazione_saturati_pi4": 0.001344462257509055,
+    "max_archi_su_un_nodo": 90,
+    "nodi_con_piu_di_un_arco": 12442,
+    "nodi_primo_estremo": 12623,
+    "passo": 34,
+    "saturati_pi4": 634,
+    "shift_assoluto": {
+     "max": 0.7853981633974483,
+     "mediana": 0.004935969957024397,
+     "min": 2.272509930672733e-09,
+     "n": 471564,
+     "non_finiti": 0,
+     "p99": 0.26451418102654
+    },
+    "somma_moduli_applicati": 266.9031590713796,
+    "somma_moduli_scartati": 10128.115503628429
+   },
+   "frazione_saturi_decisa": 0.5426113952719037,
+   "frazione_saturi_vecchia": 0.40608061684098024,
+   "frazione_segno_cambia": 0.496218964976122,
+   "passo": 34,
+   "passo_max": 0.01877785282855583,
+   "proj_simulatore_prima": {
+    "max": 4.3365555713442125,
+    "mediana": 0.011777383913873974,
+    "min": 1.466775832899541e-08,
+    "n": 471564,
+    "non_finiti": 0,
+    "p99": 1.7677156299236418
+   },
+   "saturi_decisa": 255876,
+   "saturi_vecchia": 191493,
+   "segno_cambia": 233999,
+   "somma_segnata_dd0_decisa": -733.5282213293408,
+   "somma_segnata_dd0_vecchia": 19.049099365450417,
+   "vecchia_prima": {
+    "max": 4.3365555713442125,
+    "mediana": 0.011777383913873974,
+    "min": 1.466775832899541e-08,
+    "n": 471564,
+    "non_finiti": 0,
+    "p99": 1.7677156299236418
+   }
+  },
+  {
+   "archi": 471564,
+   "archi_vivi": 471564,
+   "decisa_prima": {
+    "max": 4.665568474254598,
+    "mediana": 0.022778096787700743,
+    "min": 1.2992380406018361e-08,
+    "n": 471564,
+    "non_finiti": 0,
+    "p99": 2.4229114715521543
+   },
+   "fase": {
+    "archi": 471564,
+    "contributi_applicati": 12623,
+    "contributi_scartati": 458941,
+    "dir_laterale_z_max": 0.0,
+    "frazione_saturati_pi4": 0.0012638793461757047,
+    "max_archi_su_un_nodo": 90,
+    "nodi_con_piu_di_un_arco": 12442,
+    "nodi_primo_estremo": 12623,
+    "passo": 35,
+    "saturati_pi4": 596,
+    "shift_assoluto": {
+     "max": 0.7853981633974483,
+     "mediana": 0.004897425334409594,
+     "min": 3.672473021399175e-10,
+     "n": 471564,
+     "non_finiti": 0,
+     "p99": 0.26128071523033347
+    },
+    "somma_moduli_applicati": 264.0997672247522,
+    "somma_moduli_scartati": 10007.676165359357
+   },
+   "frazione_saturi_decisa": 0.5436992645749039,
+   "frazione_saturi_vecchia": 0.40577100881322575,
+   "frazione_segno_cambia": 0.4960090252860693,
+   "passo": 35,
+   "passo_max": 0.01877966291529799,
+   "proj_simulatore_prima": {
+    "max": 4.149003888858253,
+    "mediana": 0.011827914510187398,
+    "min": 3.222956973839789e-08,
+    "n": 471564,
+    "non_finiti": 0,
+    "p99": 1.685654559607296
+   },
+   "saturi_decisa": 256389,
+   "saturi_vecchia": 191347,
+   "segno_cambia": 233900,
+   "somma_segnata_dd0_decisa": -740.8440320453357,
+   "somma_segnata_dd0_vecchia": 19.791051194135818,
+   "vecchia_prima": {
+    "max": 4.149003888858253,
+    "mediana": 0.011827914510187398,
+    "min": 3.222956973839789e-08,
+    "n": 471564,
+    "non_finiti": 0,
+    "p99": 1.685654559607296
+   }
+  },
+  {
+   "archi": 471564,
+   "archi_vivi": 471564,
+   "decisa_prima": {
+    "max": 4.685539403241798,
+    "mediana": 0.02295681819194326,
+    "min": 4.185810718315208e-08,
+    "n": 471564,
+    "non_finiti": 0,
+    "p99": 2.4132503214936527
+   },
+   "fase": {
+    "archi": 471564,
+    "contributi_applicati": 12623,
+    "contributi_scartati": 458941,
+    "dir_laterale_z_max": 0.0,
+    "frazione_saturati_pi4": 0.0012978089930529048,
+    "max_archi_su_un_nodo": 90,
+    "nodi_con_piu_di_un_arco": 12442,
+    "nodi_primo_estremo": 12623,
+    "passo": 36,
+    "saturati_pi4": 612,
+    "shift_assoluto": {
+     "max": 0.7853981633974483,
+     "mediana": 0.00494428904343591,
+     "min": 2.5833483961518326e-09,
+     "n": 471564,
+     "non_finiti": 0,
+     "p99": 0.26165763324423974
+    },
+    "somma_moduli_applicati": 265.88808715701845,
+    "somma_moduli_scartati": 10038.21767837077
+   },
+   "frazione_saturi_decisa": 0.54556539515315,
+   "frazione_saturi_vecchia": 0.4068419132927874,
+   "frazione_segno_cambia": 0.49634832175484134,
+   "passo": 36,
+   "passo_max": 0.01878949210409706,
+   "proj_simulatore_prima": {
+    "max": 4.130919381384937,
+    "mediana": 0.011961128801726555,
+    "min": 1.2637290239486763e-08,
+    "n": 471564,
+    "non_finiti": 0,
+    "p99": 1.672954516569741
+   },
+   "saturi_decisa": 257269,
+   "saturi_vecchia": 191852,
+   "segno_cambia": 234060,
+   "somma_segnata_dd0_decisa": -749.458041012542,
+   "somma_segnata_dd0_vecchia": 20.436990625061128,
+   "vecchia_prima": {
+    "max": 4.130919381384937,
+    "mediana": 0.011961128801726555,
+    "min": 1.2637290239486763e-08,
+    "n": 471564,
+    "non_finiti": 0,
+    "p99": 1.672954516569741
+   }
+  },
+  {
+   "archi": 471564,
+   "archi_vivi": 471564,
+   "decisa_prima": {
+    "max": 4.519294308443187,
+    "mediana": 0.02295908421035503,
+    "min": 2.0270224225921323e-08,
+    "n": 471564,
+    "non_finiti": 0,
+    "p99": 2.312658265991907
+   },
+   "fase": {
+    "archi": 471564,
+    "contributi_applicati": 12623,
+    "contributi_scartati": 458941,
+    "dir_laterale_z_max": 0.0,
+    "frazione_saturati_pi4": 0.00130417080184238,
+    "max_archi_su_un_nodo": 90,
+    "nodi_con_piu_di_un_arco": 12442,
+    "nodi_primo_estremo": 12623,
+    "passo": 37,
+    "saturati_pi4": 615,
+    "shift_assoluto": {
+     "max": 0.7853981633974483,
+     "mediana": 0.004910953389392964,
+     "min": 6.45754119039941e-10,
+     "n": 471564,
+     "non_finiti": 0,
+     "p99": 0.2580426585089562
+    },
+    "somma_moduli_applicati": 262.61830410095695,
+    "somma_moduli_scartati": 9940.384809688403
+   },
+   "frazione_saturi_decisa": 0.5459937569449745,
+   "frazione_saturi_vecchia": 0.40579645604838366,
+   "frazione_segno_cambia": 0.49612777905013955,
+   "passo": 37,
+   "passo_max": 0.01879194936730261,
+   "proj_simulatore_prima": {
+    "max": 3.9562247311942067,
+    "mediana": 0.011988298244231248,
+    "min": 1.0642051011066191e-08,
+    "n": 471564,
+    "non_finiti": 0,
+    "p99": 1.5961784242833341
+   },
+   "saturi_decisa": 257471,
+   "saturi_vecchia": 191359,
+   "segno_cambia": 233956,
+   "somma_segnata_dd0_decisa": -757.1213073139453,
+   "somma_segnata_dd0_vecchia": 20.840287556222584,
+   "vecchia_prima": {
+    "max": 3.9562247311942067,
+    "mediana": 0.011988298244231248,
+    "min": 1.0642051011066191e-08,
+    "n": 471564,
+    "non_finiti": 0,
+    "p99": 1.5961784242833341
+   }
+  },
+  {
+   "archi": 471564,
+   "archi_vivi": 471564,
+   "decisa_prima": {
+    "max": 4.529319967215248,
+    "mediana": 0.023039439171855282,
+    "min": 2.404146415972569e-09,
+    "n": 471564,
+    "non_finiti": 0,
+    "p99": 2.2929417959822684
+   },
+   "fase": {
+    "archi": 471564,
+    "contributi_applicati": 12623,
+    "contributi_scartati": 458941,
+    "dir_laterale_z_max": 0.0,
+    "frazione_saturati_pi4": 0.0012702411549651797,
+    "max_archi_su_un_nodo": 90,
+    "nodi_con_piu_di_un_arco": 12442,
+    "nodi_primo_estremo": 12623,
+    "passo": 38,
+    "saturati_pi4": 599,
+    "shift_assoluto": {
+     "max": 0.7853981633974483,
+     "mediana": 0.004954078489590249,
+     "min": 3.9846987308696837e-10,
+     "n": 471564,
+     "non_finiti": 0,
+     "p99": 0.2586534007609903
+    },
+    "somma_moduli_applicati": 261.6627979885616,
+    "somma_moduli_scartati": 9939.596927297946
+   },
+   "frazione_saturi_decisa": 0.5469140986165186,
+   "frazione_saturi_vecchia": 0.4058982449890153,
+   "frazione_segno_cambia": 0.4959369247864553,
+   "passo": 38,
+   "passo_max": 0.01880156753440025,
+   "proj_simulatore_prima": {
+    "max": 3.9243095270722397,
+    "mediana": 0.012015711763624606,
+    "min": 4.621635977283564e-08,
+    "n": 471564,
+    "non_finiti": 0,
+    "p99": 1.5794716763538856
+   },
+   "saturi_decisa": 257905,
+   "saturi_vecchia": 191407,
+   "segno_cambia": 233866,
+   "somma_segnata_dd0_decisa": -763.9124431658379,
+   "somma_segnata_dd0_vecchia": 21.92567812157649,
+   "vecchia_prima": {
+    "max": 3.9243095270722397,
+    "mediana": 0.012015711763624606,
+    "min": 4.621635977283564e-08,
+    "n": 471564,
+    "non_finiti": 0,
+    "p99": 1.5794716763538856
+   }
+  },
+  {
+   "archi": 471564,
+   "archi_vivi": 471564,
+   "decisa_prima": {
+    "max": 4.435784720255742,
+    "mediana": 0.023124000191549227,
+    "min": 3.681904460306317e-09,
+    "n": 471564,
+    "non_finiti": 0,
+    "p99": 2.2015030314841564
+   },
+   "fase": {
+    "archi": 471564,
+    "contributi_applicati": 12623,
+    "contributi_scartati": 458941,
+    "dir_laterale_z_max": 0.0,
+    "frazione_saturati_pi4": 0.0012045024641406045,
+    "max_archi_su_un_nodo": 90,
+    "nodi_con_piu_di_un_arco": 12442,
+    "nodi_primo_estremo": 12623,
+    "passo": 39,
+    "saturati_pi4": 568,
+    "shift_assoluto": {
+     "max": 0.7853981633974483,
+     "mediana": 0.004920090718691576,
+     "min": 5.931410012637954e-10,
+     "n": 471564,
+     "non_finiti": 0,
+     "p99": 0.2538715460737091
+    },
+    "somma_moduli_applicati": 257.1155730653211,
+    "somma_moduli_scartati": 9812.54547052432
+   },
+   "frazione_saturi_decisa": 0.5479553146550628,
+   "frazione_saturi_vecchia": 0.40547200380012044,
+   "frazione_segno_cambia": 0.49582453283117456,
+   "passo": 39,
+   "passo_max": 0.018807342042572266,
+   "proj_simulatore_prima": {
+    "max": 3.768965151034593,
+    "mediana": 0.012058777846884344,
+    "min": 3.089960235271895e-09,
+    "n": 471564,
+    "non_finiti": 0,
+    "p99": 1.5164307578458642
+   },
+   "saturi_decisa": 258396,
+   "saturi_vecchia": 191206,
+   "segno_cambia": 233813,
+   "somma_segnata_dd0_decisa": -771.2966738100789,
+   "somma_segnata_dd0_vecchia": 22.20975598517331,
+   "vecchia_prima": {
+    "max": 3.768965151034593,
+    "mediana": 0.012058777846884344,
+    "min": 3.089960235271895e-09,
+    "n": 471564,
+    "non_finiti": 0,
+    "p99": 1.5164307578458642
+   }
+  },
+  {
+   "archi": 471564,
+   "archi_vivi": 471564,
+   "decisa_prima": {
+    "max": 4.492148238758795,
+    "mediana": 0.023224892440786835,
+    "min": 1.5908997690770268e-07,
+    "n": 471564,
+    "non_finiti": 0,
+    "p99": 2.1852257698413258
+   },
+   "fase": {
+    "archi": 471564,
+    "contributi_applicati": 12623,
+    "contributi_scartati": 458941,
+    "dir_laterale_z_max": 0.0,
+    "frazione_saturati_pi4": 0.0012469145227371047,
+    "max_archi_su_un_nodo": 90,
+    "nodi_con_piu_di_un_arco": 12442,
+    "nodi_primo_estremo": 12623,
+    "passo": 40,
+    "saturati_pi4": 588,
+    "shift_assoluto": {
+     "max": 0.7853981633974483,
+     "mediana": 0.004965991027356257,
+     "min": 2.4016644767742626e-10,
+     "n": 471564,
+     "non_finiti": 0,
+     "p99": 0.2531532910127627
+    },
+    "somma_moduli_applicati": 256.86728268590207,
+    "somma_moduli_scartati": 9824.520558720007
+   },
+   "frazione_saturi_decisa": 0.5493231035447999,
+   "frazione_saturi_vecchia": 0.4060000339296469,
+   "frazione_segno_cambia": 0.4959178393600869,
+   "passo": 40,
+   "passo_max": 0.01881873381277053,
+   "proj_simulatore_prima": {
+    "max": 3.7383827337508975,
+    "mediana": 0.01212480762835791,
+    "min": 1.1738804412027293e-09,
+    "n": 471564,
+    "non_finiti": 0,
+    "p99": 1.5009460731325017
+   },
+   "saturi_decisa": 259041,
+   "saturi_vecchia": 191455,
+   "segno_cambia": 233857,
+   "somma_segnata_dd0_decisa": -779.3790188710311,
+   "somma_segnata_dd0_vecchia": 21.51455814367793,
+   "vecchia_prima": {
+    "max": 3.7383827337508975,
+    "mediana": 0.01212480762835791,
+    "min": 1.1738804412027293e-09,
+    "n": 471564,
+    "non_finiti": 0,
+    "p99": 1.5009460731325017
+   }
+  },
+  {
+   "archi": 471564,
+   "archi_vivi": 471564,
+   "decisa_prima": {
+    "max": 4.387248902576808,
+    "mediana": 0.02324759600214333,
+    "min": 9.425429350393784e-08,
+    "n": 471564,
+    "non_finiti": 0,
+    "p99": 2.089637869825879
+   },
+   "fase": {
+    "archi": 471564,
+    "contributi_applicati": 12623,
+    "contributi_scartati": 458941,
+    "dir_laterale_z_max": 0.0,
+    "frazione_saturati_pi4": 0.0011875376407020045,
+    "max_archi_su_un_nodo": 90,
+    "nodi_con_piu_di_un_arco": 12442,
+    "nodi_primo_estremo": 12623,
+    "passo": 41,
+    "saturati_pi4": 560,
+    "shift_assoluto": {
+     "max": 0.7853981633974483,
+     "mediana": 0.004920864638333985,
+     "min": 1.7949398482238732e-09,
+     "n": 471564,
+     "non_finiti": 0,
+     "p99": 0.2506259271316704
+    },
+    "somma_moduli_applicati": 253.39498879392937,
+    "somma_moduli_scartati": 9716.508734859843
+   },
+   "frazione_saturi_decisa": 0.5500737969819579,
+   "frazione_saturi_vecchia": 0.40550593344699765,
+   "frazione_segno_cambia": 0.4956824524348763,
+   "passo": 41,
+   "passo_max": 0.018825750071976358,
+   "proj_simulatore_prima": {
+    "max": 3.5762926009732583,
+    "mediana": 0.012162627503210328,
+    "min": 1.1234852044343657e-08,
+    "n": 471564,
+    "non_finiti": 0,
+    "p99": 1.4338113700738102
+   },
+   "saturi_decisa": 259395,
+   "saturi_vecchia": 191222,
+   "segno_cambia": 233746,
+   "somma_segnata_dd0_decisa": -786.3158195847393,
+   "somma_segnata_dd0_vecchia": 20.404067334488836,
+   "vecchia_prima": {
+    "max": 3.5762926009732583,
+    "mediana": 0.012162627503210328,
+    "min": 1.1234852044343657e-08,
+    "n": 471564,
+    "non_finiti": 0,
+    "p99": 1.4338113700738102
+   }
+  },
+  {
+   "archi": 471565,
+   "archi_vivi": 471565,
+   "decisa_prima": {
+    "max": 4.462214934755422,
+    "mediana": 0.023566779959327686,
+    "min": 2.384327277115744e-08,
+    "n": 471565,
+    "non_finiti": 0,
+    "p99": 2.083370858480568
+   },
+   "fase": {
+    "archi": 471565,
+    "contributi_applicati": 12624,
+    "contributi_scartati": 458941,
+    "dir_laterale_z_max": 0.0,
+    "frazione_saturati_pi4": 0.001244791280099244,
+    "max_archi_su_un_nodo": 90,
+    "nodi_con_piu_di_un_arco": 12442,
+    "nodi_primo_estremo": 12624,
+    "passo": 42,
+    "saturati_pi4": 587,
+    "shift_assoluto": {
+     "max": 0.7853981633974483,
+     "mediana": 0.004951455892174108,
+     "min": 0.0,
+     "n": 471565,
+     "non_finiti": 0,
+     "p99": 0.2514043903619271
+    },
+    "somma_moduli_applicati": 252.53047722700916,
+    "somma_moduli_scartati": 9738.267063804069
+   },
+   "frazione_saturi_decisa": 0.5531941513895221,
+   "frazione_saturi_vecchia": 0.4074305769088037,
+   "frazione_segno_cambia": 0.49520426664404693,
+   "passo": 42,
+   "passo_max": 0.018838017314029613,
+   "proj_simulatore_prima": {
+    "max": 3.5694856098870207,
+    "mediana": 0.012333906730390674,
+    "min": 1.0169769143236924e-08,
+    "n": 471565,
+    "non_finiti": 0,
+    "p99": 1.4281183950189897
+   },
+   "saturi_decisa": 260867,
+   "saturi_vecchia": 192130,
+   "segno_cambia": 233521,
+   "somma_segnata_dd0_decisa": -794.3311818281658,
+   "somma_segnata_dd0_vecchia": 20.058172577336006,
+   "vecchia_prima": {
+    "max": 3.5694856098870207,
+    "mediana": 0.012333906730390674,
+    "min": 1.0169769143236924e-08,
+    "n": 471565,
+    "non_finiti": 0,
+    "p99": 1.4281183950189897
+   }
+  },
+  {
+   "archi": 471565,
+   "archi_vivi": 471565,
+   "decisa_prima": {
+    "max": 4.357586278005744,
+    "mediana": 0.023615259815954914,
+    "min": 4.557390015492718e-08,
+    "n": 471565,
+    "non_finiti": 0,
+    "p99": 1.9970682746635213
+   },
+   "fase": {
+    "archi": 471565,
+    "contributi_applicati": 12624,
+    "contributi_scartati": 458941,
+    "dir_laterale_z_max": 0.0,
+    "frazione_saturati_pi4": 0.0012363088863677329,
+    "max_archi_su_un_nodo": 90,
+    "nodi_con_piu_di_un_arco": 12442,
+    "nodi_primo_estremo": 12624,
+    "passo": 43,
+    "saturati_pi4": 583,
+    "shift_assoluto": {
+     "max": 0.7853981633974483,
+     "mediana": 0.004905250220327802,
+     "min": 0.0,
+     "n": 471565,
+     "non_finiti": 0,
+     "p99": 0.24861112300536203
+    },
+    "somma_moduli_applicati": 248.51376623797245,
+    "somma_moduli_scartati": 9642.95327653888
+   },
+   "frazione_saturi_decisa": 0.5540954057234951,
+   "frazione_saturi_vecchia": 0.40691951268648013,
+   "frazione_segno_cambia": 0.4950388599662825,
+   "passo": 43,
+   "passo_max": 0.018845130914479244,
+   "proj_simulatore_prima": {
+    "max": 3.424270137718635,
+    "mediana": 0.012395126877510215,
+    "min": 1.3682646491514072e-08,
+    "n": 471565,
+    "non_finiti": 0,
+    "p99": 1.3671665964759965
+   },
+   "saturi_decisa": 261292,
+   "saturi_vecchia": 191889,
+   "segno_cambia": 233443,
+   "somma_segnata_dd0_decisa": -800.5811403234547,
+   "somma_segnata_dd0_vecchia": 19.55533641526014,
+   "vecchia_prima": {
+    "max": 3.424270137718635,
+    "mediana": 0.012395126877510215,
+    "min": 1.3682646491514072e-08,
+    "n": 471565,
+    "non_finiti": 0,
+    "p99": 1.3671665964759965
+   }
+  },
+  {
+   "archi": 471565,
+   "archi_vivi": 471565,
+   "decisa_prima": {
+    "max": 4.396311425951447,
+    "mediana": 0.023700953363457344,
+    "min": 1.760877366229225e-08,
+    "n": 471565,
+    "non_finiti": 0,
+    "p99": 1.9804347958424977
+   },
+   "fase": {
+    "archi": 471565,
+    "contributi_applicati": 12624,
+    "contributi_scartati": 458941,
+    "dir_laterale_z_max": 0.0,
+    "frazione_saturati_pi4": 0.001278720855025288,
+    "max_archi_su_un_nodo": 90,
+    "nodi_con_piu_di_un_arco": 12442,
+    "nodi_primo_estremo": 12624,
+    "passo": 44,
+    "saturati_pi4": 603,
+    "shift_assoluto": {
+     "max": 0.7853981633974483,
+     "mediana": 0.004935231247818758,
+     "min": 1.673225868900062e-09,
+     "n": 471565,
+     "non_finiti": 0,
+     "p99": 0.251090825818236
+    },
+    "somma_moduli_applicati": 248.45908369584689,
+    "somma_moduli_scartati": 9684.900248551345
+   },
+   "frazione_saturi_decisa": 0.5554419857283726,
+   "frazione_saturi_vecchia": 0.40773594308313804,
+   "frazione_segno_cambia": 0.494873453288518,
+   "passo": 44,
+   "passo_max": 0.018857231069990533,
+   "proj_simulatore_prima": {
+    "max": 3.4005172758151496,
+    "mediana": 0.012478139236658997,
+    "min": 9.439845415981987e-09,
+    "n": 471565,
+    "non_finiti": 0,
+    "p99": 1.3535981699869009
+   },
+   "saturi_decisa": 261927,
+   "saturi_vecchia": 192274,
+   "segno_cambia": 233365,
+   "somma_segnata_dd0_decisa": -806.488936183516,
+   "somma_segnata_dd0_vecchia": 19.92322778545588,
+   "vecchia_prima": {
+    "max": 3.4005172758151496,
+    "mediana": 0.012478139236658997,
+    "min": 9.439845415981987e-09,
+    "n": 471565,
+    "non_finiti": 0,
+    "p99": 1.3535981699869009
+   }
+  },
+  {
+   "archi": 471565,
+   "archi_vivi": 471565,
+   "decisa_prima": {
+    "max": 4.283442924714511,
+    "mediana": 0.023751266175846344,
+    "min": 1.1224250753221934e-07,
+    "n": 471565,
+    "non_finiti": 0,
+    "p99": 1.9018203279987884
+   },
+   "fase": {
+    "archi": 471565,
+    "contributi_applicati": 12624,
+    "contributi_scartati": 458941,
+    "dir_laterale_z_max": 0.0,
+    "frazione_saturati_pi4": 0.0012872032487567992,
+    "max_archi_su_un_nodo": 90,
+    "nodi_con_piu_di_un_arco": 12442,
+    "nodi_primo_estremo": 12624,
+    "passo": 45,
+    "saturati_pi4": 607,
+    "shift_assoluto": {
+     "max": 0.7853981633974483,
+     "mediana": 0.004887979210704436,
+     "min": 6.781649162934608e-10,
+     "n": 471565,
+     "non_finiti": 0,
+     "p99": 0.24804255741445339
+    },
+    "somma_moduli_applicati": 243.00326052982066,
+    "somma_moduli_scartati": 9598.728585974706
+   },
+   "frazione_saturi_decisa": 0.5562499337312989,
+   "frazione_saturi_vecchia": 0.4072948586090995,
+   "frazione_segno_cambia": 0.4946401874609015,
+   "passo": 45,
+   "passo_max": 0.01886445589063187,
+   "proj_simulatore_prima": {
+    "max": 3.262019678478232,
+    "mediana": 0.012500273657219965,
+    "min": 6.4862962980837165e-09,
+    "n": 471565,
+    "non_finiti": 0,
+    "p99": 1.2979691942353924
+   },
+   "saturi_decisa": 262308,
+   "saturi_vecchia": 192066,
+   "segno_cambia": 233255,
+   "somma_segnata_dd0_decisa": -810.4011659145697,
+   "somma_segnata_dd0_vecchia": 19.850074467391494,
+   "vecchia_prima": {
+    "max": 3.262019678478232,
+    "mediana": 0.012500273657219965,
+    "min": 6.4862962980837165e-09,
+    "n": 471565,
+    "non_finiti": 0,
+    "p99": 1.2979691942353924
+   }
+  },
+  {
+   "archi": 471565,
+   "archi_vivi": 471565,
+   "decisa_prima": {
+    "max": 4.299689006768353,
+    "mediana": 0.02384558277253165,
+    "min": 1.1792100370906549e-07,
+    "n": 471565,
+    "non_finiti": 0,
+    "p99": 1.890362866452721
+   },
+   "fase": {
+    "archi": 471565,
+    "contributi_applicati": 12624,
+    "contributi_scartati": 458941,
+    "dir_laterale_z_max": 0.0,
+    "frazione_saturati_pi4": 0.0013465800048773765,
+    "max_archi_su_un_nodo": 90,
+    "nodi_con_piu_di_un_arco": 12442,
+    "nodi_primo_estremo": 12624,
+    "passo": 46,
+    "saturati_pi4": 635,
+    "shift_assoluto": {
+     "max": 0.7853981633974483,
+     "mediana": 0.004924540744504548,
+     "min": 2.5659545168873323e-09,
+     "n": 471565,
+     "non_finiti": 0,
+     "p99": 0.2500668456038363
+    },
+    "somma_moduli_applicati": 244.41529696068483,
+    "somma_moduli_scartati": 9641.321932865852
+   },
+   "frazione_saturi_decisa": 0.5574268658615461,
+   "frazione_saturi_vecchia": 0.4075768982006722,
+   "frazione_segno_cambia": 0.4946253432718713,
+   "passo": 46,
+   "passo_max": 0.018876823697517735,
+   "proj_simulatore_prima": {
+    "max": 3.2284383016635334,
+    "mediana": 0.012578784585157914,
+    "min": 1.9222909784788467e-08,
+    "n": 471565,
+    "non_finiti": 0,
+    "p99": 1.2843001786847603
+   },
+   "saturi_decisa": 262863,
+   "saturi_vecchia": 192199,
+   "segno_cambia": 233248,
+   "somma_segnata_dd0_decisa": -815.8303287410279,
+   "somma_segnata_dd0_vecchia": 19.59036635598527,
+   "vecchia_prima": {
+    "max": 3.2284383016635334,
+    "mediana": 0.012578784585157914,
+    "min": 1.9222909784788467e-08,
+    "n": 471565,
+    "non_finiti": 0,
+    "p99": 1.2843001786847603
+   }
+  },
+  {
+   "archi": 471565,
+   "archi_vivi": 471565,
+   "decisa_prima": {
+    "max": 4.209728121153741,
+    "mediana": 0.024037930612927774,
+    "min": 1.535614308934951e-07,
+    "n": 471565,
+    "non_finiti": 0,
+    "p99": 1.8221796221983289
+   },
+   "fase": {
+    "archi": 471565,
+    "contributi_applicati": 12624,
+    "contributi_scartati": 458941,
+    "dir_laterale_z_max": 0.0,
+    "frazione_saturati_pi4": 0.0012744796581595325,
+    "max_archi_su_un_nodo": 90,
+    "nodi_con_piu_di_un_arco": 12442,
+    "nodi_primo_estremo": 12624,
+    "passo": 47,
+    "saturati_pi4": 601,
+    "shift_assoluto": {
+     "max": 0.7853981633974483,
+     "mediana": 0.004884437377422969,
+     "min": 4.1726041487202374e-10,
+     "n": 471565,
+     "non_finiti": 0,
+     "p99": 0.24477019306449277
+    },
+    "somma_moduli_applicati": 240.46657951330286,
+    "somma_moduli_scartati": 9520.119696109618
+   },
+   "frazione_saturi_decisa": 0.559806177303235,
+   "frazione_saturi_vecchia": 0.40861811203121523,
+   "frazione_segno_cambia": 0.4947589409731426,
+   "passo": 47,
+   "passo_max": 0.018883997845175256,
+   "proj_simulatore_prima": {
+    "max": 3.1155888536685215,
+    "mediana": 0.01270328241603591,
+    "min": 1.432098137429602e-07,
+    "n": 471565,
+    "non_finiti": 0,
+    "p99": 1.2377409290439967
+   },
+   "saturi_decisa": 263985,
+   "saturi_vecchia": 192690,
+   "segno_cambia": 233311,
+   "somma_segnata_dd0_decisa": -821.4992114612351,
+   "somma_segnata_dd0_vecchia": 19.317944159916,
+   "vecchia_prima": {
+    "max": 3.1155888536685215,
+    "mediana": 0.01270328241603591,
+    "min": 1.432098137429602e-07,
+    "n": 471565,
+    "non_finiti": 0,
+    "p99": 1.2377409290439967
+   }
+  },
+  {
+   "archi": 471565,
+   "archi_vivi": 471565,
+   "decisa_prima": {
+    "max": 4.241104934424848,
+    "mediana": 0.024156301146617237,
+    "min": 5.0482020957747414e-08,
+    "n": 471565,
+    "non_finiti": 0,
+    "p99": 1.8072207711656345
+   },
+   "fase": {
+    "archi": 471565,
+    "contributi_applicati": 12624,
+    "contributi_scartati": 458941,
+    "dir_laterale_z_max": 0.0,
+    "frazione_saturati_pi4": 0.0012426706816663663,
+    "max_archi_su_un_nodo": 90,
+    "nodi_con_piu_di_un_arco": 12442,
+    "nodi_primo_estremo": 12624,
+    "passo": 48,
+    "saturati_pi4": 586,
+    "shift_assoluto": {
+     "max": 0.7853981633974483,
+     "mediana": 0.004919876798634438,
+     "min": 2.885597845573904e-09,
+     "n": 471565,
+     "non_finiti": 0,
+     "p99": 0.24581910004720262
+    },
+    "somma_moduli_applicati": 239.6698021551411,
+    "somma_moduli_scartati": 9524.629007958014
+   },
+   "frazione_saturi_decisa": 0.5612566666313233,
+   "frazione_saturi_vecchia": 0.4098120089489254,
+   "frazione_segno_cambia": 0.4948543679026221,
+   "passo": 48,
+   "passo_max": 0.018897951498622754,
+   "proj_simulatore_prima": {
+    "max": 3.12094870221992,
+    "mediana": 0.012796031245942516,
+    "min": 4.2755214776885275e-08,
+    "n": 471565,
+    "non_finiti": 0,
+    "p99": 1.2247745507123557
+   },
+   "saturi_decisa": 264669,
+   "saturi_vecchia": 193253,
+   "segno_cambia": 233356,
+   "somma_segnata_dd0_decisa": -825.909704742524,
+   "somma_segnata_dd0_vecchia": 19.025591189602427,
+   "vecchia_prima": {
+    "max": 3.12094870221992,
+    "mediana": 0.012796031245942516,
+    "min": 4.2755214776885275e-08,
+    "n": 471565,
+    "non_finiti": 0,
+    "p99": 1.2247745507123557
+   }
+  },
+  {
+   "archi": 471565,
+   "archi_vivi": 471565,
+   "decisa_prima": {
+    "max": 4.130197275116428,
+    "mediana": 0.024194648308881777,
+    "min": 2.8421299619094822e-08,
+    "n": 471565,
+    "non_finiti": 0,
+    "p99": 1.7357258550789096
+   },
+   "fase": {
+    "archi": 471565,
+    "contributi_applicati": 12624,
+    "contributi_scartati": 458941,
+    "dir_laterale_z_max": 0.0,
+    "frazione_saturati_pi4": 0.0011960175161430556,
+    "max_archi_su_un_nodo": 90,
+    "nodi_con_piu_di_un_arco": 12442,
+    "nodi_primo_estremo": 12624,
+    "passo": 49,
+    "saturati_pi4": 564,
+    "shift_assoluto": {
+     "max": 0.7853981633974483,
+     "mediana": 0.0048774719354775595,
+     "min": 1.7994679836930793e-09,
+     "n": 471565,
+     "non_finiti": 0,
+     "p99": 0.2410217850074068
+    },
+    "somma_moduli_applicati": 235.69994624922828,
+    "somma_moduli_scartati": 9392.378653350304
+   },
+   "frazione_saturi_decisa": 0.5622257801151485,
+   "frazione_saturi_vecchia": 0.40942393943570876,
+   "frazione_segno_cambia": 0.4948034735402331,
+   "passo": 49,
+   "passo_max": 0.018907683908588838,
+   "proj_simulatore_prima": {
+    "max": 3.0282025176556164,
+    "mediana": 0.012840783240718375,
+    "min": 1.549779808326414e-08,
+    "n": 471565,
+    "non_finiti": 0,
+    "p99": 1.1756656092909579
+   },
+   "saturi_decisa": 265126,
+   "saturi_vecchia": 193070,
+   "segno_cambia": 233332,
+   "somma_segnata_dd0_decisa": -829.4435239748462,
+   "somma_segnata_dd0_vecchia": 18.707437465628658,
+   "vecchia_prima": {
+    "max": 3.0282025176556164,
+    "mediana": 0.012840783240718375,
+    "min": 1.549779808326414e-08,
+    "n": 471565,
+    "non_finiti": 0,
+    "p99": 1.1756656092909579
+   }
+  },
+  {
+   "archi": 471566,
+   "archi_vivi": 471566,
+   "decisa_prima": {
+    "max": 4.157352964845261,
+    "mediana": 0.024343132093607295,
+    "min": 1.0089899986767384e-08,
+    "n": 471566,
+    "non_finiti": 0,
+    "p99": 1.7230418094408
+   },
+   "fase": {
+    "archi": 471566,
+    "contributi_applicati": 12625,
+    "contributi_scartati": 458941,
+    "dir_laterale_z_max": 0.0,
+    "frazione_saturati_pi4": 0.0012235827010429082,
+    "max_archi_su_un_nodo": 90,
+    "nodi_con_piu_di_un_arco": 12442,
+    "nodi_primo_estremo": 12625,
+    "passo": 50,
+    "saturati_pi4": 577,
+    "shift_assoluto": {
+     "max": 0.7853981633974483,
+     "mediana": 0.0049092376152360135,
+     "min": 0.0,
+     "n": 471566,
+     "non_finiti": 0,
+     "p99": 0.24129901000794066
+    },
+    "somma_moduli_applicati": 234.74398810764256,
+    "somma_moduli_scartati": 9397.378206724257
+   },
+   "frazione_saturi_decisa": 0.5638595657871857,
+   "frazione_saturi_vecchia": 0.41035825313953933,
+   "frazione_segno_cambia": 0.4947260828812934,
+   "passo": 50,
+   "passo_max": 0.018919759240731648,
+   "proj_simulatore_prima": {
+    "max": 3.03794260821362,
+    "mediana": 0.012941396546016079,
+    "min": 3.8036649095598424e-08,
+    "n": 471566,
+    "non_finiti": 0,
+    "p99": 1.1664127734468706
+   },
+   "saturi_decisa": 265897,
+   "saturi_vecchia": 193511,
+   "segno_cambia": 233296,
+   "somma_segnata_dd0_decisa": -832.7543736380544,
+   "somma_segnata_dd0_vecchia": 18.451625279906597,
+   "vecchia_prima": {
+    "max": 3.03794260821362,
+    "mediana": 0.012941396546016079,
+    "min": 3.8036649095598424e-08,
+    "n": 471566,
+    "non_finiti": 0,
+    "p99": 1.1664127734468706
+   }
+  },
+  {
+   "archi": 471566,
+   "archi_vivi": 471566,
+   "decisa_prima": {
+    "max": 4.043412582965577,
+    "mediana": 0.02440494159862905,
+    "min": 1.8089327105462109e-07,
+    "n": 471566,
+    "non_finiti": 0,
+    "p99": 1.656653269050483
+   },
+   "fase": {
+    "archi": 471566,
+    "contributi_applicati": 12625,
+    "contributi_scartati": 458941,
+    "dir_laterale_z_max": 0.0,
+    "frazione_saturati_pi4": 0.0012108591374272106,
+    "max_archi_su_un_nodo": 90,
+    "nodi_con_piu_di_un_arco": 12442,
+    "nodi_primo_estremo": 12625,
+    "passo": 51,
+    "saturati_pi4": 571,
+    "shift_assoluto": {
+     "max": 0.7853981633974483,
+     "mediana": 0.004864061467949349,
+     "min": 0.0,
+     "n": 471566,
+     "non_finiti": 0,
+     "p99": 0.2369085844561369
+    },
+    "somma_moduli_applicati": 230.77400695359285,
+    "somma_moduli_scartati": 9288.305144046875
+   },
+   "frazione_saturi_decisa": 0.5647841447432597,
+   "frazione_saturi_vecchia": 0.40970935139513875,
+   "frazione_segno_cambia": 0.49460520902694427,
+   "passo": 51,
+   "passo_max": 0.018930072937683083,
+   "proj_simulatore_prima": {
+    "max": 2.9637973378161506,
+    "mediana": 0.012960770838652352,
+    "min": 1.2847861582043416e-07,
+    "n": 471566,
+    "non_finiti": 0,
+    "p99": 1.1212335863489693
+   },
+   "saturi_decisa": 266333,
+   "saturi_vecchia": 193205,
+   "segno_cambia": 233239,
+   "somma_segnata_dd0_decisa": -834.7007531467734,
+   "somma_segnata_dd0_vecchia": 18.604888758686492,
+   "vecchia_prima": {
+    "max": 2.9637973378161506,
+    "mediana": 0.012960770838652352,
+    "min": 1.2847861582043416e-07,
+    "n": 471566,
+    "non_finiti": 0,
+    "p99": 1.1212335863489693
+   }
+  },
+  {
+   "archi": 471566,
+   "archi_vivi": 471566,
+   "decisa_prima": {
+    "max": 4.043317355562032,
+    "mediana": 0.024450043122356255,
+    "min": 1.1099721662422676e-08,
+    "n": 471566,
+    "non_finiti": 0,
+    "p99": 1.6396119622127998
+   },
+   "fase": {
+    "archi": 471566,
+    "contributi_applicati": 12625,
+    "contributi_scartati": 458941,
+    "dir_laterale_z_max": 0.0,
+    "frazione_saturati_pi4": 0.0012575122040181014,
+    "max_archi_su_un_nodo": 90,
+    "nodi_con_piu_di_un_arco": 12442,
+    "nodi_primo_estremo": 12625,
+    "passo": 52,
+    "saturati_pi4": 593,
+    "shift_assoluto": {
+     "max": 0.7853981633974483,
+     "mediana": 0.004898746319332875,
+     "min": 2.6686746956843674e-10,
+     "n": 471566,
+     "non_finiti": 0,
+     "p99": 0.2383311838087928
+    },
+    "somma_moduli_applicati": 231.00597069696448,
+    "somma_moduli_scartati": 9329.508663364353
+   },
+   "frazione_saturi_decisa": 0.5652379518455529,
+   "frazione_saturi_vecchia": 0.4097496426799218,
+   "frazione_segno_cambia": 0.49481726842053925,
+   "passo": 52,
+   "passo_max": 0.01894061361517341,
+   "proj_simulatore_prima": {
+    "max": 2.959363791443299,
+    "mediana": 0.012979584556430173,
+    "min": 2.290052206838035e-08,
+    "n": 471566,
+    "non_finiti": 0,
+    "p99": 1.1075793639190608
+   },
+   "saturi_decisa": 266547,
+   "saturi_vecchia": 193224,
+   "segno_cambia": 233339,
+   "somma_segnata_dd0_decisa": -835.4757703054105,
+   "somma_segnata_dd0_vecchia": 18.716500651349474,
+   "vecchia_prima": {
+    "max": 2.959363791443299,
+    "mediana": 0.012979584556430173,
+    "min": 2.290052206838035e-08,
+    "n": 471566,
+    "non_finiti": 0,
+    "p99": 1.1075793639190608
+   }
+  },
+  {
+   "archi": 471566,
+   "archi_vivi": 471566,
+   "decisa_prima": {
+    "max": 3.93088607637006,
+    "mediana": 0.024505025087265278,
+    "min": 2.686972721216089e-11,
+    "n": 471566,
+    "non_finiti": 0,
+    "p99": 1.5803904781770737
+   },
+   "fase": {
+    "archi": 471566,
+    "contributi_applicati": 12625,
+    "contributi_scartati": 458941,
+    "dir_laterale_z_max": 0.0,
+    "frazione_saturati_pi4": 0.0012426680464664543,
+    "max_archi_su_un_nodo": 90,
+    "nodi_con_piu_di_un_arco": 12442,
+    "nodi_primo_estremo": 12625,
+    "passo": 53,
+    "saturati_pi4": 586,
+    "shift_assoluto": {
+     "max": 0.7853981633974483,
+     "mediana": 0.004863768894829778,
+     "min": 3.5156829854772455e-09,
+     "n": 471566,
+     "non_finiti": 0,
+     "p99": 0.23557623312049844
+    },
+    "somma_moduli_applicati": 227.76909538130235,
+    "somma_moduli_scartati": 9238.086815908435
+   },
+   "frazione_saturi_decisa": 0.5659674361595196,
+   "frazione_saturi_vecchia": 0.4096860248618433,
+   "frazione_segno_cambia": 0.4947981830751157,
+   "passo": 53,
+   "passo_max": 0.018948275061384724,
+   "proj_simulatore_prima": {
+    "max": 2.880222667024532,
+    "mediana": 0.01301116292350329,
+    "min": 1.8586593625302683e-08,
+    "n": 471566,
+    "non_finiti": 0,
+    "p99": 1.067020687691245
+   },
+   "saturi_decisa": 266891,
+   "saturi_vecchia": 193194,
+   "segno_cambia": 233330,
+   "somma_segnata_dd0_decisa": -836.0447080259206,
+   "somma_segnata_dd0_vecchia": 18.731385577692798,
+   "vecchia_prima": {
+    "max": 2.880222667024532,
+    "mediana": 0.01301116292350329,
+    "min": 1.8586593625302683e-08,
+    "n": 471566,
+    "non_finiti": 0,
+    "p99": 1.067020687691245
+   }
+  },
+  {
+   "archi": 471566,
+   "archi_vivi": 471566,
+   "decisa_prima": {
+    "max": 3.9440485291911265,
+    "mediana": 0.02463994429835486,
+    "min": 4.642847555415314e-08,
+    "n": 471566,
+    "non_finiti": 0,
+    "p99": 1.5696540614628514
+   },
+   "fase": {
+    "archi": 471566,
+    "contributi_applicati": 12625,
+    "contributi_scartati": 458941,
+    "dir_laterale_z_max": 0.0,
+    "frazione_saturati_pi4": 0.0012532710161462022,
+    "max_archi_su_un_nodo": 90,
+    "nodi_con_piu_di_un_arco": 12442,
+    "nodi_primo_estremo": 12625,
+    "passo": 54,
+    "saturati_pi4": 591,
+    "shift_assoluto": {
+     "max": 0.7853981633974483,
+     "mediana": 0.004898792301201052,
+     "min": 6.918391932651926e-10,
+     "n": 471566,
+     "non_finiti": 0,
+     "p99": 0.238461551271495
+    },
+    "somma_moduli_applicati": 230.58602330623373,
+    "somma_moduli_scartati": 9285.706922730384
+   },
+   "frazione_saturi_decisa": 0.5670765067880212,
+   "frazione_saturi_vecchia": 0.41025222344274187,
+   "frazione_segno_cambia": 0.4944525262635559,
+   "passo": 54,
+   "passo_max": 0.018958332489749714,
+   "proj_simulatore_prima": {
+    "max": 2.8917737302659208,
+    "mediana": 0.013069437140379784,
+    "min": 1.7550341077123e-08,
+    "n": 471566,
+    "non_finiti": 0,
+    "p99": 1.0585794031819646
+   },
+   "saturi_decisa": 267414,
+   "saturi_vecchia": 193461,
+   "segno_cambia": 233167,
+   "somma_segnata_dd0_decisa": -836.2640408338154,
+   "somma_segnata_dd0_vecchia": 19.03266911438397,
+   "vecchia_prima": {
+    "max": 2.8917737302659208,
+    "mediana": 0.013069437140379784,
+    "min": 1.7550341077123e-08,
+    "n": 471566,
+    "non_finiti": 0,
+    "p99": 1.0585794031819646
+   }
+  },
+  {
+   "archi": 471566,
+   "archi_vivi": 471566,
+   "decisa_prima": {
+    "max": 3.862229590076509,
+    "mediana": 0.024728721615473695,
+    "min": 1.2561120278759541e-08,
+    "n": 471566,
+    "non_finiti": 0,
+    "p99": 1.5128424462985153
+   },
+   "fase": {
+    "archi": 471566,
+    "contributi_applicati": 12625,
+    "contributi_scartati": 458941,
+    "dir_laterale_z_max": 0.0,
+    "frazione_saturati_pi4": 0.0012214621071069585,
+    "max_archi_su_un_nodo": 90,
+    "nodi_con_piu_di_un_arco": 12442,
+    "nodi_primo_estremo": 12625,
+    "passo": 55,
+    "saturati_pi4": 576,
+    "shift_assoluto": {
+     "max": 0.7853981633974483,
+     "mediana": 0.004852376813350197,
+     "min": 2.091340673394424e-10,
+     "n": 471566,
+     "non_finiti": 0,
+     "p99": 0.23832572294257146
+    },
+    "somma_moduli_applicati": 229.5748722184789,
+    "somma_moduli_scartati": 9207.815555735702
+   },
+   "frazione_saturi_decisa": 0.5681855774165229,
+   "frazione_saturi_vecchia": 0.41070178935716317,
+   "frazione_segno_cambia": 0.4946773092207665,
+   "passo": 55,
+   "passo_max": 0.018966097700538247,
+   "proj_simulatore_prima": {
+    "max": 2.8176108966765434,
+    "mediana": 0.013126877885312223,
+    "min": 1.1476913300772313e-08,
+    "n": 471566,
+    "non_finiti": 0,
+    "p99": 1.0209870789689475
+   },
+   "saturi_decisa": 267937,
+   "saturi_vecchia": 193673,
+   "segno_cambia": 233273,
+   "somma_segnata_dd0_decisa": -836.3280068271765,
+   "somma_segnata_dd0_vecchia": 18.770296811507066,
+   "vecchia_prima": {
+    "max": 2.8176108966765434,
+    "mediana": 0.013126877885312223,
+    "min": 1.1476913300772313e-08,
+    "n": 471566,
+    "non_finiti": 0,
+    "p99": 1.0209870789689475
+   }
+  },
+  {
+   "archi": 471566,
+   "archi_vivi": 471566,
+   "decisa_prima": {
+    "max": 3.8819355721655797,
+    "mediana": 0.024827139323132748,
+    "min": 6.308799528985283e-08,
+    "n": 471566,
+    "non_finiti": 0,
+    "p99": 1.5001488117970851
+   },
+   "fase": {
+    "archi": 471566,
+    "contributi_applicati": 12625,
+    "contributi_scartati": 458941,
+    "dir_laterale_z_max": 0.0,
+    "frazione_saturati_pi4": 0.0012044973556193618,
+    "max_archi_su_un_nodo": 90,
+    "nodi_con_piu_di_un_arco": 12442,
+    "nodi_primo_estremo": 12625,
+    "passo": 56,
+    "saturati_pi4": 568,
+    "shift_assoluto": {
+     "max": 0.7853981633974483,
+     "mediana": 0.0048781779082373855,
+     "min": 9.962740064950441e-11,
+     "n": 471566,
+     "non_finiti": 0,
+     "p99": 0.2374201116911023
+    },
+    "somma_moduli_applicati": 229.81058897327404,
+    "somma_moduli_scartati": 9196.003265732754
+   },
+   "frazione_saturi_decisa": 0.5692649597299212,
+   "frazione_saturi_vecchia": 0.4110241196354275,
+   "frazione_segno_cambia": 0.494743047632781,
+   "passo": 56,
+   "passo_max": 0.01897704983160675,
+   "proj_simulatore_prima": {
+    "max": 2.810198459545958,
+    "mediana": 0.013191156564375663,
+    "min": 6.354857578062898e-08,
+    "n": 471566,
+    "non_finiti": 0,
+    "p99": 1.0111726984269978
+   },
+   "saturi_decisa": 268446,
+   "saturi_vecchia": 193825,
+   "segno_cambia": 233304,
+   "somma_segnata_dd0_decisa": -836.4208332869459,
+   "somma_segnata_dd0_vecchia": 18.869396475115792,
+   "vecchia_prima": {
+    "max": 2.810198459545958,
+    "mediana": 0.013191156564375663,
+    "min": 6.354857578062898e-08,
+    "n": 471566,
+    "non_finiti": 0,
+    "p99": 1.0111726984269978
+   }
+  },
+  {
+   "archi": 471566,
+   "archi_vivi": 471566,
+   "decisa_prima": {
+    "max": 3.7902401170638464,
+    "mediana": 0.02491627386909303,
+    "min": 1.1252758238001335e-08,
+    "n": 471566,
+    "non_finiti": 0,
+    "p99": 1.4427066654787373
+   },
+   "fase": {
+    "archi": 471566,
+    "contributi_applicati": 12625,
+    "contributi_scartati": 458941,
+    "dir_laterale_z_max": 0.0,
+    "frazione_saturati_pi4": 0.001077261719462387,
+    "max_archi_su_un_nodo": 90,
+    "nodi_con_piu_di_un_arco": 12442,
+    "nodi_primo_estremo": 12625,
+    "passo": 57,
+    "saturati_pi4": 508,
+    "shift_assoluto": {
+     "max": 0.7853981633974483,
+     "mediana": 0.004834856125371207,
+     "min": 2.8753587806398033e-09,
+     "n": 471566,
+     "non_finiti": 0,
+     "p99": 0.2287841155864487
+    },
+    "somma_moduli_applicati": 224.32513300865122,
+    "somma_moduli_scartati": 8988.038295918
+   },
+   "frazione_saturi_decisa": 0.5702934477888567,
+   "frazione_saturi_vecchia": 0.4112255760593427,
+   "frazione_segno_cambia": 0.4946645856571509,
+   "passo": 57,
+   "passo_max": 0.018989316516132938,
+   "proj_simulatore_prima": {
+    "max": 2.723699344526724,
+    "mediana": 0.013290695076736794,
+    "min": 1.918675863197064e-08,
+    "n": 471566,
+    "non_finiti": 0,
+    "p99": 0.9750459022097274
+   },
+   "saturi_decisa": 268931,
+   "saturi_vecchia": 193920,
+   "segno_cambia": 233267,
+   "somma_segnata_dd0_decisa": -837.1355726099633,
+   "somma_segnata_dd0_vecchia": 18.82766501044052,
+   "vecchia_prima": {
+    "max": 2.723699344526724,
+    "mediana": 0.013290695076736794,
+    "min": 1.918675863197064e-08,
+    "n": 471566,
+    "non_finiti": 0,
+    "p99": 0.9750459022097274
+   }
+  },
+  {
+   "archi": 471566,
+   "archi_vivi": 471566,
+   "decisa_prima": {
+    "max": 3.7968801427797683,
+    "mediana": 0.025019889572830377,
+    "min": 8.593253849887773e-09,
+    "n": 471566,
+    "non_finiti": 0,
+    "p99": 1.4272194740090447
+   },
+   "fase": {
+    "archi": 471566,
+    "contributi_applicati": 12625,
+    "contributi_scartati": 458941,
+    "dir_laterale_z_max": 0.0,
+    "frazione_saturati_pi4": 0.0010581763740388408,
+    "max_archi_su_un_nodo": 90,
+    "nodi_con_piu_di_un_arco": 12442,
+    "nodi_primo_estremo": 12625,
+    "passo": 58,
+    "saturati_pi4": 499,
+    "shift_assoluto": {
+     "max": 0.7853981633974483,
+     "mediana": 0.004858220714330267,
+     "min": 3.031605060683901e-09,
+     "n": 471566,
+     "non_finiti": 0,
+     "p99": 0.224681871898685
+    },
+    "somma_moduli_applicati": 223.4442308348859,
+    "somma_moduli_scartati": 8938.928338586615
+   },
+   "frazione_saturi_decisa": 0.571372830102255,
+   "frazione_saturi_vecchia": 0.41202079878532377,
+   "frazione_segno_cambia": 0.49482150960841115,
+   "passo": 58,
+   "passo_max": 0.018999943651208273,
+   "proj_simulatore_prima": {
+    "max": 2.717888475925092,
+    "mediana": 0.013363717432298267,
+    "min": 4.922316107231622e-09,
+    "n": 471566,
+    "non_finiti": 0,
+    "p99": 0.9641227291688197
+   },
+   "saturi_decisa": 269440,
+   "saturi_vecchia": 194295,
+   "segno_cambia": 233341,
+   "somma_segnata_dd0_decisa": -838.1244225855639,
+   "somma_segnata_dd0_vecchia": 18.969511739960332,
+   "vecchia_prima": {
+    "max": 2.717888475925092,
+    "mediana": 0.013363717432298267,
+    "min": 4.922316107231622e-09,
+    "n": 471566,
+    "non_finiti": 0,
+    "p99": 0.9641227291688197
+   }
+  },
+  {
+   "archi": 471566,
+   "archi_vivi": 471566,
+   "decisa_prima": {
+    "max": 3.708236301039024,
+    "mediana": 0.025120780258497698,
+    "min": 3.23787128760806e-09,
+    "n": 471566,
+    "non_finiti": 0,
+    "p99": 1.3757501929072415
+   },
+   "fase": {
+    "archi": 471566,
+    "contributi_applicati": 12625,
+    "contributi_scartati": 458941,
+    "dir_laterale_z_max": 0.0,
+    "frazione_saturati_pi4": 0.0010560557801028911,
+    "max_archi_su_un_nodo": 90,
+    "nodi_con_piu_di_un_arco": 12442,
+    "nodi_primo_estremo": 12625,
+    "passo": 59,
+    "saturati_pi4": 498,
+    "shift_assoluto": {
+     "max": 0.7853981633974483,
+     "mediana": 0.004807332360475159,
+     "min": 5.538036906544509e-10,
+     "n": 471566,
+     "non_finiti": 0,
+     "p99": 0.22021796118889506
+    },
+    "somma_moduli_applicati": 219.4539861629394,
+    "somma_moduli_scartati": 8797.038789569202
+   },
+   "frazione_saturi_decisa": 0.572509468451924,
+   "frazione_saturi_vecchia": 0.41237917916049927,
+   "frazione_segno_cambia": 0.49517352820177873,
+   "passo": 59,
+   "passo_max": 0.01901282864618455,
+   "proj_simulatore_prima": {
+    "max": 2.6418969444636615,
+    "mediana": 0.013433716819791162,
+    "min": 2.5741841150426353e-08,
+    "n": 471566,
+    "non_finiti": 0,
+    "p99": 0.929702064495993
+   },
+   "saturi_decisa": 269976,
+   "saturi_vecchia": 194464,
+   "segno_cambia": 233507,
+   "somma_segnata_dd0_decisa": -837.6949589458698,
+   "somma_segnata_dd0_vecchia": 19.369918240762672,
+   "vecchia_prima": {
+    "max": 2.6418969444636615,
+    "mediana": 0.013433716819791162,
+    "min": 2.5741841150426353e-08,
+    "n": 471566,
+    "non_finiti": 0,
+    "p99": 0.929702064495993
+   }
+  },
+  {
+   "archi": 471566,
+   "archi_vivi": 471566,
+   "decisa_prima": {
+    "max": 3.6972048059838905,
+    "mediana": 0.025151889190719617,
+    "min": 3.5561831197599956e-08,
+    "n": 471566,
+    "non_finiti": 0,
+    "p99": 1.3560461153772823
+   },
+   "fase": {
+    "archi": 471566,
+    "contributi_applicati": 12625,
+    "contributi_scartati": 458941,
+    "dir_laterale_z_max": 0.0,
+    "frazione_saturati_pi4": 0.0010327292468074458,
+    "max_archi_su_un_nodo": 90,
+    "nodi_con_piu_di_un_arco": 12442,
+    "nodi_primo_estremo": 12625,
+    "passo": 60,
+    "saturati_pi4": 487,
+    "shift_assoluto": {
+     "max": 0.7853981633974483,
+     "mediana": 0.004826946089305475,
+     "min": 2.1647397248592958e-09,
+     "n": 471566,
+     "non_finiti": 0,
+     "p99": 0.2198648482883221
+    },
+    "somma_moduli_applicati": 219.046435426194,
+    "somma_moduli_scartati": 8796.096236547393
+   },
+   "frazione_saturi_decisa": 0.5725370361730914,
+   "frazione_saturi_vecchia": 0.41202079878532377,
+   "frazione_segno_cambia": 0.49522018126836964,
+   "passo": 60,
+   "passo_max": 0.019025554284182462,
+   "proj_simulatore_prima": {
+    "max": 2.6224480297912587,
+    "mediana": 0.013449200586615532,
+    "min": 3.79576495287276e-08,
+    "n": 471566,
+    "non_finiti": 0,
+    "p99": 0.9170578942507165
+   },
+   "saturi_decisa": 269989,
+   "saturi_vecchia": 194295,
+   "segno_cambia": 233529,
+   "somma_segnata_dd0_decisa": -834.2708329104207,
+   "somma_segnata_dd0_vecchia": 19.607084418869512,
+   "vecchia_prima": {
+    "max": 2.6224480297912587,
+    "mediana": 0.013449200586615532,
+    "min": 3.79576495287276e-08,
+    "n": 471566,
+    "non_finiti": 0,
+    "p99": 0.9170578942507165
+   }
+  },
+  {
+   "archi": 471566,
+   "archi_vivi": 471566,
+   "decisa_prima": {
+    "max": 3.5956544121131073,
+    "mediana": 0.02507956639085711,
+    "min": 1.9182560940040984e-07,
+    "n": 471566,
+    "non_finiti": 0,
+    "p99": 1.3031273377776293
+   },
+   "fase": {
+    "archi": 471566,
+    "contributi_applicati": 12625,
+    "contributi_scartati": 458941,
+    "dir_laterale_z_max": 0.0,
+    "frazione_saturati_pi4": 0.0009818349923446559,
+    "max_archi_su_un_nodo": 90,
+    "nodi_con_piu_di_un_arco": 12442,
+    "nodi_primo_estremo": 12625,
+    "passo": 61,
+    "saturati_pi4": 463,
+    "shift_assoluto": {
+     "max": 0.7853981633974483,
+     "mediana": 0.004785474980766787,
+     "min": 3.6991065168754136e-09,
+     "n": 471566,
+     "non_finiti": 0,
+     "p99": 0.21822771400055144
+    },
+    "somma_moduli_applicati": 215.59404490823948,
+    "somma_moduli_scartati": 8673.658848058101
+   },
+   "frazione_saturi_decisa": 0.5724437300399096,
+   "frazione_saturi_vecchia": 0.41094141647192545,
+   "frazione_segno_cambia": 0.49534529631059065,
+   "passo": 61,
+   "passo_max": 0.019037480679312272,
+   "proj_simulatore_prima": {
+    "max": 2.5393433314790537,
+    "mediana": 0.013420870751073476,
+    "min": 3.80515729401479e-08,
+    "n": 471566,
+    "non_finiti": 0,
+    "p99": 0.881329501749795
+   },
+   "saturi_decisa": 269945,
+   "saturi_vecchia": 193786,
+   "segno_cambia": 233588,
+   "somma_segnata_dd0_decisa": -830.5180688908265,
+   "somma_segnata_dd0_vecchia": 20.19366074068561,
+   "vecchia_prima": {
+    "max": 2.5393433314790537,
+    "mediana": 0.013420870751073476,
+    "min": 3.80515729401479e-08,
+    "n": 471566,
+    "non_finiti": 0,
+    "p99": 0.881329501749795
+   }
+  },
+  {
+   "archi": 471566,
+   "archi_vivi": 471566,
+   "decisa_prima": {
+    "max": 3.5857359057643015,
+    "mediana": 0.025123290794734597,
+    "min": 3.1009302570040766e-09,
+    "n": 471566,
+    "non_finiti": 0,
+    "p99": 1.2842666728267094
+   },
+   "fase": {
+    "archi": 471566,
+    "contributi_applicati": 12625,
+    "contributi_scartati": 458941,
+    "dir_laterale_z_max": 0.0,
+    "frazione_saturati_pi4": 0.0009754732105368072,
+    "max_archi_su_un_nodo": 90,
+    "nodi_con_piu_di_un_arco": 12442,
+    "nodi_primo_estremo": 12625,
+    "passo": 62,
+    "saturati_pi4": 460,
+    "shift_assoluto": {
+     "max": 0.7853981633974483,
+     "mediana": 0.004800401345042402,
+     "min": 7.045373117546305e-10,
+     "n": 471566,
+     "non_finiti": 0,
+     "p99": 0.21876830756427415
+    },
+    "somma_moduli_applicati": 217.93166863648568,
+    "somma_moduli_scartati": 8690.389304520715
+   },
+   "frazione_saturi_decisa": 0.5726176187426575,
+   "frazione_saturi_vecchia": 0.4108311455872561,
+   "frazione_segno_cambia": 0.49518201057752254,
+   "passo": 62,
+   "passo_max": 0.01904706897553393,
+   "proj_simulatore_prima": {
+    "max": 2.524447243607384,
+    "mediana": 0.013442800007158102,
+    "min": 6.738310930434234e-08,
+    "n": 471566,
+    "non_finiti": 0,
+    "p99": 0.868099219375956
+   },
+   "saturi_decisa": 270027,
+   "saturi_vecchia": 193734,
+   "segno_cambia": 233511,
+   "somma_segnata_dd0_decisa": -826.4517878620157,
+   "somma_segnata_dd0_vecchia": 20.27895157126062,
+   "vecchia_prima": {
+    "max": 2.524447243607384,
+    "mediana": 0.013442800007158102,
+    "min": 6.738310930434234e-08,
+    "n": 471566,
+    "non_finiti": 0,
+    "p99": 0.868099219375956
+   }
+  },
+  {
+   "archi": 471566,
+   "archi_vivi": 471566,
+   "decisa_prima": {
+    "max": 3.4922734950000827,
+    "mediana": 0.025158398556696694,
+    "min": 1.3423333926402826e-07,
+    "n": 471566,
+    "non_finiti": 0,
+    "p99": 1.2351490336937527
+   },
+   "fase": {
+    "archi": 471566,
+    "contributi_applicati": 12625,
+    "contributi_scartati": 458941,
+    "dir_laterale_z_max": 0.0,
+    "frazione_saturati_pi4": 0.0009224583621380676,
+    "max_archi_su_un_nodo": 90,
+    "nodi_con_piu_di_un_arco": 12442,
+    "nodi_primo_estremo": 12625,
+    "passo": 63,
+    "saturati_pi4": 435,
+    "shift_assoluto": {
+     "max": 0.7853981633974483,
+     "mediana": 0.004750585168785972,
+     "min": 2.1837693017483015e-10,
+     "n": 471566,
+     "non_finiti": 0,
+     "p99": 0.2141498137670008
+    },
+    "somma_moduli_applicati": 216.79930938098153,
+    "somma_moduli_scartati": 8573.139679749323
+   },
+   "frazione_saturi_decisa": 0.5731329230690931,
+   "frazione_saturi_vecchia": 0.41024798225486997,
+   "frazione_segno_cambia": 0.49529652265006385,
+   "passo": 63,
+   "passo_max": 0.019061389640637968,
+   "proj_simulatore_prima": {
+    "max": 2.450053876143116,
+    "mediana": 0.013447734565507588,
+    "min": 1.687062136388265e-08,
+    "n": 471566,
+    "non_finiti": 0,
+    "p99": 0.8354729013071766
+   },
+   "saturi_decisa": 270270,
+   "saturi_vecchia": 193459,
+   "segno_cambia": 233565,
+   "somma_segnata_dd0_decisa": -822.6904805528113,
+   "somma_segnata_dd0_vecchia": 20.77837809165409,
+   "vecchia_prima": {
+    "max": 2.450053876143116,
+    "mediana": 0.013447734565507588,
+    "min": 1.687062136388265e-08,
+    "n": 471566,
+    "non_finiti": 0,
+    "p99": 0.8354729013071766
+   }
+  },
+  {
+   "archi": 471566,
+   "archi_vivi": 471566,
+   "decisa_prima": {
+    "max": 3.469612965634338,
+    "mediana": 0.025202201211119137,
+    "min": 2.0584391386072074e-07,
+    "n": 471566,
+    "non_finiti": 0,
+    "p99": 1.217366944165728
+   },
+   "fase": {
+    "archi": 471566,
+    "contributi_applicati": 12625,
+    "contributi_scartati": 458941,
+    "dir_laterale_z_max": 0.0,
+    "frazione_saturati_pi4": 0.0009224583621380676,
+    "max_archi_su_un_nodo": 90,
+    "nodi_con_piu_di_un_arco": 12442,
+    "nodi_primo_estremo": 12625,
+    "passo": 64,
+    "saturati_pi4": 435,
+    "shift_assoluto": {
+     "max": 0.7853981633974483,
+     "mediana": 0.004768407342906072,
+     "min": 7.069829196399214e-10,
+     "n": 471566,
+     "non_finiti": 0,
+     "p99": 0.21457775410796465
+    },
+    "somma_moduli_applicati": 218.34642620494242,
+    "somma_moduli_scartati": 8575.060443357215
+   },
+   "frazione_saturi_decisa": 0.5737054834317996,
+   "frazione_saturi_vecchia": 0.4103243236365641,
+   "frazione_segno_cambia": 0.4953558992802704,
+   "passo": 64,
+   "passo_max": 0.01907219666243337,
+   "proj_simulatore_prima": {
+    "max": 2.431197817024028,
+    "mediana": 0.013492172999181587,
+    "min": 5.167642269827966e-09,
+    "n": 471566,
+    "non_finiti": 0,
+    "p99": 0.8213430846434112
+   },
+   "saturi_decisa": 270540,
+   "saturi_vecchia": 193495,
+   "segno_cambia": 233593,
+   "somma_segnata_dd0_decisa": -819.7688300687317,
+   "somma_segnata_dd0_vecchia": 20.955761368783687,
+   "vecchia_prima": {
+    "max": 2.431197817024028,
+    "mediana": 0.013492172999181587,
+    "min": 5.167642269827966e-09,
+    "n": 471566,
+    "non_finiti": 0,
+    "p99": 0.8213430846434112
+   }
+  },
+  {
+   "archi": 471567,
+   "archi_vivi": 471567,
+   "decisa_prima": {
+    "max": 3.355170217770496,
+    "mediana": 0.025099832702939324,
+    "min": 1.363103906149837e-07,
+    "n": 471567,
+    "non_finiti": 0,
+    "p99": 1.1666139619444564
+   },
+   "fase": {
+    "archi": 471567,
+    "contributi_applicati": 12626,
+    "contributi_scartati": 458941,
+    "dir_laterale_z_max": 0.0,
+    "frazione_saturati_pi4": 0.0009288181742997284,
+    "max_archi_su_un_nodo": 90,
+    "nodi_con_piu_di_un_arco": 12442,
+    "nodi_primo_estremo": 12626,
+    "passo": 65,
+    "saturati_pi4": 438,
+    "shift_assoluto": {
+     "max": 0.7853981633974483,
+     "mediana": 0.004722733455722398,
+     "min": 0.0,
+     "n": 471567,
+     "non_finiti": 0,
+     "p99": 0.21051789827846543
+    },
+    "somma_moduli_applicati": 213.56479380501835,
+    "somma_moduli_scartati": 8454.989986417726
+   },
+   "frazione_saturi_decisa": 0.5731232253317132,
+   "frazione_saturi_vecchia": 0.4090044468760537,
+   "frazione_segno_cambia": 0.4952254928780004,
+   "passo": 65,
+   "passo_max": 0.019089061309647572,
+   "proj_simulatore_prima": {
+    "max": 2.3502248125514167,
+    "mediana": 0.01343850182192504,
+    "min": 3.214438714163603e-08,
+    "n": 471567,
+    "non_finiti": 0,
+    "p99": 0.7870420982074298
+   },
+   "saturi_decisa": 270266,
+   "saturi_vecchia": 192873,
+   "segno_cambia": 233532,
+   "somma_segnata_dd0_decisa": -816.3219004703233,
+   "somma_segnata_dd0_vecchia": 21.469519511181915,
+   "vecchia_prima": {
+    "max": 2.3502248125514167,
+    "mediana": 0.01343850182192504,
+    "min": 3.214438714163603e-08,
+    "n": 471567,
+    "non_finiti": 0,
+    "p99": 0.7870420982074298
+   }
+  },
+  {
+   "archi": 471568,
+   "archi_vivi": 471568,
+   "decisa_prima": {
+    "max": 3.33527660680194,
+    "mediana": 0.025250895983196967,
+    "min": 2.130339411684662e-08,
+    "n": 471568,
+    "non_finiti": 0,
+    "p99": 1.1516925856904552
+   },
+   "fase": {
+    "archi": 471568,
+    "contributi_applicati": 12627,
+    "contributi_scartati": 458941,
+    "dir_laterale_z_max": 0.0,
+    "frazione_saturati_pi4": 0.0008970074305296373,
+    "max_archi_su_un_nodo": 90,
+    "nodi_con_piu_di_un_arco": 12442,
+    "nodi_primo_estremo": 12627,
+    "passo": 66,
+    "saturati_pi4": 423,
+    "shift_assoluto": {
+     "max": 0.7853981633974483,
+     "mediana": 0.004741231619101191,
+     "min": 0.0,
+     "n": 471568,
+     "non_finiti": 0,
+     "p99": 0.20989987607526542
+    },
+    "somma_moduli_applicati": 212.61387995896098,
+    "somma_moduli_scartati": 8454.590638157848
+   },
+   "frazione_saturi_decisa": 0.5746297458691005,
+   "frazione_saturi_vecchia": 0.4104307332134496,
+   "frazione_segno_cambia": 0.49528381908865743,
+   "passo": 66,
+   "passo_max": 0.01910181812217101,
+   "proj_simulatore_prima": {
+    "max": 2.340519261864143,
+    "mediana": 0.013538983886167177,
+    "min": 8.355096358693415e-09,
+    "n": 471568,
+    "non_finiti": 0,
+    "p99": 0.7766122324378798
+   },
+   "saturi_decisa": 270977,
+   "saturi_vecchia": 193546,
+   "segno_cambia": 233560,
+   "somma_segnata_dd0_decisa": -813.3572930963653,
+   "somma_segnata_dd0_vecchia": 21.753086234435663,
+   "vecchia_prima": {
+    "max": 2.340519261864143,
+    "mediana": 0.013538983886167177,
+    "min": 8.355096358693415e-09,
+    "n": 471568,
+    "non_finiti": 0,
+    "p99": 0.7766122324378798
+   }
+  },
+  {
+   "archi": 471568,
+   "archi_vivi": 471568,
+   "decisa_prima": {
+    "max": 3.2220597549512826,
+    "mediana": 0.025251563729581893,
+    "min": 1.4522557832394948e-07,
+    "n": 471568,
+    "non_finiti": 0,
+    "p99": 1.1068006299122017
+   },
+   "fase": {
+    "archi": 471568,
+    "contributi_applicati": 12627,
+    "contributi_scartati": 458941,
+    "dir_laterale_z_max": 0.0,
+    "frazione_saturati_pi4": 0.0008694398262816815,
+    "max_archi_su_un_nodo": 90,
+    "nodi_con_piu_di_un_arco": 12442,
+    "nodi_primo_estremo": 12627,
+    "passo": 67,
+    "saturati_pi4": 410,
+    "shift_assoluto": {
+     "max": 0.7853981633974483,
+     "mediana": 0.004692764642934258,
+     "min": 0.0,
+     "n": 471568,
+     "non_finiti": 0,
+     "p99": 0.20743090645306062
+    },
+    "somma_moduli_applicati": 208.45803036790417,
+    "somma_moduli_scartati": 8345.536761177216
+   },
+   "frazione_saturi_decisa": 0.5747739456451668,
+   "frazione_saturi_vecchia": 0.40980940182539954,
+   "frazione_segno_cambia": 0.49545770705391373,
+   "passo": 67,
+   "passo_max": 0.019116842566378415,
+   "proj_simulatore_prima": {
+    "max": 2.270253491255299,
+    "mediana": 0.013523709380355294,
+    "min": 1.0976830593090181e-07,
+    "n": 471568,
+    "non_finiti": 0,
+    "p99": 0.745809124403357
+   },
+   "saturi_decisa": 271045,
+   "saturi_vecchia": 193253,
+   "segno_cambia": 233642,
+   "somma_segnata_dd0_decisa": -808.3209231380333,
+   "somma_segnata_dd0_vecchia": 22.996949892931184,
+   "vecchia_prima": {
+    "max": 2.270253491255299,
+    "mediana": 0.013523709380355294,
+    "min": 1.0976830593090181e-07,
+    "n": 471568,
+    "non_finiti": 0,
+    "p99": 0.745809124403357
+   }
+  },
+  {
+   "archi": 471568,
+   "archi_vivi": 471568,
+   "decisa_prima": {
+    "max": 3.172367196640717,
+    "mediana": 0.02524618538877617,
+    "min": 8.211103840688508e-09,
+    "n": 471568,
+    "non_finiti": 0,
+    "p99": 1.08241221014321
+   },
+   "fase": {
+    "archi": 471568,
+    "contributi_applicati": 12627,
+    "contributi_scartati": 458941,
+    "dir_laterale_z_max": 0.0,
+    "frazione_saturati_pi4": 0.0008736809961659824,
+    "max_archi_su_un_nodo": 90,
+    "nodi_con_piu_di_un_arco": 12442,
+    "nodi_primo_estremo": 12627,
+    "passo": 68,
+    "saturati_pi4": 412,
+    "shift_assoluto": {
+     "max": 0.7853981633974483,
+     "mediana": 0.004714877979760668,
+     "min": 1.4483620261373635e-10,
+     "n": 471568,
+     "non_finiti": 0,
+     "p99": 0.20827628656593244
+    },
+    "somma_moduli_applicati": 209.77958991309126,
+    "somma_moduli_scartati": 8382.166556638897
+   },
+   "frazione_saturi_decisa": 0.5745406813015302,
+   "frazione_saturi_vecchia": 0.40940649068639096,
+   "frazione_segno_cambia": 0.4955785803956163,
+   "passo": 68,
+   "passo_max": 0.019128533086845673,
+   "proj_simulatore_prima": {
+    "max": 2.2441808765839872,
+    "mediana": 0.013536401051224306,
+    "min": 4.903424285314026e-09,
+    "n": 471568,
+    "non_finiti": 0,
+    "p99": 0.7294264262908288
+   },
+   "saturi_decisa": 270935,
+   "saturi_vecchia": 193063,
+   "segno_cambia": 233699,
+   "somma_segnata_dd0_decisa": -802.4054181911631,
+   "somma_segnata_dd0_vecchia": 23.127204334723046,
+   "vecchia_prima": {
+    "max": 2.2441808765839872,
+    "mediana": 0.013536401051224306,
+    "min": 4.903424285314026e-09,
+    "n": 471568,
+    "non_finiti": 0,
+    "p99": 0.7294264262908288
+   }
+  },
+  {
+   "archi": 471569,
+   "archi_vivi": 471569,
+   "decisa_prima": {
+    "max": 3.0557548172574194,
+    "mediana": 0.025239198652406685,
+    "min": 2.4581598626175094e-08,
+    "n": 471569,
+    "non_finiti": 0,
+    "p99": 1.0381565093662217
+   },
+   "fase": {
+    "archi": 471569,
+    "contributi_applicati": 12628,
+    "contributi_scartati": 458941,
+    "dir_laterale_z_max": 0.0,
+    "frazione_saturati_pi4": 0.000827026373658998,
+    "max_archi_su_un_nodo": 90,
+    "nodi_con_piu_di_un_arco": 12442,
+    "nodi_primo_estremo": 12628,
+    "passo": 69,
+    "saturati_pi4": 390,
+    "shift_assoluto": {
+     "max": 0.7853981633974483,
+     "mediana": 0.004662551958301876,
+     "min": 0.0,
+     "n": 471569,
+     "non_finiti": 0,
+     "p99": 0.20737891511001016
+    },
+    "somma_moduli_applicati": 208.1145502393029,
+    "somma_moduli_scartati": 8299.805991194778
+   },
+   "frazione_saturi_decisa": 0.5745034130742267,
+   "frazione_saturi_vecchia": 0.4088076188214238,
+   "frazione_segno_cambia": 0.4956347851533922,
+   "passo": 69,
+   "passo_max": 0.019146972915590095,
+   "proj_simulatore_prima": {
+    "max": 2.176851002230056,
+    "mediana": 0.013548259679868802,
+    "min": 9.166590030432187e-10,
+    "n": 471569,
+    "non_finiti": 0,
+    "p99": 0.7007574585184918
+   },
+   "saturi_decisa": 270918,
+   "saturi_vecchia": 192781,
+   "segno_cambia": 233726,
+   "somma_segnata_dd0_decisa": -794.6645145912917,
+   "somma_segnata_dd0_vecchia": 23.393937629489766,
+   "vecchia_prima": {
+    "max": 2.176851002230056,
+    "mediana": 0.013548259679868802,
+    "min": 9.166590030432187e-10,
+    "n": 471569,
+    "non_finiti": 0,
+    "p99": 0.7007574585184918
+   }
+  },
+  {
+   "archi": 471573,
+   "archi_vivi": 471573,
+   "decisa_prima": {
+    "max": 3.051562458195886,
+    "mediana": 0.025194871882067912,
+    "min": 5.562378013634863e-08,
+    "n": 471573,
+    "non_finiti": 0,
+    "p99": 1.0135596121290247
+   },
+   "fase": {
+    "archi": 471573,
+    "contributi_applicati": 12631,
+    "contributi_scartati": 458942,
+    "dir_laterale_z_max": 0.0,
+    "frazione_saturati_pi4": 0.0008694306077744061,
+    "max_archi_su_un_nodo": 90,
+    "nodi_con_piu_di_un_arco": 12442,
+    "nodi_primo_estremo": 12631,
+    "passo": 70,
+    "saturati_pi4": 410,
+    "shift_assoluto": {
+     "max": 0.7853981633974483,
+     "mediana": 0.004674007783068909,
+     "min": 0.0,
+     "n": 471573,
+     "non_finiti": 0,
+     "p99": 0.20969697180044386
+    },
+    "somma_moduli_applicati": 209.115273694853,
+    "somma_moduli_scartati": 8348.55369320821
+   },
+   "frazione_saturi_decisa": 0.5743204127462769,
+   "frazione_saturi_vecchia": 0.40826340778628123,
+   "frazione_segno_cambia": 0.49565814836727295,
+   "passo": 70,
+   "passo_max": 0.019160243627667748,
+   "proj_simulatore_prima": {
+    "max": 2.14631264107006,
+    "mediana": 0.013554499702456292,
+    "min": 3.232986172958113e-08,
+    "n": 471573,
+    "non_finiti": 0,
+    "p99": 0.6831820577550128
+   },
+   "saturi_decisa": 270834,
+   "saturi_vecchia": 192526,
+   "segno_cambia": 233739,
+   "somma_segnata_dd0_decisa": -786.9670144814345,
+   "somma_segnata_dd0_vecchia": 23.666144218180733,
+   "vecchia_prima": {
+    "max": 2.14631264107006,
+    "mediana": 0.013554499702456292,
+    "min": 3.232986172958113e-08,
+    "n": 471573,
+    "non_finiti": 0,
+    "p99": 0.6831820577550128
+   }
+  },
+  {
+   "archi": 471574,
+   "archi_vivi": 471574,
+   "decisa_prima": {
+    "max": 2.9875517410530774,
+    "mediana": 0.025140981671117967,
+    "min": 4.4674814009167916e-08,
+    "n": 471574,
+    "non_finiti": 0,
+    "p99": 0.9702691027360242
+   },
+   "fase": {
+    "archi": 471574,
+    "contributi_applicati": 12632,
+    "contributi_scartati": 458942,
+    "dir_laterale_z_max": 0.0,
+    "frazione_saturati_pi4": 0.0008567054163291445,
+    "max_archi_su_un_nodo": 90,
+    "nodi_con_piu_di_un_arco": 12442,
+    "nodi_primo_estremo": 12632,
+    "passo": 71,
+    "saturati_pi4": 404,
+    "shift_assoluto": {
+     "max": 0.7853981633974483,
+     "mediana": 0.004623161525518681,
+     "min": 0.0,
+     "n": 471574,
+     "non_finiti": 0,
+     "p99": 0.20870248284035522
+    },
+    "somma_moduli_applicati": 208.91981989749502,
+    "somma_moduli_scartati": 8278.002605141526
+   },
+   "frazione_saturi_decisa": 0.5736278929711985,
+   "frazione_saturi_vecchia": 0.4074185599714997,
+   "frazione_segno_cambia": 0.495663458969324,
+   "passo": 71,
+   "passo_max": 0.01917758798421945,
+   "proj_simulatore_prima": {
+    "max": 2.072524806672106,
+    "mediana": 0.013529743605143281,
+    "min": 5.9189110090062357e-08,
+    "n": 471574,
+    "non_finiti": 0,
+    "p99": 0.6550907494582259
+   },
+   "saturi_decisa": 270508,
+   "saturi_vecchia": 192128,
+   "segno_cambia": 233742,
+   "somma_segnata_dd0_decisa": -780.0615790364617,
+   "somma_segnata_dd0_vecchia": 25.116825079593852,
+   "vecchia_prima": {
+    "max": 2.072524806672106,
+    "mediana": 0.013529743605143281,
+    "min": 5.9189110090062357e-08,
+    "n": 471574,
+    "non_finiti": 0,
+    "p99": 0.6550907494582259
+   }
+  },
+  {
+   "archi": 471575,
+   "archi_vivi": 471575,
+   "decisa_prima": {
+    "max": 2.980521185953482,
+    "mediana": 0.0251406924672995,
+    "min": 1.0347222958376222e-07,
+    "n": 471575,
+    "non_finiti": 0,
+    "p99": 0.9482544379762826
+   },
+   "fase": {
+    "archi": 471575,
+    "contributi_applicati": 12633,
+    "contributi_scartati": 458942,
+    "dir_laterale_z_max": 0.0,
+    "frazione_saturati_pi4": 0.0009351640778243121,
+    "max_archi_su_un_nodo": 90,
+    "nodi_con_piu_di_un_arco": 12442,
+    "nodi_primo_estremo": 12633,
+    "passo": 72,
+    "saturati_pi4": 441,
+    "shift_assoluto": {
+     "max": 0.7853981633974483,
+     "mediana": 0.004636058911512683,
+     "min": 0.0,
+     "n": 471575,
+     "non_finiti": 0,
+     "p99": 0.21093502445861023
+    },
+    "somma_moduli_applicati": 212.90798064797332,
+    "somma_moduli_scartati": 8326.37947899477
+   },
+   "frazione_saturi_decisa": 0.5734273445369241,
+   "frazione_saturi_vecchia": 0.40733499443354715,
+   "frazione_segno_cambia": 0.4957557122408949,
+   "passo": 72,
+   "passo_max": 0.019192619295011048,
+   "proj_simulatore_prima": {
+    "max": 2.038233865245739,
+    "mediana": 0.01354981887783537,
+    "min": 7.535688305778938e-08,
+    "n": 471575,
+    "non_finiti": 0,
+    "p99": 0.6400180947166798
+   },
+   "saturi_decisa": 270414,
+   "saturi_vecchia": 192089,
+   "segno_cambia": 233786,
+   "somma_segnata_dd0_decisa": -774.1790060979797,
+   "somma_segnata_dd0_vecchia": 25.671735762555876,
+   "vecchia_prima": {
+    "max": 2.038233865245739,
+    "mediana": 0.01354981887783537,
+    "min": 7.535688305778938e-08,
+    "n": 471575,
+    "non_finiti": 0,
+    "p99": 0.6400180947166798
+   }
+  }
+ ],
+ "piattaforma": {
+  "macchina": "AMD64",
+  "numpy": "2.3.0",
+  "python": "3.13.2",
+  "sistema": "Windows 11"
+ },
+ "scena": {
+  "archi_finali": 471575,
+  "n_finale": 12812,
+  "nmasse": 3,
+  "sep": 6.1158
+ },
+ "timbro_strumento": {
+  "blob_head": "422d92a68ec3e1606031b7d7b69033afc940d648",
+  "dirty": false,
+  "path": "C:\\Users\\lpeano\\soliton_simulator\\csv\\_test_fork\\_mem_hebb_verso.py",
+  "repo": "C:/Users/lpeano/soliton_simulator",
+  "sha1": "4f75afd8fbec10f6b23b2f40c845ae33e96ce3bd",
+  "tracciato": true
+ }
+}

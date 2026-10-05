@@ -1,0 +1,111 @@
+========================================================================================================
+MEM-HEBB-VERSO passo (1): LA FORMA DI `proj` E IL SITO DELLA FASE, A LATO
+========================================================================================================
+
+### E' UNA MISURA, NON UNA CURA: nessun PASSA/FALLISCE fuori dai controlli.
+
+  python     3.13.2
+  numpy      2.3.0
+  sistema    Windows 11
+  macchina   AMD64
+  simulatore e2940b3c  (sha1 dei byte grezzi, NON toccato)
+  copia patchata: _sim_mem_hebb.py  blob 7a12c21b  (3 ancore)
+
+====================================================================================================
+LA CONFIGURAZIONE INTERA (`P5`) -- non i flag toccati, TUTTI
+====================================================================================================
+  booleani di modulo confrontati con l'argv del DRIVER: 81
+  -> IN CONFIGURAZIONE DEL DRIVER: nessuna differenza. ZERO su 81.
+
+--------------------------------------------------------------------------------------------------------
+(c) IL CENSIMENTO DALL'AST: il sito (2) gira nella configurazione del driver?
+--------------------------------------------------------------------------------------------------------
+  siti il cui `if` nomina MEM_MOTO o MEM_MOTO_TUTTO: 3
+      riga 9130   test su MEM_MOTO_TUTTO
+      riga 9160   test su MEM_MOTO, MEM_MOTO_TUTTO
+      riga 9524   test su MEM_MOTO_TUTTO
+  MEM_HEBB           True
+  MEM_MOTO           True
+  MEM_MOTO_TUTTO     True
+  SCALA_MIN_PASSO    True
+  SCALA_MIN          False
+  TRACCIA_D0         False
+  K_FRANGE           0.0
+  ### IL SITO (2) GIRA DAVVERO: True   (serve MEM_HEBB e MEM_MOTO_TUTTO)
+  ### E `SCALA_MIN_PASSO` = True: con acceso, `_sd0` e' un PASSANTE (`:6754`),
+      quindi Delta d0 E' il `proj` post-taglio. NON chiamo `_sd0`: incrementerebbe
+      un contatore del simulatore, e una misura non muove cio' che misura.
+  scena: nmasse=3 sep=6.1158  ->  n = 12802, archi = 471564
+
+========================================================================================================
+IL RUN: 150 passi, col BATTITO per passo
+========================================================================================================
+  passi girati: 150   n finale = 14000, archi = 473022
+  passi con il sito di `d0` registrato: 150
+  passi con il sito della FASE registrato: 150
+
+========================================================================================================
+(a) `d0`: LA FORMA VECCHIA CONTRO LA FORMA DECISA
+========================================================================================================
+  passi registrati: 150   archi-passo: 70773112
+  ### E IL NUMERO SI DICHIARA: zero archi NON e' un'identita'.
+
+  distribuzione di |proj| PRIMA del taglio, aggregata sui passi
+  forma        min dei min    mediana        mediana p99    max dei max   
+  simulatore   1.228618e-10   1.362128e-02   5.627217e-01   7.560672e+00  
+  vecchia      1.228618e-10   1.362128e-02   5.627217e-01   7.560672e+00  
+  decisa       2.686973e-11   2.523785e-02   8.337671e-01   8.223917e+00  
+
+  il taglio passo_max = 0.01*mediana(d0):  da 1.876524e-02 a 2.122035e-02
+  archi SATURI (|proj| > passo_max PRIMA del taglio)
+      forma vecchia      28058416 su 70773112   frazione 0.396456
+      forma decisa       39123833 su 70773112   frazione 0.552806
+
+  il SEGNO cambia fra le due forme: 35161140 su 70773112 archi VIVI   frazione 0.496815
+      (<<vivi>> = entrambe non nulle: lo zero non ha segno, e contarlo come
+       cambio gonfierebbe il numero)
+
+  somma CON SEGNO di Delta d0, su tutti i passi
+      forma vecchia  +6.658240e+03
+      forma decisa   -9.222086e+04
+
+========================================================================================================
+(b) LA FASE: <<l'ultimo vince>>, il taglio pi/4 e l'asse z
+========================================================================================================
+  passi col sito registrato: 150   archi-passo: 70773112
+  nodi con PIU' DI UN ARCO come primo estremo: da 12442 a 12443 per passo
+  il massimo di archi su UN solo nodo: 90
+
+  CONTRIBUTI SCARTATI da <<l'ultimo vince>>
+      scartati       68847776   applicati      1925336   frazione scartati 0.972796
+      somma dei MODULI:  scartati 1.251450e+06   applicati 3.453103e+04
+      rapporto scartati/applicati: 36.241307
+
+  |shift|: mediana delle mediane 4.262912e-03   max dei max 7.853982e-01
+  saturati dal taglio pi/4 (0.785398): 79581 su 70773112   frazione 0.001124
+
+  la terza componente di `dir_laterale`, in modulo massimo: 0.000000e+00
+      ### E' ZERO PER COSTRUZIONE (`np.zeros_like`), e il numero lo conferma:
+          la direzione trasversale sta SEMPRE nel piano xy del LABORATORIO,
+          mentre i nodi stanno in 3D. E' `FASE-TRASCINAMENTO-3D`.
+
+========================================================================================================
+I TRE CONTROLLI CHE POSSONO FALLIRE
+========================================================================================================
+  C1  la mia forma VECCHIA post-taglio contro il `proj` del simulatore, AL BIT
+      confronti 150   con DIFFERENZE 0   archi confrontati 70773112   max scarto 0.000e+00
+
+  C2  traslazione rigida (`mem_mot` = il vettore del nodo di norma MASSIMA)
+      confronti 150   la DECISA non e' zero in 0   max|decisa| 0.000e+00
+      IL POSITIVO: la VECCHIA e' zero in 0   il MINIMO dei suoi max 4.315382
+
+  C3  scambio i<->j su TUTTI gli archi
+      la DECISA differisce in 0   max scarto 0.000e+00
+      la VECCHIA non e' opposta in 0   max|v(i,j)+v(j,i)| 0.000e+00
+
+  ### I TRE CONTROLLI PASSANO: la forma vecchia coincide AL BIT col simulatore
+      su 70773112 archi, la decisa e' ZERO ESATTO sotto traslazione rigida mentre la
+      vecchia NON lo e', e sotto scambio i<->j la decisa e' identica al bit
+      mentre la vecchia cambia segno ESATTAMENTE.
+========================================================================================================
+scritto: C:\Users\lpeano\soliton_simulator\csv\_test_fork\_mem_hebb_verso\_mem_hebb_verso.json

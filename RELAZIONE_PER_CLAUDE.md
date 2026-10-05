@@ -5025,3 +5025,116 @@ laboratorio va in `FASE-TRASCINAMENTO-3D`.
 ### ⚠ **E `blocca_run_base` di `MEM-HEBB-VERSO` RESTA `DA-DECIDERE`:** la decisione
 di Luca riguarda ### **la FORMA della cura**, non il blocco del run base,
 ### **e non la estendo io.**
+
+## 2026-10-05 — **`MEM-HEBB-VERSO` passo (1), IL REFERTO: i tre controlli passano,
+## `C1` AL BIT su 70 773 112 archi**
+
+Referto: `doc/REFERTO_mem_hebb_verso_2026-10-05.md`. Strumento `4f75afd8`, blob
+`e2940b3c`, corse a **`72`** e **`150`** passi, seme `11`,
+configurazione **`81`** booleani con ### **`ZERO` differenze dal driver**.
+
+### ✅ **I TRE CONTROLLI, e `C1` era il piu' esposto**
+
+| | |
+|---|--:|
+| `C1` con **differenze** | ### **`0`** su `150`, max scarto `0.000e+00` |
+| `C2` la **decisa** non e' zero in | ### **`0`** |
+| `C2` ### **IL POSITIVO:** la **vecchia** e' zero in | `0`, minimo dei suoi max `4.3154` |
+| `C3` la **decisa** differisce in | ### **`0`** |
+| `C3` la **vecchia** non e' opposta in | ### **`0`** |
+
+### **`C1` pretendeva l'identita' AL BIT, e l'ho ottenuta su `70 773 112
+### archi**: la forma vecchia che ricalcolo a lato ### **non e' una mia versione della
+legge, E' la legge.** ### **Lo avevo dichiarato come il controllo piu' esposto** --
+`np.sum` su un prodotto dipende dall'ordine delle somme -- ### **e non e' stato
+necessario ammorbidirlo.**
+
+### ⛔ **IL RISULTATO PRINCIPALE, e lo chiamo cosi' perche' lo avevo deciso PRIMA di
+### vedere il numero: IL TAGLIO MORDE SU META' DEGLI ARCHI**
+
+Nel task history, sul **gradino (b)** della stella polare, avevo scritto: *<<se la
+frazione di saturi e' alta, il referto deve dirlo come RISULTATO PRINCIPALE, non come
+nota>>*.
+
+| frazione di archi **SATURI** al taglio `0.01*mediana(d0)` | |
+|---|--:|
+| forma **vecchia** | ### **`0.396456`** |
+| forma **decisa** | ### **`0.552806`** |
+
+### **NON e' `~1`** — quindi il gradino (b) ### **non e' fallito**, la legge non e'
+invisibile dietro il taglio. ### ⛔ **Ma non e' nemmeno piccolo:** su circa meta' degli
+archi-passo ### **cio' che `d0` riceve e' `+/- passo_max`, cioe' il TAGLIO e non la
+legge** — e li' cambiare la **forma** di `proj` cambia **solo il segno**.
+
+### ⚠ **E LA FORMA DECISA SATURA PIU' DELLA VECCHIA**, perche' la mediana di
+`abs(proj)` passa da `1.362e-02` a `2.524e-02`,
+circa il doppio. ### **Non e' un'obiezione alla decisione** -- che poggia sulle
+simmetrie, e quelle sono **verificate** -- ### **ma la cura arriverebbe in un regime
+dove il taglio morde di piu', e va saputo PRIMA.**
+
+### ⛔ **E LA SOMMA CON SEGNO DI `Delta d0` CAMBIA SEGNO**
+
+| | |
+|---|--:|
+| forma **vecchia** | `6.6582e+03` |
+| forma **decisa** | ### **`-9.2221e+04`** |
+
+Circa ### **13.9 volte** in modulo, e di segno ### **opposto.** In parole: con la forma
+di oggi le lunghezze di riposo nel complesso **crescono**, con la decisa **calano**.
+### ⚠ **Non dice quale sia giusta** -- la forma e' stata decisa sulle **simmetrie**,
+non sul bilancio -- ### **ma dice che la cura NON e' cosmetica: cambia il bilancio di
+`d0` di un ordine di grandezza.**
+
+### ⛔ **IL SITO DELLA FASE SCARTA IL `97.3%` DI CIO' CHE CALCOLA**
+
+| | |
+|---|--:|
+| contributi **scartati** / **applicati** | `68 847 776` / `1 925 336` |
+| ### **rapporto dei MODULI** scartati/applicati | ### **`36.24`** |
+| un nodo e' primo estremo di **fino a** | `90` archi |
+| il taglio `pi/4`, invece, morde su | **`0.001124`** |
+
+> ### **Per ogni unita' di spostamento di fase applicata, `36.2` vengono
+> ### buttate.**
+> E questo ### **risponde alla domanda 5 della stella polare come l'avevo posta io
+> stesso prima di misurare:** avevo scritto che un rapporto molto grande vorrebbe dire
+> che ### **cio' che il sito fa oggi NON E' la legge che il commento descrive, ed e' un
+> ### ARTEFATTO DELL'ORDINE.** ### **Il rapporto e' `36.2`.**
+
+### 📌 **E IL CONFRONTO FRA I DUE SITI E' LA COSA PIU' UTILE CHE QUESTA MISURA DICE:**
+nel sito di `d0` il distorsore e' ### **il TAGLIO**; nel sito della fase il taglio tocca
+il `0.0011` e il distorsore e' ### **<<l'ultimo
+vince>>** *(`0.9728`)*. ### **Due siti, due cause diverse,
+e nessuna delle due e' quella che il commento del codice racconta.**
+
+### ✅ **E L'ASSE `z`: CONFERMATO SU 70 773 112 ARCHI-PASSO**
+
+La terza componente di `dir_laterale` ha modulo massimo ### **`0.0e+00`**, zero esatto. ### **E' `np.zeros_like` per
+costruzione, quindi il numero non SCOPRE il difetto: lo CONFERMA**, e chiude la domanda
+*<<succede davvero, o e' un ramo morto?>>*. ### **Succede sempre.** E' la voce
+`FASE-TRASCINAMENTO-3D`, e ### **la cura e' legge nuova: non si scrive adesso.**
+
+### ✅ **(c) IL SITO GIRA DAVVERO:** `MEM_HEBB`, `MEM_MOTO` e `MEM_MOTO_TUTTO` sono
+tutti `True`. ### **Senza questa riga, tutti i numeri di sopra potrebbero essere quelli
+di un ramo morto.**
+
+### ⚠ **UN DIFETTO DEL MIO STRUMENTO, dichiarato nel referto:** il censimento AST
+gira sulla ### **COPIA PATCHATA**, quindi le sue righe *(`9130`, `9160`, `9524`)* sono
+### **della copia e non del blob**; sul blob sono `9129`, `9154`, `9518`,
+### **verificate riga per riga.** ### **E' lo stesso errore che il par.2 vieta -- i
+numeri di riga di un blob diverso -- commesso dal mio strumento su se stesso.**
+
+### **E DUE COSE CHE NON HO FATTO, apposta**
+
+1. ### **non ho chiamato `_sd0`** per verificare che `Delta d0` sia il `proj`:
+   ### **lo avrei fatto incrementare un contatore.** Ho letto `SCALA_MIN_PASSO` dal
+   modulo *(`True`)* e dichiarato la conseguenza *(`:6754-6756`: e' un passante)*:
+   ### **una misura non muove cio' che misura.**
+2. ### **non ho concluso che le due forme sono SCORRELATE** perche' il segno cambia nel
+   `0.497`: una frazione vicina a `0.5` ### **e'
+   compatibile anche con una correlazione che non ho misurato.**
+
+### ⛔ **CHE COSA RESTA A LUCA:** ### **il `0.01` del taglio e' un numero SCELTO**, e
+con una frazione di saturi del `0.40`-`0.55` ### **diventa un candidato per `A11` e
+`CLIP-INVENTARIO`.** ### **Non lo tocco** *(non e' in questo mandato)*, ma il numero
+ora c'e'.
