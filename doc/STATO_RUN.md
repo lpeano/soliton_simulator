@@ -2089,6 +2089,46 @@ mettono **in coda**)*.
 
 ## `GRAVITA-POTENZIALE` — **due potenziali nel codice, e Poisson e' un VINCOLO DI SCALA**
 
+> ### ⛔ **ANNOTAZIONE DEL 2026-10-06: I BARICENTRI DELLE TRE MASSE SI AVVICINANO DEL
+> `17`-`24 %` IN `1000` PASSI.** Numeri ### **riletti da me** dai `json` committati in
+> `6cfcc4e`, non ricopiati.
+>
+> | passo | media delle tre distanze, `_AMP = 0` | `_AMP = 0.3` |
+> |--:|--:|--:|
+> | `1` | `10.6024` | `10.6024` |
+> | `200` | `10.6107` | `10.6107` |
+> | `300` | ### **`10.6150`** | ### **`10.6150`** |
+> | `500` | `10.1923` | `10.2112` |
+> | `700` | `9.4734` | `9.5459` |
+> | `1000` | ### **`8.4043`** | ### **`8.5679`** |
+> | | ### **`-20.7 %`** | ### **`-19.2 %`** |
+>
+> ### ✔ **DUE COSE CHE AGGIUNGO alla lettura del guardiano:**
+> `(1)` ### **la contrazione NON comincia subito** — al passo `300` la media e'
+> ### **`10.6150`, cioe' PIU' GRANDE che al passo `1`**, e scende solo fra il `300` e il
+> `500`; `(2)` e' ### **quasi identica nei due bracci** *(`-20.7 %` contro `-19.2 %`)*
+> ### **NONOSTANTE SEI VOLTE LE NASCITE** *(`565` divisioni contro `3496`)*, quindi
+> ### **non scala col numero di nascite.**
+>
+> ### ⛔ **E' LA RISPOSTA GREZZA ALLA PRIMA DELLE TRE PROVE DI LUCA** *(«due masse si
+> avvicinano?»)*, ### **E NON E' GRAVITA' EMERGENTE** finche' non si escludono TRE
+> spiegazioni:
+>
+> | | la spiegazione | che cosa servirebbe | stato |
+> |---|---|---|---|
+> | `(a)` | la legge di gravita' ### **ESPLICITA** `GRAV_BIFASE` | un braccio con la legge ### **SPENTA** | ### ⛔ **e' ATTIVA**, e lo ho verificato: `True` come ### **default di modulo** *(`:3254`)*, e ### **NON compare nell'argv del driver** — gira ### **senza che nessun flag la accenda** |
+> | `(b)` | una ### **contrazione GLOBALE** della rete | un ### **riferimento di scala** *(lunghezza media degli archi nel vuoto, raggio del vuoto)* registrato ### **insieme** | ### ⛔ **NON VERIFICABILE con questi dati:** verificato che ### **nessuna scala e' registrata nei due `json`** |
+> | `(c)` | la ### **dispersione dei nodi delle coorti**, che sposta i baricentri a masse ferme | la dispersione, registrata insieme | ### ⛔ **nemmeno questa e' registrata** |
+>
+> ### ⚠ **E LA `(b)` E' LA PIU' INSIDIOSA:** se la rete si contraesse ### **tutta**, i
+> baricentri si avvicinerebbero ### **senza nessuna gravita'**, e il `-20 %` sarebbe
+> ### **un cambio di unita' di misura.** ### **Senza una scala registrata non si puo'
+> distinguere**, e questo e' il motivo per cui NON chiamo il numero un risultato.
+>
+> ### ⛔ **NESSUNA MISURA ADESSO: la gravita' e' IN CODA per decisione di Luca**, e
+> questo e' ### **un riscontro arrivato da una misura fatta per ALTRO** *(il `0.3` a zero)*,
+> ### **non un'indagine.**
+
 *(APERTA il 2026-10-05 per **decisione di Luca**, **da curare DOPO**. ### **Direzione
 discussa, NON decisa.**)*
 

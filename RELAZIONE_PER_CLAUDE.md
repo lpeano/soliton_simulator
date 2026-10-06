@@ -7056,3 +7056,37 @@ basculamento chirale ### **si decidono su questi numeri, e sono decisioni di Luc
 
 > ### ⚠ **Un seme solo**, quindi ### **nessuna barra d'errore fra semi** e `P3` ne chiederebbe
 > ### **almeno quattro.** Il gradino raggiunto e' ### **`(b)`**, non `(a)` ne' `(c)`.
+
+---
+
+## 2026-10-06 — **LAVORO 1: i baricentri delle tre masse si avvicinano del `17`-`24 %`, e NON e' gravita' emergente**
+
+*(Decisione di Luca sul referto `27c10bd`. ### **Nessuna indagine, nessuna misura nuova:** i
+numeri li ho ### **riletti io** dai `json` committati in `6cfcc4e`.)*
+
+| passo | media delle tre distanze, `_AMP = 0` | `_AMP = 0.3` |
+|--:|--:|--:|
+| `1` | `10.6024` | `10.6024` |
+| `300` | ### **`10.6150`** | ### **`10.6150`** |
+| `1000` | ### **`8.4043`** | ### **`8.5679`** |
+| | ### **`-20.7 %`** | ### **`-19.2 %`** |
+
+**Due cose che aggiungo alla lettura del guardiano:** ### **la contrazione non comincia
+subito** — al passo `300` la media e' ### **piu' grande che al passo `1`**, e scende solo fra
+il `300` e il `500`; ed e' ### **quasi identica nei due bracci nonostante SEI VOLTE le
+nascite**, quindi ### **non scala col numero di nascite.**
+
+> ### ⛔ **E' LA RISPOSTA GREZZA ALLA PRIMA DELLE TRE PROVE, E NON E' GRAVITA' EMERGENTE.** Tre
+> spiegazioni da escludere, e ### **due non sono nemmeno verificabili con questi dati:**
+>
+> `(a)` ### **`GRAV_BIFASE` E' ATTIVA**, e l'ho verificato: `True` come ### **default di
+> modulo** *(`:3254`)*, e ### **non compare nell'argv del driver** — gira senza che nessun
+> flag la accenda. Serve un braccio con la legge ### **spenta.**
+> `(b)` una ### **contrazione GLOBALE** della rete: ### **nessuna scala e' registrata nei due
+> `json`**, quindi ### **non e' verificabile.** ### **E' la piu' insidiosa:** se la rete si
+> contraesse tutta, i baricentri si avvicinerebbero ### **senza nessuna gravita'**, e il
+> `-20 %` sarebbe ### **un cambio di unita' di misura.**
+> `(c)` la ### **dispersione dei nodi delle coorti**, che sposta i baricentri ### **a masse
+> ferme**: nemmeno questa e' registrata.
+
+**Nessuna misura adesso: la gravita' e' in coda per decisione di Luca.**
