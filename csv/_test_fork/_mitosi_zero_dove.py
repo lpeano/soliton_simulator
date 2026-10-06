@@ -201,7 +201,13 @@ class Misura(LUNGA.Misura):
                           "spinta_pi_esatto": 0})
 
     def _azzera_passo(self):
-        self.p = {"cambi_geom": 0, "cambi_chi_tors": 0, "cambi_perc_chi": 0,
+        # ### ⛔ **`cambi_chi_tors` NASCE `None`, e NON `0`** *(`CHI-TORS-ZERO-FALSO`,
+        #   curato il 2026-10-06 su decisione di Luca)*. ### **Il valore di partenza e' la
+        #   risposta onesta quando il gancio non ha potuto misurare: <<non lo so>>.**
+        #   ### ⚠ **Prima nasceva `0`**, e in `392` passi su `1000` *(braccio zero)* e
+        #   ### **`731` su `1000`** *(acceso)* quello `0` ### **non era <<zero cambi>>: era
+        #   <<non misurato>>** -- e la correlazione del criterio del dipolo ci cadeva dentro.
+        self.p = {"cambi_geom": 0, "cambi_chi_tors": None, "cambi_perc_chi": 0,
                   "chi_tors_non_confrontabile": 0,
                   "spinta_pi_fase": 0, "spinta_pi_dip": 0,
                   "spinta_pi_entrambe": 0, "spinta_pi_tot": 0, "spinta_pi_esatto": 0,
@@ -318,9 +324,22 @@ class Misura(LUNGA.Misura):
             #   e il contatore dice QUANTE volte e' successo invece di inventare uno zero.
             self.p["chi_tors_non_confrontabile"] = 1
             self.cont["chi_tors_non_confrontabili"] += 1
+            # ### ✔ **SI SCRIVE `None` ESPLICITAMENTE, invece di contare sul reset di
+            #   `chiudi`.** Il collaudo me l'ha mostrato: senza questa riga il valore restava
+            #   ### **quello del passo PRIMA**, e in un ciclo dove `chiudi` non venisse
+            #   chiamato -- o dove il gancio girasse due volte -- sarebbe ### **un valore
+            #   VECCHIO presentato come quello di questo passo.** ### **Togliere una
+            #   dipendenza e' meglio che fidarsi che sia rispettata.**
+            self.p["cambi_chi_tors"] = None
+            # ### ⛔ **E `cambi_chi_tors` RESTA `None`: NON MISURATO.** ### **Non si
+            #   scrive `0`**, perche' uno zero qui sarebbe ### **indistinguibile da una
+            #   misura** -- ed e' esattamente il difetto `CHI-TORS-ZERO-FALSO`.
             return
         camb = np.where(pr != a)[0]
-        self.p["cambi_chi_tors"] += int(camb.size)
+        # ### OKX **ASSEGNA, non accumula:** il gancio gira ### **una volta per passo**, e
+        #   un `+=` su `None` solleverebbe. ### **L'assegnazione e' anche piu' onesta:** dice
+        #   *<<questo passo vale `k`>>* invece di *<<aggiungi `k` a quello che c'era>>*.
+        self.p["cambi_chi_tors"] = int(camb.size)
         self.cont["cambi_chi_tors_tot"] += int(camb.size)
         self._dove(net, camb, "chi_tors")
 
@@ -598,11 +617,15 @@ def main(argv):
                 m.piena_dove(N)
             u = m.passi[-1]
             print("[battito] passo %d/%d  n=%d archi=%d  div=%d sch=%d  |tw| q50=%.4f  "
-                  "sopra4pi=%d  chiT=%d  pi:f=%d d=%d e=%d  nodi=%s"
+                  "sopra4pi=%d  chiT=%s  pi:f=%d d=%d e=%d  nodi=%s"
                   % (k, passi, u["n"], u["archi"], m.cont["nati_div_tot"],
                      m.cont["nati_sch_tot"],
                      (u.get("q_tw") or {}).get("q050", float("nan")),
-                     u.get("sopra_4pi", -1), u.get("cambi_chi_tors", -1),
+                     u.get("sopra_4pi", -1),
+                     # ### ⛔ **<<n/m>> e NON `-1`:** un numero di ripiego si confonde
+                     #   con una misura, una parola no.
+                     ("n/m" if u.get("cambi_chi_tors") is None
+                      else u["cambi_chi_tors"]),
                      u.get("spinta_pi_fase", -1), u.get("spinta_pi_dip", -1),
                      u.get("spinta_pi_entrambe", -1),
                      u.get("nodi_per_classe")), flush=True)
@@ -785,8 +808,15 @@ def collaudo():
     m7.passo = 1
     m7.chi_tors(net, np.array([1.0, 1.0, -1.0, -1.0, 1.0, 1.0]))
     prova("chi_tors: ### al PRIMO passo NON confronta, e lo DICE invece di dire zero",
-          m7.p["chi_tors_non_confrontabile"] == 1 and m7.p["cambi_chi_tors"] == 0,
-          "non confrontabili: %d" % m7.cont["chi_tors_non_confrontabili"])
+          m7.p["chi_tors_non_confrontabile"] == 1
+          and m7.p["cambi_chi_tors"] is None,
+          "non confrontabili: %d, valore %r"
+          % (m7.cont["chi_tors_non_confrontabili"], m7.p["cambi_chi_tors"]))
+    # ### STOPX **LA CURA DI `CHI-TORS-ZERO-FALSO`** *(2026-10-06, decisione di Luca)*: dove
+    #   il gancio ### **non ha potuto misurare** il contatore vale ### **`None`**, non `0`.
+    prova("chi_tors: ### CURA -- dove non misura il contatore e' `None`, NON `0`",
+          m7.p["cambi_chi_tors"] is None and m7.p["cambi_chi_tors"] != 0,
+          "%r" % m7.p["cambi_chi_tors"])
     m7.passo = 2
     m7.chi_tors(net, np.array([1.0, -1.0, -1.0, 1.0, 1.0, 1.0]))
     prova("chi_tors: ### DEVE ACCENDERSI -- al secondo passo conta i DUE che sono cambiati",
@@ -796,11 +826,40 @@ def collaudo():
     m7.chi_tors(net, np.array([1.0, -1.0, -1.0, 1.0, 1.0, 1.0]))
     prova("chi_tors: ### DEVE TACERE -- se `chi_torsione` non cambia, ZERO",
           m7.p["cambi_chi_tors"] == 0, "%d" % m7.p["cambi_chi_tors"])
+    # ### IL CASO COSTRUITO: la LUNGHEZZA cambia, come quando NASCONO NODI.
     m7.passo = 4
     m7.chi_tors(net, np.array([1.0, -1.0, -1.0]))
     prova("chi_tors: ### e se la LUNGHEZZA cambia non confronta, e lo conta",
           m7.cont["chi_tors_non_confrontabili"] == 2,
           "%d" % m7.cont["chi_tors_non_confrontabili"])
+    prova("chi_tors: ### e in quel passo il contatore e' `None`, non `0`",
+          m7.p["cambi_chi_tors"] is None, "%r" % m7.p["cambi_chi_tors"])
+    # ### ⛔ **IL CASO CHE DEVE FALLIRE CON LA FORMA VECCHIA.** La forma vecchia lasciava
+    #   `0`; il controllo qui sotto ### **distingue `0` da `None`**, quindi ### **con la
+    #   forma vecchia FALLIREBBE.** ### **Lo si prova DAVVERO**, ricostruendo la forma
+    #   vecchia a mano invece di affermare che fallirebbe.
+    def _vecchia(mm):
+        """La forma VECCHIA: dove non misura, lascia `0`."""
+        mm.p["cambi_chi_tors"] = 0
+        return mm.p["cambi_chi_tors"] is None
+
+    m8 = Misura(0.01, 0.3)
+    m8.r_regione, m8.u_bordo, m8.coorti = 2.0, 1.5, m.coorti
+    m8.passo = 1
+    m8.chi_tors(net, np.array([1.0, 1.0, -1.0, -1.0, 1.0, 1.0]))
+    prova("chi_tors: ### DEVE FALLIRE CON LA FORMA VECCHIA -- con `0` il controllo NON passa",
+          _vecchia(m8) is False and m8.p["cambi_chi_tors"] == 0,
+          "la forma vecchia da' %r, e il controllo la RESPINGE" % m8.p["cambi_chi_tors"])
+    # ### e la prova che il DANNO era reale: una serie con `0` e una con `None` danno due
+    #   medie DIVERSE, e la prima e' quella sbagliata.
+    _serie_0 = [5, 0, 7, 0, 9, 0]
+    _serie_n = [5, None, 7, None, 9, None]
+    _m0 = sum(_serie_0) / float(len(_serie_0))
+    _buoni = [x for x in _serie_n if x is not None]
+    _mn = sum(_buoni) / float(len(_buoni))
+    prova("chi_tors: ### e il DANNO era reale -- con gli zeri la media e' %.2f invece di %.2f"
+          % (_m0, _mn), abs(_m0 - _mn) > 1e-9 and _m0 < _mn,
+          "gli zeri ABBASSANO la media del %.0f %%" % (100 * (1 - _m0 / _mn)))
     # ### il gancio `nati`: gli ULTIMI `k` indici
     m.dove_nascite = []
     m.nati(net, "divisione", 2)

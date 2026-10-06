@@ -7134,3 +7134,33 @@ esistono.**
 
 **Le altre nove bloccanti che la lista non nominava:** `CENS-A1`, `CENS-A2`, `CENS-A6`,
 `CENS-A7`, `CENS-B7`, `CLI-1`, `D03`, `D31`, `SCHED-PASSO`.
+
+---
+
+## 2026-10-06 — **LAVORO 2: `CHI-TORS-ZERO-FALSO` curata nello strumento, e il collaudo mi ha fatto curare una cosa in piu'**
+
+`csv/_test_fork/_mitosi_zero_dove.py` passa a ### **`c206bd4b`**, collaudo `53` su `53`. Il
+simulatore ### **non si tocca:** resta `cf2a1ac8`. ### **Nessuna corsa da rifare.**
+
+**La cura:** dove il gancio ### **non ha potuto misurare** — quando la lunghezza di
+`chi_torsione` cambia perche' ### **nascono nodi** — il contatore vale ### **`None`**, non
+`0`. E il battito stampa ### **`n/m`**, una parola: ### **un numero di ripiego si confonde con
+una misura.**
+
+> ### ⚠ **E IL COLLAUDO MI HA FATTO CURARE UNA COSA IN PIU'.** La mia prima stesura lasciava
+> il `None` al reset di `chiudi`. Il collaudo e' fallito, e ### **non perche' il test fosse
+> sbagliato:** senza una riga esplicita ### **il valore restava quello del passo PRIMA.**
+> ### **Togliere una dipendenza e' meglio che fidarsi che sia rispettata**, e il difetto era
+> ### **latente ma reale.**
+
+**Il caso che deve fallire con la forma vecchia, e l'ho provato davvero:** ho
+### **ricostruito la forma vecchia a mano** e verificato che il controllo ### **la respinge.**
+Piu' la prova che ### **il danno era un NUMERO, non un principio:** su `[5,0,7,0,9,0]` la
+media e' `5.00`, sui soli valori misurati ### **`7.00`** — ### **gli zeri la abbassano del
+`29 %`.**
+
+> ### ✔ **E I LETTORI REGGONO IL `None` SENZA CAMBIARE:** la `spearman` ### **scarta i
+> `None`**, quindi con lo strumento curato la correlazione sarebbe giusta ### **anche senza
+> il flag.** ### **Due difese invece di una**, e i due collaudi passano invariati.
+
+**`CHI-TORS-ZERO-FALSO` e' CHIUSA**, criterio soddisfatto, ### **su decisione di Luca.**
