@@ -48,6 +48,7 @@ commit**: cosi' non se ne accumulano di invisibili.)*
 | `csv/_seal_fork/_referto_z43_cura2.py|H-P5` | non importa il simulatore e non lo fa girare. Legge il `sigillo.json` di una |
 | `csv/_seal_fork/_sigillo_mem_fase.py|H-P8` | le DUE occorrenze di `HEAD` in questo file stanno nella DOCSTRING di |
 | `csv/_seal_fork/_sigillo_mem_fase.py|H-P3` | il flag `MEM_FASE` NON HA un'opzione da riga di comando, di proposito |
+| `csv/_seal_fork/_sigillo_mitosi_soglia_grad_via.py|H-P8` | il codice di prima si prende dal PADRE del commit della patch, con |
 | `csv/_seal_fork/_sigillo_veleno_keep.py|H-P8` | il *prima* NON viene da `HEAD`, viene dal PADRE -- `git rev-parse HEAD~1`, |
 | `csv/_seal_fork/_sigillo_veleno_keep.py|H-P3` | i due moduli si caricano TUTTI E DUE passando dal `_cli()` del simulatore |
 | `csv/_seal_fork/_sigillo_z43_cura1.py|H-P8` | le occorrenze di `HEAD` in questo file stanno nella DOCSTRING di `braccio0()` |
@@ -88,5 +89,5 @@ commit**: cosi' non se ne accumulano di invisibili.)*
 | `csv/_test_fork/_z43_tempo_proprio.py|H-P3` | la scena passa TUTTA dal CLI (`nmasse` e `sep` da `argv`), e la |
 
 ```
-esenzioni dichiarate   81
+esenzioni dichiarate   82
 ```
