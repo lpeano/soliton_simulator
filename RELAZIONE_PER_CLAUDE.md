@@ -7584,3 +7584,94 @@ twist_dip = PI * tanh( tw / PHI_CRIT )     ->   sup|f'| = pi/(2pi) = 1/2,  guada
 > ### ⛔ **E NON RACCOMANDO `D` AL POSTO DI `C`: dichiaro che la mia raccomandazione e' CADUTA**
 > e che `D` ### **contraddice una direzione che Luca ha gia' scelto.** ### **Quello che posso
 > fare e' dare i numeri — ed e' `M3`.**
+
+---
+
+## 2026-10-06 — **UN ERRORE DEL GUARDIANO, E L'OPZIONE `P` DI LUCA** *(integrazione al lavoro di misura)*
+
+**Mandato di Luca.** Nessuna legge nuova, nessuna patch al simulatore *(`b8c21049`)*.
+**E DICHIARO LO STATO IN CUI L'INTEGRAZIONE MI HA TROVATO:** la corsa `M1`-`M3`
+### **non era partita** e lo strumento ### **non era committato** — l'avevo appena
+iniziato a progettare. Quindi l'integrazione entra ### **prima** del commit dello
+strumento, e ### **`M4` gira sulla STESSA corsa**, come il mandato consente
+esplicitamente in quel caso.
+
+### ① **`Σ tw` SUGLI ARCHI DI UN NODO NON E' UNA CIRCOLAZIONE** — *verificato sul codice*
+
+**La convenzione, dal codice e non assunta:** `dph = _wphi(phi[i] - phi[j])`, e il commento
+di quella riga dice ### **<<1-forma di fase, orientata i->j>>**; `twist_dip` e'
+### **antisimmetrico** in `i <-> j`. ### **Quindi `tw` e' orientata, e non e' uno scalare
+d'arco.**
+
+**E L'ORIENTAMENTO E' CANONICO, MISURATO:** ### **`471564` archi su `471564` hanno
+`i < j`**, alla costruzione e dopo un passo. **Da qui due letture, e nessuna e' una
+circolazione:**
+
+| | |
+|---|---|
+| col segno ### **MEMORIZZATO** | ### ⛔ **dipende dalla NUMERAZIONE** — e' lo stesso vizio dell'obiezione `(a)` alla `C` |
+| col segno ### **relativo al nodo** | ben definita, ma e' il ### **FLUSSO USCENTE**, cioe' la ### **DIVERGENZA** |
+
+> ### ⛔ **QUINDI `A` NON REALIZZA LA STELLA POLARE** *(«il verso dalla CIRCOLAZIONE CON
+> SEGNO»)*, e ### **l'opzione `E` NON SI REGISTRA**: e' la stessa quantita' con un peso.
+> ### **Il mio <<la piu' instabile>> giudicava la stabilita' di una cosa che non e'
+> nemmeno quella chiesta.**
+
+**E il riferimento di oggi non ha questo problema:** `perc_geom` si costruisce con
+`np.add.at(twn, i, |tw|)` e `np.add.at(twn, j, |tw|)`, cioe' ### **col MODULO su entrambi
+gli estremi** — simmetrica, indipendente dalla numerazione, ### **ed e' esattamente il verso
+che NON ha.**
+
+### ② **L'OPZIONE `P`: LA CIRCOLAZIONE SULLE PLAQUETTE**
+
+**Registrata in tabella con gli stessi campi delle altre quattro.** ### ✔ **Risolve
+l'obiezione `(a)`**: una plaquette e' un fatto del grafo, ### **non dipende ne' dalla
+numerazione ne' da un albero ne' dal `massimo = 256`**, ed e' ### **locale a tre nodi**
+contro cicli che oggi arrivano a ### **`66`** *(misurato: base `min 3`, `max 66`, media
+`14.7`)*.
+
+> ### ⛔ **MA SOLO CON `Σ tw`.** Con l'### **olonomia di FASE** no: sul triangolo e' un
+> multiplo di `4pi` e ### **quasi sempre zero** — `P` erediterebbe il difetto che `P`
+> serve a togliere.
+
+**E LE PLAQUETTE NON SONO UN OGGETTO NUOVO IN QUESTO CODICE:** il docstring di `_link_su2`
+dichiara gia' ### **<<l'OLONOMIA di plaquette (diagnostico PURE-READ) […] `Tr(U_ij U_jk
+U_ki)`>>**. ### **Esiste la nozione; manca l'ENUMERATORE**, e `M4` lo costruisce in sola
+lettura.
+
+### ✔ **UN'ALGEBRA CHE HO VERIFICATO, ed e' il motivo per cui `(c)` ha senso**
+
+| | |
+|---|---|
+| scambio due vertici | la circolazione ### **cambia segno** |
+| e la normale | ### **cambia segno anche lei** |
+| ### ✔ **il PRODOTTO `(Σ tw)·n̂`** | ### **NON cambia** |
+
+> ### ✔ **IL PRODOTTO E' INVARIANTE, CIASCUN FATTORE DA SOLO NO.** E' per questo che
+> `M4(b)` misura ### **il MODULO** e `M4(c)` ### **il vettore.** ### ⚠ **Ma `R_k` resta
+> un ASSE: l'invarianza non regala il segno**, lo sposta nella scelta di cosa proiettare —
+> e quella scelta e' ### **`P1`/`P2`/`P3`, che sono di Luca.**
+
+### 🔁 **L'ANELLO, E LA DILUIZIONE MISURATA**
+
+La condizione resta ### **`sup |f'| < 1`** col guadagno `1/(1-f')`. **E `f'` per `P` e'
+diluito**, perche' un arco sta in molte plaquette:
+
+| al passo `1` | |
+|---|--:|
+| plaquette per nodo *(media)* | ### **`1297`** |
+| plaquette per ARCO *(vicini comuni)* | ### **`35.2`** |
+| ### **la quota** | ### **`~0.027`**, cioe' ### **`~1/37`** |
+
+> ### ⚠ **E QUESTO E' UN RAPPORTO DI CONTEGGI, NON LA DERIVATA:** `f'` dipende anche dalla
+> normalizzazione di `chi_k` e dalla ### **coerenza delle normali.** ### **Scriverlo come
+> se fosse `f'` sarebbe l'errore che ho gia' fatto tre volte in un giorno: portare un
+> numero vero dove misura un'altra cosa.**
+
+**IL CONTROLLO CHE DEVE FALLIRE:** si forza il guadagno verso `1` e ### **la torsione DEVE
+esplodere.** ### **Se non esplode, la linearizzazione e' sbagliata e l'argomento di
+stabilita' non ha potere** — ne' per `P` ne' per `D`. ### **E' un controllo sul
+RAGIONAMENTO.**
+
+### ⛔ **E IO NON SCELGO:** `M4` da' i numeri, e ### **la scelta fra `A`/`B`/`C`/`D`/`P` e
+fra `P1`/`P2`/`P3` — cioe' se il verso e' un SEGNO o un ASSE — sono decisioni di Luca.**

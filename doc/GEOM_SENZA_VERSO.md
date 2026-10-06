@@ -575,3 +575,175 @@ twist_dip = PI * tanh( tw / PHI_CRIT )
 > ### ✔ **Quello che posso fare e' DARE I NUMERI**, ed e' `M3`: quante volte per passo
 > cambiano ### **il segno di `A`**, ### **l'olonomia di `C`**, ### **il segno di `tw` per
 > `D`**, e ### **`perc_geom` di oggi** come riferimento. ### **La scelta e' di Luca.**
+
+---
+
+# ANNOTAZIONE *(2026-10-06 — `par.8`: si ANNOTA, non si riscrive)*
+
+## ⛔ **UN ERRORE DEL GUARDIANO, e l'OPZIONE `P` DI LUCA**
+
+*(Mandato di Luca, integrazione al lavoro di misura. ### **Nessuna legge nuova, nessuna patch
+al simulatore** (`b8c21049`). Lo strumento della corsa ### **non era ancora committato quando
+questa integrazione e' arrivata**, quindi `M4` entra ### **nella STESSA corsa**: lo dichiaro
+qui e nel referto.)*
+
+---
+
+## ① ⛔ **`Σ tw` SUGLI ARCHI DI UN NODO NON E' UNA CIRCOLAZIONE: E' UNA DIVERGENZA**
+
+> ### **Il rilievo e' di Luca, e l'ho verificato sul codice prima di scriverlo.**
+
+**LA CONVENZIONE DI `tw`, dal codice** *(non assunta)*:
+
+| | il codice | |
+|---|---|---|
+| la 1-forma | `dph = self._wphi(self.phi[self.i] - self.phi[self.j])` | il commento alla riga dice ### **<<1-forma di fase, orientata i->j>>** |
+| il dipolo | `twist_dip = np.pi * 0.5 * (chi_torsione[i] - chi_torsione[j])` | ### **antisimmetrico in `i` <-> `j`** |
+| l'accumulo | `self.tw += (self._w4(dph - _fp) + (twist_dip - _dp) - dt_e*self.tw/_ttw)` | ### ⛔ **quindi `tw` E' ORIENTATA `i -> j`**, e non e' uno scalare d'arco |
+
+**E L'ORIENTAMENTO E' CANONICO, MISURATO:** ### **`471564` archi su `471564` hanno `i < j`**
+*(alla costruzione e dopo un passo)*. ### **Nessun arco con `i > j`, nessun cappio.**
+
+> ### ⛔ **DA QUI SEGUONO DUE COSE, e nessuna delle due e' una circolazione.**
+
+| la lettura di `Σ tw` | che cos'e' davvero | il difetto |
+|---|---|---|
+| ### **somma col segno MEMORIZZATO**, `Σ_{e∋k} tw_e` | ### **ne' flusso ne' circolazione**: somma entranti e uscenti ### **con lo stesso segno** | ### ⛔ **l'orientamento e' deciso dalla NUMERAZIONE** *(`i<j` al `100 %`)*: ### **rinumerare i nodi ribalta il segno di alcuni archi e cambia la somma.** ### **E' lo STESSO vizio dell'obiezione `(a)` alla `C`** |
+| ### **somma col segno RELATIVO a `k`** *(`+` se `k` e' la coda, `−` se e' la testa)* | ### ✔ **ben definita** e indipendente dalla numerazione — ma e' il ### **FLUSSO USCENTE**, cioe' la ### **DIVERGENZA DISCRETA** `(d* tw)_k` | ### ⛔ **una divergenza non e' una circolazione:** una circolazione esiste ### **solo su un percorso CHIUSO**, e gli archi di un nodo ### **non formano un ciclo** |
+
+> ### ⛔ **QUINDI L'OPZIONE `A` NON REALIZZA LA STELLA POLARE.** Il punto `D` di questo
+> documento dice *«la catena della rotazione ### **legge il verso dalla CIRCOLAZIONE CON
+> SEGNO**»*: ### **`A` legge una divergenza**, non una circolazione. ### **Il mio <<il piu'
+> instabile>> era un giudizio sulla STABILITA' di una cosa che non e' nemmeno la cosa
+> chiesta.**
+>
+> ### ⛔ **E L'OPZIONE `E`** — *la «circolazione locale pesata» che il guardiano aveva
+> proposto a Luca — ### **NON SI REGISTRA**: e' la stessa quantita' con un peso, quindi
+> ### **lo stesso errore.** ### **Non e' un'opzione in meno per preferenza: e' un'opzione che
+> non esiste.**
+
+**E IL RIFERIMENTO DI OGGI NON HA QUESTO PROBLEMA, perche' non ha segno:** la `perc_geom`
+si costruisce con ### **`np.add.at(twn, i, |tw|)`** e ### **`np.add.at(twn, j, |tw|)`** —
+### **il MODULO su entrambi gli estremi.** ### **E' simmetrica, quindi indipendente dalla
+numerazione — ed e' esattamente il verso che NON ha.**
+
+---
+
+## ② ✔ **L'OPZIONE `P` DI LUCA: LA CIRCOLAZIONE SULLE PLAQUETTE**
+
+**La plaquette:** un ### **triangolo di tre nodi mutuamente collegati**, con
+### **tutti e tre gli archi presenti.**
+
+> ### ✔ **E LE PLAQUETTE NON SONO UN OGGETTO NUOVO IN QUESTO CODICE:** il docstring di
+> `_link_su2` dichiara gia' ### **<<l'OLONOMIA di plaquette (diagnostico PURE-READ) usa `U`
+> […] perche' `Tr(U_ij U_jk U_ki)` sia l'invariante atteso>>**. ### **Esiste la nozione,
+> con la sua connessione SU(2); quello che non esiste e' un ENUMERATORE** — e
+> ### **`M4` lo costruisce in sola lettura.**
+
+### LA RIGA DI `P`, **con gli stessi campi delle altre quattro**
+
+| | la definizione del verso | chi la legge | cosa cambia nel dipolo | locale? | numeri a mano? | e con la legge CURATA? |
+|---|---|---|---|---|---|---|
+| **`P`** | la ### **CIRCOLAZIONE DI `tw` SULLE PLAQUETTE**, `Σ tw` sui ### **tre archi orientati** del triangolo | frame-drag, `chiralita_core_locale`, `TORS_4PI` — ### **oppure i lettori cambiano, se il verso e' un ASSE** *(`P1`)* | ### **continuo** se si usa `Σ tw`; ### ⛔ **NON l'olonomia di fase** | ### ✔ **SI'**, tre nodi | ### ✔ **ZERO** | ### ✔ **continua**, e ### **l'anello e' DILUITO** *(ogni arco sta in molte plaquette)* |
+
+### ✔ **`P` RISOLVE L'OBIEZIONE `(a)` ALLA `C`**
+
+| | |
+|---|---|
+| ### **canonica** | una plaquette e' ### **un fatto del grafo**: non dipende ne' dalla numerazione ne' da un albero ne' da un `massimo = 256` |
+| ### **locale** | ### **tre nodi**, contro un ciclo che oggi arriva a ### **`66` nodi** *(misurato: lunghezze della base `min 3`, `max 66`, media `14.7`)* |
+| ### **continua** | ### ⛔ **solo con `Σ tw`.** ### **Con l'olonomia di FASE no:** sul triangolo e' un multiplo di `4π` *(l'algebra dell'obiezione `(b)`, che vale su QUALUNQUE ciclo chiuso)*, quindi ### **quasi sempre `0`** — ### **`P` con l'olonomia erediterebbe il difetto che `P` serve a togliere** |
+
+### ⛔ **IL PROBLEMA DI PRINCIPIO, e Luca lo nomina: IN 3D UNA PLAQUETTE NON HA UN VERSO DA SOLA**
+
+> **La circolazione di una plaquette ha un verso ### **solo rispetto a un orientamento.**
+> ### **Senza un orientamento comune il segno dipende dall'ORDINE DEI VERTICI, cioe' e'
+> ARBITRARIO.**
+
+**E con le POSIZIONI, ogni plaquette da' un ### VETTORE:**
+
+```
+R_k = SOMMA sulle plaquette p che contengono k   di   (Somma tw su p) * n_cappello(p)
+```
+
+> ### ⛔ **SOMMATO SUL NODO DA' UN ASSE DI ROTAZIONE, NON UN `±1`.**
+
+### ✔ **E QUESTO PRODOTTO E' INVARIANTE, l'ho verificato per algebra**
+
+| | |
+|---|---|
+| scambio due vertici | la circolazione ### **cambia segno** *(`u→w→v→u = −(u→v→w→u)`)* |
+| e la normale | ### **cambia segno anche lei** *(`(w−u)×(v−u) = −(v−u)×(w−u)`)* |
+
+> ### ✔ **QUINDI `(Σ tw) · n̂` NON CAMBIA: il PRODOTTO e' invariante per permutazione dei
+> vertici, mentre CIASCUN FATTORE DA SOLO NON LO E'.** ### **E' il motivo per cui `R_k` e'
+> ben definito e il SEGNO della singola plaquette non lo e'** — ed e' per questo che `M4(b)`
+> misura ### **il MODULO** `|Σ tw|` e `M4(c)` ### **il vettore.**
+>
+> ### ⚠ **MA `R_k` E' UN ASSE, NON UN VERSO:** ### **l'invarianza non regala il segno**, lo
+> sposta nella scelta di ### **cosa proiettare**. ### **E quella scelta e' `P1`/`P2`/`P3`.**
+
+### LE TRE STRADE, **DA DECIDERE DA LUCA**
+
+| | la strada | che cosa costa |
+|---|---|---|
+| **`P1`** | ### **il verso del nodo E' UN VETTORE**, e si tiene tale | ### ⛔ **I LETTORI CAMBIANO**: `twist_dip = π·0.5·(chi_i − chi_j)` vuole uno ### **scalare**. Con un vettore il dipolo diventa ### **una proiezione su qualcosa**, e quel qualcosa ### **e' una legge nuova** |
+| **`P2`** | si ### **proietta l'asse sull'asse di Bloch dello spinore del nodo** *(`_nb`, `(n,3)` e `|n̂| = 1` verificato)*: il segno divento ### **<<rotazione CONCORDE o DISCORDE con lo spin>>** | ### ✔ **nessun numero nuovo** e ### ✔ **vicino al principio guida** *(lo spinore e' il tempo proprio). ### ⚠ **MA se `R_k` e `_nb` sono SCORRELATI, `P2` non lega niente** — ed e' esattamente cio' che ### **`M4(d)` misura** |
+| **`P3`** | si usano ### **le posizioni per orientare**, e si rinuncia alla regola ### **<<solo topologia>>** | ### ⛔ **`self.pos` e' IL DISEGNO**, e il repo ha gia' un difetto di questa famiglia *(nel commento di `pozzo_grafo`: <<calcola `L` da `self.pos` (il DISEGNO)>>)*. ### **Sarebbe una scelta DICHIARATA, non un incidente — ma va dichiarata** |
+
+### 🔁 **L'ANELLO `tw → dipolo → tw` RESTA DA ANALIZZARE, e la DILUIZIONE si misura**
+
+**La catena, se il verso viene da `P`:**
+
+```
+tw  ->  circolazione sulle plaquette  ->  R_k  ->  chi_k  ->  twist_dip(e)  ->  tw(e)
+```
+
+**LA CONDIZIONE DI GUADAGNO e' la stessa dell'obiezione `(c)`**, perche' il dipolo entra
+### **come variazione**:
+
+```
+dtw = P + f'*dtw        ->      dtw = P / (1 - f')        CONDIZIONE:  sup |f'| < 1
+```
+
+**E `f'` per `P` e' DILUITO, perche' un arco sta in MOLTE plaquette:**
+
+| | misurato al passo `1` |
+|---|--:|
+| plaquette per nodo *(media)* | ### **`1297`** |
+| plaquette per ARCO *(vicini comuni, media)* | ### **`35.2`** |
+| ### **la quota di plaquette del nodo che contengono un dato arco** | ### **`~0.027`**, cioe' ### **`~1/37`** |
+
+> ### ⚠ **E QUESTO E' UN RAPPORTO DI CONTEGGI, NON LA DERIVATA.** `f'` dipende anche
+> ### **dalla normalizzazione di `chi_k`** e ### **dalla COERENZA delle normali** *(se le
+> plaquette ruotano attorno ad assi diversi, i contributi si cancellano e `f'` scende
+> ancora)*. ### **Il `1/37` e' un INGREDIENTE necessario, non la risposta** — e scriverlo
+> come se fosse `f'` sarebbe ### **l'errore che ho gia' fatto tre volte in un giorno:
+> portare un numero vero dove misura un'altra cosa.**
+
+### ⛔ **IL CONTROLLO CHE DEVE FALLIRE**
+
+> **Si moltiplica la risposta del dipolo per un guadagno `G` crescente, finche' il `sup|f'|`
+> MISURATO arriva vicino a `1`. ### ✔ **A quel punto la torsione DEVE esplodere.**
+>
+> ### ⛔ **Se NON esplode, la linearizzazione e' sbagliata e l'argomento di stabilita' NON HA
+> POTERE** — ne' per `P` ne' per `D`. ### **E' un controllo sul RAGIONAMENTO, non sulla
+> cura:** un `sup|f'| < 1` che non si vede fallire da nessuna parte e' ### **un FALSO-UNO.**
+
+---
+
+## ③ **DOVE SIAMO, dopo questa integrazione**
+
+| | |
+|---|---|
+| `A` | ### ⛔ **non realizza la Stella Polare**: ### **e' una divergenza, non una circolazione** |
+| `B` | eredita `(a)` e `(b)` dalla base dei cicli |
+| `C` | ### ⛔ **la mia raccomandazione, CADUTA** |
+| `D` | toglie il salto, ### **ma contraddice una direzione che Luca ha scelto** |
+| `E` | ### ⛔ **NON REGISTRATA**: stesso errore di `A` |
+| **`P`** | ### ✔ **canonica, locale, continua** — e ### ⛔ **da' un ASSE**, che apre `P1`/`P2`/`P3` |
+
+> ### ✔ **E IO NON SCELGO.** ### **`M4` da' i numeri** *(quante plaquette, `|Σ tw|`, la
+> coerenza di `R_k`, il coseno con `_nb`, la stabilita')*, e ### **l'unica affermazione
+> permessa e' DESCRITTIVA.** ### **La scelta fra `A`/`B`/`C`/`D`/`P`, e fra `P1`/`P2`/`P3`
+> — cioe' se il verso e' un SEGNO o un ASSE — sono decisioni di Luca.**
