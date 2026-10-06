@@ -33,6 +33,28 @@ D_LUNGA = os.path.join(RADICE, "csv", "_test_fork", "_tors_w8_lunga")
 # ### I CAMPI DI `C0`, dal mandato: *«`n`, archi, divisioni, Schwinger, quantili di `|tw|`»*.
 CAMPI_C0 = ("n", "archi", "nati_tot", "schwinger_tot")
 
+# ### ⛔ **I CONTATORI CHE ESISTONO SOLO PERCHE' I GANCI CI SONO**, e che quindi
+#   ### **`C-letture` NON puo' pretendere** dal braccio senza ganci: pretenderli e' un
+#   ### **FALSO FALLIMENTO**, e il 2026-10-06 `C-letture` e' fallito proprio cosi'
+#   *(`1b5b651`: `3` differenze su `8841`, ### **tutte e tre qui dentro**)*.
+#   ### ✔ **E SI LEGGONO DALLA CLASSE, NON SI ELENCANO A MANO:** cosi' un contatore
+#   ### **futuro e' escluso da solo**, e nessuno deve ricordarsi di aggiungerlo.
+def _esclusi():
+    sys.path.insert(0, _QUI)
+    import _mitosi_zero_dove as MZD
+    e = set(MZD.Misura(0.01, 0.0).p)
+    # ### ⛔ **E LA GUARDIA CHE RENDE L'ESCLUSIONE ONESTA:** se un giorno un contatore si
+    #   chiamasse come un campo del simulatore, l'esclusione lo nasconderebbe. ### **Qui si
+    #   FERMA invece di nascondere.**
+    cattivi = e & set(CAMPI_C0)
+    if cattivi:
+        raise SystemExit("[FERMO] un contatore dei ganci si chiama come un campo del "
+                         "simulatore: %s. L'esclusione lo NASCONDEREBBE." % sorted(cattivi))
+    return e
+
+
+ESCLUSI = _esclusi()
+
 
 def leggi(p):
     if not os.path.isfile(p):
@@ -90,7 +112,12 @@ def c_letture(con, senza):
     base = set()
     for p in com:
         base |= set(k for k, v in B[p].items() if not isinstance(v, dict))
-    base = sorted(base - {"passo"})
+    # ### il braccio SENZA ganci quei contatori li ha, ma a ZERO per costruzione: sono
+    #   ### **inizializzati e mai scritti.** Confrontarli ### **misura la presenza dei
+    #   ganci, non il loro effetto sul SISTEMA** -- ed e' l'unica cosa che `C-letture`
+    #   ### **non deve** chiedere.
+    esclusi_visti = sorted(base & ESCLUSI)
+    base = sorted(base - {"passo"} - ESCLUSI)
     diff, nq = [], 0
     for p in com:
         for c in base:
@@ -105,7 +132,11 @@ def c_letture(con, senza):
     return {"passi_confrontati": len(com), "campi_per_passo": len(base),
             "campi": base, "quantili_confrontati": nq, "differenze": diff[:40],
             "n_differenze": len(diff), "passa": bool(com) and not diff,
-            "materia": len(com) * len(base) + nq}
+            "materia": len(com) * len(base) + nq,
+            # ### ⛔ **L'ESCLUSIONE SI DICHIARA NELL'ESITO:** un'esclusione taciuta e'
+            #   un insabbiamento, e chi legge deve poter contare quanti campi sono rimasti
+            #   fuori e come si chiamano.
+            "esclusi": esclusi_visti, "n_esclusi": len(esclusi_visti)}
 
 
 def c1(d):
@@ -194,14 +225,24 @@ def main(argv):
     if "--collaudo" in argv[1:]:
         return collaudo()
     L = leggi(os.path.join(D_LUNGA, "lunga.json"))
-    CON = leggi(os.path.join(D_MZD, "amp0_3.json"))
-    SENZA = leggi(os.path.join(D_MZD, "amp0_3_senza_ganci.json"))
+    # ### ⛔ **I NOMI PRESERVATI VENGONO PRIMA:** le corse da `1000` passi
+    #   ### **sovrascrivono** `amp0_3.json`, e `C0`/`C-letture` sono misurati a `150`.
+    #   ### **Leggere il file sbagliato farebbe passare o fallire il controllo per la
+    #   ragione sbagliata.**
+    CON = (leggi(os.path.join(D_MZD, "c0_150.json"))
+           or leggi(os.path.join(D_MZD, "amp0_3.json")))
+    SENZA = (leggi(os.path.join(D_MZD, "cletture_150.json"))
+             or leggi(os.path.join(D_MZD, "amp0_3_senza_ganci.json")))
     ZERO = leggi(os.path.join(D_MZD, "amp0_0.json"))
+    LUNGO_ACCESO = leggi(os.path.join(D_MZD, "amp0_3.json"))
     riga()
     print("I CONTROLLI DEL MANDATO DEL `0.3` A ZERO")
     riga()
-    for et, d in (("lunga.json", L), ("amp0_3.json", CON),
-                  ("amp0_3_senza_ganci.json", SENZA), ("amp0_0.json", ZERO)):
+    for et, d in (("lunga.json (1000 passi)", L),
+                  ("c0_150.json (C0, con ganci)", CON),
+                  ("cletture_150.json (senza ganci)", SENZA),
+                  ("amp0_0.json (il braccio ZERO)", ZERO),
+                  ("amp0_3.json (il braccio ACCESO lungo)", LUNGO_ACCESO)):
         print("  %-26s %s" % (et, ("%s passi, stato %s"
                                    % (d.get("passi_girati"), d.get("stato")))
                               if d else "### NON C'E'"))
@@ -215,6 +256,10 @@ def main(argv):
                          "divisioni + Schwinger == nati, e `n` cresce di quanto dicono")
     esiti["C1 (zero)"] = _dillo("C1 (zero)", c1(ZERO) if ZERO else None,
                                 "lo stesso, sul braccio `_AMP = 0`")
+    _na = (LUNGO_ACCESO or {}).get("passi_girati")
+    esiti["C1 (acceso %s)" % _na] = _dillo(
+        "C1 (acceso %s)" % _na, c1(LUNGO_ACCESO) if LUNGO_ACCESO else None,
+        "lo stesso, su `amp0_3.json` -- ### %s passi, LETTI DAL JSON e non assunti" % _na)
     esiti["C-fallisce"] = _dillo("C-fallisce", c_fallisce(ZERO, L)
                                  if (ZERO and L) else None,
                                  "`_AMP = 0` DEVE differire dalla misura lunga")
@@ -222,15 +267,27 @@ def main(argv):
     riga()
     print("GLI ESITI")
     riga()
-    for k in ("C0", "C-letture", "C1", "C1 (zero)", "C-fallisce"):
+    for k in ("C0", "C-letture", "C1", "C1 (zero)",
+              "C1 (acceso %s)" % _na, "C-fallisce"):
         v = esiti.get(k)
         print("  %-12s %s" % (k, "✔ PASSA" if v else
                               ("⛔ FALLISCE" if v is False else
                                "### NON FATTO (manca il json)")))
     riga()
-    # ### ⛔ **UN `None` NON E' UN PASSA:** si torna `1` anche quando un controllo non si e'
-    #   potuto fare, perche' *«non fatto»* e *«passato»* non sono la stessa cosa.
-    return 0 if all(esiti.get(k) for k in ("C0", "C-letture", "C1")) else 1
+    # ### ⛔ **UN `None` NON E' UN PASSA, e l'USCITA deve dirlo:** si torna `1` anche
+    #   quando un controllo ### **non si e' potuto fare**, perche' *<<non fatto>>* e
+    #   *<<passato>>* non sono la stessa cosa.
+    #   ### ⚠ **E LA PRIMA VERSIONE TORNAVA `0` guardando solo tre controlli su cinque**,
+    #   cioe' ### **diceva <<tutto a posto>> con due controlli mancanti** -- esattamente cio'
+    #   che la riga sopra prometteva di non fare. ### **Trovato rileggendo l'uscita contro il
+    #   messaggio che stavo scrivendo.**
+    _mancanti = [k for k, v in esiti.items() if v is None]
+    _falliti = [k for k, v in esiti.items() if v is False]
+    if _mancanti:
+        print("  ### ⚠ NON FATTI: %s -- e questo NON e' un PASSA." % ", ".join(_mancanti))
+    if _falliti:
+        print("  ### ⛔ FALLITI: %s" % ", ".join(_falliti))
+    return 0 if not (_mancanti or _falliti) else 1
 
 
 # =============================================================== IL COLLAUDO
@@ -284,6 +341,31 @@ def collaudo():
           not r["passa"], "%d differenze" % r["n_differenze"])
     r = c_letture(_finto(extra={"n": 999}), _finto())
     prova("C-letture: ### DEVE FALLIRE -- se i ganci cambiano `n`, lo prende",
+          not r["passa"], "%d differenze" % r["n_differenze"])
+    prova("C-letture: ### l'esclusione e' DERIVATA dalla classe, non elencata a mano",
+          "cambi_chi_tors" in ESCLUSI and "cambi_geom" in ESCLUSI
+          and "spinta_pi_esatto" in ESCLUSI, "%d contatori" % len(ESCLUSI))
+    prova("C-letture: ### e NON contiene NESSUN campo del simulatore (la guardia)",
+          not (ESCLUSI & set(CAMPI_C0)), "%s" % sorted(ESCLUSI & set(CAMPI_C0)))
+    _b = _finto(extra={"cambi_chi_tors": 0, "cambi_geom": 0})
+    r = c_letture(_finto(extra={"cambi_chi_tors": 6419, "cambi_geom": 6419}), _b)
+    # ### l'attesa si DERIVA dal json sintetico, non si scrive a mano: la prima versione
+    #   pretendeva `2` e il json sintetico ne ha ### **4** (`nati_div` e `nati_sch` sono
+    #   anch'essi prodotti dai ganci). ### **Il controllo era giusto e la mia attesa no.**
+    _att = sorted(set(_b["passi_dati"][0]) & ESCLUSI)
+    prova("C-letture: ### il caso VERO di 1b5b651 ora PASSA, e dichiara gli esclusi",
+          r["passa"] and r["esclusi"] == _att,
+          "esclusi %s, attesi %s" % (r["esclusi"], _att))
+    prova("C-letture: ### e i conti DEL SIMULATORE restano confrontati, non esclusi",
+          all(c not in ESCLUSI for c in ("nati_tot", "schwinger_tot", "n", "archi")))
+    r = c_letture(_finto(extra={"cambi_chi_tors": 6419, "n": 999}),
+                  _finto(extra={"cambi_chi_tors": 0}))
+    prova("C-letture: ### DEVE FALLIRE -- un campo del SIMULATORE diverso lo prende ANCORA",
+          not r["passa"] and any(z[1] == "n" for z in r["differenze"]),
+          "%d differenze" % r["n_differenze"])
+    r = c_letture(_finto(extra={"cambi_chi_tors": 6419, "q_tw": {"q050": 0.5000000001}}),
+                  _finto(extra={"cambi_chi_tors": 0}))
+    prova("C-letture: ### DEVE FALLIRE -- e un quantile diverso nel decimo decimale pure",
           not r["passa"], "%d differenze" % r["n_differenze"])
     # ### C1
     r = c1(_finto(nati={2: 3}))

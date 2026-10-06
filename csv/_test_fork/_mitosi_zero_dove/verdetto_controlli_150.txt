@@ -1,11 +1,15 @@
-[TIMBRO] _controlli_mzd.py  sha1-BYTE 61a75c5d  committato e pulito
+[TIMBRO] _controlli_mzd.py  sha1-BYTE f5c6ec23  !! MODIFICATO rispetto a HEAD (blob-git 2654305c) -- i byte che girano NON sono quelli committati
+[TIMBRO] _mitosi_zero_dove.py  sha1-BYTE 16dced88  committato e pulito
+[TIMBRO] _tors_w8_lunga.py  sha1-BYTE bc62bcaa  committato e pulito
+[TIMBRO] _mitosi_soglia_grad.py  sha1-BYTE 1279c6fb  committato e pulito
 ========================================================================================================
 I CONTROLLI DEL MANDATO DEL `0.3` A ZERO
 ========================================================================================================
-  lunga.json                 1000 passi, stato fatto
-  amp0_3.json                150 passi, stato fatto
-  amp0_3_senza_ganci.json    150 passi, stato fatto
-  amp0_0.json                ### NON C'E'
+  lunga.json (1000 passi)    1000 passi, stato fatto
+  c0_150.json (C0, con ganci) 150 passi, stato fatto
+  cletture_150.json (senza ganci) 150 passi, stato fatto
+  amp0_0.json (il braccio ZERO) ### NON C'E'
+  amp0_3.json (il braccio ACCESO lungo) 150 passi, stato fatto
 
 --------------------------------------------------------------------------------------------------------
 C0             `_AMP = 0.3` riproduce ESATTAMENTE la misura lunga
@@ -20,16 +24,14 @@ C0             `_AMP = 0.3` riproduce ESATTAMENTE la misura lunga
 --------------------------------------------------------------------------------------------------------
 C-letture      i ganci nuovi sono di SOLA LETTURA, al bit
 --------------------------------------------------------------------------------------------------------
-  materia confrontata: 8841 valori
-    campi_per_passo          41
-    n_differenze             3
+  materia confrontata: 6741 valori
+    campi_per_passo          27
+    esclusi                  ['calcio_n', 'calcio_somma', 'cambi_chi_tors', 'cambi_geom', 'cambi_perc_chi', 'chi_tors_non_confrontabile', 'nati_div', 'nati_sch', 'somma_dipolo', 'spinta_pi_dip', 'spinta_pi_entrambe', 'spinta_pi_esatto', 'spinta_pi_fase', 'spinta_pi_tot']
+    n_differenze             0
+    n_esclusi                14
     passi_confrontati        150
     quantili_confrontati     2691
-  le prime differenze (passo, campo, questo, altro):
-      (1, 'cambi_geom', 6419, 0)
-      (1, 'chi_tors_non_confrontabile', 1, 0)
-      (2, 'cambi_chi_tors', 6419, 0)
-  ### ⛔ FALLISCE
+  ### ✔ PASSA
 
 --------------------------------------------------------------------------------------------------------
 C1             divisioni + Schwinger == nati, e `n` cresce di quanto dicono
@@ -50,6 +52,18 @@ C1 (zero)      lo stesso, sul braccio `_AMP = 0`
       PASSA: un'assenza non e' un esito (STANDARD 3).
 
 --------------------------------------------------------------------------------------------------------
+C1 (acceso 150) lo stesso, su `amp0_3.json` -- ### 150 passi, LETTI DAL JSON e non assunti
+--------------------------------------------------------------------------------------------------------
+  materia confrontata: 150 valori
+    divisioni                0
+    n_differenze             0
+    nati_simulatore          0
+    passi                    150
+    schwinger                0
+    schwinger_simulatore     0
+  ### ✔ PASSA
+
+--------------------------------------------------------------------------------------------------------
 C-fallisce     `_AMP = 0` DEVE differire dalla misura lunga
 --------------------------------------------------------------------------------------------------------
   ### IL JSON NON C'E'. Il controllo NON si puo' fare, e questo NON e' un
@@ -59,8 +73,10 @@ C-fallisce     `_AMP = 0` DEVE differire dalla misura lunga
 GLI ESITI
 ========================================================================================================
   C0           ✔ PASSA
-  C-letture    ⛔ FALLISCE
+  C-letture    ✔ PASSA
   C1           ✔ PASSA
   C1 (zero)    ### NON FATTO (manca il json)
+  C1 (acceso 150) ✔ PASSA
   C-fallisce   ### NON FATTO (manca il json)
 ========================================================================================================
+  ### ⚠ NON FATTI: C1 (zero), C-fallisce -- e questo NON e' un PASSA.

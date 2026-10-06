@@ -6820,3 +6820,52 @@ quantile, e il caso in cui i due bracci sono ### **identici** — che significhe
 **E un difetto mio, toltolo prima del commit:** in `c1` avevo lasciato un ciclo
 ### **che non faceva niente** *(finiva con `pass`)*. ### **Un blocco morto in un controllo e'
 peggio di un blocco assente**, perche' chi legge crede che quel controllo guardi qualcosa.
+
+---
+
+## 2026-10-06 — **LA CORREZIONE DI `C-letture`, e l'uscita diceva «tutto a posto» con due controlli MANCANTI**
+
+`csv/_test_fork/_controlli_mzd.py`, collaudo ### **`19` su `19`** *(prima `13`)*, e
+### **nove casi devono fallire.** Il simulatore ### **non si tocca:** resta `cf2a1ac8`.
+### **Il fallimento sta in `1b5b651`, PRIMA di questo commit.**
+
+| controllo | esito | materia |
+|---|---|--:|
+| `C0` | ✔ PASSA | `8841` valori, ### **zero differenze** |
+| **`C-letture`** | ### ✔ **PASSA** | `6741` valori, zero differenze, ### **`14` campi esclusi e DICHIARATI** |
+| `C1` | ✔ PASSA | ### **su `0` nati: non ha nulla da controllare** |
+| `C1 (zero)`, `C-fallisce` | ### **NON FATTI** | manca il braccio `_AMP = 0` |
+
+**La correzione, in quattro punti, e nessuno dei quattro e' «escludere e tacere»:**
+
+1. l'esclusione ### **si DERIVA dalla classe** — `set(Misura(0.01, 0.0).p)` — quindi
+   ### **un contatore futuro e' escluso da solo**;
+2. una ### **guardia che SI FERMA** se un contatore si chiamasse come un campo del simulatore,
+   perche' l'esclusione lo ### **nasconderebbe**;
+3. gli esclusi ### **si DICHIARANO nell'esito** — ### **un'esclusione taciuta e' un
+   insabbiamento**;
+4. e i conti ### **del simulatore** *(`n`, `archi`, `nati_tot`, `schwinger_tot`)*
+   ### **restano confrontati**, che e' una prova del collaudo.
+
+> ### ⚠ **E LA RAGIONE ERA SCRITTA PRIMA**, in `2893907`: il docstring di `c_letture` dice
+> gia' che pretendere i campi nuovi sarebbe ### **un falso fallimento.** ### **L'avevo scritto
+> e non l'avevo implementato** — e' un difetto di esecuzione, non un criterio che cambia, e si
+> verifica leggendo quel commit.
+
+### ⛔ E UN SECONDO DIFETTO, trovato rileggendo l'USCITA contro il MESSAGGIO che stavo scrivendo
+
+Stavo per scrivere *«"non fatto" non e' "passato": l'uscita e' `1`»* — e
+### **il codice tornava `0`**, perche' guardava ### **tre controlli su cinque.**
+### **Diceva «tutto a posto» con due controlli MANCANTI**, cioe' esattamente cio' che la sua
+riga di commento prometteva di non fare.
+
+> ### ✔ **CORRETTO IL CODICE, non il messaggio:** ora torna `1` finche' un controllo e'
+> ### **mancante o fallito**, e li ### **NOMINA.** ### **E il modo in cui l'ho trovato vale
+> quanto la correzione: ho confrontato cio' che stavo per AFFERMARE con cio' che il codice
+> FACEVA.**
+
+**Piu' due inesattezze mie, piccole e dette:** la prova nuova pretendeva `2` esclusi e il
+`json` sintetico ne ha `4` *(### **il controllo era giusto e la mia attesa no**; ora l'attesa
+si ### **deriva** dal `json`)*; e l'etichetta `C1 (acceso 1000)` leggeva un file da
+### **`150` passi** — ### **un'etichetta che mente**, come il falso `n/d`, i «calci» e il
+«per passo» che stampava una somma. ### **Ora l'etichetta DICE i passi, letti dal `json`.**
