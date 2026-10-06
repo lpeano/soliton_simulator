@@ -179,3 +179,56 @@ Nel `par.1` ho scritto che il `0.04` *«NON l'ho rimisurato io»* e che
 > ### ⚠ **E IL REFERTO STESSO DICE CHE QUEL CRITERIO <<PASSA PER UN PELO, SU UN PASSO
 > SOLO>>:** `1` dei tre passi supera la soglia `K2` e gli altri due stanno sotto. ### **Lo
 > riporto perche' un numero che si cita deve portarsi dietro la sua fragilita'.**
+
+---
+
+## ANNOTAZIONE *(2026-10-06, a sigillo girato — `par.8`)*
+
+### ⛔ `S0 (b)` FALLISCE, **e il difetto e' NEL SIGILLO: ho chiesto alla stessa coppia di essere identica E di differire**
+
+| braccio | esito | materia |
+|---|---|--:|
+| `S0 (a)` byte | ### ✔ **PASSA** | `cf2a1ac8` + patch = ### **`30e18cdd`**, byte-identico |
+| `S0 (b)` attributi | ### ⛔ **FALLISCE** | `56255` attributi su `230` passi, ### **`2530` differenze**, la prima al passo ### **`185`** |
+| **`S1`** *(al bit)* | ### ✔ **PASSA** | `230` passi, `2990` valori, ### **ZERO differenze** |
+| `S2` *(deve differire)* | ### ✔ **PASSA** | primo passo diverso ### **`212`**, identico a `27c10bd` |
+
+### ⛔ IL DIFETTO, e non e' della patch
+
+> **`S0 (b)` confronta `prima` *(modulazione ON)* con `oggi` *(modulazione OFF)*.
+> `S2` confronta `oggi` con `amp0_3.json`, che e' il braccio ### **`_AMP = 0.3` sulla legge
+> vecchia** — cioe' ### **lo stesso sistema di `prima`.**
+>
+> ### ⛔ **QUINDI `S0 (b)` E `S2` CHIEDONO DUE COSE OPPOSTE SULLA STESSA COPPIA: che sia
+> IDENTICA e che DIFFERISCA.** ### **Non possono condividere l'orizzonte**, e io gliene ho
+> dato uno solo.
+
+**E il mandato aveva ragione a dire `150`:** il primo passo in cui `prima` e `oggi` differiscono
+e' il ### **`185`**, quindi ### **a `150` passi `S0 (b)` ha ZERO differenze** — e lo so
+### **dai dati di questa corsa**, perche' le differenze sono registrate ### **in ordine di
+passo** e il minimo e' `185`.
+
+> ### ✔ **A `150` PASSI `S0 (b)` PASSA**, con `~36 700` attributi confrontati.
+> ### ⛔ **A `230` FALLISCE PERCHE' LA PATCH FUNZIONA.**
+
+### ⚠ E LE DIFFERENZE DICONO DOVE LA PATCH MORDE, **che e' un'informazione e non un rumore**
+
+Gli attributi che differiscono sono ### **cinque**: `_tum_clip0_prob` *(il primo, al passo
+`185`)*, poi `_cs_nodo_prev`, `_rep`, `_rep_scarto_max`, `d0`.
+
+> ### ✔ **`_tum_clip0_prob` e' un CONTATORE di un clip su `prob`**, e la modulazione cambiava
+> `soglia` → `ecc` → `prob`. ### **Quindi la prima traccia della patch e' un CONTATORE che
+> conta un clip**, `27` passi prima che la differenza diventi visibile in `q_tw`
+> *(passo `212`)*. ### **Il contatore vede prima dello stato**, ed e' esattamente a questo che
+> serve.
+
+### LA CORREZIONE, **in un commit a se'**
+
+1. **`S0 (b)` prende il SUO orizzonte, `150`**, come il mandato dice, e il codice
+   ### **dichiara perche' non puo' essere quello di `S2`**;
+2. **`S0 (b)` riporta il PRIMO passo diverso**, cosi' se un giorno scendesse sotto `150`
+   si vedrebbe ### **subito** invece che come un `FALLISCE` senza numero.
+
+> ### ⛔ **E IL FALLIMENTO SI COMMITTA PRIMA DELLA CORREZIONE**, col `json` della corsa a
+> `230` salvato come `sigillo_fallito_230.json`: ### **cosi' si vede da git che non ho
+> aggiustato l'orizzonte finche' non passava.**

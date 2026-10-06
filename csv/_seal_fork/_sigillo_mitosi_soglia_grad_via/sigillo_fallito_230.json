@@ -1,0 +1,174 @@
+{
+ "S0a": {
+  "padre": "71eddc4bd711306733b78425bad99375a54ab0e7~1",
+  "blob_prima": "cf2a1ac8",
+  "blob_ricostruito": "30e18cdd",
+  "blob_oggi": "30e18cdd",
+  "byte_identico": true,
+  "passa": true
+ },
+ "S0b": {
+  "passi": 230,
+  "attributi_confrontati": 56255,
+  "differenze": [
+   [
+    185,
+    "_tum_clip0_prob"
+   ],
+   [
+    186,
+    "_tum_clip0_prob"
+   ],
+   [
+    187,
+    "_tum_clip0_prob"
+   ],
+   [
+    188,
+    "_tum_clip0_prob"
+   ],
+   [
+    189,
+    "_tum_clip0_prob"
+   ],
+   [
+    190,
+    "_tum_clip0_prob"
+   ],
+   [
+    191,
+    "_tum_clip0_prob"
+   ],
+   [
+    192,
+    "_tum_clip0_prob"
+   ],
+   [
+    193,
+    "_tum_clip0_prob"
+   ],
+   [
+    194,
+    "_tum_clip0_prob"
+   ],
+   [
+    195,
+    "_tum_clip0_prob"
+   ],
+   [
+    196,
+    "_tum_clip0_prob"
+   ],
+   [
+    197,
+    "_tum_clip0_prob"
+   ],
+   [
+    198,
+    "_tum_clip0_prob"
+   ],
+   [
+    199,
+    "_tum_clip0_prob"
+   ],
+   [
+    200,
+    "_tum_clip0_prob"
+   ],
+   [
+    201,
+    "_tum_clip0_prob"
+   ],
+   [
+    202,
+    "_tum_clip0_prob"
+   ],
+   [
+    203,
+    "_tum_clip0_prob"
+   ],
+   [
+    204,
+    "_tum_clip0_prob"
+   ],
+   [
+    205,
+    "_tum_clip0_prob"
+   ],
+   [
+    206,
+    "_tum_clip0_prob"
+   ],
+   [
+    207,
+    "_tum_clip0_prob"
+   ],
+   [
+    208,
+    "_tum_clip0_prob"
+   ],
+   [
+    209,
+    "_tum_clip0_prob"
+   ],
+   [
+    210,
+    "_rep"
+   ],
+   [
+    210,
+    "_rep_scarto_max"
+   ],
+   [
+    210,
+    "_tum_clip0_prob"
+   ],
+   [
+    210,
+    "d0"
+   ],
+   [
+    211,
+    "_cs_nodo_prev"
+   ]
+  ],
+  "n_differenze": 2530,
+  "esclusi": [
+   "_tum_r_tot"
+  ],
+  "blob_prima": "cf2a1ac8",
+  "blob_oggi": "30e18cdd",
+  "passa": false
+ },
+ "S1": {
+  "passi_confrontati": 230,
+  "campi": [
+   "n",
+   "archi",
+   "nati_tot",
+   "schwinger_tot"
+  ],
+  "quantili_confrontati": 2070,
+  "n_differenze": 0,
+  "differenze": [],
+  "materia": 2990,
+  "passa": true,
+  "blob_copia": "1fc6eeb7"
+ },
+ "S2": {
+  "passi_confrontati": 230,
+  "n_differenze": 210,
+  "primo_passo_diverso": 212,
+  "quale": [
+   212,
+   "q_tw.q100",
+   12.194081290396355,
+   12.194081290395726
+  ],
+  "materia": 2990,
+  "passa": true
+ },
+ "passi": 230,
+ "blob_oggi": "30e18cddc253df951b2356d42809eb08521fff79",
+ "esito": 1
+}
