@@ -6869,3 +6869,51 @@ riga di commento prometteva di non fare.
 si ### **deriva** dal `json`)*; e l'etichetta `C1 (acceso 1000)` leggeva un file da
 ### **`150` passi** — ### **un'etichetta che mente**, come il falso `n/d`, i «calci» e il
 «per passo» che stampava una somma. ### **Ora l'etichetta DICE i passi, letti dal `json`.**
+
+---
+
+## 2026-10-06 — **A META' CORSA, passo `262`: il braccio acceso riproduce la misura lunga anche OLTRE i `150` passi, e le previsioni sulla prima nascita sono CADUTE TUTTE E DUE**
+
+Le due corse da `1000` passi sono ### **in volo**, in processi separati *(avvio `16:28`)*.
+Il simulatore ### **non si tocca:** resta `cf2a1ac8`. ### **Nessuna conclusione: `R` si legge
+a `1000` passi**, e il criterio lo dice.
+
+### ✔ ① `C0` SI CONFERMA OLTRE IL SUO ORIZZONTE, e questo non l'avevo chiesto
+
+`C0` confronta `150` passi. Ma il braccio acceso, girando a `1000`, da' ### **gli stessi tre
+«primi»** del referto della misura lunga:
+
+| | la misura lunga | il braccio acceso |
+|---|--:|--:|
+| prima **divisione** | `214` | ### **`214`** |
+| primo **Schwinger** | `215` | ### **`215`** |
+| primo arco oltre `4π` | `218` | ### **`218`** |
+
+> ### ✔ **Tre coincidenze esatte a `~215` passi, cioe' `65` passi OLTRE l'orizzonte di `C0`.**
+> ### **Non e' un controllo che avevo fissato**, e per questo vale: ### **non potevo averlo
+> accomodato.**
+
+### ⛔ ② E LE DUE PREVISIONI SULLA PRIMA NASCITA SONO CADUTE, nella stessa direzione
+
+| chi | aveva previsto | il fatto |
+|---|---|---|
+| **il guardiano** | *«piu' tardi del `214`, ### **forse mai entro `1000`**»* | ### **passo `216`** — piu' tardi di ### **DUE passi** |
+| **io** | *«fra il `250` e il `450`»* | ### **passo `216`** — ### **molto piu' presto** |
+
+> ### ⛔ **IL `0.3` NON RITARDA LA PRIMA NASCITA: la sposta di DUE PASSI su `216`.** La lettera
+> della previsione del guardiano *(«piu' tardi del `214`»)* e' ### **tecnicamente giusta**, e
+> ### **la sostanza e' sbagliata** — *«molte meno, forse mai»* descrive un'altra cosa. ### **E
+> la mia era sbagliata di piu'**, e in direzione opposta a quella che temevo.
+
+**E le divisioni al passo `262`:** ### **`19`** nel braccio zero contro ### **`39`**
+nell'acceso, cioe' un rapporto provvisorio di ### **`0.4872`.**
+
+> ### ⚠ **NON E' `R`, e non lo chiamo `R`:** il criterio dice ### **a `1000` passi**, e a
+> `262` la rete e' appena partita. ### **Lo riporto perche' il par.4 vuole il riscontro
+> subito, non perche' decida qualcosa.**
+
+**Gli altri numeri al passo `262`:** `|tw|` mediano ### **`2.6124`** *(zero)* contro
+### **`2.6101`** *(acceso)* — ### **quasi identici**; archi oltre `4π` `1` e `0`; `chi_tors`
+`2` e `0`; spinta oltre `π` dal dipolo ### **`40`** e ### **`0`**; e i nodi per classe
+### **`1203` / `3463` / `8167`** contro `1203` / `3470` / `8181` — ### **la MATERIA ha
+esattamente lo stesso conto nei due bracci.**
