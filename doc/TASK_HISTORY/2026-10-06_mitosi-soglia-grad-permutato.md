@@ -223,6 +223,28 @@ piu' vicino al comportamento persistente di `Bp`.
 > non la toglie, e cambia una cosa per un'altra.** Il confronto fra i due bracci dice
 > **quanto** pesa la lotteria; ### **nessuno dei due e' il braccio <<pulito>>.**
 
+## ⛔ ANNOTAZIONE DEL 2026-10-06 — **L'ESITO: la mia previsione e' REFUTATA**
+
+*(Scritta **dopo** i numeri, e ### **il ragionamento preliminare qui sopra NON si riscrive**:
+resta com'era, sbagliato, come il par.8 pretende.)*
+
+| | la previsione | esito |
+|---|---|---|
+| **il guardiano** | divisioni fra `0.5x` e `2x` *(fra `9` e `36`)* | ### **CONFERMATA** |
+| **io** | le nascite **CROLLANO** | ### ⛔ **REFUTATA** |
+
+Misurato: divisioni `27`/`28`/`30` sui tre semi, media `28.33` *(dispersione `1.25`)*,
+### **rapporto `1.5741` sulle divisioni e `1.1009` sulla finestra: `P1` su entrambi, e i tre
+semi nella STESSA lettura.** I quattro controlli passano.
+
+### ⛔ **DOVE HO SBAGLIATO:** il mio ragionamento poggiava sul `q05` della soglia a `6.9900`,
+che il referto `12e2ca7` aveva **gia' stabilito** essere un effetto di **SELEZIONE**. ### **Da
+un effetto di selezione non si deduce la causalita'** -- l'avevo scritto, e poi ci ho
+ragionato sopra come se fosse una deduzione.
+
+### ✔ **E LA REGOLA DELLA LOTTERIA SCATTA:** `P1` ⟹ ### **AMBIGUO**, quindi
+### **`Bperm-fisso` non e' una scelta fatta dopo i numeri: era fissata in `f922c20`, prima.**
+
 ## 3. TODO DEL NEXT STEP
 
 1. **commit di questo task history**, prima dello strumento, ### **DA SOLO**;

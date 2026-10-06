@@ -5997,3 +5997,74 @@ divisioni da `1219` a `2` in `A` e da `18` a `2` in `B`.**
 > ### ⛔ **LA MODULAZIONE E' PORTANTE, E LEGGE LA GRANDEZZA SBAGLIATA.** Sono due fatti
 > separati, misurati separatamente, e ### **nessuno dei due dice che cosa farne: quello e'
 > una decisione di Luca.**
+
+
+---
+
+## 2026-10-06 — `Bperm`, **I MORSI RIMESCOLATI: la mia previsione e' REFUTATA**
+
+*(Referto `doc/REFERTO_mitosi_soglia_grad_perm_2026-10-06.md`, blob `b02ad79f`, generato da
+`csv/_test_fork/_referto_perm.py` `da16513b` dal `soglia_perm.json` `3c9bcf55`. Simulatore
+`f7237563`, **NON toccato**; strumento `b399adb2`, committato **prima** in `472b0e6`.)*
+
+### LA DOMANDA
+
+Il `0.3` della modulazione e' **PORTANTE** *(senza di lui `2` divisioni invece di `18`)*. Ma
+porta perche' **abbassa** la soglia, o perche' la abbassa **PROPRIO SUGLI ARCHI AD ALTO
+GRADIENTE**? Il braccio `Bperm` rimescola i morsi fra gli archi: ### **la distribuzione delle
+soglie per passo resta IDENTICA, il legame arco-gradiente e' distrutto.**
+
+### IL RISULTATO
+
+| braccio | divisioni | `Σg1∧g2∧g3` | div/`Bp` |
+|---|--:|--:|--:|
+| `Bperm-s1` | `27` | `8722` | `1.5000` |
+| `Bperm-s2` | `28` | `8301` | `1.5556` |
+| `Bperm-s3` | `30` | `8534` | `1.6667` |
+| `Bperm-id` *(permutazione identica)* | `18` | `7738` | `1.0000` |
+| `Bp` | `18` | `7738` | `1.0000` |
+
+### ⛔ **LE NASCITE NON CROLLANO: SALGONO.** Media `28.33` *(dispersione `1.25`, il `4.4 %`)*,
+rapporto **`1.5741`** sulle divisioni e **`1.1009`** sulla finestra. ### **`P1` su entrambi i
+criteri, e i tre semi cadono nella STESSA lettura** -- due metriche che differiscono di **tre
+ordini di grandezza** di statistica dicono la stessa cosa.
+
+### ⛔ **LA MIA PREVISIONE E' SBAGLIATA, e lo dico per primo**
+
+Avevo previsto il **crollo**; la previsione del guardiano *(`0.5x`-`2x`)* e' **CONFERMATA**.
+### **E il ragionamento che mi aveva portato li' era quello che avevo DICHIARATO come
+bucato:** poggiava sul `q05` della soglia a `6.9900`, che il referto `12e2ca7` aveva stabilito
+essere un effetto di **SELEZIONE** -- e da un effetto di selezione ### **non si deduce la
+causalita'.** Avevo scritto che era un'aspettativa e non una deduzione: ### **era
+un'aspettativa SBAGLIATA.**
+
+### COME SI LEGGE — e la forma e' quella fissata nel task history
+
+`Bperm` distrugge il legame **arco-gradiente** ma **conserva la distribuzione dei morsi NEL
+TEMPO**. ### **Quindi `P1` si legge <<NON CONTA QUALE ARCO>>, NON <<il gradiente non
+conta>>:** il gradiente decide ancora **quanti** morsi grandi ci sono a ogni passo.
+
+> ### ⛔ **E IL RISULTATO E' AMBIGUO, per la regola fissata PRIMA dei numeri** *(`f922c20`)*:
+> `_PRNG.permutation` gira **a ogni passo**, quindi ogni arco riceve `150` lotterie e
+> ### **`p(mai il decile alto) = 0.9^150 = 1.37e-07`** -- praticamente **ogni** arco vede
+> almeno una volta una soglia bassa, mentre in `Bp` la vedono **sempre gli stessi**.
+> ### **La lotteria spinge le nascite VERSO L'ALTO, cioe' nella direzione che si e' misurata:
+> fra <<non conta quale arco>> e <<lotteria>> questo braccio NON DISTINGUE.**
+>
+> ### ➜ **Il passo successivo era fissato prima: `Bperm-fisso`**, permutazione ripescata
+> **solo quando `len(avv)` cambia** *(`13` lotterie invece di `150`)*. ### ⚠ **E non e'
+> <<`Bperm` senza il difetto>>: lega la permutazione alla TOPOLOGIA. Nessuno dei due e' il
+> braccio pulito.**
+
+### I QUATTRO CONTROLLI PASSANO
+
+`C-perm-0`: `Bperm-id` riproduce `Bp` **esattamente** *(`18`/`18`, `7738`/`7738`, `n`
+`12827`/`12827`)*. `C-distr`: multiinsieme dei morsi identico su **`150` passi su `150`**, su
+tutti e quattro i bracci, con `array_equal` sugli ordinati -- ### **esatto, non statistico.**
+`C1`: i quattro bracci ricostruiscono `nati`. `C-rng`: `len(avv)` diverge ai passi `79`/`83`/`84`
+e **mai** per `Bperm-id`.
+
+### ✔ **E IL PEZZO <<n/d>> DI `C-distr` L'AVEVO PREVISTO IO**, nel commit dello strumento
+*(`472b0e6`, punto `2`)*: l'**impronta** delle soglie non si confronta con `Bp`, perche' `Bp`
+*(`dd86933`)* viene da uno strumento che non la registrava. ### **La prova che conta resta il
+multiinsieme prima/dopo, calcolato DENTRO la corsa.**
