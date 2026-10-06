@@ -80,6 +80,13 @@ CRESCITA = os.path.join(RADICE, "csv", "_test_fork", "_crescita_dopo_z43", "cres
 PASSI = 150
 PASSI_SALVA = 10
 PASSI_CORR = (50, 100, 140)      # i passi della misura (2), fissati dal mandato
+# ### I TRE SEMI DELLA PERMUTAZIONE, fissati PRIMA della corsa (task history `70b89c5`).
+#   ### **Tre e non uno**, perche' con `18` divisioni di riferimento la deviazione di
+#   Poisson da sola e' `~sqrt(18) ~ 4.2`, cioe' il `24 %`: un seme solo ### **non distingue
+#   `0.5x` da `0.8x`.**
+SEMI_PERM = (101, 202, 303)
+SOGLIA_P1 = 0.5                  # `>= 0.5` -> il legame NON e' portante
+SOGLIA_P2 = 0.2                  # `<= 0.2` -> il legame E' portante
 SOGLIA_K1 = 0.8                  # `Ap0 >= 0.8x Ap` -> l'ipotesi su `A` e' REFUTATA
 SOGLIA_K2 = 0.05                 # `|Spearman| <= 0.05` a tutti e tre i passi -> REFUTATA
 SOGLIA_K2B = 2.0                 # quintile alto / quintile basso della SPINTA
@@ -182,7 +189,8 @@ def quintili(pred, bers):
 
 
 # =============================================================== LA COPIA PATCHATA
-def copia_patchata(sorgente, dst, amp=None, tw_split=False):
+def copia_patchata(sorgente, dst, amp=None, tw_split=False, perm_seme=None,
+                   perm_identica=False):
     """Le ancore si **CONTANO** e devono essere **UNICHE** (`P1-quater`)."""
     t = io.open(sorgente, encoding="utf-8").read()
     fatte = []
@@ -199,17 +207,45 @@ def copia_patchata(sorgente, dst, amp=None, tw_split=False):
         "import numpy as np" + NL
         + "_MIS = None   # [MITOSI-SOGLIA-GRAD] lo riempie lo strumento" + NL
         + ("_AMP = %r   # [MITOSI-SOGLIA-GRAD] l'ampiezza della modulazione" % (amp,)
-           if amp is not None else "") + (NL if amp is not None else ""),
-        "il gancio di modulo `_MIS`" + ("" if amp is None else " e `_AMP`"))
+           if amp is not None else "") + (NL if amp is not None else "")
+        + ("_PRNG = np.random.default_rng(%r)   # [Bperm] generatore SEPARATO, MAI self.rng"
+           % (perm_seme,) + NL if perm_seme is not None else ""),
+        "il gancio di modulo `_MIS`" + ("" if amp is None else " e `_AMP`")
+        + ("" if perm_seme is None else " e `_PRNG` (seme %r)" % (perm_seme,)))
     # --- i tre ganci del censimento dei cancelli: LE STESSE ANCORE di `_crescita_dopo_z43`
-    uno("            soglia = soglia0 * (1.0 - 0.3 * np.tanh(grad_modula))" + NL,
-        ("            soglia = soglia0 * (1.0 - %s * np.tanh(grad_modula))"
-         % ("_AMP" if amp is not None else "0.3")) + NL
-        + "            if _MIS is not None:" + NL
-        + "                _MIS.modulazione(self, rn=_rn, grad=grad_modula," + NL
-        + "                                 soglia0=soglia0, soglia=soglia)" + NL,
-        ("H1 + ### **L'AMPIEZZA**: `0.3` -> `_AMP = %r`" % (amp,)) if amp is not None
-        else "H1 (ampiezza INVARIATA)")
+    if perm_seme is None and not perm_identica:
+        uno("            soglia = soglia0 * (1.0 - 0.3 * np.tanh(grad_modula))" + NL,
+            ("            soglia = soglia0 * (1.0 - %s * np.tanh(grad_modula))"
+             % ("_AMP" if amp is not None else "0.3")) + NL
+            + "            if _MIS is not None:" + NL
+            + "                _MIS.modulazione(self, rn=_rn, grad=grad_modula," + NL
+            + "                                 soglia0=soglia0, soglia=soglia)" + NL,
+            ("H1 + ### **L'AMPIEZZA**: `0.3` -> `_AMP = %r`" % (amp,)) if amp is not None
+            else "H1 (ampiezza INVARIATA)")
+    else:
+        # ### IL BRACCIO `Bperm`: il MORSO si calcola COME OGGI e poi si PERMUTA.
+        #   ### **La distribuzione per passo resta IDENTICA** -- e' la stessa array
+        #   riordinata, quindi il multiinsieme e' conservato **per costruzione** -- e
+        #   ### **il legame arco-gradiente e' DISTRUTTO.**
+        #   ### ⚠ **IL GENERATORE E' SEPARATO** (`_PRNG`), **MAI `self.rng`**: se usasse
+        #   quello del simulatore, ogni permutazione CONSUMEREBBE estrazioni e le
+        #   `rng.random(len(avv))` della mitosi si sposterebbero -- il confronto non sarebbe
+        #   piu' a parita' di dado.
+        #   ### ✔ **E con `perm_identica` la permutazione e' `arange`, cioe' un NO-OP
+        #   ARITMETICO:** serve a `C-perm-0`, che pretende il byte-identico con `Bp`.
+        uno("            soglia = soglia0 * (1.0 - 0.3 * np.tanh(grad_modula))" + NL,
+            "            _bite = 0.3 * np.tanh(grad_modula)" + NL
+            + ("            _p = np.arange(len(_bite))" + NL if perm_identica
+               else "            _p = _PRNG.permutation(len(_bite))" + NL)
+            + "            _bite_perm = _bite[_p]" + NL
+            + "            soglia = soglia0 * (1.0 - _bite_perm)" + NL
+            + "            if _MIS is not None:" + NL
+            + "                _MIS.modulazione(self, rn=_rn, grad=grad_modula," + NL
+            + "                                 soglia0=soglia0, soglia=soglia," + NL
+            + "                                 bite=_bite, bite_perm=_bite_perm)" + NL,
+            ("### **IL MORSO PERMUTATO** (%s)"
+             % ("permutazione IDENTICA: no-op" if perm_identica
+                else "generatore SEPARATO, seme %r" % (perm_seme,))))
     uno("        c = np.where(nasce)[0]" + NL,
         "        if _MIS is not None:" + NL
         + "            _MIS.catena(self, avv=avv, soglia=soglia, ecc=ecc, salita=salita," + NL
@@ -256,11 +292,29 @@ class Misura(object):
         self.corr = {}          # passo -> le correlazioni
         self._prec = None       # la FOTOGRAFIA di r e phivel del passo PRECEDENTE (COPIE)
 
-    def modulazione(self, net, rn, grad, soglia0, soglia):
+    def modulazione(self, net, rn, grad, soglia0, soglia, bite=None, bite_perm=None):
         g = np.asarray(grad, float)
         self._mod = {"soglia0": float(soglia0), "grad": q(g), "r_nodo": q(rn),
                      "soglia": q(soglia),
                      "morso": q(1.0 - np.asarray(soglia, float) / float(soglia0))}
+        # ### `C-distr`: IL MULTIINSIEME DELLE SOGLIE, verificato con un ORDINAMENTO e un
+        #   confronto ESATTO. Si tiene un'IMPRONTA per passo -- la somma e lo sha1 dei byte
+        #   dell'array ORDINATO -- invece dell'array intero: ### **un confronto esatto su
+        #   471 mila valori per 150 passi non entra in un json**, e lo sha1 dei byte
+        #   ordinati e' ESATTO (non una statistica).
+        _s = np.sort(np.asarray(soglia, float))
+        self._mod["soglie_impronta"] = hashlib.sha1(
+            np.ascontiguousarray(_s).tobytes()).hexdigest()[:16]
+        self._mod["soglie_n"] = int(_s.size)
+        if bite is not None:
+            _b, _bp = np.asarray(bite, float), np.asarray(bite_perm, float)
+            self._mod["bite_impronta"] = hashlib.sha1(
+                np.ascontiguousarray(np.sort(_b)).tobytes()).hexdigest()[:16]
+            self._mod["bite_perm_impronta"] = hashlib.sha1(
+                np.ascontiguousarray(np.sort(_bp)).tobytes()).hexdigest()[:16]
+            # ### LA PROVA DIRETTA, per passo: il multiinsieme PRIMA e DOPO la permutazione
+            self._mod["bite_multiinsieme_uguale"] = bool(
+                _b.size == _bp.size and np.array_equal(np.sort(_b), np.sort(_bp)))
 
     def catena(self, net, avv, soglia, ecc, salita, discesa, ft, segno, resp, prob, nasce):
         avv = np.asarray(avv, float)
@@ -436,8 +490,14 @@ def _scrivi(d):
     # ### CON `--solo-bg` SI SCRIVE UN FILE A PARTE: il `soglia.json` della corsa a
     #   quattro bracci e' COMMITTATO (`dd86933`), e sovrascriverlo cancellerebbe `K1` e i
     #   controlli. ### **Un dato committato non si sovrascrive con una corsa parziale.**
-    _nome = "soglia_bg.json" if d.get("solo_bg") else "soglia.json"
-    _txt = "soglia_bg.txt" if d.get("solo_bg") else "soglia.txt"
+    # ### OGNI MODO SCRIVE IL SUO FILE: i json delle corse precedenti sono COMMITTATI, e
+    #   ### **un dato committato non si sovrascrive con una corsa diversa.**
+    if d.get("perm"):
+        _nome, _txt = "soglia_perm.json", "soglia_perm.txt"
+    elif d.get("solo_bg"):
+        _nome, _txt = "soglia_bg.json", "soglia_bg.txt"
+    else:
+        _nome, _txt = "soglia.json", "soglia.txt"
     io.open(os.path.join(FUORI, _nome), "w", encoding="utf-8").write(
         json.dumps(d, indent=1, default=str))
     io.open(os.path.join(FUORI, _txt), "w", encoding="utf-8").write(
@@ -447,6 +507,7 @@ def _scrivi(d):
 def main(argv):
     passi = PASSI
     solo_bg = "--solo-bg" in argv[1:]
+    perm = "--perm" in argv[1:]
     if "--collaudo" in argv[1:]:
         riga("=")
         stampa("IL COLLAUDO DI _mitosi_soglia_grad.py")
@@ -507,15 +568,32 @@ def main(argv):
           ("B03", SIM, 0.3, False), ("Bg", SIM, None, True)]
     # ### `--solo-bg`: si rigira SOLO il braccio della misura (2). Gli altri tre non
     #   c'entrano col predittore sfasato, e rigirarli sarebbero due ore buttate.
-    if solo_bg:
+    if perm:
+        # ### I QUATTRO BRACCI DI `Bperm`: tre semi piu' la permutazione IDENTICA per
+        #   `C-perm-0`. ### **L'ampiezza resta `0.3`**: si randomizza la FORMA, non
+        #   l'ampiezza.
+        BR = [("Bperm-s%d" % (k + 1), SIM, None, False) for k in range(len(SEMI_PERM))]
+        BR.append(("Bperm-id", SIM, None, False))
+        stampa("  ### I MORSI RIMESCOLATI: tre semi (%s) piu' la permutazione IDENTICA."
+               % ", ".join(str(s) for s in SEMI_PERM))
+        stampa("      ### L'AMPIEZZA RESTA 0.3: si randomizza la FORMA, non l'ampiezza.")
+        stampa("      ### E il generatore della permutazione e' SEPARATO: mai self.rng,")
+        stampa("          cosi' le estrazioni del simulatore restano a parita' di dado.")
+    elif solo_bg:
         BR = [("Bg", SIM, None, True)]
         stampa("  ### SOLO IL BRACCIO Bg: gli altri tre non usano il gancio `torsione`,")
         stampa("      quindi il difetto del predittore non li tocca e i loro numeri")
         stampa("      restano quelli committati in dd86933.")
     sorg, mis, S_, N_, anc = {}, {}, {}, {}, {}
     for nome, src, amp, tws in BR:
-        dst = os.path.join(FUORI, "_sim_%s.py" % nome.lower())
-        anc[nome] = copia_patchata(src, dst, amp=amp, tw_split=tws)
+        dst = os.path.join(FUORI, "_sim_%s.py" % nome.lower().replace("-", "_"))
+        if perm:
+            _id = nome.endswith("-id")
+            _sm = None if _id else SEMI_PERM[int(nome[-1]) - 1]
+            anc[nome] = copia_patchata(src, dst, amp=None, tw_split=False,
+                                       perm_seme=_sm, perm_identica=_id)
+        else:
+            anc[nome] = copia_patchata(src, dst, amp=amp, tw_split=tws)
         sorg[nome] = dst
         stampa("  %-5s da %-10s ampiezza %-5s tw_split %-5s -> blob %s  (%d ancore)"
                % (nome, os.path.basename(src), amp, tws, blob(dst)[:8], len(anc[nome])))
@@ -541,7 +619,9 @@ def main(argv):
 
     def _istantanea(stato, k, err=None):
         d = {"piattaforma": pf, "passi": passi, "passi_girati": k, "stato": stato,
-             "solo_bg": bool(solo_bg),
+             "solo_bg": bool(solo_bg), "perm": bool(perm),
+             "semi_perm": list(SEMI_PERM) if perm else None,
+             "soglie_p": {"P1": SOGLIA_P1, "P2": SOGLIA_P2} if perm else None,
              "predittore_causale": all(
                  (mis["Bg"].corr.get(p) or {}).get("causale", False) for p in PASSI_CORR)
              if ("Bg" in mis and mis["Bg"].corr) else False,
@@ -601,6 +681,12 @@ def main(argv):
     comune = _istantanea("DATI SALVATI, rapporto NON ancora girato", passi)
     stampa("  ### I DATI SONO GIA' SALVATI in soglia.json, PRIMA del rapporto.")
     stampa()
+    if perm:
+        esito, guasti = rapporto_perm(mis, N_, n0, cre, rifB, divB, in_conf, passi)
+        d = dict(comune)
+        d.update({"esito": esito, "guasti": guasti, "stato": "fatto (perm)"})
+        _scrivi(d)
+        return esito
     if solo_bg:
         stampa("  ### CON --solo-bg NON SI STAMPA IL RAPPORTO: K1 e i controlli vivono")
         stampa("      nella corsa a quattro bracci (dd86933), e il referto li legge DA LI'.")
@@ -634,6 +720,192 @@ def main(argv):
 
 def _divisioni(m):
     return m.totali()["divisioni"]
+
+
+def rapporto_perm(mis, N_, n0, cre, rifB, divB, in_conf, passi):
+    """Il rapporto del braccio `Bperm`: `P1`/`P2`/`P3` applicati ### **ALLA MEDIA** dei tre
+    semi, piu' la dichiarazione ### **se i tre semi cadono in letture diverse.**"""
+    guasti = []
+    perB = {r["passo"]: r for r in rifB["passi"]}
+    nomi_s = [k for k in mis if k.startswith("Bperm-s")]
+    nomi_s.sort()
+    fin_B = sum(r.get("g1_e_g2_e_g3", 0) for r in rifB["passi"])
+
+    def _fin(m):
+        return sum(r.get("g1_e_g2_e_g3", 0) for r in m.passi)
+
+    riga("=")
+    stampa("I MORSI RIMESCOLATI: tre semi contro Bp (18 divisioni, %d nella finestra)"
+           % fin_B)
+    riga("=")
+    stampa("  %-12s %12s %16s %12s %12s"
+           % ("braccio", "divisioni", "Sum g1^g2^g3", "div/Bp", "fin/Bp"))
+    dv, fn = [], []
+    for k in nomi_s:
+        d_ = _divisioni(mis[k])
+        f_ = _fin(mis[k])
+        dv.append(d_)
+        fn.append(f_)
+        stampa("  %-12s %12d %16d %12s %12s"
+               % (k, d_, f_, ("%.4f" % (d_ / divB)) if divB else "n/d",
+                  ("%.4f" % (f_ / fin_B)) if fin_B else "n/d"))
+    k_id = [k for k in mis if k.endswith("-id")]
+    if k_id:
+        stampa("  %-12s %12d %16d %12s %12s   (permutazione IDENTICA: deve dare Bp)"
+               % (k_id[0], _divisioni(mis[k_id[0]]), _fin(mis[k_id[0]]),
+                  ("%.4f" % (_divisioni(mis[k_id[0]]) / divB)) if divB else "n/d",
+                  ("%.4f" % (_fin(mis[k_id[0]]) / fin_B)) if fin_B else "n/d"))
+    stampa("  %-12s %12d %16d %12s %12s   (RIFERIMENTO, da dd86933)"
+           % ("Bp", divB, fin_B, "1.0000", "1.0000"))
+    stampa()
+    import statistics as _st
+    m_dv = sum(dv) / len(dv) if dv else 0.0
+    m_fn = sum(fn) / len(fn) if fn else 0.0
+    sd_dv = _st.pstdev(dv) if len(dv) > 1 else 0.0
+    sd_fn = _st.pstdev(fn) if len(fn) > 1 else 0.0
+    stampa("  MEDIA sui %d semi:  divisioni %.2f (dispersione %.2f)   "
+           "Sum g1^g2^g3 %.1f (dispersione %.1f)" % (len(dv), m_dv, sd_dv, m_fn, sd_fn))
+    r_dv = (m_dv / divB) if divB else None
+    r_fn = (m_fn / fin_B) if fin_B else None
+    stampa("  RAPPORTI SULLA MEDIA:  divisioni %s   finestra %s"
+           % (("%.4f" % r_dv) if r_dv is not None else "n/d",
+              ("%.4f" % r_fn) if r_fn is not None else "n/d"))
+    stampa()
+
+    def _letto(r):
+        if r is None:
+            return "n/d"
+        if r >= SOGLIA_P1:
+            return "P1 (il legame NON e' portante)"
+        if r <= SOGLIA_P2:
+            return "P2 (il legame E' portante)"
+        return "P3 (intermedia)"
+
+    riga("=")
+    stampa("P1 / P2 / P3, applicati ALLA MEDIA")
+    riga("=")
+    stampa("  sulle DIVISIONI (%d eventi di riferimento): %s" % (divB, _letto(r_dv)))
+    stampa("  sulla FINESTRA  (%d passi-arco):            %s" % (fin_B, _letto(r_fn)))
+    stampa()
+    # ### I TRE SEMI CADONO IN LETTURE DIVERSE?
+    let_s = [_letto(d_ / divB if divB else None) for d_ in dv]
+    let_f = [_letto(f_ / fin_B if fin_B else None) for f_ in fn]
+    stampa("  LE LETTURE SEME PER SEME, sulle divisioni: %s" % ", ".join(let_s))
+    stampa("  LE LETTURE SEME PER SEME, sulla finestra:  %s" % ", ".join(let_f))
+    if len(set(let_s)) > 1:
+        stampa("  ### I TRE SEMI CADONO IN LETTURE DIVERSE sulle DIVISIONI: la media va letta")
+        stampa("      CON QUESTA RISERVA ACCANTO. Una media che sta fra due letture NON e'")
+        stampa("      una terza lettura: e' UN'INCERTEZZA.")
+    else:
+        stampa("  ### I TRE SEMI CADONO NELLA STESSA LETTURA sulle divisioni: %s" % let_s[0])
+    if len(set(let_f)) > 1:
+        stampa("  ### E IN LETTURE DIVERSE sulla FINESTRA: %s" % ", ".join(let_f))
+    else:
+        stampa("  ### E NELLA STESSA LETTURA sulla finestra: %s" % let_f[0])
+    if _letto(r_dv) != _letto(r_fn):
+        stampa("  ### ⚠ E I DUE CRITERI DISCORDANO -- divisioni contro finestra. VALE QUELLO")
+        stampa("      CON PIU' STATISTICA (la finestra, %d contro %d), e LA DISCORDANZA SI"
+               % (fin_B, divB))
+        stampa("      RIPORTA come risultato, non si risolve scegliendo il piu' comodo.")
+    stampa()
+    # ### E LA LETTURA VA DETTA NELLA FORMA GIUSTA
+    stampa("  ### E SE LE NASCITE RESTANO, LA LETTURA E' <<NON CONTA QUALE ARCO>>, NON")
+    stampa("      <<IL GRADIENTE NON CONTA>>: Bperm conserva la distribuzione dei morsi NEL")
+    stampa("      TEMPO, quindi il gradiente decide ancora QUANTI morsi grandi ci sono a")
+    stampa("      ogni passo. (Limite dichiarato nel task history, 70b89c5.)")
+    stampa()
+    riga("=")
+    stampa("I CONTROLLI")
+    riga("=")
+    CAMPI = ("archi", "g1_sopra_soglia", "g1_e_g2", "g1_e_g2_e_g3", "prob_positiva",
+             "g4_nasce", "n")
+    # C-perm-0
+    if k_id:
+        dd = []
+        for r in mis[k_id[0]].passi:
+            s = perB.get(r["passo"])
+            if s is None:
+                continue
+            for c in CAMPI:
+                if int(r.get(c, -1)) != int(s.get(c, -1)):
+                    dd.append((r["passo"], c, r.get(c), s.get(c)))
+        ok = (not dd and int(N_[k_id[0]].n) == cre["a_valle"]["n_Bp"])
+        stampa("  C-perm-0  %s contro Bp: differenze %d su %d passi, n %d contro %d  -> %s"
+               % (k_id[0], len(dd), len(mis[k_id[0]].passi), int(N_[k_id[0]].n),
+                  cre["a_valle"]["n_Bp"], "PASSA" if ok else "### FALLISCE"))
+        for x in dd[:5]:
+            stampa("            passo %s  %s: %s contro %s" % x)
+        if not ok:
+            guasti.append("C-perm-0")
+    # C-distr
+    stampa("  C-distr   il multiinsieme dei MORSI, prima e dopo la permutazione:")
+    for k in nomi_s + k_id:
+        tot = 0
+        ug = 0
+        for r in mis[k].passi:
+            m_ = r.get("mod") or {}
+            if "bite_multiinsieme_uguale" in m_:
+                tot += 1
+                ug += 1 if m_["bite_multiinsieme_uguale"] else 0
+        okd = (tot > 0 and ug == tot)
+        stampa("            %-12s passi verificati %3d, identici %3d  -> %s"
+               % (k, tot, ug, "PASSA" if okd else "### FALLISCE"))
+        if not okd:
+            guasti.append("C-distr %s" % k)
+    # ### E L'IMPRONTA DELLE SOGLIE contro Bp, passo per passo
+    stampa("  C-distr   l'impronta delle SOGLIE ordinate contro Bp:")
+    for k in nomi_s + k_id:
+        div_i = 0
+        tot_i = 0
+        for r in mis[k].passi:
+            s = perB.get(r["passo"])
+            m_ = r.get("mod") or {}
+            sm = (s or {}).get("mod") or {}
+            if "soglie_impronta" in m_ and "soglie_impronta" in sm:
+                tot_i += 1
+                if m_["soglie_impronta"] != sm["soglie_impronta"]:
+                    div_i += 1
+        stampa("            %-12s passi confrontati %3d, impronte DIVERSE %3d  -> %s"
+               % (k, tot_i, div_i,
+                  "identiche" if (tot_i and not div_i) else
+                  ("### DIVERSE" if tot_i else "n/d: Bp non porta l'impronta")))
+    # C1
+    for k in nomi_s + k_id:
+        tt_ = mis[k].totali()
+        ric = _divisioni(mis[k]) + tt_["schwinger"]
+        ok1 = (ric == tt_["nati_tot"])
+        stampa("  C1 %-12s %d + %d = %d contro nati %d   %s"
+               % (k, _divisioni(mis[k]), tt_["schwinger"], ric, tt_["nati_tot"],
+                  "COINCIDE" if ok1 else "### NON COINCIDE"))
+        if not ok1:
+            guasti.append("C1 %s" % k)
+    # C-rng
+    stampa("  C-rng     len(avv) contro Bp:")
+    for k in nomi_s + k_id:
+        primo = None
+        for r in mis[k].passi:
+            s = perB.get(r["passo"])
+            if s is None:
+                continue
+            if int(r.get("len_avv", -1)) != int(s.get("archi", -2)):
+                primo = r["passo"]
+                break
+        stampa("            %-12s primo passo DIVERSO: %s"
+               % (k, primo if primo is not None else "nessuno"))
+    stampa()
+    riga("=")
+    stampa("IL VERDETTO")
+    riga("=")
+    stampa("  configurazione dichiarata INTERA: %s" % bool(in_conf))
+    if guasti:
+        stampa("  ### FERMO. I GUASTI:")
+        for g in guasti:
+            stampa("      - " + g)
+        return 1, guasti
+    stampa("  ### I CONTROLLI PASSANO.")
+    stampa("  ### E QUESTA E' UNA MISURA, NON UN SIGILLO: che fare del 0.3 e' UNA DECISIONE")
+    stampa("      DI LUCA.")
+    return 0, []
 
 
 def rapporto(mis, N_, n0, cre, rifA, rifB, divA, divB, in_conf, passi):
@@ -1086,6 +1358,71 @@ def collaudo():
           "_nomi = [x[0] for x in BR]" in _ciclo
           and '("Ap0", "Bp0", "B03", "Bg")' not in _ciclo,
           "con --solo-bg i bracci sono UNO")
+
+    # --- 9. LA PERMUTAZIONE DEI MORSI: conserva il multiinsieme, l'identica e' un no-op
+    _g = np.random.default_rng(101)
+    _b = _g.random(1000)
+    _p = _g.permutation(len(_b))
+    prova("perm: il multiinsieme dei morsi e' CONSERVATO (stessa array riordinata)",
+          bool(np.array_equal(np.sort(_b), np.sort(_b[_p]))))
+    prova("perm: ### e il LEGAME e' distrutto: l'array permutato NON e' quello di partenza",
+          not bool(np.array_equal(_b, _b[_p])))
+    prova("perm: la permutazione IDENTICA e' un NO-OP ARITMETICO",
+          bool(np.array_equal(_b[np.arange(len(_b))], _b)),
+          "b[arange(len(b))] E' b")
+    # ### E IL GENERATORE SEPARATO NON TOCCA QUELLO DEL SIMULATORE: due `default_rng` con lo
+    #   stesso seme danno la stessa sequenza anche se in mezzo un TERZO generatore gira.
+    _r1 = np.random.default_rng(11)
+    _v1 = [float(_r1.random()) for _ in range(5)]
+    _r2 = np.random.default_rng(11)
+    _mezzo = np.random.default_rng(999)
+    _v2 = []
+    for _ in range(5):
+        _mezzo.permutation(10000)          # il generatore della permutazione LAVORA
+        _v2.append(float(_r2.random()))
+    prova("perm: ### un generatore SEPARATO non sposta le estrazioni dell'altro",
+          _v1 == _v2, "le due sequenze coincidono")
+    # ### LA PATCH: i tre modi danno sorgenti diversi nel modo giusto
+    import tempfile
+    _d2 = tempfile.mkdtemp()
+    _pp = os.path.join(_d2, "p.py")
+    _pi = os.path.join(_d2, "i.py")
+    copia_patchata(SIM, _pp, amp=None, tw_split=False, perm_seme=101)
+    copia_patchata(SIM, _pi, amp=None, tw_split=False, perm_identica=True)
+    _tp = io.open(_pp, encoding="utf-8").read()
+    _ti = io.open(_pi, encoding="utf-8").read()
+    prova("perm: col seme il sorgente ha `_PRNG = np.random.default_rng(101)`",
+          "_PRNG = np.random.default_rng(101)" in _tp)
+    prova("perm: ### e usa `_PRNG.permutation`, MAI `self.rng`",
+          "_PRNG.permutation(len(_bite))" in _tp
+          and "self.rng.permutation" not in _tp)
+    prova("perm: con la permutazione IDENTICA usa `np.arange` e NON ha `_PRNG`",
+          "_p = np.arange(len(_bite))" in _ti
+          and "_PRNG = np.random.default_rng" not in _ti)
+    prova("perm: ### il morso si calcola COME OGGI, `0.3 * np.tanh(grad_modula)`",
+          _tp.count("_bite = 0.3 * np.tanh(grad_modula)") == 1
+          and _ti.count("_bite = 0.3 * np.tanh(grad_modula)") == 1)
+    prova("perm: ### e la riga originale della soglia NON resta",
+          _tp.count("soglia = soglia0 * (1.0 - 0.3 * np.tanh(grad_modula))") == 0
+          and _ti.count("soglia = soglia0 * (1.0 - 0.3 * np.tanh(grad_modula))") == 0)
+    # ### i due sorgenti differiscono SOLO per la riga della permutazione
+    _a2 = _tp.replace("_PRNG = np.random.default_rng(101)   # [Bperm] generatore SEPARATO, "
+                      "MAI self.rng" + NL, "").replace(
+        "            _p = _PRNG.permutation(len(_bite))", "            _p = X")
+    _b2 = _ti.replace("            _p = np.arange(len(_bite))", "            _p = X")
+    prova("perm: ### i due modi differiscono SOLO nella riga della permutazione",
+          _a2 == _b2, "il resto del sorgente e' IDENTICO")
+    # --- il controllo che DEVE fallire: un morso permutato NON e' quello originale
+    _s0 = 3.0 * np.pi
+    _so = _s0 * (1.0 - _b)
+    _sp = _s0 * (1.0 - _b[_p])
+    prova("perm: ### le SOGLIE permutate hanno lo STESSO multiinsieme di quelle originali",
+          bool(np.array_equal(np.sort(_so), np.sort(_sp))))
+    prova("perm: ### ma NON sono le stesse arco per arco (il legame e' rotto)",
+          not bool(np.array_equal(_so, _sp)))
+    prova("perm: l'impronta sha1 dei byte ORDINATI coincide, ed e' ESATTA non statistica",
+          hashlib.sha1(np.ascontiguousarray(np.sort(_so)).tobytes()).hexdigest()
+          == hashlib.sha1(np.ascontiguousarray(np.sort(_sp)).tobytes()).hexdigest())
 
     riga("=")
     ko = [n for n, o, _d in esiti if not o]
