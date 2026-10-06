@@ -6390,3 +6390,42 @@ parte.**
 
 **Fallimento committato con la prova; la cura e' un commit a se', poi la corsa si rilancia.**
 Il simulatore ### **non si tocca:** resta `cf2a1ac8`.
+
+---
+
+## 2026-10-06 — **LA CURA DI `LUNGA-BATTITO-CADUTA`, e nessuna delle tre mosse e' «cambiare la chiave»**
+
+Lo strumento passa da `d95639a4` a ### **`bc62bcaa`**. Il simulatore ### **non si tocca:**
+resta `cf2a1ac8`.
+
+1. la riga del battito diventa la funzione ### **`battito()`, FUORI dal ciclo**, cosi' che
+   il collaudo ### **possa CHIAMARLA.** Finche' era una `print` dentro un ciclo da `1000`
+   passi, ### **nessun controllo poteva guardarla.**
+2. il `try` ### **si allarga a TUTTO il corpo del ciclo**, stampa e salvataggio compresi; e
+   il salvataggio dichiara `len(m.passi)` invece di `k - 1`, ### **che BUTTAVA un passo** se
+   la caduta arrivava dopo `m.chiudi`. **Piu' un `except` interno:** se il salvataggio stesso
+   cade, ### **si dice** invece di lasciare la corsa muta su due guasti.
+3. ### **sette casi che ESERCITANO `battito()`**, e quello che conta e' uno: ### **ogni
+   chiave che la riga legge con `[...]` deve ESISTERE**, e le chiavi ### **si ricavano
+   dall'AST del suo sorgente** invece di scriverle a mano — cosi' il controllo prende
+   ### **qualunque rinomina futura**, non quella di ieri.
+
+> ### ✔ **E IL POTERE E' MISURATO, NON ASSERITO:** ho rimesso la chiave morta in una copia, e
+> il collaudo scende a ### **`43` su `47`** e ### **la NOMINA**
+> *(`mancanti ['calci_oltre_pi']`)*. Sul `try` ho fatto lo stesso: una caduta ### **finta
+> nella stampa** al passo `2`, e il `json` ora si scrive con ### **`2` passi su `2`** — dove
+> ieri non si scriveva ### **affatto.**
+
+> ### ⚠ **E ANCHE QUI HO SBAGLIATO ESERCITANDOLO, non leggendolo:** il mio
+> caso-che-deve-fallire faceva `del _rotto[_tolta]` su una chiave ### **letta**, quindi col
+> difetto presente ### **FACEVA CADERE il collaudo invece di RIFERIRLO.** Corretto
+> scegliendo la chiave ### **nell'intersezione con quelle che esistono.** ### **E' la stessa
+> lezione del fallimento che sto curando: un controllo si GIRA, non si legge.**
+
+**E IL GIRO CORTO — quello che la volta scorsa ho saltato — E' STATO RIFATTO SUL FILE
+CURATO:** `4` passi, uscita `0`, e ### **i numeri coincidono ESATTI con quelli di prima
+della cura** *(`evitati` `0` → `318` → `595` → `859`; `|tw| q50` `0.0000` → `0.0000` →
+`0.0361` → `0.0673`)*. ### **La cura ha cambiato la STRUTTURA e le ETICHETTE, non la
+MISURA**, e questo e' il modo di dirlo che non chiede di crederci.
+
+**Collaudo `47` su `47`. La corsa da `1000` passi si rilancia adesso.**

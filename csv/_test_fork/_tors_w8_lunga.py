@@ -332,6 +332,23 @@ def _w4(a):
 
 
 # =============================================================== IL COLLAUDO
+def battito(k, passi, u, cont):
+    """### **LA RIGA DEL BATTITO, in una FUNZIONE perche' il COLLAUDO possa CHIAMARLA.**
+
+    ### ⛔ **IL DIFETTO DI `LUNGA-BATTITO-CADUTA` STAVA PROPRIO QUI**, e nessun controllo
+    ### la guardava: era una `print` **dentro il ciclo**, e un collaudo non gira un ciclo
+    ### da `1000` passi. **Citava `calci_oltre_pi`, una chiave che la cura dell'etichetta
+    ### aveva spezzato in TRE** -- e la corsa e' caduta al passo `1`.
+    """
+    return ("[battito] passo %d/%d  n=%d archi=%d  nati=%d sch=%d  |tw| q50=%.4f  "
+            "sopra4pi=%d  evitati=%d spuri=%d senza_causa=%d  tautw_salti=%d"
+            % (k, passi, u["n"], u["archi"], u["nati_tot"], u["schwinger_tot"],
+               (u.get("q_tw") or {}).get("q050", float("nan")),
+               u.get("sopra_4pi", -1), cont["calci_evitati"],
+               cont["calci_spuri_curata"], cont["spinta_senza_causa"],
+               u["tautw_salti"]))
+
+
 def collaudo():
     esiti = []
 
@@ -565,6 +582,68 @@ def collaudo():
           all(x["divisioni"] == x["nati"] - x["schwinger"] for x in fin))
 
     riga("=")
+    stampa("9. LA RIGA DEL BATTITO -- il difetto di `LUNGA-BATTITO-CADUTA`")
+    riga("=")
+    # ### ⛔ **QUESTA SEZIONE NON C'ERA, E LA CORSA E' CADUTA PROPRIO QUI.** Il collaudo
+    #   passava `40/40` esercitando le FORMULE, e la riga che le ### **STAMPA** non la
+    #   guardava nessuno: citava `calci_oltre_pi`, una chiave che la cura dell'etichetta
+    #   aveva spezzato in TRE. ### **Un collaudo che prova le formule non prova il rapporto
+    #   che le stampa.**
+    _ub = m3.passi[-1]
+    _cb = Misura(0.01).cont
+    try:
+        _ril = battito(7, 1000, _ub, _cb)
+        _err = None
+    except Exception as _e:
+        _ril, _err = None, repr(_e)
+    prova("battito: ### si CHIAMA su un passo VERO e NON solleva", _err is None,
+          _err or _ril[:60])
+    prova("battito: ### e la riga comincia con `[battito]`",
+          bool(_ril) and _ril.startswith("[battito] passo 7/1000"))
+    prova("battito: ### i TRE contatori compaiono per NOME",
+          bool(_ril) and all(x in _ril for x in ("evitati=", "spuri=", "senza_causa=")),
+          _ril[-70:] if _ril else "")
+    # ### IL CONTROLLO GENERALE, e non quello sulla chiave di ieri: ogni chiave che
+    #   `battito` LEGGE con `[...]` deve ESISTERE. ### **Ricavata dall'AST del suo
+    #   sorgente, non scritta a mano**, cosi' prende QUALUNQUE rinomina futura.
+    import ast as _ast
+    import inspect as _insp
+    _al = _ast.parse(_insp.getsource(battito).lstrip())
+    _letti = {"cont": set(), "u": set()}
+    for _nd in _ast.walk(_al):
+        if (isinstance(_nd, _ast.Subscript) and isinstance(_nd.value, _ast.Name)
+                and _nd.value.id in _letti and isinstance(_nd.slice, _ast.Constant)
+                and isinstance(_nd.slice.value, str)):
+            _letti[_nd.value.id].add(_nd.slice.value)
+    _manc_c = sorted(_letti["cont"] - set(_cb))
+    _manc_u = sorted(_letti["u"] - set(_ub))
+    prova("battito: ### OGNI chiave di `cont` che legge ESISTE in `Misura.cont`",
+          not _manc_c, "legge %d chiavi; mancanti %s" % (len(_letti["cont"]), _manc_c))
+    prova("battito: ### OGNI chiave di `u` che legge ESISTE nel passo registrato",
+          not _manc_u, "legge %d chiavi; mancanti %s" % (len(_letti["u"]), _manc_u))
+    prova("battito: ### e le chiavi che legge NON sono zero (il controllo ha MATERIA)",
+          len(_letti["cont"]) >= 3 and len(_letti["u"]) >= 4,
+          "cont %s | u %s" % (sorted(_letti["cont"]), sorted(_letti["u"])))
+    # ### IL CASO CHE DEVE FALLIRE: senza una chiave, `battito` DEVE sollevare.
+    # ### ⛔ **`& set(_cb)`, e NON la prima chiave che legge:** se una chiave letta
+    #   NON esiste -- cioe' se il difetto di ieri e' tornato -- il `del` farebbe CADERE
+    #   il collaudo invece di RIFERIRLO. ### **Trovato esercitandolo: ho rimesso la chiave
+    #   morta in una copia, e il collaudo e' MORTO sul caso-che-deve-fallire.**
+    _cand = sorted(_letti["cont"] & set(_cb))
+    _tolta = _cand[0] if _cand else None
+    _rotto = dict(_cb)
+    if _tolta is not None:
+        del _rotto[_tolta]
+    try:
+        battito(7, 1000, _ub, _rotto)
+        _alza = False
+    except KeyError:
+        _alza = _tolta is not None
+    prova("battito: ### DEVE FALLIRE -- togliendo `%s` da `cont` solleva KeyError"
+          % (_tolta,), _alza,
+          "### se NON solleva, questo controllo non ha potere" if not _alza else "")
+
+    riga("=")
     ko = [n for n, o, _d in esiti if not o]
     stampa("COLLAUDO: %d su %d" % (len(esiti) - len(ko), len(esiti)))
     if ko:
@@ -653,23 +732,28 @@ def main(argv):
             with contextlib.redirect_stdout(io.StringIO()):
                 _passo.passo_pieno(S, N)
             m.chiudi(N)
+            print(battito(k, passi, m.passi[-1], m.cont), flush=True)
+            if k % PASSI_SALVA == 0:
+                _ist("IN CORSO", k)
         except Exception as e:
             import traceback
+            _tb = traceback.format_exc()
+            _reg = len(m.passi)
             stampa("### LA CORSA E' CADUTA AL PASSO %d: %r" % (k, e))
-            stampa(traceback.format_exc())
-            stampa("### MA I DATI DEI %d PASSI PRIMA SONO SALVATI." % (k - 1))
-            _ist("CADUTA al passo %d" % k, k - 1,
-                 err={"passo": k, "errore": repr(e), "traccia": traceback.format_exc()})
+            stampa(_tb)
+            # ### ⚠ **`_reg`, NON `k - 1`:** se cade DOPO `m.chiudi` il passo `k` e'
+            #   gia' registrato, e dire `k - 1` lo BUTTEREBBE via nel referto.
+            stampa("### I PASSI REGISTRATI SONO %d, e si salvano." % _reg)
+            try:
+                _ist("CADUTA al passo %d" % k, _reg,
+                     err={"passo": k, "errore": repr(e), "traccia": _tb,
+                          "passi_registrati": _reg})
+            except Exception as e2:
+                # ### ⛔ **E SE IL SALVATAGGIO STESSO CADE, SI DICE:** un `except` che
+                #   cade dentro se stesso lascerebbe la corsa muta su DUE guasti.
+                stampa("### ⛔ E IL SALVATAGGIO E' CADUTO ANCHE LUI: %r" % (e2,))
+                stampa(traceback.format_exc())
             return 1
-        u = m.passi[-1]
-        print("[battito] passo %d/%d  n=%d archi=%d  nati=%d sch=%d  |tw| q50=%.4f  "
-              "sopra4pi=%d calci=%d  tautw_salti=%d"
-              % (k, passi, u["n"], u["archi"], u["nati_tot"], u["schwinger_tot"],
-                 (u.get("q_tw") or {}).get("q050", float("nan")),
-                 u.get("sopra_4pi", -1), m.cont["calci_oltre_pi"], u["tautw_salti"]),
-              flush=True)
-        if k % PASSI_SALVA == 0:
-            _ist("IN CORSO", k)
     d = _ist("DATI SALVATI", passi)
     stampa("  ### I DATI SONO SALVATI in lunga.json.")
     stampa()
