@@ -52,6 +52,7 @@ commit**: cosi' non se ne accumulano di invisibili.)*
 | `csv/_seal_fork/_sigillo_z43_cura1.py|H-P3` | la COPIA PATCHATA serve al criterio 3, perche' `omega_clk`, la coerenza |
 | `csv/_seal_fork/_sigillo_z43_cura2.py|H-P8` | le occorrenze di `HEAD` in questo file stanno nella DOCSTRING di `braccio0()` |
 | `csv/_seal_fork/_sigillo_z43_cura2.py|H-P3` | la COPIA PATCHATA serve ai criteri 1 e 5. Il `r` restituito da `ritmo()` e il |
+| `csv/_seal_fork/_tors_w8_patch.py|H-P8` | un FALSO POSITIVO, e lo nomino invece di riformularlo. Il rilevatore |
 | `csv/_seal_fork/_veleno_keep_patch.py|H-P3` | non importa il simulatore e non lo fa girare. Scrive un file. |
 | `csv/_seal_fork/_z43_cura2_patch.py|H-P8` | un FALSO POSITIVO, e lo nomino invece di riformularlo. L occorrenza di |
 | `csv/_test_fork/_calcio_sotto_scambio.py|H-P3` | la frazione del CONTROLLO si cambia su una COPIA DEL SORGENTE, non |
@@ -80,5 +81,5 @@ commit**: cosi' non se ne accumulano di invisibili.)*
 | `csv/_test_fork/_z43_tempo_proprio.py|H-P3` | la scena passa TUTTA dal CLI (`nmasse` e `sep` da `argv`), e la |
 
 ```
-esenzioni dichiarate   73
+esenzioni dichiarate   74
 ```

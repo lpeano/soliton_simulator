@@ -1514,6 +1514,76 @@ non c'è niente da cambiare lì.**
 
 ---
 
+### ⛔ **LA CURA DI `TORS-W8-AVVOLGIMENTO`** *(decisione di Luca, 2026-10-06)* — **e risponde
+### alla domanda aperta `3` qui sopra, per un verso che non avevo considerato**
+
+**La domanda `3` chiedeva se `_w8` diventi l'identità.** ### **La risposta e' un'altra: `_w8`
+non era il periodo SBAGLIATO per eccesso, era il periodo sbagliato PER IL LAVORO CHE FACEVA.**
+
+| | |
+|---|---|
+| la legge **di prima** | `tw += _w8(dph + twist_dip − twp)`, con `twp = _w8(dph + twist_dip)` |
+| il difetto | `dph = _wphi(…)` vive su un periodo di **`4π`**; `_w8` ha periodo **`8π`**. ### **Un salto di `4π` NON e' un multiplo del periodo di `_w8`, quindi NON viene riparato** |
+| **misurato** | ### **`142114` calci di modulo `4π` ESATTI** in `150` passi *(`64.6` milioni di coppie `(passo, arco)`)*, e il ramo non-`4π` — che usa `_w4`, periodo `4π` — ### **ripara entro `1.9e-15`** |
+| la legge **di oggi** | ### **`tw += _w4(dph − twp) + (twist_dip − twp_dip)`** |
+
+### ✔ **E LA CURA NON E' SCEGLIERE FRA `_w4` E `_w8`: si possono avere entrambe le cose.**
+La **fase** si avvolge col **suo** periodo *(`_w4`, `4π`, lo stesso di `_wphi`)*; il
+**dipolo** vale fra `−π` e `π`, cambia al massimo di `2π` e ### **non ha periodo, quindi non
+si avvolge.** ### **Due stati separati al posto della somma.**
+
+### ✔ **E IL CONTO DELLE LEGGI SCENDE** *(par.9-ter)*
+
+Prima `twp` significava ### **due cose diverse nei due rami**: `_w8(dph + twist_dip)` nel ramo
+`TORS_4PI` e `dph` nel ramo non-`4π`. ### **Oggi significa <<la fase precedente d'arco>> in
+ENTRAMBI.** Un nome, un significato: ### **un'eccezione TOLTA.** Il costo e' **un** campo
+d'arco, `twp_dip`.
+
+### ⛔ **E LA RIGA <<COSA NON TOCCA>> QUI SOPRA NON ERA SBAGLIATA: ERA UN CONFINE, e Luca
+### l'ha spostato**
+
+Diceva *«`tw` e' un ACCUMULO: non ha periodo, e il suo dominio appartiene a `SCALE-TW`»*.
+### ✔ **E' ancora vero: `tw` NON ha periodo, e la cura non gliene da' uno.** Quello che la
+cura cambia non e' il dominio di `tw`: e' ### **il modo di calcolare il suo INCREMENTO**, che
+e' una cosa diversa — e il difetto stava li'.
+
+### ⛔ **I DUE CALCI DI NASCITA, della stessa famiglia**
+
+| | dove | che cosa faceva |
+|---|---|---|
+| **(i)** | `_rn_div_twp` *(`:2219`)*, `_rn_sch_twp` *(`:2568`)* | inizializzavano `twp` alla **sola** differenza di fase, **senza `twist_dip`**: al primo passo l'arco nuovo riceveva ### **un calcio pari al suo dipolo** |
+| **(ii)** | `_allaccia` *(`:5228`)*, chiamata da `semina` | `twp = 0`: al primo passo ### **tutta la differenza di fase piu' il dipolo diventava torsione** |
+
+### ⛔ **E (ii) ERA LA SORGENTE PRINCIPALE DELLA TORSIONE DELLA RETE, misurato:** al passo `1`
+la spinta mediana era ### **`3.0950`** e la massima ### **`9.4248` = `3π` ESATTO** *(il
+massimo possibile di `|dph + twist_dip|`: il calcio saturava il suo limite teorico)*. Il tempo
+di scarica e' `τ_tw/dt_e` ≈ **`309` passi**, quindi in `150` passi la rete conserva il
+`61.5 %` del calcio: `3.0950 × 0.6151` = `1.9037`, contro il `|tw|` mediano ### **misurato
+`2.1105`** al passo `140`.
+
+> ### ⛔ **LA TORSIONE CHE LA RETE AVEVA A `150` PASSI ERA QUASI TUTTA IL CALCIO DI NASCITA,
+> non l'accumulo della deriva.** ### **E un calcio che viene da un'inizializzazione non viene
+> da nessuna legge.**
+
+### ✔ **LA CURA: SPINTA ZERO AL PRIMO PASSO, per QUALUNQUE via di nascita**
+
+Il marcatore e' ### **`nan` su `twp_dip`**, consumato dal primo passo di torsione, con
+l'invariante ### **PRECISATO e non allargato** *(la lezione di `peq`)*: *«finito, e `nan` SOLO
+su un arco con `tw == 0` esatto, cioe' mai passato dalla torsione»*. ### ✔ **E il <<mai oltre
+un passo>> e' STRUTTURALE:** il passo di torsione scrive `twp_dip` **incondizionatamente su
+ogni arco**.
+
+### ⚠ **PERCHE' UN MARCATORE E NON IL VALORE ALLA NASCITA:** per la **fase** il valore alla
+nascita funziona esattamente *(dopo `mitosi()` nessuno scrive `phi`)*; ### **per il DIPOLO no**
+— con `CHI_CORE` o `CHI_COOP` accesi `chi_torsione` viene da una **cache scritta nel passo
+della torsione**, quindi il valore letto alla mitosi non e' quello che l'arco vedra'.
+### **Il marcatore non dipende da nessun flag.**
+
+### ⛔ **E NON SI TOCCA IL RAMO NON-`4π`**, che non ha il difetto: `_w4` con `twp = dph` era
+### **gia' giusto**, e ora i due rami ### **scrivono la stessa cosa in `twp`.**
+
+---
+
 
 ### ❗ UNA FASE A `0` STA **SUL TAGLIO DEL WRAP**, E OGNI STATISTICA LINEARE LA LEGGE COME MASSIMO DISORDINE *(2026-09-25)*
 
@@ -1596,6 +1666,87 @@ casuali, e `6.08` è **peggio del caso**, cioè il segno che la statistica è sb
 > **La derivazione e i numeri stanno nella scheda `accensione-campo`**: qui sta solo il
 > rimando, perche' `semina` compare in entrambi i marcatori e **un lettore che arriva da
 > `fase-phi` non deve poter credere che la legge sia ancora quella.**
+
+<!-- SCHEDA nome=tau-tw-locale funzioni=_tau_tw_locale flag=TAU_LOCALI,TAU_TW -->
+
+# ⑦-bis IL TEMPO DI SCARICA DELLA TORSIONE — **`τ_tw` LOCALE**
+
+*(Scheda **aperta il 2026-10-06**, dalla cura di `TORS-W8-AVVOLGIMENTO`. ### ⛔ **Non
+esisteva, e il presidio `H-REG-R` l'ha preteso: una legge che cambia vuole una scheda, e
+`_tau_tw_locale` ne era senza.** ### **`KAPPA-TW-COMMENTO` non aveva casa: ora ce l'ha.**)*
+
+## LA FORMA, dal codice e non dal commento
+
+```
+def _tau_tw_locale(net):
+    i, j = net.i, net.j
+    if len(net.phivel) < net.n or len(i) == 0:
+        return TAU_TW                                   # <- LA GUARDIA
+    dom = |phivel[i] - phivel[j]| + 1e-3
+    return maximum(2*pi / dom, 1e-3)                    # <- kappa = 1
+```
+
+| | |
+|---|---|
+| **che cos'e'** | il tempo di **scarica** della torsione: `tw` perde `dt_e·tw/τ_tw` a ogni passo |
+| **la legge** | `τ_tw = κ·2π/(|Δω| + 1e-3)`, con `Δω` = differenza di `phivel` fra i due nodi |
+| **dimensioni** | `[τ] = T`. `ω` e' una frequenza, `2π/ω` un tempo: ### **coerente** |
+| **il verso** | la torsione decade **tanto piu' in fretta** quanto piu' i due nodi sono **fuori fase** |
+| **chi la legge** | **solo** il blocco della torsione in `step()`, nei **due** rami *(`:7795` e `:7799`)* |
+| **l'interruttore** | `TAU_LOCALI = True` *(`:451`)*: se `False`, `τ_tw = TAU_TW = 20.0`, **costante** |
+
+## ⛔ **I TRE NUMERI SCRITTI A MANO** *(`A1`, `A11`)*
+
+| | valore | che cos'e' | classificato |
+|---|--:|---|---|
+| **`κ`** | ### **`1`** | il rapporto `O(1)` della legge | ### ⛔ **UN NUMERO SCRITTO A MANO**, e il docstring ne dice **un altro** |
+| il pavimento **dentro** `dom` | `1e-3` | impedisce la divisione per zero quando `Δω = 0` | ### ⚠ **una GUARDIA NUMERICA** *(`A11`)*: protegge da un **infinito**, e un infinito non e' un errore — e' il caso `Δω = 0`, in cui la torsione **non decade**. ### **Classificato: PROIEZIONE, da derivare** |
+| il pavimento **esterno** | `1e-3` | tetto inferiore su `τ_tw` | ### ⚠ **MISURATO INERTE:** scatta se `Δω > 6283`, e il massimo misurato e' `3.236` — ### **`0` archi su `64.6` milioni di coppie** *(`eebe24f`)*. ### **Inerte NON vuol dire giusto: vuol dire non ancora in gioco** |
+
+### ⛔ **`KAPPA-TW-COMMENTO`: il commento dice `3.1831`, il codice restituisce `1`**
+
+Il **docstring** dice *«`kappa_tw = TAU_TW/(2π)` resta come rapporto `O(1)`»* e il commento
+nel corpo lo ripete; ### **la riga che gira non ha nessun fattore `TAU_TW`.** Con
+`TAU_TW = 20.0` il commento implica `κ = 3.1831`, il codice da' `κ = 1`.
+
+| con | il tetto di equilibrio | e la soglia di mitosi `3π` |
+|---|--:|---|
+| `κ = 1` *(il codice)* | **`2π`** | ### **irraggiungibile in equilibrio**: la mitosi e' **marginale** |
+| `κ = 3.1831` *(il commento)* | **`20`** | **tre volte** la soglia: la mitosi sarebbe **generica** |
+
+### ➜ ⛔ **DUE LETTURE, DUE FISICHE OPPOSTE.** ### **Non si decide dal commento** — in questo
+repo i commenti **sono stati** scaduti — ### **si decide da `git log` sulla riga del
+`return`.** ### **Che fare di `κ` e' UNA DECISIONE DI LUCA**, e la voce resta **aperta**.
+
+## ✔ **LA GUARDIA SI CONTA, dal 2026-10-06** *(rilievo `E4` del guardiano)*
+
+`_tau_tw_locale` fa `return TAU_TW` nel **proprio** ramo di guardia, quando
+`len(net.phivel) < net.n` **oppure** non ci sono archi. ### ⛔ **Quindi `TAU_TW` entra in gioco
+per TRE vie, non due** -- il ramo non locale, il docstring, e **questa guardia** -- e
+### **nessuno la contava.**
+
+| se scattasse | `τ_tw` passerebbe da | a |
+|---|--:|--:|
+| *(misurato in `eebe24f`)* | **`2.4055`** al passo `50`, **`1.9738`** al passo `140` | ### **`20`** |
+
+### ➜ **un fattore `3`-`10` sul tetto di equilibrio, in silenzio.** ### **Un ramo silenzioso
+non e' un ramo** *(`A8`)*. Ora porta i quattro contatori di `A8` — ### **invocazioni, salti,
+forma al fallimento, QUANDO** — ### **ed e' BYTE-INERTE:** nessun valore restituito cambia.
+
+### ✔ **E IL PRIMO NUMERO C'E' GIA':** sul giro minimo della cura, ### **`0` salti su `3`
+invocazioni** — la guardia **non scatta** in questa scena. ### ⚠ **E <<non scatta in questa
+scena>> non e' <<non scatta mai>>:** il numero vero lo da' la misura finale della cura, su
+`150` passi.
+
+## LE DOMANDE APERTE
+
+1. ### **`κ` va DERIVATO, non scelto** *(`A1`)*. ### **Decisione di Luca.**
+2. il pavimento **dentro** `dom` e' una **proiezione**: che cosa dice la fisica del caso
+   `Δω = 0`? ### **Due nodi in fase perfetta hanno una torsione che non decade mai?**
+3. il pavimento **esterno** e' inerte oggi: ### **va TOLTO o DERIVATO?** *(`A11`: se protegge
+   da un errore, si cerca l'errore.)*
+
+---
 
 <!-- SCHEDA nome=mitosi-schwinger funzioni=mitosi,decidi_divisione flag=MITOSI_DIR,ANTIFASE_ADD,COPPIA_MIT,PLAST_MIT,KICK_TW,REGIME,MITOSI_2LAM -->
 
@@ -1754,6 +1905,20 @@ DICHIARA e non si risolve**: nella divisione la lunghezza viene da ### **`d`**, 
 >
 > ### ⚠ **L'ULTIMA RIGA E' UN RILIEVO, non una conferma:** la coppia `psi`/`psi_spin` segue *«la regola del proprio compagno»* — e nello Schwinger ### **il compagno di `psi_spin` non c'e' piu'**, perche' `phi_s` dell'antinodo e' zero. ### **Il commit 3 SPOSTA e non cura, quindi la lascia tale** — ma ora e' ### **VISIBILE in tabella** invece di essere sepolta in due funzioni diverse.
 >
+### ⛔ **E DAL 2026-10-06 LE GRANDEZZE SONO UNA DI PIU': `twp_dip`**
+*(cura di `TORS-W8-AVVOLGIMENTO`, decisione di Luca)*
+
+Il **dipolo precedente d'arco**, con regola di nascita ### **`nan`** per **entrambi** gli
+eventi convertiti *(`_rn_div_twp_dip`, `_rn_sch_twp_dip`)* e una scrittura diretta in
+`_allaccia` per la **semina**. ### ✔ **E IL PRESIDIO D'IMPORT L'HA PRETESA:**
+`_nascita_collaudo_della_tabella()` alza un `RuntimeError` se una grandezza del registro non
+ha una regola per ogni evento convertito — ### **aggiungere il campo senza le regole non
+sarebbe compilato.**
+
+### ✔ **E IL VINCOLO 4 REGGE, verificato:** `twp_dip` sta al posto **`33`**, `twp` al `32`,
+### **`perc_geom` al `31` e `tw` al `30`** — cioe' `perc_geom` e' **ancora** subito dopo `tw`,
+e i due `raise` di `:1467` lo confermano all'import.
+
 > ### ✅ **E L'ORDINE E' MISURATO, non assunto** *(`csv/_test_fork/_ordine_registro.py`)*: l'ordine del **registro** e' un ordine ### **topologico valido** — **4 vincoli genuini, 0 violazioni**. `phi` prima di `twp` · `peq` prima di `_peqn_idx` · `n0` nel **contesto** · le **6 chiamate con effetto** collocate a mano.
 >
 > ### ⛔ **CORREZIONE DEL 2026-10-03, su rilievo del guardiano: CINQUE DERIVAZIONI DI
@@ -2013,7 +2178,7 @@ chi lo legge — curava ### **un lettore solo**, lasciava `_sin2_vir` col difett
 
 ---
 
-<!-- SCHEDA nome=nascita-punto-unico funzioni=_derivazione_perc_geom,_nascita_collaudo_della_tabella,_nascita_collocata,_nascita_non_si_tocca,_nascita_regola,_ordine_di_nascita,_registra_regola,_rn_div_conc_nodi,_rn_div_cs_nodo_prev,_rn_div_d,_rn_div_d0,_rn_div_eta,_rn_div_i,_rn_div_j,_rn_div_mem_mot,_rn_div_nb,_rn_div_nb_prec,_rn_div_nb_ret,_rn_div_omega_s,_rn_div_peq,_rn_div_perc_chi,_rn_div_perc_geom,_rn_div_perc_tw,_rn_div_phi,_rn_div_phi0,_rn_div_phi_s,_rn_div_phivel,_rn_div_pos,_rn_div_psi,_rn_div_psi_prec,_rn_div_psi_spin,_rn_div_psi_spin_prec,_rn_div_psi_spinor,_rn_div_rep,_rn_div_rho_spin,_rn_div_spinor_lift,_rn_div_tw,_rn_div_twp,_rn_div_vd,_rn_sch_conc_nodi,_rn_sch_cs_nodo_prev,_rn_sch_d,_rn_sch_d0,_rn_sch_eta,_rn_sch_i,_rn_sch_j,_rn_sch_mem_mot,_rn_sch_nb,_rn_sch_nb_prec,_rn_sch_nb_ret,_rn_sch_omega_s,_rn_sch_peq,_rn_sch_peqn_idx,_rn_sch_perc_chi,_rn_sch_perc_geom,_rn_sch_perc_tw,_rn_sch_phi,_rn_sch_phi0,_rn_sch_phi_s,_rn_sch_phivel,_rn_sch_pos,_rn_sch_psi,_rn_sch_psi_prec,_rn_sch_psi_spin,_rn_sch_psi_spin_prec,_rn_sch_psi_spinor,_rn_sch_rep,_rn_sch_rho_spin,_rn_sch_spinor_lift,_rn_sch_tw,_rn_sch_twp,_rn_sch_vd,nascita flag=FRAZ_NASCITA,REGOLE_NASCITA,ORDINE_DI_NASCITA,EVENTI_DI_NASCITA,EVENTI_CONVERTITI -->
+<!-- SCHEDA nome=nascita-punto-unico funzioni=_derivazione_perc_geom,_nascita_collaudo_della_tabella,_nascita_collocata,_nascita_non_si_tocca,_nascita_regola,_ordine_di_nascita,_registra_regola,_rn_div_conc_nodi,_rn_div_cs_nodo_prev,_rn_div_d,_rn_div_d0,_rn_div_eta,_rn_div_i,_rn_div_j,_rn_div_mem_mot,_rn_div_nb,_rn_div_nb_prec,_rn_div_nb_ret,_rn_div_omega_s,_rn_div_peq,_rn_div_perc_chi,_rn_div_perc_geom,_rn_div_perc_tw,_rn_div_phi,_rn_div_phi0,_rn_div_phi_s,_rn_div_phivel,_rn_div_pos,_rn_div_psi,_rn_div_psi_prec,_rn_div_psi_spin,_rn_div_psi_spin_prec,_rn_div_psi_spinor,_rn_div_rep,_rn_div_rho_spin,_rn_div_spinor_lift,_rn_div_tw,_rn_div_twp,_rn_div_twp_dip,_rn_div_vd,_rn_sch_conc_nodi,_rn_sch_cs_nodo_prev,_rn_sch_d,_rn_sch_d0,_rn_sch_eta,_rn_sch_i,_rn_sch_j,_rn_sch_mem_mot,_rn_sch_nb,_rn_sch_nb_prec,_rn_sch_nb_ret,_rn_sch_omega_s,_rn_sch_peq,_rn_sch_peqn_idx,_rn_sch_perc_chi,_rn_sch_perc_geom,_rn_sch_perc_tw,_rn_sch_phi,_rn_sch_phi0,_rn_sch_phi_s,_rn_sch_phivel,_rn_sch_pos,_rn_sch_psi,_rn_sch_psi_prec,_rn_sch_psi_spin,_rn_sch_psi_spin_prec,_rn_sch_psi_spinor,_rn_sch_rep,_rn_sch_rho_spin,_rn_sch_spinor_lift,_rn_sch_tw,_rn_sch_twp,_rn_sch_twp_dip,_rn_sch_vd,nascita flag=FRAZ_NASCITA,REGOLE_NASCITA,ORDINE_DI_NASCITA,EVENTI_DI_NASCITA,EVENTI_CONVERTITI -->
 
 
 ## ⭐ **E DAL 2026-10-05 `nascita` HA UNA CHIAMATA IN PIU', PRIMA DEL VELENO**
@@ -3531,6 +3696,35 @@ invece di zero.
 
 <!-- SCHEDA nome=nascita-archi funzioni=_allaccia,_nasce,semina,_semina_lam,_celle_vive flag=SEMINA_LAM,NASCITA_LAM,SCALA_MIN,SCALA_MIN_PASSO,LAM -->
 
+### ⛔ **AGGIORNAMENTO del 2026-10-06 — `_allaccia` DAVA UN CALCIO DI TORSIONE A TUTTA LA
+### SCENA** *(cura di `TORS-W8-AVVOLGIMENTO`)*
+
+`_allaccia` metteva `tw = 0` **e `twp = 0`** sugli archi nuovi. ### ⛔ **E `twp = 0` non e'
+<<nessuna storia>>: e' <<fase precedente ZERO>>**, quindi al primo passo la spinta valeva
+`dph + twist_dip − 0`, cioe' ### **TUTTA la differenza di fase dell'arco piu' il suo dipolo
+diventava torsione.**
+
+| al passo `1`, misurato su `f7237563` *(`eebe24f`)* | |
+|---|--:|
+| `|tw|` in **ingresso** *(archi appena seminati)* | `0.0000` |
+| `|dph|` mediano | `2.8971` |
+| ### **`|spinta|` mediana** | ### **`3.0950`** |
+| ### **`|spinta|` MASSIMA** | ### **`9.4248` = `3π` ESATTO** |
+| e al passo `2`, `|tw|` in ingresso mediano | ### **`3.0950`** |
+
+### ⛔ **IL MASSIMO SATURAVA IL LIMITE TEORICO** *(`|dph + twist_dip| <= 3π`)*, e il tempo di
+scarica e' `τ_tw/dt_e` ≈ **`309` passi**: in `150` passi la rete conservava il **`61.5 %`**
+del calcio. ### **`3.0950 × 0.6151` = `1.9037`, contro il `|tw|` mediano misurato `2.1105` al
+passo `140`.** ### ➜ **LA TORSIONE DELLA RETE ERA QUASI TUTTA IL CALCIO DI NASCITA.**
+
+### ✔ **LA CURA:** `_allaccia` scrive ### **`twp_dip = nan`**, il marcatore di arco nuovo, e il
+primo passo di torsione da' ### **spinta ZERO.** ### **Misurato sul giro minimo: al passo `1`
+`|tw|` mediano E massimo valgono `0.000000`.**
+
+### ⚠ **E `twp = 0` RESTA**, perche' col marcatore ### **non viene piu' letto** dal ramo `4π`
+e il ramo non-`4π` lo usa com'e' sempre stato. ### **Togliere una riga che non fa piu' danno
+non e' una cura: e' un ritocco, e andrebbe in un commit suo.**
+
 # ⑫ LA NASCITA DEGLI ARCHI — **la cura della semina** *(`D38`, decisione `D-b` di Luca)*
 
 > **Decisione di Luca, 2026-09-24:** *«Non deve nascere un arco sotto `LAM`. Il troncone
@@ -4280,6 +4474,31 @@ prima di sapere con quali flag si gira.**
 giorno tornasse incompatibile **lo direbbe da sé.**
 
 <!-- SCHEDA nome=invarianti funzioni=verifica_invarianti flag=INVARIANTI,DOMINI -->
+
+### ⛔ **AGGIORNAMENTO del 2026-10-06 — LA FORMA `dip`, e l'invariante si PRECISA**
+*(cura di `TORS-W8-AVVOLGIMENTO`)*
+
+`twp_dip`, il **dipolo precedente d'arco**, nasce ### **`nan`**: e' il marcatore di *«arco
+che non ha ancora visto un passo di torsione»*, e il primo passo di torsione lo **consuma**
+dando spinta **zero**.
+
+| | |
+|---|---|
+| la **regola** | ### **finito, oppure `nan` SOLO su un arco con `tw == 0` ESATTO** |
+| perche' `tw == 0` identifica l'arco nuovo | ### **tutte e tre** le vie di nascita azzerano `tw` *(`_rn_div_tw`, `_rn_sch_tw`, `_allaccia`)*, e ### **solo il passo di torsione lo muove** |
+| il contatore | `_g_inv_dip_nan_ok`: quanti `nan` **ammessi** il controllo vede |
+
+### ⛔ **SI PRECISA, NON SI ALLARGA — ed e' la lezione di `peq`, scritta in questa stessa
+### scheda:** *«la risposta giusta non e' allargare la regola ma PRECISARLA»*.
+### **Un `nan` su un arco con `tw != 0` resta UNA VIOLAZIONE.**
+
+### ✔ **E IL <<MAI OLTRE UN PASSO>> E' STRUTTURALE, non vigilato:** il passo di torsione
+scrive `twp_dip` ### **incondizionatamente su OGNI arco**, quindi dopo **qualunque** passo di
+torsione ### **nessun arco ha `nan`.** Il `nan` puo' esistere **solo** fra una nascita e il
+passo dopo. ### **Lo DIMOSTRA il sigillo `S1`, non lo spera un contatore.**
+
+### ⚠ **E IL PRIMO NUMERO:** sul giro minimo, `471564` archi nascono `nan` alla costruzione e
+### **`0` ne restano dopo il primo passo di torsione.**
 
 > ### ✅ **COMMIT 4 — IL CONTROLLO DI DOMINIO HA UN'ESENZIONE PER CELLA, ANCORATA AL VELENO** *(2026-10-03)*
 >
@@ -5996,7 +6215,33 @@ ripiego** che l'eccezione esiste per rendere impossibile.
 
 ---
 
-<!-- SCHEDA nome=registro-grandezze funzioni=_ferma_se_registro_incoerente,_ferma_registro,registro_mai_apparse,_forma_di,_scrivi_forma,_controlla_forma_e_tipo,_finestra_aperta flag=REGISTRO_STATO,REGISTRO_DERIVATE,REGISTRO_METRI,REGISTRO_FINESTRA,REGISTRO_NOMI,CONTROLLO_REGISTRO,CacheLunga,FormaSbagliata,TipoSbagliato,GrandezzaNonDichiarata,FinestraRestataAperta -->
+<!-- SCHEDA nome=registro-grandezze funzioni=__init__,_ferma_se_registro_incoerente,_ferma_registro,registro_mai_apparse,_forma_di,_scrivi_forma,_controlla_forma_e_tipo,_finestra_aperta flag=REGISTRO_STATO,REGISTRO_DERIVATE,REGISTRO_METRI,REGISTRO_FINESTRA,REGISTRO_NOMI,CONTROLLO_REGISTRO,CacheLunga,FormaSbagliata,TipoSbagliato,GrandezzaNonDichiarata,FinestraRestataAperta -->
+
+### ⛔ **AGGIORNAMENTO del 2026-10-06 — UNA GRANDEZZA D'ARCO IN PIU': `twp_dip`**
+*(cura di `TORS-W8-AVVOLGIMENTO`)*
+
+| | |
+|---|---|
+| **che cos'e'** | il **dipolo precedente d'arco**, `("twp_dip", ("m",), "float64")` |
+| **dove** | in `REGISTRO_STATO`, ### **subito dopo `twp`** |
+| **la nascita** | ### **`nan`** per entrambi gli eventi convertiti *(`_rn_div_twp_dip`, `_rn_sch_twp_dip`)*, e una scrittura diretta in `_allaccia` per la **semina** |
+| **l'invariante** | nella scheda `invarianti`: ### **forma `dip`** |
+
+### ✔ **E `__init__` ENTRA IN QUESTA SCHEDA, e il perche' va detto:** `__init__` crea
+### **tutte** le grandezze del registro vuote *(`self.twp_dip = np.zeros(0)`)*, quindi la sua
+riga ### **e' parte del contratto del registro**, non di un'altra legge.
+### ⛔ **Non e' un modo di passare `H-REG-R`:** `__init__` non aveva scheda, e il posto giusto
+e' quello che parla delle grandezze che lui dichiara. ### **Se qualcuno trovasse un posto
+migliore, lo sposti: la riga resta vera.**
+
+### ✔ **E IL PRESIDIO D'IMPORT HA PRETESO LE REGOLE:**
+`_nascita_collaudo_della_tabella()` alza un `RuntimeError` se una grandezza del registro non
+ha una regola per **ogni** evento convertito. ### **Aggiungere il campo senza le due regole
+NON sarebbe compilato**, e non e' una gentilezza: e' il presidio che fa il suo lavoro.
+
+### ✔ **E IL VINCOLO 4 REGGE, verificato all'import:** `twp_dip` al posto **`33`**, `twp` al
+`32`, ### **`perc_geom` al `31` e `tw` al `30`** — `perc_geom` e' **ancora** subito dopo `tw`,
+e i due `raise` di `:1467` lo confermano.
 
 > ### ✅ **COMMIT 4 — IL REGISTRO DICHIARA ANCHE LA CLASSE DI NASCITA DI UNA DERIVATA** *(2026-10-03)*
 >

@@ -264,7 +264,19 @@ DOMINI = {
     #   mestiere di `C5`, e la risposta giusta non e' allargare la regola ma PRECISARLA.
     'peq':      ('peq',    'la pressione di equilibrio: >= 0, e `nan` SOLO sugli archi marcati'),
     'tw':       ('finito', 'torsione d arco: puo essere di entrambi i segni'),
-    'twp':      ('finito', 'torsione precedente'),
+    # [TORS-W8-AVVOLGIMENTO, cura del 2026-10-06] `twp` E' LA FASE PRECEDENTE D'ARCO, e ora
+    #   lo e' in ENTRAMBI i rami: prima il ramo `TORS_4PI` ci scriveva
+    #   `_w8(dph + twist_dip)` e il ramo non-4pi ci scriveva `dph`. Un nome, due significati:
+    #   l'eccezione e' TOLTA, non spostata.
+    'twp':      ('finito', 'la FASE precedente d arco (dph del passo prima)'),
+    # ⚠ `twp_dip` HA UN'ECCEZIONE DICHIARATA, ed e' la STESSA forma di `peq`: un arco appena
+    #   nato porta `nan` finche' non vede il suo primo passo di torsione, che e' il punto in
+    #   cui la spinta vale ZERO e i due stati si registrano.
+    #   ### E IL <<MAI OLTRE UN PASSO>> E' STRUTTURALE, non vigilato: il passo di torsione
+    #   scrive `twp_dip` INCONDIZIONATAMENTE su ogni arco, quindi dopo QUALUNQUE passo di
+    #   torsione nessun arco ha `nan`. Il sigillo `S1` lo DIMOSTRA.
+    'twp_dip':  ('dip',    'il DIPOLO precedente d arco: finito, e `nan` SOLO su un arco '
+                           'che non ha ancora visto un passo di torsione'),
     '_rep':     ('finito', 'memoria di repulsione d arco'),
     '_sin2_vir':('finito', 'sin^2 della viriale: in [0,1] per costruzione, si verifica FINITO'),
     '_dt_e_ultimo': ('pos', 'il passo di tempo efficace d arco: un tempo e POSITIVO'),
@@ -587,7 +599,17 @@ def _tau_tw_locale(net):
     kappa_tw = TAU_TW/(2pi) resta come rapporto O(1). Invariante per riparametrizzazione."""
     import numpy as _np
     i, j = net.i, net.j
+    # [A8, cura TORS-W8-AVVOLGIMENTO 2026-10-06] LA GUARDIA SI CONTA. Rilievo del guardiano
+    #   (`E4`): `TAU_TW` entra in gioco per TRE vie, non due -- il ramo non locale, il
+    #   docstring che dice 3.1831, e QUESTA GUARDIA. Se scattasse, `tau_tw` passerebbe da
+    #   ~2-6 (misurato: mediana 2.4055 al passo 50) a 20: un fattore 3-10 sul tetto di
+    #   equilibrio, e NESSUNO lo contava. ### UN RAMO SILENZIOSO NON E' UN RAMO.
+    #   ### BYTE-INERTE: quattro contatori e nessun cambio di valore restituito.
+    net._g_tautw_tot = getattr(net, '_g_tautw_tot', 0) + 1
     if len(net.phivel) < net.n or len(i) == 0:
+        net._g_tautw_salti = getattr(net, '_g_tautw_salti', 0) + 1
+        net._g_tautw_forma = (len(net.phivel), net.n, len(i))
+        net._g_tautw_quando = net._g_tautw_tot
         return TAU_TW
     dom = _np.abs(net.phivel[i] - net.phivel[j]) + 1e-3
     # tau_tw = kappa_tw * 2pi/|dw|, con kappa_tw = TAU_TW/(2pi) rapporto O(1)
@@ -1269,6 +1291,10 @@ REGISTRO_STATO = (
     ("peq", ("m",), "float64"),
     ("tw", ("m",), "float64"),
     ("twp", ("m",), "float64"),
+    # [TORS-W8-AVVOLGIMENTO] il DIPOLO precedente d'arco. ### STA DOPO `twp`, quindi dopo
+    #   `tw`: il VINCOLO 4 (`perc_geom` subito dopo `tw`) non si tocca, e i suoi due `raise`
+    #   lo verificano all'import.
+    ("twp_dip", ("m",), "float64"),
     ("vd", ("m",), "float64"),
 )
 
@@ -2227,6 +2253,19 @@ def _rn_div_twp(net, c):
                               net._wphi(c["fm"] - net.phi[c["b"]])])
 
 
+@_nascita_regola("divisione", "twp_dip", "`nan`: il marcatore di ARCO NUOVO",
+                 "self.twp_dip = np.concatenate([self.twp_dip[keep], nn, nn])",
+                 "### `nan` E' IL MARCATORE: al primo passo di torsione la spinta vale ZERO "
+                 "e i due stati si registrano. ### PERCHE' UN MARCATORE E NON IL VALORE "
+                 "ALLA NASCITA: il dipolo si legge da `chi_torsione`, che con `CHI_CORE` o "
+                 "`CHI_COOP` viene da una CACHE scritta NEL PASSO DELLA TORSIONE -- quindi "
+                 "il valore letto qui NON e' quello che l'arco vedra'. Il marcatore vale "
+                 "per QUALUNQUE via di nascita e NON dipende da nessun flag")
+def _rn_div_twp_dip(net, c):
+    nn = np.full(c["quante"], np.nan)
+    net.twp_dip = np.concatenate([net.twp_dip[c["keep"]], nn, nn])
+
+
 @_nascita_regola("divisione", "vd", "eredita dall'arco che si spezza",
                  "self.vd = np.concatenate([self.vd[keep], self.vd[sel], self.vd[sel]])",
                  "la velocita' metrica dell'arco si eredita come `_rep` e `peq`")
@@ -2574,6 +2613,15 @@ def _rn_sch_twp(net, c):
     net.twp = np.concatenate([net.twp,
                               net._wphi(net.phi[c["aa"]] - c["anti"]),
                               net._wphi(c["anti"] - net.phi[c["bb"]])])
+
+
+@_nascita_regola("schwinger", "twp_dip", "`nan`: il marcatore di ARCO NUOVO",
+                 "self.twp_dip = np.concatenate([self.twp_dip, nn2, nn2])",
+                 "lo STESSO marcatore della divisione, e per lo stesso motivo: una sola "
+                 "legge per tutte le vie di nascita")
+def _rn_sch_twp_dip(net, c):
+    nn2 = np.full(c["nc"], np.nan)
+    net.twp_dip = np.concatenate([net.twp_dip, nn2, nn2])
 
 
 @_nascita_regola("schwinger", "vd", "zero (archi NUOVI)",
@@ -3978,6 +4026,7 @@ class Rete:
         self.i = np.zeros(0, int); self.j = np.zeros(0, int)
         self.d = np.zeros(0); self.d0 = np.zeros(0); self.vd = np.zeros(0)
         self.peq = np.zeros(0); self.tw = np.zeros(0); self.twp = np.zeros(0)
+        self.twp_dip = np.zeros(0)   # [TORS-W8-AVVOLGIMENTO] il dipolo precedente d'arco
         # [(3) BONIFICA 2026-09-17] MEMORIA DELLA REPULSIONE, per ARCO. Vedi `mitosi()`.
         # Nasce a 0: un arco appena creato non ha storia repulsiva. (NB: NON e' il pattern di
         # `peq`, che nasce NaN perche' va CALIBRATO sul campo; qui lo zero e' il valore giusto,
@@ -5226,6 +5275,12 @@ class Rete:
         self._rep = np.concatenate([self._rep, np.zeros(len(dd))])       # [(3)] nessuna storia
         self.tw = np.concatenate([self.tw, np.zeros(len(dd))])
         self.twp = np.concatenate([self.twp, np.zeros(len(dd))])
+        # [TORS-W8-AVVOLGIMENTO] IL MARCATORE ANCHE QUI, ed e' la via che il difetto (ii)
+        #   colpiva: `twp = 0` faceva ricevere a OGNI arco della scena tutta la sua
+        #   differenza di fase (piu' il dipolo) come torsione al primo passo.
+        #   ### MISURATO sul blob di prima: spinta mediana 3.0950, MASSIMA 9.4248 = 3pi
+        #   esatto, e al passo 2 quella spinta era diventata `|tw|`.
+        self.twp_dip = np.concatenate([self.twp_dip, np.full(len(dd), np.nan)])
         self._grado()
 
     def lambda_nodi(self):
@@ -6555,6 +6610,22 @@ class Rete:
                 cattivo = (_nan & ~_amm) | (np.isfinite(vf) & (vf < 0.0))
                 regola = ('>= 0, e `nan` SOLO sugli archi marcati da PEQ_NASCITA_LOCALE '
                           '(ammessi ora: %d)' % int(np.sum(_amm)))
+            elif forma == 'dip':
+                # [TORS-W8-AVVOLGIMENTO] IL DIPOLO PRECEDENTE: finito, oppure `nan` su un
+                #   arco che non ha ancora visto un passo di torsione -- e quello e' un arco
+                #   con `tw == 0` ESATTO, perche' tutte e tre le regole di nascita lo
+                #   azzerano e solo il passo di torsione lo muove.
+                #   ### SI PRECISA, NON SI ALLARGA: e' la lezione di `peq`.
+                vf = v.astype(float, copy=False)
+                _nan = ~np.isfinite(vf)
+                _twv = np.asarray(getattr(self, 'tw', []), float)
+                _amm = (np.zeros(len(vf), dtype=bool) if len(_twv) != len(vf)
+                        else (_twv == 0.0))
+                self._g_inv_dip_nan_ok = (getattr(self, '_g_inv_dip_nan_ok', 0)
+                                          + int(np.sum(_nan & _amm)))
+                cattivo = _nan & ~_amm
+                regola = ('finito, e `nan` SOLO su archi con `tw == 0` esatto, cioe mai '
+                          'passati dalla torsione (ammessi ora: %d)' % int(np.sum(_amm)))
             elif forma == 'indice':
                 cattivo = (v < 0) | (v >= n)
                 regola = '0 <= x < n (n = %d)' % n
@@ -7792,8 +7863,28 @@ class Rete:
             else:
                 twist_dip = np.pi * 0.5 * (chi_torsione[i] - chi_torsione[j])  # chiralità core o nodale
             _ttw = _tau_tw_locale(self) if TAU_LOCALI else TAU_TW
-            self.tw += self._w8(dph + twist_dip - self.twp) - dt_e * self.tw / _ttw
-            self.twp = self._w8(dph + twist_dip)
+            # [TORS-W8-AVVOLGIMENTO, cura del 2026-10-06] LA FASE SI AVVOLGE COL SUO
+            #   PERIODO, IL DIPOLO NON SI AVVOLGE.
+            #   ### IL DIFETTO: `dph = _wphi(...)` vive su un periodo di 4pi (`FASE_2PI` e'
+            #   False) e `_w8` ha periodo 8pi -- un salto di 4pi NON e' un multiplo del suo
+            #   periodo, quindi NON viene riparato. MISURATO: 142114 calci di modulo 4pi
+            #   ESATTI in 150 passi, e il ramo non-4pi (`_w4`, periodo 4pi) ripara entro
+            #   1.9e-15.
+            #   ### LA CURA NON E' SCEGLIERE FRA `_w4` E `_w8`: si avvolge la DIFFERENZA DI
+            #   FASE col periodo giusto e si somma la differenza del dipolo NON avvolta.
+            #   `twist_dip` sta fra -pi e pi, cambia al massimo di 2pi, e NON ha periodo.
+            #   ### E L'ARCO NUOVO HA SPINTA ZERO al suo primo passo, per QUALUNQUE via di
+            #   nascita: `twp_dip = nan` e' il marcatore, e `np.where` scarta il ramo col
+            #   `nan` senza propagarlo. Senza questo, un arco appena nato riceveva il suo
+            #   dipolo (divisione, Schwinger) o TUTTA la sua differenza di fase (semina).
+            _nuovo = np.isnan(self.twp_dip)
+            _fp = np.where(_nuovo, dph, self.twp)
+            _dp = np.where(_nuovo, twist_dip, self.twp_dip)
+            self._g_tors_nuovi = getattr(self, '_g_tors_nuovi', 0) + int(np.sum(_nuovo))
+            self.tw += (self._w4(dph - _fp) + (twist_dip - _dp)
+                        - dt_e * self.tw / _ttw)
+            self.twp = dph
+            self.twp_dip = twist_dip * np.ones_like(dph)
         else:
             _ttw = _tau_tw_locale(self) if TAU_LOCALI else TAU_TW
             self.tw += self._w4(dph - self.twp) - dt_e * self.tw / _ttw
