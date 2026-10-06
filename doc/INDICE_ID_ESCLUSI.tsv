@@ -113,3 +113,4 @@ L-B	come L-A: riga della tavola di lettura della lotteria, non un difetto.	1
 L-C	come L-A: riga della tavola di lettura della lotteria, non un difetto.	1
 L-D	come L-A: riga della tavola di lettura della lotteria, non un difetto -- e la riga che esiste PROPRIO per non forzare una lettura quando le altre tre non coprono il caso.	1
 RI-ETICHETTA	verbo italiano col trattino, non un identificatore: descrive il fatto che un passo che toglie k archi e ne aggiunge k lascia len(avv) invariato e ri-etichetta la mappa arco->morso. Rifiutato da H-INDICE il 2026-10-06.	1
+M7b	NOME DI UNA MISURA, non un identificatore di difetto: e la correlazione fra Delta(delta_sync_phi) e dph, aggiunta alla misura del TETTO DELLA TORSIONE dopo il giro corto per decidere se il termine omesso SMORZA la spinta invece di aggiungersi. Le misure di quel mandato si chiamano M1..M8, e la b segue la convenzione di M2b e M3b. Rifiutata da H-INDICE il 2026-10-06.	1

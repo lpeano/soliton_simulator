@@ -240,6 +240,84 @@ sintetico `twist_dip` e' **costante**, quindi la sua derivata e' zero.
 ### ✔ **La correzione scritta nella sezione `(c)` e' confermata dal controllo positivo
 PRIMA della corsa.**
 
+## ⛔ ANNOTAZIONE DEL 2026-10-06 — **IL GIRO CORTO HA INSEGNATO TRE COSE, e una
+## SMONTA LA PREMESSA DELLA FORMULA**
+
+*(`--passi=3`, strumento `2b4bf75b`, simulatore `f7237563`. ### **Scritta PRIMA della corsa
+vera**, e la sezione `2` qui sopra ### **non si riscrive.**)*
+
+### ✔ **ZERO: L'IMPIANTO TIENE, e il conto del guardiano si vede**
+
+`C0` da' ### **`0` differenze su `7` campi e `3` passi** *(il *«FALLISCE»* e' il confronto
+dell'`n` finale col riferimento a `150` passi: lo stesso artefatto dichiarato per `C-perm-0`)*.
+E ### **la mediana di `|tw*|` e' `6.2765`, contro `2pi` = `6.2832`**: lo ### **`0.11 %`** di
+scarto. ### ✔ **Il conto del guardiano con `r` uniforme E' GIUSTO, misurato e non assunto.**
+### ✔ **E le due forme di `tw*` -- chiusa e fedele -- differiscono di `2.3e-13`**, cioe' il
+pavimento esterno ### **non vincola nessun arco** *(`M8`: `0` su `471564`, `dom_max` `3.236`
+contro i `6283` che servirebbero)*.
+
+### ⛔ **UNO: `delta_sync_phi` NON E' UNA CORREZIONE. E' IL TERMINE DOMINANTE.**
+
+`M7` misura `|Δ(delta_sync_phi)|` sull'arco contro `|Δ(dt_n·phivel)|`, cioe' contro il termine
+che la formula usa:
+
+| quantile del rapporto | `q05` | `q25` | ### **`q50`** | `q75` | `q95` |
+|---|--:|--:|--:|--:|--:|
+| | `0.099` | `0.669` | ### **`1.791`** | `4.355` | `22.70` |
+
+> ### ⛔ **ALLA MEDIANA IL TERMINE OMESSO E' `1.79` VOLTE QUELLO TENUTO, e al `q75` e'
+> `4.4` volte.** La sezione `(c)` qui sopra lo chiamava *«un termine che la formula
+> ignora»* ### **e aveva ragione sul fatto, ma non sull'ORDINE DI GRANDEZZA: non e' una
+> correzione, e' il pezzo PIU' GRANDE.**
+>
+> ### 📌 **E HA UN SEGNO CHE CONTA:** `delta_sync_phi = dt_n_s·forza·sin(media - _phi_t)` e'
+> un termine di **Kuramoto**, cioe' ### **RICHIAMA la fase verso la media locale.** La sua
+> differenza sull'arco tende quindi a ### **OPPORSI** a `dph`, non ad aumentarlo:
+> ### **smorza la spinta invece di aggiungersi.** Se e' cosi', il tetto vero e'
+> ### **PIU' BASSO di `2pi`**, e la soglia `3pi` e' ### **ancora piu' lontana.**
+>
+> ### ⚠ **NON LO DICHIARO MISURATO: il SEGNO della sua azione su `dph` non e' in `M7`**, che
+> confronta **moduli**. ### **Lo aggiungo alla corsa vera come `M7b`:** la correlazione fra
+> `Δ(delta_sync_phi)` e `dph` stesso -- se e' negativa, richiama.
+
+### ⛔ **DUE: GLI AVVOLGIMENTI CI SONO, E SONO CENTINAIA PER PASSO**
+
+| passo | archi | avvolgimenti di `dph` | ripiegamenti del `_w8` | archi con `|tw| >= 4pi` |
+|---|--:|--:|--:|--:|
+| `1` | `471564` | -- | -- | -- |
+| `2` | `471564` | **`318`** | **`109`** | `0` |
+| `3` | `471564` | **`300`** | `0` | **`109`** |
+
+### ➜ **Lo `0.064 %` degli archi avvolge a OGNI passo**, e `twp` ### **non esce MAI da `3pi`**
+*(`0` violazioni su `943128` coppie: la derivazione della sezione `(b)` **tiene**)*.
+
+> ### ⚠ **E I DUE `109` SONO LA POPOLAZIONE DI `ARCHI-OLTRE-4PI`**, che il suo stesso testo
+> descrive come *«zero al passo `1` e `109` al passo `2`»*. ### ⛔ **MA NON DICHIARO CHE SONO
+> GLI STESSI ARCHI: sono due CONTEGGI che coincidono, e per dire <<gli stessi>> servirebbero
+> gli INDICI.** ### **Non li guardo, perche' `ARCHI-OLTRE-4PI` e' <<DA NON INDAGARE>> per
+> decisione di Luca** -- riporto il meccanismo e la coincidenza, e ### **la verifica che li
+> collegherebbe NON la faccio.**
+
+### ⛔ **TRE: UN DIFETTO DEL MIO STRUMENTO, da curare PRIMA della corsa**
+
+`M6` stampa `errore_mediano_su_pi` come **mediana FIRMATA** dell'errore. Al passo `2` da'
+### **`0.0 pi` con `318` calci sopra `pi`**, che letto da solo sembra una contraddizione:
+### **non lo e', e' un insieme BIMODALE a `±4pi` la cui mediana firmata e' zero.**
+
+> ### ⛔ **E' un difetto di REFERTO, non di misura: il numero e' giusto e la lettura e'
+> ingannevole.** Si cura riportando ### **la mediana del MODULO** e ### **lo spacco dei
+> segni** *(quanti `+`, quanti `-`)*, invece di una mediana firmata su una distribuzione a
+> due picchi. ### **Trovato dal giro corto, e il collaudo non l'avrebbe preso: il suo caso
+> iniettava un avvolgimento di UN SOLO segno.**
+
+### ✔ **E `M5` DICE GIA' UNA COSA, che la corsa vera deve confermare o smentire**
+
+Al passo `3`, ### **`twist_dip = 0` sul `100 %` degli archi** -- `perc_chi` e' ancora tutto
+zero. ### ⚠ **Non e' la conferma della seconda ipotesi del guardiano:** a tre passi la
+chiralita' **non e' ancora nata**, e la domanda vera e' che cosa accade ai passi `50`, `100` e
+`140`. ### **Se restasse `1.0`, allora `twist_dip` non contribuisce MAI, e il tetto e' `2pi`
+per costruzione.**
+
 ## 4. TODO DEL NEXT STEP
 
 1. **commit di questo task history**, ### **DA SOLO**, prima dello strumento;
