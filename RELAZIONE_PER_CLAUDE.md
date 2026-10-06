@@ -6700,3 +6700,22 @@ Il task history escludeva `50` e `150` perche' *«li' `τ` vale `309`-`1491`»*.
 **`LUNGA-BATTITO-CADUTA` e' CHIUSA**, criterio soddisfatto. `ARCHI-OLTRE-4PI`
 ### **resta aperta**, con l'annotazione corretta: ### **la sua chiusura e' una decisione di
 Luca, e io non la chiudo.**
+
+---
+
+## 2026-10-06 — **UNA DICHIARAZIONE DI ESENZIONE CHE NON AVEVA UN OGGETTO**
+
+Negli ultimi tre commit *(`439018c`, `1e970f3`, `b544d5a`)* ho messo in fondo al
+messaggio `[SENZA-NON-TRACCIATI: ...]` nominando `csv/_test_fork/_tors_w8_lunga/_sim_lunga.py`.
+
+> ### ⚠ **QUEL FILE E' GITIGNORED** *(`.gitignore:101`, `csv/**/_sim_*.py`)*, quindi
+> ### **`H-NON-TRACCIATI` non aveva niente da segnalare e la dichiarazione era SUPERFLUA.**
+> Fino a `2097bc4` ### **serviva**, perche' il `lunga.json` era ancora non tracciato;
+> da `439018c` — dove il `json` e' entrato nel repo — ### **non serviva piu'.**
+
+**Perche' lo scrivo invece di lasciarlo passare:** una via d'uscita dichiarata ### **dice
+a chi legge che c'e' qualcosa fuori dal repo.** Dichiararla quando non c'e' niente
+### **abitua a leggere quelle righe come formule**, ed e' il modo in cui una via d'uscita
+smette di significare qualcosa. ### **Il contenuto dei tre commit non cambia:** i file
+committati sono quelli giusti e le liste `FILE CAMBIATI` coincidono — `H-FILE` le ha
+verificate tutte e tre.
