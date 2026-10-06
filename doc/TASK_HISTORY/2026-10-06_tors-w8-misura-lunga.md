@@ -197,3 +197,45 @@ ferma e si scrive. ### **E un `nan` in `twp_dip` che sopravvive a un passo** ⟹
    passi e il confronto con `f7237563`;
 5. ### ⛔ **poi FERMO:** la soglia, il `0.3` e `κ` si decidono su quei numeri, e
    ### **sono decisioni di Luca.**
+
+---
+
+## ANNOTAZIONE *(2026-10-06, a corsa CADUTA -- `par.8`: si ANNOTA, non si riscrive)*
+
+> ### ⛔ **LA CORSA DA `1000` PASSI E' CADUTA AL PASSO `1`, PRIMA DI OGNI SALVATAGGIO:**
+> `KeyError: 'calci_oltre_pi'` alla riga del *«battito»* per-passo
+> *(`csv/_test_fork/_tors_w8_lunga.py:669`)*. ### **Zero passi girati, zero dati.**
+> La prova sta in `csv/_test_fork/_tors_w8_lunga/caduta_passo1.txt`, committata col
+> fallimento; la voce e' ### **`LUNGA-BATTITO-CADUTA`**.
+
+**E IL PUNTO `3` DI QUESTO TODO PRESCRIVEVA ESATTAMENTE LA COSA CHE HO SALTATO.** C'e'
+scritto *«il **giro corto** (`STANDARD 7`), **poi** la corsa»*. Il giro corto l'ho fatto --
+### **ma PRIMA di curare l'etichetta dei calci**, e dopo la cura ho rigirato ### **il
+COLLAUDO e non il GIRO CORTO.** La sequenza vera e' stata:
+
+1. giro corto a `4` passi → ### **trova** il difetto dell'etichetta *(il contatore
+   `calci_oltre_pi` misurava un controfattuale)*;
+2. cura: ### **un contatore diventa TRE** *(`calci_evitati`, `calci_spuri_curata`,
+   `spinta_senza_causa`)*, e la chiave `calci_oltre_pi` ### **non esiste piu'**;
+3. collaudo `40/40` → ### **PASSA**, perche' il collaudo ### **non esercita la riga del
+   battito**;
+4. commit `7d68c6d`, corsa lanciata → ### **cade al primo battito.**
+
+> ### ⛔ **HO RITIRATO L'UNICO CONTROLLO CHE AVEVA IL POTERE DI PRENDERLO.** Il giro corto
+> aveva ### **appena dimostrato** quel potere -- e' lui che aveva trovato il difetto
+> precedente ### **sulla stessa riga** -- e invece di rigirarlo mi sono fidato di un collaudo
+> che quella riga ### **non la guarda.** ### **Un collaudo che prova le formule non prova il
+> RAPPORTO che le stampa**, ed e' la terza volta in questa misura che il difetto sta
+> ### **nel rapporto e non nella grandezza.**
+
+**E IL SECONDO DIFETTO, PIU' GRAVE DEL PRIMO:** lo strumento ### **promette** *«i dati dei
+passi prima sono salvati»* a ogni caduta, ma il suo `try` avvolge ### **SOLO**
+`passo_pieno` e `m.chiudi`. La stampa del battito e il salvataggio ### **stanno FUORI**,
+quindi una caduta li' ### **non salva niente** -- ed e' esattamente quello che e' successo.
+### **La promessa valeva per una caduta del SIMULATORE, non per una caduta dello
+STRUMENTO**, e la differenza non era dichiarata da nessuna parte.
+
+**COSA NON CAMBIA:** le previsioni dei paragrafi `1` e `2` ### **restano quelle scritte
+prima**, e il criterio *(`300`, `600`, `1000`; `0.5` e `1.5`)* ### **non si tocca**: la
+corsa non ha prodotto un solo numero, quindi ### **non c'e' nulla da cui una previsione
+potrebbe essere stata ritoccata.**

@@ -6357,3 +6357,36 @@ Su input **legali** una differenza non spiegata e' ### **impossibile per algebra
 > `1`, `309` al `50` e `250` al `140`. ### **Nei primi passi la scarica e' molto piu' debole
 > di quella che la curva assume, quindi la crescita e' piu' rapida.**
 > ### ⛔ **E' UN LIMITE DEL TERMINE DI PARAGONE, e va scritto PRIMA della misura lunga.**
+
+---
+
+## 2026-10-06 — **LA CORSA DA `1000` PASSI E' CADUTA AL PASSO `1`, E SU UNA STAMPA**
+
+**Il fatto:** `KeyError: 'calci_oltre_pi'` alla riga del *«battito»* per-passo
+*(`csv/_test_fork/_tors_w8_lunga.py:669`, strumento `d95639a4`, simulatore `cf2a1ac8`)*.
+### **Zero passi girati, zero dati.** La prova e'
+`csv/_test_fork/_tors_w8_lunga/caduta_passo1.txt`; la voce e' ### **`LUNGA-BATTITO-CADUTA`**.
+
+**La causa prossima e' piccola:** curando il difetto dell'etichetta ho spezzato un contatore
+in tre, e ### **una citazione della chiave vecchia e' sopravvissuta** — nell'unica riga che
+non misura niente, quella che ### **stampa.**
+
+> ### ⛔ **LA CAUSA VERA NON E' PICCOLA: dopo la cura ho rigirato IL COLLAUDO E NON IL GIRO
+> CORTO.** Ho ritirato ### **l'unico controllo che aveva il potere di prendere quel difetto**
+> — ed e' lui che aveva trovato il difetto ### **precedente, sulla stessa riga.** Il collaudo
+> passa `40/40` e quella riga ### **non la guarda:** un collaudo che prova le formule
+> ### **non prova il rapporto che le stampa.** ### **Terza volta in questa misura che il
+> difetto sta nel RAPPORTO e non nella grandezza.**
+
+**E il punto `3` del mio stesso TODO lo prescriveva:** *«il giro corto, **poi** la corsa»*.
+### **L'ho letto come un passo da fare UNA VOLTA invece che come il controllo da rifare DOPO
+OGNI CURA.**
+
+**IL SECONDO DIFETTO E' PEGGIO DEL PRIMO:** lo strumento promette *«i dati dei passi prima
+sono salvati»* a ogni caduta, ma il `try` avvolge ### **solo il passo del simulatore.** La
+stampa e il salvataggio ### **stanno fuori.** ### **La promessa valeva per una caduta del
+SIMULATORE e non per una caduta dello STRUMENTO, e la differenza non era scritta da nessuna
+parte.**
+
+**Fallimento committato con la prova; la cura e' un commit a se', poi la corsa si rilancia.**
+Il simulatore ### **non si tocca:** resta `cf2a1ac8`.

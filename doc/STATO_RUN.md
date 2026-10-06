@@ -2446,3 +2446,77 @@ simulatore lento»*. ### **E' del 2026-09-27, quando le misure erano a `120`-`15
 ### ⛔ **NON INDAGATA, NON INIZIATA.** Collegata a ### **`RISCRITTURA-GO`**, e il
 collegamento non e' decorativo: ### **la strada `(a)` e' il criterio di chiusura di quella
 voce, quindi non si aprono due lavori.**
+
+---
+
+## `LUNGA-BATTITO-CADUTA` — **la corsa da `1000` passi cade al passo `1`, e cade su una STAMPA**
+
+*(Aperta il 2026-10-06. Strumento `d95639a4`, simulatore `cf2a1ac8`, mandato della misura
+lunga di `TORS-W8-AVVOLGIMENTO`. La prova:
+`csv/_test_fork/_tors_w8_lunga/caduta_passo1.txt`.)*
+
+```
+File "csv/_test_fork/_tors_w8_lunga.py", line 669, in main
+    u.get("sopra_4pi", -1), m.cont["calci_oltre_pi"], u["tautw_salti"]),
+KeyError: 'calci_oltre_pi'
+```
+
+> ### ⛔ **ZERO PASSI GIRATI, ZERO DATI.** Il `lunga.json` sul disco e' ancora quello del
+> ### **giro corto a `4` passi** *(`13:35`)*; la corsa vera *(`13:39`)* e' morta
+> ### **prima del primo salvataggio**, e quel json ### **non si committa**: non e' una
+> misura.
+
+### LA CAUSA PROSSIMA: **una citazione sopravvissuta, e in una riga che STAMPA**
+
+La cura del difetto dell'etichetta *(`7d68c6d`)* ha spezzato ### **UN contatore in TRE** —
+`calci_evitati`, `calci_spuri_curata`, `spinta_senza_causa` — e la chiave `calci_oltre_pi`
+### **non esiste piu'.** Ne e' sopravvissuta ### **una sola** citazione, ed e'
+### **l'unica che non misura niente:** la riga del *«battito»* per-passo.
+
+### ⛔ LA CAUSA VERA: **ho ritirato l'unico controllo che aveva il potere di prenderlo**
+
+La sequenza, verificata dai log:
+
+| | |
+|---|---|
+| giro corto a `4` passi | ### **TROVA** il difetto dell'etichetta, ### **su quella stessa riga** |
+| la cura | un contatore diventa ### **tre**; la chiave vecchia muore |
+| collaudo `40/40` | ### **PASSA** — e ### **non esercita la riga del battito** |
+| commit `7d68c6d`, corsa | ### **cade al primo battito** |
+
+Il giro corto aveva ### **appena dimostrato** il suo potere su quella riga, e dopo la cura ho
+rigirato ### **il collaudo e non lui.** ### **Un collaudo che prova le formule non prova il
+RAPPORTO che le stampa**, ed e' la ### **terza volta** in questa misura che il difetto sta nel
+rapporto e non nella grandezza *(il falso `n/d` sullo zero, l'etichetta dei calci, questo)*.
+
+**E il punto `3` del TODO del task history prescriveva esattamente la cosa saltata:**
+*«il **giro corto** (`STANDARD 7`), **poi** la corsa»*. ### **La regola c'era e l'ho letta
+come un passo da fare UNA VOLTA, invece che come il controllo da rifare DOPO OGNI CURA.**
+
+### ⚠ IL SECONDO DIFETTO, **piu' grave del primo: la promessa sul salvataggio era FALSA**
+
+Lo strumento stampa *«MA I DATI DEI `N` PASSI PRIMA SONO SALVATI»*, ma il suo `try` avvolge
+### **SOLO** `_passo.passo_pieno(S, N)` e `m.chiudi(N)`. ### **La stampa del battito e il
+salvataggio ogni `10` passi stanno FUORI**, quindi una caduta li' ### **non salva niente** —
+ed e' precisamente quello che e' successo.
+
+> ### ⛔ **LA PROMESSA VALEVA PER UNA CADUTA DEL SIMULATORE, NON PER UNA CADUTA DELLO
+> STRUMENTO**, e la differenza ### **non era dichiarata da nessuna parte.** Un presidio che
+> copre meno di quello che promette e' ### **peggio** di uno assente, perche' chi legge
+> smette di cercare *(`A9`)*.
+
+### LA CURA, **in un commit a se'** *(come il mandato di Luca pretende)*
+
+1. la citazione sopravvissuta diventa ### **i tre contatori veri**;
+2. il `try` ### **si allarga a TUTTO il corpo del ciclo**, stampa e salvataggio compresi,
+   cosi' che la promessa sul salvataggio sia ### **vera** e non solo scritta;
+3. ### **un caso di collaudo che ESERCITA la riga del battito** — il difetto stava la', e
+   nessun controllo la guardava.
+
+**IL CRITERIO DI CHIUSURA:** la corsa arriva a ### **`1000` passi** e il referto nasce dal
+suo `json`.
+
+### ⚠ **E IL LEGAME CON I QUATTRO CONTROLLI A ZERO ALGEBRICO di questa sessione e' la
+MORALE, non il meccanismo:** la' il difetto era un controllo che ### **non POTEVA fallire**,
+qui e' un controllo che ### **non VENIVA GIRATO.** Sono due modi diversi di avere un presidio
+che non presidia niente *(`A9`)*, e vanno cercati ### **separatamente.**
