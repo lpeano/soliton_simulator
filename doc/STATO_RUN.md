@@ -2879,3 +2879,61 @@ corsa**, su:
 ### ⛔ **NON DECISA, NON INIZIATA.** Collegata a `MITOSI-SOGLIA-GRAD` *(chiusa: e' uscita
 la ### **MODULAZIONE**, non la ### **SOGLIA**)*, `GEOM-SENZA-VERSO`, `ARCHI-OLTRE-4PI` e
 `MASSA-CRITICA-LOCALE`.
+
+---
+
+## `CICLO-CHIUSURA-SEGNO` — **il segno dell'arco di chiusura e' OPPOSTO al verso in cui
+il ciclo lo percorre**
+
+*(Aperta il 2026-10-06 sera, ### **su mandato di Luca.** ### **Cercata prima
+nell'indice con sei termini** -- `base_cicli`, `circolazione`, `olonomia`, `ciclo`,
+`chiusura`, `verso`: ### **non esisteva una voce per questo difetto**, e
+`GEOM-SENZA-VERSO` riguarda `perc_geom`, che e' un'altra cosa.)*
+
+## ① IL FATTO, **trovato durante il collaudo di `M3-C`**
+
+In `_base_cicli_topologici` il ciclo si percorre ### **`u -> lca -> v -> u`**, ma il
+segno dell'arco di ### **CHIUSURA** e' registrato ### **`+1`** -- cioe'
+### **OPPOSTO** al verso in cui il ciclo lo percorre.
+
+| la convenzione dei segni | scarto dell'olonomia dal multiplo di `4π` |
+|---|--:|
+| come ### **MEMORIZZATO** | ### ⛔ **`6.17`** |
+| ### **solo la CHIUSURA ribaltata** | ### ✔ **`7.1e-15`** |
+| tutti ribaltati | ### ⛔ **`6.17`** |
+| tutti ### **tranne** la chiusura | ### ✔ **`7.1e-15`** |
+
+> ### ⛔ **LA CONSEGUENZA MISURATA:** il ### **SEGNO** dell'olonomia discorda fra
+> `_vertici_ciclo` *(la sequenza dei NODI)* e i `(arco, verso)` della base su
+> ### **`189` cicli su `189`** al passo `230` — ### **tutti quelli con olonomia non
+> nulla** — mentre il ### **MODULO** concorda a ### **`2.1e-14`.**
+> ### **Due routine DEL SIMULATORE danno versi opposti sullo STESSO ciclo.**
+
+## ② ✔ CHI LO LEGGE — **censito COL COMANDO (`AST`), non assunto**
+
+| la catena | chi la chiama |
+|---|---|
+| `_base_cicli_topologici` | ### **SOLO** `circolazione_topologica` |
+| `circolazione_topologica` | ### **SOLO** `_diag_completa` |
+| `_diag_completa` | ### **SOLO** `batch_condensazione`, cioe' lo ### **SCRITTORE DEI CSV** — ### ⛔ **NON `step()`, NON `passo_pieno`** |
+
+> ### ✔ **QUINDI OGGI IL SEGNO LO LEGGE SOLO LA DIAGNOSTICA, E NESSUNA LEGGE.**
+> L'unica scrittura di `_diag_completa` su `net` e' ### **`_ang_asse_prec`**, una
+> memoria diagnostica.
+
+**Fuori dal simulatore** lo leggono ### **solo strumenti di misura**
+*(`_diag_triangoli`, `_lettura_torsione_spinore`, `_letture_ab`, `_scansione_schemi`,
+`test_olonomia_chiralita`, e i due strumenti di `M1`-`M4`)*; ### **tutte le altre
+occorrenze sono COPIE del simulatore** nei sigilli e nei backup.
+
+## ③ ⛔ LA CURA, **e quando**
+
+> ### ✔ **E' UNA CORREZIONE A SE', CON SIGILLO, e NON tocca la fisica** — perche'
+> nessuna legge la legge.
+>
+> ### ⛔ **MA VA FATTA PRIMA DI QUALUNQUE SCELTA CHE USI IL SEGNO DI UN CICLO:** le
+> opzioni ### **`B`** e ### **`C`** di `GEOM-SENZA-VERSO` leggerebbero
+> ### **esattamente quel segno**, e oggi ### **non e' definito in modo univoco.**
+
+### ⛔ **NON INIZIATA.** E' il punto ### **`A2`** di `doc/RIPRESA_2026-10-07.md`.
+Collegata a `GEOM-SENZA-VERSO`.

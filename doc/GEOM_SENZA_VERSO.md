@@ -848,3 +848,174 @@ silenzio.**
 > ### ⛔ **E IL PASSO `230` NON SI PUO' RACCONTARE: non c'e'.** La misura e'
 > ### **INCOMPLETA**, e il referto non si scrive finche' non lo e'. ### **Il fallimento si
 > committa PRIMA della cura** *(`par.5`)*, e questo e' quel commit.
+
+---
+
+# ANNOTAZIONE DI CHIUSURA *(2026-10-06 sera — `par.8`: si ANNOTA, non si riscrive)*
+
+*(Registrazione decisa da Luca alla chiusura della sessione. ### **Nessuna corsa, nessuna
+patch al simulatore** — resta `b8c21049`. ### **`doc/ASSIOMI.md` non toccato.**)*
+
+## `(a)` ⛔ **L'OBIEZIONE `(b)` DEL GUARDIANO E' SMENTITA; LA `(a)` E' RAFFORZATA**
+
+**La previsione era:** *«l'olonomia e' zero sulla maggior parte dei cicli»*. **Misurato:**
+
+| passo | `1` | `50` | `150` | `230` |
+|---|--:|--:|--:|--:|
+| cicli con olonomia ### **NON nulla** | `47.66 %` | `59.77 %` | `66.80 %` | ### **`73.83 %`** |
+
+> ### ⛔ **SMENTITA, E SEMPRE DI PIU':** a `230` passi ### **tre quarti** dei cicli della
+> base hanno olonomia diversa da zero, con `|k|` fino a ### **`4`**.
+> ### **Il `0` che l'obiezione `(b)` temeva NON e' il caso tipico in questa scena.**
+
+**LE OBIEZIONI `(a)` E `(c)` RESTANO**, e la `(a)` ### **si rafforza con un fatto nuovo:**
+la base dei `256` cicli ### **non cambia MAI** — `0.00 %` a tutti e quattro i passi,
+### **nemmeno al `230`, dove nascono nodi.**
+
+> ### ⛔ **PERCHE' COPRE SOLO GLI ARCHI DI INDICE PIU' BASSO.** Il taglio
+> `if len(cicli) >= massimo: break` tiene i primi `256` archi non-albero
+> ### **in ordine di INDICE**, e cio' che succede altrove — ### **comprese le nascite** —
+> ### **non li tocca.** ### **Una base che non reagisce alla rete non e' una descrizione
+> della rete: e' una descrizione della NUMERAZIONE.**
+
+## `(b)` ⛔ **UN ERRORE DEL GUARDIANO: LA FINESTRA `1`-`230` ERA SBAGLIATA PER LA STABILITA'**
+
+| | |
+|---|---|
+| le nascite | cominciano al passo ### **`216`**: su `230` passi, ### **`14` passi su `230`** hanno dinamica di mitosi |
+| la torsione | e' ### **quasi tutta sotto `2π`** in questa finestra |
+| `perc_geom` | ### **quasi non cambia**: `0.00 %`, `0.00 %`, `0.01 %` ai passi `50`, `150`, `230` |
+
+> ### ⛔ **E' IL REGIME IN CUI IL DIFETTO DA CURARE NON AGISCE.** Misurare la
+> ### **stabilita' di un verso** dove il sistema e' quasi fermo ### **non dice quanto quel
+> verso oscilli quando il sistema si muove.** ### **L'errore e' nella SCELTA DELLA
+> FINESTRA, non nei numeri**, e i numeri restano veri ### **per quella finestra.**
+>
+> ### ✔ **LA CURA E' `A1` DI `doc/RIPRESA_2026-10-07.md`:** la misura si rifa' su
+> ### **`1000` passi**, con i passi pesanti ### **oltre il `216`.**
+
+## `(c)` ⛔ **IL TITOLO DEL REFERTO E' CORRETTO NEL MERITO: IL METRO ERA SBAGLIATO**
+
+> ### ⛔ **<<`A` e `D` oscillano piu' di `perc_geom`>> CONFRONTA FRAZIONI DI SEGNI CHE
+> CAMBIANO, E QUELLO NON E' IL METRO.**
+
+| | perche' il conteggio dei segni non misura cio' che conta |
+|---|---|
+| **`D`** | il dipolo e' ### **CONTINUO**: un `tw` che passa per zero ### **non inietta niente** — il segno cambia e la spinta e' ### **infinitesima** |
+| **`A`**, **`B`**, **`C`** | ogni cambio e' un ### **SALTO DI `π`**: un conteggio e una spinta ### **coincidono** solo qui |
+| **`perc_geom`** | cambia ### **PER NODO**, e ogni nodo tocca ### **~`74` archi** *(il grado medio misurato)*: ### **un cambio non e' un cambio** |
+
+> ### ✔ **LA GRANDEZZA DA CONFRONTARE, PER TUTTE LE OPZIONI, E' LA SPINTA INIETTATA:**
+> ### **`Σ |Δdipolo|` per passo.** ### **E' l'unica che mette `A`, `B`, `C`, `D`, `P` e il
+> riferimento sulla STESSA unita'** — e ### **`A1` la misura.**
+>
+> ### ⚠ **E IL NUMERO VECCHIO NON E' FALSO: e' di un'altra grandezza.** `0.72 %`, `0.82 %`
+> e `0.22 %` restano ### **i cambi di segno per passo**, e vanno letti come tali.
+> ### **E' il terzo caso in due giorni in cui prendo un numero vero e lo porto dove misura
+> un'altra cosa.**
+
+## `(d)` ⛔ **IL SEGNO DISCORDE HA UNA CAUSA NEL SIMULATORE: UN DIFETTO, ora REGISTRATO**
+
+> ### ⛔ **VOCE NUOVA: `CICLO-CHIUSURA-SEGNO`** *(cercata prima nell'indice con sei
+> termini — `base_cicli`, `circolazione`, `olonomia`, `ciclo`, `chiusura`, `verso` —
+> ### **non esisteva**; `GEOM-SENZA-VERSO` riguarda `perc_geom`, che e' un'altra cosa)*.
+
+**LA CAUSA, trovata durante il collaudo di `M3-C`:** in `_base_cicli_topologici` il ciclo
+si percorre ### **`u -> lca -> v -> u`**, ma il segno dell'arco di ### **CHIUSURA** e'
+registrato ### **`+1`** — cioe' ### **OPPOSTO al verso in cui il ciclo lo percorre.**
+
+| la convenzione | scarto dell'olonomia dal multiplo di `4π` |
+|---|--:|
+| come ### **MEMORIZZATO** | ### ⛔ **`6.17`** |
+| ### **solo la CHIUSURA ribaltata** | ### ✔ **`7.1e-15`** |
+
+> ### ⛔ **DA QUI IL SEGNO DISCORDE: `189` cicli su `189`** al passo `230` — tutti quelli
+> con olonomia non nulla — mentre il ### **MODULO** concorda a ### **`2.1e-14`.**
+> ### **Due routine DEL SIMULATORE danno versi opposti sullo STESSO ciclo.**
+
+### ✔ **CHI LO LEGGE — censito COL COMANDO (`AST` su `soliton_simulator.py`), non assunto**
+
+| la catena | chi la chiama |
+|---|---|
+| `_base_cicli_topologici` | ### **SOLO** `circolazione_topologica` |
+| `circolazione_topologica` | ### **SOLO** `_diag_completa` |
+| `_diag_completa` | ### **SOLO** `batch_condensazione`, lo ### **scrittore dei CSV** — ### ⛔ **NON `step()`, NON `passo_pieno`** |
+
+> ### ✔ **QUINDI OGGI IL SEGNO LO LEGGE SOLO LA DIAGNOSTICA, E NESSUNA LEGGE.** L'unica
+> scrittura di `_diag_completa` su `net` e' ### **`_ang_asse_prec`**, una memoria
+> diagnostica. Fuori dal simulatore lo leggono ### **solo strumenti di misura**
+> *(`_diag_triangoli`, `_lettura_torsione_spinore`, `_letture_ab`, `_scansione_schemi`,
+> `test_olonomia_chiralita`, e i due di `M1`-`M4`)*; ### **tutte le altre occorrenze sono
+> COPIE** del simulatore nei sigilli e nei backup.
+>
+> ### ✔ **LA CURA E' QUINDI UNA CORREZIONE A SE', CON SIGILLO, e NON tocca la fisica.**
+> ### ⛔ **MA VA FATTA PRIMA DI QUALUNQUE SCELTA CHE USI IL SEGNO DI UN CICLO:** le opzioni
+> ### **`B`** e ### **`C`** leggerebbero ### **esattamente quel segno**, e oggi
+> ### **non e' definito in modo univoco.** ### **E' il punto `A2` della ripresa.**
+
+## `(e)` ⛔ **PER `P`, IL VALORE SUI NODI NATI E' INDEFINITO** *(`S-dominio`)*
+
+Al passo `230` gli ### **`11` nodi nati** *(`12802` → `12813`)* hanno
+### **ZERO plaquette**: un nato siede su un arco suddiviso, quindi ha
+### **due vicini che non sono collegati fra loro** — ### **nessun triangolo.**
+
+> ### ⛔ **QUINDI `R_k` NON ESISTE SUI NATI, e vale `NaN` — non `0`.** ### **Un `0` li'
+> direbbe <<disordine totale>> dove la verita' e' <<non definito>>**, ed e' la famiglia di
+> `CHI-TORS-ZERO-FALSO`. ### **Per `P` questo e' un `S-dominio` da dichiarare PRIMA della
+> cura:** una legge che non ha valore sui nodi appena nati ### **deve dire che cosa fa
+> li'**, e ### **non puo' scoprirlo a corsa in volo.**
+
+## `(f)` **I RISULTATI, in forma breve**
+
+### `M1` — ### ✔ **`--chi-core` e' INERTE per il dipolo**
+
+`(a) = 0` e `(c) = 0` a ### **tutti e quattro** i passi; il massimo del rapporto
+### **SCENDE** *(`0.0932`, `0.0620`, `0.0483`)* e il massimo assoluto e'
+### **`10.7` volte sotto la soglia.** ### **E in CALO, quindi il margine cresce.**
+
+### `M2` — ⚠ **`c_k` separa MATERIA da VUOTO, MA LA SEPARAZIONE CALA**
+
+| | passo `1` | `50` | `150` | `230` |
+|---|--:|--:|--:|--:|
+| `AUC` MATERIA / VUOTO | `0.9992` | `0.9966` | `0.9861` | ### **`0.9023`** |
+| mediana di `c_k` in MATERIA | `0.7904` | `0.8293` | `0.6483` | ### **`0.4847`** |
+
+> ### ⛔ **LE MASSE PERDONO COERENZA, e questa e' una DOMANDA APERTA, non un risultato.**
+> In `230` passi la mediana di MATERIA ### **quasi si dimezza** e l'`AUC` scende di
+> ### **`~0.10`**. ### **Non so perche'**, e non lo deduco da qui: ### **sta in `B7` della
+> ripresa.**
+
+### `M4` — **la coerenza dell'asse e' quella del CASO, e non c'e' legame con lo spin**
+
+**IL CONTO DEL CASO NULLO, scritto** *(e non e' una simulazione: e' algebra)*:
+
+```
+R_k = SOMMA sulle plaquette p di  c_p * n_cappello(p)
+direzioni INDIPENDENTI  ->  E|R_k|^2 = SOMMA c_p^2   (i termini incrociati hanno media 0)
+coerenza attesa = sqrt(SOMMA c^2) / SOMMA c
+a MODULI UGUALI  ->  sqrt(N)/N = 1/sqrt(N)      <- il LIMITE INFERIORE
+```
+
+| al passo `230` | plaquette per nodo | `1/sqrt(N)` | ### **misurato** | rapporto |
+|---|--:|--:|--:|--:|
+| MATERIA | `1502` | `0.0258` | ### **`0.0395`** | `1.53` |
+| BORDO | `1494` | `0.0259` | ### **`0.0448`** | `1.73` |
+| VUOTO | `1333` | `0.0274` | ### **`0.0446`** | `1.63` |
+
+> ### **LA COERENZA MISURATA E' DELL'ORDINE DEL CASO:** sta ### **`1.1`-`1.7` volte** sopra
+> il limite inferiore, ### **ed e' UGUALE in tutte e tre le classi.**
+>
+> ### ⚠ **E NON SO SEPARARE DUE SPIEGAZIONI, quindi non scelgo:** l'eccesso sopra
+> `1/sqrt(N)` e' ### **esattamente cio' che producono moduli ETEROGENEI** *(il fattore e'
+> `sqrt(E[c²])/E[c]`, che vale `1` solo a moduli uguali, e i quantili di `|Σ tw|` al `230`
+> vanno da `0.037` a `2.40`)*, ### **ma potrebbe anche essere un allineamento DEBOLE vero.**
+> ### ⚠ **E il rapporto CRESCE** *(`1.1`-`1.3` al passo `50`, `1.5`-`1.7` al `230`)*:
+> ### **anche quello puo' essere l'una o l'altra cosa.**
+> ### ✔ **CHE COSA LE SEPARA:** un ### **nullo per PERMUTAZIONE** — si rimescolano le
+> normali tenendo i moduli — oppure la distribuzione di `|Σ tw|` ### **per nodo**, che
+> questo json ### **non porta.** ### **Va aggiunto in `A1`.**
+
+**E le altre due voci:** il coseno fra `R_k` e l'asse di Bloch `_nb` sta ### **dentro il
+caso nullo** *(`2.04 σ` e `2.49 σ` contro una soglia ### **Bonferroni** di `2.99 σ` su `18`
+confronti)* — ### **nessun legame con lo spin in questa scena** — e `R_k` e'
+### **STABILE**, con una rotazione mediana di ### **`0.40`-`1.50` gradi** per passo.

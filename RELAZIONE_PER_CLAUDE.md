@@ -7872,3 +7872,150 @@ log della corsa e' `plaquette.txt`** *(con la dichiarazione `P5` intera)*.
 
 > ### ⛔ **LA SCELTA FRA `A`/`B`/`C`/`D`/`P`, FRA `P1`/`P2`/`P3`, E SE APRIRE `U1` PER
 > `chiralita_core_locale`, SONO DECISIONI DI LUCA.**
+
+---
+
+## 2026-10-06 sera — **CHIUSURA DELLA SESSIONE: la registrazione, e il punto di ripresa**
+
+> ### 📌 **IL PUNTO DI RIPRESA E' `doc/RIPRESA_2026-10-07.md`.** ### **La prima azione e'
+> `A1`:** la misura del verso ### **rifatta su `1000` passi**, col metro giusto.
+
+**Solo registrazione.** ### **Nessuna corsa, nessuna patch** — il simulatore resta
+`b8c21049`. ### **`doc/ASSIOMI.md` non toccato.**
+
+### ① ⛔ **L'OBIEZIONE `(b)` DEL GUARDIANO E' SMENTITA; LA `(a)` E' RAFFORZATA**
+
+*«L'olonomia e' zero sulla maggior parte dei cicli»* → misurato ### **`47.66 %` →
+`59.77 %` → `66.80 %` → `73.83 %`** di cicli con olonomia ### **NON** nulla.
+### **Smentita, e sempre di piu'.**
+
+**E la `(a)` si rafforza:** la base dei `256` cicli ### **non cambia MAI** *(`0.00 %` a
+tutti i passi, ### **nemmeno al `230` dove nascono nodi**)*, perche' il taglio tiene i
+primi `256` archi ### **in ordine di INDICE.** ### **Una base che non reagisce alla rete
+descrive la NUMERAZIONE, non la rete.**
+
+### ② ⛔ **UN ERRORE DEL GUARDIANO: LA FINESTRA `1`-`230` ERA SBAGLIATA**
+
+Le nascite partono al ### **`216`**, la torsione e' ### **quasi tutta sotto `2π`**, e
+`perc_geom` cambia ### **`0.00 %`, `0.00 %`, `0.01 %`.** ### **E' il regime in cui il
+difetto da curare NON AGISCE**, quindi misurare li' la stabilita' di un verso
+### **non dice quanto oscilli quando il sistema si muove.** ### **La cura e' `A1`.**
+
+### ③ ⛔ **IL TITOLO DEL MIO REFERTO E' CORRETTO NEL MERITO: IL METRO ERA SBAGLIATO**
+
+*«`A` e `D` oscillano piu' di `perc_geom`»* confronta ### **frazioni di segni che
+cambiano**, e quello non e' il metro: per ### **`D`** il dipolo e' ### **continuo**
+*(un `tw` che passa per zero non inietta niente)*; per ### **`A`/`B`/`C`** ogni cambio e'
+un ### **salto di `π`**; e ### **`perc_geom`** cambia ### **per NODO**, dove ogni nodo
+tocca ### **~`74` archi.**
+
+> ### ✔ **LA GRANDEZZA GIUSTA, PER TUTTE LE OPZIONI, E' LA SPINTA INIETTATA
+> `Σ |Δdipolo|` per passo**, e ### **`A1` la misura.** ### ⚠ **Il numero vecchio non e'
+> falso: e' di un'altra grandezza** — ### **terzo caso in due giorni.**
+
+### ④ ⛔ **IL SEGNO DISCORDE HA UNA CAUSA: UN DIFETTO DEL SIMULATORE, ora REGISTRATO**
+
+> ### **VOCE NUOVA: `CICLO-CHIUSURA-SEGNO`** *(cercata prima con sei termini:
+> ### **non esisteva**)*.
+
+In `_base_cicli_topologici` il ciclo si percorre ### **`u -> lca -> v -> u`**, ma il segno
+dell'arco di ### **chiusura** e' registrato ### **`+1`**, cioe' ### **opposto.** Da qui il
+segno discorde su ### **`189` cicli su `189`** mentre il ### **modulo** concorda a
+### **`2.1e-14`.**
+
+**CHI LO LEGGE, censito col comando (`AST`):** `_base_cicli_topologici` ← **solo**
+`circolazione_topologica` ← **solo** `_diag_completa` ← **solo** `batch_condensazione`,
+lo ### **scrittore dei CSV** — ### ⛔ **NON `step()`, NON `passo_pieno`.**
+
+> ### ✔ **QUINDI LO LEGGE SOLO LA DIAGNOSTICA, E NESSUNA LEGGE**: la cura e'
+> ### **una correzione a se', con sigillo**, e ### **non tocca la fisica.** ### ⛔ **Ma va
+> fatta PRIMA di qualunque scelta che usi il segno di un ciclo** *(le opzioni `B` e `C`)*.
+> ### **E' `A2`.**
+
+### ⑤ ⛔ **PER `P`, IL VALORE SUI NODI NATI E' INDEFINITO** *(`S-dominio`)*
+
+Gli ### **`11` nodi nati** hanno ### **zero plaquette** *(due vicini non collegati fra
+loro)*, quindi ### **`R_k` non esiste** e vale ### **`NaN`, non `0`.** ### **Una legge
+che non ha valore sui nati deve DIRE che cosa fa li', PRIMA della cura.**
+
+### ⑥ **I RISULTATI**
+
+| | |
+|---|---|
+| `M1` | ### ✔ **`--chi-core` INERTE** per il dipolo: massimo ### **`10.7` volte sotto la soglia**, ### **e in calo** |
+| `M2` | `c_k` separa MATERIA da VUOTO ### **ma la separazione CALA** *(`AUC` `0.999` → `0.902`, mediana MATERIA `0.79` → `0.48`)*: ### ⛔ **LE MASSE PERDONO COERENZA**, ed e' una ### **domanda aperta** *(`B7`)* |
+| `M4` | coerenza dell'asse ### **`0.029`-`0.045`**, ### **uguale in tutte le classi**; ### **nessun legame con lo spin**; `R_k` ### **stabile** *(`0.40`-`1.50` gradi)* |
+
+**IL CONTO DEL CASO NULLO, scritto:** per `N` vettori di direzione indipendente in `3D`,
+`E|Σv|² = Σc²`, quindi la coerenza attesa e' `sqrt(Σc²)/Σc`, e ### **a moduli uguali
+`1/sqrt(N)`** — il ### **limite inferiore.** Con `~1300`-`1500` plaquette per nodo vale
+### **`0.0258`-`0.0274`**, e il misurato sta ### **`1.1`-`1.7` volte sopra.**
+
+> ### ⚠ **E NON SO SEPARARE DUE SPIEGAZIONI, quindi non scelgo:** l'eccesso e'
+> ### **quello che producono moduli ETEROGENEI**, ### **ma potrebbe essere un allineamento
+> debole vero.** ### **Le separa un nullo per PERMUTAZIONE** *(si rimescolano le normali
+> tenendo i moduli)* ### **oppure la distribuzione di `|Σ tw|` per nodo**, che questo json
+> non porta: ### **va aggiunta in `A1`.**
+
+### ⑦ ✔ **`U2` E' CHIUSA: ERA GIA' CURATA, E NON L'AVEVO GUARDATO**
+
+**Verificato sul codice di `b8c21049`, non sulla voce:** il cancello
+`FRAZ_NASCITA*d >= LAM` in `decidi_divisione` e' ### **INCONDIZIONATO** *(le uniche
+guardie che lo contengono sono `def decidi_divisione` e `if len(c)` — ### **nessun flag**,
+censito con `AST`)*, e ### **`MITOSI_2LAM` e' dichiarato INERTE.** ### **Curata dal commit
+`6b`** *(sigillo `d9032c3`, 2026-10-04)*.
+
+> ### ⛔ **ERRORE DEL GUARDIANO E MIO:** `U2` era finita nella parte `A` della ripresa
+> perche' ### **ripresa da una voce dell'indice NON AGGIORNATA, senza guardare il codice.**
+> ### **E' esattamente `P1`** — *non usare l'associazione senza verificare lo storico*.
+> ### **La voce era ferma a prima del `6b`, e il `6b` e' del 2026-10-04.**
+
+### ⚠ **E UNA PREMESSA DEL MANDATO NON HA RETTO SUL CODICE, lo dico**
+
+*«Il ramo che rialzava gli archi in `_nasce` e' uscito»* ### **e' FALSO:** `_nasce` termina
+ancora con ### **`return np.maximum(v, LAM)`.** ### **Quel ramo resta come PRESIDIO per i
+siti che il `6b` non tocca**, e il sito vivo e' lo ### **Schwinger** — che infatti ha gia'
+la sua voce, `SCHW-SOTTO-LAM`, dove si legge *«IL `6b` NON LO TOCCA, per mandato»*.
+
+> ### ✔ **`U2` si chiude lo stesso**, perche' `U2` parla della ### **MITOSI**, e la mitosi
+> e' gated. ### **Ma le due cose che restano vanno in coda** *(`B14`)*:
+> ### **`SCHW-SOTTO-LAM`** e ### **`D31` DA RIMISURARE**, perche' e' stata misurata su
+> blob ### **`ab685eac`**, cioe' ### **prima di `SEMINA_LAM` e prima del `6b`** — due
+> cambiamenti che toccano ### **proprio le lunghezze.**
+
+### ⑧ **IL FILE DELLA RIPRESA, e che cosa contiene**
+
+| | |
+|---|---|
+| **parte `A`** | `A1` la misura rifatta · `A2` il difetto del segno di chiusura · `A3` ### **le decisioni di Luca** · `A4` la cura · `A5` la soglia a tre bracci · `A6` ### **`U1` legge per legge** |
+| **parte `B`** | `B1` la catena del vuoto … `B14`, ### **e la prima azione resta `A1`** |
+| le bloccanti | ### **`12` su `937`**, ### **verificate col comando** |
+| le aperte | ### **`701`**, di cui ### **`318` segnaposto** |
+| ### ⚠ **aggiunte da me** | ### **`53` voci** con `SI`/`DA-DECIDERE`, ### **non segnaposto**, che il mandato non nominava — ### **e dieci di esse sono REGOLE o casi di sigillo, non difetti aperti** |
+
+### ⑨ ✔ **DUE PRECISAZIONI DI LUCA, VERIFICATE SUL CODICE DI `b8c21049`**
+
+**`SCHW-SOTTO-LAM` e' PIU' AMPIA di come e' registrata**, e i commenti del simulatore lo
+dichiarano gia':
+
+| | |
+|---|---|
+| `1` | ### **`_L_sch = norm(pos[aa] - pos[bb])`** usa ### **le POSIZIONI**, non `d` — *<<E LA LUNGHEZZA VIENE DA `pos`, NON DA `d` -- nella divisione viene da `d`>>* |
+| `2` | ### **`_dd = max(FRAZ_NASCITA*_L_sch, 0.05)`**: pavimento ### **`0.05` scelto a mano** — *<<e' un `A11` e NON e' del `6a`>>* |
+| `3` | poi ### **`_nasce('schwinger')` RIALZA a `LAM`**: ### **crea e poi allunga** |
+
+> ### ⛔ **IL CANCELLO DELLA MITOSI CONTROLLA `d`, LO SCHWINGER MISURA `pos`.** Sono
+> ### **due grandezze diverse**, e ### **nessun cancello confronta la seconda con `LAM`
+> prima di creare.** ### ✔ **PRIMA DELLA CURA, LA MISURA:** quanti archi Schwinger
+> nascono sotto `LAM` *(i contatori `_sm_tr<q>_schwinger` e `_sm_lun<q>_schwinger`
+> esistono gia')* e ### **`d` contro `|pos|` sugli archi scelti.**
+
+**`D31`: il meccanismo e' VIVO, non storico.** Col flag ### **`--scala-min-passo`**, che
+### **il driver accende**, `_smp_chiudi` applica `_smorza` ### **una volta per passo**
+sulla variazione totale, ed e' ### **a senso unico**: *<<smorzando solo la DISCESA>>*, con
+### **`fatt = max(0, 1 - LAM/prima)`** applicato ### **solo dove `dx < 0`.**
+
+> ### ⛔ **E' UN CRICCHETTO CHE FA CRESCERE `d0`, e morde di piu' VICINO a `LAM`** — li'
+> `fatt` tende a `0`, quindi ### **la discesa si annulla e la salita no.** ### ✔ **PRIMA
+> DI QUALUNQUE CURA, LA RIMISURA sul blob corrente:** `_g_smp_discese`, `_g_smp_salite` e
+> ### **il bilancio di `d0`.**
