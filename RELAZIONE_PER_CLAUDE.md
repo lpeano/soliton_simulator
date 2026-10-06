@@ -6959,3 +6959,100 @@ del criterio — ### **ma si legge a `1000`, non adesso.**
 > con la frazione di ### **nodi NELLA STESSA FINESTRA**, quindi uno spostamento comune a
 > entrambe ### **si cancella.** ### **E' esattamente la ragione per cui il mandato chiedeva
 > quel confronto invece del volume.**
+
+---
+
+## 2026-10-06 — **IL REFERTO DEL `0.3` A ZERO: `R` INTERMEDIA, il DIPOLO CONFERMATO, e la rete cresce DOVE C'E' RETE**
+
+`doc/REFERTO_mitosi_zero_dove_2026-10-06.md`, blob ### **`5de6d5f5`**, generato da
+`_referto_mzd.py` *(`5b9d5d76`)* dai due `json` committati in `6cfcc4e`. Il simulatore
+### **non si tocca:** resta `cf2a1ac8`.
+
+### ✔ I SEI CONTROLLI PASSANO TUTTI
+
+| | esito | materia |
+|---|---|---|
+| `C0` | ✔ | `8841` valori, zero differenze |
+| `C-letture` | ✔ | `6741` valori, zero differenze, `14` campi esclusi e **dichiarati** |
+| `C1`, `C1 (zero)`, `C1 (acceso 1000)` | ✔ | e l'ultimo su ### **`1000` passi**, `3496` divisioni |
+| `C-fallisce` | ✔ | primo passo diverso: ### **`212`** |
+
+> ### ✔ **E `C-fallisce` DICE UNA COSA CHE NON AVEVO CHIESTO:** la prima differenza e' al passo
+> `212` ed e' nel ### **dodicesimo decimale** di `q100` di `|tw|`. ### **I due bracci divergono
+> PRIMA di qualunque nascita** *(la prima e' al `214` e al `216`)*, attraverso ### **il flusso
+> del generatore casuale** — la soglia diversa cambia quanti archi arrivano al cancello `4`,
+> quindi quanti numeri si estraggono. ### **E' esattamente il caveat che avevo scritto PRIMA**
+> *(«i due bracci non sono lo stesso sistema meno un effetto»)*: qui si vede ### **dove e
+> come.**
+
+### ⛔ DOMANDA `1` — **`R` e' INTERMEDIA, e le due letture CONCORDANO**
+
+| | `_AMP = 0` | `_AMP = 0.3` | `R` |
+|---|--:|--:|--:|
+| divisioni | `565` | `3496` | ### **`0.1616`** |
+| `Σ (g1∧g2∧g3)` | `253334` | `741333` | ### **`0.3417`** |
+
+Entrambe nella banda ### **`0.1`-`0.5`**: ### **lettura intermedia.** ### **Il `0.3` non crea
+la crescita e non e' nemmeno irrilevante:** senza di lui la rete ### **partorisce comunque**,
+ma ### **sei volte meno.** E ### **la prima nascita si sposta di DUE passi soli** *(da `214` a
+`216`)*.
+
+### ✔ DOMANDA `3` — **l'ipotesi del dipolo e' CONFERMATA in ENTRAMBI i bracci**
+
+| | `_AMP = 0` | `_AMP = 0.3` | la soglia |
+|---|--:|--:|--:|
+| frazione con la componente di **dipolo** | ### **`0.9935`** | ### **`0.9704`** | `>= 0.70` |
+| `Spearman`(cambi di `chi_torsione`, archi oltre `4π`) | ### **`0.9090`** | ### **`0.6961`** | `>= 0.50` |
+| spinta **esattamente** `π` *(che `> π` non conta)* | ### **`0`** | ### **`0`** | |
+
+> ### ✔ **E IL TIMORE SUL BORDO DELLA SOGLIA NON SI E' MATERIALIZZATO:** gli archi con spinta
+> ### **esattamente `π`** sono ### **ZERO** in entrambi i bracci, quindi la lettura
+> ### **non e' un artefatto del `> π`.** ### **Il ramo che l'avrebbe dichiarato esisteva ed e'
+> rimasto spento, che e' il modo giusto in cui un controllo puo' tacere.**
+
+> ### ⚠ **MA LA CORRELAZIONE E' SU UNA SERIE BUCATA**, e il referto lo dichiara: `392` passi
+> esclusi nel braccio zero e ### **`731` nell'acceso** — ### **il `73 %`.** Registrato come
+> ### **`CHI-TORS-ZERO-FALSO`**, e ### **la voce resta aperta.**
+
+### ⛔ DOMANDA `2` — **NESSUNA classe e' sovrarappresentata: la rete cresce DOVE C'E' RETE**
+
+I rapporti *(frazione di nascite / frazione di nodi)* stanno ### **tutti fra `0.6` e `1.4`**,
+in entrambi i bracci e in tutte le finestre: ### **mai vicini al `2`** che il criterio chiede.
+
+> ### ✔ **E' una risposta, non un'assenza di risposta:** ### **l'accelerazione NON e'
+> superficie che cresce ne' materia che prolifera.** Le nascite ### **seguono i nodi.**
+
+**E un fatto che si vede solo guardando le frazioni di NODI:** `MATERIA` passa da `0.0967` a
+### **`0.1669`** *(zero)* e a `0.1489` *(acceso)*, mentre `VUOTO` scende da `0.6319` a
+### **`0.4937`** e a `0.5320`. ### **La rete si CONCENTRA**, in entrambi i bracci — ed e' lo
+spostamento che avevo segnalato al passo `700`, ora su tutta la corsa.
+
+> ### ⚠ **E resta quello che NON so:** se siano ### **i baricentri che si muovono** o
+> ### **i nodi che cadono verso le masse.** ### **La seconda sarebbe la prima delle tre prove
+> di Luca, e per questo NON la affermo.**
+
+### LE PREVISIONI: **il guardiano `2` su `3`, io `1` su `4`**
+
+| chi | previsione | esito |
+|---|---|---|
+| guardiano | «nascite molte meno» | ### ✔ **giusta**: `565` contro `3496` |
+| guardiano | «la prima piu' tardi, forse MAI entro `1000`» | ### ⚠ **mezza**: piu' tardi di ### **`2` passi**, non «mai» |
+| guardiano | «la spinta oltre `π` soprattutto dal DIPOLO» | ### ✔ **giusta**, e nettamente: `97`-`99 %` |
+| guardiano | «le Schwinger soprattutto nel VUOTO» | ### ⚠ **mezza**: `1.24×` nel braccio zero, ### **`1.02×` nell'acceso** |
+| io | «`R` fra `0.2` e `0.6`» | ### ⛔ **mezza**: `0.3417` dentro, ### **`0.1616` FUORI** |
+| io | «prima nascita fra `250` e `450`» | ### ⛔ **sbagliata**: `216` |
+| io | «spinta oltre `π` dal DIPOLO» | ### ✔ **giusta** |
+| io | «`BORDO` sovrarappresentato, `VUOTO` per le Schwinger» | ### ⛔ **sbagliata**: ### **nessuna** |
+
+> ### ⛔ **E AVEVO DICHIARATO PRIMA LA COSA CHE MI AVREBBE FATTO SBAGLIARE DI PIU':** *«sto
+> prevedendo il braccio `A` con i numeri del braccio `B`; il serbatoio fra `3π` e `4π`
+> potrebbe non formarsi affatto se sono le nascite a riempirlo»*. ### **Ho sbagliato nella
+> direzione OPPOSTA: il serbatoio si forma quasi uguale, e la rete parte quasi insieme.**
+> ### **Dichiarare il rischio giusto non mi ha fatto prevedere meglio**, e vale la pena
+> saperlo.
+
+### ⛔ **E QUESTA E' UNA MISURA, NON UN SIGILLO:** il `0.3`, la soglia `3π`, `κ` e la legge del
+basculamento chirale ### **si decidono su questi numeri, e sono decisioni di Luca.**
+
+> ### ⚠ **Un seme solo**, quindi ### **nessuna barra d'errore fra semi** e `P3` ne chiederebbe
+> ### **almeno quattro.** Il gradino raggiunto e' ### **`(b)`**, non `(a)` ne' `(c)`.

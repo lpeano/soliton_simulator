@@ -2609,3 +2609,49 @@ e ### **perde il VERSO** mentre la catena della torsione la usa come chiralita':
 ### **le due voci parlano dello stesso array, una del NOME e una del CONTENUTO.**
 
 ### ⛔ **NON INIZIATA.**
+
+---
+
+## `CHI-TORS-ZERO-FALSO` — **un contatore che vale `0` dove la risposta giusta e' <<non lo so>>**
+
+*(Aperta il 2026-10-06 dalla misura del `0.3` a zero. Strumento `16dced88` su `cf2a1ac8`.)*
+
+Il gancio `chi_tors` confronta `chi_torsione` fra due passi per contare i nodi che cambiano.
+Quando la ### **lunghezza dell'array cambia** — cioe' quando ### **nascono nodi**
+— non puo' confrontare, e lo registra in `chi_tors_non_confrontabile`.
+### ⛔ **Ma in quei passi `cambi_chi_tors` RESTA `0`, e quello NON e' <<zero cambi>>:
+### e' <<NON MISURATO>>.**
+
+| | passi su `1000` | |
+|---|--:|--:|
+| braccio `_AMP = 0` | ### **`392`** | `39 %` |
+| braccio `_AMP = 0.3` | ### **`731`** | ### **`73 %`** |
+
+> ### ⛔ **E TOCCA UN CRITERIO:** la correlazione fra cambi di chiralita' e archi oltre
+> `4π`, che il criterio del dipolo vuole `>= 0.5`, sarebbe stata calcolata su una serie
+> ### **falsa per il `73 %`** nel braccio acceso.
+
+### ✔ CURATO NEL LETTORE, **non nello strumento** — e la differenza conta
+
+Il flag e' registrato ### **a OGNI passo**, quindi `_referto_mzd` ### **esclude** quei passi
+dalla correlazione e ### **dichiara quanti ne ha buttati** *(`abf9ba4`)*.
+
+> ### ✔ **E' L'UNICA RAGIONE PER CUI DUE CORSE DA UN'ORA E MEZZA NON VANNO RIFATTE.**
+> ### **Il disegno ha tenuto perche' il contatore del <<non misurato>> ESISTEVA:** senza di
+> lui lo zero sarebbe stato ### **indistinguibile da una misura.**
+
+### ⚠ LA RISERVA, e il perche' la voce resta aperta
+
+Lo ### **strumento** resta com'e': `16dced88` e' il blob che ha prodotto i `json`
+committati, e cambiarlo ### **li renderebbe non attribuibili.** Quindi ### **ogni corsa
+futura con quello strumento avra' lo stesso zero falso**, e ogni lettore futuro
+### **deve escludere quei passi.**
+
+**CHE FARE, e NON l'ho fatto qui:** il gancio dovrebbe scrivere ### **`None` invece di `0`**
+quando non misura, cosi' il falso-zero sarebbe ### **impossibile invece che da ricordare.**
+### ⛔ **E' una cura allo STRUMENTO, e va fatta PRIMA della prossima corsa, non dopo.**
+
+**IL CRITERIO DI CHIUSURA:** il gancio non lascia piu' uno zero dove non ha misurato, e
+### **un caso di collaudo lo pretende.**
+
+### **Collegata a `CHI-BASC-DESCRIZIONE`**, che viene dalla stessa misura.
