@@ -62,6 +62,19 @@ PAV_TAU = 1e-3                    # il pavimento ESTERNO di `_tau_tw_locale`
 PAV_DOM = 1e-3                    # il pavimento DENTRO `dom`
 
 
+def val(x):
+    """Il VALORE di una Spearman: il `json` la porta come numero **o** come `[valore, n]`.
+
+    ### ⛔ **UN DATO COMMITTATO NON DEVE DIVENTARE ILLEGGIBILE PER UNA CURA DELLO
+    STRUMENTO.** Il `json` di `a1e9246` porta `m2` come **lista**, perche' quella corsa gira
+    con lo strumento di **prima** della correzione; i `json` successivi portano un numero.
+    ### ✔ **Si leggono entrambi, e il collaudo lo verifica su tutte e due le forme.**
+    """
+    if isinstance(x, (list, tuple)):
+        return None if not x else x[0]
+    return x
+
+
 def _w8(a):
     return (a + P4) % (2.0 * P4) - P4
 
@@ -219,7 +232,7 @@ class Misura(object):
         #   (mediana del rapporto `1.79`).**
         _fin = np.isfinite(dsy) & np.isfinite(dph)
         d["m7b"] = {"n": int(np.sum(_fin)),
-                    "spearman_dsync_dph": (spearman(dph[_fin], dsy[_fin])
+                    "spearman_dsync_dph": (spearman(dph[_fin], dsy[_fin])[0]
                                            if np.sum(_fin) > 25 else None),
                     "fraz_segno_opposto": (float(np.mean((dsy[_fin] * dph[_fin]) < 0))
                                            if np.any(_fin) else None),
@@ -355,8 +368,17 @@ class Misura(object):
                      "fraz_sopra_2": float(np.mean(rap > 2.0)) if rap.size else None,
                      "fraz_sopra_1": float(np.mean(rap > 1.0)) if rap.size else None}
         # ### `M2` col dipolo (il mandato) e `M2b` SENZA (la correzione della sezione (c))
-        out["m2"] = spearman(ts + td, tw)
-        out["m2b"] = spearman(ts, tw)
+        # ### ⛔ **`spearman()` RESTITUISCE `(valore, n)`, NON UNO SCALARE** -- il suo
+        #   `return float(...), int(...)` lo dice. Il rapporto la passava a `n4()` come se
+        #   fosse un float e ### **e' caduto al passo 50 con un TypeError.**
+        #   ### ✔ **Si spacchetta ALLA SORGENTE**, cosi' il `json` porta il valore e il
+        #   conteggio **separati** e nessun lettore a valle puo' ripetere l'errore.
+        _s2, _n2 = spearman(ts + td, tw)
+        _s2b, _n2b = spearman(ts, tw)
+        out["m2"] = _s2
+        out["m2_n"] = _n2
+        out["m2b"] = _s2b
+        out["m2b_n"] = _n2b
         out["quintili_m2"] = quintili(ts + td, tw)
         out["quintili_m2b"] = quintili(ts, tw)
         # ### `M3` / `M3b`: la frazione che ARRIVA alla soglia
@@ -396,6 +418,15 @@ class Misura(object):
 
 
 # =============================================================== IL COLLAUDO
+def _solleva(f):
+    """`True` se `f()` solleva. Serve ai controlli che ### **DEVONO fallire.**"""
+    try:
+        f()
+    except Exception:
+        return True
+    return False
+
+
 def collaudo():
     esiti = []
 
@@ -661,6 +692,93 @@ def collaudo():
           "e' la domanda <<quanto varrebbe questo criterio se non ci fosse niente?>>")
 
     riga("=")
+    stampa("8. IL RAPPORTO: esercitato, non solo collaudato")
+    riga("=")
+    # ### ⛔ **IL COLLAUDO NON ESERCITAVA `rapporto()`**, e il difetto della tupla e' uscito
+    #   ### **solo dalla corsa vera, al passo 50, dopo 150 passi di calcolo.**
+    #   ### ✔ **Ora si esercita su un `json` FINTO costruito qui**, con le stesse chiavi
+    #   che la misura produce: se una formattazione cade, cade NEL COLLAUDO.
+    prova("spearman: ### restituisce una TUPLA (valore, n), non uno scalare",
+          isinstance(spearman(np.arange(100.0), np.arange(100.0)), tuple)
+          and len(spearman(np.arange(100.0), np.arange(100.0))) == 2,
+          "ed e' il difetto che ha fatto cadere il rapporto della corsa vera")
+    prova("spearman: ### il suo PRIMO elemento e' il valore, il secondo il conteggio",
+          abs(spearman(np.arange(100.0), np.arange(100.0))[0] - 1.0) < 1e-12
+          and spearman(np.arange(100.0), np.arange(100.0))[1] == 100)
+    prova("### n4 su una TUPLA solleva TypeError: il caso che DEVE fallire",
+          _solleva(lambda: n4((0.5, 100))),
+          "e' per questo che si spacchetta alla sorgente")
+    _mf = Misura(0.01)
+    _mf.passi = [{"passo": p, "n": 10, "archi": 5, "nati_tot": 0, "schwinger_tot": 0,
+                  "g1_sopra_soglia": 1, "g1_e_g2": 1, "g1_e_g2_e_g3": 1,
+                  "prob_positiva": 1, "g4_nasce": 0, "len_avv": 5,
+                  "tor": {"m5": {"n": 5, "fraz_zero": 1.0, "fraz_mezzo_pi": 0.0,
+                                 "fraz_pi": 0.0, "fraz_altro": 0.0},
+                          "m6": {"n": 5, "avvolgimenti": 0, "ripiegamenti": 0,
+                                 "calci_oltre_pi": 0,
+                                 "errore_MODULO_mediano_su_pi": None,
+                                 "errore_firmato_mediano_su_pi": None,
+                                 "calci_positivi": 0, "calci_negativi": 0,
+                                 "sopra_4pi": 0, "sopra_4pi_e_ripiega": 0},
+                          "m7": {"n": 5, "q_avanzamento": None, "q_dsync": None,
+                                 "q_rapporto": {"q050": 0.3, "q075": 0.5, "q095": 1.0,
+                                                "q005": 0.1, "q025": 0.2}},
+                          "m7b": {"n": 5, "spearman_dsync_dph": 0.1,
+                                  "fraz_segno_opposto": 0.5, "q_prodotto": None},
+                          "tetto": {"n": 5, "causale": True,
+                                    "q_tw_stella": {"q050": 6.28},
+                                    "max_scarto_forme": 0.0}}}
+                 for p in PASSI_MIS]
+    _mf.mis = {p: {"n": 5,
+                   "m1": {"n": 4, "q25_dom": 1.0, "q_rapporto": {"q050": 0.4, "q095": 0.9},
+                          "mediana": 0.4, "fraz_sopra_1": 0.0, "fraz_sopra_2": 0.0},
+                   "m2": 0.03, "m2_n": 5, "m2b": 0.03, "m2b_n": 5,
+                   "m3": {"fraz_oltre_3pi": 0.07, "fraz_oltre_soglia_modulata": 0.09,
+                          "q_soglia_modulata": None},
+                   "m3b": {"fraz_oltre_3pi": 0.07, "fraz_oltre_soglia_modulata": 0.09},
+                   "m4": {"n_g1": 1, "n_altri": 4,
+                          "g1": {"q_tw_stella": {"q050": 6.3}, "q_twist_dip": {"q050": 0.0},
+                                 "q_grad_r": {"q050": 0.1}, "q_tw": {"q050": 2.5},
+                                 "q_tw_stella_piu_dip": {"q050": 6.3}},
+                          "altri": {"q_tw_stella": {"q050": 6.35},
+                                    "q_twist_dip": {"q050": 0.0},
+                                    "q_grad_r": {"q050": 0.1}, "q_tw": {"q050": 2.4},
+                                    "q_tw_stella_piu_dip": {"q050": 6.35}}}}
+               for p in PASSI_MIS}
+    _mf.cont = {"passi_con_gancio": len(PASSI_MIS), "avvolgimenti": 10,
+                "ripiegamenti": 1, "calci_oltre_pi": 10, "coppie": 100,
+                "twp_fuori_3pi": 0, "pavimento_tau": 0, "archi_pavimento": 0}
+
+    class _FN(object):
+        n = 10
+
+    _cre_f = {"bracci": {"Bp": {"passi": [dict(r) for r in _mf.passi]}},
+              "a_valle": {"n_Bp": 10, "archi_Bp": 5}}
+    try:
+        with contextlib.redirect_stdout(io.StringIO()):
+            _e, _g = rapporto(_mf, _FN(), _cre_f, True, len(PASSI_MIS))
+        _ok_rap, _det = True, "esito %d, guasti %s" % (_e, _g)
+    except Exception as _ex:
+        _ok_rap, _det = False, repr(_ex)
+    prova("### rapporto(): gira SENZA cadere su un json finto con tutte le chiavi",
+          _ok_rap, _det)
+    # ### E CON `m2` COME LISTA, cioe' col json di PRIMA della correzione:
+    #   ### **un dato committato NON deve diventare illeggibile per una cura.**
+    for _p in PASSI_MIS:
+        _mf.mis[_p] = dict(_mf.mis[_p])
+        _mf.mis[_p]["m2"] = [0.03, 5]
+        _mf.mis[_p]["m2b"] = [0.03, 5]
+    try:
+        with contextlib.redirect_stdout(io.StringIO()):
+            rapporto(_mf, _FN(), _cre_f, True, len(PASSI_MIS))
+        _ok_v, _dv = True, "il json vecchio resta leggibile"
+    except Exception as _ex2:
+        _ok_v, _dv = False, repr(_ex2)
+    prova("### rapporto(): gira ANCHE col json VECCHIO, con m2 come LISTA", _ok_v, _dv)
+    prova("val: ### legge sia il numero sia la lista, e None da una lista vuota",
+          val(0.03) == 0.03 and val([0.03, 5]) == 0.03 and val([]) is None)
+
+    riga("=")
     ko = [n for n, o, _d in esiti if not o]
     stampa("COLLAUDO: %d su %d" % (len(esiti) - len(ko), len(esiti)))
     if ko:
@@ -672,6 +790,12 @@ def collaudo():
 
 
 # =============================================================== IL RAPPORTO
+def al_tor(mis, p):
+    """La fotografia del gancio `A` a un passo."""
+    r = [x for x in mis.passi if x["passo"] == p and "tor" in x]
+    return r[0]["tor"] if r else {}
+
+
 def rapporto(mis, net, cre, in_conf, passi):
     guasti = []
     rifB = cre["bracci"]["Bp"]
@@ -749,15 +873,31 @@ def rapporto(mis, net, cre, in_conf, passi):
         m1 = d["m1"]
         stampa("  M1  |tw|/|tw*| sugli archi con |dw| > q25 (%d su %d, q25 = %.6f)"
                % (m1["n"], d["n"], m1["q25_dom"]))
-        stampa("      mediana %s   q05 %s  q50 %s  q95 %s   frazione > 1: %s   > 2: %s"
-               % (n4(m1["mediana"]), n4((m1["q_rapporto"] or {}).get("q050")),
-                  n4((m1["q_rapporto"] or {}).get("q050")),
-                  n4((m1["q_rapporto"] or {}).get("q095")),
-                  n4(m1["fraz_sopra_1"]), n4(m1["fraz_sopra_2"])))
-        stampa("  M2  Spearman(|tw*| + |twist_dip|, |tw|)  %s" % n4(d["m2"]))
+        # ### ⛔ **ETICHETTA E VALORE NON COINCIDEVANO:** questa riga stampava `q050`
+        #   ### **tre volte**, sotto le etichette `q05`, `q50` e `q95`, e il referto diceva
+        #   *«q05 0.3999»* quando il `q05` vero e' `0.0307`. ### **Trovato incrociando la
+        #   stampa col `json`, non dal collaudo: un'etichetta sbagliata non solleva niente.**
+        _qr = m1["q_rapporto"] or {}
+        stampa("      mediana %s   q05 %s  q25 %s  q50 %s  q75 %s  q95 %s  q99 %s"
+               % (n4(m1["mediana"]), n4(_qr.get("q005")), n4(_qr.get("q025")),
+                  n4(_qr.get("q050")), n4(_qr.get("q075")), n4(_qr.get("q095")),
+                  n4(_qr.get("q099"))))
+        stampa("      frazione > 1: %s   > 2: %s"
+               % (n4(m1["fraz_sopra_1"]), n4(m1["fraz_sopra_2"])))
+        # ### ✔ E LA COERENZA SI VERIFICA, non si spera: la mediana del RAPPORTO e la
+        #   mediana di `|tw|` divisa per quella di `|tw*|` devono stare vicine.
+        _ti = ((al_tor(mis, p) or {}).get("q_tw_ingresso") or {}).get("q050")
+        _ts = (((al_tor(mis, p) or {}).get("tetto") or {}).get("q_tw_stella")
+               or {}).get("q050")
+        if _ti and _ts:
+            stampa("      ### COERENZA: mediana|tw| / mediana|tw*| = %s contro la mediana "
+                   "del rapporto %s" % (n4(_ti / _ts), n4(m1["mediana"])))
+        # ### `val()` perche' il `json` di `a1e9246` porta `m2` come LISTA.
+        _m2, _m2b = val(d["m2"]), val(d["m2b"])
+        stampa("  M2  Spearman(|tw*| + |twist_dip|, |tw|)  %s" % n4(_m2))
         stampa("  M2b Spearman(|tw*|, |tw|)  SENZA il dipolo  %s   -> %s"
-               % (n4(d["m2b"]),
-                  "il dipolo NON aiuta" if (d["m2b"] or 0) >= (d["m2"] or 0)
+               % (n4(_m2b),
+                  "il dipolo NON aiuta" if (_m2b or 0) >= (_m2 or 0)
                   else "il dipolo AIUTA"))
         stampa("  M3  frazione con |tw*| + |twist_dip| >= 3pi        %s"
                % n4(d["m3"]["fraz_oltre_3pi"]))
@@ -804,7 +944,8 @@ def rapporto(mis, net, cre, in_conf, passi):
         stampa("      TERMINE CHE CONTA, e il tetto misurato non e' quello calcolato.")
         zb = _ult[0]["tor"].get("m7b") or {}
         stampa("  M7b IL SEGNO:  Spearman(dph, Delta dsync) %s   frazione a segno OPPOSTO %s"
-               % (n4(zb.get("spearman_dsync_dph")), n4(zb.get("fraz_segno_opposto"))))
+               % (n4(val(zb.get("spearman_dsync_dph"))),
+                  n4(zb.get("fraz_segno_opposto"))))
         stampa("      ### SE LA SPEARMAN E' NEGATIVA, IL TERMINE RICHIAMA: smorza la spinta")
         stampa("      invece di aggiungersi, e il tetto vero sta SOTTO 2pi.")
     stampa()
@@ -812,7 +953,7 @@ def rapporto(mis, net, cre, in_conf, passi):
     stampa("I CRITERI, FISSATI DAL MANDATO")
     riga("=")
     med = [(p, (mis.mis.get(p) or {}).get("m1", {}).get("mediana")) for p in PASSI_MIS]
-    sp = [(p, (mis.mis.get(p) or {}).get("m2")) for p in PASSI_MIS]
+    sp = [(p, val((mis.mis.get(p) or {}).get("m2"))) for p in PASSI_MIS]
     fuori = [(p, v) for p, v in med if v is not None
              and not (MEDIANA_M1[0] <= v <= MEDIANA_M1[1])]
     sotto = [(p, v) for p, v in sp if v is not None and abs(v) < SOGLIA_M2]
