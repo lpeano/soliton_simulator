@@ -7422,3 +7422,42 @@ messaggio di `--chi-basc`)* e ### **`10` numeri di riga**, tutti spostati di ###
 > ### **Se il blob nuovo lo riproduce ancora, e' identico a `30e18cdd`.**
 
 **Le due voci sono CHIUSE, e la chiusura e' di Luca: io riporto i numeri.**
+
+---
+
+## 2026-10-06 — **DECISIONE 2: il PRINCIPIO della soglia di mitosi, e la coda aggiornata**
+
+**Il principio scelto da Luca: ### «solo valori ricavati».** La soglia candidata e'
+### **`2π + |twist_dip DELL'ARCO|`** — il quanto di olonomia ### **piu' il dipolo che
+quell'arco ha davvero**, invece del ### **massimo possibile.**
+
+> ### ⛔ **MA NON SI ADOTTA ADESSO:** si decide ### **dopo la cura di `GEOM-SENZA-VERSO`**,
+> perche' ### **quella cura cambia PROPRIO il dipolo che la soglia leggerebbe** — e si decide
+> ### **su una misura.**
+
+**Oggi `soglia0 = 2π + π`, e il `π` e' il dipolo MASSIMO** — mentre in questa scena il dipolo
+e' ### **nullo sul ~`98 %` degli archi.** ### **La soglia porta un termine che quasi nessun
+arco ha.**
+
+### ⚠ IL DATO CHE RENDE LA SCELTA DELICATA, **riverificato da me**
+
+| al passo `1000` | |
+|---|--:|
+| `q75` di `|tw|` | `5.3748` |
+| ### **`2π`** | ### **`6.2832`** |
+| `q95` di `|tw|` | `6.5578` |
+
+> ### ⛔ **`2π` STA FRA `q75` E `q95`: piu' del `5 %` degli archi e' GIA' sopra**, e
+> interpolando fra i due quantili registrati viene ### **circa il `9.6 %`.**
+>
+> ### ⚠ **E L'INTERPOLAZIONE FRA DUE QUANTILI NON E' UNA MISURA: e' una stima**, e la frazione
+> vera la darebbe ### **un conto sugli archi, che non ho fatto.** L'ordine di grandezza basta
+> per il punto.
+
+**La voce e' `SOGLIA-MITOSI-3PI`** — ### **cercata prima con cinque termini: non esisteva.**
+Porta la misura a ### **tre bracci** *(`3π`, `2π + |dipolo|`, `2π` fissa)*, `1000` passi,
+### **senza il `0.3`**, su crescita, masse *(con ### **un riferimento di scala**, che oggi
+### **non e' registrato**)* e dove.
+
+**E nella coda:** ### **`κ` ESCE dalle decisioni aperte** *(fatto e chiuso in `35044cc`)*, e
+la soglia diventa ### **«misura a tre bracci dopo `GEOM-SENZA-VERSO`, principio deciso».**

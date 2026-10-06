@@ -2819,3 +2819,63 @@ derivare**»* — dice gia' la cosa decisiva:
 
 ### ⛔ **NON DECISA, NON INIZIATA.** Collegata a `U1`, `VUOTO-LOCALE-DETERMINISTICO`,
 `ENERGIA-NON-DEFINITA`, `MCRIT-RICALCOLO` e alla candidata `(C)`.
+
+---
+
+## `SOGLIA-MITOSI-3PI` — **la soglia porta un `π` di dipolo che quasi nessun arco ha**
+
+*(Aperta il 2026-10-06 sera, ### **su decisione di Luca.** ### **Cercata prima nell'indice
+con cinque termini:** non esisteva una voce dedicata alla soglia.)*
+
+**IL FATTO:** `soglia0 = PHI_CRIT + twist_max = 2π + π = 3π`, dove il `π`
+e' il dipolo ### **MASSIMO** — ma in questa scena il dipolo e' ### **nullo sul ~`98 %`
+degli archi** *(misurato in `27c10bd`: `twist_dip` a zero su `0.9790` al passo `1000`)*.
+
+> ### ⛔ **LA SOGLIA PORTA UN TERMINE CHE QUASI NESSUN ARCO HA.**
+
+## ① IL PRINCIPIO SCELTO DA LUCA: **<<solo valori ricavati>>**
+
+La soglia candidata e' ### **`2π + |twist_dip DELL'ARCO|`**: il quanto di olonomia
+### **piu' il dipolo che quell'arco HA DAVVERO**, invece del ### **massimo possibile.**
+
+> ### ⛔ **MA NON SI ADOTTA ADESSO.** Si decide ### **DOPO la cura di
+> `GEOM-SENZA-VERSO`**, perche' ### **quella cura cambia PROPRIO il dipolo che la soglia
+> leggerebbe** — e si decide ### **su una MISURA.**
+
+## ② ⚠ IL DATO CHE RENDE LA SCELTA DELICATA, **riverificato da me dal `lunga.json`**
+
+| al passo `1000` | |
+|---|--:|
+| `q75` di `|tw|` | `5.3748` |
+| ### **`2π`** | ### **`6.2832`** |
+| `q95` di `|tw|` | `6.5578` |
+
+> ### ⛔ **`2π` STA FRA `q75` E `q95`: PIU' DEL `5 %` DEGLI ARCHI E' GIA' SOPRA**,
+> e meno del `25 %`. Interpolando ### **linearmente** fra i due quantili registrati viene
+> ### **circa il `9.6 %`.**
+>
+> ### ⚠ **E L'INTERPOLAZIONE FRA DUE QUANTILI NON E' UNA MISURA: e' una stima.** La
+> frazione vera la darebbe ### **un conto sugli archi**, e ### **non l'ho fatto.** Ma
+> l'ordine di grandezza basta per il punto.
+
+**E il punto e' questo:** una soglia a ### **`2π` fissa** metterebbe subito il
+`5`-`10 %` degli archi ### **sopra soglia**; e con ### **`2π + |twist_dip|`** gli archi
+con dipolo nullo — ### **il ~`98 %`** — avrebbero ### **esattamente quella soglia.**
+### **E' il motivo per cui la scelta e' delicata e va fatta su una misura.**
+
+## ③ LA MISURA A TRE BRACCI, **dopo la cura di `GEOM-SENZA-VERSO`**
+
+**Tre bracci** — soglia ### **`3π`**, ### **`2π + |dipolo|`**, ### **`2π`
+fissa** — ### **`1000` passi**, scena di sempre, legge curata, ### **senza il `0.3`**
+*(uscito in `71eddc4`)*, coi criteri ### **da fissare nel suo task history PRIMA della
+corsa**, su:
+
+| | che cosa si legge |
+|--:|---|
+| `1` | ### **la crescita**: stabile o esplosiva *(nascite per `100` passi — il riferimento senza il `0.3` e' ### **`48`-`150`**)* |
+| `2` | ### **le masse**: `dist_baricentri` ### **insieme a un riferimento di scala della rete** — e oggi quella scala ### **NON e' registrata**, ed e' la ragione per cui il `-20.7 %` di `GRAVITA-POTENZIALE` ### **non e' leggibile** |
+| `3` | ### **il dove**: materia / bordo / vuoto, come in `27c10bd` |
+
+### ⛔ **NON DECISA, NON INIZIATA.** Collegata a `MITOSI-SOGLIA-GRAD` *(chiusa: e' uscita
+la ### **MODULAZIONE**, non la ### **SOGLIA**)*, `GEOM-SENZA-VERSO`, `ARCHI-OLTRE-4PI` e
+`MASSA-CRITICA-LOCALE`.
