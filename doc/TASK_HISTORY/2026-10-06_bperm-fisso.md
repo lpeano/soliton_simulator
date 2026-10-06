@@ -217,6 +217,53 @@ il `json` porta i **conteggi grezzi**, e la banda e' una **lettura** che si appl
 il referto applica QUESTE bande, ed e' lui la lettura autorevole.** ### ⛔ **Lo scrivo invece
 di lasciar credere che l'ordine sia stato rispettato.**
 
+## ⛔ ANNOTAZIONE DEL 2026-10-06 — **L'ESITO: `L-B`, e la mia previsione e' refutata
+## DUE SU DUE**
+
+*(Scritta **dopo** i numeri. ### **Il ragionamento preliminare qui sopra NON si riscrive:**
+resta com'era, sbagliato, come il par.8 pretende.)*
+
+| | misurato |
+|---|---|
+| divisioni | `26` / `33` / `22`, media **`27.00`**, dispersione `4.55` *(il **`16.84 %`**)* |
+| finestra | `8664` / `8477` / `8755`, media **`8632.0`**, dispersione `115.7` *(l'`1.34 %`)* |
+| rapporti | divisioni **`1.5000`**, finestra **`1.1155`** |
+| `Bperm`, per confronto | **`1.5741`** e **`1.1009`** |
+
+### ➜ ⛔ **`L-B` SU ENTRAMBE LE METRICHE: LA LOTTERIA NON C'ENTRA.** Con `20`/`26`/`16`
+estrazioni invece di `150` il risultato ### **non si muove** -- `|1.5000 - 1.5741|` = `0.0741`
+contro `2x` l'errore combinato `0.2017`, e `|1.1155 - 1.1009|` = `0.0146` contro `0.0280`.
+
+### ⛔ **DOVE HO SBAGLIATO, e non mi appiglio al margine**
+
+Avevo previsto il **ritorno verso `Bp`**, dentro `[0.5286, 1.4714]`. Il rapporto e' `1.5000`:
+fuori di `0.0286`, il `2.86 %`. ### ⚠ **Potrei dire <<di un pelo>>, e sarebbe disonesto:**
+con la dispersione **misurata** *(`16.84 %`, errore della media `9.72 %`)* l'intervallo a
+`2 sigma` del rapporto e' `[1.2084, 1.7916]`, che ### **ESCLUDE `1.0`.**
+### **La previsione e' sbagliata per il MERITO.**
+
+### ✔ **E UNA MIA PREVISIONE E' GIUSTA: la SECONDA**
+
+Avevo scritto come cosa che **non sapevo** *(punto `2`)*: *«con una permutazione sola per
+corsa i tre semi potrebbero separarsi MOLTO di piu'»*. La dispersione passa dal `4.40 %` di
+`Bperm` al **`16.84 %`**: ### **un fattore `3.82`.** ### ⛔ **E QUESTO INDEBOLISCE LA MIA
+STESSA LETTURA:** con tre semi e il `16.84 %` la media e' **fragile**, e `P3` chiede **almeno
+quattro semi**. Lo scrivo anche se il risultato mi sta bene.
+
+### ✔ **E LA COSA CHE NON SAPEVO, PUNTO `1`, SI CHIUDE: `C-ident` DA' ZERO**
+
+Temevo che un passo potesse togliere `k` archi e aggiungerne `k`, lasciando `len(avv)`
+invariato e ri-etichettando la mappa arco-morso in silenzio. ### **Su
+`130`/`124`/`134`/`137` coppie a lunghezza uguale le impronte degli archi coincidono SEMPRE:
+zero ri-etichettature.** ### **La mappa TIENE, e ora e' misurato invece che sperato.**
+
+### ⚠ **E `C-lotterie` NON DA' `13` PER NESSUN BRACCIO**
+
+Da' `20`/`26`/`16`, perche' i bracci permutati ### **cambiano topologia PIU' di `Bp`**
+*(`19`/`25`/`15` cambi contro `12`)*. ### ✔ **Il controllo confronta coi cambi VERI di
+ciascun braccio, non col `13` che avevo calcolato:** se avessi fissato `13` come criterio
+### **sarebbe fallito a torto**, e il difetto sarebbe stato mio.
+
 ## 3. TODO DEL NEXT STEP
 
 1. **commit di questo task history**, ### **DA SOLO**, prima dello strumento;

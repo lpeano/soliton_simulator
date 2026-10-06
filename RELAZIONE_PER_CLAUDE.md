@@ -6086,3 +6086,74 @@ Il punto di ripresa sta in **`doc/CODA_2026-10-06.md`**: cosa e' finito *(la cat
 `csv/_test_fork/_mitosi_soglia_grad.py` blob **`b399adb2`**, collaudo `56/56`)*, e la coda
 *(poi il **tetto della torsione**, con le verifiche **(b)** e **(c)** sul codice ancora da
 chiudere -- la **(a)** e' fatta: `κ = 1` esattamente)*.
+
+
+---
+
+## 2026-10-06 — `Bperm-fisso`: **NON ERA LA LOTTERIA**, e la mia previsione cade due su due
+
+*(Referto `doc/REFERTO_mitosi_soglia_grad_fisso_2026-10-06.md`, blob `7aef947c`,
+generato da `csv/_test_fork/_referto_fisso.py` `63a98d8e` da **tre** `json` committati.
+Simulatore `f7237563`, **NON toccato**; strumento `43cf63c8`, committato **prima** in
+`34a11dc`.)*
+
+### LA DOMANDA
+
+`Bperm` aveva dato `P1` *(nascite a `1.5741x`)*, e la regola fissata **prima dei numeri**
+*(`f922c20`)* diceva che `P1` rende il risultato ### **AMBIGUO** fra *«non conta QUALE arco»*
+e *«LOTTERIA»* -- perche' `_PRNG.permutation` gira **a ogni passo** e ogni arco riceve `150`
+estrazioni. `Bperm-fisso` ripesca ### **solo quando `len(avv)` cambia**.
+
+### IL RISULTATO
+
+| | `Bperm` | `Bperm-fisso` |
+|---|--:|--:|
+| divisioni *(tre semi)* | `27`/`28`/`30` | `26`/`33`/`22` |
+| media | `28.33` | `27.00` |
+| **rapporto divisioni** | **`1.5741`** | **`1.5000`** |
+| **rapporto finestra** | **`1.1009`** | **`1.1155`** |
+| lotterie per arco | `150` | `20`/`26`/`16` |
+
+### ➜ ⛔ **`L-B` SU ENTRAMBE LE METRICHE: LA LOTTERIA NON C'ENTRA.** Togliendo `130`
+estrazioni su `150` il risultato ### **non si muove** -- `0.0741` contro `2x` l'errore
+combinato `0.2017` sulle divisioni, `0.0146` contro `0.0280` sulla finestra.
+
+### ⛔ **E L'AMBIGUITA' SI CHIUDE DA UN LATO SOLO**
+
+Cade la *«lotteria»*. ### **Ma non resta <<non conta quale arco>>:** se non contasse, il
+rapporto sarebbe `1`, ### **e invece e' `1.5000`.** Permutare i morsi ### **FA SALIRE** le
+nascite, e questo e' un fatto che **nessuna delle due spiegazioni copriva.**
+
+### ⚠ **L'IPOTESI PER LA PROSSIMA MISURA -- e' un'IPOTESI, non un risultato**
+
+Se randomizzare **aiuta**, l'assegnazione vera mette le soglie basse sugli archi
+### **che servono meno**: il legame col gradiente sarebbe ### **ANTI-informativo**, non solo
+non informativo. ### ✔ **Coerente con `d97317a`** *(la modulazione legge `|r_i - r_j|`,
+che correla `~0.04` con la spinta, mentre la forma esatta correla `~0.86`)*.
+### ⛔ **Non la misuro e non la dichiaro dimostrata.**
+
+### ⛔ **LA MIA PREVISIONE E' SBAGLIATA, DUE SU DUE, e non mi appiglio al margine**
+
+Avevo previsto il ritorno dentro `[0.5286, 1.4714]`; `1.5000` e' fuori di `0.0286`, il
+`2.86 %`. ### ⚠ **Potrei dire <<di un pelo>>, e sarebbe disonesto:** con la dispersione
+**misurata** *(`16.84 %`)* l'intervallo a `2 sigma` del rapporto e' `[1.2084, 1.7916]`,
+che ### **esclude `1.0`.**
+
+### ✔ **E DUE COSE CHE AVEVO SCRITTO DI NON SAPERE SI SONO CHIUSE**
+
+**La dispersione esplode come temevo:** dal `4.40 %` al **`16.84 %`**, un fattore `3.82` --
+### ⛔ **e questo indebolisce la MIA lettura: con tre semi la media e' fragile, e `P3`
+chiede quattro semi.** **E la mappa arco-morso TIENE:** `C-ident` da' ### **zero
+ri-etichettature** su `130`/`124`/`134`/`137` coppie a lunghezza uguale.
+
+### I SEI CONTROLLI PASSANO
+
+`C-perm-0` *(`Bpf-id` riproduce `Bp` **esattamente**)*, `C-distr` *(`150`/`150` passi, tutti
+i bracci)*, `C1`, `C-rng` *(divergenze ai passi `99`/`100`/`72`, **mai** per `Bpf-id`)*,
+`C-ident`, `C-lotterie` *(estratte `20`/`26`/`16` contro cambi `19`/`25`/`15`: sempre
+`cambi + 1`)*.
+
+### ⚠ **E IL LIMITE RESTA QUELLO DICHIARATO PRIMA DEI NUMERI**
+
+> ### ⛔ **`Bperm-fisso` non e' <<`Bperm` senza il difetto>>:** lega la permutazione alla
+> **topologia**. ### **Nessuno dei due e' il braccio pulito.**
