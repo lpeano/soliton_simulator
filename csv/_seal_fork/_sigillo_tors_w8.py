@@ -414,14 +414,49 @@ def collaudo():
           abs(abs(_nuova_a - _mia_sbagliata) - np.pi) < 1e-12,
           "scarto %+.6f = %.4f pi, ed e' il difetto che il sigillo ha trovato"
           % (_nuova_a - _mia_sbagliata, (_nuova_a - _mia_sbagliata) / np.pi))
-    # --- e il caso in cui la spia DEVE contare: una differenza che non e' spiegata
+    # ### ⛔ **E QUI HO TROVATO UNA COSA PIU' GRANDE DELLA PROVA CHE STAVO SCRIVENDO.**
+    #   Avevo aggiunto una prova che pretendeva una differenza NON spiegata su input
+    #   **legali**, e ### **FALLIVA.** Il motivo non e' la prova: e' che
+    #   ### **SU INPUT LEGALI UNA DIFFERENZA NON SPIEGATA E' IMPOSSIBILE PER ALGEBRA.**
+    #       `|Δdph| < 2pi`  (altrimenti `_w4` avvolge, ed e' SPIEGATO)
+    #       `|Δtd| <= 2pi`  (`twist_dip` sta in `[-pi, pi]`)
+    #       ⟹ `|argomento| < 4pi`, quindi `_w8` **non ripiega** e le due leggi COINCIDONO.
+    #   ### 📌 **QUINDI LO ZERO DI `S3` E' UN TEOREMA, NON UNA MISURA**, e presentarlo come
+    #   *«la cura non cambia qualcos'altro»* sarebbe ### **un FALSO-UNO** -- la stessa
+    #   famiglia del falso-zero di `C-ident` che il guardiano mi ha trovato.
+    #   ### ✔ **MA `S3` NON E' INUTILE, E L'HA DIMOSTRATO:** il suo potere e' contro gli
+    #   errori di **IMPLEMENTAZIONE**, e ### **ha trovato il mio difetto della spia**
+    #   (`e8122cc`). Quello che `S3` prova e' che il CODICE segue l'algebra, non che la
+    #   fisica non e' cambiata -- e il rapporto lo DICE.
+    rngt = np.random.default_rng(4242)
+    NT = 2_000_000
+    _dp = rngt.uniform(-P2, P2, NT)
+    _tp = rngt.uniform(-P2, P2, NT)
+    _V = np.array([-np.pi, -np.pi / 2, 0.0, np.pi / 2, np.pi])
+    _td = rngt.choice(_V, NT)
+    _tdp = rngt.choice(_V, NT)
+    _nu = _w4(_dp - _tp) + (_td - _tdp)
+    _ve = _w8(_dp + _td - (_tp + _tdp))
+    _dd = np.abs(_nu - _ve)
+    _gi = np.abs(_w4(_dp - _tp) - (_dp - _tp)) > 1e-12
+    prova("### TEOREMA: su input LEGALI le differenze NON spiegate sono ZERO",
+          int(np.sum((_dd > 1e-12) & ~_gi)) == 0,
+          "%d su %d casi; e le %d differenze sono TUTTE giri di fase"
+          % (int(np.sum((_dd > 1e-12) & ~_gi)), NT, int(np.sum(_dd > 1e-12))))
+    prova("### e quindi lo ZERO di S3 e' GARANTITO dall'algebra, non misurato",
+          int(np.sum(_dd > 1e-12)) > 0,
+          "le differenze esistono (%d, il %.1f%%) ma sono tutte SPIEGATE"
+          % (int(np.sum(_dd > 1e-12)), 100 * float(np.mean(_dd > 1e-12))))
+    # ### ✔ **E IL CONTATORE NON E' MORTO: lo provo con un input ILLEGALE**, e dichiaro che
+    #   e' illegale -- un input legale non puo' farlo, ed e' il punto.
     sp5 = Spia()
     sp5.passo = 7
-    sp5.torsione(fr, dph=np.full(300, 1.5 + P4 + 0.3), twist_dip=np.zeros(300),
-                 twp=np.full(300, 1.5), twp_dip=np.zeros(300))
-    prova("### spia: e una differenza NON spiegata si CONTA ancora (il presidio regge)",
-          sp5.passi[-1]["non_spiegate"] > 0,
-          "NON spiegate %d su 300: se la spia non le contasse, S3 passerebbe a vuoto"
+    sp5.torsione(fr, dph=np.full(300, 1.31), twist_dip=np.zeros(300),
+                 twp=np.full(300, 1.30), twp_dip=np.full(300, -4.1 * np.pi))
+    prova("### spia: IL CONTATORE NON E' MORTO -- con un dipolo ILLEGALE (-4.1 pi) CONTA",
+          sp5.passi[-1]["non_spiegate"] == 300,
+          "NON spiegate %d su 300. ### E l'input e ILLEGALE di proposito: |twist_dip| <= pi, "
+          "e uno LEGALE non puo' accendere il contatore (il teorema qui sopra)"
           % sp5.passi[-1]["non_spiegate"])
 
     riga("=")
@@ -581,6 +616,17 @@ def main(argv):
               "<- DEVE essere ZERO" if sp.tot["non_spiegate"] else "### ZERO: PASSA"))
     if sp.tot["non_spiegate"]:
         guasti.append("S3")
+    stampa()
+    stampa("  ### ⛔ E S3 DICHIARA IL PROPRIO POTERE, perche' uno zero senza il suo potere")
+    stampa("      accanto e' un FALSO-UNO: SU INPUT LEGALI UNA DIFFERENZA NON SPIEGATA E'")
+    stampa("      IMPOSSIBILE PER ALGEBRA -- |Delta dph| < 2pi (altrimenti _w4 avvolge, ed e'")
+    stampa("      spiegato) e |Delta td| <= 2pi, quindi |argomento| < 4pi e _w8 NON ripiega.")
+    stampa("      MISURATO su 2 milioni di casi legali nel collaudo: ZERO non spiegate.")
+    stampa("  ### QUINDI S3 NON PROVA CHE LA FISICA NON E' CAMBIATA: prova che il CODICE")
+    stampa("      segue l'algebra. ### E LO HA PROVATO: ha trovato il difetto della mia")
+    stampa("      spia (e8122cc), che sbagliava di pi esatto su 235322 coppie.")
+    stampa("  ### CHE LA PATCH SIA L'UNICA DIFFERENZA LO DICE S0, non S3: 241 attributi")
+    stampa("      di net identici su 150 passi.")
     stampa()
     riga("=")
     stampa("IL VERDETTO")
