@@ -6557,3 +6557,35 @@ oltre `4π` `218`)*, con `twist_dip` a zero che scende da `1.0000` a ### **`0.99
 > commit a se', e li' si dichiara che la correzione ### **RIPRISTINA** il criterio
 > pre-registrato invece di spostarlo, ### **perche' una soglia cambiata dopo aver visto i
 > dati e' il modo in cui un referto diventa una formalita'.**
+
+---
+
+## 2026-10-06 — **IL GENERATORE SMETTE DI CONTRADDIRE IL TASK HISTORY: `sopra_4pi` non e' un guasto, e la correzione RIPRISTINA il criterio invece di spostarlo**
+
+`csv/_test_fork/_referto_lunga.py` passa a ### **`7f28f328`** *(calcolato dai byte del file, non
+ricopiato)*. Il simulatore ### **non si tocca:** resta `cf2a1ac8`; la corsa ### **sta
+girando** *(passo `393`)* e questo commit non la tocca.
+
+**IL DIFETTO:** il generatore metteva `sopra_4pi_tot > 0` fra i ### **guasti**, quindi
+avrebbe stampato ### **«FERMO — LA CURA NON TIENE»** su un fatto che
+`doc/TASK_HISTORY/2026-10-06_tors-w8-misura-lunga.md` — committato in `7d3ae67`,
+### **PRIMA della corsa** — dichiara ### **una scoperta**, con la sua ragione scritta li':
+*«la cura toglie il meccanismo che li portava la' ### **in un passo solo**»*.
+
+**LA CORREZIONE:** `sopra_4pi_tot` esce dai guasti ed entra nelle ### **scoperte**, e il
+verdetto ha ### **tre rami** — `FERMO` *(un guasto vero)*, **«LA CURA TIENE, E C'E' UNA
+SCOPERTA»**, e `LA CURA TIENE` liscio — con ### **`FERMO` che vince** se ci sono entrambi.
+
+> ### ⛔ **E QUESTA NON E' UNA SOGLIA SPOSTATA DOPO AVER VISTO I DATI: E' IL CONTRARIO.** Il
+> criterio era ### **fissato prima** ed e' ### **giusto**; io l'ho ### **mal codificato
+> dopo**, e la correzione ### **RIPRISTINA** cio' che era pre-registrato. ### **La
+> differenza e' VERIFICABILE DA GIT e non asserita da me: il commit del task history e'
+> ANTENATO di questo**, ed e' esattamente a questo che serve il rito del `par.8`.
+
+**PIU' LA SEZIONE `QUANDO`**, perche' ### **una scoperta deve dire QUANDO e' successa:**
+primo arco oltre `4π`, prima divisione, primo Schwinger, e il massimo. Con ### **il ramo che
+DEVE accendersi**: se gli archi comparissero ### **senza nessuna nascita**, il legame
+### **non reggerebbe** e il referto lo dice invece di tacere.
+
+> ### ✔ **POTERE MISURATO:** rimettendo `sopra_4pi` fra i guasti in una copia, il collaudo
+> scende a ### **`30` su `32`** e ### **nomina i due.** Collaudo `32` su `32` sul file vero.

@@ -189,7 +189,8 @@ def genera(d):
       % C.get("calci_evitati", -1))
     w("| archi con `|tw| >= 4π`, somma su tutti i passi | `%d` | ### **%s** |"
       % (C.get("sopra_4pi_tot", -1),
-         "ZERO a ogni passo" if not C.get("sopra_4pi_tot") else "⛔ NON ZERO"))
+         "ZERO a ogni passo" if not C.get("sopra_4pi_tot")
+         else "⚠ NON ZERO: una SCOPERTA, non un guasto -- vedi sotto"))
     w()
     w("> ### ⛔ **E I PRIMI DUE ZERI SONO ALGEBRICI, non misure, e va detto:** il bound "
       "`|spinta| <= |_w4(Δdph)| + |Δdipolo| <= 4π` vale ### **per "
@@ -244,6 +245,35 @@ def genera(d):
                           "la crescita ACCELERA" if _ult > _pri * 1.5
                           else ("la crescita RALLENTA" if _pri > _ult * 1.5
                                 else "il ritmo e' STABILE")))
+        w()
+    w("## ⛔ QUANDO: **il primo arco oltre `4π`, e le prime nascite**")
+    w()
+    def _primo(ch):
+        z = [x["passo"] for x in PP if (x.get(ch) or 0) > 0]
+        return z[0] if z else None
+
+    _p4 = _primo("sopra_4pi")
+    _pn = _primo("nati_tot")
+    _ps = _primo("schwinger_tot")
+    _mx = max([(x.get("sopra_4pi") or 0, x["passo"]) for x in PP] or [(0, 0)])
+    w("| | il passo |")
+    w("|---|--:|")
+    w("| la prima **divisione** | `%s` |" % (_pn if _pn else "MAI"))
+    w("| il primo **Schwinger** | `%s` |" % (_ps if _ps else "MAI"))
+    w("| ### **il primo arco oltre `4π`** | ### **`%s`** |"
+      % (_p4 if _p4 else "MAI"))
+    w("| il **massimo** di archi oltre `4π`, e dove | `%d`, al passo `%d` |"
+      % _mx)
+    w()
+    if _p4 and _pn and _p4 >= _pn:
+        w("### ➜ **IL PRIMO ARCO OLTRE `4π` ARRIVA `%d` PASSI DOPO LA PRIMA "
+          "NASCITA**, e ### **non prima.** ⚠ **E' una COINCIDENZA, non una "
+          "prova:** servirebbero gli ### **INDICI** degli archi sopra `4π` contro "
+          "quelli ### **nati**, e questa misura non li registra." % (_p4 - _pn))
+        w()
+    elif _p4 and not _pn:
+        w("### ⛔ **ARCHI OLTRE `4π` SENZA NESSUNA NASCITA:** il legame "
+          "con le nascite ### **NON regge**, e va cercata un'altra causa.")
         w()
     w("## `M2`: **il tetto calcolato ordina gli archi?**")
     w()
@@ -329,11 +359,32 @@ def genera(d):
         guasti.append("calci SPURI dalla legge curata: %d" % C["calci_spuri_curata"])
     if C.get("spinta_senza_causa"):
         guasti.append("la FIRMA del difetto vecchio: %d" % C["spinta_senza_causa"])
+    # ### ⛔ **E `sopra_4pi_tot` NON E' UN GUASTO: lo dice il TASK HISTORY,
+    #   committato PRIMA della corsa** *(`7d3ae67`, riga `123`)*:
+    #   *<<se ne comparisse UNO, sarebbe una SCOPERTA, non un difetto della cura>>*,
+    #   ### **perche' la cura toglie il meccanismo che li portava la' IN UN PASSO
+    #   SOLO** -- e cio' che quel meccanismo farebbe lo misurano gli ALTRI DUE
+    #   contatori, che restano guasti. ### **La mia prima versione lo metteva fra i
+    #   guasti e avrebbe stampato <<LA CURA NON TIENE>> su una SCOPERTA.**
+    scoperte = []
     if C.get("sopra_4pi_tot"):
-        guasti.append("archi oltre 4pi: %d" % C["sopra_4pi_tot"])
+        scoperte.append(C["sopra_4pi_tot"])
     if guasti:
         w("> ### ⛔ **FERMO -- LA CURA NON TIENE:** %s."
           % "; ".join("**%s**" % g for g in guasti))
+    elif scoperte:
+        w("> ### ⚠ **LA CURA TIENE, E C'E' UNA SCOPERTA.** Il meccanismo che la cura "
+          "ha tolto e' ### **quello che portava un arco oltre `4π` IN UN PASSO SOLO**, "
+          "e quello resta tolto: ### **`calci_spuri_curata` e `spinta_senza_causa` sono "
+          "ZERO a ogni passo.** Ma ### **`%d` passi-arco hanno raggiunto `4π` "
+          "ACCUMULANDO**, e ### **non e' la stessa cosa.**" % scoperte[0])
+        w(">")
+        w("> ### ⛔ **E QUESTA LETTURA E' FISSATA PRIMA DELLA CORSA, non adesso:** il task "
+          "history `7d3ae67` (riga `123`, committato ### **prima**) dice "
+          "*<<se ne comparisse UNO, sarebbe una ### **scoperta**, non un difetto della "
+          "cura>>*. ### **Il generatore la contraddiceva e il generatore e' stato "
+          "corretto** -- ### **non il criterio**, e la differenza e' verificabile da "
+          "git: il task history e' ### **ANTENATO** di questo referto.**")
     else:
         w("> ### ✔ **LA CURA TIENE su `%d` passi:** zero calci spuri, zero firme del "
           "difetto vecchio, ### **zero archi oltre `4π`** -- contro i `~%d` per passo e "
@@ -466,10 +517,26 @@ def collaudo():
     v = _verdetto(r)
     prova("### DEVE FALLIRE -- con 5 calci SPURI il VERDETTO e' FERMO, non <<TIENE>>",
           bool(g) and "FERMO" in v and "LA CURA TIENE" not in v, v[:72])
+    # ### ⛔ **QUESTO CASO CODIFICAVA IL CRITERIO SBAGLIATO, e il collaudo
+    #   l'ha preso:** pretendeva `FERMO` su `sopra_4pi_tot > 0`, mentre il task
+    #   history `7d3ae67` -- committato ### **PRIMA della corsa** -- dice che sarebbe
+    #   ### **una SCOPERTA, non un difetto della cura.** Correggere il generatore
+    #   ### **RIPRISTINA** il criterio pre-registrato invece di spostarlo.
     r, _l, g = genera(_finto(cont={"sopra_4pi_tot": 3}))
     v = _verdetto(r)
-    prova("### DEVE FALLIRE -- con 3 archi oltre 4pi il VERDETTO e' FERMO",
-          bool(g) and "FERMO" in v and "LA CURA TIENE" not in v, v[:72])
+    t = NL.join(r)
+    prova("sopra4pi: ### NON e' un guasto -- il verdetto NON e' FERMO",
+          not g and "FERMO" not in v, v[:72])
+    prova("sopra4pi: ### il verdetto dice SCOPERTA e cita il task history 7d3ae67",
+          "SCOPERTA" in v and "7d3ae67" in NL.join(r[r.index("## IL VERDETTO"):]),
+          v[:72])
+    prova("sopra4pi: ### e la tabella NON lo marca <<NON ZERO>> e basta",
+          "SCOPERTA, non un guasto" in t)
+    r2, _l, g2 = genera(_finto(cont={"sopra_4pi_tot": 3,
+                                     "calci_spuri_curata": 2}))
+    v2 = _verdetto(r2)
+    prova("sopra4pi: ### DEVE FALLIRE -- con ANCHE un calcio spurio vince FERMO",
+          bool(g2) and "FERMO" in v2 and "SCOPERTA" not in v2, v2[:72])
     r, _l, g = genera(_finto(cont={"spinta_senza_causa": 1}))
     v = _verdetto(r)
     prova("### DEVE FALLIRE -- con 1 firma del difetto vecchio il VERDETTO e' FERMO",
@@ -505,6 +572,24 @@ def collaudo():
     t = NL.join(r)
     prova("guardia: ### con 0 salti dice che NON scatta, e che non e' <<non scatta mai>>",
           "NON SCATTA MAI" in t and "NON e' <<non scatta mai>>" in t)
+
+    # --------------------------------------------------- 5-bis. il QUANDO
+    _d = _finto()
+    for _x in _d["passi_dati"]:
+        _x["sopra_4pi"] = 4 if _x["passo"] >= 150 else 0
+        _x["nati_tot"] = 9 if _x["passo"] >= 140 else 0
+    t = NL.join(genera(_d)[0])
+    prova("quando: ### il primo arco oltre 4pi e la prima nascita sono NEL referto",
+          "| ### **`150`** |" in t and "| `140` |" in t)
+    prova("quando: ### e dice che arriva 10 passi DOPO la prima nascita",
+          "`10` PASSI DOPO LA PRIMA NASCITA" in t and "COINCIDENZA, non una" in t)
+    _d = _finto()
+    for _x in _d["passi_dati"]:
+        _x["sopra_4pi"], _x["nati_tot"] = 4, 0
+    t = NL.join(genera(_d)[0])
+    prova("quando: ### DEVE ACCENDERSI -- archi oltre 4pi SENZA nascite dice che il"
+          " legame NON regge",
+          "NON regge" in t and "PASSI DOPO LA PRIMA NASCITA" not in t)
 
     # --------------------------------------------------- 6. la forma
     r, _l, _g = genera(_finto())
