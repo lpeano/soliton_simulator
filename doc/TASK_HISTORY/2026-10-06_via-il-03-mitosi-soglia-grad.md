@@ -144,3 +144,38 @@ MODULAZIONE, non la soglia.**
 4. l'**archivio** del ramo che esce, col tag ### **`pre-mitosi-soglia-grad-via`**;
 5. la **chiusura** di `MITOSI-SOGLIA-GRAD`, ### **coi numeri**, e ### **scrivendo che la
    chiusura e' decisione di Luca.**
+
+---
+
+## ANNOTAZIONE *(2026-10-06 — `par.8`: si ANNOTA, non si riscrive)*
+
+### ⛔ **IL NUMERO `0.04` HA UNA FONTE, ED E' UN MIO REFERTO DELLO STESSO GIORNO**
+
+Nel `par.1` ho scritto che il `0.04` *«NON l'ho rimisurato io»* e che
+*«### **nessuna delle misure di questa settimana lo produce**»*.
+
+> ### ⛔ **LA SECONDA META' E' FALSA.** Lo produce
+> `doc/REFERTO_mitosi_soglia_grad_2026-10-06.md`, ### **committato da me in `0af53a5` alle
+> `01:42` di quello stesso giorno.**
+
+**I numeri, riletti da me dal referto** *(riga `83`: la `Spearman` del ### **gradiente NUDO
+`|r_i − r_j|`** contro la ### **`SPINTA`**, col predittore ### **CAUSALE** `t-1`)*:
+
+| passo | `50` | `100` | `140` | media |
+|---|--:|--:|--:|--:|
+| `ρ` | `0.068427` | `0.033277` | `0.011997` | ### **`0.0379`** |
+
+### **Cioe' il `~0.04` del mandato, ed e' MIO.**
+
+> ### ⛔ **E' UN `P1`: ho asserito un'assenza senza rileggere il mio stesso storico.** La
+> frase-spia e' precisamente quella che `P1` elenca — *«manca X»* — e l'ho scritta
+> ### **lo stesso giorno in cui avevo prodotto X.**
+>
+> ### ⚠ **E NON CAMBIA LA DECISIONE**, che resta fondata sui due `R` e sulla forma della
+> crescita: ### **la rafforza.** Il gradiente che la soglia legge correla con la spinta
+> ### **fra `0.012` e `0.068`**, mentre la ### **forma esatta** arriva a ### **`0.870`-`0.915`**
+> — ### **la soglia leggeva quasi il predittore PEGGIORE fra quelli misurati.**
+>
+> ### ⚠ **E IL REFERTO STESSO DICE CHE QUEL CRITERIO <<PASSA PER UN PELO, SU UN PASSO
+> SOLO>>:** `1` dei tre passi supera la soglia `K2` e gli altri due stanno sotto. ### **Lo
+> riporto perche' un numero che si cita deve portarsi dietro la sua fragilita'.**

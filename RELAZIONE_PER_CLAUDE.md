@@ -7199,3 +7199,45 @@ due.** ### **Toglierla resta una decisione di Luca.**
 **La soglia `3π` non e' toccata.** ### **Nove strumenti restano legati ai blob vecchi**, ed era
 dichiarato prima — ### **il costo piu' alto e' `_mitosi_zero_dove`, lo strumento della misura
 di oggi.**
+
+---
+
+## 2026-10-06 — **IL `0.04` HA UNA FONTE, ED E' UN MIO REFERTO DELLO STESSO GIORNO. E `U1` entra nel DIPOLO**
+
+### ⛔ ① HO ASSERITO UN'ASSENZA SENZA RILEGGERE IL MIO STORICO *(`P1`)*
+
+Nel task history di «via il `0.3`» *(`e693993`)* avevo scritto che il `0.04`
+### **«nessuna misura di questa settimana lo produce».** ### **Lo produce
+`doc/REFERTO_mitosi_soglia_grad_2026-10-06.md`, che ho committato io in `0af53a5` alle `01:42`
+dello stesso giorno.**
+
+**I numeri, riletti da me dal referto** *(la `Spearman` del gradiente ### **nudo**
+`|r_i − r_j|` contro la ### **`SPINTA`**, col predittore ### **causale**)*: `0.068427`,
+`0.033277`, `0.011997` ai passi `50` / `100` / `140` — ### **media `0.0379`.**
+
+> ### ⚠ **E NON CAMBIA LA DECISIONE: LA RAFFORZA.** Il gradiente che la soglia leggeva correla
+> con la spinta fra `0.012` e `0.068`, mentre ### **la forma esatta arriva a `0.870`-`0.915`**
+> — ### **la soglia leggeva quasi il predittore PEGGIORE fra quelli misurati.**
+
+### ⛔ ② `U1` E `U2` VANNO RISOLTE PRIMA DELLA PROSSIMA CORSA LUNGA
+
+**E la distinzione sui numeri di oggi conta:**
+
+| | |
+|---|---|
+| i ### **CONFRONTI fra bracci** | ### ✔ **restano validi:** le leggi difettose erano ### **le stesse in tutti** |
+| i ### **VALORI ASSOLUTI** *(crescita, avvicinamento delle masse)* | ### ⛔ **contengono il malfunzionamento delle cinque leggi di `U1`** |
+
+> ### ⛔ **Quindi `R = 0.1616`/`0.3417` REGGE, e `3496` divisioni, `48`-`150` nascite per
+> `100` passi e il `-20.7 %` dei baricentri ### **NO.**
+
+### ✔ ③ E `U1` ENTRA DAVVERO NEL DIPOLO, **verificato col comando**
+
+`chiralita_core_locale` calcola `rho_c` da ### **`massa_critica_adattiva`**, che
+### **chiama la STESSA `massa_critica_collasso`** con `s` misurato — ### **il ramo adattivo
+NON sfugge a `U1`.** E `rho_c` decide `rapporto = rho0/rho_c`: se `rapporto <= 1` allora
+`r = 0` e il ciclo ### **salta il nodo**, lasciando `chi_core` ### **identico a `chi`.**
+
+> ### ⛔ **Cioe': se la soglia e' `48×` irraggiungibile, `chiralita_core_locale` e' un NO-OP e
+> `_chi_geom_nodi == perc_geom`** — ### **`--chi-core` sarebbe INERTE per il dipolo.** Il
+> ragionamento completo e la raccomandazione vanno ### **nella proposta del lavoro `4`.**
