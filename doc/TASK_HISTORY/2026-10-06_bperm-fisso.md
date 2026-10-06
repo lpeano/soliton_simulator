@@ -125,6 +125,98 @@ correzione e' **un commit a se'** *(par.5)*.
 
 ---
 
+## ⛔ ANNOTAZIONE DEL 2026-10-06 — **LE BANDE ERANO TROPPO STRETTE, in due modi**
+
+*(Correzione del guardiano al blob `1bf6fe2`. ### **La banda originale qui sopra NON si
+cancella** -- il par.8 vuole che resti -- e queste sono ### **fissate PRIMA della corsa**.
+I conti li ho ### **rifatti io**, e ne esce anche **un errore nel suo**.)*
+
+### ✔ **IL PRIMO PUNTO: `1/sqrt(18)` E' UNA SOLA DEVIAZIONE STANDARD**
+
+| | |
+|---|---|
+| **la mia banda** | `1 ± 1/sqrt(18)` = `[0.7643, 1.2357]` |
+| **il difetto** | e' **`1 sigma`**. ### ⛔ **Anche con la previsione GIUSTA, un conteggio cade fuori da `1 sigma` il `31.7 %` delle volte** -- cioe' **una volta su tre**. Un criterio che boccia un'ipotesi vera un terzo delle volte **non e' un criterio** |
+| **la banda CORRETTA** | `1 ± 2/sqrt(18)` = `0.4714` ⟹ ### **`[0.5286, 1.4714]`**, cioe' `[0.53, 1.47]` *(fuori il `~4.6 %` delle volte)* |
+
+### ✔ **IL SECONDO PUNTO, ed e' il piu' grave: `1/sqrt(7738)` ASSUME L'INDIPENDENZA**
+
+`7738` sono **passi-arco**, non eventi indipendenti: ### **lo stesso arco resta nella finestra
+per molti passi consecutivi.** La statistica efficace e' ### **molto** piu' piccola, e
+`1/sqrt(7738)` = `0.0114` ### ⛔ **e' una banda FINTA: lo `1.1 %`, quando il rumore vero
+misurato e' il DOPPIO.**
+
+### ✔ **E IL RUMORE VERO NON SI STIMA: E' MISURATO, in `Bperm`** *(`d97ac64`)*
+
+| | divisioni | finestra |
+|---|--:|--:|
+| i tre semi | `27`, `28`, `30` | `8722`, `8301`, `8534` |
+| media | `28.3333` | `8519.0` |
+| dispersione *(`pstdev`, `÷N`)* | `1.2472` = **`4.4019 %`** | `172.1995` = **`2.0214 %`** |
+| errore della MEDIA *(`/sqrt(3)`)* | `2.5415 %` | **`1.1670 %`** |
+| **`2x` l'errore della media** | `5.08 %` | ### **`2.3340 %`** ⟹ **`[0.9767, 1.0233]`** |
+
+### ⛔ **E QUI C'E' UN ERRORE NEL CONTO DEL GUARDIANO, e lo scrivo perche' il mandato lo
+### chiede**
+
+Il `2.0 %` e' **`pstdev`**, la deviazione standard di **POPOLAZIONE** *(divide per `N`)* --
+e' quella che lo strumento stampa. ### ⚠ **Ma per STIMARE la dispersione da tre campioni
+l'estimatore non distorto e' quello di CAMPIONE** *(divide per `N-1`)*, e vale
+### **`stdev/pstdev = sqrt(N/(N-1))` = `1.2247`**:
+
+| | con `pstdev` | con `stdev` *(non distorta)* |
+|---|--:|--:|
+| dispersione relativa, finestra | `2.0214 %` | **`2.4756 %`** |
+| errore della media | `1.1670 %` | **`1.4293 %`** |
+| `2x` ⟹ banda | `[0.9767, 1.0233]` | ### **`[0.9714, 1.0286]`** |
+
+> ### 📌 **COME LO RISOLVO, senza reinterpretare una decisione che non e' mia:** la banda che
+> ### **VALE e' quella del guardiano, `[0.9767, 1.0233]`**, perche' e' lui che l'ha fissata e
+> la sua formula dice *«la dispersione misurata»*, che e' il numero che lo strumento stampa.
+> ### ⚠ **E riporto accanto `[0.9714, 1.0286]`:** se il risultato cadesse **fra le due**, la
+> lettura ### **non e' decisa dal dato ma dalla scelta dell'estimatore**, e il referto lo
+> direbbe invece di scegliere.
+
+### ⛔ **E UN LIMITE PIU' GRANDE DI ENTRAMBE LE BANDE, che dichiaro ORA**
+
+*«`2x` l'errore della media»* e' una regola **a `2 sigma`**, e con **tre** semi ci sono
+### **due gradi di liberta'**: l'intervallo al `95 %` vero vuole `t(0.025, 2)` = **`4.3027`**,
+non `2`. Cioe' `± 5.02 %` ⟹ `[0.9498, 1.0502]` *(o `± 6.15 %` ⟹ `[0.9385, 1.0615]` con
+l'estimatore non distorto)*. ### **E `P3` dice che per una barra fra semi servono ALMENO
+QUATTRO SEMI.**
+
+> ### ✔ **Applico la regola del guardiano COM'E' SCRITTA**, perche' e' la sua decisione.
+> ### ⛔ **Ma il referto dira' che una banda a `2 sigma` su TRE semi e' OTTIMISTICA di un
+> fattore `~2.15`**, e che ### **la cura vera sarebbe un quarto seme, non una banda piu'
+> larga.**
+
+### LA REGOLA NUOVA: **`fisso` contro `perm` si confrontano con l'ERRORE COMBINATO**
+
+### **La finestra di `Bperm-fisso` si dice *«diversa da `Bperm`»* se**
+
+```
+|media_fisso - media_perm|  >  2 * sqrt( se_fisso^2 + se_perm^2 )
+```
+
+dove ogni `se` e' la **dispersione fra i suoi tre semi diviso `sqrt(3)`**. ### ✔ **E questo e'
+piu' giusto della banda**, perche' confronta **due medie con la loro incertezza ciascuna**
+invece di una media contro un numero trattato come esatto. Per `Bperm` oggi:
+### **`se_perm` = `121.8` eventi, cioe' lo `1.4293 %`** *(con l'estimatore non distorto;
+`1.1670 %` con `pstdev`)*.
+
+### ⚠ **E LA TAVOLA `L-A`/`L-B`/`L-C`/`L-D` RESTA COM'E'**, letta con queste bande: cambia
+**la larghezza**, non **il significato** delle quattro righe.
+
+### ⛔ **UNA COSA DA DICHIARARE SULL'ORDINE: LA CORSA ERA GIA' PARTITA**
+
+Il mandato dice *«da committare PRIMA dello strumento e della corsa»*. ### **Quando e'
+arrivato, lo strumento era committato** *(`34a11dc`)* ### **e la corsa era in volo.**
+### ✔ **E NON LA FERMO, perche' la banda non cambia NIENTE di cio' che la corsa registra:**
+il `json` porta i **conteggi grezzi**, e la banda e' una **lettura** che si applica dopo.
+### **Lo strumento stampa la banda VECCHIA, e questo si cura in un commit a se' a run chiuso;
+il referto applica QUESTE bande, ed e' lui la lettura autorevole.** ### ⛔ **Lo scrivo invece
+di lasciar credere che l'ordine sia stato rispettato.**
+
 ## 3. TODO DEL NEXT STEP
 
 1. **commit di questo task history**, ### **DA SOLO**, prima dello strumento;
