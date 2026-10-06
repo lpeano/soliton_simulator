@@ -6719,3 +6719,69 @@ a chi legge che c'e' qualcosa fuori dal repo.** Dichiararla quando non c'e' nien
 smette di significare qualcosa. ### **Il contenuto dei tre commit non cambia:** i file
 committati sono quelli giusti e le liste `FILE CAMBIATI` coincidono — `H-FILE` le ha
 verificate tutte e tre.
+
+---
+
+## 2026-10-06 — **LO STRUMENTO DEL `0.3` A ZERO, E IL GIRO CORTO HA TROVATO CHE HOOKAVO UN RAMO MORTO**
+
+`csv/_test_fork/_mitosi_zero_dove.py`, blob ### **`16dced88`**, collaudo `49` su `49`.
+Il simulatore ### **non si tocca:** resta `cf2a1ac8`.
+
+> ### ✔ **LO STRUMENTO *IMPORTA* QUELLO DELLA MISURA LUNGA, NON LO COPIA.** Le registrazioni
+> che `C0` deve riprodurre sono quindi ### **letteralmente lo stesso codice** — e questo e'
+> piu' forte di un confronto fra due sorgenti, perche' non c'e' una copia che possa divergere.
+
+### ⛔ LA SCOPERTA, e cambia il merito del mandato
+
+Avevo scritto nel task history *(`b56141c`)*, ### **come «fatto letto dal codice»**, che
+`chi_torsione` e' ### **`perc_chi`**, *«con `CHI_CORE = False` e `CHI_COOP = False`»*.
+
+> ### ⛔ **QUELLI SONO I DEFAULT DI MODULO, NON LA SCENA.** L'argv del driver ha
+> ### **`--chi-coop` E `--chi-core`**, e li ho verificati ### **adesso**, da
+> `_cli_flag.argv_del_driver()`. ### **E' esattamente la trappola che il guardiano ha messo
+> per iscritto:** *«il driver accende i flag a runtime anche se il default di modulo e' OFF»*.
+
+| | credevo | il fatto |
+|---|---|---|
+| chi scrive il basculamento | `perc_chi` | ### **`perc_geom`** *(`:7905`)* |
+| cos'e' `chi_torsione` | `perc_chi` | ### **`_chi_geom_nodi`**, la chiralita' core-locale calcolata da `perc_geom` |
+| il ramo che hookavo | quello giusto | ### **quello `else`, che in questa scena NON GIRA MAI** |
+
+**E IL SINTOMO ERA VISIBILE SUBITO:** il giro corto dava ### **`chi = 0` a ogni passo**
+mentre il dipolo cambiava su ### **`90854` archi.** ### **L'ha trovato il giro corto, non la
+lettura** — ed e' la terza volta in due giorni.
+
+### ✔ COME L'HO CURATO, **e non e' «cambiare `perc_chi` in `perc_geom`»**
+
+Il gancio che conta e' ### **su `chi_torsione` stesso, dove il dipolo lo legge:** si misura
+### **la grandezza che ENTRA**, non si indovina chi l'ha scritta — cosi' il conto
+### **vale qualunque flag governi la cache.** E i tre contatori restano distinti:
+`cambi_chi_tors` *(quello del criterio)*, `cambi_geom`, e `cambi_perc_chi` — ### **cio' che il
+mandato NOMINA, misurato `0` in `4` passi.**
+
+> ### ⚠ **L'IPOTESI DEL GUARDIANO NON CADE, SI PRECISA:** il meccanismo e' quello che aveva
+> descritto, ### **ma la grandezza che cambia e' la GEOMETRIA e non la CARICA** — e
+> ### **la carica, in questa scena, non cambia affatto.**
+
+### ⚠ E UNA SECONDA COSA, che il collaudo ha trovato e che tocca il CRITERIO
+
+Un ribaltamento su ### **un solo estremo** cambia il dipolo di ### **`π` ESATTO**, quindi la
+spinta vale `π` e ### **`> π` NON la conta.** ### **Il criterio del mandato, preso alla
+lettera, mancherebbe proprio il meccanismo del guardiano quando la fase e' nulla.**
+
+> ### **IL CRITERIO RESTA `> π`** — era fissato prima, e cambiarlo adesso sarebbe spostare una
+> soglia. Accanto c'e' ora ### **`spinta_pi_esatto`**, che rende ### **visibile** l'accumulo al
+> bordo. ### **Se quel contatore fosse grande e `spinta_pi_dip` piccolo, un «REFUTATA» sarebbe
+> un ARTEFATTO DELLA SOGLIA, e il referto lo deve dire.**
+
+**Piu' la voce `CHI-BASC-DESCRIZIONE`:** la riga che `--chi-basc` stampa all'avvio dice
+*«`perc_chi` vira»* ### **mentre scrive `perc_geom`** — nomina l'array sbagliato
+### **nel dump della configurazione**, che e' dove chi legge si fida di piu'.
+### **Non la correggo: sta nel simulatore, e il simulatore non si tocca.**
+
+**E il DOVE:** classe `MATERIA`/`BORDO`/`VUOTO` con soglie ### **derivate dalla scena**
+*(`u <= 1` e' il test della scena; `1 + R_CONN/r_regione = 1.5859`, e `R_CONN` e' il **varco**
+della scena)*, ### **zero numeri nuovi.** Misurato nel giro corto: ### **`1236` / `3483` /
+`8083`** nodi, contro i `1237` delle tre coorti — ### **la classe col baricentro riproduce
+quasi esattamente l'appartenenza della scena**, e quello e' il controllo che la rende
+credibile.

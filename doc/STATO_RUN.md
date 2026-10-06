@@ -2548,3 +2548,64 @@ suo `json`.
 MORALE, non il meccanismo:** la' il difetto era un controllo che ### **non POTEVA fallire**,
 qui e' un controllo che ### **non VENIVA GIRATO.** Sono due modi diversi di avere un presidio
 che non presidia niente *(`A9`)*, e vanno cercati ### **separatamente.**
+
+---
+
+## `CHI-BASC-DESCRIZIONE` — **il flag dice <<`perc_chi` vira>>, e con `--chi-coop` scrive `perc_geom`**
+
+*(Aperta il 2026-10-06 dal **giro corto** di `csv/_test_fork/_mitosi_zero_dove.py`, su `cf2a1ac8`.)*
+
+**IL FATTO.** La riga che `--chi-basc` stampa all'avvio dice:
+
+```
+[chi-basc] basculamento chirale attivo: perc_chi vira secondo la torsione locale vs PHI_CRIT (2pi)
+```
+
+Ma l'argv del driver ha ### **anche `--chi-coop`**, e con la cooperazione il ramo che gira
+e' quello che scrive ### **`perc_geom`** *(`:7905`-`:7906`)*. ### **La riga nomina l'array
+sbagliato**, e lo fa in uno dei posti dove chi legge si fida di piu': ### **il dump della
+configurazione.**
+
+| | |
+|---|--:|
+| cambi di `perc_geom` in `4` passi | ### **`6419`** |
+| cambi di `perc_chi` negli stessi `4` passi | ### **`0`** |
+| archi con spinta oltre `π` dal **dipolo**, al passo `2` | `90854` |
+
+### ⛔ E MI HA FATTO SBAGLIARE DAVVERO, non in astratto
+
+Nel task history `b56141c` avevo scritto, ### **come <<fatto letto dal codice>>**, che
+`chi_torsione` e' `perc_chi` *«con `CHI_CORE = False` e `CHI_COOP = False`»*.
+### **Quelli sono i DEFAULT DI MODULO:** il driver accende ### **`--chi-coop` E
+`--chi-core`** a runtime — ed e' ### **esattamente la trappola che il guardiano ha messo
+per iscritto** *(«il driver accende i flag a runtime anche se il default di modulo e'
+OFF»)*.
+
+> ### ⛔ **LA PRIMA VERSIONE DEL MIO GANCIO ERA SUL RAMO `else`, CHE IN QUESTA SCENA NON
+> VIENE MAI ESEGUITO**, e contava ### **zero** mentre il dipolo cambiava su ### **`90854`
+> archi.** ### **L'ha trovato IL GIRO CORTO, non la lettura** — e questa e' la terza
+> volta in due giorni che il giro corto prende cio' che leggere non prendeva.
+
+### LA CONSEGUENZA SULLA FISICA, **piu' grande del commento**
+
+`twist_dip = π·0.5·(chi_torsione[i] − chi_torsione[j])`, e `chi_torsione` con
+`--chi-core` **e** `--chi-coop` e' ### **`_chi_geom_nodi`**, cioe' la chiralita'
+### **core-locale calcolata da `perc_geom`** *(`:7849`-`:7855`)*.
+
+> ### ✔ **QUINDI L'IPOTESI DEL GUARDIANO E' GIUSTA NEL MECCANISMO** — un nodo che
+> attraversa `2π` aggiunge `±π` a tutti i suoi archi, e con la legge curata quel
+> `±π` entra in `tw` in un passo solo — ### **ma la grandezza che cambia e' LA
+> GEOMETRIA, non la CARICA.** ### **E la carica, in questa scena, non cambia affatto.**
+
+**CHE FARE, e NON l'ho fatto qui:** la riga stampata va corretta perche' dica
+### **quale array il ramo attivo scrive.** Il posto giusto e' ### **un commit sul
+simulatore**, e in questo mandato il simulatore ### **non si tocca.**
+
+**IL CRITERIO DI CHIUSURA:** la descrizione del flag nomina l'array che il ramo attivo
+scrive, ### **in entrambi i rami.**
+
+### ⚠ **COLLEGATA a `GEOM-SENZA-VERSO`**, che dice gia' che `perc_geom` nasce da `|tw|`
+e ### **perde il VERSO** mentre la catena della torsione la usa come chiralita':
+### **le due voci parlano dello stesso array, una del NOME e una del CONTENUTO.**
+
+### ⛔ **NON INIZIATA.**

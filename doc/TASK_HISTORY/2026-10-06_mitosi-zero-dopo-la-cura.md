@@ -298,3 +298,60 @@ Accanto a `R`: ### **il passo della prima nascita nei due bracci**, le nascite p
 6. le **uscite col verdetto**, poi il **referto generato**;
 7. ### ⛔ **poi FERMO:** il `0.3`, la soglia `3π`, `κ` e ### **la legge del basculamento
    chirale** si decidono su questi numeri, e ### **sono decisioni di Luca.**
+
+---
+
+## ANNOTAZIONE *(2026-10-06, dopo il giro corto -- `par.8`: si ANNOTA, non si riscrive)*
+
+> ### ⛔ **UN <<FATTO DAL CODICE>> DEL PAR.1 E' SBAGLIATO, E LO HA TROVATO IL GIRO
+> CORTO.** Avevo scritto che `chi_torsione` e' ### **`perc_chi`** *«con `CHI_CORE = False` e
+> `CHI_COOP = False`»*. ### **Quelli sono i DEFAULT DI MODULO, non la SCENA:** l'argv del
+> driver ha ### **`--chi-coop` E `--chi-core`**, e li ho verificati ### **adesso**, da
+> `_cli_flag.argv_del_driver()`.
+
+**COSA CAMBIA, e non e' poco:**
+
+| | prima credevo | il fatto |
+|---|---|---|
+| chi scrive il basculamento | `perc_chi` | ### **`perc_geom`** *(il ramo `CHI_COOP`, `:7905`)* |
+| cos'e' `chi_torsione` | `perc_chi` | ### **`_chi_geom_nodi`**: la chiralita' core-locale calcolata da `perc_geom` |
+| il ramo che hookavo | quello giusto | ### **quello `else`, che in questa scena NON GIRA MAI** |
+
+**E IL SINTOMO ERA VISIBILE SUBITO:** il giro corto dava ### **`chi = 0` a ogni passo**
+mentre il dipolo cambiava su ### **`90854` archi.** ### **Un contatore a zero accanto a un
+effetto grande: la stessa forma del falso-zero che mi e' tornata addosso tutta la
+settimana.**
+
+### ✔ COME L'HO CURATO, e non e' <<cambiare `perc_chi` in `perc_geom`>>
+
+Il gancio che conta e' ### **su `chi_torsione` stesso**, dove il dipolo lo legge:
+### **si misura la grandezza che ENTRA, non si indovina chi l'ha scritta.** Cosi' il conto
+### **vale qualunque sia il flag** che governa la cache, e ### **non va rifatto** se un
+giorno cambiasse. E accanto restano gli altri due, ### **dichiarati per quello che sono:**
+
+| contatore | che cos'e' |
+|---|---|
+| ### **`cambi_chi_tors`** | ### **la grandezza che ENTRA nel dipolo.** E' questa che il criterio usa |
+| `cambi_geom` | i cambi che il basculamento scrive *(`perc_geom`)* |
+| `cambi_perc_chi` | ### **cio' che il mandato NOMINA**, e che in questa scena ### **non entra nel dipolo**: misurato `0` in `4` passi |
+
+> ### ⚠ **L'IPOTESI DEL GUARDIANO NON CADE, SI PRECISA:** il meccanismo e' quello che
+> aveva descritto, ### **ma la grandezza che cambia e' la GEOMETRIA e non la CARICA**, e
+> ### **la carica non cambia affatto.** ### **Il criterio del par.2 NON si tocca:** era
+> fissato prima, e si legge sul contatore che ### **misura il dipolo**, come dice.
+
+**E UN SECONDO RILIEVO, registrato come `CHI-BASC-DESCRIZIONE`:** la riga che `--chi-basc`
+stampa all'avvio dice *«`perc_chi` vira»* ### **mentre scrive `perc_geom`** — cioe'
+### **nomina l'array sbagliato nel dump della configurazione**, che e' uno dei posti dove
+chi legge si fida di piu'. ### **NON la correggo qui: sta nel simulatore, e in questo
+mandato il simulatore non si tocca.**
+
+### ⛔ **E UNA COSA CHE LA MIA PREVISIONE ORA DEVE DIRE:** avevo previsto *«la spinta
+oltre `π` viene soprattutto dal DIPOLO»* ragionando su un ribaltamento che inietta
+### **`π` esatto.** ### **Il collaudo ha mostrato che `> π` NON conta un `π`
+esatto**, quindi un ribaltamento su ### **un solo estremo** con fase nulla
+### **sfuggirebbe al criterio.** ### **Il criterio resta `> π`** — era fissato prima
+— e accanto c'e' ora `spinta_pi_esatto`, che rende ### **visibile** l'accumulo al bordo
+invece di lasciarlo cadere in silenzio. ### **Se quel contatore fosse grande e
+`spinta_pi_dip` piccolo, la lettura <<refutata>> sarebbe un ARTEFATTO DELLA SOGLIA**, e il
+referto deve dirlo.
