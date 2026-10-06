@@ -2197,6 +2197,19 @@ Riscalare `r` per `1/mediana(r) ~ 1.227` moltiplica **anche** `|r_i - r_j|` per 
 
 ## `ARCHI-OLTRE-4PI` — **~109 archi oltre il tetto dal passo `2`, e non rilassano**
 
+> ### ⛔ **ANNOTAZIONE DEL 2026-10-06, al passo `342` della misura lunga: <<ZERO A OGNI PASSO DEI `150`>>, CHE HO SCRITTO IO NELL'INDICE, NON E' <<ZERO SEMPRE>>.**
+> Con la legge curata gli archi oltre `4π` sono zero dal passo `1` al `217`, e
+> ### **tornano dal passo `218`** -- ma sono ### **fra `0` e `6`**, non `~108`, e
+> ### **salgono E SCENDONO**: ### **ci entrano e ne RIESCONO, cioe' RILASSANO**, che e'
+> esattamente cio' che i `109` di questa voce ### **non facevano.** E arrivano
+> ### **dopo le nascite**: prima nascita `214`, primo Schwinger `215`, primo arco oltre
+> `4π` ### **`218`**; `twist_dip` a zero passa da `1.0000` *(passi `50` e `150`)* a
+> ### **`0.9979`** al passo `300`. ### ⚠ **SUGGESTIVO, NON PROVATO:** tre campioni
+> del dipolo, e la prova vorrebbe gli ### **INDICI** degli archi sopra `4π` contro
+> quelli ### **nati** -- ### **e NON l'ho fatta, perche' questa voce e' <<da non
+> indagare>> per decisione di Luca.** ### **La chiusura resta una DECISIONE DI LUCA:
+> io NON la chiudo.**
+
 *(APERTA il 2026-10-05 da una **verifica del guardiano** sui dati di `CRESCITA-DOPO-Z43`.
 ### ⛔ **DA NON INDAGARE ORA** — decisione di Luca.)*
 

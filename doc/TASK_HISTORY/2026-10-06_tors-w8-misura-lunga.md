@@ -239,3 +239,63 @@ STRUMENTO**, e la differenza non era dichiarata da nessuna parte.
 prima**, e il criterio *(`300`, `600`, `1000`; `0.5` e `1.5`)* ### **non si tocca**: la
 corsa non ha prodotto un solo numero, quindi ### **non c'e' nulla da cui una previsione
 potrebbe essere stata ritoccata.**
+
+---
+
+## ANNOTAZIONE *(2026-10-06, al passo `310` -- `par.8`: si ANNOTA, non si riscrive)*
+
+**LA CORSA RIPRODUCE IL SIGILLO, a QUATTRO DECIMALI.** Il rapporto alla curva ai due passi
+che ### **non decidono** e' `1.4479` al `50` e `0.9234` al `150`: ### **esattamente i numeri
+che questo task history aveva riportato dal sigillo `c17e518` PRIMA della corsa** *(par.
+«IL LIMITE DI QUELLA CURVA»)*. ### **Non e' una somiglianza: sono le stesse cifre.**
+
+**IL PASSO `300` DECIDE, e da' `2.7026 / 3.9717 = 0.6805` → `DENTRO`.** *(Letto, non
+concluso: mancano `600` e `1000`, e il criterio dice che se i tre dessero letture diverse
+### **si dice cosi' e non si sceglie.**)*
+
+### ⚠ **E DUE PREVISIONI SONO CADUTE, in direzioni opposte**
+
+| la previsione, scritta prima | il fatto |
+|---|---|
+| *«meno di `18` divisioni a `150` passi»* | ### **ZERO** fino al passo `213`: giusta, e molto piu' netta |
+| *«a `1000` passi fra `30` e `150` divisioni»* | ### **gia' `110` divisioni al passo `310`**, e la rete cresce: ### **il tetto `150` cadra'** |
+| *«archi oltre `4π`: ZERO a ogni passo, anche a `1000`»* | ### ⛔ **FALSA: tornano dal passo `218`** |
+
+> ### ⛔ **E LA TERZA E' LA PIU' INTERESSANTE, perche' questo task history aveva fissato
+> PRIMA come leggerla:** *«se ne comparisse UNO, sarebbe una ### **scoperta, non un difetto
+> della cura**»*, e la ragione scritta li' era precisa — la cura toglie il meccanismo che li
+> portava oltre `4π` ### **in un passo solo.**
+
+**E I NUMERI CONFERMANO QUELLA RAGIONE, invece di smentirla:**
+
+1. **`calci_spuri_curata = 0` e `spinta_senza_causa = 0` a TUTTI i `310` passi:** nessuna
+   spinta di un passo solo supera il bound. ### **Il meccanismo tolto resta tolto.**
+2. **non e' la popolazione di prima:** la legge vecchia ne aveva ### **`~108` per passo,
+   quasi COSTANTE**; qui sono ### **fra `0` e `6`**, e ### **salgono E SCENDONO**
+   *(`1`→`2`→`1`→`0`→…→`6`→`4`→`3`)*. ### **Gli archi ci entrano e ne RIESCONO, cioe'
+   RILASSANO** — che e' esattamente quello che i `109` di `ARCHI-OLTRE-4PI` ### **non
+   facevano.**
+3. ### **e arrivano DOPO le nascite:** prima nascita al `214`, primo Schwinger al `215`,
+   ### **primo arco oltre `4π` al `218`.** E `twist_dip` a zero, che valeva ### **`1.0000`**
+   ai passi `50` e `150`, al passo `300` vale ### **`0.9979`.**
+
+> ### ⚠ **LA COINCIDENZA E' SUGGESTIVA, NON PROVATA, e lo scrivo prima che sembri una
+> conclusione:** ho ### **tre campioni** del dipolo, non una serie, e `214` → `218` sono
+> quattro passi su una corsa di mille. ### **La prova vorrebbe gli INDICI degli archi sopra
+> `4π` confrontati con quelli NATI, e NON l'ho fatta:** `ARCHI-OLTRE-4PI` e' ### **«da non
+> indagare» per decisione di Luca**, e questo e' un riscontro arrivato ### **da una misura
+> fatta per altro.**
+
+### ⛔ **E IL MIO GENERATORE DEL REFERTO CONTRADDICE QUESTO TASK HISTORY**
+
+`csv/_test_fork/_referto_lunga.py` *(`2266d147`, committato in `579b47d` ### **durante** la
+corsa)* mette `sopra_4pi_tot > 0` fra i ### **guasti**, quindi stamperebbe
+### **«FERMO — LA CURA NON TIENE»** su un fatto che questo documento, committato
+### **prima**, dichiara ### **una scoperta.**
+
+> ### **E' un difetto del GENERATORE, non del criterio:** il criterio e' stato fissato prima
+> ed e' ### **giusto**, io l'ho ### **mal codificato dopo.** Si corregge il generatore
+> ### **in un commit a se'**, e si dichiara li' che la correzione ### **RIPRISTINA** il
+> criterio pre-registrato invece di spostarlo — ### **perche' una soglia cambiata dopo aver
+> visto i dati e' il modo in cui un referto diventa una formalita', e la differenza fra le
+> due cose dev'essere VERIFICABILE da git, non asserita da me.**

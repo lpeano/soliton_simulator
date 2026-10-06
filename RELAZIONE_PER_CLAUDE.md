@@ -6508,3 +6508,52 @@ criterio.
 
 **Nessuna conclusione, nessuna cura, nessun flag toccato.** Il simulatore ### **non si
 tocca:** resta `cf2a1ac8`.
+
+---
+
+## 2026-10-06 — **AL PASSO `300`: la corsa riproduce il sigillo a QUATTRO DECIMALI, e gli archi oltre `4π` TORNANO — che il task history aveva gia' detto come leggere**
+
+**① LA RIPRODUZIONE, e si vede PRIMA del criterio.** Il rapporto alla curva ai due passi che
+### **non decidono** vale ### **`1.4479`** al `50` e ### **`0.9234`** al `150`:
+### **esattamente le cifre che il task history aveva riportato dal sigillo `c17e518` PRIMA
+della corsa.** Non una somiglianza — ### **le stesse cifre.**
+
+**② IL PASSO `300` DECIDE:** `2.7026 / 3.9717 = ` ### **`0.6805`** → ### **DENTRO**
+*(«accumula come previsto»)*. ### **Letto, non concluso:** mancano `600` e `1000`.
+
+**③ E TRE PREVISIONI SONO CADUTE, in direzioni opposte.**
+
+| scritta prima | il fatto |
+|---|---|
+| «meno di `18` divisioni a `150`» | ### **ZERO** fino al `213` — giusta, e piu' netta |
+| «a `1000` fra `30` e `150` divisioni» | ### **gia' `110` al passo `310`**: il tetto `150` cadra' |
+| «archi oltre `4π`: ZERO anche a `1000`» | ### ⛔ **FALSA: tornano dal passo `218`** |
+
+> ### ⛔ **E LA TERZA IL TASK HISTORY LA AVEVA GIA' LETTA, PRIMA:** *«se ne comparisse UNO,
+> sarebbe una ### **scoperta, non un difetto della cura**»* — perche' la cura toglie il
+> meccanismo che li portava la' ### **in un passo solo.**
+
+**E I NUMERI CONFERMANO QUELLA RAGIONE invece di smentirla:** `calci_spuri = 0` e
+`spinta_senza_causa = 0` a ### **tutti i `342` passi**; non sono i `~108` ### **quasi
+costanti** di prima ma ### **fra `0` e `6`**, e ### **salgono E SCENDONO** — cioe'
+### **RILASSANO**, che e' precisamente cio' che i `109` di `ARCHI-OLTRE-4PI` non facevano;
+e arrivano ### **dopo le nascite** *(prima nascita `214`, primo Schwinger `215`, primo arco
+oltre `4π` `218`)*, con `twist_dip` a zero che scende da `1.0000` a ### **`0.9979`.**
+
+> ### ⚠ **SUGGESTIVO, NON PROVATO**, e lo scrivo prima che sembri una conclusione: tre
+> campioni del dipolo, non una serie. ### **La prova vorrebbe gli INDICI degli archi sopra
+> `4π` contro quelli NATI, e NON l'ho fatta** — `ARCHI-OLTRE-4PI` e' ### **«da non indagare»
+> per decisione di Luca**, e questo e' un riscontro arrivato ### **da una misura fatta per
+> altro.**
+
+**④ E CORREGGO UNA COSA CHE HO SCRITTO IO NELL'INDICE:** *«zero a ogni passo dei `150`»*
+### **non e' «zero sempre»**, e la differenza non e' un dettaglio. Annotato nella voce e in
+`doc/STATO_RUN.md`, ### **senza chiuderla:** la chiusura e' una decisione di Luca.
+
+> ### ⛔ **E IL MIO GENERATORE DEL REFERTO CONTRADDICE IL TASK HISTORY:** mette
+> `sopra_4pi_tot > 0` fra i ### **guasti**, quindi stamperebbe ### **«FERMO — LA CURA NON
+> TIENE»** su un fatto che il documento committato ### **prima** dichiara ### **una
+> scoperta.** ### **E' un difetto del GENERATORE, non del criterio** — si corregge in un
+> commit a se', e li' si dichiara che la correzione ### **RIPRISTINA** il criterio
+> pre-registrato invece di spostarlo, ### **perche' una soglia cambiata dopo aver visto i
+> dati e' il modo in cui un referto diventa una formalita'.**
