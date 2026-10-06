@@ -346,7 +346,13 @@ def genera(zero, acceso):
           "mentre con l'acceso la prima divisione e' al passo `%d`."
           % (zero.get("passi"), _pa))
         w()
-    w("### LE NASCITE PER FINESTRE DI `%s` PASSI" % (acceso.get("finestra")))
+    # ### ⛔ **LA LARGHEZZA SI DERIVA DAI DATI, non da un campo che potrebbe mancare:**
+    #   la prima versione leggeva `acceso.get("finestra")` e stampava ### **`None`**, perche'
+    #   questo strumento quel campo ### **non lo salva.** ### **Un <<None>> in un titolo e'
+    #   un numero che non c'e' presentato come se ci fosse.**
+    _fw = (acceso.get("nascite_per_finestra") or [{}])[0]
+    _fw = ((_fw.get("a") or 0) - (_fw.get("da") or 0) + 1) if _fw.get("a") else None
+    w("### LE NASCITE PER FINESTRE DI `%s` PASSI" % n4(_fw, "%d"))
     w()
     w("| finestra | divisioni `_AMP = 0` | divisioni `_AMP = 0.3` | Schwinger `0` | "
       "Schwinger `0.3` |")
@@ -744,6 +750,13 @@ def collaudo():
     prova("forma: ### nessun segnaposto `" + chr(37) + "s` o `{}` nel testo",
           (chr(37) + "s") not in t and "{}" not in t)
     prova("forma: ### nessun doppio backtick", "``" not in t)
+    prova("forma: ### DEVE FALLIRE SE TORNA -- nessun `None` stampato come fosse un numero",
+          "`None`" not in t and "None PASSI" not in t)
+    _sf = _finto()
+    del _sf["finestra"]
+    t2 = NL.join(genera(_sf, _sf)[0])
+    prova("forma: ### e la larghezza della finestra si DERIVA dai dati, non da un campo",
+          "FINESTRE DI `50` PASSI" in t2 and "`None`" not in t2)
     prova("forma: ### il referto dichiara il LIMITE di un seme solo e il gradino `(b)`",
           "un seme solo" in t and "`(b)`" in t)
     prova("forma: ### e dice che gli INDICI degli archi oltre 4pi NON si guardano",
