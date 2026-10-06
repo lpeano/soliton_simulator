@@ -598,19 +598,25 @@ def main(argv):
         stampa("  %-5s da %-10s ampiezza %-5s tw_split %-5s -> blob %s  (%d ancore)"
                % (nome, os.path.basename(src), amp, tws, blob(dst)[:8], len(anc[nome])))
     stampa()
-    for f in anc["Bg"]:
-        stampa("      Bg: " + f)
+    for _nm, _s, _a, _t in BR:
+        for f in anc[_nm]:
+            stampa("      %s: %s" % (_nm, f))
     stampa()
     for nome, _s, _a, _t in BR:
         S_[nome], N_[nome], a_cli = carica("msg_" + nome, sorg[nome])
         mis[nome] = Misura(nome)
         S_[nome]._MIS = mis[nome]
-    in_conf = _cli_flag.dichiara_configurazione(S_["Bg"], stampa)
+    # ### IL BRACCIO DI RIFERIMENTO viene da `BR`, non da un nome scritto a mano: e'
+    #   l'ULTIMO, cioe' quello piu' vicino a `Bp` in ogni modo (`Bg` col solo nome dei due
+    #   termini; `Bperm-id` con la permutazione identica). ### **E' la SECONDA volta che un
+    #   nome fisso fa cadere la corsa:** ora la prova del collaudo guarda LA CLASSE.
+    _RIF = BR[-1][0]
+    in_conf = _cli_flag.dichiara_configurazione(S_[_RIF], stampa)
     stampa("  ### LA CONFIGURAZIONE SI DICHIARA SU `Bg`: e' la PARTE B con la SOLA")
     stampa("      separazione dei nomi, quindi l'unico braccio IN configurazione per")
     stampa("      costruzione. Ap0, Bp0 e B03 hanno l'ampiezza CAMBIATA DI PROPOSITO.")
     n0 = {k: int(N_[k].n) for k in N_}
-    stampa("  scena: n = %d, archi = %d" % (N_["Bg"].n, len(N_["Bg"].i)))
+    stampa("  scena: n = %d, archi = %d" % (N_[_RIF].n, len(N_[_RIF].i)))
     stampa()
     riga("=")
     stampa("LA CORSA: %d passi, %d bracci (%s)"
@@ -623,8 +629,9 @@ def main(argv):
              "semi_perm": list(SEMI_PERM) if perm else None,
              "soglie_p": {"P1": SOGLIA_P1, "P2": SOGLIA_P2} if perm else None,
              "predittore_causale": all(
-                 (mis["Bg"].corr.get(p) or {}).get("causale", False) for p in PASSI_CORR)
-             if ("Bg" in mis and mis["Bg"].corr) else False,
+                 (mis[_RIF].corr.get(p) or {}).get("causale", False)
+                 for p in PASSI_CORR)
+             if (_RIF in mis and mis[_RIF].corr) else False,
              "blob_sim_b": blob(SIM), "blob_sim_a": blob(sa),
              "blob_strumento": blob(__file__), "ancore": anc, "n0": n0,
              "in_configurazione_del_driver": bool(in_conf),
@@ -693,7 +700,7 @@ def main(argv):
         stampa("      Qui si producono SOLO le correlazioni del braccio Bg col predittore")
         stampa("      CAUSALE, e il referto le unisce.")
         for p in PASSI_CORR:
-            c = mis["Bg"].corr.get(p) or {}
+            c = mis[_RIF].corr.get(p) or {}
             stampa("      passo %-4d causale=%-6s predittore dal passo %s"
                    % (p, c.get("causale"), c.get("passo_del_predittore")))
         d = dict(comune)
@@ -959,7 +966,7 @@ def rapporto(mis, N_, n0, cre, rifA, rifB, divA, divB, in_conf, passi):
     stampa("      0.05 sta a oltre TRENTA deviazioni standard dallo zero. K2 e' un test di")
     stampa("      ESISTENZA con potenza enorme. ### K2b e' il criterio di ENTITA'.")
     stampa()
-    corr = mis["Bg"].corr
+    corr = mis[nomi[-1]].corr if (nomi := sorted(mis)) else {}
     BERS = ("incremento_TOTALE", "SPINTA", "SCARICA")
     PRED = ("gradiente_nudo", "proxy_grad_per_phivel", "forma_esatta")
     stampa("  LE SPEARMAN, per passo (3 predittori x 3 bersagli):")
@@ -1354,6 +1361,15 @@ def collaudo():
     #   ### **La prima versione di questa prova la cercava in TUTTO il sorgente e falliva su
     #   ### un uso LEGITTIMO.**
     _ciclo = _src.split("for k in range(1, passi + 1):")[1].split("comune = _istantanea")[0]
+    # ### E LA PROVA GENERALE DELLA CLASSE: in `main` nessun dizionario dei bracci si
+    #   indicizza con un NOME SCRITTO A MANO. ### **E' la SECONDA volta che un nome fisso fa
+    #   cadere la corsa al primo passo** (prima il battito con la tupla, poi `anc["Bg"]`),
+    #   quindi la prova non guarda piu' un punto solo: guarda LA CLASSE.
+    _main = _src.split("def main(argv):")[1].split("def _divisioni")[0]
+    import re as _re
+    _fissi = _re.findall(r'(?:anc|mis|N_|S_|sorg)\["(?:Ap0|Bp0|B03|Bg|Bperm[^"]*)"\]', _main)
+    prova("main: ### nessun dizionario dei bracci si indicizza con un nome SCRITTO A MANO",
+          not _fissi, "trovati: %s" % (sorted(set(_fissi))[:4] if _fissi else "nessuno"))
     prova("battito: ### nel CICLO DEI PASSI i nomi vengono da `BR`, non da una tupla fissa",
           "_nomi = [x[0] for x in BR]" in _ciclo
           and '("Ap0", "Bp0", "B03", "Bg")' not in _ciclo,
