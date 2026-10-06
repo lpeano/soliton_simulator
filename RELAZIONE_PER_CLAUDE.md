@@ -7090,3 +7090,47 @@ nascite**, quindi ### **non scala col numero di nascite.**
 > ferme**: nemmeno questa e' registrata.
 
 **Nessuna misura adesso: la gravita' e' in coda per decisione di Luca.**
+
+---
+
+## 2026-10-06 — **LA CODA AGGIORNATA, e cercando le voci fuori lista ho trovato `U1`**
+
+`doc/CODA_2026-10-06.md`: annotato in testa che e' ### **superato** *(`par.8`, senza
+cancellare)*, e aggiunta la sezione ### **«LA CODA AL 2026-10-06 SERA»**. ### **Ogni voce e'
+verificata nell'indice col comando**, non ricopiata dal prompt: ### **`19` su `19`
+esistono.**
+
+### ⛔ LE VOCI APERTE CHE LA LISTA NON NOMINA SONO `684`
+
+| | |
+|---|--:|
+| aperte o `da-decidere` | `703` |
+| ### **fuori dalla lista** | ### **`684`** |
+| di cui ### **segnaposto** *(«CITATO `n` volte, MAI definito»)* | `318` |
+| di cui ### **voci vere** | `366` |
+
+> ### ⚠ **Elencarle tutte renderebbe la coda INUTILIZZABILE COME CODA**, quindi
+> ### **ho dichiarato un criterio** invece di tacerle o di scaricarle tutte: riporto le
+> ### **`10` che BLOCCANO**, perche' sono le sole che cambiano ### **cosa si puo' girare**,
+> piu' `TORS-W8-AVVOLGIMENTO` che e' ### **rimasta aperta.** ### **La riduzione e' un mio
+> giudizio e non una regola scritta: l'ho dichiarata nel documento perche' Luca possa
+> ribaltarla.**
+
+### ⛔ E `U1` DICE «URGENTE, PRIMA DI QUALUNQUE GIRO LUNGO»
+
+`U1`, `da-decidere`, ### **`blocca_run_base = SI`**: *«URGENTE, PRIMA DI QUALUNQUE GIRO LUNGO
+— `massa_critica_collasso`: `21` usi DENTRO LEGGI»*.
+
+> ### ⛔ **IO DI GIRI LUNGHI NE HO FATTI TRE OGGI** *(la misura lunga da `1000` passi e i due
+> bracci del `0.3`)*, e ### **quella voce era aperta e bloccante prima, durante e dopo.**
+> ### **Non l'ho letta, e andava letta.**
+>
+> ### **Non lo scrivo per flagellarmi:** lo scrivo perche' e' ### **esattamente il tipo di cosa
+> che una coda serve a non far succedere**, e perche' ### **il modo in cui l'ho trovata —
+> cercando le voci fuori lista, come il mandato chiedeva — dice che il mandato era giusto.**
+>
+> ### ⚠ **E NON RIFACCIO LE CORSE DI MIA INIZIATIVA:** se `U1` le invalidi o no e' una lettura
+> che va fatta ### **su `U1`**, e ### **la decisione e' di Luca.**
+
+**Le altre nove bloccanti che la lista non nominava:** `CENS-A1`, `CENS-A2`, `CENS-A6`,
+`CENS-A7`, `CENS-B7`, `CLI-1`, `D03`, `D31`, `SCHED-PASSO`.
