@@ -6,16 +6,16 @@
   "macchina": "AMD64"
  },
  "passi": 230,
- "passi_girati": 220,
- "stato": "IN CORSO",
+ "passi_girati": 230,
+ "stato": "DATI SALVATI",
  "blob_sim": "b8c21049b85ba36a828f49dfa225d42419f3baf5",
  "blob_atteso": "b8c21049",
- "blob_strumento": "3cf674fdf269350a7106fb717b5db209015b222d",
+ "blob_strumento": "9a00080a6bd260731afc7a3aef99c8412218cbe9",
  "in_configurazione_del_driver": true,
- "secondi": 717.4,
+ "secondi": 753.1,
  "a_valle": {
-  "n": 12809,
-  "archi": 471574
+  "n": 12813,
+  "archi": 471580
  },
  "plaquette": {
   "geometria": {
@@ -36,9 +36,11 @@
     "n": 12802,
     "a_plaquette_totali": 5534011,
     "a_degeneri": 0,
-    "a_secondi": 4.94,
+    "a_secondi": 4.91,
     "a_controllo_indipendente": 5534011,
-    "a_secondi_controllo": 0.31,
+    "a_archi_i_maggiore_j": 0,
+    "a_cappi_esclusi": 0,
+    "a_secondi_controllo": 0.33,
     "a_per_nodo_per_classe": {
      "MATERIA": {
       "n": 1236,
@@ -317,9 +319,11 @@
     "n": 12802,
     "a_plaquette_totali": 5534011,
     "a_degeneri": 0,
-    "a_secondi": 4.89,
+    "a_secondi": 4.88,
     "a_controllo_indipendente": 5534011,
-    "a_secondi_controllo": 0.36,
+    "a_archi_i_maggiore_j": 0,
+    "a_cappi_esclusi": 0,
+    "a_secondi_controllo": 0.32,
     "a_per_nodo_per_classe": {
      "MATERIA": {
       "n": 1240,
@@ -598,9 +602,11 @@
     "n": 12802,
     "a_plaquette_totali": 5534011,
     "a_degeneri": 0,
-    "a_secondi": 4.71,
+    "a_secondi": 4.86,
     "a_controllo_indipendente": 5534011,
-    "a_secondi_controllo": 0.38,
+    "a_archi_i_maggiore_j": 0,
+    "a_cappi_esclusi": 0,
+    "a_secondi_controllo": 0.31,
     "a_per_nodo_per_classe": {
      "MATERIA": {
       "n": 1243,
@@ -872,6 +878,289 @@
       }
      },
      "riferimento_perc_geom_frazione_cambiata": 0.0
+    }
+   },
+   "230": {
+    "passo": 230,
+    "n": 12813,
+    "a_plaquette_totali": 5533797,
+    "a_degeneri": 0,
+    "a_secondi": 4.92,
+    "a_controllo_indipendente": 5533797,
+    "a_archi_i_maggiore_j": 11,
+    "a_cappi_esclusi": 0,
+    "a_secondi_controllo": 0.3,
+    "a_per_nodo_per_classe": {
+     "MATERIA": {
+      "n": 1217,
+      "mediana": 1502.0,
+      "media": 1506.4264585045194,
+      "max": 1880.0,
+      "min": 1156.0
+     },
+     "BORDO": {
+      "n": 3473,
+      "mediana": 1494.0,
+      "media": 1464.7137921105673,
+      "max": 1905.0,
+      "min": 508.0
+     },
+     "VUOTO": {
+      "n": 8123,
+      "mediana": 1333.0,
+      "media": 1191.815708482088,
+      "max": 1862.0,
+      "min": 0.0
+     }
+    },
+    "a_nodi_senza_plaquette": 11,
+    "a_nodi_senza_plaquette_non_degenere": 11,
+    "b_modulo_medio_per_nodo_per_classe": {
+     "MATERIA": {
+      "n": 1217,
+      "n_non_definiti": 0,
+      "mediana": 0.3889285386729848,
+      "media": 0.43216009133193073,
+      "q25": 0.33242710399849273,
+      "q75": 0.47739387696898944,
+      "min": 0.20599305908641818,
+      "max": 2.241757937406545
+     },
+     "BORDO": {
+      "n": 3473,
+      "n_non_definiti": 0,
+      "mediana": 0.6831864380658454,
+      "media": 0.7525269732505732,
+      "q25": 0.5621156640836623,
+      "q75": 0.8502547643135009,
+      "min": 0.2885718352095864,
+      "max": 2.6188991533230985
+     },
+     "VUOTO": {
+      "n": 8123,
+      "n_non_definiti": 11,
+      "mediana": 0.8117284363791637,
+      "media": 0.8945686112067353,
+      "q25": 0.696611687483176,
+      "q75": 0.9952948039272649,
+      "min": 0.3864526395805784,
+      "max": 2.894758084203987
+     }
+    },
+    "b_campione": {
+     "passo_campione": 29,
+     "n": 190826,
+     "quantili": [
+      0.03740616669216967,
+      0.21678500626624228,
+      0.5348229581638225,
+      1.1088781272444095,
+      2.401662043243832
+     ],
+     "max": 9.067998966684586
+    },
+    "c_coerenza_per_classe": {
+     "MATERIA": {
+      "n": 1217,
+      "n_non_definiti": 0,
+      "mediana": 0.0395379002629478,
+      "media": 0.04445333973614718,
+      "q25": 0.025204838057724395,
+      "q75": 0.057902014961572684,
+      "min": 0.0008449028616794825,
+      "max": 0.22985509931407644
+     },
+     "BORDO": {
+      "n": 3473,
+      "n_non_definiti": 0,
+      "mediana": 0.04482770797991639,
+      "media": 0.04994630788928255,
+      "q25": 0.03068760636643222,
+      "q75": 0.06357134489963735,
+      "min": 0.002960187942716987,
+      "max": 0.23014759765808615
+     },
+     "VUOTO": {
+      "n": 8123,
+      "n_non_definiti": 11,
+      "mediana": 0.044565004525684786,
+      "media": 0.052945576820069014,
+      "q25": 0.029720006225441367,
+      "q75": 0.06692214633438479,
+      "min": 0.001219341203396854,
+      "max": 0.34287289738398236
+     }
+    },
+    "c_modulo_R_per_classe": {
+     "MATERIA": {
+      "n": 1217,
+      "n_non_definiti": 0,
+      "mediana": 22.803266917898174,
+      "media": 30.484070347939735,
+      "q25": 13.972825895370876,
+      "q75": 38.16838136315894,
+      "min": 0.3128498960330212,
+      "max": 419.9584187832419
+     },
+     "BORDO": {
+      "n": 3473,
+      "n_non_definiti": 0,
+      "mediana": 45.38790990352239,
+      "media": 53.369261033462244,
+      "q25": 29.744200652126885,
+      "q75": 67.26196340005912,
+      "min": 3.5565952890985786,
+      "max": 407.1465463017075
+     },
+     "VUOTO": {
+      "n": 8123,
+      "n_non_definiti": 11,
+      "mediana": 43.14663269727098,
+      "media": 51.14458294264486,
+      "q25": 28.520704952564405,
+      "q75": 64.4278299773235,
+      "min": 0.9009001243084689,
+      "max": 466.29869074116453
+     }
+    },
+    "d_cos_con_nb_per_classe": {
+     "MATERIA": {
+      "n": 1217,
+      "n_non_definiti": 0,
+      "mediana": -0.04610956206322797,
+      "media": -0.033760792739001774,
+      "q25": -0.5644497603354277,
+      "q75": 0.46116072691157695,
+      "min": -0.9975571346844059,
+      "max": 0.99812163200277
+     },
+     "BORDO": {
+      "n": 3473,
+      "n_non_definiti": 0,
+      "mediana": 0.009286474973583196,
+      "media": 0.004063998488877977,
+      "q25": -0.4898103698095149,
+      "q75": 0.4925145876618257,
+      "min": -0.9993113931662588,
+      "max": 0.9996198034427132
+     },
+     "VUOTO": {
+      "n": 8123,
+      "n_non_definiti": 11,
+      "mediana": -0.007492259282216267,
+      "media": -0.00778416952738272,
+      "q25": -0.5058584320085323,
+      "q75": 0.4812554799237705,
+      "min": -0.9997664248628365,
+      "max": 0.9997469758944917
+     }
+    },
+    "d_frazione_oltre_mezzo_per_classe": {
+     "MATERIA": {
+      "n": 1217,
+      "n_non_definiti": 0,
+      "mediana": 1.0,
+      "media": 0.5069843878389483,
+      "q25": 0.0,
+      "q75": 1.0,
+      "min": 0.0,
+      "max": 1.0
+     },
+     "BORDO": {
+      "n": 3473,
+      "n_non_definiti": 0,
+      "mediana": 0.0,
+      "media": 0.49323351569248486,
+      "q25": 0.0,
+      "q75": 1.0,
+      "min": 0.0,
+      "max": 1.0
+     },
+     "VUOTO": {
+      "n": 8123,
+      "n_non_definiti": 11,
+      "mediana": 0.0,
+      "media": 0.49297337278106507,
+      "q25": 0.0,
+      "q75": 1.0,
+      "min": 0.0,
+      "max": 1.0
+     }
+    },
+    "d_caso_nullo": {
+     "media_attesa": 0.0,
+     "frazione_oltre_mezzo_attesa": 0.5,
+     "legge": "coseno fra due assi indipendenti in 3D: UNIFORME su [-1,1]"
+    },
+    "e_stabilita": {
+     "passo_precedente": 229,
+     "nodi_confrontabili": 12811,
+     "nodi_senza_R": 9,
+     "angolo_gradi_per_classe": {
+      "MATERIA": {
+       "n": 1217,
+       "n_non_definiti": 0,
+       "mediana": 0.5596134882513895,
+       "media": 0.9183899969630765,
+       "q25": 0.3133385804694475,
+       "q75": 0.9595651118888692,
+       "min": 0.01780774253091301,
+       "max": 129.48165913133224
+      },
+      "BORDO": {
+       "n": 3473,
+       "n_non_definiti": 0,
+       "mediana": 0.6365285193182056,
+       "media": 0.9105245814653853,
+       "q25": 0.3558501748858642,
+       "q75": 1.1057763268246255,
+       "min": 0.003343031144492124,
+       "max": 19.92004249702531
+      },
+      "VUOTO": {
+       "n": 8121,
+       "n_non_definiti": 9,
+       "mediana": 0.816443593842318,
+       "media": 1.1900017994837953,
+       "q25": 0.4498136171012646,
+       "q75": 1.412823629368184,
+       "min": 0.003980715849700193,
+       "max": 108.82617411780156
+      }
+     },
+     "riferimento_perc_geom_frazione_cambiata_per_classe": {
+      "MATERIA": {
+       "n": 1217,
+       "n_non_definiti": 0,
+       "mediana": 0.0,
+       "media": 0.0,
+       "q25": 0.0,
+       "q75": 0.0,
+       "min": 0.0,
+       "max": 0.0
+      },
+      "BORDO": {
+       "n": 3473,
+       "n_non_definiti": 0,
+       "mediana": 0.0,
+       "media": 0.0,
+       "q25": 0.0,
+       "q75": 0.0,
+       "min": 0.0,
+       "max": 0.0
+      },
+      "VUOTO": {
+       "n": 8121,
+       "n_non_definiti": 0,
+       "mediana": 0.0,
+       "media": 0.00012313754463735992,
+       "q25": 0.0,
+       "q75": 0.0,
+       "min": 0.0,
+       "max": 1.0
+      }
+     },
+     "riferimento_perc_geom_frazione_cambiata": 7.805791897588011e-05
     }
    }
   },

@@ -564,6 +564,26 @@ def main(argv):
              n4(e["nodi_senza_R"]),
              pct(e.get("riferimento_perc_geom_frazione_cambiata"))))
     A("")
+    # ### ⚠ **UN AVVERTIMENTO CHE IL DATO IMPONE, e che non avevo previsto:** ai
+    #   passi campionati `perc_geom` puo' essere PIU' QUIETO della media di corsa, e
+    #   allora il confronto di `(e)` ### **sembrerebbe piu' favorevole al riferimento di
+    #   quanto la corsa giustifichi.** ### **Si misura e si dichiara**, invece di lasciare
+    #   che il lettore lo prenda per la norma.
+    qui = [(k, (pp["misure"].get(str(k)) or {}).get("e_stabilita"))
+           for k in passi_m if k > 1]
+    qui = [(k, e["riferimento_perc_geom_frazione_cambiata"]) for k, e in qui
+           if e and e.get("riferimento_perc_geom_frazione_cambiata") is not None]
+    if qui and fg:
+        media = sum(fg) / len(fg)
+        A("> ### ⚠ **E I PASSI CAMPIONATI NON SONO PASSI MEDI, per il RIFERIMENTO:** "
+          "su tutta la corsa `perc_geom` cambia ### **%s** dei nodi per passo, mentre ai "
+          "passi della misura cambia %s. ### **Il confronto di `(e)` va letto sapendo "
+          "questo**: ai quattro passi scelti il riferimento e' ### **%s** della sua "
+          "media."
+          % (pct(media), ", ".join("`%d`: %s" % (k, pct(x)) for k, x in qui),
+             "piu' QUIETO" if sum(x for _k, x in qui) / len(qui) < media
+             else "piu' MOSSO"))
+        A(">")
     A("> ### **L'ANGOLO E IL RIFERIMENTO MISURANO DUE COSE DIVERSE, e lo dico perche' non "
       "si confondano:** l'angolo e' ### **CONTINUO** *(di quanto ruota un asse)*, la "
       "frazione di `perc_geom` e' ### **DISCRETA** *(quanti nodi cambiano valore)*. "
@@ -602,10 +622,14 @@ def main(argv):
     else:
         ok = all(x["a_nodi_sopra_1"] == 0 and x["c_diversi_da_perc_geom"] == 0 for x in v)
         pr.append(("`M1`", "### **`--chi-core` INERTE** per il dipolo",
-                   "`(a)` e `(c)` valgono `0` su %d passi su %d; il massimo del rapporto "
-                   "sale da `%s` a `%s`"
-                   % (len(v), len(dopo), n4(v[0]["b_rapporto_max"], 6),
-                      n4(v[-1]["b_rapporto_max"], 6)),
+                   "`(a)` e `(c)` valgono `0` su %d passi su %d; il massimo del "
+                   "rapporto %s: %s"
+                   % (len(v), len(dopo),
+                      ("### **SALE**" if v[-1]["b_rapporto_max"] > v[0]["b_rapporto_max"]
+                       else "### **SCENDE**"
+                       if v[-1]["b_rapporto_max"] < v[0]["b_rapporto_max"]
+                       else "resta uguale"),
+                      ", ".join("`%s`" % n4(x["b_rapporto_max"], 6) for x in v)),
                    "### \u2714 **CONFERMATA**" if ok else
                    "### \u26d4 **SMENTITA**"))
 

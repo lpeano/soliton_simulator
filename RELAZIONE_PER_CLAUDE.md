@@ -7775,3 +7775,100 @@ piu': si misura.**
 
 > ### ⛔ **LA MISURA VA RIGIRATA DA CAPO:** i `230` passi di prima si sono fermati al `229`,
 > e ### **il passo `230` non c'e'.** ### **Il referto si scrive solo a corsa completa.**
+
+---
+
+## 2026-10-06 — **IL REFERTO DI `M1`-`M4`: i due candidati al verso oscillano PIU' del verso di oggi**
+
+**La corsa e' completa:** ### **`230` passi su `230`**, un braccio, ### **sola lettura**,
+simulatore `b8c21049`, ### **zero differenze** dall'argv del driver su `82` booleani.
+*(La prima corsa si era fermata al `229`: `644a573` il fallimento, `45f6bd4` la cura.)*
+
+> ### ⛔ **QUESTO REFERTO NON SCEGLIE NIENTE**, e lo dice il mandato. ### **Le
+> raccomandazioni restano quelle di `doc/GEOM_SENZA_VERSO.md`: non ne aggiungo e non ne
+> ritiro nessuna.**
+
+### ① **IL NUMERO CHE PESA DI PIU', ed e' il criterio che Luca ha chiesto di pesare**
+
+| sull'intera corsa | frazione di nodi (o archi) che cambia **per passo** |
+|---|--:|
+| `A` *(segno di `Σ tw` sul nodo)* | ### **`0.72 %`** |
+| `D` *(segno di `tw` sull'arco)* | ### **`0.82 %`** |
+| ### **`perc_geom`** — *il verso di OGGI* | ### **`0.22 %`** |
+
+> ### ⛔ **ENTRAMBI I CANDIDATI OSCILLANO PIU' DEL RIFERIMENTO:** `A` di ### **`3.3`
+> volte**, `D` di ### **`3.7`.** ### **E col dipolo che entra COME VARIAZIONE, un verso che
+> oscilla di piu' INIETTA PIU' SPINTA, non meno.** ### **E' un numero, non una
+> raccomandazione.**
+
+### ② `M1` — **`--chi-core` E' INERTE PER IL DIPOLO, e il criterio era fissato prima**
+
+`(a) = 0` e `(c) = 0` a ### **tutti e quattro** i passi. E `(b)`, che il mandato pretende
+anche con `(a) = 0`, dice ### **quanto margine c'e'**: il massimo del rapporto
+### **SCENDE** — `0.0932`, `0.0620`, `0.0483` — e il massimo assoluto e' ### **`10.7` volte
+sotto la soglia.** ### **Non e' <<appena sotto>>: e' lontano.**
+
+### ③ `M2` — **`c_k` separa MATERIA da VUOTO, e la separazione CALA**
+
+`AUC` ### **`0.9992` → `0.9966` → `0.9861` → `0.9023`** *(`0.5` = nessuna separazione)*, e
+la mediana di `c_k` in MATERIA scende da `0.79` a `0.48`.
+
+### ④ `M3-C` — **l'olonomia non nulla CRESCE, e la base NON cambia MAI**
+
+| | passo `1` | `50` | `150` | `230` |
+|---|--:|--:|--:|--:|
+| cicli con olonomia ### **non nulla** | `47.66 %` | `59.77 %` | `66.80 %` | ### **`73.83 %`** |
+| `\|k\|` max | `2` | `3` | `3` | ### **`4`** |
+| ### **la base cambiata** | `0.00 %` | `0.00 %` | `0.00 %` | ### **`0.00 %`** |
+
+> ### ⛔ **LA PREVISIONE DEL GUARDIANO — *«zero sulla maggior parte dei cicli»* — NON E'
+> CONFERMATA, E SEMPRE DI MENO:** a `230` passi ### **tre quarti** dei cicli della base
+> hanno olonomia diversa da zero.
+>
+> ### ⛔ **E LA BASE NON CAMBIA NEMMENO CON LE NASCITE** *(`0.00 %` a tutti i passi, anche
+> al `230` dove nascono nodi)*. ### **Questo e' descrittivo, e non lo commento oltre** —
+> ma e' il tipo di fatto che riguarda l'obiezione `(a)`: i `256` cicli sono quelli degli
+> archi ### **di indice piu' basso**, e cio' che succede altrove ### **non li tocca.**
+>
+> ### ⚠ **E IL SEGNO DELL'OLONOMIA DISCORDA FRA LE DUE VIE SU `189` CICLI SU `189`** al
+> passo `230` — ### **tutti quelli con olonomia non nulla** — mentre il ### **MODULO**
+> concorda a ### **`2.1e-14`.** ### **Due routine DEL SIMULATORE scelgono versi opposti
+> sullo STESSO ciclo.**
+
+### ⑤ `M4` — **le plaquette: `R_k` e' STABILE, e NON e' legato allo spin**
+
+| | |
+|---|---|
+| `(a)` | ### **`5534011`** plaquette, ### **`1297` per nodo**; il conto ### **indipendente COINCIDE a tutti i passi**; ### **`4.9 s`** per passo |
+| `(b)` | `\|Σ tw\|` mediana ### **`0.0875`** al passo `50` |
+| `(c)` | la coerenza e' ### **`0.029`-`0.045`**, ### **vicinissima al disordine**, e ### **UGUALE in tutte e tre le classi** |
+| `(d)` | il coseno con `_nb` sta ### **dentro il caso nullo**: `2.04 σ` e `2.49 σ` contro una soglia ### **Bonferroni** di `2.99 σ` su `18` confronti |
+| `(e)` | l'angolo mediano e' ### **`0.40`-`1.50` gradi**: ### **`R_k` e' STABILE** |
+
+> ### ⛔ **`(d)` E' LA VOCE CHE RIGUARDA `P2`:** se `R_k` e l'asse di Bloch fossero legati,
+> *«rotazione concorde o discorde con lo spin»* avrebbe un contenuto. ### **Misurato, sono
+> indistinguibili da indipendenti.** ### **Il che NON chiude `P2`** — chiude solo
+> l'argomento che lo rendeva attraente ### **in questa scena.** ### **La decisione resta
+> di Luca.**
+
+### ⚠ **E DUE MIE PREVISIONI SONO SMENTITE, su sette**
+
+| | esito |
+|---|---|
+| `M3-C` *(la base cambia molto con le nascite)* | ### ⛔ **SMENTITA**: `0.00 %` anche con le nascite |
+| `M4(e)` *(`R_k` ruota di molto)* | ### ⛔ **SMENTITA**: ### **`0.40`-`1.50` gradi**, non decine |
+
+> ### **`5` confermate, `2` smentite, `0` non decidibili** — e ### **la tavola la calcola
+> lo script**, non la mia buona volonta'. ### **Le smentite sono il pezzo che vale.**
+
+### ⛔ **E UNA MIA FRASE DEL COMMIT `45f6bd4` ERA FALSA, la correggo qui**
+
+Avevo scritto che la corsa nuova avrebbe ### **sovrascritto `verso.txt`.** ### **Non lo
+fa:** `_misura_plaquette` scrive i ### **due json** ma ### **un solo `.txt`**, e
+`verso.txt` sul disco e' ancora quello del collaudo a `2` passi. ### **Non lo committo e
+non lo cancello**, e ### **non correggo lo strumento adesso**: cambiarne il blob dopo la
+corsa renderebbe il dato ### **non attribuibile** al blob che l'inventario registra. ### **Il
+log della corsa e' `plaquette.txt`** *(con la dichiarazione `P5` intera)*.
+
+> ### ⛔ **LA SCELTA FRA `A`/`B`/`C`/`D`/`P`, FRA `P1`/`P2`/`P3`, E SE APRIRE `U1` PER
+> `chiralita_core_locale`, SONO DECISIONI DI LUCA.**
