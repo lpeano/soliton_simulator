@@ -72,6 +72,7 @@ commit**: cosi' non se ne accumulano di invisibili.)*
 | `csv/_test_fork/_referto_crescita.py|H-P5` | non importa il simulatore e non lo fa girare. Legge il `crescita.json` di una |
 | `csv/_test_fork/_referto_fisso.py|H-P5` | non importa il simulatore e non lo fa girare. Legge i `json` di corse che |
 | `csv/_test_fork/_referto_lunga.py|H-P5` | non importa il simulatore e non lo fa girare. Legge il `json` di una corsa che |
+| `csv/_test_fork/_referto_mzd.py|H-P5` | non importa il simulatore e non lo fa girare. Legge i `json` di corse che hanno |
 | `csv/_test_fork/_referto_perm.py|H-P5` | non importa il simulatore e non lo fa girare. Legge i `json` di corse che |
 | `csv/_test_fork/_referto_soglia.py|H-P5` | non importa il simulatore e non lo fa girare. Legge il `soglia.json` di una |
 | `csv/_test_fork/_referto_tetto.py|H-P5` | non importa il simulatore e non lo fa girare. Legge il `json` di una corsa che |
@@ -86,5 +87,5 @@ commit**: cosi' non se ne accumulano di invisibili.)*
 | `csv/_test_fork/_z43_tempo_proprio.py|H-P3` | la scena passa TUTTA dal CLI (`nmasse` e `sep` da `argv`), e la |
 
 ```
-esenzioni dichiarate   79
+esenzioni dichiarate   80
 ```
