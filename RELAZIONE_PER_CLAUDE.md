@@ -7278,3 +7278,66 @@ dipolo**; altrimenti si riporta dove e quanto agisce.
 **E i diagnostici `_chi_core_*` NON si leggono** *(verificato nel codice e nel docstring)*: il
 ramo `geom=True` scrive ### **solo `_chi_geom_nodi`**, gli altri tre li scrive ### **il ramo
 `geom=False`** — ### **leggerli darebbe un numero giusto che risponde alla domanda sbagliata.**
+
+---
+
+## 2026-10-06 — **`MASSA-CRITICA-LOCALE`: la direzione di Luca, la proposta del guardiano, e TRE fatti dal codice che la cambiano**
+
+*(Registrazione. ### **Nessun codice, nessuna corsa.** Il sigillo di «via il `0.3`»
+### **sta girando** e questo commit non lo tocca; il simulatore resta `30e18cdd`.)*
+
+### ① LA DIREZIONE DI LUCA, **registrata come SUA**
+
+> *«### **Non voglio un valore calcolato, voglio un valore dinamico che dipende dalla dinamica
+> del sistema, nel luogo, la dinamica locale.**»*
+
+La materia sta fra ### **due riferimenti LOCALI**: ### **sotto** lo stato del vuoto del nodo
+*(`VUOTO-LOCALE-DETERMINISTICO`)*, ### **sopra** una massa critica che fa da ### **pressione di
+degenerazione** e ### **deve dipendere da `λ`** — *come in un buco nero, dove la materia
+collassa fino a un punto e poi interviene una pressione di degenerazione.*
+
+### ② LA PROPOSTA DEL GUARDIANO — ### ⛔ **NON DECISA**
+
+La ### **coerenza locale** `c_k = |ψ_k|² / (Σ_j |W_kj|·amp)²`: ### **locale**,
+### **dinamica**, dipende da `λ` per la portata di `W`, e il pieno ### **`c = 1` e' un limite
+matematico, non un numero scelto.**
+
+### ⛔ ③ TRE FATTI CHE HO VERIFICATO SUL CODICE, **e il terzo cambia la proposta**
+
+| | il fatto | la conseguenza |
+|---|---|---|
+| **①** | `amp = SCALA_AMP` e' ### **uno SCALARE costante** | non c'e' nessun `amp_j`: il denominatore e' ### **`amp·Σ_j |W_kj|`** |
+| **②** | `_mat` ### **non ha diagonale** | `c_k` misura la coerenza del ### **VICINATO vista da `k`**, e ### **la fase di `k` non entra nel suo `ψ_k`** |
+| **③** | ### ⛔ **`satura` cambia il modulo** *(monotona, satura a `1/GAMMA`)* | un numeratore ### **saturato** diviso un denominatore ### **nudo** rende ### **`c = 1` IRRAGGIUNGIBILE** dove `Σ|W|·amp > ~1/GAMMA` — ### **e la proprieta' che rende la proposta interessante si perde** |
+
+> ### ✔ **LA CORREZIONE: anche il denominatore va saturato** — `D_k = satura(amp·Σ_j |W_kj|)`.
+> ### **`satura` e' monotona e iniettiva in `|f|`**, quindi il rapporto vale `1`
+> ### **se e solo se le fasi sono tutte allineate**: ### **il limite matematico torna
+> ESATTO.** E costa poco: ### **`|ψ_k|` e' gia' memorizzato.**
+
+**E il difetto `(a)` del guardiano lo confermo PIU' forte:** con ### **un solo vicino**,
+`|F_k|` e' ### **esattamente** il denominatore, quindi ### **`c = 1` SEMPRE, anche con la
+saturazione.** ### **`c` da solo non basta.**
+
+### ④ L'ORDINE, nella coda
+
+`ENERGIA-NON-DEFINITA` → `VUOTO-LOCALE-DETERMINISTICO` **insieme a** `CS-LAMBDA-GLOBALE`
+*(il ### **pavimento**)* → la nuova legge della soglia *(il ### **soffitto**, che risolve `U1`
+### **legge per legge**)*.
+
+> ### ⛔ **Scrivere il soffitto prima del pavimento obbligherebbe a usare oggi il `Λ` globale e
+> a cambiarlo dopo: ### **una cura in due tempi.**
+
+### ⑤ E LA MISURA DI `c_k` SI AGGIUNGE ALLA CORSA CORTA DEL LAVORO `4`
+
+Stessi passi, ### **sola lettura**, coi criteri fissati ora: ### **`(a)`** la distribuzione di
+`c_k` ### **e del denominatore**, per classe; ### **`(b)`** per ### **numero di vicini**, cosi'
+il difetto del nodo isolato ### **si vede invece di essere ricordato**; ### **`(c)`**
+l'### **`AUC`** `MATERIA` contro `VUOTO`. ### **E' una misura, non una legge: non decide
+niente.**
+
+**La voce e' `MASSA-CRITICA-LOCALE`** — ### **cercata prima: non ne esisteva una equivalente**
+— collegata a `U1`, `VUOTO-LOCALE-DETERMINISTICO`, `ENERGIA-NON-DEFINITA`, `MCRIT-RICALCOLO` e
+alla candidata `(C)` del registro, che dice gia' la cosa decisiva: ### **«un'esclusione da' una
+DENSITA', non una lunghezza: il passaggio densita' → `LAM` va DERIVATO».** ### **E' il ponte
+che questa voce deve costruire.**

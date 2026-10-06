@@ -2695,3 +2695,127 @@ quando non misura, cosi' il falso-zero sarebbe ### **impossibile invece che da r
 ### **un caso di collaudo lo pretende.**
 
 ### **Collegata a `CHI-BASC-DESCRIZIONE`**, che viene dalla stessa misura.
+
+---
+
+## `MASSA-CRITICA-LOCALE` — **la soglia di collasso deve essere LOCALE e DINAMICA**
+
+*(Aperta il 2026-10-06 sera. ### ⛔ **DIREZIONE DI LUCA**, dal suo ragionamento col
+guardiano. ### **Nessun codice, nessuna misura: una registrazione.**)*
+
+## ① LA DIREZIONE DI LUCA, **registrata come SUA**
+
+> *«**Non voglio un valore calcolato, voglio un valore dinamico che dipende dalla
+> dinamica del sistema, nel luogo, la dinamica locale.**»*
+
+Vale per la soglia che sostituira' ### **`massa_critica_collasso`** *(`U1`)*.
+
+**LA MATERIA STA FRA DUE RIFERIMENTI LOCALI:**
+
+| | |
+|---|---|
+| ### **SOTTO** | lo ### **stato del vuoto del nodo** — `VUOTO-LOCALE-DETERMINISTICO`, proposta di Luca del 2026-10-02: ### **gradi di liberta' del vuoto per nodo**, scambio fase ↔ vuoto ### **deterministico e reversibile**, conduzione lungo gli archi, ### **nessuna temperatura obiettivo** |
+| ### **SOPRA** | una ### **<<massa critica>>** che fa da ### **PRESSIONE DI DEGENERAZIONE**, e ### **deve dipendere da `λ`** |
+
+> **L'idea di Luca:** *come in un buco nero la materia collassa fino a un punto e poi
+> interviene una ### **pressione di degenerazione**; qui dev'essere ### **legata a `λ`.***
+
+## ② LA PROPOSTA DEL GUARDIANO — ### ⛔ **NON DECISA**
+
+**La coerenza locale:**
+
+```
+c_k = |psi_k|^2 / ( somma_j |W_kj| * amp )^2
+```
+
+cioe' ### **il campo del nodo diviso il MASSIMO che quel vicinato potrebbe dare se tutti
+fossero in fase.** E' ### **locale**, ### **dinamica**, dipende da `λ` attraverso la
+### **portata di `W`** e la distanza minima, e il pieno ### **`c = 1` e' un LIMITE
+MATEMATICO, non un numero scelto.** ### **Il riferimento non sarebbe piu' la mediana globale**
+di `massa_critica_adattiva`.
+
+## ③ ⛔ TRE FATTI CHE HO VERIFICATO SUL CODICE DI OGGI, **e uno cambia la proposta**
+
+*(`calcola_psi` `:6268`, `satura`, `_mat`. ### **Letti, non assunti**, come il mandato
+chiede.)*
+
+**① LA FORMA VERA:**
+
+```
+amp = SCALA_AMP
+F   = self._mat(w) @ (amp * np.exp(1j * self.phi))
+psi = self.satura(F)
+```
+
+> ### ⚠ **`amp` E' UNO SCALARE COSTANTE** *(`SCALA_AMP`)*, ### **non un `amp_j` per
+> nodo:** il denominatore e' ### **`amp · Σ_j |W_kj|`**, e la proposta va scritta
+> cosi'.
+
+**② `_mat` NON HA DIAGONALE:** la somma e' ### **sui soli VICINI**, e ### **la fase del
+nodo `k` NON entra nel suo `psi_k`.**
+
+> ### **Quindi `c_k` misura la coerenza del VICINATO VISTA DA `k`, non del nodo.** Non e' un
+> difetto — ### **e' una cosa da sapere prima di leggerla.**
+
+**③ ⛔ E LA SATURAZIONE CAMBIA IL DENOMINATORE.**
+
+`satura(f) = f / (1 + GAMMA·√(|f|² + 1e-9))` e' ### **monotona crescente** in
+`|f|` e ### **satura a `1/GAMMA`.**
+
+> ### ⛔ **UN NUMERATORE SATURATO DIVISO UN DENOMINATORE NUDO RENDE `c = 1`
+> IRRAGGIUNGIBILE** dovunque `Σ_j |W_kj|·amp` superi `~1/GAMMA` — e
+> ### **la proprieta' che rende la proposta interessante** *(<<il pieno e' un limite
+> matematico>>)* ### **si perde.**
+
+### ✔ **LA CORREZIONE:** il denominatore dev'essere
+
+```
+D_k = satura( amp * somma_j |W_kj| )
+c_k = |psi_k|^2 / |D_k|^2
+```
+
+> ### ✔ **Poiche' `satura` e' MONOTONA e INIETTIVA in `|f|`, il rapporto vale `1` SE E
+> SOLO SE `|F_k| = amp·Σ_j |W_kj|`, cioe' ### **se e solo se le fasi sono tutte
+> allineate.** ### **Il limite matematico TORNA ESATTO**, e costa poco: ### **`|psi_k|` e'
+> gia' memorizzato**, va calcolato solo `D_k`.
+
+## ④ I DUE DIFETTI DICHIARATI DAL GUARDIANO, **e il primo lo confermo PIU' FORTE**
+
+| | il difetto | la mia verifica |
+|---|---|---|
+| **`(a)`** | un nodo con ### **un solo vicino** ha `c = 1` per costruzione | ### ✔ **CONFERMATO, e vale ANCHE con la saturazione:** con un vicino `|F_k| = |W_kj|·amp` e' ### **esattamente** il denominatore, quindi ### **`c = 1` SEMPRE.** ### **`c` da solo NON BASTA:** serve anche la ### **QUANTITA' di campo in gioco** *(il denominatore)*, in una forma ### **da decidere** |
+| **`(b)`** | va letta con lo stato del ### **passo precedente** *(causalita')* | ### ✔ **e vale**: `calcola_psi` e' chiamata ### **piu' volte per passo** *(`CENS-A7`, `_calcpsi_origini`)*, quindi *«lo stato corrente»* non e' un istante unico |
+
+## ⑤ L'ORDINE E LE DIPENDENZE
+
+```
+ENERGIA-NON-DEFINITA          (un'energia definita: il prerequisito)
+        |
+        v
+VUOTO-LOCALE-DETERMINISTICO   insieme a CS-LAMBDA-GLOBALE      <- IL PAVIMENTO
+        |
+        v
+la nuova legge della soglia di collasso                        <- IL SOFFITTO
+        (e risolve U1, LEGGE PER LEGGE)
+```
+
+> ### ⛔ **SCRIVERE IL SOFFITTO PRIMA DEL PAVIMENTO OBBLIGHEREBBE A USARE OGGI IL
+> `Λ` GLOBALE E A CAMBIARLO DOPO: una cura in DUE TEMPI.**
+
+**E la decisione di Luca su `U1` resta:** ### **si ricava di nuovo o si toglie, LEGGE PER
+LEGGE, mai un numero ritarato.**
+
+## ⑥ IL COLLEGAMENTO CON LA CANDIDATA `(C)` DEL REGISTRO
+
+`doc/REGISTRO_FISICA.md:408` — *«un'esclusione alla Pauli sugli spinori, ### **da
+derivare**»* — dice gia' la cosa decisiva:
+
+> *«Un'esclusione da' una ### **DENSITA'** massima, ### **non una lunghezza**: il
+> passaggio ### **densita' → `LAM`** va ### **DERIVATO, non postulato**.»*
+
+> ### ✔ **ED E' ESATTAMENTE IL PONTE CHE QUESTA VOCE DEVE COSTRUIRE:** Luca chiede una
+> pressione di degenerazione ### **legata a `λ`**, e `(C)` dice che una densita'
+> ### **non da' una lunghezza da sola.** ### **Il passaggio e' il lavoro.**
+
+### ⛔ **NON DECISA, NON INIZIATA.** Collegata a `U1`, `VUOTO-LOCALE-DETERMINISTICO`,
+`ENERGIA-NON-DEFINITA`, `MCRIT-RICALCOLO` e alla candidata `(C)`.
