@@ -6068,3 +6068,21 @@ e **mai** per `Bperm-id`.
 *(`472b0e6`, punto `2`)*: l'**impronta** delle soglie non si confronta con `Bp`, perche' `Bp`
 *(`dd86933`)* viene da uno strumento che non la registrava. ### **La prova che conta resta il
 multiinsieme prima/dopo, calcolato DENTRO la corsa.**
+
+
+---
+
+## 2026-10-06 — **SPEGNIMENTO ANNUNCIATO: il punto di ripresa**
+
+Luca spegne il computer e lo riaccende fra circa mezz'ora. ### **Niente da mettere in
+sicurezza, e lo dico invece di inventarmi un gesto:** nessun processo mio in vita
+*(`Get-CimInstance Win32_Process` su `python%` non restituisce **niente**: `Bperm` era chiusa,
+`Bperm-fisso` **non e' mai partito**)*, `git status` ### **pulito**, `HEAD` `d97ac64`
+### **coincidente con `origin/fork-su2`**. ### **Nessuna uscita parziale esiste, quindi non ce
+n'e' nessuna da lasciare fuori.**
+
+Il punto di ripresa sta in **`doc/CODA_2026-10-06.md`**: cosa e' finito *(la catena di
+`Bperm`, sei commit)*, da dove si riparte *(il braccio **`Bperm-fisso`**, estendendo
+`csv/_test_fork/_mitosi_soglia_grad.py` blob **`b399adb2`**, collaudo `56/56`)*, e la coda
+*(poi il **tetto della torsione**, con le verifiche **(b)** e **(c)** sul codice ancora da
+chiudere -- la **(a)** e' fatta: `κ = 1` esattamente)*.
