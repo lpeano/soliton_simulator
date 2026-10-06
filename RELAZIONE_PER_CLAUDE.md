@@ -7461,3 +7461,67 @@ Porta la misura a ### **tre bracci** *(`3π`, `2π + |dipolo|`, `2π` fissa)*, `
 
 **E nella coda:** ### **`κ` ESCE dalle decisioni aperte** *(fatto e chiuso in `35044cc`)*, e
 la soglia diventa ### **«misura a tre bracci dopo `GEOM-SENZA-VERSO`, principio deciso».**
+
+---
+
+## 2026-10-06 — **LAVORO 4: la proposta di progetto per `GEOM-SENZA-VERSO`** *(nessun codice di fisica)*
+
+`doc/GEOM_SENZA_VERSO.md`, annotazione *(`par.8`)*, `301` righe.
+
+### ① IL MECCANISMO E' CONFERMATO, **non e' piu' un sospetto**
+
+`27c10bd`: il ### **`97`-`99 %`** della spinta oltre `π` passa dal ### **dipolo**, e la
+`Spearman` coi cambi di `chi_torsione` e' ### **`0.9090`** / `0.6961`.
+### ⚠ **La gamba solida e' la FRAZIONE, non la correlazione** *(serie bucata)*.
+
+### ⛔ ② `U1` ENTRA NEL DIPOLO, **e la misura e' il PRIMO PASSO di tutto**
+
+`chiralita_core_locale` prende `rho_c` da `massa_critica_adattiva`, che ### **chiama la stessa
+`massa_critica_collasso`**: ### **il ramo adattivo non sfugge a `U1`.**
+
+> ### ⛔ **E IL MIO <<se la soglia e' `48×` irraggiungibile allora e' un no-op>> ERA UN NON
+> SEQUITUR**, corretto in `1f1d0d8`: ### **il `48×` e' un conto in NODI, il test e' fra
+> DENSITA'.** ### **Si misura.**
+
+**La misura, col criterio fissato prima:** ai passi `1`/`50`/`150`/`230`, ### **sola lettura**,
+`(a)` i nodi con `rapporto > 1`, `(b)` il ### **massimo** di `rapporto`, `(c)` gli elementi di
+`_chi_geom_nodi` diversi da `perc_geom`. ### **`(a) = 0` E `(c) = 0` ⟹ `--chi-core` inerte.**
+### **E `(b)` serve anche se `(a)` e' zero.**
+
+### ③ QUATTRO OPZIONI, e il CENSIMENTO dice dov'e' il problema
+
+> ### ⛔ **TUTTO CIO' CHE HA UN VERSO NEL CODICE E' PER CICLO** *(`_base_cicli_topologici`,
+> `circolazione_topologica`, `olonomia_lift_ciclo`)*, **e `perc_geom` e' per NODO.**
+> ### **Il passaggio ciclo → nodo E' la legge nuova**, non un dettaglio.
+
+| | il verso da | locale? | e con la legge curata? |
+|---|---|---|---|
+| `A` | `sign(Σ tw)` sugli archi del nodo | ✔ | ### ⛔ **il piu' instabile: ogni cambio inietta `±π`** |
+| `B` | la circolazione sui cicli del nodo | ⚠ | piu' stabile |
+| `C` | l'### **olonomia di fase**, gia' calcolata | ⚠ | ### ✔ **la piu' stabile: e' un INVARIANTE** |
+| `D` | ### **si toglie il passaggio per NODO** | ✔ | ### ✔ **niente piu' salti: variazione CONTINUA** |
+
+> ### ⛔ **IL CRITERIO CHE LE SEPARA NON E' LA CORRETTEZZA: E' LA STABILITA'.** Il dipolo entra
+> ### **come variazione**, quindi ### **un verso GIUSTO che OSCILLA inietterebbe `±π` come
+> adesso, e la cura non curerebbe niente.**
+
+### ⑥ LA RACCOMANDAZIONE
+
+> ### ✔ **RACCOMANDO LA `C`** *(l'olonomia di fase: ### **invariante**, ### **gia' calcolata**,
+> zero numeri nuovi)*, con la ### **`D`** come alternativa seria *(la piu' `9-ter`: ### **toglie
+> una variabile invece di ripararla**)*, e ### **SCONSIGLIO la `A`** — ### **e' la piu'
+> tentante e la piu' pericolosa: curerebbe il SEGNO e lascerebbe il SALTO.**
+>
+> ### ⛔ **E PRIMA DI SCEGLIERE: la misura `_chi_geom_nodi` vs `perc_geom`.** Se e' un no-op,
+> ### **tre opzioni su quattro cambiano LETTORE.**
+
+**E sull'ordine con `U1`:** ### **prima la misura, poi `U1` per la sola
+`chiralita_core_locale`, poi il verso** — ### **e dichiaro il costo della mia
+raccomandazione:** mette ### **due lavori** davanti alla cura, e se Luca preferisse invertire
+### **basterebbe dichiarare che il risultato si legge come CONFRONTO e non come valore
+assoluto.**
+
+**Piu' la misura di `c_k`** *(`MASSA-CRITICA-LOCALE`)* ### **sulla stessa corsa corta**, coi
+tre criteri fissati prima.
+
+> ### ⛔ **E QUI MI FERMO: la forma esatta della legge e' una decisione di Luca.**
