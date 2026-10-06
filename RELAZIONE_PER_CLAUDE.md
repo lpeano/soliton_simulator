@@ -7730,3 +7730,48 @@ archi fuori convenzione al `229`.**
 > — `+tw` se il verso di percorrenza coincide con `i -> j`, `−tw` altrimenti — e la chiave
 > d'arco diventa ### **canonica `(min, max)`.** ### **Zero numeri nuovi, e un'assunzione
 > IN MENO.**
+
+---
+
+## 2026-10-06 — ✔ **LA CURA: il segno della circolazione si LEGGE dall'arco, e la chiave e' CANONICA**
+
+**Commit a se', come chiede il `par.5`.** La cura ### **non aggiunge niente** *(`9-ter`)*:
+### **toglie un'assunzione.**
+
+| | prima | dopo |
+|---|---|---|
+| la chiave d'arco | `i * BASE + j` | ### ✔ **`min * BASE + max`**: un arco e' la sua ### **coppia NON ORDINATA**, comunque sia scritto |
+| il segno nella circolazione | ### **dedotto** da `i<j`: `tw[uv] + tw[vw] − tw[uw]` | ### ✔ **LETTO dall'arco**: `verso(e, da)` da' `+1` se l'arco e' memorizzato `da -> ...`, `-1` altrimenti |
+| `sign(tw)` per `D` | il segno ### **memorizzato** | ### ✔ **ridotto al verso canonico `min -> max`** |
+| gli archi con `i > j` | ### ⛔ **assunti ZERO, e lo strumento si FERMAVA** | ### ✔ **CONTATI a ogni passo**, e il conto entra nel json e nel referto |
+
+> ### ✔ **LA RIDUZIONE AL LIMITE SI VEDE:** con tutti gli archi `i<j` i primi due versi
+> valgono `+1` e il terzo `-1`, cioe' ### **esattamente la formula vecchia** — e il
+> collaudo lo verifica ### **insieme al fatto che la formula vecchia darebbe `6.0` invece
+> di `2.0`** su un arco ribaltato.
+>
+> ### ⚠ **E LA PROVA GIUSTA RIBALTA DUE COSE INSIEME:** `(i,j)` ### **e il segno di `tw`**,
+> perche' `tw` e' una 1-forma ### **orientata** e quella e' ### **la stessa forma scritta
+> al rovescio.** ### **Ribaltare solo `(i,j)` descriverebbe uno stato DIVERSO**, e una
+> prova cosi' non proverebbe l'invarianza: proverebbe un'altra cosa.
+
+### ⛔ **E IL COLLAUDO HA TROVATO UN RAMO MORTO CHE AVEVO APPENA SCRITTO**
+
+Avevo messo una guardia *«si ferma sui CAPPI (`i == j`), che la chiave canonica non
+distingue»*. ### **Non poteva scattare mai:** il filtro `(ii != jj)` sta ### **prima.**
+
+> ### ⛔ **`A8`: un ramo silenzioso non e' un ramo.** ### ✔ **Ora i cappi si CONTANO e si
+> DICHIARANO** nell'esito, ed e' la ### **stessa esclusione** che fa il simulatore in
+> `_base_cicli_topologici` *(`if a < n and b < n and a != b`)*. ### **Un'esclusione taciuta
+> e' un insabbiamento; una dichiarata non lo e'.**
+
+**COLLAUDO:** ### **`37` casi** per `M1`-`M3` e ### **`36`** per `M4`. ### ⚠ **E un mio
+indice sbagliato l'ha preso il collaudo:** avevo scritto `c1[2]` *(la coppia `(2,3)`)* dove
+serviva `c1[1]` *(la coppia `(1,2)`)*. ### **Un errore nel COLLAUDO, non nel codice.**
+
+**IL REFERTO PORTA IL FATTO CHE HA FERMATO LA CORSA:** gli archi con `i > j` e i cappi
+esclusi, ### **per passo.** ### **Una premessa che e' caduta una volta non si assume mai
+piu': si misura.**
+
+> ### ⛔ **LA MISURA VA RIGIRATA DA CAPO:** i `230` passi di prima si sono fermati al `229`,
+> e ### **il passo `230` non c'e'.** ### **Il referto si scrive solo a corsa completa.**

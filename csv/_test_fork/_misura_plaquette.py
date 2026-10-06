@@ -155,17 +155,31 @@ class Plaquette(object):
         """
         n = int(net.n)
         ii = np.asarray(net.i, np.int64); jj = np.asarray(net.j, np.int64)
+        # ### ⛔ **I CAPPI SI CONTANO PRIMA DI TOGLIERLI, e il collaudo mi ha costretto
+        #   a questo:** avevo messo una guardia che si fermava su `i == j`, ed era un
+        #   ### **RAMO MORTO** -- il filtro qui sotto li toglie ### **prima**, quindi la
+        #   guardia non poteva scattare mai. ### **`A8`: un ramo silenzioso non e' un
+        #   ramo.** ### ✔ **Ora si CONTANO e si DICHIARANO**, ed e' la stessa esclusione
+        #   che fa il simulatore in `_base_cicli_topologici` *(`if a < n and b < n and
+        #   a != b`)*: ### **un'esclusione TACIUTA e' un insabbiamento, una DICHIARATA
+        #   non lo e'.**
+        cappi = int(np.sum(ii == jj))
         m = (ii < n) & (jj < n) & (ii != jj)
         ii, jj = ii[m], jj[m]
         tw = np.asarray(net.tw, float)[m]
         pos = np.asarray(net.pos, float)[:n]
-        # ### ⛔ **L'ENUMERAZIONE ASSUME `i < j`, e NON lo assume: lo VERIFICA.** Se un
-        #   giorno un arco nascesse con `i > j`, le chiavi e i segni sarebbero sbagliati
-        #   ### **in silenzio.**
-        if ii.size and not bool(np.all(ii < jj)):
-            raise SystemExit("[FERMO] ci sono %d archi con `i >= j`: la convenzione su cui "
-                             "poggiano le chiavi e i segni della circolazione NON vale piu'."
-                             % int(np.sum(ii >= jj)))
+        # ### ⛔ **QUI C'ERA UN'ASSUNZIONE, E LA CORSA DEL 2026-10-06 L'HA FATTA SALTARE
+        #   AL PASSO `229`:** lo strumento pretendeva `i < j` su TUTTI gli archi, e si
+        #   fermava. ### ✔ **La guardia ha fatto il suo lavoro** -- ha trovato `9` archi
+        #   fuori convenzione invece di produrre nove circolazioni sbagliate in silenzio
+        #   -- ### ⛔ **ma l'assunzione era MIA, e andava TOLTA invece che difesa.**
+        #   ### ✔ **LA CURA NON AGGIUNGE NIENTE** *(`9-ter`)*: la chiave diventa
+        #   ### **CANONICA `(min, max)`** e il segno della circolazione diventa
+        #   ### **ESPLICITO**, quindi ### **non c'e' piu' niente da assumere.**
+        #   ### ⛔ **E NON RESTA NESSUN RIFIUTO QUI:** i cappi -- che la chiave canonica
+        #   non distinguerebbe -- sono ### **gia' esclusi dal filtro sopra**, e il loro
+        #   numero si ### **DICHIARA** nell'esito.
+        fuori_convenzione = int(np.sum(ii > jj))
         A = sp.csr_matrix((np.ones(ii.size * 2, np.int8),
                            (np.concatenate([ii, jj]), np.concatenate([jj, ii]))),
                           shape=(n, n))
@@ -182,12 +196,13 @@ class Plaquette(object):
         if (int(n) + 1) * int(MV.BASE_CHIAVE) >= 2 ** 62:
             raise SystemExit("[FERMO] `n = %d` e' troppo grande per la base delle chiavi: "
                              "il prodotto traboccherebbe." % n)
-        chiavi = ii * MV.BASE_CHIAVE + jj
+        chiavi = np.minimum(ii, jj) * MV.BASE_CHIAVE + np.maximum(ii, jj)
         ordine = np.argsort(chiavi, kind="stable")
         ch_o, idx_o = chiavi[ordine], ordine
 
         def arco(a, b):
-            """L'indice d'arco di `(a, b)` con `a < b`. ### **`-1` se non esiste.**"""
+            """L'indice d'arco della coppia `(a, b)` con `a < b`, per chiave
+            ### **CANONICA**. ### **`-1` se non esiste.**"""
             k = a * MV.BASE_CHIAVE + b
             p = np.searchsorted(ch_o, k)
             p = np.minimum(p, max(ch_o.size - 1, 0))
@@ -195,6 +210,15 @@ class Plaquette(object):
             fuori = np.full(k.size, -1, np.int64)
             fuori[ok] = idx_o[p[ok]]
             return fuori
+
+        def verso(e, da):
+            """`+1` se l'arco `e` e' memorizzato ### **`da -> ...`**, `-1` se al contrario.
+
+            ### ✔ **E' TUTTA LA CURA:** il segno di `tw` in una circolazione
+            ### **non si deduce da una convenzione, si LEGGE da come l'arco e'
+            memorizzato.**
+            """
+            return np.where(ii[e] == da, 1.0, -1.0)
 
         R = np.zeros((n, 3))
         conta = np.zeros(n, np.int64)
@@ -231,9 +255,14 @@ class Plaquette(object):
                                    % int(np.sum(~buono)))
                 tu, tv, tw_ = tu[buono], tv[buono], tw_[buono]
                 e_uv, e_vw, e_uw = e_uv[buono], e_vw[buono], e_uw[buono]
-            # ### LA CIRCOLAZIONE sul cammino `u -> v -> w -> u`, con `i < j` su ogni arco:
-            #   l'ultimo tratto si percorre `w -> u` quindi ### **si SOTTRAE.**
-            circ = tw[e_uv] + tw[e_vw] - tw[e_uw]
+            # ### LA CIRCOLAZIONE sul cammino `u -> v -> w -> u`, ### **col segno di
+            #   ogni tratto LETTO dall'arco** invece che dedotto da una convenzione.
+            #   ### ✔ **SI RIDUCE ALLA FORMA VECCHIA quando tutti gli archi sono `i<j`:**
+            #   i primi due versi valgono `+1` e il terzo `-1`, cioe'
+            #   `tw[uv] + tw[vw] - tw[uw]`. ### **La riduzione al limite si vede, ed e'
+            #   nel collaudo.**
+            circ = (verso(e_uv, tu) * tw[e_uv] + verso(e_vw, tv) * tw[e_vw]
+                    + verso(e_uw, tw_) * tw[e_uw])
             cr = np.cross(pos[tv] - pos[tu], pos[tw_] - pos[tu])
             nn = np.linalg.norm(cr, axis=1)
             ok = nn > EPS_NORMALE
@@ -309,6 +338,7 @@ class Plaquette(object):
         camp_mod = (np.concatenate(camp_mod) if camp_mod else np.zeros(0))
         camp_cls_v = (np.concatenate(camp_cls_v) if camp_cls_v else np.zeros(0, np.int64))
         return {"n": n, "tot": tot, "degeneri": degeneri, "secondi": secondi,
+                "archi_i_maggiore_j": fuori_convenzione, "cappi_esclusi": cappi,
                 "controllo_indipendente": atteso,
                 "secondi_controllo": secondi_controllo,
                 "R": R, "conta": conta, "somma_mod": somma_mod, "max_mod": max_mod,
@@ -349,6 +379,8 @@ class Plaquette(object):
             "a_plaquette_totali": d["tot"], "a_degeneri": d["degeneri"],
             "a_secondi": round(d["secondi"], 2),
             "a_controllo_indipendente": d["controllo_indipendente"],
+            "a_archi_i_maggiore_j": d["archi_i_maggiore_j"],
+            "a_cappi_esclusi": d["cappi_esclusi"],
             "a_secondi_controllo": round(d["secondi_controllo"], 2),
             "a_per_nodo_per_classe": a,
             "a_nodi_senza_plaquette": int(np.sum(conta == 0)),
@@ -522,18 +554,56 @@ def collaudo():
     prova("degeneri: ### e `conta_ok` e' ZERO li', mentre `conta` e' UNO",
           d2["conta_ok"][0] == 0 and d2["conta"][0] == 1)
 
-    # --- la convenzione `i < j` si VERIFICA
+    # --- ### ⛔ **LA PROVA VECCHIA DICEVA <<un arco con `i > j` FERMA lo strumento>>, E
+    #   LA CORSA DEL 2026-10-06 HA MOSTRATO CHE QUELLO ERA IL DIFETTO, non la cura:**
+    #   al passo `229` c'erano `9` archi fuori convenzione, uno per nascita, e lo
+    #   strumento si fermava. ### ✔ **Adesso NON deve fermarsi, e deve dare LA STESSA
+    #   CIRCOLAZIONE.**
+    #   ### ⚠ **E LA PROVA GIUSTA RIBALTA DUE COSE INSIEME:** `(i,j)` ### **e il segno di
+    #   `tw`**, perche' `tw` e' una 1-forma ORIENTATA e ### **quella e' la STESSA forma
+    #   scritta al rovescio.** Ribaltare solo `(i,j)` descriverebbe uno stato DIVERSO.
+    rr = Rete()
+    rr.n = 5
+    rr.i = r.i.copy(); rr.j = r.j.copy(); rr.tw = r.tw.copy()
+    rr.pos = r.pos.copy(); rr._nb = r._nb.copy(); rr.perc_geom = r.perc_geom.copy()
+    k_inv = 1                                  # l'arco `(0,2)`, che sta nel triangolo
+    rr.i[k_inv], rr.j[k_inv] = r.j[k_inv], r.i[k_inv]
+    rr.tw[k_inv] = -r.tw[k_inv]
+    di = Plaquette().enumera(rr)
+    prova("orientamento: ### un arco scritto al ROVESCIO non ferma piu' lo strumento",
+          di["tot"] == 2)
+    prova("orientamento: ### e lo DICHIARA: un arco con `i > j`",
+          di["archi_i_maggiore_j"] == 1 and d["archi_i_maggiore_j"] == 0)
+    prova("orientamento: ### la circolazione di {0,1,2} e' LA STESSA (2.0)",
+          abs(di["somma_mod"][0] - 2.0) < 1e-12)
+    prova("orientamento: ### e quella di {1,2,3} pure (4.0)",
+          abs(di["somma_mod"][3] - 4.0) < 1e-12)
+    prova("orientamento: ### e `R` e' identico, non solo il modulo",
+          np.allclose(di["R"], d["R"]))
+    # ### ✔ **E LA FORMA VECCHIA SBAGLIEREBBE, e si fa vedere invece di affermarlo:**
+    #   `tw[uv] + tw[vw] - tw[uw]` sull'arco ribaltato da' `1 + 3 - (-2) = 6`, non `2`.
+    vecchia = rr.tw[0] + rr.tw[2] - rr.tw[k_inv]
+    prova("orientamento: ### DEVE FALLIRE -- la formula VECCHIA darebbe 6.0 invece di 2.0",
+          abs(vecchia - 6.0) < 1e-12 and abs(vecchia - 2.0) > 1.0)
+    # --- ### ⛔ **IL CAPPIO: avevo messo una GUARDIA e il collaudo l'ha trovata MORTA.**
+    #   Il filtro `(ii != jj)` sta ### **PRIMA**, quindi `np.any(ii == jj)` non poteva
+    #   essere vero ### **mai**. ### **`A8`: un ramo silenzioso non e' un ramo.**
+    #   ### ✔ **Ora i cappi si CONTANO e si DICHIARANO**, come fa il simulatore stesso.
     r3 = Rete()
-    r3.n = 3
-    r3.i = np.array([1, 0, 1]); r3.j = np.array([0, 2, 2])   # il primo ha i > j
-    r3.tw = np.zeros(3); r3.pos = np.zeros((3, 3))
-    r3._nb = np.zeros((3, 3)); r3.perc_geom = np.zeros(3)
-    rotto = False
-    try:
-        Plaquette().enumera(r3)
-    except SystemExit:
-        rotto = True
-    prova("convenzione: ### DEVE FALLIRE -- un arco con `i > j` FERMA lo strumento", rotto)
+    r3.n = 4
+    # un CAPPIO sul nodo 1, piu' il triangolo {0,1,2}
+    r3.i = np.array([1, 0, 0, 1]); r3.j = np.array([1, 1, 2, 2])
+    r3.tw = np.array([9.0, 1.0, 2.0, 3.0])
+    r3.pos = np.array([[0.0, 0, 0], [1, 0, 0], [0, 1, 0], [5, 5, 5]])
+    r3._nb = np.tile(np.array([[0.0, 0, 1.0]]), (4, 1))
+    r3.perc_geom = np.zeros(4)
+    d3 = Plaquette().enumera(r3)
+    prova("cappio: ### si CONTA, e non ferma lo strumento", d3["cappi_esclusi"] == 1)
+    prova("cappio: ### ed e' ESCLUSO dall'enumerazione: resta UN triangolo", d3["tot"] == 1)
+    prova("cappio: ### e NON entra nella circolazione: 1 + 3 - 2 = 2, non 11",
+          abs(d3["somma_mod"][0] - 2.0) < 1e-12)
+    prova("cappio: ### DEVE FALLIRE -- se il cappio entrasse, il modulo NON sarebbe 2.0",
+          abs(d3["somma_mod"][0] - 11.0) > 1.0)
 
     # ### ⛔ **IL CASO CHE AVREBBE COLTO IL DIFETTO DEL TRABOCCAMENTO**, e che non avevo:
     #   un prodotto `int32 * BASE_CHIAVE` ### **si avvolge in silenzio.**

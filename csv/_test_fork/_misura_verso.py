@@ -202,9 +202,34 @@ def sola_lettura(net, etichetta):
 
 # ====================================================================== gli aiuti
 def chiavi_archi(net):
+    """La chiave di un arco, ### **CANONICA `(min, max)`.**
+
+    ### ⛔ **LA PRIMA VERSIONE USAVA `i * BASE + j`, e poggiava su una premessa che la
+    corsa del 2026-10-06 ha SMENTITO al passo `229`:** *<<tutti gli archi hanno `i < j`>>*
+    era misurato ai passi `0`, `1` e `2`, cioe' ### **prima della prima nascita** *(il
+    passo `216`)*. ### **Ogni nascita produce ESATTAMENTE un arco con `i > j`**: alla
+    mitosi nascono `a-m` e `m-b` col nodo nuovo `m` di indice ### **piu' alto**, quindi
+    `m-b` ha `i > j` ### **sempre** *(e lo Schwinger fa lo stesso con `k-bb`)*.
+
+    ### ✔ **Con la chiave canonica non c'e' piu' niente da assumere:** un arco e'
+    identificato dalla ### **coppia NON ORDINATA**, comunque sia stato memorizzato.
+    """
     ii = np.asarray(net.i, np.int64)
     jj = np.asarray(net.j, np.int64)
-    return ii * BASE_CHIAVE + jj
+    return np.minimum(ii, jj) * BASE_CHIAVE + np.maximum(ii, jj)
+
+
+def tw_canonico(net):
+    """`tw` riportata all'orientamento ### **canonico `min -> max`.**
+
+    `tw` e' una ### **1-forma orientata `i -> j`**, quindi il suo SEGNO dipende da come
+    l'arco e' memorizzato. ### **Confrontare `sign(tw)` fra due passi per coppia di nodi
+    SENZA questa riduzione conterebbe un cambio di segno dove e' cambiata solo la
+    SCRITTURA dell'arco.**
+    """
+    ii = np.asarray(net.i, np.int64)
+    jj = np.asarray(net.j, np.int64)
+    return np.asarray(net.tw, float) * np.where(ii <= jj, 1.0, -1.0)
 
 
 def allinea(ch_a, va, ch_b, vb):
@@ -411,9 +436,14 @@ class Verso(object):
         grezza = np.zeros(n); divg = np.zeros(n)
         np.add.at(grezza, ii[m], tw[m]); np.add.at(grezza, jj[m], tw[m])
         np.add.at(divg, ii[m], tw[m]); np.add.at(divg, jj[m], -tw[m])
+        # ### `A` GREZZA usa i segni ### **MEMORIZZATI**, ed e' il punto: e' la lettura
+        #   che ### **dipende da come l'arco e' scritto.** `A` DIVERGENZA e `D`, invece,
+        #   devono essere ### **indipendenti dalla scrittura**, e `D` lo diventa
+        #   riducendo `tw` al verso canonico.
         return {"n": n, "chiavi": chiavi_archi(net),
                 "sg_grezza": np.sign(grezza), "sg_divg": np.sign(divg),
-                "sg_tw": np.sign(tw),
+                "sg_tw": np.sign(tw_canonico(net)),
+                "archi_i_maggiore_j": int(np.sum(ii > jj)),
                 "perc_geom": np.asarray(net.perc_geom, float)[:n].copy()}
 
     def m3_cicli(self, net):
@@ -517,7 +547,10 @@ class Verso(object):
         self.n_prec = n
         cur = self._a_e_d(net)
         pr = self._prec
-        riga_p = {"passo": k, "n": n, "archi": int(len(net.i))}
+        riga_p = {"passo": k, "n": n, "archi": int(len(net.i)),
+                  # ### IL FATTO CHE MI ERA SFUGGITO ora si MISURA a OGNI passo, invece
+                  #   di essere assunto una volta e creduto per sempre.
+                  "archi_i_maggiore_j": cur["archi_i_maggiore_j"]}
         if pr is None:
             riga_p.update({"nodi_confrontabili": None, "cambi_A_grezza": None,
                            "cambi_A_divg": None, "cambi_perc_geom": None,
@@ -749,8 +782,30 @@ def collaudo():
     r1 = Rete(); r1.i = np.array([0, 1, 2]); r1.j = np.array([1, 2, 3])
     r2 = Rete(); r2.i = np.array([1, 0, 5]); r2.j = np.array([2, 1, 6])
     c1, c2 = chiavi_archi(r1), chiavi_archi(r2)
-    prova("chiavi: ### la chiave e' `i*BASE + j`, e BASE e' sopra `n`",
+    prova("chiavi: ### la chiave e' CANONICA `(min, max)*BASE`, e BASE e' sopra `n`",
           c1[0] == 0 * BASE_CHIAVE + 1 and BASE_CHIAVE > 100000)
+    # --- ### ⛔ **IL CASO CHE LA CORSA DEL 2026-10-06 HA RESO NECESSARIO:** un arco
+    #   scritto `(1,0)` e uno scritto `(0,1)` sono ### **LO STESSO ARCO**, e la chiave
+    #   deve dirlo. ### **Con la chiave `i*BASE + j` non lo diceva.**
+    rv = Rete(); rv.i = np.array([1, 2]); rv.j = np.array([0, 1])
+    cv = chiavi_archi(rv)
+    # ### ⚠ **E L'INDICE SBAGLIATO ERA MIO:** avevo scritto `c1[2]`, che e' la coppia
+    #   `(2,3)`, mentre `cv[1]` e' la coppia `(1,2)`, cioe' `c1[1]`.
+    #   ### **Il collaudo ha trovato un errore nel COLLAUDO, non nel codice.**
+    prova("chiavi: ### un arco scritto al ROVESCIO ha la STESSA chiave",
+          cv[0] == c1[0] and cv[1] == c1[1])
+    prova("chiavi: ### DEVE FALLIRE -- con la chiave vecchia `i*BASE + j` NON coincideva",
+          (1 * BASE_CHIAVE + 0) != c1[0])
+    # --- ### e `tw` si riduce al verso canonico, altrimenti `D` conterebbe un cambio di
+    #   segno dove e' cambiata solo la SCRITTURA dell'arco.
+    rv.tw = np.array([3.0, -5.0])
+    tc = tw_canonico(rv)
+    prova("tw_canonico: ### l'arco scritto `(1,0)` ribalta il segno di `tw`",
+          tc[0] == -3.0 and tc[1] == 5.0)
+    rd = Rete(); rd.i = np.array([0, 1]); rd.j = np.array([1, 2])
+    rd.tw = np.array([-3.0, 5.0])
+    prova("tw_canonico: ### quindi la STESSA forma scritta nei due modi da' lo STESSO segno",
+          list(np.sign(tw_canonico(rd))) == list(np.sign(tc)))
     a, b, nco = allinea(c1, np.array([1.0, -1.0, 1.0]), c2, np.array([-1.0, 1.0, 1.0]))
     prova("allinea: ### trova i DUE archi comuni, non tre", nco == 2)
     prova("allinea: ### li allinea per CHIAVE e non per indice -- (1,2) e (0,1)",
