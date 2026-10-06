@@ -1,0 +1,151 @@
+========================================================================================================
+MITOSI-SOGLIA-GRAD a ampiezza zero: il 0.3 serve o no?
+========================================================================================================
+
+  python     3.13.2
+  numpy      2.3.0
+  sistema    Windows 11
+  macchina   AMD64
+  simulatore (PARTE B) f7237563   strumento 43cf63c8
+
+  I RIFERIMENTI, dal crescita.json committato (12e2ca7):
+      Ap: divisioni 1219  schwinger 307  nati 1526  n_fin 14328  archi 473397
+      Bp: divisioni 18  schwinger 7  nati 25  n_fin 12827  archi 471596
+  ### E NON SI RIGIRANO: confrontare con numeri GIA' COMMITTATI e' piu' forte
+      che rigirarli, e rende C0 severo -- il confronto e' su TUTTI i conteggi
+      dei cancelli, a TUTTI i passi, non sul solo n finale.
+
+  braccio A dal tag pre-z43-cura2-r-da-cs: blob 062172d3
+  ### I MORSI RIMESCOLATI, TENUTI: tre semi (101, 202, 303) piu' la permutazione IDENTICA.
+      ### E LA PERMUTAZIONE SI RIPESCA SOLO QUANDO len(avv) CAMBIA:
+          nel Bp committato cambia 12 volte su 150, e TUTTE DOPO IL
+          PASSO 100 -- quindi per i primi cento passi la permutazione
+          e' UNA SOLA. ### Non e' Bperm senza il difetto: lega la
+          permutazione alla TOPOLOGIA, e nessuno dei due e' pulito.
+      ### L'AMPIEZZA RESTA 0.3: si randomizza la FORMA, non l'ampiezza.
+      ### E il generatore della permutazione e' SEPARATO: mai self.rng,
+          cosi' le estrazioni del simulatore restano a parita' di dado.
+  Bpf-s1 da soliton_simulator.py ampiezza None  tw_split False -> blob ffb4d888  (4 ancore)
+  Bpf-s2 da soliton_simulator.py ampiezza None  tw_split False -> blob c7c11489  (4 ancore)
+  Bpf-s3 da soliton_simulator.py ampiezza None  tw_split False -> blob 9425868a  (4 ancore)
+  Bpf-id da soliton_simulator.py ampiezza None  tw_split False -> blob 1cdc7f21  (4 ancore)
+
+      Bpf-s1: il gancio di modulo `_MIS` e `_PRNG` (seme 101)
+      Bpf-s1: ### **IL MORSO PERMUTATO** (TENUTA, generatore SEPARATO, seme 101)
+      Bpf-s1: H2: la catena dei cancelli
+      Bpf-s1: H3: i cancelli finali, DOPO la congiunzione
+      Bpf-s2: il gancio di modulo `_MIS` e `_PRNG` (seme 202)
+      Bpf-s2: ### **IL MORSO PERMUTATO** (TENUTA, generatore SEPARATO, seme 202)
+      Bpf-s2: H2: la catena dei cancelli
+      Bpf-s2: H3: i cancelli finali, DOPO la congiunzione
+      Bpf-s3: il gancio di modulo `_MIS` e `_PRNG` (seme 303)
+      Bpf-s3: ### **IL MORSO PERMUTATO** (TENUTA, generatore SEPARATO, seme 303)
+      Bpf-s3: H2: la catena dei cancelli
+      Bpf-s3: H3: i cancelli finali, DOPO la congiunzione
+      Bpf-id: il gancio di modulo `_MIS`
+      Bpf-id: ### **IL MORSO PERMUTATO** (permutazione IDENTICA: no-op)
+      Bpf-id: H2: la catena dei cancelli
+      Bpf-id: H3: i cancelli finali, DOPO la congiunzione
+
+====================================================================================================
+LA CONFIGURAZIONE INTERA (`P5`) -- non i flag toccati, TUTTI
+====================================================================================================
+  booleani di modulo confrontati con l'argv del DRIVER: 82
+  -> IN CONFIGURAZIONE DEL DRIVER: nessuna differenza. ZERO su 82.
+
+  ### LA CONFIGURAZIONE SI DICHIARA SU `Bg`: e' la PARTE B con la SOLA
+      separazione dei nomi, quindi l'unico braccio IN configurazione per
+      costruzione. Ap0, Bp0 e B03 hanno l'ampiezza CAMBIATA DI PROPOSITO.
+  scena: n = 12802, archi = 471564
+
+========================================================================================================
+LA CORSA: 150 passi, 4 bracci (Bpf-s1, Bpf-s2, Bpf-s3, Bpf-id)
+========================================================================================================
+  ### I DATI SONO GIA' SALVATI in soglia.json, PRIMA del rapporto.
+
+========================================================================================================
+I MORSI RIMESCOLATI: tre semi contro Bp (18 divisioni, 7738 nella finestra)
+========================================================================================================
+  braccio         divisioni     Sum g1^g2^g3       div/Bp       fin/Bp
+  Bpf-s1                 26             8664       1.4444       1.1197
+  Bpf-s2                 33             8477       1.8333       1.0955
+  Bpf-s3                 22             8755       1.2222       1.1314
+  Bpf-id                 18             7738       1.0000       1.0000   (permutazione IDENTICA: deve dare Bp)
+  Bp                     18             7738       1.0000       1.0000   (RIFERIMENTO, da dd86933)
+
+  MEDIA sui 3 semi:  divisioni 27.00 (dispersione 4.55)   Sum g1^g2^g3 8632.0 (dispersione 115.7)
+  RAPPORTI SULLA MEDIA:  divisioni 1.5000   finestra 1.1155
+
+========================================================================================================
+P1 / P2 / P3, applicati ALLA MEDIA
+========================================================================================================
+  sulle DIVISIONI (18 eventi di riferimento): P1 (il legame NON e' portante)
+  sulla FINESTRA  (7738 passi-arco):            P1 (il legame NON e' portante)
+
+  LE LETTURE SEME PER SEME, sulle divisioni: P1 (il legame NON e' portante), P1 (il legame NON e' portante), P1 (il legame NON e' portante)
+  LE LETTURE SEME PER SEME, sulla finestra:  P1 (il legame NON e' portante), P1 (il legame NON e' portante), P1 (il legame NON e' portante)
+  ### I TRE SEMI CADONO NELLA STESSA LETTURA sulle divisioni: P1 (il legame NON e' portante)
+  ### E NELLA STESSA LETTURA sulla finestra: P1 (il legame NON e' portante)
+
+  ### E SE LE NASCITE RESTANO, LA LETTURA E' <<NON CONTA QUALE ARCO>>, NON
+      <<IL GRADIENTE NON CONTA>>: Bperm conserva la distribuzione dei morsi NEL
+      TEMPO, quindi il gradiente decide ancora QUANTI morsi grandi ci sono a
+      ogni passo. (Limite dichiarato nel task history, 70b89c5.)
+
+========================================================================================================
+LA TAVOLA DELLA LOTTERIA: L-A / L-B / L-C / L-D, fissata PRIMA
+========================================================================================================
+  la banda DERIVATA:  divisioni 1 +- 1/sqrt(18) = 0.2357 -> [0.7643, 1.2357]
+                      finestra  1 +- 1/sqrt(7738) = 0.0114 -> [0.9886, 1.0114]
+  Bperm, dal soglia_perm.json COMMITTATO (3 bracci di seme):
+      divisioni 1.5741   finestra 1.1009   dispersione relativa 0.0440
+  sulle DIVISIONI: fisso 1.5000 contro perm 1.5741  ->  L-B
+      LA LOTTERIA NON C'ENTRA: la salita viene dalla permutazione in se', e va capita
+  sulla FINESTRA:  fisso 1.1155 contro perm 1.1009  ->  L-B
+      LA LOTTERIA NON C'ENTRA: la salita viene dalla permutazione in se', e va capita
+  ### E IL LIMITE RESTA QUELLO DICHIARATO PRIMA DEI NUMERI (f922c20):
+      Bperm-fisso NON e' <<Bperm senza il difetto>>. Ripescare solo alla
+      crescita LEGA LA PERMUTAZIONE ALLA TOPOLOGIA: riduce la lotteria,
+      non la toglie. ### NESSUNO DEI DUE E' IL BRACCIO PULITO.
+
+========================================================================================================
+I CONTROLLI
+========================================================================================================
+  C-perm-0  Bpf-id contro Bp: differenze 0 su 150 passi, n 12827 contro 12827  -> PASSA
+  C-distr   il multiinsieme dei MORSI, prima e dopo la permutazione:
+            Bpf-s1       passi verificati 150, identici 150  -> PASSA
+            Bpf-s2       passi verificati 150, identici 150  -> PASSA
+            Bpf-s3       passi verificati 150, identici 150  -> PASSA
+            Bpf-id       passi verificati 150, identici 150  -> PASSA
+  C-distr   l'impronta delle SOGLIE ordinate contro Bp:
+            Bpf-s1       passi confrontati   0, impronte DIVERSE   0  -> n/d: Bp non porta l'impronta
+            Bpf-s2       passi confrontati   0, impronte DIVERSE   0  -> n/d: Bp non porta l'impronta
+            Bpf-s3       passi confrontati   0, impronte DIVERSE   0  -> n/d: Bp non porta l'impronta
+            Bpf-id       passi confrontati   0, impronte DIVERSE   0  -> n/d: Bp non porta l'impronta
+  C1 Bpf-s1       26 + 9 = 35 contro nati 35   COINCIDE
+  C1 Bpf-s2       33 + 13 = 46 contro nati 46   COINCIDE
+  C1 Bpf-s3       22 + 9 = 31 contro nati 31   COINCIDE
+  C1 Bpf-id       18 + 7 = 25 contro nati 25   COINCIDE
+  C-rng     len(avv) contro Bp:
+            Bpf-s1       primo passo DIVERSO: 99
+            Bpf-s2       primo passo DIVERSO: 100
+            Bpf-s3       primo passo DIVERSO: 72
+            Bpf-id       primo passo DIVERSO: nessuno
+  C-ident   len(avv) INVARIATO ma l'insieme degli ARCHI cambiato:
+            Bpf-s1       coppie a lunghezza UGUALE 130, archi DIVERSI   0  -> la mappa arco->morso TIENE
+            Bpf-s2       coppie a lunghezza UGUALE 124, archi DIVERSI   0  -> la mappa arco->morso TIENE
+            Bpf-s3       coppie a lunghezza UGUALE 134, archi DIVERSI   0  -> la mappa arco->morso TIENE
+            Bpf-id       coppie a lunghezza UGUALE 137, archi DIVERSI   0  -> la mappa arco->morso TIENE
+  C-lotterie permutazioni ESTRATTE (solo col modo perm-fisso):
+            Bpf-s1       estratte 20   cambi di len(avv) 19   atteso 20
+            Bpf-s2       estratte 26   cambi di len(avv) 25   atteso 26
+            Bpf-s3       estratte 16   cambi di len(avv) 15   atteso 16
+            Bpf-id       estratte n/d (nessun contatore)   cambi di len(avv) 12   atteso -
+
+========================================================================================================
+IL VERDETTO
+========================================================================================================
+  configurazione dichiarata INTERA: True
+  ### I CONTROLLI PASSANO.
+  ### E QUESTA E' UNA MISURA, NON UN SIGILLO: che fare del 0.3 e' UNA DECISIONE
+      DI LUCA.
