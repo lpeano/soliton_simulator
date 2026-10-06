@@ -7164,3 +7164,38 @@ media e' `5.00`, sui soli valori misurati ### **`7.00`** — ### **gli zeri la a
 > il flag.** ### **Due difese invece di una**, e i due collaudi passano invariati.
 
 **`CHI-TORS-ZERO-FALSO` e' CHIUSA**, criterio soddisfatto, ### **su decisione di Luca.**
+
+---
+
+## 2026-10-06 — **LAVORO 3b: la patch di «via il `0.3`» e' una RIMOZIONE, e ha trovato da sola un commento scaduto**
+
+`soliton_simulator.py` passa da `cf2a1ac8` a ### **`30e18cdd`**, ### **`-22` righe** e
+### **ZERO righe di codice nuovo.**
+
+> ### ✔ **`soglia` era GIA' `np.full(len(avv), soglia0, float)`:** il blocco della modulazione
+> ### **la sovrascriveva.** Toglierlo lascia ### **`soglia = soglia0` su ogni arco**, che e'
+> esattamente cio' che il mandato chiede. ### **`9-ter` soddisfatto nel modo piu' forte: una
+> legge in meno, e nemmeno una riga da scrivere.**
+
+**Cinque sostituzioni, ogni ancora contata e unica:** via il blocco; l'annotazione coi numeri
+che decidono; via ### **`_r_nodo_mitosi`**, che restava ### **senza chiamanti**, e con lei i
+quattro `_tum_r_*`; l'annotazione sulla guardia `_g_tors4pi_*`; e il commento che nominava
+`grad_modula`.
+
+> ### ⛔ **LA QUINTA L'HA TROVATA LA PATCH STESSA**, col suo autocontrollo sulle citazioni
+> rimaste: un commento diceva *«soglia critica emergente, ### **pilotata da `grad_modula`**»*
+> su una variabile ### **che non esiste piu'** — ### **esattamente un commento scaduto.**
+>
+> ### ⚠ **E anche l'autocontrollo l'ho dovuto correggere:** diceva *«atteso `0`»* e ne trovava
+> `2`, ### **tutte e due nella riga che spiega che la variabile non esiste piu'.** Ora conta
+> ### **sul CODICE e non sul file**: ### **un autocontrollo che fallisce per la ragione
+> sbagliata e' peggio di uno assente.**
+
+**La guardia `_g_tors4pi_*` RESTA, annotata:** dopo la patch ### **non guarda piu' niente** e
+nessuno strumento vivo la legge, quindi toglierla sarebbe sicuro — ### **ma il mandato non lo
+chiede**, e ### **fare piu' di quello che un mandato chiede e' il modo in cui una cura diventa
+due.** ### **Toglierla resta una decisione di Luca.**
+
+**La soglia `3π` non e' toccata.** ### **Nove strumenti restano legati ai blob vecchi**, ed era
+dichiarato prima — ### **il costo piu' alto e' `_mitosi_zero_dove`, lo strumento della misura
+di oggi.**

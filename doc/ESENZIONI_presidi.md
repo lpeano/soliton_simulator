@@ -44,6 +44,7 @@ commit**: cosi' non se ne accumulano di invisibili.)*
 | `csv/_archivio/_rami_off_z43_cura2.py|H-P5` | e' un ARCHIVIO. Non importa il simulatore, non gira, non scrive referti. |
 | `csv/_archivio/rami_off_cura2.py|H-P5` | e' un ARCHIVIO. Non importa il simulatore, non gira, non scrive referti. |
 | `csv/_seal_fork/_c1_col_segno.py|H-P5` | legge JSON gia' scritti e non fa girare il simulatore. La configurazione di quei dati |
+| `csv/_seal_fork/_mitosi_soglia_grad_via_patch.py|H-P8` | il confronto col codice di prima lo fa IL SIGILLO, e lo prende dal PADRE. Qui |
 | `csv/_seal_fork/_referto_z43_cura2.py|H-P5` | non importa il simulatore e non lo fa girare. Legge il `sigillo.json` di una |
 | `csv/_seal_fork/_sigillo_mem_fase.py|H-P8` | le DUE occorrenze di `HEAD` in questo file stanno nella DOCSTRING di |
 | `csv/_seal_fork/_sigillo_mem_fase.py|H-P3` | il flag `MEM_FASE` NON HA un'opzione da riga di comando, di proposito |
@@ -87,5 +88,5 @@ commit**: cosi' non se ne accumulano di invisibili.)*
 | `csv/_test_fork/_z43_tempo_proprio.py|H-P3` | la scena passa TUTTA dal CLI (`nmasse` e `sep` da `argv`), e la |
 
 ```
-esenzioni dichiarate   80
+esenzioni dichiarate   81
 ```

@@ -1750,6 +1750,40 @@ scena>> non e' <<non scatta mai>>:** il numero vero lo da' la misura finale dell
 
 <!-- SCHEDA nome=mitosi-schwinger funzioni=mitosi,decidi_divisione flag=MITOSI_DIR,ANTIFASE_ADD,COPPIA_MIT,PLAST_MIT,KICK_TW,REGIME,MITOSI_2LAM -->
 
+### ⛔ **AGGIORNAMENTO del 2026-10-06: LA MODULAZIONE DELLA SOGLIA DI MITOSI E'
+USCITA** *(`MITOSI-SOGLIA-GRAD`, decisione di Luca sul referto `27c10bd`)*.
+
+**La legge era** `soglia = soglia0 · (1 − 0.3·tanh|r_i − r_j|)` — la
+soglia di `decidi_divisione` modulata dal gradiente del tempo proprio lungo l'arco.
+### **Ora e' `soglia = soglia0` su OGNI arco.**
+
+| | |
+|---|--:|
+| `R` sulle divisioni *(senza / con)* | ### **`0.1616`** |
+| `R` sulla popolazione nella finestra | ### **`0.3417`** |
+| nascite per `100` passi ### **senza** la modulazione | `48`-`150`, ### **stabili** |
+| nascite per `100` passi ### **con** | fino a ### **`1044`**, ### **in accelerazione** |
+
+> ### ✔ **LA CRESCITA NON ERA CREATA DALLA MODULAZIONE** *(`R` non e' zero: senza di
+> lei la rete partorisce comunque)*, ### **ma CAMBIA FORMA: da accelerante a stabile.**
+> ### **Si sceglie la forma senza**, ed e' `9-ter`: ### **a parita' di effetto si preferisce
+> togliere un'eccezione** — e qui l'effetto ### **non e' nemmeno pari.**
+
+**COSA ESCE DAL CODICE:** il blocco della modulazione; ### **`_r_nodo_mitosi`**, che resta
+### **senza chiamanti**; e con lei i quattro contatori `A8` ### **`_tum_r_*`**.
+### **ZERO righe di codice nuovo:** `soglia` era ### **gia'** `np.full(len(avv), soglia0)`,
+e la modulazione ### **la sovrascriveva.**
+
+> ### ⚠ **E LA SOGLIA `3π` NON E' TOCCATA:** `soglia0 = PHI_CRIT + twist_max`
+> resta. ### **Il `π` di dipolo che in questa scena non esiste e' una DECISIONE
+> SEPARATA di Luca**, col principio *«solo valori ricavati»*
+> — ### **`2π + |twist_dip dell'arco|`** — da decidere ### **dopo la cura di
+> `GEOM-SENZA-VERSO`**, su una misura a tre bracci.
+
+**Il ramo che esce e' archiviato** in `csv/_archivio/_rami_off_mitosi_soglia_grad.py`, e si
+rilancia dal tag ### **`pre-mitosi-soglia-grad-via`**.
+
+---
 ### ⛔ **AGGIORNAMENTO del 2026-10-04, commit `6b`: IL CANCELLO DI `A13` ALLA NASCITA E'
 DIVENTATO LEGGE INCONDIZIONATA, e `MITOSI_2LAM` E' UN FLAG INERTE.**
 
@@ -2645,9 +2679,36 @@ che si ferma.**
 
 ## LA FORMA — copiata dal codice
 
+> ### ⛔ **LA MODULAZIONE DELLA SOGLIA E' USCITA il 2026-10-06, su decisione di Luca.**
+> La legge era `soglia = soglia0 · (1 − 0.3·tanh|r_i − r_j|)`; ora e'
+> ### **`soglia = soglia0` su OGNI arco.**
+>
+> ### **IL PERCHE', MISURATO** *(referto `27c10bd`, `1000` passi, due bracci)*:
+>
+> | | |
+> |---|--:|
+> | `R` sulle divisioni | `0.1616` |
+> | `R` sulla popolazione nella finestra | `0.3417` |
+> | nascite per `100` passi ### **senza** | `48`-`150`, ### **stabili** |
+> | nascite per `100` passi ### **con** | fino a ### **`1044`**, ### **in accelerazione** |
+>
+> ### ✔ **La crescita NON era creata dalla modulazione** *(`R` non e' zero)*, e
+> ### **senza di lei CAMBIA FORMA: da accelerante a stabile.** ### **La si sceglie senza.**
+>
+> ### ⚠ **E LA SOGLIA `3π` NON E' TOCCATA:** `soglia0 = PHI_CRIT + twist_max`
+> resta. ### **Il `π` di dipolo che in questa scena non esiste e' una DECISIONE
+> SEPARATA di Luca**, e il principio scelto e' *«solo valori ricavati»*:
+> ### **`2π + |twist_dip dell'arco|`**, da decidere ### **dopo la cura di
+> `GEOM-SENZA-VERSO`**, su una misura a tre bracci.
+>
+> **Il ramo che esce e' archiviato** in `csv/_archivio/_rami_off_mitosi_soglia_grad.py`, e
+> si rilancia dal tag ### **`pre-mitosi-soglia-grad-via`**.
+
 ```
 soglia0 = PHI_CRIT + twist_max = 2pi + pi = 3pi          (TORS_4PI acceso)
-soglia  = soglia0 * (1 - 0.3*tanh(grad_tau))             modulazione LOCALE
+soglia  = soglia0                                        su OGNI arco
+          # [VIA IL 0.3, 2026-10-06] prima era:
+          #   soglia = soglia0 * (1 - 0.3*tanh(grad_modula))   modulazione LOCALE
 ecc     = max(|tw|/soglia - 1, 0)
 salita  = satura(ecc)                                     zero sotto soglia
 discesa = clip(1 - |tw|/TW_TETTO, 0, 1)                   ZERO da 4pi

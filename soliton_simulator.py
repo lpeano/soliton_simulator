@@ -7307,25 +7307,6 @@ class Rete:
         return (2.0 * cs_nodo[ii] * cs_nodo[jj] /
                 np.maximum(cs_nodo[ii] + cs_nodo[jj], 1e-12))
 
-    def _r_nodo_mitosi(self):
-        """L'OROLOGIO per NODO, per il gradiente di tempo della mitosi. Guardia CONTATA (`A8`).
-
-        Il fallback e' `1` = "nessuna dilatazione", **la stessa convenzione che `ritmo()` usa
-        quando non c'e' un passato** (`np.ones`): non una convenzione nuova.
-        `_r_corrente` e' un array PER NODO attraversato da un punto di crescita, cioe' la
-        classe `A8b` di `_cs_nodo_prev` (71.88 %) e `_psi_spin_prec` (95.33 %): si contano
-        QUATTRO cose, non una -- invocazioni, salti, la FORMA al fallimento, e QUANDO.
-        """
-        n = self.n
-        self._tum_r_tot = getattr(self, "_tum_r_tot", 0) + 1
-        r = getattr(self, "_r_corrente", None)
-        if r is None or len(r) < n:
-            self._tum_r_salti = getattr(self, "_tum_r_salti", 0) + 1
-            self._tum_r_forma = (-1 if r is None else len(r), n)
-            self._tum_r_quando = self._tum_r_tot
-            return np.ones(n)
-        return np.asarray(r, dtype=float)[:n]
-
     def _fattore_tempo_arco(self, n_archi):
         """`dt_e/DT` per ARCO: il fattore di tempo proprio, **LETTO e non ricalcolato**.
 
@@ -8424,6 +8405,19 @@ class Rete:
         # La modulazione e' LIMITATA a una frazione (tanh, ampiezza <0.3 della soglia):
         # la soglia non si annulla mai (mitosi che esplode) ne' diverge (mitosi che muore).
         soglia = np.full(len(avv), soglia0, float)
+        # [MITOSI-SOGLIA-GRAD VIA, 2026-10-06, decisione di Luca] LA MODULAZIONE DELLA
+        #   SOGLIA E' USCITA. `soglia` resta `soglia0` su OGNI arco, ed e' la riga qui
+        #   sopra a farlo: la modulazione la SOVRASCRIVEVA, e toglierla basta.
+        #   IL PERCHE', MISURATO (referto 27c10bd, 1000 passi, due bracci):
+        #     R = 0.1616 sulle divisioni e 0.3417 sulla popolazione nella finestra,
+        #     quindi la crescita NON era creata dalla modulazione;
+        #     e SENZA di lei la crescita e' STABILE (48-150 nascite ogni 100 passi),
+        #     mentre CON lei ACCELERA fino a 1044. Non una differenza di quantita':
+        #     UNA DIFFERENZA DI FORMA.
+        #   Il ramo che esce e' ARCHIVIATO in `csv/_archivio/_rami_off_mitosi_soglia_grad.py`
+        #   e si rilancia dal tag `pre-mitosi-soglia-grad-via`.
+        #   LA SOGLIA 3pi NON E' TOCCATA: `soglia0 = PHI_CRIT + twist_max`. Il `pi` di
+        #   dipolo che in questa scena non esiste e' una DECISIONE SEPARATA di Luca.
         # [A8, 2026-09-20] CONTABILITA' DELLA GUARDIA -- byte-inerte: si CONTA, non si cambia.
         # Un ramo che salta in silenzio e' un comportamento SCONOSCIUTO (A8), e questa forma ha
         # gia' prodotto due volte mesi di dati sbagliati: `_cs_nodo_prev` (71.88 %) e
@@ -8431,6 +8425,11 @@ class Rete:
         # salti, LA FORMA al fallimento (le due lunghezze) e QUANDO -- l'indice dell'ultima
         # invocazione saltata. Il conteggio da solo non distingue un TRANSITORIO delle prime
         # chiamate da un comportamento PRINCIPALE sparso su tutto il run: danno lo stesso numero.
+        # [MITOSI-SOGLIA-GRAD VIA, 2026-10-06] ATTENZIONE: questa guardia CONTAVA i salti
+        #   DELLA MODULAZIONE, che e' USCITA -- quindi dopo quella cura NON GUARDA PIU'
+        #   NIENTE. Nessuno strumento vivo la legge (censito col comando). NON la tolgo
+        #   perche' il mandato non lo chiede, e fare piu' di quello che un mandato chiede
+        #   e' il modo in cui una cura diventa due: TOGLIERLA E' UNA DECISIONE DI LUCA.
         self._g_tors4pi_tot = getattr(self, "_g_tors4pi_tot", 0) + 1
         # [A8/A9, 2026-09-20] IL RAMO ALTERNATIVO, DICHIARATO. Se le lunghezze non combaciano la
         # soglia di mitosi NON viene modulata dal gradiente di tempo proprio: resta `soglia0`
@@ -8442,32 +8441,11 @@ class Rete:
             self._g_tors4pi_salti = getattr(self, "_g_tors4pi_salti", 0) + 1
             self._g_tors4pi_shape = (len(self.i), len(avv))
             self._g_tors4pi_quando = self._g_tors4pi_tot
-        if TORS_4PI and len(self.i) == len(avv):
-            # gradiente di tempo proprio LUNGO l'arco: differenza del tempo proprio nodale
-            # fra i due estremi. tau_nodo alto = tempo lento = materia. Dove il gradiente
-            # e' forte, la soglia si abbassa (la mitosi e' agevolata verso il tempo lento).
-            # [CURA 2 STRUTTURALE, 2026-09-27] IL RAMO `if TEMPO_UNICO_MITOSI:` E' STATO TOLTO: la legge e' SEMPRE questa.
-            #   Il ramo `else` e' ARCHIVIATO in `csv/_archivio/rami_off_cura2.py` e si rilancia dal tag `pre-cura2-strutturale`.
-            # [CURA 2] IL GRADIENTE DI TEMPO SI PRENDE DALL'OROLOGIO, non da `|tw|`.
-            # Il commento qui sopra dice "gradiente di TEMPO PROPRIO", ma `tau_nodo` e'
-            # `1 + mean(|tw|)/PHI_CRIT`, cioe' ESATTAMENTE la formula del ramo
-            # `TEMPO_SEGNO` di `ritmo()` -- CHE NON GIRA (`TEMPO_SEGNO = False` in 9 run
-            # su 11, `Z130`). Intenzione TEMPO, implementazione TORSIONE.
-            # SI PRENDE `r` E NON `1/r`, e la ragione e' un conto, non una preferenza:
-            #   r    in [1.4142e-6, 1.4142]  -> tanh(grad) <= 0.8884 -> la soglia MODULA
-            #   1/r  in [0.707, 707107]      -> tanh(grad) -> 1 ESATTO -> la modulazione
-            #                                   diventerebbe un RISCALAMENTO COSTANTE
-            #                                   della soglia, cioe' un PARAMETRO NASCOSTO
-            #                                   (`A1`), e `A11` cor.6 dice che un limite
-            #                                   che satura e' un allarme.
-            _rn = self._r_nodo_mitosi()
-            # `grad_modula` qui e' il gradiente di `r`: IL TEMPO PROPRIO VERO.
-            grad_modula = np.abs(_rn[self.i] - _rn[self.j])
-            # modulazione limitata: la soglia scende di al piu' ~30% dove il gradiente e' forte
-            soglia = soglia0 * (1.0 - 0.3 * np.tanh(grad_modula))
         # CRITICITA' NON MONOTONA (campana) ancorata ai due valori fisici del sistema:
-        # massima alla SOGLIA LOCALE (soglia critica emergente, pilotata da `grad_modula`: il gradiente di
-        # `r` a flag acceso, della torsione a flag spento -- `D32`), e si SPEGNE al tetto 4pi. Tra i due, la
+        # massima alla SOGLIA `soglia0` (= `PHI_CRIT + twist_max` = 3pi), e si SPEGNE al tetto 4pi.
+        # [MITOSI-SOGLIA-GRAD VIA, 2026-10-06] QUI C'ERA SCRITTO <<pilotata da `grad_modula`>>,
+        #   e `grad_modula` NON ESISTE PIU'. La soglia non e' piu' pilotata da niente: e'
+        #   `soglia0` su ogni arco. Tra i due, la
         # mitosi decresce: dove la torsione supera la soglia e va verso il tetto, il
         # sistema RIDUCE la generazione (omeostasi), e a 4pi si azzera del tutto (confine
         # netto per reazione geometrica intrinseca). Il ciclo di vita:
