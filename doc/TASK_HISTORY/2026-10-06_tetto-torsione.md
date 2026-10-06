@@ -193,6 +193,53 @@ della misura sarebbe sospetto.
 
 ---
 
+## ⛔ ANNOTAZIONE DEL 2026-10-06 — **LA VERIFICA (b) SAPEVA MENO DI QUANTO SI PUO'
+## SAPERE: l'avvolgimento di `dph` inietta `-4π` ESATTI, e `_w8` non lo ripara**
+
+*(Scritta ### **dopo** il commit del task history e ### **prima** dello strumento e della
+corsa. La sezione `(b)` qui sopra ### **NON si riscrive:** diceva *«`_w8` PUO' ripiegare, e
+quante volte non lo so»*, che e' **vero ma debole**. ### **Il conto si poteva CHIUDERE, e
+l'ho chiuso.**)*
+
+### IL CONTO, fatto con uno script e non a mente
+
+Con `FASE_2PI = False` il periodo di `dph` e' `4π`. A un avvolgimento, `dph` salta di
+`-4π`, e la differenza grezza diventa `delta - 4π`. Allora:
+
+| | `_w8(delta - 4π)` | errore |
+|---|--:|--:|
+| **ramo `TORS_4PI`** *(quello che gira)* | `-12.553371` | ### ⛔ **`-4π` ESATTI** |
+| **ramo non-`4π`** *(`_w4`, `twp = dph`)* | `+0.013000` | ### ✔ **`-1.9e-15`** |
+
+### ➜ ⛔ **UN AVVOLGIMENTO DI `4π` E' INVISIBILE A UN MODULO DI PERIODO `4π` E VISIBILE A
+### UNO DI PERIODO `8π`.** Il ramo che gira ### **non ripara** cio' che l'altro ripara
+**esatto**. Difetto aperto come ### **`TORS-W8-AVVOLGIMENTO`**.
+
+### CHE COSA CAMBIA NELLA MISURA
+
+1. ### **`M6` diventa piu' preciso e piu' importante:** non si conta solo
+   `|D_t - D_{t-1}| > 4π`, si contano ### **gli avvolgimenti di `dph`** e, separatamente,
+   ### **i calci di `~±4π` che ne risultano** -- che sono **lo stesso evento visto due
+   volte**, e misurarlo in due modi e' il controllo che il conteggio e' giusto;
+2. ### ⚠ **la formula del tetto vale FRA DUE AVVOLGIMENTI**, non su tutta la corsa: un arco
+   che avvolge spesso **non ha** un equilibrio `tw*`, ha una **successione di transitori**.
+   ### **Questo entra nel referto come limite della lettura di `M1`**;
+3. ### ⛔ **e NON indago `ARCHI-OLTRE-4PI`**, che Luca ha messo fra le cose da non toccare:
+   riporto il meccanismo e il puntatore, ### **non la verifica che li collegherebbe.**
+
+### ✔ **E I DUE CONTROLLI SINTETICI SONO GIA' VERIFICATI, prima dello strumento**
+
+| controllo | atteso | misurato |
+|---|---|--:|
+| **POSITIVO** *(`κ = 1`, nessun avvolgimento, `200000` passi)* | `|tw| → 2π` entro l'`1 %` | `6.280045` contro `6.283185`: ### **scarto `0.0500 %`** ✔ |
+| **CHE DEVE FALLIRE** *(`κ = 2`)* | ### **NON** deve convergere a `2π` | `12.560091`, cioe' ### **`99.9 %` fuori** ✔ |
+
+### 📌 **E il controllo positivo dice anche una cosa sul conto del guardiano:** con `κ = 1`
+l'equilibrio e' `2π` ### **esatto entro lo `0.05 %`**, e ### **non `3π`** -- perche' nel
+sintetico `twist_dip` e' **costante**, quindi la sua derivata e' zero.
+### ✔ **La correzione scritta nella sezione `(c)` e' confermata dal controllo positivo
+PRIMA della corsa.**
+
 ## 4. TODO DEL NEXT STEP
 
 1. **commit di questo task history**, ### **DA SOLO**, prima dello strumento;

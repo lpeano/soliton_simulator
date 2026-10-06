@@ -2313,3 +2313,70 @@ sue»*. **LE TRE STRADE**, scritte per chi la prendera' e ### **non verificate**
 
 **Collegata a** `SCALE-TW` *(che chiede l'analisi completa delle scale della torsione, e di
 cui questa e' **un pezzo**)*, `ARCHI-OLTRE-4PI`, `CENS-B4`, `MITOSI-SOGLIA-GRAD`.
+
+
+---
+
+## `TORS-W8-AVVOLGIMENTO` — **`_w8` ha periodo `8π`, l'avvolgimento di `dph` e' di `4π`**
+
+*(Aperta il 2026-10-06 da una **derivazione verificata con uno script**, fatta per la misura
+del **tetto della torsione**: e' la verifica **(b)** delle tre che il mandato chiede
+### **prima** del task history. ### **Il simulatore non e' stato toccato:** `f7237563`.)*
+
+### IL FATTO — **un'identita', non una statistica**
+
+La spinta della torsione nel ramo `TORS_4PI` *(`:7795`)* e'
+
+```
+self.tw += self._w8(dph + twist_dip - self.twp) - dt_e * self.tw / _ttw
+self.twp  = self._w8(dph + twist_dip)
+```
+
+Con `FASE_2PI = False` *(`:3543`)*, `dph = _wphi(phi_i - phi_j)` vive su un periodo di
+### **`4π`**: quando la differenza di fase gira, ### **`dph` SALTA DI `-4π`.**
+### ⛔ **E `_w8` ha periodo `8π`: un salto di `4π` NON e' un multiplo del suo periodo,
+### quindi NON lo ripara.**
+
+### MISURATO, su un caso sintetico con incremento vero `delta = 0.013`
+
+| ramo | che cosa restituisce | errore |
+|---|--:|--:|
+| **`TORS_4PI`** *(quello che **gira**)*, `_w8` | `-12.553371` | ### ⛔ **`-12.566371`, cioe' `-4π` ESATTI** |
+| **non-`4π`** *(`TORS_4PI = False`)*, `_w4` + `twp = dph` | `+0.013000` | ### ✔ **`-1.9e-15`** |
+
+> ### ⛔ **QUINDI IL RAMO CHE GIRA NELLA SCENA HA UN DIFETTO CHE L'ALTRO NON HA**, e il motivo
+> e' **strutturale**: ### **un avvolgimento di `4π` e' INVISIBILE a un modulo di periodo
+> `4π` e VISIBILE a uno di periodo `8π`.**
+
+### ⚠ **PERCHE' `_w8` C'E', e non e' un errore gratuito**
+
+Serve a far vivere `dph + twist_dip` su `±3π` ### **senza avvolgerlo** *(`twist_dip` arriva a
+`±π`)*, e quello ### **lo ottiene** -- la derivazione sta nel task history del tetto:
+`|dph + twist_dip| <= 3π < 4π`, quindi ### **`twp` non avvolge MAI.**
+### **Il costo e' la perdita della riparazione.**
+
+### ⛔ **NON CURATA, e la cura NON E' UNA SCELTA FRA `_w4` E `_w8`**
+
+Si possono avere ### **entrambe** le cose: avvolgere con periodo `4π` la **differenza di
+`dph`** e sommare la differenza di `twist_dip` **non avvolta**, cioe'
+
+```
+_w4(dph - dph_prec)  +  (twist_dip - twist_dip_prec)
+```
+
+### ⚠ **NON L'HO VERIFICATA, e non la applico:** toccare la legge della torsione e'
+### **una decisione di Luca**, e il mandato del tetto lo dice.
+
+### ⚠ **PERCHE' PUO' CONTARE MOLTO, e perche' NON lo dichiaro dimostrato**
+
+Un calcio di `-4π` porta un arco ### **oltre `TW_TETTO = 4π` in un passo solo**, ed e'
+### **esattamente il sintomo di `ARCHI-OLTRE-4PI`** *(`~109` archi sopra `4π` dal passo `2`,
+che non rilassano, e la cui **seconda strada** ipotizzata era ### **proprio il wrapping della
+torsione**)*.
+
+> ### ⛔ **MA `ARCHI-OLTRE-4PI` E' <<DA NON INDAGARE>> PER DECISIONE DI LUCA.** Quindi riporto
+> il ### **meccanismo** e il ### **puntatore**, e ### **NON faccio la verifica che li
+> collegherebbe.** ### **Quanto succeda davvero lo misura `M6`** della misura del tetto.
+
+**Collegata a** `SCALE-TW` *(di cui e' un pezzo)*, `ARCHI-OLTRE-4PI`, `KAPPA-TW-COMMENTO`,
+`MITOSI-SOGLIA-GRAD`.
