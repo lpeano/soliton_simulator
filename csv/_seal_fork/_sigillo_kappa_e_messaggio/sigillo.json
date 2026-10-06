@@ -1,0 +1,98 @@
+{
+ "K0": {
+  "padre": "4dbf222bd50f9632a993fcc3e33058ba74f3c720~1",
+  "delta_righe": 10,
+  "blob_prima": "30e18cdd",
+  "blob_oggi": "b8c21049",
+  "differenze_fuori_dalle_stringhe": [],
+  "n_fuori": 0,
+  "stringhe_cambiate": [
+   [
+    "<modulo>/_tau_tw_locale",
+    0,
+    "TAU_TW LOCALE = 2pi/|omega_i - omega_j| (inverso della dispersione di ",
+    "TAU_TW LOCALE = 2pi/|omega_i - omega_j| (inverso della dispersione di "
+   ],
+   [
+    "<modulo>/ComposizioneNonValida [riga]",
+    1,
+    "1013",
+    "1023"
+   ],
+   [
+    "<modulo>/LimiteNodiSuperato [riga]",
+    1,
+    "1017",
+    "1027"
+   ],
+   [
+    "<modulo>/SchermaturaSpenta [riga]",
+    1,
+    "1029",
+    "1039"
+   ],
+   [
+    "<modulo>/CacheCorta [riga]",
+    1,
+    "1049",
+    "1059"
+   ],
+   [
+    "<modulo>/CacheLunga [riga]",
+    1,
+    "1072",
+    "1082"
+   ],
+   [
+    "<modulo>/FormaSbagliata [riga]",
+    1,
+    "1093",
+    "1103"
+   ],
+   [
+    "<modulo>/FinestraRestataAperta [riga]",
+    1,
+    "1109",
+    "1119"
+   ],
+   [
+    "<modulo>/GrandezzaNonDichiarata [riga]",
+    1,
+    "1155",
+    "1165"
+   ],
+   [
+    "<modulo>/TipoSbagliato [riga]",
+    1,
+    "1191",
+    "1201"
+   ],
+   [
+    "<modulo>/Rete [riga]",
+    1,
+    "3968",
+    "3978"
+   ],
+   [
+    "<modulo>/_applica_flag",
+    151,
+    "[chi-basc] basculamento chirale attivo: perc_chi vira secondo la torsi",
+    "[chi-basc] basculamento chirale attivo: la media di |tw| sugli archi d"
+   ]
+  ],
+  "n_stringhe": 12,
+  "passa": true
+ },
+ "K1": {
+  "passi_confrontati": 150,
+  "quantili_confrontati": 1350,
+  "materia": 1950,
+  "n_differenze": 0,
+  "differenze": [],
+  "passa": true,
+  "blob_copia": "d61f6fac"
+ },
+ "passi": 150,
+ "blob_oggi": "b8c21049b85ba36a828f49dfa225d42419f3baf5",
+ "esito": 0
+}

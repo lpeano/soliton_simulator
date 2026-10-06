@@ -7397,3 +7397,28 @@ che questa voce deve costruire.**
 > strumenti restano legati ai blob vecchi**, e ### **`_mitosi_zero_dove` — lo strumento della
 > misura del `0.3` a zero — e' il costo piu' alto:** dopo questa patch ### **non gira piu' sul
 > blob nuovo.**
+
+---
+
+## 2026-10-06 — **IL SIGILLO DI κ PASSA, e `KAPPA-TW-COMMENTO` e `CHI-BASC-DESCRIZIONE` sono CHIUSE**
+
+| | esito | materia |
+|---|---|---|
+| **`K0`** *(code object)* | ### ✔ **PASSA** | tutto il modulo, ### **ricorsivamente**: `12` differenze, ### **tutte dichiarate**, ### **ZERO fuori dalle regole** |
+| **`K1`** *(al bit)* | ### ✔ **PASSA** | `150` passi, ### **`1950` valori**, ### **zero differenze** contro `amp0.json` |
+
+**Le `12` differenze di `K0`:** ### **`2` stringhe** *(il docstring di `_tau_tw_locale` e il
+messaggio di `--chi-basc`)* e ### **`10` numeri di riga**, tutti spostati di ### **esattamente
+`+10`**, le righe che il docstring ha aggiunto.
+
+> ### ⚠ **E I DIECI NUMERI DI RIGA LI HA TROVATI IL SIGILLO, non io:** la prima versione di
+> `K0` ### **falliva.** Sono i `__firstlineno__` che Python `3.13` mette fra i `co_consts` del
+> corpo di ### **ogni classe** — ### **la stessa famiglia di `_calcpsi_origini`**, le cui
+> chiavi contengono numeri di riga. ### **Ora lo scarto si MISURA e qualunque altro intero
+> FERMA il sigillo.**
+
+> ### ✔ **E `K1` NON HA RICHIESTO UNA SECONDA CORSA DEL BLOB VECCHIO:** si appoggia a `S1` del
+> sigillo precedente, che aveva gia' stabilito `30e18cdd` ≡ `amp0.json` al bit su `230` passi.
+> ### **Se il blob nuovo lo riproduce ancora, e' identico a `30e18cdd`.**
+
+**Le due voci sono CHIUSE, e la chiusura e' di Luca: io riporto i numeri.**
