@@ -6467,3 +6467,44 @@ scelti. Fra questi, i difetti ### **veri** di questa sessione, uno per prova:
 > una frase.
 
 **Collaudo `26` su `26`. Il referto si genera a corsa finita.**
+
+---
+
+## 2026-10-06 — **A META' RUN: ZERO NASCITE in `152` passi, e prima di chiamarlo un risultato ho verificato di leggere l'attributo giusto**
+
+**La corsa e' al passo `152` su `1000`** *(avvio `13:56`, ~`3.5` s/passo, fine attesa verso
+le `15:00`-`15:30`)*. Due letture, e la seconda non me l'aspettavo.
+
+**① LA CORSA RIPRODUCE IL SIGILLO.** Al passo `149` il `|tw|` mediano e' ### **`2.2779`**,
+contro il ### **`2.2829`** che il sigillo `c17e518` ha misurato al passo `150` sulla stessa
+legge: ### **lo scarto e' lo `0.2 %`, ed e' lo sfasamento di un passo che ho dichiarato nel
+sigillo.** La misura e' ### **riproducibile**, e questo si vede ### **prima** di leggere il
+criterio.
+
+**② ZERO NASCITE.** `nati = 0` e `Schwinger = 0` a ### **tutti i `152` passi**, contro le
+### **`18` divisioni + `7` Schwinger** che la legge ### **vecchia** dava a `150` passi.
+
+> ### ⛔ **E PRIMA DI CHIAMARLO UN RISULTATO HO VERIFICATO DI LEGGERE L'ATTRIBUTO GIUSTO:**
+> lo strumento usa `getattr(net, "nati", 0)` e `getattr(net, "_g_nati_schwinger", 0)`, cioe'
+> ### **due fallback SILENZIOSI** — se il nome fosse sbagliato leggerei `0` e scriverei
+> *«zero nascite»* quando il fatto e' *«sto leggendo la cosa sbagliata»*. ### **E' la classe
+> di difetto che in questa sessione mi e' tornata addosso cinque volte.**
+>
+> | il controllo | l'esito |
+> |---|---|
+> | `self.nati` esiste nel simulatore | ### **SI**: inizializzato a `:4044`, incrementato a `:8946` e `:9062` |
+> | `_g_nati_schwinger` esiste | ### **SI**: `:9059` |
+> | ### **e la prova INDIPENDENTE dal contatore** | ### **`n` resta `12802` a TUTTI i `152` passi** — se fosse nata una divisione `n` sarebbe cresciuto |
+>
+> ### ✔ **Quindi le nascite sono DAVVERO zero, e non e' un contatore muto.** La terza riga e'
+> quella che conta: ### **non si fida del contatore, guarda la grandezza che la nascita
+> cambierebbe comunque.**
+
+> ### ⚠ **E NON CONCLUDO: mancano `848` passi.** La mia previsione scritta prima diceva
+> *«meno di `18` divisioni a `150` passi, e a `1000` passi PIU' di `18`, fra `30` e `150`»*.
+> ### **Il primo braccio e' giusto e piu' netto di quanto prevedessi; il secondo e' ancora
+> aperto**, e se restasse zero anche a `1000` sarebbe ### **una lettura sulla soglia di
+> mitosi, che e' una DECISIONE DI LUCA** — non una cosa che decido io in un referto.
+
+**Nessuna conclusione, nessuna cura, nessun flag toccato.** Il simulatore ### **non si
+tocca:** resta `cf2a1ac8`.
