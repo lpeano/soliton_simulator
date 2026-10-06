@@ -218,9 +218,21 @@ def genera(d):
          T.get("schwinger"), d["passi"]))
     w("| `|tw|` mediano al passo `140` | `%.2f` | ### **`%s`** |"
       % (RIF["tw_mediano_140"], n4((_p140.get("q_tw") or {}).get("q050"))))
-    w("| archi oltre `4π` per passo | `~%d` | ### **`%s`** |"
-      % (RIF["sopra_4pi_per_passo"],
-         "0 a OGNI passo" if not C.get("sopra_4pi_tot") else C.get("sopra_4pi_tot")))
+    # ### ⛔ **DIFETTO TROVATO LEGGENDO IL REFERTO GENERATO:** questa riga diceva
+    #   *<<per passo>>* e stampava `sopra_4pi_tot`, che e' la ### **SOMMA su TUTTI i
+    #   passi** -- cioe' metteva `~108` ### **per passo** accanto a un numero mille volte
+    #   piu' grande. ### **Il nome prometteva una cosa e il numero misurava un'altra**,
+    #   per la ### **TERZA volta in questa misura.**
+    _u4 = (PP[-1].get("sopra_4pi") if PP else None)
+    _ua = (PP[-1].get("archi") if PP else None)
+    w("| archi oltre `4π` ### **all'ULTIMO passo** *(non la somma)* | `~%d` a `150` | "
+      "### **`%s` a `%d`** |"
+      % (RIF["sopra_4pi_per_passo"], n4(_u4, "%d"), d["passi"]))
+    w("| ### **la FRAZIONE** sugli archi esistenti | `%.6f` *(a `150`)* | ### **`%s`** |"
+      % (RIF["sopra_4pi_per_passo"] / 471564.0,
+         n4(float(_u4) / _ua, "%.6f") if _u4 is not None and _ua else "n/d"))
+    w("| la **somma** su tutti i passi | *(non misurata)* | `%d` |"
+      % C.get("sopra_4pi_tot", -1))
     w("| calci di modulo `~4π` | `%d` in `150` passi | ### **`%d` dati, `%d` EVITATI** |"
       % (RIF["calci_150"], C.get("calci_spuri_curata", -1), C.get("calci_evitati", -1)))
     w()
@@ -264,6 +276,31 @@ def genera(d):
       % (_p4 if _p4 else "MAI"))
     w("| il **massimo** di archi oltre `4π`, e dove | `%d`, al passo `%d` |"
       % _mx)
+    w()
+    w()
+    w("### E COME CRESCE, perche' un massimo da solo non dice se si e' fermato")
+    w()
+    w("| passo | archi oltre `4π` | la **frazione** | archi |")
+    w("|--:|--:|--:|--:|")
+    _dec = [x for x in PP if x["passo"] % 100 == 0 or x["passo"] == _p4]
+    for x in sorted(_dec, key=lambda y: y["passo"]):
+        _v, _a = x.get("sopra_4pi") or 0, x.get("archi") or 1
+        w("| `%d` | ### **`%d`** | `%.6f` | `%d` |"
+          % (x["passo"], _v, float(_v) / _a, _a))
+    w()
+    if _mx[1] == PP[-1]["passo"] and _mx[0] > 0:
+        w("### ➜ ⛔ **IL MASSIMO E' L'ULTIMO PASSO: la misura si ferma MENTRE la "
+          "popolazione SALE**, quindi ### **non si sa se si assesti.** ### **Dire <<il "
+          "massimo e' `%d`>> senza dire QUESTO sarebbe far credere che la curva si sia "
+          "appiattita.** ### **Quanti passi servano e' una DECISIONE DI LUCA.**" % _mx[0])
+        w()
+    w("> ### ⚠ **E IL CONFRONTO CON LA LEGGE VECCHIA NON SI PUO' FARE A `%d` PASSI:** "
+      "i `~%d` della legge vecchia sono misurati a ### **`150` passi**, e la legge vecchia "
+      "### **non e' mai stata girata a `%d`.** ### **A PARITA' DI ORIZZONTE il confronto e' "
+      "`0` contro `~%d`, e QUELLO e' pulito** -- un rapporto fra `%d` passi e `150` "
+      "### **non dimostra che la cura abbia peggiorato le cose.**"
+      % (d["passi"], RIF["sopra_4pi_per_passo"], d["passi"],
+         RIF["sopra_4pi_per_passo"], d["passi"]))
     w()
     if _p4 and _pn and _p4 >= _pn:
         w("### ➜ **IL PRIMO ARCO OLTRE `4π` ARRIVA `%d` PASSI DOPO LA PRIMA "
@@ -312,8 +349,68 @@ def genera(d):
         w("### ➜ ⚠ **E QUESTO E' IL LIMITE DELLA CURVA, misurato:** il `τ` "
           "vero va da `%.0f` a `%.0f` passi, mentre la curva assume ### **`%.0f` FISSO.** "
           "### **Dove il `τ` misurato si allontana da `%.0f`, il rapporto non si "
-          "legge** -- ed e' la ragione per cui il criterio **non** decide ai passi `50` e "
-          "`150`." % (min(_tau), max(_tau), d["tau_curva"], d["tau_curva"]))
+          "legge** -- ed e' la ragione che il task history ha scritto per NON decidere "
+          "ai passi `50` e `150`."
+          % (min(_tau), max(_tau), d["tau_curva"], d["tau_curva"]))
+        w()
+        # ### ⛔ **E QUELLA RAGIONE, MISURATA, E' CONTRADDETTA:** lo scarto da `300`
+        #   e' ### **PIU' GRANDE dove il criterio DECIDE** che dove non decide. Il
+        #   criterio resta quello fissato prima -- ### **non lo sposto** -- ma questo va
+        #   DETTO, perche' cambia quanto il rapporto significhi.
+        _sc = [(p, (PI[p].get("q_tau_passi") or {}).get("q050"),
+                bool(PI[p].get("decide"))) for p in sorted(PI)]
+        _sc = [(p, t, dd) for p, t, dd in _sc if t is not None]
+        _sd = [abs(t - d["tau_curva"]) for _p, t, dd in _sc if dd]
+        _sn = [abs(t - d["tau_curva"]) for _p, t, dd in _sc if not dd]
+        if _sd and _sn and min(_sd) > max(_sn):
+            w("> ### ⛔ **E QUELLA RAGIONE, MISURATA, E' CONTRADDETTA:** lo scarto da "
+              "`%.0f` vale %s ai passi che ### **NON decidono** e %s a quelli che "
+              "### **DECIDONO.** ### **Il criterio escludeva i passi dove il `τ` "
+              "misurato e' PIU' VICINO a `%.0f`.**"
+              % (d["tau_curva"],
+                 ", ".join("`%+.1f`" % (t - d["tau_curva"])
+                           for _p, t, dd in _sc if not dd),
+                 ", ".join("`%+.1f`" % (t - d["tau_curva"])
+                           for _p, t, dd in _sc if dd), d["tau_curva"]))
+            w(">")
+            w("> ### **E IL CRITERIO NON SI SPOSTA PER QUESTO:** era fissato PRIMA della "
+              "corsa, e cambiarlo adesso ### **sarebbe spostare una soglia dopo aver "
+              "visto i dati.** ### **Si dice, e si aggiunge il controllo qui sotto.**")
+            w()
+        # ### IL CONTROLLO DI SENSIBILITA': la stessa lettura, con la curva ricostruita
+        #   sul `tau` ### **MISURATO** di quel passo invece che su `300` fisso.
+        #   ### **NON e' un criterio nuovo:** e' la domanda *<<la lettura dipende da
+        #   quell'assunzione?>>*, e il criterio resta quello che resta.
+        w("### IL CONTROLLO DI SENSIBILITA': **la stessa lettura, col `τ` MISURATO**")
+        w()
+        w("| passo | `|tw|` mediano | curva con `τ = %.0f` | rapporto | curva col "
+          "`τ` **misurato** | ### **rapporto** | lettura |" % d["tau_curva"])
+        w("|--:|--:|--:|--:|--:|--:|---|")
+        _tutte = []
+        for p, t, dd in _sc:
+            _m = (PI[p].get("q_tw") or {}).get("q050")
+            if _m is None:
+                continue
+            _c = P2 * (1.0 - math.exp(-float(p) / t))
+            _r = (_m / _c) if _c else None
+            _tutte.append((p, letto(_r), dd))
+            w("| `%d` | `%s` | `%s` | `%s` | `%s` | ### **`%s`** | %s |"
+              % (p, n4(_m), n4(PI[p].get("curva")),
+                 n4(PI[p].get("rapporto_alla_curva")), n4(_c), n4(_r),
+                 ("### **%s**" % letto(_r)) if dd else "*(%s)*" % letto(_r)))
+        w()
+        _ld = sorted(set(L for _p, L, dd in _tutte if dd))
+        if _ld == ["DENTRO"]:
+            w("### ➜ ✔ **LA LETTURA NON DIPENDE DALL'ASSUNZIONE: col `τ` "
+              "MISURATO i passi che decidono restano ### **tutti `DENTRO`.** ### **Il "
+              "rapporto si avvicina al bordo `0.5` e non lo passa**, e questo e' piu' "
+              "forte di una lettura sola.")
+        else:
+            w("### ➜ ⛔ **LA LETTURA CAMBIA COL `τ` MISURATO: %s.** "
+              "### **Allora il rapporto alla curva NON e' una grandezza robusta, e il "
+              "criterio misura in parte l'ASSUNZIONE invece del sistema.**"
+              % ", ".join("passo `%d`: **%s**" % (p, L)
+                          for p, L, dd in _tutte if dd))
         w()
     w("## `twist_dip`: **il dipolo e' ancora zero?**")
     w()
@@ -384,7 +481,7 @@ def genera(d):
           "*<<se ne comparisse UNO, sarebbe una ### **scoperta**, non un difetto della "
           "cura>>*. ### **Il generatore la contraddiceva e il generatore e' stato "
           "corretto** -- ### **non il criterio**, e la differenza e' verificabile da "
-          "git: il task history e' ### **ANTENATO** di questo referto.**")
+          "git: il task history e' ### **ANTENATO** di questo referto.")
     else:
         w("> ### ✔ **LA CURA TIENE su `%d` passi:** zero calci spuri, zero firme del "
           "difetto vecchio, ### **zero archi oltre `4π`** -- contro i `~%d` per passo e "
@@ -405,7 +502,7 @@ def genera(d):
 
 # =============================================================== IL COLLAUDO
 def _finto(passi=1000, rapporti=(0.9, 0.8, 0.7), cont=None, tautw_salti=0,
-           girati=None, q50=1.0):
+           girati=None, q50=1.0, taus=None, s4=None):
     """Un `lunga.json` SINTETICO, con i veri nomi di chiave. ### **I valori sono SCELTI, non
     misurati:** servono a provare il GENERATORE, non la fisica."""
     c = {"calci_evitati": 12345, "calci_spuri_curata": 0, "spinta_senza_causa": 0,
@@ -418,13 +515,18 @@ def _finto(passi=1000, rapporti=(0.9, 0.8, 0.7), cont=None, tautw_salti=0,
         piene[str(p)] = {
             "passo": p, "q_tw": {"q050": q50}, "curva": 2.0,
             "rapporto_alla_curva": dec.get(p, 1.2), "decide": p in dec,
-            "q_tau_passi": {"q025": 200.0, "q050": 300.0, "q075": 400.0},
+            "q_tau_passi": {"q025": 200.0,
+                            "q050": (taus or {}).get(p, 300.0), "q075": 400.0},
             "q_tw_stella": {"q050": 6.35}, "m2": 0.03, "m2b": 0.02,
             "fraz_oltre_3pi": 0.001, "fraz_oltre_soglia_modulata": 0.002,
             "m5": {"fraz_zero": 1.0, "fraz_mezzo_pi": 0.0, "fraz_pi": 0.0}}
-    pd = [{"passo": k, "n": 12802 + k, "archi": 471564, "nati_tot": k // 10,
-           "schwinger_tot": k // 50, "sopra_4pi": 0, "tautw_salti": 0,
-           "tautw_tot": 1000, "q_tw": {"q050": q50}} for k in (140, 150, passi)]
+    # ### I passi per-passo: le CENTINE servono alla tabella della crescita, piu' il
+    #   `140` e il `150` del confronto. ### **`s4` e' una funzione del passo**, cosi'
+    #   una prova puo' costruire una crescita, un massimo in mezzo, o uno zero.
+    _ks = sorted(set([140, 150, passi] + list(range(100, passi + 1, 100))))
+    pd = [{"passo": k, "n": 12802 + k, "archi": 471564 + k, "nati_tot": k // 10,
+           "schwinger_tot": k // 50, "sopra_4pi": (s4(k) if s4 else 0),
+           "tautw_salti": 0, "tautw_tot": 1000, "q_tw": {"q050": q50}} for k in _ks]
     return {
         "passi": passi, "passi_girati": passi if girati is None else girati,
         "stato": "DATI SALVATI", "finestra": 50, "tau_curva": 300.0,
@@ -590,6 +692,64 @@ def collaudo():
     prova("quando: ### DEVE ACCENDERSI -- archi oltre 4pi SENZA nascite dice che il"
           " legame NON regge",
           "NON regge" in t and "PASSI DOPO LA PRIMA NASCITA" not in t)
+
+    # --------------------------------------------------- 5-ter. <<per passo>> e la SOMMA
+    # ### ⛔ **IL DIFETTO ERA QUI:** la riga diceva *<<per passo>>* e stampava la
+    #   ### **somma su mille passi.** Queste prove pretendono che i due numeri stiano
+    #   in ### **righe DIVERSE** e che quella *«per passo»* porti ### **il valore
+    #   dell'ULTIMO passo.**
+    _d = _finto(cont={"sopra_4pi_tot": 29357}, s4=lambda k: 368 if k >= 1000 else 1)
+    t = NL.join(genera(_d)[0])
+    prova("per-passo: ### la riga dell'ULTIMO passo porta `368`, NON la somma `29357`",
+          "all'ULTIMO passo** *(non la somma)* | `~108` a `150` | ### **`368`" in t)
+    prova("per-passo: ### e la SOMMA sta in una riga SUA, detta <<somma>>",
+          "| la **somma** su tutti i passi | *(non misurata)* | `29357` |" in t)
+    prova("per-passo: ### e la FRAZIONE c'e', perche' 368 su 477575 non e' 368 su 471564",
+          "la FRAZIONE** sugli archi esistenti" in t)
+
+    # --------------------------------------------------- 5-quater. la CRESCITA
+    _d = _finto(s4=lambda k: {100: 0, 200: 0, 300: 6, 400: 1, 500: 3, 600: 7,
+                              700: 13, 800: 23, 900: 100, 1000: 368}.get(k, 0))
+    t = NL.join(genera(_d)[0])
+    prova("crescita: ### la tabella della crescita c'e', con le centine",
+          "### E COME CRESCE" in t and "| `900` | ### **`100`** |" in t)
+    prova("crescita: ### DEVE ACCENDERSI -- il massimo e' l'ULTIMO passo, e lo DICE",
+          "IL MASSIMO E' L'ULTIMO PASSO" in t and "non si sa se si assesti" in t)
+    prova("crescita: ### e dice che il confronto fra orizzonti diversi NON dimostra "
+          "un peggioramento",
+          "A PARITA' DI ORIZZONTE" in t and "non dimostra che la cura" in t)
+    _d = _finto(s4=lambda k: 400 if k == 500 else 10)
+    t = NL.join(genera(_d)[0])
+    prova("crescita: ### DEVE TACERE -- col massimo IN MEZZO non dice <<l'ultimo passo>>",
+          "IL MASSIMO E' L'ULTIMO PASSO" not in t)
+
+    # --------------------------------------------------- 5-quinquies. il tau e la sensibilita'
+    # ### ⛔ **IL CRITERIO ESCLUDEVA I PASSI DOVE IL `tau` E' PIU' VICINO A `300`**, e
+    #   il referto deve DIRLO -- senza spostare il criterio.
+    _d = _finto(taus={50: 285.6, 150: 262.6, 300: 228.4, 600: 177.1, 1000: 161.5})
+    t = NL.join(genera(_d)[0])
+    prova("tau: ### DEVE ACCENDERSI -- lo scarto e' PIU' GRANDE dove il criterio DECIDE",
+          "E' CONTRADDETTA" in t and "PIU' VICINO a `300`" in t)
+    prova("tau: ### e dice che il criterio NON si sposta per questo",
+          "IL CRITERIO NON SI SPOSTA PER QUESTO" in t
+          and "spostare una soglia dopo aver" in t)
+    _d = _finto(taus={50: 50.0, 150: 60.0, 300: 299.0, 600: 301.0, 1000: 300.0})
+    t = NL.join(genera(_d)[0])
+    prova("tau: ### DEVE TACERE -- se lo scarto e' piu' grande dove NON decide, non lo dice",
+          "E' CONTRADDETTA" not in t)
+    _d = _finto(taus={50: 285.6, 150: 262.6, 300: 228.4, 600: 177.1, 1000: 161.5},
+                q50=3.9151)
+    t = NL.join(genera(_d)[0])
+    prova("sensibilita': ### la tabella col `tau` MISURATO c'e', e la curva e' RICALCOLATA",
+          "IL CONTROLLO DI SENSIBILITA'" in t and "col `τ` MISURATO" in t)
+    prova("sensibilita': ### e dichiara se la lettura DIPENDE dall'assunzione",
+          ("LA LETTURA NON DIPENDE DALL'ASSUNZIONE" in t)
+          or ("LA LETTURA CAMBIA COL" in t))
+    _d = _finto(taus={50: 285.6, 150: 262.6, 300: 1.0, 600: 1.0, 1000: 1.0}, q50=0.5)
+    t = NL.join(genera(_d)[0])
+    prova("sensibilita': ### DEVE ACCENDERSI -- con un `tau` che ribalta la lettura lo DICE",
+          "LA LETTURA CAMBIA COL" in t
+          and "NON e' una grandezza robusta" in t)
 
     # --------------------------------------------------- 6. la forma
     r, _l, _g = genera(_finto())
