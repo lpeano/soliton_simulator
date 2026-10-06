@@ -1,7 +1,7 @@
 {
  "blob_sim": "cf2a1ac8a73e56501a68663af048d62c591b3e78",
  "blob_patch": "943884a379bf27f21f20188dfac720dd2754bbfa",
- "blob_strumento": "f54520dc4ae4b87d3f2a2fb7f1df1a06e31f464b",
+ "blob_strumento": "95e4280b6ffa65d9be744de86713718714dbd4aa",
  "token_della_cura": "twp_dip",
  "blob_prima_atteso": "f7237563",
  "blob_dopo_atteso": "cf2a1ac8",
@@ -20,10 +20,10 @@
  "s3": {
   "totali": {
    "coppie": 70734600,
-   "diverse": 870884,
+   "diverse": 635562,
    "giri": 163998,
    "nuovi": 471564,
-   "non_spiegate": 235322,
+   "non_spiegate": 0,
    "passo1": 471564
   },
   "passi": [
@@ -59,20 +59,20 @@
    {
     "passo": 2,
     "archi": 471564,
-    "diverse": 235640,
+    "diverse": 318,
     "giri": 318,
     "nuovi": 0,
-    "non_spiegate": 235322,
+    "non_spiegate": 0,
     "q_diff": {
-     "q000": 3.1415926535897922,
-     "q005": 3.1415926535897922,
-     "q025": 3.141592653589793,
-     "q050": 3.141592653589793,
-     "q075": 3.141592653589793,
-     "q095": 3.141592653589794,
-     "q100": 15.707963267948966
+     "q000": 12.566370614359169,
+     "q005": 12.56637061435917,
+     "q025": 12.566370614359172,
+     "q050": 12.566370614359172,
+     "q075": 12.566370614359172,
+     "q095": 12.566370614359174,
+     "q100": 12.566370614359176
     },
-    "q_diff_su_pi": 1.0,
+    "q_diff_su_pi": 4.0,
     "q_tw": {
      "q000": 0.0,
      "q005": 0.0,
@@ -4381,8 +4381,6 @@
   "blob_copia": "67593ac9ad0c782caeed443a282d1216e57e2cb2",
   "in_configurazione_del_driver": true
  },
- "guasti": [
-  "S3"
- ],
- "esito": 1
+ "guasti": [],
+ "esito": 0
 }

@@ -6289,3 +6289,71 @@ dice e dice come: `git checkout 0476a80`.
 ### ⚠ **E un sesto, di formato:** doppi backtick nel referto del tetto -- ### **la quinta
 volta di questa famiglia**, e l'unico modo in cui escono resta ### **girare il generatore e
 guardare l'uscita.**
+
+
+---
+
+## 2026-10-06 — **IL SIGILLO DI `TORS-W8-AVVOLGIMENTO`: PASSA**, al secondo giro
+
+*(`csv/_seal_fork/_sigillo_tors_w8.py`, simulatore `cf2a1ac8`. ### **Il primo giro era
+FALLITO su `S3`, ed era un difetto MIO**: il reperto sta in `e8122cc`.)*
+
+### ✔ **`S0`, IL BRACCIO 0 — ed e' il risultato che conta per la cura**
+
+L'ancora e' ### **auto-denunciante** *(`_cli_flag.sim_prima_del_flag`)*: trova che il commit
+che introduce `twp_dip` e' `0b48f754`, prende ### **il suo PADRE**, estrae `f7237563` in
+binario e ### **asserisce che il file NON contenga il token**. Poi
+`prima + patch = cf2a1ac8`, ### **coincide** col blob di oggi, e
+
+> ### ✔ **I DUE SIMULATORI GIRANO `150` PASSI CON `241` ATTRIBUTI DI `net` A CONFRONTO E
+> ### ZERO DIVERSI.** ### **Quindi la patch e' l'UNICA differenza**, e il mio albero di
+> lavoro non ne ha altre *(`STANDARD 5`)*.
+
+### ✔ **`S3`: `0` differenze non spiegate** *(erano `235322`)*, e il conto torna **esatto**
+
+| | |
+|---|--:|
+| coppie `(passo, arco)` | `70734600` |
+| differenze oltre `1e-12` | `635562` |
+| di cui **giri di fase** | `163998` |
+| di cui **archi nuovi** *(tutti al passo `1`)* | `471564` |
+| ### **NON SPIEGATE** | ### **`0`** |
+
+### ✔ **`163998 + 471564 = 635562`: ogni differenza e' un giro di fase o un arco nuovo, e
+non resta niente da spiegare.**
+
+### ⛔ **MA `S3` DICHIARA IL PROPRIO POTERE, e lo zero da solo sarebbe un FALSO-UNO**
+
+Su input **legali** una differenza non spiegata e' ### **impossibile per algebra**:
+`|Δdph| < 2π` *(altrimenti `_w4` avvolge, ed e' spiegato)* e `|Δtd| <= 2π` ⟹
+`|argomento| < 4π` ⟹ `_w8` **non ripiega**. ### **Misurato su `4` milioni di casi legali:
+`1.000.153` differenze, TUTTE giri di fase, ZERO non spiegate.**
+
+> ### 📌 **QUINDI `S3` NON PROVA CHE LA FISICA NON E' CAMBIATA: prova che il CODICE segue
+> l'algebra** -- ### **e lo ha provato, trovando il mio difetto della spia.**
+> ### **La domanda sulla fisica la risponde `S0`.**
+
+### ✔ **E I `150` PASSI DEL SIGILLO SONO UN REGALO: il calcio di nascita E' SPARITO**
+
+| | legge **vecchia** *(`f7237563`)* | legge **curata** *(`cf2a1ac8`)* |
+|---|--:|--:|
+| `|tw|` al passo `1`, in ingresso | `0.0000` | `0.0000` |
+| `|tw|` **prodotto** dal passo `1` | ### **`3.0950`** mediano, `9.4248` massimo | ### **`0.0000`** |
+| archi con `|tw| >= 4π` | mediana `108`, massimo `109` | ### **`0` A OGNI PASSO dei `150`** |
+| calci di modulo `~4π` | ### **`142114`** | ### **`0`** |
+| `|tw|` mediano al passo `140` | `2.11` | `2.2223` *(`1.0532x`)* |
+
+### ⚠ **E IL RAPPORTO ALLA CURVA DEL GUARDIANO SCENDE MONOTONO**
+
+| passo | `|tw|` mediano | `2π·(1 − e^(−t/300))` | rapporto |
+|--:|--:|--:|--:|
+| `25` | `1.0120` | `0.5024` | ### **`2.0145`** |
+| `50` | `1.3967` | `0.9646` | **`1.4479`** |
+| `100` | `1.8743` | `1.7811` | **`1.0523`** |
+| `150` | `2.2829` | `2.4722` | ### **`0.9234`** |
+
+> ### ⚠ **E L'ECCESSO INIZIALE HA UNA SPIEGAZIONE CHE NON E' <<una spinta misteriosa>>:** la
+> curva usa **un solo** `τ = 300`, mentre il `τ_tw/dt_e` **misurato** vale `1491` al passo
+> `1`, `309` al `50` e `250` al `140`. ### **Nei primi passi la scarica e' molto piu' debole
+> di quella che la curva assume, quindi la crescita e' piu' rapida.**
+> ### ⛔ **E' UN LIMITE DEL TERMINE DI PARAGONE, e va scritto PRIMA della misura lunga.**
