@@ -60,6 +60,17 @@ D_MZD = os.path.join(RADICE, "csv", "_test_fork", "_mitosi_zero_dove")
 #   su `230` che su `150`, quindi allungare non indebolisce niente.
 PASSI = 230
 
+# ### ⛔ **`S0 (b)` HA IL SUO ORIZZONTE, E NON PUO' AVERE QUELLO DI `S2`.**
+#   `S0 (b)` confronta `prima` *(modulazione ON)* con `oggi` *(OFF)*; `S2` confronta
+#   `oggi` con `amp0_3.json`, che e' ### **lo stesso sistema di `prima`.**
+#   ### **Quindi i due chiedono cose OPPOSTE sulla stessa coppia: che sia IDENTICA e
+#   che DIFFERISCA.** ### **Io gliene avevo dato uno solo, e `S0 (b)` e' FALLITO a
+#   `230` passi -- PERCHE' LA PATCH FUNZIONA** *(il fallimento e' committato in
+#   `c211cd4`, col suo `json`)*. ### ✔ **Il primo passo in cui `prima` e
+#   `oggi` differiscono e' il `185`**, quindi ### **a `150` -- l'orizzonte che il
+#   mandato chiedeva -- `S0 (b)` ha ZERO differenze.**
+PASSI_S0B = 150
+
 # ### ⛔ **GLI ATTRIBUTI CHE LA PATCH TOGLIE DI PROPOSITO**, ed e' l'unica esclusione di `S0`.
 #   ### **Si dichiara, non si tace:** un'esclusione taciuta e' un insabbiamento, e il
 #   `C-letture` di `1b5b651` e' fallito proprio per non averla dichiarata.
@@ -194,9 +205,16 @@ def s0b(prima, passi):
             tot += 1
             if a.get(nome) != b.get(nome):
                 diff.append((k + 1, nome))
+    # ### ⛔ **IL PRIMO PASSO DIVERSO SI RIPORTA SEMPRE, anche quando il braccio
+    #   PASSA:** un `FALLISCE` senza numero non dice ### **quanto manca**, e un `PASSA`
+    #   senza numero non dice ### **quanto margine c'e'.** ### **Se un giorno scendesse
+    #   sotto `150`, si vedrebbe SUBITO.**
+    primo = min((z[0] for z in diff), default=None)
     return {"passi": passi, "attributi_confrontati": tot, "differenze": diff[:30],
             "n_differenze": len(diff), "esclusi": sorted(esclusi),
             "blob_prima": b1[:8], "blob_oggi": b2[:8],
+            "primo_passo_diverso": primo,
+            "attributi_diversi": sorted(set(z[1] for z in diff)),
             "passa": bool(tot) and not diff}
 
 
@@ -247,13 +265,22 @@ def main(argv):
     stampa()
 
     riga("-")
-    stampa("S0 (b): PRIMA e OGGI girano %d passi con TUTTI gli attributi di net identici"
-           % passi)
+    stampa("S0 (b): PRIMA e OGGI girano %d passi (il SUO orizzonte, non quello di S2)"
+           % PASSI_S0B)
+    stampa("        con TUTTI gli attributi di net identici")
     riga("-")
-    B = s0b(A["prima"], passi)
-    for k in ("passi", "attributi_confrontati", "n_differenze", "esclusi",
+    # ### ✔ **`PASSI_S0B`, non `passi`:** e' la correzione di `c211cd4`.
+    B = s0b(A["prima"], PASSI_S0B)
+    for k in ("passi", "attributi_confrontati", "n_differenze",
+              "primo_passo_diverso", "attributi_diversi", "esclusi",
               "blob_prima", "blob_oggi"):
         stampa("   %-24s %s" % (k, B[k]))
+    if B.get("primo_passo_diverso") is None:
+        stampa("   ### ✔ nessuna differenza: e il margine fino al passo %d e' INTERO"
+               % PASSI_S0B)
+    else:
+        stampa("   ### ⛔ la prima differenza e' al passo %s, cioe' DENTRO l'orizzonte"
+               % B["primo_passo_diverso"])
     if B["differenze"]:
         stampa("   le prime differenze (passo, attributo):")
         for z in B["differenze"][:10]:
