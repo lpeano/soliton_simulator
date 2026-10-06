@@ -6429,3 +6429,41 @@ della cura** *(`evitati` `0` → `318` → `595` → `859`; `|tw| q50` `0.0000` 
 MISURA**, e questo e' il modo di dirlo che non chiede di crederci.
 
 **Collaudo `47` su `47`. La corsa da `1000` passi si rilancia adesso.**
+
+---
+
+## 2026-10-06 — **IL GENERATORE DEL REFERTO, committato PRIMA del referto, e con `26` prove su `json` sintetici**
+
+`csv/_test_fork/_referto_lunga.py`, blob ### **`2266d147`**. Il simulatore ### **non si
+tocca:** resta `cf2a1ac8`; la corsa da `1000` passi ### **sta girando** e questo commit non
+la tocca *(il generatore non e' nel percorso del processo)*.
+
+> ### ✔ **`genera()` E' SEPARATO DA `main()` PROPRIO PERCHE' IL COLLAUDO POSSA CHIAMARLO.**
+> E' la lezione di `LUNGA-BATTITO-CADUTA`, applicata ### **prima** invece che dopo:
+> ### **cio' che sta dentro `main` nessun controllo lo puo' guardare**, e il referto
+> ### **nasce dentro `main`** e' il modo in cui tre difetti di referto mi sono sfuggiti
+> in questa sessione.
+
+**I `26` casi provano il GENERATORE, non la fisica** — i `json` sono sintetici e i valori
+scelti. Fra questi, i difetti ### **veri** di questa sessione, uno per prova:
+
+| il difetto, e dove e' nato | la prova |
+|---|---|
+| `0.0` stampato `n/d` *(`34a11dc`)* | `n4(0.0) == "0.0000"`, e ### **deve DISTINGUERE** da `n4(None)` |
+| la `Spearman` e' una **tupla** *(il `TypeError` di `a1e9246`)* | `val([0.031, 900]) == 0.031` |
+| tre quantili uguali sotto tre etichette *(`eebe24f`)* | i tre valori nel testo sono ### **tre valori diversi** |
+| *«l'ipotesi NON e' refutata»* con tutto `n/d` *(`STANDARD 3`)* | con i rapporti assenti stampa ### **«il criterio NON si applica»** |
+| una corsa **incompleta** letta come una misura | `passi_girati != passi` → ### **nessun referto**, e dice perche' |
+
+> ### ✔ **E IL POTERE DEI TRE CASI-CHE-DEVONO-FALLIRE E' MISURATO:** ho rotto il verdetto
+> perche' dicesse sempre *«LA CURA TIENE»*, e il collaudo e' sceso a ### **`23` su `26`**
+> nominando i tre.
+
+> ### ⚠ **MA LE PRIME TRE VERSIONI DI QUELLE PROVE FALLIVANO SU UN GENERATORE CORRETTO:**
+> cercavano `«LA CURA TIENE»` ### **in tutto il testo**, e quella frase sta ### **anche nel
+> TITOLO della sezione.** Una quarta sbagliava una maiuscola. ### **Quattro falsi negativi
+> su ventisei, e li ho visti solo girando** — ora il verdetto ### **si legge dalla SUA riga**
+> *(`_verdetto()`)*, che e' anche piu' forte: prova ### **il verdetto**, non la presenza di
+> una frase.
+
+**Collaudo `26` su `26`. Il referto si genera a corsa finita.**
