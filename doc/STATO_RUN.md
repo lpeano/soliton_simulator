@@ -2250,3 +2250,66 @@ gli INDICI** degli archi che superano `4pi`, girato per i **primi tre** passi.
 FLUSSO**, e sono due difetti diversi.
 
 **Collegata a:** `CRESCITA-DOPO-Z43`, `MITOSI-SOGLIA-GRAD`, `Z43`.
+
+
+---
+
+## `KAPPA-TW-COMMENTO` — **il commento dice `kappa = 3.1831`, il codice restituisce `1`**
+
+*(Aperta il 2026-10-06 da una lettura del codice fatta per la misura del **tetto della
+torsione**: e' la verifica **(a)** delle tre che il mandato chiede ### **prima** del task
+history. ### **Il simulatore non e' stato toccato:** `f7237563`.)*
+
+### IL FATTO, **dal sorgente e non dal commento**
+
+`_tau_tw_locale` *(`:584`)* porta **due** affermazioni su `kappa_tw`:
+
+| dove | che cosa dice |
+|---|---|
+| il **docstring** | *«`kappa_tw = TAU_TW/(2pi)` resta come rapporto `O(1)`»* |
+| il **commento nel corpo** | *«`tau_tw = kappa_tw * 2pi/|dw|`, con `kappa_tw = TAU_TW/(2pi)` rapporto `O(1)`»* |
+| ### **la riga che GIRA** | `return np.maximum((2*np.pi) / dom, 1e-3)` — ### ⛔ **senza NESSUN fattore `TAU_TW`** |
+| il commento **di quella riga** | *«`kappa=1: tau_tw = 2pi/|dw_locale|`»* |
+
+### ⛔ **I DUE COMMENTI DELLA STESSA FUNZIONE SI CONTRADDICONO FRA LORO.** Con
+`TAU_TW = 20.0` *(`:583`)* il docstring implica `kappa_tw` = `20/(2pi)` = **`3.1831`**;
+### **il codice da' `kappa = 1` ESATTAMENTE.**
+
+### PERCHE' E' UN DIFETTO E NON UNA SVISTA
+
+`tau_tw` e' il **tempo di scarica** della torsione, quindi `kappa` entra **direttamente** nel
+tetto di equilibrio
+
+```
+tw* = kappa * 2pi * (r_i*w_i - r_j*w_j) / ( r_medio * (|w_i - w_j| + 1e-3) )
+```
+
+| con | il tetto | e la soglia di mitosi `3pi` ... |
+|---|--:|---|
+| `kappa = 1` *(il codice)* | **`2pi`** | ### e' **IRRAGGIUNGIBILE** in equilibrio: la mitosi e' **marginale per costruzione** |
+| `kappa = 3.1831` *(il commento)* | **`20`** | sarebbe **tre volte** la soglia: la mitosi sarebbe ### **generica** |
+
+> ### ⛔ **LE DUE LETTURE DANNO FISICHE OPPOSTE**, e un commento non e' una fonte: in questo
+> repo i commenti ### **sono stati scaduti**, e `CLAUDE.md` par.2 lo dice come regola.
+
+### ⚠ **E `TAU_TW = 20.0` NON E' MORTA**
+
+La usa il ramo **non locale** *(`TAU_LOCALI = False`)*. ### **Quindi la costante non si puo'
+togliere:** si puo' correggere il commento, oppure **derivare** `kappa`.
+
+### ⛔ **NON CURATA: `kappa` E' UNA DECISIONE DI LUCA**
+
+Il mandato del tetto lo dice: *«`kappa`, la soglia, il dipolo locale e il `0.3` sono decisioni
+sue»*. **LE TRE STRADE**, scritte per chi la prendera' e ### **non verificate**:
+
+1. **il commento e' sbagliato** e `kappa = 1` e' la legge ⟹ si corregge il commento e si
+   dichiara che ### **`kappa = 1` e' UN NUMERO SCRITTO A MANO** *(`A1`)*;
+2. **il commento e' giusto** e il codice ha perso il fattore ⟹ ### **il tetto e' `3.1831`
+   volte piu' alto e OGNI lettura fatta finora sulla torsione va rifatta**;
+3. ### **`kappa` va DERIVATO e non scelto**, che e' cio' che `A1` chiede.
+
+> ### 📌 **E LA (2) NON SI DECIDE DAL COMMENTO:** si decide da ### **`git log` sulla riga del
+> `return`** -- `STANDARD 9` dice che `git log` e' parte del repo e va cercato anche lui.
+
+**Collegata a** `SCALE-TW` *(che chiede l'analisi completa delle scale della torsione, e di
+cui questa e' **un pezzo**)*, `ARCHI-OLTRE-4PI`, `CENS-B4`, `MITOSI-SOGLIA-GRAD`.
