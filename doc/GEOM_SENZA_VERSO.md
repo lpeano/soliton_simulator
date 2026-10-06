@@ -438,3 +438,140 @@ rotta?***
 | **`D`** *(la direzione scelta)* | ### **confermata**: `perc_geom` resta ### **si'/no**, e il verso viene dalla circolazione ### **con segno** |
 
 > ### ⛔ **E QUI MI FERMO: la forma esatta della legge e' una decisione di Luca.**
+
+---
+
+# ANNOTAZIONE *(2026-10-06 — `par.8`: si ANNOTA, non si riscrive)*
+
+## ⛔ **LE TRE OBIEZIONI DEL GUARDIANO ALLA RACCOMANDAZIONE `C`** — *e le ho verificate tutte e tre sul codice*
+
+*(Mandato di Luca. ### **Nessuna legge nuova, nessuna patch al simulatore** (`b8c21049`).)*
+
+> ### ⛔ **TUTTE E TRE REGGONO**, e due di esse ### **ribaltano la mia raccomandazione.** Qui
+> sotto distinguo ### **cio' che ho VERIFICATO** da ### **cio' che resta da MISURARE.**
+
+---
+
+## `(a)` ⛔ **LA BASE DEI CICLI DIPENDE DALLA NUMERAZIONE DEI NODI** — *verificato*
+
+**Dal codice di `_base_cicli_topologici`** *(letto, non assunto)*:
+
+| | il codice | la conseguenza |
+|---|---|---|
+| le radici | `for radice in range(n)` | ### **in ordine di INDICE**, a partire da `0` |
+| l'albero | DFS con una pila, sull'ordine di `adiacenza`, che segue ### **l'ordine degli ARCHI** | ### **l'albero dipende dalla NUMERAZIONE** |
+| i cicli | risalgono `parent` fino al ### **LCA** | ### **possono essere lunghi quanto l'albero**, cioe' quanto la rete |
+| il taglio | `if len(cicli) >= massimo: break`, con `massimo = 256` | ### **tronca**, e tiene ### **i primi `256` archi non-albero IN ORDINE DI INDICE** |
+
+> ### ⛔ **QUINDI IL VERSO DI UN NODO DIPENDEREBBE DA UNA SCELTA GLOBALE E ARBITRARIA:** la
+> radice `0`, l'ordine di visita, e ### **quali `256` cicli sono sopravvissuti al taglio.**
+>
+> ### ⛔ **E' CONTRO `A2`** *(una legge locale decisa da una statistica globale)* ### **e
+> contro `A4`/`A5`** *(informazione da nodi lontani nello stesso istante)*.
+>
+> ### ⚠ **E <<non locale>> NELLA MIA TABELLA ERA TROPPO DEBOLE.** *«Non locale»* suona come
+> un costo; ### **questo e' un VIZIO: due numerazioni diverse della STESSA rete darebbero
+> versi diversi.** ### **Non e' una legge.**
+
+---
+
+## `(b)` ⛔ **<<INVARIANTE TOPOLOGICO>> NON VUOL DIRE STABILE QUI** — *verificato*
+
+**① La cache si invalida a ogni nascita.** `_grado()` fa ### **`self._cicli_topologici =
+None`** *(verificato col comando)*, e `_grado()` gira ### **a ogni mitosi e a ogni Schwinger.**
+
+> ### ⛔ **Con `3496` divisioni e `1265` Schwinger in `1000` passi** *(`27c10bd`)*, la base
+> ### **si ricostruisce da capo migliaia di volte** — e ### **ogni ricostruzione puo' dare
+> cicli DIVERSI**, per il punto `(a)`. ### **Un invariante su una base che cambia non e' un
+> invariante stabile: e' un invariante di un'altra base.**
+
+**② L'olonomia e' un multiplo intero di `4π`.** ### **Verificato per algebra**, non assunto:
+
+```
+su un ciclo CHIUSO la somma di (phi_i - phi_j) TELESCOPIA a 0 ESATTO
+w4(x) = x - 4pi*k(x),  k intero        ->   somma w4 = 0 - 4pi*(somma k) = 4pi*intero
+```
+
+*(`_w4(a) = (a + 2π) % 4π − 2π`, e `FASE_2PI = False` ⟹ il dominio di `φ` e' `4π`.)*
+
+> ### ⛔ **QUINDI L'OLONOMIA E' `0` o `±4π` o `±8π`…, MAI UN VALORE INTERMEDIO.** Se e' `0`
+> ### **il verso NON ESISTE**, e il `sign` darebbe ### **`0`** — cioe' ### **il valore NUOVO**
+> che il `contro` della strada `(i)` dichiarava come il suo costo. ### **`S-dominio`
+> fallirebbe, o il `0` andrebbe dichiarato e gestito da TUTTI i lettori.**
+
+> ### ⚠ **E <<zero sulla maggior parte dei cicli>> E' L'UNICO PEZZO CHE NON HO VERIFICATO:**
+> dipende da quanti ### **vortici di fase** ci sono, e ### **non lo so.** ### **E' una
+> PREVISIONE del guardiano, e `M3` la misura** *(la frazione dei cicli della base con olonomia
+> diversa da zero)*. ### **Lo scrivo come da misurare, non come fatto.**
+
+---
+
+## `(c)` ⛔ **`A`, `B` e `C` SONO TUTTE UN SEGNO DISCRETO: il salto di `π` resta**
+
+> ### ⛔ **E QUESTO E' IL PUNTO CHE RIBALTA LA MIA RACCOMANDAZIONE.** Avevo scritto che il
+> criterio e' ### **la stabilita'**, e poi ho raccomandato la `C` ### **perche' cambia di
+> RADO** — ma ### **quando cambia, cambia di `±π` come tutte le altre.** ### **Avevo scelto
+> la MENO frequente invece di quella che TOGLIE IL SALTO.**
+>
+> ### ✔ **SOLO `D` LO TOGLIE ALLA RADICE**, ### **ed e' anche la piu' LOCALE.**
+
+### ⚠ **MA `D` HA DUE COSTI, e vanno scritti**
+
+**① `D` CONTRADDICE LA STELLA POLARE.** Il punto `D` di questo documento dice:
+
+> *«la catena della rotazione ### **legge il verso dalla CIRCOLAZIONE CON SEGNO**»*
+
+e l'opzione `D` ### **non usa nessuna circolazione**: prende il dipolo ### **dalla torsione
+con segno DELL'ARCO STESSO.** ### **E' una direzione DIVERSA da quella scelta il 2026-09-29**,
+e ### **adottarla sarebbe cambiare la decisione, non attuarla.** ### **E' una decisione di
+Luca.**
+
+**② `D` CREA UN ANELLO SULLO STESSO ARCO:** `tw → dipolo → tw`.
+
+Con il dipolo che entra ### **come variazione**, se `twist_dip = f(tw_arco)`:
+
+```
+dtw = P + f(tw + dtw) - f(tw)  ~  P + f'*dtw        ->      dtw = P / (1 - f')
+```
+
+> ### ⛔ **LA CONDIZIONE DI STABILITA' E': `sup |f'| < 1`**, e il ### **guadagno e'
+> `1/(1 − f')`** — che ### **DIVERGE per `f' → 1`.**
+
+### ✔ **LA FORMA CHE PROPONGO, e soddisfa la condizione PER COSTRUZIONE**
+
+```
+twist_dip = PI * tanh( tw / PHI_CRIT )
+```
+
+| | |
+|---|---|
+| ### **`f'(tw) = (π/2π)·sech²(tw/2π)`**, quindi ### **`sup|f'| = 1/2`** | ### ✔ **stabile**, col guadagno ### **`≤ 2`** |
+| il codominio e' ### **`(−π, +π)`** | ### ✔ **lo STESSO intervallo del dipolo di oggi** *(`{−π, 0, +π}`)*: ### **nessun dominio nuovo** |
+| le due costanti | ### **`π = twist_max`** e ### **`2π = PHI_CRIT`**, ### **gia' nel sistema** |
+
+> ### ✔ **ZERO NUMERI NUOVI**, e ### **la riduzione al limite si vede:** per `|tw| ≫ 2π` la
+> `tanh` satura a ### **`±π`**, cioe' ### **il valore di oggi**; e per `tw → 0` il dipolo va a
+> `0`, ### **come oggi su un arco senza torsione.**
+>
+> ### ⚠ **E IL `1/2` NON E' UNA SCELTA: e' `π/(2π)`**, cioe' ### **il rapporto fra le due
+> costanti che la forma usa gia'.** Se un giorno si volesse `f'` piu' piccolo, ### **si
+> cambierebbe la SCALA, e quello sarebbe un numero da dichiarare.**
+
+---
+
+## ⛔ **DOVE MI LASCIANO QUESTE TRE OBIEZIONI**
+
+| | prima | dopo |
+|---|---|---|
+| `A` | sconsigliata | ### **sconsigliata** *(invariata)* |
+| `B` | non raccomandata | ### **peggiora**: eredita `(a)` e `(b)` dalla base dei cicli |
+| `C` | ### **RACCOMANDATA** | ### ⛔ **NON PIU':** `(a)` la rende ### **non una legge** *(dipende dalla numerazione)*, `(b)` le toglie ### **sia la stabilita' sia il dominio** |
+| `D` | *«alternativa da considerare seriamente»* | ### ✔ **l'unica che TOGLIE IL SALTO**, con ### **due costi DICHIARATI** |
+
+> ### ⛔ **E NON RACCOMANDO `D` AL POSTO DI `C`: dichiaro che la mia raccomandazione e'
+> CADUTA e che `D` ha un costo che NON posso decidere io** — ### **contraddice una direzione
+> che Luca ha gia' scelto.**
+>
+> ### ✔ **Quello che posso fare e' DARE I NUMERI**, ed e' `M3`: quante volte per passo
+> cambiano ### **il segno di `A`**, ### **l'olonomia di `C`**, ### **il segno di `tw` per
+> `D`**, e ### **`perc_geom` di oggi** come riferimento. ### **La scelta e' di Luca.**

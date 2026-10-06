@@ -7525,3 +7525,62 @@ assoluto.**
 tre criteri fissati prima.
 
 > ### ⛔ **E QUI MI FERMO: la forma esatta della legge e' una decisione di Luca.**
+
+---
+
+## 2026-10-06 — **LE TRE OBIEZIONI DEL GUARDIANO REGGONO TUTTE, e la mia raccomandazione `C` E' CADUTA**
+
+*(Verificate ### **sul codice**, come il mandato chiede. Nessuna legge nuova, nessuna patch:
+il simulatore resta `b8c21049`.)*
+
+### `(a)` ⛔ **LA BASE DEI CICLI DIPENDE DALLA NUMERAZIONE** — verificato
+
+`for radice in range(n)` ### **in ordine di indice da `0`**; DFS sull'ordine degli archi; i
+cicli risalgono al LCA e ### **possono essere lunghi quanto la rete**; e
+`if len(cicli) >= massimo: break` tiene ### **i primi `256` archi non-albero in ordine di
+indice.**
+
+> ### ⛔ **Quindi il verso di un nodo dipenderebbe dalla radice `0`, dall'ordine di visita e da
+> QUALI `256` cicli sono sopravvissuti.** ### **Contro `A2` e contro `A4`/`A5`.**
+> ### ⚠ **E <<non locale>> nella mia tabella era TROPPO DEBOLE:** non e' un costo, e'
+> ### **un vizio** — ### **due numerazioni della STESSA rete darebbero versi diversi.**
+
+### `(b)` ⛔ **<<INVARIANTE>> NON VUOL DIRE STABILE QUI** — verificato
+
+`_grado()` fa ### **`self._cicli_topologici = None`**, e gira ### **a ogni nascita**: con
+`3496` divisioni e `1265` Schwinger la base ### **si ricostruisce migliaia di volte**, e ogni
+volta ### **puo' dare cicli diversi** *(per `(a)`)*.
+
+**E l'olonomia e' un multiplo intero di `4π`**, ### **verificato per algebra:** su un ciclo
+chiuso `Σ(φ_i − φ_j)` ### **telescopia a `0` esatto**, e `w4(x) = x − 4π·k(x)` ⟹
+`Σ w4 = 4π·intero`. ### **Quindi `0` o `±4π`, mai in mezzo — e dove e' `0` il `sign` da'
+`0`**, il valore nuovo che `S-dominio` non ammette.
+
+> ### ⚠ **E <<zero sulla maggior parte dei cicli>> e' l'UNICO pezzo che NON ho verificato:**
+> dipende da quanti vortici ci sono. ### **`M3` lo misura**, e lo scrivo come da misurare.
+
+### `(c)` ⛔ **E QUESTO RIBALTA LA MIA RACCOMANDAZIONE**
+
+> ### ⛔ **Avevo scritto che il criterio e' LA STABILITA', e poi ho raccomandato la `C` perche'
+> cambia DI RADO — ma quando cambia, cambia di `±π` come tutte.** ### **Avevo scelto la MENO
+> FREQUENTE invece di quella che TOGLIE IL SALTO.**
+
+**Solo `D` lo toglie alla radice, ed e' anche la piu' locale** — ma ha ### **due costi**, e li
+scrivo: ### **contraddice il punto `D` della Stella Polare** *(«il verso viene dalla
+circolazione con segno»)*, e ### **crea un anello sullo stesso arco.**
+
+**La condizione di stabilita', derivata:** `Δtw = P/(1 − f')` ⟹ ### **`sup|f'| < 1`**, col
+guadagno `1/(1 − f')` che ### **diverge per `f' → 1`.** E la forma che propongo la soddisfa
+### **per costruzione:**
+
+```
+twist_dip = PI * tanh( tw / PHI_CRIT )     ->   sup|f'| = pi/(2pi) = 1/2,  guadagno <= 2
+```
+
+> ### ✔ **Zero numeri nuovi** *(`π = twist_max`, `2π = PHI_CRIT`)*, ### **stesso codominio del
+> dipolo di oggi**, e ### **la riduzione al limite si vede:** per `|tw| ≫ 2π` satura a `±π`,
+> cioe' ### **il valore di oggi.**
+
+> ### ⛔ **E NON RACCOMANDO `D` AL POSTO DI `C`: dichiaro che la mia raccomandazione e' CADUTA**
+> e che `D` ### **contraddice una direzione che Luca ha gia' scelto.** ### **Quello che posso
+> fare e' dare i numeri — ed e' `M3`.**
