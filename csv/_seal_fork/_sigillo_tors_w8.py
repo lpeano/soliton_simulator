@@ -148,7 +148,23 @@ class Spia(object):
         # ### ⚠ su un arco NUOVO la forma nuova e' zero PER COSTRUZIONE: `np.where` sul
         #   risultato lo rende esplicito invece di affidarlo all'aritmetica.
         # --- la forma VECCHIA, sullo STESSO stato
-        _twp_v = np.where(nuovo, 0.0, twp)      # il vecchio `twp` portava la SOMMA avvolta
+        # ### ⛔ **QUI AVEVO SBAGLIATO, e il sigillo me l'ha detto** *(`e8122cc`)*: usavo
+        #   `twp` DA SOLO, ma il vecchio `twp` NON era `dph` -- era
+        #   ### **`_w8(dph + twist_dip)`, LA SOMMA AVVOLTA**, che col marcatore vale
+        #   ### **`twp + twp_dip`.** E poiche' `|dph + twist_dip| <= 3pi < 4pi`, `_w8` di
+        #   quella somma E' la somma: la ricostruzione e' ESATTA, non approssimata.
+        #   ### **Con la ricostruzione sbagliata la spia confrontava la legge nuova con una
+        #   TERZA LEGGE INVENTATA, e sbagliava di `pi` ESATTO sui 235 mila archi che al
+        #   passo 2 avevano `twp_dip = pi`.**
+        #   ### ⚠ **E L'AVEVO SCRITTO IO** nel commit dello strumento (`4aba5ec`, <<cosa
+        #   ricontrollare>> punto 2): *«se sbagliassi questa ricostruzione, S3 confronterebbe
+        #   la legge nuova con una terza legge inventata, e il suo zero non vorrebbe dire
+        #   niente»*. ### **Avvertimento scritto, errore fatto.**
+        #   ### ✔ **Sui NUOVI resta `0`:** `_allaccia` metteva `twp = 0`, e le due regole di
+        #   nascita ci mettevano la fase -- ma il confronto sui nuovi e' comunque
+        #   **spiegato**, quindi il valore qui non cambia nessun verdetto. Lo lascio `0`
+        #   perche' e' cio' che la semina faceva, ed e' il caso peggiore.
+        _twp_v = np.where(nuovo, 0.0, twp + np.nan_to_num(tdp))
         vecchia = _w8(dph + td - _twp_v)
         d = np.abs(nuova - vecchia)
         div = d > 1e-12
@@ -370,14 +386,43 @@ def collaudo():
           % (sp3.passi[-1]["diverse"], sp3.passi[-1]["nuovi"],
              sp3.passi[-1]["non_spiegate"]))
     # ### IL CASO CHE DEVE FALLIRE PER LA SPIA: una differenza NON spiegata si CONTA
+    # ### ⛔ **LA PROVA CHE DISCRIMINA, e MANCAVA: con `twp_dip` FINITO E DIVERSO DA ZERO
+    #   la ricostruzione del vecchio `twp` deve usare `twp + twp_dip`.** Il collaudo di
+    #   prima provava solo che la spia CONTA; ### **non che ricostruisce GIUSTO**, e sono
+    #   due cose diverse. Le quattro prove di prima passavano con `twp_dip = 0` o `nan`,
+    #   ### **i due soli casi in cui la ricostruzione sbagliata e quella giusta
+    #   COINCIDONO.**
     sp4 = Spia()
     sp4.passo = 7
-    sp4.torsione(fr, dph=np.full(300, 1.5), twist_dip=np.zeros(300),
-                 twp=np.full(300, 1.4), twp_dip=np.full(300, 0.9))
-    prova("### spia: il caso che DEVE essere contato -- un dipolo precedente DIVERSO",
-          sp4.passi[-1]["non_spiegate"] == 300,
+    sp4.torsione(fr, dph=np.full(300, 1.31), twist_dip=np.zeros(300),
+                 twp=np.full(300, 1.30), twp_dip=np.full(300, np.pi))
+    prova("### spia: con un DIPOLO PRECEDENTE = pi le due leggi sono D'ACCORDO "
+          "(la ricostruzione e' giusta)",
+          sp4.passi[-1]["non_spiegate"] == 0 and sp4.passi[-1]["diverse"] == 0,
+          "diverse %d, NON spiegate %d: con `twp` DA SOLO sarebbero state 300 e 300"
+          % (sp4.passi[-1]["diverse"], sp4.passi[-1]["non_spiegate"]))
+    # --- e la prova ARITMETICA, in isolamento, che la ricostruzione sbagliata sbaglia di pi
+    _d1, _d2, _t1 = 1.30, 1.31, np.pi
+    _nuova_a = _w4(_d2 - _d1) + (0.0 - _t1)
+    _giusta = _w8(_d2 + 0.0 - _w8(_d1 + _t1))
+    _mia_sbagliata = _w8(_d2 + 0.0 - _d1)
+    prova("### spia: e la legge VECCHIA ricostruita BENE coincide con la nuova",
+          abs(_nuova_a - _giusta) < 1e-12,
+          "nuova %+.6f, vecchia %+.6f, differenza %.3e"
+          % (_nuova_a, _giusta, abs(_nuova_a - _giusta)))
+    prova("### spia: IL CASO CHE DEVE FALLIRE -- la ricostruzione SBAGLIATA sbaglia di pi",
+          abs(abs(_nuova_a - _mia_sbagliata) - np.pi) < 1e-12,
+          "scarto %+.6f = %.4f pi, ed e' il difetto che il sigillo ha trovato"
+          % (_nuova_a - _mia_sbagliata, (_nuova_a - _mia_sbagliata) / np.pi))
+    # --- e il caso in cui la spia DEVE contare: una differenza che non e' spiegata
+    sp5 = Spia()
+    sp5.passo = 7
+    sp5.torsione(fr, dph=np.full(300, 1.5 + P4 + 0.3), twist_dip=np.zeros(300),
+                 twp=np.full(300, 1.5), twp_dip=np.zeros(300))
+    prova("### spia: e una differenza NON spiegata si CONTA ancora (il presidio regge)",
+          sp5.passi[-1]["non_spiegate"] > 0,
           "NON spiegate %d su 300: se la spia non le contasse, S3 passerebbe a vuoto"
-          % sp4.passi[-1]["non_spiegate"])
+          % sp5.passi[-1]["non_spiegate"])
 
     riga("=")
     ko = [n for n, o, _d in esiti if not o]
