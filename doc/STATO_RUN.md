@@ -2311,6 +2311,30 @@ sue»*. **LE TRE STRADE**, scritte per chi la prendera' e ### **non verificate**
 > ### 📌 **E LA (2) NON SI DECIDE DAL COMMENTO:** si decide da ### **`git log` sulla riga del
 > `return`** -- `STANDARD 9` dice che `git log` e' parte del repo e va cercato anche lui.
 
+### ⛔ **ANNOTAZIONE DEL 2026-10-06 — IL TERZO CONSUMATORE, che questo documento
+### non dichiarava**
+
+*(Rilievo del guardiano, ### **confermato da me sul sorgente committato.** Il testo qui sopra
+### **non si riscrive:** diceva *«la usa il ramo NON locale»*, ed e' **incompleto**.)*
+
+`TAU_TW` entra in gioco per ### **TRE vie, non due**:
+
+| | dove |
+|--:|---|
+| **1** | il ramo **non locale** *(`TAU_LOCALI = False`)* |
+| **2** | il **docstring**, che dice `kappa_tw = TAU_TW/(2pi)` = `3.1831` mentre il codice da' `kappa = 1` |
+| ### **3** | ### **`_tau_tw_locale` STESSA, a `:591`:** `return TAU_TW` nel proprio ramo di guardia, `if len(net.phivel) < net.n or len(i) == 0` |
+
+### ⛔ **E LA TERZA E' LA PIU' INSIDIOSA:** se scattasse, `tau_tw` passerebbe da ### **`~2`-`6`**
+*(misurato: mediana `2.4055` al passo `50`, `1.9738` al passo `140`)* a ### **`20`** -- un
+fattore `3`-`10` sul tetto di equilibrio -- ### **e nessun contatore lo conta.**
+### **E' un fallback NON MISURATO, la classe di `P5` e `A8`: un ramo silenzioso non e' un
+ramo.** La misura del tetto *(`eebe24f`)* ### **non l'ha censito.**
+
+> ### 📌 **DECISIONE DI LUCA, presa:** il contatore `A8` *(invocazioni, salti, forma,
+> quando)* entra ### **nella cura di `TORS-W8-AVVOLGIMENTO`**, byte-inerte, e il suo numero
+> va ### **nella misura finale.**
+
 **Collegata a** `SCALE-TW` *(che chiede l'analisi completa delle scale della torsione, e di
 cui questa e' **un pezzo**)*, `ARCHI-OLTRE-4PI`, `CENS-B4`, `MITOSI-SOGLIA-GRAD`.
 

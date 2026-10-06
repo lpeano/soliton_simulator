@@ -264,6 +264,52 @@ Da' `20`/`26`/`16`, perche' i bracci permutati ### **cambiano topologia PIU' di 
 ciascun braccio, non col `13` che avevo calcolato:** se avessi fissato `13` come criterio
 ### **sarebbe fallito a torto**, e il difetto sarebbe stato mio.
 
+## ⛔ ANNOTAZIONE DEL 2026-10-06 — **DUE CORREZIONI: `C-ident` NON CHIUDE NIENTE, e
+## il primo cambio di `len(avv)` e' *AL* passo 100**
+
+*(Trovate da me nella verifica che Luca ha chiesto, ### **ricontrollate e confermate dal
+guardiano.** ### **Le annotazioni di prima NON si riscrivono:** restano com'erano, con questa
+accanto.)*
+
+### ⛔ **E1 — <<LA COSA CHE NON SAPEVO, PUNTO `1`, SI CHIUDE>> ERA FALSO. NON SI CHIUDE.**
+
+Avevo scritto che `C-ident` da' *«zero ri-etichettature su `130`/`124`/`134`/`137` coppie»* e
+che quindi *«la mappa TIENE, e ora e' **misurato** invece che sperato»*.
+
+| | |
+|---|---|
+| il **caso pericoloso** | una coppia a lunghezza uguale in cui ### **al passo PRIMA era nato qualcosa** -- solo allora gli archi possono essere cambiati a lunghezza costante |
+| quante volte si e' presentato | ### ⛔ **ZERO, su tutti e quattro i bracci** |
+| quindi | in ogni coppia guardata l'insieme degli archi era identico ### **PER COSTRUZIONE**, e l'impronta ### **non poteva differire** |
+
+### ➜ ⛔ **E' UN FALSO-ZERO: lo zero era garantito dall'insieme scelto.** Le `525` coppie non
+sono `525` prove: sono `525` casi in cui ### **non c'era niente da vedere.**
+### **Il rischio che un passo tolga `k` archi e ne aggiunga `k` NON e' escluso da questa
+corsa: e' solo non capitato, e LA DOMANDA RESTA APERTA.**
+
+> ### ⚠ **E HO SBAGLIATO DUE VOLTE, non una.** Al primo conteggio avevo usato `g4_nasce` e
+> mi dava `2`/`1`/`3`/`7` casi pericolosi, cioe' *«il controllo ha avuto potere»*.
+> ### ⛔ **`g4_nasce` NON E' UNA NASCITA:** conta chi passa il cancello `4`, e i cancelli
+> `5`-`7` possono rifiutarlo tutto. Con `ammessi` piu' l'incremento di `schwinger_tot` sono
+> ### **zero.** ### **Il primo conteggio avrebbe assolto il controllo per la ragione
+> sbagliata.**
+>
+> ### ✔ **E UNA COSA REGGE: l'impronta E' SENSIBILE** -- due insiemi che differiscono per
+> **un** arco danno `sha1` diversi, verificato. ### **Il controllo e' VALIDO e il suo POTERE
+> e' nullo: sono due cose diverse, e le avevo confuse.**
+
+### ⛔ **E2 — <<TUTTE DOPO IL PASSO 100>> E' FALSO: LA PRIMA E' *AL* PASSO 100**
+
+La lista dei cambi di `len(avv)` in `Bp` e'
+`[100, 112, 117, 121, 127, 128, 137, 140, 141, 144, 148, 149]`.
+### ➜ **Quindi la permutazione e' unica per i primi `99` passi, non per i primi cento**: al
+passo `100` si ripesca.
+
+> ### 📌 **DOVE ERA SCRITTA, e che cosa ho fatto:** la stampa dello strumento, la voce
+> d'inventario e il generatore del referto sono ### **corretti**; questo task history e'
+> ### **annotato**; e ### ⛔ **il soggetto del commit `1bf6fe2` NON si riscrive** -- e'
+> storia pushata, e lo si legge con questa annotazione accanto.
+
 ## 3. TODO DEL NEXT STEP
 
 1. **commit di questo task history**, ### **DA SOLO**, prima dello strumento;

@@ -416,22 +416,37 @@ def main():
         if not _ok:
             guasti.append("C1 %s" % k)
     # --- C-ident e C-lotterie
+    # ### ⛔ **E C-ident VA LETTO COL SUO POTERE ACCANTO** (rilievo del guardiano): il caso
+    #   pericoloso e' ### **una coppia a lunghezza uguale in cui al passo PRIMA era nato
+    #   qualcosa** -- solo allora gli archi possono essere cambiati a lunghezza costante.
+    #   Le nascite vere sono `fin.ammessi` piu' l'incremento di `schwinger_tot`:
+    #   ### **`g4_nasce` NON e' una nascita**, conta chi passa il cancello `4`, e i cancelli
+    #   `5`-`7` possono rifiutarlo tutto.
+    _pot = {}
     for k in semi_di(F) + ident(F):
         pp = F["bracci"][k]["passi"]
-        rie = tot = 0
-        for r0, r1 in zip(pp[:-1], pp[1:]):
+        rie = tot = peric = 0
+        for a in range(len(pp) - 1):
+            r0, r1 = pp[a], pp[a + 1]
             m0, m1 = (r0.get("mod") or {}), (r1.get("mod") or {})
             if "archi_impronta" not in m0 or "archi_impronta" not in m1:
                 continue
             if int(r0.get("len_avv", -1)) != int(r1.get("len_avv", -2)):
                 continue
             tot += 1
+            _sw = int(r0.get("schwinger_tot", 0)) - (
+                int(pp[a - 1].get("schwinger_tot", 0)) if a > 0 else 0)
+            if int((r0.get("fin") or {}).get("ammessi", 0)) + _sw > 0:
+                peric += 1
             if m0["archi_impronta"] != m1["archi_impronta"]:
                 rie += 1
+        _pot[k] = (tot, peric, rie)
         w("| **`C-ident`** *(riporta, non ferma)* | `%s`: coppie a lunghezza **uguale** `%d`, "
-          "archi **diversi** `%d` | **%s** |"
-          % (k, tot, rie, "la mappa arco→morso TIENE" if not rie
-             else "### si RI-ETICHETTA su %d passi" % rie))
+          "di cui con **nascite al passo prima** `%d`, archi **diversi** `%d` | **%s** |"
+          % (k, tot, peric, rie,
+             ("### POTERE NULLO: nessun caso pericoloso" if not peric
+              else ("la mappa arco→morso TIENE su `%d` casi pericolosi" % peric))
+             if not rie else "### si RI-ETICHETTA su %d passi" % rie))
     for k in semi_di(F):
         lt = lotterie(F, k)
         cam = sum(1 for a, b in zip(
@@ -447,6 +462,29 @@ def main():
       "permutazione si ripesca ### **solo quando `len(avv)` cambia**, e il conteggio lo "
       "verifica contro i cambi veri invece di fidarsi del codice.")
     w()
+    _np = sum(v[1] for v in _pot.values())
+    if not _np:
+        w("> ### ⛔ **MA `C-ident` HA POTERE NULLO SU QUESTA CORSA, e la domanda che doveva "
+          "chiudere RESTA APERTA.** I casi pericolosi sono ### **ZERO su tutti e quattro i "
+          "bracci**: in ogni coppia a lunghezza uguale ### **non era nato nessuno al passo "
+          "prima**, quindi l'insieme degli archi era identico ### **per costruzione** e "
+          "l'impronta non poteva differire.")
+        w(">")
+        w("> ### ⛔ **QUINDI LA FRASE <<ora e' MISURATO invece che sperato>> ERA SBAGLIATA, "
+          "e la correggo:** le `%d` coppie guardate non sono `%d` prove -- sono `%d` casi in "
+          "cui non c'era niente da vedere. ### **Il rischio che un passo tolga `k` archi e "
+          "ne aggiunga `k` NON e' escluso da questa corsa: e' solo non capitato.**"
+          % (sum(v[0] for v in _pot.values()), sum(v[0] for v in _pot.values()),
+             sum(v[0] for v in _pot.values())))
+        w(">")
+        w("> ### ✔ **E L'IMPRONTA E' SENSIBILE, questo si':** due insiemi che differiscono "
+          "per **un** arco danno `sha1` diversi. ### **Il controllo e' VALIDO e il suo "
+          "POTERE e' nullo: sono due cose diverse, e prima le avevo confuse.**")
+    else:
+        w("> ### ✔ **E `C-ident` HA AVUTO POTERE: `%d` casi pericolosi** *(coppie a lunghezza "
+          "uguale con nascite al passo prima)*, e su quelli l'impronta ### **coincide**."
+          % _np)
+    w()
     w("## ⚠ IL LIMITE, **dichiarato PRIMA dei numeri** *(`f922c20`)*")
     w()
     w("> ### ⛔ **`Bperm-fisso` NON E' <<`Bperm` SENZA IL DIFETTO>>.** Ripescare solo alla "
@@ -455,9 +493,11 @@ def main():
       "un'altra. NESSUNO DEI DUE E' IL BRACCIO <<PULITO>>.**")
     w(">")
     w("> ### ✔ **E C'E' UN FATTO CHE LO RENDE MENO GRAVE DI QUANTO SEMBRI:** nel `Bp` "
-      "committato `len(avv)` cambia `12` volte su `150`, e ### **TUTTE DOPO IL PASSO 100** "
-      "-- quindi per i primi cento passi la permutazione e' ### **UNA SOLA**, e il legame "
-      "con la topologia non ha ancora modo di agire.")
+      "committato `len(avv)` cambia `12` volte su `150`, e la **prima** e' ### **AL passo "
+      "`100`** -- quindi per i primi ### **99** passi la permutazione e' ### **UNA SOLA**, e "
+      "il legame con la topologia non ha ancora modo di agire. ### ⚠ **E <<tutte DOPO il "
+      "passo 100>> era sbagliato: il primo cambio e' *AL* passo 100** *(rilievo del "
+      "guardiano)*.")
     w()
     w("## IL VERDETTO")
     w()

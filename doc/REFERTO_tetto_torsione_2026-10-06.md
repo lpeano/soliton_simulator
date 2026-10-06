@@ -74,7 +74,18 @@
 | `100` | `0.068988` | `0.085821` | `0.068988` |
 | `140` | `0.072279` | `0.087575` | `0.072279` |
 
-### LA PREVISIONE DEL GUARDIANO: *«con la soglia `3π` la frazione e' sotto lo `0.1 %`»* ⟹ ### **⛔ NON confermata** *(il massimo misurato e' `0.072279`)*.
+### LA PREVISIONE DEL GUARDIANO: *«con la soglia `3π` la frazione e' sotto lo `0.1 %`»* ⟹ ### **⛔ REFUTATA SUL TETTO CALCOLATO** *(il massimo misurato e' `0.072279`)*.
+
+### ⛔ **MA LA PREVISIONE ERA AMBIGUA SULLA GRANDEZZA, e il guardiano lo dichiara**
+
+| su che cosa | valore | contro lo `0.1 %` |
+|---|--:|---|
+| il **TETTO CALCOLATO** `|tw*| + |twist_dip|` *(`M3`, come il mandato lo definisce)* | `7.22 %`, `6.90 %`, `7.23 %` | ### **REFUTATA** |
+| gli archi che **SUPERANO DAVVERO** la soglia *(`g1`, da `M4`)* | `0.0231 %`, `0.0320 %`, `0.0594 %` | ### **CONFERMATA** |
+
+> ### 📌 **DUE LETTURE OPPOSTE DELLO STESSO DATO, e la differenza e' un fattore `~122`.** La previsione non diceva su quale grandezza: ### **sulla lettera del mandato `M3` e' definita sul tetto CALCOLATO, quindi il verdetto <<REFUTATA>> e' quello giusto** -- ma ### **il numero che risponde alla domanda FISICA e' `g1`, e li' la previsione REGGE.**
+
+### ✔ **E IL NUMERO CHE DICE QUANTO E' LONTANA LA SOGLIA:** il `q99` di `|tw|` sta al `69.8 %`, `80.2 %`, `83.2 %` di `3π`. ### **La soglia di mitosi e' OLTRE il 99-esimo percentile della torsione**, a tutti e tre i passi.
 
 ### LA MIA: *«`M3b` ancora piu' bassa, vicina a zero esatto»* ⟹ ### **CONFERMATA** *(massimo `0.072279`)*.
 

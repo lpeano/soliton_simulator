@@ -280,9 +280,41 @@ def main():
     _m3 = [(MIS.get(p) or {}).get("m3", {}).get("fraz_oltre_3pi") for p in PM]
     _m3 = [x for x in _m3 if x is not None]
     w("### LA PREVISIONE DEL GUARDIANO: *«con la soglia `3π` la frazione e' sotto lo "
-      "`0.1 %%`»* ⟹ ### **%s** *(il massimo misurato e' `%s`)*."
-      % ("CONFERMATA" if _m3 and max(_m3) < 0.001 else "⛔ NON confermata",
+      "`0.1 %%`»* ⟹ ### **%s SUL TETTO CALCOLATO** *(il massimo misurato e' `%s`)*."
+      % ("CONFERMATA" if _m3 and max(_m3) < 0.001 else "⛔ REFUTATA",
          n4(max(_m3) if _m3 else None, "%.6f")))
+    w()
+    # ### ⛔ **MA LA PREVISIONE ERA AMBIGUA SULLA GRANDEZZA, e il guardiano lo dichiara:**
+    #   `M3` misura la frazione di archi il cui TETTO CALCOLATO arriva a `3π`; la domanda
+    #   fisica e' quanti archi ### **ci arrivano DAVVERO**, e quelli sono `g1`.
+    #   ### **I due numeri stanno nello stesso referto e prima non erano collegati.**
+    _g1 = [((MIS.get(p) or {}).get("m4", {}).get("n_g1"),
+            (MIS.get(p) or {}).get("m4", {}).get("n_g1", 0)
+            + (MIS.get(p) or {}).get("m4", {}).get("n_altri", 0)) for p in PM]
+    _qg = [a / b for a, b in _g1 if a is not None and b]
+    w("### ⛔ **MA LA PREVISIONE ERA AMBIGUA SULLA GRANDEZZA, e il guardiano lo dichiara**")
+    w()
+    w("| su che cosa | valore | contro lo `0.1 %` |")
+    w("|---|--:|---|")
+    w("| il **TETTO CALCOLATO** `|tw*| + |twist_dip|` *(`M3`, come il mandato lo definisce)* "
+      "| %s | ### **REFUTATA** |" % ", ".join("`%.2f %%`" % (100 * x) for x in _m3))
+    w("| gli archi che **SUPERANO DAVVERO** la soglia *(`g1`, da `M4`)* | %s | "
+      "### **CONFERMATA** |"
+      % ", ".join("`%.4f %%`" % (100 * x) for x in _qg))
+    w()
+    w("> ### 📌 **DUE LETTURE OPPOSTE DELLO STESSO DATO, e la differenza e' un fattore "
+      "`~%.0f`.** La previsione non diceva su quale grandezza: ### **sulla lettera del "
+      "mandato `M3` e' definita sul tetto CALCOLATO, quindi il verdetto <<REFUTATA>> e' "
+      "quello giusto** -- ma ### **il numero che risponde alla domanda FISICA e' `g1`, e li' "
+      "la previsione REGGE.**" % (max(_m3) / max(_qg) if _qg and max(_qg) else 0))
+    w()
+    _q99 = [((al(p).get("q_tw_ingresso") or {}).get("q099")) for p in PM]
+    _q99 = [x for x in _q99 if x is not None]
+    if _q99:
+        w("### ✔ **E IL NUMERO CHE DICE QUANTO E' LONTANA LA SOGLIA:** il `q99` di `|tw|` "
+          "sta al %s di `3π`. ### **La soglia di mitosi e' OLTRE il 99-esimo percentile "
+          "della torsione**, a tutti e tre i passi."
+          % ", ".join("`%.1f %%`" % (100 * x / P3) for x in _q99))
     w()
     _m3b = [(MIS.get(p) or {}).get("m3b", {}).get("fraz_oltre_3pi") for p in PM]
     _m3b = [x for x in _m3b if x is not None]

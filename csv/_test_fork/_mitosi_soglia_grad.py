@@ -633,10 +633,13 @@ def main(argv):
                % (", TENUTI" if perm_fisso else "",
                   ", ".join(str(s) for s in SEMI_PERM)))
         if perm_fisso:
+            # ### ⛔ **ERA <<TUTTE DOPO IL PASSO 100>>, E IL PRIMO CAMBIO E' *AL* PASSO
+            #   100** (la lista e' `[100, 112, 117, ...]`). Quindi la permutazione e' unica
+            #   per i primi ### **99** passi, non cento. Rilievo del guardiano.
             stampa("      ### E LA PERMUTAZIONE SI RIPESCA SOLO QUANDO len(avv) CAMBIA:")
-            stampa("          nel Bp committato cambia 12 volte su 150, e TUTTE DOPO IL")
-            stampa("          PASSO 100 -- quindi per i primi cento passi la permutazione")
-            stampa("          e' UNA SOLA. ### Non e' Bperm senza il difetto: lega la")
+            stampa("          nel Bp committato cambia 12 volte su 150, la PRIMA *AL* PASSO")
+            stampa("          100 -- quindi per i primi 99 passi la permutazione e' UNA")
+            stampa("          SOLA. ### Non e' Bperm senza il difetto: lega la")
             stampa("          permutazione alla TOPOLOGIA, e nessuno dei due e' pulito.")
         stampa("      ### L'AMPIEZZA RESTA 0.3: si randomizza la FORMA, non l'ampiezza.")
         stampa("      ### E il generatore della permutazione e' SEPARATO: mai self.rng,")

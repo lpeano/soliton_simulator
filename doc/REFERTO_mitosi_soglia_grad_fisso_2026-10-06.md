@@ -113,21 +113,27 @@ Lo strumento `43cf63c8` calcola la banda come `1/sqrt(N)`. ### **E' sbagliata in
 | **`C1`** | `Bpf-s2`: `33` + `13` = `46` contro `nati = 46` | **COINCIDE** |
 | **`C1`** | `Bpf-s3`: `22` + `9` = `31` contro `nati = 31` | **COINCIDE** |
 | **`C1`** | `Bpf-id`: `18` + `7` = `25` contro `nati = 25` | **COINCIDE** |
-| **`C-ident`** *(riporta, non ferma)* | `Bpf-s1`: coppie a lunghezza **uguale** `130`, archi **diversi** `0` | **la mappa arco→morso TIENE** |
-| **`C-ident`** *(riporta, non ferma)* | `Bpf-s2`: coppie a lunghezza **uguale** `124`, archi **diversi** `0` | **la mappa arco→morso TIENE** |
-| **`C-ident`** *(riporta, non ferma)* | `Bpf-s3`: coppie a lunghezza **uguale** `134`, archi **diversi** `0` | **la mappa arco→morso TIENE** |
-| **`C-ident`** *(riporta, non ferma)* | `Bpf-id`: coppie a lunghezza **uguale** `137`, archi **diversi** `0` | **la mappa arco→morso TIENE** |
+| **`C-ident`** *(riporta, non ferma)* | `Bpf-s1`: coppie a lunghezza **uguale** `130`, di cui con **nascite al passo prima** `0`, archi **diversi** `0` | **### POTERE NULLO: nessun caso pericoloso** |
+| **`C-ident`** *(riporta, non ferma)* | `Bpf-s2`: coppie a lunghezza **uguale** `124`, di cui con **nascite al passo prima** `0`, archi **diversi** `0` | **### POTERE NULLO: nessun caso pericoloso** |
+| **`C-ident`** *(riporta, non ferma)* | `Bpf-s3`: coppie a lunghezza **uguale** `134`, di cui con **nascite al passo prima** `0`, archi **diversi** `0` | **### POTERE NULLO: nessun caso pericoloso** |
+| **`C-ident`** *(riporta, non ferma)* | `Bpf-id`: coppie a lunghezza **uguale** `137`, di cui con **nascite al passo prima** `0`, archi **diversi** `0` | **### POTERE NULLO: nessun caso pericoloso** |
 | **`C-lotterie`** | `Bpf-s1`: estratte `20`, cambi di `len(avv)` `19`, atteso `20` | **COINCIDE** |
 | **`C-lotterie`** | `Bpf-s2`: estratte `26`, cambi di `len(avv)` `25`, atteso `26` | **COINCIDE** |
 | **`C-lotterie`** | `Bpf-s3`: estratte `16`, cambi di `len(avv)` `15`, atteso `16` | **COINCIDE** |
 
 > ### ✔ **E `C-lotterie` E' LA PROVA CHE IL BRACCIO FA CIO' CHE DICE:** la permutazione si ripesca ### **solo quando `len(avv)` cambia**, e il conteggio lo verifica contro i cambi veri invece di fidarsi del codice.
 
+> ### ⛔ **MA `C-ident` HA POTERE NULLO SU QUESTA CORSA, e la domanda che doveva chiudere RESTA APERTA.** I casi pericolosi sono ### **ZERO su tutti e quattro i bracci**: in ogni coppia a lunghezza uguale ### **non era nato nessuno al passo prima**, quindi l'insieme degli archi era identico ### **per costruzione** e l'impronta non poteva differire.
+>
+> ### ⛔ **QUINDI LA FRASE <<ora e' MISURATO invece che sperato>> ERA SBAGLIATA, e la correggo:** le `525` coppie guardate non sono `525` prove -- sono `525` casi in cui non c'era niente da vedere. ### **Il rischio che un passo tolga `k` archi e ne aggiunga `k` NON e' escluso da questa corsa: e' solo non capitato.**
+>
+> ### ✔ **E L'IMPRONTA E' SENSIBILE, questo si':** due insiemi che differiscono per **un** arco danno `sha1` diversi. ### **Il controllo e' VALIDO e il suo POTERE e' nullo: sono due cose diverse, e prima le avevo confuse.**
+
 ## ⚠ IL LIMITE, **dichiarato PRIMA dei numeri** *(`f922c20`)*
 
 > ### ⛔ **`Bperm-fisso` NON E' <<`Bperm` SENZA IL DIFETTO>>.** Ripescare solo alla crescita ### **lega la permutazione alla TOPOLOGIA** *(i morsi cambiano **quando** nasce un nodo)*. ### **Riduce la lotteria, non la toglie, e cambia una cosa per un'altra. NESSUNO DEI DUE E' IL BRACCIO <<PULITO>>.**
 >
-> ### ✔ **E C'E' UN FATTO CHE LO RENDE MENO GRAVE DI QUANTO SEMBRI:** nel `Bp` committato `len(avv)` cambia `12` volte su `150`, e ### **TUTTE DOPO IL PASSO 100** -- quindi per i primi cento passi la permutazione e' ### **UNA SOLA**, e il legame con la topologia non ha ancora modo di agire.
+> ### ✔ **E C'E' UN FATTO CHE LO RENDE MENO GRAVE DI QUANTO SEMBRI:** nel `Bp` committato `len(avv)` cambia `12` volte su `150`, e la **prima** e' ### **AL passo `100`** -- quindi per i primi ### **99** passi la permutazione e' ### **UNA SOLA**, e il legame con la topologia non ha ancora modo di agire. ### ⚠ **E <<tutte DOPO il passo 100>> era sbagliato: il primo cambio e' *AL* passo 100** *(rilievo del guardiano)*.
 
 ## IL VERDETTO
 

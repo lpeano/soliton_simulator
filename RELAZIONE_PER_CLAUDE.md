@@ -6231,3 +6231,61 @@ non ho guardato gli indici.**
 > ### **`κ`, la soglia `3π`, il dipolo locale e il `0.3` sono DECISIONI DI LUCA.** I
 > risultati vanno sotto ### **`SCALE-TW`**, che ### **NON si chiude:** chiede un'analisi
 > **completa** delle scale della torsione, e questo e' ### **il solo tetto di `tw`.**
+
+
+---
+
+## 2026-10-06 — **LE CINQUE CORREZIONI AL GIRO CHIUSO**, prima della cura dell'avvolgimento
+
+*(Trovate da me nella verifica che Luca ha chiesto, ### **ricontrollate e confermate dal
+guardiano.** Tutte **annotate** e non riscritte *(par.8)*, e ### **nessuna corsa rigirata:**
+i numeri escono dai `json` gia' committati. Simulatore `f7237563`, **non toccato**.)*
+
+### ⛔ **E1 — `C-ident` E' UN FALSO-ZERO: la domanda che avevo dichiarato CHIUSA resta APERTA**
+
+Il caso pericoloso -- una coppia a lunghezza uguale con ### **nascite al passo prima** -- si e'
+presentato ### **ZERO volte su tutti e quattro i bracci.** Quindi le `525` coppie guardate
+### **non sono `525` prove: sono `525` casi in cui non c'era niente da vedere.**
+
+> ### ⛔ **E HO SBAGLIATO DUE VOLTE.** Al primo conteggio avevo usato `g4_nasce` e mi dava
+> `2`/`1`/`3`/`7` casi pericolosi, cioe' *«il controllo ha avuto potere»*. ### **`g4_nasce`
+> non e' una nascita:** conta chi passa il cancello `4`, e i cancelli `5`-`7` possono
+> rifiutarlo tutto. Con `ammessi` piu' `schwinger_tot` sono ### **zero.** ### **Il primo
+> conteggio avrebbe assolto il controllo per la ragione sbagliata.**
+>
+> ### ✔ **E una cosa regge: l'impronta E' SENSIBILE.** ### **Il controllo e' VALIDO e il suo
+> POTERE e' nullo: sono due cose diverse, e le avevo confuse.**
+
+### ⛔ **E2 — il primo cambio di `len(avv)` e' *AL* passo `100`, non dopo**
+
+`[100, 112, 117, ...]`: la permutazione e' unica per i primi ### **`99`** passi, non cento.
+Corretti strumento, inventario e generatore; ### **il soggetto di `1bf6fe2` non si riscrive.**
+
+### ⛔ **E3 — `M3` del tetto ha DUE letture, e il referto ne dava UNA**
+
+| su che cosa | valore | contro lo `0.1 %` |
+|---|--:|---|
+| il tetto **CALCOLATO** *(la lettera del mandato)* | `7.22 %` / `6.90 %` / `7.23 %` | ### **REFUTATA** |
+| gli archi che **superano davvero** la soglia *(`g1`)* | `0.0231 %` / `0.0320 %` / `0.0594 %` | ### **CONFERMATA** |
+
+### **Un fattore `122` fra le due**, e la previsione non diceva su quale grandezza.
+### ✔ **E il numero che dice quanto e' lontana la soglia: il `q99` di `|tw|` sta al
+`69.8 %`-`83.2 %` di `3π` -- la mitosi vive OLTRE il 99-esimo percentile.**
+
+### ⛔ **E4 — `TAU_TW` ha un TERZO consumatore, e la verifica `(a)` non l'aveva visto**
+
+`_tau_tw_locale` **stessa** fa `return TAU_TW` a ### **`:591`**, nel proprio ramo di guardia.
+Se scattasse, `tau_tw` passerebbe da `~2`-`6` *(misurato: `2.4055` al passo `50`)* a
+### **`20`** -- e ### **nessun contatore lo conta.** ### **Un fallback non misurato, la
+classe di `P5` e `A8`, e la misura del tetto non l'ha censito: un buco MIO.**
+### ➜ **Decisione di Luca: il contatore `A8` entra nella cura dell'avvolgimento.**
+
+### ⛔ **E5 — l'inventario non diceva quale blob rigira quale `json`**
+
+Il `tetto.json` *(`a1e9246`)* viene da ### **`1b5e0d2e`** *(`0476a80`)*, non dal blob di
+oggi, e col blob di oggi il comando ### **rifa' la MISURA ma non la FORMA.** Ora la voce lo
+dice e dice come: `git checkout 0476a80`.
+
+### ⚠ **E un sesto, di formato:** doppi backtick nel referto del tetto -- ### **la quinta
+volta di questa famiglia**, e l'unico modo in cui escono resta ### **girare il generatore e
+guardare l'uscita.**

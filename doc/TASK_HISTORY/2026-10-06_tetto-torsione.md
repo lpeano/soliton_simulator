@@ -387,6 +387,51 @@ mediano di `4.0000 π` ESATTI**, segni quasi bilanciati *(`559` / `608` al passo
 ripiegamenti del passo `2` restano ### **due conteggi che coincidono.**
 ### ⛔ **`ARCHI-OLTRE-4PI` e' <<da non indagare>>, e non guardo gli indici.**
 
+## ⛔ ANNOTAZIONE DEL 2026-10-06 — **DUE CORREZIONI: `M3` ha DUE letture, e `TAU_TW`
+## ha un TERZO consumatore**
+
+*(Trovate da me nella verifica che Luca ha chiesto, ### **ricontrollate e confermate dal
+guardiano.**)*
+
+### ⛔ **E3 — `M3` DICHIARATA REFUTATA SENZA COLLEGARLA A `g1`, CHE LA CONFERMA**
+
+| su che cosa | valore | contro lo `0.1 %` |
+|---|--:|---|
+| il **tetto CALCOLATO** `|tw*| + |twist_dip|` *(`M3`, la lettera del mandato)* | `7.22 %` / `6.90 %` / `7.23 %` | ### **REFUTATA** |
+| gli archi che **SUPERANO DAVVERO** la soglia *(`g1`, da `M4`)* | `0.0231 %` / `0.0320 %` / `0.0594 %` | ### **CONFERMATA** |
+
+### ➜ **Due letture opposte dello stesso dato, e la differenza e' un fattore `~122`.**
+### ⚠ **La previsione non diceva su quale grandezza, e l'ambiguita' e' del guardiano, che la
+dichiara.** Sulla **lettera** del mandato `M3` e' definita sul tetto **calcolato**, quindi il
+verdetto *«REFUTATA»* ### **resta quello giusto** -- ma ### **il numero che risponde alla
+domanda FISICA e' `g1`, e li' la previsione REGGE.** Il referto ora riporta ### **entrambe**.
+
+### ✔ **E IL NUMERO CHE DICE QUANTO E' LONTANA LA SOGLIA:** il `q99` di `|tw|` sta al
+### **`69.8 %` / `80.2 %` / `83.2 %`** di `3π`. ### **La soglia di mitosi e' OLTRE il
+99-esimo percentile della torsione**, a tutti e tre i passi.
+
+### ⛔ **E4 — `TAU_TW` HA UN TERZO CONSUMATORE, e la verifica `(a)` non l'aveva visto**
+
+La sezione `2(a)` qui sopra dice *«`TAU_TW = 20.0` la usa **solo** il ramo non locale»*.
+### ⛔ **E' INCOMPLETO:** `_tau_tw_locale` **STESSA** fa `return TAU_TW` a ### **`:591`**,
+nel proprio ramo di guardia `if len(net.phivel) < net.n or len(i) == 0`.
+
+| | la via |
+|--:|---|
+| **1** | il ramo **non locale** *(`TAU_LOCALI = False`)* |
+| **2** | il **docstring**, che dice `3.1831` mentre il codice da' `1` |
+| ### **3** | ### **la GUARDIA dentro `_tau_tw_locale`, `:591`** |
+
+### ⛔ **E SE SCATTASSE, `tau_tw` PASSEREBBE DA `~2`-`6` A `20`:** un fattore `3`-`10` sul
+tetto -- e ### **nessun contatore lo conta.** *(Misurato in questa corsa: `tau_tw` mediano
+`2.4055` al passo `50` e `1.9738` al passo `140`.)*
+### **E' un fallback NON MISURATO, la classe di `P5` e `A8`.**
+### ⛔ **La misura del tetto NON l'ha censito, e questo e' un buco MIO.**
+
+> ### 📌 **DECISIONE DI LUCA, presa:** il contatore `A8` *(invocazioni, salti, forma,
+> quando)* entra ### **nella cura di `TORS-W8-AVVOLGIMENTO`**, byte-inerte, e il suo numero
+> va ### **nella misura finale di quella cura.** ### **Qui si annota, non si cura.**
+
 ## 4. TODO DEL NEXT STEP
 
 1. **commit di questo task history**, ### **DA SOLO**, prima dello strumento;
