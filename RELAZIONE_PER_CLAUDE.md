@@ -7241,3 +7241,40 @@ NON sfugge a `U1`.** E `rho_c` decide `rapporto = rho0/rho_c`: se `rapporto <= 1
 > ### ⛔ **Cioe': se la soglia e' `48×` irraggiungibile, `chiralita_core_locale` e' un NO-OP e
 > `_chi_geom_nodi == perc_geom`** — ### **`--chi-core` sarebbe INERTE per il dipolo.** Il
 > ragionamento completo e la raccomandazione vanno ### **nella proposta del lavoro `4`.**
+
+---
+
+## 2026-10-06 — **CORREZIONE: la mia deduzione su `U1` e `chiralita_core_locale` era un NON SEQUITUR**
+
+In `ff94e70` ho scritto: *«### **se la soglia e' `48×` irraggiungibile,
+`chiralita_core_locale` e' un NO-OP** e `_chi_geom_nodi == perc_geom`»*.
+
+> ### ⛔ **NON SEGUE, e l'ha trovato Luca.** Il ragionamento ### **sul codice resta giusto**
+> *(`chi_core` resta `chi` dove `rapporto = rho0/rho_c <= 1`)*; ### **la conclusione no.**
+
+| | |
+|---|---|
+| il `48×` di `U1` | un conto ### **in NODI**: `621` chiesti in una palla che ne contiene `13` |
+| il test di `chiralita_core_locale` | `rho0 = max |ψ|²` nel vicinato contro `rho_c = massa_critica_adattiva / volume`, cioe' ### **una DENSITA'** |
+
+> ### ⛔ **SONO DUE SCALE DIVERSE.** Che `rapporto` superi `1` o no ### **dipende dalla scala
+> di `|ψ|²`**, che il `48×` ### **non dice.** ### **Si MISURA, non si deduce.**
+>
+> ### ⚠ **E l'errore ha una forma che conosco: ho preso un numero VERO di una voce e l'ho
+> portato dove misurava un'altra cosa** — la stessa famiglia del *«per passo»* che stampava una
+> somma, e del `0.04` che ho negato essendo mio. ### **Tre volte oggi, e ogni volta e' bastato
+> che qualcuno chiedesse <<quel numero misura la stessa cosa?>>.**
+
+**Nella proposta del lavoro `4` la misura diventa IL PRIMO PASSO**, col criterio fissato prima:
+ai passi `1`, `50`, `150`, `230` si contano ### **`(a)` i nodi con `rapporto > 1`**,
+### **`(b)` il MASSIMO di `rapporto`** e ### **`(c)` gli elementi di `_chi_geom_nodi` diversi
+da `perc_geom`**. ### **`(a) = 0` E `(c) = 0` a tutti i passi ⟹ `--chi-core` e' inerte per il
+dipolo**; altrimenti si riporta dove e quanto agisce.
+
+> ### ✔ **E `(b)` SERVE ANCHE SE `(a)` E' ZERO:** un massimo a `0.98` e uno a `0.001` danno lo
+> stesso `(a) = 0` e dicono due cose ### **opposte.** ### **Uno zero senza la sua distanza
+> dalla soglia e' un'informazione a meta'.**
+
+**E i diagnostici `_chi_core_*` NON si leggono** *(verificato nel codice e nel docstring)*: il
+ramo `geom=True` scrive ### **solo `_chi_geom_nodi`**, gli altri tre li scrive ### **il ramo
+`geom=False`** — ### **leggerli darebbe un numero giusto che risponde alla domanda sbagliata.**
