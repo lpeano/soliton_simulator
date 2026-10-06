@@ -6157,3 +6157,77 @@ i bracci)*, `C1`, `C-rng` *(divergenze ai passi `99`/`100`/`72`, **mai** per `Bp
 
 > ### ⛔ **`Bperm-fisso` non e' <<`Bperm` senza il difetto>>:** lega la permutazione alla
 > **topologia**. ### **Nessuno dei due e' il braccio pulito.**
+
+
+---
+
+## 2026-10-06 — **IL TETTO DELLA TORSIONE: REFUTATO, e il conto era giusto**
+
+*(Referto `doc/REFERTO_tetto_torsione_2026-10-06.md`, blob `f26bb9b9`, generato da
+`csv/_test_fork/_referto_tetto.py` `5090e829` dal `tetto.json` `761934d6`. Simulatore
+`f7237563`, **NON toccato**; due ganci di **sola lettura**, e `C0` lo ### **dimostra**:
+`0` differenze su `7` campi e `150` passi.)*
+
+### LA DOMANDA
+
+La soglia di mitosi `3π` sta sul **tetto** della torsione? L'ipotesi del guardiano:
+`tw* = κ·2π·(r_iω_i - r_jω_j)/(r̄·(|Δω| + 1e-3))`, e con `r` uniforme `|tw*| = 2π` per
+qualunque arco a deriva costante; col dipolo `π` il massimo sarebbe `3π`, ### **la soglia
+stessa.**
+
+### ⛔ **IL VERDETTO: REFUTATA**, dal criterio del mandato
+
+`M2`, la `Spearman` fra `|tw*| + |twist_dip|` e `|tw|`, vale ### **`0.0309` / `0.0202` /
+`0.0166`** ai passi `50` / `100` / `140`: ### **sotto `0.30` a tutti e tre.**
+
+### ✔ **MA IL CONTO E' GIUSTO, E LA LETTURA ONESTA E' PIU' INTERESSANTE DEL VERDETTO**
+
+| | |
+|---|---|
+| la **forma** | `|tw*|` mediano `6.3500` contro `2π` = `6.2832`: ### **l'`1.06 %`.** Il conto del guardiano con `r` uniforme e' **giusto**, misurato |
+| la **scala** | `|tw|` mediano `2.5432`, cioe' `0.35-0.40` di `tw*`: ### **la formula azzecca l'ordine di grandezza entro un fattore `~3`** |
+| l'**ordine** | `Spearman` `0.02-0.03`: ### ⛔ **il tetto calcolato NON dice QUALE arco ha piu' torsione** |
+| la **soglia** | l'arco mediano sta al ### **`27.0 %`** di `3π`. ### **La mitosi non e' <<marginale>>: e' LONTANA al mediano e vive sulla CODA** |
+
+> ### 📌 **E' LA STESSA FORMA DEL DIFETTO DEL `0.3`:** una grandezza che ### **non ordina.**
+> `d97317a` aveva mostrato che la modulazione legge `|r_i - r_j|` con `ρ ≈ 0.04`; qui il
+> tetto calcolato correla `0.02-0.03` col `tw` vero. ### **Due leggi che guardano la
+> grandezza giusta in media e quella sbagliata arco per arco.**
+
+### ✔ **E `M5` CHIUDE L'ARGOMENTO DEL `3π`: il dipolo e' ZERO**
+
+`twist_dip = 0` sul ### **`100.0 %`** degli archi ai tre passi, e su tutta la corsa i soli
+passi con dipolo non nullo sono il **passo `1`** e tre passi con `2` archi su `471564`.
+### ⛔ **Quindi <<`2π` + il dipolo `π` = `3π`>> non ha base: non c'e' nessun `π` da
+aggiungere.** ### ✔ **E `M2b` identica a `M2` a tutte le cifre lo prova aritmeticamente.**
+
+### ⛔ **TRE COSE NUOVE, nessuna chiesta dal mandato, tutte registrate**
+
+1. **`KAPPA-TW-COMMENTO`** *(`d0bf602`)*: il commento di `_tau_tw_locale` dice
+   `κ = 3.1831`, il codice da' `1`. ### **Tetti `20` contro `2π`: fisiche opposte.**
+2. **`TORS-W8-AVVOLGIMENTO`** *(`c3546e6`)*: `_w8` ha periodo `8π` e l'avvolgimento di `dph`
+   e' `4π`, quindi **non lo ripara**. Misurato: ### **`142114` calci col modulo mediano di
+   `4.0000 π` ESATTI** su `64.6` milioni di coppie, e il ramo non-`4π` ripara **esatto**.
+3. **`delta_sync_phi` e' ATTIVO** *(`K_SYNC = 1.0`)* e la formula lo ignora: una correzione
+   del `~27 %` alla mediana, fino a `3.6` volte al `q95`.
+
+### ⛔ **E TRE COSE CHE AVEVO SCRITTO IO CADONO, e le stampa il generatore**
+
+**La piu' istruttiva:** avevo scritto *«`delta_sync_phi` e' il TERMINE DOMINANTE»* sulla base
+di una mediana `1.79` ### **misurata ai passi `2-3` del giro corto.** Ai passi del mandato e'
+`0.28`. ### ⛔ **Un numero VERO, letto nel regime sbagliato, e generalizzato.** Le altre
+due: l'ipotesi che il termine **richiami** *(la `Spearman` e' **positiva**, `+0.08`, e il
+segno e' opposto nel `52 %` dei casi: ### **il caso**)*, e la coda di `M1` *(c'e', ma lo
+`0.32 %` contro lo `0.023 %` degli `~109` archi: ### **un fattore `14`**)*.
+
+### ⚠ **E LA COSA CHE NON HO FATTO**
+
+I `109` archi sopra `4π` e i `109` ripiegamenti del passo `2` restano ### **due conteggi che
+coincidono.** ### ⛔ **`ARCHI-OLTRE-4PI` e' <<da non indagare>> per decisione di Luca, e
+non ho guardato gli indici.**
+
+### ⛔ **E QUESTA E' UNA MISURA, NON UN SIGILLO**
+
+> ### **`κ`, la soglia `3π`, il dipolo locale e il `0.3` sono DECISIONI DI LUCA.** I
+> risultati vanno sotto ### **`SCALE-TW`**, che ### **NON si chiude:** chiede un'analisi
+> **completa** delle scale della torsione, e questo e' ### **il solo tetto di `tw`.**

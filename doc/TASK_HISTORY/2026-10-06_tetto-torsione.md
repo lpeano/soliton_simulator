@@ -318,6 +318,75 @@ chiralita' **non e' ancora nata**, e la domanda vera e' che cosa accade ai passi
 `140`. ### **Se restasse `1.0`, allora `twist_dip` non contribuisce MAI, e il tetto e' `2pi`
 per costruzione.**
 
+## ⛔ ANNOTAZIONE DEL 2026-10-06 — **L'ESITO: IL TETTO E' REFUTATO, e tre cose che
+## avevo scritto io cadono con lui**
+
+*(Scritta **dopo** i numeri. ### **Le sezioni `1`, `2` e `3` qui sopra NON si riscrivono.**)*
+
+### ⛔ **IL VERDETTO, dai criteri del MANDATO e non da una mia lettura**
+
+| ipotesi | criterio | esito |
+|---|---|---|
+| **il tetto** | mediana di `M1` fuori da `[0.3, 2]` **oppure** `M2` sotto `0.30` a tutti i passi | ### **REFUTATA** |
+| **la seconda** | meno del `30 %` con `twist_dip = 0` | ### **NON refutata** |
+
+### **PERCHE':** `M2` vale `0.0309` / `0.0202` / `0.0166` ai passi `50` / `100` / `140` --
+### **sotto `0.30` a tutti e tre.** La mediana di `M1` *(`0.3999` / `0.3481` / `0.3476`)*
+sta **dentro** `[0.3, 2]`, quindi ### **il criterio che refuta e' il SECONDO, non il primo.**
+
+### ✔ **E LA LETTURA ONESTA E' PIU' INTERESSANTE DEL VERDETTO**
+
+| | |
+|---|---|
+| la **SCALA** | `|tw|` mediano `2.5432`, `|tw*|` mediano `6.3500`: il rapporto e' `~0.35-0.40`. ### **La formula azzecca l'ordine di grandezza entro un fattore `~3`** |
+| l'**ORDINE** | `Spearman` `0.02-0.03`. ### ⛔ **Il tetto calcolato NON dice QUALE arco ha piu' torsione.** E' la stessa forma del difetto del `0.3`: una grandezza che **non ordina** |
+| la **soglia** | l'arco mediano sta al ### **`27.0 %`** di `3π`, e il tetto calcolato al `67.4 %`. ### **La mitosi non e' <<marginale>>: e' LONTANA al mediano e vive sulla CODA** |
+
+### ✔ **E IL CONTO DEL GUARDIANO CON `r` UNIFORME E' GIUSTO**, misurato: `|tw*|` mediano
+`6.3500` contro `2π` = `6.2832`, ### **l'`1.06 %`.** ### **Quello che non regge non e' il
+conto: e' l'idea che `tw` segua `tw*` ARCO PER ARCO.**
+
+### ⛔ **LE PREVISIONI DEL GUARDIANO: DUE REFUTATE, DUE CONFERMATE**
+
+| | la previsione | esito |
+|---|---|---|
+| `M1` | mediana fra `0.5` e `1.2` | ### ⛔ **NON confermata:** `0.35-0.40`, **sotto** |
+| `M3` | frazione oltre `3π` **sotto lo `0.1 %`** | ### ⛔ **REFUTATA:** `7.2 %`, un fattore `~70` |
+| `M4` | `g1` ha `|tw*| + |twist_dip|` piu' alto | ### ⛔ **NON confermata:** `6.3165` contro `6.3500` al passo `50` -- ### **piu' BASSO** |
+| `M5` | la maggioranza ha `twist_dip = 0` | ### ✔ **CONFERMATA, e nel modo piu' forte: il `100.0 %`** |
+
+### ✔ **E `M5` CHIUDE L'ARGOMENTO DEL `3π`**
+
+`twist_dip = 0` su **tutti** gli archi ai tre passi, e su tutta la corsa i soli passi con
+dipolo non nullo sono il **passo `1`** *(meta' degli archi a `π`)* e tre passi con **`2`
+archi su `471564`**. ### ⛔ **QUINDI L'ARGOMENTO <<`2π` + il dipolo `π` = `3π`>> NON HA
+BASE: non c'e' nessun `π` da aggiungere.** ### ✔ **E `M2b` e' IDENTICA a `M2` a tutte le
+cifre, che e' la prova aritmetica della stessa cosa.**
+
+### ⛔ **E TRE COSE CHE AVEVO SCRITTO IO CADONO**
+
+1. *«`delta_sync_phi` non e' una correzione, e' il TERMINE DOMINANTE»* *(`406a973`)*:
+   ### **FALSO in regime.** Il rapporto mediano e' `0.28` / `0.24` / `0.28`, non `1.79`.
+   ### ⛔ **Il `1.79` era misurato ai passi `2-3` e io l'ho preso per il regime: un numero
+   VERO, letto nel posto sbagliato.**
+2. *«se richiama, smorza la spinta e il tetto vero sta sotto `2π`»*: ### **NON CONFERMATA.**
+   La `Spearman` fra `dph` e `Δδsync` e' ### **POSITIVA** *(`+0.087` / `+0.086` / `+0.079`)*
+   e la frazione a segno opposto e' `0.52-0.53`, cioe' ### **il caso.**
+3. *«la coda di `M1` e' piu' lunga della sua, per gli `~109` archi di `ARCHI-OLTRE-4PI`»*:
+   ### **regge ma spiega poco.** La frazione `> 2` e' lo `0.32-0.48 %`, e `109` archi su
+   `471564` sono lo `0.023 %`: ### **lo stesso ordine di grandezza, ma un fattore `~14` di
+   differenza.**
+
+### ✔ **E DUE COSE CHE AVEVO DERIVATO TENGONO**
+
+**La derivazione della sezione `(b)`:** `|twp| <= 3π` su ### **tutte le `64604599` coppie**,
+zero violazioni. **E `TORS-W8-AVVOLGIMENTO` e' ATTIVO:** ### **`142114` calci col modulo
+mediano di `4.0000 π` ESATTI**, segni quasi bilanciati *(`559` / `608` al passo `50`)*.
+
+### ⚠ **E LA COSA CHE NON FACCIO, ancora:** i `109` archi sopra `4π` e i `109`
+ripiegamenti del passo `2` restano ### **due conteggi che coincidono.**
+### ⛔ **`ARCHI-OLTRE-4PI` e' <<da non indagare>>, e non guardo gli indici.**
+
 ## 4. TODO DEL NEXT STEP
 
 1. **commit di questo task history**, ### **DA SOLO**, prima dello strumento;
