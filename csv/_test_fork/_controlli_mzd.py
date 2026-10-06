@@ -66,6 +66,36 @@ def per_passo(d):
     return {int(x["passo"]): x for x in (d.get("passi_dati") or [])}
 
 
+def trova(amp, senza_ganci=False):
+    """Il `json` del braccio, trovato ### **dal campo `amp` DENTRO il file**, non dal nome.
+
+    ### ⛔ **IL NOME NON SI INDOVINA:** lo strumento lo costruisce con
+    `("%g" %% amp).replace(".", "_")`, e `"%g" %% 0.0` da' ### **`"0"`** -- quindi il braccio
+    zero sta in ### **`amp0.json`**, non in `amp0_0.json`. ### **I miei due lettori cercavano
+    `amp0_0.json`**, cioe' ### **un nome ASSUNTO invece che letto**, ed e' la stessa classe di
+    `P1` che mi e' gia' costata il gancio sul ramo morto.
+
+    ### ✔ **Leggere il campo `amp` DENTRO il file e' piu' forte di indovinare il nome:**
+    vale anche se un giorno la regola del nome cambiasse.
+    """
+    if not os.path.isdir(D_MZD):
+        return None
+    for f in sorted(os.listdir(D_MZD)):
+        if not (f.startswith("amp") and f.endswith(".json")):
+            continue
+        if ("_senza_ganci" in f) != bool(senza_ganci):
+            continue
+        try:
+            d = json.loads(io.open(os.path.join(D_MZD, f),
+                                   encoding="utf-8").read())
+        except Exception:
+            continue
+        if d.get("amp") is not None and abs(float(d["amp"]) - float(amp)) < 1e-12:
+            d["_file"] = f
+            return d
+    return None
+
+
 def _cmp_q(a, b):
     """Due dizionari di quantili, confrontati ### **chiave per chiave e AL BIT.**"""
     a, b = (a or {}), (b or {})
@@ -233,16 +263,17 @@ def main(argv):
            or leggi(os.path.join(D_MZD, "amp0_3.json")))
     SENZA = (leggi(os.path.join(D_MZD, "cletture_150.json"))
              or leggi(os.path.join(D_MZD, "amp0_3_senza_ganci.json")))
-    ZERO = leggi(os.path.join(D_MZD, "amp0_0.json"))
-    LUNGO_ACCESO = leggi(os.path.join(D_MZD, "amp0_3.json"))
+    ZERO = trova(0.0)
+    LUNGO_ACCESO = trova(0.3)
     riga()
     print("I CONTROLLI DEL MANDATO DEL `0.3` A ZERO")
     riga()
     for et, d in (("lunga.json (1000 passi)", L),
                   ("c0_150.json (C0, con ganci)", CON),
                   ("cletture_150.json (senza ganci)", SENZA),
-                  ("amp0_0.json (il braccio ZERO)", ZERO),
-                  ("amp0_3.json (il braccio ACCESO lungo)", LUNGO_ACCESO)):
+                  ("il braccio ZERO -> %s" % (ZERO or {}).get("_file"), ZERO),
+                  ("il braccio ACCESO -> %s"
+                   % (LUNGO_ACCESO or {}).get("_file"), LUNGO_ACCESO)):
         print("  %-26s %s" % (et, ("%s passi, stato %s"
                                    % (d.get("passi_girati"), d.get("stato")))
                               if d else "### NON C'E'"))
@@ -389,6 +420,32 @@ def collaudo():
     r = c_fallisce(_finto(), _finto())
     prova("C-fallisce: ### DEVE FALLIRE -- se i due bracci sono IDENTICI, `_AMP` e' INERTE",
           not r["passa"] and r["primo_passo_diverso"] is None)
+    # ### ⛔ **IL NOME ERA ASSUNTO, E LO STRUMENTO SCRIVE `amp0.json`:** `"%g" % 0.0`
+    #   da' `"0"`, non `"0_0"`. ### **Ora si legge il campo `amp` DENTRO il file.**
+    import tempfile as _tf
+    global D_MZD
+    _vero, _tmp = D_MZD, _tf.mkdtemp()
+    try:
+        D_MZD = _tmp
+        io.open(os.path.join(_tmp, "amp0.json"), "w", encoding="utf-8").write(
+            json.dumps({"amp": 0.0, "passi_dati": [], "stato": "fatto"}))
+        io.open(os.path.join(_tmp, "amp0_3.json"), "w", encoding="utf-8").write(
+            json.dumps({"amp": 0.3, "passi_dati": [], "stato": "fatto"}))
+        io.open(os.path.join(_tmp, "amp0_3_senza_ganci.json"), "w",
+                encoding="utf-8").write(json.dumps({"amp": 0.3, "passi_dati": []}))
+        prova("trova: ### il braccio ZERO si trova in `amp0.json`, non in `amp0_0.json`",
+              (trova(0.0) or {}).get("_file") == "amp0.json",
+              "%s" % (trova(0.0) or {}).get("_file"))
+        prova("trova: ### e il braccio acceso NON prende quello `_senza_ganci`",
+              (trova(0.3) or {}).get("_file") == "amp0_3.json",
+              "%s" % (trova(0.3) or {}).get("_file"))
+        prova("trova: ### e col flag prende PROPRIO quello `_senza_ganci`",
+              (trova(0.3, senza_ganci=True) or {}).get("_file")
+              == "amp0_3_senza_ganci.json")
+        prova("trova: ### DEVE TACERE -- un'ampiezza che non c'e' torna `None`",
+              trova(0.7) is None)
+    finally:
+        D_MZD = _vero
     riga()
     ko = [n for n, o, _d in esiti if not o]
     print("COLLAUDO: %d su %d" % (len(esiti) - len(ko), len(esiti)))

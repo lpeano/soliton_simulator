@@ -96,6 +96,35 @@ def per_passo(d):
     return {int(x["passo"]): x for x in ((d or {}).get("passi_dati") or [])}
 
 
+def trova(amp, senza_ganci=False):
+    """Il `json` del braccio, trovato ### **dal campo `amp` DENTRO il file**, non dal nome.
+
+    ### ⛔ **IL NOME NON SI INDOVINA:** lo strumento lo costruisce con
+    `("%g" % amp).replace(".", "_")`, e `"%g" % 0.0` da' ### **`"0"`** -- quindi il braccio
+    zero sta in ### **`amp0.json`**, non in `amp0_0.json`. ### **I miei due lettori cercavano
+    `amp0_0.json`**, cioe' ### **un nome ASSUNTO invece che letto**, ed e' la stessa classe
+    di `P1` che mi e' gia' costata il gancio sul ramo morto.
+
+    ### ✔ **Leggere il campo `amp` DENTRO il file e' piu' forte che indovinare il nome:**
+    vale anche se un giorno la regola del nome cambiasse.
+    """
+    if not os.path.isdir(D):
+        return None
+    for f in sorted(os.listdir(D)):
+        if not (f.startswith("amp") and f.endswith(".json")):
+            continue
+        if ("_senza_ganci" in f) != bool(senza_ganci):
+            continue
+        try:
+            d = json.loads(io.open(os.path.join(D, f), encoding="utf-8").read())
+        except Exception:
+            continue
+        if d.get("amp") is not None and abs(float(d["amp"]) - float(amp)) < 1e-12:
+            d["_file"] = f
+            return d
+    return None
+
+
 def primo(d, campo):
     z = [x["passo"] for x in ((d or {}).get("passi_dati") or []) if (x.get(campo) or 0) > 0]
     return z[0] if z else None
@@ -145,10 +174,20 @@ def leggi_dipolo(d):
     tot = sum((x.get("spinta_pi_tot") or 0) for x in PP)
     es = sum((x.get("spinta_pi_esatto") or 0) for x in PP)
     con_dip = dp + en
-    cor, n = spearman([x.get("cambi_chi_tors") for x in PP],
-                      [x.get("sopra_4pi") for x in PP])
+    # ### ⛔ **LO ZERO FALSO, e senza toglierlo la correlazione NON SIGNIFICA NIENTE.**
+    #   Il gancio `chi_tors` non puo' confrontare `chi_torsione` quando la ### **LUNGHEZZA
+    #   cambia**, cioe' quando ### **nascono nodi** -- e in quei passi `cambi_chi_tors`
+    #   resta `0`. ### **Quello NON e' <<zero cambi>>: e' <<NON MISURATO>>**, e nel braccio
+    #   acceso sono ### **`731` passi su `1000`.** ### ✔ **I dati non sono persi: il flag
+    #   e' registrato a OGNI passo**, quindi si escludono qui -- ### **senza rigirare le
+    #   corse.**
+    _buoni = [x for x in PP if not (x.get("chi_tors_non_confrontabile") or 0)]
+    _esclusi_corr = len(PP) - len(_buoni)
+    cor, n = spearman([x.get("cambi_chi_tors") for x in _buoni],
+                      [x.get("sopra_4pi") for x in _buoni])
     return {"fase": f, "dipolo": dp, "entrambe": en, "totale": tot, "esatto": es,
-            "con_dipolo": con_dip,
+            "con_dipolo": con_dip, "corr_esclusi": _esclusi_corr,
+            "corr_passi_buoni": len(_buoni), "corr_passi_tot": len(PP),
             "frazione_con_dipolo": (con_dip / tot) if tot else None,
             "corr_chi_sopra4pi": cor, "corr_n": n,
             "somma_dipolo": sum((x.get("somma_dipolo") or 0.0) for x in PP),
@@ -353,6 +392,10 @@ def genera(zero, acceso):
     w("| ### **`Spearman`**(cambi di `chi_torsione`, archi oltre `4π`) | `%s` *(n=%s)* | "
       "`%s` *(n=%s)* |" % (n4(DZ.get("corr_chi_sopra4pi")), DZ.get("corr_n"),
                            n4(DA.get("corr_chi_sopra4pi")), DA.get("corr_n")))
+    w("| ### ⛔ **passi ESCLUSI dalla correlazione** *(`chi_torsione` non confrontabile)* "
+      "| `%s` su `%s` | `%s` su `%s` |"
+      % (DZ.get("corr_esclusi"), DZ.get("corr_passi_tot"),
+         DA.get("corr_esclusi"), DA.get("corr_passi_tot")))
     w("| ### ⚠ **spinta ESATTAMENTE `π`** *(che `> π` NON conta)* | `%s` | "
       "`%s` |" % (DZ.get("esatto"), DA.get("esatto")))
     w()
@@ -365,6 +408,18 @@ def genera(zero, acceso):
           "correlazione `%s`." % (e, et, L, n4(z.get("frazione_con_dipolo")),
                                   n4(z.get("corr_chi_sopra4pi"))))
     w(">")
+    _ez = (DZ.get("corr_esclusi") or 0) / float(DZ.get("corr_passi_tot") or 1)
+    _ea = (DA.get("corr_esclusi") or 0) / float(DA.get("corr_passi_tot") or 1)
+    if max(_ez, _ea) > 0.2:
+        w("> ### ⛔ **E LA CORRELAZIONE E' CALCOLATA SU UNA SERIE BUCATA:** il gancio "
+          "`chi_tors` ### **non puo' confrontare quando nascono nodi** *(la lunghezza "
+          "cambia)*, e in quei passi lasciava uno ### **ZERO FALSO.** Sono ### **il "
+          "%.0f %%** dei passi nel braccio zero e ### **il %.0f %%** nell'acceso. "
+          "### **Quei passi sono ESCLUSI qui**, invece di entrare come zeri -- ### **ma "
+          "la correlazione resta una misura su una serie BUCATA**, e una lettura "
+          "<<REFUTATA>> che si appoggiasse su di essa ### **andrebbe pesata per questo.**"
+          % (100 * _ez, 100 * _ea))
+        w(">")
     w("> ### ⛔ **E LA CONGIUNZIONE E' UNA <<E>>, NON UNA <<O>>:** `CONFERMATA` vuole "
       "### **frazione `>= %.0f %%` E correlazione `>= %.1f`**, e basta che una manchi perche' "
       "non lo sia. `REFUTATA` vuole la frazione ### **sotto il %.0f %%.**"
@@ -644,6 +699,45 @@ def collaudo():
           "sovrarappresentata",
           e["dove `_AMP = 0`"] == "NESSUNA" and "le nascite seguono i nodi" in t,
           "%s" % e["dove `_AMP = 0`"])
+    # --- lo ZERO FALSO
+    _nc = _finto(chi=lambda k: 5, s4=lambda k: 5)
+    for _x in _nc["passi_dati"]:
+        if _x["passo"] % 2 == 0:
+            _x["chi_tors_non_confrontabile"] = 1
+            _x["cambi_chi_tors"] = 0
+    z = leggi_dipolo(_nc)
+    prova("zero falso: ### i passi non confrontabili sono ESCLUSI dalla correlazione",
+          z["corr_esclusi"] == 500 and z["corr_passi_buoni"] == 500,
+          "esclusi %s su %s" % (z["corr_esclusi"], z["corr_passi_tot"]))
+    prova("zero falso: ### e sui RESTANTI la correlazione si calcola davvero",
+          z["corr_n"] == 500, "n = %s" % z["corr_n"])
+    r, _e, _g = genera(_nc, _finto())
+    t = NL.join(r)
+    prova("zero falso: ### DEVE ACCENDERSI -- col 50 %% escluso il referto DICE che la serie "
+          "e' BUCATA", "serie BUCATA" in t and "ZERO FALSO" in t)
+    prova("zero falso: ### e la tabella riporta quanti passi sono stati esclusi",
+          "passi ESCLUSI dalla correlazione" in t)
+    r, _e, _g = genera(_finto(chi=lambda k: 5, s4=lambda k: 5), _finto())
+    t = NL.join(r)
+    prova("zero falso: ### DEVE TACERE -- senza passi esclusi NON parla di serie bucata",
+          "serie BUCATA" not in t)
+    # --- `trova`
+    import tempfile as _tf
+    global D
+    _vero, _tmp = D, _tf.mkdtemp()
+    try:
+        D = _tmp
+        io.open(os.path.join(_tmp, "amp0.json"), "w", encoding="utf-8").write(
+            json.dumps({"amp": 0.0}))
+        io.open(os.path.join(_tmp, "amp0_3.json"), "w", encoding="utf-8").write(
+            json.dumps({"amp": 0.3}))
+        prova("trova: ### il braccio ZERO sta in `amp0.json`, non in `amp0_0.json`",
+              (trova(0.0) or {}).get("_file") == "amp0.json",
+              "%s" % (trova(0.0) or {}).get("_file"))
+        prova("trova: ### DEVE TACERE -- un'ampiezza che non c'e' torna `None`",
+              trova(0.7) is None)
+    finally:
+        D = _vero
     # --- la forma
     r, _e, _g = genera(_finto(), _finto())
     t = NL.join(r)
@@ -672,10 +766,7 @@ def collaudo():
 def main(argv):
     if "--collaudo" in argv[1:]:
         return collaudo()
-    def leggi(p):
-        q = os.path.join(D, p)
-        return json.loads(io.open(q, encoding="utf-8").read()) if os.path.isfile(q) else None
-    zero, acceso = leggi("amp0_0.json"), leggi("amp0_3.json")
+    zero, acceso = trova(0.0), trova(0.3)
     righe, esiti, guasti = genera(zero, acceso)
     if righe is None:
         for g in guasti:
