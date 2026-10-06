@@ -1,0 +1,281 @@
+[TIMBRO] _misura_plaquette.py  sha1-BYTE be7102e7  committato e pulito
+[TIMBRO] _misura_verso.py  sha1-BYTE 3cf674fd  committato e pulito
+[TIMBRO] _mitosi_soglia_grad.py  sha1-BYTE 1279c6fb  committato e pulito
+[TIMBRO] _mitosi_zero_dove.py  sha1-BYTE c206bd4b  committato e pulito
+[TIMBRO] _tors_w8_lunga.py  sha1-BYTE bc62bcaa  committato e pulito
+========================================================================================================
+M1-M4 -- IL VERSO E LE PLAQUETTE: 230 passi, UN braccio, SOLA LETTURA
+  ### M4 gira sulla STESSA corsa di M1-M3, e il motivo e' nel docstring.
+========================================================================================================
+  simulatore b8c21049   atteso b8c21049
+  ### il blob COINCIDE: la misura vale per questo simulatore.
+[calore] calcio termico SCALARE isotropo forzato (vettoriale spento per confronto)
+[tempo-unico-mitosi] NO-OP DICHIARATO dal 2026-09-27: la `CURA 2` e' STRUTTURALE e i rami a flag spento sono USCITI dal simulatore. Il braccio OFF vive al tag `pre-cura2-strutturale`; i rami in csv/_archivio/rami_off_cura2.py.
+[cura4] SEMINA_MATURA ON: i nodi della semina iniziale nascono MATURI, e la rampa usa `_tempo_luce_nodo` invece di TAU_A (che resta la sola vita media spinoriale).
+[inerzia-1C] IL CONTRASTO E' PER VICINO: rho_s normalizzato sullo STESSO conteggio di vicini che peq_nodo usa come denominatore. Coppia e inerzia scalano allo stesso modo; rho_s NON cambia altrove (cura LOCALE).
+[spinore-corretto] MASTER: orologio proprio de Broglie + spinore primario complesso _psi_spinor (evaluate-then-commit, |psi|=1)
+[invarianti] ACCESI (default). DUE LIVELLI: NUMERICO -- overflow, divisione per zero e valori non validi alzano un'eccezione con la riga esatta; l'UNDERFLOW NON ferma niente, perche' densita' come 1e-81 di un nodo neonato sono LEGITTIME. FISICO -- ogni grandezza di stato dentro il suo dominio, a fine passo, con gli INDICI e i valori. L'esplosione del 21/9 NON era un overflow (1.8e6 e' un numero normale): l'avrebbe presa solo la regola FISICA `peq >= 0`. Legge soltanto: su un run sano non cambia un bit.
+[anom-simm] L'ANOMALIA SIMMETRICA, SENZA PAVIMENTO: anom = 2*(rho-peq)/(rho+peq), con `0/0 := 0` DEFINITO (precedente: scala_p, Z67). Toglie il pavimento max(peq,1e-9), che e' un numero SCELTO e non esprime nessun vincolo fisico (A11): con peq negativo RIBALTAVA IL SEGNO e moltiplicava per 3.7e5 (Z94). Il caso peq->0 con rho ordinario passa da 1e+08 a ESATTAMENTE +2, e per anomalie piccole le due forme coincidono. *** RICHIEDE --peq-esatto: con peq < 0 il denominatore si annulla in peq = -rho ed e' un POLO, non un limite. Senza C1 questa cura sostituisce un pavimento con un polo. Il caso e' CONTATO, non assunto impossibile. ***
+[coes-causale] LA COESIONE RISPETTA L'ISTANTE E IL CONO LOCALE: `d0` e `d` si leggono dalla fotografia di INIZIO PASSO invece che da un `d0` gia' spostato da sette scritture, e il tetto e' `cs_arco*DT` col `cs` del nodo PIU' LENTO invece di `LAM*sqrt(K_C)*DT`, che e' costruito su costanti di modulo e non conosce il cono del luogo (A5). Zero parametri: `_cs_nodo_prev` esiste gia'. NB: il tetto locale non e' sempre piu' stretto -- dove il cono e' veloce ALLARGA -- ed e' causalita', non prudenza.
+[scala-min-passo] IL FRENO UNA VOLTA PER PASSO: le sei scritture di `d0` e i sotto-passi di `d` NON frenano piu'; a fine passo si applica `_smorza` UNA VOLTA sulla VARIAZIONE TOTALE, dal valore di INIZIO passo. Cura il CRICCHETTO di Z91: frenare ogni scrittura separatamente rende il risultato dipendente dall'ORDINE delle leggi e, poiche' frena solo le discese, con spinte opposte di somma nulla NON da' zero. Applicato una volta sola sul totale il bias e' ZERO ESATTO. Lo snapshot di inizio passo segue la mitosi ai quattro siti di ristrutturazione; gli archi NATI nel passo non vengono frenati, e le nascite restano a LAM. Zero coefficienti.
+[peq-nascita-locale] UNA SOLA LEGGE DI NASCITA PER `peq`: gli archi della creazione di coppia alla Schwinger nascono con `nan` e vengono CALIBRATI da step() sulla `rho` DEL LORO ARCO, esattamente come quelli di `_allaccia`. Prima prendevano `median(peq)`, LA MEDIANA GLOBALE: una statistica globale dentro una legge locale (A2), e quei nodi non hanno alcun rapporto con la mediana della rete. Zero parametri: il meccanismo esisteva gia'. L'eredita' della MITOSI non si tocca: un arco che si spezza non nasce, CONTINUA.
+[peq-esatto] IL RILASSAMENTO DI `peq` IN FORMA ESATTA: peq <- rho + (peq-rho)*exp(-dt_e/tau_bg), piu' lo stesso passo esatto per la diffusione (splitting di Lie-Trotter, punto fisso `peq+flusso`). E' una COMBINAZIONE CONVESSA, quindi `min(peq,rho) <= peq_new <= max(peq,rho)` per QUALUNQUE passo: `peq` NON PUO' PIU' SCAVALCARE SOTTO ZERO. L'Eulero esplicito di prima scavalcava per dt_e/tau_bg > 1, misurato 1.2018 al passo 1126 del ramo D. Zero coefficienti nuovi: e' la stessa forma gia' imposta dal par.4 per i rilassamenti di primo ordine. NON toglie il pavimento di :4215.
+[coes-adim] COESIONE ADIMENSIONALE: i tre addendi normalizzati sulla densita' LOCALE dell'arco (I_med sparisce, era una media globale), e lo spostamento e' passo_causale * tanh(...) * filtro_portata, con |F| <= 1 PER COSTRUZIONE. Sostituisce il clip tanh(stress)*d0.
+[chi-coop] COOPERAZIONE: chi_basc SCRIVE perc_geom (geometria, letta dalla catena della torsione) e lo spinore scrive perc_chi (carica, letta dal campo B, dalla mitosi e da Schwinger). L'anello carica -> campo -> spinore -> carica e' quello NORMALE della fisica, sfasato di un passo.
+[deparam-orologio] orologio RELAZIONALE: freq = coerenza d'arco intensiva (no |Psi|^2 estensiva, no rho_c globale, no volume)
+[campo-spinoriale] FASI 1-3: campo Psi EMESSO dallo spinore (n,2) in calcola_psi; densita'/gravita' native (rho_spin, nb); FORZE = OVERLAP SPINORIALE <psi_i|psi_j> (coppia in step). Mitosi/coppie = Fase 4, ancora scalari. Riduzione-al-limite: spinore (e^{i phi},0) -> tutto scalare (sigilli 0.000e+00)
+[fork-su2] STRATO 0: la forza trasporta con N_ij/2 = cos(chi/2) U_ij in SU(2) (MESCOLA a,b -> non-abeliano). Peso = overlap di spin |<n_i|n_j>|, non una manopola. Allineati -> N/2=I -> riduzione ESATTA allo scalare; antipodali -> N=0. Bloch presi da _psi_spinor (gli stessi stati trasportati: connessione di Berry DI quegli stati).
+[fork-su2-mem] STRATO 1: la connessione N nasce dai Bloch RITARDATI n(t-tau), tau = d/cs (tempo-luce d'arco, zero parametri nuovi). ROMPE IL TEOREMA DI INERZIA dello Strato 0: psi(t) non e' autovettore di n(t-tau).sigma, quindi <psi_i|N|psi_j> != 2<psi_i|psi_j> e la FORZA CAMBIA. Rilassamento ESATTO alpha=1-exp(-dt/tau) con slerp geodetico sulla sfera (primo ordine, mai Verlet). A riposo o per tau->0 il ritardato torna al corrente -> riduzione allo Strato 0. Il TRASPORTO resta sugli spinori correnti.
+[step2-orologio] STEP 2: omega_clk *= (cs/CS_M)^2 = OROLOGIO DI COMPTON (omega = m c^2/hbar, e nel modello c e' cs). Aggancia il tempo proprio dell'OROLOGIO a quello della METRICA, che erano scollegati. Zero parametri: a cs=CS_M il fattore e' 1 esatto. cs dal passo precedente (il settore metrico gira dopo). Tocca la MAGNITUDINE, mai il segno. NB: agisce sulla FASE (U(1)), NON sul Bloch: non organizza lo spin, e non deve.
+[rumore-colorato] TAGLIO SPETTRALE: il calcio del vuoto non e' piu' bianco ma correlato su tau_c = LAM/CS_M = 0.4 (= 40 passi), con un processo di Ornstein-Uhlenbeck sul rumore stesso e `dt_n = DT*r` (non DT: e' un processo LOCALE). `amp` INVARIATA. MOTIVO: il rumore bianco discreto inietta a tutte le frequenze fino a Nyquist, incluse quelle che il passo non risolve; in natura non esiste. ZERO coefficienti: LAM e CS_M sono gia' nel sistema. ATTENZIONE: la ricorsione PRESERVA LA VARIANZA, quindi NON abbassa theta - se lo muove lo fa SALIRE (<=5%). Si cabla perche' il rumore bianco e' SBAGLIATO, non perche' risolva l'aliasing (doc/PREDIZIONE_taglio_spettrale.md).
+[tau-luce] Il rilassamento di omega_s usa tau = d_nodo/cs_nodo (`_tempo_luce_nodo`), lo STESSO tau dello Strato 1, al posto di TAU_A*max(dens/dens_rif, 0.05). MOTIVO: inerzia = T^2 = (d/cs)^2, quindi il tempo che COSTRUISCE l'inerzia e quello che la RILASSA devono essere lo stesso; oggi sono due diversi nella stessa equazione. Zero coefficienti, zero floor nuovi. NB: |omega|_eq va come sqrt(tau), quindi theta cala di ~13x: UN ORDINE DI GRANDEZZA, NON la soluzione dell'aliasing.
+[spin-feedback] ON di default (2026-09-18): prerequisiti presenti, il ramo GIRA. Acceso PER DECISIONE e su basi di FORMA (cricchetto curato 1.112 -> 6.5e-16; G6: fase CUCITA, cambi di segno 0.0035 contro nullo 0.50; sigillo 12/12), NON perche' una misura lo abbia mostrato migliore: l'A/B a quattro semi NON ha mostrato effetto.
+[verlet] integratore metrico Velocity-Verlet (2 ordine) attivo
+[olon-part] la partizione tangenziale usa curl + twist coerente (verso -> conversione)
+[pav-com] ⚠ FLAG INERTE dal 2026-09-27: il pavimento di d0 e' ARCHIVIATO (csv/_archivio/_pavimenti_morti.py) e questo flag NON FA NIENTE. La garanzia sulle lunghezze e' LAM (--scala-min-passo, --semina-lam).
+[zeta-vir] freno anisotropo attivo: beta *= cos2 della viriale (dissipa radiale, libera tangenziale)
+[chi-basc] basculamento chirale attivo: la media di |tw| sugli archi del nodo contro PHI_CRIT (2pi). SCRIVE perc_geom (la GEOMETRIA) con --chi-coop, perc_chi (la CARICA) senza. [CHI-BASC-DESCRIZIONE, 2026-10-06: qui c'era scritto SOLO perc_chi, e col driver (--chi-coop acceso) e' perc_geom che viene scritta]
+[chi-core] frame-dragging guidato dalla chiralità emergente del core locale
+[cs-dinamico] velocità metrica locale cs_eff(rho) con profilo tanh e CFL dinamico
+====================================================================================================
+LA CONFIGURAZIONE INTERA (`P5`) -- non i flag toccati, TUTTI
+====================================================================================================
+  booleani di modulo confrontati con l'argv del DRIVER: 82
+  -> IN CONFIGURAZIONE DEL DRIVER: nessuna differenza. ZERO su 82.
+
+  scena: n = 12802, archi = 471564, DT = 0.01
+  verso      geometria: {'r_regione': 4.096438164464869, 'R_CONN': 2.4000000000000004, 'u_bordo': 1.5858748267749136, 'sep': 6.1158, 'raggio_vuoto': 12.61223816446487, 'n_coorti': [411, 413, 413]}
+  plaquette  geometria: {'r_regione': 4.096438164464869, 'R_CONN': 2.4000000000000004, 'u_bordo': 1.5858748267749136, 'sep': 6.1158, 'raggio_vuoto': 12.61223816446487, 'n_coorti': [411, 413, 413]}
+
+========================================================================================================
+LA CORSA: 230 passi, UN braccio, SOLA LETTURA
+========================================================================================================
+  passo    1/230  n 12802  archi  471564  PESANTE 8.4s
+  passo    2/230  n 12802  archi  471564  
+  passo    3/230  n 12802  archi  471564  
+  passo    4/230  n 12802  archi  471564  
+  passo    5/230  n 12802  archi  471564  
+  passo    6/230  n 12802  archi  471564  
+  passo    7/230  n 12802  archi  471564  
+  passo    8/230  n 12802  archi  471564  
+  passo    9/230  n 12802  archi  471564  
+  passo   10/230  n 12802  archi  471564  
+  passo   11/230  n 12802  archi  471564  
+  passo   12/230  n 12802  archi  471564  
+  passo   13/230  n 12802  archi  471564  
+  passo   14/230  n 12802  archi  471564  
+  passo   15/230  n 12802  archi  471564  
+  passo   16/230  n 12802  archi  471564  
+  passo   17/230  n 12802  archi  471564  
+  passo   18/230  n 12802  archi  471564  
+  passo   19/230  n 12802  archi  471564  
+  passo   20/230  n 12802  archi  471564  
+  passo   21/230  n 12802  archi  471564  
+  passo   22/230  n 12802  archi  471564  
+  passo   23/230  n 12802  archi  471564  
+  passo   24/230  n 12802  archi  471564  
+  passo   25/230  n 12802  archi  471564  
+  passo   26/230  n 12802  archi  471564  
+  passo   27/230  n 12802  archi  471564  
+  passo   28/230  n 12802  archi  471564  
+  passo   29/230  n 12802  archi  471564  
+  passo   30/230  n 12802  archi  471564  
+  passo   31/230  n 12802  archi  471564  
+  passo   32/230  n 12802  archi  471564  
+  passo   33/230  n 12802  archi  471564  
+  passo   34/230  n 12802  archi  471564  
+  passo   35/230  n 12802  archi  471564  
+  passo   36/230  n 12802  archi  471564  
+  passo   37/230  n 12802  archi  471564  
+  passo   38/230  n 12802  archi  471564  
+  passo   39/230  n 12802  archi  471564  
+  passo   40/230  n 12802  archi  471564  
+  passo   41/230  n 12802  archi  471564  
+  passo   42/230  n 12802  archi  471564  
+  passo   43/230  n 12802  archi  471564  
+  passo   44/230  n 12802  archi  471564  
+  passo   45/230  n 12802  archi  471564  
+  passo   46/230  n 12802  archi  471564  
+  passo   47/230  n 12802  archi  471564  
+  passo   48/230  n 12802  archi  471564  
+  passo   49/230  n 12802  archi  471564  PESANTE 6.5s
+  passo   50/230  n 12802  archi  471564  PESANTE 8.5s
+  passo   51/230  n 12802  archi  471564  
+  passo   52/230  n 12802  archi  471564  
+  passo   53/230  n 12802  archi  471564  
+  passo   54/230  n 12802  archi  471564  
+  passo   55/230  n 12802  archi  471564  
+  passo   56/230  n 12802  archi  471564  
+  passo   57/230  n 12802  archi  471564  
+  passo   58/230  n 12802  archi  471564  
+  passo   59/230  n 12802  archi  471564  
+  passo   60/230  n 12802  archi  471564  
+  passo   61/230  n 12802  archi  471564  
+  passo   62/230  n 12802  archi  471564  
+  passo   63/230  n 12802  archi  471564  
+  passo   64/230  n 12802  archi  471564  
+  passo   65/230  n 12802  archi  471564  
+  passo   66/230  n 12802  archi  471564  
+  passo   67/230  n 12802  archi  471564  
+  passo   68/230  n 12802  archi  471564  
+  passo   69/230  n 12802  archi  471564  
+  passo   70/230  n 12802  archi  471564  
+  passo   71/230  n 12802  archi  471564  
+  passo   72/230  n 12802  archi  471564  
+  passo   73/230  n 12802  archi  471564  
+  passo   74/230  n 12802  archi  471564  
+  passo   75/230  n 12802  archi  471564  
+  passo   76/230  n 12802  archi  471564  
+  passo   77/230  n 12802  archi  471564  
+  passo   78/230  n 12802  archi  471564  
+  passo   79/230  n 12802  archi  471564  
+  passo   80/230  n 12802  archi  471564  
+  passo   81/230  n 12802  archi  471564  
+  passo   82/230  n 12802  archi  471564  
+  passo   83/230  n 12802  archi  471564  
+  passo   84/230  n 12802  archi  471564  
+  passo   85/230  n 12802  archi  471564  
+  passo   86/230  n 12802  archi  471564  
+  passo   87/230  n 12802  archi  471564  
+  passo   88/230  n 12802  archi  471564  
+  passo   89/230  n 12802  archi  471564  
+  passo   90/230  n 12802  archi  471564  
+  passo   91/230  n 12802  archi  471564  
+  passo   92/230  n 12802  archi  471564  
+  passo   93/230  n 12802  archi  471564  
+  passo   94/230  n 12802  archi  471564  
+  passo   95/230  n 12802  archi  471564  
+  passo   96/230  n 12802  archi  471564  
+  passo   97/230  n 12802  archi  471564  
+  passo   98/230  n 12802  archi  471564  
+  passo   99/230  n 12802  archi  471564  
+  passo  100/230  n 12802  archi  471564  
+  passo  101/230  n 12802  archi  471564  
+  passo  102/230  n 12802  archi  471564  
+  passo  103/230  n 12802  archi  471564  
+  passo  104/230  n 12802  archi  471564  
+  passo  105/230  n 12802  archi  471564  
+  passo  106/230  n 12802  archi  471564  
+  passo  107/230  n 12802  archi  471564  
+  passo  108/230  n 12802  archi  471564  
+  passo  109/230  n 12802  archi  471564  
+  passo  110/230  n 12802  archi  471564  
+  passo  111/230  n 12802  archi  471564  
+  passo  112/230  n 12802  archi  471564  
+  passo  113/230  n 12802  archi  471564  
+  passo  114/230  n 12802  archi  471564  
+  passo  115/230  n 12802  archi  471564  
+  passo  116/230  n 12802  archi  471564  
+  passo  117/230  n 12802  archi  471564  
+  passo  118/230  n 12802  archi  471564  
+  passo  119/230  n 12802  archi  471564  
+  passo  120/230  n 12802  archi  471564  
+  passo  121/230  n 12802  archi  471564  
+  passo  122/230  n 12802  archi  471564  
+  passo  123/230  n 12802  archi  471564  
+  passo  124/230  n 12802  archi  471564  
+  passo  125/230  n 12802  archi  471564  
+  passo  126/230  n 12802  archi  471564  
+  passo  127/230  n 12802  archi  471564  
+  passo  128/230  n 12802  archi  471564  
+  passo  129/230  n 12802  archi  471564  
+  passo  130/230  n 12802  archi  471564  
+  passo  131/230  n 12802  archi  471564  
+  passo  132/230  n 12802  archi  471564  
+  passo  133/230  n 12802  archi  471564  
+  passo  134/230  n 12802  archi  471564  
+  passo  135/230  n 12802  archi  471564  
+  passo  136/230  n 12802  archi  471564  
+  passo  137/230  n 12802  archi  471564  
+  passo  138/230  n 12802  archi  471564  
+  passo  139/230  n 12802  archi  471564  
+  passo  140/230  n 12802  archi  471564  
+  passo  141/230  n 12802  archi  471564  
+  passo  142/230  n 12802  archi  471564  
+  passo  143/230  n 12802  archi  471564  
+  passo  144/230  n 12802  archi  471564  
+  passo  145/230  n 12802  archi  471564  
+  passo  146/230  n 12802  archi  471564  
+  passo  147/230  n 12802  archi  471564  
+  passo  148/230  n 12802  archi  471564  
+  passo  149/230  n 12802  archi  471564  PESANTE 6.4s
+  passo  150/230  n 12802  archi  471564  PESANTE 8.3s
+  passo  151/230  n 12802  archi  471564  
+  passo  152/230  n 12802  archi  471564  
+  passo  153/230  n 12802  archi  471564  
+  passo  154/230  n 12802  archi  471564  
+  passo  155/230  n 12802  archi  471564  
+  passo  156/230  n 12802  archi  471564  
+  passo  157/230  n 12802  archi  471564  
+  passo  158/230  n 12802  archi  471564  
+  passo  159/230  n 12802  archi  471564  
+  passo  160/230  n 12802  archi  471564  
+  passo  161/230  n 12802  archi  471564  
+  passo  162/230  n 12802  archi  471564  
+  passo  163/230  n 12802  archi  471564  
+  passo  164/230  n 12802  archi  471564  
+  passo  165/230  n 12802  archi  471564  
+  passo  166/230  n 12802  archi  471564  
+  passo  167/230  n 12802  archi  471564  
+  passo  168/230  n 12802  archi  471564  
+  passo  169/230  n 12802  archi  471564  
+  passo  170/230  n 12802  archi  471564  
+  passo  171/230  n 12802  archi  471564  
+  passo  172/230  n 12802  archi  471564  
+  passo  173/230  n 12802  archi  471564  
+  passo  174/230  n 12802  archi  471564  
+  passo  175/230  n 12802  archi  471564  
+  passo  176/230  n 12802  archi  471564  
+  passo  177/230  n 12802  archi  471564  
+  passo  178/230  n 12802  archi  471564  
+  passo  179/230  n 12802  archi  471564  
+  passo  180/230  n 12802  archi  471564  
+  passo  181/230  n 12802  archi  471564  
+  passo  182/230  n 12802  archi  471564  
+  passo  183/230  n 12802  archi  471564  
+  passo  184/230  n 12802  archi  471564  
+  passo  185/230  n 12802  archi  471564  
+  passo  186/230  n 12802  archi  471564  
+  passo  187/230  n 12802  archi  471564  
+  passo  188/230  n 12802  archi  471564  
+  passo  189/230  n 12802  archi  471564  
+  passo  190/230  n 12802  archi  471564  
+  passo  191/230  n 12802  archi  471564  
+  passo  192/230  n 12802  archi  471564  
+  passo  193/230  n 12802  archi  471564  
+  passo  194/230  n 12802  archi  471564  
+  passo  195/230  n 12802  archi  471564  
+  passo  196/230  n 12802  archi  471564  
+  passo  197/230  n 12802  archi  471564  
+  passo  198/230  n 12802  archi  471564  
+  passo  199/230  n 12802  archi  471564  
+  passo  200/230  n 12802  archi  471564  
+  passo  201/230  n 12802  archi  471564  
+  passo  202/230  n 12802  archi  471564  
+  passo  203/230  n 12802  archi  471564  
+  passo  204/230  n 12802  archi  471564  
+  passo  205/230  n 12802  archi  471564  
+  passo  206/230  n 12802  archi  471564  
+  passo  207/230  n 12802  archi  471564  
+  passo  208/230  n 12802  archi  471564  
+  passo  209/230  n 12802  archi  471564  
+  passo  210/230  n 12802  archi  471564  
+  passo  211/230  n 12802  archi  471564  
+  passo  212/230  n 12802  archi  471564  
+  passo  213/230  n 12802  archi  471564  
+  passo  214/230  n 12802  archi  471564  
+  passo  215/230  n 12802  archi  471564  
+  passo  216/230  n 12804  archi  471567  
+  passo  217/230  n 12806  archi  471570  
+  passo  218/230  n 12806  archi  471570  
+  passo  219/230  n 12807  archi  471571  
+  passo  220/230  n 12809  archi  471574  
+  passo  221/230  n 12811  archi  471577  
+  passo  222/230  n 12811  archi  471577  
+  passo  223/230  n 12811  archi  471577  
+  passo  224/230  n 12811  archi  471577  
+  passo  225/230  n 12811  archi  471577  
+  passo  226/230  n 12811  archi  471577  
+  passo  227/230  n 12811  archi  471577  
+  passo  228/230  n 12811  archi  471577  
+[FERMO] ci sono 9 archi con `i >= j`: la convenzione su cui poggiano le chiavi e i segni della circolazione NON vale piu'.

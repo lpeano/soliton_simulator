@@ -1,0 +1,900 @@
+{
+ "piattaforma": {
+  "python": "3.13.2",
+  "numpy": "2.3.0",
+  "sistema": "Windows 11",
+  "macchina": "AMD64"
+ },
+ "passi": 230,
+ "passi_girati": 220,
+ "stato": "IN CORSO",
+ "blob_sim": "b8c21049b85ba36a828f49dfa225d42419f3baf5",
+ "blob_atteso": "b8c21049",
+ "blob_strumento": "3cf674fdf269350a7106fb717b5db209015b222d",
+ "in_configurazione_del_driver": true,
+ "secondi": 717.4,
+ "a_valle": {
+  "n": 12809,
+  "archi": 471574
+ },
+ "plaquette": {
+  "geometria": {
+   "r_regione": 4.096438164464869,
+   "R_CONN": 2.4000000000000004,
+   "u_bordo": 1.5858748267749136,
+   "sep": 6.1158,
+   "raggio_vuoto": 12.61223816446487,
+   "n_coorti": [
+    411,
+    413,
+    413
+   ]
+  },
+  "misure": {
+   "1": {
+    "passo": 1,
+    "n": 12802,
+    "a_plaquette_totali": 5534011,
+    "a_degeneri": 0,
+    "a_secondi": 4.94,
+    "a_controllo_indipendente": 5534011,
+    "a_secondi_controllo": 0.31,
+    "a_per_nodo_per_classe": {
+     "MATERIA": {
+      "n": 1236,
+      "mediana": 1505.0,
+      "media": 1509.0914239482202,
+      "max": 1905.0,
+      "min": 1156.0
+     },
+     "BORDO": {
+      "n": 3483,
+      "mediana": 1495.0,
+      "media": 1469.0496698248637,
+      "max": 1868.0,
+      "min": 508.0
+     },
+     "VUOTO": {
+      "n": 8083,
+      "mediana": 1330.0,
+      "media": 1190.1640480019794,
+      "max": 1886.0,
+      "min": 428.0
+     }
+    },
+    "a_nodi_senza_plaquette": 0,
+    "a_nodi_senza_plaquette_non_degenere": 0,
+    "b_modulo_medio_per_nodo_per_classe": {
+     "MATERIA": {
+      "n": 1236,
+      "n_non_definiti": 0,
+      "mediana": 0.0,
+      "media": 0.0,
+      "q25": 0.0,
+      "q75": 0.0,
+      "min": 0.0,
+      "max": 0.0
+     },
+     "BORDO": {
+      "n": 3483,
+      "n_non_definiti": 0,
+      "mediana": 0.0,
+      "media": 0.0,
+      "q25": 0.0,
+      "q75": 0.0,
+      "min": 0.0,
+      "max": 0.0
+     },
+     "VUOTO": {
+      "n": 8083,
+      "n_non_definiti": 0,
+      "mediana": 0.0,
+      "media": 0.0,
+      "q25": 0.0,
+      "q75": 0.0,
+      "min": 0.0,
+      "max": 0.0
+     }
+    },
+    "b_campione": {
+     "passo_campione": 29,
+     "n": 190835,
+     "quantili": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+     ],
+     "max": 0.0
+    },
+    "c_coerenza_per_classe": {
+     "MATERIA": {
+      "n": 1236,
+      "n_non_definiti": 1236,
+      "mediana": null,
+      "media": null,
+      "q25": null,
+      "q75": null,
+      "min": null,
+      "max": null
+     },
+     "BORDO": {
+      "n": 3483,
+      "n_non_definiti": 3483,
+      "mediana": null,
+      "media": null,
+      "q25": null,
+      "q75": null,
+      "min": null,
+      "max": null
+     },
+     "VUOTO": {
+      "n": 8083,
+      "n_non_definiti": 8083,
+      "mediana": null,
+      "media": null,
+      "q25": null,
+      "q75": null,
+      "min": null,
+      "max": null
+     }
+    },
+    "c_modulo_R_per_classe": {
+     "MATERIA": {
+      "n": 1236,
+      "n_non_definiti": 0,
+      "mediana": 0.0,
+      "media": 0.0,
+      "q25": 0.0,
+      "q75": 0.0,
+      "min": 0.0,
+      "max": 0.0
+     },
+     "BORDO": {
+      "n": 3483,
+      "n_non_definiti": 0,
+      "mediana": 0.0,
+      "media": 0.0,
+      "q25": 0.0,
+      "q75": 0.0,
+      "min": 0.0,
+      "max": 0.0
+     },
+     "VUOTO": {
+      "n": 8083,
+      "n_non_definiti": 0,
+      "mediana": 0.0,
+      "media": 0.0,
+      "q25": 0.0,
+      "q75": 0.0,
+      "min": 0.0,
+      "max": 0.0
+     }
+    },
+    "d_cos_con_nb_per_classe": {
+     "MATERIA": {
+      "n": 1236,
+      "n_non_definiti": 1236,
+      "mediana": null,
+      "media": null,
+      "q25": null,
+      "q75": null,
+      "min": null,
+      "max": null
+     },
+     "BORDO": {
+      "n": 3483,
+      "n_non_definiti": 3483,
+      "mediana": null,
+      "media": null,
+      "q25": null,
+      "q75": null,
+      "min": null,
+      "max": null
+     },
+     "VUOTO": {
+      "n": 8083,
+      "n_non_definiti": 8083,
+      "mediana": null,
+      "media": null,
+      "q25": null,
+      "q75": null,
+      "min": null,
+      "max": null
+     }
+    },
+    "d_frazione_oltre_mezzo_per_classe": {
+     "MATERIA": {
+      "n": 1236,
+      "n_non_definiti": 1236,
+      "mediana": null,
+      "media": null,
+      "q25": null,
+      "q75": null,
+      "min": null,
+      "max": null
+     },
+     "BORDO": {
+      "n": 3483,
+      "n_non_definiti": 3483,
+      "mediana": null,
+      "media": null,
+      "q25": null,
+      "q75": null,
+      "min": null,
+      "max": null
+     },
+     "VUOTO": {
+      "n": 8083,
+      "n_non_definiti": 8083,
+      "mediana": null,
+      "media": null,
+      "q25": null,
+      "q75": null,
+      "min": null,
+      "max": null
+     }
+    },
+    "d_caso_nullo": {
+     "media_attesa": 0.0,
+     "frazione_oltre_mezzo_attesa": 0.5,
+     "legge": "coseno fra due assi indipendenti in 3D: UNIFORME su [-1,1]"
+    },
+    "e_stabilita": {
+     "passo_precedente": 0,
+     "nodi_confrontabili": 12802,
+     "nodi_senza_R": 12802,
+     "angolo_gradi_per_classe": {
+      "MATERIA": {
+       "n": 1236,
+       "n_non_definiti": 1236,
+       "mediana": null,
+       "media": null,
+       "q25": null,
+       "q75": null,
+       "min": null,
+       "max": null
+      },
+      "BORDO": {
+       "n": 3483,
+       "n_non_definiti": 3483,
+       "mediana": null,
+       "media": null,
+       "q25": null,
+       "q75": null,
+       "min": null,
+       "max": null
+      },
+      "VUOTO": {
+       "n": 8083,
+       "n_non_definiti": 8083,
+       "mediana": null,
+       "media": null,
+       "q25": null,
+       "q75": null,
+       "min": null,
+       "max": null
+      }
+     },
+     "riferimento_perc_geom_frazione_cambiata_per_classe": {
+      "MATERIA": {
+       "n": 1236,
+       "n_non_definiti": 0,
+       "mediana": 0.0,
+       "media": 0.49271844660194175,
+       "q25": 0.0,
+       "q75": 1.0,
+       "min": 0.0,
+       "max": 1.0
+      },
+      "BORDO": {
+       "n": 3483,
+       "n_non_definiti": 0,
+       "mediana": 1.0,
+       "media": 0.5087568188343382,
+       "q25": 0.0,
+       "q75": 1.0,
+       "min": 0.0,
+       "max": 1.0
+      },
+      "VUOTO": {
+       "n": 8083,
+       "n_non_definiti": 0,
+       "mediana": 0.0,
+       "media": 0.49956699245329705,
+       "q25": 0.0,
+       "q75": 1.0,
+       "min": 0.0,
+       "max": 1.0
+      }
+     },
+     "riferimento_perc_geom_frazione_cambiata": 0.5014060303077644
+    }
+   },
+   "50": {
+    "passo": 50,
+    "n": 12802,
+    "a_plaquette_totali": 5534011,
+    "a_degeneri": 0,
+    "a_secondi": 4.89,
+    "a_controllo_indipendente": 5534011,
+    "a_secondi_controllo": 0.36,
+    "a_per_nodo_per_classe": {
+     "MATERIA": {
+      "n": 1240,
+      "mediana": 1505.0,
+      "media": 1509.2088709677419,
+      "max": 1905.0,
+      "min": 1156.0
+     },
+     "BORDO": {
+      "n": 3475,
+      "mediana": 1494.0,
+      "media": 1469.0494964028776,
+      "max": 1868.0,
+      "min": 508.0
+     },
+     "VUOTO": {
+      "n": 8087,
+      "mediana": 1330.0,
+      "media": 1190.2642512674663,
+      "max": 1886.0,
+      "min": 428.0
+     }
+    },
+    "a_nodi_senza_plaquette": 0,
+    "a_nodi_senza_plaquette_non_degenere": 0,
+    "b_modulo_medio_per_nodo_per_classe": {
+     "MATERIA": {
+      "n": 1240,
+      "n_non_definiti": 0,
+      "mediana": 0.06677794436119264,
+      "media": 0.06997585886141028,
+      "q25": 0.0538453536207115,
+      "q75": 0.08247206815639267,
+      "min": 0.03098612204620785,
+      "max": 0.254113270022265
+     },
+     "BORDO": {
+      "n": 3475,
+      "n_non_definiti": 0,
+      "mediana": 0.13027423153074338,
+      "media": 0.1424222791819885,
+      "q25": 0.10961311547892232,
+      "q75": 0.15928804189504864,
+      "min": 0.055863098744851195,
+      "max": 0.46818388710929354
+     },
+     "VUOTO": {
+      "n": 8087,
+      "n_non_definiti": 0,
+      "mediana": 0.14326243310770997,
+      "media": 0.15735184310155967,
+      "q25": 0.12416919030272358,
+      "q75": 0.17447023345641494,
+      "min": 0.06964996619905384,
+      "max": 0.5512660512592356
+     }
+    },
+    "b_campione": {
+     "passo_campione": 29,
+     "n": 190835,
+     "quantili": [
+      0.003093337527552026,
+      0.028013707747929925,
+      0.08754929814532936,
+      0.19972796673029092,
+      0.46994909398094054
+     ],
+     "max": 1.7624666502653472
+    },
+    "c_coerenza_per_classe": {
+     "MATERIA": {
+      "n": 1240,
+      "n_non_definiti": 0,
+      "mediana": 0.034283936051635266,
+      "media": 0.03975727871839438,
+      "q25": 0.02269075688788645,
+      "q75": 0.051042850656834345,
+      "min": 0.0032304253438125265,
+      "max": 0.15484008462369053
+     },
+     "BORDO": {
+      "n": 3475,
+      "n_non_definiti": 0,
+      "mediana": 0.029220578786803866,
+      "media": 0.033461785857483946,
+      "q25": 0.0199464507075962,
+      "q75": 0.042135681036445355,
+      "min": 0.0016547914175045054,
+      "max": 0.17691646822583276
+     },
+     "VUOTO": {
+      "n": 8087,
+      "n_non_definiti": 0,
+      "mediana": 0.034202349734113416,
+      "media": 0.04459395534075918,
+      "q25": 0.021949873136856923,
+      "q75": 0.056317461359649434,
+      "min": 0.0007418640289843772,
+      "max": 0.24388197337303336
+     }
+    },
+    "c_modulo_R_per_classe": {
+     "MATERIA": {
+      "n": 1240,
+      "n_non_definiti": 0,
+      "mediana": 3.550848972150508,
+      "media": 4.331624194735016,
+      "q25": 2.001219936576354,
+      "q75": 5.7844866290883985,
+      "min": 0.21475195428233965,
+      "max": 20.906926926929312
+     },
+     "BORDO": {
+      "n": 3475,
+      "n_non_definiti": 0,
+      "mediana": 5.817533148065033,
+      "media": 6.384319025937035,
+      "q25": 4.0512351411590934,
+      "q75": 8.039565957058127,
+      "min": 0.31740963746414314,
+      "max": 24.381207703568272
+     },
+     "VUOTO": {
+      "n": 8087,
+      "n_non_definiti": 0,
+      "mediana": 6.076683567595346,
+      "media": 6.934351187860385,
+      "q25": 4.181291729852129,
+      "q75": 8.631475999296786,
+      "min": 0.11534101005245279,
+      "max": 38.941545990232456
+     }
+    },
+    "d_cos_con_nb_per_classe": {
+     "MATERIA": {
+      "n": 1240,
+      "n_non_definiti": 0,
+      "mediana": 0.02611473719942707,
+      "media": 0.007214320990259959,
+      "q25": -0.4730806150020556,
+      "q75": 0.4920051173669663,
+      "min": -0.9992797307944166,
+      "max": 0.9997176631618022
+     },
+     "BORDO": {
+      "n": 3475,
+      "n_non_definiti": 0,
+      "mediana": 0.00120337184758915,
+      "media": 0.0021054580168702276,
+      "q25": -0.47285590105899133,
+      "q75": 0.4785583151637034,
+      "min": -0.9979012263457443,
+      "max": 0.9995613776790611
+     },
+     "VUOTO": {
+      "n": 8087,
+      "n_non_definiti": 0,
+      "mediana": 0.021913604542384824,
+      "media": 0.011283215920099923,
+      "q25": -0.49398128114792517,
+      "q75": 0.5112900350512035,
+      "min": -0.9997579352956241,
+      "max": 0.999926490654591
+     }
+    },
+    "d_frazione_oltre_mezzo_per_classe": {
+     "MATERIA": {
+      "n": 1240,
+      "n_non_definiti": 0,
+      "mediana": 0.0,
+      "media": 0.4846774193548387,
+      "q25": 0.0,
+      "q75": 1.0,
+      "min": 0.0,
+      "max": 1.0
+     },
+     "BORDO": {
+      "n": 3475,
+      "n_non_definiti": 0,
+      "mediana": 0.0,
+      "media": 0.4788489208633094,
+      "q25": 0.0,
+      "q75": 1.0,
+      "min": 0.0,
+      "max": 1.0
+     },
+     "VUOTO": {
+      "n": 8087,
+      "n_non_definiti": 0,
+      "mediana": 1.0,
+      "media": 0.5038951403487077,
+      "q25": 0.0,
+      "q75": 1.0,
+      "min": 0.0,
+      "max": 1.0
+     }
+    },
+    "d_caso_nullo": {
+     "media_attesa": 0.0,
+     "frazione_oltre_mezzo_attesa": 0.5,
+     "legge": "coseno fra due assi indipendenti in 3D: UNIFORME su [-1,1]"
+    },
+    "e_stabilita": {
+     "passo_precedente": 49,
+     "nodi_confrontabili": 12802,
+     "nodi_senza_R": 0,
+     "angolo_gradi_per_classe": {
+      "MATERIA": {
+       "n": 1240,
+       "n_non_definiti": 0,
+       "mediana": 0.8789947009543031,
+       "media": 1.2372315035883166,
+       "q25": 0.49803053773310263,
+       "q75": 1.4875163481082554,
+       "min": 0.02600656876900209,
+       "max": 28.478854795875154
+      },
+      "BORDO": {
+       "n": 3475,
+       "n_non_definiti": 0,
+       "mediana": 1.2797102039322954,
+       "media": 1.738650803091789,
+       "q25": 0.7528931947661802,
+       "q75": 2.1012352269738126,
+       "min": 0.008416695606137978,
+       "max": 34.48315175127813
+      },
+      "VUOTO": {
+       "n": 8087,
+       "n_non_definiti": 0,
+       "mediana": 1.5027065793661747,
+       "media": 2.1082265713489274,
+       "q25": 0.8724145211308036,
+       "q75": 2.539398328408284,
+       "min": 0.003093919848505673,
+       "max": 91.75811766862446
+      }
+     },
+     "riferimento_perc_geom_frazione_cambiata_per_classe": {
+      "MATERIA": {
+       "n": 1240,
+       "n_non_definiti": 0,
+       "mediana": 0.0,
+       "media": 0.0,
+       "q25": 0.0,
+       "q75": 0.0,
+       "min": 0.0,
+       "max": 0.0
+      },
+      "BORDO": {
+       "n": 3475,
+       "n_non_definiti": 0,
+       "mediana": 0.0,
+       "media": 0.0,
+       "q25": 0.0,
+       "q75": 0.0,
+       "min": 0.0,
+       "max": 0.0
+      },
+      "VUOTO": {
+       "n": 8087,
+       "n_non_definiti": 0,
+       "mediana": 0.0,
+       "media": 0.0,
+       "q25": 0.0,
+       "q75": 0.0,
+       "min": 0.0,
+       "max": 0.0
+      }
+     },
+     "riferimento_perc_geom_frazione_cambiata": 0.0
+    }
+   },
+   "150": {
+    "passo": 150,
+    "n": 12802,
+    "a_plaquette_totali": 5534011,
+    "a_degeneri": 0,
+    "a_secondi": 4.71,
+    "a_controllo_indipendente": 5534011,
+    "a_secondi_controllo": 0.38,
+    "a_per_nodo_per_classe": {
+     "MATERIA": {
+      "n": 1243,
+      "mediana": 1505.0,
+      "media": 1508.4456958970234,
+      "max": 1905.0,
+      "min": 1156.0
+     },
+     "BORDO": {
+      "n": 3427,
+      "mediana": 1496.0,
+      "media": 1470.6264954770936,
+      "max": 1868.0,
+      "min": 508.0
+     },
+     "VUOTO": {
+      "n": 8132,
+      "mediana": 1331.0,
+      "media": 1191.2442203639941,
+      "max": 1886.0,
+      "min": 428.0
+     }
+    },
+    "a_nodi_senza_plaquette": 0,
+    "a_nodi_senza_plaquette_non_degenere": 0,
+    "b_modulo_medio_per_nodo_per_classe": {
+     "MATERIA": {
+      "n": 1243,
+      "n_non_definiti": 0,
+      "mediana": 0.2927541724317183,
+      "media": 0.31020316807144144,
+      "q25": 0.24857012776973353,
+      "q75": 0.35359443669739987,
+      "min": 0.16276895434010674,
+      "max": 1.287731015935085
+     },
+     "BORDO": {
+      "n": 3427,
+      "n_non_definiti": 0,
+      "mediana": 0.5196227584242722,
+      "media": 0.5827695040517112,
+      "q25": 0.4301761752230714,
+      "q75": 0.6561948891832292,
+      "min": 0.2305807344800124,
+      "max": 2.172943585997667
+     },
+     "VUOTO": {
+      "n": 8132,
+      "n_non_definiti": 0,
+      "mediana": 0.6143244539679267,
+      "media": 0.6883868805867505,
+      "q25": 0.5164623936565155,
+      "q75": 0.7740085130508229,
+      "min": 0.2864659876379016,
+      "max": 2.3986652099143657
+     }
+    },
+    "b_campione": {
+     "passo_campione": 29,
+     "n": 190835,
+     "quantili": [
+      0.02547024698988013,
+      0.1529572322225332,
+      0.3915878643335884,
+      0.8488125611154697,
+      1.924856412112128
+     ],
+     "max": 6.165226177209567
+    },
+    "c_coerenza_per_classe": {
+     "MATERIA": {
+      "n": 1243,
+      "n_non_definiti": 0,
+      "mediana": 0.03128860783865431,
+      "media": 0.03676027310573297,
+      "q25": 0.020389088953281558,
+      "q75": 0.047463181362424126,
+      "min": 0.003134262200740969,
+      "max": 0.1281187774100251
+     },
+     "BORDO": {
+      "n": 3427,
+      "n_non_definiti": 0,
+      "mediana": 0.03387813471185221,
+      "media": 0.03800974325304025,
+      "q25": 0.02258035502456169,
+      "q75": 0.04928341443714184,
+      "min": 0.0022814743325714052,
+      "max": 0.2137426714990897
+     },
+     "VUOTO": {
+      "n": 8132,
+      "n_non_definiti": 0,
+      "mediana": 0.03598508896782672,
+      "media": 0.04574005538780203,
+      "q25": 0.022733112362574845,
+      "q75": 0.05793931903546237,
+      "min": 0.0009335559564337831,
+      "max": 0.24296628492616468
+     }
+    },
+    "c_modulo_R_per_classe": {
+     "MATERIA": {
+      "n": 1243,
+      "n_non_definiti": 0,
+      "mediana": 13.699181199976785,
+      "media": 17.73033897403241,
+      "q25": 8.417199273115134,
+      "q75": 23.551315429833778,
+      "min": 1.2933424868246388,
+      "max": 86.4851511948662
+     },
+     "BORDO": {
+      "n": 3427,
+      "n_non_definiti": 0,
+      "mediana": 26.947435347663806,
+      "media": 29.95194536821085,
+      "q25": 18.024209613500076,
+      "q75": 38.56778877870745,
+      "min": 2.637638449734352,
+      "max": 189.24017595198882
+     },
+     "VUOTO": {
+      "n": 8132,
+      "n_non_definiti": 0,
+      "mediana": 26.743728425313307,
+      "media": 31.573915501583357,
+      "q25": 18.14455233114476,
+      "q75": 39.182058466605206,
+      "min": 0.6446428742118784,
+      "max": 194.90886557728106
+     }
+    },
+    "d_cos_con_nb_per_classe": {
+     "MATERIA": {
+      "n": 1243,
+      "n_non_definiti": 0,
+      "mediana": -0.019350927218043143,
+      "media": 0.0021975495983348986,
+      "q25": -0.5084339828052886,
+      "q75": 0.525691103187717,
+      "min": -0.9985792525487561,
+      "max": 0.9999181349617675
+     },
+     "BORDO": {
+      "n": 3427,
+      "n_non_definiti": 0,
+      "mediana": -0.021559331062701123,
+      "media": -0.015173804411553783,
+      "q25": -0.5187543945716637,
+      "q75": 0.48497729673121764,
+      "min": -0.9996766665813224,
+      "max": 0.9999451554489869
+     },
+     "VUOTO": {
+      "n": 8132,
+      "n_non_definiti": 0,
+      "mediana": 0.00411851899285885,
+      "media": 0.0013455988562589782,
+      "q25": -0.49796353335376864,
+      "q75": 0.5015088278719854,
+      "min": -0.9999078225739192,
+      "max": 0.9996294085614702
+     }
+    },
+    "d_frazione_oltre_mezzo_per_classe": {
+     "MATERIA": {
+      "n": 1243,
+      "n_non_definiti": 0,
+      "mediana": 1.0,
+      "media": 0.5156878519710378,
+      "q25": 0.0,
+      "q75": 1.0,
+      "min": 0.0,
+      "max": 1.0
+     },
+     "BORDO": {
+      "n": 3427,
+      "n_non_definiti": 0,
+      "mediana": 1.0,
+      "media": 0.50510650714911,
+      "q25": 0.0,
+      "q75": 1.0,
+      "min": 0.0,
+      "max": 1.0
+     },
+     "VUOTO": {
+      "n": 8132,
+      "n_non_definiti": 0,
+      "mediana": 0.0,
+      "media": 0.49938514510575505,
+      "q25": 0.0,
+      "q75": 1.0,
+      "min": 0.0,
+      "max": 1.0
+     }
+    },
+    "d_caso_nullo": {
+     "media_attesa": 0.0,
+     "frazione_oltre_mezzo_attesa": 0.5,
+     "legge": "coseno fra due assi indipendenti in 3D: UNIFORME su [-1,1]"
+    },
+    "e_stabilita": {
+     "passo_precedente": 149,
+     "nodi_confrontabili": 12802,
+     "nodi_senza_R": 0,
+     "angolo_gradi_per_classe": {
+      "MATERIA": {
+       "n": 1243,
+       "n_non_definiti": 0,
+       "mediana": 0.3986405218291676,
+       "media": 0.5976621973655923,
+       "q25": 0.22919449755878887,
+       "q75": 0.7039347232511195,
+       "min": 0.007315477027053711,
+       "max": 11.609916424738323
+      },
+      "BORDO": {
+       "n": 3427,
+       "n_non_definiti": 0,
+       "mediana": 0.5300146814276578,
+       "media": 0.7680157377483138,
+       "q25": 0.3065040764826237,
+       "q75": 0.9433958514809202,
+       "min": 0.011125640041615857,
+       "max": 11.627576895848259
+      },
+      "VUOTO": {
+       "n": 8132,
+       "n_non_definiti": 0,
+       "mediana": 0.6742476371111294,
+       "media": 0.9659217594498062,
+       "q25": 0.3801390775642588,
+       "q75": 1.1821671090560915,
+       "min": 0.0024294175237546153,
+       "max": 40.583479537243
+      }
+     },
+     "riferimento_perc_geom_frazione_cambiata_per_classe": {
+      "MATERIA": {
+       "n": 1243,
+       "n_non_definiti": 0,
+       "mediana": 0.0,
+       "media": 0.0,
+       "q25": 0.0,
+       "q75": 0.0,
+       "min": 0.0,
+       "max": 0.0
+      },
+      "BORDO": {
+       "n": 3427,
+       "n_non_definiti": 0,
+       "mediana": 0.0,
+       "media": 0.0,
+       "q25": 0.0,
+       "q75": 0.0,
+       "min": 0.0,
+       "max": 0.0
+      },
+      "VUOTO": {
+       "n": 8132,
+       "n_non_definiti": 0,
+       "mediana": 0.0,
+       "media": 0.0,
+       "q25": 0.0,
+       "q75": 0.0,
+       "min": 0.0,
+       "max": 0.0
+      }
+     },
+     "riferimento_perc_geom_frazione_cambiata": 0.0
+    }
+   }
+  },
+  "passi_misura": [
+   1,
+   50,
+   150,
+   230
+  ],
+  "passi_pesanti": [
+   0,
+   1,
+   49,
+   50,
+   149,
+   150,
+   229,
+   230
+  ],
+  "blocco": 400000,
+  "passo_campione": 29,
+  "eps_normale": 1e-12,
+  "gira_sulla_stessa_corsa_di_M1_M3": true,
+  "avvisi": []
+ }
+}

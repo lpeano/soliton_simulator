@@ -747,3 +747,104 @@ dtw = P + f'*dtw        ->      dtw = P / (1 - f')        CONDIZIONE:  sup |f'| 
 > coerenza di `R_k`, il coseno con `_nb`, la stabilita')*, e ### **l'unica affermazione
 > permessa e' DESCRITTIVA.** ### **La scelta fra `A`/`B`/`C`/`D`/`P`, e fra `P1`/`P2`/`P3`
 > — cioe' se il verso e' un SEGNO o un ASSE — sono decisioni di Luca.**
+
+---
+
+# ANNOTAZIONE *(2026-10-06 — `par.8`: si ANNOTA, non si riscrive)*
+
+## ⛔ **LA CORSA SI E' FERMATA AL PASSO `229`, E HA SMENTITO UNA MIA PREMESSA MISURATA**
+
+> ### ⛔ **<<TUTTI GLI ARCHI HANNO `i < j`>> E' FALSO.** L'ho scritto due volte in questo
+> documento e una nella relazione, con un numero vero accanto — ### **`471564` su
+> `471564`** — e quel numero ### **veniva dai passi `0`, `1` e `2`**, cioe'
+> ### **PRIMA DI QUALUNQUE NASCITA.**
+
+**CHE COSA E' SUCCESSO:** la guardia di `M4` *(che la convenzione la ### **verifica** invece
+di assumerla)* ha fermato la corsa:
+
+```
+[FERMO] ci sono 9 archi con `i >= j`: la convenzione su cui poggiano le chiavi
+        e i segni della circolazione NON vale piu'.
+```
+
+### ✔ **LA CAUSA E' DERIVATA DAL CODICE, NON SUPPOSTA**
+
+**Dalla regola di nascita di `soliton_simulator.py`** *(il suo stesso commento lo dice:
+«l'arco `a-b` sparisce (`keep`) e nascono `a-m` e `m-b`: `i` prende `a` e `m`, `j` prende
+`m` e `b`»)*:
+
+| l'arco nuovo | `i` | `j` | |
+|---|---|---|---|
+| `a-m` | `a` *(vecchio)* | `m` *(nuovo)* | ### ✔ `i < j`, perche' il nodo nuovo prende l'indice ### **piu' alto** |
+| **`m-b`** | ### **`m` (nuovo)** | `b` *(vecchio)* | ### ⛔ **`i > j` SEMPRE** |
+
+> ### ⛔ **QUINDI OGNI NASCITA PRODUCE ESATTAMENTE UN ARCO CONTRO LA CONVENZIONE**, e lo
+> stesso vale per lo Schwinger *(`i = concat([i, aa, k])`, `j = concat([j, k, bb])`:
+> l'arco `k-bb` ha `i > j`)*.
+>
+> ### ✔ **E I NUMERI TORNANO:** la prima nascita e' al passo ### **`216`** *(registrata:
+> `+2` nodi, `+4` archi)*, poi `217`, `219`, `220` — ### **`7` nascite fino al `220`** — e
+> al passo `229` gli archi fuori convenzione sono ### **`9`.** ### **Uno per nascita.**
+
+### ⚠ **E' LA TRAPPOLA DELLA FINESTRA CORTA, E L'AVEVO GIA' PAGATA OGGI**
+
+In questa stessa giornata avevo scritto che *«gli archi oltre `4π` salgono e scendono, cioe'
+si rilassano»* leggendo una finestra di `90` passi, e su `1000` passi ### **crescono fino a
+`368`.** ### **Qui ho fatto lo stesso errore con un numero ancora piu' convincente:**
+`471564` su `471564` e' un `100 %` ### **esatto**, e un `100 %` esatto ### **sembra una
+legge.** ### **Era un `100 %` su una finestra in cui la rete non era ancora nata.**
+
+---
+
+## ⛔ **CHE COSA CAMBIA NELLE CONCLUSIONI, E CHE COSA NO** — *diviso, perche' non e' lo stesso*
+
+### ✔ **LA CONCLUSIONE DELL'OBIEZIONE ① RESTA, E SI RAFFORZA**
+
+**Avevo scritto:** *«la somma col segno MEMORIZZATO ### **dipende dalla NUMERAZIONE**»*,
+e la giustificazione era *«l'orientamento e' canonico, `i<j` al `100 %`»*.
+
+> ### ⛔ **LA GIUSTIFICAZIONE E' SBAGLIATA. LA CONCLUSIONE E' PIU' FORTE DI PRIMA.**
+>
+> L'orientamento memorizzato e' `(min, max)` per gli archi ### **seminati** e
+> `(nuovo, vecchio)` per ### **un arco a ogni nascita.** Quindi `Σ tw` col segno
+> memorizzato ### **non dipende solo dalla numerazione: dipende dalla STORIA DELLE
+> NASCITE** — cioe' da una contabilita' che ### **non e' affatto una funzione del grafo di
+> adesso.** ### **Due reti IDENTICHE arrivate per due strade diverse darebbero somme
+> diverse.**
+>
+> ### ✔ **Quindi <<non e' una legge>> vale ANCORA, e per un motivo PIU' AMPIO di quello
+> che avevo scritto.**
+
+### ✔ **E LA LETTURA <<DIVERGENZA>> NON E' TOCCATA**
+
+La somma col segno ### **relativo al nodo** *(`+` se il nodo e' la coda, `−` se e' la
+testa)* e' ### **invariante per orientamento PER COSTRUZIONE**: non le importa come l'arco
+sia memorizzato. ### **Resta un flusso uscente, e resta NON una circolazione.**
+
+### ⛔ **MA `M4` SI APPOGGIAVA ALLA CONVENZIONE, E QUESTO VA CURATO**
+
+La circolazione era scritta ### **`tw[(u,v)] + tw[(v,w)] − tw[(u,w)]`**, e quei segni
+valgono ### **solo se i tre archi sono memorizzati `i<j`.** ### ✔ **La guardia ha fatto
+esattamente il suo lavoro: si e' FERMATA invece di produrre nove circolazioni sbagliate in
+silenzio.**
+
+> ### ✔ **LA CURA NON E' UN NUMERO NUOVO NE' UN'ECCEZIONE: e' rendere il segno ESPLICITO.**
+> Per ogni arco del triangolo si guarda ### **come e' memorizzato** e si somma `+tw` se il
+> verso di percorrenza coincide con `i -> j`, `−tw` altrimenti. ### **Vale per QUALUNQUE
+> orientamento**, quindi ### **non c'e' piu' niente da assumere** — e la chiave d'arco
+> diventa ### **canonica `(min, max)`**, cosi' la ricerca non dipende da come l'arco e'
+> stato scritto. ### **Zero numeri nuovi, e un'assunzione IN MENO** *(`9-ter`)*.
+
+---
+
+## ✔ **CHE COSA DELLA MISURA E' SALVO, e che cosa manca**
+
+| | |
+|---|---|
+| ### ✔ **salvi** | i passi ### **`1`, `50`, `150`** e i loro predecessori: ### **tutti PRIMA della prima nascita** *(`216`)*, quindi ### **dentro la convenzione**, e `M4` li ha calcolati bene |
+| ### ⛔ **manca** | il passo ### **`230`** — ed e' ### **il solo** con nascite, cioe' ### **il solo che renderebbe decidibile la previsione su `M3-C`** *(la base dei cicli che cambia)* |
+| il dato su disco | si ferma al passo ### **`220`**, perche' il salvataggio e' ogni `10` passi e ### **il ramo `SystemExit` non salva**: una guardia che si ferma ### **non deve scrivere un dato parziale come se fosse completo** |
+
+> ### ⛔ **E IL PASSO `230` NON SI PUO' RACCONTARE: non c'e'.** La misura e'
+> ### **INCOMPLETA**, e il referto non si scrive finche' non lo e'. ### **Il fallimento si
+> committa PRIMA della cura** *(`par.5`)*, e questo e' quel commit.

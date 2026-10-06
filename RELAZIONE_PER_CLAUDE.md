@@ -7675,3 +7675,58 @@ RAGIONAMENTO.**
 
 ### ⛔ **E IO NON SCELGO:** `M4` da' i numeri, e ### **la scelta fra `A`/`B`/`C`/`D`/`P` e
 fra `P1`/`P2`/`P3` — cioe' se il verso e' un SEGNO o un ASSE — sono decisioni di Luca.**
+
+---
+
+## 2026-10-06 — ⛔ **LA CORSA SI E' FERMATA AL PASSO `229`: <<TUTTI GLI ARCHI HANNO `i < j`>> ERA FALSO**
+
+**La guardia di `M4` ha fermato la corsa** — `[FERMO] ci sono 9 archi con i >= j` — e
+### **ha smentito una premessa che avevo MISURATO e scritto nel repo tre volte**
+*(due in `doc/GEOM_SENZA_VERSO.md`, una qui)*.
+
+### ⚠ **IL NUMERO ERA VERO E LA FINESTRA ERA SBAGLIATA**
+
+`471564` su `471564` l'avevo misurato ai passi ### **`0`, `1` e `2`**, cioe'
+### **PRIMA DI QUALUNQUE NASCITA**: la prima divisione e' al passo ### **`216`.**
+
+> ### ⛔ **E' LA TRAPPOLA DELLA FINESTRA CORTA, PAGATA DUE VOLTE IN UN GIORNO.** Stamattina
+> avevo scritto che gli archi oltre `4π` *«si rilassano»* leggendo `90` passi, e su `1000`
+> ### **crescono fino a `368`.** ### **Qui l'errore e' lo stesso con un numero PIU'
+> convincente:** un `100 %` ### **esatto** sembra una legge, e ### **era un `100 %` su una
+> finestra in cui la rete non era ancora nata.**
+
+### ✔ **LA CAUSA E' DERIVATA DAL CODICE**
+
+Alla mitosi l'arco `a-b` sparisce e nascono `a-m` e `m-b`, con `m` il nodo ### **nuovo**,
+cioe' l'indice ### **piu' alto**: quindi ### **`m-b` ha `i > j` SEMPRE** *(e lo Schwinger
+fa lo stesso con `k-bb`)*. ### **Ogni nascita produce ESATTAMENTE un arco fuori
+convenzione**, e i numeri tornano: ### **`7` nascite fino al passo `220`**, ### **`9`
+archi fuori convenzione al `229`.**
+
+### CHE COSA CAMBIA, **e che cosa no**
+
+| | |
+|---|---|
+| l'obiezione ① | ### ✔ **LA CONCLUSIONE RESTA E SI RAFFORZA**, ### ⛔ **la mia giustificazione era sbagliata**: la somma col segno memorizzato non dipende solo dalla numerazione, ### **dipende dalla STORIA DELLE NASCITE** — cioe' da una contabilita' che ### **non e' una funzione del grafo di adesso.** ### **Due reti identiche arrivate per strade diverse darebbero somme diverse** |
+| la lettura <<divergenza>> | ### ✔ **non toccata**: e' invariante per orientamento ### **per costruzione** |
+| `M4` | ### ⛔ **da curare**: la circolazione `tw[(u,v)] + tw[(v,w)] − tw[(u,w)]` ### **vale solo se i tre archi sono `i<j`** |
+
+> ### ✔ **LA GUARDIA HA FATTO ESATTAMENTE IL SUO LAVORO:** si e' ### **FERMATA** invece di
+> produrre nove circolazioni sbagliate ### **in silenzio.** ### **Senza di lei il referto
+> avrebbe portato numeri plausibili e falsi al passo `230`.**
+
+### LO STATO, **e che cosa manca**
+
+| | |
+|---|---|
+| ### ✔ salvi | i passi ### **`1`, `50`, `150`** e i loro predecessori — ### **tutti prima della prima nascita**, quindi ### **dentro la convenzione** |
+| ### ⛔ manca | il passo ### **`230`**, ed e' ### **il SOLO con nascite**, cioe' il solo che renderebbe decidibile la previsione su `M3-C` |
+| il dato su disco | si ferma al ### **`220`**: il salvataggio e' ogni `10` passi e ### **il ramo `SystemExit` non salva** — una guardia che si ferma ### **non deve scrivere un parziale come se fosse completo** |
+
+> ### ⛔ **LA MISURA E' INCOMPLETA E IL REFERTO NON SI SCRIVE.** ### **Il fallimento si
+> committa PRIMA della cura** *(`par.5`)*, e la cura e' ### **un commit a se'.**
+>
+> ### ✔ **E LA CURA NON AGGIUNGE NIENTE** *(`9-ter`)*: si rende il segno ### **esplicito**
+> — `+tw` se il verso di percorrenza coincide con `i -> j`, `−tw` altrimenti — e la chiave
+> d'arco diventa ### **canonica `(min, max)`.** ### **Zero numeri nuovi, e un'assunzione
+> IN MENO.**
