@@ -6917,3 +6917,45 @@ nell'acceso, cioe' un rapporto provvisorio di ### **`0.4872`.**
 `2` e `0`; spinta oltre `π` dal dipolo ### **`40`** e ### **`0`**; e i nodi per classe
 ### **`1203` / `3463` / `8167`** contro `1203` / `3470` / `8181` — ### **la MATERIA ha
 esattamente lo stesso conto nei due bracci.**
+
+---
+
+## 2026-10-06 — **AL PASSO `~700`: le CLASSI si spostano, e i nodi LASCIANO il vuoto**
+
+Le due corse sono ### **in volo** *(zero al `702`, acceso al `691`)*. Il simulatore
+### **non si tocca:** resta `cf2a1ac8`. ### **Nessuna conclusione: i criteri si leggono a
+`1000` passi.**
+
+**Il rapporto provvisorio delle divisioni scende:** ### **`0.4872`** al passo `262`,
+### **`0.2733`** al `330`, ### **`~0.207`** al `~700` *(`311` contro `1501`)*. ### **Il
+braccio acceso accelera di piu'**, e il rapporto e' entrato nella banda ### **intermedia**
+del criterio — ### **ma si legge a `1000`, non adesso.**
+
+### ⚠ IL FATTO NUOVO: **i conti per classe si spostano, e non solo per le nascite**
+
+| braccio `_AMP = 0` | passo `262` | passo `702` | differenza |
+|---|--:|--:|--:|
+| `MATERIA` | `1203` | ### **`1735`** | ### **`+532`** |
+| `BORDO` | `3463` | ### **`4426`** | ### **`+963`** |
+| `VUOTO` | `8167` | ### **`7093`** | ### **`-1074`** |
+| `n` totale | `12833` | `13254` | `+421` |
+
+> ### ⛔ **IL VUOTO PERDE `1074` NODI MENTRE `n` NE GUADAGNA `421`.** Le nascite da sole
+> ### **non possono farlo:** ### **dei nodi stanno CAMBIANDO CLASSE.**
+
+**Due cause possibili, e NON so distinguerle con questi dati:**
+
+1. ### **i baricentri delle coorti si MUOVONO** — e la classe li segue, perche' si ricalcola a
+   ogni passo *(e' una scelta ### **dichiarata** nel task history)*;
+2. ### **i nodi si spostano nello spazio**, cioe' ### **cadono verso le masse.**
+
+> ### ⚠ **E LA SECONDA SAREBBE LA PRIMA DELLE TRE PROVE DI LUCA** *(«due masse si
+> avvicinano?»)*. ### **Per questo NON la affermo:** distinguerle vorrebbe la distanza fra i
+> baricentri nel tempo — che lo strumento ### **registra** come prodotto laterale
+> *(`dist_baricentri`)* — e ### **un braccio di controllo senza nascite**, che non ho.
+> ### **Lo riporto come osservazione, non come risultato.**
+
+> ### ✔ **E IL CRITERIO DEL DOVE NON NE E' FALSATO:** confronta la frazione di ### **nascite**
+> con la frazione di ### **nodi NELLA STESSA FINESTRA**, quindi uno spostamento comune a
+> entrambe ### **si cancella.** ### **E' esattamente la ragione per cui il mandato chiedeva
+> quel confronto invece del volume.**
