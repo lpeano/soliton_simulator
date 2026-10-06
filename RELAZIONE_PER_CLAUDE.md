@@ -7367,3 +7367,33 @@ che questa voce deve costruire.**
 > correzione di `8d2ff71`: ### **un `PASSA` senza numero non dice quanto margine c'e'.** Qui
 > dice ### **`None`**, cioe' ### **nessuna differenza entro l'orizzonte**, e la prima arriva al
 > `185` *(dalla corsa fallita di `c211cd4`)*.
+
+---
+
+## 2026-10-06 — **L'ARCHIVIO del ramo che esce, il tag, e `MITOSI-SOGLIA-GRAD` CHIUSA**
+
+`csv/_archivio/_rami_off_mitosi_soglia_grad.py`: i due blocchi — ### **la modulazione** e
+### **`_r_nodo_mitosi`** — copiati ### **VERBATIM dal blob del PADRE**, preso con
+`git cat-file -p` ### **in binario** *(mai `git checkout`, per la trappola `CRLF` del `par.7`)*.
+
+> ### ✔ **E LA COPIA E' VERIFICATA RILEGGENDO IL FILE SCRITTO**, non la variabile in memoria:
+> ciascun blocco compare ### **esattamente una volta** nel blob del padre ### **e** nel file di
+> archivio. Il delimitatore e' ### **verificato assente** dai blocchi, non sperato.
+
+**Il tag:** ### **`pre-mitosi-soglia-grad-via`**, come per le cure precedenti.
+
+### ✔ `MITOSI-SOGLIA-GRAD` E' CHIUSA, **e la chiusura e' una decisione di Luca: io riporto i numeri**
+
+| | |
+|---|--:|
+| `R` sulle divisioni / sulla finestra | `0.1616` / `0.3417` |
+| nascite per `100` passi ### **senza** | `48`-`150`, ### **stabili** |
+| nascite per `100` passi ### **con** | fino a ### **`1044`** |
+| la `Spearman` del gradiente che la soglia leggeva | `0.012`-`0.068` *(la forma esatta: ### **`0.870`-`0.915`**)* |
+| il sigillo | ### **`4` bracci su `4`** |
+
+> ### ⛔ **E COSA RESTA FUORI, perche' non si confonda:** la soglia `3π` ### **non e'
+> toccata**, e il `π` di dipolo e' ### **una decisione separata di Luca.** ### **Nove
+> strumenti restano legati ai blob vecchi**, e ### **`_mitosi_zero_dove` — lo strumento della
+> misura del `0.3` a zero — e' il costo piu' alto:** dopo questa patch ### **non gira piu' sul
+> blob nuovo.**
