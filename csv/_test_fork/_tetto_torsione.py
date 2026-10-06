@@ -210,6 +210,20 @@ class Misura(object):
                    "q_avanzamento": q(np.abs(avanz)), "q_dsync": q(np.abs(dsy)),
                    "q_rapporto": q(np.abs(dsy[_ok]) / np.abs(avanz[_ok]))
                    if np.any(_ok) else None}
+        # ### `M7b`: IL SEGNO, che `M7` non vede perche' confronta MODULI.
+        #   `delta_sync_phi = dt_n_s*forza*sin(media - _phi_t)` e' un termine di **Kuramoto**:
+        #   ### **se RICHIAMA la fase verso la media locale, la sua differenza sull'arco si
+        #   OPPONE a `dph`**, e allora ### **SMORZA la spinta invece di aggiungersi** -- e il
+        #   tetto vero sta **sotto** `2pi`. ### ⚠ **Aggiunto DOPO il giro corto e PRIMA della
+        #   corsa vera, perche' il giro corto ha mostrato che quel termine e' DOMINANTE
+        #   (mediana del rapporto `1.79`).**
+        _fin = np.isfinite(dsy) & np.isfinite(dph)
+        d["m7b"] = {"n": int(np.sum(_fin)),
+                    "spearman_dsync_dph": (spearman(dph[_fin], dsy[_fin])
+                                           if np.sum(_fin) > 25 else None),
+                    "fraz_segno_opposto": (float(np.mean((dsy[_fin] * dph[_fin]) < 0))
+                                           if np.any(_fin) else None),
+                    "q_prodotto": q(dsy[_fin] * dph[_fin]) if np.any(_fin) else None}
 
         # ### `M6`: GLI AVVOLGIMENTI, contati in DUE modi che devono coincidere
         if self._prec is not None and self._prec["n_archi"] == dph.size:
@@ -227,13 +241,26 @@ class Misura(object):
             self.cont["avvolgimenti"] += int(np.sum(avvolto))
             self.cont["ripiegamenti"] += int(np.sum(ripiega))
             self.cont["calci_oltre_pi"] += int(np.sum(grosso))
+            # ### ⛔ **LA MEDIANA FIRMATA SU UNA DISTRIBUZIONE BIMODALE E' INGANNEVOLE:**
+            #   il giro corto ha dato `0.0 pi` con `318` calci sopra `pi`, che letto da solo
+            #   sembra una contraddizione. ### **Non lo era: l'insieme e' a `±4pi` e la
+            #   mediana FIRMATA di due picchi opposti e' ZERO.** Si riporta
+            #   ### **la mediana del MODULO** e ### **lo spacco dei SEGNI.**
+            #   ### ⚠ **E il collaudo non l'avrebbe preso: il suo caso iniettava un
+            #   avvolgimento di UN SOLO segno.**
             d["m6"] = {"n": int(dph.size),
                        "avvolgimenti": int(np.sum(avvolto)),
                        "ripiegamenti": int(np.sum(ripiega)),
                        "calci_oltre_pi": int(np.sum(grosso)),
                        "q_errore": q(np.abs(errore[grosso])) if np.any(grosso) else None,
-                       "errore_mediano_su_pi": (float(np.median(errore[grosso]) / np.pi)
-                                                if np.any(grosso) else None),
+                       "errore_MODULO_mediano_su_pi": (
+                           float(np.median(np.abs(errore[grosso])) / np.pi)
+                           if np.any(grosso) else None),
+                       "errore_firmato_mediano_su_pi": (
+                           float(np.median(errore[grosso]) / np.pi)
+                           if np.any(grosso) else None),
+                       "calci_positivi": int(np.sum(grosso & (errore > 0))),
+                       "calci_negativi": int(np.sum(grosso & (errore < 0))),
                        "sopra_4pi_e_ripiega": int(np.sum(ripiega
                                                          & (np.abs(tw_in) >= P4))),
                        "sopra_4pi": int(np.sum(np.abs(tw_in) >= P4))}
@@ -606,8 +633,29 @@ def collaudo():
           % (m2._tor["m6"]["avvolgimenti"], NA))
     prova("### M6: e il CALCIO che ne risulta e' circa -4pi su ogni arco",
           m2._tor["m6"]["calci_oltre_pi"] == NA
-          and abs(m2._tor["m6"]["errore_mediano_su_pi"] + 4.0) < 0.01,
-          "errore mediano %.4f pi" % m2._tor["m6"]["errore_mediano_su_pi"])
+          and abs(m2._tor["m6"]["errore_MODULO_mediano_su_pi"] - 4.0) < 0.01
+          and abs(m2._tor["m6"]["errore_firmato_mediano_su_pi"] + 4.0) < 0.01,
+          "MODULO %.4f pi, firmato %.4f pi"
+          % (m2._tor["m6"]["errore_MODULO_mediano_su_pi"],
+             m2._tor["m6"]["errore_firmato_mediano_su_pi"]))
+    prova("### M6: e il caso iniettato ha UN SOLO segno -- tutti negativi",
+          m2._tor["m6"]["calci_negativi"] == NA
+          and m2._tor["m6"]["calci_positivi"] == 0,
+          "ed e' PROPRIO per questo che il collaudo vecchio non vedeva il difetto")
+    # ### IL CASO BIMODALE: il difetto che il giro corto ha trovato e il collaudo NO.
+    #   ### **Il suo caso iniettava un avvolgimento di UN SOLO segno**, quindi la mediana
+    #   firmata coincideva col modulo e il difetto era invisibile.
+    _e = np.concatenate([np.full(50, -4.0 * np.pi), np.full(50, 4.0 * np.pi)])
+    prova("M6: ### la mediana FIRMATA di una distribuzione a +-4pi e' circa ZERO",
+          abs(float(np.median(_e))) < 1e-9, "%.6f" % float(np.median(_e)))
+    prova("M6: ### mentre quella del MODULO e' 4pi -- ed e' quella che conta",
+          abs(float(np.median(np.abs(_e))) / np.pi - 4.0) < 1e-12,
+          "%.4f pi" % (float(np.median(np.abs(_e))) / np.pi))
+    prova("M6: ### e lo spacco dei segni e' 50 e 50, che la mediana firmata NASCONDE",
+          int(np.sum(_e > 0)) == 50 and int(np.sum(_e < 0)) == 50)
+    prova("M6: ### e con UN SOLO segno le due mediane coincidono: ecco perche' il collaudo "
+          "vecchio non lo prendeva",
+          abs(float(np.median(_e[:50])) - float(-np.median(np.abs(_e[:50])))) < 1e-12)
     prova("M6: ### e SENZA avvolgimento i calci sono ZERO (il caso nullo)",
           _nullo["calci_oltre_pi"] == 0 and _nullo["avvolgimenti"] == 0,
           "e' la domanda <<quanto varrebbe questo criterio se non ci fosse niente?>>")
@@ -658,13 +706,30 @@ def rapporto(mis, net, cre, in_conf, passi):
     stampa("M6: GLI AVVOLGIMENTI, su tutta la corsa")
     riga("=")
     stampa("  coppie (passo, arco) confrontate       %d" % c["coppie"])
-    stampa("  AVVOLGIMENTI di dph (|salto| > 2pi)    %d   (%s)"
+    stampa("  AVVOLGIMENTI di dph (|salto| > 2pi)    %d   (%s per coppia)"
            % (c["avvolgimenti"],
               n4(c["avvolgimenti"] / c["coppie"]) if c["coppie"] else "n/d"))
     stampa("  RIPIEGAMENTI del _w8 (|arg| > 4pi)     %d" % c["ripiegamenti"])
     stampa("  CALCI oltre pi (|spinta - riparata|)   %d" % c["calci_oltre_pi"])
     stampa("  ### E I DUE CONTEGGI SONO LO STESSO EVENTO VISTO DUE VOLTE: se non")
     stampa("      coincidessero, uno dei due sarebbe sbagliato.")
+    # ### IL MODULO E I SEGNI, passo per passo ai passi del mandato
+    for p in PASSI_MIS:
+        _r = [x for x in mis.passi if x["passo"] == p and "tor" in x]
+        if not _r:
+            continue
+        z = (_r[0]["tor"].get("m6") or {})
+        if "errore_MODULO_mediano_su_pi" not in z:
+            continue
+        stampa("      passo %-4d calci %5s   MODULO mediano %s pi   firmato %s pi   "
+               "+ %s / - %s"
+               % (p, z.get("calci_oltre_pi"),
+                  n4(z.get("errore_MODULO_mediano_su_pi")),
+                  n4(z.get("errore_firmato_mediano_su_pi")),
+                  z.get("calci_positivi"), z.get("calci_negativi")))
+    stampa("  ### LA MEDIANA DEL MODULO E' QUELLA CHE CONTA: la FIRMATA su una distribuzione")
+    stampa("      a due picchi opposti da' ZERO anche con calci enormi, ed e' il difetto di")
+    stampa("      referto che il giro corto ha trovato.")
     stampa("  invariante |twp| <= 3pi violato        %d   %s"
            % (c["twp_fuori_3pi"],
               "(la derivazione del task history TIENE)" if not c["twp_fuori_3pi"]
@@ -737,6 +802,11 @@ def rapporto(mis, net, cre, in_conf, passi):
                   n4((z["q_rapporto"] or {}).get("q095"))))
         stampa("  ### SE IL RAPPORTO NON E' PICCOLO, LA FORMULA DEL MANDATO IGNORA UN")
         stampa("      TERMINE CHE CONTA, e il tetto misurato non e' quello calcolato.")
+        zb = _ult[0]["tor"].get("m7b") or {}
+        stampa("  M7b IL SEGNO:  Spearman(dph, Delta dsync) %s   frazione a segno OPPOSTO %s"
+               % (n4(zb.get("spearman_dsync_dph")), n4(zb.get("fraz_segno_opposto"))))
+        stampa("      ### SE LA SPEARMAN E' NEGATIVA, IL TERMINE RICHIAMA: smorza la spinta")
+        stampa("      invece di aggiungersi, e il tetto vero sta SOTTO 2pi.")
     stampa()
     riga("=")
     stampa("I CRITERI, FISSATI DAL MANDATO")
