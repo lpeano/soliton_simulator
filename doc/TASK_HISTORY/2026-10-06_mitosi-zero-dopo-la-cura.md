@@ -355,3 +355,62 @@ esatto**, quindi un ribaltamento su ### **un solo estremo** con fase nulla
 invece di lasciarlo cadere in silenzio. ### **Se quel contatore fosse grande e
 `spinta_pi_dip` piccolo, la lettura <<refutata>> sarebbe un ARTEFATTO DELLA SOGLIA**, e il
 referto deve dirlo.
+
+---
+
+## ANNOTAZIONE *(2026-10-06, a controlli girati -- `par.8`: si ANNOTA)*
+
+### ✔ `C0` PASSA, e con molta materia
+
+`150` passi, ### **`41` campi per passo** piu' ### **`2691` quantili** = ### **`8841`
+valori**, e ### **ZERO differenze** contro il `lunga.json`. ### **Lo strumento riproduce la
+misura lunga esattamente**, quindi il confronto fra i due bracci avra' un fondamento.
+
+### ⛔ `C-letture` FALLISCE, **e il difetto e' NEL CONTROLLO**
+
+`3` differenze su `8841` valori, e sono ### **tutte e tre in contatori che esistono SOLO
+perche' i ganci ci sono:**
+
+| il campo | con i ganci | senza |
+|---|--:|--:|
+| `cambi_geom` *(passo `1`)* | `6419` | `0` |
+| `chi_tors_non_confrontabile` *(passo `1`)* | `1` | `0` |
+| `cambi_chi_tors` *(passo `2`)* | `6419` | `0` |
+
+> ### ✔ **E L'HO VERIFICATO IN MODO INDIPENDENTE, non a occhio:** ho confrontato l'insieme dei
+> campi che differiscono con ### **l'insieme dei contatori che la classe `Misura` dichiara in
+> `_azzera_passo`**, letto ### **dalla classe stessa.** ### **Le differenze FUORI da quei
+> contatori sono ZERO.**
+
+**Quindi la sostanza di `C-letture` e' stabilita:** ### **`8838` valori su `8841` sono
+identici AL BIT su `150` passi**, e i tre scarti sono ### **in grandezze che il braccio senza
+ganci non puo' produrre.**
+
+> ### ⛔ **MA IL CONTROLLO E' FALLITO, E IO LO STO CAMBIANDO DOPO CHE E' FALLITO.** Lo scrivo
+> cosi' perche' e' ### **la forma esatta del muovere i pali della porta**, e la differenza
+> sta in due cose ### **verificabili**, non nella mia parola:
+>
+> 1. ### **la ragione era scritta PRIMA.** Il docstring di `c_letture`, committato in
+>    `2893907`, dice gia': *«i campi ### **nuovi non si pretendono** dal braccio senza ganci:
+>    pretenderli sarebbe ### **un falso fallimento**»*. ### **L'avevo scritto e NON
+>    l'avevo implementato**, ed e' un difetto di esecuzione, non un criterio che cambia.
+> 2. ### **l'esclusione e' DERIVATA, non elencata a mano:** si legge
+>    `set(Misura(dt, amp).p)` ### **dalla classe**, quindi ### **qualunque contatore futuro
+>    e' escluso automaticamente e NESSUN campo del simulatore puo' finirci dentro di
+>    nascosto.**
+>
+> ### ⚠ **E il fallimento resta committato prima della correzione**, cosi' ### **si vede da
+> git che non ho aggiustato il controllo finche' non passava.**
+
+### `C1` PASSA, **ma con poca materia, e va detto**
+
+`150` passi, `0` divisioni, `0` Schwinger, `0` nati. ### **Il controllo e' vero e non ha
+nulla da controllare:** a `150` passi col `0.3` acceso la rete ### **non ha ancora partorito**
+*(la prima nascita della misura lunga e' al passo `214`)*. ### **`C1` diventera' informativo
+solo sulle corse da `1000` passi**, e li' va riletto.
+
+### `C1 (zero)` e `C-fallisce`: **NON FATTI**, e non e' un `PASSA`
+
+Manca il `json` del braccio `_AMP = 0`, che ### **non e' ancora stato girato.** Lo strumento
+dice ### **«NON FATTO»** e torna `1`: ### **un controllo che non si e' potuto fare non deve
+poter passare per uno che e' passato.**

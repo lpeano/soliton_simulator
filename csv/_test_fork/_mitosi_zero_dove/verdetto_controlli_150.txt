@@ -1,0 +1,66 @@
+[TIMBRO] _controlli_mzd.py  sha1-BYTE 61a75c5d  committato e pulito
+========================================================================================================
+I CONTROLLI DEL MANDATO DEL `0.3` A ZERO
+========================================================================================================
+  lunga.json                 1000 passi, stato fatto
+  amp0_3.json                150 passi, stato fatto
+  amp0_3_senza_ganci.json    150 passi, stato fatto
+  amp0_0.json                ### NON C'E'
+
+--------------------------------------------------------------------------------------------------------
+C0             `_AMP = 0.3` riproduce ESATTAMENTE la misura lunga
+--------------------------------------------------------------------------------------------------------
+  materia confrontata: 1950 valori
+    campi_per_passo          4
+    n_differenze             0
+    passi_confrontati        150
+    quantili_confrontati     1350
+  ### ✔ PASSA
+
+--------------------------------------------------------------------------------------------------------
+C-letture      i ganci nuovi sono di SOLA LETTURA, al bit
+--------------------------------------------------------------------------------------------------------
+  materia confrontata: 8841 valori
+    campi_per_passo          41
+    n_differenze             3
+    passi_confrontati        150
+    quantili_confrontati     2691
+  le prime differenze (passo, campo, questo, altro):
+      (1, 'cambi_geom', 6419, 0)
+      (1, 'chi_tors_non_confrontabile', 1, 0)
+      (2, 'cambi_chi_tors', 6419, 0)
+  ### ⛔ FALLISCE
+
+--------------------------------------------------------------------------------------------------------
+C1             divisioni + Schwinger == nati, e `n` cresce di quanto dicono
+--------------------------------------------------------------------------------------------------------
+  materia confrontata: 150 valori
+    divisioni                0
+    n_differenze             0
+    nati_simulatore          0
+    passi                    150
+    schwinger                0
+    schwinger_simulatore     0
+  ### ✔ PASSA
+
+--------------------------------------------------------------------------------------------------------
+C1 (zero)      lo stesso, sul braccio `_AMP = 0`
+--------------------------------------------------------------------------------------------------------
+  ### IL JSON NON C'E'. Il controllo NON si puo' fare, e questo NON e' un
+      PASSA: un'assenza non e' un esito (STANDARD 3).
+
+--------------------------------------------------------------------------------------------------------
+C-fallisce     `_AMP = 0` DEVE differire dalla misura lunga
+--------------------------------------------------------------------------------------------------------
+  ### IL JSON NON C'E'. Il controllo NON si puo' fare, e questo NON e' un
+      PASSA: un'assenza non e' un esito (STANDARD 3).
+
+========================================================================================================
+GLI ESITI
+========================================================================================================
+  C0           ✔ PASSA
+  C-letture    ⛔ FALLISCE
+  C1           ✔ PASSA
+  C1 (zero)    ### NON FATTO (manca il json)
+  C-fallisce   ### NON FATTO (manca il json)
+========================================================================================================
