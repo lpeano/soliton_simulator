@@ -894,22 +894,32 @@ def rapporto_perm(mis, N_, n0, cre, rifB, divB, in_conf, passi, perm_fisso=False
     stampa()
     if perm_fisso:
         # ### LA TAVOLA DELLA LOTTERIA, fissata nel task history PRIMA della corsa.
-        #   ### **LA BANDA E' DERIVATA, NON SCELTA** (`P1-sexies`): il rumore di conteggio
-        #   di `N` eventi e' `1/sqrt(N)`, quindi la banda attorno a `1` e'
-        #   `1 +- 1/sqrt(divB)` sulle divisioni e `1 +- 1/sqrt(fin_B)` sulla finestra.
+        #   ### ⛔ **LA BANDA `1/sqrt(N)` ERA SBAGLIATA IN DUE MODI** (correzione del
+        #   guardiano, `0b8999c`, fissata PRIMA della corsa di `Bperm-fisso`):
+        #   ### **(1) sulle DIVISIONI `1/sqrt(18)` e' UNA deviazione standard**, e anche con
+        #   la previsione GIUSTA un conteggio cade fuori da `1 sigma` il `31.7 %` delle
+        #   volte -- ### **un criterio che boccia un'ipotesi vera un terzo delle volte non
+        #   e' un criterio.** Si usa `2/sqrt(divB)`.
+        #   ### **(2) sulla FINESTRA `1/sqrt(fin_B)` assume che ogni PASSO-ARCO sia
+        #   INDIPENDENTE**, e non lo e': lo stesso arco resta nella finestra per molti passi
+        #   consecutivi, quindi la statistica efficace e' molto piu' piccola.
+        #   ### ✔ **IL RUMORE VERO E' MISURATO, non stimato:** si prende la dispersione fra
+        #   i tre semi di `Bperm` dal `soglia_perm.json` COMMITTATO e si usa
+        #   `2 * (dispersione relativa) / sqrt(3)`, cioe' `2x` l'errore della MEDIA.
+        #   ### ⚠ **E IL LIMITE RESTA DICHIARATO:** `2 sigma` su TRE semi e' ottimistico di
+        #   un fattore `~2.15`, perche' l'`IC95` vero con due gradi di liberta' vuole
+        #   `t = 4.3027`. ### **La cura e' un QUARTO SEME** (`P3`), non una banda piu'
+        #   larga, e il referto lo ripete.
         riga("=")
         stampa("LA TAVOLA DELLA LOTTERIA: L-A / L-B / L-C / L-D, fissata PRIMA")
         riga("=")
-        b_dv = float(1.0 / np.sqrt(divB)) if divB else None
-        b_fn = float(1.0 / np.sqrt(fin_B)) if fin_B else None
-        stampa("  la banda DERIVATA:  divisioni 1 +- 1/sqrt(%d) = %s -> [%s, %s]"
+        b_dv = float(2.0 / np.sqrt(divB)) if divB else None
+        b_fn = None          # ### si deriva dalla dispersione MISURATA, qui sotto
+        stampa("  la banda DERIVATA:  divisioni 1 +- 2/sqrt(%d) = %s -> [%s, %s]"
                % (divB, n4(b_dv), n4(None if b_dv is None else 1 - b_dv),
                   n4(None if b_dv is None else 1 + b_dv)))
-        stampa("                      finestra  1 +- 1/sqrt(%d) = %s -> [%s, %s]"
-               % (fin_B, n4(b_fn), n4(None if b_fn is None else 1 - b_fn),
-                  n4(None if b_fn is None else 1 + b_fn)))
         # --- i numeri di `Bperm` dal json COMMITTATO
-        rp_dv = rp_fn = None
+        rp_dv = rp_fn = _rel_fn = None
         disp_p = 0.0
         if os.path.isfile(PERM_JSON):
             _pj = json.loads(io.open(PERM_JSON, encoding="utf-8").read())
@@ -936,20 +946,47 @@ def rapporto_perm(mis, N_, n0, cre, rifB, divB, in_conf, passi, perm_fisso=False
                    % len(_pk))
             stampa("      divisioni %s   finestra %s   dispersione relativa %.4f"
                    % (n4(rp_dv), n4(rp_fn), disp_p))
+            # ### LA BANDA DELLA FINESTRA, dalla dispersione fra semi MISURATA in `Bperm`
+            _rel_fn = (_st.pstdev(_pfn) / (sum(_pfn) / len(_pfn))
+                       if len(_pfn) > 1 and sum(_pfn) else None)
+            if _rel_fn:
+                b_fn = 2.0 * _rel_fn / float(np.sqrt(3.0))
+                stampa("                      finestra  1 +- 2*%.4f/sqrt(3) = %s -> "
+                       "[%s, %s]   (la dispersione e' MISURATA in Bperm)"
+                       % (_rel_fn, n4(b_fn), n4(1 - b_fn), n4(1 + b_fn)))
+                stampa("                      ### e con l'estimatore NON DISTORTO "
+                       "(campione, /(N-1)) sarebbe [%s, %s]: RIPORTATA, non applicata."
+                       % (n4(1 - b_fn * float(np.sqrt(1.5))),
+                          n4(1 + b_fn * float(np.sqrt(1.5)))))
+                stampa("                      ### LIMITE: 2 sigma su TRE semi e' ottimistico")
+                stampa("                      di un fattore 2.15 (t(0.025,2) = 4.3027). La")
+                stampa("                      cura e' un QUARTO SEME (P3), non una banda")
+                stampa("                      piu' larga.")
         else:
             stampa("  ### IL soglia_perm.json NON C'E': la tavola della lotteria non si")
             stampa("      puo' applicare, e lo DICO invece di inventare un confronto.")
         disp_f = (sd_dv / m_dv) if m_dv else 0.0
+        # ### OGNI METRICA USA LA PROPRIA DISPERSIONE: la finestra con quella della
+        #   finestra, le divisioni con quella delle divisioni. ### **Usarne una per
+        #   entrambe era un'approssimazione, e le due differiscono di un fattore 2.**
+        disp_f_fn = (sd_fn / m_fn) if m_fn else 0.0
+        disp_p_fn = _rel_fn if _rel_fn else disp_p
 
-        def _lot(rf, rp, b):
+        def _lot(rf, rp, b, sf, sp):
+            # ### `L-B` USA L'ERRORE COMBINATO DELLE DUE MEDIE, non il massimo delle due
+            #   dispersioni (regola fissata in `0b8999c`): confronta **due medie con la
+            #   loro incertezza CIASCUNA** invece di una media contro un numero trattato
+            #   come esatto. ### **E ogni `se` e' la dispersione fra i tre semi / sqrt(3).**
             if rf is None or rp is None or b is None:
                 return "n/d"
             lo, hi = 1.0 - b, 1.0 + b
+            _comb = 2.0 * float(np.sqrt((sf / np.sqrt(3.0)) ** 2
+                                        + (sp / np.sqrt(3.0)) ** 2))
             if rf < lo:
                 return "L-C"
             if lo <= rf <= hi and rp > hi:
                 return "L-A"
-            if rf > hi and rp > hi and abs(rf - rp) <= max(disp_f, disp_p):
+            if rf > hi and rp > hi and abs(rf - rp) <= _comb:
                 return "L-B"
             return "L-D"
 
@@ -962,8 +999,8 @@ def rapporto_perm(mis, N_, n0, cre, rifB, divB, in_conf, passi, perm_fisso=False
                "L-D": "NESSUNA DELLE TRE: la tavola non copre questo caso, e NON SI FORZA "
                       "una lettura",
                "n/d": "n/d"}
-        l_dv = _lot(r_dv, rp_dv, b_dv)
-        l_fn = _lot(r_fn, rp_fn, b_fn)
+        l_dv = _lot(r_dv, rp_dv, b_dv, disp_f, disp_p)
+        l_fn = _lot(r_fn, rp_fn, b_fn, disp_f_fn, disp_p_fn)
         stampa("  sulle DIVISIONI: fisso %s contro perm %s  ->  %s"
                % (n4(r_dv), n4(rp_dv), l_dv))
         stampa("      %s" % ETI[l_dv])
@@ -1756,6 +1793,26 @@ def collaudo():
     prova("n4: ### e la vecchia forma SBAGLIAVA -- il controllo che DEVE fallire",
           ("%.4f" % 0.0 if 0.0 else "n/d") == "n/d",
           "la forma con `if x` dava n/d su zero: ecco perche' n4 esiste")
+    # ### LE BANDE: `1 sigma` non e' un criterio, e l'indipendenza dei passi-arco e' FALSA
+    prova("bande: 2/sqrt(18) e' il DOPPIO di 1/sqrt(18)",
+          abs(2.0 / np.sqrt(18) - 2 * (1.0 / np.sqrt(18))) < 1e-15,
+          "[%.4f, %.4f] invece di [%.4f, %.4f]"
+          % (1 - 2 / np.sqrt(18), 1 + 2 / np.sqrt(18),
+             1 - 1 / np.sqrt(18), 1 + 1 / np.sqrt(18)))
+    prova("bande: ### la banda della FINESTRA da indipendenza e' PIU' STRETTA di quella "
+          "misurata, e di molto",
+          (1.0 / np.sqrt(7738)) < 2 * 0.020214 / np.sqrt(3),
+          "%.6f contro %.6f: un fattore %.1f"
+          % (1.0 / np.sqrt(7738), 2 * 0.020214 / np.sqrt(3),
+             (2 * 0.020214 / np.sqrt(3)) / (1.0 / np.sqrt(7738))))
+    import statistics as _stc
+    prova("bande: l'estimatore di CAMPIONE e' sqrt(3/2) volte quello di POPOLAZIONE",
+          abs(_stc.stdev([8722, 8301, 8534]) / _stc.pstdev([8722, 8301, 8534])
+              - np.sqrt(1.5)) < 1e-12,
+          "%.4f" % np.sqrt(1.5))
+    prova("bande: ### e l'IC95 VERO con tre semi vuole t = 4.3027, non 2",
+          abs(4.3027 / 2.0 - 2.1513) < 1e-3,
+          "una banda a 2 sigma e' ottimistica di un fattore 2.15")
     # ### `len(_bite)` E' `len(avv)`: dal sorgente INTERO (`STANDARD 9`)
     _ts = io.open(SIM, encoding="utf-8").read()
     prova("fisso: nel simulatore `avv = np.abs(self.tw)` e `grad_modula` indicizza "
