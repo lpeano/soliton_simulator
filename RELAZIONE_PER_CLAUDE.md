@@ -6785,3 +6785,38 @@ della scena)*, ### **zero numeri nuovi.** Misurato nel giro corto: ### **`1236` 
 `8083`** nodi, contro i `1237` delle tre coorti — ### **la classe col baricentro riproduce
 quasi esattamente l'appartenenza della scena**, e quello e' il controllo che la rende
 credibile.
+
+---
+
+## 2026-10-06 — **LO STRUMENTO DEI CONTROLLI, committato PRIMA di produrre un verdetto**
+
+`csv/_test_fork/_controlli_mzd.py`, blob ### **`61a75c5d`**, collaudo `13` su `13` su `json`
+sintetici — e ### **sette casi DEVONO fallire.** Nessuna corsa in questo commit; i due
+controlli a `150` passi ### **stanno girando** in processi separati.
+
+I quattro controlli del mandato, ciascuno con la sua domanda:
+
+| | che cosa pretende |
+|---|---|
+| **`C0`** | `_AMP = 0.3` riproduce ### **esattamente** la misura lunga, su ### **tutti** i passi registrati da entrambi |
+| **`C-letture`** | la copia ### **con** i ganci riproduce ### **al bit** quella ### **senza** |
+| **`C1`** | `divisioni + Schwinger == nati`, e `n` cresce ### **esattamente** di quanto dicono i nati, ### **passo per passo** |
+| **`C-fallisce`** | il braccio `_AMP = 0` ### **DEVE differire**, e si riporta ### **il primo passo** |
+
+> ### ⛔ **E OGNI CONTROLLO DICE QUANTA MATERIA HA CONFRONTATO.** Un `PASSA` su ### **zero**
+> valori non e' un `PASSA`: e' ### **un'assenza letta come un esito** *(`STANDARD 3`)* — il
+> difetto che ha fatto stampare *«l'ipotesi NON e' refutata»* con tutti i valori `n/d`. E
+> ### **«NON FATTO» non e' «PASSATO»:** se un `json` manca, l'esito e' *«non fatto»* e
+> l'uscita e' `1`.
+
+> ### ⚠ **`C-letture` E' IL CONTROLLO CHE `C0` NON DA', e vale la pena dirlo:** `C0` confronta
+> col `json` della misura lunga, ### **prodotto da uno strumento che aveva GIA' due ganci** —
+> quindi due ganci nuovi potrebbero cambiare la misura ### **e `C0` passerebbe comunque.**
+
+**Fra i sette casi che devono fallire:** una differenza nel ### **decimo decimale** di un
+quantile, e il caso in cui i due bracci sono ### **identici** — che significherebbe
+### **`_AMP` INERTE**, cioe' una misura che non misura niente.
+
+**E un difetto mio, toltolo prima del commit:** in `c1` avevo lasciato un ciclo
+### **che non faceva niente** *(finiva con `pass`)*. ### **Un blocco morto in un controllo e'
+peggio di un blocco assente**, perche' chi legge crede che quel controllo guardi qualcosa.
