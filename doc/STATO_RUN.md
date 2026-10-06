@@ -2404,3 +2404,45 @@ torsione**)*.
 
 **Collegata a** `SCALE-TW` *(di cui e' un pezzo)*, `ARCHI-OLTRE-4PI`, `KAPPA-TW-COMMENTO`,
 `MITOSI-SOGLIA-GRAD`.
+
+
+---
+
+## `PRESTAZIONI-CORSE` — **le corse costano: sei strade, da affrontare a modello STABILE**
+
+*(Aperta il 2026-10-06 ### **su decisione di Luca**, e ### ⛔ **IN CODA, NON ADESSO.**)*
+
+### ⛔ **PERCHE' NON ADESSO, e non e' prudenza**
+
+### **Ottimizzare un modello che sta cambiando legge significa ottimizzare codice che non ci
+sara'.** La cura di `TORS-W8-AVVOLGIMENTO` ha appena sostituito il blocco della torsione;
+`κ`, la soglia `3π` e il `0.3` sono ### **decisioni aperte di Luca.**
+### **Si tocca il tempo di calcolo quando la fisica sta ferma.**
+
+### IL FATTO CHE LA MOTIVA
+
+Le misure sono passate da `150` a ### **`1000` passi** *(la misura lunga di questa stessa
+cura)*, e una corsa a **quattro bracci** su `150` passi costa ### **circa un'ora e mezza** su
+questa macchina. ### **Non e' un fastidio: e' il motivo per cui una domanda in piu' costa una
+giornata.**
+
+### LE SEI STRADE, **nell'ordine in cui Luca le ha date e NON in ordine di merito**
+
+| | la strada | il vincolo che porta con se' |
+|---|---|---|
+| **(a)** | ### **PROFILARE i tempi per legge PRIMA di ottimizzare** | ### ✔ **E' gia' il criterio di chiusura di `RISCRITTURA-GO`**, che dice *«il profilo NON ESISTE»*: farla serve a **entrambe** |
+| **(b)** | partire da uno **stato gia' stabilizzato** | ### ⛔ **`carica_stato` RIFIUTA uno stato di un blob diverso** *(`raise RuntimeError` a `:7054`, **prima** del ciclo sugli attributi)*: ### **ogni cura invalida gli stati salvati**, ed e' una protezione, non un intralcio |
+| **(c)** | **bracci e semi in processi separati**, sui core della macchina | e' la via senza costi di correttezza: ### **`STANDARD 1` la pretende GIA'** *(un processo per braccio)* |
+| **(d)** | una **scena piu' piccola** per le domande esplorative | ### ⚠ **`TAGLIA-FINITA` dice che due taglie non sono uno scaling:** la verifica *«i risultati non dipendono dalla taglia»* va fatta **una volta** e ### **va fatta bene**, altrimenti e' una scorciatoia travestita |
+| **(e)** | **accelerare il calcolo** *(Numba, GPU)*, con **due** modalita' | ### ⛔ **ESATTA per sigilli e cure, VELOCE con tolleranza DICHIARATA per l'esplorazione.** Una tolleranza **non dichiarata** e' il modo in cui un sigillo diventa una formalita' |
+| **(f)** | chiedersi se **il passo di tempo si puo' allungare**, col contatore `CFL` | il contatore c'e' gia': ### **la domanda e' se `DT` e' stretto per una ragione o per abitudine** |
+
+### ⚠ **E UNA FRASE DI `RISCRITTURA-GO` VA RIMISURATA, non ricopiata**
+
+Quella voce dice *«la velocita' non e' il collo di bottiglia: nessuno dei `6` SI e' il
+simulatore lento»*. ### **E' del 2026-09-27, quando le misure erano a `120`-`150` passi.**
+### ⛔ **Oggi una misura e' a `1000` passi, e quella frase va RIMISURATA prima di riusarla.**
+
+### ⛔ **NON INDAGATA, NON INIZIATA.** Collegata a ### **`RISCRITTURA-GO`**, e il
+collegamento non e' decorativo: ### **la strada `(a)` e' il criterio di chiusura di quella
+voce, quindi non si aprono due lavori.**
