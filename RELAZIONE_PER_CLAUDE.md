@@ -7341,3 +7341,29 @@ niente.**
 alla candidata `(C)` del registro, che dice gia' la cosa decisiva: ### **«un'esclusione da' una
 DENSITA', non una lunghezza: il passaggio densita' → `LAM` va DERIVATO».** ### **E' il ponte
 che questa voce deve costruire.**
+
+---
+
+## 2026-10-06 — **IL SIGILLO DI «VIA IL `0.3`» PASSA: tutti e quattro i bracci**
+
+| braccio | esito | materia |
+|---|---|---|
+| `S0 (a)` byte | ### ✔ **PASSA** | `cf2a1ac8` + patch = ### **`30e18cdd`**, byte-identico |
+| `S0 (b)` attributi | ### ✔ **PASSA** | `150` passi, ### **`36149` attributi**, ### **zero differenze**, e ### **`primo_passo_diverso = None`: il margine fino al `150` e' INTERO** |
+| **`S1`** *(al bit)* | ### ✔ **PASSA** | `230` passi, `2990` valori, ### **zero differenze** |
+| `S2` *(deve differire)* | ### ✔ **PASSA** | primo passo diverso ### **`212`** |
+
+> ### ✔ **`S1` ERA IL BRACCIO CHE POTEVA SMENTIRE LA PATCH, e passa su `230` passi.** Il
+> ragionamento algebrico regge: ### **`soglia0·(1 − 0·tanh x) = soglia0` esattamente**, e la
+> riga ### **non tocca il generatore casuale.**
+
+> ### ✔ **E `S2` RITROVA IL `212` di `27c10bd`**, con uno strumento ### **diverso** su dati
+> ### **diversi.** ### **Due misure indipendenti, lo stesso numero.**
+
+**E l'unica esclusione di `S0 (b)` resta UNA e DICHIARATA:** `_tum_r_tot`, che la patch
+### **toglie di proposito.**
+
+> ### ⚠ **E il `primo_passo_diverso` si riporta ANCHE quando il braccio passa** — e' la
+> correzione di `8d2ff71`: ### **un `PASSA` senza numero non dice quanto margine c'e'.** Qui
+> dice ### **`None`**, cioe' ### **nessuna differenza entro l'orizzonte**, e la prima arriva al
+> `185` *(dalla corsa fallita di `c211cd4`)*.

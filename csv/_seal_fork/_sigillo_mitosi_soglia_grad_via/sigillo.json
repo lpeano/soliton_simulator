@@ -1,0 +1,55 @@
+{
+ "S0a": {
+  "padre": "71eddc4bd711306733b78425bad99375a54ab0e7~1",
+  "blob_prima": "cf2a1ac8",
+  "blob_ricostruito": "30e18cdd",
+  "blob_oggi": "30e18cdd",
+  "byte_identico": true,
+  "passa": true
+ },
+ "S0b": {
+  "passi": 150,
+  "attributi_confrontati": 36149,
+  "differenze": [],
+  "n_differenze": 0,
+  "esclusi": [
+   "_tum_r_tot"
+  ],
+  "blob_prima": "cf2a1ac8",
+  "blob_oggi": "30e18cdd",
+  "primo_passo_diverso": null,
+  "attributi_diversi": [],
+  "passa": true
+ },
+ "S1": {
+  "passi_confrontati": 230,
+  "campi": [
+   "n",
+   "archi",
+   "nati_tot",
+   "schwinger_tot"
+  ],
+  "quantili_confrontati": 2070,
+  "n_differenze": 0,
+  "differenze": [],
+  "materia": 2990,
+  "passa": true,
+  "blob_copia": "1fc6eeb7"
+ },
+ "S2": {
+  "passi_confrontati": 230,
+  "n_differenze": 210,
+  "primo_passo_diverso": 212,
+  "quale": [
+   212,
+   "q_tw.q100",
+   12.194081290396355,
+   12.194081290395726
+  ],
+  "materia": 2990,
+  "passa": true
+ },
+ "passi": 230,
+ "blob_oggi": "30e18cddc253df951b2356d42809eb08521fff79",
+ "esito": 0
+}
