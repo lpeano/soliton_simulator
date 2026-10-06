@@ -859,6 +859,20 @@ moto)*. **Tira GIÙ, come tutti gli scrittori fisici.**
 
 <!-- SCHEDA nome=tempo-proprio funzioni=ritmo,_cli,_applica_flag flag=TAU_LOC,TEMPO_SEGNO,TEMPO_PROPRIO_ORIENTATO,RITMO_WRAP_2PI -->
 
+> ### ⚠ **ANNOTAZIONE DEL 2026-10-06: IL MESSAGGIO DI `--chi-basc` NOMINAVA L'ARRAY
+> SBAGLIATO** *(`CHI-BASC-DESCRIZIONE`, decisione di Luca)*. Diceva *«`perc_chi` vira
+> secondo la torsione locale»*, e ### **col driver** — che ha `--chi-coop` —
+> ### **e' `perc_geom` che viene scritta** *(`:7905`)*. ### **MISURATO: `6419` cambi di
+> `perc_geom` e ZERO di `perc_chi` in `4` passi.**
+>
+> Ora il messaggio dice ### **entrambi i casi**: la media di `|tw|` sugli archi del nodo
+> contro `PHI_CRIT`, e ### **scrive `perc_geom` (la GEOMETRIA) con `--chi-coop`, `perc_chi`
+> (la CARICA) senza.**
+>
+> ### ⛔ **E' SOLO UNA STRINGA: il codice compilato e' IDENTICO**, e il sigillo `K0` lo
+> verifica confrontando i ### **code object di tutto il modulo, ricorsivamente.**
+
+
 ### **AGGIORNAMENTO del 2026-10-04, commit `6b`** *(questa scheda possiede
 `_applica_flag`)*: **l'avviso `[cura5]` e' stato TOLTO da `_applica_flag`.** Annunciava
 *«`MITOSI_2LAM` ON: un arco si divide SOLO se `d >= 2 LAM`»* ### **come se fosse il flag a
@@ -1670,6 +1684,25 @@ casuali, e `6.08` è **peggio del caso**, cioè il segno che la statistica è sb
 <!-- SCHEDA nome=tau-tw-locale funzioni=_tau_tw_locale flag=TAU_LOCALI,TAU_TW -->
 
 # ⑦-bis IL TEMPO DI SCARICA DELLA TORSIONE — **`τ_tw` LOCALE**
+
+> ### ✔ **DECISIONE DI LUCA, 2026-10-06 sera: `κ = 1` E' LA LEGGE.**
+>
+> La legge e' ### **`τ_tw = 2π / |Δω_locale|`**, con ### **`κ = 1`.**
+>
+> ### ⛔ **IL DOCSTRING DICEVA `κ_tw = TAU_TW/(2π)`, cioe' `3.1831`, E IL
+> CODICE HA SEMPRE USATO `1`.** E non e' la svista di un giorno: e' ### **cosi' dal PRIMO
+> COMMIT del file** *(`670310f`)*, e la ### **stessa scelta `κ = 1`** vale per `TAU_BG`
+> e `TAU_P` — ### **e' una scelta SISTEMATICA**, e il docstring era ### **il pezzo
+> vecchio.**
+>
+> ### ⚠ **E LA DIFFERENZA NON ERA PICCOLA:** con `κ = 3.1831` il tetto di
+> equilibrio della torsione sarebbe stato ### **TRE VOLTE piu' alto**, e ### **per mesi il
+> registro ha detto quel numero mentre il sistema ne usava un altro.**
+>
+> **Il blob passa da `30e18cdd` a `b8c21049`**, e il sigillo `K0` verifica che i
+> ### **code object sono IDENTICI**: `12` differenze, ### **tutte dichiarate** — `2`
+> stringhe *(il docstring e il messaggio di `--chi-basc`)* e ### **`10` numeri di riga**
+> spostati del delta ### **MISURATO**.
 
 *(Scheda **aperta il 2026-10-06**, dalla cura di `TORS-W8-AVVOLGIMENTO`. ### ⛔ **Non
 esisteva, e il presidio `H-REG-R` l'ha preteso: una legge che cambia vuole una scheda, e

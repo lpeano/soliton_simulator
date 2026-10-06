@@ -596,7 +596,17 @@ TAU_TW   = 20.0
 def _tau_tw_locale(net):
     """TAU_TW LOCALE = 2pi/|omega_i - omega_j| (inverso della dispersione di frequenza tra nodi
     adiacenti). La torsione decade tanto piu' in fretta quanto piu' i due nodi sono fuori fase.
-    kappa_tw = TAU_TW/(2pi) resta come rapporto O(1). Invariante per riparametrizzazione."""
+    Invariante per riparametrizzazione.
+
+    [KAPPA-TW-COMMENTO, 2026-10-06, DECISIONE DI LUCA] kappa = 1 E' LA LEGGE, non un refuso.
+      QUI C'ERA SCRITTO `kappa_tw = TAU_TW/(2pi)`, cioe' 3.1831, e IL CODICE HA SEMPRE USATO 1:
+      `return maximum((2*pi)/dom, 1e-3)`. Non e' una svista di un giorno -- e' COSI' DAL PRIMO
+      COMMIT DEL FILE (670310f), e la STESSA scelta `kappa = 1` vale per TAU_BG e TAU_P:
+      E' UNA SCELTA SISTEMATICA, e il docstring era il pezzo vecchio.
+      QUINDI LA LEGGE E': tau_tw = 2pi/|dw_locale|, con kappa = 1.
+      ### E LA DIFFERENZA NON E' PICCOLA: con kappa = 3.1831 il tetto di equilibrio della
+      torsione sarebbe TRE VOLTE piu' alto, e per mesi il registro ha detto quel numero mentre
+      il sistema ne usava un altro."""
     import numpy as _np
     i, j = net.i, net.j
     # [A8, cura TORS-W8-AVVOLGIMENTO 2026-10-06] LA GUARDIA SI CONTA. Rilievo del guardiano
@@ -612,7 +622,7 @@ def _tau_tw_locale(net):
         net._g_tautw_quando = net._g_tautw_tot
         return TAU_TW
     dom = _np.abs(net.phivel[i] - net.phivel[j]) + 1e-3
-    # tau_tw = kappa_tw * 2pi/|dw|, con kappa_tw = TAU_TW/(2pi) rapporto O(1)
+    # tau_tw = 2pi/|dw_locale|, con kappa = 1 (DECISIONE DI LUCA, 2026-10-06: e' LA LEGGE)
     return _np.maximum((2*_np.pi) / dom, 1e-3)   # kappa=1: tau_tw = 2pi/|dw_locale|
 KICK_TW  = 0.35
 
@@ -11285,7 +11295,7 @@ def _applica_flag(a):
     if ZETA_VIR:
         print("[zeta-vir] freno anisotropo attivo: beta *= cos2 della viriale (dissipa radiale, libera tangenziale)")
     if CHI_BASC:
-        print("[chi-basc] basculamento chirale attivo: perc_chi vira secondo la torsione locale vs PHI_CRIT (2pi)")
+        print("[chi-basc] basculamento chirale attivo: la media di |tw| sugli archi del nodo contro PHI_CRIT (2pi). SCRIVE perc_geom (la GEOMETRIA) con --chi-coop, perc_chi (la CARICA) senza. [CHI-BASC-DESCRIZIONE, 2026-10-06: qui c'era scritto SOLO perc_chi, e col driver (--chi-coop acceso) e' perc_geom che viene scritta]")
     if CHI_CORE:
         print("[chi-core] frame-dragging guidato dalla chiralità emergente del core locale")
     if CS_DINAMICO:
