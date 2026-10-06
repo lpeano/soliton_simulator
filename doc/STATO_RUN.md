@@ -2209,6 +2209,21 @@ Riscalare `r` per `1/mediana(r) ~ 1.227` moltiplica **anche** `|r_i - r_j|` per 
 > quelli ### **nati** -- ### **e NON l'ho fatta, perche' questa voce e' <<da non
 > indagare>> per decisione di Luca.** ### **La chiusura resta una DECISIONE DI LUCA:
 > io NON la chiudo.**
+>
+> ### ⛔ **E CORREGGO QUELLA ANNOTAZIONE, scritta al passo `342`: <<fra `0` e `6`,
+> SALGONO E SCENDONO>> E' VERO LOCALMENTE E FALSO COME ANDAMENTO.** A `1000` passi la
+> popolazione ### **CRESCE E ACCELERA**: `0` al `100` e al `200`, `1` al `218`, `6` al
+> `300`, `1` al `400`, `3` al `500`, `7` al `600`, `13` al `700`, `23` all'`800`,
+> `100` al `900`, ### **`368` al `1000`** -- e ### **il massimo e' l'ULTIMO passo**,
+> cioe' la misura si ferma ### **mentre la popolazione sale** e ### **non si sa se si
+> assesti.** ### **Era una lettura su una finestra di `90` passi, ed e' esattamente la
+> trappola di generalizzare da una finestra corta -- fatta su dati miei.**
+>
+> ### ⚠ **E IL `3.4x` NON E' <<PEGGIO DI PRIMA>>:** la frazione e' `0.000771` a
+> `1000` passi contro `0.000229` della legge vecchia ### **a `150`.** ### **La legge
+> vecchia non e' mai stata girata a `1000`**, e a parita' di orizzonte il confronto e'
+> ### **`0` contro `~108`.** ### **Chiuderla vorrebbe girare la legge vecchia a `1000`
+> passi, ed e' una DECISIONE DI LUCA.**
 
 *(APERTA il 2026-10-05 da una **verifica del guardiano** sui dati di `CRESCITA-DOPO-Z43`.
 ### ⛔ **DA NON INDAGARE ORA** — decisione di Luca.)*

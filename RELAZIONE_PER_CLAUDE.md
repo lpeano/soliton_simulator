@@ -6589,3 +6589,114 @@ DEVE accendersi**: se gli archi comparissero ### **senza nessuna nascita**, il l
 
 > ### ✔ **POTERE MISURATO:** rimettendo `sopra_4pi` fra i guasti in una copia, il collaudo
 > scende a ### **`30` su `32`** e ### **nomina i due.** Collaudo `32` su `32` sul file vero.
+
+---
+
+## 2026-10-06 — **IL REFERTO DELLA MISURA LUNGA: il criterio PASSA, e la cosa da guardare e' un'altra**
+
+`doc/REFERTO_tors_w8_lunga_2026-10-06.md`, blob ### **`6abc70fb`**, generato da
+`csv/_test_fork/_referto_lunga.py` *(`6fe0dea9`)* dal `lunga.json` committato in `439018c`.
+Il simulatore ### **non si tocca:** resta `cf2a1ac8`.
+
+### ✔ IL CRITERIO: **i tre passi che decidono danno LA STESSA LETTURA**
+
+| passo | rapporto | lettura |
+|--:|--:|---|
+| `300` | `0.6805` | ### **DENTRO** |
+| `600` | `0.6303` | ### **DENTRO** |
+| `1000` | `0.6462` | ### **DENTRO** |
+
+*«La torsione accumula come previsto.»* E i due che ### **si riportano e non decidono** sono
+`1.4479` al `50` e `0.9234` al `150`: ### **identici a quattro decimali** a quelli del sigillo
+`c17e518`. ### **La misura riproduce.**
+
+> ### ✔ **E LA LETTURA NON DIPENDE DALL'ASSUNZIONE DELLA CURVA:** rifacendo il conto col
+> `τ` ### **MISURATO** di ogni passo invece di `300` fisso, i tre diventano `0.5883`,
+> `0.5641`, `0.6244` — ### **si avvicinano al bordo `0.5` e non lo passano.** E' un
+> controllo in piu', ### **non un criterio nuovo:** il verdetto non lo usa.
+
+### ⛔ MA IL CRITERIO ESCLUDEVA I PASSI DOVE `τ` E' PIU' VICINO ALL'ASSUNZIONE
+
+Il task history escludeva `50` e `150` perche' *«li' `τ` vale `309`-`1491`»*. Misurato:
+
+| | scarto di `τ` da `300` |
+|---|--:|
+| passi che ### **NON decidono** *(`50`, `150`)* | `-14.4`, `-37.4` |
+| passi che ### **DECIDONO** *(`300`, `600`, `1000`)* | `-71.6`, `-122.9`, `-138.5` |
+
+> ### **E IL CRITERIO NON SI SPOSTA PER QUESTO:** era fissato ### **prima**, e cambiarlo
+> adesso ### **sarebbe spostare una soglia dopo aver visto i dati.** Si dice, e si aggiunge
+> il controllo di sensibilita' — che e' precisamente il motivo per cui l'ho aggiunto.
+
+### ⛔ LA COSA DA GUARDARE NON E' IL CRITERIO: **gli archi oltre `4π` CRESCONO**
+
+| passo | `100` | `200` | `218` | `300` | `400` | `500` | `600` | `700` | `800` | `900` | `1000` |
+|---|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|
+| archi oltre `4π` | `0` | `0` | `1` | `6` | `1` | `3` | `7` | `13` | `23` | `100` | ### **`368`** |
+
+> ### ⛔ **IL MASSIMO E' L'ULTIMO PASSO: la misura si ferma MENTRE la popolazione sale**,
+> quindi ### **non si sa se si assesti.** Quanti passi servano e' ### **una decisione di
+> Luca.**
+
+> ### ⚠ **E CORREGGO LA MIA ANNOTAZIONE DI META' RUN:** al passo `300` avevo scritto
+> *«fra `0` e `6`, ### **salgono e scendono, cioe' RILASSANO**»*. ### **E' vero localmente e
+> FALSO come andamento**, ed era una lettura su una finestra di ### **`90` passi.**
+> ### **E' esattamente la trappola di generalizzare da una finestra corta, fatta su dati
+> miei.** Corretta nell'indice e in `doc/STATO_RUN.md`, ### **senza cancellare quello che
+> avevo scritto.**
+
+> ### ⚠ **E IL `3.4x` NON E' <<PEGGIO DI PRIMA>>:** la frazione e' `0.000771` a `1000` passi
+> contro `0.000229` della legge vecchia ### **a `150`.** ### **La legge vecchia non e' mai
+> stata girata a `1000`**, e a parita' di orizzonte il confronto e' ### **`0` contro `~108`.**
+> ### **Chiudere la domanda vorrebbe girare la legge vecchia a `1000` passi, ed e' una
+> decisione di Luca.**
+
+### LA CURA TIENE, e il numero che lo dice non e' uno zero
+
+| | |
+|---|--:|
+| calci **spuri** dalla legge curata | `0` su `1000` passi |
+| la **firma** del difetto vecchio | `0` su `1000` passi |
+| ### **calci EVITATI** *(il controfattuale)* | ### **`1586016`** |
+| salti della guardia di `TAU_TW` | `0` su `1000` invocazioni |
+
+> ### ⛔ **I PRIMI DUE ZERI SONO ALGEBRICI e il referto lo dichiara:** certificano che
+> ### **l'implementazione segue il bound `4π`**, non che la fisica non e' cambiata — lo
+> stesso potere di `S3`. ### **Il numero che dice qualcosa e' `1586016`.**
+
+### LE MIE PREVISIONI: **una giusta, tre sbagliate**
+
+| scritta prima | il fatto |
+|---|---|
+| «meno di `18` divisioni a `150`» | ### ✔ **ZERO** fino al `213` |
+| «fra `30` e `150` divisioni a `1000`» | ### ⛔ **`3496`**: sbagliata di `23` volte |
+| «il rapporto scenda sotto `0.5` a `1000`» | ### ⛔ **`0.6462`**, e la discesa ### **si e' FERMATA** |
+| «archi oltre `4π` ZERO anche a `1000`» | ### ⛔ **`368`** all'ultimo passo |
+
+> ### ⚠ **E SULLA TERZA: in `5c46856` avevo scritto «resti sopra `0.3`», e in `7d3ae67` mi
+> sono impegnato a «sotto `0.5`».** ### **La previsione VECCHIA, piu' vaga, era quella
+> GIUSTA.** Avevo cambiato idea su un dato nuovo *(la discesa monotona del sigillo)* e
+> ### **la discesa si e' fermata.** Lo scrivo perche' ### **il motivo per cui ho cambiato era
+> ragionevole e il risultato e' stato peggiore**, e questo e' il tipo di cosa che si impara
+> solo tenendone il conto.
+
+### LE ALTRE LETTURE, in breve
+
+- **`M2`** *(la `Spearman` del tetto calcolato)*: `-0.0310` … `+0.0112`. ### **Il tetto NON
+  ordina gli archi**, confermato a `1000` passi e con la legge curata — lo stesso risultato di
+  `eebe24f`.
+- **`twist_dip`**: non e' piu' identicamente zero. A zero `1.0000` → `0.9892` → ### **`0.9790`**,
+  e ### **a `π`** `0.0021` → `0.0108` → ### **`0.0210`.** Cresce ### **con le nascite.**
+- **frazione oltre `3π`**: `0.0928` → `0.1126`. ### **L'`11 %` degli archi e' oltre `3π`** e
+  solo lo `0.077 %` supera `4π`: ### **c'e' ancora un taglio forte vicino a `4π`.**
+- **nascite**: `3496` divisioni, `1265` Schwinger, e per finestre di `50` passi le ultime
+  quattro danno `267`, `333`, `362`, ### **`398`** — ### **la crescita ACCELERA.**
+- **`|tw|` mediano** si assesta a ### **`3.9151`**, cioe' il ### **`62 %` di `2π`**: non e'
+  `τ` a spiegare il rapporto `0.65` *(con `τ` piu' piccolo la curva sarebbe piu' alta e il
+  rapporto piu' basso)*, ### **e' l'ASINTOTO `2π` che non regge.**
+
+### ⛔ **E QUESTA E' UNA MISURA, NON UN SIGILLO: la soglia di mitosi `3π`, il `0.3` e `κ` si decidono su questi numeri, e sono DECISIONI DI LUCA.**
+
+**`LUNGA-BATTITO-CADUTA` e' CHIUSA**, criterio soddisfatto. `ARCHI-OLTRE-4PI`
+### **resta aperta**, con l'annotazione corretta: ### **la sua chiusura e' una decisione di
+Luca, e io non la chiudo.**
