@@ -162,6 +162,67 @@ porta **per la sua FORMA** è diversa da una che porta **per la sua AMPIEZZA**.
 la risposta sarebbe <<IMPOSTO>>** — cioè il `3π` sarebbe il numero da discutere, non il
 `0.3`.
 
+## ⛔ ANNOTAZIONE DEL 2026-10-06 — **L'EFFETTO LOTTERIA**: la permutazione si ripesca
+## A OGNI PASSO, e spinge le nascite VERSO L'ALTO
+
+*(Osservazione del guardiano sul blob `7eae0618`/`b399adb2`, ### **scritta mentre la corsa e'
+IN VOLO e PRIMA di vederne i numeri.** La verifica l'ho fatta **io** sul codice dello
+strumento.)*
+
+### LA VERIFICA — **il guardiano ha ragione**
+
+| | |
+|---|---|
+| la patch | `_p = _PRNG.permutation(len(_bite))` sta **dentro** il blocco che sostituisce la riga della soglia |
+| dove vive | in `decidi_divisione`, chiamata a `:8658` **da `mitosi()`** |
+| quante volte | `mitosi` gira **una volta per passo** *(terza legge di `_passo.ordine()`)* |
+
+### ➜ **QUINDI LA PERMUTAZIONE SI RIPESCA A OGNI PASSO: `150` lotterie per arco.**
+
+### ⛔ **E IN `Bp` LA SOGLIA DI UN ARCO E' PERSISTENTE**
+
+Il morso di un arco e' `0.3*tanh(|r_i - r_j|)`, e il gradiente di `r` **varia lentamente**:
+### **un arco con gradiente piccolo ha una soglia alta SEMPRE.** In `Bperm` lo stesso arco
+riceve ### **una lotteria nuova a ogni passo**, e prima o poi pesca un morso grande.
+
+### ✔ **E L'EFFETTO SI PUO' QUANTIFICARE PRIMA DI VEDERE I NUMERI, cosa che lo rende una
+### previsione e non una scusa**
+
+La probabilita' che un arco **non veda MAI** un morso del **decile alto** in `150` estrazioni
+indipendenti e' `0.9^150` = ### **`1.37e-07`.** Cioe' ### **praticamente OGNI arco, nel corso
+della corsa, riceve almeno una volta una soglia fra le piu' basse** — mentre in `Bp` solo
+gli archi ad alto gradiente la vedono, e **sempre quelli**.
+
+### ⚠ **QUINDI L'EFFETTO LOTTERIA SPINGE LE NASCITE DI `Bperm` VERSO L'ALTO, cioe' NELLA
+### DIREZIONE DELLA PREVISIONE DEL GUARDIANO** *(`0.5x`-`2x`)* **e CONTRO la mia**
+*(crollo)*. ### **Lo scrivo adesso, prima dei numeri: se la mia previsione risultasse giusta,
+sarebbe giusta NONOSTANTE un effetto che la ostacola.**
+
+### COME SI LEGGE, **fissato ORA**
+
+| se | il risultato e' |
+|---|---|
+| vale **`P2`** *(crollo)* | ### **ROBUSTO: crolla NONOSTANTE la lotteria** |
+| vale **`P1`** o **`P3`** | ### **AMBIGUO** fra *<<non conta quale arco>>* e *<<lotteria>>* |
+
+### ✔ **E NEL CASO AMBIGUO, DOPO IL REFERTO, SI AGGIUNGE `Bperm-fisso`**
+
+Permutazione ripescata ### **SOLO quando `len(avv)` CAMBIA**, stessi tre semi, stessi
+controlli, stessi criteri. ### **Il referto finale li riporta ENTRAMBI.**
+
+### ✔ **E IL FATTORE E' MISURATO, non stimato:** nel braccio `Bp` committato *(`dd86933`)*
+`len(avv)` cambia ### **`12` volte su `150` passi**, quindi `Bperm-fisso` ripescherebbe
+**`13`** volte invece di `150` — ### **un fattore `11.5` di lotterie in meno.** E la
+probabilita' di non vedere mai il decile alto passa da `1.37e-07` a ### **`0.254`**: con
+`13` estrazioni ### **un quarto degli archi non vede mai una soglia bassa**, che e' molto
+piu' vicino al comportamento persistente di `Bp`.
+
+> ### ⚠ **MA `Bperm-fisso` NON E' <<`Bperm` SENZA IL DIFETTO>>, e va detto:** ripescare solo
+> alla crescita ### **lega la permutazione alla TOPOLOGIA**, cioe' introduce una
+> correlazione nuova *(i morsi cambiano **quando** nasce un nodo)*. ### **Riduce la lotteria,
+> non la toglie, e cambia una cosa per un'altra.** Il confronto fra i due bracci dice
+> **quanto** pesa la lotteria; ### **nessuno dei due e' il braccio <<pulito>>.**
+
 ## 3. TODO DEL NEXT STEP
 
 1. **commit di questo task history**, prima dello strumento, ### **DA SOLO**;
