@@ -9079,3 +9079,247 @@ era il dubbio principale su una lettura topologica del verso.
 
 ### ⛔ **E LA SCELTA FRA LE OPZIONI NON È IN QUESTO DOCUMENTO: È DI LUCA.**
 ### **Questa annotazione riporta i numeri e dice che cosa vincolano. Non sceglie.**
+
+---
+
+# ⛔ **CAMBIO DI ROTTA — DECISIONE DI LUCA, 2026-10-07 SERA** *(`par.8`: si ANNOTA, non si riscrive — `A1`–`A6` qui sopra restano leggibili)*
+
+> ### ⭐ **SI SOSPENDE LA CURA DEL VERSO E SI PASSA ALLO SCIOGLIMENTO DELLE MASSE.**
+> ### **Il simulatore resta `b8c21049`: nessuna legge si tocca in questo mandato.**
+
+## `A1` È **FATTA** — commit `67f020e`
+
+Referto `doc/REFERTO_verso_e_plaquette_2026-10-06.md`, dati
+`csv/_test_fork/_misura_verso/verso.json`. ### **`1000` passi, `7039.8` secondi, `0` avvisi**,
+e il controllo delle nascite ### **passato: `n` e `archi` identici al bit ad `amp0.json` su
+tutti i `1000` passi.**
+
+## ⛔ **LA CURA DEL VERSO È SOSPESA, NON ABBANDONATA** — *il perché, testuale (Luca)*
+
+> *«La corsa `A1` mostra che le masse seminate si sciolgono entro il passo `350–400` (AUC di
+> `c_k` MATERIA/VUOTO `0.999` → `0.902` al `230` → `0.737` al `300` → `0.468` al `400` →
+> `0.44–0.46` fino al `1000`). Finché le masse non sopravvivono, la cura del verso non si può
+> giudicare, e ogni confronto MATERIA/VUOTO dopo il `400` parla di zone dove la materia
+> ERA.»*
+
+### ✔ **E I NUMERI CITATI SONO VERIFICATI SUL JSON, non ricopiati** *(`L-NUMERI`)*:
+
+| passo | AUC MATERIA/VUOTO | `c_k` mediana MATERIA | BORDO | VUOTO |
+|--:|--:|--:|--:|--:|
+| `1` | ### **`0.9992`** | ### **`0.7904`** | `0.1925` | `0.1627` |
+| `150` | `0.9861` | `0.6483` | `0.2974` | `0.2430` |
+| `230` | `0.9023` | `0.4847` | `0.3257` | `0.2665` |
+| `300` | `0.7371` | `0.3870` | `0.3050` | `0.2744` |
+| ### **`400`** | ### **`0.4679`** | `0.2882` | `0.2856` | `0.2972` |
+| `500` | `0.4497` | `0.2761` | `0.2916` | `0.3019` |
+| `700` | `0.4638` | `0.2889` | `0.2912` | `0.3034` |
+| ### **`1000`** | ### **`0.4415`** | `0.2875` | `0.2844` | ### **`0.3123`** |
+
+> ### ⭐ **E IL QUADRO È PIÙ NETTO DI COME È SCRITTO: NON È UN DECADIMENTO, È UN INCROCIO.**
+> `c_k` di MATERIA ### **scende** `0.7904 → 0.2875`, e quella del VUOTO ### **SALE**
+> `0.1627 → 0.3123`. ### **Si incrociano attorno al passo `400`**, e da lì l'AUC sta
+> ### **SOTTO `0.5`**: la zona che era materia è ### **MENO coerente del vuoto**, non solo
+> «meno coerente di prima».
+
+### ✔ **Si riprende quando le masse tengono.**
+
+## ⭐ **LA PARTE A NUOVA, IN ORDINE** *(decisione di Luca)*
+
+| | | |
+|---|---|---|
+| ### **`A-S1`** | ### ⭐ **IL TEST `H1` DI `SCIOGLIMENTO-FASE`** — *la PRIMA azione* | ### **solo la SCENA cambia, nessuna legge.** È ### **`S1b`** del task history del 2026-09-27, esteso |
+| `A-S2` | ### **solo se `H1` NON basta:** la diagnosi e poi la cura di ### **`H2`** con ### **`M-LEGAMI`** *(la memoria viva dei legami al posto di `phi0`)* | con la ### **regola `§0`** della chiusura dei difetti e ### **`A15`** |
+| `A2` | ### **`CICLO-CHIUSURA-SEGNO`** | ### **resta**, piccola e ### **indipendente** |
+| *(dopo)* | ### **la cura del verso** | ### **dopo che le masse tengono** |
+
+### ⛔ **E `A3`, `A4` QUI SOPRA SONO LE VOCI SOSPESE:** le decisioni sul verso e la sua cura.
+### **Non si cancellano: aspettano le masse.** ### **`A5` e `A6` restano dove sono**, e `A6`
+*(`U1` legge per legge)* ### **resta la condizione per la prossima corsa lunga di FISICA** —
+### ⚠ **ma non per una corsa che confronta DUE BRACCI dello stesso simulatore**, dove la legge
+difettosa è ### **la stessa in entrambi.**
+
+## ⭐ **I DUE BRACCI DA AGGIUNGERE QUANDO SI RIPRENDE IL VERSO** *(decisione di Luca)*
+
+| | che cos'è | a che domanda risponde |
+|---|---|---|
+| ### **`BRACCIO ZERO`** | ### **nessun termine di dipolo**, affatto | ### ⭐ **il dipolo SERVE?** Senza questo braccio, confrontare quattro forme di dipolo ### **assume** che una ci debba essere |
+| ### **`PERC_GEOM-CON-VERSO`** | i ### **salti RARI di oggi**, ma col ### **segno preso dalla memoria dell'arco (`δ`)** | ### **si può avere il verso SENZA pagare la spinta continua?** |
+
+### **IL DATO CHE MOTIVA ENTRAMBI, dalla corsa `A1`:** ### ⛔ **nessuna candidata inietta meno
+di `perc_geom`.** L'ordine delle spinte mediane oltre il `216` è
+### **`perc_geom` `1160.8` < `D` `5260.6` < `A` `8725.8` < `MEM` `9837.0`.**
+### **Cioè: ogni cura proposta inietta PIÙ spinta della legge che vuole sostituire.**
+
+> **IL DETTAGLIO, con il conto:** **`doc/GEOM_SENZA_VERSO.md`**, paragrafo del 2026-10-07 sera.
+
+## ⛔ **`M5d` NON È «SMENTITA»: È NON DECIDIBILE** *(decisione di Luca)*
+
+L'osservazione di Luca diceva che ### **la memoria non dissipa dove la struttura è STABILE.**
+Le classi MATERIA/BORDO/VUOTO sono ### **GEOMETRICHE** *(dove le masse erano state seminate)*,
+e dal `400` in poi la zona MATERIA è ### **MENO coerente del vuoto** *(AUC `< 0.5`)*:
+### ⛔ **la condizione del test non c'era.** ### **Il numero resta; il verdetto diventa
+`NON DECIDIBILE` finché non esistono masse che durano.**
+
+## ✔ **`M5b` TOGLIE UN OSTACOLO: il vincolo su `M-LEGAMI` CADE**
+
+Il dipolo ### **non domina `δ`** *(mediana di `|tw_dip|/|tw|` ≈ `0`; ### **`23–28 %` solo
+sugli archi con un salto nei `50` passi prima**)*. ### **Quindi `M-LEGAMI` non deve più
+aspettare la cura del verso**, e può entrare in `A-S2`.
+
+## ⚠ **E `B1` E `D31` NON CAMBIANO**
+
+`B1` conserva *«la conversione di tutte le memorie e delle frecce imposte in scambi
+reversibili, verificata con l'eco di Loschmidt»*; `D31` resta ### **candidato ad anticipo**,
+e ### **la decisione è di Luca.**
+
+---
+
+# ⏸ **LA CURA DEL VERSO È SOSPESA, E DUE BRACCI SI AGGIUNGONO QUANDO SI RIPRENDE** *(decisione di Luca, 2026-10-07 sera — `par.8`: si ANNOTA, non si riscrive)*
+
+> ### ⛔ **PERCHÉ SI SOSPENDE:** la corsa `A1` mostra che ### **le masse seminate si sciolgono
+> entro il passo `350–400`.** ### **Finché le masse non sopravvivono, la cura del verso non si
+> può giudicare**, e ### **ogni confronto MATERIA/VUOTO dopo il `400` parla di zone dove la
+> materia ERA.** ### **Il dettaglio e la tavola dell'AUC stanno in
+> `doc/RIPRESA_2026-10-07.md`.** ### ✔ **Si riprende quando le masse tengono.**
+
+## ⛔ **IL DATO CHE MOTIVA I DUE BRACCI: NESSUNA CANDIDATA INIETTA MENO DI `perc_geom`**
+
+Spinta iniettata `Σ|Δdipolo|`, ### **mediana per passo oltre il `216`** *(corsa `A1`,
+`67f020e`)*:
+
+| opzione | spinta mediana oltre il `216` | rispetto a `perc_geom` |
+|---|--:|--:|
+| ### **`perc_geom`** *(la legge di OGGI)* | ### **`1160.8`** | — |
+| `D` | `5260.6` | ### **`4.5 ×`** |
+| `A` | `8725.8` | ### **`7.5 ×`** |
+| `MEM` | `9837.0` | ### **`8.5 ×`** |
+
+### ⛔ **OGNI CURA PROPOSTA INIETTA PIÙ SPINTA DELLA LEGGE CHE VUOLE SOSTITUIRE**, e questo
+non era nelle previsioni: avevo previsto `D` la ### **minore** di tutte *(previsione `P1`,
+### **SMENTITA**)*.
+
+## ⭐ **`BRACCIO ZERO` — nessun termine di dipolo, affatto**
+
+### **LA DOMANDA: il dipolo SERVE?** ### ⛔ **Senza questo braccio, confrontare quattro forme
+di dipolo ASSUME che una ci debba essere** — ed è esattamente la forma di `A8` applicata a una
+scelta di fisica: ### **un'alternativa che non si misura non è un'alternativa, è un
+presupposto.**
+### **Costo: zero numeri nuovi** *(si spegne un termine, non si accende niente)*.
+
+## ⭐ **`PERC_GEOM-CON-VERSO` — i salti rari di oggi, col segno dalla memoria**
+
+### **LA DOMANDA: si può avere il verso SENZA pagare la spinta continua?**
+`perc_geom` salta ### **raramente** — misurato nella corsa `A1`: ### **`0.0000 %` di nodi che
+cambiano segno per passo prima del `216`, `0.1220 %` dopo**, contro `0.2737 %` di `D` e
+`0.5561 %` di `MEM`. ### **L'idea è tenere la rarità e prendere il SEGNO da `δ`**, la memoria
+dell'arco, invece dal modulo che il verso l'ha perso.
+
+## ⚠ **LA CAUSA PROBABILE PER `D` E `MEM`, SCRITTA COME IPOTESI CON IL CONTO** *(proposta di Luca)*
+
+### **L'ipotesi:** `D` e `MEM` ### **leggono `tw` dello STESSO arco**, quindi ### **rientrano
+nella torsione** con un guadagno ### **`~0.5` vicino a zero.**
+
+### ✔ **IL CONTO TORNA ESATTO, e lo scrivo perché un'ipotesi con il conto si può confutare:**
+
+```
+D(tw)  = pi * tanh(tw / (2 pi))
+dD/dtw = pi * (1 / (2 pi)) * sech^2(tw / (2 pi)) = (1/2) * sech^2(tw / (2 pi))
+dD/dtw |(tw = 0) = 1/2 = 0.5                                     <-- il guadagno di Luca
+```
+
+### ⭐ **E IL SEGNO DISTINGUE LE DUE, che è un pezzo in più dell'ipotesi:**
+`MEM` usa ### **`δ = twp − tw`**, quindi
+
+```
+MEM(tw) = pi * tanh((twp - tw) / (2 pi))
+dMEM/dtw |(delta = 0) = - 1/2 = -0.5                              <-- segno OPPOSTO
+```
+
+### ➜ **`D` è un feedback POSITIVO sulla torsione** *(`tw` cresce → il dipolo cresce → `tw`
+cresce di più)*; ### **`MEM` è un feedback NEGATIVO**, cioè ### **richiamante.**
+### ⚠ **DA VERIFICARE, non verificato:** il guadagno `0.5` vale ### **vicino a `tw = 0`**, e
+alla fine della corsa `A1` ### **il `7.64 %` degli archi sta oltre `2π`**, dove
+`sech²` ### **crolla** — quindi il guadagno vero è ### **molto minore sugli archi avvolti**,
+e va misurato invece che assunto.
+
+## ⛔ **E UNA MIA OBIEZIONE ALL'IPOTESI, scritta accanto e non al posto**
+
+### **Il guadagno spiega il FEEDBACK, non la SPINTA INIETTATA.** La spinta è
+`Σ|Δdipolo|` fra due passi, cioè ### **una VARIABILITÀ**, non un segno di retroazione — e un
+feedback negativo *(`MEM`)* inietta ### **più** di uno positivo *(`D`)*, che con la sola
+lettura del guadagno ### **non si spiega.**
+
+### ⭐ **LA MIA LETTURA ALTERNATIVA: continuità contro rarità.** `D` e `MEM` sono
+### **funzioni CONTINUE di `tw`**, quindi si muovono ### **a ogni passo, su ogni arco**;
+`perc_geom` dipende da `_chi_geom_nodi`, una grandezza ### **soglia**, quindi è
+### **quasi costante a tratti** e si muove ### **solo quando un nodo bascula.**
+### ➜ **La spinta di `perc_geom` è piccola perché il suo dipolo è quasi SEMPRE LO STESSO, non
+perché non rientri nella torsione.**
+
+> ### 📌 **LA PROVA CHE SEPARA LE DUE LETTURE, e costa poco:** si confronta
+> `Σ|Δdipolo|` di `perc_geom` ### **ristretta agli archi dove un estremo ha basculato** con
+> quella sugli ### **altri**. ### **Se la mia lettura regge, quasi TUTTA la spinta di
+> `perc_geom` viene dal primo insieme**, e il rapporto fra le spinte si spiega col
+> ### **numero di archi che si muovono**, non col guadagno. ### ⛔ **Non l'ho misurata: la
+> scrivo come prova da fare, e la decisione è di Luca.**
+
+---
+
+# ⛔ **ANNOTAZIONE DEL 2026-10-07 SERA — `M5d` NON È «SMENTITA»: È NON DECIDIBILE** *(decisione di Luca; `par.8`: si ANNOTA, non si riscrive)*
+
+> ### ⛔ **L'ETICHETTA CAMBIA, IL NUMERO NO.** Il paragrafo `(c)` qui sopra resta leggibile con
+> la sua tavola: ### **la tavola è giusta, la CONCLUSIONE che le ho attaccato no.**
+
+## LA RAGIONE, ED È UNA CONDIZIONE DEL TEST CHE NON C'ERA
+
+L'osservazione di Luca diceva che ### **la memoria non dissipa dove la struttura è STABILE.**
+Il mio test confrontava la potenza per nodo fra le classi ### **MATERIA / BORDO / VUOTO** —
+### ⛔ **ma quelle classi sono GEOMETRICHE: dicono dove le masse erano state SEMINATE, non dove
+c'è struttura.**
+
+E la corsa `A1` dice che ### **dal passo `400` la zona MATERIA è MENO coerente del vuoto**:
+
+| passo | AUC MATERIA/VUOTO | `c_k` mediana MATERIA | VUOTO |
+|--:|--:|--:|--:|
+| `1` | `0.9992` | ### **`0.7904`** | `0.1627` |
+| `300` | `0.7371` | `0.3870` | `0.2744` |
+| ### **`400`** | ### **`0.4679`** | `0.2882` | `0.2972` |
+| `1000` | `0.4415` | `0.2875` | ### **`0.3123`** |
+
+### ⭐ **`c_k` di MATERIA SCENDE e quella del VUOTO SALE: si INCROCIANO attorno al `400`.**
+### ➜ **Quindi i passi `400`, `500`, `700`, `1000` — cioè TUTTI quelli su cui il criterio
+decideva — confrontavano «dove la materia ERA» con «il vuoto», e la prima era la MENO
+strutturata delle due.** ### ⛔ **Il criterio chiedeva se la memoria dissipa dove la struttura
+è stabile, e lì NON C'ERA STRUTTURA STABILE DA NESSUNA PARTE.**
+
+> ### ✔ **IL VERDETTO: `NON DECIDIBILE`, finché non esistono masse che durano.**
+> ### **I numeri restano** *(il rapporto `0.249 → 1.017`)*, e ### **vanno riletti quando il
+> test avrà la sua condizione.**
+
+## ⚠ **E IL MIO ARGOMENTO, scritto ACCANTO e senza cambiare l'etichetta**
+
+### **Sono d'accordo sulla sostanza, e aggiungo una cosa che il cambio di etichetta non deve
+far perdere:** al passo ### **`150`** — dove le masse ### **c'erano ancora** *(AUC `0.9861`,
+`c_k` MATERIA `0.6483` contro VUOTO `0.2430`)* — il criterio era soddisfatto
+### **per un PELO: `0.249` contro la soglia `0.2500`.**
+
+### ➜ **Cioè: nell'UNICO passo misurato in cui la condizione del test c'era, l'osservazione
+passava sul filo.** ### ⚠ **Non è una conferma** *(un passo solo, e un margine di `4e-4`)*,
+### **ma non è neanche niente:** quando `A-S1` darà masse che durano, ### **il numero da
+guardare è se quel `0.249` scende o sale.** ### **Lo scrivo adesso perché una previsione
+scritta dopo non è una previsione.**
+
+## ✔ **E `M5b` TOGLIE UN OSTACOLO: il vincolo su `M-LEGAMI` CADE** *(decisione di Luca)*
+
+La scheda ### **`M-LEGAMI`** portava il vincolo *«solo DOPO la cura del verso»*, perché si
+temeva che una memoria dei legami costruita su `δ` ### **leggesse il dipolo invece dello
+stato.** ### ⭐ **`M5b` lo esclude con il numero:** la mediana di `|tw_dip|/|tw|` è
+### **`≈ 0`** su tutti gli archi, e ### **`23–28 %` SOLO sugli archi toccati da un salto nei
+`50` passi prima.**
+
+### ➜ **Quindi `M-LEGAMI` non deve più aspettare la cura del verso, e può entrare in `A-S2`**
+*(la cura di `H2`, se `H1` non basta)*.
+
+> ### ⚠ **MA IL `23–28 %` NON SPARISCE, e la scheda lo porta:** sugli archi con un salto
+> recente ### **un quarto di `|tw|` viene dal dipolo**, quindi `M-LEGAMI` su quegli archi
+> ### **erediterebbe un quarto del calcio.** ### **Il vincolo cade; l'avvertenza resta.**

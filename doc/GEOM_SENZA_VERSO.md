@@ -1081,3 +1081,94 @@ cioè ### **persiste `~τ_tw`.**
 `MEM` si misura ### **accanto ad `A`, `D` e `perc_geom`**, col ### **metro giusto — la
 spinta iniettata `Σ|Δdipolo|`** — e ### **non come cura.**
 ### **Voce: `MEM-VERSO`** *(`da-decidere`)*.
+
+---
+
+# ⏸ **LA CURA DEL VERSO È SOSPESA, E DUE BRACCI SI AGGIUNGONO QUANDO SI RIPRENDE** *(decisione di Luca, 2026-10-07 sera — `par.8`: si ANNOTA, non si riscrive)*
+
+> ### ⛔ **PERCHÉ SI SOSPENDE:** la corsa `A1` mostra che ### **le masse seminate si sciolgono
+> entro il passo `350–400`.** ### **Finché le masse non sopravvivono, la cura del verso non si
+> può giudicare**, e ### **ogni confronto MATERIA/VUOTO dopo il `400` parla di zone dove la
+> materia ERA.** ### **Il dettaglio e la tavola dell'AUC stanno in
+> `doc/RIPRESA_2026-10-07.md`.** ### ✔ **Si riprende quando le masse tengono.**
+
+## ⛔ **IL DATO CHE MOTIVA I DUE BRACCI: NESSUNA CANDIDATA INIETTA MENO DI `perc_geom`**
+
+Spinta iniettata `Σ|Δdipolo|`, ### **mediana per passo oltre il `216`** *(corsa `A1`,
+`67f020e`)*:
+
+| opzione | spinta mediana oltre il `216` | rispetto a `perc_geom` |
+|---|--:|--:|
+| ### **`perc_geom`** *(la legge di OGGI)* | ### **`1160.8`** | — |
+| `D` | `5260.6` | ### **`4.5 ×`** |
+| `A` | `8725.8` | ### **`7.5 ×`** |
+| `MEM` | `9837.0` | ### **`8.5 ×`** |
+
+### ⛔ **OGNI CURA PROPOSTA INIETTA PIÙ SPINTA DELLA LEGGE CHE VUOLE SOSTITUIRE**, e questo
+non era nelle previsioni: avevo previsto `D` la ### **minore** di tutte *(previsione `P1`,
+### **SMENTITA**)*.
+
+## ⭐ **`BRACCIO ZERO` — nessun termine di dipolo, affatto**
+
+### **LA DOMANDA: il dipolo SERVE?** ### ⛔ **Senza questo braccio, confrontare quattro forme
+di dipolo ASSUME che una ci debba essere** — ed è esattamente la forma di `A8` applicata a una
+scelta di fisica: ### **un'alternativa che non si misura non è un'alternativa, è un
+presupposto.**
+### **Costo: zero numeri nuovi** *(si spegne un termine, non si accende niente)*.
+
+## ⭐ **`PERC_GEOM-CON-VERSO` — i salti rari di oggi, col segno dalla memoria**
+
+### **LA DOMANDA: si può avere il verso SENZA pagare la spinta continua?**
+`perc_geom` salta ### **raramente** — misurato nella corsa `A1`: ### **`0.0000 %` di nodi che
+cambiano segno per passo prima del `216`, `0.1220 %` dopo**, contro `0.2737 %` di `D` e
+`0.5561 %` di `MEM`. ### **L'idea è tenere la rarità e prendere il SEGNO da `δ`**, la memoria
+dell'arco, invece dal modulo che il verso l'ha perso.
+
+## ⚠ **LA CAUSA PROBABILE PER `D` E `MEM`, SCRITTA COME IPOTESI CON IL CONTO** *(proposta di Luca)*
+
+### **L'ipotesi:** `D` e `MEM` ### **leggono `tw` dello STESSO arco**, quindi ### **rientrano
+nella torsione** con un guadagno ### **`~0.5` vicino a zero.**
+
+### ✔ **IL CONTO TORNA ESATTO, e lo scrivo perché un'ipotesi con il conto si può confutare:**
+
+```
+D(tw)  = pi * tanh(tw / (2 pi))
+dD/dtw = pi * (1 / (2 pi)) * sech^2(tw / (2 pi)) = (1/2) * sech^2(tw / (2 pi))
+dD/dtw |(tw = 0) = 1/2 = 0.5                                     <-- il guadagno di Luca
+```
+
+### ⭐ **E IL SEGNO DISTINGUE LE DUE, che è un pezzo in più dell'ipotesi:**
+`MEM` usa ### **`δ = twp − tw`**, quindi
+
+```
+MEM(tw) = pi * tanh((twp - tw) / (2 pi))
+dMEM/dtw |(delta = 0) = - 1/2 = -0.5                              <-- segno OPPOSTO
+```
+
+### ➜ **`D` è un feedback POSITIVO sulla torsione** *(`tw` cresce → il dipolo cresce → `tw`
+cresce di più)*; ### **`MEM` è un feedback NEGATIVO**, cioè ### **richiamante.**
+### ⚠ **DA VERIFICARE, non verificato:** il guadagno `0.5` vale ### **vicino a `tw = 0`**, e
+alla fine della corsa `A1` ### **il `7.64 %` degli archi sta oltre `2π`**, dove
+`sech²` ### **crolla** — quindi il guadagno vero è ### **molto minore sugli archi avvolti**,
+e va misurato invece che assunto.
+
+## ⛔ **E UNA MIA OBIEZIONE ALL'IPOTESI, scritta accanto e non al posto**
+
+### **Il guadagno spiega il FEEDBACK, non la SPINTA INIETTATA.** La spinta è
+`Σ|Δdipolo|` fra due passi, cioè ### **una VARIABILITÀ**, non un segno di retroazione — e un
+feedback negativo *(`MEM`)* inietta ### **più** di uno positivo *(`D`)*, che con la sola
+lettura del guadagno ### **non si spiega.**
+
+### ⭐ **LA MIA LETTURA ALTERNATIVA: continuità contro rarità.** `D` e `MEM` sono
+### **funzioni CONTINUE di `tw`**, quindi si muovono ### **a ogni passo, su ogni arco**;
+`perc_geom` dipende da `_chi_geom_nodi`, una grandezza ### **soglia**, quindi è
+### **quasi costante a tratti** e si muove ### **solo quando un nodo bascula.**
+### ➜ **La spinta di `perc_geom` è piccola perché il suo dipolo è quasi SEMPRE LO STESSO, non
+perché non rientri nella torsione.**
+
+> ### 📌 **LA PROVA CHE SEPARA LE DUE LETTURE, e costa poco:** si confronta
+> `Σ|Δdipolo|` di `perc_geom` ### **ristretta agli archi dove un estremo ha basculato** con
+> quella sugli ### **altri**. ### **Se la mia lettura regge, quasi TUTTA la spinta di
+> `perc_geom` viene dal primo insieme**, e il rapporto fra le spinte si spiega col
+> ### **numero di archi che si muovono**, non col guadagno. ### ⛔ **Non l'ho misurata: la
+> scrivo come prova da fare, e la decisione è di Luca.**

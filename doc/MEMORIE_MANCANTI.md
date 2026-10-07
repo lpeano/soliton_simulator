@@ -823,3 +823,64 @@ era il dubbio principale su una lettura topologica del verso.
 
 ### ⛔ **E LA SCELTA FRA LE OPZIONI NON È IN QUESTO DOCUMENTO: È DI LUCA.**
 ### **Questa annotazione riporta i numeri e dice che cosa vincolano. Non sceglie.**
+
+---
+
+# ⛔ **ANNOTAZIONE DEL 2026-10-07 SERA — `M5d` NON È «SMENTITA»: È NON DECIDIBILE** *(decisione di Luca; `par.8`: si ANNOTA, non si riscrive)*
+
+> ### ⛔ **L'ETICHETTA CAMBIA, IL NUMERO NO.** Il paragrafo `(c)` qui sopra resta leggibile con
+> la sua tavola: ### **la tavola è giusta, la CONCLUSIONE che le ho attaccato no.**
+
+## LA RAGIONE, ED È UNA CONDIZIONE DEL TEST CHE NON C'ERA
+
+L'osservazione di Luca diceva che ### **la memoria non dissipa dove la struttura è STABILE.**
+Il mio test confrontava la potenza per nodo fra le classi ### **MATERIA / BORDO / VUOTO** —
+### ⛔ **ma quelle classi sono GEOMETRICHE: dicono dove le masse erano state SEMINATE, non dove
+c'è struttura.**
+
+E la corsa `A1` dice che ### **dal passo `400` la zona MATERIA è MENO coerente del vuoto**:
+
+| passo | AUC MATERIA/VUOTO | `c_k` mediana MATERIA | VUOTO |
+|--:|--:|--:|--:|
+| `1` | `0.9992` | ### **`0.7904`** | `0.1627` |
+| `300` | `0.7371` | `0.3870` | `0.2744` |
+| ### **`400`** | ### **`0.4679`** | `0.2882` | `0.2972` |
+| `1000` | `0.4415` | `0.2875` | ### **`0.3123`** |
+
+### ⭐ **`c_k` di MATERIA SCENDE e quella del VUOTO SALE: si INCROCIANO attorno al `400`.**
+### ➜ **Quindi i passi `400`, `500`, `700`, `1000` — cioè TUTTI quelli su cui il criterio
+decideva — confrontavano «dove la materia ERA» con «il vuoto», e la prima era la MENO
+strutturata delle due.** ### ⛔ **Il criterio chiedeva se la memoria dissipa dove la struttura
+è stabile, e lì NON C'ERA STRUTTURA STABILE DA NESSUNA PARTE.**
+
+> ### ✔ **IL VERDETTO: `NON DECIDIBILE`, finché non esistono masse che durano.**
+> ### **I numeri restano** *(il rapporto `0.249 → 1.017`)*, e ### **vanno riletti quando il
+> test avrà la sua condizione.**
+
+## ⚠ **E IL MIO ARGOMENTO, scritto ACCANTO e senza cambiare l'etichetta**
+
+### **Sono d'accordo sulla sostanza, e aggiungo una cosa che il cambio di etichetta non deve
+far perdere:** al passo ### **`150`** — dove le masse ### **c'erano ancora** *(AUC `0.9861`,
+`c_k` MATERIA `0.6483` contro VUOTO `0.2430`)* — il criterio era soddisfatto
+### **per un PELO: `0.249` contro la soglia `0.2500`.**
+
+### ➜ **Cioè: nell'UNICO passo misurato in cui la condizione del test c'era, l'osservazione
+passava sul filo.** ### ⚠ **Non è una conferma** *(un passo solo, e un margine di `4e-4`)*,
+### **ma non è neanche niente:** quando `A-S1` darà masse che durano, ### **il numero da
+guardare è se quel `0.249` scende o sale.** ### **Lo scrivo adesso perché una previsione
+scritta dopo non è una previsione.**
+
+## ✔ **E `M5b` TOGLIE UN OSTACOLO: il vincolo su `M-LEGAMI` CADE** *(decisione di Luca)*
+
+La scheda ### **`M-LEGAMI`** portava il vincolo *«solo DOPO la cura del verso»*, perché si
+temeva che una memoria dei legami costruita su `δ` ### **leggesse il dipolo invece dello
+stato.** ### ⭐ **`M5b` lo esclude con il numero:** la mediana di `|tw_dip|/|tw|` è
+### **`≈ 0`** su tutti gli archi, e ### **`23–28 %` SOLO sugli archi toccati da un salto nei
+`50` passi prima.**
+
+### ➜ **Quindi `M-LEGAMI` non deve più aspettare la cura del verso, e può entrare in `A-S2`**
+*(la cura di `H2`, se `H1` non basta)*.
+
+> ### ⚠ **MA IL `23–28 %` NON SPARISCE, e la scheda lo porta:** sugli archi con un salto
+> recente ### **un quarto di `|tw|` viene dal dipolo**, quindi `M-LEGAMI` su quegli archi
+> ### **erediterebbe un quarto del calcio.** ### **Il vincolo cade; l'avvertenza resta.**
