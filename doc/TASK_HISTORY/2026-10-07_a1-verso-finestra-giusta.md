@@ -215,3 +215,52 @@ cioè ### **oltre il `216`**, dove le nascite ci sono.
 
 > ### ⛔ **POI FERMARSI.** ### **Non toccare il simulatore, non scegliere un'opzione, non
 > scrivere nessuna memoria come legge, non passare ad `A2`.**
+
+---
+
+## ⭐ **AGGIUNTA DEL 2026-10-07, A CORSA IN VOLO** *(`par.8`: è un'AGGIUNTA, non una modifica delle previsioni)*
+
+> ### ⛔ **UN CONTROLLO IN PIÙ, GRATIS, E UN ERRORE DEL GUARDIANO CHE IL GUARDIANO
+> RICONOSCE.**
+
+**IL RILIEVO:** la byte-inerzia di `d01cc2a` è stata fatta su ### **`50` passi**, cioè
+### **PRIMA della prima nascita (`216`).** ### ➜ **Gli involucri sulle funzioni di nascita
+*(`_allaccia`, la mitosi, lo Schwinger)* NON SONO MAI STATI ESERCITATI MENTRE LAVORANO.**
+
+> ### ⚠ **Il guardiano aveva chiesto `50` passi, e lo riconosce.** ### **Io l'ho eseguito
+> senza notare che `50 < 216`** — ed è ### **la stessa trappola della finestra** che ha
+> fatto rifare questa misura.
+
+### ✔ **LA VERIFICA NON COSTA UNA CORSA: il riferimento ESISTE GIÀ**
+
+`csv/_test_fork/_mitosi_zero_dove/amp0.json` è il braccio ### **`_AMP = 0`** su
+### **`1000` passi**, e la catena che lo rende valido per `b8c21049` è:
+
+| | |
+|---|---|
+| `amp0.json` | blob ### **`cf2a1ac8`** con la modulazione del `0.3` ### **annullata** |
+| `S1` del sigillo `6d7107b` | ### **`30e18cdd`** riproduce `amp0.json` ### **AL BIT su `230` passi** |
+| il sigillo `35044cc` | ### **`b8c21049`** differisce da `30e18cdd` ### **solo per DUE STRINGHE**, codice compilato ### **IDENTICO** |
+
+### ⛔ **IL CRITERIO, FISSATO ORA E PRIMA DI GUARDARE** *(è di Luca)*
+
+> ### **Zero differenze su tutti i `1000` passi = gli osservatori, involucri di nascita
+> compresi, NON cambiano la dinamica.**
+>
+> ### **Una differenza = il primo passo diverso e il campo vanno nel referto, e i numeri di
+> `A1` DOPO quel passo NON VALGONO finché non si trova la causa.**
+
+### ⚠ **E DUE COSE CHE VANNO DICHIARATE PRIMA, perché cambiano la lettura**
+
+| | |
+|---|---|
+| ### **i campi che `A1` NON registra** | ### **`nati_tot`, `schwinger_tot`, `q_tw`.** ### ⛔ **E NON si aggiungono ORA:** il `par.5` vieta di toccare un file del percorso in uso, e la corsa è ### **in volo.** Si confronta ### **`n` e `archi`**, e gli altri ### **si dichiarano** |
+| ### ⚠ **una trappola di CONVENZIONE** | nel riferimento ### **`n` viene da `chiudi` (POST-passo)** e ### **`archi` dal gancio della torsione (METÀ passo)**: al passo `216` si legge ### **`n = 12804` con `archi` ancora `471564`.** ### ➜ **Un disallineamento di UN passo su `archi` sarebbe una CONVENZIONE, non una differenza di dinamica.** ### ✔ **Lo strumento prova ENTRAMBI gli allineamenti e DICHIARA quale combacia** |
+
+> ### ⚠ **E `n` E `archi` A OGNI PASSO NON SONO POCO:** `n` è ### **il conto delle nascite
+> integrato**, e `archi` risente ### **sia della mitosi** *(`−1 +2`)* ### **sia dello
+> Schwinger** *(`+2`)*. ### **Uno spostamento di UNA nascita di UN passo si vedrebbe in
+> entrambi.**
+
+**LO STRUMENTO:** `csv/_seal_fork/_inerzia_nascite.py`, e ### **gira alla fine della corsa
+`A1`.**
