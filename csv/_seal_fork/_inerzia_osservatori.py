@@ -54,7 +54,14 @@ import _mitosi_soglia_grad as _MSG               # noqa: E402
 
 stampa, riga, blob = _MSG.stampa, _MSG.riga, _MSG.blob
 NL = chr(10)
-PASSI = 50
+# ### ⛔ **ERANO `50`, E `50` NON DIMOSTRAVA NIENTE SUGLI INVOLUCRI DI NASCITA:**
+#   sulla scena del driver col seme `11` la ### **prima nascita e' al passo `216`**, quindi
+#   una finestra di `50` passi girava ### **PRIMA che gli involucri lavorassero.**
+#   ### ⭐ **Lo ha chiesto LUCA, e il difetto e' uscito al primo giro vero:** la corsa di
+#   `A1` e' caduta ### **esattamente al `216`** *(commit `e0943b4`)*, perche' l'involucro
+#   vecchio leggeva la chiave di un arco che ### **non esisteva ancora come coppia.**
+#   ### ⚠ **IL COSTO E' DICHIARATO:** due bracci da `220` passi, non da `50`.
+PASSI = 220
 FUORI = os.path.join(_QUI, "_inerzia_osservatori")
 SIM = os.path.join(RADICE, "soliton_simulator.py")
 BLOB_ATTESO = "b8c21049"
@@ -140,17 +147,33 @@ def main(argv):
     v = next((x for x in o2 if x.nome == "verso"), None)
     orig = len(v.origine) if v is not None else 0
     tolti = (v._involucri is None) if v is not None else False
-    stampa("  controllo: origini registrate %d   involucri rimossi %s"
-           % (orig, "SI" if tolti else "NO"))
+    # ### ⛔ **IL CONTROLLO DI PRIMA ERA UN FALSO-UNO, E L'HO SCRITTO IO.** Chiedeva
+    #   *<<origini registrate `> 0`>>*, e passava ### **sempre**: i `471564` `seminato` li
+    #   scrive ### **l'INSTALLAZIONE** degli involucri, con un giro su `chiavi_archi(net)`
+    #   che ### **non passa da nessun involucro.** Era garantito da qualcosa che ### **non
+    #   parla del merito.** ### **La corsa caduta lo ha dimostrato col numero:**
+    #   `seminato 471564 | divisione 0 | schwinger 0` su `216` passi.
+    # ### ✔ **IL CONTROLLO VERO: almeno una NASCITA registrata.** Solo un arco nato
+    #   dentro la finestra puo' essere etichettato ### **dall'involucro**, e quindi
+    #   ### **solo quel numero dice che l'involucro ha lavorato.**
+    _nasc = sum(1 for x in v.origine.values()
+                if x not in ("seminato",)) if v is not None else 0
+    stampa("  controllo: origini registrate %d   di cui da NASCITA %d   involucri "
+           "rimossi %s" % (orig, _nasc, "SI" if tolti else "NO"))
     if orig == 0 or not tolti:
         stampa("  ### ⛔ IL BRACCIO <<CON OSSERVATORI>> NON HA OSSERVATO, o gli "
                "involucri sono rimasti: il confronto sarebbe un FALSO-UNO.")
+        ok = False
+    if _nasc == 0:
+        stampa("  ### ⛔ ZERO ARCHI DA NASCITA IN %d PASSI: la finestra NON esercita "
+               "gli involucri, e il verdetto NON vale per le nascite. E' il FALSO-UNO "
+               "che ha fatto cadere la corsa al passo 216." % PASSI)
         ok = False
     d = {"blob_sim": blob(SIM), "blob_verso": blob(MV.__file__),
          "blob_plaquette": blob(MP.__file__), "passi": PASSI,
          "esclusi": list(ESCLUSI), "attributi": len(f1),
          "solo_nudo": solo1, "solo_osservatori": solo2, "diversi": diff,
-         "origini_registrate": orig, "involucri_rimossi": bool(tolti),
+         "origini_registrate": orig, "origini_da_nascita": _nasc, "involucri_rimossi": bool(tolti),
          "esito": "PASSA" if ok else "FALLISCE",
          "a_valle": {"nudo": [int(N1.n), int(len(N1.i))],
                      "oss": [int(N2.n), int(len(N2.i))]}}

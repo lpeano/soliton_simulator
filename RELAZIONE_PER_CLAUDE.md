@@ -8701,3 +8701,72 @@ Lo strumento ### **non ha perso niente**: `216` righe per passo, le misure pesan
 E la cura dovrà portarsi dietro ### **la byte-inerzia su una finestra che CONTIENE una
 nascita** — perché quella a `50` passi ### **ha dimostrato zero** sugli involucri che
 contano.
+
+---
+
+# ✔ **LA CURA: UN INVOLUCRO SOLO, SUL PUNTO UNICO — E SONO DUE LEGGI IN MENO** *(2026-10-07)*
+
+### **Il punto giusto non era «una regola più in là»: era `nascita` stessa.** Quando
+`nascita(net, evento, c)` ritorna, ### **`i` e `j` sono di nuovo coerenti**, e
+### **l'evento arriva esplicito** invece di essere indovinato dalla voce avvolta.
+
+| | prima | dopo |
+|---|---|---|
+| involucri installati | ### **`3`** *(due regole + `_allaccia`)* | ### **`1`** |
+| punto di attacco | `REGOLE_NASCITA[(evento, "i")]` | ### **`nascita`** |
+| etichetta dell'origine | dedotta dalla voce avvolta | ### **`evento`, passato dal simulatore** |
+| costo per nascita | due giri su tutte le chiavi, con due `set` da `471564` | ### **un giro, senza `set`** |
+
+## ⛔ **E L'INVOLUCRO DI `_allaccia` È USCITO, per un CENSIMENTO e non per un'opinione**
+
+`_allaccia` è chiamata in ### **UN SOLO punto** — `soliton_simulator.py:5114`, dentro
+### **`semina`** *(`:5005`)* — cioè alla ### **costruzione** della rete e nei percorsi
+### **interattivi** *(il tasto `s`, l'accrescimento visuale del vuoto)*, mai dentro il ciclo
+di misura. ### **Qui gli osservatori si attaccano a rete GIÀ COSTRUITA: quell'involucro non
+poteva scattare MAI** — ed è `A8`, con il numero della corsa caduta a provarlo
+*(`allaccia: 0` su `216` passi)*.
+
+### ✔ **AL SUO POSTO UN CONTEGGIO, NON UNA LEGGE:** `archi_senza_origine`, misurato a
+### **ogni passo**. ### ⭐ **E quel numero PUÒ essere diverso da zero** — che è esattamente
+il contrario di un ramo silenzioso: se un giorno un arco nascesse per una via non avvolta,
+### **il numero lo direbbe invece di tacerlo.**
+
+## ⛔ **E `allaccia` È USCITA ANCHE DA `ORIGINI`: era un FALSO-ZERO**
+
+Tolto l'involucro, quell'etichetta ### **non può più comparire per costruzione.**
+### **Un conteggio che vale zero per certezza non è una misura: è un posto vuoto che
+SEMBRA una misura.** `ORIGINI` ora è ### **`("seminato", "divisione", "schwinger")`**, cioè
+### **le origini che l'involucro può SCRIVERE DAVVERO.**
+
+## ⛔ **IL SIGILLO DELLA BYTE-INERZIA RIFATTO: due difetti, nessuno nella fisica**
+
+### **`(1)` LA FINESTRA.** Era `50` passi; la prima nascita è al ### **`216`**. Ora è
+### **`220`**, e il costo è dichiarato: ### **due bracci da `220`, non da `50`.**
+
+### **`(2)` IL CONTROLLO POSITIVO ERA UN `FALSO-UNO`.** Chiedeva *«origini registrate
+`> 0`»* e passava ### **sempre**. Ora chiede ### **`origini_da_nascita > 0`**: solo un arco
+### **nato dentro la finestra** può essere etichettato dall'involucro. ### ⭐ **E su una
+finestra di `50` passi quel controllo NON PUÒ essere soddisfatto** — cioè il sigillo
+### **si rifiuta** invece di passare a vuoto. ### **Il controllo nuovo rende impossibile
+l'errore vecchio, invece di raccomandare di non farlo.**
+
+## IL COLLAUDO: `59` CASI, dai `49`
+
+I dieci nuovi provano l'involucro su un ### **modulo e una rete FINTI**, senza una corsa:
+l'originale chiamato, l'arco nuovo etichettato con l'evento, i vecchi non rietichettati, il
+ripristino ### **verificato identico**. ### ⛔ **E IL CASO CHE DEVE FALLIRE non è una
+ricostruzione a parole:** la `nascita` finta ### **registra le lunghezze intermedie**, si
+verifica che differiscano di ### **`1`**, e poi `chiavi_archi` su ### **quello stesso
+stato** alza `ValueError`. ### ⭐ **La caduta del passo `216`, riprodotta in millisecondi.**
+
+## ⛔ **E LA FORBICE DI `_inerzia_nascite.py` ERA SBAGLIATA IN DUE MODI MIEI**
+
+Trovati ### **rileggendo lo strumento prima di usarlo**, non dai numeri: dividevo i
+percentili per ### **`1000`** invece che per `100`, e avevo ### **`lo` e `hi` SCAMBIATI.**
+Ora la derivazione è ### **scritta nel codice**. ### ⚠ **Una forbice sbagliata non alza
+niente: avrebbe DICHIARATO un disaccordo inesistente, o taciuto uno vero.**
+
+## CHE COSA MANCA ANCORA PRIMA DELLA CORSA
+
+### **La byte-inerzia su `220` passi**, che è il controllo che `50` passi non hanno fatto.
+### ⛔ **Se fallisce, la corsa non parte, e lo dico.**

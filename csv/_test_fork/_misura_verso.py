@@ -125,7 +125,15 @@ EPS_NORMALE = 1e-12
 FINESTRA_SALTO = 50
 # ### LE ORIGINI DI UN ARCO, e sono QUATTRO. `seminato` e' tutto cio' che esiste al passo
 #   `0`; le altre tre si registrano con INVOLUCRI DI SOLA LETTURA sulle regole di nascita.
-ORIGINI = ("seminato", "allaccia", "divisione", "schwinger")
+# ### ⛔ **`allaccia` E' USCITA DA QUI, e il motivo e' un FALSO-ZERO:** il suo
+#   involucro e' stato tolto *(ramo silenzioso, `A8`)*, quindi quell'etichetta ### **non
+#   puo' PIU' comparire per costruzione.** ### **Un conteggio che vale zero per certezza
+#   non e' una misura: e' un posto vuoto che SEMBRA una misura.**
+#   ### ✔ **Le origini sono quelle che l'involucro di `nascita` puo' SCRIVERE DAVVERO**
+#   -- cioe' gli eventi convertiti al punto unico -- piu' `seminato`. ### **Gli archi che
+#   non ricadono in nessuna si contano a parte** *(`archi_senza_origine`)*, e quel numero
+#   ### **PUO' essere diverso da zero.**
+ORIGINI = ("seminato", "divisione", "schwinger")
 # ### I SECCHI DI ETA', in unita' di `tau_tw`: dichiarati PRIMA. Il taglio `> 2` e' quello
 #   del mandato; gli altri servono a far VEDERE la dipendenza dall'eta' invece di
 #   affidarsi a un taglio solo.
@@ -370,6 +378,7 @@ class Verso(object):
         self._prec = None
         self._acc = None            # l'accumulatore PARALLELO di `M5(b)`
         self.origine = {}           # chiave d'arco -> origine, dagli INVOLUCRI
+        self.senza_origine = {}     # passo -> archi la cui chiave non e' attribuita
         self._involucri = None
 
     # ---------------------------------------------------------------- la scena
@@ -647,41 +656,35 @@ class Verso(object):
         ### **la BYTE-INERZIA e' il controllo che dice se ha cambiato la dinamica.**
         """
         self._involucri = []
-        for ev, gr in ((("divisione", "i"), "divisione"), (("schwinger", "i"), "schwinger")):
-            voce = S.REGOLE_NASCITA.get(ev)
-            if voce is None:
-                raise SystemExit("[FERMO] regola di nascita `%s` assente." % (ev,))
-            orig = voce["regola"]
-            etich = gr
+        if not hasattr(S, "nascita"):
+            raise SystemExit("[FERMO] `nascita` assente dal modulo: l'involucro non ha "
+                             "dove attaccarsi.")
+        _on = S.nascita
 
-            def _invol(_net, _c, _orig=orig, _et=etich):
-                _prima = set(chiavi_archi(_net).tolist())
-                _r = _orig(_net, _c)
-                for _k in set(chiavi_archi(_net).tolist()) - _prima:
-                    self.origine[int(_k)] = _et
-                return _r
-
-            voce["regola"] = _invol
-            self._involucri.append((voce, orig))
-        # ### E `_allaccia` E' UN METODO DI `net`: si avvolge sull'ISTANZA.
-        _oa = net._allaccia
-
-        def _inv_all(*a, **kw):
-            _prima = set(chiavi_archi(net).tolist())
-            _r = _oa(*a, **kw)
-            for _k in set(chiavi_archi(net).tolist()) - _prima:
-                self.origine[int(_k)] = "allaccia"
+        def _inv_nascita(_net, _evento, _c, _orig=_on):
+            _r = _orig(_net, _evento, _c)
+            # ### **DOPO**, quando `i` e `j` sono di nuovo COERENTI.
+            for _k in chiavi_archi(_net).tolist():
+                if _k not in self.origine:
+                    self.origine[_k] = _evento
             return _r
 
-        # ### ⛔ **`_allaccia` E' UN METODO DI CLASSE, e assegnarlo su `net` CREA UN
-        #   ATTRIBUTO D'ISTANZA che prima non c'era.** ### **Quindi il ripristino non e'
-        #   una riassegnazione: e' una CANCELLAZIONE** -- e si registra ### **se la chiave
-        #   c'era**, invece di indovinarlo. ### ⚠ **E' LA STESSA REGOLA CHE `sola_lettura`
-        #   APPLICA GIA' ALLE CHIAVI NUOVE**, e che qui non avevo applicato: ### **la
-        #   BYTE-INERZIA l'ha presa, con `240` attributi identici e UNO in piu'.**
-        _cera = "_allaccia" in net.__dict__
-        net._allaccia = _inv_all
-        self._involucri.append((None, (net, _oa, _cera)))
+        S.nascita = _inv_nascita
+        self._involucri.append((S, "nascita", _on))
+        # ### ⛔ **L'INVOLUCRO DI `_allaccia` E' STATO TOLTO, e il motivo e' un
+        #   CENSIMENTO DEI CHIAMANTI, non un commento:** `_allaccia` e' chiamata in
+        #   ### **UN SOLO PUNTO** -- `soliton_simulator.py:5114`, dentro ### **`semina`**
+        #   *(`:5005`)* -- cioe' ### **alla COSTRUZIONE della rete e nei percorsi
+        #   INTERATTIVI** *(il tasto `s`, l'accrescimento visuale del vuoto)*, mai dentro
+        #   il ciclo di misura. ### **Qui gli osservatori si attaccano a rete GIA'
+        #   COSTRUITA: quell'involucro non poteva scattare MAI.**
+        #   ### ⛔ **Un ramo silenzioso non e' un ramo (`A8`)**, e la corsa caduta lo ha
+        #   dimostrato col numero: ### **`allaccia: 0` su `216` passi.**
+        #   ### ✔ **AL SUO POSTO C'E' UN CONTEGGIO, non una legge:** gli archi la cui
+        #   chiave non e' attribuita a nessuna origine si contano come ### **`?`**
+        #   *(`:803` li marca gia' cosi')*, e il referto li dichiara. ### **Se un giorno
+        #   un arco nascesse per una via non avvolta, quel numero lo direbbe invece di
+        #   tacerlo** -- ed e' il contrario di un ramo silenzioso.
         # ### TUTTO CIO' CHE ESISTE AL PASSO `0` E' `seminato`, per definizione.
         for _k in chiavi_archi(net).tolist():
             self.origine[int(_k)] = "seminato"
@@ -692,21 +695,12 @@ class Verso(object):
         if not self._involucri:
             return 0
         n = 0
-        for voce, orig in self._involucri:
-            if voce is None:
-                _net, _oa, _cera = orig
-                if _cera:
-                    _net._allaccia = _oa
-                else:
-                    # ### **LA CHIAVE NON C'ERA: si CANCELLA**, e il metodo di classe
-                    #   torna visibile da se'.
-                    net_d = _net.__dict__
-                    if "_allaccia" in net_d:
-                        del net_d["_allaccia"]
-                n += 1
-            else:
-                voce["regola"] = orig
-                n += 1
+        for _mod, _nome, _orig in self._involucri:
+            setattr(_mod, _nome, _orig)
+            # ### **E SI VERIFICA CHE SIA TOLTO**, invece di prometterlo.
+            if getattr(_mod, _nome) is not _orig:
+                raise SystemExit("[FERMO] `%s` non e' tornato all'originale." % _nome)
+            n += 1
         self._involucri = None
         return n
 
@@ -919,6 +913,13 @@ class Verso(object):
                   # ### IL FATTO CHE MI ERA SFUGGITO ora si MISURA a OGNI passo, invece
                   #   di essere assunto una volta e creduto per sempre.
                   "archi_i_maggiore_j": cur["archi_i_maggiore_j"]}
+        # ### ✔ **GLI ARCHI SENZA ORIGINE, CONTATI A OGNI PASSO.** Un arco nato per
+        #   una via che l'involucro non copre ### **si vede qui**, invece di sparire in un
+        #   `?`. ### **E' il conteggio che prende il posto dell'involucro morto.**
+        _so = sum(1 for _k in cur["chiavi"].tolist() if _k not in self.origine)
+        riga_p["archi_senza_origine"] = int(_so)
+        if _so:
+            self.senza_origine[k] = int(_so)
         if pr is None:
             riga_p.update({"nodi_confrontabili": None, "cambi_A_grezza": None,
                            "cambi_A_divg": None, "cambi_perc_geom": None,
@@ -1030,6 +1031,10 @@ class Verso(object):
                 "spinta_totale": tot, "spinta_passi": nn, "spinta_mediana": med,
                 "origini_registrate": {k: sum(1 for x in self.origine.values() if x == k)
                                        for k in ORIGINI},
+                # ### **GLI ARCHI SENZA ORIGINE, DICHIARATI.** Prende il posto
+                #   dell'involucro morto di `_allaccia`: non una legge, ### **un numero
+                #   che puo' essere diverso da zero.**
+                "archi_senza_origine": self.senza_origine,
                 "misure": {str(k): v for k, v in sorted(self.misure.items())},
                 "passi_misura": list(PASSI_MISURA),
                 "passi_pesanti": list(PASSI_PESANTI),
@@ -1369,6 +1374,88 @@ def collaudo():
     x4, y4, n4 = allinea(ch_c, d_c, ch_c, d_d)
     prova("primo passo: ### DEVE FALLIRE -- senza il filtro sarebbe `999.1`",
           abs(float(np.sum(np.abs(y4 - x4))) - 999.1) < 1e-9)
+
+    # ================================================= l'INVOLUCRO di NASCITA (la cura)
+    # ### \u26d4 **IL DIFETTO CHE QUESTI CASI PRESIDIANO E' COSTATO UNA CORSA DI `1425.8`
+    #   SECONDI**, caduta al passo `216`: l'involucro vecchio avvolgeva
+    #   `REGOLE_NASCITA[("divisione","i")]`, cioe' la regola che scrive ### **SOLO
+    #   `net.i`** -- e li' l'arco ### **non esiste ancora come COPPIA.**
+    class FintoNet(object):
+        def __init__(self):
+            self.i = [0, 1]
+            self.j = [1, 2]
+
+    class FintoMod(object):
+        """Un modulo FINTO con la sua `nascita`, per provare l'involucro SENZA una corsa."""
+
+        @staticmethod
+        def nascita(net, evento, c):
+            # ### **COME IL SIMULATORE: prima `i`, POI `j`** -- e fra i due l'arco e'
+            #   incompleto. Lo stato intermedio e' il PUNTO del collaudo.
+            net.i.append(2)
+            c["lunghezze_intermedie"] = (len(net.i), len(net.j))
+            net.j.append(3)
+            return "fatto"
+
+    _mod, _fn = FintoMod(), FintoNet()
+    _orig_nascita = _mod.nascita
+    _v = Verso()
+    _v.origine = {}
+    for _k in chiavi_archi(_fn).tolist():
+        _v.origine[_k] = "seminato"
+    _ctx = {}
+
+    def _inv(_net, _evento, _c, _o=_orig_nascita):
+        _r = _o(_net, _evento, _c)
+        for _kk in chiavi_archi(_net).tolist():
+            if _kk not in _v.origine:
+                _v.origine[_kk] = _evento
+        return _r
+
+    _mod.nascita = _inv
+    _ris = _mod.nascita(_fn, "divisione", _ctx)
+    prova("involucro: ### l'originale e' CHIAMATO e il suo valore TORNA", _ris == "fatto")
+    prova("involucro: ### l'arco NUOVO e' etichettato con l'EVENTO",
+          _v.origine.get(2 * BASE_CHIAVE + 3) == "divisione")
+    prova("involucro: ### i vecchi NON si rietichettano",
+          _v.origine.get(0 * BASE_CHIAVE + 1) == "seminato"
+          and _v.origine.get(1 * BASE_CHIAVE + 2) == "seminato")
+    prova("involucro: ### e il conto torna -- `3` archi, `3` origini",
+          len(_v.origine) == 3 and len(_fn.i) == 3)
+    _mod.nascita = _orig_nascita
+    prova("involucro: ### il ripristino VERIFICATO lo rimette identico",
+          _mod.nascita is _orig_nascita)
+
+    # ---- ### \u26d4 **IL CASO CHE DEVE FALLIRE: l'involucro VECCHIO, dentro la regola.**
+    #   ### **Non e' una ricostruzione a parole: e' lo STESSO stato intermedio**, preso
+    #   dal contesto che la `nascita` finta ha registrato.
+    _li = _ctx.get("lunghezze_intermedie")
+    prova("involucro: ### lo stato intermedio ESISTE e le lunghezze DIFFERISCONO di `1`",
+          _li is not None and _li[0] == _li[1] + 1)
+    _fn2 = FintoNet()
+    _fn2.i.append(2)        # ### **esattamente lo stato in cui la regola di `i` ritorna**
+    _rotto = False
+    try:
+        chiavi_archi(_fn2)
+    except ValueError:
+        _rotto = True
+    prova("involucro: ### DEVE FALLIRE -- `chiavi_archi` dentro la regola di `i` ALZA "
+          "`ValueError`, ed e' la caduta del passo `216` riprodotta SENZA una corsa",
+          _rotto)
+    prova("involucro: ### e DOPO la nascita NON alza piu' niente",
+          len(chiavi_archi(_fn).tolist()) == 3)
+
+    # ---- ### **L'ORDINE DELLE GRANDEZZE E' LA CAUSA, e si legge dal SIMULATORE**
+    try:
+        _o = list(mod.ORDINE_DI_NASCITA)
+        prova("involucro: ### `i` e' scritta PRIMA di `j` nel simulatore -- `%d` contro "
+              "`%d`, ed e' la CAUSA strutturale" % (_o.index("i"), _o.index("j")),
+              _o.index("i") < _o.index("j"))
+        prova("involucro: ### e la regola di `j` ESISTE *(se fosse `None` l'arco non si "
+              "completerebbe li')*",
+              mod.REGOLE_NASCITA[("divisione", "j")]["regola"] is not None)
+    except Exception as _e:
+        prova("involucro: ### l'ordine di nascita si legge dal simulatore (%s)" % _e, False)
 
     riga("-")
     stampa("  COLLAUDO: %d su %d" % (sum(esiti), len(esiti)))

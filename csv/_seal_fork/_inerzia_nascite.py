@@ -152,14 +152,19 @@ def main(argv):
         f = oo[k].get("fraz_tw_oltre_2pi")
         if not q or f is None:
             continue
-        qs = sorted((float(v), kk) for kk, v in q.items() if kk.startswith("q"))
-        sopra = [int(kk[1:]) / 10.0 for v, kk in qs if v > P2PI]
-        if not sopra:
-            lo, hi = 0.0, 1.0 - (max(int(kk[1:]) for _v, kk in qs) / 1000.0)
-        else:
-            lo = 1.0 - max(int(kk[1:]) for v, kk in qs if v > P2PI) / 1000.0
-            hi = 1.0 - min(int(kk[1:]) for v, kk in qs if v > P2PI) / 1000.0
-            lo, hi = min(lo, hi), max(lo, hi)
+        # ### ⛔ **LA FORBICE, E LA PRIMA VERSIONE ERA SBAGLIATA IN DUE MODI MIEI:**
+        #   dividevo i percentili per ### **`1000`** invece che per `100`, e avevo
+        #   ### **`lo` e `hi` SCAMBIATI.** ### **Trovato rileggendo lo strumento prima di
+        #   usarlo**, non dai numeri.
+        #   ### LA DERIVAZIONE, scritta: le chiavi sono `q000`..`q100`, cioe' PERCENTILI.
+        #     se `q_p > 2pi` allora ### **piu' di `1 - p/100`** degli archi sta sopra `2pi`;
+        #     se `q_p <= 2pi` allora ### **al piu' `1 - p/100`** ci sta.
+        #   ### ➜ `lo = 1 - min{p : q_p > 2pi}/100`  e  `hi = 1 - max{p : q_p <= 2pi}/100`.
+        pp = [(int(kk[1:]), float(v)) for kk, v in q.items() if kk.startswith("q")]
+        sotto = [p for p, v in pp if v <= P2PI]
+        sopra = [p for p, v in pp if v > P2PI]
+        hi = (1.0 - max(sotto) / 100.0) if sotto else 1.0
+        lo = (1.0 - min(sopra) / 100.0) if sopra else 0.0
         forbice.append((k, f, lo, hi, bool(lo - 1e-9 <= f <= hi + 1e-9)))
     fuori_f = [x for x in forbice if not x[4]]
     stampa("  controllo a FORBICE su `q_tw` contro la frazione sopra 2pi: %d passi, "
