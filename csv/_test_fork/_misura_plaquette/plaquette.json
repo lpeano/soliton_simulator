@@ -5,17 +5,17 @@
   "sistema": "Windows 11",
   "macchina": "AMD64"
  },
- "passi": 230,
- "passi_girati": 230,
- "stato": "DATI SALVATI",
+ "passi": 1000,
+ "passi_girati": 216,
+ "stato": "CADUTA al passo 216",
  "blob_sim": "b8c21049b85ba36a828f49dfa225d42419f3baf5",
  "blob_atteso": "b8c21049",
- "blob_strumento": "9a00080a6bd260731afc7a3aef99c8412218cbe9",
+ "blob_strumento": "e0593a8ffab7bd8f392ebebd650434001579fe07",
  "in_configurazione_del_driver": true,
- "secondi": 753.1,
+ "secondi": 1425.8,
  "a_valle": {
-  "n": 12813,
-  "archi": 471580
+  "n": 12803,
+  "archi": 471565
  },
  "plaquette": {
   "geometria": {
@@ -36,11 +36,45 @@
     "n": 12802,
     "a_plaquette_totali": 5534011,
     "a_degeneri": 0,
-    "a_secondi": 4.91,
+    "a_secondi": 5.59,
     "a_controllo_indipendente": 5534011,
     "a_archi_i_maggiore_j": 0,
     "a_cappi_esclusi": 0,
-    "a_secondi_controllo": 0.33,
+    "c_frustrate_per_classe": {
+     "MATERIA": {
+      "n": 1236,
+      "n_non_definiti": 0,
+      "mediana": 0.04637615963248433,
+      "media": 0.05252773906010924,
+      "q25": 0.011911756199542212,
+      "q75": 0.08434515571307231,
+      "min": 0.0,
+      "max": 0.31027535258562794
+     },
+     "BORDO": {
+      "n": 3483,
+      "n_non_definiti": 0,
+      "mediana": 0.24154025670945156,
+      "media": 0.23934806513346538,
+      "q25": 0.2107828888404428,
+      "q75": 0.269894218544057,
+      "min": 0.07770472205618649,
+      "max": 0.39098250336473755
+     },
+     "VUOTO": {
+      "n": 8083,
+      "n_non_definiti": 0,
+      "mediana": 0.25,
+      "media": 0.2503698152876064,
+      "q25": 0.22498050353769017,
+      "q75": 0.27599437450192943,
+      "min": 0.10101010101010101,
+      "max": 0.3954983922829582
+     }
+    },
+    "c_frustrate_totali": 1242840,
+    "c_plaquette_con_c0": 5534011,
+    "a_secondi_controllo": 0.35,
     "a_per_nodo_per_classe": {
      "MATERIA": {
       "n": 1236,
@@ -314,299 +348,50 @@
      "riferimento_perc_geom_frazione_cambiata": 0.5014060303077644
     }
    },
-   "50": {
-    "passo": 50,
-    "n": 12802,
-    "a_plaquette_totali": 5534011,
-    "a_degeneri": 0,
-    "a_secondi": 4.88,
-    "a_controllo_indipendente": 5534011,
-    "a_archi_i_maggiore_j": 0,
-    "a_cappi_esclusi": 0,
-    "a_secondi_controllo": 0.32,
-    "a_per_nodo_per_classe": {
-     "MATERIA": {
-      "n": 1240,
-      "mediana": 1505.0,
-      "media": 1509.2088709677419,
-      "max": 1905.0,
-      "min": 1156.0
-     },
-     "BORDO": {
-      "n": 3475,
-      "mediana": 1494.0,
-      "media": 1469.0494964028776,
-      "max": 1868.0,
-      "min": 508.0
-     },
-     "VUOTO": {
-      "n": 8087,
-      "mediana": 1330.0,
-      "media": 1190.2642512674663,
-      "max": 1886.0,
-      "min": 428.0
-     }
-    },
-    "a_nodi_senza_plaquette": 0,
-    "a_nodi_senza_plaquette_non_degenere": 0,
-    "b_modulo_medio_per_nodo_per_classe": {
-     "MATERIA": {
-      "n": 1240,
-      "n_non_definiti": 0,
-      "mediana": 0.06677794436119264,
-      "media": 0.06997585886141028,
-      "q25": 0.0538453536207115,
-      "q75": 0.08247206815639267,
-      "min": 0.03098612204620785,
-      "max": 0.254113270022265
-     },
-     "BORDO": {
-      "n": 3475,
-      "n_non_definiti": 0,
-      "mediana": 0.13027423153074338,
-      "media": 0.1424222791819885,
-      "q25": 0.10961311547892232,
-      "q75": 0.15928804189504864,
-      "min": 0.055863098744851195,
-      "max": 0.46818388710929354
-     },
-     "VUOTO": {
-      "n": 8087,
-      "n_non_definiti": 0,
-      "mediana": 0.14326243310770997,
-      "media": 0.15735184310155967,
-      "q25": 0.12416919030272358,
-      "q75": 0.17447023345641494,
-      "min": 0.06964996619905384,
-      "max": 0.5512660512592356
-     }
-    },
-    "b_campione": {
-     "passo_campione": 29,
-     "n": 190835,
-     "quantili": [
-      0.003093337527552026,
-      0.028013707747929925,
-      0.08754929814532936,
-      0.19972796673029092,
-      0.46994909398094054
-     ],
-     "max": 1.7624666502653472
-    },
-    "c_coerenza_per_classe": {
-     "MATERIA": {
-      "n": 1240,
-      "n_non_definiti": 0,
-      "mediana": 0.034283936051635266,
-      "media": 0.03975727871839438,
-      "q25": 0.02269075688788645,
-      "q75": 0.051042850656834345,
-      "min": 0.0032304253438125265,
-      "max": 0.15484008462369053
-     },
-     "BORDO": {
-      "n": 3475,
-      "n_non_definiti": 0,
-      "mediana": 0.029220578786803866,
-      "media": 0.033461785857483946,
-      "q25": 0.0199464507075962,
-      "q75": 0.042135681036445355,
-      "min": 0.0016547914175045054,
-      "max": 0.17691646822583276
-     },
-     "VUOTO": {
-      "n": 8087,
-      "n_non_definiti": 0,
-      "mediana": 0.034202349734113416,
-      "media": 0.04459395534075918,
-      "q25": 0.021949873136856923,
-      "q75": 0.056317461359649434,
-      "min": 0.0007418640289843772,
-      "max": 0.24388197337303336
-     }
-    },
-    "c_modulo_R_per_classe": {
-     "MATERIA": {
-      "n": 1240,
-      "n_non_definiti": 0,
-      "mediana": 3.550848972150508,
-      "media": 4.331624194735016,
-      "q25": 2.001219936576354,
-      "q75": 5.7844866290883985,
-      "min": 0.21475195428233965,
-      "max": 20.906926926929312
-     },
-     "BORDO": {
-      "n": 3475,
-      "n_non_definiti": 0,
-      "mediana": 5.817533148065033,
-      "media": 6.384319025937035,
-      "q25": 4.0512351411590934,
-      "q75": 8.039565957058127,
-      "min": 0.31740963746414314,
-      "max": 24.381207703568272
-     },
-     "VUOTO": {
-      "n": 8087,
-      "n_non_definiti": 0,
-      "mediana": 6.076683567595346,
-      "media": 6.934351187860385,
-      "q25": 4.181291729852129,
-      "q75": 8.631475999296786,
-      "min": 0.11534101005245279,
-      "max": 38.941545990232456
-     }
-    },
-    "d_cos_con_nb_per_classe": {
-     "MATERIA": {
-      "n": 1240,
-      "n_non_definiti": 0,
-      "mediana": 0.02611473719942707,
-      "media": 0.007214320990259959,
-      "q25": -0.4730806150020556,
-      "q75": 0.4920051173669663,
-      "min": -0.9992797307944166,
-      "max": 0.9997176631618022
-     },
-     "BORDO": {
-      "n": 3475,
-      "n_non_definiti": 0,
-      "mediana": 0.00120337184758915,
-      "media": 0.0021054580168702276,
-      "q25": -0.47285590105899133,
-      "q75": 0.4785583151637034,
-      "min": -0.9979012263457443,
-      "max": 0.9995613776790611
-     },
-     "VUOTO": {
-      "n": 8087,
-      "n_non_definiti": 0,
-      "mediana": 0.021913604542384824,
-      "media": 0.011283215920099923,
-      "q25": -0.49398128114792517,
-      "q75": 0.5112900350512035,
-      "min": -0.9997579352956241,
-      "max": 0.999926490654591
-     }
-    },
-    "d_frazione_oltre_mezzo_per_classe": {
-     "MATERIA": {
-      "n": 1240,
-      "n_non_definiti": 0,
-      "mediana": 0.0,
-      "media": 0.4846774193548387,
-      "q25": 0.0,
-      "q75": 1.0,
-      "min": 0.0,
-      "max": 1.0
-     },
-     "BORDO": {
-      "n": 3475,
-      "n_non_definiti": 0,
-      "mediana": 0.0,
-      "media": 0.4788489208633094,
-      "q25": 0.0,
-      "q75": 1.0,
-      "min": 0.0,
-      "max": 1.0
-     },
-     "VUOTO": {
-      "n": 8087,
-      "n_non_definiti": 0,
-      "mediana": 1.0,
-      "media": 0.5038951403487077,
-      "q25": 0.0,
-      "q75": 1.0,
-      "min": 0.0,
-      "max": 1.0
-     }
-    },
-    "d_caso_nullo": {
-     "media_attesa": 0.0,
-     "frazione_oltre_mezzo_attesa": 0.5,
-     "legge": "coseno fra due assi indipendenti in 3D: UNIFORME su [-1,1]"
-    },
-    "e_stabilita": {
-     "passo_precedente": 49,
-     "nodi_confrontabili": 12802,
-     "nodi_senza_R": 0,
-     "angolo_gradi_per_classe": {
-      "MATERIA": {
-       "n": 1240,
-       "n_non_definiti": 0,
-       "mediana": 0.8789947009543031,
-       "media": 1.2372315035883166,
-       "q25": 0.49803053773310263,
-       "q75": 1.4875163481082554,
-       "min": 0.02600656876900209,
-       "max": 28.478854795875154
-      },
-      "BORDO": {
-       "n": 3475,
-       "n_non_definiti": 0,
-       "mediana": 1.2797102039322954,
-       "media": 1.738650803091789,
-       "q25": 0.7528931947661802,
-       "q75": 2.1012352269738126,
-       "min": 0.008416695606137978,
-       "max": 34.48315175127813
-      },
-      "VUOTO": {
-       "n": 8087,
-       "n_non_definiti": 0,
-       "mediana": 1.5027065793661747,
-       "media": 2.1082265713489274,
-       "q25": 0.8724145211308036,
-       "q75": 2.539398328408284,
-       "min": 0.003093919848505673,
-       "max": 91.75811766862446
-      }
-     },
-     "riferimento_perc_geom_frazione_cambiata_per_classe": {
-      "MATERIA": {
-       "n": 1240,
-       "n_non_definiti": 0,
-       "mediana": 0.0,
-       "media": 0.0,
-       "q25": 0.0,
-       "q75": 0.0,
-       "min": 0.0,
-       "max": 0.0
-      },
-      "BORDO": {
-       "n": 3475,
-       "n_non_definiti": 0,
-       "mediana": 0.0,
-       "media": 0.0,
-       "q25": 0.0,
-       "q75": 0.0,
-       "min": 0.0,
-       "max": 0.0
-      },
-      "VUOTO": {
-       "n": 8087,
-       "n_non_definiti": 0,
-       "mediana": 0.0,
-       "media": 0.0,
-       "q25": 0.0,
-       "q75": 0.0,
-       "min": 0.0,
-       "max": 0.0
-      }
-     },
-     "riferimento_perc_geom_frazione_cambiata": 0.0
-    }
-   },
    "150": {
     "passo": 150,
     "n": 12802,
     "a_plaquette_totali": 5534011,
     "a_degeneri": 0,
-    "a_secondi": 4.86,
+    "a_secondi": 6.04,
     "a_controllo_indipendente": 5534011,
     "a_archi_i_maggiore_j": 0,
     "a_cappi_esclusi": 0,
-    "a_secondi_controllo": 0.31,
+    "c_frustrate_per_classe": {
+     "MATERIA": {
+      "n": 1243,
+      "n_non_definiti": 0,
+      "mediana": 0.046560111188325225,
+      "media": 0.055539301487473006,
+      "q25": 0.011978920476286943,
+      "q75": 0.08565795739629452,
+      "min": 0.0,
+      "max": 0.3717872086072923
+     },
+     "BORDO": {
+      "n": 3427,
+      "n_non_definiti": 0,
+      "mediana": 0.24175126903553298,
+      "media": 0.23865344151768436,
+      "q25": 0.21028341608255452,
+      "q75": 0.2700379320632485,
+      "min": 0.0636986301369863,
+      "max": 0.39098250336473755
+     },
+     "VUOTO": {
+      "n": 8132,
+      "n_non_definiti": 0,
+      "mediana": 0.25,
+      "media": 0.25029662044734924,
+      "q25": 0.22494260155857962,
+      "q75": 0.27593631175385136,
+      "min": 0.10101010101010101,
+      "max": 0.3954983922829582
+     }
+    },
+    "c_frustrate_totali": 1242840,
+    "c_plaquette_con_c0": 5534011,
+    "a_secondi_controllo": 0.37,
     "a_per_nodo_per_classe": {
      "MATERIA": {
       "n": 1243,
@@ -879,311 +664,45 @@
      },
      "riferimento_perc_geom_frazione_cambiata": 0.0
     }
-   },
-   "230": {
-    "passo": 230,
-    "n": 12813,
-    "a_plaquette_totali": 5533797,
-    "a_degeneri": 0,
-    "a_secondi": 4.92,
-    "a_controllo_indipendente": 5533797,
-    "a_archi_i_maggiore_j": 11,
-    "a_cappi_esclusi": 0,
-    "a_secondi_controllo": 0.3,
-    "a_per_nodo_per_classe": {
-     "MATERIA": {
-      "n": 1217,
-      "mediana": 1502.0,
-      "media": 1506.4264585045194,
-      "max": 1880.0,
-      "min": 1156.0
-     },
-     "BORDO": {
-      "n": 3473,
-      "mediana": 1494.0,
-      "media": 1464.7137921105673,
-      "max": 1905.0,
-      "min": 508.0
-     },
-     "VUOTO": {
-      "n": 8123,
-      "mediana": 1333.0,
-      "media": 1191.815708482088,
-      "max": 1862.0,
-      "min": 0.0
-     }
-    },
-    "a_nodi_senza_plaquette": 11,
-    "a_nodi_senza_plaquette_non_degenere": 11,
-    "b_modulo_medio_per_nodo_per_classe": {
-     "MATERIA": {
-      "n": 1217,
-      "n_non_definiti": 0,
-      "mediana": 0.3889285386729848,
-      "media": 0.43216009133193073,
-      "q25": 0.33242710399849273,
-      "q75": 0.47739387696898944,
-      "min": 0.20599305908641818,
-      "max": 2.241757937406545
-     },
-     "BORDO": {
-      "n": 3473,
-      "n_non_definiti": 0,
-      "mediana": 0.6831864380658454,
-      "media": 0.7525269732505732,
-      "q25": 0.5621156640836623,
-      "q75": 0.8502547643135009,
-      "min": 0.2885718352095864,
-      "max": 2.6188991533230985
-     },
-     "VUOTO": {
-      "n": 8123,
-      "n_non_definiti": 11,
-      "mediana": 0.8117284363791637,
-      "media": 0.8945686112067353,
-      "q25": 0.696611687483176,
-      "q75": 0.9952948039272649,
-      "min": 0.3864526395805784,
-      "max": 2.894758084203987
-     }
-    },
-    "b_campione": {
-     "passo_campione": 29,
-     "n": 190826,
-     "quantili": [
-      0.03740616669216967,
-      0.21678500626624228,
-      0.5348229581638225,
-      1.1088781272444095,
-      2.401662043243832
-     ],
-     "max": 9.067998966684586
-    },
-    "c_coerenza_per_classe": {
-     "MATERIA": {
-      "n": 1217,
-      "n_non_definiti": 0,
-      "mediana": 0.0395379002629478,
-      "media": 0.04445333973614718,
-      "q25": 0.025204838057724395,
-      "q75": 0.057902014961572684,
-      "min": 0.0008449028616794825,
-      "max": 0.22985509931407644
-     },
-     "BORDO": {
-      "n": 3473,
-      "n_non_definiti": 0,
-      "mediana": 0.04482770797991639,
-      "media": 0.04994630788928255,
-      "q25": 0.03068760636643222,
-      "q75": 0.06357134489963735,
-      "min": 0.002960187942716987,
-      "max": 0.23014759765808615
-     },
-     "VUOTO": {
-      "n": 8123,
-      "n_non_definiti": 11,
-      "mediana": 0.044565004525684786,
-      "media": 0.052945576820069014,
-      "q25": 0.029720006225441367,
-      "q75": 0.06692214633438479,
-      "min": 0.001219341203396854,
-      "max": 0.34287289738398236
-     }
-    },
-    "c_modulo_R_per_classe": {
-     "MATERIA": {
-      "n": 1217,
-      "n_non_definiti": 0,
-      "mediana": 22.803266917898174,
-      "media": 30.484070347939735,
-      "q25": 13.972825895370876,
-      "q75": 38.16838136315894,
-      "min": 0.3128498960330212,
-      "max": 419.9584187832419
-     },
-     "BORDO": {
-      "n": 3473,
-      "n_non_definiti": 0,
-      "mediana": 45.38790990352239,
-      "media": 53.369261033462244,
-      "q25": 29.744200652126885,
-      "q75": 67.26196340005912,
-      "min": 3.5565952890985786,
-      "max": 407.1465463017075
-     },
-     "VUOTO": {
-      "n": 8123,
-      "n_non_definiti": 11,
-      "mediana": 43.14663269727098,
-      "media": 51.14458294264486,
-      "q25": 28.520704952564405,
-      "q75": 64.4278299773235,
-      "min": 0.9009001243084689,
-      "max": 466.29869074116453
-     }
-    },
-    "d_cos_con_nb_per_classe": {
-     "MATERIA": {
-      "n": 1217,
-      "n_non_definiti": 0,
-      "mediana": -0.04610956206322797,
-      "media": -0.033760792739001774,
-      "q25": -0.5644497603354277,
-      "q75": 0.46116072691157695,
-      "min": -0.9975571346844059,
-      "max": 0.99812163200277
-     },
-     "BORDO": {
-      "n": 3473,
-      "n_non_definiti": 0,
-      "mediana": 0.009286474973583196,
-      "media": 0.004063998488877977,
-      "q25": -0.4898103698095149,
-      "q75": 0.4925145876618257,
-      "min": -0.9993113931662588,
-      "max": 0.9996198034427132
-     },
-     "VUOTO": {
-      "n": 8123,
-      "n_non_definiti": 11,
-      "mediana": -0.007492259282216267,
-      "media": -0.00778416952738272,
-      "q25": -0.5058584320085323,
-      "q75": 0.4812554799237705,
-      "min": -0.9997664248628365,
-      "max": 0.9997469758944917
-     }
-    },
-    "d_frazione_oltre_mezzo_per_classe": {
-     "MATERIA": {
-      "n": 1217,
-      "n_non_definiti": 0,
-      "mediana": 1.0,
-      "media": 0.5069843878389483,
-      "q25": 0.0,
-      "q75": 1.0,
-      "min": 0.0,
-      "max": 1.0
-     },
-     "BORDO": {
-      "n": 3473,
-      "n_non_definiti": 0,
-      "mediana": 0.0,
-      "media": 0.49323351569248486,
-      "q25": 0.0,
-      "q75": 1.0,
-      "min": 0.0,
-      "max": 1.0
-     },
-     "VUOTO": {
-      "n": 8123,
-      "n_non_definiti": 11,
-      "mediana": 0.0,
-      "media": 0.49297337278106507,
-      "q25": 0.0,
-      "q75": 1.0,
-      "min": 0.0,
-      "max": 1.0
-     }
-    },
-    "d_caso_nullo": {
-     "media_attesa": 0.0,
-     "frazione_oltre_mezzo_attesa": 0.5,
-     "legge": "coseno fra due assi indipendenti in 3D: UNIFORME su [-1,1]"
-    },
-    "e_stabilita": {
-     "passo_precedente": 229,
-     "nodi_confrontabili": 12811,
-     "nodi_senza_R": 9,
-     "angolo_gradi_per_classe": {
-      "MATERIA": {
-       "n": 1217,
-       "n_non_definiti": 0,
-       "mediana": 0.5596134882513895,
-       "media": 0.9183899969630765,
-       "q25": 0.3133385804694475,
-       "q75": 0.9595651118888692,
-       "min": 0.01780774253091301,
-       "max": 129.48165913133224
-      },
-      "BORDO": {
-       "n": 3473,
-       "n_non_definiti": 0,
-       "mediana": 0.6365285193182056,
-       "media": 0.9105245814653853,
-       "q25": 0.3558501748858642,
-       "q75": 1.1057763268246255,
-       "min": 0.003343031144492124,
-       "max": 19.92004249702531
-      },
-      "VUOTO": {
-       "n": 8121,
-       "n_non_definiti": 9,
-       "mediana": 0.816443593842318,
-       "media": 1.1900017994837953,
-       "q25": 0.4498136171012646,
-       "q75": 1.412823629368184,
-       "min": 0.003980715849700193,
-       "max": 108.82617411780156
-      }
-     },
-     "riferimento_perc_geom_frazione_cambiata_per_classe": {
-      "MATERIA": {
-       "n": 1217,
-       "n_non_definiti": 0,
-       "mediana": 0.0,
-       "media": 0.0,
-       "q25": 0.0,
-       "q75": 0.0,
-       "min": 0.0,
-       "max": 0.0
-      },
-      "BORDO": {
-       "n": 3473,
-       "n_non_definiti": 0,
-       "mediana": 0.0,
-       "media": 0.0,
-       "q25": 0.0,
-       "q75": 0.0,
-       "min": 0.0,
-       "max": 0.0
-      },
-      "VUOTO": {
-       "n": 8121,
-       "n_non_definiti": 0,
-       "mediana": 0.0,
-       "media": 0.00012313754463735992,
-       "q25": 0.0,
-       "q75": 0.0,
-       "min": 0.0,
-       "max": 1.0
-      }
-     },
-     "riferimento_perc_geom_frazione_cambiata": 7.805791897588011e-05
-    }
    }
   },
   "passi_misura": [
    1,
-   50,
    150,
-   230
+   230,
+   300,
+   400,
+   500,
+   700,
+   1000
   ],
   "passi_pesanti": [
    0,
    1,
-   49,
-   50,
    149,
    150,
    229,
-   230
+   230,
+   299,
+   300,
+   399,
+   400,
+   499,
+   500,
+   699,
+   700,
+   999,
+   1000
   ],
   "blocco": 400000,
   "passo_campione": 29,
   "eps_normale": 1e-12,
   "gira_sulla_stessa_corsa_di_M1_M3": true,
   "avvisi": []
+ },
+ "errore": {
+  "passo": 216,
+  "errore": "ValueError('operands could not be broadcast together with shapes (471565,) (471564,) ')",
+  "traccia": "Traceback (most recent call last):\n  File \"C:\\Users\\lpeano\\soliton_simulator\\csv\\_test_fork\\_misura_verso.py\", line 1087, in corsa\n    _passo.passo_pieno(S, N)\n    ~~~~~~~~~~~~~~~~~~^^^^^^\n  File \"C:\\Users\\lpeano\\soliton_simulator\\csv\\_passo.py\", line 226, in passo_pieno\n    return _ese(net)\n  File \"C:\\Users\\lpeano\\soliton_simulator\\soliton_simulator.py\", line 3051, in esegui_passo\n    getattr(net, _nome)()\n    ~~~~~~~~~~~~~~~~~~~^^\n  File \"C:\\Users\\lpeano\\soliton_simulator\\soliton_simulator.py\", line 8907, in mitosi\n    nascita(self, \"divisione\", c)\n    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\lpeano\\soliton_simulator\\soliton_simulator.py\", line 1819, in nascita\n    voce[\"regola\"](net, c)\n    ~~~~~~~~~~~~~~^^^^^^^^\n  File \"C:\\Users\\lpeano\\soliton_simulator\\csv\\_test_fork\\_misura_verso.py\", line 660, in _invol\n    for _k in set(chiavi_archi(_net).tolist()) - _prima:\n                  ~~~~~~~~~~~~^^^^^^\n  File \"C:\\Users\\lpeano\\soliton_simulator\\csv\\_test_fork\\_misura_verso.py\", line 233, in chiavi_archi\n    return np.minimum(ii, jj) * BASE_CHIAVE + np.maximum(ii, jj)\n           ~~~~~~~~~~^^^^^^^^\nValueError: operands could not be broadcast together with shapes (471565,) (471564,) \n"
  }
 }

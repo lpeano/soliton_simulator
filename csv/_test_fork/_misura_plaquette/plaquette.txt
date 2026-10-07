@@ -1,5 +1,5 @@
 ========================================================================================================
-M1-M4 -- IL VERSO E LE PLAQUETTE: 230 passi, UN braccio, SOLA LETTURA
+M1-M4 -- IL VERSO E LE PLAQUETTE: 1000 passi, UN braccio, SOLA LETTURA
   ### M4 gira sulla STESSA corsa di M1-M3, e il motivo e' nel docstring.
 ========================================================================================================
   simulatore b8c21049   atteso b8c21049
@@ -11,10 +11,33 @@ LA CONFIGURAZIONE INTERA (`P5`) -- non i flag toccati, TUTTI
   -> IN CONFIGURAZIONE DEL DRIVER: nessuna differenza. ZERO su 82.
 
   scena: n = 12802, archi = 471564, DT = 0.01
-  verso      geometria: {'r_regione': 4.096438164464869, 'R_CONN': 2.4000000000000004, 'u_bordo': 1.5858748267749136, 'sep': 6.1158, 'raggio_vuoto': 12.61223816446487, 'n_coorti': [411, 413, 413]}
+  verso      geometria: {'r_regione': 4.096438164464869, 'R_CONN': 2.4000000000000004, 'u_bordo': 1.5858748267749136, 'sep': 6.1158, 'raggio_vuoto': 12.61223816446487, 'n_coorti': [411, 413, 413], 'archi_seminati': 471564}
   plaquette  geometria: {'r_regione': 4.096438164464869, 'R_CONN': 2.4000000000000004, 'u_bordo': 1.5858748267749136, 'sep': 6.1158, 'raggio_vuoto': 12.61223816446487, 'n_coorti': [411, 413, 413]}
 
 ========================================================================================================
-LA CORSA: 230 passi, UN braccio, SOLA LETTURA
+LA CORSA: 1000 passi, UN braccio, SOLA LETTURA
 ========================================================================================================
-  ### I DATI SONO SALVATI.
+### LA CORSA E' CADUTA AL PASSO 216: ValueError('operands could not be broadcast together with shapes (471565,) (471564,) ')
+Traceback (most recent call last):
+  File "C:\Users\lpeano\soliton_simulator\csv\_test_fork\_misura_verso.py", line 1087, in corsa
+    _passo.passo_pieno(S, N)
+    ~~~~~~~~~~~~~~~~~~^^^^^^
+  File "C:\Users\lpeano\soliton_simulator\csv\_passo.py", line 226, in passo_pieno
+    return _ese(net)
+  File "C:\Users\lpeano\soliton_simulator\soliton_simulator.py", line 3051, in esegui_passo
+    getattr(net, _nome)()
+    ~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\lpeano\soliton_simulator\soliton_simulator.py", line 8907, in mitosi
+    nascita(self, "divisione", c)
+    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lpeano\soliton_simulator\soliton_simulator.py", line 1819, in nascita
+    voce["regola"](net, c)
+    ~~~~~~~~~~~~~~^^^^^^^^
+  File "C:\Users\lpeano\soliton_simulator\csv\_test_fork\_misura_verso.py", line 660, in _invol
+    for _k in set(chiavi_archi(_net).tolist()) - _prima:
+                  ~~~~~~~~~~~~^^^^^^
+  File "C:\Users\lpeano\soliton_simulator\csv\_test_fork\_misura_verso.py", line 233, in chiavi_archi
+    return np.minimum(ii, jj) * BASE_CHIAVE + np.maximum(ii, jj)
+           ~~~~~~~~~~^^^^^^^^
+ValueError: operands could not be broadcast together with shapes (471565,) (471564,) 
+

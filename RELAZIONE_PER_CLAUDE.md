@@ -8618,3 +8618,86 @@ un lato trovati stanno tutti in ### **`_diag_completa`** *(diagnostica)* e in `_
 
 > ### ⛔ **E LA DECISIONE SU `D31` COME CANDIDATO AD ANTICIPO È DI LUCA.** ### **Io dico
 > che si PUÒ fare prima; non che si DEBBA.**
+
+---
+
+# ⛔ **LA CORSA DI `A1` È CADUTA AL PASSO `216`, LA PRIMA NASCITA — E IL DIFETTO È MIO** *(2026-10-07)*
+
+> ### ⭐ **LUCA AVEVA RAGIONE, E IL CONTROLLO CHE HA CHIESTO HA PAGATO PRIMA DI GIRARE.**
+> La byte-inerzia di `d01cc2a` girava su ### **`50` passi**, cioè ### **PRIMA della prima
+> nascita (`216`)**. Gli involucri di nascita ### **non sono mai stati esercitati mentre
+> lavorano.** ### **Alla prima nascita vera la corsa è caduta**, dopo `1425.8` secondi e
+> `215` passi buoni.
+
+## L'ERRORE, al bit
+
+```
+File "csv/_test_fork/_misura_verso.py", line 660, in _invol
+    for _k in set(chiavi_archi(_net).tolist()) - _prima:
+File "csv/_test_fork/_misura_verso.py", line 233, in chiavi_archi
+    return np.minimum(ii, jj) * BASE_CHIAVE + np.maximum(ii, jj)
+ValueError: operands could not be broadcast together with shapes (471565,) (471564,)
+```
+
+### **LA PREMESSA SBAGLIATA ERA LA MIA, e non è un dettaglio di indici:** avevo avvolto la
+voce ### **`REGOLE_NASCITA[("divisione", "i")]`**, cioè la regola che scrive ### **SOLO
+`net.i`.** Quando quella regola ritorna, ### **`net.i` ha `471565` voci e `net.j` ancora
+`471564`**: ### ⛔ **l'arco NON ESISTE ANCORA COME COPPIA, e la sua chiave non è formabile
+in quel punto.**
+
+### ⚠ **Quindi l'involucro non era «fragile»: era IMPOSSIBILE.** Sarebbe caduto alla prima
+nascita di ### **qualunque** corsa. ### **Non c'è nessuna finestra in cui funzionava.**
+
+## ⛔ **E IL CONTROLLO POSITIVO DELLA BYTE-INERZIA ERA UN `FALSO-UNO`**
+
+Il sigillo `_inerzia_osservatori.py` dichiarava un controllo positivo:
+*«le origini registrate sono `> 0`»*. ### **Passava.** Ma i numeri della corsa caduta
+dicono perché:
+
+| origine | registrate in `216` passi |
+|---|--:|
+| `seminato` | ### **`471564`** |
+| `allaccia` | ### **`0`** |
+| `divisione` | ### **`0`** |
+| `schwinger` | ### **`0`** |
+
+### ⛔ **I `471564` li scrive l'INSTALLAZIONE degli involucri**, con un giro su
+`chiavi_archi(net)` che ### **non passa da nessun involucro.** Il controllo positivo era
+garantito da qualcosa che ### **non parla del merito** — ed è esattamente il `FALSO-UNO`
+che la mia stessa lista di trappole nomina. ### **L'avevo scritto io, e l'ho fatto lo
+stesso.**
+
+### E UN SECONDO FATTO, dal censimento dei chiamanti *(non dal commento)*
+
+`_allaccia` è chiamata in ### **UN SOLO PUNTO** — `:5114`, dentro ### **`semina`**
+*(`:5005`)* — cioè ### **alla COSTRUZIONE della rete, PRIMA che gli osservatori si
+attacchino.** ### ⚠ **Quindi il suo involucro è un ramo SILENZIOSO (`A8`): le sue `0`
+registrazioni non sono un caso, sono una certezza.** Va ### **dichiarato**, non lasciato lì
+a sembrare una misura.
+
+## CHE COSA LA CORSA HA SALVATO LO STESSO
+
+Lo strumento ### **non ha perso niente**: `216` righe per passo, le misure pesanti a
+`1` e `150`, il traceback nel json, e lo stato `CADUTA al passo 216`.
+
+| | |
+|---|--:|
+| passi buoni | ### **`215`** *(più il `216` caduto)* |
+| secondi | `1425.8` |
+| spinta mediana `perc_geom` | ### **`0.0`** |
+| spinta mediana `A` | `8455.60` |
+| spinta mediana `D` | ### **`4221.82`** *(la minore delle tre non nulle)* |
+| spinta mediana `MEM` | `6889.75` |
+| frazione con `|tw| > 2pi` al passo `215` | `0.5685 %` |
+| avvisi | ### **`0`** |
+
+> ### ⛔ **QUESTI NUMERI SONO TUTTI SOTTO IL `216`, cioè nella finestra GIÀ VISTA.**
+> ### **Non rispondono a nessuna delle previsioni di `A1`, che sono tutte OLTRE il `216`.**
+> La corsa ### **va rifatta per intero** dopo la cura.
+
+## LA CURA NON STA IN QUESTO COMMIT
+
+### **Il fallimento si committa da solo, e la correzione è un commit a sé** *(par.5)*.
+E la cura dovrà portarsi dietro ### **la byte-inerzia su una finestra che CONTIENE una
+nascita** — perché quella a `50` passi ### **ha dimostrato zero** sugli involucri che
+contano.
