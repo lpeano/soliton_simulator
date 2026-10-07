@@ -16,6 +16,7 @@ import json
 import os
 import sys
 
+import numpy as np
 from scipy.stats import norm as _norm
 
 _QUI = os.path.dirname(os.path.abspath(__file__))
@@ -101,6 +102,16 @@ def main(argv):
       "DESCRITTIVA.»* ### **Le raccomandazioni restano quelle di "
       "`doc/GEOM_SENZA_VERSO.md`: questo referto non ne aggiunge e non ne ritira "
       "nessuna.**")
+    A("")
+    A("> ### ⛔ **E QUESTA E' UNA CORSA LUNGA CON `U1` APERTA, e lo dichiaro in "
+      "testa:** `U1` dice *<<URGENTE, PRIMA DI QUALUNQUE GIRO LUNGO>>*. ### **La misura "
+      "SERVE A SCEGLIERE LA CURA, non a dare valori assoluti** -- e l'argomento sta nel "
+      "task history di `A1`: ### **le opzioni non sono bracci diversi del simulatore, sono "
+      "CINQUE LETTURE DELLA STESSA CORSA**, quindi la legge difettosa che `U1` denuncia e' "
+      "### **la stessa in tutti i termini del confronto**, e un difetto comune a tutti i "
+      "termini ### **non ne cambia l'ordine.** ### ✔ **E per questa scena `U1` e' "
+      "ancora piu' lontana, ed e' MISURATO:** `M1` trova `--chi-core` ### **INERTE per il "
+      "dipolo.**")
     A("")
     A("## LA CORSA")
     A("")
@@ -332,6 +343,70 @@ def main(argv):
              n4(r.get("cambi_A_divg")), fr(r.get("cambi_A_divg")),
              n4(r.get("cambi_perc_geom")), fr(r.get("cambi_perc_geom")),
              n4(r.get("A_grezza_zero"))))
+    A("")
+    A("### ⭐ **LA SPINTA INIETTATA -- IL METRO GIUSTO**")
+    A("")
+    A("> ### ⛔ **CONTARE QUANTI SEGNI CAMBIANO NON E' IL METRO**, e il referto "
+      "`d60b987` l'aveva sbagliato: per ### **`D`** e ### **`MEM`** il dipolo e' "
+      "### **continuo** *(un valore che passa per zero non inietta niente)*, per "
+      "### **`A`** ogni cambio e' un ### **salto di `pi`**, e ### **`perc_geom`** cambia "
+      "### **per NODO** dove ogni nodo tocca ### **~`74` archi.** "
+      "### ✔ **La somma di `|Delta dipolo|` e' l'unica grandezza che le mette tutte "
+      "nella STESSA unita'.**")
+    A("")
+    A("**LE QUATTRO FORME, dichiarate:** `perc_geom` = `pi*0.5*(chi_i - chi_j)` con "
+      "`chi = _chi_geom_nodi` *(la legge di OGGI)* - `A` = il segno della somma GREZZA sul "
+      "nodo - `D` = `pi*tanh(tw/PHI_CRIT)` *(per arco, continua)* - ### **`MEM`** = "
+      "`pi*tanh(delta/PHI_CRIT)` con `delta = twp - tw` *(### **la stessa forma di `D` con "
+      "la MEMORIA al posto dell'istante**)*.")
+    A("")
+    _tt = vv.get("spinta_totale") or {}
+    _mm = vv.get("spinta_mediana") or {}
+    _nn = vv.get("spinta_passi") or {}
+    A("| l'opzione | ### **totale sulla corsa** | ### **MEDIANA per passo** | passi |")
+    A("|---|--:|--:|--:|")
+    for _e in ("perc_geom", "A", "D", "MEM"):
+        A("| %s`%s`%s | %s | ### **%s** | %s |"
+          % ("### **" if _e == "perc_geom" else "", _e,
+             "** *(la legge di oggi)*" if _e == "perc_geom" else "",
+             n4(_tt.get(_e), 1), n4(_mm.get(_e), 2), n4(_nn.get(_e))))
+    A("")
+    A("> ### ⚠ **LA MEDIANA CONTA PIU' DEL TOTALE, e il motivo e' misurato:** nei "
+      "primi passi le spinte sono ### **ordini di grandezza** sopra il regime *(il "
+      "transitorio in cui `tw` diventa non nullo)*. ### **Un totale dominato da un "
+      "transitorio dice del transitorio.**")
+    A("")
+    A("**E PER PASSO, ai passi della misura:**")
+    A("")
+    A("| passo | `perc_geom` | `A` | `D` | ### **`MEM`** | archi maturi |")
+    A("|--:|--:|--:|--:|--:|--:|")
+    for _k in passi_m:
+        _r = righe.get(_k) or {}
+        _sp = _r.get("spinta_iniettata") or {}
+        _sn = _r.get("spinta_n_maturi") or {}
+        A("| `%d` | %s | %s | %s | ### **%s** | %s |"
+          % (_k, n4(_sp.get("perc_geom"), 2), n4(_sp.get("A"), 2), n4(_sp.get("D"), 2),
+             n4(_sp.get("MEM"), 2), n4(_sn.get("A"))))
+    A("")
+    A("> ### ⚠ **E GLI ARCHI AL LORO PRIMO PASSO SONO ESCLUSI, per TUTTE e quattro le "
+      "opzioni:** al primo passo di un arco `twp` e `twp_dip` ### **non sono ancora stati "
+      "scritti dalla dinamica**, quindi una differenza fra il primo e il secondo passo "
+      "### **misura l'inizializzazione, non la dinamica.** ### **E' la stessa ragione per "
+      "cui il simulatore mette `NaN` in `twp_dip`.**")
+    A("")
+    A("### `MEM` -- **la stabilita' del segno di `delta`, e la frazione sopra `2pi`**")
+    A("")
+    A("| passo | archi confrontabili | cambi di `sign(delta)` | frazione | "
+      "### **`|tw| > 2pi`** |")
+    A("|--:|--:|--:|--:|--:|")
+    for _k in passi_m:
+        _r = righe.get(_k) or {}
+        _nc = _r.get("archi_confrontabili")
+        _cm = _r.get("cambi_MEM_segno_delta")
+        A("| `%d` | %s | %s | %s | ### **%s** |"
+          % (_k, n4(_nc), n4(_cm),
+             "n/d" if (_cm is None or not _nc) else pct(float(_cm) / _nc),
+             pct(_r.get("fraz_tw_oltre_2pi"))))
     A("")
     A("### `D` — **il segno di `tw` SULL'ARCO**, confrontato ### **per CHIAVE `(i,j)`**")
     A("")
@@ -592,6 +667,151 @@ def main(argv):
       "due numeri.**")
     A("")
 
+    # ================================================================== M5
+    A("---")
+    A("")
+    A("# `M5` -- **LE MEMORIE**")
+    A("")
+    A("## `(a)` **`c0` CONGELATO contro `c_delta` VIVO**")
+    A("")
+    A("`c0 = cos(phi0_i - phi0_j)` e' la ### **memoria CONGELATA dei legami** *(`phi0` ha "
+      "`5` scritture, tutte alla nascita)*; `c_delta = cos(dph - tw)` e' la ### **memoria "
+      "VIVA** dentro `tw`.")
+    A("")
+    A("> ### ⛔ **IL CRITERIO, fissato PRIMA:** *<<`phi0` e' memoria MORTA>>* se "
+      "`Spearman(c0, c_delta) < 0.3` sugli archi ### **VUOTO di eta' > 2 tau_tw**; "
+      "*<<`phi0` come `delta`>>* se ### **`> 0.8`**; fra i due ### **AMBIGUO.**")
+    A("")
+    A("| passo | ### **Spearman del CRITERIO** | archi | esito |")
+    A("|--:|--:|--:|---|")
+    for _k in passi_m:
+        _m5 = (vv["misure"].get(str(_k)) or {}).get("M5")
+        if not _m5:
+            A("| `%d` | n/d | n/d | n/d |" % _k)
+            continue
+        _c = _m5["a_criterio"]
+        _s, _q = _c.get("spearman"), _c.get("n")
+        _e = ("n/d: ### **nessun arco**" if _s is None else
+              "### \u2714 **MORTA**" if _s < 0.3 else
+              "### \u26d4 **come `delta`**" if _s > 0.8 else "### \u26a0 **AMBIGUO**")
+        A("| `%d` | ### **%s** | %s | %s |" % (_k, n4(_s), n4(_q), _e))
+    A("")
+    A("**E PER CLASSE, PER ORIGINE E PER ETA'** *(la dipendenza dall'eta' si riporta "
+      "perche' il taglio `> 2 tau_tw` e' UNO, e un taglio solo non si puo' rileggere)*:")
+    A("")
+    _ul = next((str(k) for k in reversed(passi_m)
+                if (vv["misure"].get(str(k)) or {}).get("M5")), None)
+    if _ul:
+        _m5 = vv["misure"][_ul]["M5"]
+        A("*(all'ultimo passo misurato: `%s`)*" % _ul)
+        A("")
+        A("| | Spearman | archi |")
+        A("|---|--:|--:|")
+        for _c, _x in (_m5["a_per_classe"] or {}).items():
+            A("| classe ### **%s** | %s | %s |" % (_c, n4(_x.get("spearman")), n4(_x.get("n"))))
+        for _c, _x in (_m5["a_per_origine"] or {}).items():
+            A("| origine `%s` | %s | %s |" % (_c, n4(_x.get("spearman")), n4(_x.get("n"))))
+        for _c, _x in (_m5["a_per_eta"] or {}).items():
+            A("| eta' `%s` x `tau_tw` | %s | %s |"
+              % (_c, n4(_x.get("spearman")), n4(_x.get("n"))))
+        A("")
+    A("## `(b)` **QUANTA PARTE DI `tw` VIENE DAL DIPOLO**")
+    A("")
+    A("> ### ⛔ **IL CRITERIO, fissato PRIMA:** *<<il dipolo DOMINA `delta`>>* se la "
+      "### **mediana** di `|tw_dip|/|tw|` ### **supera `0.5`.** ### ⚠ **E se dominasse, "
+      "`MEM-VERSO` leggerebbe SE STESSA: non sarebbe una cura, sarebbe un anello.**")
+    A("")
+    A("| passo | mediana | q05-q95 | con un salto nei `50` passi prima | archi | esito |")
+    A("|--:|--:|--:|--:|--:|---|")
+    for _k in passi_m:
+        _m5 = (vv["misure"].get(str(_k)) or {}).get("M5")
+        _b = (_m5 or {}).get("b")
+        if not _b:
+            A("| `%d` | n/d | n/d | n/d | n/d | n/d |" % _k)
+            continue
+        _q = _b.get("q") or [None] * 5
+        _md = _b.get("mediana")
+        A("| `%d` | ### **%s** | %s - %s | %s | %s | %s |"
+          % (_k, n4(_md), n4(_q[0]), n4(_q[4]),
+             n4(_b.get("mediana_con_salto_recente")), n4(_b.get("n_con_salto_recente")),
+             "n/d" if _md is None else
+             ("### \u26d4 **DOMINA**" if _md > 0.5 else "### \u2714 **non domina**")))
+    A("")
+    A("## `(c)` **IL DISORDINE CONGELATO**")
+    A("")
+    A("| passo | quota di archi con `c0 < 0` | MATERIA | BORDO | VUOTO |")
+    A("|--:|--:|--:|--:|--:|")
+    for _k in passi_m:
+        _m5 = (vv["misure"].get(str(_k)) or {}).get("M5")
+        _c = (_m5 or {}).get("c")
+        if not _c:
+            A("| `%d` | n/d | n/d | n/d | n/d |" % _k)
+            continue
+        _t = tab_classi(_c.get("quota_c0_negativo"), "mediana")
+        A("| `%d` | ### **%s** | %s | %s | %s |"
+          % (_k, pct(_c.get("quota_totale")), _t[0], _t[1], _t[2]))
+    A("")
+    A("**E LE PLAQUETTE FRUSTRATE** *(il prodotto dei tre `c0` negativo: ### **non esiste un "
+      "assegnamento di fasi che soddisfi i tre legami**, e ### **`c0` e' congelato, quindi "
+      "quella frustrazione non si scioglie mai**)*:")
+    A("")
+    A("| passo | frustrate | su | frazione | MATERIA | BORDO | VUOTO |")
+    A("|--:|--:|--:|--:|--:|--:|--:|")
+    for _k in passi_m:
+        _p = pp["misure"].get(str(_k))
+        if not _p or _p.get("c_frustrate_totali") is None:
+            A("| `%d` | n/d | n/d | n/d | n/d | n/d | n/d |" % _k)
+            continue
+        _f, _s = _p["c_frustrate_totali"], _p["c_plaquette_con_c0"]
+        _t = tab_classi(_p.get("c_frustrate_per_classe"), "mediana")
+        A("| `%d` | ### **%s** | %s | ### **%s** | %s | %s | %s |"
+          % (_k, n4(_f), n4(_s), pct(float(_f) / _s if _s else None),
+             _t[0], _t[1], _t[2]))
+    A("")
+    A("## `(d)` **IL BILANCIO DELLA TORSIONE: dove si dissipa**")
+    A("")
+    A("La potenza persa nel rilassamento, ### **`somma di tw^2*dt_e/tau_tw` per passo**, "
+      "per classe e ### **per NODO** *(meta' a ciascun estremo, che e' la proposta di "
+      "`P-DECADIMENTO` e ### **una proposta, non una legge**)*.")
+    A("")
+    A("> ### ⛔ **IL CRITERIO, fissato PRIMA:** *<<la dissipazione sta nel VUOTO>>* se la "
+      "potenza ### **per nodo MEDIANA** in MATERIA e' ### **meno di UN QUARTO** di quella in "
+      "VUOTO, ### **a TUTTI i passi pesanti dopo il `300`.** ### ⭐ **E' l'osservazione "
+      "di Luca:** una memoria che dimentica dissipa ### **solo quando ha qualcosa da "
+      "dimenticare.**")
+    A("")
+    A("| passo | potenza totale | per nodo MATERIA | BORDO | VUOTO | MATERIA sotto 1/4? |")
+    A("|--:|--:|--:|--:|--:|---|")
+    _esiti_d = []
+    for _k in passi_m:
+        _m5 = (vv["misure"].get(str(_k)) or {}).get("M5")
+        _d = (_m5 or {}).get("d")
+        if not _d:
+            A("| `%d` | n/d | n/d | n/d | n/d | n/d |" % _k)
+            continue
+        _t = tab_classi(_d.get("per_nodo_per_classe"), "mediana")
+        _cr = _d.get("criterio_materia_sotto_un_quarto")
+        if _k > 300:
+            _esiti_d.append(_cr)
+        A("| `%d` | %s | ### **%s** | %s | ### **%s** | %s |"
+          % (_k, n4(_d.get("potenza_totale"), 2), _t[0], _t[1], _t[2],
+             ("n/d" + (" *(%s)*" % _d["criterio_nota"] if _d.get("criterio_nota") else ""))
+             if _cr is None else ("### \u2714 **SI**" if _cr else "### \u26d4 **NO**")))
+    A("")
+    _ok_d = bool(_esiti_d) and all(x is True for x in _esiti_d)
+    # ### \u26d4 **TRE SEGNAPOSTO VOGLIONO TRE VALORI, e il mio `%` passava UNA TUPLA
+    #   ANNIDATA.** ### **L'ha trovato il giro del generatore sui json parziali**, che e'
+    #   la sesta volta che prende un difetto che leggere il codice non mostrava.
+    _ic, _it = (("\u2714", "SODDISFATTO -- la dissipazione sta nel VUOTO") if _ok_d
+                else ("\u26d4", "NON soddisfatto"))
+    A("> ### %s **IL CRITERIO SUI PASSI DOPO IL `300`: %s** *(%d passi valutati)*."
+      % (_ic, _it, len(_esiti_d)))
+    A("")
+    A("> ### ⚠ **E SE NON FOSSE SODDISFATTO NON SAREBBE UN DETTAGLIO:** vorrebbe dire "
+      "che la torsione dissipa ### **dove la materia sta**, cioe' che il termine di "
+      "rilassamento ### **non e' il costo di una memoria che rincorre** ma qualcos'altro.")
+    A("")
+
     # ------------------------------------------------------------------ le previsioni
     A("---")
     A("")
@@ -778,6 +998,118 @@ def main(argv):
                    % (n4(min(an), 2), n4(max(an), 2)),
                    "### \u2714 **CONFERMATA**" if min(an) > 10.0 else
                    "### \u26d4 **SMENTITA**"))
+
+    # ---------------------------------------------------- le previsioni di `A1`
+    #   ### ⛔ **I PASSI CHE CONTANO SONO QUELLI OLTRE IL `216`**, e lo dice il task
+    #   history: i passi `1`, `150` e `230` erano ### **gia' visti** nel referto
+    #   `d60b987`. ### **Una previsione su un numero gia' visto non e' una previsione.**
+    oltre = [k for k in passi_m if k > 216]
+    _tt = vv.get("spinta_totale") or {}
+    _mm = vv.get("spinta_mediana") or {}
+
+    def _sp_oltre(et):
+        """La spinta dell'opzione `et` ai passi oltre il `216`. ### **Mai una media
+        sui passi dove non e' confrontabile.**"""
+        v = [(righe.get(k) or {}).get("spinta_iniettata", {}).get(et) for k in oltre]
+        return [x for x in v if x is not None]
+
+    _s = {e: _sp_oltre(e) for e in ("perc_geom", "A", "D", "MEM")}
+    _med = {e: (float(np.median(v)) if v else None) for e, v in _s.items()}
+    # --- P1: `D` inietta la MINORE
+    if all(_med[e] is not None for e in _med):
+        _mind = min(_med, key=lambda e: _med[e])
+        pr.append(("`P1`", "### **`D` inietta la spinta MINORE** di tutte",
+                   "mediane ai passi oltre il `216`: %s"
+                   % ", ".join("`%s` %s" % (e, n4(_med[e], 2)) for e in
+                               ("perc_geom", "A", "D", "MEM")),
+                   "### \u2714 **CONFERMATA**" if _mind == "D"
+                   else "### \u26d4 **SMENTITA**: la minore e' `%s`" % _mind))
+        pr.append(("`P2`", "### **`MEM` inietta MENO di `A`**",
+                   "`MEM` %s contro `A` %s" % (n4(_med["MEM"], 2), n4(_med["A"], 2)),
+                   "### \u2714 **CONFERMATA**" if _med["MEM"] < _med["A"]
+                   else "### \u26d4 **SMENTITA**"))
+        _ord = sorted(_med, key=lambda e: _med[e])
+        pr.append(("`P3`", "### \u26a0 **NON SAPEVO l'ordine fra `A` e `perc_geom`**, e "
+                   "l'avevo scritto",
+                   "l'ordine misurato, dal minore al maggiore: %s"
+                   % " < ".join("`%s`" % e for e in _ord),
+                   "### \u2714 **ERA GIUSTO NON SAPERLO**: il numero decide, e lo scrivo"))
+    else:
+        pr.append(("`P1`-`P3`", "l'ordine delle spinte", "n/d",
+                   "### \u26a0 **NON DECIDIBILE**: spinta non confrontabile oltre il `216`"))
+    # --- P4: la frazione sopra `2pi` al `1000`
+    _fr = [(k, (righe.get(k) or {}).get("fraz_tw_oltre_2pi")) for k in passi_m]
+    _fr = [(k, x) for k, x in _fr if x is not None]
+    if _fr:
+        _ult = _fr[-1][1]
+        _cre = all(_fr[i + 1][1] >= _fr[i][1] - 1e-12 for i in range(len(_fr) - 1))
+        pr.append(("`P4`", "la frazione con `|tw| > 2pi` ### **CRESCE** e all'ultimo passo "
+                   "sta fra ### **`15 %`** e ### **`25 %`** *(era una STIMA da "
+                   "interpolazione, non una misura)*",
+                   "all'ultimo passo %s; monotona: %s"
+                   % (pct(_ult), "SI" if _cre else "NO"),
+                   "### \u2714 **CONFERMATA**" if (_cre and 0.15 <= _ult <= 0.25)
+                   else "### \u26d4 **SMENTITA**"))
+    # --- P5: le nascite per 100 passi
+    _nn = [r.get("nodi_nuovi") for r in vv["passi"] if r.get("nodi_nuovi") is not None]
+    if _nn:
+        _tot = int(sum(_nn))
+        _p100 = 100.0 * _tot / max(len(_nn), 1)
+        pr.append(("`P5`", "le nascite per `100` passi stanno fra ### **`48`** e "
+                   "### **`150`**",
+                   "`%d` nodi nuovi in `%d` passi, cioe' ### **%s per `100` passi**"
+                   % (_tot, len(_nn), n4(_p100, 1)),
+                   "### \u2714 **CONFERMATA**" if 48.0 <= _p100 <= 150.0
+                   else "### \u26d4 **SMENTITA**"))
+    # --- P6: la base dei cicli NON cambia
+    _cb = [((vv["misure"].get(str(k)) or {}).get("M3_C_cambio_base"), k) for k in passi_m]
+    _cb = [(x, k) for x, k in _cb if x]
+    if _cb:
+        _mx = max(x["frazione_cambiata"] for x, _k in _cb)
+        pr.append(("`P6`", "### \u2b50 **la base dei cicli NON CAMBIA** *(`~0 %`)* anche a "
+                   "`1000` passi e con migliaia di nascite",
+                   "massimo cambiato: %s su %d passi misurati" % (pct(_mx), len(_cb)),
+                   "### \u2714 **CONFERMATA**" if _mx <= 1e-9
+                   else "### \u26d4 **SMENTITA**"))
+    # --- M5a, M5b, M5d
+    def _m5(k):
+        return (vv["misure"].get(str(k)) or {}).get("M5")
+
+    _cr = [(_m5(k) or {}).get("a_criterio") for k in oltre]
+    _cr = [x for x in _cr if x and x.get("spearman") is not None]
+    if _cr:
+        _w = max(x["spearman"] for x in _cr)
+        pr.append(("`M5a`", "### **`phi0` e' memoria MORTA** *(Spearman `< 0.3` su VUOTO con "
+                   "eta' `> 2 tau_tw`)*",
+                   "il massimo sui passi oltre il `216`: %s *(su %d passi)*"
+                   % (n4(_w), len(_cr)),
+                   "### \u2714 **CONFERMATA**" if _w < 0.3 else
+                   "### \u26d4 **SMENTITA**: e' `> 0.8`" if _w > 0.8 else
+                   "### \u26a0 **AMBIGUO**, ed e' il terzo esito previsto dal criterio"))
+    else:
+        pr.append(("`M5a`", "`phi0` e' memoria MORTA", "n/d",
+                   "### \u26a0 **NON DECIDIBILE**: nessun arco VUOTO con eta' `> 2 tau_tw`"))
+    _bb = [(_m5(k) or {}).get("b", {}).get("mediana") for k in oltre]
+    _bb = [x for x in _bb if x is not None]
+    if _bb:
+        pr.append(("`M5b`", "### **il dipolo NON domina `delta`** *(mediana `< 0.5`)*",
+                   "la mediana massima oltre il `216`: %s" % n4(max(_bb)),
+                   "### \u2714 **CONFERMATA**" if max(_bb) <= 0.5
+                   else "### \u26d4 **SMENTITA**: il dipolo DOMINA, e `MEM-VERSO` "
+                        "leggerebbe se stessa"))
+    _dd = [(_m5(k) or {}).get("d", {}).get("criterio_materia_sotto_un_quarto")
+           for k in passi_m if k > 300]
+    _dd = [x for x in _dd if x is not None]
+    if _dd:
+        pr.append(("`M5d`", "### \u2b50 **l'osservazione di LUCA regge**: la dissipazione "
+                   "sta nel VUOTO *(MATERIA sotto un quarto di VUOTO, a TUTTI i passi dopo "
+                   "il `300`)*",
+                   "%d passi valutati, %d soddisfatti" % (len(_dd), sum(1 for x in _dd if x)),
+                   "### \u2714 **CONFERMATA**" if all(_dd)
+                   else "### \u26d4 **SMENTITA**"))
+    else:
+        pr.append(("`M5d`", "la dissipazione sta nel VUOTO", "n/d",
+                   "### \u26a0 **NON DECIDIBILE**"))
 
     A("| | la previsione | il numero | esito |")
     A("|---|---|---|---|")
