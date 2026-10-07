@@ -668,6 +668,85 @@ def main(argv):
       "due numeri.**")
     A("")
 
+    # ========================================== l'inerzia attraverso le NASCITE
+    #   ### \u2b50 **LO CHIEDE LUCA, e si legge dal json del SIGILLO, non si ricopia:**
+    #   *<<alla fine della corsa confronta PASSO PER PASSO e AL BIT i conteggi con
+    #   `amp0.json` [...] una differenza = il primo passo diverso e il campo vanno nel
+    #   referto, e i numeri di `A1` dopo quel passo NON VALGONO>>*.
+    _pn = os.path.join(RADICE, "csv", "_seal_fork", "_inerzia_nascite", "nascite.json")
+    _na = None
+    if os.path.exists(_pn):
+        try:
+            _na = json.load(io.open(_pn, encoding="utf-8"))
+        except Exception as _e:                      # noqa: BLE001
+            _na = {"_errore": str(_e)}
+    A("---")
+    A("")
+    A("# \u2b50 **L'INERZIA DEGLI OSSERVATORI ATTRAVERSO LE NASCITE** "
+      "*(il controllo di Luca, senza una corsa in piu')*")
+    A("")
+    if not _na:
+        A("> ### \u26d4 **IL SIGILLO NON HA GIRATO**, o il suo json non c'e': "
+          "### **questo referto NON puo' dire che gli osservatori non cambiano la "
+          "dinamica attraverso le nascite.** ### **Lo dico invece di ometterlo.**")
+        A("")
+    elif _na.get("_errore"):
+        A("> ### \u26d4 **IL JSON DEL SIGILLO NON SI LEGGE:** `%s`." % _na["_errore"])
+        A("")
+    else:
+        A("Il riferimento e' ### **`%s`** *(blob `%s`)*, il braccio `_AMP = 0` su "
+          "### **`%s` passi in comune**, confrontato con la corsa osservata "
+          "*(blob `%s`)*."
+          % (_na.get("riferimento"), str(_na.get("blob_riferimento"))[:8],
+             n4(_na.get("passi_comuni")), str(_na.get("blob_osservata"))[:8]))
+        A("")
+        A("> ### \u26d4 **IL CRITERIO E' DI LUCA, fissato prima di guardare:** "
+          "### **zero differenze su tutti i `1000` passi** = gli osservatori, involucri "
+          "compresi, ### **non cambiano la dinamica**; ### **una differenza** = il primo "
+          "passo diverso e il campo vanno qui, e ### **i numeri di `A1` dopo quel passo "
+          "NON VALGONO.**")
+        A("")
+        A("| campo | allineamento | differenze | era quello previsto dalla derivazione? |")
+        A("|---|--:|--:|---|")
+        for _c, _x in (_na.get("esito_per_campo") or {}).items():
+            _al, _df = _x.get("allineamento"), _x.get("differenze")
+            _at, _co = _x.get("atteso_dalla_derivazione"), _x.get("coincide_con_atteso")
+            A("| `%s` | %s | ### **%s** | %s |"
+              % (_c,
+                 "n/d" if _al is None else "### **`rif[k] = oss[k%+d]`**" % _al,
+                 n4(_df),
+                 "### \u2b50 **SI** *(`%+d`)*" % _at if _co else
+                 ("### \u26a0 **NO: la derivazione prevedeva `%+d`**" % _at)
+                 if _at is not None else "*(nessun atteso dichiarato)*"))
+        _fb = _na.get("forbice_q_tw") or {}
+        A("| la ### **forbice** su `q_tw` | `dec = -1` | ### **%s fuori forbice su %s** | "
+          "*(e' una FORBICE, non un'uguaglianza)* |"
+          % (n4(_fb.get("fuori")), n4(_fb.get("passi"))))
+        A("")
+        A("**E GLI ALTRI ALLINEAMENTI, per dire che lo zero NON e' un caso:**")
+        A("")
+        A("| | differenze |")
+        A("|---|--:|")
+        for _k, _vv in sorted((_na.get("differenze") or {}).items()):
+            A("| `%s` | %s |" % (_k, n4(_vv)))
+        A("")
+        if _na.get("esito") == "PASSA":
+            A("> ### \u2714 **IL CRITERIO DI LUCA E' SODDISFATTO: ZERO differenze su "
+              "`%s` passi.** ### **Gli osservatori, INVOLUCRI DI NASCITA COMPRESI, non "
+              "cambiano la dinamica** -- e ### **i numeri di `A1` qui sotto valgono per "
+              "tutti i `1000` passi.**" % n4(_na.get("passi_comuni")))
+        else:
+            A("> ### \u26d4 **IL CRITERIO NON E' SODDISFATTO**, e ### **i numeri di `A1` "
+              "dopo il primo passo diverso NON VALGONO** finche' non si trova la causa.")
+        A("")
+        A("> ### \u26a0 **E I CAMPI CHE `A1` NON REGISTRA SONO DICHIARATI:** %s. "
+          "### **Si confrontano `n` e `archi`, e non sono poco:** `n` e' ### **il conto "
+          "delle nascite integrato** e `archi` risente ### **sia della mitosi** *(`-1 +2`)* "
+          "### **sia dello Schwinger** *(`+2`)* -- ### **uno spostamento di UNA nascita di "
+          "UN passo si vedrebbe in entrambi.**"
+          % ", ".join("`%s`" % x for x in (_na.get("non_registrati") or [])))
+        A("")
+
     # ================================================================== M5
     def _crit_d(_d):
         """Il criterio di `M5(d)` ### **RICALCOLATO DALLE MEDIANE**, non letto dal json.
