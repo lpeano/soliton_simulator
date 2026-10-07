@@ -168,6 +168,9 @@ class Plaquette(object):
         ii, jj = ii[m], jj[m]
         tw = np.asarray(net.tw, float)[m]
         pos = np.asarray(net.pos, float)[:n]
+        # ### `c0` PER ARCO: `cos(phi0_i - phi0_j)`, la memoria CONGELATA dei legami.
+        _ph0 = np.asarray(net.phi0, float)[:n]
+        c0_arco = np.cos(_ph0[ii] - _ph0[jj])
         # ### ⛔ **QUI C'ERA UN'ASSUNZIONE, E LA CORSA DEL 2026-10-06 L'HA FATTA SALTARE
         #   AL PASSO `229`:** lo strumento pretendeva `i < j` su TUTTI gli archi, e si
         #   fermava. ### ✔ **La guardia ha fatto il suo lavoro** -- ha trovato `9` archi
@@ -233,6 +236,14 @@ class Plaquette(object):
         conta_ok = np.zeros(n, np.int64)
         somma_mod_ok = np.zeros(n)
         max_mod = np.zeros(n)
+        # ### ⭐ **`M5(c)`, seconda parte: LE PLAQUETTE FRUSTRATE.** Una plaquette e'
+        #   FRUSTRATA se il prodotto dei tre `c0 = cos(phi0_i - phi0_j)` e' NEGATIVO:
+        #   ### **non esiste un assegnamento di fasi che soddisfi tutti e tre i legami.**
+        #   ### ⚠ **E `c0` e' CONGELATO** *(`PHI0-CONGELATA`)*, quindi questa
+        #   frustrazione ### **non si scioglie mai**: e' disordine IMMUTABILE, e il conto
+        #   dice quanto.
+        frustrate = np.zeros(n, np.int64)
+        con_c0 = np.zeros(n, np.int64)
         degeneri = 0
         tot = 0
         camp_mod, camp_cls_v = [], []
@@ -243,6 +254,7 @@ class Plaquette(object):
         def svuota():
             nonlocal bu, bv, bw, quanti, degeneri, tot, camp_mod
             nonlocal camp_cls_v, conta, somma_mod, conta_ok, somma_mod_ok
+            nonlocal frustrate, con_c0
             if not bu:
                 return
             tu = np.concatenate(bu); tv = np.concatenate(bv); tw_ = np.concatenate(bw)
@@ -275,6 +287,14 @@ class Plaquette(object):
             # --- gli accumuli per NODO: ogni plaquette conta sui suoi TRE vertici
             vt = np.concatenate([tu, tv, tw_])
             conta += np.bincount(vt, minlength=n).astype(np.int64)
+            # ### LA FRUSTRAZIONE: il prodotto dei tre `c0`. ### **Negativo = frustrata.**
+            _pr = c0_arco[e_uv] * c0_arco[e_vw] * c0_arco[e_uw]
+            _fr = (_pr < 0.0)
+            con_c0 += np.bincount(vt, minlength=n).astype(np.int64)
+            if np.any(_fr):
+                frustrate += np.bincount(
+                    np.concatenate([tu[_fr], tv[_fr], tw_[_fr]]),
+                    minlength=n).astype(np.int64)
             somma_mod += np.bincount(vt, weights=np.concatenate([am, am, am]),
                                      minlength=n)
             np.maximum.at(max_mod, vt, np.concatenate([am, am, am]))
@@ -339,6 +359,7 @@ class Plaquette(object):
         camp_cls_v = (np.concatenate(camp_cls_v) if camp_cls_v else np.zeros(0, np.int64))
         return {"n": n, "tot": tot, "degeneri": degeneri, "secondi": secondi,
                 "archi_i_maggiore_j": fuori_convenzione, "cappi_esclusi": cappi,
+                "frustrate": frustrate, "con_c0": con_c0,
                 "controllo_indipendente": atteso,
                 "secondi_controllo": secondi_controllo,
                 "R": R, "conta": conta, "somma_mod": somma_mod, "max_mod": max_mod,
@@ -381,6 +402,13 @@ class Plaquette(object):
             "a_controllo_indipendente": d["controllo_indipendente"],
             "a_archi_i_maggiore_j": d["archi_i_maggiore_j"],
             "a_cappi_esclusi": d["cappi_esclusi"],
+            # ### `M5(c)`: la quota di plaquette FRUSTRATE per nodo, per classe.
+            #   ### ⚠ **`NaN` dove il nodo non ha plaquette**, non `0`.
+            "c_frustrate_per_classe": _per_classe_nan(
+                np.where(d["con_c0"] > 0,
+                         d["frustrate"] / np.maximum(d["con_c0"], 1), np.nan), cl),
+            "c_frustrate_totali": int(np.sum(d["frustrate"]) // 3),
+            "c_plaquette_con_c0": int(np.sum(d["con_c0"]) // 3),
             "a_secondi_controllo": round(d["secondi_controllo"], 2),
             "a_per_nodo_per_classe": a,
             "a_nodi_senza_plaquette": int(np.sum(conta == 0)),
@@ -513,6 +541,8 @@ def collaudo():
     r.pos = np.array([[0.0, 0, 0], [1, 0, 0], [0, 1, 0], [1, 1, 0], [9, 9, 9]])
     r._nb = np.tile(np.array([[0.0, 0, 1.0]]), (5, 1))
     r.perc_geom = np.zeros(5)
+    # ### `phi0` SERVE a `M5(c)`: sul `net` vero c'e' SEMPRE, quindi NESSUN ripiego (`A8`).
+    r.phi0 = np.zeros(5)
     pl = Plaquette()
     d = pl.enumera(r)
     prova("enumera: ### trova DUE triangoli, non uno e non sei", d["tot"] == 2)
@@ -538,6 +568,7 @@ def collaudo():
     r2.pos = np.array([[0.0, 0, 0], [1, 0, 0], [2, 0, 0]])   # ALLINEATI
     r2._nb = np.tile(np.array([[0.0, 0, 1.0]]), (3, 1))
     r2.perc_geom = np.zeros(3)
+    r2.phi0 = np.zeros(3)
     d2 = Plaquette().enumera(r2)
     prova("degeneri: ### un triangolo di tre nodi ALLINEATI si trova...", d2["tot"] == 1)
     prova("degeneri: ### ...e si CONTA come degenere", d2["degeneri"] == 1)
@@ -566,6 +597,7 @@ def collaudo():
     rr.n = 5
     rr.i = r.i.copy(); rr.j = r.j.copy(); rr.tw = r.tw.copy()
     rr.pos = r.pos.copy(); rr._nb = r._nb.copy(); rr.perc_geom = r.perc_geom.copy()
+    rr.phi0 = r.phi0.copy()
     k_inv = 1                                  # l'arco `(0,2)`, che sta nel triangolo
     rr.i[k_inv], rr.j[k_inv] = r.j[k_inv], r.i[k_inv]
     rr.tw[k_inv] = -r.tw[k_inv]
@@ -597,6 +629,7 @@ def collaudo():
     r3.pos = np.array([[0.0, 0, 0], [1, 0, 0], [0, 1, 0], [5, 5, 5]])
     r3._nb = np.tile(np.array([[0.0, 0, 1.0]]), (4, 1))
     r3.perc_geom = np.zeros(4)
+    r3.phi0 = np.zeros(4)
     d3 = Plaquette().enumera(r3)
     prova("cappio: ### si CONTA, e non ferma lo strumento", d3["cappi_esclusi"] == 1)
     prova("cappio: ### ed e' ESCLUSO dall'enumerazione: resta UN triangolo", d3["tot"] == 1)
@@ -625,6 +658,29 @@ def collaudo():
     prova("blocco: ### con BLOCCO = 1 il risultato e' IDENTICO (e' un buffer, non una legge)",
           d3["tot"] == d["tot"] and np.allclose(d3["R"], d["R"])
           and np.array_equal(d3["conta"], d["conta"]))
+
+    # --- ⭐ `M5(c)`: LE PLAQUETTE FRUSTRATE, su un caso COSTRUITO A MANO.
+    #     Con `phi0 = 0` tutti i `c0` valgono `1`: ### **zero frustrazione.**
+    #     Con `phi0 = [0, 2, 4]` i tre coseni sono `cos(-2)`, `cos(-4)`, `cos(-2)`, cioe'
+    #     ### **TRE negativi**, e il prodotto e' ### **negativo**: FRUSTRATA.
+    rf = Rete()
+    rf.n = 5
+    rf.i = r.i.copy(); rf.j = r.j.copy(); rf.tw = r.tw.copy()
+    rf.pos = r.pos.copy(); rf._nb = r._nb.copy(); rf.perc_geom = r.perc_geom.copy()
+    rf.phi0 = np.zeros(5)
+    d0 = Plaquette().enumera(rf)
+    prova("frustrate: ### con `phi0 = 0` i tre `c0` valgono 1 e la frustrazione e' ZERO",
+          int(np.sum(d0["frustrate"])) == 0 and d0["tot"] == 2)
+    rf.phi0 = np.array([0.0, 2.0, 4.0, 0.0, 0.0])
+    d1 = Plaquette().enumera(rf)
+    prova("frustrate: ### con `phi0 = [0, 2, 4]` il prodotto dei tre coseni e' NEGATIVO",
+          float(np.cos(-2.0) * np.cos(-4.0) * np.cos(-2.0)) < 0.0)
+    prova("frustrate: ### e il triangolo {0,1,2} risulta FRUSTRATO (nodo 0 conta 1)",
+          int(d1["frustrate"][0]) == 1)
+    prova("frustrate: ### DEVE FALLIRE -- con `phi0 = 0` lo stesso nodo contava ZERO",
+          int(d0["frustrate"][0]) == 0)
+    prova("frustrate: ### e `con_c0` conta TUTTE le plaquette del nodo, non solo le frustrate",
+          int(d1["con_c0"][0]) == int(d1["conta"][0]))
 
     riga("-")
     stampa("  COLLAUDO: %d su %d" % (sum(esiti), len(esiti)))

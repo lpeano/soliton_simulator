@@ -102,8 +102,12 @@ FUORI = os.path.join(RADICE, "csv", "_test_fork", "_misura_verso")
 SIM = os.path.join(RADICE, "soliton_simulator.py")
 # ### IL BLOB ATTESO: la misura vale per QUESTO simulatore e per nessun altro.
 BLOB_ATTESO = "b8c21049"
-PASSI = 230
-PASSI_MISURA = (1, 50, 150, 230)
+# ### ⭐ **`A1`, 2026-10-07: LA FINESTRA GIUSTA.** La misura del 2026-10-06 girava su
+#   `230` passi, e ### **le nascite cominciano al `216`**: era il regime in cui il difetto
+#   da curare ### **NON AGISCE**. ### **Ora `1000` passi, con CINQUE passi pesanti oltre il
+#   `216`.**
+PASSI = 1000
+PASSI_MISURA = (1, 150, 230, 300, 400, 500, 700, 1000)
 # ### I PASSI PESANTI: i passi della misura ### **E I LORO PREDECESSORI**, perche' la
 #   stabilita' e' una DIFFERENZA fra due passi, e il passo `0` e' lo stato PRIMA del primo
 #   passo. ### **Senza il predecessore, `M3-C` non avrebbe un <<fra due passi>>.**
@@ -115,7 +119,17 @@ BASE_CHIAVE = 1 << 21
 # ### I SECCHI DI GRADO, DICHIARATI PRIMA: il grado massimo misurato e' `94`.
 SECCHI_GRADO = ((0, 20), (21, 40), (41, 60), (61, 80), (81, 10 ** 9))
 P4 = 4.0 * np.pi
+P2PI = 2.0 * np.pi
 EPS_NORMALE = 1e-12
+# ### LA FINESTRA PER <<toccato da un salto del dipolo>>, dal mandato.
+FINESTRA_SALTO = 50
+# ### LE ORIGINI DI UN ARCO, e sono QUATTRO. `seminato` e' tutto cio' che esiste al passo
+#   `0`; le altre tre si registrano con INVOLUCRI DI SOLA LETTURA sulle regole di nascita.
+ORIGINI = ("seminato", "allaccia", "divisione", "schwinger")
+# ### I SECCHI DI ETA', in unita' di `tau_tw`: dichiarati PRIMA. Il taglio `> 2` e' quello
+#   del mandato; gli altri servono a far VEDERE la dipendenza dall'eta' invece di
+#   affidarsi a un taglio solo.
+SECCHI_ETA = ((0.0, 0.5), (0.5, 1.0), (1.0, 2.0), (2.0, 5.0), (5.0, 1e18))
 
 
 # ====================================================================== il presidio
@@ -252,6 +266,66 @@ def allinea(ch_a, va, ch_b, vb):
     return vsa[pos[ok]], np.asarray(vb)[ok], int(np.sum(ok))
 
 
+def dipoli_opzioni(net, delta):
+    """### **IL DIPOLO CHE CIASCUNA OPZIONE PRODURREBBE**, per ARCO.
+
+    ### ⛔ **E' IL METRO GIUSTO, e il motivo e' nell'annotazione `(c)` di
+    `doc/GEOM_SENZA_VERSO.md`:** contare ### **quanti segni cambiano** mette sulla stessa
+    riga grandezze che non lo sono — per `D` e `MEM` il dipolo e' ### **continuo** *(un
+    valore che passa per zero non inietta niente)*, per `A` e `perc_geom` ogni cambio e' un
+    ### **salto di `pi`**, e `perc_geom` cambia ### **per NODO** dove ogni nodo tocca
+    ### **~74 archi**. ### **`Somma |Delta dipolo|` e' l'unica grandezza che le mette tutte
+    nella STESSA unita'.**
+
+    ### LE QUATTRO FORME, e ognuna e' DICHIARATA
+      `perc_geom`  `pi*0.5*(chi_i - chi_j)` con `chi = _chi_geom_nodi` — ### **la legge di
+                   OGGI**, letta dove il dipolo la legge *(e `M1` ha misurato che
+                   `_chi_geom_nodi == perc_geom` in questa scena)*;
+      `A`          `pi*0.5*(s_i - s_j)` con `s = sign(Somma tw sugli archi del nodo)`, la
+                   somma col segno ### **MEMORIZZATO** — ### **l'opzione `A` come scritta**;
+      `D`          `pi*tanh(tw/PHI_CRIT)` — ### **per ARCO, continua**, la forma proposta
+                   nell'annotazione delle tre obiezioni *(`sup|f'| = 1/2`, zero numeri
+                   nuovi)*;
+      `MEM`        `pi*tanh(delta/PHI_CRIT)` con `delta = twp - tw` — ### **la STESSA forma
+                   di `D` con la MEMORIA al posto dell'istante.**
+
+    ### ⚠ **NESSUNA DI QUESTE E' UNA LEGGE: sono LETTURE.** Il simulatore non le vede.
+    """
+    n = int(net.n)
+    ii = np.asarray(net.i, int); jj = np.asarray(net.j, int)
+    tw = np.asarray(net.tw, float)
+    m = (ii < n) & (jj < n)
+    out = {}
+    # --- `perc_geom`: la legge di OGGI, letta dove il dipolo la legge
+    chi = getattr(net, "_chi_geom_nodi", None)
+    if chi is None or len(np.asarray(chi)) < n:
+        chi = np.asarray(net.perc_geom, float)[:n]
+    chi = np.asarray(chi, float)[:n]
+    d = np.zeros(len(ii))
+    d[m] = np.pi * 0.5 * (chi[ii[m]] - chi[jj[m]])
+    out["perc_geom"] = d
+    # --- `A`: il segno della somma GREZZA sugli archi del nodo
+    s = np.zeros(n)
+    np.add.at(s, ii[m], tw[m]); np.add.at(s, jj[m], tw[m])
+    s = np.sign(s)
+    d = np.zeros(len(ii))
+    d[m] = np.pi * 0.5 * (s[ii[m]] - s[jj[m]])
+    out["A"] = d
+    # --- `D` e `MEM`: per ARCO, continue
+    out["D"] = np.pi * np.tanh(tw / P2PI)
+    out["MEM"] = np.pi * np.tanh(np.asarray(delta, float) / P2PI)
+    return out
+
+
+def secchio_eta(e):
+    """L'indice del secchio di eta', coi limiti DICHIARATI in `SECCHI_ETA`."""
+    e = np.asarray(e, float)
+    fuori = np.full(e.shape, -1, int)
+    for k, (lo, hi) in enumerate(SECCHI_ETA):
+        fuori = np.where((e >= lo) & (e < hi) & (fuori < 0), k, fuori)
+    return fuori
+
+
 def auc(a, b):
     """`AUC` di `a` contro `b` *(Mann-Whitney)*. ### **`0.5` = nessuna separazione.**"""
     a = np.asarray(a, float); b = np.asarray(b, float)
@@ -294,6 +368,9 @@ class Verso(object):
         self.n_prec = None
         self.avvisi = []
         self._prec = None
+        self._acc = None            # l'accumulatore PARALLELO di `M5(b)`
+        self.origine = {}           # chiave d'arco -> origine, dagli INVOLUCRI
+        self._involucri = None
 
     # ---------------------------------------------------------------- la scena
     def prepara(self, S, net):
@@ -302,6 +379,10 @@ class Verso(object):
         #   come `_MIS`, quindi NESSUN gancio di quello strumento gira qui.**
         self.g = _MZD.Misura(S.DT, 0.0)
         self.geo = self.g.prepara(S, net)
+        # ### ⭐ **GLI INVOLUCRI DELL'ORIGINE si agganciano QUI**, prima del primo passo,
+        #   cosi' ogni arco che nasce porta la sua provenienza. ### **Toccano il MODULO e
+        #   `net._allaccia`, non lo STATO**, e si ripristinano a corsa chiusa.
+        self.geo["archi_seminati"] = self.involucri(S, net)
         return self.geo
 
     def classe_nodi(self, net):
@@ -440,11 +521,29 @@ class Verso(object):
         #   che ### **dipende da come l'arco e' scritto.** `A` DIVERGENZA e `D`, invece,
         #   devono essere ### **indipendenti dalla scrittura**, e `D` lo diventa
         #   riducendo `tw` al verso canonico.
+        # ### ⭐ **`A1`: `delta = twp - tw` E' LA MEMORIA GIA' DENTRO `tw`** -- l'algebra
+        #   sta nel §`4b` di `doc/MEMORIE_MANCANTI.md`: e' una ### **media mobile
+        #   esponenziale di `dph_prec`** con ritmo `dt_e/tau_tw`.
+        #   ### ⚠ **E IL SEGNO SI RIDUCE AL VERSO CANONICO**, come per `D`: `twp` e `tw`
+        #   sono ### **entrambi orientati `i -> j`**, quindi la loro differenza lo e'.
+        _or = np.where(ii <= jj, 1.0, -1.0)
+        delta = (np.asarray(net.twp, float) - tw)
+        dip = dipoli_opzioni(net, delta)
+        # ### `dt_e` E `tau_tw` SI LEGGONO DA `net`, NON SI RICALCOLANO: `_dt_e_ultimo` e'
+        #   scritto dallo `step` *(riga `7536`)* e `_tau_tw_locale` e' una funzione pura
+        #   del modulo. ### **Nessuna copia patchata del simulatore.**
+        dte = np.asarray(getattr(net, "_dt_e_ultimo", 0.0), float) * np.ones(len(ii))
         return {"n": n, "chiavi": chiavi_archi(net),
                 "sg_grezza": np.sign(grezza), "sg_divg": np.sign(divg),
                 "sg_tw": np.sign(tw_canonico(net)),
+                "sg_mem": np.sign(delta * _or),
                 "archi_i_maggiore_j": int(np.sum(ii > jj)),
-                "perc_geom": np.asarray(net.perc_geom, float)[:n].copy()}
+                "perc_geom": np.asarray(net.perc_geom, float)[:n].copy(),
+                "delta": delta, "tw": tw.copy(), "dip": dip,
+                "twp_dip": np.asarray(net.twp_dip, float).copy(),
+                "dt_e": dte,
+                "fraz_tw_oltre_2pi": (float(np.mean(np.abs(tw) > P2PI))
+                                      if len(tw) else None)}
 
     def m3_cicli(self, net):
         """`C`: l'olonomia di FASE sulla base, per ### **DUE vie indipendenti.**
@@ -535,8 +634,258 @@ class Verso(object):
                     if olon.size else None),
                 "_firme": firme}
 
+    # ---------------------------------------------------------------- l'ORIGINE
+    def involucri(self, S, net):
+        """Registra l'ORIGINE di ogni arco con ### **INVOLUCRI DI SOLA LETTURA.**
+
+        Le regole di nascita vivono in ### **`REGOLE_NASCITA[(evento, grandezza)]`**, un
+        dizionario di MODULO *(74 voci)*. L'involucro ### **chiama l'originale** e poi
+        ### **osserva quali chiavi d'arco sono comparse**: ### **non cambia niente.**
+
+        ### ⚠ **E TOCCA IL MODULO, non `net`**, quindi il presidio di `net` non lo
+        copre: ### **si ripristina a corsa chiusa** *(`ripristina_involucri`)*, e
+        ### **la BYTE-INERZIA e' il controllo che dice se ha cambiato la dinamica.**
+        """
+        self._involucri = []
+        for ev, gr in ((("divisione", "i"), "divisione"), (("schwinger", "i"), "schwinger")):
+            voce = S.REGOLE_NASCITA.get(ev)
+            if voce is None:
+                raise SystemExit("[FERMO] regola di nascita `%s` assente." % (ev,))
+            orig = voce["regola"]
+            etich = gr
+
+            def _invol(_net, _c, _orig=orig, _et=etich):
+                _prima = set(chiavi_archi(_net).tolist())
+                _r = _orig(_net, _c)
+                for _k in set(chiavi_archi(_net).tolist()) - _prima:
+                    self.origine[int(_k)] = _et
+                return _r
+
+            voce["regola"] = _invol
+            self._involucri.append((voce, orig))
+        # ### E `_allaccia` E' UN METODO DI `net`: si avvolge sull'ISTANZA.
+        _oa = net._allaccia
+
+        def _inv_all(*a, **kw):
+            _prima = set(chiavi_archi(net).tolist())
+            _r = _oa(*a, **kw)
+            for _k in set(chiavi_archi(net).tolist()) - _prima:
+                self.origine[int(_k)] = "allaccia"
+            return _r
+
+        net._allaccia = _inv_all
+        self._involucri.append((None, (net, _oa)))
+        # ### TUTTO CIO' CHE ESISTE AL PASSO `0` E' `seminato`, per definizione.
+        for _k in chiavi_archi(net).tolist():
+            self.origine[int(_k)] = "seminato"
+        return len(self.origine)
+
+    def ripristina_involucri(self, net):
+        """### **A corsa chiusa gli involucri si TOLGONO**, e si verifica che siano tolti."""
+        if not self._involucri:
+            return 0
+        n = 0
+        for voce, orig in self._involucri:
+            if voce is None:
+                _net, _oa = orig
+                _net._allaccia = _oa
+                n += 1
+            else:
+                voce["regola"] = orig
+                n += 1
+        self._involucri = None
+        return n
+
+    # ---------------------------------------------------------------- M5(b): l'accumulo
+    def _accumula(self, S, net, cur, pr):
+        """L'accumulatore PARALLELO del dipolo, e l'ETA' dell'arco. ### **Per CHIAVE.**
+
+        ### ⛔ **PER CHIAVE E NON PER INDICE**, perche' alla mitosi gli indici si
+        rimescolano: un accumulatore per indice ### **mescolerebbe la storia di due archi
+        diversi.** ### **Un arco nuovo parte da `0`, e la sua eta' da `0`.**
+        """
+        ch = cur["chiavi"]
+        with sola_lettura(net, "_tau_tw_locale") as g:
+            tau = np.asarray(S._tau_tw_locale(net), float) * np.ones(len(ch))
+        self.toccati.setdefault("_tau_tw_locale", g["toccati"])
+        cur["tau_tw"] = tau
+        if pr is None:
+            self._acc = {"chiavi": ch.copy(), "tw_dip": np.zeros(len(ch)),
+                         "nato": np.zeros(len(ch)), "salto": np.full(len(ch), -1.0e18)}
+            cur["tw_dip"] = self._acc["tw_dip"].copy()
+            cur["eta"] = np.zeros(len(ch))
+            cur["salto_recente"] = np.zeros(len(ch), bool)
+            return
+        A = self._acc
+        # --- i valori VECCHI, allineati sulle chiavi di ADESSO; gli archi nuovi -> `0`
+        vecchi = {}
+        for nome, zero in (("tw_dip", 0.0), ("nato", float(self.passo)),
+                           ("salto", -1.0e18)):
+            o = np.argsort(A["chiavi"], kind="stable")
+            sa = A["chiavi"][o]
+            pos = np.searchsorted(sa, ch)
+            pos = np.minimum(pos, max(sa.size - 1, 0))
+            ok = (sa.size > 0) & (sa[pos] == ch)
+            v = np.full(len(ch), zero)
+            v[ok] = A[nome][o][pos[ok]]
+            vecchi[nome] = v
+        # --- `Delta dipolo` VERO: `twp_dip` di adesso contro quello di prima
+        dprec, dora, _n = allinea(pr["chiavi"], pr["twp_dip"], ch, cur["twp_dip"])
+        ddip = np.zeros(len(ch))
+        o = np.argsort(pr["chiavi"], kind="stable")
+        sa = pr["chiavi"][o]
+        pos = np.searchsorted(sa, ch)
+        pos = np.minimum(pos, max(sa.size - 1, 0))
+        ok = (sa.size > 0) & (sa[pos] == ch)
+        ddip[ok] = (np.nan_to_num(cur["twp_dip"][ok])
+                    - np.nan_to_num(np.asarray(pr["twp_dip"])[o][pos[ok]]))
+        nuovo = ~ok
+        # ### UN ARCO NUOVO NON HA UN `Delta`: la sua spinta e' ZERO al primo passo, ed e'
+        #   la STESSA regola del `NaN` del simulatore.
+        ddip[nuovo] = 0.0
+        td = vecchi["tw_dip"] + ddip - cur["dt_e"] * vecchi["tw_dip"] / np.maximum(tau, 1e-12)
+        td[nuovo] = 0.0
+        salto = np.where(np.abs(ddip) > 1e-9, float(self.passo), vecchi["salto"])
+        self._acc = {"chiavi": ch.copy(), "tw_dip": td, "nato": vecchi["nato"],
+                     "salto": salto}
+        cur["tw_dip"] = td.copy()
+        # ### L'ETA' IN UNITA' DI `tau_tw`: `(passo - nato) * dt_e / tau_tw`.
+        cur["eta"] = ((float(self.passo) - vecchi["nato"]) * cur["dt_e"]
+                      / np.maximum(tau, 1e-12))
+        # ### ⛔ **L'ETA' IN PASSI, e serve a UNA COSA SOLA: escludere IL PRIMO PASSO di un
+        #   arco.** Al suo primo passo `twp` e `twp_dip` ### **non sono ancora stati
+        #   scritti dalla dinamica** *(`twp` nasce a `0`, `twp_dip` a `NaN`)*, quindi una
+        #   differenza fra il primo e il secondo passo ### **non misura la dinamica: misura
+        #   l'inizializzazione.** ### **E' la STESSA ragione per cui il simulatore mette
+        #   `NaN` in `twp_dip` e da' spinta ZERO al primo passo.**
+        cur["eta_passi"] = float(self.passo) - vecchi["nato"]
+        _maturo = cur["eta_passi"] >= 2.0
+        cur["maturo"] = _maturo
+        # ### E IL SALTO SI REGISTRA SOLO SUGLI ARCHI MATURI: senza questo, al passo `1`
+        #   risultavano `235491` archi <<toccati da un salto>>, e ### **era il `NaN`
+        #   iniziale letto come un salto.**
+        salto = np.where(_maturo, salto, -1.0e18)
+        self._acc["salto"] = salto
+        cur["salto_recente"] = _maturo & ((float(self.passo) - salto) <= FINESTRA_SALTO)
+
+    # ---------------------------------------------------------------- M5
+    def m5(self, S, net, cur, cl):
+        """`M5` — LE MEMORIE. ### **Tutto in SOLA LETTURA, da `net` e dall'accumulatore.**"""
+        n = int(net.n)
+        ii = np.asarray(net.i, int); jj = np.asarray(net.j, int)
+        m = (ii < n) & (jj < n)
+        ph0 = np.asarray(net.phi0, float)[:n]
+        tw = cur["tw"]
+        with sola_lettura(net, "_wphi") as g:
+            dph = np.asarray(net._wphi(np.asarray(net.phi, float)[ii]
+                                       - np.asarray(net.phi, float)[jj]), float)
+        self.toccati.setdefault("_wphi", g["toccati"])
+        c0 = np.full(len(ii), np.nan)
+        c0[m] = np.cos(ph0[ii[m]] - ph0[jj[m]])
+        cd = np.cos(dph - tw)
+        # --- la classe dell'arco: quella del nodo `i` (DICHIARATO)
+        cla = np.full(len(ii), -1, int)
+        cla[m] = cl[ii[m]]
+        ori = np.array([self.origine.get(int(k), "?") for k in cur["chiavi"]], dtype=object)
+        eta = cur["eta"]
+        se = secchio_eta(eta)
+        buoni = m & ~np.isnan(c0)
+
+        def _coppia(sel):
+            """Spearman fra `c0` e `c_delta` su un sottoinsieme. ### **`None` se poco.**"""
+            s = sel & buoni
+            q = int(np.sum(s))
+            if q < 3:
+                return None, q
+            a = _rankdata(c0[s]); b = _rankdata(cd[s])
+            if np.std(a) < 1e-12 or np.std(b) < 1e-12:
+                return None, q
+            return float(np.corrcoef(a, b)[0, 1]), q
+
+        fuori = {"n_archi": int(len(ii)), "n_confrontabili": int(np.sum(buoni))}
+        # --- (a) per CLASSE
+        pc = {}
+        for q_, nome in enumerate(_MZD.CLASSI):
+            s = buoni & (cla == q_)
+            r, q = _coppia(s)
+            pc[nome] = {"spearman": r, "n": q,
+                        "q_diff": ([float(x) for x in
+                                    np.percentile(cd[s] - c0[s], [5, 25, 50, 75, 95])]
+                                   if q else None),
+                        "segno_discorde": (float(np.mean(np.sign(cd[s]) != np.sign(c0[s])))
+                                           if q else None)}
+        fuori["a_per_classe"] = pc
+        # --- (a) per ORIGINE
+        po = {}
+        for nome in ORIGINI:
+            s = buoni & (ori == nome)
+            r, q = _coppia(s)
+            po[nome] = {"spearman": r, "n": q}
+        po["?"] = {"n": int(np.sum(ori == "?"))}
+        fuori["a_per_origine"] = po
+        # --- (a) per ETA', e IL CRITERIO: VUOTO con eta' > 2 tau_tw
+        pe = {}
+        for k2, (lo, hi) in enumerate(SECCHI_ETA):
+            s = buoni & (se == k2)
+            r, q = _coppia(s)
+            pe["%.1f-%s" % (lo, "inf" if hi > 1e17 else "%.1f" % hi)] = {
+                "spearman": r, "n": q}
+        fuori["a_per_eta"] = pe
+        s_cr = buoni & (cla == 2) & (eta > 2.0)
+        r_cr, q_cr = _coppia(s_cr)
+        fuori["a_criterio"] = {"spearman": r_cr, "n": q_cr,
+                               "classe": "VUOTO", "eta_oltre": 2.0}
+        # --- (b) la parte del dipolo dentro `tw`
+        td = cur.get("tw_dip")
+        if td is None:
+            fuori["b"] = None
+        else:
+            den = np.maximum(np.abs(tw), 1e-12)
+            rap = np.abs(td) / den
+            sr = cur.get("salto_recente", np.zeros(len(ii), bool))
+            fuori["b"] = {
+                "mediana": float(np.median(rap[m])) if int(np.sum(m)) else None,
+                "q": ([float(x) for x in np.percentile(rap[m], [5, 25, 50, 75, 95])]
+                      if int(np.sum(m)) else None),
+                "mediana_con_salto_recente": (float(np.median(rap[m & sr]))
+                                              if int(np.sum(m & sr)) else None),
+                "n_con_salto_recente": int(np.sum(m & sr)),
+                "per_classe": per_classe(np.where(m, rap, np.nan), cla)}
+        # --- (c) il disordine CONGELATO
+        neg = np.full(len(ii), np.nan)
+        neg[m] = (c0[m] < 0).astype(float)
+        fuori["c"] = {"quota_c0_negativo": per_classe(neg, cla),
+                      "quota_totale": (float(np.mean(c0[m] < 0))
+                                       if int(np.sum(m)) else None)}
+        # --- (d) IL BILANCIO DELLA TORSIONE
+        pot = tw ** 2 * cur["dt_e"] / np.maximum(cur["tau_tw"], 1e-12)
+        pn = np.zeros(n)
+        np.add.at(pn, ii[m], 0.5 * pot[m])
+        np.add.at(pn, jj[m], 0.5 * pot[m])
+        fuori["d"] = {"potenza_totale": float(np.sum(pot[m])),
+                      "per_classe_arco": per_classe(np.where(m, pot, np.nan), cla),
+                      "per_nodo_per_classe": per_classe(pn, cl)}
+        mm = fuori["d"]["per_nodo_per_classe"].get("MATERIA")
+        vv = fuori["d"]["per_nodo_per_classe"].get("VUOTO")
+        # ### ⛔ **CON IL DENOMINATORE A ZERO IL CRITERIO NON E' FALSO: E' NON
+        #   DECIDIBILE.** Al passo `1` `tw = 0` su tutti gli archi, quindi entrambe le
+        #   mediane sono `0` e `0 < 0.25*0` dava ### **`False`** -- cioe' *<<la
+        #   dissipazione NON sta nel vuoto>>* letto da ### **un'assenza di dissipazione.**
+        #   ### **E' la famiglia di `CHI-TORS-ZERO-FALSO`.**
+        if not (mm and vv) or mm["mediana"] is None or vv["mediana"] is None:
+            fuori["d"]["criterio_materia_sotto_un_quarto"] = None
+        elif vv["mediana"] <= 0.0:
+            fuori["d"]["criterio_materia_sotto_un_quarto"] = None
+            fuori["d"]["criterio_nota"] = ("NON DECIDIBILE: la potenza nel VUOTO e' zero, "
+                                           "quindi non c'e' niente da confrontare")
+        else:
+            fuori["d"]["criterio_materia_sotto_un_quarto"] = bool(
+                mm["mediana"] < 0.25 * vv["mediana"])
+        return fuori
+
     # ---------------------------------------------------------------- il giro
     def osserva(self, S, net, k, pesante):
+        self.passo = k
         n = int(net.n)
         # ### ⛔ **IL CONTROLLO CHE RENDE VALIDO IL CONFRONTO PER INDICE:** se `n` scendesse,
         #   i nodi NON nascerebbero solo in coda e confrontare `perc_geom[k]` fra due passi
@@ -547,6 +896,11 @@ class Verso(object):
         self.n_prec = n
         cur = self._a_e_d(net)
         pr = self._prec
+        # ### ⛔ **L'ACCUMULO VA PRIMA DELLA RIGA, e il giro corto me l'ha mostrato:** la
+        #   riga usa `cur["maturo"]`, che e' ### **l'accumulatore a scriverlo.** Con
+        #   l'ordine invertito la spinta risultava ### **`None` a OGNI passo**, cioe' la
+        #   misura centrale del lavoro ### **non si misurava.**
+        self._accumula(S, net, cur, pr)
         riga_p = {"passo": k, "n": n, "archi": int(len(net.i)),
                   # ### IL FATTO CHE MI ERA SFUGGITO ora si MISURA a OGNI passo, invece
                   #   di essere assunto una volta e creduto per sempre.
@@ -570,6 +924,41 @@ class Verso(object):
             riga_p["archi_confrontabili"] = nco
             riga_p["archi_nuovi"] = int(len(cur["chiavi"]) - nco)
             riga_p["cambi_D_segno_tw"] = int(np.sum(a != b)) if nco else None
+            am, bm, _n = allinea(pr["chiavi"], pr["sg_mem"], cur["chiavi"], cur["sg_mem"])
+            riga_p["cambi_MEM_segno_delta"] = int(np.sum(am != bm)) if nco else None
+            # ### ⭐ **LA SPINTA INIETTATA, IL METRO GIUSTO:** per ciascuna opzione,
+            #   `Somma |Delta dipolo|` fra due passi, ### **allineata per CHIAVE** e con
+            #   gli archi non confrontabili ### **CONTATI e ESCLUSI** *(mai zero al loro
+            #   posto: e' la lezione di `CHI-TORS-ZERO-FALSO`)*.
+            # ### ⛔ **SI ESCLUDONO GLI ARCHI AL LORO PRIMO PASSO, PER TUTTE E QUATTRO LE
+            #   OPZIONI.** Per `perc_geom`, `A` e `D` non cambia niente *(la loro spinta
+            #   li' e' gia' `~0`)*; per ### **`MEM` cambia tutto**: al passo `1`
+            #   iniettava `597235` ### **perche' `delta` parte da `dph`**, e quello e'
+            #   ### **l'avvio, non la dinamica.** ### ✔ **La regola e' UNIFORME e
+            #   DICHIARATA**, non un'eccezione per l'opzione scomoda.
+            sp, spn = {}, {}
+            _mat = cur.get("maturo")
+            for et in ("perc_geom", "A", "D", "MEM"):
+                x, y, nn = allinea(pr["chiavi"], pr["dip"][et],
+                                   cur["chiavi"], cur["dip"][et])
+                if not nn:
+                    sp[et], spn[et] = None, 0
+                    continue
+                if _mat is None:
+                    sp[et], spn[et] = None, 0
+                    continue
+                _xm, _ym, _nm = allinea(pr["chiavi"], pr["dip"][et],
+                                        cur["chiavi"][_mat], cur["dip"][et][_mat])
+                sp[et] = float(np.sum(np.abs(_ym - _xm))) if _nm else None
+                spn[et] = _nm
+            riga_p["spinta_iniettata"] = sp
+            riga_p["spinta_n_maturi"] = spn
+            riga_p["spinta_n_confrontabili"] = nco
+        riga_p["fraz_tw_oltre_2pi"] = cur["fraz_tw_oltre_2pi"]
+        # ### L'ACCUMULATORE PARALLELO di `M5(b)`: `tw_dip' = tw_dip + Delta dipolo
+        #   - dt_e*tw_dip/tau_tw`, e ### **parte da `0` ALLA NASCITA dell'arco.**
+        #   ### ⚠ **E' PARALLELO: non tocca `net`.** Serve a dire ### **quanta parte di
+        #   `tw` viene dal DIPOLO** invece che dalla fase.
         self.passi.append(riga_p)
         self._prec = cur
         if not pesante:
@@ -581,6 +970,7 @@ class Verso(object):
         if k in PASSI_MISURA:
             dati["M1"] = self.m1(S, net)
             dati["M2"] = self.m2(S, net, cl)
+            dati["M5"] = self.m5(S, net, cur, cl)
         self.pesanti[k] = dati
 
     def chiudi(self):
@@ -607,7 +997,25 @@ class Verso(object):
 
     def esito(self):
         self.chiudi()
+        # ### GLI AGGREGATI SU TUTTA LA CORSA: la spinta iniettata TOTALE per opzione, e
+        #   i passi su cui e' stata confrontabile. ### **Un totale senza il suo
+        #   denominatore non e' un totale.**
+        # ### ⚠ **IL TOTALE DA SOLO NON BASTA, e il giro corto lo mostra:** al passo `2`
+        #   le spinte sono ### **da `278186` a `739817`**, e nei passi quieti
+        #   ### **da `0` a `2030`**. ### **Un totale dominato da UN transitorio dice del
+        #   transitorio, non del regime.** ### ✔ **Quindi si riporta anche la MEDIANA per
+        #   passo**, che un singolo transitorio non sposta.
+        tot, nn, med = {}, {}, {}
+        for et in ("perc_geom", "A", "D", "MEM"):
+            v = [r["spinta_iniettata"][et] for r in self.passi
+                 if r.get("spinta_iniettata") and r["spinta_iniettata"].get(et) is not None]
+            tot[et] = float(sum(v)) if v else None
+            nn[et] = len(v)
+            med[et] = float(np.median(v)) if v else None
         return {"geometria": self.geo, "passi": self.passi,
+                "spinta_totale": tot, "spinta_passi": nn, "spinta_mediana": med,
+                "origini_registrate": {k: sum(1 for x in self.origine.values() if x == k)
+                                       for k in ORIGINI},
                 "misure": {str(k): v for k, v in sorted(self.misure.items())},
                 "passi_misura": list(PASSI_MISURA),
                 "passi_pesanti": list(PASSI_PESANTI),
@@ -687,6 +1095,16 @@ def corsa(nome, passi, osservatori, scrivi, battito=True):
                 stampa("### ⛔ E IL SALVATAGGIO E' CADUTO ANCHE LUI: %r" % (e2,))
                 stampa(traceback.format_exc())
             return 1
+    # ### ⛔ **GLI INVOLUCRI SI TOLGONO A CORSA CHIUSA, e si VERIFICA che siano tolti:**
+    #   lasciarli attaccati farebbe sbagliare la corsa DOPO, e un ripristino che non si
+    #   controlla e' una promessa.
+    for o in osservatori:
+        if hasattr(o, "ripristina_involucri"):
+            q = o.ripristina_involucri(N)
+            stampa("  involucri rimossi da %s: %d" % (o.nome, q))
+            if o._involucri is not None:
+                stampa("  ### ⛔ GLI INVOLUCRI NON SONO STATI TOLTI. Lo dico.")
+                return 1
     _ist("DATI SALVATI", passi)
     stampa("  ### I DATI SONO SALVATI.")
     return 0
@@ -873,6 +1291,70 @@ def collaudo():
           dv[1] == 0.0)
     prova("A: ### sono DUE grandezze diverse, e il mandato ne nomina una sola",
           gz[1] != dv[1])
+
+    # ================================================================ A1: le estensioni
+    class R2(object):
+        pass
+
+    # ---- `dipoli_opzioni`: le QUATTRO forme, su una rete minima
+    rr = R2()
+    rr.n = 3
+    rr.i = np.array([0, 1]); rr.j = np.array([1, 2])
+    rr.tw = np.array([P2PI, 0.0])          # il primo arco a `2pi`, il secondo a zero
+    rr.twp = np.array([0.0, 0.0])
+    rr.perc_geom = np.array([1.0, -1.0, 1.0])
+    rr._chi_geom_nodi = np.array([1.0, -1.0, 1.0])
+    dd = dipoli_opzioni(rr, rr.twp - rr.tw)
+    prova("dipoli: ### `perc_geom` da' `pi*0.5*(chi_i - chi_j)`, cioe' `pi` sul primo arco",
+          abs(dd["perc_geom"][0] - np.pi) < 1e-12)
+    prova("dipoli: ### `D` e' `pi*tanh(tw/2pi)`: `pi*tanh(1)` sul primo, ZERO sul secondo",
+          abs(dd["D"][0] - np.pi * np.tanh(1.0)) < 1e-12 and dd["D"][1] == 0.0)
+    prova("dipoli: ### `D` DEVE FALLIRE a dare `pi` esatto -- `tanh(1) = 0.7616`, non `1`",
+          abs(dd["D"][0] - np.pi) > 0.5)
+    prova("dipoli: ### `MEM` usa `delta = twp - tw`, quindi col `twp` a zero e' `-D`",
+          abs(dd["MEM"][0] + dd["D"][0]) < 1e-12)
+    # `A`: la somma GREZZA sul nodo 1 e' `tw[0] + tw[1] = 2pi > 0`, sul nodo 0 e' `2pi > 0`
+    prova("dipoli: ### `A` e' il SEGNO della somma grezza: nodi 0 e 1 entrambi `+1` -> ZERO",
+          abs(dd["A"][0]) < 1e-12)
+    prova("dipoli: ### e sul secondo arco il nodo 2 ha somma ZERO -> `sign = 0` -> `pi*0.5`",
+          abs(dd["MEM"][1]) < 1e-12 and abs(dd["A"][1] - np.pi * 0.5) < 1e-12)
+
+    # ---- `secchio_eta`: i limiti DICHIARATI
+    se = secchio_eta(np.array([0.0, 0.4, 0.5, 1.5, 3.0, 100.0, -1.0]))
+    prova("eta: ### i secchi sono quelli dichiarati, e `0` cade nel primo",
+          list(se[:6]) == [0, 0, 1, 2, 3, 4])
+    prova("eta: ### DEVE FALLIRE -- un'eta' NEGATIVA non sta in nessun secchio (`-1`)",
+          se[6] == -1)
+
+    # ---- ⛔ IL CASO CHE DEVE FALLIRE: un arco al suo PRIMO passo NON contribuisce
+    #      alla spinta. ### **E' il difetto che il giro corto ha trovato**: `MEM`
+    #      iniettava `597235` al passo `1` perche' `delta` parte da `dph`.
+    ch_a = np.array([10, 20], np.int64)
+    d_a = np.array([0.0, 0.0])
+    ch_b = np.array([10, 20, 30], np.int64)     # `30` e' NUOVO
+    d_b = np.array([0.1, 0.2, 999.0])           # e porterebbe una spinta ENORME
+    mat = np.array([True, True, False])         # ...ma NON e' maturo
+    x, y, nn = allinea(ch_a, d_a, ch_b[mat], d_b[mat])
+    prova("primo passo: ### l'arco NUOVO non entra, e la spinta e' `0.1 + 0.2 = 0.3`",
+          nn == 2 and abs(float(np.sum(np.abs(y - x))) - 0.3) < 1e-12)
+    x2, y2, n2 = allinea(ch_a, d_a, ch_b, d_b)
+    prova("primo passo: ### DEVE FALLIRE -- senza il filtro la spinta sarebbe la stessa, "
+          "perche' l'allineamento per chiave lo esclude GIA'",
+          n2 == 2 and abs(float(np.sum(np.abs(y2 - x2))) - 0.3) < 1e-12)
+    # ### ⚠ **E IL CASO VERO E' UN ALTRO, e il collaudo me l'ha chiarito:** un arco che
+    #   ESISTEVA ma era al suo PRIMO passo di dinamica ### **E' nelle chiavi di prima**,
+    #   quindi l'allineamento NON lo esclude: lo esclude ### **solo il filtro `maturo`.**
+    ch_c = np.array([10, 20], np.int64)
+    d_c = np.array([0.0, 0.0])
+    d_d = np.array([0.1, 999.0])                 # il secondo e' al suo primo passo
+    mat2 = np.array([True, False])
+    x3, y3, n3 = allinea(ch_c, d_c, ch_c[mat2], d_d[mat2])
+    prova("primo passo: ### ECCO il caso vero -- l'arco IMMATURO c'era GIA', e solo il "
+          "filtro `maturo` lo tiene fuori: `0.1` invece di `999.1`",
+          n3 == 1 and abs(float(np.sum(np.abs(y3 - x3))) - 0.1) < 1e-12)
+    x4, y4, n4 = allinea(ch_c, d_c, ch_c, d_d)
+    prova("primo passo: ### DEVE FALLIRE -- senza il filtro sarebbe `999.1`",
+          abs(float(np.sum(np.abs(y4 - x4))) - 999.1) < 1e-9)
 
     riga("-")
     stampa("  COLLAUDO: %d su %d" % (sum(esiti), len(esiti)))

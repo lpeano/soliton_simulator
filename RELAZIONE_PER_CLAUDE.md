@@ -8334,3 +8334,26 @@ cioè ### **persiste `~τ_tw`.**
 `MEM` si misura ### **accanto ad `A`, `D` e `perc_geom`**, col ### **metro giusto — la
 spinta iniettata `Σ|Δdipolo|`** — e ### **non come cura.**
 ### **Voce: `MEM-VERSO`** *(`da-decidere`)*.
+
+---
+
+## 2026-10-07 — **LE ESTENSIONI DI `A1`, committate PRIMA della corsa**
+
+**Strumenti:** `c2bbf995` *(`M1`-`M3`-`M5`)* e `3cd93fab` *(`M4`)*. ### **`1000` passi**, passi pesanti ### **`1, 150, 230, 300, 400, 500, 700, 1000`** — ### **cinque oltre il `216`.** ### **Niente copia patchata: `dt_e` si legge da `net._dt_e_ultimo` e `tau_tw` da `_tau_tw_locale`, dentro il presidio.**
+
+### ⛔ **IL GIRO CORTO HA TROVATO QUATTRO DIFETTI, E UNO ERA FATALE**
+
+| | |
+|---|---|
+| `1` | ### **`MEM` iniettava `597235`** al passo `1`: `δ` parte da `dph` quando `twp` ### **non è ancora stata scritta dalla dinamica** |
+| `2` | il salto del dipolo si registrava su ### **`235491`** archi: `twp_dip` parte da `NaN` e `nan_to_num` lo faceva sembrare un salto |
+| `3` | il criterio di `M5(d)` diceva ### **`False`** con ### **entrambe** le mediane a zero — ### **NON DECIDIBILE, non falso** *(famiglia `CHI-TORS-ZERO-FALSO`)* |
+| ### ⛔ **`4`** | ### **FATALE:** calcolavo la spinta ### **PRIMA** che l'accumulatore scrivesse `maturo`, quindi ### **valeva `None` a OGNI passo.** ### **La misura centrale del lavoro non si misurava**, e l'ha trovato un giro di ### **TRE passi** — il collaudo no, perché provava le formule e ### **non l'ordine delle chiamate** |
+
+> ### ✔ **I primi tre si curano con una regola UNIFORME e DICHIARATA** *(`eta_passi >= 2`)*, applicata a ### **tutte e quattro** le opzioni — ### **non solo a quella scomoda.** ### **Il primo passo di un arco NON è una misura**, ed è la stessa ragione per cui il simulatore mette `NaN` in `twp_dip`.
+
+### ⚠ **E LE PLAQUETTE FRUSTRATE CORREGGONO UN MIO RAGIONAMENTO**
+
+Misurato: ### **`1242840` su `5534011`** *(`22.5 %`)*; per classe ### **MATERIA `4.6 %`, BORDO `24.2 %`, VUOTO `25.0 %`.** ### ⛔ **Avevo previsto `~50 %` nel vuoto assumendo segni INDIPENDENTI, e non lo sono:** vengono da un ### **potenziale**, quindi `d(0,1) + d(1,2) + d(2,0) = 0` li vincola e la frustrazione ### **si dimezza.** ### **La direzione della previsione regge; il numero no.**
+
+**COLLAUDO: `49` casi** per `M1`-`M3`-`M5` e ### **`41`** per `M4`, con ### **nove <<DEVE FALLIRE>>.**
