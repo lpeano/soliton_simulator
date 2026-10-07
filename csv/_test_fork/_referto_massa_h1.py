@@ -31,6 +31,14 @@ FUORI = os.path.join(RADICE, "doc", "REFERTO_as1_test_h1_2026-10-07.md")
 P_H1 = os.path.join(_QUI, "_massa_h1", "h1.json")
 P_P0 = os.path.join(_QUI, "_massa_h1", "passo0.json")
 P_A1 = os.path.join(_QUI, "_misura_verso", "verso.json")
+# ### ⭐ **IL BRACCIO DI CONTROLLO RIGIRATO, e il mandato lo prevede:** *<<se ti serve una
+#   grandezza che `A1` non ha registrato, rigira il controllo e dillo>>*. ### **Serviva:**
+#   `A1` ### **non ha** la coerenza per massa, ne' la dispersione di `phivel`, ne' `tau_tw`
+#   -- e senza il controllo ### **l'esplosione della `phivel_std` del VUOTO non si puo'
+#   attribuire** *(e' un effetto dell'intervento, o succede comunque?)*.
+# ### ✔ **STESSO BLOB DELLO STRUMENTO** *(`ccbe5ed8`)*, stessa scena, stesso seme: il
+#   braccio si distingue solo per ### **`braccio_h1: false`** dentro il json.
+P_CT = os.path.join(_QUI, "_massa_h1", "controllo.json")
 R = []
 
 
@@ -72,6 +80,22 @@ def main():
         raise SystemExit("[FERMO] la corsa `H1` non e' completa: stato %r, girati %r su %r."
                          % (d.get("stato"), d.get("passi_girati"), d.get("passi")))
     h = d["massa_h1"]
+    # --- il braccio di CONTROLLO rigirato, se c'e'
+    ct = carica(P_CT)
+    hc = None
+    if ct and not ct.get("_errore"):
+        if ct.get("stato") != "DATI SALVATI" or ct.get("passi_girati") != ct.get("passi"):
+            raise SystemExit("[FERMO] il braccio di CONTROLLO non e' completo: %r, %r su %r."
+                             % (ct.get("stato"), ct.get("passi_girati"), ct.get("passi")))
+        hc = ct["massa_h1"]
+        if hc.get("braccio_h1"):
+            raise SystemExit("[FERMO] `controllo.json` dichiara `braccio_h1: true`: "
+                             "non e' il braccio di controllo.")
+        if str(ct.get("blob_strumento")) != str(d.get("blob_strumento")):
+            raise SystemExit("[FERMO] i due bracci vengono da BLOB DIVERSI dello strumento: "
+                             "%s contro %s. Non sono confrontabili."
+                             % (str(ct.get("blob_strumento"))[:8],
+                                str(d.get("blob_strumento"))[:8]))
     PM = [int(x) for x in h["passi_misura"]]
     SENZA = set(int(x) for x in h.get("passi_senza_controllo") or ())
     mis = {int(k): v for k, v in h["misure"].items()}
@@ -91,8 +115,20 @@ def main():
             c_n[int(r["passo"])] = r.get("n")
             c_fr[int(r["passo"])] = r.get("fraz_tw_oltre_2pi")
 
+    misc = {int(k): v for k, v in (hc or {}).get("misure", {}).items()} if hc else {}
+    passic = ({int(r["passo"]): r for r in hc["passi"]} if hc else {})
+
     def auc(k):
         return (mis.get(k) or {}).get("auc_materia_vuoto")
+
+    def aucc(k):
+        """L'`AUC` del braccio di controllo ### **RIGIRATO** se c'e', altrimenti quella di
+        `A1`. ### **Si DICHIARA quale delle due**, perche' non sono la stessa cosa."""
+        if k in misc:
+            return misc[k].get("auc_materia_vuoto"), "rigirato"
+        if k in c_auc:
+            return c_auc[k], "A1"
+        return None, None
 
     def ck(k, cl):
         x = ((mis.get(k) or {}).get("c_per_classe") or {}).get(cl)
@@ -121,6 +157,19 @@ def main():
     A("")
     A("## ⛔ **TRE COSE DA SAPERE PRIMA DEI NUMERI**")
     A("")
+    if hc:
+        A("> ### ⭐ **`0` — IL BRACCIO DI CONTROLLO È STATO RIGIRATO, E LO DICO.** Il mandato "
+          "lo prevede *(«se ti serve una grandezza che `A1` non ha registrato, rigira il "
+          "controllo e dillo»)*, e ### **serviva: `A1` non ha la coerenza per massa, né la "
+          "dispersione di `phivel`, né `tau_tw`.** Senza il controllo ### **l'esplosione "
+          "della `phivel_std` del VUOTO non si potrebbe attribuire** — è un effetto "
+          "dell'intervento, o succede comunque? ### ✔ **Stesso blob dello strumento** "
+          "*(`%s`)*, stessa scena, stesso seme: i due bracci si distinguono "
+          "### **solo per `braccio_h1`**, e il generatore ### **si ferma** se i blob "
+          "differiscono. ### ✔ **E dove `A1` ha l'`AUC`, il confronto con il braccio "
+          "rigirato è una PROVA IN PIÙ, non una ripetizione.**"
+          % str(ct.get("blob_strumento"))[:8])
+        A("")
     A("> ### ⛔ **`1` — `U1` È APERTA** *(da-decidere, blocca `SI`)*. Questa corsa "
       "### **non dà valori assoluti:** confronta ### **DUE BRACCI DELLO STESSO SIMULATORE**, "
       "e la legge difettosa è ### **la stessa in entrambi**. ### **Quello che si legge è la "
@@ -202,16 +251,20 @@ def main():
     A("| passo | ### **AUC `H1`** | AUC controllo | differenza | `c_k` MAT `H1` | MAT contr. | `c_k` VUO `H1` | VUO contr. |")
     A("|--:|--:|--:|--:|--:|--:|--:|--:|")
     for k in PM:
-        a_h, a_c = auc(k), c_auc.get(k)
+        a_h, (a_c, _da) = auc(k), aucc(k)
         dif = None if (a_h is None or a_c is None) else a_h - a_c
         cc = c_ck.get(k) or {}
-        A("| `%d`%s | ### **%s** | %s | %s | %s | %s | %s | %s |"
-          % (k, " ⚠" if k in SENZA else "", n4(a_h), n4(a_c),
+        _ckc = (misc.get(k) or {}).get("c_per_classe") or cc
+        _g = lambda q: (None if not _ckc.get(q) else
+                        (_ckc[q].get("mediana") if isinstance(_ckc[q], dict) else _ckc[q]))
+        A("| `%d`%s | ### **%s** | %s%s | %s | %s | %s | %s | %s |"
+          % (k, " ⚠" if (k in SENZA and _da != "rigirato") else "", n4(a_h), n4(a_c),
+             "" if _da != "A1" else " *(da `A1`)*",
              ("### **%+.4f**" % dif) if dif is not None else "n/d",
-             n4(ck(k, "MATERIA")), n4(cc.get("MATERIA")),
-             n4(ck(k, "VUOTO")), n4(cc.get("VUOTO"))))
+             n4(ck(k, "MATERIA")), n4(_g("MATERIA")),
+             n4(ck(k, "VUOTO")), n4(_g("VUOTO"))))
     A("")
-    if SENZA:
+    if SENZA and not hc:
         A("> ### ⚠ **I PASSI SEGNATI `⚠` NON HANNO IL CONTROLLO:** la corsa `A1` misurava i "
           "passi pesanti `1, 150, 230, 300, 400, 500, 700, 1000`, e ### **il `%s` non è fra "
           "loro.** ### ✔ **I due passi su cui i criteri DECIDONO — `400` e `500` — il "
@@ -226,7 +279,7 @@ def main():
         return min(q) if q else None
 
     s_h = sotto({k: auc(k) for k in PM})
-    s_c = sotto(c_auc)
+    s_c = sotto({k: aucc(k)[0] for k in PM})
     A("| | primo passo MISURATO con AUC `< 0.60` |")
     A("|---|---|")
     A("| ### **braccio `H1`** | %s |"
@@ -287,20 +340,30 @@ def main():
     A("")
     _mi = sorted(set().union(*[set((mis.get(k) or {}).get("per_massa") or {}) for k in PM])
                  ) if PM else []
-    A("| passo | %s | ### **VUOTO** |"
+    A("| passo | %s | ### **VUOTO** | ### **controllo** *(media)* |"
       % " | ".join("### **`%s`**" % x for x in _mi))
     # ### ⛔ **QUI C'ERA UN DOPPIO `|`**, e l'ha preso il giro sul referto di prova:
     #   `"|--:|" + "--:|"*3 + "|--:|"` da' ### **`|--:|--:|--:|--:||--:|`** -- una colonna in
     #   piu' e una tabella rotta. ### **Il separatore e' UNA SOLA catena.**
-    A("|--:|" + "--:|" * (len(_mi) + 1))
+    A("|--:|" + "--:|" * (len(_mi) + 2))
     for k in PM:
         pm = (mis.get(k) or {}).get("per_massa") or {}
         vu = (mis.get(k) or {}).get("vuoto")
-        A("| `%d` | %s | %s |"
+        pmc = (misc.get(k) or {}).get("per_massa") or {}
+        _med = lambda q: (None if not q else
+                          sum(v["coer_2pi"] for v in q.values() if v) / max(len(q), 1))
+        A("| `%d` | %s | %s | %s |"
           % (k,
              " | ".join(n4((pm.get(x) or {}).get("coer_2pi")) for x in _mi),
-             n4((vu or {}).get("coer_2pi"))))
+             n4((vu or {}).get("coer_2pi")),
+             n4(_med(pmc)) if pmc else "n/d"))
     A("")
+    if misc:
+        A("> ### \u2b50 **L'ULTIMA COLONNA E' IL BRACCIO DI CONTROLLO RIGIRATO** *(la MEDIA "
+          "sulle tre masse)*, e ### **senza di lei la colonna <<VUOTO>> non basterebbe:** "
+          "dice se la coerenza che cade nel braccio `H1` cade ### **di meno** di quanto "
+          "cadrebbe comunque.")
+        A("")
     A("*(la stessa, letta su `4π`)*")
     A("")
     A("| passo | %s | ### **VUOTO** |"
@@ -327,20 +390,27 @@ def main():
       "### **scrive `phivel` e nient'altro**: l'equalizzazione è una "
       "### **condizione iniziale**, non uno stato mantenuto.")
     A("")
-    A("| passo | %s | ### **VUOTO** *(il NULLO)* | %s |"
+    A("| passo | %s | ### **VUOTO** *(il NULLO)* | %s | ### **`std` masse CONTROLLO** | "
+      "### **`std` VUOTO contr.** |"
       % (" | ".join("`std %s`" % x for x in _mi),
          " | ".join("### **%s / VUOTO**" % x for x in _mi)))
-    A("|--:|" + "--:|" * (2 * len(_mi) + 1))
+    A("|--:|" + "--:|" * (2 * len(_mi) + 3))
     for k in PM:
         m = mis.get(k) or {}
         pm = m.get("per_massa") or {}
         vu = m.get("vuoto") or {}
         rel = m.get("disp_rel_per_massa") or {}
-        A("| `%d` | %s | %s | %s |"
+        mc = misc.get(k) or {}
+        pmc = mc.get("per_massa") or {}
+        vuc = mc.get("vuoto") or {}
+        _mstd = (None if not pmc else
+                 sum(v["phivel_std"] for v in pmc.values() if v) / max(len(pmc), 1))
+        A("| `%d` | %s | %s | %s | %s | %s |"
           % (k,
              " | ".join(n4((pm.get(x) or {}).get("phivel_std"), 5) for x in _mi),
              n4(vu.get("phivel_std"), 5),
-             " | ".join("### **%s**" % n4(rel.get(x)) for x in _mi)))
+             " | ".join("### **%s**" % n4(rel.get(x)) for x in _mi),
+             n4(_mstd, 5), n4(vuc.get("phivel_std"), 5)))
     A("")
     _p1 = mis.get(1) or {}
     _r1 = _p1.get("disp_rel_per_massa") or {}
@@ -361,13 +431,17 @@ def main():
       "porterebbe `tau_tw` degli archi intra-massa a ### **`2π/1e-3 = 6283.2`**, cioè "
       "### **~`2600 ×`** la mediana misurata. ### ✔ **Si misura, non si assume:**")
     A("")
-    A("| passo | `tau_tw` mediana ### **intra-massa** | su ### **TUTTI** gli archi | ### **rapporto** | archi intra-massa |")
-    A("|--:|--:|--:|--:|--:|")
+    A("| passo | `tau_tw` mediana ### **intra-massa** | su ### **TUTTI** gli archi | "
+      "### **rapporto** | ### **rapporto CONTROLLO** | archi intra-massa |")
+    A("|--:|--:|--:|--:|--:|--:|")
     for k in PM:
         t = (mis.get(k) or {}).get("tau_tw") or {}
-        A("| `%d` | %s | %s | ### **%s** | %s |"
+        tc = (misc.get(k) or {}).get("tau_tw") or {}
+        A("| `%d` | %s | %s | ### **%s** | %s | %s |"
           % (k, n4(t.get("mediana_intra_massa"), 3), n4(t.get("mediana_tutti"), 3),
-             n4(t.get("rapporto_intra_su_tutti"), 3), n4(t.get("archi_intra_massa"))))
+             n4(t.get("rapporto_intra_su_tutti"), 3),
+             n4(tc.get("rapporto_intra_su_tutti"), 3),
+             n4(t.get("archi_intra_massa"))))
     A("")
     _t1 = ((mis.get(1) or {}).get("tau_tw") or {}).get("rapporto_intra_su_tutti")
     if _t1 is not None:
@@ -404,30 +478,64 @@ def main():
     A("")
     pr = []
     # PH1-1
-    a_c400 = c_auc.get(400)
+    a_c400 = aucc(400)[0]
     if a400 is not None and a_c400 is not None:
-        ok = (a400 > a_c400) and (a400 < 0.90)
+        _num = (a400 > a_c400) and (a400 < 0.90)
+        # ### ⛔ **LA PREVISIONE ERA MAL POSTA, E LO SCRIVO INVECE DI RACCOGLIERE UNA
+        #   CONFERMA:** l'intervallo che avevo dichiarato -- *<<sopra il controllo e sotto
+        #   `0.90`>>* -- ### **ATTRAVERSA la soglia `0.60`** del criterio di Luca, quindi
+        #   ### **non poteva scegliere un verdetto.** Il numero e' caduto nella parte che il
+        #   criterio chiama ### **`H1 NON BASTA`.**
+        #   ### ➜ **Il CONTENUTO NUMERICO era giusto; l'ETICHETTA che gli avevo attaccato
+        #   era incompatibile col criterio scritto due paragrafi sopra.**
+        _et = ("### ⚠ **MAL POSTA, e il difetto è MIO:** le due condizioni numeriche "
+               "### **REGGONO** *(l'AUC è sopra il controllo e sotto `0.90`)*, ### **ma "
+               "l'intervallo che avevo dichiarato ATTRAVERSA la soglia `0.60`**, quindi "
+               "### **la previsione non poteva scegliere un verdetto.** Il numero è caduto "
+               "nella parte che il criterio chiama ### **`H1 NON BASTA`**. "
+               "### ⛔ **Non la conto come confermata.**"
+               if (_num and a400 < 0.60) else
+               ("### ✔ **CONFERMATA**" if _num else
+                ("### ⛔ **SMENTITA**: l'AUC `H1` NON è sopra il controllo"
+                 if a400 <= a_c400 else "### ⛔ **SMENTITA**: l'AUC `H1` è `>= 0.90`")))
         pr.append(("`PH1-1`",
                    "### ⚠ **`H1 AIUTA MA NON BASTA`**: AUC al `400` ### **sopra** quella del "
                    "controllo ### **ma sotto `0.90`**",
-                   "AUC `H1` %s contro controllo %s *(differenza %+.4f)*; soglia `0.90`"
-                   % (n4(a400), n4(a_c400), a400 - a_c400),
-                   "### ✔ **CONFERMATA**" if ok else
-                   ("### ⛔ **SMENTITA**: l'AUC `H1` NON è sopra il controllo"
-                    if a400 <= a_c400 else
-                    "### ⛔ **SMENTITA**: l'AUC `H1` è `>= 0.90`")))
+                   "AUC `H1` %s contro controllo %s *(differenza %+.4f)*; e la soglia del "
+                   "criterio è ### **`0.60`**"
+                   % (n4(a400), n4(a_c400), a400 - a_c400), _et))
     # PH1-2
     _r150 = (mis.get(150) or {}).get("disp_rel_per_massa") or {}
     _v150 = [v for v in _r150.values() if v is not None]
     if _v150:
         _md = sum(_v150) / len(_v150)
+        # ### ⚠ **E IL DENOMINATORE SI MUOVE:** avevo normalizzato sul VUOTO, e il vuoto
+        #   ### **si scalda** -- quindi un rapporto che scende puo' voler dire
+        #   ### **<<le masse restano quiete>>** oppure ### **<<il vuoto corre di piu'>>.**
+        #   ### **Si riporta anche il valore ASSOLUTO**, che e' la grandezza di cui parlava
+        #   l'ipotesi.
+        _pm150 = (mis.get(150) or {}).get("per_massa") or {}
+        _as150 = [v["phivel_std"] for v in _pm150.values() if v]
+        _as0 = [v["phivel_std"] for v in
+                ((mis.get(1) or {}).get("per_massa") or {}).values() if v]
+        _ass = ""
+        if _as150 and _as0:
+            _ass = ("; e in ASSOLUTO la `std` intra-massa va da %s al passo `1` a "
+                    "### **%s** al `150`, cioe' ### **%s volte**"
+                    % (n4(sum(_as0) / len(_as0), 4), n4(sum(_as150) / len(_as150), 4),
+                       n4((sum(_as150) / len(_as150)) / max(sum(_as0) / len(_as0), 1e-12), 2)))
         pr.append(("`PH1-2`",
                    "la dispersione di `phivel` intra-massa ### **TORNA**: al passo `150` è "
                    "già ### **più di METÀ** di quella del `vuoto`",
-                   "al `150` la media sulle tre masse è ### **%s** del vuoto%s"
+                   "al `150` la media sulle tre masse è ### **%s** del vuoto%s%s"
                    % (pct(_md),
-                      ("; e al passo `1` era già %s" % pct(sum(_v1) / len(_v1))) if _v1 else ""),
-                   "### ✔ **CONFERMATA**" if _md > 0.5 else "### ⛔ **SMENTITA**"))
+                      ("; al passo `1` era già %s" % pct(sum(_v1) / len(_v1))) if _v1 else "",
+                      _ass),
+                   "### ✔ **CONFERMATA**" if _md > 0.5 else
+                   "### ⛔ **SMENTITA SUL RAPPORTO** — ### ⚠ **ma il difetto è nel METRO che "
+                   "ho scelto io:** avevo normalizzato sul VUOTO, e ### **il vuoto si "
+                   "scalda**, quindi il rapporto scende anche se la dispersione delle masse "
+                   "### **CRESCE**. ### **In assoluto la dispersione torna, e di molto.**"))
     # PH1-3
     _rt = [(k, ((mis.get(k) or {}).get("tau_tw") or {}).get("rapporto_intra_su_tutti"))
            for k in PM]
@@ -477,10 +585,19 @@ def main():
     A("")
     _ok = sum(1 for x in pr if "CONFERMATA" in x[3] and "SMENTITA" not in x[3])
     _no = sum(1 for x in pr if "SMENTITA" in x[3])
-    A("> ### **%d confermate, %d SMENTITE** su %d. ### **E la smentita che vale è `PH1-3`:** "
-      "### ⭐ **avevo dichiarato un confondente grande e l'ho misurato PICCOLO** — "
-      "### **dichiararlo prima è ciò che ha reso possibile ridimensionarlo dopo.**"
-      % (_ok, _no, len(pr)))
+    # ### ⛔ **LA <<MAL POSTA>> SI CONTA A PARTE, e non si lascia implicita:** una
+    #   previsione che non poteva scegliere un verdetto ### **non e' ne' confermata ne'
+    #   smentita**, ed e' un difetto di COME L'HO SCRITTA, non del numero.
+    _mp = sum(1 for x in pr if "MAL POSTA" in x[3])
+    A("> ### **%d confermate, %d SMENTITE%s** su %d.%s ### **E la smentita che vale è "
+      "`PH1-3`:** ### ⭐ **avevo dichiarato un confondente grande e l'ho misurato "
+      "PICCOLO** — ### **dichiararlo prima è ciò che ha reso possibile ridimensionarlo dopo.**"
+      % (_ok, _no, (", %d ### **MAL POSTA**" % _mp) if _mp else "", len(pr),
+         (" ### ⚠ **E la MAL POSTA è un difetto di come ho SCRITTO la previsione, "
+          "non del numero:** l'intervallo che avevo dichiarato ### **attraversava la soglia "
+          "del criterio**, quindi qualunque numero dentro quell'intervallo avrebbe potuto "
+          "dare DUE verdetti opposti. ### **Una previsione così non si può verificare, e "
+          "contarla come confermata sarebbe stato comodo e falso.**") if _mp else ""))
     A("")
     A("---")
     A("")
