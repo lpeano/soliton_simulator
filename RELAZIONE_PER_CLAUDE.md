@@ -8100,3 +8100,64 @@ la destinazione è `VUOTO-LOCALE-DETERMINISTICO`.
 `doc/FONDAZIONE_SPINORIALE.md:141`. ### **È la famiglia di `A3`** *(che era tre voci e
 l'indice ha dovuto separarle)*: ### **si cita per NOME finché Luca non decide quale tiene
 il `VI`.**
+---
+
+## 2026-10-07 — ⭐ **LA REGOLA PERMANENTE PER LA CHIUSURA DEI DIFETTI** *(decisione di Luca)*
+
+**Vive in testa a `doc/RIPRESA_2026-10-07.md`, accanto alla regola delle voci bloccanti**, ### **e nel task history di OGNI cura futura.** Voce: `L-MEMORIA-PRIMA`.
+
+## ⭐ **LA REGOLA PERMANENTE PER LA CHIUSURA DEI DIFETTI** *(decisione di Luca, 2026-10-07)*
+
+> **Per OGNI difetto da chiudere, PRIMA di proporre la cura si valuta se e come una MEMORIA
+> (hebbiana o di altro tipo) possa curarlo, nel rispetto di A15, e la valutazione si scrive
+> nel task history della cura con questi campi:**
+>
+> - **quale memoria (cosa ricorda, dove vive: arco, nodo, spinore);**
+> - **se è HEBBIANA (si rinforza con la co-attività dei due estremi) o di altro tipo (media
+>   mobile, integrale, isteresi), e perché;**
+> - **se SOSTITUISCE una grandezza o una dissipazione già esistente, oppure ne AGGIUNGE una
+>   nuova;**
+> - **che verso dà (P-memoria);**
+> - **a chi cede ciò che dimentica (P-decadimento, A15.3);**
+> - **da dove viene il suo tempo di memoria (A15.2);**
+> - **quali altre voci della coda chiuderebbe.**
+>
+> **A PARITÀ DI EVIDENZA SI PREFERISCE LA CURA CON MEMORIA, a tre condizioni:**
+>
+> **(1) che non aggiunga stato quando ne può sostituire uno esistente (9-ter: una legge in
+> meno, non una in più);**
+>
+> **(2) che sia relazionale e locale (per arco o fra vicini, mai su pos né su medie
+> globali);**
+>
+> **(3) che una memoria che AGGIUNGE dissipazione nuova si scriva come legge solo dopo
+> ENERGIA-NON-DEFINITA e VUOTO-LOCALE-DETERMINISTICO.**
+>
+> **Se la memoria non è la cura giusta, il task history dice perché.**
+
+### 📌 **DOVE VIVE QUESTA REGOLA**
+
+| | |
+|---|---|
+| qui | accanto alla regola delle voci bloccanti, ### **le due si leggono insieme prima di ogni lavoro** |
+| `RELAZIONE_PER_CLAUDE.md` | la registrazione della decisione |
+| ### **il task history di OGNI cura futura** | ### ⛔ **i sette campi, scritti.** ### **Una cura senza quella sezione non e' pronta** |
+
+> ### ⚠ **E NON E' UN PRESIDIO: e' una REGOLA SCRITTA** *(`A9`)*. ### **Oggi non impedisce
+> niente** — nessun hook guarda se il task history di una cura porta i sette campi.
+> ### **Dirlo fa parte della regola:** un elenco che credo automatico e non lo e' e' peggio
+> di uno che so di dover controllare a mano.
+
+### ⚠ **E UNA TENSIONE DICHIARATA, perche' la condizione `(3)` non e' gratis**
+
+Una memoria che ### **dimentica** e' ### **dissipativa per legge**, e `A15.3` pretende che
+il dimenticato vada in ### **calore del vuoto locale.** Ma il vuoto locale
+### **non esiste ancora** *(`VUOTO-LOCALE-DETERMINISTICO`)* e ### **l'energia dell'arco non
+e' definita** *(`ENERGIA-NON-DEFINITA`)*.
+
+> ### ➜ **QUINDI LA CONDIZIONE `(3)` NON E' PRUDENZA: e' l'unico modo di non scrivere una
+> legge il cui bilancio non si puo' nemmeno SCRIVERE.** ### **E le memorie che
+> SOSTITUISCONO una dissipazione esistente non ci cadono**, perche' non aggiungono un
+> termine: ### **ne cambiano uno che viola gia', e la violazione resta dichiarata dov'e'.**
+
+---
