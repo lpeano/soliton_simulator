@@ -8161,3 +8161,91 @@ e' definita** *(`ENERGIA-NON-DEFINITA`)*.
 > termine: ### **ne cambiano uno che viola gia', e la violazione resta dichiarata dov'e'.**
 
 ---
+
+---
+## 2026-10-07 — ⭐ **I DUE PRINCIPI DI LUCA** *(`P-DECADIMENTO`, `P-MEMORIA`)*
+
+**La scheda sta in `doc/REGISTRO_FISICA.md`**, e `A15` li rende ### **vincolanti**: ### **`A15.3` E' `P-decadimento`**, e ### **la conseguenza di `A15` E' `P-memoria`.**
+
+
+# ⭐ **I DUE PRINCIPI DI LUCA: IL DECADIMENTO È UNA TRASFORMAZIONE, LA MEMORIA DÀ UN VERSO** *(decisione di Luca, 2026-10-07)*
+
+> ### 📌 **Sono i due principi che `A15` rende VINCOLANTI.** Senza `A15` sarebbero due
+> frasi; con `A15` sono ### **una forma che ogni legge nuova deve avere.**
+
+## `P-decadimento` — **ogni decadimento è una trasformazione**
+
+> **«Ogni decadimento è una trasformazione: ciò che una grandezza perde rilassando diventa
+> calore del vuoto locale. Nessun termine fa sparire energia. Le strutture decadono,
+> l'energia si trasforma.»**
+
+### **CHE COSA VINCOLA, in pratica**
+
+Ogni termine della forma ### **`− dt · X / τ`** deve avere ### **una destinazione.**
+### ⛔ **Oggi NESSUNO ce l'ha**, e l'inventario completo sta in
+`doc/MEMORIE_MANCANTI.md` §`3`.
+
+| | |
+|---|---|
+| la legge | *«le strutture decadono»* — ### **il decadimento NON si vieta** |
+| il vincolo | *«l'energia si trasforma»* — ### **il termine deve CEDERE a qualcuno**, non annullarsi |
+| la destinazione | ### **il calore del VUOTO LOCALE** *(`A15.3`, corollario di `A14`)* |
+| per un ARCO | ### ⚠ **a chi?** La proposta e' ### **metà a ciascun estremo** — ### **ed è una PROPOSTA, non una legge**: una regola diversa *(per esempio pesata su `\|psi\|²`)* e' altrettanto scrivibile, e ### **la scelta è di Luca** |
+
+> ### ⛔ **E MANCA IL NUMERO, non la regola:** per dire ### **quanta** energia cede un
+> termine serve ### **l'energia dell'arco**, che oggi ### **non è definita** —
+> `ENERGIA-NON-DEFINITA`. ### **Quindi `P-decadimento` oggi si può SCRIVERE come forma e
+> NON si può BILANCIARE come numero**, e dirlo è parte del principio.
+
+## `P-memoria` — **uno scalare con memoria acquista un verso**
+
+> **«Uno scalare con memoria acquista un verso: la memoria dà la direzione.»**
+
+### **PERCHE' NON E' UNA METAFORA, e si vede sull'esempio che il sistema HA GIA'**
+
+`tw` è ### **uno scalare d'arco**, e ### **porta memoria**: la legge curata lo aggiorna con
+`tw += _w4(dph − twp) + (twist_dip − twp_dip) − dt_e·tw/τ_tw`.
+### ➜ **La differenza `δ = dph − tw` è una MEDIA MOBILE della differenza di fase**
+*(l'algebra è nel §`4b` del rapporto)*, e ### **una media mobile ha un verso che il valore
+istantaneo non ha:** dice ### **da che parte si stava andando.**
+
+> ### ⚠ **E IL VERSO NON E' GRATIS: `P-memoria` dice che la memoria LO DA', non che sia il
+> verso GIUSTO.** ### **Quale verso serva — e se serva un segno o un asse — resta la
+> decisione `A3` della ripresa**, e ### **`A1` la misura.**
+
+## ⚠ **L'OSSERVAZIONE DI LUCA, DA MISURARE — e diventa `M5d`**
+
+> **«Una memoria che dimentica dissipa SOLO quando ha qualcosa da dimenticare. Dove la
+> struttura è stabile la memoria raggiunge il presente e non dissipa; nel vuoto rincorre e
+> dissipa.»**
+
+### ✔ **E' UNA PREVISIONE FALSIFICABILE, non un'intuizione**, perche' dice ### **dove** la
+dissipazione deve stare:
+
+| | |
+|---|---|
+| in ### **MATERIA** | la struttura e' stabile → la memoria ### **ha raggiunto il presente** → ### **dissipa POCO** |
+| nel ### **VUOTO** | la struttura cambia → la memoria ### **rincorre** → ### **dissipa MOLTO** |
+
+**LA MISURA, ed è `M5d` di `A1`:** la potenza persa nel rilassamento della torsione,
+### **`Σ tw² · dt_e / τ_tw` per passo**, ### **per classe** e ### **per nodo** *(metà a
+ciascun estremo, che è la proposta di `P-decadimento`)*.
+
+> ### ⛔ **IL CRITERIO, fissato PRIMA dei numeri** *(e sta nel task history di `A1`)*:
+> ### **«la dissipazione sta nel vuoto» se la potenza per nodo MEDIANA in MATERIA è meno di
+> UN QUARTO di quella in VUOTO, a TUTTI i passi pesanti dopo il `300`.**
+>
+> ### ⚠ **E SE NON FOSSE COSI', NON SAREBBE UN DETTAGLIO:** vorrebbe dire che la torsione
+> dissipa ### **dove la materia sta**, cioè che il termine di rilassamento ### **non è il
+> costo di una memoria che rincorre** ma qualcos'altro. ### **La previsione è di Luca, il
+> numero no.**
+
+## 📌 **DOVE SI AGGANCIANO**
+
+| | |
+|---|---|
+| `A15` | li rende ### **vincolanti**: `A15.3` È `P-decadimento`, la ### **conseguenza** di `A15` È `P-memoria` |
+| `A14` | `P-decadimento` è ### **il suo corollario locale**: *«nessun termine fa sparire energia»* |
+| `CONSERVAZIONE-LOCALE` | la voce che tiene ### **l'elenco delle violazioni** |
+| `ENERGIA-NON-DEFINITA` | ### ⛔ **il prerequisito**: senza l'energia dell'arco il bilancio non si scrive |
+| `VUOTO-LOCALE-DETERMINISTICO` | ### **la destinazione** del calore |
