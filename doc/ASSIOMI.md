@@ -20,6 +20,43 @@
 > ed è il meccanismo con cui leggi efficaci possono emergere. Quale legge emerga si
 > misura, non si presume.»**
 
+### ⭐ **`A15.3`, PRECISATO** *(decisione di Luca, 2026-10-07 — `par.8`: il testo originale sopra RESTA leggibile, la precisazione sta accanto)*
+
+> **«A15.3, PRECISATO: ciò che una memoria dimentica non sparisce e non si perde a senso
+> unico: si SCAMBIA, in modo REVERSIBILE, con il calore del vuoto locale, che può
+> restituirlo. L'irreversibilità (la freccia del tempo) deve EMERGERE dalla dinamica di
+> molti gradi di libertà, non stare scritta nella legge. Una memoria della forma "insegue e
+> dimentica" contiene la freccia per costruzione, ed è quindi una forma PROVVISORIA. Il
+> programma di Luca è il contrario di quello di Rovelli ("Memory and Entropy", 2020): non
+> le tracce dalla termodinamica, ma la termodinamica dalle tracce. Per questo le tracce
+> fondamentali devono essere reversibili.»**
+
+### ➜ **LA CONSEGUENZA OPERATIVA: l'ECO DI LOSCHMIDT**
+
+> **La verifica di una memoria reversibile è l'eco di Loschmidt** — ### **avanti,
+> inversione, indietro: il sistema deve tornare, a meno del caos.**
+> ### 📌 **E' già in coda**, con `VUOTO-LOCALE-DETERMINISTICO`, e la voce che la porta è
+> ### **`LOSCHMIDT-ECO`.**
+
+### 📌 **E QUESTA PRECISAZIONE RENDE VINCOLANTE UNA DIREZIONE CHE ERA IN VALUTAZIONE**
+
+`doc/REGISTRO_FISICA.md` porta già, dal ### **2026-10-02**, la scheda
+### **`REVERSIBILITA-LOCALE`** — e la portava ### **«IN VALUTAZIONE, non come decisione»**,
+con queste parole:
+
+> *«REVERSIBILITA' LOCALE, IRREVERSIBILITA' GLOBALE. L'irreversibilita' globale EMERGE dal
+> caos delle leggi locali reversibili (Boltzmann). ### **La SOLA freccia fondamentale
+> ammessa e' la CRESCITA DELLO SPAZIO** — la nascita dei nodi.»*
+>
+> *«L'eco di Loschmidt FALLISCE SOLO nella voce della NASCITA.»*
+
+> ### ➜ **`A15.3` PRECISATO NON AGGIUNGE UNA DIREZIONE NUOVA: PROMUOVE QUELLA A UN
+> ASSIOMA.** ### **Cio' che era <<una direzione da valutare>> diventa <<un vincolo sulla
+> forma delle leggi>>** — ### **e il criterio misurabile c'era già.**
+>
+> ### ⚠ **E IL CENSIMENTO DELLE FRECCE IMPOSTE È IL LAVORO CHE NE SEGUE:** sta in
+> `doc/MEMORIE_MANCANTI.md` §`7`, voce ### **`FRECCE-IMPOSTE`.**
+
 ### ⚠ **PERCHE' NON E' `A7`, `A11` NE' `A14`, e lo dico perche' si toccano tutti e tre**
 
 *(Come per `A14` rispetto ad `A7`: in questo repo un nome riciclato ha gia' fatto danni.)*

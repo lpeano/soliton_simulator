@@ -8502,3 +8502,119 @@ aveva dedotto che la memoria dei legami ### **<<dimentica molto>>.**
 `471564` ### **origini registrate** e ### **involucri rimossi**: senza di essi uno *<<zero differenze>>* potrebbe voler dire *<<gli osservatori non hanno fatto niente>>*, e il sigillo passerebbe ### **a vuoto** — ### **un FALSO-UNO.**
 
 > ### ✔ **IL PUNTO `2(c)` E' SODDISFATTO: la corsa da `1000` passi puo' partire.**
+
+---
+## 2026-10-07 — ⭐ **`A15.3` PRECISATO, e il CENSIMENTO DELLE FRECCE IMPOSTE** *(decisione di Luca)*
+
+### ⭐ **`A15.3`, PRECISATO** *(decisione di Luca, 2026-10-07 — `par.8`: il testo originale sopra RESTA leggibile, la precisazione sta accanto)*
+
+> **«A15.3, PRECISATO: ciò che una memoria dimentica non sparisce e non si perde a senso
+> unico: si SCAMBIA, in modo REVERSIBILE, con il calore del vuoto locale, che può
+> restituirlo. L'irreversibilità (la freccia del tempo) deve EMERGERE dalla dinamica di
+> molti gradi di libertà, non stare scritta nella legge. Una memoria della forma "insegue e
+> dimentica" contiene la freccia per costruzione, ed è quindi una forma PROVVISORIA. Il
+> programma di Luca è il contrario di quello di Rovelli ("Memory and Entropy", 2020): non
+> le tracce dalla termodinamica, ma la termodinamica dalle tracce. Per questo le tracce
+> fondamentali devono essere reversibili.»**
+
+### ➜ **LA CONSEGUENZA OPERATIVA: l'ECO DI LOSCHMIDT**
+
+> **La verifica di una memoria reversibile è l'eco di Loschmidt** — ### **avanti,
+> inversione, indietro: il sistema deve tornare, a meno del caos.**
+> ### 📌 **E' già in coda**, con `VUOTO-LOCALE-DETERMINISTICO`, e la voce che la porta è
+> ### **`LOSCHMIDT-ECO`.**
+
+### 📌 **E QUESTA PRECISAZIONE RENDE VINCOLANTE UNA DIREZIONE CHE ERA IN VALUTAZIONE**
+
+`doc/REGISTRO_FISICA.md` porta già, dal ### **2026-10-02**, la scheda
+### **`REVERSIBILITA-LOCALE`** — e la portava ### **«IN VALUTAZIONE, non come decisione»**,
+con queste parole:
+
+> *«REVERSIBILITA' LOCALE, IRREVERSIBILITA' GLOBALE. L'irreversibilita' globale EMERGE dal
+> caos delle leggi locali reversibili (Boltzmann). ### **La SOLA freccia fondamentale
+> ammessa e' la CRESCITA DELLO SPAZIO** — la nascita dei nodi.»*
+>
+> *«L'eco di Loschmidt FALLISCE SOLO nella voce della NASCITA.»*
+
+> ### ➜ **`A15.3` PRECISATO NON AGGIUNGE UNA DIREZIONE NUOVA: PROMUOVE QUELLA A UN
+> ASSIOMA.** ### **Cio' che era <<una direzione da valutare>> diventa <<un vincolo sulla
+> forma delle leggi>>** — ### **e il criterio misurabile c'era già.**
+>
+> ### ⚠ **E IL CENSIMENTO DELLE FRECCE IMPOSTE È IL LAVORO CHE NE SEGUE:** sta in
+> `doc/MEMORIE_MANCANTI.md` §`7`, voce ### **`FRECCE-IMPOSTE`.**
+
+
+
+# §`7` — ⭐ **IL CENSIMENTO DELLE FRECCE IMPOSTE** *(2026-10-07)*
+
+*(Mandato di Luca, dopo la precisazione di `A15.3`. ### **Ogni legge del passo che impone una
+direzione nel tempo PER COSTRUZIONE**, trovata ### **col comando** e non a memoria. Voce:
+### **`FRECCE-IMPOSTE`.**)*
+
+> ### 📌 **IL COMANDO:** un censimento `AST` su ### **`b8c21049`** che cerca
+> ### **`np.where` con una condizione DI SEGNO** *(`< 0`, `> 0`, `scende`, `sale`, `cala`,
+> `cresce`)*, i ### **`clip` a UN LATO** *(un estremo a `None`)* e i
+> ### **`maximum`/`minimum` applicati a una VARIAZIONE.**
+
+## `A` — **LE FRECCE IMPOSTE, e sono NOVE**
+
+| | la freccia | dove | quale direzione impone | reversibile? con chi | cosa serve prima | PRIMA del vuoto? |
+|---|---|---|---|---|---|---|
+| `1` | ### **`− dt_e · tw / τ_tw`** | `step`, blocco della torsione | la torsione ### **scende SEMPRE** verso zero | ### ✔ **sì**, scambiandola col ### **calore del vuoto locale** *(che può restituirla)* | ### ⛔ **l'energia dell'arco** *(`ENERGIA-NON-DEFINITA`)* e il ### **vuoto locale** | ### ⛔ **NO** |
+| `2` | `d0 += dt_e·(d − d0)/τ_p` | `step` *(`:8316`)* | `d0` ### **inseugue `d`** e non il contrario | ### ✔ sì, col vuoto locale | idem | ### ⛔ **NO** |
+| `3` | `peq += dt_e·((rho − peq)/τ_BG + …)` | `step` *(`:8010`)* | `peq` ### **inseugue `rho`** | ### ✔ sì, col vuoto locale | idem | ### ⛔ **NO** |
+| `4` | `mem_mot = (1−plast)·mem_mot + plast·grad_tw` | `memoria_hebbiana_moto` *(`:9221`)* | la memoria vecchia ### **si SOVRASCRIVE**: *vince l'ultimo* | ### ⚠ **sì, MA va riscritta come SCAMBIO**, non come sostituzione | il vuoto locale, ### **e il tempo proprio** *(oggi ticchetta su `DT` globale)* | ### ⛔ **NO** |
+| `5` | `− omega_src/_tau` | `_passo_spinoriale` *(`:5929`)* | la rotazione dello spinore ### **decade** | ### ✔ sì, col vuoto locale | idem | ### ⛔ **NO** |
+| ### ⭐ **`6`** | ### **`np.where(scende, dx·fatt, dx)`** | ### **`_smorza`** *(`:6554`)*, chiamato da `_smp_chiudi` *(una volta per passo)* | ### ⛔ **smorza le DISCESE e lascia passare le SALITE**: `fatt = max(0, 1 − LAM/prima)` si applica ### **solo dove `dx < 0`** | ### ✔ **sì, e SENZA il vuoto**: basta un vincolo ### **SIMMETRICO** | ### ✔ **niente di nuovo**: le ### **tre candidate sono già registrate** in `D31` *(la piana, Itô, `tanh`)*, e la `tanh` ha ### **deriva ZERO esatta** | ### ⭐ ✔ **SÌ — CANDIDATO AD ANTICIPO** |
+| `7` | `return np.maximum(v, LAM)` | ### **`_nasce`** | ### ⛔ **ALLUNGA e MAI accorcia**: un troncone sotto `LAM` viene ### **portato A `LAM`** | ### ⚠ **non è un rilassamento: è un CANCELLO mancato.** La via non è renderlo reversibile, è ### **non far nascere l'arco corto** | ### **il cancello allo Schwinger** *(`SCHW-SOTTO-LAM`)*, e la decisione di Luca su ### **quale lunghezza** confrontare con `LAM` | ### ✔ **SÌ**, perché è un cancello e non un bilancio |
+| `8` | il ### **termostato globale** *(Nosé-Hoover)* | scrive `phivel` ### **dall'esterno** | energia ### **e** carica, a senso unico | ### ⚠ **sì in principio** *(un termostato di contatto è reversibile nel suo spazio esteso)*, ### **ma è GLOBALE** *(`A2`)* | il ### **vuoto locale**, che lo sostituirebbe | ### ⛔ **NO** |
+| `9` | ### **`scuoti_vuoto`** | inietta rumore | ### **inietta** e non riassorbe | ### ✔ **sì**: è esattamente ciò che `VUOTO-LOCALE-DETERMINISTICO` deve diventare | il vuoto locale | ### ⛔ **NO** |
+
+### ⚠ **E UNA RIGA CHE IL CENSIMENTO HA TROVATO E CHE NON E' UNA FRECCIA NEL TEMPO**
+
+```
+p_anti = np.where(s > 0, np.tanh(s), 0.0)      # mitosi, :8803
+```
+
+| | |
+|---|---|
+| sembra | un ### **raddrizzatore**: positivo passa, negativo diventa `0` |
+| ### ✔ **non lo è** | `p_anti` è una ### **PROBABILITÀ**, e una probabilità ### **non può essere negativa**: il `0` non è una freccia nel tempo, è ### **il bordo del dominio** |
+| ### ✔ **e in più NON GIRA** | è dentro `if ANTIFASE_ADD:` e ### **`ANTIFASE_ADD = False`** *(`:3092`)*, ### **assente dall'argv del driver** |
+
+> ### ✔ **LO SCRIVO PERCHE' IL CENSIMENTO L'HA TROVATA**, non perché sia una violazione:
+> ### **un censimento che tace ciò che ha scartato non si può ricontrollare.**
+
+**E LE ALTRE SETTE RIGHE con una condizione di segno** *(`_passo_spinoriale` `:5572`,
+`:5695`, `:5936`, `:6038`; `step` `:7924`, `:8027`, `:8028`)* ### **sono selettori di segno
+nello SPAZIO o nella CARICA, o guardie anti-zero** — ### **non frecce nel tempo.** I `clip` a
+un lato trovati stanno tutti in ### **`_diag_completa`** *(diagnostica)* e in `_celle_vive`
+*(binning spaziale)*: ### **nessuno in una legge.**
+
+## `B` — ✔ **LA FRECCIA AMMESSA, e NON è una violazione**
+
+> ### ⭐ **LA CRESCITA DELLO SPAZIO.** Le nascite di nodi e di archi sono
+> ### **a senso unico PER SCELTA DI LUCA**, e la scelta è ### **registrata.**
+
+| | |
+|---|---|
+| dove è registrata | ### **`doc/REGISTRO_FISICA.md`, scheda `REVERSIBILITA-LOCALE`** *(2026-10-02)*: *«L'irreversibilita' globale EMERGE dal caos delle leggi locali reversibili (Boltzmann). ### **La SOLA freccia fondamentale ammessa e' la CRESCITA DELLO SPAZIO** — la nascita dei nodi.»* |
+| il criterio che la verifica | ### **`LOSCHMIDT-ECO`**: *«L'eco di Loschmidt FALLISCE SOLO nella voce della NASCITA.»* ### **Se fallisse anche in `step`, in `chiudi` o nel termostato, la direzione NON sarebbe soddisfatta dal codice di oggi** |
+| lo stato di quella scheda | era ### **«IN VALUTAZIONE, non come decisione»** |
+
+> ### ➜ **E `A15.3` PRECISATO LA PROMUOVE: ciò che era una direzione da valutare diventa un
+> VINCOLO SULLA FORMA DELLE LEGGI.** ### **Il criterio misurabile c'era già**, e ### **le
+> nove frecce della tabella `A` sono esattamente ciò che l'eco di Loschmidt dovrebbe trovare
+> fuori posto.**
+
+## ⛔ **CHE COSA DICE QUESTO CENSIMENTO, in una riga**
+
+| | |
+|---|--:|
+| frecce imposte trovate | ### **`9`** |
+| curabili ### **SOLO dopo** il vuoto locale | ### **`7`** |
+| ### ⭐ **curabili PRIMA** | ### **`2`** — ### **`_smorza`/`D31`** *(un vincolo simmetrico, tre candidate già registrate)* e ### **`_nasce`** *(un cancello, non un bilancio)* |
+| righe scartate dal censimento, ### **dichiarate** | ### **`8`** *(un bordo di dominio e sette selettori di segno)* |
+
+> ### ⛔ **E LA DECISIONE SU `D31` COME CANDIDATO AD ANTICIPO È DI LUCA.** ### **Io dico
+> che si PUÒ fare prima; non che si DEBBA.**
