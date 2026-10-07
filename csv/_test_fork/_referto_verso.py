@@ -696,6 +696,49 @@ def main(argv):
               "### \u26d4 **come `delta`**" if _s > 0.8 else "### \u26a0 **AMBIGUO**")
         A("| `%d` | ### **%s** | %s | %s |" % (_k, n4(_s), n4(_q), _e))
     A("")
+    # ---------------------------------------- il censimento delle ORIGINI
+    #   ### \u26d4 **QUESTA TAVOLA E' LA GUARDIA DEL `FALSO-UNO`, e non e' un ornamento:**
+    #   la riga <<per ORIGINE>> qui sotto non si puo' leggere se non si sa ### **quante
+    #   origini da NASCITA l'involucro ha registrato davvero.** ### **Il 2026-10-07 la
+    #   corsa e' caduta al passo `216` con `divisione 0` e `schwinger 0`**, e il controllo
+    #   positivo della byte-inerzia ### **passava lo stesso**, perche' contava anche i
+    #   `seminato` -- che li scrive l'installazione, non un involucro.
+    _or = vv.get("origini_registrate") or {}
+    _so = vv.get("archi_senza_origine") or {}
+    A("**LE ORIGINI REGISTRATE**, e ### **si dichiarano PRIMA della tavola per origine**, "
+      "perche' una riga <<per origine>> con zero archi di quell'origine "
+      "### **non e' una misura:**")
+    A("")
+    A("| origine | archi |")
+    A("|---|--:|")
+    for _k in ("seminato", "divisione", "schwinger"):
+        if _k in _or:
+            A("| `%s` | ### **%s** |" % (_k, n4(_or[_k])))
+    for _k in sorted(x for x in _or if x not in ("seminato", "divisione", "schwinger")):
+        A("| `%s` | %s |" % (_k, n4(_or[_k])))
+    _nasc = sum(v for k, v in _or.items() if k != "seminato")
+    A("| ### **da NASCITA, in tutto** | ### **%s** |" % n4(_nasc))
+    A("")
+    if _nasc:
+        A("> ### \u2714 **L'INVOLUCRO HA LAVORATO: `%s` archi etichettati da una NASCITA.** "
+          "### **La riga per origine si puo' leggere.**" % n4(_nasc))
+    else:
+        A("> ### \u26d4 **ZERO ARCHI DA NASCITA: la riga per origine NON si legge**, e "
+          "### **non perche' il risultato sia nullo -- perche' non e' stato misurato.** "
+          "### **E' il `FALSO-UNO` che ha fatto cadere la corsa del `216`.**")
+    A("")
+    if _so:
+        A("> ### \u26d4 **E CI SONO ARCHI SENZA ORIGINE, in `%d` passi** *(il massimo: "
+          "### **%s** al passo `%s`)*. ### **Vuol dire che un arco e' nato per una via che "
+          "l'involucro NON copre**, e il numero lo dice invece di tacerlo."
+          % (len(_so), n4(max(_so.values())),
+             max(_so, key=lambda k: _so[k])))
+    else:
+        A("> ### \u2714 **E NESSUN ARCO SENZA ORIGINE, a nessun passo:** ogni arco e' "
+          "### **o seminato o nato da un evento avvolto.** ### \u26a0 **E questo numero PUO' "
+          "essere diverso da zero** -- e' il conteggio che ha preso il posto "
+          "dell'involucro MORTO di `_allaccia`, non un posto vuoto.")
+    A("")
     A("**E PER CLASSE, PER ORIGINE E PER ETA'** *(la dipendenza dall'eta' si riporta "
       "perche' il taglio `> 2 tau_tw` e' UNO, e un taglio solo non si puo' rileggere)*:")
     A("")

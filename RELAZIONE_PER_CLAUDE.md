@@ -8770,3 +8770,20 @@ niente: avrebbe DICHIARATO un disaccordo inesistente, o taciuto uno vero.**
 
 ### **La byte-inerzia su `220` passi**, che è il controllo che `50` passi non hanno fatto.
 ### ⛔ **Se fallisce, la corsa non parte, e lo dico.**
+
+## ✔ **E LA GUARDIA DEL `FALSO-UNO` ENTRA NEL REFERTO** *(2026-10-07)*
+
+Il generatore ora stampa ### **il censimento delle origini PRIMA** della tavola «per
+origine» di `M5(a)`, e se le nascite registrate sono ### **zero** scrive:
+*«### **la riga per origine NON si legge, e non perché il risultato sia nullo — perché non è
+stato misurato**»*.
+
+### ⛔ **È lo stesso errore che ha fatto cadere la corsa del `216`, spostato dove lo legge
+CHI LEGGE** e non solo chi gira il sigillo. ### ✔ **E il giro di prova sui dati a `3`
+passi lo conferma dal vivo:** su quella finestra pre-nascita il referto dichiara
+### **«ZERO ARCHI DA NASCITA»** invece di stampare una tavola vuota che sembra una misura.
+Più `archi_senza_origine`, ### **dichiarato anche quando è zero.**
+
+Controlli di formato sul referto di prova *(`466` righe)*: ### **`0`** `None` nel testo,
+### **`0`** doppi backtick, ### **`0`** percento doppi letterali, ### **`0`** segnaposto non
+risolti, ### **`0`** righe di tabella rotte, grassetto ### **bilanciato**.
