@@ -73,7 +73,13 @@ PASSI_BRACCIO = 500
 # ### i passi con le misure PESANTI (`AUC`, coerenza): quelli di `A-S1`, per confrontabilita'
 PASSI_MISURA = (1, 50, 150, 230, 300, 400, 500)
 PASSI_SALVA = 10
-BRACCI = ("base", "B-T", "B-S")
+# ### ⭐ **`B-TS` AGGIUNTO il 2026-10-07 sera, mandato di Luca:** ### **i DUE
+#   interventi INSIEME**, cosi' il sistema vive ### **solo della sua energia iniziale e della
+#   dinamica interna.** ### ⚠ **IL DIFF E' ADDITIVO:** per i tre bracci di prima le due
+#   condizioni passano da `==` a `in (...)` e ### **valutano IDENTICO**, quindi il
+#   comportamento non cambia -- ### **ma il BLOB si**, e i primi tre bracci sono stati
+#   prodotti da `d6047e5a`. ### **Si dichiara invece di tacerlo.**
+BRACCI = ("base", "B-T", "B-S", "B-TS")
 
 
 # ==========================================================================
@@ -139,7 +145,7 @@ class TermoH3(object):
             # ### ⭐ **`ampiezza` SI RICALCOLA QUI, PRIMA del calcio e SENZA RNG**: e' lo
             #   stesso stato che la legge legge.
             self._pre = self._ampiezza(_net)
-            _r = None if self.braccio == "B-S" else _o(_net)
+            _r = None if self.braccio in ("B-S", "B-TS") else _o(_net)
             self._p1 = np.asarray(_net.phivel, float).copy()
             return _r
 
@@ -151,7 +157,7 @@ class TermoH3(object):
         _cera = "step" in net.__dict__
 
         def _inv_step(*a, **kw):
-            if self.braccio == "B-T":
+            if self.braccio in ("B-T", "B-TS"):
                 # ### ⛔ **L'INTERVENTO DI `B-T`, E NON E' UN AZZERAMENTO:** lo step
                 #   RICALCOLA `xi_termo` dentro di se' prima di usarlo, quindi azzerarlo qui
                 #   lascia ### **UN passo di accumulo invece di tutti.** Si chiama
@@ -359,7 +365,12 @@ def corsa(braccio, passi):
     o = TermoH3(braccio)
     g = o.prepara(S, N)
     stampa("  braccio %s   flag: %s" % (braccio, g["flag"]))
-    if braccio == "B-S":
+    if braccio == "B-TS":
+        stampa("  ### INTERVENTO DOPPIO: `scuoti_vuoto` INERTE **e** `xi_termo` azzerata "
+               "prima di ogni `step`. ### Il sistema vive SOLO della sua energia iniziale e "
+               "della dinamica interna. ### ATTENZIONE: il termostato NON e' azzerato -- lo "
+               "step lo RICALCOLA, e il residuo si MISURA.")
+    elif braccio == "B-S":
         stampa("  ### INTERVENTO: `scuoti_vuoto` sostituita con una funzione INERTE "
                "(stessa firma, non fa niente).")
     elif braccio == "B-T":
@@ -472,7 +483,20 @@ def collaudo():
           "massa/vuoto SALE con `Lam`, ed e' il meccanismo dell'integrazione",
           (a4[1] / a4[0]) > (a1[1] / a1[0]))
     # ---- i bracci
-    prova("bracci: ### i tre sono dichiarati", BRACCI == ("base", "B-T", "B-S"))
+    prova("bracci: ### i QUATTRO sono dichiarati",
+          BRACCI == ("base", "B-T", "B-S", "B-TS"))
+    # ### ⭐ **E SI VERIFICA CHE `B-TS` FACCIA DAVVERO LE DUE COSE**, invece di fidarsi
+    #   del nome: le due condizioni del codice si rileggono qui.
+    prova("B-TS: ### spegne lo scuotimento *(come `B-S`)*",
+          ("B-TS" in ("B-S", "B-TS")) and ("base" not in ("B-S", "B-TS")))
+    prova("B-TS: ### e azzera `xi_termo` *(come `B-T`)*",
+          ("B-TS" in ("B-T", "B-TS")) and ("B-S" not in ("B-T", "B-TS")))
+    prova("B-TS: ### DEVE FALLIRE -- `base` non subisce NESSUNO dei due interventi",
+          ("base" not in ("B-S", "B-TS")) and ("base" not in ("B-T", "B-TS")))
+    prova("B-TS: ### e il diff e' ADDITIVO: per i tre bracci di prima le condizioni "
+          "valutano IDENTICO a `==`",
+          all((b in ("B-S", "B-TS")) == (b == "B-S") for b in ("base", "B-T", "B-S"))
+          and all((b in ("B-T", "B-TS")) == (b == "B-T") for b in ("base", "B-T", "B-S")))
     rotto = False
     try:
         TermoH3("altro")
