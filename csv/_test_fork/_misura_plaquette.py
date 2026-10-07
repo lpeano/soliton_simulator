@@ -39,6 +39,20 @@ plaquette, `1.46 s`; e il conto indipendente `somma su archi dei vicini comuni /
 Tutti gli archi hanno ### **`i < j`** *(misurato: `471564` su `471564`)*, quindi per il
 triangolo `u < v < w` il cammino `u -> v -> w -> u` da':
 
+### ⛔ **ANNOTAZIONE DEL 2026-10-07: LA FRASE QUI SOPRA E' SMENTITA, e resta scritta
+### perche' il codice qui sotto NON la usa piu'.** *(par.8: si annota, non si riscrive)*
+  ### **La misura `471564 su 471564` era fatta ai passi `0`, `1` e `2`, cioe' PRIMA della
+  prima nascita (`216`)**, e ### **ogni nascita produce ESATTAMENTE UN arco con `i > j`**
+  -- alla mitosi il nodo nuovo `m` ha l'indice ### **piu' alto**, quindi `m-b` e'
+  memorizzato al rovescio *(e lo Schwinger fa lo stesso con `k-bb`)*.
+  ### ⛔ **E' COSTATA LA CORSA DEL PASSO `229`** *(2026-10-06)*, e la cura e' il
+  `verso(e, da)` di `circolazione`: ### **il segno si LEGGE dall'arco** invece di essere
+  dedotto da una convenzione, e ### **si riduce alla forma qui sotto SOLO quando la
+  convenzione vale.**
+  ### ⚠ **Resta qui come TRAPPOLA DOCUMENTATA:** chi leggesse questa formula e la
+  riscrivesse <<semplificata>> rifarebbe l'errore. ### **La forma vera e' nel codice, non
+  qui.**
+
 ```
 circ = tw[(u,v)] + tw[(v,w)] - tw[(u,w)]
 ```

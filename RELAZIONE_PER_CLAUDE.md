@@ -8881,3 +8881,23 @@ la classe viene da ### **`classe_nodi(net)` con `np.arange(net.n)`**, cioè rica
 passo, e l'indicizzazione `cl[ii[m]]` è protetta dalla stessa maschera.
 ### ⚠ **Niente è cachato dal passo `0`.** ### ⛔ **Ma una lettura non è una misura: se cade
 al `229`, la causa sarà lì e lo dirò.**
+
+## ⛔ **UN COMMENTO CHE MENTIVA, nel mio stesso strumento** *(2026-10-07)*
+
+Il docstring di `csv/_test_fork/_misura_plaquette.py` afferma ancora: *«Tutti gli archi hanno
+`i < j` ### **(misurato: `471564` su `471564`)**»* — ### **la premessa smentita il
+2026-10-06**, quella che ha fatto morire la corsa al passo `229`. ### **Il codice era curato;
+il commento no.**
+
+### ✔ **Annotato, non riscritto** *(par.8)*: la frase resta leggibile, con sotto il perché è
+smentita *(la misura era ai passi `0`, `1`, `2`; ogni nascita produce ### **esattamente UN**
+arco con `i > j`, perché il nodo nuovo ha l'indice più alto)* e ### **dove vive la forma
+vera** — il `verso(e, da)` nel codice, non la formula nel commento.
+
+> ### ⚠ **E RESTA LÌ COME TRAPPOLA DOCUMENTATA:** chi leggesse quella formula e la
+> riscrivesse «semplificata» ### **rifarebbe l'errore.**
+
+### ⛔ **E NON L'HO TOCCATO QUANDO L'HO TROVATO:** il `par.5` vieta di modificare un file che
+il processo in corso ha ### **importato**, e la byte-inerzia importava questo file. ### **La
+patch è stata scritta, messa in coda, e applicata a sigillo chiuso** — ed è il motivo per cui
+questa riga arriva ora e non trenta minuti fa.
