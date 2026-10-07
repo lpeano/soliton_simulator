@@ -8271,3 +8271,66 @@ Con ### **`δ = twp − tw`** *(cioe' `dph_prec − tw`)* e senza avvolgimento: 
 ### ⛔ **E LA MEMORIA NON CURA TUTTO**
 
 La tabella ### **DIFETTI × MEMORIE** copre ### **tutte e `12` le bloccanti** *(con un controllo che si ferma se una manca)*, e dice che ### **la maggior parte dei difetti aperti sono soglie tarate, scale globali, cancelli che mancano, commenti contro il codice e architettura** — ### **cose che una memoria non tocca.** ### ⚠ **Ed e' PARZIALE su `B13`:** delle `53` voci aggiunte ne ho nominate ### **sette**, e ### **le altre NON le ho giudicate una per una** — ### **dirlo invece di scrivere cinquanta <<nessuna>> non verificate.**
+
+---
+## 2026-10-07 — ⭐ **`MEM-VERSO` ENTRA IN TABELLA COME SESTA OPZIONE**
+
+
+
+## ⭐ **UNA SESTA OPZIONE: `MEM-VERSO`, il verso dalla MEMORIA dell'arco**
+
+*(Dal rapporto `doc/MEMORIE_MANCANTI.md` §`5`, su mandato di Luca. ### **Governata da
+`A15`** e dalla regola `L-MEMORIA-PRIMA`. ### **NON è una cura: è una candidata, e la
+scelta è di Luca.**)*
+
+### LA RIGA, **con gli stessi campi delle altre cinque**
+
+| | la definizione del verso | chi la legge | cosa cambia nel dipolo | locale? | numeri a mano? | e con la legge CURATA? |
+|---|---|---|---|---|---|---|
+| **`MEM`** | il verso dalla ### **MEMORIA dell'arco**: `δ = twp − tw`, che è una ### **media mobile esponenziale di `dph_prec`** *(l'algebra è nel §`4b` del rapporto)* — oppure una media mobile del ### **segno** di `tw` | `TORS_4PI`, e ### **nessun lettore nuovo**: è una grandezza d'### **ARCO**, come il dipolo | ### **continuo**, e ### **ritardato**: segue *da che parte si stava andando*, non *dove si è* | ### ✔ **SI'**, massimamente: ### **un arco, due nodi** | ### ✔ **ZERO**, e il suo tempo è ### **`τ_tw = 2π/\|Δω\|`, DERIVATO** | ### ✔ **niente salti `±π`**, e ### ⛔ **ma `δ` È SPORCATA DAL DIPOLO** |
+
+### ⭐ **PERCHE' E' DIVERSA DALLE ALTRE CINQUE, e in un punto che conta**
+
+| | |
+|---|---|
+| `A` | una ### **divergenza** *(non una circolazione)* |
+| `B`, `C` | ### **non locali**, e `C` ha il ### **segno non univoco** *(`CICLO-CHIUSURA-SEGNO`)* |
+| `D` | locale e continua, ### **ma usa il valore ISTANTANEO di `tw`** |
+| `P` | locale e canonica, ### **ma dà un ASSE** e apre `P1`/`P2`/`P3` |
+| ### ⭐ **`MEM`** | ### **NON AGGIUNGE NIENTE: la memoria C'E' GIA' dentro `tw`.** ### **È `D` con la storia al posto dell'istante** |
+
+> ### ✔ **E' LA PIU' `9-ter` DI TUTTE: `D` TOGLIE una variabile, `MEM` non ne aggiunge
+> nemmeno una** — ### **usa una grandezza che il sistema calcola già**, perché `twp` e `tw`
+> ci sono entrambi.
+
+### ⛔ **I DUE COSTI, e vanno scritti come per le altre**
+
+**`1` — `δ` È SPORCATA DAL DIPOLO, e di quanto si misura.** Dal §`4b`: ogni salto del
+dipolo inietta in `δ` un gradino di ### **`±π` o `±2π`** che decade col ritmo `dt_e/τ_tw`,
+cioè ### **persiste `~τ_tw`.**
+
+> ### ⛔ **QUINDI C'E' UN ANELLO: `tw → dipolo → δ → verso → dipolo`.** ### **`MEM-VERSO`
+> va DOPO la cura del verso, o INSIEME a essa — non prima.** ### **E `A1` misura quanto
+> grande è lo sporco:** è `M5b`, la parte del dipolo dentro `tw`
+> *(`|tw_dip|/|tw|`)*.
+
+**`2` — IL RITARDO E' UNA SCELTA DI FISICA, non un dettaglio.** `δ` segue `dph_prec`, non
+`dph`: ### **un passo di ritardo.**
+
+> ### ⚠ **Un verso RITARDATO può essere giusto o sbagliato, e non lo decide
+> l'implementazione:** se il sistema cambia più in fretta di `τ_tw`, il verso mediato
+> ### **punta dove il sistema ERA.** ### **È una decisione di Luca**, e il numero che la
+> informa è la ### **stabilità misurata in `A1`.**
+
+### ⛔ **IL CASO CHE DEVE FALLIRE nel suo sigillo**
+
+> Su un arco con ### **`Δω = 0`** *(due nodi in fase)* ### **`τ_tw` diverge**, la media
+> mobile ### **non dimentica mai**, e il verso deve ### **CONGELARSI.**
+> ### **Se non si congela, la forma non è quella che credo** — e il controllo lo mostra
+> invece di lasciarlo supporre.
+
+### 📌 **E IN `A1` ENTRA COME QUINTA OPZIONE MISURATA**
+
+`MEM` si misura ### **accanto ad `A`, `D` e `perc_geom`**, col ### **metro giusto — la
+spinta iniettata `Σ|Δdipolo|`** — e ### **non come cura.**
+### **Voce: `MEM-VERSO`** *(`da-decidere`)*.
