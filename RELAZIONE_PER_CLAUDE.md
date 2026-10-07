@@ -9677,3 +9677,17 @@ referto: `8` confermate, `2` smentite su `10`)*.
 
 > ### ⛔ **NON COMINCIO LA CURA.** Il criterio indica `H2`, il mandato dice di fermarsi, e
 > ### **la decisione è di Luca.**
+
+---
+
+# ⏭ **IL PUNTO DI RIPRESA DI DOMANI: `doc/RIPRESA_2026-10-08.md`** *(2026-10-07 sera)*
+
+Lo stato di `SCIOGLIMENTO-FASE` dopo la giornata, il ### **meccanismo proposto dal
+guardiano** *(voce nuova `SPINORE-SENZA-FASE`, collegata a `SCIOGLIMENTO-FASE`, `CENS-A1`,
+`ENERGIA-NON-DEFINITA`, `PHI0-CONGELATA` e `M-LEGAMI`)*, la ### **direzione di Luca
+registrata come CANDIDATA e non decisa** *(un solo orologio per nodo,
+`psi = e^{i phi/2} * (...)`, col fattore `1/2` per la doppia copertura)*, e ### **l'ordine
+di domani: `D1` la potenza della coppia, `D2` il braccio con la coppia scalare, poi la
+decisione di Luca.**
+
+### ⏸ **La cura del verso resta sospesa.**
