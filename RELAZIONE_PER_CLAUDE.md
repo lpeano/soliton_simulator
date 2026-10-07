@@ -8832,3 +8832,52 @@ morta.** ### **Se cade lì, non sarà una sorpresa: sarà quella riga.**
 > dimentica:** ### ⛔ **non è «girare più passi»** — una raccomandazione si dimentica.
 > ### ✔ **È un controllo positivo che NON PUÒ essere soddisfatto se la finestra è troppo
 > corta.**
+
+---
+
+# ✔ **LA BYTE-INERZIA PASSA SU `220` PASSI, ATTRAVERSO UNA NASCITA** *(2026-10-07)*
+
+> ### ⭐ **E QUESTA VOLTA IL CONTROLLO POSITIVO HA MATERIA:** ### **`14` archi etichettati da
+> una NASCITA**, non zero. ### **È il numero che il sigillo a `50` passi non poteva produrre.**
+
+| | il braccio NUDO | ### **CON gli osservatori** |
+|---|--:|--:|
+| `n` | `12809` | ### **`12809`** |
+| `archi` | `471574` | ### **`471574`** |
+| attributi firmati | `291` | ### **`291`** |
+
+| | |
+|---|--:|
+| attributi solo nel nudo | ### **`0`** |
+| attributi solo con gli osservatori | ### **`0`** |
+| attributi ### **DIVERSI** | ### **`0`** |
+| origini registrate | `471578` |
+| ### ⭐ **di cui da NASCITA** | ### **`14`** |
+| involucri rimossi e ### **verificati** rimossi | ### **SÌ** |
+| esclusioni dichiarate | ### **`0`** *(la lista è vuota, e si dichiara vuota)* |
+
+### ✔ **GLI OSSERVATORI NON CAMBIANO LA DINAMICA, INVOLUCRI DI NASCITA COMPRESI.**
+### **Ed è la prima volta che questa frase vale per le nascite**, perché prima la finestra
+non le conteneva.
+
+## ⚠ **UN NUMERO CHE VA SPIEGATO, invece di lasciarlo stonare**
+
+`471578` origini registrate contro ### **`471574`** archi esistenti, e ### **`14`** chiavi da
+nascita contro ### **`+10`** archi netti. ### **Non è un'incoerenza: `self.origine` è un
+REGISTRO CHE CRESCE, non un'istantanea.** Alla mitosi un arco ### **si TOGLIE** e due
+### **si aggiungono** *(`−1 +2`)*, quindi una chiave registrata può appartenere a un arco che
+### **non c'è più.** ### **Il registro dice CHE COSA È NATO, non che cosa c'è adesso** — e
+per `M5(a)`, che chiede l'origine degli archi ### **presenti**, la differenza è innocua:
+l'origine si legge ### **per chiave**, e le chiavi assenti non vengono interrogate.
+
+## E UNA LETTURA STATICA, DICHIARATA COME STATICA
+
+Il primo passo ### **PESANTE** dopo il `216` è il ### **`229`**, e questo sigillo arriva al
+`220`: ### **il percorso delle misure pesanti attraverso una nascita non è coperto**
+*(`FINESTRA-PRE-NASCITA`)*. ### **Allora l'ho letto, e lo dichiaro come lettura e non come
+prova:** nelle plaquette tutto si ricalcola dal `net` a ogni passo *(`n` fresco, `pos[:n]`,
+`phi0[:n]`, il filtro `(ii<n) & (jj<n) & (ii!=jj)`, e `fuori_convenzione` CONTATO)*; in `M5`
+la classe viene da ### **`classe_nodi(net)` con `np.arange(net.n)`**, cioè ricalcolata al
+passo, e l'indicizzazione `cl[ii[m]]` è protetta dalla stessa maschera.
+### ⚠ **Niente è cachato dal passo `0`.** ### ⛔ **Ma una lettura non è una misura: se cade
+al `229`, la causa sarà lì e lo dirò.**

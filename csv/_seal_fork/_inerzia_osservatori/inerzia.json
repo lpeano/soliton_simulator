@@ -1,24 +1,25 @@
 {
  "blob_sim": "b8c21049b85ba36a828f49dfa225d42419f3baf5",
- "blob_verso": "e0593a8ffab7bd8f392ebebd650434001579fe07",
+ "blob_verso": "670c4d75da9f7b6238c09128dce4c028c4186d11",
  "blob_plaquette": "3cd93fab17968c91a631849110cc070587353e45",
- "passi": 50,
+ "passi": 220,
  "esclusi": [],
- "attributi": 240,
+ "attributi": 291,
  "solo_nudo": [],
  "solo_osservatori": [],
  "diversi": [],
- "origini_registrate": 471564,
+ "origini_registrate": 471578,
+ "origini_da_nascita": 14,
  "involucri_rimossi": true,
  "esito": "PASSA",
  "a_valle": {
   "nudo": [
-   12802,
-   471564
+   12809,
+   471574
   ],
   "oss": [
-   12802,
-   471564
+   12809,
+   471574
   ]
  }
 }

@@ -1,13 +1,13 @@
 ========================================================================================================
-LA BYTE-INERZIA DEGLI OSSERVATORI: 50 passi CON e SENZA
+LA BYTE-INERZIA DEGLI OSSERVATORI: 220 passi CON e SENZA
 ========================================================================================================
   simulatore b8c21049   atteso b8c21049
-  strumenti: e0593a8f (verso)  3cd93fab (plaquette)
+  strumenti: 670c4d75 (verso)  3cd93fab (plaquette)
 
   --- il braccio NUDO
-      n = 12802, archi = 471564, attributi = 240
+      n = 12809, archi = 471574, attributi = 291
   --- il braccio CON GLI OSSERVATORI
-      n = 12802, archi = 471564, attributi = 240
+      n = 12809, archi = 471574, attributi = 291
 
 --------------------------------------------------------------------------------------------------------
   attributi solo nel NUDO: 0  []
@@ -15,7 +15,7 @@ LA BYTE-INERZIA DEGLI OSSERVATORI: 50 passi CON e SENZA
   attributi DIVERSI: 0
 
 ========================================================================================================
-  ### ✔ LA BYTE-INERZIA PASSA: lo stato e' IDENTICO AL BIT su 240 attributi.
+  ### ✔ LA BYTE-INERZIA PASSA: lo stato e' IDENTICO AL BIT su 291 attributi.
   ### Gli osservatori NON cambiano la dinamica, involucri compresi.
 ========================================================================================================
-  controllo: origini registrate 471564   involucri rimossi SI
+  controllo: origini registrate 471578   di cui da NASCITA 14   involucri rimossi SI
