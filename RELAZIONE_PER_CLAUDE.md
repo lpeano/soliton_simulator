@@ -8479,3 +8479,26 @@ aveva dedotto che la memoria dei legami ### **<<dimentica molto>>.**
 >
 > ### 📌 **IL GUARDIANO LO RICONOSCE**, ed è registrato qui perché ### **una correzione
 > che resta in una conversazione è una correzione persa.**
+
+---
+
+## 2026-10-07 — **LA BYTE-INERZIA DEGLI OSSERVATORI: fallisce, si cura, passa**
+
+**Il controllo `2(c)` del mandato:** `50` passi ### **CON** e ### **SENZA** gli osservatori, stato ### **identico al bit.** Sigillo `8894fb5d`.
+
+| | al primo giro *(`9022e6c`)* | dopo la cura |
+|---|--:|--:|
+| attributi confrontati | `240` | `240` |
+| ### **DIVERSI** | ### **`0`** | ### **`0`** |
+| solo nel nudo | `0` | `0` |
+| ### **solo CON gli osservatori** | ### ⛔ **`1`** *(`_allaccia`)* | ### ✔ **`0`** |
+
+> ### ⛔ **IL DIFETTO ERA NEL RIPRISTINO, NON NELLA FISICA.** `_allaccia` e' un ### **metodo di CLASSE**, e assegnarlo su `net` ### **crea un attributo d'ISTANZA che prima non c'era**: il ripristino lo ### **riassegnava** invece di ### **cancellarlo.**
+>
+> ### ✔ **E LA REGOLA C'ERA GIA':** `sola_lettura` cancella le chiavi nuove *(<<comprese le chiavi NUOVE che vanno TOLTE>>)*. ### **L'avevo scritta per `net` e non applicata agli involucri.** ### **Il difetto non e' stato non saperla: e' stato non applicarla fuori dal posto dove l'avevo scritta.**
+
+### ✔ **E I DUE CONTROLLI POSITIVI RENDONO IL SIGILLO NON VUOTO**
+
+`471564` ### **origini registrate** e ### **involucri rimossi**: senza di essi uno *<<zero differenze>>* potrebbe voler dire *<<gli osservatori non hanno fatto niente>>*, e il sigillo passerebbe ### **a vuoto** — ### **un FALSO-UNO.**
+
+> ### ✔ **IL PUNTO `2(c)` E' SODDISFATTO: la corsa da `1000` passi puo' partire.**

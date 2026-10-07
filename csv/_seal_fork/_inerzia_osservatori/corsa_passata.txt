@@ -1,3 +1,9 @@
+[TIMBRO] _inerzia_osservatori.py  sha1-BYTE 8894fb5d  committato e pulito
+[TIMBRO] _misura_verso.py  sha1-BYTE e0593a8f  !! MODIFICATO rispetto a HEAD (blob-git 0c530bff) -- i byte che girano NON sono quelli committati
+[TIMBRO] _mitosi_soglia_grad.py  sha1-BYTE 1279c6fb  committato e pulito
+[TIMBRO] _mitosi_zero_dove.py  sha1-BYTE c206bd4b  committato e pulito
+[TIMBRO] _tors_w8_lunga.py  sha1-BYTE bc62bcaa  committato e pulito
+[TIMBRO] _misura_plaquette.py  sha1-BYTE 3cd93fab  committato e pulito
 ========================================================================================================
 LA BYTE-INERZIA DEGLI OSSERVATORI: 50 passi CON e SENZA
 ========================================================================================================

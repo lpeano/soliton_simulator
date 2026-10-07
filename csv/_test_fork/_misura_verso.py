@@ -673,8 +673,15 @@ class Verso(object):
                 self.origine[int(_k)] = "allaccia"
             return _r
 
+        # ### ⛔ **`_allaccia` E' UN METODO DI CLASSE, e assegnarlo su `net` CREA UN
+        #   ATTRIBUTO D'ISTANZA che prima non c'era.** ### **Quindi il ripristino non e'
+        #   una riassegnazione: e' una CANCELLAZIONE** -- e si registra ### **se la chiave
+        #   c'era**, invece di indovinarlo. ### ⚠ **E' LA STESSA REGOLA CHE `sola_lettura`
+        #   APPLICA GIA' ALLE CHIAVI NUOVE**, e che qui non avevo applicato: ### **la
+        #   BYTE-INERZIA l'ha presa, con `240` attributi identici e UNO in piu'.**
+        _cera = "_allaccia" in net.__dict__
         net._allaccia = _inv_all
-        self._involucri.append((None, (net, _oa)))
+        self._involucri.append((None, (net, _oa, _cera)))
         # ### TUTTO CIO' CHE ESISTE AL PASSO `0` E' `seminato`, per definizione.
         for _k in chiavi_archi(net).tolist():
             self.origine[int(_k)] = "seminato"
@@ -687,8 +694,15 @@ class Verso(object):
         n = 0
         for voce, orig in self._involucri:
             if voce is None:
-                _net, _oa = orig
-                _net._allaccia = _oa
+                _net, _oa, _cera = orig
+                if _cera:
+                    _net._allaccia = _oa
+                else:
+                    # ### **LA CHIAVE NON C'ERA: si CANCELLA**, e il metodo di classe
+                    #   torna visibile da se'.
+                    net_d = _net.__dict__
+                    if "_allaccia" in net_d:
+                        del net_d["_allaccia"]
                 n += 1
             else:
                 voce["regola"] = orig
