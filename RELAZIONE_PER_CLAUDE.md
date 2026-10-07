@@ -8808,3 +8808,27 @@ Avevo corretto la forbice di `_inerzia_nascite.py` *(percentili per `100` e non 
 
 ### ⚠ **Una formula che nessuno può provare non è un controllo**, e questa stava in sei
 righe dentro un ciclo.
+
+## ⛔ **E UN DIFETTO NUOVO REGISTRATO: `FINESTRA-PRE-NASCITA`** *(2026-10-07)*
+
+Ho cercato nell'indice *(`--testo convenzione`, `--testo orientamento`, `--testo "finestra
+corta"`)* e ### **la trappola che è costata TRE volte in una settimana non aveva una voce.**
+Ora ce l'ha: ### **`FINESTRA-PRE-NASCITA`**, `aperto`, `blocca_run_base = NO`, famiglia `G`,
+con la spiegazione lunga in `doc/STATO_RUN.md` ### **sotto lo stesso ID.**
+
+| | il difetto | la finestra | il costo |
+|---|---|---|---|
+| `1` | `i < j` su TUTTI gli archi, *«`471564` su `471564`»* | passi `0`, `1`, `2` | la corsa ### **morta al `229`** |
+| `2` | la byte-inerzia | ### **`50`** passi | ### **un `PASSA` a vuoto** |
+| `3` | l'involucro sulla regola di `i` | arriva al `216` e cade | ### **`1425.8` secondi** |
+
+### ⚠ **E HO DICHIARATO UN BUCO CHE È ANCORA APERTO, invece di scoprirlo dopo:** il primo
+passo ### **PESANTE** dopo il `216` è il ### **`229`**, e la byte-inerzia a `220` passi
+### **NON lo copre.** ### **Il percorso delle misure pesanti attraverso una nascita è
+esercitato solo dalla corsa vera** — ed è ### **esattamente dove la corsa del 2026-10-06 era
+morta.** ### **Se cade lì, non sarà una sorpresa: sarà quella riga.**
+
+> ### ⭐ **E IL CRITERIO DI CHIUSURA DICE LA FORMA DELLA CURA GIUSTA, che è il punto che si
+> dimentica:** ### ⛔ **non è «girare più passi»** — una raccomandazione si dimentica.
+> ### ✔ **È un controllo positivo che NON PUÒ essere soddisfatto se la finestra è troppo
+> corta.**

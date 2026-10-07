@@ -2937,3 +2937,60 @@ occorrenze sono COPIE del simulatore** nei sigilli e nei backup.
 
 ### ⛔ **NON INIZIATA.** E' il punto ### **`A2`** di `doc/RIPRESA_2026-10-07.md`.
 Collegata a `GEOM-SENZA-VERSO`.
+
+---
+
+# `FINESTRA-PRE-NASCITA` — **una finestra prima del passo `216` non dice niente sulle nascite** *(2026-10-07)*
+
+> ### ⛔ **TRE VOLTE IN UNA SETTIMANA, E OGNI VOLTA L'ERRORE SEMBRAVA UNA MISURA.**
+
+Sulla scena del driver, seme `11`, la ### **prima nascita è al passo `216`.** Prima di quel
+passo ### **`n` e `archi` non cambiano MAI.** Quindi ogni affermazione su ciò che succede a
+una nascita, misurata su una finestra più corta, è un ### **`FALSO-ZERO` o un `FALSO-UNO`
+per costruzione** — non «un po' debole»: ### **garantita dall'insieme scelto.**
+
+## LE TRE VOLTE, COL COSTO
+
+| | il difetto | la finestra | il costo |
+|---|---|---|---|
+| ### **`1`** | lo strumento del verso pretendeva ### **`i < j` su TUTTI gli archi**, *«misurato `471564` su `471564`»* | passi ### **`0`, `1`, `2`** | la corsa è ### **morta al passo `229`** |
+| ### **`2`** | la byte-inerzia degli osservatori | ### **`50`** passi | ### **gli involucri di nascita non sono MAI stati esercitati mentre lavorano**, e il controllo positivo passava a vuoto |
+| ### **`3`** | l'involucro avvolgeva la regola che scrive ### **SOLO `net.i`** | ### **`216`** *(ci è arrivata e lì è caduta)* | ### **`1425.8` secondi** |
+
+### **Il `(1)` ha una causa derivata, non un caso:** alla mitosi il nodo nuovo `m` ha
+l'indice ### **più alto**, quindi `m-b` è memorizzato ### **al rovescio** — e lo Schwinger
+fa lo stesso con `k-bb`. ### **Ogni nascita produce ESATTAMENTE UN arco con `i > j`.**
+
+### **Il `(2)` è il più insidioso dei tre**, perché ### **non si è manifestato come un
+errore: si è manifestato come un PASSA.** Chiedeva *«origini registrate `> 0`»* e passava
+contando i ### **`471564` `seminato`**, che li scrive ### **l'INSTALLAZIONE** degli
+involucri, con un giro che ### **non passa da nessun involucro.**
+
+## ✔ **LE TRE CURE SONO FATTE**
+
+1. ### **chiave canonica `(min, max)`** e il ### **verso LETTO dall'arco** invece di dedotto
+   da una convenzione *(`45f6bd4`)*;
+2. ### **involucro UNICO su `nascita`**, il punto unico dove `i` e `j` sono di nuovo
+   coerenti *(`4009d98`)*;
+3. ### **finestra della byte-inerzia a `220` passi**, col controllo
+   ### **`origini_da_nascita > 0`** *(`4009d98`)*.
+
+## ⛔ **IL FRONTE CHE RESTA, E UN BUCO DICHIARATO**
+
+### **QUESTA VOCE NON È QUEI TRE DIFETTI.** È la domanda: ### **quali ALTRI strumenti e
+sigilli del repo girano su finestre sotto il `216` e ne traggono conclusioni sulle
+nascite?** ### **NON LI HO CENSITI.**
+
+> ### ⚠ **E UN BUCO ANCORA APERTO, che dichiaro invece di scoprirlo dopo:** il primo passo
+> ### **PESANTE** dopo il `216` è il ### **`229`** *(con il `230`)*, e la byte-inerzia a
+> `220` passi ### **NON lo copre.** Il percorso delle ### **misure pesanti attraverso una
+> nascita** è esercitato ### **solo dalla corsa vera** — ed è esattamente dove la corsa del
+> 2026-10-06 era morta. ### **Se cade lì, non sarà una sorpresa: sarà questa riga.**
+
+## ⭐ **LA FORMA DELLA CURA GIUSTA, perché è il punto che si dimentica**
+
+### ⛔ **Non è «girare più passi».** Una raccomandazione si dimentica. ### ✔ **È un
+CONTROLLO POSITIVO CHE NON PUÒ ESSERE SODDISFATTO SE LA FINESTRA È TROPPO CORTA** — come
+`origini_da_nascita > 0`, che su `50` passi fa ### **RIFIUTARE** il sigillo invece di farlo
+passare a vuoto. ### **Il controllo nuovo rende impossibile l'errore vecchio, invece di
+raccomandare di non farlo.**
