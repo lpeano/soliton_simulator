@@ -1,0 +1,50 @@
+{
+ "piattaforma": {
+  "python": "3.13.2",
+  "numpy": "2.3.0",
+  "sistema": "Windows 11",
+  "macchina": "AMD64"
+ },
+ "blob_sim": "b8c21049b85ba36a828f49dfa225d42419f3baf5",
+ "blob_atteso": "b8c21049",
+ "blob_strumento": "ccbe5ed81824cb0d579b848a043baa7912d31677",
+ "masse": {
+  "massa_0": 411,
+  "massa_1": 413,
+  "massa_2": 413
+ },
+ "vuoto": 11565,
+ "intervento": {
+  "massa_0": {
+   "nodi": 411,
+   "media": -0.016561173656363226,
+   "std_prima": 0.41880524053183155,
+   "min_prima": -1.255232261686041,
+   "max_prima": 1.1758680995021982
+  },
+  "massa_1": {
+   "nodi": 413,
+   "media": -0.01459333355284458,
+   "std_prima": 0.4136299479640352,
+   "min_prima": -1.3727323399142581,
+   "max_prima": 1.364586207873783
+  },
+  "massa_2": {
+   "nodi": 413,
+   "media": 0.027931352340951995,
+   "std_prima": 0.40523639472886225,
+   "min_prima": -1.3067855271579898,
+   "max_prima": 1.3935573515008404
+  }
+ },
+ "conteggi": {
+  "nodi_di_massa": 1237,
+  "fuori_identici": 11565,
+  "attributi": 63,
+  "diversi": [
+   "phivel"
+  ]
+ },
+ "guai": [],
+ "esito": "PASSA"
+}

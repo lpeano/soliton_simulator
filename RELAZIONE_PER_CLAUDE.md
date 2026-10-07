@@ -9323,3 +9323,90 @@ stato.** ### ⭐ **`M5b` lo esclude con il numero:** la mediana di `|tw_dip|/|tw
 > ### ⚠ **MA IL `23–28 %` NON SPARISCE, e la scheda lo porta:** sugli archi con un salto
 > recente ### **un quarto di `|tw|` viene dal dipolo**, quindi `M-LEGAMI` su quegli archi
 > ### **erediterebbe un quarto del calcio.** ### **Il vincolo cade; l'avvertenza resta.**
+
+---
+
+# ⛔ **AGGIUNTA DATATA — 2026-10-07 sera, DOPO il controllo del passo `0` e PRIMA della corsa** *(`par.8`: si ANNOTA; le PREVISIONI qui sopra NON si toccano)*
+
+> ### ⭐ **LE CINQUE PREVISIONI RESTANO COME SONO.** Questa sezione aggiunge
+> ### **un TERZO accoppiamento** e ### **i numeri di `S1`**, che il controllo del passo `0`
+> ha prodotto gratis. ### **Nessun criterio è cambiato, e nessun numero oltre il passo `0` è
+> stato visto.**
+
+## ✔ **IL CONTROLLO DEL PASSO `0` PASSA**
+
+| | |
+|---|--:|
+| attributi firmati | ### **`63`** |
+| attributi ### **diversi** | ### **`1`** — ### **solo `phivel`** |
+| nodi delle masse | `411 + 413 + 413 = ` ### **`1237`** *(il `9.66 %`)* |
+| nodi del VUOTO con `phivel` ### **IDENTICA AL BIT** | ### **`11565`** |
+
+## ⭐ **E `S1` È VENUTA GRATIS, col suo NULLO — e dice una cosa che non mi aspettavo**
+
+| | `std(phivel)` |
+|---|--:|
+| ### **dentro le masse** | ### **`0.4131`** |
+| ### **nel VUOTO** *(il NULLO, non zero)* | ### **`0.3934`** |
+| `_CALORE_INIT` | `0.4` |
+
+### ⛔ **LA DISPERSIONE DENTRO LE MASSE È SOLO IL `5 %` PIÙ ALTA DI QUELLA DEL VUOTO.**
+### ➜ **Quindi le masse non sono «specialmente disperse»: sono disperse come TUTTO IL RESTO**,
+e l'unica cosa che le distingue è che ### **PARTONO in fase.**
+### ⚠ **`S1` non è refutata** *(la dispersione è dell'ordine di `_CALORE_INIT`, cioè NON è
+trascurabile)*, ### **ma la sua lettura cambia:** `H1` non dice *«le masse hanno un difetto»*,
+dice *«la coerenza iniziale non è protetta da niente»*.
+
+## ⛔ **IL TERZO ACCOPPIAMENTO: L'INTERVENTO TOGLIE IL `10.52 %` DELL'ENERGIA CINETICA DI FASE GLOBALE**
+
+Le medie di `phivel` per massa sono ### **`−0.0166`, `−0.0146`, `+0.0279`** — cioè
+### **quasi ZERO**, come ci si aspetta da un calcio simmetrico. ### ➜ **Equalizzare alla media
+non «allinea le velocità»: le AZZERA.**
+
+| `<phivel²>` | prima | dopo | calo |
+|---|--:|--:|--:|
+| ### **GLOBALE** *(ciò che il termostato legge)* | `0.156311` | `0.139863` | ### **`10.52 %`** |
+| dentro le masse | `0.170649` | `0.000423` | ### **`99.75 %`** |
+| nel vuoto | `0.154778` | `0.154778` | ### **`0` — identico al bit** |
+
+### **E IL TERMOSTATO LEGGE UNA MEDIA GLOBALE** *(`:7711`: `E_cin = mean(phivel[:n]**2)`)*, col
+suo comportamento dichiarato nel codice: *«`xi>0` frena (energia alta), ### **`xi<0`
+RIFORNISCE** (energia bassa)»*.
+### ➜ **Quindi l'intervento fa partire il termostato in modo RIFORNENTE, su TUTTA la rete.**
+
+### ⭐ **MA IL RIFORNIMENTO È MOLTIPLICATIVO, E QUESTO CAMBIA LA PREVISIONE DEL MECCANISMO**
+
+`delta_phivel = dt_n_s * (coppia − xi_termo * phivel) / M_PH` *(`:7760`)*: il termine del
+termostato è ### **proporzionale alla `phivel` del nodo stesso.**
+### ➜ ### **Su un nodo a velocità ZERO il termostato non può fare NIENTE** *(`xi·0 = 0`)*:
+### **amplifica le velocità che ci sono**, e quelle che ci sono stanno ### **nel VUOTO.**
+
+| il canale | come agisce | agisce su `phivel = 0`? |
+|---|---|---|
+| ### **`scuoti_vuoto`** | ### **ADDITIVO** *(`phivel += calcio`)* | ### ✔ **SÌ** — è il canale da cui la dispersione intra-massa TORNA |
+| ### **il termostato** | ### **MOLTIPLICATIVO** *(`− xi·phivel`)* | ### ⛔ **NO** — amplifica il VUOTO, non le masse |
+| la ### **coppia** | additiva, ma ### **non legge `phi`** nel ramo del driver *(`H2`)* | ### ✔ sì, ma non per riallineare |
+
+> ### ⭐ **CONSEGUENZA DICHIARATA PRIMA DELLA CORSA:** nei primi passi il termostato
+> ### **rifornisce il VUOTO** mentre le masse restano quiete, quindi ### **il contrasto
+> MATERIA/VUOTO nelle VELOCITÀ cresce.** ### ⚠ **Che cosa questo faccia a `c_k` — che è una
+> coerenza di CAMPO, non di velocità — NON lo so, e non lo indovino.**
+
+### ⛔ **E SONO TRE CONFONDENTI, NON UNO. Li conto, perché il numero conta**
+
+| | che cosa cambia oltre alla dispersione di fase | verso |
+|---|---|---|
+| ### **`1`** | `tau_tw` intra-massa, ### **fattore ~`2600`** | la torsione ### **non rilassa più** dentro le masse |
+| ### **`2`** | `scuoti_vuoto` ### **ri-inietta** la dispersione | l'effetto ### **svanisce** nel tempo |
+| ### **`3`** | ### **`−10.52 %`** di energia cinetica globale → termostato ### **rifornente**, ma ### **solo dove c'è già velocità** | il ### **VUOTO** viene scaldato, le masse no |
+
+> ### ⛔ **QUINDI `H1` COSÌ COM'È SPECIFICATA NON È UN ESPERIMENTO A UNA VARIABILE, E LO DICO
+> PRIMA DI GIRARLO.** ### ✔ **L'asimmetria del test resta quella scritta sopra, e vale ancora
+> di più con tre confondenti invece di uno:** se l'`AUC` ### **resta bassa**, `H1 NON BASTA` è
+> una conclusione ### **solida** *(tre vantaggi dati alle masse e nessuno è bastato)*; se
+> ### **risale**, la causa è ### **ambigua fra quattro cause** e il referto dirà
+> ### **CONFONDUTO.**
+>
+> ### ⭐ **E LA DECISIONE SE GIRARLO COSÌ O FERMARSI È DI LUCA.** ### **Io lo giro**, perché il
+> mandato è esplicito e perché ### **il ramo che il mandato vuole davvero — «le masse si
+> sciolgono anche con le velocità coerenti?» — è quello NON confondibile.**

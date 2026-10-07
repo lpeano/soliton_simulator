@@ -1,0 +1,14 @@
+========================================================================================================
+IL CONTROLLO DEL PASSO 0: le due reti differiscono SOLO in `phivel` delle masse
+========================================================================================================
+  simulatore b8c21049   atteso b8c21049
+  masse: massa_0 411, massa_1 413, massa_2 413   vuoto: 11565 nodi
+    massa_0  nodi   411   media -0.016561   std PRIMA 0.418805   [-1.2552, +1.1759]
+    massa_1  nodi   413   media -0.014593   std PRIMA 0.413630   [-1.3727, +1.3646]
+    massa_2  nodi   413   media +0.027931   std PRIMA 0.405236   [-1.3068, +1.3936]
+
+  attributi firmati: 63   diversi: ['phivel']
+  nodi delle masse: 1237   nodi FUORI con `phivel` IDENTICA al bit: 11565
+--------------------------------------------------------------------------------------------------------
+  ### ✔ IL CONTROLLO PASSA: differisce SOLO `phivel`, e SOLO sui nodi delle masse.
+========================================================================================================
