@@ -8249,3 +8249,25 @@ ciascun estremo, che è la proposta di `P-decadimento`)*.
 | `CONSERVAZIONE-LOCALE` | la voce che tiene ### **l'elenco delle violazioni** |
 | `ENERGIA-NON-DEFINITA` | ### ⛔ **il prerequisito**: senza l'energia dell'arco il bilancio non si scrive |
 | `VUOTO-LOCALE-DETERMINISTICO` | ### **la destinazione** del calore |
+---
+
+## 2026-10-07 — ⭐ **IL RAPPORTO SULLE MEMORIE: il censimento, il bilancio, e che cosa la memoria NON cura**
+
+**Il rapporto e' `doc/MEMORIE_MANCANTI.md`** *(`500` righe)*, linkato da `B15` della ripresa e dalla coda. ### **NESSUN CODICE DI FISICA**, simulatore `b8c21049`.
+
+### ⛔ **CHE COSA HA TROVATO OLTRE AL MANDATO**
+
+| | |
+|---|---|
+| ### **`perc_tw` e' STATO MORTO** | un `float64` per nodo, scritto ### **sempre a `np.zeros`** da quattro siti di nascita, e ### **NESSUNA legge la legge.** ### **Non e' una violazione di `A15`: e' `A8`.** Voce `PERC-TW-MORTA` |
+| ### **cinque tempi di memoria su sei sono GIA' derivati** | l'unica violazione di `A15.2` e' ### **`TAU_DIFF`** |
+| ### ⛔ **il <<plateau>> della torsione NON E' UN PLATEAU** | il numero del guardiano e' ### **esatto** *(`3.9151` rad, `62.31 %` di `2π`)*, ma la serie e' ### **`1.40`, `2.28`, `2.70`, `3.42`, `3.92`: MONOTONA fino all'ultimo passo.** ### **L'equilibrio NON e' raggiunto, quindi <<quanto dimentica>> non si puo' concludere** |
+| ### ⚠ **un FALSO POSITIVO del mio censimento** | `conc_nodi` risultava *congelata* e ### **non lo e'**: si aggiorna per ### **MUTAZIONE** in `_agg_voce`, che un censimento di ASSEGNAZIONI non vede. ### **Il limite e' dichiarato**, e le mutazioni in loco sono cercate a parte *(`3` in tutto il file, ### **nessuna su un array di stato**)* |
+
+### ✔ **L'ALGEBRA DEL GUARDIANO REGGE, e l'ho rifatta riga per riga**
+
+Con ### **`δ = twp − tw`** *(cioe' `dph_prec − tw`)* e senza avvolgimento: ### **`δ' = δ + (dt_e/τ_tw)·(dph_prec − δ) − Δdipolo`**, cioe' ### **una media mobile esponenziale di `dph_prec`.** ### ⚠ **Tre precisazioni:** l'indice e' `dph_PREC` e non `dph` *(un passo di differenza)*; la relazione vive ### **mod `4π`**; e ogni salto del dipolo inietta un gradino che persiste ### **`~τ_tw`.**
+
+### ⛔ **E LA MEMORIA NON CURA TUTTO**
+
+La tabella ### **DIFETTI × MEMORIE** copre ### **tutte e `12` le bloccanti** *(con un controllo che si ferma se una manca)*, e dice che ### **la maggior parte dei difetti aperti sono soglie tarate, scale globali, cancelli che mancano, commenti contro il codice e architettura** — ### **cose che una memoria non tocca.** ### ⚠ **Ed e' PARZIALE su `B13`:** delle `53` voci aggiunte ne ho nominate ### **sette**, e ### **le altre NON le ho giudicate una per una** — ### **dirlo invece di scrivere cinquanta <<nessuna>> non verificate.**
