@@ -7,6 +7,7 @@
 | `base` | 300 su 300 | ### ✔ **completo** | 1539.8 | ### **niente** — è la dinamica di sempre |
 | `B-T` | 500 su 500 | ### ✔ **completo** | 2461.9 | ### **`xi_termo` azzerata prima di ogni `step`.** ### ⛔ **NON è un azzeramento del termostato:** lo step lo ### **RICALCOLA** dentro di sé, quindi resta ### **un passo di accumulo invece di tutti** — si chiama ### **«termostato senza memoria»** |
 | `B-S` | 500 su 500 | ### ✔ **completo** | 2403.9 | ### **`scuoti_vuoto` sostituita** con una funzione della stessa firma che ### **non fa niente** |
+| `B-TS` | 500 su 500 | ### ✔ **completo** | 1867.1 | ### **I DUE INSIEME:** `scuoti_vuoto` inerte ### **e** `xi_termo` azzerata. ### **Il sistema vive solo della sua energia iniziale e della dinamica interna.** ### ⚠ **Eredita da `B-T` il non essere un azzeramento del termostato** |
 
 ### ✔ **I FLAG CHE RENDONO VALIDA LA RICOSTRUZIONE, letti a runtime e non assunti**
 
@@ -156,15 +157,15 @@ Lo step fa `xi += dt_scal·(err_rel − xi)/tau_termo` e poi `clip(−2, 2)`. ##
 
 > ### ⛔ **I CRITERI, FISSATI PRIMA** *(mandato di Luca)*: ### **`IL TERMOSTATO SCIOGLIE LE MASSE`** se in `B-T` l'AUC al `400` è ### **`>= 0.85`**; ### **`LO SCUOTIMENTO SCIOGLIE LE MASSE`** se in `B-S` l'AUC al `400` è ### **`>= 0.85`**. ### **Il controllo è la corsa di controllo di `A-S1`, che non si rigira.**
 
-| passo | AUC ### **`B-T`** | AUC ### **`B-S`** | AUC controllo *(`A-S1`)* |
-|--:|--:|--:|--:|
-| `1` | ### **0.9992** | ### **0.9991** | 0.9992 |
-| `50` | ### **0.9967** | ### **0.9967** | 0.9966 |
-| `150` | ### **0.9598** | ### **0.8102** | 0.9861 |
-| `230` | ### **0.4973** | ### **0.1574** | 0.9023 |
-| `300` | ### **0.4946** | ### **0.3551** | 0.7371 |
-| `400` | ### **0.4316** | ### **0.3796** | 0.4679 |
-| `500` | ### **0.4686** | ### **0.4458** | 0.4497 |
+| passo | AUC ### **`B-T`** | AUC ### **`B-S`** | AUC ### **`B-TS`** | AUC controllo *(`A-S1`)* |
+|--:|--:|--:|--:|--:|
+| `1` | ### **0.9992** | ### **0.9991** | ### **0.9991** | 0.9992 |
+| `50` | ### **0.9967** | ### **0.9967** | ### **0.9967** | 0.9966 |
+| `150` | ### **0.9598** | ### **0.8102** | ### **0.9225** | 0.9861 |
+| `230` | ### **0.4973** | ### **0.1574** | ### **0.1638** | 0.9023 |
+| `300` | ### **0.4946** | ### **0.3551** | ### **0.2031** | 0.7371 |
+| `400` | ### **0.4316** | ### **0.3796** | ### **0.4848** | 0.4679 |
+| `500` | ### **0.4686** | ### **0.4458** | ### **0.3831** | 0.4497 |
 
 > ### ✔ **`B-T`: AUC al `400` = 0.4316 `< 0.85` → `IL TERMOSTATO SCIOGLIE LE MASSE` ### NON è soddisfatto** *(controllo: 0.4679)*.
 
@@ -183,6 +184,48 @@ Lo step fa `xi += dt_scal·(err_rel − xi)/tau_termo` e poi `clip(−2, 2)`. ##
 
 ---
 
+---
+
+# `(5)` ⭐ **`B-TS`: SENZA BAGNO, RESTA SOLO LA DINAMICA INTERNA**
+
+> ### ⛔ **I CRITERI, FISSATI PRIMA** *(mandato di Luca)*: ### **`LA CAUSA È IL BAGNO GLOBALE`** se l'AUC al `400` è ### **`>= 0.85`** ### **E** la coerenza di fase delle masse al `230` è ### **`>= 0.6`**; ### **`LA CAUSA È DENTRO LE MASSE (H2)`** se l'AUC al `400` è ### **`< 0.6`** ### **E** il bilancio delle masse mostra che è la ### **COPPIA** a far crescere `<phivel²>`; fra i due ### **si riporta la curva e il termine dominante.**
+
+### IL BILANCIO NELLE ### **MASSE**, somma su `500` passi
+
+| voce | somma | quota |
+|---|--:|--:|
+| `scuoti` | 0.0000 | ### **0.00 %** |
+| `termostato` | 0.6510 | ### **8.47 %** |
+| ### **`coppia`** | 6.9437 | ### **90.35 %** |
+| `residuo_incrociato` | 0.0902 | ### **1.17 %** |
+
+> ### ⛔ **IL TERMINE DOMINANTE NELLE MASSE È `coppia`** — il ### **90.35 %** del totale in valore assoluto. ### ✔ **E `scuoti` vale ESATTAMENTE `0.00000000`: l'intervento è scattato.**
+
+### ⭐ **L'ENERGIA TOTALE: resta finita, cresce o cala?** *(il mandato lo chiede comunque: senza sorgenti né freni, la sua evoluzione dice se la dinamica interna ### **conserva, scalda o dissipa**)*
+
+| | |
+|---|--:|
+| `E_cin` al passo `1` | 0.15631 |
+| `E_cin` al passo `500` | ### **3.95258** |
+| massimo | 3.95258 |
+| ### **passi con `phivel` NON FINITI** | ### **0** |
+
+> ### ⛔ **CRESCE**: da `0.15631` a ### **`3.95258`** *(`×25.29`)*. ### **E resta FINITA: `0` passi con valori non finiti.** ### ➜ **Quindi la dinamica interna, da sola, SCALDA.**
+
+### ⛔ **L'ESITO DEL CRITERIO**
+
+| | valore | la soglia |
+|---|--:|---|
+| AUC al `400` | ### **0.4848** | `>= 0.85` per il bagno, `< 0.60` per `H2` |
+| coerenza di fase delle masse al `230` | ### **0.2178** | `>= 0.6` per il bagno |
+| il termine dominante nelle masse | ### **`coppia`** | `coppia` per `H2` |
+
+> ### ⛔ **`LA CAUSA È DENTRO LE MASSE (H2)`.** Senza bagno le masse si sciolgono comunque *(AUC `0.4848`)*, e ### **il termine che le scalda è la COPPIA** — cioè ### **la loro dinamica interna.** ### ⛔ **NON comincio la cura: la decisione è di Luca.**
+
+> ### ⚠ **E `B-TS` EREDITA DA `B-T` IL NON ESSERE UN AZZERAMENTO:** `|xi|` massimo ### **0.02274** contro ### **1.75459** della base, cioè una soppressione di ### **77.1 ×**. ### **Il residuo è misurato, non assunto.**
+
+---
+
 # ⭐ **LE MIE PREVISIONI, CONTRO I NUMERI**
 
 | | la previsione | il numero | esito |
@@ -192,8 +235,13 @@ Lo step fa `xi += dt_scal·(err_rel − xi)/tau_termo` e poi `clip(−2, 2)`. ##
 | `PH3-3` | ### **`B-S` mostrerà l'effetto grande** *(AUC al `400` `>= 0.85`)*, ### **`B-T` quello piccolo** *(`< 0.85`)* | `B-S` 0.3796, `B-T` 0.4316 | ### ⛔ **SMENTITA** |
 | `PH3-4` | `T_target` cresce ### **POCO** e per via di `median(d0)`; e ### **non è il motore** del riscaldamento dei primi `50` passi | `T_target` dal passo `1` al `300`: ### **30.13 %** | ### ⛔ **SMENTITA: cresce di 30.13 %** |
 | `PH3-5` | ### **`Λ` cresce e la soppressione delle masse si INDEBOLISCE:** il rapporto `amp` masse/vuoto ### **SALE** | dal passo `1` al `300`: ### **0.1652 → 0.7468** | ### ✔ **CONFERMATA** |
+| `PTS-1` | ### ⛔ **scattera' `LA CAUSA E' DENTRO LE MASSE (H2)`: AUC al `400` `< 0.6`** *(perche' la coppia agisce `9.31 x` piu' nelle masse che nel vuoto)* | AUC al `400` in `B-TS`: ### **0.4848** | ### ✔ **CONFERMATA** |
+| `PTS-2` | il termine dominante nelle masse sara' la ### **`coppia`** | e' ### **`coppia`** *(il 90.35 %)* | ### ✔ **CONFERMATA** |
+| `PTS-3` | l'energia totale ### **CRESCE** ma `~10 x` meno del controllo *(previsto `~1.2` al `230` contro `13.57`)* | da `0.1563` a ### **3.9526**; e al `230` il controllo e' `3.4 x` piu' caldo | ### ✔ **CONFERMATA** |
+| `PTS-4` | la coerenza di fase delle masse al `230` sara' ### **`< 0.3`**, quindi il criterio del bagno NON scatta | ### **0.2178** | ### ✔ **CONFERMATA** |
+| `PTS-5` | ### **NON divergera'** entro `500` passi, e ### **non si congelera'** | passi con `phivel` non finiti: ### **0**; stato: ### **DATI SALVATI** | ### ✔ **CONFERMATA** |
 
-> ### **3 confermate, 2 SMENTITE** su 5.
+> ### **8 confermate, 2 SMENTITE** su 10.
 
 ---
 

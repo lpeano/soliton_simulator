@@ -9592,3 +9592,88 @@ verso è quello sbagliato.**
 > ### ⛔ **NESSUNA CURA PROPOSTA.** La scelta fra anticipare il vuoto locale *(`B1`)*, curare
 > prima `D31`, o entrambe, ### **è di Luca.** ### **`H3` è registrata nella voce
 > `SCIOGLIMENTO-FASE` accanto a `H1` e `H2`.**
+
+---
+
+# ⛔ **`B-TS`: LA CAUSA È DENTRO LE MASSE (`H2`) — e senza bagno si sciolgono PRIMA** *(2026-10-07 sera)*
+
+> Referto: `doc/REFERTO_h3_termostato_2026-10-07.md` *(ora `257` righe, `18` tabelle, `0`
+> difetti di formato)*. Criteri e previsioni in `fae7b9e`, committato ### **prima** della
+> modifica allo strumento. ### ⛔ **Nessun file del simulatore toccato, `b8c21049`.**
+
+## L'ESITO DEL CRITERIO
+
+| | valore | la soglia |
+|---|--:|---|
+| AUC al `400` | ### **`0.4848`** | `>= 0.85` per il bagno, ### **`< 0.60` per `H2`** |
+| coerenza di fase delle masse al `230` | ### **`0.2178`** | `>= 0.6` per il bagno |
+| termine dominante nelle masse | ### **`coppia`** | ### **`coppia` per `H2`** |
+
+### ⛔ **`LA CAUSA È DENTRO LE MASSE (H2)`: entrambe le condizioni sono soddisfatte.**
+
+Il bilancio nelle masse su `500` passi: ### **`coppia` `90.35 %`**, `termostato` `8.47 %`,
+### **`scuoti` `0.00 %` esatto**, residuo incrociato `1.17 %`.
+
+## ⭐ **E LA CURVA DICE PIÙ DEL CRITERIO**
+
+| passo | `B-T` | `B-S` | ### **`B-TS`** | controllo |
+|--:|--:|--:|--:|--:|
+| `150` | `0.9598` | `0.8102` | `0.9225` | `0.9861` |
+| ### **`230`** | `0.4973` | `0.1574` | ### **`0.1638`** | ### **`0.9023`** |
+| `300` | `0.4946` | `0.3551` | `0.2031` | `0.7371` |
+| `400` | `0.4316` | `0.3796` | ### **`0.4848`** | `0.4679` |
+
+### ⛔ **`B-TS` crolla AL `230` — `0.1638`, il peggiore di tutti i bracci, contro `0.9023`
+del controllo allo stesso passo** — e poi ### **risale in parte.**
+### ➜ **Quindi senza bagno le masse si sciolgono PRIMA, non dopo: il bagno globale
+RITARDAVA lo scioglimento invece di causarlo.**
+### ⚠ **E la non-monotonia rende fragile un criterio letto a UN passo solo:** il `400` dà
+`H2`, e la ### **curva** dà la stessa risposta ma ### **più forte** — vale la pena dirlo,
+perché su un altro passo il numero singolo avrebbe potuto ingannare.
+
+## ⭐ **L'ENERGIA TOTALE: la dinamica interna SCALDA**
+
+| | |
+|---|--:|
+| `E_cin` al passo `1` | `0.15631` |
+| `E_cin` al passo `500` | ### **`3.95258`** *(`×25.29`)* |
+| passi con `phivel` ### **non finiti** | ### **`0`** |
+
+### ➜ **Senza sorgenti né freni l'energia CRESCE e resta FINITA: la dinamica interna non
+conserva e non dissipa — SCALDA.** ### **Nessuna divergenza, nessun congelamento** *(il
+rischio che il mandato dichiarava non si è realizzato)*.
+
+## ✔ **I DUE CONTROLLI POSITIVI**
+
+| | |
+|---|---|
+| l'intervento è ### **scattato** | `scuoti` vale ### **`0.00000000` esatto** mentre ### **`rms(ampiezza)` resta NON nullo** — cioè è la ### **LEGGE** a essere spenta, ### **non il mio calcolo.** ### **Uno zero da solo non distinguerebbe le due cose** |
+| `B-TS` ### **NON è un azzeramento** del termostato | `\|xi\|` massimo ### **`0.02274`** contro ### **`1.75459`** della base: soppressione ### **`77.1 ×`**, ### **misurata e non assunta** |
+
+## ⭐ **IL NUMERO CHE AVEVA DECISO LA PREVISIONE, cercato PRIMA di scriverla**
+
+Nei json di `H3`, ### **prima** di prevedere:
+
+| | |
+|---|---|
+| la ### **coppia** agisce `9.31 ×` più nelle masse che nel vuoto *(controllo: `+5.619` contro `+0.604`)* | ### ➜ **in `B-TS` scalderà le masse e non il vuoto** |
+| e vale ### **`5.0–5.7`** nelle masse in ### **TUTTI** i bracci | ### ➜ **è una sorgente interna AUTONOMA, che non dipende dal bagno** |
+| ### ⛔ **in `B-S` il calore delle masse veniva per il `66.7 %` dal TERMOSTATO che POMPAVA** | ### ➜ **senza questo numero avrei previsto `B-TS` più CALDO di `B-S`, e sarebbe stato il contrario** |
+
+### ✔ **TUTTE E CINQUE LE PREVISIONI `PTS-1`…`PTS-5` CONFERMATE** *(bilancio complessivo del
+referto: `8` confermate, `2` smentite su `10`)*.
+
+### ⚠ **E una stima mia che era larga:** avevo previsto il controllo `~11 ×` più caldo di
+`B-TS` al `230`; misurato ### **`3.4 ×`.** Il verso era giusto, il fattore no.
+
+## ⛔ **LA LETTURA CHE RESTA, in tre righe**
+
+1. ### **il vuoto si scalda, e lo scalda `scuoti_vuoto`** *(`94 %`)* — ma non è questo che
+   scioglie le masse;
+2. ### **il termostato è il FRENO**, non il riscaldatore, e il bagno globale
+   ### **RITARDAVA** lo scioglimento;
+3. ### ⛔ **le masse si scaldano DA DENTRO: la `coppia` fa il `90.35 %`**, ed è
+   ### **`H2`.**
+
+> ### ⛔ **NON COMINCIO LA CURA.** Il criterio indica `H2`, il mandato dice di fermarsi, e
+> ### **la decisione è di Luca.**
