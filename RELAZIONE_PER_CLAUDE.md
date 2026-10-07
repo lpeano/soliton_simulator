@@ -9410,3 +9410,79 @@ termostato è ### **proporzionale alla `phivel` del nodo stesso.**
 > ### ⭐ **E LA DECISIONE SE GIRARLO COSÌ O FERMARSI È DI LUCA.** ### **Io lo giro**, perché il
 > mandato è esplicito e perché ### **il ramo che il mandato vuole davvero — «le masse si
 > sciolgono anche con le velocità coerenti?» — è quello NON confondibile.**
+
+---
+
+# ⛔ **`A-S1` — `H1 NON BASTA`: LE MASSE SI SCIOLGONO ANCHE CON LE VELOCITÀ DI FASE COERENTI** *(2026-10-07 sera)*
+
+> ### ⭐ **E È IL RAMO NON CONFONDIBILE, scritto PRIMA della corsa.** Referto:
+> `doc/REFERTO_as1_test_h1_2026-10-07.md`. Criteri e previsioni: `840a98d`, committato
+> ### **prima** dello strumento.
+
+## L'ESITO DEL CRITERIO DI LUCA
+
+| | AUC `H1` | AUC controllo | differenza | la soglia |
+|---|--:|--:|--:|---|
+| passo ### **`400`** | ### **`0.5536`** | `0.4679` | ### **`+0.0857`** | ### ⛔ **`< 0.60` → `H1 NON BASTA`** |
+| passo `500` | `0.4627` | `0.4497` | `+0.0130` | *(`>= 0.85` avrebbe detto «basta»)* |
+
+### **L'AUC è più alta del controllo a TUTTI i passi misurati** *(da `+0.0045` a `+0.0857`)*:
+### **`H1` aiuta, in modo piccolo e sistematico.** ### ⛔ **Ma `0.5536` sta sotto `0.60`, e il
+criterio dice `H1 NON BASTA`.**
+
+### ⭐ **E LA COERENZA DI FASE DELLE MASSE CROLLA COMUNQUE:** `0.9988` al passo `1` →
+### **`0.107`** al `500` *(il controllo: `0.9988` → `0.086`)*.
+
+## ⭐ **LE DUE VALIDAZIONI, e si chiudono a vicenda**
+
+| | il numero | esito |
+|---|--:|---|
+| `(a)` il controllo ### **RIGIRATO** riproduce `A1` sui contatori | ### **`0`** differenze su `501` passi | ### ✔ **è il controllo** |
+| `(b)` l'intervento ### **NON è inerte** | ### **`277`** differenze su `501`, la prima al ### **`221`** | ### ✔ **ha spostato la dinamica** |
+
+### ⛔ **Senza `(a)` la differenza sarebbe di origine ignota; senza `(b)` sarebbe un
+`FALSO-UNO`.** ### **Insieme dicono che il riferimento è SOLIDO e la differenza è REALE.**
+
+## ⭐ **E IL BRACCIO RIGIRATO HA RIDIMENSIONATO I TRE CONFONDENTI CHE AVEVO DICHIARATO**
+
+| | avevo dichiarato | ### **misurato** |
+|---|---|---|
+| `1` `tau_tw` intra-massa | ### **`×2600`** *(dal conto: `2π/1e-3` contro `2.4055`)* | ### **`1.200` contro `0.953` del controllo** al passo `1`, e `1.007` contro `0.906` al `500` — cioè ### **`+10 … +26 %` RELATIVO**, non tre ordini di grandezza |
+| `2` la ri-iniezione | la dispersione ### **torna** | ### ✔ **confermato, e in UN passo:** `std` intra-massa `0.204` al `1` *(controllo `0.464`)* → `4.69` al `500` *(controllo `5.18`)* |
+| `3` il vuoto scaldato dal termostato | un effetto ### **dell'intervento** | ### ⛔ **NO: succede in ENTRAMBI i bracci** — la `std` del vuoto va `0.434 → 4.918` in `H1` e `0.434 → 4.819` nel controllo |
+
+> ### ⭐ **QUINDI `H1` È PIÙ VICINO A UN ESPERIMENTO A UNA VARIABILE DI QUANTO TEMESSI**, e il
+> verdetto si legge ### **senza la riserva «CONFONDUTO»**. ### ⛔ **E il motivo per cui lo so è
+> che ho rigirato il braccio di controllo** — `30` minuti che il mandato permetteva
+> *(«se ti serve una grandezza che `A1` non ha registrato, rigira il controllo e dillo»)*.
+> ### **Senza di lui, due dei tre confondenti sarebbero rimasti DICHIARATI e NON MISURATI.**
+
+## ⛔ **DUE MIE PREVISIONI ERANO MAL POSTE, E NON LE CONTO COME CONFERMATE**
+
+### **`PH1-1`** diceva *«`H1 AIUTA MA NON BASTA`: AUC al `400` sopra il controllo ma sotto
+`0.90`»*. ### **Le due condizioni numeriche REGGONO** *(`0.5536 > 0.4679` e `< 0.90`)*,
+### ⛔ **ma l'intervallo che avevo dichiarato ATTRAVERSA la soglia `0.60` del criterio**:
+### **qualunque numero dentro di esso poteva dare DUE verdetti opposti.** ### **Il contenuto
+numerico era giusto; l'etichetta che gli avevo attaccato no.**
+
+### **`PH1-2`** diceva *«al passo `150` la dispersione è già più di METÀ di quella del vuoto»*:
+misurato ### **`46.76 %`**, quindi ### **SMENTITA sul rapporto.** ### ⚠ **Ma il difetto è nel
+METRO che ho scelto io:** avevo normalizzato ### **sul VUOTO**, e il vuoto ### **si scalda** —
+quindi il rapporto scende ### **anche se la dispersione delle masse CRESCE.** ### **In assoluto
+la `std` intra-massa va da `0.2063` al passo `1` a `1.7392` al `150`: `8.43` volte.**
+
+> ### ⭐ **`PH1-3` È SMENTITA PER LA RAGIONE GIUSTA:** avevo dichiarato il confondente
+> ### **grande** e l'ho misurato ### **piccolo** *(massimo `3.164`, non `>= 100`)*.
+> ### **Dichiararlo prima è ciò che ha reso possibile ridimensionarlo dopo.**
+
+**Il bilancio: `2` confermate, `2` smentite, `1` MAL POSTA** su `5`.
+
+## ⛔ **CHE COSA `A-S1` NON DICE**
+
+| | |
+|---|---|
+| la variabilità fra semi | ### **UN seme** *(`P3` non soddisfatta: `S1b` ne chiedeva `4`)* |
+| i valori ASSOLUTI | ### **`U1` è aperta:** si legge la ### **differenza**, non il livello |
+| ### **perché** le masse si sciolgono | ### **`H2` non è misurata** — è `A-S2`, e la decisione è di Luca |
+
+> ### ⛔ **E NON COMINCIO `A-S2`: IL MANDATO DICE DI FERMARMI, E MI FERMO.**

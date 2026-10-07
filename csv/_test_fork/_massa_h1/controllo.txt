@@ -1,0 +1,14 @@
+========================================================================================================
+`A-S1` -- IL TEST H1: 500 passi, braccio CONTROLLO
+========================================================================================================
+  simulatore b8c21049   atteso b8c21049
+====================================================================================================
+LA CONFIGURAZIONE INTERA (`P5`) -- non i flag toccati, TUTTI
+====================================================================================================
+  booleani di modulo confrontati con l'argv del DRIVER: 82
+  -> IN CONFIGURAZIONE DEL DRIVER: nessuna differenza. ZERO su 82.
+
+  scena: n = 12802, archi = 471564, DT = 0.01
+  geometria: {'r_regione': 4.096438164464869, 'R_CONN': 2.4000000000000004, 'u_bordo': 1.5858748267749136, 'sep': 6.1158, 'raggio_vuoto': 12.61223816446487, 'n_coorti': [411, 413, 413], 'masse': {'massa_0': 411, 'massa_1': 413, 'massa_2': 413}, 'vuoto_nodi': 11565, 'braccio': 'CONTROLLO'}
+
+  ### I DATI SONO SALVATI.
