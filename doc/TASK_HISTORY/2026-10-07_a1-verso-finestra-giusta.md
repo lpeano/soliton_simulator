@@ -264,3 +264,64 @@ cioè ### **oltre il `216`**, dove le nascite ci sono.
 
 **LO STRUMENTO:** `csv/_seal_fork/_inerzia_nascite.py`, e ### **gira alla fine della corsa
 `A1`.**
+
+---
+
+# ⛔ **AGGIUNTA DEL 2026-10-07, DOPO LA CADUTA — e NON è una modifica delle previsioni**
+
+> ### ⭐ **LE PREVISIONI E I CRITERI QUI SOPRA RESTANO INTATTI.** Questa sezione registra
+> ### **che la prima corsa non è arrivata a misurarli**, e perché. ### **Nessun criterio è
+> stato toccato dopo aver visto un numero.**
+
+## CHE COSA È SUCCESSO
+
+La corsa è ### **caduta al passo `216`**, la ### **prima nascita**, dopo `1425.8` secondi.
+### **Il difetto era mio, nello strumento**, e il simulatore non c'entra: `b8c21049`
+### **non è stato toccato.**
+
+### **LA PREMESSA SBAGLIATA:** avevo avvolto `REGOLE_NASCITA[("divisione", "i")]`, cioè la
+regola che scrive ### **SOLO `net.i`.** Quando quella regola ritorna, ### **`net.i` ha
+`471565` voci e `net.j` ancora `471564`**: ### ⛔ **l'arco non esiste ancora come COPPIA, e
+la sua chiave non è formabile lì.** ### **L'ordine si legge dal simulatore:** `i` è alla
+posizione ### **`1`** di `ORDINE_DI_NASCITA`, `j` alla ### **`2`.**
+
+### ⚠ **Quindi l'involucro non era «fragile»: era IMPOSSIBILE**, e sarebbe caduto alla prima
+nascita di ### **qualunque** corsa. ### **Non c'è nessuna finestra in cui funzionava.**
+
+## ⭐ **E IL CONTROLLO CHE LUCA AVEVA CHIESTO HA PAGATO PRIMA DI GIRARE**
+
+Il rilievo era: *«la byte-inerzia di `d01cc2a` è stata fatta su `50` passi, cioè PRIMA della
+prima nascita (`216`)»*. ### **Esatto, e il difetto è uscito prima ancora che il confronto
+con `amp0.json` si potesse fare.**
+
+### ⛔ **E IL CONTROLLO POSITIVO DI QUEL SIGILLO ERA UN `FALSO-UNO`, SCRITTO DA ME:**
+chiedeva *«origini registrate `> 0`»* e passava ### **sempre** — i `471564` `seminato` li
+scrive ### **l'installazione** degli involucri, con un giro che ### **non passa da nessun
+involucro.** ### **La corsa caduta lo ha provato col numero:** `seminato 471564 |
+divisione 0 | schwinger 0` su `216` passi.
+
+## CHE COSA CAMBIA NEL MODO DI LEGGERE `A1`
+
+| | |
+|---|---|
+| le previsioni | ### **invariate**, e ### **nessun numero oltre il `216` è stato visto** |
+| i numeri della corsa caduta | ### **tutti sotto il `216`**, cioè nella finestra ### **già vista** in `d60b987`: ### **non rispondono a nessuna previsione di `A1`** |
+| la finestra della byte-inerzia | ### **`50` → `220`**, perché `220` ### **contiene** una nascita |
+| il controllo positivo | ### **`origini_da_nascita > 0`**, che su `50` passi ### **NON PUÒ essere soddisfatto** |
+| gli involucri installati | ### **`3` → `1`**, sul punto unico `nascita` |
+
+> ### ⛔ **E LA CONDIZIONE DEL MANDATO RESTA QUELLA:** se la byte-inerzia su `220` passi
+> ### **fallisce, la corsa NON parte, e lo dico.**
+
+## ⚠ **UNA COSA CHE AVEVO DICHIARATO E CHE ORA SI PUÒ FARE**
+
+Qui sopra avevo scritto che i campi `nati_tot`, `schwinger_tot` e `q_tw` ### **non si
+aggiungono ORA**, perché il `par.5` vieta di toccare un file del percorso in uso ### **e la
+corsa era in volo.** ### **La corsa è caduta: quel vincolo non c'è più.**
+
+### ✔ **MA NON LI AGGIUNGO LO STESSO, e il motivo è dichiarato:** aggiungerli ora
+### **cambierebbe lo strumento fra le previsioni e la misura**, e il confronto con
+`amp0.json` resta ### **valido su `n` e `archi`** — che sono il conto delle nascite
+integrato e il conto degli archi, cioè ### **già sensibili a uno spostamento di UNA nascita
+di UN passo.** ### ⛔ **Un campo in più non vale una variabile in più fra la previsione e il
+numero.** ### **Se servirà, sarà un lavoro suo, dopo `A1`.**
