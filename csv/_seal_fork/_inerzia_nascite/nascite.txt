@@ -1,0 +1,28 @@
+========================================================================================================
+L'INERZIA DEGLI OSSERVATORI ATTRAVERSO LE NASCITE
+========================================================================================================
+  riferimento  amp0.json   blob cf2a1ac8   stato fatto   passi 1000
+  osservata    verso.json   blob b8c21049   stato DATI SALVATI   passi 1000
+  passi in comune: 1000  (riferimento 1000, osservata 1001)
+
+  n       rif[k] contro oss[k+0]:  differenze 0
+  n       rif[k] contro oss[k-1]:  differenze 391   primo: passo 216  rif 12804  oss 12802
+  n       rif[k] contro oss[k+1]:  differenze 391   primo: passo 215  rif 12802  oss 12804
+  archi   rif[k] contro oss[k+0]:  differenze 391   primo: passo 216  rif 471564  oss 471567
+  archi   rif[k] contro oss[k-1]:  differenze 0
+  archi   rif[k] contro oss[k+1]:  differenze 574   primo: passo 215  rif 471564  oss 471567
+
+--------------------------------------------------------------------------------------------------------
+  ### ✔ `n`: ZERO differenze con `rif[k] = oss[k+0]` su 1000 passi.
+  ### ⭐    ED E' QUELLO PREVISTO DALLA DERIVAZIONE (+0).
+  ### ✔ `archi`: ZERO differenze con `rif[k] = oss[k-1]` su 1000 passi.
+  ### ⭐    ED E' QUELLO PREVISTO DALLA DERIVAZIONE (-1).
+
+  controllo a FORBICE su `q_tw` contro la frazione sopra 2pi: 1000 passi, 0 fuori forbice
+  ### ⚠ E' UNA FORBICE, NON UN'UGUAGLIANZA: dai quantili non si ricava la frazione esatta.
+
+========================================================================================================
+  ### ✔ IL CRITERIO DI LUCA E' SODDISFATTO: ZERO differenze su 1000 passi.
+  ### Gli osservatori, INVOLUCRI DI NASCITA COMPRESI, non cambiano la dinamica.
+========================================================================================================
+  campi NON registrati dallo strumento di A1, DICHIARATI: nati_tot, schwinger_tot, q_tw

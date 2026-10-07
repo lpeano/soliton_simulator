@@ -1,6 +1,5 @@
 ========================================================================================================
-M1-M4 -- IL VERSO E LE PLAQUETTE: 1000 passi, UN braccio, SOLA LETTURA
-  ### M4 gira sulla STESSA corsa di M1-M3, e il motivo e' nel docstring.
+M1, M2, M3 -- LA MISURA DEL VERSO: 4 passi, UN braccio, SOLA LETTURA
 ========================================================================================================
   simulatore b8c21049   atteso b8c21049
   ### il blob COINCIDE: la misura vale per questo simulatore.
@@ -12,10 +11,9 @@ LA CONFIGURAZIONE INTERA (`P5`) -- non i flag toccati, TUTTI
 
   scena: n = 12802, archi = 471564, DT = 0.01
   verso      geometria: {'r_regione': 4.096438164464869, 'R_CONN': 2.4000000000000004, 'u_bordo': 1.5858748267749136, 'sep': 6.1158, 'raggio_vuoto': 12.61223816446487, 'n_coorti': [411, 413, 413], 'archi_seminati': 471564}
-  plaquette  geometria: {'r_regione': 4.096438164464869, 'R_CONN': 2.4000000000000004, 'u_bordo': 1.5858748267749136, 'sep': 6.1158, 'raggio_vuoto': 12.61223816446487, 'n_coorti': [411, 413, 413]}
 
 ========================================================================================================
-LA CORSA: 1000 passi, UN braccio, SOLA LETTURA
+LA CORSA: 4 passi, UN braccio, SOLA LETTURA
 ========================================================================================================
-  involucri rimossi da verso: 1
+  involucri rimossi da verso: 3
   ### I DATI SONO SALVATI.

@@ -1,0 +1,43 @@
+{
+ "riferimento": "amp0.json",
+ "blob_riferimento": "cf2a1ac8a73e56501a68663af048d62c591b3e78",
+ "blob_osservata": "b8c21049b85ba36a828f49dfa225d42419f3baf5",
+ "passi_comuni": 1000,
+ "confrontati": [
+  "n",
+  "archi"
+ ],
+ "non_registrati": [
+  "nati_tot",
+  "schwinger_tot",
+  "q_tw"
+ ],
+ "esito_per_campo": {
+  "n": {
+   "allineamento": 0,
+   "differenze": 0,
+   "atteso_dalla_derivazione": 0,
+   "coincide_con_atteso": true
+  },
+  "archi": {
+   "allineamento": -1,
+   "differenze": 0,
+   "atteso_dalla_derivazione": -1,
+   "coincide_con_atteso": true
+  }
+ },
+ "differenze": {
+  "n@+0": 0,
+  "n@-1": 391,
+  "n@+1": 391,
+  "archi@+0": 391,
+  "archi@-1": 0,
+  "archi@+1": 574
+ },
+ "forbice_q_tw": {
+  "passi": 1000,
+  "fuori": 0,
+  "primi_fuori": []
+ },
+ "esito": "PASSA"
+}
