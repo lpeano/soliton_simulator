@@ -442,7 +442,11 @@ La potenza persa nel rilassamento, ### **`somma di tw^2*dt_e/tau_tw` per passo**
 | `700` | 72062.46 | ### **4.2104** | 4.1207 | ### **4.0334** | ### ⛔ **NO** |
 | `1000` | 91703.97 | ### **5.2288** | 5.1874 | ### **5.1395** | ### ⛔ **NO** |
 
-> ### ⛔ **IL CRITERIO SUI PASSI DOPO IL `300`: NON soddisfatto** *(4 passi valutati)*.
+> ### ⚠ **IL CRITERIO SUI PASSI DOPO IL `300` E' NON DECIDIBILE** *(decisione di Luca, 2026-10-07 sera)*, e ### **non perche' manchi un numero:** l'`AUC` MATERIA/VUOTO sta SOTTO `0.5` a 4 dei 4 passi che decidono *(il minimo: 0.4415 al passo `1000`)*, quindi le classi ### **non identificano struttura** e il confronto parla di ### **dove la materia ERA**.
+
+> ### ⛔ **LA CONDIZIONE DEL TEST NON C'ERA.** L'osservazione di Luca dice che ### **la memoria non dissipa dove la struttura e' STABILE**, e le classi MATERIA/BORDO/VUOTO sono ### **GEOMETRICHE: dicono dove le masse sono state SEMINATE.** ### **I numeri della tavola restano e valgono; il VERDETTO aspetta masse che durano** *(`A-S1`)*.
+
+> ### ⚠ **E UN NUMERO CHE IL CAMBIO DI ETICHETTA NON DEVE FAR PERDERE:** al passo `150` -- dove le masse ### **c'erano ancora** -- il criterio era soddisfatto ### **per un PELO.** ### **Quando `A-S1` dara' masse che durano, il numero da guardare e' se quel rapporto SCENDE o SALE.**
 
 > ### ⚠ **E SE NON FOSSE SODDISFATTO NON SAREBBE UN DETTAGLIO:** vorrebbe dire che la torsione dissipa ### **dove la materia sta**, cioe' che il termine di rilassamento ### **non e' il costo di una memoria che rincorre** ma qualcos'altro.
 
@@ -469,9 +473,9 @@ Le previsioni sono fissate in `doc/TASK_HISTORY/2026-10-06_misura-verso-e-plaque
 | `P6` | ### ⭐ **la base dei cicli NON CAMBIA** *(`~0 %`)* anche a `1000` passi e con migliaia di nascite | massimo cambiato: 0.00 % su 8 passi misurati | ### ✔ **CONFERMATA** |
 | `M5a` | ### **`phi0` e' memoria MORTA** *(Spearman `< 0.3` su VUOTO con eta' `> 2 tau_tw`)* | il massimo sui passi oltre il `216`: 0.0102 *(su 6 passi)* | ### ✔ **CONFERMATA** |
 | `M5b` | ### **il dipolo NON domina `delta`** *(mediana `< 0.5`)* | la mediana massima oltre il `216`: 4.76e-07 | ### ✔ **CONFERMATA** |
-| `M5d` | ### ⭐ **l'osservazione di LUCA regge**: la dissipazione sta nel VUOTO *(MATERIA sotto un quarto di VUOTO, a TUTTI i passi dopo il `300`)* | 4 passi valutati, 0 soddisfatti | ### ⛔ **SMENTITA** |
+| `M5d` | ### ⭐ **l'osservazione di LUCA regge**: la dissipazione sta nel VUOTO *(MATERIA sotto un quarto di VUOTO, a TUTTI i passi dopo il `300`)* | 4 passi valutati, 0 soddisfatti | ### ⚠ **NON DECIDIBILE** *(decisione di Luca, 2026-10-07)*: l'`AUC` MATERIA/VUOTO sta SOTTO `0.5` a 4 dei 4 passi che decidono *(il minimo: 0.4415 al passo `1000`)*, quindi le classi ### **non identificano struttura** e il confronto parla di ### **dove la materia ERA**. ### **Il numero resta, il verdetto aspetta masse che durano.** |
 
-> ### **7 confermate, 8 SMENTITE, 1 non decidibili.** ### **Le smentite sono il pezzo che vale:** una misura che conferma tutto quello che credevo ### **non mi ha insegnato niente.**
+> ### **7 confermate, 7 SMENTITE, 2 non decidibili.** ### **Le smentite sono il pezzo che vale:** una misura che conferma tutto quello che credevo ### **non mi ha insegnato niente.**
 
 > ### ⚠ **E DUE SOGLIE DI QUESTA TAVOLA SONO MIE, non misurate:** ### **<<bassa>> = `0.5`** per la coerenza e ### **<<di molto>> = `10` gradi** per la rotazione. ### **Le dichiaro perche' un esito che dipende da una soglia scelta da me DEVE dirlo** -- la tolleranza di `M4(d)`, invece, e' ### **DERIVATA** dalla varianza di una distribuzione uniforme.
 
