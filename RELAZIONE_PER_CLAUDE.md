@@ -8901,3 +8901,69 @@ vera** — il `verso(e, da)` nel codice, non la formula nel commento.
 il processo in corso ha ### **importato**, e la byte-inerzia importava questo file. ### **La
 patch è stata scritta, messa in coda, e applicata a sigillo chiuso** — ed è il motivo per cui
 questa riga arriva ora e non trenta minuti fa.
+
+---
+
+# ⛔ **LA CORSA È FINITA, E HA TROVATO TRE DIFETTI MIEI — DUE DEI QUALI AVREBBERO FALSATO UN VERDETTO** *(2026-10-07)*
+
+La corsa da `1000` passi è ### **completa**: `7039.8` secondi, ### **`0` avvisi**, tutti e
+`16` i passi pesanti, involucri rimossi e verificati rimossi. ### ⭐ **E ha passato i due
+punti di pericolo:** il `216` *(la prima nascita)* e i passi pesanti ### **`229` e `230`**,
+che la byte-inerzia a `220` passi ### **non copriva** *(`FINESTRA-PRE-NASCITA`)*.
+
+### ✔ **E L'INVOLUCRO CURATO LAVORA, E DISTINGUE GLI EVENTI:**
+### **`1130`** archi da ### **divisione**, ### **`524`** da ### **Schwinger**,
+### **`0`** archi senza origine a ### **ogni** passo.
+
+## ⛔ **`(1)` L'ALLINEAMENTO DEL SIGILLO DELLE NASCITE ERA PARAMETRIZZATO AL ROVESCIO**
+
+### **Il sigillo ha dichiarato IL CRITERIO NON SODDISFATTO su una corsa che combacia AL
+BIT.** Spostavo l'indice del ### **riferimento** tenendo l'osservata a `k`, quindi il mio
+*«allineamento `-1`»* confrontava `rif[k-1]` con `oss[k]` — ### **il contrario di quello che
+serve** — e ### **l'allineamento giusto non era fra i due provati.**
+
+### ✔ **CURATO, e la scelta è DERIVATA e non adattata**, perché una sola derivazione spiega
+tutti i campi: `n` viene da `chiudi` *(POST-passo)* → ### **`dec = 0`**; `archi` e `q_tw`
+vengono dal ### **gancio della torsione, che gira PRIMA di mitosi/Schwinger** →
+### **`dec = -1`.**
+
+> ### ⚠ **E LA FIRMA DELLA CONVENZIONE È DENTRO LA RIGA STESSA:** al passo `216` il
+> riferimento scrive ### **`n = 12804`** *(le nascite ci sono)* con ### **`archi = 471564`**
+> *(non ci sono)*. ### **Due campi della stessa riga non possono essere letti nello stesso
+> istante, e questo lo PROVA.**
+
+### ✔ **IL VERDETTO VERO, col sigillo curato:**
+
+| campo | allineamento | differenze su `1000` passi | era quello previsto? |
+|---|--:|--:|---|
+| `n` | ### **`rif[k] = oss[k+0]`** | ### **`0`** | ### ⭐ **SÌ** |
+| `archi` | ### **`rif[k] = oss[k-1]`** | ### **`0`** | ### ⭐ **SÌ** |
+| la forbice su `q_tw` | `dec = -1` | ### **`0` fuori forbice su `1000`** | — |
+
+> ### ⭐ **IL CRITERIO DI LUCA È SODDISFATTO: zero differenze su tutti i `1000` passi.**
+> ### **Gli osservatori, involucri di nascita compresi, NON cambiano la dinamica.**
+
+### ⛔ **E LA FORBICE ERA DISALLINEATA PER LA STESSA RAGIONE:** senza lo spostamento
+uscivano ### **`7` passi su `1000`**, con scarti da ### **`2e-6` a `6e-4`** — e al passo
+`84` era ### **UN arco su `471564`.** ### ⚠ **Scarti così piccoli NON sono rumore: sono un
+disallineamento di UN passo**, e chiamarli «bordo» sarebbe stato comodo e falso.
+
+## ⛔ **`(2)` UN `NaN` DI UN ARCO APPENA NATO LETTO COME UN `False`**
+
+Al passo ### **`230`** *(un passo con nascite)* la potenza totale del bilancio era
+### **`nan`** e la mediana in VUOTO ### **`nan`**, perché il ### **VELENO** del simulatore
+mette `NaN` sulle derivate degli archi nuovi. ### ⛔ **E `nan <= 0.0` è `False`**, quindi il
+guardiano dello zero — che avevo scritto proprio per questa famiglia — ### **non scattava**,
+e il confronto finale dava *«la dissipazione NON sta nel vuoto»* ### **da un `NaN`.**
+
+### ✔ **CURATO due volte, come va fatto:** i non finiti si ### **escludono e si CONTANO**
+*(`archi_non_finiti_esclusi`, `archi_usati`)*, e il criterio ### **restituisce `None` con la
+nota** se una mediana è `NaN`. ### **Era UN passo su otto, e l'ho censito invece di
+supporlo.**
+
+## ⛔ **`(3)` E IL REFERTO NON SI FIDA PIÙ DEL BOOLEANO SALVATO**
+
+Il json di questa corsa porta ancora il booleano vecchio, e ### **rifare `1000` passi per un
+booleano non si fa.** ### ✔ **Allora il generatore RICALCOLA il criterio dalle mediane**, col
+guardiano del `NaN` — ### **il numero esce da uno script e legge il DATO, non una conclusione
+già tratta** *(`L-NUMERI`)*.

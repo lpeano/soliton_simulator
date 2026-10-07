@@ -12,6 +12,7 @@ sceglie un'opzione. Riporta i numeri e l'unica affermazione permessa e' descritt
 ### ⚠ **E SI RIFIUTA DI SCRIVERE SE UNA CORSA NON E' COMPLETA**, dicendo ### **quale.**
 """
 import io
+import math
 import json
 import os
 import sys
@@ -668,6 +669,31 @@ def main(argv):
     A("")
 
     # ================================================================== M5
+    def _crit_d(_d):
+        """Il criterio di `M5(d)` ### **RICALCOLATO DALLE MEDIANE**, non letto dal json.
+
+        ### \u26d4 **PERCHE' RICALCOLARLO:** nella corsa del 2026-10-07 il booleano
+        salvato diceva ### **`False` al passo `230` con la mediana in VUOTO a `NaN`** --
+        cioe' *<<la dissipazione NON sta nel vuoto>>* letto da ### **un NaN.** Lo
+        strumento e' curato, ### **ma il json di quella corsa porta ancora il booleano
+        vecchio**, e rifare `1000` passi per un booleano ### **non si fa.**
+        ### \u2714 **Il numero viene da uno script, come vuole `L-NUMERI`** -- e questo
+        script legge ### **le mediane**, che sono il dato.
+        """
+        _pn = (_d or {}).get("per_nodo_per_classe") or {}
+        _m = (_pn.get("MATERIA") or {}).get("mediana")
+        _v = (_pn.get("VUOTO") or {}).get("mediana")
+        if _m is None or _v is None:
+            return None, "nessuna mediana"
+        try:
+            if not (math.isfinite(_m) and math.isfinite(_v)):
+                return None, "una mediana e' `NaN`, e un `NaN` non e' un falso"
+        except TypeError:
+            return None, "mediana non numerica"
+        if _v <= 0.0:
+            return None, "la potenza nel VUOTO e' zero: niente da dimenticare"
+        return bool(_m < 0.25 * _v), None
+
     A("---")
     A("")
     A("# `M5` -- **LE MEMORIE**")
@@ -833,7 +859,10 @@ def main(argv):
             A("| `%d` | n/d | n/d | n/d | n/d | n/d |" % _k)
             continue
         _t = tab_classi(_d.get("per_nodo_per_classe"), "mediana")
-        _cr = _d.get("criterio_materia_sotto_un_quarto")
+        _cr, _nota = _crit_d(_d)
+        if _nota:
+            _d = dict(_d)
+            _d["criterio_nota"] = _nota
         if _k > 300:
             _esiti_d.append(_cr)
         A("| `%d` | %s | ### **%s** | %s | ### **%s** | %s |"
@@ -1140,14 +1169,16 @@ def main(argv):
                    "### \u2714 **CONFERMATA**" if max(_bb) <= 0.5
                    else "### \u26d4 **SMENTITA**: il dipolo DOMINA, e `MEM-VERSO` "
                         "leggerebbe se stessa"))
-    _dd = [(_m5(k) or {}).get("d", {}).get("criterio_materia_sotto_un_quarto")
-           for k in passi_m if k > 300]
+    _dd = [_crit_d((_m5(k) or {}).get("d"))[0] for k in passi_m if k > 300]
+    _nd = sum(1 for x in _dd if x is None)
     _dd = [x for x in _dd if x is not None]
     if _dd:
         pr.append(("`M5d`", "### \u2b50 **l'osservazione di LUCA regge**: la dissipazione "
                    "sta nel VUOTO *(MATERIA sotto un quarto di VUOTO, a TUTTI i passi dopo "
                    "il `300`)*",
-                   "%d passi valutati, %d soddisfatti" % (len(_dd), sum(1 for x in _dd if x)),
+                   "%d passi valutati, %d soddisfatti%s"
+                   % (len(_dd), sum(1 for x in _dd if x),
+                      (", %d NON DECIDIBILI *(esclusi)*" % _nd) if _nd else ""),
                    "### \u2714 **CONFERMATA**" if all(_dd)
                    else "### \u26d4 **SMENTITA**"))
     else:

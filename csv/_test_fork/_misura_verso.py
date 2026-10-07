@@ -867,11 +867,25 @@ class Verso(object):
                                        if int(np.sum(m)) else None)}
         # --- (d) IL BILANCIO DELLA TORSIONE
         pot = tw ** 2 * cur["dt_e"] / np.maximum(cur["tau_tw"], 1e-12)
+        # ### ⛔ **IL `NaN` DI UN ARCO APPENA NATO AVVELENAVA TUTTO IL BILANCIO, e il
+        #   criterio lo leggeva come `False`:** al passo `230` *(un passo CON nascite)* la
+        #   potenza totale era ### **`nan`** e la mediana in VUOTO ### **`nan`**, perche'
+        #   il ### **VELENO** del simulatore mette `NaN` sulle derivate degli archi nuovi.
+        #   ### ⚠ **E `nan <= 0.0` e' `False`**, quindi il guardiano dello ZERO non
+        #   scattava e il confronto finale dava *<<la dissipazione NON sta nel vuoto>>*
+        #   ### **da un NaN**, non da una misura.
+        # ### ✔ **LA CURA: i non finiti si ESCLUDONO e si CONTANO**, mai in silenzio --
+        #   un arco appena nato ### **non ha ancora una potenza misurabile**, ed e' la
+        #   stessa regola che vale per le quattro opzioni *(`eta_passi >= 2`)*.
+        fin = m & np.isfinite(pot)
+        _nf = int(np.sum(m & ~np.isfinite(pot)))
         pn = np.zeros(n)
-        np.add.at(pn, ii[m], 0.5 * pot[m])
-        np.add.at(pn, jj[m], 0.5 * pot[m])
-        fuori["d"] = {"potenza_totale": float(np.sum(pot[m])),
-                      "per_classe_arco": per_classe(np.where(m, pot, np.nan), cla),
+        np.add.at(pn, ii[fin], 0.5 * pot[fin])
+        np.add.at(pn, jj[fin], 0.5 * pot[fin])
+        fuori["d"] = {"potenza_totale": float(np.sum(pot[fin])),
+                      "archi_non_finiti_esclusi": _nf,
+                      "archi_usati": int(np.sum(fin)),
+                      "per_classe_arco": per_classe(np.where(fin, pot, np.nan), cla),
                       "per_nodo_per_classe": per_classe(pn, cl)}
         mm = fuori["d"]["per_nodo_per_classe"].get("MATERIA")
         vv = fuori["d"]["per_nodo_per_classe"].get("VUOTO")
@@ -882,6 +896,12 @@ class Verso(object):
         #   ### **E' la famiglia di `CHI-TORS-ZERO-FALSO`.**
         if not (mm and vv) or mm["mediana"] is None or vv["mediana"] is None:
             fuori["d"]["criterio_materia_sotto_un_quarto"] = None
+        elif not (np.isfinite(mm["mediana"]) and np.isfinite(vv["mediana"])):
+            # ### ⛔ **E UN `NaN` NON E' UN `False`:** il guardiano dello ZERO non lo
+            #   prendeva, perche' ### **`nan <= 0.0` e' `False`.** ### **Ora si dice.**
+            fuori["d"]["criterio_materia_sotto_un_quarto"] = None
+            fuori["d"]["criterio_nota"] = ("NON DECIDIBILE: una delle due mediane e' NaN, "
+                                           "e un NaN non e' un falso")
         elif vv["mediana"] <= 0.0:
             fuori["d"]["criterio_materia_sotto_un_quarto"] = None
             fuori["d"]["criterio_nota"] = ("NON DECIDIBILE: la potenza nel VUOTO e' zero, "

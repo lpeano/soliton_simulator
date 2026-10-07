@@ -76,6 +76,11 @@ FUORI = os.path.join(_QUI, "_inerzia_nascite")
 RIF = os.path.join(RADICE, "csv", "_test_fork", "_mitosi_zero_dove", "amp0.json")
 OSS = os.path.join(RADICE, "csv", "_test_fork", "_misura_verso", "verso.json")
 P2PI = 2.0 * np.pi
+# ### ⭐ **GLI ALLINEAMENTI PROVATI, e quello ATTESO PER DERIVAZIONE.** La riga `k` del
+#   riferimento descrive un istante che nell'osservata e' il passo `k + dec`.
+ALLINEAMENTI = (0, -1, +1)
+DEC_TORSIONE = -1          # ### il gancio della torsione gira PRIMA delle nascite
+ATTESO = {"n": 0, "archi": DEC_TORSIONE}
 # ### I CAMPI CHE SI CONFRONTANO, e quelli che si DICHIARANO non registrati.
 CONFRONTA = ("n", "archi")
 NON_REGISTRATI = ("nati_tot", "schwinger_tot", "q_tw")
@@ -145,6 +150,34 @@ def collaudo():
     # ---- un dizionario senza quantili non inventa una forbice
     prova("forbice: ### un dizionario SENZA quantili da' `None`, non `[0, 1]`",
           forbice_quantili({"altro": 1.0}) is None)
+    # ---- ### ⛔ **L'ALLINEAMENTO: il difetto che ha prodotto un verdetto SBAGLIATO**
+    #   Due serie costruite con ### **lo spostamento `-1` NOTO**: il riferimento legge
+    #   l'istante che nell'osservata e' il passo ### **precedente.**
+    _rif = {k: {"passo": k, "archi": 100 + max(k - 1, 0)} for k in range(1, 6)}
+    _oss = {k: {"passo": k, "archi": 100 + k} for k in range(0, 6)}
+
+    def _dif(dec):
+        return sum(1 for k in _rif
+                   if (k + dec) in _oss
+                   and _rif[k]["archi"] != _oss[k + dec]["archi"])
+
+    prova("allineamento: ### lo spostamento VERO (`-1`) da' ZERO differenze", _dif(-1) == 0)
+    prova("allineamento: ### `+0` NON le da' zero", _dif(0) > 0)
+    prova("allineamento: ### `+1` NON le da' zero", _dif(+1) > 0)
+    # ### ⛔ **IL CASO CHE DEVE FALLIRE: la PARAMETRIZZAZIONE VECCHIA**, che spostava
+    #   il RIFERIMENTO invece dell'osservata.
+    def _dif_vecchio(off):
+        return sum(1 for k in _rif
+                   if (k + off) in _rif
+                   and _rif[k + off]["archi"] != _oss[k]["archi"])
+
+    prova("allineamento: ### DEVE FALLIRE -- la parametrizzazione VECCHIA non trova lo "
+          "zero con NESSUNO dei suoi due offset (`0` e `-1`), ed e' il difetto che ha "
+          "prodotto il verdetto sbagliato",
+          _dif_vecchio(0) > 0 and _dif_vecchio(-1) > 0)
+    prova("allineamento: ### e l'ATTESO e' DICHIARATO, non dedotto dai numeri",
+          ATTESO.get("n") == 0 and ATTESO.get("archi") == -1
+          and set(ALLINEAMENTI) == {0, -1, 1})
     riga("-")
     stampa("  COLLAUDO: %d su %d" % (sum(esiti), len(esiti)))
     return 0 if all(esiti) else 1
@@ -182,34 +215,63 @@ def main(argv):
     stampa("  passi in comune: %d  (riferimento %d, osservata %d)"
            % (len(comuni), len(rr), len(oo)))
     stampa()
-    # ### I DUE ALLINEAMENTI, PROVATI: `0` e `-1` sul riferimento.
+    # ### ⛔ **L'ALLINEAMENTO ERA PARAMETRIZZATO AL ROVESCIO, E IL VERDETTO NE E'
+    #   USCITO SBAGLIATO** *(difetto MIO, il terzo di questo strumento)*: spostavo
+    #   l'indice del ### **RIFERIMENTO** tenendo l'osservata a `k`, quindi il mio
+    #   *<<allineamento -1>>* confrontava `rif[k-1]` con `oss[k]` -- ### **il CONTRARIO di
+    #   quello che serve** -- e l'allineamento giusto ### **non era fra i due provati.**
+    # ### ✔ **ORA SI SPOSTA L'OSSERVATA, che e' il momento FISICO:** *<<la riga `k` del
+    #   riferimento descrive un istante che nell'osservata e' il passo `k + dec`>>*.
+    # ### ⭐ **E LA SCELTA E' DERIVATA, NON ADATTATA, perche' una sola derivazione
+    #   spiega TUTTI i campi:**
+    #     `n` viene da ### **`chiudi`, cioe' POST-passo** -> le nascite del passo `k` ci
+    #       sono gia' dentro -> ### **`dec = 0`**;
+    #     `archi` e `q_tw` vengono dal ### **gancio della TORSIONE, che gira DENTRO il
+    #       passo e PRIMA di mitosi/Schwinger** -> vedono gli archi come erano alla
+    #       ### **fine del passo `k-1`** -> ### **`dec = -1`.**
+    # ### ⚠ **LA FIRMA DELLA CONVENZIONE E' DENTRO LA RIGA STESSA:** al passo `216` il
+    #   riferimento scrive ### **`n = 12804`** *(le nascite ci sono)* con
+    #   ### **`archi = 471564`** *(le nascite NON ci sono)*. ### **Due campi della stessa
+    #   riga non possono essere letti nello stesso istante, e questo lo PROVA.**
     esiti = {}
     for campo in CONFRONTA:
-        for off in (0, -1):
+        for dec in ALLINEAMENTI:
             dif = []
             for k in comuni:
-                k2 = k + off
-                if k2 not in rr:
+                if (k + dec) not in oo:
                     continue
-                a, b = rr[k2].get(campo), oo[k].get(campo)
+                a, b = rr[k].get(campo), oo[k + dec].get(campo)
                 if a is None or b is None:
                     continue
                 if int(a) != int(b):
                     dif.append((k, int(a), int(b)))
-            esiti[(campo, off)] = dif
-            stampa("  %-7s allineamento %+d:  differenze %d%s"
-                   % (campo, off, len(dif),
+            esiti[(campo, dec)] = dif
+            stampa("  %-7s rif[k] contro oss[k%+d]:  differenze %d%s"
+                   % (campo, dec, len(dif),
                       ("   primo: passo %d  rif %d  oss %d" % dif[0]) if dif else ""))
     stampa()
     riga("-")
     # ### LA LETTURA: per ogni campo vince l'allineamento con ZERO differenze, e si DICHIARA.
     scelto, ok = {}, True
     for campo in CONFRONTA:
-        zeri = [off for off in (0, -1) if not esiti[(campo, off)]]
+        zeri = [dec for dec in ALLINEAMENTI if not esiti[(campo, dec)]]
         if zeri:
-            scelto[campo] = {"allineamento": zeri[0], "differenze": 0}
-            stampa("  ### ✔ `%s`: ZERO differenze con allineamento %+d su %d passi."
-                   % (campo, zeri[0], len(comuni)))
+            _at = ATTESO.get(campo)
+            _d = _at if _at in zeri else zeri[0]
+            scelto[campo] = {"allineamento": _d, "differenze": 0,
+                             "atteso_dalla_derivazione": _at,
+                             "coincide_con_atteso": (_at in zeri)}
+            stampa("  ### ✔ `%s`: ZERO differenze con `rif[k] = oss[k%+d]` su %d passi."
+                   % (campo, _d, len(comuni)))
+            # ### ⛔ **E SI DICE SE E' QUELLO CHE LA DERIVAZIONE PREVEDEVA**, perche'
+            #   uno zero trovato provando tutto ### **non e' una previsione azzeccata.**
+            if _at is None:
+                stampa("  ###    *(nessun allineamento ATTESO dichiarato per questo campo)*")
+            elif _at in zeri:
+                stampa("  ### ⭐    ED E' QUELLO PREVISTO DALLA DERIVAZIONE (%+d)." % _at)
+            else:
+                stampa("  ### ⚠    MA LA DERIVAZIONE PREVEDEVA %+d: lo zero c'e', la mia "
+                       "spiegazione NO." % _at)
         else:
             d0 = esiti[(campo, 0)]
             scelto[campo] = {"allineamento": None, "differenze": len(d0),
@@ -223,7 +285,14 @@ def main(argv):
     forbice = []
     for k in comuni:
         q = rr[k].get("q_tw") or {}
-        f = oo[k].get("fraz_tw_oltre_2pi")
+        # ### ⛔ **ANCHE LA FORBICE ERA DISALLINEATA, e per la STESSA ragione:**
+        #   `q_tw` viene dal ### **gancio della torsione**, come `archi`, quindi va
+        #   confrontata con la frazione del passo ### **`k-1`** dell'osservata.
+        #   ### **Senza lo spostamento uscivano `7` passi fuori forbice su `1000`, con
+        #   scarti da `2e-6` a `6e-4`** -- e il passo `84` era ### **UN arco su `471564`**:
+        #   ### ⚠ **scarti cosi' piccoli NON sono rumore, sono un DISALLINEAMENTO DI UN
+        #   PASSO**, e chiamarli <<bordo>> sarebbe stato comodo e falso.
+        f = oo.get(k + DEC_TORSIONE, {}).get("fraz_tw_oltre_2pi")
         if not q or f is None:
             continue
         _fb = forbice_quantili(q)
