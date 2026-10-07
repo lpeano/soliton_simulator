@@ -8019,3 +8019,84 @@ sulla variazione totale, ed e' ### **a senso unico**: *<<smorzando solo la DISCE
 > `fatt` tende a `0`, quindi ### **la discesa si annulla e la salita no.** ### ✔ **PRIMA
 > DI QUALUNQUE CURA, LA RIMISURA sul blob corrente:** `_g_smp_discese`, `_g_smp_salite` e
 > ### **il bilancio di `d0`.**
+
+---
+
+## 2026-10-07 — ⭐ **`A15`: LA MEMORIA È DINAMICA, LOCALE, E CIÒ CHE DIMENTICA SI TRASFORMA** *(decisione di Luca)*
+
+**Commit a sé, prima di tutto il resto**, perché la regola della chiusura dei difetti e il
+rapporto sulle memorie ### **citano `A15`.** ### **`doc/ASSIOMI.md` si tocca SOLO su
+decisione di Luca, e questa È la decisione**, citata nell'intestazione dell'assioma.
+
+### **I TRE PUNTI** *(testuali nell'assioma)*
+
+| | |
+|---|---|
+| **`1`** | ogni grandezza che porta la storia si aggiorna con la dinamica: ### **nessuna memoria CONGELATA** può entrare in una legge |
+| **`2`** | il tempo di memoria ### **non è un numero scelto**: si ricava dalla dinamica locale *(come `τ_tw = 2π/\|Δω\|`)* |
+| **`3`** | ciò che una memoria dimentica diventa ### **calore del vuoto locale** *(corollario di `A14`)* |
+
+**LA CONSEGUENZA:** una memoria ### **dà un verso**, ed è il meccanismo con cui leggi
+efficaci possono emergere — ### ⚠ **e «quale legge emerga SI MISURA, non si presume»**,
+che è un vincolo su di me, non una promessa.
+
+### ✔ **PERCHE' NON E' `A7`, `A11` NE' `A14`** *(come `A14` rispetto ad `A7`)*
+
+| | |
+|---|---|
+| `A7` | ### **AUTORIZZA** la memoria *(serve stato per conservare)*; ### **`A15` la VINCOLA** *(quello stato deve essere vivo)* |
+| `A11` | derivava i ### **VALORI** *(quanto grande)*; ### **`A15.2` i RITMI** *(quanto in fretta)* |
+| `A14` | dice ### **DOVE** la conservazione vale; ### **`A15.3` NOMINA LA DESTINAZIONE** che `A14` pretende esista |
+| ⭐ | ### **e il VERSO non sta in nessuno dei tre** |
+
+### ✔ **IL NUMERO E' MISURATO, non scelto**
+
+Lo script conta gli assiomi nei titoli di `ASSIOMI.md`: ### **la sequenza `1..15` è
+PIENA** e il prossimo libero è ### **`A16`.** ### **Se non tornasse, si fermerebbe** — è
+lo stesso presidio di `A14`.
+
+### ⛔ **LE VIOLAZIONI NOTE, tutte trovate con `AST` sul blob `b8c21049` e NON a memoria**
+
+**`1` — `phi0` È CONGELATA, la prima violazione di `A15.1`:** ### **`5` scritture, TUTTE
+alla nascita o alla costruzione** *(`__init__` `:3981`, `semina` `:5059`, `_rn_div_phi0`
+`:2092`, `_rn_sch_phi0` `:2492`, `_semina_masse_coerenti` `:9985` con
+`phi0[idx] = phi[idx]`)*. Le lettrici: `A = w*cos(phi0_i − phi0_j)` nello ### **`step`**
+*(`:7566`)* e la sorgente con `HAM_SRC` *(`:8051`)*, ### **inerte perché `HAM_SRC = 0.0`**
+*(`:423`)*.
+
+> ### ⛔ **QUINDI LA <<MEMORIA HEBBIANA DEI LEGAMI>> DELL'INTESTAZIONE** *(`:20`)*
+> ### **NON IMPARA E NON DIMENTICA: è una costante d'arco.** ### ⚠ **E il segno non è
+> neutro:** nelle masse `phi0 = phi`, quindi accoppiamenti ### **positivi per
+> costruzione**; nel ### **vuoto** il segno è ### **casuale e congelato** — disordine
+> ### **immutabile.** Collegata a `SCIOGLIMENTO-FASE`.
+
+**`2` — I TEMPI DI MEMORIA: qui il codice sta MEGLIO di come il mandato lo dava, e lo
+scrivo invece di adeguarmi.** Il mandato chiedeva di elencare *«i tempi che sono numeri e
+non derivati»*. ### **Verificato: CINQUE SU SEI SONO DERIVATI.**
+
+| la memoria | il suo tempo | |
+|---|---|---|
+| `tw` | `2π/\|Δω\|` *(`:596`)* | ### ✔ derivato — ### **è l'esempio che `A15.2` cita** |
+| `peq` | `1/\|phivel_arco\|` *(`:8005`)* | ### ✔ derivato |
+| `d0 → d` | `max(t_luce, t_visco)` *(`:8296`)* | ### ✔ derivato |
+| `omega_s` | `d_nodo/cs_nodo`, e ### **`--tau-luce` È NELL'ARGV** *(`47` voci)* | ### ✔ derivato |
+| `mem_mot` | `tanh(\|grad_tw\|)` *(`:9219`)*, *«in `[0,1)`, dallo stato»* | ### ✔ derivato |
+| ### ⛔ **`TAU_DIFF`** | ### **`1.0`** *(`:460`)*, usato ### **NUDO**: `flusso / TAU_DIFF` *(`:8010`)* | ### ⛔ **NUMERO** |
+
+> ### ⛔ **L'UNICA VIOLAZIONE DI `A15.2` È `TAU_DIFF`**, e non era quella che il mandato
+> dava per prima. ### **E `TAU_BG`, `TAU_P`, `TAU_TW` esistono ancora ma sono SOLO RAMI DI
+> RISERVA** *(`TAU_LOCALI = True`)*: ### **un numero che non gira non è una legge che
+> viola — è un ramo da togliere** *(`A8`)*.
+
+**`3` — I TERMINI CHE DIMENTICANO SENZA CEDERE NIENTE** *(violazione di `A15.3`)*: il
+rilassamento della torsione, `d0 → d`, `peq → rho`, la media mobile di `mem_mot`, il
+decadimento di `omega_s`, il termostato e `scuoti_vuoto`.
+### ⛔ **Manca il NUMERO, non la regola:** per dire ### **quanta** energia perde un termine
+serve ### **l'energia dell'arco**, oggi ### **non definita** *(`ENERGIA-NON-DEFINITA`)*, e
+la destinazione è `VUOTO-LOCALE-DETERMINISTICO`.
+
+**`4` — UNA COLLISIONE DI NOMI:** ### **<<Legge VI>>** è la memoria dei legami in
+`soliton_simulator.py:20` ### **e** la ### **schermatura** in
+`doc/FONDAZIONE_SPINORIALE.md:141`. ### **È la famiglia di `A3`** *(che era tre voci e
+l'indice ha dovuto separarle)*: ### **si cita per NOME finché Luca non decide quale tiene
+il `VI`.**

@@ -2,6 +2,141 @@
 
 ---
 
+## `A15` — ❗ **LA MEMORIA È DINAMICA, LOCALE, E CIÒ CHE DIMENTICA SI TRASFORMA** *(decisione di Luca, 2026-10-07)*
+
+> ### **«A15 — LA MEMORIA È DINAMICA, LOCALE, E CIÒ CHE DIMENTICA SI TRASFORMA.**
+>
+> **1. Ogni grandezza che porta la storia del sistema (una memoria) si aggiorna con la
+> dinamica: nessuna memoria congelata (uno stato fissato alla nascita e mai più
+> aggiornato) può entrare in una legge.**
+>
+> **2. Il tempo di memoria non è un numero scelto: si ricava dalla dinamica locale (come
+> τ_tw = 2π/|Δω|).**
+>
+> **3. Ciò che una memoria dimentica diventa calore del vuoto locale (corollario di A14:
+> nessun termine fa sparire energia).**
+>
+> **Conseguenza: una memoria dà un verso (uno scalare con storia acquista una direzione),
+> ed è il meccanismo con cui leggi efficaci possono emergere. Quale legge emerga si
+> misura, non si presume.»**
+
+### ⚠ **PERCHE' NON E' `A7`, `A11` NE' `A14`, e lo dico perche' si toccano tutti e tre**
+
+*(Come per `A14` rispetto ad `A7`: in questo repo un nome riciclato ha gia' fatto danni.)*
+
+| | che cosa dice quello | che cosa dice `A15` | come si collegano |
+|---|---|---|---|
+| **`A7`** *(CONSERVAZIONE E STATO)* | *«una grandezza senza stato non puo' conservare nulla»* — e' un assioma sul ### **MECCANISMO**: ### **serve memoria per conservare** | ### **chi HA memoria ha degli OBBLIGHI**: aggiornarsi, essere locale, e cedere cio' che dimentica | ### ➜ **`A7` AUTORIZZA la memoria, `A15` la VINCOLA.** `A7` dice *«ti serve uno stato»*; `A15` dice *«e allora quello stato deve essere vivo»* |
+| **`A11`** *(UN LIMITE E' UNA LEGGE, NON UNA TOPPA)* | un ### **clip, un pavimento, un tetto** su un VALORE va derivato, non scelto | ### **`A15.2` dice la stessa cosa sui RITMI**, non sui valori: un `τ` scelto a mano e' un numero che si comporta da toppa | ### ➜ **`A15.2` e' il criterio di `A11` applicato ai TEMPI.** ### **Sono oggetti diversi:** `A11` limita ### **quanto grande**, `A15.2` ### **quanto in fretta** |
+| **`A14`** *(conservazione locale, dissipazione globale)* | ### **DOVE** la conservazione vale e dove no, e che ### **nessun termine fa sparire energia** | ### **`A15.3` NOMINA LA DESTINAZIONE** che `A14` pretende esista: il ### **calore del vuoto LOCALE** | ### ➜ **`A15.3` e' un COROLLARIO di `A14`, e lo dice.** `A14` dice *«il bilancio deve chiudere»*; `A15.3` dice ### **DOVE va il termine che chiude** |
+
+### ⭐ **E IL PEZZO CHE NON STA IN NESSUNO DEI TRE: LA MEMORIA DA' UN VERSO**
+
+Ne' `A7`, ne' `A11`, ne' `A14` dicono niente sulla ### **DIREZIONE**.
+
+> ### ➜ **La conseguenza di `A15` e' l'unico punto di questo file che dice come una
+> grandezza SENZA verso possa acquistarne uno:** ### **con la storia.** Uno scalare che
+> ricorda ### **sa da dove viene**, e da li' viene una direzione.
+>
+> ### ⚠ **E LA CHIUSA E' UN VINCOLO SU DI ME, non una promessa:** *«quale legge emerga
+> SI MISURA, non si presume»*. ### **Dire <<da qui nasce la gravita'>> sarebbe
+> esattamente il verbo disonesto che il `par.10` di `CLAUDE.md` vieta.**
+
+### **COSA NE DISCENDE: LA REGOLA DELLA CHIUSURA DEI DIFETTI**
+
+> ### ➜ **Per OGNI difetto da chiudere, PRIMA di proporre la cura si valuta se e come una
+> MEMORIA possa curarlo** — e la valutazione ### **si scrive nel task history della cura.**
+> ### **La regola completa, coi suoi sette campi e le sue tre condizioni, sta in testa a
+> `doc/RIPRESA_2026-10-07.md`** *(decisione di Luca, 2026-10-07)*.
+
+### ⛔ **LE VIOLAZIONI NOTE DI OGGI, ELENCATE E NON CURATE**
+
+**Tutte trovate col comando** *(`AST` su `soliton_simulator.py`, blob ### **`b8c21049`**,
+`sha1` dei ### **byte grezzi**)*, non a memoria.
+
+#### `1` ⛔ **`phi0` E' CONGELATA — la PRIMA violazione di `A15.1`**
+
+**`AST`: `5` scritture, e ### *tutte* alla nascita o alla costruzione.** ### **Nessun
+aggiornamento nella dinamica.**
+
+| riga | dentro | la scrittura |
+|--:|---|---|
+| `3981` | `__init__` | `self.phi0 = np.zeros(0)` *(riga condivisa con `pos` e `phi`)* |
+| `5059` | `semina` | `self.phi0 = np.concatenate([self.phi0, ph % self._dphi()])` |
+| `2092` | `_rn_div_phi0` | `net.phi0 = np.concatenate([net.phi0, c["fm"]])` |
+| `2492` | `_rn_sch_phi0` | `net.phi0 = np.concatenate([net.phi0, c["anti"]])` |
+| `9985` | `_semina_masse_coerenti` | `net.phi0[idx] = net.phi[idx]` |
+
+**LE LETTRICI:** `A = w * np.cos(self.phi0[i] - self.phi0[j])` nello ### **`step`**
+*(riga `7566`)*, e la sorgente `src = -HAM_SRC * K_C * (w/LAM) * cos(phi0_i - phi0_j) *
+cos(dph)` *(riga `8051`)* — ### ⚠ **quest'ultima e' INERTE: `HAM_SRC = 0.0`** *(riga
+`423`)*.
+
+> ### ⛔ **QUINDI LA <<MEMORIA HEBBIANA DEI LEGAMI>> NON IMPARA E NON DIMENTICA.**
+> L'intestazione del simulatore *(riga `20`)* la chiama
+> ### **<<MEMORIA HEBBIANA dei legami, `cos(dphi0)` -> Legge VI>>**, e
+> ### **non e' una memoria: e' una costante d'arco fissata alla nascita.**
+>
+> ### ⚠ **E IL SEGNO NON E' NEUTRO:** nelle masse seminate `phi0 = phi` alla
+> costruzione, quindi gli accoppiamenti sono ### **positivi per costruzione**; nel
+> ### **vuoto** il segno e' ### **casuale e congelato**, cioe' ### **disordine
+> IMMUTABILE.**
+
+**COLLEGATA A `SCIOGLIMENTO-FASE`**, che e' la diagnosi ### **gia' aperta** delle masse che
+perdono coerenza.
+
+#### `2` ⚠ **I TEMPI DI MEMORIA — e qui il codice sta MEGLIO di come me l'aspettavo**
+
+> ### ⚠ **IL MANDATO CHIEDEVA DI ELENCARE <<i tempi di memoria che sono NUMERI e non
+> derivati>>. VERIFICATO: CINQUE SU SEI SONO DERIVATI**, e ### **lo scrivo invece di
+> adeguarmi.**
+
+| la memoria | il suo tempo | derivato? |
+|---|---|---|
+| `tw` | ### **`τ_tw = 2π/\|Δω\|`** *(`_tau_tw_locale`, riga `596`; `TAU_LOCALI = True`)* | ### ✔ **SI'** — ed e' ### **l'esempio che `A15.2` cita** |
+| `peq` | `tau_bg_loc = 1/\|phivel_arco\|` *(riga `8005`)* | ### ✔ **SI'** |
+| `d0 → d` *(`τ_p`)* | `tau_p_loc = max(t_luce, t_visco)` *(riga `8296`)*, cioe' `(d_arco/cs)·elasticita` | ### ✔ **SI'** |
+| `omega_s` | `d_nodo/cs_nodo` *(`_tempo_luce_nodo`)*, e ### **`--tau-luce` E' NELL'ARGV DEL DRIVER** *(verificato: `47` voci)* | ### ✔ **SI'** |
+| `mem_mot` | `plast = np.tanh(\|grad_tw\|)` *(riga `9219`)*, e il commento dice ### **<<in `[0,1)`, dallo stato>>** | ### ✔ **SI'** |
+| ### ⛔ **`TAU_DIFF`** | ### **`1.0`** *(riga `460`)*, usato ### **NUDO**: `flusso / TAU_DIFF` *(riga `8010`)* | ### ⛔ **NO: e' un NUMERO** |
+
+> ### ⛔ **L'UNICA VIOLAZIONE DI `A15.2` CHE HO TROVATO E' `TAU_DIFF`**, e non e' quella
+> che il mandato dava per prima. ### **Le costanti `TAU_BG = 5.0`, `TAU_P = 2.0`,
+> `TAU_TW = 20.0` ESISTONO ancora**, ma con `TAU_LOCALI = True` sono
+> ### **solo i rami di riserva**: ### **un numero che non gira non e' una legge che
+> viola** — e' ### **un ramo da togliere** *(`A8`)*.
+
+#### `3` ⛔ **I TERMINI CHE DIMENTICANO SENZA CEDERE NIENTE — violazione di `A15.3`**
+
+**L'inventario completo, col bilancio, sta nel rapporto**
+*(`doc/MEMORIE_MANCANTI.md`, §`3`)*. In breve:
+
+| | il termine | che cosa perde |
+|---|---|---|
+| `1` | ### **`- dt_e * tw / τ_tw`** nella torsione | torsione d'arco, ### **a nessuno** |
+| `2` | `d0 → d` con `τ_p` | lunghezza di riposo |
+| `3` | `peq → rho` con `τ_BG` | pressione di equilibrio |
+| `4` | la ### **media mobile** di `mem_mot` | memoria di moto, ### **sovrascritta** |
+| `5` | il decadimento di `omega_s` | rotazione dello spinore |
+| `6` | il ### **termostato globale** e ### **`scuoti_vuoto`** | ### **scrivono `phivel` DALL'ESTERNO** *(gia' in `A14`, violazione `1`)* |
+
+> ### ⛔ **E MANCA IL NUMERO, non la regola:** per dire ### **QUANTA** energia perde un
+> termine serve ### **l'energia dell'arco**, che ### **oggi non e' definita** —
+> `ENERGIA-NON-DEFINITA`. ### **La destinazione e' `VUOTO-LOCALE-DETERMINISTICO`.**
+
+#### `4` ⚠ **UNA COLLISIONE DI NOMI, che va risolta prima di citare <<Legge VI>>**
+
+| dove | che cos'e' <<Legge VI>> |
+|---|---|
+| `soliton_simulator.py:20` | la ### **memoria hebbiana dei legami**, `cos(dphi0)` |
+| `doc/FONDAZIONE_SPINORIALE.md:141` | la ### **SCHERMATURA** *(la portata dipende dalla densita')* |
+
+> ### ⛔ **DUE LEGGI DIVERSE CON LO STESSO NUMERO**, ed e' la famiglia di `A3` *(che era
+> tre voci diverse e l'indice ha dovuto separarle)*. ### **Si cita per NOME, non per
+> numero, finche' non si decide quale tiene il `VI`** — ### **e la decisione e' di Luca.**
+
+---
+
 ## `A14` — ❗ **LE GRANDEZZE SI CONSERVANO LOCALMENTE E SI DISSIPANO GLOBALMENTE** *(decisione di Luca, 2026-10-03)*
 
 > ### **«Le grandezze si conservano LOCALMENTE e si dissipano GLOBALMENTE.»**
