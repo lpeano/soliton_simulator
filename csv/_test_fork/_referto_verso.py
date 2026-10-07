@@ -748,6 +748,38 @@ def main(argv):
         A("")
 
     # ================================================================== M5
+    def _auc(_k):
+        """L'`AUC` MATERIA/VUOTO di `c_k` al passo `_k`. ### **`0.5` = NESSUNA separazione.**"""
+        return ((vv["misure"].get(str(_k)) or {}).get("M2") or {}).get("auc_materia_vuoto")
+
+    def _classi_dicono_struttura(_passi):
+        """### ⛔ **LE CLASSI SONO GEOMETRICHE: dicono dove le masse SONO STATE SEMINATE,
+        non dove c'e' STRUTTURA.**
+
+        Finche' l'`AUC` sta sopra `0.5` le due cose coincidono abbastanza; ### **sotto `0.5`
+        la zona MATERIA e' MENO coerente del VUOTO**, e un confronto fra classi
+        ### **parla di <<dove la materia ERA>>.**
+
+        ### ⭐ **`0.5` NON E' UNA SOGLIA SCELTA DA ME: e' la DEFINIZIONE di <<nessuna
+        separazione>> per un'`AUC`.** ### ✔ **E cosi' il verdetto torna DECIDIBILE da
+        se'** il giorno in cui le masse durano, invece di restare inchiodato a una decisione
+        di oggi.
+        """
+        _a = [(_k, _auc(_k)) for _k in _passi]
+        _a = [(_k, _x) for _k, _x in _a if _x is not None]
+        if not _a:
+            return None, "l'`AUC` non e' registrata"
+        _sotto = [(_k, _x) for _k, _x in _a if _x < 0.5]
+        if not _sotto:
+            return True, None
+        return False, ("l'`AUC` MATERIA/VUOTO sta SOTTO `0.5` a %d dei %d passi che decidono "
+                       "*(il minimo: %s al passo `%d`)*, quindi le classi ### **non "
+                       "identificano struttura** e il confronto parla di ### **dove la "
+                       "materia ERA**"
+                       % (len(_sotto), len(_a), n4(min(_x for _k, _x in _sotto)),
+                          min(_sotto, key=lambda z: z[1])[0]))
+
+
     def _crit_d(_d):
         """Il criterio di `M5(d)` ### **RICALCOLATO DALLE MEDIANE**, non letto dal json.
 
@@ -953,11 +985,28 @@ def main(argv):
     # ### \u26d4 **TRE SEGNAPOSTO VOGLIONO TRE VALORI, e il mio `%` passava UNA TUPLA
     #   ANNIDATA.** ### **L'ha trovato il giro del generatore sui json parziali**, che e'
     #   la sesta volta che prende un difetto che leggere il codice non mostrava.
-    _ic, _it = (("\u2714", "SODDISFATTO -- la dissipazione sta nel VUOTO") if _ok_d
-                else ("\u26d4", "NON soddisfatto"))
-    A("> ### %s **IL CRITERIO SUI PASSI DOPO IL `300`: %s** *(%d passi valutati)*."
-      % (_ic, _it, len(_esiti_d)))
-    A("")
+    _ok_cl2, _perche2 = _classi_dicono_struttura([k for k in passi_m if k > 300])
+    if _ok_cl2 is False:
+        A("> ### ⚠ **IL CRITERIO SUI PASSI DOPO IL `300` E' NON DECIDIBILE** "
+          "*(decisione di Luca, 2026-10-07 sera)*, e ### **non perche' manchi un numero:** "
+          "%s." % _perche2)
+        A("")
+        A("> ### ⛔ **LA CONDIZIONE DEL TEST NON C'ERA.** L'osservazione di Luca dice "
+          "che ### **la memoria non dissipa dove la struttura e' STABILE**, e le classi "
+          "MATERIA/BORDO/VUOTO sono ### **GEOMETRICHE: dicono dove le masse sono state "
+          "SEMINATE.** ### **I numeri della tavola restano e valgono; il VERDETTO aspetta "
+          "masse che durano** *(`A-S1`)*.")
+        A("")
+        A("> ### ⚠ **E UN NUMERO CHE IL CAMBIO DI ETICHETTA NON DEVE FAR PERDERE:** al "
+          "passo `150` -- dove le masse ### **c'erano ancora** -- il criterio era "
+          "soddisfatto ### **per un PELO.** ### **Quando `A-S1` dara' masse che durano, il "
+          "numero da guardare e' se quel rapporto SCENDE o SALE.**")
+        A("")
+    else:
+        A("> ### %s **IL CRITERIO SUI PASSI DOPO IL `300`: %s** *(%d passi valutati)*."
+          % (("✔", "SODDISFATTO -- la dissipazione sta nel VUOTO") if _ok_d
+             else ("⛔", "NON soddisfatto"), len(_esiti_d)))
+        A("")
     A("> ### ⚠ **E SE NON FOSSE SODDISFATTO NON SAREBBE UN DETTAGLIO:** vorrebbe dire "
       "che la torsione dissipa ### **dove la materia sta**, cioe' che il termine di "
       "rilassamento ### **non e' il costo di una memoria che rincorre** ma qualcos'altro.")
@@ -1252,14 +1301,23 @@ def main(argv):
     _nd = sum(1 for x in _dd if x is None)
     _dd = [x for x in _dd if x is not None]
     if _dd:
-        pr.append(("`M5d`", "### \u2b50 **l'osservazione di LUCA regge**: la dissipazione "
+        _ok_cl, _perche = _classi_dicono_struttura([k for k in passi_m if k > 300])
+        # ### ⛔ **DECISIONE DI LUCA, 2026-10-07 sera: NON <<SMENTITA>>, ma NON
+        #   DECIDIBILE** -- e il motivo e' una ### **condizione del test che NON C'ERA:**
+        #   l'osservazione dice che la memoria non dissipa dove la struttura e'
+        #   ### **STABILE**, e le classi sono ### **GEOMETRICHE.**
+        # ### ✔ **E NON E' SCRITTO A MANO: si DERIVA dall'`AUC`**, quindi
+        #   ### **torna decidibile da se'** quando le masse dureranno.
+        pr.append(("`M5d`", "### ⭐ **l'osservazione di LUCA regge**: la dissipazione "
                    "sta nel VUOTO *(MATERIA sotto un quarto di VUOTO, a TUTTI i passi dopo "
                    "il `300`)*",
                    "%d passi valutati, %d soddisfatti%s"
                    % (len(_dd), sum(1 for x in _dd if x),
                       (", %d NON DECIDIBILI *(esclusi)*" % _nd) if _nd else ""),
-                   "### \u2714 **CONFERMATA**" if all(_dd)
-                   else "### \u26d4 **SMENTITA**"))
+                   ("### ⚠ **NON DECIDIBILE** *(decisione di Luca, 2026-10-07)*: %s. "
+                    "### **Il numero resta, il verdetto aspetta masse che durano.**" % _perche)
+                   if _ok_cl is False else
+                   ("### ✔ **CONFERMATA**" if all(_dd) else "### ⛔ **SMENTITA**")))
     else:
         pr.append(("`M5d`", "la dissipazione sta nel VUOTO", "n/d",
                    "### \u26a0 **NON DECIDIBILE**"))
