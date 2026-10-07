@@ -171,6 +171,20 @@ def main():
                   % ("### **" if q == "scuoti" else "", q + ("**" if q == "scuoti" else ""),
                      n4(som[q], 5), pct(abs(som[q]) / tot) if tot else "n/d"))
             A("")
+            _sg = [(k, ((pb[k].get("per_classe") or {}).get(cl) or {}).get("termostato"))
+                   for k in sorted(pb) if k >= 1]
+            _sg = [(k, x) for k, x in _sg if x is not None]
+            _pos = [k for k, x in _sg if x > 0]
+            _neg = [k for k, x in _sg if x < 0]
+            if _pos and _neg:
+                A("> ### ⭐ **IL TERMOSTATO CAMBIA SEGNO, e questo e' il fatto che la "
+                  "quota in valore assoluto NASCONDE:** aggiunge energia su ### **%d** passi "
+                  "*(il primo: `%d`)* e la ### **TOGLIE** su ### **%d** *(dal `%d` in poi)*. "
+                  "### ⛔ **Da li' FRENA**, e il totale di `Delta<phivel^2>` crolla: lo "
+                  "scuotimento inietta e il termostato ### **quasi lo annulla.** "
+                  "### **Quindi non e' il riscaldatore: e' il FRENO.**"
+                  % (len(_pos), min(_pos), len(_neg), min(_neg)))
+                A("")
             _vinc = max(VOCI, key=lambda q: abs(som[q]))
             A("> ### %s **LA VOCE PRINCIPALE NEL %s, sui primi `%d` passi, è "
               "`%s`** — con il ### **%s** del totale in valore assoluto."
@@ -234,6 +248,14 @@ def main():
                 A("> ### ⛔ **SÌ: `T_target` cresce, e la crescita viene PRINCIPALMENTE da "
                   "`median(d0)`** *(il ### **%s** di `ln(T₁/T₀)`)* — ed è il cricchetto che "
                   "`D31` descrive." % pct(lP / lT))
+                if lP / lT > 1.0:
+                    A("")
+                    A("> ### ⚠ **E LA QUOTA SUPERA IL `100` PER CENTO PERCHE' L'ALTRO "
+                      "TERMINE E' NEGATIVO, non per un errore:** `cs_rappr` ### **CALA** "
+                      "*(contributo %s)*, quindi `median(d0)` deve ### **compensarlo E "
+                      "produrre la crescita.** ### **Le due quote sommano a `100` per cento "
+                      "per costruzione**, ed e' il senso della scomposizione in logaritmo."
+                      % pct(lc / lT))
             else:
                 A("> ### ⚠ **`T_target` si muove, ma `median(d0)` NON è il motore** *(solo il "
                   "%s di `ln(T₁/T₀)`)*: il resto viene da `cs_rappr`." % pct(lP / lT))
