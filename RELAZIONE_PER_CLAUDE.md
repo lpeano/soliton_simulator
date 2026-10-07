@@ -9486,3 +9486,109 @@ la `std` intra-massa va da `0.2063` al passo `1` a `1.7392` al `150`: `8.43` vol
 | ### **perché** le masse si sciolgono | ### **`H2` non è misurata** — è `A-S2`, e la decisione è di Luca |
 
 > ### ⛔ **E NON COMINCIO `A-S2`: IL MANDATO DICE DI FERMARMI, E MI FERMO.**
+
+---
+
+# ⛔ **`H3`: IL FATTO REGGE, LA CAUSA NO — E IL TERMOSTATO È IL FRENO, NON IL RISCALDATORE** *(2026-10-07 sera)*
+
+> Referto: `doc/REFERTO_h3_termostato_2026-10-07.md`. Criteri, previsioni e
+> ### **aritmetica** in `675b627`, committato ### **prima** dello strumento e delle corse.
+> ### ⛔ **Nessuna legge toccata, simulatore `b8c21049`.**
+
+## `(1)` ✔ **LE PRIME DUE CLAUSOLE DI `H3` SONO VERE**
+
+`T_target ≈ 5.44` contro `E_cin ≈ 0.156`: l'energia è ### **`35 ×` sotto l'obiettivo**,
+`err_rel ≈ −0.97`, e `xi_termo` ### **accumula negativo** *(rifornente)*.
+
+### ⭐ **E `T_target` CRESCE, E LA CRESCITA VIENE DA `median(d0)`:** scomposta in logaritmo
+*(`ln(T₁/T₀) = 2·ln(cs₁/cs₀) + ln(P₁/P₀)`)*, `median(d0)` vale il ### **`106.54 %`** e
+`cs_rappr` il ### **`−6.54 %`** — ### **le due sommano a `100 %` per costruzione**, e il
+superamento del `100` significa solo che `cs_rappr` ### **cala.**
+### ⛔ **È il cricchetto che `D31` descrive, misurato.**
+
+## `(2)` ⛔ **MA LA TERZA CLAUSOLA È SMENTITA: LA VOCE PRINCIPALE È LO SCUOTIMENTO**
+
+Il bilancio ### **ESATTO** di `Δ<phivel²>` *(un'identità, non una stima)*, somma sui primi
+`50` passi, nel ### **VUOTO**:
+
+| voce | somma | quota |
+|---|--:|--:|
+| ### **`scuoti_vuoto`** | ### **`11.520`** | ### **`94.39 %`** |
+| `termostato` | `0.614` | `5.03 %` |
+| `coppia` | `0.035` | `0.29 %` |
+| residuo incrociato *(non attribuibile)* | `0.036` | `0.29 %` |
+
+### ⭐ **E IL TERMOSTATO CAMBIA SEGNO — il fatto che una quota in valore assoluto
+NASCONDE:** aggiunge energia su ### **`48`** passi e la ### **TOGLIE su `252`, dal `49` in
+poi.** ### ⛔ **Da lì FRENA**, e `Δ<phivel²>` crolla da `0.35` al passo `50` a `0.016` al
+`100`: ### **lo scuotimento inietta e il termostato quasi lo annulla.**
+
+> ### ⭐ **E L'ARITMETICA LO DICEVA PRIMA DELLA MISURA** *(task history, `PH3-1`)*: il
+> termostato è ### **MOLTIPLICATIVO** — `−dt_n·xi` per passo, con `dt_n = DT·r = 0.0085` —
+> quindi ### **anche SATURANDO la sua guardia `|xi| = 2`** darebbe `(1.017)^50 = 2.3`,
+> ### **non il `×8.11` misurato.**
+
+## `(3)` ⛔ **E I DUE BRACCI SMENTISCONO `H3` COME CAUSA — NEL VERSO OPPOSTO A QUELLO ATTESO**
+
+| | AUC al `400` | il criterio |
+|---|--:|---|
+| ### **`B-T`** *(termostato senza memoria, soppressione misurata `4.1 ×`)* | ### **`0.4316`** | ### ✔ **non soddisfatto** |
+| ### **`B-S`** *(senza scuotimento)* | ### **`0.3796`** | ### ✔ **non soddisfatto** |
+| controllo *(`A-S1`, `55a7edc`)* | `0.4679` | — |
+
+### ⛔ **ENTRAMBI SOTTO `0.85`, E ENTRAMBI PEGGIORI DEL CONTROLLO.**
+### ➜ **`H3` è SMENTITA come CAUSA**, e il criterio dice di tornare ad `A-S2` *(`H2`)*.
+
+### ⭐ **E NON È UN ARTEFATTO DEL DENOMINATORE: l'ho controllato, perché un contrasto può
+scendere anche se il numeratore tiene**
+
+| al passo `230` | `B-T` | `B-S` | controllo |
+|---|--:|--:|--:|
+| coerenza di fase delle masse | ### **`0.0892`** | ### **`0.0604`** | ### **`0.4565`** |
+| `c_k` mediana MATERIA | `0.2036` | `0.1969` | `0.4847` |
+| `c_k` mediana VUOTO | `0.2048` | ### **`0.3823`** | `0.2665` |
+
+### ⛔ **Le masse peggiorano DAVVERO, e due misure indipendenti concordano** *(la coerenza di
+campo e quella di fase)*: togliere ### **uno qualsiasi** dei due meccanismi
+### **ACCELERA lo scioglimento di `5–7 ×`.**
+
+### ⭐ **E IN `B-S` IL GAP SI CHIUDE DA ENTRAMBI I LATI:** il ### **VUOTO diventa PIÙ
+coerente** *(`c_k` `0.4557` al passo `150` contro `0.2430` del controllo)*, perché
+### **lo scuotimento serviva a TENERLO INCOERENTE.**
+
+## `(4)` ⭐ **`Λ` È GLOBALE E AGISCE DUE VOLTE, E IL NUMERO LO MOSTRA**
+
+`ampiezza = √stress · √Λ / (1 + I2/Λ)`, con ### **`Λ = mean(|psi|²)` globale.**
+
+| | passo `1` | passo `300` |
+|---|--:|--:|
+| rapporto `amp` ### **masse/vuoto** | `0.1652` | ### **`0.7468`** |
+| `I2` mediana delle masse | `28.33` | ### **`3.74`** |
+
+### ➜ **La protezione delle masse si scioglie**, e ### **non perché `Λ` cresca** *(oscilla
+fra `2.3` e `4.3`)* ### **ma perché `I2` delle masse CROLLA**: sono le masse che, perdendo
+coerenza, ### **perdono la propria schermatura.** ### ⚠ **È un anello di retroazione, e il
+verso è quello sbagliato.**
+
+## LE PREVISIONI: `3` CONFERMATE, `2` SMENTITE
+
+| | esito |
+|---|---|
+| `PH3-1` *(il termostato non è la voce principale)* | ### ✔ **CONFERMATA** |
+| `PH3-2` *(è `scuoti_vuoto`)* | ### ✔ **CONFERMATA** |
+| `PH3-3` *(`B-S` salva le masse, `B-T` no)* | ### ⛔ **SMENTITA: NESSUNO dei due le salva, e peggiorano entrambi** |
+| `PH3-4` *(`T_target` cresce poco)* | ### ⛔ **SMENTITA** |
+| `PH3-5` *(la protezione si indebolisce)* | ### ✔ **CONFERMATA** |
+
+## ⚠ **I LIMITI, DICHIARATI**
+
+| | |
+|---|---|
+| la ricostruzione di `xi_termo` | ### **NON è al bit:** residuo `2.34e-04` assoluto, ### **`0.326 %`** relativo su `300` passi. ### **A quel livello chi domina non cambia** *(le voci differiscono di ordini di grandezza)*, ### ⚠ **ma un confronto fine fra `T_target` ed `E_cin` non si può fare su questi numeri** |
+| `B-T` | ### ⛔ **NON è «senza termostato»:** lo step ricalcola `xi` dentro di sé, quindi è ### **«senza MEMORIA del termostato»** — soppressione misurata ### **`4.1 ×`**, e il task history l'aveva stimata `~50 ×`: ### **la mia stima era `12 ×` ottimista**, perché `err_rel` diventa grande e positivo più tardi |
+| i semi | ### **UNO** *(`P3` non soddisfatta)* |
+| i valori assoluti | ### **`U1` è aperta:** si leggono le ### **differenze fra bracci** |
+
+> ### ⛔ **NESSUNA CURA PROPOSTA.** La scelta fra anticipare il vuoto locale *(`B1`)*, curare
+> prima `D31`, o entrambe, ### **è di Luca.** ### **`H3` è registrata nella voce
+> `SCIOGLIMENTO-FASE` accanto a `H1` e `H2`.**

@@ -1,0 +1,16 @@
+========================================================================================================
+`H3` -- braccio B-T: 500 passi
+========================================================================================================
+  simulatore b8c21049   atteso b8c21049
+====================================================================================================
+LA CONFIGURAZIONE INTERA (`P5`) -- non i flag toccati, TUTTI
+====================================================================================================
+  booleani di modulo confrontati con l'argv del DRIVER: 82
+  -> IN CONFIGURAZIONE DEL DRIVER: nessuna differenza. ZERO su 82.
+
+  scena: n = 12802, archi = 471564, DT = 0.01
+  braccio B-T   flag: {'TEMPO_SEGNO': 'False', 'FORK_SU2_MEM': 'True', 'CS_DINAMICO': 'True', 'REGIME': "'deterministico'", 'CS_M': '2.0', 'M_PH': '1.0', 'DT': '0.01', 'SCUOTIMENTO': 'True', 'G_PH': '0.003'}
+  ### INTERVENTO: `xi_termo` AZZERATA prima di ogni `step`. ### ATTENZIONE: NON e' un azzeramento del termostato -- lo step lo RICALCOLA dentro di se'. Il residuo si MISURA.
+
+  involucri rimossi e verificati: 2
+  ### I DATI SONO SALVATI.
