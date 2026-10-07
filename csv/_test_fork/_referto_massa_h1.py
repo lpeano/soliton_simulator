@@ -237,6 +237,55 @@ def main():
           "### **non può affermare che i due bracci differiscono solo in `phivel`.** "
           "### **Lo dico invece di ometterlo.**")
         A("")
+    # ---------------------------------------------------------- le DUE validazioni
+    #   ### ⭐ **DUE CONTROLLI CHE SI CHIUDONO A VICENDA, e nessuno dei due e' una mia
+    #   affermazione:** `(a)` il braccio di controllo ### **RIGIRATO** deve riprodurre
+    #   ### **`A1` AL BIT** sui contatori -- altrimenti non e' il controllo; `(b)` il braccio
+    #   ### **`H1`** deve ### **DIFFERIRE** dal controllo -- altrimenti l'intervento e'
+    #   ### **INERTE** e tutto il confronto e' un ### **`FALSO-UNO`.**
+    if hc and c_n:
+        _com = sorted(set(c_n) & set(passic))
+        _dn = [(k, c_n[k], passic[k].get("n")) for k in _com
+               if c_n[k] is not None and c_n[k] != passic[k].get("n")]
+        _dh = [(k, passic[k].get("n"), (passi.get(k) or {}).get("n")) for k in _com
+               if (passi.get(k) or {}).get("n") is not None
+               and passic[k].get("n") != (passi.get(k) or {}).get("n")]
+        A("## ⭐ **LE DUE VALIDAZIONI, e si chiudono a vicenda**")
+        A("")
+        A("| | che cosa pretende | il numero | esito |")
+        A("|---|---|--:|---|")
+        A("| `(a)` ### **il controllo RIGIRATO è il controllo** | `n` identica a quella di "
+          "### **`A1`** su tutti i passi in comune *(stesso seme, stessa scena, nessun "
+          "intervento)* | ### **%s** differenze su %s passi | %s |"
+          % (n4(len(_dn)), n4(len(_com)),
+             "### ✔ **SÌ**" if not _dn else
+             ("### ⛔ **NO**: prima differenza al passo `%d` *(`A1` %s, rigirato %s)*"
+              % _dn[0])))
+        A("| `(b)` ### **l'intervento NON è inerte** | `n` del braccio `H1` ### **DIVERSA** "
+          "da quella del controllo, almeno a un passo | ### **%s** differenze su %s passi | %s |"
+          % (n4(len(_dh)), n4(len(_com)),
+             ("### ✔ **SÌ**, e la prima è al passo `%d` *(controllo %s, `H1` %s)*" % _dh[0])
+             if _dh else
+             "### ⛔ **NO: l'intervento è INERTE**, e il confronto sarebbe un `FALSO-UNO`"))
+        A("")
+        if _dn:
+            A("> ### ⛔ **LA VALIDAZIONE `(a)` FALLISCE: il braccio che chiamo <<controllo>> "
+              "NON riproduce `A1`.** ### **Tutto quello che segue va letto con questo "
+              "sospetto, e la causa va trovata prima di usare i numeri.**")
+            A("")
+        if not _dh:
+            A("> ### ⛔ **LA VALIDAZIONE `(b)` FALLISCE: l'intervento non ha cambiato NIENTE "
+              "nei contatori.** ### **Un confronto fra due bracci identici non misura il "
+              "merito: è un `FALSO-UNO`.**")
+            A("")
+        if _dn == [] and _dh:
+            A("> ### ⭐ **ENTRAMBE PASSANO, e insieme dicono una cosa che nessuna delle due "
+              "dice da sola:** il controllo è ### **esattamente** la corsa `A1` *(quindi i "
+              "numeri del 2026-10-07 valgono come riferimento)*, e l'intervento "
+              "### **ha spostato la dinamica** a partire dal passo `%d` *(il `216` è la prima "
+              "nascita: la prima differenza arriva subito dopo)*. ### **Quindi la differenza "
+              "che si legge sotto è REALE, e il riferimento è SOLIDO.**" % _dh[0][0])
+            A("")
     A("---")
     A("")
     # ======================================================================
