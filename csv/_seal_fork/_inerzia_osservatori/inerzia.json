@@ -1,0 +1,26 @@
+{
+ "blob_sim": "b8c21049b85ba36a828f49dfa225d42419f3baf5",
+ "blob_verso": "c2bbf995610ca70d4c0e8ad85893e474d6d414be",
+ "blob_plaquette": "3cd93fab17968c91a631849110cc070587353e45",
+ "passi": 50,
+ "esclusi": [],
+ "attributi": 240,
+ "solo_nudo": [],
+ "solo_osservatori": [
+  "_allaccia"
+ ],
+ "diversi": [],
+ "origini_registrate": 471564,
+ "involucri_rimossi": true,
+ "esito": "FALLISCE",
+ "a_valle": {
+  "nudo": [
+   12802,
+   471564
+  ],
+  "oss": [
+   12802,
+   471564
+  ]
+ }
+}

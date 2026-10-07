@@ -1,0 +1,21 @@
+========================================================================================================
+LA BYTE-INERZIA DEGLI OSSERVATORI: 50 passi CON e SENZA
+========================================================================================================
+  simulatore b8c21049   atteso b8c21049
+  strumenti: c2bbf995 (verso)  3cd93fab (plaquette)
+
+  --- il braccio NUDO
+      n = 12802, archi = 471564, attributi = 240
+  --- il braccio CON GLI OSSERVATORI
+      n = 12802, archi = 471564, attributi = 241
+
+--------------------------------------------------------------------------------------------------------
+  attributi solo nel NUDO: 0  []
+  attributi solo CON gli osservatori: 1  ['_allaccia']
+  attributi DIVERSI: 0
+
+========================================================================================================
+  ### ⛔ LA BYTE-INERZIA FALLISCE. LA CORSA NON PARTE.
+  ### Le differenze sono NOMINATE qui sopra.
+========================================================================================================
+  controllo: origini registrate 471564   involucri rimossi SI
