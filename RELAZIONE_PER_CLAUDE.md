@@ -8967,3 +8967,115 @@ Il json di questa corsa porta ancora il booleano vecchio, e ### **rifare `1000` 
 booleano non si fa.** ### ✔ **Allora il generatore RICALCOLA il criterio dalle mediane**, col
 guardiano del `NaN` — ### **il numero esce da uno script e legge il DATO, non una conclusione
 già tratta** *(`L-NUMERI`)*.
+
+---
+
+# ⭐ **ANNOTAZIONE DEL 2026-10-07 SERA — I NUMERI DI `M5`, DALLA CORSA DA `1000` PASSI** *(`par.8`: si ANNOTA, non si riscrive)*
+
+> ### ⛔ **TUTTO CIÒ CHE SEGUE VIENE DA UNA SOLA CORSA, CON `U1` APERTA**, e serve a
+> ### **SCEGLIERE fra letture della STESSA corsa**, non a dare valori assoluti.
+> ### **Le decisioni sono di Luca.** Riferimenti: referto
+> `doc/REFERTO_verso_e_plaquette_2026-10-06.md`, dati
+> `csv/_test_fork/_misura_verso/verso.json`, commit `67f020e`.
+> ### ✔ **E IL CONTROLLO CHE LI RENDE LEGGIBILI È PASSATO:** `n` e `archi` combaciano
+> ### **AL BIT con `amp0.json` su tutti i `1000` passi** *(`csv/_seal_fork/_inerzia_nascite/`)*
+> — gli osservatori, involucri di nascita compresi, ### **non cambiano la dinamica.**
+
+## `(a)` ⛔ **`phi0` È MEMORIA MORTA, E IL NUMERO NON È DI BORDO** → la scheda `PHI0-CONGELATA` e `M-LEGAMI`
+
+Spearman fra `c0 = cos(phi0_i − phi0_j)` *(congelato)* e `c_δ = cos(dph − tw)` *(vivo)*, sugli
+archi ### **VUOTO con età `> 2 τ_tw`**:
+
+| passo | Spearman | archi |
+|--:|--:|--:|
+| `150` | `−0.0435` | `17174` |
+| `230` | `+0.0076` | `62636` |
+| `300` | `+0.0102` | `103878` |
+| `400` | `+0.0006` | `138781` |
+| `500` | `+0.0001` | `161099` |
+| `700` | `−0.0003` | `178043` |
+| ### **`1000`** | ### **`+0.0022`** | ### **`183067`** |
+
+### **La soglia fissata PRIMA era `0.3`. Il massimo oltre il `216` è `0.0102`: TRENTA VOLTE
+sotto.** ### ⭐ **Non è un esito di bordo, ed è misurato su `183067` archi.**
+
+> ### ➜ **CONSEGUENZA PER `M-LEGAMI`:** la memoria congelata dei legami e quella viva
+> ### **non sono correlate.** Sostituire `c0` con `cos(dph − tw)` ### **non è un
+> raffinamento: è cambiare grandezza.** ### ⚠ **E questo NON dice quale delle due sia
+> giusta** — dice che la scelta ### **non è innocua**, e che va decisa, non scivolata.
+
+## `(b)` ⭐ **IL DIPOLO NON DOMINA `δ`, MA DOVE AGISCE VALE UN QUARTO** → la scheda `MEM-VERSO`
+
+Mediana di `|tw_dip| / |tw|`, con `tw_dip` ### **accumulatore PARALLELO** *(non tocca `net`)*:
+
+| | mediana su TUTTI gli archi | ### **sugli archi con un salto nei `50` passi prima** | archi |
+|--:|--:|--:|--:|
+| `230` | `0.0` | ### **`0.2751`** | `285` |
+| `500` | `4.3e-07` | ### **`0.2780`** | `2255` |
+| ### **`1000`** | ### **`2.2e-08`** | ### **`0.2289`** | ### **`9105`** |
+
+### ⛔ **E LA MEDIANA A ZERO DA SOLA SAREBBE SOSPETTA** *(un accumulatore morto darebbe lo
+stesso numero)*. ### ✔ **IL CONTROLLO POSITIVO LA SALVA: dove il dipolo agisce,
+l'accumulatore PARLA** — `23–28 %` di `|tw|`.
+
+> ### ➜ **CONSEGUENZA PER `MEM-VERSO`: il criterio è SODDISFATTO** *(mediana `< 0.5`)*,
+> quindi ### **`MEM-VERSO` non leggerebbe SE STESSA** — il timore che fosse ### **un anello
+> invece di una cura** ### **non si realizza.** ### ⚠ **Ma `23–28 %` dove il dipolo agisce
+> non è nulla:** una memoria del verso costruita su `δ` ### **erediterebbe un quarto del
+> calcio del dipolo** su quegli archi, e ### **va detto nella scheda prima di adottarla.**
+
+## `(c)` ⛔ **L'OSSERVAZIONE DI LUCA È SMENTITA: LA DISSIPAZIONE NON STA NEL VUOTO** → `P-DECADIMENTO`, §`3`
+
+Il criterio fissato PRIMA: *«la dissipazione sta nel VUOTO»* se la potenza per nodo
+### **mediana** in MATERIA è ### **meno di UN QUARTO** di quella in VUOTO, a ### **TUTTI** i
+passi pesanti dopo il `300`.
+
+| passo | MATERIA | VUOTO | ### **rapporto** | sotto `1/4`? |
+|--:|--:|--:|--:|---|
+| `150` | `0.3841` | `1.5414` | ### **`0.249`** | ### ⚠ **SÌ, per un PELO** *(il quarto è `0.2500`)* |
+| `230` | `0.5008` | ### **`NaN`** | — | ### ⛔ **NON DECIDIBILE** *(il veleno di un arco appena nato)* |
+| `300` | `0.8397` | `2.2450` | `0.374` | ### ⛔ **no** |
+| `400` | `1.8843` | `2.6261` | `0.717` | ### ⛔ **no** |
+| `500` | `3.1820` | `3.0533` | ### **`1.042`** | ### ⛔ **no** |
+| `700` | `4.2104` | `4.0334` | ### **`1.044`** | ### ⛔ **no** |
+| ### **`1000`** | `5.2288` | `5.1395` | ### **`1.017`** | ### ⛔ **no** |
+
+> ### ⛔ **IL RAPPORTO SALE MONOTONO E SUPERA `1`: la dissipazione NON si concentra nel
+> vuoto, SI EQUALIZZA** — e dal passo `500` la ### **MATERIA dissipa leggermente PIÙ** del
+> vuoto. ### **`4` passi valutati dopo il `300`, ZERO soddisfatti.**
+
+### ⚠ **E IL PASSO `150` LA CONFERMAVA PER UN PELO** *(`0.249` contro `0.250`)*: ### **una
+misura fermata al `150` avrebbe detto il CONTRARIO.** ### ⛔ **È ancora
+`FINESTRA-PRE-NASCITA`, e questa volta la finestra corta avrebbe CONFERMATO un'idea invece
+di romperla** — che è il modo in cui una trappola fa più danno.
+
+> ### ➜ **CONSEGUENZA PER `P-DECADIMENTO`:** la proposta *«una memoria che dimentica dissipa
+> solo quando ha qualcosa da dimenticare»* ### **non trova appoggio in questa misura.**
+> ### ⚠ **E NON È UNA CONFUTAZIONE DEL PRINCIPIO:** il principio parla di ### **una memoria
+> ben posta**, e `tw` oggi ### **non lo è** — `U1` è aperta e il termine di rilassamento è
+> uno dei pezzi in discussione. ### **Dice che il bilancio della torsione di OGGI non è il
+> costo di una memoria che rincorre**, e che ### **chi proponesse di leggerlo così deve
+> prima spiegare questo rapporto che sale.**
+
+## `(d)` ⭐ **E UNA COSA CHE NON CAMBIA MAI: LA BASE DEI CICLI** → `MEM-VERSO`, `M-SPINORE`
+
+### **`0.00 %` di cicli di base cambiati a TUTTI gli `8` passi misurati, con `827` nascite.**
+### ⭐ **Una memoria indicizzata sui cicli di base avrebbe un supporto STABILE** — e questo
+era il dubbio principale su una lettura topologica del verso.
+
+## ⚠ **E TRE NUMERI CHE NON ERANO IN NESSUNA SCHEDA, e che una scheda futura deve guardare**
+
+| | |
+|---|---|
+| le spinte mediane oltre il `216` | ### **`perc_geom` `1160.8` < `D` `5260.6` < `A` `8725.8` < `MEM` `9837.0`** |
+| ### ⛔ **e la legge di OGGI inietta MENO di tutte** | avevo previsto che la minore fosse `D`: ### **previsione SMENTITA.** ### **Una memoria del verso, in qualunque forma, inietterebbe PIÙ spinta di `perc_geom`** — e questo è un costo, non un dettaglio |
+| la frazione con `|tw| > 2π` | sale ### **monotona** da `0` a ### **`7.64 %`** al `1000` *(avevo previsto `15–25 %`: ### **SMENTITA**, ma il verso della crescita era giusto)* |
+| gli archi per origine | ### **`1130`** da divisione, ### **`524`** da Schwinger, ### **`0`** senza origine |
+
+> ### ⛔ **IL FATTO CHE `perc_geom` INIETTI LA SPINTA MINORE NON LA RENDE GIUSTA:** inietta
+> poco ### **perché perde il verso** *(`GEOM-SENZA-VERSO`)*, e una grandezza che perde
+> informazione ### **è naturalmente più quieta.** ### ⚠ **Ma va scritto come COSTO delle
+> alternative**, invece di essere scoperto dopo.
+
+### ⛔ **E LA SCELTA FRA LE OPZIONI NON È IN QUESTO DOCUMENTO: È DI LUCA.**
+### **Questa annotazione riporta i numeri e dice che cosa vincolano. Non sceglie.**
