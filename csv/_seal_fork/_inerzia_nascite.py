@@ -81,7 +81,81 @@ CONFRONTA = ("n", "archi")
 NON_REGISTRATI = ("nati_tot", "schwinger_tot", "q_tw")
 
 
+def forbice_quantili(q):
+    """La FORBICE sulla frazione sopra `2pi`, dai QUANTILI. ### **E si collauda.**
+
+    ### ⛔ **LA PRIMA VERSIONE ERA SBAGLIATA IN DUE MODI MIEI:** dividevo i percentili
+    per ### **`1000`** invece che per `100`, e avevo ### **`lo` e `hi` SCAMBIATI.**
+    ### **Trovato rileggendo lo strumento prima di usarlo**, non dai numeri.
+    ### ⚠ **Una forbice sbagliata non alza niente: avrebbe DICHIARATO un disaccordo
+    inesistente, o taciuto uno vero.** ### ✔ **Percio' ora e' una FUNZIONE con un
+    collaudo**, invece di sei righe dentro un ciclo.
+
+    ### LA DERIVAZIONE, scritta: le chiavi sono `q000`..`q100`, cioe' PERCENTILI.
+      se `q_p > 2pi` allora ### **piu' di `1 - p/100`** degli archi sta sopra `2pi`;
+      se `q_p <= 2pi` allora ### **al piu' `1 - p/100`** ci sta.
+    ### ➜ `lo = 1 - min{p : q_p > 2pi}/100`  e  `hi = 1 - max{p : q_p <= 2pi}/100`.
+    """
+    pp = [(int(kk[1:]), float(v)) for kk, v in q.items() if kk.startswith("q")]
+    if not pp:
+        return None
+    sotto = [p for p, v in pp if v <= P2PI]
+    sopra = [p for p, v in pp if v > P2PI]
+    hi = (1.0 - max(sotto) / 100.0) if sotto else 1.0
+    lo = (1.0 - min(sopra) / 100.0) if sopra else 0.0
+    return lo, hi
+
+
+def collaudo():
+    """### **I casi della forbice, e UNO DEVE FALLIRE.**"""
+    esiti = []
+
+    def prova(et, ok):
+        esiti.append(bool(ok))
+        stampa("  %s  %s" % ("ok  " if ok else "FALLITO", et))
+
+    _s, _g = P2PI * 0.5, P2PI * 2.0      # sotto e sopra `2pi`
+    # ---- tutti SOTTO: la frazione e' ZERO, e la forbice deve essere [0, 0]
+    q = {"q%03d" % p: _s for p in (0, 1, 5, 25, 50, 75, 95, 99, 100)}
+    f = forbice_quantili(q)
+    prova("forbice: ### tutti i quantili SOTTO `2pi` -> `[0, 0]`, cioe' frazione ZERO",
+          f == (0.0, 0.0))
+    # ---- tutti SOPRA: la frazione e' UNO
+    q = {"q%03d" % p: _g for p in (0, 1, 5, 25, 50, 75, 95, 99, 100)}
+    f = forbice_quantili(q)
+    prova("forbice: ### tutti SOPRA -> `[1, 1]`, cioe' frazione UNO", f == (1.0, 1.0))
+    # ---- il caso che conta: `q095 <= 2pi < q099`
+    q = {"q%03d" % p: (_g if p >= 99 else _s)
+         for p in (0, 1, 5, 25, 50, 75, 95, 99, 100)}
+    f = forbice_quantili(q)
+    prova("forbice: ### `q095 <= 2pi < q099` -> `[0.01, 0.05]`, e una frazione del `3 %` "
+          "ci sta dentro",
+          f is not None and abs(f[0] - 0.01) < 1e-12 and abs(f[1] - 0.05) < 1e-12
+          and f[0] <= 0.03 <= f[1])
+    # ---- ### ⛔ **IL CASO CHE DEVE FALLIRE: la VERSIONE SBAGLIATA, /1000 e scambiata**
+    pp = [(int(kk[1:]), float(v)) for kk, v in q.items() if kk.startswith("q")]
+    _sopra = [p for p, v in pp if v > P2PI]
+    _lo_sb = 1.0 - max(_sopra) / 1000.0
+    _hi_sb = 1.0 - min(_sopra) / 1000.0
+    _lo_sb, _hi_sb = min(_lo_sb, _hi_sb), max(_lo_sb, _hi_sb)
+    prova("forbice: ### DEVE FALLIRE -- la versione VECCHIA da' `[%.3f, %.3f]`, che NON "
+          "contiene il `3 %%`: avrebbe dichiarato un disaccordo INESISTENTE"
+          % (_lo_sb, _hi_sb),
+          not (_lo_sb <= 0.03 <= _hi_sb))
+    # ---- un dizionario senza quantili non inventa una forbice
+    prova("forbice: ### un dizionario SENZA quantili da' `None`, non `[0, 1]`",
+          forbice_quantili({"altro": 1.0}) is None)
+    riga("-")
+    stampa("  COLLAUDO: %d su %d" % (sum(esiti), len(esiti)))
+    return 0 if all(esiti) else 1
+
+
 def main(argv):
+    if "--collaudo" in argv[1:]:
+        riga("=")
+        stampa("IL COLLAUDO DELLA FORBICE DI _inerzia_nascite.py")
+        riga("=")
+        return collaudo()
     if not os.path.isdir(FUORI):
         os.makedirs(FUORI)
     riga("=")
@@ -152,19 +226,10 @@ def main(argv):
         f = oo[k].get("fraz_tw_oltre_2pi")
         if not q or f is None:
             continue
-        # ### ⛔ **LA FORBICE, E LA PRIMA VERSIONE ERA SBAGLIATA IN DUE MODI MIEI:**
-        #   dividevo i percentili per ### **`1000`** invece che per `100`, e avevo
-        #   ### **`lo` e `hi` SCAMBIATI.** ### **Trovato rileggendo lo strumento prima di
-        #   usarlo**, non dai numeri.
-        #   ### LA DERIVAZIONE, scritta: le chiavi sono `q000`..`q100`, cioe' PERCENTILI.
-        #     se `q_p > 2pi` allora ### **piu' di `1 - p/100`** degli archi sta sopra `2pi`;
-        #     se `q_p <= 2pi` allora ### **al piu' `1 - p/100`** ci sta.
-        #   ### ➜ `lo = 1 - min{p : q_p > 2pi}/100`  e  `hi = 1 - max{p : q_p <= 2pi}/100`.
-        pp = [(int(kk[1:]), float(v)) for kk, v in q.items() if kk.startswith("q")]
-        sotto = [p for p, v in pp if v <= P2PI]
-        sopra = [p for p, v in pp if v > P2PI]
-        hi = (1.0 - max(sotto) / 100.0) if sotto else 1.0
-        lo = (1.0 - min(sopra) / 100.0) if sopra else 0.0
+        _fb = forbice_quantili(q)
+        if _fb is None:
+            continue
+        lo, hi = _fb
         forbice.append((k, f, lo, hi, bool(lo - 1e-9 <= f <= hi + 1e-9)))
     fuori_f = [x for x in forbice if not x[4]]
     stampa("  controllo a FORBICE su `q_tw` contro la frazione sopra 2pi: %d passi, "

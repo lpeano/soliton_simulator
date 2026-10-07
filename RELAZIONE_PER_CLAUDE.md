@@ -8787,3 +8787,24 @@ Più `archi_senza_origine`, ### **dichiarato anche quando è zero.**
 Controlli di formato sul referto di prova *(`466` righe)*: ### **`0`** `None` nel testo,
 ### **`0`** doppi backtick, ### **`0`** percento doppi letterali, ### **`0`** segnaposto non
 risolti, ### **`0`** righe di tabella rotte, grassetto ### **bilanciato**.
+
+## ✔ **LA FORBICE DIVENTA UNA FUNZIONE, E IL CASO CHE DEVE FALLIRE È CONCRETO** *(2026-10-07)*
+
+Avevo corretto la forbice di `_inerzia_nascite.py` *(percentili per `100` e non per `1000`,
+`lo` e `hi` nel verso giusto)* ### **senza provarla.** Ora è
+### **`forbice_quantili(q)`** con ### **`5` casi** e un `--collaudo`.
+
+| il caso | la forbice |
+|---|---|
+| tutti i quantili sotto `2π` | ### **`[0, 0]`** — frazione zero |
+| tutti sopra | ### **`[1, 1]`** |
+| `q095 ≤ 2π < q099` | ### **`[0.01, 0.05]`**, e una frazione del `3 %` ci sta dentro |
+| un dizionario senza quantili | ### **`None`**, non `[0, 1]` |
+
+> ### ⛔ **E IL CASO CHE DEVE FALLIRE NON È UN'ASTRAZIONE:** sullo stesso caso la versione
+> vecchia dava ### **`[0.900, 0.901]`**, che ### **non contiene il `3 %`** — ### **avrebbe
+> dichiarato un disaccordo INESISTENTE**, cioè avrebbe fatto sospendere i numeri di `A1` per
+> un difetto che non c'era.
+
+### ⚠ **Una formula che nessuno può provare non è un controllo**, e questa stava in sei
+righe dentro un ciclo.
