@@ -8357,3 +8357,125 @@ spinta iniettata `Σ|Δdipolo|`** — e ### **non come cura.**
 Misurato: ### **`1242840` su `5534011`** *(`22.5 %`)*; per classe ### **MATERIA `4.6 %`, BORDO `24.2 %`, VUOTO `25.0 %`.** ### ⛔ **Avevo previsto `~50 %` nel vuoto assumendo segni INDIPENDENTI, e non lo sono:** vengono da un ### **potenziale**, quindi `d(0,1) + d(1,2) + d(2,0) = 0` li vincola e la frustrazione ### **si dimezza.** ### **La direzione della previsione regge; il numero no.**
 
 **COLLAUDO: `49` casi** per `M1`-`M3`-`M5` e ### **`41`** per `M4`, con ### **nove <<DEVE FALLIRE>>.**
+
+---
+
+# ANNOTAZIONE *(2026-10-07 — `par.8`: si ANNOTA, non si riscrive)*
+
+## ⛔ **UNA MIA RIGA NON REGGE: `mem_mot` È UNA SECONDA VIOLAZIONE DI `A15.2`**
+
+*(Rilievo del guardiano, verificato sul codice del blob ### **`b8c21049`** prima di
+scriverlo.)*
+
+> ### ⛔ **CHE COSA AVEVO SCRITTO, in tre posti:** *«`mem_mot`: il suo tempo è
+> `plast = tanh(|grad_tw|)` — ### **DERIVATO dallo stato**, `A15.2` è rispettato»*
+> — nella riga `mem_mot` del §`2`, nel §`4c`, e nella scheda `M-FLUSSO`.
+>
+> ### ⛔ **NON REGGE**, e per ### **due** ragioni ### **indipendenti.**
+
+## `1` ⛔ **IL TEMPO È CONTATO IN TICK GLOBALI: `memoria_hebbiana_moto` NON USA IL TEMPO PROPRIO**
+
+**Censimento `AST` della funzione** *(righe `9171`-`9636`)*, cercando ### **ogni** nome di
+tempo:
+
+| cercato | trovato? |
+|---|---|
+| `dt_e` *(il tempo d'arco)* | ### ⛔ **ASSENTE** |
+| `dt_n` *(il tempo di nodo)* | ### ⛔ **ASSENTE** |
+| `_fattore_tempo_arco` | ### ⛔ **ASSENTE** |
+| `_tempo_luce_nodo` | ### ⛔ **ASSENTE** |
+| `tau`, `TAU` *(qualunque costante di tempo)* | ### ⛔ **ASSENTE** |
+| `DT` | ### ⚠ **PRESENTE, e SOLO nei limiti causali** — `passo_causale = c_sistema*DT` *(`:9334`, `:9390`)*, `_csa*DT` *(`:9528`)*, `LAM*sqrt(K_C)*DT` *(`:9529`, `:9539`)* |
+
+> ### ⛔ **QUINDI L'AGGIORNAMENTO `mem_mot = (1−plast)·mem_mot + plast·grad_tw` GIRA UNA
+> VOLTA PER TICK GLOBALE, SENZA NESSUN FATTORE DI TEMPO PROPRIO.**
+>
+> ### ➜ **IL TEMPO DI MEMORIA È CONTATO IN TICK, cioè in TEMPO COORDINATO**, e
+> ### **NON RALLENTA NELLA MATERIA** — a differenza di ### **`tw`, `peq` e `d0`, che
+> avanzano con `dt_e`.**
+>
+> ### ⛔ **È CONTRO `A15.2`**, che dice *«si ricava dalla dinamica ### **LOCALE**»*:
+> ### **`plast` è derivato dallo STATO, ma l'OROLOGIO su cui ticchetta è GLOBALE** — e
+> ### **sono due cose diverse.** ### **La mia riga confondeva il RITMO con l'OROLOGIO.**
+>
+> ### ⛔ **E È CONTRO LA DECISIONE DI LUCA** che il tick globale sia ### **solo tempo
+> coordinato** e che ### **ogni nodo viva il suo tempo proprio** *(la cura `2`, «un solo
+> orologio»)*.
+
+## `2` ⛔ **`tanh(|grad_tw|)` HA UNA SCALA NASCOSTA: `grad_tw` PORTA UNITÀ**
+
+**Dal codice** *(`:9208`-`:9219`)*, e ### **con un dettaglio che rende la cosa più netta di
+come l'ho ricevuta:**
+
+```
+dtw     = twn[jj] - twn[ii]          # una DIFFERENZA DI TORSIONE  -> radianti
+dirarc  = v / L                      # un VERSORE                  -> adimensionale
+grad_tw = somma(dtw * dirarc) / _deg  # ...e NON si divide per L
+plast   = tanh(|grad_tw|)
+```
+
+> ### ⛔ **`grad_tw` NON È UN GRADIENTE PER UNITÀ DI LUNGHEZZA: `L` viene calcolata e usata
+> SOLO per normalizzare `dirarc`.** ### ➜ **Quindi `grad_tw` ha le unità della TORSIONE
+> (radianti), divise per il GRADO** *(un conteggio adimensionale)*.
+>
+> ### ⛔ **E `tanh` VUOLE UN ARGOMENTO ADIMENSIONALE.** ### **Quindi lì dentro c'è una
+> SCALA NASCOSTA di `1` radiante per unità di grado**, e nessuno l'ha scelta
+> esplicitamente. ### **È la famiglia `A1`/`A11`: un numero che si comporta da legge.**
+
+## ➜ **QUINDI: `A15.2` HA DUE VIOLAZIONI, non una**
+
+| | la violazione | che tipo |
+|---|---|---|
+| `1` | ### **`TAU_DIFF = 1.0`** *(`:460`)*, usato nudo in `flusso / TAU_DIFF` *(`:8010`)* | un ### **numero** al posto di un tempo derivato |
+| ### ⛔ **`2`** | ### **`mem_mot`** | il ### **ritmo** è derivato, ### **l'OROLOGIO è globale**; e ### **`tanh` di una grandezza con unità** nasconde una scala |
+
+> ### ⚠ **E LA SECONDA È PIÙ SOTTILE DELLA PRIMA, ed è per questo che me l'ero perso:**
+> `TAU_DIFF` è ### **visibilmente** un numero; `mem_mot` ### **sembra** derivato perché
+> `plast` lo è. ### **Ho guardato il RITMO e non l'OROLOGIO.**
+
+## ✔ **E LA SCHEDA `M-FLUSSO` CAMBIA DI CONSEGUENZA**
+
+> ### ⛔ **La memoria di flusso d'arco DEVE NASCERE COL TEMPO PROPRIO DELL'ARCO** —
+> ### **`dt_e/τ_tw`** o un equivalente ### **derivato** — ### **e SENZA scale nascoste.**
+>
+> ### ➜ **Non basta <<un ritmo derivato dallo stato>>:** serve che il ritmo sia
+> ### **adimensionale** *(un rapporto fra due tempi, o fra due grandezze omogenee)* e che
+> l'### **avanzamento** usi il tempo proprio dell'arco.
+> ### ⚠ **E il candidato `tau_tw` va VERIFICATO, non assunto**: era già scritto nella
+> scheda, e adesso è ### **un requisito, non una preferenza.**
+
+## ⚠ **E UN'ALTRA RIGA VA ANNOTATA: `τ_BG` È DERIVATO, MA CON DUE TOPPE**
+
+```
+tau_bg_loc = np.maximum(1.0 / np.maximum(r_arco, 1e-3), 1e-3)      # :8005
+```
+
+| | |
+|---|---|
+| ### ✔ **derivato** | `1/\|phivel_arco\|` — ### **sì, resta vero** |
+| ### ⛔ **ma con DUE pavimenti `1e-3`** | uno su ### **`r_arco`** *(che mette un TETTO a `τ` a `1000`)* e uno su ### **`τ` stesso** *(che morde quando `r_arco` è grande)*. ### **Sono `A11`: due limiti scelti, non derivati** |
+
+> ### ➜ **Non è una violazione di `A15.2`** *(il tempo è derivato)*, ### **ma è `A11` su un
+> tempo**, e ### **va elencato dove si elencano le toppe.**
+
+---
+
+## ⚠ **E UN ERRORE DEL GUARDIANO, che il guardiano RICONOSCE**
+
+Nella sua evidenza `(d)` aveva chiamato ### **<<plateau>>** la torsione a `3.9` rad, e ne
+aveva dedotto che la memoria dei legami ### **<<dimentica molto>>.**
+
+| passo | `1` | `50` | `150` | `300` | `600` | `1000` |
+|---|--:|--:|--:|--:|--:|--:|
+| mediana di `\|tw\|` | `0.0` | `1.3967` | `2.2829` | `2.7026` | `3.4243` | ### **`3.9151`** |
+
+> ### ⛔ **LA SERIE CRESCE FINO ALL'ULTIMO PASSO MISURATO: non è un plateau**, e
+> ### **la deduzione non regge** — per dire ### **quanto** una memoria dimentica serve il
+> valore ### **d'equilibrio**, e l'equilibrio ### **non è stato raggiunto in `1000`
+> passi.**
+>
+> ### ✔ **IL NUMERO ERA ESATTO** *(`3.9151` rad, `62.31 %` di `2π`)*: ### **sbagliata era
+> la parola, e con essa la conclusione.**
+>
+> ### 📌 **IL GUARDIANO LO RICONOSCE**, ed è registrato qui perché ### **una correzione
+> che resta in una conversazione è una correzione persa.**
