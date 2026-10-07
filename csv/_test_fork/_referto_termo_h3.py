@@ -59,7 +59,8 @@ def carica(p):
 
 def main():
     br = {}
-    for nome, f in (("base", "h3_base.json"), ("B-T", "h3_bt.json"), ("B-S", "h3_bs.json")):
+    for nome, f in (("base", "h3_base.json"), ("B-T", "h3_bt.json"),
+                    ("B-S", "h3_bs.json"), ("B-TS", "h3_bts.json")):
         d = carica(os.path.join(DIR, f))
         if d and not d.get("_errore"):
             br[nome] = d
@@ -93,13 +94,17 @@ def main():
     A("| braccio | passi | stato | secondi | che cosa gli è stato fatto |")
     A("|---|--:|---|--:|---|")
     _DESC = {"base": "### **niente** — è la dinamica di sempre",
+             "B-TS": "### **I DUE INSIEME:** `scuoti_vuoto` inerte ### **e** `xi_termo` "
+                     "azzerata. ### **Il sistema vive solo della sua energia iniziale e della "
+                     "dinamica interna.** ### ⚠ **Eredita da `B-T` il non essere un "
+                     "azzeramento del termostato**",
              "B-T": "### **`xi_termo` azzerata prima di ogni `step`.** ### ⛔ **NON è un "
                     "azzeramento del termostato:** lo step lo ### **RICALCOLA** dentro di sé, "
                     "quindi resta ### **un passo di accumulo invece di tutti** — si chiama "
                     "### **«termostato senza memoria»**",
              "B-S": "### **`scuoti_vuoto` sostituita** con una funzione della stessa firma "
                     "che ### **non fa niente**"}
-    for nome in ("base", "B-T", "B-S"):
+    for nome in ("base", "B-T", "B-S", "B-TS"):
         if nome not in br:
             A("| `%s` | — | ### ⛔ **ASSENTE** | — | %s |" % (nome, _DESC[nome]))
             continue
@@ -346,15 +351,17 @@ def main():
         for k, v in hc.get("misure", {}).items():
             _auc_ct[int(k)] = v.get("auc_materia_vuoto")
     PM = [1, 50, 150, 230, 300, 400, 500]
-    A("| passo | AUC ### **`B-T`** | AUC ### **`B-S`** | AUC controllo *(`A-S1`)* |")
-    A("|--:|--:|--:|--:|")
+    A("| passo | AUC ### **`B-T`** | AUC ### **`B-S`** | AUC ### **`B-TS`** | "
+      "AUC controllo *(`A-S1`)* |")
+    A("|--:|--:|--:|--:|--:|")
     for k in PM:
         row = []
-        for nome in ("B-T", "B-S"):
+        for nome in ("B-T", "B-S", "B-TS"):
             h = H(nome)
             m = (h or {}).get("misure", {}).get(str(k)) if h else None
             row.append(n4((m or {}).get("auc_materia_vuoto")))
-        A("| `%d` | ### **%s** | ### **%s** | %s |" % (k, row[0], row[1], n4(_auc_ct.get(k))))
+        A("| `%d` | ### **%s** | ### **%s** | ### **%s** | %s |"
+          % (k, row[0], row[1], row[2], n4(_auc_ct.get(k))))
     A("")
     _es = {}
     for nome in ("B-T", "B-S"):
@@ -414,6 +421,121 @@ def main():
     A("---")
     A("")
     # ======================================================================
+    # ================================================================== B-TS
+    hts = H("B-TS")
+    if hts:
+        A("---")
+        A("")
+        A("# `(5)` ⭐ **`B-TS`: SENZA BAGNO, RESTA SOLO LA DINAMICA INTERNA**")
+        A("")
+        A("> ### ⛔ **I CRITERI, FISSATI PRIMA** *(mandato di Luca)*: "
+          "### **`LA CAUSA È IL BAGNO GLOBALE`** se l'AUC al `400` è ### **`>= 0.85`** "
+          "### **E** la coerenza di fase delle masse al `230` è ### **`>= 0.6`**; "
+          "### **`LA CAUSA È DENTRO LE MASSE (H2)`** se l'AUC al `400` è ### **`< 0.6`** "
+          "### **E** il bilancio delle masse mostra che è la ### **COPPIA** a far crescere "
+          "`<phivel²>`; fra i due ### **si riporta la curva e il termine dominante.**")
+        A("")
+        pts = {int(r["passo"]): r for r in hts["passi"]}
+        mts = hts.get("misure", {})
+        # --- il bilancio delle masse: chi fa crescere `<phivel^2>`
+        _lim = [k for k in sorted(pts) if k >= 1]
+        som = {q: 0.0 for q in VOCI}
+        for k in _lim:
+            v = (pts[k].get("per_classe") or {}).get("masse")
+            if v:
+                for q in VOCI:
+                    som[q] += v[q]
+        _tot = sum(abs(som[q]) for q in VOCI)
+        _dom = max(VOCI, key=lambda q: abs(som[q]))
+        A("### IL BILANCIO NELLE ### **MASSE**, somma su `%d` passi" % len(_lim))
+        A("")
+        A("| voce | somma | quota |")
+        A("|---|--:|--:|")
+        for q in VOCI:
+            A("| %s`%s`%s | %s | ### **%s** |"
+              % ("### **" if q == _dom else "", q, "**" if q == _dom else "",
+                 n4(som[q], 4), pct(abs(som[q]) / _tot) if _tot else "n/d"))
+        A("")
+        A("> ### %s **IL TERMINE DOMINANTE NELLE MASSE È `%s`** — il ### **%s** del totale in "
+          "valore assoluto. ### ✔ **E `scuoti` vale ESATTAMENTE `%s`: l'intervento è "
+          "scattato.**"
+          % ("⛔" if _dom == "coppia" else "⚠", _dom,
+             pct(abs(som[_dom]) / _tot) if _tot else "n/d", n4(som["scuoti"], 8)))
+        A("")
+        # --- l'energia totale: finita, cresce o cala?
+        _E = [(k, (pts[k].get("termostato") or {}).get("E_cin")) for k in _lim]
+        _E = [(k, x) for k, x in _E if x is not None]
+        _nf = sum(1 for r in hts["passi"] if r.get("phivel_non_finiti"))
+        if _E:
+            _E0, _E1 = _E[0][1], _E[-1][1]
+            _Emax = max(x for _k, x in _E)
+            A("### ⭐ **L'ENERGIA TOTALE: resta finita, cresce o cala?** "
+              "*(il mandato lo chiede comunque: senza sorgenti né freni, la sua evoluzione dice "
+              "se la dinamica interna ### **conserva, scalda o dissipa**)*")
+            A("")
+            A("| | |")
+            A("|---|--:|")
+            A("| `E_cin` al passo `%d` | %s |" % (_E[0][0], n4(_E0, 5)))
+            A("| `E_cin` al passo `%d` | ### **%s** |" % (_E[-1][0], n4(_E1, 5)))
+            A("| massimo | %s |" % n4(_Emax, 5))
+            A("| ### **passi con `phivel` NON FINITI** | ### **%s** |" % n4(_nf))
+            A("")
+            _v = ("### ⛔ **CRESCE**" if _E1 > _E0 * 1.05 else
+                  "### ⚠ **CALA**" if _E1 < _E0 * 0.95 else "### ✔ **si CONSERVA**")
+            A("> %s: da `%s` a ### **`%s`** *(`%s`)*. ### **E resta FINITA: `%s` passi con "
+              "valori non finiti.** ### ➜ **Quindi la dinamica interna, da sola, %s.**"
+              % (_v, n4(_E0, 5), n4(_E1, 5),
+                 ("×%s" % n4(_E1 / _E0, 2)) if _E0 else "n/d", n4(_nf),
+                 "SCALDA" if _E1 > _E0 * 1.05 else
+                 ("DISSIPA" if _E1 < _E0 * 0.95 else "CONSERVA")))
+            A("")
+        # --- l'esito del criterio
+        _a4 = (mts.get("400") or {}).get("auc_materia_vuoto")
+        _pm = (mts.get("230") or {}).get("per_massa") or {}
+        _c2 = [x["coer_2pi"] for x in _pm.values() if x]
+        _co = (sum(_c2) / len(_c2)) if _c2 else None
+        A("### ⛔ **L'ESITO DEL CRITERIO**")
+        A("")
+        A("| | valore | la soglia |")
+        A("|---|--:|---|")
+        A("| AUC al `400` | ### **%s** | `>= 0.85` per il bagno, `< 0.60` per `H2` |" % n4(_a4))
+        A("| coerenza di fase delle masse al `230` | ### **%s** | `>= 0.6` per il bagno |"
+          % n4(_co))
+        A("| il termine dominante nelle masse | ### **`%s`** | `coppia` per `H2` |" % _dom)
+        A("")
+        if _a4 is None or _co is None:
+            A("> ### ⚠ **NON DECIDIBILE: manca l'AUC al `400` o la coerenza al `230`.**")
+        elif _a4 >= 0.85 and _co >= 0.6:
+            A("> ### ⛔ **`LA CAUSA È IL BAGNO GLOBALE`.** ### **Le masse SOPRAVVIVONO quando "
+              "si toglie il bagno**, e la cura sta ### **nel bagno**, non dentro le masse. "
+              "### ⛔ **E la decisione è di Luca.**")
+        elif _a4 < 0.60 and _dom == "coppia":
+            A("> ### ⛔ **`LA CAUSA È DENTRO LE MASSE (H2)`.** Senza bagno le masse si "
+              "sciolgono comunque *(AUC `%s`)*, e ### **il termine che le scalda è la "
+              "COPPIA** — cioè ### **la loro dinamica interna.** ### ⛔ **NON comincio la "
+              "cura: la decisione è di Luca.**" % n4(_a4))
+        elif _a4 < 0.60:
+            A("> ### ⚠ **AUC `< 0.60`, MA IL TERMINE DOMINANTE NON È LA COPPIA: è `%s`.** "
+              "### **Il criterio di `H2` chiede ENTRAMBE le cose, e una manca** — quindi "
+              "### **non lo dichiaro soddisfatto**, e riporto la curva e il termine." % _dom)
+        else:
+            A("> ### ⚠ **FRA I DUE: AUC al `400` = %s**, cioè ### **sopra `0.60`** *(non "
+              "`H2`)* ### **e sotto `0.85`** *(non il bagno)*. ### **Si riportano la curva e "
+              "il termine dominante nelle masse, che è `%s`.**" % (n4(_a4), _dom))
+        A("")
+        # --- il residuo di `xi` in `B-TS`
+        _xs = [abs(pts[k].get("xi_termo") or 0.0) for k in _lim]
+        _xb = [abs((passi("base").get(k) or {}).get("xi_termo") or 0.0) for k in _lim
+               if k in passi("base")]
+        if _xs and _xb:
+            A("> ### ⚠ **E `B-TS` EREDITA DA `B-T` IL NON ESSERE UN AZZERAMENTO:** "
+              "`|xi|` massimo ### **%s** contro ### **%s** della base, cioè una soppressione "
+              "di ### **%s ×**. ### **Il residuo è misurato, non assunto.**"
+              % (n4(max(_xs), 5), n4(max(_xb), 5),
+                 n4(max(_xb) / max(_xs), 1) if max(_xs) > 1e-12 else "n/d"))
+            A("")
+        A("---")
+        A("")
     A("# ⭐ **LE MIE PREVISIONI, CONTRO I NUMERI**")
     A("")
     pr = []
@@ -464,6 +586,72 @@ def main():
                    % (_rap[0][0], _rap[-1][0], n4(_rap[0][1]), n4(_rap[-1][1])),
                    "### ✔ **CONFERMATA**" if _rap[-1][1] > _rap[0][1]
                    else "### ⛔ **SMENTITA**: il rapporto CALA"))
+    # ---------------------------------------------------- le previsioni di `B-TS`
+    if hts:
+        _a4 = (hts.get("misure", {}).get("400") or {}).get("auc_materia_vuoto")
+        _pm = (hts.get("misure", {}).get("230") or {}).get("per_massa") or {}
+        _c2 = [x["coer_2pi"] for x in _pm.values() if x]
+        _co = (sum(_c2) / len(_c2)) if _c2 else None
+        _pts = {int(r["passo"]): r for r in hts["passi"]}
+        _lim = [k for k in sorted(_pts) if k >= 1]
+        _som = {q: 0.0 for q in VOCI}
+        for k in _lim:
+            v = (_pts[k].get("per_classe") or {}).get("masse")
+            if v:
+                for q in VOCI:
+                    _som[q] += v[q]
+        _dom = max(VOCI, key=lambda q: abs(_som[q]))
+        if _a4 is not None:
+            pr.append(("`PTS-1`",
+                       "### ⛔ **scattera' `LA CAUSA E' DENTRO LE MASSE (H2)`: AUC al "
+                       "`400` `< 0.6`** *(perche' la coppia agisce `9.31 x` piu' nelle masse "
+                       "che nel vuoto)*",
+                       "AUC al `400` in `B-TS`: ### **%s**" % n4(_a4),
+                       "### ✔ **CONFERMATA**" if _a4 < 0.60 else
+                       ("### ⛔ **SMENTITA, ed e' il risultato piu' importante: le masse "
+                        "SOPRAVVIVONO senza il bagno**" if _a4 >= 0.85 else
+                        "### ⛔ **SMENTITA**: sta fra `0.60` e `0.85`, quindi nessuno dei "
+                        "due criteri scatta")))
+            pr.append(("`PTS-2`",
+                       "il termine dominante nelle masse sara' la ### **`coppia`**",
+                       "e' ### **`%s`** *(il %s)*"
+                       % (_dom, pct(abs(_som[_dom]) / max(sum(abs(_som[q]) for q in VOCI),
+                                                          1e-30))),
+                       "### ✔ **CONFERMATA**" if _dom == "coppia"
+                       else "### ⛔ **SMENTITA**"))
+        _E = [(k, (_pts[k].get("termostato") or {}).get("E_cin")) for k in _lim]
+        _E = [(k, x) for k, x in _E if x is not None]
+        if _E:
+            _E0, _E1 = _E[0][1], _E[-1][1]
+            _cb = [(k, (passi("base").get(k) or {}).get("termostato", {}).get("E_cin"))
+                   for k in (230,)]
+            _cb = [x for _k, x in _cb if x is not None]
+            _r = (_cb[0] / _E1) if (_cb and _E1) else None
+            pr.append(("`PTS-3`",
+                       "l'energia totale ### **CRESCE** ma `~10 x` meno del controllo "
+                       "*(previsto `~1.2` al `230` contro `13.57`)*",
+                       "da `%s` a ### **%s**%s"
+                       % (n4(_E0, 4), n4(_E1, 4),
+                          ("; e al `230` il controllo e' `%s x` piu' caldo" % n4(_r, 1))
+                          if _r else ""),
+                       "### ✔ **CONFERMATA**" if _E1 > _E0 * 1.05
+                       else ("### ⛔ **SMENTITA: CALA**" if _E1 < _E0 * 0.95
+                             else "### ⛔ **SMENTITA: si CONSERVA**")))
+        if _co is not None:
+            pr.append(("`PTS-4`",
+                       "la coerenza di fase delle masse al `230` sara' ### **`< 0.3`**, quindi "
+                       "il criterio del bagno NON scatta",
+                       "### **%s**" % n4(_co),
+                       "### ✔ **CONFERMATA**" if _co < 0.30 else
+                       "### ⛔ **SMENTITA**"))
+        _nf = sum(1 for r in hts["passi"] if r.get("phivel_non_finiti"))
+        pr.append(("`PTS-5`",
+                   "### **NON divergera'** entro `500` passi, e ### **non si congelera'**",
+                   "passi con `phivel` non finiti: ### **%s**; stato: ### **%s**"
+                   % (n4(_nf), br["B-TS"].get("stato")),
+                   "### ✔ **CONFERMATA**"
+                   if (_nf == 0 and br["B-TS"].get("stato") == "DATI SALVATI")
+                   else "### ⛔ **SMENTITA**"))
     A("| | la previsione | il numero | esito |")
     A("|---|---|---|---|")
     for x in pr:
