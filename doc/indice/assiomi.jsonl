@@ -1,0 +1,21 @@
+{"id": "A1", "titolo": "LA LEGGE, NON IL NUMERO", "riga_fonte": 396, "fonte": "doc/ASSIOMI.md::A1", "sotto_punti": []}
+{"id": "A10", "titolo": "UNA SOLA GRANDEZZA PUO' LEGARE DUE DOMINI", "riga_fonte": 630, "fonte": "doc/ASSIOMI.md::A10", "sotto_punti": []}
+{"id": "A11", "titolo": "UN LIMITE E' UNA LEGGE, NON UNA TOPPA", "riga_fonte": 775, "fonte": "doc/ASSIOMI.md::A11", "sotto_punti": []}
+{"id": "A12", "titolo": "UN DIFETTO DIMOSTRATO SI CURA. MISURARE NON È CURARE.", "riga_fonte": 849, "fonte": "doc/ASSIOMI.md::A12", "sotto_punti": []}
+{"id": "A13", "titolo": "LAM È LA SCALA DI PLANCK DEL SISTEMA (decisione di Luca, 2026-09-24)", "riga_fonte": 348, "fonte": "doc/ASSIOMI.md::A13", "sotto_punti": []}
+{"id": "A14", "titolo": "LE GRANDEZZE SI CONSERVANO LOCALMENTE E SI DISSIPANO GLOBALMENTE (decisione di Luca, 2026-10-03)", "riga_fonte": 266, "fonte": "doc/ASSIOMI.md::A14", "sotto_punti": ["A14.1", "A14.2", "A14.3", "A14.4"]}
+{"id": "A15", "titolo": "LA MEMORIA È DINAMICA, LOCALE, E CIÒ CHE DIMENTICA SI TRASFORMA (decisione di Luca, 2026-10-07)", "riga_fonte": 92, "fonte": "doc/ASSIOMI.md::A15", "sotto_punti": ["A15.1", "A15.2", "A15.3"]}
+{"id": "A16", "titolo": "LO STATO È UNO, ED EVOLVE AL PRIMO ORDINE SOTTO UNA SOLA H (decisione di Luca, 2026-10-08)", "riga_fonte": 53, "fonte": "doc/ASSIOMI.md::A16", "sotto_punti": []}
+{"id": "A17", "titolo": "OGNI COMPORTAMENTO È DETERMINATO SOLO DAL SUO AMBITO (decisione di Luca, 2026-10-08)", "riga_fonte": 5, "fonte": "doc/ASSIOMI.md::A17", "sotto_punti": []}
+{"id": "A2", "titolo": "NESSUNA SCORCIATOIA GLOBALE", "riga_fonte": 412, "fonte": "doc/ASSIOMI.md::A2", "sotto_punti": []}
+{"id": "A3", "titolo": "NIENTE SI NORMALIZZA SUL PROPRIO INSIEME", "riga_fonte": 427, "fonte": "doc/ASSIOMI.md::A3", "sotto_punti": []}
+{"id": "A3b", "titolo": "(variante di A3, citata nel testo)", "riga_fonte": 0, "fonte": "doc/ASSIOMI.md::A3b", "sotto_punti": []}
+{"id": "A3c", "titolo": "(variante di A3, citata nel testo)", "riga_fonte": 0, "fonte": "doc/ASSIOMI.md::A3c", "sotto_punti": []}
+{"id": "A4", "titolo": "STRATIFICAZIONE CAUSALE", "riga_fonte": 465, "fonte": "doc/ASSIOMI.md::A4", "sotto_punti": []}
+{"id": "A5", "titolo": "CAUSALITA' DELLA MEDIAZIONE", "riga_fonte": 476, "fonte": "doc/ASSIOMI.md::A5", "sotto_punti": []}
+{"id": "A6", "titolo": "INERZIA (TEOREMA, non assioma)", "riga_fonte": 490, "fonte": "doc/ASSIOMI.md::A6", "sotto_punti": []}
+{"id": "A7", "titolo": "CONSERVAZIONE E STATO", "riga_fonte": 508, "fonte": "doc/ASSIOMI.md::A7", "sotto_punti": []}
+{"id": "A7b", "titolo": "(variante di A7, citata nel testo)", "riga_fonte": 0, "fonte": "doc/ASSIOMI.md::A7b", "sotto_punti": []}
+{"id": "A8", "titolo": "UN RAMO SILENZIOSO NON E' UN RAMO", "riga_fonte": 548, "fonte": "doc/ASSIOMI.md::A8", "sotto_punti": []}
+{"id": "A8b", "titolo": "(variante di A8, citata nel testo)", "riga_fonte": 0, "fonte": "doc/ASSIOMI.md::A8b", "sotto_punti": []}
+{"id": "A9", "titolo": "UN PRESIDIO CHE NON IMPEDISCE NON E' UN PRESIDIO", "riga_fonte": 590, "fonte": "doc/ASSIOMI.md::A9", "sotto_punti": []}

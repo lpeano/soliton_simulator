@@ -1,0 +1,9 @@
+========================================================================================================
+I QUATTRO REGISTRI DEI VOCABOLARI -- generati dalle fonti, non scritti a mano
+========================================================================================================
+  leggi.jsonl            21 voci
+  variabili.jsonl        44 voci
+  assiomi.jsonl          21 voci
+  decisioni.jsonl        25 voci
+
+  in tutto: 111 ID di vocabolario

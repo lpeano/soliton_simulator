@@ -1,0 +1,44 @@
+{"id": "V-CONC-NODI", "nome": "conc_nodi", "censita_in": "doc/MEMORIE_MANCANTI.md", "scritta_da": [], "scritture": 0}
+{"id": "V-CS-NODO-PREV", "nome": "_cs_nodo_prev", "censita_in": "doc/MEMORIE_MANCANTI.md", "scritta_da": ["step"], "scritture": 1}
+{"id": "V-CURA4-MATURI", "nome": "_cura4_maturi", "censita_in": "csv/_test_fork/_censimento_leggi (NON in doc/MEMORIE_MANCANTI.md)", "scritta_da": ["semina"], "scritture": 3}
+{"id": "V-D", "nome": "d", "censita_in": "doc/MEMORIE_MANCANTI.md", "scritta_da": ["_allaccia", "step"], "scritture": 5}
+{"id": "V-D0", "nome": "d0", "censita_in": "doc/MEMORIE_MANCANTI.md", "scritta_da": ["_allaccia", "decidi_divisione", "memoria_hebbiana_moto", "step"], "scritture": 11}
+{"id": "V-DEG", "nome": "_deg", "censita_in": "doc/MEMORIE_MANCANTI.md", "scritta_da": ["_grado"], "scritture": 1}
+{"id": "V-DT-E", "nome": "dt_e", "censita_in": "doc/MEMORIE_MANCANTI.md", "scritta_da": [], "scritture": 0}
+{"id": "V-DT-N", "nome": "dt_n", "censita_in": "doc/MEMORIE_MANCANTI.md", "scritta_da": [], "scritture": 0}
+{"id": "V-ETA", "nome": "eta", "censita_in": "doc/MEMORIE_MANCANTI.md", "scritta_da": ["semina", "step"], "scritture": 4}
+{"id": "V-FATTORE-TEMPO-ARCO", "nome": "_fattore_tempo_arco", "censita_in": "doc/MEMORIE_MANCANTI.md", "scritta_da": [], "scritture": 0}
+{"id": "V-I", "nome": "i", "censita_in": "doc/MEMORIE_MANCANTI.md", "scritta_da": ["_allaccia"], "scritture": 1}
+{"id": "V-J", "nome": "j", "censita_in": "doc/MEMORIE_MANCANTI.md", "scritta_da": ["_allaccia"], "scritture": 1}
+{"id": "V-LAMBDA-NODI", "nome": "lambda_nodi", "censita_in": "doc/MEMORIE_MANCANTI.md", "scritta_da": [], "scritture": 0}
+{"id": "V-MEM-MOT", "nome": "mem_mot", "censita_in": "doc/MEMORIE_MANCANTI.md", "scritta_da": ["memoria_hebbiana_moto", "semina"], "scritture": 3}
+{"id": "V-NATI", "nome": "nati", "censita_in": "csv/_test_fork/_censimento_leggi (NON in doc/MEMORIE_MANCANTI.md)", "scritta_da": ["mitosi"], "scritture": 2}
+{"id": "V-NB", "nome": "_nb", "censita_in": "doc/MEMORIE_MANCANTI.md", "scritta_da": ["_passo_spinoriale", "memoria_hebbiana_moto"], "scritture": 7}
+{"id": "V-NB-PREC", "nome": "_nb_prec", "censita_in": "doc/MEMORIE_MANCANTI.md", "scritta_da": ["_passo_spinoriale"], "scritture": 1}
+{"id": "V-NB-RET", "nome": "_nb_ret", "censita_in": "doc/MEMORIE_MANCANTI.md", "scritta_da": ["_bloch_ritardato"], "scritture": 2}
+{"id": "V-NEGATE", "nome": "negate", "censita_in": "csv/_test_fork/_censimento_leggi (NON in doc/MEMORIE_MANCANTI.md)", "scritta_da": ["decidi_divisione"], "scritture": 1}
+{"id": "V-OMEGA-S", "nome": "omega_s", "censita_in": "doc/MEMORIE_MANCANTI.md", "scritta_da": ["_passo_spinoriale", "semina"], "scritture": 4}
+{"id": "V-PEQ", "nome": "peq", "censita_in": "doc/MEMORIE_MANCANTI.md", "scritta_da": ["_allaccia", "step"], "scritture": 6}
+{"id": "V-PERC-CHI", "nome": "perc_chi", "censita_in": "doc/MEMORIE_MANCANTI.md", "scritta_da": ["semina", "step"], "scritture": 3}
+{"id": "V-PERC-GEOM", "nome": "perc_geom", "censita_in": "doc/MEMORIE_MANCANTI.md", "scritta_da": ["semina", "step"], "scritture": 2}
+{"id": "V-PERC-TW", "nome": "perc_tw", "censita_in": "doc/MEMORIE_MANCANTI.md", "scritta_da": ["semina"], "scritture": 1}
+{"id": "V-PHI", "nome": "phi", "censita_in": "doc/MEMORIE_MANCANTI.md", "scritta_da": ["memoria_hebbiana_moto", "mitosi", "semina", "step"], "scritture": 6}
+{"id": "V-PHI-S", "nome": "phi_s", "censita_in": "doc/MEMORIE_MANCANTI.md", "scritta_da": ["_passo_spinoriale", "semina"], "scritture": 2}
+{"id": "V-PHI0", "nome": "phi0", "censita_in": "doc/MEMORIE_MANCANTI.md", "scritta_da": ["semina"], "scritture": 1}
+{"id": "V-PHIVEL", "nome": "phivel", "censita_in": "doc/MEMORIE_MANCANTI.md", "scritta_da": ["scuoti_vuoto", "semina", "step"], "scritture": 4}
+{"id": "V-POS", "nome": "pos", "censita_in": "doc/MEMORIE_MANCANTI.md", "scritta_da": ["rilassa_disegno", "semina"], "scritture": 4}
+{"id": "V-PSI", "nome": "psi", "censita_in": "doc/MEMORIE_MANCANTI.md", "scritta_da": ["calcola_psi", "step"], "scritture": 3}
+{"id": "V-PSI-PREC", "nome": "_psi_prec", "censita_in": "doc/MEMORIE_MANCANTI.md", "scritta_da": ["step"], "scritture": 1}
+{"id": "V-PSI-SPIN", "nome": "psi_spin", "censita_in": "doc/MEMORIE_MANCANTI.md", "scritta_da": ["calcola_psi"], "scritture": 1}
+{"id": "V-PSI-SPIN-PREC", "nome": "_psi_spin_prec", "censita_in": "doc/MEMORIE_MANCANTI.md", "scritta_da": ["step"], "scritture": 1}
+{"id": "V-PSI-SPINOR", "nome": "_psi_spinor", "censita_in": "doc/MEMORIE_MANCANTI.md", "scritta_da": ["_estendi_psi_spinor", "_passo_spinoriale"], "scritture": 4}
+{"id": "V-REP", "nome": "_rep", "censita_in": "doc/MEMORIE_MANCANTI.md", "scritta_da": ["_allaccia", "decidi_divisione"], "scritture": 3}
+{"id": "V-RHO-SPIN", "nome": "rho_spin", "censita_in": "doc/MEMORIE_MANCANTI.md", "scritta_da": ["calcola_psi"], "scritture": 1}
+{"id": "V-SPINOR-LIFT", "nome": "_spinor_lift", "censita_in": "doc/MEMORIE_MANCANTI.md", "scritta_da": ["_aggiorna_lift_spinoriale", "_passo_spinoriale"], "scritture": 2}
+{"id": "V-TAU", "nome": "tau", "censita_in": "doc/MEMORIE_MANCANTI.md", "scritta_da": [], "scritture": 0}
+{"id": "V-TEMPO-LUCE-NODO", "nome": "_tempo_luce_nodo", "censita_in": "doc/MEMORIE_MANCANTI.md", "scritta_da": [], "scritture": 0}
+{"id": "V-TW", "nome": "tw", "censita_in": "doc/MEMORIE_MANCANTI.md", "scritta_da": ["_allaccia", "step"], "scritture": 3}
+{"id": "V-TWP", "nome": "twp", "censita_in": "doc/MEMORIE_MANCANTI.md", "scritta_da": ["_allaccia", "step"], "scritture": 3}
+{"id": "V-TWP-DIP", "nome": "twp_dip", "censita_in": "doc/MEMORIE_MANCANTI.md", "scritta_da": ["_allaccia", "step"], "scritture": 2}
+{"id": "V-VD", "nome": "vd", "censita_in": "doc/MEMORIE_MANCANTI.md", "scritta_da": ["_allaccia", "step"], "scritture": 3}
+{"id": "V-XI-TERMO", "nome": "xi_termo", "censita_in": "csv/_test_fork/_censimento_leggi (NON in doc/MEMORIE_MANCANTI.md)", "scritta_da": ["step"], "scritture": 2}
