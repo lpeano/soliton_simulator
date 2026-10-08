@@ -72,6 +72,70 @@ l'ipotesi del guardiano del punto `0(c)` ### **cade**, e il freno va cercato alt
 | **4 `rho`, `c_s`, il SEGNO** | ### **toccato di striscio:** `peq` insegue `rho` ed è un candidato a termine di pressione. ### **Il segno non lo decido io in questo giro** |
 | **5 emergente o imposto** | ### ⭐ **È LA DOMANDA DEL MANDATO.** Una legge ### **TRADUCIBILE** è emergente *(viene da un'energia)*; una ### **NON TRADUCIBILE** è ### **imposta**, e il documento la nomina tale invece di lasciarla implicita |
 
+## 5-bis. **IL CRITERIO DEL «NO»** — *integrazione di Luca, ricevuta PRIMA di classificare*
+
+> ### ⭐ **IL RILIEVO, ed è giusto:** il metodo del punto `3` *(scrivere `E` e verificare
+> `F = −∂E/∂x`)* ### **dimostra il SÌ ma non il NO.** ### ⛔ **Non trovare `E` NON prova che `E`
+> non esista** — prova solo che io non l'ho trovata. ### **Senza questo, metà della mia tavola
+> sarebbe stata «non ci sono riuscito» scritto come «non si può».**
+
+### **(1) IL TEST DI INTEGRABILITÀ** — *non richiede di indovinare `E`*
+
+Per ### **ogni** legge che muove una variabile ### **continua**, sullo snapshot della scena:
+
+```
+J_ij = dF_i / dx_j          (differenze finite, su un campione di nodi E DEI LORO VICINI)
+asimmetria = || J - J^T || / || J ||        col PAVIMENTO NUMERICO CALCOLATO
+```
+
+| esito | che cosa significa |
+|---|---|
+| ### **simmetrica** entro il pavimento | ### ✔ **una `E` ESISTE**, anche se non è ancora scritta |
+| ### **asimmetrica** | ### ⛔ **NON ESISTE in quelle variabili**, ed è un ### **«no» DIMOSTRATO** |
+
+| | |
+|---|---|
+| ### **controllo positivo** | la ### **coppia scalare** *(gradiente noto, già verificato a `1.49e-15`)* deve risultare ### **simmetrica** |
+| ### ⛔ **caso che DEVE fallire** | la ### **coppia spinoriale del driver** deve risultare ### **asimmetrica** |
+
+### ⚠ **E DUE LIMITI DEL TEST, che dichiaro PRIMA di usarlo, perché non lo sopravvaluti:**
+
+| | |
+|---|---|
+| ### **è la condizione di Poincaré** | `J` simmetrica ⇒ la forma è ### **chiusa** ⇒ `E` esiste ### **LOCALMENTE** *(su un dominio semplicemente connesso)*. ### **Sullo snapshot questo basta**, ma «esiste `E`» va letto ### **in un intorno dello stato misurato**, non globalmente |
+| ### **vale nelle variabili scelte** | ed è esattamente ciò che Luca scrive: ### **«non esiste IN QUELLE VARIABILI»**. Una legge asimmetrica in `φ` può diventare il gradiente di qualcosa ### **in variabili diverse** *(è il caso della coppia spinoriale, che la forma `U(2)` riscrive in `ψ`)*, e la tavola lo dirà invece di nasconderlo |
+| ### **le variabili reali** | il test, così com'è scritto, è quello delle variabili ### **REALI** *(`φ`, `d`, `tw`, `d0`, `peq`…)*, che sono la quasi totalità. Per uno stato ### **complesso** la condizione che corrisponde è l'### **hermitianità**, non la simmetria, e dove serve lo scrivo |
+
+### **(2) LA RISCRITTURA SI MISURA** — *e c'è una soglia*
+
+Se una legge diventa traducibile ### **solo dopo una riscrittura**, si riporta ### **quanto la
+legge riscritta differisce dall'originale sullo snapshot**: scarto relativo, ### **per classe
+`MASSE` e `VUOTO`**.
+
+> ### ⛔ **OLTRE IL `10 %` NON È UNA TRADUZIONE: È UNA LEGGE NUOVA**, e va ### **nell'elenco
+> delle decisioni di Luca**, ### **non** nella `H` candidata.
+
+### ⭐ **E QUESTA SOGLIA PRENDE GIÀ UN CASO CHE CONOSCO:** la coppia spinoriale contro la forma
+`U(2)` sta a ### **`1.054`** di scarto — cioè ### **il `105 %`**, dieci volte sopra. ### ➜ **La
+forma `U(2) NON è una traduzione della coppia del driver: è una legge nuova**, e con questo
+criterio va ### **fra le decisioni di Luca**. ### ⚠ **Senza questa regola l'avrei messa nella
+`H` candidata**, e avrei chiamato «traduzione» un cambio di fisica del `105 %`.
+
+### **(3) DUE INSTRADAMENTI AUTOMATICI** — *che tolgono il test dove non serve*
+
+| se la legge… | va in… | e il test… |
+|---|---|---|
+| dipende da una ### **velocità** o dalla ### **storia** | ### **TRADUCIBILE CON UNA MEMORIA** | si fa ### **sul sistema esteso**, non sulla legge sola |
+| è ### **a senso unico** — `np.where` su un segno, `clip` ### **da un lato** | ### **fra le FRECCE** *(non traducibile)* | ### ⛔ **non si fa**: una legge a senso unico non ha gradiente, e misurarne la jacobiana sarebbe un ### **FALSO-ZERO** *(nel ramo dove non agisce, `J = 0` è simmetrica)* |
+
+### 📌 **E LE PREVISIONI SU QUESTO CRITERIO, scritte prima di applicarlo:**
+
+| id | la previsione |
+|---|---|
+| **`PT-9`** | il test ### **sposta di classe almeno `2`** leggi che avevo previsto traducibili — e il motivo che mi aspetto è ### **la dipendenza dai vicini dei vicini**: una legge che legge `rho` del vicino e scrive sul nodo ### **non è simmetrica** a meno che la stessa quantità torni indietro |
+| **`PT-10`** | il controllo positivo ### **passa** e il caso che deve fallire ### **fallisce**. ### ⛔ **Se il caso che deve fallire PASSA, il banco è rotto e mi fermo** |
+| **`PT-11`** | ### **almeno una** legge che avrei scartato risulta ### **simmetrica** senza che io sappia scriverne la `E` — e allora va in ### **TRADUCIBILE, con `E` APERTA**, che è una casella che prima non avevo |
+
 ## 5. TODO DEL NEXT STEP — **la lista operativa**
 
 1. `0(a)` la sonda dichiarata ### **del guardiano** in `RISCRITTURA_PRIMO_ORDINE` e nei ### **due** referti del prototipo *(`v1` e `v2`)*; il grafo fisso dichiarato ### **impalcatura**.
