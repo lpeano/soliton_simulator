@@ -183,19 +183,26 @@ asserito da me**. ### ⚠ **E' un CONTROLLO, non un IMPEDIMENTO.**
 
 ## 9. L'INDICE DEI DIFETTI: COME SI USA *(dal 2026-09-26)*
 
-- **LA FONTE E' `doc/INDICE_ID.tsv`** — un TSV di **13 colonne**, e **non ce n'e' un'altra**.
-- ### 📌 **NON SI LEGGE INTERO: SI INTERROGA COL COMANDO.** `python csv/_indice_id.py` con
-  **`--cerca ID`** *(uguaglianza ESATTA, mai un prefisso)* · `--aperti` · `--blocca SI` ·
-  `--famiglia X` · `--dettaglio ID` · **`--testo PAROLA`**.
-- **`titolo_breve` e' `<= 100` caratteri e UNICO**; la frase intera vive in `stato_da`.
-- **UN DIFETTO NUOVO = UNA RIGA NELL'INDICE**, piu' la spiegazione lunga in
-  `doc/STATO_RUN.md` **con lo STESSO ID**. ### **MAI IL CONTRARIO:** un ID nuovo senza la sua
-  riga viene **RIFIUTATO da `H-INDICE`**.
-- **`blocca_run_base = SI` RICHIEDE `motivo`:** una decisione senza prova **non passa il
-  validatore**.
-- **LE VISTE SI GENERANO, NON SI MODIFICANO A MANO**, e **la lista e' CONGELATA al tag
-  `lista-chiusa-v1`: SI SPUNTA, NON SI RIGENERA.**
-- **IL VALIDATORE** e' `python csv/_indice_id.py`, e **gira da solo nel `pre-commit`**.
+- ### 📌 **LA FONTE E' `doc/indice/voci.jsonl`** *(schema `2`, dal 2026-10-08)*: una voce per
+  riga, campi a **vocabolario chiuso**. **`doc/INDICE_ID.tsv` e `doc/INDICE.md` sono VISTE
+  GENERATE**, e **non si modificano a mano**. Lo schema sta in **`doc/INDICE_SCHEMA.md`**.
+- ### ⛔ **SI SCRIVE SOLO CON `python csv/indice.py aggiorna ID --campo … --motivo "…"`**, che
+  aggiunge una riga a `doc/indice/storico.jsonl`. **A mano, mai.**
+- **SI INTERROGA COL COMANDO:** `python csv/indice.py cerca` con `--dominio` · `--stato` ·
+  `--era` · `--classe` · `--blocca` · `--legge` · `--variabile` · `--assioma` ·
+  `--meta k=v`. *(Il vecchio `csv/_indice_id.py --cerca/--dettaglio/--blocca SI` **vive
+  ancora**, e legge **la vista compatibile**.)*
+- ### ⛔ **NESSUNO STRUMENTO LEGGE `titolo` O `descrizione` PER DECIDERE QUALCOSA:** se una
+  decisione serve a un programma, **serve un CAMPO**. `titolo` e' `<= 100` caratteri.
+- **UN DIFETTO NUOVO = UNA VOCE**, piu' la spiegazione lunga in `doc/STATO_RUN.md` **con lo
+  STESSO ID**; un ID citato e **non definito** e' **UN RAPPORTO, NON UNA VOCE**
+  *(`indice.py citazioni`)*. ### **NESSUN SEGNAPOSTO AUTOMATICO, mai piu'.**
+- **Negli scritti NUOVI un ID si cita `[[ID]]`.** Le etichette **locali** *(`H1`, `D1`, `T1`,
+  `PT-7`)* **NON sono ID**.
+- ### ⚠ **`DA_CLASSIFICARE` E' UNO STATO**, ed e' **TRANSITORIO**: ci si entra solo con una
+  migrazione, e **si esce solo con una decisione registrata**. **Dove non c'e' evidenza, si
+  scrive `DA_CLASSIFICARE`:** non si indovina, e **MAI per parola chiave.**
+- **IL VALIDATORE** e' `python csv/indice.py valida`, e **gira da solo nel `pre-commit`**.
 
 **UN ID NON E' UN NOME: E' UNA CHIAVE.** Un **assioma** e uno **standard** non si rinominano
 mai; le etichette **locali** vivono col namespace *(`REGISTRO_FISICA:V8`)*; ### **i REPERTI
