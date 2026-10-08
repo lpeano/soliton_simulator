@@ -2,6 +2,54 @@
 
 ---
 
+## `A17` — ❗ **OGNI COMPORTAMENTO È DETERMINATO SOLO DAL SUO AMBITO** *(decisione di Luca, 2026-10-08)*
+
+> «Ogni legge che determina un comportamento deve essere determinata solo dall'ambito di quel
+> comportamento. Un comportamento fisico deve essere determinato solo dalla fisica, che è
+> rappresentata dalle relazioni, e non dalle posizioni sul grafico, che sono rendering. Nelle
+> formule della fisica non ci deve essere `pos`: deve essere tutto relazionale.» — **Luca**
+
+**`(1)` IL PRINCIPIO GENERALE.** Una legge che determina un comportamento può leggere **SOLO**
+grandezze che appartengono all'**ambito** di quel comportamento. Ciò che appartiene a un altro
+ambito — **il disegno**, la **diagnostica**, gli **strumenti di misura**, l'**ordine di
+esecuzione del codice** — **non può entrare nella legge**.
+
+**`(2)` IL CASO DELLA FISICA.** La fisica di questo modello è fatta di **RELAZIONI**: gli stati
+dei nodi (`ψ`), gli **archi** e la loro **topologia**, le lunghezze **relazionali** `d`, i
+**pesi**, le **memorie** (`tw`, `U`, …). Ogni termine di `H`, ogni regola di crescita e ogni
+direzione si scrive **SOLO** con queste grandezze.
+
+**`(3)` LA POSIZIONE È RENDERING.** `pos`, e tutto ciò che la presuppone — un **volume**, una
+**dimensione** dello spazio di disegno, una **distanza euclidea**, un **centro di massa**, una
+**sfera di raggio dato nel disegno** — **NON entra in nessuna legge fisica**. È ammessa solo per
+il **disegno** e per la **diagnostica**.
+
+**`(4)` GLI STRUMENTI NON SONO FISICA.** Osservatori, diagnostica e strumenti di misura **non
+possono cambiare la fisica**. Il test che lo verifica è la **BYTE-INERZIA**, che da questo
+assioma riceve il suo **fondamento**.
+
+### ⚠ **COSA `A17` NON DICE:** non vieta di disegnare il grafo in `3D` né di misurare in
+coordinate; vieta che quel disegno o quella misura **DECIDANO** qualcosa. Non dice **come**
+ricostruire la geometria dalle sole relazioni: quel progetto è **`Z47`**
+*(`doc/RAMIFICAZIONI.md`)*, e il suo criterio è **una misura**.
+
+### ⛔ **LE VIOLAZIONI NOTE, DICHIARATE E NON CURATE** *(dalla DICHIARAZIONE del 2026-09-18,
+### **da riverificare sul codice di oggi**)*:
+
+| dove | che cosa decide con `pos` |
+|---|---|
+| `_allaccia` | `cKDTree` su `pos`: **decide la TOPOLOGIA delle nascite**. ### ⛔ **Viola anche `A5`**, perché lega nodi **vicini nel disegno** che **sul grafo non si sono mai parlati** |
+| `memoria_hebbiana_moto` | le **direzioni** da `pos`: scrive `mem_mot` e `_nb`, cioè **la gravità e il frame-drag** |
+| `chiralita_core_locale` | una **sfera euclidea** |
+| il **Kuramoto dal centro di massa** | ### ✔ **cade con la sincronizzazione tolta** *(decisione di Luca, 2026-10-08)* |
+| l'**anello** `d → pos → topologia e direzioni → d` | `rilassa_disegno` |
+| ### **e nel PROTOTIPO di oggi** | il **grafo da punti in un cubo** e i pesi `w = e^(−d/λ)` con **distanza EUCLIDEA** |
+
+### ➜ **LA CURA è la RISCRITTURA al primo ordine (`A16`) fatta in modo RELAZIONALE, più
+`Z47`.**
+
+---
+
 ## `A16` — ❗ **LO STATO È UNO, ED EVOLVE AL PRIMO ORDINE SOTTO UNA SOLA H** *(decisione di Luca, 2026-10-08)*
 
 > ### **«Propendo fortemente per il primo ordine e per la riscrittura, perché è ciò che sto
@@ -637,6 +685,10 @@ o dilatazione gravitazionale reale — e la misura non le separa.**
 > **Il modello e' relazionale nella DINAMICA. La nascita della TOPOLOGIA e le DIREZIONI usano un
 > embedding euclideo in 3D (`self.pos`) come ausilio computazionale. In quel punto NON e'
 > background-independent. L'errore dell'embedding NON e' misurato.**
+
+> ### 📌 **E DAL 2026-10-08 QUESTA DICHIARAZIONE HA UN ASSIOMA: `A17`** *(in testa)* — *«nelle
+> formule della fisica non ci deve essere `pos`»*. ### **Quello che qui era una dichiarazione
+> onesta, lì è un VINCOLO SULLA FORMA**, e le violazioni elencate sotto sono ### **le sue**.
 
 **Va scritta perche' oggi il repo non la dice da nessuna parte**, ed e' emersa da una domanda di
 Luca — *«ma io posso evitare questa retroazione?»* — non da un difetto trovato in una misura.
