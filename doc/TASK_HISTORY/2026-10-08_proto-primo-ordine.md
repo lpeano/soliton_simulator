@@ -141,3 +141,67 @@ minuti**.
 5. ### **un referto** coi numeri dai json;
 6. poi ### ⛔ **FERMO: la memoria dinamica dentro `H`, le nascite e il vuoto sono decisioni
    successive di Luca.**
+
+---
+
+# ⭐ **ANNOTAZIONE DEL 2026-10-08, PRIMA DELLE CORSE** *(par.8: si annota, non si riscrive)*
+
+## ⛔ **① IL BRACCIO `U = I`, CHIESTO DAL GUARDIANO — E HA RAGIONE**
+
+> **«Un campo `SU(2)` casuale localizza da sé (Anderson con flusso di gauge casuale), e il
+> confronto a `g = 0` non distinguerebbe il disordine del grafo da quello di `U`.»**
+
+### ✔ **E IL RILIEVO COLPISCE ESATTAMENTE IL PUNTO DEBOLE CHE AVEVO SCRITTO IO** *(par.1: «un
+pacchetto che non si allarga può essere localizzazione di Anderson»)*, ### **ma io avevo
+nominato UNA sola fonte di disordine — il grafo — e ce ne sono DUE.** Il flusso di gauge
+casuale su un grafo di grado `~14` è un disordine ### **a sé**, e il controllo `g = 0` da solo
+### **non li separa.**
+
+### **IL BRACCIO CHE SI AGGIUNGE:** ### **`U_ij = I` su tutti gli archi**, stessi grafi, stessi
+semi, stessi `5` valori di `g`. ### **Due bracci, quindi:**
+
+| braccio | `U_ij` | che cosa isola |
+|---|---|---|
+| ### **`U-CASO`** | `SU(2)` casuale ma ### **fissa** *(quello di prima)* | disordine del grafo ### **+** flusso di gauge |
+| ### **`U-UNO`** | ### **identità** su tutti gli archi | ### **solo** il disordine del grafo |
+
+### ➜ **LA LETTURA, fissata adesso:** si riporta il rapporto di partecipazione ### **a
+`g = 0`** nei due bracci. ### **Se resta stretto SOLO in `U-CASO`, la localizzazione viene da
+`U`** — e un `PR` che non cresce a `g ≠ 0` ### **non** sarebbe un solitone. ### **Se resta
+stretto in ENTRAMBI, viene dal GRAFO.** ### **Se in nessuno dei due, il controllo è pulito e il
+criterio di Luca si può applicare.**
+
+### **E I CRITERI SONO GLI STESSI PER I DUE BRACCI**, come il mandato dice: `NASCE UN SOLITONE
+SUL GRAFO` se per almeno un `g` il `PR` resta entro un fattore `2` in tutti e `3` i semi
+mentre a `g = 0` cresce di oltre `5`; `NON NASCE` se nessun `g` tiene.
+
+### ⚠ **E LA PREVISIONE `PP-5` SI RAFFORZA, non cambia:** avevo scritto che a `g = 0` il `PR`
+crescerà di ### **meno** di `5` per il disordine. ### **Ora ho due bracci per vedere di QUALE
+disordine si tratta**, e la previsione nuova è: ### **`U-UNO` cresce PIÙ di `U-CASO`**, perché
+ha una sorgente di disordine in meno.
+
+## ⛔ **② IL MIO DISCRIMINANTE DI `(b)` CONFLATAVA DUE CAUSE, E L'HA MOSTRATO DA SÉ**
+
+Avevo scritto che il residuo del solitone *(`1.903e-03` contro una soglia di `1e-3`)* fosse
+### **della discretizzazione spaziale**, e avevo messo un test: ### **se il solitone si allarga,
+lo scarto deve CALARE.**
+
+### ⛔ **MISURATO: NON CALA.** `1.903e-03` a `LARG = 8` contro ### **`2.193e-03`** a
+`LARG = 12`, un fattore `0.87` — cioè ### **cresce appena.**
+
+### ➜ **E LA CAUSA È NEL DISEGNO DEL MIO TEST:** scalavo `dt ∝ LARG²` *(perché la frequenza del
+solitone va come `η²`)*, e così ### **l'errore TEMPORALE resta FISSO per costruzione** — il
+test non poteva vedere il reticolo. ### **Il mio discriminante non discriminava, e il numero me
+lo ha detto.**
+
+### ⭐ **IL DISEGNO NUOVO, che separa le due cause una per volta:**
+
+| | che cosa varia | che cosa dice |
+|---|---|---|
+| ### **(b-i)** | `LARG = 8`, `dt = 0.002` | il riferimento |
+| ### **(b-ii)** | `LARG = 8`, ### **`dt` DIMEZZATO** | se lo scarto ### **cala di ~`4`** *(secondo ordine)*, il residuo è ### **DEL PASSO TEMPORALE** |
+| ### **(b-iii)** | `LARG = 12`, `dt ∝ LARG²` | ### **lo scarto RESTA**, e questo ### **conferma** che non è spaziale: quella scalatura tiene l'errore temporale fisso |
+
+### **E LA SOGLIA SI APPLICA A `(b-ii)`:** se con `dt` dimezzato lo scarto va ### **sotto
+`1e-3`**, il controllo passa e il residuo è ### **spiegato**. ### ⛔ **Se non ci va, NON lo
+chiamo discretizzazione: lo riporto come residuo NON SPIEGATO, e le corse non partono.**

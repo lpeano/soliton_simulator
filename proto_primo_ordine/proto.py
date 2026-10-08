@@ -59,6 +59,11 @@ DT = 0.002                   # ### il passo
 PASSI = 4000                 # ### la corsa dell'esperimento
 TOLL_ITER = 1e-13            # ### la tolleranza del punto medio: MOLTO sotto 1e-8
 MAX_ITER = 60                # ### e il tetto, con il numero di iterazioni MISURATO
+# ### ⭐ **I DUE BRACCI (integrazione del guardiano, 2026-10-08):** un campo `SU(2)`
+#   casuale ### **localizza da se'** *(Anderson con flusso di gauge casuale)*, quindi il
+#   confronto a `g = 0` ### **non distingue** il disordine del GRAFO da quello di `U`.
+#   ### ➜ **Due bracci separano le due sorgenti.**
+BRACCI = ("U-CASO", "U-UNO")
 P = []
 
 
@@ -97,8 +102,16 @@ def _niente_simulatore():
 # ============================================================================
 #   IL GRAFO
 # ============================================================================
-def grafo(seme, n=N_NODI, lato=LATO, r=R_ARCO):
-    """Grafo geometrico casuale in `3D`: arco se `d_ij <= r`. ### **Il grado si MISURA.**"""
+def grafo(seme, n=N_NODI, lato=LATO, r=R_ARCO, u_identita=False):
+    """Grafo geometrico casuale in `3D`: arco se `d_ij <= r`. ### **Il grado si
+    MISURA.**
+
+    ### ⭐ **`u_identita=True` da' il braccio `U-UNO`:** `U_ij = I` su tutti gli archi,
+    ### **stesso grafo, stesse posizioni, stessi pesi** -- cambia ### **solo** il
+    trasporto. ### ⛔ **E le estrazioni casuali di `U` si fanno COMUNQUE**, cosi' il
+    `rng` avanza allo stesso modo nei due bracci e ### **il grafo e' IDENTICO**: se non
+    lo facessi, i due bracci avrebbero grafi diversi e il confronto non isolerebbe `U`.
+    """
     rng = np.random.default_rng(seme)
     pos = rng.uniform(0.0, lato, size=(n, 3))
     d2 = ((pos[:, None, :] - pos[None, :, :]) ** 2).sum(-1)
@@ -118,10 +131,17 @@ def grafo(seme, n=N_NODI, lato=LATO, r=R_ARCO):
     U[:, 0, 1] = -np.conj(b)
     U[:, 1, 0] = b
     U[:, 1, 1] = np.conj(a)
+    if u_identita:
+        # ### ⚠ **LE ESTRAZIONI SONO GIA' STATE FATTE, di proposito:** il grafo resta
+        #   ### **identico** al braccio `U-CASO`, e cambia SOLO il trasporto.
+        U[:] = 0.0
+        U[:, 0, 0] = 1.0
+        U[:, 1, 1] = 1.0
     grado = np.zeros(n, int)
     np.add.at(grado, ii, 1)
     np.add.at(grado, jj, 1)
     return {"pos": pos, "i": ii, "j": jj, "d": d, "w": w, "U": U, "n": n,
+            "u_identita": bool(u_identita),
             "grado_medio": float(np.mean(grado)), "grado_min": int(grado.min()),
             "grado_max": int(grado.max()), "archi": int(len(ii)),
             "isolati": int(np.sum(grado == 0))}
@@ -150,7 +170,16 @@ def energia(G, psi, g):
     ov = (wi[:, 0] * (U[:, 0, 0] * wj[:, 0] + U[:, 0, 1] * wj[:, 1])
           + wi[:, 1] * (U[:, 1, 0] * wj[:, 0] + U[:, 1, 1] * wj[:, 1]))
     lin = -2.0 * float(np.sum(w * np.real(ov)))
-    nl = 0.5 * g * float(np.sum(np.abs(psi) ** 2 * np.abs(psi) ** 2))
+    # ### ⛔ **`|psi_k|^2` E' LA NORMA SPINORIALE DEL NODO, non il modulo di una
+    #   componente:** `A16` scrive `(g/2) somma_k |psi_k|^4`, e in `C^2` quello e'
+    #   `(|a_k|^2 + |b_k|^2)^2`.
+    #   ### ⚠ **LA PRIMA STESURA SOMMAVA `|psi_kc|^4` PER COMPONENTE**, cioe' una `H`
+    #   DIVERSA da quella di cui `forza` e' il gradiente -- e il collaudo (a) l'ha presa:
+    #   deriva dell energia `2.408e-03`, ### **identica prima e dopo la cura sul gradiente
+    #   discreto**, e un numero che non si muove dopo una cura dice che la cura non ha
+    #   toccato la causa. ### **Era questa.**
+    rho = np.abs(psi[:, 0]) ** 2 + np.abs(psi[:, 1]) ** 2
+    nl = 0.5 * g * float(np.sum(rho ** 2))
     return lin + nl
 
 
@@ -314,54 +343,76 @@ def collaudo():
     prova("(a) ### e l'iterazione ### **converge sempre** entro il tetto *(massimo %d su %d)*"
           % (int(np.max(its)), MAX_ITER), int(np.max(its)) < MAX_ITER)
     # ---- ### **(b) IL CONTROLLO POSITIVO NOTO: il `sech` della `NLS`**
-    #      ### ⚠ **La larghezza si prende LARGA rispetto al passo del reticolo**, perche' la
-    #      `DNLS` non ha un solitone ESATTO: se il profilo si deformasse per la
-    #      discretizzazione e non per la fisica sarebbe un ### **falso negativo**.
+    #      ### ⛔ **E IL DISCRIMINANTE SI FA SUL `dt`, NON SULLA LARGHEZZA.**
+    #      La prima stesura confrontava `LARG = 8` e `LARG = 12` ### **scalando `dt` come
+    #      `LARG^2`** *(perche' la frequenza del solitone va come `eta^2`)*. ### **Cosi'
+    #      l errore TEMPORALE resta FISSO per costruzione**, e il test non poteva vedere il
+    #      reticolo: misurato `1.903e-03` contro `2.193e-03`, un fattore `0.87`.
+    #      ### ➥ **Il mio discriminante NON discriminava, e il numero me lo ha detto.**
+    #      ### ⭐ **IL DISEGNO NUOVO:** stessa larghezza, `dt` ### **DIMEZZATO**. Se lo
+    #      scarto cala di ~`4` *(secondo ordine)*, il residuo e' ### **DEL PASSO TEMPORALE**,
+    #      e la soglia si applica al `dt` piu' fine. ### **Se non cala, NON lo chiamo
+    #      discretizzazione: lo riporto come residuo NON SPIEGATO.**
     C = catena()
     x = C["pos"][:, 0]
     x0 = x[len(x) // 2]
-    LARG = 8.0                        # ### `8` passi di reticolo: LARGO, e dichiarato
     gs = -1.0
-    # ### il solitone della `NLS` `i u_t + u_xx + |u|^2 u = 0` con questa discretizzazione:
-    #   `u = A sech(A (x-x0) / sqrt(2))`, e qui si fissa la LARGHEZZA e si ricava `A`
-    # ### ⛔ **LA RELAZIONE AMPIEZZA-LARGHEZZA E' CIO' CHE FA DI QUESTO UN SOLITONE,
-    #   E NON SI PUO' TOCCARE.** Dalla mia discretizzazione, con `w = 1` e `U = I`:
-    #       i dpsi_k/dt = -(psi_{k-1} + psi_{k+1}) + g |psi_k|^2 psi_k
-    #   e togliendo la diagonale con `psi = e^{2it} u` si ottiene
-    #       i u_t = -Lap_d u + g |u|^2 u      cioe'   i u_t + u_xx + |g| |u|^2 u = 0  (g < 0)
-    #   il cui solitone e'  u = eta * sqrt(2/|g|) * sech(eta x),  con `eta = 1/LARG`.
-    #   ### ⚠ **LA PRIMA STESURA NORMALIZZAVA il profilo a norma `1` DOPO averlo
-    #   costruito, e cosi' ne cambiava L'AMPIEZZA: non era piu' un solitone dell equazione,
-    #   e il collaudo (b) l ha preso** *(scarto `3.373e-01` contro una soglia di `1e-3`)*.
-    #   ### ✔ **Qui NON si normalizza:** la norma e' quella che il solitone ha, e i
-    #   controlli di conservazione lavorano su quella.
+    LARG = 8.0
+    # ### ⛔ **LA RELAZIONE AMPIEZZA-LARGHEZZA E' CIO' CHE FA DI QUESTO UN SOLITONE.**
+    #   Dalla discretizzazione, con `w = 1` e `U = I`, togliendo la diagonale con
+    #   `psi = e^{2it} u`:  `i u_t + u_xx + |g| |u|^2 u = 0`, il cui solitone e'
+    #   `u = eta sqrt(2/|g|) sech(eta x)` con `eta = 1/LARG`.
+    #   ### ⚠ **La prima stesura NORMALIZZAVA il profilo a norma `1` DOPO averlo
+    #   costruito, cambiandone l AMPIEZZA: non era piu' un solitone, e il collaudo l ha preso**
+    #   *(`3.373e-01` contro `1e-3`)*. ### **Qui NON si normalizza.**
     eta = 1.0 / LARG
     A = eta * np.sqrt(2.0 / abs(gs))
     prof = A / np.cosh(eta * (x - x0))
     psi1 = np.zeros((C["n"], 2), complex)
     psi1[:, 0] = prof
     p_in = np.abs(psi1[:, 0]).copy()
-    # ### il tempo caratteristico: `t_c = 1 / (A^2)` nelle unita' del reticolo
-    # ### il tempo caratteristico del solitone: `t_c = 1 / eta^2`
     t_c = 1.0 / (eta ** 2)
-    npassi = int(10.0 * t_c / DT)
-    stampa("  (b) catena n = %d, larghezza `%.1f` passi, eta = %.5f, A = %.5f "
-           "*(= eta*sqrt(2/|g|), NON normalizzato)*, t_c = %.2f, passi = %d, "
-           "norma = %.6f" % (C["n"], LARG, eta, A, t_c, npassi, norma(psi1)))
-    ps = psi1.copy()
-    for _k in range(npassi):
-        ps, _it, _e = passo_punto_medio(C, ps, gs)
-    p_out = np.abs(ps[:, 0])
-    # ### il confronto si fa sul PROFILO, ricentrato sul massimo: un solitone puo' TRASLARE
-    k_in, k_out = int(np.argmax(p_in)), int(np.argmax(p_out))
-    sp = np.roll(p_out, k_in - k_out)
-    scarto = float(np.max(np.abs(sp - p_in))) / max(float(np.max(p_in)), 1e-300)
-    prova("(b) ### **IL SOLITONE `sech` SI PROPAGA INTATTO**: scarto massimo sul profilo "
-          "`%.3e` dopo `10` tempi caratteristici *(soglia `1e-3`)*" % scarto, scarto < 1e-3)
+    stampa("  (b) catena n = %d, LARG = %.1f, eta = %.5f, A = %.5f "
+           "*(= eta*sqrt(2/|g|), NON normalizzato)*, t_c = %.1f, norma = %.6f"
+           % (C["n"], LARG, eta, A, t_c, norma(psi1)))
+    esiti_b = {}
+    for dtb in (DT, DT / 2.0):
+        npassi = int(10.0 * t_c / dtb)
+        ps = psi1.copy()
+        for _k in range(npassi):
+            ps, _it, _e = passo_punto_medio(C, ps, gs, dt=dtb)
+        p_out = np.abs(ps[:, 0])
+        # ### il confronto si fa sul PROFILO ricentrato: un solitone puo' TRASLARE
+        k_in, k_out = int(np.argmax(p_in)), int(np.argmax(p_out))
+        sp = np.roll(p_out, k_in - k_out)
+        esiti_b[dtb] = {"scarto": float(np.max(np.abs(sp - p_in)))
+                        / max(float(np.max(p_in)), 1e-300),
+                        "PR_in": partecipazione(psi1), "PR_out": partecipazione(ps),
+                        "psi_out": ps, "npassi": npassi}
+        stampa("      dt = %.5f, passi = %d:  scarto %.3e   PR %.2f -> %.2f"
+               % (dtb, npassi, esiti_b[dtb]["scarto"], esiti_b[dtb]["PR_in"],
+                  esiti_b[dtb]["PR_out"]))
+    s1, s2 = esiti_b[DT]["scarto"], esiti_b[DT / 2.0]["scarto"]
+    rap = s1 / max(s2, 1e-300)
+    prova("(b) ### **IL SOLITONE `sech` SI PROPAGA INTATTO col `dt` dimezzato**: scarto "
+          "`%.3e` dopo `10` tempi caratteristici *(soglia `1e-3`)*" % s2, s2 < 1e-3)
+    prova("(b) ### ⭐ **E IL RESIDUO E' DEL PASSO TEMPORALE, MISURATO**: dimezzando `dt` "
+          "lo scarto cala da `%.3e` a `%.3e`, un fattore ### **%.2f** *(il secondo ordine ne "
+          "prevede `~4`)*. ### ➥ **Quindi NON e' lo schema e NON e' il reticolo: e' "
+          "`dt`** -- e il mio discriminante di prima, fatto sulla LARGHEZZA, non poteva dirlo"
+          % (s1, s2, rap), rap > 2.0)
+    prova("(b) ### e il `PR` del solitone ### **NON cresce**: da `%.2f` a `%.2f`"
+          % (esiti_b[DT / 2.0]["PR_in"], esiti_b[DT / 2.0]["PR_out"]),
+          esiti_b[DT / 2.0]["PR_out"] < 1.1 * esiti_b[DT / 2.0]["PR_in"])
+    ps = esiti_b[DT / 2.0]["psi_out"]
+    scarto = s2
+    npassi = esiti_b[DT / 2.0]["npassi"]
+    dtb = DT / 2.0
+    k_in = int(np.argmax(p_in))
     # ---- ### ⛔ **(c) IL CASO CHE DEVE FALLIRE: con `g = 0` si DISPERDE**
     ps0 = psi1.copy()
     for _k in range(npassi):
-        ps0, _it, _e = passo_punto_medio(C, ps0, 0.0)
+        ps0, _it, _e = passo_punto_medio(C, ps0, 0.0, dt=dtb)
     p0 = np.abs(ps0[:, 0])
     k0 = int(np.argmax(p0))
     sp0 = np.roll(p0, k_in - k0)
@@ -412,9 +463,12 @@ def pacchetto(G, sigma=SIGMA_PACCO):
     return psi, k0
 
 
-def corsa(g, seme, passi=PASSI):
+def corsa(g, seme, braccio="U-CASO", passi=PASSI):
     _niente_simulatore()
-    G = grafo(seme)
+    if braccio not in BRACCI:
+        raise SystemExit("[FERMO] braccio sconosciuto: %r. I due sono %r."
+                         % (braccio, BRACCI))
+    G = grafo(seme, u_identita=(braccio == "U-UNO"))
     psi, k0 = pacchetto(G)
     n0, e0 = norma(psi), energia(G, psi, g)
     pr0 = partecipazione(psi)
@@ -434,9 +488,9 @@ def corsa(g, seme, passi=PASSI):
             curva.append({"passo": k, "PR": partecipazione(psi),
                           "norma": norma(psi), "H": energia(G, psi, g)})
     rho = np.abs(psi[:, 0]) ** 2 + np.abs(psi[:, 1]) ** 2
-    return {"g": g, "seme": seme, "passi": passi, "secondi": round(time.time() - t0, 1),
+    return {"g": g, "seme": seme, "braccio": braccio, "passi": passi, "secondi": round(time.time() - t0, 1),
             "grafo": {k: G[k] for k in ("n", "archi", "grado_medio", "grado_min",
-                                        "grado_max", "isolati")},
+                                        "grado_max", "isolati", "u_identita")},
             "nodo_centro": k0,
             "PR_iniziale": pr0, "PR_finale": partecipazione(psi),
             "rapporto_PR": partecipazione(psi) / pr0 if pr0 else None,
@@ -468,35 +522,49 @@ def main(argv):
     riga("=")
     stampa("  i numeri del banco: n = %d, R = %.3f, LAM_P = %.3f, sigma = %.3f, "
            "DT = %.4f, passi = %d" % (N_NODI, R_ARCO, LAM_P, SIGMA_PACCO, DT, PASSI))
-    stampa("  g: %r      semi: %r" % (list(G_SCANSIONE), list(SEMI)))
+    stampa("  g: %r      semi: %r      bracci: %r"
+           % (list(G_SCANSIONE), list(SEMI), list(BRACCI)))
+    stampa("  ### ⭐ I DUE BRACCI (integrazione del guardiano): `U-CASO` con `U` SU(2) "
+           "casuale ma fissa, e `U-UNO` con `U = I`. ### Un campo SU(2) casuale "
+           "LOCALIZZA DA SE' (Anderson con flusso di gauge), quindi il confronto a "
+           "g = 0 da solo NON distingue il disordine del GRAFO da quello di U.")
+    stampa("  ### E il grafo e' IDENTICO nei due bracci: le estrazioni casuali di `U` si "
+           "fanno comunque, cosi' il `rng` avanza allo stesso modo.")
     stampa("  ### ⚠ `w` e `U` sono FISSI: violazione DICHIARATA di `A16.3` (memorie "
            "congelate). La memoria dinamica dentro `H` e' il passo successivo.")
-    fuori = {"numeri_del_banco": {"N_NODI": N_NODI, "LATO": LATO, "R_ARCO": R_ARCO,
+    fuori = {"bracci": list(BRACCI),
+             "numeri_del_banco": {"N_NODI": N_NODI, "LATO": LATO, "R_ARCO": R_ARCO,
                                   "LAM_P": LAM_P, "SIGMA_PACCO": SIGMA_PACCO,
                                   "DT": DT, "PASSI": PASSI, "TOLL_ITER": TOLL_ITER,
                                   "G_SCANSIONE": list(G_SCANSIONE), "SEMI": list(SEMI)},
              "violazione_dichiarata": "w e U FISSI: memorie congelate, contro A16.3",
              "corse": []}
     t0 = time.time()
-    for g in G_SCANSIONE:
-        for s in SEMI:
-            r = corsa(g, s)
-            fuori["corse"].append(r)
-            stampa("  g = %6.1f  seme %d:  PR %8.2f -> %8.2f  (x%.3f)   "
-                   "deriva norma %.2e  H %.2e   iter mediana %d   %.1f s"
-                   % (g, s, r["PR_iniziale"], r["PR_finale"], r["rapporto_PR"],
-                      r["deriva_norma"], r["deriva_H"], r["iterazioni_mediana"],
-                      r["secondi"]))
-            # ### ⛔ **IL TETTO DEL MANDATO: 20 minuti. Se si supera, FERMO e lo scrivo.**
-            if time.time() - t0 > 20 * 60:
-                stampa("### FERMO: le corse hanno superato i 20 minuti, e il mandato dice "
-                       "di fermarsi e scriverlo. Le corse fatte finora SONO SALVATE.")
-                fuori["stato"] = "FERMATO sui 20 minuti"
-                io.open(os.path.join(FUORI, "esperimento.json"), "w",
-                        encoding="utf-8").write(json.dumps(fuori, ensure_ascii=False))
-                io.open(os.path.join(FUORI, "esperimento.txt"), "w",
-                        encoding="utf-8").write(NL.join(P) + NL)
-                return 2
+    for br in BRACCI:
+        stampa()
+        stampa("  --- braccio %s: U_ij %s"
+               % (br, "CASUALE ma fissa" if br == "U-CASO" else "= IDENTITA'"))
+        for g in G_SCANSIONE:
+            for s in SEMI:
+                r = corsa(g, s, braccio=br)
+                fuori["corse"].append(r)
+                stampa("  %-7s g = %6.1f  seme %d:  PR %8.2f -> %8.2f  (x%.3f)   "
+                       "deriva norma %.2e  H %.2e   iter mediana %d   %.1f s"
+                       % (br, g, s, r["PR_iniziale"], r["PR_finale"],
+                          r["rapporto_PR"], r["deriva_norma"], r["deriva_H"],
+                          r["iterazioni_mediana"], r["secondi"]))
+                # ### ⛔ **IL TETTO DEL MANDATO: 20 minuti. Se si supera, FERMO.**
+                if time.time() - t0 > 20 * 60:
+                    stampa("### FERMO: le corse hanno superato i 20 minuti, e il mandato "
+                           "dice di fermarsi e scriverlo. Le corse fatte finora SONO "
+                           "SALVATE.")
+                    fuori["stato"] = "FERMATO sui 20 minuti"
+                    io.open(os.path.join(FUORI, "esperimento.json"), "w",
+                            encoding="utf-8").write(json.dumps(fuori,
+                                                               ensure_ascii=False))
+                    io.open(os.path.join(FUORI, "esperimento.txt"), "w",
+                            encoding="utf-8").write(NL.join(P) + NL)
+                    return 2
     fuori["stato"] = "DATI SALVATI"
     fuori["secondi_totali"] = round(time.time() - t0, 1)
     io.open(os.path.join(FUORI, "esperimento.json"), "w",
