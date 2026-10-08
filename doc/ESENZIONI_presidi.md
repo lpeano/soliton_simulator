@@ -13,6 +13,7 @@ commit**: cosi' non se ne accumulano di invisibili.)*
 | `csv/_collaudo_lista_chiusa.py|H-P5` | non importa il simulatore e non lo fa girare. Collauda un generatore di documenti. |
 | `csv/_collisioni_id.py|H-P5` | non importa il simulatore e non lo fa girare. Conta occorrenze in documenti. |
 | `csv/_confronto_pds.py|H-P5` | non importa il simulatore e non lo fa girare. Confronta due documenti. |
+| `csv/_controlli_indice_v2.py|H-P5` | non importa il simulatore e non lo fa girare. Controlla una migrazione. |
 | `csv/_controlli_riordino.py|H-P5` | non importa il simulatore e non lo fa girare. Conta righe e cerca stringhe. |
 | `csv/_indice_id.py|H-P5` | non importa il simulatore e non lo fa girare. Valida un TSV. |
 | `csv/_indice_riordino.py|H-P5` | non importa il simulatore e non lo fa girare. Aggiunge righe a un TSV. |
@@ -42,6 +43,7 @@ commit**: cosi' non se ne accumulano di invisibili.)*
 | `csv/_titoli_brevi.py|H-P5` | non importa il simulatore e non lo fa girare. Accorcia titoli in un TSV. |
 | `csv/_vista_smistamento.py|H-P5` | non importa il simulatore e non lo fa girare. Legge due TSV e scrive un documento. |
 | `csv/indice.py|H-P5` | non importa il simulatore e non lo fa girare. Legge e scrive l'indice. |
+| `csv/migra_indice_v2.py|H-P5` | non importa il simulatore e non lo fa girare. Migra un indice. |
 | `csv/_archivio/_indice_id_importatore.py|H-P5` | non importa il simulatore e non lo fa girare. Genera due indici da documenti. |
 | `csv/_archivio/_rami_off_tors_w8.py|H-P8` | un FALSO POSITIVO, e lo DICHIARO invece di spostare il testo per schivarlo. |
 | `csv/_archivio/_rami_off_z43_cura2.py|H-P5` | e' un ARCHIVIO. Non importa il simulatore, non gira, non scrive referti. |
@@ -98,5 +100,5 @@ commit**: cosi' non se ne accumulano di invisibili.)*
 | `csv/_test_fork/_z43_tempo_proprio.py|H-P3` | la scena passa TUTTA dal CLI (`nmasse` e `sep` da `argv`), e la |
 
 ```
-esenzioni dichiarate   91
+esenzioni dichiarate   93
 ```

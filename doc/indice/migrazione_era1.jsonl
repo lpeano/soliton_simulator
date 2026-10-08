@@ -1,0 +1,974 @@
+{"id_vecchio": "A1", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "A1-COSTANTI", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "A1-COSTANTI", "dove": "collegate", "regola": "(a2) l'alias `A1` E' UNA VOCE: e' un collegamento, non un alias"}
+{"id_vecchio": "A1-INERZIA", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "A1-INERZIA", "dove": "collegate", "regola": "(a2) l'alias `A1` E' UNA VOCE: e' un collegamento, non un alias"}
+{"id_vecchio": "A1-TREVIE", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "A1-TREVIE", "dove": "collegate", "regola": "(a2) l'alias `A1` E' UNA VOCE: e' un collegamento, non un alias"}
+{"id_vecchio": "A10", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "A11", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "A12", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "A13", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "A14", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "A15", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "A2", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "A2-ANELLO", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "A2-ANELLO", "dove": "collegate", "regola": "(a2) l'alias `A2` E' UNA VOCE: e' un collegamento, non un alias"}
+{"id_vecchio": "A2-BLOCH", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "A2-BLOCH", "dove": "collegate", "regola": "(a2) l'alias `A2` E' UNA VOCE: e' un collegamento, non un alias"}
+{"id_vecchio": "A2-DXD", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "A2-DXD", "dove": "collegate", "regola": "(a2) l'alias `A2` E' UNA VOCE: e' un collegamento, non un alias"}
+{"id_vecchio": "A2b", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "A3", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "A3-CHIRALE", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "A3-CHIRALE", "dove": "collegate", "regola": "(a2) l'alias `A3` E' UNA VOCE: e' un collegamento, non un alias"}
+{"id_vecchio": "A3-DISEGNO", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "A3-DISEGNO", "dove": "collegate", "regola": "(a2) l'alias `A3` E' UNA VOCE: e' un collegamento, non un alias"}
+{"id_vecchio": "A3-FDT", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "A3-FDT", "dove": "collegate", "regola": "(a2) l'alias `A3` E' UNA VOCE: e' un collegamento, non un alias"}
+{"id_vecchio": "A3b", "dove": "etichette_rimosse.jsonl", "regola": "(b0) ID di vocabolario"}
+{"id_vecchio": "A3c", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "A4", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "A4-METRICHE", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "A4-METRICHE", "dove": "collegate", "regola": "(a2) l'alias `A4` E' UNA VOCE: e' un collegamento, non un alias"}
+{"id_vecchio": "A5", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "A5-PANNELLO", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "A5-PANNELLO", "dove": "collegate", "regola": "(a2) l'alias `A5` E' UNA VOCE: e' un collegamento, non un alias"}
+{"id_vecchio": "A6", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "A6-PERCCHI", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "A6-PERCCHI", "dove": "collegate", "regola": "(a2) l'alias `A6` E' UNA VOCE: e' un collegamento, non un alias"}
+{"id_vecchio": "A7", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "A7b", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "A8", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "A8b", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "A9", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "AAAA-MM-GG", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "AB-CONTROLLI", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "ACCOPPIAMENTO2", "dove": "etichette_rimosse.jsonl", "regola": "(b2) etichetta di documento"}
+{"id_vecchio": "ALLA-NASCITA", "dove": "etichette_rimosse.jsonl", "regola": "(b2) etichetta di documento"}
+{"id_vecchio": "ALLUNG-RELATIVO", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "ANCORE-1", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "ANTI-ALLINEAMENTO", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "ARCH-LCONSERVA", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "ARCH-PAVIMENTI", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "ARCH-SYNC", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "ARCHI-OLTRE-4PI", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "ARCHI-PASSO", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "ARCHI-PRIMI", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "AUDIT-CURE", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "AUTO-ATTENUA", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "AUTO-MANUTENZIONE", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "AUTO-NORMALIZZANTE", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "AUTO-REFERENZIALE", "dove": "etichette_rimosse.jsonl", "regola": "(b2) etichetta di documento"}
+{"id_vecchio": "B1", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "B10", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "B2", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "B3", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "B4", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "B4-FROZEN", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "B4-FROZEN", "dove": "collegate", "regola": "(a2) l'alias `B4` E' UNA VOCE: e' un collegamento, non un alias"}
+{"id_vecchio": "B5", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "B5-KURAMOTO", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "B5-KURAMOTO", "dove": "collegate", "regola": "(a2) l'alias `B5` E' UNA VOCE: e' un collegamento, non un alias"}
+{"id_vecchio": "B6", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "B6-TURBO", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "B6-TURBO", "dove": "collegate", "regola": "(a2) l'alias `B6` E' UNA VOCE: e' un collegamento, non un alias"}
+{"id_vecchio": "B7", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "B7-SHAKE", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "B7-SHAKE", "dove": "collegate", "regola": "(a2) l'alias `B7` E' UNA VOCE: e' un collegamento, non un alias"}
+{"id_vecchio": "B8", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "B9", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "BACKGROUND-INDEPENDENT", "dove": "etichette_rimosse.jsonl", "regola": "(b2) etichetta di documento"}
+{"id_vecchio": "BIS-ANOM-SIMM", "dove": "etichette_rimosse.jsonl", "regola": "(b2) etichetta di documento"}
+{"id_vecchio": "BIS-DELTA", "dove": "etichette_rimosse.jsonl", "regola": "(b2) etichetta di documento"}
+{"id_vecchio": "C1", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "C1-PEQ-ESATTO", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "C1-PEQ-ESATTO", "dove": "collegate", "regola": "(a2) l'alias `C1` E' UNA VOCE: e' un collegamento, non un alias"}
+{"id_vecchio": "C10", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "C11", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "C12", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "C13", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "C14", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "C15", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "C16", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "C17", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "C18", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "C19", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "C1BIS-ANOM-SIMM", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "C2", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "C2-PEQ-NASCITA", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "C2-PEQ-NASCITA", "dove": "collegate", "regola": "(a2) l'alias `C2` E' UNA VOCE: e' un collegamento, non un alias"}
+{"id_vecchio": "C20", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "C21", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "C22", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "C23", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "C24", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "C25", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "C26", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "C27", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "C28", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "C3", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "C3-SCALA-MIN-PASSO", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "C3-SCALA-MIN-PASSO", "dove": "collegate", "regola": "(a2) l'alias `C3` E' UNA VOCE: e' un collegamento, non un alias"}
+{"id_vecchio": "C4", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "C4-COES-CAUSALE", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "C4-COES-CAUSALE", "dove": "collegate", "regola": "(a2) l'alias `C4` E' UNA VOCE: e' un collegamento, non un alias"}
+{"id_vecchio": "C5", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "C5-INVARIANTI", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "C5-INVARIANTI", "dove": "collegate", "regola": "(a2) l'alias `C5` E' UNA VOCE: e' un collegamento, non un alias"}
+{"id_vecchio": "C5RES-INVARIANTI", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "C6", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "C7", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "C8", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "C9", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "CARICA-DI-GAUGE", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "CARICA-PERCORSO", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "CARICA-ROTAZIONE", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "CARICA-SIMMETRIA-FASE", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "CBIS-CRITERIO-VACUO", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "CELLE-NAN-APPESE-NOME-SCADUTO", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "CENS-A1", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "CENS-A2", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "CENS-A3", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "CENS-A4", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "CENS-A5", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "CENS-A6", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "CENS-A7", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "CENS-B1", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "CENS-B10", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "CENS-B11", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "CENS-B12", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "CENS-B13", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "CENS-B14", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "CENS-B15", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "CENS-B16", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "CENS-B2", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "CENS-B3", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "CENS-B4", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "CENS-B5", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "CENS-B6", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "CENS-B7", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "CENS-B8", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "CENS-B9", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "CHI-BASC-DESCRIZIONE", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "CHI-TORS-ZERO-FALSO", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "CHK2", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "CHK3", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "CHK3-D", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "CICLO-CHIUSURA-SEGNO", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "CLI-1", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "CLIP-INVENTARIO", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "COER-4PI", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "COES-CAUSALE", "dove": "etichette_rimosse.jsonl", "regola": "(b2) etichetta di documento"}
+{"id_vecchio": "COLLAUDO-NON-ESEGUITO", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "COME-MISURARE", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "COMPONENTI:A1", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "COMPONENTI:A2", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "COMPONENTI:A3", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "COMPONENTI:A5", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "COMPONENTI:A6", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "COMPONENTI:A8", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "COMPONENTI:B1", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "COMPONENTI:B10", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "COMPONENTI:B11", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "COMPONENTI:B2", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "COMPONENTI:B3", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "COMPONENTI:B4", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "COMPONENTI:B5", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "COMPONENTI:B6", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "COMPONENTI:B7", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "COMPONENTI:B8", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "COMPONENTI:B9", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "COMPONENTI:C1", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "COMPONENTI:C2", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "COMPONENTI:C3", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "COMPONENTI:D1", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "COMPONENTI:D2", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "COMPONENTI:S1", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "COMPONENTI:S2", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "COMPONENTI:S3", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "COMPONENTI:S3b", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "COMPONENTI:S3c", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "COMPONENTI:Y0-Y10", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "COMPONENTI:Z30", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "CONFIG-1", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "CONFIG-1/", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "CONSERVAZIONE-LOCALE", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "CONTA-RIGHE", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "COPPIA-RAMP", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "COSA-RICONTROLLARE", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "CRESCITA-DOPO-Z43", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "CROSS-PASSO", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "CS-LAMBDA-GLOBALE", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "CTRL-RISCELTA", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "CURA-3", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "CURA1-CORTO", "dove": "etichette_rimosse.jsonl", "regola": "(b2) etichetta di documento"}
+{"id_vecchio": "CURA2-CORTO", "dove": "etichette_rimosse.jsonl", "regola": "(b2) etichetta di documento"}
+{"id_vecchio": "CURA2-STRUTTURALE", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "CURE-FINE", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "CURE-INIZIO", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "D0", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "D01", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "D02", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "D03", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "D04", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "D05", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "D06", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "D07", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "D08", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "D09", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "D10", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "D11", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "D12", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "D13", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "D14", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "D15", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "D16", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "D17", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "D18", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "D19", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "D20", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "D21", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "D22", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "D23", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "D24", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "D25", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "D26", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "D27", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "D28", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "D29", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "D3", "dove": "etichette_rimosse.jsonl", "regola": "(b2) etichetta di documento"}
+{"id_vecchio": "D30", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "D31", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "D32", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "D32-CONTATORE", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "D33", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "D34", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "D35", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "D36", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "D37", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "D38", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "D4", "dove": "etichette_rimosse.jsonl", "regola": "(b2) etichetta di documento"}
+{"id_vecchio": "D5", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "D6", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "D97", "dove": "etichette_rimosse.jsonl", "regola": "(b2) etichetta di documento"}
+{"id_vecchio": "DA-DECIDERE", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "DE-ACCOPPIABILITA", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "DIFETTI-NUOVI-FINE", "dove": "etichette_rimosse.jsonl", "regola": "(b2) etichetta di documento"}
+{"id_vecchio": "DIFETTI-NUOVI-INIZIO", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "DIVISIONE-AUTOCONSISTENTE", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "DOMANDE-BUSSOLA", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "DOPPIA-COP", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "DOVE-VA", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "DRIVER-SCENA-II", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "E1", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "E3", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "E4-LAM", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "E4a", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "E4b", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "EM-CURVATURA-BIDIREZIONALE", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "END-TO-END", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "ENERGIA-NON-DEFINITA", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "ESENTE-P3", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "ETC-C1-CONFINE", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "ETC-PASSO", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "ETICHETTA-A13", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "EVALUATE-THEN-COMMIT", "dove": "etichette_rimosse.jsonl", "regola": "(b2) etichetta di documento"}
+{"id_vecchio": "F1", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "F2", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "F3", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "F4", "dove": "etichette_rimosse.jsonl", "regola": "(b2) etichetta di documento"}
+{"id_vecchio": "F5", "dove": "etichette_rimosse.jsonl", "regola": "(b2) etichetta di documento"}
+{"id_vecchio": "F7", "dove": "etichette_rimosse.jsonl", "regola": "(b2) etichetta di documento"}
+{"id_vecchio": "FALSO-UNO", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "FALSO-ZERO", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "FASCE-TAU", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "FASE-5", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "FASE-TRASCINAMENTO-3D", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "FASE1", "dove": "etichette_rimosse.jsonl", "regola": "(b2) etichetta di documento"}
+{"id_vecchio": "FASE2", "dove": "etichette_rimosse.jsonl", "regola": "(b2) etichetta di documento"}
+{"id_vecchio": "FATTI-AVVIO", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "FILI-CORTI", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "FINESTRA-DEL-PICCO", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "FINESTRA-NON-DICHIARATA", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "FINESTRA-PRE-NASCITA", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "FOGLIO-NULLO", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "FORK-FIRST", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "FORMA-N-VUOTO", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "FRAG1", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "FRECCE-IMPOSTE", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "FRENO-LEGGE", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "FUGA-MULTIRIGA", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "G0", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "G1", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "G2", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "G3", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "G4", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "G4-MEMARCO", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "G5", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "G5b", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "G6", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "G7", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "G8", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "G9", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "GEOM-SENZA-VERSO", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "GEOMETRIA-DELLA-CRESCITA", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "GLOBALE-DIS", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "GLOBALE-DISEGNO", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "GRAVITA-POTENZIALE", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "GUSCIO-ANTIFASE-EMERGENTE", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "H-ETC-1", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "H-ETC-2", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "H-FILE", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "H-INDICE", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "H-NON-TRACCIATI", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "H-P1-bis", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "H-P3", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "H-P5", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "H-P7", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "H-P8", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "H-P9", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "H-REG-R", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "H-REGR-LARGA", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "H-RIGHE", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "H-STASH", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "H-VALIDATORE", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "H1", "dove": "etichette_rimosse.jsonl", "regola": "(b2) etichetta di documento"}
+{"id_vecchio": "H2", "dove": "etichette_rimosse.jsonl", "regola": "(b2) etichetta di documento"}
+{"id_vecchio": "H3", "dove": "etichette_rimosse.jsonl", "regola": "(b2) etichetta di documento"}
+{"id_vecchio": "H3b", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "H4", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "H5", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "H6", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "H6b", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "HASHSEED-RIPROD", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "HDF5", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "I1", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "I2", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "I3", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "I4", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "I5", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "IC95", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "IMPL-2", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "IN-CHE-ORDINE", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "IN-RUN", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "INDICE-LEGGERO", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "INERZIA-1", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "INERZIA-1(", "dove": "etichette_rimosse.jsonl", "regola": "(b2) etichetta di documento"}
+{"id_vecchio": "INERZIA-1(C)", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "INERZIA-INERZIA", "dove": "etichette_rimosse.jsonl", "regola": "(b2) etichetta di documento"}
+{"id_vecchio": "INTERO-BLOCCO", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "INVARIANZA-LOCALE-CS", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "INVENTARIO-SIGILLI-SENZA-COMMIT", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "J2", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "JHEP04", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "K0", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "K1", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "K10", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "K11", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "K12", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "K2", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "K2a", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "K2b", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "K3", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "K300", "dove": "etichette_rimosse.jsonl", "regola": "(b2) etichetta di documento"}
+{"id_vecchio": "K4", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "K5", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "K6", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "K7", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "K8", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "K9", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "KAPPA-TW-COMMENTO", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "L-DOPO-STOP", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "L-MEMORIA-PRIMA", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "L-NUMERI", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "L-PATCH", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "L-SOGLIA", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "L-STELLA", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "L-UN-PROMPT", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "L0", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "L1", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "L10", "dove": "etichette_rimosse.jsonl", "regola": "(b2) etichetta di documento"}
+{"id_vecchio": "L113", "dove": "etichette_rimosse.jsonl", "regola": "(b2) etichetta di documento"}
+{"id_vecchio": "L117", "dove": "etichette_rimosse.jsonl", "regola": "(b2) etichetta di documento"}
+{"id_vecchio": "L184", "dove": "etichette_rimosse.jsonl", "regola": "(b2) etichetta di documento"}
+{"id_vecchio": "L189", "dove": "etichette_rimosse.jsonl", "regola": "(b2) etichetta di documento"}
+{"id_vecchio": "L191", "dove": "etichette_rimosse.jsonl", "regola": "(b2) etichetta di documento"}
+{"id_vecchio": "L203", "dove": "etichette_rimosse.jsonl", "regola": "(b2) etichetta di documento"}
+{"id_vecchio": "L206", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "L208", "dove": "etichette_rimosse.jsonl", "regola": "(b2) etichetta di documento"}
+{"id_vecchio": "L212", "dove": "etichette_rimosse.jsonl", "regola": "(b2) etichetta di documento"}
+{"id_vecchio": "L257", "dove": "etichette_rimosse.jsonl", "regola": "(b2) etichetta di documento"}
+{"id_vecchio": "L309", "dove": "etichette_rimosse.jsonl", "regola": "(b2) etichetta di documento"}
+{"id_vecchio": "L311", "dove": "etichette_rimosse.jsonl", "regola": "(b2) etichetta di documento"}
+{"id_vecchio": "L312", "dove": "etichette_rimosse.jsonl", "regola": "(b2) etichetta di documento"}
+{"id_vecchio": "L317", "dove": "etichette_rimosse.jsonl", "regola": "(b2) etichetta di documento"}
+{"id_vecchio": "L323", "dove": "etichette_rimosse.jsonl", "regola": "(b2) etichetta di documento"}
+{"id_vecchio": "L324", "dove": "etichette_rimosse.jsonl", "regola": "(b2) etichetta di documento"}
+{"id_vecchio": "L949", "dove": "etichette_rimosse.jsonl", "regola": "(b2) etichetta di documento"}
+{"id_vecchio": "L982", "dove": "etichette_rimosse.jsonl", "regola": "(b2) etichetta di documento"}
+{"id_vecchio": "LETTORI-INDICE", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "LINGUAGGIO-REGOLE", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "LORENTZ-MATERIA-INTERFERENZA", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "LOSCHMIDT-ECO", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "LUNGA-BATTITO-CADUTA", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "LUNGHEZZA-COME-SEGNALE", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "M-FLUSSO", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "M-ISTERESI", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "M-LEGAMI", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "M-MASSA", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "M-SPINORE", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "M0", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "M0a", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "M0b", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "M0c", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "M1", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "M1b", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "M1c", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "M2", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "M2b", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "M3", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "M3b", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "M3c", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "M4", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "M5a", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "M5b", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "M5c", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "M8", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "MANDATO-PATTERN", "dove": "etichette_rimosse.jsonl", "regola": "(b2) etichetta di documento"}
+{"id_vecchio": "MANDATO-REGISTRO", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "MASSA-CRITICA-LOCALE", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "MASSA-ID", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "MASSA-ID-FISSO", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "MASSA-MIGRA", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "MASSA-VUOTO", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "MASSE-COERENTI", "dove": "etichette_rimosse.jsonl", "regola": "(b2) etichetta di documento"}
+{"id_vecchio": "MASSE-PESI-SOVRAPPOSTE", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "MAX-NODI-FERMA", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "MCRIT-RICALCOLO", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "MEM-HEBB-PIANO-XY", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "MEM-HEBB-VERSO", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "MEM-VERSO", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "MEMORIE-MANCANTI", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "MIT1", "dove": "etichette_rimosse.jsonl", "regola": "(b2) etichetta di documento"}
+{"id_vecchio": "MIT2", "dove": "etichette_rimosse.jsonl", "regola": "(b2) etichetta di documento"}
+{"id_vecchio": "MITOSI-2LAM-ACCESO", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "MITOSI-NON-DIVISA", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "MITOSI-SOGLIA-GRAD", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "MITOSI-TASSO", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "MODEL-FREE", "dove": "etichette_rimosse.jsonl", "regola": "(b2) etichetta di documento"}
+{"id_vecchio": "MODELLO-MINIMO", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "N1", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "N1b", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "N2", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "N3", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "N3b", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "N4", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "N5", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "N6", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "N7", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "N7b", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "N7c", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "N8", "dove": "etichette_rimosse.jsonl", "regola": "(b2) etichetta di documento"}
+{"id_vecchio": "NASCITA-PUNTO-UNICO", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "NODI-1", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "NON-TRACCIATI", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "O1", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "O2", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "O3", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "O3a", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "O3c", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "O4", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "OKN-ASSERT", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "OMEGA-ETA", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "OSSERVABILE-P1", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "P-DECADIMENTO", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "P-EQ-MEDIANA-ARCHI", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "P-MEMORIA", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "P0", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "P1", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "P1-bis", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "P1-quater", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "P1-sexies", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "P10", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "P11", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "P1BIS-DELTA", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "P1b", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "P2", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "P2b", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "P3", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "P4", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "P5", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "P5a", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "P5b", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "P6", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "P7", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "P8", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "P9", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "PADRE-FIGLIO", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "PASSO-1", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "PASSO-2", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "PASSO-PIENO", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "PAT-1", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "PAT-1/PAT-2", "dove": "etichette_rimosse.jsonl", "regola": "(b2) etichetta di documento"}
+{"id_vecchio": "PAT-2", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "PCG64", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "PEQ-ESATTO", "dove": "etichette_rimosse.jsonl", "regola": "(b2) etichetta di documento"}
+{"id_vecchio": "PEQ-MEDIANA-ISTANTE", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "PEQ-NASCITA", "dove": "etichette_rimosse.jsonl", "regola": "(b2) etichetta di documento"}
+{"id_vecchio": "PEQ-SEL-STANTIO", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "PER-ARCO", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "PERC-TW-MORTA", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "PESO-MAX", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "PHI-FUORI-DOMINIO", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "PHI0-CONGELATA", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "PIATTAFORMA-NON-TIMBRATA", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "POST-HOC", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "POTATURA-GUARDIE", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "POTENZE-1", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "POZZO-D", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "PRE-RILASSAMENTO-FUORI-PASSO", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "PRESIDIO-RIFIUTO-SOLO-SIGILLI", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "PRESTAZIONI-CORSE", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "PROBLEMI-CHK3", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "PROVA-COMB", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "PROVA1-40-80", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "PSI-FLASH", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "PUNTO-DI-RIPRESA", "dove": "etichette_rimosse.jsonl", "regola": "(b2) etichetta di documento"}
+{"id_vecchio": "Q0", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "Q1", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "Q1a", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "Q1b", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "Q2", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "Q3", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "Q4", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "Q5", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "Q6", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "Q7", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "Q8", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "QQ777", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "QUADRO-FINE", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "QUADRO-INIZIO", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "QUASI-CANCELLAZIONE", "dove": "etichette_rimosse.jsonl", "regola": "(b2) etichetta di documento"}
+{"id_vecchio": "R0", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "R1", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "R11", "dove": "etichette_rimosse.jsonl", "regola": "(b2) etichetta di documento"}
+{"id_vecchio": "R2", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "R3", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "R3b", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "R4", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "R5", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "R6", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "RAMI-OFF-CURA2", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "RAMPA-1", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "RAMPA-2", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "RAMPA-2/", "dove": "etichette_rimosse.jsonl", "regola": "(b2) etichetta di documento"}
+{"id_vecchio": "RAMPA2", "dove": "etichette_rimosse.jsonl", "regola": "(b2) etichetta di documento"}
+{"id_vecchio": "REG-A", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "REG-B", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "REG-C", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "REG-R", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "REG-V", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "REGIME-COMMENTI", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "REGIME-DUE-SISTEMI", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "REGISTRO_FISICA:A1", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "REGISTRO_FISICA:A11", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "REGISTRO_FISICA:A13", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "REGISTRO_FISICA:A2", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "REGISTRO_FISICA:A3", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "REGISTRO_FISICA:A4", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "REGISTRO_FISICA:A5", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "REGISTRO_FISICA:A6", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "REGISTRO_FISICA:A7", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "REGISTRO_FISICA:C1", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "REGISTRO_FISICA:C2", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "REGISTRO_FISICA:C3", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "REGISTRO_FISICA:C4", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "REGISTRO_FISICA:D33", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "REGISTRO_FISICA:D35", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "REGISTRO_FISICA:D37", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "REGISTRO_FISICA:E1a", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "REGISTRO_FISICA:E1b", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "REGISTRO_FISICA:E1c", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "REGISTRO_FISICA:E2", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "REGISTRO_FISICA:E3", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "REGISTRO_FISICA:E4", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "REGISTRO_FISICA:E4-LAM", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "REGISTRO_FISICA:P1", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "REGISTRO_FISICA:P2", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "REGISTRO_FISICA:P3", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "REGISTRO_FISICA:P3b", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "REGISTRO_FISICA:P4", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "REGISTRO_FISICA:P5", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "REGISTRO_FISICA:REG-R", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "REGISTRO_FISICA:S1", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "REGISTRO_FISICA:S10", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "REGISTRO_FISICA:S2", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "REGISTRO_FISICA:S3", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "REGISTRO_FISICA:S4", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "REGISTRO_FISICA:S5", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "REGISTRO_FISICA:S6", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "REGISTRO_FISICA:S7", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "REGISTRO_FISICA:S9", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "REGISTRO_FISICA:SCENA-1", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "REGISTRO_FISICA:T2", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "REGISTRO_FISICA:T3", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "REGISTRO_FISICA:T4", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "REGISTRO_FISICA:T5", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "REGISTRO_FISICA:U2", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "REGISTRO_FISICA:U2-5", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "REGISTRO_FISICA:U2-6", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "REGISTRO_FISICA:U2a", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "REGISTRO_FISICA:U2b", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "REGISTRO_FISICA:U2c", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "REGISTRO_FISICA:V1", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "REGISTRO_FISICA:V2", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "REGISTRO_FISICA:V3", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "REGISTRO_FISICA:V4", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "REGISTRO_FISICA:V5", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "REGISTRO_FISICA:V6", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "REGISTRO_FISICA:V7", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "REGISTRO_FISICA:V8", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "REGISTRO_FISICA:V9", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "RELAZIONE-BINARIA", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "REPERTI-IMMUTABILI", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "RES-INVARIANTI", "dove": "etichette_rimosse.jsonl", "regola": "(b2) etichetta di documento"}
+{"id_vecchio": "REVERSIBILITA-LOCALE", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "RI-ANCORATA", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "RI-ETICHETTATO", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "RI-GIRABILE", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "RI-GIRABILI", "dove": "etichette_rimosse.jsonl", "regola": "(b2) etichetta di documento"}
+{"id_vecchio": "RI-GIRABILIT", "dove": "etichette_rimosse.jsonl", "regola": "(b2) etichetta di documento"}
+{"id_vecchio": "RI-GIRABILITA", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "RI-INTERROGA", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "RI-LETTA", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "RI-LETTO", "dove": "etichette_rimosse.jsonl", "regola": "(b2) etichetta di documento"}
+{"id_vecchio": "RI-MISURA", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "RI-SCRIVA", "dove": "etichette_rimosse.jsonl", "regola": "(b2) etichetta di documento"}
+{"id_vecchio": "RI-VERIFICARE", "dove": "etichette_rimosse.jsonl", "regola": "(b2) etichetta di documento"}
+{"id_vecchio": "RI-VERIFICATI", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "RIDUZIONE-AL-LIMITE", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "RINCULO-RIPETUTI", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "RIORDINO-NOMI-H", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "RIORDINO-POSTO2", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "RIPIEGHI-ZERO", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "RIPIEGO-1", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "RIPRESA-ARGV", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "RISCRITTURA-GO", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "RITMO-AVVIO-FREDDO", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "RITMO-FLAG-SENZA-OGGETTO", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "RITMO-PAVIMENTO", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "RITMOWRAP2", "dove": "etichette_rimosse.jsonl", "regola": "(b2) etichetta di documento"}
+{"id_vecchio": "ROBUSTEZZA-FISICA", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "ROMPI-ANELLO", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "S0", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "S01", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "S02", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "S03", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "S04", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "S05", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "S06", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "S07", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "S08", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "S09", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "S09-MEDIANA", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "S1", "dove": "etichette_rimosse.jsonl", "regola": "(b2) etichetta di documento"}
+{"id_vecchio": "S10", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "S11", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "S12", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "S13", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "S1a", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "S1b", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "S1c", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "S1d", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "S1e", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "S2", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "S2b", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "S3", "dove": "etichette_rimosse.jsonl", "regola": "(b2) etichetta di documento"}
+{"id_vecchio": "S3a", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "S4a", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "S6b", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "S6c", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "S7b", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "S7c", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "S7d", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "S8", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "S8b", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "S8c", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "S8d", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "SCALA-MIN-PASSO", "dove": "etichette_rimosse.jsonl", "regola": "(b2) etichetta di documento"}
+{"id_vecchio": "SCALE-FREE", "dove": "etichette_rimosse.jsonl", "regola": "(b2) etichetta di documento"}
+{"id_vecchio": "SCALE-TW", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "SCENA-1", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "SCHED-PASSO", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "SCHED-T1", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "SCHED-T2-TIPI", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "SCHED-T2-VALIDA", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "SCHED-T3-REGOLE", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "SCHERMATURA-LEGGE-REVISIONE", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "SCHW-CORTI", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "SCHW-SOTTO-LAM", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "SCHWINGER-UN-NODO", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "SCIOGLIMENTO-FASE", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "SCUOT-INNESCO", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "SHAKE-THEN-FREEZE", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "SIGILLO-COMPARATORE-DUPLICATO", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "SIGILLO-CURA2", "dove": "etichette_rimosse.jsonl", "regola": "(b2) etichetta di documento"}
+{"id_vecchio": "SIGILLO-CURA2-RIPARATO", "dove": "etichette_rimosse.jsonl", "regola": "(b2) etichetta di documento"}
+{"id_vecchio": "SIGILLO-REGISTRO-NON-CONFRONTABILE", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "SIGILLO-SENZA-CONFIGURAZIONE", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "SIM-PRIMA-STANTIO", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "SMP-APRI-COMMENTO", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "SOGLIA-MITOSI-3PI", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "SOGLIA-NON-MODULATA", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "SOTTO-PASSO", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "SOVRA-CORREGGE", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "SPINORE-SENZA-FASE", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "STANDARD 1", "dove": "voci.jsonl::alias di STANDARD-1", "regola": "(a3) l'ID conteneva uno SPAZIO: normalizzato, e il nome vecchio RESTA come alias"}
+{"id_vecchio": "STANDARD 10", "dove": "voci.jsonl::alias di STANDARD-10", "regola": "(a3) l'ID conteneva uno SPAZIO: normalizzato, e il nome vecchio RESTA come alias"}
+{"id_vecchio": "STANDARD 2", "dove": "voci.jsonl::alias di STANDARD-2", "regola": "(a3) l'ID conteneva uno SPAZIO: normalizzato, e il nome vecchio RESTA come alias"}
+{"id_vecchio": "STANDARD 3", "dove": "voci.jsonl::alias di STANDARD-3", "regola": "(a3) l'ID conteneva uno SPAZIO: normalizzato, e il nome vecchio RESTA come alias"}
+{"id_vecchio": "STANDARD 4", "dove": "voci.jsonl::alias di STANDARD-4", "regola": "(a3) l'ID conteneva uno SPAZIO: normalizzato, e il nome vecchio RESTA come alias"}
+{"id_vecchio": "STANDARD 5", "dove": "voci.jsonl::alias di STANDARD-5", "regola": "(a3) l'ID conteneva uno SPAZIO: normalizzato, e il nome vecchio RESTA come alias"}
+{"id_vecchio": "STANDARD 6", "dove": "voci.jsonl::alias di STANDARD-6", "regola": "(a3) l'ID conteneva uno SPAZIO: normalizzato, e il nome vecchio RESTA come alias"}
+{"id_vecchio": "STANDARD 7", "dove": "voci.jsonl::alias di STANDARD-7", "regola": "(a3) l'ID conteneva uno SPAZIO: normalizzato, e il nome vecchio RESTA come alias"}
+{"id_vecchio": "STANDARD 8", "dove": "voci.jsonl::alias di STANDARD-8", "regola": "(a3) l'ID conteneva uno SPAZIO: normalizzato, e il nome vecchio RESTA come alias"}
+{"id_vecchio": "STANDARD 9", "dove": "voci.jsonl::alias di STANDARD-9", "regola": "(a3) l'ID conteneva uno SPAZIO: normalizzato, e il nome vecchio RESTA come alias"}
+{"id_vecchio": "STANDARD ⑤", "dove": "voci.jsonl::alias di STANDARD-5", "regola": "(a4) normalizzato COINCIDE con `STANDARD-5`: e' lo stesso oggetto scritto in due modi"}
+{"id_vecchio": "STATI-LOCALI", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "STEP2", "dove": "etichette_rimosse.jsonl", "regola": "(b2) etichetta di documento"}
+{"id_vecchio": "SU2", "dove": "etichette_rimosse.jsonl", "regola": "(b2) etichetta di documento"}
+{"id_vecchio": "SYNCDB-HEADLESS", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "T0", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "T1", "dove": "etichette_rimosse.jsonl", "regola": "(b2) etichetta di documento"}
+{"id_vecchio": "T1a", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "T1b", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "T3a", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "T3b", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "T4-TAUTOLOGICO", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "T6", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "T7", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "T8", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "T9", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "TAGLIA-FINITA", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "TEMPO-LUCE", "dove": "etichette_rimosse.jsonl", "regola": "(b2) etichetta di documento"}
+{"id_vecchio": "TERMOSTATO-E-FRENO", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "TERRA-BUCONERO", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "TETTO-CAUSALE-TEMPO-COORDINATO", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "TORS-SPINTA", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "TORS-W8-AVVOLGIMENTO", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "TRATTI-INTERNI", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "TRIAGE-FINE", "dove": "etichette_rimosse.jsonl", "regola": "(b2) etichetta di documento"}
+{"id_vecchio": "TRIAGE-INIZIO", "dove": "etichette_rimosse.jsonl", "regola": "(b2) etichetta di documento"}
+{"id_vecchio": "TS-1", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "TS-2", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "TS-3", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "TS-4", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "TS-5", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "TS-6", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "TW-1", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "TW-2", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "TW-3", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "TW-4", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "TW-5", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "TW-6", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "TW-DIVISIONE-INCOGNITA", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "U1", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "U2", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "U3", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "U4", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "U5", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "U6", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "U7", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "U7a", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "U7b", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "V0", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "V10", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "V1b", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "V5-SOGLIA", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "V5b", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "V6b", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "VALORE-NULL", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "VELENO-ARCHI-KEEP", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "VELENO-AUTORINFRESCO", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "VELENO-DOMINI", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "VELENO-ORIENTATO", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "VERIFICATA-SP", "dove": "etichette_rimosse.jsonl", "regola": "(b2) etichetta di documento"}
+{"id_vecchio": "VIDEO-SCENA", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "VUOTO-LOCALE-DETERMINISTICO", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "VUOTO-MASSA", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "W1", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "W2", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "W3", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "W4", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "W5", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "X0", "dove": "etichette_rimosse.jsonl", "regola": "(b2) etichetta di documento"}
+{"id_vecchio": "X1", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "X2", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "X3", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "X4", "dove": "etichette_rimosse.jsonl", "regola": "(b2) etichetta di documento"}
+{"id_vecchio": "X5", "dove": "etichette_rimosse.jsonl", "regola": "(b2) etichetta di documento"}
+{"id_vecchio": "X6", "dove": "etichette_rimosse.jsonl", "regola": "(b2) etichetta di documento"}
+{"id_vecchio": "X7", "dove": "etichette_rimosse.jsonl", "regola": "(b2) etichetta di documento"}
+{"id_vecchio": "XI-RUMORE-E-STATO", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "Y0", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "Y1", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "Y10", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "Y2", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "Y3", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "Y4", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "Y5", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "Y5a", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "Y5b", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "Y5c", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "Y6", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "Y7", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "Y8", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "Z0", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "Z1", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "Z10", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "Z100", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "Z101", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "Z102", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "Z103", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "Z104", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "Z105", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "Z106", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "Z107", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "Z108", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "Z109", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "Z11", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "Z110", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "Z111", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "Z112", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "Z113", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "Z114", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "Z115", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "Z116", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "Z117", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "Z118", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "Z119", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "Z12", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "Z120", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "Z121", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "Z122", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "Z123", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "Z124", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "Z125", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "Z127", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "Z128", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "Z13", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "Z130", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "Z134", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "Z135", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "Z136", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "Z14", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "Z142", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "Z144", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "Z145", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "Z146", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "Z147", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "Z148", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "Z15", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "Z16", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "Z17", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "Z18", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "Z19", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "Z1b", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "Z1c", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "Z2", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "Z20", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "Z21", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "Z22", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "Z23", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "Z24", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "Z25", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "Z26", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "Z27", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "Z28", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "Z29", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "Z2b", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "Z3", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "Z30", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "Z31", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "Z32", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "Z33", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "Z34", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "Z35", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "Z36", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "Z37", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "Z38", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "Z39", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "Z4", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "Z40", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "Z41", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "Z42", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "Z43", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "Z44", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "Z45", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "Z46", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "Z47", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "Z48", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "Z49", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "Z4a", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "Z4b", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "Z4c", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "Z4d", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "Z5", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "Z50", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "Z51", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "Z52", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "Z53", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "Z54", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "Z55", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "Z56", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "Z57", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "Z58", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "Z59", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "Z6", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "Z60", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "Z61", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "Z62", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "Z63", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "Z64", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "Z65", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "Z66", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "Z67", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "Z68", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "Z69", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "Z7", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "Z70", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "Z71", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "Z72", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "Z73", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "Z74", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "Z75", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "Z76", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "Z77", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "Z78", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "Z79", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "Z8", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "Z80", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "Z81", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "Z82", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "Z83", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "Z84", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "Z85", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "Z86", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "Z87", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "Z88", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "Z888", "dove": "etichette_rimosse.jsonl", "regola": "(b2) etichetta di documento"}
+{"id_vecchio": "Z89", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "Z9", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "Z90", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "Z91", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "Z92", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "Z93", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "Z94", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "Z95", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "Z96", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "Z97", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "Z98", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "Z99", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
+{"id_vecchio": "ZZ888", "dove": "etichette_rimosse.jsonl", "regola": "(b2) etichetta di documento"}
+{"id_vecchio": "ZZ999", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}

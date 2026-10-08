@@ -1,0 +1,32 @@
+========================================================================================================
+I CONTROLLI DELLA MIGRAZIONE ALLO SCHEMA 2
+========================================================================================================
+  al tag: 953 ID vecchi   ->   voci 867, etichette 85, tracce 974, conflitti 0
+
+  C1 CONSERVAZIONE: ogni ID vecchio in UNO E UNO SOLO posto PASSA   persi 0, doppi 0
+  C2 la TRACCIA copre ogni ID vecchio, con la REGOLA       PASSA   senza traccia 0
+  C3 LE LISTE DEL GUARDIANO: classificazione come indicata PASSA   fuori posto 0
+  C4 IDEMPOTENZA: la seconda esecuzione da' gli STESSI BYTE PASSA   diversi: nessuno
+  C5 `indice.py valida` passa                              PASSA     unicita', metadati, indice invertito e viste: **TUTTO A PO
+  C6 la VISTA compatibile fa girare `_indice_id.py --blocca SI` PASSA   12 bloccanti su 867 voci
+========================================================================================================
+C7 I CONTEGGI
+========================================================================================================
+  classe    DIFETTO=441  FRONTE=166  CRITERIO=91  MISURA=54  TEORIA=51  CURA=46  PRESIDIO=16  STANDARD=2
+  dominio   DA_CLASSIFICARE=664  FISICA=94  METODO=79  INFRASTRUTTURA=30
+  era       DA_CLASSIFICARE=713  ENTRAMBE=65  1=46  2=43
+  stato     DA_CLASSIFICARE=480  CHIUSA=187  APERTA=111  SOSPESA=46  AGENDA=43
+
+  LE REGOLE DELLA MIGRAZIONE, per quante volte hanno deciso:
+      (a)       629
+      (b3)      228
+      (b2)       84
+      (a2)       21
+      (a3)       10
+      (b0)        1
+      (a4)        1
+
+  bloccanti fra le voci: 12
+  etichette rimosse: 85, con 1633 citazioni in tutto
+========================================================================================================
+I CONTROLLI: 6 su 6   ### TUTTI PASSATI

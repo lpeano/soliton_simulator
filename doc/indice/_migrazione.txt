@@ -1,0 +1,16 @@
+========================================================================================================
+LA MIGRAZIONE DELL'INDICE ALLO SCHEMA 2 -- dal tag era-1-secondo-ordine
+========================================================================================================
+  voci al tag: 953
+  SEGNAPOSTO <<(CITATO N volte, MAI definito in un registro)>>: 320
+  ALIAS DELL'ERA 1 BONIFICATI: 21 diventati COLLEGAMENTI (erano ID di voci), 0 tolti (condivisi fra piu' voci)
+  ID dichiarati <<etichetta, non ID>> in una nota [SENZA-INDICE]: 347
+      -> ID di VOCABOLARIO (regola b0): 1
+      -> alias di una voce vera: 1
+      -> di cui DICHIARATI etichetta in una nota [SENZA-INDICE]: 12
+      -> etichette di documento (fuori da voci.jsonl): 84
+      -> restano DA_CLASSIFICARE: 234
+  LISTE DEL GUARDIANO applicate: L1 62/62, L2 43/43, L3 46/46
+  STRUTTURALE: TEORIA 49, criteri con padre 0, restano DA_CLASSIFICARE 480
+
+  scritti voci.jsonl (867), etichette_rimosse.jsonl (85), migrazione_era1.jsonl (974), conflitti_era1.jsonl (0)

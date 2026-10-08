@@ -36,7 +36,7 @@ cancella)*.
 
 | campo | tipo | |
 |---|---|---|
-| `id` | `^[A-Z0-9][A-Z0-9:_-]*$` | ### **unico** |
+| `id` | `^[A-Z0-9][A-Za-z0-9:_./()\[\]-]*$` | ### **unico**. ### ⚠ **La regex è larga PER UNA REGOLA:** *«i reperti non si riscrivono»* — `96` ID dell'era `1` hanno minuscole o punteggiatura *(`A2b`, `H-P1-bis`, `COMPONENTI:S3b`, `CONFIG-1/`, `INERZIA-1(C)`)*, e rifiutarli voleva dire ### **rinominarli**. Pretende ### **la maiuscola iniziale** e vieta ### **lo spazio** |
 | `alias` | lista di id | i nomi vecchi, che ### **non si riscrivono mai** |
 | `titolo` | ≤ `100` caratteri | ### ⛔ **SOLO PER UMANI** |
 | `descrizione` | testo libero | ### ⛔ **SOLO PER UMANI** |

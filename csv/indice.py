@@ -46,7 +46,13 @@ CLASSI = ("DIFETTO", "CURA", "MISURA", "CRITERIO", "PRESIDIO", "STANDARD", "TEOR
 DOMINI = ("FISICA", "METODO", "INFRASTRUTTURA", "DOCUMENTAZIONE", "DA_CLASSIFICARE")
 ERE = ("1", "2", "ENTRAMBE", "DA_CLASSIFICARE")
 STATI = ("APERTA", "IN_CORSO", "CHIUSA", "SOSPESA", "SUPERATA", "AGENDA", "DA_CLASSIFICARE")
-RE_ID = re.compile(r"^[A-Z0-9][A-Z0-9:_-]*$")
+# ### ⚠ **LA REGEX E' PIU' LARGA DI COME L'AVEVO SCRITTA, e il motivo e' una REGOLA:**
+# ### *«i REPERTI non si riscrivono -- il nome vecchio RESTA»* (`CLAUDE.md` par.9). La
+# ### migrazione ha trovato ### **96 ID esistenti** che la regex stretta avrebbe rifiutato:
+# ### `A2b` `A3c` `H-P1-bis` `E4a` `COMPONENTI:S3b` `CONFIG-1/` `INERZIA-1(C)` ...
+# ### ➜ **Rifiutarli voleva dire RINOMINARLI**, e quello non si fa. La regex pretende
+# ### ### **la MAIUSCOLA iniziale** e vieta lo spazio: il resto lo ammette.
+RE_ID = re.compile(r"^[A-Z0-9][A-Za-z0-9:_./()\[\]-]*$")
 RE_META = re.compile(r"^[a-z][a-z0-9_]*$")
 
 # ### LE TRANSIZIONI AMMESSE: la tavola di doc/INDICE_SCHEMA.md, in codice.
@@ -297,8 +303,9 @@ def vista_tsv(voci):
             m.get("tipo_era1", v["classe"].lower()), m.get("famiglia_era1", "?"),
             (v["descrizione"] or "").replace(TAB, " ").replace(NL, " ")[:900],
             m.get("avanzamento_era1", "(senza marcatore)"),
-            str(v["aggiornata"].get("data", "")),
-            (v["chiusura"].get("criterio", "") or v["superata_da"] or "")[:200],
+            m.get("revisione_era1", "") or str(v["aggiornata"].get("data", "")),
+            (m.get("motivo_era1", "")
+             or v["chiusura"].get("criterio", "") or v["superata_da"] or "")[:1000],
             (m.get("nota_guardiano", "") or "").replace(TAB, " ")[:300],
             v["stato_era_1"], m.get("si_riferisce_a_era1", ""),
         ]))
