@@ -1822,6 +1822,73 @@ def main():
                  if "ZERO DIFFERENZE" in _rr9 else "DIFFERENZE",
                  _p9.group(1) if _p9 else "n/d"))
             A("")
+        # ---- ### ⭐ **`A16`: L ANNOTAZIONE SU `B-SCAL-TS-NOSYNC`**
+        A("## ⭐ **E SOTTO `A16`: LA CLAUSOLA «SENZA BAGNO NON ESPLODE» QUI PASSA** "
+          "*(annotazione del 2026-10-08, dai json già committati)*")
+        A("")
+        _k1n, _kzn = min(ens), max(ens)
+        _tpre1, _tpreZ = ens[_k1n]["T_pre"], ens[_kzn]["T_pre"]
+        _tpos1, _tposZ = ens[_k1n]["T_post"], ens[_kzn]["T_post"]
+        A("| la lettura della cinetica | al passo `%s` | al passo `%s` | ### **la crescita** | la soglia | ### **l esito** |" % (_k1n, _kzn))
+        A("|---|--:|--:|--:|--:|---|")
+        for _et, _a, _b in (("`T_PRE` *(PRIMA del passo)*", _tpre1, _tpreZ),
+                            ("`T_POST` *(DOPO il passo)*", _tpos1, _tposZ)):
+            _r = _b / _a if _a else None
+            A("| %s | %s | %s | ### **×%s** | `×3` | %s |"
+              % (_et, n4(_a), n4(_b), n4(_r),
+                 ("### ✔ **PASSA**" if _r and _r < 3.0
+                  else "### ⛔ **NON passa**")))
+        A("")
+        A("> ### ⚠ **DUE LETTURE DELLO STESSO DATO, RICONCILIATE invece di scelte.** Il "
+          "guardiano ha scritto `%s → %s` *(`×%s`)*, cioè la cinetica ### **PRIMA** del "
+          "passo; io avevo riportato `%s → %s` *(`×%s`)*, cioè ### **DOPO**. ### **Le "
+          "due differiscono perché il PRIMO passo inietta `%s` nella cinetica**, e lo "
+          "stato iniziale non è in equilibrio. ### ➜ **La clausola `< ×3` PASSA in "
+          "entrambe le letture**, e i criteri di `D2-BIS` usavano `T_POST`: lo dico "
+          "perché i due numeri non si leggano come un disaccordo."
+          % (n4(_tpre1), n4(_tpreZ), n4(_tpreZ / _tpre1), n4(_tpos1), n4(_tposZ),
+             n4(_tposZ / _tpos1), n4(_tpos1 - _tpre1)))
+        A("")
+        _dua = {}
+        for _et9, _a9, _b9 in (("`1..215`", 1, 215), ("`216..500`", 216, 500)):
+            _f9 = [(k, v) for k, v in sorted(ens.items()) if _a9 <= k <= _b9]
+            if not _f9:
+                continue
+            _dua[_et9] = sum((v["dU_A_chiude_il_precedente"] or {}).get("totale", 0.0)
+                             for _k, v in _f9
+                             if v.get("dU_A_chiude_il_precedente"))
+        A("| finestra | ### **`Σ(dU_A)`** | `Σ(dT + dU_φ)` | `H` alla fine − `H` all inizio |")
+        A("|---|--:|--:|--:|")
+        for _et9, _a9, _b9 in (("`1..215`", 1, 215), ("`216..500`", 216, 500)):
+            _f9 = [(k, v) for k, v in sorted(ens.items()) if _a9 <= k <= _b9]
+            if not _f9:
+                continue
+            _fi = sum(v["dT"] + v["dU_phi"] for _k, v in _f9)
+            _hh = ens[_b9]["H_pre"] - ens[_a9]["H_pre"]
+            A("| %s | ### **%s** | %s | %s |"
+              % (_et9, n4(_dua.get(_et9)), n4(_fi), n4(_hh)))
+        A("")
+        _d1a, _d2a = _dua.get("`1..215`"), _dua.get("`216..500`")
+        if _d1a is not None and _d2a is not None:
+            A("> ### ⭐ **IPOTESI DEL GUARDIANO, E LA SCRIVO COME TALE:** la crescita "
+              "residua di `H` viene ### **quasi tutta dal lavoro di `A` che cambia**, e "
+              "quel lavoro ### **cambia SEGNO fra le due finestre** — `%s` su `1..215` "
+              "e ### **%s** su `216..500`. ### ➜ **Letto così è un ASSESTAMENTO INIZIALE "
+              "DEI PESI, non una pompa continua.**" % (n4(_d1a), n4(_d2a)))
+            A("")
+            A("> ### ⚠ **E RESTA UN IPOTESI, per due ragioni che dico io:** ### **(1)** "
+              "un cambio di segno su DUE finestre non è un assestamento ### **misurato**: "
+              "servirebbe la curva di `dU_A` nel tempo, e il criterio su quando si "
+              "esaurisce; ### **(2)** in questo braccio ### **non nasce niente**, quindi "
+              "`dU_A` è ### **tutto e solo `w` che cambia** — su una corsa con nascite il "
+              "numero mescolerebbe due cose. ### **La misura che la chiuderebbe non c è, e "
+              "non la spaccio per fatta.**")
+            A("")
+        A("> ### ⛔ **E SOTTO `A16` QUESTO BRACCIO RESTA UNA DIAGNOSI, non un modello:** "
+          "`phivel` e `M_PH` sono ### **secondo ordine** e l assioma non li ammette; la "
+          "coppia del simulatore ### **non deriva da `H`**. ### **Il piano è in "
+          "`doc/RISCRITTURA_PRIMO_ORDINE.md`, e il simulatore NON è toccato.**")
+        A("")
         A("---")
         A("")
     A("# ⭐ **LE MIE PREVISIONI, CONTRO I NUMERI**")

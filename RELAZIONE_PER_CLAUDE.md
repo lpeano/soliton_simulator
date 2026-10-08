@@ -10093,3 +10093,75 @@ sostituisco nel messaggio DALL'OUTPUT del comando**, e i commit pushati ### **no
 > ### **La lettura della serie:** i forzanti globali *(`H3`)* non erano la causa; la
 > sincronizzazione ### **pompa energia ma NON tiene le masse**; quello che le tiene è
 > ### **la forma della coppia** *(`H2`)*. ### **La decisione è di Luca.**
+
+---
+
+# ❗ **`A16`: REGISTRO, PIANO DELLA RISCRITTURA, E LE SEI VOCI COLLEGATE** *(2026-10-08)*
+
+> ### ⛔ **L'assioma è committato DA SOLO in `e17a334`**, con l'autorizzazione esplicita di Luca
+> e ### **solo per aggiungere `A16`**: `39` righe aggiunte, ### **`0` tolte**, e la coda del
+> file ### **identica byte per byte**. ### **Il simulatore NON è toccato: resta `b8c21049`.**
+
+## ⭐ **IL DOCUMENTO: `doc/RISCRITTURA_PRIMO_ORDINE.md`**
+
+Cinque parti: la ### **forma proposta** di `H`; ### **che cosa sparisce**, con il numero che lo
+giustifica; ### **che cosa deve rinascere** e non è ancora scritto; ### **i fatti misurati** di
+`D1`, `D2`, `D2-BIS`, `D2-TER` e `D3`; e ### **che cosa il documento NON dice.**
+
+### ⚠ **E LA PROVENIENZA DI OGNI NUMERO È ESPLICITA**, perché `L-NUMERI` dice che un numero
+ricopiato non ha provenienza. Li ho ### **ricalcolati uno per uno dai json** con uno script di
+verifica, e il controllo ha trovato ### **un difetto suo, non del documento**: sulla quota
+quadratica metteva le due classi ### **insieme** e dava `99.6` invece di `99.45` *(vuoto)* e
+`99.42` *(masse)*. ### **Curato il controllo.** ### ⛔ **E due numeri — `2.55e-06` e `1.18e-01`
+— NON vengono da un referto:** vengono dal collaudo del gradiente, la cui uscita ### **non è
+committata come file**, e il documento ### **lo dichiara** indicando il comando che la
+ri-ottiene.
+
+## ⭐ **LA SCHEDA NEL REGISTRO, E LE SEI VOCI COLLEGATE SENZA CHIUDERLE**
+
+`doc/REGISTRO_FISICA.md`: `42` righe aggiunte, ### **`0` tolte**, coda ### **identica byte per
+byte**. La scheda dice che `A16` ### **nasce già violato** e porta la tavola delle sei
+violazioni coi numeri.
+
+### **Le sei voci collegate:** `SPINORE-SENZA-FASE` · `ENERGIA-NON-DEFINITA` · `CENS-A1` ·
+`PHI0-CONGELATA` · `M-LEGAMI` · `FRECCE-IMPOSTE`. ### ⛔ **Nessuna è chiusa, e non è una
+promessa: si tocca SOLO la colonna `nota`, e il controllo verifica che le altre `12` colonne
+siano IDENTICHE su tutte le `953` voci.** Per ciascuna è scritto ### **perché proprio quella**,
+col numero che la lega ad `A16`.
+
+## ✔ **E UNA RICONCILIAZIONE, NON UNA SCELTA**
+
+Sulla cinetica di `B-SCAL-TS-NOSYNC` il guardiano scrive `1001 → 2488` *(`×2.49`)*, io avevo
+riportato `1222.92 → 2491.86` *(`×2.04`)*. ### **Sono DUE LETTURE DELLO STESSO DATO:**
+
+| la lettura | al `1` | al `500` | la crescita | esito contro `×3` |
+|---|--:|--:|--:|---|
+| `T_PRE` *(prima del passo)* | `1000.5497` | `2487.5607` | ### **`×2.4862`** | ### ✔ **PASSA** |
+| `T_POST` *(dopo il passo)* | `1222.9194` | `2491.8632` | ### **`×2.0376`** | ### ✔ **PASSA** |
+
+### ➜ **Le due differiscono perché il PRIMO passo inietta `222.3697` nella cinetica** *(lo stato
+iniziale non è in equilibrio)*. ### **La clausola «senza bagno non esplode» PASSA in entrambe le
+letture**, e i criteri di `D2-BIS` usavano `T_POST`. ### **Lo scrivo perché i due numeri non si
+leggano come un disaccordo.**
+
+## ⭐ **L'IPOTESI SULL'ASSESTAMENTO DEI PESI, SCRITTA COME IPOTESI**
+
+| finestra | ### **`Σ(dU_A)`** | `Σ(dT + dU_φ)` | `ΔH` |
+|---|--:|--:|--:|
+| `1..215` | ### **`+21435.8389`** | `+1559.4201` | `+22988.5679` |
+| `216..500` | ### **`−4284.3679`** | `+2640.0422` | `−1587.6109` |
+
+Il lavoro di `A` ### **cambia segno** fra le due finestre: letto così è un ### **assestamento
+iniziale dei pesi, non una pompa continua**. ### ⚠ **E resta un'ipotesi, per due ragioni che
+dico io:** un cambio di segno su ### **due** finestre non è un assestamento ### **misurato**
+*(servirebbe la curva di `dU_A` nel tempo e il criterio su quando si esaurisce)*; e in questo
+braccio ### **non nasce niente**, quindi `dU_A` è ### **tutto e solo `w` che cambia** — su una
+corsa con nascite il numero mescolerebbe due cose. ### **La misura che la chiuderebbe non c'è, e
+non la spaccio per fatta.**
+
+> ### ⛔ **E `D3` RESTA INCOMPIUTO, e lo dico:** la corsa `B-U2-TS-NOSYNC` si è ### **FERMATA
+> sulla mia guardia** — al primo passo `_psi_spinor` non esiste ancora, perché
+> `_passo_spinoriale` gira ### **dopo** la coppia. La correzione *(ridurre la forma al suo
+> limite `U(1)`, che il collaudo verifica esatto, e ### **contare** quei passi)* è
+> ### **scritta e non applicata**, perché il sigillo in corsa ### **importa** quel file
+> *(par.5)*. ### **Il collaudo della forma `U(2)`, però, è chiuso: `9` su `9`.**

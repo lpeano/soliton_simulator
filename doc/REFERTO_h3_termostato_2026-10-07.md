@@ -630,6 +630,26 @@ Dal commit atomico *(`:7831`)* `phi(t+1) = (phi_t + dt_n·phivel(t+1) + delta_sy
 
 > ### ⭐ **E IL CONTROLLO PIÙ FORTE SULLA FISICA NON È IL SIGILLO: È LA RI-ESECUZIONE.** `B-SCAL-TS` rigirato col blob nuovo contro il file ### **già committato** dà ### **ZERO DIFFERENZE su 44498 coppie di valori** su ### **501** passi in comune, confrontando ogni contatore e ogni voce del bilancio in entrambe le classi. ### **Le voci che `D2-TER` ha aggiunto sono dichiarate ESCLUSE nel file del confronto**, perché nel vecchio non esistono.
 
+## ⭐ **E SOTTO `A16`: LA CLAUSOLA «SENZA BAGNO NON ESPLODE» QUI PASSA** *(annotazione del 2026-10-08, dai json già committati)*
+
+| la lettura della cinetica | al passo `1` | al passo `500` | ### **la crescita** | la soglia | ### **l esito** |
+|---|--:|--:|--:|--:|---|
+| `T_PRE` *(PRIMA del passo)* | 1000.5497 | 2487.5607 | ### **×2.4862** | `×3` | ### ✔ **PASSA** |
+| `T_POST` *(DOPO il passo)* | 1222.9194 | 2491.8632 | ### **×2.0376** | `×3` | ### ✔ **PASSA** |
+
+> ### ⚠ **DUE LETTURE DELLO STESSO DATO, RICONCILIATE invece di scelte.** Il guardiano ha scritto `1000.5497 → 2487.5607` *(`×2.4862`)*, cioè la cinetica ### **PRIMA** del passo; io avevo riportato `1222.9194 → 2491.8632` *(`×2.0376`)*, cioè ### **DOPO**. ### **Le due differiscono perché il PRIMO passo inietta `222.3697` nella cinetica**, e lo stato iniziale non è in equilibrio. ### ➜ **La clausola `< ×3` PASSA in entrambe le letture**, e i criteri di `D2-BIS` usavano `T_POST`: lo dico perché i due numeri non si leggano come un disaccordo.
+
+| finestra | ### **`Σ(dU_A)`** | `Σ(dT + dU_φ)` | `H` alla fine − `H` all inizio |
+|---|--:|--:|--:|
+| `1..215` | ### **21435.8389** | 1559.4201 | 22988.5679 |
+| `216..500` | ### **-4284.3679** | 2640.0422 | -1587.6109 |
+
+> ### ⭐ **IPOTESI DEL GUARDIANO, E LA SCRIVO COME TALE:** la crescita residua di `H` viene ### **quasi tutta dal lavoro di `A` che cambia**, e quel lavoro ### **cambia SEGNO fra le due finestre** — `21435.8389` su `1..215` e ### **-4284.3679** su `216..500`. ### ➜ **Letto così è un ASSESTAMENTO INIZIALE DEI PESI, non una pompa continua.**
+
+> ### ⚠ **E RESTA UN IPOTESI, per due ragioni che dico io:** ### **(1)** un cambio di segno su DUE finestre non è un assestamento ### **misurato**: servirebbe la curva di `dU_A` nel tempo, e il criterio su quando si esaurisce; ### **(2)** in questo braccio ### **non nasce niente**, quindi `dU_A` è ### **tutto e solo `w` che cambia** — su una corsa con nascite il numero mescolerebbe due cose. ### **La misura che la chiuderebbe non c è, e non la spaccio per fatta.**
+
+> ### ⛔ **E SOTTO `A16` QUESTO BRACCIO RESTA UNA DIAGNOSI, non un modello:** `phivel` e `M_PH` sono ### **secondo ordine** e l assioma non li ammette; la coppia del simulatore ### **non deriva da `H`**. ### **Il piano è in `doc/RISCRITTURA_PRIMO_ORDINE.md`, e il simulatore NON è toccato.**
+
 ---
 
 # ⭐ **LE MIE PREVISIONI, CONTRO I NUMERI**

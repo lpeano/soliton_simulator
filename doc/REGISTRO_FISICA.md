@@ -46,6 +46,48 @@ che rifiuta un commit a `soliton_simulator.py` che non tocchi il registro, salvo
 
 **⚠ IL LIMITE, dichiarato invece che nascosto:** **non distingue una modifica di LEGGE da una di COMMENTO.** Distinguerle richiederebbe un confronto di AST fra le due versioni, e **un commento che descrive una legge è parte della legge** *(i commenti stale sono un difetto documentato di questo repo)*. **Quindi è più severo del necessario**, e le modifiche davvero non fisiche passano per `[SENZA-FISICA: <motivo>]`.
 
+## ⛔ **LA DECISIONE DEL 2026-10-08: `A16`, E LA RISCRITTURA AL PRIMO ORDINE**
+
+> ### **Decisione di Luca.** L'assioma sta in `doc/ASSIOMI.md` *(`A16`, in testa)*, il piano in
+> **`doc/RISCRITTURA_PRIMO_ORDINE.md`**, il banco in `proto_primo_ordine/`.
+> ### ⛔ **E IL SIMULATORE NON È TOCCATO: resta `b8c21049`.**
+
+### **CHE COSA CAMBIA NELLA FISICA DEL MODELLO.** `A16` fissa che ### **lo stato di nodo è uno
+solo** *(`ψ_k ∈ C²`, e `φ` si LEGGE da `ψ`)* e che ### **ogni legge che fa evolvere uno stato è
+del primo ordine e deriva dalla stessa `H`** *(`i·dψ/dt = ∂H/∂ψ*`)*. ### ➜ **Non è una legge
+nuova: è un VINCOLO SULLA FORMA di tutte le leggi**, come gli altri assiomi.
+
+### ⛔ **E NASCE GIÀ VIOLATO, dal cuore del simulatore di oggi**, con i numeri misurati:
+
+| che cosa viola `A16` | il numero |
+|---|---|
+| `phivel` con l'inerzia `M_PH` — ### **secondo ordine** *(`:7760`, `:7830`)* | — *(è la forma stessa della legge)* |
+| la coppia come ### **forza che non deriva da `H`** | il collaudo di `D3` dà scarto ### **`1.054`** contro la forma `U(2)`; il collaudo del gradiente dà ### **`1.18e-01`** per una coppia non di gradiente contro `2.55e-06` per una che lo è |
+| ### **DUE orologi** per nodo: `φ/2` e la fase comune `α` dello spinore | ### **`rms(wrap(α − φ/2)) = 1.9716`** radianti *(mediana `1.7377`)* |
+| il termostato sulle ### **velocità** | nella decomposizione di `dT` vale `+394.5614` contro `+8804.8634` della coppia |
+| la sincronizzazione che sposta `φ` ### **fuori** dalla dinamica *(`:7805`)* | toglierla costa il ### **`93.44 %`** della crescita di `H` a `A` fissa, e ### **non costa coerenza** *(`AUC` al `400` da `0.9394` a `0.9333`)* |
+| lo scuotimento come ### **calcio additivo** | ### **non fa lavoro: inietta varianza** — quota quadratica `99.45 %` nel vuoto, `99.42 %` nelle masse |
+
+### ⭐ **IL FATTO CHE HA DECISO:** ciò che tiene le masse coerenti è ### **la forma della
+coppia** *(un gradiente di un'energia che legge la fase che muove)*; ciò che pompa energia sono
+### **i forzanti e la sincronizzazione**, che ### **non ordinano**. ### ➜ **Quindi non manca una
+legge in più: ne mancano di MENO, e scritte da una sola `H`** — ed è esattamente `9-ter`
+*(«una cura non aumenta il numero delle leggi»)* portato alla sua conclusione.
+
+### **LE VOCI CHE `A16` RENDE DA RILEGGERE, e che NON si chiudono qui** *(si chiudono con
+misure, e il collegamento è nella colonna `nota` dell'indice)*:
+`SPINORE-SENZA-FASE` · `ENERGIA-NON-DEFINITA` · `CENS-A1` · `PHI0-CONGELATA` · `M-LEGAMI` ·
+`FRECCE-IMPOSTE`, più ### **le memorie provvisorie** *(`A15.1`: nessuna memoria congelata; e nel
+prototipo `w` e `U` sono ### **fissi**, dichiarato come violazione provvisoria di `A16.3`)*.
+
+### ⚠ **E COSA QUESTA SCHEDA NON DICE:** non fissa la ### **forma di `H`** *(il termine non
+lineare, le matrici d'arco, i pesi: `A16` dice che si decidono ### **con misure**)*; non dice
+che il prototipo sostituisca il simulatore *(è un ### **banco**, fuori e senza importarlo)*; e
+non dice che la simulazione sia meccanica quantistica — su un grafo di migliaia di nodi è
+### **un campo con la FORMA della dinamica quantistica**, non uno stato a molti corpi.
+
+---
+
 ## COSA C'È DA COPRIRE — **dalla `FASE A`, misurato, non stimato**
 
 **`164` scritture di stato su `27` grandezze, di cui `65` CONCATENAZIONI**, più `313` scritture su
