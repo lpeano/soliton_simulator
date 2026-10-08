@@ -60,7 +60,8 @@ def carica(p):
 def main():
     br = {}
     for nome, f in (("base", "h3_base.json"), ("B-T", "h3_bt.json"),
-                    ("B-S", "h3_bs.json"), ("B-TS", "h3_bts.json")):
+                    ("B-S", "h3_bs.json"), ("B-TS", "h3_bts.json"),
+                    ("B-SCAL", "h3_bscal.json")):
         d = carica(os.path.join(DIR, f))
         if d and not d.get("_errore"):
             br[nome] = d
@@ -94,6 +95,10 @@ def main():
     A("| braccio | passi | stato | secondi | che cosa gli è stato fatto |")
     A("|---|--:|---|--:|---|")
     _DESC = {"base": "### **niente** — è la dinamica di sempre",
+             "B-SCAL": "### **`D2`:** `_coppia_interferenza` prende il suo ### **RAMO "
+                       "SCALARE**, quello che dipende dalla ### **FASE CORRENTE** "
+                       "*(`z = e^{iφ}`)*. ### ⚠ **Il flag è spento SOLO durante la chiamata** "
+                       "e ripristinato in un `finally`: gira il ramo ### **del simulatore**",
              "B-TS": "### **I DUE INSIEME:** `scuoti_vuoto` inerte ### **e** `xi_termo` "
                      "azzerata. ### **Il sistema vive solo della sua energia iniziale e della "
                      "dinamica interna.** ### ⚠ **Eredita da `B-T` il non essere un "
@@ -104,7 +109,7 @@ def main():
                     "### **«termostato senza memoria»**",
              "B-S": "### **`scuoti_vuoto` sostituita** con una funzione della stessa firma "
                     "che ### **non fa niente**"}
-    for nome in ("base", "B-T", "B-S", "B-TS"):
+    for nome in ("base", "B-T", "B-S", "B-TS", "B-SCAL"):
         if nome not in br:
             A("| `%s` | — | ### ⛔ **ASSENTE** | — | %s |" % (nome, _DESC[nome]))
             continue
@@ -352,16 +357,16 @@ def main():
             _auc_ct[int(k)] = v.get("auc_materia_vuoto")
     PM = [1, 50, 150, 230, 300, 400, 500]
     A("| passo | AUC ### **`B-T`** | AUC ### **`B-S`** | AUC ### **`B-TS`** | "
-      "AUC controllo *(`A-S1`)* |")
-    A("|--:|--:|--:|--:|--:|")
+      "AUC ### **`B-SCAL`** | AUC controllo *(`A-S1`)* |")
+    A("|--:|--:|--:|--:|--:|--:|")
     for k in PM:
         row = []
-        for nome in ("B-T", "B-S", "B-TS"):
+        for nome in ("B-T", "B-S", "B-TS", "B-SCAL"):
             h = H(nome)
             m = (h or {}).get("misure", {}).get(str(k)) if h else None
             row.append(n4((m or {}).get("auc_materia_vuoto")))
-        A("| `%d` | ### **%s** | ### **%s** | ### **%s** | %s |"
-          % (k, row[0], row[1], row[2], n4(_auc_ct.get(k))))
+        A("| `%d` | ### **%s** | ### **%s** | ### **%s** | ### **%s** | %s |"
+          % (k, row[0], row[1], row[2], row[3], n4(_auc_ct.get(k))))
     A("")
     _es = {}
     for nome in ("B-T", "B-S"):
@@ -536,6 +541,181 @@ def main():
             A("")
         A("---")
         A("")
+    # ================================================================== D1
+    A("---")
+    A("")
+    A("# `D1` ⭐ **LA POTENZA DELLA COPPIA: pompa o ridistribuisce?**")
+    A("")
+    A("> ### ⛔ **IL CRITERIO, FISSATO PRIMA** *(mandato di Luca)*: "
+      "### **`LA COPPIA POMPA`** se `P_coppia` nelle masse è ### **positiva in almeno l'`80 %`** "
+      "dei passi `1..230` ### **E** la sua ### **somma** su quei passi è positiva; "
+      "### **`NON POMPA`** se quella somma è ### **`<= 0`**; fra i due ### **la curva.**")
+    A("")
+    A("Le tre potenze, nella ### **stessa unità** *(lavoro per unità di tempo proprio)*: "
+      "### **`P_coppia = Σ coppia_k·p1_k`** *(forza × velocità: la potenza vera)*, "
+      "`P_termo = −xi·Σ p1²`, e ### ⚠ **`P_scuoti = Σ p0·Δscuoti/dt_n`, che è un ANALOGO "
+      "DICHIARATO** — lo scuotimento è un ### **calcio additivo**, non una forza.")
+    A("")
+    pb = passi("base")
+    _kk = [k for k in sorted(pb) if k >= 1 and pb[k].get("per_classe")]
+    for cl in ("masse", "vuoto"):
+        A("## la classe ### **%s**" % cl.upper())
+        A("")
+        A("| passo | ### **`P_coppia`** | `P_termo` | `P_scuoti` *(analogo)* | `\\|coppia_k\\|` mediana |")
+        A("|--:|--:|--:|--:|--:|")
+        for k in [x for x in (1, 10, 25, 50, 100, 200, 300) if x in pb]:
+            v = (pb[k].get("per_classe") or {}).get(cl)
+            if not v or v.get("P_coppia") is None:
+                A("| `%d` | n/d | n/d | n/d | n/d |" % k)
+                continue
+            A("| `%d` | ### **%s** | %s | %s | %s |"
+              % (k, n4(v["P_coppia"], 2), n4(v["P_termo"], 2), n4(v["P_scuoti"], 2),
+                 n4(v.get("coppia_mediana_assoluta"))))
+        A("")
+        _lim = [k for k in _kk if k <= 230]
+        _v = [(pb[k].get("per_classe") or {}).get(cl, {}).get("P_coppia") for k in _lim]
+        _v = [x for x in _v if x is not None]
+        if _v:
+            _pos = sum(1 for x in _v if x > 0)
+            _som = sum(_v)
+            A("| sui passi `1..230` | |")
+            A("|---|--:|")
+            A("| passi con `P_coppia` ### **positiva** | ### **%s su %s** *(%s)* |"
+              % (n4(_pos), n4(len(_v)), pct(float(_pos) / len(_v))))
+            A("| ### **somma di `P_coppia`** | ### **%s** |" % n4(_som, 2))
+            A("")
+            if cl == "masse":
+                _d1_pos, _d1_tot, _d1_som = _pos, len(_v), _som
+    # --- l'esito di `D1`
+    if "_d1_som" in dir():
+        _q = float(_d1_pos) / max(_d1_tot, 1)
+        if _d1_som <= 0:
+            A("> ### ✔ **`NON POMPA`:** la somma di `P_coppia` nelle masse sui passi `1..230` è "
+              "### **%s `<= 0`**." % n4(_d1_som, 2))
+        elif _q >= 0.80:
+            A("> ### ⛔ **`LA COPPIA POMPA`.** `P_coppia` nelle masse è positiva nel "
+              "### **%s** dei passi `1..230` *(soglia `80 %%`)* ### **e la somma è %s `> 0`.**"
+              % (pct(_q), n4(_d1_som, 2)))
+            A("")
+            A("> ### ⚠ **E LO AVEVO DICHIARATO GIÀ NOTO PRIMA DI GIRARE:** la voce `coppia` "
+              "del bilancio di `H3` è un ### **multiplo POSITIVO** di `P_coppia` "
+              "*(`voce = (2/M_PH)·media(dt_n·coppia·p1)`, con `dt_n > 0`)*, ed era positiva in "
+              "### **`230` passi su `230`** nelle masse. ### **La corsa non lo SCOPRE: lo "
+              "misura nell'unità giusta e lo mette accanto alle altre due potenze.**")
+        else:
+            A("> ### ⚠ **FRA I DUE:** la somma è ### **%s `> 0`** ma i passi positivi sono il "
+              "### **%s**, sotto la soglia dell'`80 %%`. ### **Si riporta la curva.**"
+              % (n4(_d1_som, 2), pct(_q)))
+        A("")
+    # --- il segno di `P_termo`
+    _st = [(k, (pb[k].get("per_classe") or {}).get("vuoto", {}).get("P_termo")) for k in _kk]
+    _st = [(k, x) for k, x in _st if x is not None]
+    _neg = [k for k, x in _st if x < 0]
+    _posT = [k for k, x in _st if x > 0]
+    if _neg and _posT:
+        A("> ### ⭐ **E `P_termo` CAMBIA SEGNO, come in `H3`:** positiva *(rifornisce)* su "
+          "### **%d** passi, negativa *(frena)* su ### **%d**, e il primo passo negativo è il "
+          "### **`%d`**." % (len(_posT), len(_neg), min(_neg)))
+        A("")
+    A("---")
+    A("")
+    # ================================================================== D2
+    hsc = H("B-SCAL")
+    if hsc:
+        A("# `D2` ⭐ **UNA COPPIA CHE LEGGE LA FASE: il ramo SCALARE**")
+        A("")
+        A("> ### ⛔ **DA DICHIARARE, e il mandato lo impone:** il ramo scalare usa "
+          "### **`cos(φ_k − φ_j)`**, ### **NON `cos((φ_k − φ_j)/2)`** come nella direzione "
+          "candidata di Luca. ### **È un test sul PRINCIPIO** *(una coppia che dipende dalla "
+          "fase che muove)*, ### **NON sulla forma finale: un esito positivo NON decide la "
+          "cura.**")
+        A("")
+        A("> ### ⛔ **I CRITERI, FISSATI PRIMA:** "
+          "### **`UNA COPPIA CHE LEGGE LA FASE TIENE LE MASSE`** se l'AUC al `400` è "
+          "### **`>= 0.85`** ### **E** l'energia totale al `500` è ### **minore** che nel "
+          "controllo; ### **`NON BASTA`** se l'AUC al `400` è ### **`< 0.6`**; fra i due la "
+          "curva ### **e il confronto al passo `230`.**")
+        A("")
+        # --- la verifica in tre pezzi
+        _c = hsc.get("verifica_d2") or {}
+        A("### ✔ **LA VERIFICA DELL'INTERVENTO — MISURATA, non promessa**")
+        A("")
+        A("| | |")
+        A("|---|--:|")
+        A("| chiamate a `_coppia_interferenza` | ### **%s** |" % n4(_c.get("chiamate")))
+        A("| ripristini del flag | ### **%s** |" % n4(_c.get("ripristini")))
+        A("| ### **firme del settore spinoriale DIVERSE** *(prima/dopo)* | ### **%s** |"
+          % n4(_c.get("firme_diverse")))
+        A("| flag NON ripristinato | ### **%s** |" % n4(_c.get("flag_non_ripristinato")))
+        A("")
+        _ok2 = (_c.get("chiamate") == _c.get("ripristini")
+                and not _c.get("firme_diverse") and not _c.get("flag_non_ripristinato"))
+        if _ok2:
+            A("> ### ✔ **`chiamate == ripristini`, ZERO firme diverse, ZERO flag non "
+              "ripristinati.** ### ⭐ **Quindi `_coppia_interferenza` è PURA, e spegnere un "
+              "flag intorno a lei NON PUÒ toccare nient'altro che il valore restituito** — "
+              "### **ed è la misura che il mandato chiede al posto delle parole.**")
+        else:
+            A("> ### ⛔ **LA VERIFICA FALLISCE:** %s. ### **I numeri di `D2` NON valgono "
+              "finché non si trova la causa.**"
+              % (("firme diverse su `%s`" % (_c.get("quali") or []))
+                 if _c.get("firme_diverse") else "chiamate e ripristini non coincidono"))
+        A("")
+        # --- l'energia e l'esito
+        psc = {int(r["passo"]): r for r in hsc["passi"]}
+        _E = [(k, (psc[k].get("termostato") or {}).get("E_cin")) for k in sorted(psc) if k >= 1]
+        _E = [(k, x) for k, x in _E if x is not None]
+        # ### ⛔ **IL CONTROLLO DI `A-S1` NON REGISTRA `E_cin`** -- il suo osservatore
+        #   non lo misurava -- quindi la seconda clausola del criterio di Luca
+        #   *(<<l'energia al `500` minore che nel controllo>>)* ### **NON E' VALUTABILE ALLA
+        #   LETTERA.** ### ✔ **Si confronta col braccio `base`, che e' la dinamica di
+        #   sempre, al MASSIMO PASSO COMUNE** -- e ### **si DICHIARA qual e'**, invece di
+        #   mettere un numero senza dire a che passo si riferisce.
+        _Eb = {k: ((pb[k].get("termostato") or {}).get("E_cin")) for k in pb}
+        _Eb = {k: v for k, v in _Eb.items() if v is not None}
+        _Es = dict(_E)
+        _com = sorted(set(_Eb) & set(_Es))
+        _kcom = max(_com) if _com else None
+        _Ect = _Eb.get(_kcom)
+        _a4 = (hsc.get("misure", {}).get("400") or {}).get("auc_materia_vuoto")
+        _E5 = dict(_E).get(500)
+        A("| | `B-SCAL` | controllo |")
+        A("|---|--:|--:|")
+        A("| AUC al `230` | ### **%s** | %s |"
+          % (n4((hsc.get("misure", {}).get("230") or {}).get("auc_materia_vuoto")),
+             n4(_auc_ct.get(230))))
+        A("| ### **AUC al `400`** | ### **%s** | %s |" % (n4(_a4), n4(_auc_ct.get(400))))
+        A("| `E_cin` al `1` | %s | — |" % n4(_E[0][1], 5) if _E else "| `E_cin` | n/d | — |")
+        A("| ### **`E_cin` al `500`** | ### **%s** | ### ⛔ **ASSENTE** *(il controllo "
+          "di `A-S1` non registra `E_cin`)* |" % n4(_E5, 5))
+        if _kcom is not None:
+            A("| ### **`E_cin` al `%d`** *(il massimo passo comune col braccio `base`)* | "
+              "### **%s** | ### **%s** |"
+              % (_kcom, n4(_Es.get(_kcom), 5), n4(_Ect, 5)))
+        A("")
+        _pm = (hsc.get("misure", {}).get("230") or {}).get("per_massa") or {}
+        _c2 = [x["coer_2pi"] for x in _pm.values() if x]
+        A("| coerenza di fase delle masse al `230` | ### **%s** |"
+          % n4((sum(_c2) / len(_c2)) if _c2 else None))
+        A("|---|--:|")
+        A("")
+        if _a4 is None:
+            A("> ### ⚠ **NON DECIDIBILE: manca l'AUC al `400`.**")
+        elif _a4 < 0.60:
+            A("> ### ⛔ **`NON BASTA`:** AUC al `400` = ### **%s**, sotto `0.60` "
+              "*(controllo %s)*. ### **Una coppia che legge la fase, DA SOLA, non tiene le "
+              "masse.**" % (n4(_a4), n4(_auc_ct.get(400))))
+        elif _a4 >= 0.85:
+            A("> ### ⭐ **AUC al `400` = %s `>= 0.85`.** ### **Il primo pezzo del criterio è "
+              "soddisfatto; il secondo chiede l'energia al `500` MINORE che nel controllo, e "
+              "va letto nella riga sopra.**" % n4(_a4))
+        else:
+            A("> ### ⚠ **FRA I DUE:** AUC al `400` = ### **%s**, ### **sopra `0.60`** *(non "
+              "«non basta»)* ### **e sotto `0.85`** *(non «tiene»)*. ### **Si riporta la curva "
+              "e il confronto al `230`.**" % n4(_a4))
+        A("")
+        A("---")
+        A("")
     A("# ⭐ **LE MIE PREVISIONI, CONTRO I NUMERI**")
     A("")
     pr = []
@@ -652,6 +832,64 @@ def main():
                    "### ✔ **CONFERMATA**"
                    if (_nf == 0 and br["B-TS"].get("stato") == "DATI SALVATI")
                    else "### ⛔ **SMENTITA**"))
+    # ---------------------------------------------------- le previsioni di `D1` e `D2`
+    if "_d1_som" in dir():
+        _q = float(_d1_pos) / max(_d1_tot, 1)
+        pr.append(("`PD-1`",
+                   "### ⛔ **`LA COPPIA POMPA`**, con margine larghissimo. "
+                   "### ⚠ **DICHIARATA GIA' NOTA** prima di girare: era nei dati di `H3`",
+                   "nelle masse: positiva nel ### **%s** dei passi `1..230`, somma ### **%s**"
+                   % (pct(_q), n4(_d1_som, 2)),
+                   "### ✔ **CONFERMATA**" if (_q >= 0.80 and _d1_som > 0)
+                   else "### ⛔ **SMENTITA**"))
+    _pmass = (pb.get(230) or {}).get("per_classe", {}).get("masse") or {}
+    _pvuo = (pb.get(230) or {}).get("per_classe", {}).get("vuoto") or {}
+    if _pmass.get("P_coppia") is not None and _pvuo.get("P_scuoti") is not None:
+        _a, _b, _c = (abs(_pmass["P_coppia"]), abs(_pmass.get("P_scuoti") or 0.0),
+                      abs(_pvuo["P_scuoti"]))
+        _ord = (0.1 <= (_a / max(_b, 1e-30)) <= 10.0) and (_a < _c)
+        pr.append(("`PD-2`",
+                   "`P_coppia` nelle masse ### **dello stesso ordine** di `P_scuoti` nelle "
+                   "masse, e ### **molto piu' piccola** di `P_scuoti` nel vuoto",
+                   "al passo `230`: `\\|P_coppia\\|` masse ### **%s**, `\\|P_scuoti\\|` masse "
+                   "%s, `\\|P_scuoti\\|` vuoto %s" % (n4(_a, 2), n4(_b, 2), n4(_c, 2)),
+                   "### ✔ **CONFERMATA**" if _ord else "### ⛔ **SMENTITA**"))
+    if _neg and _posT:
+        pr.append(("`PD-3`",
+                   "`P_termo` cambiera' ### **SEGNO** attorno al passo `49`",
+                   "primo passo negativo: ### **`%d`** *(positiva su %d passi, negativa su %d)*"
+                   % (min(_neg), len(_posT), len(_neg)),
+                   "### ✔ **CONFERMATA**" if 30 <= min(_neg) <= 70
+                   else "### ⚠ **CAMBIA SEGNO, ma al passo `%d`**" % min(_neg)))
+    if hsc:
+        _a4b = (hsc.get("misure", {}).get("400") or {}).get("auc_materia_vuoto")
+        if _a4b is not None:
+            pr.append(("`PD-4`",
+                       "### ⚠ **`D2` dara' `NON BASTA`: AUC al `400` `< 0.6`** "
+                       "*(il ramo scalare cambia la COPPIA, non la scena, e `A` resta "
+                       "`w*cos(phi0_i - phi0_j)` con `phi0` CONGELATA)*",
+                       "AUC al `400` in `B-SCAL`: ### **%s** *(controllo %s)*"
+                       % (n4(_a4b), n4(_auc_ct.get(400))),
+                       "### ✔ **CONFERMATA**" if _a4b < 0.60 else
+                       ("### ⛔ **SMENTITA, ed e' il risultato piu' importante: una coppia "
+                        "che legge la fase TIENE le masse**" if _a4b >= 0.85 else
+                        "### ⛔ **SMENTITA**: sta fra `0.60` e `0.85`")))
+        if _kcom is not None and _Ect is not None:
+            _esc = _Es.get(_kcom)
+            pr.append(("`PD-5`",
+                       "ma l'energia totale in `D2` sara' ### **MINORE** che nel controllo",
+                       "### ⚠ **il controllo di `A-S1` NON registra `E_cin`**, quindi il "
+                       "confronto e' col braccio `base` al ### **massimo passo comune, il "
+                       "`%d`**: `B-SCAL` ### **%s** contro `base` ### **%s**"
+                       % (_kcom, n4(_esc, 4), n4(_Ect, 4)),
+                       "### ✔ **CONFERMATA**" if (_esc is not None and _esc < _Ect)
+                       else "### ⛔ **SMENTITA**"))
+        else:
+            pr.append(("`PD-5`",
+                       "ma l'energia totale in `D2` sara' ### **MINORE** che nel controllo",
+                       "### ⛔ **nessun passo in comune con un braccio NON intervenuto che "
+                       "registri `E_cin`**",
+                       "### ⚠ **NON DECIDIBILE**"))
     A("| | la previsione | il numero | esito |")
     A("|---|---|---|---|")
     for x in pr:
