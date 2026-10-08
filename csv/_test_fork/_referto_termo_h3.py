@@ -9,6 +9,7 @@ import io
 import json
 import math
 import os
+import re
 import sys
 
 _QUI = os.path.dirname(os.path.abspath(__file__))
@@ -61,7 +62,8 @@ def main():
     br = {}
     for nome, f in (("base", "h3_base.json"), ("B-T", "h3_bt.json"),
                     ("B-S", "h3_bs.json"), ("B-TS", "h3_bts.json"),
-                    ("B-SCAL", "h3_bscal.json")):
+                    ("B-SCAL", "h3_bscal.json"),
+                    ("B-SCAL-TS", "h3_bscalts.json")):
         d = carica(os.path.join(DIR, f))
         if d and not d.get("_errore"):
             br[nome] = d
@@ -99,6 +101,12 @@ def main():
                        "SCALARE**, quello che dipende dalla ### **FASE CORRENTE** "
                        "*(`z = e^{iφ}`)*. ### ⚠ **Il flag è spento SOLO durante la chiamata** "
                        "e ripristinato in un `finally`: gira il ramo ### **del simulatore**",
+             "B-SCAL-TS": "### **`D2-BIS`: I TRE INSIEME** — `scuoti_vuoto` inerte, "
+                          "`xi_termo` azzerata ### **e** la coppia sul suo ### **RAMO "
+                          "SCALARE**. ### ⭐ **Nessun codice di intervento nuovo:** sono "
+                          "i due interventi ### **già sigillati** composti, e il "
+                          "collaudo verifica che per i cinque bracci di prima le "
+                          "condizioni valutino ### **IDENTICO**",
              "B-TS": "### **I DUE INSIEME:** `scuoti_vuoto` inerte ### **e** `xi_termo` "
                      "azzerata. ### **Il sistema vive solo della sua energia iniziale e della "
                      "dinamica interna.** ### ⚠ **Eredita da `B-T` il non essere un "
@@ -109,7 +117,7 @@ def main():
                     "### **«termostato senza memoria»**",
              "B-S": "### **`scuoti_vuoto` sostituita** con una funzione della stessa firma "
                     "che ### **non fa niente**"}
-    for nome in ("base", "B-T", "B-S", "B-TS", "B-SCAL"):
+    for nome in ("base", "B-T", "B-S", "B-TS", "B-SCAL", "B-SCAL-TS"):
         if nome not in br:
             A("| `%s` | — | ### ⛔ **ASSENTE** | — | %s |" % (nome, _DESC[nome]))
             continue
@@ -861,6 +869,492 @@ def main():
         A("")
         A("---")
         A("")
+    # ======================================================================
+    #   ### ⭐ **`D2-BIS`: L ENERGIA, E CHE COSA IL CRITERIO MISURA DAVVERO**
+    # ======================================================================
+    _pe = {}
+    hts = H("B-SCAL-TS")
+    if hts:
+        pts = {int(r["passo"]): r for r in hts["passi"]}
+        _en = {k: r["energia"] for k, r in sorted(pts.items()) if r.get("energia")}
+        _gts = hts.get("geometria") or {}
+        _nm = sum((_gts.get("masse") or {}).values())
+        _nv = _gts.get("vuoto_nodi") or 0
+        # ### ⚠ **L ETICHETTA NON DEVE MENTIRE:** <<prima/dopo le nascite>> vale se
+        #   nascite ce ne sono. In questo braccio ce ne sono ZERO, e allora la
+        #   frontiera del `216` divide ### **solo il tempo**.
+        _nati0 = sum((r.get("nati_nel_passo") or 0) for r in hts["passi"])
+        if _nati0:
+            FIN = (("1..215 *(PRIMA delle nascite)*", 1, 215),
+                   ("216..500 *(DOPO la prima nascita)*", 216, 500))
+        else:
+            FIN = (("1..215", 1, 215),
+                   ("216..500 *(e qui NON nasce niente: divide solo il tempo)*",
+                    216, 500))
+
+        def _fin(a, b):
+            return [(k, v) for k, v in sorted(_en.items()) if a <= k <= b]
+
+        A("# `D2-BIS` ⭐ **`B-SCAL-TS`: LA COPPIA SCALARE SENZA BAGNO, E L ENERGIA**")
+        A("")
+        A("> *Criteri e previsioni: `doc/TASK_HISTORY/"
+          "2026-10-08_bscalts-energia-e-potenziale.md`, committato ### **prima** in `d69214d`.*")
+        A("")
+        # --- ### ⭐ **IL FATTO CHE CAMBIA LA LETTURA: QUI NON NASCE NIENTE**
+        _nati = sum((r.get("nati_nel_passo") or 0) for r in hts["passi"])
+        _n0 = hts["passi"][0]["n"] if hts["passi"] else None
+        _n1 = hts["passi"][-1]["n"] if hts["passi"] else None
+        _a0 = hts["passi"][0]["archi"] if hts["passi"] else None
+        _a1 = hts["passi"][-1]["archi"] if hts["passi"] else None
+        A("## ⛔ **IL FATTO DA DIRE PRIMA DI TUTTO: IN QUESTO BRACCIO NON NASCE "
+          "NIENTE**")
+        A("")
+        A("| braccio | passi | `n` iniziale → finale | archi iniziali → finali | "
+          "### **nodi nati** |")
+        A("|---|--:|--:|--:|--:|")
+        for _nm2 in ("base", "B-SCAL", "B-TS", "B-SCAL-TS"):
+            _h2 = H(_nm2)
+            if not _h2 or not _h2.get("passi"):
+                continue
+            _p2 = _h2["passi"]
+            _gr = _p2[-1]["n"] - _p2[0]["n"]
+            A("| `%s` | %s | %s → %s | %s → %s | %s |"
+              % (_nm2, n4(len(_p2) - 1), n4(_p2[0]["n"]), n4(_p2[-1]["n"]),
+                 n4(_p2[0]["archi"]), n4(_p2[-1]["archi"]),
+                 ("### **%s**" % n4(_gr)) if _gr else "### ⛔ **0**"))
+        A("")
+        if _nati == 0 and _n0 == _n1 and _a0 == _a1:
+            A("> ### ⛔ **ZERO NASCITE SU %s PASSI: `n` e gli archi NON SI MUOVONO.** "
+              "### **Non l avevo previsto**, e cambia la lettura di tre cose: "
+              "### **(1)** la previsione `PE-5` è smentita ### **non perché le nascite "
+              "non dominino, ma perché non ce ne sono**; ### **(2)** la finestra "
+              "`216..500` in questo braccio ### **non separa le nascite da niente** — "
+              "si riporta comunque, perché il mandato la chiede, ma ### **qui divide "
+              "solo il tempo**; ### **(3)** `dU_A` è ### **tutto e solo `w` che "
+              "cambia**, quindi il lavoro di `A` qui misura ### **la plasticità dei "
+              "pesi**, non la crescita della rete." % n4(len(hts["passi"]) - 1))
+            A("")
+            A("> ### ⭐ **ED È UN RISULTATO A SÉ, non un contrattempo:** con la coppia "
+              "### **scalare** e il bagno soppresso il sistema ### **non arriva alla "
+              "soglia di mitosi**, mentre con la coppia ### **spinoriale** e lo stesso "
+              "bagno soppresso *(`B-TS`)* qualcosa nasce comunque. ### **La coppia che "
+              "legge la fase tiene le masse coerenti E ferma la divisione** — e se la "
+              "divisione è un fenomeno che si vuole tenere, questo è ### **un costo da "
+              "mettere sul tavolo della decisione**, non un dettaglio.")
+            A("")
+        A("## ⭐ **LE DUE ENERGIE SONO DERIVATE DAL CODICE, NON SCELTE**")
+        A("")
+        A("| | |")
+        A("|---|---|")
+        A("| ### **CINETICA** | da `:7760` e `:7830`, diviso per `dt_n_s`, si legge "
+          "### **Newton sulla coordinata `φ`** con inerzia `M_PH`: "
+          "### **`T = ½·M_PH·Σ phivel²`** |")
+        A("| il ruolo di `dt_n` | ### ⛔ **NON entra in `T`.** È il passo "
+          "d integrazione, ed è ### **PER NODO** *(`dt_n = DT·r`, `:7498`)*: entra solo "
+          "nei LAVORI, via `Δφ = dt_n·phivel(t+1)` *(`:7831`)* |")
+        A("| ### ⚠ **e NON è l `E_cin` del codice** | `:7711` calcola "
+          "`mean(phivel²)`: una ### **MEDIA**, senza `½` e senza `M_PH` — un analogo di "
+          "### **TEMPERATURA** per il confronto con `T_target`. ### **Due cose diverse "
+          "con lo stesso nome, e qui sotto ci sono entrambe** |")
+        A("| ### **POTENZIALE** | `U = −K_C·Σ_archi A_ij·cos(φ_i − φ_j)` con la `A` "
+          "### **EFFETTIVAMENTE USATA** — catturata dall involucro, perché è il "
+          "### **primo argomento** di `_coppia_interferenza`: non si ricostruisce |")
+        A("")
+        A("> ### ✔ **E CHE IL RAMO SCALARE SIA `−∂U/∂φ` È MISURATO SULLA FUNZIONE "
+          "VERA**, non argomentato: `--collaudo-potenziale` dà ### **`1.49e-15`** sulla "
+          "`A` e le `φ` vere, e la ### **differenza finita** *(che non passa dalla mia "
+          "derivata)* dà ### **`3.32e-09`**. ### ⛔ **E il caso che DEVE fallire "
+          "fallisce:** la coppia ### **spinoriale** dà `1.01e+00`, con lo spinore "
+          "### **lontano** dal limite in cui i due rami coinciderebbero "
+          "*(`max|b| = 1.0000`)*.")
+        A("")
+        # --- ### il CRITERIO 1, e che cosa misura davvero
+        A("## ⛔ **IL CRITERIO `LA COPPIA SCALARE CONSERVA A A FISSO`**")
+        A("")
+        A("> ### **Il criterio di Luca:** in almeno il ### **`95 %`** dei passi, "
+          "`P_coppia` più il `dU/dt` dovuto alle ### **sole `φ`** ha residuo relativo "
+          "### **`< 1e-2`**. ### **Valutato nella forma del LAVORO** "
+          "*(`Σ coppia·Δφ`)*, perché ### **`dt_n` è PER NODO** e una potenza per un "
+          "`dt` unico sarebbe sbagliata.")
+        A("")
+        A("| finestra | passi | ### **quota con residuo `< 1e-2`** | residuo mediano | "
+          "`Δφ` massimo mediano | ### **residuo / `Δφ`** *(decile `10` — mediana — decile `90`)* | max | `W_interf` quasi nullo |")
+        A("|---|--:|--:|--:|--:|--:|--:|--:|")
+        _qfin = {}
+        for et, a, b in FIN:
+            f = _fin(a, b)
+            if not f:
+                A("| %s | — | ### **n/d** | — | — | — | — | — |" % et)
+                continue
+            rr = [abs(v["residuo_relativo"]) for _k, v in f]
+            dd = [v["dphi_massimo"] for _k, v in f]
+            _rap = sorted(r / d for r, d in zip(rr, dd) if d > 0)
+            # ### ⚠ **UN RAPPORTO ESPLODE QUANDO IL DENOMINATORE E' QUASI NULLO**, e
+            #   quello non e' un fatto di fisica. Si CONTANO i passi in cui
+            #   `|W_interf|` sta sotto il `10 %` della sua mediana.
+            _wi_a = sorted(abs(v["W_interferenza"]) for _k, v in f)
+            _wmed = _wi_a[len(_wi_a) // 2] if _wi_a else 0.0
+            _pochi = sum(1 for x in _wi_a if x < 0.10 * _wmed)
+            _med = sorted(rr)[len(rr) // 2]
+            _mdd = sorted(dd)[len(dd) // 2]
+            _mr = (sorted(_rap)[len(_rap) // 2]) if _rap else None
+            _qu = sum(1 for x in rr if x < 1e-2) / float(len(rr))
+            _qfin[et] = _qu
+            _d10 = _rap[int(0.10 * (len(_rap) - 1))] if _rap else None
+            _d90 = _rap[int(0.90 * (len(_rap) - 1))] if _rap else None
+            A("| %s | %s | ### **%s** | %s | %s | %s | %s | %s |"
+              % (et, n4(len(f)), pct(_qu), n4(_med, 5), n4(_mdd, 5),
+                 ("%s / %s / %s" % (n4(_d10, 4), n4(_mr, 4), n4(_d90, 4)))
+                 if _rap else "—",
+                 n4(_rap[-1], 4) if _rap else "—", n4(_pochi)))
+            if et.startswith("1.."):
+                _qfin["rap"] = (_d10, _mr, _d90, _rap[-1], _pochi, len(_rap))
+        A("")
+        _tot = [abs(v["residuo_relativo"]) for _k, v in sorted(_en.items())]
+        _qt = (sum(1 for x in _tot if x < 1e-2) / float(len(_tot))) if _tot else None
+        if _qt is None:
+            A("> ### ⚠ **NON DECIDIBILE: nessun passo con l energia.**")
+        elif _qt >= 0.95:
+            A("> ### ✔ **`LA COPPIA SCALARE CONSERVA A A FISSO`: il criterio è "
+              "SODDISFATTO** *(%s dei passi, soglia `95 %%`)*." % pct(_qt))
+        else:
+            A("> ### ⛔ **IL CRITERIO NON È SODDISFATTO:** solo ### **%s** dei passi sta "
+              "sotto `1e-2` *(soglia `95 %%`)*." % pct(_qt))
+        A("")
+        A("### ⭐ **E QUEL RESIDUO NON MISURA LA CONSERVAZIONE: MISURA IL PASSO.**")
+        A("")
+        A("Il residuo è `dU_φ + Σ coppia·Δφ`, e ### **`Δφ` è l incremento VERO** "
+          "*(quello che contiene anche `delta_sync_phi`)*: la sincronizzazione entra "
+          "### **sia in `dU_φ` sia nel lavoro**, quindi ### **si cancella e non "
+          "contribuisce**. E siccome il collaudo ### **MISURA** che la coppia è "
+          "`−∂U/∂φ` *(`1.49e-15`)*, l identità `dU_φ = −Σ coppia·Δφ + O(Δφ²)` è "
+          "### **ALGEBRA**: il residuo ### **È** quel resto del secondo ordine. "
+          "### ⛔ **Non è una congettura, e non dipende da questa corsa.**")
+        A("")
+        A("> ### ⚠ **LA BANDA QUI SOTTO ERA PENSATA COME CONFERMA INDIPENDENTE, E LO "
+          "È SOLO IN PARTE:** il coefficiente del secondo ordine va come "
+          "`cos(φ_i − φ_j)` e quindi ### **VARIA DA PASSO A PASSO**, perciò il "
+          "rapporto ### **non deve** restare costante quanto avevo creduto scrivendo "
+          "la previsione. ### **Era un attesa mia troppo forte, e la correggo qui "
+          "invece di leggere la larghezza della banda come un problema del codice.**")
+        A("")
+        _rr = _qfin.get("rap")
+        if not _rr or not _rr[0]:
+            A("> ### ⚠ **LA BANDA NON È MISURATA:** non lo affermo senza i numeri.")
+        else:
+            _fat = _rr[2] / _rr[0]
+            A("> ### **LA PROVA, dai dati:** se il residuo è del secondo ordine, "
+              "allora `residuo / Δφ` deve restare in una banda ### **stretta** mentre "
+              "il residuo assoluto cambia. ### **MISURATO:** fra i decili `10` e `90` "
+              "sta fra `%s` e `%s`, un fattore ### **%s** — ma il ### **massimo è "
+              "`%s`**."
+              % (n4(_rr[0], 4), n4(_rr[2], 4), n4(_fat, 3), n4(_rr[3], 4)))
+            A("")
+            A("> ### ⛔ **E LA CODA NON LA NASCONDO: SU %s PASSI, `%s` HANNO "
+              "`abs(W_interf)` SOTTO IL `10 %%` DELLA SUA MEDIANA** — cioè un "
+              "### **denominatore quasi nullo**, dove un rapporto relativo esplode "
+              "### **per aritmetica, non per fisica.**" % (n4(_rr[5]), n4(_rr[4])))
+            A("")
+            if _fat <= 5.0:
+                A("> ### ✔ **PER L `80 %%` CENTRALE DEI PASSI IL RAPPORTO STA ENTRO UN "
+                  "FATTORE `%s`: la firma del secondo ordine REGGE.** ### ➜ **Quindi la "
+                  "domanda «la coppia scalare è conservativa?» NON la decide la corsa: "
+                  "la decide il COLLAUDO, e il collaudo dice SÌ a `1.49e-15`.** "
+                  "### ⚠ **Il criterio, come è scritto, misura il PASSO "
+                  "D INTEGRAZIONE** — e lo dico invece di presentare un `NON "
+                  "SODDISFATTO` come se parlasse della fisica." % n4(_fat, 3))
+            else:
+                A("> ### **UN FATTORE `%s` SULL `80 %%` CENTRALE: la banda è più "
+                  "larga di quanto avessi previsto**, e la ragione è scritta qui "
+                  "sopra *(il coefficiente del secondo ordine varia come "
+                  "`cos(φ_i − φ_j)`)*. ### ⛔ **QUESTO NON INDEBOLISCE LA "
+                  "CONCLUSIONE, perché la conclusione poggia sul COLLAUDO e sull "
+                  "ALGEBRA, non sulla banda:** la coppia scalare ### **È** `−∂U/∂φ`, "
+                  "misurato a `1.49e-15` su tre casi, con la differenza finita a "
+                  "conferma. ### ➜ **Quindi il `NON SODDISFATTO` del criterio NON "
+                  "dice che la coppia non conserva: dice che `dt` non è abbastanza "
+                  "piccolo perché il lavoro di PRIMO ordine approssimi `ΔU` all "
+                  "`1 %%`.** ### ⚠ **E LA MISURA CHE SEPAREREBBE il secondo ordine "
+                  "dalla coda dei denominatori piccoli è il lavoro col TRAPEZIO** "
+                  "*(la coppia valutata ANCHE a `φ` nuove)*: ### **questa corsa non "
+                  "la registra, e lo scrivo come misura MANCANTE, non come "
+                  "dettaglio.**" % n4(_fat, 3))
+        A("")
+        # --- ### la NON conservazione VERA, esatta
+        A("## ⭐ **LA NON-CONSERVAZIONE VERA, A `A` FISSO: `dT + dU_φ`** "
+          "*(esatta, nessuna approssimazione)*")
+        A("")
+        A("| finestra | `dT` sommato | `dU_φ` sommato | ### **`dT + dU_φ`** | "
+          "in quota di `dU_φ` |")
+        A("|---|--:|--:|--:|--:|")
+        for et, a, b in FIN:
+            f = _fin(a, b)
+            if not f:
+                continue
+            _st = sum(v["dT"] for _k, v in f)
+            _su = sum(v["dU_phi"] for _k, v in f)
+            A("| %s | %s | %s | ### **%s** | %s |"
+              % (et, n4(_st), n4(_su), n4(_st + _su),
+                 pct((_st + _su) / _su) if _su else "—"))
+        A("")
+        A("> ### ⛔ **A `A` FISSO L ENERGIA NON SI CONSERVA. E LA CAUSA NON LA SCELGO "
+          "IO: LA SCELGONO I NUMERI**, perché `dT` si DECOMPONE dal bilancio. "
+          "### **In unità di energia:** la voce del bilancio è una media di "
+          "`Δ(phivel²)` per nodo, quindi il suo contributo a `T` è "
+          "### **`½·M_PH·(voce_masse·n_masse + voce_vuoto·n_vuoto)`**.")
+        A("")
+        A("| finestra | ### **termostato** | ### **coppia** | `scuoti` | residuo "
+          "incrociato | ### **somma** | `dT` misurato |")
+        A("|---|--:|--:|--:|--:|--:|--:|")
+        _dom = {}
+        for et, a, b in FIN:
+            f = [(k, pts[k]) for k in sorted(pts) if a <= k <= b
+                 and (pts[k].get("per_classe") or {}).get("masse")]
+            if not f:
+                A("| %s | — | — | — | — | — | — |" % et)
+                continue
+            _v = {q: 0.0 for q in VOCI}
+            for _k, r in f:
+                pc = r["per_classe"]
+                for q in VOCI:
+                    for cl, nn in (("masse", _nm), ("vuoto", _nv)):
+                        x = (pc.get(cl) or {})
+                        if x.get(q) is not None:
+                            _v[q] += 0.5 * x[q] * (x.get("nodi") or nn)
+            _sm = sum(_v.values())
+            _dtm = sum(v["dT"] for _k, v in _fin(a, b))
+            A("| %s | ### **%s** | ### **%s** | %s | %s | ### **%s** | %s |"
+              % (et, n4(_v["termostato"]), n4(_v["coppia"]), n4(_v["scuoti"]),
+                 n4(_v["residuo_incrociato"]), n4(_sm), n4(_dtm)))
+            _dom[et] = max(VOCI, key=lambda q: abs(_v[q]))
+        A("")
+        _d1 = _dom.get("1..215 *(PRIMA delle nascite)*")
+        if _d1 == "termostato":
+            A("> ### ⛔ **E LA PREVISIONE DEL TASK HISTORY ERA INCOMPLETA, MIA:** avevo "
+              "scritto che la non-conservazione viene dai ### **tre termini "
+              "non-gradiente** della coppia. ### **I numeri dicono che la voce "
+              "DOMINANTE è il TERMOSTATO**, e il motivo è nel codice: `B-SCAL-TS` "
+              "azzera `xi_termo` ### **prima** di ogni passo, ma lo step lo "
+              "### **RICALCOLA** — e il valore ricalcolato è ### **NEGATIVO**, cioè "
+              "### **RIFORNISCE** energia invece di frenarla *(`xi<0` RIFORNISCE, ed è "
+              "scritto nel commento del simulatore)*. ### ➜ **Quindi «senza "
+              "termostato» resta una SORGENTE, e il referto lo dice invece di "
+              "attribuire tutto ai tre termini che avevo censito.**")
+        elif _d1 == "coppia":
+            A("> ### ✔ **LA VOCE DOMINANTE È LA COPPIA, e la somma delle voci "
+              "RIPRODUCE `dT`** — il bilancio è un'identità, non una stima. "
+              "### ⚠ **E IL MIO SOSPETTO ERA SBAGLIATO:** avevo pensato che fosse il "
+              "### **residuo del termostato** *(`xi<0` RIFORNISCE)* a immettere "
+              "l energia, perché `xi` resta negativo. ### **I numeri dicono che quel "
+              "residuo è PICCOLO**, ed è un risultato a sé: in `B-SCAL-TS` il "
+              "### **«termostato senza memoria» è quasi innocuo**, e quello che scalda "
+              "è la ### **coppia** *(dell interferenza più i tre termini "
+              "non-gradiente)*.")
+        elif _d1:
+            A("> ### ⚠ **LA VOCE DOMINANTE È `%s`**, e NON era quella che avevo "
+              "previsto." % _d1)
+        A("")
+        A("| finestra | `W` dell ### **interferenza** | `W` della coppia "
+          "### **totale** | ### **`W_extra`** *(i tre non-gradiente)* | "
+          "### **in quota** |")
+        A("|---|--:|--:|--:|--:|")
+        for et, a, b in FIN:
+            f = _fin(a, b)
+            if not f:
+                continue
+            _wi = sum(v["W_interferenza"] for _k, v in f)
+            _wt = sum(v["W_coppia_totale"] for _k, v in f)
+            _wx = sum(v["W_extra_non_gradiente"] for _k, v in f)
+            A("| %s | %s | %s | ### **%s** | %s |"
+              % (et, n4(_wi), n4(_wt), n4(_wx),
+                 pct(abs(_wx) / abs(_wi)) if _wi else "—"))
+            # ### ⚠ **NON <<la prima finestra>>: il rapporto CAMBIA fra le due, e
+            #   prendere la prima sarebbe scegliere quella che fa comodo.** Si tiene
+            #   ciascuna, e il verdetto si da' sul TOTALE.
+            _pe["W_extra_" + et[:7]] = (abs(_wx) / abs(_wi)) if _wi else None
+            _pe["Wi_som"] = _pe.get("Wi_som", 0.0) + abs(_wi)
+            _pe["Wx_som"] = _pe.get("Wx_som", 0.0) + abs(_wx)
+        A("")
+        # --- ### il lavoro di `A` che cambia
+        A("## ⭐ **QUANTA PARTE DI `ΔH` VIENE DA `A` CHE CAMBIA, E QUANTA DALLE `φ`**")
+        A("")
+        A("> ### ⚠ **IL PASSO DI RITARDO È DICHIARATO:** `dU_A` si può calcolare solo "
+          "alla chiamata ### **successiva** *(la `A` nuova nasce lì)*, quindi la voce "
+          "del passo `k` ### **chiude il passo `k−1`** e si somma col suo `dU_φ`.")
+        A("")
+        A("| finestra | `dU_φ` | ### **`dU_A`** | di cui ### **`w`** *(archi comuni)* | "
+          "di cui ### **nascite** | archi ### **spariti** | ### **quota di `A`** |")
+        A("|---|--:|--:|--:|--:|--:|--:|")
+        for et, a, b in FIN:
+            f = [(k, v) for k, v in _fin(a, b) if v.get("dU_A_chiude_il_precedente")]
+            if not f:
+                A("| %s | — | ### **n/d** | — | — | — | — |" % et)
+                continue
+            _su = sum(v["dU_phi"] for _k, v in _fin(a, b))
+            _d = [v["dU_A_chiude_il_precedente"] for _k, v in f]
+            _ta = sum(x["totale"] for x in _d)
+            _w = sum(x["w_su_archi_comuni"] for x in _d)
+            _nn = sum(x["nascite_archi_nuovi"] for x in _d)
+            _sp = sum(x["archi_spariti"] for x in _d)
+            _den = abs(_su) + abs(_ta)
+            A("| %s | %s | ### **%s** | %s | %s | %s | ### **%s** |"
+              % (et, n4(_su), n4(_ta), n4(_w), n4(_nn), n4(_sp),
+                 pct(abs(_ta) / _den) if _den else "—"))
+            _pe.setdefault("quota_A_%d" % a, (abs(_ta) / _den) if _den else None)
+            _pe.setdefault("nascite_%d" % a, _nn)
+            # ### ⚠ **IL CONTEGGIO E IL LAVORO SONO DUE COSE:** `_nn` e' un ENERGIA,
+            #   `quanti_nuovi` e' un NUMERO DI ARCHI. La previsione nomina gli ARCHI.
+            _pe.setdefault("quanti_nuovi_%d" % a,
+                           sum(x.get("quanti_nuovi", 0) for x in _d))
+        A("")
+        # --- ### `T`, `U`, `H` per classe ai passi di misura
+        A("## **`T`, `U` e `H` AI PASSI DI MISURA, PER CLASSE**")
+        A("")
+        A("> ### ⚠ **`U` SI SPARTISCE IN TRE CLASSI, NON DUE:** un arco fra una massa e "
+          "il vuoto ### **non appartiene a nessuna delle due**, e metterlo d autorità "
+          "in una falserebbe il bilancio. Le masse sono ### **%s** nodi su "
+          "### **%s**." % (n4(_nm), n4(_nm + _nv)))
+        A("")
+        A("| passo | `T` masse | `T` vuoto | `U` masse | `U` misti | `U` vuoto | "
+          "### **`H`** | `E_cin` del codice |")
+        A("|--:|--:|--:|--:|--:|--:|--:|--:|")
+        for k in sorted(_en):
+            if k not in (1, 50, 150, 215, 216, 230, 300, 400, 500):
+                continue
+            v = _en[k]
+            _tc = v.get("T_pre_per_classe") or {}
+            _uc = v.get("U_per_classe") or {}
+            A("| %d | %s | %s | %s | %s | %s | ### **%s** | %s |"
+              % (k, n4(_tc.get("masse")), n4(_tc.get("vuoto")), n4(_uc.get("masse")),
+                 n4(_uc.get("misti")), n4(_uc.get("vuoto")), n4(v.get("H_pre")),
+                 n4(v.get("E_cin_del_codice"), 5)))
+        A("")
+        # --- ### ⭐ **IL CONTROLLO POSITIVO DELLA SPARTIZIONE**
+        _er_u = _er_a = 0.0
+        _quanti = 0
+        for _k, v in sorted(_en.items()):
+            _uc = v.get("U_per_classe") or {}
+            _ac = v.get("archi_per_classe") or {}
+            if not _uc or v.get("U") is None:
+                continue
+            _quanti += 1
+            _su = sum(_uc.values())
+            _er_u = max(_er_u, abs(_su - v["U"]) / max(abs(v["U"]), 1e-300))
+            _ra = pts.get(_k, {}).get("archi")
+            if _ra:
+                _er_a = max(_er_a, abs(sum(_ac.values()) - _ra))
+        A("| il controllo positivo | su %s passi |" % n4(_quanti))
+        A("|---|--:|")
+        A("| le tre classi di `U` ### **ricompongono `U`** | scarto relativo massimo ### **%s** |" % n4(_er_u, 3))
+        A("| gli archi delle tre classi ### **fanno gli archi del passo** | scarto massimo ### **%s** |" % n4(_er_a))
+        A("")
+        if _er_u < 1e-9 and _er_a == 0:
+            A("> ### ✔ **LA SPARTIZIONE PER CLASSE È VERIFICATA, non presunta:** le tre "
+              "classi ricompongono `U` e gli archi. ### **Senza questo controllo una "
+              "colonna per classe potrebbe essere sbagliata senza che si veda.**")
+        else:
+            A("> ### ⛔ **LA SPARTIZIONE PER CLASSE NON TORNA** *(scarto su `U` %s, sugli "
+              "archi %s)*: ### **le colonne per classe NON valgono finché non si trova "
+              "la causa.**" % (n4(_er_u, 3), n4(_er_a)))
+        A("")
+        # --- ### il CRITERIO 2
+        A("## ⛔ **IL CRITERIO `SENZA BAGNO NON ESPLODE`**")
+        A("")
+        _k1 = min(_en) if _en else None
+        _kz = max(_en) if _en else None
+        _t1 = _en[_k1]["T_post"] if _k1 is not None else None
+        _tz = _en[_kz]["T_post"] if _kz is not None else None
+        _cre = (_tz / _t1) if (_t1 and _tz) else None
+        _pe["crescita_T"] = _cre
+        A("| | |")
+        A("|---|--:|")
+        A("| `T` al passo `%s` | %s |" % (_k1, n4(_t1)))
+        A("| `T` al passo `%s` | %s |" % (_kz, n4(_tz)))
+        A("| ### **la crescita** | ### **%s** |"
+          % (("×%s" % n4(_cre)) if _cre else "n/d"))
+        A("| il confronto: `B-TS` *(coppia SPINORIALE, stesso bagno spento)* | "
+          "### **×25.29** |")
+        A("")
+        # ### ⛔ **E QUI NON RIPETO L ERRORE CHE IL PUNTO 1 DI QUESTO MANDATO HA
+        #   APPENA CORRETTO:** <<energia cinetica TOTALE>> è dominata dal VUOTO, che è
+        #   il `90.34 %` dei nodi. La crescita si riporta ### **ANCHE PER CLASSE.**
+        _t1c = (_en[_k1].get("T_post_per_classe") or {}) if _k1 is not None else {}
+        _tzc = (_en[_kz].get("T_post_per_classe") or {}) if _kz is not None else {}
+        A("| classe | `T` al `%s` | `T` al `%s` | ### **la crescita** |"
+          % (_k1, _kz))
+        A("|---|--:|--:|--:|")
+        _crc = {}
+        for _cl in ("masse", "vuoto"):
+            _x, _y = _t1c.get(_cl), _tzc.get(_cl)
+            _r2 = (_y / _x) if (_x and _y) else None
+            _crc[_cl] = _r2
+            A("| ### **%s** | %s | %s | ### **%s** |"
+              % (_cl.upper(), n4(_x), n4(_y),
+                 ("×%s" % n4(_r2)) if _r2 else "n/d"))
+        A("| ### **TOTALE** *(dominato dal VUOTO: %s nodi su %s)* | %s | %s | "
+          "### **%s** |"
+          % (n4(_nv), n4(_nm + _nv), n4(_t1), n4(_tz),
+             ("×%s" % n4(_cre)) if _cre else "n/d"))
+        A("")
+        if _crc.get("masse") and _crc.get("vuoto"):
+            A("> ### ⛔ **LA CLAUSOLA È SCRITTA SULL ENERGIA TOTALE, CHE È LA "
+              "GRANDEZZA DOMINATA DAL VUOTO** — ed è ### **lo stesso difetto** che il "
+              "punto `1` di questo mandato ha dichiarato per `D2`. ### **Il verdetto "
+              "formale resta quello che è** *(un criterio fissato prima non si riscrive "
+              "dopo)*, ### **ma i numeri per classe dicono un altra cosa:** le MASSE "
+              "crescono ### **×%s**, il VUOTO ### **×%s** — un fattore ### **%s** fra "
+              "le due. ### ➜ **Quello che esplode è il VUOTO, e le masse restano "
+              "l oggetto freddo e coerente.**"
+              % (n4(_crc["masse"]), n4(_crc["vuoto"]),
+                 n4(_crc["vuoto"] / _crc["masse"], 2)))
+            A("")
+        if _cre is None:
+            A("> ### ⚠ **NON DECIDIBILE.**")
+        elif _cre < 3.0:
+            A("> ### ✔ **`SENZA BAGNO NON ESPLODE`: il criterio è SODDISFATTO** "
+              "*(×%s, soglia ×3)*. ### ⭐ **E il confronto è il punto:** con la coppia "
+              "### **spinoriale** e lo stesso bagno spento l energia cinetica cresceva "
+              "### **×25.29**." % n4(_cre))
+        else:
+            A("> ### ⛔ **IL CRITERIO NON È SODDISFATTO: ×%s**, oltre la soglia ×3 "
+              "*(`B-TS` dava ×25.29)*." % n4(_cre))
+        A("")
+        # --- ### `AUC` e coerenza
+        A("## **L `AUC` E LA COERENZA, COME IN `D2`**")
+        A("")
+        _mts = hts.get("misure", {})
+        _a2 = (_mts.get("230") or {}).get("auc_materia_vuoto")
+        _a4t = (_mts.get("400") or {}).get("auc_materia_vuoto")
+        _pe["auc400"] = _a4t
+        _asc = None
+        if H("B-SCAL"):
+            _asc = (H("B-SCAL").get("misure", {}).get("400") or {}).get(
+                "auc_materia_vuoto")
+        A("| | `B-SCAL-TS` | `B-SCAL` *(col bagno)* | controllo |")
+        A("|---|--:|--:|--:|")
+        A("| AUC al `230` | ### **%s** | %s | %s |"
+          % (n4(_a2),
+             n4((H("B-SCAL").get("misure", {}).get("230") or {}).get(
+                 "auc_materia_vuoto")) if H("B-SCAL") else "—",
+             n4(_auc_ct.get(230))))
+        A("| ### **AUC al `400`** | ### **%s** | %s | %s |"
+          % (n4(_a4t), n4(_asc), n4(_auc_ct.get(400))))
+        A("")
+        _pmt = (_mts.get("230") or {}).get("per_massa") or {}
+        A("| massa | coerenza di fase al `230` | `std(phivel)` |")
+        A("|---|--:|--:|")
+        for et in sorted(_pmt):
+            x = _pmt[et]
+            if not x:
+                continue
+            A("| `%s` | ### **%s** | %s |"
+              % (et, n4(x.get("coer_2pi")), n4(x.get("phivel_std"))))
+        _vt = (_mts.get("230") or {}).get("vuoto") or {}
+        A("| il ### **VUOTO** | %s | %s |"
+          % (n4(_vt.get("coer_2pi")), n4(_vt.get("phivel_std"))))
+        A("")
+        A("---")
+        A("")
     A("# ⭐ **LE MIE PREVISIONI, CONTRO I NUMERI**")
     A("")
     pr = []
@@ -1037,6 +1531,117 @@ def main():
                        "### ⚠ **NON DECIDIBILE**"))
     A("| | la previsione | il numero | esito |")
     A("|---|---|---|---|")
+    # ==================================================================
+    #   ### **`PE-1..PE-7`: le previsioni di `D2-BIS`**
+    # ==================================================================
+    if hts:
+        # ### ⭐ **I NUMERI DEL COLLAUDO SI LEGGONO DAL SUO FILE** *(`L-NUMERI`)*:
+        #   un numero ricopiato non ha provenienza.
+        _cp = os.path.join(DIR, "collaudo_potenziale.txt")
+        _txt = ""
+        try:
+            _txt = io.open(_cp, encoding="utf-8").read()
+        except Exception:                               # noqa: BLE001
+            _txt = ""
+
+        def _num(rx):
+            m = re.search(rx, _txt, re.S)
+            return m.group(1) if m else None
+
+        _sc = _num(r"ramo SCALARE.*?VERE del simulatore: differenza massima "
+                   r"relativa `([^`]+)`")
+        _sp = _num(r"coppia SPINORIALE.*?differenza massima relativa `([^`]+)`")
+        _df = _num(r"DIFFERENZA FINITA.*?scarto relativo massimo `([^`]+)`")
+        _cc = _num(r"COLLAUDO DEL POTENZIALE: (\d+ su \d+)")
+        if _cc:
+            A("> ### ✔ **I numeri del collaudo del potenziale sono LETTI dal suo "
+              "file** *(`csv/_test_fork/_termo_h3/collaudo_potenziale.txt`, "
+              "### **%s**)*, non ricopiati." % _cc)
+            A("")
+        else:
+            A("> ### ⚠ **Il file del collaudo del potenziale non è leggibile:** le "
+              "previsioni `PE-1` e `PE-2` restano ### **NON VALUTATE**, e lo dico "
+              "invece di metterci i numeri a memoria.")
+            A("")
+        if _sc:
+            pr.append(("`PE-1`",
+                       "il collaudo del potenziale ### **CHIUDE** sulla funzione vera, "
+                       "con residuo relativo ### **`< 1e-10`**",
+                       "### **%s**" % _sc,
+                       "### ✔ **CONFERMATA**" if float(_sc) < 1e-10
+                       else "### ⛔ **SMENTITA**"))
+        if _sp:
+            pr.append(("`PE-2`",
+                       "### **il caso che DEVE fallire fallisce:** la coppia "
+                       "### **spinoriale** non chiude, con residuo ### **`> 1e-2`**",
+                       "### **%s**%s" % (_sp, (" *(e la differenza finita, che non passa "
+                                              "dalla mia derivata, dà `%s`)*" % _df)
+                                        if _df else ""),
+                       "### ✔ **CONFERMATA**" if float(_sp) > 1e-2
+                       else "### ⛔ **SMENTITA**"))
+        _qa = _qfin.get("1..215 *(PRIMA delle nascite)*")
+        _qb = _qfin.get("216..500 *(DOPO la prima nascita)*")
+        if _qa is not None:
+            _ok3 = (_qa >= 0.95) and (_qb is None or _qb < _qa)
+            pr.append(("`PE-3`",
+                       "il criterio della conservazione è ### **soddisfatto** nella "
+                       "finestra `1..215` *(`>= 95 %`)* e ### **meno** dopo il `216`",
+                       "`1..215` ### **%s**, `216..500` ### **%s**"
+                       % (pct(_qa), pct(_qb) if _qb is not None else "n/d"),
+                       "### ✔ **CONFERMATA**" if _ok3 else
+                       "### ⛔ **SMENTITA**, e il referto dice ### **perché**: quel "
+                       "residuo misura il ### **passo d integrazione**, non la "
+                       "conservazione"))
+        _cre2 = _pe.get("crescita_T")
+        if _cre2 is not None:
+            pr.append(("`PE-4`",
+                       "### **`SENZA BAGNO NON ESPLODE` è soddisfatto:** l energia "
+                       "cinetica ### **non cresce ×3**",
+                       "### **×%s** *(`B-TS`, con la coppia spinoriale, dava "
+                       "×25.29)*" % n4(_cre2),
+                       "### ✔ **CONFERMATA**" if _cre2 < 3.0
+                       else "### ⛔ **SMENTITA**"))
+        _qA = _pe.get("quota_A_216")
+        if _qA is not None:
+            _nn216 = _pe.get("nascite_216")
+            _senza = (sum((r.get("nati_nel_passo") or 0) for r in hts["passi"]) == 0)
+            pr.append(("`PE-5`",
+                       "il ### **lavoro di `A` che cambia** è la parte "
+                       "### **dominante** della variazione di `H` dopo il `216`, "
+                       "### **perché le nascite aggiungono archi**",
+                       "la quota di `A` è ### **%s**, gli archi nuovi sono "
+                       "### **%s** e il loro lavoro ### **%s**"
+                       % (pct(_qA), n4(_pe.get("quanti_nuovi_216")), n4(_nn216)),
+                       ("### ⛔ **SMENTITA, E PER UN MOTIVO CHE NON AVEVO PREVISTO:** "
+                        "in questo braccio ### **non nasce NIENTE**, quindi la "
+                        "premessa della previsione *(«le nascite aggiungono archi»)* "
+                        "### **non si verifica mai**. ### **Non è che le nascite non "
+                        "dominino: non ci sono.**") if _senza
+                       else ("### ✔ **CONFERMATA**" if _qA > 0.50
+                             else "### ⛔ **SMENTITA**: dominano le `φ`")))
+        _a4b = _pe.get("auc400")
+        if _a4b is not None:
+            pr.append(("`PE-6`",
+                       "l `AUC` al `400` resta ### **`>= 0.85`** anche senza bagno",
+                       "### **%s**" % n4(_a4b),
+                       "### ✔ **CONFERMATA**" if _a4b >= 0.85
+                       else "### ⛔ **SMENTITA**"))
+        _wx2 = ((_pe.get("Wx_som") / _pe["Wi_som"])
+                if _pe.get("Wi_som") else None)
+        if _wx2 is not None:
+            pr.append(("`PE-7`",
+                       "### **`W_extra` NON è trascurabile** *(almeno il `10 %` di "
+                       "`W_interf` in modulo)*. ### **Scritta così per poter PERDERE:** "
+                       "se fosse trascurabile, il criterio chiuderebbe anche sulla "
+                       "coppia totale e il mio censimento sarebbe stato pessimismo",
+                       "### **%s** di `W_interf` su tutta la corsa — e ### ⚠ **il "
+                       "rapporto CAMBIA con la finestra:** `%s` su `1..215`, `%s` su "
+                       "`216..500`. ### **Riporto entrambe invece di scegliere quella "
+                       "che mi conviene**"
+                       % (pct(_wx2), pct(_pe.get("W_extra_1..215")),
+                          pct(_pe.get("W_extra_216..5"))),
+                       "### ✔ **CONFERMATA sul TOTALE**" if _wx2 >= 0.10
+                       else "### ⛔ **SMENTITA: era pessimismo mio**"))
     for x in pr:
         A("| %s | %s | %s | %s |" % x)
     A("")
@@ -1054,6 +1659,30 @@ def main():
     A("| la variabilità fra semi | ### **UN seme** *(il `11`)*: `P3` non soddisfatta |")
     A("| i valori ASSOLUTI | ### **`U1` è aperta:** si leggono le ### **differenze fra bracci** |")
     A("| `B-T` come ### **«senza termostato»** | ### ⛔ **NON lo è:** è «senza MEMORIA del termostato», e il residuo è misurato qui sopra |")
+    if hts:
+        A("| ### **`B-SCAL-TS` come prova della DIREZIONE di Luca** | ### ⛔ **NON lo "
+          "è:** il ramo scalare usa `cos(φ_k − φ_j)`, ### **non `cos((φ_k − φ_j)/2)`**. "
+          "È un test sul ### **PRINCIPIO**, e un esito positivo ### **non decide la "
+          "cura** |")
+        A("| ### **la conservazione lungo la CORSA** | ### ⛔ **non è misurata, e non "
+          "può esserlo con questi dati:** servirebbe il lavoro col ### **TRAPEZIO** "
+          "*(la coppia valutata anche a `φ` nuove)*, che la corsa ### **non registra**. "
+          "### **Quello che è misurato è che la coppia È `−∂U/∂φ`** *(collaudo, "
+          "`1.49e-15`)* |")
+        A("| ### **«senza bagno»** | ### ⚠ **il bagno è SOPPRESSO, non spento:** "
+          "`xi_termo` è azzerata ### **prima** di ogni passo, ma lo step lo "
+          "### **RICALCOLA** — e il residuo resta, ### **misurato** nella "
+          "decomposizione di `dT` |")
+        if sum((r.get("nati_nel_passo") or 0) for r in hts["passi"]):
+            A("| ### **la finestra** | ### **`1..215` vale solo PRIMA delle nascite** "
+              "*(`FINESTRA-PRE-NASCITA`)*: le due finestre sono ### **sempre "
+              "separate** nelle tavole qui sopra |")
+        else:
+            A("| ### **la finestra** | ### ⚠ **in questo braccio la frontiera del "
+              "`216` NON separa le nascite da niente**, perché nascite ### **non ce ne "
+              "sono**: divide ### **solo il tempo**. Le due finestre si riportano "
+              "comunque *(il mandato le chiede)*, e `FINESTRA-PRE-NASCITA` resta la "
+              "ragione per cui si riportano SEPARATE |")
     A("| la ricostruzione come ### **esatta** | ### ⛔ **NON lo è:** predice `xi` allo `0.1 %`, e il residuo è riportato |")
     A("")
     io.open(FUORI, "w", encoding="utf-8", newline=NL).write(NL.join(R) + NL)
