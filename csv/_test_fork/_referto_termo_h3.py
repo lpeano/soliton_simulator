@@ -740,9 +740,15 @@ def main():
         A("")
         _pm = (hsc.get("misure", {}).get("230") or {}).get("per_massa") or {}
         _c2 = [x["coer_2pi"] for x in _pm.values() if x]
-        A("| coerenza di fase delle masse al `230` | ### **%s** |"
-          % n4((sum(_c2) / len(_c2)) if _c2 else None))
-        A("|---|--:|")
+        _coc = None
+        if hc:
+            _pmc = (hc.get("misure", {}).get("230") or {}).get("per_massa") or {}
+            _cc = [x["coer_2pi"] for x in _pmc.values() if x]
+            _coc = (sum(_cc) / len(_cc)) if _cc else None
+        A("| | valore | il controllo |")
+        A("|---|--:|--:|")
+        A("| ### **coerenza di fase delle masse al `230`** | ### **%s** | %s |"
+          % (n4((sum(_c2) / len(_c2)) if _c2 else None), n4(_coc)))
         A("")
         if _a4 is None:
             A("> ### ⚠ **NON DECIDIBILE: manca l'AUC al `400`.**")
@@ -751,9 +757,37 @@ def main():
               "*(controllo %s)*. ### **Una coppia che legge la fase, DA SOLA, non tiene le "
               "masse.**" % (n4(_a4), n4(_auc_ct.get(400))))
         elif _a4 >= 0.85:
-            A("> ### ⭐ **AUC al `400` = %s `>= 0.85`.** ### **Il primo pezzo del criterio è "
-              "soddisfatto; il secondo chiede l'energia al `500` MINORE che nel controllo, e "
-              "va letto nella riga sopra.**" % n4(_a4))
+            # ### IL CRITERIO E' UNA CONGIUNZIONE, e si valuta come tale: l'AUC E
+            #   l'energia. Dichiarare soddisfatta la prima clausola e tacere sulla seconda
+            #   sarebbe TRADIRE il criterio.
+            _en = (_Es.get(_kcom) is not None and _Ect is not None and _Es[_kcom] < _Ect)
+            A("> ### \u2b50 **AUC al `400` = %s, cioe\' `>= 0.85`: LA PRIMA CLAUSOLA E\' "
+              "SODDISFATTA, e con un margine grande** *(il controllo sta a %s)*."
+              % (n4(_a4), n4(_auc_ct.get(400))))
+            A("")
+            if _en:
+                A("> ### \u2714 **E ANCHE LA SECONDA:** l\'energia al passo `%d` e\' "
+                  "### **%s** contro ### **%s** del braccio `base`. ### \u26d4 **QUINDI "
+                  "`UNA COPPIA CHE LEGGE LA FASE TIENE LE MASSE`.**"
+                  % (_kcom, n4(_Es.get(_kcom), 4), n4(_Ect, 4)))
+            else:
+                A("> ### \u26d4 **MA LA SECONDA NON LO E\': l\'energia NON e\' minore.** Al "
+                  "passo `%d` vale ### **%s** contro ### **%s** del braccio `base` -- cioe\' "
+                  "il sistema e\' ### **PIU\' CALDO**, non piu\' freddo."
+                  % (_kcom, n4(_Es.get(_kcom), 4), n4(_Ect, 4)))
+                A("")
+                A("> ### \u26a0 **QUINDI IL CRITERIO, CHE E\' UNA CONGIUNZIONE, NON E\' "
+                  "SODDISFATTO** -- e lo dico invece di fermarmi alla clausola che mi "
+                  "conviene. ### \u2b50 **MA IL FATTO RESTA, ed e\' grosso: una coppia che "
+                  "LEGGE LA FASE CHE MUOVE tiene la coerenza delle masse MOLTO meglio, pur "
+                  "lasciando il sistema PIU\' CALDO.** ### **La coerenza non e\' una "
+                  "questione di temperatura, e questo e\' il risultato che la corsa "
+                  "aggiunge.**")
+            A("")
+            A("> ### \u26d4 **E NON DECIDE LA CURA, per la ragione dichiarata in testa alla "
+              "sezione:** il ramo scalare usa `cos(phi_k - phi_j)`, ### **non "
+              "`cos((phi_k - phi_j)/2)`** della direzione candidata di Luca. ### **E\' un "
+              "test sul PRINCIPIO. La decisione e\' di Luca.**")
         else:
             A("> ### ⚠ **FRA I DUE:** AUC al `400` = ### **%s**, ### **sopra `0.60`** *(non "
               "«non basta»)* ### **e sotto `0.85`** *(non «tiene»)*. ### **Si riporta la curva "
