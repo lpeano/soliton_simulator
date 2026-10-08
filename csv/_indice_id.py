@@ -64,7 +64,15 @@ COL = ["id", "alias", "titolo_breve", "fonte_principale", "stato", "blocca_run_b
 # ### e il triage si fa ### **a riscrittura finita** *(`doc/TRIAGE_ERA_1.md`)*.
 # ### ⛔ **E NON sta fra gli stati che contraddicono `blocca_run_base = SI`:** una bloccante
 # ### sospesa ### **resta bloccante**, perche' blocca le corse dell'era `1`.
-STATI = {"aperto", "chiuso", "non-difetto", "teoria", "da-decidere", "SOSPESA-ERA-1"}
+# ### ⛔ **DAL 2026-10-08 QUESTO FILE VALIDA UNA *VISTA*, NON LA FONTE** *(schema `2`)*: la
+# ### fonte e' `doc/indice/voci.jsonl` e il validatore vero e' ### **`csv/indice.py valida`**,
+# ### agganciato al `pre-commit`. ### **Questo resta perche' `--blocca SI`, `--cerca` e
+# ### `--dettaglio` sono comandi che si usano**, e la vista li fa funzionare senza riscriverli.
+# ### ➜ **Gli stati dello schema `2` si aggiungono al vocabolario**; quelli dell'era `1`
+# ### restano, perche' la colonna `stato_era_1` li porta ancora.
+STATI = {"aperto", "chiuso", "non-difetto", "teoria", "da-decidere", "SOSPESA-ERA-1",
+         "APERTA", "IN_CORSO", "CHIUSA", "SOSPESA", "SUPERATA", "AGENDA",
+         "DA_CLASSIFICARE"}
 BLOCCA = {"SI", "NO", "DA-DECIDERE", "DA VERIFICARE"}
 TIPI = {"difetto", "sospetto", "fronte", "misura", "cura", "presidio", "assioma", "standard",
         "criterio-locale", "altro"}
@@ -167,6 +175,21 @@ def perdite():
     al_tag = set(x.split(TAB)[0].strip() for x in (q.stdout or "").split(NL)[1:] if x.strip())
     _c, righe = leggi(FONTE)
     ora = set(x.split(TAB)[0].strip() for x in righe)
+    # ### ⛔ **DALLO SCHEMA 2 UN ID PUO' NON ESSERE PIU' UN `id` E NON ESSERE PERSO:** puo'
+    # ### essere un ### **ALIAS** *(il nome vecchio di una voce normalizzata)* oppure
+    # ### un'### **ETICHETTA RIMOSSA** *(un ID citato nei documenti che non era una voce)*.
+    # ### ➜ **Il controllo impara i due posti**, altrimenti grida <<perse>> su `89` ID che
+    # ### la migrazione ha ### **conservato e tracciato** *(`doc/indice/migrazione_era1.jsonl`)*.
+    for x in righe:
+        c2 = x.split(TAB)
+        if len(c2) > 1:
+            ora |= set(a2.strip() for a2 in c2[1].split(",") if a2.strip())
+    _et = os.path.join(RADICE, "doc", "indice", "etichette_rimosse.jsonl")
+    if os.path.exists(_et):
+        import json as _json
+        for _r in io.open(_et, encoding="utf-8"):
+            if _r.strip():
+                ora.add(_json.loads(_r)["id"])
     return sorted((al_tag - ora) - set(CANCELLAZIONI)), None
 
 

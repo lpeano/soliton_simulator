@@ -1,3 +1,25 @@
+# ⛔ **SOSTITUITO** — *questo documento non e' piu' la fonte* *(2026-10-08)*
+
+> ### ⛔ **L'ELENCO QUI SOTTO ERA FATTO CON UN'EURISTICA A PAROLE CHIAVE, e ha sbagliato.**
+> La verifica del guardiano su tutte le `953` voci ha trovato che ### **circa `50` delle `86`
+> «METODO» erano fisica dell'era `1`**, e che ### **circa `45` lezioni di metodo erano state
+> sospese.**
+>
+> ### ➜ **LA FONTE ADESSO SONO LE LISTE ESPLICITE DI LUCA**, applicate una per una dalla
+> migrazione allo schema `2`:
+>
+> | | |
+> |---|---|
+> | la ### **traccia** di ogni ID vecchio | ### **`doc/indice/migrazione_era1.jsonl`** |
+> | le voci e i loro campi | `doc/indice/voci.jsonl` |
+> | il ### **referto** | `doc/REFERTO_indice_v2.md` |
+> | come si interroga | `python csv/indice.py cerca --dominio METODO` |
+>
+> ### ⚠ **NON si cancella** *(par.5: niente `rm`)*: ### **resta leggibile come il reperto di
+> un errore**, e il suo errore e' ### **il motivo per cui lo schema `2` esiste.**
+
+---
+
 # LE LEZIONI DI METODO — **NON si sospendono, e Luca lo confermi**
 
 > ### ⛔ **Le voci qui sotto NON hanno ricevuto `SOSPESA-ERA-1`:** sono ### **lezioni di METODO**, e valgono anche nell'era `2`.

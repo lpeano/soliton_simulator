@@ -2161,3 +2161,26 @@ ordine; piu' ### **tre transizioni vietate** e i ### **due derivati**.
 > ### 📌 **AGGANCIATO AL `pre-commit`**, e ### **si accende da se'**: gira solo se
 > `doc/indice/voci.jsonl` esiste, cosi' prima della migrazione non c'e' niente da validare e
 > dopo il presidio ### **c'e' senza doverlo accendere a mano.**
+
+### 🔬 LA MIGRAZIONE DELL'INDICE, I SUOI CONTROLLI E IL REFERTO *(2026-10-08)*
+
+| | |
+|---|---|
+| **file** | `csv/migra_indice_v2.py` *(588 righe)* · `csv/_controlli_indice_v2.py` *(188 righe)* · `csv/_doc_referto_indice.py` *(248 righe)* |
+| **COMANDO** | `python csv/migra_indice_v2.py [--collaudo]` · `python csv/_controlli_indice_v2.py` · `python csv/_doc_referto_indice.py` |
+| **cosa misura** | la migrazione e' ### **RIESEGUIBILE e IDEMPOTENTE** *(due esecuzioni = gli stessi byte, ed e' il controllo `C4`)*; i controlli provano ### **CONSERVAZIONE** *(ogni ID vecchio in uno e uno solo posto)*, ### **traccia**, ### **liste del guardiano**, ### **idempotenza**, ### **validazione** e ### **vista compatibile** |
+| **BLOB** | `2f0cefe0` *(il generatore del referto)* |
+
+**Esito:** ### **`6` su `6`** i controlli; `953` ID vecchi → ### **`867` voci** + `85`
+etichette rimosse, con ### **`0` persi, `0` doppi, `0` conflitti**.
+
+> ### ⛔ **E LA MIGRAZIONE HA FATTO EMERGERE TRE DIFETTI DELL'INDICE VECCHIO:** `96` ID con
+> ### **minuscole o punteggiatura** *(la regex stretta avrebbe chiesto di RINOMINARLI)*; `21`
+> ### **alias che erano ID di altre voci** e `6` ### **condivisi fra due voci**; `11` ID con
+> ### **uno SPAZIO** *(normalizzati, col nome vecchio come alias)*.
+
+> ### ⚠ **E QUATTRO DIFETTI MIEI, presi dai controlli e dai due validatori:** `C3` *(la
+> passata strutturale SOVRASCRIVEVA le liste del guardiano)*; `C4` *(la migrazione
+> ### **leggeva una vista che lei stessa scrive**, quindi non era idempotente)*; le colonne
+> `motivo` e `revisione` ### **perse**; e un ### **tetto di `1200` caratteri** su un testo
+> conservato, che ### **lo avrebbe troncato** *(`A11`: un numero scelto)*.

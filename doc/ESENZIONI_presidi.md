@@ -15,6 +15,7 @@ commit**: cosi' non se ne accumulano di invisibili.)*
 | `csv/_confronto_pds.py|H-P5` | non importa il simulatore e non lo fa girare. Confronta due documenti. |
 | `csv/_controlli_indice_v2.py|H-P5` | non importa il simulatore e non lo fa girare. Controlla una migrazione. |
 | `csv/_controlli_riordino.py|H-P5` | non importa il simulatore e non lo fa girare. Conta righe e cerca stringhe. |
+| `csv/_doc_referto_indice.py|H-P5` | non importa il simulatore e non lo fa girare. Legge l'indice e i controlli. |
 | `csv/_indice_id.py|H-P5` | non importa il simulatore e non lo fa girare. Valida un TSV. |
 | `csv/_indice_riordino.py|H-P5` | non importa il simulatore e non lo fa girare. Aggiunge righe a un TSV. |
 | `csv/_inventario_lettori_id.py|H-P5` | non importa il simulatore e non lo fa girare. Classifica script per contenuto. |
@@ -100,5 +101,5 @@ commit**: cosi' non se ne accumulano di invisibili.)*
 | `csv/_test_fork/_z43_tempo_proprio.py|H-P3` | la scena passa TUTTA dal CLI (`nmasse` e `sep` da `argv`), e la |
 
 ```
-esenzioni dichiarate   93
+esenzioni dichiarate   94
 ```

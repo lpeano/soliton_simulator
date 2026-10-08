@@ -10538,3 +10538,38 @@ niente.**
 `--applica --solo S` una classe alla volta)* ### ⛔ **non esiste ancora, e lo dico:** scriverlo
 adesso sarebbe uno strumento ### **che non si può collaudare**, perché la versione nuova delle
 leggi non c'è.
+
+## L'INDICE DETERMINISTICO *(schema `2`)* — **la bonifica, e i difetti che ha fatto emergere** (2026-10-08)
+
+La sospensione di `9f23313` classificava `METODO`/`FISICA` ### **con parole chiave nel
+titolo**, e la verifica del guardiano su tutte le `953` voci ha trovato quattro modi in cui
+sbagliava. ### ➜ **La causa non era l'euristica: era che l'indice NON AVEVA UN CAMPO per
+dirlo.** Lo schema `2` sostituisce il testo libero con ### **campi a vocabolario chiuso**,
+riferimenti ### **validati contro i registri**, e metadati ### **dichiarati**.
+
+### ✔ **I `6` controlli passano**, e il primo e' quello che conta: ogni ID vecchio compare in
+### **uno e uno solo** di `voci.jsonl::id`, `voci.jsonl::alias`,
+`etichette_rimosse.jsonl` — ### **`0` persi, `0` doppi, `0` conflitti** con le liste di Luca
+*(applicate al `100 %`: `62`+`43`+`46`)*.
+
+### ⛔ **E LA MIGRAZIONE HA FATTO EMERGERE TRE DIFETTI DELL'INDICE VECCHIO che nessuno aveva
+nominato:** `96` ID con ### **minuscole o punteggiatura** *(la mia regex stretta avrebbe
+chiesto di ### **rinominarli**, contro «i reperti non si riscrivono»)*; la colonna `alias`
+conteneva ### **cose che non sono alias** *(`21` erano ID di altre voci, `6` condivisi fra
+due)*; `11` ID ### **con uno spazio** *(gli standard numerati: normalizzati, e il nome vecchio
+RESTA come alias)*.
+
+### ⚠ **E quattro difetti MIEI, presi dai controlli e dai due validatori.** `C3`: la passata
+strutturale girava ### **dopo** le liste del guardiano e le ### **sovrascriveva** — ### **una
+decisione dichiarata batte un'inferenza, sempre.** `C4`, il piu' subdolo: la migrazione
+### **leggeva `doc/INDICE.md`, che lei stessa genera**, quindi la seconda esecuzione dava
+risultati diversi — ### **non era idempotente, e senza quel controllo non me ne sarei
+accorto.** Più: avevo ### **perso le colonne `motivo` e `revisione`** *(e `motivo` e' la PROVA
+che giustifica `blocca SI`)*, e il mio ### **tetto di `1200` caratteri** su quel testo era
+### **un numero scelto** che lo avrebbe ### **troncato** — cioè la perdita che il metadato
+esiste per evitare.
+
+### ⛔ **Che cosa resta a Luca: `480` voci `DA_CLASSIFICARE`.** Non è un difetto: è lo scopo.
+### **La migrazione non indovina mai** — dove non c'è evidenza strutturale scrive
+`DA_CLASSIFICARE`, e ### **mai per parola chiave.** La tavola corta è in
+`doc/REFERTO_indice_v2.md`.

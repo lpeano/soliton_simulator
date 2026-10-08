@@ -10,6 +10,29 @@
 
 ---
 
+# 📌 `⓿` **DA DOVE PARTE, dallo schema `2`** *(aggiornato il 2026-10-08)*
+
+> ### ⛔ **IL TRIAGE PARTE DA UN COMANDO, non da una lettura:**
+
+```
+python csv/indice.py cerca --stato SOSPESA        # le 46 da triare
+python csv/indice.py cerca --stato DA_CLASSIFICARE  # le 480 che aspettano LUCA, NON il triage
+```
+
+| | |
+|---|---|
+| ### **le `SOSPESA`** | sono ### **`46`**, e sono ### **le liste del guardiano applicate**: fisica dell'era `1`, dominio e era ### **dichiarati** |
+| ### ⛔ **le `AGENDA` NON PASSANO DAL TRIAGE** | sono ### **`43`**, e sono il ### **programma dell'era `2`**: non sono difetti dell'era `1`, quindi ### **non c'e' niente da triare** — si lavorano |
+| ### ⛔ **le `DA_CLASSIFICARE`** | sono ### **`480`**, e ### **non sono materia del triage: sono DECISIONI DI LUCA.** La tavola corta sta in `doc/REFERTO_indice_v2.md` |
+| ### **la traccia** | `doc/indice/migrazione_era1.jsonl` dice, per ### **ogni** ID vecchio, ### **dove e' andato e per quale regola** |
+
+### ⚠ **E IL CAMPO CHE IL TRIAGE USA NON E' PIU' `si_riferisce_a`:** quello era riempito
+### **cercando nomi nel testo** *(per DIFETTO)*, e vive come metadato `si_riferisce_a_era1`.
+### ➜ **I riferimenti VERI sono i campi `leggi`, `variabili` e `assiomi`**, validati contro i
+registri — e si cercano con `indice cerca --legge L-… / --variabile V-… / --assioma A…`.
+
+---
+
 # ⭐ `①` **LE TRE USCITE, e come si decide fra loro**
 
 | | l'uscita | quando | ### **che cosa si scrive** |
@@ -19,8 +42,7 @@
 | **`V`** | ### **ANCORA VALIDA** | il difetto ### **non dipendeva dalla dinamica** *(es. una regola di nascita, un'eredità alla nascita, un default sbagliato)* | ### **resta aperta così com'è**, e `stato` torna a `stato_era_1` |
 
 ### ⚠ **E UNA QUARTA USCITA CHE NON E' UN'USCITA, e va prevista:** una voce può risultare
-### **NON CLASSIFICABILE** perché ### **non si capisce a quale legge si riferiva**. ### ⛔ **Sono
-`411` su `629`, misurate** *(il campo `si_riferisce_a` dice `(non trovato)`)*: `titolo_breve` è
+### **NON CLASSIFICABILE** perché ### **non si capisce a quale legge si riferiva**. ### ⛔ **Erano `411` su `629` nello schema `1`; nello schema `2` sono le ### **`480` `DA_CLASSIFICARE`**, e NON sono materia del triage: sono ### **decisioni di Luca** *(il campo `si_riferisce_a` dice `(non trovato)`)*: `titolo_breve` è
 troncato a `100` caratteri e la spiegazione lunga non nomina la legge. ### ➜ **Quelle si LEGGONO
 A MANO, e il triage non le instrada da solo.**
 
