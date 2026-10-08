@@ -1,0 +1,49 @@
+========================================================================================================
+L ESPERIMENTO DEL MARE -- nascono le masse dall interferenza?
+========================================================================================================
+  i numeri: n = 400, rho_0 = 1.000, eps = 0.0100 rad, dt = 0.0020, passi = 5000 (T = 10.00), campione ogni 50 passi, soglia grumo = 3.0 x media
+  ### rho_0 = 1 E NON la norma 1: con norma 1 sarebbe rho_0 = 0.0025 e g*rho_0 = 0.05 a g = -20, contro una scala di salto ~5 -- la non linearita' sarebbe NEGLIGIBILE PER COSTRUZIONE. E' un numero di banco, dichiarato.
+  ### t_c = 1/(|g| rho_0), il tempo dell INSTABILITA' MODULAZIONALE. Per g = 0 non e' definito e si usa quello di |g| = 5, dichiarato.
+
+  --- braccio U-CASO: U_ij CASUALE ma fissa
+  U-CASO  g =    0.0 seme 11:  grumi max 11  vita max  11.00 t_c  rho_max/media   6.04  PR  400.00 ->  272.59  dN 8.5e-16 dH 0.0e+00  22.7 s
+  U-CASO  g =    0.0 seme 12:  grumi max  9  vita max  13.50 t_c  rho_max/media   6.22  PR  400.00 ->  257.17  dN 1.3e-13 dH 4.1e-13  18.3 s
+  U-CASO  g =    0.0 seme 13:  grumi max  8  vita max  15.00 t_c  rho_max/media   6.57  PR  400.00 ->  276.52  dN 4.4e-14 dH 5.0e-13  21.6 s
+  U-CASO  g =   -2.0 seme 11:  grumi max  4  vita max   2.00 t_c  rho_max/media   3.96  PR  400.00 ->  302.10  dN 3.0e-14 dH 1.6e-13  26.3 s
+  U-CASO  g =   -2.0 seme 12:  grumi max  2  vita max   1.60 t_c  rho_max/media   3.41  PR  400.00 ->  312.55  dN 2.4e-14 dH 1.3e-13  24.2 s
+  U-CASO  g =   -2.0 seme 13:  grumi max  3  vita max   1.80 t_c  rho_max/media   3.88  PR  400.00 ->  307.28  dN 3.2e-14 dH 1.8e-13  26.6 s
+  U-CASO  g =   -5.0 seme 11:  grumi max  0  vita max   0.00 t_c  rho_max/media   2.79  PR  400.00 ->  339.25  dN 1.3e-14 dH 4.0e-14  29.7 s
+  U-CASO  g =   -5.0 seme 12:  grumi max  0  vita max   0.00 t_c  rho_max/media   2.83  PR  400.00 ->  347.65  dN 1.1e-14 dH 3.7e-14  27.7 s
+  U-CASO  g =   -5.0 seme 13:  grumi max  0  vita max   0.00 t_c  rho_max/media   2.80  PR  400.00 ->  340.09  dN 1.1e-14 dH 3.6e-14  30.5 s
+  U-CASO  g =  -10.0 seme 11:  grumi max  0  vita max   0.00 t_c  rho_max/media   2.27  PR  400.00 ->  366.03  dN 2.4e-13 dH 7.9e-13  36.6 s
+  U-CASO  g =  -10.0 seme 12:  grumi max  0  vita max   0.00 t_c  rho_max/media   2.28  PR  400.00 ->  367.26  dN 1.8e-13 dH 6.0e-13  35.9 s
+  U-CASO  g =  -10.0 seme 13:  grumi max  0  vita max   0.00 t_c  rho_max/media   2.49  PR  400.00 ->  364.56  dN 9.5e-14 dH 3.1e-13  37.9 s
+  U-CASO  g =  -20.0 seme 11:  grumi max  0  vita max   0.00 t_c  rho_max/media   2.21  PR  400.00 ->  380.72  dN 1.9e-13 dH 5.6e-13  42.0 s
+  U-CASO  g =  -20.0 seme 12:  grumi max  0  vita max   0.00 t_c  rho_max/media   1.83  PR  400.00 ->  379.74  dN 2.1e-13 dH 5.9e-13  37.7 s
+  U-CASO  g =  -20.0 seme 13:  grumi max  0  vita max   0.00 t_c  rho_max/media   2.00  PR  400.00 ->  382.01  dN 2.4e-13 dH 7.0e-13  41.6 s
+
+  --- braccio U-UNO: U_ij = IDENTITA'
+  U-UNO   g =    0.0 seme 11:  grumi max  6  vita max  43.00 t_c  rho_max/media  12.68  PR  400.00 ->  176.02  dN 3.8e-15 dH 5.4e-15  26.0 s
+  U-UNO   g =    0.0 seme 12:  grumi max  7  vita max  45.50 t_c  rho_max/media   7.74  PR  400.00 ->  172.78  dN 2.1e-15 dH 2.5e-15  20.9 s
+  U-UNO   g =    0.0 seme 13:  grumi max  5  vita max  47.50 t_c  rho_max/media  11.51  PR  400.00 ->  142.89  dN 2.3e-15 dH 2.9e-15  22.8 s
+  U-UNO   g =   -2.0 seme 11:  grumi max 18  vita max  19.00 t_c  rho_max/media  12.70  PR  400.00 ->   96.94  dN 4.1e-15 dH 4.6e-14  36.7 s
+  U-UNO   g =   -2.0 seme 12:  grumi max 21  vita max  19.00 t_c  rho_max/media  11.62  PR  400.00 ->   99.43  dN 2.2e-14 dH 1.1e-13  33.9 s
+  U-UNO   g =   -2.0 seme 13:  grumi max 15  vita max  18.40 t_c  rho_max/media  14.06  PR  400.00 ->   95.41  dN 1.1e-14 dH 8.3e-14  37.2 s
+  U-UNO   g =   -5.0 seme 11:  grumi max 22  vita max  44.00 t_c  rho_max/media   7.64  PR  400.00 ->  169.42  dN 1.0e-13 dH 5.2e-13  40.7 s
+  U-UNO   g =   -5.0 seme 12:  grumi max 18  vita max  48.00 t_c  rho_max/media   7.07  PR  400.00 ->  174.61  dN 7.3e-14 dH 3.9e-13  37.5 s
+  U-UNO   g =   -5.0 seme 13:  grumi max 17  vita max  39.00 t_c  rho_max/media   6.82  PR  400.00 ->  169.16  dN 3.1e-14 dH 1.6e-13  40.9 s
+  U-UNO   g =  -10.0 seme 11:  grumi max 14  vita max  63.00 t_c  rho_max/media   5.04  PR  400.00 ->  235.13  dN 5.9e-14 dH 3.0e-13  45.5 s
+  U-UNO   g =  -10.0 seme 12:  grumi max 11  vita max  97.00 t_c  rho_max/media   4.71  PR  400.00 ->  242.43  dN 7.6e-14 dH 3.9e-13  41.8 s
+  U-UNO   g =  -10.0 seme 13:  grumi max 14  vita max  53.00 t_c  rho_max/media   4.55  PR  400.00 ->  235.13  dN 4.2e-14 dH 2.1e-13  44.5 s
+  U-UNO   g =  -20.0 seme 11:  grumi max  3  vita max  18.00 t_c  rho_max/media   3.61  PR  400.00 ->  295.43  dN 1.5e-13 dH 6.4e-13  52.0 s
+  U-UNO   g =  -20.0 seme 12:  grumi max  3  vita max  88.00 t_c  rho_max/media   3.49  PR  400.00 ->  301.70  dN 1.5e-13 dH 6.5e-13  48.1 s
+  U-UNO   g =  -20.0 seme 13:  grumi max  3  vita max  14.00 t_c  rho_max/media   3.49  PR  400.00 ->  295.16  dN 1.3e-13 dH 5.6e-13  52.5 s
+
+  --- ### ⛔ IL CASO CHE DEVE FALLIRE: eps = 0, mare PERFETTAMENTE uniforme. ### La simmetria NON si rompe da sola, e se si rompesse sarebbe UN DIFETTO DEL MIO CODICE, non fisica.
+  U-CASO  g = -10.0 seme 11  eps = 0:  grumi max 0  rho_max/media 2.267851  PR  400.00 ->  365.00
+  U-CASO  g = -10.0 seme 12  eps = 0:  grumi max 0  rho_max/media 2.185246  PR  400.00 ->  367.49
+  U-CASO  g = -10.0 seme 13  eps = 0:  grumi max 0  rho_max/media 2.478874  PR  400.00 ->  366.64
+  U-UNO   g = -10.0 seme 11  eps = 0:  grumi max 12  rho_max/media 5.280090  PR  400.00 ->  234.99
+  U-UNO   g = -10.0 seme 12  eps = 0:  grumi max 14  rho_max/media 4.549318  PR  400.00 ->  242.31
+  U-UNO   g = -10.0 seme 13  eps = 0:  grumi max 12  rho_max/media 4.637526  PR  400.00 ->  234.75
+  ### I DATI DEL MARE SONO SALVATI (1274.2 s in tutto).

@@ -205,3 +205,79 @@ lo ha detto.**
 ### **E LA SOGLIA SI APPLICA A `(b-ii)`:** se con `dt` dimezzato lo scarto va ### **sotto
 `1e-3`**, il controllo passa e il residuo è ### **spiegato**. ### ⛔ **Se non ci va, NON lo
 chiamo discretizzazione: lo riporto come residuo NON SPIEGATO, e le corse non partono.**
+
+---
+
+# ⭐ **ANNOTAZIONE ②, PRIMA DELLE CORSE: L'ESPERIMENTO DEL MARE** *(2026-10-08)*
+
+> ### ⛔ **L'IDEA DI LUCA, e il rilievo che mi coglie in pieno:**
+> **«I solitoni alla scala di Planck fanno dei campi, e i campi per interferenza generano le
+> masse. L'esperimento del pacchetto singolo prova solo che una massa GIÀ FORMATA si sostiene,
+> NON che nasce.»**
+
+### ✔ **HA RAGIONE, E IL DIFETTO ERA NEL DISEGNO, NON NEI NUMERI.** Il mio esperimento parte da
+un ### **pacchetto già localizzato**: qualunque cosa misuri, misura ### **la persistenza**, non
+### **la genesi**. ### ➜ **E il bersaglio del progetto è la genesi** *(`doc/IPOTESI_gravita_a_spinta.md`,
+`doc/REGISTRO_FISICA.md`: «l'aggregazione di spazio-tempo-materia»)*. ### **Il mare è
+l'esperimento giusto, e il pacchetto resta come controllo di persistenza.**
+
+## **LO STATO INIZIALE DEL MARE** *(i valori si dichiarano ADESSO)*
+
+| | |
+|---|---|
+| `\|ψ_k\|` | ### **uguale su tutti i nodi**, con ### **`ρ_0 = \|ψ_k\|² = 1`** — quindi norma totale `= n = 400` |
+| ### ⚠ **perché `ρ_0 = 1` e non la norma `1`** | con norma totale `1` si avrebbe `ρ_0 = 1/400 = 0.0025`, e il termine non lineare `g·ρ_0` sarebbe ### **`0.05` a `g = -20`** contro una scala di salto `~5`: ### **la non linearità sarebbe NEGLIGIBILE e non succederebbe niente, per costruzione.** Con `ρ_0 = 1` il confronto è `g` contro `~5`. ### **È un numero di banco, ed è dichiarato** |
+| `χ_k` | ### **uguale** su tutti i nodi: `(1, 0)` |
+| `φ_k` | `φ_0 + disturbo`, con disturbo uniforme in `[-ε, +ε]` e ### **`ε = 0.01` rad** |
+| ### ⛔ **nessuna concentrazione iniziale** | ed è il punto: il mare è ### **uniforme in modulo** |
+
+## **IL TEMPO, E PERCHÉ QUESTA SCALA**
+
+Il tempo caratteristico del mare ### **non** è quello del pacchetto: è il tempo
+dell'### **instabilità modulazionale**, che per la `NLS` focalizzante cresce come
+### **`1/(\|g\|·ρ_0)`**.
+
+| | |
+|---|---|
+| `t_c` | ### **`1/(\|g\|·ρ_0)`** per `g ≠ 0`; per `g = 0` ### **non è definito**, e si usa quello di `\|g\| = 5` ### **dichiarandolo** |
+| la corsa | ### **`5000` passi** con `dt = 0.002`, cioè `T = 10` — e `T` si riporta ### **in unità di `t_c`** per ciascun `g` *(`50 t_c` a `g = -5`, `20 t_c` a `g = -2`, `200 t_c` a `g = -20`)* |
+
+## **LE MISURE**
+
+| | come |
+|---|---|
+| il ### **rapporto di partecipazione** globale | `PR = 1/Σρ̂²` con `ρ̂` normalizzata |
+| i ### **GRUMI** | i nodi con `ρ_k > 3·⟨ρ⟩`, raggruppati in ### **componenti connesse SUL GRAFO** |
+| la ### **vita** di un grumo | un grumo ### **sopravvive** al campione successivo se esiste un grumo che ne sovrappone ### **almeno il `50 %`** dei nodi; le catene di sopravvivenze danno la vita, ### **in unità di `t_c`** |
+| la ### **norma** di un grumo | `Σρ_k` sui suoi nodi |
+| la ### **energia** di un grumo | il termine non lineare sui suoi nodi ### **più** i salti con ### **entrambi** gli estremi dentro. ### ⚠ **I salti che ATTRAVERSANO il bordo NON si attribuiscono a nessuno**, e si riportano a parte: metterli d'autorità in un grumo falserebbe il bilancio — ### **la stessa regola delle tre classi di `D3`** |
+| l'### **orologio** *(`A16.2`)* | `dφ/dt` al nodo di `ρ` massimo del grumo, contro la sua ### **energia per unità di norma** |
+
+## **I CRITERI, FISSATI ADESSO** *(quelli di Luca)*
+
+| | il criterio |
+|---|---|
+| ### **`LE MASSE NASCONO DALL'INTERFERENZA`** | se per ### **almeno un `g` focalizzante**, in ### **tutti e `3`** i semi si formano grumi che durano ### **più di `10 t_c`**, ### **MENTRE** con `g = 0` il mare resta uniforme ### **entro un fattore `2`** della densità media |
+| ### **`NON NASCONO`** | se ### **nessun `g`** produce grumi duraturi |
+| ### ⛔ **IL CASO CHE DEVE FALLIRE** | con ### **`ε = 0`** *(mare perfettamente uniforme)* ### **non deve nascere niente**: la simmetria ### **non si rompe da sola** |
+| e ### **i due bracci separati** | se i grumi nascono ### **solo** con `U` casuale, potrebbe essere ### **localizzazione di Anderson** e non interferenza non lineare |
+
+## **LE PREVISIONI, PRIMA DI VEDERE I NUMERI**
+
+| id | la previsione |
+|---|---|
+| **`PM-1`** | ### **i grumi NASCONO** per i `g` più negativi: l'instabilità modulazionale è ### **il meccanismo standard** della `NLS` focalizzante, e qui c'è |
+| **`PM-2`** | ### ⛔ **il caso `ε = 0` NON produce niente**, e il residuo resta al livello dell'### **arrotondamento**: la simmetria non si rompe da sola, e se si rompesse sarebbe ### **un difetto del mio codice**, non fisica |
+| **`PM-3`** | i grumi nascono ### **in ENTRAMBI i bracci**, perché l'instabilità modulazionale ### **non ha bisogno di disordine** — le basta la non linearità. ### **Scritta per poter PERDERE: se nascono solo in `U-CASO`, è Anderson e lo dirò** |
+| **`PM-4`** | a `g = 0` il mare ### **resta uniforme entro un fattore `2`** in `U-UNO`, ### **ma NON in `U-CASO`**: il flusso di gauge casuale localizza da sé *(ed è il rilievo del guardiano)*. ### ➜ **In quel caso il criterio di Luca si applica SOLO al braccio `U-UNO`, e lo dirò** |
+| **`PM-5`** | ### ⭐ **l'orologio di de Broglie si vede**: `dφ/dt` del grumo correla con la sua energia per unità di norma, col segno giusto, entro il `30 %` |
+| **`PM-6`** | la ### **vita** dei grumi è ### **lunga** *(oltre `10 t_c`)* per i `g` grandi e ### **corta** per `g = -2`: più non lineare, più stabile |
+
+### **COSA MI FAREBBE FERMARE:** il caso `ε = 0` che ### **produce grumi** *(sarebbe un difetto
+del codice: una rottura di simmetria senza causa)*; la norma o l'energia che ### **derivano**;
+una corsa oltre i ### **`20` minuti**.
+
+### ⚠ **E UNA COSA CHE QUESTO ESPERIMENTO NON PUÒ DIRE, dichiarata prima:** se i grumi nascono,
+### **non** sono ancora «masse» nel senso del bersaglio — sono ### **grumi di `\|ψ\|²` che
+durano**. Che si attraggano, con che legge, e se tutti cadano allo stesso modo sono
+### **le tre prove di `doc/IPOTESI_gravita_a_spinta.md`**, e ### **restano fuori.**

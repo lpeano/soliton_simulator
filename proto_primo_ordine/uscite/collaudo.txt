@@ -1,0 +1,24 @@
+========================================================================================================
+IL COLLAUDO DEL PROTOTIPO AL PRIMO ORDINE
+========================================================================================================
+  ok    il prototipo ### **NON ha importato il simulatore** *(guardato in `sys.modules`, non dichiarato)*
+  grafo: n = 400, archi = 2759, grado medio 13.79 (min 2, max 29), isolati 0
+  ok    grafo: ### `U` e' UNITARIA su tutti gli archi *(scarto massimo da `I`: `6.661e-16`)*
+  ok    grafo: ### **nessun nodo isolato** *(un nodo isolato non evolverebbe, e sarebbe un pezzo di stato fuori dalla dinamica)*
+  (a) 10000 passi in 40.8 s; iterazioni del punto medio: mediana 5, massimo 5
+  ok    (a) ### **la NORMA si conserva**: deriva relativa `3.706e-13` su `10^4` passi *(soglia `1e-8`)*
+  ok    (a) ### **l'ENERGIA si conserva**: deriva relativa `4.364e-13` su `10^4` passi *(soglia `1e-8`)*
+  ok    (a) ### e l'iterazione ### **converge sempre** entro il tetto *(massimo 5 su 60)*
+  ok    (b) ### **IL SOLITONE DISCRETO E' STAZIONARIO**, e si verifica: residuo dell equazione `9.714e-17` dopo `200` passi di Newton *(soglia `1e-12`)*
+  (b) `mu` = -0.015625, `max u` = 0.176545 *(continuo: 0.176777)*, e lo SCARTO fra solitone CONTINUO e DISCRETO e' ### **3.239e-02**
+  (b) catena n = 160, LARG = 8.0, eta = 0.12500, t_c = 64.0, dt = 0.00200, passi = 320000, norma = 0.499236
+  ok    (b) ### **IL SOLITONE DISCRETO SI PROPAGA INTATTO**: scarto massimo sul profilo `9.027e-11` dopo `10` tempi caratteristici *(soglia `1e-3`)*
+  ok    (b) ### ⭐ **E QUESTO DIMOSTRA L ATTRIBUZIONE del residuo di prima:** col `sech` CONTINUO lo scarto era `1.903e-03` *(e non calava ne' con `dt` ne' con la larghezza)*; col solitone ### **DELL EQUAZIONE** e' `9.027e-11`. ### ➥ **Quel residuo era lo SCARTO CONTINUO-DISCRETO, misurato `3.239e-02` sul profilo iniziale, non un difetto dello schema**
+  (b) la deviazione nel tempo *(ogni 2000 passi)*: 1.57e-16 2.89e-13 5.83e-13 8.88e-13 1.21e-12 1.54e-12 1.89e-12 2.26e-12
+  ok    (b) ### e il `PR` ### **NON cresce**: da `23.95` a `23.95`
+  ok    (c) ### ⛔ **DEVE FALLIRE -- con `g = 0` il profilo SI DISPERDE**: scarto `5.558e-01` *(contro `9.027e-11` con `g != 0`)*, e il `PR` va da `23.95` a ### **`110.43`** *(con `g != 0`: `23.95`)*
+  ok    (d) ### **la DOPPIA COPERTURA si vede su `H`**: `phi_k + 2pi` su UN nodo cambia l'energia da `-1.001070` a `-0.753662` *(differenza `0.247408`)*
+  ok    (d) ### e `phi_k + 4pi` la riporta ### **IDENTICA** *(scarto `0.000e+00`)*
+  ok    `phi` SI LEGGE da `psi` e sta in `[0, 4pi)` *(min `3.8905`, max `3.8905`)*: ### **non e' una variabile** *(`A16.1`)*
+--------------------------------------------------------------------------------------------------------
+  COLLAUDO: 14 su 14

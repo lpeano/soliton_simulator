@@ -10165,3 +10165,78 @@ non la spaccio per fatta.**
 > limite `U(1)`, che il collaudo verifica esatto, e ### **contare** quei passi)* è
 > ### **scritta e non applicata**, perché il sigillo in corsa ### **importa** quel file
 > *(par.5)*. ### **Il collaudo della forma `U(2)`, però, è chiuso: `9` su `9`.**
+
+---
+
+# ⛔ **IL PROTOTIPO: IL COLLAUDO CHIUDE `14/14`, MA IL CRITERIO DEL MARE NON È DECIDIBILE** *(2026-10-08)*
+
+> Referto: `doc/REFERTO_proto_primo_ordine_2026-10-08.md` *(`180` righe, `12` tabelle, `0`
+> difetti)*. ### ⛔ **Simulatore `b8c21049`, e il prototipo NON lo importa — e lo ASSERISCE.**
+
+## ⛔ **IL TETTO DEI `20` MINUTI È STATO SUPERATO: `1274.2 s = 21.24` MINUTI**
+
+### **Il mandato dice di fermarsi e scriverlo, e mi fermo:** ### **NON ho lanciato
+l'esperimento del pacchetto.** ### ⚠ **E il mio controllo del tetto non l'ha preso**, perché
+l'avevo messo ### **dentro** il ciclo dei `g` e dei semi, mentre il blocco `ε = 0` sta
+### **dopo**: gli ultimi `6` giri sono passati senza controllo. ### **I dati sono completi, ma
+il presidio era mal posto.**
+
+## ✔ **IL COLLAUDO: `14` SU `14`, E `(b)` PROVA CIÒ CHE DICE**
+
+Norma `3.706e-13`, energia `4.364e-13` su `10⁴` passi; il solitone ### **discreto** è
+stazionario a `9.714e-17` e si propaga a ### **`9.027e-11`** *(contro `1.903e-03` del `sech`
+continuo, il cui scarto dal discreto è `3.239e-02`)*; la doppia copertura torna
+### **esatta** dopo `4π`.
+
+### ⛔ **QUATTRO ERRORI MIEI IN CINQUE GIRI, e ciascuno preso da un controllo che POTEVA
+passare:** l'encoding di `stdout` *(la nona volta in questo repo)*; `energia` e `forza` che
+descrivevano ### **due `H` diverse**; il `sech` ### **normalizzato**, che così non era più un
+solitone; e un discriminante sulla ### **larghezza** che ### **non discriminava**. ### **Il
+terzo giro ha smontato la mia stessa spiegazione:** il `dt` dimezzato dava lo stesso numero a
+quattro cifre, e ### **una quantità che non si muove dimezzando il passo non è un errore di
+integrazione.**
+
+## ⛔ **IL MARE: IL CRITERIO NON SI PUÒ SODDISFARE COME È SCRITTO**
+
+| braccio | `ρ_max/media` a `g = 0` | la clausola chiede |
+|---|--:|--:|
+| `U-CASO` | `6.04` · `6.22` · `6.57` | `< 2` |
+| `U-UNO` | ### **`12.68` · `7.74` · `11.51`** | `< 2` |
+
+### ➜ **Il controllo a `g = 0` NON è un controllo: il mare non resta uniforme nemmeno senza non
+linearità**, in ### **nessuno** dei due bracci.
+
+### ⭐ **E LA CAUSA È MISURATA:** con `ψ` uniforme la forza è `F_k = −(Σ_j w_kj)·ψ + g·ρ·ψ`, e
+### **`Σ_j w_kj` varia da `0.17` a `7.84`** — un rapporto fino a ### **`39×`** e una
+deviazione del ### **`38 %`**. ### **Il «mare uniforme» lo è solo in MODULO: in energia di sito
+non lo è per niente.** La localizzazione a `g = 0` è ### **Anderson del GRAFO** — il falso
+positivo che avevo dichiarato, ### **ma di una sorgente che non avevo nominato.**
+
+## ⛔ **E IL CASO CHE DEVE FALLIRE È SMENTITO: CON `ε = 0` NASCONO `12`-`14` GRUMI IN `U-UNO`**
+
+Il criterio diceva «non deve nascere niente, perché la simmetria non si rompe da sola».
+### ➜ **La premessa è falsa: la simmetria non c'era.** Un `|ψ|` uniforme su questo grafo
+### **non è uno stato simmetrico.** ### ⚠ **E il test era mal posto, ed è un difetto mio:** lo
+stato che *sarebbe* simmetrico è ### **uno stato stazionario** dell'equazione, non il costante —
+e per il solitone l'avevo fatto giusto, qui no.
+
+## ⛔ **L'OROLOGIO È ALIASATO, E NON LO USO**
+
+Campiono ogni `0.1` di tempo, quindi `dφ/dt` è risolvibile solo fino a `±62.83` — e i valori
+misurati stanno ### **esattamente** a quel limite *(`±62.82`)*. ### **La fase avanza di più di
+`2π` fra due campioni: la differenza avvolta non è più `dφ/dt`.** Il sintomo è che le
+correlazioni hanno ### **segno opposto** nei due bracci *(`−0.59` e `+0.45`)*. ### **È una
+misura MANCANTE, non un risultato**, e la cura è campionare la fase ### **a ogni passo.**
+
+## ⚠ **QUATTRO PREVISIONI SU SEI SMENTITE, E IL PEZZO CHE VALE È `PM-4`**
+
+Avevo previsto che il disordine venisse dal ### **gauge** e che `U-UNO` restasse uniforme.
+### ⛔ **È al contrario: `U-UNO` localizza PIÙ di `U-CASO`.** E in `U-CASO` la non linearità
+### **DISTRUGGE** la localizzazione invece di crearla *(`4` grumi a `g = -2`, ### **`0`** da
+`g = -5` in giù)*.
+
+> ### ⛔ **NON DICO CHE LE MASSE NASCONO, E NON DICO CHE NON NASCONO.** In `U-UNO` a `g = -10`
+> ci sono `14` grumi con vita fino a `63 t_c`; ### **ma a `g = 0` ce ne sono `6` con vita `43`**,
+> e senza un controllo pulito ### **non si attribuisce niente.** ### **La misura che
+> deciderebbe c'è** *(partire da uno stato stazionario, come per il solitone)*, ### **e non la
+> faccio: il tetto è superato e la decisione è di Luca.**
