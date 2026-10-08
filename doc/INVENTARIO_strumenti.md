@@ -1942,3 +1942,59 @@ del driver, `393` vive, `11` ### **a senso unico**; `32` flag cambiati dall'argv
 > ### ⚠ **CIO' CHE IL METODO NON VEDE, dichiarato:** le scritture per ### **mutazione** *(un `dict`
 > aggiornato dentro una funzione a cui l'oggetto e' passato come argomento)* — e' il falso positivo
 > gia' preso su `conc_nodi`. Per quelle il censimento e' ### **per difetto**.
+
+### 🔬 IL TEST DI INTEGRABILITA' — **il criterio del <<NO>>** *(2026-10-08)*
+
+| | |
+|---|---|
+| **file** | `csv/_test_fork/_prova_integrabilita.py` *(346 righe)* |
+| **COMANDO** | `python csv/_test_fork/_prova_integrabilita.py` |
+| **cosa misura** | se una legge e' il gradiente di ### **QUALCHE** `E`, ### **senza doverla indovinare**: `(A)` la legge ### **legge** la variabile che scrive? `(B)` `\|\|J − Jᵀ\|\|/\|\|J\|\|` contro il ### **pavimento CALCOLATO**. ### **Simmetrica ⇒ `E` esiste; asimmetrica ⇒ un «no» DIMOSTRATO** |
+| **BLOB** | `f2009678` *(sha1 dei byte grezzi)* |
+
+**Esito:** il banco e' ### **SANO** — i tre controlli passano. Coppia scalare
+### **`4.915e-12`** contro un pavimento di `4.926e-09` *(**SIMMETRICA**, il controllo positivo)*; la
+coppia ### **sintetica** asimmetrica a `1.463e-02` *(**discrimina**)*; la coppia del ### **driver**
+### **non legge `phi` affatto** *(`0.000e+00`)*.
+
+> ### ⛔ **E IL RISULTATO: LA SINCRONIZZAZIONE E' ASIMMETRICA A `1.0591`** — contro un pavimento
+> di `1.438e-10`, cioe' ### **nove ordini di grandezza sopra**. ### **Non esiste nessuna `E(φ)` di cui
+> `K_SYNC` sia il gradiente**, e non e' <<non l'ho trovata>>: e' ### **dimostrato**.
+
+> ### ⚠ **DUE DIFETTI CHE IL BANCO HA PRESO DI SE STESSO:** `(1)` `12` nodi di base portavano
+> ### **`11049`** vicini su questo grafo *(`471564` archi)*, cioe' una jacobiana `11049²` — il
+> tetto e' `40`, e la restrizione e' ### **lecita** *(una `J` simmetrica ha tutte le sottomatrici
+> principali simmetriche)*; `(2)` ### **`_bloch_ritardato` SCRIVE `_nb_ret`**, quindi due
+> chiamate con la stessa `phi` davano numeri diversi e il test strutturale leggeva quella deriva
+> come ### **<<la legge dipende da `phi`>>: un FALSO-UNO**. Ora `_nb_ret` si salva e si rimette,
+> e ### **ogni legge passa prima un controllo di RIPETIBILITA'**.
+
+### 🔬 IL TEST DI INTEGRABILITA' — **il criterio del <<NO>>** *(2026-10-08)*
+
+| | |
+|---|---|
+| **file** | `csv/_test_fork/_prova_integrabilita.py` *(351 righe)* |
+| **COMANDO** | `python csv/_test_fork/_prova_integrabilita.py` |
+| **cosa misura** | se una legge e' il gradiente di ### **QUALCHE** `E`, ### **senza doverla indovinare**: `(A)` la legge ### **legge** la variabile che scrive? `(B)` `\|\|J − Jᵀ\|\|/\|\|J\|\|` contro il ### **pavimento CALCOLATO**. ### **Simmetrica ⇒ `E` esiste; asimmetrica ⇒ un «no» DIMOSTRATO** |
+| **BLOB** | `b79b7459` *(sha1 dei byte grezzi)* |
+
+**Esito:** il banco e' ### **SANO** — i tre controlli passano. Coppia scalare
+### **`5.178e-12`** contro un pavimento di `4.936e-09` *(**SIMMETRICA**, il controllo positivo)*; la
+coppia ### **sintetica** asimmetrica a `1.463e-02` *(**discrimina**)*; la coppia del ### **driver**
+### **non legge `phi` affatto** *(`0.000e+00`)*.
+
+> ### ⛔ **E IL RISULTATO: LA SINCRONIZZAZIONE E' ASIMMETRICA A `1.0641`** — contro un pavimento
+> di `1.438e-10`, cioe' ### **nove ordini di grandezza sopra**, e lo ### **stesso** numero ai tre
+> passi `h`. ### **Non esiste nessuna `E(φ)` di cui `K_SYNC` sia il gradiente**, e non e'
+> <<non l'ho trovata>>: e' ### **dimostrato**.
+
+> ### ⚠ **TRE DIFETTI PRESI PRIMA DEL VERDETTO, due dal banco e uno da un PRESIDIO:**
+> `(1)` `12` nodi di base portavano ### **`11049`** vicini *(`471564` archi)*, cioe' una
+> jacobiana `11049²` — il tetto e' `40`, e la restrizione e' ### **lecita** *(una `J` simmetrica
+> ha tutte le sottomatrici principali simmetriche)*; `(2)` ### **`_bloch_ritardato` SCRIVE
+> `_nb_ret`**, quindi due chiamate con la stessa `phi` davano numeri diversi e il test
+> strutturale leggeva quella deriva come ### **<<dipende da `phi`>>: un FALSO-UNO** — ora
+> `_nb_ret` si salva e si rimette, e ogni legge passa prima un controllo di
+> ### **RIPETIBILITA'**; `(3)` ### **`H-P3` ha preso che `net.step()` NON E' UN PASSO** — senza
+> `passo_pieno` non girano `scuoti_vuoto`, `rilassa_disegno` ne' la memoria hebbiana, cioe' lo
+> snapshot ### **non era sulla traiettoria del driver.**

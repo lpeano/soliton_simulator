@@ -1,0 +1,45 @@
+========================================================================================================
+IL TEST DI INTEGRABILITA' -- il criterio del <<NO>>
+========================================================================================================
+  simulatore b8c21049   atteso b8c21049
+====================================================================================================
+LA CONFIGURAZIONE INTERA (`P5`) -- non i flag toccati, TUTTI
+====================================================================================================
+  booleani di modulo confrontati con l'argv del DRIVER: 82
+  -> IN CONFIGURAZIONE DEL DRIVER: nessuna differenza. ZERO su 82.
+
+  scena: n = 12802, archi = 471564, DT = 0.01
+  snapshot dopo 3 passi PIENI (`_passo.passo_pieno`, non `net.step()`)
+  campione: 3 nodi di base -> 40 col loro vicinato
+  A: 471564 archi, |A| medio 0.662533  (A = w*cos(phi0_i - phi0_j), ricostruita e DICHIARATA)
+========================================================================================================
+(A) IL TEST STRUTTURALE -- la legge LEGGE la variabile che SCRIVE?
+========================================================================================================
+  coppia SCALARE                    dF/F perturbando phi: 2.163e-03   ->  LEGGE x
+  coppia del DRIVER                 dF/F perturbando phi: 0.000e+00   ->  ### NON LEGGE x
+  sincronizzazione                  dF/F perturbando phi: 2.549e-03   ->  LEGGE x
+  coppia ASIMMETRICA (sintetica)    dF/F perturbando phi: 1.998e-03   ->  LEGGE x
+========================================================================================================
+(B) IL TEST DI INTEGRABILITA' -- ||J - J^T|| / ||J|| contro il PAVIMENTO CALCOLATO
+========================================================================================================
+  coppia SCALARE                    h 1e-04   asimmetria 4.394824e-13   pavimento 4.040045e-07   SIMMETRICA
+  coppia SCALARE                    h 1e-05   asimmetria 5.178401e-12   pavimento 4.936019e-09   SIMMETRICA
+  coppia SCALARE                    h 1e-06   asimmetria 6.607984e-11   pavimento 9.009102e-09   SIMMETRICA
+      ### -> una E ESISTE (localmente, in quelle variabili)
+  coppia del DRIVER                 ### NON SI MISURA: ha gia' fallito il (A). Misurarla darebbe J = 0, che e' SIMMETRICA -- un FALSO-ZERO.
+  sincronizzazione                  h 1e-04   asimmetria 1.064088e+00   pavimento 1.177281e-08   ### ASIMMETRICA
+  sincronizzazione                  h 1e-05   asimmetria 1.064088e+00   pavimento 1.438371e-10   ### ASIMMETRICA
+  sincronizzazione                  h 1e-06   asimmetria 1.064088e+00   pavimento 2.625279e-10   ### ASIMMETRICA
+      ### -> NON ESISTE una E in quelle variabili -- un <<no>> DIMOSTRATO
+  coppia ASIMMETRICA (sintetica)    h 1e-04   asimmetria 1.462809e-02   pavimento 5.806138e-07   ### ASIMMETRICA
+  coppia ASIMMETRICA (sintetica)    h 1e-05   asimmetria 1.462809e-02   pavimento 7.093784e-09   ### ASIMMETRICA
+  coppia ASIMMETRICA (sintetica)    h 1e-06   asimmetria 1.462809e-02   pavimento 1.294740e-08   ### ASIMMETRICA
+      ### -> NON ESISTE una E in quelle variabili -- un <<no>> DIMOSTRATO
+========================================================================================================
+I CONTROLLI DEL BANCO
+========================================================================================================
+  controllo POSITIVO (coppia scalare simmetrica):            PASSA
+  caso che DEVE fallire   (coppia del driver NON traducibile): PASSA   -- per: NON TRADUCIBILE in quelle variabili (test A)
+  caso che DEVE fallire (B) (coppia sintetica asimmetrica):   PASSA
+
+  ### IL BANCO: SANO -- i verdetti si possono leggere

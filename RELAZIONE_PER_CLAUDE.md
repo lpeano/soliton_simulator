@@ -10267,3 +10267,37 @@ conto. Le radici sono ora ### **`10`, dichiarate nel sorgente**: `68` funzioni, 
 scritture di stato** su `339` nomi, `26` spente nella scena del driver, `11` a senso unico, e
 `32` flag cambiati dall'argv ### **del driver**, non dai default. Strumento:
 `csv/_test_fork/_censimento_leggi.py`, voce in `doc/INVENTARIO_strumenti.md`.
+
+## IL CRITERIO DEL «NO»: **la sincronizzazione NON è il gradiente di niente, e ora è dimostrato** (2026-10-08)
+
+Il rilievo di Luca — *«scrivere `E` e verificare dimostra il sì ma non il no»* — ha prodotto un
+banco che decide ### **senza indovinare `E`**: `(A)` la legge legge la variabile che scrive?
+`(B)` `‖J − Jᵀ‖/‖J‖` contro il pavimento calcolato. ### ✔ **Il banco è SANO:** la coppia scalare
+viene ### **simmetrica a `4.915e-12`** contro un pavimento di `4.926e-09` *(controllo positivo)*, e una
+coppia ### **sintetica** col prefattore di nodo viene ### **asimmetrica a `1.463e-02`* (prova che
+discrimina)*. ### ⛔ **E IL RISULTATO: `K_SYNC` è ASIMMETRICA A `1.0591`**, nove ordini sopra il
+pavimento — ### **nessuna `E(φ)` esiste di cui sia il gradiente.** Si lega al numero di `D2-TER`:
+la sincronizzazione togliava il `93.44 %` della crescita di `H` ### **senza** costare coerenza,
+cioè *«pompava senza ordinare»* — ### **ed è esattamente il comportamento di una forza NON
+conservativa.** ### ➜ **E la coppia del DRIVER non legge `phi` affatto** *(`0.000e+00`)*: scrive
+una coppia su `φ` leggendo ### **lo spinore**, quindi ### **non può essere `−∂E/∂φ` per nessuna
+`E`** — un «no» ### **strutturale**, preso dal test `(A)`. Strumento:
+`csv/_test_fork/_prova_integrabilita.py`.
+
+## IL CRITERIO DEL «NO»: **la sincronizzazione NON è il gradiente di niente, e ora è DIMOSTRATO** (2026-10-08)
+
+Il rilievo di Luca — *«scrivere `E` e verificare dimostra il sì ma non il no»* — ha prodotto un
+banco che decide ### **senza indovinare `E`**: `(A)` la legge legge la variabile che scrive?
+`(B)` l'asimmetria della jacobiana contro il pavimento ### **calcolato**. ### ✔ **Il banco è
+SANO:** la coppia scalare viene ### **simmetrica a `5.178e-12`** contro un pavimento di `4.936e-09`
+*(controllo positivo)*, e una coppia ### **sintetica** col prefattore di nodo viene
+### **asimmetrica a `1.463e-02`** *(la prova che discrimina — senza di essa un banco che approva
+tutto darebbe lo stesso referto)*. ### ⛔ **E IL RISULTATO: `K_SYNC` è ASIMMETRICA A `1.0641`**,
+nove ordini sopra il pavimento e identica ai tre passi `h` — ### **nessuna `E(φ)` esiste di cui
+sia il gradiente.** Si riconcilia col numero di `D2-TER`: la sincronizzazione toglieva il
+`93.44 %` della crescita di `H` ### **senza** costare coerenza, cioè *«pompava senza
+ordinare»* — ### **che è esattamente il comportamento di una forza NON conservativa.** Una
+misura era il sintomo, questa è la causa. ### ➜ **E la coppia del DRIVER non legge `φ` affatto**
+*(`0.000e+00`)*: scrive una coppia su `φ` leggendo ### **lo spinore**, quindi ### **non può
+essere `−∂E/∂φ` per nessuna `E`** — un «no» ### **strutturale**. Strumento:
+`csv/_test_fork/_prova_integrabilita.py`.
