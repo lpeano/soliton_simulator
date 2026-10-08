@@ -10465,3 +10465,29 @@ settori — con ### **una sola `H` quel problema non esiste.**
 ### ⭐ **E un numero che non è cambiato ma ha cambiato significato:** lo scarto `1.054` fra la
 coppia del driver e la forma `U(2)` era *«quanto differisce»*; col criterio del «no» di Luca
 *(soglia del `10 %`)* dice che la forma `U(2)` ### **non è una traduzione: è una legge nuova.**
+
+## LA CHIUSURA DELL'ERA `1` — **il tag, e che cosa passa** (2026-10-08)
+
+`doc/ERA_1_CHIUSURA.md` fotografa il simulatore ### **`b8c21049`** *(secondo ordine)* e dice
+perché lo si cambia. ### ⭐ **Zero numeri ricopiati:** tutto dalle uscite, e i tre che vivono
+solo nel referto *(`230 su 230`, `93.44 %`, `×2.4862`)* si ### **estraggono con
+un'espressione**, con l'### **asserzione** che ci siano — se il referto cambiasse, il documento
+### **non si scriverebbe.**
+
+### **I riferimenti:** `D1` ### **`230 su 230`** passi con `P_coppia` positiva; la coppia che
+### **legge la fase** tiene le masse *(`B-TS` `0.4848` contro `B-SCAL` `0.9020`)*; `D2-TER` `AUC400`
+### **`0.9333`** e cinetica ### **`×2.4862`**; i due «no» *(`1.0641` e `0.000e+00`)*; il mare `v1`
+### **non decidibile** e il `v2` ### **collasso**; il bilancio *(`381466.2` liberati, `199600.0` la
+prima divisione, cascata ferma al livello ### **`4`**)*; lo spartiacque ### **`ρ = 25.0`**.
+
+### ⚠ **E una nota che cambia come si legge la candidata dell'unità di stato:** `ρ₁ =
+λ_max/|g|` = `1.1299` è derivata ### **DENTRO LA SONDA** — da un `|ψ|⁴` di ### **sito** e dallo
+spettro di un grafo costruito con ### **`pos`** *(`A17`!)*. ### ➜ **Va ricalcolata sulla `H` di
+Luca, dove la coesione è un termine D'ARCO:** il numero di oggi è ### **un ordine di grandezza,
+non il valore.**
+
+### ⭐ **E su `T1` la candidata del guardiano regge, e il conto torna:** la ### **lunghezza
+minima `LAM`** vieta la fusione *(due nodi che si fondono dovrebbero ### **scendere sotto
+`LAM`**)*, mentre la nascita ### **spezza un arco `≥ 2·LAM` in due pezzi `≥ LAM`**. ### ➜
+**L'asimmetria sarebbe GEOMETRICA, non energetica, e `A13` diventerebbe la ragione di `A14.2`.**
+### ⛔ **Da verificare, non assunta.**

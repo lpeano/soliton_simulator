@@ -66,6 +66,7 @@ commit**: cosi' non se ne accumulano di invisibili.)*
 | `csv/_test_fork/_confronto_previsione.py|H-P5` | non costruisce nessuna scena e non carica il simulatore: legge i `json` di un run |
 | `csv/_test_fork/_controlli_mzd.py|H-P5` | non importa il simulatore e non lo fa girare. Confronta i `json` di corse che |
 | `csv/_test_fork/_crescita_dopo_z43.py|H-P3` | le COPIE PATCHATE servono perche' `grad_modula`, `soglia`, `ecc`, `salita`, |
+| `csv/_test_fork/_doc_era1.py|H-P5` | non importa il simulatore e non lo fa girare. Legge `json` e referti prodotti |
 | `csv/_test_fork/_doc_traduzione.py|H-P5` | non importa il simulatore e non lo fa girare: legge quattro `json` prodotti |
 | `csv/_test_fork/_esponenti_figli.py|H-P5` | legge JSON gia' scritti, non fa girare il simulatore. La configurazione di quei dati |
 | `csv/_test_fork/_massa_id.py|H-P5` | non costruisce nessuna scena e non carica il simulatore. Il `--collaudo` gira su un |
@@ -94,5 +95,5 @@ commit**: cosi' non se ne accumulano di invisibili.)*
 | `csv/_test_fork/_z43_tempo_proprio.py|H-P3` | la scena passa TUTTA dal CLI (`nmasse` e `sep` da `argv`), e la |
 
 ```
-esenzioni dichiarate   87
+esenzioni dichiarate   88
 ```

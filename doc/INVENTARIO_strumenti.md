@@ -2101,3 +2101,17 @@ il minimo del fattore `N/C`. ### ⭐ **Le due fermate sono DIVERSE, e il discrim
 > ### **`\b` e' diventato un BACKSPACE `\x08`**, quindi il regex ### **non poteva funzionare**
 > e il conto tornava `0` ### **per un motivo sbagliato.** ### ➜ **Ora: sole sottostringhe,
 > nessun escape.**
+
+### 🔬 IL GENERATORE DELLA CHIUSURA DELL'ERA `1` *(2026-10-08)*
+
+| | |
+|---|---|
+| **file** | `csv/_test_fork/_doc_era1.py` *(352 righe)* |
+| **COMANDO** | `python csv/_test_fork/_doc_era1.py` |
+| **cosa misura** | ### **niente: GENERA `doc/ERA_1_CHIUSURA.md`** dalle uscite committate. I tre numeri che vivono ### **solo nel referto** *(`230 su 230`, `93.44 %`, `×2.4862`)* si ### **ESTRAGGONO dal testo con un'espressione**, e il generatore ### **ASSERISCE che ci siano**: se il referto cambiasse, il documento ### **NON si scriverebbe** invece di scrivere un numero vecchio |
+| **BLOB** | `9214e6a2` |
+
+**Esito:** `146` righe, e ### **zero** numeri ricopiati a mano. ### ⭐ **E un controllo fra
+uscite diverse:** il livello di arresto della cascata e' letto da ### **due** json e il
+generatore ### **asserisce che concordino** — *«due misure incompatibili sullo stesso oggetto si
+riconciliano, non si sceglie»*.
