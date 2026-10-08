@@ -60,11 +60,13 @@ commit**: cosi' non se ne accumulano di invisibili.)*
 | `csv/_seal_fork/_tors_w8_patch.py|H-P8` | un FALSO POSITIVO, e lo nomino invece di riformularlo. Il rilevatore |
 | `csv/_seal_fork/_veleno_keep_patch.py|H-P3` | non importa il simulatore e non lo fa girare. Scrive un file. |
 | `csv/_seal_fork/_z43_cura2_patch.py|H-P8` | un FALSO POSITIVO, e lo nomino invece di riformularlo. L occorrenza di |
+| `csv/_test_fork/_bilancio_nascita.py|H-P5` | non importa il simulatore e non lo fa girare. E' aritmetica sui numeri gia' |
 | `csv/_test_fork/_calcio_sotto_scambio.py|H-P3` | la frazione del CONTROLLO si cambia su una COPIA DEL SORGENTE, non |
 | `csv/_test_fork/_confronto_blob_misure.py|H-P5` | non importa il simulatore e non lo fa girare. Legge due referti json |
 | `csv/_test_fork/_confronto_previsione.py|H-P5` | non costruisce nessuna scena e non carica il simulatore: legge i `json` di un run |
 | `csv/_test_fork/_controlli_mzd.py|H-P5` | non importa il simulatore e non lo fa girare. Confronta i `json` di corse che |
 | `csv/_test_fork/_crescita_dopo_z43.py|H-P3` | le COPIE PATCHATE servono perche' `grad_modula`, `soglia`, `ecc`, `salita`, |
+| `csv/_test_fork/_doc_traduzione.py|H-P5` | non importa il simulatore e non lo fa girare: legge quattro `json` prodotti |
 | `csv/_test_fork/_esponenti_figli.py|H-P5` | legge JSON gia' scritti, non fa girare il simulatore. La configurazione di quei dati |
 | `csv/_test_fork/_massa_id.py|H-P5` | non costruisce nessuna scena e non carica il simulatore. Il `--collaudo` gira su un |
 | `csv/_test_fork/_massa_id_fisso.py|H-P5` | non costruisce nessuna scena e non carica il simulatore. Legge gli `.npz` di un run |
@@ -74,7 +76,6 @@ commit**: cosi' non se ne accumulano di invisibili.)*
 | `csv/_test_fork/_mitosi_zero_dove.py|H-P3` | lo strumento passa dal CLI (`_cli_flag.carica`) per la configurazione. Le |
 | `csv/_test_fork/_partecipazioni.py|H-P5` | legge le coorti e i `misura.json` di un run che ha gia' dichiarato la propria |
 | `csv/_test_fork/_referto_crescita.py|H-P5` | non importa il simulatore e non lo fa girare. Legge il `crescita.json` di una |
-| `csv/_test_fork/_doc_traduzione.py|H-P5` | non importa il simulatore e non lo fa girare: legge quattro `json` di strumenti che hanno GIA' dichiarato la configurazione INTERA, e la RIPORTA nel documento con la provenienza
 | `csv/_test_fork/_referto_fisso.py|H-P5` | non importa il simulatore e non lo fa girare. Legge i `json` di corse che |
 | `csv/_test_fork/_referto_lunga.py|H-P5` | non importa il simulatore e non lo fa girare. Legge il `json` di una corsa che |
 | `csv/_test_fork/_referto_mzd.py|H-P5` | non importa il simulatore e non lo fa girare. Legge i `json` di corse che hanno |
@@ -92,5 +93,5 @@ commit**: cosi' non se ne accumulano di invisibili.)*
 | `csv/_test_fork/_z43_tempo_proprio.py|H-P3` | la scena passa TUTTA dal CLI (`nmasse` e `sep` da `argv`), e la |
 
 ```
-esenzioni dichiarate   85
+esenzioni dichiarate   86
 ```

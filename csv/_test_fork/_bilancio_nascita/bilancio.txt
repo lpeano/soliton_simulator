@@ -1,0 +1,54 @@
+========================================================================================================
+IL BILANCIO DELLA NASCITA -- la proposta di Luca: paga il CALORE sul vuoto locale
+========================================================================================================
+  la scena del conto: N = 400, g = -5.0, w = lambda_max = 1.0000  (braccio NON-NORM, seme 11)
+
+========================================================================================================
+(1) IL BILANCIO SECCO
+========================================================================================================
+  la CONCENTRAZIONE libera:   H(esteso)     -18533.8  ->  H(un nodo)    -400000.0
+      energia liberata            381466.2
+  la PRIMA DIVISIONE costa:   Delta H       199600.0   (con w = 1.0)
+      e con w = lambda_max = 5.6494:  Delta H     197740.2  -- il  51.84 % della liberata
+      cioe' il  52.32 % di cio' che la concentrazione ha liberato
+  ### -> IL PRIMO CONTO TORNA: il calore gia' liberato BASTA, e avanza.
+========================================================================================================
+(2) LA TAUTOLOGIA DELLA CONSERVAZIONE -- la forza E il limite della proposta
+========================================================================================================
+  In una dinamica conservativa (A16) l'energia non sparisce, quindi il costo di
+  DISFARE il collasso e' ESATTAMENTE l'energia che il collasso ha liberato:
+      per tornare da un nodo al mare esteso servono       381466.2
+      il collasso ne aveva liberati                       381466.2
+      margine                                         0.000000e+00
+  ### -> LA FORZA: NON SERVE NESSUN BAGNO ESTERNO. Il conto si chiude da solo,
+  ###    ed e' esattamente cio' che la proposta di Luca dice.
+  ### -> IL LIMITE, E VA DETTO: il margine e' ZERO PER COSTRUZIONE. <<Basta>> e
+  ###    <<basta esattamente>> sono la stessa cosa, quindi il fatto che il
+  ###    conto torni NON E' UNA PROVA CHE IL PROCESSO AVVENGA: e' la condizione
+  ###    minima perche' non sia vietato. Quello che decide e' DOVE VA IL CALORE.
+========================================================================================================
+(3) LA CASCATA -- il costo va come N^2, quindi ogni livello costa UN QUARTO
+========================================================================================================
+  Un nodo di norma n che si divide in due da n/2 costa  (|g|/4) n^2 - w n.
+  Al livello k ci sono 2^k nodi da N/2^k, quindi il livello costa
+      2^k * [ (|g|/4) (N/2^k)^2 - w (N/2^k) ]  =  (|g|/4) N^2 / 2^k  -  w N
+
+  livello   nodi   norma per nodo   costo del livello   cumulato   calore residuo
+  --------------------------------------------------------------------------------------
+      0       1        400.0000            199600.0    199600.0        181866.2
+      1       2        200.0000             99600.0    299200.0         82266.2
+      2       4        100.0000             49600.0    348800.0         32666.2
+      3       8         50.0000             24600.0    373400.0          8066.2
+      4      16         25.0000             12100.0    385500.0         -4033.8
+
+  ### -> IL CALORE SI ESAURISCE AL LIVELLO 4: da li' in poi la frammentazione
+  ###    NON E' PIU' FINANZIATA, e il sistema si ferma a 16 nodi.
+  ###    QUESTO E' UN FRENO CHE SI FERMA DA SOLO: non frammenta all'infinito.
+
+  E LA SERIE INTERA, se si ignorasse il termine -w N:
+      somma_k (|g|/4) N^2 / 2^k  =  (|g|/2) N^2  =      400000.0
+      l'energia liberata dal collasso            =      381466.2
+      differenza                                 =       18533.8
+  ### -> I DUE TERMINI N^2 SI CANCELLANO: la differenza e' di ordine N, cioe' i
+  ###    termini di HOPPING. QUINDI non sono le grandezze dominanti a decidere se
+  ###    la nascita si paga: LO DECIDONO I TERMINI SOTTODOMINANTI.

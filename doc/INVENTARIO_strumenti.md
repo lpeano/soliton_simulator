@@ -2010,10 +2010,10 @@ coppia ### **sintetica** asimmetrica a `1.463e-02` *(**discrimina**)*; la coppia
 
 | | |
 |---|---|
-| **file** | `csv/_test_fork/_doc_traduzione.py` *(587 righe)* |
+| **file** | `csv/_test_fork/_doc_traduzione.py` *(937 righe)* |
 | **COMANDO** | `python csv/_test_fork/_doc_traduzione.py` |
 | **cosa misura** | ### **niente: GENERA `doc/TRADUZIONE_IN_H.md`** dai quattro json, perche' ogni numero del documento ### **esca da un'uscita** e non da una mano *(`L-NUMERI`)* |
-| **BLOB** | `90b2d84a` |
+| **BLOB** | `1f3b2b1e` |
 
 **Esito:** `67` regole di nascita su `2` eventi, e fra le loro `26` classi
 ### **NESSUNA si chiama «il genitore cede»** ⇒ `Σρ` ### **cresce** a ogni nascita *(la
@@ -2027,3 +2027,25 @@ porta `Σρ` a ### **`+0.0886 %`**; la candidata `ψ → ψ/√2` la conserva ##
 > e' un freno SOLO SE il vuoto locale paga** — che e' il punto `S5`, e ### **`S5` e' APERTO.**
 > ### **Non e' una conferma dell'ipotesi del guardiano: e' la dimostrazione che quell'ipotesi
 > dipende interamente dal punto aperto.**
+
+### 🔬 IL BILANCIO DELLA NASCITA — **chi paga, e dove si ferma** *(2026-10-08)*
+
+| | |
+|---|---|
+| **file** | `csv/_test_fork/_bilancio_nascita.py` *(172 righe)* |
+| **COMANDO** | `python csv/_test_fork/_bilancio_nascita.py` |
+| **cosa misura** | la proposta di Luca *(«paga il calore che si scarica sul vuoto locale»)* messa in numeri: `(1)` il bilancio secco; `(2)` la ### **tautologia della conservazione** *(il margine e' ZERO per costruzione)*; `(3)` la ### **cascata**, dove il costo va come `N²` e ogni livello costa ### **un quarto** del precedente |
+| **BLOB** | `039af771` |
+
+**Esito:** la concentrazione libera ### **`381466.2`**, la prima divisione costa ### **`199600.0`**
+*(il `52.32 %`)*, ### **e il conto torna.**
+
+> ### ⭐ **E IL FRENO SI FERMA DA SOLO, A UN NUMERO CHE NON HO SCELTO:** il calore si esaurisce
+> al livello ### **`4`**, cioe' a ### **`16` nodi**. ### **La scala d'arresto ESCE DAL
+> BILANCIO, non e' una manopola** *(`A1`)*.
+
+> ### ⚠ **MA IL MARGINE E' ZERO PER COSTRUZIONE**, ed e' la forza *(nessun bagno esterno)* e il
+> limite *(«basta» e «basta esattamente» sono la stessa cosa)*. ### **I due termini `N²` si
+> cancellano** — la serie intera fa `400000.0`, il liberato `381466.2`, e la differenza ### **`18533.8`**
+> e' esattamente `|H`(esteso)`|`, cioe' ### **l'hopping.** ### ➜ **Non sono le grandezze
+> dominanti a decidere se la nascita si paga: lo decidono i termini SOTTODOMINANTI.**

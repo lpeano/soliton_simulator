@@ -10324,3 +10324,37 @@ interamente dal punto aperto.** Il numero che lo lega al simulatore: senza bagno
 crollano da `164` a `0`, quindi ### **oggi chi paga la nascita è il bagno GLOBALE.**
 L'### **elenco delle decisioni di Luca** è nel `⑨` del documento: ### **dieci voci**, e la `8`
 *(da dove viene l'energia dello spazio nuovo)* ### **è quella da cui dipendono le altre.**
+
+## **LE MEMORIE ERANO SCRITTE COME DISSIPAZIONE** — e il calore paga la nascita (2026-10-08)
+
+**`1`.** Nella `H` candidata avevo scritto `(1/2)tw²/τ`, `(1/2)(d−d0)²/τ_p`, `(1/2)(ρ−peq)²/τ_bg`
+*«e il rilassamento è la discesa di `E`»*. ### ⛔ **Quello è un FLUSSO DI GRADIENTE, cioè
+dissipazione** — `ẋ = −∂E/∂x` dà `dE/dt ≤ 0` — ### **la forma «insegue e dimentica» che `A16.3`
+non ammette, e io l'avevo chiamata «termine di `H`».** La `⑤` ora si chiama ### **«i termini
+candidati, e quali sono già hamiltoniani»** ed è in tre: ### **già hamiltoniano** *(la coppia
+scalare: il coniugato `(φ, ρ)` c'è già)*; ### **potenziali veri che aspettano il coniugato della
+geometria**; ### **flussi di gradiente**, che ### **non sono termini di `H`**.
+
+### ⭐ **E la cosa che emerge:** il coniugato naturale di `tw` ### **è l'elettromagnetismo** — un
+angolo per arco col suo momento e un termine di placchetta ### **è una gauge `U(1)` sul
+reticolo.** Ci si arriva ### **dall'obbligo di dare un coniugato a una memoria**, non per
+innesto. ### **Ipotesi, marcata tale.** `omega_s` invece ### **ha già un coniugato** *(è una
+velocità angolare)*: le va ### **tolto** lo smorzamento.
+
+**`3`. LA PROPOSTA DI LUCA, messa in numeri.** La concentrazione libera ### **`381466.2`**; la prima
+divisione costa ### **`199600.0`**, il ### **`52.32 %`**: ### **il conto torna, senza bagno
+esterno.** ### ⭐ **E il freno si ferma da solo al livello `4` — `16` nodi — con la scala
+d'arresto che ESCE DAL BILANCIO, non da una manopola.** ### ⚠ **Ma il margine complessivo è
+ZERO per costruzione** *(in una dinamica conservativa disfare il collasso costa esattamente ciò
+che il collasso ha liberato)*, quindi ### **il conto che torna non prova che il processo
+avvenga: prova che non è vietato.** ### **I due termini `N²` si cancellano, e decide
+l'hopping.**
+
+**`5`. DECISIONE DI LUCA, PRESA: si toglie la sincronizzazione perché emergerà.** Scheda in
+`doc/REGISTRO_FISICA.md` *(`sincronizzazione-si-toglie`)*. ### ⭐ **E il motivo `(ii)` di Luca
+mi ha costretto a una distinzione che non avevo:** la ### **stessa** `E` dà ### **due leggi** —
+`φ̇ = −∂E/∂φ` ### **dissipa**, `i dψ/dt = ∂H/∂ψ*` ### **conserva**. ### ➜ **Non conta quale
+energia: conta a quale equazione la si dia** — ed è il motivo per cui *«scrivere la `E` della
+sincronizzazione»* non l'avrebbe salvata.
+
+Le decisioni passano da `10` a ### **`13`**, di cui ### **una PRESA**.

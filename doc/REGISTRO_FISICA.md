@@ -102,6 +102,68 @@ voce `Z…` della `FASE A`, commit `9a82bfb`)*.
 
 ---
 
+<!-- SCHEDA nome=sincronizzazione-si-toglie funzioni= flag=K_SYNC,SYNC_SPINORE,SYNC_FASE_OROLOGIO,KURAMOTO_SU2 -->
+
+## ⛔ **LA DECISIONE DEL 2026-10-08: SI TOGLIE LA SINCRONIZZAZIONE, PERCHE' EMERGERA'**
+
+> ### **Decisione di Luca, PRESA** *(non una proposta)*.
+> ### ⛔ **E NEL SIMULATORE ATTUALE NON SI TOCCA NIENTE: resta `b8c21049`.** La rimozione di
+> `K_SYNC` avviene ### **nella riscrittura**, sotto il flag del primo ordine.
+
+### **LA LEGGE CHE SI TOGLIE.** `delta_sync_phi = dt_n_s · forza · sin(media − φ)` con
+`media = angle(Σ_j w_kj e^{iφ_j})` e `forza = (2/π)·prof_rel·rinforzo_shear` — un Kuramoto
+locale che ### **sposta `φ` fuori dalla dinamica**.
+
+### **I TRE MOTIVI, CON I NUMERI:**
+
+| | il motivo | il numero |
+|---|---|--:|
+| **`(i)`** | ### **nessuna `E(φ)` esiste** di cui `K_SYNC` sia il gradiente | asimmetria della jacobiana ### **`1.0641`** contro un pavimento ### **calcolato** di `1.438e-10` — ### **nove ordini sopra**, e identica ai tre passi `h` |
+| **`(ii)`** | ### **anche un Kuramoto SIMMETRICO e' un flusso di gradiente**, cioe' ### **dissipativo**: e' la forma che `A16.3` ### **non ammette come legge** | `φ̇ = −∂E/∂φ` ⇒ `dE/dt = −\|∂E/∂φ\|² ≤ 0` |
+| **`(iii)`** | ### **toglierla NON costa coerenza**, e toglie il pompaggio | `AUC` al `400`: `0.9394` → ### **`0.9333`**; e toglie il ### **`93.44 %`** della crescita di `H` a `A` fissa |
+
+### ⭐ **E UNA DISTINZIONE CHE IL `(ii)` RENDE NECESSARIA, perche' senza di essa sembra una
+contraddizione.** La ### **stessa** energia `E = −K_C Σ A_ij cos(φ_i − φ_j)` da' ### **due
+leggi diverse**, e ### **una conserva e l'altra dissipa**:
+
+```
+Kuramoto  (gradiente):   phi'_i = -dE/dphi_i                  ->  dE/dt <= 0   DISSIPA
+primo ordine (A16):      i dpsi/dt = dH/dpsi*                 ->  dH/dt  = 0   CONSERVA
+                         cioe'  phi'_k = +dH/drho_k ,  rho'_k = -dH/dphi_k
+```
+
+### ➜ **Non conta QUALE energia: conta A QUALE EQUAZIONE la si dia.** La coppia scalare e il
+Kuramoto nascono dalla ### **stessa** `E`; la prima e' hamiltoniana perche' `φ` e `ρ` sono
+### **coniugati**, il secondo e' una discesa. ### ⛔ **Per questo «scrivere la `E` della
+sincronizzazione» non l'avrebbe salvata: l'avrebbe resa un Kuramoto simmetrico, che dissipa
+comunque.**
+
+### ⭐ **PERCHE' DEVE EMERGERE, e non e' una speranza.** Al primo ordine uno stato stazionario
+ha ### **la stessa frequenza su tutti i nodi**:
+
+```
+psi_k(t) = psi_k(0) e^{-i mu t}     =>     dphi_k/dt = mu    PER OGNI k
+```
+
+### ➜ **L'aggancio degli orologi NON e' una legge da aggiungere: e' una PROPRIETA' dello stato
+stazionario.** E il sistema ci arriva ### **cedendo l'energia in eccesso al vuoto locale**
+*(`A15.3`)* — ### **lo stesso calore che paga la nascita dello spazio** *(la proposta di Luca
+del `2026-10-08`, `doc/TRADUZIONE_IN_H.md` `⑥.2`)*.
+
+### ⛔ **IL CRITERIO DA MISURARE, NON DA ASSUMERE** *(e la decisione si RIAPRE se non passa)*:
+
+> **Quando il vuoto locale sara' scritto, si misura se gli orologi di una massa si agganciano
+> ### SENZA nessuna legge di sincronizzazione:** la ### **dispersione di `dφ/dt` dentro la
+> massa** deve ### **calare nel tempo**, con il ### **calore ceduto al vuoto CONTABILIZZATO**.
+> ### ⛔ **Se non succede, la decisione si riapre.**
+
+### ⚠ **E COSA QUESTA SCHEDA NON DICE:** non dice che l'aggancio ### **avvenga** — dice che
+### **al primo ordine e' una proprieta' dello stato stazionario**, e che ### **se il sistema
+raggiunga quello stato e' DA MISURARE.** Non tocca il simulatore di oggi: ### **`K_SYNC` resta
+`1.0` in `b8c21049`**, e il flag non si muove.
+
+---
+
 <!-- SCHEDA nome=freno-scala-min funzioni=_smorza,_smp_apri,_smp_chiudi,_smp_snap,_sd0,_nasce flag=SCALA_MIN,SCALA_MIN_PASSO,PAV_COM -->
 # ① IL FRENO DI `SCALA_MIN` — **`SCALA_MIN_PASSO` / `_smorza` / `_smp_chiudi`**
 
