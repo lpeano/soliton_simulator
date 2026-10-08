@@ -42,8 +42,24 @@ PASSI = 220
 FUORI = os.path.join(_QUI, "_inerzia_termo")
 SIM = os.path.join(RADICE, "soliton_simulator.py")
 BLOB_ATTESO = "b8c21049"
-# ### L'ESCLUSIONE E' VUOTA, e si dichiara VUOTA.
-ESCLUSI = ()
+# ### ⛔ **L'ESCLUSIONE NON E' PIU' VUOTA, dal 2026-10-08, e la RAGIONE E' SCRITTA.**
+#   `_calcpsi_origini` e' un dizionario DIAGNOSTICO scritto dentro `calcola_psi`
+#   *(`:6295`-`:6297`)*, con chiavi costruite come
+#       `"%s:%d" % (chiamante.co_name, chiamante.f_lineno)`
+#   cioe' ### **IL NOME E LA RIGA DEL CHIAMANTE**. L'osservatore di `D2-TER` avvolge
+#   `calcola_psi` per misurare se `K_SYNC = 0` e' un solo interruttore, e
+#   ### **l'involucro DIVENTA il chiamante**: le chiavi cambiano ### **per
+#   costruzione**, non per un effetto sulla fisica.
+#   ### ⚠ **E NON BASTA AGGREGARE PER FUNZIONE**, che e' la pratica abituale per
+#   questa voce: con l'involucro cambia ### **anche il nome** della funzione
+#   *(`_inv_psi` invece di `step`)*, quindi l'aggregazione non riconcilia niente.
+#   ### ✔ **E NESSUNA LEGGE LO LEGGE:** nel simulatore compare SOLO a `:6295` e
+#   `:6297`, ### **entrambe SCRITTURE**. Censito, non supposto.
+#   ### ⛔ **MA ESCLUDERE SENZA METTERE NIENTE AL POSTO SAREBBE TOGLIERE IL
+#   CONTROLLO**, quindi al suo posto c'e' il controllo positivo `(3)` qui sotto: la
+#   ### **SOMMA** dei valori deve coincidere fra i due bracci e con
+#   `_calcpsi_w_none`. ### **Le CHIAVI cambiano; i NUMERI no.**
+ESCLUSI = ("_calcpsi_origini",)
 
 
 def _impronta(net):
@@ -116,6 +132,38 @@ def main(argv):
     _tolti = (o2._inv is None) if o2 is not None else False
     stampa("  controllo: passi registrati %d   passi col BILANCIO %d   involucri rimossi %s"
            % (_np_, _bil, "SI" if _tolti else "NO"))
+    # ### ⭐ **IL TERZO CONTROLLO POSITIVO, che RIMPIAZZA l'attributo escluso.**
+    #   `_calcpsi_origini` e' escluso perche' le sue CHIAVI sono righe del chiamante.
+    #   ### **Ma i suoi NUMERI devono coincidere**: la somma dei conteggi e' il numero
+    #   di chiamate con `w is None`, che e' ### **una grandezza della dinamica**, non
+    #   della contabilita'. ### ⛔ **E PUO' FALLIRE:** se l'involucro aggiungesse o
+    #   togliesse una chiamata, questa somma cambierebbe.
+    _o1d = getattr(N1, "_calcpsi_origini", None) or {}
+    _o2d = getattr(N2, "_calcpsi_origini", None) or {}
+    _s1 = sum(_o1d.values())
+    _s2 = sum(_o2d.values())
+    _w1 = int(getattr(N1, "_calcpsi_w_none", 0) or 0)
+    _w2 = int(getattr(N2, "_calcpsi_w_none", 0) or 0)
+    _c1 = int(getattr(N1, "_calcpsi_chiamate", 0) or 0)
+    _c2 = int(getattr(N2, "_calcpsi_chiamate", 0) or 0)
+    stampa("  controllo dell'ATTRIBUTO ESCLUSO -- le CHIAVI cambiano, i NUMERI no:")
+    stampa("     somma dei conteggi di `_calcpsi_origini`:  nudo %d   osservato %d"
+           % (_s1, _s2))
+    stampa("     `_calcpsi_w_none`:                         nudo %d   osservato %d"
+           % (_w1, _w2))
+    stampa("     chiavi (che POSSONO differire):            nudo %d   osservato %d  %r"
+           % (len(_o1d), len(_o2d), sorted(_o2d)[:4]))
+    stampa("     `_calcpsi_chiamate` TOTALI:                nudo %d   osservato %d"
+           % (_c1, _c2))
+    _ok_num = (_s1 == _s2 == _w1 == _w2) and (_c1 == _c2)
+    if not _ok_num:
+        stampa("  ### ⛔ I NUMERI DELL'ATTRIBUTO ESCLUSO NON COINCIDONO: l'involucro ha "
+               "cambiato QUANTE volte `calcola_psi` viene chiamata, e quello NON e' "
+               "contabilita'.")
+        ok = False
+    else:
+        stampa("  ### ✔ I NUMERI COINCIDONO: l'involucro cambia le CHIAVI e non i "
+               "CONTEGGI, quindi l'esclusione copre contabilita' e non fisica.")
     if _np_ == 0 or _bil == 0 or not _tolti:
         stampa("  ### ⛔ IL BRACCIO OSSERVATO NON HA MISURATO, o gli involucri sono "
                "rimasti: il confronto sarebbe un FALSO-UNO.")
@@ -125,6 +173,13 @@ def main(argv):
          "solo_nudo": solo1, "solo_osservatore": solo2, "diversi": diversi,
          "passi_registrati": _np_, "passi_col_bilancio": _bil,
          "involucri_rimossi": bool(_tolti),
+         # ### ⭐ **il controllo dell'attributo ESCLUSO**, nel json e non solo a schermo
+         "escluso_calcpsi_origini": {
+             "somma_conteggi": {"nudo": int(_s1), "osservato": int(_s2)},
+             "calcpsi_w_none": {"nudo": _w1, "osservato": _w2},
+             "calcpsi_chiamate": {"nudo": _c1, "osservato": _c2},
+             "chiavi": {"nudo": len(_o1d), "osservato": len(_o2d)},
+             "numeri_coincidono": bool(_ok_num)},
          "a_valle": {"nudo": [int(N1.n), int(len(N1.i))],
                      "oss": [int(N2.n), int(len(N2.i))]},
          "esito": "PASSA" if ok else "FALLISCE"}
