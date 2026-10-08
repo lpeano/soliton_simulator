@@ -9984,3 +9984,112 @@ W_tot - voce_coppia  =  Σ dt_n·c_tot·(p2 - p1)  +  Σ c_tot·delta_sync_phi
 ### **recinto di codice** veniva contato come «doppio backtick». ### **Ora il controllo salta i
 recinti** — e nello stesso giro ha preso ### **due grassetti annidati veri** nelle frasi che
 avevo appena scritto.
+
+---
+
+# ⭐ **`D2-TER`: LA SINCRONIZZAZIONE POMPA SENZA ORDINARE — E IL CRITERIO HA DUE LETTURE** *(2026-10-08)*
+
+> Referto: `doc/REFERTO_h3_termostato_2026-10-07.md` *(`690` righe, `54` tabelle, `0` difetti)*.
+> Criteri e previsioni in `74d1305`, committato ### **prima** dello strumento *(`d86bb8c`)*, che
+> a sua volta è ### **prima** delle corse. ### ⛔ **Simulatore `b8c21049`, `ASSIOMI.md` non
+> toccato.**
+
+## ⛔ **IL CRITERIO DIPENDE DALLA LETTURA, E NON SCELGO IO**
+
+| la lettura di «crescita di `H`» su `1..215` | `B-SCAL-TS` | `NOSYNC` | rapporto | ### **verdetto** |
+|---|--:|--:|--:|---|
+| `H(215) − H(1)`, ### **letterale** | `+47544.2149` | `+22988.5679` | ### **`48.35 %`** | ### ⚠ **`FRA I DUE`** |
+| `Σ(dT + dU_φ)`, a ### **`A` fissa** | `+23782.6394` | `+1559.4201` | ### **`6.56 %`** | ### ⛔ **`LA SINCRONIZZAZIONE È LA SORGENTE`** |
+| la differenza: ### **`Σ(dU_A)`** | `+23885.7223` | `+21435.8389` | `89.74 %` | — |
+
+### ➜ **La ragione è misurata, non argomentata:** `H` cresce ### **anche** per il lavoro di `A`
+che cambia, e quel lavoro è ### **quasi lo stesso nei due bracci**. ### **La sincronizzazione
+muove la parte in `φ`, non quella in `A`.**
+
+### ⭐ **QUELLO CHE I NUMERI DICONO SENZA AMBIGUITÀ:** togliere `K_SYNC` toglie il
+### **`93.44 %`** della crescita di `H` ### **a `A` fissa** e il ### **`51.65 %`** di quella
+totale. ### ⚠ **Il criterio, come è scritto, non distingueva le due cose — e riporto entrambe
+invece di scegliere quella che dà il verdetto più netto.**
+
+## ⭐ **E LE MASSE NON SI SCIOLGONO: LA SINCRONIZZAZIONE POMPAVA SENZA ORDINARE**
+
+| | `B-SCAL-TS` | ### **`NOSYNC`** | controllo |
+|---|--:|--:|--:|
+| AUC al `230` | `0.9377` | ### **`0.9891`** | `0.9023` |
+| ### **AUC al `400`** | `0.9394` | ### **`0.9333`** | `0.4679` |
+| coerenza delle tre masse al `230` | `0.9024` · `0.9264` · `0.9495` | ### **`0.9197` · `0.9352` · `0.9372`** | — |
+| nascite | `0` | ### **`0`** | — |
+
+### ➜ **Togliere la sincronizzazione costa il `93 %` del pompaggio e NON costa coerenza** — al
+`230` l'`AUC` è perfino ### **migliore**. ### **Quindi la coerenza viene dalla COPPIA**, che è
+`−∂U/∂φ` e ordina le fasi. ### ✔ **È la previsione `PS-5`, confermata**, e il gradino **(b)**
+della `ROBUSTEZZA-FISICA` è ora raggiunto per questa coerenza: ### **sopravvive al togliere la
+legge pratica che la poteva produrre.**
+
+## ✔ **LA TUA STIMA DEDOTTA, CONFERMATA DALLA MISURA DIRETTA A CINQUE CIFRE**
+
+`delta_sync_phi` si ### **deriva dalla legge** del commit atomico *(`:7831`)*:
+`delta_sync_phi = Δφ − dt_n·phivel(t+1)`. Misurato su `1..215`:
+
+| | |
+|---|--:|
+| `W_sync` sulla coppia ### **TOTALE**, ### **misurato** | ### **`−22250.2756`** |
+| la ### **stima dedotta** del punto `0` *(ricalcolata, non ricopiata)* | `−22251.2229` |
+| ### **il rapporto** | ### **`1.0000`** |
+| `W_sync` sulla coppia ### **dell'interferenza** | `−19993.5289` su `W_interferenza` `−13637.4544` |
+
+### ⚠ **E la ricomposizione `W_sync + W_newton = W_interferenza` è TAUTOLOGICA** *(i due addendi
+partizionano `Δφ` per definizione)*: la riporto perché il mandato la chiede e ### **la dichiaro
+tale**. ### **Il controllo vero è il pavimento in `NOSYNC`:** `3.7311e-16` contro `6.7817e-03`,
+un fattore ### **`1.8e+13`**.
+
+### ⛔ **E LA MIA PREVISIONE `PS-1` ERA TROPPO FORTE:** avevo scritto «esattamente `0`», e
+l'avvolgimento `mod 4π` ### **non è esatto**. ### **Sbagliata nella forma, giusta nella sostanza,
+e la annoto invece di riscriverla.**
+
+## ⛔ **IL SIGILLO DI BYTE-INERZIA È FALLITO, E L'HO COMMITTATO PRIMA DI CURARLO**
+
+**`3ef2dd4`** porta l'esito `FALLISCE` ### **così com'è**, come vuole il par.5. ### **Un solo
+attributo su `291`: `_calcpsi_origini`**, con `n` e gli archi a valle ### **identici**.
+### **La causa, dal codice:** le sue chiavi sono `nome_del_chiamante:riga_del_chiamante`
+*(`:6295`-`:6297`)*, e il mio involucro su `calcola_psi` ### **diventa il chiamante**.
+### ⚠ **E aggregare per FUNZIONE — la pratica abituale per questa voce — NON basta:** cambia
+### **anche il nome** della funzione *(`_inv_psi` invece di `step`)*.
+
+### **La cura (`0572907`, un commit a sé), e non è «escludere e via»:** l'attributo entra in
+`ESCLUSI` ### **con la ragione scritta nel codice**, e al suo posto va un ### **terzo controllo
+positivo che PUÒ fallire**. Dopo la cura il sigillo ### **PASSA**: `0` differenze su `290`
+attributi, e il controllo nuovo dà ### **`_calcpsi_chiamate` `441` contro `441`** — l'involucro
+### **non aggiunge né toglie una chiamata.** ### ⚠ **Il costo lo dichiaro:** quell'attributo non
+è più confrontato al bit. ### **L'alternativa era togliere l'involucro e perdere la misura su
+`K_SYNC`.**
+
+### ⭐ **E IL CONTROLLO PIÙ FORTE SULLA FISICA NON È IL SIGILLO: È LA RI-ESECUZIONE.**
+`B-SCAL-TS` rigirato col blob nuovo contro il file ### **già committato** dà ### **ZERO
+DIFFERENZE su `44498` coppie di valori**, su `501` passi, su ogni contatore e ogni voce del
+bilancio in entrambe le classi.
+
+## ✔ **E `K_SYNC = 0` È UN SOLO INTERRUTTORE — MISURATO**
+
+Il censimento dal codice: `K_SYNC` apre il blocco di `:7767`, la cui ### **unica** uscita è
+`delta_sync_phi` *(`:7805`)*, perché `_forza_sync` si popola ### **solo se** uno fra
+`SYNC_SPINORE`, `SYNC_FASE_OROLOGIO`, `KURAMOTO_SU2` è acceso — e nel driver sono
+### **tutti e tre spenti**. ### ⚠ **E `--sync` non è `K_SYNC`:** `K_SYNC` ### **non ha affatto
+un flag CLI.** L'unico altro effetto è la `calcola_psi` di `:7771`, e ### **misurato: `500`
+chiamate, `0` cambiate**, mentre `:7592` ne cambia ### **tutte e `500`** — quindi il rivelatore
+### **può fallire**.
+
+## ⛔ **UN DIFETTO MIO CHE SI È RIPETUTO TRE VOLTE**
+
+In tre messaggi di commit ho scritto ### **a mano** conteggi di riga ### **sbagliati**:
+`1031 → 1077` *(vero `674 → 1062`)* in `32d5e60`, `1694 → 1789` *(vero `1694 → 1788`)* in
+`05c0f76`, `132 → 203` *(vero `140 → 195`)* in `0572907`. ### **È `L-NUMERI` violata tre volte**,
+e la causa è sempre la stessa: ### **scrivevo il numero prima di lanciare il comando che lo
+misura**, e `split("\n")` dà un elemento in più di `wc -l`. ### ➜ **Dal 2026-10-08 i conteggi li
+sostituisco nel messaggio DALL'OUTPUT del comando**, e i commit pushati ### **non li riscrivo**.
+
+> ### ⛔ **NON COMINCIO LA CURA.** `ENERGIA-NON-DEFINITA`, `SPINORE-SENZA-FASE` e
+> `SCIOGLIMENTO-FASE` sono ### **annotate, non riscritte**, e nessuna voce nuova è aperta.
+> ### **La lettura della serie:** i forzanti globali *(`H3`)* non erano la causa; la
+> sincronizzazione ### **pompa energia ma NON tiene le masse**; quello che le tiene è
+> ### **la forma della coppia** *(`H2`)*. ### **La decisione è di Luca.**

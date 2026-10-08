@@ -1,0 +1,8 @@
+LA RI-ESECUZIONE DI `B-SCAL-TS`: blob nuovo contro il committato (86e3865)
+  blob_strumento  vecchio dd718098   nuovo 5b8c5875
+  blob_sim        vecchio b8c21049   nuovo b8c21049
+  passi in comune: 501   (vecchio 501, nuovo 501)
+  VOCI ESCLUSE, perche' AGGIUNTE da D2-TER e assenti nel vecchio: ('W_newton', 'W_sync', 'W_newton_totale', 'W_sync_totale', 'W_sync_per_classe', 'W_newton_per_classe', 'delta_sync_rms', 'delta_sync_massimo', 'delta_sync_non_nulli', 'delta_sync_rms_per_classe', 'ricomposizione_residuo')
+  coppie di valori confrontate: 44498
+  ESITO: ZERO DIFFERENZE su tutti i passi in comune e tutte le voci confrontate.
+  -> le modifiche di D2-TER allo strumento sono BYTE-INERTI PER LA FISICA, MISURATO.

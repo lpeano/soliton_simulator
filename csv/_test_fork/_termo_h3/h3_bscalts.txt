@@ -13,5 +13,5 @@ LA CONFIGURAZIONE INTERA (`P5`) -- non i flag toccati, TUTTI
   ### INTERVENTO TRIPLO, e sono i DUE GIA' SIGILLATI COMPOSTI: `scuoti_vuoto` INERTE **e** `xi_termo` azzerata prima di ogni `step` (come `B-TS`), **piu'** `_coppia_interferenza` sul suo RAMO SCALARE (come `B-SCAL`). ### Nessun codice nuovo di intervento: le TRE appartenenze di braccio sono estese, e il diff e' ADDITIVO.
   ### ⚠ E IL CRITERIO DELLA CONSERVAZIONE SI VALUTA SULLA COPPIA DELL'INTERFERENZA, non sulla totale: con i flag del driver si sommano REPULS_LEGGE (:7621), SPIN_FEEDBACK (:7656) e FRAME_DRAG (:7702), e K_SYNC muove phi fuori dalla coppia (:7805). ### Scritto nel task history PRIMA della corsa.
 
-  involucri rimossi e verificati: 3
+  involucri rimossi e verificati: 4
   ### I DATI SONO SALVATI.

@@ -3,16 +3,35 @@
  "blob_termo_h3": "5b8c58759857920cb7183f23b71903e86995db5d",
  "blob_misura_verso": "fcf75043c975beae1d5ca79881687f05a1090eeb",
  "passi": 220,
- "esclusi": [],
- "attributi": 291,
- "solo_nudo": [],
- "solo_osservatore": [],
- "diversi": [
+ "esclusi": [
   "_calcpsi_origini"
  ],
+ "attributi": 290,
+ "solo_nudo": [],
+ "solo_osservatore": [],
+ "diversi": [],
  "passi_registrati": 221,
  "passi_col_bilancio": 220,
  "involucri_rimossi": true,
+ "escluso_calcpsi_origini": {
+  "somma_conteggi": {
+   "nudo": 1,
+   "osservato": 1
+  },
+  "calcpsi_w_none": {
+   "nudo": 1,
+   "osservato": 1
+  },
+  "calcpsi_chiamate": {
+   "nudo": 441,
+   "osservato": 441
+  },
+  "chiavi": {
+   "nudo": 1,
+   "osservato": 1
+  },
+  "numeri_coincidono": true
+ },
  "a_valle": {
   "nudo": [
    12809,
@@ -23,5 +42,5 @@
    471574
   ]
  },
- "esito": "FALLISCE"
+ "esito": "PASSA"
 }

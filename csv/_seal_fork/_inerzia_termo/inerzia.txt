@@ -6,17 +6,23 @@ LA BYTE-INERZIA DELL'OSSERVATORE `TermoH3`: 220 passi CON e SENZA
   ### LA FINESTRA E' 220 PASSI, cioe' OLTRE la prima nascita (216).
 
   --- il braccio NUDO
-      n = 12809, archi = 471574, attributi = 291
+      n = 12809, archi = 471574, attributi = 290
   --- il braccio CON L'OSSERVATORE
-      n = 12809, archi = 471574, attributi = 291
+      n = 12809, archi = 471574, attributi = 290
 
 --------------------------------------------------------------------------------------------------------
   attributi solo nel NUDO: 0  []
   attributi solo CON l'osservatore: 0  []
-  attributi DIVERSI: 1  ['_calcpsi_origini']
+  attributi DIVERSI: 0  []
 
 ========================================================================================================
-  ### ⛔ LA BYTE-INERZIA FALLISCE. LE CORSE NON PARTONO.
-  ### Le differenze sono NOMINATE qui sopra.
+  ### ✔ LA BYTE-INERZIA PASSA: lo stato e' IDENTICO AL BIT su 290 attributi.
+  ### L'osservatore `TermoH3` NON cambia la dinamica, involucri su `step` e su `scuoti_vuoto` compresi.
 ========================================================================================================
   controllo: passi registrati 221   passi col BILANCIO 220   involucri rimossi SI
+  controllo dell'ATTRIBUTO ESCLUSO -- le CHIAVI cambiano, i NUMERI no:
+     somma dei conteggi di `_calcpsi_origini`:  nudo 1   osservato 1
+     `_calcpsi_w_none`:                         nudo 1   osservato 1
+     chiavi (che POSSONO differire):            nudo 1   osservato 1  ['_inv_psi:284']
+     `_calcpsi_chiamate` TOTALI:                nudo 441   osservato 441
+  ### ✔ I NUMERI COINCIDONO: l'involucro cambia le CHIAVI e non i CONTEGGI, quindi l'esclusione copre contabilita' e non fisica.

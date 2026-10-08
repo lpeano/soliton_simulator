@@ -63,7 +63,8 @@ def main():
     for nome, f in (("base", "h3_base.json"), ("B-T", "h3_bt.json"),
                     ("B-S", "h3_bs.json"), ("B-TS", "h3_bts.json"),
                     ("B-SCAL", "h3_bscal.json"),
-                    ("B-SCAL-TS", "h3_bscalts.json")):
+                    ("B-SCAL-TS", "h3_bscalts.json"),
+                    ("B-SCAL-TS-NOSYNC", "h3_bscaltsnosync.json")):
         d = carica(os.path.join(DIR, f))
         if d and not d.get("_errore"):
             br[nome] = d
@@ -101,6 +102,12 @@ def main():
                        "SCALARE**, quello che dipende dalla ### **FASE CORRENTE** "
                        "*(`z = e^{iφ}`)*. ### ⚠ **Il flag è spento SOLO durante la chiamata** "
                        "e ripristinato in un `finally`: gira il ramo ### **del simulatore**",
+             "B-SCAL-TS-NOSYNC": "### **`D2-TER`: I QUATTRO INSIEME** — i tre di "
+                                 "`B-SCAL-TS` ### **più `K_SYNC = 0`**, messo dallo "
+                                 "strumento sul modulo e ripristinato in un `finally`. "
+                                 "### ⭐ **E che sia UN SOLO interruttore è MISURATO**, "
+                                 "non argomentato *(la tavola di `calcola_psi` qui "
+                                 "sotto)*",
              "B-SCAL-TS": "### **`D2-BIS`: I TRE INSIEME** — `scuoti_vuoto` inerte, "
                           "`xi_termo` azzerata ### **e** la coppia sul suo ### **RAMO "
                           "SCALARE**. ### ⭐ **Nessun codice di intervento nuovo:** sono "
@@ -117,7 +124,8 @@ def main():
                     "### **«termostato senza memoria»**",
              "B-S": "### **`scuoti_vuoto` sostituita** con una funzione della stessa firma "
                     "che ### **non fa niente**"}
-    for nome in ("base", "B-T", "B-S", "B-TS", "B-SCAL", "B-SCAL-TS"):
+    for nome in ("base", "B-T", "B-S", "B-TS", "B-SCAL", "B-SCAL-TS",
+                 "B-SCAL-TS-NOSYNC"):
         if nome not in br:
             A("| `%s` | — | ### ⛔ **ASSENTE** | — | %s |" % (nome, _DESC[nome]))
             continue
@@ -1449,6 +1457,373 @@ def main():
         A("")
         A("---")
         A("")
+    # ======================================================================
+    #   ### ⭐ **`D2-TER`: LA SINCRONIZZAZIONE COME SORGENTE**
+    # ======================================================================
+    _ps = {}
+    hns = H("B-SCAL-TS-NOSYNC")
+    if hns and hts:
+        pns = {int(r["passo"]): r for r in hns["passi"]}
+        ens = {k: r["energia"] for k, r in sorted(pns.items()) if r.get("energia")}
+        A("# `D2-TER` ⭐ **LA SINCRONIZZAZIONE È LA SORGENTE?**")
+        A("")
+        A("> *Criteri e previsioni: `doc/TASK_HISTORY/2026-10-08_d2ter-sincronizzazione-sorgente.md`, committato ### **prima** in `74d1305`.*")
+        A("")
+        # ---- ### il censimento, e se e' UN SOLO interruttore
+        A("## ⭐ **`K_SYNC = 0` È UN SOLO INTERRUTTORE? MISURATO, NON ARGOMENTATO**")
+        A("")
+        A("Dal codice: `K_SYNC` apre il blocco di `:7767`, la cui ### **unica** uscita "
+          "è `delta_sync_phi` *(`:7805`)*, perché `_forza_sync` si popola ### **solo "
+          "se** uno fra `SYNC_SPINORE`, `SYNC_FASE_OROLOGIO` e `KURAMOTO_SU2` è acceso "
+          "— e le tre leggi che lo leggono stanno a `:5946`, `:6053`, `:6067`. "
+          "### ⚠ **E `--sync` NON è `K_SYNC`:** quello è un flag CLI a sé *(`:11600`)*, "
+          "e ### **`K_SYNC` non ha affatto un flag CLI** — è una costante di modulo.")
+        A("")
+        _fd = (hns.get("geometria") or {}).get("flag_dopo_intervento") or {}
+        _fp = (hts.get("geometria") or {}).get("flag_dopo_intervento") or {}
+        A("| flag | in `B-SCAL-TS` | in ### **`B-SCAL-TS-NOSYNC`** |")
+        A("|---|--:|--:|")
+        for _q in ("K_SYNC", "SYNC_SPINORE", "SYNC_FASE_OROLOGIO", "KURAMOTO_SU2"):
+            A("| `%s` | %s | ### **%s** |"
+              % (_q, _fp.get(_q, "n/d"), _fd.get(_q, "n/d")))
+        A("")
+        A("### ⛔ **MA IL BLOCCO CONTIENE `calcola_psi(w)`** *(`:7771`)*, che "
+          "### **SCRIVE** `self.psi`, `psi_spin` e `rho_spin`: saltarlo salta quella "
+          "scrittura. ### **«Dovrebbe essere byte-inerte» non è una misura**, quindi un "
+          "involucro firma `psi` ### **prima e dopo OGNI chiamata** e conta per "
+          "### **CHIAMANTE**.")
+        A("")
+        A("| braccio | chiamante | chiamate | ### **che hanno CAMBIATO `psi`** |")
+        A("|---|--:|--:|--:|")
+        _uno_int = None
+        for _nm4, _h4 in (("B-SCAL-TS", hts), ("B-SCAL-TS-NOSYNC", hns)):
+            _c4 = (_h4.get("verifica_calcola_psi") or {}).get("per_chiamante") or {}
+            for _k4 in sorted(_c4, key=lambda x: int(x)):
+                _n4, _m4 = _c4[_k4][0], _c4[_k4][1]
+                A("| `%s` | ### **`:%s`** | %s | %s |"
+                  % (_nm4, _k4, n4(_n4),
+                     ("### ⛔ **%s**" % n4(_m4)) if _m4 else "### ✔ **0**"))
+                if _nm4 == "B-SCAL-TS" and _k4 == "7771":
+                    _uno_int = (_n4, _m4)
+        A("")
+        if _uno_int and _uno_int[0] > 0 and _uno_int[1] == 0:
+            A("> ### ✔ **`K_SYNC = 0` È UN SOLO INTERRUTTORE:** la `calcola_psi` di "
+              "`:7771` è stata chiamata ### **%s** volte e ha cambiato `psi` "
+              "### **ZERO** volte. ### ⭐ **E il rivelatore PUÒ fallire:** `:7592` "
+              "cambia `psi` ### **a ogni chiamata**, quindi non è un controllo che passa "
+              "a vuoto. ### ➜ **La regola d oro del par.3 è rispettata: fra i due bracci "
+              "cambia UNA cosa.**" % n4(_uno_int[0]))
+        elif _uno_int:
+            A("> ### ⛔ **NON È UN SOLO INTERRUTTORE:** la `calcola_psi` di `:7771` ha "
+              "cambiato `psi` ### **%s** volte su %s. ### **Fra i due bracci cambiano "
+              "DUE cose, e il confronto va letto con DUE variabili.**"
+              % (n4(_uno_int[1]), n4(_uno_int[0])))
+        else:
+            A("> ### ⚠ **Il contatore di `:7771` manca:** non lo affermo senza la "
+              "misura.")
+        A("")
+        # ---- ### la taglia di `delta_sync_phi`
+        A("## ⭐ **`delta_sync_phi` DERIVATO DALLA LEGGE, E IL CONTROLLO CHE LO VALIDA**")
+        A("")
+        A("Dal commit atomico *(`:7831`)* `phi(t+1) = (phi_t + dt_n·phivel(t+1) + "
+          "delta_sync_phi) mod _dphi()`, quindi ### **`delta_sync_phi = Δφ − "
+          "dt_n·phivel(t+1)`** — ### **esatto dalla legge, non stimato** *(e "
+          "`dt_n_s = dt_n` perché `TEMPO_SEGNO = False`, che lo strumento verifica e "
+          "altrimenti FERMA)*.")
+        A("")
+        A("| braccio | `rms` mediano | ### **massimo** | nodi con valore non nullo "
+          "*(mediano)* |")
+        A("|---|--:|--:|--:|")
+        for _nm5, _e5 in (("B-SCAL-TS", _en), ("B-SCAL-TS-NOSYNC", ens)):
+            _rr5 = sorted(v["delta_sync_rms"] for v in _e5.values())
+            _mm5 = max(v["delta_sync_massimo"] for v in _e5.values()) if _e5 else None
+            _nn5 = sorted(v["delta_sync_non_nulli"] for v in _e5.values())
+            A("| `%s` | ### **%s** | %s | %s |"
+              % (_nm5, ("%.4e" % _rr5[len(_rr5) // 2]) if _rr5 else "—",
+                 ("%.4e" % _mm5) if _mm5 is not None else "—",
+                 n4(_nn5[len(_nn5) // 2]) if _nn5 else "—"))
+            _ps["dsy_" + _nm5] = _rr5[len(_rr5) // 2] if _rr5 else None
+        A("")
+        _a5, _b5 = _ps.get("dsy_B-SCAL-TS"), _ps.get("dsy_B-SCAL-TS-NOSYNC")
+        if _a5 and _b5:
+            A("> ### ⚠ **E LA MIA PREVISIONE `PS-1` ERA TROPPO FORTE:** avevo scritto "
+              "### **«esattamente `0`»**, e in `NOSYNC` il residuo è `%.4e`. ### **Non "
+              "è un termine: è il PAVIMENTO DI ARROTONDAMENTO**, perché l avvolgimento "
+              "`mod 4π` ### **non è esatto** e `eps_macchina · |φ|` è di quell ordine. "
+              "### ➜ **Ma il controllo DISCRIMINA comunque: `%.4e` contro `%.4e`, cioè "
+              "un fattore `%.3e`.** ### **La previsione era sbagliata nella FORMA e "
+              "giusta nella SOSTANZA, e la annoto invece di riscriverla** *(par.8)*."
+              % (_b5, _a5, _b5, _a5 / _b5))
+            A("")
+        # ---- ### la spartizione del lavoro
+        A("## ⭐ **LA SPARTIZIONE DEL LAVORO: `W_newton` CONTRO `W_sync`**")
+        A("")
+        A("> ### ⚠ **LA RICOMPOSIZIONE `W_sync + W_newton = W_interferenza` È "
+          "TAUTOLOGICA**, perché i due addendi partizionano `Δφ` ### **per "
+          "definizione**. Il mandato la chiede e si riporta, ### **ma il controllo vero "
+          "è il pavimento in `NOSYNC` qui sopra.**")
+        A("")
+        A("| braccio | finestra | ### **`W_sync`** | `W_newton` | `W_interferenza` | "
+          "### **quota di `W_sync`** | residuo della ricomposizione |")
+        A("|---|---|--:|--:|--:|--:|--:|")
+        for _nm6, _e6 in (("B-SCAL-TS", _en), ("B-SCAL-TS-NOSYNC", ens)):
+            for _et6, _a6, _b6 in (("`1..215`", 1, 215), ("`216..500`", 216, 500)):
+                _f6 = [(k, v) for k, v in sorted(_e6.items()) if _a6 <= k <= _b6]
+                if not _f6:
+                    continue
+                _s6 = sum(v["W_sync"] for _k, v in _f6)
+                _n6 = sum(v["W_newton"] for _k, v in _f6)
+                _i6 = sum(v["W_interferenza"] for _k, v in _f6)
+                _r6 = max(v["ricomposizione_residuo"] for _k, v in _f6)
+                A("| `%s` | %s | ### **%s** | %s | %s | ### **%s** | %.2e |"
+                  % (_nm6, _et6, n4(_s6), n4(_n6), n4(_i6),
+                     pct(abs(_s6) / abs(_i6)) if _i6 else "—", _r6))
+                if _nm6 == "B-SCAL-TS":
+                    _ps["Wsync_" + _et6] = (_s6, (abs(_s6) / abs(_i6)) if _i6 else None)
+        A("")
+        A("| braccio | finestra | `W_sync` sulla coppia ### **TOTALE** | il confronto "
+          "con la ### **STIMA** del punto `0` |")
+        A("|---|---|--:|--:|")
+        # ### ⛔ **LA STIMA NON SI RICOPIA** *(`L-NUMERI`)*: si prende da `_ipo`,
+        #   calcolato nella sezione del punto `0`, nello STESSO ordine delle finestre.
+        _ord = [_ipo[_e] for _e, _a, _b in FIN if _e in _ipo]
+        _stima = {}
+        for _ii8, _et8 in enumerate(("`1..215`", "`216..500`")):
+            if _ii8 < len(_ord):
+                _stima[_et8] = _ord[_ii8][0]
+        for _et6, _a6, _b6 in (("`1..215`", 1, 215), ("`216..500`", 216, 500)):
+            _f6 = [(k, v) for k, v in sorted(_en.items()) if _a6 <= k <= _b6]
+            if not _f6:
+                continue
+            _st6 = sum(v["W_sync_totale"] for _k, v in _f6)
+            _sti = _stima.get(_et6)
+            A("| `B-SCAL-TS` | %s | ### **%s** | la stima era `%s` → rapporto "
+              "### **%s** |"
+              % (_et6, n4(_st6), n4(_sti), n4(_st6 / _sti, 3) if _sti else "—"))
+            _ps["Wsynctot_" + _et6] = (_st6, _st6 / _sti if _sti else None)
+        A("")
+        # ---- ### IL CRITERIO
+        A("## ⛔ **IL CRITERIO: `LA SINCRONIZZAZIONE È LA SORGENTE`?**")
+        A("")
+        # ### ⛔ **<<LA CRESCITA DI `H`>> HA DUE LETTURE, E DANNO VERDETTI DIVERSI.**
+        #   `H(215) - H(1)` *(LETTERALE)* contiene anche il ### **lavoro di `A` che
+        #   cambia**; `somma(dT + dU_phi)` e' la parte ### **a `A` FISSA**. La
+        #   differenza e' `somma(dU_A)`, ed e' GRANDE.
+        #   ### ⚠ **Si riportano ENTRAMBE: scegliere quella che da' il verdetto piu'
+        #   netto sarebbe scegliere il risultato.**
+        def _cres(_e, _modo, _a=1, _b=215):
+            _f = [(k, v) for k, v in sorted(_e.items()) if _a <= k <= _b]
+            if not _f:
+                return None
+            if _modo == "letterale":
+                if _a not in _e or _b not in _e:
+                    return None
+                return _e[_b]["H_pre"] - _e[_a]["H_pre"]
+            if _modo == "fissa":
+                return sum(v["dT"] + v["dU_phi"] for _k, v in _f)
+            return sum((v["dU_A_chiude_il_precedente"] or {}).get("totale", 0.0)
+                       for _k, v in _f if v.get("dU_A_chiude_il_precedente"))
+
+        A("| la lettura di ### **«crescita di `H`»** | in `B-SCAL-TS` | ### **in `NOSYNC`** | il rapporto | soglia ### **SORGENTE** *(un quarto)* | soglia ### **NON È LEI** *(la metà)* | ### **il verdetto** |")
+        A("|---|--:|--:|--:|--:|--:|---|")
+        _ver = {}
+        for _md, _nome in (("letterale", "`H(215) − H(1)`, ### **LETTERALE**"),
+                           ("fissa", "`Σ(dT + dU_φ)`, a ### **`A` FISSA**")):
+            _x = _cres(_en, _md)
+            _y = _cres(ens, _md)
+            if _x is None or _y is None or not _x:
+                A("| %s | — | ### **n/d** | — | — | — | ### **n/d** |" % _nome)
+                continue
+            _vd = ("### ⛔ **`LA SINCRONIZZAZIONE È LA SORGENTE`**" if _y < _x / 4.0
+                   else ("### ⛔ **`NON È LEI`**" if _y > _x / 2.0
+                         else "### ⚠ **`FRA I DUE`**"))
+            _ver[_md] = (_x, _y, _y / _x, _vd)
+            A("| %s | %s | ### **%s** | ### **%s** | %s | %s | %s |"
+              % (_nome, n4(_x), n4(_y), pct(_y / _x), n4(_x / 4.0), n4(_x / 2.0), _vd))
+        A("")
+        _dap = _cres(_en, "dua")
+        _dan = _cres(ens, "dua")
+        A("| il ### **lavoro di `A` che cambia** su `1..215` | `B-SCAL-TS` | ### **`NOSYNC`** | il rapporto |")
+        A("|---|--:|--:|--:|")
+        A("| ### **`Σ(dU_A)`** | %s | ### **%s** | %s |"
+          % (n4(_dap), n4(_dan), pct(_dan / _dap) if _dap else "—"))
+        A("")
+        _vl = _ver.get("letterale")
+        _vf = _ver.get("fissa")
+        if _vl and _vf and _vl[3] != _vf[3]:
+            A("> ### ⛔ **I DUE VERDETTI SONO DIVERSI, E LO DICO INVECE DI SCEGLIERE.** "
+              "Sulla lettura ### **letterale** il criterio dà %s *(%s)*; sulla lettura "
+              "### **a `A` fissa** dà %s *(%s)*. ### ➜ **E la ragione è nella tavola "
+              "qui sopra:** `H` cresce ANCHE per il ### **lavoro di `A` che cambia**, e "
+              "quel lavoro è ### **quasi lo stesso nei due bracci** *(%s contro %s, "
+              "cioè il %s)* — ### **la sincronizzazione non lo tocca.**"
+              % (_vl[3], pct(_vl[2]), _vf[3], pct(_vf[2]), n4(_dap), n4(_dan),
+                 pct(_dan / _dap) if _dap else "—"))
+            A("")
+            A("> ### ⭐ **QUELLO CHE I NUMERI DICONO SENZA AMBIGUITÀ:** togliere `K_SYNC` "
+              "toglie ### **%s** della crescita di `H` ### **a `A` fissa** *(da %s a %s)*, "
+              "e ### **%s** della crescita TOTALE. ### **La sincronizzazione è la "
+              "sorgente DELLA PARTE IN `φ`, non di tutta la crescita** — e il criterio, "
+              "come è scritto, non distingueva le due cose."
+              % (pct(1.0 - _vf[2]), n4(_vf[0]), n4(_vf[1]),
+                 pct((_vl[0] - _vl[1]) / _vl[0])))
+            A("")
+        elif _vf:
+            A("> ### **Le due letture concordano: %s.**" % _vf[3])
+            A("")
+        _dh_p = _vf[0] if _vf else None
+        _dh_n = _vf[1] if _vf else None
+        _ps["dh_n"] = _dh_n
+        _ps["dh_p"] = _dh_p
+        _ps["dh_lett"] = _vl
+        A("")
+        # ---- ### la curva, e le altre grandezze
+        A("| passo | `H` in `B-SCAL-TS` | ### **`H` in `NOSYNC`** | `T` masse "
+          "`NOSYNC` | `T` vuoto `NOSYNC` | `U` totale `NOSYNC` |")
+        A("|--:|--:|--:|--:|--:|--:|")
+        for k in (1, 50, 150, 215, 216, 230, 300, 400, 500):
+            if k not in ens and k not in _en:
+                continue
+            _vp = _en.get(k) or {}
+            _vn = ens.get(k) or {}
+            _tc = _vn.get("T_pre_per_classe") or {}
+            A("| %d | %s | ### **%s** | %s | %s | %s |"
+              % (k, n4(_vp.get("H_pre")), n4(_vn.get("H_pre")),
+                 n4(_tc.get("masse")), n4(_tc.get("vuoto")), n4(_vn.get("U"))))
+        A("")
+        _mns = hns.get("misure", {})
+        _an2 = (_mns.get("230") or {}).get("auc_materia_vuoto")
+        _an4 = (_mns.get("400") or {}).get("auc_materia_vuoto")
+        _ps["auc400_nosync"] = _an4
+        _nati_n = sum((r.get("nati_nel_passo") or 0) for r in hns["passi"])
+        _ps["nati_nosync"] = _nati_n
+        A("| | `B-SCAL-TS` | ### **`B-SCAL-TS-NOSYNC`** | controllo |")
+        A("|---|--:|--:|--:|")
+        A("| AUC al `230` | %s | ### **%s** | %s |"
+          % (n4((hts.get("misure", {}).get("230") or {}).get("auc_materia_vuoto")),
+             n4(_an2), n4(_auc_ct.get(230))))
+        A("| ### **AUC al `400`** | %s | ### **%s** | %s |"
+          % (n4((hts.get("misure", {}).get("400") or {}).get("auc_materia_vuoto")),
+             n4(_an4), n4(_auc_ct.get(400))))
+        A("| ### **nascite** | %s | ### **%s** | — |"
+          % (n4(sum((r.get("nati_nel_passo") or 0) for r in hts["passi"])),
+             n4(_nati_n)))
+        A("")
+        _pmn = (_mns.get("230") or {}).get("per_massa") or {}
+        _pmp = ((hts.get("misure", {}).get("230") or {}).get("per_massa")) or {}
+        A("| massa | coerenza al `230` in `B-SCAL-TS` | ### **in `NOSYNC`** |")
+        A("|---|--:|--:|")
+        for _e7 in sorted(set(list(_pmn) + list(_pmp))):
+            A("| `%s` | %s | ### **%s** |"
+              % (_e7, n4((_pmp.get(_e7) or {}).get("coer_2pi")),
+                 n4((_pmn.get(_e7) or {}).get("coer_2pi"))))
+        _vn7 = (_mns.get("230") or {}).get("vuoto") or {}
+        _vp7 = ((hts.get("misure", {}).get("230") or {}).get("vuoto")) or {}
+        A("| il ### **VUOTO** | %s | ### **%s** |"
+          % (n4(_vp7.get("coer_2pi")), n4(_vn7.get("coer_2pi"))))
+        A("")
+        if _an4 is not None:
+            if _an4 < 0.60:
+                A("> ### ⭐ **E LE MASSE SI SCIOLGONO SENZA SINCRONIZZAZIONE** *(AUC al "
+                  "`400` = `%s`)*. ### ⛔ **È il risultato che il mandato nomina: "
+                  "vorrebbe dire che la sincronizzazione le teneva insieme POMPANDO "
+                  "energia**, e che la coerenza di `B-SCAL-TS` ### **non** veniva dalla "
+                  "sola coppia. ### **La mia previsione `PS-5` diceva il contrario, ed è "
+                  "SMENTITA.**" % n4(_an4))
+            elif _an4 >= 0.85:
+                A("> ### ✔ **LE MASSE NON SI SCIOLGONO** *(AUC al `400` = `%s`)*: la "
+                  "coerenza ### **sopravvive** al togliere la sincronizzazione, quindi "
+                  "viene dalla ### **coppia**, che è `−∂U/∂φ` e ordina le fasi. "
+                  "### ➜ **E allora la sincronizzazione POMPAVA senza ordinare.**"
+                  % n4(_an4))
+            else:
+                A("> ### ⚠ **FRA I DUE** *(AUC al `400` = `%s`)*: la coerenza cala ma "
+                  "non crolla, e ### **non forzo una lettura.**" % n4(_an4))
+            A("")
+        # ---- ### ⛔ **IL SIGILLO E LA RI-ESECUZIONE, dai FILE e non ricopiati**
+        A("## ⛔ **IL SIGILLO DI BYTE-INERZIA È FALLITO, POI CURATO — E LO SCRIVO IN "
+          "QUEST ORDINE**")
+        A("")
+        _ij = None
+        try:
+            _ij = json.load(io.open(os.path.join(RADICE, "csv", "_seal_fork",
+                                                 "_inerzia_termo", "inerzia.json"),
+                                    encoding="utf-8"))
+        except Exception:                                      # noqa: BLE001
+            _ij = None
+        A("| | |")
+        A("|---|---|")
+        A("| ### **che cos è fallito** | ### **UN** attributo su `291`: "
+          "`_calcpsi_origini`, con `n` e gli archi a valle ### **identici** nei due "
+          "bracci. L esito `FALLISCE` è committato ### **così com è** in `3ef2dd4`, "
+          "### **prima** della cura *(par.5)* |")
+        A("| ### **la causa, dal codice** | quel dizionario è ### **diagnostico** e le "
+          "sue chiavi sono `nome_del_chiamante:riga_del_chiamante` *(`:6295`-`:6297`)*; "
+          "l involucro su `calcola_psi` ### **diventa il chiamante**, quindi le chiavi "
+          "cambiano ### **per costruzione** |")
+        A("| ### ⚠ **e aggregare per FUNZIONE non basta** | cambia ### **anche il "
+          "nome** della funzione *(`_inv_psi` invece di `step`)*, quindi "
+          "l aggregazione — la pratica abituale per questa voce — ### **non riconcilia "
+          "niente** |")
+        A("| ### ✔ **e nessuna legge lo legge** | nel simulatore compare ### **solo** a "
+          "`:6295` e `:6297`, ### **entrambe SCRITTURE**: censito, non supposto |")
+        A("| ### **la cura** *(`0572907`, un commit a sé)* | l attributo entra in "
+          "`ESCLUSI` ### **con la ragione scritta nel codice**, e al suo posto va un "
+          "### **TERZO controllo positivo che PUÒ fallire**: la ### **somma** dei "
+          "conteggi e `_calcpsi_chiamate` devono coincidere fra i due bracci. "
+          "### **Le CHIAVI cambiano, i NUMERI no** |")
+        if _ij:
+            _ec = _ij.get("escluso_calcpsi_origini") or {}
+            A("")
+            A("| il sigillo, dopo la cura | |")
+            A("|---|--:|")
+            A("| ### **esito** | ### **%s** |" % (_ij.get("esito") or "n/d"))
+            A("| attributi confrontati | %s |" % n4(_ij.get("attributi")))
+            A("| ### **attributi DIVERSI** | ### **%s** |" % n4(len(_ij.get("diversi")
+                                                                 or [])))
+            A("| esclusi, ### **dichiarati** | `%s` |"
+              % ", ".join(_ij.get("esclusi") or ["—"]))
+            A("| `n` e archi a valle | nudo `%s` · osservato `%s` |"
+              % ((_ij.get("a_valle") or {}).get("nudo"),
+                 (_ij.get("a_valle") or {}).get("oss")))
+            if _ec:
+                A("| ### **il controllo che rimpiazza l escluso** | somma dei conteggi "
+                  "`%s` / `%s`; `_calcpsi_w_none` `%s` / `%s`; ### **`_calcpsi_chiamate` "
+                  "TOTALI `%s` / `%s`**; chiavi `%s` / `%s` *(e POSSONO differire)* |"
+                  % ((_ec.get("somma_conteggi") or {}).get("nudo"),
+                     (_ec.get("somma_conteggi") or {}).get("osservato"),
+                     (_ec.get("calcpsi_w_none") or {}).get("nudo"),
+                     (_ec.get("calcpsi_w_none") or {}).get("osservato"),
+                     (_ec.get("calcpsi_chiamate") or {}).get("nudo"),
+                     (_ec.get("calcpsi_chiamate") or {}).get("osservato"),
+                     (_ec.get("chiavi") or {}).get("nudo"),
+                     (_ec.get("chiavi") or {}).get("osservato")))
+                A("| ### **i numeri coincidono** | ### **%s** |"
+                  % ("✔ SÌ" if _ec.get("numeri_coincidono") else "⛔ NO"))
+        A("")
+        # ---- ### la RI-ESECUZIONE, letta dal file che la produce
+        _rr9 = ""
+        try:
+            _rr9 = io.open(os.path.join(DIR, "riesecuzione_bscalts.txt"),
+                           encoding="utf-8").read()
+        except Exception:                                      # noqa: BLE001
+            _rr9 = ""
+        if _rr9:
+            _m9 = re.search(r"coppie di valori confrontate: (\d+)", _rr9)
+            _p9 = re.search(r"passi in comune: (\d+)", _rr9)
+            A("> ### ⭐ **E IL CONTROLLO PIÙ FORTE SULLA FISICA NON È IL SIGILLO: È LA "
+              "RI-ESECUZIONE.** `B-SCAL-TS` rigirato col blob nuovo contro il file "
+              "### **già committato** dà ### **%s** su ### **%s** passi in comune, "
+              "confrontando ogni contatore e ogni voce del bilancio in entrambe le "
+              "classi. ### **Le voci che `D2-TER` ha aggiunto sono dichiarate ESCLUSE "
+              "nel file del confronto**, perché nel vecchio non esistono."
+              % (("ZERO DIFFERENZE su %s coppie di valori"
+                  % (_m9.group(1) if _m9 else "n/d"))
+                 if "ZERO DIFFERENZE" in _rr9 else "DIFFERENZE",
+                 _p9.group(1) if _p9 else "n/d"))
+            A("")
+        A("---")
+        A("")
     A("# ⭐ **LE MIE PREVISIONI, CONTRO I NUMERI**")
     A("")
     pr = []
@@ -1736,6 +2111,103 @@ def main():
                           pct(_pe.get("W_extra_216..5"))),
                        "### ✔ **CONFERMATA sul TOTALE**" if _wx2 >= 0.10
                        else "### ⛔ **SMENTITA: era pessimismo mio**"))
+    # ==================================================================
+    #   ### **`PS-1..PS-8`: le previsioni di `D2-TER`**
+    # ==================================================================
+    if hns and hts:
+        _d1t = _ps.get("dsy_B-SCAL-TS")
+        _d2t = _ps.get("dsy_B-SCAL-TS-NOSYNC")
+        if _d1t and _d2t:
+            pr.append(("`PS-1`",
+                       "in `NOSYNC` `delta_sync_phi` è ### **esattamente `0`** su tutti "
+                       "i passi e tutti i nodi",
+                       "il residuo è ### **%.4e**, contro `%.4e` in `B-SCAL-TS` "
+                       "*(un fattore `%.3e`)*" % (_d2t, _d1t, _d1t / _d2t),
+                       "### ⛔ **SMENTITA NELLA FORMA, confermata nella SOSTANZA:** "
+                       "l avvolgimento `mod 4π` ### **non è esatto**, quindi il "
+                       "pavimento è `eps_macchina·|φ|` e NON lo zero. ### **Era "
+                       "un attesa mia troppo forte, e la annoto** *(par.8)*"))
+        _w1 = _ps.get("Wsync_`1..215`")
+        if _w1 and _w1[1] is not None:
+            pr.append(("`PS-2`",
+                       "in `B-SCAL-TS` `W_sync` è la parte ### **dominante** di "
+                       "`W_interferenza` *(oltre il `50 %`)*",
+                       "### **%s**" % pct(_w1[1]),
+                       "### ✔ **CONFERMATA**" if _w1[1] > 0.50
+                       else "### ⛔ **SMENTITA**"))
+        _wt1 = _ps.get("Wsynctot_`1..215`")
+        if _wt1 and _wt1[1]:
+            pr.append(("`PS-3`",
+                       "`W_sync` sulla coppia ### **TOTALE** sta ### **entro un fattore "
+                       "`2`** dalla stima dedotta nel punto `0`",
+                       "misurato `%s`, stima `%s` → rapporto ### **%s**"
+                       % (n4(_wt1[0]), n4(_wt1[0] / _wt1[1]), n4(_wt1[1], 4)),
+                       "### ✔ **CONFERMATA**" if 0.5 <= _wt1[1] <= 2.0
+                       else "### ⛔ **SMENTITA**"))
+        _dn, _dp = _ps.get("dh_n"), _ps.get("dh_p")
+        if _dn is not None and _dp:
+            pr.append(("`PS-4`",
+                       "### **`LA SINCRONIZZAZIONE È LA SORGENTE` è soddisfatto:** la "
+                       "crescita di `H` in `NOSYNC` sta ### **sotto un quarto** di "
+                       "quella di `B-SCAL-TS`",
+                       "a ### **`A` FISSA**: ### **%s** *(`%s` contro `%s`, soglia "
+                       "`%s`)*; ### ⚠ **sulla lettura LETTERALE `H(215) − H(1)`: "
+                       "%s**, cioè ### **`FRA I DUE`**"
+                       % (pct(_dn / _dp), n4(_dn), n4(_dp), n4(_dp / 4.0),
+                          pct(_ps["dh_lett"][2]) if _ps.get("dh_lett") else "n/d"),
+                       ("### ✔ **CONFERMATA sulla lettura a `A` FISSA**, ### ⚠ **e NON "
+                        "su quella letterale:** il criterio non distingueva le due, e "
+                        "### **riporto entrambe invece di scegliere**"
+                        if (_ps.get("dh_lett") and _ps["dh_lett"][2] >= 0.25)
+                        else "### ✔ **CONFERMATA su ENTRAMBE le letture**")
+                       if _dn < _dp / 4.0 else "### ⛔ **SMENTITA**"))
+        _a4n = _ps.get("auc400_nosync")
+        if _a4n is not None:
+            pr.append(("`PS-5`",
+                       "### **le masse NON si sciolgono** senza sincronizzazione: `AUC` "
+                       "al `400` ### **`>= 0.85`**. ### **Scritta per poter PERDERE:** "
+                       "se crolla, la sincronizzazione le teneva insieme ### **pompando**",
+                       "### **%s**" % n4(_a4n),
+                       "### ✔ **CONFERMATA**" if _a4n >= 0.85 else
+                       ("### ⛔ **SMENTITA, ed è il risultato più importante del "
+                        "braccio:** la coerenza ### **non** veniva dalla sola coppia"
+                        if _a4n < 0.60 else
+                        "### ⚠ **FRA I DUE**, e non forzo una lettura")))
+        _nn = _ps.get("nati_nosync")
+        if _nn is not None:
+            pr.append(("`PS-6`",
+                       "### **zero nascite anche in `NOSYNC`**: il bagno resta spento, "
+                       "ed è lui che porta alla soglia *(il punto `0`)*",
+                       "### **%s** nascite" % n4(_nn),
+                       "### ✔ **CONFERMATA**" if _nn == 0
+                       else "### ⛔ **SMENTITA: ne nascono %s**" % n4(_nn)))
+        _c7 = ((hts.get("verifica_calcola_psi") or {}).get("per_chiamante")
+               or {}).get("7771")
+        if _c7:
+            pr.append(("`PS-7`",
+                       "la `calcola_psi` di `:7771` è ### **byte-inerte**, quindi "
+                       "`K_SYNC = 0` è ### **UN SOLO interruttore**",
+                       "### **%s** chiamate, ### **%s** cambiate *(e `:7592` ne cambia "
+                       "tutte, quindi il rivelatore PUÒ fallire)*"
+                       % (n4(_c7[0]), n4(_c7[1])),
+                       "### ✔ **CONFERMATA**" if _c7[1] == 0
+                       else "### ⛔ **SMENTITA: il braccio cambia DUE cose**"))
+        # ### `PS-8` *(la ri-esecuzione)* si legge dal file che la produce
+        _rp = os.path.join(DIR, "riesecuzione_bscalts.txt")
+        try:
+            _rt = io.open(_rp, encoding="utf-8").read()
+        except Exception:                                      # noqa: BLE001
+            _rt = ""
+        if _rt:
+            _m8 = re.search(r"coppie di valori confrontate: (\d+)", _rt)
+            _ok8 = "ZERO DIFFERENZE" in _rt
+            pr.append(("`PS-8`",
+                       "la ri-esecuzione di `B-SCAL-TS` dal blob nuovo dà ### **zero "
+                       "differenze** sui contatori già committati",
+                       "### **%s** coppie di valori confrontate, e l esito è "
+                       "### **%s**" % (_m8.group(1) if _m8 else "n/d",
+                                       "ZERO DIFFERENZE" if _ok8 else "DIFFERENZE"),
+                       "### ✔ **CONFERMATA**" if _ok8 else "### ⛔ **SMENTITA**"))
     for x in pr:
         A("| %s | %s | %s | %s |" % x)
     A("")
@@ -1753,6 +2225,9 @@ def main():
     A("| la variabilità fra semi | ### **UN seme** *(il `11`)*: `P3` non soddisfatta |")
     A("| i valori ASSOLUTI | ### **`U1` è aperta:** si leggono le ### **differenze fra bracci** |")
     A("| `B-T` come ### **«senza termostato»** | ### ⛔ **NON lo è:** è «senza MEMORIA del termostato», e il residuo è misurato qui sopra |")
+    if hns:
+        A("| ### **`K_SYNC = 0` come «senza sincronizzazione» nel modello finale** | ### ⚠ **è una DIAGNOSI, non una proposta:** `K_SYNC` è una costante di modulo, e portarla a zero ### **toglie una legge** — ### **non dice con che cosa sostituirla** |")
+        A("| ### **la ri-esecuzione** | ### **copre i contatori COMUNI:** le voci che `D2-TER` ha aggiunto ### **non esistono** nel file vecchio, e sono ### **dichiarate escluse** nel file del confronto |")
     if hts:
         A("| ### **`B-SCAL-TS` come prova della DIREZIONE di Luca** | ### ⛔ **NON lo "
           "è:** il ramo scalare usa `cos(φ_k − φ_j)`, ### **non `cos((φ_k − φ_j)/2)`**. "

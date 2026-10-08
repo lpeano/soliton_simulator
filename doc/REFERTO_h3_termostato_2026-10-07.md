@@ -9,7 +9,8 @@
 | `B-S` | 500 su 500 | ### ✔ **completo** | 2403.9 | ### **`scuoti_vuoto` sostituita** con una funzione della stessa firma che ### **non fa niente** |
 | `B-TS` | 500 su 500 | ### ✔ **completo** | 1867.1 | ### **I DUE INSIEME:** `scuoti_vuoto` inerte ### **e** `xi_termo` azzerata. ### **Il sistema vive solo della sua energia iniziale e della dinamica interna.** ### ⚠ **Eredita da `B-T` il non essere un azzeramento del termostato** |
 | `B-SCAL` | 500 su 500 | ### ✔ **completo** | 2271.4 | ### **`D2`:** `_coppia_interferenza` prende il suo ### **RAMO SCALARE**, quello che dipende dalla ### **FASE CORRENTE** *(`z = e^{iφ}`)*. ### ⚠ **Il flag è spento SOLO durante la chiamata** e ripristinato in un `finally`: gira il ramo ### **del simulatore** |
-| `B-SCAL-TS` | 500 su 500 | ### ✔ **completo** | 2539.3 | ### **`D2-BIS`: I TRE INSIEME** — `scuoti_vuoto` inerte, `xi_termo` azzerata ### **e** la coppia sul suo ### **RAMO SCALARE**. ### ⭐ **Nessun codice di intervento nuovo:** sono i due interventi ### **già sigillati** composti, e il collaudo verifica che per i cinque bracci di prima le condizioni valutino ### **IDENTICO** |
+| `B-SCAL-TS` | 500 su 500 | ### ✔ **completo** | 3294.4 | ### **`D2-BIS`: I TRE INSIEME** — `scuoti_vuoto` inerte, `xi_termo` azzerata ### **e** la coppia sul suo ### **RAMO SCALARE**. ### ⭐ **Nessun codice di intervento nuovo:** sono i due interventi ### **già sigillati** composti, e il collaudo verifica che per i cinque bracci di prima le condizioni valutino ### **IDENTICO** |
+| `B-SCAL-TS-NOSYNC` | 500 su 500 | ### ✔ **completo** | 3184.2 | ### **`D2-TER`: I QUATTRO INSIEME** — i tre di `B-SCAL-TS` ### **più `K_SYNC = 0`**, messo dallo strumento sul modulo e ripristinato in un `finally`. ### ⭐ **E che sia UN SOLO interruttore è MISURATO**, non argomentato *(la tavola di `calcola_psi` qui sotto)* |
 
 ### ✔ **I FLAG CHE RENDONO VALIDA LA RICOSTRUZIONE, letti a runtime e non assunti**
 
@@ -510,6 +511,127 @@ W_tot - voce_coppia  =  Σ dt_n·c_tot·(p2 - p1)  +  Σ c_tot·delta_sync_phi
 
 ---
 
+# `D2-TER` ⭐ **LA SINCRONIZZAZIONE È LA SORGENTE?**
+
+> *Criteri e previsioni: `doc/TASK_HISTORY/2026-10-08_d2ter-sincronizzazione-sorgente.md`, committato ### **prima** in `74d1305`.*
+
+## ⭐ **`K_SYNC = 0` È UN SOLO INTERRUTTORE? MISURATO, NON ARGOMENTATO**
+
+Dal codice: `K_SYNC` apre il blocco di `:7767`, la cui ### **unica** uscita è `delta_sync_phi` *(`:7805`)*, perché `_forza_sync` si popola ### **solo se** uno fra `SYNC_SPINORE`, `SYNC_FASE_OROLOGIO` e `KURAMOTO_SU2` è acceso — e le tre leggi che lo leggono stanno a `:5946`, `:6053`, `:6067`. ### ⚠ **E `--sync` NON è `K_SYNC`:** quello è un flag CLI a sé *(`:11600`)*, e ### **`K_SYNC` non ha affatto un flag CLI** — è una costante di modulo.
+
+| flag | in `B-SCAL-TS` | in ### **`B-SCAL-TS-NOSYNC`** |
+|---|--:|--:|
+| `K_SYNC` | 1.0 | ### **0.0** |
+| `SYNC_SPINORE` | False | ### **False** |
+| `SYNC_FASE_OROLOGIO` | False | ### **False** |
+| `KURAMOTO_SU2` | False | ### **False** |
+
+### ⛔ **MA IL BLOCCO CONTIENE `calcola_psi(w)`** *(`:7771`)*, che ### **SCRIVE** `self.psi`, `psi_spin` e `rho_spin`: saltarlo salta quella scrittura. ### **«Dovrebbe essere byte-inerte» non è una misura**, quindi un involucro firma `psi` ### **prima e dopo OGNI chiamata** e conta per ### **CHIAMANTE**.
+
+| braccio | chiamante | chiamate | ### **che hanno CAMBIATO `psi`** |
+|---|--:|--:|--:|
+| `B-SCAL-TS` | ### **`:876`** | 1 | ### ⛔ **1** |
+| `B-SCAL-TS` | ### **`:7592`** | 500 | ### ⛔ **500** |
+| `B-SCAL-TS` | ### **`:7771`** | 500 | ### ✔ **0** |
+| `B-SCAL-TS-NOSYNC` | ### **`:876`** | 1 | ### ⛔ **1** |
+| `B-SCAL-TS-NOSYNC` | ### **`:7592`** | 500 | ### ⛔ **500** |
+
+> ### ✔ **`K_SYNC = 0` È UN SOLO INTERRUTTORE:** la `calcola_psi` di `:7771` è stata chiamata ### **500** volte e ha cambiato `psi` ### **ZERO** volte. ### ⭐ **E il rivelatore PUÒ fallire:** `:7592` cambia `psi` ### **a ogni chiamata**, quindi non è un controllo che passa a vuoto. ### ➜ **La regola d oro del par.3 è rispettata: fra i due bracci cambia UNA cosa.**
+
+## ⭐ **`delta_sync_phi` DERIVATO DALLA LEGGE, E IL CONTROLLO CHE LO VALIDA**
+
+Dal commit atomico *(`:7831`)* `phi(t+1) = (phi_t + dt_n·phivel(t+1) + delta_sync_phi) mod _dphi()`, quindi ### **`delta_sync_phi = Δφ − dt_n·phivel(t+1)`** — ### **esatto dalla legge, non stimato** *(e `dt_n_s = dt_n` perché `TEMPO_SEGNO = False`, che lo strumento verifica e altrimenti FERMA)*.
+
+| braccio | `rms` mediano | ### **massimo** | nodi con valore non nullo *(mediano)* |
+|---|--:|--:|--:|
+| `B-SCAL-TS` | ### **6.7817e-03** | 3.5039e-02 | 12802 |
+| `B-SCAL-TS-NOSYNC` | ### **3.7311e-16** | 3.2561e-15 | 12796 |
+
+> ### ⚠ **E LA MIA PREVISIONE `PS-1` ERA TROPPO FORTE:** avevo scritto ### **«esattamente `0`»**, e in `NOSYNC` il residuo è `3.7311e-16`. ### **Non è un termine: è il PAVIMENTO DI ARROTONDAMENTO**, perché l avvolgimento `mod 4π` ### **non è esatto** e `eps_macchina · |φ|` è di quell ordine. ### ➜ **Ma il controllo DISCRIMINA comunque: `6.7817e-03` contro `3.7311e-16`, cioè un fattore `1.818e+13`.** ### **La previsione era sbagliata nella FORMA e giusta nella SOSTANZA, e la annoto invece di riscriverla** *(par.8)*.
+
+## ⭐ **LA SPARTIZIONE DEL LAVORO: `W_newton` CONTRO `W_sync`**
+
+> ### ⚠ **LA RICOMPOSIZIONE `W_sync + W_newton = W_interferenza` È TAUTOLOGICA**, perché i due addendi partizionano `Δφ` ### **per definizione**. Il mandato la chiede e si riporta, ### **ma il controllo vero è il pavimento in `NOSYNC` qui sopra.**
+
+| braccio | finestra | ### **`W_sync`** | `W_newton` | `W_interferenza` | ### **quota di `W_sync`** | residuo della ricomposizione |
+|---|---|--:|--:|--:|--:|--:|
+| `B-SCAL-TS` | `1..215` | ### **-19993.5289** | 6356.0745 | -13637.4544 | ### **146.61 %** | 2.67e-14 |
+| `B-SCAL-TS` | `216..500` | ### **-17704.8616** | 335.9635 | -17368.8981 | ### **101.93 %** | 3.03e-14 |
+| `B-SCAL-TS-NOSYNC` | `1..215` | ### **-0.0000** | -1078.8467 | -1078.8467 | ### **0.00 %** | 1.92e-15 |
+| `B-SCAL-TS-NOSYNC` | `216..500` | ### **-0.0000** | -1274.2057 | -1274.2057 | ### **0.00 %** | 5.19e-15 |
+
+| braccio | finestra | `W_sync` sulla coppia ### **TOTALE** | il confronto con la ### **STIMA** del punto `0` |
+|---|---|--:|--:|
+| `B-SCAL-TS` | `1..215` | ### **-22250.2756** | la stima era `-22251.2229` → rapporto ### **1.000** |
+| `B-SCAL-TS` | `216..500` | ### **-26949.4294** | la stima era `-26950.8780` → rapporto ### **1.000** |
+
+## ⛔ **IL CRITERIO: `LA SINCRONIZZAZIONE È LA SORGENTE`?**
+
+| la lettura di ### **«crescita di `H`»** | in `B-SCAL-TS` | ### **in `NOSYNC`** | il rapporto | soglia ### **SORGENTE** *(un quarto)* | soglia ### **NON È LEI** *(la metà)* | ### **il verdetto** |
+|---|--:|--:|--:|--:|--:|---|
+| `H(215) − H(1)`, ### **LETTERALE** | 47544.2149 | ### **22988.5679** | ### **48.35 %** | 11886.0537 | 23772.1075 | ### ⚠ **`FRA I DUE`** |
+| `Σ(dT + dU_φ)`, a ### **`A` FISSA** | 23782.6394 | ### **1559.4201** | ### **6.56 %** | 5945.6598 | 11891.3197 | ### ⛔ **`LA SINCRONIZZAZIONE È LA SORGENTE`** |
+
+| il ### **lavoro di `A` che cambia** su `1..215` | `B-SCAL-TS` | ### **`NOSYNC`** | il rapporto |
+|---|--:|--:|--:|
+| ### **`Σ(dU_A)`** | 23885.7223 | ### **21435.8389** | 89.74 % |
+
+> ### ⛔ **I DUE VERDETTI SONO DIVERSI, E LO DICO INVECE DI SCEGLIERE.** Sulla lettura ### **letterale** il criterio dà ### ⚠ **`FRA I DUE`** *(48.35 %)*; sulla lettura ### **a `A` fissa** dà ### ⛔ **`LA SINCRONIZZAZIONE È LA SORGENTE`** *(6.56 %)*. ### ➜ **E la ragione è nella tavola qui sopra:** `H` cresce ANCHE per il ### **lavoro di `A` che cambia**, e quel lavoro è ### **quasi lo stesso nei due bracci** *(23885.7223 contro 21435.8389, cioè il 89.74 %)* — ### **la sincronizzazione non lo tocca.**
+
+> ### ⭐ **QUELLO CHE I NUMERI DICONO SENZA AMBIGUITÀ:** togliere `K_SYNC` toglie ### **93.44 %** della crescita di `H` ### **a `A` fissa** *(da 23782.6394 a 1559.4201)*, e ### **51.65 %** della crescita TOTALE. ### **La sincronizzazione è la sorgente DELLA PARTE IN `φ`, non di tutta la crescita** — e il criterio, come è scritto, non distingueva le due cose.
+
+
+| passo | `H` in `B-SCAL-TS` | ### **`H` in `NOSYNC`** | `T` masse `NOSYNC` | `T` vuoto `NOSYNC` | `U` totale `NOSYNC` |
+|--:|--:|--:|--:|--:|--:|
+| 1 | -61863.9959 | ### **-61863.9959** | 105.5464 | 895.0033 | -62864.5456 |
+| 50 | -36747.0422 | ### **-40157.8739** | 109.4471 | 772.5282 | -41039.8492 |
+| 150 | -18660.7504 | ### **-35908.3326** | 122.4502 | 1164.9406 | -37195.7233 |
+| 215 | -14319.7810 | ### **-38875.4280** | 152.8112 | 1227.7992 | -40256.0385 |
+| 216 | -14225.8847 | ### **-38934.3650** | 153.6951 | 1234.5551 | -40322.6152 |
+| 230 | -12813.5120 | ### **-39751.2141** | 166.2905 | 1341.7954 | -41259.3000 |
+| 300 | -3362.4302 | ### **-42702.4686** | 239.9990 | 1754.8711 | -44697.3387 |
+| 400 | 8815.2615 | ### **-42699.7152** | 327.9550 | 1983.9474 | -45011.6176 |
+| 500 | 18020.4822 | ### **-40521.9759** | 400.2383 | 2087.3224 | -43009.5366 |
+
+| | `B-SCAL-TS` | ### **`B-SCAL-TS-NOSYNC`** | controllo |
+|---|--:|--:|--:|
+| AUC al `230` | 0.9377 | ### **0.9891** | 0.9023 |
+| ### **AUC al `400`** | 0.9394 | ### **0.9333** | 0.4679 |
+| ### **nascite** | 0 | ### **0** | — |
+
+| massa | coerenza al `230` in `B-SCAL-TS` | ### **in `NOSYNC`** |
+|---|--:|--:|
+| `massa_0` | 0.9495 | ### **0.9372** |
+| `massa_1` | 0.9024 | ### **0.9197** |
+| `massa_2` | 0.9264 | ### **0.9352** |
+| il ### **VUOTO** | 0.0274 | ### **0.0078** |
+
+> ### ✔ **LE MASSE NON SI SCIOLGONO** *(AUC al `400` = `0.9333`)*: la coerenza ### **sopravvive** al togliere la sincronizzazione, quindi viene dalla ### **coppia**, che è `−∂U/∂φ` e ordina le fasi. ### ➜ **E allora la sincronizzazione POMPAVA senza ordinare.**
+
+## ⛔ **IL SIGILLO DI BYTE-INERZIA È FALLITO, POI CURATO — E LO SCRIVO IN QUEST ORDINE**
+
+| | |
+|---|---|
+| ### **che cos è fallito** | ### **UN** attributo su `291`: `_calcpsi_origini`, con `n` e gli archi a valle ### **identici** nei due bracci. L esito `FALLISCE` è committato ### **così com è** in `3ef2dd4`, ### **prima** della cura *(par.5)* |
+| ### **la causa, dal codice** | quel dizionario è ### **diagnostico** e le sue chiavi sono `nome_del_chiamante:riga_del_chiamante` *(`:6295`-`:6297`)*; l involucro su `calcola_psi` ### **diventa il chiamante**, quindi le chiavi cambiano ### **per costruzione** |
+| ### ⚠ **e aggregare per FUNZIONE non basta** | cambia ### **anche il nome** della funzione *(`_inv_psi` invece di `step`)*, quindi l aggregazione — la pratica abituale per questa voce — ### **non riconcilia niente** |
+| ### ✔ **e nessuna legge lo legge** | nel simulatore compare ### **solo** a `:6295` e `:6297`, ### **entrambe SCRITTURE**: censito, non supposto |
+| ### **la cura** *(`0572907`, un commit a sé)* | l attributo entra in `ESCLUSI` ### **con la ragione scritta nel codice**, e al suo posto va un ### **TERZO controllo positivo che PUÒ fallire**: la ### **somma** dei conteggi e `_calcpsi_chiamate` devono coincidere fra i due bracci. ### **Le CHIAVI cambiano, i NUMERI no** |
+
+| il sigillo, dopo la cura | |
+|---|--:|
+| ### **esito** | ### **PASSA** |
+| attributi confrontati | 290 |
+| ### **attributi DIVERSI** | ### **0** |
+| esclusi, ### **dichiarati** | `_calcpsi_origini` |
+| `n` e archi a valle | nudo `[12809, 471574]` · osservato `[12809, 471574]` |
+| ### **il controllo che rimpiazza l escluso** | somma dei conteggi `1` / `1`; `_calcpsi_w_none` `1` / `1`; ### **`_calcpsi_chiamate` TOTALI `441` / `441`**; chiavi `1` / `1` *(e POSSONO differire)* |
+| ### **i numeri coincidono** | ### **✔ SÌ** |
+
+> ### ⭐ **E IL CONTROLLO PIÙ FORTE SULLA FISICA NON È IL SIGILLO: È LA RI-ESECUZIONE.** `B-SCAL-TS` rigirato col blob nuovo contro il file ### **già committato** dà ### **ZERO DIFFERENZE su 44498 coppie di valori** su ### **501** passi in comune, confrontando ogni contatore e ogni voce del bilancio in entrambe le classi. ### **Le voci che `D2-TER` ha aggiunto sono dichiarate ESCLUSE nel file del confronto**, perché nel vecchio non esistono.
+
+---
+
 # ⭐ **LE MIE PREVISIONI, CONTRO I NUMERI**
 
 | | la previsione | il numero | esito |
@@ -537,8 +659,16 @@ W_tot - voce_coppia  =  Σ dt_n·c_tot·(p2 - p1)  +  Σ c_tot·delta_sync_phi
 | `PE-5` | il ### **lavoro di `A` che cambia** è la parte ### **dominante** della variazione di `H` dopo il `216`, ### **perché le nascite aggiungono archi** | la quota di `A` è ### **1.96 %**, gli archi nuovi sono ### **0** e il loro lavoro ### **0.0000** | ### ⛔ **SMENTITA, E PER UN MOTIVO CHE NON AVEVO PREVISTO:** in questo braccio ### **non nasce NIENTE**, quindi la premessa della previsione *(«le nascite aggiungono archi»)* ### **non si verifica mai**. ### **Non è che le nascite non dominino: non ci sono.** |
 | `PE-6` | l `AUC` al `400` resta ### **`>= 0.85`** anche senza bagno | ### **0.9394** | ### ✔ **CONFERMATA** |
 | `PE-7` | ### **`W_extra` NON è trascurabile** *(almeno il `10 %` di `W_interf` in modulo)*. ### **Scritta così per poter PERDERE:** se fosse trascurabile, il criterio chiuderebbe anche sulla coppia totale e il mio censimento sarebbe stato pessimismo | ### **16.53 %** di `W_interf` su tutta la corsa — e ### ⚠ **il rapporto CAMBIA con la finestra:** `9.33 %` su `1..215`, `n/d` su `216..500`. ### **Riporto entrambe invece di scegliere quella che mi conviene** | ### ✔ **CONFERMATA sul TOTALE** |
+| `PS-1` | in `NOSYNC` `delta_sync_phi` è ### **esattamente `0`** su tutti i passi e tutti i nodi | il residuo è ### **3.7311e-16**, contro `6.7817e-03` in `B-SCAL-TS` *(un fattore `1.818e+13`)* | ### ⛔ **SMENTITA NELLA FORMA, confermata nella SOSTANZA:** l avvolgimento `mod 4π` ### **non è esatto**, quindi il pavimento è `eps_macchina·|φ|` e NON lo zero. ### **Era un attesa mia troppo forte, e la annoto** *(par.8)* |
+| `PS-2` | in `B-SCAL-TS` `W_sync` è la parte ### **dominante** di `W_interferenza` *(oltre il `50 %`)* | ### **146.61 %** | ### ✔ **CONFERMATA** |
+| `PS-3` | `W_sync` sulla coppia ### **TOTALE** sta ### **entro un fattore `2`** dalla stima dedotta nel punto `0` | misurato `-22250.2756`, stima `-22251.2229` → rapporto ### **1.0000** | ### ✔ **CONFERMATA** |
+| `PS-4` | ### **`LA SINCRONIZZAZIONE È LA SORGENTE` è soddisfatto:** la crescita di `H` in `NOSYNC` sta ### **sotto un quarto** di quella di `B-SCAL-TS` | a ### **`A` FISSA**: ### **6.56 %** *(`1559.4201` contro `23782.6394`, soglia `5945.6598`)*; ### ⚠ **sulla lettura LETTERALE `H(215) − H(1)`: 48.35 %**, cioè ### **`FRA I DUE`** | ### ✔ **CONFERMATA sulla lettura a `A` FISSA**, ### ⚠ **e NON su quella letterale:** il criterio non distingueva le due, e ### **riporto entrambe invece di scegliere** |
+| `PS-5` | ### **le masse NON si sciolgono** senza sincronizzazione: `AUC` al `400` ### **`>= 0.85`**. ### **Scritta per poter PERDERE:** se crolla, la sincronizzazione le teneva insieme ### **pompando** | ### **0.9333** | ### ✔ **CONFERMATA** |
+| `PS-6` | ### **zero nascite anche in `NOSYNC`**: il bagno resta spento, ed è lui che porta alla soglia *(il punto `0`)* | ### **0** nascite | ### ✔ **CONFERMATA** |
+| `PS-7` | la `calcola_psi` di `:7771` è ### **byte-inerte**, quindi `K_SYNC = 0` è ### **UN SOLO interruttore** | ### **500** chiamate, ### **0** cambiate *(e `:7592` ne cambia tutte, quindi il rivelatore PUÒ fallire)* | ### ✔ **CONFERMATA** |
+| `PS-8` | la ri-esecuzione di `B-SCAL-TS` dal blob nuovo dà ### **zero differenze** sui contatori già committati | ### **44498** coppie di valori confrontate, e l esito è ### **ZERO DIFFERENZE** | ### ✔ **CONFERMATA** |
 
-> ### **13 confermate, 8 SMENTITE** su 21.
+> ### **20 confermate, 9 SMENTITE** su 29.
 
 ---
 
@@ -550,6 +680,8 @@ W_tot - voce_coppia  =  Σ dt_n·c_tot·(p2 - p1)  +  Σ c_tot·delta_sync_phi
 | la variabilità fra semi | ### **UN seme** *(il `11`)*: `P3` non soddisfatta |
 | i valori ASSOLUTI | ### **`U1` è aperta:** si leggono le ### **differenze fra bracci** |
 | `B-T` come ### **«senza termostato»** | ### ⛔ **NON lo è:** è «senza MEMORIA del termostato», e il residuo è misurato qui sopra |
+| ### **`K_SYNC = 0` come «senza sincronizzazione» nel modello finale** | ### ⚠ **è una DIAGNOSI, non una proposta:** `K_SYNC` è una costante di modulo, e portarla a zero ### **toglie una legge** — ### **non dice con che cosa sostituirla** |
+| ### **la ri-esecuzione** | ### **copre i contatori COMUNI:** le voci che `D2-TER` ha aggiunto ### **non esistono** nel file vecchio, e sono ### **dichiarate escluse** nel file del confronto |
 | ### **`B-SCAL-TS` come prova della DIREZIONE di Luca** | ### ⛔ **NON lo è:** il ramo scalare usa `cos(φ_k − φ_j)`, ### **non `cos((φ_k − φ_j)/2)`**. È un test sul ### **PRINCIPIO**, e un esito positivo ### **non decide la cura** |
 | ### **la conservazione lungo la CORSA** | ### ⛔ **non è misurata, e non può esserlo con questi dati:** servirebbe il lavoro col ### **TRAPEZIO** *(la coppia valutata anche a `φ` nuove)*, che la corsa ### **non registra**. ### **Quello che è misurato è che la coppia È `−∂U/∂φ`** *(collaudo, `1.49e-15`)* |
 | ### **«senza bagno»** | ### ⚠ **il bagno è SOPPRESSO, non spento:** `xi_termo` è azzerata ### **prima** di ogni passo, ma lo step lo ### **RICALCOLA** — e il residuo resta, ### **misurato** nella decomposizione di `dT` |
