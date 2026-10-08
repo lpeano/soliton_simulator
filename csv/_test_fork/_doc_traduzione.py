@@ -167,6 +167,8 @@ def main():
     cre = leggi("csv/_test_fork/_crescita_conti/crescita.json")
     v2 = leggi("proto_primo_ordine/uscite/diagnosi_v2.json")
     bil = leggi("csv/_test_fork/_bilancio_nascita/bilancio.json")
+    pos = leggi("csv/_test_fork/_censimento_pos/pos.json")
+    POS = {x["legge"]: x for x in pos["per_legge"]}
     e = {x["legge"]: x for x in itg["esiti"]}
     # ### LA DICHIARAZIONE `P5` SI LEGGE DALL'USCITA dello strumento che ha misurato, e si
     # ### ASSERISCE: se non c'e', il documento NON si scrive.
@@ -312,10 +314,42 @@ def main():
     cls = {}
     for (nome, anc, var, classe, ex, esito) in TAVOLA:
         cls.setdefault(canonica(classe), []).append(nome)
-    A("| la legge | ancora *(nome, MAI una riga)* | variabile | ### **classe** |")
-    A("|---|---|---|---|")
+    A("| la legge | ancora *(nome, MAI una riga)* | variabile | ### **classe** | "
+      "### ⛔ **legge `pos`? (`A17`)** |")
+    A("|---|---|---|---|---|")
     for (nome, anc, var, classe, ex, esito) in TAVOLA:
-        A("| %s | `%s` | `%s` | ### **%s** |" % (nome, anc, var, classe))
+        q = POS.get(nome)
+        if q is None:
+            cella = "*(non censita)*"
+        elif q["stato"] == "no":
+            cella = "### ✔ **no**"
+        elif q["stato"] == "INDIRETTO":
+            cella = ("### ⚠ **INDIRETTO**, via `%s`"
+                     % ",".join(sorted(q.get("vie_indirette", {}))[:2]))
+        else:
+            gg = q.get("guardie_dirette") or []
+            cella = ("### ⛔ **DIRETTO**, righe `%s`%s"
+                     % (",".join(str(b) for b in q["righe_dirette"][:4]),
+                        (" *(guardia `%s`)*" % ",".join(gg)) if gg else ""))
+        A("| %s | `%s` | `%s` | ### **%s** | %s |" % (nome, anc, var, classe, cella))
+    n_no = sum(1 for x in pos["per_legge"] if x["stato"] == "no")
+    n_dir = sum(1 for x in pos["per_legge"] if x["stato"] == "DIRETTO")
+    n_ind = sum(1 for x in pos["per_legge"] if x["stato"] == "INDIRETTO")
+    n_sync = sum(1 for x in pos["per_legge"]
+                 if x["stato"] == "DIRETTO" and "K_SYNC" in (x.get("guardie_dirette") or []))
+    A("")
+    A("### ⛔ **`%d` leggi su `%d` leggono `pos`** *(`%d` DIRETTO, `%d` INDIRETTO)*. "
+      "### ⭐ **MA `%d` di quelle DIRETTE sono LO STESSO BLOCCO:**"
+      % (n_dir + n_ind, len(pos["per_legge"]), n_dir, n_ind, n_sync))
+    A("")
+    A("> ### ⭐ **LE UNICHE LETTURE DI `pos` DENTRO `step` SONO IL CENTRO DI MASSA DELLA "
+      "SINCRONIZZAZIONE** *(righe `7773`-`7774`, guardia `K_SYNC`)*: `cmv` e `r_cm`. "
+      "### ➜ **Quindi `%d` «DIRETTO» su `%d` NON sono `%d` difetti diversi: sono UNO, e la "
+      "decisione `3` (PRESA) lo toglie.**" % (n_sync, n_dir, n_sync))
+    A("> ### ⚠ **E QUESTO E' UN DIFETTO DELLA MIA MISURA, PRESO DALLA MISURA STESSA:** "
+      "l'ancora di quelle leggi e' `step`, che e' ### **una funzione lunghissima**, quindi il "
+      "grafo le attribuiva tutte la stessa lettura. ### **Senza la colonna «guardia» la tavola "
+      "avrebbe detto il falso**, e il numero vero e' ### **molto migliore** di come appariva.")
     A("")
     A("### **IL CONTO PER CLASSE** *(e `9-ter` chiede che si CONTI)*:")
     A("")
@@ -926,6 +960,91 @@ def main():
     A("")
     A("---")
     A("")
+    A("# ⛔ `⑩` **LA REVIEW RELAZIONALE** *(`A17`)* — **dove entra `pos`, e la candidata "
+      "relazionale**")
+    A("")
+    A("> ### ⛔ **`A17`** *(`4f830bd`)*: *«nelle formule della fisica non ci deve essere `pos`: "
+      "deve essere tutto relazionale»*. ### **Questa sezione NON lo assume: lo MISURA** — "
+      "`csv/_test_fork/_censimento_pos.py`, per forma e non per nome.")
+    A("")
+    A("## `⑩.1` **NEL SIMULATORE — le violazioni, misurate dal codice di OGGI**")
+    A("")
+    A("| dove | che cosa decide con `pos` | ### **la candidata RELAZIONALE** |")
+    A("|---|---|---|")
+    A("| ### ⛔ **`_allaccia`** *(riga `%s`, ### **nessuna guardia**)* | un `cKDTree` su `pos`: "
+      "### **DECIDE LA TOPOLOGIA delle nascite.** ### ⛔ **Viola anche `A5`:** lega nodi vicini "
+      "### **nel disegno** che ### **sul grafo non si sono mai parlati** | ### ⭐ **il nato si "
+      "attacca AL GENITORE e AI VICINI DEL GENITORE**, con le lunghezze prese dalle ### **`d` "
+      "del genitore**. ### ✔ **Nessuna ricerca di prossimita': l'intorno e' GIA' nel grafo** |"
+      % ",".join(str(b) for b in POS["la creazione degli archi"]["righe_dirette"][:2]))
+    A("| ### ⛔ **`memoria_hebbiana_moto`** *(righe `%s`, guardie `%s`)* | le ### **direzioni** "
+      "da `pos`: scrive `mem_mot` e `_nb`, cioe' ### **la gravita' e il frame-drag** | "
+      "### ⭐ **le direzioni dal TRASPORTO `N` degli spinori** *(la connessione `SU(2)` d'arco, "
+      "che gia' esiste)*, dalle ### **direzioni di Bloch** `_nb`, e dal ### **grafo** "
+      "*(l'arco E' la direzione)*. ### ✔ **Tutte e tre sono gia' nel sistema** |"
+      % (",".join(str(b) for b in POS["la memoria hebbiana del moto"]["righe_dirette"][:4]),
+         ",".join(POS["la memoria hebbiana del moto"]["guardie_dirette"])))
+    A("| ### ⛔ **`chiralita_core_locale`** *(INDIRETTA per l'orologio)* | una ### **sfera "
+      "euclidea** | il ### **nucleo come insieme di nodi a distanza di GRAFO ≤ `r`**, oppure "
+      "la ### **componente connessa** sopra una soglia di `ρ`. ### ⚠ **Il raggio in archi "
+      "va DERIVATO, non scelto** *(`A1`)* |")
+    A("| ### ✔ **il Kuramoto dal CENTRO DI MASSA** *(righe `7773`-`7774`, guardia `K_SYNC`)* | "
+      "`cmv` e `r_cm`: ### **un centro di massa pesato su `pos`** | ### ⭐ **CADE con la "
+      "sincronizzazione tolta** *(decisione `3`, PRESA)*. ### **Non serve una candidata: serve "
+      "non riscriverla** |")
+    A("| ### ⛔ **l'anello `d → pos → topologia e direzioni → d`** | `rilassa_disegno` | "
+      "### **si SPEZZA togliendo i due consumatori**: `_allaccia` e `memoria_hebbiana_moto`. "
+      "### ➜ **Allora `rilassa_disegno` resta, ma SOLO per il disegno** — che e' cio' che "
+      "`A17` ammette |")
+    A("")
+    A("## `⑩.2` ### ⛔ **NEL PROTOTIPO — `A17` lo dichiara violato, e il censimento CONFERMA**")
+    A("")
+    A("| | |")
+    A("|---|---|")
+    A("| funzioni del prototipo che usano `pos` | ### **`%d`** — `%s` |"
+      % (len(pos["prototipo"]["funzioni"]), " ".join(sorted(pos["prototipo"]["funzioni"]))))
+    A("| righe con una ### **distanza euclidea** | ### **`%d`** |"
+      % len(pos["prototipo"]["righe_euclidee"]))
+    A("| il grafo | punti in un ### **cubo**, archi per ### **raggio euclideo** `R_ARCO` |")
+    A("| i pesi | `w = e^(−d/λ)` con `d` ### **EUCLIDEA** |")
+    A("")
+    A("### ⭐ **COME SI COSTRUISCONO GRAFO E PESI NEI PROSSIMI PROTOTIPI, SENZA `pos` — due "
+      "candidate:**")
+    A("")
+    A("| | la candidata | che cosa da' | ### **il prezzo** |")
+    A("|---|---|---|---|")
+    A("| ### **`(1)`** | ### **UN GRAFO ASTRATTO DICHIARATO**: si parte da una topologia nota "
+      "*(un reticolo regolare, un grafo casuale `k`-regolare, un espansore)* e i pesi sono "
+      "### **tutti uguali** o estratti da una legge ### **sul grafo** *(es. `w_ij = f(grado)`)* | "
+      "### ✔ **`pos` NON ESISTE NEMMENO**: non c'e' niente da violare | ### ⚠ **si perde il "
+      "confronto con lo spazio `3D`**: non si puo' piu' dire *«assomiglia a una palla»* |")
+    A("| ### **`(2)`** | ### **LA GEOMETRIA SI MISURA DAL GRAFO**: le lunghezze sono le `d` "
+      "### **d'arco come variabili dinamiche** *(decisione `9`)*, e `pos` si calcola "
+      "### **SOLO per disegnare**, da un embedding che ### **non rientra** in nessuna legge | "
+      "### ⭐ **e' la forma che il simulatore GIA' vorrebbe**: `d` e' relazionale, e' `pos` che "
+      "e' derivata | ### ⚠ **serve un controllo**: che l'embedding ### **non rientri**, e il "
+      "test e' la ### **BYTE-INERZIA** *(`A17` punto `4`)* |")
+    A("")
+    A("> ### ⚠ **E UNA COSA CHE `A17` MI HA FATTO VEDERE E CHE AVEVO SCRITTO SENZA ACCORGERMENE:** "
+      "nella decisione `10` avevo proposto come estensione del vuoto locale la ### **lunghezza "
+      "di guarigione `ξ = 1/√(|g|ρ)`**. ### ⛔ **`ξ` e' una LUNGHEZZA**, e una lunghezza "
+      "presuppone un metro. ### ➜ **In forma relazionale va espressa in NUMERO DI ARCHI** — "
+      "cioe' *«quanti passi di grafo»* —, non in distanza. ### **La candidata non cambia, "
+      "cambia l'unita'**, e senza `A17` l'avrei lasciata ambigua.")
+    A("")
+    A("## `⑩.3` **IL RIASSUNTO: che cosa resta da riscrivere, in ordine di gravita'**")
+    A("")
+    A("| | perche' e' il piu' grave |")
+    A("|---|---|")
+    A("| ### ⛔ **`1` `_allaccia`** | ### **nessuna guardia** *(e' sempre acceso)*, e "
+      "### **decide la TOPOLOGIA** — cioe' decide ### **che cosa esiste**, non come si muove. "
+      "### **E viola anche `A5`** |")
+    A("| ### ⛔ **`2` `memoria_hebbiana_moto`** | decide ### **le direzioni della gravita'** |")
+    A("| ### ⚠ **`3` `chiralita_core_locale`** | una sfera euclidea, e arriva ### **indiretta** "
+      "fino all'orologio |")
+    A("| ### ✔ **`4` il Kuramoto dal centro di massa** | ### **gia' deciso: cade** |")
+    A("| ### ⚠ **`5` il prototipo** | ### **violato da subito**, e dichiarato nell'assioma |")
+    A("")
     A("# ⛔ **CHE COSA QUESTO DOCUMENTO NON DICE**")
     A("")
     A("| | |")
@@ -942,6 +1061,10 @@ def main():
       "lettore»**, e questo giro ### **non lo fa** |")
     A("| le ### **scale e i semi** | ### **uno snapshot, una scena, `3` passi.** ### **`P3` non "
       "e' soddisfatta**, e il documento non pretende il contrario |")
+    A("| che la review `A17` sia ### **completa** | ### ⚠ **NO:** il censimento di `pos` e' "
+      "### **per DIFETTO** come quello delle leggi — ### **non vede un alias** *(`p = "
+      "self.pos`)* passato ad altra funzione. ### **E l'attribuzione per legge e' grossolana "
+      "dove l'ancora e' `step`**, e sta scritto |")
     io.open(DEST, "w", encoding="utf-8", newline=NL).write(NL.join(R) + NL)
     print("scritto %s (%d righe)" % (DEST, len(R)))
     return 0

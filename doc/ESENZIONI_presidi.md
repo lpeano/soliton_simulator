@@ -62,6 +62,7 @@ commit**: cosi' non se ne accumulano di invisibili.)*
 | `csv/_seal_fork/_z43_cura2_patch.py|H-P8` | un FALSO POSITIVO, e lo nomino invece di riformularlo. L occorrenza di |
 | `csv/_test_fork/_bilancio_nascita.py|H-P5` | non importa il simulatore e non lo fa girare. E' aritmetica sui numeri gia' |
 | `csv/_test_fork/_calcio_sotto_scambio.py|H-P3` | la frazione del CONTROLLO si cambia su una COPIA DEL SORGENTE, non |
+| `csv/_test_fork/_censimento_pos.py|H-P5` | non importa il simulatore e non lo fa girare. Legge il SORGENTE con l'AST, e |
 | `csv/_test_fork/_confronto_blob_misure.py|H-P5` | non importa il simulatore e non lo fa girare. Legge due referti json |
 | `csv/_test_fork/_confronto_previsione.py|H-P5` | non costruisce nessuna scena e non carica il simulatore: legge i `json` di un run |
 | `csv/_test_fork/_controlli_mzd.py|H-P5` | non importa il simulatore e non lo fa girare. Confronta i `json` di corse che |
@@ -93,5 +94,5 @@ commit**: cosi' non se ne accumulano di invisibili.)*
 | `csv/_test_fork/_z43_tempo_proprio.py|H-P3` | la scena passa TUTTA dal CLI (`nmasse` e `sep` da `argv`), e la |
 
 ```
-esenzioni dichiarate   86
+esenzioni dichiarate   87
 ```

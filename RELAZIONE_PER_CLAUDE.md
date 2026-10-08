@@ -10386,3 +10386,27 @@ e se il calore non basta la materia ### **resta compressa al limite senza collas
 stesso calore del vuoto locale paga la ### **nascita** `(A)`, l'### **aggancio degli orologi**
 `(B)` e alimenta il ### **freno vero** `(C)`. ### ⛔ **Se manca a uno, manca agli altri** — e il
 margine, misurato, è ### **zero per costruzione.**
+
+## LA REVIEW RELAZIONALE *(`A17`)* — **e il numero vero è molto migliore di come appariva** (2026-10-08)
+
+Misurato, non assunto *(`csv/_test_fork/_censimento_pos.py`)*: ### **`22` funzioni** del
+simulatore leggono `pos` *(`66` occorrenze)*, e ### **`14` leggi su `20`** la leggono.
+### ⭐ **Ma `9` delle `13` «DIRETTO» sono LO STESSO BLOCCO:** le uniche letture di `pos` dentro
+`step` sono il ### **centro di massa della sincronizzazione** *(righe `7773`-`7774`, guardia
+`K_SYNC`)* — ### **e la decisione `3`, PRESA, lo toglie.**
+
+### ⚠ **E la colonna «guardia» è nata da un difetto della mia misura, preso dalla misura
+stessa:** l'ancora di quelle leggi è `step`, ### **una funzione lunghissima**, quindi il grafo
+attribuiva a tutte la stessa lettura. ### **Senza la guardia la tavola avrebbe detto il falso.**
+
+Le violazioni vere, in ordine di gravità: ### **`_allaccia`** *(nessuna guardia, decide la
+TOPOLOGIA — e viola anche `A5`)*, candidata ### **«il nato si attacca al genitore e ai vicini
+del genitore, con le `d` del genitore»**; ### **`memoria_hebbiana_moto`** *(le direzioni della
+gravità)*, candidate ### **il trasporto `N`, le direzioni di Bloch, il grafo**;
+### **`chiralita_core_locale`** *(sfera euclidea)*, candidata ### **la distanza di GRAFO**.
+
+### ⭐ **E `A17` mi ha fatto vedere una cosa che avevo scritto senza accorgermene:** nella
+decisione `10` avevo proposto `ξ = 1/√(|g|ρ)` come estensione del vuoto locale. ### ⛔ **`ξ` è
+una LUNGHEZZA, e una lunghezza presuppone un metro.** In forma relazionale va espressa in
+### **numero di ARCHI**. La candidata non cambia, ### **cambia l'unità** — e senza `A17`
+l'avrei lasciata ambigua.

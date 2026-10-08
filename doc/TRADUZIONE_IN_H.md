@@ -62,29 +62,34 @@ Il metodo ovvio *(scrivere `E` e verificare `F = −∂E/∂x`)* ### **dimostra 
 
 ### ⚠ **LA CLASSIFICAZIONE E' UN GIUDIZIO MIO, e lo dichiaro:** i numeri che la sostengono vengono dalle uscite, il giudizio no.
 
-| la legge | ancora *(nome, MAI una riga)* | variabile | ### **classe** |
-|---|---|---|---|
-| la coppia d'interferenza, ramo SCALARE | `_coppia_interferenza (ramo OFF)` | `phi` | ### **TRADUCIBILE** |
-| il legame elastico delle lunghezze | `step, blocco di `vd` (VERLET)` | `d` | ### **TRADUCIBILE** |
-| la repulsione | `REPULS_LEGGE, `_rep`` | `d` | ### **TRADUCIBILE** |
-| il rilassamento della torsione | `step, blocco `tau_tw`` | `tw` | ### **CON UNA MEMORIA** |
-| il rilassamento della lunghezza di riposo | `step, `tau_p_loc`` | `d0` | ### **CON UNA MEMORIA** |
-| il rilassamento della pressione di equilibrio | `step, `tau_bg_loc`, TAU_DIFF` | `peq` | ### **CON UNA MEMORIA** |
-| la precessione dello spinore e l'orologio | `_passo_spinoriale, `omega_s`` | `omega_s` | ### **CON UNA MEMORIA** |
-| la memoria hebbiana del moto | `memoria_hebbiana_moto, `mem_mot`` | `mem_mot` | ### **CON UNA MEMORIA** |
-| la dinamica dei pesi e delle distanze | ``w`, `d`, `d0` nello step` | `w, d, d0` | ### **CON UNA MEMORIA** |
-| la mitosi | `mitosi, decidi_divisione` | `tutta la struttura` | ### **CRESCITA DELLO SPAZIO** |
-| la creazione di coppia (Schwinger) | `mitosi, evento `schwinger`` | `tutta la struttura` | ### **CRESCITA DELLO SPAZIO** |
-| la creazione degli archi | `_allaccia` | `i, j, d, d0, peq, tw, vd` | ### **CRESCITA DELLO SPAZIO** |
-| la scomparsa degli archi | `le potature nello step` | `i, j` | ### **CRESCITA DELLO SPAZIO -- ma A ROVESCIO** |
-| la sincronizzazione | `K_SYNC` | `phi` | ### **NON TRADUCIBILE -- DIMOSTRATO** |
-| la coppia d'interferenza del DRIVER | `_coppia_interferenza (CAMPO_SPINORIALE)` | `phi` | ### **NON TRADUCIBILE IN phi -- DIMOSTRATO** |
-| il termostato | `xi_termo, REGIME` | `phivel` | ### **NON TRADUCIBILE** |
-| lo scuotimento del vuoto | `scuoti_vuoto` | `phivel` | ### **NON TRADUCIBILE** |
-| il freno `_smorza` | `_smorza (D31)` | `d0` | ### **NON TRADUCIBILE -- FRECCIA** |
-| lo smorzamento anisotropo | `ZETA_VIR, `beta*vd`` | `vd` | ### **NON TRADUCIBILE -- DISSIPAZIONE** |
-| la massa critica | `massa_critica_adattiva, massa_critica_collasso` | `la soglia` | ### **NON TRADUCIBILE -- e' una SOGLIA** |
-| i contatori `_g_*`, `_taup_*`, `_sfb_*` | `i prefissi diagnostici` | `-` | ### **DIAGNOSTICA** |
+| la legge | ancora *(nome, MAI una riga)* | variabile | ### **classe** | ### ⛔ **legge `pos`? (`A17`)** |
+|---|---|---|---|---|
+| la coppia d'interferenza, ramo SCALARE | `_coppia_interferenza (ramo OFF)` | `phi` | ### **TRADUCIBILE** | ### ✔ **no** |
+| il legame elastico delle lunghezze | `step, blocco di `vd` (VERLET)` | `d` | ### **TRADUCIBILE** | ### ⛔ **DIRETTO**, righe `7773,7774` *(guardia `K_SYNC`)* |
+| la repulsione | `REPULS_LEGGE, `_rep`` | `d` | ### **TRADUCIBILE** | ### ✔ **no** |
+| il rilassamento della torsione | `step, blocco `tau_tw`` | `tw` | ### **CON UNA MEMORIA** | ### ⛔ **DIRETTO**, righe `7773,7774` *(guardia `K_SYNC`)* |
+| il rilassamento della lunghezza di riposo | `step, `tau_p_loc`` | `d0` | ### **CON UNA MEMORIA** | ### ⛔ **DIRETTO**, righe `7773,7774` *(guardia `K_SYNC`)* |
+| il rilassamento della pressione di equilibrio | `step, `tau_bg_loc`, TAU_DIFF` | `peq` | ### **CON UNA MEMORIA** | ### ⛔ **DIRETTO**, righe `7773,7774` *(guardia `K_SYNC`)* |
+| la precessione dello spinore e l'orologio | `_passo_spinoriale, `omega_s`` | `omega_s` | ### **CON UNA MEMORIA** | ### ⚠ **INDIRETTO**, via `chiralita_core_locale` |
+| la memoria hebbiana del moto | `memoria_hebbiana_moto, `mem_mot`` | `mem_mot` | ### **CON UNA MEMORIA** | ### ⛔ **DIRETTO**, righe `9208,9378,9379,9592` *(guardia `GRAV_BIFASE,LS_AZIM,VIRIALE`)* |
+| la dinamica dei pesi e delle distanze | ``w`, `d`, `d0` nello step` | `w, d, d0` | ### **CON UNA MEMORIA** | ### ⛔ **DIRETTO**, righe `7773,7774` *(guardia `K_SYNC`)* |
+| la mitosi | `mitosi, decidi_divisione` | `tutta la struttura` | ### **CRESCITA DELLO SPAZIO** | ### ⛔ **DIRETTO**, righe `8786,9007` *(guardia `COPPIA_MIT`)* |
+| la creazione di coppia (Schwinger) | `mitosi, evento `schwinger`` | `tutta la struttura` | ### **CRESCITA DELLO SPAZIO** | ### ⛔ **DIRETTO**, righe `8786,9007` *(guardia `COPPIA_MIT`)* |
+| la creazione degli archi | `_allaccia` | `i, j, d, d0, peq, tw, vd` | ### **CRESCITA DELLO SPAZIO** | ### ⛔ **DIRETTO**, righe `5248,5248` |
+| la scomparsa degli archi | `le potature nello step` | `i, j` | ### **CRESCITA DELLO SPAZIO -- ma A ROVESCIO** | ### ⛔ **DIRETTO**, righe `7773,7774` *(guardia `K_SYNC`)* |
+| la sincronizzazione | `K_SYNC` | `phi` | ### **NON TRADUCIBILE -- DIMOSTRATO** | ### ⛔ **DIRETTO**, righe `7773,7774` *(guardia `K_SYNC`)* |
+| la coppia d'interferenza del DRIVER | `_coppia_interferenza (CAMPO_SPINORIALE)` | `phi` | ### **NON TRADUCIBILE IN phi -- DIMOSTRATO** | ### ✔ **no** |
+| il termostato | `xi_termo, REGIME` | `phivel` | ### **NON TRADUCIBILE** | ### ⛔ **DIRETTO**, righe `7773,7774` *(guardia `K_SYNC`)* |
+| lo scuotimento del vuoto | `scuoti_vuoto` | `phivel` | ### **NON TRADUCIBILE** | ### ✔ **no** |
+| il freno `_smorza` | `_smorza (D31)` | `d0` | ### **NON TRADUCIBILE -- FRECCIA** | ### ✔ **no** |
+| lo smorzamento anisotropo | `ZETA_VIR, `beta*vd`` | `vd` | ### **NON TRADUCIBILE -- DISSIPAZIONE** | ### ⛔ **DIRETTO**, righe `7773,7774` *(guardia `K_SYNC`)* |
+| la massa critica | `massa_critica_adattiva, massa_critica_collasso` | `la soglia` | ### **NON TRADUCIBILE -- e' una SOGLIA** | ### ✔ **no** |
+| i contatori `_g_*`, `_taup_*`, `_sfb_*` | `i prefissi diagnostici` | `-` | ### **DIAGNOSTICA** | *(non censita)* |
+
+### ⛔ **`14` leggi su `20` leggono `pos`** *(`13` DIRETTO, `1` INDIRETTO)*. ### ⭐ **MA `9` di quelle DIRETTE sono LO STESSO BLOCCO:**
+
+> ### ⭐ **LE UNICHE LETTURE DI `pos` DENTRO `step` SONO IL CENTRO DI MASSA DELLA SINCRONIZZAZIONE** *(righe `7773`-`7774`, guardia `K_SYNC`)*: `cmv` e `r_cm`. ### ➜ **Quindi `9` «DIRETTO» su `13` NON sono `9` difetti diversi: sono UNO, e la decisione `3` (PRESA) lo toglie.**
+> ### ⚠ **E QUESTO E' UN DIFETTO DELLA MIA MISURA, PRESO DALLA MISURA STESSA:** l'ancora di quelle leggi e' `step`, che e' ### **una funzione lunghissima**, quindi il grafo le attribuiva tutte la stessa lettura. ### **Senza la colonna «guardia» la tavola avrebbe detto il falso**, e il numero vero e' ### **molto migliore** di come appariva.
 
 ### **IL CONTO PER CLASSE** *(e `9-ter` chiede che si CONTI)*:
 
@@ -396,6 +401,48 @@ Delta H      = -(g/4) N^2 - w N  =  (|g|/4) N^2 - w N
 
 ---
 
+# ⛔ `⑩` **LA REVIEW RELAZIONALE** *(`A17`)* — **dove entra `pos`, e la candidata relazionale**
+
+> ### ⛔ **`A17`** *(`4f830bd`)*: *«nelle formule della fisica non ci deve essere `pos`: deve essere tutto relazionale»*. ### **Questa sezione NON lo assume: lo MISURA** — `csv/_test_fork/_censimento_pos.py`, per forma e non per nome.
+
+## `⑩.1` **NEL SIMULATORE — le violazioni, misurate dal codice di OGGI**
+
+| dove | che cosa decide con `pos` | ### **la candidata RELAZIONALE** |
+|---|---|---|
+| ### ⛔ **`_allaccia`** *(riga `5248,5248`, ### **nessuna guardia**)* | un `cKDTree` su `pos`: ### **DECIDE LA TOPOLOGIA delle nascite.** ### ⛔ **Viola anche `A5`:** lega nodi vicini ### **nel disegno** che ### **sul grafo non si sono mai parlati** | ### ⭐ **il nato si attacca AL GENITORE e AI VICINI DEL GENITORE**, con le lunghezze prese dalle ### **`d` del genitore**. ### ✔ **Nessuna ricerca di prossimita': l'intorno e' GIA' nel grafo** |
+| ### ⛔ **`memoria_hebbiana_moto`** *(righe `9208,9378,9379,9592`, guardie `GRAV_BIFASE,LS_AZIM,VIRIALE`)* | le ### **direzioni** da `pos`: scrive `mem_mot` e `_nb`, cioe' ### **la gravita' e il frame-drag** | ### ⭐ **le direzioni dal TRASPORTO `N` degli spinori** *(la connessione `SU(2)` d'arco, che gia' esiste)*, dalle ### **direzioni di Bloch** `_nb`, e dal ### **grafo** *(l'arco E' la direzione)*. ### ✔ **Tutte e tre sono gia' nel sistema** |
+| ### ⛔ **`chiralita_core_locale`** *(INDIRETTA per l'orologio)* | una ### **sfera euclidea** | il ### **nucleo come insieme di nodi a distanza di GRAFO ≤ `r`**, oppure la ### **componente connessa** sopra una soglia di `ρ`. ### ⚠ **Il raggio in archi va DERIVATO, non scelto** *(`A1`)* |
+| ### ✔ **il Kuramoto dal CENTRO DI MASSA** *(righe `7773`-`7774`, guardia `K_SYNC`)* | `cmv` e `r_cm`: ### **un centro di massa pesato su `pos`** | ### ⭐ **CADE con la sincronizzazione tolta** *(decisione `3`, PRESA)*. ### **Non serve una candidata: serve non riscriverla** |
+| ### ⛔ **l'anello `d → pos → topologia e direzioni → d`** | `rilassa_disegno` | ### **si SPEZZA togliendo i due consumatori**: `_allaccia` e `memoria_hebbiana_moto`. ### ➜ **Allora `rilassa_disegno` resta, ma SOLO per il disegno** — che e' cio' che `A17` ammette |
+
+## `⑩.2` ### ⛔ **NEL PROTOTIPO — `A17` lo dichiara violato, e il censimento CONFERMA**
+
+| | |
+|---|---|
+| funzioni del prototipo che usano `pos` | ### **`3`** — `collaudo grafo solitone_discreto` |
+| righe con una ### **distanza euclidea** | ### **`2`** |
+| il grafo | punti in un ### **cubo**, archi per ### **raggio euclideo** `R_ARCO` |
+| i pesi | `w = e^(−d/λ)` con `d` ### **EUCLIDEA** |
+
+### ⭐ **COME SI COSTRUISCONO GRAFO E PESI NEI PROSSIMI PROTOTIPI, SENZA `pos` — due candidate:**
+
+| | la candidata | che cosa da' | ### **il prezzo** |
+|---|---|---|---|
+| ### **`(1)`** | ### **UN GRAFO ASTRATTO DICHIARATO**: si parte da una topologia nota *(un reticolo regolare, un grafo casuale `k`-regolare, un espansore)* e i pesi sono ### **tutti uguali** o estratti da una legge ### **sul grafo** *(es. `w_ij = f(grado)`)* | ### ✔ **`pos` NON ESISTE NEMMENO**: non c'e' niente da violare | ### ⚠ **si perde il confronto con lo spazio `3D`**: non si puo' piu' dire *«assomiglia a una palla»* |
+| ### **`(2)`** | ### **LA GEOMETRIA SI MISURA DAL GRAFO**: le lunghezze sono le `d` ### **d'arco come variabili dinamiche** *(decisione `9`)*, e `pos` si calcola ### **SOLO per disegnare**, da un embedding che ### **non rientra** in nessuna legge | ### ⭐ **e' la forma che il simulatore GIA' vorrebbe**: `d` e' relazionale, e' `pos` che e' derivata | ### ⚠ **serve un controllo**: che l'embedding ### **non rientri**, e il test e' la ### **BYTE-INERZIA** *(`A17` punto `4`)* |
+
+> ### ⚠ **E UNA COSA CHE `A17` MI HA FATTO VEDERE E CHE AVEVO SCRITTO SENZA ACCORGERMENE:** nella decisione `10` avevo proposto come estensione del vuoto locale la ### **lunghezza di guarigione `ξ = 1/√(|g|ρ)`**. ### ⛔ **`ξ` e' una LUNGHEZZA**, e una lunghezza presuppone un metro. ### ➜ **In forma relazionale va espressa in NUMERO DI ARCHI** — cioe' *«quanti passi di grafo»* —, non in distanza. ### **La candidata non cambia, cambia l'unita'**, e senza `A17` l'avrei lasciata ambigua.
+
+## `⑩.3` **IL RIASSUNTO: che cosa resta da riscrivere, in ordine di gravita'**
+
+| | perche' e' il piu' grave |
+|---|---|
+| ### ⛔ **`1` `_allaccia`** | ### **nessuna guardia** *(e' sempre acceso)*, e ### **decide la TOPOLOGIA** — cioe' decide ### **che cosa esiste**, non come si muove. ### **E viola anche `A5`** |
+| ### ⛔ **`2` `memoria_hebbiana_moto`** | decide ### **le direzioni della gravita'** |
+| ### ⚠ **`3` `chiralita_core_locale`** | una sfera euclidea, e arriva ### **indiretta** fino all'orologio |
+| ### ✔ **`4` il Kuramoto dal centro di massa** | ### **gia' deciso: cade** |
+| ### ⚠ **`5` il prototipo** | ### **violato da subito**, e dichiarato nell'assioma |
+
 # ⛔ **CHE COSA QUESTO DOCUMENTO NON DICE**
 
 | | |
@@ -405,3 +452,4 @@ Delta H      = -(g/4) N^2 - w N  =  (|g|/4) N^2 - w N
 | che la nascita ### **frenerebbe** | ### ⛔ **non lo dice:** dice che ### **diluisce esattamente** e che ### **costa**, quindi dipende da `S5`, ### **che e' aperto** |
 | che i ### **contatori** siano davvero diagnostici | ### ⚠ **il criterio e' di FORMA** *(prefissi e code)*, e ### **puo' sbagliare**: ogni nome va verificato col ### **«nessun lettore»**, e questo giro ### **non lo fa** |
 | le ### **scale e i semi** | ### **uno snapshot, una scena, `3` passi.** ### **`P3` non e' soddisfatta**, e il documento non pretende il contrario |
+| che la review `A17` sia ### **completa** | ### ⚠ **NO:** il censimento di `pos` e' ### **per DIFETTO** come quello delle leggi — ### **non vede un alias** *(`p = self.pos`)* passato ad altra funzione. ### **E l'attribuzione per legge e' grossolana dove l'ancora e' `step`**, e sta scritto |

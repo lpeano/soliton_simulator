@@ -1,0 +1,58 @@
+========================================================================================================
+IL CENSIMENTO DI `pos` -- chi legge il DISEGNO (A17)
+========================================================================================================
+  sorgente: 13335 righe, 244 funzioni
+  FUNZIONI che leggono `pos` o una forma che la presuppone: 22  (66 occorrenze)
+
+    batch_condensazione            16 occorr.  righe 12092,12179,12181,12826,12827  [cKDTree,pos]  guardie: (nessuna)
+    _diag_completa                  7 occorr.  righe 12179,12181,12175,12706,12731  [cKDTree,pos]  guardie: (nessuna)
+    rilassa_disegno                 6 occorr.  righe 9119,9122,9127,9128,9129  [pos]  guardie: (nessuna)
+    update                          4 occorr.  righe 10563,10467,10557,10593  [cKDTree,pos]  guardie: (nessuna)
+    _semina_lam                     4 occorr.  righe 4930,4928,4929,5001  [cKDTree,pos]  guardie: (nessuna)
+    memoria_hebbiana_moto           4 occorr.  righe 9208,9378,9379,9592  [pos]  guardie: GRAV_BIFASE,LS_AZIM,VIRIALE
+    _ordine                         3 occorr.  righe 12826,12827,12824  [cKDTree,pos]  guardie: (nessuna)
+    _rn_sch_pos                     2 occorr.  righe 2522,2523  [pos]  guardie: (nessuna)
+    _render_vista_rete_sola         2 occorr.  righe 10269,10270  [pos]  guardie: (nessuna)
+    chiralita_core_locale           2 occorr.  righe 4468,4469  [pos]  guardie: (nessuna)
+    _allaccia                       2 occorr.  righe 5248,5248  [cKDTree,pos]  guardie: (nessuna)
+    step                            2 occorr.  righe 7773,7774  [pos]  guardie: K_SYNC
+    mitosi                          2 occorr.  righe 8786,9007  [pos]  guardie: COPPIA_MIT
+    _gusci_esterni                  2 occorr.  righe 12849,12844  [cKDTree,pos]  guardie: (nessuna)
+    classifica_topologia            1 occorr.  righe 762  [pos]  guardie: (nessuna)
+    _rn_div_pos                     1 occorr.  righe 2118  [pos]  guardie: (nessuna)
+    _semina_masse_coerenti          1 occorr.  righe 9939  [pos]  guardie: (nessuna)
+    semina                          1 occorr.  righe 5057  [pos]  guardie: (nessuna)
+    campo_spaziale                  1 occorr.  righe 9066  [pos]  guardie: (nessuna)
+    pozzo_grafo                     1 occorr.  righe 9165  [pos]  guardie: POZZO_D
+    _regione_centrale               1 occorr.  righe 12820  [pos]  guardie: (nessuna)
+    _picchi_nuovi                   1 occorr.  righe 12920  [pos]  guardie: (nessuna)
+========================================================================================================
+PER LEGGE: la legge <<legge pos>>? -- chiudendo il grafo dalla sua ANCORA
+========================================================================================================
+  la coppia d'interferenza, ramo SCALARE        no          -                           guardie: -
+  il legame elastico delle lunghezze            DIRETTO     righe 7773,7774             guardie: K_SYNC
+  la repulsione                                 no          -                           guardie: -
+  il rilassamento della torsione                DIRETTO     righe 7773,7774             guardie: K_SYNC
+  il rilassamento della lunghezza di riposo     DIRETTO     righe 7773,7774             guardie: K_SYNC
+  il rilassamento della pressione di equilibrio  DIRETTO     righe 7773,7774             guardie: K_SYNC
+  la precessione dello spinore e l'orologio     INDIRETTO   via chiralita_core_locale   guardie: -
+  la memoria hebbiana del moto                  DIRETTO     righe 9208,9378,9379,9592   guardie: GRAV_BIFASE,LS_AZIM,VIRIALE
+  la dinamica dei pesi e delle distanze         DIRETTO     righe 7773,7774             guardie: K_SYNC
+  la mitosi                                     DIRETTO     righe 8786,9007             guardie: COPPIA_MIT
+  la creazione di coppia (Schwinger)            DIRETTO     righe 8786,9007             guardie: COPPIA_MIT
+  la creazione degli archi                      DIRETTO     righe 5248,5248             guardie: -
+  la scomparsa degli archi                      DIRETTO     righe 7773,7774             guardie: K_SYNC
+  la sincronizzazione                           DIRETTO     righe 7773,7774             guardie: K_SYNC
+  la coppia d'interferenza del DRIVER           no          -                           guardie: -
+  il termostato                                 DIRETTO     righe 7773,7774             guardie: K_SYNC
+  lo scuotimento del vuoto                      no          -                           guardie: -
+  il freno `_smorza`                            no          -                           guardie: -
+  lo smorzamento anisotropo                     DIRETTO     righe 7773,7774             guardie: K_SYNC
+  la massa critica                              no          -                           guardie: -
+========================================================================================================
+IL PROTOTIPO -- A17 lo dichiara violato da subito: si CONTROLLA
+========================================================================================================
+  funzioni del prototipo che usano `pos`: 3  -- collaudo grafo solitone_discreto
+  righe con una NORMA su posizioni (distanza euclidea): 2
+      riga  861: d = np.linalg.norm(G["pos"] - c[None, :], axis=1)
+      riga  863: dk = np.linalg.norm(G["pos"] - G["pos"][k0][None, :], axis=1)

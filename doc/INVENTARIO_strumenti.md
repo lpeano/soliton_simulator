@@ -2010,10 +2010,10 @@ coppia ### **sintetica** asimmetrica a `1.463e-02` *(**discrimina**)*; la coppia
 
 | | |
 |---|---|
-| **file** | `csv/_test_fork/_doc_traduzione.py` *(951 righe)* |
+| **file** | `csv/_test_fork/_doc_traduzione.py` *(1074 righe)* |
 | **COMANDO** | `python csv/_test_fork/_doc_traduzione.py` |
 | **cosa misura** | ### **niente: GENERA `doc/TRADUZIONE_IN_H.md`** dai quattro json, perche' ogni numero del documento ### **esca da un'uscita** e non da una mano *(`L-NUMERI`)* |
-| **BLOB** | `c4502fbb` |
+| **BLOB** | `61c9c636` |
 
 **Esito:** `67` regole di nascita su `2` eventi, e fra le loro `26` classi
 ### **NESSUNA si chiama «il genitore cede»** ⇒ `Σρ` ### **cresce** a ogni nascita *(la
@@ -2049,3 +2049,25 @@ porta `Σρ` a ### **`+0.0886 %`**; la candidata `ψ → ψ/√2` la conserva ##
 > cancellano** — la serie intera fa `400000.0`, il liberato `381466.2`, e la differenza ### **`18533.8`**
 > e' esattamente `|H`(esteso)`|`, cioe' ### **l'hopping.** ### ➜ **Non sono le grandezze
 > dominanti a decidere se la nascita si paga: lo decidono i termini SOTTODOMINANTI.**
+
+### 🔬 IL CENSIMENTO DI `pos` — **chi legge il DISEGNO** *(`A17`, 2026-10-08)*
+
+| | |
+|---|---|
+| **file** | `csv/_test_fork/_censimento_pos.py` *(255 righe)* |
+| **COMANDO** | `python csv/_test_fork/_censimento_pos.py` |
+| **cosa misura** | ### **chi legge `pos`**, per FORMA e non per nome *(piu' `cKDTree`, `cdist` e le altre forme che la presuppongono)*: per ### **funzione**, con la ### **riga** e la ### **GUARDIA**; e per ### **legge**, chiudendo il grafo dalla sua ancora e distinguendo ### **DIRETTO** da ### **INDIRETTO** |
+| **BLOB** | `a4d826b8` |
+
+**Esito:** ### **`22` funzioni** leggono `pos` *(`66` occorrenze)*; ### **`14` leggi su `20`**
+la leggono *(`13` DIRETTO, `1` INDIRETTO)*.
+
+> ### ⭐ **MA `9` DELLE «DIRETTO» SONO LO STESSO BLOCCO:** le ### **uniche** letture di `pos`
+> dentro `step` sono il ### **centro di massa della sincronizzazione** *(righe `7773`-`7774`,
+> guardia `K_SYNC`)*. ### ➜ **Non sono `9` difetti: sono UNO, e la decisione `3` (PRESA) lo
+> toglie.**
+
+> ### ⚠ **E LA COLONNA «GUARDIA» E' NATA DA UN DIFETTO DELLA MISURA, preso dalla misura
+> stessa:** l'ancora di quelle leggi e' `step`, ### **una funzione lunghissima**, quindi il
+> grafo attribuiva a tutte la stessa lettura. ### **Senza la guardia la tavola avrebbe detto
+> il falso** — e il numero vero e' ### **molto migliore** di come appariva.
