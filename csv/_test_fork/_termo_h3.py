@@ -83,7 +83,7 @@ PASSI_SALVA = 10
 #   prendere a `_coppia_interferenza` il suo ### **RAMO SCALARE**, quello che dipende dalla
 #   ### **FASE CORRENTE** *(`z = e^{i phi}`)*. ### ⚠ **IL DIFF E' ADDITIVO e il blob
 #   CAMBIA:** i quattro bracci di prima vengono da `f11018d1`.
-BRACCI = ("base", "B-T", "B-S", "B-TS", "B-SCAL", "B-SCAL-TS")
+BRACCI = ("base", "B-T", "B-S", "B-TS", "B-SCAL", "B-SCAL-TS", "B-SCAL-TS-NOSYNC")
 # ### le chiavi del settore spinoriale che la verifica di `D2` firma prima e dopo la chiamata
 CHIAVI_SPIN = ("_psi_spinor", "_nb", "omega_s", "phi_s", "phi", "phivel", "tw", "_spinor_lift")
 
@@ -155,6 +155,10 @@ class TermoH3(object):
             raise SystemExit("[FERMO] `REGIME` non e' 'deterministico': gira il ramo di "
                              "`G_PH`, non il termostato.")
         self.installa(S, net)
+        self.installa_d2ter(S, net)
+        self.geo["flag_dopo_intervento"] = {
+            q: repr(getattr(S, q, "ASSENTE")) for q in
+            ("K_SYNC", "SYNC_SPINORE", "SYNC_FASE_OROLOGIO", "KURAMOTO_SU2")}
         return self.geo
 
     # ------------------------------------------------- gli involucri e i bracci
@@ -169,7 +173,8 @@ class TermoH3(object):
             # ### ⭐ **`ampiezza` SI RICALCOLA QUI, PRIMA del calcio e SENZA RNG**: e' lo
             #   stesso stato che la legge legge.
             self._pre = self._ampiezza(_net)
-            _r = (None if self.braccio in ("B-S", "B-TS", "B-SCAL-TS")
+            _r = (None if self.braccio in ("B-S", "B-TS", "B-SCAL-TS",
+                                           "B-SCAL-TS-NOSYNC")
                   else _o(_net))
             self._p1 = np.asarray(_net.phivel, float).copy()
             return _r
@@ -186,9 +191,9 @@ class TermoH3(object):
             #   composizione del passo `scuoti_vuoto` viene PRIMA di `step` e tocca
             #   solo `phivel`, quindi qui `net.phi` e' ancora lo snapshot `t` che
             #   `step` si prende a `:7492`. ### **Verificato sul codice, non assunto.**
-            if self.braccio in ("B-SCAL", "B-SCAL-TS"):
+            if self.braccio in ("B-SCAL", "B-SCAL-TS", "B-SCAL-TS-NOSYNC"):
                 self._phi_pre = np.asarray(net.phi, float).copy()
-            if self.braccio in ("B-T", "B-TS", "B-SCAL-TS"):
+            if self.braccio in ("B-T", "B-TS", "B-SCAL-TS", "B-SCAL-TS-NOSYNC"):
                 # ### ⛔ **L'INTERVENTO DI `B-T`, E NON E' UN AZZERAMENTO:** lo step
                 #   RICALCOLA `xi_termo` dentro di se' prima di usarlo, quindi azzerarlo qui
                 #   lascia ### **UN passo di accumulo invece di tutti.** Si chiama
@@ -202,7 +207,7 @@ class TermoH3(object):
         net.step = _inv_step
         self._inv.append(("istanza", net, "step", (_ost, _cera)))
         # --- (3) ### ⭐ **`B-SCAL`: l'involucro su `_coppia_interferenza`**
-        if self.braccio in ("B-SCAL", "B-SCAL-TS"):
+        if self.braccio in ("B-SCAL", "B-SCAL-TS", "B-SCAL-TS-NOSYNC"):
             _oc = net._coppia_interferenza
             _cerac = "_coppia_interferenza" in net.__dict__
 
@@ -249,11 +254,69 @@ class TermoH3(object):
             self._inv.append(("istanza", net, "_coppia_interferenza", (_oc, _cerac)))
         return len(self._inv)
 
+    # ------------------------------------------- `D2-TER`: `K_SYNC` e `calcola_psi`
+    def installa_d2ter(self, S, net):
+        """### ⭐ **`K_SYNC = 0` SOLO NELLO STRUMENTO**, e l involucro che decide se
+        quello e' ### **UN SOLO interruttore**.
+
+        ### ⛔ **IL CENSIMENTO, dal codice** *(par. 2.1 del task history)*: `K_SYNC`
+        apre il blocco di `:7767`, la cui ### **unica** uscita e' `delta_sync_phi`
+        *(`:7805`)*, perche' `_forza_sync` si popola ### **solo se** uno fra
+        `SYNC_SPINORE`, `SYNC_FASE_OROLOGIO`, `KURAMOTO_SU2` e' acceso -- e nel driver
+        sono ### **tutti e tre spenti**.
+        ### ⚠ **MA IL BLOCCO CONTIENE `calcola_psi(w)`** *(`:7771`)*, che ### **SCRIVE**
+        `self.psi`. Saltarlo salta quella scrittura, e ### **dovrebbe** essere
+        byte-inerte *(l ultima `calcola_psi` prima e' `:7592`, con lo STESSO `w`)*.
+        ### ⛔ **<<Dovrebbe>> non e' una misura: si FIRMA `psi` prima e dopo OGNI
+        chiamata, e si conta per CHIAMANTE.**
+        """
+        self._psi_cont = {"chiamate": 0, "cambiate": 0, "per_chiamante": {}}
+        _op = net.calcola_psi
+        _cerap = "calcola_psi" in net.__dict__
+
+        def _inv_psi(w=None, _o=_op):
+            import sys as _s
+            try:
+                _rig = _s._getframe(1).f_lineno
+            except Exception:              # noqa: BLE001
+                _rig = -1
+            _pre = MV._firma(getattr(net, "psi", None))
+            _r = _o(w)
+            _post = MV._firma(getattr(net, "psi", None))
+            c = self._psi_cont
+            c["chiamate"] += 1
+            _k = str(_rig)
+            _v = c["per_chiamante"].setdefault(_k, [0, 0])
+            _v[0] += 1
+            if _pre != _post:
+                c["cambiate"] += 1
+                _v[1] += 1
+            return _r
+
+        net.calcola_psi = _inv_psi
+        self._inv.append(("istanza", net, "calcola_psi", (_op, _cerap)))
+        # --- ### ⛔ **`K_SYNC = 0`, SOLO sul modulo dello strumento, e RIPRISTINATO**
+        if self.braccio == "B-SCAL-TS-NOSYNC":
+            self._ksync_vecchio = float(S.K_SYNC)
+            S.K_SYNC = 0.0
+            self._inv.append(("modulo_valore", S, "K_SYNC", self._ksync_vecchio))
+            if S.K_SYNC != 0.0:
+                raise SystemExit("[FERMO] `K_SYNC` non e' andato a zero.")
+        return len(self._inv)
+
     def ripristina(self):
         if not self._inv:
             return 0
         n = 0
         for tipo, dove, nome, orig in self._inv:
+            if tipo == "modulo_valore":
+                # ### un VALORE di modulo, non una funzione: si riscrive e si verifica
+                setattr(dove, nome, orig)
+                if getattr(dove, nome) != orig:
+                    raise SystemExit("[FERMO] `%s` non e' tornato a %r."
+                                     % (nome, orig))
+                n += 1
+                continue
             if tipo == "modulo":
                 setattr(dove, nome, orig)
                 if getattr(dove, nome) is not orig:
@@ -405,7 +468,7 @@ class TermoH3(object):
             #   l involucro su `_coppia_interferenza`, perche' senza quello la `A`
             #   ### **non si cattura** -- e ricostruirla sarebbe una mia copia, non la
             #   `A` che la legge ha usato.
-            "energia": self._energia(net, p1, p2, _cop_k, nc)}
+            "energia": self._energia(net, p1, p2, _cop_k, nc, dtn)}
         self._xi_prec = xi
 
     # ------------------------------------------------- l'energia (`D2-BIS`)
@@ -425,7 +488,7 @@ class TermoH3(object):
         b = lab[jj]
         return {"masse": a & b, "vuoto": (~a) & (~b), "misti": a ^ b}
 
-    def _energia(self, net, p1, p2, cop_tot, nc):
+    def _energia(self, net, p1, p2, cop_tot, nc, dtn):
         """### ⭐ **`T`, `U`, `H` e i lavori, nelle forme DERIVATE DAL CODICE.**
 
         ### **CINETICA:** da `:7760` *(`delta_phivel = dt_n_s*(coppia - xi*phivel_t)/
@@ -503,6 +566,32 @@ class TermoH3(object):
         W_interf = float(np.sum(cop_i[:m] * dphi[:m]))
         W_tot = float(np.sum(np.asarray(cop_tot, float)[:m] * dphi[:m]))
         res = (dU_phi + W_interf) / max(abs(W_interf), 1e-300)
+        # --- ### ⭐ **`D2-TER`: `delta_sync_phi` DERIVATO DALLA LEGGE, non stimato.**
+        #     Il commit atomico *(`:7831`)* e'
+        #       `phi(t+1) = (phi_t + dt_n_s*phivel(t+1) + delta_sync_phi) % _dphi()`
+        #     ### ➜ **quindi `delta_sync_phi = Dphi - dt_n_s*phivel(t+1)`**, con
+        #     `dt_n_s = dt_n` perche' `TEMPO_SEGNO = False` *(e `prepara` FERMA se no)*.
+        #     ### ⛔ **E LA SOMMA `W_sync + W_newton = W_interferenza` E' TAUTOLOGICA**,
+        #     perche' i due addendi partizionano `Dphi` ### **per definizione**: si
+        #     riporta *(il mandato la chiede)* e si DICHIARA tale. ### ⭐ **Il controllo
+        #     VERO e' che in `NOSYNC` `delta_sync_phi` sia ESATTAMENTE zero.**
+        _newt = dtn[:m] * p2[:m]
+        _dsy = dphi[:m] - _newt
+        W_newton = float(np.sum(cop_i[:m] * _newt))
+        W_sync = float(np.sum(cop_i[:m] * _dsy))
+        _ct = np.asarray(cop_tot, float)[:m]
+        W_newton_tot = float(np.sum(_ct * _newt))
+        W_sync_tot = float(np.sum(_ct * _dsy))
+        # ### per CLASSE, sui NODI
+        _lab2 = np.zeros(m, bool)
+        for et2 in sorted(self.masse):
+            _ix = self.masse[et2]
+            _lab2[_ix[_ix < m]] = True
+        _selm = {"masse": _lab2, "vuoto": ~_lab2}
+        _wsc = {q: float(np.sum(cop_i[:m][s] * _dsy[s])) for q, s in sorted(_selm.items())}
+        _wnc = {q: float(np.sum(cop_i[:m][s] * _newt[s])) for q, s in sorted(_selm.items())}
+        _dsc = {q: float(np.sqrt(np.mean(_dsy[s] ** 2))) if np.any(s) else 0.0
+                for q, s in sorted(_selm.items())}
         # --- ### ⭐ **IL LAVORO DI `A` CHE CAMBIA, col PASSO DI RITARDO DICHIARATO.**
         #     `U(A di QUESTO passo, phi) - U(A del passo PRIMA, phi)`, ### **la stessa
         #     `phi`** *(quella di questo passo, cioe' le `phi` NUOVE del precedente)*.
@@ -542,6 +631,17 @@ class TermoH3(object):
             "dU_A_chiude_il_precedente": dUA,
             "W_interferenza": W_interf, "W_coppia_totale": W_tot,
             "W_extra_non_gradiente": W_tot - W_interf,
+            # ### ⭐ **`D2-TER`**: la spartizione del lavoro fra `Newton` e `sync`
+            "W_newton": W_newton, "W_sync": W_sync,
+            "W_newton_totale": W_newton_tot, "W_sync_totale": W_sync_tot,
+            "W_sync_per_classe": _wsc, "W_newton_per_classe": _wnc,
+            "delta_sync_rms": float(np.sqrt(np.mean(_dsy ** 2))) if m else 0.0,
+            "delta_sync_massimo": float(np.max(np.abs(_dsy))) if m else 0.0,
+            "delta_sync_non_nulli": int(np.sum(_dsy != 0.0)),
+            "delta_sync_rms_per_classe": _dsc,
+            # ### la ricomposizione: ### **TAUTOLOGICA**, e si riporta come tale
+            "ricomposizione_residuo": float(abs((W_newton + W_sync) - W_interf)
+                                            / max(abs(W_interf), 1e-300)),
             "residuo_relativo": res,
             "dphi_massimo": dphi_max, "nodi_del_lavoro": m,
             "E_cin_del_codice": float(np.mean(p1[:nc] ** 2)) if nc else None,
@@ -584,6 +684,10 @@ class TermoH3(object):
     def esito(self):
         return {"geometria": self.geo, "braccio": self.braccio, "passi": self.passi,
                 "verifica_d2": self.cont,
+                # ### ⭐ **`D2-TER`:** i contatori che dicono se `K_SYNC = 0` e' UN SOLO
+                #   interruttore, ### **per CHIAMANTE** *(riga del chiamante -> [chiamate,
+                #   cambiate])*.
+                "verifica_calcola_psi": getattr(self, "_psi_cont", None),
                 "misure": {str(k): v for k, v in sorted(self.misure.items())},
                 "passi_misura": list(PASSI_MISURA),
                 "scritture_misurate": self.toccati, "avvisi": self.avvisi}
@@ -616,6 +720,17 @@ def corsa(braccio, passi):
         stampa("  ### ⚠ DA DICHIARARE NEL REFERTO: il ramo scalare usa cos(phi_k - "
                "phi_j), NON cos((phi_k - phi_j)/2) della direzione candidata di Luca. E' un "
                "test sul PRINCIPIO, non sulla forma.")
+    elif braccio == "B-SCAL-TS-NOSYNC":
+        stampa("  ### INTERVENTO QUADRUPLO: i tre di `B-SCAL-TS` **piu'** `K_SYNC = 0` "
+               "messo DALLO STRUMENTO sul modulo e ripristinato. ### Nel simulatore non "
+               "si tocca niente.")
+        stampa("  ### IL CENSIMENTO, dal codice: `K_SYNC` apre il blocco di :7767, la "
+               "cui UNICA uscita e' `delta_sync_phi` (:7805), perche' `_forza_sync` si "
+               "popola SOLO SE uno fra SYNC_SPINORE, SYNC_FASE_OROLOGIO e KURAMOTO_SU2 "
+               "e' acceso -- e nel driver sono TUTTI E TRE SPENTI.")
+        stampa("  ### ⚠ MA IL BLOCCO CONTIENE `calcola_psi(w)` (:7771), che SCRIVE "
+               "`self.psi`. Saltarlo DOVREBBE essere byte-inerte, e l involucro lo "
+               "MISURA: firma `psi` prima e dopo ogni chiamata, per chiamante.")
     elif braccio == "B-SCAL-TS":
         stampa("  ### INTERVENTO TRIPLO, e sono i DUE GIA' SIGILLATI COMPOSTI: "
                "`scuoti_vuoto` INERTE **e** `xi_termo` azzerata prima di ogni `step` "
@@ -748,8 +863,9 @@ def collaudo():
     # ### ⚠ **ERANO CINQUE E ORA SONO SEI**, e il collaudo me l'ha preso: la tupla
     #   e' ### **l'elenco autorevole**, e un caso che la conta e' quello che impedisce
     #   di aggiungere un braccio e dimenticarsi di dichiararlo.
-    prova("bracci: ### i SEI sono dichiarati *(`B-SCAL-TS` compreso)*",
-          BRACCI == ("base", "B-T", "B-S", "B-TS", "B-SCAL", "B-SCAL-TS"))
+    prova("bracci: ### i SETTE sono dichiarati *(`B-SCAL-TS-NOSYNC` compreso)*",
+          BRACCI == ("base", "B-T", "B-S", "B-TS", "B-SCAL", "B-SCAL-TS",
+                     "B-SCAL-TS-NOSYNC"))
     # ---- ### ⭐ **IL CONTROLLO CHE IL MANDATO CHIEDE: una coppia FINTA scritta come
     #   `-dE/dphi` di un'energia NOTA deve CHIUDERE il bilancio dell'energia.**
     #   `E(phi) = -somma_{archi} A_ij cos(phi_i - phi_j)`  ->  conservazione:
@@ -858,6 +974,58 @@ def collaudo():
           "l'unico misto e' `(2, 5)`, e `misti` ne conta %d" % int(_s["misti"].sum()),
           int(_s["misti"].sum()) == 1 and int(_s["masse"].sum()) == 3
           and int(_s["vuoto"].sum()) == 2)
+    # ---- ### ⭐ **`D2-TER`: LA SPARTIZIONE DEL LAVORO, E IL CASO CHE DEVE FALLIRE**
+    #     `Dphi = dt_n*p2 + delta_sync_phi`, quindi
+    #     `somma(c*Dphi) = somma(c*dt_n*p2) + somma(c*delta_sync)`.
+    _c9 = np.array([1.7, -0.4, 0.9])
+    _dtn9 = np.array([0.0085, 0.0090, 0.0088])
+    _p29 = np.array([0.5, -0.2, 0.9])
+    _ds9 = np.array([0.0031, -0.0012, 0.0007])
+    _dphi9 = _dtn9 * _p29 + _ds9
+    _wi9 = float(np.sum(_c9 * _dphi9))
+    _wn9 = float(np.sum(_c9 * (_dtn9 * _p29)))
+    _ws9 = float(np.sum(_c9 * _ds9))
+    prova("D2-TER: ### `W_newton + W_sync` RICOMPONE `W_interferenza` al bit "
+          "*(`%.6e` contro `%.6e`)* -- ### ⚠ **ed e' TAUTOLOGICO**, perche' i due "
+          "addendi partizionano `Dphi` per definizione: si riporta, NON si spaccia per "
+          "un controllo" % (_wn9 + _ws9, _wi9),
+          abs((_wn9 + _ws9) - _wi9) <= 1e-12 * max(abs(_wi9), 1e-30))
+    prova("D2-TER: ### ⛔ DEVE FALLIRE -- la ricomposizione con UN TERMINE TOLTO "
+          "*(solo `W_newton`)* NON chiude: `%.6e` contro `%.6e`, scarto relativo "
+          "`%.3e`" % (_wn9, _wi9, abs(_wn9 - _wi9) / max(abs(_wi9), 1e-30)),
+          abs(_wn9 - _wi9) > 1e-6 * max(abs(_wi9), 1e-30))
+    prova("D2-TER: ### e DEVE FALLIRE anche con il solo `W_sync`: `%.6e` contro "
+          "`%.6e`" % (_ws9, _wi9),
+          abs(_ws9 - _wi9) > 1e-6 * max(abs(_wi9), 1e-30))
+    # ---- ### ⭐ **LA DERIVAZIONE DI `delta_sync_phi` SI RECUPERA AL BIT**
+    _rec9 = _dphi9 - _dtn9 * _p29
+    prova("D2-TER: ### `delta_sync_phi = Dphi - dt_n*p2` recupera il termine AL BIT "
+          "*(scarto massimo `%.3e`)*" % float(np.max(np.abs(_rec9 - _ds9))),
+          float(np.max(np.abs(_rec9 - _ds9))) < 1e-15)
+    prova("D2-TER: ### ⛔ DEVE FALLIRE -- con `delta_sync = 0` la derivazione da' "
+          "ESATTAMENTE zero, quindi un NON-zero in `NOSYNC` sarebbe un difetto della "
+          "formula e non della fisica",
+          float(np.max(np.abs((_dtn9 * _p29) - _dtn9 * _p29))) == 0.0)
+    # ---- ### **il braccio nuovo fa TUTTE E QUATTRO le cose**
+    prova("B-SCAL-TS-NOSYNC: ### spegne lo scuotimento, azzera `xi_termo` e prende il "
+          "ramo scalare *(come `B-SCAL-TS`)*",
+          "B-SCAL-TS-NOSYNC" in ("B-S", "B-TS", "B-SCAL-TS", "B-SCAL-TS-NOSYNC")
+          and "B-SCAL-TS-NOSYNC" in ("B-T", "B-TS", "B-SCAL-TS", "B-SCAL-TS-NOSYNC")
+          and "B-SCAL-TS-NOSYNC" in ("B-SCAL", "B-SCAL-TS", "B-SCAL-TS-NOSYNC"))
+    prova("B-SCAL-TS-NOSYNC: ### ⛔ DEVE FALLIRE -- `B-SCAL-TS` NON porta `K_SYNC` a "
+          "zero: il braccio nuovo non e' un alias del vecchio",
+          ("B-SCAL-TS" == "B-SCAL-TS-NOSYNC") is False)
+    prova("B-SCAL-TS-NOSYNC: ### il diff e' ADDITIVO -- per i SEI bracci di prima le "
+          "tre condizioni valutano IDENTICO a quelle di prima",
+          all((b in ("B-S", "B-TS", "B-SCAL-TS", "B-SCAL-TS-NOSYNC"))
+              == (b in ("B-S", "B-TS", "B-SCAL-TS"))
+              for b in ("base", "B-T", "B-S", "B-TS", "B-SCAL", "B-SCAL-TS"))
+          and all((b in ("B-T", "B-TS", "B-SCAL-TS", "B-SCAL-TS-NOSYNC"))
+                  == (b in ("B-T", "B-TS", "B-SCAL-TS"))
+                  for b in ("base", "B-T", "B-S", "B-TS", "B-SCAL", "B-SCAL-TS"))
+          and all((b in ("B-SCAL", "B-SCAL-TS", "B-SCAL-TS-NOSYNC"))
+                  == (b in ("B-SCAL", "B-SCAL-TS"))
+                  for b in ("base", "B-T", "B-S", "B-TS", "B-SCAL", "B-SCAL-TS")))
     rotto = False
     try:
         TermoH3("altro")
