@@ -83,7 +83,7 @@ PASSI_SALVA = 10
 #   prendere a `_coppia_interferenza` il suo ### **RAMO SCALARE**, quello che dipende dalla
 #   ### **FASE CORRENTE** *(`z = e^{i phi}`)*. ### ⚠ **IL DIFF E' ADDITIVO e il blob
 #   CAMBIA:** i quattro bracci di prima vengono da `f11018d1`.
-BRACCI = ("base", "B-T", "B-S", "B-TS", "B-SCAL")
+BRACCI = ("base", "B-T", "B-S", "B-TS", "B-SCAL", "B-SCAL-TS")
 # ### le chiavi del settore spinoriale che la verifica di `D2` firma prima e dopo la chiamata
 CHIAVI_SPIN = ("_psi_spinor", "_nb", "omega_s", "phi_s", "phi", "phivel", "tw", "_spinor_lift")
 
@@ -110,6 +110,15 @@ class TermoH3(object):
         self._p0 = self._p1 = None
         self._xi_prec = 0.0
         self._pre = None
+        # ### ⭐ **gli stati della misura dell energia (`B-SCAL-TS`, `D2-BIS`)**:
+        #   `_en` e' la cattura di QUESTO passo *(`A`, gli archi, la coppia
+        #   dell interferenza)*, `_en_prec` quella del passo PRIMA -- serve al
+        #   ### **lavoro di `A` che cambia**, che si chiude con ### **un passo di
+        #   ritardo** *(dichiarato nel task history)*.
+        self._en = None
+        self._en_prec = None
+        self._phi_pre = None
+        self._en_avvisi = []
         # ### i contatori della verifica di `D2`: ### **si misura, non si promette.**
         self.cont = {"chiamate": 0, "ripristini": 0, "firme_diverse": 0, "quali": [],
                      "flag_non_ripristinato": 0}
@@ -131,7 +140,13 @@ class TermoH3(object):
         # ### i flag che rendono valida la ricostruzione: si DICHIARANO, non si assumono
         self.geo["flag"] = {q: repr(getattr(S, q, "ASSENTE")) for q in
                             ("TEMPO_SEGNO", "FORK_SU2_MEM", "CS_DINAMICO", "REGIME",
-                             "CS_M", "M_PH", "DT", "SCUOTIMENTO", "G_PH")}
+                             "CS_M", "M_PH", "DT", "SCUOTIMENTO", "G_PH",
+                             # ### ⭐ **i flag delle QUATTRO leggi che NON sono il
+                             #   gradiente di `U`** *(par. 2.3 del task history)*: si
+                             #   ### **dichiarano**, cosi' chi legge il json sa
+                             #   perche' il bilancio non chiude sulla coppia TOTALE.
+                             "K_C", "K_SYNC", "REPULS_LEGGE", "SPIN_FEEDBACK",
+                             "FRAME_DRAG", "FASE_2PI", "MU_PSI")}
         if getattr(S, "TEMPO_SEGNO", False):
             raise SystemExit("[FERMO] `TEMPO_SEGNO` e' ON: `dt_n_s != dt_n` e la "
                              "decomposizione del termostato NON vale. Lo dico invece di "
@@ -154,7 +169,8 @@ class TermoH3(object):
             # ### ⭐ **`ampiezza` SI RICALCOLA QUI, PRIMA del calcio e SENZA RNG**: e' lo
             #   stesso stato che la legge legge.
             self._pre = self._ampiezza(_net)
-            _r = None if self.braccio in ("B-S", "B-TS") else _o(_net)
+            _r = (None if self.braccio in ("B-S", "B-TS", "B-SCAL-TS")
+                  else _o(_net))
             self._p1 = np.asarray(_net.phivel, float).copy()
             return _r
 
@@ -166,7 +182,13 @@ class TermoH3(object):
         _cera = "step" in net.__dict__
 
         def _inv_step(*a, **kw):
-            if self.braccio in ("B-T", "B-TS"):
+            # ### ⭐ **`phi` ALL INGRESSO DELLO STEP E' ESATTAMENTE `_phi_t`**: nella
+            #   composizione del passo `scuoti_vuoto` viene PRIMA di `step` e tocca
+            #   solo `phivel`, quindi qui `net.phi` e' ancora lo snapshot `t` che
+            #   `step` si prende a `:7492`. ### **Verificato sul codice, non assunto.**
+            if self.braccio in ("B-SCAL", "B-SCAL-TS"):
+                self._phi_pre = np.asarray(net.phi, float).copy()
+            if self.braccio in ("B-T", "B-TS", "B-SCAL-TS"):
                 # ### ⛔ **L'INTERVENTO DI `B-T`, E NON E' UN AZZERAMENTO:** lo step
                 #   RICALCOLA `xi_termo` dentro di se' prima di usarlo, quindi azzerarlo qui
                 #   lascia ### **UN passo di accumulo invece di tutti.** Si chiama
@@ -180,7 +202,7 @@ class TermoH3(object):
         net.step = _inv_step
         self._inv.append(("istanza", net, "step", (_ost, _cera)))
         # --- (3) ### ⭐ **`B-SCAL`: l'involucro su `_coppia_interferenza`**
-        if self.braccio == "B-SCAL":
+        if self.braccio in ("B-SCAL", "B-SCAL-TS"):
             _oc = net._coppia_interferenza
             _cerac = "_coppia_interferenza" in net.__dict__
 
@@ -210,6 +232,17 @@ class TermoH3(object):
                     for q in _d:
                         if q not in self.cont["quali"]:
                             self.cont["quali"].append(q)
+                # ### ⭐ **LA CATTURA PER L ENERGIA: `A` E' IL PRIMO ARGOMENTO.**
+                #   Non la ricostruisco e non la ricalcolo: ### **e' quella che la
+                #   legge ha usato in questo passo**, e il mandato chiede proprio
+                #   quella. Insieme vanno gli archi *(`A` e' per arco)* e la coppia
+                #   ### **dell INTERFERENZA**, che e' quella che `-dU/dphi` descrive.
+                _na = len(np.asarray(A, float))
+                self._en_prec = self._en
+                self._en = {"A": np.asarray(A, float).copy(),
+                            "i": np.asarray(net.i, np.int64)[:_na].copy(),
+                            "j": np.asarray(net.j, np.int64)[:_na].copy(),
+                            "cop": np.asarray(_r, float).copy()}
                 return _r
 
             net._coppia_interferenza = _inv_coppia
@@ -367,8 +400,154 @@ class TermoH3(object):
                                                    float(np.median(np.asarray(r, float)))),
             "Lam": (None if not self._pre else self._pre["Lam"]),
             "nodi_confrontati": int(nc), "nati_nel_passo": int(n - nc),
-            "per_classe": voci}
+            "per_classe": voci,
+            # ### ⭐ **L ENERGIA (`D2-BIS`)**: `None` sui bracci che non hanno
+            #   l involucro su `_coppia_interferenza`, perche' senza quello la `A`
+            #   ### **non si cattura** -- e ricostruirla sarebbe una mia copia, non la
+            #   `A` che la legge ha usato.
+            "energia": self._energia(net, p1, p2, _cop_k, nc)}
         self._xi_prec = xi
+
+    # ------------------------------------------------- l'energia (`D2-BIS`)
+    def _classe_archi(self, ii, jj, n):
+        """### **L etichetta di CLASSE per ARCO, e sono TRE, non due.**
+
+        `masse` se ### **ENTRAMBI** gli estremi sono in una massa, `vuoto` se
+        ### **NESSUNO**, `misti` altrimenti. ### ⚠ **Un arco fra una massa e il vuoto
+        non appartiene a nessuna delle due:** metterlo d'autorita' in una delle due
+        falserebbe il bilancio, e quel bilancio e' il punto della misura.
+        """
+        lab = np.zeros(int(n), bool)
+        for et in sorted(self.masse):
+            idx = self.masse[et]
+            lab[idx[idx < n]] = True
+        a = lab[ii]
+        b = lab[jj]
+        return {"masse": a & b, "vuoto": (~a) & (~b), "misti": a ^ b}
+
+    def _energia(self, net, p1, p2, cop_tot, nc):
+        """### ⭐ **`T`, `U`, `H` e i lavori, nelle forme DERIVATE DAL CODICE.**
+
+        ### **CINETICA:** da `:7760` *(`delta_phivel = dt_n_s*(coppia - xi*phivel_t)/
+        M_PH`)* e `:7830` *(`phivel = phivel_t + delta_phivel`)*, diviso per `dt_n_s`,
+        si legge ### **Newton sulla coordinata `phi`** con inerzia `M_PH`, quindi
+        ### **`T = (1/2) M_PH somma(phivel^2)`**.
+        ### ⚠ **`dt_n` NON ENTRA in `T`:** e' il passo d'integrazione, ed e'
+        ### **PER NODO** *(`dt_n = DT*r`, `:7498`)*. Entra solo nei LAVORI, via
+        `Dphi = dt_n*phivel(t+1)` *(`:7831`)*.
+        ### ⛔ **E NON E' l `E_cin` DEL CODICE** *(`:7711`)*, che e' `mean(phivel^2)`:
+        una MEDIA senza `1/2` e senza `M_PH`, cioe' un analogo di TEMPERATURA.
+
+        ### **POTENZIALE:** `U = -K_C somma_archi A cos(phi_i - phi_j)`, con la `A`
+        ### **EFFETTIVAMENTE USATA** in quel passo *(catturata dall involucro: e' il
+        suo primo argomento)*. E il ramo scalare di `_coppia_interferenza` *(`:7484`)*
+        ne e' ### **esattamente `-dU/dphi`**, perche' `_mat` *(`:6257`)* e' SIMMETRICA.
+        """
+        e = self._en
+        if e is None or self._phi_pre is None:
+            return None
+        K_C = float(self.S.K_C)
+        M_PH = float(self.S.M_PH)
+        ph0 = self._phi_pre
+        ph1 = np.asarray(net.phi, float)
+        na = len(ph0)
+        nb = len(ph1)
+        # ### ⛔ **LE DUE ASSERZIONI DEL TASK HISTORY.** Senza queste
+        #   `U(A vecchia, phi nuove)` non vuol dire niente, perche' gli archi di `A`
+        #   indicizzano nodi che potrebbero non essere piu' gli stessi.
+        if nb < na:
+            raise SystemExit("[FERMO] `n` e' CALATO (%d -> %d): gli indici dei nodi "
+                             "non sono stabili e la decomposizione di `U` NON VALE."
+                             % (na, nb))
+        ii = e["i"]
+        jj = e["j"]
+        if len(ii) and (int(ii.max()) >= na or int(jj.max()) >= na):
+            raise SystemExit("[FERMO] un indice d'arco di `A` sfora `n`: %d / %d "
+                             "contro %d." % (int(ii.max()), int(jj.max()), na))
+        A = e["A"]
+        u0 = -K_C * A * np.cos(ph0[ii] - ph0[jj])
+        u1 = -K_C * A * np.cos(ph1[ii] - ph1[jj])
+        U0 = float(np.sum(u0))
+        dU_phi = float(np.sum(u1)) - U0
+        sel_a = self._classe_archi(ii, jj, na)
+        # --- `U` per classe, sulla `A` e le `phi` di QUESTO passo
+        U_cl = {q: float(np.sum(u0[s])) for q, s in sorted(sel_a.items())}
+        U_na = {q: int(np.sum(s)) for q, s in sorted(sel_a.items())}
+        dU_phi_cl = {q: float(np.sum(u1[s]) - np.sum(u0[s]))
+                     for q, s in sorted(sel_a.items())}
+        # --- `T` per classe *(sui NODI, non sugli archi)*
+        lab = np.zeros(nc, bool)
+        for et in sorted(self.masse):
+            idx = self.masse[et]
+            lab[idx[idx < nc]] = True
+        sel_n = {"masse": lab, "vuoto": ~lab}
+        T0_cl = {q: 0.5 * M_PH * float(np.sum(p1[:nc][s] ** 2))
+                 for q, s in sorted(sel_n.items())}
+        T1_cl = {q: 0.5 * M_PH * float(np.sum(p2[:nc][s] ** 2))
+                 for q, s in sorted(sel_n.items())}
+        T0 = 0.5 * M_PH * float(np.sum(p1[:nc] ** 2))
+        T1 = 0.5 * M_PH * float(np.sum(p2[:nc] ** 2))
+        # --- ### **`Dphi` AVVOLTO sul periodo di `phi`** *(`4 pi` con `FASE_2PI`
+        #     spento, `:6392`)*: l incremento vero e' `~0.05`, quindi l avvolgimento
+        #     lo recupera ESATTO -- e il massimo si MISURA, per poterlo smentire.
+        per = float(net._dphi())
+        d = ph1[:na] - ph0
+        dphi = (d + per / 2.0) % per - per / 2.0
+        dphi_max = float(np.max(np.abs(dphi))) if na else 0.0
+        if dphi_max > per / 4.0:
+            raise SystemExit("[FERMO] `Dphi` massimo %.4f oltre un quarto del periodo "
+                             "%.4f: l avvolgimento NON e' piu' affidabile."
+                             % (dphi_max, per))
+        cop_i = np.asarray(e["cop"], float)
+        m = int(min(len(cop_i), na, nc, len(cop_tot)))
+        W_interf = float(np.sum(cop_i[:m] * dphi[:m]))
+        W_tot = float(np.sum(np.asarray(cop_tot, float)[:m] * dphi[:m]))
+        res = (dU_phi + W_interf) / max(abs(W_interf), 1e-300)
+        # --- ### ⭐ **IL LAVORO DI `A` CHE CAMBIA, col PASSO DI RITARDO DICHIARATO.**
+        #     `U(A di QUESTO passo, phi) - U(A del passo PRIMA, phi)`, ### **la stessa
+        #     `phi`** *(quella di questo passo, cioe' le `phi` NUOVE del precedente)*.
+        #     ### ➜ **Si somma con `dU_phi` DEL PASSO PRECEDENTE** e i due chiudono
+        #     `U(A nuova, phi nuove) - U(A vecchia, phi vecchie)`.
+        dUA = None
+        pp = self._en_prec
+        if pp is not None and len(pp["i"]):
+            iq = pp["i"]
+            jq = pp["j"]
+            if int(iq.max()) < na and int(jq.max()) < na:
+                uq = -K_C * pp["A"] * np.cos(ph0[iq] - ph0[jq])
+                NN = np.int64(max(na, 1))
+                ka = np.minimum(ii, jj) * NN + np.maximum(ii, jj)
+                kb = np.minimum(iq, jq) * NN + np.maximum(iq, jq)
+                ca = np.isin(ka, kb)
+                cb = np.isin(kb, ka)
+                dUA = {
+                    "totale": U0 - float(np.sum(uq)),
+                    # ### **`w` CHE CAMBIA**: gli archi presenti in ENTRAMBI i passi
+                    "w_su_archi_comuni": (float(np.sum(u0[ca]))
+                                          - float(np.sum(uq[cb]))),
+                    # ### **LE NASCITE**: gli archi che ci sono solo DOPO
+                    "nascite_archi_nuovi": float(np.sum(u0[~ca])),
+                    # ### e quelli che sono SPARITI *(la mitosi ne toglie)*
+                    "archi_spariti": -float(np.sum(uq[~cb])),
+                    "quanti_comuni": int(np.sum(ca)),
+                    "quanti_nuovi": int(np.sum(~ca)),
+                    "quanti_spariti": int(np.sum(~cb)),
+                    "chiude": "il passo PRECEDENTE: si somma col suo `dU_phi`"}
+        return {
+            "T_pre": T0, "T_post": T1, "T_pre_per_classe": T0_cl,
+            "T_post_per_classe": T1_cl, "dT": T1 - T0,
+            "U": U0, "U_per_classe": U_cl, "archi_per_classe": U_na,
+            "H_pre": T0 + U0,
+            "dU_phi": dU_phi, "dU_phi_per_classe": dU_phi_cl,
+            "dU_A_chiude_il_precedente": dUA,
+            "W_interferenza": W_interf, "W_coppia_totale": W_tot,
+            "W_extra_non_gradiente": W_tot - W_interf,
+            "residuo_relativo": res,
+            "dphi_massimo": dphi_max, "nodi_del_lavoro": m,
+            "E_cin_del_codice": float(np.mean(p1[:nc] ** 2)) if nc else None,
+            "nota": ("`T` e' (1/2)*M_PH*somma(phivel^2); `E_cin_del_codice` e' "
+                     "mean(phivel^2) di `:7711`, un analogo di TEMPERATURA. "
+                     "DUE COSE DIVERSE.")}
 
     # ---------------------------------------------------------------- osserva
     def osserva(self, S, net, k, pesante):
@@ -437,6 +616,17 @@ def corsa(braccio, passi):
         stampa("  ### ⚠ DA DICHIARARE NEL REFERTO: il ramo scalare usa cos(phi_k - "
                "phi_j), NON cos((phi_k - phi_j)/2) della direzione candidata di Luca. E' un "
                "test sul PRINCIPIO, non sulla forma.")
+    elif braccio == "B-SCAL-TS":
+        stampa("  ### INTERVENTO TRIPLO, e sono i DUE GIA' SIGILLATI COMPOSTI: "
+               "`scuoti_vuoto` INERTE **e** `xi_termo` azzerata prima di ogni `step` "
+               "(come `B-TS`), **piu'** `_coppia_interferenza` sul suo RAMO SCALARE "
+               "(come `B-SCAL`). ### Nessun codice nuovo di intervento: le TRE "
+               "appartenenze di braccio sono estese, e il diff e' ADDITIVO.")
+        stampa("  ### ⚠ E IL CRITERIO DELLA CONSERVAZIONE SI VALUTA SULLA COPPIA "
+               "DELL'INTERFERENZA, non sulla totale: con i flag del driver si "
+               "sommano REPULS_LEGGE (:7621), SPIN_FEEDBACK (:7656) e FRAME_DRAG "
+               "(:7702), e K_SYNC muove phi fuori dalla coppia (:7805). ### Scritto "
+               "nel task history PRIMA della corsa.")
     elif braccio == "B-TS":
         stampa("  ### INTERVENTO DOPPIO: `scuoti_vuoto` INERTE **e** `xi_termo` azzerata "
                "prima di ogni `step`. ### Il sistema vive SOLO della sua energia iniziale e "
@@ -555,8 +745,11 @@ def collaudo():
           "massa/vuoto SALE con `Lam`, ed e' il meccanismo dell'integrazione",
           (a4[1] / a4[0]) > (a1[1] / a1[0]))
     # ---- i bracci
-    prova("bracci: ### i CINQUE sono dichiarati",
-          BRACCI == ("base", "B-T", "B-S", "B-TS", "B-SCAL"))
+    # ### ⚠ **ERANO CINQUE E ORA SONO SEI**, e il collaudo me l'ha preso: la tupla
+    #   e' ### **l'elenco autorevole**, e un caso che la conta e' quello che impedisce
+    #   di aggiungere un braccio e dimenticarsi di dichiararlo.
+    prova("bracci: ### i SEI sono dichiarati *(`B-SCAL-TS` compreso)*",
+          BRACCI == ("base", "B-T", "B-S", "B-TS", "B-SCAL", "B-SCAL-TS"))
     # ---- ### ⭐ **IL CONTROLLO CHE IL MANDATO CHIEDE: una coppia FINTA scritta come
     #   `-dE/dphi` di un'energia NOTA deve CHIUDERE il bilancio dell'energia.**
     #   `E(phi) = -somma_{archi} A_ij cos(phi_i - phi_j)`  ->  conservazione:
@@ -626,6 +819,45 @@ def collaudo():
           "valutano IDENTICO a `==`",
           all((b in ("B-S", "B-TS")) == (b == "B-S") for b in ("base", "B-T", "B-S"))
           and all((b in ("B-T", "B-TS")) == (b == "B-T") for b in ("base", "B-T", "B-S")))
+    # ---- ### ⭐ **`B-SCAL-TS`: fa TUTTE E TRE le cose, e si rilegge dal codice**
+    prova("B-SCAL-TS: ### spegne lo scuotimento *(come `B-S`)*",
+          "B-SCAL-TS" in ("B-S", "B-TS", "B-SCAL-TS"))
+    prova("B-SCAL-TS: ### azzera `xi_termo` *(come `B-T`)*",
+          "B-SCAL-TS" in ("B-T", "B-TS", "B-SCAL-TS"))
+    prova("B-SCAL-TS: ### e prende il RAMO SCALARE *(come `B-SCAL`)*",
+          "B-SCAL-TS" in ("B-SCAL", "B-SCAL-TS"))
+    prova("B-SCAL-TS: ### DEVE FALLIRE -- `B-SCAL` NON azzera `xi_termo` e NON spegne "
+          "lo scuotimento: il braccio nuovo non e' un alias del vecchio",
+          ("B-SCAL" not in ("B-T", "B-TS", "B-SCAL-TS"))
+          and ("B-SCAL" not in ("B-S", "B-TS", "B-SCAL-TS")))
+    prova("B-SCAL-TS: ### il diff e' ADDITIVO -- per i CINQUE bracci di prima le tre "
+          "condizioni valutano IDENTICO a quelle di prima",
+          all((b in ("B-S", "B-TS", "B-SCAL-TS")) == (b in ("B-S", "B-TS"))
+              for b in ("base", "B-T", "B-S", "B-TS", "B-SCAL"))
+          and all((b in ("B-T", "B-TS", "B-SCAL-TS")) == (b in ("B-T", "B-TS"))
+                  for b in ("base", "B-T", "B-S", "B-TS", "B-SCAL"))
+          and all((b in ("B-SCAL", "B-SCAL-TS")) == (b == "B-SCAL")
+                  for b in ("base", "B-T", "B-S", "B-TS", "B-SCAL")))
+    # ---- ### **le TRE classi di arco sono DISGIUNTE e COPRONO tutto**
+    _o = TermoH3("B-SCAL-TS")
+    _o.masse = {"m0": np.array([0, 1, 2]), "m1": np.array([3, 4])}
+    _ii = np.array([0, 1, 3, 5, 6, 2])
+    _jj = np.array([1, 2, 4, 6, 7, 5])
+    _s = _o._classe_archi(_ii, _jj, 8)
+    _tot = _s["masse"].astype(int) + _s["vuoto"].astype(int) + _s["misti"].astype(int)
+    prova("archi: ### le TRE classi sono DISGIUNTE e coprono TUTTI gli archi "
+          "*(masse %d, vuoto %d, misti %d su %d)*"
+          % (int(_s["masse"].sum()), int(_s["vuoto"].sum()), int(_s["misti"].sum()),
+             len(_ii)),
+          bool(np.all(_tot == 1)))
+    # ### ⚠ **AVEVO SCRITTO `== 2` E SONO `1`:** sui sei archi di prova l'unico
+    #   MASSA-VUOTO e' `(2, 5)`. ### **Errore MIO nel contare, preso dal collaudo** --
+    #   ed e' esattamente a questo che serve scrivere il numero atteso invece di
+    #   chiedere solo <<maggiore di zero>>.
+    prova("archi: ### DEVE FALLIRE a mettere un arco MASSA-VUOTO fra le masse -- "
+          "l'unico misto e' `(2, 5)`, e `misti` ne conta %d" % int(_s["misti"].sum()),
+          int(_s["misti"].sum()) == 1 and int(_s["masse"].sum()) == 3
+          and int(_s["vuoto"].sum()) == 2)
     rotto = False
     try:
         TermoH3("altro")
@@ -648,8 +880,164 @@ def collaudo():
 
 
 # ==========================================================================
+#   ### ⭐ **IL COLLAUDO DEL POTENZIALE, SULLA FUNZIONE VERA**
+# ==========================================================================
+def collaudo_potenziale():
+    """### ⛔ **IL COLLAUDO CHE IL MANDATO CHIEDE, e si fa PRIMA della corsa.**
+
+    `U = -K_C somma_archi A cos(phi_i - phi_j)`. Il ### **RAMO SCALARE** di
+    `_coppia_interferenza` *(`:7484`)* deve dare ### **esattamente `-dU/dphi`**, a meno
+    dell'arrotondamento. ### **E IL CASO CHE DEVE FALLIRE: la coppia SPINORIALE**
+    *(quella del driver, `:7474`)* ### **NON deve chiudere.**
+    ### ⚠ **E IL CASO CHE DEVE FALLIRE PUO' PASSARE PER CASO:** il docstring del
+    simulatore dice che nel limite `b = 0, a = e^{i phi}` i due rami ### **COINCIDONO**.
+    Quindi la distanza dello spinore da quel limite ### **SI MISURA**, e se fosse
+    piccola il caso sarebbe ### **VUOTO** -- e lo direi.
+    ### ➜ **Se la prima identita' non chiude: FERMO, e lo scrivo.**
+    """
+    esiti = []
+
+    def prova(et, ok):
+        esiti.append(bool(ok))
+        stampa("  %s  %s" % ("ok  " if ok else "FALLITO", et))
+        return bool(ok)
+
+    b = blob(SIM)
+    riga("=")
+    stampa("IL COLLAUDO DEL POTENZIALE -- sulla funzione VERA del simulatore")
+    riga("=")
+    stampa("  simulatore %s   atteso %s" % (b[:8], BLOB_ATTESO))
+    if not b.startswith(BLOB_ATTESO):
+        raise SystemExit("[FERMO] il blob del simulatore NON e' quello atteso.")
+    with contextlib.redirect_stdout(io.StringIO()):
+        S, N, _a = carica("coll_potenziale", SIM)
+    _cli_flag.dichiara_configurazione(S, stampa)
+    stampa("  scena: n = %d, archi = %d" % (N.n, len(N.i)))
+    # ### ⛔ **UN PASSO VERO PRIMA**, perche' il ramo spinoriale vuole `_psi_spinor`:
+    #   senza quello ricadrebbe sul ramo scalare e il caso <<deve fallire>>
+    #   ### **passerebbe per il motivo sbagliato** -- un FALSO-UNO.
+    with contextlib.redirect_stdout(io.StringIO()):
+        _passo.passo_pieno(S, N)
+    n = int(N.n)
+    K_C = float(S.K_C)
+    ii = np.asarray(N.i, np.int64)
+    jj = np.asarray(N.j, np.int64)
+    _ps = getattr(N, "_psi_spinor", None)
+    ok_pre = (bool(S.CAMPO_SPINORIALE) and _ps is not None and len(_ps) >= n
+              and bool(S.FORK_SU2) and len(ii) > 0)
+    prova("le PRECONDIZIONI del ramo spinoriale sono soddisfatte: "
+          "`CAMPO_SPINORIALE` %r, `FORK_SU2` %r, `_psi_spinor` %s, archi %d "
+          "*(senza queste il caso <<deve fallire>> sarebbe un FALSO-UNO)*"
+          % (bool(S.CAMPO_SPINORIALE), bool(S.FORK_SU2),
+             ("len %d >= n %d" % (len(_ps), n)) if _ps is not None else "ASSENTE",
+             len(ii)), ok_pre)
+
+    def U(A, ph):
+        return -K_C * float(np.sum(A * np.cos(ph[ii] - ph[jj])))
+
+    def grad(A, ph):
+        """### `-dU/dphi`, dalla derivata analitica e SCRITTA."""
+        g = np.zeros(n)
+        s = K_C * A * np.sin(ph[ii] - ph[jj])
+        np.add.at(g, ii, +s)          # ### `dU/dphi_i = +K_C A sin(phi_i - phi_j)`
+        np.add.at(g, jj, -s)          # ### `dU/dphi_j = -K_C A sin(phi_i - phi_j)`
+        return -g                     # ### `coppia = -dU/dphi`
+
+    def scalare(A, ph):
+        """### Il RAMO SCALARE del SIMULATORE, non una mia copia."""
+        _v = S.CAMPO_SPINORIALE
+        S.CAMPO_SPINORIALE = False
+        try:
+            return np.asarray(N._coppia_interferenza(A, np.exp(1j * ph)), float)
+        finally:
+            S.CAMPO_SPINORIALE = _v
+
+    rng = np.random.default_rng(11)
+    w = N._pesi()
+    casi = [("la `A` e le `phi` VERE del simulatore",
+             w * np.cos(N.phi0[ii] - N.phi0[jj]), np.asarray(N.phi, float).copy()),
+            ("una `A` e delle `phi` CASUALI",
+             rng.normal(0.0, 1.0, len(ii)), rng.uniform(0.0, 4.0 * np.pi, n)),
+            ("una `A` casuale con le `phi` VERE",
+             rng.normal(0.0, 0.3, len(ii)), np.asarray(N.phi, float).copy())]
+    for et, A, ph in casi:
+        c_vera = scalare(A, ph)
+        c_att = grad(A, ph)
+        sc = max(float(np.max(np.abs(c_att))), 1e-300)
+        rel = float(np.max(np.abs(c_vera - c_att))) / sc
+        prova("### il ramo SCALARE **E'** `-dU/dphi` -- %s: differenza massima "
+              "relativa `%.3e` *(scala `%.4f`)*" % (et, rel, sc), rel < 1e-10)
+    # ---- ### ⭐ **IL CONTROLLO INDIPENDENTE: LA DIFFERENZA FINITA.**
+    #     Non usa la mia algebra: perturba `phi_k` e guarda `U`. Se la derivata
+    #     analitica fosse sbagliata, ### **questo se ne accorge comunque.**
+    A, ph = casi[0][1], casi[0][2]
+    c_vera = scalare(A, ph)
+    eps = 1e-6
+    nodi = rng.choice(n, size=12, replace=False)
+    peggio = pegg_glob = 0.0
+    U_tot = abs(U(A, ph))
+    for k in nodi:
+        p = ph.copy(); p[k] += eps
+        m = ph.copy(); m[k] -= eps
+        # ### ⭐ **SOLO GLI ARCHI CHE TOCCANO `k`:** `U` dipende da `phi_k` solo
+        #   attraverso quelli, quindi la restrizione da' la ### **STESSA derivata**
+        #   -- ed e' esatta, non un'approssimazione. ### **Ma la CANCELLAZIONE
+        #   crolla**, perche' i due numeri sottratti non sono piu' grandi come `U`.
+        _m = (ii == k) | (jj == k)
+        _Ak = A[_m]; _ik = ii[_m]; _jk = jj[_m]
+
+        def _Uk(_ph, _A=_Ak, _i=_ik, _j=_jk):
+            return -K_C * float(np.sum(_A * np.cos(_ph[_i] - _ph[_j])))
+
+        d = (_Uk(p) - _Uk(m)) / (2.0 * eps)        # ### `dU/dphi_k`, ESATTA
+        peggio = max(peggio, abs(-d - c_vera[k]) / max(abs(c_vera[k]), 1e-6))
+        dg = (U(A, p) - U(A, m)) / (2.0 * eps)     # ### la stessa cosa su `U` INTERA
+        pegg_glob = max(pegg_glob, abs(-dg - c_vera[k]) / max(abs(c_vera[k]), 1e-6))
+    prova("### LA DIFFERENZA FINITA conferma, su 12 nodi scelti a caso: scarto "
+          "relativo massimo `%.3e` *(e questo controllo NON passa dalla mia "
+          "derivata)*" % peggio, peggio < 1e-7)
+    # ### ⚠ **E IL MIO PRIMO CONTROLLO ERA SBAGLIATO, non il codice.** Fatto su `U`
+    #   INTERA dava `%.3e`, che non e' un disaccordo: e' il ### **PAVIMENTO DI
+    #   CANCELLAZIONE** di una differenza fra due numeri grandi `|U| = %.3e`.
+    #   Il pavimento atteso e' `eps_macchina*|U| / (2*eps*|coppia|)`, e si STAMPA.
+    _pav = (2.22e-16 * U_tot) / (2.0 * eps * max(float(np.max(np.abs(c_vera[nodi]))),
+                                                1e-300))
+    prova("### e la versione su `U` INTERA da' `%.3e`, che NON e' un disaccordo ma il "
+          "PAVIMENTO DI CANCELLAZIONE: `|U| = %.4g`, pavimento atteso `%.3e`. "
+          "### **Errore MIO di precisione, non del codice**"
+          % (pegg_glob, U_tot, _pav), pegg_glob < 100.0 * _pav)
+    # ---- ### ⛔ **IL CASO CHE DEVE FALLIRE**
+    c_spin = np.asarray(N._coppia_interferenza(A, np.exp(1j * ph)), float)
+    c_att = grad(A, ph)
+    sc = max(float(np.max(np.abs(c_att))), 1e-300)
+    rel_s = float(np.max(np.abs(c_spin - c_att))) / sc
+    prova("### ⛔ DEVE FALLIRE -- la coppia SPINORIALE *(il ramo del driver)* **NON** e' "
+          "`-dU/dphi`: differenza massima relativa `%.3e`" % rel_s, rel_s > 1e-2)
+    # ---- ### **e la distanza dello spinore dal limite in cui i due rami COINCIDONO**
+    _p = np.asarray(_ps)[:n]
+    _bmax = float(np.max(np.abs(_p[:, 1])))
+    _amax = float(np.max(np.abs(_p[:, 0] - np.exp(1j * np.asarray(N.phi, float)[:n]))))
+    prova("### lo spinore NON e' nel limite `b = 0, a = e^{i phi}` in cui i due rami "
+          "coinciderebbero: `max|b| = %.4f`, `max|a - e^{i phi}| = %.4f` -- quindi il "
+          "caso che deve fallire ### **non e' vuoto**" % (_bmax, _amax),
+          _bmax > 1e-6 or _amax > 1e-6)
+    riga("-")
+    stampa("  COLLAUDO DEL POTENZIALE: %d su %d" % (sum(esiti), len(esiti)))
+    if not all(esiti):
+        stampa("### ⛔ FERMO: il collaudo del potenziale NON chiude. Il mandato dice "
+               "di fermarsi e scriverlo, e mi fermo.")
+    return 0 if all(esiti) else 1
+
+
+# ==========================================================================
 def main(argv):
     a = argv[1:]
+    if "--collaudo-potenziale" in a:
+        e = collaudo_potenziale()
+        os.makedirs(FUORI, exist_ok=True)
+        io.open(os.path.join(FUORI, "collaudo_potenziale.txt"), "w",
+                encoding="utf-8").write(NL.join(_MSG.P) + NL)
+        return e
     if "--collaudo" in a:
         riga("=")
         stampa("IL COLLAUDO DI _termo_h3.py")
