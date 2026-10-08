@@ -2,6 +2,45 @@
 
 ---
 
+## `A16` — ❗ **LO STATO È UNO, ED EVOLVE AL PRIMO ORDINE SOTTO UNA SOLA H** *(decisione di Luca, 2026-10-08)*
+
+> ### **«Propendo fortemente per il primo ordine e per la riscrittura, perché è ciò che sto
+> cercando sin dall'inizio. Naturalmente tutto sarà basato sempre su memorie.»** — Luca
+
+### **(1) LO STATO DI NODO È UNO SOLO:** `ψ_k = |ψ_k|·e^{iφ_k/2}·χ_k ∈ C²`, con `χ_k` la
+direzione di Bloch. ### **La fase `φ` NON è una variabile a parte: si legge da `ψ`.** Il
+dominio di `φ` è `[0, 4π)`: ### **la doppia copertura (`−ψ` dopo `2π`) è costitutiva**, non un
+dettaglio.
+
+### **(2) OGNI LEGGE CHE FA EVOLVERE UNO STATO È DEL PRIMO ORDINE E DERIVA DALLA STESSA `H`:**
+`i·dψ_k/dt = ∂H/∂ψ_k*`. ### **Niente inerzie aggiunte, niente forze che non siano derivate di
+`H`.** La frequenza dell'orologio di un nodo è la sua energia locale *(l'orologio di de
+Broglie)*: ### **UN SOLO OROLOGIO PER NODO.**
+
+### **(3) LE MEMORIE SONO GRADI DI LIBERTÀ LENTI DENTRO `H`**, sui nodi o sugli archi, con la
+loro parte di energia. ### **Una memoria della forma insegue-e-dimentica NON è ammessa come
+legge:** l'oblio è uno scambio con il vuoto locale e ### **deve EMERGERE** *(`A15.3`)*.
+
+### **(4) CONSEGUENZE SU `A14`:** norma ed energia si conservano ### **per costruzione** nel
+nucleo locale *(`A14.1`, `A14.4`)*; l'unica eccezione ammessa è ### **la crescita dello
+spazio** *(`A14.2`)*, e ### **la nascita deve conservare la norma totale**, che è la carica di
+Noether della fase *(`A14.3`)*.
+
+### ⚠ **COSA `A16` NON DICE:** non fissa ### **la forma di `H`** *(il termine non lineare, le
+matrici d'arco, i pesi)*: quella ### **si decide con misure**. Non afferma che la simulazione
+sia meccanica quantistica completa: su un grafo di migliaia di nodi è ### **un campo con la
+FORMA della dinamica quantistica** *(primo ordine, unitaria, una `H`)*, ### **non uno stato
+quantistico a molti corpi.**
+
+### ⛔ **LA VIOLAZIONE NOTA, DICHIARATA E NON CURATA:** il simulatore di oggi *(`b8c21049`)*
+viola `A16` ### **nel suo cuore** — `phivel` con l'inerzia `M_PH` *(secondo ordine)*, la coppia
+come forza che ### **non deriva da `H`** *(misurato: scarto `1.01`)*, l'orologio privato `α`
+dello spinore, il termostato sulle velocità, la sincronizzazione che sposta `φ` ### **fuori**
+dalla dinamica. ### **La cura non è una legge: è la RISCRITTURA**
+*(`doc/RISCRITTURA_PRIMO_ORDINE.md`)*.
+
+---
+
 ## `A15` — ❗ **LA MEMORIA È DINAMICA, LOCALE, E CIÒ CHE DIMENTICA SI TRASFORMA** *(decisione di Luca, 2026-10-07)*
 
 > ### **«A15 — LA MEMORIA È DINAMICA, LOCALE, E CIÒ CHE DIMENTICA SI TRASFORMA.**
