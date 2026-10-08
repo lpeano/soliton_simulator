@@ -41,6 +41,7 @@ commit**: cosi' non se ne accumulano di invisibili.)*
 | `csv/_sposta_standard10.py|H-P5` | non importa il simulatore e non lo fa girare. Sposta prosa fra due documenti. |
 | `csv/_titoli_brevi.py|H-P5` | non importa il simulatore e non lo fa girare. Accorcia titoli in un TSV. |
 | `csv/_vista_smistamento.py|H-P5` | non importa il simulatore e non lo fa girare. Legge due TSV e scrive un documento. |
+| `csv/indice.py|H-P5` | non importa il simulatore e non lo fa girare. Legge e scrive l'indice. |
 | `csv/_archivio/_indice_id_importatore.py|H-P5` | non importa il simulatore e non lo fa girare. Genera due indici da documenti. |
 | `csv/_archivio/_rami_off_tors_w8.py|H-P8` | un FALSO POSITIVO, e lo DICHIARO invece di spostare il testo per schivarlo. |
 | `csv/_archivio/_rami_off_z43_cura2.py|H-P5` | e' un ARCHIVIO. Non importa il simulatore, non gira, non scrive referti. |
@@ -97,5 +98,5 @@ commit**: cosi' non se ne accumulano di invisibili.)*
 | `csv/_test_fork/_z43_tempo_proprio.py|H-P3` | la scena passa TUTTA dal CLI (`nmasse` e `sep` da `argv`), e la |
 
 ```
-esenzioni dichiarate   90
+esenzioni dichiarate   91
 ```

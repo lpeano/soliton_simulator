@@ -2135,3 +2135,29 @@ nessuna voce si cancella.**
 > attribuiti da `143` a ### **`218`** — ma il resto ### **non nomina la propria legge da
 > nessuna parte.** ### ➜ **Quelle vanno LETTE A MANO al triage**, e il campo dice
 > `(non trovato)` invece di inventare.
+
+### 🔬 L'INDICE `v2` — **l'unica via di lettura e di scrittura** *(2026-10-08)*
+
+| | |
+|---|---|
+| **file** | `csv/indice.py` *(657 righe)* |
+| **COMANDO** | `python csv/indice.py collaudo` · `valida` · `cerca` · `aggiorna` · `viste` · `citazioni` · `meta-aggiungi`/`meta-depreca`/`meta-rinomina` |
+| **cosa misura** | ### **valida** schema, vocabolari, riferimenti, transizioni, campi obbligatori, unicita', metadati, e l'### **allineamento dei DERIVATI** *(indice invertito e viste)*; ### **cerca** per campi e metadati ### **senza parsing di testo**; ### **scrive** solo con `aggiorna`, che aggiunge una riga a `storico.jsonl` |
+| **BLOB** | `23f29617` |
+
+**Esito del collaudo:** ### **`19` su `19`**, e ### **tredici dei diciannove casi DEVONO
+FALLIRE** — dominio fuori vocabolario, legge inesistente, `CHIUSA` senza chiusura, `SUPERATA`
+senza `superata_da`, `SOSPESA` senza `stato_era_1`, id duplicato, chiave meta non registrata,
+valore meta del tipo sbagliato, chiave meta ### **deprecata**, `blocca` con stato `CHIUSA`,
+`dominio DA_CLASSIFICARE` con stato ed era decisi, alias che e' anche un id, chiavi fuori
+ordine; piu' ### **tre transizioni vietate** e i ### **due derivati**.
+
+> ### ⭐ **E I DUE CONTROLLI SUI DERIVATI SI PROVANO SULLA LORO LOGICA, in memoria:** si
+> costruisce un indice invertito ### **sbagliato** e una vista TSV ### **con una riga aggiunta
+> a mano**, e si pretende che il confronto ### **li veda**. ### ⚠ **Il collaudo valida in
+> memoria, quindi `derivati=False`** — e il primo giro me l'ha insegnato: il ### **caso SANO
+> FALLIVA**, perche' `valida` cercava file derivati che ancora non esistono.
+
+> ### 📌 **AGGANCIATO AL `pre-commit`**, e ### **si accende da se'**: gira solo se
+> `doc/indice/voci.jsonl` esiste, cosi' prima della migrazione non c'e' niente da validare e
+> dopo il presidio ### **c'e' senza doverlo accendere a mano.**

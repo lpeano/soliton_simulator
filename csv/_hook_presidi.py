@@ -436,6 +436,20 @@ def pre_commit():
         sys.stderr.write(NL + "  CHE FARE: correggere la riga dell'indice."
                          " Il validatore dice quale e perche'." + NL + NL)
         return 1
+    # [INDICE v2, 2026-10-08] IL VALIDATORE DELLO SCHEMA 2 -- `doc/indice/voci.jsonl` e' LA
+    #   FONTE, e il TSV e' una VISTA GENERATA. Gira SOLO se la fonte esiste, perche' prima
+    #   della migrazione non c'e' niente da validare: cosi' il presidio **si accende da se'**
+    #   quando la migrazione passa, invece di dover essere acceso a mano.
+    if os.path.exists(os.path.join(RADICE, 'doc', 'indice', 'voci.jsonl')):
+        _q2 = _sp.run([sys.executable, os.path.join(RADICE, 'csv', 'indice.py'), 'valida'],
+                      cwd=RADICE, capture_output=True, text=True)
+        if _q2.returncode:
+            sys.stderr.write((_q2.stdout or '') + (_q2.stderr or ''))
+            sys.stderr.write(NL + "  CHE FARE: `python csv/indice.py valida` dice quale voce"
+                             " e perche'. Le viste si rigenerano con"
+                             " `python csv/indice.py viste`, e si scrive SOLO con"
+                             " `python csv/indice.py aggiorna`." + NL + NL)
+            return 1
     # [INDICE] il controllo degli ID citati **NON sta qui**: sta in `commit-msg`, perche' e' l'unico
     #   stadio in cui il MESSAGGIO esiste -- e senza il messaggio la via d'uscita dichiarata
     #   `[SENZA-INDICE: ...]` non si puo' leggere. Metterlo in `pre-commit` significava leggere

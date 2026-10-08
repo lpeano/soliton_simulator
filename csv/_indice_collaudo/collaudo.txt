@@ -1,0 +1,28 @@
+================================================================================================
+IL COLLAUDO DELL'INDICE v2 -- coi casi che DEVONO fallire
+================================================================================================
+  il caso SANO                                         PASSA        ok
+  ### dominio FUORI vocabolario                        RIFIUTA      ok
+  ### legge INESISTENTE                                RIFIUTA      ok
+  ### CHIUSA senza chiusura                            RIFIUTA      ok
+  ### SUPERATA senza superata_da                       RIFIUTA      ok
+  ### SOSPESA senza stato_era_1                        RIFIUTA      ok
+  ### id DUPLICATO                                     RIFIUTA      ok
+  ### chiave meta NON REGISTRATA                       RIFIUTA      ok
+  ### valore meta del TIPO SBAGLIATO                   RIFIUTA      ok
+  ### chiave meta DEPRECATA usata                      RIFIUTA      ok
+  ### blocca con stato CHIUSA                          RIFIUTA      ok
+  ### dominio DA_CLASSIFICARE con stato ed era decisi  RIFIUTA      ok
+  ### alias che e' anche un id                         RIFIUTA      ok
+  ### chiavi FUORI ORDINE                              RIFIUTA      ok
+  ### transizione VIETATA `CHIUSA` -> `SOSPESA`        VIETATA      ok
+  ### transizione VIETATA `SUPERATA` -> `CHIUSA`       VIETATA      ok
+  ### transizione VIETATA `APERTA` -> `DA_CLASSIFICARE` VIETATA      ok
+  ### indice invertito DISALLINEATO                    VISTO        ok
+  ### vista TSV MODIFICATA A MANO                      VISTO        ok
+
+  COLLAUDO: 19 su 19
+  ### I DUE CONTROLLI SUI DERIVATI sono provati IN MEMORIA sulla loro LOGICA
+  ###   (si costruisce un derivato sbagliato e si pretende che il confronto lo
+  ###   veda); SUL FILE VERO li fa `valida`, e sono gli ultimi due della sua
+  ###   lista. ### Il collaudo valida IN MEMORIA, quindi `derivati=False`.
