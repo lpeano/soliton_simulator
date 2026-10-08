@@ -9915,3 +9915,72 @@ sta qui.**
 > `SCIOGLIMENTO-FASE` sono ### **annotate, non riscritte**, e nessuna voce nuova è aperta:
 > `ENERGIA-NON-DEFINITA` ### **già affermava** ciò che oggi è ### **misurato**.
 > ### **La decisione è di Luca.**
+
+---
+
+# ⛔ **`D2-TER` punto `0`: AVEVO ATTRIBUITO LE ZERO NASCITE ALLA COPPIA, E SONO DEL BAGNO** *(2026-10-08)*
+
+> Referto aggiornato: `doc/REFERTO_h3_termostato_2026-10-07.md` *(`558` righe, `42` tabelle,
+> `0` difetti)*. ### ⛔ **Simulatore `b8c21049`, `ASSIOMI.md` non toccato. Nessuna corsa nuova
+> in questo commit: i numeri vengono dai json già committati.**
+
+## ⛔ **LA CORREZIONE CHE CONTA: L'ETICHETTA ERA SBAGLIATA**
+
+Avevo scritto che ### **«la coppia che legge la fase tiene le masse coerenti E ferma la
+divisione»**. ### **I numeri dicono che la seconda metà è falsa:**
+
+| braccio | coppia | bagno | passi | ### **nascite** |
+|---|---|---|--:|--:|
+| `base` | spinoriale | ### **acceso** | `300` | `48` |
+| `B-SCAL` | ### **scalare** | ### **acceso** | `500` | ### **`164`** |
+| `B-TS` | spinoriale | ### **spento** | `500` | `9` |
+| `B-SCAL-TS` | ### **scalare** | ### **spento** | `500` | ### ⛔ **`0`** |
+
+### ➜ **`B-SCAL` ha la STESSA coppia scalare e, col bagno, fa PIÙ nascite del `base`.**
+### **Le nascite crollano TOGLIENDO IL BAGNO, non cambiando la coppia.** ### ⚠ **Avevo
+confrontato `B-SCAL-TS` col `base` e attribuito la differenza alla coppia, quando fra i due
+cambiano DUE cose.** Il confronto che isola la coppia è `B-TS` contro `B-SCAL-TS` *(`9` → `0`)*,
+e quello che isola il bagno è `B-SCAL` contro `B-SCAL-TS` *(`164` → `0`)*.
+### **Il costo è del togliere il bagno, non della forma della coppia** — e resta sul tavolo
+della decisione, ### **con l'etichetta giusta.**
+
+## ⛔ **E UNA FRASE CHE SI LEGGEVA PER UN'ALTRA**
+
+Avevo scritto che la sincronizzazione ### **«si cancella e non contribuisce»**. ### **Vale per
+il RESIDUO dell'identità di primo ordine** — dove `Δφ` compare in ### **entrambi** i membri —
+### ⛔ **e SOLO lì: nel bilancio di `H` lo spostamento di sincronizzazione FA LAVORO, e molto.**
+### **Due affermazioni diverse scritte vicine si leggono come una, e la seconda non l'avevo
+detta.**
+
+## ⭐ **L'IPOTESI DEL GUARDIANO: REGGE, E COL SECONDO ORDINE È PIÙ FORTE**
+
+L'algebra, che ho rifatto invece di prenderla per buona:
+
+```
+W_tot - voce_coppia  =  Σ dt_n·c_tot·(p2 - p1)  +  Σ c_tot·delta_sync_phi
+                        ^^^^^^^^^^^^^^^^^^^^^^
+                        il SECONDO ORDINE, che il guardiano non aveva messo, e
+                        che si LIMITA dal bilancio: dt_n·c_tot = M_PH·d_t + dt_n·xi·p1,
+                        e `residuo_incrociato` in energia E' (1/2)·Σ(d_t²)
+```
+
+| finestra | `W_tot` | voce ### **`coppia`** | differenza | ### **secondo ordine** | ### **`W_sync` stimato** | `ΔH` | ### **quota** |
+|---|--:|--:|--:|--:|--:|--:|--:|
+| `1..215` | `−12365.2351` | `+8804.8634` | `−21170.0985` | `+1081.1243` | ### **`−22251.2229`** | `+23782.6394` | ### **`93.56 %`** |
+| `216..500` | `−13516.3246` | `+11951.6986` | `−25468.0232` | `+1482.8547` | ### **`−26950.8780`** | `+31938.3755` | ### **`84.38 %`** |
+
+### ✔ **L'aritmetica del guardiano REGGE**, e la differenza `−21170` che aveva scritto è
+### **esatta**. ### ⭐ **Col secondo ordine quantificato l'ipotesi è PIÙ forte, non meno:**
+`W_sync` sale a `−22251` e la quota a ### **`93.56 %`**.
+
+> ### ⛔ **MA RESTA UN'IPOTESI, e le due ragioni le dico io:** ### **(1)** `W_sync` qui è
+> ### **DEDOTTO da una differenza**, non misurato — `delta_sync_phi` ### **non è registrato**
+> in quella corsa; ### **(2)** la differenza è costruita sulla coppia ### **TOTALE**, mentre
+> `W_interferenza` *(la sola che sia `−∂U/∂φ`)* è un altro numero *(`−13637` contro `−12365`)*.
+> ### ➜ **La misura DIRETTA è il punto `1`, col controllo positivo che `W_sync + W_newton`
+> ricomponga `W_interferenza`.**
+
+### ⚠ **E UN ALTRO FALSO POSITIVO DEL MIO CONTROLLO DI FORMATO, curato nel CONTROLLO:** un
+### **recinto di codice** veniva contato come «doppio backtick». ### **Ora il controllo salta i
+recinti** — e nello stesso giro ha preso ### **due grassetti annidati veri** nelle frasi che
+avevo appena scritto.

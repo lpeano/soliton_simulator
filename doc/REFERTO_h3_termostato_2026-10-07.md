@@ -363,7 +363,9 @@ La voce `scuoti` del bilancio e' `media(2·p0·Δs + Δs²)`: il primo addendo e
 
 > ### ⛔ **ZERO NASCITE SU 500 PASSI: `n` e gli archi NON SI MUOVONO.** ### **Non l avevo previsto**, e cambia la lettura di tre cose: ### **(1)** la previsione `PE-5` è smentita ### **non perché le nascite non dominino, ma perché non ce ne sono**; ### **(2)** la finestra `216..500` in questo braccio ### **non separa le nascite da niente** — si riporta comunque, perché il mandato la chiede, ma ### **qui divide solo il tempo**; ### **(3)** `dU_A` è ### **tutto e solo `w` che cambia**, quindi il lavoro di `A` qui misura ### **la plasticità dei pesi**, non la crescita della rete.
 
-> ### ⭐ **ED È UN RISULTATO A SÉ, non un contrattempo:** con la coppia ### **scalare** e il bagno soppresso il sistema ### **non arriva alla soglia di mitosi**, mentre con la coppia ### **spinoriale** e lo stesso bagno soppresso *(`B-TS`)* qualcosa nasce comunque. ### **La coppia che legge la fase tiene le masse coerenti E ferma la divisione** — e se la divisione è un fenomeno che si vuole tenere, questo è ### **un costo da mettere sul tavolo della decisione**, non un dettaglio.
+> ### ⛔ **E L ATTRIBUZIONE NON È ALLA COPPIA: È AL BAGNO TOLTO.** ### ⚠ **Qui avevo scritto che è «la coppia scalare» a fermare la divisione, e i numeri dicono che NO:** `B-SCAL` ha la ### **STESSA** coppia scalare e, ### **col bagno**, fa ### **164** nascite in `500` passi — ### **più del `base`**, che ne fa `48` in `300`. E con la coppia ### **spinoriale** e il bagno ### **spento** *(`B-TS`)* ne fa `9`. ### ➜ **Le nascite crollano TOGLIENDO IL BAGNO, non cambiando la coppia:** `base 48` → `B-SCAL 164` → `B-TS 9` → `B-SCAL-TS 0`.
+
+> ### ⭐ **E RESTA UN RISULTATO, ma di un ALTRO fatto:** togliere i due forzanti globali ### **azzera** la divisione, e la coppia scalare ### **non la ripristina**. ### **Il bagno è ciò che porta il sistema alla soglia di mitosi**, e il costo è del ### **togliere il bagno**, ### **non della forma della coppia.** ### ⚠ **Resta sul tavolo della decisione, con l etichetta giusta.**
 
 ## ⭐ **LE DUE ENERGIE SONO DERIVATE DAL CODICE, NON SCELTE**
 
@@ -389,7 +391,7 @@ La voce `scuoti` del bilancio e' `media(2·p0·Δs + Δs²)`: il primo addendo e
 
 ### ⭐ **E QUEL RESIDUO NON MISURA LA CONSERVAZIONE: MISURA IL PASSO.**
 
-Il residuo è `dU_φ + Σ coppia·Δφ`, e ### **`Δφ` è l incremento VERO** *(quello che contiene anche `delta_sync_phi`)*: la sincronizzazione entra ### **sia in `dU_φ` sia nel lavoro**, quindi ### **si cancella e non contribuisce**. E siccome il collaudo ### **MISURA** che la coppia è `−∂U/∂φ` *(`1.49e-15`)*, l identità `dU_φ = −Σ coppia·Δφ + O(Δφ²)` è ### **ALGEBRA**: il residuo ### **È** quel resto del secondo ordine. ### ⛔ **Non è una congettura, e non dipende da questa corsa.**
+Il residuo è `dU_φ + Σ coppia·Δφ`, e ### **`Δφ` è l incremento VERO** *(quello che contiene anche `delta_sync_phi`)*: la sincronizzazione entra ### **sia in `dU_φ` sia nel lavoro**, quindi ### **si cancella NEL RESIDUO DI QUELLA IDENTITÀ** — ### ⛔ **e SOLO lì: NON nel bilancio di `H`, dove lo spostamento di sincronizzazione FA LAVORO, e molto** *(la sezione qui sotto)*. E siccome il collaudo ### **MISURA** che la coppia è `−∂U/∂φ` *(`1.49e-15`)*, l identità `dU_φ = −Σ coppia·Δφ + O(Δφ²)` è ### **ALGEBRA**: il residuo ### **È** quel resto del secondo ordine. ### ⛔ **Non è una congettura, e non dipende da questa corsa.**
 
 > ### ⚠ **LA BANDA QUI SOTTO ERA PENSATA COME CONFERMA INDIPENDENTE, E LO È SOLO IN PARTE:** il coefficiente del secondo ordine va come `cos(φ_i − φ_j)` e quindi ### **VARIA DA PASSO A PASSO**, perciò il rapporto ### **non deve** restare costante quanto avevo creduto scrivendo la previsione. ### **Era un attesa mia troppo forte, e la correggo qui invece di leggere la larghezza della banda come un problema del codice.**
 
@@ -418,6 +420,28 @@ Il residuo è `dU_φ + Σ coppia·Δφ`, e ### **`Δφ` è l incremento VERO** *
 |---|--:|--:|--:|--:|
 | 1..215 | -13637.4544 | -12365.2351 | ### **1272.2193** | 9.33 % |
 | 216..500 *(e qui NON nasce niente: divide solo il tempo)* | -17368.8981 | -13516.3246 | ### **3852.5735** | 22.18 % |
+
+## ⭐ **L IPOTESI DEL GUARDIANO: LA SINCRONIZZAZIONE È LA SORGENTE** *(`D2-TER`, e qui è UN IPOTESI, non un fatto)*
+
+L algebra, scritta: `W_tot = Σ c_tot·Δφ` con `Δφ = dt_n·phivel(t+1) + delta_sync_phi`, mentre la voce `coppia` del bilancio cinetico, in unità di energia, è `Σ p1·d_cop = Σ dt_n·c_tot·p1/M_PH`. ### ➜ **La loro differenza contiene DUE cose, non una:**
+
+```
+W_tot - voce_coppia  =  Σ dt_n·c_tot·(p2 - p1)  +  Σ c_tot·delta_sync_phi
+                        ^^^^^^^^^^^^^^^^^^^^^^
+                        il SECONDO ORDINE, e si LIMITA dal bilancio:
+                        dt_n·c_tot = M_PH·d_t + dt_n·xi·p1, quindi
+                        Σ dt_n·c_tot·d_t = M_PH·Σ(d_t²) + (un termine in xi)
+                        e `residuo_incrociato` in energia E' (1/2)·Σ(d_t²)
+```
+
+| finestra | `W_tot` | voce ### **`coppia`** | ### **differenza** | di cui ### **secondo ordine** | ### **`W_sync` STIMATO** | `ΔH` | ### **`−W_sync` su `ΔH`** |
+|---|--:|--:|--:|--:|--:|--:|--:|
+| 1..215 | -12365.2351 | 8804.8634 | ### **-21170.0985** | 1081.1243 | ### **-22251.2229** | 23782.6394 | ### **93.56 %** |
+| 216..500 *(e qui NON nasce niente: divide solo il tempo)* | -13516.3246 | 11951.6986 | ### **-25468.0232** | 1482.8547 | ### **-26950.8780** | 31938.3755 | ### **84.38 %** |
+
+> ### ⭐ **L ARITMETICA DEL GUARDIANO REGGE, E L HO RIFATTA IO:** la differenza è ### **-21170.0985**, e il secondo ordine — ### **che il guardiano non aveva messo** — ne spiega ### **1081.1243**, quindi `W_sync` stimato è ### **-22251.2229**. ### ➜ **Cioè lo spostamento di sincronizzazione spiega il 93.56 % della crescita di `H` nella prima finestra.** ### **Con il secondo ordine dentro, l ipotesi è PIÙ forte di come era scritta, non meno.**
+
+> ### ⛔ **E RESTA UN IPOTESI, per DUE ragioni che dico io:** ### **(1)** `W_sync` qui è ### **DEDOTTO da una differenza**, non misurato — `delta_sync_phi` non è registrato in questa corsa; ### **(2)** la differenza è costruita sulla coppia ### **TOTALE**, mentre `W_interferenza` *(la sola che sia `−∂U/∂φ`)* è un altro numero. ### ➜ **La misura DIRETTA è `D2-TER` punto `1`, e il controllo positivo è che `W_sync + W_newton` ricomponga `W_interferenza`.**
 
 ## ⭐ **QUANTA PARTE DI `ΔH` VIENE DA `A` CHE CAMBIA, E QUANTA DALLE `φ`**
 

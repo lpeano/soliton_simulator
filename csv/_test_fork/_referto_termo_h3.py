@@ -934,13 +934,38 @@ def main():
               "cambia**, quindi il lavoro di `A` qui misura ### **la plasticità dei "
               "pesi**, non la crescita della rete." % n4(len(hts["passi"]) - 1))
             A("")
-            A("> ### ⭐ **ED È UN RISULTATO A SÉ, non un contrattempo:** con la coppia "
-              "### **scalare** e il bagno soppresso il sistema ### **non arriva alla "
-              "soglia di mitosi**, mentre con la coppia ### **spinoriale** e lo stesso "
-              "bagno soppresso *(`B-TS`)* qualcosa nasce comunque. ### **La coppia che "
-              "legge la fase tiene le masse coerenti E ferma la divisione** — e se la "
-              "divisione è un fenomeno che si vuole tenere, questo è ### **un costo da "
-              "mettere sul tavolo della decisione**, non un dettaglio.")
+            # ### ⛔ **CORREZIONE DEL 2026-10-08 (`D2-TER`, punto 0): L ATTRIBUZIONE
+            #   ERA MIA E SBAGLIATA.** Avevo scritto che e' ### **la coppia scalare**
+            #   a fermare la divisione. Ma `B-SCAL` ha la ### **STESSA** coppia
+            #   scalare e, ### **col bagno**, fa ### **piu'** nascite del `base`.
+            #   ### **Le nascite crollano TOGLIENDO IL BAGNO, non cambiando la coppia.**
+            _nb = {}
+            for _nm3 in ("base", "B-SCAL", "B-TS", "B-SCAL-TS"):
+                _h3 = H(_nm3)
+                if _h3 and _h3.get("passi"):
+                    _p3 = _h3["passi"]
+                    _nb[_nm3] = (_p3[-1]["n"] - _p3[0]["n"], len(_p3) - 1)
+            A("> ### ⛔ **E L ATTRIBUZIONE NON È ALLA COPPIA: È AL BAGNO TOLTO.** "
+              "### ⚠ **Qui avevo scritto che è «la coppia scalare» a fermare la "
+              "divisione, e i numeri dicono che NO:** `B-SCAL` ha la ### **STESSA** "
+              "coppia scalare e, ### **col bagno**, fa ### **%s** nascite in `%s` "
+              "passi — ### **più del `base`**, che ne fa `%s` in `%s`. E con la coppia "
+              "### **spinoriale** e il bagno ### **spento** *(`B-TS`)* ne fa `%s`. "
+              "### ➜ **Le nascite crollano TOGLIENDO IL BAGNO, non cambiando la "
+              "coppia:** `base %s` → `B-SCAL %s` → `B-TS %s` → `B-SCAL-TS %s`."
+              % (n4(_nb.get("B-SCAL", (0, 0))[0]), n4(_nb.get("B-SCAL", (0, 0))[1]),
+                 n4(_nb.get("base", (0, 0))[0]), n4(_nb.get("base", (0, 0))[1]),
+                 n4(_nb.get("B-TS", (0, 0))[0]),
+                 n4(_nb.get("base", (0, 0))[0]), n4(_nb.get("B-SCAL", (0, 0))[0]),
+                 n4(_nb.get("B-TS", (0, 0))[0]),
+                 n4(_nb.get("B-SCAL-TS", (0, 0))[0])))
+            A("")
+            A("> ### ⭐ **E RESTA UN RISULTATO, ma di un ALTRO fatto:** togliere i due "
+              "forzanti globali ### **azzera** la divisione, e la coppia scalare "
+              "### **non la ripristina**. ### **Il bagno è ciò che porta il sistema "
+              "alla soglia di mitosi**, e il costo è del ### **togliere il bagno**, "
+              "### **non della forma della coppia.** ### ⚠ **Resta sul tavolo della "
+              "decisione, con l etichetta giusta.**")
             A("")
         A("## ⭐ **LE DUE ENERGIE SONO DERIVATE DAL CODICE, NON SCELTE**")
         A("")
@@ -1025,8 +1050,10 @@ def main():
         A("")
         A("Il residuo è `dU_φ + Σ coppia·Δφ`, e ### **`Δφ` è l incremento VERO** "
           "*(quello che contiene anche `delta_sync_phi`)*: la sincronizzazione entra "
-          "### **sia in `dU_φ` sia nel lavoro**, quindi ### **si cancella e non "
-          "contribuisce**. E siccome il collaudo ### **MISURA** che la coppia è "
+          "### **sia in `dU_φ` sia nel lavoro**, quindi ### **si cancella NEL RESIDUO "
+          "DI QUELLA IDENTITÀ** — ### ⛔ **e SOLO lì: NON nel bilancio di `H`, dove lo "
+          "spostamento di sincronizzazione FA LAVORO, e molto** *(la sezione "
+          "qui sotto)*. E siccome il collaudo ### **MISURA** che la coppia è "
           "`−∂U/∂φ` *(`1.49e-15`)*, l identità `dU_φ = −Σ coppia·Δφ + O(Δφ²)` è "
           "### **ALGEBRA**: il residuo ### **È** quel resto del secondo ordine. "
           "### ⛔ **Non è una congettura, e non dipende da questa corsa.**")
@@ -1176,6 +1203,73 @@ def main():
             _pe["Wx_som"] = _pe.get("Wx_som", 0.0) + abs(_wx)
         A("")
         # --- ### il lavoro di `A` che cambia
+        # ======================================================
+        #   ### ⭐ **L IPOTESI DEL GUARDIANO: LA SINCRONIZZAZIONE COME SORGENTE**
+        # ======================================================
+        A("## ⭐ **L IPOTESI DEL GUARDIANO: LA SINCRONIZZAZIONE È LA SORGENTE** "
+          "*(`D2-TER`, e qui è UN IPOTESI, non un fatto)*")
+        A("")
+        A("L algebra, scritta: `W_tot = Σ c_tot·Δφ` con `Δφ = dt_n·phivel(t+1) + "
+          "delta_sync_phi`, mentre la voce `coppia` del bilancio cinetico, in unità di "
+          "energia, è `Σ p1·d_cop = Σ dt_n·c_tot·p1/M_PH`. ### ➜ **La loro differenza "
+          "contiene DUE cose, non una:**")
+        A("")
+        A("```")
+        A("W_tot - voce_coppia  =  Σ dt_n·c_tot·(p2 - p1)  +  Σ c_tot·delta_sync_phi")
+        A("                        ^^^^^^^^^^^^^^^^^^^^^^")
+        A("                        il SECONDO ORDINE, e si LIMITA dal bilancio:")
+        A("                        dt_n·c_tot = M_PH·d_t + dt_n·xi·p1, quindi")
+        A("                        Σ dt_n·c_tot·d_t = M_PH·Σ(d_t²) + (un termine in xi)")
+        A("                        e `residuo_incrociato` in energia E' (1/2)·Σ(d_t²)")
+        A("```")
+        A("")
+        A("| finestra | `W_tot` | voce ### **`coppia`** | ### **differenza** | di cui "
+          "### **secondo ordine** | ### **`W_sync` STIMATO** | `ΔH` | ### **`−W_sync` "
+          "su `ΔH`** |")
+        A("|---|--:|--:|--:|--:|--:|--:|--:|")
+        _ipo = {}
+        for et, a2, b2 in FIN:
+            f = _fin(a2, b2)
+            if not f:
+                continue
+            _wt2 = sum(v["W_coppia_totale"] for _k, v in f)
+            _dh2 = sum(v["dT"] + v["dU_phi"] for _k, v in f)
+            _vc = _vri = 0.0
+            for _k, _v in f:
+                _pc = (pts.get(_k, {}).get("per_classe") or {})
+                for _cl, _nn in (("masse", _nm), ("vuoto", _nv)):
+                    _x = _pc.get(_cl) or {}
+                    if _x.get("coppia") is not None:
+                        _vc += 0.5 * _x["coppia"] * (_x.get("nodi") or _nn)
+                    if _x.get("residuo_incrociato") is not None:
+                        _vri += 0.5 * _x["residuo_incrociato"] * (_x.get("nodi") or _nn)
+            _dif = _wt2 - _vc
+            _sec = 2.0 * _vri
+            _ws = _dif - _sec
+            _ipo[et] = (_ws, _dh2, (-_ws/_dh2) if _dh2 else None, _dif, _sec)
+            A("| %s | %s | %s | ### **%s** | %s | ### **%s** | %s | ### **%s** |"
+              % (et, n4(_wt2), n4(_vc), n4(_dif), n4(_sec), n4(_ws), n4(_dh2),
+                 pct((-_ws / _dh2) if _dh2 else None)))
+        A("")
+        _q1 = _ipo.get(FIN[0][0])
+        if _q1 and _q1[2] is not None:
+            A("> ### ⭐ **L ARITMETICA DEL GUARDIANO REGGE, E L HO RIFATTA IO:** la "
+              "differenza è ### **%s**, e il secondo ordine — ### **che il guardiano "
+              "non aveva messo** — ne spiega ### **%s**, quindi `W_sync` stimato è "
+              "### **%s**. ### ➜ **Cioè lo spostamento di sincronizzazione spiega il "
+              "%s della crescita di `H` nella prima finestra.** ### **Con il "
+              "secondo ordine dentro, l ipotesi è PIÙ forte di come era scritta, non "
+              "meno.**"
+              % (n4(_q1[3]), n4(_q1[4]), n4(_q1[0]), pct(_q1[2])))
+            A("")
+        A("> ### ⛔ **E RESTA UN IPOTESI, per DUE ragioni che dico io:** ### **(1)** "
+          "`W_sync` qui è ### **DEDOTTO da una differenza**, non misurato — "
+          "`delta_sync_phi` non è registrato in questa corsa; ### **(2)** la "
+          "differenza è costruita sulla coppia ### **TOTALE**, mentre "
+          "`W_interferenza` *(la sola che sia `−∂U/∂φ`)* è un altro numero. "
+          "### ➜ **La misura DIRETTA è `D2-TER` punto `1`, e il controllo positivo "
+          "è che `W_sync + W_newton` ricomponga `W_interferenza`.**")
+        A("")
         A("## ⭐ **QUANTA PARTE DI `ΔH` VIENE DA `A` CHE CAMBIA, E QUANTA DALLE `φ`**")
         A("")
         A("> ### ⚠ **IL PASSO DI RITARDO È DICHIARATO:** `dU_A` si può calcolare solo "
