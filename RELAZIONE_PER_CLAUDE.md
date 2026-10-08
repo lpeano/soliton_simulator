@@ -10515,3 +10515,26 @@ confermi:** la classificazione è ### **un'euristica**, e due numeri lo dicono �
 «metodo» ci sono ### **`22` di tipo `difetto`** *(presi per una parola)*, e fra le sospese ci
 sono ### **`8` bloccanti**. ### **Se una di quelle è in realtà una lezione di metodo, l'era `2`
 la perderebbe.**
+
+## IL PIANO DEL TRIAGE — **scritto e NON eseguito** (2026-10-08)
+
+`doc/TRIAGE_ERA_1.md`: tre uscite — ### **`S` SUPERATA** *(la legge non esiste più: si chiude
+col rimando alla scheda che l'ha tolta)*, ### **`T` TRASPORTATA** *(il difetto si ricontrolla
+### **MISURANDO**, non a parole)*, ### **`V` ANCORA VALIDA** *(non dipendeva dalla dinamica)*.
+
+### ⚠ **E una quarta uscita che non è un'uscita, e sta nei numeri: `411` su `629` sono NON
+CLASSIFICABILI** — il campo dice `(non trovato)`, e ### **si leggono a mano.** Il piano lo
+scrive invece di promettere che il triage le instradi da solo.
+
+### ⭐ **Tre previsioni, scritte PRIMA del triage per poterle perdere:** le voci della
+### **sincronizzazione** → `S` *(decisione `(B)`)*; quelle di ### **`phivel` e del termostato**
+→ `S` *(`A16.2`, `A14.1`)*; l'### **eredità di `pos` alla nascita** → `V` *(è una regola di
+nascita, e `A17` la vieta comunque)*. ### ⛔ **E `U1`** *(bloccante)*: la decisione `(A)` fa
+sparire `massacriticacollasso`, quindi `S` — ### ⚠ **ma SOLO quando il vuoto locale sarà
+scritto**, perché finché la soglia non è calcolabile la costante ### **non è stata sostituita da
+niente.**
+
+### **Il comando previsto** *(`--collaudo` conta, `--proponi` scrive proposte in un `.md`,
+`--applica --solo S` una classe alla volta)* ### ⛔ **non esiste ancora, e lo dico:** scriverlo
+adesso sarebbe uno strumento ### **che non si può collaudare**, perché la versione nuova delle
+leggi non c'è.
