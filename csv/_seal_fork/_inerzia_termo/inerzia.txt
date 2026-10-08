@@ -2,7 +2,7 @@
 LA BYTE-INERZIA DELL'OSSERVATORE `TermoH3`: 220 passi CON e SENZA
 ========================================================================================================
   simulatore b8c21049   atteso b8c21049
-  strumento dd718098 (termo_h3)   fcf75043 (misura_verso)
+  strumento 5b8c5875 (termo_h3)   fcf75043 (misura_verso)
   ### LA FINESTRA E' 220 PASSI, cioe' OLTRE la prima nascita (216).
 
   --- il braccio NUDO
@@ -13,10 +13,10 @@ LA BYTE-INERZIA DELL'OSSERVATORE `TermoH3`: 220 passi CON e SENZA
 --------------------------------------------------------------------------------------------------------
   attributi solo nel NUDO: 0  []
   attributi solo CON l'osservatore: 0  []
-  attributi DIVERSI: 0  []
+  attributi DIVERSI: 1  ['_calcpsi_origini']
 
 ========================================================================================================
-  ### ✔ LA BYTE-INERZIA PASSA: lo stato e' IDENTICO AL BIT su 291 attributi.
-  ### L'osservatore `TermoH3` NON cambia la dinamica, involucri su `step` e su `scuoti_vuoto` compresi.
+  ### ⛔ LA BYTE-INERZIA FALLISCE. LE CORSE NON PARTONO.
+  ### Le differenze sono NOMINATE qui sopra.
 ========================================================================================================
   controllo: passi registrati 221   passi col BILANCIO 220   involucri rimossi SI

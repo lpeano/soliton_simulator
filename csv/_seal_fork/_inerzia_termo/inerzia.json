@@ -1,13 +1,15 @@
 {
  "blob_sim": "b8c21049b85ba36a828f49dfa225d42419f3baf5",
- "blob_termo_h3": "dd7180989521f98cd41af68e96b59b697c227e9a",
+ "blob_termo_h3": "5b8c58759857920cb7183f23b71903e86995db5d",
  "blob_misura_verso": "fcf75043c975beae1d5ca79881687f05a1090eeb",
  "passi": 220,
  "esclusi": [],
  "attributi": 291,
  "solo_nudo": [],
  "solo_osservatore": [],
- "diversi": [],
+ "diversi": [
+  "_calcpsi_origini"
+ ],
  "passi_registrati": 221,
  "passi_col_bilancio": 220,
  "involucri_rimossi": true,
@@ -21,5 +23,5 @@
    471574
   ]
  },
- "esito": "PASSA"
+ "esito": "FALLISCE"
 }
