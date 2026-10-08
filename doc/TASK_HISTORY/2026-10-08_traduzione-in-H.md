@@ -147,3 +147,35 @@ criterio va ### **fra le decisioni di Luca**. ### ⚠ **Senza questa regola l'av
 7. La verifica sullo snapshot ### **solo per le traducibili**, col caso che deve fallire.
 8. `doc/TRADUZIONE_IN_H.md` con la tavola, la `H` candidata, il confronto con la sonda e ### **l'elenco delle decisioni di Luca**.
 9. ### ⛔ **Poi FERMARSI.**
+
+## 6. L'ANNOTAZIONE — **gli esiti delle undici previsioni**
+
+*(Scritta dopo, come vuole il par.8: ### **sopra non si riscrive niente.** I numeri:
+`doc/TRADUZIONE_IN_H.md`, generato dai quattro json.)*
+
+| id | esito |
+|---|---|
+| **`PT-1`** | ### ⛔ **MANCATA, E DAL BASSO:** `21` righe contro un minimo di `24`. Il motivo e' ### **mio**, non del sistema: ho ### **raggruppato piu' grosso** di quanto avessi previsto — `419` scritture in `21` righe, perche' *«il rilassamento di `d0`»* e' ### **una** riga e ### **dieci** scritture |
+| **`PT-2`** | ### ⛔ **MANCATA: `3` traducibili, non `7`** — ed e' `PT-9` che l'ha mangiata |
+| **`PT-3`** | ### ✔ **PRESA ESATTA: `6`** |
+| **`PT-4`** | ### ✔ **PRESA ESATTA: `4`.** E la difficolta' che dichiaravo si e' rivelata giusta: ### **la scomparsa di un arco e' GIA' una violazione di `A14.2`**, non una legge da tradurre, e sta nell'elenco di Luca come ### **difetto da decidere** |
+| **`PT-5`** | ### **MANCATA per `+2`: `7` non traducibili, non `5`** — le due in piu' sono quelle che `PT-9` ha spostato |
+| **`PT-6`** | ### **MANCATA, e NON la aggiusto:** `1` riga, non `3`. Ma quella riga copre ### **`231` nomi**: ### **`PT-6` contava le LEGGI, la tavola conta le RIGHE**, e le due cose non sono la stessa |
+| **`PT-7`** | ### ⭐ **VINTA A META', E LA META' CHE PERDE E' QUELLA CHE CONTA.** La diluizione c'e' ed e' ### **esatta** *(`Σρ` al bit, `ρ²` del nodo dimezzato)*; ### ⛔ **ma la divisione ALZA `H` di `+199600`**, quindi ### **non avviene da sola.** ### ➜ **La nascita e' un freno SOLO SE il vuoto locale paga, e `S5` e' APERTO** |
+| **`PT-8`** | ### **CONFERMATA come lettura, NON come misura:** la tavola nomina ### **tre** freni nel simulatore *(repulsione, massa critica, nascita)* e ### **zero** nella sonda. ### ⚠ **Che siano loro a impedire il collasso NON e' misurato**, e non lo scrivo come se lo fosse |
+| **`PT-9`** | ### ⭐ **VINTA, E DI PIU':** dicevo ### **almeno `2`** spostamenti, ### **ne ha fatti `4`** — sincronizzazione, coppia del driver, `_smorza`, massa critica |
+| **`PT-10`** | ### ✔ **PRESA:** il controllo positivo passa *(`4.39e-13`)* e il caso che deve fallire fallisce. ### **Il banco e' SANO**, e i verdetti si leggono |
+| **`PT-11`** | ### **NON VERIFICATA:** nessuna legge e' risultata ### **simmetrica senza che io sappia scriverne la `E`**, quindi la casella *«TRADUCIBILE con `E` APERTA»* ### **e' rimasta vuota.** ### **Non la riempio per non lasciarla vuota** |
+
+### ⭐ **E DUE COSE CHE IL MANDATO NON PREVEDEVA, e che sono emerse facendo:**
+
+| | |
+|---|---|
+| ### **il test `(A)` viene PRIMA del `(B)`** | una legge che scrive `x` ma ### **non legge `x`** ha `J = 0`, che e' ### **simmetrica**: il `(B)` la promuoverebbe a traducibile. ### ⛔ **E' un FALSO-ZERO, ed e' esattamente il caso della coppia del driver** — senza il `(A)` l'avrei messa in `H` |
+| ### **il terzo controllo del banco** | serviva una legge che ### **DEVE** risultare asimmetrica, perche' ### **un banco che approva tutto e un banco che funziona danno lo STESSO referto sul controllo positivo.** L'ho costruita *(la coppia col prefattore di nodo)*, e ### **non e' una legge del simulatore**: e' dichiarata come controllo |
+
+### ⚠ **E UNO SCARTO DI PROCESSO, dichiarato nel commit:** i quattro strumenti di questo
+mandato ### **hanno girato prima di essere committati**, contro il par.5. Il timbro di
+`_presidio` lo ha scritto a ogni giro, e io l'ho letto e sono andato avanti. ### **I blob sono
+nell'inventario e il comando rigira verbatim, quindi l'output e' riproducibile AL COMMIT — ma
+l'ordine non e' stato rispettato, e l'ordine E' il punto della regola.**
