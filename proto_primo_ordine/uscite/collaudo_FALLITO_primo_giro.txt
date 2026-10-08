@@ -1,0 +1,20 @@
+========================================================================================================
+IL COLLAUDO DEL PROTOTIPO AL PRIMO ORDINE
+========================================================================================================
+  ok    il prototipo ### **NON ha importato il simulatore** *(guardato in `sys.modules`, non dichiarato)*
+  grafo: n = 400, archi = 2759, grado medio 13.79 (min 2, max 29), isolati 0
+  ok    grafo: ### `U` e' UNITARIA su tutti gli archi *(scarto massimo da `I`: `6.661e-16`)*
+  ok    grafo: ### **nessun nodo isolato** *(un nodo isolato non evolverebbe, e sarebbe un pezzo di stato fuori dalla dinamica)*
+  (a) 10000 passi in 55.6 s; iterazioni del punto medio: mediana 5, massimo 5
+  ok    (a) ### **la NORMA si conserva**: deriva relativa `3.706e-13` su `10^4` passi *(soglia `1e-8`)*
+  FALLITO  (a) ### **l'ENERGIA si conserva**: deriva relativa `2.408e-03` su `10^4` passi *(soglia `1e-8`)*
+  ok    (a) ### e l'iterazione ### **converge sempre** entro il tetto *(massimo 5 su 60)*
+  (b) catena n = 160, larghezza `8.0` passi, A = 0.17678, t_c = 32.00, passi = 159999
+  FALLITO  (b) ### **IL SOLITONE `sech` SI PROPAGA INTATTO**: scarto massimo sul profilo `3.373e-01` dopo `10` tempi caratteristici *(soglia `1e-3`)*
+  ok    (c) ### ⛔ **DEVE FALLIRE -- con `g = 0` il profilo SI DISPERDE**: scarto `5.937e-01` *(contro `3.373e-01` con `g != 0`)*, e il `PR` va da `24.00` a ### **`134.86`** *(con `g != 0`: `14.56`)*
+  ok    (d) ### **la DOPPIA COPERTURA si vede su `H`**: `phi_k + 2pi` su UN nodo cambia l'energia da `-2.015634` a `-1.519515` *(differenza `0.496119`)*
+  ok    (d) ### e `phi_k + 4pi` la riporta ### **IDENTICA** *(scarto `0.000e+00`)*
+  ok    `phi` SI LEGGE da `psi` e sta in `[0, 4pi)` *(min `0.1444`, max `12.4939`)*: ### **non e' una variabile** *(`A16.1`)*
+--------------------------------------------------------------------------------------------------------
+  COLLAUDO: 9 su 11
+### FERMO: il collaudo NON chiude, e le corse NON partono.
