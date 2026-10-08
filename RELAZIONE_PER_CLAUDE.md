@@ -9691,3 +9691,99 @@ di domani: `D1` la potenza della coppia, `D2` il braccio con la coppia scalare, 
 decisione di Luca.**
 
 ### ⏸ **La cura del verso resta sospesa.**
+
+---
+
+# ⭐ **`D1` E `D2`: LA COPPIA POMPA, E UNA COPPIA CHE LEGGE LA FASE TIENE LA COERENZA** *(2026-10-08)*
+
+> Referto: `doc/REFERTO_h3_termostato_2026-10-07.md` *(`365` righe, `26` tabelle, `0` difetti
+> di formato)*. Criteri e previsioni in `ae8c952`, committato ### **prima** degli strumenti e
+> delle corse. ### ⛔ **Simulatore `b8c21049`, `ASSIOMI.md` non toccato.**
+
+## ⛔ **UNA CORREZIONE AL MECCANISMO, PRIMA DEL VERDETTO**
+
+### **«`φ` non entra mai in `ψ`» è TROPPO FORTE e non regge.**
+
+| | |
+|---|---|
+| la dipendenza ### **DIRETTA** | ### ✔ **non c'è**, e su questo il guardiano ha ragione: il censimento `AST` di `_coppia_interferenza` *(`:7434`)* trova ### **zero** letture di `phi`, `phi0`, `phivel`, e ### **`z` è PASSATO MA NON USATO** in quel ramo |
+| la dipendenza ### **INDIRETTA** | ### ⛔ **c'è.** `_passo_spinoriale` *(`:5432`)* legge `self.phi` alla riga ### **`:5986`** → `omega_clk` = coerenza d'arco → con `DEPARAM_OROLOGIO = True` è applicata come ### **fase globale `e^{−i·omega_clk·dt/2}`** e committata in `_psi_spinor` *(`:6111`)* |
+| come entra | ### **SOLO come fase comune `α`**, ### **non** nella direzione di Bloch, e con ### **un passo di ritardo** |
+
+### ⭐ **E IL CUORE DEL MECCANISMO REGGE COMUNQUE, per tre ragioni dal codice:** `A` usa
+### **`φ0` congelata**; la dipendenza è su una ### **storia integrata** e ritardata; e
+`omega_clk` è ### **uno scalare per nodo**, non il gradiente di un'energia in `φ_k`.
+### ➜ **Quindi `∂(coppia)/∂φ_k` non è zero, ma la coppia NON è `−∂E/∂φ` di nessuna energia** —
+ed è ### **questa** la proprietà che permette di pompare, non lo zero esatto.
+
+## ⛔ **`D1`: `LA COPPIA POMPA`**
+
+`P_coppia` nelle masse è ### **positiva in `230` passi su `230`** *(il `100 %`, soglia `80 %`)*
+e la somma è ### **`+564721.69`**; nel vuoto `229/230` e `+455660.71`.
+
+### ⚠ **E l'avevo dichiarato GIÀ NOTO prima di girare:** la voce `coppia` del bilancio di `H3`
+è un ### **multiplo POSITIVO** di `P_coppia`, ed era positiva in `230` passi su `230`.
+### **La corsa non lo SCOPRE: lo misura nell'unità giusta.**
+
+### ⭐ **E UNA DISTINZIONE CHE LA MISURA AGGIUNGE: LO SCUOTIMENTO NON FA LAVORO, INIETTA VARIANZA**
+
+| classe | varianza iniettata *(`Δs²`)* | lavoro ### **lineare** | quota quadratica |
+|---|--:|--:|--:|
+| VUOTO | `+73.13` | ### **`−0.41`** | ### **`99.4 %`** |
+| MASSE | `+9.65` | ### **`+0.06`** | ### **`99.4 %`** |
+
+### **Per un calcio CASUALE il lavoro lineare media a ZERO**, perché non è correlato con la
+velocità corrente. ### ➜ **La coppia è la POTENZA dominante** *(lavoro sistematico)*,
+### **lo scuotimento la SORGENTE DI VARIANZA dominante** *(scalda senza lavoro netto, come un
+bagno termico)*. ### ⛔ **Confrontarli come potenze inganna** — e questo ### **spiega**, non
+corregge, il `94 %` misurato in `H3`.
+
+### ✔ **E `P_termo` cambia segno al passo `49`**, come previsto *(positiva su `48` passi,
+negativa su `252`)*.
+
+## ⭐ **`D2`: LA COERENZA TIENE, MA IL CRITERIO (UNA CONGIUNZIONE) NON È SODDISFATTO**
+
+| | `B-SCAL` | controllo |
+|---|--:|--:|
+| AUC al `230` | ### **`0.9886`** | `0.9023` |
+| ### **AUC al `400`** | ### **`0.9020`** | ### **`0.4679`** |
+| coerenza di fase delle masse al `230` | ### **`0.8622`** | ### **`0.4565`** |
+| `E_cin` al `300` *(massimo passo comune col braccio `base`)* | ### **`19.0291`** | `16.3929` |
+
+### ✔ **LA PRIMA CLAUSOLA È SODDISFATTA con margine grande** *(`0.9020 >= 0.85`)*, e la
+coerenza delle masse è ### **quasi il DOPPIO** del controllo.
+### ⛔ **MA LA SECONDA NON LO È: l'energia è PIÙ ALTA, non più bassa.**
+### ➜ **Quindi il criterio, che è una congiunzione, NON è soddisfatto** — e lo dico invece di
+fermarmi alla clausola che mi conviene.
+
+> ### ⭐ **MA IL FATTO RESTA, ed è grosso: una coppia che LEGGE LA FASE CHE MUOVE tiene la
+> coerenza delle masse molto meglio, PUR lasciando il sistema più caldo.**
+> ### **La coerenza non è una questione di temperatura, e questo è il risultato che la corsa
+> aggiunge.**
+
+### ⛔ **E NON DECIDE LA CURA:** il ramo scalare usa ### **`cos(φ_k − φ_j)`**, non
+### **`cos((φ_k − φ_j)/2)`** della direzione candidata. ### **È un test sul PRINCIPIO.**
+
+## ✔ **I CONTROLLI, TUTTI MISURATI**
+
+| | |
+|---|---|
+| la verifica dell'intervento di `D2` | ### **`500` chiamate, `500` ripristini, `0` firme diverse** sulle otto chiavi spinoriali, `0` flag non ripristinati → ### **`_coppia_interferenza` è PURA** |
+| la ### **byte-inerzia** dell'osservatore | ### **`0`** differenze su ### **`291`** attributi, `220` passi ### **attraverso la prima nascita**, con `221` passi registrati e `220` col bilancio |
+| ### ⭐ **la RI-ESECUZIONE** del braccio `base` dal blob nuovo contro quello committato | ### **`301` passi in comune, ZERO differenze** su tutti i contatori ### **e su ogni voce del bilancio in entrambe le classi** |
+| il controllo del bilancio dell'energia | una coppia `−∂E/∂φ` chiude a ### **`2.55e-06`**; una ### **non** di gradiente a `1.18e-01` |
+
+### ⭐ **La ri-esecuzione chiude il caveat che avevo dichiarato DUE volte:** le modifiche allo
+strumento sono ### **byte-inerti per la fisica — misurato, non argomentato.**
+
+### ⛔ **E IL CASO CHE DEVE FALLIRE HA PRESO UN MIO ERRORE DI SEGNO:** la prima stesura del
+gradiente dava residuo ### **`2.00`** *(cioè `dE = +dt·P`, il verso opposto)*, e
+### **il caso «deve fallire» passava PER CASO su una base sbagliata: non discriminava niente.**
+
+**Previsioni: `11` confermate, `4` smentite su `15`.** ### **`PD-4` e `PD-5` sono smentite, ed
+è il pezzo che vale:** avevo previsto che una coppia che legge la fase ### **non bastasse** e
+che l'energia ### **calasse**. ### **Sbagliate entrambe, nella direzione informativa.**
+
+> ### ⛔ **NON COMINCIO LA CURA.** `SPINORE-SENZA-FASE` è aggiornata col verdetto e collegata ad
+> ### **`A14`, `A7` ed `ENERGIA-NON-DEFINITA`**, perché il pompaggio è confermato.
+> ### **La decisione è di Luca.**

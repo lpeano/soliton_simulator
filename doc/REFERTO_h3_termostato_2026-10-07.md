@@ -4,10 +4,11 @@
 
 | braccio | passi | stato | secondi | che cosa gli è stato fatto |
 |---|--:|---|--:|---|
-| `base` | 300 su 300 | ### ✔ **completo** | 1539.8 | ### **niente** — è la dinamica di sempre |
+| `base` | 300 su 300 | ### ✔ **completo** | 1605.3 | ### **niente** — è la dinamica di sempre |
 | `B-T` | 500 su 500 | ### ✔ **completo** | 2461.9 | ### **`xi_termo` azzerata prima di ogni `step`.** ### ⛔ **NON è un azzeramento del termostato:** lo step lo ### **RICALCOLA** dentro di sé, quindi resta ### **un passo di accumulo invece di tutti** — si chiama ### **«termostato senza memoria»** |
 | `B-S` | 500 su 500 | ### ✔ **completo** | 2403.9 | ### **`scuoti_vuoto` sostituita** con una funzione della stessa firma che ### **non fa niente** |
 | `B-TS` | 500 su 500 | ### ✔ **completo** | 1867.1 | ### **I DUE INSIEME:** `scuoti_vuoto` inerte ### **e** `xi_termo` azzerata. ### **Il sistema vive solo della sua energia iniziale e della dinamica interna.** ### ⚠ **Eredita da `B-T` il non essere un azzeramento del termostato** |
+| `B-SCAL` | 500 su 500 | ### ✔ **completo** | 2271.4 | ### **`D2`:** `_coppia_interferenza` prende il suo ### **RAMO SCALARE**, quello che dipende dalla ### **FASE CORRENTE** *(`z = e^{iφ}`)*. ### ⚠ **Il flag è spento SOLO durante la chiamata** e ripristinato in un `finally`: gira il ramo ### **del simulatore** |
 
 ### ✔ **I FLAG CHE RENDONO VALIDA LA RICOSTRUZIONE, letti a runtime e non assunti**
 
@@ -157,15 +158,15 @@ Lo step fa `xi += dt_scal·(err_rel − xi)/tau_termo` e poi `clip(−2, 2)`. ##
 
 > ### ⛔ **I CRITERI, FISSATI PRIMA** *(mandato di Luca)*: ### **`IL TERMOSTATO SCIOGLIE LE MASSE`** se in `B-T` l'AUC al `400` è ### **`>= 0.85`**; ### **`LO SCUOTIMENTO SCIOGLIE LE MASSE`** se in `B-S` l'AUC al `400` è ### **`>= 0.85`**. ### **Il controllo è la corsa di controllo di `A-S1`, che non si rigira.**
 
-| passo | AUC ### **`B-T`** | AUC ### **`B-S`** | AUC ### **`B-TS`** | AUC controllo *(`A-S1`)* |
-|--:|--:|--:|--:|--:|
-| `1` | ### **0.9992** | ### **0.9991** | ### **0.9991** | 0.9992 |
-| `50` | ### **0.9967** | ### **0.9967** | ### **0.9967** | 0.9966 |
-| `150` | ### **0.9598** | ### **0.8102** | ### **0.9225** | 0.9861 |
-| `230` | ### **0.4973** | ### **0.1574** | ### **0.1638** | 0.9023 |
-| `300` | ### **0.4946** | ### **0.3551** | ### **0.2031** | 0.7371 |
-| `400` | ### **0.4316** | ### **0.3796** | ### **0.4848** | 0.4679 |
-| `500` | ### **0.4686** | ### **0.4458** | ### **0.3831** | 0.4497 |
+| passo | AUC ### **`B-T`** | AUC ### **`B-S`** | AUC ### **`B-TS`** | AUC ### **`B-SCAL`** | AUC controllo *(`A-S1`)* |
+|--:|--:|--:|--:|--:|--:|
+| `1` | ### **0.9992** | ### **0.9991** | ### **0.9991** | ### **0.9992** | 0.9992 |
+| `50` | ### **0.9967** | ### **0.9967** | ### **0.9967** | ### **0.9964** | 0.9966 |
+| `150` | ### **0.9598** | ### **0.8102** | ### **0.9225** | ### **0.9958** | 0.9861 |
+| `230` | ### **0.4973** | ### **0.1574** | ### **0.1638** | ### **0.9886** | 0.9023 |
+| `300` | ### **0.4946** | ### **0.3551** | ### **0.2031** | ### **0.9604** | 0.7371 |
+| `400` | ### **0.4316** | ### **0.3796** | ### **0.4848** | ### **0.9020** | 0.4679 |
+| `500` | ### **0.4686** | ### **0.4458** | ### **0.3831** | ### **0.8243** | 0.4497 |
 
 > ### ✔ **`B-T`: AUC al `400` = 0.4316 `< 0.85` → `IL TERMOSTATO SCIOGLIE LE MASSE` ### NON è soddisfatto** *(controllo: 0.4679)*.
 
@@ -226,6 +227,108 @@ Lo step fa `xi += dt_scal·(err_rel − xi)/tau_termo` e poi `clip(−2, 2)`. ##
 
 ---
 
+---
+
+# `D1` ⭐ **LA POTENZA DELLA COPPIA: pompa o ridistribuisce?**
+
+> ### ⛔ **IL CRITERIO, FISSATO PRIMA** *(mandato di Luca)*: ### **`LA COPPIA POMPA`** se `P_coppia` nelle masse è ### **positiva in almeno l'`80 %`** dei passi `1..230` ### **E** la sua ### **somma** su quei passi è positiva; ### **`NON POMPA`** se quella somma è ### **`<= 0`**; fra i due ### **la curva.**
+
+Le tre potenze, nella ### **stessa unità** *(lavoro per unità di tempo proprio)*: ### **`P_coppia = Σ coppia_k·p1_k`** *(forza × velocità: la potenza vera)*, `P_termo = −xi·Σ p1²`, e ### ⚠ **`P_scuoti = Σ p0·Δscuoti/dt_n`, che è un ANALOGO DICHIARATO** — lo scuotimento è un ### **calcio additivo**, non una forza.
+
+## la classe ### **MASSE**
+
+| passo | ### **`P_coppia`** | `P_termo` | `P_scuoti` *(analogo)* | `\|coppia_k\|` mediana |
+|--:|--:|--:|--:|--:|
+| `1` | ### **153.81** | 4.79 | 0.02 | 20.5304 |
+| `10` | ### **142.93** | 53.95 | 83.78 | 0.4401 |
+| `25` | ### **491.29** | 163.60 | -285.51 | 0.5860 |
+| `50` | ### **1895.71** | -70.26 | 1244.39 | 1.0625 |
+| `100` | ### **4802.54** | -6987.01 | -3232.74 | 1.8329 |
+| `200` | ### **1563.14** | -5850.26 | 1186.17 | 0.8895 |
+| `300` | ### **890.30** | -14542.15 | 3857.27 | 0.7174 |
+
+| sui passi `1..230` | |
+|---|--:|
+| passi con `P_coppia` ### **positiva** | ### **230 su 230** *(100.00 %)* |
+| ### **somma di `P_coppia`** | ### **564721.69** |
+
+## la classe ### **VUOTO**
+
+| passo | ### **`P_coppia`** | `P_termo` | `P_scuoti` *(analogo)* | `\|coppia_k\|` mediana |
+|--:|--:|--:|--:|--:|
+| `1` | ### **-692.18** | 40.65 | 0.06 | 18.8240 |
+| `10` | ### **128.44** | 1461.04 | 1498.86 | 0.1727 |
+| `25` | ### **403.93** | 11664.39 | 11372.59 | 0.1948 |
+| `50` | ### **1319.94** | -5182.41 | -22231.67 | 0.2362 |
+| `100` | ### **1924.41** | -348347.42 | 77849.06 | 0.2410 |
+| `200` | ### **2721.08** | -194683.08 | -15157.70 | 0.3762 |
+| `300` | ### **12341.87** | -254480.24 | 46382.38 | 0.5145 |
+
+| sui passi `1..230` | |
+|---|--:|
+| passi con `P_coppia` ### **positiva** | ### **229 su 230** *(99.57 %)* |
+| ### **somma di `P_coppia`** | ### **455660.71** |
+
+> ### ⛔ **`LA COPPIA POMPA`.** `P_coppia` nelle masse è positiva nel ### **100.00 %** dei passi `1..230` *(soglia `80 %`)* ### **e la somma è 564721.69 `> 0`.**
+
+> ### ⚠ **E LO AVEVO DICHIARATO GIÀ NOTO PRIMA DI GIRARE:** la voce `coppia` del bilancio di `H3` è un ### **multiplo POSITIVO** di `P_coppia` *(`voce = (2/M_PH)·media(dt_n·coppia·p1)`, con `dt_n > 0`)*, ed era positiva in ### **`230` passi su `230`** nelle masse. ### **La corsa non lo SCOPRE: lo misura nell'unità giusta e lo mette accanto alle altre due potenze.**
+
+## ⭐ **E LO SCUOTIMENTO NON FA LAVORO: INIETTA VARIANZA**
+
+La voce `scuoti` del bilancio e' `media(2·p0·Δs + Δs²)`: il primo addendo e' il ### **lavoro LINEARE** *(cioe' `2·dt_n·P_scuoti`)*, il secondo e' la ### **VARIANZA iniettata.** ### ⛔ **E per un calcio CASUALE il lavoro lineare media a ZERO**, perche' il calcio ### **non e' correlato con la velocita' corrente.**
+
+| classe | somma `1..230` del ### **QUADRATICO** | del ### **LINEARE** | quota del quadratico |
+|---|--:|--:|--:|
+| VUOTO | ### **73.1294** | -0.4067 | ### **99.45 %** |
+| MASSE | ### **9.6478** | 0.0568 | ### **99.42 %** |
+
+> ### ⭐ **QUESTO RISOLVE L'APPARENTE CONTRADDIZIONE CON `H3`:** li' lo scuotimento faceva il ### **`94 %`** del riscaldamento; qui `P_scuoti` oscilla attorno a ### **zero**. ### **Non e' un disaccordo: sono DUE GRANDEZZE DIVERSE.** La coppia e' la ### **POTENZA** dominante *(fa lavoro SISTEMATICO)*, lo scuotimento la ### **SORGENTE DI VARIANZA** dominante *(scalda senza fare lavoro netto, come un bagno termico)*.
+
+> ### ⛔ **E CONFRONTARE `P_coppia` CON `P_scuoti` COME SE FOSSERO LA STESSA COSA INGANNEREBBE:** `P_scuoti` ### **sottostima sistematicamente** lo scuotimento, perche' una potenza ### **non vede il termine quadratico.** ### **Lo scrivo qui perche' chi legge la tavola delle potenze lo deve sapere PRIMA di confrontare le colonne.**
+
+> ### ⭐ **E `P_termo` CAMBIA SEGNO, come in `H3`:** positiva *(rifornisce)* su ### **48** passi, negativa *(frena)* su ### **252**, e il primo passo negativo è il ### **`49`**.
+
+---
+
+# `D2` ⭐ **UNA COPPIA CHE LEGGE LA FASE: il ramo SCALARE**
+
+> ### ⛔ **DA DICHIARARE, e il mandato lo impone:** il ramo scalare usa ### **`cos(φ_k − φ_j)`**, ### **NON `cos((φ_k − φ_j)/2)`** come nella direzione candidata di Luca. ### **È un test sul PRINCIPIO** *(una coppia che dipende dalla fase che muove)*, ### **NON sulla forma finale: un esito positivo NON decide la cura.**
+
+> ### ⛔ **I CRITERI, FISSATI PRIMA:** ### **`UNA COPPIA CHE LEGGE LA FASE TIENE LE MASSE`** se l'AUC al `400` è ### **`>= 0.85`** ### **E** l'energia totale al `500` è ### **minore** che nel controllo; ### **`NON BASTA`** se l'AUC al `400` è ### **`< 0.6`**; fra i due la curva ### **e il confronto al passo `230`.**
+
+### ✔ **LA VERIFICA DELL'INTERVENTO — MISURATA, non promessa**
+
+| | |
+|---|--:|
+| chiamate a `_coppia_interferenza` | ### **500** |
+| ripristini del flag | ### **500** |
+| ### **firme del settore spinoriale DIVERSE** *(prima/dopo)* | ### **0** |
+| flag NON ripristinato | ### **0** |
+
+> ### ✔ **`chiamate == ripristini`, ZERO firme diverse, ZERO flag non ripristinati.** ### ⭐ **Quindi `_coppia_interferenza` è PURA, e spegnere un flag intorno a lei NON PUÒ toccare nient'altro che il valore restituito** — ### **ed è la misura che il mandato chiede al posto delle parole.**
+
+| | `B-SCAL` | controllo |
+|---|--:|--:|
+| AUC al `230` | ### **0.9886** | 0.9023 |
+| ### **AUC al `400`** | ### **0.9020** | 0.4679 |
+| `E_cin` al `1` | 0.15631 | — |
+| ### **`E_cin` al `500`** | ### **25.40616** | ### ⛔ **ASSENTE** *(il controllo di `A-S1` non registra `E_cin`)* |
+| ### **`E_cin` al `300`** *(il massimo passo comune col braccio `base`)* | ### **19.02911** | ### **16.39289** |
+
+| | valore | il controllo |
+|---|--:|--:|
+| ### **coerenza di fase delle masse al `230`** | ### **0.8622** | 0.4565 |
+
+> ### ⭐ **AUC al `400` = 0.9020, cioe' `>= 0.85`: LA PRIMA CLAUSOLA E' SODDISFATTA, e con un margine grande** *(il controllo sta a 0.4679)*.
+
+> ### ⛔ **MA LA SECONDA NON LO E': l'energia NON e' minore.** Al passo `300` vale ### **19.0291** contro ### **16.3929** del braccio `base` -- cioe' il sistema e' ### **PIU' CALDO**, non piu' freddo.
+
+> ### ⚠ **QUINDI IL CRITERIO, CHE E' UNA CONGIUNZIONE, NON E' SODDISFATTO** -- e lo dico invece di fermarmi alla clausola che mi conviene. ### ⭐ **MA IL FATTO RESTA, ed e' grosso: una coppia che LEGGE LA FASE CHE MUOVE tiene la coerenza delle masse MOLTO meglio, pur lasciando il sistema PIU' CALDO.** ### **La coerenza non e' una questione di temperatura, e questo e' il risultato che la corsa aggiunge.**
+
+> ### ⛔ **E NON DECIDE LA CURA, per la ragione dichiarata in testa alla sezione:** il ramo scalare usa `cos(phi_k - phi_j)`, ### **non `cos((phi_k - phi_j)/2)`** della direzione candidata di Luca. ### **E' un test sul PRINCIPIO. La decisione e' di Luca.**
+
+---
+
 # ⭐ **LE MIE PREVISIONI, CONTRO I NUMERI**
 
 | | la previsione | il numero | esito |
@@ -240,8 +343,13 @@ Lo step fa `xi += dt_scal·(err_rel − xi)/tau_termo` e poi `clip(−2, 2)`. ##
 | `PTS-3` | l'energia totale ### **CRESCE** ma `~10 x` meno del controllo *(previsto `~1.2` al `230` contro `13.57`)* | da `0.1563` a ### **3.9526**; e al `230` il controllo e' `3.4 x` piu' caldo | ### ✔ **CONFERMATA** |
 | `PTS-4` | la coerenza di fase delle masse al `230` sara' ### **`< 0.3`**, quindi il criterio del bagno NON scatta | ### **0.2178** | ### ✔ **CONFERMATA** |
 | `PTS-5` | ### **NON divergera'** entro `500` passi, e ### **non si congelera'** | passi con `phivel` non finiti: ### **0**; stato: ### **DATI SALVATI** | ### ✔ **CONFERMATA** |
+| `PD-1` | ### ⛔ **`LA COPPIA POMPA`**, con margine larghissimo. ### ⚠ **DICHIARATA GIA' NOTA** prima di girare: era nei dati di `H3` | nelle masse: positiva nel ### **100.00 %** dei passi `1..230`, somma ### **564721.69** | ### ✔ **CONFERMATA** |
+| `PD-2` | `P_coppia` nelle masse ### **dello stesso ordine** di `P_scuoti` nelle masse, e ### **molto piu' piccola** di `P_scuoti` nel vuoto | al passo `230`: `\|P_coppia\|` masse ### **1140.25**, `\|P_scuoti\|` masse 1553.56, `\|P_scuoti\|` vuoto 19826.70 | ### ✔ **CONFERMATA** |
+| `PD-3` | `P_termo` cambiera' ### **SEGNO** attorno al passo `49` | primo passo negativo: ### **`49`** *(positiva su 48 passi, negativa su 252)* | ### ✔ **CONFERMATA** |
+| `PD-4` | ### ⚠ **`D2` dara' `NON BASTA`: AUC al `400` `< 0.6`** *(il ramo scalare cambia la COPPIA, non la scena, e `A` resta `w*cos(phi0_i - phi0_j)` con `phi0` CONGELATA)* | AUC al `400` in `B-SCAL`: ### **0.9020** *(controllo 0.4679)* | ### ⛔ **SMENTITA, ed e' il risultato piu' importante: una coppia che legge la fase TIENE le masse** |
+| `PD-5` | ma l'energia totale in `D2` sara' ### **MINORE** che nel controllo | ### ⚠ **il controllo di `A-S1` NON registra `E_cin`**, quindi il confronto e' col braccio `base` al ### **massimo passo comune, il `300`**: `B-SCAL` ### **19.0291** contro `base` ### **16.3929** | ### ⛔ **SMENTITA** |
 
-> ### **8 confermate, 2 SMENTITE** su 10.
+> ### **11 confermate, 4 SMENTITE** su 15.
 
 ---
 
