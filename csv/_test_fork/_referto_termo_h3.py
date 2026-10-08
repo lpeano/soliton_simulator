@@ -607,6 +607,51 @@ def main():
               "### **%s**, sotto la soglia dell'`80 %%`. ### **Si riporta la curva.**"
               % (n4(_d1_som, 2), pct(_q)))
         A("")
+    # --- ### ⭐ **LO SCUOTIMENTO NON FA LAVORO: INIETTA VARIANZA.**
+    #   La voce `scuoti` del bilancio e' `media(2*p0*Ds + Ds^2)`: il primo addendo e' il
+    #   ### **LAVORO LINEARE** *(cioe' `2*dt_n*P_scuoti`)*, il secondo e' la
+    #   ### **VARIANZA iniettata.** ### ⛔ **E per un calcio CASUALE il lavoro lineare
+    #   media a ZERO**, perche' il calcio non e' correlato con la velocita' corrente.
+    #   ### ✔ **Si misura, e risolve l'apparente contraddizione con `H3`:** la coppia e'
+    #   la ### **POTENZA** dominante, lo scuotimento la ### **SORGENTE DI VARIANZA**
+    #   dominante -- ### **due cose diverse, e confrontarle come potenze INGANNA.**
+    A("## ⭐ **E LO SCUOTIMENTO NON FA LAVORO: INIETTA VARIANZA**")
+    A("")
+    A("La voce `scuoti` del bilancio e' `media(2·p0·Δs + Δs²)`: il primo addendo e' il "
+      "### **lavoro LINEARE** *(cioe' `2·dt_n·P_scuoti`)*, il secondo e' la "
+      "### **VARIANZA iniettata.** ### ⛔ **E per un calcio CASUALE il lavoro lineare media a "
+      "ZERO**, perche' il calcio ### **non e' correlato con la velocita' corrente.**")
+    A("")
+    A("| classe | somma `1..230` del ### **QUADRATICO** | del ### **LINEARE** | quota del quadratico |")
+    A("|---|--:|--:|--:|")
+    for cl in ("vuoto", "masse"):
+        _sq = _sl = 0.0
+        _n = 0
+        for k in [x for x in _kk if x <= 230]:
+            v = (pb[k].get("per_classe") or {}).get(cl) or {}
+            if v.get("scuoti") is None or v.get("rms_d_scuoti") is None:
+                continue
+            _q = v["rms_d_scuoti"] ** 2
+            _sq += _q
+            _sl += v["scuoti"] - _q
+            _n += 1
+        if _n:
+            A("| %s | ### **%s** | %s | ### **%s** |"
+              % (cl.upper(), n4(_sq, 4), n4(_sl, 4),
+                 pct(abs(_sq) / max(abs(_sq) + abs(_sl), 1e-30))))
+    A("")
+    A("> ### ⭐ **QUESTO RISOLVE L'APPARENTE CONTRADDIZIONE CON `H3`:** li' lo scuotimento "
+      "faceva il ### **`94 %`** del riscaldamento; qui `P_scuoti` oscilla attorno a ### **zero**. "
+      "### **Non e' un disaccordo: sono DUE GRANDEZZE DIVERSE.** La coppia e' la "
+      "### **POTENZA** dominante *(fa lavoro SISTEMATICO)*, lo scuotimento la "
+      "### **SORGENTE DI VARIANZA** dominante *(scalda senza fare lavoro netto, come un bagno "
+      "termico)*.")
+    A("")
+    A("> ### ⛔ **E CONFRONTARE `P_coppia` CON `P_scuoti` COME SE FOSSERO LA STESSA COSA "
+      "INGANNEREBBE:** `P_scuoti` ### **sottostima sistematicamente** lo scuotimento, perche' "
+      "una potenza ### **non vede il termine quadratico.** ### **Lo scrivo qui perche' chi "
+      "legge la tavola delle potenze lo deve sapere PRIMA di confrontare le colonne.**")
+    A("")
     # --- il segno di `P_termo`
     _st = [(k, (pb[k].get("per_classe") or {}).get("vuoto", {}).get("P_termo")) for k in _kk]
     _st = [(k, x) for k, x in _st if x is not None]
