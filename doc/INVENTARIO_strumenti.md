@@ -2010,10 +2010,10 @@ coppia ### **sintetica** asimmetrica a `1.463e-02` *(**discrimina**)*; la coppia
 
 | | |
 |---|---|
-| **file** | `csv/_test_fork/_doc_traduzione.py` *(1074 righe)* |
+| **file** | `csv/_test_fork/_doc_traduzione.py` *(1481 righe)* |
 | **COMANDO** | `python csv/_test_fork/_doc_traduzione.py` |
 | **cosa misura** | ### **niente: GENERA `doc/TRADUZIONE_IN_H.md`** dai quattro json, perche' ogni numero del documento ### **esca da un'uscita** e non da una mano *(`L-NUMERI`)* |
-| **BLOB** | `61c9c636` |
+| **BLOB** | `e3a4afd7` |
 
 **Esito:** `67` regole di nascita su `2` eventi, e fra le loro `26` classi
 ### **NESSUNA si chiama «il genitore cede»** ⇒ `Σρ` ### **cresce** a ogni nascita *(la
@@ -2054,10 +2054,10 @@ porta `Σρ` a ### **`+0.0886 %`**; la candidata `ψ → ψ/√2` la conserva ##
 
 | | |
 |---|---|
-| **file** | `csv/_test_fork/_censimento_pos.py` *(255 righe)* |
+| **file** | `csv/_test_fork/_censimento_pos.py` *(339 righe)* |
 | **COMANDO** | `python csv/_test_fork/_censimento_pos.py` |
 | **cosa misura** | ### **chi legge `pos`**, per FORMA e non per nome *(piu' `cKDTree`, `cdist` e le altre forme che la presuppongono)*: per ### **funzione**, con la ### **riga** e la ### **GUARDIA**; e per ### **legge**, chiudendo il grafo dalla sua ancora e distinguendo ### **DIRETTO** da ### **INDIRETTO** |
-| **BLOB** | `a4d826b8` |
+| **BLOB** | `d678c876` |
 
 **Esito:** ### **`22` funzioni** leggono `pos` *(`66` occorrenze)*; ### **`14` leggi su `20`**
 la leggono *(`13` DIRETTO, `1` INDIRETTO)*.
@@ -2071,3 +2071,33 @@ la leggono *(`13` DIRETTO, `1` INDIRETTO)*.
 > stessa:** l'ancora di quelle leggi e' `step`, ### **una funzione lunghissima**, quindi il
 > grafo attribuiva a tutte la stessa lettura. ### **Senza la guardia la tavola avrebbe detto
 > il falso** — e il numero vero e' ### **molto migliore** di come appariva.
+
+### 🔬 IL TETTO PER NODO e LA LUNGHEZZA MINIMA *(2026-10-08)*
+
+| | |
+|---|---|
+| **file** | `csv/_test_fork/_tetto_e_lam.py` *(223 righe)* |
+| **COMANDO** | `python csv/_test_fork/_tetto_e_lam.py` |
+| **cosa misura** | `(1)` la ### **cascata CON un tetto per nodo** `C`, ### **scandito** *(l'unita' di stato e' APERTA: `C` non si sceglie)*: se il collasso su un nodo resta il piu' basso, e a che livello la cascata si ferma; `(2)` il ### **censimento di `LAM` come limite di lunghezza**, per FORMA, con la riga, se la lunghezza e' la `d` ### **relazionale** o viene da `pos` *(`A17`)*, e se e' un ### **TAGLIO**, un ### **CANCELLO** o un'### **ENERGIA** |
+| **BLOB** | `d23944bf` |
+
+**Esito `(1)`:** il collasso su un nodo e' ### **VIETATO per ogni `C < 400`**, e il tetto alza
+il minimo del fattore `N/C`. ### ⭐ **Le due fermate sono DIVERSE, e il discrimine e' un numero:
+`ρ = 25.0`** — sopra prevale ### **il calore** *(e la barriera non lavora)*, sotto prevale
+### **il tetto** *(e la materia resta compressa)*.
+
+**Esito `(2)`:** `27` punti in cui `LAM` e' un limite; `5` su una lunghezza ### **relazionale**,
+### **`1`** su qualcosa calcolato da `pos`, e ### **`0`** scritti come `2*LAM`.
+
+> ### ⭐ **E IL `2·LAM` NON E' UN SECONDO PARAMETRO: E' DERIVATO.** In `decidi_divisione`
+> l'arco si ### **spezza in due**, quindi ### **ognuno dei due tronconi** deve essere `≥ LAM`;
+> con `FRAZ_NASCITA = 0.5` la congiunzione si riduce a `0.5·d ≥ LAM`, cioe' ### **`d ≥ 2·LAM`
+> AL BIT**. ### **`2·LAM` e' `LAM` applicata AI FIGLI**, e il flag `MITOSI_2LAM` e'
+> ### **INERTE** dal commit `6b`.
+
+> ### ⚠ **DUE DIFETTI MIEI IN FILA SU QUESTO STRUMENTO, dichiarati:** il primo criterio era
+> `"pos" in riga`, che prendeva un ### **falso positivo** *(`pos = prima > 0.0`, un booleano
+> LOCALE)*; la correzione l'ho scritta con un regex i cui escape sono passati dalla shell e
+> ### **`\b` e' diventato un BACKSPACE `\x08`**, quindi il regex ### **non poteva funzionare**
+> e il conto tornava `0` ### **per un motivo sbagliato.** ### ➜ **Ora: sole sottostringhe,
+> nessun escape.**

@@ -32,9 +32,12 @@ RADICE = os.path.dirname(os.path.dirname(_QUI))
 sys.path.insert(0, os.path.join(RADICE, "csv"))
 import _presidio                                             # noqa: E402
 _presidio.avvia(__file__)
+import _cli_flag                                             # noqa: E402
 
-# ESENTE-H-P5: non importa il simulatore e non lo fa girare. Legge il SORGENTE con l'AST, e
-# non c'e' nessuna configurazione di modulo da dichiarare: il risultato non dipende dai flag.
+# ### ⚠ **L'ESENZIONE E' DECADUTA, e lo dichiaro:** dal 2026-10-08 questo strumento
+# ### CARICA il modulo passando dall'argv del DRIVER, perche' deve dire se una guardia e'
+# ### ACCESA -- e <<una violazione dietro un flag spento non e' viva>>. Quindi dichiara la
+# ### configurazione INTERA come ogni misura (`P5`), e NON e' piu' esente.
 SIM = os.path.join(RADICE, "soliton_simulator.py")
 PROTO = os.path.join(RADICE, "proto_primo_ordine", "proto.py")
 FUORI = os.path.join(_QUI, "_censimento_pos")
@@ -67,6 +70,27 @@ LEGGI = [
 
 # ### le forme che PRESUPPONGONO `pos`, anche senza nominarla
 PRESUPPONGONO = ("cKDTree", "KDTree", "cdist", "distance_matrix", "ConvexHull")
+
+# ### I TRE GRUPPI *(classificazione chiesta da Luca, 2026-10-08)*. ### ⚠ **E' un GIUDIZIO
+# ### MIO sul RUOLO della funzione, non una misura**, e si dichiara: l'appartenenza si legge
+# ### dal nome e dal contesto, non da un test.
+RENDERING = ("update", "_render_vista_rete_sola", "rilassa_disegno", "campo_spaziale")
+DIAGNOSTICA = ("batch_condensazione", "_diag_completa", "_ordine", "_gusci_esterni",
+               "_regione_centrale", "_picchi_nuovi", "classifica_topologia")
+INIZIALI = ("semina", "_semina_lam", "_semina_masse_coerenti", "_celle_vive")
+NASCITA = ("_rn_sch_pos", "_rn_div_pos")
+
+
+def gruppo(nome):
+    if nome in RENDERING:
+        return "RENDERING"
+    if nome in DIAGNOSTICA:
+        return "DIAGNOSTICA"
+    if nome in INIZIALI:
+        return "CONDIZIONI INIZIALI"
+    if nome in NASCITA:
+        return "EREDITA' ALLA NASCITA"
+    return "LEGGE FISICA"
 
 
 def stampa(s=""):
@@ -156,12 +180,20 @@ def chiusura(funzioni, radice):
 
 def main():
     os.makedirs(FUORI, exist_ok=True)
+    # ### ⛔ **LO STATO DEI FLAG SI LEGGE DAL DRIVER, non dai default del modulo:** una
+    # ### violazione dietro un flag ### **spento** non e' viva. Si passa da
+    # ### `_cli_flag.argv_del_driver()`, che esegue il TESTO del driver fino a
+    # ### `S._applica_flag(a)` e CATTURA la sys.argv che il driver ha costruito.
+    import contextlib
+    with contextlib.redirect_stdout(io.StringIO()):
+        S, argv_driver = _cli_flag.argv_del_driver()
     sorgente = io.open(SIM, encoding="utf-8").read()
     albero, funz = funzioni_di(sorgente)
     riga("=")
     stampa("IL CENSIMENTO DI `pos` -- chi legge il DISEGNO (A17)")
     riga("=")
     stampa("  sorgente: %d righe, %d funzioni" % (len(sorgente.split(NL)), len(funz)))
+    _cli_flag.dichiara_configurazione(S, stampa)
 
     # ---------------------------------------------- tutte le letture, per funzione
     per_funzione = {}
@@ -182,6 +214,56 @@ def main():
         stampa("    %-30s %2d occorr.  righe %s  [%s]  guardie: %s"
                % (k, len(v), ",".join(str(b) for _, b in v[:5]), ",".join(quali),
                   ",".join(gg) if gg else "(nessuna)"))
+
+    # ---------------------------------------------- LE GUARDIE, CON LO STATO NEL DRIVER
+    riga("=")
+    stampa("LE GUARDIE DELLA TAVOLA `pos`, CON LO STATO NEL DRIVER")
+    stampa("### <<Una violazione dietro un flag SPENTO non e' viva>>")
+    riga("=")
+    tutte = sorted(set(x for L in guardie.values() for g in L.values() for x in g))
+    stato_g = {}
+    for k in tutte:
+        v = getattr(S, k, "(assente)")
+        acceso = bool(v) if v != "(assente)" else None
+        stato_g[k] = {"valore": v, "acceso": acceso,
+                      "nell_argv": ("--" + k.lower().replace("_", "-")) in argv_driver}
+        stampa("  %-18s valore EFFETTIVO %-8s -> %s   %s"
+               % (k, repr(v), "### ACCESO" if acceso else "spento",
+                  "(passato nell'argv)" if stato_g[k]["nell_argv"] else ""))
+
+    # ---------------------------------------------- LA GRAVITA' E `pozzo_grafo`
+    riga("=")
+    stampa("LA GRAVITA' LEGGE `pos`? -- `pozzo_grafo` e la cura `POZZO_D` (D02)")
+    riga("=")
+    _pd = getattr(S, "POZZO_D", None)
+    _gb = getattr(S, "GRAV_BIFASE", None)
+    pozzo = {"POZZO_D_effettivo": _pd, "GRAV_BIFASE_effettivo": _gb,
+             "pozzo_d_nell_argv": "--pozzo-d" in argv_driver,
+             "righe_pos_in_pozzo_grafo": [b for _, b in
+                                          per_funzione.get("pozzo_grafo", [])]}
+    stampa("  `pozzo_grafo` legge `pos` alle righe: %s"
+           % (",".join(str(b) for b in pozzo["righe_pos_in_pozzo_grafo"]) or "(nessuna)"))
+    stampa("  `GRAV_BIFASE` effettivo: %r   `POZZO_D` effettivo: %r" % (_gb, _pd))
+    stampa("  `--pozzo-d` nell'argv del driver: %s" % pozzo["pozzo_d_nell_argv"])
+    if _pd:
+        stampa("  ### -> LA VIOLAZIONE **NON E' VIVA**: `POZZO_D` e' ACCESO nel driver, quindi")
+        stampa("  ###    `L` viene da `self.d` e NON da `|pos_j - pos_i|`. ### LA CURA (D02)")
+        stampa("  ###    E' GIA' ATTIVA.")
+    else:
+        stampa("  ### -> LA VIOLAZIONE E' VIVA: `POZZO_D` e' SPENTO, quindi `L` viene da `pos`.")
+    pozzo["viva"] = not bool(_pd)
+
+    # ---------------------------------------------- I TRE GRUPPI
+    riga("=")
+    stampa("LA CLASSIFICAZIONE IN TRE GRUPPI (chiesta da Luca) -- e il quarto che ho trovato")
+    riga("=")
+    per_gruppo = {}
+    for k in per_funzione:
+        per_gruppo.setdefault(gruppo(k), []).append(k)
+    for gg in ("LEGGE FISICA", "RENDERING", "DIAGNOSTICA", "CONDIZIONI INIZIALI",
+               "EREDITA' ALLA NASCITA"):
+        L = sorted(per_gruppo.get(gg, []))
+        stampa("  %-22s %2d  %s" % (gg, len(L), " ".join(L)))
 
     # ---------------------------------------------- per LEGGE
     riga("=")
@@ -240,6 +322,8 @@ def main():
         stampa("      riga %4d: %s" % (ln, r[:84]))
 
     d = {"per_funzione": {k: [[a, b] for a, b in v] for k, v in per_funzione.items()},
+         "gruppi": {k: sorted(v) for k, v in per_gruppo.items()},
+         "stato_guardie": stato_g, "pozzo": pozzo, "argv_driver": list(argv_driver),
          "per_legge": esiti,
          "prototipo": {"funzioni": {k: [[a, b] for a, b in v] for k, v in rp.items()},
                        "righe_euclidee": [[ln, r] for ln, r in eucl]}}

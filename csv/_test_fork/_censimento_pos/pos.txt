@@ -2,6 +2,12 @@
 IL CENSIMENTO DI `pos` -- chi legge il DISEGNO (A17)
 ========================================================================================================
   sorgente: 13335 righe, 244 funzioni
+====================================================================================================
+LA CONFIGURAZIONE INTERA (`P5`) -- non i flag toccati, TUTTI
+====================================================================================================
+  booleani di modulo confrontati con l'argv del DRIVER: 82
+  -> IN CONFIGURAZIONE DEL DRIVER: nessuna differenza. ZERO su 82.
+
   FUNZIONI che leggono `pos` o una forma che la presuppone: 22  (66 occorrenze)
 
     batch_condensazione            16 occorr.  righe 12092,12179,12181,12826,12827  [cKDTree,pos]  guardie: (nessuna)
@@ -26,6 +32,33 @@ IL CENSIMENTO DI `pos` -- chi legge il DISEGNO (A17)
     pozzo_grafo                     1 occorr.  righe 9165  [pos]  guardie: POZZO_D
     _regione_centrale               1 occorr.  righe 12820  [pos]  guardie: (nessuna)
     _picchi_nuovi                   1 occorr.  righe 12920  [pos]  guardie: (nessuna)
+========================================================================================================
+LE GUARDIE DELLA TAVOLA `pos`, CON LO STATO NEL DRIVER
+### <<Una violazione dietro un flag SPENTO non e' viva>>
+========================================================================================================
+  COPPIA_MIT         valore EFFETTIVO 1.0      -> ### ACCESO   
+  GRAV_BIFASE        valore EFFETTIVO True     -> ### ACCESO   
+  K_SYNC             valore EFFETTIVO 1.0      -> ### ACCESO   
+  LS_AZIM            valore EFFETTIVO False    -> spento   
+  POZZO_D            valore EFFETTIVO True     -> ### ACCESO   (passato nell'argv)
+  VIRIALE            valore EFFETTIVO True     -> ### ACCESO   (passato nell'argv)
+========================================================================================================
+LA GRAVITA' LEGGE `pos`? -- `pozzo_grafo` e la cura `POZZO_D` (D02)
+========================================================================================================
+  `pozzo_grafo` legge `pos` alle righe: 9165
+  `GRAV_BIFASE` effettivo: True   `POZZO_D` effettivo: True
+  `--pozzo-d` nell'argv del driver: True
+  ### -> LA VIOLAZIONE **NON E' VIVA**: `POZZO_D` e' ACCESO nel driver, quindi
+  ###    `L` viene da `self.d` e NON da `|pos_j - pos_i|`. ### LA CURA (D02)
+  ###    E' GIA' ATTIVA.
+========================================================================================================
+LA CLASSIFICAZIONE IN TRE GRUPPI (chiesta da Luca) -- e il quarto che ho trovato
+========================================================================================================
+  LEGGE FISICA            6  _allaccia chiralita_core_locale memoria_hebbiana_moto mitosi pozzo_grafo step
+  RENDERING               4  _render_vista_rete_sola campo_spaziale rilassa_disegno update
+  DIAGNOSTICA             7  _diag_completa _gusci_esterni _ordine _picchi_nuovi _regione_centrale batch_condensazione classifica_topologia
+  CONDIZIONI INIZIALI     3  _semina_lam _semina_masse_coerenti semina
+  EREDITA' ALLA NASCITA   2  _rn_div_pos _rn_sch_pos
 ========================================================================================================
 PER LEGGE: la legge <<legge pos>>? -- chiudendo il grafo dalla sua ANCORA
 ========================================================================================================

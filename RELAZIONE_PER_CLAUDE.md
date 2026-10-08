@@ -10410,3 +10410,35 @@ decisione `10` avevo proposto `ξ = 1/√(|g|ρ)` come estensione del vuoto loca
 una LUNGHEZZA, e una lunghezza presuppone un metro.** In forma relazionale va espressa in
 ### **numero di ARCHI**. La candidata non cambia, ### **cambia l'unità** — e senza `A17`
 l'avrei lasciata ambigua.
+
+## LA DEGENERAZIONE, LA LUNGHEZZA MINIMA E LA COERENZA — *e il discrimine è un numero* (2026-10-08)
+
+**`⑪` LA DEGENERAZIONE.** Il tetto per nodo ### **vieta** il collasso su un nodo per ogni
+`C < 400`, e alza il minimo del fattore `N/C` *(con `C = 25`: `16` volte)*. ### ⭐ **E le due
+fermate — il calore e il tetto — sono DIVERSE, con un discrimine misurato: `ρ = 25.0` per
+nodo.** Sopra prevale il calore *(e la barriera ### **non lavora**)*; sotto prevale il tetto
+*(e la materia ### **resta compressa**)* — ### **due regimi fisici diversi.** ### ⛔ **E quale
+sia il nostro dipende dall'UNITÀ DI STATO, che è aperta:** con la candidata che mi sembra più
+naturale *(`ρ₁ = λ_max/|g|`, l'unica scala che la `H` stessa definisce)* `C = 2.2598`, quindi
+### **prevale il tetto**, e la materia resterebbe a ### **`11` volte** la capacità.
+
+**`⑫` LA LUNGHEZZA MINIMA.** `27` punti, `5` relazionali, ### **`1`** da `pos`, e
+### **`0`** scritti come `2*LAM`. ### ⭐ **Perché il `2·LAM` non è un secondo parametro: è
+DERIVATO** — l'arco si spezza in due, quindi ### **ognuno dei tronconi** deve stare sopra `LAM`,
+e con `FRAZ_NASCITA = 0.5` questo è `d ≥ 2·LAM` ### **al bit**.
+
+**`⑬` LA COERENZA.** Quattro tensioni, e ### **nessuna la risolvo**:
+### **`T1`** *«la nascita conserva»* ### **RESTRINGE `A14.2`**, non la conferma — col margine
+zero il bilancio ### **ammette anche la fusione**, quindi l'irreversibilità resta un
+### **postulato in più**; ### **`T2`** un serbatoio, ### **tre usi**, che possono mancare l'uno
+all'altro *(e l'ipotesi più interessante è che siano ### **lo stesso processo**)*;
+### **`T3`** il vuoto locale è relazionale ### **solo in parte** *(`ξ` è una lunghezza)*;
+### **`T4`** le due fermate. Più quattro ### **dipendenze**, da cui esce un ordine di lavoro:
+### **unità di stato → vuoto locale relazionale → geometria in `H` → l'aggancio come misura.**
+
+### ⭐ **E l'integrazione `A17` ha prodotto due correzioni, misurate:** `VIRIALE` e `POZZO_D`
+sono ### **ACCESI** nel driver *(non spenti)*, perché l'argv li passa — quindi
+### **la violazione di `pos` nella gravità NON è viva: la cura `D02` è già attiva.**
+### ⚠ **Ma il DEFAULT del modulo è `POZZO_D = False`**, cioè chi importa il simulatore senza il
+driver ha la gravità che legge `pos`: ### **per `A17` quel default è sbagliato**, ed è una
+decisione di Luca.

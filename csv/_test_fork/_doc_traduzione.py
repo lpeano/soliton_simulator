@@ -168,6 +168,7 @@ def main():
     v2 = leggi("proto_primo_ordine/uscite/diagnosi_v2.json")
     bil = leggi("csv/_test_fork/_bilancio_nascita/bilancio.json")
     pos = leggi("csv/_test_fork/_censimento_pos/pos.json")
+    tl = leggi("csv/_test_fork/_tetto_e_lam/tetto_e_lam.json")
     POS = {x["legge"]: x for x in pos["per_legge"]}
     e = {x["legge"]: x for x in itg["esiti"]}
     # ### LA DICHIARAZIONE `P5` SI LEGGE DALL'USCITA dello strumento che ha misurato, e si
@@ -997,6 +998,81 @@ def main():
       "### ➜ **Allora `rilassa_disegno` resta, ma SOLO per il disegno** — che e' cio' che "
       "`A17` ammette |")
     A("")
+    A("## `⑩.1-bis` ### ⭐ **LE GUARDIE, CON LO STATO NEL DRIVER** — *«una violazione "
+      "dietro un flag SPENTO non e' viva»*")
+    A("")
+    A("### ⛔ **Letto DAL DRIVER** *(`_cli_flag.argv_del_driver`)*, ### **non dai default del "
+      "modulo** — ed e' la differenza che conta:")
+    A("")
+    A("| guardia | valore ### **EFFETTIVO** | | passata nell'argv? |")
+    A("|---|--:|---|---|")
+    for k in sorted(pos["stato_guardie"]):
+        v = pos["stato_guardie"][k]
+        A("| `%s` | `%s` | %s | %s |"
+          % (k, v["valore"], "### ⛔ **ACCESO**" if v["acceso"] else "### ✔ spento",
+             "### **sì**" if v["nell_argv"] else "no *(è il default)*"))
+    A("")
+    A("> ### ⚠ **E DUE CORREZIONI A QUANTO MI ERA STATO DATO, misurate:** `VIRIALE` e "
+      "`POZZO_D` risultano ### **ACCESI**, non spenti — ### **perche' il driver li PASSA "
+      "nell'argv** *(`--viriale`, `--pozzo-d`)*, mentre il ### **default del modulo** e' "
+      "`False`. ### ➜ **Le due letture non si scelgono: si riconciliano, e la riconciliazione "
+      "e' esattamente la regola «i flag dal driver, non dai default».**")
+    A("")
+    A("### ⭐ **E LA GRAVITA'? `pozzo_grafo` legge `pos` alla riga `%s` — MA LA VIOLAZIONE "
+      "NON E' VIVA**" % ",".join(str(b) for b in pos["pozzo"]["righe_pos_in_pozzo_grafo"]))
+    A("")
+    A("| | |")
+    A("|---|---|")
+    A("| la legge gravitazionale | `GRAV_BIFASE` = `%s`: ### **ACCESA** |"
+      % pos["pozzo"]["GRAV_BIFASE_effettivo"])
+    A("| `pozzo_grafo` usa `L = \|pos_j − pos_i\|` | ### **solo se `POZZO_D` e' SPENTO** |")
+    A("| `POZZO_D` nel driver | `%s` — ### ⛔ **ACCESO**, e ### **passato nell'argv** "
+      "*(`--pozzo-d`)* |" % pos["pozzo"]["POZZO_D_effettivo"])
+    A("| ### ➜ **quindi** | ### ✔ **`L` viene da `self.d`, NON da `pos`. LA CURA (`D02`) E' "
+      "GIA' ATTIVA**, e la violazione ### **non e' viva nella configurazione del driver** |")
+    A("")
+    A("> ### ⚠ **MA RESTA UN DIFETTO, e non lo nascondo:** il ### **default del modulo** e' "
+      "`POZZO_D = False`, cioe' ### **chi importa il simulatore senza il driver ha la gravita' "
+      "che legge `pos`.** ### ➜ **La cura esiste ma NON e' il default**, e per `A17` il default "
+      "### **e' sbagliato**. ### **Questa e' una decisione di Luca** *(ribaltare il default)*, "
+      "non una cosa che faccio io.")
+    A("")
+    A("## `⑩.1-ter` ### ⭐ **LE `%d` FUNZIONI CHE LEGGONO `pos`, IN QUATTRO GRUPPI**"
+      % len(pos["per_funzione"]))
+    A("")
+    A("### ⚠ **I gruppi sono un GIUDIZIO MIO sul RUOLO della funzione, non una misura**, e lo "
+      "dichiaro. ### **Luca ne chiedeva tre: il quarto l'ho trovato classificando.**")
+    A("")
+    A("| gruppo | quante | le funzioni | ### **`A17` lo ammette?** |")
+    A("|---|--:|---|---|")
+    GR = [("LEGGE FISICA", "### ⛔ **NO: VIOLA `A17`**"),
+          ("RENDERING", "### ✔ **SI**, `A17.3` lo ammette *(il disegno)*"),
+          ("DIAGNOSTICA", "### ✔ **SI**, `A17.3` lo ammette *(l'analisi)*"),
+          ("CONDIZIONI INIZIALI", "### ❓ **E' LA DOMANDA PER LUCA**, qui sotto"),
+          ("EREDITA' ALLA NASCITA", "### ⛔ **NO**: `pos` del nato ### **si eredita**, e "
+                                    "un'eredita' di `pos` e' `pos` in una legge di crescita")]
+    for gg, amm in GR:
+        L = pos["gruppi"].get(gg, [])
+        A("| ### **%s** | ### **%d** | %s | %s |"
+          % (gg, len(L), " ".join("`%s`" % x for x in L), amm))
+    A("")
+    A("> ### ❓ **LA DOMANDA PER LUCA, e non la decido:** `semina`, `_semina_lam` e "
+      "`_semina_masse_coerenti` costruiscono la ### **topologia iniziale DAL DISEGNO** — punti "
+      "in una palla, a distanza euclidea `≥ LAM`, e poi gli archi. ### **Una scena iniziale "
+      "costruita dal disegno e' ammessa da `A17`, o va costruita in modo relazionale?**")
+    A("> | | |")
+    A("> |---|---|")
+    A("> | ### **l'argomento PER ammetterla** | una condizione iniziale ### **non e' una "
+      "legge**: `A17` parla di *«ogni legge che determina un comportamento»*, e una scena di "
+      "partenza ### **non determina un comportamento: lo INIZIA** |")
+    A("> | ### ⛔ **l'argomento CONTRO** | la scena iniziale fissa ### **quali nodi sono "
+      "vicini**, e quella topologia ### **sopravvive per tutta la corsa** — quindi `pos` "
+      "### **decide** qualcosa che la fisica poi usa per sempre. ### **E `_allaccia` ha lo "
+      "stesso difetto DENTRO la dinamica**, dove invece e' chiaramente vietato |")
+    A("> | ### **che cosa cambierebbe** | se va costruita in modo relazionale, serve una "
+      "### **topologia dichiarata** *(un reticolo, un grafo `k`-regolare, un espansore)* — "
+      "### **che e' la candidata `(1)` del `⑩.2`** |")
+    A("")
     A("## `⑩.2` ### ⛔ **NEL PROTOTIPO — `A17` lo dichiara violato, e il censimento CONFERMA**")
     A("")
     A("| | |")
@@ -1044,6 +1120,337 @@ def main():
       "fino all'orologio |")
     A("| ### ✔ **`4` il Kuramoto dal centro di massa** | ### **gia' deciso: cade** |")
     A("| ### ⚠ **`5` il prototipo** | ### **violato da subito**, e dichiarato nell'assioma |")
+    A("")
+    tt = tl["tetto"]
+    A("# ⭐ `⑪` **LA DEGENERAZIONE — i dettagli della decisione `(C)`**")
+    A("")
+    A("## `⑪.1` **DA DOVE EMERGE: due regole RELAZIONALI, e nessun volume** *(`A17`)*")
+    A("")
+    A("| | la regola | perche' e' relazionale |")
+    A("|---|---|---|")
+    A("| ### **`1`** | la ### **CAPACITA' DEL NODO:** `ψ_k ∈ C²` ha ### **due componenti**, "
+      "quindi ### **al piu' DUE STATI per nodo** *(immagine di Pauli; lo spin `½` dalla "
+      "### **doppia copertura** a `4π`)* | e' una proprieta' ### **DELLO STATO**, non dello "
+      "spazio |")
+    A("| ### **`2`** | la ### **LUNGHEZZA MINIMA SUGLI ARCHI:** `d_ij ≥ LAM` *(`A13`)*, o "
+      "`2·LAM` in certi casi — ### ⛔ **sulla `d` RELAZIONALE, MAI su `\|pos_i − pos_j\|`** | "
+      "`d` e' una ### **relazione d'arco** |")
+    A("")
+    A("### ⛔ **E NIENTE VOLUME, NIENTE DIMENSIONE** *(`A17.3`)*: ### **niente `2/LAM³`, "
+      "niente `ρ^(5/3)`.** La forma di Chandrasekhar presuppone ### **uno spazio di dimensione "
+      "`3`**, che qui ### **non c'e'**.")
+    A("")
+    A("## `⑪.2` ### ⭐ **IL VINCOLO DI COERENZA: la capacita' sta DENTRO `H`, come BARRIERA "
+      "PER NODO**")
+    A("")
+    A("### ⛔ **NON solo come effetto delle nascite**, e il motivo e' un numero: se il freno "
+      "fosse ### **solo** «capacita' + nascite», quando il calore si esaurisce — ### **e si "
+      "esaurisce, al livello `%d`** — ### **le nascite si fermano e NON RESTA NESSUN FRENO.**"
+      % tt["livello_calore"])
+    A("")
+    A("| con la barriera in `H` | |")
+    A("|---|---|")
+    A("| la ### **degenerazione** | ### **tiene SEMPRE** |")
+    A("| la ### **nascita** | ### **ALLEGGERISCE quando il calore la paga** |")
+    A("| se il calore ### **non basta** | la materia ### **resta compressa al limite SENZA "
+      "COLLASSARE** |")
+    A("")
+    A("### ⚠ **UNA CAUTELA DICHIARATA:** ### **Pauli NON emerge da solo** in un campo come "
+      "questo. La doppia copertura e' ### **necessaria ma NON sufficiente** per la statistica "
+      "di Fermi. ### ➜ **La barriera e' derivata dalla STRUTTURA** *(due componenti, `LAM`)*, "
+      "### **NON dalla statistica** — e chiamarla «Pauli» e' un'### **ANALOGIA**, non una "
+      "derivazione.")
+    A("")
+    A("## `⑪.3` ### ⛔ **IL PUNTO APERTO: L'UNITA' DI STATO** — *quante `ρ` vale UNO stato*")
+    A("")
+    A("### **«Due stati per nodo» NON e' un numero finche' non si sa quanto vale uno stato.** "
+      "Le candidate, ### **tutte relazionali** *(`A1`: derivate, non scelte)*:")
+    A("")
+    A("| | la candidata | ### **relazionale?** | che cosa da' |")
+    A("|---|---|---|---|")
+    A("| ### **`(1)`** | ### **la densita' media:** `ρ₁ = Σρ/n = 1` per la normalizzazione | "
+      "### ⚠ **sì, ma e' una CONVENZIONE**, non una derivazione: `Σρ = n` l'ho scelto io | "
+      "`C = 2` |")
+    A("| ### ⭐ **`(2)`** | ### **dove la non linearita' pareggia l'hopping:** `\|g\|ρ₁ = "
+      "λ_max`, cioe' `ρ₁ = λ_max/\|g\|` | ### ✔ **sì, e DERIVATA:** `λ_max` e' una proprieta' "
+      "### **spettrale del grafo**, `g` e' nella `H`. ### **Nessun numero scelto** | "
+      "`ρ₁ = %.4f`, ### **`C = %.4f`** |"
+      % (5.6494 / 5.0, 2.0 * 5.6494 / 5.0))
+    A("| ### **`(3)`** | la ### **norma del solitone discreto piu' piccolo** che `H` sostiene | "
+      "### ✔ **sì**, e' una soluzione di `H` | ### **non calcolata** |")
+    A("| ### **`(4)`** | la ### **doppia copertura:** un giro di `4π` della fase = uno stato | "
+      "### ✔ **sì** *(la fase si legge da `ψ`)*, ed e' quella che lega allo ### **spin `½`** | "
+      "### ⛔ **da' un conto di FASE, non una `ρ`** |")
+    A("")
+    A("> ### ⭐ **QUALE MI SEMBRA LA PIU' NATURALE, e NON la decido: la `(2)`.** E' l'unica "
+      "scala che ### **la `H` stessa definisce**, ed e' il punto dove la non linearita' "
+      "### **smette di essere trascurabile** — che e' esattamente la soglia che il `MARE v2` "
+      "aveva trovato ingovernabile. ### ⛔ **La decisione e' di Luca.**")
+    A("")
+    A("## `⑪.4` ### ⭐ **IL CONFRONTO ARITMETICO: la cascata CON il tetto**")
+    A("")
+    A("### **`(a)` IL COLLASSO SU UN NODO RESTA LO STATO PIU' BASSO?** Con un tetto `C` per "
+      "nodo, un nodo solo e' ammesso ### **solo se `C ≥ N = %.0f`**; altrimenti la norma deve "
+      "stare su almeno `N/C` nodi e `H_min = −w·(archi) + (g/2)·N·C`:" % tt["N"])
+    A("")
+    A("| `C` | nodi minimi | `H_min` *(senza hopping)* | `H`(un nodo) | ### **un nodo "
+      "ammesso?** |")
+    A("|--:|--:|--:|--:|---|")
+    for x in tt["tabella_a"]:
+        A("| `%.1f` | `%.1f` | `%.1f` | `%.1f` | %s |"
+          % (float(x["C"]), float(x["nodi_minimi"]), float(x["H_min"]),
+             float(x["H_un_nodo"]),
+             "### **sì**" if x["un_nodo_ammesso"] in (True, "True") else "### ⛔ **NO**"))
+    A("")
+    A("### ➜ **NO: per ogni `C < %.0f` il collasso su un nodo e' VIETATO.** Lo stato piu' "
+      "basso diventa *«la norma sul MINIMO numero di nodi che il tetto consente»*, cioe' "
+      "### **esattamente «compressa al limite senza collassare»**. ### ⭐ **E il tetto alza il "
+      "minimo del fattore `N/C`:** con `C = 25` passa da `%.1f` a `%.1f`, ### **`16` volte piu' "
+      "alto.**" % (tt["N"], 0.5 * tt["g"] * tt["N"] * tt["N"], 0.5 * tt["g"] * tt["N"] * 25.0))
+    A("")
+    A("### **`(b)` A CHE LIVELLO SI FERMA LA CASCATA, E QUALE LIMITE PREVALE?**")
+    A("")
+    A("| `C` | livello richiesto dal ### **tetto** | il ### **calore** ne paga | ### **quale "
+      "PREVALE** |")
+    A("|--:|--:|--:|---|")
+    for x in tt["tabella_b"]:
+        A("| `%.1f` | `%s` | `%s` | %s |"
+          % (float(x["C"]), x["livello_tetto"], x["livello_calore"],
+             "il ### **CALORE**" if x["prevale"] == "calore" else "### ⛔ **IL TETTO**"))
+    A("")
+    A("> ### ⭐ **I DUE LIMITI DANNO FERMATE DIVERSE, E IL DISCRIMINE E' UN NUMERO: "
+      "`ρ = %.1f` per nodo**, cioe' dove il calore si esaurisce." % tt["rho_calore"])
+    A("> | | |")
+    A("> |---|---|")
+    A("> | se `C ≥ %.1f` | prevale ### **IL CALORE**: le nascite si fermano ### **prima** che "
+      "il tetto morda, la materia resta a `ρ = %.1f` ### **senza toccare il tetto** — e la "
+      "barriera ### **NON lavora** |" % (tt["rho_calore"], tt["rho_calore"]))
+    A("> | se `C < %.1f` | prevale ### **IL TETTO**: il calore ### **NON basta** a frammentare "
+      "quanto il tetto chiede, quindi ### **la materia resta COMPRESSA AL LIMITE** — ed e' "
+      "### **esattamente il terzo caso di Luca** |" % tt["rho_calore"])
+    A("")
+    A("> ### ⛔ **E CON LA CANDIDATA CHE MI SEMBRA PIU' NATURALE, `(2)`, PREVALE IL TETTO:** "
+      "`C = %.4f`, che e' ### **ben sotto `%.1f`** — il tetto chiederebbe `8` livelli e il "
+      "calore ne paga `%d`. ### ➜ **Quindi la materia resterebbe compressa a `ρ = %.1f`, cioe' "
+      "### **`%.0f` volte** la capacita'. ### ⚠ **La barriera dovrebbe fare MOLTO lavoro**, e "
+      "questa e' una ### **PREVISIONE**, non una misura."
+      % (2.0 * 5.6494 / 5.0, tt["rho_calore"], tt["livello_calore"], tt["rho_calore"],
+         tt["rho_calore"] / (2.0 * 5.6494 / 5.0)))
+    A("")
+    A("# ⭐ `⑫` **LA LUNGHEZZA MINIMA NEL CODICE** — *censita per FORMA*")
+    A("")
+    A("| | |")
+    A("|---|--:|")
+    A("| punti in cui `LAM` e' un ### **limite di lunghezza** | ### **`%d`** |" % len(tl["lam"]))
+    A("| su una lunghezza ### **RELAZIONALE** *(`d`, `d0`)* | `%d` |"
+      % sum(1 for x in tl["lam"] if x["relazionale"]))
+    A("| ### ⛔ **su qualcosa calcolato da `pos`** *(`A17`)* | ### **`%d`** |"
+      % sum(1 for x in tl["lam"] if x["da_pos"]))
+    A("| scritti come `2*LAM` | ### **`%d`** — *e il perche' e' qui sotto* |"
+      % sum(1 for x in tl["lam"] if x["due_lam"]))
+    A("")
+    A("### ⭐ **PERCHE' IN CERTI CASI E' `2·LAM` — E NON E' UN SECONDO PARAMETRO.** Il "
+      "censimento trova ### **ZERO** occorrenze di `2*LAM`, e la ragione e' che ### **il `2` "
+      "non e' scritto: e' DERIVATO.** In `decidi_divisione` *(righe `8677`-`8678`)*:")
+    A("")
+    A("```")
+    A("_sx = FRAZ_NASCITA * d >= LAM          # il troncone verso `a`")
+    A("_dx = (1 - FRAZ_NASCITA) * d >= LAM    # il troncone verso `b`")
+    A("```")
+    A("")
+    A("### ➜ **L'arco si SPEZZA IN DUE, quindi OGNUNO DEI DUE TRONCONI deve essere `≥ LAM`** — "
+      "e con `FRAZ_NASCITA = 0.5` la congiunzione si riduce a `0.5·d ≥ LAM`, cioe' "
+      "### **`d ≥ 2·LAM` AL BIT** *(moltiplicare per `0.5` e `2.0` e' esatto in `IEEE-754`)*. "
+      "### ⭐ **Quindi `2·LAM` NON e' una soglia in piu': e' `LAM` applicata AI FIGLI.** "
+      "### ✔ **E il flag `MITOSI_2LAM` e' INERTE dal commit `6b`:** il comportamento e' "
+      "### **sempre acceso**.")
+    A("")
+    A("### **E LA FORMA DI OGNI LIMITE: TAGLIO, CANCELLO o ENERGIA — col candidato al primo "
+      "ordine**")
+    A("")
+    A("| forma | quanti | ### **che cos'e' oggi** | ### **il candidato al primo ordine** |")
+    A("|---|--:|---|---|")
+    forme = {}
+    for x in tl["lam"]:
+        forme.setdefault(x["tipo"], []).append(x)
+    CAND = {"CANCELLO": "### **CANCELLO SULLA NASCITA** — resta un cancello, ma solo nella "
+                        "### **regola di crescita**, dove un sì/no e' legittimo",
+            "PAVIMENTO": "### ⛔ **DEVE DIVENTARE UNA BARRIERA D'ENERGIA su `d`**: un "
+                         "pavimento e' un ### **taglio a senso unico**, cioe' una freccia "
+                         "*(`A14.2`)*, e al primo ordine non e' ammesso",
+            "TETTO": "### ⛔ **come il pavimento: barriera d'energia**",
+            "TAGLIO": "### ⛔ **barriera d'energia**"}
+    for k in sorted(forme, key=lambda x: -len(forme[x])):
+        cand = next((v for kk, v in CAND.items() if k.startswith(kk)), "—")
+        A("| `%s` | ### **%d** | %s | %s |" % (k, len(forme[k]), k.split("(")[0].strip(), cand))
+    A("")
+    A("### ⚠ **E IL PUNTO GIA' NOTO, confermato:** `_nasce` ### **rialza a `LAM` gli archi "
+      "corti** *(`np.maximum(v, LAM)`)* — e' la ### **freccia `7`** di `FRECCE-IMPOSTE` e la "
+      "voce `SCHW-SOTTO-LAM`. ### ➜ **Al primo ordine quel `maximum` non puo' restare: "
+      "diventa un CANCELLO che VIETA la nascita** *(se il figlio starebbe sotto `LAM`, "
+      "### **non nasce**)*, ### **invece di farlo nascere e poi spostarlo.**")
+    A("")
+    A("### ⛔ **E L'UNICO `pos` RESTATO: `_celle_vive`** *(riga `4856`, "
+      "`np.linalg.norm(sp) <= LAM`)* — e sta nelle ### **CONDIZIONI INIZIALI**, cioe' nel "
+      "gruppo su cui ### **c'e' la domanda aperta per Luca** *(`⑩.1-ter`)*.")
+    A("")
+    A("> ### ⚠ **E DUE DIFETTI MIEI IN FILA SU QUESTO CENSIMENTO, entrambi dichiarati:** il "
+      "primo criterio era `\"pos\" in riga`, che prendeva un ### **falso positivo** *(riga "
+      "`6547`: `pos = prima > 0.0`, un booleano ### **LOCALE** che si chiama `pos`)*; la sua "
+      "correzione l'ho scritta con un regex i cui escape sono passati dalla shell, e "
+      "### **`\\b` e' diventato un BACKSPACE `\\x08`** — quindi il regex ### **non poteva "
+      "funzionare** e il conto tornava `0` ### **per un motivo sbagliato.** ### ➜ **Ora il "
+      "criterio e' fatto di sole sottostringhe, senza nessun escape**, e il numero vero e' "
+      "### **`1`**.")
+    A("")
+    A("# ⛔ `⑬` **LA REVIEW DI COERENZA DELLE TRE DECISIONI PRESE**")
+    A("")
+    A("> ### ⛔ **NON risolvo le tensioni: le ELENCO, con la decisione di Luca che ciascuna "
+      "richiede.**")
+    A("")
+    A("## `⑬.1` **UNA PER UNA, contro gli assiomi e i fatti misurati**")
+    A("")
+    A("| | ### **`(A)` il calore paga la nascita** | ### **`(B)` la sincronizzazione si "
+      "toglie** | ### **`(C)` il freno e\' la `(c)`** |")
+    A("|---|---|---|---|")
+    A("| `A1` *(la legge, non il numero)* | ### ✔ **coerente, e migliora:** la soglia e\' "
+      "### **un bilancio**, non un numero | ### ✔ **coerente:** toglie `K_SYNC`, che e\' una "
+      "scala senza derivazione | ### ⚠ **coerente SOLO SE l\'unita\' di stato e\' derivata:** "
+      "finche\' e\' aperta, *«due stati»* ### **non e\' un numero** |")
+    A("| `A13` *(`d ≥ LAM`)* | — | — | ### ✔ **ci si APPOGGIA:** e\' una delle due regole da "
+      "cui la degenerazione emerge |")
+    A("| `A14.1` *(nessuna scrittura dall\'esterno)* | ### ✔ **e\' la cura:** toglie il "
+      "### **bagno globale** | ### ✔ **coerente:** toglie un forzante | — |")
+    A("| `A14.2` *(la crescita e\' l\'unica freccia)* | ### ⛔ **TENSIONE `T1`** *(qui sotto)* | "
+      "### ✔ **coerente** | ### ⛔ **TENSIONE `T4`:** i `%d` ### **pavimenti** su `LAM` sono "
+      "tagli a senso unico, cioe\' frecce |"
+      % sum(1 for x in tl["lam"] if x["tipo"].startswith("PAVIMENTO")))
+    A("| `A14.3` *(conserva la quantita\' di campo)* | ### ✔ **con `ψ → ψ/√2`:** `Σρ` "
+      "### **al bit** | — | — |")
+    A("| `A15.3` *(scambio col vuoto)* | ### ✔ **E\' esattamente `A15.3`** | ### ✔ **ci si "
+      "appoggia:** l\'aggancio cede l\'eccesso al vuoto | ### ✔ **il freno vero ci si appoggia** |")
+    A("| `A16.1` *(uno stato per nodo)* | — | ### ✔ | ### ✔ **la capacita\' VIENE da `ψ ∈ C²`** |")
+    A("| `A16.2` *(primo ordine)* | ### ✔ | ### ✔ **e\' il motivo:** l\'aggancio e\' una "
+      "### **proprieta\' dello stato stazionario** | ### ⛔ **DIPENDENZA `D1`:** serve la "
+      "geometria dinamica dentro `H` *(decisione `9 (a)`)* |")
+    A("| `A16.3` *(memorie dentro `H`)* | — | ### ✔ **il Kuramoto e\' un flusso di gradiente, "
+      "e `A16.3` non lo ammette** | ### ✔ **la barriera E\' dentro `H`**, non un effetto |")
+    A("| `A16.4` *(la nascita conserva)* | ### ✔ **e\' il punto** | — | — |")
+    A("| `A17.1-2` *(solo relazioni)* | ### ⛔ **TENSIONE `T3`:** il ### **vuoto locale** non "
+      "e\' ancora definito in modo relazionale | ### ✔ **MIGLIORA `A17`:** togliendo `K_SYNC` "
+      "spariscono ### **`9` delle `13`** letture di `pos` | ### ✔ **due regole relazionali, "
+      "`0` volumi** |")
+    A("| `A17.3` *(`pos` e\' rendering)* | ### ⚠ **`ξ` e\' una LUNGHEZZA:** va in "
+      "### **numero di archi** | ### ✔ **toglie il centro di massa** | ### ✔ **`d` e\' "
+      "relazionale** |")
+    A("| `A17.4` *(gli strumenti non sono fisica)* | — | — | — |")
+    A("| i ### **FATTI MISURATI** | ### ✔ `381466.2` liberata contro `199600.0` richiesta; "
+      "### ⛔ **ma `164 → 0` dice che oggi paga il BAGNO** | ### ✔ asimmetria `1.0641`; "
+      "`AUC400` `0.9394 → 0.9333` | ### ✔ il `MARE v2` dice che ### **senza freno si collassa**; "
+      "il tetto ### **alza il minimo di `16` volte** |")
+    A("")
+    A("## `⑬.2` ### ⛔ **LE TENSIONI, e la decisione che ciascuna richiede**")
+    A("")
+    A("### ⛔ **`T1` — «LA NASCITA CONSERVA L\'ENERGIA» RESTRINGE `A14.2`, non la conferma.**")
+    A("")
+    A("### **La domanda era: e\' coerente con `A14.2` o lo restringe?** ### ➜ **LO "
+      "RESTRINGE**, e il motivo e\' il margine zero: se il `ΔH` della nascita e\' "
+      "### **esattamente** il calore che la concentrazione ha liberato, allora il bilancio "
+      "e\' ### **simmetrico nel tempo** — ### **la fusione di due nodi restituirebbe "
+      "esattamente quel calore**, e sarebbe ### **permessa dall\'energia.**")
+    A("")
+    A("| | |")
+    A("|---|---|")
+    A("| ### ➜ **la conseguenza** | ### **l\'irreversibilita\' della crescita NON segue dal "
+      "bilancio energetico:** il bilancio, da solo, ### **ammette anche il verso contrario.** "
+      "### ⛔ **Quindi `A14.2` resta un POSTULATO IN PIU\'**, non un teorema del conto |")
+    A("| ### **la decisione che richiede** | ### ⛔ **DI LUCA:** `A14.2` e\' *(`a`)* un "
+      "### **assioma** che vieta la fusione per decreto; oppure *(`b`)* c\'e\' "
+      "### **un\'asimmetria da trovare** *(entropica, o nella contabilita\' del vuoto)* che la "
+      "renda un teorema. ### **Non lo decido io** |")
+    A("")
+    A("### ⛔ **`T2` — UN SERBATOIO, TRE USI: possono mancare l\'uno all\'altro.**")
+    A("")
+    A("### **La domanda era: il calore che paga le nascite e quello che serve all\'aggancio "
+      "degli orologi possono mancare l\'uno all\'altro?** ### ➜ **SI\', e il margine misurato "
+      "e\' ZERO.**")
+    A("")
+    A("| | |")
+    A("|---|---|")
+    A("| i tre usi | `(A)` la ### **nascita**; `(B)` l\'### **aggancio degli orologi**; `(C)` "
+      "il ### **freno vero** |")
+    A("| ### ⛔ **il conflitto** | sono ### **lo STESSO serbatoio**, e il bilancio chiude "
+      "### **esattamente**: se l\'aggancio consuma l\'eccesso, ### **per la nascita non "
+      "resta niente** — e viceversa |")
+    A("| ### ⚠ **e non e\' simmetrico** | l\'aggancio e\' un fatto ### **dello stato "
+      "stazionario**, cioe\' avviene ### **mentre** il sistema scende; la nascita e\' un "
+      "### **evento**. ### **Chi arriva prima prende** |")
+    A("| ### **la decisione che richiede** | ### ⛔ **DI LUCA:** *(`a`)* una ### **priorita\'** "
+      "dichiarata; *(`b`)* la contabilita\' del vuoto ### **separata per uso**; oppure *(`c`)* "
+      "l\'ipotesi che siano ### **LO STESSO processo** *(l\'aggancio E\' il modo in cui il "
+      "calore si rende disponibile)*. ### ⭐ **La `(c)` mi sembra la piu\' interessante, e NON "
+      "la decido** |")
+    A("")
+    A("### ⛔ **`T3` — IL «VUOTO LOCALE» NON E\' ANCORA RELAZIONALE** *(`A17`)*.")
+    A("")
+    A("### **La domanda era: «vuoto locale» e la sua estensione sono definiti in modo "
+      "relazionale?** ### ➜ **IN PARTE.**")
+    A("")
+    A("| | ### **relazionale?** |")
+    A("|---|---|")
+    A("| l\'### **intorno** come insieme di nodi del ### **grafo** | ### ✔ **sì** |")
+    A("| i ### **vicini diretti** come estensione | ### ✔ **sì**, per costruzione |")
+    A("| ### **la grandezza contabile** *(`H` ristretta all\'intorno meno il profilo "
+      "stazionario)* | ### ⚠ **la FORMA sì, ma la sottrazione NON E\' SCRITTA** |")
+    A("| ### ⛔ **`ξ = 1/√(\|g\|ρ)`** come estensione | ### ⛔ **NO: e\' una LUNGHEZZA**, e una "
+      "lunghezza presuppone un metro. Va espressa in ### **NUMERO DI ARCHI** |")
+    A("| ### **la decisione che richiede** | ### ⛔ **DI LUCA:** l\'estensione e\' *(`a`)* i "
+      "### **vicini diretti** *(relazionale subito, ma e\' un numero fisso: `1` passo)*; "
+      "oppure *(`b`)* una ### **scala derivata convertita in passi di grafo** — e allora serve "
+      "### **come si converte**, che e\' `Z47` |")
+    A("")
+    A("### ⛔ **`T4` — LE DUE FERMATE SONO DIVERSE, E PREVALE LA PIU\' STRETTA.**")
+    A("")
+    A("### **La domanda era: la cascata che si ferma al livello `%d` e il tetto per nodo danno "
+      "due fermate diverse, e quale prevale?** ### ➜ **SI\', sono diverse, e il discrimine e\' "
+      "`ρ = %.1f`** *(il `⑪.4`)*." % (tt["livello_calore"], tt["rho_calore"]))
+    A("")
+    A("| | |")
+    A("|---|---|")
+    A("| ### **prevale la piu\' STRETTA** | se `C ≥ %.1f` prevale ### **il calore** *(e la "
+      "barriera NON lavora)*; se `C < %.1f` prevale ### **il tetto** *(e la materia resta "
+      "compressa)* |" % (tt["rho_calore"], tt["rho_calore"]))
+    A("| ### ⛔ **e quale sia dipende dall\'UNITA\' DI STATO, che e\' APERTA** | con la "
+      "candidata `(2)` — la piu\' naturale — ### **`C = %.4f`, quindi prevale IL TETTO** |"
+      % (2.0 * 5.6494 / 5.0))
+    A("| ### ⚠ **la tensione vera** | ### **le due fermate non sono due versioni della stessa "
+      "cosa:** la fermata ### **del calore** lascia la materia ### **lontana dal tetto**, "
+      "quella ### **del tetto** la lascia ### **premuta contro**. ### ➜ **Sono due REGIMI "
+      "FISICI diversi**, e quale sia il nostro ### **non e\' deciso** |")
+    A("| ### **la decisione che richiede** | ### ⛔ **DI LUCA: l\'unita\' di stato** — perche\' "
+      "### **e\' lei a scegliere il regime** |")
+    A("")
+    A("## `⑬.3` **LE DIPENDENZE** *(non tensioni: ordini di lavoro)*")
+    A("")
+    A("| | la dipendenza | ### **perche\'** |")
+    A("|---|---|---|")
+    A("| ### **`D1`** | `(C)` ### **richiede** la decisione `9 (a)` *(geometria hamiltoniana "
+      "in `(d, p_d)`)* | `d_ij ≥ LAM` come ### **barriera d\'energia** ha senso solo se `d` ha "
+      "una dinamica che ### **sente** la barriera. ### **Gia\' nota e dichiarata** |")
+    A("| ### **`D2`** | `(B)` ### **richiede** `(A)` | l\'aggancio emerge ### **cedendo "
+      "l\'eccesso al vuoto locale**, e il vuoto locale e\' definito in `(A)` — ### **che e\' "
+      "aperto** |")
+    A("| ### **`D3`** | `(A)` e `(C)` ### **richiedono** l\'### **unita\' di stato** | senza "
+      "di essa ne\' la capacita\' ne\' il regime sono numeri |")
+    A("| ### **`D4`** | tutte e tre ### **richiedono** che il ### **vuoto locale sia "
+      "RELAZIONALE** *(`A17`)* | altrimenti la cura di `A16` reintroduce `pos` ### **dal lato "
+      "del vuoto** |")
+    A("")
+    A("> ### ⭐ **E L\'ORDINE CHE NE ESCE, che non e\' una mia preferenza ma la chiusura delle "
+      "dipendenze:** ### **`1`** l\'unita\' di stato *(`D3`)* → ### **`2`** il vuoto locale in "
+      "forma relazionale *(`D4`, `T3`)* → ### **`3`** la geometria dentro `H` *(`D1`)* → "
+      "### **`4`** l\'aggancio come misura *(`D2`)*. ### ⛔ **E `T1` sta FUORI da quest\'ordine: "
+      "e\' una questione di assiomi, non di lavoro.**")
     A("")
     A("# ⛔ **CHE COSA QUESTO DOCUMENTO NON DICE**")
     A("")

@@ -62,7 +62,6 @@ commit**: cosi' non se ne accumulano di invisibili.)*
 | `csv/_seal_fork/_z43_cura2_patch.py|H-P8` | un FALSO POSITIVO, e lo nomino invece di riformularlo. L occorrenza di |
 | `csv/_test_fork/_bilancio_nascita.py|H-P5` | non importa il simulatore e non lo fa girare. E' aritmetica sui numeri gia' |
 | `csv/_test_fork/_calcio_sotto_scambio.py|H-P3` | la frazione del CONTROLLO si cambia su una COPIA DEL SORGENTE, non |
-| `csv/_test_fork/_censimento_pos.py|H-P5` | non importa il simulatore e non lo fa girare. Legge il SORGENTE con l'AST, e |
 | `csv/_test_fork/_confronto_blob_misure.py|H-P5` | non importa il simulatore e non lo fa girare. Legge due referti json |
 | `csv/_test_fork/_confronto_previsione.py|H-P5` | non costruisce nessuna scena e non carica il simulatore: legge i `json` di un run |
 | `csv/_test_fork/_controlli_mzd.py|H-P5` | non importa il simulatore e non lo fa girare. Confronta i `json` di corse che |
@@ -85,6 +84,7 @@ commit**: cosi' non se ne accumulano di invisibili.)*
 | `csv/_test_fork/_referto_tetto.py|H-P5` | non importa il simulatore e non lo fa girare. Legge il `json` di una corsa che |
 | `csv/_test_fork/_scomposizione_tratti.py|H-P5` | non costruisce nessuna scena e non carica il simulatore. Legge i `misura.json` di un |
 | `csv/_test_fork/_tetto_causale_tempo.py|H-P3` | la misura NON configura il modulo a mano -- la scena passa TUTTA dal CLI |
+| `csv/_test_fork/_tetto_e_lam.py|H-P5` | non importa il simulatore e non lo fa girare. La parte `1` e' aritmetica sui |
 | `csv/_test_fork/_tors_w8_lunga.py|H-P5` | dichiara la configurazione INTERA con `_cli_flag.dichiara_configurazione`, ma |
 | `csv/_test_fork/_tratti_cammino.py|H-P5` | non costruisce nessuna scena e non carica il simulatore. Il `--collaudo` gira su |
 | `csv/_test_fork/_v1_ripetizione.py|H-P5` | confronta due `misura.json` gia' prodotti, ciascuno da un run che ha dichiarato la |
