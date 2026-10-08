@@ -321,9 +321,27 @@ La voce `scuoti` del bilancio e' `media(2·p0·Δs + Δs²)`: il primo addendo e
 
 > ### ⭐ **AUC al `400` = 0.9020, cioe' `>= 0.85`: LA PRIMA CLAUSOLA E' SODDISFATTA, e con un margine grande** *(il controllo sta a 0.4679)*.
 
-> ### ⛔ **MA LA SECONDA NON LO E': l'energia NON e' minore.** Al passo `300` vale ### **19.0291** contro ### **16.3929** del braccio `base` -- cioe' il sistema e' ### **PIU' CALDO**, non piu' freddo.
+> ### ⛔ **MA LA SECONDA NON LO E': l'energia GLOBALE non e' minore.** Al passo `300` vale ### **19.0291** contro ### **16.3929** del braccio `base`.
 
-> ### ⚠ **QUINDI IL CRITERIO, CHE E' UNA CONGIUNZIONE, NON E' SODDISFATTO** -- e lo dico invece di fermarmi alla clausola che mi conviene. ### ⭐ **MA IL FATTO RESTA, ed e' grosso: una coppia che LEGGE LA FASE CHE MUOVE tiene la coerenza delle masse MOLTO meglio, pur lasciando il sistema PIU' CALDO.** ### **La coerenza non e' una questione di temperatura, e questo e' il risultato che la corsa aggiunge.**
+> ### ⚠ **QUINDI IL CRITERIO, CHE E' UNA CONGIUNZIONE, NON E' SODDISFATTO** -- e lo dico invece di fermarmi alla clausola che mi conviene.
+
+> ### ⛔ **MA QUELLA CLAUSOLA MISURAVA LA GRANDEZZA SBAGLIATA, e lo dico perche' cambia la lettura:** l'energia ### **GLOBALE** e' dominata dal ### **VUOTO**, che e' il ### **90.34 %** dei nodi. ### ⚠ **E' un errore del guardiano, che ha scritto la clausola, e MIO, che l'ho letta come se dicesse qualcosa sulle MASSE.** ### ✔ **Il verdetto FORMALE resta quello che e'** -- un criterio fissato prima non si riscrive dopo -- ### **ma la tavola per classe qui sotto dice che cosa succede DAVVERO.**
+
+| `phivel^2` al passo `300` | braccio `base` | ### **`B-SCAL`** | rapporto |
+|---|--:|--:|--:|
+| ### **MASSE** | 9.0368 | ### **2.4715** | ### **0.273** |
+| ### **VUOTO** | 16.8191 | ### **20.2505** | ### **1.204** |
+
+| `P_coppia` in `B-SCAL` | passi | ### **segno** | somma |
+|---|--:|---|--:|
+| ### **MASSE** | 500 | ### **NEGATIVA in 499 su 500** | ### **-575956.7** |
+| MASSE, ### **dopo il `230`** | 270 | positiva in **0 su 270** | -417741.1 |
+| ### **VUOTO** | 500 | ### **POSITIVA in 364 su 500** | ### **562890.3** |
+| VUOTO, ### **dopo il `230`** | 270 | positiva in **270 su 270** | 3596164.3 |
+
+> ### ⭐ **LA LETTURA GIUSTA, e corregge quella che avevo scritto:** con la coppia scalare ### **le MASSE sono PIU' FREDDE** *(e non piu' calde)*, ### **e la coppia TOGLIE loro energia** -- `P_coppia` nelle masse e' ### **NEGATIVA quasi sempre**, contro i ### **`230` su `230` POSITIVI** del braccio `base`. ### **Il piu' caldo e' il VUOTO**, dove la coppia immette energia.
+
+> ### ⛔ **QUINDI LA FRASE <<LA COERENZA NON E' UNA QUESTIONE DI TEMPERATURA>> CHE AVEVO SCRITTO E' SBAGLIATA**, e la cancello: era basata sulla temperatura ### **GLOBALE**, cioe' su quella del vuoto. ### ✔ **Per le MASSE coerenza e temperatura vanno INSIEME, come ci si aspetta:** la coppia scalare le raffredda ### **e** le tiene coerenti.
 
 > ### ⛔ **E NON DECIDE LA CURA, per la ragione dichiarata in testa alla sezione:** il ramo scalare usa `cos(phi_k - phi_j)`, ### **non `cos((phi_k - phi_j)/2)`** della direzione candidata di Luca. ### **E' un test sul PRINCIPIO. La decisione e' di Luca.**
 

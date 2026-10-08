@@ -708,6 +708,11 @@ def main():
         A("")
         # --- l'energia e l'esito
         psc = {int(r["passo"]): r for r in hsc["passi"]}
+        # ### i nodi per classe, dalla geometria: servono a dire QUANTO il globale e'
+        #   dominato dal VUOTO.
+        _g = hsc.get("geometria") or {}
+        _nmas = sum((_g.get("masse") or {}).values())
+        _nvuo = _g.get("vuoto_nodi") or 0
         _E = [(k, (psc[k].get("termostato") or {}).get("E_cin")) for k in sorted(psc) if k >= 1]
         _E = [(k, x) for k, x in _E if x is not None]
         # ### ⛔ **IL CONTROLLO DI `A-S1` NON REGISTRA `E_cin`** -- il suo osservatore
@@ -771,18 +776,79 @@ def main():
                   "`UNA COPPIA CHE LEGGE LA FASE TIENE LE MASSE`.**"
                   % (_kcom, n4(_Es.get(_kcom), 4), n4(_Ect, 4)))
             else:
-                A("> ### \u26d4 **MA LA SECONDA NON LO E\': l\'energia NON e\' minore.** Al "
-                  "passo `%d` vale ### **%s** contro ### **%s** del braccio `base` -- cioe\' "
-                  "il sistema e\' ### **PIU\' CALDO**, non piu\' freddo."
+                A("> ### \u26d4 **MA LA SECONDA NON LO E\': l\'energia GLOBALE non e\' "
+                  "minore.** Al passo `%d` vale ### **%s** contro ### **%s** del braccio "
+                  "`base`."
                   % (_kcom, n4(_Es.get(_kcom), 4), n4(_Ect, 4)))
                 A("")
                 A("> ### \u26a0 **QUINDI IL CRITERIO, CHE E\' UNA CONGIUNZIONE, NON E\' "
                   "SODDISFATTO** -- e lo dico invece di fermarmi alla clausola che mi "
-                  "conviene. ### \u2b50 **MA IL FATTO RESTA, ed e\' grosso: una coppia che "
-                  "LEGGE LA FASE CHE MUOVE tiene la coerenza delle masse MOLTO meglio, pur "
-                  "lasciando il sistema PIU\' CALDO.** ### **La coerenza non e\' una "
-                  "questione di temperatura, e questo e\' il risultato che la corsa "
-                  "aggiunge.**")
+                  "conviene.")
+                A("")
+                # ### \u26d4 **MA LA CLAUSOLA MISURAVA LA GRANDEZZA SBAGLIATA, e la lettura
+                #   per CLASSE lo mostra.** ### **Errore del guardiano, che l'ha scritta, e
+                #   mio, che l'ho letta come se dicesse qualcosa sulle masse.**
+                A("> ### \u26d4 **MA QUELLA CLAUSOLA MISURAVA LA GRANDEZZA SBAGLIATA, e lo "
+                  "dico perche\' cambia la lettura:** l\'energia ### **GLOBALE** e\' dominata "
+                  "dal ### **VUOTO**, che e\' il ### **%s** dei nodi. "
+                  "### \u26a0 **E\' un errore del guardiano, che ha scritto la clausola, e MIO, "
+                  "che l\'ho letta come se dicesse qualcosa sulle MASSE.** "
+                  "### \u2714 **Il verdetto FORMALE resta quello che e\'** -- un criterio "
+                  "fissato prima non si riscrive dopo -- ### **ma la tavola per classe qui "
+                  "sotto dice che cosa succede DAVVERO.**"
+                  % pct(float(_nvuo) / max(_nvuo + _nmas, 1)) if (_nvuo and _nmas)
+                  else "")
+                A("")
+                # --- la tavola PER CLASSE, che e' la lettura giusta
+                A("| `phivel^2` al passo `%d` | braccio `base` | ### **`B-SCAL`** | rapporto |"
+                  % _kcom)
+                A("|---|--:|--:|--:|")
+                for cl in ("masse", "vuoto"):
+                    _a = (pb.get(_kcom, {}).get("per_classe") or {}).get(cl, {}).get("phivel2")
+                    _s = (psc.get(_kcom, {}).get("per_classe") or {}).get(cl, {}).get("phivel2")
+                    A("| ### **%s** | %s | ### **%s** | ### **%s** |"
+                      % (cl.upper(), n4(_a, 4), n4(_s, 4),
+                         n4(_s / _a, 3) if (_a and _s) else "n/d"))
+                A("")
+                A("| `P_coppia` in `B-SCAL` | passi | ### **segno** | somma |")
+                A("|---|--:|---|--:|")
+                for cl in ("masse", "vuoto"):
+                    _v = [(k, (psc[k].get("per_classe") or {}).get(cl, {}).get("P_coppia"))
+                          for k in sorted(psc) if k >= 1]
+                    _v = [(k, x) for k, x in _v if x is not None]
+                    if not _v:
+                        continue
+                    _ng = sum(1 for _k, x in _v if x < 0)
+                    _ps2 = sum(1 for _k, x in _v if x > 0)
+                    A("| ### **%s** | %s | ### **%s** | ### **%s** |"
+                      % (cl.upper(), n4(len(_v)),
+                         # ### ⛔ **NIENTE GRASSETTO QUI: la colonna e' GIA' avvolta in
+                         #   `### **...**`, e annidarlo darebbe `****`.** Il controllo di
+                         #   formato lo prende, ma il referto si legge PRIMA.
+                         ("NEGATIVA in %s su %s" % (n4(_ng), n4(len(_v))))
+                         if _ng > _ps2 else
+                         ("POSITIVA in %s su %s" % (n4(_ps2), n4(len(_v)))),
+                         n4(sum(x for _k, x in _v), 1)))
+                    _d = [(k, x) for k, x in _v if k > 230]
+                    if _d:
+                        _dp = sum(1 for _k, x in _d if x > 0)
+                        A("| %s, ### **dopo il `230`** | %s | %s | %s |"
+                          % (cl.upper(), n4(len(_d)),
+                             "positiva in **%s su %s**" % (n4(_dp), n4(len(_d))),
+                             n4(sum(x for _k, x in _d), 1)))
+                A("")
+                A("> ### \u2b50 **LA LETTURA GIUSTA, e corregge quella che avevo scritto:** "
+                  "con la coppia scalare ### **le MASSE sono PIU\' FREDDE** *(e non piu\' "
+                  "calde)*, ### **e la coppia TOGLIE loro energia** -- `P_coppia` nelle masse "
+                  "e\' ### **NEGATIVA quasi sempre**, contro i ### **`230` su `230` POSITIVI** "
+                  "del braccio `base`. ### **Il piu\' caldo e\' il VUOTO**, dove la coppia "
+                  "immette energia.")
+                A("")
+                A("> ### \u26d4 **QUINDI LA FRASE <<LA COERENZA NON E\' UNA QUESTIONE DI "
+                  "TEMPERATURA>> CHE AVEVO SCRITTO E\' SBAGLIATA**, e la cancello: era basata "
+                  "sulla temperatura ### **GLOBALE**, cioe\' su quella del vuoto. "
+                  "### \u2714 **Per le MASSE coerenza e temperatura vanno INSIEME, come ci si "
+                  "aspetta:** la coppia scalare le raffredda ### **e** le tiene coerenti.")
             A("")
             A("> ### \u26d4 **E NON DECIDE LA CURA, per la ragione dichiarata in testa alla "
               "sezione:** il ramo scalare usa `cos(phi_k - phi_j)`, ### **non "
