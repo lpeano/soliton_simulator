@@ -79,7 +79,13 @@ PASSI_SALVA = 10
 #   condizioni passano da `==` a `in (...)` e ### **valutano IDENTICO**, quindi il
 #   comportamento non cambia -- ### **ma il BLOB si**, e i primi tre bracci sono stati
 #   prodotti da `d6047e5a`. ### **Si dichiara invece di tacerlo.**
-BRACCI = ("base", "B-T", "B-S", "B-TS")
+# ### ⭐ **`B-SCAL` AGGIUNTO il 2026-10-08 (`D2`, mandato di Luca):** l'involucro fa
+#   prendere a `_coppia_interferenza` il suo ### **RAMO SCALARE**, quello che dipende dalla
+#   ### **FASE CORRENTE** *(`z = e^{i phi}`)*. ### ⚠ **IL DIFF E' ADDITIVO e il blob
+#   CAMBIA:** i quattro bracci di prima vengono da `f11018d1`.
+BRACCI = ("base", "B-T", "B-S", "B-TS", "B-SCAL")
+# ### le chiavi del settore spinoriale che la verifica di `D2` firma prima e dopo la chiamata
+CHIAVI_SPIN = ("_psi_spinor", "_nb", "omega_s", "phi_s", "phi", "phivel", "tw", "_spinor_lift")
 
 
 # ==========================================================================
@@ -104,6 +110,9 @@ class TermoH3(object):
         self._p0 = self._p1 = None
         self._xi_prec = 0.0
         self._pre = None
+        # ### i contatori della verifica di `D2`: ### **si misura, non si promette.**
+        self.cont = {"chiamate": 0, "ripristini": 0, "firme_diverse": 0, "quali": [],
+                     "flag_non_ripristinato": 0}
 
     # ---------------------------------------------------------------- la scena
     def prepara(self, S, net):
@@ -170,6 +179,41 @@ class TermoH3(object):
 
         net.step = _inv_step
         self._inv.append(("istanza", net, "step", (_ost, _cera)))
+        # --- (3) ### ⭐ **`B-SCAL`: l'involucro su `_coppia_interferenza`**
+        if self.braccio == "B-SCAL":
+            _oc = net._coppia_interferenza
+            _cerac = "_coppia_interferenza" in net.__dict__
+
+            def _inv_coppia(A, z, _o=_oc):
+                """### ⛔ **NON RISCRIVO LA FORMULA:** spengo `CAMPO_SPINORIALE` solo
+                ### **durante la chiamata**, cosi' gira il ### **ramo scalare DEL
+                SIMULATORE** *(`:7484`)*, e lo ripristino in un `finally`.
+                ### ✔ **E la verifica e' MISURATA, non promessa:** si firmano le chiavi
+                del settore spinoriale ### **prima e dopo**, e si contano chiamate e
+                ripristini.
+                """
+                self.cont["chiamate"] += 1
+                _pre = {q: MV._firma(getattr(net, q, None)) for q in CHIAVI_SPIN}
+                _vecchio = S.CAMPO_SPINORIALE
+                S.CAMPO_SPINORIALE = False
+                try:
+                    _r = _o(A, z)
+                finally:
+                    S.CAMPO_SPINORIALE = _vecchio
+                    self.cont["ripristini"] += 1
+                if S.CAMPO_SPINORIALE is not _vecchio:
+                    self.cont["flag_non_ripristinato"] += 1
+                _post = {q: MV._firma(getattr(net, q, None)) for q in CHIAVI_SPIN}
+                _d = [q for q in sorted(_pre) if _pre[q] != _post[q]]
+                if _d:
+                    self.cont["firme_diverse"] += 1
+                    for q in _d:
+                        if q not in self.cont["quali"]:
+                            self.cont["quali"].append(q)
+                return _r
+
+            net._coppia_interferenza = _inv_coppia
+            self._inv.append(("istanza", net, "_coppia_interferenza", (_oc, _cerac)))
         return len(self._inv)
 
     def ripristina(self):
@@ -275,6 +319,15 @@ class TermoH3(object):
             idx = self.masse[et]
             lab[idx[idx < nc]] = 1
         sel = {"masse": lab == 1, "vuoto": lab == 0}
+        # ### ⭐ **`D1`: LA COPPIA PER NODO, RECUPERATA ESATTAMENTE.**
+        #   La decomposizione da' `d_cop = dt_n * coppia / M_PH`, quindi
+        #   ### **`coppia_k = d_cop_k * M_PH / dt_n_k`.**
+        #   ### ⛔ **E QUESTO RENDE TAUTOLOGICA l'identita' col bilancio**, quindi
+        #   ### **NON la spaccio per un controllo:** il controllo vero sta nel collaudo, dove
+        #   una coppia FINTA scritta come `-dE/dphi` deve ### **chiudere il bilancio
+        #   dell'energia.** ### **Qui si riporta l'ORDINE DI GRANDEZZA di `coppia_k`, che con
+        #   `K_C = 2` dev'essere `O(1)`: se fosse `1e6` saprei di aver sbagliato.**
+        _cop_k = (d_cop * M_PH) / np.maximum(dtn, 1e-300)
         voci = {}
         for q, s in sel.items():
             if not np.any(s):
@@ -291,6 +344,15 @@ class TermoH3(object):
                 "phivel2": float(np.mean(p2[:nc][s] ** 2)),
                 "phivel_std": float(np.std(p2[:nc][s])),
                 "rms_d_scuoti": float(np.sqrt(np.mean(d_s[s] ** 2))),
+                # ### ⭐ **LE TRE POTENZE DI `D1`, nella STESSA unita'** *(lavoro per
+                #   unita' di tempo proprio)*. ### ⚠ **La terza e' un ANALOGO
+                #   DICHIARATO:** lo scuotimento e' un ### **calcio additivo**, non una
+                #   forza, e scriverlo come potenza sarebbe una finzione.
+                "P_coppia": float(np.sum(_cop_k[s] * p1[:nc][s])),
+                "P_termo": float(np.sum(-(xi * p1[:nc][s]) * p1[:nc][s])),
+                "P_scuoti": float(np.sum(p0[:nc][s] * d_s[s] / np.maximum(dtn[s], 1e-300))),
+                "coppia_mediana_assoluta": float(np.median(np.abs(_cop_k[s]))),
+                "coppia_massima_assoluta": float(np.max(np.abs(_cop_k[s]))),
             }
             if self._pre:
                 a = self._pre["amp"][:nc]
@@ -342,6 +404,7 @@ class TermoH3(object):
 
     def esito(self):
         return {"geometria": self.geo, "braccio": self.braccio, "passi": self.passi,
+                "verifica_d2": self.cont,
                 "misure": {str(k): v for k, v in sorted(self.misure.items())},
                 "passi_misura": list(PASSI_MISURA),
                 "scritture_misurate": self.toccati, "avvisi": self.avvisi}
@@ -365,7 +428,16 @@ def corsa(braccio, passi):
     o = TermoH3(braccio)
     g = o.prepara(S, N)
     stampa("  braccio %s   flag: %s" % (braccio, g["flag"]))
-    if braccio == "B-TS":
+    if braccio == "B-SCAL":
+        stampa("  ### INTERVENTO: `_coppia_interferenza` prende il suo RAMO SCALARE "
+               "(`CAMPO_SPINORIALE` spento SOLO durante la chiamata, ripristinato in un "
+               "finally). ### Gira il ramo DEL SIMULATORE, non una mia copia. ### E la "
+               "verifica e' MISURATA: firme del settore spinoriale prima/dopo, piu' i "
+               "contatori chiamate/ripristini.")
+        stampa("  ### ⚠ DA DICHIARARE NEL REFERTO: il ramo scalare usa cos(phi_k - "
+               "phi_j), NON cos((phi_k - phi_j)/2) della direzione candidata di Luca. E' un "
+               "test sul PRINCIPIO, non sulla forma.")
+    elif braccio == "B-TS":
         stampa("  ### INTERVENTO DOPPIO: `scuoti_vuoto` INERTE **e** `xi_termo` azzerata "
                "prima di ogni `step`. ### Il sistema vive SOLO della sua energia iniziale e "
                "della dinamica interna. ### ATTENZIONE: il termostato NON e' azzerato -- lo "
@@ -483,8 +555,65 @@ def collaudo():
           "massa/vuoto SALE con `Lam`, ed e' il meccanismo dell'integrazione",
           (a4[1] / a4[0]) > (a1[1] / a1[0]))
     # ---- i bracci
-    prova("bracci: ### i QUATTRO sono dichiarati",
-          BRACCI == ("base", "B-T", "B-S", "B-TS"))
+    prova("bracci: ### i CINQUE sono dichiarati",
+          BRACCI == ("base", "B-T", "B-S", "B-TS", "B-SCAL"))
+    # ---- ### ⭐ **IL CONTROLLO CHE IL MANDATO CHIEDE: una coppia FINTA scritta come
+    #   `-dE/dphi` di un'energia NOTA deve CHIUDERE il bilancio dell'energia.**
+    #   `E(phi) = -somma_{archi} A_ij cos(phi_i - phi_j)`  ->  conservazione:
+    #   `dE/dt = -somma_k coppia_k * phivel_k`, cioe' ### **`dE + dt*P = 0` a meno di
+    #   `O(dt^2)`.**
+    _A = np.array([0.7, 0.3])
+    _ii = np.array([0, 1]); _jj = np.array([1, 2])
+    _ph = np.array([0.3, -0.8, 1.1])
+    _pv = np.array([0.5, -0.2, 0.9])
+    _M, _dt = 1.0, 1e-4
+
+    def _E(ph):
+        return -float(np.sum(_A * np.cos(ph[_ii] - ph[_jj])))
+
+    def _coppia(ph):
+        """`-dE/dphi_k`, scritta a mano dalla derivata analitica."""
+        # ### ⛔ **IL SEGNO: la prima stesura l'aveva SBAGLIATO, e il collaudo l'ha
+        #   preso** *(residuo `2.00` invece di `~0`: cioe' `dE = +dt*P`, il verso opposto)*.
+        #   ### **LA DERIVATA, scritta:** con `E = -A*cos(phi_i - phi_j)` si ha
+        #   `dE/dphi_i = +A*sin(phi_i - phi_j)` e `dE/dphi_j = -A*sin(...)`.
+        #   ### ⚠ **E IL CASO <<DEVE FALLIRE>> PASSAVA PER CASO**, su una base gia'
+        #   sbagliata: non discriminava niente.
+        g = np.zeros(3)
+        s = _A * np.sin(ph[_ii] - ph[_jj])
+        np.add.at(g, _ii, +s)          # ### `dE/dphi_i`
+        np.add.at(g, _jj, -s)          # ### `dE/dphi_j`
+        return -g                      # ### `coppia = -dE/dphi`
+
+    _c0 = _coppia(_ph)
+    _P = float(np.sum(_c0 * _pv))
+    _ph1 = _ph + _dt * _pv
+    _pv1 = _pv + _dt * _c0 / _M
+    _dE = _E(_ph1) - _E(_ph)
+    _res = abs(_dE + _dt * _P) / max(abs(_dt * _P), 1e-30)
+    prova("D1: ### una coppia scritta come `-dE/dphi` CHIUDE il bilancio -- `dE + dt*P = 0` "
+          "con residuo relativo `%.2e`" % _res, _res < 1e-3)
+    # ### ⛔ **E IL CASO CHE DEVE FALLIRE: una coppia NON di gradiente NON chiude.**
+    _cx = _c0 + np.array([0.0, 0.5, 0.0])      # ### una perturbazione NON di gradiente
+    _Px = float(np.sum(_cx * _pv))
+    _pv1x = _pv + _dt * _cx / _M
+    _dEx = _E(_ph + _dt * _pv) - _E(_ph)       # ### `E` dipende solo da `phi`: lo stesso `dE`
+    _resx = abs(_dEx + _dt * _Px) / max(abs(_dt * _Px), 1e-30)
+    prova("D1: ### DEVE FALLIRE -- una coppia che NON e' `-dE/dphi` NON chiude il bilancio "
+          "*(residuo relativo `%.2e`)*, e lo strumento se ne accorge" % _resx,
+          _resx > 1e-2)
+    # ---- il recupero di `coppia_k` dalla decomposizione
+    _dtn = np.array([0.0085, 0.0090])
+    _cop = np.array([1.7, -0.4])
+    _dcop = _dtn * _cop / 1.0
+    prova("D1: ### `coppia_k = d_cop * M_PH / dt_n` recupera la coppia AL BIT",
+          float(np.max(np.abs((_dcop * 1.0 / _dtn) - _cop))) < 1e-12)
+    prova("D1: ### e l'identita' col bilancio e' TAUTOLOGICA, quindi NON e' un controllo -- "
+          "il controllo vero e' il bilancio dell'energia qui sopra", True)
+    # ---- `B-SCAL`: le chiavi firmate e il ripristino
+    prova("B-SCAL: ### le chiavi del settore spinoriale firmate sono OTTO, e comprendono "
+          "`_psi_spinor` e `_nb`",
+          len(CHIAVI_SPIN) == 8 and "_psi_spinor" in CHIAVI_SPIN and "_nb" in CHIAVI_SPIN)
     # ### ⭐ **E SI VERIFICA CHE `B-TS` FACCIA DAVVERO LE DUE COSE**, invece di fidarsi
     #   del nome: le due condizioni del codice si rileggono qui.
     prova("B-TS: ### spegne lo scuotimento *(come `B-S`)*",
