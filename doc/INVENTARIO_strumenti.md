@@ -2010,10 +2010,10 @@ coppia ### **sintetica** asimmetrica a `1.463e-02` *(**discrimina**)*; la coppia
 
 | | |
 |---|---|
-| **file** | `csv/_test_fork/_doc_traduzione.py` *(937 righe)* |
+| **file** | `csv/_test_fork/_doc_traduzione.py` *(951 righe)* |
 | **COMANDO** | `python csv/_test_fork/_doc_traduzione.py` |
 | **cosa misura** | ### **niente: GENERA `doc/TRADUZIONE_IN_H.md`** dai quattro json, perche' ogni numero del documento ### **esca da un'uscita** e non da una mano *(`L-NUMERI`)* |
-| **BLOB** | `1f3b2b1e` |
+| **BLOB** | `c4502fbb` |
 
 **Esito:** `67` regole di nascita su `2` eventi, e fra le loro `26` classi
 ### **NESSUNA si chiama «il genitore cede»** ⇒ `Σρ` ### **cresce** a ogni nascita *(la

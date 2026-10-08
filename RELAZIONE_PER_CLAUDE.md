@@ -10358,3 +10358,31 @@ energia: conta a quale equazione la si dia** — ed è il motivo per cui *«scri
 sincronizzazione»* non l'avrebbe salvata.
 
 Le decisioni passano da `10` a ### **`13`**, di cui ### **una PRESA**.
+
+## `A17` E **TRE DECISIONI PRESE** — *un serbatoio, tre usi* (2026-10-08)
+
+**`A17`** *(`4f830bd`, commit da solo, `52` aggiunte e `0` rimozioni, coda del file verificata
+### **identica al byte**)*: ### **«nelle formule della fisica non ci deve essere `pos`».**
+### ⭐ **E il punto `(4)` dà un FONDAMENTO alla byte-inerzia:** non era prudenza, è
+### **il test di un assioma.** Questo rende diversa una cosa che avevo già dichiarato:
+l'esclusione di `_calcpsi_origini` dal sigillo di byte-inerzia — le sue chiavi contengono
+### **nome e riga del chiamante**, cioè ### **l'ordine di esecuzione del codice**, che `A17`
+punto `(1)` nomina come ### **un altro ambito.** ### **Segnalato, non curato.**
+
+**Le tre decisioni, tutte PRESE**, con scheda in `doc/REGISTRO_FISICA.md`:
+
+| | la decisione | il numero che la sostiene | ### **il criterio che la riapre** |
+|---|---|--:|---|
+| **`(A)`** | ### **il calore sul vuoto locale paga la nascita** *(era candidata in `b6cba2f`)* | libera `381466.2`, la prima divisione costa `199600.0` — il `52.32 %`; la cascata si ferma al livello ### **`4`** *(`16` nodi)* | se il calore ### **non resta vicino** alla massa |
+| **`(B)`** | ### **la sincronizzazione si toglie perché emergerà** *(già registrata; solo il rimando aggiunto)* | asimmetria `1.0641` contro `1.438e-10` | se gli orologi ### **non si agganciano** da soli |
+| **`(C)`** | ### **il freno della coesione è la `(c)`: ENTRAMBI** | il calore si esaurisce al livello `4`, e ### **lì le nascite si fermano** | se la barriera ### **non cambia il minimo** |
+
+### ⭐ **E `(C)` è un argomento di COERENZA, non di gusto:** se il freno fosse solo «capacità +
+nascite», ### **quando il calore finisce non resta nessun freno.** Con la barriera dentro `H`:
+la degenerazione ### **tiene sempre**, la nascita ### **alleggerisce quando il calore la paga**,
+e se il calore non basta la materia ### **resta compressa al limite senza collassare.**
+
+### ⚠ **E la cosa che le lega, e che è una tensione da sorvegliare: UN SERBATOIO, TRE USI.** Lo
+stesso calore del vuoto locale paga la ### **nascita** `(A)`, l'### **aggancio degli orologi**
+`(B)` e alimenta il ### **freno vero** `(C)`. ### ⛔ **Se manca a uno, manca agli altri** — e il
+margine, misurato, è ### **zero per costruzione.**

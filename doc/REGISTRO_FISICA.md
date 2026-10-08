@@ -102,6 +102,117 @@ voce `Z…` della `FASE A`, commit `9a82bfb`)*.
 
 ---
 
+<!-- SCHEDA nome=freno-della-coesione funzioni=massa_critica_adattiva,massa_critica_collasso flag=K_C,COES_ADIM,COES_CAUSALE,LAM -->
+
+## ⭐ **LA DECISIONE DEL 2026-10-08 `(C)`: IL FRENO DELLA COESIONE E' LA `(c)` — ENTRAMBI**
+
+> ### **Decisione di Luca, PRESA.** L'elenco di `doc/TRADUZIONE_IN_H.md` dava tre alternative
+> *(`(a)` un termine che satura dentro `H`; `(b)` la nascita dello spazio; `(c)` entrambi)*:
+> ### **e' la `(c)`.**
+> ### ⛔ **E NEL SIMULATORE ATTUALE NON SI TOCCA NIENTE: resta `b8c21049`.**
+
+| il freno | che cos'e' | la portata |
+|---|---|---|
+| ### **FRENO VERO** | la ### **NASCITA DELLO SPAZIO**, pagata dal ### **calore** *(decisione `(A)`)* | ### **alleggerisce** la materia, e si ferma quando il calore finisce *(livello `4`, `16` nodi)* |
+| ### **FRENO A CORTO RAGGIO** | la ### **PRESSIONE DI DEGENERAZIONE** — parole di Luca: *«la pressione di degenerazione, ### **che in natura esiste**»* | ### **tiene SEMPRE**, anche quando il calore e' finito |
+
+### ⭐ **PERCHE' SERVONO ENTRAMBI, ed e' un argomento di coerenza, non di gusto.** Se il freno
+fosse ### **solo** «capacita' + nascite», quando il calore si esaurisce — e si esaurisce, al
+livello ### **`4`** — ### **le nascite si fermano e NON RESTA NESSUN FRENO.** Con la barriera
+dentro `H`:
+
+| | |
+|---|---|
+| la ### **degenerazione** | ### **tiene SEMPRE** |
+| la ### **nascita** | ### **ALLEGGERISCE quando il calore la paga** |
+| se il calore ### **non basta** | la materia ### **resta compressa al limite SENZA COLLASSARE** |
+
+### **DA DOVE EMERGE LA DEGENERAZIONE — due regole RELAZIONALI, e nessun volume** *(`A17`)*:
+
+| | la regola | perche' e' relazionale |
+|---|---|---|
+| ### **`1`** | la ### **CAPACITA' DEL NODO**: `ψ_k ∈ C²` ha ### **due componenti**, quindi ### **al piu' DUE STATI per nodo** *(immagine di Pauli; lo spin `½` viene dalla ### **doppia copertura** a `4π`)* | e' una proprieta' ### **dello stato**, non dello spazio |
+| ### **`2`** | la ### **LUNGHEZZA MINIMA SUGLI ARCHI**: `d_ij ≥ LAM` *(`A13`)*, o `2·LAM` in certi casi — ### ⛔ **sulla `d` RELAZIONALE, MAI su `\|pos_i − pos_j\|`** | `d` e' una ### **relazione d'arco** |
+
+### ⛔ **E NIENTE VOLUME, NIENTE DIMENSIONE** *(`A17` punto `3`)*: ### **niente `2/LAM³`, niente
+`ρ^(5/3)`.** La forma di Chandrasekhar presuppone ### **uno spazio di dimensione `3`**, che qui
+### **non c'e'**.
+
+### ⚠ **UNA CAUTELA DICHIARATA, e non la nascondo:** ### **Pauli NON emerge da solo in un campo
+come questo.** La ### **doppia copertura** e' ### **necessaria ma NON sufficiente** per la
+statistica di Fermi. ### ➜ **La barriera e' derivata dalla STRUTTURA** *(due componenti, `LAM`)*,
+### **NON dalla statistica** — e chiamarla «Pauli» e' un'### **analogia**, non una derivazione.
+
+### ⛔ **IL PUNTO APERTO, da NON inventare:** «due stati» richiede ### **l'UNITA' DI STATO**,
+cioe' ### **quanta `ρ` vale UNO stato.** Le candidate stanno in `doc/TRADUZIONE_IN_H.md`
+*(`⑧`)*, tutte relazionali, ### **e la decisione e' di Luca.**
+
+### ⛔ **IL CRITERIO CHE LA RIAPRE:** se, scritta la barriera, ### **il collasso su un nodo
+resta lo stato piu' basso** *(cioe' la barriera non cambia il minimo)*, la `(c)` ### **non ha
+ottenuto il suo scopo** e si riapre.
+
+### 📌 **E UNA DIPENDENZA, dichiarata:** la degenerazione ### **richiede la geometria DINAMICA
+dentro `H`** — cioe' la decisione `9 (a)` — perche' `d_ij ≥ LAM` come ### **barriera d'energia**
+ha senso solo se `d` ha una dinamica che ### **sente** quella barriera.
+
+---
+
+<!-- SCHEDA nome=chi-paga-la-nascita funzioni=mitosi,decidi_divisione,massa_critica_adattiva,massa_critica_collasso flag=COPPIA_MIT,MITOSI_2LAM,TEMPO_UNICO_MITOSI -->
+
+## ⭐ **LA DECISIONE DEL 2026-10-08 `(A)`: CHI PAGA LA NASCITA E' IL CALORE SUL VUOTO LOCALE**
+
+> ### **Decisione di Luca, PRESA.** *(Era ### **candidata** in `b6cba2f`; oggi e' ### **presa**.)*
+> ### ⛔ **E NEL SIMULATORE ATTUALE NON SI TOCCA NIENTE: resta `b8c21049`.**
+
+> ### **LE PAROLE DI LUCA:** *«chi paga la nascita e' ### **il calore che si scarica sul vuoto
+> locale**»*.
+
+### **IL BILANCIO, CON I NUMERI** *(`N = 400`, `g = -5`, braccio `NON-NORM`, seme `11`; dal
+`csv/_test_fork/_bilancio_nascita`)*:
+
+| | |
+|---|--:|
+| la ### **CONCENTRAZIONE libera**: `H`(mare esteso) → `H`(un nodo) | `-18533.8` → `-400000.0` |
+| energia liberata | ### **`381466.2`** |
+| in una dinamica conservativa diventa ### **CALORE NEL VUOTO LOCALE** *(`A15.3`)* | — |
+| la ### **NASCITA costa** *(la prima divisione)* | ### **`+199600.0`** |
+| e lo ### **PRELEVA da lì** | il ### **`52.32 %`** della liberata |
+
+### ⭐ **E LA CASCATA SI FERMA DA SOLA.** Il costo va come `N²`, quindi ogni livello costa
+### **un quarto** del precedente: il calore si esaurisce al livello ### **`4`**, cioe' a
+### **`16` nodi**. ### **La scala d'arresto ESCE DAL BILANCIO: non e' una manopola** *(`A1`)*.
+
+### ⭐ **E LA SOGLIA DIVENTA IL BILANCIO STESSO** — non un numero *(`A1`)*: un nodo si divide
+### **quando il calore disponibile nel suo vuoto locale ≥ `ΔH` della divisione**.
+### ➜ **Sostituisce `massa_critica_adattiva` e `massa_critica_collasso` coi suoi `21` usi dentro
+le leggi, cioe' CHIUDE la voce bloccante `U1`.**
+
+### ⛔ **CHE COSA RESTA APERTO, e va scritto come APERTO:**
+
+| | che cosa manca | ### **e deve essere RELAZIONALE** *(`A17`)* |
+|---|---|---|
+| ### **`(i)`** | che cos'e' il ### **vuoto locale come grandezza CONTABILE** | candidato: le ### **oscillazioni irradiate**, cioe' `H` ristretta all'intorno ### **meno** il profilo stazionario lì. ### ⛔ **La sottrazione NON e' scritta**, e ### **«intorno» va definito sul GRAFO, non nel disegno** |
+| ### **`(ii)`** | la sua ### **ESTENSIONE** | i ### **vicini diretti** *(relazionale per costruzione)*, oppure una ### **scala legata alla massa** — candidata la lunghezza di guarigione `ξ = 1/√(\|g\|ρ)`, ### **derivata** *(`A1`)*. ### ⚠ **Ma `ξ` e' una LUNGHEZZA: in forma relazionale va espressa in NUMERO DI ARCHI, non in distanza** |
+
+### ⚠ **E LA COSA CHE IL BILANCIO DICE E CHE LA FRASE NON DICEVA: IL MARGINE E' ZERO PER
+COSTRUZIONE.** In una dinamica conservativa, disfare il collasso costa ### **esattamente** cio'
+che il collasso ha liberato. ### ✔ **La forza: nessun bagno esterno.** ### ⛔ **Il limite: il
+conto che torna NON prova che il processo avvenga — prova che NON E' VIETATO.** E i due termini
+`N²` ### **si cancellano** *(la serie fa `400000.0`, il liberato `381466.2`, la differenza
+### **`18533.8`** e' esattamente l'### **hopping**)*: ### ➜ **decidono i termini
+SOTTODOMINANTI.**
+
+### ⛔ **IL CRITERIO CHE LA RIAPRE:**
+
+> **Se, scritto il vuoto locale, il calore ### NON resta disponibile vicino alla massa** — si
+> ### **disperde prima di poter pagare** — ### **la decisione si riapre.**
+
+### 📌 **E IL LEGAME CON LE ALTRE DUE:** lo ### **stesso** calore serve all'### **aggancio degli
+orologi** *(decisione `(B)`, `sincronizzazione-si-toglie`)* e alimenta il ### **freno vero**
+della decisione `(C)` *(`freno-della-coesione`)*. ### ⚠ **Un serbatoio, TRE usi.**
+
+---
+
 <!-- SCHEDA nome=sincronizzazione-si-toglie funzioni= flag=K_SYNC,SYNC_SPINORE,SYNC_FASE_OROLOGIO,KURAMOTO_SU2 -->
 
 ## ⛔ **LA DECISIONE DEL 2026-10-08: SI TOGLIE LA SINCRONIZZAZIONE, PERCHE' EMERGERA'**
@@ -109,6 +220,13 @@ voce `Z…` della `FASE A`, commit `9a82bfb`)*.
 > ### **Decisione di Luca, PRESA** *(non una proposta)*.
 > ### ⛔ **E NEL SIMULATORE ATTUALE NON SI TOCCA NIENTE: resta `b8c21049`.** La rimozione di
 > `K_SYNC` avviene ### **nella riscrittura**, sotto il flag del primo ordine.
+>
+> ### 📌 **E IL RIMANDO ALLE ALTRE DUE DECISIONI DEL 2026-10-08** *(aggiunto, la scheda
+> ### **non si riscrive**)*: l'aggancio degli orologi si paga cedendo l'eccesso al
+> ### **vuoto locale**, che e' ### **LO STESSO CALORE** con cui la decisione `(A)`
+> *(`chi-paga-la-nascita`)* paga la ### **nascita dello spazio** e con cui la `(C)`
+> *(`freno-della-coesione`)* alimenta il ### **freno vero**. ### ⚠ **Un serbatoio, TRE usi — e
+> se manca a uno, manca agli altri.**
 
 ### **LA LEGGE CHE SI TOGLIE.** `delta_sync_phi = dt_n_s · forza · sin(media − φ)` con
 `media = angle(Σ_j w_kj e^{iφ_j})` e `forza = (2/π)·prof_rel·rinforzo_shear` — un Kuramoto

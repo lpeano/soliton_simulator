@@ -799,13 +799,23 @@ def main():
     A("# ⛔ `⑨` **L'ELENCO DELLE DECISIONI DI LUCA** — *una per riga, con le alternative e che "
       "cosa cambierebbe*")
     A("")
+    A("### ⭐ **TRE SONO PRESE** *(decisioni di Luca del 2026-10-08)*: la ### **`1`** *(il "
+      "freno e' la `(c)`: entrambi)*, la ### **`3`** *(la sincronizzazione si toglie)*, la "
+      "### **`10`** *(il calore paga la nascita)*. ### **Le altre dieci sono APERTE**, e le "
+      "schede delle prese stanno in `doc/REGISTRO_FISICA.md`.")
+    A("")
     A("| # | la decisione | le alternative | che cosa cambia |")
     A("|--:|---|---|---|")
-    A("| `1` | ### **la forma della COESIONE e del suo FRENO** | `(a)` un termine che "
-      "### **satura** dentro `H`; `(b)` la ### **nascita dello spazio**; `(c)` ### **entrambi** | "
-      "### ⛔ **con `(a)` il freno e' dentro `H` e il collasso non avviene;** con `(b)` il freno "
-      "e' una legge FUORI da `H` e ### **serve chi paga** *(`S5`)*; `(c)` e' l'unica che regge se "
-      "`S5` resta aperto |")
+    A("| `1` | ### ✔ ⭐ **IL FRENO DELLA COESIONE E' LA `(c)` — DECISIONE DI LUCA, PRESA** "
+      "*(2026-10-08)* | ### **ENTRAMBI**, e non per prudenza | ### **FRENO VERO:** la "
+      "### **nascita dello spazio**, pagata dal calore *(decisione `10`)*. ### **FRENO A CORTO "
+      "RAGGIO:** la ### **PRESSIONE DI DEGENERAZIONE** — *«che in natura esiste»* — come "
+      "### **BARRIERA PER NODO dentro `H`**. ### ⭐ **PERCHE' ENTRAMBI, ed e' coerenza non "
+      "gusto:** se il freno fosse solo «capacita' + nascite», quando il calore si esaurisce "
+      "*(livello `4`)* ### **le nascite si fermano e NON RESTA NESSUN FRENO.** Con la barriera: "
+      "la degenerazione ### **tiene sempre**, la nascita ### **alleggerisce quando il calore la "
+      "paga**, e se il calore non basta la materia ### **resta compressa al limite senza "
+      "collassare**. ### **Scheda:** `freno-della-coesione`. ### **Dettagli:** `⑧` |")
     A("| `2` | ### **l'interferenza NORMALIZZATA sul grado, o no** | `w_ij` ### **come oggi**; "
       "oppure `w_ij/√(s_i s_j)` | il `PR` del Perron a `g = 0` passa da ### **`%.1f`** a "
       "### **`%.1f`** su `400`: ### **la geometria da sola concentra, e la normalizzazione glielo "
@@ -825,7 +835,8 @@ def main():
       "### **per ogni `k`**, e il sistema ci arriva cedendo l'eccesso al vuoto locale — "
       "### **lo stesso calore della `10`**. ### ⛔ **CRITERIO DA MISURARE, non da assumere:** "
       "la dispersione di `dφ/dt` dentro la massa deve ### **calare**, col calore "
-      "contabilizzato. ### **Se non succede, la decisione si RIAPRE** |"
+      "contabilizzato. ### **Se non succede, la decisione si RIAPRE.** ### ⚠ **E lo stesso "
+      "calore serve alla `1` e alla `10`: UN SERBATOIO, TRE USI** |"
       % (SY["asimmetria"], SY["pavimento"]))
     A("| `4` | ### **`A` da `φ⁰` o dalla MEMORIA VIVA dei legami** | `φ⁰` ### **congelata** "
       "*(oggi)*; oppure una memoria d'arco che ### **evolve** | ### ⛔ **`φ⁰` congelata viola "
@@ -856,13 +867,16 @@ def main():
       "### **del primo ordine NELLO SPAZIO DELLE FASI**, con l'energia cinetica delle "
       "lunghezze ### **DENTRO `H`**; ### **`(b)`** la geometria diventa ### **anch'essa uno "
       "stato del tipo di `ψ`** | ### **vedi la tabella qui sotto** |")
-    A("| `10` | ### ⭐ **IL CALORE PAGA LA NASCITA** — la proposta di Luca, ### **accanto "
-      "a `S5`** *(`⑥.2`)* | ### **`(a)`** la soglia e' ### **IL BILANCIO** *(il nodo divide "
-      "quando il calore locale ≥ `ΔH`)*; ### **`(b)`** si tiene una massa critica a parte | "
-      "### ⭐ **con `(a)` sparisce `massa_critica_collasso` e i suoi `21` usi, cioe' "
-      "### **si CHIUDE la voce bloccante `U1`**, e la soglia diventa una ### **LEGGE** "
-      "*(`A1`)*. ### ⛔ **Ma restano da definire DUE cose:** che cos'e' il vuoto locale come "
-      "grandezza contabile, e l'estensione di «locale» |")
+    A("| `10` | ### ✔ ⭐ **IL CALORE PAGA LA NASCITA — DECISIONE DI LUCA, PRESA** "
+      "*(2026-10-08; era ### **candidata** in `b6cba2f`)* | ### **non ci sono piu' "
+      "alternative:** la soglia ### **E' IL BILANCIO** *(il nodo divide quando il calore del "
+      "suo vuoto locale ≥ `ΔH`)*. ### **Scheda:** `chi-paga-la-nascita` | ### ⭐ **sparisce "
+      "`massa_critica_collasso` e i suoi `21` usi dentro le leggi: CHIUDE la voce bloccante "
+      "`U1`**, e la soglia diventa una ### **LEGGE** *(`A1`)*. ### ⛔ **E RESTA APERTO, scritto "
+      "come aperto:** che cos'e' il ### **vuoto locale come grandezza contabile** e la sua "
+      "### **estensione**, ### **entrambi in forma RELAZIONALE** *(`A17`)*. ### ⛔ **CRITERIO "
+      "CHE LA RIAPRE:** se il calore ### **non resta disponibile vicino alla massa** *(si "
+      "disperde prima di poter pagare)*, si riapre |")
     A("| `11` | ### **la forma `U(2)` della coppia** | tenerla; oppure no | ### ⛔ **NON e' "
       "una traduzione: e' UNA LEGGE NUOVA** — `1.054` di scarto, il `105 %`, dieci volte sopra "
       "la soglia del `10 %`. ### **Va decisa come fisica nuova, non adottata come "
