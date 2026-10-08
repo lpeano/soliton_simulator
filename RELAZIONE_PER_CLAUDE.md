@@ -10491,3 +10491,27 @@ minima `LAM`** vieta la fusione *(due nodi che si fondono dovrebbero ### **scend
 `LAM`**)*, mentre la nascita ### **spezza un arco `≥ 2·LAM` in due pezzi `≥ LAM`**. ### ➜
 **L'asimmetria sarebbe GEOMETRICA, non energetica, e `A13` diventerebbe la ragione di `A14.2`.**
 ### ⛔ **Da verificare, non assunta.**
+
+## LA SOSPENSIONE DELLE VOCI, **sul ramo `primo-ordine`** (2026-10-08)
+
+### **`629` voci sospese** con `SOSPESA-ERA-1`, ### **`86` lasciate** come lezioni di metodo,
+### **`8` bloccanti** fra le sospese. ### ✔ **`953` prima, `953` dopo, e il codice lo
+asserisce: nessuna voce si cancella.** Lo stato originale è in ### **`stato_era_1`**, e il
+soggetto in ### **`si_riferisce_a`** — due colonne nuove, quindi il TSV passa da `13` a
+### **`15`** colonne e il validatore è aggiornato.
+
+### ⛔ **E `CLAUDE.md` par.9 dice ancora «un TSV di 13 colonne»:** quella riga va aggiornata, ed
+è ### **una decisione di Luca** — `CLAUDE.md` è il flusso di lavoro, non uno strumento, e non
+lo tocco da solo.
+
+### ⚠ **Un numero che dice una cosa sull'INDICE, non sul mio strumento: `411` sospese su `629`
+restano senza riferimento.** `titolo_breve` è troncato a `100` caratteri; cercare anche
+nell'### **`id`** e nella ### **spiegazione lunga di `doc/STATO_RUN.md`** porta gli attribuiti
+da `143` a ### **`218`**, ma il resto ### **non nomina la propria legge da nessuna parte.** ### ➜
+**Vanno lette a mano al triage**, e il campo dice `(non trovato)` invece di inventare.
+
+### ⛔ **E l'elenco delle `METODO` è in `doc/SOSPENSIONE_era1_METODO.md` perché Luca lo
+confermi:** la classificazione è ### **un'euristica**, e due numeri lo dicono — fra le `86`
+«metodo» ci sono ### **`22` di tipo `difetto`** *(presi per una parola)*, e fra le sospese ci
+sono ### **`8` bloccanti**. ### **Se una di quelle è in realtà una lezione di metodo, l'era `2`
+la perderebbe.**

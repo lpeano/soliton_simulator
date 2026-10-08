@@ -49,9 +49,22 @@ TAG = "lista-chiusa-v1"
 NL = chr(10)
 TAB = chr(9)
 
+# ### ⚠ **DAL 2026-10-08 LE COLONNE SONO `15`, NON `13`** *(la chiusura dell'era `1`)*: la
+# ### sospensione richiede di ### **conservare lo stato originale** (`stato_era_1`) e di dire
+# ### ### **a quale legge o variabile la voce si riferisce** (`si_riferisce_a`).
+# ### ⛔ **E `CLAUDE.md` par.9 dice ancora «un TSV di 13 colonne»:** quella riga va aggiornata,
+# ### ### **ed e' una decisione di Luca** -- `CLAUDE.md` e' il flusso di lavoro, non uno
+# ### strumento, e non lo tocco da solo.
 COL = ["id", "alias", "titolo_breve", "fonte_principale", "stato", "blocca_run_base", "tipo",
-       "famiglia", "stato_da", "avanzamento", "revisione", "motivo", "nota"]
-STATI = {"aperto", "chiuso", "non-difetto", "teoria", "da-decidere"}
+       "famiglia", "stato_da", "avanzamento", "revisione", "motivo", "nota",
+       "stato_era_1", "si_riferisce_a"]
+# ### ⭐ **`SOSPESA-ERA-1` dal 2026-10-08** *(decisione di Luca: la chiusura dell'era `1`)*:
+# ### una voce sospesa ### **NON e' chiusa** -- il difetto c'e' ancora, ma riguarda una legge
+# ### che la riscrittura al primo ordine potrebbe ### **togliere, tradurre o lasciare intatta**,
+# ### e il triage si fa ### **a riscrittura finita** *(`doc/TRIAGE_ERA_1.md`)*.
+# ### ⛔ **E NON sta fra gli stati che contraddicono `blocca_run_base = SI`:** una bloccante
+# ### sospesa ### **resta bloccante**, perche' blocca le corse dell'era `1`.
+STATI = {"aperto", "chiuso", "non-difetto", "teoria", "da-decidere", "SOSPESA-ERA-1"}
 BLOCCA = {"SI", "NO", "DA-DECIDERE", "DA VERIFICARE"}
 TIPI = {"difetto", "sospetto", "fronte", "misura", "cura", "presidio", "assioma", "standard",
         "criterio-locale", "altro"}

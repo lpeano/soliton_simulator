@@ -2115,3 +2115,23 @@ il minimo del fattore `N/C`. ### ⭐ **Le due fermate sono DIVERSE, e il discrim
 uscite diverse:** il livello di arresto della cascata e' letto da ### **due** json e il
 generatore ### **asserisce che concordino** — *«due misure incompatibili sullo stesso oggetto si
 riconciliano, non si sceglie»*.
+
+### 🔬 LA SOSPENSIONE DELLE VOCI DELL'ERA `1` *(2026-10-08)*
+
+| | |
+|---|---|
+| **file** | `csv/_sospendi_era1.py` *(264 righe)* |
+| **COMANDO** | `python csv/_sospendi_era1.py --collaudo` *(conta e NON scrive)* · `python csv/_sospendi_era1.py --applica` |
+| **cosa misura** | classifica ogni voce in ### **FISICA** o ### **METODO** *(euristica dichiarata: `tipo` in `presidio`/`standard`/`assioma`, o una ### **parola del metodo**)*, mette `SOSPESA-ERA-1` alle ### **fisiche in gioco**, conserva lo stato originale in `stato_era_1` e cerca ### **a quale legge o variabile** la voce si riferisce |
+| **BLOB** | `d14c515f` |
+
+**Esito:** ### **`629` sospese**, `86` lasciate come ### **lezioni di metodo**, ### **`8`
+bloccanti** fra le sospese. ### ✔ **`953` voci prima, `953` dopo — e il codice lo ASSERISCE:
+nessuna voce si cancella.**
+
+> ### ⚠ **E UN NUMERO CHE DICE UNA COSA SULL'INDICE, non sul mio strumento: `411` sospese su
+> `629` restano SENZA riferimento.** `titolo_breve` e' troncato a `100` caratteri, e cercare
+> anche nell'### **`id`** e nella ### **spiegazione lunga di `doc/STATO_RUN.md`** porta gli
+> attribuiti da `143` a ### **`218`** — ma il resto ### **non nomina la propria legge da
+> nessuna parte.** ### ➜ **Quelle vanno LETTE A MANO al triage**, e il campo dice
+> `(non trovato)` invece di inventare.
