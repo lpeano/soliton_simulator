@@ -1,0 +1,21 @@
+========================================================================================================
+IL COLLAUDO DEL POTENZIALE -- sulla funzione VERA del simulatore
+========================================================================================================
+  simulatore b8c21049   atteso b8c21049
+====================================================================================================
+LA CONFIGURAZIONE INTERA (`P5`) -- non i flag toccati, TUTTI
+====================================================================================================
+  booleani di modulo confrontati con l'argv del DRIVER: 82
+  -> IN CONFIGURAZIONE DEL DRIVER: nessuna differenza. ZERO su 82.
+
+  scena: n = 12802, archi = 471564
+  ok    le PRECONDIZIONI del ramo spinoriale sono soddisfatte: `CAMPO_SPINORIALE` True, `FORK_SU2` True, `_psi_spinor` len 12802 >= n 12802, archi 471564 *(senza queste il caso <<deve fallire>> sarebbe un FALSO-UNO)*
+  ok    ### il ramo SCALARE **E'** `-dU/dphi` -- la `A` e le `phi` VERE del simulatore: differenza massima relativa `1.490e-15` *(scala `2.9815`)*
+  ok    ### il ramo SCALARE **E'** `-dU/dphi` -- una `A` e delle `phi` CASUALI: differenza massima relativa `8.478e-16` *(scala `54.4778`)*
+  ok    ### il ramo SCALARE **E'** `-dU/dphi` -- una `A` casuale con le `phi` VERE: differenza massima relativa `7.328e-16` *(scala `14.5451`)*
+  ok    ### LA DIFFERENZA FINITA conferma, su 12 nodi scelti a caso: scarto relativo massimo `3.316e-09` *(e questo controllo NON passa dalla mia derivata)*
+  ok    ### e la versione su `U` INTERA da' `1.672e-05`, che NON e' un disaccordo ma il PAVIMENTO DI CANCELLAZIONE: `|U| = 3.506e+04`, pavimento atteso `3.761e-06`. ### **Errore MIO di precisione, non del codice**
+  ok    ### ⛔ DEVE FALLIRE -- la coppia SPINORIALE *(il ramo del driver)* **NON** e' `-dU/dphi`: differenza massima relativa `1.012e+00`
+  ok    ### lo spinore NON e' nel limite `b = 0, a = e^{i phi}` in cui i due rami coinciderebbero: `max|b| = 1.0000`, `max|a - e^{i phi}| = 1.9995` -- quindi il caso che deve fallire ### **non e' vuoto**
+--------------------------------------------------------------------------------------------------------
+  COLLAUDO DEL POTENZIALE: 8 su 8

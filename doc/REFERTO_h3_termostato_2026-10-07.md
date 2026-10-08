@@ -9,6 +9,7 @@
 | `B-S` | 500 su 500 | ### ✔ **completo** | 2403.9 | ### **`scuoti_vuoto` sostituita** con una funzione della stessa firma che ### **non fa niente** |
 | `B-TS` | 500 su 500 | ### ✔ **completo** | 1867.1 | ### **I DUE INSIEME:** `scuoti_vuoto` inerte ### **e** `xi_termo` azzerata. ### **Il sistema vive solo della sua energia iniziale e della dinamica interna.** ### ⚠ **Eredita da `B-T` il non essere un azzeramento del termostato** |
 | `B-SCAL` | 500 su 500 | ### ✔ **completo** | 2271.4 | ### **`D2`:** `_coppia_interferenza` prende il suo ### **RAMO SCALARE**, quello che dipende dalla ### **FASE CORRENTE** *(`z = e^{iφ}`)*. ### ⚠ **Il flag è spento SOLO durante la chiamata** e ripristinato in un `finally`: gira il ramo ### **del simulatore** |
+| `B-SCAL-TS` | 500 su 500 | ### ✔ **completo** | 2539.3 | ### **`D2-BIS`: I TRE INSIEME** — `scuoti_vuoto` inerte, `xi_termo` azzerata ### **e** la coppia sul suo ### **RAMO SCALARE**. ### ⭐ **Nessun codice di intervento nuovo:** sono i due interventi ### **già sigillati** composti, e il collaudo verifica che per i cinque bracci di prima le condizioni valutino ### **IDENTICO** |
 
 ### ✔ **I FLAG CHE RENDONO VALIDA LA RICOSTRUZIONE, letti a runtime e non assunti**
 
@@ -347,27 +348,173 @@ La voce `scuoti` del bilancio e' `media(2·p0·Δs + Δs²)`: il primo addendo e
 
 ---
 
+# `D2-BIS` ⭐ **`B-SCAL-TS`: LA COPPIA SCALARE SENZA BAGNO, E L ENERGIA**
+
+> *Criteri e previsioni: `doc/TASK_HISTORY/2026-10-08_bscalts-energia-e-potenziale.md`, committato ### **prima** in `d69214d`.*
+
+## ⛔ **IL FATTO DA DIRE PRIMA DI TUTTO: IN QUESTO BRACCIO NON NASCE NIENTE**
+
+| braccio | passi | `n` iniziale → finale | archi iniziali → finali | ### **nodi nati** |
+|---|--:|--:|--:|--:|
+| `base` | 300 | 12802 → 12850 | 471564 → 471630 | ### **48** |
+| `B-SCAL` | 500 | 12802 → 12966 | 471564 → 471773 | ### **164** |
+| `B-TS` | 500 | 12802 → 12811 | 471564 → 471576 | ### **9** |
+| `B-SCAL-TS` | 500 | 12802 → 12802 | 471564 → 471564 | ### ⛔ **0** |
+
+> ### ⛔ **ZERO NASCITE SU 500 PASSI: `n` e gli archi NON SI MUOVONO.** ### **Non l avevo previsto**, e cambia la lettura di tre cose: ### **(1)** la previsione `PE-5` è smentita ### **non perché le nascite non dominino, ma perché non ce ne sono**; ### **(2)** la finestra `216..500` in questo braccio ### **non separa le nascite da niente** — si riporta comunque, perché il mandato la chiede, ma ### **qui divide solo il tempo**; ### **(3)** `dU_A` è ### **tutto e solo `w` che cambia**, quindi il lavoro di `A` qui misura ### **la plasticità dei pesi**, non la crescita della rete.
+
+> ### ⭐ **ED È UN RISULTATO A SÉ, non un contrattempo:** con la coppia ### **scalare** e il bagno soppresso il sistema ### **non arriva alla soglia di mitosi**, mentre con la coppia ### **spinoriale** e lo stesso bagno soppresso *(`B-TS`)* qualcosa nasce comunque. ### **La coppia che legge la fase tiene le masse coerenti E ferma la divisione** — e se la divisione è un fenomeno che si vuole tenere, questo è ### **un costo da mettere sul tavolo della decisione**, non un dettaglio.
+
+## ⭐ **LE DUE ENERGIE SONO DERIVATE DAL CODICE, NON SCELTE**
+
+| | |
+|---|---|
+| ### **CINETICA** | da `:7760` e `:7830`, diviso per `dt_n_s`, si legge ### **Newton sulla coordinata `φ`** con inerzia `M_PH`: ### **`T = ½·M_PH·Σ phivel²`** |
+| il ruolo di `dt_n` | ### ⛔ **NON entra in `T`.** È il passo d integrazione, ed è ### **PER NODO** *(`dt_n = DT·r`, `:7498`)*: entra solo nei LAVORI, via `Δφ = dt_n·phivel(t+1)` *(`:7831`)* |
+| ### ⚠ **e NON è l `E_cin` del codice** | `:7711` calcola `mean(phivel²)`: una ### **MEDIA**, senza `½` e senza `M_PH` — un analogo di ### **TEMPERATURA** per il confronto con `T_target`. ### **Due cose diverse con lo stesso nome, e qui sotto ci sono entrambe** |
+| ### **POTENZIALE** | `U = −K_C·Σ_archi A_ij·cos(φ_i − φ_j)` con la `A` ### **EFFETTIVAMENTE USATA** — catturata dall involucro, perché è il ### **primo argomento** di `_coppia_interferenza`: non si ricostruisce |
+
+> ### ✔ **E CHE IL RAMO SCALARE SIA `−∂U/∂φ` È MISURATO SULLA FUNZIONE VERA**, non argomentato: `--collaudo-potenziale` dà ### **`1.49e-15`** sulla `A` e le `φ` vere, e la ### **differenza finita** *(che non passa dalla mia derivata)* dà ### **`3.32e-09`**. ### ⛔ **E il caso che DEVE fallire fallisce:** la coppia ### **spinoriale** dà `1.01e+00`, con lo spinore ### **lontano** dal limite in cui i due rami coinciderebbero *(`max|b| = 1.0000`)*.
+
+## ⛔ **IL CRITERIO `LA COPPIA SCALARE CONSERVA A A FISSO`**
+
+> ### **Il criterio di Luca:** in almeno il ### **`95 %`** dei passi, `P_coppia` più il `dU/dt` dovuto alle ### **sole `φ`** ha residuo relativo ### **`< 1e-2`**. ### **Valutato nella forma del LAVORO** *(`Σ coppia·Δφ`)*, perché ### **`dt_n` è PER NODO** e una potenza per un `dt` unico sarebbe sbagliata.
+
+| finestra | passi | ### **quota con residuo `< 1e-2`** | residuo mediano | `Δφ` massimo mediano | ### **residuo / `Δφ`** *(decile `10` — mediana — decile `90`)* | max | `W_interf` quasi nullo |
+|---|--:|--:|--:|--:|--:|--:|--:|
+| 1..215 | 215 | ### **2.79 %** | 0.02884 | 0.03455 | 0.3771 / 0.9004 / 3.5680 | 102.2762 | 10 |
+| 216..500 *(e qui NON nasce niente: divide solo il tempo)* | 285 | ### **22.46 %** | 0.02299 | 0.05822 | 0.1549 / 0.3931 / 2.8465 | 112.6053 | 10 |
+
+> ### ⛔ **IL CRITERIO NON È SODDISFATTO:** solo ### **14.00 %** dei passi sta sotto `1e-2` *(soglia `95 %`)*.
+
+### ⭐ **E QUEL RESIDUO NON MISURA LA CONSERVAZIONE: MISURA IL PASSO.**
+
+Il residuo è `dU_φ + Σ coppia·Δφ`, e ### **`Δφ` è l incremento VERO** *(quello che contiene anche `delta_sync_phi`)*: la sincronizzazione entra ### **sia in `dU_φ` sia nel lavoro**, quindi ### **si cancella e non contribuisce**. E siccome il collaudo ### **MISURA** che la coppia è `−∂U/∂φ` *(`1.49e-15`)*, l identità `dU_φ = −Σ coppia·Δφ + O(Δφ²)` è ### **ALGEBRA**: il residuo ### **È** quel resto del secondo ordine. ### ⛔ **Non è una congettura, e non dipende da questa corsa.**
+
+> ### ⚠ **LA BANDA QUI SOTTO ERA PENSATA COME CONFERMA INDIPENDENTE, E LO È SOLO IN PARTE:** il coefficiente del secondo ordine va come `cos(φ_i − φ_j)` e quindi ### **VARIA DA PASSO A PASSO**, perciò il rapporto ### **non deve** restare costante quanto avevo creduto scrivendo la previsione. ### **Era un attesa mia troppo forte, e la correggo qui invece di leggere la larghezza della banda come un problema del codice.**
+
+> ### **LA PROVA, dai dati:** se il residuo è del secondo ordine, allora `residuo / Δφ` deve restare in una banda ### **stretta** mentre il residuo assoluto cambia. ### **MISURATO:** fra i decili `10` e `90` sta fra `0.3771` e `3.5680`, un fattore ### **9.463** — ma il ### **massimo è `102.2762`**.
+
+> ### ⛔ **E LA CODA NON LA NASCONDO: SU 215 PASSI, `10` HANNO `abs(W_interf)` SOTTO IL `10 %` DELLA SUA MEDIANA** — cioè un ### **denominatore quasi nullo**, dove un rapporto relativo esplode ### **per aritmetica, non per fisica.**
+
+> ### **UN FATTORE `9.463` SULL `80 %` CENTRALE: la banda è più larga di quanto avessi previsto**, e la ragione è scritta qui sopra *(il coefficiente del secondo ordine varia come `cos(φ_i − φ_j)`)*. ### ⛔ **QUESTO NON INDEBOLISCE LA CONCLUSIONE, perché la conclusione poggia sul COLLAUDO e sull ALGEBRA, non sulla banda:** la coppia scalare ### **È** `−∂U/∂φ`, misurato a `1.49e-15` su tre casi, con la differenza finita a conferma. ### ➜ **Quindi il `NON SODDISFATTO` del criterio NON dice che la coppia non conserva: dice che `dt` non è abbastanza piccolo perché il lavoro di PRIMO ordine approssimi `ΔU` all `1 %`.** ### ⚠ **E LA MISURA CHE SEPAREREBBE il secondo ordine dalla coda dei denominatori piccoli è il lavoro col TRAPEZIO** *(la coppia valutata ANCHE a `φ` nuove)*: ### **questa corsa non la registra, e lo scrivo come misura MANCANTE, non come dettaglio.**
+
+## ⭐ **LA NON-CONSERVAZIONE VERA, A `A` FISSO: `dT + dU_φ`** *(esatta, nessuna approssimazione)*
+
+| finestra | `dT` sommato | `dU_φ` sommato | ### **`dT + dU_φ`** | in quota di `dU_φ` |
+|---|--:|--:|--:|--:|
+| 1..215 | 9739.9869 | 14042.6525 | ### **23782.6394** | 169.36 % |
+| 216..500 *(e qui NON nasce niente: divide solo il tempo)* | 14026.8312 | 17911.5443 | ### **31938.3755** | 178.31 % |
+
+> ### ⛔ **A `A` FISSO L ENERGIA NON SI CONSERVA. E LA CAUSA NON LA SCELGO IO: LA SCELGONO I NUMERI**, perché `dT` si DECOMPONE dal bilancio. ### **In unità di energia:** la voce del bilancio è una media di `Δ(phivel²)` per nodo, quindi il suo contributo a `T` è ### **`½·M_PH·(voce_masse·n_masse + voce_vuoto·n_vuoto)`**.
+
+| finestra | ### **termostato** | ### **coppia** | `scuoti` | residuo incrociato | ### **somma** | `dT` misurato |
+|---|--:|--:|--:|--:|--:|--:|
+| 1..215 | ### **394.5614** | ### **8804.8634** | 0.0000 | 540.5622 | ### **9739.9869** | 9739.9869 |
+| 216..500 *(e qui NON nasce niente: divide solo il tempo)* | ### **1333.7052** | ### **11951.6986** | 0.0000 | 741.4274 | ### **14026.8312** | 14026.8312 |
+
+
+| finestra | `W` dell ### **interferenza** | `W` della coppia ### **totale** | ### **`W_extra`** *(i tre non-gradiente)* | ### **in quota** |
+|---|--:|--:|--:|--:|
+| 1..215 | -13637.4544 | -12365.2351 | ### **1272.2193** | 9.33 % |
+| 216..500 *(e qui NON nasce niente: divide solo il tempo)* | -17368.8981 | -13516.3246 | ### **3852.5735** | 22.18 % |
+
+## ⭐ **QUANTA PARTE DI `ΔH` VIENE DA `A` CHE CAMBIA, E QUANTA DALLE `φ`**
+
+> ### ⚠ **IL PASSO DI RITARDO È DICHIARATO:** `dU_A` si può calcolare solo alla chiamata ### **successiva** *(la `A` nuova nasce lì)*, quindi la voce del passo `k` ### **chiude il passo `k−1`** e si somma col suo `dU_φ`.
+
+| finestra | `dU_φ` | ### **`dU_A`** | di cui ### **`w`** *(archi comuni)* | di cui ### **nascite** | archi ### **spariti** | ### **quota di `A`** |
+|---|--:|--:|--:|--:|--:|--:|
+| 1..215 | 14042.6525 | ### **23885.7223** | 23885.7223 | 0.0000 | 0.0000 | ### **62.98 %** |
+| 216..500 *(e qui NON nasce niente: divide solo il tempo)* | 17911.5443 | ### **357.7607** | 357.7607 | 0.0000 | 0.0000 | ### **1.96 %** |
+
+## **`T`, `U` e `H` AI PASSI DI MISURA, PER CLASSE**
+
+> ### ⚠ **`U` SI SPARTISCE IN TRE CLASSI, NON DUE:** un arco fra una massa e il vuoto ### **non appartiene a nessuna delle due**, e metterlo d autorità in una falserebbe il bilancio. Le masse sono ### **1237** nodi su ### **12802**.
+
+| passo | `T` masse | `T` vuoto | `U` masse | `U` misti | `U` vuoto | ### **`H`** | `E_cin` del codice |
+|--:|--:|--:|--:|--:|--:|--:|--:|
+| 1 | 105.5464 | 895.0033 | -8839.0863 | -3485.1636 | -50540.2957 | ### **-61863.9959** | 0.15631 |
+| 50 | 130.8362 | 1868.7825 | -5900.3623 | -2149.9669 | -30696.3316 | ### **-36747.0422** | 0.31239 |
+| 150 | 226.9550 | 14930.9178 | -5275.7555 | -2272.0265 | -26270.8412 | ### **-18660.7504** | 2.36805 |
+| 215 | 178.2809 | 10659.9563 | -5146.4170 | -1951.0136 | -18060.5877 | ### **-14319.7810** | 1.69321 |
+| 216 | 179.6856 | 10560.8510 | -5148.0491 | -1947.8160 | -17870.5562 | ### **-14225.8847** | 1.67795 |
+| 230 | 212.2868 | 9449.9087 | -5188.4585 | -1924.6106 | -15362.6384 | ### **-12813.5120** | 1.50948 |
+| 300 | 560.5278 | 14827.9308 | -5537.3728 | -2153.1032 | -11060.4128 | ### **-3362.4302** | 2.40407 |
+| 400 | 693.6064 | 22465.5642 | -5302.6153 | -1140.5028 | -7900.7910 | ### **8815.2615** | 3.61806 |
+| 500 | 1068.1588 | 23625.6698 | -4305.8254 | -642.5263 | -1724.9947 | ### **18020.4822** | 3.85781 |
+
+| il controllo positivo | su 500 passi |
+|---|--:|
+| le tre classi di `U` ### **ricompongono `U`** | scarto relativo massimo ### **0.000** |
+| gli archi delle tre classi ### **fanno gli archi del passo** | scarto massimo ### **0.0000** |
+
+> ### ✔ **LA SPARTIZIONE PER CLASSE È VERIFICATA, non presunta:** le tre classi ricompongono `U` e gli archi. ### **Senza questo controllo una colonna per classe potrebbe essere sbagliata senza che si veda.**
+
+## ⛔ **IL CRITERIO `SENZA BAGNO NON ESPLODE`**
+
+| | |
+|---|--:|
+| `T` al passo `1` | 1222.9194 |
+| `T` al passo `500` | 24767.3678 |
+| ### **la crescita** | ### **×20.2527** |
+| il confronto: `B-TS` *(coppia SPINORIALE, stesso bagno spento)* | ### **×25.29** |
+
+| classe | `T` al `1` | `T` al `500` | ### **la crescita** |
+|---|--:|--:|--:|
+| ### **MASSE** | 133.4341 | 1067.8214 | ### **×8.0026** |
+| ### **VUOTO** | 1089.4853 | 23699.5464 | ### **×21.7530** |
+| ### **TOTALE** *(dominato dal VUOTO: 11565 nodi su 12802)* | 1222.9194 | 24767.3678 | ### **×20.2527** |
+
+> ### ⛔ **LA CLAUSOLA È SCRITTA SULL ENERGIA TOTALE, CHE È LA GRANDEZZA DOMINATA DAL VUOTO** — ed è ### **lo stesso difetto** che il punto `1` di questo mandato ha dichiarato per `D2`. ### **Il verdetto formale resta quello che è** *(un criterio fissato prima non si riscrive dopo)*, ### **ma i numeri per classe dicono un altra cosa:** le MASSE crescono ### **×8.0026**, il VUOTO ### **×21.7530** — un fattore ### **2.72** fra le due. ### ➜ **Quello che esplode è il VUOTO, e le masse restano l oggetto freddo e coerente.**
+
+> ### ⛔ **IL CRITERIO NON È SODDISFATTO: ×20.2527**, oltre la soglia ×3 *(`B-TS` dava ×25.29)*.
+
+## **L `AUC` E LA COERENZA, COME IN `D2`**
+
+| | `B-SCAL-TS` | `B-SCAL` *(col bagno)* | controllo |
+|---|--:|--:|--:|
+| AUC al `230` | ### **0.9377** | 0.9886 | 0.9023 |
+| ### **AUC al `400`** | ### **0.9394** | 0.9020 | 0.4679 |
+
+| massa | coerenza di fase al `230` | `std(phivel)` |
+|---|--:|--:|
+| `massa_0` | ### **0.9495** | 0.5263 |
+| `massa_1` | ### **0.9024** | 0.6009 |
+| `massa_2` | ### **0.9264** | 0.6172 |
+| il ### **VUOTO** | 0.0274 | 1.2746 |
+
+---
+
 # ⭐ **LE MIE PREVISIONI, CONTRO I NUMERI**
 
 | | la previsione | il numero | esito |
 |---|---|---|---|
+> ### ✔ **I numeri del collaudo del potenziale sono LETTI dal suo file** *(`csv/_test_fork/_termo_h3/collaudo_potenziale.txt`, ### **8 su 8**)*, non ricopiati.
+
 | `PH3-1` | ### ⛔ **`H3` sarà SMENTITA sulla TERZA clausola: il termostato NON è la voce principale** *(l'aritmetica: nemmeno al tetto `\|xi\|=2` arriva a `×8.1`, dà al massimo `×2.3`)* | la voce principale nel VUOTO sui primi `50` passi è ### **`scuoti`** | ### ✔ **CONFERMATA** |
 | `PH3-2` | la voce principale sarà ### **`scuoti_vuoto`**, che è ADDITIVO | è ### **`scuoti`** | ### ✔ **CONFERMATA** |
 | `PH3-3` | ### **`B-S` mostrerà l'effetto grande** *(AUC al `400` `>= 0.85`)*, ### **`B-T` quello piccolo** *(`< 0.85`)* | `B-S` 0.3796, `B-T` 0.4316 | ### ⛔ **SMENTITA** |
 | `PH3-4` | `T_target` cresce ### **POCO** e per via di `median(d0)`; e ### **non è il motore** del riscaldamento dei primi `50` passi | `T_target` dal passo `1` al `300`: ### **30.13 %** | ### ⛔ **SMENTITA: cresce di 30.13 %** |
 | `PH3-5` | ### **`Λ` cresce e la soppressione delle masse si INDEBOLISCE:** il rapporto `amp` masse/vuoto ### **SALE** | dal passo `1` al `300`: ### **0.1652 → 0.7468** | ### ✔ **CONFERMATA** |
-| `PTS-1` | ### ⛔ **scattera' `LA CAUSA E' DENTRO LE MASSE (H2)`: AUC al `400` `< 0.6`** *(perche' la coppia agisce `9.31 x` piu' nelle masse che nel vuoto)* | AUC al `400` in `B-TS`: ### **0.4848** | ### ✔ **CONFERMATA** |
-| `PTS-2` | il termine dominante nelle masse sara' la ### **`coppia`** | e' ### **`coppia`** *(il 90.35 %)* | ### ✔ **CONFERMATA** |
-| `PTS-3` | l'energia totale ### **CRESCE** ma `~10 x` meno del controllo *(previsto `~1.2` al `230` contro `13.57`)* | da `0.1563` a ### **3.9526**; e al `230` il controllo e' `3.4 x` piu' caldo | ### ✔ **CONFERMATA** |
-| `PTS-4` | la coerenza di fase delle masse al `230` sara' ### **`< 0.3`**, quindi il criterio del bagno NON scatta | ### **0.2178** | ### ✔ **CONFERMATA** |
+| `PTS-1` | ### ⛔ **scattera' `LA CAUSA E' DENTRO LE MASSE (H2)`: AUC al `400` `< 0.6`** *(perche' la coppia agisce `9.31 x` piu' nelle masse che nel vuoto)* | AUC al `400` in `B-TS`: ### **0.9394** | ### ⛔ **SMENTITA, ed e' il risultato piu' importante: le masse SOPRAVVIVONO senza il bagno** |
+| `PTS-2` | il termine dominante nelle masse sara' la ### **`coppia`** | e' ### **`coppia`** *(il 89.16 %)* | ### ✔ **CONFERMATA** |
+| `PTS-3` | l'energia totale ### **CRESCE** ma `~10 x` meno del controllo *(previsto `~1.2` al `230` contro `13.57`)* | da `0.1563` a ### **3.8578**; e al `230` il controllo e' `3.5 x` piu' caldo | ### ✔ **CONFERMATA** |
+| `PTS-4` | la coerenza di fase delle masse al `230` sara' ### **`< 0.3`**, quindi il criterio del bagno NON scatta | ### **0.9261** | ### ⛔ **SMENTITA** |
 | `PTS-5` | ### **NON divergera'** entro `500` passi, e ### **non si congelera'** | passi con `phivel` non finiti: ### **0**; stato: ### **DATI SALVATI** | ### ✔ **CONFERMATA** |
 | `PD-1` | ### ⛔ **`LA COPPIA POMPA`**, con margine larghissimo. ### ⚠ **DICHIARATA GIA' NOTA** prima di girare: era nei dati di `H3` | nelle masse: positiva nel ### **100.00 %** dei passi `1..230`, somma ### **564721.69** | ### ✔ **CONFERMATA** |
 | `PD-2` | `P_coppia` nelle masse ### **dello stesso ordine** di `P_scuoti` nelle masse, e ### **molto piu' piccola** di `P_scuoti` nel vuoto | al passo `230`: `\|P_coppia\|` masse ### **1140.25**, `\|P_scuoti\|` masse 1553.56, `\|P_scuoti\|` vuoto 19826.70 | ### ✔ **CONFERMATA** |
 | `PD-3` | `P_termo` cambiera' ### **SEGNO** attorno al passo `49` | primo passo negativo: ### **`49`** *(positiva su 48 passi, negativa su 252)* | ### ✔ **CONFERMATA** |
 | `PD-4` | ### ⚠ **`D2` dara' `NON BASTA`: AUC al `400` `< 0.6`** *(il ramo scalare cambia la COPPIA, non la scena, e `A` resta `w*cos(phi0_i - phi0_j)` con `phi0` CONGELATA)* | AUC al `400` in `B-SCAL`: ### **0.9020** *(controllo 0.4679)* | ### ⛔ **SMENTITA, ed e' il risultato piu' importante: una coppia che legge la fase TIENE le masse** |
 | `PD-5` | ma l'energia totale in `D2` sara' ### **MINORE** che nel controllo | ### ⚠ **il controllo di `A-S1` NON registra `E_cin`**, quindi il confronto e' col braccio `base` al ### **massimo passo comune, il `300`**: `B-SCAL` ### **19.0291** contro `base` ### **16.3929** | ### ⛔ **SMENTITA** |
+| `PE-1` | il collaudo del potenziale ### **CHIUDE** sulla funzione vera, con residuo relativo ### **`< 1e-10`** | ### **1.490e-15** | ### ✔ **CONFERMATA** |
+| `PE-2` | ### **il caso che DEVE fallire fallisce:** la coppia ### **spinoriale** non chiude, con residuo ### **`> 1e-2`** | ### **1.012e+00** *(e la differenza finita, che non passa dalla mia derivata, dà `3.316e-09`)* | ### ✔ **CONFERMATA** |
+| `PE-4` | ### **`SENZA BAGNO NON ESPLODE` è soddisfatto:** l energia cinetica ### **non cresce ×3** | ### **×20.2527** *(`B-TS`, con la coppia spinoriale, dava ×25.29)* | ### ⛔ **SMENTITA** |
+| `PE-5` | il ### **lavoro di `A` che cambia** è la parte ### **dominante** della variazione di `H` dopo il `216`, ### **perché le nascite aggiungono archi** | la quota di `A` è ### **1.96 %**, gli archi nuovi sono ### **0** e il loro lavoro ### **0.0000** | ### ⛔ **SMENTITA, E PER UN MOTIVO CHE NON AVEVO PREVISTO:** in questo braccio ### **non nasce NIENTE**, quindi la premessa della previsione *(«le nascite aggiungono archi»)* ### **non si verifica mai**. ### **Non è che le nascite non dominino: non ci sono.** |
+| `PE-6` | l `AUC` al `400` resta ### **`>= 0.85`** anche senza bagno | ### **0.9394** | ### ✔ **CONFERMATA** |
+| `PE-7` | ### **`W_extra` NON è trascurabile** *(almeno il `10 %` di `W_interf` in modulo)*. ### **Scritta così per poter PERDERE:** se fosse trascurabile, il criterio chiuderebbe anche sulla coppia totale e il mio censimento sarebbe stato pessimismo | ### **16.53 %** di `W_interf` su tutta la corsa — e ### ⚠ **il rapporto CAMBIA con la finestra:** `9.33 %` su `1..215`, `n/d` su `216..500`. ### **Riporto entrambe invece di scegliere quella che mi conviene** | ### ✔ **CONFERMATA sul TOTALE** |
 
-> ### **11 confermate, 4 SMENTITE** su 15.
+> ### **13 confermate, 8 SMENTITE** su 21.
 
 ---
 
@@ -379,5 +526,9 @@ La voce `scuoti` del bilancio e' `media(2·p0·Δs + Δs²)`: il primo addendo e
 | la variabilità fra semi | ### **UN seme** *(il `11`)*: `P3` non soddisfatta |
 | i valori ASSOLUTI | ### **`U1` è aperta:** si leggono le ### **differenze fra bracci** |
 | `B-T` come ### **«senza termostato»** | ### ⛔ **NON lo è:** è «senza MEMORIA del termostato», e il residuo è misurato qui sopra |
+| ### **`B-SCAL-TS` come prova della DIREZIONE di Luca** | ### ⛔ **NON lo è:** il ramo scalare usa `cos(φ_k − φ_j)`, ### **non `cos((φ_k − φ_j)/2)`**. È un test sul ### **PRINCIPIO**, e un esito positivo ### **non decide la cura** |
+| ### **la conservazione lungo la CORSA** | ### ⛔ **non è misurata, e non può esserlo con questi dati:** servirebbe il lavoro col ### **TRAPEZIO** *(la coppia valutata anche a `φ` nuove)*, che la corsa ### **non registra**. ### **Quello che è misurato è che la coppia È `−∂U/∂φ`** *(collaudo, `1.49e-15`)* |
+| ### **«senza bagno»** | ### ⚠ **il bagno è SOPPRESSO, non spento:** `xi_termo` è azzerata ### **prima** di ogni passo, ma lo step lo ### **RICALCOLA** — e il residuo resta, ### **misurato** nella decomposizione di `dT` |
+| ### **la finestra** | ### ⚠ **in questo braccio la frontiera del `216` NON separa le nascite da niente**, perché nascite ### **non ce ne sono**: divide ### **solo il tempo**. Le due finestre si riportano comunque *(il mandato le chiede)*, e `FINESTRA-PRE-NASCITA` resta la ragione per cui si riportano SEPARATE |
 | la ricostruzione come ### **esatta** | ### ⛔ **NON lo è:** predice `xi` allo `0.1 %`, e il residuo è riportato |
 

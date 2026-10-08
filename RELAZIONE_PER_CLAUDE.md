@@ -9787,3 +9787,131 @@ che l'energia ### **calasse**. ### **Sbagliate entrambe, nella direzione informa
 > ### ⛔ **NON COMINCIO LA CURA.** `SPINORE-SENZA-FASE` è aggiornata col verdetto e collegata ad
 > ### **`A14`, `A7` ed `ENERGIA-NON-DEFINITA`**, perché il pompaggio è confermato.
 > ### **La decisione è di Luca.**
+
+---
+
+# ⭐ **`D2-BIS`: LA COPPIA SCALARE SENZA BAGNO TIENE LA COERENZA — E FERMA LA DIVISIONE** *(2026-10-08)*
+
+> Referto: `doc/REFERTO_h3_termostato_2026-10-07.md` *(`534` righe, `41` tabelle, `0` difetti
+> di formato)*. Criteri e previsioni in `d69214d`, committato ### **prima** dello strumento
+> *(`32d5e60`)*, che a sua volta è committato ### **prima** della corsa. ### ⛔ **Simulatore
+> `b8c21049`, `ASSIOMI.md` non toccato.**
+
+## ✔ **IL PUNTO `1` DEL MANDATO, CHIUSO IN UN COMMIT DA SOLO** *(`57f8ed6`)*
+
+La seconda clausola di `D2` chiedeva ### **l'energia TOTALE**, che è dominata dal ### **VUOTO**
+*(il `90.34 %` dei nodi)*. ### **La clausola misurava la grandezza sbagliata: è un errore del
+guardiano, che l'ha scritta, e MIO, che l'ho letta come se dicesse qualcosa sulle masse.**
+### **Il verdetto formale resta** *(un criterio fissato prima non si riscrive dopo)*, e accanto
+c'è ora la tavola per classe: `phivel²` al `300` è ### **`2.4715`** nelle masse contro `9.0368`
+del base, e `20.2505` nel vuoto contro `16.8191`. ### ➜ **Con la coppia scalare le MASSE sono
+PIÙ FREDDE e la coppia TOGLIE loro energia** *(negativa in `499` passi su `500`)*; il più caldo
+è il ### **VUOTO**. ### ⛔ **Quindi la mia frase «la coerenza non è una questione di
+temperatura» è CANCELLATA: per le masse coerenza e temperatura vanno INSIEME.**
+
+## ⭐ **IL COLLAUDO CHE IL MANDATO CHIEDE: SULLA FUNZIONE VERA, E CHIUDE**
+
+| | |
+|---|--:|
+| il ramo ### **SCALARE** è `−∂U/∂φ`, sulla `A` e le `φ` vere | ### **`1.49e-15`** |
+| *(e su due casi casuali)* | `8.48e-16` · `7.33e-16` |
+| la ### **differenza finita**, che ### **non passa dalla mia derivata** | ### **`3.32e-09`** |
+| ### ⛔ **il caso che DEVE fallire:** la coppia ### **SPINORIALE** | ### **`1.01e+00`** |
+| e ### **non è vuoto:** la distanza dello spinore dal limite in cui i due rami coinciderebbero | `max\|b\| = 1.0000` · `max\|a − e^{iφ}\| = 1.9995` |
+
+### **La differenza finita è ristretta AGLI ARCHI CHE TOCCANO IL NODO**, dove la restrizione è
+### **esatta** *(`U` dipende da `φ_k` solo attraverso quelli)*. ### ⚠ **E LA PRIMA STESURA ERA
+MIA E SBAGLIATA:** fatta su `U` intera dava `1.67e-05` contro una soglia di `1e-5`, e
+### **non era un disaccordo: era il PAVIMENTO DI CANCELLAZIONE** di una differenza fra due
+numeri grandi `|U| = 3.5e+04` *(pavimento atteso `3.76e-06`)*. ### **La cura non è stata
+allentare la soglia: è stata misurare la cosa giusta**, e il numero vecchio resta nel collaudo
+col suo pavimento stampato.
+
+## ⛔ **UNA PREMESSA DEL CRITERIO CADE, E L'HO SCRITTA PRIMA DI GIRARE**
+
+La `coppia` che muove `phivel` *(`:7760`)* ### **non è** quella che `_coppia_interferenza`
+restituisce. Con i default del driver se ne sommano ### **altri tre** — `REPULS_LEGGE`
+*(`:7621`)*, `SPIN_FEEDBACK` *(`:7656`)*, `FRAME_DRAG` *(`:7702`)* — e un ### **quarto** muove
+`φ` ### **fuori** dalla coppia *(`K_SYNC`, `delta_sync_phi` a `:7805`)*.
+
+### ⭐ **E IL CRITERIO «CONSERVA A `A` FISSO», COME È SCRITTO, NON MISURA LA CONSERVAZIONE:
+MISURA IL PASSO.** Siccome il collaudo ### **misura** che la coppia è `−∂U/∂φ`, l'identità
+`dU_φ = −Σ coppia·Δφ + O(Δφ²)` è ### **algebra**, e la sincronizzazione ### **si cancella**
+perché entra sia in `dU_φ` sia nel lavoro. Misurato: ### **`14.00 %`** dei passi sotto `1e-2`
+*(soglia `95 %`)* → ### ⛔ **NON SODDISFATTO**, ### **ma per il passo d'integrazione, non per
+la fisica.** ### ⚠ **La misura che separerebbe il secondo ordine dalla coda dei denominatori
+piccoli è il lavoro col TRAPEZIO, e questa corsa NON la registra: lo scrivo come misura
+MANCANTE.**
+
+## ✔ **IL BILANCIO CHIUDE COME IDENTITÀ, E HA SMENTITO UN MIO SOSPETTO**
+
+| finestra | `dT` | `dU_φ` | ### **`dT + dU_φ`** | ### **termostato** | ### **coppia** | `scuoti` |
+|---|--:|--:|--:|--:|--:|--:|
+| `1..215` | `+9739.9869` | `+14042.6525` | ### **`+23782.6394`** | `+394.5614` | ### **`+8804.8634`** | ### **`0.0000`** |
+| `216..500` | `+14026.8312` | `+17911.5443` | ### **`+31938.3755`** | `+1333.7052` | ### **`+11951.6986`** | ### **`0.0000`** |
+
+### **La somma delle voci RIPRODUCE `dT` cifra per cifra.** ### ⚠ **E IL MIO SOSPETTO ERA
+SBAGLIATO:** avevo pensato che fosse il ### **residuo del termostato** *(`xi<0` RIFORNISCE)* a
+immettere l'energia, perché `xi` resta negativo tutta la corsa. ### **I numeri dicono che quel
+residuo è PICCOLO**, ed è un risultato a sé: il ### **«termostato senza memoria» è quasi
+innocuo**, e quello che scalda è la ### **coppia**.
+
+## ⛔ **IL FATTO CHE NON AVEVO PREVISTO: IN QUESTO BRACCIO NON NASCE NIENTE**
+
+| braccio | passi | `n` iniziale → finale | ### **nodi nati** | ### **AUC al `400`** |
+|---|--:|--:|--:|--:|
+| `base` | `300` | `12802` → `12850` | `48` | *(non registrata)* |
+| `B-SCAL` *(col bagno)* | `500` | `12802` → `12966` | `164` | `0.9020` |
+| `B-TS` *(coppia SPINORIALE, bagno spento)* | `500` | `12802` → `12811` | `9` | `0.4848` |
+| ### **`B-SCAL-TS`** | `500` | `12802` → `12802` | ### ⛔ **`0`** | ### **`0.9394`** |
+
+### ⭐ **L'`AUC` al `400` è `0.9394`, MEGLIO del `0.9020` di `B-SCAL` col bagno e più del DOPPIO
+del `0.4679` del controllo**, e la coerenza di fase delle masse al `230` è ### **`0.9024`,
+`0.9264`, `0.9495`** mentre il ### **vuoto sta a `0.0274`**. ### ➜ **Togliere i due forzanti
+globali NON scioglie le masse, se la coppia legge la fase.**
+
+### ⛔ **MA ZERO NASCITE SU `500` PASSI**, contro `164` di `B-SCAL` e `9` di `B-TS`.
+### **Non l'avevo previsto, e non è un contrattempo: è un risultato.** La coppia che legge la
+fase ### **tiene le masse coerenti E impedisce di raggiungere la soglia di mitosi.**
+### **Se la divisione è un fenomeno da tenere, questo è un COSTO sul tavolo della decisione, non
+un dettaglio.** ### ➜ **E smentisce `PE-5` per un motivo che non avevo previsto: non è che le
+nascite non dominino il lavoro di `A` — non ce ne sono.**
+
+## ⚠ **E LA SECONDA CLAUSOLA RIPETEVA L'ERRORE DEL PUNTO `1`, QUINDI NON LO RIPETO**
+
+`SENZA BAGNO NON ESPLODE` chiede che l'energia cinetica ### **totale** cresca meno di `×3`.
+Misurato ### **`×20.2527`** → ### ⛔ **NON SODDISFATTO**, e il verdetto resta. ### **Ma la
+clausola è scritta sulla grandezza TOTALE, cioè la stessa dominata dal VUOTO che il punto `1` di
+questo mandato ha appena dichiarato sbagliata.** Per classe: le ### **MASSE** crescono
+### **`×8.0026`**, il ### **VUOTO** ### **`×21.7530`** — un fattore `2.72` fra le due.
+### ➜ **Quello che esplode è il VUOTO.** *(Il confronto: `B-TS`, con la coppia spinoriale e lo
+stesso bagno spento, dava `×25.29`.)*
+
+## ✔ **I CONTROLLI, TUTTI MISURATI**
+
+| | |
+|---|---|
+| la ### **byte-inerzia** dell'osservatore, sul blob ### **di oggi** | ### **`PASSA`**: `0` differenze su ### **`291`** attributi, `220` passi ### **attraverso la prima nascita**, esclusioni dichiarate ### **vuote**, involucri rimossi e verificati. ### ⚠ **E il `blob_termo_h3` del json è `dd718098`**, non quello vecchio: un `PASSA` che non nominasse il codice di oggi non direbbe niente |
+| l'intervento del ramo scalare | ### **`500` chiamate, `500` ripristini, `0` firme diverse** sulle otto chiavi spinoriali, `0` flag non ripristinati |
+| la ### **spartizione per classe** di `U` | le tre classi ### **ricompongono `U`** *(scarto relativo `0.000`)* e ### **gli archi del passo** *(scarto `0`)*, su `500` passi |
+| le ### **due asserzioni** a ogni passo | `n` non cala mai, e nessun indice d'arco sfora `n`: lo strumento ### **FERMA** se cadono |
+
+**Previsioni: `13` confermate, `8` smentite su `21`.** ### **`PE-5` e `PE-7` sono le due che
+valgono:** `PE-5` smentita ### **per la premessa, non per il numero**; e `PE-7` chiede che
+`W_extra` non sia trascurabile — misurato ### **`16.53 %`** su tutta la corsa, ### ⚠ **ma
+`9.33 %` su `1..215` e `22.18 %` su `216..500`.** ### **Il verdetto cambia con la finestra, e
+riporto entrambe invece di scegliere quella che mi conviene.**
+
+## ⛔ **UN MIO ERRORE IN UN MESSAGGIO DI COMMIT, CHE RESTA IN STORIA**
+
+In `32d5e60` ho scritto a mano ### **`1031 -> 1077` righe**, dove il conto vero è
+### **`674 -> 1062`** *(da `git show HEAD~1` e `wc -l`)*. ### **È `L-NUMERI` violata: un numero
+battuto a mano invece di uscire da un comando.** Il correttivo è stato ### **rifiutato da
+`H-FILE`** — su un `--amend` non c'è nulla in stage, quindi la lista che il presidio calcola è
+### **vuota** — e il commit era già pushato: ### **non riscrivo storia pushata, la correzione
+sta qui.**
+
+> ### ⛔ **NON COMINCIO LA CURA.** `ENERGIA-NON-DEFINITA`, `SPINORE-SENZA-FASE` e
+> `SCIOGLIMENTO-FASE` sono ### **annotate, non riscritte**, e nessuna voce nuova è aperta:
+> `ENERGIA-NON-DEFINITA` ### **già affermava** ciò che oggi è ### **misurato**.
+> ### **La decisione è di Luca.**

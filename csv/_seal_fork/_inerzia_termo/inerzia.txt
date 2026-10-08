@@ -2,7 +2,7 @@
 LA BYTE-INERZIA DELL'OSSERVATORE `TermoH3`: 220 passi CON e SENZA
 ========================================================================================================
   simulatore b8c21049   atteso b8c21049
-  strumento 2a15d957 (termo_h3)   fcf75043 (misura_verso)
+  strumento dd718098 (termo_h3)   fcf75043 (misura_verso)
   ### LA FINESTRA E' 220 PASSI, cioe' OLTRE la prima nascita (216).
 
   --- il braccio NUDO
