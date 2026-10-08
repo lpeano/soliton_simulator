@@ -2,7 +2,7 @@
 LA BYTE-INERZIA DELL'OSSERVATORE `TermoH3`: 220 passi CON e SENZA
 ========================================================================================================
   simulatore b8c21049   atteso b8c21049
-  strumento 5b8c5875 (termo_h3)   fcf75043 (misura_verso)
+  strumento 10c2d0cc (termo_h3)   fcf75043 (misura_verso)
   ### LA FINESTRA E' 220 PASSI, cioe' OLTRE la prima nascita (216).
 
   --- il braccio NUDO
@@ -23,6 +23,6 @@ LA BYTE-INERZIA DELL'OSSERVATORE `TermoH3`: 220 passi CON e SENZA
   controllo dell'ATTRIBUTO ESCLUSO -- le CHIAVI cambiano, i NUMERI no:
      somma dei conteggi di `_calcpsi_origini`:  nudo 1   osservato 1
      `_calcpsi_w_none`:                         nudo 1   osservato 1
-     chiavi (che POSSONO differire):            nudo 1   osservato 1  ['_inv_psi:284']
+     chiavi (che POSSONO differire):            nudo 1   osservato 1  ['_inv_psi:384']
      `_calcpsi_chiamate` TOTALI:                nudo 441   osservato 441
   ### ✔ I NUMERI COINCIDONO: l'involucro cambia le CHIAVI e non i CONTEGGI, quindi l'esclusione copre contabilita' e non fisica.
