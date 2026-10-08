@@ -10255,3 +10255,15 @@ scatta è il terzo — *`LO STATO PIÙ BASSO È GIÀ UNA MASSA`* — ### **subit
 ### **24.6** su `400` in `NON-NORM` e ### **348** in `NORM` — ### **la geometria da sola concentra,
 e la normalizzazione toglie quasi tutta quella concentrazione.** Referto:
 `doc/REFERTO_proto_mare_v2_2026-10-08.md`. ### **La forma di `H` è una decisione di Luca.**
+
+## IL CENSIMENTO DELLE LEGGI, **per forma** — *e il difetto che ha preso da sé* (2026-10-08)
+
+Il mandato della traduzione in `H` chiede di partire da `step()` e dalle funzioni che chiama.
+### ⛔ **Non basta, ed e' misurato:** il grafo delle chiamate chiuso ### **dal solo `step`**
+raggiunge `44` funzioni e ### **non contiene `mitosi`, Schwinger, `scuoti_vuoto` ne' la memoria
+hebbiana** — quelle le chiama ### **il driver**. ### ➜ **Con la sola radice `step` avrei perso
+TUTTA la classe CRESCITA DELLO SPAZIO**, cioe' esattamente la classe su cui il mandato chiede il
+conto. Le radici sono ora ### **`10`, dichiarate nel sorgente**: `68` funzioni, ### **`419`
+scritture di stato** su `339` nomi, `26` spente nella scena del driver, `11` a senso unico, e
+`32` flag cambiati dall'argv ### **del driver**, non dai default. Strumento:
+`csv/_test_fork/_censimento_leggi.py`, voce in `doc/INVENTARIO_strumenti.md`.

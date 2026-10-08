@@ -1920,3 +1920,25 @@ su un run sano: `eta`, `inf` su tutti i 12802** — legittimo e dichiarato.
 > `:7165`, e `step` la **calibra**. ### **«Derivata sporca» e «`peq` da calibrare» sono la STESSA
 > COSA**, e per `9-ter` questo conta: la generalizzazione 4 ### **da' un nome a cio' che il sistema
 > fa gia' in due punti.**
+
+### 🔬 IL CENSIMENTO DELLE LEGGI CHE MUOVONO LO STATO, **per FORMA** *(2026-10-08)*
+
+| | |
+|---|---|
+| **file** | `csv/_test_fork/_censimento_leggi.py` *(319 righe)* |
+| **COMANDO** | `python csv/_test_fork/_censimento_leggi.py` |
+| **cosa misura** | ### **ogni scrittura di stato** raggiungibile dalle `10` radici dichiarate, cercata ### **PER FORMA** *(`self.X =`, `self.X[...] =`, `+=`, `np.add.at`, `setattr`)*, con ### **la GUARDIA** *(i flag di modulo che la dominano)* e ### **lo stato EFFETTIVO del flag NEL DRIVER**, preso da `_cli_flag.argv_del_driver()` e ### **non** dal default del modulo |
+| **BLOB** | `03387ee7` *(sha1 dei byte grezzi)* |
+
+**Esito:** `419` scritture su `339` nomi, da ### **`68` funzioni**; `26` ### **spente** nella scena
+del driver, `393` vive, `11` ### **a senso unico**; `32` flag cambiati dall'argv.
+
+> ### ⛔ **E IL CENSIMENTO HA PRESO UN DIFETTO DI SE STESSO:** con la sola radice `step` il grafo
+> raggiunge ### **`44`** funzioni e ### **NON contiene `mitosi`, Schwinger, `scuoti_vuoto` ne' la
+> memoria hebbiana** — quelle le chiama ### **il DRIVER**, non lo `step`. ### ➜ **Un censimento con
+> la sola radice `step`, che e' quello che il mandato nomina, avrebbe perso TUTTA la classe
+> CRESCITA.** Le radici sono `10`, dichiarate nel sorgente, e portano a `68` funzioni *(`+24`)*.
+
+> ### ⚠ **CIO' CHE IL METODO NON VEDE, dichiarato:** le scritture per ### **mutazione** *(un `dict`
+> aggiornato dentro una funzione a cui l'oggetto e' passato come argomento)* — e' il falso positivo
+> gia' preso su `conc_nodi`. Per quelle il censimento e' ### **per difetto**.
