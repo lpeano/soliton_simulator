@@ -1,0 +1,28 @@
+========================================================================================================
+IL COLLAUDO DELLA FORMA `U(2)` -- sulla scena VERA del driver
+========================================================================================================
+  simulatore b8c21049   atteso b8c21049
+====================================================================================================
+LA CONFIGURAZIONE INTERA (`P5`) -- non i flag toccati, TUTTI
+====================================================================================================
+  booleani di modulo confrontati con l'argv del DRIVER: 82
+  -> IN CONFIGURAZIONE DEL DRIVER: nessuna differenza. ZERO su 82.
+
+  scena: n = 12802, archi = 471564
+  ok    gauge: ### la PRIMA componente di `chi` e' REALE e `>= 0` su tutti i nodi *(parte immaginaria massima `1.213e-18`, minimo reale `6.454e-03`)*, e la NORMA resta `1` *(scarto massimo `4.441e-16`)*
+     ### nodi al POLO `b` *(gauge sulla seconda componente)*: 0 su 12802
+     ### ⚠ E ALLORA QUEL RAMO NON E' ESERCITATO SU QUESTA SCENA: la gauge sulla seconda componente e' scritta e NON provata dai dati. ### Lo dichiaro invece di contarla fra i controlli passati.
+     ### `rms(wrap(alpha - phi/2))` = 1.9716 radianti, mediana 1.7377 -- ### se e' grande, la forma SOSTITUISCE la fase dello spinore invece di riscriverla
+  ### ⚠ IL COLLAUDO USA IL BLOCH CORRENTE, non quello ritardato: `_bloch_ritardato` ha MEMORIA (scrive `self._nb_ret`) e chiamarla qui sporcherebbe lo stato. ### Si prova la DERIVATA, non lo Strato 1.
+  `E` = -4877.058861   `max|coppia|` = 2.541910
+  ok    D3 (1): ### **`coppia = -dE/dphi`**, confermata dalla DIFFERENZA FINITA su `12` nodi a caso, ristretta agli archi del nodo: scarto relativo massimo `5.198e-09`, contro un PAVIMENTO DERIVATO di `4.036e-09` *(`eps_macchina*|E_loc|/(2*eps)`, con `|E_loc| ~ 10.10`)*
+  ok    D3 (1b): ### e la forma `|M| sin(Dphi/2 + arg M)` da' la STESSA coppia *(scarto relativo `3.494e-16`)*: la derivata non poggia su una sola scrittura
+  ok    D3 (2): ### **`phi_k + 2pi` su UN NODO CAMBIA `E`** *(da `-4877.058861` a `-4877.109306`, differenza `-0.050445`)*: `psi_k -> -psi_k` e gli archi che toccano `k` cambiano segno
+  ok    D3 (2): ### **`phi_k + 4pi` RIPORTA `E` IDENTICO** *(scarto `0.000e+00`)*
+  ok    D3 (2): ### ⚠ **e uno spostamento GLOBALE di `2pi` NON cambia `E`** *(scarto `9.095e-13`)*, perche' `E` dipende dalle DIFFERENZE -- ### **la doppia copertura si vede sul segno RELATIVO, non su quello assoluto**
+  ok    D3 (3): ### con `chi` uguale su tutti i nodi `N/2` E' L IDENTITA' *(scarto massimo `0.000e+00`)* -- e viene da `_link_su2_N` DEL SIMULATORE, non da una mia matrice
+  ok    D3 (3): ### **IL LIMITE `U(1)` TORNA**: la coppia si riduce a `(1/2) K_C somma A sin((phi_j - phi_k)/2)` *(scarto relativo `0.000e+00`)*
+  ok    D3 (4): ### ⛔ **DEVE FALLIRE -- la coppia SPINORIALE del driver NON e' `-dE/dphi`** della forma `U(2)`: scarto massimo relativo `1.054e+00`
+     ### e i due ordini di grandezza: `max|coppia U(2)|` = 2.541910, `max|coppia driver|` = 1.405733 -- ### il `1/2` e il peso `cos(chi/2)` si vedono
+--------------------------------------------------------------------------------------------------------
+  COLLAUDO DELLA FORMA `U(2)`: 9 su 9

@@ -10442,3 +10442,26 @@ sono ### **ACCESI** nel driver *(non spenti)*, perché l'argv li passa — quind
 ### ⚠ **Ma il DEFAULT del modulo è `POZZO_D = False`**, cioè chi importa il simulatore senza il
 driver ha la gravità che legge `pos`: ### **per `A17` quel default è sbagliato**, ed è una
 decisione di Luca.
+
+## `D3` SI CHIUDE: **ABBANDONATO PER DECISIONE**, non per esito (2026-10-08)
+
+`D3` chiedeva *«la forma `U(2)` regge dentro la dinamica del SECONDO ordine?»*, e ### **`A16`
+dice che quella dinamica non c'è più.** La corsa `B-U2-TS-NOSYNC` era ferma al primo passo su
+una mia guardia *(`_psi_spinor` non esiste al passo `1`)*, e la correzione era scritta e non
+applicata. ### ✔ **Il collaudo della FORMA invece è completo — `9` su `9` — e il suo output è
+committato ora.**
+
+### **Passa all'era `2`:** la derivata `coppia = −∂E/∂φ` *(### **`3.494e-16`**, e la forma
+alternativa dà lo stesso numero: non poggia su una scrittura sola)*; la ### **doppia copertura
+sul segno RELATIVO** *(`9.095e-13`: `E` dipende dalle differenze)*; il ### **limite `U(1)`
+esatto** *(`0.000e+00`)*; e ⭐ **il fatto che vale di più: `rms(α − φ/2) = 1.9716` rad, cioè
+i due orologi dell'era `1` sono SCOLLEGATI.**
+
+### ⛔ **Non passa:** la corsa e il criterio sull'`AUC`, che misuravano ### **dentro `phivel`**
+e confrontavano due transitori del secondo ordine. ### ⚠ **E nemmeno la mia guardia:** *«manca
+`_psi_spinor` al passo `1`»* è un difetto dell'### **ordine di esecuzione** di un passo a più
+settori — con ### **una sola `H` quel problema non esiste.**
+
+### ⭐ **E un numero che non è cambiato ma ha cambiato significato:** lo scarto `1.054` fra la
+coppia del driver e la forma `U(2)` era *«quanto differisce»*; col criterio del «no» di Luca
+*(soglia del `10 %`)* dice che la forma `U(2)` ### **non è una traduzione: è una legge nuova.**

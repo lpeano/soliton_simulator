@@ -201,3 +201,43 @@ chiamata ### **più di una volta per passo**; `phivel` non finito.
 7. commit ### **prima** della corsa; corsa in background, interrogata, senza chiudere il turno;
 8. ### **un referto** coi numeri dai json; poi ### ⛔ **FERMO: la cura nel simulatore è una
    decisione di Luca.**
+
+## LA CHIUSURA DI `D3` — **ABBANDONATO PER DECISIONE** *(`A16`, 2026-10-08)*
+
+*(Annotazione, come vuole il par.8: ### **sopra non si riscrive niente.**)*
+
+> ### ⛔ **`D3` NON si chiude perche' e' riuscito ne' perche' e' fallito: si chiude perche'
+> LA DOMANDA NON E' PIU' QUELLA.** `D3` chiedeva *«la forma `U(2)` regge DENTRO la dinamica
+> del SECONDO ordine?»*. ### **`A16` dice che quella dinamica non c'e' piu'**, e la decisione
+> e' di Luca.
+
+### **COM'ERA RIMASTO.** La corsa `B-U2-TS-NOSYNC` si e' fermata ### **al primo passo**, su
+una ### **mia guardia**: `_psi_spinor` ### **non esiste ancora al passo `1`** *(lo scrive
+`_passo_spinoriale`, che gira DOPO la coppia)*. La correzione — ridurre la forma al suo limite
+`U(1)` e ### **contare quei passi** — e' ### **scritta e NON applicata**, perche' il file era
+importato dal processo in volo *(par.5)*.
+
+### ✔ **CHE COSA DI `D3` RESTA VALIDO E PASSA ALL'ERA `2`** *(il collaudo e' su `9` controlli
+su `9`, e il suo output e' committato in questo commit)*:
+
+| | il fatto | il numero |
+|---|---|--:|
+| ### ⭐ **la DERIVATA della forma** | `coppia = −∂E/∂φ`, e la forma `\|M\| sin(Δφ/2 + arg M)` da' ### **la STESSA coppia**: la derivata ### **non poggia su una sola scrittura** | ### **`3.494e-16`** |
+| ### **la DOPPIA COPERTURA sul segno RELATIVO** | uno spostamento ### **globale** di `2π` ### **non cambia `E`**, perche' `E` dipende dalle ### **DIFFERENZE** ⇒ ### **la doppia copertura si vede sul segno RELATIVO, non su quello assoluto** | `9.095e-13` |
+| ### **il LIMITE `U(1)` ESATTO** | la coppia si riduce a `(1/2)·K_C·Σ A sin((φ_j − φ_k)/2)` | ### **`0.000e+00`** |
+| ### ⭐ **e IL FATTO MISURATO che vale di piu'** | ### **i due orologi dell'era `1` sono SCOLLEGATI:** la fase comune `α` dello spinore e `φ/2` ### **non sono la stessa cosa** | ### **`rms(wrap(α − φ/2)) = 1.9716` rad** *(mediana `1.7377`)* |
+
+### ⛔ **CHE COSA NON PASSA, e appartiene al SECONDO ordine:**
+
+| | |
+|---|---|
+| ### **la corsa `B-U2-TS-NOSYNC`** | misurava la forma ### **dentro `phivel`**, cioe' dentro l'inerzia che `A16` ### **toglie** |
+| ### **il criterio sull'`AUC`** | confrontava due ### **traiettorie del secondo ordine**. ### **Nell'era `2` la coerenza si misura su uno stato stazionario, non su un transitorio** |
+| ### ⚠ **e la mia guardia stessa** | *«`_psi_spinor` non esiste al passo `1`»* e' un difetto ### **dell'ordine di esecuzione** di un passo a piu' settori: con ### **una sola `H`** quel problema ### **non esiste** |
+
+### ⚠ **E UNA COSA CHE NON ERA UN RISULTATO DI `D3` MA LO E' DIVENTATA:** lo scarto
+### **`1.054`** fra la coppia del driver e la forma `U(2)` era nato come *«quanto la forma
+differisce»*. ### ➜ **Con il criterio del «no» di Luca** *(soglia del `10 %` per chiamare una
+riscrittura «traduzione»)* ### **quel numero dice che la forma `U(2)` NON E' UNA TRADUZIONE: e'
+UNA LEGGE NUOVA**, e sta nell'elenco delle decisioni di `doc/TRADUZIONE_IN_H.md` *(la `11`)*.
+### **Il numero non e' cambiato: e' cambiato che cosa significa.**
