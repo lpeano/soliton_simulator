@@ -4,6 +4,8 @@
 
 > ### ⛔ **Simulatore `b8c21049`, `ASSIOMI.md` non toccato, e il prototipo NON importa il simulatore.** ### **Solo `U = I`**, come il mandato chiede.
 
+> ### ⚠ **E LA `H` DI QUESTO BANCO È UNA SONDA MINIMA SCELTA DAL GUARDIANO** *(precisazione di Luca, 2026-10-08)*: `hopping + (g/2)|ψ|⁴` è una ### **forma DA MANUALE** *(Schrödinger non lineare discreta)*, ### **NON una decisione di Luca e NON una traduzione delle sue leggi** — quella è il lavoro di `doc/TRADUZIONE_IN_H.md`. ### ⛔ **E il GRAFO FISSO è un'IMPALCATURA DEL TEST, non il modello di Luca:** nello spazio di Luca nodi e archi ### **nascono** *(`doc/RISCRITTURA_PRIMO_ORDINE.md` §⑤)*.
+
 ---
 
 # ⛔ `①` **L'ESITO: `LO STATO PIÙ BASSO È GIÀ UNA MASSA`, E SCATTA SUBITO SOTTO `g = 0`**

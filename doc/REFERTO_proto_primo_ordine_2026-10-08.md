@@ -4,6 +4,8 @@
 
 > ### ⛔ **IL SIMULATORE NON È TOCCATO** *(`b8c21049`)*, **e il prototipo NON lo importa** — e lo ### **asserisce** guardando `sys.modules`, non lo promette. L'assioma è `A16` *(`e17a334`)*, il piano `doc/RISCRITTURA_PRIMO_ORDINE.md`.
 
+> ### ⚠ **E LA `H` DI QUESTO BANCO È UNA SONDA MINIMA SCELTA DAL GUARDIANO** *(precisazione di Luca, 2026-10-08)*: `hopping + (g/2)|ψ|⁴` è una ### **forma DA MANUALE** *(Schrödinger non lineare discreta)*, ### **NON una decisione di Luca e NON una traduzione delle sue leggi** — quella è il lavoro di `doc/TRADUZIONE_IN_H.md`. ### ⛔ **E il GRAFO FISSO è un'IMPALCATURA DEL TEST, non il modello di Luca:** nello spazio di Luca nodi e archi ### **nascono** *(`doc/RISCRITTURA_PRIMO_ORDINE.md` §⑤)*.
+
 ---
 
 # ⛔ `①` **IL TETTO DEI `20` MINUTI È STATO SUPERATO, E LO DICO PRIMA DEI RISULTATI**

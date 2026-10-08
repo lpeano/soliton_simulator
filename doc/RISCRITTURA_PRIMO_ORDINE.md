@@ -40,6 +40,19 @@ H  =  - somma_archi w_ij * ( <psi_i| U_ij |psi_j> + c.c. )   +  (g/2) * somma_k 
 | `g` | il termine non lineare | ### **si SCANDISCE**, non si sceglie: il prototipo prova cinque valori dichiarati prima |
 | la metrica, il vuoto, le nascite | — | ### **non ci sono ancora.** Vedi `③` |
 
+> ### ⛔ **QUESTA `H` E' UNA SONDA MINIMA SCELTA DAL GUARDIANO, NON UNA DECISIONE DI LUCA E
+> NON UNA TRADUZIONE DELLE SUE LEGGI** *(precisazione di Luca, 2026-10-08)*.
+> ### **E' una forma DA MANUALE** — la ### **Schrodinger non lineare discreta**, `DNLS` —
+> presa in prestito perche' e' la piu' semplice che abbia insieme un trasporto e una non
+> linearita'. ### ⚠ **Il documento, prima di questa riga, la presentava come «la forma al primo
+> ordine»: era MIO, e non lo diceva.**
+>
+> | | |
+> |---|---|
+> | che cos'e' | ### **un BANCO**: serve a sapere ### **se** una dinamica al primo ordine su un grafo regge le masse, ### **non** quale `H` abbia il modello di Luca |
+> | ### ⛔ **che cosa NON e'** | la traduzione delle leggi del simulatore. ### **Quella non e' ancora stata fatta**, ed e' il lavoro di `doc/TRADUZIONE_IN_H.md` |
+> | ### ⛔ **e il GRAFO FISSO** | e' un'### **IMPALCATURA DEL TEST, non il modello di Luca.** Nel modello lo spazio e' ### **DINAMICO** *(vedi `⑤`)*: nodi e archi ### **nascono**. Il prototipo lo congela ### **per poter misurare una cosa alla volta**, non perche' creda che sia fisso |
+
 ---
 
 # ② CHE COSA SPARISCE — **e il numero che lo giustifica**
@@ -102,7 +115,72 @@ ordinano**. ### **Quindi non manca una legge in più: ne mancano di meno, e scri
 
 ---
 
-# ⑤ CHE COSA QUESTO DOCUMENTO NON DICE
+# ⑤ **LO SPAZIO NASCE DALLA MATERIA** *(precisazione di Luca, 2026-10-08)*
+
+> ### ⭐ **LA FRASE DI LUCA:** lo spazio non e' un contenitore dato. ### **E' un grafo
+> DINAMICO**, e nodi e archi nascono ### **perche' la materia lo esige.**
+
+| | il punto | ### **stato** |
+|---|---|---|
+| **`S1`** | ### **lo spazio e' un grafo DINAMICO:** nodi e archi ### **nascono** perche' la materia lo esige. La mitosi scatta ### **oltre una soglia**, e quella soglia dev'essere ### **UNA LEGGE, NON UN NUMERO** *(`A1`, `A15.2`)* | ### ⭐ **DECISO** *(e' il modello di Luca)*; ### ⛔ **la soglia di oggi NON e' una legge**, ed e' la cura che `A1` chiede |
+| **`S2`** | ### **la crescita dello spazio e' l'UNICA freccia ammessa** *(`A14.2`, `REVERSIBILITA-LOCALE`, `LOSCHMIDT-ECO`)*: ogni altra irreversibilita' e' un difetto, non una scelta | ### ⭐ **DECISO** |
+| **`S3`** | ### **le distanze NON sono primarie:** sono ### **relazioni e memorie** — `d0` insegue `d`, e il metro e' una cosa che il sistema ### **ricorda**, non un dato | ### ⭐ **DECISO** |
+| **`S4`** | al primo ordine la nascita deve ### **CONSERVARE la quantita' di campo `Σρ`** *(`A14.3`, `A16.4`)*. ### **Forma candidata:** `ψ_p → ψ_p/√2` sul genitore ### **e** sul nato, ### **stessa fase e stessa direzione** | ### **CANDIDATO** *(la forma e' proposta, non decisa)* |
+| **`S5`** | la nascita deve ### **cedere o ricevere la differenza di energia dal VUOTO LOCALE** *(`A14.2`)* — che oggi e' sostituito dal ### **BAGNO GLOBALE** | ### ⛔ **APERTO:** ### **quale termine paghi il conto nel vuoto locale NON e' scritto.** E il bagno globale di oggi e' ### **misurato**: `B-SCAL` ### **`164`** nascite col bagno contro ### **`0`** di `B-SCAL-TS` senza — ### **senza bagno non nasceva niente** |
+
+### ⭐ **E L'ANELLO, che e' la cosa che il prototipo NON vede:**
+
+```
+materia concentrata  ->  NASCE SPAZIO  ->  la densita' si diluisce e la geometria cambia
+                     ->  il campo si muove diversamente  ->  (di nuovo)
+```
+
+| | |
+|---|---|
+| ### **il prototipo ne vede META'** | ### **«la geometria agisce sul campo»** — e basta: `w` e `U` sono ### **fissi** |
+| ### ⛔ **la meta' che manca** | ### **«il campo agisce sulla geometria»**, cioe' ### **la nascita.** ### **Non e' un dettaglio: e' il ramo che CHIUDE l'anello**, e senza di esso il banco non puo' dire niente su come nasce una massa |
+
+---
+
+# ⑥ **IL MARE `v2`: LA SONDA NON HA UN FRENO ALLA CONCENTRAZIONE** *(`8efed03`)*
+
+### **IL FATTO MISURATO.** Con la sonda, ### **a norma fissa**, lo stato piu' basso e' il
+### **COLLASSO SU UN NODO**, per ### **ogni** `g < 0`:
+
+| | |
+|---|---|
+| a `g = -5` | ### **`-400000`** *(un nodo)* contro ### **`-18534`** *(il mare esteso)*, braccio `NON-NORM` |
+| il conto | `H`(un nodo)` = (g/2)N²` va come ### **`N²`**; `H`(esteso)` ≈ -λN + (g/2)N²/n_eff` va come ### **`N`** |
+| ### ⛔ **e nessun `ρ_0` salva** | alla soglia la non linearita' vale ### **`0.029`** e ### **`0.005`** contro `λ_max` `5.65` e `1.00`: ### **«il mare e' il piu' basso» e «la non linearita' conta» si ESCLUDONO in questa `H`** |
+
+### ➜ **LA LETTURA: LA SONDA NON HA UN FRENO.** `(g/2)|ψ|⁴` con `g < 0` e' ### **pura
+coesione**: niente in quella `H` si oppone alla concentrazione, quindi il minimo e' la
+concentrazione ### **massima** che la norma consente.
+
+> ### ⚠ **IPOTESI DEL GUARDIANO, e la scrivo COME TALE:** nel modello di Luca il freno
+> candidato e' ### **PROPRIO LA NASCITA DELLO SPAZIO** — la materia oltre soglia ### **divide
+> il nodo e si diluisce** — insieme a cio' che nel simulatore fa da ### **repulsione** e da
+> ### **massa critica**. ### ➜ **Il collasso del prototipo sarebbe allora IL FENOMENO CHE LO
+> SPAZIO DINAMICO DEVE IMPEDIRE.** ### ⛔ **E' un'ipotesi: non e' misurata, e il conto che la
+> deciderebbe sta in `doc/TRADUZIONE_IN_H.md`.**
+
+### 📌 **E IL NUMERO SU CUI LUCA DECIDERA' LA FORMA DELL'INTERFERENZA** — il `PR`
+dell'autovettore di Perron a `g = 0`, cioe' ### **quanto concentra la GEOMETRIA DA SOLA**,
+senza nessuna non linearita':
+
+| | `PR` su `400` | `max/media` | `λ_max` |
+|---|--:|--:|--:|
+| ### **senza normalizzazione** *(`w_ij` come oggi)* | ### **`24.6`** | `29.38` | `5.6494` |
+| ### **con normalizzazione** *(`w_ij/√(s_i s_j)`)* | ### **`348.2`** | `2.25` | `1.0000` |
+
+### ⛔ **La scelta fra le due forme e' una DECISIONE DI LUCA**, e la normalizzazione
+### **tocca `A3`**: `s_k` e' una grandezza del proprio intorno, ma e' una ### **SOMMA**, non una
+statistica di posizione, quindi il meccanismo che `A3` nomina ### **non scatta** — misurato,
+`s̃_k` passa da `0.3856` a `0.1160` di deviazione relativa, ### **con media `0.98`, non `1`**.
+
+---
+
+# ⑦ CHE COSA QUESTO DOCUMENTO NON DICE
 
 | | |
 |---|---|
