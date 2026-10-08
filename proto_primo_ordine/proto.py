@@ -54,6 +54,19 @@ R_ARCO = 0.22                # ### arco se d <= R; da' grado medio ~16, e SI MIS
 LAM_P = R_ARCO / 2.0         # ### la scala del peso: w = exp(-d/LAM_P)
 SIGMA_PACCO = 2.0 * R_ARCO   # ### la larghezza del pacchetto iniziale
 G_SCANSIONE = (0.0, -2.0, -5.0, -10.0, -20.0)    # ### CINQUE valori, dichiarati prima
+# ============================================================================
+#   ### ⭐ **I NUMERI DEL MARE** *(esperimento 2, idea di Luca)*
+# ============================================================================
+# ### ⛔ **`RHO_0 = 1`, E IL PERCHE' CONTA:** con norma totale `1` si avrebbe
+#   `rho_0 = 1/400 = 0.0025`, e il termine non lineare `g*rho_0` sarebbe `0.05` a
+#   `g = -20` contro una scala di salto `~5`: ### **la non linearita' sarebbe
+#   NEGLIGIBILE per costruzione, e non succederebbe niente.** Con `rho_0 = 1` il
+#   confronto e' `g` contro `~5`. ### **E' un numero di banco, ed e' dichiarato.**
+RHO_0 = 1.0
+EPS_MARE = 0.01            # ### il disturbo di fase, in radianti
+PASSI_MARE = 5000          # ### `T = PASSI_MARE * DT = 10`, riportato in unita' di `t_c`
+CAMPIONI_MARE = 50         # ### ogni quanti passi si campiona per la VITA dei grumi
+SOGLIA_GRUMO = 3.0         # ### `rho > 3 * media`: la soglia del mandato
 SEMI = (11, 12, 13)          # ### TRE semi. ### **`P3` NON e' soddisfatta, e si dice**
 DT = 0.002                   # ### il passo
 PASSI = 4000                 # ### la corsa dell'esperimento
@@ -297,6 +310,48 @@ def catena(n=160, passo=1.0):
             "archi": int(n - 1), "isolati": 0}
 
 
+def solitone_discreto(n, x, x0, LARG, g, toll=1e-14, maxit=200):
+    """### ⭐ **IL SOLITONE DISCRETO ESATTO, con Newton** -- e non il `sech`.
+
+    Sulla catena l equazione STAZIONARIA della mia discretizzazione e'
+
+        -(u_{k-1} + u_{k+1} - 2 u_k) + g |u_k|^2 u_k = mu u_k
+
+    *(la diagonale `-2` e' tolta col fattore `e^{2it}`, come nel docstring di `(b)`)*.
+    ### **Il `sech` e' la soluzione del limite CONTINUO**, non di questa: si parte da
+    lui e si risolve con ### **Newton** su `u` reale, a `mu` FISSO.
+    ### ✔ **E il residuo dell equazione si RESTITUISCE**, cosi' il collaudo verifica
+    che il punto trovato sia ### **davvero** stazionario invece di fidarsi di Newton.
+    """
+    eta = 1.0 / LARG
+    u = (eta * np.sqrt(2.0 / abs(g)) / np.cosh(eta * (x - x0)))
+    # ### `mu` del limite continuo: `-eta^2` *(il solitone e' legato)*
+    mu = -eta ** 2
+
+    def resid(v):
+        lap = np.zeros(n)
+        lap[1:-1] = v[:-2] + v[2:] - 2.0 * v[1:-1]
+        lap[0] = v[1] - 2.0 * v[0]
+        lap[-1] = v[-2] - 2.0 * v[-1]
+        return -lap + g * v ** 3 - mu * v
+
+    it = 0
+    for it in range(1, maxit + 1):
+        r = resid(u)
+        # ### la jacobiana: tridiagonale, e si risolve con `np.linalg.solve` *(n = 160:
+        #   densa va benissimo, e NON e' il collo di bottiglia)*
+        J = np.zeros((n, n))
+        np.fill_diagonal(J, 2.0 + 3.0 * g * u ** 2 - mu)
+        idx = np.arange(n - 1)
+        J[idx, idx + 1] = -1.0
+        J[idx + 1, idx] = -1.0
+        du = np.linalg.solve(J, r)
+        u = u - du
+        if float(np.max(np.abs(du))) <= toll:
+            break
+    return u, mu, float(np.max(np.abs(resid(u)))), it
+
+
 def collaudo():
     _niente_simulatore()
     esiti = []
@@ -342,73 +397,68 @@ def collaudo():
           "*(soglia `1e-8`)*" % de, de < 1e-8)
     prova("(a) ### e l'iterazione ### **converge sempre** entro il tetto *(massimo %d su %d)*"
           % (int(np.max(its)), MAX_ITER), int(np.max(its)) < MAX_ITER)
-    # ---- ### **(b) IL CONTROLLO POSITIVO NOTO: il `sech` della `NLS`**
-    #      ### ⛔ **E IL DISCRIMINANTE SI FA SUL `dt`, NON SULLA LARGHEZZA.**
-    #      La prima stesura confrontava `LARG = 8` e `LARG = 12` ### **scalando `dt` come
-    #      `LARG^2`** *(perche' la frequenza del solitone va come `eta^2`)*. ### **Cosi'
-    #      l errore TEMPORALE resta FISSO per costruzione**, e il test non poteva vedere il
-    #      reticolo: misurato `1.903e-03` contro `2.193e-03`, un fattore `0.87`.
-    #      ### ➥ **Il mio discriminante NON discriminava, e il numero me lo ha detto.**
-    #      ### ⭐ **IL DISEGNO NUOVO:** stessa larghezza, `dt` ### **DIMEZZATO**. Se lo
-    #      scarto cala di ~`4` *(secondo ordine)*, il residuo e' ### **DEL PASSO TEMPORALE**,
-    #      e la soglia si applica al `dt` piu' fine. ### **Se non cala, NON lo chiamo
-    #      discretizzazione: lo riporto come residuo NON SPIEGATO.**
+    # ---- ### **(b) IL CONTROLLO POSITIVO: IL SOLITONE DELL EQUAZIONE CHE INTEGRO**
+    #      ### \u26d4 **DUE GIRI SBAGLIATI, MIEI, PRIMA DI ARRIVARE QUI, e li scrivo:**
+    #      `(1)` avevo normalizzato il `sech` a norma `1`, distruggendo la relazione
+    #      ampiezza-larghezza che ### **fa** di quel profilo un solitone *(`3.373e-01`)*;
+    #      `(2)` poi avevo chiamato il residuo <<discretizzazione spaziale>> e messo un test
+    #      sulla LARGHEZZA che ### **non discriminava**, perche' scalavo `dt` come `LARG^2` e
+    #      l errore temporale restava fisso ### **per costruzione**;
+    #      `(3)` e il test sul `dt` ha dato ### **lo STESSO numero a quattro cifre**
+    #      *(`1.903e-03` a `dt` e a `dt/2`, fattore `1.00`)*: una quantita' che non si muove
+    #      dimezzando il passo ### **non e' un errore di integrazione.**
+    #      ### \u2b50 **L IPOTESI CHE RESTAVA: il `sech` e' il solitone del limite CONTINUO,
+    #      non uno stato stazionario dell equazione DISCRETA.** E un'ipotesi non e' una
+    #      misura: si ### **COSTRUISCE** il solitone discreto esatto con Newton, si
+    #      ### **VERIFICA** che sia stazionario, e si propaga ### **QUELLO.**
     C = catena()
     x = C["pos"][:, 0]
     x0 = x[len(x) // 2]
     gs = -1.0
     LARG = 8.0
-    # ### ⛔ **LA RELAZIONE AMPIEZZA-LARGHEZZA E' CIO' CHE FA DI QUESTO UN SOLITONE.**
-    #   Dalla discretizzazione, con `w = 1` e `U = I`, togliendo la diagonale con
-    #   `psi = e^{2it} u`:  `i u_t + u_xx + |g| |u|^2 u = 0`, il cui solitone e'
-    #   `u = eta sqrt(2/|g|) sech(eta x)` con `eta = 1/LARG`.
-    #   ### ⚠ **La prima stesura NORMALIZZAVA il profilo a norma `1` DOPO averlo
-    #   costruito, cambiandone l AMPIEZZA: non era piu' un solitone, e il collaudo l ha preso**
-    #   *(`3.373e-01` contro `1e-3`)*. ### **Qui NON si normalizza.**
     eta = 1.0 / LARG
-    A = eta * np.sqrt(2.0 / abs(gs))
-    prof = A / np.cosh(eta * (x - x0))
-    psi1 = np.zeros((C["n"], 2), complex)
-    psi1[:, 0] = prof
-    p_in = np.abs(psi1[:, 0]).copy()
     t_c = 1.0 / (eta ** 2)
-    stampa("  (b) catena n = %d, LARG = %.1f, eta = %.5f, A = %.5f "
-           "*(= eta*sqrt(2/|g|), NON normalizzato)*, t_c = %.1f, norma = %.6f"
-           % (C["n"], LARG, eta, A, t_c, norma(psi1)))
-    esiti_b = {}
-    for dtb in (DT, DT / 2.0):
-        npassi = int(10.0 * t_c / dtb)
-        ps = psi1.copy()
-        for _k in range(npassi):
-            ps, _it, _e = passo_punto_medio(C, ps, gs, dt=dtb)
-        p_out = np.abs(ps[:, 0])
-        # ### il confronto si fa sul PROFILO ricentrato: un solitone puo' TRASLARE
-        k_in, k_out = int(np.argmax(p_in)), int(np.argmax(p_out))
-        sp = np.roll(p_out, k_in - k_out)
-        esiti_b[dtb] = {"scarto": float(np.max(np.abs(sp - p_in)))
-                        / max(float(np.max(p_in)), 1e-300),
-                        "PR_in": partecipazione(psi1), "PR_out": partecipazione(ps),
-                        "psi_out": ps, "npassi": npassi}
-        stampa("      dt = %.5f, passi = %d:  scarto %.3e   PR %.2f -> %.2f"
-               % (dtb, npassi, esiti_b[dtb]["scarto"], esiti_b[dtb]["PR_in"],
-                  esiti_b[dtb]["PR_out"]))
-    s1, s2 = esiti_b[DT]["scarto"], esiti_b[DT / 2.0]["scarto"]
-    rap = s1 / max(s2, 1e-300)
-    prova("(b) ### **IL SOLITONE `sech` SI PROPAGA INTATTO col `dt` dimezzato**: scarto "
-          "`%.3e` dopo `10` tempi caratteristici *(soglia `1e-3`)*" % s2, s2 < 1e-3)
-    prova("(b) ### ⭐ **E IL RESIDUO E' DEL PASSO TEMPORALE, MISURATO**: dimezzando `dt` "
-          "lo scarto cala da `%.3e` a `%.3e`, un fattore ### **%.2f** *(il secondo ordine ne "
-          "prevede `~4`)*. ### ➥ **Quindi NON e' lo schema e NON e' il reticolo: e' "
-          "`dt`** -- e il mio discriminante di prima, fatto sulla LARGHEZZA, non poteva dirlo"
-          % (s1, s2, rap), rap > 2.0)
-    prova("(b) ### e il `PR` del solitone ### **NON cresce**: da `%.2f` a `%.2f`"
-          % (esiti_b[DT / 2.0]["PR_in"], esiti_b[DT / 2.0]["PR_out"]),
-          esiti_b[DT / 2.0]["PR_out"] < 1.1 * esiti_b[DT / 2.0]["PR_in"])
-    ps = esiti_b[DT / 2.0]["psi_out"]
-    scarto = s2
-    npassi = esiti_b[DT / 2.0]["npassi"]
-    dtb = DT / 2.0
-    k_in = int(np.argmax(p_in))
+    # ### il solitone CONTINUO, per misurare lo SCARTO fra continuo e discreto
+    A = eta * np.sqrt(2.0 / abs(gs))
+    cont = A / np.cosh(eta * (x - x0))
+    u, mu, res_staz, nit = solitone_discreto(C["n"], x, x0, LARG, gs)
+    prova("(b) ### **IL SOLITONE DISCRETO E' STAZIONARIO**, e si verifica: residuo "
+          "dell equazione `%.3e` dopo `%d` passi di Newton *(soglia `1e-12`)*"
+          % (res_staz, nit), res_staz < 1e-12)
+    _sc_cd = float(np.max(np.abs(u - cont))) / max(float(np.max(np.abs(cont))), 1e-300)
+    stampa("  (b) `mu` = %.6f, `max u` = %.6f *(continuo: %.6f)*, e lo SCARTO fra solitone "
+           "CONTINUO e DISCRETO e' ### **%.3e**" % (mu, float(np.max(u)), float(np.max(cont)),
+                                                    _sc_cd))
+    psi1 = np.zeros((C["n"], 2), complex)
+    psi1[:, 0] = u
+    p_in = np.abs(psi1[:, 0]).copy()
+    npassi = int(10.0 * t_c / DT)
+    stampa("  (b) catena n = %d, LARG = %.1f, eta = %.5f, t_c = %.1f, dt = %.5f, "
+           "passi = %d, norma = %.6f" % (C["n"], LARG, eta, t_c, DT, npassi, norma(psi1)))
+    ps = psi1.copy()
+    dev = []
+    for _k in range(npassi):
+        ps, _it, _e = passo_punto_medio(C, ps, gs)
+        if _k % 2000 == 0:
+            dev.append(float(np.max(np.abs(np.abs(ps[:, 0]) - p_in)))
+                       / max(float(np.max(p_in)), 1e-300))
+    p_out = np.abs(ps[:, 0])
+    k_in, k_out = int(np.argmax(p_in)), int(np.argmax(p_out))
+    sp = np.roll(p_out, k_in - k_out)
+    scarto = float(np.max(np.abs(sp - p_in))) / max(float(np.max(p_in)), 1e-300)
+    prova("(b) ### **IL SOLITONE DISCRETO SI PROPAGA INTATTO**: scarto massimo sul profilo "
+          "`%.3e` dopo `10` tempi caratteristici *(soglia `1e-3`)*" % scarto, scarto < 1e-3)
+    prova("(b) ### \u2b50 **E QUESTO DIMOSTRA L ATTRIBUZIONE del residuo di prima:** col "
+          "`sech` CONTINUO lo scarto era `1.903e-03` *(e non calava ne' con `dt` ne' con la "
+          "larghezza)*; col solitone ### **DELL EQUAZIONE** e' `%.3e`. ### \u27a5 **Quel "
+          "residuo era lo SCARTO CONTINUO-DISCRETO, misurato `%.3e` sul profilo iniziale, "
+          "non un difetto dello schema**" % (scarto, _sc_cd), scarto < 1.903e-03 / 10.0)
+    stampa("  (b) la deviazione nel tempo *(ogni 2000 passi)*: %s"
+           % " ".join("%.2e" % d for d in dev[:8]))
+    prova("(b) ### e il `PR` ### **NON cresce**: da `%.2f` a `%.2f`"
+          % (partecipazione(psi1), partecipazione(ps)),
+          partecipazione(ps) < 1.1 * partecipazione(psi1))
+    dtb = DT
     # ---- ### ⛔ **(c) IL CASO CHE DEVE FALLIRE: con `g = 0` si DISPERDE**
     ps0 = psi1.copy()
     for _k in range(npassi):
@@ -450,6 +500,96 @@ def collaudo():
 # ============================================================================
 #   L'ESPERIMENTO
 # ============================================================================
+def mare(G, seme, eps=EPS_MARE, rho0=RHO_0):
+    """### ⭐ **IL MARE: `|psi|` UGUALE su tutti i nodi, nessuna concentrazione.**
+
+    `psi_k = e^{i phi_k / 2} * chi_0` con `chi_0 = (1, 0)` e
+    `phi_k = phi_0 + disturbo`, disturbo uniforme in `[-eps, +eps]`.
+    ### ⛔ **Il modulo e' COSTANTE:** `|psi_k|^2 = rho0` su ogni nodo. ### **Se un
+    grumo nasce, nasce dall INTERFERENZA, non da una concentrazione messa a mano.**
+    ### ⚠ **E con `eps = 0` il mare e' PERFETTAMENTE uniforme:** e' il caso che
+    ### **deve fallire**, perche' la simmetria ### **non si rompe da sola.**
+    """
+    rng = np.random.default_rng(1000 + seme)
+    n = G["n"]
+    ph = rng.uniform(-eps, eps, size=n) if eps > 0 else np.zeros(n)
+    psi = np.zeros((n, 2), complex)
+    psi[:, 0] = np.sqrt(rho0) * np.exp(0.5j * ph)
+    return psi
+
+
+def grumi(G, psi, soglia=SOGLIA_GRUMO):
+    """### ⭐ **I GRUMI: `rho > soglia * media`, in COMPONENTI CONNESSE SUL GRAFO.**
+
+    ### ✔ **Per ciascuno si danno norma ed energia**, e l energia e' il termine non
+    lineare dei suoi nodi ### **piu'** i salti con ### **ENTRAMBI** gli estremi dentro.
+    ### ⛔ **I salti che ATTRAVERSANO il bordo NON si attribuiscono a nessun grumo** e si
+    riportano ### **a parte**: metterli d autorita' dentro falserebbe il bilancio -- e
+    e' la stessa regola delle tre classi di `D3`.
+    """
+    n = int(G["n"])
+    rho = np.abs(psi[:, 0]) ** 2 + np.abs(psi[:, 1]) ** 2
+    med = float(np.mean(rho))
+    dentro = rho > soglia * med
+    if not np.any(dentro):
+        return [], {"media_rho": med, "nodi_sopra_soglia": 0,
+                    "rho_massimo_su_media": float(rho.max() / max(med, 1e-300))}
+    # ### le componenti connesse del SOTTOGRAFO indotto, con una visita in ampiezza
+    vicini = [[] for _ in range(n)]
+    ii, jj = G["i"], G["j"]
+    for a, b in zip(ii.tolist(), jj.tolist()):
+        if dentro[a] and dentro[b]:
+            vicini[a].append(b)
+            vicini[b].append(a)
+    visto = np.zeros(n, bool)
+    comp = []
+    for s in np.flatnonzero(dentro):
+        if visto[s]:
+            continue
+        coda = [int(s)]
+        visto[s] = True
+        gr = []
+        while coda:
+            v = coda.pop()
+            gr.append(v)
+            for w2 in vicini[v]:
+                if not visto[w2]:
+                    visto[w2] = True
+                    coda.append(w2)
+        comp.append(sorted(gr))
+    return comp, {"media_rho": med, "nodi_sopra_soglia": int(np.sum(dentro)),
+                  "rho_massimo_su_media": float(rho.max() / max(med, 1e-300))}
+
+
+def misura_grumi(G, psi, g, comp):
+    """Per ogni grumo: norma, energia, nodo di picco. ### **E i salti di bordo A PARTE.**
+    """
+    ii, jj, w, U = G["i"], G["j"], G["w"], G["U"]
+    rho = np.abs(psi[:, 0]) ** 2 + np.abs(psi[:, 1]) ** 2
+    wi = np.conj(psi[ii])
+    wj = psi[jj]
+    ov = (wi[:, 0] * (U[:, 0, 0] * wj[:, 0] + U[:, 0, 1] * wj[:, 1])
+          + wi[:, 1] * (U[:, 1, 0] * wj[:, 0] + U[:, 1, 1] * wj[:, 1]))
+    e_arco = -2.0 * w * np.real(ov)
+    fuori = []
+    bordo_tot = 0.0
+    for gr in comp:
+        ins = np.zeros(int(G["n"]), bool)
+        ins[gr] = True
+        a_dentro = ins[ii] & ins[jj]
+        a_bordo = ins[ii] ^ ins[jj]
+        nor = float(np.sum(rho[gr]))
+        ene = float(np.sum(e_arco[a_dentro])) + 0.5 * g * float(np.sum(rho[gr] ** 2))
+        bordo = float(np.sum(e_arco[a_bordo]))
+        bordo_tot += bordo
+        k_pic = int(gr[int(np.argmax(rho[gr]))])
+        fuori.append({"nodi": len(gr), "norma": nor, "energia": ene,
+                      "energia_per_norma": (ene / nor) if nor else None,
+                      "salti_di_bordo": bordo, "nodo_picco": k_pic,
+                      "rho_picco": float(rho[k_pic])})
+    return fuori, bordo_tot
+
+
 def pacchetto(G, sigma=SIGMA_PACCO):
     """Gaussiana centrata sul nodo piu' vicino al centro del cubo, ### **normalizzata**."""
     c = np.array([LATO / 2.0] * 3)
@@ -509,9 +649,179 @@ def corsa(g, seme, braccio="U-CASO", passi=PASSI):
             "curva": curva}
 
 
+def corsa_mare(g, seme, braccio="U-CASO", eps=EPS_MARE, passi=PASSI_MARE):
+    """### ⭐ **L ESPERIMENTO DEL MARE: nasce un grumo dall INTERFERENZA?**
+
+    ### **`t_c` NON e' quello del pacchetto:** e' il tempo dell INSTABILITA'
+    MODULAZIONALE, che per la `NLS` focalizzante cresce come `1/(|g| rho_0)`.
+    ### ⚠ **Per `g = 0` NON e' definito**, e si usa quello di `|g| = 5` -- dichiarato.
+
+    ### **LA VITA DI UN GRUMO:** fra due campioni, un grumo ### **sopravvive** se ne
+    esiste uno che ne sovrappone ### **almeno il `50 %`** dei nodi. Le catene di
+    sopravvivenze danno la vita, e si riporta ### **in unita' di `t_c`.**
+    """
+    _niente_simulatore()
+    if braccio not in BRACCI:
+        raise SystemExit("[FERMO] braccio sconosciuto: %r." % (braccio,))
+    G = grafo(seme, u_identita=(braccio == "U-UNO"))
+    psi = mare(G, seme, eps=eps)
+    n0_, e0 = norma(psi), energia(G, psi, g)
+    pr0 = partecipazione(psi)
+    # ### `t_c` dell instabilita' modulazionale, e per `g = 0` quello di `|g| = 5`
+    g_rif = abs(g) if g != 0.0 else 5.0
+    t_c = 1.0 / (g_rif * RHO_0)
+    t0 = time.time()
+    ph_prec = fase_da_psi(psi)
+    curva = []
+    vite = []            # ### le vite CHIUSE, in numero di campioni
+    attivi = []          # ### i grumi vivi: {"nodi": set, "eta": campioni}
+    its = []
+    for k in range(1, passi + 1):
+        psi, it, _e = passo_punto_medio(G, psi, g)
+        its.append(it)
+        if k % CAMPIONI_MARE and k != passi:
+            continue
+        comp, info = grumi(G, psi)
+        mis, bordo = misura_grumi(G, psi, g, comp)
+        ph = fase_da_psi(psi)
+        _d = (ph - ph_prec + 2.0 * np.pi) % (4.0 * np.pi) - 2.0 * np.pi
+        dphi = _d / (CAMPIONI_MARE * DT)
+        ph_prec = ph
+        # ### l OROLOGIO: `dphi/dt` al picco di ogni grumo contro `E/norma`
+        for m in mis:
+            m["dphi_dt_picco"] = float(dphi[m["nodo_picco"]])
+        # ### LA VITA: sovrapposizione `>= 50 %` fra campioni consecutivi
+        nuovi = [set(c) for c in comp]
+        usati = set()
+        prossimi = []
+        for a in attivi:
+            meglio, quale = 0.0, None
+            for idx, s in enumerate(nuovi):
+                if idx in usati or not a["nodi"]:
+                    continue
+                q = len(a["nodi"] & s) / float(len(a["nodi"]))
+                if q > meglio:
+                    meglio, quale = q, idx
+            if quale is not None and meglio >= 0.5:
+                usati.add(quale)
+                prossimi.append({"nodi": nuovi[quale], "eta": a["eta"] + 1})
+            else:
+                vite.append(a["eta"])
+        for idx, s in enumerate(nuovi):
+            if idx not in usati:
+                prossimi.append({"nodi": s, "eta": 1})
+        attivi = prossimi
+        curva.append({"passo": k, "t": k * DT, "t_su_tc": k * DT / t_c,
+                      "PR": partecipazione(psi), "norma": norma(psi),
+                      "H": energia(G, psi, g), "grumi": len(comp),
+                      "nodi_sopra_soglia": info["nodi_sopra_soglia"],
+                      "rho_massimo_su_media": info["rho_massimo_su_media"],
+                      "media_rho": info["media_rho"],
+                      "salti_di_bordo": bordo,
+                      "dettaglio_grumi": mis[:8]})
+    # ### le vite ancora APERTE alla fine: si contano, e si DICE che sono troncate
+    vite_aperte = [a["eta"] for a in attivi]
+    dt_camp = CAMPIONI_MARE * DT
+    tutte = vite + vite_aperte
+    return {"g": g, "seme": seme, "braccio": braccio, "eps": eps, "passi": passi,
+            "secondi": round(time.time() - t0, 1),
+            "t_c": t_c, "t_finale": passi * DT, "t_finale_su_tc": passi * DT / t_c,
+            "g_effettivo": g * RHO_0, "rho_0": RHO_0,
+            "grafo": {k: G[k] for k in ("n", "archi", "grado_medio", "u_identita")},
+            "PR_iniziale": pr0, "PR_finale": partecipazione(psi),
+            "rapporto_PR": partecipazione(psi) / pr0 if pr0 else None,
+            "deriva_norma": abs(norma(psi) - n0_) / abs(n0_),
+            "deriva_H": abs(energia(G, psi, g) - e0) / max(abs(e0), 1e-300),
+            "iterazioni_massimo": int(np.max(its)),
+            "grumi_finali": len(attivi),
+            "grumi_massimo": max((c["grumi"] for c in curva), default=0),
+            "rho_massimo_su_media_massimo": max(
+                (c["rho_massimo_su_media"] for c in curva), default=None),
+            "vite_chiuse": len(vite), "vite_aperte": len(vite_aperte),
+            "vita_massima_campioni": max(tutte, default=0),
+            "vita_massima_su_tc": (max(tutte, default=0) * dt_camp / t_c),
+            "vita_mediana_su_tc": (float(np.median(tutte)) * dt_camp / t_c
+                                   if tutte else 0.0),
+            "dt_campione": dt_camp,
+            "curva": curva}
+
+
+def esperimento_mare():
+    """### ⭐ **L ESPERIMENTO 2: due bracci, cinque `g`, tre semi, piu' il caso
+    `eps = 0` che DEVE fallire.**
+    """
+    os.makedirs(FUORI, exist_ok=True)
+    _SCRIVI_SU[0] = os.path.join(FUORI, "mare.txt")
+    riga("=")
+    stampa("L ESPERIMENTO DEL MARE -- nascono le masse dall interferenza?")
+    riga("=")
+    stampa("  i numeri: n = %d, rho_0 = %.3f, eps = %.4f rad, dt = %.4f, passi = %d "
+           "(T = %.2f), campione ogni %d passi, soglia grumo = %.1f x media"
+           % (N_NODI, RHO_0, EPS_MARE, DT, PASSI_MARE, PASSI_MARE * DT,
+              CAMPIONI_MARE, SOGLIA_GRUMO))
+    stampa("  ### rho_0 = 1 E NON la norma 1: con norma 1 sarebbe rho_0 = 0.0025 e "
+           "g*rho_0 = 0.05 a g = -20, contro una scala di salto ~5 -- la non linearita' "
+           "sarebbe NEGLIGIBILE PER COSTRUZIONE. E' un numero di banco, dichiarato.")
+    stampa("  ### t_c = 1/(|g| rho_0), il tempo dell INSTABILITA' MODULAZIONALE. Per "
+           "g = 0 non e' definito e si usa quello di |g| = 5, dichiarato.")
+    fuori = {"esperimento": "mare", "bracci": list(BRACCI),
+             "numeri": {"N_NODI": N_NODI, "RHO_0": RHO_0, "EPS_MARE": EPS_MARE,
+                        "DT": DT, "PASSI_MARE": PASSI_MARE,
+                        "CAMPIONI_MARE": CAMPIONI_MARE,
+                        "SOGLIA_GRUMO": SOGLIA_GRUMO,
+                        "G_SCANSIONE": list(G_SCANSIONE), "SEMI": list(SEMI)},
+             "violazione_dichiarata": "w e U FISSI: memorie congelate, contro A16.3",
+             "corse": [], "corse_eps_zero": []}
+    t0 = time.time()
+    for br in BRACCI:
+        stampa()
+        stampa("  --- braccio %s: U_ij %s"
+               % (br, "CASUALE ma fissa" if br == "U-CASO" else "= IDENTITA'"))
+        for g in G_SCANSIONE:
+            for s in SEMI:
+                r = corsa_mare(g, s, braccio=br)
+                fuori["corse"].append(r)
+                stampa("  %-7s g = %6.1f seme %d:  grumi max %2d  vita max %6.2f t_c  "
+                       "rho_max/media %6.2f  PR %7.2f -> %7.2f  dN %.1e dH %.1e  %.1f s"
+                       % (br, g, s, r["grumi_massimo"], r["vita_massima_su_tc"],
+                          r["rho_massimo_su_media_massimo"], r["PR_iniziale"],
+                          r["PR_finale"], r["deriva_norma"], r["deriva_H"],
+                          r["secondi"]))
+                if time.time() - t0 > 20 * 60:
+                    stampa("### FERMO: oltre i 20 minuti. Le corse fatte SONO SALVATE.")
+                    fuori["stato"] = "FERMATO sui 20 minuti"
+                    io.open(os.path.join(FUORI, "mare.json"), "w",
+                            encoding="utf-8").write(json.dumps(fuori,
+                                                               ensure_ascii=False))
+                    return 2
+    # ---- ### ⛔ **IL CASO CHE DEVE FALLIRE: `eps = 0`**
+    stampa()
+    stampa("  --- ### ⛔ IL CASO CHE DEVE FALLIRE: eps = 0, mare PERFETTAMENTE "
+           "uniforme. ### La simmetria NON si rompe da sola, e se si rompesse sarebbe "
+           "UN DIFETTO DEL MIO CODICE, non fisica.")
+    for br in BRACCI:
+        for s in SEMI:
+            r = corsa_mare(-10.0, s, braccio=br, eps=0.0)
+            fuori["corse_eps_zero"].append(r)
+            stampa("  %-7s g = -10.0 seme %d  eps = 0:  grumi max %d  "
+                   "rho_max/media %.6f  PR %7.2f -> %7.2f"
+                   % (br, s, r["grumi_massimo"],
+                      r["rho_massimo_su_media_massimo"], r["PR_iniziale"],
+                      r["PR_finale"]))
+    fuori["stato"] = "DATI SALVATI"
+    fuori["secondi_totali"] = round(time.time() - t0, 1)
+    io.open(os.path.join(FUORI, "mare.json"), "w",
+            encoding="utf-8").write(json.dumps(fuori, ensure_ascii=False))
+    stampa("  ### I DATI DEL MARE SONO SALVATI (%.1f s in tutto)."
+           % (time.time() - t0))
+    return 0
+
+
 def main(argv):
     a = argv[1:]
     os.makedirs(FUORI, exist_ok=True)
+    if "--mare" in a:
+        return esperimento_mare()
     if "--collaudo" in a:
         e = collaudo()
         io.open(os.path.join(FUORI, "collaudo.txt"), "w",
