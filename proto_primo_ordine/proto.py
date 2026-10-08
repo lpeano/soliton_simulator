@@ -77,6 +77,21 @@ MAX_ITER = 60                # ### e il tetto, con il numero di iterazioni MISUR
 #   confronto a `g = 0` ### **non distingue** il disordine del GRAFO da quello di `U`.
 #   ### ➜ **Due bracci separano le due sorgenti.**
 BRACCI = ("U-CASO", "U-UNO")
+# ### ⭐ **MARE v2: i DUE BRACCI D INTERFERENZA** *(misura, NON decisione)*
+#   `NON-NORM`: `w_ij` come oggi -- il grado conta come energia.
+#   `NORM`:     `w_ij / sqrt(s_i s_j)` con `s_k = somma_j w_kj`, ### **hermitiano**.
+#   ### ⛔ **E TOCCA `A3`**, che dice <<niente si normalizza su una statistica di
+#   POSIZIONE del proprio insieme>>. ### **Lo spirito c'e' tutto** *(il vicinato del
+#   nodo diventa il metro)*; ### ⚠ **il meccanismo che `A3` nomina NO**, perche' `s_k`
+#   e' una ### **SOMMA** e non una mediana: misurato, dopo la normalizzazione `s_k` ha
+#   media `0.98` e deviazione ancora `12 %` *(contro il `38 %`)*, e `max/min` passa da
+#   `39.8` a `3.7`. ### **La scelta fra le due forme e' una DECISIONE DI LUCA.**
+BRACCI_V2 = ("NON-NORM", "NORM")
+G_V2 = (0.0, -5.0, -10.0)        # ### i tre `g` del mandato
+DG_CONTINUA = -0.25             # ### il passo della continuazione in `g`
+TOLL_NEWTON = 1e-13
+MAXIT_NEWTON = 80
+SOGLIA_GRUMO_V2 = 3.0           # ### `rho_k(t)/rho_k(0) > 3`, RISPETTO allo stato fermo
 P = []
 
 
@@ -158,6 +173,256 @@ def grafo(seme, n=N_NODI, lato=LATO, r=R_ARCO, u_identita=False):
             "grado_medio": float(np.mean(grado)), "grado_min": int(grado.min()),
             "grado_max": int(grado.max()), "archi": int(len(ii)),
             "isolati": int(np.sum(grado == 0))}
+
+
+def pesi_v2(G, braccio):
+    """### I pesi del braccio: `w` come sono, oppure `w/sqrt(s_i s_j)`.
+
+    ### ✔ **Hermitiano per costruzione** in entrambi i casi: il peso e' lo stesso nelle
+    due direzioni dell arco, e `sqrt(s_i s_j)` e' ### **simmetrico**.
+    ### ✔ **E `s_k` si RESTITUISCE**, perche' il referto lo misura.
+    """
+    ii, jj, w = G["i"], G["j"], G["w"]
+    n = int(G["n"])
+    s = np.zeros(n)
+    np.add.at(s, ii, w)
+    np.add.at(s, jj, w)
+    if braccio == "NORM":
+        return w / np.sqrt(np.maximum(s[ii] * s[jj], 1e-300)), s
+    return w.copy(), s
+
+
+def perron(G, wv):
+    """### ⭐ **L AUTOVETTORE DI PERRON della parte lineare** -- il ramo ESTESO.
+
+    Il piu' BASSO di `-W` e' il piu' ALTO di `W`, e per Perron-Frobenius il suo
+    autovettore e' ### **POSITIVO**: e' lo stato esteso, quello senza nodi.
+    ### ✔ **Si normalizza a `somma psi^2 = n`**, cioe' densita' media `1`.
+    """
+    n = int(G["n"])
+    W = np.zeros((n, n))
+    W[G["i"], G["j"]] = wv
+    W[G["j"], G["i"]] = wv
+    val, vec = np.linalg.eigh(W)
+    u = vec[:, int(np.argmax(val))]
+    if float(np.sum(u)) < 0:
+        u = -u
+    u = np.abs(u)                      # ### Perron: POSITIVO
+    u = u * np.sqrt(n / float(np.sum(u ** 2)))
+    return u, W, float(np.max(val))
+
+
+def stazionario(W, u0, g, n, toll=TOLL_NEWTON, maxit=MAXIT_NEWTON):
+    """### NEWTON SMORZATO sul sistema aumentato: `(psi, mu)` col vincolo sulla norma.
+
+    ```
+    -(W psi)_k + g psi_k^3 - mu psi_k = 0        somma_k psi_k^2 = n
+    ```
+    La jacobiana e' `-W + diag(3 g psi^2 - mu)`, la colonna di `mu` e' `-psi`, la riga del
+    vincolo e' `2 psi^T`.
+
+    ### ⛔ **E IL PASSO E' SMORZATO, E NON E' UN VEZZO.** La prima stesura usava
+    Newton ### **pieno**, e il risultato ### **DIPENDEVA DAL PASSO DELLA CONTINUAZIONE**:
+    con `dg = -0.25` dava `PR = 2.0`, con `-0.05` dava `PR = 1.0` oppure ### **non
+    convergeva.** ### **Un risultato che dipende dal passo NON sta sul ramo: Newton
+    SALTAVA.**
+    ### ➥ **LA CAUSA, dal problema:** al Perron la jacobiana ha un autovalore
+    ### **quasi nullo** *(`-W + lambda_max I`)*, e sui grafi geometrici casuali il ### **top
+    dello spettro e' quasi degenere**: ci sono altre direzioni quasi singolari che il
+    bordo del vincolo ### **non** copre. Il passo pieno finisce lontano.
+    ### ✔ **LA CURA E' STANDARD E DERIVATA, non tarata:** si accetta il passo solo se
+    la ### **norma del residuo CALA**, altrimenti si dimezza *(backtracking)*.
+    """
+    # ### ⭐ **PRIMA LA DISCESA A TEMPO IMMAGINARIO, POI NEWTON PER RIFINIRE.**
+    #   ### ⛔ **E il perche' e' misurato:** Newton PIENO ### **saltava** *(il ramo
+    #   dipendeva dal passo: `PR = 2.0` con `dg = -0.25`, `1.0` con `-0.05`)*; Newton
+    #   ### **SMORZATO** non saltava piu' ma ### **non convergeva** *(si fermava al primo
+    #   `g` in entrambi i bracci e per entrambi i passi)*.
+    #   ### ➥ **LA CAUSA:** al Perron la jacobiana ha un modo quasi nullo, e sui grafi
+    #   geometrici casuali il top dello spettro e' ### **quasi degenere**: il bordo del
+    #   vincolo copre UNA direzione, non le altre.
+    #   ### ✔ **LA DISCESA A TEMPO IMMAGINARIO E' IL GRADIENTE DI `H` A NORMA FISSA**,
+    #   quindi ### **scende per costruzione** e non ha bisogno di invertire niente; Newton
+    #   poi rifinisce ### **da un punto che e' GIA' sul ramo**, dove il condizionamento
+    #   non morde piu'.
+    psi = u0.copy()
+    psi = psi * np.sqrt(n / max(float(np.sum(psi ** 2)), 1e-300))
+    _dtau = 0.05
+    for _k in range(4000):
+        _F = -(W @ psi) + g * psi ** 3
+        _mu = float(psi @ _F) / max(float(psi @ psi), 1e-300)
+        _gr = _F - _mu * psi
+        if float(np.max(np.abs(_gr))) <= 1e-13:
+            break
+        _p2 = psi - _dtau * _gr
+        _p2 = _p2 * np.sqrt(n / max(float(np.sum(_p2 ** 2)), 1e-300))
+        # ### il passo si dimezza se `H` non CALA: discesa, non speranza
+        if energia_v2(W, _p2.astype(complex), g) <= energia_v2(W, psi.astype(complex), g):
+            psi = _p2
+        else:
+            _dtau *= 0.5
+            if _dtau < 1e-12:
+                break
+    mu = float(psi @ (-(W @ psi) + g * psi ** 3) / max(float(psi @ psi), 1e-300))
+
+    def residuo(p, m):
+        r1 = -(W @ p) + g * p ** 3 - m * p
+        r2 = float(np.sum(p ** 2) - n)
+        return r1, r2, float(np.sqrt(np.sum(r1 ** 2) + r2 ** 2))
+
+    it = 0
+    for it in range(1, maxit + 1):
+        r1, r2, nr = residuo(psi, mu)
+        J = -W + np.diag(3.0 * g * psi ** 2 - mu)
+        A2 = np.zeros((n + 1, n + 1))
+        A2[:n, :n] = J
+        A2[:n, n] = -psi
+        A2[n, :n] = 2.0 * psi
+        try:
+            d = np.linalg.solve(A2, np.concatenate([r1, [r2]]))
+        except Exception:                                      # noqa: BLE001
+            return None, None, float("inf"), it, "jacobiana singolare"
+        # ### ⭐ **BACKTRACKING: il passo si dimezza finche' il residuo non CALA**
+        lam = 1.0
+        ok = False
+        for _k in range(40):
+            p2 = psi - lam * d[:n]
+            m2 = mu - lam * float(d[n])
+            if np.all(np.isfinite(p2)):
+                _, _, nr2 = residuo(p2, m2)
+                if nr2 < nr:
+                    psi, mu, ok = p2, m2, True
+                    break
+            lam *= 0.5
+        if not ok:
+            break
+        if lam * float(np.max(np.abs(d))) <= toll:
+            break
+    # ### ⛔ **IL RESIDUO SI MISURA RELATIVO, ED E' `A3c`.** La prima stesura
+    #   confrontava `|somma psi^2 - n|` ### **ASSOLUTO** con `1e-12`: ma quella somma vale
+    #   `n = 400`, e la precisione macchina su una somma di `400` termini di taglia `1` e'
+    #   gia' `~1e-12`. ### **Era un confronto fra grandezze non commensurabili** --
+    #   misurato `1.82e-12`, che in relativo e' `4.5e-15`, cioe' ### **zero.**
+    _sc = max(float(np.max(np.abs(W @ psi))), 1e-300)
+    res_eq = float(np.max(np.abs(-(W @ psi) + g * psi ** 3 - mu * psi))) / _sc
+    res_nr = abs(float(np.sum(psi ** 2) - n)) / n
+    res = max(res_eq, res_nr)
+    if res > 1e-12:
+        return None, None, res, it, ("residuo relativo sopra 1e-12 "
+                                     "(equazione %.2e, vincolo %.2e)" % (res_eq, res_nr))
+    return psi, mu, res, it, "ok"
+
+
+def continua(G, braccio, g_fine, dg=DG_CONTINUA):
+    """### ⭐ **LA CONTINUAZIONE in `g`**, dal Perron a `g = 0` fino a `g_fine`.
+
+    ### ⛔ **Se Newton non converge, il RAMO ESTESO FINISCE, e il `g` in cui finisce
+    E' UN RISULTATO** *(auto-intrappolamento: lo stato piu' basso diventa localizzato
+    da solo)*. ### **Non si forza: si riporta.**
+    """
+    n = int(G["n"])
+    wv, s = pesi_v2(G, braccio)
+    u, W, lam = perron(G, wv)
+    tappe = [{"g": 0.0, "PR": partecipazione(np.stack([u, np.zeros(n)], axis=1)
+                                             .astype(complex)),
+              "max_su_media": float(np.max(u ** 2) / np.mean(u ** 2)),
+              "mu": -lam, "residuo": 0.0, "newton": 0}]
+    psi, mu = u, -lam
+    if g_fine == 0.0:
+        return psi, mu, W, s, tappe, None
+    gg = 0.0
+    while gg > g_fine + 1e-12:
+        gg = max(gg + dg, g_fine)
+        p2, m2, res, it, stato = stazionario(W, psi, gg, n)
+        if p2 is None:
+            # ### ⛔ **IL RAMO ESTESO FINISCE QUI, e lo si DICE.**
+            return psi, mu, W, s, tappe, {"g_fine_ramo": gg, "motivo": stato,
+                                          "residuo": res, "newton": it}
+        psi, mu = p2, m2
+        tappe.append({"g": gg,
+                      "PR": partecipazione(np.stack([psi, np.zeros(n)], axis=1)
+                                           .astype(complex)),
+                      "max_su_media": float(np.max(psi ** 2) / np.mean(psi ** 2)),
+                      "mu": mu, "residuo": res, "newton": it})
+    return psi, mu, W, s, tappe, None
+
+
+def forza_v2(W, psi, g):
+    """### `F = dH/dpsi* = -W psi + g |psi|^2 psi`, nel braccio dato *(una componente)*.
+    """
+    return -(W @ psi) + g * (np.abs(psi) ** 2) * psi
+
+
+def energia_v2(W, psi, g):
+    """### `H = -psi* W psi + (g/2) somma |psi|^4`. ### **Reale per costruzione.**
+    """
+    return (-float(np.real(np.conj(psi) @ (W @ psi)))
+            + 0.5 * g * float(np.sum(np.abs(psi) ** 4)))
+
+
+def orologio_v2(psi, F):
+    """### ⭐ **`dphi/dt = -2 Re(psi* F) / |psi|^2`, DALLA LEGGE e senza aliasing.**
+
+    Da `i dpsi/dt = F` con `psi = R e^{i phi/2}` *(la convenzione di `A16.1`)*:
+    `psi* dpsi/dt = R dR/dt + i (R^2/2) dphi/dt` e `psi* dpsi/dt = -i psi* F`, quindi
+    `-Re(psi* F) = (R^2/2) dphi/dt`. ### **Il `2` viene dal `phi/2`.**
+    ### ⛔ **E il collaudo `(b)` la confronta con una differenza finita a passo FINE.**
+    """
+    r2 = np.abs(psi) ** 2
+    return -2.0 * np.real(np.conj(psi) * F) / np.maximum(r2, 1e-300)
+
+
+def passo_v2(W, psi, g, dt=DT, toll=TOLL_ITER, maxit=MAX_ITER):
+    """### Il punto medio implicito col GRADIENTE DISCRETO, come nel `v1`.
+    """
+    nuovo = psi.copy()
+    rho0 = np.abs(psi) ** 2
+    it = 0
+    for it in range(1, maxit + 1):
+        mezzo = 0.5 * (psi + nuovo)
+        rho1 = np.abs(nuovo) ** 2
+        F = -(W @ mezzo) + g * (0.5 * (rho0 + rho1)) * mezzo
+        cand = psi - 1j * dt * F
+        err = float(np.max(np.abs(cand - nuovo)))
+        nuovo = cand
+        if err <= toll:
+            break
+    return nuovo, it
+
+
+def grumi_v2(G, rho, rho0, soglia=SOGLIA_GRUMO_V2):
+    """### ⭐ **I GRUMI RISPETTO ALLO STATO DI PARTENZA:** `rho_k/rho_k(0) > soglia`.
+
+    ### **E' la differenza col `v1`**, dove la soglia era sulla MEDIA: li' il grafo
+    stesso bastava a superarla, qui no.
+    """
+    n = int(G["n"])
+    rap = rho / np.maximum(rho0, 1e-300)
+    dentro = rap > soglia
+    if not np.any(dentro):
+        return [], float(np.max(rap))
+    vic = [[] for _ in range(n)]
+    for a, b in zip(G["i"].tolist(), G["j"].tolist()):
+        if dentro[a] and dentro[b]:
+            vic[a].append(b)
+            vic[b].append(a)
+    visto = np.zeros(n, bool)
+    comp = []
+    for s0 in np.flatnonzero(dentro):
+        if visto[s0]:
+            continue
+        coda = [int(s0)]
+        visto[s0] = True
+        gr = []
+        while coda:
+            v = coda.pop()
+            gr.append(v)
+            for w2 in vic[v]:
+                if not visto[w2]:
+                    visto[w2] = True
+                    coda.append(w2)
+        comp.append(sorted(gr))
+    return comp, float(np.max(rap))
 
 
 def unitarie(G):

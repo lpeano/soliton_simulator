@@ -10240,3 +10240,18 @@ Avevo previsto che il disordine venisse dal ### **gauge** e che `U-UNO` restasse
 > e senza un controllo pulito ### **non si attribuisce niente.** ### **La misura che
 > deciderebbe c'è** *(partire da uno stato stazionario, come per il solitone)*, ### **e non la
 > faccio: il tetto è superato e la decisione è di Luca.**
+
+## MARE `v2` — **lo stato di partenza che il mandato chiede NON è lo stato più basso** *(2026-10-08)*
+
+Il `v2` doveva togliere il difetto del `v1` *(il mare uniforme non era stazionario)* partendo
+dallo ### **stato stazionario di `H` completa sul ramo esteso**. ### ⛔ **Quello stato esiste ma è
+una SELLA, e il conto lo dimostra:** a norma fissa `Σψ² = N`, un solo nodo dà `H = (g/2)N²` che va
+come `N²`, mentre l'esteso va come `N` — a `g = -5`, ### **`-400000` contro `-18534`**. La
+continuazione lo conferma: ### **`PR = 1.00` al primo passo sotto `g = 0`**, in entrambi i bracci.
+### ⛔ **E nessun `ρ_0` salva il mare:** alla soglia la non linearità vale `0.029` e `0.005` contro
+`λ_max` `5.65` e `1.00`. ### ➜ **Quindi i criteri del mandato NON sono valutati**, e l'esito che
+scatta è il terzo — *`LO STATO PIÙ BASSO È GIÀ UNA MASSA`* — ### **subito sotto `g = 0`**, non
+«prima di `g = -10`». Il numero che resta in mano: il ### **`PR` del Perron a `g = 0`** è
+### **24.6** su `400` in `NON-NORM` e ### **348** in `NORM` — ### **la geometria da sola concentra,
+e la normalizzazione toglie quasi tutta quella concentrazione.** Referto:
+`doc/REFERTO_proto_mare_v2_2026-10-08.md`. ### **La forma di `H` è una decisione di Luca.**

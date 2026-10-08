@@ -134,3 +134,35 @@ corse)*.
 bersaglio.** Che si ### **attraggano**, con che ### **legge**, e se ### **cadano tutti allo
 stesso modo** sono le ### **tre prove** di `doc/IPOTESI_gravita_a_spinta.md`, e
 ### **restano FUORI.**
+
+## 9. L'ANNOTAZIONE — **LA PREMESSA DEL MANDATO NON STA IN PIEDI, E IL CONTO LO DICE**
+
+*(Scritta dopo, come vuole il par.8: ### **sopra non si riscrive niente.** I numeri:
+`proto_primo_ordine/diagnosi_v2.py` → `doc/REFERTO_proto_mare_v2_2026-10-08.md`.)*
+
+### ⛔ **Il mandato chiede «lo stato stazionario di `H` completa sul ramo ESTESO, con densità
+media `ρ_0 = 1`». Quello stato ESISTE, ma NON è lo stato più basso: è una SELLA.**
+
+| | |
+|---|---|
+| il conto | a norma fissa `Σψ² = N`, ### **un solo nodo** dà `H = (g/2)N²` *(va come `N²`)*, l'esteso `H ≈ −λN + (g/2)N²/n_eff` *(va come `N`)* |
+| ### ➜ | per ### **ogni** `g < 0` vince un nodo: a `g = -5`, ### **`-400000` contro `-18534`** *(`NON-NORM`)* e ### **`-1549`** *(`NORM`)* |
+| la misura | la continuazione collassa a ### **`PR = 1.00`** già al ### **primo** passo sotto `g = 0`, in ### **entrambi** i bracci e per ### **entrambi** i `Δg` |
+| ### ⛔ **e nessun `ρ_0` salva** | sotto la soglia il mare resta il più basso, ma lì `\|g\|ρ_0` vale ### **`0.029`** e ### **`0.005`** contro `λ_max` `5.65` e `1.00`: ### **la non linearità SPARISCE** |
+
+| previsione | esito |
+|---|---|
+| **`PV-1`** | ### ⛔ **SMENTITA.** Dicevo *«il ramo esteso NON finisce, ma si localizza»*: finisce ### **subito**, e la discesa ne cade fuori al primo passo |
+| **`PV-2`** | ### **MEZZA, e la metà che vale è misurata.** `NON-NORM`: `max/media` ### **29.38** e `PR` ### **24.6** su `400` — ### **confermata in pieno**. `NORM`: `max/media` `2.25` *(appena sopra il `2` che avevo scritto)* e `PR` ### **348**, cioè ### **NON «ben sotto 400»** |
+| **`PV-3`..`PV-8`** | ### **NON VALUTATE:** l'esperimento ha bisogno di uno stato di partenza ### **fermo ed esteso**, e quello ### **non c'è**. ### **Non le converto in verdetti** |
+
+### ⚠ **E IL DIFETTO CHE HO PRESO NEL REFERTO STESSO, prima di committarlo:** la riga *«dopo la
+normalizzazione»* ripeteva il `s_k` ### **di prima**, perché `pesi_v2` restituisce sempre quello;
+era un ### **FALSO-UNO**. Ricalcolato dai pesi veri: `0.3856 → ` ### **`0.1160`** e
+`16.66 → ` ### **`2.82`** — coerente col `0.12` e `3.7` che avevo misurato ### **prima** della
+corsa, nel §3.
+
+### ⛔ **CHE COSA NON DECIDO:** la forma di `H`. Le strade che il conto lascia aperte — un termine
+che ### **penalizza** la concentrazione, oppure il ramo esteso studiato ### **come sella**
+*(dichiarando che si misura un decadimento)*, oppure `g > 0` — sono ### **DECISIONI DI LUCA**, e
+sono ### **più a monte** della scelta `NON-NORM`/`NORM` su cui il mandato mi chiedeva di fermarmi.

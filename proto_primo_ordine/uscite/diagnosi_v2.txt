@@ -1,0 +1,27 @@
+========================================================================================================
+MARE v2 -- LA DIAGNOSI: lo stato di partenza del mandato NON ESISTE come stato piu' basso
+========================================================================================================
+  NON-NORM  seme 11: lambda_max 5.6494  PR(Perron)   24.58  max/media   29.38  n_eff   24.6   s_k dev 0.3856 max/min  16.66
+      g =   -5.0: H(un nodo)    -400000.0  H(esteso)     -18533.8  -> UN NODO   rho_0 di soglia 0.005889  (|g| rho_0 = 0.02944)
+      g =  -10.0: H(un nodo)    -800000.0  H(esteso)     -34807.9  -> UN NODO   rho_0 di soglia 0.002944  (|g| rho_0 = 0.02944)
+      continuazione a dg = -0.25: PR lungo il ramo 24.6 1.0 1.0 1.0 1.0 1.0   fine None
+  NON-NORM  seme 12: lambda_max 4.8287  PR(Perron)   18.07  max/media   37.86  n_eff   18.1   s_k dev 0.3732 max/min  15.96
+      g =   -5.0: H(un nodo)    -400000.0  H(esteso)     -24064.7  -> UN NODO   rho_0 di soglia 0.005112  (|g| rho_0 = 0.02556)
+      g =  -10.0: H(un nodo)    -800000.0  H(esteso)     -46197.8  -> UN NODO   rho_0 di soglia 0.002556  (|g| rho_0 = 0.02556)
+      continuazione a dg = -0.25: PR lungo il ramo 18.1 1.0 1.0 1.0 1.0 1.0   fine None
+  NON-NORM  seme 13: lambda_max 5.1396  PR(Perron)   19.77  max/media   32.94  n_eff   19.8   s_k dev 0.3846 max/min  39.83
+      g =   -5.0: H(un nodo)    -400000.0  H(esteso)     -22292.6  -> UN NODO   rho_0 di soglia 0.005414  (|g| rho_0 = 0.02707)
+      g =  -10.0: H(un nodo)    -800000.0  H(esteso)     -42529.3  -> UN NODO   rho_0 di soglia 0.002707  (|g| rho_0 = 0.02707)
+      continuazione a dg = -0.25: PR lungo il ramo 19.8 1.0 1.0 1.0 1.0 1.0   fine None
+  NORM      seme 11: lambda_max 1.0000  PR(Perron)  348.22  max/media    2.25  n_eff  348.2   s_k dev 0.1160 max/min   2.82
+      g =   -5.0: H(un nodo)    -400000.0  H(esteso)      -1548.7  -> UN NODO   rho_0 di soglia 0.001003  (|g| rho_0 = 0.00501)
+      g =  -10.0: H(un nodo)    -800000.0  H(esteso)      -2697.4  -> UN NODO   rho_0 di soglia 0.000501  (|g| rho_0 = 0.00501)
+      continuazione a dg = -0.25: PR lungo il ramo 348.2 1.0 1.0 1.0 1.0 1.0   fine -2.25
+  NORM      seme 12: lambda_max 1.0000  PR(Perron)  351.10  max/media    2.17  n_eff  351.1   s_k dev 0.1154 max/min   2.66
+      g =   -5.0: H(un nodo)    -400000.0  H(esteso)      -1539.3  -> UN NODO   rho_0 di soglia 0.001003  (|g| rho_0 = 0.00501)
+      g =  -10.0: H(un nodo)    -800000.0  H(esteso)      -2678.6  -> UN NODO   rho_0 di soglia 0.000501  (|g| rho_0 = 0.00501)
+      continuazione a dg = -0.25: PR lungo il ramo 351.1 1.0 1.0 1.0 1.0 1.0   fine -2.5
+  NORM      seme 13: lambda_max 1.0000  PR(Perron)  348.45  max/media    2.00  n_eff  348.4   s_k dev 0.1227 max/min   3.69
+      g =   -5.0: H(un nodo)    -400000.0  H(esteso)      -1548.0  -> UN NODO   rho_0 di soglia 0.001003  (|g| rho_0 = 0.00501)
+      g =  -10.0: H(un nodo)    -800000.0  H(esteso)      -2695.9  -> UN NODO   rho_0 di soglia 0.000501  (|g| rho_0 = 0.00501)
+      continuazione a dg = -0.25: PR lungo il ramo 348.4 1.0 1.0 1.0 1.0 1.0   fine -1.75
