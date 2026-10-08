@@ -10301,3 +10301,26 @@ misura era il sintomo, questa è la causa. ### ➜ **E la coppia del DRIVER non 
 *(`0.000e+00`)*: scrive una coppia su `φ` leggendo ### **lo spinore**, quindi ### **non può
 essere `−∂E/∂φ` per nessuna `E`** — un «no» ### **strutturale**. Strumento:
 `csv/_test_fork/_prova_integrabilita.py`.
+
+## LA TRADUZIONE IN `H`: **`21` leggi in cinque classi, due «no» DIMOSTRATI, e `PT-7` vinta a metà** (2026-10-08)
+
+`doc/TRADUZIONE_IN_H.md` è scritto, e ogni suo numero esce da un json *(`L-NUMERI`)*. Il conto
+per classe: ### **`3`** traducibili *(previste `7`)*, `6` con una memoria, `4` di crescita,
+### **`7`** non traducibili *(previste `5`)*, `1` riga di diagnostica ### **che copre `231`
+nomi**. ### ⭐ **`PT-9` la vince e di più:** dicevo che il test avrebbe spostato ### **almeno
+`2`** leggi fuori da traducibile, ### **ne ha spostate `4`**. ### ⛔ **`PT-1` è MANCATA, dal
+basso** *(`21` contro un minimo di `24`)*, e il motivo è ### **mio**: ho raggruppato più grosso
+di quanto avessi previsto — `419` scritture in `21` righe, perché *«il rilassamento di `d0`»* è
+una riga e dieci scritture. ### **Lo scrivo invece di spezzare le righe fino a far quadrare il
+numero.**
+
+### ⭐ **E il risultato che conta, su `PT-7`:** la divisione `ψ → ψ/√2` conserva `Σρ`
+### **al bit** e ### **dimezza il `ρ²` del nodo** — cioè toglie esattamente ciò che il collasso
+guadagna, e quella metà della previsione ### **regge**. ### ⛔ **Ma la divisione ALZA `H` di
+`+199600.0`** *(`N = 400`, `g = -5.0`)*, quindi ### **non avviene da sola: va pagata.** ### ➜ **La
+nascita è un freno SOLO SE il vuoto locale paga**, che è il punto `S5` — e `S5` è ### **aperto**.
+### **Non è una conferma dell'ipotesi del guardiano: è la dimostrazione che quell'ipotesi dipende
+interamente dal punto aperto.** Il numero che lo lega al simulatore: senza bagno le nascite
+crollano da `164` a `0`, quindi ### **oggi chi paga la nascita è il bagno GLOBALE.**
+L'### **elenco delle decisioni di Luca** è nel `⑨` del documento: ### **dieci voci**, e la `8`
+*(da dove viene l'energia dello spazio nuovo)* ### **è quella da cui dipendono le altre.**

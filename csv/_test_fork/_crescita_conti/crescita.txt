@@ -1,0 +1,87 @@
+========================================================================================================
+IL CONTO DELLA CRESCITA -- Sigma rho e l'energia a ogni nascita
+========================================================================================================
+  simulatore b8c21049   atteso b8c21049
+========================================================================================================
+(1) LE REGOLE DI NASCITA, LETTE DALLA TAVOLA DEL SIMULATORE (non dai commenti)
+========================================================================================================
+  regole trovate: 67, su 2 eventi: divisione, schwinger
+
+  zero                                            10 grandezze: _rep eta eta mem_mot perc_tw perc_tw phi_s t
+  eredita dal genitore `a`                         9 grandezze: _cs_nodo_prev _nb _nb_prec _nb_ret _psi_prec
+  eredita dal genitore `aa`                        7 grandezze: _cs_nodo_prev _nb _nb_prec _nb_ret _psi_prec
+  media dei genitori                               6 grandezze: phivel phivel pos pos psi psi
+  eredita dall'arco che si spezza                  3 grandezze: _rep peq vd
+  eredita invertita                                3 grandezze: _psi_spinor _spinor_lift perc_chi
+  media                                            2 grandezze: phi phi0
+  topologia: l'arco si spezza in due               2 grandezze: i j
+  eredita col segno                                2 grandezze: _psi_spinor _spinor_lift
+  derivata dalla definizione                       2 grandezze: perc_geom perc_geom
+  eredita da `a`                                   2 grandezze: psi_spin rho_spin
+  `nan`: il marcatore di arco nuovo                2 grandezze: twp_dip twp_dip
+  topologia: due archi nuovi verso i genitori      2 grandezze: i j
+  eredita da `aa`                                  2 grandezze: psi_spin rho_spin
+  meta' della distanza fra i genitori              2 grandezze: d d0
+  eredita la concorrenza del genitore `a`          1 grandezze: conc_nodi
+  eredita la chiralita' del genitore `a`           1 grandezze: perc_chi
+  meta' dell'arco                                  1 grandezze: d
+  meta' dell'arco, con offset plastico             1 grandezze: d0
+  differenza di fase genitore-figlio               1 grandezze: twp
+  antifase del figlio di mitosi                    1 grandezze: phi
+  eredita la concorrenza di `aa`, marcata `schwi   1 grandezze: conc_nodi
+  antifase                                         1 grandezze: phi0
+  `nan` = da calibrare sul proprio arco            1 grandezze: peq
+  la marca degli archi nati con `nan`              1 grandezze: _peqn_idx
+  differenza di fase genitore-antinodo             1 grandezze: twp
+
+  ### LE GRANDEZZE CHE IL NATO PRENDE PER MEDIA DEI GENITORI: phi phi0 phivel pos psi
+  ### QUELLE CHE EREDITA DA UN GENITORE:                      _cs_nodo_prev _nb _nb_prec _nb_ret _psi_prec _psi_spin_prec _psi_spinor _rep _sp
+  ### ⛔ E NESSUNA REGOLA TOGLIE NIENTE AL GENITORE: la tavola non ha una classe
+  ###    <<il genitore cede>>. Quindi Sigma rho CRESCE a ogni nascita -- e' la
+  ###    violazione 6 di A14, e qui e' LETTA DALLA TAVOLA, non dedotta.
+  ###    classi che somigliano a <<cede>>: ["meta' dell'arco", "meta' dell'arco, con offset plastico", "meta' della distanza fra i genitori"]
+====================================================================================================
+LA CONFIGURAZIONE INTERA (`P5`) -- non i flag toccati, TUTTI
+====================================================================================================
+  booleani di modulo confrontati con l'argv del DRIVER: 82
+  -> IN CONFIGURAZIONE DEL DRIVER: nessuna differenza. ZERO su 82.
+
+========================================================================================================
+(2) IL CONTO SULLO SNAPSHOT -- la rho VERA della scena, dopo 3 passi pieni
+========================================================================================================
+  n = 12802   Sigma rho = 3.285613e+04   Sigma rho^2 = 4.111959e+05   rho_max = 2.912054e+01
+  il nodo piu' denso: k = 10598, rho_k = 2.912054e+01  (0.0886 % di Sigma rho)
+
+  SE QUEL NODO DIVIDE:
+      regola DI OGGI (il nato prende la media, e il genitore NON cede):
+          Sigma rho:  3.285613e+04 -> 3.288525e+04   (+0.0886 %)   ### NON CONSERVA
+          Sigma rho^2: 4.111959e+05 -> 4.120439e+05   (+0.2062 %)
+      regola CANDIDATA psi -> psi/sqrt(2) su genitore e nato:
+          Sigma rho:  3.285613e+04 -> 3.285613e+04   (0.000e+00)   ### CONSERVA AL BIT
+          Sigma rho^2: 4.111959e+05 -> 4.107719e+05   (-0.1031 %)   ### IL rho^2 DEL NODO SI DIMEZZA
+========================================================================================================
+(3) PT-7 -- LA NASCITA FRENA IL COLLASSO? il conto sulla H della SONDA
+========================================================================================================
+  La sonda: H = - somma_archi w (psi_i* psi_j + c.c.) + (g/2) somma_k rho_k^2
+  Un nodo che tiene TUTTA la norma N, contro lo stesso nodo DIVISO in due da
+  psi -> psi/sqrt(2), con un arco di peso w fra i due figli:
+
+      H(un nodo)     = (g/2) N^2
+      H(due figli)   = -2 w (N/2) + (g/2) * 2 * (N/2)^2 = -w N + (g/4) N^2
+      Delta H        = H(due) - H(uno) = -(g/4) N^2 - w N = (|g|/4) N^2 - w N
+
+      N   400  g   -5.0  w  1.0000 :  H(uno)    -400000.0   H(due)    -200400.0   Delta H    +199600.0  -> LA DIVISIONE COSTA
+      N   400  g   -5.0  w  5.6494 :  H(uno)    -400000.0   H(due)    -202259.8   Delta H    +197740.2  -> LA DIVISIONE COSTA
+      N   400  g  -10.0  w  1.0000 :  H(uno)    -800000.0   H(due)    -400400.0   Delta H    +399600.0  -> LA DIVISIONE COSTA
+      N   400  g  -10.0  w  5.6494 :  H(uno)    -800000.0   H(due)    -402259.8   Delta H    +397740.2  -> LA DIVISIONE COSTA
+
+  ### ⭐ IL RISULTATO, E PT-7 LA VINCE A META':
+  ###   LA DILUIZIONE C'E', ED E' ESATTA: Sigma rho si conserva al bit e il
+  ###   contributo rho^2 del nodo SI DIMEZZA -- cioe' la divisione toglie
+  ###   esattamente cio' che il collasso guadagna. QUESTO ERA PT-7, e regge.
+  ### ⛔ MA LA DIVISIONE ALZA H, quindi NON AVVIENE DA SOLA: va PAGATA.
+  ###   Delta H = (|g|/4) N^2 - w N, che per N = 400 e g = -5 vale ~ +2e5.
+  ### ➜ QUINDI LA NASCITA E' UN FRENO *SOLO SE QUALCUNO PAGA*, e chi paga e'
+  ###   il VUOTO LOCALE -- che e' il punto S5, e S5 E' APERTO.
+  ### ⛔ NON e' una conferma dell'ipotesi del guardiano: e' la DIMOSTRAZIONE
+  ###   CHE QUELL'IPOTESI DIPENDE INTERAMENTE DAL PUNTO APERTO.

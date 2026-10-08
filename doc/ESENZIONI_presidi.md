@@ -74,6 +74,7 @@ commit**: cosi' non se ne accumulano di invisibili.)*
 | `csv/_test_fork/_mitosi_zero_dove.py|H-P3` | lo strumento passa dal CLI (`_cli_flag.carica`) per la configurazione. Le |
 | `csv/_test_fork/_partecipazioni.py|H-P5` | legge le coorti e i `misura.json` di un run che ha gia' dichiarato la propria |
 | `csv/_test_fork/_referto_crescita.py|H-P5` | non importa il simulatore e non lo fa girare. Legge il `crescita.json` di una |
+| `csv/_test_fork/_doc_traduzione.py|H-P5` | non importa il simulatore e non lo fa girare: legge quattro `json` di strumenti che hanno GIA' dichiarato la configurazione INTERA, e la RIPORTA nel documento con la provenienza
 | `csv/_test_fork/_referto_fisso.py|H-P5` | non importa il simulatore e non lo fa girare. Legge i `json` di corse che |
 | `csv/_test_fork/_referto_lunga.py|H-P5` | non importa il simulatore e non lo fa girare. Legge il `json` di una corsa che |
 | `csv/_test_fork/_referto_mzd.py|H-P5` | non importa il simulatore e non lo fa girare. Legge i `json` di corse che hanno |
@@ -91,5 +92,5 @@ commit**: cosi' non se ne accumulano di invisibili.)*
 | `csv/_test_fork/_z43_tempo_proprio.py|H-P3` | la scena passa TUTTA dal CLI (`nmasse` e `sep` da `argv`), e la |
 
 ```
-esenzioni dichiarate   84
+esenzioni dichiarate   85
 ```

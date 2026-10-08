@@ -1998,3 +1998,32 @@ coppia ### **sintetica** asimmetrica a `1.463e-02` *(**discrimina**)*; la coppia
 > ### **RIPETIBILITA'**; `(3)` ### **`H-P3` ha preso che `net.step()` NON E' UN PASSO** — senza
 > `passo_pieno` non girano `scuoti_vuoto`, `rilassa_disegno` ne' la memoria hebbiana, cioe' lo
 > snapshot ### **non era sulla traiettoria del driver.**
+
+### 🔬 IL CONTO DELLA CRESCITA, e **il generatore della TRADUZIONE IN `H`** *(2026-10-08)*
+
+| | |
+|---|---|
+| **file** | `csv/_test_fork/_crescita_conti.py` *(204 righe)* |
+| **COMANDO** | `python csv/_test_fork/_crescita_conti.py` |
+| **cosa misura** | `(1)` le ### **regole di nascita LETTE DALLA TAVOLA** `_nascita_regola` del simulatore *(non dai commenti)*; `(2)` di quanto cambiano `Σρ` e `Σρ²` sullo snapshot con la regola di oggi e con la candidata `ψ → ψ/√2`; `(3)` ### **`PT-7`: la divisione frena il collasso?**, in forma chiusa sulla `H` della sonda |
+| **BLOB** | `5a9bdd9a` |
+
+| | |
+|---|---|
+| **file** | `csv/_test_fork/_doc_traduzione.py` *(587 righe)* |
+| **COMANDO** | `python csv/_test_fork/_doc_traduzione.py` |
+| **cosa misura** | ### **niente: GENERA `doc/TRADUZIONE_IN_H.md`** dai quattro json, perche' ogni numero del documento ### **esca da un'uscita** e non da una mano *(`L-NUMERI`)* |
+| **BLOB** | `90b2d84a` |
+
+**Esito:** `67` regole di nascita su `2` eventi, e fra le loro `26` classi
+### **NESSUNA si chiama «il genitore cede»** ⇒ `Σρ` ### **cresce** a ogni nascita *(la
+violazione `6` di `A14`, qui ### **letta dalla tavola**)*. Sullo snapshot: la regola di oggi
+porta `Σρ` a ### **`+0.0886 %`**; la candidata `ψ → ψ/√2` la conserva ### **al bit** e
+### **dimezza il `ρ²` del nodo**.
+
+> ### ⛔ **E `PT-7` LA VINCE A META', con la meta' che perde che e' quella che conta:** la
+> diluizione ### **c'e' ed e' esatta**, ma la divisione ### **ALZA `H` di `+199600.0`**
+> *(`N = 400`, `g = -5.0`)*, quindi ### **NON avviene da sola: va PAGATA.** ### ➜ **La nascita
+> e' un freno SOLO SE il vuoto locale paga** — che e' il punto `S5`, e ### **`S5` e' APERTO.**
+> ### **Non e' una conferma dell'ipotesi del guardiano: e' la dimostrazione che quell'ipotesi
+> dipende interamente dal punto aperto.**
