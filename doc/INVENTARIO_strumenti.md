@@ -2585,3 +2585,17 @@ etichette rimosse, con ### **`0` persi, `0` doppi, `0` conflitti**.
 | **cosa misurano** | il primo: le `47` chiusure **voce per voce**, le `41` `chiusura` orfane **in due liste**, e le `59` righe della terza lettura **una per una**; il secondo: **che cosa BLOCCA e che cosa è solo scritto** |
 | ### ⭐ **e il secondo LEGGE IL HOOK** | non si crede alla propria tabella: la colonna *«cablato davvero»* **apre `.githooks/` e `csv/_hook_presidi.py`** e cerca il nome. ### **Un presidio dichiarato e non cablato è ciò che `A9` condanna, e un referto non può essere l'unico posto che non lo verifica** |
 | **l'uscita** | `doc/REFERTO_indice_v3_chiusure.md` *(`390` righe)* · `doc/REFERTO_strumenti_era2.md` *(`111` righe)* |
+
+---
+
+### `csv/_righe_indirizzate.py` — **LA CITAZIONE A `file:riga`** *(2026-10-09)*
+
+| | |
+|---|---|
+| **file** | `csv/_righe_indirizzate.py` |
+| **BLOB** *(sha1 dei byte grezzi)* | `dd99b8c8` |
+| **COMANDO** | `python csv/_righe_indirizzate.py`, poi `python csv/indice.py aggiorna-lotto doc/indice/_lotti/v3_indirizzate.jsonl` |
+| **cosa misura** | per ognuna delle `10` righe: **la frase è ESATTAMENTE alla riga indicata?** Se sì applica, se no **elenca** |
+| ### ⭐ **è la cura di un mio difetto** | le citazioni erano **giuste**: ### **io cercavo nel file della `fonte`**, che per quelle voci **non è il file dove la frase sta** — e dichiaravo *«NON COMPARE»* una frase che c'era |
+| ### ⛔ **e un indirizzo sbagliato NON si corregge a mano** | se la riga `N` non porta la frase, **non si cerca a `N±1` e non si cerca altrove**: ### **si elenca** |
+| **l'uscita** | `doc/indice/_lotti/v3_indirizzate.jsonl` · `doc/indice/_p2_indirizzate.json` |

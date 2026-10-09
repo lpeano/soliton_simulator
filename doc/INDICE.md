@@ -236,7 +236,7 @@
 | `DE-ACCOPPIABILITA` | MISURA | FISICA | 1 | ### **CHIUSA** |  | 4. DE-ACCOPPIABILITA' — analisi, non piano |
 | `DIVISIONE-AUTOCONSISTENTE` | FRONTE | FISICA | 2 | ### **AGENDA** |  | la divisione dell arco come UNA legge: dove si rompe, cosa ereditano i figli, il |
 | `DOPPIA-COP` | CURA | FISICA | 1 | ### **SOSPESA** |  | LA CURA (b): la doppia copertura 4 pi e' un ASSIOMA e va resa STRUTTURALE, non m |
-| `DRIVER-SCENA-II` | DIFETTO | INFRASTRUTTURA | 1 | ### **SOSPESA** |  | APERTA il 2026-09-26 (rilievo di Luca) / IL DRIVER NON SA FARE LA SCENA (ii), e  |
+| `DRIVER-SCENA-II` | CURA | INFRASTRUTTURA | 1 | ### **CHIUSA** |  | APERTA il 2026-09-26 (rilievo di Luca) / IL DRIVER NON SA FARE LA SCENA (ii), e  |
 | `E1` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 56 volte, MAI definito in un registro) |
 | `E3` | FRONTE | FISICA | 1 | ### **SOSPESA** |  | EPOCA 3 + RUN LUNGO — tag epoca-3, 3000 passi, M1/M4 leggere durante il run / GL |
 | `E4-LAM` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | LAM FATTO il 2026-09-24 / LA LEGGE «NESSUNA LUNGHEZZA SOTTO LAM» DEVE DIVENTARE  |
@@ -247,7 +247,7 @@
 | `ENERGIA-NON-DEFINITA` | FRONTE | FISICA | 1 | ### **SUPERATA** |  | il modello non ha un'energia totale, e senza quella bilancio e calore non hanno  |
 | `ESENTE-P3` | DIFETTO | METODO | ENTRAMBE | ### **APERTA** |  | (CITATO 2 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
 | `ETC-C1-CONFINE` | CURA | INFRASTRUTTURA | 1 | ### **CHIUSA** |  | cura (c) pezzo 1: la fotografia si apre a inizio PASSO PIENO, non di step, e ide |
-| `ETC-PASSO` | CURA | FISICA | 1 | ### **CHIUSA** |  | LA CURA (a): il passo diventa SINCRONO -- fotografia a inizio passo, commit a fi |
+| `ETC-PASSO` | CURA | FISICA | 1 | ### **SUPERATA** |  | LA CURA (a): il passo diventa SINCRONO -- fotografia a inizio passo, commit a fi |
 | `ETICHETTA-A13` | DIFETTO | DOCUMENTAZIONE | ENTRAMBE | ### **CHIUSA** |  | l'etichetta sbagliata `A13` dove la regola e' `A3-DISEGNO`: corretta nei documen |
 | `F1` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 19 volte, MAI definito in un registro) |
 | `F2` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 17 volte, MAI definito in un registro) |
@@ -364,9 +364,9 @@
 | `M-ISTERESI` | CURA | FISICA | 2 | ### **AGENDA** |  | un isteresi sui flip di perc_geom e perc_chi: COMPLEMENTO di MEM-VERSO, non alte |
 | `M-LEGAMI` | CURA | FISICA | 2 | ### **AGENDA** |  | cos(dph - tw) al posto di cos(phi0_i - phi0_j): rende viva una memoria congelata |
 | `M-MASSA` | CURA | FISICA | 2 | ### **AGENDA** |  | pesi di appartenenza con memoria: AGGIUNGE stato, e dipende da MASSA-ID |
-| `M-SPINORE` | CURA | FISICA | 2 | ### **AGENDA** |  | trasporto SU(2) per arco con memoria: il candidato campo di gauge della carica |
+| `M-SPINORE` | FRONTE | FISICA | 2 | ### **AGENDA** |  | trasporto SU(2) per arco con memoria: il candidato campo di gauge della carica |
 | `M0` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 3 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
-| `M0a` | DIFETTO | INFRASTRUTTURA | 1 | ### **SOSPESA** |  | MISURA 0 di DRIVER-SCENA-II: `--nodi 0` NON e' rispettato -- net.n = 455 dopo `_ |
+| `M0a` | MISURA | INFRASTRUTTURA | 1 | ### **CHIUSA** |  | MISURA 0 di DRIVER-SCENA-II: `--nodi 0` NON e' rispettato -- net.n = 455 dopo `_ |
 | `M0b` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 2 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
 | `M0c` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 2 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
 | `M1` | FRONTE | FISICA | 2 | ### **AGENDA** |  | LA MATERIA È UNO STATO, NON UNA SOSTANZA — e non c'è SCARICO. Nel codice la mate |
@@ -436,12 +436,12 @@
 | `P1b` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 7 volte, MAI definito in un registro) [P1b] |
 | `P2` | STANDARD | METODO | ENTRAMBE | ### **APERTA** |  | PRIMA DI ESCLUDERE UN FLAG DA UNA MISURA: FORZA IL SISTEMA O LO CORREGGE? |
 | `P2b` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 3 volte, MAI definito in un registro) [P2b] |
-| `P3` | PRESIDIO | METODO | ENTRAMBE | ### **APERTA** |  | NESSUNA STATISTICA SENZA BARRA D'ERRORE, e per confronti fra bracci si usa la |
+| `P3` | STANDARD | METODO | ENTRAMBE | ### **APERTA** |  | NESSUNA STATISTICA SENZA BARRA D'ERRORE, e per confronti fra bracci si usa la |
 | `P4` | STANDARD | METODO | ENTRAMBE | ### **APERTA** |  | PRIMA DI MISURARE SE UNA GRANDEZZA CAMBIA, VERIFICARE CHE SIA LIBERA DI CAMBIARE |
 | `P5` | STANDARD | METODO | ENTRAMBE | ### **APERTA** |  | OGNI RAMO else / FALLBACK / getattr(..., default) SU UN PERCORSO FISICO VA CONTA |
 | `P5a` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 5 volte, MAI definito in un registro) [P5a] |
 | `P5b` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 6 volte, MAI definito in un registro) [P5b] |
-| `P6` | PRESIDIO | METODO | ENTRAMBE | ### **APERTA** |  | OGNI CSV DI MISURA PORTA BLOB, SEME E TUTTI I FLAG che distinguono quel run dagl |
+| `P6` | STANDARD | METODO | ENTRAMBE | ### **SUPERATA** |  | OGNI CSV DI MISURA PORTA BLOB, SEME E TUTTI I FLAG che distinguono quel run dagl |
 | `P7` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 18 volte, MAI definito in un registro) [P7] |
 | `P8` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 20 volte, MAI definito in un registro) [P8] |
 | `P9` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 12 volte, MAI definito in un registro) [P9] |
@@ -556,8 +556,8 @@
 | `REGISTRO_FISICA:V5` | CRITERIO | METODO | 1 | ### **SOSPESA** |  | la deriva della proposta lontano / decade come 1/d in assoluto, 1/d² in relativo |
 | `REGISTRO_FISICA:V6` | CRITERIO | METODO | 1 | ### **SOSPESA** |  | il caso che DEVE fallire: la forma exp(dx/u) / deve esplodere vicino al confine, |
 | `REGISTRO_FISICA:V7` | CRITERIO | METODO | 1 | ### **SOSPESA** |  | mai sotto LAM: una discesa enorme, dx = −100·d / oggi attraversa; la proposta no |
-| `REGISTRO_FISICA:V8` | CRITERIO | METODO | 1 | ### **SOSPESA** |  | la DISTRIBUZIONE di \/dx\//d, non solo il suo tipico / è il numero che decide fr |
-| `REGISTRO_FISICA:V9` | CRITERIO | METODO | 1 | ### **SOSPESA** |  | quante scritture hanno \/dx\//d 1, e quante 2 / 1: Itô comprime; 2: Itô inverte  |
+| `REGISTRO_FISICA:V8` | CRITERIO | METODO | 1 | ### **CHIUSA** |  | la DISTRIBUZIONE di \/dx\//d, non solo il suo tipico / è il numero che decide fr |
+| `REGISTRO_FISICA:V9` | CRITERIO | METODO | 1 | ### **CHIUSA** |  | quante scritture hanno \/dx\//d 1, e quante 2 / 1: Itô comprime; 2: Itô inverte  |
 | `RELAZIONE-BINARIA` | DIFETTO | INFRASTRUTTURA | ENTRAMBE | ### **APERTA** |  | un NUL letterale rende RELAZIONE_PER_CLAUDE.md binaria per git, e i suoi diff il |
 | `REPERTI-IMMUTABILI` | DIFETTO | METODO | ENTRAMBE | ### **APERTA** |  | APERTA il 2026-09-26 (proposta di Luca), famiglia G / UN COMMIT PUO' TOCCARE UN  |
 | `REVERSIBILITA-LOCALE` | FRONTE | FISICA | 2 | ### **AGENDA** |  | reversibilita' LOCALE, irreversibilita' GLOBALE: la sola freccia e' la crescita  |
@@ -643,7 +643,7 @@
 | `STANDARD-5` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 3 volte, MAI definito in un registro) [STANDARD 5] |
 | `STANDARD-6` | STANDARD | METODO | ENTRAMBE | ### **APERTA** |  | OGNI DIFETTO ACCLARATO SI REGISTRA SUBITO NELLA CODA UNICA |
 | `STANDARD-7` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 2 volte, MAI definito in un registro) [STANDARD 7] |
-| `STANDARD-8` | STANDARD | METODO | ENTRAMBE | ### **APERTA** |  | UN DIFETTO DIMOSTRATO SI CURA: MISURARE NON E' CURARE |
+| `STANDARD-8` | STANDARD | METODO | ENTRAMBE | ### **SUPERATA** |  | UN DIFETTO DIMOSTRATO SI CURA: MISURARE NON E' CURARE |
 | `STANDARD-9` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 13 volte, MAI definito in un registro) [STANDARD 9] |
 | `STATI-LOCALI` | PRESIDIO | INFRASTRUTTURA | 1 | ### **SOSPESA** |  | gli stati .npz del grafo restano LOCALI: in git vanno solo sha1, percorso e coma |
 | `SYNCDB-HEADLESS` | DIFETTO | INFRASTRUTTURA | 1 | ### **SOSPESA** |  | `--sync-db` in headless CARICA ma non SALVA: lo dice il docstring del driver |
@@ -745,7 +745,7 @@
 | `Z116` | MISURA | FISICA | 1 | ### **CHIUSA** |  | Z116 CHIUSA PER MISURA ⏳[archivi delle cure · MISURA] / I TRE BRACCI: 6/8 · 7/8  |
 | `Z117` | DIFETTO | FISICA | 1 | ### **CHIUSA** |  | Z117 CHIUSA PER DIMOSTRAZIONE + MISURA / IL WRAP «A 4π» DI ritmo() NON AVVOLGE N |
 | `Z118` | MISURA | FISICA | 1 | ### **CHIUSA** |  | Z118 CHIUSA PER DIMOSTRAZIONE / IL CENSIMENTO DELLE FASI: 52 punti, 38 gravi. E  |
-| `Z119` | DIFETTO | FISICA | 1 | ### **CHIUSA** |  | Z119 CHIUSA PER DIMOSTRAZIONE + MISURA / L'ANTIPARTICELLA DI SCHWINGER NASCE CON |
+| `Z119` | MISURA | FISICA | 1 | ### **CHIUSA** |  | Z119 CHIUSA PER DIMOSTRAZIONE + MISURA / L'ANTIPARTICELLA DI SCHWINGER NASCE CON |
 | `Z12` | FRONTE | FISICA | 1 | ### **SOSPESA** |  | Z12 🟨VALE PER QUELLA SCENA ⏳[EPOCA 1 · MISURA] / pesi() gira SEDICI volte per pa |
 | `Z120` | MISURA | FISICA | 1 | ### **CHIUSA** |  | Z120 CHIUSA PER DIMOSTRAZIONE / LA VERIFICA DI B1: NESSUNA RIGA DELLA FISICA DIS |
 | `Z121` | MISURA | FISICA | 1 | ### **CHIUSA** |  | Z121 CHIUSA PER MISURA ⏳[archivi delle cure · MISURA] / φ NON E' L'AZIMUT DEL VE |

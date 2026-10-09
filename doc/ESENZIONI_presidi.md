@@ -67,6 +67,7 @@ commit**: cosi' non se ne accumulano di invisibili.)*
 | `csv/_punto_della_situazione.py|H-P5` | non importa il simulatore e non lo fa girare. Legge un TSV e `git log`. |
 | `csv/_registri_indice.py|H-P5` | non importa il simulatore e non lo fa girare. Estrae dai sorgenti e dai |
 | `csv/_regole_proposta.py|H-P5` | non importa il simulatore e non lo fa girare. Legge documenti e ne scrive uno. |
+| `csv/_righe_indirizzate.py|H-P5` | non importa il simulatore e non lo fa girare. Costruisce un lotto. |
 | `csv/_righe_origine.py|H-P5` | non importa il simulatore e non lo fa girare. Legge documenti. |
 | `csv/_rinomina_collisioni.py|H-P5` | non importa il simulatore e non lo fa girare. Rinomina etichette in due documenti. |
 | `csv/_rinomina_hook.py|H-P5` | non importa il simulatore e non lo fa girare. Rinomina etichette in sorgenti. |
@@ -138,5 +139,5 @@ commit**: cosi' non se ne accumulano di invisibili.)*
 | `csv/_test_fork/_z43_tempo_proprio.py|H-P3` | la scena passa TUTTA dal CLI (`nmasse` e `sep` da `argv`), e la |
 
 ```
-esenzioni dichiarate   131
+esenzioni dichiarate   132
 ```

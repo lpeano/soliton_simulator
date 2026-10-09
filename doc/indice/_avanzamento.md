@@ -83,8 +83,8 @@ era       1=538  DA_CLASSIFICARE=188  ENTRAMBE=96  2=24
 stato     SOSPESA=369  DA_CLASSIFICARE=188  CHIUSA=182  APERTA=82  AGENDA=24  SUPERATA=1
 ```
 
-### ✔ **FATTO IN QUESTO GIRO:** il punto `1`: la cartella dell'era `2` e' ### **`primo_ordine/`** *(decisione di Luca)*, e ### **`H-FISICA-FUORI-LISTA` da questo momento IMPEDISCE** — finche' la costante era vuota era ### **una tenda.** Collaudo sulla cartella VERA nei due versi: ### **`17`/`17`.**
+### ✔ **FATTO IN QUESTO GIRO:** il punto `2`: le `10` righe con la citazione a `file:riga`, ### **`10` su `10` applicate** — ### **la frase era ESATTAMENTE a quella riga in tutte.** E `STANDARD-6` ### **ritirata dai DATI**: il file passa da `59` a `58` righe.
 
-### ⛔ **RESTA:** i punti `2`…`6` — le `10` righe a `file:riga`, `F1` senza lo stato, `F8` senza il `.py`, le note di `F6`/`F3`, e il referto.
+### ⛔ **RESTA:** i punti `3`…`6` — `F1` senza lo stato, `F8` senza il `.py`, le note di `F6`/`F3`, e il referto.
 
-**Ultimo lotto applicato:** `doc/indice/_lotti/v3_cartella.jsonl` *(`1` voce: la descrizione del presidio, che diceva «non impedisce niente»)*
+**Ultimo lotto applicato:** `doc/indice/_lotti/v3_indirizzate.jsonl` *(`10` voci)*

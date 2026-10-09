@@ -14,7 +14,6 @@ ETC-PASSO | stato=SUPERATA superata_da=SCHED-PASSO | chiusa come superata il 202
 P6 | classe=STANDARD stato=SUPERATA superata_da=P3 | fuse dentro | alta
 STANDARD-8 | stato=SUPERATA superata_da=A12 | e non si duplica | media
 L-SOGLIA | stato=SUPERATA superata_da=P1-sexies | fusa dentro | media
-STANDARD-6 | stato=SUPERATA superata_da=H-INDICE | il hook | media
 P3 | classe=STANDARD | del hook | alta
 P4 | classe=STANDARD | LIBERA di cambiare | alta
 P5 | classe=STANDARD | va CONTATO | alta

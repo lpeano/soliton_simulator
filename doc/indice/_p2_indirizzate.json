@@ -1,0 +1,112 @@
+{
+ "fatte": [
+  {
+   "id": "DRIVER-SCENA-II",
+   "campi": {
+    "classe": "CURA",
+    "stato": "CHIUSA",
+    "chiusura": {
+     "criterio": "verifica completa del guardiano: il SIGILLO di `DRIVER-SCENA-II` (doc/INVENTARIO_strumenti.md:927) [COMMIT RICAVATO: riga 927 di `doc/INVENTARIO_strumenti.md`]",
+     "commit": "ee5ecd3",
+     "data": "2026-10-09"
+    }
+   },
+   "indirizzo": "doc/INVENTARIO_strumenti.md:927",
+   "riga": "| `csv/_seal_fork/_sigillo_scena_ii.py` | `2a324202` | `python csv/_seal_fork/_sigillo_scena_ii.py` · `--corto` | **il SIGILLO di `DRIVER-SCENA-II`**, cinque criteri: argv del default invariata *(cont"
+  },
+  {
+   "id": "M0a",
+   "campi": {
+    "classe": "MISURA",
+    "stato": "CHIUSA",
+    "chiusura": {
+     "criterio": "verifica completa del guardiano: MISURA 0 (doc/INVENTARIO_strumenti.md:924) [COMMIT RICAVATO: riga 924 di `doc/INVENTARIO_strumenti.md`]",
+     "commit": "2b273da",
+     "data": "2026-10-09"
+    }
+   },
+   "indirizzo": "doc/INVENTARIO_strumenti.md:924",
+   "riga": "| `csv/_test_fork/_misura0_scena_ii.py` | `2d502a4d` | `python csv/_test_fork/_misura0_scena_ii.py` | **MISURA 0** di `DRIVER-SCENA-II`: `net.n` dopo `_applica_flag` con `--nodi 0`, e che cosa fanno l"
+  },
+  {
+   "id": "REGISTRO_FISICA:V8",
+   "campi": {
+    "stato": "CHIUSA",
+    "chiusura": {
+     "criterio": "verifica completa del guardiano: LA MISURA CHE L'HA DECISA (doc/REGISTRO_FISICA.md:435) [COMMIT RICAVATO: riga 435 di `doc/REGISTRO_FISICA.md`]",
+     "commit": "19cea14",
+     "data": "2026-10-09"
+    }
+   },
+   "indirizzo": "doc/REGISTRO_FISICA.md:435",
+   "riga": "> **LA MISURA CHE L'HA DECISA:** `V8`/`V9` dal giro corto di `CURA 2` — **`max |dx|/d = 0.0531`"
+  },
+  {
+   "id": "REGISTRO_FISICA:V9",
+   "campi": {
+    "stato": "CHIUSA",
+    "chiusura": {
+     "criterio": "verifica completa del guardiano: LA MISURA CHE L'HA DECISA (doc/REGISTRO_FISICA.md:435) [COMMIT RICAVATO: riga 435 di `doc/REGISTRO_FISICA.md`]",
+     "commit": "19cea14",
+     "data": "2026-10-09"
+    }
+   },
+   "indirizzo": "doc/REGISTRO_FISICA.md:435",
+   "riga": "> **LA MISURA CHE L'HA DECISA:** `V8`/`V9` dal giro corto di `CURA 2` — **`max |dx|/d = 0.0531`"
+  },
+  {
+   "id": "Z119",
+   "campi": {
+    "classe": "MISURA"
+   },
+   "indirizzo": "doc/STATO_RUN.md:653",
+   "riga": "| **D35** | **L'antiparticella di Schwinger nasce con `+2π` (`:5443`) e nel campo `F = Σ exp(iφ)` E' IDENTICA alla particella, non opposta. Il commento dice `+π`** | `Z119`: letto dal sorgente · **il "
+  },
+  {
+   "id": "ETC-PASSO",
+   "campi": {
+    "stato": "SUPERATA",
+    "superata_da": "SCHED-PASSO",
+    "chiusura": {}
+   },
+   "indirizzo": "doc/SMISTAMENTO_run_base.md:216",
+   "riga": "| `SI` | **SCHED-PASSO** | il passo pieno diventa uno SCHEDULATORE: le regole del passo sono architettura, non intenzioni | eredita il blocco da `ETC-PASSO` (chiusa come superata il 2026-09-28): il ru"
+  },
+  {
+   "id": "P6",
+   "campi": {
+    "classe": "STANDARD",
+    "stato": "SUPERATA",
+    "superata_da": "P3"
+   },
+   "indirizzo": "doc/PATTERN_DI_PROVA.md:141",
+   "riga": "| `P6`, `par.9-bis` | **fuse dentro `P3`** | questo documento |"
+  },
+  {
+   "id": "STANDARD-8",
+   "campi": {
+    "stato": "SUPERATA",
+    "superata_da": "A12"
+   },
+   "indirizzo": "doc/PATTERN_DI_PROVA.md:140",
+   "riga": "| `STANDARD 8` | **è `A12`**, e non si duplica | `doc/ASSIOMI.md` |"
+  },
+  {
+   "id": "P3",
+   "campi": {
+    "classe": "STANDARD"
+   },
+   "indirizzo": "doc/PATTERN_DI_PROVA.md:143",
+   "riga": "| `P3`, `P5`, `P7`, `P8` **del hook** | **`H-P3`, `H-P5`, `H-P7`, `H-P8`** | `CLAUDE.md` par.12 |"
+  },
+  {
+   "id": "M-SPINORE",
+   "campi": {
+    "classe": "FRONTE"
+   },
+   "indirizzo": "doc/MEMORIE_MANCANTI.md:362",
+   "riga": "| ### **che altro chiuderebbe** | nessuna voce aperta oggi: ### **è un fronte, non una cura** |"
+  }
+ ],
+ "non_fatte": []
+}

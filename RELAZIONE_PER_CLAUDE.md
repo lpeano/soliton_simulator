@@ -10925,3 +10925,17 @@ Il task history e' committato ### **prima del lavoro** *(par.8)*: `doc/TASK_HIST
 ### ⚠ **LA CARTELLA NON ESISTE ANCORA, E NON L'HO CREATA.** Il mandato da- ### **il nome**, non l'ordine di crearla — e creare la cartella del codice dell'era `2` ### **e- un atto di FISICA**, non di indice. ### ⭐ **Il presidio funziona comunque, e la ragione e- un dettaglio di progetto che oggi paga: guarda I PERCORSI STAGED, non il disco.** Impedisce ### **dal primo `.py` che qualcuno metta la-**, non ### **dal giorno in cui la cartella nasce.**
 
 ### ✔ **E IL COLLAUDO CONSERVA LA MISURA DEL VECCHIO STATO:** un braccio gira ### **su una copia con la costante VUOTA** e prova che la- ### **`intrusi` era sempre vuoto.** ### ⭐ **Cio- che un presidio NON faceva e- una misura, non un ricordo** — e un collaudo che cancella i bracci vecchi ### **cancella la prova di cio- che e- cambiato.**
+
+---
+
+## LE `10` RIGHE A `file:riga`: **`10` su `10`, e il difetto era il MIO ritrovamento** (2026-10-09)
+
+`10` voci, `10` righe di storico, la validazione intera passa. Nessuna corsa; il simulatore resta `b8c21049`.
+
+### ⛔ **LE CITAZIONI ERANO GIUSTE, E IL DIFETTO ERA IL MIO RITROVAMENTO.** Cercavo ### **nel file della `fonte`** della voce, che per queste dieci ### **non e' il file dove la frase sta** — e il referto le metteva fra le *«non applicate: la citazione non compare»*. ### ⭐ **Dichiaravo che una frase non c'era, e c'era:** il mio `T4` *«altrove nel file che la `fonte` nomina»* era ### **largo nel posto sbagliato** — largo nel FILE, e ### **cieco su quale file.**
+
+### ✔ **E IL CONTROLLO DEL MANDATO E- PIU- STRETTO DEL MIO, non piu- largo:** ### **la frase deve essere ESATTAMENTE alla riga indicata.** Niente `N±1`, niente *«altrove»*. ### **Un indirizzo sbagliato non si corregge a mano**, e se la riga non porta la frase ### **si elenca.**
+
+### ⚠ **E UNA L'HO GUARDATA DUE VOLTE:** `Z119` indirizza a `doc/STATO_RUN.md:653`, e quella riga ### **parla di `D35`.** La riga e' lunga ### **`440` caratteri**, e la frase *«`Z119`: letto dal sorgente»* sta ### **al carattere `167`**, nella colonna *«come si e' saputo»*. ### **Il match era genuino, e l'ho verificato invece di fidarmi del troncamento della mia stampa.**
+
+### ✔ **E `STANDARD-6` SI RITIRA DAI DATI** *(citazione inesistente)*: il file del guardiano passa da `59` a `58` righe. ### ⭐ **Un dato che il guardiano RITIRA si TOGLIE, non si corregge** — e il commit `3926dbb` che asseriva `59` righe ### **era vero quando l'ha asserito.**
