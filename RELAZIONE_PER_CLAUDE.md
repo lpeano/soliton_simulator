@@ -11369,3 +11369,24 @@ Una legge e- in `leggi_attive` ### **PER ID**, oppure ### **non gira**; e ### **
 ### ✅ **E IL DRIVER RIPRODUCE I NUMERI DEL COLLAUDO:** norma `26.836105950993492 → ...545` *(relativa `1.986e-15`)*, energia relativa `3.979e-05` su `200` passi. ### **Due vie indipendenti che concordano** — e non era garantito: il collaudo monta la scena ### **da `catena()`**, il driver ### **da `grafo("catena", 9)`.**
 
 ### ⚠ **CHE COSA RESTA DEL PUNTO `15`:** `(d)` *(i confronti `A`/`B` col campo UNICO, la lezione di `Z20`)* e `(e)` *(la versione del formato, la scrittura ATOMICA, i reperti immutabili)*. ### **Sono un commit a se-.**
+
+## PUNTO `8` — ### **LA REVERSIBILITA-: entrambi tornano, e LA MIA PREVISIONE NON REGGE** *(2026-10-09)*
+
+`k = 50` passi avanti e `50` indietro: ### **verifica DIRETTA di `A16`.** La lettura era ### **fissata PRIMA**, nel task history: errore relativo `< 1e-9`.
+
+| seme | `GLOBALE` | `LOCALE` | locale/globale |
+|--:|--:|--:|--:|
+| `11` | `4.52e-16` | `4.16e-16` | `0.92` |
+| `101` | `4.20e-15` | `4.22e-15` | `1.00` |
+| `202` | `2.55e-15` | `1.54e-15` | `0.61` |
+| `303` | `3.04e-15` | `8.24e-16` | `0.27` |
+
+### ✅ **CONFERMATO:** entrambi tornano, e di ### **quattro ordini di grandezza sotto la lettura** *(`< 5e-15` contro `< 1e-9`)*. E l-### **EULERO ESPLICITO**, scritto ### **SOLO per il caso che deve fallire**, sbaglia di ### **`6.9e-2`**: ### **il braccio distingue un metodo simmetrico da uno qualunque**, e senza di lui sarebbe un `FALSO-UNO`.
+
+### ⛔ **NON CONFERMATO, ed e- LA MIA previsione:** avevo scritto *«mi aspetto il GLOBALE PEGGIORE del LOCALE, perche- il punto fisso ha una tolleranza che non e- simmetrica nel tempo»*. Il locale e- piu- piccolo in ### **`3` semi su `4`**, ### **ma tutti gli `8` valori stanno fra `4e-16` e `4e-15`** — ### **il limite di `float64`** — e il rapporto ### **oscilla di un fattore `3.7`.**
+
+### ⭐ **QUINDI NON E- UN EFFETTO: e- arrotondamento.** ### ⚠ **E CON UN SEME SOLO SEMBRAVA VERO** *(`4.5e-16` contro `4.2e-16`)*: ### **e- il difetto che `P3` nomina** — *«nessuna statistica senza barra d-errore»* — e ### **l-ho evitato SOLO perche- ho rifatto la misura su quattro semi invece di fermarmi al primo.**
+
+### ⛔ **E NON E- NEMMENO <<UN RITROVATO>>, come avevo scritto che sarebbe stato:** avevo detto che se il locale non fosse migliore, ### **la composizione palindroma non comprerebbe la reversibilita- che promette.** ### **Non compra nulla QUI, perche- il globale e- GIA- al limite della macchina: non c-e- niente da comprare.** La differenza fra i due resta ### **IL CONO.**
+
+Il task history e- ### **ANNOTATO, non riscritto** *(par.`8`)*. Collaudo della catena: ### **`38`/`38`** *(da `33`)*.

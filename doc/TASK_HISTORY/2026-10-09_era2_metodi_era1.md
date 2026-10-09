@@ -111,3 +111,26 @@ regola scattasse dove dicevo io, ### **non che la regola fosse giusta.**
 - [ ] **`5`**, **`6`**, **`9`**, **`10`** — il **timbro** · **salva e riprendi** che ### **RIFIUTA se la tabella è cambiata** · ### **un solo esecutore** · il **conto delle leggi**
 - [ ] **`7`**, **`8`** — il **modello di sigillo** *(`primo_ordine/sigilli/_modello.py`)* · la ### **REVERSIBILITÀ**, con ### **entrambi** gli integratori e ### **il caso che deve fallire**
 - [ ] **il referto**, e `doc/indice/_avanzamento.md` aggiornato
+
+---
+
+## ⚠ **ANNOTAZIONE DEL PUNTO `8`** — ### **la mia previsione NON REGGE** *(2026-10-09, dopo la misura)*
+
+> ### ⛔ **Il par.`8` dice: *«non si riscrive quando si rivela sbagliato: si ANNOTA»*.** Quindi la sezione `2` resta come l'ho scritta, e questo e' cio' che la misura dice.
+
+**Avevo scritto, prima di misurare:** *«mi aspetto che il **GLOBALE** sia **PEGGIORE** del **LOCALE**, perche' il punto fisso ha una tolleranza che non e' simmetrica nel tempo»*, e *«se il locale NON fosse migliore, e' un ritrovato»*.
+
+| seme | `GLOBALE` | `LOCALE` | locale/globale |
+|--:|--:|--:|--:|
+| `11` | `4.52e-16` | `4.16e-16` | `0.92` |
+| `101` | `4.20e-15` | `4.22e-15` | `1.00` |
+| `202` | `2.55e-15` | `1.54e-15` | `0.61` |
+| `303` | `3.04e-15` | `8.24e-16` | `0.27` |
+
+### ✅ **CIO' CHE LA MISURA CONFERMA:** ### **entrambi tornano**, e la lettura fissata era `< 1e-9` — ### **misurato `< 5e-15`, quattro ordini di grandezza sotto.** E l'`EULERO ESPLICITO`, scritto **solo per questo**, ### **sbaglia di `6.9e-2`**: il braccio ### **distingue un metodo simmetrico da uno qualunque**, e senza di lui sarebbe un `FALSO-UNO`.
+
+### ⛔ **CIO' CHE LA MISURA NON CONFERMA, ed e' la mia previsione:** il locale e' numericamente piu' piccolo in ### **`3` semi su `4`**, ### **ma tutti gli `8` valori stanno fra `4e-16` e `4e-15`** — ### **il limite di `float64`** — e il rapporto ### **oscilla di un fattore `3.7`.**
+
+### ⭐ **QUINDI NON E' UN EFFETTO:** un effetto che cambia di un fattore `3.7` fra i semi ### **e' arrotondamento, non una proprieta' dei due metodi.** ### ⚠ **E con UN SEME SOLO sembrava vero** *(`4.5e-16` contro `4.2e-16`)*: ### **e' esattamente il difetto che `P3` nomina** — *«nessuna statistica senza barra d'errore»* — e ### **l'ho evitato solo perche' ho rifatto la misura su quattro semi invece di fermarmi al primo.**
+
+### ⛔ **E NON E' NEMMENO <<UN RITROVATO>>, come avevo scritto che sarebbe stato:** avevo detto *«se il locale NON fosse migliore, e' un ritrovato — vorrebbe dire che la composizione palindroma non compra la reversibilita' che promette»*. ### **La composizione palindroma NON compra nulla QUI, perche' il globale e' GIA' al limite della macchina:** ### **non c'e' niente da comprare.** La differenza fra i due resta ### **il CONO**, non la reversibilita'.

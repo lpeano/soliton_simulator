@@ -2660,8 +2660,8 @@ etichette rimosse, con ### **`0` persi, `0` doppi, `0` conflitti**.
 
 | | |
 |---|---|
-| **i file** | `primo_ordine/passo.py` *(BLOB `df1b1e50`)* · `primo_ordine/_collauda_passo.py` *(BLOB `49dc612f`)* |
-| **COMANDO** | `python primo_ordine/_collauda_passo.py` *(il collaudo della catena, `33`/`33`)* |
+| **i file** | `primo_ordine/passo.py` *(BLOB `df1b1e50`)* · `primo_ordine/_collauda_passo.py` *(BLOB `1ea62b18`)* |
+| **COMANDO** | `python primo_ordine/_collauda_passo.py` *(il collaudo della catena, `38`/`38`)* |
 | **cosa misura** | i **tre livelli** dello schedulatore *(quali permutazioni sono byte-identiche e quali no)* · **IL CONO**, per `PASSO` e per `STRATO` · la **deriva** di norma ed energia dei due candidati · **`A8b`** *(nessuna cache nascosta)* · **i SEI casi che devono fallire** |
 | ### ⭐ **e il collaudo sta in un file SUO** | il cono si misura **sulla norma**, la norma e' **un osservatore**, e `P-E4` vieta a `passo.py` di importare `osservatori/` *(`A17`)*. ### **Il presidio ha imposto la forma, invece di lasciarmela scegliere** |
 | ### ⛔ **e NON SCEGLIE l'integratore** | la scelta e' **di Luca** *(il nodo `INT`)*: i due candidati stanno nella **stessa tavola**, con cono, deriva e costo |

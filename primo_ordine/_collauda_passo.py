@@ -348,6 +348,101 @@ def cache(T, n, dt, iterazioni, toll):
 
 
 # =====================================================================================
+#   (G) LA REVERSIBILITA- -- punto `8`: verifica DIRETTA di `A16`
+# -------------------------------------------------------------------------------------
+#   ### ⛔ **`k` PASSI AVANTI E `k` INDIETRO DEVONO TORNARE ALLO STATO INIZIALE.**
+#   ### Il punto medio implicito e- ### **simmetrico nel tempo per costruzione**, quindi
+#   ### ### **dovrebbe** tornare quasi esattamente. ### ⚠ **<<Dovrebbe>> non e-
+#   ### <<torna>>: SI MISURA.**
+#   ### ⭐ **E LA LETTURA ERA FISSATA PRIMA**, nel task history: errore relativo
+#   ### ### **`< 1e-9` a `k = 50`**, e ### **mi aspettavo il GLOBALE PEGGIORE del
+#   ### LOCALE** -- perche- il punto fisso ha una tolleranza che ### **non e- simmetrica
+#   ### nel tempo.**
+# =====================================================================================
+
+def eulero_esplicito(st, ii, jj, dt, termini, iterazioni, toll, *resto):
+    """### UN EULERO ESPLICITO, scritto ### **SOLO per il caso che DEVE fallire.**
+
+    ### ⛔ **NON E- UN CANDIDATO e non lo diventera-:** non e- simmetrico, quindi
+    ### **non e- reversibile** e ### **perde energia monotonamente.** Esiste perche-
+    ### **senza di lui il braccio della reversibilita- non distinguerebbe un metodo
+    ### simmetrico da uno qualunque** -- e un braccio che non distingue e- un
+    ### `FALSO-UNO`.
+    """
+    g = HAM.gradiente(st, ii, jj, termini)
+    return ({k: st[k] + dt * (-1j) * g[k] for k in st}, {"metodo": "eulero"})
+
+
+def reversibilita(T, n, dt, iterazioni, toll, k=50):
+    print()
+    print("  (G) LA REVERSIBILITA- -- `%d` passi avanti e `%d` indietro (punto `8`)" % (k, k))
+    ii, jj = catena(n)
+    ss = PA.strati(ii, jj)
+    fuori = {}
+    for nome, fun, kw in (("GLOBALE", PA.passo_globale, ()),
+                          ("LOCALE", PA.passo_locale, (ss,)),
+                          ("EULERO (deve fallire)", eulero_esplicito, ())):
+        st0 = stato_seme(n, C["seme"])
+        st = {x: v.copy() for x, v in st0.items()}
+        for _ in range(k):
+            st = fun(st, ii, jj, dt, T, iterazioni, toll, *kw)[0]
+        for _ in range(k):
+            st = fun(st, ii, jj, -dt, T, iterazioni, toll, *kw)[0]
+        num = max(float(np.max(np.abs(st[x] - st0[x]))) for x in st0)
+        den = max(float(np.max(np.abs(st0[x]))) for x in st0)
+        rel = num / den
+        fuori[nome] = rel
+        print("      %-22s errore relativo %.3e" % (nome, rel))
+    esito("`8` il GLOBALE torna allo stato iniziale entro `1e-9`",
+          fuori["GLOBALE"] < 1e-9,
+          "### la lettura era FISSATA PRIMA, nel task history: `%.3e`" % fuori["GLOBALE"])
+    esito("`8` il LOCALE torna allo stato iniziale entro `1e-9`",
+          fuori["LOCALE"] < 1e-9,
+          "### `%.3e`" % fuori["LOCALE"])
+    esito("### DEVE fallire: un EULERO ESPLICITO non torna (errore `> 1e-3`)",
+          fuori["EULERO (deve fallire)"] > 1e-3,
+          "### senza di lui il braccio non distinguerebbe un metodo SIMMETRICO da uno "
+          "qualunque: sarebbe un FALSO-UNO")
+    # ### ⛔ **E LA MIA PREVISIONE NON REGGE, e si misura su QUATTRO SEMI.**
+    # ### Nel task history avevo scritto: ### **<<mi aspetto che il GLOBALE sia PEGGIORE
+    # ### del LOCALE, perche- il punto fisso ha una tolleranza che non e- simmetrica nel
+    # ### tempo>>**. ### ⚠ **Con UN SEME sembrava vero** *(`4.5e-16` contro
+    # ### `4.2e-16`)*; ### **con quattro il rapporto oscilla fra `0.27` e `1.00`**, e
+    # ### ### **tutti i valori stanno fra `1e-16` e `1e-14`: il limite della macchina.**
+    # ### ⭐ **Quindi la differenza NON E- RISOLVIBILE: e- arrotondamento, non una
+    # ### proprieta- dei due metodi.** ### **Un effetto che cambia di un fattore `4` fra
+    # ### i semi non e- un effetto.**
+    rapporti = []
+    for _seme in (11, 101, 202, 303):
+        _o = {}
+        for _nome, _fun, _kw in (("G", PA.passo_globale, ()),
+                                 ("L", PA.passo_locale, (ss,))):
+            _a = stato_seme(n, _seme)
+            _s = {x: v.copy() for x, v in _a.items()}
+            for _ in range(k):
+                _s = _fun(_s, ii, jj, dt, T, iterazioni, toll, *_kw)[0]
+            for _ in range(k):
+                _s = _fun(_s, ii, jj, -dt, T, iterazioni, toll, *_kw)[0]
+            _o[_nome] = (max(float(np.max(np.abs(_s[x] - _a[x]))) for x in _a)
+                         / max(float(np.max(np.abs(_a[x]))) for x in _a))
+        rapporti.append((_seme, _o["G"], _o["L"]))
+    print("      su QUATTRO semi: %s"
+          % "  ".join("s%d: G=%.2e L=%.2e" % (s, g, l) for s, g, l in rapporti))
+    tutti = [x for _s, g, l in rapporti for x in (g, l)]
+    esito("### e TUTTI i valori stanno al LIMITE DELLA MACCHINA (`< 1e-13`)",
+          max(tutti) < 1e-13,
+          "max `%.3e` su 8 misure: ### entrambi gli integratori sono REVERSIBILI"
+          % max(tutti))
+    rr = [l / g for _s, g, l in rapporti]
+    esito("### e la mia PREVISIONE (<<globale PEGGIORE>>) NON E- UN EFFETTO MISURABILE",
+          max(rr) / min(rr) > 2.0,
+          "il rapporto locale/globale oscilla fra `%.2f` e `%.2f`: ### un effetto che "
+          "cambia di un fattore `%.1f` fra i semi NON E- UN EFFETTO"
+          % (min(rr), max(rr), max(rr) / min(rr)))
+    return fuori, rapporti
+
+
+# =====================================================================================
 #   (F) I SEI CASI CHE DEVONO FALLIRE -- in UN SOLO POSTO
 # -------------------------------------------------------------------------------------
 #   ### ⛔ **Il mandato li elenca per nome, e qui si ESEGUONO**: ciascuno si costruisce,
@@ -471,6 +566,7 @@ def main():
     c = cono(T, n, dt, it, tl)
     d = deriva(T, n, dt, C["passi"], it, tl)
     cache(T, n, dt, it, tl)
+    rev = reversibilita(T, n, dt, it, tl)
     sei_casi()
     print()
     print("=" * 100)
