@@ -4,13 +4,16 @@
 
 | dominio | era | voci |
 |---|---|--:|
-| `DA_CLASSIFICARE` | `DA_CLASSIFICARE` | 529 |
+| `DA_CLASSIFICARE` | `DA_CLASSIFICARE` | 417 |
 | `DOCUMENTAZIONE` | `1` | 14 |
-| `FISICA` | `1` | 163 |
+| `DOCUMENTAZIONE` | `ENTRAMBE` | 3 |
+| `FISICA` | `1` | 242 |
 | `FISICA` | `2` | 47 |
+| `FISICA` | `DA_CLASSIFICARE` | 2 |
 | `FISICA` | `ENTRAMBE` | 16 |
-| `INFRASTRUTTURA` | `ENTRAMBE` | 22 |
-| `METODO` | `ENTRAMBE` | 76 |
+| `INFRASTRUTTURA` | `1` | 2 |
+| `INFRASTRUTTURA` | `ENTRAMBE` | 24 |
+| `METODO` | `ENTRAMBE` | 100 |
 
 | id | classe | dominio | era | stato | blocca | titolo |
 |---|---|---|---|---|---|---|
@@ -27,7 +30,7 @@
 | `A2` | STANDARD | FISICA | ENTRAMBE | ### **APERTA** |  | NESSUNA SCORCIATOIA GLOBALE |
 | `A2-ANELLO` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **CHIUSA** |  | l'anello A6 di Z70 — periodo 2, via chiralitacorelocale/CHICORE / doc/RAMIFICAZI |
 | `A2-BLOCH` | MISURA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **CHIUSA** |  | BLOCH VALE SEMPRE ⏳[EPOCA 1 · CODICE] / Invarianza del Bloch sotto Step 2 — phc  |
-| `A2-DXD` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | RIMISURARE NEL REGIME NUOVO: \/dx\//d del freno-legge (criterio di riapertura: q |
+| `A2-DXD` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | RIMISURARE NEL REGIME NUOVO: \/dx\//d del freno-legge (criterio di riapertura: q |
 | `A2b` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 2 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
 | `A3` | STANDARD | FISICA | ENTRAMBE | ### **APERTA** |  | NIENTE SI NORMALIZZA SUL PROPRIO INSIEME |
 | `A3-CHIRALE` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **CHIUSA** |  | Z71 — la carica chirale non si conserva / doc/RAMIFICAZIONI.md Z71 / APERTA. I d |
@@ -35,7 +38,7 @@
 | `A3-FDT` | MISURA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **CHIUSA** |  | FDT VALE SEMPRE ⏳[EPOCA 1 · CODICE] / FDT del solo scuotimento — il drift di n → |
 | `A3c` | STANDARD | FISICA | ENTRAMBE | ### **APERTA** |  | un RAPPORTO confrontato con un MASSIMO / (115, accanto a due massimi di passi di |
 | `A4` | STANDARD | FISICA | ENTRAMBE | ### **APERTA** |  | STRATIFICAZIONE CAUSALE |
-| `A4-METRICHE` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | le METRICHE DEL SETTORE CHIRALE / doc/TASKHISTORY/2026-09-20metriche-settore-chi |
+| `A4-METRICHE` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | le METRICHE DEL SETTORE CHIRALE / doc/TASKHISTORY/2026-09-20metriche-settore-chi |
 | `A5` | STANDARD | FISICA | ENTRAMBE | ### **APERTA** |  | CAUSALITA' DELLA MEDIAZIONE |
 | `A5-PANNELLO` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **CHIUSA** |  | il PANNELLO FEDELE (interpolazione di psi accanto a campospaziale) / la ex-LISTA |
 | `A6` | STANDARD | FISICA | ENTRAMBE | ### **APERTA** |  | INERZIA (TEOREMA, non assioma) |
@@ -46,8 +49,8 @@
 | `A8b` | STANDARD | METODO | ENTRAMBE | ### **APERTA** |  | COROLLARIO: le cache CROSS-PASSO |
 | `A9` | STANDARD | METODO | ENTRAMBE | ### **APERTA** |  | UN PRESIDIO CHE NON IMPEDISCE NON E' UN PRESIDIO |
 | `AAAA-MM-GG` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 3 volte, MAI definito in un registro) |
-| `AB-CONTROLLI` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | l'A/B di W5 non ha salvato i punti di CONTROLLO nel vuoto, e senza quelli la den |
-| `ALLUNG-RELATIVO` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | il criterio V6 dell'allungamento sottrae variazioni relative con DENOMINATORI DI |
+| `AB-CONTROLLI` | DIFETTO | METODO | ENTRAMBE | ### **APERTA** |  | l'A/B di W5 non ha salvato i punti di CONTROLLO nel vuoto, e senza quelli la den |
+| `ALLUNG-RELATIVO` | DIFETTO | METODO | ENTRAMBE | ### **APERTA** |  | il criterio V6 dell'allungamento sottrae variazioni relative con DENOMINATORI DI |
 | `ANCORE-1` | DIFETTO | METODO | ENTRAMBE | ### **APERTA** |  | APERTA il 2026-09-25 / 25 SIGILLI PRENDONO «IL CODICE DI PRIMA» DA HEAD (43 occo |
 | `ANTI-ALLINEAMENTO` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 2 volte, MAI definito in un registro; citato solo in... [ANTI-ALLINEAMEN |
 | `ARCH-LCONSERVA` | CURA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **CHIUSA** |  | _togli_rotazione_rigida esce dal simulatore; L_CONSERVA diventa un no-op accetta |
@@ -68,12 +71,12 @@
 | `B4-FROZEN` | MISURA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **CHIUSA** |  | FROZEN VALE SEMPRE ⏳[EPOCA 1 · CODICE] / Bloch frozen-o-noise / senza scuotiment |
 | `B5` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **CHIUSA** |  | theta / l'aliasing del settore di spin / CLAUDE.md §9, registro C14, fronte A /  |
 | `B5-KURAMOTO` | MISURA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **CHIUSA** |  | KURAMOTO VALE SEMPRE ⏳[EPOCA 1 · CODICE] / Kuramoto refutato / K-frozen byte-ide |
-| `B6` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | le due cure OFF: COPPIARECIPROCA e GRAVAMPIEZZA / :739 e :732 (entrambe = False) |
+| `B6` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | le due cure OFF: COPPIARECIPROCA e GRAVAMPIEZZA / :739 e :732 (entrambe = False) |
 | `B6-TURBO` | MISURA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **CHIUSA** |  | TURBO VALE SEMPRE ⏳[EPOCA 1 · MISURA] / Esito B del turbo — con cs al 5 % di CSM |
-| `B7` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | i reperti DA RIMISURARE sulla scena nuova / Z43, Z46, Z48-Z52, coerg / misurati  |
+| `B7` | DIFETTO | FISICA | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | i reperti DA RIMISURARE sulla scena nuova / Z43, Z46, Z48-Z52, coerg / misurati  |
 | `B7-SHAKE` | MISURA | FISICA | 1 | ### **SOSPESA** |  | SHAKE 🟨VALE PER QUELLA SCENA ⏳[EPOCA 1 · MISURA] / shake-then-freeze — la preces |
 | `B8` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **CHIUSA** |  | IL BLOCCO DEL RUN A 6000 AL PASSO 2700 / doc/REFERTObloccorun6000.md (131 righe) |
-| `B9` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | Z63 / Z64 — i 1455 nodi a 10⁻¹³; la catena f → x → r che non riproduce r / regis |
+| `B9` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | Z63 / Z64 — i 1455 nodi a 10⁻¹³; la catena f → x → r che non riproduce r / regis |
 | `C1` | MISURA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **CHIUSA** |  | C1 VALE SEMPRE ⏳[EPOCA 1 · MISURA] / ESITO (I): nessun bug. omega = coppia/inerz |
 | `C1-PEQ-ESATTO` | CURA | FISICA | 1 | ### **SOSPESA** |  | PEQESATTO — rilassamento in forma esatta / GLOBALE §2① / 7/7 (Z95) |
 | `C10` | MISURA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **CHIUSA** |  | C10 VALE SEMPRE ⏳[EPOCA 1 · MISURA] / LA BARRA D'ERRORE USATA FINORA E' TRE VOLT |
@@ -140,10 +143,10 @@
 | `CENS-B9` | DIFETTO | DOCUMENTAZIONE | 1 | ### **APERTA** |  | [B] *"LEGGE DI STABILITA' (**esplorativa**): i nuovi nodi in regione sovra |
 | `CHI-BASC-DESCRIZIONE` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **CHIUSA** |  | il flag --chi-basc stampa <<perc_chi vira>>, ma con --chi-coop scrive perc_geom |
 | `CHI-TORS-ZERO-FALSO` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **CHIUSA** |  | il gancio chi_tors lascia uno ZERO dove non ha potuto misurare: 392 e 731 passi  |
-| `CHK2` | CURA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | CHECKPOINT 2 / GLOBALE §3 / raggiunto e riferito a Luca. IL RUN LUNGO NON SI LAN |
-| `CHK3` | CURA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | CHECKPOINT: referto dei quattro esiti, ciascuno contro le sue letture fissate PR |
-| `CHK3-D` | CURA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | Nel referto del CHK3, la sezione «I DIFETTI NUOVI CONTRO LE MISURE GIA' FATTE» — |
-| `CICLO-CHIUSURA-SEGNO` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | il segno dell arco di chiusura in _base_cicli_topologici e opposto al verso di p |
+| `CHK2` | CURA | METODO | ENTRAMBE | ### **APERTA** |  | CHECKPOINT 2 / GLOBALE §3 / raggiunto e riferito a Luca. IL RUN LUNGO NON SI LAN |
+| `CHK3` | CURA | METODO | ENTRAMBE | ### **APERTA** |  | CHECKPOINT: referto dei quattro esiti, ciascuno contro le sue letture fissate PR |
+| `CHK3-D` | CURA | METODO | ENTRAMBE | ### **APERTA** |  | Nel referto del CHK3, la sezione «I DIFETTI NUOVI CONTRO LE MISURE GIA' FATTE» — |
+| `CICLO-CHIUSURA-SEGNO` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | il segno dell arco di chiusura in _base_cicli_topologici e opposto al verso di p |
 | `CLI-1` | CURA | INFRASTRUTTURA | ENTRAMBE | ### **APERTA** | SI | I SIGILLI DI CURA 4 E CURA 5 NON HANNO MAI PROVATO IL PERCORSO CLI: impostavano  |
 | `CLIP-INVENTARIO` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | INVENTARIO dei clip, tetti e pavimenti del passo pieno: 27 TETTI FISICI su 117 g |
 | `COER-4PI` | CRITERIO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **CHIUSA** |  | la coerenza della massa e' `/<e^{i phi}>/`: il campo NON distingue `phi` da `phi |
@@ -184,7 +187,7 @@
 | `CONTA-RIGHE` | FRONTE | METODO | ENTRAMBE | ### **APERTA** |  | DUE CONVENZIONI PER CONTARE LE RIGHE: i miei strumenti contavano uno in piu' di  |
 | `COPPIA-RAMP` | MISURA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **CHIUSA** |  | APERTA il 2026-09-26 / PERCHE' LA COPPIA NON PORTA ramp? Misurato sui figli (2 s |
 | `COSA-RICONTROLLARE` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 3 volte, MAI definito in un registro) [COSA-RICONTROLLARE] |
-| `CRESCITA-DOPO-Z43` | MISURA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | con r = cs/CS_M la rete quasi non cresce: ~25 nascite contro ~1500 in 150 passi |
+| `CRESCITA-DOPO-Z43` | MISURA | FISICA | 1 | ### **SOSPESA** |  | con r = cs/CS_M la rete quasi non cresce: ~25 nascite contro ~1500 in 150 passi |
 | `CROSS-PASSO` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 3 volte, MAI definito in un registro) [CROSS-PASSO] |
 | `CS-LAMBDA-GLOBALE` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | _cs_nodo non e del tutto locale: il pavimento usa _Lam = mean(/psi/^2) su TUTTA  |
 | `CTRL-RISCELTA` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **CHIUSA** |  | i punti di controllo si RISCEGLIEVANO a ogni checkpoint: l'osservabile della PRO |
@@ -206,7 +209,7 @@
 | `D11` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **CHIUSA** |  | d scende DIECI VOLTE sotto LAM mentre SCALAMIN e' acceso, e la causa NON e' trov |
 | `D12` | DIFETTO | METODO | ENTRAMBE | ### **APERTA** |  | 1755 MB di .pkl non hanno il comando che li rigenera (par.5-quinquies: «un dato  |
 | `D13` | DIFETTO | METODO | ENTRAMBE | ### **APERTA** |  | I sigilli storici non sono stati rigirati sul blob corrente / Z11 / — / APERTO |
-| `D14` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | median(\/f\/) fa TRE mestieri, non due: e' anche il rompi-anello / Z41 / — / APE |
+| `D14` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | median(\/f\/) fa TRE mestieri, non due: e' anche il rompi-anello / Z41 / — / APE |
 | `D15` | DIFETTO | FISICA | 2 | ### **AGENDA** |  | A7: la carica chirale NON si conserva / Z71, letto dal codice / — / APERTO |
 | `D16` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **CHIUSA** |  | SCALAMIN frenava OGNI scrittura separatamente: il risultato dipendeva dall'ORDIN |
 | `D17` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **CHIUSA** |  | peq diventava NEGATIVO e il pavimento max(peq, 1e-9) NE RIBALTAVA IL SEGNO (da - |
@@ -225,7 +228,7 @@
 | `D30` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | massa chiama semina SENZA massid (:6209), quindi masseinfo non viene MAI popolat |
 | `D31` | DIFETTO | FISICA | 1 | ### **SOSPESA** | SI | Il freno di SCALAMIN (smpchiudi) E' IL MOTORE della crescita di d0: vale il 117. |
 | `D32` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **CHIUSA** |  | I TEMPI PROPRI DICHIARATI SONO TRE, E SONO TRE GRANDEZZE DIVERSE: r, taupp e d/c |
-| `D32-CONTATORE` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | i contatori `_rep_taupp_*` contano un clamp che NON ESISTE PIU' |
+| `D32-CONTATORE` | DIFETTO | INFRASTRUTTURA | 1 | ### **APERTA** |  | i contatori `_rep_taupp_*` contano un clamp che NON ESISTE PIU' |
 | `D33` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | La repulsione alla massima compressione e' AZZERATA proprio dove serve: dal 75 % |
 | `D34` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **CHIUSA** |  | D34 CURATO IN CODICE il 2026-09-24 / Il wrap «a 4π» di ritmo() (:2584-2585) NON  |
 | `D35` | DIFETTO | FISICA | 2 | ### **AGENDA** |  | L'antiparticella di Schwinger nasce con +2π (:5443) e nel campo F = Σ exp(iφ) E' |
@@ -243,8 +246,8 @@
 | `DOVE-VA` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 2 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
 | `DRIVER-SCENA-II` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **CHIUSA** |  | APERTA il 2026-09-26 (rilievo di Luca) / IL DRIVER NON SA FARE LA SCENA (ii), e  |
 | `E1` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 56 volte, MAI definito in un registro) |
-| `E3` | CURA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | EPOCA 3 + RUN LUNGO — tag epoca-3, 3000 passi, M1/M4 leggere durante il run / GL |
-| `E4-LAM` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | LAM FATTO il 2026-09-24 / LA LEGGE «NESSUNA LUNGHEZZA SOTTO LAM» DEVE DIVENTARE  |
+| `E3` | CURA | METODO | ENTRAMBE | ### **APERTA** |  | EPOCA 3 + RUN LUNGO — tag epoca-3, 3000 passi, M1/M4 leggere durante il run / GL |
+| `E4-LAM` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | LAM FATTO il 2026-09-24 / LA LEGGE «NESSUNA LUNGHEZZA SOTTO LAM» DEVE DIVENTARE  |
 | `E4a` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 3 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
 | `E4b` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 5 volte, MAI definito in un registro) [E4b] |
 | `EM-CURVATURA-BIDIREZIONALE` | MISURA | FISICA | 2 | ### **AGENDA** |  | l accoppiamento EM-curvatura e' bidirezionale in natura: il verso EM->curvatura  |
@@ -263,14 +266,14 @@
 | `FASE-5` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 2 volte, MAI definito in un registro) [FASE-5] |
 | `FASE-TRASCINAMENTO-3D` | DIFETTO | FISICA | 2 | ### **AGENDA** |  | il trascinamento di fase usa dir_laterale = (-y, x, 0): privilegia l asse z del  |
 | `FATTI-AVVIO` | FRONTE | INFRASTRUTTURA | ENTRAMBE | ### **APERTA** |  | la catena di AVVIO non ha un solo fatto in FATTI_dal_codice.md: _applica_flag, a |
-| `FILI-CORTI` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | i fili si accorciano SOLO FRA LE MASSE o OVUNQUE? Il calo della distanza viene d |
+| `FILI-CORTI` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | i fili si accorciano SOLO FRA LE MASSE o OVUNQUE? Il calo della distanza viene d |
 | `FINESTRA-DEL-PICCO` | CRITERIO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **CHIUSA** |  | 72 passi non bastano a dire se il sistema esplode: il picco di K_fase e' al pass |
 | `FINESTRA-NON-DICHIARATA` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **CHIUSA** |  | _smp_d0 e _smp_d vivono solo dentro il passo e il registro non le dichiarava |
 | `FINESTRA-PRE-NASCITA` | FRONTE | METODO | ENTRAMBE | ### **APERTA** |  | una finestra PRIMA della prima nascita (216) non dice niente sulle nascite: e' c |
-| `FOGLIO-NULLO` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | il diagnostico dei fogli vale il suo NULLO sulla scena (ii): la fase sta sul con |
+| `FOGLIO-NULLO` | DIFETTO | METODO | ENTRAMBE | ### **APERTA** |  | il diagnostico dei fogli vale il suo NULLO sulla scena (ii): la fase sta sul con |
 | `FORK-FIRST` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 2 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
-| `FORMA-N-VUOTO` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | `n` in forma_passo0 non puo' cambiare: e' l'insieme congelato del passo 0 (P4) |
-| `FRAG1` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | mitosi() SU UNA RETE SENZA CAMPO VA IN IndexError INVECE DI DICHIARARLO. I = sel |
+| `FORMA-N-VUOTO` | DIFETTO | METODO | ENTRAMBE | ### **APERTA** |  | `n` in forma_passo0 non puo' cambiare: e' l'insieme congelato del passo 0 (P4) |
+| `FRAG1` | DIFETTO | INFRASTRUTTURA | ENTRAMBE | ### **APERTA** |  | mitosi() SU UNA RETE SENZA CAMPO VA IN IndexError INVECE DI DICHIARARLO. I = sel |
 | `FRECCE-IMPOSTE` | DIFETTO | FISICA | 2 | ### **AGENDA** |  | il censimento delle leggi che impongono una direzione nel tempo: NOVE, e DUE cur |
 | `FRENO-LEGGE` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 5 volte, MAI definito in un registro) [FRENO-LEGGE] |
 | `FUGA-MULTIRIGA` | DIFETTO | INFRASTRUTTURA | ENTRAMBE | ### **APERTA** |  | la via d'uscita di H-REG-R e H-P1-bis e' una regex SENZA re.S: una dichiarazione |
@@ -315,7 +318,7 @@
 | `H6b` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 2 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
 | `HASHSEED-RIPROD` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **CHIUSA** |  | FALSO ALLARME: PYTHONHASHSEED non cambia lo stato del simulatore (23/23 identich |
 | `HDF5` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 8 volte, MAI definito in un registro) |
-| `I1` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | IDEA DI LUCA, per dopo: costruire UNA massa, farla maturare, leggerne la struttu |
+| `I1` | DIFETTO | FISICA | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | IDEA DI LUCA, per dopo: costruire UNA massa, farla maturare, leggerne la struttu |
 | `I2` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 28 volte, MAI definito in un registro) |
 | `I3` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 8 volte, MAI definito in un registro) [I3] |
 | `I4` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 14 volte, MAI definito in un registro) [I4] |
@@ -325,7 +328,7 @@
 | `IN-CHE-ORDINE` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 2 volte, MAI definito in un registro; citato solo in... [IN-CHE-ORDINE] |
 | `IN-RUN` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 3 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
 | `INDICE-LEGGERO` | FRONTE | INFRASTRUTTURA | ENTRAMBE | ### **APERTA** |  | l'indice pesa 169 KB e leggerlo intero non fa risparmiare contesto: serve un com |
-| `INERZIA-1` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | LA LEGGE DELL'INERZIA CEDE A k = 2, ED È UN DIFETTO DIMOSTRATO (misura 3, f8b27d |
+| `INERZIA-1` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | LA LEGGE DELL'INERZIA CEDE A k = 2, ED È UN DIFETTO DIMOSTRATO (misura 3, f8b27d |
 | `INERZIA-1(C)` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **CHIUSA** |  | 1(C) — CURATA e SIGILLATA 3/6 il 2026-09-25: GIUSTA e INSUFFICIENTE / LA CURA TO |
 | `INTERO-BLOCCO` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 7 volte, MAI definito in un registro) [INTERO-BLOCCO] |
 | `INVARIANZA-LOCALE-CS` | FRONTE | FISICA | 2 | ### **AGENDA** |  | ogni legge che usa una grandezza GLOBALE da all osservatore locale un riferiment |
@@ -376,7 +379,7 @@
 | `M1` | DIFETTO | FISICA | 2 | ### **AGENDA** |  | LA MATERIA È UNO STATO, NON UNA SOSTANZA — e non c'è SCARICO. Nel codice la mate |
 | `M1b` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 23 volte, MAI definito in un registro) |
 | `M1c` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 5 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
-| `M2` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | LA MITOSI — DUE DIFETTI DA ACCLARARE. ① il figlio nasce nel PUNTO MEDIO: posfigl |
+| `M2` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | LA MITOSI — DUE DIFETTI DA ACCLARARE. ① il figlio nasce nel PUNTO MEDIO: posfigl |
 | `M2b` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 7 volte, MAI definito in un registro) [M2b] |
 | `M3` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 27 volte, MAI definito in un registro) |
 | `M3b` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 3 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
@@ -387,10 +390,10 @@
 | `M5c` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 2 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
 | `M8` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 2 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
 | `MANDATO-REGISTRO` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 12 volte, MAI definito in un registro) [MANDATO-REGISTRO] |
-| `MASSA-CRITICA-LOCALE` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | la soglia di collasso deve essere LOCALE e DINAMICA, e dipendere da lambda: dire |
+| `MASSA-CRITICA-LOCALE` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | la soglia di collasso deve essere LOCALE e DINAMICA, e dipendere da lambda: dire |
 | `MASSA-ID` | DIFETTO | METODO | ENTRAMBE | ### **APERTA** |  | le masse si identificano con l'ID di massa (conc_nodi), non coi nodi del passo 0 |
 | `MASSA-ID-FISSO` | MISURA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **CHIUSA** |  | MASSA-ID a LIGNAGGIO FISSO: non applicabile, la precondizione V-PRE non regge (i |
-| `MASSA-MIGRA` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | la massa segue i NODI o la COERENZA? E come cambia la sua FORMA? |
+| `MASSA-MIGRA` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | la massa segue i NODI o la COERENZA? E come cambia la sua FORMA? |
 | `MASSA-VUOTO` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 2 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
 | `MASSE-PESI-SOVRAPPOSTE` | FRONTE | FISICA | 2 | ### **AGENDA** |  | un nodo appartiene a PIU masse con peso diverso: una massa e una configurazione  |
 | `MAX-NODI-FERMA` | CURA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **CHIUSA** |  | MAX_NODI e' una guardia di MEMORIA che oggi cambia la FISICA in silenzio: deve F |
@@ -428,7 +431,7 @@
 | `OMEGA-ETA` | MISURA | FISICA | 1 | ### **SOSPESA** |  | APERTA il 2026-09-26 (Luca: da seguire nel run base, NON una cura) / IL RAPPORTO |
 | `OSSERVABILE-P1` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **CHIUSA** |  | APERTA il 2026-09-26 (rilievo di Luca) / NON ESISTE UNO STRUMENTO UFFICIALE PER  |
 | `P-DECADIMENTO` | STANDARD | FISICA | ENTRAMBE | ### **APERTA** |  | ogni decadimento e una trasformazione: cio che una grandezza perde diventa calor |
-| `P-EQ-MEDIANA-ARCHI` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | P_eq prende la mediana dei PRIMI n ARCHI su m: un sottoinsieme arbitrario, non t |
+| `P-EQ-MEDIANA-ARCHI` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | P_eq prende la mediana dei PRIMI n ARCHI su m: un sottoinsieme arbitrario, non t |
 | `P-MEMORIA` | STANDARD | FISICA | ENTRAMBE | ### **APERTA** |  | uno scalare con memoria acquista un verso: la memoria da la direzione |
 | `P0` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 12 volte, MAI definito in un registro; citato solo in referti/sigilli/ta |
 | `P1` | PRESIDIO | METODO | ENTRAMBE | ### **APERTA** |  | NON USARE L'ASSOCIAZIONE SENZA VERIFICARE LO STORICO. |
@@ -452,7 +455,7 @@
 | `P9` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 12 volte, MAI definito in un registro) [P9] |
 | `PADRE-FIGLIO` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 2 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
 | `PASSO-1` | DIFETTO | METODO | ENTRAMBE | ### **APERTA** |  | IL PASSO NON È step(): SONO CINQUE CHIAMATE, e 24 script sotto csv/ avanzano in  |
-| `PASSO-2` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | UN AVANZAMENTO INCOMPLETO NEL SIMULATORE STESSO, :8404: for in range(300): net.s |
+| `PASSO-2` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | UN AVANZAMENTO INCOMPLETO NEL SIMULATORE STESSO, :8404: for in range(300): net.s |
 | `PASSO-PIENO` | DIFETTO | METODO | ENTRAMBE | ### **APERTA** |  | un hook che rifiuta uno script che avanza con net.step() invece di csv/_passo.py |
 | `PAT-1` | CURA | METODO | ENTRAMBE | ### **APERTA** |  | dovespingelagravita.py non rispetta il pattern 5 (nessun CONTROLLO DELL'INVOLUCR |
 | `PAT-2` | CURA | METODO | ENTRAMBE | ### **APERTA** |  | spegnigravbifase.py:184 non rispetta il pattern 2 (usa max\/Δ\/ invece delle FIR |
@@ -460,9 +463,9 @@
 | `PEQ-MEDIANA-ISTANTE` | CURA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **CHIUSA** |  | _g_peqn_mediana si prende UNA volta, sullo stato da cui la nascita parte: era l  |
 | `PEQ-SEL-STANTIO` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | mitosi legge self.peq[sel] DOPO che peq e' stato rifiltrato con keep: archi sbag |
 | `PER-ARCO` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 2 volte, MAI definito in un registro) [PER-ARCO] |
-| `PERC-TW-MORTA` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | perc_tw e STATO MORTO: scritta sempre a zero da quattro siti di nascita, e NESSU |
+| `PERC-TW-MORTA` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | perc_tw e STATO MORTO: scritta sempre a zero da quattro siti di nascita, e NESSU |
 | `PESO-MAX` | CRITERIO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **CHIUSA** |  | partecipazioni multiple: l'opacita' di un nodo e' il MAX su tutte le masse, non  |
-| `PHI-FUORI-DOMINIO` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | una delle dieci scritture di phi NON normalizza, e il sito della fase lo copriva |
+| `PHI-FUORI-DOMINIO` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | una delle dieci scritture di phi NON normalizza, e il sito della fase lo copriva |
 | `PHI0-CONGELATA` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | phi0 e CONGELATA: 5 scritture tutte alla nascita, e lo step la legge come memori |
 | `PIATTAFORMA-NON-TIMBRATA` | FRONTE | METODO | ENTRAMBE | ### **APERTA** |  | I REFERTI NON TIMBRANO LA PIATTAFORMA, e i conteggi assoluti ne dipendono |
 | `POST-HOC` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 5 volte, MAI definito in un registro) [POST-HOC] |
@@ -474,7 +477,7 @@
 | `PRESTAZIONI-CORSE` | DIFETTO | INFRASTRUTTURA | ENTRAMBE | ### **APERTA** |  | le corse costano: sei strade per il tempo di calcolo, da affrontare a modello ST |
 | `PROBLEMI-CHK3` | CURA | FISICA | 1 | ### **SOSPESA** |  | IL PIANO DEI PROBLEMI APERTI — per ciascuno: la domanda da chiudere · la misura  |
 | `PROVA-COMB` | CURA | FISICA | 1 | ### **SOSPESA** |  | LA PROVA COMBINATA: TUTTE LE CURE APPROVATE ACCESE INSIEME — 600 passi, stesso s |
-| `PROVA1-40-80` | MISURA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | i NODI delle masse del passo 0 si avvicinano piu' dei controlli a 40-80 passi; i |
+| `PROVA1-40-80` | MISURA | FISICA | 1 | ### **SOSPESA** |  | i NODI delle masse del passo 0 si avvicinano piu' dei controlli a 40-80 passi; i |
 | `PSI-FLASH` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **CHIUSA** |  | /psi/ SALTA di 1.6x nei passi con nascite: due siti ricalcolano psi dopo la mito |
 | `Q0` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 3 volte, MAI definito in un registro) [Q0] |
 | `Q1` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 13 volte, MAI definito in un registro) [Q1] |
@@ -498,75 +501,75 @@
 | `R4` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 13 volte, MAI definito in un registro) [R4] |
 | `R5` | PRESIDIO | METODO | ENTRAMBE | ### **APERTA** |  | contava 25 aperture su 24 passi: l'iniezione del test apriva il freno lei stessa |
 | `R6` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 27 volte, MAI definito in un registro) [R6] |
-| `RAMI-OFF-CURA2` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | i rami a flag spento di TEMPO_UNICO_MITOSI, archiviati COPIATI dal sorgente |
+| `RAMI-OFF-CURA2` | DIFETTO | INFRASTRUTTURA | 1 | ### **APERTA** |  | i rami a flag spento di TEMPO_UNICO_MITOSI, archiviati COPIATI dal sorgente |
 | `RAMPA-1` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **CHIUSA** |  | CHIUSA il 2026-09-25, strada (3) (decisione di Luca): sigillo 9/9 dal CLI, ramp  |
-| `RAMPA-2` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | APERTA il 2026-09-25 (richiesta di Luca) / AL PASSO 0 TUTTI LEGGONO cs = CSM. La |
+| `RAMPA-2` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | APERTA il 2026-09-25 (richiesta di Luca) / AL PASSO 0 TUTTI LEGGONO cs = CSM. La |
 | `REG-A` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | FASE A del registro della fisica: l'INVENTARIO degli scrittori di stato / MANDAT |
-| `REG-B` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | FASE B: le SCHEDE, a lotti, un commit per lotto / MANDATO-REGISTRO §2 / LE QUATT |
-| `REG-C` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | FASE C: LA STORIA di ogni legge, e le schede delle leggi TOLTE / MANDATO-REGISTR |
+| `REG-B` | DIFETTO | DOCUMENTAZIONE | ENTRAMBE | ### **APERTA** |  | FASE B: le SCHEDE, a lotti, un commit per lotto / MANDATO-REGISTRO §2 / LE QUATT |
+| `REG-C` | DIFETTO | DOCUMENTAZIONE | ENTRAMBE | ### **APERTA** |  | FASE C: LA STORIA di ogni legge, e le schede delle leggi TOLTE / MANDATO-REGISTR |
 | `REG-R` | DIFETTO | INFRASTRUTTURA | ENTRAMBE | ### **APERTA** |  | LA REGOLA MANTENUTA del registro della fisica — la riga in CLAUDE.md («nessuna l |
 | `REG-V` | DIFETTO | INFRASTRUTTURA | ENTRAMBE | ### **APERTA** |  | verificaregistro.py: completezza, esistenza, coerenza con la traccia di d0 e col |
 | `REGIME-COMMENTI` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **CHIUSA** |  | i commenti dichiaravano DEFAULT e canonico il regime stocastico, che non gira ma |
 | `REGIME-DUE-SISTEMI` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | --regime crea un secondo sistema con lo stesso nome: SCUOTIMENTO cambia se il fl |
-| `REGISTRO_FISICA:A1` | CRITERIO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | flag SPENTO = BYTE-IDENTICO al codice precedente, firma dei byte, un processo pe |
-| `REGISTRO_FISICA:A11` | CRITERIO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | IL PAVIMENTO 1e-6 |
-| `REGISTRO_FISICA:A13` | CRITERIO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | A13 dice che sotto LAM non esiste niente, nemmeno una distanza fra nodi. Quindi  |
-| `REGISTRO_FISICA:A2` | CRITERIO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | al passo 1, ramp == 1 su TUTTI i nodi della semina iniziale, ESATTO |
-| `REGISTRO_FISICA:A3` | CRITERIO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | un nodo nato da MITOSI parte da ramp = 0 e arriva a 1 nel suo tempo-luce |
+| `REGISTRO_FISICA:A1` | CRITERIO | METODO | ENTRAMBE | ### **APERTA** |  | flag SPENTO = BYTE-IDENTICO al codice precedente, firma dei byte, un processo pe |
+| `REGISTRO_FISICA:A11` | CRITERIO | FISICA | 1 | ### **SOSPESA** |  | IL PAVIMENTO 1e-6 |
+| `REGISTRO_FISICA:A13` | CRITERIO | FISICA | 1 | ### **SOSPESA** |  | A13 dice che sotto LAM non esiste niente, nemmeno una distanza fra nodi. Quindi  |
+| `REGISTRO_FISICA:A2` | CRITERIO | METODO | ENTRAMBE | ### **APERTA** |  | al passo 1, ramp == 1 su TUTTI i nodi della semina iniziale, ESATTO |
+| `REGISTRO_FISICA:A3` | CRITERIO | FISICA | 1 | ### **SOSPESA** |  | un nodo nato da MITOSI parte da ramp = 0 e arriva a 1 nel suo tempo-luce |
 | `REGISTRO_FISICA:A4` | CRITERIO | FISICA | 1 | ### **SOSPESA** |  | contrasto massa/vuoto e Lam al passo 1, contro P2 = 27 e P3 = 5 |
 | `REGISTRO_FISICA:A5` | CRITERIO | FISICA | 1 | ### **SOSPESA** |  | CONTROLLO POSITIVO: ON e OFF DEVONO differire |
 | `REGISTRO_FISICA:A6` | CRITERIO | FISICA | 1 | ### **SOSPESA** |  | CASO CHE DEVE FALLIRE: con maturi=False forzato, A2 deve dare FAIL |
-| `REGISTRO_FISICA:A7` | CRITERIO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | TAUA non è più letto da pesi — dall'AST, non da un grep |
-| `REGISTRO_FISICA:C1` | CRITERIO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | flag spento: byte-identico / par.2.1. L'arresto vive dentro SEMINALAM: a flag sp |
-| `REGISTRO_FISICA:C2` | CRITERIO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | la capienza è INDIPENDENTE da n chiesto (prova del raddoppio) / È IL CRITERIO CH |
-| `REGISTRO_FISICA:C3` | CRITERIO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | frazione di impacchettamento 0.384 NELLA SFERA INTERNA — i nodi a distanza = RCO |
-| `REGISTRO_FISICA:C4` | CRITERIO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | nessun rifiuto falso: con n sotto la capienza misurata la semina riesce sempre,  |
-| `REGISTRO_FISICA:D33` | CRITERIO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | la repulsione si spegne dove servirebbe. Il segno si inverte oltre 3.5π, ma |
-| `REGISTRO_FISICA:D35` | CRITERIO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | l'antifase non è un'antifase. Il campo è F = Σ K·exp(iφ), e |
-| `REGISTRO_FISICA:D37` | CRITERIO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | UNA CHIAVE DUPLICATA NEI DOMINI, ed è mia |
-| `REGISTRO_FISICA:E1a` | CRITERIO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | E1a la mitosi non muore / Luca / gnatimitosi 0 e n cresce / il nullo: se la cura |
-| `REGISTRO_FISICA:E1b` | CRITERIO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | E1b la mitosi non esplode / Luca / n finale < 10× il riferimento, e il run arriv |
-| `REGISTRO_FISICA:E1c` | CRITERIO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | E1c il fattore / mio / le nascite salgono di un fattore fra 5× e 100× / DERIVATA |
-| `REGISTRO_FISICA:E2` | CRITERIO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | E2 le coppie annichilano / Luca / NON MISURABILE, e si dichiara / vedi il blocco |
+| `REGISTRO_FISICA:A7` | CRITERIO | METODO | ENTRAMBE | ### **APERTA** |  | TAUA non è più letto da pesi — dall'AST, non da un grep |
+| `REGISTRO_FISICA:C1` | CRITERIO | METODO | ENTRAMBE | ### **APERTA** |  | flag spento: byte-identico / par.2.1. L'arresto vive dentro SEMINALAM: a flag sp |
+| `REGISTRO_FISICA:C2` | CRITERIO | FISICA | 1 | ### **SOSPESA** |  | la capienza è INDIPENDENTE da n chiesto (prova del raddoppio) / È IL CRITERIO CH |
+| `REGISTRO_FISICA:C3` | CRITERIO | FISICA | 1 | ### **SOSPESA** |  | frazione di impacchettamento 0.384 NELLA SFERA INTERNA — i nodi a distanza = RCO |
+| `REGISTRO_FISICA:C4` | CRITERIO | FISICA | 1 | ### **SOSPESA** |  | nessun rifiuto falso: con n sotto la capienza misurata la semina riesce sempre,  |
+| `REGISTRO_FISICA:D33` | CRITERIO | FISICA | 1 | ### **SOSPESA** |  | la repulsione si spegne dove servirebbe. Il segno si inverte oltre 3.5π, ma |
+| `REGISTRO_FISICA:D35` | CRITERIO | FISICA | 1 | ### **SOSPESA** |  | l'antifase non è un'antifase. Il campo è F = Σ K·exp(iφ), e |
+| `REGISTRO_FISICA:D37` | CRITERIO | INFRASTRUTTURA | ENTRAMBE | ### **APERTA** |  | UNA CHIAVE DUPLICATA NEI DOMINI, ed è mia |
+| `REGISTRO_FISICA:E1a` | CRITERIO | FISICA | 1 | ### **SOSPESA** |  | E1a la mitosi non muore / Luca / gnatimitosi 0 e n cresce / il nullo: se la cura |
+| `REGISTRO_FISICA:E1b` | CRITERIO | FISICA | 1 | ### **SOSPESA** |  | E1b la mitosi non esplode / Luca / n finale < 10× il riferimento, e il run arriv |
+| `REGISTRO_FISICA:E1c` | CRITERIO | METODO | ENTRAMBE | ### **APERTA** |  | E1c il fattore / mio / le nascite salgono di un fattore fra 5× e 100× / DERIVATA |
+| `REGISTRO_FISICA:E2` | CRITERIO | METODO | ENTRAMBE | ### **APERTA** |  | E2 le coppie annichilano / Luca / NON MISURABILE, e si dichiara / vedi il blocco |
 | `REGISTRO_FISICA:E3` | CRITERIO | FISICA | 1 | ### **SOSPESA** |  | E3 la finestra di D33 / mio / si riporta la popolazione delle due finestre nei d |
-| `REGISTRO_FISICA:E4` | CRITERIO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | E4 i diagnostici di fase / mio / max(φ) < 2π nel braccio della cura / la riserva |
-| `REGISTRO_FISICA:E4-LAM` | CRITERIO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | LA LEGGE d = LAM SI VERIFICA SEMPRE (decisione di Luca, 2026-09-24) |
-| `REGISTRO_FISICA:P1` | CRITERIO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | somma dei pesi per nodo / 50 / 9 / 0.18 |
-| `REGISTRO_FISICA:P2` | CRITERIO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | contrasto Imassa / Ivuoto / 13 / 27 / 2.1 |
-| `REGISTRO_FISICA:P3` | CRITERIO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | Λ / 140 / 5 / 0.036 |
-| `REGISTRO_FISICA:P3b` | CRITERIO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | ampiezza dello scuotimento / — / 5× più bassa / 0.2 |
-| `REGISTRO_FISICA:P4` | CRITERIO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | csfloor dentro le masse / 0.9 / 0.55 / 0.61 |
-| `REGISTRO_FISICA:P5` | CRITERIO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | lambdanodi / — / quasi COSTANTE, 0.74-0.76 LAM ovunque / — |
-| `REGISTRO_FISICA:REG-R` | CRITERIO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | R, la regola mantenuta (da cablare quando le schede coprono le leggi attive): ne |
-| `REGISTRO_FISICA:S1` | CRITERIO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | flag SPENTO = byte-identico: firma dei byte su tutti i campi, un processo per br |
-| `REGISTRO_FISICA:S10` | CRITERIO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | le regioni restano coerenti: frazione di nodi della coorte con I Λ, ai passi 0,  |
-| `REGISTRO_FISICA:S2` | CRITERIO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | passo ZERO: min distanza fra POSIZIONI = LAM (cKDTree, k=2) / è A13 misurato dir |
-| `REGISTRO_FISICA:S3` | CRITERIO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | passo ZERO: sum(d < LAM) == 0 E sum(d == LAM) == 0 / i due INSIEME: il primo da  |
-| `REGISTRO_FISICA:S4` | CRITERIO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | gsmnascite == 0 al passo zero / il presidio non deve scattare. Rileva solo il pa |
-| `REGISTRO_FISICA:S5` | CRITERIO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | nodi isolati == 0 / un nodo isolato non è un nodo più semplice: è un nodo che es |
-| `REGISTRO_FISICA:S6` | CRITERIO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | d == /posi − posj/ per OGNI arco al passo zero / dice se la cura ha curato D02 a |
-| `REGISTRO_FISICA:S7` | CRITERIO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | giro corto di 120 passi: la mitosi viva, il bilancio di d0 CHIUDE / E1a e B, gli |
-| `REGISTRO_FISICA:S9` | CRITERIO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | al passo ZERO: intensità media DENTRO le regioni / quella del vuoto, 1 — e si ri |
-| `REGISTRO_FISICA:SCENA-1` | CRITERIO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | 1, STRADA (1): IL VUOTO DI DEFAULT E' LA SATURAZIONE, E SEMINALAM E' OBBLIGATORI |
-| `REGISTRO_FISICA:T2` | CRITERIO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | -0.15 … +0.44 / fa cio' che la geometria impone |
-| `REGISTRO_FISICA:T3` | CRITERIO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | un arco sotto LAM a flag SPENTI FERMA il run / quello che prima non faceva |
-| `REGISTRO_FISICA:T4` | CRITERIO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | e con d = LAM non si ferma / il controllo che rende T3 leggibile: senza, T3 pass |
-| `REGISTRO_FISICA:T5` | CRITERIO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | byte-inerte: 206 campi identici, 0 diversi contro cura1corto / l'invariante legg |
-| `REGISTRO_FISICA:U2` | CRITERIO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | U2 È ATTIVA IN ENTRAMBI I BRACCI DI P-GONFIA E FABBRICA LUNGHEZZA (Luca, 2026-09 |
-| `REGISTRO_FISICA:U2-5` | CRITERIO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | 5 è MODEL-FREE: non confronta col mio conto, legge d e d0 e conta gli archi che |
+| `REGISTRO_FISICA:E4` | CRITERIO | METODO | ENTRAMBE | ### **APERTA** |  | E4 i diagnostici di fase / mio / max(φ) < 2π nel braccio della cura / la riserva |
+| `REGISTRO_FISICA:E4-LAM` | CRITERIO | FISICA | 1 | ### **SOSPESA** |  | LA LEGGE d = LAM SI VERIFICA SEMPRE (decisione di Luca, 2026-09-24) |
+| `REGISTRO_FISICA:P1` | CRITERIO | FISICA | 1 | ### **SOSPESA** |  | somma dei pesi per nodo / 50 / 9 / 0.18 |
+| `REGISTRO_FISICA:P2` | CRITERIO | FISICA | 1 | ### **SOSPESA** |  | contrasto Imassa / Ivuoto / 13 / 27 / 2.1 |
+| `REGISTRO_FISICA:P3` | CRITERIO | FISICA | 1 | ### **SOSPESA** |  | Λ / 140 / 5 / 0.036 |
+| `REGISTRO_FISICA:P3b` | CRITERIO | FISICA | 1 | ### **SOSPESA** |  | ampiezza dello scuotimento / — / 5× più bassa / 0.2 |
+| `REGISTRO_FISICA:P4` | CRITERIO | FISICA | 1 | ### **SOSPESA** |  | csfloor dentro le masse / 0.9 / 0.55 / 0.61 |
+| `REGISTRO_FISICA:P5` | CRITERIO | FISICA | 1 | ### **SOSPESA** |  | lambdanodi / — / quasi COSTANTE, 0.74-0.76 LAM ovunque / — |
+| `REGISTRO_FISICA:REG-R` | CRITERIO | METODO | ENTRAMBE | ### **APERTA** |  | R, la regola mantenuta (da cablare quando le schede coprono le leggi attive): ne |
+| `REGISTRO_FISICA:S1` | CRITERIO | METODO | ENTRAMBE | ### **APERTA** |  | flag SPENTO = byte-identico: firma dei byte su tutti i campi, un processo per br |
+| `REGISTRO_FISICA:S10` | CRITERIO | FISICA | 1 | ### **SOSPESA** |  | le regioni restano coerenti: frazione di nodi della coorte con I Λ, ai passi 0,  |
+| `REGISTRO_FISICA:S2` | CRITERIO | FISICA | 1 | ### **SOSPESA** |  | passo ZERO: min distanza fra POSIZIONI = LAM (cKDTree, k=2) / è A13 misurato dir |
+| `REGISTRO_FISICA:S3` | CRITERIO | FISICA | 1 | ### **SOSPESA** |  | passo ZERO: sum(d < LAM) == 0 E sum(d == LAM) == 0 / i due INSIEME: il primo da  |
+| `REGISTRO_FISICA:S4` | CRITERIO | METODO | ENTRAMBE | ### **APERTA** |  | gsmnascite == 0 al passo zero / il presidio non deve scattare. Rileva solo il pa |
+| `REGISTRO_FISICA:S5` | CRITERIO | FISICA | 1 | ### **SOSPESA** |  | nodi isolati == 0 / un nodo isolato non è un nodo più semplice: è un nodo che es |
+| `REGISTRO_FISICA:S6` | CRITERIO | FISICA | 1 | ### **SOSPESA** |  | d == /posi − posj/ per OGNI arco al passo zero / dice se la cura ha curato D02 a |
+| `REGISTRO_FISICA:S7` | CRITERIO | FISICA | 1 | ### **SOSPESA** |  | giro corto di 120 passi: la mitosi viva, il bilancio di d0 CHIUDE / E1a e B, gli |
+| `REGISTRO_FISICA:S9` | CRITERIO | FISICA | 1 | ### **SOSPESA** |  | al passo ZERO: intensità media DENTRO le regioni / quella del vuoto, 1 — e si ri |
+| `REGISTRO_FISICA:SCENA-1` | CRITERIO | FISICA | 1 | ### **SOSPESA** |  | 1, STRADA (1): IL VUOTO DI DEFAULT E' LA SATURAZIONE, E SEMINALAM E' OBBLIGATORI |
+| `REGISTRO_FISICA:T2` | CRITERIO | FISICA | 1 | ### **SOSPESA** |  | -0.15 … +0.44 / fa cio' che la geometria impone |
+| `REGISTRO_FISICA:T3` | CRITERIO | FISICA | 1 | ### **SOSPESA** |  | un arco sotto LAM a flag SPENTI FERMA il run / quello che prima non faceva |
+| `REGISTRO_FISICA:T4` | CRITERIO | METODO | ENTRAMBE | ### **APERTA** |  | e con d = LAM non si ferma / il controllo che rende T3 leggibile: senza, T3 pass |
+| `REGISTRO_FISICA:T5` | CRITERIO | METODO | ENTRAMBE | ### **APERTA** |  | byte-inerte: 206 campi identici, 0 diversi contro cura1corto / l'invariante legg |
+| `REGISTRO_FISICA:U2` | CRITERIO | FISICA | 1 | ### **SOSPESA** |  | U2 È ATTIVA IN ENTRAMBI I BRACCI DI P-GONFIA E FABBRICA LUNGHEZZA (Luca, 2026-09 |
+| `REGISTRO_FISICA:U2-5` | CRITERIO | METODO | ENTRAMBE | ### **APERTA** |  | 5 è MODEL-FREE: non confronta col mio conto, legge d e d0 e conta gli archi che |
 | `REGISTRO_FISICA:U2-6` | CRITERIO | FISICA | 1 | ### **SOSPESA** |  | 6 È IL CASO CHE DEVE FALLIRE (P1-sexies, ed è il criterio più importante): la |
-| `REGISTRO_FISICA:U2a` | CRITERIO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | la LUNGHEZZA FABBRICATA da nasce, sum(LAM - v) sugli archi troncati, SEPARATA pe |
-| `REGISTRO_FISICA:U2b` | CRITERIO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | quanti archi sono stati troncati, e su quanti visti — stessa separazione / idem |
-| `REGISTRO_FISICA:U2c` | CRITERIO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | frazione di archi sotto 2 LAM / ai passi 0 e 120 |
-| `REGISTRO_FISICA:V1` | CRITERIO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | quanto vale a, il passo tipico di rumore, misurato / è il numero che decide la c |
-| `REGISTRO_FISICA:V2` | CRITERIO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | la deriva di oggi sotto rumore simmetrico / deve riprodurre Z113: ≈ +1.582e-03 c |
-| `REGISTRO_FISICA:V3` | CRITERIO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | la deriva della proposta, stessa a, stessi d / deve essere del secondo ordine: r |
-| `REGISTRO_FISICA:V4` | CRITERIO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | la deriva della proposta al confine (d → LAM) / → 0, mentre quella di oggi → a/2 |
-| `REGISTRO_FISICA:V5` | CRITERIO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | la deriva della proposta lontano / decade come 1/d in assoluto, 1/d² in relativo |
+| `REGISTRO_FISICA:U2a` | CRITERIO | FISICA | 1 | ### **SOSPESA** |  | la LUNGHEZZA FABBRICATA da nasce, sum(LAM - v) sugli archi troncati, SEPARATA pe |
+| `REGISTRO_FISICA:U2b` | CRITERIO | FISICA | 1 | ### **SOSPESA** |  | quanti archi sono stati troncati, e su quanti visti — stessa separazione / idem |
+| `REGISTRO_FISICA:U2c` | CRITERIO | FISICA | 1 | ### **SOSPESA** |  | frazione di archi sotto 2 LAM / ai passi 0 e 120 |
+| `REGISTRO_FISICA:V1` | CRITERIO | FISICA | 1 | ### **SOSPESA** |  | quanto vale a, il passo tipico di rumore, misurato / è il numero che decide la c |
+| `REGISTRO_FISICA:V2` | CRITERIO | FISICA | 1 | ### **SOSPESA** |  | la deriva di oggi sotto rumore simmetrico / deve riprodurre Z113: ≈ +1.582e-03 c |
+| `REGISTRO_FISICA:V3` | CRITERIO | FISICA | 1 | ### **SOSPESA** |  | la deriva della proposta, stessa a, stessi d / deve essere del secondo ordine: r |
+| `REGISTRO_FISICA:V4` | CRITERIO | FISICA | 1 | ### **SOSPESA** |  | la deriva della proposta al confine (d → LAM) / → 0, mentre quella di oggi → a/2 |
+| `REGISTRO_FISICA:V5` | CRITERIO | FISICA | 1 | ### **SOSPESA** |  | la deriva della proposta lontano / decade come 1/d in assoluto, 1/d² in relativo |
 | `REGISTRO_FISICA:V6` | CRITERIO | FISICA | 1 | ### **SOSPESA** |  | il caso che DEVE fallire: la forma exp(dx/u) / deve esplodere vicino al confine, |
-| `REGISTRO_FISICA:V7` | CRITERIO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | mai sotto LAM: una discesa enorme, dx = −100·d / oggi attraversa; la proposta no |
-| `REGISTRO_FISICA:V8` | CRITERIO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | la DISTRIBUZIONE di \/dx\//d, non solo il suo tipico / è il numero che decide fr |
-| `REGISTRO_FISICA:V9` | CRITERIO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | quante scritture hanno \/dx\//d 1, e quante 2 / 1: Itô comprime; 2: Itô inverte  |
+| `REGISTRO_FISICA:V7` | CRITERIO | FISICA | 1 | ### **SOSPESA** |  | mai sotto LAM: una discesa enorme, dx = −100·d / oggi attraversa; la proposta no |
+| `REGISTRO_FISICA:V8` | CRITERIO | FISICA | 1 | ### **SOSPESA** |  | la DISTRIBUZIONE di \/dx\//d, non solo il suo tipico / è il numero che decide fr |
+| `REGISTRO_FISICA:V9` | CRITERIO | FISICA | 1 | ### **SOSPESA** |  | quante scritture hanno \/dx\//d 1, e quante 2 / 1: Itô comprime; 2: Itô inverte  |
 | `RELAZIONE-BINARIA` | DIFETTO | INFRASTRUTTURA | ENTRAMBE | ### **APERTA** |  | un NUL letterale rende RELAZIONE_PER_CLAUDE.md binaria per git, e i suoi diff il |
 | `REPERTI-IMMUTABILI` | DIFETTO | METODO | ENTRAMBE | ### **APERTA** |  | APERTA il 2026-09-26 (proposta di Luca), famiglia G / UN COMMIT PUO' TOCCARE UN  |
 | `REVERSIBILITA-LOCALE` | FRONTE | FISICA | 2 | ### **AGENDA** |  | reversibilita' LOCALE, irreversibilita' GLOBALE: la sola freccia e' la crescita  |
@@ -579,33 +582,33 @@
 | `RI-MISURA` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 3 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
 | `RI-VERIFICATI` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 2 volte, MAI definito in un registro; citato solo in... [RI-VERIFICATI] |
 | `RIDUZIONE-AL-LIMITE` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 2 volte, MAI definito in un registro; citato solo in... [RIDUZIONE-AL-LI |
-| `RINCULO-RIPETUTI` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | il rinculo dei genitori applica UNA spinta sola a un nodo genitore due volte nel |
+| `RINCULO-RIPETUTI` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | il rinculo dei genitori applica UNA spinta sola a un nodo genitore due volte nel |
 | `RIORDINO-NOMI-H` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **CHIUSA** |  | il prefisso `H-` e' sui NOMI VECCHI (H-P3) e non sui nomi semantici (H-CLI) che  |
 | `RIORDINO-POSTO2` | FRONTE | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **CHIUSA** |  | IL POSTO 2 HA 11 REGOLE E IL TETTO E' 10: quale si fonde |
 | `RIPIEGHI-ZERO` | CURA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **CHIUSA** |  | ZERO ripieghi che cambiano la fisica in silenzio: tutti e 100 i confronti `len(x |
 | `RIPIEGO-1` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **CHIUSA** |  | APERTA E CHIUSA il 2026-09-25 (difetto mio, rilevato da LUCA) / UN RIPIEGO GLOBA |
 | `RIPRESA-ARGV` | DIFETTO | INFRASTRUTTURA | ENTRAMBE | ### **APERTA** |  | APERTA il 2026-09-26 (limite di un meccanismo che ho costruito io) / LA RIPRESA  |
 | `RISCRITTURA-GO` | DIFETTO | FISICA | 2 | ### **AGENDA** |  | riscrivere il simulatore in Go: valutato, NON deciso |
-| `RITMO-AVVIO-FREDDO` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | ritmo() cade nel ramo di sicurezza al PASSO 1 di ogni run: orologio uniforme |
-| `RITMO-FLAG-SENZA-OGGETTO` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | due flag e due sigilli perdono il loro OGGETTO con la cura (2) di Z43 |
-| `RITMO-PAVIMENTO` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | IL PAVIMENTO DEL RITMO MORDE: min(r) = 1.414212e-06 e' ESATTAMENTE il pavimento, |
+| `RITMO-AVVIO-FREDDO` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | ritmo() cade nel ramo di sicurezza al PASSO 1 di ogni run: orologio uniforme |
+| `RITMO-FLAG-SENZA-OGGETTO` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | due flag e due sigilli perdono il loro OGGETTO con la cura (2) di Z43 |
+| `RITMO-PAVIMENTO` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | IL PAVIMENTO DEL RITMO MORDE: min(r) = 1.414212e-06 e' ESATTAMENTE il pavimento, |
 | `ROBUSTEZZA-FISICA` | STANDARD | METODO | ENTRAMBE | ### **APERTA** |  | i TRE GRADINI che una conclusione di fisica deve salire: rumore numerico, legge  |
 | `ROMPI-ANELLO` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 8 volte, MAI definito in un registro) [ROMPI-ANELLO] |
 | `S0` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 6 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
-| `S01` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | Chi fa crescere d0: in G3 gli scrittori sommano -1.6e+03 e med d0 RADDOPPIA lo s |
-| `S02` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | Il freno di SCALAMIN e' il motore di d0 / DECISO da Z108: bilancio che CHIUDE a  |
-| `S03` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | La memoria del moto fa scappare d0 / DECISO da Z109: spegnendola d0 cresce ancor |
-| `S04` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | La crescita e' NUCLEAZIONE, non stiramento / CADE con Z108: nascite meno morti v |
-| `S05` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | La compressione d/d0 < 1 e' un difetto e non una fase / G3 dice che peggiora sen |
-| `S06` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | Il «muro dell'1 %» dell'antifase e' causato da D35: l'antifase «non annichila» p |
-| `S07` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | dphiarc = angle(exp(1j·Δφ)) (:5894) COLLASSA a 2π una differenza che vive su 4π  |
-| `S08` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | Se φ non e' l'azimut del Bloch, CHE COS'E'? / Z121 ha refutato la frase del docs |
-| `S09` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | IL TETTO DI r E' RAGGIUNTO PER UNA VIA CHE NON CONOSCIAMO — lettura di Luca, 202 |
-| `S09-MEDIANA` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | la spinta S09 scala con `median(d0)` GLOBALE: lo stesso A2 gia' curato in S05 il |
+| `S01` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | Chi fa crescere d0: in G3 gli scrittori sommano -1.6e+03 e med d0 RADDOPPIA lo s |
+| `S02` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | Il freno di SCALAMIN e' il motore di d0 / DECISO da Z108: bilancio che CHIUDE a  |
+| `S03` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | La memoria del moto fa scappare d0 / DECISO da Z109: spegnendola d0 cresce ancor |
+| `S04` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | La crescita e' NUCLEAZIONE, non stiramento / CADE con Z108: nascite meno morti v |
+| `S05` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | La compressione d/d0 < 1 e' un difetto e non una fase / G3 dice che peggiora sen |
+| `S06` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | Il «muro dell'1 %» dell'antifase e' causato da D35: l'antifase «non annichila» p |
+| `S07` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | dphiarc = angle(exp(1j·Δφ)) (:5894) COLLASSA a 2π una differenza che vive su 4π  |
+| `S08` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | Se φ non e' l'azimut del Bloch, CHE COS'E'? / Z121 ha refutato la frase del docs |
+| `S09` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | IL TETTO DI r E' RAGGIUNTO PER UNA VIA CHE NON CONOSCIAMO — lettura di Luca, 202 |
+| `S09-MEDIANA` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | la spinta S09 scala con `median(d0)` GLOBALE: lo stesso A2 gia' curato in S05 il |
 | `S10` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **CHIUSA** |  | S10 RITIRATA il 2026-09-24 / Il tetto 1.414213 di r viene da un ramo di ritmo()  |
-| `S11` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | r E' SATURO AL SUO TETTO PER UN TERZO DEI NODI, e la quota CRESCE: 0.76 % - 29.5 |
-| `S12` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | S12 APPROVATO DA LUCA il 2026-09-24 / IL RILASSAMENTO DI rep DENTRO mitosi() (:5 |
-| `S13` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | IL TEMPO D'ARCO DOVREBBE ESSERE min(ri, rj) INVECE DELLA MEDIA ARITMETICA? — pro |
+| `S11` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | r E' SATURO AL SUO TETTO PER UN TERZO DEI NODI, e la quota CRESCE: 0.76 % - 29.5 |
+| `S12` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | S12 APPROVATO DA LUCA il 2026-09-24 / IL RILASSAMENTO DI rep DENTRO mitosi() (:5 |
+| `S13` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | IL TEMPO D'ARCO DOVREBBE ESSERE min(ri, rj) INVECE DELLA MEDIA ARITMETICA? — pro |
 | `S1a` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 15 volte, MAI definito in un registro) [S1a] |
 | `S1b` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 19 volte, MAI definito in un registro) [S1b] |
 | `S1c` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 2 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
@@ -630,7 +633,7 @@
 | `SCHED-T1` | CURA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **CHIUSA** |  | T1 dello schedulatore: la composizione e' una LISTA e c'e' UN SOLO esecutore, es |
 | `SCHED-T2-TIPI` | CURA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **CHIUSA** |  | T2 (i tipi): gli 8 tipi del registro del passo, e dopo L_CONSERVA sono coerenti  |
 | `SCHED-T2-VALIDA` | CURA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **CHIUSA** |  | T2: esegui_passo VALIDA la composizione -- apri primo, coda fissa, registro, nes |
-| `SCHED-T3-REGOLE` | MISURA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | le regole di composizione: 94 scritture, 80 nelle cinque forme, 6 eccezioni in t |
+| `SCHED-T3-REGOLE` | MISURA | DOCUMENTAZIONE | ENTRAMBE | ### **APERTA** |  | le regole di composizione: 94 scritture, 80 nelle cinque forme, 6 eccezioni in t |
 | `SCHERMATURA-LEGGE-REVISIONE` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | lambda_nodi: una rho_c GLOBALE, un commento che descrive un altra legge, un nume |
 | `SCHW-CORTI` | MISURA | FISICA | 1 | ### **SOSPESA** |  | il 39 % delle coppie Schwinger ACCORCIA il grafo: 2*dd < d, misurato |
 | `SCHW-SOTTO-LAM` | DIFETTO | FISICA | 2 | ### **AGENDA** |  | lo Schwinger fa nascere archi SOTTO LAM che _nasce alza: A13 alla nascita NON ap |
@@ -643,7 +646,7 @@
 | `SIGILLO-SENZA-CONFIGURAZIONE` | FRONTE | INFRASTRUTTURA | ENTRAMBE | ### **APERTA** |  | il sigillo prende la configurazione dal CLI del driver ma NON la timbra nel suo  |
 | `SIM-PRIMA-STANTIO` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **CHIUSA** |  | il _sim_prima_controllo.py committato NON era il codice di prima: conteneva la c |
 | `SMP-APRI-COMMENTO` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | il docstring di _smp_apri dice che la chiamano cinque leggi: oggi la chiama solo |
-| `SOGLIA-MITOSI-3PI` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | la soglia di mitosi e 2pi + pi col pi di dipolo MASSIMO, e in questa scena il di |
+| `SOGLIA-MITOSI-3PI` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | la soglia di mitosi e 2pi + pi col pi di dipolo MASSIMO, e in questa scena il di |
 | `SOGLIA-NON-MODULATA` | MISURA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **CHIUSA** |  | la modulazione 0.3 della soglia non agisce: il gradiente di tempo proprio e' zer |
 | `SOTTO-PASSO` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 4 volte, MAI definito in un registro) [SOTTO-PASSO] |
 | `SOVRA-CORREGGE` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 2 volte, MAI definito in un registro; citato solo in... [SOVRA-CORREGGE] |
@@ -674,9 +677,9 @@
 | `TERMOSTATO-E-FRENO` | MISURA | FISICA | 1 | ### **SOSPESA** |  | il termostato frena piu' di quanto rifornisca: togliergli il freno, non la sorge |
 | `TERRA-BUCONERO` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 3 volte, MAI definito in un registro) [TERRA-BUCONERO] |
 | `TETTO-CAUSALE-TEMPO-COORDINATO` | DIFETTO | FISICA | 2 | ### **AGENDA** | SI | il tetto causale usa c_s LOCALE ma DT COORDINATO: dove r e piccolo permette moti |
-| `TORS-SPINTA` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | la spinta repulsiva di torsione: legge DINAMICA dentro mitosi(), con tre numeri  |
-| `TORS-W8-AVVOLGIMENTO` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | _w8 ha periodo 8pi ma l avvolgimento di dph e di 4pi: il ramo TORS_4PI inietta - |
-| `TRATTI-INTERNI` | MISURA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | a 80 passi il calo di A(t) sta negli INTERNI, non nel varco: le regioni si contr |
+| `TORS-SPINTA` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | la spinta repulsiva di torsione: legge DINAMICA dentro mitosi(), con tre numeri  |
+| `TORS-W8-AVVOLGIMENTO` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | _w8 ha periodo 8pi ma l avvolgimento di dph e di 4pi: il ramo TORS_4PI inietta - |
+| `TRATTI-INTERNI` | MISURA | METODO | ENTRAMBE | ### **APERTA** |  | a 80 passi il calo di A(t) sta negli INTERNI, non nel varco: le regioni si contr |
 | `TS-1` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 5 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
 | `TS-2` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 2 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
 | `TS-3` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 2 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
@@ -702,14 +705,14 @@
 | `V0` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 7 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
 | `V10` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 5 volte, MAI definito in un registro) [V10] |
 | `V1b` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 3 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
-| `V5-SOGLIA` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | il criterio V5 confonde SCIOGLIERSI con MIGRARE, e misura lo spostamento con LAM |
+| `V5-SOGLIA` | DIFETTO | METODO | ENTRAMBE | ### **APERTA** |  | il criterio V5 confonde SCIOGLIERSI con MIGRARE, e misura lo spostamento con LAM |
 | `V5b` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 3 volte, MAI definito in un registro) [V5b] |
 | `V6b` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 6 volte, MAI definito in un registro) [V6b] |
 | `VALORE-NULL` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 2 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
 | `VELENO-ARCHI-KEEP` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **CHIUSA** |  | il veleno allunga in coda le derivate d arco e NON applica keep: ogni arco legge |
 | `VELENO-AUTORINFRESCO` | FRONTE | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **CHIUSA** |  | il veleno NaN romperebbe i due siti AUTO-RINFRESCO: il disallineamento E il loro |
 | `VELENO-DOMINI` | DIFETTO | METODO | ENTRAMBE | ### **APERTA** |  | DOMINI include 9 delle 10 derivate: una derivata avvelenata VIOLA il dominio per |
-| `VELENO-ORIENTATO` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | il VELENO del commit 4 cade su UNO dei due archi figli, e QUALE dipende dall ori |
+| `VELENO-ORIENTATO` | DIFETTO | METODO | ENTRAMBE | ### **APERTA** |  | il VELENO del commit 4 cade su UNO dei due archi figli, e QUALE dipende dall ori |
 | `VIDEO-SCENA` | DIFETTO | INFRASTRUTTURA | ENTRAMBE | ### **APERTA** |  | il video della scena del pilota: diagnostico, mostra `pos` che NON e' la distanz |
 | `VUOTO-LOCALE-DETERMINISTICO` | FRONTE | FISICA | 2 | ### **AGENDA** |  | termostato locale + scuotimento DETERMINISTICO: UNA legge per nodo, fase <-> vuo |
 | `VUOTO-MASSA` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 2 volte, MAI definito in un registro) [VUOTO-MASSA] |
@@ -721,7 +724,7 @@
 | `X1` | FRONTE | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **CHIUSA** |  | X1 VALE SEMPRE ⏳[EPOCA 1 · MISURA] / TEMPOPROPRIOORIENTATO: il principio e' gius |
 | `X2` | FRONTE | FISICA | 1 | ### **SOSPESA** |  | X2 🟨VALE PER QUELLA SCENA ⏳[EPOCA 1 · MISURA] / ZETALOC: «smorzamento locale» ch |
 | `X3` | FRONTE | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **CHIUSA** |  | X3 VALE SEMPRE ⏳[EPOCA 1 · CODICE] / AUDIT DI LETTURA DELLE LEGGI — registrato ( |
-| `XI-RUMORE-E-STATO` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | _xi_rumore sta in REGISTRO_DERIVATE ma ha MEMORIA: un grado di liberta classific |
+| `XI-RUMORE-E-STATO` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | _xi_rumore sta in REGISTRO_DERIVATE ma ha MEMORIA: un grado di liberta classific |
 | `Y0` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 4 volte, MAI definito in un registro) [Y0] |
 | `Y1` | FRONTE | FISICA | 2 | ### **AGENDA** |  | Y1 DA RIVERIFICARE ⏳[EPOCA 1 · MISURA] / Il settore U(1) non ha un'osservabile d |
 | `Y10` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 4 volte, MAI definito in un registro) [Y10] |

@@ -72,19 +72,19 @@ python csv/indice.py aggiorna-lotto doc/indice/_lotti/<nome>.jsonl
 | | |
 |---|--:|
 | voci | `867` |
-| ### **`DA_CLASSIFICARE` vere** *(non segnaposto)* | ### **`112`** |
+| ### **`DA_CLASSIFICARE` vere** *(non segnaposto)* | ### **`2`** |
 | ### **segnaposto `NON_DEFINITA`** | ### **`233`** |
 | ### **`CHIUSE` senza dominio** | ### **`184`** |
 
 ```
 classe    NON_DEFINITA=233  DIFETTO=209  FRONTE=168  CRITERIO=95  MISURA=54  CURA=46  PRESIDIO=34  STANDARD=28
-dominio   DA_CLASSIFICARE=529  FISICA=226  METODO=76  INFRASTRUTTURA=22  DOCUMENTAZIONE=14
-era       DA_CLASSIFICARE=529  1=177  ENTRAMBE=114  2=47
-stato     DA_CLASSIFICARE=345  CHIUSA=187  SOSPESA=163  APERTA=125  AGENDA=47
+dominio   DA_CLASSIFICARE=417  FISICA=307  METODO=100  INFRASTRUTTURA=26  DOCUMENTAZIONE=17
+era       DA_CLASSIFICARE=419  1=258  ENTRAMBE=143  2=47
+stato     SOSPESA=242  DA_CLASSIFICARE=235  CHIUSA=187  APERTA=156  AGENDA=47
 ```
 
-### ✔ **FATTO IN QUESTO GIRO:** il punto 1 (le correzioni) e le QUATTRO REGOLE della classificazione per contenuto: 135 voci su 247
+### ✔ **FATTO IN QUESTO GIRO:** le 247 voci vere: 245 classificate, 2 in dubbio DICHIARATO
 
-### ⛔ **RESTA:** le 112 voci da LEGGERE, i 233 segnaposto e le 184 CHIUSE senza dominio
+### ⛔ **RESTA:** i 233 segnaposto NON_DEFINITA e le 184 CHIUSE senza dominio
 
-**Ultimo lotto applicato:** `doc/indice/_lotti/contenuto_03.jsonl`
+**Ultimo lotto applicato:** `doc/indice/_lotti/lettura_03.jsonl`
