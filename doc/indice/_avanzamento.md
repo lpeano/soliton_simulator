@@ -83,8 +83,8 @@ era       1=538  DA_CLASSIFICARE=188  ENTRAMBE=96  2=24
 stato     SOSPESA=369  DA_CLASSIFICARE=188  CHIUSA=182  APERTA=82  AGENDA=24  SUPERATA=1
 ```
 
-### ✔ **FATTO IN QUESTO GIRO:** i punti `3`, `4` e `5`, e ### **`F9` e `F10` ACCESI nello stesso commit che li rende veri.** Delle `165` righe: ### **`79` applicate**, `23` applicate in parte, `44` lasciate, `19` non applicate — ### **e i conti tornano a `165`, con un `assert`.**
+### ✔ **FATTO IN QUESTO GIRO:** il referto ### **`doc/REFERTO_indice_v3_verifica_completa.md`** *(`438` righe, riga per riga tutte e `165`)*. ### **Il mandato «correzioni della verifica completa» e' CHIUSO**, con l'ordine del punto `1` corretto da Luca.
 
-### ⛔ **RESTA:** il referto ### **`doc/REFERTO_indice_v3_verifica_completa.md`**, voce per voce. ### **E in CODA** *(`doc/CODA_2026-10-09.md`)*: l'integrazione al mandato «gli strumenti diventano obbligatori anche per l'era `2`», ### **il cui testo base non e' arrivato.**
+### ⛔ **RESTA, E NON E- LAVORO MIO FINCHE- NON ARRIVA:** il mandato *«gli strumenti diventano obbligatori anche per l'era `2`»* — ### **l'integrazione c'e'** *(`doc/CODA_2026-10-09.md`)*, ### **il testo base NO.**
 
-**Ultimi lotti applicati:** `doc/indice/_lotti/v3_guardiano.jsonl` *(`115` righe)* e `doc/indice/_lotti/v3_convenzioni.jsonl` *(`11`)*
+**Ultimi lotti applicati:** `doc/indice/_lotti/v3_guardiano.jsonl` e `doc/indice/_lotti/v3_convenzioni.jsonl` — ### **il referto NON scrive sull'indice**: legge, conta e scrive un documento.

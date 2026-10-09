@@ -10743,3 +10743,13 @@ Il difetto toccava `8` voci; questo commit ne cura `5` *(quelle che il file del 
 ### ⛔ **E DUE RIFIUTI DELLO SCHEMA, VERI:** `S02` chiedeva `superata_da=D31` e ### **`D31` non e' una DECISIONE ne' un ASSIOMA**; `Z21` chiedeva `SUPERATA` ### **senza dire da che cosa.** Il lotto e' stato ### **rifiutato senza scrivere niente** — la cura dell'atomicita' del giro scorso ### **ha funzionato su un caso vero.** ### ⭐ **Una voce superata deve dire DA CHE COSA, e deve essere una DECISIONE: un difetto non decide niente.**
 
 ### ✔ **E `41` chiusure non si fanno perche' la riga NON PORTA IL COMMIT.** E' la stessa regola del punto `1` del giro scorso: ### **un commit non si inventa.**
+
+---
+
+## IL REFERTO DELLA VERIFICA COMPLETA: **`165` righe, una per una** (2026-10-09)
+
+`doc/REFERTO_indice_v3_verifica_completa.md`, `438` righe. ### **`79` applicate, `23` in parte, `44` lasciate, `19` non applicate**, e il generatore ### **asserisce che la somma faccia `165`.** Nessuna corsa; il simulatore resta `b8c21049`.
+
+### ⭐ **PERCHE- IL VERDETTO E- PER RIGA E NON PER CAMPO:** il mandato chiede *«quante righe applicate, quante non applicate, quante lasciate»*, e ### **`23` righe hanno un campo applicato E un campo lasciato.** Un conteggio per campo ### **le metterebbe due volte** e non risponderebbe alla domanda.
+
+### 📌 **E IL REFERTO PORTA SETTE COSE A LUCA**, ognuna con i numeri: i ### **due livelli `T0` e `T4` che aggiungo io** *(`49` + `33` righe)*, le ### **`19` non applicate**, le chiusure ### **senza commit**, le ### **contraddizioni della riga**, ### **`CLI-1`/`POTATURA-GUARDIE`** *(il guardiano contro se stesso)*, ### **`S02`/`Z21`** *(rifiutate dallo schema)*, e ### **la nota di `G1`: riscriverla o toglierla?**

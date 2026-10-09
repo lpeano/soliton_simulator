@@ -2491,3 +2491,17 @@ etichette rimosse, con ### **`0` persi, `0` doppi, `0` conflitti**.
 | ### ⚠ **i cinque livelli, e DUE li aggiungo io** | `T1` la riga, `T2` il blocco, `T3` la sezione **sono del mandato**; `T0` *(il testo della voce)* e `T4` *(altrove nel file, e **SOLO se la riga non si ritrova**)* **sono miei, e la docstring li dichiara** |
 | **le due convenzioni** | gli ID **si leggono da `CLAUDE.md`**: la tabella del §`11` → `STANDARD`, quella del §`12` → `PRESIDIO`. **«In vigore» = «citato in `CLAUDE.md` oggi»** |
 | **l'uscita** | `doc/indice/_p3_guardiano.json` · `doc/indice/_p4_convenzioni.json` · i due lotti |
+
+---
+
+### `csv/_doc_referto_verifica_completa.py` — **IL REFERTO, RIGA PER RIGA** *(2026-10-09)*
+
+| | |
+|---|---|
+| **file** | `csv/_doc_referto_verifica_completa.py` |
+| **BLOB** *(sha1 dei byte grezzi)* | `0a78be91` |
+| **COMANDO** | `python csv/_doc_referto_verifica_completa.py` |
+| **cosa misura** | tutte e **`165` le righe del file del guardiano**, ognuna col suo **verdetto**, il **livello** in cui la citazione si è trovata, il **prima → dopo** dei quattro campi e **il motivo** dove non si applica |
+| **l'uscita** | `doc/REFERTO_indice_v3_verifica_completa.md` *(`438` righe)* |
+| ### ⛔ **il PRIMA viene da `git show`** | `git show bfb1596:doc/indice/voci.jsonl`, il task history, cioè **prima di ogni scrittura del giro** |
+| ### ⚠ **gira i quattro collaudi DA SÉ** | i controlli, il collaudo dei presidi, quello dell'indice e **le sei attese del difetto «IL FATTO»**: nessun numero ricopiato dal terminale |
