@@ -171,13 +171,13 @@ altre voci** *(un **collegamento**, non un alias)* e `6` erano **condivisi fra d
 
 | id | che cosa segnala |
 |---|---|
-| **`F1`** | **GEMELLE:** il **titolo** di una voce cita l'**ID di un'altra**, e **dominio o era differiscono** |
-| **`F2`** | **ERA `2` PULITA:** una voce dell'era `2` che nomina **simboli dell'era `1`** *(`phivel`, `M_PH`, `mem_mot`, `Nose-Hoover`, `sync`…)*, **un numero di riga `:NNNN`**, o **un flag `--…`** |
-| **`F3`** | **`FISICA` CHE PARLA DI STRUMENTI:** il **titolo** di una voce `FISICA` dice *sigillo, criterio, controllo positivo, caso che deve fallire, commento, docstring, README, hook, presidio, CRLF* |
-| **`F4`** | **ETICHETTA CON DEFINIZIONE:** un'etichetta rimossa che un documento **DEFINISCE** *(riga di tabella o intestazione)*. ### ⚠ **Le VISTE GENERATE sono escluse**, perché una riga in `doc/LISTA_CHIUSA.md` **elenca** un ID, non lo definisce |
-| ### ⛔ **`F5`** | **STORICO SENZA COMMIT: È UN ERRORE**, non un segnale, e sta in `valida`. ### ⚠ **Solo per le righe GIÀ COMMITTATE** *(quelle in `HEAD`)*: le altre sono **il ritardo** — nella forma letterale **bloccherebbe ogni commit di un lotto** |
-| ⛔ **`F7`** | **LO STATO DI UNA VOCE DELL'ERA `1`: È UN ERRORE**, non un segnale, e sta in `valida`. `FISICA` + era `1` + stato diverso da `SOSPESA`/`CHIUSA`/**`SUPERATA`** *(### **`SUPERATA` sta con `CHIUSA`:** una voce superata da una decisione **non è aperta**, è risolta **da fuori**)* ⇒ **la validazione fallisce**. ### ⚠ **Nasce da un errore mio**, e il perché sta nel suo sorgente |
-| **`F6`** | **NOTE COERENTI:** una `nota_guardiano` che **nomina una lista del guardiano** e la voce **non è più ciò che quella lista diceva**. ### ⚠ **Non legge la prosa**, e una nota che si dichiara *«correzione»* **non si guarda** |
+| **`PI-GEMELLE`** | **GEMELLE:** il **titolo** di una voce cita l'**ID di un'altra**, e **dominio o era differiscono** |
+| **`PI-SIMBOLI-ERA1`** | **ERA `2` PULITA:** una voce dell'era `2` che nomina **simboli dell'era `1`** *(`phivel`, `M_PH`, `mem_mot`, `Nose-Hoover`, `sync`…)*, **un numero di riga `:NNNN`**, o **un flag `--…`** |
+| **`PI-PAROLE-STRUMENTO`** | **`FISICA` CHE PARLA DI STRUMENTI:** il **titolo** di una voce `FISICA` dice *sigillo, criterio, controllo positivo, caso che deve fallire, commento, docstring, README, hook, presidio, CRLF* |
+| **`PI-ETICHETTA-DEFINITA`** | **ETICHETTA CON DEFINIZIONE:** un'etichetta rimossa che un documento **DEFINISCE** *(riga di tabella o intestazione)*. ### ⚠ **Le VISTE GENERATE sono escluse**, perché una riga in `doc/LISTA_CHIUSA.md` **elenca** un ID, non lo definisce |
+| ### ⛔ **`PI-STORICO-SENZA-COMMIT`** | **STORICO SENZA COMMIT: È UN ERRORE**, non un segnale, e sta in `valida`. ### ⚠ **Solo per le righe GIÀ COMMITTATE** *(quelle in `HEAD`)*: le altre sono **il ritardo** — nella forma letterale **bloccherebbe ogni commit di un lotto** |
+| ⛔ **`PI-FISICA-ERA1-NON-SOSPESA`** | **LO STATO DI UNA VOCE DELL'ERA `1`: È UN ERRORE**, non un segnale, e sta in `valida`. `FISICA` + era `1` + stato diverso da `SOSPESA`/`CHIUSA`/**`SUPERATA`** *(### **`SUPERATA` sta con `CHIUSA`:** una voce superata da una decisione **non è aperta**, è risolta **da fuori**)* ⇒ **la validazione fallisce**. ### ⚠ **Nasce da un errore mio**, e il perché sta nel suo sorgente |
+| **`PI-NOTA-CONTRADDICE-LISTA`** | **NOTE COERENTI:** una `nota_guardiano` che **nomina una lista del guardiano** e la voce **non è più ciò che quella lista diceva**. ### ⚠ **Non legge la prosa**, e una nota che si dichiara *«correzione»* **non si guarda** |
 
 ### **UN SEGNALE SI CHIUDE IN DUE MODI SOLI:** **correggendo la voce**, oppure con ### **`meta.eccezione_presidio`** — forma obbligata **`F<n>: <motivo>`**, e il motivo deve contenere **un pezzo LETTERALE di almeno `20` caratteri** del testo della voce. ### ⛔ **La forma la impone `valida`:** senza quel controllo l'eccezione sarebbe **una via di fuga a costo zero.**
 
@@ -204,7 +204,7 @@ Era **spaccata in due**: `71` voci `CRITERIO` in `FISICA` e `35` in `METODO`, e 
 
 ---
 
-## QUANDO UN'INTESTAZIONE **DEFINISCE** UN ID *(regola di `F4`, 2026-10-09)*
+## QUANDO UN'INTESTAZIONE **DEFINISCE** UN ID *(regola di `PI-ETICHETTA-DEFINITA`, 2026-10-09)*
 
 > ### ⭐ **L'ID deve essere il SOGGETTO, e ci deve essere CONTENUTO.**
 
@@ -219,7 +219,7 @@ Si toglie dall'inizio della riga, **ripetutamente**: i `#`, gli spazi, i **simbo
 
 ### **Il collaudo ha i due casi che il mandato fissa** — `POST-HOC` **non deve** scattare, `TW-1` a `6e5e75b` **deve** — piu' **il braccio che prova che è LA REGOLA a zittirlo**: con la regola spenta, `POST-HOC` torna a segnalare.
 
-### ⛔ **E `F4` SI FERMA AL PRIMO FILE**, quindi **non può dire se un ID è un OMONIMO.** Per quello c'è **`python csv/_cerca_definizioni.py`**, che cerca **TUTTE** le definizioni in **tutto il repo** — e che esclude i file che **parlano dell'indice** *(referti, task history, attrezzi, `par9.md`)*: ### ⭐ **un file che parla dell'indice ELENCA gli ID, non li DEFINISCE**, ed è **la terza volta** che questo falso-uno si presenta — dopo `doc/INDICE.md` *(il controllo `C4`)* e `doc/LISTA_CHIUSA.md` *(il ripasso del blocco `C`)*.
+### ⛔ **E `PI-ETICHETTA-DEFINITA` SI FERMA AL PRIMO FILE**, quindi **non può dire se un ID è un OMONIMO.** Per quello c'è **`python csv/_cerca_definizioni.py`**, che cerca **TUTTE** le definizioni in **tutto il repo** — e che esclude i file che **parlano dell'indice** *(referti, task history, attrezzi, `par9.md`)*: ### ⭐ **un file che parla dell'indice ELENCA gli ID, non li DEFINISCE**, ed è **la terza volta** che questo falso-uno si presenta — dopo `doc/INDICE.md` *(il controllo `C4`)* e `doc/LISTA_CHIUSA.md` *(il ripasso del blocco `C`)*.
 
 ### **Un'etichetta NON ha un `meta`**, perché non è una voce: la sua eccezione e la sua nota stanno in **campi suoi**, scritti con **`etichette-lotto`** — la stessa via, con la sua riga di storico.
 
@@ -233,7 +233,7 @@ Si toglie dall'inizio della riga, **ripetutamente**: i `#`, gli spazi, i **simbo
 |---|---|
 | ### **`stato`** | lo stato **DI OGGI**: per una voce `FISICA`/era `1` può essere solo **`SOSPESA`**, **`CHIUSA`** o **`SUPERATA`** |
 | ### **`stato_era_1`** | lo stato **che la voce aveva nell'era `1`**: è lì che va l'*«APERTO»* di un'intestazione come `## APERTO CURA1-CORTO` |
-| ### ⛔ **il presidio** | **`F7`**, e **è un ERRORE, non un segnale**: `FISICA` + era `1` + stato diverso da `SOSPESA`/`CHIUSA`/**`SUPERATA`** *(### **`SUPERATA` sta con `CHIUSA`:** una voce superata da una decisione **non è aperta**, è risolta **da fuori**)* ⇒ **la validazione fallisce** |
+| ### ⛔ **il presidio** | **`PI-FISICA-ERA1-NON-SOSPESA`**, e **è un ERRORE, non un segnale**: `FISICA` + era `1` + stato diverso da `SOSPESA`/`CHIUSA`/**`SUPERATA`** *(### **`SUPERATA` sta con `CHIUSA`:** una voce superata da una decisione **non è aperta**, è risolta **da fuori**)* ⇒ **la validazione fallisce** |
 
 ### ⚠ **Da dove viene la regola:** nel giro del punto `5` avevo ripristinato `4` voci leggendo lo stato da `## APERTO <ID>`, e avevo **dichiarato la provenienza del dato** — ma l'avevo messo nel campo **sbagliato**. ### **Dichiarare da dove viene un dato non basta se lo si mette nel campo sbagliato**, e per questo la regola ha un presidio e non solo una riga.
 
@@ -255,7 +255,7 @@ Si toglie dall'inizio della riga, **ripetutamente**: i `#`, gli spazi, i **simbo
 
 ---
 
-## `F7` VALE PER **QUALSIASI DOMINIO** *(2026-10-09)*
+## `PI-FISICA-ERA1-NON-SOSPESA` VALE PER **QUALSIASI DOMINIO** *(2026-10-09)*
 
 > ### ⭐ **La regola non parlava di fisica: una voce dell'era `1` NON CHIUSA è `SOSPESA`**, e vale per `METODO`, `INFRASTRUTTURA` e `DOCUMENTAZIONE` come per `FISICA`.
 
@@ -274,11 +274,11 @@ Si toglie dall'inizio della riga, **ripetutamente**: i `#`, gli spazi, i **simbo
 
 ### ⚠ **`35` voci erano `ENTRAMBE` per INERZIA**, non per lettura: `era ENTRAMBE` passa da `173` a **`138`**. ### **Non è una decisione di fisica**, e tutte restano `SOSPESE`: **non cambia nulla per l'era `2`, solo l'ordine.**
 
-### **Il presidio che lo guarda è `F8`, e SEGNALA**: una voce `ENTRAMBE` non `CHIUSA` che **nomina un oggetto concreto dell'era `1`**.
+### **Il presidio che lo guarda è `PI-OGGETTI-ERA1`, e SEGNALA**: una voce `ENTRAMBE` non `CHIUSA` che **nomina un oggetto concreto dell'era `1`**.
 
 ---
 
-## IL PRESIDIO `F8` — **una voce `ENTRAMBE` che nomina un oggetto dell'era `1`** *(2026-10-09)*
+## IL PRESIDIO `PI-OGGETTI-ERA1` — **una voce `ENTRAMBE` che nomina un oggetto dell'era `1`** *(2026-10-09)*
 
 > ### ⛔ **SEGNALA, non decide.** Una voce `era ENTRAMBE` **non `CHIUSA`** il cui **titolo o descrizione** nomina un **oggetto concreto dell'era `1`**.
 
@@ -333,7 +333,7 @@ Si toglie dall'inizio della riga, **ripetutamente**: i `#`, gli spazi, i **simbo
 | | |
 |---|---|
 | ### ~~**lo schema `D`/`Z` è LO STESSO FATTO**~~ | ### ⛔ **ERRORE, corretto il 2026-10-09:** la voce `D` è ### **il DIFETTO**, la `Z` è ### **il REPERTO che lo ha trovato.** Io le leggevo come *«la stessa cosa scritta due volte»* |
-| ### ✔ **`F1` confronta `dominio` ed `era`, MAI lo stato** | il difetto e il suo reperto parlano ### **della stessa cosa, nella stessa era** — ma ### **una misura resta un'AVVERTENZA anche dopo che il difetto è curato** *(`D19` CURATO, `Z88` aperta come avvertenza)*. ### ⚠ **Avevo elencato `9` coppie disallineate come «un ritrovato»: erano LA FORMA GIUSTA** |
+| ### ✔ **`PI-GEMELLE` confronta `dominio` ed `era`, MAI lo stato** | il difetto e il suo reperto parlano ### **della stessa cosa, nella stessa era** — ma ### **una misura resta un'AVVERTENZA anche dopo che il difetto è curato** *(`D19` CURATO, `Z88` aperta come avvertenza)*. ### ⚠ **Avevo elencato `9` coppie disallineate come «un ritrovato»: erano LA FORMA GIUSTA** |
 | ### **`meta.duplicato_di`** | le altre voci che dicono lo stesso fatto. ### ⛔ **Non sceglie un originale**, e le voci **NON si fondono**: ogni membro nomina **gli altri** |
 | ### **e `collegate`** | porta gli stessi ID, perché è il campo che lo schema già valida |
 
@@ -350,14 +350,14 @@ Si toglie dall'inizio della riga, **ripetutamente**: i `#`, gli spazi, i **simbo
 
 ---
 
-## `F9` E `F10`, E LE DUE CONVENZIONI *(2026-10-09)*
+## `PI-ERA-STATO` E `PI-CRITERIO-METODO`, E LE DUE CONVENZIONI *(2026-10-09)*
 
 | | |
 |---|---|
-| ### **`F9`** *(ERRORE)* | era `ENTRAMBE` ⇒ stato `APERTA` o `CHIUSA`; era `2` ⇒ `AGENDA`. ### ⭐ **Il perché:** *«sospesa»* vuol dire ### **«rimandata all'era `2`»**, e una cosa che vale ### **anche** nell'era `2` ### **non si può rimandare a se stessa**; l'era `2` ### **non è cominciata**, quindi una sua voce è ### **agenda** |
-| ### **`F10`** *(ERRORE)* | `CRITERIO` ⇒ dominio `METODO`: un criterio è una ### **regola di giudizio**, e dice ### **come si decide**, non come va il mondo |
+| ### **`PI-ERA-STATO`** *(ERRORE)* | era `ENTRAMBE` ⇒ stato `APERTA` o `CHIUSA`; era `2` ⇒ `AGENDA`. ### ⭐ **Il perché:** *«sospesa»* vuol dire ### **«rimandata all'era `2`»**, e una cosa che vale ### **anche** nell'era `2` ### **non si può rimandare a se stessa**; l'era `2` ### **non è cominciata**, quindi una sua voce è ### **agenda** |
+| ### **`PI-CRITERIO-METODO`** *(ERRORE)* | `CRITERIO` ⇒ dominio `METODO`: un criterio è una ### **regola di giudizio**, e dice ### **come si decide**, non come va il mondo |
 | ### ⛔ **e si accendono CON la cura, non prima** | `indice.py valida` gira nel `pre-commit`: un presidio bloccante con violazioni in piedi ### **blocca ogni commit del repo**, compreso quello che lo accende |
-| ### **`F6` legge anche la TRIPLA dichiarata** | una nota che scrive `DOMINIO/era N/STATO` fa ### **un'asserzione**, e se la voce si è mossa ### **la nota è scaduta.** ### ⚠ **La via grossolana** — *«la nota nomina uno stato diverso»* — dava ### **`69` segnali**; la forma esatta ne dà ### **`1`: `G1`** |
+| ### **`PI-NOTA-CONTRADDICE-LISTA` legge anche la TRIPLA dichiarata** | una nota che scrive `DOMINIO/era N/STATO` fa ### **un'asserzione**, e se la voce si è mossa ### **la nota è scaduta.** ### ⚠ **La via grossolana** — *«la nota nomina uno stato diverso»* — dava ### **`69` segnali**; la forma esatta ne dà ### **`1`: `G1`** |
 | ### **STANDARD contro PRESIDIO** | `PRESIDIO` è ### **solo ciò che è cablato** *(`A9`)*: le regole di lavoro del §`11` ### **non impediscono niente** e sono `STANDARD` |
 | ### **una regola in vigore è `APERTA`** | `CHIUSA` ### **solo se ritirata o fusa.** ### ⭐ **Una regola non si «finisce»: VALE** — la stessa frase degli assiomi |
 
@@ -375,7 +375,7 @@ Si toglie dall'inizio della riga, **ripetutamente**: i `#`, gli spazi, i **simbo
 
 ---
 
-## `F12`: **la `chiusura` ORFANA** *(2026-10-09)*
+## `PI-CHIUSURA-ORFANA`: **la `chiusura` ORFANA** *(2026-10-09)*
 
 | | |
 |---|---|
@@ -394,25 +394,25 @@ Si toglie dall'inizio della riga, **ripetutamente**: i `#`, gli spazi, i **simbo
 | ### **la regola** | `superata_da` può essere l'id di una ### **decisione**, di un ### **assioma** ### **o di una VOCE** |
 | ### **il perché** | una voce ### **promossa o fusa** in un'altra è superata ### **da quella.** `S02` è *«PROMOSSO»* a `D31`, e `D31` è una voce |
 | ### ⛔ **la mia regola di ieri era mezza vera** | avevo scritto *«un difetto non decide niente»*: ### **vero per una DECISIONE, falso per una PROMOZIONE.** Pretendere che ogni superamento venisse da ### **fuori l'indice** faceva ### **perdere la storia delle FUSIONI** |
-| ### **e `F9` ammette `SUPERATA` per `ENTRAMBE`** | *«superata»* non è *«rimandata»*: è ### **risolta da fuori**, e per questo ### **non cade nel divieto che colpisce `SOSPESA`** |
+| ### **e `PI-ERA-STATO` ammette `SUPERATA` per `ENTRAMBE`** | *«superata»* non è *«rimandata»*: è ### **risolta da fuori**, e per questo ### **non cade nel divieto che colpisce `SOSPESA`** |
 | ### ⚠ **i due versi sono collaudati** | una voce come `superata_da` → ### **accettata**; un id che non è né decisione, né assioma, né voce → ### **rifiutato.** ### **Senza il verso negativo la regola nuova non è una regola: è un PERMESSO** |
 
 ---
 
-## `F11`: **l'indice è il REPLAY del suo storico** *(2026-10-09)*
+## `PI-REPLAY`: **l'indice è il REPLAY del suo storico** *(2026-10-09)*
 
 | | |
 |---|---|
 | ### **la regola** *(ERRORE)* | ogni voce coincide, ### **campo per campo**, col `dopo` della sua ### **ULTIMA** riga di storico; una voce ### **senza storico** coincide col suo stato a ### **`3ef2326`** *(fine della migrazione)*; una voce ### **nata dopo e senza storico** è un errore |
-| ### ⭐ **perché è il più forte di tutti** | gli altri presidi guardano ### **se un campo è plausibile**; `F11` guarda ### **se il campo è ARRIVATO DA UNA SCRITTURA DICHIARATA** |
+| ### ⭐ **perché è il più forte di tutti** | gli altri presidi guardano ### **se un campo è plausibile**; `PI-REPLAY` guarda ### **se il campo è ARRIVATO DA UNA SCRITTURA DICHIARATA** |
 | ### ⛔ **e rende VERA una regola che era solo scritta** | *«si scrive SOLO con `indice.py aggiorna`»* *(par.9)* era ### **una riga di documento**, e `A9` dice che una regola scritta ### **non impedisce niente.** Adesso impedisce |
 | ### ⚠ **`aggiornata` non si confronta** | è ### **un timbro di QUANDO**, non un dato della voce, e lo riscrive ogni lotto anche quando non cambia niente |
-| ### ⚠ **e sta nel ramo dei DERIVATI, come `F5`** | ### **legge il disco**, non solo la lista: durante un lotto lo storico nuovo ### **non è ancora scritto**, e `F11` accuserebbe ### **ogni voce del lotto** |
+| ### ⚠ **e sta nel ramo dei DERIVATI, come `PI-STORICO-SENZA-COMMIT`** | ### **legge il disco**, non solo la lista: durante un lotto lo storico nuovo ### **non è ancora scritto**, e `PI-REPLAY` accuserebbe ### **ogni voce del lotto** |
 | ### ⛔ **se il tag non si legge, TACE** | senza il ### **punto di partenza** non si può dire se una voce senza storico sia giusta: ### **meglio tacere che accusare** |
 
 ---
 
-## `F8`: **via il marcatore «un file `.py` del repo»** *(2026-10-09)*
+## `PI-OGGETTI-ERA1`: **via il marcatore «un file `.py` del repo»** *(2026-10-09)*
 
 | | |
 |---|---|

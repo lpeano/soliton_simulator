@@ -16,7 +16,19 @@
    "P-E6",
    "P-E7",
    "P-E8",
-   "P-M1"
+   "P-M1",
+   "PI-CHIUSURA-ORFANA",
+   "PI-CRITERIO-METODO",
+   "PI-ERA-STATO",
+   "PI-ETICHETTA-DEFINITA",
+   "PI-FISICA-ERA1-NON-SOSPESA",
+   "PI-GEMELLE",
+   "PI-NOTA-CONTRADDICE-LISTA",
+   "PI-OGGETTI-ERA1",
+   "PI-PAROLE-STRUMENTO",
+   "PI-REPLAY",
+   "PI-SIMBOLI-ERA1",
+   "PI-STORICO-SENZA-COMMIT"
   ]
  },
  "blocca": {
@@ -465,6 +477,18 @@
    "PESO-MAX",
    "PHI-FUORI-DOMINIO",
    "PHI0-CONGELATA",
+   "PI-CHIUSURA-ORFANA",
+   "PI-CRITERIO-METODO",
+   "PI-ERA-STATO",
+   "PI-ETICHETTA-DEFINITA",
+   "PI-FISICA-ERA1-NON-SOSPESA",
+   "PI-GEMELLE",
+   "PI-NOTA-CONTRADDICE-LISTA",
+   "PI-OGGETTI-ERA1",
+   "PI-PAROLE-STRUMENTO",
+   "PI-REPLAY",
+   "PI-SIMBOLI-ERA1",
+   "PI-STORICO-SENZA-COMMIT",
    "PIATTAFORMA-NON-TIMBRATA",
    "POTATURA-GUARDIE",
    "POTENZE-1",
@@ -1707,6 +1731,18 @@
    "P-E7",
    "P-E8",
    "P-M1",
+   "PI-CHIUSURA-ORFANA",
+   "PI-CRITERIO-METODO",
+   "PI-ERA-STATO",
+   "PI-ETICHETTA-DEFINITA",
+   "PI-FISICA-ERA1-NON-SOSPESA",
+   "PI-GEMELLE",
+   "PI-NOTA-CONTRADDICE-LISTA",
+   "PI-OGGETTI-ERA1",
+   "PI-PAROLE-STRUMENTO",
+   "PI-REPLAY",
+   "PI-SIMBOLI-ERA1",
+   "PI-STORICO-SENZA-COMMIT",
    "Q6",
    "R3",
    "R5",
@@ -2523,6 +2559,18 @@
    "PAT-1",
    "PAT-2",
    "PESO-MAX",
+   "PI-CHIUSURA-ORFANA",
+   "PI-CRITERIO-METODO",
+   "PI-ERA-STATO",
+   "PI-ETICHETTA-DEFINITA",
+   "PI-FISICA-ERA1-NON-SOSPESA",
+   "PI-GEMELLE",
+   "PI-NOTA-CONTRADDICE-LISTA",
+   "PI-OGGETTI-ERA1",
+   "PI-PAROLE-STRUMENTO",
+   "PI-REPLAY",
+   "PI-SIMBOLI-ERA1",
+   "PI-STORICO-SENZA-COMMIT",
    "PIATTAFORMA-NON-TIMBRATA",
    "Q6",
    "R3",
@@ -3478,6 +3526,18 @@
    "P5",
    "P6",
    "PASSO-PIENO",
+   "PI-CHIUSURA-ORFANA",
+   "PI-CRITERIO-METODO",
+   "PI-ERA-STATO",
+   "PI-ETICHETTA-DEFINITA",
+   "PI-FISICA-ERA1-NON-SOSPESA",
+   "PI-GEMELLE",
+   "PI-NOTA-CONTRADDICE-LISTA",
+   "PI-OGGETTI-ERA1",
+   "PI-PAROLE-STRUMENTO",
+   "PI-REPLAY",
+   "PI-SIMBOLI-ERA1",
+   "PI-STORICO-SENZA-COMMIT",
    "PIATTAFORMA-NON-TIMBRATA",
    "PRESIDIO-RIFIUTO-SOLO-SIGILLI",
    "PRESTAZIONI-CORSE",
@@ -4655,101 +4715,107 @@
   ]
  },
  "meta:eccezione_presidio": {
-  "F1: CRITERIO -- e- IL CRITERIO CHE VERIFICA il difetto che cita. Il testo dice << |posi − posj| per OGNI arco al passo zero | dice se la cura ha curato D02 a questo sito... titolo_breve INTERO: d == |posi >>": [
+  "PI-GEMELLE: CRITERIO -- e- IL CRITERIO CHE VERIFICA il difetto che cita. Il testo dice << |posi − posj| per OGNI arco al passo zero | dice se la cura ha curato D02 a questo sito... titolo_breve INTERO: d == |posi >>": [
    "REGISTRO_FISICA:S6"
   ],
-  "F1: CRITERIO -- e- IL CRITERIO CHE VERIFICA il difetto che cita. Il testo dice <<E3 la finestra di D33 | mio | si riporta la popolazione delle due fines>>": [
+  "PI-GEMELLE: CRITERIO -- e- IL CRITERIO CHE VERIFICA il difetto che cita. Il testo dice <<E3 la finestra di D33 | mio | si riporta la popolazione delle due fines>>": [
    "REGISTRO_FISICA:E3"
   ],
-  "F1: CRITERIO -- e- IL CRITERIO CHE VERIFICA il difetto che cita. Il testo dice <<U2 È ATTIVA IN ENTRAMBI I BRACCI DI P-GONFIA E FABBRICA LUNGHEZZA (Luca, 2026-09-2>>": [
+  "PI-GEMELLE: CRITERIO -- e- IL CRITERIO CHE VERIFICA il difetto che cita. Il testo dice <<U2 È ATTIVA IN ENTRAMBI I BRACCI DI P-GONFIA E FABBRICA LUNGHEZZA (Luca, 2026-09-2>>": [
    "REGISTRO_FISICA:U2"
   ],
-  "F1: CRITERIO -- e- IL CRITERIO CHE VERIFICA il difetto che cita: un criterio nomina la legge su cui gira, e questa e- la relazione normale fra un controllo e la sua legge. Il testo dice <<la coerenza della massa e' `|<e^{i phi}>|`: il campo NON distingue `phi` >>": [
+  "PI-GEMELLE: CRITERIO -- e- IL CRITERIO CHE VERIFICA il difetto che cita: un criterio nomina la legge su cui gira, e questa e- la relazione normale fra un controllo e la sua legge. Il testo dice <<la coerenza della massa e' `|<e^{i phi}>|`: il campo NON distingue `phi` >>": [
    "COER-4PI"
   ],
-  "F1: DIPENDENZA -- DICHIARA DA CHE COSA DIPENDE: una cura che non nomina la sua dipendenza non si puo- ordinare. Il testo dice <<si di appartenenza con memoria: AGGIUNGE stato, e dipende da MASSA-ID CANDIDATA REGISTRATA il 2026-10-07 e NON>>": [
+  "PI-GEMELLE: DIPENDENZA -- DICHIARA DA CHE COSA DIPENDE: una cura che non nomina la sua dipendenza non si puo- ordinare. Il testo dice <<si di appartenenza con memoria: AGGIUNGE stato, e dipende da MASSA-ID CANDIDATA REGISTRATA il 2026-10-07 e NON>>": [
    "M-MASSA"
   ],
-  "F1: DIPENDENZA -- DICHIARA SU CHE COSA GIRAVA l-A/B: e- la voce di cui parla. Il testo dice <<l'A/B di W5 non ha salvato i punti di CONTROLLO nel vuoto, e >>": [
+  "PI-GEMELLE: DIPENDENZA -- DICHIARA SU CHE COSA GIRAVA l-A/B: e- la voce di cui parla. Il testo dice <<l'A/B di W5 non ha salvato i punti di CONTROLLO nel vuoto, e >>": [
    "AB-CONTROLLI"
   ],
-  "F1: DOCUMENTO -- e- UN DIFETTO DI DOCUMENTAZIONE che CITA LA REGOLA GIUSTA: senza nominarla non direbbe qual e- l-etichetta sbagliata. Il testo dice <<l'etichetta sbagliata `A13` dove la regola e' `A3-DISEGNO`: corretta nei documenti, non ancora.>>": [
+  "PI-GEMELLE: DOCUMENTO -- e- UN DIFETTO DI DOCUMENTAZIONE che CITA LA REGOLA GIUSTA: senza nominarla non direbbe qual e- l-etichetta sbagliata. Il testo dice <<l'etichetta sbagliata `A13` dove la regola e' `A3-DISEGNO`: corretta nei documenti, non ancora.>>": [
    "ETICHETTA-A13"
   ],
-  "F1: OMONIMO -- il <<C4>> del titolo e- IL CONTROLLO della migrazione, non la voce `C4`. Il testo dice <<n collaudo che si RIFIUTA di girare esce con 2, e il controllo C4 lo conta come PASS csv/_controlli_riordino.py>>": [
+  "PI-GEMELLE: OMONIMO -- il <<C4>> del titolo e- IL CONTROLLO della migrazione, non la voce `C4`. Il testo dice <<n collaudo che si RIFIUTA di girare esce con 2, e il controllo C4 lo conta come PASS csv/_controlli_riordino.py>>": [
    "COLLAUDO-NON-ESEGUITO"
   ],
-  "F1: OMONIMO -- il <<M1>> del titolo e- LA MISURA DEL RUN, non la voce `M1`. Il testo dice <<EPOCA 3 + RUN LUNGO — tag epoca-3, 3000 passi, M1/M4 leggere durante il run | GLOBALE §4 | 🔒... titolo_breve INTERO: EPOCA 3 >>": [
+  "PI-GEMELLE: OMONIMO -- il <<M1>> del titolo e- LA MISURA DEL RUN, non la voce `M1`. Il testo dice <<EPOCA 3 + RUN LUNGO — tag epoca-3, 3000 passi, M1/M4 leggere durante il run | GLOBALE §4 | 🔒... titolo_breve INTERO: EPOCA 3 >>": [
    "E3"
   ],
-  "F1: il titolo dice <<INVARIANTI — 42 domini, due livelli | mandato C5 | 3/3 (Z100>> -- il `C5` che cita e' IL MANDATO DEGLI INVARIANTI, non la voce `C5` (la misura su tauluce). E' un OMONIMO, dichiarato in meta.omonimo di `C5`, non una mescolanza di dominio": [
+  "PI-GEMELLE: il titolo dice <<INVARIANTI — 42 domini, due livelli | mandato C5 | 3/3 (Z100>> -- il `C5` che cita e' IL MANDATO DEGLI INVARIANTI, non la voce `C5` (la misura su tauluce). E' un OMONIMO, dichiarato in meta.omonimo di `C5`, non una mescolanza di dominio": [
    "C5-INVARIANTI"
   ],
-  "F1: il titolo dice <<Z100 CURATA E SIGILLATA ⏳[EPOCA 3 · CURA] | INVARIANTI (C5):>> -- il `C5` che cita e' IL MANDATO DEGLI INVARIANTI, non la voce `C5` (la misura su tauluce). E' un OMONIMO, dichiarato in meta.omonimo di `C5`, non una mescolanza di dominio": [
+  "PI-GEMELLE: il titolo dice <<Z100 CURATA E SIGILLATA ⏳[EPOCA 3 · CURA] | INVARIANTI (C5):>> -- il `C5` che cita e' IL MANDATO DEGLI INVARIANTI, non la voce `C5` (la misura su tauluce). E' un OMONIMO, dichiarato in meta.omonimo di `C5`, non una mescolanza di dominio": [
    "Z100"
   ],
-  "F2: la voce e- di PROGRAMMA e nomina l-era 1 perche- dice CHE COSA SOSTITUISCE o PRESCRIVE: <<NERE A PIU MASSE, con peso diverso. UNA MASSA E UNA CONFIGURAZIONE DEL CAMPO, NON UN INSIEME DI NODI. COME E OGGI, verific>>": [
-   "MASSE-PESI-SOVRAPPOSTE"
+  "PI-OGGETTI-ERA1: questa voce ELENCA i simboli dell-era 1 PERCHE- E- IL SUO LAVORO elencarli: la descrizione dice <<phivel, phidot, M_PH, perc_chi, perc_geom>>. Un presidio che nomina cio- che cerca non sta parlando del vecchio codice: STA DEFINENDO SE- STESSO": [
+   "PI-SIMBOLI-ERA1"
   ],
-  "F2: la voce e- di PROGRAMMA e nomina l-era 1 perche- dice CHE COSA SOSTITUISCE o PRESCRIVE: <<OGNI OSSERVATORE, FATTO DELLA STESSA MATERIA, MISURA LA SUA c_s COSTANTE SUL POSTO; il tick globale e SOLO LA COORDINATA. Quindi>>": [
-   "INVARIANZA-LOCALE-CS"
-  ],
-  "F2: la voce e- di PROGRAMMA e nomina l-era 1 perche- dice CHE COSA SOSTITUISCE o PRESCRIVE: <<deciso da Luca lo stesso giorno: LE GRANDEZZE SI CONSERVANO LOCALMENTE E SI DISSIPANO GLOBALMENTE. Il testo intero s>>": [
-   "CONSERVAZIONE-LOCALE"
-  ],
-  "F2: la voce e- di PROGRAMMA e nomina l-era 1 perche- dice CHE COSA SOSTITUISCE o PRESCRIVE: <<di flusso per ARCO, scalare e antisimmetrica, al posto di mem_mot CANDIDATA REGISTRATA il 2026-10-07 e NON DECI>>": [
-   "M-FLUSSO"
-  ],
-  "F2: la voce e- di PROGRAMMA e nomina l-era 1 perche- dice CHE COSA SOSTITUISCE o PRESCRIVE: <<ocale, che puo restituirlo; l irreversibilita deve EMERGERE dalla dinamica di molti gradi di liberta, non stare scritta >>": [
-   "FRECCE-IMPOSTE"
-  ],
-  "F2: la voce e- di PROGRAMMA e nomina l-era 1 perche- dice CHE COSA SOSTITUISCE o PRESCRIVE: <<rmostato locale + scuotimento DETERMINISTICO: UNA legge per nodo, fase <-> vuoto PROPOSTA DI LUCA del 2026-10->>": [
-   "VUOTO-LOCALE-DETERMINISTICO"
-  ],
-  "F2: la voce e- di PROGRAMMA e nomina l-era 1 perche- dice CHE COSA SOSTITUISCE o PRESCRIVE: <<tenziali nel codice e nessun Poisson risolto: Poisson e un VINCOLO DI SCALA APERTA il 2026-10-05 per DECISIONE DI LUCA, d>>": [
-   "GRAVITA-POTENZIALE"
-  ],
-  "F2: la voce e- di PROGRAMMA e nomina l-era 1 perche- dice CHE COSA SOSTITUISCE o PRESCRIVE: <<un isteresi sui flip di perc_geom e perc_chi: COMPLEMENTO di MEM-VERSO, non alternativa CANDIDATA REGISTRATA il 2026>>": [
-   "M-ISTERESI"
-  ],
-  "F3: il titolo e- <<APERTO SIGILLO-CURA2-RIPARATO>>, e la parola `sigillo` ci sta perche- E- IL NOME STESSO DELLA VOCE. Il segnale scatta sull-ID, non su cio- di cui la voce parla": [
+  "PI-PAROLE-STRUMENTO: il titolo e- <<APERTO SIGILLO-CURA2-RIPARATO>>, e la parola `sigillo` ci sta perche- E- IL NOME STESSO DELLA VOCE. Il segnale scatta sull-ID, non su cio- di cui la voce parla": [
    "SIGILLO-CURA2-RIPARATO"
   ],
-  "F3: il titolo e- <<APERTO SIGILLO-CURA2>>, e la parola `sigillo` ci sta perche- E- IL NOME STESSO DELLA VOCE. Il segnale scatta sull-ID, non su cio- di cui la voce parla": [
+  "PI-PAROLE-STRUMENTO: il titolo e- <<APERTO SIGILLO-CURA2>>, e la parola `sigillo` ci sta perche- E- IL NOME STESSO DELLA VOCE. Il segnale scatta sull-ID, non su cio- di cui la voce parla": [
    "SIGILLO-CURA2"
   ],
-  "F3: il titolo e- <<`F4` | scritture di stato senza traccia | `D04` — già fatto per `d0`: >>, e la parola `criterio` NON e- il suo argomento: e- dentro la frase che dice DA QUALE DIFETTO NASCE questa famiglia (<<D04 -- gia- fatto per d0: si RIUSA il criterio>>). La voce parla di SCRITTURE DI STATO SENZA TRACCIA, che e- fisica": [
+  "PI-PAROLE-STRUMENTO: il titolo e- <<`F4` | scritture di stato senza traccia | `D04` — già fatto per `d0`: >>, e la parola `criterio` NON e- il suo argomento: e- dentro la frase che dice DA QUALE DIFETTO NASCE questa famiglia (<<D04 -- gia- fatto per d0: si RIUSA il criterio>>). La voce parla di SCRITTURE DI STATO SENZA TRACCIA, che e- fisica": [
    "F4"
   ],
-  "F3: la voce e' FISICA e il titolo nomina il <<commento>>, ma non parla di STRUMENTI: parla di CIO' CHE IL COMMENTO DICHIARA. La classe (B) del censimento e' <<(B) COSTRUITA E MAI MISURATA -- 16 voci>>, trascritta alla lettera da doc/CENSIMENTO_intenzioni.md:265 -- NON testo falso: una cosa costruita e mai misurata E' UN FRONTE APERTO": [
+  "PI-PAROLE-STRUMENTO: la voce e' FISICA e il titolo nomina il <<commento>>, ma non parla di STRUMENTI: parla di CIO' CHE IL COMMENTO DICHIARA. La classe (B) del censimento e' <<(B) COSTRUITA E MAI MISURATA -- 16 voci>>, trascritta alla lettera da doc/CENSIMENTO_intenzioni.md:265 -- NON testo falso: una cosa costruita e mai misurata E' UN FRONTE APERTO": [
    "CENS-B15"
   ],
-  "F3: resta `FISICA` -- e- una CURA CHIUSA COL SIGILLO: il titolo nomina il sigillo  perche- il sigillo e- cio- che l-ha chiusa. Il testo dice <<CHIUSA il 2026-09-26 con la CURA A (rhos/W^2), sigillo 6>>": [
+  "PI-PAROLE-STRUMENTO: resta `FISICA` -- e- una CURA CHIUSA COL SIGILLO: il titolo nomina il sigillo  perche- il sigillo e- cio- che l-ha chiusa. Il testo dice <<CHIUSA il 2026-09-26 con la CURA A (rhos/W^2), sigillo 6>>": [
    "POTENZE-1"
   ],
-  "F3: resta `FISICA` -- idem: cura chiusa col sigillo. Il testo dice <<CHIUSA il 2026-09-25, strada (3) (decisione di Luca): si>>": [
+  "PI-PAROLE-STRUMENTO: resta `FISICA` -- idem: cura chiusa col sigillo. Il testo dice <<CHIUSA il 2026-09-25, strada (3) (decisione di Luca): si>>": [
    "RAMPA-1"
   ],
-  "F3: resta `FISICA` -- idem: cura chiusa col sigillo. Il testo dice <<Z124 CHIUSA PER MISURA ⏳[archivi delle cure · SIGILLO] |>>": [
+  "PI-PAROLE-STRUMENTO: resta `FISICA` -- idem: cura chiusa col sigillo. Il testo dice <<Z124 CHIUSA PER MISURA ⏳[archivi delle cure · SIGILLO] |>>": [
    "Z124"
   ],
-  "F3: resta `FISICA` -- idem: cura chiusa col sigillo. Il testo dice <<§3 PROVA DI SPEGNIMENTO: la GRAVITA' BIFASE | GLOBALE-DI>>": [
+  "PI-PAROLE-STRUMENTO: resta `FISICA` -- idem: cura chiusa col sigillo. Il testo dice <<§3 PROVA DI SPEGNIMENTO: la GRAVITA' BIFASE | GLOBALE-DI>>": [
    "G3"
   ],
-  "F3: resta `FISICA` -- il <<criterio>> del titolo e- IL CRITERIO DI RIAPERTURA DI  QUESTA VOCE, non il suo argomento: cio- di cui parla e- |dx|/d  del freno-legge, da RIMISURARE nel regime nuovo. E- una  grandezza della legge. Il testo dice <<RIMISURARE NEL REGIME NUOVO: \\|dx\\|/d del freno-legge (c>>": [
+  "PI-PAROLE-STRUMENTO: resta `FISICA` -- il <<criterio>> del titolo e- IL CRITERIO DI RIAPERTURA DI  QUESTA VOCE, non il suo argomento: cio- di cui parla e- |dx|/d  del freno-legge, da RIMISURARE nel regime nuovo. E- una  grandezza della legge. Il testo dice <<RIMISURARE NEL REGIME NUOVO: \\|dx\\|/d del freno-legge (c>>": [
    "A2-DXD"
   ],
-  "F3: resta `FISICA` -- il commento e- IL CONTRASTO: il fatto misurato e- che lo  Schwinger crea UN SOLO nodo e LA CARICA CAMBIA di +-1. Una  conservazione violata e- fisica. Il testo dice <<lo Schwinger crea UN solo nodo e il commento dice che la>>": [
+  "PI-PAROLE-STRUMENTO: resta `FISICA` -- il commento e- IL CONTRASTO: il fatto misurato e- che lo  Schwinger crea UN SOLO nodo e LA CARICA CAMBIA di +-1. Una  conservazione violata e- fisica. Il testo dice <<lo Schwinger crea UN solo nodo e il commento dice che la>>": [
    "SCHWINGER-UN-NODO"
   ],
-  "F3: resta `FISICA` -- il commento e- UNO DEI TRE PUNTI, e gli altri due sono della  legge: una rho_c GLOBALE (viola A2) e un numero NON DERIVATO  (viola A1). Due su tre sono fisica. Il testo dice <<lambda_nodi: una rho_c GLOBALE, un commento che descrive>>": [
+  "PI-PAROLE-STRUMENTO: resta `FISICA` -- il commento e- UNO DEI TRE PUNTI, e gli altri due sono della  legge: una rho_c GLOBALE (viola A2) e un numero NON DERIVATO  (viola A1). Due su tre sono fisica. Il testo dice <<lambda_nodi: una rho_c GLOBALE, un commento che descrive>>": [
    "SCHERMATURA-LEGGE-REVISIONE"
   ],
-  "F3: resta `FISICA` -- il docstring e- IL CONTRASTO, non il difetto: il difetto e-  che pozzo_grafo calcola L da self.pos, cioe- DAL DISEGNO, dove  servirebbe la distanza reale. E- la gravita- che legge il  disegno, ed e- fisica. Il testo dice <<pozzografo calcola L da self.pos — IL DISEGNO — mentre i>>": [
+  "PI-PAROLE-STRUMENTO: resta `FISICA` -- il docstring e- IL CONTRASTO, non il difetto: il difetto e-  che pozzo_grafo calcola L da self.pos, cioe- DAL DISEGNO, dove  servirebbe la distanza reale. E- la gravita- che legge il  disegno, ed e- fisica. Il testo dice <<pozzografo calcola L da self.pos — IL DISEGNO — mentre i>>": [
    "D02"
   ],
-  "F3: resta `FISICA` -- la domanda aperta e- <<se phi non e- l-azimut del Bloch, CHE  COS-E-?>>, e il docstring e- nominato perche- Z121 lo ha  REFUTATO. L-oggetto e- phi, non il docstring. Il testo dice <<Se φ non e' l'azimut del Bloch, CHE COS'E'? | Z121 ha re>>": [
+  "PI-PAROLE-STRUMENTO: resta `FISICA` -- la domanda aperta e- <<se phi non e- l-azimut del Bloch, CHE  COS-E-?>>, e il docstring e- nominato perche- Z121 lo ha  REFUTATO. L-oggetto e- phi, non il docstring. Il testo dice <<Se φ non e' l'azimut del Bloch, CHE COS'E'? | Z121 ha re>>": [
    "S08"
+  ],
+  "PI-SIMBOLI-ERA1: il <<flag>> che il presidio vede e- DI GIT, non del simulatore -- la descrizione dice <<E la CI rigenera tutto e fa git diff --exit-code>>, e --exit-code e- un-opzione di git diff. Il presidio legge la prosa, e qui legge male": [
+   "P-E2"
+  ],
+  "PI-SIMBOLI-ERA1: la voce e- di PROGRAMMA e nomina l-era 1 perche- dice CHE COSA SOSTITUISCE o PRESCRIVE: <<NERE A PIU MASSE, con peso diverso. UNA MASSA E UNA CONFIGURAZIONE DEL CAMPO, NON UN INSIEME DI NODI. COME E OGGI, verific>>": [
+   "MASSE-PESI-SOVRAPPOSTE"
+  ],
+  "PI-SIMBOLI-ERA1: la voce e- di PROGRAMMA e nomina l-era 1 perche- dice CHE COSA SOSTITUISCE o PRESCRIVE: <<OGNI OSSERVATORE, FATTO DELLA STESSA MATERIA, MISURA LA SUA c_s COSTANTE SUL POSTO; il tick globale e SOLO LA COORDINATA. Quindi>>": [
+   "INVARIANZA-LOCALE-CS"
+  ],
+  "PI-SIMBOLI-ERA1: la voce e- di PROGRAMMA e nomina l-era 1 perche- dice CHE COSA SOSTITUISCE o PRESCRIVE: <<deciso da Luca lo stesso giorno: LE GRANDEZZE SI CONSERVANO LOCALMENTE E SI DISSIPANO GLOBALMENTE. Il testo intero s>>": [
+   "CONSERVAZIONE-LOCALE"
+  ],
+  "PI-SIMBOLI-ERA1: la voce e- di PROGRAMMA e nomina l-era 1 perche- dice CHE COSA SOSTITUISCE o PRESCRIVE: <<di flusso per ARCO, scalare e antisimmetrica, al posto di mem_mot CANDIDATA REGISTRATA il 2026-10-07 e NON DECI>>": [
+   "M-FLUSSO"
+  ],
+  "PI-SIMBOLI-ERA1: la voce e- di PROGRAMMA e nomina l-era 1 perche- dice CHE COSA SOSTITUISCE o PRESCRIVE: <<ocale, che puo restituirlo; l irreversibilita deve EMERGERE dalla dinamica di molti gradi di liberta, non stare scritta >>": [
+   "FRECCE-IMPOSTE"
+  ],
+  "PI-SIMBOLI-ERA1: la voce e- di PROGRAMMA e nomina l-era 1 perche- dice CHE COSA SOSTITUISCE o PRESCRIVE: <<rmostato locale + scuotimento DETERMINISTICO: UNA legge per nodo, fase <-> vuoto PROPOSTA DI LUCA del 2026-10->>": [
+   "VUOTO-LOCALE-DETERMINISTICO"
+  ],
+  "PI-SIMBOLI-ERA1: la voce e- di PROGRAMMA e nomina l-era 1 perche- dice CHE COSA SOSTITUISCE o PRESCRIVE: <<tenziali nel codice e nessun Poisson risolto: Poisson e un VINCOLO DI SCALA APERTA il 2026-10-05 per DECISIONE DI LUCA, d>>": [
+   "GRAVITA-POTENZIALE"
+  ],
+  "PI-SIMBOLI-ERA1: la voce e- di PROGRAMMA e nomina l-era 1 perche- dice CHE COSA SOSTITUISCE o PRESCRIVE: <<un isteresi sui flip di perc_geom e perc_chi: COMPLEMENTO di MEM-VERSO, non alternativa CANDIDATA REGISTRATA il 2026>>": [
+   "M-ISTERESI"
   ]
  },
  "meta:famiglia_era1": {
@@ -6481,6 +6547,18 @@
    "P4",
    "P5",
    "PASSO-PIENO",
+   "PI-CHIUSURA-ORFANA",
+   "PI-CRITERIO-METODO",
+   "PI-ERA-STATO",
+   "PI-ETICHETTA-DEFINITA",
+   "PI-FISICA-ERA1-NON-SOSPESA",
+   "PI-GEMELLE",
+   "PI-NOTA-CONTRADDICE-LISTA",
+   "PI-OGGETTI-ERA1",
+   "PI-PAROLE-STRUMENTO",
+   "PI-REPLAY",
+   "PI-SIMBOLI-ERA1",
+   "PI-STORICO-SENZA-COMMIT",
    "PIATTAFORMA-NON-TIMBRATA",
    "PRESIDIO-RIFIUTO-SOLO-SIGILLI",
    "PRESTAZIONI-CORSE",

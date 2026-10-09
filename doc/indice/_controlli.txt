@@ -1,21 +1,21 @@
 ========================================================================================================
 I CONTROLLI DELLA MIGRAZIONE ALLO SCHEMA 2
 ========================================================================================================
-  al tag: 953 ID vecchi   ->   voci 849, etichette 106, tracce 1028, conflitti 0
+  al tag: 953 ID vecchi   ->   voci 871, etichette 106, tracce 1028, conflitti 0
 
   C1 CONSERVAZIONE: ogni ID vecchio in UNO E UNO SOLO posto PASSA   persi 0, doppi 0
   C2 la TRACCIA copre ogni ID vecchio, con la REGOLA       PASSA   senza traccia 0
   C3 LE LISTE DEL GUARDIANO: classificazione come indicata PASSA   fuori posto 0
-  C4 IDEMPOTENZA (NON si rilancia: c'e' lavoro di dopo)    PASSA   storico.jsonl ha 1919 righe -> verificata al commit 6b8cb90; e la migrazione ha un PRESIDIO che la ferma
-  C5 `indice.py valida` passa                              PASSA     ### i PRESIDI contro le mescolanze: 18 segnali (F1=4  F2=0
-  C6 la VISTA passa IL VALIDATORE VECCHIO (quello del pre-commit) e la domanda PASSA   12 bloccanti su 849 voci
+  C4 IDEMPOTENZA (NON si rilancia: c'e' lavoro di dopo)    PASSA   storico.jsonl ha 1976 righe -> verificata al commit 6b8cb90; e la migrazione ha un PRESIDIO che la ferma
+  C5 `indice.py valida` passa                              PASSA     ### i PRESIDI contro le mescolanze: 18 segnali (PI-GEMELLE
+  C6 la VISTA passa IL VALIDATORE VECCHIO (quello del pre-commit) e la domanda PASSA   12 bloccanti su 871 voci
 ========================================================================================================
 C7 I CONTEGGI
 ========================================================================================================
-  classe    NON_DEFINITA=187  DIFETTO=184  MISURA=149  FRONTE=110  CRITERIO=96  CURA=56  STANDARD=44  PRESIDIO=23
-  dominio   FISICA=378  METODO=216  DA_CLASSIFICARE=187  INFRASTRUTTURA=52  DOCUMENTAZIONE=16
-  era       1=539  DA_CLASSIFICARE=188  ENTRAMBE=97  2=25
-  stato     SOSPESA=321  CHIUSA=224  DA_CLASSIFICARE=188  APERTA=84  AGENDA=25  SUPERATA=7
+  classe    NON_DEFINITA=187  DIFETTO=184  MISURA=149  FRONTE=110  CRITERIO=96  CURA=56  PRESIDIO=45  STANDARD=44
+  dominio   FISICA=378  METODO=229  DA_CLASSIFICARE=187  INFRASTRUTTURA=61  DOCUMENTAZIONE=16
+  era       1=539  DA_CLASSIFICARE=188  ENTRAMBE=111  2=33
+  stato     SOSPESA=321  CHIUSA=224  DA_CLASSIFICARE=188  APERTA=98  AGENDA=33  SUPERATA=7
 
   LE REGOLE DELLA MIGRAZIONE, per quante volte hanno deciso:
       (a)       629

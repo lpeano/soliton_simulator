@@ -8,17 +8,17 @@
 
 | | quanti |
 |---|--:|
-| **`PORTATO`** | `53` |
+| **`PORTATO`** | `65` |
 | **`DA_PORTARE`** | `30` |
 | **`DA_DECIDERE`** | `5` |
 | **`NON_SI_APPLICA`** | `9` |
-| **in tutto** | ### **`97`** |
+| **in tutto** | ### **`109`** |
 
-### ⚠ **E IL NUMERO `97` E- MISURATO, non stimato:** viene dal perimetro che l-indice calcola, e ### **il mandato ne nominava <<una decina>>** per nome piu- *<<e le cure di architettura>>*. ### **La decina era `20`.**
+### ⚠ **E IL NUMERO `109` E- MISURATO, non stimato:** viene dal perimetro che l-indice calcola, e ### **il mandato ne nominava <<una decina>>** per nome piu- *<<e le cure di architettura>>*. ### **La decina era `20`.**
 
 ---
 
-## `PORTATO` — `53` metodi
+## `PORTATO` — `65` metodi
 
 > ### ✅ **GIA- NELL-ERA `2`**, e `dove` dice dove
 
@@ -44,7 +44,7 @@
 | **`H-REG-R`** | `PRESIDIO` | una legge che cambia senza la sua scheda: ### nell-era 2 la scheda SI GENERA in `doc/leggi_era2/<id>.md`, quindi `SCHEDA_NEL_REGISTRO` limita `H-REG-R` al simulatore -- DUE POSTI PER LA STESSA SCHEDA SAREBBERO DUE FONTI | `csv/_file_fisica.py::SCHEDA_NEL_REGISTRO` |
 | **`H-RIGHE`** | `PRESIDIO` | `CLAUDE.md` sotto le 400 righe: ### IL PUNTO 2 DELLE REGOLE DI GESTIONE (mandato 6) genera la sezione delle regole dall-indice | `.githooks/pre-commit` |
 | **`H-STASH`** | `PRESIDIO` | `git stash` bloccato da `permissions.deny`: non e- un hook e non ha via d-uscita. Vale per ogni lavoro, era 2 compresa | `.claude/settings` |
-| **`H-VALIDATORE`** | `PRESIDIO` | un indice mal formato o con una voce persa: gira nel `pre-commit` e ha fermato questo mandato (`F5`, riga di storico senza `commit`) | `.githooks/pre-commit` + `csv/indice.py valida` |
+| **`H-VALIDATORE`** | `PRESIDIO` | un indice mal formato o con una voce persa: gira nel `pre-commit` e ha fermato questo mandato (`PI-STORICO-SENZA-COMMIT`, riga di storico senza `commit`) | `.githooks/pre-commit` + `csv/indice.py valida` |
 | **`L-DOPO-STOP`** | `STANDARD` | dopo uno STOP si lavora solo la coda: ### e Luca ha cambiato la regola per questa coda -- lo STOP vale come CHECKPOINT e si passa al mandato successivo SENZA aspettare | metodo; la deroga e- in `doc/CODA_2026-10-09.md` |
 | **`L-NUMERI`** | `STANDARD` | ogni numero di un commit o di un referto esce da uno script: il referto dell-infrastruttura e- GENERATO dall-uscita dei sette collaudi, e la CI lo rigenera facendo `git diff` | `csv/_referto_infrastruttura_era2.py` |
 | **`L-PATCH`** | `STANDARD` | le patch in primo piano, niente `git stash`, niente escape: vedi `P1-quater` | `H-STASH` + ogni patch script |
@@ -66,6 +66,18 @@
 | **`P1-quater`** | `STANDARD` | ogni sostituzione si asserisce per se-: l-helper `sost()` conta l-ancora e FALLISCE se non e- unica. ### E LA LEZIONE SI E- ALLARGATA: non solo gli escape, ma il NESTING -- i heredoc di bash si sono rotti tre volte sull-apostrofo, e i patch script si scrivono con lo strumento di scrittura | ogni patch script di questo mandato |
 | **`P1-sexies`** | `STANDARD` | un criterio si collauda su un caso a risposta nota, e il caso che DEVE fallire e- il piu- importante: i SEI casi del mandato girano in un solo posto, ognuno verificato PER LA CHIAVE GIUSTA | `_collauda_passo.py` sezione (F) |
 | **`P4`** | `STANDARD` | prima di misurare se una grandezza cambia, verificare che sia LIBERA di cambiare: il braccio <<il cono del globale cambia con la tolleranza>> l-ha fatto -- ho misurato a TRE tolleranze invece di una | `_collauda_passo.py` sezione (C) |
+| **`PI-CHIUSURA-ORFANA`** | `PRESIDIO` | una `chiusura` piena su una voce che non e- CHIUSA: una chiusura che nessuno ha applicato | `csv/indice.py::_f12_chiusura_orfana`, ### ERRORE (rifiuta) |
+| **`PI-CRITERIO-METODO`** | `PRESIDIO` | una voce classe CRITERIO in un dominio che non e- METODO: un criterio e- un MODO DI VERIFICARE, e dirlo FISICA confonderebbe cio- che si misura con come si misura (`A17`) | `csv/indice.py::_f10_criterio_metodo`, ### ERRORE (rifiuta) |
+| **`PI-ERA-STATO`** | `PRESIDIO` | era ENTRAMBE o era 2 con uno stato impossibile. ### L-era 2 ammette solo AGENDA, perche- NON E- COMINCIATA. Acceso NELLO STESSO COMMIT delle correzioni che lo rendono vero, e l-ordine giusto me l-ha corretto Luca | `csv/indice.py::_f9_era_stato`, ### ERRORE (rifiuta) |
+| **`PI-ETICHETTA-DEFINITA`** | `PRESIDIO` | un-etichetta rimossa che un documento vivo DEFINISCE ancora. ### E le viste GENERATE non contano: una riga di `doc/INDICE.md` ELENCA un ID, non lo DEFINISCE | `csv/indice.py::_f4_etichette`, ### SEGNALA |
+| **`PI-FISICA-ERA1-NON-SOSPESA`** | `PRESIDIO` | una voce FISICA dell-era 1 con uno stato che non e- SOSPESA ne- CHIUSA. ### NASCE DA UN ERRORE MIO: ho messo nel campo `stato` l-<<APERTO>> di un documento, che e- lo stato DELL-ERA 1 e va in `stato_era_1` | `csv/indice.py::_f7_stato`, ### ERRORE (rifiuta) |
+| **`PI-GEMELLE`** | `PRESIDIO` | due voci col titolo che cita l-altra e dominio o era differenti. ### SEGNALA e non decide, perche- <<come lo stesso fatto>> NON E- RILEVABILE da un programma -- e il guardiano mi ha corretto: lo STATO e- uscito dal controllo | `csv/indice.py::_f1_gemelle`, ### SEGNALA |
+| **`PI-NOTA-CONTRADDICE-LISTA`** | `PRESIDIO` | una nota che nomina una lista del guardiano e ne contraddice dominio, era o stato. ### LA PRIMA STESURA LEGGEVA LA PROSA: 11 dei 13 segnali erano UNA SOLA FRASE, e l-ha trovato il presidio stesso guardando la sua uscita | `csv/indice.py::_f6_note`, ### SEGNALA |
+| **`PI-OGGETTI-ERA1`** | `PRESIDIO` | una voce ENTRAMBE che nomina un oggetto concreto dell-era 1. ### E IL GUARDIANO MI HA CORRETTO: il marcatore <<nomina un `.py`>> e- STATO TOLTO, perche- 6 dei 20 segnali erano suoi -- nominare un file non e- parlare del vecchio codice | `csv/indice.py::_f8_era1`, ### SEGNALA |
+| **`PI-PAROLE-STRUMENTO`** | `PRESIDIO` | una voce FISICA il cui titolo dice le parole dello strumento (`A17`). ### LEGGE IL TITOLO, e per questo SEGNALA -- ed e- uno dei sei difetti che il principio del mandato nomina | `csv/indice.py::_f3_fisica_strumenti`, ### SEGNALA |
+| **`PI-REPLAY`** | `PRESIDIO` | l-indice e- il REPLAY del suo storico. ### E- IL PRESIDIO CHE RENDE VERA la frase <<si scrive SOLO con la via unica>>. ### E HA UN LIMITE MISURATO: blocca `aggiorna` singolo, perche- quello valida CON i derivati PRIMA di appendere la sua riga -- la via che funziona e- `aggiorna-lotto` | `csv/indice.py::_f11_replay`, ### ERRORE (rifiuta) |
+| **`PI-SIMBOLI-ERA1`** | `PRESIDIO` | una voce dell-era 2 che nomina un simbolo dell-era 1. ### E HA SCATTATO SULLA SUA PROPRIA VOCE, che elenca i simboli che cerca: chiuso con l-eccezione che cita il testo | `csv/indice.py::_f2_era2`, ### SEGNALA |
+| **`PI-STORICO-SENZA-COMMIT`** | `PRESIDIO` | una riga di storico GIA- COMMITTATA e senza `commit`. ### E- L-UNICO DEI DODICI CHE ERA UN ERRORE DAL PRIMO GIORNO, e ha fermato questo mandato CINQUE volte: non e- una tenda | `csv/indice.py::_f5_storico`, ### ERRORE (rifiuta) |
 | **`R3`** | `PRESIDIO` | pretendeva `bias == 0.0` esatto e falliva su due ulp: ### LA LEZIONE E- PORTATA -- nessun braccio dell-era 2 pretende l-uguaglianza esatta di un float calcolato, e la norma si misura con una tolleranza DICHIARATA | `_collauda_passo.py` sezione (D) |
 | **`R5`** | `PRESIDIO` | contava 25 aperture su 24 passi perche- l-iniezione del test apriva il freno: ### LA LEZIONE E- PORTATA -- i casi che devono fallire dell-era 2 verificano anche che, TOLTO il finto, il presidio TACCIA | `_collauda_passo.py` sezione (F), ultimo braccio |
 | **`REG-R`** | `PRESIDIO` | la regola mantenuta del registro della fisica: nell-era 2 la scheda si genera, e il registro resta la casa delle leggi dell-era 1 | `csv/_file_fisica.py::SCHEDA_NEL_REGISTRO` |

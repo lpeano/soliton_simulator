@@ -15,7 +15,7 @@
 | `INFRASTRUTTURA` | `2` | 8 |
 | `INFRASTRUTTURA` | `ENTRAMBE` | 14 |
 | `METODO` | `1` | 153 |
-| `METODO` | `ENTRAMBE` | 64 |
+| `METODO` | `ENTRAMBE` | 76 |
 
 | id | classe | dominio | era | stato | blocca | titolo |
 |---|---|---|---|---|---|---|
@@ -471,6 +471,18 @@
 | `PESO-MAX` | CRITERIO | METODO | 1 | ### **CHIUSA** |  | partecipazioni multiple: l'opacita' di un nodo e' il MAX su tutte le masse, non  |
 | `PHI-FUORI-DOMINIO` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | una delle dieci scritture di phi NON normalizza, e il sito della fase lo copriva |
 | `PHI0-CONGELATA` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | phi0 e CONGELATA: 5 scritture tutte alla nascita, e lo step la legge come memori |
+| `PI-CHIUSURA-ORFANA` | PRESIDIO | METODO | ENTRAMBE | ### **APERTA** |  | una chiusura PIENA su una voce che non e- CHIUSA: la chiusura e- orfana |
+| `PI-CRITERIO-METODO` | PRESIDIO | METODO | ENTRAMBE | ### **APERTA** |  | una voce classe CRITERIO in un dominio che non e- METODO |
+| `PI-ERA-STATO` | PRESIDIO | METODO | ENTRAMBE | ### **APERTA** |  | l-era e lo stato si contraddicono: era ENTRAMBE o era 2 con uno stato impossibil |
+| `PI-ETICHETTA-DEFINITA` | PRESIDIO | METODO | ENTRAMBE | ### **APERTA** |  | un-etichetta RIMOSSA che in un documento vivo e- ancora DEFINITA |
+| `PI-FISICA-ERA1-NON-SOSPESA` | PRESIDIO | METODO | ENTRAMBE | ### **APERTA** |  | una voce FISICA dell-era 1 con uno stato che non e- SOSPESA ne- CHIUSA |
+| `PI-GEMELLE` | PRESIDIO | METODO | ENTRAMBE | ### **APERTA** |  | due voci GEMELLE: stesso dominio e stessa era, e una delle due non e- RIMOSSA |
+| `PI-NOTA-CONTRADDICE-LISTA` | PRESIDIO | METODO | ENTRAMBE | ### **APERTA** |  | una nota del guardiano che nomina una sua LISTA e ne CONTRADDICE dominio, era o  |
+| `PI-OGGETTI-ERA1` | PRESIDIO | METODO | ENTRAMBE | ### **APERTA** |  | una voce dell-era 2 che nomina un OGGETTO CONCRETO dell-era 1 |
+| `PI-PAROLE-STRUMENTO` | PRESIDIO | METODO | ENTRAMBE | ### **APERTA** |  | una voce di dominio FISICA il cui titolo dice le parole dello STRUMENTO |
+| `PI-REPLAY` | PRESIDIO | METODO | ENTRAMBE | ### **APERTA** |  | l-indice e- il REPLAY del suo storico: ogni voce coincide col dopo della sua ult |
+| `PI-SIMBOLI-ERA1` | PRESIDIO | METODO | ENTRAMBE | ### **APERTA** |  | una voce dell-era 2 che nomina un SIMBOLO dell-era 1: sta ancora parlando del ve |
+| `PI-STORICO-SENZA-COMMIT` | PRESIDIO | METODO | ENTRAMBE | ### **APERTA** |  | una riga di storico GIA- COMMITTATA e senza il campo commit |
 | `PIATTAFORMA-NON-TIMBRATA` | FRONTE | METODO | ENTRAMBE | ### **APERTA** |  | I REFERTI NON TIMBRANO LA PIATTAFORMA, e i conteggi assoluti ne dipendono |
 | `POTATURA-GUARDIE` | FRONTE | INFRASTRUTTURA | 1 | ### **SOSPESA** |  | I 57 rami MORTI delle guardie di lunghezza: potatura rimandata dopo il riordino  |
 | `POTENZE-1` | CURA | FISICA | 1 | ### **CHIUSA** |  | CHIUSA il 2026-09-26 con la CURA A (rhos/W^2), sigillo 6/6: F2 da x47 000 a x1.4 |

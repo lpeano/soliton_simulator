@@ -2257,7 +2257,7 @@ etichette rimosse, con ### **`0` persi, `0` doppi, `0` conflitti**.
 | | |
 |---|---|
 | **file** | `csv/_collaudo_presidi_indice.py` |
-| **BLOB** *(sha1 dei byte grezzi)* | `2b0f4d1c` |
+| **BLOB** *(sha1 dei byte grezzi)* | `fdffa301` |
 | **COMANDO** | `python csv/_collaudo_presidi_indice.py` |
 | **cosa misura** | che ogni presidio **SCATTI** sul suo caso a risposta nota *(`P1-sexies`)* **e NON scatti** sulla voce corretta. `F1` `B2`→`Z31` · `F2` `D35` · `F3` `C28` · `F4` `TW-1` · `F5` sintetico · `F6` `CENS-A6`, piu' `3` casi sulla **forma dell'eccezione** |
 | **l'uscita** | **`15` su `15`**, e la riga finale **riconta le voci** per provare che l'indice vero non e' stato toccato |
@@ -2688,7 +2688,7 @@ etichette rimosse, con ### **`0` persi, `0` doppi, `0` conflitti**.
 | | |
 |---|---|
 | **file** | `csv/_metodi_era2.py` |
-| **BLOB** *(sha1 dei byte grezzi)* | `f950042e` |
+| **BLOB** *(sha1 dei byte grezzi)* | `6c2fbfec` |
 | **COMANDO** | `python csv/_metodi_era2.py` *(il presidio, e GENERA il documento)* · `--collaudo` *(nei due versi, `8`/`8`)* |
 | **cosa impedisce** | che `doc/METODI_era1_in_era2.md` **invecchi in silenzio**: ### **ogni metodo del perimetro DEVE avere una riga** *(come si applica · dove · stato)*, citato o no |
 | ### ⭐ **e il PERIMETRO lo calcola l'INDICE** | da ### **campi a vocabolario chiuso** *(`classe in (STANDARD, PRESIDIO)`, piu' le cure di architettura che il mandato nomina **per ID**)*. ### ⛔ **Nessun `titolo` e nessuna `descrizione` si leggono per decidere se una voce e' un metodo** — e' il principio del mandato **applicato a se stesso** |

@@ -89,6 +89,38 @@ CHIAVI = ("id", "alias", "titolo", "descrizione", "classe", "dominio", "era", "s
           "blocca", "leggi", "variabili", "assiomi", "collegate", "padre", "superata_da",
           "chiusura", "fonte", "creata", "aggiornata", "stato_era_1", "meta")
 
+# =====================================================================================
+#   LA DICHIARAZIONE DEGLI ID -- punto `12(a)`, e i nomi sono quelli NUOVI del `12(b)`
+# -------------------------------------------------------------------------------------
+#   ### ⛔ **DODICI PRESIDI IN UN FILE: quindi `PRESIDI` e non `PRESIDIO`.**
+#   ### `P-C1` legge questa tabella ### **via AST** e verifica che ### **ogni ID sia
+#   ### nell-indice** e che ### **la funzione esista nel modulo.**
+#   ### ⭐ **E i nomi sono CAMBIATI il 2026-10-09:** si chiamavano `F1`…`F12`,
+#   ### e quei nomi ### **COLLIDEVANO con ID veri** *(`F1`-`F3` segnaposto, `F4`-`F5`
+#   ### difetti)*. ### **Il nome vecchio vive come alias NAMESPACED**
+#   ### *(`VALIDATORE:F1`)*: nudo collidirebbe, ed e- la ragione del rinominamento.
+# =====================================================================================
+PRESIDI = {
+    "PI-GEMELLE": "_f1_gemelle",
+    "PI-SIMBOLI-ERA1": "_f2_era2",
+    "PI-PAROLE-STRUMENTO": "_f3_fisica_strumenti",
+    "PI-ETICHETTA-DEFINITA": "_f4_etichette",
+    "PI-STORICO-SENZA-COMMIT": "_f5_storico",
+    "PI-NOTA-CONTRADDICE-LISTA": "_f6_note",
+    "PI-FISICA-ERA1-NON-SOSPESA": "_f7_stato",
+    "PI-OGGETTI-ERA1": "_f8_era1",
+    "PI-ERA-STATO": "_f9_era_stato",
+    "PI-CRITERIO-METODO": "_f10_criterio_metodo",
+    "PI-REPLAY": "_f11_replay",
+    "PI-CHIUSURA-ORFANA": "_f12_chiusura_orfana",
+}
+
+# ### ⛔ **LA FORMA DI UN-ECCEZIONE SI COSTRUISCE DALLA TABELLA `PRESIDI`.**
+# ### Scrivere l-elenco a mano qui sarebbe ### **un secondo posto** dove i nomi
+# ### dei presidi possono divergere -- e ### **divergerebbero**, perche- i nomi
+# ### sono appena cambiati.
+_FORMA_ECC = r"^(" + "|".join(re.escape(k) for k in PRESIDI) + r"):\s*(.+)$"
+
 TIPI_META = ("enum", "bool", "intero", "reale", "data", "testo_breve", "id_voce",
              "id_legge", "id_variabile", "id_assioma", "id_decisione", "sha_commit",
              "sha_blob")
@@ -263,26 +295,26 @@ def valida(voci, reg, verboso=True, derivati=True):
                            % (q, k, v["dominio"]))
     # ### ⛔ **QUESTI DUE VANNO PRIMA DEL RITORNO, e non e- un dettaglio:** dipendono
     # ### ### **SOLO dalle voci**, e `aggiorna_lotto` valida con `derivati=False`
-    # ### ### **PRIMA DI SCRIVERE**. Finche- stavano dopo, un lotto che violava `F7`
+    # ### ### **PRIMA DI SCRIVERE**. Finche- stavano dopo, un lotto che violava `PI-FISICA-ERA1-NON-SOSPESA`
     # ### ### **VENIVA SCRITTO** e solo allora l-assert scattava: l-indice restava
     # ### ### **CORROTTO**, e l-ho ripristinato con `git checkout`. L-ha dimostrato una
     # ### prova end-to-end, e la promessa *<<se non passa NON SI SCRIVE NIENTE>>*
     # ### ### **era falsa.**
     err += _f7_stato(voci)
-    # ### `F10` SI ACCENDE, `F9` NO, e la differenza e- ### **misurata, non di gusto:**
-    # ### `F10` viola su ### **ZERO** voci, `F9` su ### **CINQUE**. `indice.py valida`
+    # ### `PI-CRITERIO-METODO` SI ACCENDE, `PI-ERA-STATO` NO, e la differenza e- ### **misurata, non di gusto:**
+    # ### `PI-CRITERIO-METODO` viola su ### **ZERO** voci, `PI-ERA-STATO` su ### **CINQUE**. `indice.py valida`
     # ### gira nel `pre-commit`: un presidio bloccante con violazioni in piedi
     # ### ### **blocca ogni commit del repo**, compreso quello che lo accende.
-    # ### ✔ **E ADESSO `F9` E- ACCESO, NELLO STESSO COMMIT CHE CURA LE CINQUE** -- `A2`,
+    # ### ✔ **E ADESSO `PI-ERA-STATO` E- ACCESO, NELLO STESSO COMMIT CHE CURA LE CINQUE** -- `A2`,
     # ### `LUNGA-BATTITO-CADUTA`, `PRESTAZIONI-CORSE`, `REPERTI-IMMUTABILI`,
     # ### `RIPRESA-ARGV`: quattro passano ad `APERTA`, una a era `1`.
     # ### ⛔ **In DUE commit non si poteva**, e Luca lo ha riconosciuto: *<<F9 e F10 si
     # ### accendono NELLO STESSO COMMIT delle correzioni che li rendono veri, mai
-    # ### prima>>*. Il commit che accendesse `F9` prima ### **sarebbe bloccato dal suo
+    # ### prima>>*. Il commit che accendesse `PI-ERA-STATO` prima ### **sarebbe bloccato dal suo
     # ### stesso hook**, perche- `indice.py valida` gira nel `pre-commit`.
     err += _f9_era_stato(voci)
     err += _f10_criterio_metodo(voci)
-    # ### `F12` SI ACCENDE QUI, ### **nello stesso commit che cura le `41`** -- e- la
+    # ### `PI-CHIUSURA-ORFANA` SI ACCENDE QUI, ### **nello stesso commit che cura le `41`** -- e- la
     # ### ### **quarta volta** che l-ordine non e- libero, e stavolta stava scritto nel
     # ### task history ### **prima di muovermi.**
     err += _f12_chiusura_orfana(voci)
@@ -290,15 +322,15 @@ def valida(voci, reg, verboso=True, derivati=True):
     # ### L'INDICE INVERTITO e le VISTE: DERIVATI, e si CONFRONTANO
     if not derivati:
         return err
-    # ### `F5` e la FORMA delle ECCEZIONI sono ERRORI, non segnali, e stanno QUI: il
+    # ### `PI-STORICO-SENZA-COMMIT` e la FORMA delle ECCEZIONI sono ERRORI, non segnali, e stanno QUI: il
     # ### mandato dice *<<storico senza commit -> ERRORE, non segnale>>*, e
     # ### un-eccezione che NON CITA non e- un-eccezione, e- una via di fuga.
     err += _f5_storico(voci)
-    # ### `F11` STA QUI, accanto a `F5`, perche- ### **legge il disco** *(lo storico e il
+    # ### `PI-REPLAY` STA QUI, accanto a `PI-STORICO-SENZA-COMMIT`, perche- ### **legge il disco** *(lo storico e il
     # ### tag)* e non solo la lista: ### **non e- puro**, e il `derivati=False` di
     # ### `aggiorna_lotto` lo salta ### **di proposito** -- durante un lotto lo storico
-    # ### nuovo ### **non e- ancora scritto**, e `F11` accuserebbe ogni voce del lotto.
-    # ### ✔ **Dopo la scrittura `valida` gira INTERO, e li- `F11` controlla.**
+    # ### nuovo ### **non e- ancora scritto**, e `PI-REPLAY` accuserebbe ogni voce del lotto.
+    # ### ✔ **Dopo la scrittura `valida` gira INTERO, e li- `PI-REPLAY` controlla.**
     err += _f11_replay(voci)
     atteso = invertito(voci, reg)
     if os.path.exists(INVERTITO):
@@ -542,7 +574,7 @@ def aggiorna_lotto(voci, reg, percorso):
     # ### le viste sono ### **per costruzione stale** finche' non si riscrivono: controllarli
     # ### qui vorrebbe dire rifiutare OGNI lotto. ### ➜ **E si rivalida INTERO DOPO**, viste
     # ### comprese: cosi' nessun controllo si perde.
-    # ### ⛔ **`F5` NON dipende dalle voci** -- guarda `storico.jsonl` sul disco contro
+    # ### ⛔ **`PI-STORICO-SENZA-COMMIT` NON dipende dalle voci** -- guarda `storico.jsonl` sul disco contro
     # ### `HEAD` -- quindi ### **si chiede PRIMA di scrivere**, non alla fine: alla fine
     # ### sarebbe ### **un allarme su un file GIA- SCRITTO.**
     err = _f5_storico(voci) + valida(voci, reg, verboso=False, derivati=False)
@@ -700,9 +732,9 @@ def citazioni(voci):
 def collaudo():
     def base(**kw):
         v = {"id": "X1", "alias": [], "titolo": "t", "descrizione": "", "classe": "DIFETTO",
-        # ### ⚠ **La voce-modello era `FISICA`/era `1`/`APERTA`, che da oggi `F7` VIETA:**
+        # ### ⚠ **La voce-modello era `FISICA`/era `1`/`APERTA`, che da oggi `PI-FISICA-ERA1-NON-SOSPESA` VIETA:**
         # ### il caso SANO sarebbe diventato un fallimento. ### **Era `ENTRAMBE`**, e il
-        # ### caso di `F7` ce l-ha suo.
+        # ### caso di `PI-FISICA-ERA1-NON-SOSPESA` ce l-ha suo.
              "dominio": "FISICA", "era": "ENTRAMBE", "stato": "APERTA", "blocca": False,
              "leggi": [], "variabili": [], "assiomi": [], "collegate": [], "padre": "",
              "superata_da": "", "chiusura": {}, "fonte": "doc/x.md::X1",
@@ -731,14 +763,14 @@ def collaudo():
           base(id="B")], True),
         ("### `superata_da` che NON e- ne- decisione, ne- assioma, ne- voce",
          [base(stato="SUPERATA", superata_da="NON-ESISTE-NIENTE")], False),
-        # ### ⭐ **E `F9` AMMETTE `SUPERATA` PER `ENTRAMBE`**, che corregge una mia
+        # ### ⭐ **E `PI-ERA-STATO` AMMETTE `SUPERATA` PER `ENTRAMBE`**, che corregge una mia
         # ### strettezza; ma ### **`SOSPESA` resta VIETATA**, e il caso accanto lo prova.
-        ("era `ENTRAMBE` con `SUPERATA` (il verso POSITIVO di `F9`)",
+        ("era `ENTRAMBE` con `SUPERATA` (il verso POSITIVO di `PI-ERA-STATO`)",
          [base(stato="SUPERATA", superata_da="B"), base(id="B")], True),
-        ("### `F9`: era `ENTRAMBE` con stato `SOSPESA`, che resta VIETATO",
+        ("### `PI-ERA-STATO`: era `ENTRAMBE` con stato `SOSPESA`, che resta VIETATO",
          [base(stato="SOSPESA", stato_era_1="aperto")], False),
         ("### SOSPESA senza stato_era_1", [base(stato="SOSPESA")], False),
-        ("### `F7`: FISICA/era 1 con stato APERTA",
+        ("### `PI-FISICA-ERA1-NON-SOSPESA`: FISICA/era 1 con stato APERTA",
          [base(era="1", stato="APERTA")], False),
         ("### id DUPLICATO", [base(), base()], False),
         ("### chiave meta NON REGISTRATA", [base(meta={"pippo": "x"})], False),
@@ -813,35 +845,35 @@ def collaudo():
 # ### decisione e- di chi legge. ### **Un segnale si chiude in due modi soli:**
 # ### ### **correggendo la voce**, oppure con ### **`meta.eccezione_presidio`**, che deve
 # ### ### **CITARE IL TESTO ALLA LETTERA.**
-# ### ⚠ **`F5` e- L-UNICO che e- un ERRORE**, e il mandato lo dice: *«storico senza commit ->
+# ### ⚠ **`PI-STORICO-SENZA-COMMIT` e- L-UNICO che e- un ERRORE**, e il mandato lo dice: *«storico senza commit ->
 # ### errore, non segnale»*.
-# ### ⛔ **E `F1` non puo- leggere l-intenzione:** *«come lo stesso fatto»* non e- rilevabile
-# ### da un programma. `F1` segnala ### **che l-ID c-e-**; che sia *lo stesso fatto* lo decide
+# ### ⛔ **E `PI-GEMELLE` non puo- leggere l-intenzione:** *«come lo stesso fatto»* non e- rilevabile
+# ### da un programma. `PI-GEMELLE` segnala ### **che l-ID c-e-**; che sia *lo stesso fatto* lo decide
 # ### chi legge. ### **E- esattamente il motivo per cui questi presidi SEGNALANO.**
 
 # ### I simboli dell-ERA 1: se una voce dell-era `2` li nomina, sta ancora parlando del
-# ### vecchio codice. (`F2`)
+# ### vecchio codice. (`PI-SIMBOLI-ERA1`)
 ERA1_SIMBOLI = ("phivel", "phidot", "M_PH", "perc_chi", "perc_geom", "mem_mot",
                 "dir_laterale", "Nose-Hoover", "scuotimento", "sync", "SCALAMIN")
 # ### Le parole degli STRUMENTI: se le dice il titolo di una voce `FISICA`, quella voce parla
-# ### del modo di verificare, non della natura. (`F3`)
+# ### del modo di verificare, non della natura. (`PI-PAROLE-STRUMENTO`)
 STRUMENTI = ("sigillo", "criterio", "controllo positivo", "caso che deve fallire",
              "commento", "docstring", "README", "hook", "presidio", "CRLF")
-# ### GENERATE: una riga qui ELENCA un ID, non lo DEFINISCE. (`F4`)
+# ### GENERATE: una riga qui ELENCA un ID, non lo DEFINISCE. (`PI-ETICHETTA-DEFINITA`)
 # ### ⛔ **E- lo stesso FALSO-UNO del controllo `C4`, che leggeva `doc/INDICE.md`.**
 VISTE_GENERATE = ("doc/LISTA_CHIUSA.md", "doc/INDICE.md", "doc/INDICE_ID.tsv",
                   "doc/INDICE_ID_dettaglio.md", "doc/indice/")
-# ### Che cosa diceva ciascuna lista del guardiano. (`F6`)
+# ### Che cosa diceva ciascuna lista del guardiano. (`PI-NOTA-CONTRADDICE-LISTA`)
 LISTE_GUARDIANO = {"1": (None, "ENTRAMBE", None),
                    "2": ("FISICA", "2", "AGENDA"),
                    "3": ("FISICA", "1", "SOSPESA")}
 # ### ⛔ **`_DOMINI_PAROLA` e `_STATI_PAROLA` SONO STATE TOLTE**, non lasciate morte:
-# ### servivano a `F6` per ### **leggere la prosa della nota**, ed e- proprio cio- che
+# ### servivano a `PI-NOTA-CONTRADDICE-LISTA` per ### **leggere la prosa della nota**, ed e- proprio cio- che
 # ### ### **sbagliava** *(«candidata SUPERATA dalla decisione» letto come lo stato
 # ### `SUPERATA`)*. ### **Un vocabolario che non si usa piu- si cancella**, altrimenti
 # ### il prossimo lo riusa.
 _TOKEN = re.compile(r"[A-Za-z][A-Za-z0-9_:.-]*")
-# ### Lo schema `D`/`Z`: una riga della tavola `D` che cita la sua `Z`. (`F1`)
+# ### Lo schema `D`/`Z`: una riga della tavola `D` che cita la sua `Z`. (`PI-GEMELLE`)
 _DZ = re.compile(r"^D\d+[a-z]?$")
 _ZZ = re.compile(r"^Z\d+[a-z]?$")
 _RIGA_NNNN = re.compile(r":\d{3,5}(?![0-9])")
@@ -876,7 +908,11 @@ def _eccezioni_malformate(voci):
     for v in voci:
         for e in (v.get("meta") or {}).get("eccezione_presidio", []) or []:
             s = str(e)
-            m = re.match(r"^(F[1-6]):\s*(.+)$", s.strip())
+            # ### ⛔ **LA FORMA SEGUE IL RINOMINAMENTO** *(punto `12(b)`)*: il prefisso
+            # ### e- ### **l-ID del presidio**, e `_PRESIDI_NOMI` lo prende
+            # ### ### **dalla tabella `PRESIDI`** -- cosi- ### **non c-e- un
+            # ### secondo posto** dove l-elenco possa divergere.
+            m = re.match(_FORMA_ECC, s.strip())
             if not m:
                 err.append("`%s`: `eccezione_presidio` fuori forma: serve `F<n>: <motivo>`, "
                            "trovato %r" % (v["id"], s[:60]))
@@ -892,7 +928,7 @@ def _eccezioni_malformate(voci):
 
 
 def _f5_righe(vive, n_head):
-    """### LA LOGICA DI `F5`, PURA: nessun disco, nessun git.
+    """### LA LOGICA DI `PI-STORICO-SENZA-COMMIT`, PURA: nessun disco, nessun git.
 
     ### ⛔ **Esiste per una ragione precisa:** il collaudo deve poterla provare
     ### **senza toccare l-indice vero**, e il mandato lo dice. ### **Un collaudo che per
@@ -903,7 +939,7 @@ def _f5_righe(vive, n_head):
     for k in range(min(n_head, len(vive))):
         riga = vive[k] if isinstance(vive[k], dict) else json.loads(vive[k])
         if not riga.get("commit"):
-            err.append("`F5` storico riga %d: GIA- COMMITTATA e senza `commit`. Gira "
+            err.append("`PI-STORICO-SENZA-COMMIT` storico riga %d: GIA- COMMITTATA e senza `commit`. Gira "
                        "`python csv/indice.py storico-commit`" % (k + 1))
     return err[:20]
 
@@ -913,19 +949,19 @@ def _f5_righe(vive, n_head):
 # ### ### **quello con cui sono nate.** `3ef2326` e- il commit in cui la migrazione ha
 # ### finito di scriverle.
 FINE_MIGRAZIONE = "3ef2326"
-# ### I campi che `F11` confronta: ### **tutti quelli dello schema tranne `aggiornata`**, che
+# ### I campi che `PI-REPLAY` confronta: ### **tutti quelli dello schema tranne `aggiornata`**, che
 # ### e- ### **un timbro di QUANDO**, non un dato della voce -- e lo riscrive ogni lotto,
 # ### anche quando non cambia niente.
 CHIAVI_F11 = tuple(k for k in CHIAVI if k != "aggiornata")
 
 
 def _f11_righe(voci, ultimo, nati):
-    """### `F11`, ### **la parte PURA:** ogni voce coincide col `dopo` della sua ULTIMA riga
+    """### `PI-REPLAY`, ### **la parte PURA:** ogni voce coincide col `dopo` della sua ULTIMA riga
     di storico; ### **le voci senza storico** coincidono con il loro stato alla fine della
     migrazione; ### **una voce nata dopo e senza storico e- un ERRORE.**
 
     ### ⭐ **E- IL PRESIDIO PIU- FORTE DI TUTTI, e il perche- e- questo:** gli altri guardano
-    ### **se un campo e- plausibile**; `F11` guarda ### **se il campo e- ARRIVATO DA UNA
+    ### **se un campo e- plausibile**; `PI-REPLAY` guarda ### **se il campo e- ARRIVATO DA UNA
     SCRITTURA DICHIARATA.** ### ⛔ **Una modifica a mano a `voci.jsonl` -- anche con le viste
     rigenerate, anche se passa TUTTI gli altri controlli -- qui NON PASSA**, perche-
     ### **non ha una riga di storico che la spieghi.**
@@ -943,7 +979,7 @@ def _f11_righe(voci, ultimo, nati):
         if u is None:
             m = nati.get(v["id"])
             if m is None:
-                err.append("`F11` `%s`: NATA DOPO la migrazione e SENZA STORICO. Una voce "
+                err.append("`PI-REPLAY` `%s`: NATA DOPO la migrazione e SENZA STORICO. Una voce "
                            "nuova si crea con `crea-lotto`, che scrive la sua riga: se la "
                            "riga non c-e-, la voce e- stata scritta A MANO" % v["id"])
                 continue
@@ -951,7 +987,7 @@ def _f11_righe(voci, ultimo, nati):
                  if json.dumps(v[k], sort_keys=True)
                  != json.dumps(m.get(k), sort_keys=True)]
             if d:
-                err.append("`F11` `%s`: NON ha storico, quindi deve coincidere col suo "
+                err.append("`PI-REPLAY` `%s`: NON ha storico, quindi deve coincidere col suo "
                            "stato a %s (fine della migrazione), e invece differisce in %s"
                            % (v["id"], FINE_MIGRAZIONE, d[:5]))
             continue
@@ -959,7 +995,7 @@ def _f11_righe(voci, ultimo, nati):
              if json.dumps(v[k], sort_keys=True)
              != json.dumps((u.get("dopo") or {}).get(k), sort_keys=True)]
         if d:
-            err.append("`F11` `%s`: NON coincide col `dopo` della sua ULTIMA riga di storico "
+            err.append("`PI-REPLAY` `%s`: NON coincide col `dopo` della sua ULTIMA riga di storico "
                        "(%s), e differisce in %s. Il campo non e- arrivato da una scrittura "
                        "dichiarata: qualcuno ha scritto A MANO"
                        % (v["id"], u.get("quando", ""), d[:5]))
@@ -994,7 +1030,7 @@ def _f11_ultimo(percorso=None):
 
 
 def _f11_replay(voci):
-    """### `F11` sul disco: legge `storico.jsonl` e ### **le voci al tag.**
+    """### `PI-REPLAY` sul disco: legge `storico.jsonl` e ### **le voci al tag.**
 
     ### ⚠ **Se il tag non si legge il presidio TACE, e lo dichiaro:** senza il
     ### **punto di partenza** non si puo- dire se una voce senza storico sia giusta --
@@ -1009,7 +1045,7 @@ def _f11_replay(voci):
 
 
 def _f5_storico(voci):
-    """### `F5`: una riga di storico ### **GIA- COMMITTATA** senza il suo `commit`.
+    """### `PI-STORICO-SENZA-COMMIT`: una riga di storico ### **GIA- COMMITTATA** senza il suo `commit`.
 
     ### ⛔ **E- UN ERRORE, non un segnale**, e il mandato lo dice.
     ### ⚠ **MA SOLO PER LE RIGHE GIA- COMMITTATE, e questa e- una MIA DERIVAZIONE:** nella
@@ -1018,7 +1054,7 @@ def _f5_storico(voci):
     `commit` vuoto -- ### **il commit che le conterra- non esiste ancora** *(e- il ritardo
     dichiarato nel blocco `D`)*. ### ✔ **Le righe presenti in `HEAD` devono avere il loro
     commit; quelle aggiunte DOPO `HEAD` sono esattamente il ritardo, e sono esenti.**
-    ### **Cosi- `F5` obbliga a girare `storico-commit` prima del commit successivo**, invece
+    ### **Cosi- `PI-STORICO-SENZA-COMMIT` obbliga a girare `storico-commit` prima del commit successivo**, invece
     di impedire il commit.
     """
     del voci
@@ -1130,7 +1166,7 @@ def da_decidere(voci, reg):
     return righe
 
 
-# ### ⭐ **GLI OGGETTI CONCRETI DELL-ERA `1`** *(`F8`, dal 2026-10-09)*. Il guardiano:
+# ### ⭐ **GLI OGGETTI CONCRETI DELL-ERA `1`** *(`PI-OGGETTI-ERA1`, dal 2026-10-09)*. Il guardiano:
 # ### *<<vale per ### **ENTRAMBE** una REGOLA DI LAVORO o uno strumento che sopravvive;
 # ### e- ### **era 1** cio- che riguarda un OGGETTO CONCRETO dell-era 1>>*.
 # ### ⛔ **E un oggetto concreto si riconosce da COME SI SCRIVE, non dalla parola:** un flag
@@ -1148,7 +1184,7 @@ ERA1_OGGETTI = (
     # ### ### **`--` usato come lineetta** *(<<-- e poi>>)* non conta.
     (r"(?<![A-Za-z0-9-])--[a-z][a-z0-9-]{2,}", "un flag `--...`"),
     (r"\bCURA\s*\d", "CURA n"),
-    # ### ⭐ **ALLARGATO il 2026-10-09**, perche- il guardiano dichiara che `F8` era
+    # ### ⭐ **ALLARGATO il 2026-10-09**, perche- il guardiano dichiara che `PI-OGGETTI-ERA1` era
     # ### ### **troppo stretto:** una ### **funzione o una variabile del simulatore** e- un
     # ### oggetto concreto dell-era 1 ### **tanto quanto un `.pkl`**, e cosi- uno
     # ### ### **script di `csv/_test_fork` o `csv/_seal_fork`.**
@@ -1202,7 +1238,7 @@ def _riga_origine_di(v):
 
 
 def _f8_era1(voci):
-    """### `F8`: una voce `ENTRAMBE` NON CHIUSA che nomina un oggetto concreto dell-era `1`.
+    """### `PI-OGGETTI-ERA1`: una voce `ENTRAMBE` NON CHIUSA che nomina un oggetto concreto dell-era `1`.
 
     ### ⛔ **SEGNALA, non decide:** il mandato dice che i segnali che restano
     ### **si ELENCANO, non si correggono.**
@@ -1211,13 +1247,13 @@ def _f8_era1(voci):
     """
     fuori = []
     for v in voci:
-        if str(v["era"]) != "ENTRAMBE" or v["stato"] == "CHIUSA" or _coperto(v, "F8"):
+        if str(v["era"]) != "ENTRAMBE" or v["stato"] == "CHIUSA" or _coperto(v, "PI-OGGETTI-ERA1"):
             continue
         # ### ⛔ **F8 LEGGEVA UN TITOLO TRONCATO, ed e- L-ERRORE (d) applicato a un
         # ### presidio:** il titolo di `CONFIG-1` finisce *<<28 LEGGI SU 31 SPENTE,
         # ### misurato...>>*, e ### **la riga d-origine nomina `csv/_config_delle_misure.py`
         # ### e i flag `FORK_SU2`, `CAMPO_SPINORIALE`, `TAU_LUCE`.** Il mandato dice che
-        # ### `F8` ### **deve** scattare su `CONFIG-1`: ### **senza la riga d-origine non
+        # ### `PI-OGGETTI-ERA1` ### **deve** scattare su `CONFIG-1`: ### **senza la riga d-origine non
         # ### puo-.**
         t = ((v.get("titolo") or "") + " " + (v.get("descrizione") or "")
              + " " + _riga_origine_di(v))
@@ -1233,7 +1269,7 @@ def _f8_era1(voci):
 
 
 def _f12_chiusura_orfana(voci):
-    """### `F12`: una `chiusura` non vuota ### **su una voce che non e- `CHIUSA`.**
+    """### `PI-CHIUSURA-ORFANA`: una `chiusura` non vuota ### **su una voce che non e- `CHIUSA`.**
 
     ### ⛔ **E- UN ERRORE, non un segnale:** una voce che porta *<<chiusa dal commit `X`
     con criterio `Y`>>* e ### **non e- chiusa MENTE** -- e mente ### **in un campo che
@@ -1249,13 +1285,13 @@ def _f12_chiusura_orfana(voci):
     `40` righe ### **non chiudono** -> la `chiusura` ### **si svuota**; `1` chiude
     *(`Z22`)* -> ### **`CHIUSA`**, col commit ricavato.
 
-    ### **E- PURA**, come `F7` e `F9`: il collaudo la prova ### **su una COPIA.**
+    ### **E- PURA**, come `PI-FISICA-ERA1-NON-SOSPESA` e `PI-ERA-STATO`: il collaudo la prova ### **su una COPIA.**
     """
     err = []
     for v in voci:
         ch = v["chiusura"] or {}
         if ch and v["stato"] != "CHIUSA":
-            err.append("`F12` `%s`: la `chiusura` e- piena (commit `%s`) ma lo stato e- "
+            err.append("`PI-CHIUSURA-ORFANA` `%s`: la `chiusura` e- piena (commit `%s`) ma lo stato e- "
                        "`%s`. Una voce che dice <<chiusa dal commit X>> e non e- chiusa "
                        "MENTE, e mente in un campo che un programma legge"
                        % (v["id"], ch.get("commit", "")[:40], v["stato"]))
@@ -1263,7 +1299,7 @@ def _f12_chiusura_orfana(voci):
 
 
 def _f9_era_stato(voci):
-    """### `F9`: l-era e lo stato ### **non sono indipendenti.**
+    """### `PI-ERA-STATO`: l-era e lo stato ### **non sono indipendenti.**
 
     ### **La regola del mandato:** era `ENTRAMBE` ### **=> stato `APERTA` o `CHIUSA`**;
     era `2` ### **=> stato `AGENDA`.** ### ⭐ **Il perche- e- che l-era dice QUANDO una
@@ -1282,10 +1318,10 @@ def _f9_era_stato(voci):
     nello STESSO commit che cura le `5`**, e la cura e- ### **il file del guardiano.**
 
     ### ⚠ **E le `5` si curano in DUE modi diversi** -- portarle a `APERTA`, oppure
-    portarle a ### **era `1`** *(dove `SOSPESA` e- lecito, e `F8` segnala proprio che
+    portarle a ### **era `1`** *(dove `SOSPESA` e- lecito, e `PI-OGGETTI-ERA1` segnala proprio che
     nominano oggetti dell-era 1)*. ### ⛔ **QUALE DEI DUE lo dice il file, non io.**
 
-    ### **E- PURA**, come `F7`: il collaudo la prova ### **su una COPIA.**
+    ### **E- PURA**, come `PI-FISICA-ERA1-NON-SOSPESA`: il collaudo la prova ### **su una COPIA.**
     """
     err = []
     for v in voci:
@@ -1302,19 +1338,19 @@ def _f9_era_stato(voci):
         # ### ⛔ **<<Superata>> non e- <<rimandata>>:** e- ### **risolta da fuori**, e per
         # ### questo non cade nel divieto che colpisce `SOSPESA`.
         if e == "ENTRAMBE" and v["stato"] not in ("APERTA", "CHIUSA", "SUPERATA"):
-            err.append("`F9` `%s`: era `ENTRAMBE` con stato `%s`. Una voce che vale per "
+            err.append("`PI-ERA-STATO` `%s`: era `ENTRAMBE` con stato `%s`. Una voce che vale per "
                        "ENTRAMBE le ere e- APERTA o CHIUSA: <<sospesa>> vuol dire "
                        "<<rimandata all-era 2>>, e una cosa che vale ANCHE nell-era 2 "
                        "non si puo- rimandare a se stessa"
                        % (v["id"], v["stato"]))
         if e == "2" and v["stato"] != "AGENDA":
-            err.append("`F9` `%s`: era `2` con stato `%s`. L-era 2 NON E- COMINCIATA: "
+            err.append("`PI-ERA-STATO` `%s`: era `2` con stato `%s`. L-era 2 NON E- COMINCIATA: "
                        "una sua voce e- AGENDA" % (v["id"], v["stato"]))
     return err
 
 
 def _f10_criterio_metodo(voci):
-    """### `F10`: una voce di classe `CRITERIO` ### **sta nel dominio `METODO`.**
+    """### `PI-CRITERIO-METODO`: una voce di classe `CRITERIO` ### **sta nel dominio `METODO`.**
 
     ### ⭐ **Un criterio e- una REGOLA DI GIUDIZIO**, e una regola di giudizio
     ### **non e- fisica**: dice ### **come si decide**, non ### **come va il mondo.**
@@ -1323,7 +1359,7 @@ def _f10_criterio_metodo(voci):
 
     ### ✔ **QUESTO SI PUO- ACCENDERE SUBITO: le violazioni oggi sono ZERO**, misurate
     sulle `846` voci a `bfb1596`. ### **Un presidio che si accende su zero violazioni
-    non ha bisogno di nessuna cura prima** -- ed e- per questo che `F9` e `F10`,
+    non ha bisogno di nessuna cura prima** -- ed e- per questo che `PI-ERA-STATO` e `PI-CRITERIO-METODO`,
     che il mandato chiede ### **insieme**, ### **si separano: uno si puo-, l-altro no.**
 
     ### ⚠ **E lo zero NON e- un FALSO-ZERO:** il punto `4` del 2026-10-09 ha portato
@@ -1334,7 +1370,7 @@ def _f10_criterio_metodo(voci):
     err = []
     for v in voci:
         if v["classe"] == "CRITERIO" and v["dominio"] != "METODO":
-            err.append("`F10` `%s`: classe `CRITERIO` nel dominio `%s`. Un criterio e- "
+            err.append("`PI-CRITERIO-METODO` `%s`: classe `CRITERIO` nel dominio `%s`. Un criterio e- "
                        "una REGOLA DI GIUDIZIO, e una regola di giudizio non e- fisica: "
                        "dice COME SI DECIDE, non come va il mondo" % (v["id"],
                                                                       v["dominio"]))
@@ -1342,7 +1378,7 @@ def _f10_criterio_metodo(voci):
 
 
 def _f7_stato(voci):
-    """### `F7`: una voce `FISICA` dell-era `1` con uno stato che non e- `SOSPESA` ne-
+    """### `PI-FISICA-ERA1-NON-SOSPESA`: una voce `FISICA` dell-era `1` con uno stato che non e- `SOSPESA` ne-
     `CHIUSA`.
 
     ### ⛔ **E- UN ERRORE, non un segnale**, e il mandato lo dice: *<<la validazione
@@ -1376,7 +1412,7 @@ def _f7_stato(voci):
         vietato = (str(v["era"]) == "1"
                    and v["stato"] not in ("SOSPESA", "CHIUSA", "SUPERATA"))
         if vietato:
-            err.append("`F7` `%s`: `%s`/era `1` con stato `%s`. Una voce dell-era 1 "
+            err.append("`PI-FISICA-ERA1-NON-SOSPESA` `%s`: `%s`/era `1` con stato `%s`. Una voce dell-era 1 "
                        "NON CHIUSA e- SOSPESA; se quello stato viene da un documento "
                        "(<<APERTO>>), e- lo stato DELL-ERA 1 e va in `stato_era_1`"
                        % (v["id"], v["dominio"], v["stato"]))
@@ -1384,12 +1420,12 @@ def _f7_stato(voci):
 
 
 def _f1_gemelle(voci):
-    """### `F1`: il titolo di una voce ### **cita l-ID di un-altra**, e ### **dominio o era
+    """### `PI-GEMELLE`: il titolo di una voce ### **cita l-ID di un-altra**, e ### **dominio o era
     DIFFERISCONO.**"""
     ids = {v["id"]: v for v in voci}
     fuori = []
     for v in voci:
-        if _coperto(v, "F1"):
+        if _coperto(v, "PI-GEMELLE"):
             continue
         for tok in set(_TOKEN.findall(v.get("titolo") or "")):
             w = ids.get(tok)
@@ -1427,10 +1463,10 @@ def _f1_gemelle(voci):
 
 
 def _f2_era2(voci):
-    """### `F2`: una voce dell-era `2` che ### **nomina il vecchio codice.**"""
+    """### `PI-SIMBOLI-ERA1`: una voce dell-era `2` che ### **nomina il vecchio codice.**"""
     fuori = []
     for v in voci:
-        if str(v["era"]) != "2" or _coperto(v, "F2"):
+        if str(v["era"]) != "2" or _coperto(v, "PI-SIMBOLI-ERA1"):
             continue
         t = _testo_voce(v)
         tl = t.lower()
@@ -1446,14 +1482,14 @@ def _f2_era2(voci):
 
 
 def _f3_fisica_strumenti(voci):
-    """### `F3`: una voce `FISICA` il cui ### **TITOLO** parla di strumenti.
+    """### `PI-PAROLE-STRUMENTO`: una voce `FISICA` il cui ### **TITOLO** parla di strumenti.
 
     ### ⚠ **Solo il titolo**, e il mandato dice cosi-: *«il cui TITOLO parla di…»*.
     ### **Preso alla lettera**, e se risulta troppo stretto lo si scrive invece di allargarlo.
     """
     fuori = []
     for v in voci:
-        if v["dominio"] != "FISICA" or _coperto(v, "F3"):
+        if v["dominio"] != "FISICA" or _coperto(v, "PI-PAROLE-STRUMENTO"):
             continue
         tl = (v.get("titolo") or "").lower()
         visti = [s for s in STRUMENTI if s.lower() in tl]
@@ -1463,7 +1499,7 @@ def _f3_fisica_strumenti(voci):
     return fuori
 
 
-# ### ⛔ **LA REGOLA DELL-INTESTAZIONE** *(punto `5` del 2026-10-09)*. `F4` segnalava `30`
+# ### ⛔ **LA REGOLA DELL-INTESTAZIONE** *(punto `5` del 2026-10-09)*. `PI-ETICHETTA-DEFINITA` segnalava `30`
 # ### etichette, e ### **circa meta- erano intestazioni in cui l-ID sta DENTRO LA PROSA**:
 # ### *<<`### 1.2 ⚠ E LA LETTURA CHE DECIDE DAVVERO — dichiarata POST-HOC, non era fissata
 # ### prima`>>*. ### **`POST-HOC` non e- il soggetto di quell-intestazione: e- un aggettivo.**
@@ -1513,7 +1549,7 @@ def _intestazione_definisce(righe, k, idv):
 
 
 def _f4_etichette(etich):
-    """### `F4`: un-etichetta rimossa che ### **in un documento E- DEFINITA.**"""
+    """### `PI-ETICHETTA-DEFINITA`: un-etichetta rimossa che ### **in un documento E- DEFINITA.**"""
     fuori = []
     riga_t = "|"
     for e in etich:
@@ -1569,7 +1605,7 @@ _TRIPLA = re.compile(r"(FISICA|METODO|INFRASTRUTTURA|DOCUMENTAZIONE)\s*/\s*era\s
 
 
 def _f6_note(voci):
-    """### `F6`: una `nota_guardiano` che ### **nomina una lista del guardiano** e che
+    """### `PI-NOTA-CONTRADDICE-LISTA`: una `nota_guardiano` che ### **nomina una lista del guardiano** e che
     ### **contraddice** il dominio, l-era o lo stato della voce.
 
     ### ⛔ **NON SI LEGGE LA PROSA, e la prima stesura lo faceva:** cercava nella nota le
@@ -1585,7 +1621,7 @@ def _f6_note(voci):
     fuori = []
     for v in voci:
         nota = (v.get("meta") or {}).get("nota_guardiano") or ""
-        if not nota or _coperto(v, "F6"):
+        if not nota or _coperto(v, "PI-NOTA-CONTRADDICE-LISTA"):
             continue
         # ### ✔ **PRIMA LA TRIPLA DICHIARATA**, che vale ### **anche per una nota che si
         # ### dice <<correzione>>:** una correzione ### **dichiara cio- che la voce E-**, e
@@ -1638,17 +1674,17 @@ def segnali(voci, reg, verboso=True):
     n_note = sum(1 for v in voci
                  if re.search(r"list[ae]\s*[123]?\s*del guardiano",
                               (v.get("meta") or {}).get("nota_guardiano") or "", re.I))
-    tutti = [("F1", "GEMELLE: il titolo cita l-ID di un-altra, e dominio o era differiscono",
+    tutti = [("PI-GEMELLE", "GEMELLE: il titolo cita l-ID di un-altra, e dominio o era differiscono",
               _f1_gemelle(voci), len(voci)),
-             ("F2", "ERA 2 PULITA: una voce dell-era 2 che nomina simboli dell-era 1",
+             ("PI-SIMBOLI-ERA1", "ERA 2 PULITA: una voce dell-era 2 che nomina simboli dell-era 1",
               _f2_era2(voci), n_era2),
-             ("F3", "FISICA CHE PARLA DI STRUMENTI: il titolo di una voce FISICA",
+             ("PI-PAROLE-STRUMENTO", "FISICA CHE PARLA DI STRUMENTI: il titolo di una voce FISICA",
               _f3_fisica_strumenti(voci), n_fisica),
-             ("F4", "ETICHETTA CON DEFINIZIONE: un-etichetta che un documento DEFINISCE",
+             ("PI-ETICHETTA-DEFINITA", "ETICHETTA CON DEFINIZIONE: un-etichetta che un documento DEFINISCE",
               _f4_etichette(etich), len(etich)),
-             ("F6", "NOTE COERENTI: una nota che nomina una lista e la contraddice",
+             ("PI-NOTA-CONTRADDICE-LISTA", "NOTE COERENTI: una nota che nomina una lista e la contraddice",
               _f6_note(voci), n_note),
-             ("F8", "ERA 1 NEL TESTO: una voce ENTRAMBE che nomina un oggetto concreto",
+             ("PI-OGGETTI-ERA1", "ERA 1 NEL TESTO: una voce ENTRAMBE che nomina un oggetto concreto",
               _f8_era1(voci),
               sum(1 for v in voci if str(v["era"]) == "ENTRAMBE"
                   and v["stato"] != "CHIUSA"))]
@@ -1761,10 +1797,10 @@ def etichette_lotto(percorso):
     """### LA VIA DI SCRITTURA PER LE ETICHETTE RIMOSSE.
 
     ### ⚠ **Perche- serviva:** il punto `5` del 2026-10-09 deve ### **chiudere un
-    segnale di `F4` su un'etichetta** *(`GLOBALE-DIS`: la sua unica definizione dice
+    segnale di `PI-ETICHETTA-DEFINITA` su un'etichetta** *(`GLOBALE-DIS`: la sua unica definizione dice
     che l'ID ### **non esiste**)* e ### **lasciare una nota «da decidere da Luca»** su
     tre altre. ### ⛔ **Un'etichetta NON ha un `meta`**, perche- non e- una voce: la
-    sua eccezione e la sua nota stanno in ### **campi suoi**, e `F4` li legge.
+    sua eccezione e la sua nota stanno in ### **campi suoi**, e `PI-ETICHETTA-DEFINITA` li legge.
 
     ### ✔ **Resta LA STESSA VIA:** ogni modifica ### **una riga di storico**, col
     motivo, e ### **se un ID non e- fra le etichette il lotto non parte.**
@@ -1858,7 +1894,7 @@ def crea_lotto(voci, reg, percorso):
         storia.append({"quando": v["creata"]["data"], "id": idv, "motivo": motivo,
                        "commit": r.get("commit", ""), "commit_base": _head(),
                        "prima": None, "dopo": json.loads(json.dumps(v))})
-    # ### ⛔ **`F5` NON dipende dalle voci** -- guarda `storico.jsonl` sul disco contro
+    # ### ⛔ **`PI-STORICO-SENZA-COMMIT` NON dipende dalle voci** -- guarda `storico.jsonl` sul disco contro
     # ### `HEAD` -- quindi ### **si chiede PRIMA di scrivere**, non alla fine: alla fine
     # ### sarebbe ### **un allarme su un file GIA- SCRITTO.**
     err = _f5_storico(voci) + valida(voci, reg, verboso=False, derivati=False)

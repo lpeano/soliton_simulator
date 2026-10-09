@@ -11251,3 +11251,38 @@ In `5f04d46`. ### **`54.687` righe aggiunte**, di cui ### **`40.000` in tre copi
 ### ⭐ **E LA REGOLA CHE DECIDE E- DEL GUARDIANO:** *«NON TRACCIATO deve voler dire DIMENTICATO: i file rigenerabili vanno nel `.gitignore`, e un file citato da un documento ma non tracciato e- un-omissione»*. ### ⛔ **Un-eccezione dichiarata a OGNI commit e- il modo in cui un file dimenticato RESTA dimenticato** — e infatti ### **due strumenti veri si nascondevano dentro la stessa eccezione, descritti come <<copie>>**, e nessuno l-avrebbe visto finche- l-eccezione li copriva.
 
 ### ⚠ **L-ERRORE OPERATIVO, e la regola che ne traggo:** ho scritto `cm.aggiungi(["csv", "doc", …])` — ### **una CARTELLA**, non i file. ### **Non si passa una cartella a `git add`:** si passano ### **i file che si e- deciso di committare.** *(E il par.5 dice che la lista `FILE CAMBIATI` ### **si GENERA** dall-indice: la genera, infatti — ### **ma l-indice l-avevo riempito io, male.**)*
+
+## PUNTO `12(b)` — ### **`F1`…`F12` RINOMINATI, e una REGRESSIONE che mi sono fatto da solo** *(2026-10-09)*
+
+### ⛔ **IL FATTO:** `F1`, `F2`, `F3` sono voci ### **SEGNAPOSTO** dell-indice e `F4`, `F5` sono ### **DIFETTI.** Io ho chiamato cosi- i dodici presidi del validatore ### **dal primo giorno**, e ### **ogni messaggio di commit ha dovuto dichiarare che <<`F1` nel senso dei PRESIDI non e- un ID dell-indice>>.** ### ⭐ **Una dichiarazione ripetuta venti volte e- il sintomo di un nome sbagliato**, e il guardiano lo ha visto.
+
+| il nome vecchio | il nome nuovo | che cosa impedisce |
+|---|---|---|
+| `F1` | **`PI-GEMELLE`** | due voci col titolo che cita l-altra, e dominio o era differenti *(### **segnala**)* |
+| `F2` | **`PI-SIMBOLI-ERA1`** | una voce dell-era `2` che nomina un simbolo dell-era `1` |
+| `F3` | **`PI-PAROLE-STRUMENTO`** | una voce `FISICA` il cui titolo dice le parole dello strumento |
+| `F4` | **`PI-ETICHETTA-DEFINITA`** | un-etichetta rimossa che un documento vivo DEFINISCE ancora |
+| `F5` | **`PI-STORICO-SENZA-COMMIT`** | una riga di storico gia- committata e senza `commit` *(### **ERRORE**)* |
+| `F6` | **`PI-NOTA-CONTRADDICE-LISTA`** | una nota che nomina una lista e ne contraddice i campi |
+| `F7` | **`PI-FISICA-ERA1-NON-SOSPESA`** | fisica dell-era `1` non chiusa e non sospesa *(### **ERRORE**)* |
+| `F8` | **`PI-OGGETTI-ERA1`** | una voce `ENTRAMBE` che nomina un oggetto concreto dell-era `1` |
+| `F9` | **`PI-ERA-STATO`** | era e stato che si contraddicono *(### **ERRORE**)* |
+| `F10` | **`PI-CRITERIO-METODO`** | un `CRITERIO` fuori dal dominio `METODO` *(### **ERRORE**)* |
+| `F11` | **`PI-REPLAY`** | l-indice non coincide col replay del suo storico *(### **ERRORE**)* |
+| `F12` | **`PI-CHIUSURA-ORFANA`** | una `chiusura` piena su una voce non chiusa *(### **ERRORE**)* |
+
+### ⭐ **E L-ALIAS E- NAMESPACED, non nudo:** `VALIDATORE:F1`, perche- ### **`F1` E- GIA- PRESO** da una voce vera e un alias nudo ### **collidirebbe.** Il par.`9` lo prevede: *«le etichette LOCALI vivono col namespace»*.
+
+### ⚠ **E IL PERIMETRO DELLA SOSTITUZIONE L-HO DICHIARATO PRIMA DI FARLA:** ### **l-implementazione VIVA** *(`csv/indice.py`)*, il ### **suo collaudo VIVO** e il ### **documento di REGOLA** *(`doc/REGOLE/par9.md`)*. ### ⛔ **NON i generatori di referto ne- gli strumenti one-shot delle fasi dell-indice:** i loro output sono ### **REPERTI**, e i reperti ### **non si riscrivono** — il nome vecchio resta la- e ### **si risolve con l-alias.**
+
+### ⛔ **E MI SONO FATTO UNA REGRESSIONE, che vale la pena raccontare per intero**
+
+Dopo la sostituzione i segnali sono passati da ### **`19` a `53`.** ### ⭐ **E NON L-HO SPIEGATA INDOVINANDO: ho guardato CHI SCATTA** *(`P1`)* — e la lista nominava ### **voci VECCHIE** *(`C5-INVARIANTI`, `D05`, `D06`…)*, non le ventuno nuove. ### **Questo diceva che la causa NON erano le voci nuove.**
+
+### **La causa:** `_coperto(v, quale)` cerca un-eccezione che ### **COMINCI con `quale + ":"`**, e i dati di `meta.eccezione_presidio` portano il prefisso ### **`F<n>:`**. ### ⛔ **Avevo rinominato la chiave NEL CODICE e NON NEI DATI, quindi TUTTE le eccezioni dichiarate avevano smesso di combaciare** — ### **non era rumore nuovo: erano `32` eccezioni che nessuno leggeva piu-.**
+
+### ✅ **La cura, nei dati e non in un doppio riconoscimento:** `32` prefissi riscritti con la via unica *(### **il testo citato non cambia di un carattere**)*, cosi- ### **resta UN SOLO nome in uso.** E la ### **forma** di un-eccezione ### **si costruisce ora dalla tabella `PRESIDI`** invece di essere scritta a mano *(era `^(F[1-6]):`)*: ### **scriverla a mano sarebbe un secondo posto dove i nomi possono divergere — e divergerebbero, perche- sono appena cambiati.**
+
+### ⚠ **E DUE SEGNALI RESTAVANO, ed erano MIEI:** `P-E2` nomina un flag ### **di git** *(`--exit-code`)*, e ### **la voce di `PI-SIMBOLI-ERA1` ELENCA i simboli che cerca** — un presidio che definisce se stesso ### **nomina cio- che cerca.** Chiusi con l-`eccezione_presidio` che ### **cita il testo alla lettera**, che e- la via prevista. ### **Segnali: `18`, come prima del rinominamento.**
+
+**I numeri:** `79` + `78` + `26` + `1` sostituzioni nei quattro file vivi · `12` voci nuove con alias · `32` prefissi di eccezione riscritti · ### **`P-C1`: `22` presidi dichiarati** *(da `10`)* · ### **`P-M1`: `109` metodi e `109` righe** *(da `97`)* · collaudi ### **`67`/`67`, `8`/`8`, `8`/`8`, `6`/`6`.**

@@ -164,7 +164,7 @@ METODI = {
                 "d-uscita. Vale per ogni lavoro, era 2 compresa",
                 "`.claude/settings`", "PORTATO"),
     "H-VALIDATORE": ("un indice mal formato o con una voce persa: gira nel `pre-commit` e "
-                     "ha fermato questo mandato (`F5`, riga di storico senza `commit`)",
+                     "ha fermato questo mandato (`PI-STORICO-SENZA-COMMIT`, riga di storico senza `commit`)",
                      "`.githooks/pre-commit` + `csv/indice.py valida`", "PORTATO"),
     "H-ETC-1": ("presidio PROPOSTO e NON CABLATO nell-era 1: non ha un corrispondente "
                 "nell-era 2, dove non esiste `calcola_psi`",
@@ -405,6 +405,70 @@ METODI["P-E8"] = (
     "gira DOPO il push. ### E- UNA RETE CHE SEGNALA (`A9`), e qui avevo scritto il "
     "contrario. ### E non e- mai stata osservata girare",
     "`.github/workflows/era2.yml`; ### SEGNALA, non impedisce", "PORTATO")
+
+
+# ### ⚠ **E I DODICI PRESIDI DEL VALIDATORE DELL-INDICE.** Si chiamavano
+# ### `F1`…`F12`, e quei nomi ### **COLLIDEVANO con ID veri** -- il punto `12(b)`
+# ### li ha rinominati, e il nome vecchio vive come ### **alias NAMESPACED**
+# ### *(`VALIDATORE:F1`)*. ### **Sono dell-era `1` nell-origine e valgono per
+# ### ENTRAMBE**, perche- l-indice e- uno.
+METODI['PI-GEMELLE'] = (
+    'due voci col titolo che cita l-altra e dominio o era differenti. ### SEGNALA e non dec'
+    'ide, perche- <<come lo stesso fatto>> NON E- RILEVABILE da un programma -- e il guardi'
+    'ano mi ha corretto: lo STATO e- uscito dal controllo',
+    '`csv/indice.py::_f1_gemelle`, ### SEGNALA', "PORTATO")
+METODI['PI-SIMBOLI-ERA1'] = (
+    'una voce dell-era 2 che nomina un simbolo dell-era 1. ### E HA SCATTATO SULLA SUA PROP'
+    'RIA VOCE, che elenca i simboli che cerca: chiuso con l-eccezione che cita il testo',
+    '`csv/indice.py::_f2_era2`, ### SEGNALA', "PORTATO")
+METODI['PI-PAROLE-STRUMENTO'] = (
+    'una voce FISICA il cui titolo dice le parole dello strumento (`A17`). ### LEGGE IL TIT'
+    'OLO, e per questo SEGNALA -- ed e- uno dei sei difetti che il principio del mandato no'
+    'mina',
+    '`csv/indice.py::_f3_fisica_strumenti`, ### SEGNALA', "PORTATO")
+METODI['PI-ETICHETTA-DEFINITA'] = (
+    'un-etichetta rimossa che un documento vivo DEFINISCE ancora. ### E le viste GENERATE n'
+    'on contano: una riga di `doc/INDICE.md` ELENCA un ID, non lo DEFINISCE',
+    '`csv/indice.py::_f4_etichette`, ### SEGNALA', "PORTATO")
+METODI['PI-STORICO-SENZA-COMMIT'] = (
+    'una riga di storico GIA- COMMITTATA e senza `commit`. ### E- L-UNICO DEI DODICI CHE ER'
+    'A UN ERRORE DAL PRIMO GIORNO, e ha fermato questo mandato CINQUE volte: non e- una ten'
+    'da',
+    '`csv/indice.py::_f5_storico`, ### ERRORE (rifiuta)', "PORTATO")
+METODI['PI-NOTA-CONTRADDICE-LISTA'] = (
+    'una nota che nomina una lista del guardiano e ne contraddice dominio, era o stato. ###'
+    ' LA PRIMA STESURA LEGGEVA LA PROSA: 11 dei 13 segnali erano UNA SOLA FRASE, e l-ha tro'
+    'vato il presidio stesso guardando la sua uscita',
+    '`csv/indice.py::_f6_note`, ### SEGNALA', "PORTATO")
+METODI['PI-FISICA-ERA1-NON-SOSPESA'] = (
+    'una voce FISICA dell-era 1 con uno stato che non e- SOSPESA ne- CHIUSA. ### NASCE DA U'
+    'N ERRORE MIO: ho messo nel campo `stato` l-<<APERTO>> di un documento, che e- lo stato'
+    ' DELL-ERA 1 e va in `stato_era_1`',
+    '`csv/indice.py::_f7_stato`, ### ERRORE (rifiuta)', "PORTATO")
+METODI['PI-OGGETTI-ERA1'] = (
+    'una voce ENTRAMBE che nomina un oggetto concreto dell-era 1. ### E IL GUARDIANO MI HA '
+    'CORRETTO: il marcatore <<nomina un `.py`>> e- STATO TOLTO, perche- 6 dei 20 segnali er'
+    'ano suoi -- nominare un file non e- parlare del vecchio codice',
+    '`csv/indice.py::_f8_era1`, ### SEGNALA', "PORTATO")
+METODI['PI-ERA-STATO'] = (
+    'era ENTRAMBE o era 2 con uno stato impossibile. ### L-era 2 ammette solo AGENDA, perch'
+    'e- NON E- COMINCIATA. Acceso NELLO STESSO COMMIT delle correzioni che lo rendono vero,'
+    ' e l-ordine giusto me l-ha corretto Luca',
+    '`csv/indice.py::_f9_era_stato`, ### ERRORE (rifiuta)', "PORTATO")
+METODI['PI-CRITERIO-METODO'] = (
+    'una voce classe CRITERIO in un dominio che non e- METODO: un criterio e- un MODO DI VE'
+    'RIFICARE, e dirlo FISICA confonderebbe cio- che si misura con come si misura (`A17`)',
+    '`csv/indice.py::_f10_criterio_metodo`, ### ERRORE (rifiuta)', "PORTATO")
+METODI['PI-REPLAY'] = (
+    'l-indice e- il REPLAY del suo storico. ### E- IL PRESIDIO CHE RENDE VERA la frase <<si'
+    ' scrive SOLO con la via unica>>. ### E HA UN LIMITE MISURATO: blocca `aggiorna` singol'
+    'o, perche- quello valida CON i derivati PRIMA di appendere la sua riga -- la via che f'
+    'unziona e- `aggiorna-lotto`',
+    '`csv/indice.py::_f11_replay`, ### ERRORE (rifiuta)', "PORTATO")
+METODI['PI-CHIUSURA-ORFANA'] = (
+    'una `chiusura` piena su una voce che non e- CHIUSA: una chiusura che nessuno ha applic'
+    'ato',
+    '`csv/indice.py::_f12_chiusura_orfana`, ### ERRORE (rifiuta)', "PORTATO")
 
 # ### I TRE che la QUARTA versione del mandato aggiunge al punto `0`.
 METODI["CONFIG-1"] = (
