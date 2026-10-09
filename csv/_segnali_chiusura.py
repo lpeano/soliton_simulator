@@ -304,9 +304,98 @@ def punto3():
         print("      %-30s %s" % (x["id"], (e[0] if e else "NOTA: " + F2_NOTA)[:88]))
 
 
+# ==========================================================================
+#   PUNTO 4  --  `F3`: cosa parla della LEGGE e cosa dello STRUMENTO
+# ==========================================================================
+# ### ⛔ **IL CRITERIO DEL MANDATO:** *<<se parla di un difetto della ### **LEGGE** resta
+# ### `FISICA` con eccezione; se parla ### **del testo o dello strumento**, sposta>>*.
+# ### ⭐ **E leggendo i sei viene fuori una regolarita-:** in `4` di loro ### **il commento o
+# ### il docstring e- IL CONTRASTO, non il difetto** -- la voce dice *<<il codice fa X e il
+# ### commento dice Y>>*, e ### **il difetto e- X.** Un titolo che nomina uno strumento non
+# ### parla per questo di strumenti.
+F3_RESTA = {
+    "POTENZE-1": ("SIGILLO",
+     "e- una CURA CHIUSA COL SIGILLO: il titolo nomina il sigillo  "
+     "perche- il sigillo e- cio- che l-ha chiusa"),
+    "RAMPA-1": ("SIGILLO",
+     "idem: cura chiusa col sigillo"),
+    "Z124": ("SIGILLO",
+     "idem: cura chiusa col sigillo"),
+    "G3": ("SIGILLO",
+     "idem: cura chiusa col sigillo"),
+    "A2-DXD": ("LEGGE",
+     "il <<criterio>> del titolo e- IL CRITERIO DI RIAPERTURA DI  "
+     "QUESTA VOCE, non il suo argomento: cio- di cui parla e- |dx|/d  "
+     "del freno-legge, da RIMISURARE nel regime nuovo. E- una  "
+     "grandezza della legge"),
+    "D02": ("LEGGE",
+     "il docstring e- IL CONTRASTO, non il difetto: il difetto e-  "
+     "che pozzo_grafo calcola L da self.pos, cioe- DAL DISEGNO, dove  "
+     "servirebbe la distanza reale. E- la gravita- che legge il  "
+     "disegno, ed e- fisica"),
+    "S08": ("LEGGE",
+     "la domanda aperta e- <<se phi non e- l-azimut del Bloch, CHE  "
+     "COS-E-?>>, e il docstring e- nominato perche- Z121 lo ha  "
+     "REFUTATO. L-oggetto e- phi, non il docstring"),
+    "SCHERMATURA-LEGGE-REVISIONE": ("LEGGE",
+     "il commento e- UNO DEI TRE PUNTI, e gli altri due sono della  "
+     "legge: una rho_c GLOBALE (viola A2) e un numero NON DERIVATO  "
+     "(viola A1). Due su tre sono fisica"),
+    "SCHWINGER-UN-NODO": ("LEGGE",
+     "il commento e- IL CONTRASTO: il fatto misurato e- che lo  "
+     "Schwinger crea UN SOLO nodo e LA CARICA CAMBIA di +-1. Una  "
+     "conservazione violata e- fisica"),
+}
+F3_SPOSTA = {
+    "W5": ("METODO",
+     "il testo e- INTERAMENTE UN PROTOCOLLO DI VERIFICA --  "
+     "<<CRITERIO di POZZO-D: A/B nel driver, scena (ii)(a), 4 semi,  "
+     "120 passi, con la barra fra semi>> -- e NON dice niente su che  "
+     "cosa la legge faccia. E- il COME SI GIUDICA, quindi METODO"),
+}
+
+
+def punto4():
+    import indice as IX
+    voci = carica()
+    per = {v["id"]: v for v in voci}
+    segn = {i for i, _m in IX._f3_fisica_strumenti(voci)}
+    assert segn == set(F3_RESTA) | set(F3_SPOSTA), (
+        "i segnali di F3 NON sono i 10 che ho letto: %s" % sorted(segn))
+    lotto = []
+    for i in sorted(F3_RESTA):
+        tipo, perche = F3_RESTA[i]
+        v = per[i]
+        lotto.append({"id": i, "quando": DATA, "campi": {},
+                      "meta": {"eccezione_presidio":
+                               ["F3: resta `FISICA` -- %s. Il testo dice <<%s>>"
+                                % (perche, pezzo(v, 56))]},
+                      "motivo": ("(4) SEGNALE CHIUSO CON ECCEZIONE, e la voce resta "
+                                 "`FISICA`: %s. Il testo dice <<%s>>"
+                                 % (perche, pezzo(v, 70)))})
+    for i in sorted(F3_SPOSTA):
+        dom, perche = F3_SPOSTA[i]
+        v = per[i]
+        lotto.append({"id": i, "quando": DATA,
+                      "campi": {"dominio": dom},
+                      "meta": {"nota_guardiano":
+                               "punto 4: spostata da FISICA a %s -- %s" % (dom, perche)},
+                      "motivo": ("(4) SPOSTATA da `FISICA` a `%s`: %s. Il testo dice <<%s>>"
+                                 % (dom, perche, pezzo(v, 70)))})
+    scrivi("v3_p4.jsonl", lotto)
+    n_sig = sum(1 for k in F3_RESTA if F3_RESTA[k][0] == "SIGILLO")
+    print("  (4) %d restano `FISICA` con eccezione (%d cure sigillate + %d letti), %d "
+          "spostate" % (len(F3_RESTA), n_sig, len(F3_RESTA) - n_sig, len(F3_SPOSTA)))
+    for i in sorted(F3_RESTA):
+        print("      %-30s %-8s %s" % (i, F3_RESTA[i][0], F3_RESTA[i][1][:74]))
+    for i in sorted(F3_SPOSTA):
+        print("      %-30s -> %-6s %s" % (i, F3_SPOSTA[i][0], F3_SPOSTA[i][1][:70]))
+
+
 def main(argv):
     assert argv and argv[0] in ("1", "2", "2b", "3", "4"), __doc__
-    {"1": punto1, "2": punto2, "2b": punto2_lotto, "3": punto3}[argv[0]]()
+    {"1": punto1, "2": punto2, "2b": punto2_lotto, "3": punto3,
+     "4": punto4}[argv[0]]()
     return 0
 
 

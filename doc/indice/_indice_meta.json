@@ -2147,7 +2147,6 @@
    "U1",
    "U2",
    "VUOTO-LOCALE-DETERMINISTICO",
-   "W5",
    "X1",
    "X2",
    "X3",
@@ -2513,6 +2512,7 @@
    "VELENO-AUTORINFRESCO",
    "VELENO-DOMINI",
    "VELENO-ORIENTATO",
+   "W5",
    "Z100",
    "Z11",
    "Z125",
@@ -4334,6 +4334,33 @@
   ],
   "F2: la voce e- di PROGRAMMA e nomina l-era 1 perche- dice CHE COSA SOSTITUISCE o PRESCRIVE: <<un isteresi sui flip di perc_geom e perc_chi: COMPLEMENTO di MEM-VERSO, non alternativa CANDIDATA REGISTRATA il 2026>>": [
    "M-ISTERESI"
+  ],
+  "F3: resta `FISICA` -- e- una CURA CHIUSA COL SIGILLO: il titolo nomina il sigillo  perche- il sigillo e- cio- che l-ha chiusa. Il testo dice <<CHIUSA il 2026-09-26 con la CURA A (rhos/W^2), sigillo 6>>": [
+   "POTENZE-1"
+  ],
+  "F3: resta `FISICA` -- idem: cura chiusa col sigillo. Il testo dice <<CHIUSA il 2026-09-25, strada (3) (decisione di Luca): si>>": [
+   "RAMPA-1"
+  ],
+  "F3: resta `FISICA` -- idem: cura chiusa col sigillo. Il testo dice <<Z124 CHIUSA PER MISURA ⏳[archivi delle cure · SIGILLO] |>>": [
+   "Z124"
+  ],
+  "F3: resta `FISICA` -- idem: cura chiusa col sigillo. Il testo dice <<§3 PROVA DI SPEGNIMENTO: la GRAVITA' BIFASE | GLOBALE-DI>>": [
+   "G3"
+  ],
+  "F3: resta `FISICA` -- il <<criterio>> del titolo e- IL CRITERIO DI RIAPERTURA DI  QUESTA VOCE, non il suo argomento: cio- di cui parla e- |dx|/d  del freno-legge, da RIMISURARE nel regime nuovo. E- una  grandezza della legge. Il testo dice <<RIMISURARE NEL REGIME NUOVO: \\|dx\\|/d del freno-legge (c>>": [
+   "A2-DXD"
+  ],
+  "F3: resta `FISICA` -- il commento e- IL CONTRASTO: il fatto misurato e- che lo  Schwinger crea UN SOLO nodo e LA CARICA CAMBIA di +-1. Una  conservazione violata e- fisica. Il testo dice <<lo Schwinger crea UN solo nodo e il commento dice che la>>": [
+   "SCHWINGER-UN-NODO"
+  ],
+  "F3: resta `FISICA` -- il commento e- UNO DEI TRE PUNTI, e gli altri due sono della  legge: una rho_c GLOBALE (viola A2) e un numero NON DERIVATO  (viola A1). Due su tre sono fisica. Il testo dice <<lambda_nodi: una rho_c GLOBALE, un commento che descrive>>": [
+   "SCHERMATURA-LEGGE-REVISIONE"
+  ],
+  "F3: resta `FISICA` -- il docstring e- IL CONTRASTO, non il difetto: il difetto e-  che pozzo_grafo calcola L da self.pos, cioe- DAL DISEGNO, dove  servirebbe la distanza reale. E- la gravita- che legge il  disegno, ed e- fisica. Il testo dice <<pozzografo calcola L da self.pos — IL DISEGNO — mentre i>>": [
+   "D02"
+  ],
+  "F3: resta `FISICA` -- la domanda aperta e- <<se phi non e- l-azimut del Bloch, CHE  COS-E-?>>, e il docstring e- nominato perche- Z121 lo ha  REFUTATO. L-oggetto e- phi, non il docstring. Il testo dice <<Se φ non e' l'azimut del Bloch, CHE COS'E'? | Z121 ha re>>": [
+   "S08"
   ]
  },
  "meta:famiglia_era1": {

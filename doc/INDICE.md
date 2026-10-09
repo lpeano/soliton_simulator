@@ -7,13 +7,13 @@
 | `DA_CLASSIFICARE` | `DA_CLASSIFICARE` | 181 |
 | `DOCUMENTAZIONE` | `1` | 21 |
 | `DOCUMENTAZIONE` | `ENTRAMBE` | 6 |
-| `FISICA` | `1` | 339 |
+| `FISICA` | `1` | 338 |
 | `FISICA` | `2` | 25 |
 | `FISICA` | `DA_CLASSIFICARE` | 1 |
 | `FISICA` | `ENTRAMBE` | 16 |
 | `INFRASTRUTTURA` | `1` | 16 |
 | `INFRASTRUTTURA` | `ENTRAMBE` | 31 |
-| `METODO` | `1` | 75 |
+| `METODO` | `1` | 76 |
 | `METODO` | `ENTRAMBE` | 119 |
 
 | id | classe | dominio | era | stato | blocca | titolo |
@@ -686,7 +686,7 @@
 | `W2` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 4 volte, MAI definito in un registro) [W2] |
 | `W3` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 3 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
 | `W4` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 7 volte, MAI definito in un registro) [W4] |
-| `W5` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | CRITERIO di POZZO-D: A/B nel driver, scena (ii)(a), 4 semi, 120 passi, con la ba |
+| `W5` | DIFETTO | METODO | 1 | ### **SOSPESA** |  | CRITERIO di POZZO-D: A/B nel driver, scena (ii)(a), 4 semi, 120 passi, con la ba |
 | `X1` | FRONTE | FISICA | 1 | ### **CHIUSA** |  | X1 VALE SEMPRE ⏳[EPOCA 1 · MISURA] / TEMPOPROPRIOORIENTATO: il principio e' gius |
 | `X2` | FRONTE | FISICA | 1 | ### **SOSPESA** |  | X2 🟨VALE PER QUELLA SCENA ⏳[EPOCA 1 · MISURA] / ZETALOC: «smorzamento locale» ch |
 | `X3` | FRONTE | FISICA | 1 | ### **CHIUSA** |  | X3 VALE SEMPRE ⏳[EPOCA 1 · CODICE] / AUDIT DI LETTURA DELLE LEGGI — registrato ( |

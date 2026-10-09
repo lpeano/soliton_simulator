@@ -136,6 +136,12 @@ def main():
     # ### IL BLOCCO G2: <<Ldisegno/d per arco>> e- UNA MISURA SULL-ERA 1 -- omissione del
     # ### guardiano dal blocco A, dove le altre 14 voci della lista 2 sono passate all-era 1.
     CORRETTE_V3["G1"] = ("FISICA", "1", "SOSPESA")                   # (G2)
+    # ### IL PUNTO 4 DEL 2026-10-09: `W5` esce da `FISICA` perche- il suo testo e-
+    # ### ### **interamente un protocollo di verifica** (<<CRITERIO di POZZO-D: A/B nel
+    # ### driver, scena (ii)(a), 4 semi, 120 passi>>) e ### **non dice niente su che cosa la
+    # ### legge faccia.** ### ⚠ **Questo SI- e- un ID, non una regola:** l-ho deciso
+    # ### ### **leggendo**, e un ID deciso leggendo va scritto come ID.
+    CORRETTE_V3["W5"] = ("METODO", "1", "SOSPESA")                   # (punto 4)
     for _i in ("CENS-A6", "CENS-A7", "SMP-APRI-COMMENTO", "MITOSI-2LAM-ACCESO"):
         CORRETTE_V3[_i] = ("DOCUMENTAZIONE", "1", "SOSPESA")        # (B) i FUORI POSTO
 
