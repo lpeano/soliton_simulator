@@ -2236,3 +2236,16 @@ etichette rimosse, con ### **`0` persi, `0` doppi, `0` conflitti**.
 | **cosa misura** | i conteggi **prima** *(da `git show 6e5e75b:doc/indice/voci.jsonl`)* e **dopo** *(dal disco)*, e scrive il referto **voce per voce** dai lotti committati. Fa girare **lui** `_controlli_indice_v2.py` e `indice.py collaudo` e ne riporta le righe |
 | **l'uscita** | `doc/REFERTO_indice_v3_correzione.md` *(`305` righe)* |
 | ### ⚠ **la trappola, e l'ho presa** | contando le righe con `PASSA` prendeva anche **la riga di RIEPILOGO**, e i controlli diventavano **`7` su `7`**. Adesso tiene solo le righe che aprono con un id `C<n>` |
+
+---
+
+### `csv/_fase3_residui.py` — **I TRE RESIDUI DELLA VERIFICA** *(2026-10-09)*
+
+| | |
+|---|---|
+| **file** | `csv/_fase3_residui.py` |
+| **BLOB** *(sha1 dei byte grezzi)* | `ca2f7a64` |
+| **COMANDO** | `python csv/_fase3_residui.py`, poi `python csv/indice.py aggiorna-lotto doc/indice/_lotti/v3_G.jsonl` |
+| **cosa misura** | niente: **applica** i tre residui. `G1` le `5` voci che **verificano un flag dell'era `1`** → `METODO/1/SOSPESA`; `G2` la voce `G1` *(«`Ldisegno/d` per arco»)* → `FISICA/1/SOSPESA`; `G3` le `9` **note superate** |
+| **l'uscita** | `doc/indice/_lotti/v3_G.jsonl` *(`10` voci)* |
+| ### ⚠ **la coda che NON si butta** | `CENS-A6` portava *«candidata SUPERATA dalla decisione sulla sincronizzazione»*: la nota nuova **la conserva**, perché **sostituire una nota non è cancellarne il contenuto** |

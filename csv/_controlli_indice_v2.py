@@ -126,8 +126,16 @@ def main():
     CORRETTE_V3["RISCRITTURA-GO"] = ("INFRASTRUTTURA", "ENTRAMBE", "APERTA")  # (A)
     CORRETTE_V3["AUDIT-CURE"] = ("METODO", "ENTRAMBE", "APERTA")              # (A)
     CORRETTE_V3["LOSCHMIDT-ECO"] = ("METODO", "ENTRAMBE", "APERTA")           # (A)
+    # ### IL BLOCCO G1 CORREGGE LA CORREZIONE: queste cinque VERIFICANO UN FLAG DELL-ERA 1,
+    # ### quindi vanno a METODO/era 1/SOSPESA come TS-* e TW-*. Nel blocco B le avevo messe
+    # ### a METODO/ENTRAMBE/APERTA perche- il prompt diceva <<altrimenti APERTA>>, E IO
+    # ### L-HO APPLICATO ALLA LETTERA: l-errore era nel prompt del guardiano, ma
+    # ### l-applicazione acritica e- mia.
     for _i in ("H-ETC-1", "REGISTRO_FISICA:A5", "REGISTRO_FISICA:U2-6", "COMPONENTI:S3"):
-        CORRETTE_V3[_i] = ("METODO", "ENTRAMBE", "APERTA")          # (B) le GEMELLE
+        CORRETTE_V3[_i] = ("METODO", "1", "SOSPESA")                 # (G1)
+    # ### IL BLOCCO G2: <<Ldisegno/d per arco>> e- UNA MISURA SULL-ERA 1 -- omissione del
+    # ### guardiano dal blocco A, dove le altre 14 voci della lista 2 sono passate all-era 1.
+    CORRETTE_V3["G1"] = ("FISICA", "1", "SOSPESA")                   # (G2)
     for _i in ("CENS-A6", "CENS-A7", "SMP-APRI-COMMENTO", "MITOSI-2LAM-ACCESO"):
         CORRETTE_V3[_i] = ("DOCUMENTAZIONE", "1", "SOSPESA")        # (B) i FUORI POSTO
 

@@ -7,14 +7,14 @@
 | `DA_CLASSIFICARE` | `DA_CLASSIFICARE` | 181 |
 | `DOCUMENTAZIONE` | `1` | 21 |
 | `DOCUMENTAZIONE` | `ENTRAMBE` | 6 |
-| `FISICA` | `1` | 396 |
-| `FISICA` | `2` | 26 |
+| `FISICA` | `1` | 397 |
+| `FISICA` | `2` | 25 |
 | `FISICA` | `DA_CLASSIFICARE` | 1 |
 | `FISICA` | `ENTRAMBE` | 16 |
 | `INFRASTRUTTURA` | `1` | 16 |
 | `INFRASTRUTTURA` | `ENTRAMBE` | 31 |
-| `METODO` | `1` | 12 |
-| `METODO` | `ENTRAMBE` | 124 |
+| `METODO` | `1` | 17 |
+| `METODO` | `ENTRAMBE` | 119 |
 
 | id | classe | dominio | era | stato | blocca | titolo |
 |---|---|---|---|---|---|---|
@@ -169,8 +169,8 @@
 | `COMPONENTI:D1` | CRITERIO | FISICA | 1 | ### **CHIUSA** |  | csnodoprev esteso alla mitosi — il figlio eredita cs dal padre, come le altre se |
 | `COMPONENTI:D2` | CRITERIO | FISICA | 1 | ### **CHIUSA** |  | psispinprec esteso alla mitosi — settima voce della stessa convenzione / guardia |
 | `COMPONENTI:S1` | CRITERIO | FISICA | 1 | ### **SOSPESA** |  | FAIL ATTESO — vs blob 2277e9a0, di quattro cambiamenti fa / nodi 3164 contro 292 |
-| `COMPONENTI:S2` | CRITERIO | METODO | ENTRAMBE | ### **APERTA** |  | riduzione al limite sul blob ATTUALE: ON (cs=CSM) vs OFF byte-identico / 0.000e+ |
-| `COMPONENTI:S3` | CRITERIO | METODO | ENTRAMBE | ### **APERTA** |  | S3.0 / IL CONTROLLO POSITIVO: il test VEDE l'effetto / 39/40 nodi con \/f(1)−f(0 |
+| `COMPONENTI:S2` | CRITERIO | METODO | 1 | ### **SOSPESA** |  | riduzione al limite sul blob ATTUALE: ON (cs=CSM) vs OFF byte-identico / 0.000e+ |
+| `COMPONENTI:S3` | CRITERIO | METODO | 1 | ### **SOSPESA** |  | S3.0 / IL CONTROLLO POSITIVO: il test VEDE l'effetto / 39/40 nodi con \/f(1)−f(0 |
 | `COMPONENTI:S3b` | CRITERIO | FISICA | 1 | ### **SOSPESA** |  | l'orologio rallenta dove cs è basso / 0.0100 volte a cs = 0.1·CSM |
 | `COMPONENTI:S3c` | CRITERIO | FISICA | 1 | ### **SOSPESA** |  | a cs = CSM il fattore è 1 esatto / 1.000000000000000 |
 | `COMPONENTI:Y0-Y10` | CRITERIO | FISICA | 1 | ### **CHIUSA** |  | Y10, 11/11 PASS. |
@@ -262,7 +262,7 @@
 | `FRENO-LEGGE` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 5 volte, MAI definito in un registro) [FRENO-LEGGE] |
 | `FUGA-MULTIRIGA` | DIFETTO | INFRASTRUTTURA | ENTRAMBE | ### **APERTA** |  | la via d'uscita di H-REG-R e H-P1-bis e' una regex SENZA re.S: una dichiarazione |
 | `G0` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 2 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
-| `G1` | CURA | FISICA | 2 | ### **AGENDA** |  | §1 QUANTO CONTA IL DISEGNO — Ldisegno/d per arco, per regione, nel tempo, e la c |
+| `G1` | CURA | FISICA | 1 | ### **SOSPESA** |  | §1 QUANTO CONTA IL DISEGNO — Ldisegno/d per arco, per regione, nel tempo, e la c |
 | `G2` | CURA | FISICA | 1 | ### **SOSPESA** |  | §2 DOVE SPINGE LA GRAVITA' / GLOBALE-DISEGNO §2 / FATTO. Il saldo vive sul CONFI |
 | `G3` | CURA | FISICA | 1 | ### **SOSPESA** |  | §3 PROVA DI SPEGNIMENTO: la GRAVITA' BIFASE / GLOBALE-DISEGNO §3 / FATTA. sigill |
 | `G4` | CURA | FISICA | 1 | ### **SOSPESA** |  | §4 PROVA DI SPEGNIMENTO: la MEMORIA DEL MOTO — flag MEMMOTO / GLOBALE-DISEGNO §4 |
@@ -277,7 +277,7 @@
 | `GEOMETRIA-DELLA-CRESCITA` | FRONTE | FISICA | 2 | ### **AGENDA** |  | SPECULATIVA: lo spazio delle fasi CRESCE, e una forza nuova come OSTRUZIONE fra  |
 | `GRAVITA-POTENZIALE` | FRONTE | FISICA | 2 | ### **AGENDA** |  | due potenziali nel codice e nessun Poisson risolto: Poisson e un VINCOLO DI SCAL |
 | `GUSCIO-ANTIFASE-EMERGENTE` | MISURA | FISICA | 1 | ### **SOSPESA** |  | il guscio in antifase si forma DA SOLO e scherma? Oggi emergente e imposta sono  |
-| `H-ETC-1` | PRESIDIO | METODO | ENTRAMBE | ### **APERTA** |  | PRESIDIO PROPOSTO E NON CABLATO: zero calcola_psi senza w dentro passo_pieno |
+| `H-ETC-1` | PRESIDIO | METODO | 1 | ### **SOSPESA** |  | PRESIDIO PROPOSTO E NON CABLATO: zero calcola_psi senza w dentro passo_pieno |
 | `H-ETC-2` | PRESIDIO | METODO | ENTRAMBE | ### **APERTA** |  | PRESIDIO PROPOSTO E NON CABLATO: permutare le cinque leggi deve dare lo STESSO s |
 | `H-FILE` | PRESIDIO | METODO | ENTRAMBE | ### **CHIUSA** |  | la lista FILE CAMBIATI nel messaggio e verificata da una macchina: il decimo hoo |
 | `H-INDICE` | PRESIDIO | METODO | ENTRAMBE | ### **APERTA** |  | PRESIDIO DEL HOOK: un ID citato in un documento vivo o nel messaggio che non e'  |
@@ -492,7 +492,7 @@
 | `REGISTRO_FISICA:A2` | CRITERIO | METODO | ENTRAMBE | ### **APERTA** |  | al passo 1, ramp == 1 su TUTTI i nodi della semina iniziale, ESATTO |
 | `REGISTRO_FISICA:A3` | CRITERIO | FISICA | 1 | ### **SOSPESA** |  | un nodo nato da MITOSI parte da ramp = 0 e arriva a 1 nel suo tempo-luce |
 | `REGISTRO_FISICA:A4` | CRITERIO | FISICA | 1 | ### **SOSPESA** |  | contrasto massa/vuoto e Lam al passo 1, contro P2 = 27 e P3 = 5 |
-| `REGISTRO_FISICA:A5` | CRITERIO | METODO | ENTRAMBE | ### **APERTA** |  | CONTROLLO POSITIVO: ON e OFF DEVONO differire |
+| `REGISTRO_FISICA:A5` | CRITERIO | METODO | 1 | ### **SOSPESA** |  | CONTROLLO POSITIVO: ON e OFF DEVONO differire |
 | `REGISTRO_FISICA:A6` | CRITERIO | FISICA | 1 | ### **SOSPESA** |  | CASO CHE DEVE FALLIRE: con maturi=False forzato, A2 deve dare FAIL |
 | `REGISTRO_FISICA:A7` | CRITERIO | METODO | ENTRAMBE | ### **APERTA** |  | TAUA non è più letto da pesi — dall'AST, non da un grep |
 | `REGISTRO_FISICA:C1` | CRITERIO | METODO | ENTRAMBE | ### **APERTA** |  | flag spento: byte-identico / par.2.1. L'arresto vive dentro SEMINALAM: a flag sp |
@@ -532,7 +532,7 @@
 | `REGISTRO_FISICA:T5` | CRITERIO | METODO | ENTRAMBE | ### **APERTA** |  | byte-inerte: 206 campi identici, 0 diversi contro cura1corto / l'invariante legg |
 | `REGISTRO_FISICA:U2` | CRITERIO | FISICA | 1 | ### **SOSPESA** |  | U2 È ATTIVA IN ENTRAMBI I BRACCI DI P-GONFIA E FABBRICA LUNGHEZZA (Luca, 2026-09 |
 | `REGISTRO_FISICA:U2-5` | CRITERIO | METODO | ENTRAMBE | ### **APERTA** |  | 5 è MODEL-FREE: non confronta col mio conto, legge d e d0 e conta gli archi che |
-| `REGISTRO_FISICA:U2-6` | CRITERIO | METODO | ENTRAMBE | ### **APERTA** |  | 6 È IL CASO CHE DEVE FALLIRE (P1-sexies, ed è il criterio più importante): la |
+| `REGISTRO_FISICA:U2-6` | CRITERIO | METODO | 1 | ### **SOSPESA** |  | 6 È IL CASO CHE DEVE FALLIRE (P1-sexies, ed è il criterio più importante): la |
 | `REGISTRO_FISICA:U2a` | CRITERIO | FISICA | 1 | ### **SOSPESA** |  | la LUNGHEZZA FABBRICATA da nasce, sum(LAM - v) sugli archi troncati, SEPARATA pe |
 | `REGISTRO_FISICA:U2b` | CRITERIO | FISICA | 1 | ### **SOSPESA** |  | quanti archi sono stati troncati, e su quanti visti — stessa separazione / idem |
 | `REGISTRO_FISICA:U2c` | CRITERIO | FISICA | 1 | ### **SOSPESA** |  | frazione di archi sotto 2 LAM / ai passi 0 e 120 |

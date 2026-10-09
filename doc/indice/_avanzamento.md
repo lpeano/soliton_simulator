@@ -74,17 +74,17 @@ python csv/indice.py aggiorna-lotto doc/indice/_lotti/<nome>.jsonl
 | voci | `830` |
 | ### **`DA_CLASSIFICARE` vere** *(non segnaposto)* | ### **`1`** |
 | ### **segnaposto `NON_DEFINITA`** | ### **`181`** |
-| ### **righe di storico** | ### **`1079`** |
+| ### **righe di storico** | ### **`1089`** |
 
 ```
 classe    DIFETTO=210  NON_DEFINITA=181  FRONTE=169  CRITERIO=107  MISURA=55  CURA=46  PRESIDIO=34  STANDARD=28
 dominio   FISICA=439  DA_CLASSIFICARE=181  METODO=136  INFRASTRUTTURA=47  DOCUMENTAZIONE=27
-era       1=445  DA_CLASSIFICARE=182  ENTRAMBE=177  2=26
-stato     SOSPESA=274  CHIUSA=187  DA_CLASSIFICARE=182  APERTA=161  AGENDA=26
+era       1=451  DA_CLASSIFICARE=182  ENTRAMBE=172  2=25
+stato     SOSPESA=280  CHIUSA=187  DA_CLASSIFICARE=182  APERTA=156  AGENDA=25
 ```
 
-### ✔ **FATTO IN QUESTO GIRO:** il blocco `E`: ### **il referto `doc/REFERTO_indice_v3_correzione.md`, voce per voce** *(`305` righe, `8` sezioni)*, i controlli `6/6` e il collaudo `21/21`. ### **LA CORREZIONE `v3` E' CHIUSA** -- `A`, `B`, `C`, `D`, `E`. Piu' ### **un difetto mio APERTO**: `INDICE-COLLAUDO-SCRITTURA` *(il collaudo non guarda la via di scrittura)*
+### ✔ **FATTO IN QUESTO GIRO:** il blocco `G`, i tre residui: ### **`5` voci che VERIFICANO UN FLAG DELL'ERA `1`** tornano all'era `1` *(e nel referto `v3` avevo scritto che quella correzione era «presa prima di applicare»:* ### **era falsa su queste cinque**, *e l'applicazione acritica e' mia)*; la misura `G1` *(«`Ldisegno/d` per arco»)* pure; e ### **`9` note** che dicevano *«fisica dell'era `1`»* su voci che ### **non sono `FISICA`**
 
-### ⛔ **RESTA:** ### **le decisioni di Luca**, e sono scritte nel referto: `181` concetti da definire *(`D5`/`D6` come ### **omonimi**)*, ### **l'era di `5` voci**, le ### **`12` etichette che la regola corretta dichiara definite** e di cui il mandato non dice la classe, e `20` assiomi in attesa
+### ⛔ **RESTA:** il blocco `F`: ### **i sei presidi nel validatore** *(`F1`-`F4` e `F6` SEGNALANO, `F5` e' un ERRORE)*, il ### **collaudo su una COPIA di prova** con `12` esiti attesi, e il referto `doc/REFERTO_indice_v3_presidi.md`
 
-**Ultimo lotto applicato:** `doc/indice/_lotti/v3_E_difetto.jsonl`
+**Ultimo lotto applicato:** `doc/indice/_lotti/v3_G.jsonl`
