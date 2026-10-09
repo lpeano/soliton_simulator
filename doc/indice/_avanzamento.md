@@ -83,8 +83,8 @@ era       1=460  DA_CLASSIFICARE=188  ENTRAMBE=173  2=25
 stato     SOSPESA=289  DA_CLASSIFICARE=188  CHIUSA=187  APERTA=157  AGENDA=25
 ```
 
-### ✔ **FATTO IN QUESTO GIRO:** il punto `5`: ### **`doc/indice/DA_DECIDERE_LUCA.md`, un elenco solo e SI GENERA** -- `38` voci e `38` domande, da ### **tre criteri** e ### **nessuna lista di ID nel codice**, perche' un elenco mezzo generato e' peggio di nessun elenco: ### **sembra completo**
+### ✔ **FATTO IN QUESTO GIRO:** il punto `6`: ### **il referto `doc/REFERTO_indice_v3_pulizia.md`** *(`240` righe)*, i controlli `6/6`, il collaudo dei presidi `24/24`, quello dell'indice `22/22`. ### **I SEGNALI SONO `F1=0 F2=1 F3=0 F4=0 F6=0`, esattamente quelli che il mandato aveva scritto** -- e `103` era il numero di due giri fa
 
-### ⛔ **RESTA:** il punto `6`: i controlli e il referto ### **`doc/REFERTO_indice_v3_pulizia.md`**
+### ⛔ **RESTA:** ### **le decisioni di Luca**, e stanno in ### **un posto solo che si GENERA**: `doc/indice/DA_DECIDERE_LUCA.md` -- `11` omonimi, `20` assiomi da confermare, `7` domande aperte. Piu' ### **tre classificazioni che sono MIE**, e si cambiano con un lotto di una riga
 
-**Ultimo lotto applicato:** `doc/indice/_lotti/v3_q4_f3.jsonl *(il punto `5` non passa da un lotto: genera un elenco)*`
+**Ultimo lotto applicato:** `doc/indice/_lotti/v3_q4_f3.jsonl *(il punto `6` non passa da un lotto: scrive il referto)*`
