@@ -294,6 +294,12 @@ def valida(voci, reg, verboso=True, derivati=True):
     # ### mandato dice *<<storico senza commit -> ERRORE, non segnale>>*, e
     # ### un-eccezione che NON CITA non e- un-eccezione, e- una via di fuga.
     err += _f5_storico(voci)
+    # ### `F11` STA QUI, accanto a `F5`, perche- ### **legge il disco** *(lo storico e il
+    # ### tag)* e non solo la lista: ### **non e- puro**, e il `derivati=False` di
+    # ### `aggiorna_lotto` lo salta ### **di proposito** -- durante un lotto lo storico
+    # ### nuovo ### **non e- ancora scritto**, e `F11` accuserebbe ogni voce del lotto.
+    # ### ✔ **Dopo la scrittura `valida` gira INTERO, e li- `F11` controlla.**
+    err += _f11_replay(voci)
     atteso = invertito(voci, reg)
     if os.path.exists(INVERTITO):
         avuto = json.load(io.open(INVERTITO, encoding="utf-8"))
@@ -900,6 +906,106 @@ def _f5_righe(vive, n_head):
             err.append("`F5` storico riga %d: GIA- COMMITTATA e senza `commit`. Gira "
                        "`python csv/indice.py storico-commit`" % (k + 1))
     return err[:20]
+
+
+# ### ⛔ **IL TAG DELLA FINE DELLA MIGRAZIONE.** Le voci ### **senza storico** non sono un
+# ### buco: sono ### **quelle che nessuno ha ancora toccato**, e il loro stato giusto e-
+# ### ### **quello con cui sono nate.** `3ef2326` e- il commit in cui la migrazione ha
+# ### finito di scriverle.
+FINE_MIGRAZIONE = "3ef2326"
+# ### I campi che `F11` confronta: ### **tutti quelli dello schema tranne `aggiornata`**, che
+# ### e- ### **un timbro di QUANDO**, non un dato della voce -- e lo riscrive ogni lotto,
+# ### anche quando non cambia niente.
+CHIAVI_F11 = tuple(k for k in CHIAVI if k != "aggiornata")
+
+
+def _f11_righe(voci, ultimo, nati):
+    """### `F11`, ### **la parte PURA:** ogni voce coincide col `dopo` della sua ULTIMA riga
+    di storico; ### **le voci senza storico** coincidono con il loro stato alla fine della
+    migrazione; ### **una voce nata dopo e senza storico e- un ERRORE.**
+
+    ### ⭐ **E- IL PRESIDIO PIU- FORTE DI TUTTI, e il perche- e- questo:** gli altri guardano
+    ### **se un campo e- plausibile**; `F11` guarda ### **se il campo e- ARRIVATO DA UNA
+    SCRITTURA DICHIARATA.** ### ⛔ **Una modifica a mano a `voci.jsonl` -- anche con le viste
+    rigenerate, anche se passa TUTTI gli altri controlli -- qui NON PASSA**, perche-
+    ### **non ha una riga di storico che la spieghi.**
+
+    ### ⚠ **E- l-unico presidio che rende VERA la frase <<si scrive SOLO con `indice.py
+    aggiorna`>>** *(par.9)*: prima era ### **una regola scritta**, e `A9` dice che una regola
+    scritta ### **non impedisce niente.**
+
+    ### ⛔ **`aggiornata` NON si confronta:** e- un timbro di ### **quando**, non un dato
+    della voce.
+    """
+    err = []
+    for v in voci:
+        u = ultimo.get(v["id"])
+        if u is None:
+            m = nati.get(v["id"])
+            if m is None:
+                err.append("`F11` `%s`: NATA DOPO la migrazione e SENZA STORICO. Una voce "
+                           "nuova si crea con `crea-lotto`, che scrive la sua riga: se la "
+                           "riga non c-e-, la voce e- stata scritta A MANO" % v["id"])
+                continue
+            d = [k for k in CHIAVI_F11
+                 if json.dumps(v[k], sort_keys=True)
+                 != json.dumps(m.get(k), sort_keys=True)]
+            if d:
+                err.append("`F11` `%s`: NON ha storico, quindi deve coincidere col suo "
+                           "stato a %s (fine della migrazione), e invece differisce in %s"
+                           % (v["id"], FINE_MIGRAZIONE, d[:5]))
+            continue
+        d = [k for k in CHIAVI_F11
+             if json.dumps(v[k], sort_keys=True)
+             != json.dumps((u.get("dopo") or {}).get(k), sort_keys=True)]
+        if d:
+            err.append("`F11` `%s`: NON coincide col `dopo` della sua ULTIMA riga di storico "
+                       "(%s), e differisce in %s. Il campo non e- arrivato da una scrittura "
+                       "dichiarata: qualcuno ha scritto A MANO"
+                       % (v["id"], u.get("quando", ""), d[:5]))
+    return err
+
+
+def _f11_nati():
+    """### Le voci ### **alla fine della migrazione**, o `{}` se il tag non si legge."""
+    q = subprocess.run(["git", "show", "%s:doc/indice/voci.jsonl" % FINE_MIGRAZIONE],
+                       cwd=RADICE, capture_output=True, text=True, encoding="utf-8")
+    if q.returncode != 0:
+        return {}
+    fuori = {}
+    for r in q.stdout.split(NL):
+        if r.strip():
+            w = json.loads(r)
+            fuori[w["id"]] = w
+    return fuori
+
+
+def _f11_ultimo(percorso=None):
+    """### Per ogni id, ### **l-ULTIMA riga di storico.**"""
+    p = percorso or STORICO
+    fuori = {}
+    if not os.path.exists(p):
+        return fuori
+    for r in io.open(p, encoding="utf-8").read().split(NL):
+        if r.strip():
+            s = json.loads(r)
+            fuori[s["id"]] = s
+    return fuori
+
+
+def _f11_replay(voci):
+    """### `F11` sul disco: legge `storico.jsonl` e ### **le voci al tag.**
+
+    ### ⚠ **Se il tag non si legge il presidio TACE, e lo dichiaro:** senza il
+    ### **punto di partenza** non si puo- dire se una voce senza storico sia giusta --
+    ### **meglio tacere che accusare.**
+    """
+    if not os.path.exists(STORICO):
+        return []
+    nati = _f11_nati()
+    if not nati:
+        return []
+    return _f11_righe(voci, _f11_ultimo(), nati)
 
 
 def _f5_storico(voci):

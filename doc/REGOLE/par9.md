@@ -396,3 +396,16 @@ Si toglie dall'inizio della riga, **ripetutamente**: i `#`, gli spazi, i **simbo
 | ### ⛔ **la mia regola di ieri era mezza vera** | avevo scritto *«un difetto non decide niente»*: ### **vero per una DECISIONE, falso per una PROMOZIONE.** Pretendere che ogni superamento venisse da ### **fuori l'indice** faceva ### **perdere la storia delle FUSIONI** |
 | ### **e `F9` ammette `SUPERATA` per `ENTRAMBE`** | *«superata»* non è *«rimandata»*: è ### **risolta da fuori**, e per questo ### **non cade nel divieto che colpisce `SOSPESA`** |
 | ### ⚠ **i due versi sono collaudati** | una voce come `superata_da` → ### **accettata**; un id che non è né decisione, né assioma, né voce → ### **rifiutato.** ### **Senza il verso negativo la regola nuova non è una regola: è un PERMESSO** |
+
+---
+
+## `F11`: **l'indice è il REPLAY del suo storico** *(2026-10-09)*
+
+| | |
+|---|---|
+| ### **la regola** *(ERRORE)* | ogni voce coincide, ### **campo per campo**, col `dopo` della sua ### **ULTIMA** riga di storico; una voce ### **senza storico** coincide col suo stato a ### **`3ef2326`** *(fine della migrazione)*; una voce ### **nata dopo e senza storico** è un errore |
+| ### ⭐ **perché è il più forte di tutti** | gli altri presidi guardano ### **se un campo è plausibile**; `F11` guarda ### **se il campo è ARRIVATO DA UNA SCRITTURA DICHIARATA** |
+| ### ⛔ **e rende VERA una regola che era solo scritta** | *«si scrive SOLO con `indice.py aggiorna`»* *(par.9)* era ### **una riga di documento**, e `A9` dice che una regola scritta ### **non impedisce niente.** Adesso impedisce |
+| ### ⚠ **`aggiornata` non si confronta** | è ### **un timbro di QUANDO**, non un dato della voce, e lo riscrive ogni lotto anche quando non cambia niente |
+| ### ⚠ **e sta nel ramo dei DERIVATI, come `F5`** | ### **legge il disco**, non solo la lista: durante un lotto lo storico nuovo ### **non è ancora scritto**, e `F11` accuserebbe ### **ogni voce del lotto** |
+| ### ⛔ **se il tag non si legge, TACE** | senza il ### **punto di partenza** non si può dire se una voce senza storico sia giusta: ### **meglio tacere che accusare** |

@@ -68,6 +68,20 @@ def con(voci, sostituite):
     return [json.loads(json.dumps(per.get(v["id"], v))) for v in voci]
 
 
+def cita(err, idv):
+    """### `True` se un ERRORE nomina quell-id.
+
+    ### ⛔ **Serve perche- i presidi che SEGNALANO tornano coppie `(id, messaggio)` e
+    quelli che sono ERRORI tornano STRINGHE:** `scatta` sa leggere le prime,
+    ### **non le seconde**, e usarlo su `F11` dava ### **<<too many values to unpack>>**.
+    ### ⚠ **Due forme di uscita per due famiglie di presidi: lo DICHIARO invece di
+    unificarle**, perche- unificarle vorrebbe dire ### **toccare tutti i presidi** per un
+    collaudo.
+    """
+    ago = chr(96) + idv + chr(96)
+    return any(ago in e for e in err)
+
+
 def scatta(fuori, idv):
     return any(i == idv for i, _m in fuori)
 
@@ -301,6 +315,81 @@ def main():
     esito("F9  NON deve scattare: un SEGNAPOSTO -- `DA_CLASSIFICARE` non e- uno stato",
           IX._f9_era_stato([_sp9]) == [],
           "e- l-ASSENZA di uno stato: prima la classe, poi lo stato")
+
+    # ---------------------------------------------------------------- F11
+    # ### ⛔ **IL COLLAUDO LO DETTA IL MANDATO, E GIRA SU UNA COPIA:** *<<stato di
+    # ### `A2-ANELLO` cambiato a mano + viste rigenerate -> DEVE fallire; senza modifiche
+    # ### -> NON deve>>*. ### **Nessun file del repo si tocca:** si copiano
+    # ### `voci.jsonl` e `storico.jsonl` in una cartella temporanea.
+    import shutil
+    import tempfile
+    _tmp = tempfile.mkdtemp(prefix="f11_")
+    try:
+        shutil.copy(IX.VOCI, os.path.join(_tmp, "voci.jsonl"))
+        shutil.copy(IX.STORICO, os.path.join(_tmp, "storico.jsonl"))
+        _nati = IX._f11_nati()
+        _ult = IX._f11_ultimo(os.path.join(_tmp, "storico.jsonl"))
+        _vc = [json.loads(r) for r
+               in io.open(os.path.join(_tmp, "voci.jsonl"),
+                          encoding="utf-8").read().split(NL) if r.strip()]
+        esito("F11 NON deve scattare: la COPIA INTATTA, tutte le %d voci" % len(_vc),
+              IX._f11_righe(_vc, _ult, _nati) == [],
+              "l-indice e- il REPLAY del suo storico, e oggi lo e-")
+        # ### ⚠ **LA MANOMISSIONE: `A2-ANELLO` cambiato A MANO nella copia.**
+        _k = [j for j, w in enumerate(_vc) if w["id"] == "A2-ANELLO"]
+        assert _k, "A2-ANELLO non c-e-"
+        _prima_stato = _vc[_k[0]]["stato"]
+        _vc[_k[0]]["stato"] = "APERTA" if _prima_stato != "APERTA" else "CHIUSA"
+        print("  `F11` A2-ANELLO nella COPIA: `%s` -> `%s` (a mano)"
+              % (_prima_stato, _vc[_k[0]]["stato"]))
+        esito("F11 DEVE essere un ERRORE: `A2-ANELLO` cambiato A MANO nella copia",
+              cita(IX._f11_righe(_vc, _ult, _nati), "A2-ANELLO"),
+              "il campo non e- arrivato da una scrittura dichiarata")
+        # ### ⛔ **E LE VISTE RIGENERATE NON LO SALVANO, che e- il punto del mandato:** si
+        # ### rigenerano ### **dalla copia manomessa**, quindi ### **concordano con essa**
+        # ### -- e il confronto delle viste ### **tace.** ### ⭐ **`F11` scatta comunque,
+        # ### perche- non guarda le viste: guarda LO STORICO.**
+        _vv0, _rg0 = IX.carica()
+        del _vv0
+        _reg = json.loads(json.dumps(_rg0))
+        _att = IX.invertito(_vc, _reg)
+        esito("F11 DEVE scattare ANCHE con le viste rigenerate dalla copia manomessa",
+              cita(IX._f11_righe(_vc, _ult, _nati), "A2-ANELLO")
+              and IX.invertito(_vc, _reg) == _att,
+              "le viste sono DERIVATE: rigenerarle dalla manomissione le rende COERENTI "
+              "con essa, e nessun altro controllo la vede")
+        # ### ⚠ **E LA MANOMISSIONE CHE IL MANDATO DETTA LA VEDE ANCHE `F7`, e lo DICO:**
+        # ### `A2-ANELLO` e- ### **era `1`**, e `F7` vieta era `1` + `APERTA`. ### **Quindi
+        # ### quel caso NON dimostra che `F11` serva:** dimostra che ### **scatta.**
+        _altri = [e for e in IX.valida(_vc, _reg, verboso=False, derivati=False)
+                  if "A2-ANELLO" in e and "`F11`" not in e]
+        esito("F7 LA VEDE ANCHE LUI, e lo dichiaro: era `1` + `APERTA` e- vietato",
+              any("`F7`" in e for e in _altri),
+              "il caso del mandato prova che `F11` SCATTA, non che SERVA")
+        # ### ⛔ **QUINDI SERVE UNA MANOMISSIONE CHE NESSUN ALTRO VEDA**, altrimenti `F11`
+        # ### e- ### **un presidio senza bisogno dimostrato** -- e un presidio che ripete
+        # ### cio- che un altro dice ### **aumenta il numero delle leggi senza aggiungere
+        # ### niente** *(il criterio 9-ter di Luca)*.
+        # ### ✔ **Il `titolo`: nessun presidio lo confronta con niente.** Cambiarlo a mano
+        # ### ### **passa TUTTO** -- vocabolari, stati, ere, viste rigenerate -- e
+        # ### ### **solo `F11` lo vede**, perche- solo `F11` chiede ### **da dove viene.**
+        _vc2 = json.loads(json.dumps(_vc))
+        _vc2[_k[0]]["stato"] = _prima_stato
+        _vc2[_k[0]]["titolo"] = "UN TITOLO SCRITTO A MANO, e nessuno lo confronta"
+        _soli = [e for e in IX.valida(_vc2, _reg, verboso=False, derivati=False)
+                 if "A2-ANELLO" in e]
+        esito("F11 E- NECESSARIO: il `titolo` cambiato a mano passa TUTTI gli altri",
+              _soli == [] and cita(IX._f11_righe(_vc2, _ult, _nati), "A2-ANELLO"),
+              "nessun presidio confronta il `titolo` con niente: solo `F11` chiede DA DOVE "
+              "VIENE")
+        # ### ✔ **E il caso <<nata dopo e senza storico>>, costruito: e- un ERRORE.**
+        _nuova = json.loads(json.dumps(_vc[_k[0]]))
+        _nuova["id"] = "VOCE-SCRITTA-A-MANO"
+        esito("F11 DEVE scattare: una voce NATA DOPO la migrazione e SENZA STORICO",
+              cita(IX._f11_righe([_nuova], _ult, _nati), "VOCE-SCRITTA-A-MANO"),
+              "una voce nuova si crea con `crea-lotto`, che scrive la sua riga")
+    finally:
+        shutil.rmtree(_tmp, ignore_errors=True)
 
     # ---------------------------------------------------------------- F12
     # ### ⛔ **IL CASO A RISPOSTA NOTA E- L-INDICE DI IERI:** a `570d43a` *(dopo il punto

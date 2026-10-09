@@ -10835,3 +10835,15 @@ Il punto `4`. `1` voce, `1` riga di storico; `F6` da `3` a `2` segnali; `6`/`6` 
 ### ⭐ **E IL TERZO E' LA PROVA CHE I PRESIDI SERVONO:** `F12` l'ho scritto io stamattina, e ### **mi ha fermato nel pomeriggio su un caso che non avevo previsto.** ### **`SUPERATA` non e- `CHIUSA`: SOSTITUISCE la chiusura, non la conferma.**
 
 ### ✔ **E LE DUE CORREZIONI DEL GUARDIANO A SE- STESSO, che il mandato chiede di dichiarare:** la classe `(B)` del censimento e' ### **«COSTRUITA E MAI MISURATA»**, non testo falso — le `13` `CENS-B*` sono ### **FRONTI aperti**, e io leggevo *«censimento delle intenzioni»* come *«il testo dichiara il falso»*; e `REGISTRO_FISICA:P*` sono ### **PREVISIONI, non esiti** — `6` voci a `CRITERIO`/`METODO`, e questo spiega perche' la riga di `P2` dice *«P2 E' FALLITA»*: ### **non e' l'esito di una misura, e' il CONFRONTO fra la previsione e la misura.**
+
+---
+
+## `F11`: **l'indice e' il REPLAY del suo storico** — e rende VERA una regola che era solo scritta (2026-10-09)
+
+`0` violazioni su `846` voci *(`38` senza storico, tutte uguali al loro stato a `3ef2326`, dove la migrazione ne aveva scritte `867`)*. `59`/`59` il collaudo dei presidi, `6`/`6` i controlli. Nessuna corsa; il simulatore resta `b8c21049`.
+
+### ⭐ **E- IL PRESIDIO PIU- FORTE DI TUTTI, e la ragione e- questa:** gli altri guardano ### **se un campo e- plausibile**; `F11` guarda ### **se il campo e- ARRIVATO DA UNA SCRITTURA DICHIARATA.** ### ⛔ **Il par.9 dice «si scrive SOLO con `indice.py aggiorna»` dal primo giorno, e per `A9` era UNA TENDA:** nessuno impediva di aprire `voci.jsonl` e battere un campo. ### **Adesso qualcuno lo impedisce.**
+
+### ⚠ **E LA MANOMISSIONE CHE IL MANDATO DETTA LA VEDE ANCHE `F7`, e lo dico:** `A2-ANELLO` e' ### **era `1`**, e `F7` vieta era `1` + `APERTA`. ### **Quindi quel caso prova che `F11` SCATTA, non che SERVA.** ### ✔ **Per provare che serve ho cercato una manomissione che nessun altro veda, e l'ho trovata: il `titolo`.** Nessun presidio lo confronta con niente — cambiarlo a mano passa ### **vocabolari, stati, ere e viste rigenerate** — e ### **solo `F11` lo vede, perche' solo `F11` chiede DA DOVE VIENE.**
+
+### ⭐ **Il criterio `9-ter` lo pretendeva:** *«una cura non aumenta il numero delle leggi»*. ### **Un presidio che ripete cio- che un altro dice e' una legge in piu- e zero informazione in piu-** — e senza il braccio del `titolo` `F11` sarebbe stato ### **un presidio senza bisogno dimostrato.**

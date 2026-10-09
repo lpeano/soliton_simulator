@@ -83,8 +83,8 @@ era       1=538  DA_CLASSIFICARE=188  ENTRAMBE=96  2=24
 stato     SOSPESA=369  DA_CLASSIFICARE=188  CHIUSA=182  APERTA=82  AGENDA=24  SUPERATA=1
 ```
 
-### ✔ **FATTO IN QUESTO GIRO:** il punto `5`, ### **la terza lettura**: delle `59` righe ### **`47` applicate**, `11` non applicate *(citazione non trovata)*, `1` niente da fare. ### ⛔ **E TRE DIFETTI MIEI, trovati dai presidi e dallo schema**, non da me.
+### ✔ **FATTO IN QUESTO GIRO:** il punto `6`, ### **`F11`: l'indice e' il REPLAY del suo storico.** Passa con ### **`0` violazioni** *(`38` voci senza storico, tutte uguali al loro stato a `3ef2326`)*, e il collaudo gira ### **su una COPIA** come il mandato detta: `59`/`59`.
 
-### ⛔ **RESTA:** la ### **parte II** — `F11` *(punto `6`)*, `csv/_file_fisica.py` *(punto `7`)*, l'ID nel messaggio *(punto `8`)* — e i due referti *(punto `9`)*.
+### ⛔ **RESTA:** il punto `7` *(`csv/_file_fisica.py`)*, il punto `8` *(l'ID nel messaggio)* e il punto `9` *(i due referti)*.
 
-**Ultimo lotto applicato:** `doc/indice/_lotti/v3_guardiano_b.jsonl` *(`47` voci, in due passate: `45` + `2`)*
+**Ultimo lotto applicato:** `doc/indice/_lotti/v3_guardiano_b.jsonl` — ### **il punto `6` NON scrive sull'indice**: aggiunge un presidio.
