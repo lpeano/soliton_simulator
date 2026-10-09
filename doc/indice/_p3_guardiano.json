@@ -1,0 +1,2514 @@
+{
+ "applicate": [
+  {
+   "id": "SOGLIA-MITOSI-3PI",
+   "campi": {
+    "classe": "DIFETTO",
+    "stato": "SOSPESA"
+   },
+   "meta": {},
+   "livello": "T0",
+   "conf": "alta"
+  },
+  {
+   "id": "X1",
+   "campi": {
+    "stato": "SOSPESA"
+   },
+   "meta": {},
+   "livello": "T1",
+   "conf": "alta"
+  },
+  {
+   "id": "A1-TREVIE",
+   "campi": {
+    "stato": "SOSPESA"
+   },
+   "meta": {},
+   "livello": "T1",
+   "conf": "alta"
+  },
+  {
+   "id": "B3",
+   "campi": {
+    "classe": "FRONTE",
+    "stato": "SOSPESA"
+   },
+   "meta": {},
+   "livello": "T4",
+   "conf": "alta"
+  },
+  {
+   "id": "B4",
+   "campi": {
+    "classe": "FRONTE",
+    "stato": "SOSPESA"
+   },
+   "meta": {},
+   "livello": "T1",
+   "conf": "alta"
+  },
+  {
+   "id": "C20",
+   "campi": {
+    "stato": "CHIUSA",
+    "chiusura": {
+     "criterio": "verifica completa del guardiano: C. DIAGNOSI CHIUSE",
+     "commit": "0000048",
+     "data": "2026-10-09"
+    }
+   },
+   "meta": {},
+   "livello": "T3",
+   "conf": "alta"
+  },
+  {
+   "id": "D0",
+   "campi": {
+    "classe": "MISURA"
+   },
+   "meta": {},
+   "livello": "T0",
+   "conf": "alta"
+  },
+  {
+   "id": "G2",
+   "campi": {
+    "classe": "MISURA"
+   },
+   "meta": {},
+   "livello": "T0",
+   "conf": "alta"
+  },
+  {
+   "id": "G3",
+   "campi": {
+    "classe": "MISURA"
+   },
+   "meta": {},
+   "livello": "T0",
+   "conf": "alta"
+  },
+  {
+   "id": "G4",
+   "campi": {
+    "classe": "MISURA"
+   },
+   "meta": {},
+   "livello": "T0",
+   "conf": "alta"
+  },
+  {
+   "id": "S03",
+   "campi": {
+    "classe": "MISURA"
+   },
+   "meta": {},
+   "livello": "T0",
+   "conf": "alta"
+  },
+  {
+   "id": "S04",
+   "campi": {
+    "classe": "MISURA"
+   },
+   "meta": {},
+   "livello": "T0",
+   "conf": "alta"
+  },
+  {
+   "id": "Z13",
+   "campi": {
+    "classe": "CURA"
+   },
+   "meta": {},
+   "livello": "T4",
+   "conf": "alta"
+  },
+  {
+   "id": "Z127",
+   "campi": {
+    "classe": "MISURA",
+    "stato": "CHIUSA",
+    "chiusura": {
+     "criterio": "verifica completa del guardiano: E1 NON PASSA",
+     "commit": "445e2896",
+     "data": "2026-10-09"
+    }
+   },
+   "meta": {},
+   "livello": "T0",
+   "conf": "alta"
+  },
+  {
+   "id": "Z26",
+   "campi": {
+    "classe": "MISURA",
+    "stato": "CHIUSA",
+    "chiusura": {
+     "criterio": "verifica completa del guardiano: CONTIENE LO ZERO",
+     "commit": "4d4db99",
+     "data": "2026-10-09"
+    }
+   },
+   "meta": {},
+   "livello": "T1",
+   "conf": "alta"
+  },
+  {
+   "id": "A2",
+   "campi": {
+    "stato": "APERTA"
+   },
+   "meta": {},
+   "livello": "T-STRUTTURALE",
+   "conf": "alta"
+  },
+  {
+   "id": "REPERTI-IMMUTABILI",
+   "campi": {
+    "stato": "APERTA"
+   },
+   "meta": {},
+   "livello": "T0",
+   "conf": "alta"
+  },
+  {
+   "id": "PRESTAZIONI-CORSE",
+   "campi": {
+    "stato": "APERTA"
+   },
+   "meta": {},
+   "livello": "T2",
+   "conf": "alta"
+  },
+  {
+   "id": "RIPRESA-ARGV",
+   "campi": {
+    "stato": "APERTA"
+   },
+   "meta": {},
+   "livello": "T0",
+   "conf": "media"
+  },
+  {
+   "id": "LUNGA-BATTITO-CADUTA",
+   "campi": {
+    "era": "1"
+   },
+   "meta": {},
+   "livello": "T0",
+   "conf": "media"
+  },
+  {
+   "id": "B10",
+   "campi": {
+    "stato": "SOSPESA"
+   },
+   "meta": {},
+   "livello": "T3",
+   "conf": "alta"
+  },
+  {
+   "id": "B8",
+   "campi": {
+    "stato": "SOSPESA"
+   },
+   "meta": {},
+   "livello": "T3",
+   "conf": "alta"
+  },
+  {
+   "id": "Z29",
+   "campi": {
+    "classe": "CURA"
+   },
+   "meta": {},
+   "livello": "T4",
+   "conf": "alta"
+  },
+  {
+   "id": "Z30",
+   "campi": {
+    "classe": "MISURA"
+   },
+   "meta": {},
+   "livello": "T0",
+   "conf": "alta"
+  },
+  {
+   "id": "Z35",
+   "campi": {
+    "classe": "CURA",
+    "stato": "CHIUSA",
+    "chiusura": {
+     "criterio": "verifica completa del guardiano: BYTE-INERTE",
+     "commit": "94b6cc29",
+     "data": "2026-10-09"
+    }
+   },
+   "meta": {},
+   "livello": "T1",
+   "conf": "alta"
+  },
+  {
+   "id": "Z53",
+   "campi": {
+    "classe": "CURA"
+   },
+   "meta": {},
+   "livello": "T4",
+   "conf": "alta"
+  },
+  {
+   "id": "Z5",
+   "campi": {
+    "classe": "MISURA"
+   },
+   "meta": {},
+   "livello": "T1",
+   "conf": "alta"
+  },
+  {
+   "id": "Z87",
+   "campi": {
+    "classe": "DIFETTO",
+    "stato": "CHIUSA",
+    "chiusura": {
+     "criterio": "verifica completa del guardiano: CAUSA TROVATA",
+     "commit": "f884eff0",
+     "data": "2026-10-09"
+    }
+   },
+   "meta": {},
+   "livello": "T1",
+   "conf": "alta"
+  },
+  {
+   "id": "Z28",
+   "campi": {
+    "classe": "CRITERIO",
+    "dominio": "METODO"
+   },
+   "meta": {},
+   "livello": "T0",
+   "conf": "alta"
+  },
+  {
+   "id": "Z31",
+   "campi": {
+    "classe": "DIFETTO",
+    "stato": "SOSPESA"
+   },
+   "meta": {},
+   "livello": "T1",
+   "conf": "alta"
+  },
+  {
+   "id": "Z25",
+   "campi": {
+    "classe": "CURA"
+   },
+   "meta": {},
+   "livello": "T3",
+   "conf": "alta"
+  },
+  {
+   "id": "Z42",
+   "campi": {
+    "classe": "CURA"
+   },
+   "meta": {},
+   "livello": "T0",
+   "conf": "alta"
+  },
+  {
+   "id": "Z67",
+   "campi": {
+    "classe": "CURA"
+   },
+   "meta": {},
+   "livello": "T0",
+   "conf": "alta"
+  },
+  {
+   "id": "X3",
+   "campi": {
+    "classe": "MISURA"
+   },
+   "meta": {},
+   "livello": "T1",
+   "conf": "alta"
+  },
+  {
+   "id": "Z110",
+   "campi": {
+    "classe": "MISURA"
+   },
+   "meta": {},
+   "livello": "T0",
+   "conf": "alta"
+  },
+  {
+   "id": "Z111",
+   "campi": {
+    "classe": "MISURA"
+   },
+   "meta": {},
+   "livello": "T0",
+   "conf": "alta"
+  },
+  {
+   "id": "Z62",
+   "campi": {
+    "classe": "MISURA"
+   },
+   "meta": {},
+   "livello": "T3",
+   "conf": "alta"
+  },
+  {
+   "id": "U2",
+   "campi": {
+    "classe": "DIFETTO"
+   },
+   "meta": {},
+   "livello": "T1",
+   "conf": "alta"
+  },
+  {
+   "id": "CHK3-D",
+   "campi": {
+    "classe": "MISURA"
+   },
+   "meta": {},
+   "livello": "T1",
+   "conf": "alta"
+  },
+  {
+   "id": "SCALE-TW",
+   "campi": {
+    "classe": "FRONTE"
+   },
+   "meta": {},
+   "livello": "T1",
+   "conf": "alta"
+  },
+  {
+   "id": "PROBLEMI-CHK3",
+   "campi": {
+    "classe": "FRONTE"
+   },
+   "meta": {},
+   "livello": "T1",
+   "conf": "alta"
+  },
+  {
+   "id": "E3",
+   "campi": {
+    "classe": "FRONTE"
+   },
+   "meta": {},
+   "livello": "T3",
+   "conf": "alta"
+  },
+  {
+   "id": "Z10",
+   "campi": {
+    "classe": "DIFETTO"
+   },
+   "meta": {},
+   "livello": "T0",
+   "conf": "alta"
+  },
+  {
+   "id": "X2",
+   "campi": {
+    "classe": "DIFETTO"
+   },
+   "meta": {},
+   "livello": "T1",
+   "conf": "alta"
+  },
+  {
+   "id": "PAT-1",
+   "campi": {
+    "classe": "DIFETTO"
+   },
+   "meta": {},
+   "livello": "T0",
+   "conf": "alta"
+  },
+  {
+   "id": "PAT-2",
+   "campi": {
+    "classe": "DIFETTO"
+   },
+   "meta": {},
+   "livello": "T0",
+   "conf": "alta"
+  },
+  {
+   "id": "EM-CURVATURA-BIDIREZIONALE",
+   "campi": {
+    "classe": "FRONTE"
+   },
+   "meta": {},
+   "livello": "T0",
+   "conf": "alta"
+  },
+  {
+   "id": "LORENTZ-MATERIA-INTERFERENZA",
+   "campi": {
+    "classe": "FRONTE"
+   },
+   "meta": {},
+   "livello": "T0",
+   "conf": "alta"
+  },
+  {
+   "id": "SIGILLO-CURA2-RIPARATO",
+   "campi": {
+    "classe": "MISURA"
+   },
+   "meta": {},
+   "livello": "T2",
+   "conf": "alta"
+  },
+  {
+   "id": "POTENZE-1",
+   "campi": {
+    "classe": "CURA"
+   },
+   "meta": {},
+   "livello": "T0",
+   "conf": "alta"
+  },
+  {
+   "id": "RAMPA-1",
+   "campi": {
+    "classe": "CURA"
+   },
+   "meta": {},
+   "livello": "T0",
+   "conf": "alta"
+  },
+  {
+   "id": "POTATURA-GUARDIE",
+   "campi": {
+    "dominio": "INFRASTRUTTURA"
+   },
+   "meta": {},
+   "livello": "T4",
+   "conf": "alta"
+  },
+  {
+   "id": "D37",
+   "campi": {
+    "dominio": "INFRASTRUTTURA"
+   },
+   "meta": {},
+   "livello": "T0",
+   "conf": "alta"
+  },
+  {
+   "id": "Z14",
+   "campi": {},
+   "meta": {
+    "da_dividere": true,
+    "da_dividere_parti": [
+     "parte 1: DIFETTO/FISICA/1",
+     "parte 2: STANDARD/METODO/ENTRAMBE",
+     "come l-ho trovata: ### LE DUE PARTI LE DICHIARA IL FILE DEL GUARDIANO, e la citazione e- <<REGOLA GENERALE>>"
+    ]
+   },
+   "livello": "T1",
+   "conf": "alta"
+  },
+  {
+   "id": "Z22",
+   "campi": {
+    "classe": "STANDARD",
+    "dominio": "METODO",
+    "era": "ENTRAMBE",
+    "stato": "APERTA"
+   },
+   "meta": {},
+   "livello": "T1",
+   "conf": "alta"
+  },
+  {
+   "id": "Z68",
+   "campi": {
+    "classe": "CURA"
+   },
+   "meta": {},
+   "livello": "T4",
+   "conf": "media"
+  },
+  {
+   "id": "Z73",
+   "campi": {
+    "classe": "MISURA"
+   },
+   "meta": {},
+   "livello": "T0",
+   "conf": "media"
+  },
+  {
+   "id": "Z70",
+   "campi": {
+    "classe": "MISURA"
+   },
+   "meta": {},
+   "livello": "T0",
+   "conf": "media"
+  },
+  {
+   "id": "Z2",
+   "campi": {
+    "stato": "SOSPESA"
+   },
+   "meta": {},
+   "livello": "T1",
+   "conf": "media"
+  },
+  {
+   "id": "Z6",
+   "campi": {
+    "stato": "SOSPESA"
+   },
+   "meta": {},
+   "livello": "T0",
+   "conf": "media"
+  },
+  {
+   "id": "Z8",
+   "campi": {
+    "stato": "SOSPESA"
+   },
+   "meta": {},
+   "livello": "T0",
+   "conf": "media"
+  },
+  {
+   "id": "Z19",
+   "campi": {
+    "stato": "SOSPESA"
+   },
+   "meta": {},
+   "livello": "T1",
+   "conf": "media"
+  },
+  {
+   "id": "CHK3",
+   "campi": {
+    "classe": "FRONTE"
+   },
+   "meta": {},
+   "livello": "T1",
+   "conf": "media"
+  },
+  {
+   "id": "PROVA-COMB",
+   "campi": {
+    "classe": "FRONTE"
+   },
+   "meta": {},
+   "livello": "T1",
+   "conf": "media"
+  },
+  {
+   "id": "Z21",
+   "campi": {
+    "classe": "MISURA"
+   },
+   "meta": {},
+   "livello": "T3",
+   "conf": "media"
+  },
+  {
+   "id": "Z1",
+   "campi": {
+    "classe": "DIFETTO"
+   },
+   "meta": {},
+   "livello": "T0",
+   "conf": "media"
+  },
+  {
+   "id": "Z101",
+   "campi": {
+    "classe": "MISURA"
+   },
+   "meta": {},
+   "livello": "T0",
+   "conf": "media"
+  },
+  {
+   "id": "Z148",
+   "campi": {
+    "classe": "MISURA"
+   },
+   "meta": {},
+   "livello": "T4",
+   "conf": "media"
+  },
+  {
+   "id": "S13",
+   "campi": {
+    "classe": "FRONTE"
+   },
+   "meta": {},
+   "livello": "T0",
+   "conf": "media"
+  },
+  {
+   "id": "MASSA-MIGRA",
+   "campi": {
+    "classe": "FRONTE"
+   },
+   "meta": {},
+   "livello": "T4",
+   "conf": "media"
+  },
+  {
+   "id": "GUSCIO-ANTIFASE-EMERGENTE",
+   "campi": {
+    "classe": "FRONTE"
+   },
+   "meta": {},
+   "livello": "T0",
+   "conf": "media"
+  },
+  {
+   "id": "REGISTRO_FISICA:D33",
+   "campi": {
+    "classe": "DIFETTO"
+   },
+   "meta": {},
+   "livello": "T0",
+   "conf": "media"
+  },
+  {
+   "id": "Z27",
+   "campi": {
+    "classe": "MISURA"
+   },
+   "meta": {},
+   "livello": "T0",
+   "conf": "media"
+  },
+  {
+   "id": "Z32",
+   "campi": {
+    "classe": "MISURA",
+    "stato": "CHIUSA",
+    "chiusura": {
+     "criterio": "verifica completa del guardiano: INTATTA",
+     "commit": "72acd6aa",
+     "data": "2026-10-09"
+    }
+   },
+   "meta": {},
+   "livello": "T0",
+   "conf": "media"
+  },
+  {
+   "id": "Z33",
+   "campi": {
+    "classe": "MISURA",
+    "stato": "CHIUSA",
+    "chiusura": {
+     "criterio": "verifica completa del guardiano: VERDETTO",
+     "commit": "72acd6aa",
+     "data": "2026-10-09"
+    }
+   },
+   "meta": {},
+   "livello": "T1",
+   "conf": "media"
+  },
+  {
+   "id": "Z34",
+   "campi": {
+    "classe": "MISURA",
+    "stato": "CHIUSA",
+    "chiusura": {
+     "criterio": "verifica completa del guardiano: VERDETTO",
+     "commit": "72acd6aa",
+     "data": "2026-10-09"
+    }
+   },
+   "meta": {},
+   "livello": "T1",
+   "conf": "media"
+  },
+  {
+   "id": "Z37",
+   "campi": {
+    "classe": "MISURA",
+    "stato": "CHIUSA",
+    "chiusura": {
+     "criterio": "verifica completa del guardiano: FALLISCE SU ENTRAMBI I FRONTI",
+     "commit": "f8f46683",
+     "data": "2026-10-09"
+    }
+   },
+   "meta": {},
+   "livello": "T0",
+   "conf": "media"
+  },
+  {
+   "id": "Z91",
+   "campi": {
+    "classe": "DIFETTO"
+   },
+   "meta": {},
+   "livello": "T3",
+   "conf": "media"
+  },
+  {
+   "id": "Z92",
+   "campi": {
+    "classe": "DIFETTO"
+   },
+   "meta": {},
+   "livello": "T3",
+   "conf": "media"
+  },
+  {
+   "id": "Z7",
+   "campi": {
+    "dominio": "INFRASTRUTTURA"
+   },
+   "meta": {},
+   "livello": "T0",
+   "conf": "media"
+  },
+  {
+   "id": "Z88",
+   "campi": {
+    "dominio": "METODO"
+   },
+   "meta": {},
+   "livello": "T1",
+   "conf": "media"
+  },
+  {
+   "id": "Y2",
+   "campi": {
+    "stato": "SOSPESA"
+   },
+   "meta": {},
+   "livello": "T1",
+   "conf": "media"
+  },
+  {
+   "id": "REGISTRO_FISICA:E4-LAM",
+   "campi": {
+    "classe": "CURA"
+   },
+   "meta": {},
+   "livello": "T0",
+   "conf": "media"
+  },
+  {
+   "id": "COMPONENTI:A1",
+   "campi": {
+    "classe": "CURA"
+   },
+   "meta": {},
+   "livello": "T4",
+   "conf": "media"
+  },
+  {
+   "id": "MASSA-ID",
+   "campi": {
+    "classe": "FRONTE"
+   },
+   "meta": {},
+   "livello": "T4",
+   "conf": "media"
+  },
+  {
+   "id": "W5",
+   "campi": {
+    "classe": "CRITERIO"
+   },
+   "meta": {},
+   "livello": "T0",
+   "conf": "media"
+  },
+  {
+   "id": "Z125",
+   "campi": {
+    "classe": "DIFETTO"
+   },
+   "meta": {},
+   "livello": "T0",
+   "conf": "media"
+  },
+  {
+   "id": "Z15",
+   "campi": {
+    "classe": "DIFETTO"
+   },
+   "meta": {},
+   "livello": "T4",
+   "conf": "media"
+  },
+  {
+   "id": "LOSCHMIDT-ECO",
+   "campi": {
+    "classe": "FRONTE"
+   },
+   "meta": {},
+   "livello": "T4",
+   "conf": "media"
+  },
+  {
+   "id": "C19",
+   "campi": {
+    "dominio": "METODO"
+   },
+   "meta": {},
+   "livello": "T1",
+   "conf": "media"
+  },
+  {
+   "id": "D10",
+   "campi": {
+    "dominio": "INFRASTRUTTURA"
+   },
+   "meta": {},
+   "livello": "T0",
+   "conf": "media"
+  },
+  {
+   "id": "A4-METRICHE",
+   "campi": {
+    "classe": "FRONTE",
+    "dominio": "METODO"
+   },
+   "meta": {},
+   "livello": "T1",
+   "conf": "media"
+  },
+  {
+   "id": "Y1",
+   "campi": {
+    "classe": "DIFETTO"
+   },
+   "meta": {},
+   "livello": "T4",
+   "conf": "media"
+  },
+  {
+   "id": "Z130",
+   "campi": {
+    "dominio": "METODO"
+   },
+   "meta": {},
+   "livello": "T1",
+   "conf": "media"
+  },
+  {
+   "id": "Z136",
+   "campi": {
+    "classe": "MISURA"
+   },
+   "meta": {},
+   "livello": "T0",
+   "conf": "media"
+  },
+  {
+   "id": "REG-R",
+   "campi": {
+    "classe": "PRESIDIO"
+   },
+   "meta": {},
+   "livello": "T1",
+   "conf": "media"
+  },
+  {
+   "id": "SIGILLO-COMPARATORE-DUPLICATO",
+   "campi": {
+    "classe": "DIFETTO"
+   },
+   "meta": {},
+   "livello": "T0",
+   "conf": "media"
+  },
+  {
+   "id": "SIGILLO-REGISTRO-NON-CONFRONTABILE",
+   "campi": {
+    "classe": "DIFETTO"
+   },
+   "meta": {},
+   "livello": "T4",
+   "conf": "media"
+  },
+  {
+   "id": "SIGILLO-SENZA-CONFIGURAZIONE",
+   "campi": {
+    "classe": "DIFETTO"
+   },
+   "meta": {},
+   "livello": "T4",
+   "conf": "media"
+  },
+  {
+   "id": "C25",
+   "campi": {
+    "era": "ENTRAMBE"
+   },
+   "meta": {},
+   "livello": "T1",
+   "conf": "media"
+  },
+  {
+   "id": "D05",
+   "campi": {
+    "classe": "FRONTE",
+    "dominio": "INFRASTRUTTURA"
+   },
+   "meta": {},
+   "livello": "T0",
+   "conf": "media"
+  },
+  {
+   "id": "CLI-1",
+   "campi": {
+    "classe": "DIFETTO",
+    "dominio": "METODO"
+   },
+   "meta": {
+    "da_dividere": true,
+    "da_dividere_parti": [
+     "parte 1: DIFETTO/METODO/1",
+     "parte 2: STANDARD/METODO/ENTRAMBE",
+     "come l-ho trovata: ### LE DUE PARTI LE DICHIARA IL FILE DEL GUARDIANO, e la citazione e- <<vale come regola generale>>"
+    ]
+   },
+   "livello": "T1",
+   "conf": "media"
+  }
+ ],
+ "non_applicate": [
+  {
+   "id": "CENS-A4",
+   "cambi": {
+    "stato": "CHIUSA"
+   },
+   "citazione": "Questo commit corregge SOLO il commento",
+   "conf": "alta",
+   "perche": "NON COMPARE: ne- nella voce, ne- nella riga, ne- nella sezione, ne- nel file `doc/CENSIMENTO_intenzioni.md`",
+   "riga": ""
+  },
+  {
+   "id": "REGISTRO_FISICA:D37",
+   "cambi": {
+    "stato": "CHIUSA"
+   },
+   "citazione": "È CURATO",
+   "conf": "alta",
+   "perche": "### COMPARE NEL FILE `doc/REGISTRO_FISICA.md` MA FUORI DALLA SEZIONE della voce, e la regola chiede la riga o la sezione che la contiene",
+   "riga": "## ❌ `D37` — **UNA CHIAVE DUPLICATA NEI `DOMINI`, ed è mia** `'_cs_nodo_prev'` compariva **due volte**: `:226` *(la mia)* e `:257` *(preesistente)*. **In un letterale di dict vince l'ULTIMA**, quindi la mia era **codice morto** — e **il sigillo lo ha mostrato**, stampando una descrizione **che non e"
+  },
+  {
+   "id": "CHI-TORS-ZERO-FALSO",
+   "cambi": {
+    "classe": "DIFETTO",
+    "stato": "SOSPESA"
+   },
+   "citazione": "la voce resta aperta",
+   "conf": "alta",
+   "perche": "### COMPARE NEL FILE `doc/STATO_RUN.md` MA FUORI DALLA SEZIONE della voce, e la regola chiede la riga o la sezione che la contiene",
+   "riga": "## `CHI-TORS-ZERO-FALSO` — **un contatore che vale `0` dove la risposta giusta e' <<non lo so>>** *(Aperta il 2026-10-06 dalla misura del `0.3` a zero. Strumento `16dced88` su `cf2a1ac8`.)* Il gancio `chi_tors` confronta `chi_torsione` fra due passi per contare i nodi che cambiano. Quando la ### **l"
+  },
+  {
+   "id": "B2",
+   "cambi": {
+    "classe": "DIFETTO",
+    "stato": "SOSPESA"
+   },
+   "citazione": "NON RIPARATI IN QUESTO GIRO",
+   "conf": "alta",
+   "perche": "NON COMPARE: ne- nella voce, ne- nella riga, ne- nella sezione, ne- nel file `doc/STATO_RUN.md`",
+   "riga": "| **B2** | **`Z31` — i sigilli non ri-girabili** | `Z31`, citata in **17 file** | **rifatta TRE volte**, l'ultima ieri | il recupero sistematico → **è il §2.2 del mandato di oggi**, in corso | **io** | `VALE SEMPRE` |"
+  },
+  {
+   "id": "REGISTRO_FISICA:SCENA-1",
+   "cambi": {
+    "classe": "CURA",
+    "dominio": "FISICA",
+    "stato": "CHIUSA"
+   },
+   "citazione": "CHIUSA il 2026-09-25",
+   "conf": "alta",
+   "perche": "NON COMPARE: ne- nella voce, ne- nella riga, ne- nella sezione, ne- nel file `doc/REGISTRO_FISICA.md`",
+   "riga": "### ✅✅ `SCENA-1`, STRADA (1): **IL VUOTO DI DEFAULT E' LA SATURAZIONE, E `SEMINA_LAM` E' OBBLIGATORIA** *(Luca, 2026-09-25)* ``` PRIMA net.semina(a.nodi) con `a.nodi = SEME_INIZIALE = 900` in raggio 4.0 -> con `SEMINA_LAM` RIFIUTA: la saturazione vera e' 455 DOPO net.semina(-1 if SEMINA_LAM else a.n"
+  },
+  {
+   "id": "Q6",
+   "cambi": {
+    "classe": "DIFETTO",
+    "stato": "CHIUSA"
+   },
+   "citazione": "il FAIL era del criterio",
+   "conf": "alta",
+   "perche": "NON COMPARE: ne- nella voce, ne- nella riga, ne- nella sezione, ne- nel file `CLAUDE.md`",
+   "riga": ""
+  },
+  {
+   "id": "R3",
+   "cambi": {
+    "classe": "DIFETTO",
+    "stato": "CHIUSA"
+   },
+   "citazione": "il FAIL era del criterio",
+   "conf": "alta",
+   "perche": "NON COMPARE: ne- nella voce, ne- nella riga, ne- nella sezione, ne- nel file `CLAUDE.md`",
+   "riga": ""
+  },
+  {
+   "id": "R5",
+   "cambi": {
+    "classe": "DIFETTO",
+    "stato": "CHIUSA"
+   },
+   "citazione": "il FAIL era del criterio",
+   "conf": "alta",
+   "perche": "NON COMPARE: ne- nella voce, ne- nella riga, ne- nella sezione, ne- nel file `CLAUDE.md`",
+   "riga": ""
+  },
+  {
+   "id": "U3",
+   "cambi": {
+    "classe": "DIFETTO",
+    "stato": "CHIUSA"
+   },
+   "citazione": "il FAIL era del criterio",
+   "conf": "alta",
+   "perche": "NON COMPARE: ne- nella voce, ne- nella riga, ne- nella sezione, ne- nel file `CLAUDE.md`",
+   "riga": ""
+  },
+  {
+   "id": "FASCE-TAU",
+   "cambi": {
+    "classe": "FRONTE"
+   },
+   "citazione": "DA VERIFICARE",
+   "conf": "alta",
+   "perche": "### COMPARE NEL FILE `doc/STATO_RUN.md` MA FUORI DALLA SEZIONE della voce, e la regola chiede la riga o la sezione che la contiene",
+   "riga": "| **FASCE-TAU** | **LA CRESCITA E' COORDINATA COL TEMPO PROPRIO?** — l'espansione non dev'essere omogenea in senso **assoluto**, ma omogenea **DENTRO UNA FASCIA DI TEMPO PROPRIO**: cio' che condivide lo stesso `r` cresce insieme, e fasce diverse crescono in modo diverso, **in proporzione a quanto il"
+  },
+  {
+   "id": "L-STELLA",
+   "cambi": {
+    "classe": "STANDARD"
+   },
+   "citazione": "Regola scritta, NON un presidio",
+   "conf": "alta",
+   "perche": "NON COMPARE: ne- nella voce, ne- nella riga, ne- nella sezione, ne- nel file `CLAUDE.md par.11`",
+   "riga": ""
+  },
+  {
+   "id": "CICLO-CHIUSURA-SEGNO",
+   "cambi": {
+    "dominio": "METODO"
+   },
+   "citazione": "NON tocca la fisica",
+   "conf": "alta",
+   "perche": "### COMPARE NEL FILE `doc/STATO_RUN.md` MA FUORI DALLA SEZIONE della voce, e la regola chiede la riga o la sezione che la contiene",
+   "riga": "## `CICLO-CHIUSURA-SEGNO` — **il segno dell'arco di chiusura e' OPPOSTO al verso in cui il ciclo lo percorre** *(Aperta il 2026-10-06 sera, ### **su mandato di Luca.** ### **Cercata prima nell'indice con sei termini** -- `base_cicli`, `circolazione`, `olonomia`, `ciclo`, `chiusura`, `verso`: ### **n"
+  },
+  {
+   "id": "D27",
+   "cambi": {
+    "stato": "CHIUSA"
+   },
+   "citazione": "NON E' UN DIFETTO NEL SISTEMA ATTUALE",
+   "conf": "media",
+   "perche": "### COMPARE NEL FILE `doc/STATO_RUN.md` MA FUORI DALLA SEZIONE della voce, e la regola chiede la riga o la sezione che la contiene",
+   "riga": "| **`Z65`** | **DIFETTO** | **`D27`** *(APERTO)* | **Il grafo e' in QUATTRO COMPONENTI che non si toccano mai**, e la bimodalita' del grado e' la semina. **Una distanza SUL GRAFO fra componenti diverse non esiste**, e le tre prove dell'ipotesi la usano |"
+  },
+  {
+   "id": "SCHED-PASSO",
+   "cambi": {
+    "dominio": "INFRASTRUTTURA"
+   },
+   "citazione": "architettura del passo, non fisica",
+   "conf": "media",
+   "perche": "NON COMPARE: ne- nella voce, ne- nella riga, ne- nella sezione, ne- nel file `doc/PIANO_schedulatore_passo.md`",
+   "riga": ""
+  },
+  {
+   "id": "D26",
+   "cambi": {
+    "stato": "CHIUSA"
+   },
+   "citazione": "La cura in se' resta valida",
+   "conf": "media",
+   "perche": "### COMPARE NEL FILE `doc/STATO_RUN.md` MA FUORI DALLA SEZIONE della voce, e la regola chiede la riga o la sezione che la contiene",
+   "riga": "| **`Z53`** | **DIFETTO** | **`D26`** *(CURATO)* | Le coorti **non sopravvivevano allo SNAPSHOT**: dopo un salva/ricarica il lignaggio ripartiva VUOTO |"
+  },
+  {
+   "id": "REG-A",
+   "cambi": {
+    "classe": "MISURA",
+    "stato": "CHIUSA"
+   },
+   "citazione": "FATTA (1214283)",
+   "conf": "media",
+   "perche": "NON COMPARE: ne- nella voce, ne- nella riga, ne- nella sezione, ne- nel file `doc/STATO_RUN.md`",
+   "riga": "| **REG-A** | **FASE A del registro della fisica: l'INVENTARIO degli scrittori di stato** | MANDATO-REGISTRO §2 | ✅ **FATTA** *(`1214283`, blob `2c70e4ad`)*: **`164` scritture fisiche su `27` grandezze, di cui `65` CONCATENAZIONI**, piu' `313` scritture su attributi **non dichiarati fisici**, elenca"
+  },
+  {
+   "id": "TW-DIVISIONE-INCOGNITA",
+   "cambi": {
+    "classe": "MISURA",
+    "dominio": "METODO"
+   },
+   "citazione": "una soglia misurata nel posto sbagliato",
+   "conf": "media",
+   "perche": "NON COMPARE: ne- nella voce, ne- nella riga, ne- nella sezione, ne- nel file `csv/_test_fork/_misure_calore/`",
+   "riga": ""
+  },
+  {
+   "id": "ESENTE-P3",
+   "cambi": {
+    "classe": "PRESIDIO"
+   },
+   "citazione": "ESENTE-H-P3",
+   "conf": "media",
+   "perche": "NON COMPARE: ne- nella voce, ne- nella riga, ne- nella sezione, ne- nel file `doc/STATO_RUN.md`",
+   "riga": ""
+  },
+  {
+   "id": "C5RES-INVARIANTI",
+   "cambi": {
+    "classe": "FRONTE",
+    "dominio": "INFRASTRUTTURA"
+   },
+   "citazione": "I4 scatola nera",
+   "conf": "media",
+   "perche": "### COMPARE NEL FILE `doc/STATO_RUN.md` MA FUORI DALLA SEZIONE della voce, e la regola chiede la riga o la sezione che la contiene",
+   "riga": "| **C5RES-INVARIANTI** | **I RESIDUI DI `C5`** — **`I4`** la scatola nera *(rigiocare da solo il passo in cui scatta un invariante)*, **`I5`** la tabella degli underflow **per RIGA**, e la **MODALITA' FINE** *(controllo dopo OGNI scrittura invece che a fine passo)* | mandato `C5`, decisione di Luca "
+  }
+ ],
+ "lasciate": [
+  {
+   "id": "C13",
+   "campo": "stato",
+   "valore": "CHIUSA",
+   "perche": "### la riga NON PORTA UN COMMIT, e chiudere pretende `chiusura.commit`: un commit NON SI INVENTA (la stessa regola del punto 1)",
+   "riga": "| **C13** 🟨`VALE PER QUELLA SCENA` ⏳`[EPOCA 1 · MISURA]` | **⚠⚠ IL TEMPO-LUCE NON E' TESTABILE A QUESTA DENSITA'.** `cs` non e' «quasi-costante per caso»: e' **morto per densita'** (`I ~ 0.05` contro soglia `~400`, §6). Quindi **`tau = d/cs` E' `tau ∝ d`**, e tutto il ramo di lavoro su di esso è, in"
+  },
+  {
+   "id": "C17",
+   "campo": "stato",
+   "valore": "CHIUSA",
+   "perche": "### la riga NON PORTA UN COMMIT, e chiudere pretende `chiusura.commit`: un commit NON SI INVENTA (la stessa regola del punto 1)",
+   "riga": "| **C17** 🟨`VALE PER QUELLA SCENA` ⏳`[EPOCA 1 · MISURA]` | **LA DISPERSIONE DI `r` E' RUMORE: la FASE 5 non ha, a oggi, NESSUN effetto misurabile.** Ne' sulla mediana (non poteva, C12) ne' sulla dispersione (poteva, e non ne ha). La cura C11 resta giusta — un flag inerte al 95.33 % e' un difetto — m"
+  },
+  {
+   "id": "C18",
+   "campo": "stato",
+   "valore": "CHIUSA",
+   "perche": "### la riga NON PORTA UN COMMIT, e chiudere pretende `chiusura.commit`: un commit NON SI INVENTA (la stessa regola del punto 1)",
+   "riga": "| **C18** 🟨`VALE PER QUELLA SCENA` ⏳`[EPOCA 1 · MISURA]` | **IL FDT RIFATTO SUL SISTEMA NON CASTRATO (FASE 5 attiva, `--cs-dinamico` acceso): MIGLIORA DI DUE ORDINI E RESTA INSUFFICIENTE DI TRE. NON SI CABLA** | `lambda` **3.47 -> ~26** (x7.5); `tau_smorz` **28.8 -> 3.7-3.8 passi**; `kT/Lam` **~2e7 "
+  },
+  {
+   "id": "C22",
+   "campo": "stato",
+   "valore": "CHIUSA",
+   "perche": "### la riga NON PORTA UN COMMIT, e chiudere pretende `chiusura.commit`: un commit NON SI INVENTA (la stessa regola del punto 1)",
+   "riga": "| **C22** 🟨`VALE PER QUELLA SCENA` ⏳`[EPOCA 1 · MISURA]` | **LA CRESCITA DI `L_tot` E' L'INERZIA CHE SI ACCENDE, NON UNA VIOLAZIONE.** Il mandato la attribuiva alla mitosi; **misurato: `L_tot` cresce DI PIU' nei passi SENZA nascite** (da 3 a 7 volte, su 4 run su 4). **E la scomposizione dice perche'"
+  },
+  {
+   "id": "C23",
+   "campo": "stato",
+   "valore": "CHIUSA",
+   "perche": "### la riga NON PORTA UN COMMIT, e chiudere pretende `chiusura.commit`: un commit NON SI INVENTA (la stessa regola del punto 1)",
+   "riga": "| **C23** 🟨`VALE PER QUELLA SCENA` ⏳`[EPOCA 1 · MISURA]` | **IL FATTORE `(CS_M/cs)^2` NON E' ~1 SULLA CODA a 500 passi.** La mediana resta `1.000020` — il nodo tipico non lo sente — ma il **massimo** arriva a **1.019** e il **6-16 % dei nodi** supera l'1 % | `frac>1%`: **0.000 al passo 50**, **0.057"
+  },
+  {
+   "id": "C24",
+   "campo": "stato",
+   "valore": "CHIUSA",
+   "perche": "### la riga NON PORTA UN COMMIT, e chiudere pretende `chiusura.commit`: un commit NON SI INVENTA (la stessa regola del punto 1)",
+   "riga": "| **C24** 🟨`VALE PER QUELLA SCENA` ⏳`[EPOCA 1 · MISURA]` | **LA CRESCITA DI `L_tot` STA NELLA CODA, NON NEL NODO TIPICO — fatto nuovo, non spiegato.** `L_tot/n` cresce **x110-126** (OFF) e **x6.4-10** (ON), ma il prodotto delle MEDIANE non ci si avvicina: `I` mediana **x2.3-4.1**, `omega` mediano **"
+  },
+  {
+   "id": "C1-PEQ-ESATTO",
+   "campo": "stato",
+   "valore": "CHIUSA",
+   "perche": "### la riga NON PORTA UN COMMIT, e chiudere pretende `chiusura.commit`: un commit NON SI INVENTA (la stessa regola del punto 1)",
+   "riga": ""
+  },
+  {
+   "id": "C1BIS-ANOM-SIMM",
+   "campo": "stato",
+   "valore": "CHIUSA",
+   "perche": "### la riga NON PORTA UN COMMIT, e chiudere pretende `chiusura.commit`: un commit NON SI INVENTA (la stessa regola del punto 1)",
+   "riga": ""
+  },
+  {
+   "id": "C2-PEQ-NASCITA",
+   "campo": "stato",
+   "valore": "CHIUSA",
+   "perche": "### la riga NON PORTA UN COMMIT, e chiudere pretende `chiusura.commit`: un commit NON SI INVENTA (la stessa regola del punto 1)",
+   "riga": ""
+  },
+  {
+   "id": "C3-SCALA-MIN-PASSO",
+   "campo": "stato",
+   "valore": "CHIUSA",
+   "perche": "### la riga NON PORTA UN COMMIT, e chiudere pretende `chiusura.commit`: un commit NON SI INVENTA (la stessa regola del punto 1)",
+   "riga": ""
+  },
+  {
+   "id": "C4-COES-CAUSALE",
+   "campo": "stato",
+   "valore": "CHIUSA",
+   "perche": "### la riga NON PORTA UN COMMIT, e chiudere pretende `chiusura.commit`: un commit NON SI INVENTA (la stessa regola del punto 1)",
+   "riga": ""
+  },
+  {
+   "id": "D0",
+   "campo": "stato",
+   "valore": "CHIUSA",
+   "perche": "### la riga NON PORTA UN COMMIT, e chiudere pretende `chiusura.commit`: un commit NON SI INVENTA (la stessa regola del punto 1)",
+   "riga": "| **D0** | **CHI FA SCAPPARE `d0`** | 21/9 | ✅ **MISURATO: e' IL FRENO.** Gli scrittori spingono **giu'** `-1.543e+05`, il vincolo **aggiunge** `+3.205e+05`. **`S10` inerte, `S09` verso il BASSO** *(`Z102`)*. **La spinta e' la DISCESA CANCELLATA**, `|dx|·min(1, LAM/d0)`, e **si indebolisce da sola**"
+  },
+  {
+   "id": "CHK2",
+   "campo": "stato",
+   "valore": "CHIUSA",
+   "perche": "### la riga NON PORTA UN COMMIT, e chiudere pretende `chiusura.commit`: un commit NON SI INVENTA (la stessa regola del punto 1)",
+   "riga": "| **CHK2** | **CHECKPOINT 2** | GLOBALE §3 | ✅ **raggiunto e riferito a Luca.** **IL RUN LUNGO NON SI LANCIA** |"
+  },
+  {
+   "id": "COMPONENTI:S3b",
+   "campo": "stato",
+   "valore": "CHIUSA",
+   "perche": "### la riga NON PORTA UN COMMIT, e chiudere pretende `chiusura.commit`: un commit NON SI INVENTA (la stessa regola del punto 1)",
+   "riga": "| `S3b` | l'orologio **rallenta** dove `cs` è basso | `0.0100` volte a `cs = 0.1·CS_M` |"
+  },
+  {
+   "id": "COMPONENTI:S3c",
+   "campo": "stato",
+   "valore": "CHIUSA",
+   "perche": "### la riga NON PORTA UN COMMIT, e chiudere pretende `chiusura.commit`: un commit NON SI INVENTA (la stessa regola del punto 1)",
+   "riga": ""
+  },
+  {
+   "id": "D34",
+   "campo": "stato",
+   "valore": "CHIUSA",
+   "perche": "### la riga NON PORTA UN COMMIT, e chiudere pretende `chiusura.commit`: un commit NON SI INVENTA (la stessa regola del punto 1)",
+   "riga": "| **D34** ✅`CURATO IN CODICE il 2026-09-24` | **Il wrap «a 4π» di `ritmo()` (`:2584-2585`) NON AVVOLGE: su `(-2π, 2π)` e' l'IDENTITA'. Ogni attraversamento del taglio a `±π` registra una frequenza spuria di `~2π/DT`** | `Z117`: dimostrazione algebrica *(`max|w4(a) - a| = 0` su `100 001` punti)* + mi"
+  },
+  {
+   "id": "G2",
+   "campo": "stato",
+   "valore": "CHIUSA",
+   "perche": "### la riga NON PORTA UN COMMIT, e chiudere pretende `chiusura.commit`: un commit NON SI INVENTA (la stessa regola del punto 1)",
+   "riga": "| **G2** | **§2 DOVE SPINGE LA GRAVITA'** | GLOBALE-DISEGNO §2 | ✅ **FATTO.** Il saldo vive **sul CONFINE vuoto-massa** *(`-1.4150`/arco, `107 %` del totale, `Z105`)*; i 20 archi col `|saldo|` maggiore sono **`20/20` nel VUOTO** e il confine e' **DIFFUSO** su `96 429` archi all'**`85 %` del plateau*"
+  },
+  {
+   "id": "G3",
+   "campo": "stato",
+   "valore": "CHIUSA",
+   "perche": "### la riga NON PORTA UN COMMIT, e chiudere pretende `chiusura.commit`: un commit NON SI INVENTA (la stessa regola del punto 1)",
+   "riga": "| **G3** | **§3 PROVA DI SPEGNIMENTO: la GRAVITA' BIFASE** | GLOBALE-DISEGNO §3 | ✅ **FATTA.** ✅ sigillo `7/7` · ✅ controllo involucro `206/0`. **ESITO: la gravita' NON e' il motore.** Rapporto di `d0` **`1.2321` → `1.2211`**, differenza `0.9 %`. **La compressione PEGGIORA** *(`d/d0` `0.7489` → `0.6"
+  },
+  {
+   "id": "G4",
+   "campo": "stato",
+   "valore": "CHIUSA",
+   "perche": "### la riga NON PORTA UN COMMIT, e chiudere pretende `chiusura.commit`: un commit NON SI INVENTA (la stessa regola del punto 1)",
+   "riga": "| **G4** | **§4 PROVA DI SPEGNIMENTO: la MEMORIA DEL MOTO** — flag `MEM_MOTO` | GLOBALE-DISEGNO §4 | ✅ **FATTO** *(finito 14:39:27)*. **La memoria del moto NON e' il motore** — `d0` cresce ancora *(`1.1607`)* — **ma ne porta il `62 %`**, e **spegnendola la COMPRESSIONE SPARISCE**: `d/d0` da `0.7489`"
+  },
+  {
+   "id": "S02",
+   "campo": "stato+superata_da",
+   "valore": "D31",
+   "perche": "### `D31` NON E- UNA DECISIONE NE- UN ASSIOMA, e lo schema la rifiuta: una voce superata deve essere superata DA UNA DECISIONE, e un difetto non decide niente",
+   "riga": ""
+  },
+  {
+   "id": "S03",
+   "campo": "stato",
+   "valore": "CHIUSA",
+   "perche": "### la riga NON PORTA UN COMMIT, e chiudere pretende `chiusura.commit`: un commit NON SI INVENTA (la stessa regola del punto 1)",
+   "riga": "| **S03** | **La memoria del moto fa scappare `d0`** | ✅ **DECISO da `Z109`**: spegnendola `d0` **cresce ancora** *(`1.1607`)*, quindi **NON e' il motore** — ma la crescita **cala del `62 %`** e **la compressione sparisce** | **NON E' IL MOTORE, ma pesa il `62 %`** |"
+  },
+  {
+   "id": "S04",
+   "campo": "stato",
+   "valore": "CHIUSA",
+   "perche": "### la riga NON PORTA UN COMMIT, e chiudere pretende `chiusura.commit`: un commit NON SI INVENTA (la stessa regola del punto 1)",
+   "riga": "| **S04** | **La crescita e' NUCLEAZIONE, non stiramento** | ❌ **CADE con `Z108`**: nascite meno morti valgono lo **`0.01 %`** del `Δ` *(`+254.4` su `+1.731e+06`)* | **NON E' IL MOTORE** |"
+  },
+  {
+   "id": "Z13",
+   "campo": "stato",
+   "valore": "CHIUSA",
+   "perche": "### la riga NON PORTA UN COMMIT, e chiudere pretende `chiusura.commit`: un commit NON SI INVENTA (la stessa regola del punto 1)",
+   "riga": ""
+  },
+  {
+   "id": "REGISTRO_FISICA:P2",
+   "campo": "stato",
+   "valore": "CHIUSA",
+   "perche": "### la riga NON PORTA UN COMMIT, e chiudere pretende `chiusura.commit`: un commit NON SI INVENTA (la stessa regola del punto 1)",
+   "riga": ""
+  },
+  {
+   "id": "Z29",
+   "campo": "stato",
+   "valore": "CHIUSA",
+   "perche": "### la riga NON PORTA UN COMMIT, e chiudere pretende `chiusura.commit`: un commit NON SI INVENTA (la stessa regola del punto 1)",
+   "riga": ""
+  },
+  {
+   "id": "Z30",
+   "campo": "stato",
+   "valore": "CHIUSA",
+   "perche": "### la riga NON PORTA UN COMMIT, e chiudere pretende `chiusura.commit`: un commit NON SI INVENTA (la stessa regola del punto 1)",
+   "riga": ""
+  },
+  {
+   "id": "Z53",
+   "campo": "stato",
+   "valore": "CHIUSA",
+   "perche": "### la riga NON PORTA UN COMMIT, e chiudere pretende `chiusura.commit`: un commit NON SI INVENTA (la stessa regola del punto 1)",
+   "riga": ""
+  },
+  {
+   "id": "Z5",
+   "campo": "stato",
+   "valore": "CHIUSA",
+   "perche": "### la riga NON PORTA UN COMMIT, e chiudere pretende `chiusura.commit`: un commit NON SI INVENTA (la stessa regola del punto 1)",
+   "riga": "| **Z5** 🟨`VALE PER QUELLA SCENA` ⏳`[EPOCA 1 · MISURA]` | **A3 NON E' UN CASO PARTICOLARE DI A2 — risolta una delle domande aperte degli ASSIOMI** (2026-09-17) | `doc/ASSIOMI.md`, sezione APERTO #2, chiedeva se **A3 discenda da A2**. **Basta un controesempio, e il codice ne ha uno:** `u_nodo = I / m"
+  },
+  {
+   "id": "Z28",
+   "campo": "stato",
+   "valore": "CHIUSA",
+   "perche": "### la riga NON PORTA UN COMMIT, e chiudere pretende `chiusura.commit`: un commit NON SI INVENTA (la stessa regola del punto 1)",
+   "riga": "| **Z28** 🟨`VALE PER QUELLA SCENA` ⏳`[EPOCA 1 · MISURA]` | **✅ CHIUSA PRIMA DI NASCERE — il limite «serve una topologia a grado basso o variabile» era un ERRORE DEL MANDATO, costruito su una MIA conclusione sbagliata. E gli ERRORI DI POPOLAZIONE sono QUATTRO in due giorni** (2026-09-18) | Il mandato"
+  },
+  {
+   "id": "REGISTRO_FISICA:T3",
+   "campo": "stato",
+   "valore": "CHIUSA",
+   "perche": "### la riga NON PORTA UN COMMIT, e chiudere pretende `chiusura.commit`: un commit NON SI INVENTA (la stessa regola del punto 1)",
+   "riga": "| `T3` | **un arco sotto `LAM` a flag SPENTI FERMA il run** | quello che prima **non** faceva |"
+  },
+  {
+   "id": "REGISTRO_FISICA:T4",
+   "campo": "stato",
+   "valore": "CHIUSA",
+   "perche": "### la riga NON PORTA UN COMMIT, e chiudere pretende `chiusura.commit`: un commit NON SI INVENTA (la stessa regola del punto 1)",
+   "riga": ""
+  },
+  {
+   "id": "REGISTRO_FISICA:T5",
+   "campo": "stato",
+   "valore": "CHIUSA",
+   "perche": "### la riga NON PORTA UN COMMIT, e chiudere pretende `chiusura.commit`: un commit NON SI INVENTA (la stessa regola del punto 1)",
+   "riga": "| `T5` | **byte-inerte**: `206` campi identici, `0` diversi contro `_cura1_corto` | l'invariante **legge soltanto** |"
+  },
+  {
+   "id": "REGISTRO_FISICA:U2-5",
+   "campo": "stato",
+   "valore": "CHIUSA",
+   "perche": "### la riga NON PORTA UN COMMIT, e chiudere pretende `chiusura.commit`: un commit NON SI INVENTA (la stessa regola del punto 1)",
+   "riga": "**`U2-5` è MODEL-FREE:** non confronta col mio conto, **legge `d` e `d0` e conta gli archi che"
+  },
+  {
+   "id": "REGISTRO_FISICA:U2-6",
+   "campo": "stato",
+   "valore": "CHIUSA",
+   "perche": "### la riga NON PORTA UN COMMIT, e chiudere pretende `chiusura.commit`: un commit NON SI INVENTA (la stessa regola del punto 1)",
+   "riga": "**`U2-6` È IL CASO CHE DEVE FALLIRE** *(`P1-sexies`, ed è il criterio più importante)*: la"
+  },
+  {
+   "id": "T3a",
+   "campo": "stato",
+   "valore": "CHIUSA",
+   "perche": "### la riga NON PORTA UN COMMIT, e chiudere pretende `chiusura.commit`: un commit NON SI INVENTA (la stessa regola del punto 1)",
+   "riga": ""
+  },
+  {
+   "id": "T3b",
+   "campo": "stato",
+   "valore": "CHIUSA",
+   "perche": "### la riga NON PORTA UN COMMIT, e chiudere pretende `chiusura.commit`: un commit NON SI INVENTA (la stessa regola del punto 1)",
+   "riga": ""
+  },
+  {
+   "id": "Z142",
+   "campo": "stato",
+   "valore": "CHIUSA",
+   "perche": "### la riga NON PORTA UN COMMIT, e chiudere pretende `chiusura.commit`: un commit NON SI INVENTA (la stessa regola del punto 1)",
+   "riga": "| **Z142** 🟥`REPERTO, DIFETTI MIEI` ⏳`[archivi delle cure · SIGILLO FALLITO]` | **IL SIGILLO DI `E4-LAM` FALLISCE `4/5`, E I DUE DIFETTI SONO MIEI: un CRITERIO che cerca nel TESTO invece che nel CODICE, e una CHIAVE DUPLICATA nei `DOMINI` perche' avevo concluso un'assenza da una ricerca PARZIALE** ("
+  },
+  {
+   "id": "Z2",
+   "campo": "classe",
+   "valore": "DIFETTO",
+   "perche": "### LA REGOLA DELLA CLASSE DA- `MISURA`, NON `DIFETTO`: la riga CONTRADDICE il cambio (la riga dice <<un esito misurato>> (la PRIMA che compare): 9-17) | La correzione (2) ha sostituito 0.02median(self.d0)re)",
+   "riga": "| **Z2** 🟩`VALE SEMPRE` ⏳`[EPOCA 1 · MISURA]` | **`spinta`: A2 e A3 sono stati tolti, A1 NO** (2026-09-17) | La correzione (2) ha sostituito `0.02*median(self.d0)*rep` con `0.02*self.d0*_rep`: cadono la statistica globale (A2) e la normalizzazione sul proprio insieme (A3). **Il coefficiente `0.02` r"
+  },
+  {
+   "id": "Z6",
+   "campo": "classe",
+   "valore": "DIFETTO",
+   "perche": "### LA REGOLA DELLA CLASSE DA- `MISURA`, NON `DIFETTO`: la riga CONTRADDICE il cambio (la riga dice <<un esito misurato>> (la PRIMA che compare): al posto di NaN) e ① inerzia (rho/peq = 0/0 = NaN in omega_s))",
+   "riga": "| **Z6** 🟩`VALE SEMPRE` ⏳`[EPOCA 1 · MISURA]` | **IL TRANSITORIO DI ACCENSIONE E' UN BLOCCO STRUTTURALE — ha fermato DUE correzioni** (2026-09-17) | `psi` **non viene calcolato prima del primo `step`**, quindi ai passi 0-1 **ogni grandezza derivata e' zero**: `rho`, `peq`, e ogni **rapporto fra gran"
+  },
+  {
+   "id": "C5",
+   "campo": "stato",
+   "valore": "CHIUSA",
+   "perche": "### la riga NON PORTA UN COMMIT, e chiudere pretende `chiusura.commit`: un commit NON SI INVENTA (la stessa regola del punto 1)",
+   "riga": "| **C5** 🟨`VALE PER QUELLA SCENA` ⏳`[EPOCA 1 · MISURA]` | **`tau_luce = d/cs` e' PIATTO** ⇒ la sostituzione **rompe** la cancellazione | **+0.097 ± 0.0055**, IC95 [+0.086, +0.108] | `doc/TAU_tempo_luce.md` §7 |"
+  },
+  {
+   "id": "Z21",
+   "campo": "stato",
+   "valore": "SUPERATA",
+   "perche": "### `SUPERATA` SENZA DIRE DA CHE COSA: lo schema pretende `superata_da`, e il file non lo porta. <<Superata>> vuol dire CHE QUALCUNO HA DECISO ALTRO, e chi ha deciso NON SI INVENTA",
+   "riga": "| **Z21** 🟨`VALE PER QUELLA SCENA` ⏳`[EPOCA 1 · MISURA]` | **`SPIN_FEEDBACK` con `TAU_A = 2.0`: ESITO MISTO, e non si sceglie una delle quattro letture** (2026-09-17) | **Base verificata** (Z20). `E4` **[GATE] PASSA**: feedback applicato in **124/126** chiamate (98.4 %), `lift_corto` 2 = transitorio"
+  },
+  {
+   "id": "H1",
+   "campo": "stato",
+   "valore": "CHIUSA",
+   "perche": "### la riga NON PORTA UN COMMIT, e chiudere pretende `chiusura.commit`: un commit NON SI INVENTA (la stessa regola del punto 1)",
+   "riga": "### **`H1` aiuta, in modo piccolo e sistematico.** ### ⛔ **Ma `0.5536` sta sotto `0.60`, e il criterio dice `H1 NON BASTA`.**"
+  },
+  {
+   "id": "H3",
+   "campo": "stato",
+   "valore": "CHIUSA",
+   "perche": "### la riga NON PORTA UN COMMIT, e chiudere pretende `chiusura.commit`: un commit NON SI INVENTA (la stessa regola del punto 1)",
+   "riga": "# `H3` — **CHI SCALDA IL VUOTO: IL TERMOSTATO O LO SCUOTIMENTO?** *Referto generato da `csv/_test_fork/_referto_termo_h3.py`. Dati: `csv/_test_fork/_termo_h3/`. Criteri, previsioni e aritmetica: `doc/TASK_HISTORY/2026-10-07_h3-termostato-e-scuotimento.md`, committato ### **PRIMA** dello strumento e "
+  },
+  {
+   "id": "DE-ACCOPPIABILITA",
+   "campo": "stato",
+   "valore": "CHIUSA",
+   "perche": "### la riga NON PORTA UN COMMIT, e chiudere pretende `chiusura.commit`: un commit NON SI INVENTA (la stessa regola del punto 1)",
+   "riga": "## 4. DE-ACCOPPIABILITA' — analisi, non piano La domanda \"e se il gate diventasse il solo `SCUOTIMENTO`?\" e' in parte **superata dai fatti**: la legge **gia' gira** in entrambi gli schemi. Non c'e' nulla da de-accoppiare per \"accendere il vuoto\": e' acceso. Quel che **non** esiste nel ramo asincrono"
+  },
+  {
+   "id": "REGISTRO_FISICA:P3",
+   "campo": "stato",
+   "valore": "CHIUSA",
+   "perche": "### la riga NON PORTA UN COMMIT, e chiudere pretende `chiusura.commit`: un commit NON SI INVENTA (la stessa regola del punto 1)",
+   "riga": ""
+  },
+  {
+   "id": "Z27",
+   "campo": "stato",
+   "valore": "CHIUSA",
+   "perche": "### la riga NON PORTA UN COMMIT, e chiudere pretende `chiusura.commit`: un commit NON SI INVENTA (la stessa regola del punto 1)",
+   "riga": ""
+  },
+  {
+   "id": "Z91",
+   "campo": "stato",
+   "valore": "CHIUSA",
+   "perche": "### LA REGOLA DELLO STATO DA- `SOSPESA`, NON `CHIUSA`: la riga CONTRADDICE il cambio (la riga dice <<APERTA>> (la PRIMA parola di stato): | Z91 APERTA [EPOCA 2 · LETTURA DEL CODICE] | SCALA_)",
+   "riga": "| **Z91** 🟥`APERTA` ⏳`[EPOCA 2 · LETTURA DEL CODICE]` | **⚠ `SCALA_MIN` FRENA OGNI SCRITTURA SEPARATAMENTE, QUINDI IL RISULTATO DIPENDE DALL'ORDINE DELLE LEGGI E PRODUCE UN BIAS VERSO L'ALTO ANCHE A VARIAZIONE NETTA NULLA** (2026-09-21, mandato §②, **sola lettura**; simulatore `4954fe5b`; `doc/REFER"
+  },
+  {
+   "id": "Z92",
+   "campo": "stato",
+   "valore": "CHIUSA",
+   "perche": "### LA REGOLA DELLO STATO DA- `SOSPESA`, NON `CHIUSA`: la riga CONTRADDICE il cambio (la riga dice <<APERTA>> (la PRIMA parola di stato): freno che cresceva insieme alla fuga. | APERTA come LIMITE, non come)",
+   "riga": "| **Z92** 🟨`LIMITE DICHIARATO` ⏳`[EPOCA 2 · LETTURA DEL CODICE]` | **`COES_ADIM` legge ISTANTI MISTI, e il suo tetto e' GLOBALE: violerebbe `A5`, ma in questo run NON E' STATO ESERCITATO** (2026-09-21, mandato §②, sola lettura; `doc/REFERTO_istanti_scala_min_coes_adim.md`) | **① ISTANTI MISTI, dal c"
+  },
+  {
+   "id": "Z50",
+   "campo": "classe",
+   "valore": "MISURA",
+   "perche": "### LA REGOLA DELLA CLASSE DA- `DIFETTO`, NON `MISURA`: la riga CONTRADDICE il cambio (la riga dice <<DIFETTO MIO>> (la PRIMA che compare): O, un seme) | E PRIMA DEL RISULTATO, UN DIFETTO MIO, trovato perche)",
+   "riga": "| **Z50** 🟨`VALE PER QUELLA SCENA` ⏳`[EPOCA 1 · MISURA]` | **⚠ QUALIFICATA il 2026-09-18: VALE PER LA REGIONE DENSA.** Il mandato chiedeva `A_m` sui nodi con `rho_spin` SOPRA soglia, ma **se i bracci sono CIANO** — interferenza DISTRUTTIVA, `|psi|` basso — **stavano nel COMPLEMENTO**. **`Z51` ha mis"
+  },
+  {
+   "id": "Z7",
+   "campo": "classe",
+   "valore": "DIFETTO",
+   "perche": "### LA REGOLA DELLA CLASSE DA- `FRONTE`, NON `DIFETTO`: la riga CONTRADDICE il cambio (la riga dice <<una domanda o un programma, e la voce e- aperta>> (la PRIMA che compare): be cs^-4) non rompe nessun cons)",
+   "riga": "| **Z7** 🟩`VALE SEMPRE` ⏳`[EPOCA 1 · CODICE]` | **`_fatt_cs_ultimo` e' SCRITTO e MAI LETTO — quarto caso della stessa famiglia** (2026-09-17) | `:2123` `self._fatt_cs_ultimo = _fatt_cs # per la metrica (solo lettura a valle)`. **A valle non c'e' nessuno:** una sola occorrenza nel codice, ed e' la sc"
+  },
+  {
+   "id": "Z54",
+   "campo": "classe",
+   "valore": "CURA",
+   "perche": "### LA REGOLA DELLA CLASSE DA- `MISURA`, NON `CURA`: la riga CONTRADDICE il cambio (la riga dice <<CHIUSA PER MISURA>> (la PRIMA che compare): ampi: l'archivio non tocca la fisica. | CHIUSA per MISURA. To)",
+   "riga": "| **Z54** 🟨`VALE PER QUELLA SCENA` ⏳`[EPOCA 1 · MISURA]` | **✅ CHIUSA — L'ARCHIVIO A SERIE: `--db-serie` + `--db-rigioca` + `gzip`. Sigillo **12/12** sul blob `7c4dec1d`** (2026-09-19, `csv/_seal_fork/_sigillo_archivio_2026-09-19.txt`). **I tre difetti dichiarati nel commit `312a3b4` sono chiusi, co"
+  },
+  {
+   "id": "Y2",
+   "campo": "classe",
+   "valore": "DIFETTO",
+   "perche": "### LA REGOLA DELLA CLASSE DA- `MISURA`, NON `DIFETTO`: la riga CONTRADDICE il cambio (la riga dice <<un esito misurato>> (la PRIMA che compare): V | (a) u1_segno_ov_nullo scrive 2/pi = 0.6366, ma canon vien)",
+   "riga": "| **Y2** 🟩`VALE SEMPRE` ⏳`[EPOCA 1 · MISURA]` | **Due osservabili U(1) hanno il nullo SBAGLIATO o NON VERIFICATO, e una e' scritta nei CSV** | (a) `u1_segno_ov_nullo` scrive **`2/pi = 0.6366`**, ma `canon` viene da `_nb_grav()` — una direzione **diversa** dal Bloch del nodo — quindi il nullo e' **`("
+  },
+  {
+   "id": "REGISTRO_FISICA:E4-LAM",
+   "campo": "stato",
+   "valore": "CHIUSA",
+   "perche": "### la riga NON PORTA UN COMMIT, e chiudere pretende `chiusura.commit`: un commit NON SI INVENTA (la stessa regola del punto 1)",
+   "riga": ""
+  },
+  {
+   "id": "COMPONENTI:A1",
+   "campo": "dominio",
+   "valore": "FISICA",
+   "perche": "### la citazione si trova in `T4` -- la SEZIONE, o il FILE -- non nella voce ne- nella sua riga, e per `dominio` la regola del punto 1 non ha una lettura: una sezione contiene anche le voci vicine",
+   "riga": ""
+  },
+  {
+   "id": "COMPONENTI:A1",
+   "campo": "stato",
+   "valore": "CHIUSA",
+   "perche": "### la riga NON PORTA UN COMMIT, e chiudere pretende `chiusura.commit`: un commit NON SI INVENTA (la stessa regola del punto 1)",
+   "riga": ""
+  },
+  {
+   "id": "Z86",
+   "campo": "classe",
+   "valore": "DIFETTO",
+   "perche": "### LA REGOLA DELLA CLASSE DA- `MISURA`, NON `DIFETTO`: la riga CONTRADDICE il cambio (la riga dice <<un esito misurato>> (la PRIMA che compare): f884eff0 sul simulatore 43972024, esito 7/9; doc/REFERTO_sigi)",
+   "riga": "| **Z86** 🟩`VALE SEMPRE` ⏳`[EPOCA 2 · CODICE]` | **IL CRITERIO `Z4a` DEL SIGILLO DEL RAMO D ERA SBAGLIATO, E L'ERRORE E' MIO: `max(dx_eff - dx) <= 0` E' FALSO PER COSTRUZIONE quando si SMORZA una discesa** (2026-09-21, sigillo `f884eff0` sul simulatore `43972024`, esito `7/9`; `doc/REFERTO_sigillo_r"
+  },
+  {
+   "id": "Z145",
+   "campo": "classe",
+   "valore": "DIFETTO",
+   "perche": "### LA REGOLA DELLA CLASSE DA- `MISURA`, NON `DIFETTO`: la riga CONTRADDICE il cambio (la riga dice <<un esito misurato>> (la PRIMA che compare): ubprocess, ingresso --braccio. Collaudo 8/8, con K7/K8 che pr)",
+   "riga": "## `Z145` — ✅ **CHIUSO** — `T5` del sigillo di `CURA 2` era invalido: `dv > 0` letto come effetto *(2026-09-24)* **STATO: CHIUSO lo stesso giorno, con ENTRAMBI i pezzi del criterio soddisfatti.** 1. **`T5` rifatto in due processi freschi a un solo braccio:** `_cura2_corto` contro `_cura1_corto`. **I"
+  },
+  {
+   "id": "L-SOGLIA",
+   "campo": "stato",
+   "valore": "CHIUSA",
+   "perche": "### la riga NON PORTA UN COMMIT, e chiudere pretende `chiusura.commit`: un commit NON SI INVENTA (la stessa regola del punto 1)",
+   "riga": ""
+  },
+  {
+   "id": "STANDARD-4",
+   "campo": "stato",
+   "valore": "CHIUSA",
+   "perche": "### la riga NON PORTA UN COMMIT, e chiudere pretende `chiusura.commit`: un commit NON SI INVENTA (la stessa regola del punto 1)",
+   "riga": ""
+  },
+  {
+   "id": "SCHED-T3-REGOLE",
+   "campo": "dominio",
+   "valore": "FISICA",
+   "perche": "### la citazione si trova in `T4` -- la SEZIONE, o il FILE -- non nella voce ne- nella sua riga, e per `dominio` la regola del punto 1 non ha una lettura: una sezione contiene anche le voci vicine",
+   "riga": ""
+  },
+  {
+   "id": "D11",
+   "campo": "classe",
+   "valore": "DIFETTO",
+   "perche": "### LA REGOLA DELLA CLASSE DA- `MISURA`, NON `DIFETTO`: la riga CONTRADDICE il cambio (la riga dice <<un esito misurato>> (la PRIMA che compare): i sotto LAM sono ZERO, con min(d)/LAM = 1.000000 esatto (Z148)",
+   "riga": "| **D11** | **`d` scende DIECI VOLTE sotto `LAM` mentre `SCALA_MIN` e' acceso, e la causa NON e' trovata** | `Z87` | **la cura di `Z87`: il mondo si costruisce SEMPRE dopo i flag** *(`01eda44`, categoria D)* | **`CURATO`** — *decisione della revisione storica, 2026-09-26:* **la causa ERA che i flag "
+  },
+  {
+   "id": "D17",
+   "campo": "classe",
+   "valore": "DIFETTO",
+   "perche": "### LA REGOLA DELLA CLASSE DA- `MISURA`, NON `DIFETTO`: la riga CONTRADDICE il cambio (la riga dice <<un esito misurato>> (la PRIMA che compare): x(peq, 1e-9) NE RIBALTAVA IL SEGNO (da -3.72 a +1.8e+06) | Z9)",
+   "riga": "| **D17** | **`peq` diventava NEGATIVO e il pavimento `max(peq, 1e-9)` NE RIBALTAVA IL SEGNO** *(da `-3.72` a `+1.8e+06`)* | `Z94` | `PEQ_ESATTO` + `ANOM_SIMM` *(`C1`, `C1-bis`)* | **`CURATO`** |"
+  },
+  {
+   "id": "C7",
+   "campo": "classe",
+   "valore": "CURA",
+   "perche": "### LA REGOLA DELLA CLASSE DA- `MISURA`, NON `CURA`: la riga CONTRADDICE il cambio (la riga dice <<un esito misurato>> (la PRIMA che compare): rev veniva scartata a ogni mitosi ⇒ nel 72 % delle chiamate t)",
+   "riga": "| **C7** 🟩`VALE SEMPRE` ⏳`[EPOCA 1 · MISURA]` | **La cache `_cs_nodo_prev` veniva scartata a ogni mitosi** ⇒ nel 72 % delle chiamate `tau = d/cs` calcolava `tau = d/CS_M`. **Curata** (il figlio eredita da `src`, sesta voce della stessa convenzione). **NB: e' chiuso il DIFETTO, non un effetto fisico*"
+  },
+  {
+   "id": "C11",
+   "campo": "classe",
+   "valore": "CURA",
+   "perche": "### LA REGOLA DELLA CLASSE DA- `MISURA`, NON `CURA`: la riga CONTRADDICE il cambio (la riga dice <<un esito misurato>> (la PRIMA che compare): sa convenzione | guardia 4π fallita nel 95.33 % (143/150), co)",
+   "riga": "| **C11** 🟩`VALE SEMPRE` ⏳`[EPOCA 1 · MISURA]` | **`_psi_spin_prec` non era esteso alla mitosi ⇒ la guardia ESATTA di `ritmo()` scartava il ramo a **4π**: la **FASE 5 (orologio di doppia copertura) era INERTE in ogni run `--campo-spinoriale` mai girato**. `r` veniva dal ritmo **SCALARE a 2π**, quell"
+  },
+  {
+   "id": "D04",
+   "campo": "dominio",
+   "valore": "INFRASTRUTTURA",
+   "perche": "### la citazione si trova in `T4` -- la SEZIONE, o il FILE -- non nella voce ne- nella sua riga, e per `dominio` la regola del punto 1 non ha una lettura: una sezione contiene anche le voci vicine",
+   "riga": ""
+  },
+  {
+   "id": "CENS-A1",
+   "campo": "dominio",
+   "valore": "DOCUMENTAZIONE",
+   "perche": "### la citazione si trova in `T4` -- la SEZIONE, o il FILE -- non nella voce ne- nella sua riga, e per `dominio` la regola del punto 1 non ha una lettura: una sezione contiene anche le voci vicine",
+   "riga": ""
+  },
+  {
+   "id": "Y1",
+   "campo": "dominio",
+   "valore": "METODO",
+   "perche": "### la citazione si trova in `T4` -- la SEZIONE, o il FILE -- non nella voce ne- nella sua riga, e per `dominio` la regola del punto 1 non ha una lettura: una sezione contiene anche le voci vicine",
+   "riga": ""
+  },
+  {
+   "id": "MITOSI-2LAM-ACCESO",
+   "campo": "stato",
+   "valore": "CHIUSA",
+   "perche": "### la riga NON PORTA UN COMMIT, e chiudere pretende `chiusura.commit`: un commit NON SI INVENTA (la stessa regola del punto 1)",
+   "riga": ""
+  }
+ ],
+ "livelli": {
+  "T0": 49,
+  "T1": 36,
+  "T4": 33,
+  "T3": 22,
+  "T-STRUTTURALE": 1,
+  "T2": 5
+ },
+ "esiti": [
+  {
+   "id": "SOGLIA-MITOSI-3PI",
+   "verdetto": "APPLICATA",
+   "dettaglio": "['classe', 'stato'] in `T0` (alta)"
+  },
+  {
+   "id": "X1",
+   "verdetto": "APPLICATA",
+   "dettaglio": "['stato'] in `T1` (alta)"
+  },
+  {
+   "id": "A1-TREVIE",
+   "verdetto": "APPLICATA",
+   "dettaglio": "['stato'] in `T1` (alta)"
+  },
+  {
+   "id": "B3",
+   "verdetto": "APPLICATA",
+   "dettaglio": "['classe', 'stato'] in `T4` (alta)"
+  },
+  {
+   "id": "B4",
+   "verdetto": "APPLICATA",
+   "dettaglio": "['classe', 'stato'] in `T1` (alta)"
+  },
+  {
+   "id": "CENS-A4",
+   "verdetto": "NON_APPLICATA",
+   "dettaglio": "NON COMPARE: ne- nella voce, ne- nella riga, ne- nella sezione, ne- nel file `doc/CENSIMENTO_intenzioni.md`"
+  },
+  {
+   "id": "C13",
+   "verdetto": "LASCIATA",
+   "dettaglio": "citazione trovata in `T3`, ma NESSUN campo applicato: 1 lasciati"
+  },
+  {
+   "id": "C17",
+   "verdetto": "LASCIATA",
+   "dettaglio": "citazione trovata in `T3`, ma NESSUN campo applicato: 1 lasciati"
+  },
+  {
+   "id": "C18",
+   "verdetto": "LASCIATA",
+   "dettaglio": "citazione trovata in `T3`, ma NESSUN campo applicato: 1 lasciati"
+  },
+  {
+   "id": "C20",
+   "verdetto": "APPLICATA",
+   "dettaglio": "['chiusura', 'stato'] in `T3` (alta)"
+  },
+  {
+   "id": "C22",
+   "verdetto": "LASCIATA",
+   "dettaglio": "citazione trovata in `T3`, ma NESSUN campo applicato: 1 lasciati"
+  },
+  {
+   "id": "C23",
+   "verdetto": "LASCIATA",
+   "dettaglio": "citazione trovata in `T3`, ma NESSUN campo applicato: 1 lasciati"
+  },
+  {
+   "id": "C24",
+   "verdetto": "LASCIATA",
+   "dettaglio": "citazione trovata in `T3`, ma NESSUN campo applicato: 1 lasciati"
+  },
+  {
+   "id": "C1-PEQ-ESATTO",
+   "verdetto": "LASCIATA",
+   "dettaglio": "citazione trovata in `T4`, ma NESSUN campo applicato: 1 lasciati"
+  },
+  {
+   "id": "C1BIS-ANOM-SIMM",
+   "verdetto": "LASCIATA",
+   "dettaglio": "citazione trovata in `T4`, ma NESSUN campo applicato: 1 lasciati"
+  },
+  {
+   "id": "C2-PEQ-NASCITA",
+   "verdetto": "LASCIATA",
+   "dettaglio": "citazione trovata in `T4`, ma NESSUN campo applicato: 1 lasciati"
+  },
+  {
+   "id": "C3-SCALA-MIN-PASSO",
+   "verdetto": "LASCIATA",
+   "dettaglio": "citazione trovata in `T4`, ma NESSUN campo applicato: 1 lasciati"
+  },
+  {
+   "id": "C4-COES-CAUSALE",
+   "verdetto": "LASCIATA",
+   "dettaglio": "citazione trovata in `T4`, ma NESSUN campo applicato: 1 lasciati"
+  },
+  {
+   "id": "D0",
+   "verdetto": "APPLICATA_IN_PARTE",
+   "dettaglio": "applicati ['classe']; lasciati 1"
+  },
+  {
+   "id": "CHK2",
+   "verdetto": "LASCIATA",
+   "dettaglio": "citazione trovata in `T0`, ma NESSUN campo applicato: 1 lasciati"
+  },
+  {
+   "id": "COMPONENTI:S3b",
+   "verdetto": "LASCIATA",
+   "dettaglio": "citazione trovata in `T3`, ma NESSUN campo applicato: 1 lasciati"
+  },
+  {
+   "id": "COMPONENTI:S3c",
+   "verdetto": "LASCIATA",
+   "dettaglio": "citazione trovata in `T4`, ma NESSUN campo applicato: 1 lasciati"
+  },
+  {
+   "id": "D34",
+   "verdetto": "LASCIATA",
+   "dettaglio": "citazione trovata in `T0`, ma NESSUN campo applicato: 1 lasciati"
+  },
+  {
+   "id": "G2",
+   "verdetto": "APPLICATA_IN_PARTE",
+   "dettaglio": "applicati ['classe']; lasciati 1"
+  },
+  {
+   "id": "G3",
+   "verdetto": "APPLICATA_IN_PARTE",
+   "dettaglio": "applicati ['classe']; lasciati 1"
+  },
+  {
+   "id": "G4",
+   "verdetto": "APPLICATA_IN_PARTE",
+   "dettaglio": "applicati ['classe']; lasciati 1"
+  },
+  {
+   "id": "S02",
+   "verdetto": "LASCIATA",
+   "dettaglio": "citazione trovata in `T4`, ma NESSUN campo applicato: 1 lasciati"
+  },
+  {
+   "id": "S03",
+   "verdetto": "APPLICATA_IN_PARTE",
+   "dettaglio": "applicati ['classe']; lasciati 1"
+  },
+  {
+   "id": "S04",
+   "verdetto": "APPLICATA_IN_PARTE",
+   "dettaglio": "applicati ['classe']; lasciati 1"
+  },
+  {
+   "id": "Z13",
+   "verdetto": "APPLICATA_IN_PARTE",
+   "dettaglio": "applicati ['classe']; lasciati 1"
+  },
+  {
+   "id": "Z127",
+   "verdetto": "APPLICATA",
+   "dettaglio": "['chiusura', 'classe', 'stato'] in `T0` (alta)"
+  },
+  {
+   "id": "Z26",
+   "verdetto": "APPLICATA",
+   "dettaglio": "['chiusura', 'classe', 'stato'] in `T1` (alta)"
+  },
+  {
+   "id": "REGISTRO_FISICA:P2",
+   "verdetto": "LASCIATA",
+   "dettaglio": "citazione trovata in `T4`, ma NESSUN campo applicato: 1 lasciati"
+  },
+  {
+   "id": "A2",
+   "verdetto": "APPLICATA",
+   "dettaglio": "['stato'] in `T-STRUTTURALE` (alta)"
+  },
+  {
+   "id": "REPERTI-IMMUTABILI",
+   "verdetto": "APPLICATA",
+   "dettaglio": "['stato'] in `T0` (alta)"
+  },
+  {
+   "id": "PRESTAZIONI-CORSE",
+   "verdetto": "APPLICATA",
+   "dettaglio": "['stato'] in `T2` (alta)"
+  },
+  {
+   "id": "RIPRESA-ARGV",
+   "verdetto": "APPLICATA",
+   "dettaglio": "['stato'] in `T0` (media)"
+  },
+  {
+   "id": "LUNGA-BATTITO-CADUTA",
+   "verdetto": "APPLICATA",
+   "dettaglio": "['era'] in `T0` (media)"
+  },
+  {
+   "id": "REGISTRO_FISICA:D37",
+   "verdetto": "NON_APPLICATA",
+   "dettaglio": "### COMPARE NEL FILE `doc/REGISTRO_FISICA.md` MA FUORI DALLA SEZIONE della voce, e la regola chiede la riga o la sezione che la contiene"
+  },
+  {
+   "id": "B10",
+   "verdetto": "APPLICATA",
+   "dettaglio": "['stato'] in `T3` (alta)"
+  },
+  {
+   "id": "B8",
+   "verdetto": "APPLICATA",
+   "dettaglio": "['stato'] in `T3` (alta)"
+  },
+  {
+   "id": "Z29",
+   "verdetto": "APPLICATA_IN_PARTE",
+   "dettaglio": "applicati ['classe']; lasciati 1"
+  },
+  {
+   "id": "Z30",
+   "verdetto": "APPLICATA_IN_PARTE",
+   "dettaglio": "applicati ['classe']; lasciati 1"
+  },
+  {
+   "id": "Z35",
+   "verdetto": "APPLICATA",
+   "dettaglio": "['chiusura', 'classe', 'stato'] in `T1` (alta)"
+  },
+  {
+   "id": "Z53",
+   "verdetto": "APPLICATA_IN_PARTE",
+   "dettaglio": "applicati ['classe']; lasciati 1"
+  },
+  {
+   "id": "Z5",
+   "verdetto": "APPLICATA_IN_PARTE",
+   "dettaglio": "applicati ['classe']; lasciati 1"
+  },
+  {
+   "id": "Z87",
+   "verdetto": "APPLICATA",
+   "dettaglio": "['chiusura', 'classe', 'stato'] in `T1` (alta)"
+  },
+  {
+   "id": "Z28",
+   "verdetto": "APPLICATA_IN_PARTE",
+   "dettaglio": "applicati ['classe', 'dominio']; lasciati 1"
+  },
+  {
+   "id": "CHI-TORS-ZERO-FALSO",
+   "verdetto": "NON_APPLICATA",
+   "dettaglio": "### COMPARE NEL FILE `doc/STATO_RUN.md` MA FUORI DALLA SEZIONE della voce, e la regola chiede la riga o la sezione che la contiene"
+  },
+  {
+   "id": "Z31",
+   "verdetto": "APPLICATA",
+   "dettaglio": "['classe', 'stato'] in `T1` (alta)"
+  },
+  {
+   "id": "B2",
+   "verdetto": "NON_APPLICATA",
+   "dettaglio": "NON COMPARE: ne- nella voce, ne- nella riga, ne- nella sezione, ne- nel file `doc/STATO_RUN.md`"
+  },
+  {
+   "id": "REGISTRO_FISICA:T3",
+   "verdetto": "LASCIATA",
+   "dettaglio": "citazione trovata in `T3`, ma NESSUN campo applicato: 1 lasciati"
+  },
+  {
+   "id": "REGISTRO_FISICA:T4",
+   "verdetto": "LASCIATA",
+   "dettaglio": "citazione trovata in `T4`, ma NESSUN campo applicato: 1 lasciati"
+  },
+  {
+   "id": "REGISTRO_FISICA:T5",
+   "verdetto": "LASCIATA",
+   "dettaglio": "citazione trovata in `T3`, ma NESSUN campo applicato: 1 lasciati"
+  },
+  {
+   "id": "REGISTRO_FISICA:U2-5",
+   "verdetto": "LASCIATA",
+   "dettaglio": "citazione trovata in `T3`, ma NESSUN campo applicato: 1 lasciati"
+  },
+  {
+   "id": "REGISTRO_FISICA:U2-6",
+   "verdetto": "LASCIATA",
+   "dettaglio": "citazione trovata in `T3`, ma NESSUN campo applicato: 1 lasciati"
+  },
+  {
+   "id": "T3a",
+   "verdetto": "LASCIATA",
+   "dettaglio": "citazione trovata in `T4`, ma NESSUN campo applicato: 1 lasciati"
+  },
+  {
+   "id": "T3b",
+   "verdetto": "LASCIATA",
+   "dettaglio": "citazione trovata in `T4`, ma NESSUN campo applicato: 1 lasciati"
+  },
+  {
+   "id": "Z142",
+   "verdetto": "LASCIATA",
+   "dettaglio": "citazione trovata in `T3`, ma NESSUN campo applicato: 1 lasciati"
+  },
+  {
+   "id": "REGISTRO_FISICA:SCENA-1",
+   "verdetto": "NON_APPLICATA",
+   "dettaglio": "NON COMPARE: ne- nella voce, ne- nella riga, ne- nella sezione, ne- nel file `doc/REGISTRO_FISICA.md`"
+  },
+  {
+   "id": "Z25",
+   "verdetto": "APPLICATA",
+   "dettaglio": "['classe'] in `T3` (alta)"
+  },
+  {
+   "id": "Z42",
+   "verdetto": "APPLICATA",
+   "dettaglio": "['classe'] in `T0` (alta)"
+  },
+  {
+   "id": "Z67",
+   "verdetto": "APPLICATA",
+   "dettaglio": "['classe'] in `T0` (alta)"
+  },
+  {
+   "id": "X3",
+   "verdetto": "APPLICATA",
+   "dettaglio": "['classe'] in `T1` (alta)"
+  },
+  {
+   "id": "Z110",
+   "verdetto": "APPLICATA",
+   "dettaglio": "['classe'] in `T0` (alta)"
+  },
+  {
+   "id": "Z111",
+   "verdetto": "APPLICATA",
+   "dettaglio": "['classe'] in `T0` (alta)"
+  },
+  {
+   "id": "Z62",
+   "verdetto": "APPLICATA",
+   "dettaglio": "['classe'] in `T3` (alta)"
+  },
+  {
+   "id": "U2",
+   "verdetto": "APPLICATA",
+   "dettaglio": "['classe'] in `T1` (alta)"
+  },
+  {
+   "id": "CHK3-D",
+   "verdetto": "APPLICATA",
+   "dettaglio": "['classe'] in `T1` (alta)"
+  },
+  {
+   "id": "SCALE-TW",
+   "verdetto": "APPLICATA",
+   "dettaglio": "['classe'] in `T1` (alta)"
+  },
+  {
+   "id": "PROBLEMI-CHK3",
+   "verdetto": "APPLICATA",
+   "dettaglio": "['classe'] in `T1` (alta)"
+  },
+  {
+   "id": "E3",
+   "verdetto": "APPLICATA",
+   "dettaglio": "['classe'] in `T3` (alta)"
+  },
+  {
+   "id": "Z10",
+   "verdetto": "APPLICATA",
+   "dettaglio": "['classe'] in `T0` (alta)"
+  },
+  {
+   "id": "X2",
+   "verdetto": "APPLICATA",
+   "dettaglio": "['classe'] in `T1` (alta)"
+  },
+  {
+   "id": "PAT-1",
+   "verdetto": "APPLICATA",
+   "dettaglio": "['classe'] in `T0` (alta)"
+  },
+  {
+   "id": "PAT-2",
+   "verdetto": "APPLICATA",
+   "dettaglio": "['classe'] in `T0` (alta)"
+  },
+  {
+   "id": "Q6",
+   "verdetto": "NON_APPLICATA",
+   "dettaglio": "NON COMPARE: ne- nella voce, ne- nella riga, ne- nella sezione, ne- nel file `CLAUDE.md`"
+  },
+  {
+   "id": "R3",
+   "verdetto": "NON_APPLICATA",
+   "dettaglio": "NON COMPARE: ne- nella voce, ne- nella riga, ne- nella sezione, ne- nel file `CLAUDE.md`"
+  },
+  {
+   "id": "R5",
+   "verdetto": "NON_APPLICATA",
+   "dettaglio": "NON COMPARE: ne- nella voce, ne- nella riga, ne- nella sezione, ne- nel file `CLAUDE.md`"
+  },
+  {
+   "id": "U3",
+   "verdetto": "NON_APPLICATA",
+   "dettaglio": "NON COMPARE: ne- nella voce, ne- nella riga, ne- nella sezione, ne- nel file `CLAUDE.md`"
+  },
+  {
+   "id": "FASCE-TAU",
+   "verdetto": "NON_APPLICATA",
+   "dettaglio": "### COMPARE NEL FILE `doc/STATO_RUN.md` MA FUORI DALLA SEZIONE della voce, e la regola chiede la riga o la sezione che la contiene"
+  },
+  {
+   "id": "EM-CURVATURA-BIDIREZIONALE",
+   "verdetto": "APPLICATA",
+   "dettaglio": "['classe'] in `T0` (alta)"
+  },
+  {
+   "id": "LORENTZ-MATERIA-INTERFERENZA",
+   "verdetto": "APPLICATA",
+   "dettaglio": "['classe'] in `T0` (alta)"
+  },
+  {
+   "id": "L-STELLA",
+   "verdetto": "NON_APPLICATA",
+   "dettaglio": "NON COMPARE: ne- nella voce, ne- nella riga, ne- nella sezione, ne- nel file `CLAUDE.md par.11`"
+  },
+  {
+   "id": "SIGILLO-CURA2-RIPARATO",
+   "verdetto": "APPLICATA",
+   "dettaglio": "['classe'] in `T2` (alta)"
+  },
+  {
+   "id": "POTENZE-1",
+   "verdetto": "APPLICATA",
+   "dettaglio": "['classe'] in `T0` (alta)"
+  },
+  {
+   "id": "RAMPA-1",
+   "verdetto": "APPLICATA",
+   "dettaglio": "['classe'] in `T0` (alta)"
+  },
+  {
+   "id": "CICLO-CHIUSURA-SEGNO",
+   "verdetto": "NON_APPLICATA",
+   "dettaglio": "### COMPARE NEL FILE `doc/STATO_RUN.md` MA FUORI DALLA SEZIONE della voce, e la regola chiede la riga o la sezione che la contiene"
+  },
+  {
+   "id": "POTATURA-GUARDIE",
+   "verdetto": "APPLICATA",
+   "dettaglio": "['dominio'] in `T4` (alta)"
+  },
+  {
+   "id": "D37",
+   "verdetto": "APPLICATA",
+   "dettaglio": "['dominio'] in `T0` (alta)"
+  },
+  {
+   "id": "Z14",
+   "verdetto": "APPLICATA",
+   "dettaglio": "['da_dividere', 'da_dividere_parti'] in `T1` (alta)"
+  },
+  {
+   "id": "Z22",
+   "verdetto": "APPLICATA",
+   "dettaglio": "['classe', 'dominio', 'era', 'stato'] in `T1` (alta)"
+  },
+  {
+   "id": "Z68",
+   "verdetto": "APPLICATA",
+   "dettaglio": "['classe'] in `T4` (media)"
+  },
+  {
+   "id": "Z73",
+   "verdetto": "APPLICATA",
+   "dettaglio": "['classe'] in `T0` (media)"
+  },
+  {
+   "id": "Z70",
+   "verdetto": "APPLICATA",
+   "dettaglio": "['classe'] in `T0` (media)"
+  },
+  {
+   "id": "Z2",
+   "verdetto": "APPLICATA_IN_PARTE",
+   "dettaglio": "applicati ['stato']; lasciati 1"
+  },
+  {
+   "id": "Z6",
+   "verdetto": "APPLICATA_IN_PARTE",
+   "dettaglio": "applicati ['stato']; lasciati 1"
+  },
+  {
+   "id": "Z8",
+   "verdetto": "APPLICATA",
+   "dettaglio": "['stato'] in `T0` (media)"
+  },
+  {
+   "id": "Z19",
+   "verdetto": "APPLICATA",
+   "dettaglio": "['stato'] in `T1` (media)"
+  },
+  {
+   "id": "C5",
+   "verdetto": "LASCIATA",
+   "dettaglio": "citazione trovata in `T3`, ma NESSUN campo applicato: 1 lasciati"
+  },
+  {
+   "id": "CHK3",
+   "verdetto": "APPLICATA",
+   "dettaglio": "['classe'] in `T1` (media)"
+  },
+  {
+   "id": "PROVA-COMB",
+   "verdetto": "APPLICATA",
+   "dettaglio": "['classe'] in `T1` (media)"
+  },
+  {
+   "id": "Z21",
+   "verdetto": "APPLICATA_IN_PARTE",
+   "dettaglio": "applicati ['classe']; lasciati 1"
+  },
+  {
+   "id": "Z1",
+   "verdetto": "APPLICATA",
+   "dettaglio": "['classe'] in `T0` (media)"
+  },
+  {
+   "id": "Z101",
+   "verdetto": "APPLICATA",
+   "dettaglio": "['classe'] in `T0` (media)"
+  },
+  {
+   "id": "Z148",
+   "verdetto": "APPLICATA",
+   "dettaglio": "['classe'] in `T4` (media)"
+  },
+  {
+   "id": "S13",
+   "verdetto": "APPLICATA",
+   "dettaglio": "['classe'] in `T0` (media)"
+  },
+  {
+   "id": "MASSA-MIGRA",
+   "verdetto": "APPLICATA",
+   "dettaglio": "['classe'] in `T4` (media)"
+  },
+  {
+   "id": "GUSCIO-ANTIFASE-EMERGENTE",
+   "verdetto": "APPLICATA",
+   "dettaglio": "['classe'] in `T0` (media)"
+  },
+  {
+   "id": "H1",
+   "verdetto": "LASCIATA",
+   "dettaglio": "citazione trovata in `T2`, ma NESSUN campo applicato: 1 lasciati"
+  },
+  {
+   "id": "H3",
+   "verdetto": "LASCIATA",
+   "dettaglio": "citazione trovata in `T2`, ma NESSUN campo applicato: 1 lasciati"
+  },
+  {
+   "id": "DE-ACCOPPIABILITA",
+   "verdetto": "LASCIATA",
+   "dettaglio": "citazione trovata in `T2`, ma NESSUN campo applicato: 1 lasciati"
+  },
+  {
+   "id": "D27",
+   "verdetto": "NON_APPLICATA",
+   "dettaglio": "### COMPARE NEL FILE `doc/STATO_RUN.md` MA FUORI DALLA SEZIONE della voce, e la regola chiede la riga o la sezione che la contiene"
+  },
+  {
+   "id": "REGISTRO_FISICA:P3",
+   "verdetto": "LASCIATA",
+   "dettaglio": "citazione trovata in `T4`, ma NESSUN campo applicato: 1 lasciati"
+  },
+  {
+   "id": "REGISTRO_FISICA:D33",
+   "verdetto": "APPLICATA",
+   "dettaglio": "['classe'] in `T0` (media)"
+  },
+  {
+   "id": "SCHED-PASSO",
+   "verdetto": "NON_APPLICATA",
+   "dettaglio": "NON COMPARE: ne- nella voce, ne- nella riga, ne- nella sezione, ne- nel file `doc/PIANO_schedulatore_passo.md`"
+  },
+  {
+   "id": "Z27",
+   "verdetto": "APPLICATA_IN_PARTE",
+   "dettaglio": "applicati ['classe']; lasciati 1"
+  },
+  {
+   "id": "Z32",
+   "verdetto": "APPLICATA",
+   "dettaglio": "['chiusura', 'classe', 'stato'] in `T0` (media)"
+  },
+  {
+   "id": "Z33",
+   "verdetto": "APPLICATA",
+   "dettaglio": "['chiusura', 'classe', 'stato'] in `T1` (media)"
+  },
+  {
+   "id": "Z34",
+   "verdetto": "APPLICATA",
+   "dettaglio": "['chiusura', 'classe', 'stato'] in `T1` (media)"
+  },
+  {
+   "id": "Z37",
+   "verdetto": "APPLICATA",
+   "dettaglio": "['chiusura', 'classe', 'stato'] in `T0` (media)"
+  },
+  {
+   "id": "Z91",
+   "verdetto": "APPLICATA_IN_PARTE",
+   "dettaglio": "applicati ['classe']; lasciati 1"
+  },
+  {
+   "id": "Z92",
+   "verdetto": "APPLICATA_IN_PARTE",
+   "dettaglio": "applicati ['classe']; lasciati 1"
+  },
+  {
+   "id": "Z50",
+   "verdetto": "LASCIATA",
+   "dettaglio": "citazione trovata in `T1`, ma NESSUN campo applicato: 1 lasciati"
+  },
+  {
+   "id": "Z7",
+   "verdetto": "APPLICATA_IN_PARTE",
+   "dettaglio": "applicati ['dominio']; lasciati 1"
+  },
+  {
+   "id": "Z88",
+   "verdetto": "APPLICATA",
+   "dettaglio": "['dominio'] in `T1` (media)"
+  },
+  {
+   "id": "Z54",
+   "verdetto": "LASCIATA",
+   "dettaglio": "citazione trovata in `T1`, ma NESSUN campo applicato: 1 lasciati"
+  },
+  {
+   "id": "Y2",
+   "verdetto": "APPLICATA_IN_PARTE",
+   "dettaglio": "applicati ['stato']; lasciati 1"
+  },
+  {
+   "id": "REGISTRO_FISICA:E4-LAM",
+   "verdetto": "APPLICATA_IN_PARTE",
+   "dettaglio": "applicati ['classe']; lasciati 1"
+  },
+  {
+   "id": "COMPONENTI:A1",
+   "verdetto": "APPLICATA_IN_PARTE",
+   "dettaglio": "applicati ['classe']; lasciati 2"
+  },
+  {
+   "id": "MASSA-ID",
+   "verdetto": "APPLICATA",
+   "dettaglio": "['classe'] in `T4` (media)"
+  },
+  {
+   "id": "D26",
+   "verdetto": "NON_APPLICATA",
+   "dettaglio": "### COMPARE NEL FILE `doc/STATO_RUN.md` MA FUORI DALLA SEZIONE della voce, e la regola chiede la riga o la sezione che la contiene"
+  },
+  {
+   "id": "Z86",
+   "verdetto": "LASCIATA",
+   "dettaglio": "citazione trovata in `T0`, ma NESSUN campo applicato: 1 lasciati"
+  },
+  {
+   "id": "Z145",
+   "verdetto": "LASCIATA",
+   "dettaglio": "citazione trovata in `T0`, ma NESSUN campo applicato: 1 lasciati"
+  },
+  {
+   "id": "W5",
+   "verdetto": "APPLICATA",
+   "dettaglio": "['classe'] in `T0` (media)"
+  },
+  {
+   "id": "Z125",
+   "verdetto": "APPLICATA",
+   "dettaglio": "['classe'] in `T0` (media)"
+  },
+  {
+   "id": "Z15",
+   "verdetto": "APPLICATA",
+   "dettaglio": "['classe'] in `T4` (media)"
+  },
+  {
+   "id": "LOSCHMIDT-ECO",
+   "verdetto": "APPLICATA",
+   "dettaglio": "['classe'] in `T4` (media)"
+  },
+  {
+   "id": "L-SOGLIA",
+   "verdetto": "LASCIATA",
+   "dettaglio": "citazione trovata in `T4`, ma NESSUN campo applicato: 1 lasciati"
+  },
+  {
+   "id": "STANDARD-4",
+   "verdetto": "LASCIATA",
+   "dettaglio": "citazione trovata in `T4`, ma NESSUN campo applicato: 1 lasciati"
+  },
+  {
+   "id": "REG-A",
+   "verdetto": "NON_APPLICATA",
+   "dettaglio": "NON COMPARE: ne- nella voce, ne- nella riga, ne- nella sezione, ne- nel file `doc/STATO_RUN.md`"
+  },
+  {
+   "id": "SCHED-T3-REGOLE",
+   "verdetto": "LASCIATA",
+   "dettaglio": "citazione trovata in `T4`, ma NESSUN campo applicato: 1 lasciati"
+  },
+  {
+   "id": "TW-DIVISIONE-INCOGNITA",
+   "verdetto": "NON_APPLICATA",
+   "dettaglio": "NON COMPARE: ne- nella voce, ne- nella riga, ne- nella sezione, ne- nel file `csv/_test_fork/_misure_calore/`"
+  },
+  {
+   "id": "C19",
+   "verdetto": "APPLICATA",
+   "dettaglio": "['dominio'] in `T1` (media)"
+  },
+  {
+   "id": "D11",
+   "verdetto": "LASCIATA",
+   "dettaglio": "citazione trovata in `T1`, ma NESSUN campo applicato: 1 lasciati"
+  },
+  {
+   "id": "D17",
+   "verdetto": "LASCIATA",
+   "dettaglio": "citazione trovata in `T1`, ma NESSUN campo applicato: 1 lasciati"
+  },
+  {
+   "id": "C7",
+   "verdetto": "LASCIATA",
+   "dettaglio": "citazione trovata in `T1`, ma NESSUN campo applicato: 1 lasciati"
+  },
+  {
+   "id": "C11",
+   "verdetto": "LASCIATA",
+   "dettaglio": "citazione trovata in `T1`, ma NESSUN campo applicato: 1 lasciati"
+  },
+  {
+   "id": "D10",
+   "verdetto": "APPLICATA",
+   "dettaglio": "['dominio'] in `T0` (media)"
+  },
+  {
+   "id": "D04",
+   "verdetto": "LASCIATA",
+   "dettaglio": "citazione trovata in `T4`, ma NESSUN campo applicato: 1 lasciati"
+  },
+  {
+   "id": "CENS-A1",
+   "verdetto": "LASCIATA",
+   "dettaglio": "citazione trovata in `T4`, ma NESSUN campo applicato: 1 lasciati"
+  },
+  {
+   "id": "A4-METRICHE",
+   "verdetto": "APPLICATA",
+   "dettaglio": "['classe', 'dominio'] in `T1` (media)"
+  },
+  {
+   "id": "Y1",
+   "verdetto": "APPLICATA_IN_PARTE",
+   "dettaglio": "applicati ['classe']; lasciati 1"
+  },
+  {
+   "id": "Z130",
+   "verdetto": "APPLICATA",
+   "dettaglio": "['dominio'] in `T1` (media)"
+  },
+  {
+   "id": "Z136",
+   "verdetto": "APPLICATA",
+   "dettaglio": "['classe'] in `T0` (media)"
+  },
+  {
+   "id": "MITOSI-2LAM-ACCESO",
+   "verdetto": "LASCIATA",
+   "dettaglio": "citazione trovata in `T4`, ma NESSUN campo applicato: 1 lasciati"
+  },
+  {
+   "id": "REG-R",
+   "verdetto": "APPLICATA",
+   "dettaglio": "['classe'] in `T1` (media)"
+  },
+  {
+   "id": "SIGILLO-COMPARATORE-DUPLICATO",
+   "verdetto": "APPLICATA",
+   "dettaglio": "['classe'] in `T0` (media)"
+  },
+  {
+   "id": "SIGILLO-REGISTRO-NON-CONFRONTABILE",
+   "verdetto": "APPLICATA",
+   "dettaglio": "['classe'] in `T4` (media)"
+  },
+  {
+   "id": "SIGILLO-SENZA-CONFIGURAZIONE",
+   "verdetto": "APPLICATA",
+   "dettaglio": "['classe'] in `T4` (media)"
+  },
+  {
+   "id": "ESENTE-P3",
+   "verdetto": "NON_APPLICATA",
+   "dettaglio": "NON COMPARE: ne- nella voce, ne- nella riga, ne- nella sezione, ne- nel file `doc/STATO_RUN.md`"
+  },
+  {
+   "id": "C25",
+   "verdetto": "APPLICATA",
+   "dettaglio": "['era'] in `T1` (media)"
+  },
+  {
+   "id": "D05",
+   "verdetto": "APPLICATA",
+   "dettaglio": "['classe', 'dominio'] in `T0` (media)"
+  },
+  {
+   "id": "C5RES-INVARIANTI",
+   "verdetto": "NON_APPLICATA",
+   "dettaglio": "### COMPARE NEL FILE `doc/STATO_RUN.md` MA FUORI DALLA SEZIONE della voce, e la regola chiede la riga o la sezione che la contiene"
+  },
+  {
+   "id": "CLI-1",
+   "verdetto": "APPLICATA",
+   "dettaglio": "['classe', 'da_dividere', 'da_dividere_parti', 'dominio'] in `T1` (media)"
+  }
+ ]
+}

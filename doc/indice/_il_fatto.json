@@ -17,27 +17,27 @@
   "id": "SOGLIA-MITOSI-3PI",
   "prima": [
    "CHIUSA",
-   "MISURA"
+   null
   ],
   "dopo": [
    null,
-   "MISURA"
+   null
   ],
-  "stato_su_disco": "CHIUSA",
-  "classe_su_disco": "MISURA",
+  "stato_su_disco": "SOSPESA",
+  "classe_su_disco": "DIFETTO",
   "riga": "## `SOGLIA-MITOSI-3PI` — **la soglia porta un `π` di dipolo che quasi nessun arco ha** *(Aperta il 2026-10-06 sera, ### **su decisione di Luca.** ### **Cercata prima nell'indice con cinque termini:** non esisteva una voce dedicata alla soglia.)* **IL FATTO:** `soglia0 = PHI_CRIT + twist_max = 2π + π"
  },
  {
   "id": "X1",
   "prima": [
    "CHIUSA",
-   null
+   "FRONTE"
   ],
   "dopo": [
    "SOSPESA",
-   null
+   "FRONTE"
   ],
-  "stato_su_disco": "CHIUSA",
+  "stato_su_disco": "SOSPESA",
   "classe_su_disco": "FRONTE",
   "riga": "| **X1** 🟩`VALE SEMPRE` ⏳`[EPOCA 1 · MISURA]` | **`TEMPO_PROPRIO_ORIENTATO`: il principio e' giusto, ma `dt_n < 0` rompe TRE consumatori** | Con `f = signed` (`:1925`) `r` puo' essere **negativo** (`r = x/sqrt(1+x^2)`, `x < 0`), quindi `dt_n = DT*r < 0`. **Enumerati i consumatori dal codice:** (a) *"
  },

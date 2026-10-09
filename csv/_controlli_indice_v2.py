@@ -200,6 +200,23 @@ def main():
     for _i in ("CENS-A6", "CENS-A7", "SMP-APRI-COMMENTO", "MITOSI-2LAM-ACCESO"):
         CORRETTE_V3[_i] = ("DOCUMENTAZIONE", "1", "SOSPESA")        # (B) i FUORI POSTO
 
+    # ### LA VERIFICA COMPLETA DEL GUARDIANO (2026-10-09, file di 165 righe, commit
+    # ### `67c12fa`): per DUE voci il file ### **contraddice le liste vecchie DELLO STESSO
+    # ### GUARDIANO** -- `CLI-1` sta nella lista `1`, `POTATURA-GUARDIE` nella `3`.
+    # ### ⛔ **Non scelgo io fra le due:** la riconciliazione e- ### **temporale e
+    # ### CITATA** -- la verifica completa e- la parola ### **piu- recente** del
+    # ### guardiano, e ### **porta una frase del repo** *(`CLI-1`: <<vale come regola
+    # ### generale>>; `POTATURA-GUARDIE`: <<i 57 rami MORTI>>)*, mentre le liste
+    # ### ### **non citavano niente.** ### ⚠ **E IL CONFLITTO VA NEL REFERTO:** due
+    # ### affermazioni incompatibili sullo stesso oggetto ### **si riconciliano, non si
+    # ### scelgono** -- e Luca deve sapere che e- stato il guardiano a cambiare idea.
+    CORRETTE_V3["CLI-1"] = ("METODO", "1", "SOSPESA")
+    CORRETTE_V3["POTATURA-GUARDIE"] = ("INFRASTRUTTURA", "1", "SOSPESA")
+    # ### ⚠ **E STA DOPO TUTTE LE ALTRE CORREZIONI DI PROPOSITO:** `CLI-1` e-
+    # ### riscritta dal blocco <<era delle voci di metodo>> poco sopra, e
+    # ### ### **l-ultima assegnazione vince.** La verifica completa e- la parola
+    # ### ### **piu- recente**, quindi la sua riga ### **va per ultima.**
+
     def _atteso(idv, dom, era, stato):
         """### Che cosa il controllo si aspetta OGGI: la lista, la CORREZIONE, o LA REGOLA.
 

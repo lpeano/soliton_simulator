@@ -83,8 +83,8 @@ era       1=538  DA_CLASSIFICARE=188  ENTRAMBE=96  2=24
 stato     SOSPESA=369  DA_CLASSIFICARE=188  CHIUSA=182  APERTA=82  AGENDA=24  SUPERATA=1
 ```
 
-### ✔ **FATTO IN QUESTO GIRO:** il file del guardiano *(`165` righe, commit `67c12fa`)*, e ### **la cura del difetto «IL FATTO»**: il difetto toccava ### **`8` voci**, e `5` le cura questo commit *(`10` righe col PONTE)*. ### ⛔ **Il difetto era MIO, ed e' scritto nei miei stessi motivi:** il lotto del punto `1` chiudeva citando *«IL FATTO: soglia0 = …»* ### **come criterio di chiusura.**
+### ✔ **FATTO IN QUESTO GIRO:** i punti `3`, `4` e `5`, e ### **`F9` e `F10` ACCESI nello stesso commit che li rende veri.** Delle `165` righe: ### **`79` applicate**, `23` applicate in parte, `44` lasciate, `19` non applicate — ### **e i conti tornano a `165`, con un `assert`.**
 
-### ⛔ **RESTA:** il punto `3` del mandato *(applicare le `165` righe, con `F9` e `F10` accesi ### **nello stesso commit**)*, il punto `5` *(la nota di `G1` e `F6`)*, e il referto ### **`doc/REFERTO_indice_v3_verifica_completa.md`.**
+### ⛔ **RESTA:** il referto ### **`doc/REFERTO_indice_v3_verifica_completa.md`**, voce per voce. ### **E in CODA** *(`doc/CODA_2026-10-09.md`)*: l'integrazione al mandato «gli strumenti diventano obbligatori anche per l'era `2`», ### **il cui testo base non e' arrivato.**
 
-**Ultimo lotto applicato:** `doc/indice/_lotti/v3_il_fatto.jsonl`
+**Ultimi lotti applicati:** `doc/indice/_lotti/v3_guardiano.jsonl` *(`115` righe)* e `doc/indice/_lotti/v3_convenzioni.jsonl` *(`11`)*

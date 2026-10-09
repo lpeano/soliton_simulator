@@ -8,6 +8,7 @@ commit**: cosi' non se ne accumulano di invisibili.)*
 | `csv/_a_luca.py|H-P5` | non importa il simulatore e non lo fa girare. Costruisce un lotto. |
 | `csv/_analisi_lettori_indice.py|H-P5` | non importa il simulatore e non lo fa girare. Legge sorgenti e conta. |
 | `csv/_ancore_prima.py|H-P5` | strumento di analisi STATICA. Non importa il simulatore e non lo fa girare: |
+| `csv/_applica_correzioni_guardiano.py|H-P5` | non importa il simulatore e non lo fa girare. Costruisce un lotto. |
 | `csv/_archivio_relazioni.py|H-P5` | non importa il simulatore e non lo fa girare. Divide un documento per giorno. |
 | `csv/_cerca_definizioni.py|H-P5` | non importa il simulatore e non lo fa girare. Cerca definizioni nei documenti. |
 | `csv/_collaudo_criterio_zero.py|H-P5` | non importa il simulatore e non lo fa girare. E' un collaudo di un CRITERIO |
@@ -30,6 +31,7 @@ commit**: cosi' non se ne accumulano di invisibili.)*
 | `csv/_doc_referto_segnali.py|H-P5` | non importa il simulatore e non lo fa girare. Scrive un referto sull'indice. |
 | `csv/_doc_referto_v3.py|H-P5` | non importa il simulatore e non lo fa girare. Scrive un referto sull'indice. |
 | `csv/_dominio_esplicite.py|H-P5` | non importa il simulatore e non lo fa girare. Costruisce un lotto. |
+| `csv/_due_convenzioni.py|H-P5` | non importa il simulatore e non lo fa girare. Costruisce un lotto. |
 | `csv/_era_esplicite.py|H-P5` | non importa il simulatore e non lo fa girare. Costruisce un lotto. |
 | `csv/_era_metodo.py|H-P5` | non importa il simulatore e non lo fa girare. Costruisce un lotto per l'indice. |
 | `csv/_fase2_chiuse.py|H-P5` | non importa il simulatore e non lo fa girare. Costruisce lotti per l'indice. |
@@ -130,5 +132,5 @@ commit**: cosi' non se ne accumulano di invisibili.)*
 | `csv/_test_fork/_z43_tempo_proprio.py|H-P3` | la scena passa TUTTA dal CLI (`nmasse` e `sep` da `argv`), e la |
 
 ```
-esenzioni dichiarate   123
+esenzioni dichiarate   125
 ```

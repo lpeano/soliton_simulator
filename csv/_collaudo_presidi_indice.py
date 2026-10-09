@@ -234,6 +234,101 @@ def main():
           len(IX._f7_stato(a4_prima)) == 1,
           "la regola vale per QUALSIASI dominio, non solo FISICA")
 
+    # ---------------------------------------------------------------- F9
+    # ### ⛔ **IL CASO A RISPOSTA NOTA LO INDICA IL MANDATO:** *<<`F9` DEVE scattare su
+    # ### `A2` a `80eaf82`>>*. ### **`A2` e- era `ENTRAMBE` con stato `SOSPESA`**, e
+    # ### <<sospesa>> vuol dire ### **<<rimandata all-era 2>>**: una cosa che vale
+    # ### ### **anche** nell-era 2 ### **non si puo- rimandare a se stessa.**
+    F9_Q = "80eaf82"
+    v_f9 = al_commit(F9_Q, "doc/indice/voci.jsonl")
+    a2_prima = [v for v in v_f9 if v["id"] == "A2"]
+    assert a2_prima, "A2 non c-e- a " + F9_Q
+    print("  `F9`  A2 a %s: `%s`/era `%s`/`%s`"
+          % (F9_Q, a2_prima[0]["classe"], a2_prima[0]["era"], a2_prima[0]["stato"]))
+    esito("F9  DEVE essere un ERRORE: A2 a %s e- era `%s` con stato `%s`"
+          % (F9_Q, a2_prima[0]["era"], a2_prima[0]["stato"]),
+          len(IX._f9_era_stato(a2_prima)) == 1,
+          "<<sospesa>> vuol dire <<rimandata all-era 2>>, e cio- che vale ANCHE "
+          "nell-era 2 non si rimanda a se stesso")
+    # ### ⭐ **E LE DUE CURE POSSIBILI SI PROVANO ENTRAMBE**, perche- il mandato non dice
+    # ### quale: ### **portarla ad `APERTA`** oppure ### **portarla a era `1`** *(dove
+    # ### `SOSPESA` e- lecito)*. ### ⛔ **Quale delle due lo dice il file del guardiano**,
+    # ### e il collaudo prova soltanto che ### **tutte e due spengono `F9`.**
+    _ap9 = json.loads(json.dumps(a2_prima[0]))
+    _ap9["stato"] = "APERTA"
+    esito("F9  NON deve scattare: la PRIMA cura -- era `ENTRAMBE` con stato `APERTA`",
+          IX._f9_era_stato([_ap9]) == [])
+    _er9 = json.loads(json.dumps(a2_prima[0]))
+    _er9["era"] = "1"
+    esito("F9  NON deve scattare: la SECONDA cura -- era `1` con stato `SOSPESA`",
+          IX._f9_era_stato([_er9]) == [],
+          "nell-era 1 `SOSPESA` e- lecito, ed e- cio- che `F7` pretende")
+    # ### ⚠ **E SULL-INDICE DI OGGI NE TROVA CINQUE**, che e- il numero del mandato: e-
+    # ### ### **la ragione per cui `F9` NON e- nel validatore** *(`A9`: non e- un
+    # ### presidio finche- non e- cablato, e cablarlo oggi bloccherebbe il repo)*.
+    # ### ⛔ **IL BRACCIO SI ANCORA A `67c12fa`**, il commit del file del guardiano,
+    # ### cioe- ### **PRIMA della cura.** Leggere <<oggi>> lo spegnerebbe da se- appena
+    # ### le cinque sono curate: ### **un braccio che si spegne quando il difetto sparisce
+    # ### non prova piu- niente**, e il caso a risposta nota ### **e- una FOTO.**
+    _f9_oggi = IX._f9_era_stato(al_commit("67c12fa", "doc/indice/voci.jsonl"))
+    esito("F9  DEVE trovare le CINQUE a 67c12fa, e sono quelle che il mandato nomina",
+          len(_f9_oggi) == 5
+          and sorted(x.split("`")[3] for x in _f9_oggi)
+          == ["A2", "LUNGA-BATTITO-CADUTA", "PRESTAZIONI-CORSE", "REPERTI-IMMUTABILI",
+              "RIPRESA-ARGV"],
+          "e per questo NON si poteva accendere PRIMA: lo accende il commit che le cura")
+    # ### ✔ **E ADESSO SULL-INDICE VERO SONO ZERO**, ed e- la condizione che rende
+    # ### ### **lecito** accenderlo: le quattro passano ad `APERTA`,
+    # ### `LUNGA-BATTITO-CADUTA` a era `1`.
+    esito("F9  NON deve scattare: su TUTTE le %d voci di oggi, DOPO la cura" % len(voci),
+          IX._f9_era_stato(voci) == [],
+          "e- la condizione che rende LECITO accenderlo nel validatore")
+    # ### ⭐ **IL SECONDO RAMO DELLA REGOLA** -- era `2` ### **=> `AGENDA`** -- oggi
+    # ### ### **non ha violazioni**, quindi il caso ### **si costruisce.**
+    _e2 = json.loads(json.dumps([v for v in voci if str(v["era"]) == "2"][0]))
+    print("  `F9`  il secondo ramo: %s, era 2, oggi `%s`" % (_e2["id"], _e2["stato"]))
+    esito("F9  NON deve scattare: era `2` con stato `AGENDA`, cioe- oggi",
+          IX._f9_era_stato([_e2]) == [])
+    _e2b = json.loads(json.dumps(_e2))
+    _e2b["stato"] = "APERTA"
+    esito("F9  DEVE scattare: era `2` con stato `APERTA` -- l-era 2 NON E- COMINCIATA",
+          len(IX._f9_era_stato([_e2b])) == 1)
+    # ### ⛔ **E IL SALTO DICHIARATO:** un ### **segnaposto** non ha ancora uno stato, e
+    # ### ### **non si giudica.** Senza questo braccio il salto sarebbe
+    # ### ### **una riga di codice senza prova.**
+    _sp9 = json.loads(json.dumps(_e2))
+    _sp9["era"], _sp9["stato"] = "ENTRAMBE", "DA_CLASSIFICARE"
+    esito("F9  NON deve scattare: un SEGNAPOSTO -- `DA_CLASSIFICARE` non e- uno stato",
+          IX._f9_era_stato([_sp9]) == [],
+          "e- l-ASSENZA di uno stato: prima la classe, poi lo stato")
+
+    # ---------------------------------------------------------------- F10
+    # ### ⛔ **IL CASO A RISPOSTA NOTA E- UNA CURA DEL GIRO SCORSO:** a `4ec2684`
+    # ### `REGISTRO_FISICA:D37` era ### **`CRITERIO`/`INFRASTRUTTURA`**, e il punto `4`
+    # ### del 2026-10-09 l-ha portata a `DIFETTO`. ### ⭐ **Cosi- lo ZERO di oggi non e-
+    # ### un FALSO-ZERO:** e- il risultato di quella cura, e il braccio lo mostra.
+    F10_Q = "4ec2684"
+    d37_prima = [v for v in al_commit(F10_Q, "doc/indice/voci.jsonl")
+                 if v["id"] == "REGISTRO_FISICA:D37"]
+    assert d37_prima, "REGISTRO_FISICA:D37 non c-e- a " + F10_Q
+    print("  `F10` REGISTRO_FISICA:D37 a %s: `%s`/`%s`   |   oggi: `%s`/`%s`"
+          % (F10_Q, d37_prima[0]["classe"], d37_prima[0]["dominio"],
+             [v for v in voci if v["id"] == "REGISTRO_FISICA:D37"][0]["classe"],
+             [v for v in voci if v["id"] == "REGISTRO_FISICA:D37"][0]["dominio"]))
+    esito("F10 DEVE essere un ERRORE: D37 a %s era `CRITERIO`/`INFRASTRUTTURA`" % F10_Q,
+          len(IX._f10_criterio_metodo(d37_prima)) == 1,
+          "un criterio dice COME SI DECIDE, e non e- infrastruttura")
+    esito("F10 NON deve scattare: su TUTTE le %d voci di oggi" % len(voci),
+          IX._f10_criterio_metodo(voci) == [],
+          "ZERO violazioni -- ed e- per questo che F10 SI PUO- accendere e F9 no")
+    # ### ⚠ **E IL BRACCIO CHE PROVA CHE LO ZERO E- VERO:** una voce `CRITERIO` di oggi,
+    # ### spostata a `FISICA`, ### **DEVE scattare.** Senza questo, lo zero potrebbe
+    # ### venire da una regola che ### **non guarda niente.**
+    _cr = json.loads(json.dumps([v for v in voci if v["classe"] == "CRITERIO"][0]))
+    _cr["dominio"] = "FISICA"
+    esito("F10 DEVE scattare: %s portata a `FISICA` -- lo zero NON e- un FALSO-ZERO"
+          % _cr["id"], len(IX._f10_criterio_metodo([_cr])) == 1)
+
     # ---------------------------------------------------------------- F6
     a6_prima = [v for v in v_pre_g if v["id"] == "CENS-A6"]
     print("  `F6`  la nota di CENS-A6 a %s: <<%s>>"
@@ -242,6 +337,39 @@ def main():
           scatta(IX._f6_note(con(voci, a6_prima)), "CENS-A6"))
     esito("F6  NON deve scattare: con la nota della correzione v3",
           not scatta(IX._f6_note(voci), "CENS-A6"))
+    # ### ⛔ **IL CASO A RISPOSTA NOTA LO INDICA IL MANDATO:** *<<`G1` ha una
+    # ### `nota_guardiano` che dice ancora `SOSPESA`; `F6` DEVE trovarla>>*. La nota e-
+    # ### *<<correzione v3 blocco G2: ### **FISICA/era 1/SOSPESA**>>*, e la voce oggi e-
+    # ### ### **`CHIUSA`** perche- il guardiano ha dichiarato che e- ### **<<FATTO>>.**
+    g1 = [v for v in voci if v["id"] == "G1"]
+    print("  `F6`  la nota di G1: <<%s>>   |   la voce e- `%s`"
+          % (" ".join((g1[0]["meta"].get("nota_guardiano") or "").split())[:70],
+             g1[0]["stato"]))
+    esito("F6  DEVE scattare: la nota di `G1` DICHIARA `SOSPESA` e la voce e- `CHIUSA`",
+          scatta(IX._f6_note(voci), "G1"),
+          "una nota che DICHIARA una tripla `dominio/era/stato` e- un-ASSERZIONE, e se la "
+          "voce si e- mossa la nota e- SCADUTA")
+    # ### ⚠ **E IL BRACCIO NEGATIVO PROVA CHE NON LEGGE LA PROSA:** con la tripla
+    # ### ### **allineata** alla voce, `F6` ### **tace** -- quindi non scatta
+    # ### ### **per la presenza della parola**, ma per ### **la contraddizione.**
+    _g1b = json.loads(json.dumps(g1[0]))
+    _g1b["meta"]["nota_guardiano"] = ("correzione v3 blocco G2: %s/era %s/%s -- la tripla "
+                                      "ALLINEATA" % (_g1b["dominio"], _g1b["era"],
+                                                     _g1b["stato"]))
+    esito("F6  NON deve scattare: la STESSA nota con la tripla ALLINEATA",
+          not scatta(IX._f6_note([_g1b]), "G1"),
+          "non scatta per la PAROLA, scatta per la CONTRADDIZIONE")
+    # ### ⛔ **E LA VIA GROSSOLANA SI MISURA, per dire perche- l-ho scartata:** <<la nota
+    # ### nomina uno stato diverso da quello della voce>> dava ### **69 segnali.**
+    _grosso = sum(1 for v in voci
+                  for _s in ("SOSPESA", "CHIUSA", "APERTA", "AGENDA", "SUPERATA")
+                  if _s in ((v.get("meta") or {}).get("nota_guardiano") or "").upper()
+                  and v["stato"] != _s)
+    esito("F6  LA VIA GROSSOLANA DAVA %d SEGNALI, e la stretta ne da- %d"
+          % (_grosso, len(IX._f6_note(voci))),
+          _grosso > 20 and len(IX._f6_note(voci)) < 5,
+          "era la condizione di FERMO del task history: se l-estensione scatta su decine "
+          "di voci, e- troppo grossa")
 
     # ------------------------------------------------- LA FORMA DELL'ECCEZIONE
     base = json.loads(json.dumps([v for v in voci if v["id"] == "C28"][0]))

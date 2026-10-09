@@ -10725,3 +10725,21 @@ Il difetto toccava `8` voci; questo commit ne cura `5` *(quelle che il file del 
 ### ⚠ **E DUE VOCI IN PIU' DELLE SEI:** `M3` e `X1`. `M3` e' un ### **segnaposto** e il punto `1` la saltava gia', ma la sua riga e' *«## ① **IL FATTO**, trovato durante il collaudo di `M3-C`»* — ### **il caso di scuola del difetto.** `X1` e' ### **nei dati del guardiano** *(«Si chiude quando (a), (b) e (c) sono trattati esplicitamente», `alta`)*, e ### **il file e la regola corretta dicono LA STESSA COSA**: `SOSPESA`.
 
 ### ⭐ **E L'ORDINE: questa cura va PRIMA di applicare il file, e non e' un cavillo.** La regola del punto `3` dice *«`media` + citazione trovata → rileggi la riga intera; applica se la frase sostiene il cambio»*: ### **quel giudizio si da' con la regola dello stato** — e con il difetto in piedi ### **una riga che dice «IL FATTO» sosterrebbe una chiusura che la riga non sostiene.**
+
+---
+
+## LE `165` RIGHE DEL GUARDIANO: **`79` applicate, e `F9` e `F10` ACCESI nello stesso commit** (2026-10-09)
+
+`79` applicate, `23` in parte, `44` lasciate, `19` non applicate — ### **e i conti tornano a `165` con un `assert`.** `6`/`6` i controlli, `48`/`48` il collaudo dei presidi, `22`/`22` quello dell'indice. `F9`, `F10` e `F7`: ### **zero violazioni.** Nessuna corsa; il simulatore resta `b8c21049`.
+
+### ✔ **E L'ORDINE DEL PUNTO `1` ERA SBAGLIATO, E LUCA LO HA RICONOSCIUTO:** *«F9 e F10 si accendono NELLO STESSO COMMIT delle correzioni che li rendono veri, mai prima»*. ### ⭐ **E' la terza volta in tre giri che <<l'ordine non e' libero>> si presenta, e la prima in cui arriva PRIMA del danno:** il task history `bfb1596` lo aveva dedotto ### **dal codice dell'hook**, non da una botta.
+
+### ⛔ **IL LIMITE ERA IL MIO RITROVAMENTO, NON IL GUARDIANO.** La prima stesura dichiarava ### **`65` citazioni introvabili su `165`**: `15` stavano ### **nel testo della voce**, `37` ### **altrove nel file di origine**, e solo ### **`13`** erano davvero introvabili. ### **Ho aggiunto due livelli e li ho DICHIARATI:** `T0` *(il testo della voce)* e `T4` *(il file, e ### **solo quando la riga d'origine non si ritrova** — la' il luogo che il mandato nomina ### **non esiste**)*.
+
+### ⚠ **E UN DIFETTO DEL MIO GIUDIZIO, trovato da una voce sola:** `RIPRESA-ARGV` e' era `ENTRAMBE`, la sua riga dice *«APERTA il 2026-09-26»*, il file dice `APERTA`, e la regola dello stato diceva ### **`SOSPESA`** — perche' ### **e' scritta per l'era `1`.** ### ⭐ **`SOSPESA` e `APERTA` non sono due verdetti: sono LO STESSO verdetto**, e quale dei due sia legale ### **lo decide l'ERA** *(`F7` per l'era `1`, `F9` per `ENTRAMBE`)*. ### **Trattarla come contraddizione avrebbe lasciato `F9` violato, cioe' IMPEDITO DI ACCENDERLO.**
+
+### ⛔ **E DUE AFFERMAZIONI DEL GUARDIANO SI CONTRADDICONO, e NON scelgo io:** `CLI-1` e `POTATURA-GUARDIE` stanno nelle ### **liste `1` e `3`**, e il file nuovo le manda altrove. `C3` ### **e' fallito**, e non l'ho zittito: la riconciliazione e' ### **temporale e CITATA** — la verifica completa e' la parola ### **piu' recente** e ### **porta una frase del repo**, le liste ### **non citavano niente.** ### ⚠ **Ma e' il guardiano che ha cambiato idea, e Luca deve saperlo.**
+
+### ⛔ **E DUE RIFIUTI DELLO SCHEMA, VERI:** `S02` chiedeva `superata_da=D31` e ### **`D31` non e' una DECISIONE ne' un ASSIOMA**; `Z21` chiedeva `SUPERATA` ### **senza dire da che cosa.** Il lotto e' stato ### **rifiutato senza scrivere niente** — la cura dell'atomicita' del giro scorso ### **ha funzionato su un caso vero.** ### ⭐ **Una voce superata deve dire DA CHE COSA, e deve essere una DECISIONE: un difetto non decide niente.**
+
+### ✔ **E `41` chiusure non si fanno perche' la riga NON PORTA IL COMMIT.** E' la stessa regola del punto `1` del giro scorso: ### **un commit non si inventa.**

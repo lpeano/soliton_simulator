@@ -259,6 +259,19 @@ def valida(voci, reg, verboso=True, derivati=True):
     # ### prova end-to-end, e la promessa *<<se non passa NON SI SCRIVE NIENTE>>*
     # ### ### **era falsa.**
     err += _f7_stato(voci)
+    # ### `F10` SI ACCENDE, `F9` NO, e la differenza e- ### **misurata, non di gusto:**
+    # ### `F10` viola su ### **ZERO** voci, `F9` su ### **CINQUE**. `indice.py valida`
+    # ### gira nel `pre-commit`: un presidio bloccante con violazioni in piedi
+    # ### ### **blocca ogni commit del repo**, compreso quello che lo accende.
+    # ### ✔ **E ADESSO `F9` E- ACCESO, NELLO STESSO COMMIT CHE CURA LE CINQUE** -- `A2`,
+    # ### `LUNGA-BATTITO-CADUTA`, `PRESTAZIONI-CORSE`, `REPERTI-IMMUTABILI`,
+    # ### `RIPRESA-ARGV`: quattro passano ad `APERTA`, una a era `1`.
+    # ### ⛔ **In DUE commit non si poteva**, e Luca lo ha riconosciuto: *<<F9 e F10 si
+    # ### accendono NELLO STESSO COMMIT delle correzioni che li rendono veri, mai
+    # ### prima>>*. Il commit che accendesse `F9` prima ### **sarebbe bloccato dal suo
+    # ### stesso hook**, perche- `indice.py valida` gira nel `pre-commit`.
+    err += _f9_era_stato(voci)
+    err += _f10_criterio_metodo(voci)
     err += _eccezioni_malformate(voci)
     # ### L'INDICE INVERTITO e le VISTE: DERIVATI, e si CONFRONTANO
     if not derivati:
@@ -1074,6 +1087,79 @@ def _f8_era1(voci):
     return fuori
 
 
+def _f9_era_stato(voci):
+    """### `F9`: l-era e lo stato ### **non sono indipendenti.**
+
+    ### **La regola del mandato:** era `ENTRAMBE` ### **=> stato `APERTA` o `CHIUSA`**;
+    era `2` ### **=> stato `AGENDA`.** ### ⭐ **Il perche- e- che l-era dice QUANDO una
+    cosa vive, e lo stato dice COM-E- ADESSO:** una voce che vale per ### **entrambe le
+    ere** non puo- essere ### **SOSPESA**, perche- <<sospesa>> vuol dire
+    ### **<<rimandata all-era 2>>** -- e una cosa che vale ### **anche** nell-era 2
+    ### **non si puo- rimandare a se stessa.** Una voce dell-era `2` e- ### **agenda**,
+    perche- l-era 2 ### **non e- cominciata.**
+
+    ### ⛔ **NON E- NEL VALIDATORE, E NON E- UN PRESIDIO** *(`A9`)*: il mandato lo
+    vuole ### **BLOCCANTE**, e oggi ### **`5` voci lo violano** -- `A2`,
+    `LUNGA-BATTITO-CADUTA`, `PRESTAZIONI-CORSE`, `REPERTI-IMMUTABILI`, `RIPRESA-ARGV`.
+    ### **`indice.py valida` gira nel `pre-commit`**, quindi accenderlo adesso
+    ### **bloccherebbe OGNI COMMIT DEL REPO**, compreso quello che lo accende: l-hook
+    gira il codice ### **dell-albero di lavoro.** ### ➜ **La riga che lo accende sta
+    nello STESSO commit che cura le `5`**, e la cura e- ### **il file del guardiano.**
+
+    ### ⚠ **E le `5` si curano in DUE modi diversi** -- portarle a `APERTA`, oppure
+    portarle a ### **era `1`** *(dove `SOSPESA` e- lecito, e `F8` segnala proprio che
+    nominano oggetti dell-era 1)*. ### ⛔ **QUALE DEI DUE lo dice il file, non io.**
+
+    ### **E- PURA**, come `F7`: il collaudo la prova ### **su una COPIA.**
+    """
+    err = []
+    for v in voci:
+        # ### ⭐ **UN SEGNAPOSTO SI SALTA:** `DA_CLASSIFICARE` non e- uno stato, e-
+        # ### ### **l-assenza di uno stato** -- la stessa scelta del punto `1` del
+        # ### 2026-10-09, dove lo stato non si decide prima della classe.
+        if v["stato"] == "DA_CLASSIFICARE":
+            continue
+        e = str(v["era"])
+        if e == "ENTRAMBE" and v["stato"] not in ("APERTA", "CHIUSA"):
+            err.append("`F9` `%s`: era `ENTRAMBE` con stato `%s`. Una voce che vale per "
+                       "ENTRAMBE le ere e- APERTA o CHIUSA: <<sospesa>> vuol dire "
+                       "<<rimandata all-era 2>>, e una cosa che vale ANCHE nell-era 2 "
+                       "non si puo- rimandare a se stessa"
+                       % (v["id"], v["stato"]))
+        if e == "2" and v["stato"] != "AGENDA":
+            err.append("`F9` `%s`: era `2` con stato `%s`. L-era 2 NON E- COMINCIATA: "
+                       "una sua voce e- AGENDA" % (v["id"], v["stato"]))
+    return err
+
+
+def _f10_criterio_metodo(voci):
+    """### `F10`: una voce di classe `CRITERIO` ### **sta nel dominio `METODO`.**
+
+    ### ⭐ **Un criterio e- una REGOLA DI GIUDIZIO**, e una regola di giudizio
+    ### **non e- fisica**: dice ### **come si decide**, non ### **come va il mondo.**
+    ### ⛔ **E- UN ERRORE, non un segnale**, e il mandato lo dice: *<<entrambi errori
+    (validazione bloccante)>>*.
+
+    ### ✔ **QUESTO SI PUO- ACCENDERE SUBITO: le violazioni oggi sono ZERO**, misurate
+    sulle `846` voci a `bfb1596`. ### **Un presidio che si accende su zero violazioni
+    non ha bisogno di nessuna cura prima** -- ed e- per questo che `F9` e `F10`,
+    che il mandato chiede ### **insieme**, ### **si separano: uno si puo-, l-altro no.**
+
+    ### ⚠ **E lo zero NON e- un FALSO-ZERO:** il punto `4` del 2026-10-09 ha portato
+    `REGISTRO_FISICA:D37` da `CRITERIO`/`INFRASTRUTTURA` a `DIFETTO`, e
+    `REGISTRO_FISICA:C3` a `CRITERIO`/`METODO`. ### **Lo zero di oggi e- il risultato di
+    quelle cure**, e il collaudo lo prova ### **con un caso che DEVE scattare.**
+    """
+    err = []
+    for v in voci:
+        if v["classe"] == "CRITERIO" and v["dominio"] != "METODO":
+            err.append("`F10` `%s`: classe `CRITERIO` nel dominio `%s`. Un criterio e- "
+                       "una REGOLA DI GIUDIZIO, e una regola di giudizio non e- fisica: "
+                       "dice COME SI DECIDE, non come va il mondo" % (v["id"],
+                                                                      v["dominio"]))
+    return err
+
+
 def _f7_stato(voci):
     """### `F7`: una voce `FISICA` dell-era `1` con uno stato che non e- `SOSPESA` ne-
     `CHIUSA`.
@@ -1283,6 +1369,21 @@ def _f4_etichette(etich):
     return fuori
 
 
+# ### ⛔ **UNA NOTA PUO- DICHIARARE UNA TRIPLA**, e allora la tripla e- un-ASSERZIONE:
+# ### *<<correzione v3 blocco G2: ### **FISICA/era 1/SOSPESA**>>* dice
+# ### ### **che cos-e- la voce**, e se la voce e- cambiata ### **la nota e- SCADUTA.**
+# ### ⚠ **E NON E- LEGGERE LA PROSA:** serve ### **la forma esatta**
+# ### `DOMINIO/era N/STATO`. Sulle `846` voci la trovano ### **`6` note**, e
+# ### ### **una sola e- incoerente: `G1`** -- esattamente il caso che il mandato
+# ### nomina. ### ⛔ **La via grossolana -- <<la nota nomina uno stato diverso>> --
+# ### dava `69` SEGNALI**, perche- la maggior parte delle note parla
+# ### ### **di un-altra era o fa una DOMANDA** *(<<superata da A16?>>)*: era
+# ### ### **la condizione di FERMO scritta nel task history**, e mi sono fermato.
+_TRIPLA = re.compile(r"(FISICA|METODO|INFRASTRUTTURA|DOCUMENTAZIONE)\s*/\s*era\s*"
+                    r"(1|2|ENTRAMBE)\s*/\s*(APERTA|CHIUSA|SOSPESA|AGENDA|SUPERATA)",
+                    re.I)
+
+
 def _f6_note(voci):
     """### `F6`: una `nota_guardiano` che ### **nomina una lista del guardiano** e che
     ### **contraddice** il dominio, l-era o lo stato della voce.
@@ -1302,6 +1403,25 @@ def _f6_note(voci):
         nota = (v.get("meta") or {}).get("nota_guardiano") or ""
         if not nota or _coperto(v, "F6"):
             continue
+        # ### ✔ **PRIMA LA TRIPLA DICHIARATA**, che vale ### **anche per una nota che si
+        # ### dice <<correzione>>:** una correzione ### **dichiara cio- che la voce E-**, e
+        # ### se la voce si e- mossa ### **la dichiarazione e- SCADUTA.** `G1` dice
+        # ### *<<correzione v3 blocco G2: FISICA/era 1/SOSPESA>>* e oggi e- ### **`CHIUSA`**,
+        # ### perche- il guardiano ha dichiarato che e- ### **<<FATTO>>.**
+        mt = _TRIPLA.search(nota)
+        if mt:
+            d, e, s = (x.upper() for x in mt.groups())
+            g2 = []
+            if v["dominio"] != d:
+                g2.append("la nota dichiara `%s`, la voce e- `%s`" % (d, v["dominio"]))
+            if str(v["era"]).upper() != e:
+                g2.append("la nota dichiara era `%s`, la voce e- era `%s`" % (e, v["era"]))
+            if v["stato"] != s:
+                g2.append("la nota dichiara `%s`, la voce e- `%s`" % (s, v["stato"]))
+            if g2:
+                fuori.append((v["id"], "la nota DICHIARA una tripla `dominio/era/stato` e "
+                                       "la voce non e- piu- quella: %s" % "; ".join(g2)))
+                continue
         m = re.search(r"list[ae]\s*([123])?\s*del guardiano", nota, re.I)
         if not m:
             continue

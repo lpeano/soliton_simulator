@@ -2477,3 +2477,17 @@ etichette rimosse, con ### **`0` persi, `0` doppi, `0` conflitti**.
 | ### ⭐ **la differenza si ISOLA spegnendo il filtro** | `_scarta` si sostituisce con `lambda: False`, cioè **il comportamento di prima della cura**: così l'elenco è **esattamente ciò che il difetto ha causato**, non ciò che credo abbia causato |
 | ### ⛔ **e il CONTROLLO è un ASSERT** | le `6` voci che il mandato dichiara attese **devono** comparire: se una non compare, `_controllo_il_fatto.py` **si ferma** — la regola che ho scritto non sarebbe quella del mandato |
 | **l'uscita** | `doc/indice/_il_fatto.json` · `doc/indice/_lotti/v3_il_fatto.jsonl` |
+
+---
+
+### `csv/_applica_correzioni_guardiano.py` e `csv/_due_convenzioni.py` — **LE `165` RIGHE, E LE DUE CONVENZIONI** *(2026-10-09)*
+
+| | |
+|---|---|
+| **i file** | `csv/_applica_correzioni_guardiano.py` *(BLOB `e50706d9`)* · `csv/_due_convenzioni.py` *(BLOB `6ad42775`)* |
+| **COMANDO** | `python csv/_applica_correzioni_guardiano.py` + `python csv/indice.py aggiorna-lotto doc/indice/_lotti/v3_guardiano.jsonl`; poi `python csv/_due_convenzioni.py` + `aggiorna-lotto doc/indice/_lotti/v3_convenzioni.jsonl` |
+| **cosa misura** | per ognuna delle `165` righe: **dove compare la citazione** *(cinque livelli, e quale ha trovato)*, se la riga intera **sostiene** il cambio, e **un verdetto per riga** — `APPLICATA`, `APPLICATA_IN_PARTE`, `LASCIATA`, `NON_APPLICATA` |
+| ### ⛔ **i conti tornano a `165`, e è un `assert`** | un conteggio **per campo** non risponde alla domanda del mandato: una riga che cambia due campi può averne **uno applicato e uno lasciato.** Se i verdetti non sommano a `165`, **una riga del guardiano è stata persa**, e lo strumento **si ferma** |
+| ### ⚠ **i cinque livelli, e DUE li aggiungo io** | `T1` la riga, `T2` il blocco, `T3` la sezione **sono del mandato**; `T0` *(il testo della voce)* e `T4` *(altrove nel file, e **SOLO se la riga non si ritrova**)* **sono miei, e la docstring li dichiara** |
+| **le due convenzioni** | gli ID **si leggono da `CLAUDE.md`**: la tabella del §`11` → `STANDARD`, quella del §`12` → `PRESIDIO`. **«In vigore» = «citato in `CLAUDE.md` oggi»** |
+| **l'uscita** | `doc/indice/_p3_guardiano.json` · `doc/indice/_p4_convenzioni.json` · i due lotti |

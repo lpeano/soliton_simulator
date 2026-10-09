@@ -347,3 +347,16 @@ Si toglie dall'inizio della riga, **ripetutamente**: i `#`, gli spazi, i **simbo
 | ### **perché** | *«**IL FATTO** che `d` scenda sotto `LAM` …»* è un ### **SOSTANTIVO**: introduce una frase e ### **non chiude niente.** *«`FATTO:` …»* coi due punti è ### **un'etichetta di campo**, come *«MISURA:»* |
 | ### ⭐ **è lo stesso errore della NEGAZIONE, un livello più su** | `NEGA` guarda ### **se la parola è negata**; questo guarda ### **se la parola è un verbo** |
 | ### ⛔ **e dove la regola corretta NON decide, lo stato TORNA DOV'ERA** | non è un'invenzione: la `CHIUSA` di oggi ### **l'aveva scritta il lotto col difetto**, e ### **una scrittura sbagliata si disfa** |
+
+---
+
+## `F9` E `F10`, E LE DUE CONVENZIONI *(2026-10-09)*
+
+| | |
+|---|---|
+| ### **`F9`** *(ERRORE)* | era `ENTRAMBE` ⇒ stato `APERTA` o `CHIUSA`; era `2` ⇒ `AGENDA`. ### ⭐ **Il perché:** *«sospesa»* vuol dire ### **«rimandata all'era `2`»**, e una cosa che vale ### **anche** nell'era `2` ### **non si può rimandare a se stessa**; l'era `2` ### **non è cominciata**, quindi una sua voce è ### **agenda** |
+| ### **`F10`** *(ERRORE)* | `CRITERIO` ⇒ dominio `METODO`: un criterio è una ### **regola di giudizio**, e dice ### **come si decide**, non come va il mondo |
+| ### ⛔ **e si accendono CON la cura, non prima** | `indice.py valida` gira nel `pre-commit`: un presidio bloccante con violazioni in piedi ### **blocca ogni commit del repo**, compreso quello che lo accende |
+| ### **`F6` legge anche la TRIPLA dichiarata** | una nota che scrive `DOMINIO/era N/STATO` fa ### **un'asserzione**, e se la voce si è mossa ### **la nota è scaduta.** ### ⚠ **La via grossolana** — *«la nota nomina uno stato diverso»* — dava ### **`69` segnali**; la forma esatta ne dà ### **`1`: `G1`** |
+| ### **STANDARD contro PRESIDIO** | `PRESIDIO` è ### **solo ciò che è cablato** *(`A9`)*: le regole di lavoro del §`11` ### **non impediscono niente** e sono `STANDARD` |
+| ### **una regola in vigore è `APERTA`** | `CHIUSA` ### **solo se ritirata o fusa.** ### ⭐ **Una regola non si «finisce»: VALE** — la stessa frase degli assiomi |
