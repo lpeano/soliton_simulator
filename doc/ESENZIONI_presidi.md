@@ -8,6 +8,7 @@ commit**: cosi' non se ne accumulano di invisibili.)*
 | `csv/_analisi_lettori_indice.py|H-P5` | non importa il simulatore e non lo fa girare. Legge sorgenti e conta. |
 | `csv/_ancore_prima.py|H-P5` | strumento di analisi STATICA. Non importa il simulatore e non lo fa girare: |
 | `csv/_archivio_relazioni.py|H-P5` | non importa il simulatore e non lo fa girare. Divide un documento per giorno. |
+| `csv/_cerca_definizioni.py|H-P5` | non importa il simulatore e non lo fa girare. Cerca definizioni nei documenti. |
 | `csv/_collaudo_criterio_zero.py|H-P5` | non importa il simulatore e non lo fa girare. E' un collaudo di un CRITERIO |
 | `csv/_collaudo_istruzioni.py|H-P5` | non importa il simulatore e non lo fa girare. Collauda una sezione di documentazione. |
 | `csv/_collaudo_lista_chiusa.py|H-P5` | non importa il simulatore e non lo fa girare. Collauda un generatore di documenti. |
@@ -33,6 +34,7 @@ commit**: cosi' non se ne accumulano di invisibili.)*
 | `csv/_letture_rho_s.py|H-P5` | strumento di analisi STATICA. Non importa il simulatore e non lo fa girare: |
 | `csv/_lista_chiusa.py|H-P5` | non importa il simulatore e non lo fa girare. Legge un TSV e scrive un documento. |
 | `csv/_osservabile_p1.py|H-P5` | la configurazione si dichiara solo quando si COSTRUISCE una scena (`--scena`), e |
+| `csv/_p5_etichette.py|H-P5` | non importa il simulatore e non lo fa girare. Costruisce lotti per l'indice. |
 | `csv/_patch_cura2_strutturale.py|H-P5` | non importa il simulatore e non lo fa girare. Riscrive un sorgente per AST. |
 | `csv/_patch_d32_nomi.py|H-P5` | non importa il simulatore e non lo fa girare. Rinomina variabili in un sorgente. |
 | `csv/_patch_default_scena.py|H-P5` | non importa il simulatore e non lo fa girare. Sostituisce due default nel driver. |
@@ -113,5 +115,5 @@ commit**: cosi' non se ne accumulano di invisibili.)*
 | `csv/_test_fork/_z43_tempo_proprio.py|H-P3` | la scena passa TUTTA dal CLI (`nmasse` e `sep` da `argv`), e la |
 
 ```
-esenzioni dichiarate   106
+esenzioni dichiarate   108
 ```

@@ -103,6 +103,7 @@ python csv/indice.py aggiorna-lotto doc/indice/_lotti/<nome>.jsonl
 python csv/indice.py crea-lotto    doc/indice/_lotti/<nome>.jsonl   # NASCE
 python csv/indice.py storico-commit                              # il campo `commit`
 python csv/indice.py segnali                                      # i PRESIDI
+python csv/indice.py etichette-lotto doc/indice/_lotti/<nome>.jsonl  # le ETICHETTE
 ```
 
 | | |
@@ -198,3 +199,24 @@ Era **spaccata in due**: `71` voci `CRITERIO` in `FISICA` e `35` in `METODO`, e 
 | ### ⚠ **il prezzo** | `FISICA` perde `58` voci *(da `439` a `381`)*, e chi legge i conteggi di ieri e di domani **deve trovare scritto perché** |
 
 ### **E il controllo `C3` conosce LA REGOLA, non i `6` ID** che oggi la esercitano: una voce `CRITERIO` si aspetta in `METODO` **qualunque cosa dicesse la lista del guardiano**, altrimenti il controllo andrebbe riscritto ogni volta che una voce diventa un criterio.
+
+---
+
+## QUANDO UN'INTESTAZIONE **DEFINISCE** UN ID *(regola di `F4`, 2026-10-09)*
+
+> ### ⭐ **L'ID deve essere il SOGGETTO, e ci deve essere CONTENUTO.**
+
+Si toglie dall'inizio della riga, **ripetutamente**: i `#`, gli spazi, i **simboli non alfanumerici** *(`⛔` `✅` `⚠` `⭐` `➜` `①` `*` backtick `—` `§`)*, la **numerazione** *(`5.`, `1.2`, `5-bis.`, `§38`)* e **una parola di stato** *(`APERTO`, `CHIUSO`, `APERTA`, `CHIUSA`, `RISOLTO`, `SOSPESO`)*.
+
+| | |
+|---|---|
+| ### ✔ **è una definizione** | il resto **comincia con l'ID** *(e l'ID finisce dove finisce il token: `S1` non definisce `S10`)* ### **e c'è contenuto** — `3` caratteri dopo l'ID **oppure** una riga non vuota e non-intestazione **SOTTO** |
+| ### ⚠ **il «**sotto**» serve** | `## APERTO CURA1-CORTO` ha l'intestazione **nuda** e il contenuto **nel paragrafo che segue**: *«senza contenuto»* vuol dire **niente, né accanto né sotto** |
+| ### ⛔ **non è una definizione** | l'ID **dentro la prosa**: `### 1.2 ⚠ E LA LETTURA CHE DECIDE DAVVERO — dichiarata POST-HOC, non era fissata prima`. ### **`POST-HOC` è un aggettivo**, e `RI-LETTO`, `RI-VERIFICATI`, `SOVRA-CORREGGE` sono **verbi** |
+| ### **le righe di tabella** | **non cambiano:** `\| `ID` \| …` resta una definizione |
+
+### **Il collaudo ha i due casi che il mandato fissa** — `POST-HOC` **non deve** scattare, `TW-1` a `6e5e75b` **deve** — piu' **il braccio che prova che è LA REGOLA a zittirlo**: con la regola spenta, `POST-HOC` torna a segnalare.
+
+### ⛔ **E `F4` SI FERMA AL PRIMO FILE**, quindi **non può dire se un ID è un OMONIMO.** Per quello c'è **`python csv/_cerca_definizioni.py`**, che cerca **TUTTE** le definizioni in **tutto il repo** — e che esclude i file che **parlano dell'indice** *(referti, task history, attrezzi, `par9.md`)*: ### ⭐ **un file che parla dell'indice ELENCA gli ID, non li DEFINISCE**, ed è **la terza volta** che questo falso-uno si presenta — dopo `doc/INDICE.md` *(il controllo `C4`)* e `doc/LISTA_CHIUSA.md` *(il ripasso del blocco `C`)*.
+
+### **Un'etichetta NON ha un `meta`**, perché non è una voce: la sua eccezione e la sua nota stanno in **campi suoi**, scritti con **`etichette-lotto`** — la stessa via, con la sua riga di storico.

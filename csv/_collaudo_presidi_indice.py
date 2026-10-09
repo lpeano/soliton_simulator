@@ -137,6 +137,28 @@ def main():
     esito("F4  NON deve scattare: TW-1 oggi NON e' fra le etichette",
           not any(e["id"] == "TW-1" for e in etich)
           and not scatta(IX._f4_etichette(etich), "TW-1"))
+    # ### LA REGOLA DELL-INTESTAZIONE (punto 5), e sono I DUE CASI CHE IL MANDATO FISSA.
+    # ### `POST-HOC` e- segnalato da `### 1.2 E LA LETTURA CHE DECIDE DAVVERO -- dichiarata
+    # ### POST-HOC, non era fissata prima`: ### **l-ID non e- il SOGGETTO, e- un
+    # ### aggettivo.** `TW-1` invece e- definito da ### **una RIGA DI TABELLA**, e le righe
+    # ### di tabella la regola NON le tocca: ### **deve continuare a scattare.**
+    ph = [e for e in e_prima if e["id"] == "POST-HOC"]
+    assert ph, "POST-HOC non era fra le etichette a " + PRIMA_V3
+    esito("F4  NON deve scattare: POST-HOC, l-ID sta DENTRO LA PROSA dell-intestazione",
+          not scatta(IX._f4_etichette(ph), "POST-HOC"),
+          "`### 1.2 ... -- dichiarata POST-HOC, non era fissata prima`")
+    esito("F4  DEVE scattare: TW-1 a %s -- una RIGA DI TABELLA lo definisce" % PRIMA_V3,
+          scatta(IX._f4_etichette(tw1_prima), "TW-1"),
+          "la regola dell-intestazione NON tocca le righe di tabella")
+    # ### ⛔ **E il braccio che prova che e- LA REGOLA a zittire `POST-HOC`**, non il caso:
+    # ### con la regola spenta ### **POST-HOC torna a segnalare.**
+    _vera = IX._intestazione_definisce
+    try:
+        IX._intestazione_definisce = lambda righe, k, idv: True
+        esito("F4  DEVE scattare: con la REGOLA SPENTA, POST-HOC torna a segnalare",
+              scatta(IX._f4_etichette(ph), "POST-HOC"))
+    finally:
+        IX._intestazione_definisce = _vera
 
     # ---------------------------------------------------------------- F5
     # ### SINTETICO, e in memoria: `_f5_righe` e' PURA proprio per questo.

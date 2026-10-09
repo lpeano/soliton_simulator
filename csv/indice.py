@@ -10,6 +10,7 @@ python csv/indice.py aggiorna-lotto LOTTO.jsonl     # la STESSA via, in blocco
 python csv/indice.py crea-lotto LOTTO.jsonl        # la STESSA via, per FAR NASCERE una voce
 python csv/indice.py storico-commit               # riempie il campo `commit` DAI LOG
 python csv/indice.py segnali                      # i PRESIDI: segnalano, NON decidono
+python csv/indice.py etichette-lotto LOTTO.jsonl   # la via per le ETICHETTE rimosse
 python csv/indice.py mostra [--stato X] [--segnaposto SI] [--da N] [--quante N]
 python csv/indice.py meta-aggiungi k --tipo T [--valori a,b] [--regex R] --descrizione "..."
 python csv/indice.py meta-depreca k --sostituito-da k2 --motivo "..."
@@ -918,12 +919,67 @@ def _f3_fisica_strumenti(voci):
     return fuori
 
 
+# ### ⛔ **LA REGOLA DELL-INTESTAZIONE** *(punto `5` del 2026-10-09)*. `F4` segnalava `30`
+# ### etichette, e ### **circa meta- erano intestazioni in cui l-ID sta DENTRO LA PROSA**:
+# ### *<<`### 1.2 ⚠ E LA LETTURA CHE DECIDE DAVVERO — dichiarata POST-HOC, non era fissata
+# ### prima`>>*. ### **`POST-HOC` non e- il soggetto di quell-intestazione: e- un aggettivo.**
+# ### Lo stesso per `RI-LETTO`, `RI-VERIFICATI`, `SOVRA-CORREGGE`, che sono ### **VERBI.**
+# ###
+# ### ✔ **UN-INTESTAZIONE DEFINISCE SE, E SOLO SE:**
+# ###   ① si toglie dall-inizio, ripetutamente, cio- che NON porta significato -- i `#`, gli
+# ###     spazi, i ### **simboli non alfanumerici** *(`⛔` `✅` `⚠` `⭐` `➜` `①` `*` backtick
+# ###     `—` `§`)*, la ### **numerazione** *(`5.`, `1.2`, `5-bis.`, `§38`)* e ### **una
+# ###     parola di STATO** *(`APERTO`, `CHIUSO`, `APERTA`, `CHIUSA`, `RISOLTO`,
+# ###     `SOSPESO`)*; ### **e il resto COMINCIA con l-ID** -- cioe- ### **l-ID e- il
+# ###     SOGGETTO**;
+# ###   ② ### **e c-e- CONTENUTO:** altri `3` caratteri sulla riga dopo l-ID,
+# ###     ### **oppure** almeno una riga non vuota e non-intestazione ### **SOTTO**.
+# ### ⚠ **Il ② serve a `## APERTO CURA1-CORTO`**, dove il contenuto e- ### **il paragrafo
+# ### sotto**: l-intestazione e- nuda, la sezione no. ### **<<Senza contenuto>> vuol dire
+# ### che non c-e- NIENTE, ne- accanto ne- sotto.**
+_H_SIMBOLI = re.compile(r"^[^0-9A-Za-z]+")
+_H_NUM = re.compile(r"^(?:§\s*)?\d+(?:[.-][0-9A-Za-z]+)*\.?\s*")
+_H_STATO = re.compile(r"^(?:APERTO|APERTA|CHIUSO|CHIUSA|RISOLTO|RISOLTA|SOSPESO|SOSPESA)\b\s*", re.I)
+
+
+def _intestazione_definisce(righe, k, idv):
+    """### `righe[k]` e- un-intestazione: ### **definisce `idv`?** Vedi la regola sopra."""
+    t = re.sub(r"^#{1,6}\s*", "", righe[k])
+    for _ in range(8):
+        prima = t
+        for r in (_H_SIMBOLI, _H_NUM, _H_STATO):
+            t = r.sub("", t, count=1)
+        if t == prima:
+            break
+    if not t.startswith(idv):
+        return False
+    resto = t[len(idv):]
+    # ### ⛔ **e l-ID deve finire DOVE FINISCE IL TOKEN:** `S1` non definisce `S10`.
+    if resto[:1] and (resto[0].isalnum() or resto[0] in "_:-"):
+        return False
+    if len(resto.strip()) >= 3:
+        return True
+    # ### ② il CONTENUTO puo- stare SOTTO: `## APERTO CURA1-CORTO` + il paragrafo
+    for r in righe[k + 1:k + 12]:
+        if r.strip().startswith("#"):
+            break
+        if len(r.strip()) >= 3:
+            return True
+    return False
+
+
 def _f4_etichette(etich):
     """### `F4`: un-etichetta rimossa che ### **in un documento E- DEFINITA.**"""
     fuori = []
     riga_t = "|"
     for e in etich:
         idv = e["id"]
+        # ### ⛔ **UN-ETICHETTA NON HA UN `meta`:** non e- una voce, e lo schema delle
+        # ### voci non la riguarda. ### **Quindi la sua eccezione sta in un campo suo**,
+        # ### `eccezione_presidio`, scritto con `etichette-lotto` -- la stessa via, con
+        # ### la sua riga di storico.
+        if e.get("eccezione_presidio"):
+            continue
         q = re.escape(idv)
         rt = re.compile(r"^\s*\|\s*\**\s*`?" + q + r"`?\s*\**\s*\|")
         it = re.compile(r"^#{1,6}\s.*(?<![A-Za-z0-9_:-])" + q + r"(?![A-Za-z0-9_:-])")
@@ -935,12 +991,14 @@ def _f4_etichette(etich):
             if not os.path.exists(p):
                 continue
             trovata = None
-            for n, r in enumerate(io.open(p, encoding="utf-8",
-                                          errors="replace").read().split(NL), 1):
+            righe = io.open(p, encoding="utf-8", errors="replace").read().split(NL)
+            for n, r in enumerate(righe, 1):
                 if rt.match(r):
                     trovata = ("una riga di tabella", n)
                     break
-                if it.match(r):
+                # ### ⛔ **NON BASTA CHE L-INTESTAZIONE CONTENGA L-ID:** vedi la regola
+                # ### dell-intestazione qui sopra.
+                if it.match(r) and _intestazione_definisce(righe, n - 1, idv):
                     trovata = ("un-intestazione", n)
                     break
             if trovata:
@@ -1117,6 +1175,47 @@ def storico_commit():
     return 0
 
 
+def etichette_lotto(percorso):
+    """### LA VIA DI SCRITTURA PER LE ETICHETTE RIMOSSE.
+
+    ### ⚠ **Perche- serviva:** il punto `5` del 2026-10-09 deve ### **chiudere un
+    segnale di `F4` su un'etichetta** *(`GLOBALE-DIS`: la sua unica definizione dice
+    che l'ID ### **non esiste**)* e ### **lasciare una nota «da decidere da Luca»** su
+    tre altre. ### ⛔ **Un'etichetta NON ha un `meta`**, perche- non e- una voce: la
+    sua eccezione e la sua nota stanno in ### **campi suoi**, e `F4` li legge.
+
+    ### ✔ **Resta LA STESSA VIA:** ogni modifica ### **una riga di storico**, col
+    motivo, e ### **se un ID non e- fra le etichette il lotto non parte.**
+    """
+    righe = [json.loads(r) for r in io.open(percorso, encoding="utf-8").read()
+             .split(NL) if r.strip()]
+    etich = [json.loads(r) for r in io.open(ETICH, encoding="utf-8").read().split(NL)
+             if r.strip()]
+    per = {e["id"]: e for e in etich}
+    storia = []
+    for r in righe:
+        idv = r["id"]
+        assert idv in per, "`%s` NON e- fra le etichette rimosse" % idv
+        e = per[idv]
+        prima = json.loads(json.dumps(e))
+        for k, val in r.items():
+            if k in ("id", "motivo", "quando"):
+                continue
+            e[k] = val
+        motivo = r.get("motivo") or ("(etichetta) aggiornata: " + ", ".join(
+            k for k in r if k not in ("id", "motivo", "quando")))
+        assert len(motivo) >= 20, "`%s`: motivo troppo corto" % idv
+        storia.append({"quando": r.get("quando") or _oggi(), "id": idv,
+                       "motivo": motivo, "commit": "", "commit_base": _head(),
+                       "prima": prima, "dopo": json.loads(json.dumps(e))})
+    _scrivi_jsonl(ETICH, etich)
+    with io.open(STORICO, "a", encoding="utf-8", newline=NL) as f:
+        for s in storia:
+            f.write(json.dumps(s, ensure_ascii=False) + NL)
+    print("  lotto ETICHETTE applicato: %d etichette, %d righe di storico"
+          % (len(righe), len(storia)))
+
+
 def crea_lotto(voci, reg, percorso):
     """### LA VIA PER FAR NASCERE UNA VOCE -- la STESSA via, non un-altra.
 
@@ -1233,6 +1332,9 @@ def main(argv):
         return 0
     if cmd == "crea-lotto":
         crea_lotto(voci, reg, pos[0])
+        return 0
+    if cmd == "etichette-lotto":
+        etichette_lotto(pos[0])
         return 0
     if cmd == "storico-commit":
         return storico_commit()

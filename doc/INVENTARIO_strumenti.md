@@ -2141,7 +2141,7 @@ nessuna voce si cancella.**
 | | |
 |---|---|
 | **file** | `csv/indice.py` *(657 righe)* |
-| **COMANDO** | `python csv/indice.py collaudo` · `valida` · `cerca` · `aggiorna` · **`aggiorna-lotto`** · **`crea-lotto`** · **`storico-commit`** · **`segnali`** · `mostra` · `viste` · `citazioni` · `meta-aggiungi`/`meta-depreca`/`meta-rinomina` |
+| **COMANDO** | `python csv/indice.py collaudo` · `valida` · `cerca` · `aggiorna` · **`aggiorna-lotto`** · **`crea-lotto`** · **`storico-commit`** · **`segnali`** · **`etichette-lotto`** · `mostra` · `viste` · `citazioni` · `meta-aggiungi`/`meta-depreca`/`meta-rinomina` |
 | **cosa misura** | ### **valida** schema, vocabolari, riferimenti, transizioni, campi obbligatori, unicita', metadati, e l'### **allineamento dei DERIVATI** *(indice invertito e viste)*; ### **cerca** per campi e metadati ### **senza parsing di testo**; ### **scrive** solo con `aggiorna`, che aggiunge una riga a `storico.jsonl` |
 | **BLOB** | `23f29617` |
 
@@ -2287,3 +2287,28 @@ etichette rimosse, con ### **`0` persi, `0` doppi, `0` conflitti**.
 | **COMANDO** | `python csv/_segnali_chiusura.py 1` · `2` *(seleziona)* · `2b` *(il lotto)* · `3` · `4`, poi `python csv/indice.py aggiorna-lotto doc/indice/_lotti/v3_p<n>.jsonl` |
 | **cosa misura** | il punto `1` **elenca i segnali di `F1` che restano** dopo la restrizione; il punto `2` **seleziona i candidati a ESITO MISURATO** fra le voci `CRITERIO`/`FISICA` *(un numero come risultato, e **nessun verbo prescrittivo**)* e ne scrive **la frase**, perché la decisione la prendo **leggendo** |
 | **l'uscita** | `doc/indice/_lotti/v3_p1.jsonl` · `doc/indice/_p2_esiti.json` |
+
+---
+
+### `csv/_cerca_definizioni.py` — **TUTTE le definizioni di un ID, in tutto il repo** *(2026-10-09)*
+
+| | |
+|---|---|
+| **file** | `csv/_cerca_definizioni.py` |
+| **BLOB** *(sha1 dei byte grezzi)* | `014b97f3` |
+| **COMANDO** | `python csv/_cerca_definizioni.py --f4` *(tutte quelle che `F4` segnala)* · `python csv/_cerca_definizioni.py <ID> [<ID> …]` |
+| **cosa misura** | **tutte** le definizioni — riga di tabella o **intestazione col soggetto** — in `1527` file tracciati, **distinte per TIPO** *(documento, relazione, task-history, sigillo, attrezzo)*. ### **Serve perché `F4` si ferma al primo file**, e un presidio che si ferma al primo **non può dire se un ID è un omonimo** |
+| **l'uscita** | `doc/indice/_definizioni.json` |
+| ### ⚠ **la trappola, ed è LA TERZA VOLTA** | i **miei stessi referti** contengono `\| ID \| … \|` per ogni segnale, e venivano letti come **definizioni**: `AUTO-MANUTENZIONE` risultava definita in `4` posti invece di `1`. ### ⭐ **Un file che parla dell'indice ELENCA gli ID, non li definisce** — dopo `doc/INDICE.md` *(`C4`)* e `doc/LISTA_CHIUSA.md` |
+
+---
+
+### `csv/_p5_etichette.py` — **LE ETICHETTE SEGNALATE DA `F4`, DECISE** *(2026-10-09)*
+
+| | |
+|---|---|
+| **file** | `csv/_p5_etichette.py` |
+| **BLOB** *(sha1 dei byte grezzi)* | `f2b03651` |
+| **COMANDO** | `python csv/_p5_etichette.py`, poi `python csv/indice.py crea-lotto doc/indice/_lotti/v3_p5.jsonl` e `python csv/indice.py etichette-lotto doc/indice/_lotti/v3_p5_etichette.jsonl` |
+| **cosa misura** | niente: **porta la decisione**, in quattro tabelle con il perché di ciascuna voce. `7` **ripristinate**, `6` **omonimi** *(non si scelgono)*, `1` che **resta etichetta**, `3` nel **quarto caso** |
+| ### ⚠ **il QUARTO caso, e lo avevo previsto** | `AUTO-MANUTENZIONE` *(una **regola di lavoro**, non una legge)*, `F4` e `F5` *(una **famiglia di difetti** che punta a un'altra voce)*: **nessuno dei tre esiti del mandato**, quindi **elencati**, con la nota «da decidere da Luca» e **il segnale LASCIATO ACCESO** |

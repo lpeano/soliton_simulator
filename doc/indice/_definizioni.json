@@ -1,0 +1,787 @@
+{
+ "AUTO-MANUTENZIONE": [
+  {
+   "file": "doc/STORIA_REGOLE.md",
+   "tipo": "documento",
+   "riga": 479,
+   "come": "intestazione",
+   "testo": "## 5-bis. AUTO-MANUTENZIONE (tieni aggiornati i documenti vivi)"
+  }
+ ],
+ "CURA1-CORTO": [
+  {
+   "file": "doc/STATO_RUN.md",
+   "tipo": "documento",
+   "riga": 1330,
+   "come": "intestazione",
+   "testo": "## APERTO CURA1-CORTO"
+  }
+ ],
+ "CURA2-CORTO": [
+  {
+   "file": "doc/STATO_RUN.md",
+   "tipo": "documento",
+   "riga": 1353,
+   "come": "intestazione",
+   "testo": "## APERTO CURA2-CORTO"
+  }
+ ],
+ "D3": [
+  {
+   "file": "RELAZIONE_PER_CLAUDE.md",
+   "tipo": "relazione",
+   "riga": 10446,
+   "come": "intestazione",
+   "testo": "## `D3` SI CHIUDE: **ABBANDONATO PER DECISIONE**, non per esito (2026-10-08)"
+  },
+  {
+   "file": "csv/_test_fork/_termo_h3.py",
+   "tipo": "attrezzo",
+   "riga": 88,
+   "come": "intestazione",
+   "testo": "# ### ⭐ **`D3`: i bracci che spengono i forzanti e la sincronizzazione**, cosi' le tre"
+  },
+  {
+   "file": "csv/_test_fork/_termo_h3.py",
+   "tipo": "attrezzo",
+   "riga": 105,
+   "come": "intestazione",
+   "testo": "# ### ⭐ **`D3`: LA FORMA `U(2)` DELLA COPPIA** *(direzione candidata di Luca)*"
+  },
+  {
+   "file": "csv/_test_fork/_termo_h3.py",
+   "tipo": "attrezzo",
+   "riga": 1455,
+   "come": "intestazione",
+   "testo": "# ### ⭐ **`D3`: IL COLLAUDO DELLA FORMA `U(2)`, SULLA SCENA VERA**"
+  },
+  {
+   "file": "doc/CENSIMENTO_intenzioni.md",
+   "tipo": "documento",
+   "riga": 313,
+   "come": "riga di tabella",
+   "testo": "| **`D3`** | `:1427-1430` e `:4009` (`CAMPO_SPINORIALE`) | **2026-09-09** (`954549f`) | *\"calcolato **IN PARALLELO** ... **non ancora agganciato** a g"
+  },
+  {
+   "file": "doc/MAPPA_accoppiamenti_spin.md",
+   "tipo": "documento",
+   "riga": 68,
+   "come": "riga di tabella",
+   "testo": "| **D3** | Bloch del **campo emesso** | `omega_s` | **1962** | `correzione += cross(_nb_grav(), nb)` |"
+  },
+  {
+   "file": "doc/RISCRITTURA_PRIMO_ORDINE.md",
+   "tipo": "documento",
+   "riga": 108,
+   "come": "riga di tabella",
+   "testo": "| `D3` | ### ⛔ **e la fase dello spinore NON è `φ/2`** | `rms(wrap(α − φ/2))` = ### **`1.9716`** radianti |"
+  },
+  {
+   "file": "doc/TASK_HISTORY/2026-10-08_d3-forma-u2-della-coppia.md",
+   "tipo": "task-history",
+   "riga": 1,
+   "come": "intestazione",
+   "testo": "# `D3`: LA FORMA `U(2)` DELLA COPPIA, NELLO STRUMENTO — LA DERIVAZIONE E IL BRACCIO"
+  }
+ ],
+ "D4": [
+  {
+   "file": "doc/CENSIMENTO_intenzioni.md",
+   "tipo": "documento",
+   "riga": 314,
+   "come": "riga di tabella",
+   "testo": "| **`D4`** | `:1037-1044` | **2026-09-03** (`2a97cad`) | *\"l'EVOLUZIONE SU(2) **E' CONGELATA** ... e non e' mai stata reinnestata nel percorso vivo\"* "
+  },
+  {
+   "file": "doc/MAPPA_accoppiamenti_spin.md",
+   "tipo": "documento",
+   "riga": 69,
+   "come": "riga di tabella",
+   "testo": "| **D4** | **rumore del vuoto** | `_nb` | **1908** | `_nb += N(0,1) * amp`, `amp = sqrt(Lam)/(1+I2/Lam)` |"
+  }
+ ],
+ "DE-ACCOPPIABILITA": [
+  {
+   "file": "doc/INDAGINE_scuotimento.md",
+   "tipo": "documento",
+   "riga": 156,
+   "come": "intestazione",
+   "testo": "## 4. DE-ACCOPPIABILITA' — analisi, non piano"
+  }
+ ],
+ "F4": [
+  {
+   "file": "doc/relazioni/2026-09-21.md",
+   "tipo": "relazione",
+   "riga": 3572,
+   "come": "riga di tabella",
+   "testo": "| **`F4`** | scritture di stato **senza traccia** | `D04` — **già fatto per `d0`: si RIUSA il criterio**, rami esclusivi compresi |"
+  }
+ ],
+ "F5": [
+  {
+   "file": "doc/relazioni/2026-09-21.md",
+   "tipo": "relazione",
+   "riga": 3573,
+   "come": "riga di tabella",
+   "testo": "| **`F5`** | fasi col **periodo sbagliato** | `D34`, dal censimento in corso |"
+  }
+ ],
+ "GLOBALE-DIS": [
+  {
+   "file": "doc/relazioni/2026-09-26.md",
+   "tipo": "relazione",
+   "riga": 1068,
+   "come": "intestazione",
+   "testo": "## ① **`GLOBALE-DIS` NON ESISTE: L'HO INVENTATO IO TRONCANDO**"
+  }
+ ],
+ "H1": [
+  {
+   "file": "RELAZIONE_PER_CLAUDE.md",
+   "tipo": "relazione",
+   "riga": 9430,
+   "come": "intestazione",
+   "testo": "### **`H1` aiuta, in modo piccolo e sistematico.** ### ⛔ **Ma `0.5536` sta sotto `0.60`, e il"
+  },
+  {
+   "file": "doc/TASK_HISTORY/2026-09-27_scioglimento.md",
+   "tipo": "task-history",
+   "riga": 14,
+   "come": "intestazione",
+   "testo": "### 1.1 `H1` **CONFERMATA (struttura)** — la scena NON tocca `phivel`"
+  },
+  {
+   "file": "doc/TASK_HISTORY/2026-10-07_as1-test-h1-scioglimento.md",
+   "tipo": "task-history",
+   "riga": 55,
+   "come": "intestazione",
+   "testo": "### `H1`, VERIFICATA DI NUOVO SUL SORGENTE DI `b8c21049` *(non ripresa dalla voce)*"
+  },
+  {
+   "file": "doc/relazioni/2026-09-27.md",
+   "tipo": "relazione",
+   "riga": 1297,
+   "come": "intestazione",
+   "testo": "## ✅ `H1` — **la scena NON tocca `phivel`**"
+  }
+ ],
+ "H2": [
+  {
+   "file": "csv/_seal_fork/_sigillo_twist_nodo.py",
+   "tipo": "sigillo",
+   "riga": 63,
+   "come": "intestazione",
+   "testo": "# ---------------------------------------------------------------- H2 e H3: forma algebrica pura"
+  },
+  {
+   "file": "doc/TASK_HISTORY/2026-09-27_scioglimento.md",
+   "tipo": "task-history",
+   "riga": 28,
+   "come": "intestazione",
+   "testo": "### 1.2 `H2` **CONFERMATA (struttura)** — la coppia non legge la fase corrente"
+  },
+  {
+   "file": "doc/relazioni/2026-09-27.md",
+   "tipo": "relazione",
+   "riga": 1306,
+   "come": "intestazione",
+   "testo": "## ❗ `H2` — **confermata PER STRUTTURA, non come sospetto**"
+  }
+ ],
+ "H3": [
+  {
+   "file": "RELAZIONE_PER_CLAUDE.md",
+   "tipo": "relazione",
+   "riga": 9492,
+   "come": "intestazione",
+   "testo": "# ⛔ **`H3`: IL FATTO REGGE, LA CAUSA NO — E IL TERMOSTATO È IL FRENO, NON IL RISCALDATORE** *(2026-10-07 sera)*"
+  },
+  {
+   "file": "RELAZIONE_PER_CLAUDE.md",
+   "tipo": "relazione",
+   "riga": 9540,
+   "come": "intestazione",
+   "testo": "### ➜ **`H3` è SMENTITA come CAUSA**, e il criterio dice di tornare ad `A-S2` *(`H2`)*."
+  },
+  {
+   "file": "doc/REFERTO_h3_termostato_2026-10-07.md",
+   "tipo": "documento",
+   "riga": 1,
+   "come": "intestazione",
+   "testo": "# `H3` — **CHI SCALDA IL VUOTO: IL TERMOSTATO O LO SCUOTIMENTO?**"
+  },
+  {
+   "file": "doc/TASK_HISTORY/2026-10-07_h3-termostato-e-scuotimento.md",
+   "tipo": "task-history",
+   "riga": 1,
+   "come": "intestazione",
+   "testo": "# `H3` — **CHI SCALDA IL VUOTO: il termostato o lo scuotimento?** *(2026-10-07 sera, mandato di Luca + integrazione)*"
+  }
+ ],
+ "MASSE-COERENTI": [],
+ "S1": [
+  {
+   "file": "RELAZIONE_PER_CLAUDE.md",
+   "tipo": "relazione",
+   "riga": 9356,
+   "come": "intestazione",
+   "testo": "### ⚠ **`S1` non è refutata** *(la dispersione è dell'ordine di `_CALORE_INIT`, cioè NON è"
+  },
+  {
+   "file": "csv/_seal_fork/_sigillo_coorti.py",
+   "tipo": "sigillo",
+   "riga": 147,
+   "come": "intestazione",
+   "testo": "# ------------------------------------------------------------------ S1 [DECISIVO]"
+  },
+  {
+   "file": "csv/_seal_fork/_sigillo_mitosi_soglia_grad_via.py",
+   "tipo": "sigillo",
+   "riga": 11,
+   "come": "riga di tabella",
+   "testo": "| **`S1`** | ### ⛔ **IL CONTROLLO FORTE:** il blob nuovo riproduce **AL BIT** i conteggi per passo di `amp0.json` *(il braccio `_AMP = 0` di `6cfcc4e`"
+  },
+  {
+   "file": "csv/_seal_fork/_sigillo_pezzo1.py",
+   "tipo": "sigillo",
+   "riga": 56,
+   "come": "intestazione",
+   "testo": "# --- S1. RIDUZIONE AL LIMITE: allineati -> U = I esattamente, w = 0 ---------------------------"
+  },
+  {
+   "file": "csv/_seal_fork/_sigillo_tors_w8.py",
+   "tipo": "sigillo",
+   "riga": 10,
+   "come": "riga di tabella",
+   "testo": "| **`S1`** | controlli positivi **sintetici**: a un giro di fase l'incremento e' quello vero entro `1e-12`; con un cambio di dipolo e' `Δdipolo`; ### "
+  },
+  {
+   "file": "doc/COMPONENTI_PROMOSSE.md",
+   "tipo": "documento",
+   "riga": 86,
+   "come": "riga di tabella",
+   "testo": "| **`S1`** | **FAIL ATTESO** — vs blob `2277e9a0`, di **quattro cambiamenti fa** | nodi **3164 contro 2924**, 32 shape |"
+  },
+  {
+   "file": "doc/PREDIZIONE_step2.md",
+   "tipo": "documento",
+   "riga": 101,
+   "come": "riga di tabella",
+   "testo": "| **S1** | flag OFF byte-identico al codice pre-modifica | `max\\\\|A-B\\\\| = 0.000e+00` (con il conteggio nodi accanto: uno zero senza confronto non val"
+  },
+  {
+   "file": "doc/REFACTORING_SPINORIALE.md",
+   "tipo": "documento",
+   "riga": 199,
+   "come": "intestazione",
+   "testo": "### S1 — Causalità (ETC rigoroso, il loop emitter-campo è più stretto)"
+  },
+  {
+   "file": "doc/REFERTO_esperimento_tau_a.md",
+   "tipo": "documento",
+   "riga": 9,
+   "come": "intestazione",
+   "testo": "## 1. S1 — **STABILITÀ: 5/5 PASS. Non diverge.**"
+  },
+  {
+   "file": "doc/REFERTO_z43_tempo_proprio_2026-10-05.md",
+   "tipo": "documento",
+   "riga": 163,
+   "come": "riga di tabella",
+   "testo": "| `S1` | `1.068` | ### **`1.003`** |"
+  },
+  {
+   "file": "doc/REFERTO_z43_tempo_proprio_2026-10-05.md",
+   "tipo": "documento",
+   "riga": 316,
+   "come": "riga di tabella",
+   "testo": "| `S1` | `147` | `4.150e-01` | `9.636e-02` | `1.523e+00` | ### **`15.80`** |"
+  },
+  {
+   "file": "doc/REFERTO_z43_tempo_proprio_2026-10-05.md",
+   "tipo": "documento",
+   "riga": 357,
+   "come": "riga di tabella",
+   "testo": "| `S1` | `5.079e-01` | `4.104e-01` | `n/d` |"
+  },
+  {
+   "file": "doc/REGISTRO_FISICA.md",
+   "tipo": "documento",
+   "riga": 4164,
+   "come": "riga di tabella",
+   "testo": "| **`S1`** | **flag SPENTO = byte-identico**: **firma dei byte** su tutti i campi, **un processo per braccio** | par.2.1 · `STANDARD 1` · `STANDARD 2`"
+  },
+  {
+   "file": "doc/RISCRITTURA_PRIMO_ORDINE.md",
+   "tipo": "documento",
+   "riga": 125,
+   "come": "riga di tabella",
+   "testo": "| **`S1`** | ### **lo spazio e' un grafo DINAMICO:** nodi e archi ### **nascono** perche' la materia lo esige. La mitosi scatta ### **oltre una soglia"
+  },
+  {
+   "file": "doc/TASK_HISTORY/2026-09-27_scioglimento.md",
+   "tipo": "task-history",
+   "riga": 102,
+   "come": "riga di tabella",
+   "testo": "| **`S1`** | dispersione di `phivel` **dentro le masse al passo 0**, contro il suo **nullo** *(la dispersione nel VUOTO, non zero)* e contro `_CALORE_"
+  },
+  {
+   "file": "doc/TASK_HISTORY/2026-10-05_z43-definizione-tempo-proprio-misura.md",
+   "tipo": "task-history",
+   "riga": 296,
+   "come": "riga di tabella",
+   "testo": "| **`S1`** | `C1` / media di `C1` **dello stesso nodo** sui passi precedenti |"
+  },
+  {
+   "file": "doc/TASK_HISTORY/2026-10-06_tors-w8-cura.md",
+   "tipo": "task-history",
+   "riga": 217,
+   "come": "riga di tabella",
+   "testo": "| **`S1`** | controlli positivi **sintetici**: a un giro di fase l'incremento e' quello vero entro `1e-12`; con un cambio di dipolo l'incremento e' `Δ"
+  },
+  {
+   "file": "doc/TASK_HISTORY/2026-10-06_via-il-03-mitosi-soglia-grad.md",
+   "tipo": "task-history",
+   "riga": 117,
+   "come": "riga di tabella",
+   "testo": "| **`S1`** | il blob nuovo riproduce ### **AL BIT** i conteggi per passo di `amp0.json` *(il braccio `_AMP = 0` di `6cfcc4e`)* sui primi `150` passi |"
+  },
+  {
+   "file": "doc/TASK_HISTORY/2026-10-07_as1-test-h1-scioglimento.md",
+   "tipo": "task-history",
+   "riga": 21,
+   "come": "riga di tabella",
+   "testo": "| `S1` | dispersione di `phivel` dentro le masse al passo `0`, contro il suo **nullo** *(il VUOTO, non zero)* | ### ⛔ **mai fatta** |"
+  },
+  {
+   "file": "doc/TASK_HISTORY/2026-10-07_as1-test-h1-scioglimento.md",
+   "tipo": "task-history",
+   "riga": 273,
+   "come": "intestazione",
+   "testo": "### ⚠ **`S1` non è refutata** *(la dispersione è dell'ordine di `_CALORE_INIT`, cioè NON è"
+  },
+  {
+   "file": "doc/relazioni/2026-09-16.md",
+   "tipo": "relazione",
+   "riga": 2203,
+   "come": "intestazione",
+   "testo": "### S1 — non diverge: 5/5 PASS"
+  },
+  {
+   "file": "doc/relazioni/2026-09-21.md",
+   "tipo": "relazione",
+   "riga": 1550,
+   "come": "riga di tabella",
+   "testo": "| **S1** | flag spento **byte-identico** |"
+  }
+ ],
+ "S3": [
+  {
+   "file": "RELAZIONE_PER_CLAUDE.md",
+   "tipo": "relazione",
+   "riga": 6312,
+   "come": "intestazione",
+   "testo": "### ✔ **`S3`: `0` differenze non spiegate** *(erano `235322`)*, e il conto torna **esatto**"
+  },
+  {
+   "file": "csv/_seal_fase4/_sigillo_fase4.py",
+   "tipo": "attrezzo",
+   "riga": 22,
+   "come": "intestazione",
+   "testo": "# S3 e' una riduzione DETERMINISTICA: spengo il rumore del vuoto (SCUOTIMENTO), che altrimenti"
+  },
+  {
+   "file": "csv/_seal_fase5/_sigillo_fase5.py",
+   "tipo": "attrezzo",
+   "riga": 22,
+   "come": "intestazione",
+   "testo": "# S3 = riduzione DETERMINISTICA: spengo il rumore del vuoto (reagisce, come in Fase 4)."
+  },
+  {
+   "file": "csv/_seal_fork/_passo_zero_scena_ii.py",
+   "tipo": "sigillo",
+   "riga": 81,
+   "come": "intestazione",
+   "testo": "# ---- S3 : `d` sotto e A `LAM` --------------------------------------------------------------"
+  },
+  {
+   "file": "csv/_seal_fork/_passo_zero_scena_ii.py",
+   "tipo": "sigillo",
+   "riga": 325,
+   "come": "intestazione",
+   "testo": "# ---------------------------------------------------------------- S3"
+  },
+  {
+   "file": "csv/_seal_fork/_sigillo_coorti.py",
+   "tipo": "sigillo",
+   "riga": 181,
+   "come": "intestazione",
+   "testo": "# ------------------------------------------------------------------ S3"
+  },
+  {
+   "file": "csv/_seal_fork/_sigillo_pezzo1.py",
+   "tipo": "sigillo",
+   "riga": 74,
+   "come": "intestazione",
+   "testo": "# --- S3. det U = 1 -> e' SU(2), non solo U(2) (det=1 lascia la fase U(1)/EM separata) ---------"
+  },
+  {
+   "file": "csv/_seal_fork/_sigillo_step2.py",
+   "tipo": "sigillo",
+   "riga": 127,
+   "come": "intestazione",
+   "testo": "# ============================================================ S3/S2: in-process, PERCORSO REALE"
+  },
+  {
+   "file": "csv/_seal_fork/_sigillo_strato1.py",
+   "tipo": "sigillo",
+   "riga": 450,
+   "come": "intestazione",
+   "testo": "# S3 misura la forza su stati SINTETICI. Qui la stessa domanda viene posta alla DINAMICA REALE:"
+  },
+  {
+   "file": "csv/_seal_fork/_sigillo_tors_w8.py",
+   "tipo": "sigillo",
+   "riga": 12,
+   "come": "riga di tabella",
+   "testo": "| **`S3`** | nella corsa vera, un gancio di ### **SOLA LETTURA** calcola le **due** forme della spinta sullo **STESSO** stato: le differenze oltre `1e"
+  },
+  {
+   "file": "csv/_seal_fork/_sigillo_tors_w8.py",
+   "tipo": "sigillo",
+   "riga": 531,
+   "come": "intestazione",
+   "testo": "# =============================================================== S3"
+  },
+  {
+   "file": "doc/COMPONENTI_PROMOSSE.md",
+   "tipo": "documento",
+   "riga": 81,
+   "come": "riga di tabella",
+   "testo": "| `S3` | la legge è quella dichiarata | `max\\|mis − atteso\\| = 3.469e-18` |"
+  },
+  {
+   "file": "doc/PREDIZIONE_step2.md",
+   "tipo": "documento",
+   "riga": 103,
+   "come": "riga di tabella",
+   "testo": "| **S3** | **IL DECISIVO**: verso e scaling | `omega_eff/omega_base = (cs/CS_M)^2` a ~1e-15, su `cs/CS_M = 1.0, 0.5, 0.1`; e l'orologio **rallenta** d"
+  },
+  {
+   "file": "doc/REFACTORING_SPINORIALE.md",
+   "tipo": "documento",
+   "riga": 228,
+   "come": "intestazione",
+   "testo": "### S3 — Riduzione al limite (il nuovo → il vecchio quando gli spinori sono in fase)"
+  },
+  {
+   "file": "doc/REGISTRO_FISICA.md",
+   "tipo": "documento",
+   "riga": 4166,
+   "come": "riga di tabella",
+   "testo": "| **`S3`** | **passo ZERO: `sum(d < LAM) == 0` E `sum(d == LAM) == 0`** | **i due INSIEME**: il primo da solo lo darebbe anche `_nasce`. **Lo zero sul"
+  },
+  {
+   "file": "doc/RISCRITTURA_PRIMO_ORDINE.md",
+   "tipo": "documento",
+   "riga": 127,
+   "come": "riga di tabella",
+   "testo": "| **`S3`** | ### **le distanze NON sono primarie:** sono ### **relazioni e memorie** — `d0` insegue `d`, e il metro e' una cosa che il sistema ### **r"
+  },
+  {
+   "file": "doc/TASK_HISTORY/2026-09-27_scioglimento.md",
+   "tipo": "task-history",
+   "riga": 107,
+   "come": "riga di tabella",
+   "testo": "| **`S3`** | **`xi_termo` per passo**; **se `< 0` il termostato POMPA energia** | `xi_termo < 0` su una frazione non trascurabile | **il nullo:** `xi_"
+  },
+  {
+   "file": "doc/TASK_HISTORY/2026-10-06_tors-w8-cura.md",
+   "tipo": "task-history",
+   "riga": 219,
+   "come": "riga di tabella",
+   "testo": "| **`S3`** | nella **corsa vera**, un gancio di ### **SOLA LETTURA** calcola a ogni passo ### **le due forme della spinta sullo STESSO stato.** Le dif"
+  },
+  {
+   "file": "doc/TASK_HISTORY/2026-10-07_as1-test-h1-scioglimento.md",
+   "tipo": "task-history",
+   "riga": 26,
+   "come": "riga di tabella",
+   "testo": "| `S3` | `xi_termo` per passo, col **nullo** su un vuoto senza masse | ### ⛔ **mai fatta** |"
+  },
+  {
+   "file": "doc/relazioni/2026-09-21.md",
+   "tipo": "relazione",
+   "riga": 1552,
+   "come": "riga di tabella",
+   "testo": "| **S3** | fotografia usata **24 su 24**, zero fallback, **e lo scarto dal `d0` di prima vale `9.4653e-02`** |"
+  },
+  {
+   "file": "doc/relazioni/2026-09-25.md",
+   "tipo": "relazione",
+   "riga": 405,
+   "come": "riga di tabella",
+   "testo": "| **`S3`** | `sum(d < LAM) == 0` **E** `sum(d == LAM) == 0` | **PASS** — `0` e `0` |"
+  }
+ ],
+ "SIGILLO-CURA2": [
+  {
+   "file": "doc/STATO_RUN.md",
+   "tipo": "documento",
+   "riga": 1342,
+   "come": "intestazione",
+   "testo": "## APERTO SIGILLO-CURA2"
+  }
+ ],
+ "SIGILLO-CURA2-RIPARATO": [
+  {
+   "file": "doc/STATO_RUN.md",
+   "tipo": "documento",
+   "riga": 1365,
+   "come": "intestazione",
+   "testo": "## APERTO SIGILLO-CURA2-RIPARATO"
+  }
+ ],
+ "T1": [
+  {
+   "file": "RELAZIONE_PER_CLAUDE.md",
+   "tipo": "relazione",
+   "riga": 10431,
+   "come": "intestazione",
+   "testo": "### **`T1`** *«la nascita conserva»* ### **RESTRINGE `A14.2`**, non la conferma — col margine"
+  },
+  {
+   "file": "csv/_seal_fork/_guasto_ripieghi/_sim_precura.py",
+   "tipo": "sigillo",
+   "riga": 842,
+   "come": "intestazione",
+   "testo": "# [T1, 2026-09-28] LO SCHEDULATORE DEL PASSO: la COMPOSIZIONE e' una LISTA ESPLICITA,"
+  },
+  {
+   "file": "csv/_seal_fork/_guasto_ripieghi/_sim_precura.py",
+   "tipo": "sigillo",
+   "riga": 851,
+   "come": "intestazione",
+   "testo": "# T1 e' BYTE-IDENTICO. Fotografia, variazioni e vincoli-una-volta sono T3."
+  },
+  {
+   "file": "csv/_seal_fork/_sig_controllo_unico/_sim_prima_5750.py",
+   "tipo": "sigillo",
+   "riga": 842,
+   "come": "intestazione",
+   "testo": "# [T1, 2026-09-28] LO SCHEDULATORE DEL PASSO: la COMPOSIZIONE e' una LISTA ESPLICITA,"
+  },
+  {
+   "file": "csv/_seal_fork/_sig_controllo_unico/_sim_prima_5750.py",
+   "tipo": "sigillo",
+   "riga": 851,
+   "come": "intestazione",
+   "testo": "# T1 e' BYTE-IDENTICO. Fotografia, variazioni e vincoli-una-volta sono T3."
+  },
+  {
+   "file": "csv/_seal_fork/_sig_controllo_unico/_sim_prima_controllo.py",
+   "tipo": "sigillo",
+   "riga": 842,
+   "come": "intestazione",
+   "testo": "# [T1, 2026-09-28] LO SCHEDULATORE DEL PASSO: la COMPOSIZIONE e' una LISTA ESPLICITA,"
+  },
+  {
+   "file": "csv/_seal_fork/_sig_controllo_unico/_sim_prima_controllo.py",
+   "tipo": "sigillo",
+   "riga": 851,
+   "come": "intestazione",
+   "testo": "# T1 e' BYTE-IDENTICO. Fotografia, variazioni e vincoli-una-volta sono T3."
+  },
+  {
+   "file": "csv/_seal_fork/_sig_guardie/_sim_prima_guardie.py",
+   "tipo": "sigillo",
+   "riga": 842,
+   "come": "intestazione",
+   "testo": "# [T1, 2026-09-28] LO SCHEDULATORE DEL PASSO: la COMPOSIZIONE e' una LISTA ESPLICITA,"
+  },
+  {
+   "file": "csv/_seal_fork/_sig_guardie/_sim_prima_guardie.py",
+   "tipo": "sigillo",
+   "riga": 851,
+   "come": "intestazione",
+   "testo": "# T1 e' BYTE-IDENTICO. Fotografia, variazioni e vincoli-una-volta sono T3."
+  },
+  {
+   "file": "csv/_seal_fork/_sigillo_scena_ii.py",
+   "tipo": "sigillo",
+   "riga": 7,
+   "come": "riga di tabella",
+   "testo": "| **T1** | il driver lancia la scena `(ii)` con `--scena`, **default invariato** | l'**argv** che il driver costruisce **senza** `--scena` e' **identi"
+  },
+  {
+   "file": "csv/_test_fork/_z124_registra.py",
+   "tipo": "attrezzo",
+   "riga": 98,
+   "come": "riga di tabella",
+   "testo": "| `T1` | il default è spento, letto dal sorgente | **PASS** `FASE_2PI = False` |"
+  },
+  {
+   "file": "csv/_test_fork/_z134_registra.py",
+   "tipo": "attrezzo",
+   "riga": 112,
+   "come": "riga di tabella",
+   "testo": "| `T1` | l'opzione esiste **nel simulatore** *e* il **driver** la passa | **PASS** |"
+  },
+  {
+   "file": "csv/_test_fork/_z144_registra.py",
+   "tipo": "attrezzo",
+   "riga": 65,
+   "come": "riga di tabella",
+   "testo": "| `T1` | `_lam_attivo` non ha più riferimenti di **codice** — **dall'AST: `[]`** | **PASS** |"
+  },
+  {
+   "file": "doc/INVENTARIO_strumenti.md",
+   "tipo": "documento",
+   "riga": 1225,
+   "come": "intestazione",
+   "testo": "## `T1` dello schedulatore, e il suo sigillo *(2026-09-28)*"
+  },
+  {
+   "file": "doc/PIANO_schedulatore_passo.md",
+   "tipo": "documento",
+   "riga": 180,
+   "come": "riga di tabella",
+   "testo": "| **`T1`** | **4** | ① l'esecutore + i 6 chiamanti · ② il sigillo byte-identico · ③ `csv/_passo.py` al nuovo contratto · ④ `H-P9` riscritto |"
+  },
+  {
+   "file": "doc/REFERTO_rigiro_tau_luce.md",
+   "tipo": "documento",
+   "riga": 23,
+   "come": "intestazione",
+   "testo": "## 2. T1 — **il criterio è SCADUTO, e non è una regressione**"
+  },
+  {
+   "file": "doc/SIGILLO_tau_luce_FALLITO.md",
+   "tipo": "documento",
+   "riga": 56,
+   "come": "intestazione",
+   "testo": "## T1 — **PASS**, ed è il sigillo che copre di più"
+  },
+  {
+   "file": "doc/TASK_HISTORY/2026-09-18_sigillo-tau-luce.md",
+   "tipo": "task-history",
+   "riga": 25,
+   "come": "intestazione",
+   "testo": "### 1.2 **T1 — il criterio è SCADUTO: confronta DUE FISICHE DIVERSE**"
+  },
+  {
+   "file": "doc/TASK_HISTORY/2026-09-18_sigillo-tau-luce.md",
+   "tipo": "task-history",
+   "riga": 183,
+   "come": "intestazione",
+   "testo": "### 2.1 `T1` — **si ancora alla COPPIA DI BLOB che racchiude il cambiamento**"
+  },
+  {
+   "file": "doc/TASK_HISTORY/2026-09-26_potenze1-scomposizione-figli.md",
+   "tipo": "task-history",
+   "riga": 21,
+   "come": "riga di tabella",
+   "testo": "| **`T1`** | ciò che resta in `rho/W²` **a parità di peso** | **nessuna delle due**: è la differenza *intrinseca* |"
+  },
+  {
+   "file": "doc/TASK_HISTORY/2026-09-27_tratti.md",
+   "tipo": "task-history",
+   "riga": 102,
+   "come": "riga di tabella",
+   "testo": "| **`T1`** | **la scomposizione CHIUDE**: `\\|L_intA + L_varco + L_intB - L_tot\\| < 1e-9` | l'aritmetica e' giusta | qualunque scarto: non si misura ni"
+  },
+  {
+   "file": "doc/TRADUZIONE_IN_H.md",
+   "tipo": "documento",
+   "riga": 621,
+   "come": "intestazione",
+   "testo": "### ⛔ **`T1` — «LA NASCITA CONSERVA L'ENERGIA» RESTRINGE `A14.2`, non la conferma.**"
+  },
+  {
+   "file": "doc/relazioni/2026-09-16.md",
+   "tipo": "relazione",
+   "riga": 1669,
+   "come": "intestazione",
+   "testo": "### T1 — scaduto, **e non è una regressione**"
+  },
+  {
+   "file": "doc/relazioni/2026-09-21.md",
+   "tipo": "relazione",
+   "riga": 1351,
+   "come": "riga di tabella",
+   "testo": "| **T1** | PASS | diagnostici SPENTI = simulatore di PRIMA della patch: **12 campi byte-identici** |"
+  },
+  {
+   "file": "doc/relazioni/2026-09-21.md",
+   "tipo": "relazione",
+   "riga": 3023,
+   "come": "riga di tabella",
+   "testo": "| `T1` | **punto (3)** `S08_proj` | `3 → 0` |"
+  },
+  {
+   "file": "doc/relazioni/2026-09-21.md",
+   "tipo": "relazione",
+   "riga": 3676,
+   "come": "riga di tabella",
+   "testo": "| `T1` | **il default è SPENTO**, letto dal sorgente | `False` |"
+  },
+  {
+   "file": "doc/relazioni/2026-09-21.md",
+   "tipo": "relazione",
+   "riga": 3961,
+   "come": "riga di tabella",
+   "testo": "| `T1` | il default è spento, letto dal sorgente | **PASS** `FASE_2PI = False` |"
+  },
+  {
+   "file": "doc/relazioni/2026-09-21.md",
+   "tipo": "relazione",
+   "riga": 4607,
+   "come": "riga di tabella",
+   "testo": "| `T1` | l'opzione esiste **nel simulatore** *e* il **driver** la passa | **PASS** |"
+  },
+  {
+   "file": "doc/relazioni/2026-09-21.md",
+   "tipo": "relazione",
+   "riga": 5148,
+   "come": "riga di tabella",
+   "testo": "| `T1` | `_lam_attivo` non ha più riferimenti di **codice** — **dall'AST: `[]`** | **PASS** |"
+  },
+  {
+   "file": "doc/relazioni/2026-09-24.md",
+   "tipo": "relazione",
+   "riga": 29,
+   "come": "riga di tabella",
+   "testo": "| `T1` | `TEMPO_UNICO_MITOSI = False` di default |"
+  },
+  {
+   "file": "doc/relazioni/2026-09-26.md",
+   "tipo": "relazione",
+   "riga": 2065,
+   "come": "intestazione",
+   "testo": "## `T1` non puo' piu' dire «identiche»: ora dice «**la differenza e' ESATTAMENTE quella dichiarata**»"
+  },
+  {
+   "file": "doc/relazioni/2026-09-28.md",
+   "tipo": "relazione",
+   "riga": 5,
+   "come": "intestazione",
+   "testo": "# 🏗 **T1 — LO SCHELETRO DELLO SCHEDULATORE. Sigillo: tre criteri su tre** *(2026-09-28)*"
+  },
+  {
+   "file": "soliton_simulator.py",
+   "tipo": "altro",
+   "riga": 941,
+   "come": "intestazione",
+   "testo": "# [T1, 2026-09-28] LO SCHEDULATORE DEL PASSO: la COMPOSIZIONE e' una LISTA ESPLICITA,"
+  },
+  {
+   "file": "soliton_simulator.py",
+   "tipo": "altro",
+   "riga": 950,
+   "come": "intestazione",
+   "testo": "# T1 e' BYTE-IDENTICO. Fotografia, variazioni e vincoli-una-volta sono T3."
+  }
+ ],
+ "TEMPO-LUCE": []
+}

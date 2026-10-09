@@ -162,6 +162,8 @@
    "CS-LAMBDA-GLOBALE",
    "CTRL-RISCELTA",
    "CURA-3",
+   "CURA1-CORTO",
+   "CURA2-CORTO",
    "CURA2-STRUTTURALE",
    "D0",
    "D01",
@@ -192,6 +194,7 @@
    "D27",
    "D28",
    "D29",
+   "D3",
    "D30",
    "D32",
    "D32-CONTATORE",
@@ -201,8 +204,10 @@
    "D36",
    "D37",
    "D38",
+   "D4",
    "D5",
    "D6",
+   "DE-ACCOPPIABILITA",
    "DIVISIONE-AUTOCONSISTENTE",
    "DOPPIA-COP",
    "DRIVER-SCENA-II",
@@ -268,6 +273,9 @@
    "H-RIGHE",
    "H-STASH",
    "H-VALIDATORE",
+   "H1",
+   "H2",
+   "H3",
    "H3b",
    "H4",
    "H5",
@@ -548,6 +556,7 @@
    "S08",
    "S09",
    "S09-MEDIANA",
+   "S1",
    "S10",
    "S11",
    "S12",
@@ -559,6 +568,7 @@
    "S1e",
    "S2",
    "S2b",
+   "S3",
    "S3a",
    "S4a",
    "S6b",
@@ -583,6 +593,8 @@
    "SCUOT-INNESCO",
    "SHAKE-THEN-FREEZE",
    "SIGILLO-COMPARATORE-DUPLICATO",
+   "SIGILLO-CURA2",
+   "SIGILLO-CURA2-RIPARATO",
    "SIGILLO-REGISTRO-NON-CONFRONTABILE",
    "SIGILLO-SENZA-CONFIGURAZIONE",
    "SIM-PRIMA-STANTIO",
@@ -604,6 +616,7 @@
    "STATI-LOCALI",
    "SYNCDB-HEADLESS",
    "T0",
+   "T1",
    "T1a",
    "T1b",
    "T3a",
@@ -1407,8 +1420,13 @@
    "COMPONENTI:S3c",
    "COPPIA-RAMP",
    "CRESCITA-DOPO-Z43",
+   "CURA1-CORTO",
+   "CURA2-CORTO",
+   "DE-ACCOPPIABILITA",
    "EM-CURVATURA-BIDIREZIONALE",
    "GUSCIO-ANTIFASE-EMERGENTE",
+   "H1",
+   "H3",
    "LORENTZ-MATERIA-INTERFERENZA",
    "LOSCHMIDT-ECO",
    "MASSA-ID-FISSO",
@@ -1429,6 +1447,8 @@
    "SCHW-CORTI",
    "SCUOT-INNESCO",
    "SHAKE-THEN-FREEZE",
+   "SIGILLO-CURA2",
+   "SIGILLO-CURA2-RIPARATO",
    "SOGLIA-NON-MODULATA",
    "TERMOSTATO-E-FRENO",
    "TRATTI-INTERNI"
@@ -1437,6 +1457,8 @@
    "A2b",
    "COSA-RICONTROLLARE",
    "CROSS-PASSO",
+   "D3",
+   "D4",
    "D5",
    "D6",
    "E1",
@@ -1454,6 +1476,7 @@
    "G7",
    "G8",
    "G9",
+   "H2",
    "H3b",
    "H4",
    "H5",
@@ -1546,12 +1569,14 @@
    "RI-MISURA",
    "RIDUZIONE-AL-LIMITE",
    "S0",
+   "S1",
    "S1a",
    "S1b",
    "S1c",
    "S1d",
    "S1e",
    "S2b",
+   "S3",
    "S3a",
    "S4a",
    "S6b",
@@ -1571,6 +1596,7 @@
    "STANDARD-7",
    "STANDARD-9",
    "T0",
+   "T1",
    "T1a",
    "T1b",
    "T6",
@@ -1688,6 +1714,8 @@
    "A2b",
    "COSA-RICONTROLLARE",
    "CROSS-PASSO",
+   "D3",
+   "D4",
    "D5",
    "D6",
    "E1",
@@ -1705,6 +1733,7 @@
    "G7",
    "G8",
    "G9",
+   "H2",
    "H3b",
    "H4",
    "H5",
@@ -1797,12 +1826,14 @@
    "RI-MISURA",
    "RIDUZIONE-AL-LIMITE",
    "S0",
+   "S1",
    "S1a",
    "S1b",
    "S1c",
    "S1d",
    "S1e",
    "S2b",
+   "S3",
    "S3a",
    "S4a",
    "S6b",
@@ -1822,6 +1853,7 @@
    "STANDARD-7",
    "STANDARD-9",
    "T0",
+   "T1",
    "T1a",
    "T1b",
    "T6",
@@ -1989,6 +2021,8 @@
    "CRESCITA-DOPO-Z43",
    "CS-LAMBDA-GLOBALE",
    "CURA-3",
+   "CURA1-CORTO",
+   "CURA2-CORTO",
    "D0",
    "D01",
    "D02",
@@ -2025,6 +2059,7 @@
    "D36",
    "D37",
    "D38",
+   "DE-ACCOPPIABILITA",
    "DIVISIONE-AUTOCONSISTENTE",
    "DOPPIA-COP",
    "E3",
@@ -2045,6 +2080,8 @@
    "GEOMETRIA-DELLA-CRESCITA",
    "GRAVITA-POTENZIALE",
    "GUSCIO-ANTIFASE-EMERGENTE",
+   "H1",
+   "H3",
    "I1",
    "INERZIA-1",
    "INERZIA-1(C)",
@@ -2135,6 +2172,8 @@
    "SCIOGLIMENTO-FASE",
    "SCUOT-INNESCO",
    "SHAKE-THEN-FREEZE",
+   "SIGILLO-CURA2",
+   "SIGILLO-CURA2-RIPARATO",
    "SOGLIA-MITOSI-3PI",
    "SOGLIA-NON-MODULATA",
    "SPINORE-SENZA-FASE",
@@ -2651,6 +2690,8 @@
    "CRESCITA-DOPO-Z43",
    "CS-LAMBDA-GLOBALE",
    "CURA-3",
+   "CURA1-CORTO",
+   "CURA2-CORTO",
    "CURA2-STRUTTURALE",
    "D0",
    "D01",
@@ -2689,6 +2730,7 @@
    "D36",
    "D37",
    "D38",
+   "DE-ACCOPPIABILITA",
    "DOPPIA-COP",
    "DRIVER-SCENA-II",
    "E3",
@@ -2704,6 +2746,8 @@
    "GEOM-SENZA-VERSO",
    "GUSCIO-ANTIFASE-EMERGENTE",
    "H-ETC-1",
+   "H1",
+   "H3",
    "INERZIA-1",
    "INERZIA-1(C)",
    "KAPPA-TW-COMMENTO",
@@ -2824,6 +2868,8 @@
    "SCIOGLIMENTO-FASE",
    "SCUOT-INNESCO",
    "SHAKE-THEN-FREEZE",
+   "SIGILLO-CURA2",
+   "SIGILLO-CURA2-RIPARATO",
    "SMP-APRI-COMMENTO",
    "SOGLIA-MITOSI-3PI",
    "SOGLIA-NON-MODULATA",
@@ -3010,6 +3056,8 @@
    "A2b",
    "COSA-RICONTROLLARE",
    "CROSS-PASSO",
+   "D3",
+   "D4",
    "D5",
    "D6",
    "E1",
@@ -3027,6 +3075,7 @@
    "G7",
    "G8",
    "G9",
+   "H2",
    "H3b",
    "H4",
    "H5",
@@ -3120,12 +3169,14 @@
    "RI-MISURA",
    "RIDUZIONE-AL-LIMITE",
    "S0",
+   "S1",
    "S1a",
    "S1b",
    "S1c",
    "S1d",
    "S1e",
    "S2b",
+   "S3",
    "S3a",
    "S4a",
    "S6b",
@@ -3145,6 +3196,7 @@
    "STANDARD-7",
    "STANDARD-9",
    "T0",
+   "T1",
    "T1a",
    "T1b",
    "T6",
@@ -4335,6 +4387,12 @@
   "F2: la voce e- di PROGRAMMA e nomina l-era 1 perche- dice CHE COSA SOSTITUISCE o PRESCRIVE: <<un isteresi sui flip di perc_geom e perc_chi: COMPLEMENTO di MEM-VERSO, non alternativa CANDIDATA REGISTRATA il 2026>>": [
    "M-ISTERESI"
   ],
+  "F3: il titolo e- <<APERTO SIGILLO-CURA2-RIPARATO>>, e la parola `sigillo` ci sta perche- E- IL NOME STESSO DELLA VOCE. Il segnale scatta sull-ID, non su cio- di cui la voce parla": [
+   "SIGILLO-CURA2-RIPARATO"
+  ],
+  "F3: il titolo e- <<APERTO SIGILLO-CURA2>>, e la parola `sigillo` ci sta perche- E- IL NOME STESSO DELLA VOCE. Il segnale scatta sull-ID, non su cio- di cui la voce parla": [
+   "SIGILLO-CURA2"
+  ],
   "F3: resta `FISICA` -- e- una CURA CHIUSA COL SIGILLO: il titolo nomina il sigillo  perche- il sigillo e- cio- che l-ha chiusa. Il testo dice <<CHIUSA il 2026-09-26 con la CURA A (rhos/W^2), sigillo 6>>": [
    "POTENZE-1"
   ],
@@ -5023,11 +5081,104 @@
   ]
  },
  "meta:omonimo": {
+  "... e altre 15 definizioni: la lista INTERA sta in doc/indice/_definizioni.json": [
+   "S3"
+  ],
+  "... e altre 16 definizioni: la lista INTERA sta in doc/indice/_definizioni.json": [
+   "S1"
+  ],
+  "... e altre 2 definizioni: la lista INTERA sta in doc/indice/_definizioni.json": [
+   "D3"
+  ],
+  "... e altre 28 definizioni: la lista INTERA sta in doc/indice/_definizioni.json": [
+   "T1"
+  ],
+  "RELAZIONE_PER_CLAUDE.md:10431 -- ### **`T1`** *«la nascita conserva»* ### **RESTRINGE `A14.2`**, non la conferma — col margine": [
+   "T1"
+  ],
+  "RELAZIONE_PER_CLAUDE.md:10446 -- ## `D3` SI CHIUDE: **ABBANDONATO PER DECISIONE**, non per esito (2026-10-08)": [
+   "D3"
+  ],
+  "RELAZIONE_PER_CLAUDE.md:6312 -- ### ✔ **`S3`: `0` differenze non spiegate** *(erano `235322`)*, e il conto torna **esatto**": [
+   "S3"
+  ],
+  "RELAZIONE_PER_CLAUDE.md:9356 -- ### ⚠ **`S1` non è refutata** *(la dispersione è dell'ordine di `_CALORE_INIT`, cioè NON è": [
+   "S1"
+  ],
+  "csv/_seal_fase4/_sigillo_fase4.py:22 -- # S3 e' una riduzione DETERMINISTICA: spengo il rumore del vuoto (SCUOTIMENTO), che altrimenti": [
+   "S3"
+  ],
+  "csv/_seal_fase5/_sigillo_fase5.py:22 -- # S3 = riduzione DETERMINISTICA: spengo il rumore del vuoto (reagisce, come in Fase 4).": [
+   "S3"
+  ],
+  "csv/_seal_fork/_guasto_ripieghi/_sim_precura.py:842 -- # [T1, 2026-09-28] LO SCHEDULATORE DEL PASSO: la COMPOSIZIONE e' una LISTA ESPLICITA,": [
+   "T1"
+  ],
+  "csv/_seal_fork/_guasto_ripieghi/_sim_precura.py:851 -- # T1 e' BYTE-IDENTICO. Fotografia, variazioni e vincoli-una-volta sono T3.": [
+   "T1"
+  ],
+  "csv/_seal_fork/_passo_zero_scena_ii.py:325 -- # ---------------------------------------------------------------- S3": [
+   "S3"
+  ],
+  "csv/_seal_fork/_passo_zero_scena_ii.py:81 -- # ---- S3 : `d` sotto e A `LAM` --------------------------------------------------------------": [
+   "S3"
+  ],
+  "csv/_seal_fork/_sig_controllo_unico/_sim_prima_5750.py:842 -- # [T1, 2026-09-28] LO SCHEDULATORE DEL PASSO: la COMPOSIZIONE e' una LISTA ESPLICITA,": [
+   "T1"
+  ],
+  "csv/_seal_fork/_sig_controllo_unico/_sim_prima_5750.py:851 -- # T1 e' BYTE-IDENTICO. Fotografia, variazioni e vincoli-una-volta sono T3.": [
+   "T1"
+  ],
+  "csv/_seal_fork/_sig_controllo_unico/_sim_prima_controllo.py:842 -- # [T1, 2026-09-28] LO SCHEDULATORE DEL PASSO: la COMPOSIZIONE e' una LISTA ESPLICITA,": [
+   "T1"
+  ],
+  "csv/_seal_fork/_sigillo_coorti.py:147 -- # ------------------------------------------------------------------ S1 [DECISIVO]": [
+   "S1"
+  ],
+  "csv/_seal_fork/_sigillo_coorti.py:181 -- # ------------------------------------------------------------------ S3": [
+   "S3"
+  ],
+  "csv/_seal_fork/_sigillo_mitosi_soglia_grad_via.py:11 -- | **`S1`** | ### ⛔ **IL CONTROLLO FORTE:** il blob nuovo riproduce **AL BIT** i conteggi per passo di `amp0.js": [
+   "S1"
+  ],
+  "csv/_seal_fork/_sigillo_pezzo1.py:56 -- # --- S1. RIDUZIONE AL LIMITE: allineati -> U = I esattamente, w = 0 ---------------------------": [
+   "S1"
+  ],
+  "csv/_seal_fork/_sigillo_tors_w8.py:10 -- | **`S1`** | controlli positivi **sintetici**: a un giro di fase l'incremento e' quello vero entro `1e-12`; co": [
+   "S1"
+  ],
+  "csv/_seal_fork/_sigillo_twist_nodo.py:63 -- # ---------------------------------------------------------------- H2 e H3: forma algebrica pura": [
+   "H2"
+  ],
+  "csv/_test_fork/_termo_h3.py:105 -- # ### ⭐ **`D3`: LA FORMA `U(2)` DELLA COPPIA** *(direzione candidata di Luca)*": [
+   "D3"
+  ],
+  "csv/_test_fork/_termo_h3.py:1455 -- # ### ⭐ **`D3`: IL COLLAUDO DELLA FORMA `U(2)`, SULLA SCENA VERA**": [
+   "D3"
+  ],
+  "csv/_test_fork/_termo_h3.py:88 -- # ### ⭐ **`D3`: i bracci che spengono i forzanti e la sincronizzazione**, cosi' le tre": [
+   "D3"
+  ],
+  "doc/CENSIMENTO_intenzioni.md:313 -- | **`D3`** | `:1427-1430` e `:4009` (`CAMPO_SPINORIALE`) | **2026-09-09** (`954549f`) | *\"calcolato **IN PARAL": [
+   "D3"
+  ],
+  "doc/CENSIMENTO_intenzioni.md:314 -- | **`D4`** | `:1037-1044` | **2026-09-03** (`2a97cad`) | *\"l'EVOLUZIONE SU(2) **E' CONGELATA** ... e non e' ma": [
+   "D4"
+  ],
   "doc/CENSIMENTO_intenzioni.md:315 -- `:936` (`SYNC_UPDATE`) e le sue motivazioni sparse nei documenti": [
    "D5"
   ],
   "doc/CENSIMENTO_intenzioni.md:316 -- `Checkpoint.md` nel suo insieme (~640 righe), ~40 voci [TODO]/[IN VERIFICA]": [
    "D6"
+  ],
+  "doc/COMPONENTI_PROMOSSE.md:86 -- | **`S1`** | **FAIL ATTESO** — vs blob `2277e9a0`, di **quattro cambiamenti fa** | nodi **3164 contro 2924**, ": [
+   "S1"
+  ],
+  "doc/MAPPA_accoppiamenti_spin.md:68 -- | **D3** | Bloch del **campo emesso** | `omega_s` | **1962** | `correzione += cross(_nb_grav(), nb)` |": [
+   "D3"
+  ],
+  "doc/MAPPA_accoppiamenti_spin.md:69 -- | **D4** | **rumore del vuoto** | `_nb` | **1908** | `_nb += N(0,1) * amp`, `amp = sqrt(Lam)/(1+I2/Lam)` |": [
+   "D4"
   ],
   "doc/MAPPA_accoppiamenti_spin.md:70 -- `omega_s`, `- omega_src/_tau`: IL POZZO": [
    "D5"
@@ -5040,6 +5191,12 @@
   ],
   "doc/STATO_RUN.md e doc/RAMIFICAZIONI.md -- il <<mandato C5>>, cioe' GLI INVARIANTI: <<INVARIANTI (C5): il programma si ferma quando una grandezza esce...>>": [
    "C5"
+  ],
+  "doc/TASK_HISTORY/2026-09-27_scioglimento.md:28 -- ### 1.2 `H2` **CONFERMATA (struttura)** — la coppia non legge la fase corrente": [
+   "H2"
+  ],
+  "doc/relazioni/2026-09-27.md:1306 -- ## ❗ `H2` — **confermata PER STRUTTURA, non come sospetto**": [
+   "H2"
   ]
  },
  "meta:tipo_era1": {
@@ -5068,7 +5225,10 @@
    "CLIP-INVENTARIO",
    "COLLAUDO-NON-ESEGUITO",
    "CONFIG-1",
+   "CURA1-CORTO",
+   "CURA2-CORTO",
    "CURA2-STRUTTURALE",
+   "D3",
    "D32-CONTATORE",
    "E4-LAM",
    "ETICHETTA-A13",
@@ -5077,6 +5237,9 @@
    "FRECCE-IMPOSTE",
    "FUGA-MULTIRIGA",
    "H-REGR-LARGA",
+   "H1",
+   "H2",
+   "H3",
    "I1",
    "INERZIA-1",
    "INERZIA-1(C)",
@@ -5114,12 +5277,17 @@
    "S07",
    "S08",
    "S09",
+   "S1",
    "S10",
    "S11",
    "S12",
    "S13",
+   "S3",
    "SCENA-1",
+   "SIGILLO-CURA2",
+   "SIGILLO-CURA2-RIPARATO",
    "SOGLIA-MITOSI-3PI",
+   "T1",
    "U2",
    "VIDEO-SCENA",
    "W5"
@@ -5177,8 +5345,10 @@
    "COMPONENTI:S3c",
    "COMPONENTI:Y0-Y10",
    "COMPONENTI:Z30",
+   "D4",
    "D5",
    "D6",
+   "DE-ACCOPPIABILITA",
    "FINESTRA-DEL-PICCO",
    "K2a",
    "K2b",
@@ -5787,6 +5957,8 @@
    "COLLAUDO-NON-ESEGUITO",
    "CONFIG-1",
    "CONTA-RIGHE",
+   "CURA1-CORTO",
+   "CURA2-CORTO",
    "D12",
    "D13",
    "D26",
@@ -5878,6 +6050,8 @@
    "ROBUSTEZZA-FISICA",
    "SCHED-T3-REGOLE",
    "SIGILLO-COMPARATORE-DUPLICATO",
+   "SIGILLO-CURA2",
+   "SIGILLO-CURA2-RIPARATO",
    "SIGILLO-REGISTRO-NON-CONFRONTABILE",
    "SIGILLO-SENZA-CONFIGURAZIONE",
    "STANDARD-10",
@@ -6093,6 +6267,8 @@
    "A2b",
    "COSA-RICONTROLLARE",
    "CROSS-PASSO",
+   "D3",
+   "D4",
    "D5",
    "D6",
    "E1",
@@ -6110,6 +6286,7 @@
    "G7",
    "G8",
    "G9",
+   "H2",
    "H3b",
    "H4",
    "H5",
@@ -6203,12 +6380,14 @@
    "RI-MISURA",
    "RIDUZIONE-AL-LIMITE",
    "S0",
+   "S1",
    "S1a",
    "S1b",
    "S1c",
    "S1d",
    "S1e",
    "S2b",
+   "S3",
    "S3a",
    "S4a",
    "S6b",
@@ -6228,6 +6407,7 @@
    "STANDARD-7",
    "STANDARD-9",
    "T0",
+   "T1",
    "T1a",
    "T1b",
    "T6",
@@ -6367,6 +6547,7 @@
    "D35",
    "D36",
    "D38",
+   "DE-ACCOPPIABILITA",
    "DOPPIA-COP",
    "E3",
    "E4-LAM",
@@ -6379,6 +6560,8 @@
    "GEOM-SENZA-VERSO",
    "GUSCIO-ANTIFASE-EMERGENTE",
    "H-ETC-1",
+   "H1",
+   "H3",
    "INERZIA-1",
    "M2",
    "MASSA-CRITICA-LOCALE",

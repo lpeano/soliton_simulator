@@ -71,20 +71,20 @@ python csv/indice.py aggiorna-lotto doc/indice/_lotti/<nome>.jsonl
 
 | | |
 |---|--:|
-| voci | `830` |
+| voci | `843` |
 | ### **`DA_CLASSIFICARE` vere** *(non segnaposto)* | ### **`1`** |
-| ### **segnaposto `NON_DEFINITA`** | ### **`181`** |
-| ### **righe di storico** | ### **`1182`** |
+| ### **segnaposto `NON_DEFINITA`** | ### **`187`** |
+| ### **righe di storico** | ### **`1201`** |
 
 ```
-classe    DIFETTO=210  NON_DEFINITA=181  FRONTE=169  CRITERIO=94  MISURA=68  CURA=46  PRESIDIO=34  STANDARD=28
-dominio   FISICA=380  METODO=195  DA_CLASSIFICARE=181  INFRASTRUTTURA=47  DOCUMENTAZIONE=27
-era       1=451  DA_CLASSIFICARE=182  ENTRAMBE=172  2=25
-stato     SOSPESA=280  CHIUSA=187  DA_CLASSIFICARE=182  APERTA=156  AGENDA=25
+classe    DIFETTO=210  NON_DEFINITA=187  FRONTE=169  CRITERIO=94  MISURA=75  CURA=46  PRESIDIO=34  STANDARD=28
+dominio   FISICA=387  METODO=195  DA_CLASSIFICARE=187  INFRASTRUTTURA=47  DOCUMENTAZIONE=27
+era       1=458  DA_CLASSIFICARE=188  ENTRAMBE=172  2=25
+stato     SOSPESA=283  DA_CLASSIFICARE=188  CHIUSA=187  APERTA=160  AGENDA=25
 ```
 
-### ✔ **FATTO IN QUESTO GIRO:** il punto `4`: ### **`F3` a ZERO** -- `9` voci restano `FISICA` con un'eccezione e una sola si sposta *(`W5`)*, perche' in quattro di loro ### **il commento o il docstring e' IL CONTRASTO, non il difetto**: la voce dice *«il codice fa X e il commento dice Y»*, e ### **il difetto e' X**
+### ✔ **FATTO IN QUESTO GIRO:** il punto `5`: ### **`F4` da `30` segnali a `3`** -- la ### **regola dell'intestazione** *(l'ID deve essere il SOGGETTO, e ci deve essere contenuto)*, `7` etichette ### **ripristinate**, `6` ### **OMONIMI che non si scelgono** *(`S1` ne ha `22`, `T1` `34`)*, e il ### **FALSO-UNO per la TERZA VOLTA** -- stavolta sui ### **miei referti**, che elencano gli ID e sembravano definirli
 
-### ⛔ **RESTA:** il punto `5` *(`F4`: la ### **regola dell'intestazione**, l'attrezzo che cerca ### **TUTTE** le definizioni nel repo, e i tre esiti -- ripristina, omonimo, resta etichetta)* e `6` *(il referto `doc/REFERTO_indice_v3_segnali.md`)*
+### ⛔ **RESTA:** il punto `6`: i controlli e il referto ### **`doc/REFERTO_indice_v3_segnali.md`**, voce per voce, con i segnali prima/dopo per presidio e i conteggi dominio/era/stato
 
-**Ultimo lotto applicato:** `doc/indice/_lotti/v3_p4.jsonl`
+**Ultimo lotto applicato:** `doc/indice/_lotti/v3_p5.jsonl`

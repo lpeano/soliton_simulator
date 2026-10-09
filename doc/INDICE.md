@@ -4,10 +4,10 @@
 
 | dominio | era | voci |
 |---|---|--:|
-| `DA_CLASSIFICARE` | `DA_CLASSIFICARE` | 181 |
+| `DA_CLASSIFICARE` | `DA_CLASSIFICARE` | 187 |
 | `DOCUMENTAZIONE` | `1` | 21 |
 | `DOCUMENTAZIONE` | `ENTRAMBE` | 6 |
-| `FISICA` | `1` | 338 |
+| `FISICA` | `1` | 345 |
 | `FISICA` | `2` | 25 |
 | `FISICA` | `DA_CLASSIFICARE` | 1 |
 | `FISICA` | `ENTRAMBE` | 16 |
@@ -185,6 +185,8 @@
 | `CS-LAMBDA-GLOBALE` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | _cs_nodo non e del tutto locale: il pavimento usa _Lam = mean(/psi/^2) su TUTTA  |
 | `CTRL-RISCELTA` | DIFETTO | METODO | ENTRAMBE | ### **CHIUSA** |  | i punti di controllo si RISCEGLIEVANO a ogni checkpoint: l'osservabile della PRO |
 | `CURA-3` | CURA | FISICA | 1 | ### **SOSPESA** |  | - phi su 2pi con le soglie che la seguono / nella forma decisa: frazioni che sul |
+| `CURA1-CORTO` | MISURA | FISICA | 1 | ### **APERTA** |  | APERTO CURA1-CORTO |
+| `CURA2-CORTO` | MISURA | FISICA | 1 | ### **APERTA** |  | APERTO CURA2-CORTO |
 | `CURA2-STRUTTURALE` | DIFETTO | INFRASTRUTTURA | 1 | ### **CHIUSA** |  | la CURA 2 diventa STRUTTURALE: i rami `else` di TEMPO_UNICO_MITOSI escono dal si |
 | `D0` | CURA | FISICA | 1 | ### **SOSPESA** |  | CHI FA SCAPPARE d0 / 21/9 / MISURATO: e' IL FRENO. Gli scrittori spingono giu' - |
 | `D01` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | S09 clippa al passo causale — quindi e' gia' una LUNGHEZZA — e poi moltiplica pe |
@@ -216,6 +218,7 @@
 | `D27` | DIFETTO | FISICA | 1 | ### **CHIUSA** |  | Il grafo e' in QUATTRO COMPONENTI che non si toccano mai / Z65, misurato in ORIG |
 | `D28` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | nsub esplode e lo tira max(/vd/) su POCHISSIMI archi: il costo dell'intero siste |
 | `D29` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | CINQUE NODI DI VUOTO sono i piu' connessi dell'intero sistema: il vuoto ha degli |
+| `D3` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | OMONIMO `D3`: 8 definizioni con significati DIVERSI |
 | `D30` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | massa chiama semina SENZA massid (:6209), quindi masseinfo non viene MAI popolat |
 | `D31` | DIFETTO | FISICA | 1 | ### **SOSPESA** | SI | Il freno di SCALAMIN (smpchiudi) E' IL MOTORE della crescita di d0: vale il 117. |
 | `D32` | DIFETTO | FISICA | 1 | ### **CHIUSA** |  | I TEMPI PROPRI DICHIARATI SONO TRE, E SONO TRE GRANDEZZE DIVERSE: r, taupp e d/c |
@@ -226,8 +229,10 @@
 | `D36` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | LA SOGLIA DELLA MITOSI E' IN UNITA' ASSOLUTE DI tw, MENTRE LA SCALA DI tw DIPEND |
 | `D37` | DIFETTO | FISICA | 1 | ### **CHIUSA** |  | D37 CURATO il 2026-09-24 / CHIAVE DUPLICATA NEI DOMINI: 'csnodoprev' compare DUE |
 | `D38` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | nasce (:3850) e' gated su SCALAMIN or SCALAMINPASSO: la legge «nessun arco sotto |
+| `D4` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | OMONIMO `D4`: 2 definizioni con significati DIVERSI |
 | `D5` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | OMONIMO `D5`: lo stesso ID nomina DUE OGGETTI DIVERSI |
 | `D6` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | OMONIMO `D6`: lo stesso ID nomina DUE OGGETTI DIVERSI |
+| `DE-ACCOPPIABILITA` | MISURA | FISICA | 1 | ### **SOSPESA** |  | 4. DE-ACCOPPIABILITA' — analisi, non piano |
 | `DIVISIONE-AUTOCONSISTENTE` | FRONTE | FISICA | 2 | ### **AGENDA** |  | la divisione dell arco come UNA legge: dove si rompe, cosa ereditano i figli, il |
 | `DOPPIA-COP` | CURA | FISICA | 1 | ### **SOSPESA** |  | LA CURA (b): la doppia copertura 4 pi e' un ASSIOMA e va resa STRUTTURALE, non m |
 | `DRIVER-SCENA-II` | DIFETTO | INFRASTRUTTURA | 1 | ### **CHIUSA** |  | APERTA il 2026-09-26 (rilievo di Luca) / IL DRIVER NON SA FARE LA SCENA (ii), e  |
@@ -293,6 +298,9 @@
 | `H-RIGHE` | PRESIDIO | METODO | ENTRAMBE | ### **APERTA** |  | PRESIDIO DEL HOOK: CLAUDE.md oltre le 400 righe |
 | `H-STASH` | PRESIDIO | METODO | ENTRAMBE | ### **CHIUSA** |  | git stash e BLOCCATO da permissions.deny: il decimo presidio, e NON e un hook |
 | `H-VALIDATORE` | PRESIDIO | METODO | ENTRAMBE | ### **APERTA** |  | PRESIDIO DEL HOOK: un indice mal formato o con una voce persa rispetto al tag |
+| `H1` | MISURA | FISICA | 1 | ### **SOSPESA** |  | `H1` aiuta, in modo piccolo e sistematico. ### ⛔ Ma `0.5536` sta sotto `0.60`, e |
+| `H2` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | OMONIMO `H2`: 3 definizioni con significati DIVERSI |
+| `H3` | MISURA | FISICA | 1 | ### **SOSPESA** |  | `H3` — CHI SCALDA IL VUOTO: IL TERMOSTATO O LO SCUOTIMENTO? |
 | `H3b` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 3 volte, MAI definito in un registro) [H3b] |
 | `H4` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 4 volte, MAI definito in un registro) [H4] |
 | `H5` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 4 volte, MAI definito in un registro) [H5] |
@@ -573,6 +581,7 @@
 | `S08` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | Se φ non e' l'azimut del Bloch, CHE COS'E'? / Z121 ha refutato la frase del docs |
 | `S09` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | IL TETTO DI r E' RAGGIUNTO PER UNA VIA CHE NON CONOSCIAMO — lettura di Luca, 202 |
 | `S09-MEDIANA` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | la spinta S09 scala con `median(d0)` GLOBALE: lo stesso A2 gia' curato in S05 il |
+| `S1` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | OMONIMO `S1`: 22 definizioni con significati DIVERSI |
 | `S10` | DIFETTO | FISICA | 1 | ### **CHIUSA** |  | S10 RITIRATA il 2026-09-24 / Il tetto 1.414213 di r viene da un ramo di ritmo()  |
 | `S11` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | r E' SATURO AL SUO TETTO PER UN TERZO DEI NODI, e la quota CRESCE: 0.76 % - 29.5 |
 | `S12` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | S12 APPROVATO DA LUCA il 2026-09-24 / IL RILASSAMENTO DI rep DENTRO mitosi() (:5 |
@@ -584,6 +593,7 @@
 | `S1e` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 2 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
 | `S2` | FRONTE | FISICA | 1 | ### **SOSPESA** |  | S2 🟨VALE PER QUELLA SCENA ⏳[EPOCA 1 · MISURA] / NON SI RIPRODUCE sul sistema cor |
 | `S2b` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 2 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
+| `S3` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | OMONIMO `S3`: 21 definizioni con significati DIVERSI |
 | `S3a` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 5 volte, MAI definito in un registro) [S3a] |
 | `S4a` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 4 volte, MAI definito in un registro) [S4a] |
 | `S6b` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 2 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
@@ -610,6 +620,8 @@
 | `SCUOT-INNESCO` | MISURA | FISICA | 1 | ### **CHIUSA** |  | lo scuotimento del vuoto e' l'innesco: senza di lui zero nascite e spin omogenei |
 | `SHAKE-THEN-FREEZE` | MISURA | FISICA | 1 | ### **CHIUSA** |  | ✅ SHAKE-THEN-FREEZE — CHIUSO (2026-09-14, commit `5cffa73`). ESITO B, come prede |
 | `SIGILLO-COMPARATORE-DUPLICATO` | FRONTE | INFRASTRUTTURA | ENTRAMBE | ### **APERTA** |  | il comparatore del lockstep e copiato in due sigilli: due copie che possono dive |
+| `SIGILLO-CURA2` | MISURA | FISICA | 1 | ### **APERTA** |  | APERTO SIGILLO-CURA2 |
+| `SIGILLO-CURA2-RIPARATO` | MISURA | FISICA | 1 | ### **APERTA** |  | APERTO SIGILLO-CURA2-RIPARATO |
 | `SIGILLO-REGISTRO-NON-CONFRONTABILE` | FRONTE | INFRASTRUTTURA | ENTRAMBE | ### **APERTA** |  | il comparatore del sigillo non sa confrontare _veleno_registro (un dict di array |
 | `SIGILLO-SENZA-CONFIGURAZIONE` | FRONTE | INFRASTRUTTURA | ENTRAMBE | ### **APERTA** |  | il sigillo prende la configurazione dal CLI del driver ma NON la timbra nel suo  |
 | `SIM-PRIMA-STANTIO` | DIFETTO | METODO | ENTRAMBE | ### **CHIUSA** |  | il _sim_prima_controllo.py committato NON era il codice di prima: conteneva la c |
@@ -631,6 +643,7 @@
 | `STATI-LOCALI` | PRESIDIO | INFRASTRUTTURA | ENTRAMBE | ### **APERTA** |  | gli stati .npz del grafo restano LOCALI: in git vanno solo sha1, percorso e coma |
 | `SYNCDB-HEADLESS` | DIFETTO | INFRASTRUTTURA | ENTRAMBE | ### **APERTA** |  | `--sync-db` in headless CARICA ma non SALVA: lo dice il docstring del driver |
 | `T0` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 32 volte, MAI definito in un registro) |
+| `T1` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | OMONIMO `T1`: 34 definizioni con significati DIVERSI |
 | `T1a` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 19 volte, MAI definito in un registro) [T1a] |
 | `T1b` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 23 volte, MAI definito in un registro) [T1b] |
 | `T3a` | CRITERIO | METODO | ENTRAMBE | ### **APERTA** |  | SIGILLO scena (ii): lo STESSO seme due volte da' byte IDENTICI -- 219 firme sha1 |
