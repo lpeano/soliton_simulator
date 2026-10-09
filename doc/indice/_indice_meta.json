@@ -4364,8 +4364,167 @@
  },
  "meta:da_dividere": {
   "True": [
+   "B10",
    "B6",
-   "M2"
+   "B7",
+   "CENS-A2",
+   "CENS-B4",
+   "CENS-B8",
+   "E4-LAM",
+   "LUNGA-BATTITO-CADUTA",
+   "M2",
+   "MASSA-CRITICA-LOCALE",
+   "SCHERMATURA-LEGGE-REVISIONE",
+   "SPINORE-SENZA-FASE",
+   "Z121",
+   "Z18",
+   "Z39",
+   "Z53",
+   "Z78"
+  ]
+ },
+ "meta:da_dividere_parti": {
+  "come l-ho trovata: ### LA DIVISIONE E- MIA, e il testo NON la dichiara: tagliata sul separatore piu- forte": [
+   "B7",
+   "LUNGA-BATTITO-CADUTA"
+  ],
+  "come l-ho trovata: ### LA DIVISIONE E- MIA, e il testo NON la dichiara: tagliata sul separatore piu- forte -- E LA RIGA D-ORIGINE NON SI RITROVA: le parti vengono dal titolo e dalla descrizione": [
+   "B6",
+   "CENS-A2",
+   "CENS-B4",
+   "CENS-B8",
+   "MASSA-CRITICA-LOCALE",
+   "SPINORE-SENZA-FASE",
+   "Z18",
+   "Z39",
+   "Z53"
+  ],
+  "come l-ho trovata: il TESTO dichiara le parti (i marcatori sono nel testo)": [
+   "Z121",
+   "Z78"
+  ],
+  "come l-ho trovata: il TESTO dichiara le parti (l-annuncio e- <<DUE cose>>, e i marcatori sono nel testo)": [
+   "E4-LAM"
+  ],
+  "come l-ho trovata: il TESTO dichiara le parti (l-annuncio e- <<DUE fatti>>, e i marcatori sono nel testo)": [
+   "B10"
+  ],
+  "come l-ho trovata: il TESTO dichiara le parti (l-annuncio e- <<TRE PUNTI>>, e i marcatori sono nel testo) -- E LA RIGA D-ORIGINE NON SI RITROVA: le parti vengono dal titolo e dalla descrizione": [
+   "SCHERMATURA-LEGGE-REVISIONE"
+  ],
+  "parte 1: ## LUNGA-BATTITO-CADUTA — la corsa da 1000 passi cade al passo 1, e cade su una STAMPA (Aperta il 2026-10-06.": [
+   "LUNGA-BATTITO-CADUTA"
+  ],
+  "parte 1: (a) GLOBALE: la densita critica viene da Ncrit = massa_critica_adattiva(self) (:4998), una grandezza della rete INTERA, e rho_c = Ncrit / (4/3 pi LAM^3). E ricalcolata ~7 volte per passo su stati DIVERSI dentro lo stesso passo -- e il comme": [
+   "SCHERMATURA-LEGGE-REVISIONE"
+  ],
+  "parte 1: Z18 DA RIVERIFICARE [EPOCA 1 · MISURA]": [
+   "Z18"
+  ],
+  "parte 1: Z39 DA RIVERIFICARE [EPOCA 1 · MISURA]": [
+   "Z39"
+  ],
+  "parte 1: Z53 DA RIVERIFICARE [EPOCA 1 · MISURA]": [
+   "Z53"
+  ],
+  "parte 1: [A] TORS_4PI: \"Prova sperimentale, default off\",": [
+   "CENS-A2"
+  ],
+  "parte 1: [B] \"INTEGRATORE METRICO SPERIMENTALE ...": [
+   "CENS-B8"
+  ],
+  "parte 1: [B] \"costanti temporali TAU_P/TAU_BG/TAU_TW come RAPPORTI adimensionali .": [
+   "CENS-B4"
+  ],
+  "parte 1: i reperti DA RIMISURARE sulla scena nuova": [
+   "B7"
+  ],
+  "parte 1: la coppia muove phivel ma deriva da un'ALTRA fase: lo spinore ha un orologio tutto suo APERTA il 2026-10-07 sera.": [
+   "SPINORE-SENZA-FASE"
+  ],
+  "parte 1: la soglia di collasso deve essere LOCALE e DINAMICA, e dipendere da lambda: direzione di Luca APERTA il 2026-10-06 sera.": [
+   "MASSA-CRITICA-LOCALE"
+  ],
+  "parte 1: le due cure OFF: COPPIARECIPROCA e GRAVAMPIEZZA": [
+   "B6"
+  ],
+  "parte 1: ① --override-blob NON è nel driver vero (0 occorrenze in _scena_video.py): la ex-LISTA 2 punto 2 puntava al bersaglio sbagliato.": [
+   "B10"
+  ],
+  "parte 1: ① L'ENUMERAZIONE: d0 e' scritto in DIECI punti — :2083 (archi nuovi), :4067 (il rilassamento viscoelastico d0 += dt_e(d-d0)/tau_p), :4077 (diffusione di superficie), :4254, :4379 (mitosi), :4466 (Schwinger), :4669, :4812, :4816, :4835, :487": [
+   "Z78"
+  ],
+  "parte 1: ① in 31 righe su 31 il campo legge φ da exp/cos/sin (Z118) — e' un conto, non un'interpretazione ·": [
+   "Z121"
+  ],
+  "parte 1: ① l'INVARIANTE d >= LAM di C5 va reso INCONDIZIONATO (oggi è gated su SCALA_MIN or SCALA_MIN_PASSO, :3702, e a flag spenti degrada a d > 0);": [
+   "E4-LAM"
+  ],
+  "parte 2: (b) COMMENTO CONTRO CODICE: l intestazione del file (:82) diceva <<TRANSIZIONE DOLCE (tanh)>> e IL CODICE NON USA tanh: usa fattore = 1/(1 + softplus(u-1)) con softplus = log1p(exp(clip(u-1,-30,30))) (:5003-5004). CORRETTA (solo commento, e": [
+   "SCHERMATURA-LEGGE-REVISIONE"
+  ],
+  "parte 2: :739 e :732 (entrambe = False)... titolo_breve INTERO: le due cure OFF: COPPIARECIPROCA e GRAVAMPIEZZA": [
+   "B6"
+  ],
+  "parte 2: DIREZIONE DI LUCA, registrata come SUA: <<non voglio un valore calcolato, voglio un valore dinamico che dipende dalla dinamica del sistema, nel luogo, la dinamica locale>>.": [
+   "MASSA-CRITICA-LOCALE"
+  ],
+  "parte 2: Default off per mantenere i titolo_breve INTERO: [classe B del censimento] \"INTEGRATORE METRICO SPERIMENTALE ...": [
+   "CENS-B8"
+  ],
+  "parte 2: LE COORTI SOPRAVVIVEVANO GIA' ALLA MITOSI. NON... titolo_breve INTERO: Z53 DA RIVERIFICARE [EPOCA 1 · MISURA]": [
+   "Z53"
+  ],
+  "parte 2: LO SFASAMENTO eta: per mesi il nodo appena nato ha... titolo_breve INTERO: Z18 DA RIVERIFICARE [EPOCA 1 · MISURA]": [
+   "Z18"
+  ],
+  "parte 2: MECCANISMO PROPOSTO DAL GUARDIANO, DA VERIFICARE: NON E' UN FATTO.": [
+   "SPINORE-SENZA-FASE"
+  ],
+  "parte 2: Strumento d95639a4, simulatore cf2a1ac8, mandato della misura lunga di TORS-W8-AVVOLGIMENTO.": [
+   "LUNGA-BATTITO-CADUTA"
+  ],
+  "parte 2: UN FATTO STABILE DI CLAUDE.md E' CADUTO: cs E' VIVO.... titolo_breve INTERO: Z39 DA RIVERIFICARE [EPOCA 1 · MISURA]": [
+   "Z39"
+  ],
+  "parte 2: Z43, Z46, Z48-Z52, coer_g": [
+   "B7"
+  ],
+  "parte 2: il default e' True titolo_breve INTERO: [classe A del censimento] TORS_4PI: \"Prova sperimentale, default off\",": [
+   "CENS-A2"
+  ],
+  "parte 2: titolo_breve INTERO: [classe B del censimento] \"costanti temporali TAU_P/TAU_BG/TAU_TW come RAPPORTI adimensionali .": [
+   "CENS-B4"
+  ],
+  "parte 2: ② LA MITOSI E' REFUTATA PER DIMOSTRAZIONE: :4379 fa d0 = concat([d0[keep], d0new]) — gli archi in keep conservano d0 ESATTAMENTE, e gli archi divisi vengono RIMOSSI, non modificati. La mitosi non puo' toccare il d0 di un arco che sopravvive": [
+   "Z78"
+  ],
+  "parte 2: ② due rappresentazioni della doppia copertura sono due ponti (A10) ·": [
+   "Z121"
+  ],
+  "parte 2: ② la COPIA _scena_video_ripresa.py ESISTE ANCORA ed è tracciata da git, mentre il docstring del driver vero dice «la copia è stata rimossa» | un docstring STALE (la classe di difetto che CLAUDE.md §0 chiama per nome), e un secondo driver ne": [
+   "B10"
+  ],
+  "parte 2: ② la REALIZZAZIONE della legge va cambiata, perché oggi è il freno a senso unico = D31 | in attesa — NON è parte di CURA 2. Rendere l'invariante incondizionato cambierebbe il comportamento di una configurazione diversa da quella dei run: a ": [
+   "E4-LAM"
+  ],
+  "parte 3: (c) NUMERO NON DERIVATO: portata_minima = LAM 0.15 (:5005), e l intestazione (:92) la dichiarava <<geometrica, non una manopola di taratura>>. MA 0.15 E UN NUMERO SCELTO: chiamarlo geometrico non lo DERIVA. E A1 dice la legge, non il numero": [
+   "SCHERMATURA-LEGGE-REVISIONE"
+  ],
+  "parte 3: ① FATTO: l'invariante è INCONDIZIONATO. Sigillo csv/_seal_fork/_sigillo_e4lam.py 6/6, collaudo 8/8 con QUATTRO casi che devono fallire. T3: un arco sotto LAM a flag SPENTI ferma il run con riga, regola, indici e arco. T5: 206 campi identici": [
+   "E4-LAM"
+  ],
+  "parte 3: ③ L'INSTABILITA' DI t_visco E' REFUTATA PER MISURA, e la soglia la dichiara il codice (:4061: «e' un Eulero esplicito e DIVERGE OSCILLANDO se dt_e/tau_p >= 1»): _taup_cfl_max vale 0.5656 in A al passo 3000 e 0.5650 in B al 360 — praticament": [
+   "Z78"
+  ],
+  "parte 3: ③ con φ su 2π la soglia della mitosi torna 2π e il 3π cade. LA DECISIONE REGGE SU TRE GAMBE INVECE DI QUATTRO, e l'argomento caduto non argomenta per 4π: dice solo che φ non e' quello che il commento dichiara. → E apre una domanda NUOVA: se": [
+   "Z121"
+  ],
+  "parte 4: ② RESTA APERTO: la REALIZZAZIONE della legge è ancora il freno a senso unico, cioè D31. La scheda del freno-legge è il lavoro successivo. |": [
+   "E4-LAM"
+  ],
+  "parte 4: ④ E UN ARGOMENTO DI SEGNO CHIUDE IL PUNTO: d0 += dt_e(d-d0)/tau_p muove d0 VERSO d; sull'arco osservato d cresce (0.73 -> 1.97) e d0 cala (0.73 -> 0.24), cioe' se ne allontana. Il rilassamento non puo' essere cio' che spinge d0 in giu'. ⑤ M": [
+   "Z78"
   ]
  },
  "meta:duplicato_di": {

@@ -74,7 +74,7 @@ python csv/indice.py aggiorna-lotto doc/indice/_lotti/<nome>.jsonl
 | voci | `846` |
 | ### **`DA_CLASSIFICARE` vere** *(non segnaposto)* | ### **`1`** |
 | ### **segnaposto `NON_DEFINITA`** | ### **`187`** |
-| ### **righe di storico** | ### **`1612`** |
+| ### **righe di storico** | ### **`1628`** |
 
 ```
 classe    DIFETTO=200  NON_DEFINITA=187  MISURA=141  FRONTE=109  CRITERIO=90  CURA=56  PRESIDIO=34  STANDARD=29
@@ -83,8 +83,8 @@ era       1=538  DA_CLASSIFICARE=188  ENTRAMBE=96  2=24
 stato     SOSPESA=369  DA_CLASSIFICARE=188  CHIUSA=182  APERTA=82  AGENDA=24  SUPERATA=1
 ```
 
-### ✔ **FATTO IN QUESTO GIRO:** il punto `6`: ### **gemelle e duplicati** -- `4` gruppi dichiarati con `meta.duplicato_di` e ### **NON fusi** *(e `REGISTRO_FISICA:REG-R`/`REG-R`/`H-REG-R` sono ### **lo stesso fatto scritto TRE volte**, una come criterio, una come difetto, una come presidio)*; e ### **`F1` esteso allo STATO solo per lo schema `D`/`Z`**: `18` coppie, ### **`9` disallineate**, elencate senza indovinare. Collaudo `34/34`
+### ✔ **FATTO IN QUESTO GIRO:** il punto `7`: le ### **`16` da dividere, SENZA dividerle** -- `5` divisioni ### **le dichiara il testo** *(i cerchietti, le lettere, «DUE cose distinte»)* e `11` ### **sono mie, e l'ultima voce della lista lo dice**. `da_dividere` e' un `bool` e non poteva portarle: ### **il bool dice SE, `da_dividere_parti` dice CHE COSA**
 
-### ⛔ **RESTA:** il punto `7` *(`meta.da_dividere` con le due parti e la frase, ### **senza dividere**)* e `8` *(i controlli e il referto `doc/REFERTO_indice_v3_righe_origine.md`, voce per voce)*
+### ⛔ **RESTA:** il punto `8`: i controlli e il referto ### **`doc/REFERTO_indice_v3_righe_origine.md`**, voce per voce -- piu' i conteggi prima/dopo, quante voci ha cambiato il punto `1` e quante ha lasciato, e i segnali per presidio
 
-**Ultimo lotto applicato:** `doc/indice/_lotti/v3_s6.jsonl`
+**Ultimo lotto applicato:** `doc/indice/_lotti/v3_s7.jsonl`

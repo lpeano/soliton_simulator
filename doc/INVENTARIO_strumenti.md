@@ -2436,3 +2436,16 @@ etichette rimosse, con ### **`0` persi, `0` doppi, `0` conflitti**.
 | **cosa misura** | le **coppie `D`→`Z`** *(una riga della tavola `D` che cita la sua `Z`)* e **quante sono disallineate**; e porta i `4` gruppi di duplicati |
 | **l'uscita** | `doc/indice/_lotti/v3_s6.jsonl` · `doc/indice/_p6_gemelle_dz.json` *(le coppie e le disallineate, **con le due righe d'origine**)* |
 | ### ⛔ **`duplicato_di` NON sceglie un originale** | ogni membro del gruppo nomina **gli altri**: scegliere sarebbe **fondere a metà**, e il mandato dice **NON FUSI** |
+
+---
+
+### `csv/_da_dividere.py` — **LE DUE PARTI, SENZA DIVIDERE** *(2026-10-09)*
+
+| | |
+|---|---|
+| **file** | `csv/_da_dividere.py` |
+| **BLOB** *(sha1 dei byte grezzi)* | `063cbb87` |
+| **COMANDO** | `python csv/_da_dividere.py`, poi `python csv/indice.py aggiorna-lotto doc/indice/_lotti/v3_s7.jsonl` |
+| **cosa misura** | **quante divisioni le dichiara il TESTO** *(i marcatori `①`, `(a)`, e l'annuncio «DUE cose»)* e **quante sono MIE** |
+| ### ⛔ **`da_dividere` è un `bool`** | e non può portare le parti: il bool resta *(dice **SE**)* e si aggiunge **`da_dividere_parti`** *(dice **CHE COSA**)*, perché `M2` e `B6` lo usano già col bool e **cambiare il tipo di una chiave in uso romperebbe loro** |
+| ### ⚠ **l'ultima voce della lista dice COME** | *«il TESTO dichiara le parti»* oppure *«LA DIVISIONE È MIA»*: ### **una divisione proposta non si spaccia per una dichiarata** |
