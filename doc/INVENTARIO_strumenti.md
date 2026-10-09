@@ -2141,7 +2141,7 @@ nessuna voce si cancella.**
 | | |
 |---|---|
 | **file** | `csv/indice.py` *(657 righe)* |
-| **COMANDO** | `python csv/indice.py collaudo` · `valida` · `cerca` · `aggiorna` · **`aggiorna-lotto`** · **`crea-lotto`** · `mostra` · `viste` · `citazioni` · `meta-aggiungi`/`meta-depreca`/`meta-rinomina` |
+| **COMANDO** | `python csv/indice.py collaudo` · `valida` · `cerca` · `aggiorna` · **`aggiorna-lotto`** · **`crea-lotto`** · **`storico-commit`** · `mostra` · `viste` · `citazioni` · `meta-aggiungi`/`meta-depreca`/`meta-rinomina` |
 | **cosa misura** | ### **valida** schema, vocabolari, riferimenti, transizioni, campi obbligatori, unicita', metadati, e l'### **allineamento dei DERIVATI** *(indice invertito e viste)*; ### **cerca** per campi e metadati ### **senza parsing di testo**; ### **scrive** solo con `aggiorna`, che aggiunge una riga a `storico.jsonl` |
 | **BLOB** | `23f29617` |
 

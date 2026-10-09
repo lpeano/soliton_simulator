@@ -26,7 +26,7 @@
 | i ### **derivati** | `doc/indice/_indice_meta.json` *(indice invertito)*, `doc/INDICE_ID.tsv` *(vista compatibile)*, `doc/INDICE.md` |
 | ### ⛔ **ogni altra forma è una VISTA GENERATA** | `TSV` e `markdown` ### **non si modificano a mano**, mai. Il validatore se ne accorge |
 
-### ⛔ **UNA SOLA VIA DI SCRITTURA:** `python csv/indice.py aggiorna …` *(o `aggiorna-lotto`, e `crea-lotto` per far NASCERE una voce: ### **sono la stessa via** — stesse asserzioni, una riga di storico per voce, ### **una validazione alla fine e se non passa non si scrive niente**)*. Ogni modifica aggiunge
+### ⛔ **UNA SOLA VIA DI SCRITTURA:** `python csv/indice.py aggiorna …` *(o `aggiorna-lotto`, `crea-lotto` per far NASCERE una voce, e `storico-commit` che riempie il campo `commit` dai log: ### **sono la stessa via** — stesse asserzioni, una riga di storico per voce, ### **una validazione alla fine e se non passa non si scrive niente**)*. Ogni modifica aggiunge
 una riga a **`doc/indice/storico.jsonl`** *(**solo in aggiunta**: non si riscrive e non si
 cancella)*.
 

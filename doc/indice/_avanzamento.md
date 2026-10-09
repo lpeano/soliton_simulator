@@ -74,7 +74,7 @@ python csv/indice.py aggiorna-lotto doc/indice/_lotti/<nome>.jsonl
 | voci | `829` |
 | ### **`DA_CLASSIFICARE` vere** *(non segnaposto)* | ### **`1`** |
 | ### **segnaposto `NON_DEFINITA`** | ### **`181`** |
-| ### **righe di storico** | ### **`1046`** |
+| ### **righe di storico** | ### **`1078`** |
 
 ```
 classe    DIFETTO=209  NON_DEFINITA=181  FRONTE=169  CRITERIO=107  MISURA=55  CURA=46  PRESIDIO=34  STANDARD=28
@@ -83,8 +83,8 @@ era       1=445  DA_CLASSIFICARE=182  ENTRAMBE=176  2=26
 stato     SOSPESA=274  CHIUSA=187  DA_CLASSIFICARE=182  APERTA=160  AGENDA=26
 ```
 
-### ✔ **FATTO IN QUESTO GIRO:** il blocco `C`: ### **`16` etichette RIPRISTINATE come voci**, perche' la mia regola era sbagliata -- ### **un documento e' esattamente il posto in cui un ID si DEFINISCE.** `12` criteri di sigillo *(`TS-*`, `TW-*`)*, `O4` *(un'obiezione al bersaglio!)*, `SHAKE-THEN-FREEZE` *(con la sua chiusura, `5cffa73`)*, e `D5`/`D6` ### **OMONIMI, che NON si scelgono.** Piu' `crea-lotto`, ### **la via che mancava per far NASCERE una voce**
+### ✔ **FATTO IN QUESTO GIRO:** il blocco `D`: il campo `commit` dello storico ### **riempito in tutte e `1078` le righe, PRESO DAI LOG** *(lo storico e' solo-in-aggiunta, quindi per ogni commit le righe `[prima, dopo)` sono ESATTAMENTE le sue -- e ### **la premessa si VERIFICA**, riga per riga)*. Piu' `commit_base`, che la via di scrittura ### **timbra da se'**
 
-### ⛔ **RESTA:** il blocco `D` *(il campo `commit` dello storico, vuoto in `982` righe)* e il blocco `E` *(i controlli e il referto `doc/REFERTO_indice_v3_correzione.md`)*
+### ⛔ **RESTA:** il blocco `E`: i controlli e il referto `doc/REFERTO_indice_v3_correzione.md`, voce per voce
 
-**Ultimo lotto applicato:** `doc/indice/_lotti/v3_C.jsonl`
+**Ultimo lotto applicato:** `doc/indice/_lotti/v3_C_titolo.jsonl *(l'ultimo; il blocco `D` non passa da un lotto: tocca SOLO il campo `commit` dello storico)*`

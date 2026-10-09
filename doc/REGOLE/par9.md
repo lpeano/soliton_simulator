@@ -101,11 +101,13 @@ effetto collaterale di uno strumento.**
 python csv/indice.py aggiorna ID --campo stato=SOSPESA --motivo "...cita il testo..."
 python csv/indice.py aggiorna-lotto doc/indice/_lotti/<nome>.jsonl
 python csv/indice.py crea-lotto    doc/indice/_lotti/<nome>.jsonl   # NASCE
+python csv/indice.py storico-commit                              # il campo `commit`
 ```
 
 | | |
 |---|---|
 | ### **ogni modifica** | aggiunge una riga a **`doc/indice/storico.jsonl`**, che è **solo in aggiunta** |
+| ### **il COMMIT della riga** | `commit_base` lo **timbra la via di scrittura** *(`HEAD` al momento in cui scrive)*; `commit` — il commit che **contiene** la riga — lo riempie **`storico-commit`** dai log, perché lo storico è **solo-in-aggiunta** e per ogni commit le righe `[prima, dopo)` sono **esattamente le sue**. ### ⚠ **Resta UN LOTTO DI RITARDO**, e non è una scelta: quando il lotto gira, ### **il commit che lo conterrà NON ESISTE ANCORA** |
 | ### **il motivo CITA** | una frase della descrizione o della fonte. **Il lotto rifiuta un motivo sotto i `20` caratteri** |
 | ### **una voce NASCE** | solo con `crea-lotto`, e la sua riga di storico ha **`prima: null`**. ### ⚠ **Prima del 2026-10-09 non c'era**, e le voci nascevano **dentro la migrazione** — che gira una volta sola, dal tag: far nascere una voce dopo voleva dire **scrivere a mano in `voci.jsonl`**, cioè ### **una seconda via di scrittura** |
 | ### **togliere da `etichette_rimosse`** | fa parte dello **stesso atto** di `crea-lotto`, perché `C1` pretende che ogni ID vecchio stia in ### **UNO E UNO SOLO** posto. ### **Non è pulizia: è la conservazione** |

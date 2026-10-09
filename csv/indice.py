@@ -8,6 +8,7 @@ python csv/indice.py cerca [--dominio X] [--stato X] [--era X] [--blocca SI|NO]
 python csv/indice.py aggiorna ID --campo nome=valore | --meta k=v --motivo "..." [--commit SHA]
 python csv/indice.py aggiorna-lotto LOTTO.jsonl     # la STESSA via, in blocco
 python csv/indice.py crea-lotto LOTTO.jsonl        # la STESSA via, per FAR NASCERE una voce
+python csv/indice.py storico-commit               # riempie il campo `commit` DAI LOG
 python csv/indice.py mostra [--stato X] [--segnaposto SI] [--da N] [--quante N]
 python csv/indice.py meta-aggiungi k --tipo T [--valori a,b] [--regex R] --descrizione "..."
 python csv/indice.py meta-depreca k --sostituito-da k2 --motivo "..."
@@ -24,6 +25,7 @@ import io
 import json
 import os
 import re
+import subprocess
 import sys
 
 _QUI = os.path.dirname(os.path.abspath(__file__))
@@ -424,7 +426,8 @@ def aggiorna(voci, reg, idv, campi, metas, motivo, commit):
     _scrivi_jsonl(VOCI, voci)
     io.open(STORICO, "a", encoding="utf-8", newline=NL).write(
         json.dumps({"quando": _oggi(), "id": idv, "motivo": motivo,
-                    "commit": commit or "", "prima": prima, "dopo": v},
+                    "commit": commit or "", "commit_base": _head(),
+                    "prima": prima, "dopo": v},
                    ensure_ascii=False) + NL)
     viste(voci, reg)
     print("  `%s` aggiornata, e lo storico ha una riga in piu'" % idv)
@@ -468,8 +471,8 @@ def aggiorna_lotto(voci, reg, percorso):
             v["meta"][k] = val
         v["aggiornata"] = {"data": r.get("quando") or _oggi(), "commit": r.get("commit", "")}
         storia.append({"quando": v["aggiornata"]["data"], "id": idv, "motivo": motivo,
-                       "commit": r.get("commit", ""), "prima": prima,
-                       "dopo": json.loads(json.dumps(v))})
+                       "commit": r.get("commit", ""), "commit_base": _head(),
+                       "prima": prima, "dopo": json.loads(json.dumps(v))})
     # ### ⚠ **SI VALIDA `derivati=False` PRIMA di scrivere**, perche' l'indice invertito e
     # ### le viste sono ### **per costruzione stale** finche' non si riscrivono: controllarli
     # ### qui vorrebbe dire rifiutare OGNI lotto. ### ➜ **E si rivalida INTERO DOPO**, viste
@@ -714,6 +717,79 @@ def collaudo():
 
 
 # ==========================================================================
+def _head():
+    """### `HEAD` adesso: il commit ### **su cui** la modifica e- fatta. Si sa, a differenza
+    del commit che la ### **conterra-**."""
+    q = subprocess.run(["git", "rev-parse", "--short=8", "HEAD"], cwd=RADICE,
+                       capture_output=True, text=True)
+    return (q.stdout or "").strip() if q.returncode == 0 else ""
+
+
+def storico_commit():
+    """### IL BLOCCO `D`: riempie il campo `commit` di ogni riga dello storico.
+
+    ### ⛔ **Non si indovina: si LEGGE DAI LOG.** `storico.jsonl` e- ### **solo in
+    aggiunta**, quindi per ogni commit che l-ha toccato le righe
+    `[quante_prima, quante_dopo)` sono ### **esattamente quelle che quel commit ha
+    scritto.** ### ✔ **E LA PREMESSA SI VERIFICA:** se una versione vecchia non e- un
+    ### **prefisso** di quella nuova lo storico ### **non e- piu- solo-in-aggiunta**, e
+    allora ### **questa funzione SI FERMA** invece di scrivere numeri sbagliati.
+
+    ### ⚠ **UN LOTTO DI RITARDO, e non e- un difetto nascosto:** le righe scritte DOPO
+    l-ultimo commit non hanno ancora un commit che le contenga, e restano vuote fino al
+    giro dopo. ### **E- la conseguenza di quando esiste un commit**, non una scelta.
+    """
+    righe = [r for r in io.open(STORICO, encoding="utf-8").read().split(NL) if r.strip()]
+    vive = [json.loads(r) for r in righe]
+    q = subprocess.run(["git", "log", "--reverse", "--format=%h", "--",
+                        "doc/indice/storico.jsonl"], cwd=RADICE, capture_output=True,
+                       text=True)
+    commits = [c for c in (q.stdout or "").split() if c]
+    print("=" * 96)
+    print("IL CAMPO `commit` DELLO STORICO -- preso DAI LOG, non indovinato")
+    print("=" * 96)
+    print("  righe: %d   commit che hanno toccato il file: %d" % (len(vive), len(commits)))
+    prec, assegnate = 0, 0
+    for c in commits:
+        qc = subprocess.run(["git", "show", "%s:doc/indice/storico.jsonl" % c], cwd=RADICE,
+                            capture_output=True, text=True, encoding="utf-8")
+        sue = [r for r in (qc.stdout or "").split(NL) if r.strip()]
+        # ### LA PREMESSA, VERIFICATA: la versione di allora e- un PREFISSO di oggi.
+        assert len(sue) <= len(righe), ("`%s`: aveva %d righe, oggi il file ne ha %d: lo "
+                                        "storico NON e- solo-in-aggiunta" % (c, len(sue),
+                                                                             len(righe)))
+        for k, r in enumerate(sue):
+            a, b = json.loads(r), vive[k]
+            assert (a["id"], a["quando"], a["motivo"]) == (b["id"], b["quando"],
+                                                           b["motivo"]), (
+                "`%s`: la riga %d di allora NON e- la riga %d di oggi: lo storico e- stato "
+                "RISCRITTO, e questa funzione si ferma" % (c, k + 1, k + 1))
+        n = 0
+        for k in range(prec, len(sue)):
+            if not vive[k].get("commit"):
+                vive[k]["commit"] = c
+                n += 1
+        if len(sue) > prec:
+            print("  %-10s righe %5d..%-5d  (%d)  %s" % (c, prec + 1, len(sue),
+                                                         len(sue) - prec,
+                                                         "riempite %d" % n))
+        assegnate += n
+        prec = max(prec, len(sue))
+    restano = [k for k, v in enumerate(vive) if not v.get("commit")]
+    print()
+    print("  riempite: %d   senza commit: %d" % (assegnate, len(restano)))
+    if restano:
+        print("  ### LE %d SENZA COMMIT SONO LE RIGHE %d..%d, scritte DOPO l-ultimo commit:"
+              % (len(restano), restano[0] + 1, restano[-1] + 1))
+        print("  ### il commit che le conterra- NON ESISTE ANCORA. Si riempiono al giro dopo,")
+        print("  ### ed e- IL LOTTO DI RITARDO dichiarato nel sorgente di questa funzione.")
+    if assegnate:
+        io.open(STORICO, "w", encoding="utf-8", newline=NL).write(
+            NL.join(json.dumps(v, ensure_ascii=False) for v in vive) + NL)
+        print("  scritto doc/indice/storico.jsonl")
+    return 0
+
+
 def crea_lotto(voci, reg, percorso):
     """### LA VIA PER FAR NASCERE UNA VOCE -- la STESSA via, non un-altra.
 
@@ -772,8 +848,8 @@ def crea_lotto(voci, reg, percorso):
                                    "dice di toglierlo" % idv)
             togli.append(idv)
         storia.append({"quando": v["creata"]["data"], "id": idv, "motivo": motivo,
-                       "commit": r.get("commit", ""), "prima": None,
-                       "dopo": json.loads(json.dumps(v))})
+                       "commit": r.get("commit", ""), "commit_base": _head(),
+                       "prima": None, "dopo": json.loads(json.dumps(v))})
     err = valida(voci, reg, verboso=False, derivati=False)
     assert not err, ("il lotto NON passa la validazione, e NON SI SCRIVE NIENTE:" + NL
                      + NL.join(err[:10]))
@@ -831,6 +907,8 @@ def main(argv):
     if cmd == "crea-lotto":
         crea_lotto(voci, reg, pos[0])
         return 0
+    if cmd == "storico-commit":
+        return storico_commit()
     if cmd == "mostra":
         mostra(voci, uno)
         return 0
