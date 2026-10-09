@@ -339,9 +339,14 @@ METODI = {
                             "punto 3, da fare", "DA_PORTARE"),
     "C5": ("`tauluce = d/cs` e- piatto: e- una misura dell-era 1 su una scena dell-era 1",
            "nessun sito nell-era 2", "NON_SI_APPLICA"),
-    "Z100": ("gli invarianti: il programma si ferma quando sono violati. ### E- IL PUNTO "
-             "1 (i domini che FERMANO), e oggi l-era 2 non ha invarianti dichiarati",
-             "punto 1, da fare", "DA_PORTARE"),
+    "Z100": (
+        "gli invarianti: il programma si ferma quando sono violati. ### PORTATO dal "
+        "punto 1 nella forma dei DOMINI -- ogni tipo dichiara la sua forma, e il "
+        "controllo FERMA. ### Gli invarianti di FISICA (norma, energia) si MISURANO "
+        "invece, e la deriva e- stampata: fermare su una deriva numerica sarebbe "
+        "fermare su un arrotondamento",
+        "`primo_ordine/stato.py::controlla_domini`; la deriva in `_collauda_passo.py`",
+        "PORTATO"),
     "VELENO-ARCHI-KEEP": ("il veleno allunga le derivate d-arco e non applica `keep`: "
                           "### l-era 2 non ha derivati da avvelenare -- lo stato e- SOLO "
                           "`psi`. ### Il punto 4 e- VERO E VUOTO oggi, e lo dico",
@@ -359,22 +364,12 @@ METODI = {
                          "la chiave `(min, max)`, quindi l-arco `(3,7)` e `(7,3)` hanno "
                          "LA STESSA chiave e lo strato non dipende da come e- scritto",
                          "`passo.py::strati`", "PORTATO"),
-    "RIPIEGHI-ZERO": ("zero ripieghi che cambiano la fisica in silenzio: ### IL PUNTO 2 "
-                      "lo rende un presidio del generatore (nessun ramo nei termini), e "
-                      "`A8` ne e- l-assioma",
-                      "punto 2, da fare", "DA_PORTARE"),
-    "MAX-NODI-FERMA": ("una guardia di MEMORIA non cambia la fisica in silenzio: deve "
-                       "FERMARE. ### L-era 2 non ha ancora una guardia di memoria, e "
-                       "quando l-avra- dovra- fermare",
-                       "nessun sito oggi", "DA_PORTARE"),
-    "RIPRESA-ARGV": ("la ripresa si fida dell-`argv`: ### E- IL PUNTO 6 -- la ripresa "
-                     "dell-era 2 RIFIUTA se la tabella e- cambiata, e il punto 15(a) dice "
-                     "che la riga di comando sceglie SOLO il file di configurazione",
-                     "punti 6 e 15, da fare", "DA_PORTARE"),
-    "Z54": ("l-archivio a serie: e- un meccanismo di dati dell-era 1. ### IL PUNTO 15(e) "
-            "rifa- la stessa cura meglio -- versione del formato, scrittura ATOMICA, "
-            "reperti immutabili",
-            "punto 15(e), da fare", "DA_PORTARE"),
+    "RIPIEGHI-ZERO": (
+        "zero ripieghi che cambiano la fisica in silenzio. ### PORTATO in DUE "
+        "modi: il generatore RIFIUTA i rami nei termini (punto 2), e il controllo "
+        "di dominio FERMA invece di troncare (punto 1)",
+        "`leggi/schema.py::RAMI` + `stato.py::controlla_domini`",
+        "PORTATO"),
 }
 
 
@@ -489,6 +484,28 @@ METODI['PI-CHIUSURA-ORFANA'] = (
     '`csv/indice.py::_f12_chiusura_orfana`, ### ERRORE (rifiuta)', "PORTATO")
 
 # ### I TRE che la QUARTA versione del mandato aggiunge al punto `0`.
+# ### ⚠ **QUESTE TRE RIGHE LE HO INGHIOTTITE DUE VOLTE**, con una sostituzione
+# ### il cui indice di fine cercava ### **il primo `"DA_PORTARE"),` dopo l-inizio** --
+# ### e quello era ### **il terminatore della riga DOPO.** ### **Me l-ha detto `P-M1`,
+# ### entrambe le volte.**
+METODI["MAX-NODI-FERMA"] = (
+    "una guardia di MEMORIA non cambia la fisica in silenzio: deve FERMARE. "
+    "### PORTATO dal punto 1: ogni tipo dichiara la sua FORMA di dominio, e il "
+    "controllo generato in `stato.py` SOLLEVA -- e il passo lo chiama a OGNI passo, "
+    "verificato VIA AST",
+    "`primo_ordine/stato.py::controlla_domini`, chiamato da `passo.py`", "PORTATO")
+METODI["RIPRESA-ARGV"] = (
+    "la ripresa si fida dell-argv. ### IL PUNTO 15(a) HA CHIUSO METa- DEL CERCHIO: la "
+    "riga di comando sceglie SOLO il file, e un argomento in piu- e- un ERRORE. "
+    "### MA LA RIPRESA NON ESISTE ANCORA: e- il punto 6, e la sua pretesa e- che "
+    "RIFIUTI se la tabella e- cambiata",
+    "`primo_ordine/driver.py::main` per l-argv; la ripresa e- il punto 6",
+    "DA_PORTARE")
+METODI["Z54"] = (
+    "l-archivio a serie: e- un meccanismo di dati dell-era 1. ### IL PUNTO 15(e) rifa- "
+    "la stessa cura meglio -- versione del formato, scrittura ATOMICA, reperti "
+    "immutabili -- e NON e- ancora fatto",
+    "punto 15(e), da fare", "DA_PORTARE")
 METODI["CONFIG-1"] = (
     "28 leggi su 31 giravano SPENTE in sei misure, per 140 costanti di modulo. "
     "### IL PUNTO 15 L-HA CHIUSO, e non con un presidio sui flag: ### TOGLIENDO I "

@@ -11447,3 +11447,25 @@ Collaudo ### **`11`/`11`**, nei due versi. E il presidio ### **lascia il repo co
 ### ⚠ **E UNA MIA REGOLA DI SEGNALE ERA TROPPO RIGIDA:** pretendeva un `@rif` di ruolo ### **`implementa`**, e ha segnalato `MISURA-NORMA-ERA2` — che e- ### **una MISURA**, e l-osservatore ### **LA MISURA**, non la implementa. ### **La regola giusta: NESSUN `@rif` di nessun ruolo**, cioe- ### **niente nel codice la tocca.**
 
 ### ⚠ **CHE COSA RESTA DEL PUNTO `14`:** `(f)` *(`indice.py rinomina`, che aggiorna voce, alias, ogni `@rif` e ogni `[[ID]]` in UN commit)* e `(g)` *(i `[[ID]]` nei documenti vivi, che ### **`H-INDICE` gia- verifica**)*. ### **Il `(f)` e- un commit a se-.**
+
+## PUNTO `1` — ### **I DOMINI: il controllo FERMA, e NON TRONCA** *(2026-10-10)*
+
+### ⭐ **E <<MAI TRONCARE>> E- LA PARTE CHE CONTA, non il controllo.** Troncare ### **nasconde** la violazione e ### **cambia la fisica in silenzio**; fermare ### **la mostra.** ### **E- la lezione di `MAX-NODI-FERMA`** *(una guardia di memoria che cambiava la fisica in silenzio: ### **deve FERMARE**)* ### **e di `RIPIEGHI-ZERO`.**
+
+### ⛔ **E IL DOMINIO STA SUL TIPO, non sulla variabile**, e lo dichiaro: due variabili dello stesso tipo ### **hanno lo stesso dominio per costruzione** — metterlo sulla variabile sarebbe ### **un posto in piu- dove possono divergere.**
+
+| la forma | che cosa pretende |
+|---|---|
+| `finito` | ogni componente ### **finita** *(niente `NaN`, niente `inf`)* |
+| `finito-pos` | finita ### **e `> 0`** |
+| `fase-2pi` | finita, e ### **si legge modulo `2pi`** — ### **una fase non si tronca: si RIDUCE**, e la riduzione e- ### **esatta** |
+
+**Il controllo `controlla_domini(st, dove)` SI GENERA** in `stato.py` dalla tabella, e ### **il passo lo chiama a OGNI passo** — in ### **entrambi** gli integratori, ### **verificato VIA AST** *(`2` chiamate: ### **un controllo che nessuno chiama e- una tenda**)*.
+
+### ⚠ **E UNA SCELTA CHE DICHIARO: a ogni PASSO, non a ogni STRATO.** Un sotto-passo ### **intermedio** di una composizione simmetrica ### **non e- uno stato fisico** — e- ### **meta- di un-operazione**: ### **controllarlo la- vorrebbe dire fermare su uno stato che non esiste.**
+
+### ✅ **E il messaggio dice LA VARIABILE, LA FORMA e DOVE**, perche- un controllo che ferma ### **senza dire che cosa ha visto** ### **costringe a rifare la corsa per saperlo.**
+
+**Collaudo:** la catena va a ### **`43`/`43`** *(da `38`)*, con i due casi che ### **DEVONO fermare** *(un `NaN`, un `inf`)* e il braccio che verifica ### **che il passo lo chiami davvero.** `P-R1` ### **`12`/`12`** *(due rami nuovi, dichiarati `validazione`)*.
+
+### ⛔ **E IL PRESIDIO `P-RIF` HA PRESO IL MIO COMMENTO DI ADESSO:** avevo scritto *«e- la lezione di `MAX-NODI-FERMA` e di `RIPIEGHI-ZERO`»* ### **in un commento**, e li ha rifiutati. ### **Spostati nel docstring**, dove sono ### **documentazione** — e ### **e- la seconda volta in due punti che il presidio di ieri corregge il codice di oggi.**

@@ -8,8 +8,8 @@
 
 | | quanti |
 |---|--:|
-| **`PORTATO`** | `74` |
-| **`DA_PORTARE`** | `28` |
+| **`PORTATO`** | `77` |
+| **`DA_PORTARE`** | `25` |
 | **`DA_DECIDERE`** | `5` |
 | **`NON_SI_APPLICA`** | `9` |
 | **in tutto** | ### **`116`** |
@@ -18,7 +18,7 @@
 
 ---
 
-## `PORTATO` — `74` metodi
+## `PORTATO` — `77` metodi
 
 > ### ✅ **GIA- NELL-ERA `2`**, e `dove` dice dove
 
@@ -55,6 +55,7 @@
 | **`L-SOGLIA`** | `STANDARD` | una soglia non si calcola dai dati che giudica, e si collauda sul caso nullo: ### SUPERATA nell-era 1. Nell-era 2 le tolleranze sono DICHIARATE a priori (`TOLL_IM`, `toll` del punto fisso), non calcolate dai dati | i moduli generati + `passo.py` |
 | **`L-STELLA`** | `STANDARD` | le cinque domande per iscritto nel task history: ### FATTE per la tappa 5, e LA 3 HA TROVATO UN DIFETTO -- la dipendenza del cono globale dalla tolleranza | `doc/TASK_HISTORY/2026-10-09_era2_infrastruttura.md` |
 | **`L-UN-PROMPT`** | `STANDARD` | un prompt alla volta, i rilievi in CODA: in questo mandato sono arrivate SEI voci di coda, tutte registrate e nessuna eseguita fuori ordine | `doc/CODA_2026-10-09.md` |
+| **`MAX-NODI-FERMA`** | `CURA` | una guardia di MEMORIA non cambia la fisica in silenzio: deve FERMARE. ### PORTATO dal punto 1: ogni tipo dichiara la sua FORMA di dominio, e il controllo generato in `stato.py` SOLLEVA -- e il passo lo chiama a OGNI passo, verificato VIA AST | `primo_ordine/stato.py::controlla_domini`, chiamato da `passo.py` |
 | **`P-C1`** | `PRESIDIO` | NATO NELL-ERA 2, ed e- il presidio del punto 12(a): il codice dichiara l-ID e la macchina verifica la biiezione, con DUE severita- -- un ID dichiarato e non nell-indice RIFIUTA, una voce PRESIDIO che nessun codice dichiara SEGNALA (A9). ### E HA PRESO SE- STESSO, come P-M1 | `csv/_controlli_nell_indice.py::controlla`, `pre-commit` + CI |
 | **`P-E1`** | `PRESIDIO` | NATO NELL-ERA 2. La BIIEZIONE fra legge in tabella, file generato, riga di registro e scheda, nei DUE VERSI, e `LEGGE` si legge VIA AST. ### Allargato agli OSSERVATORI il 2026-10-09: prima un osservatore in tabella era INVISIBILE alla biiezione | `csv/_presidi_era2.py::pe1`, `pre-commit` + CI, SENZA via d-uscita |
 | **`P-E2`** | `PRESIDIO` | NATO NELL-ERA 2. L-IMPRONTA: un generato ritoccato a mano, o una tabella cambiata senza rigenerare. ### SI RIGENERA, NON SI CORREGGE IL FILE -- e la CI rigenera e fa `git diff --exit-code` | `csv/_presidi_era2.py::pe2`, `pre-commit` + CI |
@@ -90,6 +91,7 @@
 | **`R3`** | `PRESIDIO` | pretendeva `bias == 0.0` esatto e falliva su due ulp: ### LA LEZIONE E- PORTATA -- nessun braccio dell-era 2 pretende l-uguaglianza esatta di un float calcolato, e la norma si misura con una tolleranza DICHIARATA | `_collauda_passo.py` sezione (D) |
 | **`R5`** | `PRESIDIO` | contava 25 aperture su 24 passi perche- l-iniezione del test apriva il freno: ### LA LEZIONE E- PORTATA -- i casi che devono fallire dell-era 2 verificano anche che, TOLTO il finto, il presidio TACCIA | `_collauda_passo.py` sezione (F), ultimo braccio |
 | **`REG-R`** | `PRESIDIO` | la regola mantenuta del registro della fisica: nell-era 2 la scheda si genera, e il registro resta la casa delle leggi dell-era 1 | `csv/_file_fisica.py::SCHEDA_NEL_REGISTRO` |
+| **`RIPIEGHI-ZERO`** | `CURA` | zero ripieghi che cambiano la fisica in silenzio. ### PORTATO in DUE modi: il generatore RIFIUTA i rami nei termini (punto 2), e il controllo di dominio FERMA invece di troncare (punto 1) | `leggi/schema.py::RAMI` + `stato.py::controlla_domini` |
 | **`ROBUSTEZZA-FISICA`** | `STANDARD` | i tre gradini: ### il mandato dell-infrastruttura arriva al gradino (a) e SOLO quello, dichiarato nella stella polare -- non (b) e non (c), perche- le leggi sono di prova | il task history, sezione LA STELLA POLARE |
 | **`SCHED-PASSO`** | `CURA` | il passo pieno diventa uno SCHEDULATORE: ### PORTATO -- `passo.py` separa strati, composizione, validazione e integrazione | `passo.py` |
 | **`SCHED-T2-TIPI`** | `CURA` | gli 8 tipi del registro del passo: nell-era 2 i tipi sono 4 (`termine_nodo`, `termine_arco`, `regola`, `osservatore`) e stanno in UN vocabolario chiuso | `leggi/schema.py::TIPI` |
@@ -97,11 +99,12 @@
 | **`STANDARD-8`** | `STANDARD` | un difetto dimostrato si cura: ### SUPERATA, assorbita in `A12` | vedi `A12` |
 | **`U3`** | `PRESIDIO` | confrontava con uno sviluppo invece del valore esatto: ### LA LEZIONE E- PORTATA -- la derivata generata si confronta con la differenza finita, non con una forma approssimata scritta a mano | `_genera.py --prova` |
 | **`VELENO-ORIENTATO`** | `DIFETTO` | il veleno cade su UNO dei due archi figli, e quale dipende dall-orientamento: ### LA LEZIONE E- PORTATA -- `strati()` usa la chiave `(min, max)`, quindi l-arco `(3,7)` e `(7,3)` hanno LA STESSA chiave e lo strato non dipende da come e- scritto | `passo.py::strati` |
+| **`Z100`** | `CURA` | gli invarianti: il programma si ferma quando sono violati. ### PORTATO dal punto 1 nella forma dei DOMINI -- ogni tipo dichiara la sua forma, e il controllo FERMA. ### Gli invarianti di FISICA (norma, energia) si MISURANO invece, e la deriva e- stampata: fermare su una deriva numerica sarebbe fermare su un arrotondamento | `primo_ordine/stato.py::controlla_domini`; la deriva in `_collauda_passo.py` |
 | **`Z22`** | `STANDARD` | il par.5-quinquies esisteva ed e- stato violato: la lezione e- che ### UN OUTPUT DA UN FILE NON TRACCIATO NON E- RIPRODUCIBILE -- e il timbro di `_presidio.avvia` lo dice a ogni giro | `csv/_presidio.py` |
 
 ---
 
-## `DA_PORTARE` — `28` metodi
+## `DA_PORTARE` — `25` metodi
 
 > ### ⚠ **SI APPLICA, E NON C-E- ANCORA**: `dove` dice **quale punto del mandato** lo porta
 
@@ -117,14 +120,12 @@
 | **`H-P5`** | `PRESIDIO` | un referto che non dichiara la configurazione INTERA. ### ORA LA CONFIGURAZIONE ESISTE (punto 15(a)) e il driver ne stampa l-IMPRONTA e TUTTI i campi: ### MA NESSUN REFERTO DELL-ERA 2 LA DICHIARA ANCORA, e quello e- il punto 5 (il timbro) | `primo_ordine/driver.py::main`; il referto e- il punto 5 |
 | **`H-P8`** | `PRESIDIO` | un confronto che prende il codice di prima da `HEAD` invece che dal PADRE: l-era 2 non ha ancora confronti prima/dopo | `.githooks/pre-commit` |
 | **`H-P9`** | `PRESIDIO` | uno strumento che avanza una rete fuori dall-esecutore: ### IL PUNTO 9 LO GENERALIZZA all-era 2, e ### il caso da rifiutare potrebbe essere `_collauda_passo.py`, che chiama `mezzo_implicito` direttamente | `.githooks/pre-commit`; punto 9 |
-| **`MAX-NODI-FERMA`** | `CURA` | una guardia di MEMORIA non cambia la fisica in silenzio: deve FERMARE. ### L-era 2 non ha ancora una guardia di memoria, e quando l-avra- dovra- fermare | nessun sito oggi |
 | **`NASCITA-PUNTO-UNICO`** | `CURA` | le grandezze della nascita si scrivono in UN SOLO punto, con una regola dichiarata per ciascuna: ### e- IL PUNTO 3, e `crescita.py` e- ancora uno stub | punto 3, da fare |
 | **`P-DECADIMENTO`** | `STANDARD` | ogni decadimento e- una trasformazione: ### lo pretende il campo `bilancio` di una `regola`, che lo schema rende OBBLIGATORIO | `leggi/schema.py`; nessuna `regola` ancora |
 | **`P3`** | `STANDARD` | nessuna statistica senza barra d-errore: ### l-era 2 non ha ancora una statistica -- le misure fatte sono DETERMINISTICHE (byte, cono, deriva) | nessun sito oggi |
 | **`P5`** | `STANDARD` | ogni ramo `else`/fallback su un percorso fisico va CONTATO: ### IL PUNTO 2 lo rende un presidio -- le guardie fuori dalla fisica avranno un contatore | punto 2, da fare |
 | **`P6`** | `STANDARD` | ogni csv di misura porta blob, seme e flag: ### SUPERATA nell-era 1, e il punto 5 la rifa- meglio -- IL TIMBRO porta l-impronta della TABELLA e dei GENERATI, non una lista di flag | punto 5, da fare |
-| **`RIPIEGHI-ZERO`** | `CURA` | zero ripieghi che cambiano la fisica in silenzio: ### IL PUNTO 2 lo rende un presidio del generatore (nessun ramo nei termini), e `A8` ne e- l-assioma | punto 2, da fare |
-| **`RIPRESA-ARGV`** | `DIFETTO` | la ripresa si fida dell-`argv`: ### E- IL PUNTO 6 -- la ripresa dell-era 2 RIFIUTA se la tabella e- cambiata, e il punto 15(a) dice che la riga di comando sceglie SOLO il file di configurazione | punti 6 e 15, da fare |
+| **`RIPRESA-ARGV`** | `DIFETTO` | la ripresa si fida dell-argv. ### IL PUNTO 15(a) HA CHIUSO METa- DEL CERCHIO: la riga di comando sceglie SOLO il file, e un argomento in piu- e- un ERRORE. ### MA LA RIPRESA NON ESISTE ANCORA: e- il punto 6, e la sua pretesa e- che RIFIUTI se la tabella e- cambiata | `primo_ordine/driver.py::main` per l-argv; la ripresa e- il punto 6 |
 | **`SCHED-T1`** | `CURA` | la composizione e- una LISTA e c-e- UN SOLO esecutore: ### PORTATO -- `COMPOSIZIONE_GLOBALE` e `composizione_locale()` sono liste dichiarate. ### MA <<un solo esecutore>> NON E- ANCORA UN PRESIDIO: e- il punto 9 | `passo.py`; il presidio e- il punto 9 |
 | **`SCHED-T3-REGOLE`** | `MISURA` | le regole di composizione, 94 scritture in cinque forme: ### nell-era 2 le regole non esistono ancora -- e- il punto 11(a) | punto 11(a), da fare |
 | **`STANDARD-10`** | `STANDARD` | una cura non aumenta il numero delle leggi: ### APPLICATA -- `leggi/osservatori.yaml` e- stato TOLTO perche- a parita- di effetto si preferisce togliere un-eccezione. ### E IL PUNTO 10 chiede che ogni referto STAMPI il conto | punto 10, da fare |
@@ -132,9 +133,8 @@
 | **`STANDARD-6`** | `STANDARD` | ogni difetto acclarato si registra SUBITO: i difetti di questo mandato sono nei commit e nella relazione. ### MA DUE NON HANNO UNA VOCE: il buco di `H-FISICA-FUORI-LISTA` e la dipendenza del cono globale dalla tolleranza | la relazione; le voci mancano |
 | **`STATI-LOCALI`** | `PRESIDIO` | gli stati pesanti restano locali, in git solo sha1, percorso e comando: ### IL PUNTO 15(e) lo rende una regola del formato dei dati | nessun dato pesante oggi; punto 15 |
 | **`TAGLIA-FINITA`** | `STANDARD` | lo scaling di taglia finita come via al limite continuo: l-era 2 non ha ancora una misura di taglia | nessun sito oggi |
-| **`Z100`** | `CURA` | gli invarianti: il programma si ferma quando sono violati. ### E- IL PUNTO 1 (i domini che FERMANO), e oggi l-era 2 non ha invarianti dichiarati | punto 1, da fare |
 | **`Z20`** | `FRONTE` | due bracci di un confronto che differivano in piu- di un posto: ### IL PUNTO 15(d) lo rende un presidio -- un `A`/`B` dichiara IL CAMPO UNICO in cui differiscono, e un controllo verifica che differiscano SOLO li- | punto 15(d), da fare |
-| **`Z54`** | `MISURA` | l-archivio a serie: e- un meccanismo di dati dell-era 1. ### IL PUNTO 15(e) rifa- la stessa cura meglio -- versione del formato, scrittura ATOMICA, reperti immutabili | punto 15(e), da fare |
+| **`Z54`** | `MISURA` | l-archivio a serie: e- un meccanismo di dati dell-era 1. ### IL PUNTO 15(e) rifa- la stessa cura meglio -- versione del formato, scrittura ATOMICA, reperti immutabili -- e NON e- ancora fatto | punto 15(e), da fare |
 
 ---
 

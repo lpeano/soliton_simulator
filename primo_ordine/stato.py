@@ -19,6 +19,40 @@ VARIABILI = (
     ('psi', 'complesso_c2_nodo', 'V-PSI-ERA2'),
 )
 
+# ### I DOMINI, dal TIPO *(punto `1`)*: `(nome, tipo, forma)`.
+# ### ⛔ **E IL CONTROLLO FERMA, NON TRONCA:** troncare
+# ### ### **nasconde** la violazione e cambia la fisica in silenzio
+# ### *(un ramo silenzioso non e- un ramo)*; fermare ### **la mostra.**
+DOMINI = (
+    ('psi', 'complesso_c2_nodo', 'finito'),
+)
+
+
+def controlla_domini(st, dove):
+    """### I domini di tutte le variabili. ### **FERMA, non tronca.**
+
+    ### ⛔ **Solleva `AssertionError` col NOME della variabile,
+    la FORMA violata e ### **dove** e- successo** -- perche- un controllo che
+    ferma senza dire ### **che cosa** ha visto ### **costringe a rifare la
+    corsa per saperlo.**
+    """
+    for nome, _tipo, forma in DOMINI:
+        v = st[nome]
+        if forma in ('finito', 'finito-pos', 'fase-2pi'):
+            cattivi = int(np.sum(~np.isfinite(v)))
+            assert cattivi == 0, (
+                'DOMINIO VIOLATO (' + dove + '): la variabile ' + nome
+                + ' ha ' + repr(cattivi) + ' componenti NON FINITE'
+                + ' (forma ' + forma + '). ### Il controllo FERMA e NON TRONCA:'
+                + ' troncare cambierebbe la fisica in silenzio')
+        if forma == 'finito-pos':
+            cattivi = int(np.sum(np.real(v) <= 0.0))
+            assert cattivi == 0, (
+                'DOMINIO VIOLATO (' + dove + '): la variabile ' + nome
+                + ' ha ' + repr(cattivi) + ' componenti <= 0'
+                + ' (forma ' + forma + ')')
+    return True
+
 
 def nuovo(n):
     """### Uno stato vuoto per `n` nodi.

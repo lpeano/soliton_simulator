@@ -452,6 +452,49 @@ def reversibilita(T, n, dt, iterazioni, toll, k=50):
 #   ### il mandato chiede ### **la catena**, e una catena si guarda intera.
 # =====================================================================================
 
+def domini(T, n, dt, iterazioni, toll):
+    """### `(H)` IL PUNTO `1`: il dominio ### **FERMA**, e non tronca."""
+    print()
+    print("  (H) I DOMINI -- punto `1`: il controllo FERMA, e NON TRONCA")
+    ii, jj = catena(n)
+    ss = PA.strati(ii, jj)
+    st = stato_seme(n, C["seme"])
+    esito("il dominio di uno stato BUONO passa", ST.controlla_domini(st, "prova"),
+          "%d variabili, forme %s"
+          % (len(ST.DOMINI), sorted({f for _n, _t, f in ST.DOMINI})))
+    esito("### e OGNI variabile ha un dominio DICHIARATO",
+          len(ST.DOMINI) == len(ST.VARIABILI),
+          "### una variabile senza dominio e- una che nessuno puo- controllare")
+    # ### ⛔ **IL CASO CHE DEVE FALLIRE: un `NaN` nello stato.**
+    storto = {k: v.copy() for k, v in st.items()}
+    storto["psi"][0, 0] = float("nan")
+    try:
+        ST.controlla_domini(storto, "il collaudo")
+        esito("### DEVE fermare: un `NaN` nello stato", False)
+    except AssertionError as e:
+        esito("### DEVE fermare: un `NaN` nello stato",
+              "DOMINIO VIOLATO" in str(e) and "psi" in str(e),
+              "### e il messaggio dice LA VARIABILE, LA FORMA e DOVE: un controllo che "
+              "ferma senza dirlo costringe a rifare la corsa")
+    storto2 = {k: v.copy() for k, v in st.items()}
+    storto2["psi"][1, 1] = float("inf")
+    try:
+        ST.controlla_domini(storto2, "il collaudo")
+        esito("### DEVE fermare: un `inf` nello stato", False)
+    except AssertionError:
+        esito("### DEVE fermare: un `inf` nello stato", True)
+    # ### ✅ **E IL PASSO LO CHIAMA DAVVERO**, non e- una funzione che nessuno usa.
+    import ast as _ast
+    src = io.open(os.path.join(_QUI, "passo.py"), encoding="utf-8").read()
+    chiamate = [x for x in _ast.walk(_ast.parse(src))
+                if isinstance(x, _ast.Call)
+                and getattr(x.func, "attr", None) == "controlla_domini"]
+    esito("### e il PASSO lo chiama DAVVERO, in entrambi gli integratori",
+          len(chiamate) == 2,
+          "%d chiamate, lette via AST: ### un controllo che nessuno chiama e- una tenda"
+          % len(chiamate))
+
+
 def sei_casi():
     import _genera as GEN
     import _presidi_era2 as PRE
@@ -567,6 +610,7 @@ def main():
     d = deriva(T, n, dt, C["passi"], it, tl)
     cache(T, n, dt, it, tl)
     rev = reversibilita(T, n, dt, it, tl)
+    domini(T, n, dt, it, tl)
     sei_casi()
     print()
     print("=" * 100)

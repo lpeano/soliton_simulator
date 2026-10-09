@@ -60,6 +60,11 @@ RAMI = {
         "solleva `NotImplementedError` per i tipi d-arco e per `coppia_coniugata`: "
         "### NON sceglie un valore, DICHIARA CHE NON SA FARLO -- ed e- il segnaposto "
         "ONESTO della decisione 13"),
+    ("primo_ordine/stato.py", "controlla_domini"): (
+        2, "validazione",
+        "i DUE controlli di dominio (punto 1): le componenti FINITE, e `> 0` per la "
+        "forma `finito-pos`. ### SOLLEVANO e NON TRONCANO -- troncare nasconderebbe "
+        "la violazione e cambierebbe la fisica in silenzio, fermare LA MOSTRA"),
     ("primo_ordine/hamiltoniana.py", "carica_termini"): (
         3, "smistamento",
         "salta i file che non sono `.py` e quelli senza `LEGGE`: ### la decisione viene "

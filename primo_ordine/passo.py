@@ -40,6 +40,7 @@ import os
 import numpy as np
 
 import hamiltoniana as HAM
+import stato as ST
 
 _QUI = os.path.dirname(os.path.abspath(__file__))
 
@@ -231,6 +232,10 @@ def passo_globale(st, ii, jj, dt, termini, iterazioni, toll):
     err = valida_composizione(COMPOSIZIONE_GLOBALE, 1)
     assert not err, err
     nuovo, scarto, usate = mezzo_implicito(st, ii, jj, dt, T, iterazioni, toll)
+    # ### ⛔ **IL DOMINIO SI CONTROLLA A OGNI PASSO, E FERMA** *(punto `1`)*.
+    # ### ### **Non tronca:** troncare nasconderebbe la violazione e cambierebbe la
+    # ### fisica ### **in silenzio** *(un ramo silenzioso non e- un ramo)*.
+    ST.controlla_domini(nuovo, "dopo un passo GLOBALE")
     return nuovo, {"composizione": COMPOSIZIONE_GLOBALE, "strati": 1,
                    "scarto": scarto, "iterazioni": usate}
 
@@ -271,6 +276,12 @@ def passo_locale(st, ii, jj, dt, termini, iterazioni, toll, gli_strati):
                                                np.asarray(jj)[sel], peso * dt,
                                                archi, iterazioni, toll)
         tracce.append((nome, peso, sc, us))
+    # ### ⛔ **IL DOMINIO, A OGNI PASSO, E FERMA** *(punto `1`)*.
+    # ### ⚠ **A ogni PASSO e non a ogni STRATO**, e lo dichiaro: un sotto-passo
+    # ### ### **intermedio** di una composizione simmetrica ### **non e- uno stato
+    # ### fisico** -- e- meta- di un-operazione. ### **Controllarlo la- vorrebbe dire
+    # ### fermare su uno stato che non esiste.**
+    ST.controlla_domini(corrente, "dopo un passo LOCALE")
     return corrente, {"composizione": comp, "strati": L, "tracce": tuple(tracce)}
 
 

@@ -29,6 +29,12 @@ Gira con:  python primo_ordine/leggi/schema.py        # il collaudo dello schema
 - **I RAMI** *(`Min`, `Max`, `Piecewise`, `Abs`…)*: ### **`A11`** — un limite e- ### **una LEGGE**, non una toppa; e ### **`A12`** — la cura e- ### **DERIVARE**, non tarare.
 
 ### **I RAMI E I SIMBOLI VIETATI stanno in `RAMI` e `VIETATI`.**
+
+### ⛔ **E I DOMINI** *(punto `1`)*: ogni tipo dichiara la sua ### **forma** in
+### `DOMINI`, e il controllo generato in `stato.py` ### **FERMA, non tronca.**
+### ⭐ **E- la lezione di `MAX-NODI-FERMA`** *(una guardia di memoria che cambiava
+### la fisica in silenzio: deve FERMARE)* **e di `RIPIEGHI-ZERO`** *(zero ripieghi che
+### cambiano la fisica in silenzio)*, piu- l-assioma del ramo silenzioso.
 """
 import io
 import os
@@ -61,6 +67,33 @@ TIPI_VARIABILE = {
     "coppia_coniugata": ("una coppia (q, p) coniugata -- ### AMMESSA e NON USATA: "
                          "e- la decisione 13, APERTA"),
 }
+
+# =====================================================================================
+#   I DOMINI -- punto `1`: ogni TIPO dichiara il suo, e un controllo ### **FERMA**
+# -------------------------------------------------------------------------------------
+#   ### \u26d4 **<<MAI TRONCARE>> E- LA PARTE CHE CONTA**, non il controllo: troncare
+#   ### ### **nasconde** la violazione e ### **cambia la fisica in silenzio** *(`A8`)*,
+#   ### fermare ### **la mostra.** ### **E- una lezione dell-era `1`, e i due ID
+#   ### che la portano stanno nel docstring.**
+#   ### \u2b50 **E IL DOMINIO STA SUL TIPO, non sulla variabile:** due variabili dello
+#   ### stesso tipo ### **hanno lo stesso dominio per costruzione** -- e metterlo sulla
+#   ### variabile sarebbe ### **un posto in piu- dove possono divergere.**
+#
+#   `tipo -> (forma, controllo)`:
+#     `finito`       ogni componente e- ### **finita** *(niente `NaN`, niente `inf`)*
+#     `finito-pos`   finita e ### **> 0**
+#     `fase-2pi`     finita, e ### **si legge modulo `2pi`** *(nessun limite: una fase
+#                    ### **non si tronca**, si riduce -- e la riduzione e- ESATTA)*
+# =====================================================================================
+DOMINI = {
+    "complesso_c2_nodo": "finito",
+    "reale_nodo": "finito",
+    "reale_arco": "finito",
+    "fase_arco": "fase-2pi",
+    "coppia_coniugata": "finito",
+}
+
+FORME_DOMINIO = ("finito", "finito-pos", "fase-2pi")
 
 # ### DOVE VIVE UNA VARIABILE: sul nodo o sull-arco. ### **Serve all-AMBITO:** un
 # ### `termine_nodo` ### **non puo- leggere una variabile d-arco**, ed e- il controllo che
@@ -191,6 +224,13 @@ def valida_variabile(d):
     for k in ("nome", "tipo", "voce", "scheda"):
         if not str(d.get(k) or "").strip():
             _err(fuori, idv, "manca `%s`" % k)
+    # ### \u26d4 **IL DOMINIO DEL TIPO DEVE ESSERE DICHIARATO** *(punto `1`)*: un
+    # ### tipo senza dominio e- ### **una variabile che nessuno puo- controllare.**
+    if d.get("tipo") in TIPI_VARIABILE and d.get("tipo") not in DOMINI:
+        _err(fuori, idv, "il tipo `%s` NON HA UN DOMINIO DICHIARATO in `DOMINI`. "
+                         "### Una variabile senza dominio e- una variabile che nessuno "
+                         "puo- controllare, e il punto 1 dice che il controllo FERMA"
+             % d.get("tipo"))
     if d.get("tipo") not in TIPI_VARIABILE:
         _err(fuori, idv, "`tipo` %r fuori vocabolario: %s"
              % (d.get("tipo"), sorted(TIPI_VARIABILE)))

@@ -2621,7 +2621,7 @@ etichette rimosse, con ### **`0` persi, `0` doppi, `0` conflitti**.
 | | |
 |---|---|
 | **file** | `primo_ordine/leggi/schema.py` |
-| **BLOB** *(sha1 dei byte grezzi)* | `f32d1e0e` |
+| **BLOB** *(sha1 dei byte grezzi)* | `bdd53fb2` |
 | **COMANDO** | `python primo_ordine/leggi/schema.py` *(il collaudo, `25`/`25`)* |
 | **cosa misura** | che una riga di tabella abbia **la forma**: vocabolario **chiuso**, `prova` booleano, `scheda` non vuota, **l'ambito dichiarato**, i parametri con **valore E origine**, il **bilancio** di una regola, la **voce** di un osservatore |
 | ### ⭐ **e il controllo che conta** | ### **un `termine_nodo` non può avere una variabile d'ARCO nell'ambito**: una variabile d'arco **collega due nodi**, quindi leggerla ### **È vedere il vicino** — e si vede **nella TABELLA**, prima di generare |
@@ -2660,8 +2660,8 @@ etichette rimosse, con ### **`0` persi, `0` doppi, `0` conflitti**.
 
 | | |
 |---|---|
-| **i file** | `primo_ordine/passo.py` *(BLOB `df1b1e50`)* · `primo_ordine/_collauda_passo.py` *(BLOB `f323d163`)* |
-| **COMANDO** | `python primo_ordine/_collauda_passo.py` *(il collaudo della catena, `38`/`38`)* |
+| **i file** | `primo_ordine/passo.py` *(BLOB `df1b1e50`)* · `primo_ordine/_collauda_passo.py` *(BLOB `129e61d0`)* |
+| **COMANDO** | `python primo_ordine/_collauda_passo.py` *(il collaudo della catena, `43`/`43`)* |
 | **cosa misura** | i **tre livelli** dello schedulatore *(quali permutazioni sono byte-identiche e quali no)* · **IL CONO**, per `PASSO` e per `STRATO` · la **deriva** di norma ed energia dei due candidati · **`A8b`** *(nessuna cache nascosta)* · **i SEI casi che devono fallire** |
 | ### ⭐ **e il collaudo sta in un file SUO** | il cono si misura **sulla norma**, la norma e' **un osservatore**, e `P-E4` vieta a `passo.py` di importare `osservatori/` *(`A17`)*. ### **Il presidio ha imposto la forma, invece di lasciarmela scegliere** |
 | ### ⛔ **e NON SCEGLIE l'integratore** | la scelta e' **di Luca** *(il nodo `INT`)*: i due candidati stanno nella **stessa tavola**, con cono, deriva e costo |
@@ -2674,7 +2674,7 @@ etichette rimosse, con ### **`0` persi, `0` doppi, `0` conflitti**.
 | | |
 |---|---|
 | **file** | `csv/_referto_infrastruttura_era2.py` |
-| **BLOB** *(sha1 dei byte grezzi)* | `ffec187a` |
+| **BLOB** *(sha1 dei byte grezzi)* | `d0e96fcd` |
 | **COMANDO** | `python csv/_referto_infrastruttura_era2.py` |
 | **cosa misura** | **FA GIRARE i sette collaudi** dell'era `2` e scrive `doc/REFERTO_infrastruttura_era2.md` **dalla loro uscita** |
 | ### ⛔ **e nessun numero e' ricopiato** | `L-NUMERI`: le cifre del referto escono **dallo `stdout` dei comandi**, e il referto porta **i comandi stessi**, verbatim. ### **Se un collaudo smette di passare, il referto LO DICE** invece di conservare il numero di ieri |
@@ -2688,7 +2688,7 @@ etichette rimosse, con ### **`0` persi, `0` doppi, `0` conflitti**.
 | | |
 |---|---|
 | **file** | `csv/_metodi_era2.py` |
-| **BLOB** *(sha1 dei byte grezzi)* | `a58e2f62` |
+| **BLOB** *(sha1 dei byte grezzi)* | `fea3be7a` |
 | **COMANDO** | `python csv/_metodi_era2.py` *(il presidio, e GENERA il documento)* · `--collaudo` *(nei due versi, `8`/`8`)* |
 | **cosa impedisce** | che `doc/METODI_era1_in_era2.md` **invecchi in silenzio**: ### **ogni metodo del perimetro DEVE avere una riga** *(come si applica · dove · stato)*, citato o no |
 | ### ⭐ **e il PERIMETRO lo calcola l'INDICE** | da ### **campi a vocabolario chiuso** *(`classe in (STANDARD, PRESIDIO)`, piu' le cure di architettura che il mandato nomina **per ID**)*. ### ⛔ **Nessun `titolo` e nessuna `descrizione` si leggono per decidere se una voce e' un metodo** — e' il principio del mandato **applicato a se stesso** |
@@ -2733,7 +2733,7 @@ etichette rimosse, con ### **`0` persi, `0` doppi, `0` conflitti**.
 | | |
 |---|---|
 | **file** | `csv/_rami_era2.py` |
-| **BLOB** *(sha1 dei byte grezzi)* | `21ae870f` |
+| **BLOB** *(sha1 dei byte grezzi)* | `335cd798` |
 | **COMANDO** | `python csv/_rami_era2.py` · `--collaudo` *(nei due versi, `10`/`10`)* |
 | ### ⛔ **cosa impedisce** | una funzione di fisica ### **con rami e NON dichiarata** · un ### **conteggio** che non coincide con l'AST · un ### **ruolo fuori vocabolario** · un `perche'` ### **troppo corto** |
 | ### ⭐ **e la parte che conta non e' contarli** | e' ### **dire a che servono:** un `if` non e' un difetto, ### **un `if` NON DICHIARATO lo e'** — perche' nessuno sa se smista, valida, o ### **sceglie in silenzio un pezzo di fisica** |
