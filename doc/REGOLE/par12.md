@@ -93,3 +93,14 @@ la riga **`PUSHATO:`**, che Luca vede a colpo d'occhio.
 | ### **la CARTELLA dell'era `2`** | ### **VUOTA**, *«da decidere da Luca»*. ### ⚠ **Finché è vuota `H-FISICA-FUORI-LISTA` non impedisce niente** *(`A9`: è una tenda)*, e il collaudo gira ### **su una cartella di PROVA in una COPIA** |
 | ### ⭐ **e mettere un file nella LISTA costa** | ciò che è nella lista è ### **soggetto a `H-REG-R`** *(nessuna legge senza la sua scheda)* ### **e a `H-P7`** *(il commento di ogni flag)*: ### **due presidi addosso** |
 | ### ⚠ **il numero dei hook NON sta nel titolo del §`12`** | ce lo avevo messo, e il titolo ### **andava riscritto a ogni presidio nuovo** — e `csv/_struttura_regole.py` ### **vedeva un titolo sparire** |
+
+---
+
+## `H-ID-OBBLIGATORIO`: **il rovescio di `H-INDICE`** *(2026-10-09)*
+
+| | |
+|---|---|
+| ### **la regola** | un commit che tocca ### **un file della LISTA** di `csv/_file_fisica.py`, o un ### **`doc/REFERTO_*` / `doc/REPERTO_*`**, ### **cita almeno un ID** dell'indice |
+| ### **il perché** | la fisica che cambia ### **ha UNA VOCE che la spiega**, e un referto è ### **la risposta a una domanda** — e la domanda è una voce. ### **Un commit che cambia una legge senza citare un ID dice «ho cambiato una legge» e non dice quale problema stava risolvendo** |
+| ### ⛔ **«un referto» è SOLO due prefissi** | `doc/REFERTO_*` e `doc/REPERTO_*`. ### **La mia definizione era «un file sotto `doc/`», cioè LARGA** — e una definizione larga in un presidio ### **rifiuta commit che nessuno voleva rifiutare** |
+| ### **la via d'uscita** | `[SENZA-INDICE: <motivo>]`, ### **a inizio riga** — ### **la stessa di `H-INDICE`**, di proposito: chi dichiara di non avere ID da citare lo dichiara ### **una volta** |

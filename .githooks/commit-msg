@@ -16,4 +16,9 @@ python csv/_hook_file_cambiati.py --controlla "$1" || exit 1
 # tracciati e NON ignorati sotto csv/ o doc/. Via d'uscita a INIZIO RIGA:
 #   [SENZA-NON-TRACCIATI: <motivo>]
 python csv/_hook_non_tracciati.py --controlla "$1" || exit 1
+# `H-ID-OBBLIGATORIO` (2026-10-09, punto 8): un commit che tocca un file della LISTA di
+# csv/_file_fisica.py, o un doc/REFERTO_* / doc/REPERTO_*, CITA almeno un ID dell'indice.
+# E' il ROVESCIO di H-INDICE, che controlla che gli ID citati ESISTANO. Via d'uscita a
+# INIZIO RIGA, la stessa:  [SENZA-INDICE: <motivo>]
+python csv/_hook_id_obbligatorio.py --controlla "$1" || exit 1
 exec python csv/_hook_relazione.py --controlla "$1"

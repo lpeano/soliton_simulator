@@ -83,8 +83,8 @@ era       1=538  DA_CLASSIFICARE=188  ENTRAMBE=96  2=24
 stato     SOSPESA=369  DA_CLASSIFICARE=188  CHIUSA=182  APERTA=82  AGENDA=24  SUPERATA=1
 ```
 
-### ✔ **FATTO IN QUESTO GIRO:** il punto `7`: `csv/_file_fisica.py` con ### **le due costanti**, i due presidi che ora ### **leggono la LISTA** invece del nome a mano, e `H-FISICA-FUORI-LISTA` — collaudo ### **`12`/`12` su una cartella di PROVA in una COPIA.** ### ⛔ **La CARTELLA resta VUOTA: il nome lo decide Luca.**
+### ✔ **FATTO IN QUESTO GIRO:** il punto `8`, ### **`H-ID-OBBLIGATORIO`**: un commit che tocca la fisica o un referto ### **cita almeno un ID.** Collaudo nei due versi: ### **`11`/`11`.** ### ⛔ **E la definizione di «referto» era MIA e LARGA:** la correzione `C` della coda l'ha stretta a ### **due prefissi.**
 
-### ⛔ **RESTA:** il punto `8` *(l'ID nel messaggio)* e il punto `9` *(i due referti, ### **con la domanda sul nome della cartella**)*.
+### ⛔ **RESTA:** il punto `9` — i controlli e i ### **due referti**, con ### **la domanda a Luca sul nome della cartella dell'era `2`.**
 
-**Ultimo lotto applicato:** `doc/indice/_lotti/v3_h_fisica.jsonl` *(`1` voce NUOVA: il presidio)*
+**Ultimo lotto applicato:** `doc/indice/_lotti/v3_h_id.jsonl` *(`1` voce NUOVA: il presidio)*

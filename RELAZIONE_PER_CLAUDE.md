@@ -10863,3 +10863,17 @@ Il punto `4`. `1` voce, `1` riga di storico; `F6` da `3` a `2` segnali; `6`/`6` 
 ### 📌 **LA DOMANDA A LUCA, che va nel referto:** ### **come si chiama la cartella del codice dell'era `2`?** Il presidio diventa vero ### **cambiando UNA STRINGA** in `csv/_file_fisica.py`.
 
 ### ⚠ **E UN DIFETTO DI `CLAUDE.md` CHE HO CURATO:** il titolo del §`12` conteneva ### **il numero dei hook** *(«e sono UNDICI»)*, quindi ### **andava riscritto a ogni presidio nuovo** — e `csv/_struttura_regole.py`, che verifica che ### **nessuna regola si perda**, ### **vedeva un titolo sparire.** Il numero ### **si conta dalla tabella**, e la rinomina sta in un elenco ### **dichiarato** *(`RINOMINATI`)*: ### ⛔ **la BASE del confronto NON si sposta, perche' spostarla avrebbe perdonato TUTTO CIO' CHE E' AVVENUTO PRIMA.**
+
+---
+
+## `H-ID-OBBLIGATORIO`: **il rovescio di `H-INDICE`**, e una definizione MIA che era LARGA (2026-10-09)
+
+`11`/`11` il collaudo nei due versi, `1` voce nuova nell'indice, `CLAUDE.md` a `296` righe. Nessuna corsa; il simulatore resta `b8c21049`.
+
+### ⭐ **ERA MEZZO CONTROLLO, COME `F12`:** `H-INDICE` verifica che gli ID citati ### **esistano**, e ### **che ce ne sia almeno UNO non lo chiedeva nessuno.** Un commit che cambia una legge senza citare un ID dice *«ho cambiato una legge»* ### **e non dice quale problema stava risolvendo** — e un referto che non cita niente e- ### **una misura senza committente.**
+
+### ⛔ **E LA DEFINIZIONE DI «REFERTO» ERA MIA, E LARGA.** La correzione `C` della coda dice: *«un referto sotto `doc/` vuol dire SOLO i file `doc/REFERTO_*` e `doc/REPERTO_*`, non qualunque file sotto `doc/`»*. ### ⭐ **Una definizione larga in un presidio rifiuta commit che nessuno voleva rifiutare** — e il collaudo ha ### **il braccio che lo prova**: `doc/STATO_RUN.md`, `doc/REGOLE/par9.md` e `doc/indice/voci.jsonl` ### **NON contano.**
+
+### ✔ **E RIUSA IL PARSER DI `H-INDICE`, non uno suo:** ### **due presidi che leggono la stessa forma di ID con due parser diversi divergono** — ed e- ### **esattamente il difetto che ho pagato due commit fa** sul `superata_da`, dove la copia della regola nell'applicatore ### **era vecchia.**
+
+### ⚠ **E LA SENTINELLA DEL COLLAUDO SI SCEGLIE A RUN TIME**, riusando quella di `H-INDICE`: un ID finto ### **scritto nel codice finisce nei referti** e al giro dopo ### **e- un ID NOTO** — e il caso che DEVE fallire ### **passa.** `H-INDICE` lo ha imparato ### **due volte**, e qui non si ripete.

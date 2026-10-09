@@ -2559,3 +2559,17 @@ etichette rimosse, con ### **`0` persi, `0` doppi, `0` conflitti**.
 | ### ✔ **e allora il collaudo gira ALTROVE** | si copia `_file_fisica.py` in una cartella temporanea, si scrive **un nome di prova nella costante della COPIA**, e si fanno scattare i casi. **Il presidio diventa vero cambiando UNA STRINGA** |
 | ### ⭐ **e prova anche che TACE** | con la cartella vuota `intrusi` è **sempre vuoto**: **un presidio che tace va provato che taccia**, altrimenti nessuno sa se tace perché è spento o perché è rotto |
 | **chi legge la LISTA** | `csv/_hook_fisica.py` *(`H-REG-R`)* e `csv/_presidio_commenti_flag.py` *(`H-P7`)*: prima scrivevano `soliton_simulator.py` **a mano** |
+
+---
+
+### `csv/_hook_id_obbligatorio.py` — **L'ID NEL MESSAGGIO** *(2026-10-09)*
+
+| | |
+|---|---|
+| **file** | `csv/_hook_id_obbligatorio.py` |
+| **BLOB** *(sha1 dei byte grezzi)* | `435c6919` |
+| **COMANDO** | `python csv/_hook_id_obbligatorio.py --collaudo` *(`11`/`11`)*; nel `commit-msg`: `--controlla $1` |
+| **cosa misura** | **quali commit contano** *(un file della LISTA, o un `doc/REFERTO_*`/`doc/REPERTO_*`)* e **se il messaggio cita almeno un ID NOTO** |
+| ### ⭐ **è il ROVESCIO di `H-INDICE`** | quello controlla che gli ID citati ### **esistano**; questo che ### **ce ne sia almeno UNO** |
+| ### ⛔ **e «un referto» è SOLO due prefissi** | `doc/REFERTO_*` e `doc/REPERTO_*`, non qualunque file sotto `doc/`: ### **la mia definizione era LARGA**, e una definizione larga in un presidio ### **rifiuta commit che nessuno voleva rifiutare** |
+| ### ⚠ **e riusa il parser di `H-INDICE`** | ### **due presidi che leggono la stessa forma di ID con due parser diversi divergono** — è il difetto che ho pagato sul `superata_da` due commit fa |
