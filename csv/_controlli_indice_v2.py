@@ -218,6 +218,11 @@ def main():
     # ### <<ANNOTAZIONE DEL 2026-10-02>>)*, mentre `L3` le voleva `SOSPESA`.
     # ### ⭐ **Stessa riconciliazione, stessa ragione:** la parola piu- recente,
     # ### ### **e cita.**
+    # ### E `REG-R` dalla TERZA LETTURA *(<<l-hook che RIFIUTA>>, `media`, trovata in
+    # ### `T1`)*: la lista `1` le dava un altro dominio. ### **Stessa riconciliazione**, e
+    # ### stavolta ### **confermata in anticipo**: il mandato dice *<<vale il file del
+    # ### guardiano, che cita>>*.
+    CORRETTE_V3["REG-R"] = ("METODO", "ENTRAMBE", "APERTA")
     CORRETTE_V3["REGISTRO_FISICA:U2-6"] = ("METODO", "1", "CHIUSA")
     CORRETTE_V3["MITOSI-2LAM-ACCESO"] = ("DOCUMENTAZIONE", "1", "CHIUSA")
     CORRETTE_V3["CLI-1"] = ("METODO", "1", "SOSPESA")

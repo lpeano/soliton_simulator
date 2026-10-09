@@ -10817,3 +10817,21 @@ Il punto `4`. `1` voce, `1` riga di storico; `F6` da `3` a `2` segnali; `6`/`6` 
 ### ⚠ **E `C3` AVEVA DUE FALLIMENTI NUOVI, dai punti `1` e `2`:** `REGISTRO_FISICA:U2-6` e `MITOSI-2LAM-ACCESO` sono fra le `47` chiusure, quindi e- ### **lo stesso file del guardiano** a dirle `CHIUSA` mentre `L3` le voleva `SOSPESA`. ### **Stessa riconciliazione, stessa ragione: la parola piu- recente, E CITA.**
 
 ### ⛔ **E UN BRACCIO DI COLLAUDO SI SAREBBE SPENTO DA SE-, per la seconda volta in questo giro:** il caso *«`F6` DEVE scattare su `G1`»* legge la nota, e ### **il punto `4` la toglie.** L'ho ### **ancorato a `7e4c59c`**, e ho aggiunto il braccio che prova che ### **sulla `G1` di oggi `F6` tace.** *(La prima volta: le cinque di `F9`.)* ### ⭐ **Un caso a risposta nota e' una FOTO, non uno specchio.**
+
+---
+
+## LA TERZA LETTURA: **`47` righe su `59` applicate, e TRE difetti MIEI trovati dai presidi** (2026-10-09)
+
+`47` applicate, `11` non applicate, `1` niente da fare — e i conti tornano a `59` con un `assert`. `6`/`6` i controlli, `53`/`53` il collaudo dei presidi. Nessuna corsa; il simulatore resta `b8c21049`.
+
+### ⛔ **TRE DIFETTI MIEI, E NESSUNO L'HO TROVATO IO.**
+
+| | il difetto | chi l'ha trovato |
+|---|---|---|
+| `1` | ### **`superata_da` giudicato come campo INDIPENDENTE**: `Z21` e `L-SOGLIA` hanno perso ### **entrambi** i campi — il `superata_da` cadeva per *«in `T3` non basta»*, e poi lo `stato` cadeva per ### **<<SUPERATA senza dire da che cosa>>**, cioe' ### **per la mancanza del campo che avevo appena scartato io** | ### **lo schema**, rifiutando |
+| `2` | ### **la regola di `superata_da` era DUPLICATA**: la copia nell'applicatore diceva *«ne' decisione, ne' assioma»* e il validatore ### **accettava gia- una voce.** ### **Due copie della stessa regola divergono** | ### **il rifiuto stesso**, che citava una ragione ### **che il repo aveva smesso di avere** |
+| `3` | ### **la `chiusura` restava piena su una voce che usciva da `CHIUSA`**: `L-SOGLIA` passava a `SUPERATA` ### **portandosi dietro il commit di chiusura** | ### **`F12`**, acceso due commit prima, ### **rifiutando il lotto senza scrivere niente** |
+
+### ⭐ **E IL TERZO E' LA PROVA CHE I PRESIDI SERVONO:** `F12` l'ho scritto io stamattina, e ### **mi ha fermato nel pomeriggio su un caso che non avevo previsto.** ### **`SUPERATA` non e- `CHIUSA`: SOSTITUISCE la chiusura, non la conferma.**
+
+### ✔ **E LE DUE CORREZIONI DEL GUARDIANO A SE- STESSO, che il mandato chiede di dichiarare:** la classe `(B)` del censimento e' ### **«COSTRUITA E MAI MISURATA»**, non testo falso — le `13` `CENS-B*` sono ### **FRONTI aperti**, e io leggevo *«censimento delle intenzioni»* come *«il testo dichiara il falso»*; e `REGISTRO_FISICA:P*` sono ### **PREVISIONI, non esiti** — `6` voci a `CRITERIO`/`METODO`, e questo spiega perche' la riga di `P2` dice *«P2 E' FALLITA»*: ### **non e' l'esito di una misura, e' il CONFRONTO fra la previsione e la misura.**

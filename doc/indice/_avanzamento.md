@@ -83,8 +83,8 @@ era       1=538  DA_CLASSIFICARE=188  ENTRAMBE=96  2=24
 stato     SOSPESA=369  DA_CLASSIFICARE=188  CHIUSA=182  APERTA=82  AGENDA=24  SUPERATA=1
 ```
 
-### ✔ **FATTO IN QUESTO GIRO:** il punto `4`: la nota di `G1` ### **TOLTA** *(`meta_togli`)*, e `C3` ### **allineato al file del guardiano** — che adesso ### **lo conferma lui.** `F6` passa da `3` a `2` segnali.
+### ✔ **FATTO IN QUESTO GIRO:** il punto `5`, ### **la terza lettura**: delle `59` righe ### **`47` applicate**, `11` non applicate *(citazione non trovata)*, `1` niente da fare. ### ⛔ **E TRE DIFETTI MIEI, trovati dai presidi e dallo schema**, non da me.
 
-### ⛔ **RESTA:** i punti `5`…`9`.
+### ⛔ **RESTA:** la ### **parte II** — `F11` *(punto `6`)*, `csv/_file_fisica.py` *(punto `7`)*, l'ID nel messaggio *(punto `8`)* — e i due referti *(punto `9`)*.
 
-**Ultimo lotto applicato:** `doc/indice/_lotti/v3_g1.jsonl` *(`1` voce)*
+**Ultimo lotto applicato:** `doc/indice/_lotti/v3_guardiano_b.jsonl` *(`47` voci, in due passate: `45` + `2`)*

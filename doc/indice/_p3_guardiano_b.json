@@ -1,0 +1,911 @@
+{
+ "applicate": [
+  {
+   "id": "Z7",
+   "campi": {
+    "stato": "CHIUSA",
+    "classe": "DIFETTO",
+    "chiusura": {
+     "criterio": "verifica completa del guardiano: ① CABLATA [COMMIT RICAVATO: il primo commit che introduce la frase in doc/RAMIFICAZIONI.md, trovato con git log -S --reverse; riga 316 di `doc/RAMIFICAZIONI.md`]",
+     "commit": "fa1089c",
+     "data": "2026-10-09"
+    }
+   },
+   "meta": {},
+   "livello": "T3",
+   "conf": "alta"
+  },
+  {
+   "id": "RAMI-OFF-CURA2",
+   "campi": {
+    "stato": "CHIUSA",
+    "classe": "CURA",
+    "chiusura": {
+     "criterio": "verifica completa del guardiano: COPIATI DAL SORGENTE [COMMIT RICAVATO: il primo commit che introduce la frase in csv/_archivio/rami_off_cura2.py, trovato con git log -S --reverse; riga 5 di `csv/_archivio/rami_off_cura2.py`]",
+     "commit": "6b73f40",
+     "data": "2026-10-09"
+    }
+   },
+   "meta": {},
+   "livello": "T4",
+   "conf": "media"
+  },
+  {
+   "id": "INDICE-LEGGERO",
+   "campi": {
+    "stato": "CHIUSA",
+    "chiusura": {
+     "criterio": "verifica completa del guardiano: IL TITOLO BREVE DEV'ESSERE BREVE [COMMIT RICAVATO: il primo commit che introduce la frase in csv/_indice_id.py, trovato con git log -S --reverse; riga 153 di `csv/_indice_id.py`]",
+     "commit": "469d2a7",
+     "data": "2026-10-09"
+    }
+   },
+   "meta": {},
+   "livello": "T4",
+   "conf": "media"
+  },
+  {
+   "id": "B7-SHAKE",
+   "campi": {
+    "stato": "CHIUSA",
+    "chiusura": {
+     "criterio": "verifica completa del guardiano: la precessione mutua non organizza [COMMIT RICAVATO: il primo commit che introduce la frase in doc/RAMIFICAZIONI.md, trovato con git log -S --reverse; riga 211 di `doc/RAMIFICAZIONI.md`]",
+     "commit": "f6d432c",
+     "data": "2026-10-09"
+    }
+   },
+   "meta": {},
+   "livello": "T0",
+   "conf": "media"
+  },
+  {
+   "id": "Z24",
+   "campi": {
+    "stato": "CHIUSA",
+    "chiusura": {
+     "criterio": "verifica completa del guardiano: Z24 CHIUSA [COMMIT RICAVATO: il primo commit che introduce la frase in doc/RAMIFICAZIONI.md, trovato con git log -S --reverse; riga 338 di `doc/RAMIFICAZIONI.md`]",
+     "commit": "fa1089c",
+     "data": "2026-10-09"
+    }
+   },
+   "meta": {},
+   "livello": "T3",
+   "conf": "media"
+  },
+  {
+   "id": "Z21",
+   "campi": {
+    "stato": "SUPERATA",
+    "superata_da": "Z26"
+   },
+   "meta": {},
+   "livello": "T3",
+   "conf": "media"
+  },
+  {
+   "id": "L-SOGLIA",
+   "campi": {
+    "stato": "SUPERATA",
+    "superata_da": "P1-sexies",
+    "chiusura": {}
+   },
+   "meta": {},
+   "livello": "T4",
+   "conf": "media"
+  },
+  {
+   "id": "P4",
+   "campi": {
+    "classe": "STANDARD"
+   },
+   "meta": {},
+   "livello": "T0",
+   "conf": "alta"
+  },
+  {
+   "id": "P5",
+   "campi": {
+    "classe": "STANDARD"
+   },
+   "meta": {},
+   "livello": "T0",
+   "conf": "alta"
+  },
+  {
+   "id": "L-MEMORIA-PRIMA",
+   "campi": {
+    "classe": "STANDARD"
+   },
+   "meta": {},
+   "livello": "T1",
+   "conf": "alta"
+  },
+  {
+   "id": "P1-bis",
+   "campi": {
+    "classe": "STANDARD"
+   },
+   "meta": {},
+   "livello": "T0",
+   "conf": "media"
+  },
+  {
+   "id": "CENS-B1",
+   "campi": {
+    "classe": "FRONTE"
+   },
+   "meta": {},
+   "livello": "T4",
+   "conf": "alta"
+  },
+  {
+   "id": "CENS-B2",
+   "campi": {
+    "classe": "FRONTE",
+    "dominio": "FISICA"
+   },
+   "meta": {},
+   "livello": "T4",
+   "conf": "alta"
+  },
+  {
+   "id": "CENS-B3",
+   "campi": {
+    "classe": "FRONTE",
+    "dominio": "FISICA"
+   },
+   "meta": {},
+   "livello": "T4",
+   "conf": "alta"
+  },
+  {
+   "id": "CENS-B5",
+   "campi": {
+    "classe": "FRONTE",
+    "dominio": "FISICA"
+   },
+   "meta": {},
+   "livello": "T4",
+   "conf": "alta"
+  },
+  {
+   "id": "CENS-B6",
+   "campi": {
+    "classe": "FRONTE",
+    "dominio": "FISICA"
+   },
+   "meta": {},
+   "livello": "T4",
+   "conf": "alta"
+  },
+  {
+   "id": "CENS-B7",
+   "campi": {
+    "classe": "FRONTE"
+   },
+   "meta": {},
+   "livello": "T4",
+   "conf": "alta"
+  },
+  {
+   "id": "CENS-B9",
+   "campi": {
+    "classe": "FRONTE",
+    "dominio": "FISICA"
+   },
+   "meta": {},
+   "livello": "T4",
+   "conf": "alta"
+  },
+  {
+   "id": "CENS-B10",
+   "campi": {
+    "classe": "FRONTE",
+    "dominio": "FISICA"
+   },
+   "meta": {},
+   "livello": "T4",
+   "conf": "alta"
+  },
+  {
+   "id": "CENS-B11",
+   "campi": {
+    "classe": "FRONTE",
+    "dominio": "FISICA"
+   },
+   "meta": {},
+   "livello": "T4",
+   "conf": "alta"
+  },
+  {
+   "id": "CENS-B12",
+   "campi": {
+    "classe": "FRONTE",
+    "dominio": "FISICA"
+   },
+   "meta": {},
+   "livello": "T4",
+   "conf": "alta"
+  },
+  {
+   "id": "CENS-B13",
+   "campi": {
+    "classe": "FRONTE",
+    "dominio": "FISICA"
+   },
+   "meta": {},
+   "livello": "T4",
+   "conf": "alta"
+  },
+  {
+   "id": "CENS-B14",
+   "campi": {
+    "classe": "FRONTE",
+    "dominio": "FISICA"
+   },
+   "meta": {},
+   "livello": "T4",
+   "conf": "alta"
+  },
+  {
+   "id": "CENS-B15",
+   "campi": {
+    "classe": "FRONTE",
+    "dominio": "FISICA"
+   },
+   "meta": {},
+   "livello": "T4",
+   "conf": "alta"
+  },
+  {
+   "id": "REG-B",
+   "campi": {
+    "stato": "SOSPESA",
+    "classe": "FRONTE",
+    "dominio": "METODO",
+    "era": "1"
+   },
+   "meta": {},
+   "livello": "T1",
+   "conf": "media"
+  },
+  {
+   "id": "REG-C",
+   "campi": {
+    "stato": "SOSPESA",
+    "classe": "FRONTE",
+    "dominio": "METODO",
+    "era": "1"
+   },
+   "meta": {},
+   "livello": "T0",
+   "conf": "media"
+  },
+  {
+   "id": "REGISTRO_FISICA:P1",
+   "campi": {
+    "classe": "CRITERIO",
+    "dominio": "METODO"
+   },
+   "meta": {},
+   "livello": "T3",
+   "conf": "alta"
+  },
+  {
+   "id": "REGISTRO_FISICA:P2",
+   "campi": {
+    "classe": "CRITERIO",
+    "dominio": "METODO"
+   },
+   "meta": {},
+   "livello": "T4",
+   "conf": "alta"
+  },
+  {
+   "id": "REGISTRO_FISICA:P3",
+   "campi": {
+    "classe": "CRITERIO",
+    "dominio": "METODO"
+   },
+   "meta": {},
+   "livello": "T4",
+   "conf": "alta"
+  },
+  {
+   "id": "REGISTRO_FISICA:P3b",
+   "campi": {
+    "classe": "CRITERIO",
+    "dominio": "METODO"
+   },
+   "meta": {},
+   "livello": "T3",
+   "conf": "alta"
+  },
+  {
+   "id": "REGISTRO_FISICA:P4",
+   "campi": {
+    "classe": "CRITERIO",
+    "dominio": "METODO"
+   },
+   "meta": {},
+   "livello": "T4",
+   "conf": "alta"
+  },
+  {
+   "id": "REGISTRO_FISICA:P5",
+   "campi": {
+    "classe": "CRITERIO",
+    "dominio": "METODO"
+   },
+   "meta": {},
+   "livello": "T4",
+   "conf": "alta"
+  },
+  {
+   "id": "M1",
+   "campi": {
+    "classe": "FRONTE"
+   },
+   "meta": {},
+   "livello": "T1",
+   "conf": "media"
+  },
+  {
+   "id": "CELLE-NAN-APPESE-NOME-SCADUTO",
+   "campi": {
+    "classe": "DIFETTO"
+   },
+   "meta": {},
+   "livello": "T0",
+   "conf": "media"
+  },
+  {
+   "id": "COMPONENTI:D1",
+   "campi": {
+    "classe": "CURA"
+   },
+   "meta": {},
+   "livello": "T0",
+   "conf": "media"
+  },
+  {
+   "id": "COMPONENTI:D2",
+   "campi": {
+    "classe": "CURA"
+   },
+   "meta": {},
+   "livello": "T0",
+   "conf": "media"
+  },
+  {
+   "id": "D09",
+   "campi": {
+    "classe": "MISURA"
+   },
+   "meta": {},
+   "livello": "T4",
+   "conf": "media"
+  },
+  {
+   "id": "S10",
+   "campi": {
+    "classe": "MISURA"
+   },
+   "meta": {},
+   "livello": "T0",
+   "conf": "media"
+  },
+  {
+   "id": "REG-V",
+   "campi": {
+    "classe": "FRONTE"
+   },
+   "meta": {},
+   "livello": "T4",
+   "conf": "media"
+  },
+  {
+   "id": "REG-R",
+   "campi": {
+    "dominio": "METODO"
+   },
+   "meta": {},
+   "livello": "T1",
+   "conf": "media"
+  },
+  {
+   "id": "CURA-3",
+   "campi": {
+    "classe": "FRONTE"
+   },
+   "meta": {},
+   "livello": "T1",
+   "conf": "media"
+  },
+  {
+   "id": "COPPIA-RAMP",
+   "campi": {
+    "classe": "FRONTE"
+   },
+   "meta": {},
+   "livello": "T1",
+   "conf": "media"
+  },
+  {
+   "id": "A3-CHIRALE",
+   "campi": {
+    "classe": "FRONTE"
+   },
+   "meta": {},
+   "livello": "T1",
+   "conf": "media"
+  },
+  {
+   "id": "CARICA-ROTAZIONE",
+   "campi": {
+    "classe": "FRONTE"
+   },
+   "meta": {},
+   "livello": "T4",
+   "conf": "media"
+  },
+  {
+   "id": "MITOSI-TASSO",
+   "campi": {
+    "classe": "FRONTE"
+   },
+   "meta": {},
+   "livello": "T1",
+   "conf": "media"
+  },
+  {
+   "id": "FILI-CORTI",
+   "campi": {
+    "classe": "FRONTE"
+   },
+   "meta": {},
+   "livello": "T0",
+   "conf": "media"
+  },
+  {
+   "id": "POTATURA-GUARDIE",
+   "campi": {
+    "classe": "FRONTE"
+   },
+   "meta": {},
+   "livello": "T4",
+   "conf": "media"
+  }
+ ],
+ "non_applicate": [
+  {
+   "id": "DRIVER-SCENA-II",
+   "cambi": {
+    "classe": "CURA",
+    "stato": "CHIUSA"
+   },
+   "citazione": "6/6 PASS",
+   "conf": "alta",
+   "perche": "NON COMPARE: ne- nella voce, ne- nella riga, ne- nella sezione, ne- nel file `doc/STATO_RUN.md`",
+   "riga": "| **OSSERVABILE-P1 — APERTA il 2026-09-26 (rilievo di Luca)** | **NON ESISTE UNO STRUMENTO UFFICIALE PER LA DISTANZA FRA LE MASSE.** La `PROVA 1` chiede *«due masse si avvicinano?»*, e la distanza del sistema e' **lungo il GRAFO pesato con `d`** *(`A13`: la distanza sta sugli archi, non su `pos`)*. "
+  },
+  {
+   "id": "M0a",
+   "cambi": {
+    "classe": "MISURA",
+    "stato": "CHIUSA"
+   },
+   "citazione": "3/3 come atteso",
+   "conf": "media",
+   "perche": "NON COMPARE: ne- nella voce, ne- nella riga, ne- nella sezione, ne- nel file `csv/_test_fork/_misura0_scena_ii.py`",
+   "riga": ""
+  },
+  {
+   "id": "REGISTRO_FISICA:V8",
+   "cambi": {
+    "stato": "CHIUSA"
+   },
+   "citazione": "LA MISURA CHE L'HA DECISA",
+   "conf": "media",
+   "perche": "### COMPARE NEL FILE `doc/REGISTRO_FISICA.md` MA FUORI DALLA SEZIONE della voce, e la regola chiede la riga o la sezione che la contiene",
+   "riga": "| **`V8`** | **la DISTRIBUZIONE di `\\|dx\\|/d`**, non solo il suo tipico | è **il numero che decide fra piana e Itô**: `p50`, `p99`, `max`. Se `max ≪ 1` la non-monotonia di Itô **non si manifesta mai** |"
+  },
+  {
+   "id": "REGISTRO_FISICA:V9",
+   "cambi": {
+    "stato": "CHIUSA"
+   },
+   "citazione": "LA MISURA CHE L'HA DECISA",
+   "conf": "media",
+   "perche": "### COMPARE NEL FILE `doc/REGISTRO_FISICA.md` MA FUORI DALLA SEZIONE della voce, e la regola chiede la riga o la sezione che la contiene",
+   "riga": "| **`V9`** | **quante scritture hanno `\\|dx\\|/d > 1`, e quante `> 2`** | `> 1`: Itô **comprime**; `> 2`: Itô **inverte il verso**. **Se sono zero, la scelta è libera; se non lo sono, la piana è l'unica monotona** |"
+  },
+  {
+   "id": "Z119",
+   "cambi": {
+    "classe": "MISURA"
+   },
+   "citazione": "non si corregge prima della decisione di Luca",
+   "conf": "media",
+   "perche": "NON COMPARE: ne- nella voce, ne- nella riga, ne- nella sezione, ne- nel file `doc/RAMIFICAZIONI.md`",
+   "riga": "| **Z119** 🟩`CHIUSA PER DIMOSTRAZIONE + MISURA` | **L'ANTIPARTICELLA DI SCHWINGER NASCE CON `+2π`, E NEL CAMPO E' IDENTICA ALLA PARTICELLA. Il ramo E' ATTIVO: scatta `90`-`172` volte su 600 passi** (2026-09-22, rilievo di Luca; letto dal sorgente `:5443-5444` e misurato dai bilanci dei tre bracci di"
+  },
+  {
+   "id": "ETC-PASSO",
+   "cambi": {
+    "stato": "SUPERATA",
+    "superata_da": "SCHED-PASSO"
+   },
+   "citazione": "chiusa come superata il 2026-09-28",
+   "conf": "alta",
+   "perche": "NON COMPARE: ne- nella voce, ne- nella riga, ne- nella sezione, ne- nel file `doc/TASK_HISTORY/2026-09-27_etc-passo.md`",
+   "riga": ""
+  },
+  {
+   "id": "P6",
+   "cambi": {
+    "classe": "STANDARD",
+    "stato": "SUPERATA",
+    "superata_da": "P3"
+   },
+   "citazione": "fuse dentro",
+   "conf": "alta",
+   "perche": "NON COMPARE: ne- nella voce, ne- nella riga, ne- nella sezione, ne- nel file `CLAUDE.md`",
+   "riga": ""
+  },
+  {
+   "id": "STANDARD-8",
+   "cambi": {
+    "stato": "SUPERATA",
+    "superata_da": "A12"
+   },
+   "citazione": "e non si duplica",
+   "conf": "media",
+   "perche": "NON COMPARE: ne- nella voce, ne- nella riga, ne- nella sezione, ne- nel file `doc/ASSIOMI.md`",
+   "riga": ""
+  },
+  {
+   "id": "STANDARD-6",
+   "cambi": {
+    "stato": "SUPERATA",
+    "superata_da": "H-INDICE"
+   },
+   "citazione": "il hook",
+   "conf": "media",
+   "perche": "NON COMPARE: ne- nella voce, ne- nella riga, ne- nella sezione, ne- nel file `doc/INDICE_ID.tsv`",
+   "riga": ""
+  },
+  {
+   "id": "P3",
+   "cambi": {
+    "classe": "STANDARD"
+   },
+   "citazione": "del hook",
+   "conf": "alta",
+   "perche": "NON COMPARE: ne- nella voce, ne- nella riga, ne- nella sezione, ne- nel file `CLAUDE.md`",
+   "riga": ""
+  },
+  {
+   "id": "M-SPINORE",
+   "cambi": {
+    "classe": "FRONTE"
+   },
+   "citazione": "è un fronte, non una cura",
+   "conf": "alta",
+   "perche": "### COMPARE NEL FILE `doc/MEMORIE_MANCANTI.md` MA FUORI DALLA SEZIONE della voce, e la regola chiede la riga o la sezione che la contiene",
+   "riga": "# §`5` — **LE MEMORIE CHE MANCANO** > ### 📌 **Ogni scheda porta i SETTE CAMPI di `L-MEMORIA-PRIMA`**, più la grandezza > esistente da cui nasce, i prerequisiti, la misura che la decide, il posto in coda, e i > ### **rischi — anelli di retroazione compresi — con il caso che DEVE FALLIRE nel suo > sig"
+  }
+ ],
+ "lasciate": [
+  {
+   "id": "S02",
+   "campo": "-",
+   "valore": "-",
+   "perche": "NIENTE DA FARE: `stato` e- GIA- `SUPERATA`; `superata_da` e- GIA- `D31`",
+   "riga": ""
+  }
+ ],
+ "livelli": {
+  "T3": 5,
+  "T4": 25,
+  "T0": 10,
+  "T1": 8
+ },
+ "esiti": [
+  {
+   "id": "Z7",
+   "verdetto": "APPLICATA",
+   "dettaglio": "['chiusura', 'classe', 'stato'] in `T3` (alta)"
+  },
+  {
+   "id": "DRIVER-SCENA-II",
+   "verdetto": "NON_APPLICATA",
+   "dettaglio": "NON COMPARE: ne- nella voce, ne- nella riga, ne- nella sezione, ne- nel file `doc/STATO_RUN.md`"
+  },
+  {
+   "id": "M0a",
+   "verdetto": "NON_APPLICATA",
+   "dettaglio": "NON COMPARE: ne- nella voce, ne- nella riga, ne- nella sezione, ne- nel file `csv/_test_fork/_misura0_scena_ii.py`"
+  },
+  {
+   "id": "RAMI-OFF-CURA2",
+   "verdetto": "APPLICATA",
+   "dettaglio": "['chiusura', 'classe', 'stato'] in `T4` (media)"
+  },
+  {
+   "id": "INDICE-LEGGERO",
+   "verdetto": "APPLICATA",
+   "dettaglio": "['chiusura', 'stato'] in `T4` (media)"
+  },
+  {
+   "id": "REGISTRO_FISICA:V8",
+   "verdetto": "NON_APPLICATA",
+   "dettaglio": "### COMPARE NEL FILE `doc/REGISTRO_FISICA.md` MA FUORI DALLA SEZIONE della voce, e la regola chiede la riga o la sezione che la contiene"
+  },
+  {
+   "id": "REGISTRO_FISICA:V9",
+   "verdetto": "NON_APPLICATA",
+   "dettaglio": "### COMPARE NEL FILE `doc/REGISTRO_FISICA.md` MA FUORI DALLA SEZIONE della voce, e la regola chiede la riga o la sezione che la contiene"
+  },
+  {
+   "id": "B7-SHAKE",
+   "verdetto": "APPLICATA",
+   "dettaglio": "['chiusura', 'stato'] in `T0` (media)"
+  },
+  {
+   "id": "Z24",
+   "verdetto": "APPLICATA",
+   "dettaglio": "['chiusura', 'stato'] in `T3` (media)"
+  },
+  {
+   "id": "Z119",
+   "verdetto": "NON_APPLICATA",
+   "dettaglio": "NON COMPARE: ne- nella voce, ne- nella riga, ne- nella sezione, ne- nel file `doc/RAMIFICAZIONI.md`"
+  },
+  {
+   "id": "S02",
+   "verdetto": "NIENTE_DA_FARE",
+   "dettaglio": "`stato` e- GIA- `SUPERATA`; `superata_da` e- GIA- `D31`"
+  },
+  {
+   "id": "Z21",
+   "verdetto": "APPLICATA",
+   "dettaglio": "['stato', 'superata_da'] in `T3` (media)"
+  },
+  {
+   "id": "ETC-PASSO",
+   "verdetto": "NON_APPLICATA",
+   "dettaglio": "NON COMPARE: ne- nella voce, ne- nella riga, ne- nella sezione, ne- nel file `doc/TASK_HISTORY/2026-09-27_etc-passo.md`"
+  },
+  {
+   "id": "P6",
+   "verdetto": "NON_APPLICATA",
+   "dettaglio": "NON COMPARE: ne- nella voce, ne- nella riga, ne- nella sezione, ne- nel file `CLAUDE.md`"
+  },
+  {
+   "id": "STANDARD-8",
+   "verdetto": "NON_APPLICATA",
+   "dettaglio": "NON COMPARE: ne- nella voce, ne- nella riga, ne- nella sezione, ne- nel file `doc/ASSIOMI.md`"
+  },
+  {
+   "id": "L-SOGLIA",
+   "verdetto": "APPLICATA",
+   "dettaglio": "['chiusura', 'stato', 'superata_da'] in `T4` (media)"
+  },
+  {
+   "id": "STANDARD-6",
+   "verdetto": "NON_APPLICATA",
+   "dettaglio": "NON COMPARE: ne- nella voce, ne- nella riga, ne- nella sezione, ne- nel file `doc/INDICE_ID.tsv`"
+  },
+  {
+   "id": "P3",
+   "verdetto": "NON_APPLICATA",
+   "dettaglio": "NON COMPARE: ne- nella voce, ne- nella riga, ne- nella sezione, ne- nel file `CLAUDE.md`"
+  },
+  {
+   "id": "P4",
+   "verdetto": "APPLICATA",
+   "dettaglio": "['classe'] in `T0` (alta)"
+  },
+  {
+   "id": "P5",
+   "verdetto": "APPLICATA",
+   "dettaglio": "['classe'] in `T0` (alta)"
+  },
+  {
+   "id": "L-MEMORIA-PRIMA",
+   "verdetto": "APPLICATA",
+   "dettaglio": "['classe'] in `T1` (alta)"
+  },
+  {
+   "id": "P1-bis",
+   "verdetto": "APPLICATA",
+   "dettaglio": "['classe'] in `T0` (media)"
+  },
+  {
+   "id": "CENS-B1",
+   "verdetto": "APPLICATA",
+   "dettaglio": "['classe'] in `T4` (alta)"
+  },
+  {
+   "id": "CENS-B2",
+   "verdetto": "APPLICATA",
+   "dettaglio": "['classe', 'dominio'] in `T4` (alta)"
+  },
+  {
+   "id": "CENS-B3",
+   "verdetto": "APPLICATA",
+   "dettaglio": "['classe', 'dominio'] in `T4` (alta)"
+  },
+  {
+   "id": "CENS-B5",
+   "verdetto": "APPLICATA",
+   "dettaglio": "['classe', 'dominio'] in `T4` (alta)"
+  },
+  {
+   "id": "CENS-B6",
+   "verdetto": "APPLICATA",
+   "dettaglio": "['classe', 'dominio'] in `T4` (alta)"
+  },
+  {
+   "id": "CENS-B7",
+   "verdetto": "APPLICATA",
+   "dettaglio": "['classe'] in `T4` (alta)"
+  },
+  {
+   "id": "CENS-B9",
+   "verdetto": "APPLICATA",
+   "dettaglio": "['classe', 'dominio'] in `T4` (alta)"
+  },
+  {
+   "id": "CENS-B10",
+   "verdetto": "APPLICATA",
+   "dettaglio": "['classe', 'dominio'] in `T4` (alta)"
+  },
+  {
+   "id": "CENS-B11",
+   "verdetto": "APPLICATA",
+   "dettaglio": "['classe', 'dominio'] in `T4` (alta)"
+  },
+  {
+   "id": "CENS-B12",
+   "verdetto": "APPLICATA",
+   "dettaglio": "['classe', 'dominio'] in `T4` (alta)"
+  },
+  {
+   "id": "CENS-B13",
+   "verdetto": "APPLICATA",
+   "dettaglio": "['classe', 'dominio'] in `T4` (alta)"
+  },
+  {
+   "id": "CENS-B14",
+   "verdetto": "APPLICATA",
+   "dettaglio": "['classe', 'dominio'] in `T4` (alta)"
+  },
+  {
+   "id": "CENS-B15",
+   "verdetto": "APPLICATA",
+   "dettaglio": "['classe', 'dominio'] in `T4` (alta)"
+  },
+  {
+   "id": "REG-B",
+   "verdetto": "APPLICATA",
+   "dettaglio": "['classe', 'dominio', 'era', 'stato'] in `T1` (media)"
+  },
+  {
+   "id": "REG-C",
+   "verdetto": "APPLICATA",
+   "dettaglio": "['classe', 'dominio', 'era', 'stato'] in `T0` (media)"
+  },
+  {
+   "id": "REGISTRO_FISICA:P1",
+   "verdetto": "APPLICATA",
+   "dettaglio": "['classe', 'dominio'] in `T3` (alta)"
+  },
+  {
+   "id": "REGISTRO_FISICA:P2",
+   "verdetto": "APPLICATA",
+   "dettaglio": "['classe', 'dominio'] in `T4` (alta)"
+  },
+  {
+   "id": "REGISTRO_FISICA:P3",
+   "verdetto": "APPLICATA",
+   "dettaglio": "['classe', 'dominio'] in `T4` (alta)"
+  },
+  {
+   "id": "REGISTRO_FISICA:P3b",
+   "verdetto": "APPLICATA",
+   "dettaglio": "['classe', 'dominio'] in `T3` (alta)"
+  },
+  {
+   "id": "REGISTRO_FISICA:P4",
+   "verdetto": "APPLICATA",
+   "dettaglio": "['classe', 'dominio'] in `T4` (alta)"
+  },
+  {
+   "id": "REGISTRO_FISICA:P5",
+   "verdetto": "APPLICATA",
+   "dettaglio": "['classe', 'dominio'] in `T4` (alta)"
+  },
+  {
+   "id": "M-SPINORE",
+   "verdetto": "NON_APPLICATA",
+   "dettaglio": "### COMPARE NEL FILE `doc/MEMORIE_MANCANTI.md` MA FUORI DALLA SEZIONE della voce, e la regola chiede la riga o la sezione che la contiene"
+  },
+  {
+   "id": "M1",
+   "verdetto": "APPLICATA",
+   "dettaglio": "['classe'] in `T1` (media)"
+  },
+  {
+   "id": "CELLE-NAN-APPESE-NOME-SCADUTO",
+   "verdetto": "APPLICATA",
+   "dettaglio": "['classe'] in `T0` (media)"
+  },
+  {
+   "id": "COMPONENTI:D1",
+   "verdetto": "APPLICATA",
+   "dettaglio": "['classe'] in `T0` (media)"
+  },
+  {
+   "id": "COMPONENTI:D2",
+   "verdetto": "APPLICATA",
+   "dettaglio": "['classe'] in `T0` (media)"
+  },
+  {
+   "id": "D09",
+   "verdetto": "APPLICATA",
+   "dettaglio": "['classe'] in `T4` (media)"
+  },
+  {
+   "id": "S10",
+   "verdetto": "APPLICATA",
+   "dettaglio": "['classe'] in `T0` (media)"
+  },
+  {
+   "id": "REG-V",
+   "verdetto": "APPLICATA",
+   "dettaglio": "['classe'] in `T4` (media)"
+  },
+  {
+   "id": "REG-R",
+   "verdetto": "APPLICATA",
+   "dettaglio": "['dominio'] in `T1` (media)"
+  },
+  {
+   "id": "CURA-3",
+   "verdetto": "APPLICATA",
+   "dettaglio": "['classe'] in `T1` (media)"
+  },
+  {
+   "id": "COPPIA-RAMP",
+   "verdetto": "APPLICATA",
+   "dettaglio": "['classe'] in `T1` (media)"
+  },
+  {
+   "id": "A3-CHIRALE",
+   "verdetto": "APPLICATA",
+   "dettaglio": "['classe'] in `T1` (media)"
+  },
+  {
+   "id": "CARICA-ROTAZIONE",
+   "verdetto": "APPLICATA",
+   "dettaglio": "['classe'] in `T4` (media)"
+  },
+  {
+   "id": "MITOSI-TASSO",
+   "verdetto": "APPLICATA",
+   "dettaglio": "['classe'] in `T1` (media)"
+  },
+  {
+   "id": "FILI-CORTI",
+   "verdetto": "APPLICATA",
+   "dettaglio": "['classe'] in `T0` (media)"
+  },
+  {
+   "id": "POTATURA-GUARDIE",
+   "verdetto": "APPLICATA",
+   "dettaglio": "['classe'] in `T4` (media)"
+  }
+ ]
+}

@@ -208,9 +208,18 @@ def sostiene(v, riga, campo, valore, livello):
                   "regola che la contraddica" % (livello, campo))
 
 
-def leggi_file():
-    rr = [r for r in io.open(FILE_G, encoding="utf-8").read().split(NL) if r.strip()]
-    assert len(rr) == 165, "il file del guardiano non ha 165 righe: %d" % len(rr)
+def leggi_file(percorso=None, quante=165):
+    """### Le righe del file del guardiano. ### **Il numero si ASSERISCE**, sempre.
+
+    ### ⛔ **Il percorso arriva dall-argv** *(dal 2026-10-09)*: il guardiano ha mandato
+    ### **un secondo file** -- la ### **terza lettura**, `59` righe -- e
+    ### **lo stesso attrezzo deve applicare entrambi**, altrimenti ### **la regola si
+    duplica e le due copie divergono.**
+    """
+    rr = [r for r in io.open(percorso or FILE_G, encoding="utf-8").read().split(NL)
+          if r.strip()]
+    assert len(rr) == quante, ("il file %s non ha %d righe: %d"
+                               % (percorso or FILE_G, quante, len(rr)))
     fuori = []
     for r in rr:
         pz = [x.strip() for x in r.split("|")]
@@ -231,16 +240,37 @@ def leggi_file():
     return fuori
 
 
-def main():
-    voci = [json.loads(x) for x in
-            io.open(os.path.join(D, "voci.jsonl"), encoding="utf-8").read().split(NL)
-            if x.strip()]
+def main(argv=()):
+    # ### ⛔ **IL FILE, QUANTE RIGHE, E I NOMI DELLE USCITE ARRIVANO DA FUORI:** senza
+    # ### questo l-attrezzo sarebbe ### **legato a un file solo**, e il secondo file
+    # ### avrebbe voluto ### **una copia del codice.** ### ⭐ **Due copie della stessa
+    # ### regola divergono**, ed e- il difetto che il repo chiama <<una legge in due
+    # ### posti>>.
+    percorso = argv[0] if argv else None
+    quante = int(argv[1]) if len(argv) > 1 else 165
+    suff = argv[2] if len(argv) > 2 else ""
+    # ### ⛔ **E LE VOCI POSSONO VENIRE DA UN COMMIT, e serve per il REFERTO:** una volta
+    # ### applicato il lotto, rigirare l-attrezzo ### **sul disco** da-
+    # ### ### **`NIENTE_DA_FARE` su tutto** -- i campi sono gia- quelli -- e
+    # ### ### **il verdetto VERO si perde.**
+    # ### ⭐ **Il verdetto e- cio- che la regola ha deciso QUANDO HA INCONTRATO L-INDICE**,
+    # ### non cio- che decide dopo aver vinto: ### **si rigenera dal commit del file.**
+    ref = argv[3] if len(argv) > 3 else ""
+    if ref:
+        import subprocess
+        q = subprocess.run(["git", "show", "%s:doc/indice/voci.jsonl" % ref], cwd=RADICE,
+                           capture_output=True, text=True, encoding="utf-8")
+        assert q.returncode == 0, ref
+        testo = q.stdout
+    else:
+        testo = io.open(os.path.join(D, "voci.jsonl"), encoding="utf-8").read()
+    voci = [json.loads(x) for x in testo.split(NL) if x.strip()]
     per = {v["id"]: v for v in voci}
     # ### ⛔ **Il REGISTRO serve per i due requisiti di `SUPERATA`:** `superata_da` deve
     # ### nominare ### **una DECISIONE o un ASSIOMA**, e l-elenco sta nel registro.
     import indice as IX
     _vv, reg = IX.carica()
-    righe = leggi_file()
+    righe = leggi_file(percorso, quante)
     lotto, applicate, non_applicate, lasciate = [], [], [], []
     # ### ⛔ **UN VERDETTO PER RIGA, e i conti DEVONO tornare a `165`:** il mandato
     # ### chiede ### **quante applicate, quante non applicate, quante lasciate** -- e
@@ -271,7 +301,19 @@ def main():
         campi, meta, note = {}, {}, []
         salta = []
         quante_lasciate = len(lasciate)
-        for campo, valore in r["cambi"].items():
+        # ### ⛔ **L-ORDINE DEI CAMPI CONTA, ED E- UN DIFETTO MIO SCOPERTO SU DUE VOCI:**
+        # ### `stato=SUPERATA` ### **e** `superata_da=X` sono ### **UNA DECISIONE SOLA**, non
+        # ### due. Giudicandoli separatamente, `Z21` e `L-SOGLIA` hanno perso
+        # ### ### **entrambi** i campi: il `superata_da` cadeva perche- *<<per un campo senza
+        # ### regola la citazione in `T3`/`T4` non basta>>*, e poi lo `stato` cadeva perche-
+        # ### ### **<<SUPERATA senza dire da che cosa>>** -- ### **cioe- per la mancanza del
+        # ### campo che avevo appena scartato io.**
+        # ### ⭐ **`superata_da` NON E- UN CAMPO INDIPENDENTE: e- L-OGGETTO di `SUPERATA`.**
+        # ### ➜ Si valuta ### **lo `stato` per primo**, e se la riga dice `SUPERATA`
+        # ### ### **il suo oggetto viene con lui.**
+        ordine = sorted(r["cambi"].items(),
+                        key=lambda kv: {"stato": 0, "superata_da": 1}.get(kv[0], 2))
+        for campo, valore in ordine:
             # ### ⛔ **`da_dividere` NELL-INDICE E- UN `bool`**, e il file gli passa due
             # ### parti: il bool dice ### **SE**, `da_dividere_parti` dice ### **CHE COSA**
             # ### -- la chiave aggiunta nel punto `7` del 2026-10-09 proprio per questo.
@@ -288,6 +330,14 @@ def main():
             assert campo in CAMPI_SCHEMA, campo
             if str(v[campo]) == valore:
                 salta.append("`%s` e- GIA- `%s`" % (campo, valore))
+                continue
+            if campo == "superata_da" and campi.get("stato") == "SUPERATA":
+                # ### ✔ **VIENE COL SUO `stato`:** la riga dice *<<`SUPERATA` da `X`>>*,
+                # ### e ### **spezzare la frase in due non la rende piu- vera.**
+                campi[campo] = valore
+                note.append("`superata_da` viene col suo `stato`: `SUPERATA` da `%s` e- "
+                            "UNA DECISIONE SOLA, e spezzarla in due non la rende piu- vera"
+                            % valore)
                 continue
             if r["conf"] == "media":
                 ok, perche = sostiene(v, riga, campo, valore, liv)
@@ -310,26 +360,52 @@ def main():
                 lasciate.append((i, "stato", "SUPERATA",
                                  "### `SUPERATA` SENZA DIRE DA CHE COSA: lo schema pretende `superata_da`, e il file non lo porta. <<Superata>> vuol dire CHE QUALCUNO HA DECISO ALTRO, e chi ha deciso NON SI INVENTA", riga))
                 del campi["stato"]
-            elif s not in reg["decisioni"] and s not in reg["assiomi"]:
+            # ### ⛔ **E QUESTA REGOLA ERA DUPLICATA, ED E- IL DIFETTO:** la copia qui
+            # ### diceva ### **<<ne- decisione, ne- assioma>>** e il validatore, dal punto
+            # ### `3` di oggi, accetta ### **anche una VOCE.** ### **Due copie della stessa
+            # ### regola divergono**, e la copia vecchia ha rifiutato `Z21` e `L-SOGLIA`
+            # ### ### **citando una ragione che il repo aveva gia- smesso di avere.**
+            # ### ➜ **Si chiede agli STESSI insiemi del validatore**, e la frase del motivo
+            # ### li nomina tutti e tre.
+            elif (s not in reg["decisioni"] and s not in reg["assiomi"]
+                  and s not in per):
                 lasciate.append((i, "stato+superata_da", s,
-                                 "### `%s` NON E- UNA DECISIONE NE- UN ASSIOMA, e lo schema la rifiuta: una voce superata deve essere superata DA UNA DECISIONE, e un difetto non decide niente" % s, riga))
+                                 "### `%s` NON E- UNA DECISIONE, NE- UN ASSIOMA, NE- UNA VOCE: lo schema la rifiuta" % s, riga))
                 del campi["stato"]
                 campi.pop("superata_da", None)
 
         # ### ⛔ **CHIUDERE PRETENDE `chiusura.criterio` E `chiusura.commit`**, e il commit
         # ### ### **si cerca nella riga.** ### **Se non c-e-, la voce NON si chiude.**
         if campi.get("stato") == "CHIUSA":
-            sha = _SHA.search(SR.norm(riga or ""))
-            if not sha:
-                lasciate.append((i, "stato", "CHIUSA",
-                                 "### la riga NON PORTA UN COMMIT, e chiudere pretende "
-                                 "`chiusura.commit`: un commit NON SI INVENTA (la stessa "
-                                 "regola del punto 1)", riga))
-                del campi["stato"]
-            else:
-                campi["chiusura"] = {"criterio": ("verifica completa del guardiano: %s"
-                                                  % r["citazione"])[:400],
-                                     "commit": sha.group(0), "data": DATA}
+            # ### ⭐ **IL COMMIT DI CHIUSURA SI RICAVA, NON SI CERCA NELLA RIGA**
+            # ### *(2026-10-09, punto `1` del mandato nuovo)*. ### ⛔ **La versione di ieri
+            # ### cercava uno sha DENTRO la riga e, non trovandolo, LASCIAVA la voce:**
+            # ### `47` chiusure non fatte. ### **Una riga di documento non ha nessun motivo
+            # ### di portare lo sha del commit che l-ha scritta** -- quello sta
+            # ### ### **nella storia di git**, e `git log -S --reverse` lo trova.
+            # ### ⚠ **E l-attrezzo diventa IDEMPOTENTE col punto `1`:** rigirarlo sul primo
+            # ### file chiuderebbe adesso ### **le stesse `47`** che il punto `1` ha chiuso
+            # ### a mano. ### **Una regola sola, in un posto solo.**
+            import _commit_di_chiusura as CC
+            ch, come, dove = CC.chiusura_di(v, r["citazione"], CC.sha_del_tag())
+            campi["chiusura"] = ch
+            note.append("chiusura: il commit e- %s (%s)" % (come, dove[:120]))
+        # ### ⛔ **E `F12` HA RIFIUTATO IL LOTTO, FACENDO IL SUO LAVORO:** `L-SOGLIA` era
+        # ### `CHIUSA` col commit ricavato dal punto `1`, e il file la porta a `SUPERATA`
+        # ### -- ### **la `chiusura` restava piena su una voce non chiusa.**
+        # ### ⭐ **`SUPERATA` non e- `CHIUSA`: SOSTITUISCE la chiusura, non la conferma**
+        # ### -- e cio- che la voce ha da dire adesso sta in ### **`superata_da`.**
+        # ### ✔ **Il valore vecchio non si perde:** vive in `storico.jsonl`, dentro
+        # ### `prima`. ### **E il lotto e- stato RIFIUTATO SENZA SCRIVERE NIENTE:** la cura
+        # ### dell-atomicita- lavora ### **per la seconda volta su un caso che non ho
+        # ### costruito io.**
+        if (campi.get("stato") and campi["stato"] != "CHIUSA"
+                and (v["chiusura"] or {}) and "chiusura" not in campi):
+            campi["chiusura"] = {}
+            note.append("la `chiusura` SI SVUOTA perche- lo stato diventa "
+                        + campi["stato"] + ": `F12` pretende che una `chiusura` piena "
+                        "implichi `CHIUSA`, e il valore vecchio vive nello storico")
+
         if not campi and not meta:
             if len(lasciate) > quante_lasciate:
                 esiti.append((i, "LASCIATA", "citazione trovata in `%s`, ma NESSUN campo "
@@ -366,7 +442,7 @@ def main():
         else:
             esiti.append((i, "APPLICATA", "%s in `%s` (%s)"
                           % (sorted(set(campi) | set(meta)), liv, r["conf"])))
-    p = os.path.join(D, "_lotti", "v3_guardiano.jsonl")
+    p = os.path.join(D, "_lotti", "v3_guardiano%s.jsonl" % suff)
     io.open(p, "w", encoding="utf-8", newline=NL).write(
         NL.join(json.dumps(x, ensure_ascii=False) for x in lotto) + NL)
     rapporto = {"applicate": [{"id": a, "campi": b, "meta": c, "livello": d, "conf": e}
@@ -380,9 +456,10 @@ def main():
                              for a, b, c, d, e in lasciate],
                 "livelli": dict(livelli),
                 "esiti": [{"id": a, "verdetto": b, "dettaglio": c} for a, b, c in esiti]}
-    io.open(os.path.join(D, "_p3_guardiano.json"), "w", encoding="utf-8",
+    io.open(os.path.join(D, "_p3_guardiano%s.json" % suff), "w", encoding="utf-8",
             newline=NL).write(json.dumps(rapporto, ensure_ascii=False, indent=1))
-    print("  scritto doc/indice/_lotti/v3_guardiano.jsonl: %d righe" % len(lotto))
+    print("  scritto doc/indice/_lotti/v3_guardiano%s.jsonl: %d righe"
+          % (suff, len(lotto)))
     print("  ### APPLICATE: %d su %d righe del file" % (len(applicate), len(righe)))
     print("  ### NON APPLICATE (citazione non trovata): %d" % len(non_applicate))
     for i, r, come, _g in non_applicate:
@@ -395,7 +472,7 @@ def main():
     print("  ### IL VERDETTO PER RIGA, e i conti tornano:")
     for k, n in conta.most_common():
         print("   %-20s %d" % (k, n))
-    print("   %-20s %d  (DEVE essere 165)" % ("in tutto", sum(conta.values())))
+    print("   %-20s %d  (DEVE essere %d)" % ("in tutto", sum(conta.values()), len(righe)))
     # ### ⛔ **E- UN ASSERT, non una stampa:** se i conti non tornano a `165`
     # ### ### **una riga del guardiano e- stata persa**, e perdere una riga senza
     # ### accorgersene e- ### **esattamente il difetto che il par.9 chiama <<una voce
@@ -407,4 +484,4 @@ def main():
 
 
 if __name__ == "__main__":
-    sys.exit(main())
+    sys.exit(main(sys.argv[1:]))

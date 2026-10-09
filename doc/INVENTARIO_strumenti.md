@@ -2533,3 +2533,15 @@ etichette rimosse, con ### **`0` persi, `0` doppi, `0` conflitti**.
 | ### ⭐ **non sceglie fra i due campi: chiede al DOCUMENTO** | due campi si contraddicono *(`chiusura` dice chiusa, `stato` dice sospesa)*, e **il terzo arbitro è la riga d'origine** |
 | ### ⚠ **e svuota la `chiusura`, NON lo stato** | lo stato **l'ha deciso un lavoro che ha letto la riga**; la `chiusura` **è ciò che è rimasto indietro** dalla migrazione |
 | **l'uscita** | `doc/indice/_lotti/v3_f12.jsonl` · `doc/indice/_p2_f12.json` |
+
+---
+
+### `csv/_applica_correzioni_guardiano.py` — **PARAMETRICO, e le chiusure usano il punto `1`** *(2026-10-09, seconda versione)*
+
+| | |
+|---|---|
+| **BLOB** *(sha1 dei byte grezzi)* | `7558140c` |
+| **COMANDO** | `python csv/_applica_correzioni_guardiano.py <file> <quante> <suffisso> [<commit delle voci>]` — per la terza lettura: `python csv/_applica_correzioni_guardiano.py doc/indice/_lotti/correzioni_guardiano_2026-10-09_b.txt 59 _b 3926dbb` |
+| ### ⭐ **che cosa è cambiato** | **il file arriva dall'argv** *(due file, un attrezzo: **due copie della stessa regola divergono**)*; le **chiusure usano il punto `1`** *(il commit si RICAVA)*; e le voci possono venire **da un commit** |
+| ### ⛔ **perché le voci da un commit** | applicato il lotto, rigirarlo **sul disco** dà `NIENTE_DA_FARE` su tutto e **il verdetto VERO si perde.** Il verdetto è ciò che la regola ha deciso **quando ha incontrato l'indice** |
+| **l'uscita** | `doc/indice/_lotti/v3_guardiano_b.jsonl` · `doc/indice/_p3_guardiano_b.json` |
