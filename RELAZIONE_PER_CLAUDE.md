@@ -11081,3 +11081,15 @@ Collaudo del generatore ### **`9`/`9`**; `dH/dpsi*` generata contro la differenz
 ### ⛔ **E UN BRACCIO DI COLLAUDO HA FALLITO PER UNA RAGIONE PERFETTA.** Avevo definito una regex di via d'uscita *(`_FUGA`)* ### **senza leggerla mai**, come promemoria che la via non c'e'; il braccio doveva provare che ### **nessuno la legge**, e cercava la stringa nel file — ### **trovandola NEL PROPRIO TESTO.** ### ⭐ **Un controllo che si cerca addosso trova sempre se stesso**, e la cura non era cambiare il controllo: ### **era togliere la cosa che non doveva esistere** — ### **codice morto che INVITA una scappatoia che il mandato vieta.** Adesso il braccio guarda ### **l'ALBERO** *(nessuna chiamata a `search` su un pattern `FUGA`/`SENZA`)*.
 
 ### ⚠ **E `P-E5` OGGI E- VERO E VUOTO, e lo dico:** ### **zero osservatori**, quindi il braccio *«gli osservatori non scrivono»* ### **passa senza provare niente.** ### **Un `PASSA` su un insieme vuoto e- un FALSO-ZERO**, e la tappa `5` gli dara' ### **un osservatore da far girare.**
+
+---
+
+## TAPPA `5a`: **la somma dei gradienti NON e' associativa, e l'ordine canonico porta carico** (2026-10-09)
+
+`hamiltoniana.py`: `H` e `dH/dpsi*` ### **in un solo posto**, i termini caricati da `termini/` ### **via la costante `LEGGE`**, la somma ### **in ordine canonico per ID.** Nessuna fisica nuova; il simulatore resta `b8c21049`.
+
+### ⭐ **LA MISURA CHE NON SUPPONEVO:** l'integrazione sullo schedulatore chiede *«somma ad arrotondamento esatto (alla `math.fsum`) ### **o** in ordine canonico per ID»*, e io credevo di poter usare `fsum` per entrambe. ### ⛔ **Non si puo-: `fsum` lavora su SCALARI REALI, e il gradiente e- un ARRAY COMPLESSO.** ### ✔ **Misurato:** `H` sotto permutazione dei termini e- ### **identica** *(`fsum`)*; il gradiente ### **cambia i bit.**
+
+### ✔ **E ALLORA L'ORDINE CANONICO NON E- UN ORNAMENTO: E- CIO- CHE RENDE LA SOMMA RIPRODUCIBILE** — e l'ho reso ### **imposto anche su una lista data** *(`sorted` dentro `gradiente()`)*. ### ⚠ **Ma cosi' il collaudo «permuta i termini → byte-identico» sarebbe VERO PER COSTRUZIONE: un FALSO-UNO.** ### ✔ **Quindi c'e- `gradiente_grezzo()`, che somma NELL'ORDINE DATO e serve SOLO al collaudo:** con quella una permutazione ### **cambia i bit**, e la coppia di misure prova ### **che il `sorted` fa un lavoro vero.**
+
+### ⛔ **E IL MANDATO NON E' CHIUSO.** Restano lo ### **schedulatore a STRATI**, i ### **due integratori candidati**, il ### **cono di causalita'**, i ### **sei casi che DEVONO fallire** e il ### **referto** — piu' le tre integrazioni arrivate a mandato aperto. ### **Ogni tappa fatta e' committata e pushata**, e il repo e' valido: era la ragione per cui il mandato chiedeva un commit per tappa.

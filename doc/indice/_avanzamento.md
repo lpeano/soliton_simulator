@@ -83,8 +83,10 @@ era       1=538  DA_CLASSIFICARE=188  ENTRAMBE=96  2=24
 stato     SOSPESA=369  DA_CLASSIFICARE=188  CHIUSA=182  APERTA=82  AGENDA=24  SUPERATA=1
 ```
 
-### ✔ **FATTO IN QUESTO GIRO:** la ### **TAPPA `4b`**: gli ### **otto presidi** dell'era `2` — `P-E1`…`P-E7` in `csv/_presidi_era2.py` *(collaudo ### **`13`/`13` nei due versi**)*, cablati nel `pre-commit` e nel `commit-msg`, e ### **`P-E8`: la CI su GitHub** *(`.github/workflows/era2.yml`)*. ### ⛔ **Senza via d'uscita**, e il mandato lo dice.
+### ✔ **FATTO IN QUESTO GIRO:** la ### **TAPPA `5a`**: `hamiltoniana.py` — `H` e `dH/dpsi*` ### **in un solo posto**, i termini caricati ### **da `termini/` via `LEGGE`**, e la somma ### **in ordine canonico per ID.** ### ⛔ **E la misura dice una cosa che non supponevo:** `H` con `fsum` e' ### **identica sotto permutazione**, il gradiente ### **NO** — quindi ### **l'ordine canonico PORTA CARICO**, e `gradiente_grezzo()` lo prova.
 
-### ⛔ **RESTA:** la tappa `5` *(il collaudo della catena, i sei casi che DEVONO fallire, ### **piu' le tre integrazioni**: il cono, l'integratore candidato a passi locali, e lo schedulatore a strati)* e la `6` *(il referto)*.
+### ⛔ **RESTA, e il mandato NON e' chiuso:** la tappa `5` *(lo schedulatore a STRATI, i due integratori candidati, il cono, i sei casi che DEVONO fallire)* e la `6` *(il referto)*.
 
-**Ultimo lotto applicato:** `doc/indice/_lotti/era2_registri.jsonl` — ### **la tappa `4b` NON scrive sull'indice.**
+### 📌 **E IN CODA, QUATTRO VOCI CON UN ORDINE DICHIARATO DA LUCA:** ① ### **chiusa** *(assorbita)* · ② le decisioni sulle `43` domande · ③ il piano d'azione e l'albero delle scelte · ④ ### **i metodi dell'era `1` nell'era `2`.**
+
+**Ultimo lotto applicato:** `doc/indice/_lotti/era2_registri.jsonl` — ### **la tappa `5a` NON scrive sull'indice.**
