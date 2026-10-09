@@ -127,6 +127,16 @@ def controlla(legge, variabili):
     if viet:
         fuori.append("`%s`: l-espressione nomina %s, ### VIETATO (`A17`: una posizione non "
                      "entra nella fisica, e la decisione 9 e- APERTA)" % (idv, viet))
+    # ### \u26d4 **I RAMI: `A11` dice che UN LIMITE E- UNA LEGGE, non una toppa.**
+    # ### Un `Max(x, 0)` dentro un termine di `H` ### **viola `A14` per costruzione**
+    # ### *(non esiste una lagrangiana che lo contenga)*, e ### **la cura non e-
+    # ### tararlo: e- DERIVARE la legge** che produce quel comportamento.
+    rami = SCH.rami_vietati(legge["espressione"])
+    if rami:
+        fuori.append("`%s`: l-espressione nomina %s, ### VIETATO (`A11`: un limite e- una "
+                     "LEGGE, non una toppa; `A8`: un ramo silenzioso non e- un ramo). "
+                     "### Non si tara: si DERIVA la legge che produce quel "
+                     "comportamento (`A12`)" % (idv, rami))
     sim, _con = ambiente(legge, variabili)
     try:
         e = sympy.sympify(legge["espressione"], locals={k: sympy.Symbol(k) for k in sim})
@@ -555,6 +565,31 @@ def collaudo():
     g, _e = controlla(lg(espressione="psi_0c*psi_0 + pos_x"), VOC)
     esito("### DEVE rifiutare: un-espressione che nomina `pos_x` (`A17`)",
           any("VIETATO" in x for x in g))
+    # ### ⛔ **I RAMI: `A11` dice che un limite e- una LEGGE** *(punto `2`)*.
+    for _e_ramo, _nome in (("Max(psi_0c*psi_0, 0)", "Max"),
+                           ("Abs(psi_0)*psi_0c", "Abs"),
+                           ("Piecewise((psi_0c*psi_0, True))", "Piecewise"),
+                           ("sign(psi_0c*psi_0)", "sign"),
+                           ("floor(psi_0c*psi_0)", "floor")):
+        g, _x = controlla(lg(espressione=_e_ramo), VOC)
+        esito("### DEVE rifiutare: un RAMO nell-espressione (`%s`)" % _nome,
+              any("A11" in x for x in g),
+              "un limite e- una LEGGE, non una toppa; e non si TARA: si DERIVA")
+    # ### ✅ **E NON deve rifiutare le DUE leggi VERE**, altrimenti il braccio
+    # ### ### **sarebbe vero per costruzione**: una lista di nomi vietati che
+    # ### ### **rifiuta tutto** non distingue niente.
+    _leggi_vere, _varia_vere = carica()
+    _voc_vero = {v["nome"]: v["tipo"] for v in _varia_vere}
+    for _lg in _leggi_vere:
+        esito("NON deve rifiutare: la legge vera `%s`" % _lg["id"],
+              controlla(_lg, _voc_vero)[0] == [],
+              "### se rifiutasse, la lista dei rami sarebbe TROPPO LARGA")
+    # ### ⚠ **E i confini di parola: `max_nodi` CONTIENE `Max`?** No, e si prova.
+    g, _x = controlla(lg(espressione="psi_0c*psi_0"), VOC)
+    esito("### i CONFINI DI PAROLA: `Abs` NON si trova dentro `Absurdo`",
+          SCH.rami_vietati("Absurdo*psi_0") == []
+          and SCH.rami_vietati("Abs(psi_0)") == ["Abs"],
+          "### in questo repo i confini di parola sono stati dimenticati QUATTRO volte")
     # ### ⛔ **UN SIMBOLO FUORI DALL-AMBITO.**
     g, _e = controlla(lg(espressione="psi_0c*psi_0 + w"), VOC)
     esito("### DEVE rifiutare: un simbolo FUORI dall-ambito (`w` non e- dichiarato)",

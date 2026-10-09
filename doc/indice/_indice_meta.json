@@ -1,10 +1,16 @@
 {
  "assiomi": {
+  "A11": [
+   "P-R1"
+  ],
   "A16": [
    "MISURA-NORMA-ERA2"
   ],
   "A17": [
    "MISURA-NORMA-ERA2"
+  ],
+  "A8": [
+   "P-R1"
   ],
   "A9": [
    "P-C1",
@@ -444,6 +450,7 @@
    "P-EQ-MEDIANA-ARCHI",
    "P-M1",
    "P-MEMORIA",
+   "P-R1",
    "P-T1",
    "P0",
    "P1",
@@ -1733,6 +1740,7 @@
    "P-E7",
    "P-E8",
    "P-M1",
+   "P-R1",
    "P-T1",
    "PI-CHIUSURA-ORFANA",
    "PI-CRITERIO-METODO",
@@ -2429,6 +2437,7 @@
    "P-E6",
    "P-E7",
    "P-E8",
+   "P-R1",
    "PERC-TW-MORTA",
    "POTATURA-GUARDIE",
    "PRESTAZIONI-CORSE",
@@ -3257,6 +3266,7 @@
    "P-E6",
    "P-E7",
    "P-E8",
+   "P-R1",
    "REVERSIBILITA-LOCALE",
    "VUOTO-LOCALE-DETERMINISTICO",
    "Z104"
@@ -6477,6 +6487,7 @@
    "P-E6",
    "P-E7",
    "P-E8",
+   "P-R1",
    "REVERSIBILITA-LOCALE",
    "VUOTO-LOCALE-DETERMINISTICO",
    "Z104"

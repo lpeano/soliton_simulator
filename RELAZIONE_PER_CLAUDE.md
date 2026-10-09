@@ -11311,3 +11311,31 @@ Nella descrizione di `P-T1` ho scritto i nomi dei caratteri ### **dentro un here
 **Collaudo `11`/`11`**, nei due versi. `(a)` `24` chiavi di metadato, tutte registrate con `tipo` e `descrizione`. `(e)` cinque registri guardati.
 
 ### ⚠ **E CHE COSA NON HO FATTO DEL PUNTO `13`, detto per nome:** `(c)` *(ogni campo di testo cambia solo con una riga di storico che ne porta l-impronta, e il replay a TUTTI i registri)*, `(d)` *(le citazioni STRUTTURATE `{file, riga, commit, impronta}`, verificate su `git show`)* e `(f)` *(tutti i testi generati byte-identici)*. ### **`(f)` e- gia- vero per le viste e per `doc/METODI_era1_in_era2.md`, e NON per tutti.** Sono un commit a se-.
+
+## PUNTO `2` — ### **NESSUN RAMO NEI TERMINI, e i `27` rami della fisica DICHIARATI** *(2026-10-09)*
+
+**Due cose, e la seconda e- quella che non mi aspettavo.**
+
+### `1.` ### **IL GENERATORE RIFIUTA I LIMITI** *(`A11`)*
+
+`Min`, `Max`, `Piecewise`, `Abs`, `sign`, `Heaviside`, `floor`, `ceiling`, `clip`, `Mod`, `frac`: ### **vietati nell-espressione di una legge**, come `pos`. ### ⭐ **E `Abs` ci sta per una ragione piu- fine:** `|psi|` ha ### **una derivata NON ANALITICA in zero**, e ### **la derivata di Wirtinger che il generatore calcola la- NON ESISTE** — quindi non e- solo `A11`: ### **e- che il generatore non saprebbe derivarla.**
+
+### ✅ **E il collaudo ha i DUE versi, piu- uno che serviva:** cinque rami rifiutati, ### **le due leggi VERE non rifiutate** *(altrimenti una lista di nomi vietati che rifiuta tutto ### **non distingue niente**)*, e ### **i CONFINI DI PAROLA** — `Abs` non si trova dentro `Absurdo`, e ### **in questo repo i confini di parola sono stati dimenticati QUATTRO volte.** Generatore: ### **`22`/`22`** *(da `13`)*.
+
+### `2.` ### **I `27` RAMI DELLA FISICA, CONTATI E CLASSIFICATI**
+
+`A8` dice *«un ramo silenzioso non e- un ramo»* e `P5` che va ### **contato.** ### ⭐ **Ma la parte che conta non e- contarli: e- DIRE A CHE SERVONO** — un `if` non e- un difetto, ### **un `if` NON DICHIARATO lo e-**, perche- nessuno sa se smista, valida, o ### **sceglie in silenzio un pezzo di fisica.**
+
+| il ruolo | funzioni | rami | |
+|---|--:|--:|---|
+| `validazione` | `2` | `8` | sono ### **il presidio stesso**: costruiscono messaggi, non cambiano valori |
+| `smistamento` | `4` | `7` | scelgono ### **da un CAMPO dichiarato** *(`TIPO`, il nome nella composizione)*, non da un indovinello |
+| `iterazione` | `2` | `3` | fermano un ciclo — e ### **la soglia e- DICHIARATA** *(`toll=1e-14`)* |
+| ### ⚠ **`default`** | `4` | ### **`9`** | ### ⛔ **SONO UN DEBITO:** il punto `15(b)` dice *«un parametro non presente e- un ERRORE»*, e ### **li ho scritti io ieri** *(`termini=None`, `gli_strati=None`, `iterazioni=64`, `toll=1e-14`)*. ### **Dichiarati, non nascosti** |
+| `guardia` | `0` | ### **`0`** | ### **e lo dico invece di lasciarlo credere:** se ce ne fosse una, `A11` direbbe ### **cerca l-ERRORE da cui protegge** |
+
+### ⚠ **E IL LIMITE LO DICHIARO:** ### **la classificazione la scrivo io**, il conteggio no — quello lo misura l-AST. ### **Quindi `P-R1` garantisce che un ramo NUOVO non passi inosservato, NON che la mia etichetta sia giusta.**
+
+### ⛔ **E IL PRESIDIO MI HA CORRETTO SUBITO, con `24` errori:** le chiavi della tabella usano `/`, e `os.path.join` su Windows da- `\`. ### ⭐ **Una chiave che cambia col sistema operativo non e- una chiave** — e l-ho visto perche- il presidio ha parlato, non perche- l-ho pensato.
+
+**Collaudi:** `P-R1` ### **`10`/`10`**, generatore ### **`22`/`22`**, schema `25`/`25`.

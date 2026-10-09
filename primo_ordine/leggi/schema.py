@@ -62,6 +62,19 @@ DOVE = {"complesso_c2_nodo": "nodo", "reale_nodo": "nodo", "coppia_coniugata": "
 # ### mondo. ### **La decisione `9` e- aperta, e il formato NON la anticipa.**
 VIETATI = ("pos", "pos_x", "pos_y", "pos_z", "x", "y", "z", "coord", "xyz")
 
+# ### ⛔ **I RAMI, e sono VIETATI PER LA STESSA RAGIONE DI `pos`:** `A11` dice
+# ### ### **un limite e- una LEGGE, non una toppa**, e `A8` che
+# ### ### **un ramo silenzioso non e- un ramo.** ### **Un `Max(x, 0)` dentro
+# ### un termine di `H` e- un limite SENZA una legge che lo giustifichi**, e
+# ### ### **non esiste una lagrangiana che lo contenga.**
+# ### ⚠ **`Abs` e- nella lista e la ragione e- piu- fine:** `|psi|` da-
+# ### solo ### **una derivata NON ANALITICA in zero**, e la derivata di
+# ### Wirtinger che il generatore calcola ### **la- non esiste.**
+# ### ✅ **E la cura NON e- tararlo: e- DERIVARE la legge** che produce
+# ### quel comportamento *(`A12`)*.
+RAMI = ("Min", "Max", "Piecewise", "Abs", "sign", "Heaviside", "floor",
+        "ceiling", "clip", "Mod", "frac")
+
 # ### LE CHIAVI OBBLIGATORIE, per tipo.
 CHIAVI_COMUNI = ("id", "tipo", "scheda", "assiomi", "prova")
 CHIAVI_TERMINE = ("espressione", "ambito", "parametri")
@@ -175,14 +188,34 @@ def valida_variabile(d):
     return fuori
 
 
-def simboli_vietati(espressione):
-    """### I simboli VIETATI che l-espressione nomina. ### ⛔ **`A17` per costruzione.**"""
+def _nominati(espressione, elenco):
+    """I nomi di `elenco` che l-espressione ### **nomina**, a confini di parola.
+
+    ### ⚠ **I CONFINI DI PAROLA SERVONO, e in questo repo e- successo QUATTRO
+    VOLTE** di dimenticarli: `max` sta dentro `max_nodi`, `x` dentro `xi` e dentro
+    `index`, `FINITO` dentro `infinito`, `PASS` dentro `passato`.
+    """
     t = str(espressione or "")
     fuori = []
-    for v in VIETATI:
+    for v in elenco:
         if re.search(r"(?<![A-Za-z0-9_])" + re.escape(v) + r"(?![A-Za-z0-9_])", t):
             fuori.append(v)
     return fuori
+
+
+def simboli_vietati(espressione):
+    """### I simboli VIETATI che l-espressione nomina. ### ⛔ **`A17` per costruzione.**"""
+    return _nominati(espressione, VIETATI)
+
+
+def rami_vietati(espressione):
+    """### I RAMI che l-espressione nomina. ### ⛔ **`A11` per costruzione.**
+
+    ### ⭐ **E- un presidio e non una raccomandazione:** il generatore
+    ### **rifiuta la legge** e ### **non genera niente** -- quindi un limite
+    ### **non puo- entrare nella fisica senza passare da una DECISIONE.**
+    """
+    return _nominati(espressione, RAMI)
 
 
 # =====================================================================================

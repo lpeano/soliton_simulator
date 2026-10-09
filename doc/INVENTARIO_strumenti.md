@@ -2621,7 +2621,7 @@ etichette rimosse, con ### **`0` persi, `0` doppi, `0` conflitti**.
 | | |
 |---|---|
 | **file** | `primo_ordine/leggi/schema.py` |
-| **BLOB** *(sha1 dei byte grezzi)* | `4be1bb29` |
+| **BLOB** *(sha1 dei byte grezzi)* | `95db24eb` |
 | **COMANDO** | `python primo_ordine/leggi/schema.py` *(il collaudo, `25`/`25`)* |
 | **cosa misura** | che una riga di tabella abbia **la forma**: vocabolario **chiuso**, `prova` booleano, `scheda` non vuota, **l'ambito dichiarato**, i parametri con **valore E origine**, il **bilancio** di una regola, la **voce** di un osservatore |
 | ### ⭐ **e il controllo che conta** | ### **un `termine_nodo` non può avere una variabile d'ARCO nell'ambito**: una variabile d'arco **collega due nodi**, quindi leggerla ### **È vedere il vicino** — e si vede **nella TABELLA**, prima di generare |
@@ -2635,7 +2635,7 @@ etichette rimosse, con ### **`0` persi, `0` doppi, `0` conflitti**.
 | | |
 |---|---|
 | **file** | `primo_ordine/_genera.py` |
-| **BLOB** *(sha1 dei byte grezzi)* | `0428e9c7` |
+| **BLOB** *(sha1 dei byte grezzi)* | `2b291c4f` |
 | **COMANDO** | `python primo_ordine/_genera.py` *(genera)* · `python primo_ordine/_genera.py --prova` *(il collaudo, `13`/`13`)* |
 | **cosa misura** | `(a)` i simboli liberi **dentro l'ambiente** e `pos` **mai**; `(b)` **`dH/dpsi*` simbolica** *(Wirtinger)*; `(c)` il **modulo numpy** con `LEGGE` e **l'IMPRONTA**; `(d)` la **scheda** |
 | ### ⭐ **e i nomi dei simboli SONO i nomi delle locali** | così l'espressione stampata da `sympy` ### **è già il codice**: ### **nessuna sostituzione testuale** fra la derivata e il file — e una sostituzione è ### **un posto dove la formula può cambiare senza che nessuno lo veda** |
@@ -2688,7 +2688,7 @@ etichette rimosse, con ### **`0` persi, `0` doppi, `0` conflitti**.
 | | |
 |---|---|
 | **file** | `csv/_metodi_era2.py` |
-| **BLOB** *(sha1 dei byte grezzi)* | `c07692d1` |
+| **BLOB** *(sha1 dei byte grezzi)* | `17f548d1` |
 | **COMANDO** | `python csv/_metodi_era2.py` *(il presidio, e GENERA il documento)* · `--collaudo` *(nei due versi, `8`/`8`)* |
 | **cosa impedisce** | che `doc/METODI_era1_in_era2.md` **invecchi in silenzio**: ### **ogni metodo del perimetro DEVE avere una riga** *(come si applica · dove · stato)*, citato o no |
 | ### ⭐ **e il PERIMETRO lo calcola l'INDICE** | da ### **campi a vocabolario chiuso** *(`classe in (STANDARD, PRESIDIO)`, piu' le cure di architettura che il mandato nomina **per ID**)*. ### ⛔ **Nessun `titolo` e nessuna `descrizione` si leggono per decidere se una voce e' un metodo** — e' il principio del mandato **applicato a se stesso** |
@@ -2703,7 +2703,7 @@ etichette rimosse, con ### **`0` persi, `0` doppi, `0` conflitti**.
 | | |
 |---|---|
 | **file** | `csv/_controlli_nell_indice.py` |
-| **BLOB** *(sha1 dei byte grezzi)* | `087dbb54` |
+| **BLOB** *(sha1 dei byte grezzi)* | `b758e661` |
 | **COMANDO** | `python csv/_controlli_nell_indice.py` *(gli errori e i segnali)* · `--collaudo` *(nei due versi, `8`/`8`)* · `--segnali` |
 | ### ⛔ **cosa RIFIUTA** | il **codice dichiara un ID** che ### **non e' nell'indice** — un presidio che cita un ID inesistente ### **ha un riferimento rotto** · oppure la voce esiste e ### **non ha `classe: PRESIDIO`** |
 | ### ⚠ **cosa SEGNALA e non rifiuta** | una voce `classe: PRESIDIO` che ### **nessun codice dichiara**: potrebbe vivere ### **in shell** *(i `H-*` stanno in `.githooks/`)* o essere ### **proposta e non cablata** *(`H-ETC-1`, `H-ETC-2`)*. ### **Rifiutare un fatto VERO non e' un presidio: e' un impedimento** *(`A9`)* |
@@ -2725,5 +2725,20 @@ etichette rimosse, con ### **`0` persi, `0` doppi, `0` conflitti**.
 | ### ✅ **e NON RIPARA: MANTIENE** | **misurato:** i ### **sei** presidi `ERRORE` ### **non nominano nessun campo di testo**; i ### **sei** `SEGNALE` lo fanno tutti. ### **Serve perche' domani qualcuno puo' aggiungere una riga**, e la riga che legge un titolo ### **non si vede guardando il verdetto** |
 | ### ⛔ **e il `CR` si rifiuta per una MISURA** | `valida` legge `doc/INDICE_ID.tsv` a ### **newline universali**, e un `CR` nudo in un campo ### **diventa un `LF` in lettura**: la vista ### **non coincide piu'**, e il messaggio dice *«e' stata modificata a mano»* — ### **che e' falso.** `LF` e `TAB` invece ### **le viste li normalizzano** |
 | **i numeri** | `12` presidi *(`6` `ERRORE`, `6` `SEGNALE`)* · `24` chiavi di metadato · `5` registri guardati per `(e)` |
+
+---
+
+### `csv/_rami_era2.py` — **`P-R1`: OGNI RAMO DELLA FISICA E' DICHIARATO** *(2026-10-09)*
+
+| | |
+|---|---|
+| **file** | `csv/_rami_era2.py` |
+| **BLOB** *(sha1 dei byte grezzi)* | `25709836` |
+| **COMANDO** | `python csv/_rami_era2.py` · `--collaudo` *(nei due versi, `10`/`10`)* |
+| ### ⛔ **cosa impedisce** | una funzione di fisica ### **con rami e NON dichiarata** · un ### **conteggio** che non coincide con l'AST · un ### **ruolo fuori vocabolario** · un `perche'` ### **troppo corto** |
+| ### ⭐ **e la parte che conta non e' contarli** | e' ### **dire a che servono:** un `if` non e' un difetto, ### **un `if` NON DICHIARATO lo e'** — perche' nessuno sa se smista, valida, o ### **sceglie in silenzio un pezzo di fisica** |
+| **i ruoli** *(vocabolario chiuso)* | `smistamento` · `validazione` · `iterazione` · ### **`default`** *(un DEBITO: il punto `15(b)` lo vietera')* · ### **`guardia`** *(`A11`: cercare l'errore)* |
+| **i numeri** | ### **`27` rami in `12` funzioni** — `smistamento` `7`, `validazione` `8`, `iterazione` `3`, ### **`default` `9`**, `guardia` ### **`0`** |
+| ### ⚠ **il limite, dichiarato** | ### **la classificazione la scrivo io**, il conteggio no: il presidio garantisce che un ramo ### **NUOVO** non passi inosservato, ### **NON che la mia etichetta sia giusta** |
 
 ---

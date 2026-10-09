@@ -49,6 +49,7 @@ SORGENTI = (
     "csv/_metodi_era2.py",
     "csv/_controlli_nell_indice.py",
     "csv/_testo_e_metadati.py",
+    "csv/_rami_era2.py",
     "csv/indice.py",
     "csv/_hook_presidi.py",
     "csv/_hook_id_obbligatorio.py",

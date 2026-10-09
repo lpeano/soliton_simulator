@@ -80,6 +80,11 @@ jobs:
           python primo_ordine/_genera.py
           git diff --exit-code -- primo_ordine doc/leggi_era2
 
+      - name: "### `P-R1` -- ogni ramo della fisica e- dichiarato"
+        run: |
+          python csv/_rami_era2.py
+          python csv/_rami_era2.py --collaudo
+
       - name: "### `P-T1` -- il testo libero non si interpreta per decidere"
         run: |
           python csv/_testo_e_metadati.py

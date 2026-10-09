@@ -503,6 +503,11 @@ METODI["P-T1"] = (
     "ERRORE non puo- NOMINARE un campo di testo (via AST), e chi legge la prosa PUO- SOLO "
     "SEGNALARE. ### Non ripara: MANTIENE -- la misura dice che oggi e- gia- vero",
     "`csv/_testo_e_metadati.py::controlla`, `pre-commit` + CI", "PORTATO")
+METODI["P-R1"] = (
+    "NATO NELL-ERA 2: `A8` e `P5` cablati. Il CONTEGGIO dei rami lo misura l-AST, il "
+    "RUOLO e- dichiarato a vocabolario chiuso. ### 27 rami in 12 funzioni, e NOVE SONO "
+    "`default` -- un DEBITO che il punto 15(b) vietera-, dichiarato invece che nascosto",
+    "`csv/_rami_era2.py::controlla`, `pre-commit` + CI", "PORTATO")
 METODI["AUDIT-CURE"] = (
     "il censimento delle cure e del loro costo: ### IL PUNTO 10 chiede che ogni referto "
     "STAMPI il numero delle leggi, e che un commit che lo aumenta lo DICHIARI",

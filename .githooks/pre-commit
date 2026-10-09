@@ -32,3 +32,8 @@ python "$(git rev-parse --show-toplevel)/csv/_controlli_nell_indice.py" || exit 
 #  ### Un presidio dichiarato `ERRORE` non puo' nominare un campo di TESTO (via AST):
 #  ### chi RIFIUTA decide da campi strutturati, chi legge la prosa PUO' SOLO SEGNALARE.
 python "$(git rev-parse --show-toplevel)/csv/_testo_e_metadati.py" || exit 1
+
+#  `P-R1` -- OGNI RAMO DELLA FISICA DELL'ERA 2 E' DICHIARATO.
+#  ### `A8`: un ramo silenzioso non e' un ramo. Il CONTEGGIO lo misura l'AST, il
+#  ### RUOLO e' dichiarato a vocabolario chiuso. Un ramo nuovo non passa inosservato.
+python "$(git rev-parse --show-toplevel)/csv/_rami_era2.py" || exit 1
