@@ -498,6 +498,11 @@ METODI["P-C1"] = (
     "nell-indice RIFIUTA, una voce PRESIDIO che nessun codice dichiara SEGNALA (A9). "
     "### E HA PRESO SE- STESSO, come P-M1",
     "`csv/_controlli_nell_indice.py::controlla`, `pre-commit` + CI", "PORTATO")
+METODI["P-T1"] = (
+    "NATO NELL-ERA 2, ed e- il principio del mandato CABLATO: un presidio dichiarato "
+    "ERRORE non puo- NOMINARE un campo di testo (via AST), e chi legge la prosa PUO- SOLO "
+    "SEGNALARE. ### Non ripara: MANTIENE -- la misura dice che oggi e- gia- vero",
+    "`csv/_testo_e_metadati.py::controlla`, `pre-commit` + CI", "PORTATO")
 METODI["AUDIT-CURE"] = (
     "il censimento delle cure e del loro costo: ### IL PUNTO 10 chiede che ogni referto "
     "STAMPI il numero delle leggi, e che un commit che lo aumenta lo DICHIARI",

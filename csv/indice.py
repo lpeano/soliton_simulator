@@ -115,6 +115,33 @@ PRESIDI = {
     "PI-CHIUSURA-ORFANA": "_f12_chiusura_orfana",
 }
 
+# =====================================================================================
+#   LA SEVERITA- DI OGNI PRESIDIO -- punto `13(b)`, a VOCABOLARIO CHIUSO
+# -------------------------------------------------------------------------------------
+#   ### ⛔ **PERCHE- DICHIARATA E NON DEDOTTA:** la severita- si potrebbe dedurre da
+#   ### ### **quale lista** un presidio finisce *(`err` oppure `segnali`)*, e dedurre
+#   ### dalla ### **forma del codice** e- esattamente cio- che questo mandato vieta.
+#   ### ⭐ **`P-T1` la legge VIA AST e verifica che NESSUN presidio `ERRORE` tocchi
+#   ### un campo di TESTO** -- chi RIFIUTA decide da campi strutturati, chi legge la
+#   ### prosa ### **puo- solo SEGNALARE.**
+#   ### ✅ **E oggi e- VERO, MISURATO:** i sei `ERRORE` non nominano nessun campo di
+#   ### testo e non chiamano nessuna ricerca testuale; i sei `SEGNALE` lo fanno tutti.
+# =====================================================================================
+PRESIDI_SEVERITA = {
+    "PI-GEMELLE": "SEGNALE",
+    "PI-SIMBOLI-ERA1": "SEGNALE",
+    "PI-PAROLE-STRUMENTO": "SEGNALE",
+    "PI-ETICHETTA-DEFINITA": "SEGNALE",
+    "PI-STORICO-SENZA-COMMIT": "ERRORE",
+    "PI-NOTA-CONTRADDICE-LISTA": "SEGNALE",
+    "PI-FISICA-ERA1-NON-SOSPESA": "ERRORE",
+    "PI-OGGETTI-ERA1": "SEGNALE",
+    "PI-ERA-STATO": "ERRORE",
+    "PI-CRITERIO-METODO": "ERRORE",
+    "PI-REPLAY": "ERRORE",
+    "PI-CHIUSURA-ORFANA": "ERRORE",
+}
+
 # ### ⛔ **LA FORMA DI UN-ECCEZIONE SI COSTRUISCE DALLA TABELLA `PRESIDI`.**
 # ### Scrivere l-elenco a mano qui sarebbe ### **un secondo posto** dove i nomi
 # ### dei presidi possono divergere -- e ### **divergerebbero**, perche- i nomi

@@ -11286,3 +11286,28 @@ Dopo la sostituzione i segnali sono passati da ### **`19` a `53`.** ### ⭐ **E 
 ### ⚠ **E DUE SEGNALI RESTAVANO, ed erano MIEI:** `P-E2` nomina un flag ### **di git** *(`--exit-code`)*, e ### **la voce di `PI-SIMBOLI-ERA1` ELENCA i simboli che cerca** — un presidio che definisce se stesso ### **nomina cio- che cerca.** Chiusi con l-`eccezione_presidio` che ### **cita il testo alla lettera**, che e- la via prevista. ### **Segnali: `18`, come prima del rinominamento.**
 
 **I numeri:** `79` + `78` + `26` + `1` sostituzioni nei quattro file vivi · `12` voci nuove con alias · `32` prefissi di eccezione riscritti · ### **`P-C1`: `22` presidi dichiarati** *(da `10`)* · ### **`P-M1`: `109` metodi e `109` righe** *(da `97`)* · collaudi ### **`67`/`67`, `8`/`8`, `8`/`8`, `6`/`6`.**
+
+## PUNTO `13(a)(b)(e)` — ### **IL TESTO LIBERO NON SI INTERPRETA PER DECIDERE** *(2026-10-09)*
+
+### ✅ **E LA PRIMA COSA CHE HO FATTO E- MISURARE, invece di curare:** ### **i sei presidi che sono ERRORI non nominano NESSUN campo di testo e non chiamano nessuna ricerca testuale**; i sei che SEGNALANO lo fanno tutti. ### ⭐ **Quindi il punto `13(b)` E- GIA- VERO**, e `P-T1` ### **non ripara: MANTIENE** — serve perche- ### **domani qualcuno puo- aggiungere una riga a un presidio bloccante**, e la riga che legge un titolo ### **non si vede guardando il verdetto: si vede guardando il codice.**
+
+### ⛔ **E LA SEVERITA- E- DICHIARATA, non dedotta** *(`PRESIDI_SEVERITA`, vocabolario chiuso)*: si potrebbe dedurre da ### **quale lista** un presidio finisce *(`err` oppure `segnali`)*, e ### **dedurre dalla FORMA DEL CODICE e- esattamente cio- che questo mandato vieta.**
+
+### ⚠ **E DUE MIE REGOLE ERANO TROPPO LARGHE, e me l-ha detto il presidio stesso**
+
+| | che avevo scritto | che ho misurato |
+|---|---|---|
+| `1` | fra le chiamate vietate avevo messo `split`, `lower`, `startswith`… | ### **`P-T1` ha rifiutato `PI-STORICO-SENZA-COMMIT`**, perche- `_f5_storico` fa `read().split(NL)`: ### **spezzare un file in righe NON e- interpretare una prosa.** ### ✅ **L-atto rilevabile e- NOMINARE UN CAMPO DI TESTO**, e resta solo `_testo_voce` — che esiste SOLO per concatenarli |
+| `2` | avevo ammesso `CR`, `LF` e `TAB` fra i caratteri di controllo | ### ⛔ **IL `CR` ROMPE UNA VISTA**, e l-ho misurato — vedi sotto |
+
+### ⛔ **IL `CR`: UN DIFETTO CHE MI SONO FATTO, E CHE HA SPIEGATO UN MESSAGGIO FALSO**
+
+Nella descrizione di `P-T1` ho scritto i nomi dei caratteri ### **dentro un heredoc**, e Python ### **ha interpretato gli escape**: nella voce sono finiti ### **un `CR`, un `LF` e un `TAB` VERI.** Subito dopo, `valida` ha cominciato a dire ### **«la VISTA `doc/INDICE_ID.tsv` NON coincide: e- stata modificata a mano»** — e ### **rigenerarla NON serviva.**
+
+### ⭐ **LA CAUSA, misurata:** `valida` legge il `TSV` con `io.open(..., encoding="utf-8").read()`, cioe- ### **a NEWLINE UNIVERSALI**, e un ### **`CR` nudo dentro un campo diventa un `LF` in lettura** — quindi il confronto fallisce ### **e il messaggio accusa una modifica a mano che non c-e- stata.** ### ✅ **`LF` e `TAB` invece le viste li NORMALIZZANO** *(`.replace(NL, " ")`, `.replace(TAB, " ")`)*; ### **il `CR` no, e nessuno lo aveva notato perche- NESSUNA VOCE NE AVEVA UNO.**
+
+### ✅ **Curato in tre atti:** i tre caratteri ### **escono dalla voce** *(via unica)*, ### **la regola si stringe** *(`CR` rifiutato, e il commento dice **la misura**, non la prudenza)*, e il collaudo guadagna ### **il braccio che prova che scatta** piu- quello che prova che ### **`LF` e `TAB` NON fanno scattare** — altrimenti si rifiuterebbe `metadati.jsonl`, che ne ha uno.
+
+**Collaudo `11`/`11`**, nei due versi. `(a)` `24` chiavi di metadato, tutte registrate con `tipo` e `descrizione`. `(e)` cinque registri guardati.
+
+### ⚠ **E CHE COSA NON HO FATTO DEL PUNTO `13`, detto per nome:** `(c)` *(ogni campo di testo cambia solo con una riga di storico che ne porta l-impronta, e il replay a TUTTI i registri)*, `(d)` *(le citazioni STRUTTURATE `{file, riga, commit, impronta}`, verificate su `git show`)* e `(f)` *(tutti i testi generati byte-identici)*. ### **`(f)` e- gia- vero per le viste e per `doc/METODI_era1_in_era2.md`, e NON per tutti.** Sono un commit a se-.

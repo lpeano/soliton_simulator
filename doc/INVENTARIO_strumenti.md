@@ -2688,7 +2688,7 @@ etichette rimosse, con ### **`0` persi, `0` doppi, `0` conflitti**.
 | | |
 |---|---|
 | **file** | `csv/_metodi_era2.py` |
-| **BLOB** *(sha1 dei byte grezzi)* | `6c2fbfec` |
+| **BLOB** *(sha1 dei byte grezzi)* | `c07692d1` |
 | **COMANDO** | `python csv/_metodi_era2.py` *(il presidio, e GENERA il documento)* · `--collaudo` *(nei due versi, `8`/`8`)* |
 | **cosa impedisce** | che `doc/METODI_era1_in_era2.md` **invecchi in silenzio**: ### **ogni metodo del perimetro DEVE avere una riga** *(come si applica · dove · stato)*, citato o no |
 | ### ⭐ **e il PERIMETRO lo calcola l'INDICE** | da ### **campi a vocabolario chiuso** *(`classe in (STANDARD, PRESIDIO)`, piu' le cure di architettura che il mandato nomina **per ID**)*. ### ⛔ **Nessun `titolo` e nessuna `descrizione` si leggono per decidere se una voce e' un metodo** — e' il principio del mandato **applicato a se stesso** |
@@ -2703,12 +2703,27 @@ etichette rimosse, con ### **`0` persi, `0` doppi, `0` conflitti**.
 | | |
 |---|---|
 | **file** | `csv/_controlli_nell_indice.py` |
-| **BLOB** *(sha1 dei byte grezzi)* | `1fda339d` |
+| **BLOB** *(sha1 dei byte grezzi)* | `087dbb54` |
 | **COMANDO** | `python csv/_controlli_nell_indice.py` *(gli errori e i segnali)* · `--collaudo` *(nei due versi, `8`/`8`)* · `--segnali` |
 | ### ⛔ **cosa RIFIUTA** | il **codice dichiara un ID** che ### **non e' nell'indice** — un presidio che cita un ID inesistente ### **ha un riferimento rotto** · oppure la voce esiste e ### **non ha `classe: PRESIDIO`** |
 | ### ⚠ **cosa SEGNALA e non rifiuta** | una voce `classe: PRESIDIO` che ### **nessun codice dichiara**: potrebbe vivere ### **in shell** *(i `H-*` stanno in `.githooks/`)* o essere ### **proposta e non cablata** *(`H-ETC-1`, `H-ETC-2`)*. ### **Rifiutare un fatto VERO non e' un presidio: e' un impedimento** *(`A9`)* |
 | ### ⭐ **e il BERSAGLIO si verifica** | se e' un nome, ### **la funzione deve esistere nel modulo**; se e' un percorso, ### **il file deve esistere** — letto **via AST**. ### **Una dichiarazione senza niente dietro e' una promessa**, e questo repo ne ha gia' avute |
 | **due forme di dichiarazione** | `PRESIDIO = "<id>"` *(un file, **un** presidio)* · `PRESIDI = {"<id>": "<bersaglio>"}` *(un file che ne tiene **molti**: `csv/indice.py` ne ha **dodici**, e un solo `PRESIDIO` non potrebbe nominarli)* |
 | **i numeri** | `10` presidi dichiarati dal codice · `8` sorgenti guardate · `23` segnali · `0` errori |
+
+---
+
+### `csv/_testo_e_metadati.py` — **`P-T1`: IL TESTO LIBERO NON SI INTERPRETA PER DECIDERE** *(2026-10-09)*
+
+| | |
+|---|---|
+| **file** | `csv/_testo_e_metadati.py` |
+| **BLOB** *(sha1 dei byte grezzi)* | `483b9559` |
+| **COMANDO** | `python csv/_testo_e_metadati.py` · `--collaudo` *(nei due versi, `11`/`11`)* |
+| ### ⛔ **cosa impedisce** | `(b)` un presidio dichiarato **`ERRORE`** che ### **NOMINA un campo di TESTO** *(o chiama `_testo_voce`)*, letto **via AST** · `(a)` una chiave di `meta` **usata e non REGISTRATA** · `(e)` un testo ### **non `NFC`** o con un ### **`CR`** |
+| ### ⭐ **e la SEVERITA' e' DICHIARATA, non dedotta** | `PRESIDI_SEVERITA` in `csv/indice.py`, a vocabolario chiuso *(`ERRORE` · `SEGNALE`)*. ### **Dedurla da quale lista un presidio finisce vorrebbe dire dedurre dalla FORMA DEL CODICE** — cioe' esattamente cio' che il mandato vieta |
+| ### ✅ **e NON RIPARA: MANTIENE** | **misurato:** i ### **sei** presidi `ERRORE` ### **non nominano nessun campo di testo**; i ### **sei** `SEGNALE` lo fanno tutti. ### **Serve perche' domani qualcuno puo' aggiungere una riga**, e la riga che legge un titolo ### **non si vede guardando il verdetto** |
+| ### ⛔ **e il `CR` si rifiuta per una MISURA** | `valida` legge `doc/INDICE_ID.tsv` a ### **newline universali**, e un `CR` nudo in un campo ### **diventa un `LF` in lettura**: la vista ### **non coincide piu'**, e il messaggio dice *«e' stata modificata a mano»* — ### **che e' falso.** `LF` e `TAB` invece ### **le viste li normalizzano** |
+| **i numeri** | `12` presidi *(`6` `ERRORE`, `6` `SEGNALE`)* · `24` chiavi di metadato · `5` registri guardati per `(e)` |
 
 ---

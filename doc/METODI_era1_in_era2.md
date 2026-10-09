@@ -8,17 +8,17 @@
 
 | | quanti |
 |---|--:|
-| **`PORTATO`** | `65` |
+| **`PORTATO`** | `66` |
 | **`DA_PORTARE`** | `30` |
 | **`DA_DECIDERE`** | `5` |
 | **`NON_SI_APPLICA`** | `9` |
-| **in tutto** | ### **`109`** |
+| **in tutto** | ### **`110`** |
 
-### ⚠ **E IL NUMERO `109` E- MISURATO, non stimato:** viene dal perimetro che l-indice calcola, e ### **il mandato ne nominava <<una decina>>** per nome piu- *<<e le cure di architettura>>*. ### **La decina era `20`.**
+### ⚠ **E IL NUMERO `110` E- MISURATO, non stimato:** viene dal perimetro che l-indice calcola, e ### **il mandato ne nominava <<una decina>>** per nome piu- *<<e le cure di architettura>>*. ### **La decina era `20`.**
 
 ---
 
-## `PORTATO` — `65` metodi
+## `PORTATO` — `66` metodi
 
 > ### ✅ **GIA- NELL-ERA `2`**, e `dove` dice dove
 
@@ -61,6 +61,7 @@
 | **`P-E7`** | `PRESIDIO` | NATO NELL-ERA 2. I riferimenti esistono: la scheda sul disco, e ### dal 2026-10-09 la `voce` di un osservatore RISOLVE nell-indice -- prima era una stringa che nessuno verificava | `csv/_presidi_era2.py::pe7`, `pre-commit` + CI |
 | **`P-E8`** | `PRESIDIO` | NATO NELL-ERA 2, ed e- IL SOLO che NON IMPEDISCE: senza protezione del ramo la CI gira DOPO il push. ### E- UNA RETE CHE SEGNALA (`A9`), e qui avevo scritto il contrario. ### E non e- mai stata osservata girare | `.github/workflows/era2.yml`; ### SEGNALA, non impedisce |
 | **`P-M1`** | `PRESIDIO` | e- il presidio di questo punto: ### SI APPLICA A SE- STESSO -- appena la sua voce e- nata, il perimetro lo ha incluso e lui ha RIFIUTATO IL COMMIT chiedendo questa riga. ### Non l-ho previsto: me l-ha detto lui | `csv/_metodi_era2.py::controlla`, cablato nel `pre-commit` e nella CI |
+| **`P-T1`** | `PRESIDIO` | NATO NELL-ERA 2, ed e- il principio del mandato CABLATO: un presidio dichiarato ERRORE non puo- NOMINARE un campo di testo (via AST), e chi legge la prosa PUO- SOLO SEGNALARE. ### Non ripara: MANTIENE -- la misura dice che oggi e- gia- vero | `csv/_testo_e_metadati.py::controlla`, `pre-commit` + CI |
 | **`P1`** | `STANDARD` | non usare l-associazione senza verificare lo storico: in questo mandato ho riletto dal disco prima di ogni cura, e due volte la rilettura mi ha smentito | metodo, non codice |
 | **`P1-bis`** | `STANDARD` | la relazione si scrive nello stesso commit del riscontro: ogni commit di questo mandato ha il suo paragrafo | `RELAZIONE_PER_CLAUDE.md` + `H-P1-bis` |
 | **`P1-quater`** | `STANDARD` | ogni sostituzione si asserisce per se-: l-helper `sost()` conta l-ancora e FALLISCE se non e- unica. ### E LA LEZIONE SI E- ALLARGATA: non solo gli escape, ma il NESTING -- i heredoc di bash si sono rotti tre volte sull-apostrofo, e i patch script si scrivono con lo strumento di scrittura | ogni patch script di questo mandato |

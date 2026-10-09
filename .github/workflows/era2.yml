@@ -80,6 +80,11 @@ jobs:
           python primo_ordine/_genera.py
           git diff --exit-code -- primo_ordine doc/leggi_era2
 
+      - name: "### `P-T1` -- il testo libero non si interpreta per decidere"
+        run: |
+          python csv/_testo_e_metadati.py
+          python csv/_testo_e_metadati.py --collaudo
+
       - name: "### `P-C1` -- anche i controlli stanno nell-indice"
         run: |
           python csv/_controlli_nell_indice.py

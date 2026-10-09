@@ -27,3 +27,8 @@ python "$(git rev-parse --show-toplevel)/csv/_metodi_era2.py" || exit 1
 #  ### Una voce `PRESIDIO` che nessun codice dichiara e' un SEGNALE, non un
 #  ### errore: potrebbe vivere in shell, o essere proposta e non cablata (`A9`).
 python "$(git rev-parse --show-toplevel)/csv/_controlli_nell_indice.py" || exit 1
+
+#  `P-T1` -- IL TESTO LIBERO NON SI INTERPRETA PER DECIDERE.
+#  ### Un presidio dichiarato `ERRORE` non puo' nominare un campo di TESTO (via AST):
+#  ### chi RIFIUTA decide da campi strutturati, chi legge la prosa PUO' SOLO SEGNALARE.
+python "$(git rev-parse --show-toplevel)/csv/_testo_e_metadati.py" || exit 1
