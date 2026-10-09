@@ -5,15 +5,15 @@
 | dominio | era | voci |
 |---|---|--:|
 | `DA_CLASSIFICARE` | `DA_CLASSIFICARE` | 179 |
-| `DOCUMENTAZIONE` | `1` | 17 |
+| `DOCUMENTAZIONE` | `1` | 21 |
 | `DOCUMENTAZIONE` | `ENTRAMBE` | 6 |
-| `FISICA` | `1` | 393 |
-| `FISICA` | `2` | 43 |
-| `FISICA` | `DA_CLASSIFICARE` | 2 |
+| `FISICA` | `1` | 394 |
+| `FISICA` | `2` | 26 |
+| `FISICA` | `DA_CLASSIFICARE` | 1 |
 | `FISICA` | `ENTRAMBE` | 16 |
-| `INFRASTRUTTURA` | `1` | 14 |
-| `INFRASTRUTTURA` | `ENTRAMBE` | 29 |
-| `METODO` | `ENTRAMBE` | 114 |
+| `INFRASTRUTTURA` | `1` | 16 |
+| `INFRASTRUTTURA` | `ENTRAMBE` | 30 |
+| `METODO` | `ENTRAMBE` | 124 |
 
 | id | classe | dominio | era | stato | blocca | titolo |
 |---|---|---|---|---|---|---|
@@ -56,7 +56,7 @@
 | `ARCH-SYNC` | CURA | INFRASTRUTTURA | 1 | ### **CHIUSA** |  | SYNC_UPDATE e i suoi rami escono dal simulatore; --sync diventa un no-op accetta |
 | `ARCHI-OLTRE-4PI` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | circa 109 archi sono oltre il tetto 4pi dal passo 2 e non rilassano, in tutti i  |
 | `ARCHI-PRIMI` | DIFETTO | INFRASTRUTTURA | ENTRAMBE | ### **APERTA** |  | la vista disegna i PRIMI 24000 archi per indice: il 100 % finisce in un quadrant |
-| `AUDIT-CURE` | FRONTE | FISICA | 2 | ### **AGENDA** |  | per ogni legge aggiunta: compensava un difetto che ORA e' curato? Non il numero: |
+| `AUDIT-CURE` | FRONTE | METODO | ENTRAMBE | ### **APERTA** |  | per ogni legge aggiunta: compensava un difetto che ORA e' curato? Non il numero: |
 | `B1` | DIFETTO | FISICA | 1 | ### **CHIUSA** |  | Z47 — pos nella fisica: l'ultimo SFONDO / doc/RAMIFICAZIONI.md Z47, doc/ASSIOMI. |
 | `B10` | DIFETTO | INFRASTRUTTURA | ENTRAMBE | ### **CHIUSA** |  | --override-blob e la COPIA del driver / csv/testfork/scenavideoripresa.py (e68bb |
 | `B2` | DIFETTO | METODO | ENTRAMBE | ### **CHIUSA** |  | Z31 — i sigilli non ri-girabili / Z31, citata in 17 file / rifatta TRE volte, l' |
@@ -67,7 +67,7 @@
 | `B5-KURAMOTO` | MISURA | FISICA | 1 | ### **CHIUSA** |  | KURAMOTO VALE SEMPRE ⏳[EPOCA 1 · CODICE] / Kuramoto refutato / K-frozen byte-ide |
 | `B6` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | le due cure OFF: COPPIARECIPROCA e GRAVAMPIEZZA / :739 e :732 (entrambe = False) |
 | `B6-TURBO` | MISURA | FISICA | 1 | ### **CHIUSA** |  | TURBO VALE SEMPRE ⏳[EPOCA 1 · MISURA] / Esito B del turbo — con cs al 5 % di CSM |
-| `B7` | DIFETTO | FISICA | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | i reperti DA RIMISURARE sulla scena nuova / Z43, Z46, Z48-Z52, coerg / misurati  |
+| `B7` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | i reperti DA RIMISURARE sulla scena nuova / Z43, Z46, Z48-Z52, coerg / misurati  |
 | `B7-SHAKE` | MISURA | FISICA | 1 | ### **SOSPESA** |  | SHAKE 🟨VALE PER QUELLA SCENA ⏳[EPOCA 1 · MISURA] / shake-then-freeze — la preces |
 | `B8` | DIFETTO | INFRASTRUTTURA | ENTRAMBE | ### **CHIUSA** |  | IL BLOCCO DEL RUN A 6000 AL PASSO 2700 / doc/REFERTObloccorun6000.md (131 righe) |
 | `B9` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | Z63 / Z64 — i 1455 nodi a 10⁻¹³; la catena f → x → r che non riproduce r / regis |
@@ -91,10 +91,10 @@
 | `C22` | MISURA | FISICA | 1 | ### **SOSPESA** |  | C22 🟨VALE PER QUELLA SCENA ⏳[EPOCA 1 · MISURA] / LA CRESCITA DI Ltot E' L'INERZI |
 | `C23` | MISURA | FISICA | 1 | ### **SOSPESA** |  | C23 🟨VALE PER QUELLA SCENA ⏳[EPOCA 1 · MISURA] / IL FATTORE (CSM/cs)^2 NON E' 1  |
 | `C24` | MISURA | FISICA | 1 | ### **SOSPESA** |  | C24 🟨VALE PER QUELLA SCENA ⏳[EPOCA 1 · MISURA] / LA CRESCITA DI Ltot STA NELLA C |
-| `C25` | MISURA | FISICA | 1 | ### **CHIUSA** |  | C25 VALE SEMPRE ⏳[EPOCA 1 · CODICE] / UN FILE NON SI PUO' COMMITTARE PER IL SUO  |
+| `C25` | MISURA | INFRASTRUTTURA | 1 | ### **CHIUSA** |  | C25 VALE SEMPRE ⏳[EPOCA 1 · CODICE] / UN FILE NON SI PUO' COMMITTARE PER IL SUO  |
 | `C26` | MISURA | FISICA | 1 | ### **CHIUSA** |  | C26 VALE SEMPRE ⏳[EPOCA 1 · CODICE] / VERSOCHI E' UN NO-OP SILENZIOSO SOTTO CHIC |
 | `C27` | MISURA | FISICA | 1 | ### **CHIUSA** |  | C27 VALE SEMPRE ⏳[EPOCA 1 · CODICE] / TRE FLAG VIVONO DENTRO if VIRIALE: E NON L |
-| `C28` | MISURA | FISICA | 1 | ### **CHIUSA** |  | C28 VALE SEMPRE ⏳[EPOCA 1 · CODICE] / 14 FLAG SU 16 NON HANNO ALCUN SIGILLO. Tie |
+| `C28` | MISURA | METODO | ENTRAMBE | ### **CHIUSA** |  | C28 VALE SEMPRE ⏳[EPOCA 1 · CODICE] / 14 FLAG SU 16 NON HANNO ALCUN SIGILLO. Tie |
 | `C3` | MISURA | FISICA | 1 | ### **CHIUSA** |  | C3 VALE SEMPRE ⏳[EPOCA 1 · MISURA] / Il residuo di 0.34 e' TRANSITORIO, non un t |
 | `C3-SCALA-MIN-PASSO` | CURA | FISICA | 1 | ### **SOSPESA** |  | SCALAMINPASSO — il freno una volta per passo / GLOBALE §2③ / 6/6 (Z97) |
 | `C4` | MISURA | FISICA | 1 | ### **CHIUSA** |  | C4 VALE SEMPRE ⏳[EPOCA 1 · CODICE] / inerzia = T² — chiude il buco dimensionale; |
@@ -106,10 +106,10 @@
 | `C7` | MISURA | FISICA | 1 | ### **CHIUSA** |  | C7 VALE SEMPRE ⏳[EPOCA 1 · MISURA] / La cache csnodoprev veniva scartata a ogni  |
 | `C8` | MISURA | FISICA | 1 | ### **CHIUSA** |  | C8 VALE SEMPRE ⏳[EPOCA 1 · MISURA] / LA FASE 2 NON SI CHIUDE. Col tempo-luce cab |
 | `C9` | MISURA | FISICA | 1 | ### **CHIUSA** |  | C9 VALE SEMPRE ⏳[EPOCA 1 · MISURA] / --tau-luce ha un effetto GRANDE sulla pende |
-| `CARICA-DI-GAUGE` | DIFETTO | FISICA | 2 | ### **AGENDA** |  | il segno di perc_chi dipende al 100 per cento dal rappresentante canonico: e' un |
-| `CARICA-PERCORSO` | FRONTE | FISICA | 2 | ### **AGENDA** |  | l ordine in cui si chiude il filone della carica: cinque punti, e il primo si pu |
-| `CARICA-ROTAZIONE` | MISURA | FISICA | 2 | ### **AGENDA** |  | la carica e' il verso di rotazione collettivo: somma di /psi/^2 * phivel per mas |
-| `CARICA-SIMMETRIA-FASE` | MISURA | FISICA | 2 | ### **AGENDA** |  | la carica e il verso di rotazione: il test dello spostamento globale, e quale fr |
+| `CARICA-DI-GAUGE` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | il segno di perc_chi dipende al 100 per cento dal rappresentante canonico: e' un |
+| `CARICA-PERCORSO` | FRONTE | FISICA | 1 | ### **SOSPESA** |  | l ordine in cui si chiude il filone della carica: cinque punti, e il primo si pu |
+| `CARICA-ROTAZIONE` | MISURA | FISICA | 1 | ### **SOSPESA** |  | la carica e' il verso di rotazione collettivo: somma di /psi/^2 * phivel per mas |
+| `CARICA-SIMMETRIA-FASE` | MISURA | FISICA | 1 | ### **SOSPESA** |  | la carica e il verso di rotazione: il test dello spostamento globale, e quale fr |
 | `CBIS-CRITERIO-VACUO` | DIFETTO | METODO | ENTRAMBE | ### **CHIUSA** |  | il criterio del braccio C-bis era vacuo: _eventi stava sempre fra le sbagliate |
 | `CELLE-NAN-APPESE-NOME-SCADUTO` | FRONTE | INFRASTRUTTURA | ENTRAMBE | ### **APERTA** |  | celle_nan_appese misura len_dopo - len_prima, che coincideva col veleno solo pri |
 | `CENS-A1` | DIFETTO | FISICA | 1 | ### **SOSPESA** | SI | [A] la RIDUZIONE AL LIMITE dello spinore: lo stato che la garantisce non e' ragg |
@@ -117,8 +117,8 @@
 | `CENS-A3` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | [A] `COPPIA_MIT`: *"(opzione, spenta di default)"*, e il default e' `1.0` |
 | `CENS-A4` | DIFETTO | DOCUMENTAZIONE | 1 | ### **APERTA** |  | [A] `MITOSI_DIR`: *"MITOSI DIREZIONALE ATTIVA"*, e il valore e' `0.0` |
 | `CENS-A5` | DIFETTO | DOCUMENTAZIONE | 1 | ### **APERTA** |  | [A] `_passo_spinoriale` *"ORFANO"*: smentito da un altro commento dello stesso f |
-| `CENS-A6` | DIFETTO | FISICA | 1 | ### **SOSPESA** | SI | [A] `README.md`: *"Tutti gli script di lancio includono esplicitamente `--sync`" |
-| `CENS-A7` | DIFETTO | FISICA | 1 | ### **SOSPESA** | SI | [A] il commento di `calcola_psi`: *"~19 chiamanti"*, misurato **2** |
+| `CENS-A6` | DIFETTO | DOCUMENTAZIONE | 1 | ### **SOSPESA** | SI | [A] `README.md`: *"Tutti gli script di lancio includono esplicitamente `--sync`" |
+| `CENS-A7` | DIFETTO | DOCUMENTAZIONE | 1 | ### **SOSPESA** | SI | [A] il commento di `calcola_psi`: *"~19 chiamanti"*, misurato **2** |
 | `CENS-B1` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | [B] *"`SPINORE_VIVO = True` **NON E' MAI STATO VALIDATO COME DEFAULT** ... |
 | `CENS-B10` | DIFETTO | DOCUMENTAZIONE | 1 | ### **APERTA** |  | [B] *"**ESPLORATIVO**: lega la creazione di coppia anche all'anomalia di d |
 | `CENS-B11` | DIFETTO | DOCUMENTAZIONE | 1 | ### **APERTA** |  | [B] tre osservabili di controllo nominate una per una -- *"esponente di sc |
@@ -136,10 +136,10 @@
 | `CENS-B8` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | [B] *"INTEGRATORE METRICO **SPERIMENTALE** ... Default off per mantenere i |
 | `CENS-B9` | DIFETTO | DOCUMENTAZIONE | 1 | ### **APERTA** |  | [B] *"LEGGE DI STABILITA' (**esplorativa**): i nuovi nodi in regione sovra |
 | `CHI-BASC-DESCRIZIONE` | DIFETTO | DOCUMENTAZIONE | 1 | ### **CHIUSA** |  | il flag --chi-basc stampa <<perc_chi vira>>, ma con --chi-coop scrive perc_geom |
-| `CHI-TORS-ZERO-FALSO` | DIFETTO | FISICA | 1 | ### **CHIUSA** |  | il gancio chi_tors lascia uno ZERO dove non ha potuto misurare: 392 e 731 passi  |
-| `CHK2` | CURA | METODO | ENTRAMBE | ### **APERTA** |  | CHECKPOINT 2 / GLOBALE §3 / raggiunto e riferito a Luca. IL RUN LUNGO NON SI LAN |
-| `CHK3` | CURA | METODO | ENTRAMBE | ### **APERTA** |  | CHECKPOINT: referto dei quattro esiti, ciascuno contro le sue letture fissate PR |
-| `CHK3-D` | CURA | METODO | ENTRAMBE | ### **APERTA** |  | Nel referto del CHK3, la sezione «I DIFETTI NUOVI CONTRO LE MISURE GIA' FATTE» — |
+| `CHI-TORS-ZERO-FALSO` | DIFETTO | METODO | ENTRAMBE | ### **CHIUSA** |  | il gancio chi_tors lascia uno ZERO dove non ha potuto misurare: 392 e 731 passi  |
+| `CHK2` | CURA | FISICA | 1 | ### **SOSPESA** |  | CHECKPOINT 2 / GLOBALE §3 / raggiunto e riferito a Luca. IL RUN LUNGO NON SI LAN |
+| `CHK3` | CURA | FISICA | 1 | ### **SOSPESA** |  | CHECKPOINT: referto dei quattro esiti, ciascuno contro le sue letture fissate PR |
+| `CHK3-D` | CURA | FISICA | 1 | ### **SOSPESA** |  | Nel referto del CHK3, la sezione «I DIFETTI NUOVI CONTRO LE MISURE GIA' FATTE» — |
 | `CICLO-CHIUSURA-SEGNO` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | il segno dell arco di chiusura in _base_cicli_topologici e opposto al verso di p |
 | `CLI-1` | CURA | INFRASTRUTTURA | ENTRAMBE | ### **APERTA** | SI | I SIGILLI DI CURA 4 E CURA 5 NON HANNO MAI PROVATO IL PERCORSO CLI: impostavano  |
 | `CLIP-INVENTARIO` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | INVENTARIO dei clip, tetti e pavimenti del passo pieno: 27 TETTI FISICI su 117 g |
@@ -168,8 +168,8 @@
 | `COMPONENTI:D1` | CRITERIO | FISICA | 1 | ### **CHIUSA** |  | csnodoprev esteso alla mitosi — il figlio eredita cs dal padre, come le altre se |
 | `COMPONENTI:D2` | CRITERIO | FISICA | 1 | ### **CHIUSA** |  | psispinprec esteso alla mitosi — settima voce della stessa convenzione / guardia |
 | `COMPONENTI:S1` | CRITERIO | FISICA | 1 | ### **SOSPESA** |  | FAIL ATTESO — vs blob 2277e9a0, di quattro cambiamenti fa / nodi 3164 contro 292 |
-| `COMPONENTI:S2` | CRITERIO | FISICA | 1 | ### **SOSPESA** |  | riduzione al limite sul blob ATTUALE: ON (cs=CSM) vs OFF byte-identico / 0.000e+ |
-| `COMPONENTI:S3` | CRITERIO | FISICA | 1 | ### **SOSPESA** |  | S3.0 / IL CONTROLLO POSITIVO: il test VEDE l'effetto / 39/40 nodi con \/f(1)−f(0 |
+| `COMPONENTI:S2` | CRITERIO | METODO | ENTRAMBE | ### **APERTA** |  | riduzione al limite sul blob ATTUALE: ON (cs=CSM) vs OFF byte-identico / 0.000e+ |
+| `COMPONENTI:S3` | CRITERIO | METODO | ENTRAMBE | ### **APERTA** |  | S3.0 / IL CONTROLLO POSITIVO: il test VEDE l'effetto / 39/40 nodi con \/f(1)−f(0 |
 | `COMPONENTI:S3b` | CRITERIO | FISICA | 1 | ### **SOSPESA** |  | l'orologio rallenta dove cs è basso / 0.0100 volte a cs = 0.1·CSM |
 | `COMPONENTI:S3c` | CRITERIO | FISICA | 1 | ### **SOSPESA** |  | a cs = CSM il fattore è 1 esatto / 1.000000000000000 |
 | `COMPONENTI:Y0-Y10` | CRITERIO | FISICA | 1 | ### **CHIUSA** |  | Y10, 11/11 PASS. |
@@ -188,7 +188,7 @@
 | `D0` | CURA | FISICA | 1 | ### **SOSPESA** |  | CHI FA SCAPPARE d0 / 21/9 / MISURATO: e' IL FRENO. Gli scrittori spingono giu' - |
 | `D01` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | S09 clippa al passo causale — quindi e' gia' una LUNGHEZZA — e poi moltiplica pe |
 | `D02` | DIFETTO | FISICA | 1 | ### **CHIUSA** |  | pozzografo calcola L da self.pos — IL DISEGNO — mentre il suo docstring dichiara |
-| `D03` | DIFETTO | FISICA | 2 | ### **AGENDA** | SI | La memoria del moto prende le direzioni da pos, normalizza su Imed GLOBALE, e ha |
+| `D03` | DIFETTO | FISICA | 1 | ### **SOSPESA** | SI | La memoria del moto prende le direzioni da pos, normalizza su Imed GLOBALE, e ha |
 | `D04` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | smpchiudi() RISCRIVE tutto d0 a fine passo e NON ha nessun tracciad0 attorno: e' |
 | `D05` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | I residui di C5: I4 scatola nera, I5 underflow per riga, modalita' fine / il man |
 | `D06` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | fattcsultimo e' SCRITTO e MAI LETTO (quarto caso della stessa famiglia) / Z7, le |
@@ -200,7 +200,7 @@
 | `D12` | DIFETTO | METODO | ENTRAMBE | ### **APERTA** |  | 1755 MB di .pkl non hanno il comando che li rigenera (par.5-quinquies: «un dato  |
 | `D13` | DIFETTO | METODO | ENTRAMBE | ### **APERTA** |  | I sigilli storici non sono stati rigirati sul blob corrente / Z11 / — / APERTO |
 | `D14` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | median(\/f\/) fa TRE mestieri, non due: e' anche il rompi-anello / Z41 / — / APE |
-| `D15` | DIFETTO | FISICA | 2 | ### **AGENDA** |  | A7: la carica chirale NON si conserva / Z71, letto dal codice / — / APERTO |
+| `D15` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | A7: la carica chirale NON si conserva / Z71, letto dal codice / — / APERTO |
 | `D16` | DIFETTO | FISICA | 1 | ### **CHIUSA** |  | SCALAMIN frenava OGNI scrittura separatamente: il risultato dipendeva dall'ORDIN |
 | `D17` | DIFETTO | FISICA | 1 | ### **CHIUSA** |  | peq diventava NEGATIVO e il pavimento max(peq, 1e-9) NE RIBALTAVA IL SEGNO (da - |
 | `D18` | DIFETTO | FISICA | 1 | ### **CHIUSA** |  | COESADIM leggeva ISTANTI MISTI e il suo tetto era GLOBALE / Z92 · A5 / COESCAUSA |
@@ -221,15 +221,15 @@
 | `D32-CONTATORE` | DIFETTO | INFRASTRUTTURA | 1 | ### **APERTA** |  | i contatori `_rep_taupp_*` contano un clamp che NON ESISTE PIU' |
 | `D33` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | La repulsione alla massima compressione e' AZZERATA proprio dove serve: dal 75 % |
 | `D34` | DIFETTO | FISICA | 1 | ### **CHIUSA** |  | D34 CURATO IN CODICE il 2026-09-24 / Il wrap «a 4π» di ritmo() (:2584-2585) NON  |
-| `D35` | DIFETTO | FISICA | 2 | ### **AGENDA** |  | L'antiparticella di Schwinger nasce con +2π (:5443) e nel campo F = Σ exp(iφ) E' |
+| `D35` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | L'antiparticella di Schwinger nasce con +2π (:5443) e nel campo F = Σ exp(iφ) E' |
 | `D36` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | LA SOGLIA DELLA MITOSI E' IN UNITA' ASSOLUTE DI tw, MENTRE LA SCALA DI tw DIPEND |
 | `D37` | DIFETTO | FISICA | 1 | ### **CHIUSA** |  | D37 CURATO il 2026-09-24 / CHIAVE DUPLICATA NEI DOMINI: 'csnodoprev' compare DUE |
-| `D38` | DIFETTO | FISICA | 2 | ### **AGENDA** |  | nasce (:3850) e' gated su SCALAMIN or SCALAMINPASSO: la legge «nessun arco sotto |
+| `D38` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | nasce (:3850) e' gated su SCALAMIN or SCALAMINPASSO: la legge «nessun arco sotto |
 | `DIVISIONE-AUTOCONSISTENTE` | FRONTE | FISICA | 2 | ### **AGENDA** |  | la divisione dell arco come UNA legge: dove si rompe, cosa ereditano i figli, il |
 | `DOPPIA-COP` | CURA | FISICA | 1 | ### **SOSPESA** |  | LA CURA (b): la doppia copertura 4 pi e' un ASSIOMA e va resa STRUTTURALE, non m |
 | `DRIVER-SCENA-II` | DIFETTO | INFRASTRUTTURA | 1 | ### **CHIUSA** |  | APERTA il 2026-09-26 (rilievo di Luca) / IL DRIVER NON SA FARE LA SCENA (ii), e  |
 | `E1` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 56 volte, MAI definito in un registro) |
-| `E3` | CURA | METODO | ENTRAMBE | ### **APERTA** |  | EPOCA 3 + RUN LUNGO — tag epoca-3, 3000 passi, M1/M4 leggere durante il run / GL |
+| `E3` | CURA | FISICA | 1 | ### **SOSPESA** |  | EPOCA 3 + RUN LUNGO — tag epoca-3, 3000 passi, M1/M4 leggere durante il run / GL |
 | `E4-LAM` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | LAM FATTO il 2026-09-24 / LA LEGGE «NESSUNA LUNGHEZZA SOTTO LAM» DEVE DIVENTARE  |
 | `E4a` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 3 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
 | `E4b` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 5 volte, MAI definito in un registro) [E4b] |
@@ -246,7 +246,7 @@
 | `FALSO-UNO` | DIFETTO | METODO | ENTRAMBE | ### **APERTA** |  | un verdetto NEGATIVO prodotto da una voce che non parla del merito: il gemello d |
 | `FALSO-ZERO` | DIFETTO | METODO | ENTRAMBE | ### **APERTA** |  | uno ZERO prodotto da un insieme o un campione che ho scelto io: cinque volte in  |
 | `FASCE-TAU` | CURA | FISICA | 2 | ### **AGENDA** |  | LA CRESCITA E' COORDINATA COL TEMPO PROPRIO? — l'espansione non dev'essere omoge |
-| `FASE-TRASCINAMENTO-3D` | DIFETTO | FISICA | 2 | ### **AGENDA** |  | il trascinamento di fase usa dir_laterale = (-y, x, 0): privilegia l asse z del  |
+| `FASE-TRASCINAMENTO-3D` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | il trascinamento di fase usa dir_laterale = (-y, x, 0): privilegia l asse z del  |
 | `FATTI-AVVIO` | FRONTE | INFRASTRUTTURA | ENTRAMBE | ### **APERTA** |  | la catena di AVVIO non ha un solo fatto in FATTI_dal_codice.md: _applica_flag, a |
 | `FILI-CORTI` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | i fili si accorciano SOLO FRA LE MASSE o OVUNQUE? Il calo della distanza viene d |
 | `FINESTRA-DEL-PICCO` | CRITERIO | METODO | ENTRAMBE | ### **CHIUSA** |  | 72 passi non bastano a dire se il sistema esplode: il picco di K_fase e' al pass |
@@ -274,7 +274,7 @@
 | `GEOMETRIA-DELLA-CRESCITA` | FRONTE | FISICA | 2 | ### **AGENDA** |  | SPECULATIVA: lo spazio delle fasi CRESCE, e una forza nuova come OSTRUZIONE fra  |
 | `GRAVITA-POTENZIALE` | FRONTE | FISICA | 2 | ### **AGENDA** |  | due potenziali nel codice e nessun Poisson risolto: Poisson e un VINCOLO DI SCAL |
 | `GUSCIO-ANTIFASE-EMERGENTE` | MISURA | FISICA | 1 | ### **SOSPESA** |  | il guscio in antifase si forma DA SOLO e scherma? Oggi emergente e imposta sono  |
-| `H-ETC-1` | PRESIDIO | FISICA | 1 | ### **SOSPESA** |  | PRESIDIO PROPOSTO E NON CABLATO: zero calcola_psi senza w dentro passo_pieno |
+| `H-ETC-1` | PRESIDIO | METODO | ENTRAMBE | ### **APERTA** |  | PRESIDIO PROPOSTO E NON CABLATO: zero calcola_psi senza w dentro passo_pieno |
 | `H-ETC-2` | PRESIDIO | METODO | ENTRAMBE | ### **APERTA** |  | PRESIDIO PROPOSTO E NON CABLATO: permutare le cinque leggi deve dare lo STESSO s |
 | `H-FILE` | PRESIDIO | METODO | ENTRAMBE | ### **CHIUSA** |  | la lista FILE CAMBIATI nel messaggio e verificata da una macchina: il decimo hoo |
 | `H-INDICE` | PRESIDIO | METODO | ENTRAMBE | ### **APERTA** |  | PRESIDIO DEL HOOK: un ID citato in un documento vivo o nel messaggio che non e'  |
@@ -340,7 +340,7 @@
 | `LETTORI-INDICE` | DIFETTO | INFRASTRUTTURA | ENTRAMBE | ### **CHIUSA** |  | CHIUSA il 2026-09-26 (decisioni di Luca) / ESITO: 1 RITIRATO, 1 CONVERTITO, 4 FU |
 | `LINGUAGGIO-REGOLE` | FRONTE | METODO | ENTRAMBE | ### **APERTA** |  | un linguaggio dichiarativo delle leggi, da cui GENERARE il codice e il documento |
 | `LORENTZ-MATERIA-INTERFERENZA` | MISURA | FISICA | 2 | ### **AGENDA** |  | la materia per interferenza aggira la violazione di Lorentz che si propaga alle  |
-| `LOSCHMIDT-ECO` | MISURA | FISICA | 2 | ### **AGENDA** |  | l'eco di Loschmidt PER VOCE: un errore subito grande e' irreversibilita' del COD |
+| `LOSCHMIDT-ECO` | MISURA | METODO | ENTRAMBE | ### **APERTA** |  | l'eco di Loschmidt PER VOCE: un errore subito grande e' irreversibilita' del COD |
 | `LUNGA-BATTITO-CADUTA` | DIFETTO | INFRASTRUTTURA | ENTRAMBE | ### **CHIUSA** |  | la corsa da 1000 passi cade al passo 1: la stampa cita un contatore RINOMINATO |
 | `LUNGHEZZA-COME-SEGNALE` | FRONTE | METODO | ENTRAMBE | ### **APERTA** |  | usare len(x) < n come segnale di <<nodo nuovo>> e una toppa implicita: serve una |
 | `M-FLUSSO` | CURA | FISICA | 2 | ### **AGENDA** |  | memoria di flusso per ARCO, scalare e antisimmetrica, al posto di mem_mot |
@@ -373,11 +373,11 @@
 | `MASSE-PESI-SOVRAPPOSTE` | FRONTE | FISICA | 2 | ### **AGENDA** |  | un nodo appartiene a PIU masse con peso diverso: una massa e una configurazione  |
 | `MAX-NODI-FERMA` | CURA | FISICA | 1 | ### **CHIUSA** |  | MAX_NODI e' una guardia di MEMORIA che oggi cambia la FISICA in silenzio: deve F |
 | `MCRIT-RICALCOLO` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | massa_critica_adattiva si ricalcola 7 volte per passo su stati diversi: e' una l |
-| `MEM-HEBB-PIANO-XY` | DIFETTO | FISICA | 2 | ### **AGENDA** |  | dir_laterale ruota di 90 gradi nel SOLO piano xy e azzera z: un piano preferito |
+| `MEM-HEBB-PIANO-XY` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | dir_laterale ruota di 90 gradi nel SOLO piano xy e azzera z: un piano preferito |
 | `MEM-HEBB-VERSO` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | memoria_hebbiana_moto dipende dal verso dell'arco: d0 cambia segno e lo shift va |
 | `MEM-VERSO` | CURA | FISICA | 2 | ### **AGENDA** |  | il verso dell arco dalla sua MEMORIA (delta = twp - tw) invece che dal segno ist |
 | `MEMORIE-MANCANTI` | DIFETTO | FISICA | 2 | ### **AGENDA** |  | il rapporto sulle memorie: il censimento dello stato, il bilancio, e le memorie  |
-| `MITOSI-2LAM-ACCESO` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | il piano dichiara MITOSI_2LAM e PLAST_DIN OFF, e il DRIVER li ACCENDE: --mitosi- |
+| `MITOSI-2LAM-ACCESO` | DIFETTO | DOCUMENTAZIONE | 1 | ### **SOSPESA** |  | il piano dichiara MITOSI_2LAM e PLAST_DIN OFF, e il DRIVER li ACCENDE: --mitosi- |
 | `MITOSI-NON-DIVISA` | MISURA | INFRASTRUTTURA | 1 | ### **CHIUSA** |  | la mitosi NON si spezza per TIPO restando byte-identica: struttura e stato si al |
 | `MITOSI-SOGLIA-GRAD` | DIFETTO | FISICA | 1 | ### **CHIUSA** |  | la soglia di mitosi si abbassa col gradiente di tempo proprio: ampiezza 0.3 e ta |
 | `MITOSI-TASSO` | MISURA | FISICA | 1 | ### **SOSPESA** |  | APERTA il 2026-09-26 (era una voce PERSA: viveva senza ID) / CHE IL TASSO DI MIT |
@@ -437,7 +437,7 @@
 | `PEQ-MEDIANA-ISTANTE` | CURA | FISICA | 1 | ### **CHIUSA** |  | _g_peqn_mediana si prende UNA volta, sullo stato da cui la nascita parte: era l  |
 | `PEQ-SEL-STANTIO` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | mitosi legge self.peq[sel] DOPO che peq e' stato rifiltrato con keep: archi sbag |
 | `PER-ARCO` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 2 volte, MAI definito in un registro) [PER-ARCO] |
-| `PERC-TW-MORTA` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | perc_tw e STATO MORTO: scritta sempre a zero da quattro siti di nascita, e NESSU |
+| `PERC-TW-MORTA` | DIFETTO | INFRASTRUTTURA | 1 | ### **SOSPESA** |  | perc_tw e STATO MORTO: scritta sempre a zero da quattro siti di nascita, e NESSU |
 | `PESO-MAX` | CRITERIO | METODO | ENTRAMBE | ### **CHIUSA** |  | partecipazioni multiple: l'opacita' di un nodo e' il MAX su tutte le masse, non  |
 | `PHI-FUORI-DOMINIO` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | una delle dieci scritture di phi NON normalizza, e il sito della fase lo copriva |
 | `PHI0-CONGELATA` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | phi0 e CONGELATA: 5 scritture tutte alla nascita, e lo step la legge come memori |
@@ -487,7 +487,7 @@
 | `REGISTRO_FISICA:A2` | CRITERIO | METODO | ENTRAMBE | ### **APERTA** |  | al passo 1, ramp == 1 su TUTTI i nodi della semina iniziale, ESATTO |
 | `REGISTRO_FISICA:A3` | CRITERIO | FISICA | 1 | ### **SOSPESA** |  | un nodo nato da MITOSI parte da ramp = 0 e arriva a 1 nel suo tempo-luce |
 | `REGISTRO_FISICA:A4` | CRITERIO | FISICA | 1 | ### **SOSPESA** |  | contrasto massa/vuoto e Lam al passo 1, contro P2 = 27 e P3 = 5 |
-| `REGISTRO_FISICA:A5` | CRITERIO | FISICA | 1 | ### **SOSPESA** |  | CONTROLLO POSITIVO: ON e OFF DEVONO differire |
+| `REGISTRO_FISICA:A5` | CRITERIO | METODO | ENTRAMBE | ### **APERTA** |  | CONTROLLO POSITIVO: ON e OFF DEVONO differire |
 | `REGISTRO_FISICA:A6` | CRITERIO | FISICA | 1 | ### **SOSPESA** |  | CASO CHE DEVE FALLIRE: con maturi=False forzato, A2 deve dare FAIL |
 | `REGISTRO_FISICA:A7` | CRITERIO | METODO | ENTRAMBE | ### **APERTA** |  | TAUA non è più letto da pesi — dall'AST, non da un grep |
 | `REGISTRO_FISICA:C1` | CRITERIO | METODO | ENTRAMBE | ### **APERTA** |  | flag spento: byte-identico / par.2.1. L'arresto vive dentro SEMINALAM: a flag sp |
@@ -527,7 +527,7 @@
 | `REGISTRO_FISICA:T5` | CRITERIO | METODO | ENTRAMBE | ### **APERTA** |  | byte-inerte: 206 campi identici, 0 diversi contro cura1corto / l'invariante legg |
 | `REGISTRO_FISICA:U2` | CRITERIO | FISICA | 1 | ### **SOSPESA** |  | U2 È ATTIVA IN ENTRAMBI I BRACCI DI P-GONFIA E FABBRICA LUNGHEZZA (Luca, 2026-09 |
 | `REGISTRO_FISICA:U2-5` | CRITERIO | METODO | ENTRAMBE | ### **APERTA** |  | 5 è MODEL-FREE: non confronta col mio conto, legge d e d0 e conta gli archi che |
-| `REGISTRO_FISICA:U2-6` | CRITERIO | FISICA | 1 | ### **SOSPESA** |  | 6 È IL CASO CHE DEVE FALLIRE (P1-sexies, ed è il criterio più importante): la |
+| `REGISTRO_FISICA:U2-6` | CRITERIO | METODO | ENTRAMBE | ### **APERTA** |  | 6 È IL CASO CHE DEVE FALLIRE (P1-sexies, ed è il criterio più importante): la |
 | `REGISTRO_FISICA:U2a` | CRITERIO | FISICA | 1 | ### **SOSPESA** |  | la LUNGHEZZA FABBRICATA da nasce, sum(LAM - v) sugli archi troncati, SEPARATA pe |
 | `REGISTRO_FISICA:U2b` | CRITERIO | FISICA | 1 | ### **SOSPESA** |  | quanti archi sono stati troncati, e su quanti visti — stessa separazione / idem |
 | `REGISTRO_FISICA:U2c` | CRITERIO | FISICA | 1 | ### **SOSPESA** |  | frazione di archi sotto 2 LAM / ai passi 0 e 120 |
@@ -552,7 +552,7 @@
 | `RIPIEGHI-ZERO` | CURA | FISICA | 1 | ### **CHIUSA** |  | ZERO ripieghi che cambiano la fisica in silenzio: tutti e 100 i confronti `len(x |
 | `RIPIEGO-1` | DIFETTO | FISICA | 1 | ### **CHIUSA** |  | APERTA E CHIUSA il 2026-09-25 (difetto mio, rilevato da LUCA) / UN RIPIEGO GLOBA |
 | `RIPRESA-ARGV` | DIFETTO | INFRASTRUTTURA | ENTRAMBE | ### **APERTA** |  | APERTA il 2026-09-26 (limite di un meccanismo che ho costruito io) / LA RIPRESA  |
-| `RISCRITTURA-GO` | DIFETTO | FISICA | 2 | ### **AGENDA** |  | riscrivere il simulatore in Go: valutato, NON deciso |
+| `RISCRITTURA-GO` | DIFETTO | INFRASTRUTTURA | ENTRAMBE | ### **APERTA** |  | riscrivere il simulatore in Go: valutato, NON deciso |
 | `RITMO-AVVIO-FREDDO` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | ritmo() cade nel ramo di sicurezza al PASSO 1 di ogni run: orologio uniforme |
 | `RITMO-FLAG-SENZA-OGGETTO` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | due flag e due sigilli perdono il loro OGGETTO con la cura (2) di Z43 |
 | `RITMO-PAVIMENTO` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | IL PAVIMENTO DEL RITMO MORDE: min(r) = 1.414212e-06 e' ESATTAMENTE il pavimento, |
@@ -599,15 +599,15 @@
 | `SCHED-T3-REGOLE` | MISURA | DOCUMENTAZIONE | ENTRAMBE | ### **APERTA** |  | le regole di composizione: 94 scritture, 80 nelle cinque forme, 6 eccezioni in t |
 | `SCHERMATURA-LEGGE-REVISIONE` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | lambda_nodi: una rho_c GLOBALE, un commento che descrive un altra legge, un nume |
 | `SCHW-CORTI` | MISURA | FISICA | 1 | ### **SOSPESA** |  | il 39 % delle coppie Schwinger ACCORCIA il grafo: 2*dd < d, misurato |
-| `SCHW-SOTTO-LAM` | DIFETTO | FISICA | 2 | ### **AGENDA** |  | lo Schwinger fa nascere archi SOTTO LAM che _nasce alza: A13 alla nascita NON ap |
-| `SCHWINGER-UN-NODO` | DIFETTO | FISICA | 2 | ### **AGENDA** |  | lo Schwinger crea UN solo nodo e il commento dice che la coppia e' neutra: la ca |
+| `SCHW-SOTTO-LAM` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | lo Schwinger fa nascere archi SOTTO LAM che _nasce alza: A13 alla nascita NON ap |
+| `SCHWINGER-UN-NODO` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | lo Schwinger crea UN solo nodo e il commento dice che la coppia e' neutra: la ca |
 | `SCIOGLIMENTO-FASE` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | perche' coer_campo va da 0.999 a 0.20 in 120 passi: la scena non tocca phivel e  |
 | `SCUOT-INNESCO` | MISURA | FISICA | 1 | ### **CHIUSA** |  | lo scuotimento del vuoto e' l'innesco: senza di lui zero nascite e spin omogenei |
 | `SIGILLO-COMPARATORE-DUPLICATO` | FRONTE | INFRASTRUTTURA | ENTRAMBE | ### **APERTA** |  | il comparatore del lockstep e copiato in due sigilli: due copie che possono dive |
 | `SIGILLO-REGISTRO-NON-CONFRONTABILE` | FRONTE | INFRASTRUTTURA | ENTRAMBE | ### **APERTA** |  | il comparatore del sigillo non sa confrontare _veleno_registro (un dict di array |
 | `SIGILLO-SENZA-CONFIGURAZIONE` | FRONTE | INFRASTRUTTURA | ENTRAMBE | ### **APERTA** |  | il sigillo prende la configurazione dal CLI del driver ma NON la timbra nel suo  |
 | `SIM-PRIMA-STANTIO` | DIFETTO | METODO | ENTRAMBE | ### **CHIUSA** |  | il _sim_prima_controllo.py committato NON era il codice di prima: conteneva la c |
-| `SMP-APRI-COMMENTO` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | il docstring di _smp_apri dice che la chiamano cinque leggi: oggi la chiama solo |
+| `SMP-APRI-COMMENTO` | DIFETTO | DOCUMENTAZIONE | 1 | ### **SOSPESA** |  | il docstring di _smp_apri dice che la chiamano cinque leggi: oggi la chiama solo |
 | `SOGLIA-MITOSI-3PI` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | la soglia di mitosi e 2pi + pi col pi di dipolo MASSIMO, e in questa scena il di |
 | `SOGLIA-NON-MODULATA` | MISURA | FISICA | 1 | ### **CHIUSA** |  | la modulazione 0.3 della soglia non agisce: il gradiente di tempo proprio e' zer |
 | `SOTTO-PASSO` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 4 volte, MAI definito in un registro) [SOTTO-PASSO] |
@@ -637,10 +637,10 @@
 | `TAGLIA-FINITA` | STANDARD | METODO | ENTRAMBE | ### **APERTA** |  | lo scaling di taglia finita come via al limite continuo: reti diverse e si estra |
 | `TERMOSTATO-E-FRENO` | MISURA | FISICA | 1 | ### **SOSPESA** |  | il termostato frena piu' di quanto rifornisca: togliergli il freno, non la sorge |
 | `TERRA-BUCONERO` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 3 volte, MAI definito in un registro) [TERRA-BUCONERO] |
-| `TETTO-CAUSALE-TEMPO-COORDINATO` | DIFETTO | FISICA | 2 | ### **AGENDA** | SI | il tetto causale usa c_s LOCALE ma DT COORDINATO: dove r e piccolo permette moti |
+| `TETTO-CAUSALE-TEMPO-COORDINATO` | DIFETTO | FISICA | 1 | ### **SOSPESA** | SI | il tetto causale usa c_s LOCALE ma DT COORDINATO: dove r e piccolo permette moti |
 | `TORS-SPINTA` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | la spinta repulsiva di torsione: legge DINAMICA dentro mitosi(), con tre numeri  |
 | `TORS-W8-AVVOLGIMENTO` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | _w8 ha periodo 8pi ma l avvolgimento di dph e di 4pi: il ramo TORS_4PI inietta - |
-| `TRATTI-INTERNI` | MISURA | METODO | ENTRAMBE | ### **APERTA** |  | a 80 passi il calo di A(t) sta negli INTERNI, non nel varco: le regioni si contr |
+| `TRATTI-INTERNI` | MISURA | FISICA | 1 | ### **SOSPESA** |  | a 80 passi il calo di A(t) sta negli INTERNI, non nel varco: le regioni si contr |
 | `TW-DIVISIONE-INCOGNITA` | DIFETTO | FISICA | 1 | ### **CHIUSA** |  | il tw che sparisce a una divisione non torna con la soglia misurata: -7.19 contr |
 | `U1` | DIFETTO | FISICA | 1 | ### **SOSPESA** | SI | URGENTE, PRIMA DI QUALUNQUE GIRO LUNGO — massacriticacollasso: 21 usi DENTRO LEG |
 | `U2` | DIFETTO | FISICA | 1 | ### **CHIUSA** |  | M2 DIVENTA URGENTE — la mitosi mette figli SOTTO la scala di Planck. Con la semi |
@@ -674,7 +674,7 @@
 | `X3` | FRONTE | FISICA | 1 | ### **CHIUSA** |  | X3 VALE SEMPRE ⏳[EPOCA 1 · CODICE] / AUDIT DI LETTURA DELLE LEGGI — registrato ( |
 | `XI-RUMORE-E-STATO` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | _xi_rumore sta in REGISTRO_DERIVATE ma ha MEMORIA: un grado di liberta classific |
 | `Y0` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 4 volte, MAI definito in un registro) [Y0] |
-| `Y1` | FRONTE | FISICA | 2 | ### **AGENDA** |  | Y1 DA RIVERIFICARE ⏳[EPOCA 1 · MISURA] / Il settore U(1) non ha un'osservabile d |
+| `Y1` | FRONTE | FISICA | 1 | ### **SOSPESA** |  | Y1 DA RIVERIFICARE ⏳[EPOCA 1 · MISURA] / Il settore U(1) non ha un'osservabile d |
 | `Y10` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 4 volte, MAI definito in un registro) [Y10] |
 | `Y2` | FRONTE | FISICA | 1 | ### **CHIUSA** |  | Y2 VALE SEMPRE ⏳[EPOCA 1 · MISURA] / Due osservabili U(1) hanno il nullo SBAGLIA |
 | `Y3` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 9 volte, MAI definito in un registro) [Y3] |
@@ -689,7 +689,7 @@
 | `Z0` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 10 volte, MAI definito in un registro; citato solo in referti/sigilli/ta |
 | `Z1` | FRONTE | FISICA | 1 | ### **SOSPESA** |  | Z1 🟨VALE PER QUELLA SCENA ⏳[EPOCA 1 · MISURA] / inerzia: la correzione (1) NON e |
 | `Z10` | FRONTE | FISICA | 1 | ### **CHIUSA** |  | Z10 VALE SEMPRE ⏳[EPOCA 1 · CODICE] / TAUA E' UN SOLO NUMERO PER DUE LEGGI FISIC |
-| `Z100` | FRONTE | FISICA | 1 | ### **CHIUSA** |  | Z100 CURATA E SIGILLATA ⏳[EPOCA 3 · CURA] / INVARIANTI (C5): il programma si fer |
+| `Z100` | FRONTE | METODO | ENTRAMBE | ### **CHIUSA** |  | Z100 CURATA E SIGILLATA ⏳[EPOCA 3 · CURA] / INVARIANTI (C5): il programma si fer |
 | `Z101` | FRONTE | FISICA | 1 | ### **SOSPESA** |  | Z101 APERTA ⏳[EPOCA 3 · MISURA] / VALIDAZIONE A 600 PASSI: 6 criteri su 8 REGGON |
 | `Z102` | FRONTE | FISICA | 1 | ### **CHIUSA** |  | Z102 CHIUSA PER MISURA ⏳[EPOCA 3 · MISURA] / CHI FA SCAPPARE d0: E' IL FRENO DEL |
 | `Z103` | FRONTE | FISICA | 1 | ### **CHIUSA** |  | Z103 CHIUSA PER MISURA ⏳[EPOCA 3 · MISURA] / IL POZZO GRAVITAZIONALE USA IL DISE |
@@ -699,7 +699,7 @@
 | `Z107` | FRONTE | FISICA | 1 | ### **CHIUSA** |  | Z107 CHIUSA PER MISURA ⏳[EPOCA 3 · MISURA] / LA GRAVITA' NON E' IL MOTORE DELLA  |
 | `Z108` | FRONTE | FISICA | 1 | ### **CHIUSA** |  | Z108 CHIUSA PER MISURA ⏳[archivi delle cure · MISURA] / IL BILANCIO DI d0 CHIUDE |
 | `Z109` | FRONTE | FISICA | 1 | ### **CHIUSA** |  | Z109 CHIUSA PER MISURA ⏳[archivi delle cure · MISURA] / LA MEMORIA DEL MOTO NON  |
-| `Z11` | FRONTE | FISICA | 1 | ### **CHIUSA** |  | Z11 VALE SEMPRE ⏳[EPOCA 1 · CODICE] / RIGIRO DEI SIGILLI STORICI — lavoro PREVIS |
+| `Z11` | FRONTE | METODO | ENTRAMBE | ### **APERTA** |  | Z11 VALE SEMPRE ⏳[EPOCA 1 · CODICE] / RIGIRO DEI SIGILLI STORICI — lavoro PREVIS |
 | `Z110` | FRONTE | FISICA | 1 | ### **CHIUSA** |  | Z110 CHIUSA PER MISURA ⏳[archivi delle cure · MISURA] / r E taupp SONO DUE GRAND |
 | `Z111` | FRONTE | FISICA | 1 | ### **CHIUSA** |  | Z111 CHIUSA PER MISURA ⏳[archivi delle cure · MISURA] / LA REPULSIONE ALLA MASSI |
 | `Z112` | FRONTE | FISICA | 1 | ### **CHIUSA** |  | Z112 CHIUSA PER MISURA ⏳[archivi delle cure · MISURA] / L'IPOTESI DELLA COMPRESS |
@@ -727,7 +727,7 @@
 | `Z14` | FRONTE | FISICA | 1 | ### **CHIUSA** |  | Z14 VALE SEMPRE ⏳[EPOCA 1 · CODICE] / IL TERZO RAMO DI calcolapsi (elif sotto RE |
 | `Z142` | FRONTE | METODO | ENTRAMBE | ### **APERTA** |  | Z142 REPERTO, DIFETTI MIEI ⏳[archivi delle cure · SIGILLO FALLITO] / IL SIGILLO  |
 | `Z144` | FRONTE | FISICA | 1 | ### **CHIUSA** |  | Z144 CURA IN CODICE ⏳[archivi delle cure · CURA] / E4-LAM PASSA 6/6: la legge d  |
-| `Z145` | FRONTE | FISICA | 1 | ### **CHIUSA** |  | CHIUSO — T5 del sigillo di CURA 2 era invalido: dv 0 letto come effetto (2026-09 |
+| `Z145` | FRONTE | METODO | ENTRAMBE | ### **CHIUSA** |  | CHIUSO — T5 del sigillo di CURA 2 era invalido: dv 0 letto come effetto (2026-09 |
 | `Z146` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 3 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
 | `Z148` | FRONTE | FISICA | 1 | ### **SOSPESA** |  | LA LEGGE d = LAM REGGE PERCHE' UNA CURA E' ACCESA (2026-09-24) |
 | `Z15` | FRONTE | METODO | ENTRAMBE | ### **APERTA** |  | Z15 DA RIVERIFICARE ⏳[EPOCA 1 · MISURA] / 14 .pkl su 36 non portano il BLOB del  |
@@ -738,7 +738,7 @@
 | `Z1b` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 12 volte, MAI definito in un registro) [Z1b] |
 | `Z1c` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 30 volte, MAI definito in un registro) [Z1c] |
 | `Z2` | FRONTE | FISICA | 1 | ### **CHIUSA** |  | Z2 VALE SEMPRE ⏳[EPOCA 1 · MISURA] / spinta: A2 e A3 sono stati tolti, A1 NO (20 |
-| `Z20` | FRONTE | FISICA | 1 | ### **CHIUSA** |  | Z20 VALE SEMPRE ⏳[EPOCA 1 · MISURA] / UN DRIVER CHE FORZA UN FLAG IN TUTTI I BRA |
+| `Z20` | FRONTE | METODO | ENTRAMBE | ### **CHIUSA** |  | Z20 VALE SEMPRE ⏳[EPOCA 1 · MISURA] / UN DRIVER CHE FORZA UN FLAG IN TUTTI I BRA |
 | `Z21` | FRONTE | FISICA | 1 | ### **SOSPESA** |  | Z21 🟨VALE PER QUELLA SCENA ⏳[EPOCA 1 · MISURA] / SPINFEEDBACK con TAUA = 2.0: ES |
 | `Z22` | FRONTE | FISICA | 1 | ### **CHIUSA** |  | Z22 VALE SEMPRE ⏳[EPOCA 1 · MISURA] / REGOLA 9 — par.5-quinquies ESISTEVA, ed e' |
 | `Z23` | FRONTE | FISICA | 1 | ### **SOSPESA** |  | Z23 🟨VALE PER QUELLA SCENA ⏳[EPOCA 1 · MISURA] / SPINFEEDBACK NON E' ANTISIMMETR |
@@ -751,7 +751,7 @@
 | `Z2b` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 5 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
 | `Z3` | FRONTE | FISICA | 1 | ### **SOSPESA** |  | Z3 🟨VALE PER QUELLA SCENA ⏳[EPOCA 1 · MISURA] / peq DEGENERE: un fallback a DUE  |
 | `Z30` | FRONTE | FISICA | 1 | ### **SOSPESA** |  | Z30 DA RIVERIFICARE ⏳[EPOCA 1 · MISURA] / CHIUSA il 2026-09-18 — INDIFFERENTE, q |
-| `Z31` | FRONTE | FISICA | 1 | ### **CHIUSA** |  | Z31 VALE SEMPRE ⏳[EPOCA 1 · MISURA] / QUATTRO SIGILLI NON SONO PIU' RI-GIRABILI: |
+| `Z31` | FRONTE | METODO | ENTRAMBE | ### **CHIUSA** |  | Z31 VALE SEMPRE ⏳[EPOCA 1 · MISURA] / QUATTRO SIGILLI NON SONO PIU' RI-GIRABILI: |
 | `Z32` | FRONTE | FISICA | 1 | ### **SOSPESA** |  | Z32 🟨VALE PER QUELLA SCENA ⏳[EPOCA 1 · MISURA] / Z9 RIMISURATA SUL BLOB ATTUALE: |
 | `Z33` | FRONTE | FISICA | 1 | ### **SOSPESA** |  | Z33 🟨VALE PER QUELLA SCENA ⏳[EPOCA 1 · MISURA] / LA MEDIANA IN ritmo() E' ENTRAM |
 | `Z34` | FRONTE | FISICA | 1 | ### **SOSPESA** |  | Z34 🟨VALE PER QUELLA SCENA ⏳[EPOCA 1 · MISURA] / Z33 MISURATA: NON e' un difetto |
@@ -815,7 +815,7 @@
 | `Z83` | FRONTE | FISICA | 1 | ### **CHIUSA** |  | Z83 VALE SEMPRE ⏳[EPOCA 1 · MISURA] / DOMANDA APERTA: d0 DEVE STARE SOPRA LAM? I |
 | `Z84` | FRONTE | FISICA | 1 | ### **CHIUSA** |  | Z84 VALE SEMPRE ⏳[EPOCA 1 · MISURA] / E' cs^2lap CHE ALLUNGA L'ARCO — la TENSION |
 | `Z85` | FRONTE | FISICA | 1 | ### **CHIUSA** |  | Z85 VALE SEMPRE ⏳[EPOCA 1 · MISURA] / I LETTORI DI percchi, CENSITI DAL DISCO: l |
-| `Z86` | FRONTE | FISICA | 1 | ### **CHIUSA** |  | Z86 VALE SEMPRE ⏳[EPOCA 2 · CODICE] / IL CRITERIO Z4a DEL SIGILLO DEL RAMO D ERA |
+| `Z86` | FRONTE | METODO | ENTRAMBE | ### **CHIUSA** |  | Z86 VALE SEMPRE ⏳[EPOCA 2 · CODICE] / IL CRITERIO Z4a DEL SIGILLO DEL RAMO D ERA |
 | `Z87` | FRONTE | FISICA | 1 | ### **SOSPESA** |  | Z87 DA RIVERIFICARE ⏳[EPOCA 2 · MISURA] / d SCENDE A DIECI VOLTE SOTTO LAM MENTR |
 | `Z88` | FRONTE | FISICA | 1 | ### **SOSPESA** |  | Z88 DA RIVERIFICARE ⏳[EPOCA 1 · CODICE] / AVVERTENZA SULL'EPOCA 1: OTTO grandezz |
 | `Z89` | FRONTE | METODO | ENTRAMBE | ### **APERTA** |  | Z89 DA RIVERIFICARE ⏳[EPOCA 1 · CODICE] / 1755 MB DI .pkl NON HANNO IL COMANDO C |

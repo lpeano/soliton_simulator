@@ -109,21 +109,47 @@ def main():
     # ### <<fuori posto>> su una correzione CHIESTA.
     CORRETTE_1D = {"C21", "MASSA-ID", "CONTA-RIGHE", "PIATTAFORMA-NON-TIMBRATA", "CONFIG-1",
                    "ANCORE-1", "COLLAUDO-NON-ESEGUITO", "IMPL-2", "H-ETC-2"}
+    # ### LE CORREZIONI DELLA VERIFICA `v3` (2026-10-09), e sono CHIESTE DA LUCA:
+    # ### *<<le liste del guardiano si aggiornano DI CONSEGUENZA>>.* NON stanno nelle liste
+    # ### di `migra_indice_v2.py`, e c-e un motivo preciso: quelle liste sono CIO- CHE IL
+    # ### GUARDIANO AVEVA DETTO AL TEMPO DELLA MIGRAZIONE, e la migrazione DEVE RESTARE
+    # ### RIPRODUCIBILE DAL TAG. La correzione sta QUI, dove il controllo dice che cosa si
+    # ### ASPETTA OGGI.
+    # ### IL BLOCCO A: la lista 2 era un ERRORE DEL GUARDIANO -- quelle voci sono DIFETTI
+    # ### DEL CODICE DELL-ERA 1, non lavoro dell-era 2.
+    CORRETTE_V3 = {}
+    for _i in ("CARICA-ROTAZIONE", "CARICA-SIMMETRIA-FASE", "CARICA-DI-GAUGE",
+               "CARICA-PERCORSO", "D03", "D15", "D35", "D38", "FASE-TRASCINAMENTO-3D",
+               "MEM-HEBB-PIANO-XY", "SCHW-SOTTO-LAM", "SCHWINGER-UN-NODO",
+               "TETTO-CAUSALE-TEMPO-COORDINATO", "Y1"):
+        CORRETTE_V3[_i] = ("FISICA", "1", "SOSPESA")                          # (A)
+    CORRETTE_V3["RISCRITTURA-GO"] = ("INFRASTRUTTURA", "ENTRAMBE", "APERTA")  # (A)
+    CORRETTE_V3["AUDIT-CURE"] = ("METODO", "ENTRAMBE", "APERTA")              # (A)
+    CORRETTE_V3["LOSCHMIDT-ECO"] = ("METODO", "ENTRAMBE", "APERTA")           # (A)
+    for _i in ("H-ETC-1", "REGISTRO_FISICA:A5", "REGISTRO_FISICA:U2-6", "COMPONENTI:S3"):
+        CORRETTE_V3[_i] = ("METODO", "ENTRAMBE", "APERTA")          # (B) le GEMELLE
+    for _i in ("CENS-A6", "CENS-A7", "SMP-APRI-COMMENTO", "MITOSI-2LAM-ACCESO"):
+        CORRETTE_V3[_i] = ("DOCUMENTAZIONE", "1", "SOSPESA")        # (B) i FUORI POSTO
+
+    def _atteso(idv, dom, era, stato):
+        """### Che cosa il controllo si aspetta OGGI: la lista, oppure la CORREZIONE."""
+        return CORRETTE_V3.get(idv, (dom, era, stato))
+
     guai = []
     for idv, (dom, _p) in MG.L1.items():
         v = per.get(idv)
-        atteso = "METODO" if idv in CORRETTE_1D else dom
-        if v is None or v["dominio"] != atteso or str(v["era"]) != "ENTRAMBE":
+        d, e, _s = _atteso(idv, "METODO" if idv in CORRETTE_1D else dom, "ENTRAMBE", None)
+        if v is None or v["dominio"] != d or str(v["era"]) != e:
             guai.append("L1 " + idv)
     for idv in MG.L2:
         v = per.get(idv)
-        if v is None or v["dominio"] != "FISICA" or str(v["era"]) != "2" \
-                or v["stato"] != "AGENDA":
+        d, e, s = _atteso(idv, "FISICA", "2", "AGENDA")
+        if v is None or v["dominio"] != d or str(v["era"]) != e or v["stato"] != s:
             guai.append("L2 " + idv)
     for idv in MG.L3:
         v = per.get(idv)
-        if v is None or v["dominio"] != "FISICA" or str(v["era"]) != "1" \
-                or v["stato"] != "SOSPESA":
+        d, e, s = _atteso(idv, "FISICA", "1", "SOSPESA")
+        if v is None or v["dominio"] != d or str(v["era"]) != e or v["stato"] != s:
             guai.append("L3 " + idv)
     nei_conflitti = {x["id"] for x in confl}
     guai = [g for g in guai if g.split(" ", 1)[1] not in nei_conflitti]

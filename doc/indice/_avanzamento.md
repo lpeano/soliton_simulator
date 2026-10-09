@@ -72,19 +72,19 @@ python csv/indice.py aggiorna-lotto doc/indice/_lotti/<nome>.jsonl
 | | |
 |---|--:|
 | voci | `813` |
-| ### **`DA_CLASSIFICARE` vere** *(non segnaposto)* | ### **`2`** |
+| ### **`DA_CLASSIFICARE` vere** *(non segnaposto)* | ### **`1`** |
 | ### **segnaposto `NON_DEFINITA`** | ### **`179`** |
-| ### **`CHIUSE` senza dominio** | ### **`0`** |
+| ### **righe di storico** | ### **`1030`** |
 
 ```
 classe    DIFETTO=209  NON_DEFINITA=179  FRONTE=168  CRITERIO=95  MISURA=54  CURA=46  PRESIDIO=34  STANDARD=28
-dominio   FISICA=454  DA_CLASSIFICARE=179  METODO=114  INFRASTRUTTURA=43  DOCUMENTAZIONE=23
-era       1=424  DA_CLASSIFICARE=181  ENTRAMBE=165  2=43
-stato     SOSPESA=246  CHIUSA=187  DA_CLASSIFICARE=181  APERTA=156  AGENDA=43
+dominio   FISICA=437  DA_CLASSIFICARE=179  METODO=124  INFRASTRUTTURA=46  DOCUMENTAZIONE=27
+era       1=431  DA_CLASSIFICARE=180  ENTRAMBE=176  2=26
+stato     SOSPESA=261  CHIUSA=186  DA_CLASSIFICARE=180  APERTA=160  AGENDA=26
 ```
 
-### ✔ **FATTO IN QUESTO GIRO:** i 233 segnaposto (1 alias, 53 etichette, 179 concetti), piu' il presidio che impedisce alla migrazione di cancellare il lavoro di dopo
+### ✔ **FATTO IN QUESTO GIRO:** la correzione `v3`, blocchi `A` e `B`: la lista `2` del guardiano era un ERRORE SUO (`17` voci dall'era `2` all'era `1`, e `5` che decide Luca), le ### **gemelle** a `METODO/ENTRAMBE`, i ### **fuori posto** a `DOCUMENTAZIONE`/`INFRASTRUTTURA`, e `D13`/`Z11` ### **allineate su `APERTA`** perche' il lavoro NON e' fatto
 
-### ⛔ **RESTA:** il referto della fase 2
+### ⛔ **RESTA:** i blocchi `C` *(le etichette rimosse per sbaglio, e ### **la regola corretta**)*, `D` *(il campo `commit` dello storico)* e `E` *(il referto)*
 
-**Ultimo lotto applicato:** `doc/indice/_lotti/segnaposto_concetti.jsonl`
+**Ultimo lotto applicato:** `doc/indice/_lotti/v3_B.jsonl`
