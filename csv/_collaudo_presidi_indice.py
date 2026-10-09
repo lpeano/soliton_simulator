@@ -254,6 +254,16 @@ def main():
     esito("F8  DEVE scattare: T3a a 72e452f era `ENTRAMBE` e dice <<SIGILLO scena (ii)>>",
           scatta(IX._f8_era1(t3a_prima), "T3a"),
           "era `%s`, stato `%s`" % (t3a_prima[0]["era"], t3a_prima[0]["stato"]))
+    # ### ⭐ **L-ALLARGAMENTO DEL 2026-10-09**, e i due casi li indica il mandato: a
+    # ### `ba400c0` `CONFIG-1` e `PAT-1` erano `ENTRAMBE` e nominano ### **una funzione o
+    # ### uno script**, e `F8` vecchio ### **non li vedeva.**
+    for _i in ("CONFIG-1", "PAT-1"):
+        _p = [v for v in al_commit("ba400c0", "doc/indice/voci.jsonl")
+              if v["id"] == _i]
+        assert _p, _i
+        esito("F8  DEVE scattare: %s a ba400c0, era `%s`" % (_i, _p[0]["era"]),
+              scatta(IX._f8_era1(_p), _i),
+              "una funzione, una variabile o uno script dell-era 1")
     for _i, _che in (("P6", "e- una REGOLA: nomina la PAROLA flag, non un flag"),
                      ("FALSO-ZERO", "e- un difetto del METODO, senza oggetti concreti")):
         _v = [v for v in voci if v["id"] == _i]

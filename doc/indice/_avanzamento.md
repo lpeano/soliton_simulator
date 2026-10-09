@@ -74,17 +74,17 @@ python csv/indice.py aggiorna-lotto doc/indice/_lotti/<nome>.jsonl
 | voci | `846` |
 | ### **`DA_CLASSIFICARE` vere** *(non segnaposto)* | ### **`1`** |
 | ### **segnaposto `NON_DEFINITA`** | ### **`187`** |
-| ### **righe di storico** | ### **`1534`** |
+| ### **righe di storico** | ### **`1578`** |
 
 ```
 classe    DIFETTO=202  NON_DEFINITA=187  MISURA=141  FRONTE=107  CRITERIO=92  CURA=54  PRESIDIO=34  STANDARD=29
 dominio   FISICA=389  METODO=196  DA_CLASSIFICARE=187  INFRASTRUTTURA=47  DOCUMENTAZIONE=27
-era       1=496  DA_CLASSIFICARE=188  ENTRAMBE=138  2=24
-stato     SOSPESA=349  DA_CLASSIFICARE=188  CHIUSA=184  APERTA=100  AGENDA=24  SUPERATA=1
+era       1=537  DA_CLASSIFICARE=188  ENTRAMBE=97  2=24
+stato     SOSPESA=368  DA_CLASSIFICARE=188  CHIUSA=182  APERTA=83  AGENDA=24  SUPERATA=1
 ```
 
-### ✔ **FATTO IN QUESTO GIRO:** il punto `2`: ### **la classe dalla riga d'origine** -- `88` classi cambiate *(`55` `FRONTE`→`MISURA`: un fronte chiuso con un esito misurato ### **non e' piu' un fronte**)*. E un difetto del rilevatore preso guardando l'uscita: ### **un `?` nella prosa non e' una domanda**, e gli assiomi `A1`, `A7b`, `A10` diventavano `FRONTE`
+### ✔ **FATTO IN QUESTO GIRO:** il punto `3`: ### **era `1` per le esplicite** *(l'elenco «voci SOSPESE» LETTO dal documento, piu' le `38` nominate)*, e ### **`F8` allargato**. ### ⛔ **`F8` leggeva un titolo TRONCATO -- l'errore `(d)` applicato a un presidio** -- e adesso legge la riga d'origine. Collaudo `32/32`, e ### **un marcatore che avevo aggiunto io l'ho TOLTO** perche' rompeva un caso negativo
 
-### ⛔ **RESTA:** il punto `3` *(era `1` esplicite e ### **`F8` allargato** a funzioni, variabili e script)*, poi `4` *(dominio)*, `5` *(a Luca, senza toccare)*, `6` *(gemelle e duplicati)*, `7` *(`da_dividere`)* e `8` *(il referto)*
+### ⛔ **RESTA:** il punto `4` *(dominio delle esplicite)*, poi `5` *(a Luca, senza toccare)*, `6` *(gemelle e duplicati)*, `7` *(`da_dividere`)* e `8` *(i controlli e il referto `doc/REFERTO_indice_v3_righe_origine.md`)*
 
-**Ultimo lotto applicato:** `doc/indice/_lotti/v3_s2.jsonl`
+**Ultimo lotto applicato:** `doc/indice/_lotti/v3_s3.jsonl`

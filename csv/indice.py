@@ -996,8 +996,48 @@ ERA1_OGGETTI = (
     # ### ### **`--` usato come lineetta** *(<<-- e poi>>)* non conta.
     (r"(?<![A-Za-z0-9-])--[a-z][a-z0-9-]{2,}", "un flag `--...`"),
     (r"\bCURA\s*\d", "CURA n"),
+    # ### ⭐ **ALLARGATO il 2026-10-09**, perche- il guardiano dichiara che `F8` era
+    # ### ### **troppo stretto:** una ### **funzione o una variabile del simulatore** e- un
+    # ### oggetto concreto dell-era 1 ### **tanto quanto un `.pkl`**, e cosi- uno
+    # ### ### **script di `csv/_test_fork` o `csv/_seal_fork`.**
+    (r"\bphivel\b|\bperc_[a-z]+|\b_avvelena_[a-z]*"
+     r"|\bpasso_pieno\b|\bnet\.step\b|\bmitosi\b|\bcalcola_psi\b"
+     r"|\bsmp_apri\b|\bsmpchiudi\b|\bpsispin\w*|\bcsnodoprev\b"
+     r"|\bomega_s\b|\bchiralita_core_locale\b|\bforma_passo0\b",
+     "una funzione o una variabile del simulatore"),
+    (r"csv/_test_fork|csv/_seal_fork", "uno script di csv/_test_fork o csv/_seal_fork"),
+    # ### ⚠ **`PAT-1` nomina `dovespingelagravita.py`** -- il DRIVER -- e non sta in
+    # ### `csv/`: ### **un file `.py` del repo e- un oggetto concreto** come uno script.
+    (r"[A-Za-z0-9_]+\.py\b", "un file `.py` del repo"),
+    # ### ⛔ **UN PATTERN CHE AVEVO AGGIUNTO IO, E L-HO TOLTO.** Volevo far scattare
+    # ### `CONFIG-1` su un ### **FLAG-COSTANTE** (`FORK_SU2`, `TAU_LUCE`), e il pattern
+    # ### ### **faceva scattare `FALSO-ZERO` su `REGISTRO_STATO`** -- il caso che il mandato
+    # ### dice che ### **NON deve scattare.** ### ✔ **E non serviva:** `CONFIG-1` scatta
+    # ### ### **dal suo `csv/_config_delle_misure.py`**, che la riga d-origine nomina.
+    # ### ⭐ **Un marcatore che il mandato non chiede e che rompe un caso negativo
+    # ### si TOGLIE, non si aggiusta.**
 )
 _ERA1_RE = tuple((re.compile(r, re.I), q) for r, q in ERA1_OGGETTI)
+
+
+_RIGHE = {}
+
+
+def _riga_origine_di(v):
+    """### La riga d-origine della voce, ### **o la stringa vuota.**
+
+    ### ⚠ **L-import e- QUI DENTRO e non in testa**, perche- `csv/_righe_origine.py`
+    importa a sua volta questo modulo: ### **un import in testa sarebbe circolare.**
+    """
+    i = v["id"]
+    if i not in _RIGHE:
+        try:
+            import _righe_origine as _RO
+            r = _RO.riga_origine(v)[0]
+        except Exception:
+            r = None
+        _RIGHE[i] = " ".join((r or "").split())
+    return _RIGHE[i]
 
 
 def _f8_era1(voci):
@@ -1012,7 +1052,14 @@ def _f8_era1(voci):
     for v in voci:
         if str(v["era"]) != "ENTRAMBE" or v["stato"] == "CHIUSA" or _coperto(v, "F8"):
             continue
-        t = (v.get("titolo") or "") + " " + (v.get("descrizione") or "")
+        # ### ⛔ **F8 LEGGEVA UN TITOLO TRONCATO, ed e- L-ERRORE (d) applicato a un
+        # ### presidio:** il titolo di `CONFIG-1` finisce *<<28 LEGGI SU 31 SPENTE,
+        # ### misurato...>>*, e ### **la riga d-origine nomina `csv/_config_delle_misure.py`
+        # ### e i flag `FORK_SU2`, `CAMPO_SPINORIALE`, `TAU_LUCE`.** Il mandato dice che
+        # ### `F8` ### **deve** scattare su `CONFIG-1`: ### **senza la riga d-origine non
+        # ### puo-.**
+        t = ((v.get("titolo") or "") + " " + (v.get("descrizione") or "")
+             + " " + _riga_origine_di(v))
         visti = []
         for r, q in _ERA1_RE:
             m = r.search(t)

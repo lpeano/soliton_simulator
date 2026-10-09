@@ -2385,3 +2385,16 @@ etichette rimosse, con ### **`0` persi, `0` doppi, `0` conflitti**.
 | **cosa misura** | la **riga d'origine INTERA** di una voce *(`452` su `846` si ritrovano)*, e da quella **lo stato**. ### ⛔ **Il collaudo sui `7` casi del mandato gira PRIMA, e se non passa il lotto non si scrive** |
 | ### ⚠ **tre correzioni al RITROVAMENTO** | il prefisso di `fonte` è **senza `**` e backtick** *(senza spogliarli: `1` caso su `7`)*; alcune **emoji di stato** sono nel titolo e altre no; un prefisso può essere **contenuto in un nome più lungo** → **vince la riga più corta** |
 | ### ⚠ **due correzioni alla REGOLA** | il **confine di parola** *(`infinito` contiene `FINITO`)* e **la PRIMA parola di stato vince** *(la riga racconta anche la STORIA)*. ### **Alla lettera la regola dava `5` su `7`, e il collaudo ha deciso** |
+
+---
+
+### `csv/_era_esplicite.py` — **ERA `1` PER LE ESPLICITE** *(2026-10-09)*
+
+| | |
+|---|---|
+| **file** | `csv/_era_esplicite.py` |
+| **BLOB** *(sha1 dei byte grezzi)* | `d3cbd8bd` |
+| **COMANDO** | `python csv/_era_esplicite.py`, poi `python csv/indice.py aggiorna-lotto doc/indice/_lotti/v3_s3.jsonl` |
+| **cosa misura** | ### **LEGGE l'elenco dal documento**, non lo ricopia: trova la riga *«voci SOSPESE»* di `doc/CURE_fisica_ordine.md` e **pretende che sia unica e che porti `14` ID**. Poi le `38` nominate dal mandato |
+| **l'uscita** | `doc/indice/_lotti/v3_s3.jsonl` · `doc/indice/_p3_conflitti.json` |
+| ### ⚠ **i due CONFLITTI** | `PSI-FLASH` e `MASSA-ID-FISSO` erano `CHIUSA` **con una chiusura che viene dal TAG** *(«chiusa nell'era `1` (stato `chiuso` al tag `era-1-secondo-ordine`)»)*, e il documento le chiama **SOSPESE**: si riaprono, e il conflitto **è dichiarato** |

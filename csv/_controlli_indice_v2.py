@@ -153,6 +153,30 @@ def main():
     # ### tutto il senso del giro -- *<<la validita- non e- lo stato>>*.
     CORRETTE_V3["G1"] = ("FISICA", "1", "CHIUSA")
     CORRETTE_V3["REG-A"] = ("FISICA", "1", "CHIUSA")
+    # ### IL PUNTO 3 DEL MANDATO (era delle esplicite): l-elenco DICHIARATO <<voci
+    # ### SOSPESE>> di doc/CURE_fisica_ordine.md:26 e le 38 nominate vanno all-era 1.
+    # ### ⚠ **Qui gli ID li DA- IL MANDATO**, quindi si scrivono come ID: non c-e- un
+    # ### predicato che dica <<sta nell-elenco dichiarato di quel documento>>.
+    for _i, _e, _s in (
+            ("ANCORE-1", "1", "SOSPESA"),
+            ("ARCHI-PRIMI", "1", "SOSPESA"),
+            ("C21", "1", "SOSPESA"),
+            ("CONFIG-1", "1", "SOSPESA"),
+            ("D26", "1", "SOSPESA"),
+            ("FATTI-AVVIO", "1", "SOSPESA"),
+            ("H-ETC-2", "1", "SOSPESA"),
+            ("LUNGHEZZA-COME-SEGNALE", "1", "SOSPESA"),
+            ("MASSA-ID", "1", "SOSPESA"),
+            ("PASSO-1", "1", "SOSPESA"),
+            ("PAT-1", "1", "SOSPESA"),
+            ("PAT-2", "1", "SOSPESA"),
+            ("Q6", "1", "SOSPESA"),
+            ("R3", "1", "SOSPESA"),
+            ("R5", "1", "SOSPESA"),
+            ("STATI-LOCALI", "1", "SOSPESA"),
+            ("U3", "1", "SOSPESA"),
+    ):
+        CORRETTE_V3[_i] = (per[_i]["dominio"] if _i in per else CORRETTE_V3.get(_i, (None,))[0], _e, _s)
     # ### IL MANDATO DEL 2026-10-09 (era delle voci di metodo): il guardiano dichiara che
     # ### la regola ### **<<metodo = era ENTRAMBE>> era TROPPO GROSSA.** Queste 14 stanno
     # ### nella lista 1, che le dava `ENTRAMBE`, e ### **riguardano un OGGETTO CONCRETO
