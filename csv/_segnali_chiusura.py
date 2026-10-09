@@ -240,9 +240,73 @@ def punto2_lotto():
         print("      %-24s %s" % (i, DECISO_CRITERIO[i][:92]))
 
 
+# ==========================================================================
+#   PUNTO 3  --  `F2`: la frase in cui la voce dice che cosa SOSTITUISCE o PRESCRIVE
+# ==========================================================================
+# ### ⛔ **LA CITAZIONE NON SI RICOPIA: SI ESTRAE DAL TESTO VIVO.** Per ogni voce ho
+# ### ### **letto** il testo e scelto ### **un marcatore**; la frase la ritaglia il codice
+# ### ### **attorno a quel marcatore, dal testo della voce**. Cosi- la citazione e-
+# ### ### **letterale PER COSTRUZIONE**, e non per mia diligenza nel copiare -- e se il
+# ### marcatore non c-e-, ### **il codice si ferma** invece di scrivere un-eccezione falsa.
+F2_MARCATORE = {
+    "CONSERVAZIONE-LOCALE": "SI CONSERVANO LOCALMENTE",
+    "FRECCE-IMPOSTE": "deve EMERGERE dalla dinamica",
+    "GRAVITA-POTENZIALE": "Poisson e un VINCOLO DI SCALA",
+    "INVARIANZA-LOCALE-CS": "MISURA LA SUA c_s COSTANTE SUL POSTO",
+    "M-FLUSSO": "al posto di mem_mot",
+    "M-ISTERESI": "COMPLEMENTO di MEM-VERSO",
+    "MASSE-PESI-SOVRAPPOSTE": "E UNA CONFIGURAZIONE DEL CAMPO",
+    "VUOTO-LOCALE-DETERMINISTICO": "UNA legge per nodo",
+}
+# ### ⛔ **`ENERGIA-NON-DEFINITA` NON SI TOCCA**, e il mandato lo dice: prende
+# ### ### **solo la nota**, perche- la domanda e- di Luca. ### **Il guardiano scrive che
+# ### secondo lui e- superata** *(«con `A16` l-energia c-e-, ed e- `H`»)*, ### **e lo dice
+# ### come opinione, non come decisione.**
+F2_NOTA = ("da decidere da Luca: superata da A16 (H definita)?")
+
+
+def punto3():
+    import indice as IX
+    voci = carica()
+    per = {v["id"]: v for v in voci}
+    segn = {i for i, _m in IX._f2_era2(voci)}
+    assert segn == set(F2_MARCATORE) | {"ENERGIA-NON-DEFINITA"}, (
+        "i segnali di F2 NON sono i 9 che ho letto: %s" % sorted(segn))
+    lotto = []
+    for i in sorted(F2_MARCATORE):
+        v = per[i]
+        t = " ".join(testo(v).split())
+        k = t.find(F2_MARCATORE[i])
+        assert k >= 0, "`%s`: il marcatore %r NON e- nel testo" % (i, F2_MARCATORE[i])
+        # ### la finestra: ### **dal testo vivo**, mai ricopiata
+        frase = t[max(0, k - 46):k + len(F2_MARCATORE[i]) + 46]
+        assert len(frase) >= 20
+        lotto.append({"id": i, "quando": DATA, "campi": {},
+                      "meta": {"eccezione_presidio":
+                               ["F2: la voce e- di PROGRAMMA e nomina l-era 1 perche- dice "
+                                "CHE COSA SOSTITUISCE o PRESCRIVE: <<%s>>" % frase]},
+                      "motivo": ("(3) SEGNALE CHIUSO CON ECCEZIONE: F2 ha ragione a vedere "
+                                 "l-era 1, ma la voce e- AL POSTO GIUSTO -- e- di programma, "
+                                 "e nomina il vecchio codice per dire che cosa sostituisce: "
+                                 "<<%s>>" % frase)})
+    v = per["ENERGIA-NON-DEFINITA"]
+    lotto.append({"id": "ENERGIA-NON-DEFINITA", "quando": DATA, "campi": {},
+                  "meta": {"nota_guardiano": F2_NOTA},
+                  "motivo": ("(3) NON SI TOCCA, per mandato: resta `%s`/era `%s`/`%s` e "
+                             "prende SOLO la nota. Il testo dice <<%s>>, e il guardiano scrive "
+                             "che con A16 l-energia c-e- ed e- H: LA DECISIONE E- DI LUCA"
+                             % (v["dominio"], v["era"], v["stato"], pezzo(v, 80)))})
+    scrivi("v3_p3.jsonl", lotto)
+    print("  (3) %d eccezioni che CITANO il <<sostituisce>>, piu- la nota di "
+          "ENERGIA-NON-DEFINITA" % len(F2_MARCATORE))
+    for x in lotto:
+        e = x["meta"].get("eccezione_presidio")
+        print("      %-30s %s" % (x["id"], (e[0] if e else "NOTA: " + F2_NOTA)[:88]))
+
+
 def main(argv):
     assert argv and argv[0] in ("1", "2", "2b", "3", "4"), __doc__
-    {"1": punto1, "2": punto2, "2b": punto2_lotto}[argv[0]]()
+    {"1": punto1, "2": punto2, "2b": punto2_lotto, "3": punto3}[argv[0]]()
     return 0
 
 

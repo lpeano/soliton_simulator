@@ -74,7 +74,7 @@ python csv/indice.py aggiorna-lotto doc/indice/_lotti/<nome>.jsonl
 | voci | `830` |
 | ### **`DA_CLASSIFICARE` vere** *(non segnaposto)* | ### **`1`** |
 | ### **segnaposto `NON_DEFINITA`** | ### **`181`** |
-| ### **righe di storico** | ### **`1163`** |
+| ### **righe di storico** | ### **`1172`** |
 
 ```
 classe    DIFETTO=210  NON_DEFINITA=181  FRONTE=169  CRITERIO=94  MISURA=68  CURA=46  PRESIDIO=34  STANDARD=28
@@ -83,8 +83,8 @@ era       1=451  DA_CLASSIFICARE=182  ENTRAMBE=172  2=25
 stato     SOSPESA=280  CHIUSA=187  DA_CLASSIFICARE=182  APERTA=156  AGENDA=25
 ```
 
-### ✔ **FATTO IN QUESTO GIRO:** il punto `2`: ### **la classe `CRITERIO` e' una cosa sola** -- `58` voci da `FISICA` a `METODO` e ### **`13` ESITI MISURATI** a classe `MISURA` restando `FISICA`, ciascuno ### **con la frase che l'ha deciso**. `era` e `stato` ### **invariati**. `4` candidati ### **rifiutati leggendo** *(in `== 0` e in «contro `P2 = 27`» il numero e' ### **un controllo**, non una misura)*
+### ✔ **FATTO IN QUESTO GIRO:** il punto `3`: ### **`F2` da `9` segnali a `1`** -- otto voci di programma chiudono con un'eccezione ### **che cita la frase del «sostituisce»** *(e la citazione NON e' ricopiata: la ritaglia il codice ### **dal testo vivo**)*. `ENERGIA-NON-DEFINITA` ### **non si tocca**: il suo segnale ### **resta acceso**, perche' e' una domanda di Luca
 
-### ⛔ **RESTA:** il punto `3` *(`F2`, le `8` eccezioni che citano il «sostituisce»)*, `4` *(`F3`)*, `5` *(`F4` e la ### **regola dell'intestazione**, collaudata su `POST-HOC` e `TW-1`)* e `6` *(il referto `doc/REFERTO_indice_v3_segnali.md`)*
+### ⛔ **RESTA:** il punto `4` *(`F3`, i `10` che restano)*, `5` *(`F4` e la ### **regola dell'intestazione**)* e `6` *(il referto `doc/REFERTO_indice_v3_segnali.md`)*
 
-**Ultimo lotto applicato:** `doc/indice/_lotti/v3_p2.jsonl`
+**Ultimo lotto applicato:** `doc/indice/_lotti/v3_p3.jsonl`
