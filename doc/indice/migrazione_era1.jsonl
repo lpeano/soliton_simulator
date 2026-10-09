@@ -972,3 +972,57 @@
 {"id_vecchio": "Z99", "dove": "voci.jsonl::id", "regola": "(a) meccanica"}
 {"id_vecchio": "ZZ888", "dove": "etichette_rimosse.jsonl", "regola": "(b2) etichetta di documento"}
 {"id_vecchio": "ZZ999", "dove": "voci.jsonl::id", "regola": "(b3) resta DA_CLASSIFICARE"}
+{"id_vecchio": "CONFIG-1/", "dove": "voci.jsonl::alias di CONFIG-1", "regola": "(fase2-b1) l'id RIPULITO dalla punteggiatura finale coincide con `CONFIG-1`: e' lo stesso oggetto"}
+{"id_vecchio": "AAAA-MM-GG", "dove": "etichette_rimosse.jsonl", "regola": "(fase2-b2) etichetta di documento, deciso dalle CITAZIONI"}
+{"id_vecchio": "ANTI-ALLINEAMENTO", "dove": "etichette_rimosse.jsonl", "regola": "(fase2-b2) etichetta di documento, deciso dalle CITAZIONI"}
+{"id_vecchio": "ARCHI-PASSO", "dove": "etichette_rimosse.jsonl", "regola": "(fase2-b2) etichetta di documento, deciso dalle CITAZIONI"}
+{"id_vecchio": "AUTO-ATTENUA", "dove": "etichette_rimosse.jsonl", "regola": "(fase2-b2) etichetta di documento, deciso dalle CITAZIONI"}
+{"id_vecchio": "AUTO-MANUTENZIONE", "dove": "etichette_rimosse.jsonl", "regola": "(fase2-b2) etichetta di documento, deciso dalle CITAZIONI"}
+{"id_vecchio": "AUTO-NORMALIZZANTE", "dove": "etichette_rimosse.jsonl", "regola": "(fase2-b2) etichetta di documento, deciso dalle CITAZIONI"}
+{"id_vecchio": "COME-MISURARE", "dove": "etichette_rimosse.jsonl", "regola": "(fase2-b2) etichetta di documento, deciso dalle CITAZIONI"}
+{"id_vecchio": "CURE-FINE", "dove": "etichette_rimosse.jsonl", "regola": "(fase2-b2) etichetta di documento, deciso dalle CITAZIONI"}
+{"id_vecchio": "CURE-INIZIO", "dove": "etichette_rimosse.jsonl", "regola": "(fase2-b2) etichetta di documento, deciso dalle CITAZIONI"}
+{"id_vecchio": "D5", "dove": "etichette_rimosse.jsonl", "regola": "(fase2-b2) etichetta di documento, deciso dalle CITAZIONI"}
+{"id_vecchio": "D6", "dove": "etichette_rimosse.jsonl", "regola": "(fase2-b2) etichetta di documento, deciso dalle CITAZIONI"}
+{"id_vecchio": "DA-DECIDERE", "dove": "etichette_rimosse.jsonl", "regola": "(fase2-b2) etichetta di documento, deciso dalle CITAZIONI"}
+{"id_vecchio": "DE-ACCOPPIABILITA", "dove": "etichette_rimosse.jsonl", "regola": "(fase2-b2) etichetta di documento, deciso dalle CITAZIONI"}
+{"id_vecchio": "DIFETTI-NUOVI-INIZIO", "dove": "etichette_rimosse.jsonl", "regola": "(fase2-b2) etichetta di documento, deciso dalle CITAZIONI"}
+{"id_vecchio": "DOMANDE-BUSSOLA", "dove": "etichette_rimosse.jsonl", "regola": "(fase2-b2) etichetta di documento, deciso dalle CITAZIONI"}
+{"id_vecchio": "DOVE-VA", "dove": "etichette_rimosse.jsonl", "regola": "(fase2-b2) etichetta di documento, deciso dalle CITAZIONI"}
+{"id_vecchio": "FASE-5", "dove": "etichette_rimosse.jsonl", "regola": "(fase2-b2) etichetta di documento, deciso dalle CITAZIONI"}
+{"id_vecchio": "FORK-FIRST", "dove": "etichette_rimosse.jsonl", "regola": "(fase2-b2) etichetta di documento, deciso dalle CITAZIONI"}
+{"id_vecchio": "GLOBALE-DIS", "dove": "etichette_rimosse.jsonl", "regola": "(fase2-b2) etichetta di documento, deciso dalle CITAZIONI"}
+{"id_vecchio": "GLOBALE-DISEGNO", "dove": "etichette_rimosse.jsonl", "regola": "(fase2-b2) etichetta di documento, deciso dalle CITAZIONI"}
+{"id_vecchio": "IN-CHE-ORDINE", "dove": "etichette_rimosse.jsonl", "regola": "(fase2-b2) etichetta di documento, deciso dalle CITAZIONI"}
+{"id_vecchio": "JHEP04", "dove": "etichette_rimosse.jsonl", "regola": "(fase2-b2) etichetta di documento, deciso dalle CITAZIONI"}
+{"id_vecchio": "L206", "dove": "etichette_rimosse.jsonl", "regola": "(fase2-b2) etichetta di documento, deciso dalle CITAZIONI"}
+{"id_vecchio": "MANDATO-REGISTRO", "dove": "etichette_rimosse.jsonl", "regola": "(fase2-b2) etichetta di documento, deciso dalle CITAZIONI"}
+{"id_vecchio": "O4", "dove": "etichette_rimosse.jsonl", "regola": "(fase2-b2) etichetta di documento, deciso dalle CITAZIONI"}
+{"id_vecchio": "POST-HOC", "dove": "etichette_rimosse.jsonl", "regola": "(fase2-b2) etichetta di documento, deciso dalle CITAZIONI"}
+{"id_vecchio": "QQ777", "dove": "etichette_rimosse.jsonl", "regola": "(fase2-b2) etichetta di documento, deciso dalle CITAZIONI"}
+{"id_vecchio": "QUADRO-FINE", "dove": "etichette_rimosse.jsonl", "regola": "(fase2-b2) etichetta di documento, deciso dalle CITAZIONI"}
+{"id_vecchio": "QUADRO-INIZIO", "dove": "etichette_rimosse.jsonl", "regola": "(fase2-b2) etichetta di documento, deciso dalle CITAZIONI"}
+{"id_vecchio": "RI-ETICHETTATO", "dove": "etichette_rimosse.jsonl", "regola": "(fase2-b2) etichetta di documento, deciso dalle CITAZIONI"}
+{"id_vecchio": "RI-GIRABILE", "dove": "etichette_rimosse.jsonl", "regola": "(fase2-b2) etichetta di documento, deciso dalle CITAZIONI"}
+{"id_vecchio": "RI-GIRABILITA", "dove": "etichette_rimosse.jsonl", "regola": "(fase2-b2) etichetta di documento, deciso dalle CITAZIONI"}
+{"id_vecchio": "RI-INTERROGA", "dove": "etichette_rimosse.jsonl", "regola": "(fase2-b2) etichetta di documento, deciso dalle CITAZIONI"}
+{"id_vecchio": "RI-LETTA", "dove": "etichette_rimosse.jsonl", "regola": "(fase2-b2) etichetta di documento, deciso dalle CITAZIONI"}
+{"id_vecchio": "RI-VERIFICATI", "dove": "etichette_rimosse.jsonl", "regola": "(fase2-b2) etichetta di documento, deciso dalle CITAZIONI"}
+{"id_vecchio": "ROMPI-ANELLO", "dove": "etichette_rimosse.jsonl", "regola": "(fase2-b2) etichetta di documento, deciso dalle CITAZIONI"}
+{"id_vecchio": "SHAKE-THEN-FREEZE", "dove": "etichette_rimosse.jsonl", "regola": "(fase2-b2) etichetta di documento, deciso dalle CITAZIONI"}
+{"id_vecchio": "SOVRA-CORREGGE", "dove": "etichette_rimosse.jsonl", "regola": "(fase2-b2) etichetta di documento, deciso dalle CITAZIONI"}
+{"id_vecchio": "TS-1", "dove": "etichette_rimosse.jsonl", "regola": "(fase2-b2) etichetta di documento, deciso dalle CITAZIONI"}
+{"id_vecchio": "TS-2", "dove": "etichette_rimosse.jsonl", "regola": "(fase2-b2) etichetta di documento, deciso dalle CITAZIONI"}
+{"id_vecchio": "TS-3", "dove": "etichette_rimosse.jsonl", "regola": "(fase2-b2) etichetta di documento, deciso dalle CITAZIONI"}
+{"id_vecchio": "TS-4", "dove": "etichette_rimosse.jsonl", "regola": "(fase2-b2) etichetta di documento, deciso dalle CITAZIONI"}
+{"id_vecchio": "TS-5", "dove": "etichette_rimosse.jsonl", "regola": "(fase2-b2) etichetta di documento, deciso dalle CITAZIONI"}
+{"id_vecchio": "TS-6", "dove": "etichette_rimosse.jsonl", "regola": "(fase2-b2) etichetta di documento, deciso dalle CITAZIONI"}
+{"id_vecchio": "TW-1", "dove": "etichette_rimosse.jsonl", "regola": "(fase2-b2) etichetta di documento, deciso dalle CITAZIONI"}
+{"id_vecchio": "TW-2", "dove": "etichette_rimosse.jsonl", "regola": "(fase2-b2) etichetta di documento, deciso dalle CITAZIONI"}
+{"id_vecchio": "TW-3", "dove": "etichette_rimosse.jsonl", "regola": "(fase2-b2) etichetta di documento, deciso dalle CITAZIONI"}
+{"id_vecchio": "TW-4", "dove": "etichette_rimosse.jsonl", "regola": "(fase2-b2) etichetta di documento, deciso dalle CITAZIONI"}
+{"id_vecchio": "TW-5", "dove": "etichette_rimosse.jsonl", "regola": "(fase2-b2) etichetta di documento, deciso dalle CITAZIONI"}
+{"id_vecchio": "TW-6", "dove": "etichette_rimosse.jsonl", "regola": "(fase2-b2) etichetta di documento, deciso dalle CITAZIONI"}
+{"id_vecchio": "VUOTO-MASSA", "dove": "etichette_rimosse.jsonl", "regola": "(fase2-b2) etichetta di documento, deciso dalle CITAZIONI"}
+{"id_vecchio": "Z147", "dove": "etichette_rimosse.jsonl", "regola": "(fase2-b2) etichetta di documento, deciso dalle CITAZIONI"}
+{"id_vecchio": "ZZ999", "dove": "etichette_rimosse.jsonl", "regola": "(fase2-b2) etichetta di documento, deciso dalle CITAZIONI"}

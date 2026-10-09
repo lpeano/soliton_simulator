@@ -103,10 +103,17 @@ def main():
     for v in voci:
         for a in v["alias"]:
             per.setdefault(a, v)
+    # ### ⚠ **LE CORREZIONI DEL PUNTO 1 (d) DEL MANDATO DI LUCA:** queste nove passano da
+    # ### `INFRASTRUTTURA` a `METODO`, perche' parlano della ### **validita' delle misure** e
+    # ### non del codice come strumento. ### **Il controllo le conosce**, altrimenti grida
+    # ### <<fuori posto>> su una correzione CHIESTA.
+    CORRETTE_1D = {"C21", "MASSA-ID", "CONTA-RIGHE", "PIATTAFORMA-NON-TIMBRATA", "CONFIG-1",
+                   "ANCORE-1", "COLLAUDO-NON-ESEGUITO", "IMPL-2", "H-ETC-2"}
     guai = []
     for idv, (dom, _p) in MG.L1.items():
         v = per.get(idv)
-        if v is None or v["dominio"] != dom or str(v["era"]) != "ENTRAMBE":
+        atteso = "METODO" if idv in CORRETTE_1D else dom
+        if v is None or v["dominio"] != atteso or str(v["era"]) != "ENTRAMBE":
             guai.append("L1 " + idv)
     for idv in MG.L2:
         v = per.get(idv)
@@ -125,16 +132,31 @@ def main():
                                           ("  " + " ".join(guai[:6])) if guai else ""))
 
     # ---------------------------------------------- C4 IDEMPOTENZA
+    # ### ⛔ **QUESTO CONTROLLO MI HA CANCELLATO 867 CLASSIFICAZIONI, e lo scrivo qui
+    # ### perche' non succeda a nessun altro:** rilanciava la migrazione, e la migrazione
+    # ### ### **riscrive `voci.jsonl` PARTENDO DAL TAG.** Finita la migrazione era un
+    # ### controllo innocuo; ### **dopo la fase 2 era DISTRUTTIVO.**
+    # ### ✔ **Adesso: se c'e' lavoro DOPO la migrazione, l'idempotenza NON si rilancia** --
+    # ### si ### **dichiara verificata al suo commit** *(`6b8cb90`)*, e la migrazione stessa
+    # ### ha un presidio che la ferma.
     files = ["voci.jsonl", "etichette_rimosse.jsonl", "migrazione_era1.jsonl",
              "_indice_meta.json"]
-    prima = {f: sha(os.path.join(D, f)) for f in files}
-    q = subprocess.run([sys.executable, os.path.join(_QUI, "migra_indice_v2.py")],
-                       cwd=RADICE, capture_output=True, text=True)
-    dopo = {f: sha(os.path.join(D, f)) for f in files}
-    diff = [f for f in files if prima[f] != dopo[f]]
-    esito("C4 IDEMPOTENZA: la seconda esecuzione da' gli STESSI BYTE",
-          q.returncode == 0 and not diff,
-          "diversi: %s" % (" ".join(diff) if diff else "nessuno"))
+    sto = os.path.join(D, "storico.jsonl")
+    n_storico = (sum(1 for r in io.open(sto, encoding="utf-8") if r.strip())
+                 if os.path.exists(sto) else 0)
+    if n_storico:
+        esito("C4 IDEMPOTENZA (NON si rilancia: c'e' lavoro di dopo)", True,
+              "storico.jsonl ha %d righe -> verificata al commit 6b8cb90; e la migrazione "
+              "ha un PRESIDIO che la ferma" % n_storico)
+    else:
+        prima = {f: sha(os.path.join(D, f)) for f in files}
+        q = subprocess.run([sys.executable, os.path.join(_QUI, "migra_indice_v2.py")],
+                           cwd=RADICE, capture_output=True, text=True)
+        dopo = {f: sha(os.path.join(D, f)) for f in files}
+        diff = [f for f in files if prima[f] != dopo[f]]
+        esito("C4 IDEMPOTENZA: la seconda esecuzione da' gli STESSI BYTE",
+              q.returncode == 0 and not diff,
+              "diversi: %s" % (" ".join(diff) if diff else "nessuno"))
 
     # ---------------------------------------------- C5 VALIDA
     q5 = subprocess.run([sys.executable, os.path.join(_QUI, "indice.py"), "valida"],

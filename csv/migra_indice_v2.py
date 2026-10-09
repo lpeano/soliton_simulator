@@ -256,8 +256,34 @@ STATO_DA_ERA1 = {"chiuso": "CHIUSA", "non-difetto": "CHIUSA", "teoria": "APERTA"
                  "aperto": "APERTA", "da-decidere": "APERTA", "SOSPESA-ERA-1": "APERTA"}
 
 
+def lavoro_di_dopo():
+    """### Le righe di `storico.jsonl` che NON vengono dalla migrazione.
+
+    ### ⛔ **La migrazione non scrive storico:** scrive `voci.jsonl` e la traccia. Quindi
+    ### **ogni riga di storico e' lavoro FATTO DOPO** -- una classificazione, una correzione.
+    """
+    p = os.path.join(D, "storico.jsonl")
+    if not os.path.exists(p):
+        return 0
+    return sum(1 for r in io.open(p, encoding="utf-8") if r.strip())
+
+
 def main(argv):
     solo_collaudo = "--collaudo" in argv
+    # ### ⛔ **IL PRESIDIO CHE MANCAVA, e l'ha fatto scoprire il controllo `C4`:** lui
+    # ### verifica l'IDEMPOTENZA ### **rilanciando la migrazione**, e la migrazione
+    # ### ### **riscrive `voci.jsonl` DAL TAG**. Finita la migrazione era innocuo; ### **dopo
+    # ### la fase 2 e' DISTRUTTIVO**, e infatti ha cancellato `867` classificazioni in un
+    # ### colpo. ### ➜ **Adesso la migrazione SI FERMA se trova lavoro di dopo.**
+    _n = lavoro_di_dopo()
+    if _n and not solo_collaudo and "--forza" not in argv:
+        print("### FERMO: `doc/indice/storico.jsonl` ha %d righe, cioe' C'E' LAVORO FATTO "
+              "DOPO LA MIGRAZIONE." % _n)
+        print("### Rilanciare la migrazione lo CANCELLEREBBE, perche' riscrive voci.jsonl")
+        print("### partendo dal tag %s." % TAG)
+        print("### Se e' davvero cio' che vuoi: --forza. Per provare l'idempotenza senza")
+        print("### toccare niente: --collaudo.")
+        return 2
     os.makedirs(D, exist_ok=True)
     vecchie = vecchio_indice()
     riga("=")

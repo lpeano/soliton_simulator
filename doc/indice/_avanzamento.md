@@ -71,20 +71,20 @@ python csv/indice.py aggiorna-lotto doc/indice/_lotti/<nome>.jsonl
 
 | | |
 |---|--:|
-| voci | `867` |
+| voci | `813` |
 | ### **`DA_CLASSIFICARE` vere** *(non segnaposto)* | ### **`2`** |
-| ### **segnaposto `NON_DEFINITA`** | ### **`233`** |
+| ### **segnaposto `NON_DEFINITA`** | ### **`179`** |
 | ### **`CHIUSE` senza dominio** | ### **`0`** |
 
 ```
-classe    NON_DEFINITA=233  DIFETTO=209  FRONTE=168  CRITERIO=95  MISURA=54  CURA=46  PRESIDIO=34  STANDARD=28
-dominio   FISICA=454  DA_CLASSIFICARE=233  METODO=114  INFRASTRUTTURA=43  DOCUMENTAZIONE=23
-era       1=424  DA_CLASSIFICARE=235  ENTRAMBE=165  2=43
-stato     SOSPESA=246  DA_CLASSIFICARE=235  CHIUSA=187  APERTA=156  AGENDA=43
+classe    DIFETTO=209  NON_DEFINITA=179  FRONTE=168  CRITERIO=95  MISURA=54  CURA=46  PRESIDIO=34  STANDARD=28
+dominio   FISICA=454  DA_CLASSIFICARE=179  METODO=114  INFRASTRUTTURA=43  DOCUMENTAZIONE=23
+era       1=424  DA_CLASSIFICARE=181  ENTRAMBE=165  2=43
+stato     SOSPESA=246  CHIUSA=187  DA_CLASSIFICARE=181  APERTA=156  AGENDA=43
 ```
 
-### ✔ **FATTO IN QUESTO GIRO:** le 184 CHIUSE (dominio ed era), e la correzione dei 4 AGENDA sbagliati
+### ✔ **FATTO IN QUESTO GIRO:** i 233 segnaposto (1 alias, 53 etichette, 179 concetti), piu' il presidio che impedisce alla migrazione di cancellare il lavoro di dopo
 
-### ⛔ **RESTA:** i 233 segnaposto NON_DEFINITA: alias, etichetta o concetto da definire
+### ⛔ **RESTA:** il referto della fase 2
 
-**Ultimo lotto applicato:** `doc/indice/_lotti/chiuse_04.jsonl`
+**Ultimo lotto applicato:** `doc/indice/_lotti/segnaposto_concetti.jsonl`
