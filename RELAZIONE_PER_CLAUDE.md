@@ -10685,3 +10685,17 @@ I segnali sono ### **`F1=0 F2=1 F3=0 F4=0 F6=0`**, ### **esattamente quelli che 
 ### ⚠ **`F7` vale adesso per QUALSIASI DOMINIO**, e violava su `16` voci *(`14` `CENS-*` di `DOCUMENTAZIONE`, `D32-CONTATORE`, `RAMI-OFF-CURA2`)*: ### **la regola non parlava di fisica.** ### ⛔ **E l'ordine non e' libero, per la seconda volta in due giri:** un presidio bloccante acceso ### **prima** della cura ### **rende inapplicabile il lotto che lo curerebbe.**
 
 ### ⭐ **E `F8`** — una voce `ENTRAMBE` che nomina un oggetto dell'era `1` — ### **segnala due sole voci, e sono entrambe nell'elenco del mandato di quelle che RESTANO `ENTRAMBE`.** Le elenco e ### **non le correggo**: tutte e due sono ### **REGOLE che MENZIONANO un `.pkl` per confronto**, non voci che ne parlano. ### **`F8` guarda una parola, e una parola non dice di chi si parla** — la stessa lezione di `F3`, e ### **la terza volta che la incontro.**
+
+---
+
+## LO STATO DALLA RIGA D'ORIGINE: **`53` stati cambiati, e il TITOLO TAGLIAVA DOVE LA RIGA DECIDE** (2026-10-09)
+
+Il mandato in `8` punti e' chiuso. `846` voci, `953` ID vecchi conservati, `6` su `6` i controlli, `34` su `34` il collaudo dei presidi, `22` su `22` quello dell'indice. `doc/REFERTO_indice_v3_righe_origine.md`, `375` righe. Nessuna corsa; il simulatore resta `b8c21049`.
+
+### ⭐ **LA VALIDITA' NON E' LO STATO, e questo e' il ritrovato del giro:** *«VALE SEMPRE»*, *«VALE PER QUELLA SCENA»*, *«LIMITE DICHIARATO»* ### **non dicono se una cosa e' fatta**: dicono ### **fin dove vale cio' che si e' trovato.** Erano trattate come stati, e lo stato stava ### **nella riga d'origine** — che i titoli dell'indice, ### **`<= 100` caratteri**, tagliavano. ### ⛔ **Il titolo di `Z83` finisce *«… | DO…»*; la riga dice *«DOMANDA APERTA»*, e la voce era `CHIUSA`.**
+
+### ⚠ **DUE CORREZIONI ALLA REGOLA, e le dichiaro perche' non sono mie da fare:** alla lettera la regola del mandato dava ### **`5` su `7`** sul collaudo. Le ho aggiunte: il ### **confine di parola** *(`infinito` contiene `FINITO`)* e ### **la prima parola di stato vince** *(la riga racconta anche la STORIA: `Z25` dice «fronte aperto» e la cella dice «CHIUSA»)*. ### **Con quelle, `7` su `7`.** ### ⭐ **Aggiustare un ATTREZZO su casi a risposta nota e' lecito; aggiustare la REGOLA e' un'altra cosa, e il referto lo scrive.**
+
+### ✔ **E LO SCHEMA HA FATTO UN FILTRO GIUSTO AL POSTO MIO, tre volte:** `validita` non registrata → ### **lotto rifiutato, zero scritture**; chiudere pretende il commit → ### **`20` righe dicono «CHIUSA» senza portarlo**, e la' dentro ci sono ### **ASSIOMI** *(`A5`, `A9`)*, la cui riga e' ### **una DEFINIZIONE, non una chiusura** — ### ⭐ **un assioma non e' «fatto»: VALE**; un segnaposto non prende uno stato → ### **`45` saltate.**
+
+### ⛔ **E UNA COSA CHE RESTA, e NON e' un residuo:** `9` coppie `D`/`Z` sono disallineate, e ### **per sette il punto `1` ha letto ENTRAMBE le righe.** Se danno stati diversi, ### **sono le RIGHE a disaccordare sullo stesso fatto**, e allinearle vorrebbe dire ### **scegliere quale vale.** ### **Non lo faccio: lo elenco con le due righe accanto.**

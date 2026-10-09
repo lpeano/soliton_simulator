@@ -2449,3 +2449,18 @@ etichette rimosse, con ### **`0` persi, `0` doppi, `0` conflitti**.
 | **cosa misura** | **quante divisioni le dichiara il TESTO** *(i marcatori `①`, `(a)`, e l'annuncio «DUE cose»)* e **quante sono MIE** |
 | ### ⛔ **`da_dividere` è un `bool`** | e non può portare le parti: il bool resta *(dice **SE**)* e si aggiunge **`da_dividere_parti`** *(dice **CHE COSA**)*, perché `M2` e `B6` lo usano già col bool e **cambiare il tipo di una chiave in uso romperebbe loro** |
 | ### ⚠ **l'ultima voce della lista dice COME** | *«il TESTO dichiara le parti»* oppure *«LA DIVISIONE È MIA»*: ### **una divisione proposta non si spaccia per una dichiarata** |
+
+---
+
+### `csv/_doc_referto_righe_origine.py` — **IL REFERTO, E NESSUN NUMERO RICOPIATO** *(2026-10-09)*
+
+| | |
+|---|---|
+| **file** | `csv/_doc_referto_righe_origine.py` |
+| **BLOB** *(sha1 dei byte grezzi)* | `bae6870f` |
+| **COMANDO** | `python csv/_doc_referto_righe_origine.py` |
+| **cosa misura** | i conteggi `classe`/`dominio`/`era`/`stato` **prima e dopo**, quante voci ha cambiato il punto `1` e **perché ha lasciato le altre**, i segnali per presidio **voce per voce con la frase**, e i tre collaudi |
+| **l'uscita** | `doc/REFERTO_indice_v3_righe_origine.md` *(`375` righe)* |
+| ### ⛔ **il PRIMA viene da `git show`** | `git show 4ec2684:doc/indice/voci.jsonl`, non da un numero che ho scritto io: ### **un numero ricopiato non ha provenienza** *(`L-NUMERI`)* |
+| ### ⭐ **e le decisioni si IMPORTANO** | il referto fa `import` di `_stato_dalla_riga`, `_dominio_esplicite`, `_a_luca`, `_gemelle_duplicati` e `_da_dividere`: ### **il referto e il lavoro non possono divergere**, perché **leggono la stessa tavola** |
+| ### ⚠ **gira i collaudi DA SÉ** | i `3` collaudi e i `6` controlli sono **lanciati dal generatore**, non ricopiati dal terminale |

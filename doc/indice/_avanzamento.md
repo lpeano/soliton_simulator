@@ -83,8 +83,10 @@ era       1=538  DA_CLASSIFICARE=188  ENTRAMBE=96  2=24
 stato     SOSPESA=369  DA_CLASSIFICARE=188  CHIUSA=182  APERTA=82  AGENDA=24  SUPERATA=1
 ```
 
-### ✔ **FATTO IN QUESTO GIRO:** il punto `7`: le ### **`16` da dividere, SENZA dividerle** -- `5` divisioni ### **le dichiara il testo** *(i cerchietti, le lettere, «DUE cose distinte»)* e `11` ### **sono mie, e l'ultima voce della lista lo dice**. `da_dividere` e' un `bool` e non poteva portarle: ### **il bool dice SE, `da_dividere_parti` dice CHE COSA**
+### ✔ **FATTO IN QUESTO GIRO:** il punto `8`, **l'ultimo**: i controlli e il referto ### **`doc/REFERTO_indice_v3_righe_origine.md`** *(`375` righe, voce per voce)*. ### **Il mandato «STATO E CLASSE DALLA RIGA D'ORIGINE» e' CHIUSO: `8` punti su `8`.**
 
-### ⛔ **RESTA:** il punto `8`: i controlli e il referto ### **`doc/REFERTO_indice_v3_righe_origine.md`**, voce per voce -- piu' i conteggi prima/dopo, quante voci ha cambiato il punto `1` e quante ha lasciato, e i segnali per presidio
+### ⭐ **I NUMERI DEL MANDATO:** il punto `1` ha cambiato ### **`53` stati** e ne ha lasciati ### **`305`**, di cui ### **`5` davvero ambigui** *(gli altri: `230` «nessuna parola decide», `45` segnaposto, `20` chiusure senza commit, `5` riservate a Luca)*. I segnali: ### **`F1`=`7` `F8`=`19`**, e gli altri a `0`.
 
-**Ultimo lotto applicato:** `doc/indice/_lotti/v3_s7.jsonl`
+### ⛔ **RESTA A LUCA, e non lo decido io:** le `46` di `doc/indice/DA_DECIDERE_LUCA.md`, le `9` coppie `D`/`Z` ### **in cui le due RIGHE disaccordano**, le `16` da dividere *(e per `11` la proposta e' MIA)*, le `20` chiusure ### **senza il commit che ha chiuso**, i `19` segnali di `F8` ### **sul confine fra le due frasi dell'era**, e ### **le DUE correzioni che ho fatto alla REGOLA del punto `1`.**
+
+**Ultimo lotto applicato:** `doc/indice/_lotti/v3_s7.jsonl` — ### **il punto `8` NON scrive sull'indice**: legge, conta e scrive un referto.
