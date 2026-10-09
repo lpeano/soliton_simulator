@@ -68,16 +68,21 @@ def main():
     for v in sorted(res, key=lambda x: x["id"]):
         mo, f, t = M(v, "motivo_era1"), v["fonte"], testo(v)
         if "MISURA DA RIFARE" in mo:
-            if "[EPOCA 2" in t:
-                era, stato = "2", "AGENDA"
-                marc = "[EPOCA 2"
-            else:
-                era, stato = "1", "SOSPESA"
-                marc = "[EPOCA 1" if "[EPOCA 1" in t else "(senza marcatore d'epoca)"
-            agg(v, "FISICA", era, stato,
-                "(R1) `motivo_era1` dice <<%s>>, e il testo porta il marcatore `%s`: e' una "
-                "MISURA del sistema, quindi FISICA, e l'era viene DAL MARCATORE"
-                % (cit(mo, 70), marc))
+            # ### ⛔ **UN ERRORE MIO, PRESO LEGGENDO LE VOCI CHIUSE:** avevo mappato
+            # ### `[EPOCA 2` sull'### **era 2 dello schema**. ### **E' FALSO.** Le
+            # ### <<epoche>> `1`, `2`, `3` sono ### **FASI DI LAVORO sul simulatore del
+            # ### SECONDO ordine** *(`Z87`: <<d SCENDE A DIECI VOLTE SOTTO LAM>>; `Z91`:
+            # ### <<SCALA_MIN FRENA OGNI SCRITTURA>>)*, mentre l'### **era `2` dello schema
+            # ### e' la RISCRITTURA al primo ordine** -- e quella e' ### **la lista `L2` di
+            # ### Luca**, non un marcatore nel testo. ### ➜ **Tutte le epoche vanno nell'era
+            # ### `1`**, e le `4` voci che avevo messo in `AGENDA` sono state corrette.
+            m2 = [x for x in ("[EPOCA 1", "[EPOCA 2", "[EPOCA 3") if x in t]
+            marc = m2[0] if m2 else "(senza marcatore d'epoca)"
+            agg(v, "FISICA", "1", "SOSPESA",
+                "(R1) `motivo_era1` dice <<%s>>, e il testo porta `%s`: e' una MISURA del "
+                "sistema, quindi FISICA. ### E L'<<EPOCA>> NON E' L'ERA: le epoche sono fasi "
+                "di lavoro sul SECONDO ordine, quindi era 1"
+                % (cit(mo, 60), marc))
             n["R1"] += 1
         elif "non blocca fino a prova contraria" in mo:
             agg(v, "FISICA", "1", "SOSPESA",
