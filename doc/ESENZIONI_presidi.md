@@ -5,6 +5,7 @@ commit**: cosi' non se ne accumulano di invisibili.)*
 
 | file\|presidio | motivo dichiarato |
 |---|---|
+| `csv/_a_luca.py|H-P5` | non importa il simulatore e non lo fa girare. Costruisce un lotto. |
 | `csv/_analisi_lettori_indice.py|H-P5` | non importa il simulatore e non lo fa girare. Legge sorgenti e conta. |
 | `csv/_ancore_prima.py|H-P5` | strumento di analisi STATICA. Non importa il simulatore e non lo fa girare: |
 | `csv/_archivio_relazioni.py|H-P5` | non importa il simulatore e non lo fa girare. Divide un documento per giorno. |
@@ -124,5 +125,5 @@ commit**: cosi' non se ne accumulano di invisibili.)*
 | `csv/_test_fork/_z43_tempo_proprio.py|H-P3` | la scena passa TUTTA dal CLI (`nmasse` e `sep` da `argv`), e la |
 
 ```
-esenzioni dichiarate   117
+esenzioni dichiarate   118
 ```

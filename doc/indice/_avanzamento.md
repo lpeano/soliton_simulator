@@ -74,7 +74,7 @@ python csv/indice.py aggiorna-lotto doc/indice/_lotti/<nome>.jsonl
 | voci | `846` |
 | ### **`DA_CLASSIFICARE` vere** *(non segnaposto)* | ### **`1`** |
 | ### **segnaposto `NON_DEFINITA`** | ### **`187`** |
-| ### **righe di storico** | ### **`1594`** |
+| ### **righe di storico** | ### **`1603`** |
 
 ```
 classe    DIFETTO=200  NON_DEFINITA=187  MISURA=141  FRONTE=109  CRITERIO=90  CURA=56  PRESIDIO=34  STANDARD=29
@@ -83,8 +83,8 @@ era       1=538  DA_CLASSIFICARE=188  ENTRAMBE=96  2=24
 stato     SOSPESA=369  DA_CLASSIFICARE=188  CHIUSA=182  APERTA=82  AGENDA=24  SUPERATA=1
 ```
 
-### ✔ **FATTO IN QUESTO GIRO:** il punto `4`: ### **dominio e classe delle `16` esplicite**, ogni motivo ### **con la frase della sua riga d'origine** -- e per tre, dove la riga non si ritrova, ### **il motivo lo DICHIARA** e cita il titolo. `REGISTRO_FISICA:D37` era `CRITERIO`+`INFRASTRUTTURA`, e il mandato scioglie il nodo ### **dalla parte della classe**
+### ✔ **FATTO IN QUESTO GIRO:** il punto `5`: le ### **nove a Luca SENZA toccarle** -- solo la domanda in `nota_guardiano`, e `DA_DECIDERE_LUCA.md` ### **le raccoglie da se'** *(`37`→`46` voci)*. ### **Zero campi di classificazione cambiati**, e ### **l'assert del generatore lo garantisce**: pretende `campi == {}` su tutte e nove
 
-### ⛔ **RESTA:** il punto `5` *(le `9` a Luca, ### **senza toccarle**)*, poi `6` *(gemelle e duplicati, con `F1` esteso allo stato)*, `7` *(`meta.da_dividere`)* e `8` *(i controlli e il referto `doc/REFERTO_indice_v3_righe_origine.md`)*
+### ⛔ **RESTA:** il punto `6` *(gemelle e duplicati: `meta.duplicato_di` e `collegate`, ### **non fusi**, e `F1` esteso allo stato)*, `7` *(`meta.da_dividere`, ### **non dividere**)* e `8` *(i controlli e il referto)*
 
-**Ultimo lotto applicato:** `doc/indice/_lotti/v3_s4.jsonl`
+**Ultimo lotto applicato:** `doc/indice/_lotti/v3_s5.jsonl`

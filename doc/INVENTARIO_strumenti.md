@@ -2410,3 +2410,16 @@ etichette rimosse, con ### **`0` persi, `0` doppi, `0` conflitti**.
 | **COMANDO** | `python csv/_dominio_esplicite.py`, poi `python csv/indice.py aggiorna-lotto doc/indice/_lotti/v3_s4.jsonl` |
 | **cosa misura** | niente: **porta le `16` decisioni del mandato**, e ### **ogni motivo cita LA RIGA D'ORIGINE** — o, dove non si ritrova, **lo dichiara e cita il titolo** |
 | ### ⚠ **il nodo di `REGISTRO_FISICA:D37`** | era `CRITERIO`+`INFRASTRUTTURA`, e questo **viola la regola della classe**: un `CRITERIO` si aspetta in `METODO`. ### **Il mandato scioglie il nodo dalla parte della CLASSE:** non è un criterio, è un **`DIFETTO`** |
+
+---
+
+### `csv/_a_luca.py` — **LE NOVE A LUCA, SENZA TOCCARLE** *(2026-10-09)*
+
+| | |
+|---|---|
+| **file** | `csv/_a_luca.py` |
+| **BLOB** *(sha1 dei byte grezzi)* | `c76f0b75` |
+| **COMANDO** | `python csv/_a_luca.py`, poi `python csv/indice.py aggiorna-lotto doc/indice/_lotti/v3_s5.jsonl` e `python csv/indice.py da-decidere` |
+| **cosa misura** | niente: aggiunge ### **soltanto la domanda** in `nota_guardiano`, e `DA_DECIDERE_LUCA.md` **le raccoglie da sé** |
+| ### ⛔ **l'assert che garantisce il «senza toccare»** | il generatore ### **pretende `campi == {}`** su tutte e nove: se una decisione ci finisse dentro, **il lotto non partirebbe** |
+| ### ⚠ **la FRASE NON va nella nota** | l'elenco generato porta già una colonna **«LA FRASE»**: scriverla due volte vorrebbe dire **tenerla in due posti, e due copie divergono** |

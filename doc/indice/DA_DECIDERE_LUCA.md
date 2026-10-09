@@ -4,8 +4,8 @@
 
 | | |
 |---|--:|
-| **voci che aspettano una decisione** | ### **`37`** |
-| **domande in tutto** | `37` |
+| **voci che aspettano una decisione** | ### **`46`** |
+| **domande in tutto** | `46` |
 | **segnaposto `NON_DEFINITA`**, che NON sono una domanda | `187` |
 
 ---
@@ -39,7 +39,7 @@
 | `A13` | `STANDARD`/`FISICA`/`ENTRAMBE`/`APERTA` | CONFERMI `FISICA`/era `ENTRAMBE`? vincola la FORMA DELLE LEGGI o descrive il comportamento del sistema | LAM È LA SCALA DI PLANCK DEL SISTEMA (decisione di Luca, 2026-09-24) |
 | `A14` | `STANDARD`/`FISICA`/`ENTRAMBE`/`APERTA` | CONFERMI `FISICA`/era `ENTRAMBE`? vincola la FORMA DELLE LEGGI o descrive il comportamento del sistema | LE GRANDEZZE SI CONSERVANO LOCALMENTE E SI DISSIPANO GLOBALMENTE (decisione di Luca, 2026-10-03) ASSIOMA deciso da Luca il 2026-10-03, e doc/ASSIOMI.m |
 | `A15` | `STANDARD`/`FISICA`/`ENTRAMBE`/`APERTA` | CONFERMI `FISICA`/era `ENTRAMBE`? vincola la FORMA DELLE LEGGI o descrive il comportamento del sistema | LA MEMORIA E DINAMICA, LOCALE, E CIO CHE DIMENTICA SI TRASFORMA (decisione di Luca, 2026-10-07) ASSIOMA deciso da Luca il 2026-10-07, e doc/ASSIOMI.md |
-| `A2` | `STANDARD`/`FISICA`/`ENTRAMBE`/`APERTA` | CONFERMI `FISICA`/era `ENTRAMBE`? vincola la FORMA DELLE LEGGI o descrive il comportamento del sistema | NESSUNA SCORCIATOIA GLOBALE |
+| `A2` | `STANDARD`/`FISICA`/`ENTRAMBE`/`SOSPESA` | CONFERMI `FISICA`/era `ENTRAMBE`? vincola la FORMA DELLE LEGGI o descrive il comportamento del sistema | NESSUNA SCORCIATOIA GLOBALE |
 | `A3` | `STANDARD`/`FISICA`/`ENTRAMBE`/`APERTA` | CONFERMI `FISICA`/era `ENTRAMBE`? vincola la FORMA DELLE LEGGI o descrive il comportamento del sistema | NIENTE SI NORMALIZZA SUL PROPRIO INSIEME |
 | `A3c` | `STANDARD`/`FISICA`/`ENTRAMBE`/`APERTA` | CONFERMI `FISICA`/era `ENTRAMBE`? vincola la FORMA DELLE LEGGI o descrive il comportamento del sistema | un RAPPORTO confrontato con un MASSIMO / (115, accanto a due massimi di passi diversi) /... titolo_breve INTERO: un RAPPORTO confrontato con un MASSIM |
 | `A4` | `STANDARD`/`FISICA`/`ENTRAMBE`/`APERTA` | CONFERMI `FISICA`/era `ENTRAMBE`? vincola la FORMA DELLE LEGGI o descrive il comportamento del sistema | STRATIFICAZIONE CAUSALE |
@@ -55,16 +55,25 @@
 
 ---
 
-## le DOMANDE aperte -- `6`
+## le DOMANDE aperte -- `15`
 
 | id | `classe`/`dominio`/era/stato | LA DOMANDA | LA FRASE |
 |---|---|---|---|
+| `A3-DISEGNO` | `DIFETTO`/`FISICA`/`2`/`AGENDA` | superata da A16/A17? le due decisioni di Luca del 2026-10-08 riscrivono cio- che questa voce chiede | IL DISEGNO ESCE DALLA DINAMICA — cura a sé, prima delle tre prove. pos entra nella fisica in… |
+| `G4-MEMARCO` | `CURA`/`FISICA`/`2`/`AGENDA` | superata da A16/A17? | MEMARCO — LA MEMORIA DEL MOTO TRADOTTA IN FORMA RELAZIONALE (aggiunta di Luca al §4, 2026-09-22) /… |
 | `I1` | `DIFETTO`/`FISICA`/`DA_CLASSIFICARE`/`DA_CLASSIFICARE` | CHE CLASSE, DOMINIO, ERA E STATO? <<IDEA DI LUCA, PER DOPO: costruire UNA massa, farla maturare, leggerne la struttura>>. ### E' FISICA, ma <<per dopo>> non dice SE e' dell'era 2: non sta nelle AGENDA di Luca, e indovinarlo sarebbe in | IDEA DI LUCA, per dopo: costruire UNA massa, farla maturare, leggerne la struttura sul grafo e... titolo_breve INTERO: IDEA DI LUCA, per dopo: costrui |
+| `K2a` | `CRITERIO`/`METODO`/`ENTRAMBE`/`APERTA` | era 1 o ENTRAMBE? dipende se cio- che dice riguarda un oggetto concreto dell-era 1 o una regola che sopravvive | SIGILLO osservabile-P1: si cambia SOLO `d` (un arco del cammino minimo x10) e la distanza DEVE... titolo_breve INTERO: SIGILLO osservabile-P1: si camb |
+| `K2b` | `CRITERIO`/`METODO`/`ENTRAMBE`/`APERTA` | era 1 o ENTRAMBE? | SIGILLO osservabile-P1: si cambia SOLO `pos` (un nodo di 10 LAM) e la distanza NON deve... titolo_breve INTERO: SIGILLO osservabile-P1: si cambia SOLO |
 | `M-FLUSSO` | `CURA`/`FISICA`/`2`/`AGENDA` | era 1 o 2 | memoria di flusso per ARCO, scalare e antisimmetrica, al posto di mem_mot CANDIDATA REGISTRATA il 2026-10-07 e NON DECISA, dal rapporto doc/MEMORIE_MA |
 | `M-ISTERESI` | `CURA`/`FISICA`/`2`/`AGENDA` | era 1 o 2 | un isteresi sui flip di perc_geom e perc_chi: COMPLEMENTO di MEM-VERSO, non alternativa CANDIDATA REGISTRATA il 2026-10-07 e NON DECISA, dal rapporto  |
 | `M-LEGAMI` | `CURA`/`FISICA`/`2`/`AGENDA` | era 1 o 2 | cos(dph - tw) al posto di cos(phi0_i - phi0_j): rende viva una memoria congelata CANDIDATA REGISTRATA il 2026-10-07 e NON DECISA, dal rapporto doc/MEM |
 | `M-MASSA` | `CURA`/`FISICA`/`2`/`AGENDA` | era 1 o 2 | pesi di appartenenza con memoria: AGGIUNGE stato, e dipende da MASSA-ID CANDIDATA REGISTRATA il 2026-10-07 e NON DECISA, dal rapporto doc/MEMORIE_MANC |
+| `MASSA-CRITICA-LOCALE` | `DIFETTO`/`FISICA`/`1`/`SOSPESA` | contiene una DIREZIONE DI LUCA per l-era 2: va letta come programma dell-era 2 o come difetto dell-era 1? | la soglia di collasso deve essere LOCALE e DINAMICA, e dipendere da lambda: direzione di Luca APERTA il 2026-10-06 sera. DIREZIONE DI LUCA, registrata |
 | `MEM-VERSO` | `CURA`/`FISICA`/`2`/`AGENDA` | era 1 o 2 | il verso dell arco dalla sua MEMORIA (delta = twp - tw) invece che dal segno istantaneo CANDIDATA REGISTRATA il 2026-10-07 e NON DECISA, dal rapporto  |
+| `O4` | `FRONTE`/`FISICA`/`1`/`SOSPESA` | era 2? e- un-OBIEZIONE AL BERSAGLIO (la conservazione dell-energia), e un-obiezione al bersaglio non si chiude nell-era 1 | CONSERVAZIONE DELL'ENERGIA. L'energia assorbita non si riesce a bilanciare / **O4** / **CONSERVAZIONE DELL'ENERGIA.** L'energia assorbita non si riesc |
+| `SPINORE-SENZA-FASE` | `DIFETTO`/`FISICA`/`1`/`SOSPESA` | contiene una DIREZIONE DI LUCA per l-era 2: va letta come programma dell-era 2 o come difetto dell-era 1? | la coppia muove phivel ma deriva da un'ALTRA fase: lo spinore ha un orologio tutto suo APERTA il 2026-10-07 sera. MECCANISMO PROPOSTO DAL GUARDIANO, D |
+| `Z104` | `FRONTE`/`FISICA`/`2`/`AGENDA` | superata da A16/A17? | Z104 APERTA ⏳[EPOCA 3 · DERIVAZIONE] / MEMARCO: LA MEMORIA DEL MOTO TRADOTTA IN FORMA... titolo_breve INTERO: Z104 APERTA ⏳[EPOCA 3 · DERIVAZIONE] / M |
+| `Z47` | `FRONTE`/`FISICA`/`1`/`CHIUSA` | era 2? il testo dice <<PROGETTO DI LUNGO PERIODO -- NON INIZIATO. GEOMETRIA RELAZIONALE SENZA EMBEDDING>>, e un progetto non iniziato somiglia all-era 2 | Z47 VALE SEMPRE ⏳[EPOCA 1 · MISURA] / PROGETTO DI LUNGO PERIODO — NON INIZIATO. GEOMETRIA... titolo_breve INTERO: Z47 VALE SEMPRE ⏳[EPOCA 1 · MISURA]  |
 
 ---
 
