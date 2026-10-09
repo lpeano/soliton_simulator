@@ -1,0 +1,165 @@
+SOGLIA-MITOSI-3PI | classe=DIFETTO stato=SOSPESA | MA NON SI ADOTTA ADESSO | alta
+X1 | stato=SOSPESA | Si chiude quando (a), (b) e (c) sono trattati esplicitamente | alta
+A1-TREVIE | stato=SOSPESA | né applicata né scartata | alta
+B3 | classe=FRONTE stato=SOSPESA | Quanti siano su un percorso fisico non è misurato | alta
+B4 | classe=FRONTE stato=SOSPESA | quel conto non esiste ancora | alta
+CENS-A4 | stato=CHIUSA | Questo commit corregge SOLO il commento | alta
+C13 | stato=CHIUSA | C. DIAGNOSI CHIUSE | alta
+C17 | stato=CHIUSA | C. DIAGNOSI CHIUSE | alta
+C18 | stato=CHIUSA | C. DIAGNOSI CHIUSE | alta
+C20 | stato=CHIUSA | C. DIAGNOSI CHIUSE | alta
+C22 | stato=CHIUSA | C. DIAGNOSI CHIUSE | alta
+C23 | stato=CHIUSA | C. DIAGNOSI CHIUSE | alta
+C24 | stato=CHIUSA | C. DIAGNOSI CHIUSE | alta
+C1-PEQ-ESATTO | stato=CHIUSA | ✅ | alta
+C1BIS-ANOM-SIMM | stato=CHIUSA | ✅ | alta
+C2-PEQ-NASCITA | stato=CHIUSA | ✅ | alta
+C3-SCALA-MIN-PASSO | stato=CHIUSA | ✅ | alta
+C4-COES-CAUSALE | stato=CHIUSA | ✅ | alta
+D0 | classe=MISURA stato=CHIUSA | MISURATO: e' IL FRENO | alta
+CHK2 | stato=CHIUSA | raggiunto e riferito a Luca | alta
+COMPONENTI:S3b | stato=CHIUSA | SIGILLATA con controllo positivo | alta
+COMPONENTI:S3c | stato=CHIUSA | SIGILLATA con controllo positivo | alta
+D34 | stato=CHIUSA | CURATO IN CODICE | alta
+G2 | classe=MISURA stato=CHIUSA | FATTO. Il saldo vive sul CONFINE | alta
+G3 | classe=MISURA stato=CHIUSA | sigillo 7/7 | alta
+G4 | classe=MISURA stato=CHIUSA | FATTO (finito 14:39:27) | alta
+S02 | stato=SUPERATA superata_da=D31 | PROMOSSO | alta
+S03 | classe=MISURA stato=CHIUSA | DECISO da Z109 | alta
+S04 | classe=MISURA stato=CHIUSA | CADE con Z108 | alta
+Z13 | classe=CURA stato=CHIUSA | CHIUSA il 2026-09-17 | alta
+Z127 | classe=MISURA stato=CHIUSA | E1 NON PASSA | alta
+Z26 | classe=MISURA stato=CHIUSA | CONTIENE LO ZERO | alta
+REGISTRO_FISICA:P2 | stato=CHIUSA | P2 È FALLITA | alta
+A2 | stato=APERTA | (combinazione impossibile: ENTRAMBE+SOSPESA) | alta
+REPERTI-IMMUTABILI | stato=APERTA | APERTA il 2026-09-26 | alta
+PRESTAZIONI-CORSE | classe=FRONTE stato=APERTA | IN CODA, NON ADESSO | alta
+RIPRESA-ARGV | stato=APERTA | LA RIPRESA SI FIDA DEL BLOB | media
+LUNGA-BATTITO-CADUTA | era=1 | _tors_w8_lunga | media
+REGISTRO_FISICA:D37 | stato=CHIUSA | È CURATO | alta
+B10 | stato=SOSPESA | APERTE DA PRIMA | alta
+B8 | stato=SOSPESA | APERTE DA PRIMA | alta
+Z29 | classe=CURA stato=CHIUSA | Sigillo 8/8 | alta
+Z30 | classe=MISURA stato=CHIUSA | CHIUSA il 2026-09-18 | alta
+Z35 | classe=CURA stato=CHIUSA | BYTE-INERTE | alta
+Z53 | classe=CURA stato=CHIUSA | CURATO, SIGILLO 9/9 PASS | alta
+Z5 | classe=MISURA stato=CHIUSA | chiusa per DIMOSTRAZIONE | alta
+Z87 | classe=DIFETTO stato=CHIUSA | CAUSA TROVATA | alta
+Z28 | classe=CRITERIO dominio=METODO stato=CHIUSA | CHIUSA PRIMA DI NASCERE | alta
+CHI-TORS-ZERO-FALSO | classe=DIFETTO stato=SOSPESA | la voce resta aperta | alta
+Z31 | classe=DIFETTO stato=SOSPESA | NON RIPARATI IN QUESTO GIRO | alta
+B2 | classe=DIFETTO stato=SOSPESA | NON RIPARATI IN QUESTO GIRO | alta
+REGISTRO_FISICA:T3 | stato=CHIUSA | PASS | alta
+REGISTRO_FISICA:T4 | stato=CHIUSA | PASS | alta
+REGISTRO_FISICA:T5 | stato=CHIUSA | PASS | alta
+REGISTRO_FISICA:U2-5 | stato=CHIUSA | PASS | alta
+REGISTRO_FISICA:U2-6 | stato=CHIUSA | PASS | alta
+T3a | stato=CHIUSA | PASS | alta
+T3b | stato=CHIUSA | PASS | alta
+Z142 | stato=CHIUSA | E4-LAM PASSA | alta
+REGISTRO_FISICA:SCENA-1 | classe=CURA dominio=FISICA stato=CHIUSA | CHIUSA il 2026-09-25 | alta
+Z25 | classe=CURA | CURAT | alta
+Z42 | classe=CURA | CURAT | alta
+Z67 | classe=CURA | CURAT | alta
+X3 | classe=MISURA | e' uno stato | alta
+Z110 | classe=MISURA | CHIUSA PER MISURA | alta
+Z111 | classe=MISURA | CHIUSA PER MISURA | alta
+Z62 | classe=MISURA | CHIUSA PER MISURA | alta
+U2 | classe=DIFETTO | VA MISURATA, non assunta | alta
+CHK3-D | classe=MISURA | Solo misure e letture del sorgente | alta
+SCALE-TW | classe=FRONTE | NON | alta
+PROBLEMI-CHK3 | classe=FRONTE | NON | alta
+E3 | classe=FRONTE | NON | alta
+Z10 | classe=DIFETTO | difetto di suo | alta
+X2 | classe=DIFETTO | Due difetti distinti | alta
+PAT-1 | classe=DIFETTO | non rispetta il pattern | alta
+PAT-2 | classe=DIFETTO | non rispetta il pattern | alta
+Q6 | classe=DIFETTO stato=CHIUSA | il FAIL era del criterio | alta
+R3 | classe=DIFETTO stato=CHIUSA | il FAIL era del criterio | alta
+R5 | classe=DIFETTO stato=CHIUSA | il FAIL era del criterio | alta
+U3 | classe=DIFETTO stato=CHIUSA | il FAIL era del criterio | alta
+FASCE-TAU | classe=FRONTE | DA VERIFICARE | alta
+EM-CURVATURA-BIDIREZIONALE | classe=FRONTE | DA VERIFICARE | alta
+LORENTZ-MATERIA-INTERFERENZA | classe=FRONTE | DA VERIFICARE | alta
+L-STELLA | classe=STANDARD | Regola scritta, NON un presidio | alta
+SIGILLO-CURA2-RIPARATO | classe=MISURA | FINITO 5/5 | alta
+POTENZE-1 | classe=CURA | sigillo | alta
+RAMPA-1 | classe=CURA | sigillo | alta
+CICLO-CHIUSURA-SEGNO | dominio=METODO | NON tocca la fisica | alta
+POTATURA-GUARDIE | dominio=INFRASTRUTTURA | i 57 rami MORTI | alta
+D37 | dominio=INFRASTRUTTURA | CHIAVE DUPLICATA NEI DOMINI | alta
+Z14 | da_dividere=DIFETTO/FISICA/1 + STANDARD/METODO/ENTRAMBE | REGOLA GENERALE | alta
+Z22 | classe=STANDARD dominio=METODO era=ENTRAMBE stato=APERTA | Una regola che non impedisce | alta
+Z68 | classe=CURA | sigillo 3/3 | media
+Z73 | classe=MISURA | RITIRATA | media
+Z70 | classe=MISURA | C'E', MA NON E' ISTANTANEO | media
+Z2 | classe=DIFETTO stato=SOSPESA | A1 resta violato | media
+Z6 | classe=DIFETTO stato=SOSPESA | BLOCCO STRUTTURALE | media
+Z8 | stato=SOSPESA | NON e' caratterizzato | media
+Z19 | stato=SOSPESA | non e' mai stata fatta | media
+C5 | stato=CHIUSA | C. DIAGNOSI CHIUSE | media
+CHK3 | classe=FRONTE | QUI CI SI FERMA | media
+PROVA-COMB | classe=FRONTE | l'insieme no | media
+Z21 | classe=MISURA stato=SUPERATA | era UN SEME | media
+Z1 | classe=DIFETTO | NON e' stata cablata | media
+Z101 | classe=MISURA | 6 criteri su 8 REGGONO | media
+Z148 | classe=MISURA | ACCLARATO | media
+S13 | classe=FRONTE | proposta per TUTTO il sistema | media
+MASSA-MIGRA | classe=FRONTE | NON VA CORRETTO | media
+GUSCIO-ANTIFASE-EMERGENTE | classe=FRONTE | IPOTESI DI LUCA | media
+H1 | stato=CHIUSA | H1 NON BASTA | media
+H3 | stato=CHIUSA | 500 su 500 | media
+DE-ACCOPPIABILITA | stato=CHIUSA | superata dai fatti | media
+D27 | stato=CHIUSA | NON E' UN DIFETTO NEL SISTEMA ATTUALE | media
+REGISTRO_FISICA:P3 | stato=CHIUSA | TIENE | media
+REGISTRO_FISICA:D33 | classe=DIFETTO | la repulsione si spegne | media
+SCHED-PASSO | dominio=INFRASTRUTTURA | architettura del passo, non fisica | media
+Z27 | classe=MISURA stato=CHIUSA | Z24 MISURATA | media
+Z32 | classe=MISURA stato=CHIUSA | INTATTA | media
+Z33 | classe=MISURA stato=CHIUSA | VERDETTO | media
+Z34 | classe=MISURA stato=CHIUSA | VERDETTO | media
+Z37 | classe=MISURA stato=CHIUSA | FALLISCE SU ENTRAMBI I FRONTI | media
+Z91 | classe=DIFETTO stato=CHIUSA | CRICCHETTO E' CURATO | media
+Z92 | classe=DIFETTO stato=CHIUSA | CURATA | media
+Z50 | classe=MISURA | NON E' UNA Y | media
+Z7 | classe=DIFETTO dominio=INFRASTRUTTURA | SCRITTO e MAI LETTO | media
+Z88 | dominio=METODO | SERVE A CHI RILEGGE | media
+Z54 | classe=CURA | Sigillo 12/12 | media
+Y2 | classe=DIFETTO stato=SOSPESA | resta muta | media
+REGISTRO_FISICA:E4-LAM | classe=CURA stato=CHIUSA | SI VERIFICA SEMPRE | media
+COMPONENTI:A1 | classe=CURA dominio=FISICA stato=CHIUSA | PROMOSSA il 2026-09-16 | media
+MASSA-ID | classe=FRONTE | messo IN CODA | media
+D26 | stato=CHIUSA | La cura in se' resta valida | media
+Z86 | classe=DIFETTO | ERA SBAGLIATO | media
+Z145 | classe=DIFETTO | era invalido | media
+W5 | classe=CRITERIO | A/B nel driver | media
+Z125 | classe=DIFETTO | DIFETTO DI METODO, MIO | media
+Z15 | classe=DIFETTO | e' un DEBITO | media
+LOSCHMIDT-ECO | classe=FRONTE | NON da fare oggi | media
+L-SOGLIA | stato=CHIUSA | fusa dentro | media
+STANDARD-4 | stato=CHIUSA | fusa dentro | media
+REG-A | classe=MISURA stato=CHIUSA | FATTA (1214283) | media
+SCHED-T3-REGOLE | dominio=FISICA | Le eccezioni sono ZERO | media
+TW-DIVISIONE-INCOGNITA | classe=MISURA dominio=METODO | una soglia misurata nel posto sbagliato | media
+C19 | dominio=METODO | Controllo di identita' cablato | media
+D11 | classe=DIFETTO | CURATO | media
+D17 | classe=DIFETTO | CURATO | media
+C7 | classe=CURA | Curata | media
+C11 | classe=CURA | CURATO | media
+D10 | dominio=INFRASTRUTTURA | INVISIBILE | media
+D04 | dominio=INFRASTRUTTURA | invisibile alla traccia | media
+CENS-A1 | dominio=DOCUMENTAZIONE | dichiarata e FALSA | media
+A4-METRICHE | classe=FRONTE dominio=METODO | il pannello fedele viene prima | media
+Y1 | classe=DIFETTO dominio=METODO | zero fisica | media
+Z130 | dominio=METODO | Conta le invocazioni | media
+Z136 | classe=MISURA | CHIUSA PER DIMOSTRAZIONE | media
+MITOSI-2LAM-ACCESO | stato=CHIUSA | ANNOTAZIONE DEL 2026-10-02 | media
+REG-R | classe=PRESIDIO | l'hook che RIFIUTA | media
+SIGILLO-COMPARATORE-DUPLICATO | classe=DIFETTO | PERCHE E UN DIFETTO | media
+SIGILLO-REGISTRO-NON-CONFRONTABILE | classe=DIFETTO | il difetto va in coda | media
+SIGILLO-SENZA-CONFIGURAZIONE | classe=DIFETTO | il difetto va in coda | media
+ESENTE-P3 | classe=PRESIDIO | ESENTE-H-P3 | media
+C25 | era=ENTRAMBE | git lo NORMALIZZA | media
+D05 | classe=FRONTE dominio=INFRASTRUTTURA | I4 scatola nera | media
+C5RES-INVARIANTI | classe=FRONTE dominio=INFRASTRUTTURA | I4 scatola nera | media
+CLI-1 | classe=DIFETTO dominio=METODO da_dividere=DIFETTO/METODO/1 + STANDARD/METODO/ENTRAMBE | vale come regola generale | media
