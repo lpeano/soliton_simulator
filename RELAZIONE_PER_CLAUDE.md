@@ -10753,3 +10753,15 @@ Il difetto toccava `8` voci; questo commit ne cura `5` *(quelle che il file del 
 ### ⭐ **PERCHE- IL VERDETTO E- PER RIGA E NON PER CAMPO:** il mandato chiede *«quante righe applicate, quante non applicate, quante lasciate»*, e ### **`23` righe hanno un campo applicato E un campo lasciato.** Un conteggio per campo ### **le metterebbe due volte** e non risponderebbe alla domanda.
 
 ### 📌 **E IL REFERTO PORTA SETTE COSE A LUCA**, ognuna con i numeri: i ### **due livelli `T0` e `T4` che aggiungo io** *(`49` + `33` righe)*, le ### **`19` non applicate**, le chiusure ### **senza commit**, le ### **contraddizioni della riga**, ### **`CLI-1`/`POTATURA-GUARDIE`** *(il guardiano contro se stesso)*, ### **`S02`/`Z21`** *(rifiutate dallo schema)*, e ### **la nota di `G1`: riscriverla o toglierla?**
+
+---
+
+## IL MANDATO DELLE CHIUSURE E DEGLI STRUMENTI DELL'ERA `2`: **«il commit di chiusura si RICAVA, non si inventa»** (2026-10-09)
+
+Il task history e' committato ### **prima del lavoro** *(par.8)*: `doc/TASK_HISTORY/2026-10-09_indice_v3_chiusure_e_strumenti_era2.md`, `114` righe. Nove punti, due parti. Nessuna corsa; il simulatore resta `b8c21049`.
+
+### ⭐ **E LA PRIMA RIGA DEL MANDATO CORREGGE UNA MIA RINUNCIA.** Nel giro scorso ho lasciato ### **`47` chiusure non fatte** scrivendo *«un commit non si inventa»*. Era vero a meta': ### **non inventarlo era giusto, fermarsi li' era una RINUNCIA.** Il commit che ha chiuso una voce ### **sta nella storia di git**, e `git log -S'<frase>' --reverse` ### **lo trova.** ### ⛔ **«Non si inventa» non vuol dire «non si cerca»**, e cercavo lo sha ### **dentro la riga**, che non ha nessun motivo di portarlo.
+
+### ✔ **E LA CODA SI CHIUDE:** il mandato dice *«questo mandato CONTIENE anche il mandato base «INDICE E FISICA» che non ti era arrivato: la voce ① di `doc/CODA_2026-10-09.md` e' assorbita qui (parte II)»*. ### **Le tre correzioni `A`, `B` e `C` della coda sono dentro i punti `6`, `7` e `8`**, e la voce si chiude ### **al punto `9`**, non adesso: ### **si chiude quando il lavoro e' fatto, non quando e' letto.**
+
+### ⚠ **E UNA COSA LA DICHIARO PRIMA DI SCRIVERLA, perche' `A9` la condanna:** il presidio del punto `7` sulla ### **cartella dell'era `2`** ### **non impedira- NIENTE finche- la cartella e- vuota** — e la cartella ### **resta vuota, perche' il nome lo decide Luca.** ### ⭐ **Per `A9` quello non e' un presidio: e- una tenda.** Lo scrivo nel referto come tale, e il collaudo gira ### **su una cartella di PROVA in una COPIA**: e' esattamente cio- che il mandato chiede, e ### **il motivo e- questo.**
