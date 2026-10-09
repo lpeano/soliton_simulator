@@ -11200,3 +11200,22 @@ Luca ha dato via alla coda, con l-ordine registrato in `677685c` e `080a0d0`: ##
 | `4` | ### **se il punto `4` *(il veleno)* si puo- fare**: oggi lo stato e- ### **solo `psi`**, e ### **non c-e- NESSUN derivato da invalidare.** ### **Potrebbe essere vero e vuoto, e allora va DETTO** |
 
 ### ⛔ **E UNA PREVISIONE CHE MI ESPONE, fissata prima della misura:** sul punto `8` *(reversibilita-)* ### **mi aspetto che il GLOBALE sia PEGGIORE del LOCALE**, perche- il punto fisso ha una tolleranza che ### **non e- simmetrica nel tempo**. ### ⭐ **E se il locale NON risultasse migliore, e- un RITROVATO** — vorrebbe dire che la composizione palindroma ### **non compra la reversibilita- che promette.** ### **Piu- il caso che DEVE fallire: un Euler esplicito, scritto SOLO per questo**, che se non sbagliasse direbbe che ### **la misura non distingue un metodo simmetrico da uno che non lo e-.**
+
+## PUNTO `0` — ### **IL CENSIMENTO DEI METODI: `88`, non <<una decina>>** *(2026-10-09)*
+
+Il mandato chiede una riga per ### **OGNI** metodo dell-era `1`, e ne nomina ### **una decina per nome** piu- *<<e le cure di architettura>>*. ### ⛔ **IL NUMERO VERO E- `88`**, e non l-ho stimato: ### **lo calcola l-indice** da ### **campi a vocabolario chiuso** *(`classe in (STANDARD, PRESIDIO)`: `44` + `23` = `67`, piu- le `20` cure di architettura che il mandato nomina per ID, piu- `P-M1` stesso)*.
+
+| | quanti | |
+|---|--:|---|
+| `PORTATO` | `44` | gia- nell-era `2`, e `dove` dice dove |
+| `DA_PORTARE` | `30` | si applica e non c-e- ancora: `dove` dice ### **quale punto del mandato lo porta** |
+| `DA_DECIDERE` | `5` | serve una decisione di Luca |
+| `NON_SI_APPLICA` | `9` | ### **e il perche- e- scritto** |
+
+### ⭐ **E IL PRESIDIO E- LA FORMA FORTE DI CIO- CHE IL MANDATO CHIEDE.** Il mandato dice *<<un metodo CITATO senza riga → rifiutato>>*; `P-M1` pretende che ### **OGNI metodo del perimetro abbia una riga, citato o no.** ### **Cosi- una voce `STANDARD` o `PRESIDIO` aggiunta domani FA RIFIUTARE IL COMMIT** finche- non si dice come si applica — e il documento ### **non puo- invecchiare in silenzio** *(`A9`, `AUTO-MANUTENZIONE`)*.
+
+### ⛔ **E IL PRESIDIO SI E- APPLICATO A SE- STESSO, senza che io lo prevedessi.** Appena ho creato la voce `P-M1` *(classe `PRESIDIO`, perche- il punto `12` lo pretende)*, ### **il perimetro lo ha incluso e lui HA RIFIUTATO IL COMMIT** chiedendo la propria riga. ### ⭐ **E- la prova che il controllo funziona su una voce che non esisteva quando l-ho scritto** — cioe- esattamente il caso per cui serve.
+
+### ⚠ **E IL CENSIMENTO HA TROVATO CHE `P-E1`…`P-E8` NON SONO NELL-INDICE.** Li ho scritti io ieri, ### **sono presidi cablati e senza via d-uscita**, e ### **nessuna voce li nomina** — quindi `P-M1` ### **non li vede**, perche- il perimetro lo calcola ### **dall-indice.** ### ✅ **E- esattamente il punto `12`, che viene subito dopo:** *«ogni controllo ha una VOCE, e il codice dichiara l-ID»*.
+
+**Collaudo `8`/`8`**, nei due versi: una voce `STANDARD` nuova senza riga → ### **scatta** · una riga orfana → ### **scatta** · uno `stato` fuori vocabolario → ### **scatta** · un `NON_SI_APPLICA` senza il perche- → ### **scatta** · ### **e rimesso tutto a posto TACE di nuovo** · ### **e il documento rigenerato e- BYTE-IDENTICO.**

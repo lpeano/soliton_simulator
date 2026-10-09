@@ -5,6 +5,9 @@
   ],
   "A17": [
    "MISURA-NORMA-ERA2"
+  ],
+  "A9": [
+   "P-M1"
   ]
  },
  "blocca": {
@@ -408,6 +411,7 @@
    "OSSERVABILE-P1",
    "P-DECADIMENTO",
    "P-EQ-MEDIANA-ARCHI",
+   "P-M1",
    "P-MEMORIA",
    "P0",
    "P1",
@@ -1675,6 +1679,7 @@
    "H-RIGHE",
    "H-STASH",
    "H-VALIDATORE",
+   "P-M1",
    "Q6",
    "R3",
    "R5",
@@ -2466,6 +2471,7 @@
    "MASSA-ID",
    "MASSA-ID-FISSO",
    "OSSERVABILE-P1",
+   "P-M1",
    "P1",
    "P1-bis",
    "P1-quater",
@@ -3414,6 +3420,7 @@
    "LOSCHMIDT-ECO",
    "NON-TRACCIATI",
    "P-DECADIMENTO",
+   "P-M1",
    "P-MEMORIA",
    "P1",
    "P1-bis",
@@ -6409,6 +6416,7 @@
    "LOSCHMIDT-ECO",
    "NON-TRACCIATI",
    "P-DECADIMENTO",
+   "P-M1",
    "P-MEMORIA",
    "P1",
    "P1-bis",

@@ -15,3 +15,9 @@ python "$(git rev-parse --show-toplevel)/csv/_hook_presidi.py" --pre-commit || e
 # le impronte, le variabili, le importazioni, e gli osservatori in sola lettura.
 # ### NESSUNA VIA D-USCITA per i file di primo_ordine/: il mandato lo dice.
 python "$(git rev-parse --show-toplevel)/csv/_presidi_era2.py" --pre-commit || exit 1
+
+#  `P-M1` -- IL DOCUMENTO DEI METODI NON INVECCHIA IN SILENZIO.
+#  ### Pretende che OGNI metodo del perimetro (che l'indice calcola da `classe`)
+#  ### abbia una riga che dice COME SI APPLICA all'era 2. Una voce `STANDARD` o
+#  ### `PRESIDIO` nuova fa RIFIUTARE il commit finche' non ha la sua riga.
+python "$(git rev-parse --show-toplevel)/csv/_metodi_era2.py" || exit 1

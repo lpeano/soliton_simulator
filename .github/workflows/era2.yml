@@ -80,6 +80,14 @@ jobs:
           python primo_ordine/_genera.py
           git diff --exit-code -- primo_ordine doc/leggi_era2
 
+      - name: "### `P-M1` -- il documento dei metodi non invecchia in silenzio"
+        # ### Gira sul disco (e RIGENERA il documento), poi il collaudo nei due
+        # ### versi, poi `git diff`: un documento scaduto NON passa inosservato.
+        run: |
+          python csv/_metodi_era2.py
+          python csv/_metodi_era2.py --collaudo
+          git diff --exit-code -- doc/METODI_era1_in_era2.md
+
       - name: "### IL COLLAUDO DELLA CATENA -- lo schedulatore, il cono, i SEI casi"
         # ### E- il collaudo che il mandato chiama <<di TUTTA LA CATENA>>: i tre
         # ### livelli dello schedulatore, il CONO per passo e per strato, la deriva dei

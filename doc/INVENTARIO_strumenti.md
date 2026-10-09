@@ -2682,3 +2682,18 @@ etichette rimosse, con ### **`0` persi, `0` doppi, `0` conflitti**.
 | **l'uscita** | `doc/REFERTO_infrastruttura_era2.md` |
 
 ---
+
+### `csv/_metodi_era2.py` — **`P-M1`: I METODI DELL'ERA `1` NELL'ERA `2`** *(2026-10-09)*
+
+| | |
+|---|---|
+| **file** | `csv/_metodi_era2.py` |
+| **BLOB** *(sha1 dei byte grezzi)* | `a40e496c` |
+| **COMANDO** | `python csv/_metodi_era2.py` *(il presidio, e GENERA il documento)* · `--collaudo` *(nei due versi, `8`/`8`)* |
+| **cosa impedisce** | che `doc/METODI_era1_in_era2.md` **invecchi in silenzio**: ### **ogni metodo del perimetro DEVE avere una riga** *(come si applica · dove · stato)*, citato o no |
+| ### ⭐ **e il PERIMETRO lo calcola l'INDICE** | da ### **campi a vocabolario chiuso** *(`classe in (STANDARD, PRESIDIO)`, piu' le cure di architettura che il mandato nomina **per ID**)*. ### ⛔ **Nessun `titolo` e nessuna `descrizione` si leggono per decidere se una voce e' un metodo** — e' il principio del mandato **applicato a se stesso** |
+| ### ⛔ **e `stato` e' a vocabolario CHIUSO** | `PORTATO` · `DA_PORTARE` · `DA_DECIDERE` · `NON_SI_APPLICA`, e ### **un `NON_SI_APPLICA` o un `DA_DECIDERE` DEVE dire il perche'** — *«una risposta senza il perche' non e' una risposta»* *(`L-STELLA`)* |
+| **i numeri** | ### **`88` metodi, `88` righe** *(`PORTATO` `44` · `DA_PORTARE` `30` · `DA_DECIDERE` `5` · `NON_SI_APPLICA` `9`)* |
+| **l'uscita** | `doc/METODI_era1_in_era2.md`, **generato** |
+
+---
