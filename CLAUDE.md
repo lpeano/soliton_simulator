@@ -281,7 +281,7 @@ qui**: sta in `doc/PATTERN_DI_PROVA.md`.)*
 | **`H-INDICE`** | `commit-msg` | un **ID** citato **che non e' nell'indice** |
 | **`H-FILE`** | `commit-msg` | una lista **`FILE CAMBIATI`** che **non coincide** con `git diff --cached --name-only`, o che **manca** |
 | **`H-NON-TRACCIATI`** | `commit-msg` | **file NON TRACCIATI e NON ignorati** sotto `csv/` o `doc/`. **BLOCCA, non avvisa** |
-| **`H-FISICA-FUORI-LISTA`** | `pre-commit` | un **`.py` sotto la CARTELLA del codice dell'era `2`** che **non e' nella LISTA** di `csv/_file_fisica.py`. ### ⚠ **La cartella e' VUOTA** *(il nome lo decide Luca)*, quindi **oggi non impedisce niente** (`A9`) |
+| **`H-FISICA-FUORI-LISTA`** | `pre-commit` | un **`.py` sotto `primo_ordine/`** *(la cartella del codice dell'era `2`, **decisione di Luca del 2026-10-09**)* che **non e' nella LISTA** di `csv/_file_fisica.py` |
 | **`H-ID-OBBLIGATORIO`** | `commit-msg` | un commit che tocca **un file della LISTA di `csv/_file_fisica.py`**, o un **`doc/REFERTO_*` / `doc/REPERTO_*`**, e **non cita nessun ID** dell'indice. ### **E' il ROVESCIO di `H-INDICE`** |
 | **`H-STASH`** | `permissions.deny` | **`git stash`**, qualunque forma. **Non e' un hook:** impedisce **prima** che il comando parta, e **non ha via d'uscita** |
 

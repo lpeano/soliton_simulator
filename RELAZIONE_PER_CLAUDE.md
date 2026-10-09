@@ -10913,3 +10913,15 @@ Il task history e' committato ### **prima del lavoro** *(par.8)*: `doc/TASK_HIST
 ### ⭐ **E LA RAGIONE DEL PUNTO `3` E- UNA DISTINZIONE CHE NON AVEVO:** *«la voce `D` e' il DIFETTO, la `Z` e' il REPERTO che l'ha trovato: possono avere stati diversi a ragione»*. ### ⛔ **Io leggevo `D` e `Z` come «la stessa cosa scritta due volte».** Sono ### **un difetto e la misura che lo ha scoperto** — e ### **una misura resta un'avvertenza anche dopo che il difetto e' curato.** Il referto diceva *«sono le RIGHE a disaccordare»*: ### **le righe dicevano la verita-, e il presidio era sbagliato.**
 
 ### ✔ **E LA CARTELLA DELL'ERA `2` HA UN NOME:** `primo_ordine/` *(decisione di Luca)*. ### ⚠ **Non la creo:** il mandato da- ### **il nome**, non l'ordine di creare la cartella — e creare la cartella del codice dell'era `2` ### **e' un atto di fisica**, non di indice. ### ⭐ **Il presidio diventa vero comunque, perche' guarda I PERCORSI STAGED, non il disco:** impedisce ### **dal primo `.py` che qualcuno metta la-.**
+
+---
+
+## `primo_ordine/`: **la tenda diventa un presidio** (2026-10-09)
+
+`CARTELLA_ERA_2 = "primo_ordine/"`, collaudo ### **`17`/`17`** sulla cartella VERA nei due versi. Nessuna corsa; il simulatore resta `b8c21049`.
+
+### ✔ **E LA PRIMA COSA CHE HO FATTO E- RISCRIVERE CIO- CHE DICEVA «NON IMPEDISCE»:** la riga di `CLAUDE.md` §`12`, e ### **la descrizione della voce**, dicevano *«la cartella e- VUOTA, quindi oggi non impedisce niente (`A9`)»*. ### ⛔ **Una descrizione che resta indietro su un presidio DICE CHE UN IMPEDIMENTO NON C'E- QUANDO C'E-**, ed e- ### **la piu- pericolosa delle due bugie**: l'altra fa sperare, questa fa ### **non fidarsi di qualcosa che funziona.**
+
+### ⚠ **LA CARTELLA NON ESISTE ANCORA, E NON L'HO CREATA.** Il mandato da- ### **il nome**, non l'ordine di crearla — e creare la cartella del codice dell'era `2` ### **e- un atto di FISICA**, non di indice. ### ⭐ **Il presidio funziona comunque, e la ragione e- un dettaglio di progetto che oggi paga: guarda I PERCORSI STAGED, non il disco.** Impedisce ### **dal primo `.py` che qualcuno metta la-**, non ### **dal giorno in cui la cartella nasce.**
+
+### ✔ **E IL COLLAUDO CONSERVA LA MISURA DEL VECCHIO STATO:** un braccio gira ### **su una copia con la costante VUOTA** e prova che la- ### **`intrusi` era sempre vuoto.** ### ⭐ **Cio- che un presidio NON faceva e- una misura, non un ricordo** — e un collaudo che cancella i bracci vecchi ### **cancella la prova di cio- che e- cambiato.**

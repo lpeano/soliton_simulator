@@ -44,13 +44,22 @@ FILE_FISICA = (
     "soliton_simulator.py",
 )
 
-# ### ⛔ **LA CARTELLA DEL CODICE DELL-ERA `2`: VUOTA.**
+# ### ✔ **LA CARTELLA DEL CODICE DELL-ERA `2`: `primo_ordine/`** -- ### **decisione di Luca
+# ### del 2026-10-09.** ### ⭐ **E da questo momento `H-FISICA-FUORI-LISTA` IMPEDISCE:**
+# ### finche- la costante era `""` era ### **una TENDA** *(`A9`)*, e l-avevo dichiarato in
+# ### quattro posti. ### **Adesso un `.py` nuovo la- sotto che non e- nella LISTA fa
+# ### RIFIUTARE il commit.**
+# ### ⚠ **LA CARTELLA NON ESISTE ANCORA, e NON l-ho creata:** il mandato da- ### **il
+# ### nome**, non l-ordine di crearla -- e creare la cartella del codice dell-era `2` e-
+# ### ### **un atto di FISICA**, non di indice. ### ✔ **Il presidio funziona comunque,
+# ### perche- guarda I PERCORSI STAGED e non il disco:** impedisce ### **dal primo `.py`
+# ### che qualcuno metta la-.**
 # ### ### **«da decidere da Luca»** -- e il mandato e- esplicito:
 # ### *<<la cartella del codice dell-era 2 NON ESISTE e NON la scegli tu>>*.
 # ### ⚠ **Finche- e- `""` il presidio sulla cartella NON GUARDA NIENTE**, ed e- dichiarato
 # ### nel referto: per `A9` ### **non e- un presidio, e- una tenda.** ### ✔ **Il giorno in
 # ### cui Luca da- il nome, diventa vero cambiando QUESTA STRINGA e nient-altro.**
-CARTELLA_ERA_2 = ""          # da decidere da Luca
+CARTELLA_ERA_2 = "primo_ordine/"   # decisione di Luca, 2026-10-09
 
 
 # =====================================================================================

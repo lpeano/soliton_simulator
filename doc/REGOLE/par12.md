@@ -104,3 +104,15 @@ la riga **`PUSHATO:`**, che Luca vede a colpo d'occhio.
 | ### **il perché** | la fisica che cambia ### **ha UNA VOCE che la spiega**, e un referto è ### **la risposta a una domanda** — e la domanda è una voce. ### **Un commit che cambia una legge senza citare un ID dice «ho cambiato una legge» e non dice quale problema stava risolvendo** |
 | ### ⛔ **«un referto» è SOLO due prefissi** | `doc/REFERTO_*` e `doc/REPERTO_*`. ### **La mia definizione era «un file sotto `doc/`», cioè LARGA** — e una definizione larga in un presidio ### **rifiuta commit che nessuno voleva rifiutare** |
 | ### **la via d'uscita** | `[SENZA-INDICE: <motivo>]`, ### **a inizio riga** — ### **la stessa di `H-INDICE`**, di proposito: chi dichiara di non avere ID da citare lo dichiara ### **una volta** |
+
+---
+
+## LA CARTELLA DELL'ERA `2` E' `primo_ordine/` *(decisione di Luca, 2026-10-09)*
+
+| | |
+|---|---|
+| ### **la costante** | `csv/_file_fisica.py::CARTELLA_ERA_2 = "primo_ordine/"` |
+| ### ✔ **e da questo momento `H-FISICA-FUORI-LISTA` IMPEDISCE** | finché la costante era `""` era ### **una TENDA** *(`A9`)*, e l'avevo dichiarato in ### **quattro posti** |
+| ### ⚠ **la cartella NON esiste ancora, e NON l'ho creata** | il mandato dà ### **il nome**, non l'ordine di crearla — e creare la cartella del codice dell'era `2` è ### **un atto di FISICA**, non di indice |
+| ### ⭐ **e il presidio funziona comunque** | guarda ### **i percorsi staged, non il disco**: impedisce ### **dal primo `.py` che qualcuno metta là** |
+| ### **il collaudo** | sulla cartella ### **VERA**, nei due versi, piu' ### **una copia con la costante VUOTA** che conserva ### **la misura del vecchio stato** |

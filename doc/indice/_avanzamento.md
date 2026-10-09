@@ -83,8 +83,8 @@ era       1=538  DA_CLASSIFICARE=188  ENTRAMBE=96  2=24
 stato     SOSPESA=369  DA_CLASSIFICARE=188  CHIUSA=182  APERTA=82  AGENDA=24  SUPERATA=1
 ```
 
-### ✔ **FATTO IN QUESTO GIRO:** il punto `9`, ### **i due referti** — `doc/REFERTO_indice_v3_chiusure.md` *(`390` righe)* e `doc/REFERTO_strumenti_era2.md` *(`111` righe)*. ### **Il mandato e' CHIUSO: `9` punti su `9`, due parti**, e ### **la voce ① della coda si chiude con esso.**
+### ✔ **FATTO IN QUESTO GIRO:** il punto `1`: la cartella dell'era `2` e' ### **`primo_ordine/`** *(decisione di Luca)*, e ### **`H-FISICA-FUORI-LISTA` da questo momento IMPEDISCE** — finche' la costante era vuota era ### **una tenda.** Collaudo sulla cartella VERA nei due versi: ### **`17`/`17`.**
 
-### 📌 **E UNA DOMANDA RESTA, in testa al secondo referto:** ### **come si chiama la cartella del codice dell'era `2`?** Finche' manca, `H-FISICA-FUORI-LISTA` ### **non impedisce niente** — per `A9` ### **e' una tenda.**
+### ⛔ **RESTA:** i punti `2`…`6` — le `10` righe a `file:riga`, `F1` senza lo stato, `F8` senza il `.py`, le note di `F6`/`F3`, e il referto.
 
-**Ultimi lotti applicati:** `v3_h_fisica.jsonl` e `v3_h_id.jsonl` — ### **il punto `9` NON scrive sull'indice**: legge, conta e scrive due documenti.
+**Ultimo lotto applicato:** `doc/indice/_lotti/v3_cartella.jsonl` *(`1` voce: la descrizione del presidio, che diceva «non impedisce niente»)*

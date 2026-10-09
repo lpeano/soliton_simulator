@@ -49,7 +49,10 @@ def copia_con_cartella(dove, nome):
     ### **e- una costante** *(`A1`: zero manopole)*, e il collaudo ### **ne cambia una COPIA.**
     """
     sorg = io.open(os.path.join(_QUI, "_file_fisica.py"), encoding="utf-8").read()
-    a = 'CARTELLA_ERA_2 = ""          # da decidere da Luca'
+    # ### ⚠ **L-ANCORA SEGUE LA COSTANTE:** quando il nome e- arrivato, la riga e-
+    # ### cambiata e ### **l-assert l-ha detto subito** invece di lasciare il collaudo
+    # ### girare su una copia ### **identica all-originale.**
+    a = 'CARTELLA_ERA_2 = "primo_ordine/"   # decisione di Luca, 2026-10-09'
     assert sorg.count(a) == 1, "l-ancora della costante non e- unica"
     p = os.path.join(dove, "_ff_prova.py")
     io.open(p, "w", encoding="utf-8", newline=NL).write(
@@ -64,17 +67,50 @@ def main():
     print("=" * 100)
     print("IL COLLAUDO DI `csv/_file_fisica.py` -- su una cartella di PROVA, in una COPIA")
     print("=" * 100)
-    # ### ⛔ **PRIMA LA COSA PIU- IMPORTANTE: con la cartella VUOTA il presidio TACE.**
-    esito("la CARTELLA dell-era 2 e- VUOTA, come il mandato impone",
-          FF.CARTELLA_ERA_2 == "",
-          "<<NON la scegli tu>>")
-    esito("con la cartella VUOTA `sotto_la_cartella` e- SEMPRE `False`",
-          not FF.sotto_la_cartella("qualunque/cosa.py")
-          and not FF.sotto_la_cartella("/x.py") and not FF.sotto_la_cartella(""),
-          "un presidio che non guarda niente NON DEVE FINGERE di guardare")
-    esito("con la cartella VUOTA `intrusi` e- SEMPRE vuoto -- ### E- UNA TENDA (`A9`)",
-          FF.intrusi(["x.py", "a/b/c.py", "soliton_simulator.py"]) == [],
-          "provato che TACE: cosi- si sa che tace perche- e- SPENTO, non perche- e- ROTTO")
+    # ### ✔ **PRIMA LA COSA PIU- IMPORTANTE: LA CARTELLA HA UN NOME, E IL PRESIDIO
+    # ### ### IMPEDISCE.** *(decisione di Luca del 2026-10-09: `primo_ordine/`)*
+    # ### ⛔ **Fino a stamattina la costante era `""` e il presidio era UNA TENDA** (`A9`):
+    # ### i tre bracci di prima provavano ### **che TACEVA.** ### **Adesso provano che
+    # ### IMPEDISCE**, e il braccio accanto conserva ### **la prova del vecchio stato**,
+    # ### perche- ### **cio- che un presidio NON faceva e- una misura, non un ricordo.**
+    esito("la CARTELLA dell-era 2 HA UN NOME",
+          FF.CARTELLA_ERA_2 == "primo_ordine/",
+          "decisione di Luca, 2026-10-09: era `\"\"` e il presidio era UNA TENDA")
+    VERA = FF.CARTELLA_ERA_2.rstrip("/")
+    print("  la cartella VERA: %r   (esiste sul disco: %s -- e NON l-ho creata io)"
+          % (FF.CARTELLA_ERA_2,
+             "si-" if os.path.isdir(os.path.join(RADICE, VERA)) else "NO"))
+    print()
+    print("  (a) SULLA CARTELLA VERA, NEI DUE VERSI -- ed e- cio- che il mandato chiede")
+    esito("### DEVE rifiutare: un `.py` FUORI LISTA sotto `%s`" % FF.CARTELLA_ERA_2,
+          FF.intrusi(["%s/nuova_fisica.py" % VERA]) == ["%s/nuova_fisica.py" % VERA],
+          "fisica che NESSUN presidio sorveglia")
+    esito("NON deve rifiutare: un file CHE E- NELLA LISTA",
+          FF.intrusi(list(FF.FILE_FISICA)) == [],
+          "il presidio non deve impedire proprio cio- che chiede di fare")
+    esito("### DEVE rifiutare: anche in una SOTTOCARTELLA di `%s`" % FF.CARTELLA_ERA_2,
+          FF.intrusi(["%s/leggi/campo.py" % VERA]) != [],
+          "la regola e- <<SOTTO la cartella>>, non <<DENTRO la cartella>>")
+    esito("NON deve rifiutare: un file che NON finisce in `.py`",
+          FF.intrusi(["%s/dati.json" % VERA, "%s/note.md" % VERA]) == [],
+          "la regola del mandato dice <<un `.py` nuovo>>")
+    esito("### DEVE rifiutare: lo stesso percorso con le BARRE DI WINDOWS",
+          FF.intrusi([VERA + chr(92) + "nuova.py"]) != [],
+          "due forme dello stesso percorso NON sono lo stesso percorso per una `==`")
+    esito("NON deve rifiutare: un `.py` FUORI dalla cartella",
+          FF.intrusi(["csv/indice.py", "altrove/x.py",
+                      VERA + "_simile/x.py"]) == [],
+          "e nemmeno una cartella col nome che COMINCIA come quella: serve la barra")
+    print()
+    print("  (b) LA PROVA DEL VECCHIO STATO, su una COPIA con la costante VUOTA")
+    _tv = tempfile.mkdtemp(prefix="ff0_")
+    try:
+        _m0 = copia_con_cartella(_tv, "")
+        esito("con la cartella VUOTA `intrusi` era SEMPRE vuoto -- ### ERA UNA TENDA",
+              _m0.intrusi(["x.py", "%s/x.py" % VERA, "a/b/c.py"]) == [],
+              "e- la misura di cio- che il presidio NON faceva: non un ricordo")
+    finally:
+        shutil.rmtree(_tv, ignore_errors=True)
     print()
     tmp = tempfile.mkdtemp(prefix="ff_")
     try:
