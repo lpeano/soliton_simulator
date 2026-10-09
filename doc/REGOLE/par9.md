@@ -336,3 +336,14 @@ Si toglie dall'inizio della riga, **ripetutamente**: i `#`, gli spazi, i **simbo
 | ### **`F1` confronta lo STATO solo lì** | fuori da quello schema **no**: due voci diverse **possono stare in stati diversi senza contraddirsi**, e confrontare lo stato in generale farebbe segnalare mezzo indice |
 | ### **`meta.duplicato_di`** | le altre voci che dicono lo stesso fatto. ### ⛔ **Non sceglie un originale**, e le voci **NON si fondono**: ogni membro nomina **gli altri** |
 | ### **e `collegate`** | porta gli stessi ID, perché è il campo che lo schema già valida |
+
+---
+
+## IL DIFETTO «IL FATTO» *(2026-10-09)*
+
+| | |
+|---|---|
+| ### **la regola** | `FATTO`/`FATTA` contano ### **solo se** non precedute da `IL`/`il` ### **e** non seguite da `:` |
+| ### **perché** | *«**IL FATTO** che `d` scenda sotto `LAM` …»* è un ### **SOSTANTIVO**: introduce una frase e ### **non chiude niente.** *«`FATTO:` …»* coi due punti è ### **un'etichetta di campo**, come *«MISURA:»* |
+| ### ⭐ **è lo stesso errore della NEGAZIONE, un livello più su** | `NEGA` guarda ### **se la parola è negata**; questo guarda ### **se la parola è un verbo** |
+| ### ⛔ **e dove la regola corretta NON decide, lo stato TORNA DOV'ERA** | non è un'invenzione: la `CHIUSA` di oggi ### **l'aveva scritta il lotto col difetto**, e ### **una scrittura sbagliata si disfa** |

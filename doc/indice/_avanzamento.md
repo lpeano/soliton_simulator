@@ -83,10 +83,8 @@ era       1=538  DA_CLASSIFICARE=188  ENTRAMBE=96  2=24
 stato     SOSPESA=369  DA_CLASSIFICARE=188  CHIUSA=182  APERTA=82  AGENDA=24  SUPERATA=1
 ```
 
-### ✔ **FATTO IN QUESTO GIRO:** il punto `8`, **l'ultimo**: i controlli e il referto ### **`doc/REFERTO_indice_v3_righe_origine.md`** *(`375` righe, voce per voce)*. ### **Il mandato «STATO E CLASSE DALLA RIGA D'ORIGINE» e' CHIUSO: `8` punti su `8`.**
+### ✔ **FATTO IN QUESTO GIRO:** il file del guardiano *(`165` righe, commit `67c12fa`)*, e ### **la cura del difetto «IL FATTO»**: il difetto toccava ### **`8` voci**, e `5` le cura questo commit *(`10` righe col PONTE)*. ### ⛔ **Il difetto era MIO, ed e' scritto nei miei stessi motivi:** il lotto del punto `1` chiudeva citando *«IL FATTO: soglia0 = …»* ### **come criterio di chiusura.**
 
-### ⭐ **I NUMERI DEL MANDATO:** il punto `1` ha cambiato ### **`53` stati** e ne ha lasciati ### **`305`**, di cui ### **`5` davvero ambigui** *(gli altri: `230` «nessuna parola decide», `45` segnaposto, `20` chiusure senza commit, `5` riservate a Luca)*. I segnali: ### **`F1`=`7` `F8`=`19`**, e gli altri a `0`.
+### ⛔ **RESTA:** il punto `3` del mandato *(applicare le `165` righe, con `F9` e `F10` accesi ### **nello stesso commit**)*, il punto `5` *(la nota di `G1` e `F6`)*, e il referto ### **`doc/REFERTO_indice_v3_verifica_completa.md`.**
 
-### ⛔ **RESTA A LUCA, e non lo decido io:** le `46` di `doc/indice/DA_DECIDERE_LUCA.md`, le `9` coppie `D`/`Z` ### **in cui le due RIGHE disaccordano**, le `16` da dividere *(e per `11` la proposta e' MIA)*, le `20` chiusure ### **senza il commit che ha chiuso**, i `19` segnali di `F8` ### **sul confine fra le due frasi dell'era**, e ### **le DUE correzioni che ho fatto alla REGOLA del punto `1`.**
-
-**Ultimo lotto applicato:** `doc/indice/_lotti/v3_s7.jsonl` — ### **il punto `8` NON scrive sull'indice**: legge, conta e scrive un referto.
+**Ultimo lotto applicato:** `doc/indice/_lotti/v3_il_fatto.jsonl`

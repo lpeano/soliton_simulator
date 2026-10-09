@@ -10711,3 +10711,17 @@ Il task history e' committato ### **prima del lavoro** *(par.8)*: `doc/TASK_HIST
 ### ⛔ **E IL PUNTO `1` E' IMPOSSIBILE PRIMA DELLA CURA, non rischioso: IMPOSSIBILE.** `indice.py valida` gira ### **nel `pre-commit`** *(`csv/_hook_presidi.py`, blocco `[INDICE v2]`)*, e se torna diverso da `0` ### **blocca OGNI COMMIT DEL REPO.** Il commit che accende `F9` ### **sarebbe bloccato dal suo stesso hook**, perche' l'hook gira il codice ### **dell'albero di lavoro** su un indice che lo viola ancora. ### ⭐ **Non esiste un ordine in cui «presidi, poi correzioni» stia in DUE commit: devono stare nello STESSO.**
 
 ### ⚠ **E E' LA TERZA VOLTA IN TRE GIRI:** `F5` e `F7` hanno dato la stessa lezione — ### **un presidio bloccante acceso prima della cura rende inapplicabile il lotto che lo curerebbe.** ### **Le prime due volte l'ho scoperto sbattendoci; questa volta sta scritto nel task history PRIMA di muovermi**, e la lezione nuova e' che ### **il costo non e' l'indice: e' il repo intero.**
+
+---
+
+## IL DIFETTO «IL FATTO»: **il criterio di chiusura CITAVA la prova che la chiusura era sbagliata** (2026-10-09)
+
+Il difetto toccava `8` voci; questo commit ne cura `5` *(quelle che il file del guardiano NON nomina)*, con il PONTE `CHIUSA`→`APERTA`→`SOSPESA` e la `chiusura` ### **svuotata.** Collaudo della regola dello stato `7` su `7`, le sei attese ### **`6` su `6`**. Nessuna corsa; il simulatore resta `b8c21049`.
+
+### ⛔ **IL DIFETTO ERA MIO, E STA SCRITTO NEI MIEI STESSI MOTIVI.** Il lotto del punto `1` ha chiuso sei voci col criterio *«la riga dice **FATTO**»*, e la frase citata e' ### **«IL FATTO: soglia0 = PHI_CRIT + twist_max»**, ### **«(c) IL FATTO PIU' GROSSO»**, ### **«IL FATTO: median(lambda_nodi()) vale 0.8000»**. ### ⭐ **Il criterio di chiusura CITAVA la prova che la chiusura era sbagliata**, e non l'ho visto perche' ### **guardavo se la parola c'era, non se era un VERBO.**
+
+### ✔ **E LA DIFFERENZA SI ISOLA SPEGNENDO IL FILTRO, non riscrivendo la regola:** `_scarta` si sostituisce con `lambda: False` e si confrontano le due decisioni. ### **Cosi' l'elenco e' esattamente cio' che il difetto ha causato**, non cio' che credo abbia causato -- e il controllo delle sei attese e' ### **un `assert`**, non una lettura a occhio.
+
+### ⚠ **E DUE VOCI IN PIU' DELLE SEI:** `M3` e `X1`. `M3` e' un ### **segnaposto** e il punto `1` la saltava gia', ma la sua riga e' *«## ① **IL FATTO**, trovato durante il collaudo di `M3-C`»* — ### **il caso di scuola del difetto.** `X1` e' ### **nei dati del guardiano** *(«Si chiude quando (a), (b) e (c) sono trattati esplicitamente», `alta`)*, e ### **il file e la regola corretta dicono LA STESSA COSA**: `SOSPESA`.
+
+### ⭐ **E L'ORDINE: questa cura va PRIMA di applicare il file, e non e' un cavillo.** La regola del punto `3` dice *«`media` + citazione trovata → rileggi la riga intera; applica se la frase sostiene il cambio»*: ### **quel giudizio si da' con la regola dello stato** — e con il difetto in piedi ### **una riga che dice «IL FATTO» sosterrebbe una chiusura che la riga non sostiene.**

@@ -77,6 +77,34 @@ def _re_parola(w):
     return _CONF[w]
 
 
+# ### ⛔ **IL DIFETTO <<IL FATTO>>, e lo dichiara il guardiano:** la parola `FATTO`
+# ### ### **non dice sempre che una cosa e- fatta.**
+# ### • *<<### **IL FATTO** che d scenda sotto LAM …>>* — qui `FATTO` e-
+# ###   ### **un SOSTANTIVO**: introduce una frase, e ### **non chiude niente.**
+# ### • *<<`FATTO:` …>>* — coi due punti e- ### **un-ETICHETTA DI CAMPO**, come
+# ###   <<MISURA:>> o <<ESITO:>>: dice ### **dove si legge**, non ### **che e- finito.**
+# ### ➜ **Quindi `FATTO`/`FATTA` contano SOLO se** non precedute da `IL`/`il`
+# ### ### **e** non seguite da `:`.
+# ### ⭐ **E- lo stesso errore della NEGAZIONE, un livello piu- su:** `NEGA` guarda
+# ### ### **se la parola e- negata**, questo guarda ### **se la parola e- un verbo.**
+_IL_PRIMA = __import__("re").compile(r"\bil\s+$", __import__("re").I)
+_FATTO = ("FATTO", "FATTA")
+
+
+def _scarta(t, k, w):
+    """### `True` se questa occorrenza di `w` a `k` ### **non e- una parola di stato.**
+
+    ### ⚠ **Pura e condivisa da `trova` e da `_pos`:** se stesse in uno solo dei due,
+    ### **la decisione e la POSIZIONE non userebbero la stessa regola** -- e la regola
+    <<la prima parola di stato vince>> ### **si legge dalla posizione.**
+    """
+    if w.upper() not in _FATTO:
+        return False
+    if _IL_PRIMA.search(t[:k]):
+        return True
+    return t[k + len(w):k + len(w) + 1] == ":"
+
+
 def trova(testo, parole):
     """### Le parole di `parole` presenti in `testo`, ### **a CONFINE DI PAROLA** e
     ### **salvo quelle NEGATE.**"""
@@ -85,7 +113,7 @@ def trova(testo, parole):
     for w in parole:
         for m in _re_parola(w).finditer(t):
             k = m.start()
-            if not NEGA.search(t[:k]):
+            if not NEGA.search(t[:k]) and not _scarta(t, k, w):
                 fuori.append((w, " ".join(t[max(0, k - 40):k + len(w) + 40].split())))
                 break
     return fuori
@@ -107,7 +135,7 @@ def _pos(testo, w):
     """### Dove compare la parola, ### **a confine e non negata.** `10**9` se non c-e-."""
     t = norm(testo)
     for m in _re_parola(w).finditer(t):
-        if not NEGA.search(t[:m.start()]):
+        if not NEGA.search(t[:m.start()]) and not _scarta(t, m.start(), w):
             return m.start()
     return 10 ** 9
 

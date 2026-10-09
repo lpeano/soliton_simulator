@@ -2464,3 +2464,16 @@ etichette rimosse, con ### **`0` persi, `0` doppi, `0` conflitti**.
 | ### ⛔ **il PRIMA viene da `git show`** | `git show 4ec2684:doc/indice/voci.jsonl`, non da un numero che ho scritto io: ### **un numero ricopiato non ha provenienza** *(`L-NUMERI`)* |
 | ### ⭐ **e le decisioni si IMPORTANO** | il referto fa `import` di `_stato_dalla_riga`, `_dominio_esplicite`, `_a_luca`, `_gemelle_duplicati` e `_da_dividere`: ### **il referto e il lavoro non possono divergere**, perché **leggono la stessa tavola** |
 | ### ⚠ **gira i collaudi DA SÉ** | i `3` collaudi e i `6` controlli sono **lanciati dal generatore**, non ricopiati dal terminale |
+
+---
+
+### `csv/_controllo_il_fatto.py` e `csv/_cura_il_fatto.py` — **IL DIFETTO «IL FATTO»** *(2026-10-09)*
+
+| | |
+|---|---|
+| **i file** | `csv/_controllo_il_fatto.py` *(BLOB `b1941ace`)* · `csv/_cura_il_fatto.py` *(BLOB `4e6dd0e6`)*; il filtro sta in `csv/_stato_dalla_riga.py` *(BLOB `078038b6`)* |
+| **COMANDO** | `python csv/_controllo_il_fatto.py`, poi `python csv/_cura_il_fatto.py`, poi `python csv/indice.py aggiorna-lotto doc/indice/_lotti/v3_il_fatto.jsonl` |
+| **cosa misura** | **quali voci il difetto toccava**: la decisione del punto `1` **con** il filtro contro **senza**, e la differenza è l'elenco |
+| ### ⭐ **la differenza si ISOLA spegnendo il filtro** | `_scarta` si sostituisce con `lambda: False`, cioè **il comportamento di prima della cura**: così l'elenco è **esattamente ciò che il difetto ha causato**, non ciò che credo abbia causato |
+| ### ⛔ **e il CONTROLLO è un ASSERT** | le `6` voci che il mandato dichiara attese **devono** comparire: se una non compare, `_controllo_il_fatto.py` **si ferma** — la regola che ho scritto non sarebbe quella del mandato |
+| **l'uscita** | `doc/indice/_il_fatto.json` · `doc/indice/_lotti/v3_il_fatto.jsonl` |

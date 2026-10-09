@@ -1,0 +1,114 @@
+[
+ {
+  "id": "M3",
+  "prima": [
+   "CHIUSA",
+   null
+  ],
+  "dopo": [
+   null,
+   null
+  ],
+  "stato_su_disco": "DA_CLASSIFICARE",
+  "classe_su_disco": "NON_DEFINITA",
+  "riga": "## ① IL FATTO, **trovato durante il collaudo di `M3-C`** In `_base_cicli_topologici` il ciclo si percorre ### **`u -> lca -> v -> u`**, ma il segno dell'arco di ### **CHIUSURA** e' registrato ### **`+1`** -- cioe'"
+ },
+ {
+  "id": "SOGLIA-MITOSI-3PI",
+  "prima": [
+   "CHIUSA",
+   "MISURA"
+  ],
+  "dopo": [
+   null,
+   "MISURA"
+  ],
+  "stato_su_disco": "CHIUSA",
+  "classe_su_disco": "MISURA",
+  "riga": "## `SOGLIA-MITOSI-3PI` — **la soglia porta un `π` di dipolo che quasi nessun arco ha** *(Aperta il 2026-10-06 sera, ### **su decisione di Luca.** ### **Cercata prima nell'indice con cinque termini:** non esisteva una voce dedicata alla soglia.)* **IL FATTO:** `soglia0 = PHI_CRIT + twist_max = 2π + π"
+ },
+ {
+  "id": "X1",
+  "prima": [
+   "CHIUSA",
+   null
+  ],
+  "dopo": [
+   "SOSPESA",
+   null
+  ],
+  "stato_su_disco": "CHIUSA",
+  "classe_su_disco": "FRONTE",
+  "riga": "| **X1** 🟩`VALE SEMPRE` ⏳`[EPOCA 1 · MISURA]` | **`TEMPO_PROPRIO_ORIENTATO`: il principio e' giusto, ma `dt_n < 0` rompe TRE consumatori** | Con `f = signed` (`:1925`) `r` puo' essere **negativo** (`r = x/sqrt(1+x^2)`, `x < 0`), quindi `dt_n = DT*r < 0`. **Enumerati i consumatori dal codice:** (a) *"
+ },
+ {
+  "id": "Z23",
+  "prima": [
+   "CHIUSA",
+   null
+  ],
+  "dopo": [
+   null,
+   null
+  ],
+  "stato_su_disco": "SOSPESA",
+  "classe_su_disco": "MISURA",
+  "riga": "| **Z23** 🟨`VALE PER QUELLA SCENA` ⏳`[EPOCA 1 · MISURA]` | **`SPIN_FEEDBACK` NON E' ANTISIMMETRICO: `sum(out) != 0`, e la causa e' la divisione per il grado. E il `2.706` non e' un fatto sul feedback** (2026-09-17) | **(a) IL RAPPORTO NON E' UNA COSTANTE.** `|feedback|/|coppia|` su 64 invocazioni a "
+ },
+ {
+  "id": "Z46",
+  "prima": [
+   "CHIUSA",
+   null
+  ],
+  "dopo": [
+   null,
+   null
+  ],
+  "stato_su_disco": "SOSPESA",
+  "classe_su_disco": "MISURA",
+  "riga": "| **Z46** 🟨`VALE PER QUELLA SCENA` ⏳`[EPOCA 1 · MISURA]` | **⚠ IL 93 % DEI NODI NON INVECCHIA, SONO SEMPRE GLI STESSI, E SONO LE TRE MASSE. E IL GAUGE DEL TEMPO E' LA COSTANTE `1e-9`** (2026-09-18, blob `a1ae5090` **invariato**, run CONTINUO a 1200 passi, seed 900, **`--tau-luce` NON CERTIFICATO** e"
+ },
+ {
+  "id": "Z56",
+  "prima": [
+   "CHIUSA",
+   "FRONTE"
+  ],
+  "dopo": [
+   "SOSPESA",
+   "FRONTE"
+  ],
+  "stato_su_disco": "SOSPESA",
+  "classe_su_disco": "MISURA",
+  "riga": "| **Z56** 🟨`VALE PER QUELLA SCENA` ⏳`[EPOCA 1 · MISURA]` | **⚠ `chi_basc`: NON E' UNA MONOCOLTURA CHE SI RIBALTA — e la premessa opposta veniva da UN MIO STRUMENTO** (2026-09-19, blob `7c4dec1d`, 45 snapshot del run fermato al 2700, seme 42, **un seme, una scena**, `--tau-luce` 6/7). **`fr(perc_chi "
+ },
+ {
+  "id": "Z66",
+  "prima": [
+   "CHIUSA",
+   "FRONTE"
+  ],
+  "dopo": [
+   null,
+   "FRONTE"
+  ],
+  "stato_su_disco": "SOSPESA",
+  "classe_su_disco": "MISURA",
+  "riga": "| **Z66** 🟨`VALE PER QUELLA SCENA` ⏳`[EPOCA 1 · MISURA]` | **`median(lambda_nodi())` SI CONGELA: `0.6092` IDENTICO A QUATTRO DECIMALI PER 270 PASSI, MENTRE `n` CRESCE** (2026-09-20, blob `775ceab7`, seme 42, scena N-MASSE 3 masse a `sep = 4.0`, pilota di 300 passi, **un seme una scena**). **IL FATTO"
+ },
+ {
+  "id": "Z74",
+  "prima": [
+   "CHIUSA",
+   "FRONTE"
+  ],
+  "dopo": [
+   "SOSPESA",
+   "FRONTE"
+  ],
+  "stato_su_disco": "SOSPESA",
+  "classe_su_disco": "MISURA",
+  "riga": "| **Z74** 🟨`VALE PER QUELLA SCENA` ⏳`[EPOCA 1 · MISURA]` | **il ramo B rallenta `x11`: `nsub` esplode, e lo tira `\\|vd\\|.max()` su POCHISSIMI archi** (2026-09-20, catturato **a run VIVO** con `py-spy`; simulatore `edb8f844` byte grezzi / blob git `b44f50ce`; **1 seme per ramo**) | **IL FATTO:** cost"
+ }
+]
