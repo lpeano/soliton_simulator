@@ -311,3 +311,17 @@ Si toglie dall'inizio della riga, **ripetutamente**: i `#`, gli spazi, i **simbo
 | ### ⚠ **`APERTO` di un REGISTRO DI CORSE non conta** | `## APERTO CURA1-CORTO` è **il titolo del registro**, e il *«chiuso … FINITO»* sta **sotto**: si vede **solo aprendo la sezione** |
 | ### ⛔ **chiudere pretende il COMMIT** | `CHIUSA` senza `chiusura.commit` non passa, e ### **un commit non si inventa**: `20` righe dicono CHIUSA **senza portarlo**, e **restano come sono** |
 | ### ⛔ **un SEGNAPOSTO non prende uno stato** | prima la classe, poi lo stato |
+
+---
+
+## LA CLASSE **DALLA RIGA D'ORIGINE** *(2026-10-09)*
+
+| | |
+|---|---|
+| ### **`CURA`** | `CURATO E SIGILLATO`, `CURA IN CODICE` |
+| ### **`MISURA`** | `CHIUSA PER MISURA`, oppure **un esito misurato** — e ### ⚠ **solo se la voce è CHIUSA**: un numero in una voce aperta è **una misura DA FARE**, non un esito |
+| ### **`DIFETTO`** | *«è un DIFETTO»*, `DIFETTO ACCLARATO` |
+| ### **`FRONTE`** | **solo** se la voce è aperta **e** il testo è una **domanda DICHIARATA** *(`DOMANDA APERTA`, *«la domanda:»*)* o un **programma** *(`PROGRAMMA`, `PROGETTO`, `NON INIZIATO`, *«si chiude quando»*)* |
+| ### ⛔ **un `?` nella prosa NON è una domanda** | la prima stesura lo contava, e ### **gli ASSIOMI `A1`, `A7b`, `A10` diventavano `FRONTE`**: la loro sezione contiene un punto di domanda e la voce è aperta. ### **Un assioma non è un fronte: è una legge di FORMA, e non si apre né si chiude** |
+| ### **la PRIMA che compare vince** | come per lo stato: ### **una cura chiusa nomina il difetto che ha curato**, e la narrazione viene dopo |
+| ### ⛔ **un SEGNAPOSTO non prende una classe dalla riga** | la sua riga è **dove l'ID è CITATO**, non dove è definito |

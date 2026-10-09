@@ -304,13 +304,110 @@ def punto1():
     return 0
 
 
+# ==========================================================================
+#   LA CLASSE DALLA RIGA  --  punto `2`
+# ==========================================================================
+# ### ⛔ **La stessa tecnica dello stato, e le stesse due trappole:** ### **confine di
+# ### parola** e ### **la PRIMA che compare vince** -- perche- la riga racconta anche la
+# ### storia, e ### **una cura chiusa nomina il difetto che ha curato.**
+CL_CURA = ("CURATO E SIGILLATO", "CURATA E SIGILLATA", "CURATE E SIGILLATE",
+           "CURA IN CODICE", "CURATO IN CODICE", "CURATA IN CODICE")
+CL_DIFETTO = ("E- UN DIFETTO", "E UN DIFETTO", "DIFETTO ACCLARATO", "DIFETTO MIO",
+              "DIFETTO VERO")
+CL_MISURA = ("CHIUSA PER MISURA", "CHIUSO PER MISURA")
+_NUM = re.compile(r"\d+[.,]\d+|\d+\s*%|\d+\s*/\s*\d+")
+# ### ⛔ **UN `?` NELLA PROSA NON E- UNA DOMANDA**, e la prima stesura lo contava: cosi-
+# ### ### **`A1`, `A7b`, `A10` -- ASSIOMI -- diventavano `FRONTE`**, perche- la loro sezione
+# ### contiene un punto di domanda e la voce e- aperta. ### **Un assioma non e- un fronte:
+# ### e- una legge di FORMA, e non si chiude ne- si apre.** ### ✔ **Serve la domanda
+# ### DICHIARATA.**
+_DOMANDA = re.compile(r"DOMANDA APERTA|LA DOMANDA:|DOMANDA DEL GUARDIANO", re.I)
+_PROGRAMMA = re.compile(r"PROGRAMMA|PROGETTO|NON INIZIAT|SI CHIUDE QUANDO|CHIUDE CHI", re.I)
+
+
+def decidi_classe(v, riga):
+    """### La classe dalla riga, ### **con la PRIMA che compare che vince.**"""
+    if riga is None:
+        return (None, "nessuna riga d-origine")
+    n = norm(riga)
+    cand = []
+    for cl, parole in (("CURA", CL_CURA), ("DIFETTO", CL_DIFETTO),
+                       ("MISURA", CL_MISURA)):
+        for w, ctx in trova(n, parole):
+            cand.append((_pos(n, w), cl, w, ctx))
+    # ### ⚠ **<<un esito misurato>> vale solo se la voce e- CHIUSA**: un numero in una voce
+    # ### aperta e- ### **una misura DA FARE**, non un esito.
+    if v["stato"] == "CHIUSA":
+        m = _NUM.search(n)
+        if m:
+            cand.append((m.start() + 10 ** 6, "MISURA", "un esito misurato",
+                         n[max(0, m.start() - 40):m.start() + 50]))
+    # ### ⛔ **`FRONTE` SOLO se la voce e- APERTA e il testo e- una domanda o un programma**,
+    # ### e il mandato lo dice: ### **un fronte chiuso non e- un fronte.**
+    aperta = v["stato"] in ("APERTA", "SOSPESA", "AGENDA")
+    if aperta:
+        m = _DOMANDA.search(n) or _PROGRAMMA.search(n)
+        if m:
+            cand.append((m.start() + 2 * 10 ** 6, "FRONTE",
+                         "una domanda o un programma, e la voce e- aperta",
+                         n[max(0, m.start() - 40):m.start() + 50]))
+    if not cand:
+        return (None, "NESSUNA parola decide la classe: %s" % n[:140])
+    cand.sort()
+    quali = sorted({c[1] for c in cand})
+    if len(quali) > 1 and cand[0][0] < 10 ** 6 and cand[1][0] < 10 ** 6:
+        return (None, "AMBIGUA: la riga porta %s -- %s"
+                % ("/".join(quali), cand[0][3][:110]))
+    _k, cl, w, ctx = cand[0]
+    return (cl, "la riga dice <<%s>> (la PRIMA che compare): %s" % (w, ctx[:150]))
+
+
+def punto2():
+    """### Il LOTTO della classe. ### **Ambigui: si elencano, non si toccano.**"""
+    vv = RO.voci()
+    lotto, amb, cam = [], [], 0
+    for v in vv:
+        riga = RO.riga_origine(v)[0]
+        if riga is None:
+            continue
+        if v["classe"] == "NON_DEFINITA":
+            # ### ⛔ **Un segnaposto non prende una classe da una riga:** la sua riga
+            # ### ### **non e- una definizione** -- e- il posto dove l-ID e- CITATO.
+            amb.append((v["id"], "SEGNAPOSTO: la sua riga e- dove l-ID e- CITATO, "
+                                 "non dove e- definito"))
+            continue
+        if v["id"] in RISERVATE:
+            amb.append((v["id"], "RISERVATA al punto 5: NON si tocca"))
+            continue
+        cl, perche = decidi_classe(v, riga)
+        if cl is None:
+            amb.append((v["id"], perche))
+            continue
+        if cl == v["classe"]:
+            continue
+        cam += 1
+        lotto.append({"id": v["id"], "quando": DATA, "campi": {"classe": cl},
+                      "meta": {},
+                      "motivo": "(2) LA CLASSE DALLA RIGA: da `%s` a `%s`. %s"
+                                % (v["classe"], cl, perche[:200])})
+    p = os.path.join(D, "_lotti", "v3_s2.jsonl")
+    io.open(p, "w", encoding="utf-8", newline=NL).write(
+        NL.join(json.dumps(x, ensure_ascii=False) for x in lotto) + NL)
+    io.open(os.path.join(D, "_p2_ambigue.json"), "w", encoding="utf-8",
+            newline=NL).write(json.dumps(amb, ensure_ascii=False, indent=1))
+    print("  scritto doc/indice/_lotti/v3_s2.jsonl: %d voci" % len(lotto))
+    print("  (2) %d classi cambiate, %d non toccate" % (cam, len(amb)))
+    return 0
+
+
 def main(argv):
     assert argv and argv[0] in ("collaudo", "1", "2"), __doc__
     if argv[0] == "collaudo":
         return collaudo()
     if argv[0] == "1":
         return punto1()
-    print("il punto %s arriva dopo" % argv[0])
+    if argv[0] == "2":
+        return punto2()
     return 0
 
 
