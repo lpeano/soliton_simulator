@@ -8,7 +8,7 @@
 | **il task history** | `doc/TASK_HISTORY/2026-10-09_indice_v3_righe_origine.md`, ### **committato PRIMA del lavoro** *(`4ec2684`)* |
 | **i commit** | `f613fef` *(`1`)* · `9af76a4` *(`2`)* · `f2aa241` *(`3`)* · `ed189ed` *(`4`)* · `7400a9e` *(`5`)* · `5f4097a` *(`6`)* · `3dfd8ee` *(`7`)*, piu' questo |
 | **il simulatore** | `b8c21049`, ### **NON toccato** — nessuna corsa |
-| **i controlli** | ### **6 su 6** · collaudo dei presidi ### **34 su 34** · collaudo della REGOLA DELLO STATO ### **7 su 7** |
+| **i controlli** | ### **6 su 6** · collaudo dei presidi ### **59 su 59** · collaudo della REGOLA DELLO STATO ### **7 su 7** |
 
 ---
 
@@ -29,7 +29,7 @@
 
 | | |
 |---|--:|
-| voci con una ### **riga d'origine ritrovabile** | ### **`452`** su `846` |
+| voci con una ### **riga d'origine ritrovabile** | ### **`452`** su `848` |
 | ### **`meta.validita`** scritte | ### **`129`** |
 | — *vale sempre* | `67` |
 | — *vale per quella scena* | `61` |
@@ -190,8 +190,8 @@ L'elenco ### **si legge dal documento**, non si ricopia: l'attrezzo trova la rig
 | il gruppo | i membri |
 |---|---|
 | `A12` / `STANDARD-8` | `STANDARD`/`METODO`/era `ENTRAMBE` · `STANDARD`/`METODO`/era `ENTRAMBE` |
-| `REGISTRO_FISICA:REG-R` / `REG-R` / `H-REG-R` | `CRITERIO`/`METODO`/era `ENTRAMBE` · `DIFETTO`/`INFRASTRUTTURA`/era `ENTRAMBE` · `PRESIDIO`/`METODO`/era `ENTRAMBE` |
-| `C5RES-INVARIANTI` / `D05` | `CURA`/`FISICA`/era `1` · `DIFETTO`/`FISICA`/era `1` |
+| `REGISTRO_FISICA:REG-R` / `REG-R` / `H-REG-R` | `CRITERIO`/`METODO`/era `ENTRAMBE` · `PRESIDIO`/`METODO`/era `ENTRAMBE` · `PRESIDIO`/`METODO`/era `ENTRAMBE` |
+| `C5RES-INVARIANTI` / `D05` | `CURA`/`FISICA`/era `1` · `FRONTE`/`INFRASTRUTTURA`/era `1` |
 | `PASSO-PIENO` / `H-P9` | `DIFETTO`/`METODO`/era `ENTRAMBE` · `PRESIDIO`/`METODO`/era `ENTRAMBE` |
 
 ### ⭐ **E il gruppo di TRE dice una cosa su come nascono i duplicati:** `REGISTRO_FISICA:REG-R`, `REG-R` e `H-REG-R` sono `CRITERIO`/`METODO`, `DIFETTO`/`INFRASTRUTTURA` e `PRESIDIO`/`METODO` — ### **lo stesso fatto scritto tre volte**, una come criterio, una come difetto, una come presidio. ### **Non e' una svista: e' che un fatto, mentre lo si cura, CAMBIA CATEGORIA** — e l'indice ha registrato ### **ogni passaggio come una voce nuova.**
@@ -253,83 +253,84 @@ L'elenco ### **si legge dal documento**, non si ricopia: l'attrezzo trova la rig
 
 | `classe` | prima | dopo | |
 |---|--:|--:|---|
-| DIFETTO | `212` | `200` | ### **-12** |
+| DIFETTO | `212` | `187` | ### **-25** |
 | NON_DEFINITA | `187` | `187` |  |
-| MISURA | `75` | `141` | ### **+66** |
+| MISURA | `75` | `146` | ### **+71** |
 | FRONTE | `169` | `109` | ### **-60** |
-| CRITERIO | `94` | `90` | ### **-4** |
+| CRITERIO | `94` | `96` | ### **+2** |
 | CURA | `46` | `56` | ### **+10** |
-| PRESIDIO | `34` | `34` |  |
-| STANDARD | `29` | `29` |  |
+| STANDARD | `29` | `42` | ### **+13** |
+| PRESIDIO | `34` | `25` | ### **-9** |
 
 | `dominio` | prima | dopo | |
 |---|--:|--:|---|
-| FISICA | `389` | `383` | ### **-6** |
-| METODO | `196` | `198` | ### **+2** |
+| FISICA | `389` | `377` | ### **-12** |
+| METODO | `196` | `216` | ### **+20** |
 | DA_CLASSIFICARE | `187` | `187` |  |
-| INFRASTRUTTURA | `47` | `49` | ### **+2** |
-| DOCUMENTAZIONE | `27` | `29` | ### **+2** |
+| INFRASTRUTTURA | `47` | `52` | ### **+5** |
+| DOCUMENTAZIONE | `27` | `16` | ### **-11** |
 
 | `era` | prima | dopo | |
 |---|--:|--:|---|
-| 1 | `496` | `538` | ### **+42** |
+| 1 | `496` | `539` | ### **+43** |
 | DA_CLASSIFICARE | `188` | `188` |  |
-| ENTRAMBE | `138` | `96` | ### **-42** |
+| ENTRAMBE | `138` | `97` | ### **-41** |
 | 2 | `24` | `24` |  |
 
 | `stato` | prima | dopo | |
 |---|--:|--:|---|
-| SOSPESA | `340` | `369` | ### **+29** |
+| SOSPESA | `340` | `325` | ### **-15** |
+| CHIUSA | `187` | `221` | ### **+34** |
 | DA_CLASSIFICARE | `188` | `188` |  |
-| CHIUSA | `187` | `182` | ### **-5** |
-| APERTA | `106` | `82` | ### **-24** |
+| APERTA | `106` | `86` | ### **-20** |
 | AGENDA | `24` | `24` |  |
-| SUPERATA | `1` | `1` |  |
+| SUPERATA | `1` | `4` | ### **+3** |
 
 | | prima | dopo |
 |---|--:|--:|
-| voci | `846` | ### **`846`** |
+| voci | `846` | ### **`848`** |
 | ### **ID vecchi conservati** | `953` | ### **`953`** *(`0` persi, `0` doppi)* |
-| ### **righe di storico** | `1272` | ### **`1628`** |
+| ### **righe di storico** | `1272` | ### **`1903`** |
 
 | presidio | segnali |
 |---|--:|
-| `F1` | ### **`7`** |
+| `F1` | ### **`8`** |
 | `F2` | `0` |
-| `F3` | `0` |
+| `F3` | ### **`1`** |
 | `F4` | `0` |
-| `F6` | `0` |
-| `F8` | ### **`19`** |
-| ### **in tutto** | ### **`26`** |
+| `F6` | ### **`2`** |
+| `F8` | ### **`20`** |
+| ### **in tutto** | ### **`31`** |
 
 ```
   C1 CONSERVAZIONE: ogni ID vecchio in UNO E UNO SOLO posto PASSA   persi 0, doppi 0
   C2 la TRACCIA copre ogni ID vecchio, con la REGOLA       PASSA   senza traccia 0
   C3 LE LISTE DEL GUARDIANO: classificazione come indicata PASSA   fuori posto 0
-  C4 IDEMPOTENZA (NON si rilancia: c'e' lavoro di dopo)    PASSA   storico.jsonl ha 1628 righe -> verificata al commit 6b8cb90; e la migrazione ha un PRESIDIO che la ferma
-  C5 `indice.py valida` passa                              PASSA     ### i PRESIDI contro le mescolanze: 26 segnali (F1=7  F2=0
-  C6 la VISTA passa IL VALIDATORE VECCHIO (quello del pre-commit) e la domanda PASSA   12 bloccanti su 846 voci
+  C4 IDEMPOTENZA (NON si rilancia: c'e' lavoro di dopo)    PASSA   storico.jsonl ha 1903 righe -> verificata al commit 6b8cb90; e la migrazione ha un PRESIDIO che la ferma
+  C5 `indice.py valida` passa                              PASSA     ### i PRESIDI contro le mescolanze: 31 segnali (F1=8  F2=0
+  C6 la VISTA passa IL VALIDATORE VECCHIO (quello del pre-commit) e la domanda PASSA   12 bloccanti su 848 voci
 ```
 
 ---
 
-## ⑩ I `26` SEGNALI CHE RESTANO — **voce per voce, con la frase**
+## ⑩ I `31` SEGNALI CHE RESTANO — **voce per voce, con la frase**
 
 > ### ⛔ **NON SI CORREGGONO: SI ELENCANO.** Un presidio ### **segnala, non decide** — e un segnale che si spegne cambiando la voce invece di guardarla ### **e- un segnale perso.**
 
-### **`F1`: `7`**
+### **`F1`: `8`**
 
 | id | il segnale | la riga d'origine |
 |---|---|---|
+| `D05` | il titolo cita `C5`, che e- `FISICA`/era `1`, mentre questa e- `INFRASTRUTTURA`/era `1` | */ D05 / I residui di C5: I4 scatola nera, I5 underflow per riga, modalita' fine / il mandato C5 e la coda / — / APERTO /* |
+| `D06` | il titolo cita `Z7`, che e- `INFRASTRUTTURA`/era `1`/`CHIUSA`, mentre questa e- `FISICA`/era `1`/`SOSPESA` | ### ⚠ **non si ritrova** |
 | `D08` | il titolo cita `Z14`, che e- `FISICA`/era `1`/`CHIUSA`, mentre questa e- `FISICA`/era `1`/`SOSPESA` | */ D08 / Il terzo ramo di calcola_psi (elif sotto REPULS_LEGGE) e' DICHIARATO, non corretto / Z14, letto dal codice / — / APERTO /* |
-| `D11` | il titolo cita `Z87`, che e- `FISICA`/era `1`/`SOSPESA`, mentre questa e- `FISICA`/era `1`/`CHIUSA` | */ D11 / d scende DIECI VOLTE sotto LAM mentre SCALA_MIN e' acceso, e la causa NON e' trovata / Z87 / la cura di Z87: il mondo si costruisce SEMPRE dopo i flag (01eda44, categoria D) / CURATO* |
 | `D14` | il titolo cita `Z41`, che e- `FISICA`/era `1`/`CHIUSA`, mentre questa e- `FISICA`/era `1`/`SOSPESA` | */ D14 / median(\/f\/) fa TRE mestieri, non due: e' anche il rompi-anello / Z41 / — / APERTO /* |
 | `D18` | il titolo cita `Z92`, che e- `FISICA`/era `1`/`SOSPESA`, mentre questa e- `FISICA`/era `1`/`CHIUSA` | ### ⚠ **non si ritrova** |
-| `D19` | il titolo cita `Z88`, che e- `FISICA`/era `1`/`SOSPESA`, mentre questa e- `FISICA`/era `1`/`CHIUSA` | */ D19 / OTTO grandezze che la semina legge erano INERTI SUL VUOTO in ogni run di epoca 1 / Z88 / la cura del mondo-dopo-i-flag / CURATO /* |
-| `D25` | il titolo cita `Z46`, che e- `FISICA`/era `1`/`CHIUSA`, mentre questa e- `FISICA`/era `1`/`SOSPESA` | */ Z46 / DIFETTO / D25 (APERTO) / Il gauge del tempo e' la costante 1e-9, e il 93 % dei nodi non invecchia: sono sempre gli stessi, e sono le tre masse /* |
+| `D19` | il titolo cita `Z88`, che e- `METODO`/era `1`/`SOSPESA`, mentre questa e- `FISICA`/era `1`/`CHIUSA` | */ D19 / OTTO grandezze che la semina legge erano INERTI SUL VUOTO in ogni run di epoca 1 / Z88 / la cura del mondo-dopo-i-flag / CURATO /* |
 | `D27` | il titolo cita `Z65`, che e- `FISICA`/era `1`/`CHIUSA`, mentre questa e- `FISICA`/era `1`/`SOSPESA` | */ Z65 / DIFETTO / D27 (APERTO) / Il grafo e' in QUATTRO COMPONENTI che non si toccano mai, e la bimodalita' del grado e' la semina. Una distanza SUL GRAFO fra componenti diverse non esiste, * |
+| `Z130` | il titolo cita `S10`, che e- `FISICA`/era `1`, mentre questa e- `METODO`/era `1` | */ Z130 SOSPETTO RITIRATO, MIO [archivi delle cure · LETTURA] / S10 E' RITIRATA: la premessa era sbagliata DUE VOLTE, e il tetto 1.414213 che avevo messo in dubbio E' quello del ramo che gira* |
 
-### **`F8`: `19`**
+### **`F8`: `20`**
 
 | id | il segnale | la riga d'origine |
 |---|---|---|
@@ -339,23 +340,24 @@ L'elenco ### **si legge dal documento**, non si ricopia: l'attrezzo trova la rig
 | `A9` | era `ENTRAMBE` ma nomina un oggetto dell-era 1: un file `.py` del repo (<<_presidio.py>>) | *## A9 — UN PRESIDIO CHE NON IMPEDISCE NON E' UN PRESIDIO Una nota, un commento o una regola scritta che non impedisce STRUTTURALMENTE il ripetersi di un difetto non e' un presidio: e' una TE* |
 | `CONTA-RIGHE` | era `ENTRAMBE` ma nomina un oggetto dell-era 1: un file `.py` del repo (<<_struttura_regole.py>>) | ### ⚠ **non si ritrova** |
 | `FINESTRA-PRE-NASCITA` | era `ENTRAMBE` ma nomina un oggetto dell-era 1: una funzione o una variabile del simulatore (<<perc_geom>>) | ### ⚠ **non si ritrova** |
+| `H-FILE` | era `ENTRAMBE` ma nomina un oggetto dell-era 1: un flag `--...` (<<--cached>>); un file `.py` del repo (<<_hook_file_cambiati.py>>) | ### ⚠ **non si ritrova** |
+| `H-FISICA-FUORI-LISTA` | era `ENTRAMBE` ma nomina un oggetto dell-era 1: un file `.py` del repo (<<_file_fisica.py>>) | ### ⚠ **non si ritrova** |
+| `H-ID-OBBLIGATORIO` | era `ENTRAMBE` ma nomina un oggetto dell-era 1: un flag `--...` (<<--collaudo>>); un file `.py` del repo (<<_file_fisica.py>>) | ### ⚠ **non si ritrova** |
 | `H-P9` | era `ENTRAMBE` ma nomina un oggetto dell-era 1: una funzione o una variabile del simulatore (<<net.step>>) | ### ⚠ **non si ritrova** |
 | `INDICE-COLLAUDO-SCRITTURA` | era `ENTRAMBE` ma nomina un oggetto dell-era 1: un file `.py` del repo (<<indice.py>>) | *def collaudo():* |
-| `LUNGA-BATTITO-CADUTA` | era `ENTRAMBE` ma nomina un oggetto dell-era 1: una funzione o una variabile del simulatore (<<passo_pieno>>); uno script di csv/_test_fork o csv/_seal_fork (<<csv/_test_fork>>); un file `.py` del repo (<<_tors_w8_lunga.py>>) | *## LUNGA-BATTITO-CADUTA — la corsa da 1000 passi cade al passo 1, e cade su una STAMPA (Aperta il 2026-10-06. Strumento d95639a4, simulatore cf2a1ac8, mandato della misura lunga di TORS-W8-A* |
 | `NON-TRACCIATI` | era `ENTRAMBE` ma nomina un oggetto dell-era 1: un `.pkl` (<<.pkl>>); un file `.py` del repo (<<_censimento_non_tracciati.py>>) | ### ⚠ **non si ritrova** |
 | `PASSO-PIENO` | era `ENTRAMBE` ma nomina un oggetto dell-era 1: una funzione o una variabile del simulatore (<<net.step>>); un file `.py` del repo (<<_passo.py>>) | ### ⚠ **non si ritrova** |
 | `PIATTAFORMA-NON-TIMBRATA` | era `ENTRAMBE` ma nomina un oggetto dell-era 1: uno script di csv/_test_fork o csv/_seal_fork (<<csv/_test_fork>>); un file `.py` del repo (<<_confronto_blob_misure.py>>) | ### ⚠ **non si ritrova** |
 | `PRESIDIO-RIFIUTO-SOLO-SIGILLI` | era `ENTRAMBE` ma nomina un oggetto dell-era 1: uno script di csv/_test_fork o csv/_seal_fork (<<csv/_test_fork>>); un file `.py` del repo (<<_presidio.py>>) | ### ⚠ **non si ritrova** |
-| `REG-B` | era `ENTRAMBE` ma nomina un oggetto dell-era 1: una funzione o una variabile del simulatore (<<mitosi>>) | */ REG-B / FASE B: le SCHEDE, a lotti, un commit per lotto / MANDATO-REGISTRO §2 / LE QUATTRO DELL'ORDINE DI LUCA SONO SCRITTE. ① freno di SCALA_MIN (DIFETTOSA, i TRE CANDIDATI come domande) * |
 | `REG-R` | era `ENTRAMBE` ma nomina un oggetto dell-era 1: un file `.py` del repo (<<soliton_simulator.py>>) | */ REG-R / LA REGOLA MANTENUTA del registro della fisica — la riga in CLAUDE.md («nessuna legge fisica entra, cambia o esce dal simulatore senza passare da doc/REGISTRO_FISICA.md») e l'hook c* |
 | `REG-V` | era `ENTRAMBE` ma nomina un oggetto dell-era 1: un file `.py` del repo (<<verificaregistro.py>>) | ### ⚠ **non si ritrova** |
 | `REPERTI-IMMUTABILI` | era `ENTRAMBE` ma nomina un oggetto dell-era 1: uno script di csv/_test_fork o csv/_seal_fork (<<csv/_seal_fork>>); un file `.py` del repo (<<_sim_A.py>>) | */ ❓ REPERTI-IMMUTABILI — APERTA il 2026-09-26 (proposta di Luca), famiglia G / UN COMMIT PUO' TOCCARE UN REPERTO GIA' CITATO DA UN REFERTO. Luca lo ha rilevato su csv/_seal_fork/_sig_cura_A/* |
 | `RIPRESA-ARGV` | era `ENTRAMBE` ma nomina un oggetto dell-era 1: il sigillo di una cura (<<sigillo della cura>>) | */ RIPRESA-ARGV — APERTA il 2026-09-26 (limite di un meccanismo che ho costruito io) / LA RIPRESA SI FIDA DEL BLOB, E IL BLOB NON CERTIFICA L'ARGV. Caso reale: i json dei bracci off_ del sigi* |
 | `Z125` | era `ENTRAMBE` ma nomina un oggetto dell-era 1: una funzione o una variabile del simulatore (<<mitosi>>) | */ Z125 DIFETTO DI METODO, MIO [archivi delle cure · LETTURA] / IL §E NON ESISTE NEL REPO OLTRE E1 ED E2: ho citato «i quattro test E1-E4» undici volte senza che E3 ed E4 fossero scritti da n* |
 
-### ⚠ **E `F1` NE VEDE `7` SU `9`:** le altre due — `D16` e `D26` — ### **citano la loro `Z` nella DESCRIZIONE**, e `F1` guarda ### **il TITOLO.** Lo dico perche- il numero del presidio e quello dell-attrezzo ### **NON coincidono**, e la ragione e- questa.
+### ⚠ **E `F1` NE VEDE `8` SU `9`:** le altre due — `D16` e `D26` — ### **citano la loro `Z` nella DESCRIZIONE**, e `F1` guarda ### **il TITOLO.** Lo dico perche- il numero del presidio e quello dell-attrezzo ### **NON coincidono**, e la ragione e- questa.
 
-### ⭐ **E `F8` dice una cosa SUL CONFINE, non sulle voci:** le `19` voci che segnala sono ### **era `ENTRAMBE` con un oggetto concreto dell-era `1` nel testo**. Il mandato del giro prima ha detto che ### **vale per ENTRAMBE una REGOLA DI LAVORO o uno strumento che sopravvive**, ed e- ### **era `1` cio- che riguarda un OGGETTO CONCRETO**: ### **queste `19` stanno sul confine fra le due frasi**, e dove sta il confine ### **lo decide Luca, non un marcatore.**
+### ⭐ **E `F8` dice una cosa SUL CONFINE, non sulle voci:** le `20` voci che segnala sono ### **era `ENTRAMBE` con un oggetto concreto dell-era `1` nel testo**. Il mandato del giro prima ha detto che ### **vale per ENTRAMBE una REGOLA DI LAVORO o uno strumento che sopravvive**, ed e- ### **era `1` cio- che riguarda un OGGETTO CONCRETO**: ### **queste `20` stanno sul confine fra le due frasi**, e dove sta il confine ### **lo decide Luca, non un marcatore.**
 
 ---
 
@@ -367,7 +369,7 @@ L'elenco ### **si legge dal documento**, non si ricopia: l'attrezzo trova la rig
 | ### **le `D`/`Z` disallineate** | `9` | ### **le RIGHE disaccordano** sullo stesso fatto: scegliere quale vale e' una decisione |
 | ### **le `16` da dividere** | `16` | la divisione ### **la decide Luca**, e per `11` ### **la proposta e' MIA** |
 | ### **le chiusure senza commit** | `20` | righe che dicono *«CHIUSA»* e ### **non portano il commit che ha chiuso** |
-| ### **i segnali di `F8`** | `19` | ### **elencati, non corretti** |
+| ### **i segnali di `F8`** | `20` | ### **elencati, non corretti** |
 | ### **le due correzioni alla REGOLA del punto `1`** | `2` | se Luca intendeva la regola ### **alla lettera**, `2` dei `7` casi del collaudo ### **escono diversi** |
 | ### **i segnaposto** | `187` | ### **non sono una domanda: sono il lavoro che resta** |
 

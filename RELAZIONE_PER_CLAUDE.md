@@ -10891,3 +10891,13 @@ Il punto `4`. `1` voce, `1` riga di storico; `F6` da `3` a `2` segnali; `6`/`6` 
 ### 📌 **E LA DOMANDA CHE RESTA, in testa al secondo referto: COME SI CHIAMA LA CARTELLA DEL CODICE DELL'ERA `2`?** Finche' manca, `H-FISICA-FUORI-LISTA` e' ### **nel `pre-commit` e non impedisce niente** — ### **una TENDA**, e lo scrivo in quattro posti perche' un presidio che non impedisce e ### **che non lo dice** e' peggio di un presidio che non c'e'.
 
 ### ✔ **E LA VOCE ① DELLA CODA SI CHIUDE**: era arrivata ### **senza il suo mandato base**, il mandato di oggi l'ha assorbita, e le tre correzioni `A`/`B`/`C` sono finite ### **dentro `F11`, nella costante vuota, e dentro `H-ID-OBBLIGATORIO`.** ### **Si chiude quando il lavoro e' fatto, non quando e' letto.**
+
+---
+
+## UN REFERTO DEVE RIGENERARSI IDENTICO, e **due non lo facevano** (2026-10-09)
+
+### ⛔ **IL DIFETTO ERA MIO, ed era nella funzione che costruisce OGNI tabella prima/dopo:** ordinavo ### **solo per il conteggio**, e due valori con lo stesso numero — `DIFETTO` e `NON_DEFINITA`, ### **`187` entrambi** — uscivano ### **in ordine DIVERSO a ogni corsa**, perche' l'ordine di un `set` ### **non e' garantito.**
+
+### ⭐ **E LA CONSEGUENZA E- PEGGIO DEL DIFETTO:** in ogni messaggio di commit scrivo *«il referto si rigenera, e deve dare lo STESSO FILE al suo commit»*. ### **Era una promessa FALSA** — e un controllo che non puo' essere fatto ### **e' peggio di un controllo che non c'e-**, perche' ci si conta sopra.
+
+### ✔ **La cura: il nome e' lo spareggio**, e ### **un ordine totale non ha pari merito.** Curati ### **`7` generatori** *(non solo i tre di oggi: la stessa funzione sta in tutti)*, e la prova e' ### **due rigenerazioni di seguito** confrontate col disco.

@@ -54,7 +54,14 @@ def gira(cmd, pat):
 def tab(campo, a, b):
     p("| `%s` | prima | dopo | |" % campo)
     p("|---|--:|--:|---|")
-    for k in sorted(set(a) | set(b), key=lambda x: -b.get(x, 0)):
+    # ### ⛔ **IL PARI MERITO ROMPEVA LA RIPRODUCIBILITA-:** ordinando ### **solo per il
+    # ### conteggio**, due valori con lo stesso numero *(`DIFETTO` e `NON_DEFINITA`, `187`
+    # ### entrambi)* usciviano ### **in ordine DIVERSO a ogni corsa** -- l-ordine di un
+    # ### `set` non e- garantito. ### **Un referto che non si rigenera identico non si puo-
+    # ### verificare**, e il controllo <<si rigenera, e deve dare lo STESSO FILE>> che
+    # ### scrivo in ogni messaggio ### **sarebbe stato falso.**
+    # ### ✔ **Il nome e- lo spareggio**, e un ordine totale non ha pari merito.
+    for k in sorted(set(a) | set(b), key=lambda x: (-b.get(x, 0), x)):
         d = b.get(k, 0) - a.get(k, 0)
         p("| %s | `%d` | `%d` | %s |" % (k, a.get(k, 0), b.get(k, 0),
                                          ("### **%+d**" % d) if d else ""))

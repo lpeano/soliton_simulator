@@ -9,7 +9,7 @@
 | **il file del guardiano** | `doc/indice/_lotti/correzioni_guardiano_2026-10-09.txt`, `165` righe, ### **committato da solo** *(`67c12fa`)* |
 | **i commit** | `ba8c359` *(il difetto «IL FATTO»)* · `ed10b34` *(i punti `3`, `4`, `5` e l'accensione di `F9`/`F10`)*, piu' questo |
 | **il simulatore** | `b8c21049`, ### **NON toccato** — nessuna corsa |
-| **i controlli** | ### **6 su 6** · collaudo dei presidi ### **48 su 48** · collaudo dell'indice ### **22 su 22** · le sei attese del difetto ### **6 su 6** |
+| **i controlli** | ### **6 su 6** · collaudo dei presidi ### **59 su 59** · collaudo dell'indice ### **26 su 26** · le sei attese del difetto ### **6 su 6** |
 
 ---
 
@@ -112,10 +112,10 @@
 | `SIGILLO-CURA2-RIPARATO` | `classe=MISURA` | *FINITO 5/5* | `alta` | `DIFETTO/FISICA/era 1/CHIUSA` → ### **`MISURA/FISICA/era 1/CHIUSA`** | ['classe'] in `T2` (alta) — `T2` |
 | `POTENZE-1` | `classe=CURA` | *sigillo* | `alta` | `MISURA/FISICA/era 1/CHIUSA` → ### **`CURA/FISICA/era 1/CHIUSA`** | ['classe'] in `T0` (alta) — `T0` |
 | `RAMPA-1` | `classe=CURA` | *sigillo* | `alta` | `MISURA/FISICA/era 1/CHIUSA` → ### **`CURA/FISICA/era 1/CHIUSA`** | ['classe'] in `T0` (alta) — `T0` |
-| `POTATURA-GUARDIE` | `dominio=INFRASTRUTTURA` | *i 57 rami MORTI* | `alta` | `CURA/FISICA/era 1/SOSPESA` → ### **`CURA/INFRASTRUTTURA/era 1/SOSPESA`** | ['dominio'] in `T4` (alta) — `T4` |
+| `POTATURA-GUARDIE` | `dominio=INFRASTRUTTURA` | *i 57 rami MORTI* | `alta` | `CURA/FISICA/era 1/SOSPESA` → ### **`FRONTE/INFRASTRUTTURA/era 1/SOSPESA`** | ['dominio'] in `T4` (alta) — `T4` |
 | `D37` | `dominio=INFRASTRUTTURA` | *CHIAVE DUPLICATA NEI DOMINI* | `alta` | `DIFETTO/FISICA/era 1/CHIUSA` → ### **`DIFETTO/INFRASTRUTTURA/era 1/CHIUSA`** | ['dominio'] in `T0` (alta) — `T0` |
 | `Z14` | `da_dividere=DIFETTO/FISICA/1 + STANDARD/METODO/ENTRAMBE` | *REGOLA GENERALE* | `alta` | `FRONTE/FISICA/era 1/CHIUSA` → ### **`FRONTE/FISICA/era 1/CHIUSA`** | ['da_dividere', 'da_dividere_parti'] in `T1` (alta) — `T1` |
-| `Z22` | `classe=STANDARD dominio=METODO era=ENTRAMBE stato=APERTA` | *Una regola che non impedisce* | `alta` | `MISURA/FISICA/era 1/CHIUSA` → ### **`STANDARD/METODO/era ENTRAMBE/APERTA`** | ['classe', 'dominio', 'era', 'stato'] in `T1` (alta) — `T1` |
+| `Z22` | `classe=STANDARD dominio=METODO era=ENTRAMBE stato=APERTA` | *Una regola che non impedisce* | `alta` | `MISURA/FISICA/era 1/CHIUSA` → ### **`STANDARD/METODO/era ENTRAMBE/CHIUSA`** | ['classe', 'dominio', 'era', 'stato'] in `T1` (alta) — `T1` |
 | `Z68` | `classe=CURA` | *sigillo 3/3* | `media` | `FRONTE/FISICA/era 1/CHIUSA` → ### **`CURA/FISICA/era 1/CHIUSA`** | ['classe'] in `T4` (media) — `T4` |
 | `Z73` | `classe=MISURA` | *RITIRATA* | `media` | `FRONTE/FISICA/era 1/CHIUSA` → ### **`MISURA/FISICA/era 1/CHIUSA`** | ['classe'] in `T0` (media) — `T0` |
 | `Z70` | `classe=MISURA` | *C'E', MA NON E' ISTANTANEO* | `media` | `FRONTE/FISICA/era 1/CHIUSA` → ### **`MISURA/FISICA/era 1/CHIUSA`** | ['classe'] in `T0` (media) — `T0` |
@@ -145,7 +145,7 @@
 | `A4-METRICHE` | `classe=FRONTE dominio=METODO` | *il pannello fedele viene prima* | `media` | `DIFETTO/FISICA/era 1/SOSPESA` → ### **`FRONTE/METODO/era 1/SOSPESA`** | ['classe', 'dominio'] in `T1` (media) — `T1` |
 | `Z130` | `dominio=METODO` | *Conta le invocazioni* | `media` | `MISURA/FISICA/era 1/CHIUSA` → ### **`MISURA/METODO/era 1/CHIUSA`** | ['dominio'] in `T1` (media) — `T1` |
 | `Z136` | `classe=MISURA` | *CHIUSA PER DIMOSTRAZIONE* | `media` | `FRONTE/FISICA/era 1/CHIUSA` → ### **`MISURA/FISICA/era 1/CHIUSA`** | ['classe'] in `T0` (media) — `T0` |
-| `REG-R` | `classe=PRESIDIO` | *l'hook che RIFIUTA* | `media` | `DIFETTO/INFRASTRUTTURA/era ENTRAMBE/APERTA` → ### **`PRESIDIO/INFRASTRUTTURA/era ENTRAMBE/APERTA`** | ['classe'] in `T1` (media) — `T1` |
+| `REG-R` | `classe=PRESIDIO` | *l'hook che RIFIUTA* | `media` | `DIFETTO/INFRASTRUTTURA/era ENTRAMBE/APERTA` → ### **`PRESIDIO/METODO/era ENTRAMBE/APERTA`** | ['classe'] in `T1` (media) — `T1` |
 | `SIGILLO-COMPARATORE-DUPLICATO` | `classe=DIFETTO` | *PERCHE E UN DIFETTO* | `media` | `FRONTE/INFRASTRUTTURA/era 1/SOSPESA` → ### **`DIFETTO/INFRASTRUTTURA/era 1/SOSPESA`** | ['classe'] in `T0` (media) — `T0` |
 | `SIGILLO-REGISTRO-NON-CONFRONTABILE` | `classe=DIFETTO` | *il difetto va in coda* | `media` | `FRONTE/INFRASTRUTTURA/era 1/SOSPESA` → ### **`DIFETTO/INFRASTRUTTURA/era 1/SOSPESA`** | ['classe'] in `T4` (media) — `T4` |
 | `SIGILLO-SENZA-CONFIGURAZIONE` | `classe=DIFETTO` | *il difetto va in coda* | `media` | `FRONTE/INFRASTRUTTURA/era 1/SOSPESA` → ### **`DIFETTO/INFRASTRUTTURA/era 1/SOSPESA`** | ['classe'] in `T4` (media) — `T4` |
@@ -159,28 +159,28 @@
 
 | id | il file chiede | citazione | conf | prima → dopo | il dettaglio |
 |---|---|---|---|---|---|
-| `D0` | `classe=MISURA stato=CHIUSA` | *MISURATO: e' IL FRENO* | `alta` | `CURA/FISICA/era 1/SOSPESA` → ### **`MISURA/FISICA/era 1/SOSPESA`** | ### **`stato`=`CHIUSA`**: ### la riga NON PORTA UN COMMIT, e chiudere pretende `chiusura.commit`: un commit NON SI INVENTA (la stessa regola del punto 1) |
-| `G2` | `classe=MISURA stato=CHIUSA` | *FATTO. Il saldo vive sul CONFINE* | `alta` | `CURA/FISICA/era 1/SOSPESA` → ### **`MISURA/FISICA/era 1/SOSPESA`** | ### **`stato`=`CHIUSA`**: ### la riga NON PORTA UN COMMIT, e chiudere pretende `chiusura.commit`: un commit NON SI INVENTA (la stessa regola del punto 1) |
-| `G3` | `classe=MISURA stato=CHIUSA` | *sigillo 7/7* | `alta` | `CURA/FISICA/era 1/SOSPESA` → ### **`MISURA/FISICA/era 1/SOSPESA`** | ### **`stato`=`CHIUSA`**: ### la riga NON PORTA UN COMMIT, e chiudere pretende `chiusura.commit`: un commit NON SI INVENTA (la stessa regola del punto 1) |
-| `G4` | `classe=MISURA stato=CHIUSA` | *FATTO (finito 14:39:27)* | `alta` | `CURA/FISICA/era 1/SOSPESA` → ### **`MISURA/FISICA/era 1/SOSPESA`** | ### **`stato`=`CHIUSA`**: ### la riga NON PORTA UN COMMIT, e chiudere pretende `chiusura.commit`: un commit NON SI INVENTA (la stessa regola del punto 1) |
-| `S03` | `classe=MISURA stato=CHIUSA` | *DECISO da Z109* | `alta` | `DIFETTO/FISICA/era 1/SOSPESA` → ### **`MISURA/FISICA/era 1/SOSPESA`** | ### **`stato`=`CHIUSA`**: ### la riga NON PORTA UN COMMIT, e chiudere pretende `chiusura.commit`: un commit NON SI INVENTA (la stessa regola del punto 1) |
-| `S04` | `classe=MISURA stato=CHIUSA` | *CADE con Z108* | `alta` | `DIFETTO/FISICA/era 1/SOSPESA` → ### **`MISURA/FISICA/era 1/SOSPESA`** | ### **`stato`=`CHIUSA`**: ### la riga NON PORTA UN COMMIT, e chiudere pretende `chiusura.commit`: un commit NON SI INVENTA (la stessa regola del punto 1) |
-| `Z13` | `classe=CURA stato=CHIUSA` | *CHIUSA il 2026-09-17* | `alta` | `FRONTE/FISICA/era 1/SOSPESA` → ### **`CURA/FISICA/era 1/SOSPESA`** | ### **`stato`=`CHIUSA`**: ### la riga NON PORTA UN COMMIT, e chiudere pretende `chiusura.commit`: un commit NON SI INVENTA (la stessa regola del punto 1) |
-| `Z29` | `classe=CURA stato=CHIUSA` | *Sigillo 8/8* | `alta` | `FRONTE/FISICA/era 1/SOSPESA` → ### **`CURA/FISICA/era 1/SOSPESA`** | ### **`stato`=`CHIUSA`**: ### la riga NON PORTA UN COMMIT, e chiudere pretende `chiusura.commit`: un commit NON SI INVENTA (la stessa regola del punto 1) |
-| `Z30` | `classe=MISURA stato=CHIUSA` | *CHIUSA il 2026-09-18* | `alta` | `FRONTE/FISICA/era 1/SOSPESA` → ### **`MISURA/FISICA/era 1/SOSPESA`** | ### **`stato`=`CHIUSA`**: ### la riga NON PORTA UN COMMIT, e chiudere pretende `chiusura.commit`: un commit NON SI INVENTA (la stessa regola del punto 1) |
-| `Z53` | `classe=CURA stato=CHIUSA` | *CURATO, SIGILLO 9/9 PASS* | `alta` | `FRONTE/FISICA/era 1/SOSPESA` → ### **`CURA/FISICA/era 1/SOSPESA`** | ### **`stato`=`CHIUSA`**: ### la riga NON PORTA UN COMMIT, e chiudere pretende `chiusura.commit`: un commit NON SI INVENTA (la stessa regola del punto 1) |
-| `Z5` | `classe=MISURA stato=CHIUSA` | *chiusa per DIMOSTRAZIONE* | `alta` | `FRONTE/FISICA/era 1/SOSPESA` → ### **`MISURA/FISICA/era 1/SOSPESA`** | ### **`stato`=`CHIUSA`**: ### la riga NON PORTA UN COMMIT, e chiudere pretende `chiusura.commit`: un commit NON SI INVENTA (la stessa regola del punto 1) |
-| `Z28` | `classe=CRITERIO dominio=METODO stato=CHIUSA` | *CHIUSA PRIMA DI NASCERE* | `alta` | `FRONTE/FISICA/era 1/SOSPESA` → ### **`CRITERIO/METODO/era 1/SOSPESA`** | ### **`stato`=`CHIUSA`**: ### la riga NON PORTA UN COMMIT, e chiudere pretende `chiusura.commit`: un commit NON SI INVENTA (la stessa regola del punto 1) |
+| `D0` | `classe=MISURA stato=CHIUSA` | *MISURATO: e' IL FRENO* | `alta` | `CURA/FISICA/era 1/SOSPESA` → ### **`MISURA/FISICA/era 1/CHIUSA`** | ### **`stato`=`CHIUSA`**: ### la riga NON PORTA UN COMMIT, e chiudere pretende `chiusura.commit`: un commit NON SI INVENTA (la stessa regola del punto 1) |
+| `G2` | `classe=MISURA stato=CHIUSA` | *FATTO. Il saldo vive sul CONFINE* | `alta` | `CURA/FISICA/era 1/SOSPESA` → ### **`MISURA/FISICA/era 1/CHIUSA`** | ### **`stato`=`CHIUSA`**: ### la riga NON PORTA UN COMMIT, e chiudere pretende `chiusura.commit`: un commit NON SI INVENTA (la stessa regola del punto 1) |
+| `G3` | `classe=MISURA stato=CHIUSA` | *sigillo 7/7* | `alta` | `CURA/FISICA/era 1/SOSPESA` → ### **`MISURA/FISICA/era 1/CHIUSA`** | ### **`stato`=`CHIUSA`**: ### la riga NON PORTA UN COMMIT, e chiudere pretende `chiusura.commit`: un commit NON SI INVENTA (la stessa regola del punto 1) |
+| `G4` | `classe=MISURA stato=CHIUSA` | *FATTO (finito 14:39:27)* | `alta` | `CURA/FISICA/era 1/SOSPESA` → ### **`MISURA/FISICA/era 1/CHIUSA`** | ### **`stato`=`CHIUSA`**: ### la riga NON PORTA UN COMMIT, e chiudere pretende `chiusura.commit`: un commit NON SI INVENTA (la stessa regola del punto 1) |
+| `S03` | `classe=MISURA stato=CHIUSA` | *DECISO da Z109* | `alta` | `DIFETTO/FISICA/era 1/SOSPESA` → ### **`MISURA/FISICA/era 1/CHIUSA`** | ### **`stato`=`CHIUSA`**: ### la riga NON PORTA UN COMMIT, e chiudere pretende `chiusura.commit`: un commit NON SI INVENTA (la stessa regola del punto 1) |
+| `S04` | `classe=MISURA stato=CHIUSA` | *CADE con Z108* | `alta` | `DIFETTO/FISICA/era 1/SOSPESA` → ### **`MISURA/FISICA/era 1/CHIUSA`** | ### **`stato`=`CHIUSA`**: ### la riga NON PORTA UN COMMIT, e chiudere pretende `chiusura.commit`: un commit NON SI INVENTA (la stessa regola del punto 1) |
+| `Z13` | `classe=CURA stato=CHIUSA` | *CHIUSA il 2026-09-17* | `alta` | `FRONTE/FISICA/era 1/SOSPESA` → ### **`CURA/FISICA/era 1/CHIUSA`** | ### **`stato`=`CHIUSA`**: ### la riga NON PORTA UN COMMIT, e chiudere pretende `chiusura.commit`: un commit NON SI INVENTA (la stessa regola del punto 1) |
+| `Z29` | `classe=CURA stato=CHIUSA` | *Sigillo 8/8* | `alta` | `FRONTE/FISICA/era 1/SOSPESA` → ### **`CURA/FISICA/era 1/CHIUSA`** | ### **`stato`=`CHIUSA`**: ### la riga NON PORTA UN COMMIT, e chiudere pretende `chiusura.commit`: un commit NON SI INVENTA (la stessa regola del punto 1) |
+| `Z30` | `classe=MISURA stato=CHIUSA` | *CHIUSA il 2026-09-18* | `alta` | `FRONTE/FISICA/era 1/SOSPESA` → ### **`MISURA/FISICA/era 1/CHIUSA`** | ### **`stato`=`CHIUSA`**: ### la riga NON PORTA UN COMMIT, e chiudere pretende `chiusura.commit`: un commit NON SI INVENTA (la stessa regola del punto 1) |
+| `Z53` | `classe=CURA stato=CHIUSA` | *CURATO, SIGILLO 9/9 PASS* | `alta` | `FRONTE/FISICA/era 1/SOSPESA` → ### **`CURA/FISICA/era 1/CHIUSA`** | ### **`stato`=`CHIUSA`**: ### la riga NON PORTA UN COMMIT, e chiudere pretende `chiusura.commit`: un commit NON SI INVENTA (la stessa regola del punto 1) |
+| `Z5` | `classe=MISURA stato=CHIUSA` | *chiusa per DIMOSTRAZIONE* | `alta` | `FRONTE/FISICA/era 1/SOSPESA` → ### **`MISURA/FISICA/era 1/CHIUSA`** | ### **`stato`=`CHIUSA`**: ### la riga NON PORTA UN COMMIT, e chiudere pretende `chiusura.commit`: un commit NON SI INVENTA (la stessa regola del punto 1) |
+| `Z28` | `classe=CRITERIO dominio=METODO stato=CHIUSA` | *CHIUSA PRIMA DI NASCERE* | `alta` | `FRONTE/FISICA/era 1/SOSPESA` → ### **`CRITERIO/METODO/era 1/CHIUSA`** | ### **`stato`=`CHIUSA`**: ### la riga NON PORTA UN COMMIT, e chiudere pretende `chiusura.commit`: un commit NON SI INVENTA (la stessa regola del punto 1) |
 | `Z2` | `classe=DIFETTO stato=SOSPESA` | *A1 resta violato* | `media` | `MISURA/FISICA/era 1/CHIUSA` → ### **`MISURA/FISICA/era 1/SOSPESA`** | ### **`classe`=`DIFETTO`**: ### LA REGOLA DELLA CLASSE DA- `MISURA`, NON `DIFETTO`: la riga CONTRADDICE il cambio (la riga dice <<un esito misurato>> (la PRIMA che compare): 9-17) / La correzione (2) ha sostituito 0.02median(self.d0)re) |
 | `Z6` | `classe=DIFETTO stato=SOSPESA` | *BLOCCO STRUTTURALE* | `media` | `MISURA/FISICA/era 1/CHIUSA` → ### **`MISURA/FISICA/era 1/SOSPESA`** | ### **`classe`=`DIFETTO`**: ### LA REGOLA DELLA CLASSE DA- `MISURA`, NON `DIFETTO`: la riga CONTRADDICE il cambio (la riga dice <<un esito misurato>> (la PRIMA che compare): al posto di NaN) e ① inerzia (rho/peq = 0/0 = NaN in omega_s)) |
-| `Z21` | `classe=MISURA stato=SUPERATA` | *era UN SEME* | `media` | `FRONTE/FISICA/era 1/SOSPESA` → ### **`MISURA/FISICA/era 1/SOSPESA`** | ### **`stato`=`SUPERATA`**: ### `SUPERATA` SENZA DIRE DA CHE COSA: lo schema pretende `superata_da`, e il file non lo porta. <<Superata>> vuol dire CHE QUALCUNO HA DECISO ALTRO, e chi ha deciso NON SI INVENTA |
-| `Z27` | `classe=MISURA stato=CHIUSA` | *Z24 MISURATA* | `media` | `FRONTE/FISICA/era 1/SOSPESA` → ### **`MISURA/FISICA/era 1/SOSPESA`** | ### **`stato`=`CHIUSA`**: ### la riga NON PORTA UN COMMIT, e chiudere pretende `chiusura.commit`: un commit NON SI INVENTA (la stessa regola del punto 1) |
+| `Z21` | `classe=MISURA stato=SUPERATA` | *era UN SEME* | `media` | `FRONTE/FISICA/era 1/SOSPESA` → ### **`MISURA/FISICA/era 1/SUPERATA`** | ### **`stato`=`SUPERATA`**: ### `SUPERATA` SENZA DIRE DA CHE COSA: lo schema pretende `superata_da`, e il file non lo porta. <<Superata>> vuol dire CHE QUALCUNO HA DECISO ALTRO, e chi ha deciso NON SI INVENTA |
+| `Z27` | `classe=MISURA stato=CHIUSA` | *Z24 MISURATA* | `media` | `FRONTE/FISICA/era 1/SOSPESA` → ### **`MISURA/FISICA/era 1/CHIUSA`** | ### **`stato`=`CHIUSA`**: ### la riga NON PORTA UN COMMIT, e chiudere pretende `chiusura.commit`: un commit NON SI INVENTA (la stessa regola del punto 1) |
 | `Z91` | `classe=DIFETTO stato=CHIUSA` | *CRICCHETTO E' CURATO* | `media` | `FRONTE/FISICA/era 1/SOSPESA` → ### **`DIFETTO/FISICA/era 1/SOSPESA`** | ### **`stato`=`CHIUSA`**: ### LA REGOLA DELLO STATO DA- `SOSPESA`, NON `CHIUSA`: la riga CONTRADDICE il cambio (la riga dice <<APERTA>> (la PRIMA parola di stato): / Z91 APERTA [EPOCA 2 · LETTURA DEL CODICE] / SCALA_) |
 | `Z92` | `classe=DIFETTO stato=CHIUSA` | *CURATA* | `media` | `FRONTE/FISICA/era 1/SOSPESA` → ### **`DIFETTO/FISICA/era 1/SOSPESA`** | ### **`stato`=`CHIUSA`**: ### LA REGOLA DELLO STATO DA- `SOSPESA`, NON `CHIUSA`: la riga CONTRADDICE il cambio (la riga dice <<APERTA>> (la PRIMA parola di stato): freno che cresceva insieme alla fuga. / APERTA come LIMITE, non come) |
-| `Z7` | `classe=DIFETTO dominio=INFRASTRUTTURA` | *SCRITTO e MAI LETTO* | `media` | `FRONTE/FISICA/era 1/SOSPESA` → ### **`FRONTE/INFRASTRUTTURA/era 1/SOSPESA`** | ### **`classe`=`DIFETTO`**: ### LA REGOLA DELLA CLASSE DA- `FRONTE`, NON `DIFETTO`: la riga CONTRADDICE il cambio (la riga dice <<una domanda o un programma, e la voce e- aperta>> (la PRIMA che compare): be cs^-4) non rompe nessun cons) |
+| `Z7` | `classe=DIFETTO dominio=INFRASTRUTTURA` | *SCRITTO e MAI LETTO* | `media` | `FRONTE/FISICA/era 1/SOSPESA` → ### **`DIFETTO/INFRASTRUTTURA/era 1/CHIUSA`** | ### **`classe`=`DIFETTO`**: ### LA REGOLA DELLA CLASSE DA- `FRONTE`, NON `DIFETTO`: la riga CONTRADDICE il cambio (la riga dice <<una domanda o un programma, e la voce e- aperta>> (la PRIMA che compare): be cs^-4) non rompe nessun cons) |
 | `Y2` | `classe=DIFETTO stato=SOSPESA` | *resta muta* | `media` | `MISURA/METODO/era 1/CHIUSA` → ### **`MISURA/METODO/era 1/SOSPESA`** | ### **`classe`=`DIFETTO`**: ### LA REGOLA DELLA CLASSE DA- `MISURA`, NON `DIFETTO`: la riga CONTRADDICE il cambio (la riga dice <<un esito misurato>> (la PRIMA che compare): V / (a) u1_segno_ov_nullo scrive 2/pi = 0.6366, ma canon vien) |
-| `REGISTRO_FISICA:E4-LAM` | `classe=CURA stato=CHIUSA` | *SI VERIFICA SEMPRE* | `media` | `CRITERIO/METODO/era 1/SOSPESA` → ### **`CURA/METODO/era 1/SOSPESA`** | ### **`stato`=`CHIUSA`**: ### la riga NON PORTA UN COMMIT, e chiudere pretende `chiusura.commit`: un commit NON SI INVENTA (la stessa regola del punto 1) |
-| `COMPONENTI:A1` | `classe=CURA dominio=FISICA stato=CHIUSA` | *PROMOSSA il 2026-09-16* | `media` | `CRITERIO/METODO/era 1/SOSPESA` → ### **`CURA/METODO/era 1/SOSPESA`** | ### **`dominio`=`FISICA`**: ### la citazione si trova in `T4` -- la SEZIONE, o il FILE -- non nella voce ne- nella sua riga, e per `dominio` la regola del punto 1 non ha una lettura: una sezione contiene anche le voci vicine · ### **`stato`=`CHIUSA`**: ### la riga NON PORTA UN COMMIT, e chiudere pretende `chiusura.commit`: un commit NON SI INVENTA (la stessa regola del punto 1) |
+| `REGISTRO_FISICA:E4-LAM` | `classe=CURA stato=CHIUSA` | *SI VERIFICA SEMPRE* | `media` | `CRITERIO/METODO/era 1/SOSPESA` → ### **`CURA/METODO/era 1/CHIUSA`** | ### **`stato`=`CHIUSA`**: ### la riga NON PORTA UN COMMIT, e chiudere pretende `chiusura.commit`: un commit NON SI INVENTA (la stessa regola del punto 1) |
+| `COMPONENTI:A1` | `classe=CURA dominio=FISICA stato=CHIUSA` | *PROMOSSA il 2026-09-16* | `media` | `CRITERIO/METODO/era 1/SOSPESA` → ### **`CURA/METODO/era 1/CHIUSA`** | ### **`dominio`=`FISICA`**: ### la citazione si trova in `T4` -- la SEZIONE, o il FILE -- non nella voce ne- nella sua riga, e per `dominio` la regola del punto 1 non ha una lettura: una sezione contiene anche le voci vicine · ### **`stato`=`CHIUSA`**: ### la riga NON PORTA UN COMMIT, e chiudere pretende `chiusura.commit`: un commit NON SI INVENTA (la stessa regola del punto 1) |
 | `Y1` | `classe=DIFETTO dominio=METODO` | *zero fisica* | `media` | `FRONTE/FISICA/era 1/SOSPESA` → ### **`DIFETTO/FISICA/era 1/SOSPESA`** | ### **`dominio`=`METODO`**: ### la citazione si trova in `T4` -- la SEZIONE, o il FILE -- non nella voce ne- nella sua riga, e per `dominio` la regola del punto 1 non ha una lettura: una sezione contiene anche le voci vicine |
 
 ### **LE `44` LASCIATE**
@@ -189,42 +189,42 @@
 
 | id | il file chiede | citazione | conf | prima → dopo | il dettaglio |
 |---|---|---|---|---|---|
-| `C13` | `stato=CHIUSA` | *C. DIAGNOSI CHIUSE* | `alta` | `MISURA/FISICA/era 1/SOSPESA` → ### **`MISURA/FISICA/era 1/SOSPESA`** | ### **`stato`=`CHIUSA`**: ### la riga NON PORTA UN COMMIT, e chiudere pretende `chiusura.commit`: un commit NON SI INVENTA (la stessa regola del punto 1) |
-| `C17` | `stato=CHIUSA` | *C. DIAGNOSI CHIUSE* | `alta` | `MISURA/FISICA/era 1/SOSPESA` → ### **`MISURA/FISICA/era 1/SOSPESA`** | ### **`stato`=`CHIUSA`**: ### la riga NON PORTA UN COMMIT, e chiudere pretende `chiusura.commit`: un commit NON SI INVENTA (la stessa regola del punto 1) |
-| `C18` | `stato=CHIUSA` | *C. DIAGNOSI CHIUSE* | `alta` | `MISURA/FISICA/era 1/SOSPESA` → ### **`MISURA/FISICA/era 1/SOSPESA`** | ### **`stato`=`CHIUSA`**: ### la riga NON PORTA UN COMMIT, e chiudere pretende `chiusura.commit`: un commit NON SI INVENTA (la stessa regola del punto 1) |
-| `C22` | `stato=CHIUSA` | *C. DIAGNOSI CHIUSE* | `alta` | `MISURA/FISICA/era 1/SOSPESA` → ### **`MISURA/FISICA/era 1/SOSPESA`** | ### **`stato`=`CHIUSA`**: ### la riga NON PORTA UN COMMIT, e chiudere pretende `chiusura.commit`: un commit NON SI INVENTA (la stessa regola del punto 1) |
-| `C23` | `stato=CHIUSA` | *C. DIAGNOSI CHIUSE* | `alta` | `MISURA/FISICA/era 1/SOSPESA` → ### **`MISURA/FISICA/era 1/SOSPESA`** | ### **`stato`=`CHIUSA`**: ### la riga NON PORTA UN COMMIT, e chiudere pretende `chiusura.commit`: un commit NON SI INVENTA (la stessa regola del punto 1) |
-| `C24` | `stato=CHIUSA` | *C. DIAGNOSI CHIUSE* | `alta` | `MISURA/FISICA/era 1/SOSPESA` → ### **`MISURA/FISICA/era 1/SOSPESA`** | ### **`stato`=`CHIUSA`**: ### la riga NON PORTA UN COMMIT, e chiudere pretende `chiusura.commit`: un commit NON SI INVENTA (la stessa regola del punto 1) |
-| `C1-PEQ-ESATTO` | `stato=CHIUSA` | *✅* | `alta` | `CURA/FISICA/era 1/SOSPESA` → ### **`CURA/FISICA/era 1/SOSPESA`** | ### **`stato`=`CHIUSA`**: ### la riga NON PORTA UN COMMIT, e chiudere pretende `chiusura.commit`: un commit NON SI INVENTA (la stessa regola del punto 1) |
-| `C1BIS-ANOM-SIMM` | `stato=CHIUSA` | *✅* | `alta` | `CURA/FISICA/era 1/SOSPESA` → ### **`CURA/FISICA/era 1/SOSPESA`** | ### **`stato`=`CHIUSA`**: ### la riga NON PORTA UN COMMIT, e chiudere pretende `chiusura.commit`: un commit NON SI INVENTA (la stessa regola del punto 1) |
-| `C2-PEQ-NASCITA` | `stato=CHIUSA` | *✅* | `alta` | `CURA/FISICA/era 1/SOSPESA` → ### **`CURA/FISICA/era 1/SOSPESA`** | ### **`stato`=`CHIUSA`**: ### la riga NON PORTA UN COMMIT, e chiudere pretende `chiusura.commit`: un commit NON SI INVENTA (la stessa regola del punto 1) |
-| `C3-SCALA-MIN-PASSO` | `stato=CHIUSA` | *✅* | `alta` | `CURA/FISICA/era 1/SOSPESA` → ### **`CURA/FISICA/era 1/SOSPESA`** | ### **`stato`=`CHIUSA`**: ### la riga NON PORTA UN COMMIT, e chiudere pretende `chiusura.commit`: un commit NON SI INVENTA (la stessa regola del punto 1) |
-| `C4-COES-CAUSALE` | `stato=CHIUSA` | *✅* | `alta` | `CURA/FISICA/era 1/SOSPESA` → ### **`CURA/FISICA/era 1/SOSPESA`** | ### **`stato`=`CHIUSA`**: ### la riga NON PORTA UN COMMIT, e chiudere pretende `chiusura.commit`: un commit NON SI INVENTA (la stessa regola del punto 1) |
-| `CHK2` | `stato=CHIUSA` | *raggiunto e riferito a Luca* | `alta` | `CURA/FISICA/era 1/SOSPESA` → ### **`CURA/FISICA/era 1/SOSPESA`** | ### **`stato`=`CHIUSA`**: ### la riga NON PORTA UN COMMIT, e chiudere pretende `chiusura.commit`: un commit NON SI INVENTA (la stessa regola del punto 1) |
-| `COMPONENTI:S3b` | `stato=CHIUSA` | *SIGILLATA con controllo positivo* | `alta` | `MISURA/FISICA/era 1/SOSPESA` → ### **`MISURA/FISICA/era 1/SOSPESA`** | ### **`stato`=`CHIUSA`**: ### la riga NON PORTA UN COMMIT, e chiudere pretende `chiusura.commit`: un commit NON SI INVENTA (la stessa regola del punto 1) |
-| `COMPONENTI:S3c` | `stato=CHIUSA` | *SIGILLATA con controllo positivo* | `alta` | `MISURA/FISICA/era 1/SOSPESA` → ### **`MISURA/FISICA/era 1/SOSPESA`** | ### **`stato`=`CHIUSA`**: ### la riga NON PORTA UN COMMIT, e chiudere pretende `chiusura.commit`: un commit NON SI INVENTA (la stessa regola del punto 1) |
-| `D34` | `stato=CHIUSA` | *CURATO IN CODICE* | `alta` | `CURA/FISICA/era 1/SOSPESA` → ### **`CURA/FISICA/era 1/SOSPESA`** | ### **`stato`=`CHIUSA`**: ### la riga NON PORTA UN COMMIT, e chiudere pretende `chiusura.commit`: un commit NON SI INVENTA (la stessa regola del punto 1) |
-| `S02` | `stato=SUPERATA superata_da=D31` | *PROMOSSO* | `alta` | `DIFETTO/FISICA/era 1/SOSPESA` → ### **`DIFETTO/FISICA/era 1/SOSPESA`** | ### **`stato+superata_da`=`D31`**: ### `D31` NON E- UNA DECISIONE NE- UN ASSIOMA, e lo schema la rifiuta: una voce superata deve essere superata DA UNA DECISIONE, e un difetto non decide niente |
-| `REGISTRO_FISICA:P2` | `stato=CHIUSA` | *P2 È FALLITA* | `alta` | `MISURA/FISICA/era 1/SOSPESA` → ### **`MISURA/FISICA/era 1/SOSPESA`** | ### **`stato`=`CHIUSA`**: ### la riga NON PORTA UN COMMIT, e chiudere pretende `chiusura.commit`: un commit NON SI INVENTA (la stessa regola del punto 1) |
-| `REGISTRO_FISICA:T3` | `stato=CHIUSA` | *PASS* | `alta` | `CRITERIO/METODO/era 1/SOSPESA` → ### **`CRITERIO/METODO/era 1/SOSPESA`** | ### **`stato`=`CHIUSA`**: ### la riga NON PORTA UN COMMIT, e chiudere pretende `chiusura.commit`: un commit NON SI INVENTA (la stessa regola del punto 1) |
-| `REGISTRO_FISICA:T4` | `stato=CHIUSA` | *PASS* | `alta` | `CRITERIO/METODO/era 1/SOSPESA` → ### **`CRITERIO/METODO/era 1/SOSPESA`** | ### **`stato`=`CHIUSA`**: ### la riga NON PORTA UN COMMIT, e chiudere pretende `chiusura.commit`: un commit NON SI INVENTA (la stessa regola del punto 1) |
-| `REGISTRO_FISICA:T5` | `stato=CHIUSA` | *PASS* | `alta` | `CRITERIO/METODO/era 1/SOSPESA` → ### **`CRITERIO/METODO/era 1/SOSPESA`** | ### **`stato`=`CHIUSA`**: ### la riga NON PORTA UN COMMIT, e chiudere pretende `chiusura.commit`: un commit NON SI INVENTA (la stessa regola del punto 1) |
-| `REGISTRO_FISICA:U2-5` | `stato=CHIUSA` | *PASS* | `alta` | `CRITERIO/METODO/era 1/SOSPESA` → ### **`CRITERIO/METODO/era 1/SOSPESA`** | ### **`stato`=`CHIUSA`**: ### la riga NON PORTA UN COMMIT, e chiudere pretende `chiusura.commit`: un commit NON SI INVENTA (la stessa regola del punto 1) |
-| `REGISTRO_FISICA:U2-6` | `stato=CHIUSA` | *PASS* | `alta` | `CRITERIO/METODO/era 1/SOSPESA` → ### **`CRITERIO/METODO/era 1/SOSPESA`** | ### **`stato`=`CHIUSA`**: ### la riga NON PORTA UN COMMIT, e chiudere pretende `chiusura.commit`: un commit NON SI INVENTA (la stessa regola del punto 1) |
-| `T3a` | `stato=CHIUSA` | *PASS* | `alta` | `CRITERIO/METODO/era 1/SOSPESA` → ### **`CRITERIO/METODO/era 1/SOSPESA`** | ### **`stato`=`CHIUSA`**: ### la riga NON PORTA UN COMMIT, e chiudere pretende `chiusura.commit`: un commit NON SI INVENTA (la stessa regola del punto 1) |
-| `T3b` | `stato=CHIUSA` | *PASS* | `alta` | `CRITERIO/METODO/era 1/SOSPESA` → ### **`CRITERIO/METODO/era 1/SOSPESA`** | ### **`stato`=`CHIUSA`**: ### la riga NON PORTA UN COMMIT, e chiudere pretende `chiusura.commit`: un commit NON SI INVENTA (la stessa regola del punto 1) |
-| `Z142` | `stato=CHIUSA` | *E4-LAM PASSA* | `alta` | `DIFETTO/METODO/era 1/SOSPESA` → ### **`DIFETTO/METODO/era 1/SOSPESA`** | ### **`stato`=`CHIUSA`**: ### la riga NON PORTA UN COMMIT, e chiudere pretende `chiusura.commit`: un commit NON SI INVENTA (la stessa regola del punto 1) |
-| `C5` | `stato=CHIUSA` | *C. DIAGNOSI CHIUSE* | `media` | `MISURA/FISICA/era 1/SOSPESA` → ### **`MISURA/FISICA/era 1/SOSPESA`** | ### **`stato`=`CHIUSA`**: ### la riga NON PORTA UN COMMIT, e chiudere pretende `chiusura.commit`: un commit NON SI INVENTA (la stessa regola del punto 1) |
-| `H1` | `stato=CHIUSA` | *H1 NON BASTA* | `media` | `MISURA/FISICA/era 1/SOSPESA` → ### **`MISURA/FISICA/era 1/SOSPESA`** | ### **`stato`=`CHIUSA`**: ### la riga NON PORTA UN COMMIT, e chiudere pretende `chiusura.commit`: un commit NON SI INVENTA (la stessa regola del punto 1) |
-| `H3` | `stato=CHIUSA` | *500 su 500* | `media` | `MISURA/FISICA/era 1/SOSPESA` → ### **`MISURA/FISICA/era 1/SOSPESA`** | ### **`stato`=`CHIUSA`**: ### la riga NON PORTA UN COMMIT, e chiudere pretende `chiusura.commit`: un commit NON SI INVENTA (la stessa regola del punto 1) |
-| `DE-ACCOPPIABILITA` | `stato=CHIUSA` | *superata dai fatti* | `media` | `MISURA/FISICA/era 1/SOSPESA` → ### **`MISURA/FISICA/era 1/SOSPESA`** | ### **`stato`=`CHIUSA`**: ### la riga NON PORTA UN COMMIT, e chiudere pretende `chiusura.commit`: un commit NON SI INVENTA (la stessa regola del punto 1) |
-| `REGISTRO_FISICA:P3` | `stato=CHIUSA` | *TIENE* | `media` | `MISURA/FISICA/era 1/SOSPESA` → ### **`MISURA/FISICA/era 1/SOSPESA`** | ### **`stato`=`CHIUSA`**: ### la riga NON PORTA UN COMMIT, e chiudere pretende `chiusura.commit`: un commit NON SI INVENTA (la stessa regola del punto 1) |
+| `C13` | `stato=CHIUSA` | *C. DIAGNOSI CHIUSE* | `alta` | `MISURA/FISICA/era 1/SOSPESA` → ### **`MISURA/FISICA/era 1/CHIUSA`** | ### **`stato`=`CHIUSA`**: ### la riga NON PORTA UN COMMIT, e chiudere pretende `chiusura.commit`: un commit NON SI INVENTA (la stessa regola del punto 1) |
+| `C17` | `stato=CHIUSA` | *C. DIAGNOSI CHIUSE* | `alta` | `MISURA/FISICA/era 1/SOSPESA` → ### **`MISURA/FISICA/era 1/CHIUSA`** | ### **`stato`=`CHIUSA`**: ### la riga NON PORTA UN COMMIT, e chiudere pretende `chiusura.commit`: un commit NON SI INVENTA (la stessa regola del punto 1) |
+| `C18` | `stato=CHIUSA` | *C. DIAGNOSI CHIUSE* | `alta` | `MISURA/FISICA/era 1/SOSPESA` → ### **`MISURA/FISICA/era 1/CHIUSA`** | ### **`stato`=`CHIUSA`**: ### la riga NON PORTA UN COMMIT, e chiudere pretende `chiusura.commit`: un commit NON SI INVENTA (la stessa regola del punto 1) |
+| `C22` | `stato=CHIUSA` | *C. DIAGNOSI CHIUSE* | `alta` | `MISURA/FISICA/era 1/SOSPESA` → ### **`MISURA/FISICA/era 1/CHIUSA`** | ### **`stato`=`CHIUSA`**: ### la riga NON PORTA UN COMMIT, e chiudere pretende `chiusura.commit`: un commit NON SI INVENTA (la stessa regola del punto 1) |
+| `C23` | `stato=CHIUSA` | *C. DIAGNOSI CHIUSE* | `alta` | `MISURA/FISICA/era 1/SOSPESA` → ### **`MISURA/FISICA/era 1/CHIUSA`** | ### **`stato`=`CHIUSA`**: ### la riga NON PORTA UN COMMIT, e chiudere pretende `chiusura.commit`: un commit NON SI INVENTA (la stessa regola del punto 1) |
+| `C24` | `stato=CHIUSA` | *C. DIAGNOSI CHIUSE* | `alta` | `MISURA/FISICA/era 1/SOSPESA` → ### **`MISURA/FISICA/era 1/CHIUSA`** | ### **`stato`=`CHIUSA`**: ### la riga NON PORTA UN COMMIT, e chiudere pretende `chiusura.commit`: un commit NON SI INVENTA (la stessa regola del punto 1) |
+| `C1-PEQ-ESATTO` | `stato=CHIUSA` | *✅* | `alta` | `CURA/FISICA/era 1/SOSPESA` → ### **`CURA/FISICA/era 1/CHIUSA`** | ### **`stato`=`CHIUSA`**: ### la riga NON PORTA UN COMMIT, e chiudere pretende `chiusura.commit`: un commit NON SI INVENTA (la stessa regola del punto 1) |
+| `C1BIS-ANOM-SIMM` | `stato=CHIUSA` | *✅* | `alta` | `CURA/FISICA/era 1/SOSPESA` → ### **`CURA/FISICA/era 1/CHIUSA`** | ### **`stato`=`CHIUSA`**: ### la riga NON PORTA UN COMMIT, e chiudere pretende `chiusura.commit`: un commit NON SI INVENTA (la stessa regola del punto 1) |
+| `C2-PEQ-NASCITA` | `stato=CHIUSA` | *✅* | `alta` | `CURA/FISICA/era 1/SOSPESA` → ### **`CURA/FISICA/era 1/CHIUSA`** | ### **`stato`=`CHIUSA`**: ### la riga NON PORTA UN COMMIT, e chiudere pretende `chiusura.commit`: un commit NON SI INVENTA (la stessa regola del punto 1) |
+| `C3-SCALA-MIN-PASSO` | `stato=CHIUSA` | *✅* | `alta` | `CURA/FISICA/era 1/SOSPESA` → ### **`CURA/FISICA/era 1/CHIUSA`** | ### **`stato`=`CHIUSA`**: ### la riga NON PORTA UN COMMIT, e chiudere pretende `chiusura.commit`: un commit NON SI INVENTA (la stessa regola del punto 1) |
+| `C4-COES-CAUSALE` | `stato=CHIUSA` | *✅* | `alta` | `CURA/FISICA/era 1/SOSPESA` → ### **`CURA/FISICA/era 1/CHIUSA`** | ### **`stato`=`CHIUSA`**: ### la riga NON PORTA UN COMMIT, e chiudere pretende `chiusura.commit`: un commit NON SI INVENTA (la stessa regola del punto 1) |
+| `CHK2` | `stato=CHIUSA` | *raggiunto e riferito a Luca* | `alta` | `CURA/FISICA/era 1/SOSPESA` → ### **`CURA/FISICA/era 1/CHIUSA`** | ### **`stato`=`CHIUSA`**: ### la riga NON PORTA UN COMMIT, e chiudere pretende `chiusura.commit`: un commit NON SI INVENTA (la stessa regola del punto 1) |
+| `COMPONENTI:S3b` | `stato=CHIUSA` | *SIGILLATA con controllo positivo* | `alta` | `MISURA/FISICA/era 1/SOSPESA` → ### **`MISURA/FISICA/era 1/CHIUSA`** | ### **`stato`=`CHIUSA`**: ### la riga NON PORTA UN COMMIT, e chiudere pretende `chiusura.commit`: un commit NON SI INVENTA (la stessa regola del punto 1) |
+| `COMPONENTI:S3c` | `stato=CHIUSA` | *SIGILLATA con controllo positivo* | `alta` | `MISURA/FISICA/era 1/SOSPESA` → ### **`MISURA/FISICA/era 1/CHIUSA`** | ### **`stato`=`CHIUSA`**: ### la riga NON PORTA UN COMMIT, e chiudere pretende `chiusura.commit`: un commit NON SI INVENTA (la stessa regola del punto 1) |
+| `D34` | `stato=CHIUSA` | *CURATO IN CODICE* | `alta` | `CURA/FISICA/era 1/SOSPESA` → ### **`CURA/FISICA/era 1/CHIUSA`** | ### **`stato`=`CHIUSA`**: ### la riga NON PORTA UN COMMIT, e chiudere pretende `chiusura.commit`: un commit NON SI INVENTA (la stessa regola del punto 1) |
+| `S02` | `stato=SUPERATA superata_da=D31` | *PROMOSSO* | `alta` | `DIFETTO/FISICA/era 1/SOSPESA` → ### **`DIFETTO/FISICA/era 1/SUPERATA`** | ### **`stato+superata_da`=`D31`**: ### `D31` NON E- UNA DECISIONE NE- UN ASSIOMA, e lo schema la rifiuta: una voce superata deve essere superata DA UNA DECISIONE, e un difetto non decide niente |
+| `REGISTRO_FISICA:P2` | `stato=CHIUSA` | *P2 È FALLITA* | `alta` | `MISURA/FISICA/era 1/SOSPESA` → ### **`CRITERIO/METODO/era 1/CHIUSA`** | ### **`stato`=`CHIUSA`**: ### la riga NON PORTA UN COMMIT, e chiudere pretende `chiusura.commit`: un commit NON SI INVENTA (la stessa regola del punto 1) |
+| `REGISTRO_FISICA:T3` | `stato=CHIUSA` | *PASS* | `alta` | `CRITERIO/METODO/era 1/SOSPESA` → ### **`CRITERIO/METODO/era 1/CHIUSA`** | ### **`stato`=`CHIUSA`**: ### la riga NON PORTA UN COMMIT, e chiudere pretende `chiusura.commit`: un commit NON SI INVENTA (la stessa regola del punto 1) |
+| `REGISTRO_FISICA:T4` | `stato=CHIUSA` | *PASS* | `alta` | `CRITERIO/METODO/era 1/SOSPESA` → ### **`CRITERIO/METODO/era 1/CHIUSA`** | ### **`stato`=`CHIUSA`**: ### la riga NON PORTA UN COMMIT, e chiudere pretende `chiusura.commit`: un commit NON SI INVENTA (la stessa regola del punto 1) |
+| `REGISTRO_FISICA:T5` | `stato=CHIUSA` | *PASS* | `alta` | `CRITERIO/METODO/era 1/SOSPESA` → ### **`CRITERIO/METODO/era 1/CHIUSA`** | ### **`stato`=`CHIUSA`**: ### la riga NON PORTA UN COMMIT, e chiudere pretende `chiusura.commit`: un commit NON SI INVENTA (la stessa regola del punto 1) |
+| `REGISTRO_FISICA:U2-5` | `stato=CHIUSA` | *PASS* | `alta` | `CRITERIO/METODO/era 1/SOSPESA` → ### **`CRITERIO/METODO/era 1/CHIUSA`** | ### **`stato`=`CHIUSA`**: ### la riga NON PORTA UN COMMIT, e chiudere pretende `chiusura.commit`: un commit NON SI INVENTA (la stessa regola del punto 1) |
+| `REGISTRO_FISICA:U2-6` | `stato=CHIUSA` | *PASS* | `alta` | `CRITERIO/METODO/era 1/SOSPESA` → ### **`CRITERIO/METODO/era 1/CHIUSA`** | ### **`stato`=`CHIUSA`**: ### la riga NON PORTA UN COMMIT, e chiudere pretende `chiusura.commit`: un commit NON SI INVENTA (la stessa regola del punto 1) |
+| `T3a` | `stato=CHIUSA` | *PASS* | `alta` | `CRITERIO/METODO/era 1/SOSPESA` → ### **`CRITERIO/METODO/era 1/CHIUSA`** | ### **`stato`=`CHIUSA`**: ### la riga NON PORTA UN COMMIT, e chiudere pretende `chiusura.commit`: un commit NON SI INVENTA (la stessa regola del punto 1) |
+| `T3b` | `stato=CHIUSA` | *PASS* | `alta` | `CRITERIO/METODO/era 1/SOSPESA` → ### **`CRITERIO/METODO/era 1/CHIUSA`** | ### **`stato`=`CHIUSA`**: ### la riga NON PORTA UN COMMIT, e chiudere pretende `chiusura.commit`: un commit NON SI INVENTA (la stessa regola del punto 1) |
+| `Z142` | `stato=CHIUSA` | *E4-LAM PASSA* | `alta` | `DIFETTO/METODO/era 1/SOSPESA` → ### **`DIFETTO/METODO/era 1/CHIUSA`** | ### **`stato`=`CHIUSA`**: ### la riga NON PORTA UN COMMIT, e chiudere pretende `chiusura.commit`: un commit NON SI INVENTA (la stessa regola del punto 1) |
+| `C5` | `stato=CHIUSA` | *C. DIAGNOSI CHIUSE* | `media` | `MISURA/FISICA/era 1/SOSPESA` → ### **`MISURA/FISICA/era 1/CHIUSA`** | ### **`stato`=`CHIUSA`**: ### la riga NON PORTA UN COMMIT, e chiudere pretende `chiusura.commit`: un commit NON SI INVENTA (la stessa regola del punto 1) |
+| `H1` | `stato=CHIUSA` | *H1 NON BASTA* | `media` | `MISURA/FISICA/era 1/SOSPESA` → ### **`MISURA/FISICA/era 1/CHIUSA`** | ### **`stato`=`CHIUSA`**: ### la riga NON PORTA UN COMMIT, e chiudere pretende `chiusura.commit`: un commit NON SI INVENTA (la stessa regola del punto 1) |
+| `H3` | `stato=CHIUSA` | *500 su 500* | `media` | `MISURA/FISICA/era 1/SOSPESA` → ### **`MISURA/FISICA/era 1/CHIUSA`** | ### **`stato`=`CHIUSA`**: ### la riga NON PORTA UN COMMIT, e chiudere pretende `chiusura.commit`: un commit NON SI INVENTA (la stessa regola del punto 1) |
+| `DE-ACCOPPIABILITA` | `stato=CHIUSA` | *superata dai fatti* | `media` | `MISURA/FISICA/era 1/SOSPESA` → ### **`MISURA/FISICA/era 1/CHIUSA`** | ### **`stato`=`CHIUSA`**: ### la riga NON PORTA UN COMMIT, e chiudere pretende `chiusura.commit`: un commit NON SI INVENTA (la stessa regola del punto 1) |
+| `REGISTRO_FISICA:P3` | `stato=CHIUSA` | *TIENE* | `media` | `MISURA/FISICA/era 1/SOSPESA` → ### **`CRITERIO/METODO/era 1/CHIUSA`** | ### **`stato`=`CHIUSA`**: ### la riga NON PORTA UN COMMIT, e chiudere pretende `chiusura.commit`: un commit NON SI INVENTA (la stessa regola del punto 1) |
 | `Z50` | `classe=MISURA` | *NON E' UNA Y* | `media` | `DIFETTO/FISICA/era 1/SOSPESA` → ### **`DIFETTO/FISICA/era 1/SOSPESA`** | ### **`classe`=`MISURA`**: ### LA REGOLA DELLA CLASSE DA- `DIFETTO`, NON `MISURA`: la riga CONTRADDICE il cambio (la riga dice <<DIFETTO MIO>> (la PRIMA che compare): O, un seme) / E PRIMA DEL RISULTATO, UN DIFETTO MIO, trovato perche) |
 | `Z54` | `classe=CURA` | *Sigillo 12/12* | `media` | `MISURA/INFRASTRUTTURA/era 1/CHIUSA` → ### **`MISURA/INFRASTRUTTURA/era 1/CHIUSA`** | ### **`classe`=`CURA`**: ### LA REGOLA DELLA CLASSE DA- `MISURA`, NON `CURA`: la riga CONTRADDICE il cambio (la riga dice <<CHIUSA PER MISURA>> (la PRIMA che compare): ampi: l'archivio non tocca la fisica. / CHIUSA per MISURA. To) |
 | `Z86` | `classe=DIFETTO` | *ERA SBAGLIATO* | `media` | `MISURA/METODO/era 1/CHIUSA` → ### **`MISURA/METODO/era 1/CHIUSA`** | ### **`classe`=`DIFETTO`**: ### LA REGOLA DELLA CLASSE DA- `MISURA`, NON `DIFETTO`: la riga CONTRADDICE il cambio (la riga dice <<un esito misurato>> (la PRIMA che compare): f884eff0 sul simulatore 43972024, esito 7/9; doc/REFERTO_sigi) |
 | `Z145` | `classe=DIFETTO` | *era invalido* | `media` | `MISURA/METODO/era 1/CHIUSA` → ### **`MISURA/METODO/era 1/CHIUSA`** | ### **`classe`=`DIFETTO`**: ### LA REGOLA DELLA CLASSE DA- `MISURA`, NON `DIFETTO`: la riga CONTRADDICE il cambio (la riga dice <<un esito misurato>> (la PRIMA che compare): ubprocess, ingresso --braccio. Collaudo 8/8, con K7/K8 che pr) |
-| `L-SOGLIA` | `stato=CHIUSA` | *fusa dentro* | `media` | `STANDARD/METODO/era ENTRAMBE/APERTA` → ### **`STANDARD/METODO/era ENTRAMBE/APERTA`** | ### **`stato`=`CHIUSA`**: ### la riga NON PORTA UN COMMIT, e chiudere pretende `chiusura.commit`: un commit NON SI INVENTA (la stessa regola del punto 1) |
-| `STANDARD-4` | `stato=CHIUSA` | *fusa dentro* | `media` | `STANDARD/METODO/era ENTRAMBE/APERTA` → ### **`STANDARD/METODO/era ENTRAMBE/APERTA`** | ### **`stato`=`CHIUSA`**: ### la riga NON PORTA UN COMMIT, e chiudere pretende `chiusura.commit`: un commit NON SI INVENTA (la stessa regola del punto 1) |
+| `L-SOGLIA` | `stato=CHIUSA` | *fusa dentro* | `media` | `STANDARD/METODO/era ENTRAMBE/APERTA` → ### **`STANDARD/METODO/era ENTRAMBE/SUPERATA`** | ### **`stato`=`CHIUSA`**: ### la riga NON PORTA UN COMMIT, e chiudere pretende `chiusura.commit`: un commit NON SI INVENTA (la stessa regola del punto 1) |
+| `STANDARD-4` | `stato=CHIUSA` | *fusa dentro* | `media` | `STANDARD/METODO/era ENTRAMBE/APERTA` → ### **`STANDARD/METODO/era ENTRAMBE/CHIUSA`** | ### **`stato`=`CHIUSA`**: ### la riga NON PORTA UN COMMIT, e chiudere pretende `chiusura.commit`: un commit NON SI INVENTA (la stessa regola del punto 1) |
 | `SCHED-T3-REGOLE` | `dominio=FISICA` | *Le eccezioni sono ZERO* | `media` | `MISURA/DOCUMENTAZIONE/era ENTRAMBE/APERTA` → ### **`MISURA/DOCUMENTAZIONE/era ENTRAMBE/APERTA`** | ### **`dominio`=`FISICA`**: ### la citazione si trova in `T4` -- la SEZIONE, o il FILE -- non nella voce ne- nella sua riga, e per `dominio` la regola del punto 1 non ha una lettura: una sezione contiene anche le voci vicine |
 | `D11` | `classe=DIFETTO` | *CURATO* | `media` | `MISURA/FISICA/era 1/CHIUSA` → ### **`MISURA/FISICA/era 1/CHIUSA`** | ### **`classe`=`DIFETTO`**: ### LA REGOLA DELLA CLASSE DA- `MISURA`, NON `DIFETTO`: la riga CONTRADDICE il cambio (la riga dice <<un esito misurato>> (la PRIMA che compare): i sotto LAM sono ZERO, con min(d)/LAM = 1.000000 esatto (Z148) |
 | `D17` | `classe=DIFETTO` | *CURATO* | `media` | `MISURA/FISICA/era 1/CHIUSA` → ### **`MISURA/FISICA/era 1/CHIUSA`** | ### **`classe`=`DIFETTO`**: ### LA REGOLA DELLA CLASSE DA- `MISURA`, NON `DIFETTO`: la riga CONTRADDICE il cambio (la riga dice <<un esito misurato>> (la PRIMA che compare): x(peq, 1e-9) NE RIBALTAVA IL SEGNO (da -3.72 a +1.8e+06) / Z9) |
@@ -232,7 +232,7 @@
 | `C11` | `classe=CURA` | *CURATO* | `media` | `MISURA/FISICA/era 1/CHIUSA` → ### **`MISURA/FISICA/era 1/CHIUSA`** | ### **`classe`=`CURA`**: ### LA REGOLA DELLA CLASSE DA- `MISURA`, NON `CURA`: la riga CONTRADDICE il cambio (la riga dice <<un esito misurato>> (la PRIMA che compare): sa convenzione / guardia 4π fallita nel 95.33 % (143/150), co) |
 | `D04` | `dominio=INFRASTRUTTURA` | *invisibile alla traccia* | `media` | `DIFETTO/FISICA/era 1/SOSPESA` → ### **`DIFETTO/FISICA/era 1/SOSPESA`** | ### **`dominio`=`INFRASTRUTTURA`**: ### la citazione si trova in `T4` -- la SEZIONE, o il FILE -- non nella voce ne- nella sua riga, e per `dominio` la regola del punto 1 non ha una lettura: una sezione contiene anche le voci vicine |
 | `CENS-A1` | `dominio=DOCUMENTAZIONE` | *dichiarata e FALSA* | `media` | `DIFETTO/FISICA/era 1/SOSPESA` → ### **`DIFETTO/FISICA/era 1/SOSPESA`** | ### **`dominio`=`DOCUMENTAZIONE`**: ### la citazione si trova in `T4` -- la SEZIONE, o il FILE -- non nella voce ne- nella sua riga, e per `dominio` la regola del punto 1 non ha una lettura: una sezione contiene anche le voci vicine |
-| `MITOSI-2LAM-ACCESO` | `stato=CHIUSA` | *ANNOTAZIONE DEL 2026-10-02* | `media` | `DIFETTO/DOCUMENTAZIONE/era 1/SOSPESA` → ### **`DIFETTO/DOCUMENTAZIONE/era 1/SOSPESA`** | ### **`stato`=`CHIUSA`**: ### la riga NON PORTA UN COMMIT, e chiudere pretende `chiusura.commit`: un commit NON SI INVENTA (la stessa regola del punto 1) |
+| `MITOSI-2LAM-ACCESO` | `stato=CHIUSA` | *ANNOTAZIONE DEL 2026-10-02* | `media` | `DIFETTO/DOCUMENTAZIONE/era 1/SOSPESA` → ### **`DIFETTO/DOCUMENTAZIONE/era 1/CHIUSA`** | ### **`stato`=`CHIUSA`**: ### la riga NON PORTA UN COMMIT, e chiudere pretende `chiusura.commit`: un commit NON SI INVENTA (la stessa regola del punto 1) |
 
 ### **LE `19` NON APPLICATE**
 
@@ -269,23 +269,12 @@
 | | gli ID |
 |---|---|
 | §`11`, ### **le regole di lavoro** *(`8`)* | `P1` · `P2` · `P1-quater` · `L-PATCH` · `L-NUMERI` · `L-UN-PROMPT` · `L-STELLA` · `L-DOPO-STOP` |
-| §`12`, ### **i cablati** *(`12`)* | `H-P3` · `H-P5` · `H-P7` · `H-P8` · `H-VALIDATORE` · `H-RIGHE` · `H-P1-bis` · `H-REG-R` · `H-INDICE` · `H-FILE` · `H-NON-TRACCIATI` · `H-STASH` |
+| §`12`, ### **i cablati** *(`14`)* | `H-P3` · `H-P5` · `H-P7` · `H-P8` · `H-VALIDATORE` · `H-RIGHE` · `H-P1-bis` · `H-REG-R` · `H-INDICE` · `H-FILE` · `H-NON-TRACCIATI` · `H-FISICA-FUORI-LISTA` · `H-ID-OBBLIGATORIO` · `H-STASH` |
 
 | id | prima | dopo | perche' |
 |---|---|---|---|
-| `P1` | `PRESIDIO`/`APERTA` | ### **`STANDARD`/`APERTA`** | una ### **regola scritta NON IMPEDISCE NIENTE** *(`A9`)*: e- uno `STANDARD`, e `PRESIDIO` e- ### **solo cio- che e- CABLATO** |
-| `P2` | `PRESIDIO`/`APERTA` | ### **`STANDARD`/`APERTA`** | una ### **regola scritta NON IMPEDISCE NIENTE** *(`A9`)*: e- uno `STANDARD`, e `PRESIDIO` e- ### **solo cio- che e- CABLATO** |
-| `P1-quater` | `PRESIDIO`/`APERTA` | ### **`STANDARD`/`APERTA`** | una ### **regola scritta NON IMPEDISCE NIENTE** *(`A9`)*: e- uno `STANDARD`, e `PRESIDIO` e- ### **solo cio- che e- CABLATO** |
-| `L-PATCH` | `PRESIDIO`/`APERTA` | ### **`STANDARD`/`APERTA`** | una ### **regola scritta NON IMPEDISCE NIENTE** *(`A9`)*: e- uno `STANDARD`, e `PRESIDIO` e- ### **solo cio- che e- CABLATO** |
-| `L-NUMERI` | `PRESIDIO`/`APERTA` | ### **`STANDARD`/`APERTA`** | una ### **regola scritta NON IMPEDISCE NIENTE** *(`A9`)*: e- uno `STANDARD`, e `PRESIDIO` e- ### **solo cio- che e- CABLATO** |
-| `L-UN-PROMPT` | `PRESIDIO`/`APERTA` | ### **`STANDARD`/`APERTA`** | una ### **regola scritta NON IMPEDISCE NIENTE** *(`A9`)*: e- uno `STANDARD`, e `PRESIDIO` e- ### **solo cio- che e- CABLATO** |
-| `L-STELLA` | `PRESIDIO`/`APERTA` | ### **`STANDARD`/`APERTA`** | una ### **regola scritta NON IMPEDISCE NIENTE** *(`A9`)*: e- uno `STANDARD`, e `PRESIDIO` e- ### **solo cio- che e- CABLATO** |
-| `L-DOPO-STOP` | `PRESIDIO`/`APERTA` | ### **`STANDARD`/`APERTA`** | una ### **regola scritta NON IMPEDISCE NIENTE** *(`A9`)*: e- uno `STANDARD`, e `PRESIDIO` e- ### **solo cio- che e- CABLATO** |
-| `H-FILE` | `PRESIDIO`/`CHIUSA` | ### **`PRESIDIO`/`APERTA`** | e- ### **CABLATO** *(§`12`)*, quindi `PRESIDIO`; e un hook ### **IN VIGORE e- `APERTA`** — ### **una regola non si «finisce»: VALE** |
-| `H-NON-TRACCIATI` | `PRESIDIO`/`CHIUSA` | ### **`PRESIDIO`/`APERTA`** | e- ### **CABLATO** *(§`12`)*, quindi `PRESIDIO`; e un hook ### **IN VIGORE e- `APERTA`** — ### **una regola non si «finisce»: VALE** |
-| `H-STASH` | `PRESIDIO`/`CHIUSA` | ### **`PRESIDIO`/`APERTA`** | e- ### **CABLATO** *(§`12`)*, quindi `PRESIDIO`; e un hook ### **IN VIGORE e- `APERTA`** — ### **una regola non si «finisce»: VALE** |
 
-### ✔ **E `9` erano GIA- a posto:** `H-P3` · `H-P5` · `H-P7` · `H-P8` · `H-VALIDATORE` · `H-RIGHE` · `H-P1-bis` · `H-REG-R` · `H-INDICE`.
+### ✔ **E `22` erano GIA- a posto:** `P1` · `P2` · `P1-quater` · `L-PATCH` · `L-NUMERI` · `L-UN-PROMPT` · `L-STELLA` · `L-DOPO-STOP` · `H-P3` · `H-P5` · `H-P7` · `H-P8` · `H-VALIDATORE` · `H-RIGHE` · `H-P1-bis` · `H-REG-R` · `H-INDICE` · `H-FILE` · `H-NON-TRACCIATI` · `H-FISICA-FUORI-LISTA` · `H-ID-OBBLIGATORIO` · `H-STASH`.
 
 ---
 
@@ -293,7 +282,7 @@
 
 | | |
 |---|---|
-| la nota di `G1` | *«correzione v3 blocco G2: FISICA/era 1/SOSPESA -- <<Ldisegno/d per arco>> e' una MISURA SULL'ERA 1. Omissione del guardiano dal blocco A, dove le altre 14 voci della lista 2 sono passate all'era 1»* |
+| la nota di `G1` | *«»* |
 | la voce oggi | `MISURA`/`FISICA`/era `1`/### **`CHIUSA`** |
 | perche' `F6` NON la trovava | ### **due ragioni**: la nota non nomina *«la lista `N` del guardiano»*, e dice *«correzione»* — che era escluso come ### **informativo** |
 | l'estensione | una nota che scrive ### **la forma esatta `DOMINIO/era N/STATO`** fa ### **un'ASSERZIONE**, e se la voce si e- mossa ### **la nota e- SCADUTA** |
@@ -327,62 +316,62 @@
 
 | `classe` | prima | dopo | |
 |---|--:|--:|---|
-| DIFETTO | `200` | `207` | ### **+7** |
+| DIFETTO | `200` | `187` | ### **-13** |
 | NON_DEFINITA | `187` | `187` |  |
-| MISURA | `141` | `155` | ### **+14** |
-| CRITERIO | `90` | `90` |  |
-| FRONTE | `109` | `87` | ### **-22** |
-| CURA | `56` | `55` | ### **-1** |
-| STANDARD | `29` | `38` | ### **+9** |
-| PRESIDIO | `34` | `27` | ### **-7** |
+| MISURA | `141` | `146` | ### **+5** |
+| FRONTE | `109` | `109` |  |
+| CRITERIO | `90` | `96` | ### **+6** |
+| CURA | `56` | `56` |  |
+| STANDARD | `29` | `42` | ### **+13** |
+| PRESIDIO | `34` | `25` | ### **-9** |
 
 | `dominio` | prima | dopo | |
 |---|--:|--:|---|
-| FISICA | `383` | `372` | ### **-11** |
-| METODO | `198` | `205` | ### **+7** |
+| FISICA | `383` | `377` | ### **-6** |
+| METODO | `198` | `216` | ### **+18** |
 | DA_CLASSIFICARE | `187` | `187` |  |
-| INFRASTRUTTURA | `49` | `53` | ### **+4** |
-| DOCUMENTAZIONE | `29` | `29` |  |
+| INFRASTRUTTURA | `49` | `52` | ### **+3** |
+| DOCUMENTAZIONE | `29` | `16` | ### **-13** |
 
 | `era` | prima | dopo | |
 |---|--:|--:|---|
-| 1 | `538` | `537` | ### **-1** |
+| 1 | `538` | `539` | ### **+1** |
 | DA_CLASSIFICARE | `188` | `188` |  |
 | ENTRAMBE | `96` | `97` | ### **+1** |
 | 2 | `24` | `24` |  |
 
 | `stato` | prima | dopo | |
 |---|--:|--:|---|
-| SOSPESA | `369` | `374` | ### **+5** |
+| SOSPESA | `369` | `325` | ### **-44** |
+| CHIUSA | `182` | `221` | ### **+39** |
 | DA_CLASSIFICARE | `188` | `188` |  |
-| CHIUSA | `182` | `169` | ### **-13** |
-| APERTA | `82` | `90` | ### **+8** |
+| APERTA | `82` | `86` | ### **+4** |
 | AGENDA | `24` | `24` |  |
-| SUPERATA | `1` | `1` |  |
+| SUPERATA | `1` | `4` | ### **+3** |
 
 | | prima | dopo |
 |---|--:|--:|
-| voci | `846` | ### **`846`** |
+| voci | `846` | ### **`848`** |
 | ### **ID vecchi conservati** | `953` | ### **`953`** *(`0` persi, `0` doppi)* |
-| ### **righe di storico** | `1628` | ### **`1764`** |
+| ### **righe di storico** | `1628` | ### **`1903`** |
 
 | presidio | segnali | |
 |---|--:|---|
 | `F1` | ### **`8`** |  |
 | `F2` | `0` |  |
-| `F3` | `0` |  |
+| `F3` | ### **`1`** |  |
 | `F4` | `0` |  |
 | `F6` | ### **`2`** | ### **`G1`** e `POTATURA-GUARDIE` |
 | `F8` | ### **`20`** |  |
 | `F7` `F9` `F10` | ### **`0`** | ### **sono ERRORI: se non fossero zero, `valida` non passerebbe** |
-| ### **in tutto** | ### **`30`** | ### **si elencano, non si correggono** |
+| ### **in tutto** | ### **`31`** | ### **si elencano, non si correggono** |
 
 ### **I SEGNALI CHE RESTANO, voce per voce**
 
 | `F1` | il segnale |
 |---|---|
 | `D05` | il titolo cita `C5`, che e- `FISICA`/era `1`, mentre questa e- `INFRASTRUTTURA`/era `1` |
-| `D06` | il titolo cita `Z7`, che e- `INFRASTRUTTURA`/era `1`/`SOSPESA`, mentre questa e- `FISICA`/era `1`/`SOSPESA` |
+| `D06` | il titolo cita `Z7`, che e- `INFRASTRUTTURA`/era `1`/`CHIUSA`, mentre questa e- `FISICA`/era `1`/`SOSPESA` |
 | `D08` | il titolo cita `Z14`, che e- `FISICA`/era `1`/`CHIUSA`, mentre questa e- `FISICA`/era `1`/`SOSPESA` |
 | `D14` | il titolo cita `Z41`, che e- `FISICA`/era `1`/`CHIUSA`, mentre questa e- `FISICA`/era `1`/`SOSPESA` |
 | `D18` | il titolo cita `Z92`, che e- `FISICA`/era `1`/`SOSPESA`, mentre questa e- `FISICA`/era `1`/`CHIUSA` |
@@ -392,8 +381,8 @@
 
 | `F6` | il segnale |
 |---|---|
-| `G1` | la nota DICHIARA una tripla `dominio/era/stato` e la voce non e- piu- quella: la nota dichiara `SOSPESA`, la voce e- `CHIUSA` |
 | `POTATURA-GUARDIE` | la nota nomina la lista `3` del guardiano e la voce NON e- piu- cio- che quella lista diceva: la lista diceva `FISICA`, la voce e- `INFRASTRUTTURA` |
+| `REGISTRO_FISICA:U2-6` | la nota DICHIARA una tripla `dominio/era/stato` e la voce non e- piu- quella: la nota dichiara `SOSPESA`, la voce e- `CHIUSA` |
 
 | `F8` | il segnale |
 |---|---|
@@ -404,19 +393,19 @@
 | `CONTA-RIGHE` | era `ENTRAMBE` ma nomina un oggetto dell-era 1: un file `.py` del repo (<<_struttura_regole.py>>) |
 | `FINESTRA-PRE-NASCITA` | era `ENTRAMBE` ma nomina un oggetto dell-era 1: una funzione o una variabile del simulatore (<<perc_geom>>) |
 | `H-FILE` | era `ENTRAMBE` ma nomina un oggetto dell-era 1: un flag `--...` (<<--cached>>); un file `.py` del repo (<<_hook_file_cambiati.py>>) |
+| `H-FISICA-FUORI-LISTA` | era `ENTRAMBE` ma nomina un oggetto dell-era 1: un file `.py` del repo (<<_file_fisica.py>>) |
+| `H-ID-OBBLIGATORIO` | era `ENTRAMBE` ma nomina un oggetto dell-era 1: un flag `--...` (<<--collaudo>>); un file `.py` del repo (<<_file_fisica.py>>) |
 | `H-P9` | era `ENTRAMBE` ma nomina un oggetto dell-era 1: una funzione o una variabile del simulatore (<<net.step>>) |
 | `INDICE-COLLAUDO-SCRITTURA` | era `ENTRAMBE` ma nomina un oggetto dell-era 1: un file `.py` del repo (<<indice.py>>) |
 | `NON-TRACCIATI` | era `ENTRAMBE` ma nomina un oggetto dell-era 1: un `.pkl` (<<.pkl>>); un file `.py` del repo (<<_censimento_non_tracciati.py>>) |
 | `PASSO-PIENO` | era `ENTRAMBE` ma nomina un oggetto dell-era 1: una funzione o una variabile del simulatore (<<net.step>>); un file `.py` del repo (<<_passo.py>>) |
 | `PIATTAFORMA-NON-TIMBRATA` | era `ENTRAMBE` ma nomina un oggetto dell-era 1: uno script di csv/_test_fork o csv/_seal_fork (<<csv/_test_fork>>); un file `.py` del repo (<<_confronto_blob_misure.py>>) |
 | `PRESIDIO-RIFIUTO-SOLO-SIGILLI` | era `ENTRAMBE` ma nomina un oggetto dell-era 1: uno script di csv/_test_fork o csv/_seal_fork (<<csv/_test_fork>>); un file `.py` del repo (<<_presidio.py>>) |
-| `REG-B` | era `ENTRAMBE` ma nomina un oggetto dell-era 1: una funzione o una variabile del simulatore (<<mitosi>>) |
 | `REG-R` | era `ENTRAMBE` ma nomina un oggetto dell-era 1: un file `.py` del repo (<<soliton_simulator.py>>) |
 | `REG-V` | era `ENTRAMBE` ma nomina un oggetto dell-era 1: un file `.py` del repo (<<verificaregistro.py>>) |
 | `REPERTI-IMMUTABILI` | era `ENTRAMBE` ma nomina un oggetto dell-era 1: uno script di csv/_test_fork o csv/_seal_fork (<<csv/_seal_fork>>); un file `.py` del repo (<<_sim_A.py>>) |
 | `RIPRESA-ARGV` | era `ENTRAMBE` ma nomina un oggetto dell-era 1: il sigillo di una cura (<<sigillo della cura>>) |
 | `Z125` | era `ENTRAMBE` ma nomina un oggetto dell-era 1: una funzione o una variabile del simulatore (<<mitosi>>) |
-| `Z22` | era `ENTRAMBE` ma nomina un oggetto dell-era 1: un file `.py` del repo (<<_esperimento_spin_feedback.py>>) |
 
 ---
 
