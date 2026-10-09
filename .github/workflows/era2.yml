@@ -80,6 +80,9 @@ jobs:
           python primo_ordine/_genera.py
           git diff --exit-code -- primo_ordine doc/leggi_era2
 
+      - name: "### IL MODELLO DI SIGILLO -- i quattro bracci del rito (punto 7)"
+        run: python primo_ordine/sigilli/_modello.py
+
       - name: "### `P-MOD` -- la modularita- non si degrada"
         run: |
           python csv/_modularita_era2.py

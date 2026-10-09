@@ -61,6 +61,10 @@ FILE_FISICA = (
     # ### e un import fuori mappa, un ciclo o un modulo non in mappa
     # ### ### **fa rifiutare il commit.**
     'primo_ordine/_mappa.yaml',
+    # ### IL MODELLO DI SIGILLO *(punti `7` e `12(c)`)*: dichiara
+    # ### ### **`LEGGE` e `CRITERI`**, e `P-E9` lo verifica via AST.
+    'primo_ordine/sigilli/__init__.py',
+    'primo_ordine/sigilli/_modello.py',
     # ### ⚠ **IL COLLAUDO DELLA CATENA STA SOTTO `primo_ordine/`**, quindi
     # ### la lista lo deve nominare. ### ⛔ **Ma NON e- in `FISICA` di
     # ### `P-E4`**: il cono si misura sulla NORMA, e la norma e- un osservatore

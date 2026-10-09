@@ -223,10 +223,9 @@ METODI = {
                   "tre volte sull-apostrofo, e i patch script si scrivono con lo strumento "
                   "di scrittura",
                   "ogni patch script di questo mandato", "PORTATO"),
-    "P1-sexies": ("un criterio si collauda su un caso a risposta nota, e il caso che DEVE "
-                  "fallire e- il piu- importante: i SEI casi del mandato girano in un solo "
-                  "posto, ognuno verificato PER LA CHIAVE GIUSTA",
-                  "`_collauda_passo.py` sezione (F)", "PORTATO"),
+    "P1-sexies": (
+        'un criterio si collauda su un caso a risposta nota, e il caso che DEVE fallire e- il piu- importante. ### CABLATO DUE VOLTE: i sei casi di `_collauda_passo.py`, e ORA `P-E9` che RIFIUTA un sigillo senza il criterio `deve-fallire`',
+        '`_collauda_passo.py` sezione (F) + `csv/_presidi_era2.py::pe9`', "PORTATO"),
     "P2": ("prima di escludere un flag: forza o corregge? ### L-era 2 non ha flag di "
            "fisica, e il punto 15(c) dice che non ne avra-",
            "nessun sito", "NON_SI_APPLICA"),
@@ -279,9 +278,9 @@ METODI = {
                           "gradino (a) e SOLO quello, dichiarato nella stella polare -- "
                           "non (b) e non (c), perche- le leggi sono di prova",
                           "il task history, sezione LA STELLA POLARE", "PORTATO"),
-    "STANDARD-4": ("snapshot contro snapshot allo stesso istante: ### IL PUNTO 7 lo "
-                   "porta nel modello di sigillo dell-era 2",
-                   "punto 7, da fare", "DA_PORTARE"),
+    "STANDARD-4": (
+        'snapshot contro snapshot allo stesso istante. ### PORTATO nel modello di sigillo (punto 7): i bracci partono dallo STESSO SEME e fanno lo STESSO numero di passi, e il confronto e- AL BYTE. ### E il <<prima>> NON E- PIU- UNA COPIA PATCHATA: si ottiene mettendo a ZERO il coefficiente, quindi il braccio zero e- byte-identico PER COSTRUZIONE',
+        '`primo_ordine/sigilli/_modello.py`', "PORTATO"),
     "STANDARD-6": ("ogni difetto acclarato si registra SUBITO: i difetti di questo "
                    "mandato sono nei commit e nella relazione. ### MA DUE NON HANNO UNA "
                    "VOCE: il buco di `H-FISICA-FUORI-LISTA` e la dipendenza del cono "
@@ -568,6 +567,9 @@ METODI['P-MOD'] = (
 # ### `DECISIONE`, che ### **non e- nel perimetro dei METODI** *(`STANDARD` e
 # ### `PRESIDIO`)*. ### ⭐ **Una domanda a Luca NON E- UN METODO**, e il posto
 # ### dove vive e- ### **`DA_DECIDERE_LUCA.md`**, che la raccoglie ### **da se-.**
+METODI['P-E9'] = (
+    'NATO NELL-ERA 2: ogni sigillo dichiara `LEGGE` e `CRITERI`, letti VIA AST, e il criterio `deve-fallire` e- OBBLIGATORIO. ### Un sigillo che DICE di avere criteri senza averli e- PEGGIO di uno senza criteri: il primo SEMBRA FATTO',
+    '`csv/_presidi_era2.py::pe9`, `pre-commit` + CI', "PORTATO")
 METODI['VELENO-ARCHI-KEEP'] = (
     'il veleno allunga le derivate d-arco e non applica `keep`. ### IL PUNTO 4 E- VERO E VUOTO, e il collaudo lo MISURA: zero derivati, perche- lo stato e- solo `psi`. ### E la garanzia arriva dall-altro lato -- `senza_cache` rifiuta una memoria non dichiarata (`A8b`) -- quindi non c-e- IL BERSAGLIO',
     '`_collauda_passo.py` sezione (I); il braccio FALLIRA- al primo derivato', "PORTATO")

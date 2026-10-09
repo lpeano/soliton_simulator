@@ -11542,3 +11542,24 @@ Luca ha autorizzato esattamente questo: *«se serve una decisione di Luca, la re
 ### ⛔ **E `P-M1` MI HA CORRETTO SUBITO:** avevo dato una riga nei METODI anche alle due `DEC-*`, e ### **le ha rifiutate come ORFANE** — ### **giustamente**: sono di classe `DECISIONE`, che ### **non e- nel perimetro dei metodi.** ### **Una domanda a Luca NON E- UN METODO**, e il posto dove vive e- `DA_DECIDERE_LUCA.md`, che la raccoglie ### **da se-.**
 
 **Collaudi:** la catena va a ### **`46`/`46`** *(da `43`)*, `P-MOD` ### **`10`/`10`**, `P-M1` `8`/`8`. I metodi: ### **`PORTATO=86`**, `DA_PORTARE=19`.
+
+## PUNTI `7` e `12(c)` — ### **IL MODELLO DI SIGILLO, e il RITO ADATTATO cambia UNA cosa** *(2026-10-10)*
+
+### ⭐ **E QUELLA UNA COSA E- LA PIU- IMPORTANTE.** Nell-era `1` il *«prima»* di un sigillo era ### **una COPIA del simulatore patchata a mano** — `13k` righe, estratte dal padre del commit, e ### **tre di quelle copie le ho committate per sbaglio due giorni fa.** ### ✅ **Nell-era `2` il *«prima»* si ottiene METTENDO A ZERO IL COEFFICIENTE e RIGENERANDO:** nessuna copia, nessuna patch, e ### **il braccio zero e- byte-identico PER COSTRUZIONE, non per fortuna.**
+
+| il braccio | che cosa prova | misurato |
+|---|---|---|
+| **`zero`** | `g = 0` da- uno stato ### **BYTE-IDENTICO** a quello ### **senza la legge** | ### ✅ **identico** |
+| **`deve-fallire`** | con `g != 0` i byte ### **DEVONO** differire | ### ✅ **differiscono** *(firme `01065898a4838944` e `faf3935903c49d18`)* |
+| **`positivo`** | l-energia della legge ### **PUO-** essere diversa da zero | `23.766838` — ### **quindi lo zero di sopra non e- un `FALSO-ZERO`** |
+| **`limite`** | l-energia tende a `0` ### **come `g`** | il rapporto `energia/g` varia di ### **`1.49e-16` su tre decadi**: la legge e- ### **lineare in `g`**, come la sua forma dice |
+
+### ⚠ **E IL MODELLO DICHIARA CIO- CHE NON PROVA**, che e- la parte che mi interessa: mette `g` ### **sul modulo gia- caricato**, non nella tabella. E- ### **la stessa aritmetica** *(il modulo legge `PARAMETRI[k]` a ogni chiamata)* ### **ma non passa dal generatore** — quindi ### **NON prova che la TABELLA sia la fonte.** ### ✅ **Quello lo prova `P-E2`**, che confronta l-impronta del generato con la riga di tabella ### **e gira a ogni commit.**
+
+### `12(c)` ### **`P-E9`: ogni sigillo dichiara `LEGGE` e `CRITERI`**
+
+Letti ### **via AST**, come `LEGGE` nei generati: ### **una regex li troverebbe anche in un commento**, e ### ⛔ **un sigillo che DICE di avere criteri senza averli e- PEGGIO di uno senza criteri** — perche- il primo ### **sembra fatto.**
+
+### ✅ **E DUE PRETESE IN PIU-, che il mandato non chiedeva per nome ma che il rito implica:** un criterio deve essere ### **`(che cosa, LA LETTURA)`** — ### **un criterio senza la lettura non e- un criterio: e- un-intenzione** — e il criterio ### **`deve-fallire` e- OBBLIGATORIO**, perche- `P1-sexies` dice che e- ### **il piu- importante.**
+
+**Collaudi:** i presidi dell-era `2` vanno a ### **`22`/`22`** *(da `16`)*, il sigillo ### **`4`/`4`**, `P-MOD` `10`/`10` *(`22` moduli in mappa)*. I metodi: ### **`PORTATO=88`**, `DA_PORTARE=18`.

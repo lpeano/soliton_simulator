@@ -67,6 +67,7 @@ PRESIDI = {
     "P-E6": "pe6",
     "P-E7": "pe7",
     "P-E8": ".github/workflows/era2.yml",
+    "P-E9": "pe9",
 }
 
 SCHEDE = os.path.join(RADICE, "doc", "leggi_era2")
@@ -302,7 +303,8 @@ def tutti(verboso=True):
     reg_l, reg_v = _registri()
     gen = _generati()
     err = (pe1(leggi, gen, reg_l) + pe2(leggi, gen, varia)
-           + pe3(varia, reg_v) + pe4() + pe7(reg_l, reg_v, leggi, varia))
+           + pe3(varia, reg_v) + pe4() + pe7(reg_l, reg_v, leggi, varia)
+           + pe9(leggi, verboso=False))
     if verboso:
         print("  la tabella: %d leggi, %d variabili   |   i generati: %d   |   "
               "i registri: %d + %d" % (len(leggi), len(varia), len(gen),
@@ -311,7 +313,7 @@ def tutti(verboso=True):
             for e in err[:14]:
                 print("   ### %s" % e)
         else:
-            print("  ### P-E1, P-E2, P-E3, P-E4, P-E7: TUTTO A POSTO")
+            print("  ### P-E1, P-E2, P-E3, P-E4, P-E7, P-E9: TUTTO A POSTO")
     return err
 
 
@@ -352,6 +354,57 @@ def pe5(verboso=True):
               % (len(files), "si-" if not err else "### NO"))
     return err
 
+
+# =====================================================================================
+#   P-E9 -- OGNI SIGILLO DICHIARA `LEGGE` E `CRITERI`  (punto `12(c)`)
+# -------------------------------------------------------------------------------------
+#   ### ⛔ **Letti VIA AST**, come `LEGGE` nei generati: ### **una regex li
+#   ### troverebbe anche in un commento**, e un sigillo ### **che DICE di avere criteri
+#   ### senza averli e- PEGGIO di un sigillo senza criteri** -- perche- il primo
+#   ### ### **sembra fatto.**
+#   ### ⭐ **E I `CRITERI` SI FISSANO PRIMA:** e- la regola del rito, e qui
+#   ### ### **diventa una STRUTTURA** invece di una frase nel task history.
+# =====================================================================================
+SIGILLI = os.path.join(PO, "sigilli")
+
+
+def pe9(leggi, verboso=True):
+    """### `P-E9`: ogni sigillo dichiara ### **`LEGGE` e `CRITERI`**, via AST."""
+    err = []
+    if not os.path.isdir(SIGILLI):
+        return err
+    idv = {x["id"] for x in leggi}
+    quanti = 0
+    for f in sorted(os.listdir(SIGILLI)):
+        if not f.endswith(".py") or f == "__init__.py":
+            continue
+        quanti += 1
+        d = _costanti(os.path.join(SIGILLI, f))
+        if not isinstance(d.get("LEGGE"), str) or not d["LEGGE"].strip():
+            err.append("`P-E9` `sigilli/%s`: NON dichiara `LEGGE`. ### Un sigillo che "
+                       "non dice CHE COSA sigilla non si puo- rigirare al suo commit"
+                       % f)
+        elif d["LEGGE"] not in idv:
+            err.append("`P-E9` `sigilli/%s`: sigilla `%s`, che NON E- IN TABELLA"
+                       % (f, d["LEGGE"]))
+        c = d.get("CRITERI")
+        if not isinstance(c, dict) or not c:
+            err.append("`P-E9` `sigilli/%s`: NON dichiara `CRITERI`. ### I criteri si "
+                       "fissano PRIMA, e qui sono una STRUTTURA invece di una frase" % f)
+            continue
+        for k, v in sorted(c.items()):
+            if not (isinstance(v, (tuple, list)) and len(v) == 2
+                    and all(str(x).strip() for x in v)):
+                err.append("`P-E9` `sigilli/%s`: il criterio `%s` non e- "
+                           "`(che cosa, la lettura)`. ### Un criterio senza LA LETTURA "
+                           "non e- un criterio: e- un-intenzione" % (f, k))
+        if "deve-fallire" not in c:
+            err.append("`P-E9` `sigilli/%s`: NESSUN criterio `deve-fallire`. ### E- il "
+                       "piu- importante: senza, il criterio non distingue niente" % f)
+    if verboso:
+        print("  `P-E9`: %d sigilli, `LEGGE` e `CRITERI` dichiarati: %s"
+              % (quanti, "si-" if not err else "### NO"))
+    return err
 
 # =====================================================================================
 #   P-E6 -- la tabella cambia, il registro e il messaggio la seguono
@@ -458,6 +511,42 @@ def collaudo():
     esito("NON deve scattare: tolto quello finto, `P-E5` TACE di nuovo",
           pe5(verboso=False) == [],
           "### il braccio di sopra scattava per LUI, non per un residuo")
+    esito("`P-E9`: ogni sigillo dichiara `LEGGE` e `CRITERI`",
+          pe9(leggi, verboso=False) == [],
+          "%d sigilli" % len([1 for f in os.listdir(SIGILLI)
+                              if f.endswith(".py") and f != "__init__.py"]
+                             if os.path.isdir(SIGILLI) else []))
+    _ps = os.path.join(SIGILLI, "_finto_sigillo.py")
+    try:
+        io.open(_ps, "w", encoding="utf-8", newline=NL).write(
+            "# -*- coding: utf-8 -*-" + NL + "LEGGE = 'PROVA-LOCALE'" + NL)
+        esito("### DEVE scattare: un sigillo SENZA `CRITERI`",
+              any("NON dichiara `CRITERI`" in e for e in pe9(leggi, verboso=False)),
+              "### i criteri si fissano PRIMA")
+        io.open(_ps, "w", encoding="utf-8", newline=NL).write(
+            "# -*- coding: utf-8 -*-" + NL
+            + "CRITERI = {'zero': ('x', 'y'), 'deve-fallire': ('x', 'y')}" + NL)
+        esito("### DEVE scattare: un sigillo SENZA `LEGGE`",
+              any("NON dichiara `LEGGE`" in e for e in pe9(leggi, verboso=False)),
+              "### non si puo- rigirare al suo commit")
+        io.open(_ps, "w", encoding="utf-8", newline=NL).write(
+            "# -*- coding: utf-8 -*-" + NL + "LEGGE = 'PROVA-LOCALE'" + NL
+            + "CRITERI = {'zero': ('x', 'y')}" + NL)
+        esito("### DEVE scattare: un sigillo SENZA il criterio `deve-fallire`",
+              any("NESSUN criterio `deve-fallire`" in e
+                  for e in pe9(leggi, verboso=False)),
+              "### e- il piu- importante (`P1-sexies`)")
+        io.open(_ps, "w", encoding="utf-8", newline=NL).write(
+            "# -*- coding: utf-8 -*-" + NL + "LEGGE = 'LEGGE-INVENTATA'" + NL
+            + "CRITERI = {'deve-fallire': ('x', 'y')}" + NL)
+        esito("### DEVE scattare: un sigillo che sigilla una legge NON IN TABELLA",
+              any("NON E- IN TABELLA" in e for e in pe9(leggi, verboso=False)))
+    finally:
+        if os.path.exists(_ps):
+            os.remove(_ps)
+    esito("NON deve scattare: tolto il finto, `P-E9` TACE di nuovo",
+          pe9(leggi, verboso=False) == [],
+          "### i bracci di sopra scattavano per LUI")
     print()
     print("  (a) `P-E1` -- LA BIIEZIONE")
     esito("### DEVE scattare: una legge in tabella SENZA file generato",

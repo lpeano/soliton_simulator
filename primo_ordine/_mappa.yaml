@@ -97,6 +97,15 @@ moduli:
     importa: [_genera, _presidio, hamiltoniana, passo, schema, schema_config, stato]
 
   # ------------------------------------------------------------------ I PACCHETTI
+  # ------------------------------------------------------------------ I SIGILLI
+  - nome: sigilli/__init__.py
+    responsabilita: il pacchetto dei sigilli, che dichiarano LEGGE e CRITERI
+    importa: []
+
+  - nome: sigilli/_modello.py
+    responsabilita: il modello di un sigillo di legge, coi quattro bracci del rito
+    importa: [_presidio, hamiltoniana, passo, schema_config, stato, timbro]
+
   - nome: __init__.py
     responsabilita: il pacchetto dell-era 2, e cosa sta dove
     importa: []

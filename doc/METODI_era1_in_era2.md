@@ -8,17 +8,17 @@
 
 | | quanti |
 |---|--:|
-| **`PORTATO`** | `86` |
-| **`DA_PORTARE`** | `19` |
+| **`PORTATO`** | `88` |
+| **`DA_PORTARE`** | `18` |
 | **`DA_DECIDERE`** | `5` |
 | **`NON_SI_APPLICA`** | `8` |
-| **in tutto** | ### **`118`** |
+| **in tutto** | ### **`119`** |
 
-### ⚠ **E IL NUMERO `118` E- MISURATO, non stimato:** viene dal perimetro che l-indice calcola, e ### **il mandato ne nominava <<una decina>>** per nome piu- *<<e le cure di architettura>>*. ### **La decina era `20`.**
+### ⚠ **E IL NUMERO `119` E- MISURATO, non stimato:** viene dal perimetro che l-indice calcola, e ### **il mandato ne nominava <<una decina>>** per nome piu- *<<e le cure di architettura>>*. ### **La decina era `20`.**
 
 ---
 
-## `PORTATO` — `86` metodi
+## `PORTATO` — `88` metodi
 
 > ### ✅ **GIA- NELL-ERA `2`**, e `dove` dice dove
 
@@ -66,6 +66,7 @@
 | **`P-E6`** | `PRESIDIO` | NATO NELL-ERA 2. La tabella che cambia senza la riga di registro e senza l-ID nel messaggio: lega il cambiamento della fonte unica alla sua tracciabilita- | `csv/_presidi_era2.py::pe6`, stadio `commit-msg` |
 | **`P-E7`** | `PRESIDIO` | NATO NELL-ERA 2. I riferimenti esistono: la scheda sul disco, e ### dal 2026-10-09 la `voce` di un osservatore RISOLVE nell-indice -- prima era una stringa che nessuno verificava | `csv/_presidi_era2.py::pe7`, `pre-commit` + CI |
 | **`P-E8`** | `PRESIDIO` | NATO NELL-ERA 2, ed e- IL SOLO che NON IMPEDISCE: senza protezione del ramo la CI gira DOPO il push. ### E- UNA RETE CHE SEGNALA (`A9`), e qui avevo scritto il contrario. ### E non e- mai stata osservata girare | `.github/workflows/era2.yml`; ### SEGNALA, non impedisce |
+| **`P-E9`** | `PRESIDIO` | NATO NELL-ERA 2: ogni sigillo dichiara `LEGGE` e `CRITERI`, letti VIA AST, e il criterio `deve-fallire` e- OBBLIGATORIO. ### Un sigillo che DICE di avere criteri senza averli e- PEGGIO di uno senza criteri: il primo SEMBRA FATTO | `csv/_presidi_era2.py::pe9`, `pre-commit` + CI |
 | **`P-ES1`** | `PRESIDIO` | NATO NELL-ERA 2, e generalizza `H-P9`: chi avanza lo stato passa dallo schedulatore. ### Le eccezioni sono DICHIARATE una per una con il loro perche- (almeno 40 caratteri), e guarda le chiamate E I NOMI -- il driver assegna la funzione a una variabile, e un presidio che guardasse solo le chiamate NON VEDREBBE NIENTE | `csv/_un_solo_esecutore.py::controlla`, `pre-commit` + CI |
 | **`P-M1`** | `PRESIDIO` | e- il presidio di questo punto: ### SI APPLICA A SE- STESSO -- appena la sua voce e- nata, il perimetro lo ha incluso e lui ha RIFIUTATO IL COMMIT chiedendo questa riga. ### Non l-ho previsto: me l-ha detto lui | `csv/_metodi_era2.py::controlla`, cablato nel `pre-commit` e nella CI |
 | **`P-MOD`** | `PRESIDIO` | NATO NELL-ERA 2: la mappa dichiara CHI IMPORTA CHI, e un import fuori mappa, un CICLO, un modulo non in mappa o una dipendenza dichiarata e NON USATA sono rifiutati. ### Piu- il TETTO di righe e la responsabilita- in UNA RIGA: se non ci sta, IL MODULO FA DUE COSE | `csv/_modularita_era2.py::controlla` + `primo_ordine/_mappa.yaml` |
@@ -77,7 +78,7 @@
 | **`P1`** | `STANDARD` | non usare l-associazione senza verificare lo storico: in questo mandato ho riletto dal disco prima di ogni cura, e due volte la rilettura mi ha smentito | metodo, non codice |
 | **`P1-bis`** | `STANDARD` | la relazione si scrive nello stesso commit del riscontro: ogni commit di questo mandato ha il suo paragrafo | `RELAZIONE_PER_CLAUDE.md` + `H-P1-bis` |
 | **`P1-quater`** | `STANDARD` | ogni sostituzione si asserisce per se-: l-helper `sost()` conta l-ancora e FALLISCE se non e- unica. ### E LA LEZIONE SI E- ALLARGATA: non solo gli escape, ma il NESTING -- i heredoc di bash si sono rotti tre volte sull-apostrofo, e i patch script si scrivono con lo strumento di scrittura | ogni patch script di questo mandato |
-| **`P1-sexies`** | `STANDARD` | un criterio si collauda su un caso a risposta nota, e il caso che DEVE fallire e- il piu- importante: i SEI casi del mandato girano in un solo posto, ognuno verificato PER LA CHIAVE GIUSTA | `_collauda_passo.py` sezione (F) |
+| **`P1-sexies`** | `STANDARD` | un criterio si collauda su un caso a risposta nota, e il caso che DEVE fallire e- il piu- importante. ### CABLATO DUE VOLTE: i sei casi di `_collauda_passo.py`, e ORA `P-E9` che RIFIUTA un sigillo senza il criterio `deve-fallire` | `_collauda_passo.py` sezione (F) + `csv/_presidi_era2.py::pe9` |
 | **`P4`** | `STANDARD` | prima di misurare se una grandezza cambia, verificare che sia LIBERA di cambiare: il braccio <<il cono del globale cambia con la tolleranza>> l-ha fatto -- ho misurato a TRE tolleranze invece di una | `_collauda_passo.py` sezione (C) |
 | **`P6`** | `STANDARD` | ogni csv di misura porta blob, seme e flag. ### SUPERATA nell-era 1, e IL PUNTO 5 LA RIFA- MEGLIO: il TIMBRO porta l-impronta della TABELLA, dei GENERATI e della CONFIGURAZIONE, piu- la scena, il seme e le versioni -- non una lista di flag, perche- ### i flag non ci sono | `primo_ordine/timbro.py::timbro`, stampato dal driver |
 | **`PI-CHIUSURA-ORFANA`** | `PRESIDIO` | una `chiusura` piena su una voce che non e- CHIUSA: una chiusura che nessuno ha applicato | `csv/indice.py::_f12_chiusura_orfana`, ### ERRORE (rifiuta) |
@@ -102,6 +103,7 @@
 | **`SCHED-T2-TIPI`** | `CURA` | gli 8 tipi del registro del passo: nell-era 2 i tipi sono 4 (`termine_nodo`, `termine_arco`, `regola`, `osservatore`) e stanno in UN vocabolario chiuso | `leggi/schema.py::TIPI` |
 | **`SCHED-T2-VALIDA`** | `CURA` | l-esecutore VALIDA la composizione: ### PORTATO E PIU- FORTE -- `valida_composizione()` ha quattro controlli (vocabolario, palindromo di nomi E pesi, nessun doppione, pesi a 1) e ### ognuno ha il suo caso che deve fallire | `passo.py::valida_composizione` |
 | **`STANDARD-10`** | `STANDARD` | una cura non aumenta il numero delle leggi. ### IL PUNTO 10 LO RENDE STAMPATO: ogni referto porta IL CONTO, per tipo, e dice quante sono `prova: true` -- oggi 3 su 3, cioe- ZERO leggi vere | `timbro.py::conto_leggi`, nel referto |
+| **`STANDARD-4`** | `STANDARD` | snapshot contro snapshot allo stesso istante. ### PORTATO nel modello di sigillo (punto 7): i bracci partono dallo STESSO SEME e fanno lo STESSO numero di passi, e il confronto e- AL BYTE. ### E il <<prima>> NON E- PIU- UNA COPIA PATCHATA: si ottiene mettendo a ZERO il coefficiente, quindi il braccio zero e- byte-identico PER COSTRUZIONE | `primo_ordine/sigilli/_modello.py` |
 | **`STANDARD-8`** | `STANDARD` | un difetto dimostrato si cura: ### SUPERATA, assorbita in `A12` | vedi `A12` |
 | **`STATI-LOCALI`** | `PRESIDIO` | gli stati pesanti restano locali, in git solo sha1, percorso e comando. ### PORTATO: `db_era2/*.npz` e- nel `.gitignore`, e IL `.timbro.json` ACCANTO SI TRACCIA -- e- leggero e porta l-impronta della tabella, dei generati e della configurazione, cioe- IL COMANDO CHE RIPRODUCE QUEL DATO | `.gitignore` + `timbro.py::salva` |
 | **`U3`** | `PRESIDIO` | confrontava con uno sviluppo invece del valore esatto: ### LA LEZIONE E- PORTATA -- la derivata generata si confronta con la differenza finita, non con una forma approssimata scritta a mano | `_genera.py --prova` |
@@ -113,7 +115,7 @@
 
 ---
 
-## `DA_PORTARE` — `19` metodi
+## `DA_PORTARE` — `18` metodi
 
 > ### ⚠ **SI APPLICA, E NON C-E- ANCORA**: `dove` dice **quale punto del mandato** lo porta
 
@@ -134,7 +136,6 @@
 | **`P5`** | `STANDARD` | ogni ramo `else`/fallback su un percorso fisico va CONTATO: ### IL PUNTO 2 lo rende un presidio -- le guardie fuori dalla fisica avranno un contatore | punto 2, da fare |
 | **`SCHED-T1`** | `CURA` | la composizione e- una LISTA e c-e- UN SOLO esecutore: ### PORTATO -- `COMPOSIZIONE_GLOBALE` e `composizione_locale()` sono liste dichiarate. ### MA <<un solo esecutore>> NON E- ANCORA UN PRESIDIO: e- il punto 9 | `passo.py`; il presidio e- il punto 9 |
 | **`SCHED-T3-REGOLE`** | `MISURA` | le regole di composizione, 94 scritture in cinque forme: ### nell-era 2 le regole non esistono ancora -- e- il punto 11(a) | punto 11(a), da fare |
-| **`STANDARD-4`** | `STANDARD` | snapshot contro snapshot allo stesso istante: ### IL PUNTO 7 lo porta nel modello di sigillo dell-era 2 | punto 7, da fare |
 | **`STANDARD-6`** | `STANDARD` | ogni difetto acclarato si registra SUBITO: i difetti di questo mandato sono nei commit e nella relazione. ### MA DUE NON HANNO UNA VOCE: il buco di `H-FISICA-FUORI-LISTA` e la dipendenza del cono globale dalla tolleranza | la relazione; le voci mancano |
 | **`TAGLIA-FINITA`** | `STANDARD` | lo scaling di taglia finita come via al limite continuo: l-era 2 non ha ancora una misura di taglia | nessun sito oggi |
 | **`Z20`** | `FRONTE` | due bracci di un confronto che differivano in piu- di un posto: ### IL PUNTO 15(d) lo rende un presidio -- un `A`/`B` dichiara IL CAMPO UNICO in cui differiscono, e un controllo verifica che differiscano SOLO li- | punto 15(d), da fare |

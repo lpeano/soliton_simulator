@@ -2567,7 +2567,7 @@ etichette rimosse, con ### **`0` persi, `0` doppi, `0` conflitti**.
 | | |
 |---|---|
 | **file** | `csv/_hook_id_obbligatorio.py` |
-| **BLOB** *(sha1 dei byte grezzi)* | `624dd4e3` |
+| **BLOB** *(sha1 dei byte grezzi)* | `c7aff75b` |
 | **COMANDO** | `python csv/_hook_id_obbligatorio.py --collaudo` *(`11`/`11`)*; nel `commit-msg`: `--controlla $1` |
 | **cosa misura** | **quali commit contano** *(un file della LISTA, o un `doc/REFERTO_*`/`doc/REPERTO_*`)* e **se il messaggio cita almeno un ID NOTO** |
 | ### ⭐ **è il ROVESCIO di `H-INDICE`** | quello controlla che gli ID citati ### **esistano**; questo che ### **ce ne sia almeno UNO** |
@@ -2649,8 +2649,8 @@ etichette rimosse, con ### **`0` persi, `0` doppi, `0` conflitti**.
 | | |
 |---|---|
 | **file** | `csv/_presidi_era2.py` |
-| **BLOB** *(sha1 dei byte grezzi)* | `3a66cdfe` |
-| **COMANDO** | `python csv/_presidi_era2.py` *(sul disco)* · `--collaudo` *(nei due versi, `16`/`16`)* · `--pre-commit` · `--commit-msg FILE` |
+| **BLOB** *(sha1 dei byte grezzi)* | `9987c3b1` |
+| **COMANDO** | `python csv/_presidi_era2.py` *(sul disco)* · `--collaudo` *(nei due versi, `22`/`22`)* · `--pre-commit` · `--commit-msg FILE` |
 | **cosa impedisce** | `P-E1` la **biiezione** *(tabella ↔ file ↔ registro ↔ scheda)* · `P-E2` **l'impronta** · `P-E3` le **variabili nei due versi** · `P-E4` le **importazioni** *(`A17`)* · `P-E5` gli **osservatori in sola lettura**, misurato **al byte** · `P-E6` la tabella che cambia senza il registro e senza l'ID nel messaggio · `P-E7` i **riferimenti** |
 | ### ⛔ **e `LEGGE` si legge via AST** | una regex la troverebbe ### **anche dentro un commento o una stringa**, e ### **un presidio che si lascia ingannare da un commento non è un presidio** |
 | ### ⛔ **NESSUNA via d'uscita** | e ### **la sua ASSENZA è il presidio**: la prima stesura definiva una regex `_FUGA` ### **senza leggerla mai**, come promemoria — ### **codice morto che INVITA una scappatoia che il mandato vieta** |
@@ -2688,7 +2688,7 @@ etichette rimosse, con ### **`0` persi, `0` doppi, `0` conflitti**.
 | | |
 |---|---|
 | **file** | `csv/_metodi_era2.py` |
-| **BLOB** *(sha1 dei byte grezzi)* | `8916010f` |
+| **BLOB** *(sha1 dei byte grezzi)* | `a7ec0a9d` |
 | **COMANDO** | `python csv/_metodi_era2.py` *(il presidio, e GENERA il documento)* · `--collaudo` *(nei due versi, `8`/`8`)* |
 | **cosa impedisce** | che `doc/METODI_era1_in_era2.md` **invecchi in silenzio**: ### **ogni metodo del perimetro DEVE avere una riga** *(come si applica · dove · stato)*, citato o no |
 | ### ⭐ **e il PERIMETRO lo calcola l'INDICE** | da ### **campi a vocabolario chiuso** *(`classe in (STANDARD, PRESIDIO)`, piu' le cure di architettura che il mandato nomina **per ID**)*. ### ⛔ **Nessun `titolo` e nessuna `descrizione` si leggono per decidere se una voce e' un metodo** — e' il principio del mandato **applicato a se stesso** |
@@ -2823,12 +2823,27 @@ etichette rimosse, con ### **`0` persi, `0` doppi, `0` conflitti**.
 
 | | |
 |---|---|
-| **i file** | `csv/_modularita_era2.py` *(BLOB `8fb73811`)* · `primo_ordine/_mappa.yaml` *(BLOB `ba9e8521`)* |
+| **i file** | `csv/_modularita_era2.py` *(BLOB `8fb73811`)* · `primo_ordine/_mappa.yaml` *(BLOB `1413d7e2`)* |
 | **COMANDO** | `python csv/_modularita_era2.py` · `--collaudo` *(nei due versi, `10`/`10`)* |
 | ### ⭐ **perche' una MAPPA e non solo un divieto** | `P-E4` vieta ### **due** import; una mappa dice ### **la cosa POSITIVA** — cio' che e' ### **previsto** — e ### **un import che nessuno ha previsto e' esattamente quello che degrada la modularita' senza che nessuno lo decida** |
 | ### ⛔ **cosa impedisce** | un import ### **fuori mappa** · un ### **CICLO** · un modulo ### **non in mappa** · una dipendenza ### **dichiarata e NON USATA** · un file ### **oltre il tetto** · una responsabilita' che ### **non sta in UNA RIGA** · `hamiltoniana`/`passo` che ### **calcolano una grandezza** |
 | **il tetto** | `700` righe, ### **DICHIARATO SUL MISURATO** *(il piu' lungo e' `_genera.py` con `684`)*. Oltre, ### **si divide, non si allunga** — e ### **i generati NON hanno tetto**, perche' la loro lunghezza ### **la decide la tabella** |
 | ### ⚠ **e `(d)` ha un CRITERIO** | se la responsabilita' ### **non si riesce a scrivere in una riga**, ### **il modulo fa due cose** — e quella e' l'informazione, non l'adempimento |
 | **i numeri** | `20` moduli in mappa, `4` generati |
+
+---
+
+### `primo_ordine/sigilli/_modello.py` — **IL MODELLO DI UN SIGILLO DELL'ERA `2`** *(2026-10-10)*
+
+| | |
+|---|---|
+| **file** | `primo_ordine/sigilli/_modello.py` |
+| **BLOB** *(sha1 dei byte grezzi)* | `c91fde52` |
+| **COMANDO** | `python primo_ordine/sigilli/_modello.py` *(il sigillo di `PROVA-LOCALE`, `4`/`4`)* |
+| ### ⭐ **e il RITO ADATTATO cambia UNA cosa, la piu' importante** | nell'era `1` il *«prima»* era ### **una COPIA del simulatore patchata a mano** *(`13k` righe, estratte dal padre del commit)*. ### **Nell'era `2` il *«prima»* si ottiene METTENDO A ZERO IL COEFFICIENTE e RIGENERANDO** — nessuna copia, nessuna patch, e ### **il braccio zero e' byte-identico PER COSTRUZIONE, non per fortuna** |
+| **i quattro bracci** | `zero` *(coefficiente a `0` = ### **byte-identico** a <<senza la legge>>)* · `limite` *(si riduce a una forma nota)* · `positivo` *(la grandezza ### **PUO'** cambiare: contro il `FALSO-ZERO`)* · ### **`deve-fallire`** *(il piu' importante, `P1-sexies`)* |
+| **i numeri misurati** | `zero` byte-identico · `g != 0` ### **differisce** · l'energia della legge a `g = 0.5` e' `23.766838` · il rapporto `energia/g` varia di ### **`1.49e-16` su tre decadi** *(la legge e' **lineare in `g`**, come la sua forma dice)* |
+| ### ⚠ **e dichiara cio' che NON prova** | mette `g` ### **sul modulo gia' caricato**, non nella tabella: e' ### **la stessa aritmetica** ma ### **non passa dal generatore**, quindi ### **non prova che la TABELLA sia la fonte.** ### **Quello lo prova `P-E2`**, che e' cablato e gira a ogni commit |
+| **`12(c)`** | dichiara ### **`LEGGE` e `CRITERI`**, e `P-E9` li legge ### **via AST** |
 
 ---

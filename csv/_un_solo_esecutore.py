@@ -66,6 +66,13 @@ ECCEZIONI = {
             "idem: i due candidati si misurano NELLO STESSO MODO, e la tavola del referto "
             "esiste perche- il collaudo li ha fatti girare entrambi",
     },
+    "primo_ordine/sigilli/_modello.py": {
+        "passo_locale":
+            "un SIGILLO fa girare i suoi bracci, ed e- il suo mestiere: chiama l-esecutore "
+            "come il driver, e NON ne scrive uno suo. ### Il braccio `zero` e il braccio "
+            "`g != 0` DEVONO girare NELLO STESSO MODO, altrimenti il confronto al byte "
+            "non misura la legge: misura due esecutori diversi",
+    },
     "primo_ordine/driver.py": {
         "passo_globale":
             "il driver AVANZA LA CORSA, ed e- il suo mestiere: chiama l-esecutore che la "

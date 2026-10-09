@@ -15,7 +15,7 @@
 | `INFRASTRUTTURA` | `2` | 11 |
 | `INFRASTRUTTURA` | `ENTRAMBE` | 14 |
 | `METODO` | `1` | 153 |
-| `METODO` | `2` | 1 |
+| `METODO` | `2` | 2 |
 | `METODO` | `ENTRAMBE` | 79 |
 
 | id | classe | dominio | era | stato | blocca | titolo |
@@ -439,6 +439,7 @@
 | `P-E6` | PRESIDIO | INFRASTRUTTURA | 2 | ### **AGENDA** |  | la tabella che cambia senza la riga di registro e senza l-ID nel messaggio |
 | `P-E7` | PRESIDIO | INFRASTRUTTURA | 2 | ### **AGENDA** |  | i RIFERIMENTI esistono: la scheda sul disco, e la voce di un osservatore nell-in |
 | `P-E8` | PRESIDIO | INFRASTRUTTURA | 2 | ### **AGENDA** |  | la CI: i collaudi girano a ogni push, e FUORI dal PC di Luca -- ma SEGNALA, non  |
+| `P-E9` | PRESIDIO | METODO | 2 | ### **AGENDA** |  | ogni SIGILLO dichiara LEGGE e CRITERI, letti via AST: i criteri si fissano PRIMA |
 | `P-EQ-MEDIANA-ARCHI` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | P_eq prende la mediana dei PRIMI n ARCHI su m: un sottoinsieme arbitrario, non t |
 | `P-ES1` | PRESIDIO | INFRASTRUTTURA | 2 | ### **AGENDA** |  | UN SOLO ESECUTORE: chi avanza lo stato passa dallo schedulatore, o si dichiara |
 | `P-M1` | PRESIDIO | METODO | ENTRAMBE | ### **APERTA** |  | ogni METODO dell-era 1 ha una riga che dice come si applica all-era 2 |
