@@ -10613,3 +10613,17 @@ che copre `55` voci e ne sbaglia un quarto è ### **peggio di nessuna regola.**
 ### ⛔ **Resta a Luca:** `179` concetti che ### **il codice nomina** e nessuno ha definito, `2`
 voci col ### **dubbio dichiarato**, `2` da ### **dividere** *(con la proposta)*, e `20` assiomi
 ### **in attesa di conferma.**
+
+## LA CORREZIONE `v3`: **il guardiano ha corretto le PROPRIE liste**, e io tre regole mie (2026-10-09)
+
+`64` voci toccate, ### **`1079` righe di storico** *(da `982`)*, `6` su `6` i controlli, `21` su `21` il collaudo, ### **`953` ID vecchi conservati** *(`0` persi, `0` doppi)*. Nessuna corsa; il simulatore resta `b8c21049`.
+
+### ⭐ **Il pezzo che conta: la lista `2` del guardiano era un ERRORE SUO.** `17` voci che davano per ### **lavoro dell'era `2`** sono ### **difetti del codice dell'era `1`** — la loro ### **lezione** passa all'era `2`, ### **la voce no.** `AGENDA` scende da `43` a `26`, e ### **`43` era «esattamente la lista `L2`»**: il calo e' voluto. ### **E `5` voci NON le ho toccate** *(`M-LEGAMI`, `M-ISTERESI`, `MEM-VERSO`, `M-FLUSSO`, `M-MASSA`)*: portano solo la nota *«era `1` o `2`? decide Luca»*, perche' ### **una voce di cui non si sa l'era non si sposta per simmetria.**
+
+### ⛔ **E LA MIA REGOLA DELLA FASE `2` ERA FALSA:** *«se tutte le citazioni stanno in documenti, e' un'etichetta»*. ### **Un documento e' esattamente il posto in cui un ID si DEFINISCE.** La regola corretta distingue ### **una riga di tabella o un'intestazione** *(definizione)* da ### **una citazione nel corpo** — e `16` etichette tornano voci: `12` criteri di sigillo, ### **`O4`, che e' una delle OBIEZIONI AL BERSAGLIO DEL PROGETTO** *(«la massa della Terra raddoppierebbe»)*, `SHAKE-THEN-FREEZE` con la sua chiusura, e ### **`D5`/`D6` OMONIMI, che NON si scelgono.**
+
+### ⚠ **Quattro difetti miei, e DUE li ha presi il `pre-commit`, non io:** il `tipo_era1` mancante *(`12` righe rifiutate)*, e — ### **il peggiore** — ### **il controllo `C6` era PIU' DEBOLE DEL HOOK:** girava `--blocca SI`, ### **una domanda**, mentre il `pre-commit` gira ### **il validatore.** Rafforzato, ### **la prima volta che l'ho girato ha preso subito due collisioni di titolo che io non avevo visto** — e una delle due, `TW-1` ≡ `TS-6`, ### **non era un difetto del generatore: le due righe dicono davvero la stessa cosa in due documenti diversi.**
+
+### ⛔ **E una cosa che il mandato chiede e che NON E' POSSIBILE, detta subito:** *«da ora in avanti `aggiorna-lotto` scrive il `commit`»* — ### **quando il lotto gira, il commit che lo conterra' non esiste ancora.** Al suo posto: ### **`commit_base` timbrato dalla via di scrittura** *(`HEAD`, e quello si sa)* e ### **`storico-commit` che riempie `commit` dai log**, con ### **un lotto di ritardo dichiarato.**
+
+### ⛔ **Resta a Luca:** `181` concetti da definire *(`D5` e `D6` compresi, come omonimi)*, ### **l'era di `5` voci**, le ### **`12` etichette che la regola corretta dichiara definite e di cui il mandato non dice la classe**, e `20` assiomi in attesa. ### **Una decisione non presa e' un dato; una presa al posto suo e' un difetto.**

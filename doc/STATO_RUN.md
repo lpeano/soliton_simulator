@@ -2994,3 +2994,20 @@ CONTROLLO POSITIVO CHE NON PUÒ ESSERE SODDISFATTO SE LA FINESTRA È TROPPO CORT
 `origini_da_nascita > 0`, che su `50` passi fa ### **RIFIUTARE** il sigillo invece di farlo
 passare a vuoto. ### **Il controllo nuovo rende impossibile l'errore vecchio, invece di
 raccomandare di non farlo.**
+
+---
+
+## ⛔ **`INDICE-COLLAUDO-SCRITTURA`** — *il collaudo dell'indice non guarda la via di scrittura* **(aperto il 2026-10-09, è mio)**
+
+`python csv/indice.py collaudo` dice **`21` su `21`**, e il numero è vero. ### ⚠ **Ma i `21` casi provano `valida`**, su insiemi di voci costruiti **in memoria**: dominio fuori vocabolario, legge inesistente, `CHIUSA` senza chiusura, chiave meta deprecata, chiavi fuori ordine. ### ⛔ **Nessuno dei `21` chiama una via di SCRITTURA.**
+
+| la via | nata | ha un caso nel collaudo? |
+|---|---|---|
+| `aggiorna` | schema `2` | ### **no** |
+| `aggiorna-lotto` | fase `2` | ### **no** |
+| `crea-lotto` | **oggi**, blocco `C` | ### **no** |
+| `storico-commit` | **oggi**, blocco `D` | ### **no** |
+
+### **Perché lo apro invece di chiuderlo in silenzio:** in questo stesso giro il `pre-commit` ha preso **due** difetti che il collaudo non vedeva — il `tipo_era1` mancante e **il controllo `C6` più debole del hook**. ### ⛔ **Un presidio che non guarda la via di scrittura non impedisce niente** (`A9`), e queste due vie sono entrate in uso **oggi**, su `64` voci, **senza un caso che DEBBA fallire.**
+
+**Che cosa chiuderebbe questa voce:** un caso sano e un **caso che deve fallire** per ciascuna delle quattro vie — per `crea-lotto` almeno *id già esistente*, *motivo sotto i `20` caratteri*, *chiave meta non registrata*, *`togli_da_etichette` su un ID che non è fra le etichette*; per `storico-commit` almeno *uno storico che NON è solo-in-aggiunta* — e la verifica che **su un fallimento non si scrive niente**.

@@ -12,7 +12,7 @@
 | `FISICA` | `DA_CLASSIFICARE` | 1 |
 | `FISICA` | `ENTRAMBE` | 16 |
 | `INFRASTRUTTURA` | `1` | 16 |
-| `INFRASTRUTTURA` | `ENTRAMBE` | 30 |
+| `INFRASTRUTTURA` | `ENTRAMBE` | 31 |
 | `METODO` | `1` | 12 |
 | `METODO` | `ENTRAMBE` | 124 |
 
@@ -308,6 +308,7 @@
 | `IC95` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 80 volte, MAI definito in un registro) |
 | `IMPL-2` | FRONTE | METODO | ENTRAMBE | ### **APERTA** |  | una SECONDA implementazione indipendente, scritta dalle LEGGI e non dal codice |
 | `IN-RUN` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 3 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
+| `INDICE-COLLAUDO-SCRITTURA` | DIFETTO | INFRASTRUTTURA | ENTRAMBE | ### **APERTA** |  | `crea-lotto` e `storico-commit` NON hanno un caso nel collaudo di `indice.py` |
 | `INDICE-LEGGERO` | FRONTE | INFRASTRUTTURA | ENTRAMBE | ### **APERTA** |  | l'indice pesa 169 KB e leggerlo intero non fa risparmiare contesto: serve un com |
 | `INERZIA-1` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | LA LEGGE DELL'INERZIA CEDE A k = 2, ED È UN DIFETTO DIMOSTRATO (misura 3, f8b27d |
 | `INERZIA-1(C)` | DIFETTO | FISICA | 1 | ### **CHIUSA** |  | 1(C) — CURATA e SIGILLATA 3/6 il 2026-09-25: GIUSTA e INSUFFICIENTE / LA CURA TO |

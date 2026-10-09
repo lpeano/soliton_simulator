@@ -2197,3 +2197,42 @@ etichette rimosse, con ### **`0` persi, `0` doppi, `0` conflitti**.
 | **cosa misura** | `A` la lista `2` del guardiano *(che era un **errore suo**)*; `B` le **gemelle** e i **fuori posto**, più `D13`/`Z11` che sono **lo stesso fatto**; `C` **ripassa le `53` etichette** con la regola corretta — ### **una riga di tabella o un'intestazione che definisce l'ID È UNA DEFINIZIONE** |
 | **l'uscita** | `doc/indice/_lotti/v3_A.jsonl` *(`22`)* · `v3_B.jsonl` *(`26`)* · `v3_C.jsonl` *(`16`)* · `doc/indice/_ripasso_etichette.json` · `doc/indice/_ripasso_restano_a_luca.json` |
 | ### ⚠ **la trappola, e l'ho presa** | il ripasso trovava `37` definizioni invece di `28`, perché cercava anche in **`doc/LISTA_CHIUSA.md`** — che è **la lista degli ID**: ogni ID ci compare **per definizione di cos'è quel file**. ### **È un FALSO-UNO**, ed è lo stesso difetto di `C4` che leggeva `doc/INDICE.md`. Le **viste generate** sono escluse, e il perché sta nel sorgente |
+
+---
+
+### `csv/_doc_referto_v3.py` — **IL REFERTO DELLA CORREZIONE `v3`** *(2026-10-09)*
+
+| | |
+|---|---|
+| **file** | `csv/_doc_referto_v3.py` |
+| **BLOB** *(sha1 dei byte grezzi)* | `bb814ce4` |
+| **COMANDO** | `python csv/_doc_referto_v3.py` |
+| **cosa misura** | i conteggi **prima** *(da `git show 6e5e75b:doc/indice/voci.jsonl`)* e **dopo** *(dal disco)*, e scrive il referto **voce per voce** dai lotti committati. Fa girare **lui** `_controlli_indice_v2.py` e `indice.py collaudo` e ne riporta le righe |
+| **l'uscita** | `doc/REFERTO_indice_v3_correzione.md` *(`305` righe)* |
+| ### ⚠ **la trappola, e l'ho presa** | contando le righe con `PASSA` prendeva anche **la riga di RIEPILOGO**, e i controlli diventavano **`7` su `7`**. Adesso tiene solo le righe che aprono con un id `C<n>` |
+
+---
+
+### `csv/_doc_referto_v3.py` — **IL REFERTO DELLA CORREZIONE `v3`** *(2026-10-09)*
+
+| | |
+|---|---|
+| **file** | `csv/_doc_referto_v3.py` |
+| **BLOB** *(sha1 dei byte grezzi)* | `bb814ce4` |
+| **COMANDO** | `python csv/_doc_referto_v3.py` |
+| **cosa misura** | i conteggi **prima** *(da `git show 6e5e75b:doc/indice/voci.jsonl`)* e **dopo** *(dal disco)*, e scrive il referto **voce per voce** dai lotti committati. Fa girare **lui** `_controlli_indice_v2.py` e `indice.py collaudo` e ne riporta le righe |
+| **l'uscita** | `doc/REFERTO_indice_v3_correzione.md` *(`305` righe)* |
+| ### ⚠ **la trappola, e l'ho presa** | contando le righe con `PASSA` prendeva anche **la riga di RIEPILOGO**, e i controlli diventavano **`7` su `7`**. Adesso tiene solo le righe che aprono con un id `C<n>` |
+
+---
+
+### `csv/_doc_referto_v3.py` — **IL REFERTO DELLA CORREZIONE `v3`** *(2026-10-09)*
+
+| | |
+|---|---|
+| **file** | `csv/_doc_referto_v3.py` |
+| **BLOB** *(sha1 dei byte grezzi)* | `bb814ce4` |
+| **COMANDO** | `python csv/_doc_referto_v3.py` |
+| **cosa misura** | i conteggi **prima** *(da `git show 6e5e75b:doc/indice/voci.jsonl`)* e **dopo** *(dal disco)*, e scrive il referto **voce per voce** dai lotti committati. Fa girare **lui** `_controlli_indice_v2.py` e `indice.py collaudo` e ne riporta le righe |
+| **l'uscita** | `doc/REFERTO_indice_v3_correzione.md` *(`305` righe)* |
+| ### ⚠ **la trappola, e l'ho presa** | contando le righe con `PASSA` prendeva anche **la riga di RIEPILOGO**, e i controlli diventavano **`7` su `7`**. Adesso tiene solo le righe che aprono con un id `C<n>` |

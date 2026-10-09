@@ -71,20 +71,20 @@ python csv/indice.py aggiorna-lotto doc/indice/_lotti/<nome>.jsonl
 
 | | |
 |---|--:|
-| voci | `829` |
+| voci | `830` |
 | ### **`DA_CLASSIFICARE` vere** *(non segnaposto)* | ### **`1`** |
 | ### **segnaposto `NON_DEFINITA`** | ### **`181`** |
-| ### **righe di storico** | ### **`1078`** |
+| ### **righe di storico** | ### **`1079`** |
 
 ```
-classe    DIFETTO=209  NON_DEFINITA=181  FRONTE=169  CRITERIO=107  MISURA=55  CURA=46  PRESIDIO=34  STANDARD=28
-dominio   FISICA=439  DA_CLASSIFICARE=181  METODO=136  INFRASTRUTTURA=46  DOCUMENTAZIONE=27
-era       1=445  DA_CLASSIFICARE=182  ENTRAMBE=176  2=26
-stato     SOSPESA=274  CHIUSA=187  DA_CLASSIFICARE=182  APERTA=160  AGENDA=26
+classe    DIFETTO=210  NON_DEFINITA=181  FRONTE=169  CRITERIO=107  MISURA=55  CURA=46  PRESIDIO=34  STANDARD=28
+dominio   FISICA=439  DA_CLASSIFICARE=181  METODO=136  INFRASTRUTTURA=47  DOCUMENTAZIONE=27
+era       1=445  DA_CLASSIFICARE=182  ENTRAMBE=177  2=26
+stato     SOSPESA=274  CHIUSA=187  DA_CLASSIFICARE=182  APERTA=161  AGENDA=26
 ```
 
-### ✔ **FATTO IN QUESTO GIRO:** il blocco `D`: il campo `commit` dello storico ### **riempito in tutte e `1078` le righe, PRESO DAI LOG** *(lo storico e' solo-in-aggiunta, quindi per ogni commit le righe `[prima, dopo)` sono ESATTAMENTE le sue -- e ### **la premessa si VERIFICA**, riga per riga)*. Piu' `commit_base`, che la via di scrittura ### **timbra da se'**
+### ✔ **FATTO IN QUESTO GIRO:** il blocco `E`: ### **il referto `doc/REFERTO_indice_v3_correzione.md`, voce per voce** *(`305` righe, `8` sezioni)*, i controlli `6/6` e il collaudo `21/21`. ### **LA CORREZIONE `v3` E' CHIUSA** -- `A`, `B`, `C`, `D`, `E`. Piu' ### **un difetto mio APERTO**: `INDICE-COLLAUDO-SCRITTURA` *(il collaudo non guarda la via di scrittura)*
 
-### ⛔ **RESTA:** il blocco `E`: i controlli e il referto `doc/REFERTO_indice_v3_correzione.md`, voce per voce
+### ⛔ **RESTA:** ### **le decisioni di Luca**, e sono scritte nel referto: `181` concetti da definire *(`D5`/`D6` come ### **omonimi**)*, ### **l'era di `5` voci**, le ### **`12` etichette che la regola corretta dichiara definite** e di cui il mandato non dice la classe, e `20` assiomi in attesa
 
-**Ultimo lotto applicato:** `doc/indice/_lotti/v3_C_titolo.jsonl *(l'ultimo; il blocco `D` non passa da un lotto: tocca SOLO il campo `commit` dello storico)*`
+**Ultimo lotto applicato:** `doc/indice/_lotti/v3_E_difetto.jsonl`
