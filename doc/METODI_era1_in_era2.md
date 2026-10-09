@@ -8,17 +8,17 @@
 
 | | quanti |
 |---|--:|
-| **`PORTATO`** | `77` |
-| **`DA_PORTARE`** | `25` |
+| **`PORTATO`** | `84` |
+| **`DA_PORTARE`** | `19` |
 | **`DA_DECIDERE`** | `5` |
 | **`NON_SI_APPLICA`** | `9` |
-| **in tutto** | ### **`116`** |
+| **in tutto** | ### **`117`** |
 
-### ⚠ **E IL NUMERO `116` E- MISURATO, non stimato:** viene dal perimetro che l-indice calcola, e ### **il mandato ne nominava <<una decina>>** per nome piu- *<<e le cure di architettura>>*. ### **La decina era `20`.**
+### ⚠ **E IL NUMERO `117` E- MISURATO, non stimato:** viene dal perimetro che l-indice calcola, e ### **il mandato ne nominava <<una decina>>** per nome piu- *<<e le cure di architettura>>*. ### **La decina era `20`.**
 
 ---
 
-## `PORTATO` — `77` metodi
+## `PORTATO` — `84` metodi
 
 > ### ✅ **GIA- NELL-ERA `2`**, e `dove` dice dove
 
@@ -45,6 +45,7 @@
 | **`H-NON-TRACCIATI`** | `PRESIDIO` | file non tracciati e non ignorati sotto `csv/` o `doc/` BLOCCANO: ha bloccato questo mandato piu- volte | `.githooks/commit-msg` |
 | **`H-P1-bis`** | `PRESIDIO` | un referto committato senza toccare la relazione: il referto dell-infrastruttura e- stato committato CON il suo paragrafo | `.githooks/commit-msg` |
 | **`H-P3`** | `PRESIDIO` | un sigillo che configura il modulo a mano invece di passare dal CLI. ### GENERALIZZATO dal punto 15(a): ### LA RIGA DI COMANDO SCEGLIE SOLO IL FILE, e un argomento in piu- e- UN ERRORE -- quindi non esiste un modo di configurare a mano | `primo_ordine/driver.py::main`, e lo schema della configurazione |
+| **`H-P5`** | `PRESIDIO` | un referto che non dichiara la configurazione INTERA. ### PORTATO: il timbro porta la configurazione INTERA piu- la sua impronta, e il referto dell-era 2 stampa il conto delle leggi | `timbro.py::righe_timbro`, stampato dal driver |
 | **`H-REG-R`** | `PRESIDIO` | una legge che cambia senza la sua scheda: ### nell-era 2 la scheda SI GENERA in `doc/leggi_era2/<id>.md`, quindi `SCHEDA_NEL_REGISTRO` limita `H-REG-R` al simulatore -- DUE POSTI PER LA STESSA SCHEDA SAREBBERO DUE FONTI | `csv/_file_fisica.py::SCHEDA_NEL_REGISTRO` |
 | **`H-RIGHE`** | `PRESIDIO` | `CLAUDE.md` sotto le 400 righe: ### IL PUNTO 2 DELLE REGOLE DI GESTIONE (mandato 6) genera la sezione delle regole dall-indice | `.githooks/pre-commit` |
 | **`H-STASH`** | `PRESIDIO` | `git stash` bloccato da `permissions.deny`: non e- un hook e non ha via d-uscita. Vale per ogni lavoro, era 2 compresa | `.claude/settings` |
@@ -65,6 +66,7 @@
 | **`P-E6`** | `PRESIDIO` | NATO NELL-ERA 2. La tabella che cambia senza la riga di registro e senza l-ID nel messaggio: lega il cambiamento della fonte unica alla sua tracciabilita- | `csv/_presidi_era2.py::pe6`, stadio `commit-msg` |
 | **`P-E7`** | `PRESIDIO` | NATO NELL-ERA 2. I riferimenti esistono: la scheda sul disco, e ### dal 2026-10-09 la `voce` di un osservatore RISOLVE nell-indice -- prima era una stringa che nessuno verificava | `csv/_presidi_era2.py::pe7`, `pre-commit` + CI |
 | **`P-E8`** | `PRESIDIO` | NATO NELL-ERA 2, ed e- IL SOLO che NON IMPEDISCE: senza protezione del ramo la CI gira DOPO il push. ### E- UNA RETE CHE SEGNALA (`A9`), e qui avevo scritto il contrario. ### E non e- mai stata osservata girare | `.github/workflows/era2.yml`; ### SEGNALA, non impedisce |
+| **`P-ES1`** | `PRESIDIO` | NATO NELL-ERA 2, e generalizza `H-P9`: chi avanza lo stato passa dallo schedulatore. ### Le eccezioni sono DICHIARATE una per una con il loro perche- (almeno 40 caratteri), e guarda le chiamate E I NOMI -- il driver assegna la funzione a una variabile, e un presidio che guardasse solo le chiamate NON VEDREBBE NIENTE | `csv/_un_solo_esecutore.py::controlla`, `pre-commit` + CI |
 | **`P-M1`** | `PRESIDIO` | e- il presidio di questo punto: ### SI APPLICA A SE- STESSO -- appena la sua voce e- nata, il perimetro lo ha incluso e lui ha RIFIUTATO IL COMMIT chiedendo questa riga. ### Non l-ho previsto: me l-ha detto lui | `csv/_metodi_era2.py::controlla`, cablato nel `pre-commit` e nella CI |
 | **`P-R1`** | `PRESIDIO` | NATO NELL-ERA 2: `A8` e `P5` cablati. Il CONTEGGIO dei rami lo misura l-AST, il RUOLO e- dichiarato a vocabolario chiuso. ### 27 rami in 12 funzioni, e NOVE SONO `default` -- un DEBITO che il punto 15(b) vietera-, dichiarato invece che nascosto | `csv/_rami_era2.py::controlla`, `pre-commit` + CI |
 | **`P-RIF`** | `PRESIDIO` | NATO NELL-ERA 2: un ID nel codice e- un `@rif`, o non esiste. ### Un ID in un COMMENTO e- prosa, e un riferimento che una macchina segue non vive nella prosa; i DOCSTRING restano, ed e- una scelta DICHIARATA. ### E si e- fatto piu- forte quando l-indice si e- completato: appena `A16` e `A17` sono diventati voci, ha trovato 4 commenti in piu- | `csv/_rif_nel_codice.py::controlla` + `primo_ordine/_rif.py`, `pre-commit` + CI |
@@ -76,6 +78,7 @@
 | **`P1-quater`** | `STANDARD` | ogni sostituzione si asserisce per se-: l-helper `sost()` conta l-ancora e FALLISCE se non e- unica. ### E LA LEZIONE SI E- ALLARGATA: non solo gli escape, ma il NESTING -- i heredoc di bash si sono rotti tre volte sull-apostrofo, e i patch script si scrivono con lo strumento di scrittura | ogni patch script di questo mandato |
 | **`P1-sexies`** | `STANDARD` | un criterio si collauda su un caso a risposta nota, e il caso che DEVE fallire e- il piu- importante: i SEI casi del mandato girano in un solo posto, ognuno verificato PER LA CHIAVE GIUSTA | `_collauda_passo.py` sezione (F) |
 | **`P4`** | `STANDARD` | prima di misurare se una grandezza cambia, verificare che sia LIBERA di cambiare: il braccio <<il cono del globale cambia con la tolleranza>> l-ha fatto -- ho misurato a TRE tolleranze invece di una | `_collauda_passo.py` sezione (C) |
+| **`P6`** | `STANDARD` | ogni csv di misura porta blob, seme e flag. ### SUPERATA nell-era 1, e IL PUNTO 5 LA RIFA- MEGLIO: il TIMBRO porta l-impronta della TABELLA, dei GENERATI e della CONFIGURAZIONE, piu- la scena, il seme e le versioni -- non una lista di flag, perche- ### i flag non ci sono | `primo_ordine/timbro.py::timbro`, stampato dal driver |
 | **`PI-CHIUSURA-ORFANA`** | `PRESIDIO` | una `chiusura` piena su una voce che non e- CHIUSA: una chiusura che nessuno ha applicato | `csv/indice.py::_f12_chiusura_orfana`, ### ERRORE (rifiuta) |
 | **`PI-CRITERIO-METODO`** | `PRESIDIO` | una voce classe CRITERIO in un dominio che non e- METODO: un criterio e- un MODO DI VERIFICARE, e dirlo FISICA confonderebbe cio- che si misura con come si misura (`A17`) | `csv/indice.py::_f10_criterio_metodo`, ### ERRORE (rifiuta) |
 | **`PI-ERA-STATO`** | `PRESIDIO` | era ENTRAMBE o era 2 con uno stato impossibile. ### L-era 2 ammette solo AGENDA, perche- NON E- COMINCIATA. Acceso NELLO STESSO COMMIT delle correzioni che lo rendono vero, e l-ordine giusto me l-ha corretto Luca | `csv/indice.py::_f9_era_stato`, ### ERRORE (rifiuta) |
@@ -92,19 +95,23 @@
 | **`R5`** | `PRESIDIO` | contava 25 aperture su 24 passi perche- l-iniezione del test apriva il freno: ### LA LEZIONE E- PORTATA -- i casi che devono fallire dell-era 2 verificano anche che, TOLTO il finto, il presidio TACCIA | `_collauda_passo.py` sezione (F), ultimo braccio |
 | **`REG-R`** | `PRESIDIO` | la regola mantenuta del registro della fisica: nell-era 2 la scheda si genera, e il registro resta la casa delle leggi dell-era 1 | `csv/_file_fisica.py::SCHEDA_NEL_REGISTRO` |
 | **`RIPIEGHI-ZERO`** | `CURA` | zero ripieghi che cambiano la fisica in silenzio. ### PORTATO in DUE modi: il generatore RIFIUTA i rami nei termini (punto 2), e il controllo di dominio FERMA invece di troncare (punto 1) | `leggi/schema.py::RAMI` + `stato.py::controlla_domini` |
+| **`RIPRESA-ARGV`** | `DIFETTO` | la ripresa si fida dell-argv. ### PORTATO: la riga di comando sceglie SOLO il file (punto 15a) e LA RIPRESA RIFIUTA se tabella, generati o configurazione sono cambiati -- RIFIUTA, non avverte, perche- riprendere con una tabella diversa continua una corsa che NON E- QUELLA | `timbro.py::riprendi` |
 | **`ROBUSTEZZA-FISICA`** | `STANDARD` | i tre gradini: ### il mandato dell-infrastruttura arriva al gradino (a) e SOLO quello, dichiarato nella stella polare -- non (b) e non (c), perche- le leggi sono di prova | il task history, sezione LA STELLA POLARE |
 | **`SCHED-PASSO`** | `CURA` | il passo pieno diventa uno SCHEDULATORE: ### PORTATO -- `passo.py` separa strati, composizione, validazione e integrazione | `passo.py` |
 | **`SCHED-T2-TIPI`** | `CURA` | gli 8 tipi del registro del passo: nell-era 2 i tipi sono 4 (`termine_nodo`, `termine_arco`, `regola`, `osservatore`) e stanno in UN vocabolario chiuso | `leggi/schema.py::TIPI` |
 | **`SCHED-T2-VALIDA`** | `CURA` | l-esecutore VALIDA la composizione: ### PORTATO E PIU- FORTE -- `valida_composizione()` ha quattro controlli (vocabolario, palindromo di nomi E pesi, nessun doppione, pesi a 1) e ### ognuno ha il suo caso che deve fallire | `passo.py::valida_composizione` |
+| **`STANDARD-10`** | `STANDARD` | una cura non aumenta il numero delle leggi. ### IL PUNTO 10 LO RENDE STAMPATO: ogni referto porta IL CONTO, per tipo, e dice quante sono `prova: true` -- oggi 3 su 3, cioe- ZERO leggi vere | `timbro.py::conto_leggi`, nel referto |
 | **`STANDARD-8`** | `STANDARD` | un difetto dimostrato si cura: ### SUPERATA, assorbita in `A12` | vedi `A12` |
+| **`STATI-LOCALI`** | `PRESIDIO` | gli stati pesanti restano locali, in git solo sha1, percorso e comando. ### PORTATO: `db_era2/*.npz` e- nel `.gitignore`, e IL `.timbro.json` ACCANTO SI TRACCIA -- e- leggero e porta l-impronta della tabella, dei generati e della configurazione, cioe- IL COMANDO CHE RIPRODUCE QUEL DATO | `.gitignore` + `timbro.py::salva` |
 | **`U3`** | `PRESIDIO` | confrontava con uno sviluppo invece del valore esatto: ### LA LEZIONE E- PORTATA -- la derivata generata si confronta con la differenza finita, non con una forma approssimata scritta a mano | `_genera.py --prova` |
 | **`VELENO-ORIENTATO`** | `DIFETTO` | il veleno cade su UNO dei due archi figli, e quale dipende dall-orientamento: ### LA LEZIONE E- PORTATA -- `strati()` usa la chiave `(min, max)`, quindi l-arco `(3,7)` e `(7,3)` hanno LA STESSA chiave e lo strato non dipende da come e- scritto | `passo.py::strati` |
 | **`Z100`** | `CURA` | gli invarianti: il programma si ferma quando sono violati. ### PORTATO dal punto 1 nella forma dei DOMINI -- ogni tipo dichiara la sua forma, e il controllo FERMA. ### Gli invarianti di FISICA (norma, energia) si MISURANO invece, e la deriva e- stampata: fermare su una deriva numerica sarebbe fermare su un arrotondamento | `primo_ordine/stato.py::controlla_domini`; la deriva in `_collauda_passo.py` |
 | **`Z22`** | `STANDARD` | il par.5-quinquies esisteva ed e- stato violato: la lezione e- che ### UN OUTPUT DA UN FILE NON TRACCIATO NON E- RIPRODUCIBILE -- e il timbro di `_presidio.avvia` lo dice a ogni giro | `csv/_presidio.py` |
+| **`Z54`** | `MISURA` | l-archivio a serie. ### IL PUNTO 15(e) e il 6 lo rifanno meglio: versione del formato nel timbro, scrittura ATOMICA (temporaneo + rinomina, perche- il PC si riavvia fra 00:00 e 02:00), e la RIPRESA CHE RIFIUTA se la tabella e- cambiata | `timbro.py::scrivi_atomico`, `::salva`, `::riprendi` |
 
 ---
 
-## `DA_PORTARE` — `25` metodi
+## `DA_PORTARE` — `19` metodi
 
 > ### ⚠ **SI APPLICA, E NON C-E- ANCORA**: `dove` dice **quale punto del mandato** lo porta
 
@@ -117,24 +124,18 @@
 | **`A7b`** | `STANDARD` | uno stato non nasce indefinito: `stato.py::nuovo` azzera ESPLICITAMENTE, e ### il punto 3 del mandato lo estende alla NASCITA di un nodo | `stato.py`; `crescita.py` ancora da generare |
 | **`AUDIT-CURE`** | `FRONTE` | il censimento delle cure e del loro costo: ### IL PUNTO 10 chiede che ogni referto STAMPI il numero delle leggi, e che un commit che lo aumenta lo DICHIARI | punto 10, da fare |
 | **`H-FISICA-FUORI-LISTA`** | `PRESIDIO` | un `.py` sotto `primo_ordine/` non nella LISTA fa rifiutare il commit. ### E HA UN BUCO MISURATO: legge `FILE_FISICA` DAL DISCO mentre giudica i percorsi STAGED | `.githooks/pre-commit` + `csv/_file_fisica.py` |
-| **`H-P5`** | `PRESIDIO` | un referto che non dichiara la configurazione INTERA. ### ORA LA CONFIGURAZIONE ESISTE (punto 15(a)) e il driver ne stampa l-IMPRONTA e TUTTI i campi: ### MA NESSUN REFERTO DELL-ERA 2 LA DICHIARA ANCORA, e quello e- il punto 5 (il timbro) | `primo_ordine/driver.py::main`; il referto e- il punto 5 |
 | **`H-P8`** | `PRESIDIO` | un confronto che prende il codice di prima da `HEAD` invece che dal PADRE: l-era 2 non ha ancora confronti prima/dopo | `.githooks/pre-commit` |
 | **`H-P9`** | `PRESIDIO` | uno strumento che avanza una rete fuori dall-esecutore: ### IL PUNTO 9 LO GENERALIZZA all-era 2, e ### il caso da rifiutare potrebbe essere `_collauda_passo.py`, che chiama `mezzo_implicito` direttamente | `.githooks/pre-commit`; punto 9 |
 | **`NASCITA-PUNTO-UNICO`** | `CURA` | le grandezze della nascita si scrivono in UN SOLO punto, con una regola dichiarata per ciascuna: ### e- IL PUNTO 3, e `crescita.py` e- ancora uno stub | punto 3, da fare |
 | **`P-DECADIMENTO`** | `STANDARD` | ogni decadimento e- una trasformazione: ### lo pretende il campo `bilancio` di una `regola`, che lo schema rende OBBLIGATORIO | `leggi/schema.py`; nessuna `regola` ancora |
 | **`P3`** | `STANDARD` | nessuna statistica senza barra d-errore: ### l-era 2 non ha ancora una statistica -- le misure fatte sono DETERMINISTICHE (byte, cono, deriva) | nessun sito oggi |
 | **`P5`** | `STANDARD` | ogni ramo `else`/fallback su un percorso fisico va CONTATO: ### IL PUNTO 2 lo rende un presidio -- le guardie fuori dalla fisica avranno un contatore | punto 2, da fare |
-| **`P6`** | `STANDARD` | ogni csv di misura porta blob, seme e flag: ### SUPERATA nell-era 1, e il punto 5 la rifa- meglio -- IL TIMBRO porta l-impronta della TABELLA e dei GENERATI, non una lista di flag | punto 5, da fare |
-| **`RIPRESA-ARGV`** | `DIFETTO` | la ripresa si fida dell-argv. ### IL PUNTO 15(a) HA CHIUSO METa- DEL CERCHIO: la riga di comando sceglie SOLO il file, e un argomento in piu- e- un ERRORE. ### MA LA RIPRESA NON ESISTE ANCORA: e- il punto 6, e la sua pretesa e- che RIFIUTI se la tabella e- cambiata | `primo_ordine/driver.py::main` per l-argv; la ripresa e- il punto 6 |
 | **`SCHED-T1`** | `CURA` | la composizione e- una LISTA e c-e- UN SOLO esecutore: ### PORTATO -- `COMPOSIZIONE_GLOBALE` e `composizione_locale()` sono liste dichiarate. ### MA <<un solo esecutore>> NON E- ANCORA UN PRESIDIO: e- il punto 9 | `passo.py`; il presidio e- il punto 9 |
 | **`SCHED-T3-REGOLE`** | `MISURA` | le regole di composizione, 94 scritture in cinque forme: ### nell-era 2 le regole non esistono ancora -- e- il punto 11(a) | punto 11(a), da fare |
-| **`STANDARD-10`** | `STANDARD` | una cura non aumenta il numero delle leggi: ### APPLICATA -- `leggi/osservatori.yaml` e- stato TOLTO perche- a parita- di effetto si preferisce togliere un-eccezione. ### E IL PUNTO 10 chiede che ogni referto STAMPI il conto | punto 10, da fare |
 | **`STANDARD-4`** | `STANDARD` | snapshot contro snapshot allo stesso istante: ### IL PUNTO 7 lo porta nel modello di sigillo dell-era 2 | punto 7, da fare |
 | **`STANDARD-6`** | `STANDARD` | ogni difetto acclarato si registra SUBITO: i difetti di questo mandato sono nei commit e nella relazione. ### MA DUE NON HANNO UNA VOCE: il buco di `H-FISICA-FUORI-LISTA` e la dipendenza del cono globale dalla tolleranza | la relazione; le voci mancano |
-| **`STATI-LOCALI`** | `PRESIDIO` | gli stati pesanti restano locali, in git solo sha1, percorso e comando: ### IL PUNTO 15(e) lo rende una regola del formato dei dati | nessun dato pesante oggi; punto 15 |
 | **`TAGLIA-FINITA`** | `STANDARD` | lo scaling di taglia finita come via al limite continuo: l-era 2 non ha ancora una misura di taglia | nessun sito oggi |
 | **`Z20`** | `FRONTE` | due bracci di un confronto che differivano in piu- di un posto: ### IL PUNTO 15(d) lo rende un presidio -- un `A`/`B` dichiara IL CAMPO UNICO in cui differiscono, e un controllo verifica che differiscano SOLO li- | punto 15(d), da fare |
-| **`Z54`** | `MISURA` | l-archivio a serie: e- un meccanismo di dati dell-era 1. ### IL PUNTO 15(e) rifa- la stessa cura meglio -- versione del formato, scrittura ATOMICA, reperti immutabili -- e NON e- ancora fatto | punto 15(e), da fare |
 
 ---
 

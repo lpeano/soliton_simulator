@@ -32,6 +32,7 @@ import numpy as np                                           # noqa: E402
 import hamiltoniana as HAM                                   # noqa: E402
 import passo as PA                                           # noqa: E402
 import schema_config as CFG                                  # noqa: E402
+import timbro as TB                                          # noqa: E402
 import stato as ST                                           # noqa: E402
 
 NL = chr(10)
@@ -118,9 +119,14 @@ def main(argv):
         return 2
     c = CFG.carica(argv[0])
     imp = CFG.impronta(c)
-    print("  la configurazione: %s   ### IMPRONTA %s" % (argv[0], imp))
-    print("  %s" % "   ".join("%s=%s" % (k, c[k]) for k in CFG.CAMPI
-                              if k not in ("versione",)))
+    # ### ⛔ **IL TIMBRO IN TESTA** *(punto `5`)*: ### **l-impronta della tabella,
+    # ### dei generati e della configurazione**, la scena, il seme, le versioni, e
+    # ### ### **IL CONTO DELLE LEGGI** *(punto `10`)*. ### **Un-uscita senza timbro non
+    # ### si sa da dove viene.**
+    t = TB.timbro(c, imp)
+    for riga in TB.righe_timbro(t):
+        print("  " + riga)
+    print("  la configurazione: %s" % argv[0])
     r = gira(c)
     print("  %d strati su %d archi" % (r["strati"], len(r["archi"][0])))
     for (n0, v0), (n1, v1) in zip(r["misure0"], r["misure1"]):
@@ -130,6 +136,15 @@ def main(argv):
     rel = abs(r["energia1"] - r["energia0"]) / max(abs(r["energia0"]), 1e-300)
     print("  %-14s %+.12f -> %+.12f   relativa %.3e"
           % ("energia", r["energia0"], r["energia1"], rel))
+    # ### ⛔ **E LO STATO SI SALVA, con il TIMBRO accanto** *(punto `6`)*: lo `npz`
+    # ### ### **resta locale** *(e- un dato pesante)*, il `json` del timbro
+    # ### ### **si puo- committare.** ### **Scrittura ATOMICA** *(punto `15(e)`)*.
+    fuori = os.path.join(RADICE, "db_era2")
+    os.makedirs(fuori, exist_ok=True)
+    p = os.path.join(fuori, "stato_%s.npz" % imp[:10])
+    TB.salva(p, r["stato"], c["passi"], c, imp)
+    print("  salvato %s   ### e il TIMBRO accanto, in `.timbro.json`"
+          % os.path.relpath(p, RADICE))
     return 0
 
 

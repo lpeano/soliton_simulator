@@ -160,3 +160,12 @@ csv/_test_fork/_video_g6000/*.png
 csv/_seal_fork/**/_prima.py
 csv/_seal_fork/**/_ricostruito.py
 csv/_test_fork/_mitosi_zero_dove/amp0_3_senza_ganci.json
+
+# ----------------------------------------------------------------------------
+# GLI STATI DELL'ERA 2 (2026-10-10): `db_era2/*.npz` sono DATI PESANTI, e
+#   STATI-LOCALI dice che in git vanno solo sha1, percorso e comando.
+#   ### MA IL `.timbro.json` ACCANTO SI TRACCIA: e' leggero, e porta l'impronta
+#   ### della tabella, dei generati e della configurazione -- cioe' IL COMANDO
+#   ### CHE RIPRODUCE QUEL DATO.
+db_era2/*.npz
+db_era2/*.parziale

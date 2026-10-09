@@ -11469,3 +11469,45 @@ Collaudo ### **`11`/`11`**, nei due versi. E il presidio ### **lascia il repo co
 **Collaudo:** la catena va a ### **`43`/`43`** *(da `38`)*, con i due casi che ### **DEVONO fermare** *(un `NaN`, un `inf`)* e il braccio che verifica ### **che il passo lo chiami davvero.** `P-R1` ### **`12`/`12`** *(due rami nuovi, dichiarati `validazione`)*.
 
 ### ⛔ **E IL PRESIDIO `P-RIF` HA PRESO IL MIO COMMENTO DI ADESSO:** avevo scritto *«e- la lezione di `MAX-NODI-FERMA` e di `RIPIEGHI-ZERO`»* ### **in un commento**, e li ha rifiutati. ### **Spostati nel docstring**, dove sono ### **documentazione** — e ### **e- la seconda volta in due punti che il presidio di ieri corregge il codice di oggi.**
+
+## PUNTI `5`, `6`, `9`, `10` — ### **IL TIMBRO, LA RIPRESA CHE RIFIUTA, UN SOLO ESECUTORE, IL CONTO** *(2026-10-10)*
+
+### ⭐ **I TRE PRIMI STANNO IN UN FILE SOLO, e non per comodita-:** sono ### **la stessa cosa guardata da tre lati** — ### **l-impronta di cio- che ha girato.** Il timbro la ### **stampa**, il salvataggio la ### **scrive accanto ai dati**, la ripresa la ### **confronta e RIFIUTA.** ### ⛔ **Tenerli separati vorrebbe dire calcolarla in TRE POSTI, e tre posti divergono.**
+
+**Il timbro, come esce:**
+
+```
+#   tabella    c1617b0abc278dac
+#   generati   57eacdcd06183cd7   (4 file)
+#   config     f60880b697e19f32
+#   LEGGI      3 in tutto, 3 DI PROVA, osservatore=1, termine_arco=1, termine_nodo=1
+#   scena      catena, 9 nodi, seme 11, dt 0.01, 200 passi, integratore locale
+#   versioni   python 3.13.2, numpy 2.3.0, AMD64
+```
+
+### ⚠ **E L-IMPRONTA E- DEI GENERATI, non del generatore**, e lo dichiaro: se il generatore cambiasse ### **senza cambiare cio- che genera**, ### **l-uscita e- la stessa** — e il timbro deve dire ### **che cosa ha girato**, non ### **chi l-ha scritto.**
+
+### `6` ### **LA RIPRESA RIFIUTA, e non avverte** *(`RIPRESA-ARGV`)*
+
+Riprendere con una tabella diversa ### **continua una corsa che non e- quella**, e il risultato ### **sembra la stessa misura.** Misurato: con un seme diverso nella configurazione, la ripresa dice ### **«`impronta_config`: salvato `f60880b6`, ora `dec0fc9c`»** e ### **si ferma.**
+
+### ✅ **E LA SCRITTURA E- ATOMICA** *(punto `15(e)`)*: temporaneo + `os.replace`, perche- ### **il PC si riavvia da solo fra `00:00` e `02:00`** e ### **un file a meta- e- peggio di nessun file.** Lo `npz` ### **non si traccia** *(`STATI-LOCALI`)*, il `.timbro.json` accanto ### **si traccia** — e- ### **leggero, e porta il comando che riproduce quel dato.**
+
+### `10` ### **IL CONTO DELLE LEGGI, DALLA TABELLA**
+
+### ⛔ **Dalla tabella e non dai file:** contare i file direbbe ### **quante ne sono state generate**, non ### **quante ce ne sono.** Oggi: ### **`3` leggi, e `3` sono `prova: true`** — cioe- ### **ZERO leggi vere nell-era `2`**, e il referto ora ### **lo stampa in testa.**
+
+### `9` ### **UN SOLO ESECUTORE, e il mio rilevatore aveva DUE difetti**
+
+| | il difetto | la cura |
+|---|---|---|
+| `1` | avevo messo ### **`gradiente`** fra le funzioni che <<avanzano>>, e il presidio ha accusato ### **`hamiltoniana.py`, che lo DEFINISCE** | ### **calcolare `dH/dpsi*` NON E- avanzare lo stato:** avanza ### **chi integra**, cioe- chi mette insieme il gradiente e il `dt` |
+| `2` | guardavo ### **solo le CHIAMATE**, e il driver scrive `avanza = PA.passo_locale if …` e poi chiama `avanza(…)` | ### ⛔ **un presidio che guarda solo le chiamate NON VEDE NIENTE**, e ### **assegnare la funzione a una variabile sarebbe la via di fuga piu- facile del mondo.** Ora guarda ### **le chiamate E I NOMI** |
+
+### ⭐ **E L-AVEVO PREVISTO NEL TASK HISTORY:** *«sospetto che il caso da rifiutare sia `_collauda_passo.py`, che chiama `mezzo_implicito` direttamente»*. ### **Era vero.** ### ✅ **E la cura e- DICHIARARLO, non nasconderlo:** un collaudo ### **DEVE** poter chiamare un sotto-passo — ### **il cono PER STRATO si misura esattamente cosi-**, e un presidio che lo vietasse ### **renderebbe la misura impossibile, non il codice migliore.**
+
+**`5` eccezioni dichiarate su `2` file**, ognuna col suo ### **perche- di almeno `40` caratteri**, piu- ### **`2` passi scritti a mano** *(l-esecutore, e l-Eulero esplicito del punto `8`)*. ### **E un-eccezione ORFANA e- rifiutata**: resta come ### **un permesso che nessuno ha chiesto.**
+
+### ⚠ **E IL MIO COLLAUDO AVEVA UN DIFETTO DI ALIASING**, che il collaudo stesso ha trovato: `salva` era ### **lo stesso dizionario** che il ripristino rimetteva, quindi il caso successivo ### **mutava la copia di salvataggio** — e il braccio finale *(«rimesso tutto a posto, TACE»)* ### **e- quello che l-ha visto.**
+
+**Collaudi:** `P-ES1` ### **`8`/`8`** · `P-M1` `8`/`8` · i metodi vanno a ### **`PORTATO=84`** *(da `77`)*, `DA_PORTARE` scende a ### **`19`** *(da `25`)*.

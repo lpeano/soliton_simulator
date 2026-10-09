@@ -54,6 +54,9 @@ FILE_FISICA = (
     # ### IL COSTRUTTO `@rif` *(punto `14`)*: ### **byte-inerte**, e il suo
     # ### collaudo lo verifica ### **con `is`.**
     'primo_ordine/_rif.py',
+    # ### IL TIMBRO *(punti `5`, `6`, `10`)*: l-impronta di cio- che ha
+    # ### girato, ### **in un solo posto** -- tre posti divergerebbero.
+    'primo_ordine/timbro.py',
     # ### ⚠ **IL COLLAUDO DELLA CATENA STA SOTTO `primo_ordine/`**, quindi
     # ### la lista lo deve nominare. ### ⛔ **Ma NON e- in `FISICA` di
     # ### `P-E4`**: il cono si misura sulla NORMA, e la norma e- un osservatore

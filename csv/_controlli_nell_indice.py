@@ -53,6 +53,7 @@ SORGENTI = (
     "csv/_replay_registri.py",
     "csv/_citazioni_strutturate.py",
     "csv/_rif_nel_codice.py",
+    "csv/_un_solo_esecutore.py",
     "csv/indice.py",
     "csv/_hook_presidi.py",
     "csv/_hook_id_obbligatorio.py",

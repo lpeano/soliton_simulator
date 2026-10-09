@@ -1,0 +1,47 @@
+{
+ "config": {
+  "dt": 0.01,
+  "integratore": "locale",
+  "iterazioni": 64,
+  "leggi_attive": [
+   "PROVA-HOPPING",
+   "PROVA-LOCALE"
+  ],
+  "nodi": 9,
+  "osservatori": [
+   "PROVA-NORMA"
+  ],
+  "passi": 200,
+  "scena": "catena",
+  "seme": 11,
+  "toll": 1e-14,
+  "versione": 1
+ },
+ "conto_leggi": {
+  "di_prova": 3,
+  "per_tipo": {
+   "osservatore": 1,
+   "termine_arco": 1,
+   "termine_nodo": 1
+  },
+  "totale": 3,
+  "variabili": 1
+ },
+ "generati": [
+  "osservatori/prova_norma.py=de559e91fd29e8c2",
+  "stato.py=78440fb9a1064157",
+  "termini/prova_hopping.py=58e763653d7df7fe",
+  "termini/prova_locale.py=40743d115d1aac66"
+ ],
+ "impronta_config": "f60880b697e19f32",
+ "impronta_generati": "57eacdcd06183cd7",
+ "impronta_tabella": "c1617b0abc278dac",
+ "passo": 200,
+ "versione_dati": 1,
+ "versioni": {
+  "macchina": "AMD64",
+  "numpy": "2.3.0",
+  "piattaforma": "Windows-11-10.0.26300-SP0",
+  "python": "3.13.2"
+ }
+}

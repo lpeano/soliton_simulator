@@ -2567,7 +2567,7 @@ etichette rimosse, con ### **`0` persi, `0` doppi, `0` conflitti**.
 | | |
 |---|---|
 | **file** | `csv/_hook_id_obbligatorio.py` |
-| **BLOB** *(sha1 dei byte grezzi)* | `f9a49898` |
+| **BLOB** *(sha1 dei byte grezzi)* | `b1fc8814` |
 | **COMANDO** | `python csv/_hook_id_obbligatorio.py --collaudo` *(`11`/`11`)*; nel `commit-msg`: `--controlla $1` |
 | **cosa misura** | **quali commit contano** *(un file della LISTA, o un `doc/REFERTO_*`/`doc/REPERTO_*`)* e **se il messaggio cita almeno un ID NOTO** |
 | ### ⭐ **è il ROVESCIO di `H-INDICE`** | quello controlla che gli ID citati ### **esistano**; questo che ### **ce ne sia almeno UNO** |
@@ -2674,7 +2674,7 @@ etichette rimosse, con ### **`0` persi, `0` doppi, `0` conflitti**.
 | | |
 |---|---|
 | **file** | `csv/_referto_infrastruttura_era2.py` |
-| **BLOB** *(sha1 dei byte grezzi)* | `d0e96fcd` |
+| **BLOB** *(sha1 dei byte grezzi)* | `5f44420a` |
 | **COMANDO** | `python csv/_referto_infrastruttura_era2.py` |
 | **cosa misura** | **FA GIRARE i sette collaudi** dell'era `2` e scrive `doc/REFERTO_infrastruttura_era2.md` **dalla loro uscita** |
 | ### ⛔ **e nessun numero e' ricopiato** | `L-NUMERI`: le cifre del referto escono **dallo `stdout` dei comandi**, e il referto porta **i comandi stessi**, verbatim. ### **Se un collaudo smette di passare, il referto LO DICE** invece di conservare il numero di ieri |
@@ -2688,7 +2688,7 @@ etichette rimosse, con ### **`0` persi, `0` doppi, `0` conflitti**.
 | | |
 |---|---|
 | **file** | `csv/_metodi_era2.py` |
-| **BLOB** *(sha1 dei byte grezzi)* | `fea3be7a` |
+| **BLOB** *(sha1 dei byte grezzi)* | `fefd4d43` |
 | **COMANDO** | `python csv/_metodi_era2.py` *(il presidio, e GENERA il documento)* · `--collaudo` *(nei due versi, `8`/`8`)* |
 | **cosa impedisce** | che `doc/METODI_era1_in_era2.md` **invecchi in silenzio**: ### **ogni metodo del perimetro DEVE avere una riga** *(come si applica · dove · stato)*, citato o no |
 | ### ⭐ **e il PERIMETRO lo calcola l'INDICE** | da ### **campi a vocabolario chiuso** *(`classe in (STANDARD, PRESIDIO)`, piu' le cure di architettura che il mandato nomina **per ID**)*. ### ⛔ **Nessun `titolo` e nessuna `descrizione` si leggono per decidere se una voce e' un metodo** — e' il principio del mandato **applicato a se stesso** |
@@ -2703,7 +2703,7 @@ etichette rimosse, con ### **`0` persi, `0` doppi, `0` conflitti**.
 | | |
 |---|---|
 | **file** | `csv/_controlli_nell_indice.py` |
-| **BLOB** *(sha1 dei byte grezzi)* | `9a8368a1` |
+| **BLOB** *(sha1 dei byte grezzi)* | `6bcbcf42` |
 | **COMANDO** | `python csv/_controlli_nell_indice.py` *(gli errori e i segnali)* · `--collaudo` *(nei due versi, `8`/`8`)* · `--segnali` |
 | ### ⛔ **cosa RIFIUTA** | il **codice dichiara un ID** che ### **non e' nell'indice** — un presidio che cita un ID inesistente ### **ha un riferimento rotto** · oppure la voce esiste e ### **non ha `classe: PRESIDIO`** |
 | ### ⚠ **cosa SEGNALA e non rifiuta** | una voce `classe: PRESIDIO` che ### **nessun codice dichiara**: potrebbe vivere ### **in shell** *(i `H-*` stanno in `.githooks/`)* o essere ### **proposta e non cablata** *(`H-ETC-1`, `H-ETC-2`)*. ### **Rifiutare un fatto VERO non e' un presidio: e' un impedimento** *(`A9`)* |
@@ -2747,7 +2747,7 @@ etichette rimosse, con ### **`0` persi, `0` doppi, `0` conflitti**.
 
 | | |
 |---|---|
-| **i file** | `primo_ordine/config/schema_config.py` *(BLOB `78491ed8`)* · `primo_ordine/config/prova.yaml` · `primo_ordine/driver.py` *(BLOB `de83a39a`)* |
+| **i file** | `primo_ordine/config/schema_config.py` *(BLOB `78491ed8`)* · `primo_ordine/config/prova.yaml` · `primo_ordine/driver.py` *(BLOB `427d0dec`)* |
 | **COMANDO** | `python primo_ordine/driver.py primo_ordine/config/prova.yaml` · `python primo_ordine/config/schema_config.py` *(il collaudo dello schema, `24`/`24`)* |
 | ### ⛔ **LA RIGA DI COMANDO SCEGLIE SOLO IL FILE** | ### **un argomento, e un argomento in piu' e' un ERRORE.** Nessun flag che cambi un parametro, nessuna variabile d'ambiente, ### **nessun default nel codice** |
 | ### ⭐ **e NIENTE INTERRUTTORI PER LE LEGGI** *(`15(c)`)* | una legge e' in `leggi_attive` ### **PER ID**, oppure ### **non gira** — e un ID che non e' in `leggi.yaml` ### **fa RIFIUTARE il file.** ### **E' la lezione di `CONFIG-1`:** `28` leggi su `31` giravano SPENTE, e la cura ### **non e' un presidio sui flag: e' togliere i flag** |
@@ -2799,5 +2799,22 @@ etichette rimosse, con ### **`0` persi, `0` doppi, `0` conflitti**.
 | ### ⛔ **cosa impedisce** | un ### **ID in un commento `#`** *(col **tokenizer**, non con una regex)* · un ### **`@rif` verso un ID inesistente** · un ### **`file:riga`** in un commento o in una stringa |
 | ### ⚠ **e il confine COMMENTO/DOCSTRING e' DICHIARATO** | il mandato dice *«nei COMMENTI»*: un commento sta ### **accanto al codice** e un ID la' ### **sembra un riferimento**; un docstring e' ### **documentazione** e spiega il ### **perche'**. ### **`10` ID nei commenti (curati), `33` nei docstring (che restano)** |
 | **l'uscita** | `doc/RIFERIMENTI_era2.md`, ### **il verso opposto, GENERATO**: `4` voci, `4` riferimenti |
+
+---
+
+### `primo_ordine/timbro.py` e `csv/_un_solo_esecutore.py` — **IL TIMBRO, LA RIPRESA CHE RIFIUTA, UN SOLO ESECUTORE** *(2026-10-10)*
+
+| | |
+|---|---|
+| **i file** | `primo_ordine/timbro.py` *(BLOB `87f46ab9`)* · `csv/_un_solo_esecutore.py` *(BLOB `76181b4f`)* |
+| **COMANDO** | `python primo_ordine/driver.py primo_ordine/config/prova.yaml` *(stampa il timbro e salva)* · `python csv/_un_solo_esecutore.py` · `--collaudo` *(nei due versi, `8`/`8`)* |
+| ### ⭐ **e i tre punti stanno in UN file, non per comodita'** | sono ### **la stessa cosa guardata da tre lati** — ### **l'impronta di cio' che ha girato.** Il timbro la ### **stampa**, il salvataggio la ### **scrive accanto ai dati**, la ripresa la ### **confronta e RIFIUTA.** ### **Tenerli separati vorrebbe dire calcolarla in TRE POSTI, e tre posti divergono** |
+| **`5` il TIMBRO** | l'impronta della ### **tabella**, dei ### **generati** *(dei generati, non del generatore: se il generatore cambia senza cambiare cio' che genera, ### **l'uscita e' la stessa**)*, della ### **configurazione**, piu' scena, seme, `dt`, passi, integratore, ### **le leggi ATTIVE** e ### **le versioni** |
+| **`6` SALVA e RIPRENDI** | lo stato in `npz` ### **locale** e il timbro in un `json` ### **accanto, che si committa.** ### **La ripresa RIFIUTA** se tabella, generati o configurazione sono cambiati — ### **rifiuta, non avverte** |
+| **`15(e)` la scrittura e' ATOMICA** | temporaneo + `os.replace`: ### **il PC si riavvia da solo fra `00:00` e `02:00`**, e ### **un file a meta' e' peggio di nessun file** |
+| **`10` il CONTO DELLE LEGGI** | dalla ### **TABELLA**, non dai file *(contare i file direbbe **quante ne sono state generate**, non **quante ce ne sono**)*. ### **Stampato dal timbro E dal referto** |
+| **`9` UN SOLO ESECUTORE** | `P-ES1` guarda le chiamate ### **E I NOMI**: il driver scrive `avanza = PA.passo_locale if …` e poi chiama `avanza(…)`, e ### **un presidio che guardasse solo le chiamate NON VEDREBBE NIENTE** |
+| ### ⚠ **e le eccezioni sono DICHIARATE** | `5` su `2` file, ognuna col suo ### **perche' di almeno `40` caratteri**: *«una via di fuga a costo zero non e' un'eccezione, e' un buco»*. E ### **un'eccezione ORFANA e' rifiutata** |
+| **l'uscita** | `db_era2/stato_<impronta>.npz` *(### **non tracciato**)* + `.timbro.json` *(### **tracciato**: e' il comando che riproduce quel dato)* |
 
 ---

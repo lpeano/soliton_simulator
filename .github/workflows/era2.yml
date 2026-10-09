@@ -80,6 +80,12 @@ jobs:
           python primo_ordine/_genera.py
           git diff --exit-code -- primo_ordine doc/leggi_era2
 
+      - name: "### `P-ES1` -- un solo esecutore, e il TIMBRO"
+        run: |
+          python csv/_un_solo_esecutore.py
+          python csv/_un_solo_esecutore.py --collaudo
+          python primo_ordine/driver.py primo_ordine/config/prova.yaml
+
       - name: "### `@rif` e `P-RIF` -- un ID nel codice e- un costrutto, non prosa"
         run: |
           python primo_ordine/_rif.py

@@ -155,11 +155,9 @@ METODI = {
     # ### ⚠ **QUESTA RIGA L-AVEVO INGHIOTTITA** con una sostituzione il cui indice
     # ### di fine cercava ### **il primo `"DA_PORTARE"),` dopo l-inizio**, e quello era
     # ### il terminatore ### **di H-P5, non di H-P3.** ### **Me l-ha detto `P-M1`.**
-    "H-P5": ("un referto che non dichiara la configurazione INTERA. ### ORA LA "
-             "CONFIGURAZIONE ESISTE (punto 15(a)) e il driver ne stampa l-IMPRONTA e "
-             "TUTTI i campi: ### MA NESSUN REFERTO DELL-ERA 2 LA DICHIARA ANCORA, e "
-             "quello e- il punto 5 (il timbro)",
-             "`primo_ordine/driver.py::main`; il referto e- il punto 5", "DA_PORTARE"),
+    "H-P5": (
+        'un referto che non dichiara la configurazione INTERA. ### PORTATO: il timbro porta la configurazione INTERA piu- la sua impronta, e il referto dell-era 2 stampa il conto delle leggi',
+        '`timbro.py::righe_timbro`, stampato dal driver', "PORTATO"),
     "H-P7": ("ogni flag porta il suo commento: ### l-era 2 NON HA FLAG di fisica, e il "
              "punto 15(c) dice che non ne avra- -- una legge e- in tabella o non c-e-",
              "`SCHEDA_NEL_REGISTRO` lo limita al simulatore", "NON_SI_APPLICA"),
@@ -209,9 +207,9 @@ METODI = {
     "REG-R": ("la regola mantenuta del registro della fisica: nell-era 2 la scheda si "
               "genera, e il registro resta la casa delle leggi dell-era 1",
               "`csv/_file_fisica.py::SCHEDA_NEL_REGISTRO`", "PORTATO"),
-    "STATI-LOCALI": ("gli stati pesanti restano locali, in git solo sha1, percorso e "
-                     "comando: ### IL PUNTO 15(e) lo rende una regola del formato dei dati",
-                     "nessun dato pesante oggi; punto 15", "DA_PORTARE"),
+    "STATI-LOCALI": (
+        'gli stati pesanti restano locali, in git solo sha1, percorso e comando. ### PORTATO: `db_era2/*.npz` e- nel `.gitignore`, e IL `.timbro.json` ACCANTO SI TRACCIA -- e- leggero e porta l-impronta della tabella, dei generati e della configurazione, cioe- IL COMANDO CHE RIPRODUCE QUEL DATO',
+        '`.gitignore` + `timbro.py::salva`', "PORTATO"),
     # ------------------------------------------------------------------ le REGOLE DI LAVORO
     "P1": ("non usare l-associazione senza verificare lo storico: in questo mandato ho "
            "riletto dal disco prima di ogni cura, e due volte la rilettura mi ha smentito",
@@ -242,10 +240,9 @@ METODI = {
     "P5": ("ogni ramo `else`/fallback su un percorso fisico va CONTATO: ### IL PUNTO 2 lo "
            "rende un presidio -- le guardie fuori dalla fisica avranno un contatore",
            "punto 2, da fare", "DA_PORTARE"),
-    "P6": ("ogni csv di misura porta blob, seme e flag: ### SUPERATA nell-era 1, e il "
-           "punto 5 la rifa- meglio -- IL TIMBRO porta l-impronta della TABELLA e dei "
-           "GENERATI, non una lista di flag",
-           "punto 5, da fare", "DA_PORTARE"),
+    "P6": (
+        'ogni csv di misura porta blob, seme e flag. ### SUPERATA nell-era 1, e IL PUNTO 5 LA RIFA- MEGLIO: il TIMBRO porta l-impronta della TABELLA, dei GENERATI e della CONFIGURAZIONE, piu- la scena, il seme e le versioni -- non una lista di flag, perche- ### i flag non ci sono',
+        '`primo_ordine/timbro.py::timbro`, stampato dal driver', "PORTATO"),
     "L-DOPO-STOP": ("dopo uno STOP si lavora solo la coda: ### e Luca ha cambiato la "
                     "regola per questa coda -- lo STOP vale come CHECKPOINT e si passa al "
                     "mandato successivo SENZA aspettare",
@@ -292,11 +289,9 @@ METODI = {
                    "la relazione; le voci mancano", "DA_PORTARE"),
     "STANDARD-8": ("un difetto dimostrato si cura: ### SUPERATA, assorbita in `A12`",
                    "vedi `A12`", "PORTATO"),
-    "STANDARD-10": ("una cura non aumenta il numero delle leggi: ### APPLICATA -- "
-                    "`leggi/osservatori.yaml` e- stato TOLTO perche- a parita- di effetto "
-                    "si preferisce togliere un-eccezione. ### E IL PUNTO 10 chiede che "
-                    "ogni referto STAMPI il conto",
-                    "punto 10, da fare", "DA_PORTARE"),
+    "STANDARD-10": (
+        'una cura non aumenta il numero delle leggi. ### IL PUNTO 10 LO RENDE STAMPATO: ogni referto porta IL CONTO, per tipo, e dice quante sono `prova: true` -- oggi 3 su 3, cioe- ZERO leggi vere',
+        '`timbro.py::conto_leggi`, nel referto', "PORTATO"),
     "AUTO-MANUTENZIONE": ("tieni aggiornati i documenti vivi: l-inventario e la relazione "
                           "sono stati aggiornati in OGNI commit, e ### DUE NUMERI "
                           "DELL-INVENTARIO ERANO GIA- SCADUTI quando li ho guardati",
@@ -495,17 +490,11 @@ METODI["MAX-NODI-FERMA"] = (
     "verificato VIA AST",
     "`primo_ordine/stato.py::controlla_domini`, chiamato da `passo.py`", "PORTATO")
 METODI["RIPRESA-ARGV"] = (
-    "la ripresa si fida dell-argv. ### IL PUNTO 15(a) HA CHIUSO METa- DEL CERCHIO: la "
-    "riga di comando sceglie SOLO il file, e un argomento in piu- e- un ERRORE. "
-    "### MA LA RIPRESA NON ESISTE ANCORA: e- il punto 6, e la sua pretesa e- che "
-    "RIFIUTI se la tabella e- cambiata",
-    "`primo_ordine/driver.py::main` per l-argv; la ripresa e- il punto 6",
-    "DA_PORTARE")
+    'la ripresa si fida dell-argv. ### PORTATO: la riga di comando sceglie SOLO il file (punto 15a) e LA RIPRESA RIFIUTA se tabella, generati o configurazione sono cambiati -- RIFIUTA, non avverte, perche- riprendere con una tabella diversa continua una corsa che NON E- QUELLA',
+    '`timbro.py::riprendi`', "PORTATO")
 METODI["Z54"] = (
-    "l-archivio a serie: e- un meccanismo di dati dell-era 1. ### IL PUNTO 15(e) rifa- "
-    "la stessa cura meglio -- versione del formato, scrittura ATOMICA, reperti "
-    "immutabili -- e NON e- ancora fatto",
-    "punto 15(e), da fare", "DA_PORTARE")
+    'l-archivio a serie. ### IL PUNTO 15(e) e il 6 lo rifanno meglio: versione del formato nel timbro, scrittura ATOMICA (temporaneo + rinomina, perche- il PC si riavvia fra 00:00 e 02:00), e la RIPRESA CHE RIFIUTA se la tabella e- cambiata',
+    '`timbro.py::scrivi_atomico`, `::salva`, `::riprendi`', "PORTATO")
 METODI["CONFIG-1"] = (
     "28 leggi su 31 giravano SPENTE in sei misure, per 140 costanti di modulo. "
     "### IL PUNTO 15 L-HA CHIUSO, e non con un presidio sui flag: ### TOGLIENDO I "
@@ -564,6 +553,13 @@ METODI["P-RIF"] = (
     "trovato 4 commenti in piu-",
     "`csv/_rif_nel_codice.py::controlla` + `primo_ordine/_rif.py`, `pre-commit` + CI",
     "PORTATO")
+METODI["P-ES1"] = (
+    "NATO NELL-ERA 2, e generalizza `H-P9`: chi avanza lo stato passa dallo "
+    "schedulatore. ### Le eccezioni sono DICHIARATE una per una con il loro perche- "
+    "(almeno 40 caratteri), e guarda le chiamate E I NOMI -- il driver assegna la "
+    "funzione a una variabile, e un presidio che guardasse solo le chiamate NON "
+    "VEDREBBE NIENTE",
+    "`csv/_un_solo_esecutore.py::controlla`, `pre-commit` + CI", "PORTATO")
 METODI["AUDIT-CURE"] = (
     "il censimento delle cure e del loro costo: ### IL PUNTO 10 chiede che ogni referto "
     "STAMPI il numero delle leggi, e che un commit che lo aumenta lo DICHIARI",

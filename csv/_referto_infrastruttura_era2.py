@@ -106,6 +106,34 @@ def main():
     A("")
     A("---")
     A("")
+    # ### ⛔ **IL CONTO DELLE LEGGI** *(punto `10`)*: ### **ogni referto lo
+    # ### STAMPA**, e un commit che lo aumenta ### **deve dichiararlo.**
+    sys.path.insert(0, os.path.join(RADICE, "primo_ordine"))
+    sys.path.insert(0, os.path.join(RADICE, "primo_ordine", "leggi"))
+    import timbro as _TB
+    _c = _TB.conto_leggi()
+    A("## `0.` IL CONTO DELLE LEGGI — ### **`%d`** *(punto `10`)*" % _c["totale"])
+    A("")
+    A("> ### ⛔ **OGNI REFERTO LO STAMPA, e un commit che lo AUMENTA deve "
+      "DICHIARARLO** *(`STANDARD-10`, `AUDIT-CURE`)*: ### **una cura non aumenta il "
+      "numero delle leggi**, e a parita- di effetto ### **si preferisce togliere "
+      "un-eccezione.**")
+    A("")
+    A("| | quante |")
+    A("|---|--:|")
+    for _t, _n in sorted(_c["per_tipo"].items()):
+        A("| `%s` | `%d` |" % (_t, _n))
+    A("| **in tutto** | ### **`%d`** |" % _c["totale"])
+    A("| di cui ### **`prova: true`** | ### **`%d`** |" % _c["di_prova"])
+    A("| le **variabili** | `%d` |" % _c["variabili"])
+    A("")
+    A("### ⚠ **E `%d` SU `%d` SONO DI PROVA**, cioe- ### **non sono fisica "
+      "decisa**: valori che vengono ### **da niente**, e la scheda di ognuna lo dice. "
+      "### **Il conto delle leggi VERE dell-era `2` e- `%d`.**"
+      % (_c["di_prova"], _c["totale"], _c["totale"] - _c["di_prova"]))
+    A("")
+    A("---")
+    A("")
     A("## `1.` CHE COSA BLOCCA, E DOVE")
     A("")
     A("> ### ⚠ **LA DISTINZIONE CHE CONTA, e che ho dovuto correggere in corsa:** "

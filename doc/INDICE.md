@@ -12,7 +12,7 @@
 | `FISICA` | `DA_CLASSIFICARE` | 1 |
 | `FISICA` | `ENTRAMBE` | 18 |
 | `INFRASTRUTTURA` | `1` | 39 |
-| `INFRASTRUTTURA` | `2` | 9 |
+| `INFRASTRUTTURA` | `2` | 10 |
 | `INFRASTRUTTURA` | `ENTRAMBE` | 14 |
 | `METODO` | `1` | 153 |
 | `METODO` | `2` | 1 |
@@ -438,6 +438,7 @@
 | `P-E7` | PRESIDIO | INFRASTRUTTURA | 2 | ### **AGENDA** |  | i RIFERIMENTI esistono: la scheda sul disco, e la voce di un osservatore nell-in |
 | `P-E8` | PRESIDIO | INFRASTRUTTURA | 2 | ### **AGENDA** |  | la CI: i collaudi girano a ogni push, e FUORI dal PC di Luca -- ma SEGNALA, non  |
 | `P-EQ-MEDIANA-ARCHI` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | P_eq prende la mediana dei PRIMI n ARCHI su m: un sottoinsieme arbitrario, non t |
+| `P-ES1` | PRESIDIO | INFRASTRUTTURA | 2 | ### **AGENDA** |  | UN SOLO ESECUTORE: chi avanza lo stato passa dallo schedulatore, o si dichiara |
 | `P-M1` | PRESIDIO | METODO | ENTRAMBE | ### **APERTA** |  | ogni METODO dell-era 1 ha una riga che dice come si applica all-era 2 |
 | `P-MEMORIA` | STANDARD | FISICA | ENTRAMBE | ### **APERTA** |  | uno scalare con memoria acquista un verso: la memoria da la direzione |
 | `P-R1` | PRESIDIO | INFRASTRUTTURA | 2 | ### **AGENDA** |  | ogni RAMO della fisica dell-era 2 e- dichiarato: quanti, e a che servono |
