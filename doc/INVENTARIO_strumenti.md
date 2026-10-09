@@ -2361,3 +2361,15 @@ etichette rimosse, con ### **`0` persi, `0` doppi, `0` conflitti**.
 | **cosa misura** | niente: **porta la decisione** sulle `35` voci, nei tre gruppi che il mandato scrive *(`12` gemelle di criteri, `13` di metodo, `10` di strumenti)*, con il perché di ciascun gruppo |
 | ### ⚠ **i due CASI LIMITE** | `REGISTRO_FISICA:A1` e `S1` dicono *«flag SPENTO = byte-identico…»*, che è **una FORMA valida per qualunque era**. Stanno in una tabella **loro**, `LIMITE`, perché **non devono sparire fra i `35`** |
 | ### ⛔ **le ECCEZIONI** | il mandato ne ammette; `ECCEZIONI` è **vuoto**, e il dizionario c'è **perché una eccezione futura vada LÌ** e non in un commento |
+
+---
+
+### `csv/_doc_referto_era_metodo.py` — **IL REFERTO DELL'ERA DELLE VOCI DI METODO** *(2026-10-09)*
+
+| | |
+|---|---|
+| **file** | `csv/_doc_referto_era_metodo.py` |
+| **BLOB** *(sha1 dei byte grezzi)* | `b2fee97f` |
+| **COMANDO** | `python csv/_doc_referto_era_metodo.py` |
+| **cosa misura** | i conteggi **prima** da `git show 72e452f:…` e **dopo** dal disco; i segnali dalle stesse funzioni che gira il validatore; e **importa** i tre gruppi, i `LIMITE` e le `ECCEZIONI` da `csv/_era_metodo.py` e la tavola `ERA1_OGGETTI` da `csv/indice.py`: ### **il referto e il lavoro non possono divergere** |
+| **l'uscita** | `doc/REFERTO_indice_v3_era_metodo.md` *(`250` righe)* |

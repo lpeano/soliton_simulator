@@ -83,8 +83,8 @@ era       1=496  DA_CLASSIFICARE=188  ENTRAMBE=138  2=24
 stato     SOSPESA=340  DA_CLASSIFICARE=188  CHIUSA=187  APERTA=106  AGENDA=24  SUPERATA=1
 ```
 
-### ✔ **FATTO IN QUESTO GIRO:** il punto `3`: ### **il presidio `F8`** -- una voce `ENTRAMBE` che nomina un ### **oggetto concreto dell'era `1`**, riconosciuto da ### **come si scrive** *(un flag dai due trattini, il blob dal suo sha1)* e non dalla parola. ### **Due soli segnali, e sono entrambi fra le voci che il mandato dice di LASCIARE `ENTRAMBE`**: li elenco, non li correggo. Collaudo `30/30`
+### ✔ **FATTO IN QUESTO GIRO:** il punto `4`: ### **il referto `doc/REFERTO_indice_v3_era_metodo.md`** *(`250` righe)*, con ### **l'errore del guardiano dichiarato in testa** -- *«metodo = era `ENTRAMBE`» era troppo grossa, ### **e io l'ho applicata**: `35` voci erano `ENTRAMBE` ### **per inerzia***. `6/6` i controlli, `30/30` il collaudo dei presidi
 
-### ⛔ **RESTA:** il punto `4`: i controlli e il referto ### **`doc/REFERTO_indice_v3_era_metodo.md`**, con ### **l'errore del guardiano dichiarato** e i segnali residui voce per voce
+### ⛔ **RESTA:** ### **le decisioni di Luca** in `doc/indice/DA_DECIDERE_LUCA.md` *(si genera)*; i ### **`2` segnali di `F8`** *(elencati, non corretti)*; i ### **due casi limite** *(`REGISTRO_FISICA:A1` e `S1`: la forma e' generica, il soggetto e' un flag)*; e il ### **buco su `doc/TRADUZIONE_IN_H.md`**, che l'indice non vede
 
-**Ultimo lotto applicato:** `doc/indice/_lotti/v3_r2.jsonl *(il punto `3` non passa da un lotto: aggiunge un presidio)*`
+**Ultimo lotto applicato:** `doc/indice/_lotti/v3_r2.jsonl *(il punto `4` non passa da un lotto: scrive il referto)*`
