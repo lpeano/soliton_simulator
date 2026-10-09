@@ -8,17 +8,17 @@
 
 | | quanti |
 |---|--:|
-| **`PORTATO`** | `70` |
+| **`PORTATO`** | `71` |
 | **`DA_PORTARE`** | `28` |
 | **`DA_DECIDERE`** | `5` |
 | **`NON_SI_APPLICA`** | `9` |
-| **in tutto** | ### **`112`** |
+| **in tutto** | ### **`113`** |
 
-### ⚠ **E IL NUMERO `112` E- MISURATO, non stimato:** viene dal perimetro che l-indice calcola, e ### **il mandato ne nominava <<una decina>>** per nome piu- *<<e le cure di architettura>>*. ### **La decina era `20`.**
+### ⚠ **E IL NUMERO `113` E- MISURATO, non stimato:** viene dal perimetro che l-indice calcola, e ### **il mandato ne nominava <<una decina>>** per nome piu- *<<e le cure di architettura>>*. ### **La decina era `20`.**
 
 ---
 
-## `PORTATO` — `70` metodi
+## `PORTATO` — `71` metodi
 
 > ### ✅ **GIA- NELL-ERA `2`**, e `dove` dice dove
 
@@ -66,6 +66,7 @@
 | **`P-R1`** | `PRESIDIO` | NATO NELL-ERA 2: `A8` e `P5` cablati. Il CONTEGGIO dei rami lo misura l-AST, il RUOLO e- dichiarato a vocabolario chiuso. ### 27 rami in 12 funzioni, e NOVE SONO `default` -- un DEBITO che il punto 15(b) vietera-, dichiarato invece che nascosto | `csv/_rami_era2.py::controlla`, `pre-commit` + CI |
 | **`P-T1`** | `PRESIDIO` | NATO NELL-ERA 2, ed e- il principio del mandato CABLATO: un presidio dichiarato ERRORE non puo- NOMINARE un campo di testo (via AST), e chi legge la prosa PUO- SOLO SEGNALARE. ### Non ripara: MANTIENE -- la misura dice che oggi e- gia- vero | `csv/_testo_e_metadati.py::controlla`, `pre-commit` + CI |
 | **`P-T2`** | `PRESIDIO` | NATO NELL-ERA 2: il REPLAY su TUTTI i registri (4 REPLAY, 5 REPERTO col blob dichiarato) e i testi generati BYTE-IDENTICI (9 file, VELOCI nel pre-commit e LENTI solo nella CI). ### E metadati.jsonl e- un REPERTO PER NECESSITA-: ha una via di scrittura e ZERO storico | `csv/_replay_registri.py::controlla`, `pre-commit` + CI |
+| **`P-T3`** | `PRESIDIO` | NATO NELL-ERA 2: una citazione e- {file, riga, commit, impronta, frase} e si RI-VERIFICA su `git show`. ### Il par.2 dice che i numeri di riga SONO SHIFTATI: con il commit una citazione e- vera PER SEMPRE, senza e- destinata a diventare falsa | `csv/_citazioni_strutturate.py::controlla`, `pre-commit` + CI |
 | **`P1`** | `STANDARD` | non usare l-associazione senza verificare lo storico: in questo mandato ho riletto dal disco prima di ogni cura, e due volte la rilettura mi ha smentito | metodo, non codice |
 | **`P1-bis`** | `STANDARD` | la relazione si scrive nello stesso commit del riscontro: ogni commit di questo mandato ha il suo paragrafo | `RELAZIONE_PER_CLAUDE.md` + `H-P1-bis` |
 | **`P1-quater`** | `STANDARD` | ogni sostituzione si asserisce per se-: l-helper `sost()` conta l-ancora e FALLISCE se non e- unica. ### E LA LEZIONE SI E- ALLARGATA: non solo gli escape, ma il NESTING -- i heredoc di bash si sono rotti tre volte sull-apostrofo, e i patch script si scrivono con lo strumento di scrittura | ogni patch script di questo mandato |

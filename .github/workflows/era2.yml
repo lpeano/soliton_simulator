@@ -80,6 +80,11 @@ jobs:
           python primo_ordine/_genera.py
           git diff --exit-code -- primo_ordine doc/leggi_era2
 
+      - name: "### `P-T3` -- le citazioni strutturate, ri-verificate su git show"
+        run: |
+          python csv/_citazioni_strutturate.py
+          python csv/_citazioni_strutturate.py --collaudo
+
       - name: "### `P-T2` -- il replay su tutti i registri, e i generati (CON i lenti)"
         run: |
           python csv/_replay_registri.py --con-lenti

@@ -44,7 +44,17 @@ D = os.path.join(RADICE, "doc", "indice")
 
 PRESIDIO = "P-T2"
 
-STATI = ("REPLAY", "REPERTO")
+# ### ⚠ **E IL TERZO STATO CORREGGE UNA COSA CHE HO SCRITTO IO:** la prima
+# ### stesura diceva *<<o ha un replay, o e- un reperto: NON C-E- UNA TERZA
+# ### RISPOSTA>>*. ### **C-E-**, e `citazioni.jsonl` lo dimostra: ### **cresce**
+# ### *(quindi non e- un reperto)* e ### **non ha uno storico** *(quindi non e-
+# ### un replay)*. Una citazione e- ### **immutabile per costruzione** -- e-
+# ### appuntata a un commit -- quindi il registro ### **si allunga e non si
+# ### riscrive mai.**
+# ### ⭐ **E il presidio e- PIU- FORTE di un blob:** il blob direbbe solo
+# ### *<<e- cambiato>>*; questo dice ### **<<una riga che c-era NON C-E- PIU-,
+# ### o e- CAMBIATA>>**, e lo verifica ### **contro `git show HEAD`.**
+STATI = ("REPLAY", "REPERTO", "SOLO-AGGIUNTE")
 
 # ### ⛔ **I CAMPI DI TESTO LIBERO**, gli stessi di `P-T1`: ### **una sola lista**,
 # ### e qui si importa invece di ricopiarla -- ### **due liste divergerebbero.**
@@ -73,6 +83,10 @@ REGISTRI = {
     "decisioni.jsonl": ("REPERTO", "id", None, None, "d8a4fd2fae8c4b3f"),
     "migrazione_era1.jsonl": ("REPERTO", None, None, None, "9a5c45b40fb853fd"),
     "conflitti_era1.jsonl": ("REPERTO", None, None, None, "da39a3ee5e6b4b0d"),
+    # ### \u2705 **IL TERZO STATO:** le citazioni strutturate ### **crescono e non si
+    # ### riscrivono.** Nessun blob *(cambierebbe a ogni aggiunta)* e nessuno storico
+    # ### *(una citazione appuntata a un commit ### **non ha versioni**)*.
+    "citazioni.jsonl": ("SOLO-AGGIUNTE", "id", None, None, None),
 }
 
 # =====================================================================================
@@ -201,6 +215,34 @@ def reperto(nome):
     return []
 
 
+def solo_aggiunte(nome):
+    """### `SOLO-AGGIUNTE`: ### **ogni riga che c-era a `HEAD` c-e- ancora, IDENTICA.**
+
+    ### \u26d4 **Si confronta con `git show HEAD:<file>`**, non con un blob dichiarato:
+    un blob ### **cambierebbe a ogni aggiunta** e andrebbe riscritto a mano -- e
+    ### **un presidio che va riscritto a ogni commit si spegne da se-.**
+    """
+    import subprocess
+    p = os.path.join(D, nome)
+    rel = "doc/indice/" + nome
+    r = subprocess.run(["git", "show", "HEAD:" + rel], cwd=RADICE, capture_output=True)
+    if r.returncode != 0:
+        # ### \u2705 **Non e- ancora a `HEAD`:** e- il commit in cui NASCE.
+        return []
+    prima = [json.loads(x) for x in
+             r.stdout.decode("utf-8").split(NL) if x.strip()]
+    ora = {json.dumps(x, sort_keys=True, ensure_ascii=False) for x in _jsonl(p)}
+    err = []
+    for x in prima:
+        s = json.dumps(x, sort_keys=True, ensure_ascii=False)
+        if s not in ora:
+            err.append("`P-T2` `%s`: una riga che c-era a `HEAD` NON C-E- PIU- o e- "
+                       "CAMBIATA (`%s`). ### Questo registro e- `SOLO-AGGIUNTE`: si "
+                       "allunga, e non si riscrive"
+                       % (nome, str(x.get("id") or s)[:40]))
+    return err
+
+
 def controlla():
     err = []
     # --- ogni `.jsonl` di `doc/indice/` e- DICHIARATO
@@ -208,14 +250,18 @@ def controlla():
                  and not f.startswith("storico")}
     for f in sorted(sul_disco - set(REGISTRI)):
         err.append("`P-T2` `%s`: e- un registro sul disco e NON E- DICHIARATO. "
-                   "### O ha un replay, o e- un reperto col suo blob: non c-e- una "
-                   "terza risposta" % f)
+                   "### O ha un replay, o e- un reperto col suo blob, o e- "
+                   "`SOLO-AGGIUNTE`: TRE risposte, e il terzo stato CORREGGE cio- che "
+                   "questa riga diceva prima" % f)
     for f in sorted(set(REGISTRI) - sul_disco):
         err.append("`P-T2` `%s`: DICHIARATO e non sul disco" % f)
     for nome, (stato, _c, storico, _d, b) in sorted(REGISTRI.items()):
         if stato not in STATI:
             err.append("`P-T2` `%s`: stato %r fuori vocabolario: %s"
                        % (nome, stato, list(STATI)))
+            continue
+        if stato == "SOLO-AGGIUNTE":
+            err += solo_aggiunte(nome)
             continue
         if stato == "REPLAY":
             if not storico:
@@ -295,10 +341,11 @@ def collaudo():
     print("=" * 100)
     print("IL COLLAUDO DI `P-T2` -- nei DUE VERSI")
     print("=" * 100)
-    n_rep = sum(1 for v in REGISTRI.values() if v[0] == "REPLAY")
-    n_per = sum(1 for v in REGISTRI.values() if v[0] == "REPERTO")
+    n = {s: sum(1 for v in REGISTRI.values() if v[0] == s) for s in STATI}
+    n_rep = n["REPLAY"]
     esito("sul disco: `P-T2` TACE sui registri", controlla() == [],
-          "%d registri: %d `REPLAY`, %d `REPERTO`" % (len(REGISTRI), n_rep, n_per))
+          "%d registri: %s" % (len(REGISTRI),
+                               ", ".join("%d `%s`" % (n[s], s) for s in STATI)))
     esito("### il braccio sopra HA MATERIA (ci sono registri da rigiocare)", n_rep >= 3,
           "%d `REPLAY`: se fosse 0 il braccio sarebbe un FALSO-UNO" % n_rep)
     # --- quante righe di storico CAMBIANO un campo di testo: il `13(c)` ha materia?
@@ -339,6 +386,30 @@ def collaudo():
         io.open(p, "wb").write(salva)
     esito("NON deve scattare: rimesso il file, il replay TACE", replay("voci.jsonl") == [],
           "### il braccio di sopra scattava per LUI, non per un residuo")
+    # --- il TERZO stato: una riga TOLTA
+    import subprocess as _sp
+    _p = os.path.join(D, "citazioni.jsonl")
+    _r = _sp.run(["git", "show", "HEAD:doc/indice/citazioni.jsonl"], cwd=RADICE,
+                 capture_output=True)
+    if _r.returncode == 0:
+        _salva = io.open(_p, "rb").read()
+        try:
+            _rr = _jsonl(_p)
+            io.open(_p, "w", encoding="utf-8", newline=NL).write(
+                NL.join(json.dumps(x, ensure_ascii=False) for x in _rr[1:]) + NL)
+            esito("### DEVE scattare: una riga TOLTA da un registro `SOLO-AGGIUNTE`",
+                  any("NON C-E- PIU-" in x for x in solo_aggiunte("citazioni.jsonl")),
+                  "### si allunga, e NON si riscrive")
+        finally:
+            io.open(_p, "wb").write(_salva)
+        esito("NON deve scattare: rimesso il file, `SOLO-AGGIUNTE` TACE",
+              solo_aggiunte("citazioni.jsonl") == [],
+              "### il braccio di sopra scattava per LUI")
+    else:
+        esito("`SOLO-AGGIUNTE`: `citazioni.jsonl` NASCE in questo commit",
+              solo_aggiunte("citazioni.jsonl") == [],
+              "### non e- ancora a `HEAD`: il braccio che DEVE scattare arriva al "
+              "prossimo commit, e lo dico")
     # --- un REPERTO che cambia
     salva2 = dict(REGISTRI["assiomi.jsonl"])if False else REGISTRI["assiomi.jsonl"]
     try:
@@ -354,7 +425,7 @@ def collaudo():
         io.open(f2, "w", encoding="utf-8", newline=NL).write("{}" + NL)
         esito("### DEVE scattare: un registro sul disco e NON DICHIARATO",
               any("NON E- DICHIARATO" in x for x in controlla()),
-              "### o ha un replay, o e- un reperto: ### NON C-E- UNA TERZA RISPOSTA")
+              "### o ha un replay, o e- un reperto, o e- `SOLO-AGGIUNTE`: TRE risposte")
     finally:
         if os.path.exists(f2):
             os.remove(f2)
@@ -386,9 +457,10 @@ def main(argv):
     # ### presidio di `pre-commit` che costa due minuti ### **e- una ragione per dare
     # ### `--no-verify`.**
     err += generati(con_lenti="--con-lenti" in argv)
-    n_rep = sum(1 for v in REGISTRI.values() if v[0] == "REPLAY")
-    print("  `P-T2`: %d registri (%d `REPLAY`, %d `REPERTO`), %d testi generati"
-          % (len(REGISTRI), n_rep, len(REGISTRI) - n_rep, len(GENERATI)))
+    n = {s: sum(1 for v in REGISTRI.values() if v[0] == s) for s in STATI}
+    print("  `P-T2`: %d registri (%s), %d testi generati"
+          % (len(REGISTRI), ", ".join("%d `%s`" % (n[s], s) for s in STATI),
+             len(GENERATI)))
     for e in err[:14]:
         print("  ### %s" % e)
     print("  ### %d errori" % len(err))

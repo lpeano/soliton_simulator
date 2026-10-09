@@ -2688,7 +2688,7 @@ etichette rimosse, con ### **`0` persi, `0` doppi, `0` conflitti**.
 | | |
 |---|---|
 | **file** | `csv/_metodi_era2.py` |
-| **BLOB** *(sha1 dei byte grezzi)* | `74fe4442` |
+| **BLOB** *(sha1 dei byte grezzi)* | `36eb8024` |
 | **COMANDO** | `python csv/_metodi_era2.py` *(il presidio, e GENERA il documento)* · `--collaudo` *(nei due versi, `8`/`8`)* |
 | **cosa impedisce** | che `doc/METODI_era1_in_era2.md` **invecchi in silenzio**: ### **ogni metodo del perimetro DEVE avere una riga** *(come si applica · dove · stato)*, citato o no |
 | ### ⭐ **e il PERIMETRO lo calcola l'INDICE** | da ### **campi a vocabolario chiuso** *(`classe in (STANDARD, PRESIDIO)`, piu' le cure di architettura che il mandato nomina **per ID**)*. ### ⛔ **Nessun `titolo` e nessuna `descrizione` si leggono per decidere se una voce e' un metodo** — e' il principio del mandato **applicato a se stesso** |
@@ -2703,7 +2703,7 @@ etichette rimosse, con ### **`0` persi, `0` doppi, `0` conflitti**.
 | | |
 |---|---|
 | **file** | `csv/_controlli_nell_indice.py` |
-| **BLOB** *(sha1 dei byte grezzi)* | `6e96b7c3` |
+| **BLOB** *(sha1 dei byte grezzi)* | `7cb3394e` |
 | **COMANDO** | `python csv/_controlli_nell_indice.py` *(gli errori e i segnali)* · `--collaudo` *(nei due versi, `8`/`8`)* · `--segnali` |
 | ### ⛔ **cosa RIFIUTA** | il **codice dichiara un ID** che ### **non e' nell'indice** — un presidio che cita un ID inesistente ### **ha un riferimento rotto** · oppure la voce esiste e ### **non ha `classe: PRESIDIO`** |
 | ### ⚠ **cosa SEGNALA e non rifiuta** | una voce `classe: PRESIDIO` che ### **nessun codice dichiara**: potrebbe vivere ### **in shell** *(i `H-*` stanno in `.githooks/`)* o essere ### **proposta e non cablata** *(`H-ETC-1`, `H-ETC-2`)*. ### **Rifiutare un fatto VERO non e' un presidio: e' un impedimento** *(`A9`)* |
@@ -2763,12 +2763,27 @@ etichette rimosse, con ### **`0` persi, `0` doppi, `0` conflitti**.
 | | |
 |---|---|
 | **file** | `csv/_replay_registri.py` |
-| **BLOB** *(sha1 dei byte grezzi)* | `91519df8` |
+| **BLOB** *(sha1 dei byte grezzi)* | `79837035` |
 | **COMANDO** | `python csv/_replay_registri.py` *(i veloci)* · `--con-lenti` *(anche il referto: e' quello che la CI passa)* · `--collaudo` *(nei due versi, `11`/`11`)* |
 | ### ⛔ **cosa impedisce** | un record che ### **non coincide col `dopo` della sua ultima riga di storico** · un `REPERTO` il cui ### **BLOB e' cambiato** · un registro sul disco ### **non dichiarato** · un testo generato che ### **rigenerato e' DIVERSO** |
 | **due stati, vocabolario chiuso** | **`REPLAY`** *(si rigioca lo storico)* · **`REPERTO`** *(non cambia, e il blob lo dice)*. ### **`9` registri: `4` e `5`** — quindi *«tutti i registri»* ### **NON vuol dire «tutti hanno uno storico»** |
 | ### ⚠ **e `metadati.jsonl` e' il caso scomodo** | ha ### **una via di scrittura** *(`meta-aggiungi`)* e ### **ZERO righe di storico**: oggi e' un `REPERTO` ### **per necessita', non per scelta** — e il referto lo nomina come ### **un BUCO** |
 | ### ⭐ **e i generati si dividono in VELOCI e LENTI** | il generatore del referto ### **fa girare i sette collaudi** e dal punto `8` ### **supera i `120` secondi.** ### **Un presidio di `pre-commit` da due minuti e' una ragione per dare `--no-verify`**, quindi i lenti stanno ### **SOLO nella CI** |
 | **l'uscita** | a schermo; e ### **il repo resta come l'ha trovato** — se un generato risulta diverso, ### **rimette i byte di prima** |
+
+---
+
+### `csv/_citazioni_strutturate.py` — **`P-T3`: LE CITAZIONI SI RI-VERIFICANO SU `git show`** *(2026-10-10)*
+
+| | |
+|---|---|
+| **file** | `csv/_citazioni_strutturate.py` |
+| **BLOB** *(sha1 dei byte grezzi)* | `6cbdb8b2` |
+| **COMANDO** | `python csv/_citazioni_strutturate.py` · `--collaudo` *(nei due versi, `14`/`14`)* |
+| **la forma** | `{id, file, riga, commit, impronta, frase}` — vocabolario ### **CHIUSO** |
+| ### ⭐ **e il `commit` e' LA PARTE CHE CONTA** | il par.`2` dice che ### **i numeri di riga nei documenti SONO SHIFTATI**: una citazione `file:riga` ### **senza** un commit e' ### **destinata a diventare falsa**, non per malizia ma ### **per il tempo che passa.** Con il commit, `git show <commit>:<file>` da' ### **sempre gli stessi byte** |
+| ### ⛔ **e servono ENTRAMBE** | ### **l'impronta** dice che la riga e' ### **quella**; ### **la frase** dice che la citazione ### **parla di quello** |
+| **l'impronta** | normalizza ### **solo gli SPAZI** *(un file si ri-indenta, e l'indentazione non e' la citazione)* e ### **NON il testo** *(se cambia una parola ### **deve** cambiare)*. E ### **non si scrive a mano: si CALCOLA** da `git show` *(`L-NUMERI`)* |
+| **l'uscita** | `doc/indice/citazioni.jsonl`, `10` citazioni — ### **quelle date dal guardiano**, che qui ### **guadagnano il commit** |
 
 ---

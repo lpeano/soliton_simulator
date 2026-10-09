@@ -11406,3 +11406,17 @@ Il task history e- ### **ANNOTATO, non riscritto** *(par.`8`)*. Collaudo della c
 ### ⚠ **E UN COSTO MISURATO, che cambia la forma del presidio:** il generatore del referto ### **fa girare i sette collaudi**, e dal punto `8` *(che aggiunge `4` semi × `100` passi × `2` integratori)* ### **supera i `120` secondi.** ### ⛔ **Un presidio di `pre-commit` da due minuti NON E- UN PRESIDIO: e- una ragione per dare `--no-verify`.** ### ✅ **Quindi i generati si dividono in VELOCI e LENTI**, e i lenti stanno ### **SOLO nella CI** — e il punto `6` della TERZA parte chiedera- ### **il budget dichiarato**: ### **questo e- il primo posto dove serve.**
 
 Collaudo ### **`11`/`11`**, nei due versi. E il presidio ### **lascia il repo come l-ha trovato:** se un generato risulta diverso, ### **rimette i byte di prima.**
+
+## PUNTO `13(d)` — ### **LE CITAZIONI SI RI-VERIFICANO SU `git show`**, e un TERZO stato di registro che ### **mi corregge** *(2026-10-10)*
+
+### ⭐ **IL `commit` E- LA PARTE CHE CONTA, e non il `file:riga`.** Il par.`2` dice: *«CERCA PER NOME DI FUNZIONE O DI FLAG, MAI PER RIGA: i numeri di riga nei documenti sono di blob vecchi e SONO SHIFTATI»*. ### ⛔ **Quindi una citazione `file:riga` SENZA un commit e- destinata a diventare falsa** — non per malizia, ### **per il tempo che passa.** ### ✅ **Con il commit e- vera per sempre:** `git show <commit>:<file>` ### **da- sempre gli stessi byte.**
+
+### ⛔ **E SERVONO ENTRAMBE, impronta E frase:** ### **l-impronta** dice che la riga e- ### **quella**; ### **la frase** dice che la citazione ### **parla di quello.** Una sola delle due ### **non prova la citazione.**
+
+### ⚠ **E L-IMPRONTA NORMALIZZA SOLO GLI SPAZI**, non il testo: un file ### **si ri-indenta** e l-indentazione ### **non e- la citazione**; ma se cambiasse una parola ### **senza cambiare l-impronta, l-impronta non proverebbe niente.** E ### **non si scrive a mano: si CALCOLA** da `git show` *(`L-NUMERI`)*.
+
+**Le `10` citazioni** del registro sono ### **quelle date dal guardiano** *(`csv/_righe_indirizzate.py`)*: qui ### **guadagnano il commit e l-impronta**, e diventano ### **ri-verificabili.** Le citazioni libere gia- scritte ### **restano come REPERTI** — non si convertono. Collaudo ### **`14`/`14`.**
+
+### ⛔ **E UN TERZO STATO DI REGISTRO, CHE CORREGGE UNA COSA CHE HO SCRITTO IO IERI.** In `P-T2` avevo scritto: *«o ha un replay, o e- un reperto col suo blob: NON C-E- UNA TERZA RISPOSTA»*. ### ⚠ **C-E-, e `citazioni.jsonl` lo dimostra:** ### **cresce** *(quindi non e- un reperto)* e ### **non ha uno storico** *(quindi non e- un replay)* — una citazione e- ### **immutabile per costruzione**, appuntata a un commit, quindi il registro ### **si allunga e non si riscrive mai.**
+
+### ✅ **E `SOLO-AGGIUNTE` E- PIU- FORTE DI UN BLOB, non piu- debole:** un blob direbbe solo *«e- cambiato»* e ### **andrebbe riscritto a ogni aggiunta** *(e un presidio che va riscritto a ogni commit si spegne da se-)*; questo dice ### **«una riga che c-era NON C-E- PIU-, o e- CAMBIATA»**, verificato ### **contro `git show HEAD`.** ### **E la frase che diceva il contrario e- stata corretta in tre posti.**

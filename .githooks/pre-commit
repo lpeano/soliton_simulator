@@ -43,3 +43,8 @@ python "$(git rev-parse --show-toplevel)/csv/_rami_era2.py" || exit 1
 #  ### collaudi) stanno SOLO nella CI. Un presidio di pre-commit da due minuti
 #  ### e' una ragione per dare --no-verify.
 python "$(git rev-parse --show-toplevel)/csv/_replay_registri.py" || exit 1
+
+#  `P-T3` -- LE CITAZIONI SONO STRUTTURATE e si RI-VERIFICANO.
+#  ### {file, riga, commit, impronta}: con il commit una citazione e' vera PER
+#  ### SEMPRE, perche' `git show <commit>:<file>` da' sempre gli stessi byte.
+python "$(git rev-parse --show-toplevel)/csv/_citazioni_strutturate.py" || exit 1

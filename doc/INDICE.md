@@ -15,7 +15,7 @@
 | `INFRASTRUTTURA` | `2` | 9 |
 | `INFRASTRUTTURA` | `ENTRAMBE` | 14 |
 | `METODO` | `1` | 153 |
-| `METODO` | `ENTRAMBE` | 78 |
+| `METODO` | `ENTRAMBE` | 79 |
 
 | id | classe | dominio | era | stato | blocca | titolo |
 |---|---|---|---|---|---|---|
@@ -440,6 +440,7 @@
 | `P-R1` | PRESIDIO | INFRASTRUTTURA | 2 | ### **AGENDA** |  | ogni RAMO della fisica dell-era 2 e- dichiarato: quanti, e a che servono |
 | `P-T1` | PRESIDIO | METODO | ENTRAMBE | ### **APERTA** |  | il TESTO LIBERO non si interpreta per decidere: chi RIFIUTA legge solo campi str |
 | `P-T2` | PRESIDIO | METODO | ENTRAMBE | ### **APERTA** |  | il REPLAY su TUTTI i registri, e i testi generati che si rigenerano byte-identic |
+| `P-T3` | PRESIDIO | METODO | ENTRAMBE | ### **APERTA** |  | le CITAZIONI sono STRUTTURATE e si ri-verificano su git show, non a occhio |
 | `P0` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 12 volte, MAI definito in un registro; citato solo in referti/sigilli/ta |
 | `P1` | STANDARD | METODO | ENTRAMBE | ### **APERTA** |  | NON USARE L'ASSOCIAZIONE SENZA VERIFICARE LO STORICO. |
 | `P1-bis` | STANDARD | METODO | ENTRAMBE | ### **APERTA** |  | LA RELAZIONE SI SCRIVE NELLO STESSO COMMIT DEL RISCONTRO |

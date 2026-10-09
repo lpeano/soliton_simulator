@@ -519,6 +519,12 @@ METODI["P-T2"] = (
     "LENTI solo nella CI). ### E metadati.jsonl e- un REPERTO PER NECESSITA-: ha "
     "una via di scrittura e ZERO storico",
     "`csv/_replay_registri.py::controlla`, `pre-commit` + CI", "PORTATO")
+METODI["P-T3"] = (
+    "NATO NELL-ERA 2: una citazione e- {file, riga, commit, impronta, frase} e si "
+    "RI-VERIFICA su `git show`. ### Il par.2 dice che i numeri di riga SONO SHIFTATI: "
+    "con il commit una citazione e- vera PER SEMPRE, senza e- destinata a diventare "
+    "falsa",
+    "`csv/_citazioni_strutturate.py::controlla`, `pre-commit` + CI", "PORTATO")
 METODI["AUDIT-CURE"] = (
     "il censimento delle cure e del loro costo: ### IL PUNTO 10 chiede che ogni referto "
     "STAMPI il numero delle leggi, e che un commit che lo aumenta lo DICHIARI",
