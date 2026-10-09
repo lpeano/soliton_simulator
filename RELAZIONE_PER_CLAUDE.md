@@ -10573,3 +10573,43 @@ esiste per evitare.
 ### **La migrazione non indovina mai** — dove non c'è evidenza strutturale scrive
 `DA_CLASSIFICARE`, e ### **mai per parola chiave.** La tavola corta è in
 `doc/REFERTO_indice_v2.md`.
+
+## L'INDICE `v2`, FASE `2`: **la classificazione per contenuto** — e un difetto mio grave (2026-10-09)
+
+`dominio DA_CLASSIFICARE` passa da ### **`664`** a ### **`179`**, `stato` da `480` a
+### **`181`**, con ### **`982` righe di storico** — una per ogni modifica, ciascuna con un motivo
+### **che cita il testo** *(il lotto rifiuta un motivo sotto i `20` caratteri)*. I `6` controlli
+passano, conservazione a ### **`0` persi e `0` doppi** anche dopo aver spostato `54`
+segnaposto.
+
+### ⭐ **Tre cose che la fase `2` ha fatto emergere, e sono difetti MIEI della fase `1`:**
+
+**`1`. La classe `TEORIA` era il vecchio STATO `teoria` trasportato come CLASSE.** Nessuna
+delle `51` era una teoria: erano ### **assiomi, presidi, standard e criteri di sigillo.** ➜
+**Un campo usato per dire un'altra cosa** è esattamente ciò che i vocabolari chiusi esistono
+per impedire, e ora sta scritto in `doc/REGOLE/par9.md`.
+
+**`2`. L'«EPOCA» non è l'ERA.** Avevo letto `[EPOCA 2]` come l'era `2` dello schema e messo
+### **`4` voci in `AGENDA`** che non ci vanno *(`Z87` `Z90` `Z91` `Z92`: misure del **secondo
+ordine**)*. Le epoche `1`-`2`-`3` sono ### **fasi di lavoro sul secondo ordine**; l'era `2` è
+la riscrittura, cioè ### **la lista `L2` di Luca**. ➜ Corrette, e **`AGENDA` ora è `43` =
+esattamente la lista**.
+
+**`3`. ⛔ Il controllo dell'IDEMPOTENZA mi ha cancellato `867` classificazioni.** `C4`
+verificava ### **rilanciando la migrazione**, e la migrazione ### **riscrive `voci.jsonl` dal
+tag.** Finita la fase `1` era innocuo; dopo la fase `2` era ### **distruttivo**. L'ho preso
+guardando i conteggi subito dopo: quel *«diversi: voci.jsonl»* ### **non era un difetto
+dell'idempotenza — era il danno.** Ripristinato da git *(tutto era committato)*, e ora
+### **la migrazione si ferma** se `storico.jsonl` ha righe, perché ogni riga è lavoro di dopo.
+### ⚠ **Un controllo che distrugge ciò che controlla è il difetto più facile da rifare**, e sta
+scritto nel sorgente di entrambi.
+
+### ⚠ **E una regola che ho SCARTATO prima di applicarla:** `fonte = doc/REGISTRO_FISICA.md`
+→ `FISICA` avrebbe coperto `55` voci in un colpo. ### ⛔ **È falso:** lì stanno **sia** criteri
+di fisica **sia** criteri di ### **verifica** *(«flag SPENTO = BYTE-IDENTICO», «il controllo che
+rende `T3` leggibile»)*. Le ho ### **lette**, e ### **`13` sono finite in `METODO`.** Una regola
+che copre `55` voci e ne sbaglia un quarto è ### **peggio di nessuna regola.**
+
+### ⛔ **Resta a Luca:** `179` concetti che ### **il codice nomina** e nessuno ha definito, `2`
+voci col ### **dubbio dichiarato**, `2` da ### **dividere** *(con la proposta)*, e `20` assiomi
+### **in attesa di conferma.**
