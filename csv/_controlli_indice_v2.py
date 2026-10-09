@@ -147,6 +147,22 @@ def main():
     # ### di Luca del 2026-10-08. ### **Era 1 perche- la voce e- UNA LETTURA DEL CODICE
     # ### DELL-ERA 1**, non programma dell-era 2.
     CORRETTE_V3["ENERGIA-NON-DEFINITA"] = ("FISICA", "1", "SUPERATA")
+    # ### IL MANDATO DEL 2026-10-09 (era delle voci di metodo): il guardiano dichiara che
+    # ### la regola ### **<<metodo = era ENTRAMBE>> era TROPPO GROSSA.** Queste 14 stanno
+    # ### nella lista 1, che le dava `ENTRAMBE`, e ### **riguardano un OGGETTO CONCRETO
+    # ### dell-era 1** -- un sigillo, un `.pkl`, il pilota, una funzione del simulatore.
+    # ### ⚠ **Sono ID e non una regola**, e il motivo e- che ### **<<oggetto concreto>> non
+    # ### si rileva da un predicato**: le ho decise ### **leggendo**, e un ID deciso
+    # ### leggendo ### **si scrive come ID** (come `W5` nel punto 4 del giro scorso).
+    for _i in (
+            "CELLE-NAN-APPESE-NOME-SCADUTO", "CLI-1",
+            "D12", "D13",
+            "INVENTARIO-SIGILLI-SENZA-COMMIT", "SIGILLO-COMPARATORE-DUPLICATO",
+            "SIGILLO-REGISTRO-NON-CONFRONTABILE", "SIGILLO-SENZA-CONFIGURAZIONE",
+            "SYNCDB-HEADLESS", "VELENO-DOMINI",
+            "VIDEO-SCENA", "Z142",
+            "Z15", "Z89"):
+        CORRETTE_V3[_i] = (MG.L1[_i][0], "1", "SOSPESA")
     for _i in ("CENS-A6", "CENS-A7", "SMP-APRI-COMMENTO", "MITOSI-2LAM-ACCESO"):
         CORRETTE_V3[_i] = ("DOCUMENTAZIONE", "1", "SOSPESA")        # (B) i FUORI POSTO
 

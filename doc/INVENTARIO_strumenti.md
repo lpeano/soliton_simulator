@@ -2348,3 +2348,16 @@ etichette rimosse, con ### **`0` persi, `0` doppi, `0` conflitti**.
 | **COMANDO** | `python csv/_doc_referto_pulizia.py` |
 | **cosa misura** | i segnali **dopo** *(dalle stesse funzioni che gira il validatore)*, quelli **prima** da `git show 89784dc:…`, e **importa le decisioni** da `_pulizia_finale.py` *(`P1`, `OMONIMI_3`, `F1_MARCATORE`, `P4`)*: ### **il referto e il lavoro non possono divergere.** Fa girare **lui** i controlli e i due collaudi |
 | **l'uscita** | `doc/REFERTO_indice_v3_pulizia.md` *(`240` righe)* |
+
+---
+
+### `csv/_era_metodo.py` — **L'ERA DELLE VOCI DI METODO E STRUMENTI** *(2026-10-09)*
+
+| | |
+|---|---|
+| **file** | `csv/_era_metodo.py` |
+| **BLOB** *(sha1 dei byte grezzi)* | `310960e5` |
+| **COMANDO** | `python csv/_era_metodo.py`, poi `python csv/indice.py aggiorna-lotto doc/indice/_lotti/v3_r2.jsonl` |
+| **cosa misura** | niente: **porta la decisione** sulle `35` voci, nei tre gruppi che il mandato scrive *(`12` gemelle di criteri, `13` di metodo, `10` di strumenti)*, con il perché di ciascun gruppo |
+| ### ⚠ **i due CASI LIMITE** | `REGISTRO_FISICA:A1` e `S1` dicono *«flag SPENTO = byte-identico…»*, che è **una FORMA valida per qualunque era**. Stanno in una tabella **loro**, `LIMITE`, perché **non devono sparire fra i `35`** |
+| ### ⛔ **le ECCEZIONI** | il mandato ne ammette; `ECCEZIONI` è **vuoto**, e il dizionario c'è **perché una eccezione futura vada LÌ** e non in un commento |

@@ -74,17 +74,17 @@ python csv/indice.py aggiorna-lotto doc/indice/_lotti/<nome>.jsonl
 | voci | `846` |
 | ### **`DA_CLASSIFICARE` vere** *(non segnaposto)* | ### **`1`** |
 | ### **segnaposto `NON_DEFINITA`** | ### **`187`** |
-| ### **righe di storico** | ### **`1237`** |
+| ### **righe di storico** | ### **`1272`** |
 
 ```
 classe    DIFETTO=212  NON_DEFINITA=187  FRONTE=169  CRITERIO=94  MISURA=75  CURA=46  PRESIDIO=34  STANDARD=29
 dominio   FISICA=389  METODO=196  DA_CLASSIFICARE=187  INFRASTRUTTURA=47  DOCUMENTAZIONE=27
-era       1=461  DA_CLASSIFICARE=188  ENTRAMBE=173  2=24
-stato     SOSPESA=305  DA_CLASSIFICARE=188  CHIUSA=187  APERTA=141  AGENDA=24  SUPERATA=1
+era       1=496  DA_CLASSIFICARE=188  ENTRAMBE=138  2=24
+stato     SOSPESA=340  DA_CLASSIFICARE=188  CHIUSA=187  APERTA=106  AGENDA=24  SUPERATA=1
 ```
 
-### ✔ **FATTO IN QUESTO GIRO:** il punto `1`: ### **`F7` vale per QUALSIASI DOMINIO** -- la regola non parlava di fisica. `16` voci curate ### **PRIMA che il presidio si accendesse** *(`14` `CENS-*` di `DOCUMENTAZIONE`, `D32-CONTATORE`, `RAMI-OFF-CURA2`)*, ed erano ### **esattamente quelle che il mandato nominava**. Collaudo `27/27`
+### ✔ **FATTO IN QUESTO GIRO:** il punto `2`: le ### **`35` voci da era `ENTRAMBE` a era `1`** -- cio' che riguarda un ### **oggetto concreto dell'era `1`** *(un sigillo, la scena `(ii)`, il pilota, un `.pkl`, un flag)* non e' `ENTRAMBE`. ### **Zero eccezioni, e i due casi limite DICHIARATI** *(`REGISTRO_FISICA:A1` e `S1`: la FORMA e' generica, il SOGGETTO e' un flag)*. `ENTRAMBE` `173`→`138`, era `1` `461`→`496`
 
-### ⛔ **RESTA:** il punto `2` *(le ### **`35` voci** a era `1`/`SOSPESA`: cio' che riguarda un oggetto concreto dell'era `1` non e' `ENTRAMBE`)*, poi `3` *(### **`F8`**, che segnala le `ENTRAMBE` che nominano un oggetto dell'era `1`)* e `4` *(il referto)*
+### ⛔ **RESTA:** il punto `3` *(### **`F8`**, che SEGNALA le `ENTRAMBE` non chiuse che nominano un oggetto dell'era `1`, coi tre bracci su `T3a`, `P6` e `FALSO-ZERO`)* e `4` *(i controlli e il referto `doc/REFERTO_indice_v3_era_metodo.md`)*
 
-**Ultimo lotto applicato:** `doc/indice/_lotti/v3_r1.jsonl`
+**Ultimo lotto applicato:** `doc/indice/_lotti/v3_r2.jsonl`

@@ -260,3 +260,18 @@ Si toglie dall'inizio della riga, **ripetutamente**: i `#`, gli spazi, i **simbo
 > ### ⭐ **La regola non parlava di fisica: una voce dell'era `1` NON CHIUSA è `SOSPESA`**, e vale per `METODO`, `INFRASTRUTTURA` e `DOCUMENTAZIONE` come per `FISICA`.
 
 ### ⚠ **Violava su `16` voci** — le `14` `CENS-*`, `D32-CONTATORE` e `RAMI-OFF-CURA2` — e ### **sono state curate PRIMA che il presidio si accendesse**: ### ⛔ **un presidio bloccante acceso prima della cura rende inapplicabile il lotto che lo curerebbe**, perché la validazione gira **dentro `aggiorna-lotto`.**
+
+---
+
+## L'ERA DI UNA VOCE DI **METODO** O DI **STRUMENTI** *(criterio del guardiano, 2026-10-09)*
+
+> ### ⛔ **Il guardiano dichiara che la regola precedente — «metodo = era `ENTRAMBE`» — era TROPPO GROSSA.**
+
+| | |
+|---|---|
+| ### **`ENTRAMBE`** | una **REGOLA DI LAVORO** *(le `P*`, i presidi `H-*`)* o **uno strumento che SOPRAVVIVE** alla riscrittura |
+| ### **era `1`** | ciò che riguarda un **OGGETTO CONCRETO dell'era `1`**: un **sigillo di una cura**, la **scena `(ii)`**, il **pilota**, un **`.pkl`**, il blob **`b8c21049`**, **una funzione o un flag di `soliton_simulator.py`** |
+
+### ⚠ **`35` voci erano `ENTRAMBE` per INERZIA**, non per lettura: `era ENTRAMBE` passa da `173` a **`138`**. ### **Non è una decisione di fisica**, e tutte restano `SOSPESE`: **non cambia nulla per l'era `2`, solo l'ordine.**
+
+### **Il presidio che lo guarda è `F8`, e SEGNALA**: una voce `ENTRAMBE` non `CHIUSA` che **nomina un oggetto concreto dell'era `1`**.
