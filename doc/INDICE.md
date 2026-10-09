@@ -7,59 +7,58 @@
 | `DA_CLASSIFICARE` | `DA_CLASSIFICARE` | 664 |
 | `FISICA` | `1` | 46 |
 | `FISICA` | `2` | 43 |
-| `FISICA` | `DA_CLASSIFICARE` | 5 |
-| `INFRASTRUTTURA` | `ENTRAMBE` | 30 |
-| `METODO` | `DA_CLASSIFICARE` | 44 |
-| `METODO` | `ENTRAMBE` | 35 |
+| `FISICA` | `ENTRAMBE` | 16 |
+| `INFRASTRUTTURA` | `ENTRAMBE` | 22 |
+| `METODO` | `ENTRAMBE` | 76 |
 
 | id | classe | dominio | era | stato | blocca | titolo |
 |---|---|---|---|---|---|---|
-| `A1` | TEORIA | METODO | DA_CLASSIFICARE | ### **APERTA** |  | LA LEGGE, NON IL NUMERO |
+| `A1` | STANDARD | FISICA | ENTRAMBE | ### **APERTA** |  | LA LEGGE, NON IL NUMERO |
 | `A1-COSTANTI` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | AUDIT DELLE COSTANTI TARATE — 90 commenti «misurato/tarato» nel sorgente. Si sep |
 | `A1-INERZIA` | MISURA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **CHIUSA** |  | INERZIA VALE SEMPRE ⏳[EPOCA 1 · CODICE] / Teorema di inerzia — lo Strato 0 e' in |
 | `A1-TREVIE` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **CHIUSA** |  | la catena a TRE VIE di step — if CHICORE… / elif VERSOCHI… / elif not(…) / :3623 |
-| `A10` | TEORIA | METODO | DA_CLASSIFICARE | ### **APERTA** |  | UNA SOLA GRANDEZZA PUO' LEGARE DUE DOMINI |
-| `A11` | TEORIA | METODO | DA_CLASSIFICARE | ### **APERTA** |  | UN LIMITE E' UNA LEGGE, NON UNA TOPPA |
-| `A12` | TEORIA | METODO | DA_CLASSIFICARE | ### **APERTA** |  | UN DIFETTO DIMOSTRATO SI CURA. MISURARE NON È CURARE. |
-| `A13` | TEORIA | METODO | DA_CLASSIFICARE | ### **APERTA** |  | LAM È LA SCALA DI PLANCK DEL SISTEMA (decisione di Luca, 2026-09-24) |
-| `A14` | TEORIA | METODO | DA_CLASSIFICARE | ### **APERTA** |  | LE GRANDEZZE SI CONSERVANO LOCALMENTE E SI DISSIPANO GLOBALMENTE (decisione di L |
-| `A15` | TEORIA | METODO | DA_CLASSIFICARE | ### **APERTA** |  | LA MEMORIA E DINAMICA, LOCALE, E CIO CHE DIMENTICA SI TRASFORMA (decisione di Lu |
-| `A2` | TEORIA | METODO | DA_CLASSIFICARE | ### **APERTA** |  | NESSUNA SCORCIATOIA GLOBALE |
+| `A10` | STANDARD | FISICA | ENTRAMBE | ### **APERTA** |  | UNA SOLA GRANDEZZA PUO' LEGARE DUE DOMINI |
+| `A11` | STANDARD | FISICA | ENTRAMBE | ### **APERTA** |  | UN LIMITE E' UNA LEGGE, NON UNA TOPPA |
+| `A12` | STANDARD | METODO | ENTRAMBE | ### **APERTA** |  | UN DIFETTO DIMOSTRATO SI CURA. MISURARE NON È CURARE. |
+| `A13` | STANDARD | FISICA | ENTRAMBE | ### **APERTA** |  | LAM È LA SCALA DI PLANCK DEL SISTEMA (decisione di Luca, 2026-09-24) |
+| `A14` | STANDARD | FISICA | ENTRAMBE | ### **APERTA** |  | LE GRANDEZZE SI CONSERVANO LOCALMENTE E SI DISSIPANO GLOBALMENTE (decisione di L |
+| `A15` | STANDARD | FISICA | ENTRAMBE | ### **APERTA** |  | LA MEMORIA E DINAMICA, LOCALE, E CIO CHE DIMENTICA SI TRASFORMA (decisione di Lu |
+| `A2` | STANDARD | FISICA | ENTRAMBE | ### **APERTA** |  | NESSUNA SCORCIATOIA GLOBALE |
 | `A2-ANELLO` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **CHIUSA** |  | l'anello A6 di Z70 — periodo 2, via chiralitacorelocale/CHICORE / doc/RAMIFICAZI |
 | `A2-BLOCH` | MISURA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **CHIUSA** |  | BLOCH VALE SEMPRE ⏳[EPOCA 1 · CODICE] / Invarianza del Bloch sotto Step 2 — phc  |
 | `A2-DXD` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | RIMISURARE NEL REGIME NUOVO: \/dx\//d del freno-legge (criterio di riapertura: q |
-| `A2b` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 2 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
-| `A3` | TEORIA | METODO | DA_CLASSIFICARE | ### **APERTA** |  | NIENTE SI NORMALIZZA SUL PROPRIO INSIEME |
+| `A2b` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 2 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
+| `A3` | STANDARD | FISICA | ENTRAMBE | ### **APERTA** |  | NIENTE SI NORMALIZZA SUL PROPRIO INSIEME |
 | `A3-CHIRALE` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **CHIUSA** |  | Z71 — la carica chirale non si conserva / doc/RAMIFICAZIONI.md Z71 / APERTA. I d |
 | `A3-DISEGNO` | DIFETTO | FISICA | 2 | ### **AGENDA** |  | IL DISEGNO ESCE DALLA DINAMICA — cura a sé, prima delle tre prove. pos entra nel |
 | `A3-FDT` | MISURA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **CHIUSA** |  | FDT VALE SEMPRE ⏳[EPOCA 1 · CODICE] / FDT del solo scuotimento — il drift di n → |
-| `A3c` | TEORIA | METODO | DA_CLASSIFICARE | ### **APERTA** |  | un RAPPORTO confrontato con un MASSIMO / (115, accanto a due massimi di passi di |
-| `A4` | TEORIA | METODO | DA_CLASSIFICARE | ### **APERTA** |  | STRATIFICAZIONE CAUSALE |
+| `A3c` | STANDARD | FISICA | ENTRAMBE | ### **APERTA** |  | un RAPPORTO confrontato con un MASSIMO / (115, accanto a due massimi di passi di |
+| `A4` | STANDARD | FISICA | ENTRAMBE | ### **APERTA** |  | STRATIFICAZIONE CAUSALE |
 | `A4-METRICHE` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | le METRICHE DEL SETTORE CHIRALE / doc/TASKHISTORY/2026-09-20metriche-settore-chi |
-| `A5` | TEORIA | METODO | DA_CLASSIFICARE | ### **APERTA** |  | CAUSALITA' DELLA MEDIAZIONE |
+| `A5` | STANDARD | FISICA | ENTRAMBE | ### **APERTA** |  | CAUSALITA' DELLA MEDIAZIONE |
 | `A5-PANNELLO` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **CHIUSA** |  | il PANNELLO FEDELE (interpolazione di psi accanto a campospaziale) / la ex-LISTA |
-| `A6` | TEORIA | METODO | DA_CLASSIFICARE | ### **APERTA** |  | INERZIA (TEOREMA, non assioma) |
+| `A6` | STANDARD | FISICA | ENTRAMBE | ### **APERTA** |  | INERZIA (TEOREMA, non assioma) |
 | `A6-PERCCHI` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **CHIUSA** |  | percchi FA DUE LAVORI CON REGOLE OPPOSTE: chibasc lo tratta da CHIRALITA', TEMPO |
-| `A7` | TEORIA | METODO | DA_CLASSIFICARE | ### **APERTA** |  | CONSERVAZIONE E STATO |
-| `A7b` | TEORIA | METODO | DA_CLASSIFICARE | ### **APERTA** |  | COROLLARIO: uno stato non nasce indefinito (aggiunto 2026-09-17) |
-| `A8` | TEORIA | METODO | DA_CLASSIFICARE | ### **APERTA** |  | UN RAMO SILENZIOSO NON E' UN RAMO |
-| `A8b` | TEORIA | METODO | DA_CLASSIFICARE | ### **APERTA** |  | COROLLARIO: le cache CROSS-PASSO |
-| `A9` | TEORIA | METODO | DA_CLASSIFICARE | ### **APERTA** |  | UN PRESIDIO CHE NON IMPEDISCE NON E' UN PRESIDIO |
-| `AAAA-MM-GG` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 3 volte, MAI definito in un registro) |
+| `A7` | STANDARD | FISICA | ENTRAMBE | ### **APERTA** |  | CONSERVAZIONE E STATO |
+| `A7b` | STANDARD | FISICA | ENTRAMBE | ### **APERTA** |  | COROLLARIO: uno stato non nasce indefinito (aggiunto 2026-09-17) |
+| `A8` | STANDARD | METODO | ENTRAMBE | ### **APERTA** |  | UN RAMO SILENZIOSO NON E' UN RAMO |
+| `A8b` | STANDARD | METODO | ENTRAMBE | ### **APERTA** |  | COROLLARIO: le cache CROSS-PASSO |
+| `A9` | STANDARD | METODO | ENTRAMBE | ### **APERTA** |  | UN PRESIDIO CHE NON IMPEDISCE NON E' UN PRESIDIO |
+| `AAAA-MM-GG` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 3 volte, MAI definito in un registro) |
 | `AB-CONTROLLI` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | l'A/B di W5 non ha salvato i punti di CONTROLLO nel vuoto, e senza quelli la den |
 | `ALLUNG-RELATIVO` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | il criterio V6 dell'allungamento sottrae variazioni relative con DENOMINATORI DI |
-| `ANCORE-1` | DIFETTO | INFRASTRUTTURA | ENTRAMBE | ### **APERTA** |  | APERTA il 2026-09-25 / 25 SIGILLI PRENDONO «IL CODICE DI PRIMA» DA HEAD (43 occo |
-| `ANTI-ALLINEAMENTO` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 2 volte, MAI definito in un registro; citato solo in... [ANTI-ALLINEAMEN |
+| `ANCORE-1` | DIFETTO | METODO | ENTRAMBE | ### **APERTA** |  | APERTA il 2026-09-25 / 25 SIGILLI PRENDONO «IL CODICE DI PRIMA» DA HEAD (43 occo |
+| `ANTI-ALLINEAMENTO` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 2 volte, MAI definito in un registro; citato solo in... [ANTI-ALLINEAMEN |
 | `ARCH-LCONSERVA` | CURA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **CHIUSA** |  | _togli_rotazione_rigida esce dal simulatore; L_CONSERVA diventa un no-op accetta |
 | `ARCH-PAVIMENTI` | CURA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **CHIUSA** |  | i pavimenti morti (_floor_d0, _pav_d0, i due 0.05 su d) escono dal simulatore |
 | `ARCH-SYNC` | CURA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **CHIUSA** |  | SYNC_UPDATE e i suoi rami escono dal simulatore; --sync diventa un no-op accetta |
 | `ARCHI-OLTRE-4PI` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | circa 109 archi sono oltre il tetto 4pi dal passo 2 e non rilassano, in tutti i  |
-| `ARCHI-PASSO` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 2 volte, MAI definito in un registro) |
+| `ARCHI-PASSO` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 2 volte, MAI definito in un registro) |
 | `ARCHI-PRIMI` | DIFETTO | INFRASTRUTTURA | ENTRAMBE | ### **APERTA** |  | la vista disegna i PRIMI 24000 archi per indice: il 100 % finisce in un quadrant |
 | `AUDIT-CURE` | FRONTE | FISICA | 2 | ### **AGENDA** |  | per ogni legge aggiunta: compensava un difetto che ORA e' curato? Non il numero: |
-| `AUTO-ATTENUA` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 2 volte, MAI definito in un registro) [AUTO-ATTENUA] |
-| `AUTO-MANUTENZIONE` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 2 volte, MAI definito in un registro) [AUTO-MANUTENZIONE] |
-| `AUTO-NORMALIZZANTE` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 4 volte, MAI definito in un registro) |
+| `AUTO-ATTENUA` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 2 volte, MAI definito in un registro) [AUTO-ATTENUA] |
+| `AUTO-MANUTENZIONE` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 2 volte, MAI definito in un registro) [AUTO-MANUTENZIONE] |
+| `AUTO-NORMALIZZANTE` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 4 volte, MAI definito in un registro) |
 | `B1` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **CHIUSA** |  | Z47 — pos nella fisica: l'ultimo SFONDO / doc/RAMIFICAZIONI.md Z47, doc/ASSIOMI. |
 | `B10` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **CHIUSA** |  | --override-blob e la COPIA del driver / csv/testfork/scenavideoripresa.py (e68bb |
 | `B2` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **CHIUSA** |  | Z31 — i sigilli non ri-girabili / Z31, citata in 17 file / rifatta TRE volte, l' |
@@ -90,7 +89,7 @@
 | `C2` | MISURA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **CHIUSA** |  | C2 VALE SEMPRE ⏳[EPOCA 1 · CODICE] / Il −1 e' cancellato da √tau, con tau ∝ rho^ |
 | `C2-PEQ-NASCITA` | CURA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | PEQNASCITALOCALE — nascita locale di peq / GLOBALE §2② / 6/6 (Z96) |
 | `C20` | MISURA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | C20 🟨VALE PER QUELLA SCENA ⏳[EPOCA 1 · MISURA] / PRIMA MISURA DELLA CONSERVAZION |
-| `C21` | MISURA | INFRASTRUTTURA | ENTRAMBE | ### **APERTA** |  | C21 DA RIVERIFICARE ⏳[EPOCA 1 · MISURA] / TRE CRITERI DI SIGILLO SBAGLIATI IN UN |
+| `C21` | MISURA | METODO | ENTRAMBE | ### **APERTA** |  | C21 DA RIVERIFICARE ⏳[EPOCA 1 · MISURA] / TRE CRITERI DI SIGILLO SBAGLIATI IN UN |
 | `C22` | MISURA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | C22 🟨VALE PER QUELLA SCENA ⏳[EPOCA 1 · MISURA] / LA CRESCITA DI Ltot E' L'INERZI |
 | `C23` | MISURA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | C23 🟨VALE PER QUELLA SCENA ⏳[EPOCA 1 · MISURA] / IL FATTORE (CSM/cs)^2 NON E' 1  |
 | `C24` | MISURA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | C24 🟨VALE PER QUELLA SCENA ⏳[EPOCA 1 · MISURA] / LA CRESCITA DI Ltot STA NELLA C |
@@ -147,8 +146,8 @@
 | `CLI-1` | CURA | INFRASTRUTTURA | ENTRAMBE | ### **APERTA** | SI | I SIGILLI DI CURA 4 E CURA 5 NON HANNO MAI PROVATO IL PERCORSO CLI: impostavano  |
 | `CLIP-INVENTARIO` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | INVENTARIO dei clip, tetti e pavimenti del passo pieno: 27 TETTI FISICI su 117 g |
 | `COER-4PI` | CRITERIO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **CHIUSA** |  | la coerenza della massa e' `/<e^{i phi}>/`: il campo NON distingue `phi` da `phi |
-| `COLLAUDO-NON-ESEGUITO` | DIFETTO | INFRASTRUTTURA | ENTRAMBE | ### **APERTA** |  | un collaudo che si RIFIUTA di girare esce con 2, e il controllo C4 lo conta come |
-| `COME-MISURARE` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 2 volte, MAI definito in un registro; citato solo in... [COME-MISURARE] |
+| `COLLAUDO-NON-ESEGUITO` | DIFETTO | METODO | ENTRAMBE | ### **APERTA** |  | un collaudo che si RIFIUTA di girare esce con 2, e il controllo C4 lo conta come |
+| `COME-MISURARE` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 2 volte, MAI definito in un registro; citato solo in... [COME-MISURARE] |
 | `COMPONENTI:A1` | CRITERIO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | A1. STEP2OROLOGIO — aggancio OROLOGIO ↔ METRICA · omegaclk = (cs/CSM)² |
 | `COMPONENTI:A2` | CRITERIO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | peq è lo sfondo diffuso locale (Legge I, :265): nessuna statistica globale |
 | `COMPONENTI:A3` | CRITERIO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | dopo la proiezione arco→nodo, numeratore e denominatore vivono entrambi sui nodi |
@@ -178,20 +177,20 @@
 | `COMPONENTI:S3c` | CRITERIO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | a cs = CSM il fattore è 1 esatto / 1.000000000000000 |
 | `COMPONENTI:Y0-Y10` | CRITERIO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **CHIUSA** |  | Y10, 11/11 PASS. |
 | `COMPONENTI:Z30` | CRITERIO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | Z30: la forma del denominatore — nudo (attuale, zero scelte) contro linea (la me |
-| `CONFIG-1` | DIFETTO | INFRASTRUTTURA | ENTRAMBE | ### **APERTA** |  | APERTA il 2026-09-25 / LE SEI MISURE DI OGGI GIRAVANO CON 28 LEGGI SU 31 SPENTE, |
-| `CONFIG-1/` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 4 volte, MAI definito in un registro) [CONFIG-1/] |
+| `CONFIG-1` | DIFETTO | METODO | ENTRAMBE | ### **APERTA** |  | APERTA il 2026-09-25 / LE SEI MISURE DI OGGI GIRAVANO CON 28 LEGGI SU 31 SPENTE, |
+| `CONFIG-1/` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 4 volte, MAI definito in un registro) [CONFIG-1/] |
 | `CONSERVAZIONE-LOCALE` | FRONTE | FISICA | 2 | ### **AGENDA** |  | A14: ogni legge si giudica su tre domande -- energia locale, carica locale, tota |
-| `CONTA-RIGHE` | FRONTE | INFRASTRUTTURA | ENTRAMBE | ### **APERTA** |  | DUE CONVENZIONI PER CONTARE LE RIGHE: i miei strumenti contavano uno in piu' di  |
+| `CONTA-RIGHE` | FRONTE | METODO | ENTRAMBE | ### **APERTA** |  | DUE CONVENZIONI PER CONTARE LE RIGHE: i miei strumenti contavano uno in piu' di  |
 | `COPPIA-RAMP` | MISURA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **CHIUSA** |  | APERTA il 2026-09-26 / PERCHE' LA COPPIA NON PORTA ramp? Misurato sui figli (2 s |
-| `COSA-RICONTROLLARE` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 3 volte, MAI definito in un registro) [COSA-RICONTROLLARE] |
+| `COSA-RICONTROLLARE` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 3 volte, MAI definito in un registro) [COSA-RICONTROLLARE] |
 | `CRESCITA-DOPO-Z43` | MISURA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | con r = cs/CS_M la rete quasi non cresce: ~25 nascite contro ~1500 in 150 passi |
-| `CROSS-PASSO` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 3 volte, MAI definito in un registro) [CROSS-PASSO] |
+| `CROSS-PASSO` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 3 volte, MAI definito in un registro) [CROSS-PASSO] |
 | `CS-LAMBDA-GLOBALE` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | _cs_nodo non e del tutto locale: il pavimento usa _Lam = mean(/psi/^2) su TUTTA  |
 | `CTRL-RISCELTA` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **CHIUSA** |  | i punti di controllo si RISCEGLIEVANO a ogni checkpoint: l'osservabile della PRO |
 | `CURA-3` | CURA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | - phi su 2pi con le soglie che la seguono / nella forma decisa: frazioni che sul |
 | `CURA2-STRUTTURALE` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **CHIUSA** |  | la CURA 2 diventa STRUTTURALE: i rami `else` di TEMPO_UNICO_MITOSI escono dal si |
-| `CURE-FINE` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 2 volte, MAI definito in un registro) [CURE-FINE] |
-| `CURE-INIZIO` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 2 volte, MAI definito in un registro) [CURE-INIZIO] |
+| `CURE-FINE` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 2 volte, MAI definito in un registro) [CURE-FINE] |
+| `CURE-INIZIO` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 2 volte, MAI definito in un registro) [CURE-INIZIO] |
 | `D0` | CURA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | CHI FA SCAPPARE d0 / 21/9 / MISURATO: e' IL FRENO. Gli scrittori spingono giu' - |
 | `D01` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | S09 clippa al passo causale — quindi e' gia' una LUNGHEZZA — e poi moltiplica pe |
 | `D02` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **CHIUSA** |  | pozzografo calcola L da self.pos — IL DISEGNO — mentre il suo docstring dichiara |
@@ -232,35 +231,35 @@
 | `D36` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | LA SOGLIA DELLA MITOSI E' IN UNITA' ASSOLUTE DI tw, MENTRE LA SCALA DI tw DIPEND |
 | `D37` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **CHIUSA** |  | D37 CURATO il 2026-09-24 / CHIAVE DUPLICATA NEI DOMINI: 'csnodoprev' compare DUE |
 | `D38` | DIFETTO | FISICA | 2 | ### **AGENDA** |  | nasce (:3850) e' gated su SCALAMIN or SCALAMINPASSO: la legge «nessun arco sotto |
-| `D5` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 2 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
-| `D6` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 2 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
-| `DA-DECIDERE` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 222 volte, MAI definito in un registro; citato solo in referti/sigilli/t |
-| `DE-ACCOPPIABILITA` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 2 volte, MAI definito in un registro; citato solo in... [DE-ACCOPPIABILI |
-| `DIFETTI-NUOVI-INIZIO` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 2 volte, MAI definito in un registro) [DIFETTI-NUOVI-INIZIO] |
+| `D5` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 2 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
+| `D6` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 2 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
+| `DA-DECIDERE` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 222 volte, MAI definito in un registro; citato solo in referti/sigilli/t |
+| `DE-ACCOPPIABILITA` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 2 volte, MAI definito in un registro; citato solo in... [DE-ACCOPPIABILI |
+| `DIFETTI-NUOVI-INIZIO` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 2 volte, MAI definito in un registro) [DIFETTI-NUOVI-INIZIO] |
 | `DIVISIONE-AUTOCONSISTENTE` | FRONTE | FISICA | 2 | ### **AGENDA** |  | la divisione dell arco come UNA legge: dove si rompe, cosa ereditano i figli, il |
-| `DOMANDE-BUSSOLA` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 2 volte, MAI definito in un registro; citato solo in... [DOMANDE-BUSSOLA |
+| `DOMANDE-BUSSOLA` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 2 volte, MAI definito in un registro; citato solo in... [DOMANDE-BUSSOLA |
 | `DOPPIA-COP` | CURA | FISICA | 1 | ### **SOSPESA** |  | LA CURA (b): la doppia copertura 4 pi e' un ASSIOMA e va resa STRUTTURALE, non m |
-| `DOVE-VA` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 2 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
+| `DOVE-VA` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 2 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
 | `DRIVER-SCENA-II` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **CHIUSA** |  | APERTA il 2026-09-26 (rilievo di Luca) / IL DRIVER NON SA FARE LA SCENA (ii), e  |
-| `E1` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 56 volte, MAI definito in un registro) |
+| `E1` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 56 volte, MAI definito in un registro) |
 | `E3` | CURA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | EPOCA 3 + RUN LUNGO — tag epoca-3, 3000 passi, M1/M4 leggere durante il run / GL |
 | `E4-LAM` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | LAM FATTO il 2026-09-24 / LA LEGGE «NESSUNA LUNGHEZZA SOTTO LAM» DEVE DIVENTARE  |
-| `E4a` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 3 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
-| `E4b` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 5 volte, MAI definito in un registro) [E4b] |
+| `E4a` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 3 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
+| `E4b` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 5 volte, MAI definito in un registro) [E4b] |
 | `EM-CURVATURA-BIDIREZIONALE` | MISURA | FISICA | 2 | ### **AGENDA** |  | l accoppiamento EM-curvatura e' bidirezionale in natura: il verso EM->curvatura  |
-| `END-TO-END` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 4 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
+| `END-TO-END` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 4 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
 | `ENERGIA-NON-DEFINITA` | FRONTE | FISICA | 2 | ### **AGENDA** |  | il modello non ha un'energia totale, e senza quella bilancio e calore non hanno  |
 | `ESENTE-P3` | DIFETTO | METODO | ENTRAMBE | ### **APERTA** |  | (CITATO 2 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
 | `ETC-C1-CONFINE` | CURA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **CHIUSA** |  | cura (c) pezzo 1: la fotografia si apre a inizio PASSO PIENO, non di step, e ide |
 | `ETC-PASSO` | CURA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **CHIUSA** |  | LA CURA (a): il passo diventa SINCRONO -- fotografia a inizio passo, commit a fi |
 | `ETICHETTA-A13` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **CHIUSA** |  | l'etichetta sbagliata `A13` dove la regola e' `A3-DISEGNO`: corretta nei documen |
-| `F1` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 19 volte, MAI definito in un registro) |
-| `F2` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 17 volte, MAI definito in un registro) |
-| `F3` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 14 volte, MAI definito in un registro) |
+| `F1` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 19 volte, MAI definito in un registro) |
+| `F2` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 17 volte, MAI definito in un registro) |
+| `F3` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 14 volte, MAI definito in un registro) |
 | `FALSO-UNO` | DIFETTO | METODO | ENTRAMBE | ### **APERTA** |  | un verdetto NEGATIVO prodotto da una voce che non parla del merito: il gemello d |
 | `FALSO-ZERO` | DIFETTO | METODO | ENTRAMBE | ### **APERTA** |  | uno ZERO prodotto da un insieme o un campione che ho scelto io: cinque volte in  |
 | `FASCE-TAU` | CURA | FISICA | 2 | ### **AGENDA** |  | LA CRESCITA E' COORDINATA COL TEMPO PROPRIO? — l'espansione non dev'essere omoge |
-| `FASE-5` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 2 volte, MAI definito in un registro) [FASE-5] |
+| `FASE-5` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 2 volte, MAI definito in un registro) [FASE-5] |
 | `FASE-TRASCINAMENTO-3D` | DIFETTO | FISICA | 2 | ### **AGENDA** |  | il trascinamento di fase usa dir_laterale = (-y, x, 0): privilegia l asse z del  |
 | `FATTI-AVVIO` | FRONTE | INFRASTRUTTURA | ENTRAMBE | ### **APERTA** |  | la catena di AVVIO non ha un solo fatto in FATTI_dal_codice.md: _applica_flag, a |
 | `FILI-CORTI` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | i fili si accorciano SOLO FRA LE MASSE o OVUNQUE? Il calo della distanza viene d |
@@ -268,96 +267,96 @@
 | `FINESTRA-NON-DICHIARATA` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **CHIUSA** |  | _smp_d0 e _smp_d vivono solo dentro il passo e il registro non le dichiarava |
 | `FINESTRA-PRE-NASCITA` | FRONTE | METODO | ENTRAMBE | ### **APERTA** |  | una finestra PRIMA della prima nascita (216) non dice niente sulle nascite: e' c |
 | `FOGLIO-NULLO` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | il diagnostico dei fogli vale il suo NULLO sulla scena (ii): la fase sta sul con |
-| `FORK-FIRST` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 2 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
+| `FORK-FIRST` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 2 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
 | `FORMA-N-VUOTO` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | `n` in forma_passo0 non puo' cambiare: e' l'insieme congelato del passo 0 (P4) |
 | `FRAG1` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | mitosi() SU UNA RETE SENZA CAMPO VA IN IndexError INVECE DI DICHIARARLO. I = sel |
 | `FRECCE-IMPOSTE` | DIFETTO | FISICA | 2 | ### **AGENDA** |  | il censimento delle leggi che impongono una direzione nel tempo: NOVE, e DUE cur |
-| `FRENO-LEGGE` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 5 volte, MAI definito in un registro) [FRENO-LEGGE] |
+| `FRENO-LEGGE` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 5 volte, MAI definito in un registro) [FRENO-LEGGE] |
 | `FUGA-MULTIRIGA` | DIFETTO | INFRASTRUTTURA | ENTRAMBE | ### **APERTA** |  | la via d'uscita di H-REG-R e H-P1-bis e' una regex SENZA re.S: una dichiarazione |
-| `G0` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 2 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
+| `G0` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 2 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
 | `G1` | CURA | FISICA | 2 | ### **AGENDA** |  | §1 QUANTO CONTA IL DISEGNO — Ldisegno/d per arco, per regione, nel tempo, e la c |
 | `G2` | CURA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | §2 DOVE SPINGE LA GRAVITA' / GLOBALE-DISEGNO §2 / FATTO. Il saldo vive sul CONFI |
 | `G3` | CURA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | §3 PROVA DI SPEGNIMENTO: la GRAVITA' BIFASE / GLOBALE-DISEGNO §3 / FATTA. sigill |
 | `G4` | CURA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | §4 PROVA DI SPEGNIMENTO: la MEMORIA DEL MOTO — flag MEMMOTO / GLOBALE-DISEGNO §4 |
 | `G4-MEMARCO` | CURA | FISICA | 2 | ### **AGENDA** |  | MEMARCO — LA MEMORIA DEL MOTO TRADOTTA IN FORMA RELAZIONALE (aggiunta di Luca al |
-| `G5` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 4 volte, MAI definito in un registro) [G5] |
-| `G5b` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 2 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
-| `G6` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 16 volte, MAI definito in un registro) |
-| `G7` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 3 volte, MAI definito in un registro) [G7] |
-| `G8` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 3 volte, MAI definito in un registro) [G8] |
-| `G9` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 6 volte, MAI definito in un registro) [G9] |
+| `G5` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 4 volte, MAI definito in un registro) [G5] |
+| `G5b` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 2 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
+| `G6` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 16 volte, MAI definito in un registro) |
+| `G7` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 3 volte, MAI definito in un registro) [G7] |
+| `G8` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 3 volte, MAI definito in un registro) [G8] |
+| `G9` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 6 volte, MAI definito in un registro) [G9] |
 | `GEOM-SENZA-VERSO` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | perc_geom nasce da /tw/: perde il VERSO, ma la catena della torsione la usa come |
-| `GEOMETRIA-DELLA-CRESCITA` | TEORIA | FISICA | 2 | ### **AGENDA** |  | SPECULATIVA: lo spazio delle fasi CRESCE, e una forza nuova come OSTRUZIONE fra  |
-| `GLOBALE-DIS` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 4 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
-| `GLOBALE-DISEGNO` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 19 volte, MAI definito in un registro) [GLOBALE-DISEGNO] |
+| `GEOMETRIA-DELLA-CRESCITA` | FRONTE | FISICA | 2 | ### **AGENDA** |  | SPECULATIVA: lo spazio delle fasi CRESCE, e una forza nuova come OSTRUZIONE fra  |
+| `GLOBALE-DIS` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 4 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
+| `GLOBALE-DISEGNO` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 19 volte, MAI definito in un registro) [GLOBALE-DISEGNO] |
 | `GRAVITA-POTENZIALE` | FRONTE | FISICA | 2 | ### **AGENDA** |  | due potenziali nel codice e nessun Poisson risolto: Poisson e un VINCOLO DI SCAL |
 | `GUSCIO-ANTIFASE-EMERGENTE` | MISURA | FISICA | 1 | ### **SOSPESA** |  | il guscio in antifase si forma DA SOLO e scherma? Oggi emergente e imposta sono  |
 | `H-ETC-1` | PRESIDIO | FISICA | 1 | ### **SOSPESA** |  | PRESIDIO PROPOSTO E NON CABLATO: zero calcola_psi senza w dentro passo_pieno |
-| `H-ETC-2` | PRESIDIO | INFRASTRUTTURA | ENTRAMBE | ### **APERTA** |  | PRESIDIO PROPOSTO E NON CABLATO: permutare le cinque leggi deve dare lo STESSO s |
+| `H-ETC-2` | PRESIDIO | METODO | ENTRAMBE | ### **APERTA** |  | PRESIDIO PROPOSTO E NON CABLATO: permutare le cinque leggi deve dare lo STESSO s |
 | `H-FILE` | PRESIDIO | METODO | ENTRAMBE | ### **CHIUSA** |  | la lista FILE CAMBIATI nel messaggio e verificata da una macchina: il decimo hoo |
-| `H-INDICE` | TEORIA | METODO | DA_CLASSIFICARE | ### **APERTA** |  | PRESIDIO DEL HOOK: un ID citato in un documento vivo o nel messaggio che non e'  |
+| `H-INDICE` | PRESIDIO | METODO | ENTRAMBE | ### **APERTA** |  | PRESIDIO DEL HOOK: un ID citato in un documento vivo o nel messaggio che non e'  |
 | `H-NON-TRACCIATI` | PRESIDIO | METODO | ENTRAMBE | ### **CHIUSA** |  | l undicesimo hook: BLOCCA se ci sono file non tracciati e non ignorati sotto csv |
-| `H-P1-bis` | TEORIA | METODO | DA_CLASSIFICARE | ### **APERTA** |  | PRESIDIO DEL HOOK: un referto committato senza toccare la relazione |
-| `H-P3` | TEORIA | METODO | DA_CLASSIFICARE | ### **APERTA** |  | PRESIDIO DEL HOOK: un sigillo che configura il modulo A MANO invece di passare d |
-| `H-P5` | TEORIA | METODO | DA_CLASSIFICARE | ### **APERTA** |  | PRESIDIO DEL HOOK: un referto che non dichiara la configurazione INTERA |
-| `H-P7` | TEORIA | METODO | DA_CLASSIFICARE | ### **APERTA** |  | PRESIDIO DEL HOOK: un flag il cui commento cambia senza nominare quel flag |
-| `H-P8` | TEORIA | METODO | DA_CLASSIFICARE | ### **APERTA** |  | PRESIDIO DEL HOOK: un confronto che prende il codice di prima da HEAD invece che |
-| `H-P9` | TEORIA | METODO | DA_CLASSIFICARE | ### **APERTA** |  | PRESIDIO DEL HOOK: uno strumento che fa avanzare una rete con net.step() invece  |
-| `H-REG-R` | TEORIA | METODO | DA_CLASSIFICARE | ### **APERTA** |  | PRESIDIO DEL HOOK: una legge che cambia senza la sua scheda in REGISTRO_FISICA |
+| `H-P1-bis` | PRESIDIO | METODO | ENTRAMBE | ### **APERTA** |  | PRESIDIO DEL HOOK: un referto committato senza toccare la relazione |
+| `H-P3` | PRESIDIO | METODO | ENTRAMBE | ### **APERTA** |  | PRESIDIO DEL HOOK: un sigillo che configura il modulo A MANO invece di passare d |
+| `H-P5` | PRESIDIO | METODO | ENTRAMBE | ### **APERTA** |  | PRESIDIO DEL HOOK: un referto che non dichiara la configurazione INTERA |
+| `H-P7` | PRESIDIO | METODO | ENTRAMBE | ### **APERTA** |  | PRESIDIO DEL HOOK: un flag il cui commento cambia senza nominare quel flag |
+| `H-P8` | PRESIDIO | METODO | ENTRAMBE | ### **APERTA** |  | PRESIDIO DEL HOOK: un confronto che prende il codice di prima da HEAD invece che |
+| `H-P9` | PRESIDIO | METODO | ENTRAMBE | ### **APERTA** |  | PRESIDIO DEL HOOK: uno strumento che fa avanzare una rete con net.step() invece  |
+| `H-REG-R` | PRESIDIO | METODO | ENTRAMBE | ### **APERTA** |  | PRESIDIO DEL HOOK: una legge che cambia senza la sua scheda in REGISTRO_FISICA |
 | `H-REGR-LARGA` | DIFETTO | INFRASTRUTTURA | ENTRAMBE | ### **APERTA** |  | H-REG-R associa una scheda per NOME DI FUNZIONE: scatta su qualunque modifica a  |
-| `H-RIGHE` | TEORIA | METODO | DA_CLASSIFICARE | ### **APERTA** |  | PRESIDIO DEL HOOK: CLAUDE.md oltre le 400 righe |
+| `H-RIGHE` | PRESIDIO | METODO | ENTRAMBE | ### **APERTA** |  | PRESIDIO DEL HOOK: CLAUDE.md oltre le 400 righe |
 | `H-STASH` | PRESIDIO | METODO | ENTRAMBE | ### **CHIUSA** |  | git stash e BLOCCATO da permissions.deny: il decimo presidio, e NON e un hook |
-| `H-VALIDATORE` | TEORIA | METODO | DA_CLASSIFICARE | ### **APERTA** |  | PRESIDIO DEL HOOK: un indice mal formato o con una voce persa rispetto al tag |
-| `H3b` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 3 volte, MAI definito in un registro) [H3b] |
-| `H4` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 4 volte, MAI definito in un registro) [H4] |
-| `H5` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 4 volte, MAI definito in un registro) [H5] |
-| `H6` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 3 volte, MAI definito in un registro) [H6] |
-| `H6b` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 2 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
+| `H-VALIDATORE` | PRESIDIO | METODO | ENTRAMBE | ### **APERTA** |  | PRESIDIO DEL HOOK: un indice mal formato o con una voce persa rispetto al tag |
+| `H3b` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 3 volte, MAI definito in un registro) [H3b] |
+| `H4` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 4 volte, MAI definito in un registro) [H4] |
+| `H5` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 4 volte, MAI definito in un registro) [H5] |
+| `H6` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 3 volte, MAI definito in un registro) [H6] |
+| `H6b` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 2 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
 | `HASHSEED-RIPROD` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **CHIUSA** |  | FALSO ALLARME: PYTHONHASHSEED non cambia lo stato del simulatore (23/23 identich |
-| `HDF5` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 8 volte, MAI definito in un registro) |
+| `HDF5` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 8 volte, MAI definito in un registro) |
 | `I1` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | IDEA DI LUCA, per dopo: costruire UNA massa, farla maturare, leggerne la struttu |
-| `I2` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 28 volte, MAI definito in un registro) |
-| `I3` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 8 volte, MAI definito in un registro) [I3] |
-| `I4` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 14 volte, MAI definito in un registro) [I4] |
-| `I5` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 14 volte, MAI definito in un registro) [I5] |
-| `IC95` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 80 volte, MAI definito in un registro) |
-| `IMPL-2` | FRONTE | INFRASTRUTTURA | ENTRAMBE | ### **APERTA** |  | una SECONDA implementazione indipendente, scritta dalle LEGGI e non dal codice |
-| `IN-CHE-ORDINE` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 2 volte, MAI definito in un registro; citato solo in... [IN-CHE-ORDINE] |
-| `IN-RUN` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 3 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
+| `I2` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 28 volte, MAI definito in un registro) |
+| `I3` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 8 volte, MAI definito in un registro) [I3] |
+| `I4` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 14 volte, MAI definito in un registro) [I4] |
+| `I5` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 14 volte, MAI definito in un registro) [I5] |
+| `IC95` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 80 volte, MAI definito in un registro) |
+| `IMPL-2` | FRONTE | METODO | ENTRAMBE | ### **APERTA** |  | una SECONDA implementazione indipendente, scritta dalle LEGGI e non dal codice |
+| `IN-CHE-ORDINE` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 2 volte, MAI definito in un registro; citato solo in... [IN-CHE-ORDINE] |
+| `IN-RUN` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 3 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
 | `INDICE-LEGGERO` | FRONTE | INFRASTRUTTURA | ENTRAMBE | ### **APERTA** |  | l'indice pesa 169 KB e leggerlo intero non fa risparmiare contesto: serve un com |
 | `INERZIA-1` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | LA LEGGE DELL'INERZIA CEDE A k = 2, ED È UN DIFETTO DIMOSTRATO (misura 3, f8b27d |
 | `INERZIA-1(C)` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **CHIUSA** |  | 1(C) — CURATA e SIGILLATA 3/6 il 2026-09-25: GIUSTA e INSUFFICIENTE / LA CURA TO |
-| `INTERO-BLOCCO` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 7 volte, MAI definito in un registro) [INTERO-BLOCCO] |
+| `INTERO-BLOCCO` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 7 volte, MAI definito in un registro) [INTERO-BLOCCO] |
 | `INVARIANZA-LOCALE-CS` | FRONTE | FISICA | 2 | ### **AGENDA** |  | ogni legge che usa una grandezza GLOBALE da all osservatore locale un riferiment |
 | `INVENTARIO-SIGILLI-SENZA-COMMIT` | DIFETTO | INFRASTRUTTURA | ENTRAMBE | ### **APERTA** |  | 79 voci di sigillo su 82 non hanno il commit con cui rigirarle, piu una riga dup |
-| `J2` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 3 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
-| `JHEP04` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 2 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
-| `K0` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 2 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
-| `K1` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 26 volte, MAI definito in un registro) |
-| `K10` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 4 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
-| `K11` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 2 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
-| `K12` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 2 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
-| `K2` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 19 volte, MAI definito in un registro) [K2] |
-| `K2a` | TEORIA | FISICA | DA_CLASSIFICARE | ### **APERTA** |  | SIGILLO osservabile-P1: si cambia SOLO `d` (un arco del cammino minimo x10) e la |
-| `K2b` | TEORIA | FISICA | DA_CLASSIFICARE | ### **APERTA** |  | SIGILLO osservabile-P1: si cambia SOLO `pos` (un nodo di 10 LAM) e la distanza N |
-| `K3` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 17 volte, MAI definito in un registro) [K3] |
-| `K4` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 12 volte, MAI definito in un registro) |
-| `K5` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 12 volte, MAI definito in un registro) [K5] |
-| `K6` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 9 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
-| `K7` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 28 volte, MAI definito in un registro) [K7] |
-| `K8` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 10 volte, MAI definito in un registro) |
-| `K9` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 3 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
+| `J2` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 3 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
+| `JHEP04` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 2 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
+| `K0` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 2 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
+| `K1` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 26 volte, MAI definito in un registro) |
+| `K10` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 4 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
+| `K11` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 2 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
+| `K12` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 2 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
+| `K2` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 19 volte, MAI definito in un registro) [K2] |
+| `K2a` | CRITERIO | METODO | ENTRAMBE | ### **APERTA** |  | SIGILLO osservabile-P1: si cambia SOLO `d` (un arco del cammino minimo x10) e la |
+| `K2b` | CRITERIO | METODO | ENTRAMBE | ### **APERTA** |  | SIGILLO osservabile-P1: si cambia SOLO `pos` (un nodo di 10 LAM) e la distanza N |
+| `K3` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 17 volte, MAI definito in un registro) [K3] |
+| `K4` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 12 volte, MAI definito in un registro) |
+| `K5` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 12 volte, MAI definito in un registro) [K5] |
+| `K6` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 9 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
+| `K7` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 28 volte, MAI definito in un registro) [K7] |
+| `K8` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 10 volte, MAI definito in un registro) |
+| `K9` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 3 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
 | `KAPPA-TW-COMMENTO` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **CHIUSA** |  | il commento di _tau_tw_locale dice kappa_tw = TAU_TW/(2pi) = 3.1831, il codice r |
-| `L-DOPO-STOP` | TEORIA | METODO | DA_CLASSIFICARE | ### **APERTA** |  | DOPO UNO STOP, se Luca non risponde si lavora SOLO la coda: nessuna cura fisica, |
-| `L-MEMORIA-PRIMA` | TEORIA | METODO | DA_CLASSIFICARE | ### **APERTA** |  | PRIMA di proporre una cura si valuta se una MEMORIA la cura, e la valutazione st |
-| `L-NUMERI` | TEORIA | METODO | DA_CLASSIFICARE | ### **APERTA** |  | OGNI NUMERO SCRITTO IN UN COMMIT O IN UN REFERTO ESCE DA UNO SCRIPT |
-| `L-PATCH` | TEORIA | METODO | DA_CLASSIFICARE | ### **APERTA** |  | LE PATCH SI LANCIANO IN PRIMO PIANO; niente git stash con una patch in corso; ne |
-| `L-SOGLIA` | TEORIA | METODO | DA_CLASSIFICARE | ### **APERTA** |  | UNA SOGLIA NON SI CALCOLA DAI DATI CHE GIUDICA, e si collauda sul caso nullo |
-| `L-STELLA` | TEORIA | METODO | DA_CLASSIFICARE | ### **APERTA** |  | LE CINQUE DOMANDE DELLA STELLA POLARE SI RISPONDONO PER ISCRITTO NEL TASK HISTOR |
-| `L-UN-PROMPT` | TEORIA | METODO | DA_CLASSIFICARE | ### **APERTA** |  | UN PROMPT ALLA VOLTA: i rilievi che arrivano durante un lavoro vanno in CODA |
-| `L0` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 2 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
-| `L1` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 9 volte, MAI definito in un registro) |
-| `L206` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 5 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
+| `L-DOPO-STOP` | PRESIDIO | METODO | ENTRAMBE | ### **APERTA** |  | DOPO UNO STOP, se Luca non risponde si lavora SOLO la coda: nessuna cura fisica, |
+| `L-MEMORIA-PRIMA` | PRESIDIO | METODO | ENTRAMBE | ### **APERTA** |  | PRIMA di proporre una cura si valuta se una MEMORIA la cura, e la valutazione st |
+| `L-NUMERI` | PRESIDIO | METODO | ENTRAMBE | ### **APERTA** |  | OGNI NUMERO SCRITTO IN UN COMMIT O IN UN REFERTO ESCE DA UNO SCRIPT |
+| `L-PATCH` | PRESIDIO | METODO | ENTRAMBE | ### **APERTA** |  | LE PATCH SI LANCIANO IN PRIMO PIANO; niente git stash con una patch in corso; ne |
+| `L-SOGLIA` | STANDARD | METODO | ENTRAMBE | ### **APERTA** |  | UNA SOGLIA NON SI CALCOLA DAI DATI CHE GIUDICA, e si collauda sul caso nullo |
+| `L-STELLA` | PRESIDIO | METODO | ENTRAMBE | ### **APERTA** |  | LE CINQUE DOMANDE DELLA STELLA POLARE SI RISPONDONO PER ISCRITTO NEL TASK HISTOR |
+| `L-UN-PROMPT` | PRESIDIO | METODO | ENTRAMBE | ### **APERTA** |  | UN PROMPT ALLA VOLTA: i rilievi che arrivano durante un lavoro vanno in CODA |
+| `L0` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 2 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
+| `L1` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 9 volte, MAI definito in un registro) |
+| `L206` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 5 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
 | `LETTORI-INDICE` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **CHIUSA** |  | CHIUSA il 2026-09-26 (decisioni di Luca) / ESITO: 1 RITIRATO, 1 CONVERTITO, 4 FU |
 | `LINGUAGGIO-REGOLE` | FRONTE | METODO | ENTRAMBE | ### **APERTA** |  | un linguaggio dichiarativo delle leggi, da cui GENERARE il codice e il documento |
 | `LORENTZ-MATERIA-INTERFERENZA` | MISURA | FISICA | 2 | ### **AGENDA** |  | la materia per interferenza aggira la violazione di Lorentz che si propaga alle  |
@@ -369,29 +368,29 @@
 | `M-LEGAMI` | CURA | FISICA | 2 | ### **AGENDA** |  | cos(dph - tw) al posto di cos(phi0_i - phi0_j): rende viva una memoria congelata |
 | `M-MASSA` | CURA | FISICA | 2 | ### **AGENDA** |  | pesi di appartenenza con memoria: AGGIUNGE stato, e dipende da MASSA-ID |
 | `M-SPINORE` | CURA | FISICA | 2 | ### **AGENDA** |  | trasporto SU(2) per arco con memoria: il candidato campo di gauge della carica |
-| `M0` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 3 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
-| `M0a` | TEORIA | FISICA | DA_CLASSIFICARE | ### **APERTA** |  | MISURA 0 di DRIVER-SCENA-II: `--nodi 0` NON e' rispettato -- net.n = 455 dopo `_ |
-| `M0b` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 2 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
-| `M0c` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 2 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
+| `M0` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 3 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
+| `M0a` | DIFETTO | INFRASTRUTTURA | ENTRAMBE | ### **APERTA** |  | MISURA 0 di DRIVER-SCENA-II: `--nodi 0` NON e' rispettato -- net.n = 455 dopo `_ |
+| `M0b` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 2 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
+| `M0c` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 2 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
 | `M1` | DIFETTO | FISICA | 2 | ### **AGENDA** |  | LA MATERIA È UNO STATO, NON UNA SOSTANZA — e non c'è SCARICO. Nel codice la mate |
-| `M1b` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 23 volte, MAI definito in un registro) |
-| `M1c` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 5 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
+| `M1b` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 23 volte, MAI definito in un registro) |
+| `M1c` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 5 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
 | `M2` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | LA MITOSI — DUE DIFETTI DA ACCLARARE. ① il figlio nasce nel PUNTO MEDIO: posfigl |
-| `M2b` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 7 volte, MAI definito in un registro) [M2b] |
-| `M3` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 27 volte, MAI definito in un registro) |
-| `M3b` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 3 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
-| `M3c` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 20 volte, MAI definito in un registro) |
-| `M4` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 18 volte, MAI definito in un registro) |
-| `M5a` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 3 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
-| `M5b` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 2 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
-| `M5c` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 2 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
-| `M8` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 2 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
-| `MANDATO-REGISTRO` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 12 volte, MAI definito in un registro) [MANDATO-REGISTRO] |
+| `M2b` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 7 volte, MAI definito in un registro) [M2b] |
+| `M3` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 27 volte, MAI definito in un registro) |
+| `M3b` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 3 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
+| `M3c` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 20 volte, MAI definito in un registro) |
+| `M4` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 18 volte, MAI definito in un registro) |
+| `M5a` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 3 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
+| `M5b` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 2 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
+| `M5c` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 2 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
+| `M8` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 2 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
+| `MANDATO-REGISTRO` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 12 volte, MAI definito in un registro) [MANDATO-REGISTRO] |
 | `MASSA-CRITICA-LOCALE` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | la soglia di collasso deve essere LOCALE e DINAMICA, e dipendere da lambda: dire |
-| `MASSA-ID` | DIFETTO | INFRASTRUTTURA | ENTRAMBE | ### **APERTA** |  | le masse si identificano con l'ID di massa (conc_nodi), non coi nodi del passo 0 |
+| `MASSA-ID` | DIFETTO | METODO | ENTRAMBE | ### **APERTA** |  | le masse si identificano con l'ID di massa (conc_nodi), non coi nodi del passo 0 |
 | `MASSA-ID-FISSO` | MISURA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **CHIUSA** |  | MASSA-ID a LIGNAGGIO FISSO: non applicabile, la precondizione V-PRE non regge (i |
 | `MASSA-MIGRA` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | la massa segue i NODI o la COERENZA? E come cambia la sua FORMA? |
-| `MASSA-VUOTO` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 2 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
+| `MASSA-VUOTO` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 2 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
 | `MASSE-PESI-SOVRAPPOSTE` | FRONTE | FISICA | 2 | ### **AGENDA** |  | un nodo appartiene a PIU masse con peso diverso: una massa e una configurazione  |
 | `MAX-NODI-FERMA` | CURA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **CHIUSA** |  | MAX_NODI e' una guardia di MEMORIA che oggi cambia la FISICA in silenzio: deve F |
 | `MCRIT-RICALCOLO` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | massa_critica_adattiva si ricalcola 7 volte per passo su stati diversi: e' una l |
@@ -404,68 +403,68 @@
 | `MITOSI-SOGLIA-GRAD` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **CHIUSA** |  | la soglia di mitosi si abbassa col gradiente di tempo proprio: ampiezza 0.3 e ta |
 | `MITOSI-TASSO` | MISURA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | APERTA il 2026-09-26 (era una voce PERSA: viveva senza ID) / CHE IL TASSO DI MIT |
 | `MODELLO-MINIMO` | FRONTE | FISICA | 2 | ### **AGENDA** |  | un modello semplice (spinore, grafo, LAM) da costruire DOPO il simulatore comple |
-| `N1` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 15 volte, MAI definito in un registro) [N1] |
-| `N1b` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 8 volte, MAI definito in un registro) [N1b] |
-| `N2` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 17 volte, MAI definito in un registro) [N2] |
-| `N3` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 6 volte, MAI definito in un registro) [N3] |
-| `N3b` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 22 volte, MAI definito in un registro) |
-| `N4` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 2 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
-| `N5` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 2 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
-| `N6` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 12 volte, MAI definito in un registro) [N6] |
-| `N7` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 13 volte, MAI definito in un registro) |
-| `N7b` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 3 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
-| `N7c` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 2 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
+| `N1` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 15 volte, MAI definito in un registro) [N1] |
+| `N1b` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 8 volte, MAI definito in un registro) [N1b] |
+| `N2` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 17 volte, MAI definito in un registro) [N2] |
+| `N3` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 6 volte, MAI definito in un registro) [N3] |
+| `N3b` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 22 volte, MAI definito in un registro) |
+| `N4` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 2 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
+| `N5` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 2 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
+| `N6` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 12 volte, MAI definito in un registro) [N6] |
+| `N7` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 13 volte, MAI definito in un registro) |
+| `N7b` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 3 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
+| `N7c` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 2 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
 | `NASCITA-PUNTO-UNICO` | CURA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **CHIUSA** |  | le grandezze della nascita si scrivono in UN SOLO punto, con UNA regola dichiara |
 | `NODI-1` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **CHIUSA** |  | RITIRATA (Luca, 2026-09-25). NON cancellata: resta come storia, col motivo. PERC |
 | `NON-TRACCIATI` | FRONTE | INFRASTRUTTURA | ENTRAMBE | ### **APERTA** |  | 484 file non tracciati: 98 CITATI e non tracciati sono riferimenti al vuoto, e i |
-| `O1` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 12 volte, MAI definito in un registro; citato solo in referti/sigilli/ta |
-| `O2` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 9 volte, MAI definito in un registro) [O2] |
-| `O3` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 8 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
-| `O3a` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 2 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
-| `O3c` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 4 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
-| `O4` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 7 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
+| `O1` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 12 volte, MAI definito in un registro; citato solo in referti/sigilli/ta |
+| `O2` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 9 volte, MAI definito in un registro) [O2] |
+| `O3` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 8 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
+| `O3a` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 2 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
+| `O3c` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 4 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
+| `O4` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 7 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
 | `OKN-ASSERT` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **CHIUSA** |  | CHIUSA il 2026-09-26, a run finito (residuo rilevato da Luca) / UN getattr(...,  |
 | `OMEGA-ETA` | MISURA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | APERTA il 2026-09-26 (Luca: da seguire nel run base, NON una cura) / IL RAPPORTO |
 | `OSSERVABILE-P1` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **CHIUSA** |  | APERTA il 2026-09-26 (rilievo di Luca) / NON ESISTE UNO STRUMENTO UFFICIALE PER  |
-| `P-DECADIMENTO` | TEORIA | METODO | DA_CLASSIFICARE | ### **APERTA** |  | ogni decadimento e una trasformazione: cio che una grandezza perde diventa calor |
+| `P-DECADIMENTO` | STANDARD | FISICA | ENTRAMBE | ### **APERTA** |  | ogni decadimento e una trasformazione: cio che una grandezza perde diventa calor |
 | `P-EQ-MEDIANA-ARCHI` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | P_eq prende la mediana dei PRIMI n ARCHI su m: un sottoinsieme arbitrario, non t |
-| `P-MEMORIA` | TEORIA | METODO | DA_CLASSIFICARE | ### **APERTA** |  | uno scalare con memoria acquista un verso: la memoria da la direzione |
-| `P0` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 12 volte, MAI definito in un registro; citato solo in referti/sigilli/ta |
+| `P-MEMORIA` | STANDARD | FISICA | ENTRAMBE | ### **APERTA** |  | uno scalare con memoria acquista un verso: la memoria da la direzione |
+| `P0` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 12 volte, MAI definito in un registro; citato solo in referti/sigilli/ta |
 | `P1` | PRESIDIO | METODO | ENTRAMBE | ### **APERTA** |  | NON USARE L'ASSOCIAZIONE SENZA VERIFICARE LO STORICO. |
-| `P1-bis` | TEORIA | METODO | DA_CLASSIFICARE | ### **APERTA** |  | LA RELAZIONE SI SCRIVE NELLO STESSO COMMIT DEL RISCONTRO |
-| `P1-quater` | TEORIA | METODO | DA_CLASSIFICARE | ### **APERTA** |  | OGNI SOSTITUZIONE DI TESTO SI ASSERISCE PER SE', MAI IN BLOCCO |
-| `P1-sexies` | TEORIA | METODO | DA_CLASSIFICARE | ### **APERTA** |  | UN CRITERIO SI COLLAUDA SU UN CASO A RISPOSTA NOTA, e il caso che DEVE fallire e |
-| `P10` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 9 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
-| `P11` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 2 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
+| `P1-bis` | PRESIDIO | METODO | ENTRAMBE | ### **APERTA** |  | LA RELAZIONE SI SCRIVE NELLO STESSO COMMIT DEL RISCONTRO |
+| `P1-quater` | PRESIDIO | METODO | ENTRAMBE | ### **APERTA** |  | OGNI SOSTITUZIONE DI TESTO SI ASSERISCE PER SE', MAI IN BLOCCO |
+| `P1-sexies` | STANDARD | METODO | ENTRAMBE | ### **APERTA** |  | UN CRITERIO SI COLLAUDA SU UN CASO A RISPOSTA NOTA, e il caso che DEVE fallire e |
+| `P10` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 9 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
+| `P11` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 2 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
 | `P1BIS-DELTA` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **CHIUSA** |  | in coda per la LISTA CHIUSA, famiglia G (ordine di Luca, 2026-09-25) / P1-bis VE |
-| `P1b` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 7 volte, MAI definito in un registro) [P1b] |
+| `P1b` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 7 volte, MAI definito in un registro) [P1b] |
 | `P2` | PRESIDIO | METODO | ENTRAMBE | ### **APERTA** |  | PRIMA DI ESCLUDERE UN FLAG DA UNA MISURA: FORZA IL SISTEMA O LO CORREGGE? |
-| `P2b` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 3 volte, MAI definito in un registro) [P2b] |
+| `P2b` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 3 volte, MAI definito in un registro) [P2b] |
 | `P3` | PRESIDIO | METODO | ENTRAMBE | ### **APERTA** |  | NESSUNA STATISTICA SENZA BARRA D'ERRORE, e per confronti fra bracci si usa la |
 | `P4` | PRESIDIO | METODO | ENTRAMBE | ### **APERTA** |  | PRIMA DI MISURARE SE UNA GRANDEZZA CAMBIA, VERIFICARE CHE SIA LIBERA DI CAMBIARE |
 | `P5` | PRESIDIO | METODO | ENTRAMBE | ### **APERTA** |  | OGNI RAMO else / FALLBACK / getattr(..., default) SU UN PERCORSO FISICO VA CONTA |
-| `P5a` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 5 volte, MAI definito in un registro) [P5a] |
-| `P5b` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 6 volte, MAI definito in un registro) [P5b] |
+| `P5a` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 5 volte, MAI definito in un registro) [P5a] |
+| `P5b` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 6 volte, MAI definito in un registro) [P5b] |
 | `P6` | PRESIDIO | METODO | ENTRAMBE | ### **APERTA** |  | OGNI CSV DI MISURA PORTA BLOB, SEME E TUTTI I FLAG che distinguono quel run dagl |
-| `P7` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 18 volte, MAI definito in un registro) [P7] |
-| `P8` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 20 volte, MAI definito in un registro) [P8] |
-| `P9` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 12 volte, MAI definito in un registro) [P9] |
-| `PADRE-FIGLIO` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 2 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
+| `P7` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 18 volte, MAI definito in un registro) [P7] |
+| `P8` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 20 volte, MAI definito in un registro) [P8] |
+| `P9` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 12 volte, MAI definito in un registro) [P9] |
+| `PADRE-FIGLIO` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 2 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
 | `PASSO-1` | DIFETTO | METODO | ENTRAMBE | ### **APERTA** |  | IL PASSO NON È step(): SONO CINQUE CHIAMATE, e 24 script sotto csv/ avanzano in  |
 | `PASSO-2` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | UN AVANZAMENTO INCOMPLETO NEL SIMULATORE STESSO, :8404: for in range(300): net.s |
 | `PASSO-PIENO` | DIFETTO | METODO | ENTRAMBE | ### **APERTA** |  | un hook che rifiuta uno script che avanza con net.step() invece di csv/_passo.py |
 | `PAT-1` | CURA | METODO | ENTRAMBE | ### **APERTA** |  | dovespingelagravita.py non rispetta il pattern 5 (nessun CONTROLLO DELL'INVOLUCR |
 | `PAT-2` | CURA | METODO | ENTRAMBE | ### **APERTA** |  | spegnigravbifase.py:184 non rispetta il pattern 2 (usa max\/Δ\/ invece delle FIR |
-| `PCG64` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 2 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
+| `PCG64` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 2 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
 | `PEQ-MEDIANA-ISTANTE` | CURA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **CHIUSA** |  | _g_peqn_mediana si prende UNA volta, sullo stato da cui la nascita parte: era l  |
 | `PEQ-SEL-STANTIO` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | mitosi legge self.peq[sel] DOPO che peq e' stato rifiltrato con keep: archi sbag |
-| `PER-ARCO` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 2 volte, MAI definito in un registro) [PER-ARCO] |
+| `PER-ARCO` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 2 volte, MAI definito in un registro) [PER-ARCO] |
 | `PERC-TW-MORTA` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | perc_tw e STATO MORTO: scritta sempre a zero da quattro siti di nascita, e NESSU |
 | `PESO-MAX` | CRITERIO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **CHIUSA** |  | partecipazioni multiple: l'opacita' di un nodo e' il MAX su tutte le masse, non  |
 | `PHI-FUORI-DOMINIO` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | una delle dieci scritture di phi NON normalizza, e il sito della fase lo copriva |
 | `PHI0-CONGELATA` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | phi0 e CONGELATA: 5 scritture tutte alla nascita, e lo step la legge come memori |
-| `PIATTAFORMA-NON-TIMBRATA` | FRONTE | INFRASTRUTTURA | ENTRAMBE | ### **APERTA** |  | I REFERTI NON TIMBRANO LA PIATTAFORMA, e i conteggi assoluti ne dipendono |
-| `POST-HOC` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 5 volte, MAI definito in un registro) [POST-HOC] |
+| `PIATTAFORMA-NON-TIMBRATA` | FRONTE | METODO | ENTRAMBE | ### **APERTA** |  | I REFERTI NON TIMBRANO LA PIATTAFORMA, e i conteggi assoluti ne dipendono |
+| `POST-HOC` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 5 volte, MAI definito in un registro) [POST-HOC] |
 | `POTATURA-GUARDIE` | CURA | FISICA | 1 | ### **SOSPESA** |  | I 57 rami MORTI delle guardie di lunghezza: potatura rimandata dopo il riordino  |
 | `POTENZE-1` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **CHIUSA** |  | CHIUSA il 2026-09-26 con la CURA A (rhos/W^2), sigillo 6/6: F2 da x47 000 a x1.4 |
 | `POZZO-D` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **CHIUSA** |  | la cura di D02 (flag `POZZO_D` nel codice): nel pozzo del grafo `L` viene da `se |
@@ -476,28 +475,28 @@
 | `PROVA-COMB` | CURA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | LA PROVA COMBINATA: TUTTE LE CURE APPROVATE ACCESE INSIEME — 600 passi, stesso s |
 | `PROVA1-40-80` | MISURA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | i NODI delle masse del passo 0 si avvicinano piu' dei controlli a 40-80 passi; i |
 | `PSI-FLASH` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **CHIUSA** |  | /psi/ SALTA di 1.6x nei passi con nascite: due siti ricalcolano psi dopo la mito |
-| `Q0` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 3 volte, MAI definito in un registro) [Q0] |
-| `Q1` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 13 volte, MAI definito in un registro) [Q1] |
-| `Q1a` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 5 volte, MAI definito in un registro) [Q1a] |
-| `Q1b` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 6 volte, MAI definito in un registro) [Q1b] |
-| `Q2` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 9 volte, MAI definito in un registro) [Q2] |
-| `Q3` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 9 volte, MAI definito in un registro) [Q3] |
-| `Q4` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 23 volte, MAI definito in un registro) [Q4] |
-| `Q5` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 7 volte, MAI definito in un registro) [Q5] |
+| `Q0` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 3 volte, MAI definito in un registro) [Q0] |
+| `Q1` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 13 volte, MAI definito in un registro) [Q1] |
+| `Q1a` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 5 volte, MAI definito in un registro) [Q1a] |
+| `Q1b` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 6 volte, MAI definito in un registro) [Q1b] |
+| `Q2` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 9 volte, MAI definito in un registro) [Q2] |
+| `Q3` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 9 volte, MAI definito in un registro) [Q3] |
+| `Q4` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 23 volte, MAI definito in un registro) [Q4] |
+| `Q5` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 7 volte, MAI definito in un registro) [Q5] |
 | `Q6` | PRESIDIO | METODO | ENTRAMBE | ### **APERTA** |  | Q6 (1a) / confrontava i valori dopo il passo, quando il rilassamento li ha gia'  |
-| `Q7` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 2 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
-| `Q8` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 13 volte, MAI definito in un registro) [Q8] |
-| `QQ777` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 2 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
-| `QUADRO-FINE` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 2 volte, MAI definito in un registro) [QUADRO-FINE] |
-| `QUADRO-INIZIO` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 2 volte, MAI definito in un registro) [QUADRO-INIZIO] |
-| `R0` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 3 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
-| `R1` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 30 volte, MAI definito in un registro) |
+| `Q7` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 2 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
+| `Q8` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 13 volte, MAI definito in un registro) [Q8] |
+| `QQ777` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 2 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
+| `QUADRO-FINE` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 2 volte, MAI definito in un registro) [QUADRO-FINE] |
+| `QUADRO-INIZIO` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 2 volte, MAI definito in un registro) [QUADRO-INIZIO] |
+| `R0` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 3 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
+| `R1` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 30 volte, MAI definito in un registro) |
 | `R2` | FRONTE | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | R2 🟨VALE PER QUELLA SCENA ⏳[EPOCA 1 · MISURA] / NUOVO: il residuo della catena t |
 | `R3` | PRESIDIO | METODO | ENTRAMBE | ### **APERTA** |  | pretendeva bias == 0.0 esatto e falliva su due ulp di arrotondamento |
-| `R3b` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 12 volte, MAI definito in un registro) [R3b] |
-| `R4` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 13 volte, MAI definito in un registro) [R4] |
+| `R3b` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 12 volte, MAI definito in un registro) [R3b] |
+| `R4` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 13 volte, MAI definito in un registro) [R4] |
 | `R5` | PRESIDIO | METODO | ENTRAMBE | ### **APERTA** |  | contava 25 aperture su 24 passi: l'iniezione del test apriva il freno lei stessa |
-| `R6` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 27 volte, MAI definito in un registro) [R6] |
+| `R6` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 27 volte, MAI definito in un registro) [R6] |
 | `RAMI-OFF-CURA2` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | i rami a flag spento di TEMPO_UNICO_MITOSI, archiviati COPIATI dal sorgente |
 | `RAMPA-1` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **CHIUSA** |  | CHIUSA il 2026-09-25, strada (3) (decisione di Luca): sigillo 9/9 dal CLI, ramp  |
 | `RAMPA-2` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | APERTA il 2026-09-25 (richiesta di Luca) / AL PASSO 0 TUTTI LEGGONO cs = CSM. La |
@@ -569,16 +568,16 @@
 | `REGISTRO_FISICA:V9` | CRITERIO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | quante scritture hanno \/dx\//d 1, e quante 2 / 1: Itô comprime; 2: Itô inverte  |
 | `RELAZIONE-BINARIA` | DIFETTO | INFRASTRUTTURA | ENTRAMBE | ### **APERTA** |  | un NUL letterale rende RELAZIONE_PER_CLAUDE.md binaria per git, e i suoi diff il |
 | `REPERTI-IMMUTABILI` | DIFETTO | METODO | ENTRAMBE | ### **APERTA** |  | APERTA il 2026-09-26 (proposta di Luca), famiglia G / UN COMMIT PUO' TOCCARE UN  |
-| `REVERSIBILITA-LOCALE` | TEORIA | FISICA | 2 | ### **AGENDA** |  | reversibilita' LOCALE, irreversibilita' GLOBALE: la sola freccia e' la crescita  |
-| `RI-ANCORATA` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 2 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
-| `RI-ETICHETTATO` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 2 volte, MAI definito in un registro; citato solo in... [RI-ETICHETTATO] |
-| `RI-GIRABILE` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 4 volte, MAI definito in un registro) [RI-GIRABILE] |
-| `RI-GIRABILITA` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 2 volte, MAI definito in un registro; citato solo in... [RI-GIRABILITA] |
-| `RI-INTERROGA` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 2 volte, MAI definito in un registro) [RI-INTERROGA] |
-| `RI-LETTA` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 4 volte, MAI definito in un registro) [RI-LETTA] |
-| `RI-MISURA` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 3 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
-| `RI-VERIFICATI` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 2 volte, MAI definito in un registro; citato solo in... [RI-VERIFICATI] |
-| `RIDUZIONE-AL-LIMITE` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 2 volte, MAI definito in un registro; citato solo in... [RIDUZIONE-AL-LI |
+| `REVERSIBILITA-LOCALE` | FRONTE | FISICA | 2 | ### **AGENDA** |  | reversibilita' LOCALE, irreversibilita' GLOBALE: la sola freccia e' la crescita  |
+| `RI-ANCORATA` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 2 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
+| `RI-ETICHETTATO` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 2 volte, MAI definito in un registro; citato solo in... [RI-ETICHETTATO] |
+| `RI-GIRABILE` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 4 volte, MAI definito in un registro) [RI-GIRABILE] |
+| `RI-GIRABILITA` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 2 volte, MAI definito in un registro; citato solo in... [RI-GIRABILITA] |
+| `RI-INTERROGA` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 2 volte, MAI definito in un registro) [RI-INTERROGA] |
+| `RI-LETTA` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 4 volte, MAI definito in un registro) [RI-LETTA] |
+| `RI-MISURA` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 3 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
+| `RI-VERIFICATI` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 2 volte, MAI definito in un registro; citato solo in... [RI-VERIFICATI] |
+| `RIDUZIONE-AL-LIMITE` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 2 volte, MAI definito in un registro; citato solo in... [RIDUZIONE-AL-LI |
 | `RINCULO-RIPETUTI` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | il rinculo dei genitori applica UNA spinta sola a un nodo genitore due volte nel |
 | `RIORDINO-NOMI-H` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **CHIUSA** |  | il prefisso `H-` e' sui NOMI VECCHI (H-P3) e non sui nomi semantici (H-CLI) che  |
 | `RIORDINO-POSTO2` | FRONTE | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **CHIUSA** |  | IL POSTO 2 HA 11 REGOLE E IL TETTO E' 10: quale si fonde |
@@ -590,8 +589,8 @@
 | `RITMO-FLAG-SENZA-OGGETTO` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | due flag e due sigilli perdono il loro OGGETTO con la cura (2) di Z43 |
 | `RITMO-PAVIMENTO` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | IL PAVIMENTO DEL RITMO MORDE: min(r) = 1.414212e-06 e' ESATTAMENTE il pavimento, |
 | `ROBUSTEZZA-FISICA` | STANDARD | METODO | ENTRAMBE | ### **APERTA** |  | i TRE GRADINI che una conclusione di fisica deve salire: rumore numerico, legge  |
-| `ROMPI-ANELLO` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 8 volte, MAI definito in un registro) [ROMPI-ANELLO] |
-| `S0` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 6 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
+| `ROMPI-ANELLO` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 8 volte, MAI definito in un registro) [ROMPI-ANELLO] |
+| `S0` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 6 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
 | `S01` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | Chi fa crescere d0: in G3 gli scrittori sommano -1.6e+03 e med d0 RADDOPPIA lo s |
 | `S02` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | Il freno di SCALAMIN e' il motore di d0 / DECISO da Z108: bilancio che CHIUDE a  |
 | `S03` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | La memoria del moto fa scappare d0 / DECISO da Z109: spegnendola d0 cresce ancor |
@@ -606,24 +605,24 @@
 | `S11` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | r E' SATURO AL SUO TETTO PER UN TERZO DEI NODI, e la quota CRESCE: 0.76 % - 29.5 |
 | `S12` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | S12 APPROVATO DA LUCA il 2026-09-24 / IL RILASSAMENTO DI rep DENTRO mitosi() (:5 |
 | `S13` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | IL TEMPO D'ARCO DOVREBBE ESSERE min(ri, rj) INVECE DELLA MEDIA ARITMETICA? — pro |
-| `S1a` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 15 volte, MAI definito in un registro) [S1a] |
-| `S1b` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 19 volte, MAI definito in un registro) [S1b] |
-| `S1c` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 2 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
-| `S1d` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 2 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
-| `S1e` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 2 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
+| `S1a` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 15 volte, MAI definito in un registro) [S1a] |
+| `S1b` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 19 volte, MAI definito in un registro) [S1b] |
+| `S1c` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 2 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
+| `S1d` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 2 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
+| `S1e` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 2 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
 | `S2` | FRONTE | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | S2 🟨VALE PER QUELLA SCENA ⏳[EPOCA 1 · MISURA] / NON SI RIPRODUCE sul sistema cor |
-| `S2b` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 2 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
-| `S3a` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 5 volte, MAI definito in un registro) [S3a] |
-| `S4a` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 4 volte, MAI definito in un registro) [S4a] |
-| `S6b` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 2 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
-| `S6c` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 2 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
-| `S7b` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 2 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
-| `S7c` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 2 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
-| `S7d` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 2 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
-| `S8` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 20 volte, MAI definito in un registro) [S8] |
-| `S8b` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 6 volte, MAI definito in un registro) [S8b] |
-| `S8c` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 3 volte, MAI definito in un registro) [S8c] |
-| `S8d` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 4 volte, MAI definito in un registro) [S8d] |
+| `S2b` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 2 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
+| `S3a` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 5 volte, MAI definito in un registro) [S3a] |
+| `S4a` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 4 volte, MAI definito in un registro) [S4a] |
+| `S6b` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 2 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
+| `S6c` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 2 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
+| `S7b` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 2 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
+| `S7c` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 2 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
+| `S7d` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 2 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
+| `S8` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 20 volte, MAI definito in un registro) [S8] |
+| `S8b` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 6 volte, MAI definito in un registro) [S8b] |
+| `S8c` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 3 volte, MAI definito in un registro) [S8c] |
+| `S8d` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 4 volte, MAI definito in un registro) [S8d] |
 | `SCALE-TW` | CURA | FISICA | 1 | ### **SOSPESA** | SI | LE SCALE DELLA TORSIONE: un'analisi completa, DA CAPO / mandato di Luca ricevuto |
 | `SCENA-1` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **CHIUSA** |  | CHIUSA il 2026-09-25, strada (1) (decisione di Luca) / SEMINALAM era approvata m |
 | `SCHED-PASSO` | CURA | FISICA | 1 | ### **SOSPESA** | SI | il passo pieno diventa uno SCHEDULATORE: le regole del passo sono architettura,  |
@@ -637,7 +636,7 @@
 | `SCHWINGER-UN-NODO` | DIFETTO | FISICA | 2 | ### **AGENDA** |  | lo Schwinger crea UN solo nodo e il commento dice che la coppia e' neutra: la ca |
 | `SCIOGLIMENTO-FASE` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | perche' coer_campo va da 0.999 a 0.20 in 120 passi: la scena non tocca phivel e  |
 | `SCUOT-INNESCO` | MISURA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **CHIUSA** |  | lo scuotimento del vuoto e' l'innesco: senza di lui zero nascite e spin omogenei |
-| `SHAKE-THEN-FREEZE` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 2 volte, MAI definito in un registro; citato solo in... [SHAKE-THEN-FREE |
+| `SHAKE-THEN-FREEZE` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 2 volte, MAI definito in un registro; citato solo in... [SHAKE-THEN-FREE |
 | `SIGILLO-COMPARATORE-DUPLICATO` | FRONTE | INFRASTRUTTURA | ENTRAMBE | ### **APERTA** |  | il comparatore del lockstep e copiato in due sigilli: due copie che possono dive |
 | `SIGILLO-REGISTRO-NON-CONFRONTABILE` | FRONTE | INFRASTRUTTURA | ENTRAMBE | ### **APERTA** |  | il comparatore del sigillo non sa confrontare _veleno_registro (un dict di array |
 | `SIGILLO-SENZA-CONFIGURAZIONE` | FRONTE | INFRASTRUTTURA | ENTRAMBE | ### **APERTA** |  | il sigillo prende la configurazione dal CLI del driver ma NON la timbra nel suo  |
@@ -645,97 +644,97 @@
 | `SMP-APRI-COMMENTO` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | il docstring di _smp_apri dice che la chiamano cinque leggi: oggi la chiama solo |
 | `SOGLIA-MITOSI-3PI` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | la soglia di mitosi e 2pi + pi col pi di dipolo MASSIMO, e in questa scena il di |
 | `SOGLIA-NON-MODULATA` | MISURA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **CHIUSA** |  | la modulazione 0.3 della soglia non agisce: il gradiente di tempo proprio e' zer |
-| `SOTTO-PASSO` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 4 volte, MAI definito in un registro) [SOTTO-PASSO] |
-| `SOVRA-CORREGGE` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 2 volte, MAI definito in un registro; citato solo in... [SOVRA-CORREGGE] |
+| `SOTTO-PASSO` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 4 volte, MAI definito in un registro) [SOTTO-PASSO] |
+| `SOVRA-CORREGGE` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 2 volte, MAI definito in un registro; citato solo in... [SOVRA-CORREGGE] |
 | `SPINORE-SENZA-FASE` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | la coppia muove phivel ma deriva da un'ALTRA fase: lo spinore ha un orologio tut |
-| `STANDARD-1` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 10 volte, MAI definito in un registro) [STANDARD 1] |
-| `STANDARD-10` | TEORIA | METODO | DA_CLASSIFICARE | ### **APERTA** |  | STANDARD 10 — UNA CURA NON AUMENTA IL NUMERO DELLE LEGGI (criterio di Luca, 2026 |
-| `STANDARD-2` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 5 volte, MAI definito in un registro) [STANDARD 2] |
-| `STANDARD-3` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 3 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
-| `STANDARD-4` | TEORIA | METODO | DA_CLASSIFICARE | ### **APERTA** |  | SNAPSHOT CONTRO SNAPSHOT, ALLO STESSO ISTANTE |
-| `STANDARD-5` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 3 volte, MAI definito in un registro) [STANDARD 5] |
-| `STANDARD-6` | TEORIA | METODO | DA_CLASSIFICARE | ### **APERTA** |  | OGNI DIFETTO ACCLARATO SI REGISTRA SUBITO NELLA CODA UNICA |
-| `STANDARD-7` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 2 volte, MAI definito in un registro) [STANDARD 7] |
-| `STANDARD-8` | TEORIA | METODO | DA_CLASSIFICARE | ### **APERTA** |  | UN DIFETTO DIMOSTRATO SI CURA: MISURARE NON E' CURARE |
-| `STANDARD-9` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 13 volte, MAI definito in un registro) [STANDARD 9] |
+| `STANDARD-1` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 10 volte, MAI definito in un registro) [STANDARD 1] |
+| `STANDARD-10` | STANDARD | METODO | ENTRAMBE | ### **APERTA** |  | STANDARD 10 — UNA CURA NON AUMENTA IL NUMERO DELLE LEGGI (criterio di Luca, 2026 |
+| `STANDARD-2` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 5 volte, MAI definito in un registro) [STANDARD 2] |
+| `STANDARD-3` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 3 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
+| `STANDARD-4` | STANDARD | METODO | ENTRAMBE | ### **APERTA** |  | SNAPSHOT CONTRO SNAPSHOT, ALLO STESSO ISTANTE |
+| `STANDARD-5` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 3 volte, MAI definito in un registro) [STANDARD 5] |
+| `STANDARD-6` | STANDARD | METODO | ENTRAMBE | ### **APERTA** |  | OGNI DIFETTO ACCLARATO SI REGISTRA SUBITO NELLA CODA UNICA |
+| `STANDARD-7` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 2 volte, MAI definito in un registro) [STANDARD 7] |
+| `STANDARD-8` | STANDARD | METODO | ENTRAMBE | ### **APERTA** |  | UN DIFETTO DIMOSTRATO SI CURA: MISURARE NON E' CURARE |
+| `STANDARD-9` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 13 volte, MAI definito in un registro) [STANDARD 9] |
 | `STATI-LOCALI` | PRESIDIO | INFRASTRUTTURA | ENTRAMBE | ### **APERTA** |  | gli stati .npz del grafo restano LOCALI: in git vanno solo sha1, percorso e coma |
 | `SYNCDB-HEADLESS` | DIFETTO | INFRASTRUTTURA | ENTRAMBE | ### **APERTA** |  | `--sync-db` in headless CARICA ma non SALVA: lo dice il docstring del driver |
-| `T0` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 32 volte, MAI definito in un registro) |
-| `T1a` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 19 volte, MAI definito in un registro) [T1a] |
-| `T1b` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 23 volte, MAI definito in un registro) [T1b] |
-| `T3a` | TEORIA | FISICA | DA_CLASSIFICARE | ### **APERTA** |  | SIGILLO scena (ii): lo STESSO seme due volte da' byte IDENTICI -- 219 firme sha1 |
-| `T3b` | TEORIA | FISICA | DA_CLASSIFICARE | ### **APERTA** |  | SIGILLO scena (ii): semi DIVERSI danno reti diverse -- 99 firme su 219 cambiano |
+| `T0` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 32 volte, MAI definito in un registro) |
+| `T1a` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 19 volte, MAI definito in un registro) [T1a] |
+| `T1b` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 23 volte, MAI definito in un registro) [T1b] |
+| `T3a` | CRITERIO | METODO | ENTRAMBE | ### **APERTA** |  | SIGILLO scena (ii): lo STESSO seme due volte da' byte IDENTICI -- 219 firme sha1 |
+| `T3b` | CRITERIO | METODO | ENTRAMBE | ### **APERTA** |  | SIGILLO scena (ii): semi DIVERSI danno reti diverse -- 99 firme su 219 cambiano |
 | `T4-TAUTOLOGICO` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **CHIUSA** |  | il collaudo T4 della scomposizione non puo' fallire: D_interni e' zero per ident |
-| `T6` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 32 volte, MAI definito in un registro) [T6] |
-| `T7` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 9 volte, MAI definito in un registro) [T7] |
-| `T8` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 4 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
-| `T9` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 7 volte, MAI definito in un registro) [T9] |
+| `T6` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 32 volte, MAI definito in un registro) [T6] |
+| `T7` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 9 volte, MAI definito in un registro) [T7] |
+| `T8` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 4 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
+| `T9` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 7 volte, MAI definito in un registro) [T9] |
 | `TAGLIA-FINITA` | STANDARD | METODO | ENTRAMBE | ### **APERTA** |  | lo scaling di taglia finita come via al limite continuo: reti diverse e si estra |
 | `TERMOSTATO-E-FRENO` | MISURA | FISICA | 1 | ### **SOSPESA** |  | il termostato frena piu' di quanto rifornisca: togliergli il freno, non la sorge |
-| `TERRA-BUCONERO` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 3 volte, MAI definito in un registro) [TERRA-BUCONERO] |
+| `TERRA-BUCONERO` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 3 volte, MAI definito in un registro) [TERRA-BUCONERO] |
 | `TETTO-CAUSALE-TEMPO-COORDINATO` | DIFETTO | FISICA | 2 | ### **AGENDA** | SI | il tetto causale usa c_s LOCALE ma DT COORDINATO: dove r e piccolo permette moti |
 | `TORS-SPINTA` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | la spinta repulsiva di torsione: legge DINAMICA dentro mitosi(), con tre numeri  |
 | `TORS-W8-AVVOLGIMENTO` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | _w8 ha periodo 8pi ma l avvolgimento di dph e di 4pi: il ramo TORS_4PI inietta - |
 | `TRATTI-INTERNI` | MISURA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | a 80 passi il calo di A(t) sta negli INTERNI, non nel varco: le regioni si contr |
-| `TS-1` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 5 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
-| `TS-2` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 2 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
-| `TS-3` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 2 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
-| `TS-4` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 2 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
-| `TS-5` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 3 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
-| `TS-6` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 3 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
-| `TW-1` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 2 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
-| `TW-2` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 3 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
-| `TW-3` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 3 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
-| `TW-4` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 2 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
-| `TW-5` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 2 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
-| `TW-6` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 2 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
+| `TS-1` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 5 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
+| `TS-2` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 2 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
+| `TS-3` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 2 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
+| `TS-4` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 2 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
+| `TS-5` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 3 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
+| `TS-6` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 3 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
+| `TW-1` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 2 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
+| `TW-2` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 3 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
+| `TW-3` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 3 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
+| `TW-4` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 2 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
+| `TW-5` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 2 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
+| `TW-6` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 2 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
 | `TW-DIVISIONE-INCOGNITA` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **CHIUSA** |  | il tw che sparisce a una divisione non torna con la soglia misurata: -7.19 contr |
 | `U1` | DIFETTO | FISICA | 1 | ### **SOSPESA** | SI | URGENTE, PRIMA DI QUALUNQUE GIRO LUNGO — massacriticacollasso: 21 usi DENTRO LEG |
 | `U2` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **CHIUSA** |  | M2 DIVENTA URGENTE — la mitosi mette figli SOTTO la scala di Planck. Con la semi |
 | `U3` | PRESIDIO | METODO | ENTRAMBE | ### **APERTA** |  | confrontava con il mio sviluppo e/2 invece del valore esatto e/(2+e); il numero  |
-| `U4` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 5 volte, MAI definito in un registro) [U4] |
-| `U5` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 6 volte, MAI definito in un registro) [U5] |
-| `U6` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 5 volte, MAI definito in un registro) [U6] |
-| `U7` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 10 volte, MAI definito in un registro; citato solo in referti/sigilli/ta |
-| `U7a` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 8 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
-| `U7b` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 12 volte, MAI definito in un registro) [U7b] |
-| `V0` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 7 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
-| `V10` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 5 volte, MAI definito in un registro) [V10] |
-| `V1b` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 3 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
+| `U4` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 5 volte, MAI definito in un registro) [U4] |
+| `U5` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 6 volte, MAI definito in un registro) [U5] |
+| `U6` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 5 volte, MAI definito in un registro) [U6] |
+| `U7` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 10 volte, MAI definito in un registro; citato solo in referti/sigilli/ta |
+| `U7a` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 8 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
+| `U7b` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 12 volte, MAI definito in un registro) [U7b] |
+| `V0` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 7 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
+| `V10` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 5 volte, MAI definito in un registro) [V10] |
+| `V1b` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 3 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
 | `V5-SOGLIA` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | il criterio V5 confonde SCIOGLIERSI con MIGRARE, e misura lo spostamento con LAM |
-| `V5b` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 3 volte, MAI definito in un registro) [V5b] |
-| `V6b` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 6 volte, MAI definito in un registro) [V6b] |
-| `VALORE-NULL` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 2 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
+| `V5b` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 3 volte, MAI definito in un registro) [V5b] |
+| `V6b` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 6 volte, MAI definito in un registro) [V6b] |
+| `VALORE-NULL` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 2 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
 | `VELENO-ARCHI-KEEP` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **CHIUSA** |  | il veleno allunga in coda le derivate d arco e NON applica keep: ogni arco legge |
 | `VELENO-AUTORINFRESCO` | FRONTE | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **CHIUSA** |  | il veleno NaN romperebbe i due siti AUTO-RINFRESCO: il disallineamento E il loro |
 | `VELENO-DOMINI` | DIFETTO | METODO | ENTRAMBE | ### **APERTA** |  | DOMINI include 9 delle 10 derivate: una derivata avvelenata VIOLA il dominio per |
 | `VELENO-ORIENTATO` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | il VELENO del commit 4 cade su UNO dei due archi figli, e QUALE dipende dall ori |
 | `VIDEO-SCENA` | DIFETTO | INFRASTRUTTURA | ENTRAMBE | ### **APERTA** |  | il video della scena del pilota: diagnostico, mostra `pos` che NON e' la distanz |
 | `VUOTO-LOCALE-DETERMINISTICO` | FRONTE | FISICA | 2 | ### **AGENDA** |  | termostato locale + scuotimento DETERMINISTICO: UNA legge per nodo, fase <-> vuo |
-| `VUOTO-MASSA` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 2 volte, MAI definito in un registro) [VUOTO-MASSA] |
-| `W1` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 8 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
-| `W2` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 4 volte, MAI definito in un registro) [W2] |
-| `W3` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 3 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
-| `W4` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 7 volte, MAI definito in un registro) [W4] |
+| `VUOTO-MASSA` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 2 volte, MAI definito in un registro) [VUOTO-MASSA] |
+| `W1` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 8 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
+| `W2` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 4 volte, MAI definito in un registro) [W2] |
+| `W3` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 3 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
+| `W4` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 7 volte, MAI definito in un registro) [W4] |
 | `W5` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | CRITERIO di POZZO-D: A/B nel driver, scena (ii)(a), 4 semi, 120 passi, con la ba |
 | `X1` | FRONTE | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **CHIUSA** |  | X1 VALE SEMPRE ⏳[EPOCA 1 · MISURA] / TEMPOPROPRIOORIENTATO: il principio e' gius |
 | `X2` | FRONTE | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | X2 🟨VALE PER QUELLA SCENA ⏳[EPOCA 1 · MISURA] / ZETALOC: «smorzamento locale» ch |
 | `X3` | FRONTE | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **CHIUSA** |  | X3 VALE SEMPRE ⏳[EPOCA 1 · CODICE] / AUDIT DI LETTURA DELLE LEGGI — registrato ( |
 | `XI-RUMORE-E-STATO` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | _xi_rumore sta in REGISTRO_DERIVATE ma ha MEMORIA: un grado di liberta classific |
-| `Y0` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 4 volte, MAI definito in un registro) [Y0] |
+| `Y0` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 4 volte, MAI definito in un registro) [Y0] |
 | `Y1` | FRONTE | FISICA | 2 | ### **AGENDA** |  | Y1 DA RIVERIFICARE ⏳[EPOCA 1 · MISURA] / Il settore U(1) non ha un'osservabile d |
-| `Y10` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 4 volte, MAI definito in un registro) [Y10] |
+| `Y10` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 4 volte, MAI definito in un registro) [Y10] |
 | `Y2` | FRONTE | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **CHIUSA** |  | Y2 VALE SEMPRE ⏳[EPOCA 1 · MISURA] / Due osservabili U(1) hanno il nullo SBAGLIA |
-| `Y3` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 9 volte, MAI definito in un registro) [Y3] |
-| `Y4` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 5 volte, MAI definito in un registro) [Y4] |
-| `Y5` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 65 volte, MAI definito in un registro) |
-| `Y5a` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 2 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
-| `Y5b` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 3 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
-| `Y5c` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 3 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
-| `Y6` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 9 volte, MAI definito in un registro) [Y6] |
-| `Y7` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 5 volte, MAI definito in un registro) [Y7] |
-| `Y8` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 4 volte, MAI definito in un registro) [Y8] |
-| `Z0` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 10 volte, MAI definito in un registro; citato solo in referti/sigilli/ta |
+| `Y3` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 9 volte, MAI definito in un registro) [Y3] |
+| `Y4` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 5 volte, MAI definito in un registro) [Y4] |
+| `Y5` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 65 volte, MAI definito in un registro) |
+| `Y5a` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 2 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
+| `Y5b` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 3 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
+| `Y5c` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 3 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
+| `Y6` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 9 volte, MAI definito in un registro) [Y6] |
+| `Y7` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 5 volte, MAI definito in un registro) [Y7] |
+| `Y8` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 4 volte, MAI definito in un registro) [Y8] |
+| `Z0` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 10 volte, MAI definito in un registro; citato solo in referti/sigilli/ta |
 | `Z1` | FRONTE | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | Z1 🟨VALE PER QUELLA SCENA ⏳[EPOCA 1 · MISURA] / inerzia: la correzione (1) NON e |
 | `Z10` | FRONTE | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **CHIUSA** |  | Z10 VALE SEMPRE ⏳[EPOCA 1 · CODICE] / TAUA E' UN SOLO NUMERO PER DUE LEGGI FISIC |
 | `Z100` | FRONTE | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **CHIUSA** |  | Z100 CURATA E SIGILLATA ⏳[EPOCA 3 · CURA] / INVARIANTI (C5): il programma si fer |
@@ -767,7 +766,7 @@
 | `Z124` | FRONTE | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **CHIUSA** |  | Z124 CHIUSA PER MISURA ⏳[archivi delle cure · SIGILLO] / IL SIGILLO DI FASE2PI:  |
 | `Z125` | FRONTE | METODO | ENTRAMBE | ### **APERTA** |  | Z125 DIFETTO DI METODO, MIO ⏳[archivi delle cure · LETTURA] / IL §E NON ESISTE N |
 | `Z127` | FRONTE | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | Z127 LA LETTURA CADE ⏳[archivi delle cure · PROVA] / E1 NON PASSA: CON FASE2PI L |
-| `Z128` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 2 volte, MAI definito in un registro) [Z128] |
+| `Z128` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 2 volte, MAI definito in un registro) [Z128] |
 | `Z13` | FRONTE | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | Z13 DA RIVERIFICARE ⏳[EPOCA 1 · MISURA] / calcolapsi() ricalcola i pesi in TUTTE |
 | `Z130` | FRONTE | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **CHIUSA** |  | Z130 SOSPETTO RITIRATO, MIO ⏳[archivi delle cure · LETTURA] / S10 E' RITIRATA: l |
 | `Z134` | FRONTE | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **CHIUSA** |  | Z134 CURA IN CODICE ⏳[archivi delle cure · CURA] / CURA 1 — L'OROLOGIO: RITMOWRA |
@@ -777,16 +776,16 @@
 | `Z142` | FRONTE | METODO | ENTRAMBE | ### **APERTA** |  | Z142 REPERTO, DIFETTI MIEI ⏳[archivi delle cure · SIGILLO FALLITO] / IL SIGILLO  |
 | `Z144` | FRONTE | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **CHIUSA** |  | Z144 CURA IN CODICE ⏳[archivi delle cure · CURA] / E4-LAM PASSA 6/6: la legge d  |
 | `Z145` | FRONTE | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **CHIUSA** |  | CHIUSO — T5 del sigillo di CURA 2 era invalido: dv 0 letto come effetto (2026-09 |
-| `Z146` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 3 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
-| `Z147` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 3 volte, MAI definito in un registro) [Z147] |
+| `Z146` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 3 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
+| `Z147` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 3 volte, MAI definito in un registro) [Z147] |
 | `Z148` | FRONTE | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | LA LEGGE d = LAM REGGE PERCHE' UNA CURA E' ACCESA (2026-09-24) |
 | `Z15` | FRONTE | METODO | ENTRAMBE | ### **APERTA** |  | Z15 DA RIVERIFICARE ⏳[EPOCA 1 · MISURA] / 14 .pkl su 36 non portano il BLOB del  |
 | `Z16` | FRONTE | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **CHIUSA** |  | Z16 VALE SEMPRE ⏳[EPOCA 1 · MISURA] / Y5 ROSSO: la causa e' rhosorgente <= 0, NO |
 | `Z17` | FRONTE | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | Z17 🟨VALE PER QUELLA SCENA ⏳[EPOCA 1 · MISURA] / A6 nell'inerzia e' garantito da |
 | `Z18` | FRONTE | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | Z18 DA RIVERIFICARE ⏳[EPOCA 1 · MISURA] / LO SFASAMENTO eta: per mesi il nodo ap |
 | `Z19` | FRONTE | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **CHIUSA** |  | Z19 VALE SEMPRE ⏳[EPOCA 1 · MISURA] / QUARTA VOLTA: una grandezza letta in un mo |
-| `Z1b` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 12 volte, MAI definito in un registro) [Z1b] |
-| `Z1c` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 30 volte, MAI definito in un registro) [Z1c] |
+| `Z1b` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 12 volte, MAI definito in un registro) [Z1b] |
+| `Z1c` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 30 volte, MAI definito in un registro) [Z1c] |
 | `Z2` | FRONTE | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **CHIUSA** |  | Z2 VALE SEMPRE ⏳[EPOCA 1 · MISURA] / spinta: A2 e A3 sono stati tolti, A1 NO (20 |
 | `Z20` | FRONTE | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **CHIUSA** |  | Z20 VALE SEMPRE ⏳[EPOCA 1 · MISURA] / UN DRIVER CHE FORZA UN FLAG IN TUTTI I BRA |
 | `Z21` | FRONTE | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | Z21 🟨VALE PER QUELLA SCENA ⏳[EPOCA 1 · MISURA] / SPINFEEDBACK con TAUA = 2.0: ES |
@@ -798,7 +797,7 @@
 | `Z27` | FRONTE | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | Z27 DA RIVERIFICARE ⏳[EPOCA 1 · MISURA] / Z24 MISURATA: i tre punti NON sono lo  |
 | `Z28` | FRONTE | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | Z28 🟨VALE PER QUELLA SCENA ⏳[EPOCA 1 · MISURA] / CHIUSA PRIMA DI NASCERE — il li |
 | `Z29` | FRONTE | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | Z29 DA RIVERIFICARE ⏳[EPOCA 1 · MISURA] / Z24 CHIUSA — dei tre punti UNO era un  |
-| `Z2b` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 5 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
+| `Z2b` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 5 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
 | `Z3` | FRONTE | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | Z3 🟨VALE PER QUELLA SCENA ⏳[EPOCA 1 · MISURA] / peq DEGENERE: un fallback a DUE  |
 | `Z30` | FRONTE | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | Z30 DA RIVERIFICARE ⏳[EPOCA 1 · MISURA] / CHIUSA il 2026-09-18 — INDIFFERENTE, q |
 | `Z31` | FRONTE | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **CHIUSA** |  | Z31 VALE SEMPRE ⏳[EPOCA 1 · MISURA] / QUATTRO SIGILLI NON SONO PIU' RI-GIRABILI: |
@@ -821,10 +820,10 @@
 | `Z47` | FRONTE | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **CHIUSA** |  | Z47 VALE SEMPRE ⏳[EPOCA 1 · MISURA] / PROGETTO DI LUNGO PERIODO — NON INIZIATO.  |
 | `Z48` | FRONTE | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | Z48 🟨VALE PER QUELLA SCENA ⏳[EPOCA 1 · MISURA] / QUALIFICATA il 2026-09-18: VALE |
 | `Z49` | FRONTE | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | Z49 🟨VALE PER QUELLA SCENA ⏳[EPOCA 1 · MISURA] / IL CICLO C'E', MA NON E' NEL CO |
-| `Z4a` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 16 volte, MAI definito in un registro) [Z4a] |
-| `Z4b` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 10 volte, MAI definito in un registro) [Z4b] |
-| `Z4c` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 4 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
-| `Z4d` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 4 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
+| `Z4a` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 16 volte, MAI definito in un registro) [Z4a] |
+| `Z4b` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 10 volte, MAI definito in un registro) [Z4b] |
+| `Z4c` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 4 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
+| `Z4d` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 4 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
 | `Z5` | FRONTE | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | Z5 🟨VALE PER QUELLA SCENA ⏳[EPOCA 1 · MISURA] / A3 NON E' UN CASO PARTICOLARE DI |
 | `Z50` | FRONTE | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | Z50 🟨VALE PER QUELLA SCENA ⏳[EPOCA 1 · MISURA] / QUALIFICATA il 2026-09-18: VALE |
 | `Z51` | FRONTE | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | Z51 🟨VALE PER QUELLA SCENA ⏳[EPOCA 1 · MISURA] / LA Y NON C'E': NE' NEL DENSO, N |
@@ -880,4 +879,4 @@
 | `Z97` | FRONTE | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **CHIUSA** |  | Z97 CURATA E SIGILLATA ⏳[EPOCA 3 · CURA] / SCALAMINPASSO (C3): il freno UNA VOLT |
 | `Z98` | FRONTE | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **CHIUSA** |  | Z98 CURATA E SIGILLATA ⏳[EPOCA 3 · CURA] / COESCAUSALE (C4): un solo ISTANTE e i |
 | `Z99` | FRONTE | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **CHIUSA** |  | Z99 CURATA E SIGILLATA ⏳[EPOCA 3 · CURA] / ANOMSIMM (C1-bis): il pavimento max(p |
-| `ZZ999` | DIFETTO | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 3 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
+| `ZZ999` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 3 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |

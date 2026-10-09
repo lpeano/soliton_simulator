@@ -74,8 +74,11 @@ STATI = {"aperto", "chiuso", "non-difetto", "teoria", "da-decidere", "SOSPESA-ER
          "APERTA", "IN_CORSO", "CHIUSA", "SOSPESA", "SUPERATA", "AGENDA",
          "DA_CLASSIFICARE"}
 BLOCCA = {"SI", "NO", "DA-DECIDERE", "DA VERIFICARE"}
+# ### ⚠ **E `non_definita` SI AGGIUNGE AL VOCABOLARIO DELLA VISTA** *(schema `3`)*: la
+# ### colonna `tipo` della vista porta la ### **classe** quando il metadato `tipo_era1` non
+# ### c'e', e un segnaposto non ha un `tipo` dell'era `1`.
 TIPI = {"difetto", "sospetto", "fronte", "misura", "cura", "presidio", "assioma", "standard",
-        "criterio-locale", "altro"}
+        "criterio-locale", "altro", "non_definita"}
 FAM = {"A", "B", "C", "D", "E", "F", "G", "?"}
 TITOLO_MAX = 100     # [INDICE-LEGGERO] un titolo breve dev'essere breve: la stampa e' UNA riga
 AVANZ = {"FATTO", "IN CORSO", "IN CODA", "BLOCCATO", "CON RISERVA", "(senza marcatore)"}

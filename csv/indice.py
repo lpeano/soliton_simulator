@@ -6,6 +6,8 @@ python csv/indice.py valida
 python csv/indice.py cerca [--dominio X] [--stato X] [--era X] [--blocca SI|NO]
                            [--legge ID] [--variabile ID] [--assioma ID] [--meta k=v]
 python csv/indice.py aggiorna ID --campo nome=valore | --meta k=v --motivo "..." [--commit SHA]
+python csv/indice.py aggiorna-lotto LOTTO.jsonl     # la STESSA via, in blocco
+python csv/indice.py mostra [--stato X] [--segnaposto SI] [--da N] [--quante N]
 python csv/indice.py meta-aggiungi k --tipo T [--valori a,b] [--regex R] --descrizione "..."
 python csv/indice.py meta-depreca k --sostituito-da k2 --motivo "..."
 python csv/indice.py meta-rinomina k k2 --motivo "..."
@@ -39,10 +41,16 @@ META = os.path.join(D, "metadati.jsonl")
 INVERTITO = os.path.join(D, "_indice_meta.json")
 TSV = os.path.join(RADICE, "doc", "INDICE_ID.tsv")
 VISTA_MD = os.path.join(RADICE, "doc", "INDICE.md")
-SCHEMA_VERSION = 2
+# ### ⭐ **SCHEMA 3 (2026-10-09): la classe `NON_DEFINITA`.** La migrazione aveva dato
+# ### `DIFETTO` ai `234` segnaposto *(titolo <<MAI definito in un registro>>)*, ed e'
+# ### ### **sbagliato: un segnaposto NON E' UN DIFETTO** -- e' un ID citato di cui non si sa
+# ### che cosa sia. ### ⛔ **E il validatore vieta `NON_DEFINITA` con uno stato diverso da
+# ### `DA_CLASSIFICARE`:** una voce di cui non si sa la classe non puo' essere <<aperta>>.
+# ### **LA MIGRAZIONE DI VERSIONE:** `csv/migra_schema_3.py`, riseguibile.
+SCHEMA_VERSION = 3
 
 CLASSI = ("DIFETTO", "CURA", "MISURA", "CRITERIO", "PRESIDIO", "STANDARD", "TEORIA",
-          "DECISIONE", "FRONTE")
+          "DECISIONE", "FRONTE", "NON_DEFINITA")
 DOMINI = ("FISICA", "METODO", "INFRASTRUTTURA", "DOCUMENTAZIONE", "DA_CLASSIFICARE")
 ERE = ("1", "2", "ENTRAMBE", "DA_CLASSIFICARE")
 STATI = ("APERTA", "IN_CORSO", "CHIUSA", "SOSPESA", "SUPERATA", "AGENDA", "DA_CLASSIFICARE")
@@ -206,6 +214,9 @@ def valida(voci, reg, verboso=True, derivati=True):
             err.append("`%s`: SOSPESA senza `stato_era_1`" % q)
         if v["blocca"] and v["stato"] in ("CHIUSA", "SUPERATA"):
             err.append("`%s`: blocca=true con stato `%s`: contraddizione" % (q, v["stato"]))
+        if v["classe"] == "NON_DEFINITA" and v["stato"] != "DA_CLASSIFICARE":
+            err.append("`%s`: classe NON_DEFINITA con stato `%s`: una voce di cui non si sa "
+                       "la classe non puo' avere uno stato deciso" % (q, v["stato"]))
         if v["dominio"] == "DA_CLASSIFICARE" and v["stato"] != "DA_CLASSIFICARE" \
                 and str(v["era"]) != "DA_CLASSIFICARE":
             err.append("`%s`: dominio DA_CLASSIFICARE ma stato ed era sono deciso" % q)
@@ -417,6 +428,94 @@ def aggiorna(voci, reg, idv, campi, metas, motivo, commit):
     print("  `%s` aggiornata, e lo storico ha una riga in piu'" % idv)
 
 
+def aggiorna_lotto(voci, reg, percorso):
+    """### ⭐ **LA SCRITTURA A LOTTI: E' LA STESSA VIA, non un'altra.**
+
+    Prende un `jsonl` di `{id, campi: {...}, meta: {...}, motivo}` e lo applica
+    ### **atomicamente**: ### **una riga di storico PER VOCE** *(come `aggiorna`)*, le
+    ### **stesse** asserzioni sulle transizioni e sui metadati, e ### **una sola**
+    validazione alla fine -- ### **se non passa, NON SI SCRIVE NIENTE.**
+    ### ⚠ **Serve perche' la fase 2 tocca ~900 voci:** `aggiorna` una per volta riscriverebbe
+    `voci.jsonl` e le tre viste ### **novecento volte**, e un lavoro di quella forma non si
+    porta a termine. ### **La REGOLA che conta -- una via di scrittura, un motivo che cita, una
+    riga di storico -- resta INTATTA.**
+    """
+    per = {v["id"]: v for v in voci}
+    righe = [json.loads(r) for r in io.open(percorso, encoding="utf-8").read().split(NL)
+             if r.strip()]
+    storia = []
+    for r in righe:
+        idv = r["id"]
+        assert idv in per, "`%s` non e' una voce" % idv
+        motivo = r.get("motivo", "")
+        assert len(motivo) >= 20, ("`%s`: il motivo e' troppo corto per CITARE qualcosa: %r"
+                                   % (idv, motivo))
+        v = per[idv]
+        prima = json.loads(json.dumps(v))
+        for k, val in (r.get("campi") or {}).items():
+            assert k in CHIAVI, "`%s`: `%s` non e' un campo dello schema" % (idv, k)
+            if k == "stato" and val != v["stato"]:
+                assert val in TRANSIZIONI.get(v["stato"], set()), (
+                    "`%s`: TRANSIZIONE VIETATA `%s` -> `%s`" % (idv, v["stato"], val))
+            v[k] = val
+        for k, val in (r.get("meta") or {}).items():
+            spec = reg["metadati"].get(k)
+            assert spec, "`%s`: la chiave meta `%s` NON e' registrata" % (idv, k)
+            assert spec.get("stato") == "ATTIVO", ("`%s`: la chiave meta `%s` e' DEPRECATA"
+                                                   % (idv, k))
+            v["meta"][k] = val
+        v["aggiornata"] = {"data": r.get("quando") or _oggi(), "commit": r.get("commit", "")}
+        storia.append({"quando": v["aggiornata"]["data"], "id": idv, "motivo": motivo,
+                       "commit": r.get("commit", ""), "prima": prima,
+                       "dopo": json.loads(json.dumps(v))})
+    # ### ⚠ **SI VALIDA `derivati=False` PRIMA di scrivere**, perche' l'indice invertito e
+    # ### le viste sono ### **per costruzione stale** finche' non si riscrivono: controllarli
+    # ### qui vorrebbe dire rifiutare OGNI lotto. ### ➜ **E si rivalida INTERO DOPO**, viste
+    # ### comprese: cosi' nessun controllo si perde.
+    err = valida(voci, reg, verboso=False, derivati=False)
+    assert not err, ("IL LOTTO NON PASSA LA VALIDAZIONE, e NON SI SCRIVE NIENTE:" + NL
+                     + NL.join(err[:10]))
+    _scrivi_jsonl(VOCI, voci)
+    io.open(STORICO, "a", encoding="utf-8", newline=NL).write(
+        NL.join(json.dumps(x, ensure_ascii=False) for x in storia) + NL)
+    viste(voci, reg)
+    v2, r2 = carica()
+    err2 = valida(v2, r2, verboso=False)
+    assert not err2, ("### SCRITTO, MA LA VALIDAZIONE INTERA FALLISCE:" + NL
+                      + NL.join(err2[:10]))
+    print("  lotto applicato: %d voci, %d righe di storico; e la validazione INTERA passa"
+          % (len(righe), len(storia)))
+
+
+def mostra(voci, a):
+    """### Il DUMP per leggere: `descrizione`, `fonte` e i metadati dell'era `1` --
+    ### **mai il solo titolo.**"""
+    res = voci
+    for k, c in (("stato", "stato"), ("dominio", "dominio"), ("classe", "classe")):
+        if a.get(k):
+            res = [v for v in res if str(v[c]) == a[k]]
+    if a.get("segnaposto"):
+        vuole = a["segnaposto"].upper() in ("SI", "TRUE", "1")
+        res = [v for v in res if ("MAI definito in un registro" in v["titolo"]) == vuole]
+    res = sorted(res, key=lambda x: x["id"])
+    da = int(a.get("da", 0) or 0)
+    quante = int(a.get("quante", 50) or 50)
+    lung = int(a.get("lung", 300) or 300)
+    for v in res[da:da + quante]:
+        m = v["meta"] or {}
+        print("### %s | %s | %s | %s | %s" % (v["id"], v["classe"], v["stato"],
+                                              m.get("tipo_era1", "-"),
+                                              m.get("famiglia_era1", "-")))
+        print("  F: %s" % v["fonte"][:110])
+        d = (v["descrizione"] or "").replace(NL, " ")
+        print("  D: %s" % (d[:lung] if d else "(vuota)  T: " + v["titolo"][:120]))
+        for k in ("motivo_era1", "si_riferisce_a_era1", "avanzamento_era1", "file_citanti",
+                  "nota_guardiano"):
+            if m.get(k):
+                print("  %s: %s" % (k[:12], str(m[k])[:170]))
+    print("--- mostrate %d di %d (da %d)" % (min(quante, max(0, len(res) - da)), len(res), da))
+
+
 def _oggi():
     import datetime
     return datetime.date.today().isoformat()
@@ -559,6 +658,11 @@ def collaudo():
         ("### alias che e' anche un id", [base(id="A", alias=["B"]), base(id="B")], False),
         ("### chiavi FUORI ORDINE",
          [dict(reversed(list(base().items())))], False),
+        ("### classe NON_DEFINITA con stato APERTA",
+         [base(classe="NON_DEFINITA", stato="APERTA")], False),
+        ("il caso SANO con classe NON_DEFINITA",
+         [base(classe="NON_DEFINITA", stato="DA_CLASSIFICARE",
+               dominio="DA_CLASSIFICARE", era="DA_CLASSIFICARE")], True),
     ]
     print("=" * 96)
     print("IL COLLAUDO DELL'INDICE v%d -- coi casi che DEVONO fallire" % SCHEMA_VERSION)
@@ -641,6 +745,12 @@ def main(argv):
         return 0
     if cmd == "citazioni":
         citazioni(voci)
+        return 0
+    if cmd == "aggiorna-lotto":
+        aggiorna_lotto(voci, reg, pos[0])
+        return 0
+    if cmd == "mostra":
+        mostra(voci, uno)
         return 0
     if cmd == "aggiorna":
         aggiorna(voci, reg, pos[0], a.get("campo", []), a.get("meta", []),
