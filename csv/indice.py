@@ -978,6 +978,52 @@ def da_decidere(voci, reg):
     return righe
 
 
+# ### ⭐ **GLI OGGETTI CONCRETI DELL-ERA `1`** *(`F8`, dal 2026-10-09)*. Il guardiano:
+# ### *<<vale per ### **ENTRAMBE** una REGOLA DI LAVORO o uno strumento che sopravvive;
+# ### e- ### **era 1** cio- che riguarda un OGGETTO CONCRETO dell-era 1>>*.
+# ### ⛔ **E un oggetto concreto si riconosce da COME SI SCRIVE, non dalla parola:** un flag
+# ### da ### **`--`**, non dalla parola *<<flag>>*; il blob dal ### **suo sha1**, non dalla
+# ### parola *<<blob>>*. ### **Per questo `P6` -- <<ogni csv di misura porta BLOB, SEME e
+# ### TUTTI I FLAG>> -- NON scatta: e- una REGOLA, e non nomina nessun flag.**
+ERA1_OGGETTI = (
+    # ### il SIGILLO DI UNA CURA, in tutte le forme in cui lo scriviamo
+    (r"sigill\w*\s+(?:di|del|della|dell)\s*(?:la\s+)?cura", "il sigillo di una cura"),
+    (r"scena\s*\(ii\)", "la scena (ii)"),
+    (r"\bpilot[ao]\b", "il pilota"),
+    (r"\.pkl\b", "un `.pkl`"),
+    (r"b8c21049", "il blob b8c21049"),
+    # ### ⚠ **un FLAG si riconosce dai due trattini ATTACCATI a una lettera:** cosi- il
+    # ### ### **`--` usato come lineetta** *(<<-- e poi>>)* non conta.
+    (r"(?<![A-Za-z0-9-])--[a-z][a-z0-9-]{2,}", "un flag `--...`"),
+    (r"\bCURA\s*\d", "CURA n"),
+)
+_ERA1_RE = tuple((re.compile(r, re.I), q) for r, q in ERA1_OGGETTI)
+
+
+def _f8_era1(voci):
+    """### `F8`: una voce `ENTRAMBE` NON CHIUSA che nomina un oggetto concreto dell-era `1`.
+
+    ### ⛔ **SEGNALA, non decide:** il mandato dice che i segnali che restano
+    ### **si ELENCANO, non si correggono.**
+    ### ⚠ **Solo le NON CHIUSE**, e il mandato lo dice: ### **una voce chiusa non si sposta
+    piu-.**
+    """
+    fuori = []
+    for v in voci:
+        if str(v["era"]) != "ENTRAMBE" or v["stato"] == "CHIUSA" or _coperto(v, "F8"):
+            continue
+        t = (v.get("titolo") or "") + " " + (v.get("descrizione") or "")
+        visti = []
+        for r, q in _ERA1_RE:
+            m = r.search(t)
+            if m:
+                visti.append("%s (<<%s>>)" % (q, " ".join(m.group(0).split())[:40]))
+        if visti:
+            fuori.append((v["id"], "era `ENTRAMBE` ma nomina un oggetto dell-era 1: "
+                                   + "; ".join(visti[:4])))
+    return fuori
+
+
 def _f7_stato(voci):
     """### `F7`: una voce `FISICA` dell-era `1` con uno stato che non e- `SOSPESA` ne-
     `CHIUSA`.
@@ -1234,7 +1280,11 @@ def segnali(voci, reg, verboso=True):
              ("F4", "ETICHETTA CON DEFINIZIONE: un-etichetta che un documento DEFINISCE",
               _f4_etichette(etich), len(etich)),
              ("F6", "NOTE COERENTI: una nota che nomina una lista e la contraddice",
-              _f6_note(voci), n_note)]
+              _f6_note(voci), n_note),
+             ("F8", "ERA 1 NEL TESTO: una voce ENTRAMBE che nomina un oggetto concreto",
+              _f8_era1(voci),
+              sum(1 for v in voci if str(v["era"]) == "ENTRAMBE"
+                  and v["stato"] != "CHIUSA"))]
     if verboso:
         print("=" * 96)
         print("I PRESIDI CONTRO LE MESCOLANZE  --  SEGNALANO, NON DECIDONO")

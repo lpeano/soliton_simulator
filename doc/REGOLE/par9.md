@@ -275,3 +275,21 @@ Si toglie dall'inizio della riga, **ripetutamente**: i `#`, gli spazi, i **simbo
 ### ⚠ **`35` voci erano `ENTRAMBE` per INERZIA**, non per lettura: `era ENTRAMBE` passa da `173` a **`138`**. ### **Non è una decisione di fisica**, e tutte restano `SOSPESE`: **non cambia nulla per l'era `2`, solo l'ordine.**
 
 ### **Il presidio che lo guarda è `F8`, e SEGNALA**: una voce `ENTRAMBE` non `CHIUSA` che **nomina un oggetto concreto dell'era `1`**.
+
+---
+
+## IL PRESIDIO `F8` — **una voce `ENTRAMBE` che nomina un oggetto dell'era `1`** *(2026-10-09)*
+
+> ### ⛔ **SEGNALA, non decide.** Una voce `era ENTRAMBE` **non `CHIUSA`** il cui **titolo o descrizione** nomina un **oggetto concreto dell'era `1`**.
+
+| l'oggetto | come si riconosce |
+|---|---|
+| il **sigillo di una cura** | `sigill… di/del/della cura` |
+| la **scena `(ii)`** | `scena (ii)` |
+| il **pilota** | `pilota` |
+| un **`.pkl`** | `.pkl` |
+| il **blob** | `b8c21049`, ### ⚠ **lo sha1, NON la parola «blob»** |
+| un **flag** | `--` **attaccato a una lettera**, ### ⚠ **NON la parola «flag»** |
+| una **cura numerata** | `CURA n` |
+
+### ⭐ **Un oggetto concreto si riconosce da COME SI SCRIVE, non dalla parola**, ed è per questo che `P6` — *«ogni csv di misura porta BLOB, SEME e TUTTI I FLAG»* — ### **NON scatta: è una REGOLA, e non nomina nessun flag.**

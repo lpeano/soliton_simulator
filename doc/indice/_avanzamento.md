@@ -83,8 +83,8 @@ era       1=496  DA_CLASSIFICARE=188  ENTRAMBE=138  2=24
 stato     SOSPESA=340  DA_CLASSIFICARE=188  CHIUSA=187  APERTA=106  AGENDA=24  SUPERATA=1
 ```
 
-### ✔ **FATTO IN QUESTO GIRO:** il punto `2`: le ### **`35` voci da era `ENTRAMBE` a era `1`** -- cio' che riguarda un ### **oggetto concreto dell'era `1`** *(un sigillo, la scena `(ii)`, il pilota, un `.pkl`, un flag)* non e' `ENTRAMBE`. ### **Zero eccezioni, e i due casi limite DICHIARATI** *(`REGISTRO_FISICA:A1` e `S1`: la FORMA e' generica, il SOGGETTO e' un flag)*. `ENTRAMBE` `173`→`138`, era `1` `461`→`496`
+### ✔ **FATTO IN QUESTO GIRO:** il punto `3`: ### **il presidio `F8`** -- una voce `ENTRAMBE` che nomina un ### **oggetto concreto dell'era `1`**, riconosciuto da ### **come si scrive** *(un flag dai due trattini, il blob dal suo sha1)* e non dalla parola. ### **Due soli segnali, e sono entrambi fra le voci che il mandato dice di LASCIARE `ENTRAMBE`**: li elenco, non li correggo. Collaudo `30/30`
 
-### ⛔ **RESTA:** il punto `3` *(### **`F8`**, che SEGNALA le `ENTRAMBE` non chiuse che nominano un oggetto dell'era `1`, coi tre bracci su `T3a`, `P6` e `FALSO-ZERO`)* e `4` *(i controlli e il referto `doc/REFERTO_indice_v3_era_metodo.md`)*
+### ⛔ **RESTA:** il punto `4`: i controlli e il referto ### **`doc/REFERTO_indice_v3_era_metodo.md`**, con ### **l'errore del guardiano dichiarato** e i segnali residui voce per voce
 
-**Ultimo lotto applicato:** `doc/indice/_lotti/v3_r2.jsonl`
+**Ultimo lotto applicato:** `doc/indice/_lotti/v3_r2.jsonl *(il punto `3` non passa da un lotto: aggiunge un presidio)*`

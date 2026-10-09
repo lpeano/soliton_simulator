@@ -242,6 +242,25 @@ def main():
     esito("ECCEZIONE  DEVE essere un ERRORE: fuori forma (manca `F<n>:`)",
           len(IX._eccezioni_malformate([storta])) == 1)
 
+    # ---------------------------------------------------------------- F8
+    # ### ⛔ **I TRE CASI LI INDICA IL MANDATO**, e il negativo e- quello che conta:
+    # ### `P6` dice *<<ogni csv di misura porta BLOB, SEME e ### **TUTTI I FLAG**>>* --
+    # ### ### **nomina la PAROLA flag, non un flag** -- e `FALSO-ZERO` e- un difetto del
+    # ### metodo senza nessun oggetto. ### **Se scattassero, i marcatori sarebbero troppo
+    # ### larghi.**
+    t3a_prima = [v for v in al_commit("72e452f", "doc/indice/voci.jsonl")
+                 if v["id"] == "T3a"]
+    assert t3a_prima, "T3a non c-e- a 72e452f"
+    esito("F8  DEVE scattare: T3a a 72e452f era `ENTRAMBE` e dice <<SIGILLO scena (ii)>>",
+          scatta(IX._f8_era1(t3a_prima), "T3a"),
+          "era `%s`, stato `%s`" % (t3a_prima[0]["era"], t3a_prima[0]["stato"]))
+    for _i, _che in (("P6", "e- una REGOLA: nomina la PAROLA flag, non un flag"),
+                     ("FALSO-ZERO", "e- un difetto del METODO, senza oggetti concreti")):
+        _v = [v for v in voci if v["id"] == _i]
+        assert _v, _i
+        esito("F8  NON deve scattare: %s, %s" % (_i, _che),
+              not scatta(IX._f8_era1(_v), _i))
+
     # ------------------------------------- L'ATOMICITA', END-TO-END
     # ### ⛔ **QUESTA PROVA HA TROVATO UN DIFETTO CHE IL COLLAUDO NON VEDEVA:**
     # ### `aggiorna_lotto` validava con `derivati=False` *(che saltava `F7`)*,
