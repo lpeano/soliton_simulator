@@ -235,3 +235,19 @@ Si toglie dall'inizio della riga, **ripetutamente**: i `#`, gli spazi, i **simbo
 | ### ⛔ **il presidio** | **`F7`**, e **è un ERRORE, non un segnale**: `FISICA` + era `1` + stato diverso da `SOSPESA`/`CHIUSA` ⇒ **la validazione fallisce** |
 
 ### ⚠ **Da dove viene la regola:** nel giro del punto `5` avevo ripristinato `4` voci leggendo lo stato da `## APERTO <ID>`, e avevo **dichiarato la provenienza del dato** — ma l'avevo messo nel campo **sbagliato**. ### **Dichiarare da dove viene un dato non basta se lo si mette nel campo sbagliato**, e per questo la regola ha un presidio e non solo una riga.
+
+---
+
+## CIÒ SU CUI L'INDICE ASPETTA LUCA — **un elenco solo, e si GENERA** *(2026-10-09)*
+
+> ### ⛔ **`python csv/indice.py da-decidere` → `doc/indice/DA_DECIDERE_LUCA.md`. NON si scrive a mano.**
+
+| | il criterio | la domanda |
+|---|---|---|
+| ① | la `nota_guardiano` dice *«da decidere / confermare da Luca»* | **ciò che la nota stessa chiede** |
+| ② | la voce ha **`meta.omonimo`** | **quale dei `N` significati?** |
+| ③ | `stato = DA_CLASSIFICARE` **e la classe NON è `NON_DEFINITA`** | che classe, dominio, era e stato? |
+
+### ⚠ **I segnaposto `NON_DEFINITA` NON ci vanno**, e sono `187`: non sono una domanda, sono **il lavoro che resta.**
+
+### ⭐ **Perché GENERATO e non scritto:** nel codice **non c'è nessuna lista di ID**, ci sono **i tre criteri**, e l'elenco è ciò che trovano. ### ⛔ **Un elenco mezzo generato è peggio di nessun elenco, perché SEMBRA COMPLETO.**

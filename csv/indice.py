@@ -11,6 +11,7 @@ python csv/indice.py crea-lotto LOTTO.jsonl        # la STESSA via, per FAR NASC
 python csv/indice.py storico-commit               # riempie il campo `commit` DAI LOG
 python csv/indice.py segnali                      # i PRESIDI: segnalano, NON decidono
 python csv/indice.py etichette-lotto LOTTO.jsonl   # la via per le ETICHETTE rimosse
+python csv/indice.py da-decidere                  # CIO- SU CUI L-INDICE ASPETTA LUCA
 python csv/indice.py mostra [--stato X] [--segnaposto SI] [--da N] [--quante N]
 python csv/indice.py meta-aggiungi k --tipo T [--valori a,b] [--regex R] --descrizione "..."
 python csv/indice.py meta-depreca k --sostituito-da k2 --motivo "..."
@@ -871,6 +872,104 @@ def _f5_storico(voci):
     return _f5_righe(vive, len([r for r in q.stdout.split(NL) if r.strip()]))
 
 
+DA_DECIDERE = os.path.join(D, "DA_DECIDERE_LUCA.md")
+_DD_NOTA = re.compile(r"da\s+(decidere|confermare)\s+da\s+Luca[\s:,-]*(.*)$", re.I)
+
+
+def da_decidere(voci, reg):
+    """### UN ELENCO SOLO: tutto cio- su cui l-indice ASPETTA LUCA.
+
+    ### ⛔ **Nel codice NON c-e- nessuna lista di ID: ci sono i TRE CRITERI**, e l-elenco
+    e- cio- che trovano. ### **Il mandato dice «generato e non scritto a mano»**, e la
+    ragione e- precisa: ### **un elenco mezzo generato SEMBRA COMPLETO.**
+
+      * ① la `nota_guardiano` dice *«da decidere / confermare da Luca»* -> la domanda e-
+        ### **cio- che la nota stessa chiede**;
+      * ② la voce ha `meta.omonimo` -> ### **quale dei `N` significati?**;
+      * ③ `stato = DA_CLASSIFICARE` e la classe ### **NON e- `NON_DEFINITA`** -> che
+        classe, dominio, era e stato?
+
+    ### ⚠ **I segnaposto NON ci vanno**, e il mandato lo dice: sono tanti, e sono
+    ### **il lavoro che resta**, non una domanda aperta.
+    """
+    del reg
+    righe = {}
+
+    def dom(idv, q):
+        righe.setdefault(idv, []).append(q)
+
+    for v in voci:
+        nota = (v.get("meta") or {}).get("nota_guardiano") or ""
+        m = _DD_NOTA.search(nota)
+        if m:
+            coda = " ".join(m.group(2).split())[:200]
+            if m.group(1).lower().startswith("conf"):
+                dom(v["id"], "CONFERMI `%s`/era `%s`? %s"
+                    % (v["dominio"], v["era"], coda))
+            else:
+                dom(v["id"], coda or "la nota chiede una decisione e non dice quale")
+        om = (v.get("meta") or {}).get("omonimo") or []
+        if om:
+            # ### ⚠ **L-ULTIMA VOCE DI `omonimo` PUO- ESSERE UN TRONCAMENTO**
+            # ### *(<<... e altre N definizioni>>)*: contarla come un significato
+            # ### ### **direbbe un numero piu- piccolo del vero.** `D3` ha `8`
+            # ### definizioni e `7` voci nel meta: la domanda deve dire ### **ALMENO.**
+            tronco = bool(om) and str(om[-1]).strip().startswith("...")
+            dom(v["id"], "OMONIMO: quale %s significati dichiarati in `meta.omonimo`? "
+                         "NON si scegli da se-"
+                         % (("di ALMENO %d" % (len(om) - 1)) if tronco
+                            else ("dei %d" % len(om))))
+        if v["stato"] == "DA_CLASSIFICARE" and v["classe"] != "NON_DEFINITA":
+            d = (v.get("meta") or {}).get("motivo_dubbio") or ""
+            dom(v["id"], "CHE CLASSE, DOMINIO, ERA E STATO? %s"
+                % (" ".join(d.split())[:200] if d else "il dubbio non e- dichiarato"))
+    per = {v["id"]: v for v in voci}
+    nd = sum(1 for v in voci if v["classe"] == "NON_DEFINITA")
+    R = [
+         "# CIO' SU CUI L-INDICE ASPETTA LUCA — **un elenco solo, GENERATO**",
+         "",
+         "> ### ⛔ **Questo file e' GENERATO da `python csv/indice.py da-decidere`: NON si scrive a mano.** Nel codice ### **non c'e' nessuna lista di ID**: ci sono ### **tre criteri** — la nota che dice *<<da decidere/confermare da Luca>>*, il metadato `omonimo`, e lo stato `DA_CLASSIFICARE` su una voce che ### **non e' un segnaposto.**",
+         "",
+         "| | |",
+         "|---|--:|",
+    ]
+    R.append("| **voci che aspettano una decisione** | ### **`%d`** |" % len(righe))
+    R.append("| **domande in tutto** | `%d` |" % sum(len(x) for x in righe.values()))
+    R.append("| **segnaposto `NON_DEFINITA`**, che NON sono una domanda | `%d` |" % nd)
+    R += ["", "---", ""]
+    gruppi = [("gli OMONIMI -- due nomi e una cosa, e NON si scegli",
+               lambda i: bool((per[i].get("meta") or {}).get("omonimo"))),
+              ("le CLASSIFICAZIONI da confermare",
+               lambda i: any(q.startswith("CONFERMI") for q in righe[i])),
+              ("le DOMANDE aperte", lambda i: True)]
+    visti = set()
+    for titolo, quali in gruppi:
+        dentro = [i for i in sorted(righe) if i not in visti and quali(i)]
+        if not dentro:
+            continue
+        visti |= set(dentro)
+        R += ["## %s -- `%d`" % (titolo, len(dentro)), "",
+              "| id | `classe`/`dominio`/era/stato | LA DOMANDA | LA FRASE |",
+              "|---|---|---|---|"]
+        for i in dentro:
+            v = per[i]
+            frase = " ".join(((v.get("titolo") or "") + " "
+                              + (v.get("descrizione") or "")).split())[:150]
+            R.append("| `%s` | `%s`/`%s`/`%s`/`%s` | %s | %s |"
+                     % (i, v["classe"], v["dominio"], v["era"], v["stato"],
+                        "<br>".join(q.replace("|", "/") for q in righe[i]),
+                        frase.replace("|", "/")))
+        R += ["", "---", ""]
+    R.append("> ### \u2b50 **Una decisione non presa e- un dato; una decisione presa al "
+             "posto di Luca e- un difetto.** Questo file e- il primo: ### **tutto cio- che "
+             "l-indice NON sa, in un posto solo.**")
+    R.append("")
+    io.open(DA_DECIDERE, "w", encoding="utf-8", newline=NL).write(NL.join(R) + NL)
+    print("  scritto doc/indice/DA_DECIDERE_LUCA.md: %d voci, %d domande, %d righe"
+          % (len(righe), sum(len(x) for x in righe.values()), len(R)))
+    return righe
+
+
 def _f7_stato(voci):
     """### `F7`: una voce `FISICA` dell-era `1` con uno stato che non e- `SOSPESA` ne-
     `CHIUSA`.
@@ -1389,6 +1488,9 @@ def main(argv):
         return storico_commit()
     if cmd == "segnali":
         segnali(voci, reg)
+        return 0
+    if cmd == "da-decidere":
+        da_decidere(voci, reg)
         return 0
     if cmd == "mostra":
         mostra(voci, uno)

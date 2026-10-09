@@ -83,8 +83,8 @@ era       1=460  DA_CLASSIFICARE=188  ENTRAMBE=173  2=25
 stato     SOSPESA=289  DA_CLASSIFICARE=188  CHIUSA=187  APERTA=157  AGENDA=25
 ```
 
-### ✔ **FATTO IN QUESTO GIRO:** il punto `4`: ### **`F4` a ZERO** -- i tre del «quarto caso» decisi ### **per EREDITA'** *(una famiglia di difetti prende il dominio del difetto da cui NASCE: `F4` da `D04`, `F5` da `D34`)*. ### **E i segnali finali sono esattamente quelli che il mandato si aspettava: `F1=0 F2=1 F3=0 F4=0 F6=0`**
+### ✔ **FATTO IN QUESTO GIRO:** il punto `5`: ### **`doc/indice/DA_DECIDERE_LUCA.md`, un elenco solo e SI GENERA** -- `38` voci e `38` domande, da ### **tre criteri** e ### **nessuna lista di ID nel codice**, perche' un elenco mezzo generato e' peggio di nessun elenco: ### **sembra completo**
 
-### ⛔ **RESTA:** il punto `5` *(l'elenco `doc/indice/DA_DECIDERE_LUCA.md`, ### **generato da `indice.py` e non scritto a mano**)* e `6` *(i controlli e il referto `doc/REFERTO_indice_v3_pulizia.md`)*
+### ⛔ **RESTA:** il punto `6`: i controlli e il referto ### **`doc/REFERTO_indice_v3_pulizia.md`**
 
-**Ultimo lotto applicato:** `doc/indice/_lotti/v3_q4.jsonl`
+**Ultimo lotto applicato:** `doc/indice/_lotti/v3_q4_f3.jsonl *(il punto `5` non passa da un lotto: genera un elenco)*`
