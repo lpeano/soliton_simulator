@@ -179,3 +179,22 @@ altre voci** *(un **collegamento**, non un alias)* e `6` erano **condivisi fra d
 ### **UN SEGNALE SI CHIUDE IN DUE MODI SOLI:** **correggendo la voce**, oppure con ### **`meta.eccezione_presidio`** — forma obbligata **`F<n>: <motivo>`**, e il motivo deve contenere **un pezzo LETTERALE di almeno `20` caratteri** del testo della voce. ### ⛔ **La forma la impone `valida`:** senza quel controllo l'eccezione sarebbe **una via di fuga a costo zero.**
 
 ### **IL COLLAUDO:** `python csv/_collaudo_presidi_indice.py`, **`15` su `15`** — ogni presidio si è visto **SCATTARE** sul suo caso a risposta nota *(`P1-sexies`)* e **non scattare** sulla voce corretta. ### ⛔ **Su una COPIA letta con `git show`, mai sull'indice vero.**
+
+---
+
+## LA CLASSE `CRITERIO` È **UNA COSA SOLA** *(criterio del guardiano, 2026-10-09)*
+
+> ### ⭐ **Un criterio DICE COME SI GIUDICA, quindi è `METODO`.**
+
+Era **spaccata in due**: `71` voci `CRITERIO` in `FISICA` e `35` in `METODO`, e **gli stessi tipi di criterio** — *«caso che deve fallire»*, *«byte-identico»* — stavano **da tutte e due le parti.**
+
+| | |
+|---|---|
+| ### **la regola** | `classe = CRITERIO` ⇒ `dominio = METODO`. ### ⚠ **`era` e `stato` NON si toccano** |
+| ### **l'unica eccezione** | una voce il cui testo **non è un criterio ma un ESITO MISURATO** — *es. `REGISTRO_FISICA:P5`, «quasi COSTANTE, `0.74`-`0.76` LAM»* ⇒ classe **`MISURA`**, dominio **`FISICA`** |
+| ### **come si riconosce un esito** | un numero o un intervallo **come risultato**, e ### **nessun verbo prescrittivo** *(«DEVE», «si verifica», «basta», «byte-identico», una soglia)*. ### ⛔ **`==` non è una misura: è un CONFRONTO** |
+| ### ⛔ **la regola SELEZIONA, la lettura DECIDE** | i candidati li dà `python csv/_segnali_chiusura.py 2`; **la decisione sta nelle tabelle `DECISO_ESITO` e `DECISO_CRITERIO`**, e ### **ogni riga porta la frase che l'ha decisa.** `4` candidati sono stati **rifiutati leggendo** |
+| ### **non è fisica** | è **un criterio di CLASSIFICAZIONE**, e il guardiano lo dichiara. Tutte le voci restano `SOSPESE` o `CHIUSE` ⇒ ### **non cambia nulla per l'era `2`, solo l'ordine** |
+| ### ⚠ **il prezzo** | `FISICA` perde `58` voci *(da `439` a `381`)*, e chi legge i conteggi di ieri e di domani **deve trovare scritto perché** |
+
+### **E il controllo `C3` conosce LA REGOLA, non i `6` ID** che oggi la esercitano: una voce `CRITERIO` si aspetta in `METODO` **qualunque cosa dicesse la lista del guardiano**, altrimenti il controllo andrebbe riscritto ogni volta che una voce diventa un criterio.

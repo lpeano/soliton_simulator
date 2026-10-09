@@ -74,17 +74,17 @@ python csv/indice.py aggiorna-lotto doc/indice/_lotti/<nome>.jsonl
 | voci | `830` |
 | ### **`DA_CLASSIFICARE` vere** *(non segnaposto)* | ### **`1`** |
 | ### **segnaposto `NON_DEFINITA`** | ### **`181`** |
-| ### **righe di storico** | ### **`1092`** |
+| ### **righe di storico** | ### **`1163`** |
 
 ```
-classe    DIFETTO=210  NON_DEFINITA=181  FRONTE=169  CRITERIO=107  MISURA=55  CURA=46  PRESIDIO=34  STANDARD=28
-dominio   FISICA=439  DA_CLASSIFICARE=181  METODO=136  INFRASTRUTTURA=47  DOCUMENTAZIONE=27
+classe    DIFETTO=210  NON_DEFINITA=181  FRONTE=169  CRITERIO=94  MISURA=68  CURA=46  PRESIDIO=34  STANDARD=28
+dominio   FISICA=381  METODO=194  DA_CLASSIFICARE=181  INFRASTRUTTURA=47  DOCUMENTAZIONE=27
 era       1=451  DA_CLASSIFICARE=182  ENTRAMBE=172  2=25
 stato     SOSPESA=280  CHIUSA=187  DA_CLASSIFICARE=182  APERTA=156  AGENDA=25
 ```
 
-### ✔ **FATTO IN QUESTO GIRO:** il punto `1`: ### **`F1` da `49` segnali a `5`**, e ### **la formulazione sbagliata era mia** -- *citare un assioma non vuol dire essere gemelle*, e `42` dei `49` puntavano a ### **assiomi, presidi o segnaposto** *(io ne avevo dichiarati `12`)*. Piu' `C5` ### **OMONIMO** *(la misura su `tauluce` e il «mandato `C5`» degli invarianti)* e ### **due bracci di collaudo nuovi**, che provano che e' ### **la CLASSE** a zittire il segnale
+### ✔ **FATTO IN QUESTO GIRO:** il punto `2`: ### **la classe `CRITERIO` e' una cosa sola** -- `58` voci da `FISICA` a `METODO` e ### **`13` ESITI MISURATI** a classe `MISURA` restando `FISICA`, ciascuno ### **con la frase che l'ha deciso**. `era` e `stato` ### **invariati**. `4` candidati ### **rifiutati leggendo** *(in `== 0` e in «contro `P2 = 27`» il numero e' ### **un controllo**, non una misura)*
 
-### ⛔ **RESTA:** il punto `2` *(### **la classe `CRITERIO` e' una cosa sola**: `71` voci da `FISICA` a `METODO`, e gli ### **esiti misurati** a `MISURA`)*, poi `3` *(`F2`)*, `4` *(`F3`)*, `5` *(`F4` e la ### **regola dell'intestazione**)* e `6` *(il referto)*
+### ⛔ **RESTA:** il punto `3` *(`F2`, le `8` eccezioni che citano il «sostituisce»)*, `4` *(`F3`)*, `5` *(`F4` e la ### **regola dell'intestazione**, collaudata su `POST-HOC` e `TW-1`)* e `6` *(il referto `doc/REFERTO_indice_v3_segnali.md`)*
 
-**Ultimo lotto applicato:** `doc/indice/_lotti/v3_p1.jsonl`
+**Ultimo lotto applicato:** `doc/indice/_lotti/v3_p2.jsonl`

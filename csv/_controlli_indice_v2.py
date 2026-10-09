@@ -140,8 +140,19 @@ def main():
         CORRETTE_V3[_i] = ("DOCUMENTAZIONE", "1", "SOSPESA")        # (B) i FUORI POSTO
 
     def _atteso(idv, dom, era, stato):
-        """### Che cosa il controllo si aspetta OGGI: la lista, oppure la CORREZIONE."""
-        return CORRETTE_V3.get(idv, (dom, era, stato))
+        """### Che cosa il controllo si aspetta OGGI: la lista, la CORREZIONE, o LA REGOLA.
+
+        ### ⛔ **IL PUNTO 2 DEL 2026-10-09 NON E- UNA LISTA DI ID: E- UNA REGOLA.**
+        *<<Un criterio dice come si giudica -> `METODO`>>*, e quindi ### **ogni voce di
+        classe `CRITERIO` si aspetta in `METODO`**, qualunque cosa dicesse la lista del
+        guardiano. ### **Si scrive la REGOLA, non i 6 ID che oggi la esercitano** --
+        altrimenti il controllo va riscritto ogni volta che una voce diventa un criterio.
+        """
+        d, e, s = CORRETTE_V3.get(idv, (dom, era, stato))
+        v = per.get(idv)
+        if v is not None and v["classe"] == "CRITERIO":
+            d = "METODO"
+        return d, e, s
 
     guai = []
     for idv, (dom, _p) in MG.L1.items():

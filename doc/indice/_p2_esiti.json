@@ -1,0 +1,145 @@
+{
+ "esiti": [
+  {
+   "id": "COMPONENTI:D1",
+   "frase": "csnodoprev esteso alla mitosi — il figlio eredita cs dal padre, come le altre sei cache |... D1 || 5/5 PASS, con P1b (controllo positiv titolo_breve INTERO: csnodoprev esteso alla mitosi — il figlio eredita cs dal padre, come le altre sei cache | fallback 71.88 % →… doc/COMPONENTI_PROMOSSE.md::csnodoprev esteso alla mitosi — il figli",
+   "numero": "71.88"
+  },
+  {
+   "id": "COMPONENTI:D2",
+   "frase": "psispinprec esteso alla mitosi — settima voce della stessa convenzione | guardia 4π fallita nel... D2 || 6/6 PASS, con S1b (controllo positiv titolo_breve INTERO: psispinprec esteso alla mitosi — settima voce della stessa convenzione | guardia 4π fallita nel 95.33 %… doc/COMPONENTI_PROMOSSE.md::psispinprec esteso alla mitosi — settima",
+   "numero": "95.33"
+  },
+  {
+   "id": "COMPONENTI:S3b",
+   "frase": "l'orologio rallenta dove cs è basso | 0.0100 volte a cs = 0.1·CSM doc/COMPONENTI_PROMOSSE.md::l'orologio rallenta dove cs è basso | 0.",
+   "numero": "0.0100"
+  },
+  {
+   "id": "COMPONENTI:S3c",
+   "frase": "a cs = CSM il fattore è 1 esatto | 1.000000000000000 doc/COMPONENTI_PROMOSSE.md::a cs = CSM il fattore è 1 esatto | 1.000",
+   "numero": "1.000000000000000"
+  },
+  {
+   "id": "REGISTRO_FISICA:A3",
+   "frase": "un nodo nato da MITOSI parte da ramp = 0 e arriva a 1 nel suo tempo-luce doc/REGISTRO_FISICA.md::un nodo nato da MITOSI parte da ramp = 0",
+   "numero": "= 0"
+  },
+  {
+   "id": "REGISTRO_FISICA:A4",
+   "frase": "contrasto massa/vuoto e Lam al passo 1, contro P2 = 27 e P3 = 5 doc/REGISTRO_FISICA.md::contrasto massa/vuoto e Lam al passo 1,",
+   "numero": "= 2"
+  },
+  {
+   "id": "REGISTRO_FISICA:C3",
+   "frase": "frazione di impacchettamento 0.384 NELLA SFERA INTERNA — i nodi a distanza = RCONN dal bordo... titolo_breve INTERO: frazione di impacchettamento 0.384 NELLA SFERA INTERNA — i nodi a distanza = RCONN dal bordo, entro la… doc/REGISTRO_FISICA.md::frazione di impacchettamento 0.384 NELLA",
+   "numero": "0.384"
+  },
+  {
+   "id": "REGISTRO_FISICA:D33",
+   "frase": "la repulsione si spegne dove servirebbe. Il segno si inverte oltre 3.5π, ma doc/REGISTRO_FISICA.md::la repulsione si spegne dove servirebbe.",
+   "numero": "3.5"
+  },
+  {
+   "id": "REGISTRO_FISICA:P1",
+   "frase": "somma dei pesi per nodo | 50 | 9 | 0.18 doc/REGISTRO_FISICA.md::somma dei pesi per nodo | 50 | 9 | 0.18",
+   "numero": "0.18"
+  },
+  {
+   "id": "REGISTRO_FISICA:P2",
+   "frase": "contrasto Imassa / Ivuoto | 13 | 27 | 2.1 doc/REGISTRO_FISICA.md::contrasto Imassa / Ivuoto | 13 | 27 | 2.",
+   "numero": "2.1"
+  },
+  {
+   "id": "REGISTRO_FISICA:P3",
+   "frase": "Λ | 140 | 5 | 0.036 doc/REGISTRO_FISICA.md::Λ | 140 | 5 | 0.036",
+   "numero": "0.036"
+  },
+  {
+   "id": "REGISTRO_FISICA:P3b",
+   "frase": "ampiezza dello scuotimento | — | 5× più bassa | 0.2 doc/REGISTRO_FISICA.md::ampiezza dello scuotimento | — | 5× più",
+   "numero": "0.2"
+  },
+  {
+   "id": "REGISTRO_FISICA:P4",
+   "frase": "csfloor dentro le masse | 0.9 | 0.55 | 0.61 doc/REGISTRO_FISICA.md::csfloor dentro le masse | 0.9 | 0.55 | 0",
+   "numero": "0.9"
+  },
+  {
+   "id": "REGISTRO_FISICA:P5",
+   "frase": "lambdanodi | — | quasi COSTANTE, 0.74-0.76 LAM ovunque | — doc/REGISTRO_FISICA.md::lambdanodi | — | quasi COSTANTE, 0.74-0.",
+   "numero": "0.74"
+  },
+  {
+   "id": "REGISTRO_FISICA:S3",
+   "frase": "passo ZERO: sum(d < LAM) == 0 E sum(d == LAM) == 0 | i due INSIEME: il primo da solo lo darebbe... titolo_breve INTERO: passo ZERO: sum(d < LAM) == 0 E sum(d == LAM) == 0 | i due INSIEME: il primo da solo lo darebbe anche nasce.… doc/REGISTRO_FISICA.md::passo ZERO: sum(d < LAM) == 0 E sum(d ==",
+   "numero": "= 0"
+  },
+  {
+   "id": "REGISTRO_FISICA:S5",
+   "frase": "nodi isolati == 0 | un nodo isolato non è un nodo più semplice: è un nodo che esce dalla fisica doc/REGISTRO_FISICA.md::nodi isolati == 0 | un nodo isolato non",
+   "numero": "= 0"
+  },
+  {
+   "id": "REGISTRO_FISICA:T2",
+   "frase": "-0.15 … +0.44 | fa cio' che la geometria impone doc/REGISTRO_FISICA.md::-0.15 … +0.44 | fa cio' che la geometria",
+   "numero": "0.15"
+  }
+ ],
+ "criteri": [
+  "COER-4PI",
+  "COMPONENTI:A1",
+  "COMPONENTI:A2",
+  "COMPONENTI:A3",
+  "COMPONENTI:A5",
+  "COMPONENTI:A6",
+  "COMPONENTI:A8",
+  "COMPONENTI:B1",
+  "COMPONENTI:B10",
+  "COMPONENTI:B11",
+  "COMPONENTI:B2",
+  "COMPONENTI:B3",
+  "COMPONENTI:B4",
+  "COMPONENTI:B5",
+  "COMPONENTI:B6",
+  "COMPONENTI:B7",
+  "COMPONENTI:B8",
+  "COMPONENTI:B9",
+  "COMPONENTI:C1",
+  "COMPONENTI:C2",
+  "COMPONENTI:C3",
+  "COMPONENTI:S1",
+  "COMPONENTI:Y0-Y10",
+  "COMPONENTI:Z30",
+  "REGISTRO_FISICA:A11",
+  "REGISTRO_FISICA:A13",
+  "REGISTRO_FISICA:A6",
+  "REGISTRO_FISICA:C2",
+  "REGISTRO_FISICA:C4",
+  "REGISTRO_FISICA:D35",
+  "REGISTRO_FISICA:E1a",
+  "REGISTRO_FISICA:E1b",
+  "REGISTRO_FISICA:E3",
+  "REGISTRO_FISICA:E4-LAM",
+  "REGISTRO_FISICA:S10",
+  "REGISTRO_FISICA:S2",
+  "REGISTRO_FISICA:S6",
+  "REGISTRO_FISICA:S7",
+  "REGISTRO_FISICA:S9",
+  "REGISTRO_FISICA:SCENA-1",
+  "REGISTRO_FISICA:T3",
+  "REGISTRO_FISICA:U2",
+  "REGISTRO_FISICA:U2a",
+  "REGISTRO_FISICA:U2b",
+  "REGISTRO_FISICA:U2c",
+  "REGISTRO_FISICA:V1",
+  "REGISTRO_FISICA:V2",
+  "REGISTRO_FISICA:V3",
+  "REGISTRO_FISICA:V4",
+  "REGISTRO_FISICA:V5",
+  "REGISTRO_FISICA:V6",
+  "REGISTRO_FISICA:V7",
+  "REGISTRO_FISICA:V8",
+  "REGISTRO_FISICA:V9"
+ ]
+}

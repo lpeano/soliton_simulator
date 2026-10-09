@@ -110,7 +110,60 @@ PRESCRIVE = ("deve", "devono", "si verifica", "basta", "serve", "byte-identico",
              "si misura", "si confronta", "non deve", "va verificato", "si pretende",
              "soglia", "firma dei byte", "DEVE")
 # ### **UN ESITO riporta una MISURA come risultato.**
-MISURATO = re.compile(r"\d+[.,]\d+|\d+\s*%|=\s*-?\d")
+# ### `==` NON E- UNA MISURA: e- un CONFRONTO, e la prima stesura lo contava.
+# ### `REGISTRO_FISICA:S3` (<<sum(d < LAM) == 0 E sum(d == LAM) == 0>>) e
+# ### `REGISTRO_FISICA:S5` (<<nodi isolati == 0>>) finivano fra i candidati a ESITO,
+# ### ### **e sono due CONTROLLI.** Il `=` singolo resta, perche- <<il fattore = 1>> e-
+# ### una misura -- ma ### **due voci passano comunque solo per la lettura**, e stanno
+# ### in `DECISO_CRITERIO`.
+MISURATO = re.compile(r"\d+[.,]\d+|\d+\s*%|(?<!=)=(?!=)\s*-?\d")
+
+
+# ==========================================================================
+#   LA DECISIONE DEL PUNTO 2, LETTA VOCE PER VOCE
+# ==========================================================================
+# ### ⛔ **La regola SELEZIONA, la lettura DECIDE**, e sta nel task history *prima*.
+# ### Queste due tabelle sono ### **la decisione**, e ciascuna riga porta ### **la frase
+# ### che l-ha decisa** -- il mandato chiede proprio quello.
+#
+# ### ✔ **ESITI MISURATI** -> classe `MISURA`, dominio `FISICA`.
+DECISO_ESITO = {
+    "COMPONENTI:D1": "fallback 71.88 % -> ... | 5/5 PASS: e- IL NUMERO MISURATO di una "
+        "componente sigillata",
+    "COMPONENTI:D2": "guardia 4pi fallita nel 95.33 % | 6/6 PASS: idem, un numero "
+        "misurato",
+    "COMPONENTI:S3b": "l-orologio rallenta dove cs e- basso | 0.0100 volte a cs = "
+        "0.1*CSM: un VALORE, non una prescrizione",
+    "COMPONENTI:S3c": "a cs = CSM il fattore e- 1 esatto | 1.000000000000000: un valore "
+        "misurato al bit",
+    "REGISTRO_FISICA:C3": "frazione di impacchettamento 0.384 NELLA SFERA INTERNA: una "
+        "frazione MISURATA",
+    "REGISTRO_FISICA:D33": "Il segno si inverte oltre 3.5pi: un FATTO misurato sul difetto, "
+        "non un criterio di giudizio",
+    "REGISTRO_FISICA:P1": "somma dei pesi per nodo | 50 | 9 | 0.18: una riga di TAVOLA di "
+        "misure (prima | dopo | valore)",
+    "REGISTRO_FISICA:P2": "contrasto Imassa / Ivuoto | 13 | 27 | 2.1: idem",
+    "REGISTRO_FISICA:P3": "Lambda | 140 | 5 | 0.036: idem",
+    "REGISTRO_FISICA:P3b": "ampiezza dello scuotimento | - | 5x piu- bassa | 0.2: idem",
+    "REGISTRO_FISICA:P4": "csfloor dentro le masse | 0.9 | 0.55 | 0.61: idem",
+    "REGISTRO_FISICA:P5": "lambdanodi | - | quasi COSTANTE, 0.74-0.76 LAM ovunque | -: e- "
+        "L-ESEMPIO CHE IL MANDATO DA-",
+    "REGISTRO_FISICA:T2": "-0.15 ... +0.44 | fa cio- che la geometria impone: un INTERVALLO "
+        "misurato",
+}
+# ### ⛔ **CANDIDATI RIFIUTATI: la regola li aveva presi, e LEGGENDO sono CONTROLLI.**
+# ### Il numero c-e-, ma ### **non e- una misura: e- il valore CONTRO CUI si confronta.**
+DECISO_CRITERIO = {
+    "REGISTRO_FISICA:A3": "un nodo nato da MITOSI parte da ramp = 0 e arriva a 1 nel suo "
+        "tempo-luce: <<parte da ... e arriva a>> e- CIO- CHE SI VERIFICA, "
+        "non cio- che si e- misurato",
+    "REGISTRO_FISICA:A4": "contrasto massa/vuoto e Lam al passo 1, CONTRO P2 = 27 e P3 = 5: "
+        "<<contro>> dice che 27 e 5 sono i valori DI RIFERIMENTO, cioe- il "
+        "criterio",
+    "REGISTRO_FISICA:S3": "passo ZERO: sum(d < LAM) == 0 E sum(d == LAM) == 0: due CONTROLLI, "
+        "e `==` non e- una misura",
+    "REGISTRO_FISICA:S5": "nodi isolati == 0: un CONTROLLO",
+}
 
 
 def punto2():
@@ -144,9 +197,52 @@ def punto2():
     return esiti, criteri
 
 
+def punto2_lotto():
+    """### Il LOTTO del punto `2`: ### **la classe `CRITERIO` torna una cosa sola.**
+
+    ### ⛔ **`era` e `stato` NON si toccano**, e il mandato lo dice: *<<era invariata, stato
+    invariato (`SOSPESA` resta `SOSPESA`, `CHIUSA` resta `CHIUSA`)>>*. Si cambia
+    ### **solo il dominio** -- e per i `13` esiti ### **anche la classe.**
+    """
+    voci = carica()
+    cand = [v for v in voci if v["classe"] == "CRITERIO" and v["dominio"] == "FISICA"]
+    lotto = []
+    for v in cand:
+        i = v["id"]
+        if i in DECISO_ESITO:
+            lotto.append({"id": i, "quando": DATA,
+                          "campi": {"classe": "MISURA"},
+                          "meta": {"nota_guardiano":
+                                   "punto 2: NON e- un criterio ma un ESITO MISURATO, e "
+                                   "resta FISICA. La frase che decide: " +
+                                   DECISO_ESITO[i]},
+                          "motivo": ("(2) ESITO MISURATO, non criterio: resta `FISICA` e la "
+                                     "classe passa a `MISURA`. La frase che decide e- <<%s>>"
+                                     % DECISO_ESITO[i])})
+        else:
+            nota = ("punto 2: un criterio DICE COME SI GIUDICA, quindi METODO. era e stato "
+                    "INVARIATI")
+            if i in DECISO_CRITERIO:
+                nota = ("punto 2: la regola l-aveva preso per un ESITO e LEGGENDO e- un "
+                        "CONTROLLO -- " + DECISO_CRITERIO[i])
+            lotto.append({"id": i, "quando": DATA,
+                          "campi": {"dominio": "METODO"},
+                          "meta": {"nota_guardiano": nota},
+                          "motivo": ("(2) UN CRITERIO DICE COME SI GIUDICA, quindi METODO "
+                                     "(criterio di classificazione del guardiano, NON una "
+                                     "decisione di fisica). era e stato INVARIATI. Il testo "
+                                     "dice <<%s>>" % pezzo(v, 80))})
+    scrivi("v3_p2.jsonl", lotto)
+    print("  (2) %d a `METODO`, %d a classe `MISURA` restando `FISICA`"
+          % (len(cand) - len(DECISO_ESITO), len(DECISO_ESITO)))
+    print("  ### I 4 CANDIDATI RIFIUTATI, e il perche- sta nella loro nota:")
+    for i in sorted(DECISO_CRITERIO):
+        print("      %-24s %s" % (i, DECISO_CRITERIO[i][:92]))
+
+
 def main(argv):
-    assert argv and argv[0] in ("1", "2", "3", "4"), __doc__
-    {"1": punto1, "2": punto2}[argv[0]]()
+    assert argv and argv[0] in ("1", "2", "2b", "3", "4"), __doc__
+    {"1": punto1, "2": punto2, "2b": punto2_lotto}[argv[0]]()
     return 0
 
 

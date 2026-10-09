@@ -7,13 +7,13 @@
 | `DA_CLASSIFICARE` | `DA_CLASSIFICARE` | 181 |
 | `DOCUMENTAZIONE` | `1` | 21 |
 | `DOCUMENTAZIONE` | `ENTRAMBE` | 6 |
-| `FISICA` | `1` | 397 |
+| `FISICA` | `1` | 339 |
 | `FISICA` | `2` | 25 |
 | `FISICA` | `DA_CLASSIFICARE` | 1 |
 | `FISICA` | `ENTRAMBE` | 16 |
 | `INFRASTRUTTURA` | `1` | 16 |
 | `INFRASTRUTTURA` | `ENTRAMBE` | 31 |
-| `METODO` | `1` | 17 |
+| `METODO` | `1` | 75 |
 | `METODO` | `ENTRAMBE` | 119 |
 
 | id | classe | dominio | era | stato | blocca | titolo |
@@ -144,37 +144,37 @@
 | `CICLO-CHIUSURA-SEGNO` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | il segno dell arco di chiusura in _base_cicli_topologici e opposto al verso di p |
 | `CLI-1` | CURA | INFRASTRUTTURA | ENTRAMBE | ### **APERTA** | SI | I SIGILLI DI CURA 4 E CURA 5 NON HANNO MAI PROVATO IL PERCORSO CLI: impostavano  |
 | `CLIP-INVENTARIO` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | INVENTARIO dei clip, tetti e pavimenti del passo pieno: 27 TETTI FISICI su 117 g |
-| `COER-4PI` | CRITERIO | FISICA | 1 | ### **CHIUSA** |  | la coerenza della massa e' `/<e^{i phi}>/`: il campo NON distingue `phi` da `phi |
+| `COER-4PI` | CRITERIO | METODO | 1 | ### **CHIUSA** |  | la coerenza della massa e' `/<e^{i phi}>/`: il campo NON distingue `phi` da `phi |
 | `COLLAUDO-NON-ESEGUITO` | DIFETTO | METODO | ENTRAMBE | ### **APERTA** |  | un collaudo che si RIFIUTA di girare esce con 2, e il controllo C4 lo conta come |
-| `COMPONENTI:A1` | CRITERIO | FISICA | 1 | ### **SOSPESA** |  | A1. STEP2OROLOGIO — aggancio OROLOGIO ↔ METRICA · omegaclk = (cs/CSM)² |
-| `COMPONENTI:A2` | CRITERIO | FISICA | 1 | ### **SOSPESA** |  | peq è lo sfondo diffuso locale (Legge I, :265): nessuna statistica globale |
-| `COMPONENTI:A3` | CRITERIO | FISICA | 1 | ### **SOSPESA** |  | dopo la proiezione arco→nodo, numeratore e denominatore vivono entrambi sui nodi |
-| `COMPONENTI:A5` | CRITERIO | FISICA | 1 | ### **SOSPESA** |  | d/cs è il tempo causale |
-| `COMPONENTI:A6` | CRITERIO | FISICA | 1 | ### **SOSPESA** |  | A6 (ragione primaria) / l'inerzia si valuta sullo stato precedente. Una funzione |
-| `COMPONENTI:A8` | CRITERIO | FISICA | 1 | ### **SOSPESA** |  | il fallback dello sfondo è contato — e non basta quante volte scatta: si registr |
-| `COMPONENTI:B1` | CRITERIO | FISICA | 1 | ### **SOSPESA** |  | --deparam-orologio / SÌ — «zero parametri» nel suo commento / byte-identità a OF |
-| `COMPONENTI:B10` | CRITERIO | FISICA | 1 | ### **SOSPESA** |  | --tau-luce / SÌ — d/cs, lo stesso tau già cablato nello Strato 1, coefficiente 1 |
-| `COMPONENTI:B11` | CRITERIO | FISICA | 1 | ### **SOSPESA** |  | --cs-dinamico / sì (cs = CSM/(1+GAMMA√I), stesso GAMMA di G(rho)) / A/B storico; |
-| `COMPONENTI:B2` | CRITERIO | FISICA | 1 | ### **SOSPESA** |  | --spinore-corretto / sì per costruzione (evaluate-then-commit, \/psi\/=1) / «Def |
-| `COMPONENTI:B3` | CRITERIO | FISICA | 1 | ### **SOSPESA** |  | --verlet / è una scelta di integratore, non una legge / «attivare per il confron |
-| `COMPONENTI:B4` | CRITERIO | FISICA | 1 | ### **SOSPESA** |  | --spinore-vivo / sì (reinnesto nell'ordine ETC, zero parametri) / «Reversibile,  |
-| `COMPONENTI:B5` | CRITERIO | FISICA | 1 | ### **SOSPESA** |  | --chi-core / «nessun segno selezionato a priori» / «default off per A/B» / NON S |
-| `COMPONENTI:B6` | CRITERIO | FISICA | 1 | ### **SOSPESA** |  | --campo-spinoriale / sì (FASE 1, riduzione al limite esatta) / «Default off = by |
-| `COMPONENTI:B7` | CRITERIO | FISICA | 1 | ### **SOSPESA** |  | --fork-su2 / sì (Berry non normalizzato, il peso cos(chi/2) è ciò che resta non  |
-| `COMPONENTI:B8` | CRITERIO | FISICA | 1 | ### **SOSPESA** |  | --fork-su2-mem / sì — tau = d/cs, «nessun numero nuovo, d e cs esistono già» / 2 |
-| `COMPONENTI:B9` | CRITERIO | FISICA | 1 | ### **SOSPESA** |  | --step2-orologio / SÌ — orologio di Compton omega ∝ cs²; «fisica NECESSARIA e de |
-| `COMPONENTI:C1` | CRITERIO | FISICA | 1 | ### **SOSPESA** |  | --gamma-turbo / dichiarato dal codice stesso: «[DIAGNOSTICO, NON PERCORSO CERTIF |
-| `COMPONENTI:C2` | CRITERIO | FISICA | 1 | ### **SOSPESA** |  | --kuramoto-su2 / meccanismo di allineamento aggiunto a mano, non derivato. E ref |
-| `COMPONENTI:C3` | CRITERIO | FISICA | 1 | ### **SOSPESA** |  | --regime (deterministico, ecc.) / cambia quattro interruttori insieme (TAUA, GPH |
-| `COMPONENTI:D1` | CRITERIO | FISICA | 1 | ### **CHIUSA** |  | csnodoprev esteso alla mitosi — il figlio eredita cs dal padre, come le altre se |
-| `COMPONENTI:D2` | CRITERIO | FISICA | 1 | ### **CHIUSA** |  | psispinprec esteso alla mitosi — settima voce della stessa convenzione / guardia |
-| `COMPONENTI:S1` | CRITERIO | FISICA | 1 | ### **SOSPESA** |  | FAIL ATTESO — vs blob 2277e9a0, di quattro cambiamenti fa / nodi 3164 contro 292 |
+| `COMPONENTI:A1` | CRITERIO | METODO | 1 | ### **SOSPESA** |  | A1. STEP2OROLOGIO — aggancio OROLOGIO ↔ METRICA · omegaclk = (cs/CSM)² |
+| `COMPONENTI:A2` | CRITERIO | METODO | 1 | ### **SOSPESA** |  | peq è lo sfondo diffuso locale (Legge I, :265): nessuna statistica globale |
+| `COMPONENTI:A3` | CRITERIO | METODO | 1 | ### **SOSPESA** |  | dopo la proiezione arco→nodo, numeratore e denominatore vivono entrambi sui nodi |
+| `COMPONENTI:A5` | CRITERIO | METODO | 1 | ### **SOSPESA** |  | d/cs è il tempo causale |
+| `COMPONENTI:A6` | CRITERIO | METODO | 1 | ### **SOSPESA** |  | A6 (ragione primaria) / l'inerzia si valuta sullo stato precedente. Una funzione |
+| `COMPONENTI:A8` | CRITERIO | METODO | 1 | ### **SOSPESA** |  | il fallback dello sfondo è contato — e non basta quante volte scatta: si registr |
+| `COMPONENTI:B1` | CRITERIO | METODO | 1 | ### **SOSPESA** |  | --deparam-orologio / SÌ — «zero parametri» nel suo commento / byte-identità a OF |
+| `COMPONENTI:B10` | CRITERIO | METODO | 1 | ### **SOSPESA** |  | --tau-luce / SÌ — d/cs, lo stesso tau già cablato nello Strato 1, coefficiente 1 |
+| `COMPONENTI:B11` | CRITERIO | METODO | 1 | ### **SOSPESA** |  | --cs-dinamico / sì (cs = CSM/(1+GAMMA√I), stesso GAMMA di G(rho)) / A/B storico; |
+| `COMPONENTI:B2` | CRITERIO | METODO | 1 | ### **SOSPESA** |  | --spinore-corretto / sì per costruzione (evaluate-then-commit, \/psi\/=1) / «Def |
+| `COMPONENTI:B3` | CRITERIO | METODO | 1 | ### **SOSPESA** |  | --verlet / è una scelta di integratore, non una legge / «attivare per il confron |
+| `COMPONENTI:B4` | CRITERIO | METODO | 1 | ### **SOSPESA** |  | --spinore-vivo / sì (reinnesto nell'ordine ETC, zero parametri) / «Reversibile,  |
+| `COMPONENTI:B5` | CRITERIO | METODO | 1 | ### **SOSPESA** |  | --chi-core / «nessun segno selezionato a priori» / «default off per A/B» / NON S |
+| `COMPONENTI:B6` | CRITERIO | METODO | 1 | ### **SOSPESA** |  | --campo-spinoriale / sì (FASE 1, riduzione al limite esatta) / «Default off = by |
+| `COMPONENTI:B7` | CRITERIO | METODO | 1 | ### **SOSPESA** |  | --fork-su2 / sì (Berry non normalizzato, il peso cos(chi/2) è ciò che resta non  |
+| `COMPONENTI:B8` | CRITERIO | METODO | 1 | ### **SOSPESA** |  | --fork-su2-mem / sì — tau = d/cs, «nessun numero nuovo, d e cs esistono già» / 2 |
+| `COMPONENTI:B9` | CRITERIO | METODO | 1 | ### **SOSPESA** |  | --step2-orologio / SÌ — orologio di Compton omega ∝ cs²; «fisica NECESSARIA e de |
+| `COMPONENTI:C1` | CRITERIO | METODO | 1 | ### **SOSPESA** |  | --gamma-turbo / dichiarato dal codice stesso: «[DIAGNOSTICO, NON PERCORSO CERTIF |
+| `COMPONENTI:C2` | CRITERIO | METODO | 1 | ### **SOSPESA** |  | --kuramoto-su2 / meccanismo di allineamento aggiunto a mano, non derivato. E ref |
+| `COMPONENTI:C3` | CRITERIO | METODO | 1 | ### **SOSPESA** |  | --regime (deterministico, ecc.) / cambia quattro interruttori insieme (TAUA, GPH |
+| `COMPONENTI:D1` | MISURA | FISICA | 1 | ### **CHIUSA** |  | csnodoprev esteso alla mitosi — il figlio eredita cs dal padre, come le altre se |
+| `COMPONENTI:D2` | MISURA | FISICA | 1 | ### **CHIUSA** |  | psispinprec esteso alla mitosi — settima voce della stessa convenzione / guardia |
+| `COMPONENTI:S1` | CRITERIO | METODO | 1 | ### **SOSPESA** |  | FAIL ATTESO — vs blob 2277e9a0, di quattro cambiamenti fa / nodi 3164 contro 292 |
 | `COMPONENTI:S2` | CRITERIO | METODO | 1 | ### **SOSPESA** |  | riduzione al limite sul blob ATTUALE: ON (cs=CSM) vs OFF byte-identico / 0.000e+ |
 | `COMPONENTI:S3` | CRITERIO | METODO | 1 | ### **SOSPESA** |  | S3.0 / IL CONTROLLO POSITIVO: il test VEDE l'effetto / 39/40 nodi con \/f(1)−f(0 |
-| `COMPONENTI:S3b` | CRITERIO | FISICA | 1 | ### **SOSPESA** |  | l'orologio rallenta dove cs è basso / 0.0100 volte a cs = 0.1·CSM |
-| `COMPONENTI:S3c` | CRITERIO | FISICA | 1 | ### **SOSPESA** |  | a cs = CSM il fattore è 1 esatto / 1.000000000000000 |
-| `COMPONENTI:Y0-Y10` | CRITERIO | FISICA | 1 | ### **CHIUSA** |  | Y10, 11/11 PASS. |
-| `COMPONENTI:Z30` | CRITERIO | FISICA | 1 | ### **SOSPESA** |  | Z30: la forma del denominatore — nudo (attuale, zero scelte) contro linea (la me |
+| `COMPONENTI:S3b` | MISURA | FISICA | 1 | ### **SOSPESA** |  | l'orologio rallenta dove cs è basso / 0.0100 volte a cs = 0.1·CSM |
+| `COMPONENTI:S3c` | MISURA | FISICA | 1 | ### **SOSPESA** |  | a cs = CSM il fattore è 1 esatto / 1.000000000000000 |
+| `COMPONENTI:Y0-Y10` | CRITERIO | METODO | 1 | ### **CHIUSA** |  | Y10, 11/11 PASS. |
+| `COMPONENTI:Z30` | CRITERIO | METODO | 1 | ### **SOSPESA** |  | Z30: la forma del denominatore — nudo (attuale, zero scelte) contro linea (la me |
 | `CONFIG-1` | DIFETTO | METODO | ENTRAMBE | ### **APERTA** |  | APERTA il 2026-09-25 / LE SEI MISURE DI OGGI GIRAVANO CON 28 LEGGI SU 31 SPENTE, |
 | `CONSERVAZIONE-LOCALE` | FRONTE | FISICA | 2 | ### **AGENDA** |  | A14: ogni legge si giudica su tre domande -- energia locale, carica locale, tota |
 | `CONTA-RIGHE` | FRONTE | METODO | ENTRAMBE | ### **APERTA** |  | DUE CONVENZIONI PER CONTARE LE RIGHE: i miei strumenti contavano uno in piu' di  |
@@ -487,64 +487,64 @@
 | `REGIME-COMMENTI` | DIFETTO | DOCUMENTAZIONE | 1 | ### **CHIUSA** |  | i commenti dichiaravano DEFAULT e canonico il regime stocastico, che non gira ma |
 | `REGIME-DUE-SISTEMI` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | --regime crea un secondo sistema con lo stesso nome: SCUOTIMENTO cambia se il fl |
 | `REGISTRO_FISICA:A1` | CRITERIO | METODO | ENTRAMBE | ### **APERTA** |  | flag SPENTO = BYTE-IDENTICO al codice precedente, firma dei byte, un processo pe |
-| `REGISTRO_FISICA:A11` | CRITERIO | FISICA | 1 | ### **SOSPESA** |  | IL PAVIMENTO 1e-6 |
-| `REGISTRO_FISICA:A13` | CRITERIO | FISICA | 1 | ### **SOSPESA** |  | A13 dice che sotto LAM non esiste niente, nemmeno una distanza fra nodi. Quindi  |
+| `REGISTRO_FISICA:A11` | CRITERIO | METODO | 1 | ### **SOSPESA** |  | IL PAVIMENTO 1e-6 |
+| `REGISTRO_FISICA:A13` | CRITERIO | METODO | 1 | ### **SOSPESA** |  | A13 dice che sotto LAM non esiste niente, nemmeno una distanza fra nodi. Quindi  |
 | `REGISTRO_FISICA:A2` | CRITERIO | METODO | ENTRAMBE | ### **APERTA** |  | al passo 1, ramp == 1 su TUTTI i nodi della semina iniziale, ESATTO |
-| `REGISTRO_FISICA:A3` | CRITERIO | FISICA | 1 | ### **SOSPESA** |  | un nodo nato da MITOSI parte da ramp = 0 e arriva a 1 nel suo tempo-luce |
-| `REGISTRO_FISICA:A4` | CRITERIO | FISICA | 1 | ### **SOSPESA** |  | contrasto massa/vuoto e Lam al passo 1, contro P2 = 27 e P3 = 5 |
+| `REGISTRO_FISICA:A3` | CRITERIO | METODO | 1 | ### **SOSPESA** |  | un nodo nato da MITOSI parte da ramp = 0 e arriva a 1 nel suo tempo-luce |
+| `REGISTRO_FISICA:A4` | CRITERIO | METODO | 1 | ### **SOSPESA** |  | contrasto massa/vuoto e Lam al passo 1, contro P2 = 27 e P3 = 5 |
 | `REGISTRO_FISICA:A5` | CRITERIO | METODO | 1 | ### **SOSPESA** |  | CONTROLLO POSITIVO: ON e OFF DEVONO differire |
-| `REGISTRO_FISICA:A6` | CRITERIO | FISICA | 1 | ### **SOSPESA** |  | CASO CHE DEVE FALLIRE: con maturi=False forzato, A2 deve dare FAIL |
+| `REGISTRO_FISICA:A6` | CRITERIO | METODO | 1 | ### **SOSPESA** |  | CASO CHE DEVE FALLIRE: con maturi=False forzato, A2 deve dare FAIL |
 | `REGISTRO_FISICA:A7` | CRITERIO | METODO | ENTRAMBE | ### **APERTA** |  | TAUA non è più letto da pesi — dall'AST, non da un grep |
 | `REGISTRO_FISICA:C1` | CRITERIO | METODO | ENTRAMBE | ### **APERTA** |  | flag spento: byte-identico / par.2.1. L'arresto vive dentro SEMINALAM: a flag sp |
-| `REGISTRO_FISICA:C2` | CRITERIO | FISICA | 1 | ### **SOSPESA** |  | la capienza è INDIPENDENTE da n chiesto (prova del raddoppio) / È IL CRITERIO CH |
-| `REGISTRO_FISICA:C3` | CRITERIO | FISICA | 1 | ### **SOSPESA** |  | frazione di impacchettamento 0.384 NELLA SFERA INTERNA — i nodi a distanza = RCO |
-| `REGISTRO_FISICA:C4` | CRITERIO | FISICA | 1 | ### **SOSPESA** |  | nessun rifiuto falso: con n sotto la capienza misurata la semina riesce sempre,  |
-| `REGISTRO_FISICA:D33` | CRITERIO | FISICA | 1 | ### **SOSPESA** |  | la repulsione si spegne dove servirebbe. Il segno si inverte oltre 3.5π, ma |
-| `REGISTRO_FISICA:D35` | CRITERIO | FISICA | 1 | ### **SOSPESA** |  | l'antifase non è un'antifase. Il campo è F = Σ K·exp(iφ), e |
+| `REGISTRO_FISICA:C2` | CRITERIO | METODO | 1 | ### **SOSPESA** |  | la capienza è INDIPENDENTE da n chiesto (prova del raddoppio) / È IL CRITERIO CH |
+| `REGISTRO_FISICA:C3` | MISURA | FISICA | 1 | ### **SOSPESA** |  | frazione di impacchettamento 0.384 NELLA SFERA INTERNA — i nodi a distanza = RCO |
+| `REGISTRO_FISICA:C4` | CRITERIO | METODO | 1 | ### **SOSPESA** |  | nessun rifiuto falso: con n sotto la capienza misurata la semina riesce sempre,  |
+| `REGISTRO_FISICA:D33` | MISURA | FISICA | 1 | ### **SOSPESA** |  | la repulsione si spegne dove servirebbe. Il segno si inverte oltre 3.5π, ma |
+| `REGISTRO_FISICA:D35` | CRITERIO | METODO | 1 | ### **SOSPESA** |  | l'antifase non è un'antifase. Il campo è F = Σ K·exp(iφ), e |
 | `REGISTRO_FISICA:D37` | CRITERIO | INFRASTRUTTURA | ENTRAMBE | ### **APERTA** |  | UNA CHIAVE DUPLICATA NEI DOMINI, ed è mia |
-| `REGISTRO_FISICA:E1a` | CRITERIO | FISICA | 1 | ### **SOSPESA** |  | E1a la mitosi non muore / Luca / gnatimitosi 0 e n cresce / il nullo: se la cura |
-| `REGISTRO_FISICA:E1b` | CRITERIO | FISICA | 1 | ### **SOSPESA** |  | E1b la mitosi non esplode / Luca / n finale < 10× il riferimento, e il run arriv |
+| `REGISTRO_FISICA:E1a` | CRITERIO | METODO | 1 | ### **SOSPESA** |  | E1a la mitosi non muore / Luca / gnatimitosi 0 e n cresce / il nullo: se la cura |
+| `REGISTRO_FISICA:E1b` | CRITERIO | METODO | 1 | ### **SOSPESA** |  | E1b la mitosi non esplode / Luca / n finale < 10× il riferimento, e il run arriv |
 | `REGISTRO_FISICA:E1c` | CRITERIO | METODO | ENTRAMBE | ### **APERTA** |  | E1c il fattore / mio / le nascite salgono di un fattore fra 5× e 100× / DERIVATA |
 | `REGISTRO_FISICA:E2` | CRITERIO | METODO | ENTRAMBE | ### **APERTA** |  | E2 le coppie annichilano / Luca / NON MISURABILE, e si dichiara / vedi il blocco |
-| `REGISTRO_FISICA:E3` | CRITERIO | FISICA | 1 | ### **SOSPESA** |  | E3 la finestra di D33 / mio / si riporta la popolazione delle due finestre nei d |
+| `REGISTRO_FISICA:E3` | CRITERIO | METODO | 1 | ### **SOSPESA** |  | E3 la finestra di D33 / mio / si riporta la popolazione delle due finestre nei d |
 | `REGISTRO_FISICA:E4` | CRITERIO | METODO | ENTRAMBE | ### **APERTA** |  | E4 i diagnostici di fase / mio / max(φ) < 2π nel braccio della cura / la riserva |
-| `REGISTRO_FISICA:E4-LAM` | CRITERIO | FISICA | 1 | ### **SOSPESA** |  | LA LEGGE d = LAM SI VERIFICA SEMPRE (decisione di Luca, 2026-09-24) |
-| `REGISTRO_FISICA:P1` | CRITERIO | FISICA | 1 | ### **SOSPESA** |  | somma dei pesi per nodo / 50 / 9 / 0.18 |
-| `REGISTRO_FISICA:P2` | CRITERIO | FISICA | 1 | ### **SOSPESA** |  | contrasto Imassa / Ivuoto / 13 / 27 / 2.1 |
-| `REGISTRO_FISICA:P3` | CRITERIO | FISICA | 1 | ### **SOSPESA** |  | Λ / 140 / 5 / 0.036 |
-| `REGISTRO_FISICA:P3b` | CRITERIO | FISICA | 1 | ### **SOSPESA** |  | ampiezza dello scuotimento / — / 5× più bassa / 0.2 |
-| `REGISTRO_FISICA:P4` | CRITERIO | FISICA | 1 | ### **SOSPESA** |  | csfloor dentro le masse / 0.9 / 0.55 / 0.61 |
-| `REGISTRO_FISICA:P5` | CRITERIO | FISICA | 1 | ### **SOSPESA** |  | lambdanodi / — / quasi COSTANTE, 0.74-0.76 LAM ovunque / — |
+| `REGISTRO_FISICA:E4-LAM` | CRITERIO | METODO | 1 | ### **SOSPESA** |  | LA LEGGE d = LAM SI VERIFICA SEMPRE (decisione di Luca, 2026-09-24) |
+| `REGISTRO_FISICA:P1` | MISURA | FISICA | 1 | ### **SOSPESA** |  | somma dei pesi per nodo / 50 / 9 / 0.18 |
+| `REGISTRO_FISICA:P2` | MISURA | FISICA | 1 | ### **SOSPESA** |  | contrasto Imassa / Ivuoto / 13 / 27 / 2.1 |
+| `REGISTRO_FISICA:P3` | MISURA | FISICA | 1 | ### **SOSPESA** |  | Λ / 140 / 5 / 0.036 |
+| `REGISTRO_FISICA:P3b` | MISURA | FISICA | 1 | ### **SOSPESA** |  | ampiezza dello scuotimento / — / 5× più bassa / 0.2 |
+| `REGISTRO_FISICA:P4` | MISURA | FISICA | 1 | ### **SOSPESA** |  | csfloor dentro le masse / 0.9 / 0.55 / 0.61 |
+| `REGISTRO_FISICA:P5` | MISURA | FISICA | 1 | ### **SOSPESA** |  | lambdanodi / — / quasi COSTANTE, 0.74-0.76 LAM ovunque / — |
 | `REGISTRO_FISICA:REG-R` | CRITERIO | METODO | ENTRAMBE | ### **APERTA** |  | R, la regola mantenuta (da cablare quando le schede coprono le leggi attive): ne |
 | `REGISTRO_FISICA:S1` | CRITERIO | METODO | ENTRAMBE | ### **APERTA** |  | flag SPENTO = byte-identico: firma dei byte su tutti i campi, un processo per br |
-| `REGISTRO_FISICA:S10` | CRITERIO | FISICA | 1 | ### **SOSPESA** |  | le regioni restano coerenti: frazione di nodi della coorte con I Λ, ai passi 0,  |
-| `REGISTRO_FISICA:S2` | CRITERIO | FISICA | 1 | ### **SOSPESA** |  | passo ZERO: min distanza fra POSIZIONI = LAM (cKDTree, k=2) / è A13 misurato dir |
-| `REGISTRO_FISICA:S3` | CRITERIO | FISICA | 1 | ### **SOSPESA** |  | passo ZERO: sum(d < LAM) == 0 E sum(d == LAM) == 0 / i due INSIEME: il primo da  |
+| `REGISTRO_FISICA:S10` | CRITERIO | METODO | 1 | ### **SOSPESA** |  | le regioni restano coerenti: frazione di nodi della coorte con I Λ, ai passi 0,  |
+| `REGISTRO_FISICA:S2` | CRITERIO | METODO | 1 | ### **SOSPESA** |  | passo ZERO: min distanza fra POSIZIONI = LAM (cKDTree, k=2) / è A13 misurato dir |
+| `REGISTRO_FISICA:S3` | CRITERIO | METODO | 1 | ### **SOSPESA** |  | passo ZERO: sum(d < LAM) == 0 E sum(d == LAM) == 0 / i due INSIEME: il primo da  |
 | `REGISTRO_FISICA:S4` | CRITERIO | METODO | ENTRAMBE | ### **APERTA** |  | gsmnascite == 0 al passo zero / il presidio non deve scattare. Rileva solo il pa |
-| `REGISTRO_FISICA:S5` | CRITERIO | FISICA | 1 | ### **SOSPESA** |  | nodi isolati == 0 / un nodo isolato non è un nodo più semplice: è un nodo che es |
-| `REGISTRO_FISICA:S6` | CRITERIO | FISICA | 1 | ### **SOSPESA** |  | d == /posi − posj/ per OGNI arco al passo zero / dice se la cura ha curato D02 a |
-| `REGISTRO_FISICA:S7` | CRITERIO | FISICA | 1 | ### **SOSPESA** |  | giro corto di 120 passi: la mitosi viva, il bilancio di d0 CHIUDE / E1a e B, gli |
-| `REGISTRO_FISICA:S9` | CRITERIO | FISICA | 1 | ### **SOSPESA** |  | al passo ZERO: intensità media DENTRO le regioni / quella del vuoto, 1 — e si ri |
-| `REGISTRO_FISICA:SCENA-1` | CRITERIO | FISICA | 1 | ### **SOSPESA** |  | 1, STRADA (1): IL VUOTO DI DEFAULT E' LA SATURAZIONE, E SEMINALAM E' OBBLIGATORI |
-| `REGISTRO_FISICA:T2` | CRITERIO | FISICA | 1 | ### **SOSPESA** |  | -0.15 … +0.44 / fa cio' che la geometria impone |
-| `REGISTRO_FISICA:T3` | CRITERIO | FISICA | 1 | ### **SOSPESA** |  | un arco sotto LAM a flag SPENTI FERMA il run / quello che prima non faceva |
+| `REGISTRO_FISICA:S5` | CRITERIO | METODO | 1 | ### **SOSPESA** |  | nodi isolati == 0 / un nodo isolato non è un nodo più semplice: è un nodo che es |
+| `REGISTRO_FISICA:S6` | CRITERIO | METODO | 1 | ### **SOSPESA** |  | d == /posi − posj/ per OGNI arco al passo zero / dice se la cura ha curato D02 a |
+| `REGISTRO_FISICA:S7` | CRITERIO | METODO | 1 | ### **SOSPESA** |  | giro corto di 120 passi: la mitosi viva, il bilancio di d0 CHIUDE / E1a e B, gli |
+| `REGISTRO_FISICA:S9` | CRITERIO | METODO | 1 | ### **SOSPESA** |  | al passo ZERO: intensità media DENTRO le regioni / quella del vuoto, 1 — e si ri |
+| `REGISTRO_FISICA:SCENA-1` | CRITERIO | METODO | 1 | ### **SOSPESA** |  | 1, STRADA (1): IL VUOTO DI DEFAULT E' LA SATURAZIONE, E SEMINALAM E' OBBLIGATORI |
+| `REGISTRO_FISICA:T2` | MISURA | FISICA | 1 | ### **SOSPESA** |  | -0.15 … +0.44 / fa cio' che la geometria impone |
+| `REGISTRO_FISICA:T3` | CRITERIO | METODO | 1 | ### **SOSPESA** |  | un arco sotto LAM a flag SPENTI FERMA il run / quello che prima non faceva |
 | `REGISTRO_FISICA:T4` | CRITERIO | METODO | ENTRAMBE | ### **APERTA** |  | e con d = LAM non si ferma / il controllo che rende T3 leggibile: senza, T3 pass |
 | `REGISTRO_FISICA:T5` | CRITERIO | METODO | ENTRAMBE | ### **APERTA** |  | byte-inerte: 206 campi identici, 0 diversi contro cura1corto / l'invariante legg |
-| `REGISTRO_FISICA:U2` | CRITERIO | FISICA | 1 | ### **SOSPESA** |  | U2 È ATTIVA IN ENTRAMBI I BRACCI DI P-GONFIA E FABBRICA LUNGHEZZA (Luca, 2026-09 |
+| `REGISTRO_FISICA:U2` | CRITERIO | METODO | 1 | ### **SOSPESA** |  | U2 È ATTIVA IN ENTRAMBI I BRACCI DI P-GONFIA E FABBRICA LUNGHEZZA (Luca, 2026-09 |
 | `REGISTRO_FISICA:U2-5` | CRITERIO | METODO | ENTRAMBE | ### **APERTA** |  | 5 è MODEL-FREE: non confronta col mio conto, legge d e d0 e conta gli archi che |
 | `REGISTRO_FISICA:U2-6` | CRITERIO | METODO | 1 | ### **SOSPESA** |  | 6 È IL CASO CHE DEVE FALLIRE (P1-sexies, ed è il criterio più importante): la |
-| `REGISTRO_FISICA:U2a` | CRITERIO | FISICA | 1 | ### **SOSPESA** |  | la LUNGHEZZA FABBRICATA da nasce, sum(LAM - v) sugli archi troncati, SEPARATA pe |
-| `REGISTRO_FISICA:U2b` | CRITERIO | FISICA | 1 | ### **SOSPESA** |  | quanti archi sono stati troncati, e su quanti visti — stessa separazione / idem |
-| `REGISTRO_FISICA:U2c` | CRITERIO | FISICA | 1 | ### **SOSPESA** |  | frazione di archi sotto 2 LAM / ai passi 0 e 120 |
-| `REGISTRO_FISICA:V1` | CRITERIO | FISICA | 1 | ### **SOSPESA** |  | quanto vale a, il passo tipico di rumore, misurato / è il numero che decide la c |
-| `REGISTRO_FISICA:V2` | CRITERIO | FISICA | 1 | ### **SOSPESA** |  | la deriva di oggi sotto rumore simmetrico / deve riprodurre Z113: ≈ +1.582e-03 c |
-| `REGISTRO_FISICA:V3` | CRITERIO | FISICA | 1 | ### **SOSPESA** |  | la deriva della proposta, stessa a, stessi d / deve essere del secondo ordine: r |
-| `REGISTRO_FISICA:V4` | CRITERIO | FISICA | 1 | ### **SOSPESA** |  | la deriva della proposta al confine (d → LAM) / → 0, mentre quella di oggi → a/2 |
-| `REGISTRO_FISICA:V5` | CRITERIO | FISICA | 1 | ### **SOSPESA** |  | la deriva della proposta lontano / decade come 1/d in assoluto, 1/d² in relativo |
-| `REGISTRO_FISICA:V6` | CRITERIO | FISICA | 1 | ### **SOSPESA** |  | il caso che DEVE fallire: la forma exp(dx/u) / deve esplodere vicino al confine, |
-| `REGISTRO_FISICA:V7` | CRITERIO | FISICA | 1 | ### **SOSPESA** |  | mai sotto LAM: una discesa enorme, dx = −100·d / oggi attraversa; la proposta no |
-| `REGISTRO_FISICA:V8` | CRITERIO | FISICA | 1 | ### **SOSPESA** |  | la DISTRIBUZIONE di \/dx\//d, non solo il suo tipico / è il numero che decide fr |
-| `REGISTRO_FISICA:V9` | CRITERIO | FISICA | 1 | ### **SOSPESA** |  | quante scritture hanno \/dx\//d 1, e quante 2 / 1: Itô comprime; 2: Itô inverte  |
+| `REGISTRO_FISICA:U2a` | CRITERIO | METODO | 1 | ### **SOSPESA** |  | la LUNGHEZZA FABBRICATA da nasce, sum(LAM - v) sugli archi troncati, SEPARATA pe |
+| `REGISTRO_FISICA:U2b` | CRITERIO | METODO | 1 | ### **SOSPESA** |  | quanti archi sono stati troncati, e su quanti visti — stessa separazione / idem |
+| `REGISTRO_FISICA:U2c` | CRITERIO | METODO | 1 | ### **SOSPESA** |  | frazione di archi sotto 2 LAM / ai passi 0 e 120 |
+| `REGISTRO_FISICA:V1` | CRITERIO | METODO | 1 | ### **SOSPESA** |  | quanto vale a, il passo tipico di rumore, misurato / è il numero che decide la c |
+| `REGISTRO_FISICA:V2` | CRITERIO | METODO | 1 | ### **SOSPESA** |  | la deriva di oggi sotto rumore simmetrico / deve riprodurre Z113: ≈ +1.582e-03 c |
+| `REGISTRO_FISICA:V3` | CRITERIO | METODO | 1 | ### **SOSPESA** |  | la deriva della proposta, stessa a, stessi d / deve essere del secondo ordine: r |
+| `REGISTRO_FISICA:V4` | CRITERIO | METODO | 1 | ### **SOSPESA** |  | la deriva della proposta al confine (d → LAM) / → 0, mentre quella di oggi → a/2 |
+| `REGISTRO_FISICA:V5` | CRITERIO | METODO | 1 | ### **SOSPESA** |  | la deriva della proposta lontano / decade come 1/d in assoluto, 1/d² in relativo |
+| `REGISTRO_FISICA:V6` | CRITERIO | METODO | 1 | ### **SOSPESA** |  | il caso che DEVE fallire: la forma exp(dx/u) / deve esplodere vicino al confine, |
+| `REGISTRO_FISICA:V7` | CRITERIO | METODO | 1 | ### **SOSPESA** |  | mai sotto LAM: una discesa enorme, dx = −100·d / oggi attraversa; la proposta no |
+| `REGISTRO_FISICA:V8` | CRITERIO | METODO | 1 | ### **SOSPESA** |  | la DISTRIBUZIONE di \/dx\//d, non solo il suo tipico / è il numero che decide fr |
+| `REGISTRO_FISICA:V9` | CRITERIO | METODO | 1 | ### **SOSPESA** |  | quante scritture hanno \/dx\//d 1, e quante 2 / 1: Itô comprime; 2: Itô inverte  |
 | `RELAZIONE-BINARIA` | DIFETTO | INFRASTRUTTURA | ENTRAMBE | ### **APERTA** |  | un NUL letterale rende RELAZIONE_PER_CLAUDE.md binaria per git, e i suoi diff il |
 | `REPERTI-IMMUTABILI` | DIFETTO | METODO | ENTRAMBE | ### **APERTA** |  | APERTA il 2026-09-26 (proposta di Luca), famiglia G / UN COMMIT PUO' TOCCARE UN  |
 | `REVERSIBILITA-LOCALE` | FRONTE | FISICA | 2 | ### **AGENDA** |  | reversibilita' LOCALE, irreversibilita' GLOBALE: la sola freccia e' la crescita  |
