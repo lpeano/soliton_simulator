@@ -10699,3 +10699,15 @@ Il mandato in `8` punti e' chiuso. `846` voci, `953` ID vecchi conservati, `6` s
 ### ✔ **E LO SCHEMA HA FATTO UN FILTRO GIUSTO AL POSTO MIO, tre volte:** `validita` non registrata → ### **lotto rifiutato, zero scritture**; chiudere pretende il commit → ### **`20` righe dicono «CHIUSA» senza portarlo**, e la' dentro ci sono ### **ASSIOMI** *(`A5`, `A9`)*, la cui riga e' ### **una DEFINIZIONE, non una chiusura** — ### ⭐ **un assioma non e' «fatto»: VALE**; un segnaposto non prende uno stato → ### **`45` saltate.**
 
 ### ⛔ **E UNA COSA CHE RESTA, e NON e' un residuo:** `9` coppie `D`/`Z` sono disallineate, e ### **per sette il punto `1` ha letto ENTRAMBE le righe.** Se danno stati diversi, ### **sono le RIGHE a disaccordare sullo stesso fatto**, e allinearle vorrebbe dire ### **scegliere quale vale.** ### **Non lo faccio: lo elenco con le due righe accanto.**
+
+---
+
+## IL MANDATO DELLA VERIFICA COMPLETA: **il file NON e' arrivato, e i presidi del punto `1` sono IMPOSSIBILI prima della cura** (2026-10-09)
+
+Il task history e' committato ### **prima del lavoro** *(par.8)*: `doc/TASK_HISTORY/2026-10-09_indice_v3_verifica_completa.md`, `129` righe. Nessuna corsa; il simulatore resta `b8c21049`.
+
+### ⛔ **IL FILE `doc/indice/_lotti/correzioni_guardiano_2026-10-09.jsonl` NON C'E'.** Cercato ### **nel percorso chiesto**, ### **in tutta la storia di git** *(`git log --all -- '*correzioni_guardiano*'`)* e ### **sul disco** *(`find -iname '*guardiano*'`)*: ### **niente.** E il punto `3` ### **e' il file** — `165` righe da applicare, piu' il punto `2` che chiede *«per quelle che NON sono nel file …»* e il punto `6` che chiede ### **quante applicate, quante no.**
+
+### ⛔ **E IL PUNTO `1` E' IMPOSSIBILE PRIMA DELLA CURA, non rischioso: IMPOSSIBILE.** `indice.py valida` gira ### **nel `pre-commit`** *(`csv/_hook_presidi.py`, blocco `[INDICE v2]`)*, e se torna diverso da `0` ### **blocca OGNI COMMIT DEL REPO.** Il commit che accende `F9` ### **sarebbe bloccato dal suo stesso hook**, perche' l'hook gira il codice ### **dell'albero di lavoro** su un indice che lo viola ancora. ### ⭐ **Non esiste un ordine in cui «presidi, poi correzioni» stia in DUE commit: devono stare nello STESSO.**
+
+### ⚠ **E E' LA TERZA VOLTA IN TRE GIRI:** `F5` e `F7` hanno dato la stessa lezione — ### **un presidio bloccante acceso prima della cura rende inapplicabile il lotto che lo curerebbe.** ### **Le prime due volte l'ho scoperto sbattendoci; questa volta sta scritto nel task history PRIMA di muovermi**, e la lezione nuova e' che ### **il costo non e' l'indice: e' il repo intero.**
