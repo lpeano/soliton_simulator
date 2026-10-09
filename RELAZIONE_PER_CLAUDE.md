@@ -11236,3 +11236,18 @@ Il mandato chiede una riga per ### **OGNI** metodo dell-era `1`, e ne nomina ###
 ### ⚠ **E UNA FORMA CHE HO DOVUTO SCEGLIERE, e la dichiaro:** il mandato dice *«il codice dichiara l-ID (`PRESIDIO = "<id>"`)»*, ma ### **`csv/indice.py` tiene DODICI presidi**: un solo `PRESIDIO` ### **non potrebbe nominarli.** ### ✅ **Quindi DUE forme** — `PRESIDIO` per un file con uno, `PRESIDI = {id: bersaglio}` per un file che ne tiene molti — e ### ⭐ **il BERSAGLIO si VERIFICA** *(funzione nel modulo, o file sul disco, via AST)*: ### **una dichiarazione senza niente dietro e- una promessa.**
 
 **I numeri:** `10` presidi dichiarati dal codice, `8` sorgenti guardate, ### **`0` errori e `23` segnali** *(i tredici `H-*`, che vivono in shell, e i proposti)*. ### **`P-M1`: `97` metodi e `97` righe** *(da `88`)*. Collaudi ### **`8`/`8` e `8`/`8`**, nei due versi.
+
+### ⛔ **CORREZIONE: HO PASSATO `csv` INTERO A `git add`, e ho committato CINQUE FILE che il mio stesso messaggio dichiarava NON TRACCIATI** *(2026-10-09)*
+
+In `5f04d46`. ### **`54.687` righe aggiunte**, di cui ### **`40.000` in tre copie di `soliton_simulator.py`.** ### ⚠ **E il messaggio portava, a inizio riga, `[SENZA-NON-TRACCIATI: …]` che li dichiarava NON tracciati** — quindi ### **il commit e il suo messaggio si contraddicevano.**
+
+### ⭐ **MA GUARDANDOLI, I CINQUE NON SONO LA STESSA COSA — e la mia eccezione li descriveva MALE:**
+
+| i file | che cosa sono | che faccio |
+|---|---|---|
+| `csv/_fase2_chiuse.py` *(`224` righe)* e `csv/_fase2_lettura.py` *(`307`)* | ### **STRUMENTI VERI** della fase `2` dell-indice — e il terzo della famiglia, `csv/_fase2_segnaposto.py`, ### **E- TRACCIATO DA SEMPRE.** La mia eccezione li chiamava *«COPIE che i sigilli costruiscono a ogni giro»*: ### **FALSO** | ### ✅ **RESTANO COMMITTATI: erano DIMENTICATI, e tracciarli e- LA CURA** |
+| tre `_prima.py`/`_ricostruito.py` *(`13k` righe ciascuno)* e `amp0_3_senza_ganci.json` | ### **COPIE del simulatore** che un sigillo si costruisce per confrontare prima/dopo, e l-uscita di una corsa vecchia: ### **rigenerabili dal comando del sigillo** | ### ⛔ **TOLTI dall-indice** *(`git rm --cached`, ### **sul disco restano**)* ### **e messi nel `.gitignore`** |
+
+### ⭐ **E LA REGOLA CHE DECIDE E- DEL GUARDIANO:** *«NON TRACCIATO deve voler dire DIMENTICATO: i file rigenerabili vanno nel `.gitignore`, e un file citato da un documento ma non tracciato e- un-omissione»*. ### ⛔ **Un-eccezione dichiarata a OGNI commit e- il modo in cui un file dimenticato RESTA dimenticato** — e infatti ### **due strumenti veri si nascondevano dentro la stessa eccezione, descritti come <<copie>>**, e nessuno l-avrebbe visto finche- l-eccezione li copriva.
+
+### ⚠ **L-ERRORE OPERATIVO, e la regola che ne traggo:** ho scritto `cm.aggiungi(["csv", "doc", …])` — ### **una CARTELLA**, non i file. ### **Non si passa una cartella a `git add`:** si passano ### **i file che si e- deciso di committare.** *(E il par.5 dice che la lista `FILE CAMBIATI` ### **si GENERA** dall-indice: la genera, infatti — ### **ma l-indice l-avevo riempito io, male.**)*

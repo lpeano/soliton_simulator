@@ -144,3 +144,19 @@ csv/_test_fork/_video_g6000/*.png
 !csv/_test_fork/_video_g6000/frame_039.png
 !csv/_test_fork/_video_g6000/frame_042.png
 !csv/_test_fork/_video_g6000/frame_045.png
+
+# ----------------------------------------------------------------------------
+# LE COPIE CHE I SIGILLI RICOSTRUISCONO A OGNI GIRO (2026-10-09).
+#   `_prima.py` e `_ricostruito.py` sono COPIE di soliton_simulator.py (13k righe
+#   ciascuna) che un sigillo si costruisce per confrontare prima/dopo. Si
+#   rigenerano dal comando del sigillo, al suo commit.
+#
+#   ### PERCHE' NEL .gitignore E NON IN UN'ECCEZIONE DICHIARATA A OGNI COMMIT:
+#   ### la regola del guardiano dice <<NON TRACCIATO deve voler dire DIMENTICATO:
+#   ### i file rigenerabili vanno nel .gitignore>>. Un'eccezione ripetuta a ogni
+#   ### messaggio e' il modo in cui un file DIMENTICATO resta dimenticato -- e
+#   ### infatti due strumenti veri (csv/_fase2_chiuse.py, csv/_fase2_lettura.py)
+#   ### si nascondevano nella stessa eccezione, descritti come <<copie>>.
+csv/_seal_fork/**/_prima.py
+csv/_seal_fork/**/_ricostruito.py
+csv/_test_fork/_mitosi_zero_dove/amp0_3_senza_ganci.json
