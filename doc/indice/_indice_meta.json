@@ -4357,6 +4357,33 @@
   ]
  },
  "meta:eccezione_presidio": {
+  "F1: CRITERIO -- e- IL CRITERIO CHE VERIFICA il difetto che cita. Il testo dice << |posi − posj| per OGNI arco al passo zero | dice se la cura ha curato D02 a questo sito... titolo_breve INTERO: d == |posi >>": [
+   "REGISTRO_FISICA:S6"
+  ],
+  "F1: CRITERIO -- e- IL CRITERIO CHE VERIFICA il difetto che cita. Il testo dice <<E3 la finestra di D33 | mio | si riporta la popolazione delle due fines>>": [
+   "REGISTRO_FISICA:E3"
+  ],
+  "F1: CRITERIO -- e- IL CRITERIO CHE VERIFICA il difetto che cita. Il testo dice <<U2 È ATTIVA IN ENTRAMBI I BRACCI DI P-GONFIA E FABBRICA LUNGHEZZA (Luca, 2026-09-2>>": [
+   "REGISTRO_FISICA:U2"
+  ],
+  "F1: CRITERIO -- e- IL CRITERIO CHE VERIFICA il difetto che cita: un criterio nomina la legge su cui gira, e questa e- la relazione normale fra un controllo e la sua legge. Il testo dice <<la coerenza della massa e' `|<e^{i phi}>|`: il campo NON distingue `phi` >>": [
+   "COER-4PI"
+  ],
+  "F1: DIPENDENZA -- DICHIARA DA CHE COSA DIPENDE: una cura che non nomina la sua dipendenza non si puo- ordinare. Il testo dice <<si di appartenenza con memoria: AGGIUNGE stato, e dipende da MASSA-ID CANDIDATA REGISTRATA il 2026-10-07 e NON>>": [
+   "M-MASSA"
+  ],
+  "F1: DIPENDENZA -- DICHIARA SU CHE COSA GIRAVA l-A/B: e- la voce di cui parla. Il testo dice <<l'A/B di W5 non ha salvato i punti di CONTROLLO nel vuoto, e >>": [
+   "AB-CONTROLLI"
+  ],
+  "F1: DOCUMENTO -- e- UN DIFETTO DI DOCUMENTAZIONE che CITA LA REGOLA GIUSTA: senza nominarla non direbbe qual e- l-etichetta sbagliata. Il testo dice <<l'etichetta sbagliata `A13` dove la regola e' `A3-DISEGNO`: corretta nei documenti, non ancora.>>": [
+   "ETICHETTA-A13"
+  ],
+  "F1: OMONIMO -- il <<C4>> del titolo e- IL CONTROLLO della migrazione, non la voce `C4`. Il testo dice <<n collaudo che si RIFIUTA di girare esce con 2, e il controllo C4 lo conta come PASS csv/_controlli_riordino.py>>": [
+   "COLLAUDO-NON-ESEGUITO"
+  ],
+  "F1: OMONIMO -- il <<M1>> del titolo e- LA MISURA DEL RUN, non la voce `M1`. Il testo dice <<EPOCA 3 + RUN LUNGO — tag epoca-3, 3000 passi, M1/M4 leggere durante il run | GLOBALE §4 | 🔒... titolo_breve INTERO: EPOCA 3 >>": [
+   "E3"
+  ],
   "F1: il titolo dice <<INVARIANTI — 42 domini, due livelli | mandato C5 | 3/3 (Z100>> -- il `C5` che cita e' IL MANDATO DEGLI INVARIANTI, non la voce `C5` (la misura su tauluce). E' un OMONIMO, dichiarato in meta.omonimo di `C5`, non una mescolanza di dominio": [
    "C5-INVARIANTI"
   ],
@@ -5197,6 +5224,18 @@
   ],
   "doc/relazioni/2026-09-27.md:1306 -- ## ❗ `H2` — **confermata PER STRUTTURA, non come sospetto**": [
    "H2"
+  ],
+  "il <<C4>> citato da `COLLAUDO-NON-ESEGUITO`: ### **IL CONTROLLO `C4`** della migrazione -- <<un collaudo che si RIFIUTA di girare esce con 2, e il controllo C4 lo conta come PASS>>": [
+   "C4"
+  ],
+  "il <<M1>> citato da `E3`: ### **LA MISURA DEL RUN** -- <<M1/M4 leggere durante il run>>, cioe- una delle misure dell-epoca 3": [
+   "M1"
+  ],
+  "la VOCE `C4`: <<inerzia = T^2 -- chiude il buco dimensionale>>, una misura FISICA/era 1": [
+   "C4"
+  ],
+  "la VOCE `M1`: <<LA MATERIA E- UNO STATO, NON UNA SOSTANZA -- e non c-e- SCARICO>>, un difetto FISICA/era 2": [
+   "M1"
   ]
  },
  "meta:tipo_era1": {

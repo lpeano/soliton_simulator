@@ -74,7 +74,7 @@ python csv/indice.py aggiorna-lotto doc/indice/_lotti/<nome>.jsonl
 | voci | `843` |
 | ### **`DA_CLASSIFICARE` vere** *(non segnaposto)* | ### **`1`** |
 | ### **segnaposto `NON_DEFINITA`** | ### **`187`** |
-| ### **righe di storico** | ### **`1205`** |
+| ### **righe di storico** | ### **`1216`** |
 
 ```
 classe    DIFETTO=210  NON_DEFINITA=187  FRONTE=169  CRITERIO=94  MISURA=75  CURA=46  PRESIDIO=34  STANDARD=28
@@ -83,8 +83,8 @@ era       1=458  DA_CLASSIFICARE=188  ENTRAMBE=172  2=25
 stato     SOSPESA=287  DA_CLASSIFICARE=188  CHIUSA=187  APERTA=156  AGENDA=25
 ```
 
-### ✔ **FATTO IN QUESTO GIRO:** il punto `2`: ### **il presidio `F7`, ed e' un ERRORE** *(`FISICA`/era `1` con stato diverso da `SOSPESA`/`CHIUSA` ⇒ la validazione fallisce)*. ### ⛔ **E provandolo END-TO-END ho scoperto che `aggiorna-lotto` SCRIVEVA PRIMA della validazione intera:** la promessa *«se non passa non si scrive niente»* ### **era falsa**, e l'indice si e' corrotto davvero. Curato alla causa, e ### **la prova e' diventata permanente**
+### ✔ **FATTO IN QUESTO GIRO:** il punto `3`: ### **`F1` a ZERO** -- `M1` e `C4` sono ### **OMONIMI** *(in `E3` «`M1`» e' la misura del run, in `COLLAUDO-NON-ESEGUITO` «`C4`» e' il controllo)*, e le `9` eccezioni ### **citano la frase**, divise nei tre gruppi che il mandato nomina. ### **Su `49` segnali iniziali, ZERO gemelle vere**
 
-### ⛔ **RESTA:** il punto `3` *(gli `11` di `F1`: `M1` e `C4` omonimi, `8` eccezioni che citano la frase)*, `4` *(i `3` di `F4`)*, `5` *(l'elenco `DA_DECIDERE_LUCA.md`, ### **generato**)* e `6` *(il referto `doc/REFERTO_indice_v3_pulizia.md`)*
+### ⛔ **RESTA:** il punto `4` *(i `3` di `F4`, con la regola dei tre esiti)*, `5` *(l'elenco `DA_DECIDERE_LUCA.md`, ### **generato**)* e `6` *(il referto `doc/REFERTO_indice_v3_pulizia.md`)*
 
-**Ultimo lotto applicato:** `doc/indice/_lotti/v3_q1.jsonl *(il punto `2` non passa da un lotto: aggiunge un presidio)*`
+**Ultimo lotto applicato:** `doc/indice/_lotti/v3_q3.jsonl`

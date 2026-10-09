@@ -55,15 +55,15 @@ F1_MARCATORE = {
     "COLLAUDO-NON-ESEGUITO": ("OMONIMO", "il controllo C4 lo conta come PASS",
                               "il <<C4>> del titolo e- IL CONTROLLO della migrazione, non "
                               "la voce `C4`"),
-    "COER-4PI": ("CRITERIO", "COERENZA",
+    "COER-4PI": ("CRITERIO", "la coerenza della massa",
                  "e- IL CRITERIO CHE VERIFICA il difetto che cita: un criterio nomina la "
                  "legge su cui gira, e questa e- la relazione normale fra un controllo e la "
                  "sua legge"),
-    "REGISTRO_FISICA:E3": ("CRITERIO", "",
+    "REGISTRO_FISICA:E3": ("CRITERIO", "la finestra di D33",
                            "e- IL CRITERIO CHE VERIFICA il difetto che cita"),
-    "REGISTRO_FISICA:S6": ("CRITERIO", "",
+    "REGISTRO_FISICA:S6": ("CRITERIO", "se la cura ha curato D02",
                            "e- IL CRITERIO CHE VERIFICA il difetto che cita"),
-    "REGISTRO_FISICA:U2": ("CRITERIO", "",
+    "REGISTRO_FISICA:U2": ("CRITERIO", "ATTIVA IN ENTRAMBI I BRACCI",
                            "e- IL CRITERIO CHE VERIFICA il difetto che cita"),
     "ETICHETTA-A13": ("DOCUMENTO", "dove la regola e'",
                       "e- UN DIFETTO DI DOCUMENTAZIONE che CITA LA REGOLA GIUSTA: senza "
@@ -71,7 +71,7 @@ F1_MARCATORE = {
     "M-MASSA": ("DIPENDENZA", "dipende da",
                 "DICHIARA DA CHE COSA DIPENDE: una cura che non nomina la sua dipendenza "
                 "non si puo- ordinare"),
-    "AB-CONTROLLI": ("DIPENDENZA", "l'A/B di",
+    "AB-CONTROLLI": ("DIPENDENZA", "A/B di W5",
                      "DICHIARA SU CHE COSA GIRAVA l-A/B: e- la voce di cui parla"),
 }
 
