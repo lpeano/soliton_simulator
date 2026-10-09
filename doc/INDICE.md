@@ -7,14 +7,14 @@
 | `DA_CLASSIFICARE` | `DA_CLASSIFICARE` | 187 |
 | `DOCUMENTAZIONE` | `1` | 21 |
 | `DOCUMENTAZIONE` | `ENTRAMBE` | 6 |
-| `FISICA` | `1` | 345 |
+| `FISICA` | `1` | 347 |
 | `FISICA` | `2` | 25 |
 | `FISICA` | `DA_CLASSIFICARE` | 1 |
 | `FISICA` | `ENTRAMBE` | 16 |
 | `INFRASTRUTTURA` | `1` | 16 |
 | `INFRASTRUTTURA` | `ENTRAMBE` | 31 |
 | `METODO` | `1` | 76 |
-| `METODO` | `ENTRAMBE` | 119 |
+| `METODO` | `ENTRAMBE` | 120 |
 
 | id | classe | dominio | era | stato | blocca | titolo |
 |---|---|---|---|---|---|---|
@@ -58,6 +58,7 @@
 | `ARCHI-OLTRE-4PI` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | circa 109 archi sono oltre il tetto 4pi dal passo 2 e non rilassano, in tutti i  |
 | `ARCHI-PRIMI` | DIFETTO | INFRASTRUTTURA | ENTRAMBE | ### **APERTA** |  | la vista disegna i PRIMI 24000 archi per indice: il 100 % finisce in un quadrant |
 | `AUDIT-CURE` | FRONTE | METODO | ENTRAMBE | ### **APERTA** |  | per ogni legge aggiunta: compensava un difetto che ORA e' curato? Non il numero: |
+| `AUTO-MANUTENZIONE` | STANDARD | METODO | ENTRAMBE | ### **APERTA** |  | 5-bis. AUTO-MANUTENZIONE (tieni aggiornati i documenti vivi) |
 | `B1` | DIFETTO | FISICA | 1 | ### **CHIUSA** |  | Z47 — pos nella fisica: l'ultimo SFONDO / doc/RAMIFICAZIONI.md Z47, doc/ASSIOMI. |
 | `B10` | DIFETTO | INFRASTRUTTURA | ENTRAMBE | ### **CHIUSA** |  | --override-blob e la COPIA del driver / csv/testfork/scenavideoripresa.py (e68bb |
 | `B2` | DIFETTO | METODO | ENTRAMBE | ### **CHIUSA** |  | Z31 — i sigilli non ri-girabili / Z31, citata in 17 file / rifatta TRE volte, l' |
@@ -251,6 +252,8 @@
 | `F1` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 19 volte, MAI definito in un registro) |
 | `F2` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 17 volte, MAI definito in un registro) |
 | `F3` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 14 volte, MAI definito in un registro) |
+| `F4` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | `F4` / scritture di stato senza traccia / `D04` — già fatto per `d0`: si RIUSA i |
+| `F5` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | `F5` / fasi col periodo sbagliato / `D34`, dal censimento in corso / |
 | `FALSO-UNO` | DIFETTO | METODO | ENTRAMBE | ### **APERTA** |  | un verdetto NEGATIVO prodotto da una voce che non parla del merito: il gemello d |
 | `FALSO-ZERO` | DIFETTO | METODO | ENTRAMBE | ### **APERTA** |  | uno ZERO prodotto da un insieme o un campione che ho scelto io: cinque volte in  |
 | `FASCE-TAU` | CURA | FISICA | 2 | ### **AGENDA** |  | LA CRESCITA E' COORDINATA COL TEMPO PROPRIO? — l'espansione non dev'essere omoge |

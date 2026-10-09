@@ -200,8 +200,13 @@ def punto4():
             "fonte": "%s::%s" % (y["file"], tit[:60]),
             "stato_era_1": (vecchie.get(i) or {}).get("stato", "da-decidere"),
             "meta": {"tipo_era1": (vecchie.get(i) or {}).get("tipo", "altro"),
-                     "nota_guardiano": "punto 4: il <<quarto caso>> del giro scorso, DECISO "
-                                       "con la regola dei tre esiti -- " + perche}},
+                     # ### `nota_guardiano` e- `testo_breve`, regex `^.{1,300}$`: la
+                     # ### nota si TAGLIA, e ### **il perche- INTERO resta nel
+                     # ### `motivo`**, che non ha limite. ### **Un campo con un
+                     # ### limite dichiarato non si allarga per far stare una frase.**
+                     "nota_guardiano": ("punto 4: il <<quarto caso>> del giro scorso, "
+                                        "DECISO con la regola dei tre esiti -- "
+                                        + perche)[:300]}},
             "quando": DATA, "togli_da_etichette": True,
             "motivo": ("(4) RIPRISTINATA: nel giro scorso l-avevo messa nel <<quarto caso>>, "
                        "e il mandato dice di chiudere CON LA REGOLA DEI TRE ESITI. %s. La "

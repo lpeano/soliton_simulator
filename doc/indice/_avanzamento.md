@@ -71,20 +71,20 @@ python csv/indice.py aggiorna-lotto doc/indice/_lotti/<nome>.jsonl
 
 | | |
 |---|--:|
-| voci | `843` |
+| voci | `846` |
 | ### **`DA_CLASSIFICARE` vere** *(non segnaposto)* | ### **`1`** |
 | ### **segnaposto `NON_DEFINITA`** | ### **`187`** |
-| ### **righe di storico** | ### **`1216`** |
+| ### **righe di storico** | ### **`1220`** |
 
 ```
-classe    DIFETTO=210  NON_DEFINITA=187  FRONTE=169  CRITERIO=94  MISURA=75  CURA=46  PRESIDIO=34  STANDARD=28
-dominio   FISICA=387  METODO=195  DA_CLASSIFICARE=187  INFRASTRUTTURA=47  DOCUMENTAZIONE=27
-era       1=458  DA_CLASSIFICARE=188  ENTRAMBE=172  2=25
-stato     SOSPESA=287  DA_CLASSIFICARE=188  CHIUSA=187  APERTA=156  AGENDA=25
+classe    DIFETTO=212  NON_DEFINITA=187  FRONTE=169  CRITERIO=94  MISURA=75  CURA=46  PRESIDIO=34  STANDARD=29
+dominio   FISICA=389  METODO=196  DA_CLASSIFICARE=187  INFRASTRUTTURA=47  DOCUMENTAZIONE=27
+era       1=460  DA_CLASSIFICARE=188  ENTRAMBE=173  2=25
+stato     SOSPESA=289  DA_CLASSIFICARE=188  CHIUSA=187  APERTA=157  AGENDA=25
 ```
 
-### ✔ **FATTO IN QUESTO GIRO:** il punto `3`: ### **`F1` a ZERO** -- `M1` e `C4` sono ### **OMONIMI** *(in `E3` «`M1`» e' la misura del run, in `COLLAUDO-NON-ESEGUITO` «`C4`» e' il controllo)*, e le `9` eccezioni ### **citano la frase**, divise nei tre gruppi che il mandato nomina. ### **Su `49` segnali iniziali, ZERO gemelle vere**
+### ✔ **FATTO IN QUESTO GIRO:** il punto `4`: ### **`F4` a ZERO** -- i tre del «quarto caso» decisi ### **per EREDITA'** *(una famiglia di difetti prende il dominio del difetto da cui NASCE: `F4` da `D04`, `F5` da `D34`)*. ### **E i segnali finali sono esattamente quelli che il mandato si aspettava: `F1=0 F2=1 F3=0 F4=0 F6=0`**
 
-### ⛔ **RESTA:** il punto `4` *(i `3` di `F4`, con la regola dei tre esiti)*, `5` *(l'elenco `DA_DECIDERE_LUCA.md`, ### **generato**)* e `6` *(il referto `doc/REFERTO_indice_v3_pulizia.md`)*
+### ⛔ **RESTA:** il punto `5` *(l'elenco `doc/indice/DA_DECIDERE_LUCA.md`, ### **generato da `indice.py` e non scritto a mano**)* e `6` *(i controlli e il referto `doc/REFERTO_indice_v3_pulizia.md`)*
 
-**Ultimo lotto applicato:** `doc/indice/_lotti/v3_q3.jsonl`
+**Ultimo lotto applicato:** `doc/indice/_lotti/v3_q4.jsonl`
