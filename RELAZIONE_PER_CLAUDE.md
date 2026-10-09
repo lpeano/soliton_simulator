@@ -10901,3 +10901,15 @@ Il punto `4`. `1` voce, `1` riga di storico; `F6` da `3` a `2` segnali; `6`/`6` 
 ### ⭐ **E LA CONSEGUENZA E- PEGGIO DEL DIFETTO:** in ogni messaggio di commit scrivo *«il referto si rigenera, e deve dare lo STESSO FILE al suo commit»*. ### **Era una promessa FALSA** — e un controllo che non puo' essere fatto ### **e' peggio di un controllo che non c'e-**, perche' ci si conta sopra.
 
 ### ✔ **La cura: il nome e' lo spareggio**, e ### **un ordine totale non ha pari merito.** Curati ### **`7` generatori** *(non solo i tre di oggi: la stessa funzione sta in tutti)*, e la prova e' ### **due rigenerazioni di seguito** confrontate col disco.
+
+---
+
+## IL MANDATO DELLA CHIUSURA DEL RIORDINO: **due dei sei punti correggono presidi che ho scritto io** (2026-10-09)
+
+Il task history e' committato ### **prima del lavoro** *(par.8)*: `doc/TASK_HISTORY/2026-10-09_indice_v3_fine_riordino.md`, `97` righe. Nessuna corsa; il simulatore resta `b8c21049`.
+
+### ⛔ **E LA TERZA VOLTA CHE UN PRESIDIO CHE HO ESTESO «ALLA LETTERA DEL MANDATO» HA PRODOTTO SEGNALI CHE POI HO ELENCATO COME DIFETTI DELL'INDICE.** `F1` sulle coppie `D`/`Z` *(le `9` disallineate che il referto chiamava *«un ritrovato»*)* e `F8` col marcatore `.py` *(`17` dei `20` segnali)*. ### ⭐ **Il difetto non era nelle voci: era nel presidio** — e ### **io l'avevo scritto, misurato, e creduto.**
+
+### ⭐ **E LA RAGIONE DEL PUNTO `3` E- UNA DISTINZIONE CHE NON AVEVO:** *«la voce `D` e' il DIFETTO, la `Z` e' il REPERTO che l'ha trovato: possono avere stati diversi a ragione»*. ### ⛔ **Io leggevo `D` e `Z` come «la stessa cosa scritta due volte».** Sono ### **un difetto e la misura che lo ha scoperto** — e ### **una misura resta un'avvertenza anche dopo che il difetto e' curato.** Il referto diceva *«sono le RIGHE a disaccordare»*: ### **le righe dicevano la verita-, e il presidio era sbagliato.**
+
+### ✔ **E LA CARTELLA DELL'ERA `2` HA UN NOME:** `primo_ordine/` *(decisione di Luca)*. ### ⚠ **Non la creo:** il mandato da- ### **il nome**, non l'ordine di creare la cartella — e creare la cartella del codice dell'era `2` ### **e' un atto di fisica**, non di indice. ### ⭐ **Il presidio diventa vero comunque, perche' guarda I PERCORSI STAGED, non il disco:** impedisce ### **dal primo `.py` che qualcuno metta la-.**
