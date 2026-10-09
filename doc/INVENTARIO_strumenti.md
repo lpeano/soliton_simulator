@@ -2275,3 +2275,15 @@ etichette rimosse, con ### **`0` persi, `0` doppi, `0` conflitti**.
 | **cosa misura** | i segnali **voce per voce** *(dalle stesse funzioni che gira il validatore)*, e fa girare **lui** il collaudo riportandone le righe. Porta **l'atteso fissato nel task history PRIMA di misurare**, accanto al misurato |
 | **l'uscita** | `doc/REFERTO_indice_v3_presidi.md` |
 | ### ⚠ **la trappola, e è LA SECONDA VOLTA** | contare gli esiti cercando `PASSA` prende anche la riga di riepilogo *(«TUTTI **PASSA**TI»)*: `16` su `16` invece di `15` su `15`. **La prima volta fu il referto `v3`**, che dava `7` controlli su `7` invece di `6` su `6`. ### **Si conta sulla FORMA dell'esito**, non su una parola che compare anche altrove |
+
+---
+
+### `csv/_segnali_chiusura.py` — **LA CHIUSURA DEI SEGNALI DEI PRESIDI** *(2026-10-09)*
+
+| | |
+|---|---|
+| **file** | `csv/_segnali_chiusura.py` |
+| **BLOB** *(sha1 dei byte grezzi)* | `0005d30a` |
+| **COMANDO** | `python csv/_segnali_chiusura.py 1` · `2` · `3` · `4`, poi `python csv/indice.py aggiorna-lotto doc/indice/_lotti/v3_p<n>.jsonl` |
+| **cosa misura** | il punto `1` **elenca i segnali di `F1` che restano** dopo la restrizione; il punto `2` **seleziona i candidati a ESITO MISURATO** fra le voci `CRITERIO`/`FISICA` *(un numero come risultato, e **nessun verbo prescrittivo**)* e ne scrive **la frase**, perché la decisione la prendo **leggendo** |
+| **l'uscita** | `doc/indice/_lotti/v3_p1.jsonl` · `doc/indice/_p2_esiti.json` |

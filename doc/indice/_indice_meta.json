@@ -4304,6 +4304,14 @@
    "M2"
   ]
  },
+ "meta:eccezione_presidio": {
+  "F1: il titolo dice <<INVARIANTI — 42 domini, due livelli | mandato C5 | 3/3 (Z100>> -- il `C5` che cita e' IL MANDATO DEGLI INVARIANTI, non la voce `C5` (la misura su tauluce). E' un OMONIMO, dichiarato in meta.omonimo di `C5`, non una mescolanza di dominio": [
+   "C5-INVARIANTI"
+  ],
+  "F1: il titolo dice <<Z100 CURATA E SIGILLATA ⏳[EPOCA 3 · CURA] | INVARIANTI (C5):>> -- il `C5` che cita e' IL MANDATO DEGLI INVARIANTI, non la voce `C5` (la misura su tauluce). E' un OMONIMO, dichiarato in meta.omonimo di `C5`, non una mescolanza di dominio": [
+   "Z100"
+  ]
+ },
  "meta:famiglia_era1": {
   "?": [
    "A1",
@@ -4975,6 +4983,12 @@
   ],
   "doc/MAPPA_accoppiamenti_spin.md:71 -- `calcio_omega` in `semina()`: punto zero ALLA NASCITA, non per passo": [
    "D6"
+  ],
+  "doc/RAMIFICAZIONI.md -- la VOCE `C5`, una MISURA: <<tauluce = d/cs e' PIATTO => la sostituzione rompe la...>>": [
+   "C5"
+  ],
+  "doc/STATO_RUN.md e doc/RAMIFICAZIONI.md -- il <<mandato C5>>, cioe' GLI INVARIANTI: <<INVARIANTI (C5): il programma si ferma quando una grandezza esce...>>": [
+   "C5"
   ]
  },
  "meta:tipo_era1": {

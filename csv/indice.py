@@ -866,6 +866,14 @@ def _f1_gemelle(voci):
             w = ids.get(tok)
             if w is None or w["id"] == v["id"]:
                 continue
+            # ### LA RESTRIZIONE DEL 2026-10-09, E IL DIFETTO ERA MIO: CITARE UN ASSIOMA
+            # ### NON E- ESSERE GEMELLE. `D24` e- un difetto dell-era 1 che VIOLA `A2`, e
+            # ### `A2` vale per ### **ENTRAMBE** le ere: <<differiscono>> e- GIUSTO che sia
+            # ### vero, e non e- una mescolanza. Lo stesso per i presidi (`H-*`) e per i
+            # ### SEGNAPOSTO, che ### **non hanno ancora un dominio ne- un-era.**
+            # ### ### **42 dei 49 segnali erano questo**, e io ne avevo dichiarati 12.
+            if w["classe"] in ("STANDARD", "PRESIDIO", "NON_DEFINITA"):
+                continue
             if w["dominio"] != v["dominio"] or str(w["era"]) != str(v["era"]):
                 fuori.append((v["id"], "il titolo cita `%s`, che e- `%s`/era `%s`, mentre "
                                        "questa e- `%s`/era `%s`"

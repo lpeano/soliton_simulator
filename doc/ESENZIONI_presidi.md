@@ -50,6 +50,7 @@ commit**: cosi' non se ne accumulano di invisibili.)*
 | `csv/_riordino_fatti.py|H-P5` | non importa il simulatore e non lo fa girare. Sposta prosa fra due documenti. |
 | `csv/_riordino_sposta.py|H-P5` | non importa il simulatore e non lo fa girare. Sposta prosa fra documenti. |
 | `csv/_riordino_storia.py|H-P5` | non importa il simulatore e non lo fa girare. Archivia prosa da un tag di git. |
+| `csv/_segnali_chiusura.py|H-P5` | non importa il simulatore e non lo fa girare. Costruisce lotti per l'indice. |
 | `csv/_sospendi_era1.py|H-P5` | non importa il simulatore e non lo fa girare. Legge e riscrive un TSV. |
 | `csv/_sposta_standard10.py|H-P5` | non importa il simulatore e non lo fa girare. Sposta prosa fra due documenti. |
 | `csv/_titoli_brevi.py|H-P5` | non importa il simulatore e non lo fa girare. Accorcia titoli in un TSV. |
@@ -112,5 +113,5 @@ commit**: cosi' non se ne accumulano di invisibili.)*
 | `csv/_test_fork/_z43_tempo_proprio.py|H-P3` | la scena passa TUTTA dal CLI (`nmasse` e `sep` da `argv`), e la |
 
 ```
-esenzioni dichiarate   105
+esenzioni dichiarate   106
 ```

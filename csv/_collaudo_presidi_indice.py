@@ -99,6 +99,18 @@ def main():
           "il titolo di B2 dice <<Z31 -- i sigilli non ri-girabili | Z31, ...>>")
     esito("F1  NON deve scattare: con Z31 corretta (METODO/ENTRAMBE)",
           not scatta(IX._f1_gemelle(voci), "B2"))
+    # ### LA RESTRIZIONE DEL 2026-10-09 si prova COSI-, e non basta dire che il numero e-
+    # ### calato: `D24` dice <<`A2` e- VIOLATO da Lam = mean(I)>>, e ### **`A2` e- uno
+    # ### STANDARD che vale per ENTRAMBE le ere** -- e- GIUSTO che differisca.
+    # ### ⛔ **E il braccio che DEVE scattare prova che e- LA CLASSE a zittirlo**, non
+    # ### qualcos-altro: con `A2` finto `DIFETTO`, `D24` torna a segnalare.
+    esito("F1  NON deve scattare: D24 cita A2, che e- uno STANDARD (entrambe le ere)",
+          not scatta(IX._f1_gemelle(voci), "D24"),
+          "il titolo di D24 dice <<A2 e- VIOLATO da Lam = mean(I)>>")
+    a2_finto = json.loads(json.dumps([v for v in voci if v["id"] == "A2"][0]))
+    a2_finto["classe"] = "DIFETTO"
+    esito("F1  DEVE scattare: con A2 finto DIFETTO -- e- LA CLASSE che lo zittisce",
+          scatta(IX._f1_gemelle(con(voci, [a2_finto])), "D24"))
 
     # ---------------------------------------------------------------- F2
     d35_prima = [v for v in v_prima if v["id"] == "D35"]
