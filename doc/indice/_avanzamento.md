@@ -83,10 +83,8 @@ era       1=538  DA_CLASSIFICARE=188  ENTRAMBE=96  2=24
 stato     SOSPESA=369  DA_CLASSIFICARE=188  CHIUSA=182  APERTA=82  AGENDA=24  SUPERATA=1
 ```
 
-### ✔ **FATTO IN QUESTO GIRO:** la ### **TAPPA `3`**: il generatore. Collaudo ### **`9`/`9`**, e la derivata generata contro la differenza finita: ### **errore relativo `5.515e-11`** *(la lettura fissata era `< 1e-7`)*. Due termini di PROVA in tabella → ### **due moduli e due schede GENERATI.**
+### ✔ **FATTO IN QUESTO GIRO:** la ### **TAPPA `4a`**: `stato.py` ### **GENERATO dalla tabella** *(impronta `ff5c058ce3e855b7`)*, la ### **via di scrittura** dei registri dell'era `2` *(`python csv/indice.py era2-lotto`)* con collaudo ### **`6`/`6`**, e le ### **`2` leggi + `1` variabile** scritte in `leggi.jsonl` e `variabili.jsonl` con `era: "2"`.
 
-### ⛔ **RESTA:** le tappe `4`…`6` — gli `8` presidi *(piu' la CI)*, il collaudo della catena, il referto.
+### ⛔ **RESTA:** la tappa `4b` *(gli `8` presidi e la CI)*, la `5` *(il collaudo della catena e i sei casi che DEVONO fallire)*, la `6` *(il referto)*.
 
-### 📌 **E IN CODA, CON UN ORDINE:** voce ② ### **le decisioni di Luca sulle `43` domande**, poi voce ③ ### **il piano d'azione dell'era `2` e l'albero delle scelte.** ### **Luca ha dichiarato l'ordine.**
-
-**Ultimo lotto applicato:** `doc/indice/_lotti/v3_note2.jsonl` — ### **la tappa `3` NON scrive sull'indice**: le voci delle due leggi arrivano alla tappa `4`, con i presidi che le verificano.
+**Ultimo lotto applicato:** `doc/indice/_lotti/era2_registri.jsonl` *(`3` righe, ### **nei registri dell'era `2`**: `voci.jsonl` non si tocca)*

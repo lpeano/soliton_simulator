@@ -39,8 +39,10 @@ import sys
 _QUI = os.path.dirname(os.path.abspath(__file__))
 RADICE = os.path.dirname(_QUI)
 sys.path.insert(0, os.path.join(_QUI, "leggi"))
+sys.path.insert(0, _QUI)
 sys.path.insert(0, os.path.join(RADICE, "csv"))
 import schema as SCH                                         # noqa: E402
+import _genera_stato as GS                                   # noqa: E402
 
 NL = chr(10)
 Q3 = chr(34) * 3
@@ -136,7 +138,73 @@ def controlla(legge, variabili):
         fuori.append("`%s`: i simboli %s sono FUORI DALL-AMBITO (ammessi: %s). "
                      "### Un termine di nodo NON VEDE I VICINI, e i simboli dei vicini "
                      "NON ESISTONO nel suo ambiente" % (idv, extra, sim))
+    # ### ⛔ **E L-ESPRESSIONE DEVE ESSERE REALE, verificato SIMBOLICAMENTE.**
+    # ### Senza questo il modulo faceva `np.real(...)` e ### **scartava in silenzio**
+    # ### la parte immaginaria: ### **un `H` non hermitiano avrebbe girato senza dire
+    # ### niente** *(`A8`)*.
+    if not extra:
+        reale, d = e_reale(e, legge, variabili)
+        if not reale:
+            fuori.append("`%s`: l-espressione NON E- REALE. `expr - conj(expr)` = `%s`, "
+                         "e non si riduce a zero. ### Un `H` non hermitiano non conserva "
+                         "la norma, e un `np.real()` lo scarterebbe IN SILENZIO (`A8`)"
+                         % (idv, str(d)[:120]))
     return fuori, e
+
+
+def conjuga(e, coppie):
+    """### L-espressione CONIUGATA, scambiando ogni simbolo con il suo coniugato.
+
+    ### ⛔ **`sympy.conjugate()` NON SERVE QUI:** i coniugati sono ### **simboli
+    INDIPENDENTI** *(Wirtinger)*, quindi `conjugate(psi_0)` non e- `psi_0c` -- e-
+    ### **un-espressione che sympy non sa ridurre.** ### ➜ **Si SCAMBIA**, con la mappa
+    che il generatore conosce.
+    """
+    import sympy
+    m = {}
+    for a_, b_ in coppie:
+        m[sympy.Symbol(a_)] = sympy.Symbol(b_)
+        m[sympy.Symbol(b_)] = sympy.Symbol(a_)
+    # ### ⛔ **E ANCHE L-UNITA- IMMAGINARIA SI CONIUGA, ed era un BUCO VERO del mio
+    # ### ### controllo:** scambiare i soli simboli lasciava `I*(psi^dag psi)`
+    # ### ### **invariato**, quindi `expr - conj(expr)` faceva ### **zero** e un termine
+    # ### ### **IMMAGINARIO PURO passava per reale.**
+    # ### ⭐ **L-ha trovato un braccio di collaudo che ho scritto per un ALTRO motivo**
+    # ### *(provare che <<col c.c.>> non basta)*: ### **il braccio cercava una cosa e ne
+    # ### ha trovata un-altra.**
+    return e.xreplace(m).xreplace({__import__("sympy").I: -__import__("sympy").I})
+
+
+def coppie_di(legge, variabili):
+    """### Le coppie `(simbolo, suo coniugato)` dell-ambiente di questa legge."""
+    fuori = []
+    lati = ("i", "j") if legge["tipo"] == "termine_arco" else ("",)
+    for v in legge["ambito"]:
+        if variabili[v] != "complesso_c2_nodo":
+            continue
+        for lato in lati:
+            s = v + (("_" + lato) if lato else "")
+            fuori += [(s + "_0", s + "_0c"), (s + "_1", s + "_1c")]
+    return fuori
+
+
+def e_reale(e, legge, variabili):
+    """### `(True/False, la differenza)`: l-espressione e- ### **REALE?**
+
+    ### ⛔ **E QUESTO E- UN DIFETTO CHE IL GUARDIANO HA TROVATO NEL MIO GENERATORE:** il
+    modulo faceva `np.real(np.sum(_e))`, e ### **scartava in SILENZIO la parte
+    immaginaria.** ### **`A8`: un ramo silenzioso non e- un ramo** -- e un `H` non
+    hermitiano ### **avrebbe girato senza dire niente**, dando una dinamica che
+    ### **non conserva la norma** e sembrando funzionare.
+
+    ### ✔ **IL CONTROLLO VA SULLA TABELLA, non nel modulo:** si verifica
+    ### **SIMBOLICAMENTE** che `expr - conj(expr) == 0`, e ### **si RIFIUTA la legge** se
+    non lo e-. ### **Nel modulo resta un `assert` sulla tolleranza**, che e- la rete
+    ### **sotto** la verifica, non ### **al posto** di essa.
+    """
+    import sympy
+    d = sympy.simplify(sympy.expand(e - conjuga(e, coppie_di(legge, variabili))))
+    return (d == 0, d)
 
 
 def derivata(e, coniugati):
@@ -203,6 +271,12 @@ def modulo(legge, variabili, e, grad, imp):
          "TIPO = %r" % legge["tipo"],
          "AMBITO = %r" % (tuple(legge["ambito"]),),
          "PROVA = %r" % bool(legge["prova"]),
+         "# ### LA TOLLERANZA su |Im(H)|: DICHIARATA, non scelta nel momento.",
+         "# ### 1e-10 relativo: l-espressione e- VERIFICATA REALE SIMBOLICAMENTE, quindi",
+         "# ### qui resta solo l-ERRORE DI VIRGOLA MOBILE -- e 1e-10 e- mille volte",
+         "# ### l-epsilon di float64 accumulato su una somma di qualche migliaio di",
+         "# ### termini.",
+         "TOLL_IM = 1e-10",
          "PARAMETRI = %r" % {k: d["valore"]
                              for k, d in (legge.get("parametri") or {}).items()},
          "",
@@ -212,7 +286,18 @@ def modulo(legge, variabili, e, grad, imp):
           '    """### Il contributo di questa legge a `H`. ### **Reale.**"""']
     L += _locali(legge, variabili)
     L += ["    _e = %s" % _npy(e),
-          "    return float(np.real(np.sum(_e)))",
+          "    _s = np.sum(_e)",
+          "    # ### " + chr(0x26D4) + " NON `np.real`: un troncamento SILENZIOSO non e-",
+          "    # ### un ramo (`A8`). L-espressione e- VERIFICATA REALE SIMBOLICAMENTE dal",
+          "    # ### generatore; questo `assert` e- la rete SOTTO quella verifica, non AL",
+          "    # ### POSTO di essa -- e scatta se l-aritmetica in virgola mobile va oltre",
+          "    # ### la tolleranza dichiarata.",
+          "    _im = abs(float(np.imag(_s)))",
+          "    assert _im <= TOLL_IM * max(abs(float(np.real(_s))), 1.0), (",
+          "        '%s: |Im(H)| = ' % LEGGE + repr(_im)",
+          "        + ' oltre la tolleranza ' + repr(TOLL_IM)",
+          "        + ': l-espressione NON e- reale su questi dati')",
+          "    return float(np.real(_s))",
           "",
           ""]
     # ------------------------------------------------------------------ il gradiente
@@ -307,6 +392,14 @@ def genera(verboso=True):
     assert not err, ("### LA TABELLA NON PASSA LO SCHEMA, e NON SI GENERA NIENTE:" + NL
                      + NL.join(err[:12]))
     os.makedirs(SCHEDE, exist_ok=True)
+    # ### `stato.py` SI GENERA, con l-impronta del blocco `variabili`: la tabella e-
+    # ### ### **l-unica fonte**, e una variabile dichiarata in due posti DIVERGEREBBE.
+    imp_var = impronta({'variabili': varia})
+    io.open(os.path.join(_QUI, 'stato.py'), 'w', encoding='utf-8',
+            newline=NL).write(GS.stato_py(varia, imp_var))
+    if verboso:
+        print('   %-18s primo_ordine/stato.py   impronta %s, %d variabili'
+              % ('(lo stato)', imp_var, len(varia)))
     fatti = []
     for lg in leggi:
         if lg["tipo"] not in ("termine_nodo", "termine_arco"):
@@ -372,9 +465,15 @@ def collaudo():
     esito("### DEVE rifiutare: un `termine_nodo` che nomina `psi_i`/`psi_j` (il VICINO)",
           any("NON VEDE I VICINI" in x for x in g),
           "i simboli dei vicini NON ESISTONO nell-ambiente di un termine di nodo")
-    esito("NON deve rifiutare: lo STESSO con `tipo: termine_arco`",
+    # ### ⚠ **E QUESTO BRACCIO L-HO CORRETTO, perche- la mia espressione era SBAGLIATA:**
+    # ### usavo `psi_i_0c*psi_j_0`, che e- ### **NON HERMITIANA** -- e fino a che il
+    # ### controllo di realta- non c-era ### **passava.** ### **Il braccio provava
+    # ### l-ambito con un-espressione che un`H` non puo- avere.**
+    esito("NON deve rifiutare: un `termine_arco` che legge i due capi, CON il `c.c.`",
           controlla(lg(tipo="termine_arco",
-                       espressione="psi_i_0c*psi_j_0"), VOC)[0] == [])
+                       espressione="psi_i_0c*psi_j_0 + psi_j_0c*psi_i_0"),
+                    VOC)[0] == [],
+          "un termine d-arco PUO- leggere i due capi: e- il suo mestiere")
     # ### ⛔ **`pos` NELL-ESPRESSIONE.**
     g, _e = controlla(lg(espressione="psi_0c*psi_0 + pos_x"), VOC)
     esito("### DEVE rifiutare: un-espressione che nomina `pos_x` (`A17`)",
@@ -396,6 +495,36 @@ def collaudo():
                                           + sympy.Symbol("psi_1c") * sympy.Symbol("psi_1"))
     esito("e la derivata del QUADRATO e- `2*psi_0*(psi_0c*psi_0 + psi_1c*psi_1)`",
           sympy.simplify(d2["psi_0c"] - atteso) == 0)
+    # ### ⛔ **LA REALTA- DELL-ESPRESSIONE, e il difetto lo ha trovato il guardiano:** il
+    # ### modulo faceva `np.real(np.sum(_e))` e ### **scartava in SILENZIO la parte
+    # ### immaginaria** *(`A8`)*. ### **Il controllo va SULLA TABELLA, simbolicamente.**
+    VA = {"psi": "complesso_c2_nodo"}
+    _g, e_h = controlla(lg(tipo="termine_arco",
+                           espressione="-K*(psi_i_0c*psi_j_0 + psi_i_1c*psi_j_1 "
+                                       "+ psi_j_0c*psi_i_0 + psi_j_1c*psi_i_1)",
+                           parametri={"K": {"valore": 1.0, "origine": "prova"}}), VA)
+    esito("NON deve rifiutare: `PROVA-HOPPING` -- il bilineare CON il `c.c.` E- reale",
+          _g == [] and e_h is not None,
+          "`expr - conj(expr)` si riduce a zero")
+    _g2, _e2 = controlla(lg(espressione="(g/2)*(psi_0c*psi_0 + psi_1c*psi_1)**2",
+                            parametri={"g": {"valore": 0.5,
+                                             "origine": "prova"}}), VA)
+    esito("NON deve rifiutare: `PROVA-LOCALE` -- `(g/2)(psi^dag psi)^2` E- reale",
+          _g2 == [])
+    # ### ⛔ **IL CASO CHE IL GUARDIANO NOMINA: il bilineare SENZA il `c.c.`**
+    _g3, _e3 = controlla(lg(tipo="termine_arco", espressione="-K*psi_i_0c*psi_j_0",
+                            parametri={"K": {"valore": 1.0,
+                                             "origine": "prova"}}), VA)
+    esito("### DEVE rifiutare: `-K*psi_i_0c*psi_j_0` SENZA il `c.c.` (non hermitiano)",
+          any("NON E- REALE" in x for x in _g3),
+          "un `H` non hermitiano NON conserva la norma, e `np.real()` lo scarterebbe "
+          "IN SILENZIO")
+    # ### ⚠ **E un termine con un `i` davanti NON e- reale**, nemmeno col `c.c.`:
+    # ### ### **il braccio lo prova**, perche- <<col c.c.>> non basta da solo.
+    _g4, _e4 = controlla(lg(espressione="I*(psi_0c*psi_0 + psi_1c*psi_1)"), VA)
+    esito("### DEVE rifiutare: `I*(psi^dag psi)` -- immaginario PURO",
+          any("NON E- REALE" in x for x in _g4),
+          "<<col c.c.>> non basta: conta che `expr - conj(expr)` sia ZERO")
     # ### ⛔ **L-IMPRONTA non dipende dall-ORDINE delle chiavi.**
     a = dict(lg())
     b = {k: a[k] for k in reversed(list(a))}

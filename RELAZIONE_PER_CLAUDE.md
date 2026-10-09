@@ -11053,3 +11053,17 @@ Collaudo del generatore ### **`9`/`9`**; `dH/dpsi*` generata contro la differenz
 ### ✔ **E IL TERMINE DI NODO E- CIECO SUI VICINI IN DUE MODI, non uno:** ### **l'ambito** nello schema *(una variabile d'arco nell'ambito di un `termine_nodo` e' un errore)*, e ### **l'AMBIENTE del generatore** *(per un `termine_nodo` i simboli `psi_i`/`psi_j` ### **non esistono**, quindi nominarli e' «fuori dall'ambito»)*. ### ⭐ **Due presidi sulla stessa cosa, e il criterio `9-ter` lo ammette solo se guardano COSE DIVERSE:** il primo guarda ### **la dichiarazione**, il secondo ### **l'espressione.**
 
 ### ⚠ **E L'IMPRONTA NON DIPENDE DALL'ORDINE DELLE CHIAVI**, e il braccio lo prova: se dipendesse, ### **riordinare lo yaml rifiuterebbe ogni file** — e il presidio accuserebbe ### **una modifica che non c'e- stata.**
+
+---
+
+## TAPPA `4a`: **`stato.py` si GENERA, e i registri dell'era `2` hanno una sola porta** (2026-10-09)
+
+`stato.py` generato *(impronta `ff5c058ce3e855b7`)*, `2` leggi e `1` variabile con `era: "2"`, collaudo dei registri ### **`6`/`6`.** Nessuna fisica nuova; il simulatore resta `b8c21049`.
+
+### ⭐ **`stato.py` SI GENERA, e la decisione la dichiaro:** il mandato lo elenca ### **fuori da `termini/`**, e la tentazione era scrivere le dichiarazioni a mano. ### ⛔ **Ma la tabella e- L'UNICA FONTE**, e una variabile dichiarata ### **in due posti** — la tabella e il modulo — ### **divergerebbe.** ### ⚠ **Se Luca preferisce `stato.py` a mano, `P-E3` diventa il presidio che tiene insieme DUE dichiarazioni invece di una generata: piu' debole, e va saputo.**
+
+### ✔ **E LO STORICO DELL'ERA `2` STA IN UN FILE SUO** *(`storico_era2.jsonl`)*: `storico.jsonl` porta ### **righe di VOCE**, e `F5` e `F11` le leggono cosi'. ### ⛔ **Mescolare due forme di riga in un file solo e' il difetto che questo repo chiama «due cose in un posto»** — e `F11`, che ricostruisce l'indice dal suo storico, ### **leggerebbe una riga che non e' una voce.**
+
+### ⚠ **E LE `21` RIGHE VECCHIE DI `leggi.jsonl` NON SI TOCCANO:** sono ### **ancore di traduzione dell'era `1`** e ### **non hanno il campo `era`.** La validazione dell'era `2` guarda ### **solo le righe che dichiarano `era: "2"`**, e il collaudo ha ### **il braccio che lo prova.**
+
+### ⚠ **E UNA TRAPPOLA EVITATA, la quarta in tre giorni:** il primo tentativo di generare `stato.py` era ### **una patch che costruiva Python che costruiva Python** — ### **tre livelli di virgolette annidate**, e una stringa spezzata a meta' che non si chiudeva. ### ✔ **L'ho spostato in `primo_ordine/_genera_stato.py`**, dove il codice generato si compone ### **da righe semplici** e il file ### **si scrive una volta e si legge.**

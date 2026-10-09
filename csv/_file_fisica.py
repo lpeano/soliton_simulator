@@ -50,6 +50,7 @@ FILE_FISICA = (
     'primo_ordine/vuoto.py',
     'primo_ordine/driver.py',
     'primo_ordine/_genera.py',
+    'primo_ordine/_genera_stato.py',
     'primo_ordine/termini/__init__.py',
     # ### I DUE GENERATI: entrano nella LISTA ### **nel commit in cui nascono**, e il
     # ### mandato lo pretende. ### ⚠ **Sono `prova: true`**: la LISTA sorveglia

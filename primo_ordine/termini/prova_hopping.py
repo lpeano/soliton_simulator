@@ -14,6 +14,12 @@ IMPRONTA = '19547a22540dac81'
 TIPO = 'termine_arco'
 AMBITO = ('psi',)
 PROVA = True
+# ### LA TOLLERANZA su |Im(H)|: DICHIARATA, non scelta nel momento.
+# ### 1e-10 relativo: l-espressione e- VERIFICATA REALE SIMBOLICAMENTE, quindi
+# ### qui resta solo l-ERRORE DI VIRGOLA MOBILE -- e 1e-10 e- mille volte
+# ### l-epsilon di float64 accumulato su una somma di qualche migliaio di
+# ### termini.
+TOLL_IM = 1e-10
 PARAMETRI = {'K': 1.0}
 
 
@@ -29,7 +35,18 @@ def energia(st, ii=None, jj=None):
     psi_j_1c = np.conj(psi_j_1)
     K = PARAMETRI['K']
     _e = -K*(psi_i_0*psi_j_0c + psi_i_0c*psi_j_0 + psi_i_1*psi_j_1c + psi_i_1c*psi_j_1)
-    return float(np.real(np.sum(_e)))
+    _s = np.sum(_e)
+    # ### ⛔ NON `np.real`: un troncamento SILENZIOSO non e-
+    # ### un ramo (`A8`). L-espressione e- VERIFICATA REALE SIMBOLICAMENTE dal
+    # ### generatore; questo `assert` e- la rete SOTTO quella verifica, non AL
+    # ### POSTO di essa -- e scatta se l-aritmetica in virgola mobile va oltre
+    # ### la tolleranza dichiarata.
+    _im = abs(float(np.imag(_s)))
+    assert _im <= TOLL_IM * max(abs(float(np.real(_s))), 1.0), (
+        '%s: |Im(H)| = ' % LEGGE + repr(_im)
+        + ' oltre la tolleranza ' + repr(TOLL_IM)
+        + ': l-espressione NON e- reale su questi dati')
+    return float(np.real(_s))
 
 
 def gradiente(st, fuori, ii=None, jj=None):

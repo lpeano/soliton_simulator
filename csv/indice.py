@@ -1921,6 +1921,16 @@ def main(argv):
     if cmd == "etichette-lotto":
         etichette_lotto(pos[0])
         return 0
+    if cmd == "era2-lotto":
+        # ### ⛔ **LA VIA DI SCRITTURA DEI REGISTRI DELL-ERA `2`**, e sta QUI perche- il
+        # ### mandato dice *<<via `indice.py`>>*: ### **una sola porta**, come per le voci.
+        # ### ⚠ **Il codice vive in `csv/_indice_era2.py`** -- `indice.py` e- gia-
+        # ### ### **lungo**, e un file che cresce senza fine ### **nessuno lo rilegge.**
+        import _indice_era2 as _E2
+        return _E2.lotto(pos[0])
+    if cmd == "era2-valida":
+        import _indice_era2 as _E2
+        return 1 if _E2.valida() else 0
     if cmd == "storico-commit":
         return storico_commit()
     if cmd == "segnali":
