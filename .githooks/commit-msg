@@ -21,4 +21,7 @@ python csv/_hook_non_tracciati.py --controlla "$1" || exit 1
 # E' il ROVESCIO di H-INDICE, che controlla che gli ID citati ESISTANO. Via d'uscita a
 # INIZIO RIGA, la stessa:  [SENZA-INDICE: <motivo>]
 python csv/_hook_id_obbligatorio.py --controlla "$1" || exit 1
+# `P-E6` (era 2): leggi.yaml cambia => la riga del registro NELLO STESSO COMMIT, e l-ID
+# della legge NEL MESSAGGIO. ### SENZA VIA D-USCITA.
+python csv/_presidi_era2.py --commit-msg "$1" || exit 1
 exec python csv/_hook_relazione.py --controlla "$1"

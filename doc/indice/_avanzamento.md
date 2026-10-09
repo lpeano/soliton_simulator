@@ -83,8 +83,8 @@ era       1=538  DA_CLASSIFICARE=188  ENTRAMBE=96  2=24
 stato     SOSPESA=369  DA_CLASSIFICARE=188  CHIUSA=182  APERTA=82  AGENDA=24  SUPERATA=1
 ```
 
-### ✔ **FATTO IN QUESTO GIRO:** la ### **TAPPA `4a`**: `stato.py` ### **GENERATO dalla tabella** *(impronta `ff5c058ce3e855b7`)*, la ### **via di scrittura** dei registri dell'era `2` *(`python csv/indice.py era2-lotto`)* con collaudo ### **`6`/`6`**, e le ### **`2` leggi + `1` variabile** scritte in `leggi.jsonl` e `variabili.jsonl` con `era: "2"`.
+### ✔ **FATTO IN QUESTO GIRO:** la ### **TAPPA `4b`**: gli ### **otto presidi** dell'era `2` — `P-E1`…`P-E7` in `csv/_presidi_era2.py` *(collaudo ### **`13`/`13` nei due versi**)*, cablati nel `pre-commit` e nel `commit-msg`, e ### **`P-E8`: la CI su GitHub** *(`.github/workflows/era2.yml`)*. ### ⛔ **Senza via d'uscita**, e il mandato lo dice.
 
-### ⛔ **RESTA:** la tappa `4b` *(gli `8` presidi e la CI)*, la `5` *(il collaudo della catena e i sei casi che DEVONO fallire)*, la `6` *(il referto)*.
+### ⛔ **RESTA:** la tappa `5` *(il collaudo della catena, i sei casi che DEVONO fallire, ### **piu' le tre integrazioni**: il cono, l'integratore candidato a passi locali, e lo schedulatore a strati)* e la `6` *(il referto)*.
 
-**Ultimo lotto applicato:** `doc/indice/_lotti/era2_registri.jsonl` *(`3` righe, ### **nei registri dell'era `2`**: `voci.jsonl` non si tocca)*
+**Ultimo lotto applicato:** `doc/indice/_lotti/era2_registri.jsonl` — ### **la tappa `4b` NON scrive sull'indice.**

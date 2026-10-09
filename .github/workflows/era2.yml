@@ -1,0 +1,71 @@
+# =====================================================================================
+#  P-E8 -- LA CI: i presidi girano A OGNI PUSH, e FUORI DAL PC DI LUCA
+# -------------------------------------------------------------------------------------
+#  ### PERCHE' CONTA, e non e' una comodita': i hook del `pre-commit` vivono in
+#  ### `.githooks/`, e valgono SOLO SE qualcuno ha dato `git config core.hooksPath
+#  ### .githooks`. Per `A9` un presidio che dipende da un comando dato a mano
+#  ### E' UNA TENDA: chi clona il repo e non lo da' NON HA NESSUN PRESIDIO.
+#
+#  ### LA CI NON SI PUO' DIMENTICARE: gira sul server, a ogni push, e NON HA
+#  ### VIA D'USCITA -- come i presidi di primo_ordine/.
+#
+#  ### ⚠ E QUESTA E' LA PRIMA VOLTA CHE UN PRESIDIO DI QUESTO REPO GIRA FUORI DAL PC DI
+#  ### LUCA. Il referto dell'infrastruttura lo dichiara come il gradino di
+#  ### ROBUSTEZZA-FISICA di questo mandato.
+# =====================================================================================
+name: era2
+
+on:
+  push:
+    branches: ["**"]
+  pull_request:
+
+jobs:
+  presidi:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          # ### LA STORIA INTERA: `F5`, `F11` e il commit di chiusura leggono `git log`
+          # ### e `git show` -- con un clone superficiale TACEREBBERO, e un presidio che
+          # ### tace per un motivo tecnico E' PEGGIO DI UN PRESIDIO CHE NON C'E'.
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+
+      - name: le dipendenze
+        run: python -m pip install --upgrade pip && pip install -r requirements.txt
+
+      - name: il validatore dell-indice
+        run: python csv/indice.py valida
+
+      - name: i registri dell-era 2
+        run: python csv/indice.py era2-valida
+
+      - name: P-E1..P-E5 e P-E7, sul disco
+        run: python csv/_presidi_era2.py
+
+      - name: il collaudo dei presidi dell-era 2, nei due versi
+        run: python csv/_presidi_era2.py --collaudo
+
+      - name: lo schema della tabella
+        run: python primo_ordine/leggi/schema.py
+
+      - name: il collaudo del generatore
+        run: python primo_ordine/_genera.py --prova
+
+      - name: ### E IL GENERATO E- RIPRODUCIBILE -- si rigenera e NON cambia
+        # ### ⛔ E' il controllo che rende VERA la frase <<i file generati non si
+        # ### modificano a mano>>: se qualcuno tocca un file generato, la rigenerazione
+        # ### lo riscrive e `git diff` NON E' VUOTO.
+        run: |
+          python primo_ordine/_genera.py
+          git diff --exit-code -- primo_ordine doc/leggi_era2
+
+      - name: il collaudo dei presidi dell-indice
+        run: python csv/_collaudo_presidi_indice.py
+
+      - name: i controlli della migrazione
+        run: python csv/_controlli_indice_v2.py

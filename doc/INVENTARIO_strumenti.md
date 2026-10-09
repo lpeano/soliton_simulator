@@ -2641,3 +2641,17 @@ etichette rimosse, con ### **`0` persi, `0` doppi, `0` conflitti**.
 | ### ⭐ **e i nomi dei simboli SONO i nomi delle locali** | così l'espressione stampata da `sympy` ### **è già il codice**: ### **nessuna sostituzione testuale** fra la derivata e il file — e una sostituzione è ### **un posto dove la formula può cambiare senza che nessuno lo veda** |
 | ### ⛔ **e i simboli dei vicini NON ESISTONO** per un `termine_nodo` | è il ### **secondo** presidio contro *«un termine di nodo che vede i vicini»*: il primo è l'ambito nello schema |
 | **l'uscita** | `primo_ordine/termini/<id>.py` · `doc/leggi_era2/<id>.md` |
+
+---
+
+### `csv/_presidi_era2.py` — **`P-E1`…`P-E7`, SENZA VIA D'USCITA** *(2026-10-09)*
+
+| | |
+|---|---|
+| **file** | `csv/_presidi_era2.py` |
+| **BLOB** *(sha1 dei byte grezzi)* | `c5613748` |
+| **COMANDO** | `python csv/_presidi_era2.py` *(sul disco)* · `--collaudo` *(nei due versi, `13`/`13`)* · `--pre-commit` · `--commit-msg FILE` |
+| **cosa impedisce** | `P-E1` la **biiezione** *(tabella ↔ file ↔ registro ↔ scheda)* · `P-E2` **l'impronta** · `P-E3` le **variabili nei due versi** · `P-E4` le **importazioni** *(`A17`)* · `P-E5` gli **osservatori in sola lettura**, misurato **al byte** · `P-E6` la tabella che cambia senza il registro e senza l'ID nel messaggio · `P-E7` i **riferimenti** |
+| ### ⛔ **e `LEGGE` si legge via AST** | una regex la troverebbe ### **anche dentro un commento o una stringa**, e ### **un presidio che si lascia ingannare da un commento non è un presidio** |
+| ### ⛔ **NESSUNA via d'uscita** | e ### **la sua ASSENZA è il presidio**: la prima stesura definiva una regex `_FUGA` ### **senza leggerla mai**, come promemoria — ### **codice morto che INVITA una scappatoia che il mandato vieta** |
+| **`P-E8`** | `.github/workflows/era2.yml`: ### **la CI, a ogni push** |

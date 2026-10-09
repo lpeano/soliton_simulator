@@ -1,0 +1,17 @@
+# =====================================================================================
+#  LE DIPENDENZE, DICHIARATE -- e verificate sul PC di Luca
+# -------------------------------------------------------------------------------------
+#  ### Il mandato chiede: <<Dipendenze nuove (sympy, ...) dichiarate in un requirements
+#  ### e verificate sul PC di Luca>>. ### VERIFICATO: sono GIA' TUTTE INSTALLATE, e le
+#  ### versioni qui sotto sono QUELLE CHE GIRANO (non un minimo scelto a caso).
+#
+#  numpy 2.3.0   sympy 1.14.0   PyYAML 6.0.3    (python 3.13, Windows)
+#
+#  ### ⚠ E I CONTEGGI ASSOLUTI DI UN RUN DIPENDONO DALLA PIATTAFORMA (e' un fatto
+#  ### misurato in questo repo: Linux/numpy 2.5.3 contro Windows/numpy 2.3.0). La CI
+#  ### gira su Linux: i suoi numeri NON si confrontano al bit con quelli del PC di Luca,
+#  ### e i collaudi che GIRANO IN CI confrontano IDENTITA' PRIMA/DOPO, non valori assoluti.
+# =====================================================================================
+numpy>=2.3.0
+sympy>=1.14.0
+PyYAML>=6.0

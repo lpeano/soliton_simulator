@@ -11,3 +11,7 @@
 #  `python csv/_hook_presidi.py` LO DICE, invece di tacere (`A9`).
 # ============================================================================================
 python "$(git rev-parse --show-toplevel)/csv/_hook_presidi.py" --pre-commit || exit 1
+# `P-E1`..`P-E5` e `P-E7` (era 2): la biiezione tabella <-> file <-> registro <-> scheda,
+# le impronte, le variabili, le importazioni, e gli osservatori in sola lettura.
+# ### NESSUNA VIA D-USCITA per i file di primo_ordine/: il mandato lo dice.
+python "$(git rev-parse --show-toplevel)/csv/_presidi_era2.py" --pre-commit || exit 1

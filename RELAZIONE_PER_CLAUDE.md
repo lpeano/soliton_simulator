@@ -11067,3 +11067,17 @@ Collaudo del generatore ### **`9`/`9`**; `dH/dpsi*` generata contro la differenz
 ### ⚠ **E LE `21` RIGHE VECCHIE DI `leggi.jsonl` NON SI TOCCANO:** sono ### **ancore di traduzione dell'era `1`** e ### **non hanno il campo `era`.** La validazione dell'era `2` guarda ### **solo le righe che dichiarano `era: "2"`**, e il collaudo ha ### **il braccio che lo prova.**
 
 ### ⚠ **E UNA TRAPPOLA EVITATA, la quarta in tre giorni:** il primo tentativo di generare `stato.py` era ### **una patch che costruiva Python che costruiva Python** — ### **tre livelli di virgolette annidate**, e una stringa spezzata a meta' che non si chiudeva. ### ✔ **L'ho spostato in `primo_ordine/_genera_stato.py`**, dove il codice generato si compone ### **da righe semplici** e il file ### **si scrive una volta e si legge.**
+
+---
+
+## TAPPA `4b`: **gli otto presidi dell'era `2`, e la PRIMA CI** (2026-10-09)
+
+`P-E1`…`P-E7` in `csv/_presidi_era2.py`, collaudo ### **`13`/`13` nei due versi**, cablati in `pre-commit` e `commit-msg`; `P-E8` e' ### **`.github/workflows/era2.yml`.** Nessuna fisica nuova; il simulatore resta `b8c21049`.
+
+### ⭐ **E LA CI E- IL GRADINO VERO DI QUESTO MANDATO, non i sette presidi.** I hook del `pre-commit` vivono in `.githooks/` e valgono ### **SOLO SE qualcuno ha dato `git config core.hooksPath .githooks`** — e per `A9` ### **un presidio che dipende da un comando dato a mano E- UNA TENDA:** chi clona il repo e non lo da' ### **non ha nessun presidio.** ### ✔ **La CI non si puo- dimenticare**, e ### **e- la prima volta che un presidio di questo repo gira FUORI dal PC di Luca.**
+
+### ✔ **E LA CI HA UN PASSO CHE RENDE VERA UNA FRASE SCRITTA:** rigenera e poi fa `git diff --exit-code`. ### **Se qualcuno tocca un file generato, la rigenerazione lo riscrive e il diff NON e- vuoto** — cosi' *«i file generati non si modificano a mano»* ### **smette di essere una riga nell'intestazione.**
+
+### ⛔ **E UN BRACCIO DI COLLAUDO HA FALLITO PER UNA RAGIONE PERFETTA.** Avevo definito una regex di via d'uscita *(`_FUGA`)* ### **senza leggerla mai**, come promemoria che la via non c'e'; il braccio doveva provare che ### **nessuno la legge**, e cercava la stringa nel file — ### **trovandola NEL PROPRIO TESTO.** ### ⭐ **Un controllo che si cerca addosso trova sempre se stesso**, e la cura non era cambiare il controllo: ### **era togliere la cosa che non doveva esistere** — ### **codice morto che INVITA una scappatoia che il mandato vieta.** Adesso il braccio guarda ### **l'ALBERO** *(nessuna chiamata a `search` su un pattern `FUGA`/`SENZA`)*.
+
+### ⚠ **E `P-E5` OGGI E- VERO E VUOTO, e lo dico:** ### **zero osservatori**, quindi il braccio *«gli osservatori non scrivono»* ### **passa senza provare niente.** ### **Un `PASSA` su un insieme vuoto e- un FALSO-ZERO**, e la tappa `5` gli dara' ### **un osservatore da far girare.**
