@@ -11123,3 +11123,39 @@ Il mandato chiede, nella tappa `5`, ### **almeno un osservatore**, e la ragione 
 ### ⚠ **E `H-FISICA-FUORI-LISTA` HA LASCIATO PASSARE, per una ragione precisa:** giudica ### **i percorsi STAGED**, ma legge `FILE_FISICA` ### **dal DISCO.** ### ⛔ **Quindi una modifica NON COMMITTATA della lista basta ad autorizzare un commit** — ed e- la stessa classe del par.`7` *(«si confronta col BLOB a `HEAD`, mai con `git status`»)*, ### **applicata a un presidio invece che a un sorgente.**
 
 **Chiuso qui** *(la lista entra nel repo)*. ### ✅ **E il buco e- REGISTRATO, non curato:** la cura — ### **leggere `FILE_FISICA` dall-INDICE** *(`git show :csv/_file_fisica.py`)* ### **e non dal disco** — e- ### **un commit a se-**, e il referto della tappa `6` la nomina fra cio- che ### **resta aperto.**
+
+## TAPPA `5c` — ### **LO SCHEDULATORE A STRATI, I DUE CANDIDATI, E IL CONO** *(2026-10-09)*
+
+`primo_ordine/passo.py` e `primo_ordine/_collauda_passo.py`. ### **Collaudo: `33`/`33`.**
+
+### I TRE LIVELLI, e ### **quali permutazioni sono byte-identiche** *(misurato)*
+
+| | che cosa | byte-identico? | il perche- FISICO |
+|---|---|---|---|
+| `1` | i **termini di `H`**, permutati | ### ✅ **SI**, `H` e il gradiente | `H` con `math.fsum` *(somma ad arrotondamento esatto)*; il gradiente perche- `gradiente()` ### **impone l-ordine canonico per ID** |
+| `1-bis` | gli stessi, con la somma **GREZZA** | ### ⛔ **NO** | ### **ed e- il controllo che rende il braccio sopra una MISURA e non un FALSO-UNO:** l-ordine ### **porta carico davvero** |
+| `2` | gli **archi dentro UNO strato**, permutati | ### ✅ **SI** | sono ### **DISGIUNTI**: ogni nodo riceve ### **UN SOLO** contributo d-arco, quindi ### **non c-e- somma da riordinare** |
+| `3` | **gli STRATI, scambiati** | ### ⛔ **NO** | ### **non commutano**, e due operatori che non commutano danno ### **un risultato DIVERSO, non un arrotondamento diverso.** ### ⭐ **L-unica cura e- la SIMMETRIA**, che annulla l-errore di ordine pari |
+
+### IL CONO, ### **misurato per `STRATO` e per `PASSO`** *(catena di `9` nodi, `2` strati, perturbo UN nodo)*
+
+| | raggio | oltre e- | |
+|---|---|---|---|
+| **per STRATO** | ### **`1` arco** | ### ✅ **ESATTAMENTE ZERO** *(`7` nodi a `0.0`)* | e- cio- che uno strato SIGNIFICA |
+| **per PASSO, LOCALE** | ### **`3` archi** | ### ✅ **ESATTAMENTE ZERO** | e `3` e- ### **il numero di operazioni d-arco nella composizione**: coincide, ### **e non l-avevo previsto** *(credevo `2`, il numero di strati — la composizione simmetrica visita gli strati `2L-1` volte)* |
+| **per PASSO, GLOBALE** | ### **`5` archi su `8`** | ### ⚠ **zero, ma per UNDERFLOW** | vedi sotto |
+
+### ⛔ **E QUI LA MISURA MI HA CORRETTO, su un braccio che avevo scritto IO.** Avevo asserito *«il GLOBALE a distanza massima NON e- zero»*: ### **falso.** ### ⭐ **E la ragione vera e- PEGGIORE di quella che credevo:** il raggio del globale ### **DIPENDE DALLA TOLLERANZA DEL PUNTO FISSO** — ### **`3` archi a `1e-4`, `5` a `1e-8` e a `1e-14`.** ### ⛔ **Quindi il globale ha un orizzonte che ASSOMIGLIA a una causalita- e non lo e-, perche- e- fissato da una MANOPOLA DEL RISOLUTORE.** ### **Un cono infinito si vedrebbe; questo si nasconde.**
+
+### LA TAVOLA DEI DUE CANDIDATI — ### ⛔ **SENZA SCEGLIERE** *(la scelta e- di Luca, nodo `INT`)*
+
+| | cono | deriva NORMA | deriva ENERGIA | costo |
+|---|---|--:|--:|---|
+| **GLOBALE** *(punto medio implicito su tutto il grafo)* | `5` su `8` archi, ### ⚠ **NON dichiarato: artefatto della tolleranza** | `1.191e-15` | `3.939e-05` | `6`-`9` iterazioni di punto fisso |
+| **LOCALE** *(punto medio implicito per STRATO, alla Strang)* | `3` su `8` archi, ### ✅ **ESATTO e DICHIARATO** | `1.986e-15` | `3.979e-05` | `5` sotto-passi × le sue iterazioni |
+
+### ⚠ **E LA NORMA NON E- CONSERVATA AL BIT DA NESSUNO DEI DUE**, e lo dico invece di prometterlo: il punto medio conserva gli invarianti quadratici ### **in aritmetica esatta**, non in virgola mobile. `1.2e-15` e `2.0e-15` su `200` passi ### **sono MISURE**, non garanzie.
+
+### `A8b` e ### **i SEI casi che devono fallire**
+
+`senza_cache()` confronta ### **tutte le costanti di modulo** dei moduli di fisica prima e dopo tre passi: ### **`5` moduli, nessuno si ricorda niente** — e ### **il presidio scatta** se gliene si fa ricordare uno. ### ✅ **E i sei casi del mandato girano in UN SOLO POSTO** *(sezione `(F)`)*, ognuno verificato ### **per la chiave giusta**: un `termine_nodo` che legge un vicino · un-espressione con `pos` · un generato ritoccato a mano · una legge senza `voce` o senza `scheda` *(e in piu- ### **una `voce` che non e- nell-indice**)* · un osservatore che scrive · un termine che importa un osservatore. ### **Piu- il braccio che verifica che, tolti i finti, i presidi TACCIANO** — altrimenti scatterebbero per un residuo.

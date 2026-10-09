@@ -130,3 +130,17 @@ vera, che ### **non è decisa.**
 | numeri o leggi aggiunti, e di che tipo | ### **due parametri**: `K` *(hopping)* e `g` *(locale)*, ### **entrambi dichiarati `PROVA` con origine «valore di prova, NON derivato»** — e `A1` lo pretende scritto |
 | verso `EM`-curvatura | ### **niente**: nessuna legge di fisica entra. ### **L'infrastruttura e' neutra** |
 | emergente o imposto | ### **nessuno dei due**: non c'e' fisica. ### ⭐ **Ma il FORMATO e' costruito perche' la fisica sia IMPOSTA IN UN SOLO POSTO** *(la tabella)* e ### **derivata altrove** — e questo e' il contrario di come l'era `1` e' cresciuta |
+
+## LA STELLA POLARE — ### **le cinque risposte, PER LA TAPPA `5`** *(`L-STELLA`)*
+
+> ### ⚠ **`passo.py` E- UN FILE DI FISICA**, e il mandato dice *«nessuna fisica nuova»*. ### **Le due cose stanno insieme solo se le cinque domande hanno una risposta scritta**, e *«non si applica»* senza il perche- ### **non e- una risposta.**
+
+| | la risposta |
+|---|---|
+| **`1` `A14`, conservazione LOCALE** | ### **NON SI APPLICA ALLE LEGGI, E SI APPLICA ALLO SCHEDULATORE** — e il perche-: le due leggi in tabella sono `prova: true` e ### **non pretendono di conservare niente.** ### ⭐ **Ma lo SCHEDULATORE puo- rompere una conservazione che le leggi avrebbero**, e questa e- la ragione della composizione simmetrica. ### **MISURATO:** la norma si conserva a ### **`1.2e-15`** *(globale)* e ### **`2.0e-15`** *(locale)* su `200` passi, l-energia a ### **`3.9e-5`** per entrambi |
+| **`2` quale dei TRE GRADINI** | ### **(a) ROBUSTO AL RUMORE NUMERICO, e SOLO quello.** ### ⛔ **Non (b) e non (c):** non c-e- nessuna legge pratica da togliere, e ### **nessun limite noto da ritrovare** — le leggi sono di prova. ### **Il gradino (a) e- raggiunto nel senso preciso che le permutazioni dichiarate byte-identiche LO SONO AL BYTE**, misurato, e quelle dichiarate diverse ### **differiscono** |
+| **`3` aggiunge un numero o una legge?** | ### **AGGIUNGE DUE NUMERI, e sono di un tipo che la domanda `3` non elenca:** `iterazioni=64` e `toll=1e-14` del punto fisso. ### ⛔ **NON sono costanti di accoppiamento, non sono toppe, non sono clip: sono PARAMETRI DEL RISOLUTORE** — `A17`, lo strumento non e- fisica. ### ⚠ **MA UNO DEI DUE SI E- RIVELATO VISIBILE NELLA FISICA:** ### **il cono dell-integratore GLOBALE dipende da `toll`** *(`3` archi a `1e-4`, `5` a `1e-8` e a `1e-14`)*. ### ⭐ **Quindi `toll` NON e- innocuo**, ed e- ### **la ragione piu- forte contro il globale** nella tavola della tappa `6` |
+| **`4` tocca `rho`, `c_s` o il SEGNO?** | ### **NO**, e il perche-: lo stato dell-era `2` e- ### **solo `psi`** *(`stato.py`, una variabile)*. `rho` e `c_s` ### **non esistono ancora**, e il segno che c-e- — il `-i` di `dpsi/dt = -i dH/dpsi*` — ### **non e- una scelta: e- l-equazione del moto** |
+| **`5` emergente o imposto** | ### **NON SI APPLICA, e il perche-: non si afferma nessun FENOMENO.** ### ⛔ **Questa tappa non misura un comportamento del mondo: misura CHE LO STRUMENTO FACCIA CIO- CHE DICE** — cono, permutazioni, deriva. ### ⚠ **E la domanda `5` tornera- VERA e OBBLIGATORIA** al primo risultato di fisica dell-era `2`, che ### **non e- questo** |
+
+### ⭐ **E LA DOMANDA `3` HA FATTO IL SUO LAVORO:** ### **mi ha fatto trovare che `toll` si vede nella fisica.** Avevo in testa di dichiararlo *«parametro del risolutore, `A17`, non e- fisica»* e ### **chiudere li-.** ### ⛔ **E- la risposta che ha preteso di dire DI CHE TIPO e- il numero a costringermi a guardare, e guardando il cono del globale si e- rivelato DIPENDENTE DA LUI.**

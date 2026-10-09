@@ -51,6 +51,12 @@ FILE_FISICA = (
     'primo_ordine/driver.py',
     'primo_ordine/_genera.py',
     'primo_ordine/_genera_stato.py',
+    # ### ⚠ **IL COLLAUDO DELLA CATENA STA SOTTO `primo_ordine/`**, quindi
+    # ### la lista lo deve nominare. ### ⛔ **Ma NON e- in `FISICA` di
+    # ### `P-E4`**: il cono si misura sulla NORMA, e la norma e- un osservatore
+    # ### -- un file che importa `osservatori/` ### **non puo- essere fisica**
+    # ### *(`A17`)*. ### **Il presidio mi ha costretto alla forma giusta.**
+    'primo_ordine/_collauda_passo.py',
     'primo_ordine/termini/__init__.py',
     # ### I TRE GENERATI: entrano nella LISTA ### **nel commit in cui nascono**, e il
     # ### mandato lo pretende. ### ⚠ **Sono `prova: true`**: la LISTA sorveglia

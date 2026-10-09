@@ -2552,7 +2552,7 @@ etichette rimosse, con ### **`0` persi, `0` doppi, `0` conflitti**.
 
 | | |
 |---|---|
-| **i file** | `csv/_file_fisica.py` *(BLOB `7453444d`)* · `csv/_collaudo_file_fisica.py` *(BLOB `8cc5f427`)* |
+| **i file** | `csv/_file_fisica.py` *(BLOB `e845b798`)* · `csv/_collaudo_file_fisica.py` *(BLOB `8cc5f427`)* |
 | **COMANDO** | `python csv/_file_fisica.py` *(che cosa sorveglia, e che cosa no)* · `python csv/_collaudo_file_fisica.py` *(il collaudo, `17`/`17`)*
 | **cosa misura** | **due costanti**: la LISTA dei file di fisica sorvegliati *(oggi `soliton_simulator.py`)* e la CARTELLA del codice dell'era `2`, **vuota** |
 | ### ⛔ **la CARTELLA è VUOTA, e il nome lo decide Luca** | *«NON la scegli tu»*. ### ⚠ **Quindi `H-FISICA-FUORI-LISTA` oggi NON IMPEDISCE NIENTE** — per `A9` **non è un presidio, è una TENDA**, e il referto lo dichiara |
@@ -2655,3 +2655,16 @@ etichette rimosse, con ### **`0` persi, `0` doppi, `0` conflitti**.
 | ### ⛔ **e `LEGGE` si legge via AST** | una regex la troverebbe ### **anche dentro un commento o una stringa**, e ### **un presidio che si lascia ingannare da un commento non è un presidio** |
 | ### ⛔ **NESSUNA via d'uscita** | e ### **la sua ASSENZA è il presidio**: la prima stesura definiva una regex `_FUGA` ### **senza leggerla mai**, come promemoria — ### **codice morto che INVITA una scappatoia che il mandato vieta** |
 | **`P-E8`** | `.github/workflows/era2.yml`: ### **la CI, a ogni push** |
+
+### `primo_ordine/passo.py` e `primo_ordine/_collauda_passo.py` — **LO SCHEDULATORE A STRATI, I DUE CANDIDATI, IL CONO** *(2026-10-09)*
+
+| | |
+|---|---|
+| **i file** | `primo_ordine/passo.py` *(BLOB `df1b1e50`)* · `primo_ordine/_collauda_passo.py` *(BLOB `197e6827`)* |
+| **COMANDO** | `python primo_ordine/_collauda_passo.py` *(il collaudo della catena, `33`/`33`)* |
+| **cosa misura** | i **tre livelli** dello schedulatore *(quali permutazioni sono byte-identiche e quali no)* · **IL CONO**, per `PASSO` e per `STRATO` · la **deriva** di norma ed energia dei due candidati · **`A8b`** *(nessuna cache nascosta)* · **i SEI casi che devono fallire** |
+| ### ⭐ **e il collaudo sta in un file SUO** | il cono si misura **sulla norma**, la norma e' **un osservatore**, e `P-E4` vieta a `passo.py` di importare `osservatori/` *(`A17`)*. ### **Il presidio ha imposto la forma, invece di lasciarmela scegliere** |
+| ### ⛔ **e NON SCEGLIE l'integratore** | la scelta e' **di Luca** *(il nodo `INT`)*: i due candidati stanno nella **stessa tavola**, con cono, deriva e costo |
+| **l'uscita** | **a schermo**, e il referto della tappa `6` prende i numeri **da qui** *(`L-NUMERI`)* |
+
+---
