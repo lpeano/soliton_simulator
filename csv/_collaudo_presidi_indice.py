@@ -367,17 +367,26 @@ def main():
     # ### `nota_guardiano` che dice ancora `SOSPESA`; `F6` DEVE trovarla>>*. La nota e-
     # ### *<<correzione v3 blocco G2: ### **FISICA/era 1/SOSPESA**>>*, e la voce oggi e-
     # ### ### **`CHIUSA`** perche- il guardiano ha dichiarato che e- ### **<<FATTO>>.**
-    g1 = [v for v in voci if v["id"] == "G1"]
+    # ### ⛔ **IL BRACCIO SI ANCORA A `7e4c59c`, perche- il punto `4` TOGLIE la nota:** un
+    # ### caso a risposta nota che legge <<oggi>> ### **si spegne quando il difetto
+    # ### sparisce**, e allora ### **non prova piu- niente.** ### **E- la seconda volta
+    # ### in questo giro** *(la prima: le cinque di `F9`)*.
+    g1 = [v for v in al_commit("7e4c59c", "doc/indice/voci.jsonl") if v["id"] == "G1"]
     print("  `F6`  la nota di G1: <<%s>>   |   la voce e- `%s`"
           % (" ".join((g1[0]["meta"].get("nota_guardiano") or "").split())[:70],
              g1[0]["stato"]))
-    esito("F6  DEVE scattare: la nota di `G1` DICHIARA `SOSPESA` e la voce e- `CHIUSA`",
-          scatta(IX._f6_note(voci), "G1"),
+    esito("F6  DEVE scattare: a 7e4c59c la nota di `G1` DICHIARA `SOSPESA` e la voce e- "
+          "`CHIUSA`", scatta(IX._f6_note(g1), "G1"),
           "una nota che DICHIARA una tripla `dominio/era/stato` e- un-ASSERZIONE, e se la "
           "voce si e- mossa la nota e- SCADUTA")
     # ### ⚠ **E IL BRACCIO NEGATIVO PROVA CHE NON LEGGE LA PROSA:** con la tripla
     # ### ### **allineata** alla voce, `F6` ### **tace** -- quindi non scatta
     # ### ### **per la presenza della parola**, ma per ### **la contraddizione.**
+    # ### ✔ **E ADESSO LA NOTA NON C-E- PIU-:** il punto `4` l-ha TOLTA, e il braccio
+    # ### accanto prova che ### **`F6` tace sulla `G1` di oggi.**
+    esito("F6  NON deve scattare: la `G1` di OGGI, dopo che la nota e- stata TOLTA",
+          not scatta(IX._f6_note(voci), "G1"),
+          "una domanda a cui si e- risposto non si riscrive: si TOGLIE")
     _g1b = json.loads(json.dumps(g1[0]))
     _g1b["meta"]["nota_guardiano"] = ("correzione v3 blocco G2: %s/era %s/%s -- la tripla "
                                       "ALLINEATA" % (_g1b["dominio"], _g1b["era"],

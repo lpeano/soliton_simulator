@@ -83,8 +83,8 @@ era       1=538  DA_CLASSIFICARE=188  ENTRAMBE=96  2=24
 stato     SOSPESA=369  DA_CLASSIFICARE=188  CHIUSA=182  APERTA=82  AGENDA=24  SUPERATA=1
 ```
 
-### ✔ **FATTO IN QUESTO GIRO:** il punto `3`, ### **`superata_da` accetta anche una VOCE** e ### **`F9` ammette `SUPERATA` per `ENTRAMBE`**: schema, validatore e collaudo ### **nei due versi** *(`26`/`26`)*. `S02` → `SUPERATA` da `D31`.
+### ✔ **FATTO IN QUESTO GIRO:** il punto `4`: la nota di `G1` ### **TOLTA** *(`meta_togli`)*, e `C3` ### **allineato al file del guardiano** — che adesso ### **lo conferma lui.** `F6` passa da `3` a `2` segnali.
 
-### ⛔ **RESTA:** i punti `4`…`9`. ### ⚠ **E `Z21` NON e' qui:** il mandato dice *«applica `S02` e `Z21`»*, ma ### **il file vecchio non porta il suo `superata_da`** — lo porta ### **la terza lettura** *(`superata_da=Z26`)*, quindi `Z21` si applica ### **al punto `5`.**
+### ⛔ **RESTA:** i punti `5`…`9`.
 
-**Ultimo lotto applicato:** `doc/indice/_lotti/v3_superate.jsonl` *(`1` voce)*
+**Ultimo lotto applicato:** `doc/indice/_lotti/v3_g1.jsonl` *(`1` voce)*

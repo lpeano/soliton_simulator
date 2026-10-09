@@ -10803,3 +10803,17 @@ Schema, validatore e collaudo ### **nei due versi**: `26`/`26` il collaudo dell'
 ### ✔ **E `F9` AMMETTE `SUPERATA` PER `ENTRAMBE`, che corregge un'altra mia strettezza:** avevo scritto *«`ENTRAMBE` ⇒ `APERTA` o `CHIUSA`»* ### **alla lettera del mandato.** ### ⭐ **«Superata» non e' «rimandata»: e' RISOLTA DA FUORI**, e per questo ### **non cade nel divieto che colpisce `SOSPESA`** — che era il motivo vero di `F9`: *«una cosa che vale anche nell'era 2 non si rimanda a se stessa»*.
 
 ### ⚠ **E `Z21` NON l'ho applicata qui, benche' il mandato la nomini:** il file vecchio chiede `SUPERATA` ### **senza dire da che cosa**, e il `superata_da` lo porta ### **la terza lettura** *(`Z26`)*. ### **Applicarla adesso vorrebbe dire scegliere io da che cosa e- superata**, e la terza lettura lo dice fra due commit.
+
+---
+
+## LA NOTA DI `G1` SI TOGLIE, e **una decisione portata a chi tocca e tornata indietro NON E' PIU' MIA** (2026-10-09)
+
+Il punto `4`. `1` voce, `1` riga di storico; `F6` da `3` a `2` segnali; `6`/`6` i controlli, `53`/`53` il collaudo dei presidi. Nessuna corsa; il simulatore resta `b8c21049`.
+
+### ✔ **LA NOTA SI TOGLIE, non si riscrive**, ed e- la risposta alla domanda che avevo messo nel referto: ### **la sua storia vive in `storico.jsonl`**, quindi togliere la nota ### **non perde niente.** ### ⭐ **E una domanda a cui si e- risposto non si riscrive: si TOGLIE** — e- la ragione per cui `meta_togli` esiste.
+
+### ⭐ **E `CLI-1`/`POTATURA-GUARDIE` NON SONO PIU- UNA MIA SCELTA DI FORMA.** Avevo scritto *«ho scelto la FORMA della riconciliazione, non il merito»* e ### **l'ho portato a Luca.** La conferma e- arrivata — *«vale il file del guardiano, che cita; e' il guardiano che lo conferma»* — e ### **una decisione portata a chi tocca e tornata indietro non e- piu- mia.**
+
+### ⚠ **E `C3` AVEVA DUE FALLIMENTI NUOVI, dai punti `1` e `2`:** `REGISTRO_FISICA:U2-6` e `MITOSI-2LAM-ACCESO` sono fra le `47` chiusure, quindi e- ### **lo stesso file del guardiano** a dirle `CHIUSA` mentre `L3` le voleva `SOSPESA`. ### **Stessa riconciliazione, stessa ragione: la parola piu- recente, E CITA.**
+
+### ⛔ **E UN BRACCIO DI COLLAUDO SI SAREBBE SPENTO DA SE-, per la seconda volta in questo giro:** il caso *«`F6` DEVE scattare su `G1`»* legge la nota, e ### **il punto `4` la toglie.** L'ho ### **ancorato a `7e4c59c`**, e ho aggiunto il braccio che prova che ### **sulla `G1` di oggi `F6` tace.** *(La prima volta: le cinque di `F9`.)* ### ⭐ **Un caso a risposta nota e' una FOTO, non uno specchio.**

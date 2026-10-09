@@ -203,13 +203,23 @@ def main():
     # ### LA VERIFICA COMPLETA DEL GUARDIANO (2026-10-09, file di 165 righe, commit
     # ### `67c12fa`): per DUE voci il file ### **contraddice le liste vecchie DELLO STESSO
     # ### GUARDIANO** -- `CLI-1` sta nella lista `1`, `POTATURA-GUARDIE` nella `3`.
-    # ### ⛔ **Non scelgo io fra le due:** la riconciliazione e- ### **temporale e
-    # ### CITATA** -- la verifica completa e- la parola ### **piu- recente** del
-    # ### guardiano, e ### **porta una frase del repo** *(`CLI-1`: <<vale come regola
-    # ### generale>>; `POTATURA-GUARDIE`: <<i 57 rami MORTI>>)*, mentre le liste
-    # ### ### **non citavano niente.** ### ⚠ **E IL CONFLITTO VA NEL REFERTO:** due
-    # ### affermazioni incompatibili sullo stesso oggetto ### **si riconciliano, non si
-    # ### scelgono** -- e Luca deve sapere che e- stato il guardiano a cambiare idea.
+    # ### ✔ **E IL 2026-10-09 IL GUARDIANO LO HA CONFERMATO**, quindi non e- piu- una mia
+    # ### scelta di forma: *<<`CLI-1` e `POTATURA-GUARDIE`: vale il file del guardiano, che
+    # ### cita; e- il guardiano che lo conferma, quindi `C3` si allinea al file>>.*
+    # ### ⭐ **La riconciliazione era TEMPORALE E CITATA** -- la verifica completa e- la
+    # ### parola ### **piu- recente** e ### **porta una frase del repo** *(`CLI-1`:
+    # ### <<vale come regola generale>>; `POTATURA-GUARDIE`: <<i 57 rami MORTI>>)*, mentre
+    # ### le liste ### **non citavano niente.** ### ⚠ **Avevo scritto <<ho scelto la FORMA,
+    # ### non il merito>> e l-avevo portato a Luca:** la conferma e- arrivata, e
+    # ### ### **una decisione portata a chi tocca e tornata indietro NON E- PIU- MIA.**
+    # ### E LE DUE CHE IL PUNTO `1` HA CHIUSO: stanno nelle `47` righe <<chiusure senza
+    # ### commit>> del file del guardiano, quindi e- ### **lo stesso file** a dirle
+    # ### `CHIUSA` *(`REGISTRO_FISICA:U2-6`: <<PASS>>; `MITOSI-2LAM-ACCESO`:
+    # ### <<ANNOTAZIONE DEL 2026-10-02>>)*, mentre `L3` le voleva `SOSPESA`.
+    # ### ⭐ **Stessa riconciliazione, stessa ragione:** la parola piu- recente,
+    # ### ### **e cita.**
+    CORRETTE_V3["REGISTRO_FISICA:U2-6"] = ("METODO", "1", "CHIUSA")
+    CORRETTE_V3["MITOSI-2LAM-ACCESO"] = ("DOCUMENTAZIONE", "1", "CHIUSA")
     CORRETTE_V3["CLI-1"] = ("METODO", "1", "SOSPESA")
     CORRETTE_V3["POTATURA-GUARDIE"] = ("INFRASTRUTTURA", "1", "SOSPESA")
     # ### ⚠ **E STA DOPO TUTTE LE ALTRE CORREZIONI DI PROPOSITO:** `CLI-1` e-
