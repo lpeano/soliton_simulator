@@ -18,6 +18,17 @@ costruisce una legge con una `coppia_coniugata`** e verifica che lo schema la ac
 il tipo ### **non è una parola nel vocabolario: è una forma provata.**
 
 Gira con:  python primo_ordine/leggi/schema.py        # il collaudo dello schema
+
+
+### ⛔ **I DUE DIVIETI, e i loro assiomi** *(qui, nel docstring, perche-
+### un ID in un COMMENTO e- vietato dal punto `14(c)`: ### **un
+### riferimento che una macchina segue non vive nella prosa**, e questi
+### ID sono ### **documentazione**, non riferimenti)*:
+
+- **I SIMBOLI VIETATI** *(`pos`, `x`, `y`, `z`…)*: ### **`A17`** — lo strumento non e- fisica, e la decisione `9` e- ### **APERTA**;
+- **I RAMI** *(`Min`, `Max`, `Piecewise`, `Abs`…)*: ### **`A11`** — un limite e- ### **una LEGGE**, non una toppa; e ### **`A12`** — la cura e- ### **DERIVARE**, non tarare.
+
+### **I RAMI E I SIMBOLI VIETATI stanno in `RAMI` e `VIETATI`.**
 """
 import io
 import os
@@ -37,10 +48,10 @@ NL = chr(10)
 # ### questo una regola ### **deve dichiarare il BILANCIO.**
 TIPI = ("termine_nodo", "termine_arco", "regola", "osservatore")
 
-# ### I TIPI DI VARIABILE. ### ⭐ **`psi` e- `C^2` di NODO** *(`A16`: lo spinore e- il tempo
+# ### I TIPI DI VARIABILE. ### ⭐ **`psi` e- `C^2` di NODO** *(lo spinore e- il tempo
 # ### proprio della massa, e vive sul nodo)*.
 # ### ⚠ **`coppia_coniugata` e- AMMESSA e NON USATA:** e- la decisione `13`, ### **aperta.**
-# ### ⛔ **E NON C-E- NIENTE PER LA POSIZIONE:** e- la decisione `9`, ### **aperta**, e `A17`
+# ### ⛔ **E NON C-E- NIENTE PER LA POSIZIONE:** e- la decisione `9`, ### **aperta**, e l-assioma
 # ### vieta che una posizione entri nella fisica.
 TIPI_VARIABILE = {
     "complesso_c2_nodo": "un complesso C^2 sul NODO (psi, `A16`)",
@@ -57,12 +68,12 @@ TIPI_VARIABILE = {
 DOVE = {"complesso_c2_nodo": "nodo", "reale_nodo": "nodo", "coppia_coniugata": "nodo",
         "reale_arco": "arco", "fase_arco": "arco"}
 
-# ### ⛔ **I SIMBOLI VIETATI, e il perche- e- `A17`:** uno strumento non e- fisica, e
+# ### ⛔ **I SIMBOLI VIETATI, e il perche- sta nel docstring:** uno strumento non e- fisica, e
 # ### ### **una POSIZIONE e- lo strumento con cui GUARDIAMO**, non una proprieta- del
 # ### mondo. ### **La decisione `9` e- aperta, e il formato NON la anticipa.**
 VIETATI = ("pos", "pos_x", "pos_y", "pos_z", "x", "y", "z", "coord", "xyz")
 
-# ### ⛔ **I RAMI, e sono VIETATI PER LA STESSA RAGIONE DI `pos`:** `A11` dice
+# ### ⛔ **I RAMI, e sono VIETATI PER LA STESSA RAGIONE DI `pos`:** l-assioma dice
 # ### ### **un limite e- una LEGGE, non una toppa**, e `A8` che
 # ### ### **un ramo silenzioso non e- un ramo.** ### **Un `Max(x, 0)` dentro
 # ### un termine di `H` e- un limite SENZA una legge che lo giustifichi**, e
@@ -71,7 +82,7 @@ VIETATI = ("pos", "pos_x", "pos_y", "pos_z", "x", "y", "z", "coord", "xyz")
 # ### solo ### **una derivata NON ANALITICA in zero**, e la derivata di
 # ### Wirtinger che il generatore calcola ### **la- non esiste.**
 # ### ✅ **E la cura NON e- tararlo: e- DERIVARE la legge** che produce
-# ### quel comportamento *(`A12`)*.
+# ### quel comportamento -- ### **curare, non misurare.**
 RAMI = ("Min", "Max", "Piecewise", "Abs", "sign", "Heaviside", "floor",
         "ceiling", "clip", "Mod", "frac")
 

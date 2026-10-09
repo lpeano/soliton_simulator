@@ -7,7 +7,7 @@
 """
 import numpy as np
 
-# ### L-ID DELLA LEGGE: `P-E1` lo legge ### **via AST**, non per regex.
+# ### L-ID DELLA LEGGE: un presidio lo legge ### **via AST**, non per regex.
 LEGGE = 'PROVA-HOPPING'
 # ### L-IMPRONTA della riga di tabella *(`sha1` del `json` a chiavi ordinate)*.
 IMPRONTA = '19547a22540dac81'

@@ -51,6 +51,9 @@ FILE_FISICA = (
     'primo_ordine/driver.py',
     'primo_ordine/_genera.py',
     'primo_ordine/_genera_stato.py',
+    # ### IL COSTRUTTO `@rif` *(punto `14`)*: ### **byte-inerte**, e il suo
+    # ### collaudo lo verifica ### **con `is`.**
+    'primo_ordine/_rif.py',
     # ### ⚠ **IL COLLAUDO DELLA CATENA STA SOTTO `primo_ordine/`**, quindi
     # ### la lista lo deve nominare. ### ⛔ **Ma NON e- in `FISICA` di
     # ### `P-E4`**: il cono si misura sulla NORMA, e la norma e- un osservatore

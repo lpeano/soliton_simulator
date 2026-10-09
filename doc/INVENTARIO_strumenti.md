@@ -2567,7 +2567,7 @@ etichette rimosse, con ### **`0` persi, `0` doppi, `0` conflitti**.
 | | |
 |---|---|
 | **file** | `csv/_hook_id_obbligatorio.py` |
-| **BLOB** *(sha1 dei byte grezzi)* | `c5a338d3` |
+| **BLOB** *(sha1 dei byte grezzi)* | `f9a49898` |
 | **COMANDO** | `python csv/_hook_id_obbligatorio.py --collaudo` *(`11`/`11`)*; nel `commit-msg`: `--controlla $1` |
 | **cosa misura** | **quali commit contano** *(un file della LISTA, o un `doc/REFERTO_*`/`doc/REPERTO_*`)* e **se il messaggio cita almeno un ID NOTO** |
 | ### ⭐ **è il ROVESCIO di `H-INDICE`** | quello controlla che gli ID citati ### **esistano**; questo che ### **ce ne sia almeno UNO** |
@@ -2621,7 +2621,7 @@ etichette rimosse, con ### **`0` persi, `0` doppi, `0` conflitti**.
 | | |
 |---|---|
 | **file** | `primo_ordine/leggi/schema.py` |
-| **BLOB** *(sha1 dei byte grezzi)* | `95db24eb` |
+| **BLOB** *(sha1 dei byte grezzi)* | `f32d1e0e` |
 | **COMANDO** | `python primo_ordine/leggi/schema.py` *(il collaudo, `25`/`25`)* |
 | **cosa misura** | che una riga di tabella abbia **la forma**: vocabolario **chiuso**, `prova` booleano, `scheda` non vuota, **l'ambito dichiarato**, i parametri con **valore E origine**, il **bilancio** di una regola, la **voce** di un osservatore |
 | ### ⭐ **e il controllo che conta** | ### **un `termine_nodo` non può avere una variabile d'ARCO nell'ambito**: una variabile d'arco **collega due nodi**, quindi leggerla ### **È vedere il vicino** — e si vede **nella TABELLA**, prima di generare |
@@ -2635,7 +2635,7 @@ etichette rimosse, con ### **`0` persi, `0` doppi, `0` conflitti**.
 | | |
 |---|---|
 | **file** | `primo_ordine/_genera.py` |
-| **BLOB** *(sha1 dei byte grezzi)* | `a14dc3de` |
+| **BLOB** *(sha1 dei byte grezzi)* | `b0796177` |
 | **COMANDO** | `python primo_ordine/_genera.py` *(genera)* · `python primo_ordine/_genera.py --prova` *(il collaudo, `13`/`13`)* |
 | **cosa misura** | `(a)` i simboli liberi **dentro l'ambiente** e `pos` **mai**; `(b)` **`dH/dpsi*` simbolica** *(Wirtinger)*; `(c)` il **modulo numpy** con `LEGGE` e **l'IMPRONTA**; `(d)` la **scheda** |
 | ### ⭐ **e i nomi dei simboli SONO i nomi delle locali** | così l'espressione stampata da `sympy` ### **è già il codice**: ### **nessuna sostituzione testuale** fra la derivata e il file — e una sostituzione è ### **un posto dove la formula può cambiare senza che nessuno lo veda** |
@@ -2660,7 +2660,7 @@ etichette rimosse, con ### **`0` persi, `0` doppi, `0` conflitti**.
 
 | | |
 |---|---|
-| **i file** | `primo_ordine/passo.py` *(BLOB `df1b1e50`)* · `primo_ordine/_collauda_passo.py` *(BLOB `1ea62b18`)* |
+| **i file** | `primo_ordine/passo.py` *(BLOB `df1b1e50`)* · `primo_ordine/_collauda_passo.py` *(BLOB `f323d163`)* |
 | **COMANDO** | `python primo_ordine/_collauda_passo.py` *(il collaudo della catena, `38`/`38`)* |
 | **cosa misura** | i **tre livelli** dello schedulatore *(quali permutazioni sono byte-identiche e quali no)* · **IL CONO**, per `PASSO` e per `STRATO` · la **deriva** di norma ed energia dei due candidati · **`A8b`** *(nessuna cache nascosta)* · **i SEI casi che devono fallire** |
 | ### ⭐ **e il collaudo sta in un file SUO** | il cono si misura **sulla norma**, la norma e' **un osservatore**, e `P-E4` vieta a `passo.py` di importare `osservatori/` *(`A17`)*. ### **Il presidio ha imposto la forma, invece di lasciarmela scegliere** |
@@ -2688,7 +2688,7 @@ etichette rimosse, con ### **`0` persi, `0` doppi, `0` conflitti**.
 | | |
 |---|---|
 | **file** | `csv/_metodi_era2.py` |
-| **BLOB** *(sha1 dei byte grezzi)* | `36eb8024` |
+| **BLOB** *(sha1 dei byte grezzi)* | `a58e2f62` |
 | **COMANDO** | `python csv/_metodi_era2.py` *(il presidio, e GENERA il documento)* · `--collaudo` *(nei due versi, `8`/`8`)* |
 | **cosa impedisce** | che `doc/METODI_era1_in_era2.md` **invecchi in silenzio**: ### **ogni metodo del perimetro DEVE avere una riga** *(come si applica · dove · stato)*, citato o no |
 | ### ⭐ **e il PERIMETRO lo calcola l'INDICE** | da ### **campi a vocabolario chiuso** *(`classe in (STANDARD, PRESIDIO)`, piu' le cure di architettura che il mandato nomina **per ID**)*. ### ⛔ **Nessun `titolo` e nessuna `descrizione` si leggono per decidere se una voce e' un metodo** — e' il principio del mandato **applicato a se stesso** |
@@ -2703,7 +2703,7 @@ etichette rimosse, con ### **`0` persi, `0` doppi, `0` conflitti**.
 | | |
 |---|---|
 | **file** | `csv/_controlli_nell_indice.py` |
-| **BLOB** *(sha1 dei byte grezzi)* | `7cb3394e` |
+| **BLOB** *(sha1 dei byte grezzi)* | `9a8368a1` |
 | **COMANDO** | `python csv/_controlli_nell_indice.py` *(gli errori e i segnali)* · `--collaudo` *(nei due versi, `8`/`8`)* · `--segnali` |
 | ### ⛔ **cosa RIFIUTA** | il **codice dichiara un ID** che ### **non e' nell'indice** — un presidio che cita un ID inesistente ### **ha un riferimento rotto** · oppure la voce esiste e ### **non ha `classe: PRESIDIO`** |
 | ### ⚠ **cosa SEGNALA e non rifiuta** | una voce `classe: PRESIDIO` che ### **nessun codice dichiara**: potrebbe vivere ### **in shell** *(i `H-*` stanno in `.githooks/`)* o essere ### **proposta e non cablata** *(`H-ETC-1`, `H-ETC-2`)*. ### **Rifiutare un fatto VERO non e' un presidio: e' un impedimento** *(`A9`)* |
@@ -2785,5 +2785,19 @@ etichette rimosse, con ### **`0` persi, `0` doppi, `0` conflitti**.
 | ### ⛔ **e servono ENTRAMBE** | ### **l'impronta** dice che la riga e' ### **quella**; ### **la frase** dice che la citazione ### **parla di quello** |
 | **l'impronta** | normalizza ### **solo gli SPAZI** *(un file si ri-indenta, e l'indentazione non e' la citazione)* e ### **NON il testo** *(se cambia una parola ### **deve** cambiare)*. E ### **non si scrive a mano: si CALCOLA** da `git show` *(`L-NUMERI`)* |
 | **l'uscita** | `doc/indice/citazioni.jsonl`, `10` citazioni — ### **quelle date dal guardiano**, che qui ### **guadagnano il commit** |
+
+---
+
+### `primo_ordine/_rif.py` e `csv/_rif_nel_codice.py` — **`@rif`: UN ID NEL CODICE E' UN COSTRUTTO** *(2026-10-10)*
+
+| | |
+|---|---|
+| **i file** | `primo_ordine/_rif.py` *(BLOB `79dca064`)* · `csv/_rif_nel_codice.py` *(BLOB `2228620e`)* |
+| **COMANDO** | `python primo_ordine/_rif.py` *(il collaudo della BYTE-INERZIA, `14`/`14`)* · `python csv/_rif_nel_codice.py` *(il presidio e la vista)* · `--collaudo` *(nei due versi, `10`/`10`)* |
+| ### ⛔ **byte-inerte, e COLLAUDATO** | `rif(...)` torna ### **la funzione STESSA**, verificato ### **con `is`** — non una copia, non un involucro: ### **nome, docstring, modulo e comportamento NON cambiano** |
+| **i ruoli** *(vocabolario chiuso)* | `implementa` · `verifica` · `misura` · `guardia` · `genera` |
+| ### ⛔ **cosa impedisce** | un ### **ID in un commento `#`** *(col **tokenizer**, non con una regex)* · un ### **`@rif` verso un ID inesistente** · un ### **`file:riga`** in un commento o in una stringa |
+| ### ⚠ **e il confine COMMENTO/DOCSTRING e' DICHIARATO** | il mandato dice *«nei COMMENTI»*: un commento sta ### **accanto al codice** e un ID la' ### **sembra un riferimento**; un docstring e' ### **documentazione** e spiega il ### **perche'**. ### **`10` ID nei commenti (curati), `33` nei docstring (che restano)** |
+| **l'uscita** | `doc/RIFERIMENTI_era2.md`, ### **il verso opposto, GENERATO**: `4` voci, `4` riferimenti |
 
 ---

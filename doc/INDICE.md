@@ -10,11 +10,12 @@
 | `FISICA` | `1` | 336 |
 | `FISICA` | `2` | 25 |
 | `FISICA` | `DA_CLASSIFICARE` | 1 |
-| `FISICA` | `ENTRAMBE` | 16 |
+| `FISICA` | `ENTRAMBE` | 18 |
 | `INFRASTRUTTURA` | `1` | 39 |
 | `INFRASTRUTTURA` | `2` | 9 |
 | `INFRASTRUTTURA` | `ENTRAMBE` | 14 |
 | `METODO` | `1` | 153 |
+| `METODO` | `2` | 1 |
 | `METODO` | `ENTRAMBE` | 79 |
 
 | id | classe | dominio | era | stato | blocca | titolo |
@@ -29,6 +30,8 @@
 | `A13` | STANDARD | FISICA | ENTRAMBE | ### **APERTA** |  | LAM È LA SCALA DI PLANCK DEL SISTEMA (decisione di Luca, 2026-09-24) |
 | `A14` | STANDARD | FISICA | ENTRAMBE | ### **APERTA** |  | LE GRANDEZZE SI CONSERVANO LOCALMENTE E SI DISSIPANO GLOBALMENTE (decisione di L |
 | `A15` | STANDARD | FISICA | ENTRAMBE | ### **APERTA** |  | LA MEMORIA E DINAMICA, LOCALE, E CIO CHE DIMENTICA SI TRASFORMA (decisione di Lu |
+| `A16` | STANDARD | FISICA | ENTRAMBE | ### **APERTA** |  | LO STATO E- UNO, ED EVOLVE AL PRIMO ORDINE SOTTO UNA SOLA H |
+| `A17` | STANDARD | FISICA | ENTRAMBE | ### **APERTA** |  | OGNI COMPORTAMENTO E- DETERMINATO SOLO DAL SUO AMBITO |
 | `A2` | STANDARD | FISICA | ENTRAMBE | ### **APERTA** |  | NESSUNA SCORCIATOIA GLOBALE |
 | `A2-ANELLO` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | l'anello A6 di Z70 — periodo 2, via chiralitacorelocale/CHICORE / doc/RAMIFICAZI |
 | `A2-BLOCH` | MISURA | FISICA | 1 | ### **CHIUSA** |  | BLOCH VALE SEMPRE ⏳[EPOCA 1 · CODICE] / Invarianza del Bloch sotto Step 2 — phc  |
@@ -438,6 +441,7 @@
 | `P-M1` | PRESIDIO | METODO | ENTRAMBE | ### **APERTA** |  | ogni METODO dell-era 1 ha una riga che dice come si applica all-era 2 |
 | `P-MEMORIA` | STANDARD | FISICA | ENTRAMBE | ### **APERTA** |  | uno scalare con memoria acquista un verso: la memoria da la direzione |
 | `P-R1` | PRESIDIO | INFRASTRUTTURA | 2 | ### **AGENDA** |  | ogni RAMO della fisica dell-era 2 e- dichiarato: quanti, e a che servono |
+| `P-RIF` | PRESIDIO | METODO | 2 | ### **AGENDA** |  | un ID nel codice e- un @rif, o non esiste: un riferimento non vive nella prosa |
 | `P-T1` | PRESIDIO | METODO | ENTRAMBE | ### **APERTA** |  | il TESTO LIBERO non si interpreta per decidere: chi RIFIUTA legge solo campi str |
 | `P-T2` | PRESIDIO | METODO | ENTRAMBE | ### **APERTA** |  | il REPLAY su TUTTI i registri, e i testi generati che si rigenerano byte-identic |
 | `P-T3` | PRESIDIO | METODO | ENTRAMBE | ### **APERTA** |  | le CITAZIONI sono STRUTTURATE e si ri-verificano su git show, non a occhio |

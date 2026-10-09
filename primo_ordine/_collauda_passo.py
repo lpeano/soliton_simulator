@@ -348,7 +348,7 @@ def cache(T, n, dt, iterazioni, toll):
 
 
 # =====================================================================================
-#   (G) LA REVERSIBILITA- -- punto `8`: verifica DIRETTA di `A16`
+#   (G) LA REVERSIBILITA- -- punto `8`: la verifica DIRETTA di un assioma
 # -------------------------------------------------------------------------------------
 #   ### ⛔ **`k` PASSI AVANTI E `k` INDIETRO DEVONO TORNARE ALLO STATO INIZIALE.**
 #   ### Il punto medio implicito e- ### **simmetrico nel tempo per costruzione**, quindi

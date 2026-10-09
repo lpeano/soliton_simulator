@@ -23,6 +23,7 @@
    "P-E7",
    "P-E8",
    "P-M1",
+   "P-RIF",
    "P-T1",
    "P-T2",
    "P-T3",
@@ -52,6 +53,8 @@
    "A13",
    "A14",
    "A15",
+   "A16",
+   "A17",
    "A2",
    "A2-ANELLO",
    "A2-BLOCH",
@@ -453,6 +456,7 @@
    "P-M1",
    "P-MEMORIA",
    "P-R1",
+   "P-RIF",
    "P-T1",
    "P-T2",
    "P-T3",
@@ -1745,6 +1749,7 @@
    "P-E8",
    "P-M1",
    "P-R1",
+   "P-RIF",
    "P-T1",
    "P-T2",
    "P-T3",
@@ -1775,6 +1780,8 @@
    "A13",
    "A14",
    "A15",
+   "A16",
+   "A17",
    "A2",
    "A3",
    "A3c",
@@ -2032,6 +2039,8 @@
    "A13",
    "A14",
    "A15",
+   "A16",
+   "A17",
    "A2",
    "A2-ANELLO",
    "A2-BLOCH",
@@ -2562,6 +2571,7 @@
    "MASSA-ID-FISSO",
    "OSSERVABILE-P1",
    "P-M1",
+   "P-RIF",
    "P-T1",
    "P-T2",
    "P-T3",
@@ -3275,6 +3285,7 @@
    "P-E7",
    "P-E8",
    "P-R1",
+   "P-RIF",
    "REVERSIBILITA-LOCALE",
    "VUOTO-LOCALE-DETERMINISTICO",
    "Z104"
@@ -3477,6 +3488,8 @@
    "A13",
    "A14",
    "A15",
+   "A16",
+   "A17",
    "A2",
    "A3",
    "A3c",
@@ -4772,6 +4785,9 @@
   ],
   "PI-GEMELLE: il titolo dice <<Z100 CURATA E SIGILLATA ⏳[EPOCA 3 · CURA] | INVARIANTI (C5):>> -- il `C5` che cita e' IL MANDATO DEGLI INVARIANTI, non la voce `C5` (la misura su tauluce). E' un OMONIMO, dichiarato in meta.omonimo di `C5`, non una mescolanza di dominio": [
    "Z100"
+  ],
+  "PI-OGGETTI-ERA1: il <<flag>> che il presidio vede e- DI GIT, non del simulatore -- la descrizione dice <<un presidio di pre-commit da due minuti e- una ragione per dare --no-verify>>, e --no-verify e- un-opzione di git commit. Stessa classe del falso positivo di P-E2 con --exit-code": [
+   "P-T2"
   ],
   "PI-OGGETTI-ERA1: questa voce ELENCA i simboli dell-era 1 PERCHE- E- IL SUO LAVORO elencarli: la descrizione dice <<phivel, phidot, M_PH, perc_chi, perc_geom>>. Un presidio che nomina cio- che cerca non sta parlando del vecchio codice: STA DEFINENDO SE- STESSO": [
    "PI-SIMBOLI-ERA1"
@@ -6498,6 +6514,7 @@
    "P-E7",
    "P-E8",
    "P-R1",
+   "P-RIF",
    "REVERSIBILITA-LOCALE",
    "VUOTO-LOCALE-DETERMINISTICO",
    "Z104"
@@ -6510,6 +6527,8 @@
    "A13",
    "A14",
    "A15",
+   "A16",
+   "A17",
    "A2",
    "A3",
    "A3c",

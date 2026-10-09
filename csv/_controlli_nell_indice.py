@@ -52,6 +52,7 @@ SORGENTI = (
     "csv/_rami_era2.py",
     "csv/_replay_registri.py",
     "csv/_citazioni_strutturate.py",
+    "csv/_rif_nel_codice.py",
     "csv/indice.py",
     "csv/_hook_presidi.py",
     "csv/_hook_id_obbligatorio.py",

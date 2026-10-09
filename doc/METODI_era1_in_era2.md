@@ -8,17 +8,17 @@
 
 | | quanti |
 |---|--:|
-| **`PORTATO`** | `71` |
+| **`PORTATO`** | `74` |
 | **`DA_PORTARE`** | `28` |
 | **`DA_DECIDERE`** | `5` |
 | **`NON_SI_APPLICA`** | `9` |
-| **in tutto** | ### **`113`** |
+| **in tutto** | ### **`116`** |
 
-### ⚠ **E IL NUMERO `113` E- MISURATO, non stimato:** viene dal perimetro che l-indice calcola, e ### **il mandato ne nominava <<una decina>>** per nome piu- *<<e le cure di architettura>>*. ### **La decina era `20`.**
+### ⚠ **E IL NUMERO `116` E- MISURATO, non stimato:** viene dal perimetro che l-indice calcola, e ### **il mandato ne nominava <<una decina>>** per nome piu- *<<e le cure di architettura>>*. ### **La decina era `20`.**
 
 ---
 
-## `PORTATO` — `71` metodi
+## `PORTATO` — `74` metodi
 
 > ### ✅ **GIA- NELL-ERA `2`**, e `dove` dice dove
 
@@ -27,6 +27,8 @@
 | **`A1`** | `STANDARD` | ogni parametro in `leggi.yaml` porta `valore` E `origine`, e lo schema rifiuta un parametro senza origine | `leggi/schema.py` |
 | **`A12`** | `STANDARD` | un difetto dimostrato si cura: i difetti trovati in questo mandato sono stati curati nel commit successivo, o DICHIARATI aperti con il perche- | il referto dell-infrastruttura, sezione dei limiti |
 | **`A14`** | `STANDARD` | conservazione locale e dissipazione globale: la norma e l-energia si MISURANO (deriva 1.2e-15 e 3.9e-5 su 200 passi); ### il BILANCIO di una `regola` lo pretende come campo obbligatorio | `_collauda_passo.py` sezione (D) + `schema.py` campo `bilancio` |
+| **`A16`** | `STANDARD` | lo stato e- UNO e evolve al PRIMO ORDINE sotto una sola `H`. ### E- L-ASSIOMA CHE DA- IL NOME AL RAMO, ed e- VERIFICATO DIRETTAMENTE: il punto 8 misura la REVERSIBILITA- su quattro semi, e entrambi gli integratori tornano entro 4e-15 -- quattro ordini sotto la lettura fissata | `_collauda_passo.py` sezione (G); `A16` e- il nome del ramo |
+| **`A17`** | `STANDARD` | ogni comportamento e- determinato SOLO dal suo ambito. ### CABLATO IN TRE POSTI: i simboli VIETATI dello schema (pos, x, y, z, coord, xyz), `P-E4` (la fisica non importa osservatori/ ne- driver) e `P-E5` (gli osservatori non scrivono lo stato, MISURATO AL BYTE) | `leggi/schema.py::VIETATI`, `csv/_presidi_era2.py::pe4` e `::pe5` |
 | **`A2`** | `STANDARD` | nessuna scorciatoia globale: un `termine_nodo` NON PUO- avere una variabile d-arco nell-ambito, e i simboli dei vicini non esistono nel suo ambiente | `leggi/schema.py` + `_genera.py::ambiente` |
 | **`A4`** | `STANDARD` | stratificazione causale: ### E- IL CUORE DELLA FOTOGRAFIA PER STRATO, e il cono si MISURA (1 arco per strato, esattamente zero oltre) | `passo.py::strati` + `_collauda_passo.py` sezione (C) |
 | **`A7`** | `STANDARD` | conservazione e stato: lo stato e- DICHIARATO in `leggi.yaml` e `stato.py` si GENERA, quindi non esiste uno stato non dichiarato | `_genera_stato.py` + `P-E3` |
@@ -64,6 +66,7 @@
 | **`P-E8`** | `PRESIDIO` | NATO NELL-ERA 2, ed e- IL SOLO che NON IMPEDISCE: senza protezione del ramo la CI gira DOPO il push. ### E- UNA RETE CHE SEGNALA (`A9`), e qui avevo scritto il contrario. ### E non e- mai stata osservata girare | `.github/workflows/era2.yml`; ### SEGNALA, non impedisce |
 | **`P-M1`** | `PRESIDIO` | e- il presidio di questo punto: ### SI APPLICA A SE- STESSO -- appena la sua voce e- nata, il perimetro lo ha incluso e lui ha RIFIUTATO IL COMMIT chiedendo questa riga. ### Non l-ho previsto: me l-ha detto lui | `csv/_metodi_era2.py::controlla`, cablato nel `pre-commit` e nella CI |
 | **`P-R1`** | `PRESIDIO` | NATO NELL-ERA 2: `A8` e `P5` cablati. Il CONTEGGIO dei rami lo misura l-AST, il RUOLO e- dichiarato a vocabolario chiuso. ### 27 rami in 12 funzioni, e NOVE SONO `default` -- un DEBITO che il punto 15(b) vietera-, dichiarato invece che nascosto | `csv/_rami_era2.py::controlla`, `pre-commit` + CI |
+| **`P-RIF`** | `PRESIDIO` | NATO NELL-ERA 2: un ID nel codice e- un `@rif`, o non esiste. ### Un ID in un COMMENTO e- prosa, e un riferimento che una macchina segue non vive nella prosa; i DOCSTRING restano, ed e- una scelta DICHIARATA. ### E si e- fatto piu- forte quando l-indice si e- completato: appena `A16` e `A17` sono diventati voci, ha trovato 4 commenti in piu- | `csv/_rif_nel_codice.py::controlla` + `primo_ordine/_rif.py`, `pre-commit` + CI |
 | **`P-T1`** | `PRESIDIO` | NATO NELL-ERA 2, ed e- il principio del mandato CABLATO: un presidio dichiarato ERRORE non puo- NOMINARE un campo di testo (via AST), e chi legge la prosa PUO- SOLO SEGNALARE. ### Non ripara: MANTIENE -- la misura dice che oggi e- gia- vero | `csv/_testo_e_metadati.py::controlla`, `pre-commit` + CI |
 | **`P-T2`** | `PRESIDIO` | NATO NELL-ERA 2: il REPLAY su TUTTI i registri (4 REPLAY, 5 REPERTO col blob dichiarato) e i testi generati BYTE-IDENTICI (9 file, VELOCI nel pre-commit e LENTI solo nella CI). ### E metadati.jsonl e- un REPERTO PER NECESSITA-: ha una via di scrittura e ZERO storico | `csv/_replay_registri.py::controlla`, `pre-commit` + CI |
 | **`P-T3`** | `PRESIDIO` | NATO NELL-ERA 2: una citazione e- {file, riga, commit, impronta, frase} e si RI-VERIFICA su `git show`. ### Il par.2 dice che i numeri di riga SONO SHIFTATI: con il commit una citazione e- vera PER SEMPRE, senza e- destinata a diventare falsa | `csv/_citazioni_strutturate.py::controlla`, `pre-commit` + CI |

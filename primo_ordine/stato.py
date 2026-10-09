@@ -11,7 +11,7 @@ esiste.**
 """
 import numpy as np
 
-# ### L-IMPRONTA del blocco `variabili` della tabella: `P-E2` la confronta.
+# ### L-IMPRONTA del blocco `variabili` della tabella: un presidio la confronta.
 IMPRONTA = 'ff5c058ce3e855b7'
 
 # ### (nome, tipo, ID della voce in `doc/indice/variabili.jsonl`)

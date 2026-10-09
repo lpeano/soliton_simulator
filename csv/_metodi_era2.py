@@ -113,6 +113,20 @@ METODI = {
     "A15": ("la memoria e- dinamica e locale: nessuna memoria nell-era 2 finche- la "
             "decisione 13 e- aperta -- e il tipo `coppia_coniugata` e- AMMESSO e NON USATO",
             "`schema.py::TIPI_VARIABILE`; decisione 13", "DA_DECIDERE"),
+    # ### ⚠ **E QUESTI DUE SONO ARRIVATI TARDI, perche- NON ERANO NELL-INDICE:**
+    # ### `A16` e `A17` sono decisioni di Luca del `2026-10-08` e ### **nessuna voce li
+    # ### nominava.** ### **Li ha trovati `P-RIF`**, rifiutando un `@rif` verso `A17`.
+    "A16": ("lo stato e- UNO e evolve al PRIMO ORDINE sotto una sola `H`. ### E- L-ASSIOMA "
+            "CHE DA- IL NOME AL RAMO, ed e- VERIFICATO DIRETTAMENTE: il punto 8 misura la "
+            "REVERSIBILITA- su quattro semi, e entrambi gli integratori tornano entro "
+            "4e-15 -- quattro ordini sotto la lettura fissata",
+            "`_collauda_passo.py` sezione (G); `A16` e- il nome del ramo", "PORTATO"),
+    "A17": ("ogni comportamento e- determinato SOLO dal suo ambito. ### CABLATO IN TRE "
+            "POSTI: i simboli VIETATI dello schema (pos, x, y, z, coord, xyz), `P-E4` (la "
+            "fisica non importa osservatori/ ne- driver) e `P-E5` (gli osservatori non "
+            "scrivono lo stato, MISURATO AL BYTE)",
+            "`leggi/schema.py::VIETATI`, `csv/_presidi_era2.py::pe4` e `::pe5`",
+            "PORTATO"),
     # ------------------------------------------------------------------ i HOOK
     "H-FILE": ("la lista `FILE CAMBIATI` si GENERA da `git diff --cached --name-only`, e "
                "vale per ogni commit -- compresi quelli dell-era 2",
@@ -525,6 +539,14 @@ METODI["P-T3"] = (
     "con il commit una citazione e- vera PER SEMPRE, senza e- destinata a diventare "
     "falsa",
     "`csv/_citazioni_strutturate.py::controlla`, `pre-commit` + CI", "PORTATO")
+METODI["P-RIF"] = (
+    "NATO NELL-ERA 2: un ID nel codice e- un `@rif`, o non esiste. ### Un ID in un "
+    "COMMENTO e- prosa, e un riferimento che una macchina segue non vive nella prosa; "
+    "i DOCSTRING restano, ed e- una scelta DICHIARATA. ### E si e- fatto piu- forte "
+    "quando l-indice si e- completato: appena `A16` e `A17` sono diventati voci, ha "
+    "trovato 4 commenti in piu-",
+    "`csv/_rif_nel_codice.py::controlla` + `primo_ordine/_rif.py`, `pre-commit` + CI",
+    "PORTATO")
 METODI["AUDIT-CURE"] = (
     "il censimento delle cure e del loro costo: ### IL PUNTO 10 chiede che ogni referto "
     "STAMPI il numero delle leggi, e che un commit che lo aumenta lo DICHIARI",

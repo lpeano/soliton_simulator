@@ -41,6 +41,10 @@ RADICE = os.path.dirname(_QUI)
 sys.path.insert(0, os.path.join(_QUI, "leggi"))
 sys.path.insert(0, _QUI)
 sys.path.insert(0, os.path.join(RADICE, "csv"))
+# ### ⛔ **IL COSTRUTTO `@rif`** *(punto `14`)*: ### **byte-inerte**, e
+# ### ### **collaudato tale** -- `rif(...)` torna ### **la funzione STESSA**, non un
+# ### involucro, e il collaudo lo verifica con `is`.
+from _rif import rif                                         # noqa: E402
 import schema as SCH                                         # noqa: E402
 import _genera_stato as GS                                   # noqa: E402
 
@@ -118,6 +122,11 @@ def ambiente(legge, variabili):
 #   (a) IL CONTROLLO, (b) LA DERIVATA
 # =====================================================================================
 
+# ### ⭐ **E QUESTO E- UN RIFERIMENTO VERO, non prosa:** `controlla()` ### **E- la
+# ### guardia** dei tre assiomi, e il `@rif` lo dice ### **all-AST** invece che a chi
+# ### legge un commento. ### **Il verso opposto si GENERA**
+# ### *(`doc/RIFERIMENTI_era2.md`)*.
+@rif("A11", "A17", "A12", ruolo="guardia")
 def controlla(legge, variabili):
     """### `(a)`: i simboli liberi ### **dentro l-ambiente**, e ### **`pos` mai.**"""
     import sympy
@@ -127,8 +136,8 @@ def controlla(legge, variabili):
     if viet:
         fuori.append("`%s`: l-espressione nomina %s, ### VIETATO (`A17`: una posizione non "
                      "entra nella fisica, e la decisione 9 e- APERTA)" % (idv, viet))
-    # ### \u26d4 **I RAMI: `A11` dice che UN LIMITE E- UNA LEGGE, non una toppa.**
-    # ### Un `Max(x, 0)` dentro un termine di `H` ### **viola `A14` per costruzione**
+    # ### ⛔ **I RAMI: UN LIMITE E- UNA LEGGE, non una toppa** *(vedi il `@rif`)*.
+    # ### Un `Max(x, 0)` dentro un termine di `H` ### **viola la CONSERVAZIONE per costruzione**
     # ### *(non esiste una lagrangiana che lo contenga)*, e ### **la cura non e-
     # ### tararlo: e- DERIVARE la legge** che produce quel comportamento.
     rami = SCH.rami_vietati(legge["espressione"])
@@ -275,7 +284,7 @@ def modulo(legge, variabili, e, grad, imp):
          Q3,
          "import numpy as np",
          "",
-         "# ### L-ID DELLA LEGGE: `P-E1` lo legge ### **via AST**, non per regex.",
+         "# ### L-ID DELLA LEGGE: un presidio lo legge ### **via AST**, non per regex.",
          "LEGGE = %r" % idv,
          "# ### L-IMPRONTA della riga di tabella *(`sha1` del `json` a chiavi ordinate)*.",
          "IMPRONTA = %r" % imp,
@@ -362,20 +371,32 @@ def modulo_osservatore(legge, variabili, e, imp):
          "",
          "### **La scheda:** `doc/leggi_era2/%s.md`." % idv,
          Q3,
+         "import os",
+         "import sys",
+         "",
+         "sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))",
+         "",
          "import numpy as np",
          "",
-         "# ### L-ID: `P-E1` lo legge ### **via AST**, non per regex.",
+         "from _rif import rif",
+         "",
+         "# ### L-ID: un presidio lo legge ### **via AST**, non per regex.",
          "LEGGE = %r" % idv,
          "IMPRONTA = %r" % imp,
          "TIPO = %r" % legge["tipo"],
          "AMBITO = %r" % (tuple(legge["ambito"]),),
          "PROVA = %r" % bool(legge["prova"]),
-         "# ### LA VOCE che questo osservatore MISURA: `P-E7` la verifica.",
+         "# ### LA VOCE che questo osservatore MISURA: un presidio la verifica.",
          "VOCE = %r" % legge["voce"],
          "TOLL_IM = 1e-10",
          "",
          ""]
-    L += ["def misura(st):",
+    # ### ⭐ **E L-OSSERVATORE DICHIARA, con un `@rif`, CHE MISURA LA SUA VOCE.**
+    # ### ### **E- un riferimento vero**: la voce e- una `MISURA`, e questo codice la
+    # ### ### **calcola.** Prima la stessa cosa stava ### **in un commento**, e il punto
+    # ### `14(c)` dice che ### **un riferimento nella prosa non e- un riferimento.**
+    L += ['@rif(%r, ruolo="misura")' % legge["voce"],
+          "def misura(st):",
           '    """### Il valore misurato. ### **Reale, e NON tocca `st`.**"""']
     L += _locali(legge, variabili)
     L += ["    _e = %s" % _npy(e),
@@ -570,7 +591,7 @@ def collaudo():
     g, _e = controlla(lg(espressione="psi_0c*psi_0 + pos_x"), VOC)
     esito("### DEVE rifiutare: un-espressione che nomina `pos_x` (`A17`)",
           any("VIETATO" in x for x in g))
-    # ### ⛔ **I RAMI: `A11` dice che un limite e- una LEGGE** *(punto `2`)*.
+    # ### ⛔ **I RAMI: un limite e- una LEGGE** *(punto `2`)*.
     for _e_ramo, _nome in (("Max(psi_0c*psi_0, 0)", "Max"),
                            ("Abs(psi_0)*psi_0c", "Abs"),
                            ("Piecewise((psi_0c*psi_0, True))", "Piecewise"),

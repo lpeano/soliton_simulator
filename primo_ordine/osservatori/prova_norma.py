@@ -5,19 +5,27 @@
 
 ### **La scheda:** `doc/leggi_era2/PROVA-NORMA.md`.
 """
+import os
+import sys
+
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
 import numpy as np
 
-# ### L-ID: `P-E1` lo legge ### **via AST**, non per regex.
+from _rif import rif
+
+# ### L-ID: un presidio lo legge ### **via AST**, non per regex.
 LEGGE = 'PROVA-NORMA'
 IMPRONTA = 'dbaed7132e12fbae'
 TIPO = 'osservatore'
 AMBITO = ('psi',)
 PROVA = True
-# ### LA VOCE che questo osservatore MISURA: `P-E7` la verifica.
+# ### LA VOCE che questo osservatore MISURA: un presidio la verifica.
 VOCE = 'MISURA-NORMA-ERA2'
 TOLL_IM = 1e-10
 
 
+@rif('MISURA-NORMA-ERA2', ruolo="misura")
 def misura(st):
     """### Il valore misurato. ### **Reale, e NON tocca `st`.**"""
     psi_0 = st['psi'][:, 0]

@@ -80,6 +80,13 @@ jobs:
           python primo_ordine/_genera.py
           git diff --exit-code -- primo_ordine doc/leggi_era2
 
+      - name: "### `@rif` e `P-RIF` -- un ID nel codice e- un costrutto, non prosa"
+        run: |
+          python primo_ordine/_rif.py
+          python csv/_rif_nel_codice.py
+          python csv/_rif_nel_codice.py --collaudo
+          git diff --exit-code -- doc/RIFERIMENTI_era2.md
+
       - name: "### `P-T3` -- le citazioni strutturate, ri-verificate su git show"
         run: |
           python csv/_citazioni_strutturate.py

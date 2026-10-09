@@ -11420,3 +11420,30 @@ Collaudo ### **`11`/`11`**, nei due versi. E il presidio ### **lascia il repo co
 ### ⛔ **E UN TERZO STATO DI REGISTRO, CHE CORREGGE UNA COSA CHE HO SCRITTO IO IERI.** In `P-T2` avevo scritto: *«o ha un replay, o e- un reperto col suo blob: NON C-E- UNA TERZA RISPOSTA»*. ### ⚠ **C-E-, e `citazioni.jsonl` lo dimostra:** ### **cresce** *(quindi non e- un reperto)* e ### **non ha uno storico** *(quindi non e- un replay)* — una citazione e- ### **immutabile per costruzione**, appuntata a un commit, quindi il registro ### **si allunga e non si riscrive mai.**
 
 ### ✅ **E `SOLO-AGGIUNTE` E- PIU- FORTE DI UN BLOB, non piu- debole:** un blob direbbe solo *«e- cambiato»* e ### **andrebbe riscritto a ogni aggiunta** *(e un presidio che va riscritto a ogni commit si spegne da se-)*; questo dice ### **«una riga che c-era NON C-E- PIU-, o e- CAMBIATA»**, verificato ### **contro `git show HEAD`.** ### **E la frase che diceva il contrario e- stata corretta in tre posti.**
+
+## PUNTO `14` — ### **`@rif`: UN RIFERIMENTO NON VIVE NELLA PROSA** — e ha trovato che ### **`A16` e `A17` NON SONO NELL-INDICE** *(2026-10-10)*
+
+`primo_ordine/_rif.py`: `@rif("<id>", ruolo=...)`, ### **byte-inerte e COLLAUDATO tale** — torna ### **la funzione STESSA**, verificato ### **con `is`.** Collaudo ### **`14`/`14`**; il presidio `P-RIF` ### **`10`/`10`.**
+
+### ⛔ **E IL BUCO CHE HA TROVATO E- IL PIU- GROSSO DI QUESTO MANDATO.** Ho messo un `@rif("A11", "A17", "A12", ruolo="guardia")` sul controllo del generatore, e il presidio lo ha ### **RIFIUTATO**: *«`A17` punta a UN ID CHE NON ESISTE»*.
+
+### ⚠ **`A16` e `A17` sono DECISIONI DI LUCA del 2026-10-08**, stanno in `doc/ASSIOMI.md` con la loro intestazione — ### **`A16` da- il nome a questo ramo** — e ### **nessuna voce dell-indice li nominava.** `A13`, `A14`, `A15` ci sono; ### **questi due no.**
+
+### ⛔ **E LI HO CITATI IN OGNI COMMIT DI QUESTO MANDATO**, sotto una mia dichiarazione `[SENZA-INDICE: … A16, A17 sono CITAZIONI]`. ### ⭐ **Quindi la MIA eccezione ha nascosto il buco per due giorni:** dichiaravo *«non sono voci che questo commit definisce»* — ### **vero, e IRRILEVANTE.** La domanda giusta era ### **«ESISTONO?»**, e ### **non me la sono fatta.** ### ✅ **Registrati** *(e `doc/ASSIOMI.md` ### **non e- toccato**: la voce REGISTRA un assioma che esiste)*.
+
+### ⭐ **E IL PRESIDIO SI E- FATTO PIU- FORTE APPENA L-INDICE SI E- COMPLETATO:** con `A16` e `A17` fra le voci ha trovato ### **`4` commenti in piu-**, che prima ### **erano invisibili perche- gli ID non esistevano.** ### **Un presidio che legge l-indice vale quanto l-indice e- completo.**
+
+### IL CONFINE FRA COMMENTO E DOCSTRING, ### **dichiarato**
+
+| | | |
+|---|---|---|
+| un **commento `#`** | sta ### **accanto a una riga di codice** | chi lo legge sta leggendo ### **il codice**, e un ID la- ### **sembra un riferimento**: quindi ### **deve esserlo** |
+| un **docstring** | e- ### **documentazione** | spiega ### **PERCHE-**, e in questo repo ### **le ragioni sono la parte che vale.** ### **Nessun difetto di questo repo e- mai nato da un docstring** |
+
+**Misurato:** ### **`10` ID nei commenti** *(curati: la frase resta, l-ID va nel docstring)* e ### **`33` nei docstring** *(che restano, ed e- ### **una scelta dichiarata**, non una dimenticanza)*.
+
+### ✅ **E DOVE UN `@rif` HA SENSO DAVVERO, L-HO MESSO:** `controlla()` del generatore ### **E- la guardia** di `A11`, `A17` e `A12`; l-osservatore generato ### **MISURA** la sua voce. ### **Quattro riferimenti**, e ### **il verso opposto SI GENERA** in `doc/RIFERIMENTI_era2.md`.
+
+### ⚠ **E UNA MIA REGOLA DI SEGNALE ERA TROPPO RIGIDA:** pretendeva un `@rif` di ruolo ### **`implementa`**, e ha segnalato `MISURA-NORMA-ERA2` — che e- ### **una MISURA**, e l-osservatore ### **LA MISURA**, non la implementa. ### **La regola giusta: NESSUN `@rif` di nessun ruolo**, cioe- ### **niente nel codice la tocca.**
+
+### ⚠ **CHE COSA RESTA DEL PUNTO `14`:** `(f)` *(`indice.py rinomina`, che aggiorna voce, alias, ogni `@rif` e ogni `[[ID]]` in UN commit)* e `(g)` *(i `[[ID]]` nei documenti vivi, che ### **`H-INDICE` gia- verifica**)*. ### **Il `(f)` e- un commit a se-.**

@@ -37,7 +37,7 @@ def stato_py(varia, imp):
          Q,
          "import numpy as np",
          "",
-         "# ### L-IMPRONTA del blocco `variabili` della tabella: `P-E2` la confronta.",
+         "# ### L-IMPRONTA del blocco `variabili` della tabella: un presidio la confronta.",
          "IMPRONTA = " + repr(imp),
          "",
          "# ### (nome, tipo, ID della voce in `doc/indice/variabili.jsonl`)",
