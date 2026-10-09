@@ -1003,13 +1003,20 @@ def _f7_stato(voci):
         # ### ### **superata da una decisione NON E- APERTA** -- e- risolta ### **da
         # ### fuori.** `TRANSIZIONI` lo conferma: da `SUPERATA` si esce ### **solo verso
         # ### `APERTA`**, cioe- ### **solo riaprendola.**
-        vietato = (v["dominio"] == "FISICA" and str(v["era"]) == "1"
+        # ### ⭐ **ESTESO A QUALSIASI DOMINIO il 2026-10-09**, e il perche- e- che la
+        # ### regola non parlava di fisica: ### **una voce dell-era 1 NON CHIUSA e-
+        # ### SOSPESA**, e vale per `METODO`, `INFRASTRUTTURA` e `DOCUMENTAZIONE` come per
+        # ### `FISICA`. ### **Violava su 16 voci** -- le 14 `CENS-*`, `D32-CONTATORE` e
+        # ### `RAMI-OFF-CURA2` -- e ### **sono state curate PRIMA che il presidio si
+        # ### accendesse**, perche- un presidio bloccante acceso prima della cura
+        # ### ### **rende il lotto che lo curerebbe inapplicabile.**
+        vietato = (str(v["era"]) == "1"
                    and v["stato"] not in ("SOSPESA", "CHIUSA", "SUPERATA"))
         if vietato:
-            err.append("`F7` `%s`: `FISICA`/era `1` con stato `%s`. La fisica dell-era 1 "
+            err.append("`F7` `%s`: `%s`/era `1` con stato `%s`. Una voce dell-era 1 "
                        "NON CHIUSA e- SOSPESA; se quello stato viene da un documento "
                        "(<<APERTO>>), e- lo stato DELL-ERA 1 e va in `stato_era_1`"
-                       % (v["id"], v["stato"]))
+                       % (v["id"], v["dominio"], v["stato"]))
     return err
 
 

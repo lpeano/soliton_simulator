@@ -203,6 +203,17 @@ def main():
     _ap["stato"] = "APERTA"
     esito("F7  DEVE scattare ancora: FISICA/era 1/APERTA, cioe- non e- un allargamento "
           "cieco", len(IX._f7_stato([_ap])) == 1)
+    # ### ⭐ **L-ESTENSIONE A QUALSIASI DOMINIO (2026-10-09)**, e il caso a risposta nota
+    # ### lo indica il mandato: a `72e452f` `CENS-A4` era
+    # ### ### **DOCUMENTAZIONE/era 1/APERTA** -- fuori da `FISICA`, quindi `F7` vecchio
+    # ### ### **NON la vedeva.**
+    a4_prima = [v for v in al_commit("72e452f", "doc/indice/voci.jsonl")
+                if v["id"] == "CENS-A4"]
+    assert a4_prima, "CENS-A4 non c-e- a 72e452f"
+    esito("F7  DEVE scattare: CENS-A4 a 72e452f era `%s`/era 1/`%s`"
+          % (a4_prima[0]["dominio"], a4_prima[0]["stato"]),
+          len(IX._f7_stato(a4_prima)) == 1,
+          "la regola vale per QUALSIASI dominio, non solo FISICA")
 
     # ---------------------------------------------------------------- F6
     a6_prima = [v for v in v_pre_g if v["id"] == "CENS-A6"]

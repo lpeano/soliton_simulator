@@ -117,26 +117,26 @@
 | `CENS-A1` | DIFETTO | FISICA | 1 | ### **SOSPESA** | SI | [A] la RIDUZIONE AL LIMITE dello spinore: lo stato che la garantisce non e' ragg |
 | `CENS-A2` | DIFETTO | FISICA | 1 | ### **SOSPESA** | SI | [A] `TORS_4PI`: *"Prova sperimentale, default off"*, e il default e' `True` |
 | `CENS-A3` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | [A] `COPPIA_MIT`: *"(opzione, spenta di default)"*, e il default e' `1.0` |
-| `CENS-A4` | DIFETTO | DOCUMENTAZIONE | 1 | ### **APERTA** |  | [A] `MITOSI_DIR`: *"MITOSI DIREZIONALE ATTIVA"*, e il valore e' `0.0` |
-| `CENS-A5` | DIFETTO | DOCUMENTAZIONE | 1 | ### **APERTA** |  | [A] `_passo_spinoriale` *"ORFANO"*: smentito da un altro commento dello stesso f |
+| `CENS-A4` | DIFETTO | DOCUMENTAZIONE | 1 | ### **SOSPESA** |  | [A] `MITOSI_DIR`: *"MITOSI DIREZIONALE ATTIVA"*, e il valore e' `0.0` |
+| `CENS-A5` | DIFETTO | DOCUMENTAZIONE | 1 | ### **SOSPESA** |  | [A] `_passo_spinoriale` *"ORFANO"*: smentito da un altro commento dello stesso f |
 | `CENS-A6` | DIFETTO | DOCUMENTAZIONE | 1 | ### **SOSPESA** | SI | [A] `README.md`: *"Tutti gli script di lancio includono esplicitamente `--sync`" |
 | `CENS-A7` | DIFETTO | DOCUMENTAZIONE | 1 | ### **SOSPESA** | SI | [A] il commento di `calcola_psi`: *"~19 chiamanti"*, misurato **2** |
 | `CENS-B1` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | [B] *"`SPINORE_VIVO = True` **NON E' MAI STATO VALIDATO COME DEFAULT** ... |
-| `CENS-B10` | DIFETTO | DOCUMENTAZIONE | 1 | ### **APERTA** |  | [B] *"**ESPLORATIVO**: lega la creazione di coppia anche all'anomalia di d |
-| `CENS-B11` | DIFETTO | DOCUMENTAZIONE | 1 | ### **APERTA** |  | [B] tre osservabili di controllo nominate una per una -- *"esponente di sc |
-| `CENS-B12` | DIFETTO | DOCUMENTAZIONE | 1 | ### **APERTA** |  | [B] *"KERNEL BILANCIATO DAL TEMPO PROPRIO (tau^alpha) **SEMPRE ATTIVO** .. |
-| `CENS-B13` | DIFETTO | DOCUMENTAZIONE | 1 | ### **APERTA** |  | [B] *"`inerzia = np.maximum(_contrasto * _T2, 1e-6)` -- **il pavimento RES |
-| `CENS-B14` | DIFETTO | DOCUMENTAZIONE | 1 | ### **APERTA** |  | [B] l'osservabile e' calcolata (`m0_spin_core`, `m0_spin_core_disp`); `Che |
-| `CENS-B15` | DIFETTO | DOCUMENTAZIONE | 1 | ### **APERTA** |  | [B] il **condizionale** scritto nel commento: *"Un esito positivo va letto |
+| `CENS-B10` | DIFETTO | DOCUMENTAZIONE | 1 | ### **SOSPESA** |  | [B] *"**ESPLORATIVO**: lega la creazione di coppia anche all'anomalia di d |
+| `CENS-B11` | DIFETTO | DOCUMENTAZIONE | 1 | ### **SOSPESA** |  | [B] tre osservabili di controllo nominate una per una -- *"esponente di sc |
+| `CENS-B12` | DIFETTO | DOCUMENTAZIONE | 1 | ### **SOSPESA** |  | [B] *"KERNEL BILANCIATO DAL TEMPO PROPRIO (tau^alpha) **SEMPRE ATTIVO** .. |
+| `CENS-B13` | DIFETTO | DOCUMENTAZIONE | 1 | ### **SOSPESA** |  | [B] *"`inerzia = np.maximum(_contrasto * _T2, 1e-6)` -- **il pavimento RES |
+| `CENS-B14` | DIFETTO | DOCUMENTAZIONE | 1 | ### **SOSPESA** |  | [B] l'osservabile e' calcolata (`m0_spin_core`, `m0_spin_core_disp`); `Che |
+| `CENS-B15` | DIFETTO | DOCUMENTAZIONE | 1 | ### **SOSPESA** |  | [B] il **condizionale** scritto nel commento: *"Un esito positivo va letto |
 | `CENS-B16` | DIFETTO | METODO | ENTRAMBE | ### **APERTA** |  | [B] (1) INVENTARIO e (2) README sono prescritti *"nello stesso commit del  |
-| `CENS-B2` | DIFETTO | DOCUMENTAZIONE | 1 | ### **APERTA** |  | [B] ON di default *"PER DECISIONE DI LUCA E SU BASI DI FORMA, **NON** perc |
-| `CENS-B3` | DIFETTO | DOCUMENTAZIONE | 1 | ### **APERTA** |  | [B] *"IN VERIFICA"*, e nel corpo: *"stabile, ma **il guadagno sul decadime |
-| `CENS-B4` | DIFETTO | DOCUMENTAZIONE | 1 | ### **APERTA** |  | [B] *"costanti temporali TAU_P/TAU_BG/TAU_TW come RAPPORTI adimensionali . |
-| `CENS-B5` | DIFETTO | DOCUMENTAZIONE | 1 | ### **APERTA** |  | [B] *"**Da validare su TEMPI LUNGHI** (hardware di Luca): taglia stabile e |
-| `CENS-B6` | DIFETTO | DOCUMENTAZIONE | 1 | ### **APERTA** |  | [B] *"**DA RIPRENDERE**: seme iniziale di asimmetria strutturale (fase/tor |
+| `CENS-B2` | DIFETTO | DOCUMENTAZIONE | 1 | ### **SOSPESA** |  | [B] ON di default *"PER DECISIONE DI LUCA E SU BASI DI FORMA, **NON** perc |
+| `CENS-B3` | DIFETTO | DOCUMENTAZIONE | 1 | ### **SOSPESA** |  | [B] *"IN VERIFICA"*, e nel corpo: *"stabile, ma **il guadagno sul decadime |
+| `CENS-B4` | DIFETTO | DOCUMENTAZIONE | 1 | ### **SOSPESA** |  | [B] *"costanti temporali TAU_P/TAU_BG/TAU_TW come RAPPORTI adimensionali . |
+| `CENS-B5` | DIFETTO | DOCUMENTAZIONE | 1 | ### **SOSPESA** |  | [B] *"**Da validare su TEMPI LUNGHI** (hardware di Luca): taglia stabile e |
+| `CENS-B6` | DIFETTO | DOCUMENTAZIONE | 1 | ### **SOSPESA** |  | [B] *"**DA RIPRENDERE**: seme iniziale di asimmetria strutturale (fase/tor |
 | `CENS-B7` | DIFETTO | FISICA | 1 | ### **SOSPESA** | SI | [B] *"Default ancora off; **convergenza e superiorita' rispetto al percors |
 | `CENS-B8` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | [B] *"INTEGRATORE METRICO **SPERIMENTALE** ... Default off per mantenere i |
-| `CENS-B9` | DIFETTO | DOCUMENTAZIONE | 1 | ### **APERTA** |  | [B] *"LEGGE DI STABILITA' (**esplorativa**): i nuovi nodi in regione sovra |
+| `CENS-B9` | DIFETTO | DOCUMENTAZIONE | 1 | ### **SOSPESA** |  | [B] *"LEGGE DI STABILITA' (**esplorativa**): i nuovi nodi in regione sovra |
 | `CHI-BASC-DESCRIZIONE` | DIFETTO | DOCUMENTAZIONE | 1 | ### **CHIUSA** |  | il flag --chi-basc stampa <<perc_chi vira>>, ma con --chi-coop scrive perc_geom |
 | `CHI-TORS-ZERO-FALSO` | DIFETTO | METODO | ENTRAMBE | ### **CHIUSA** |  | il gancio chi_tors lascia uno ZERO dove non ha potuto misurare: 392 e 731 passi  |
 | `CHK2` | CURA | FISICA | 1 | ### **SOSPESA** |  | CHECKPOINT 2 / GLOBALE §3 / raggiunto e riferito a Luca. IL RUN LUNGO NON SI LAN |
@@ -223,7 +223,7 @@
 | `D30` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | massa chiama semina SENZA massid (:6209), quindi masseinfo non viene MAI popolat |
 | `D31` | DIFETTO | FISICA | 1 | ### **SOSPESA** | SI | Il freno di SCALAMIN (smpchiudi) E' IL MOTORE della crescita di d0: vale il 117. |
 | `D32` | DIFETTO | FISICA | 1 | ### **CHIUSA** |  | I TEMPI PROPRI DICHIARATI SONO TRE, E SONO TRE GRANDEZZE DIVERSE: r, taupp e d/c |
-| `D32-CONTATORE` | DIFETTO | INFRASTRUTTURA | 1 | ### **APERTA** |  | i contatori `_rep_taupp_*` contano un clamp che NON ESISTE PIU' |
+| `D32-CONTATORE` | DIFETTO | INFRASTRUTTURA | 1 | ### **SOSPESA** |  | i contatori `_rep_taupp_*` contano un clamp che NON ESISTE PIU' |
 | `D33` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | La repulsione alla massima compressione e' AZZERATA proprio dove serve: dal 75 % |
 | `D34` | DIFETTO | FISICA | 1 | ### **CHIUSA** |  | D34 CURATO IN CODICE il 2026-09-24 / Il wrap «a 4π» di ritmo() (:2584-2585) NON  |
 | `D35` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | L'antiparticella di Schwinger nasce con +2π (:5443) e nel campo F = Σ exp(iφ) E' |
@@ -487,7 +487,7 @@
 | `R4` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 13 volte, MAI definito in un registro) [R4] |
 | `R5` | PRESIDIO | METODO | ENTRAMBE | ### **APERTA** |  | contava 25 aperture su 24 passi: l'iniezione del test apriva il freno lei stessa |
 | `R6` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 27 volte, MAI definito in un registro) [R6] |
-| `RAMI-OFF-CURA2` | DIFETTO | INFRASTRUTTURA | 1 | ### **APERTA** |  | i rami a flag spento di TEMPO_UNICO_MITOSI, archiviati COPIATI dal sorgente |
+| `RAMI-OFF-CURA2` | DIFETTO | INFRASTRUTTURA | 1 | ### **SOSPESA** |  | i rami a flag spento di TEMPO_UNICO_MITOSI, archiviati COPIATI dal sorgente |
 | `RAMPA-1` | DIFETTO | FISICA | 1 | ### **CHIUSA** |  | CHIUSA il 2026-09-25, strada (3) (decisione di Luca): sigillo 9/9 dal CLI, ramp  |
 | `RAMPA-2` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | APERTA il 2026-09-25 (richiesta di Luca) / AL PASSO 0 TUTTI LEGGONO cs = CSM. La |
 | `REG-A` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | FASE A del registro della fisica: l'INVENTARIO degli scrittori di stato / MANDAT |

@@ -252,3 +252,11 @@ Si toglie dall'inizio della riga, **ripetutamente**: i `#`, gli spazi, i **simbo
 ### ⚠ **I segnaposto `NON_DEFINITA` NON ci vanno**, e sono `187`: non sono una domanda, sono **il lavoro che resta.**
 
 ### ⭐ **Perché GENERATO e non scritto:** nel codice **non c'è nessuna lista di ID**, ci sono **i tre criteri**, e l'elenco è ciò che trovano. ### ⛔ **Un elenco mezzo generato è peggio di nessun elenco, perché SEMBRA COMPLETO.**
+
+---
+
+## `F7` VALE PER **QUALSIASI DOMINIO** *(2026-10-09)*
+
+> ### ⭐ **La regola non parlava di fisica: una voce dell'era `1` NON CHIUSA è `SOSPESA`**, e vale per `METODO`, `INFRASTRUTTURA` e `DOCUMENTAZIONE` come per `FISICA`.
+
+### ⚠ **Violava su `16` voci** — le `14` `CENS-*`, `D32-CONTATORE` e `RAMI-OFF-CURA2` — e ### **sono state curate PRIMA che il presidio si accendesse**: ### ⛔ **un presidio bloccante acceso prima della cura rende inapplicabile il lotto che lo curerebbe**, perché la validazione gira **dentro `aggiorna-lotto`.**
