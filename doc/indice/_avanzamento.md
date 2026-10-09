@@ -74,17 +74,17 @@ python csv/indice.py aggiorna-lotto doc/indice/_lotti/<nome>.jsonl
 | voci | `843` |
 | ### **`DA_CLASSIFICARE` vere** *(non segnaposto)* | ### **`1`** |
 | ### **segnaposto `NON_DEFINITA`** | ### **`187`** |
-| ### **righe di storico** | ### **`1201`** |
+| ### **righe di storico** | ### **`1205`** |
 
 ```
 classe    DIFETTO=210  NON_DEFINITA=187  FRONTE=169  CRITERIO=94  MISURA=75  CURA=46  PRESIDIO=34  STANDARD=28
 dominio   FISICA=387  METODO=195  DA_CLASSIFICARE=187  INFRASTRUTTURA=47  DOCUMENTAZIONE=27
 era       1=458  DA_CLASSIFICARE=188  ENTRAMBE=172  2=25
-stato     SOSPESA=283  DA_CLASSIFICARE=188  CHIUSA=187  APERTA=160  AGENDA=25
+stato     SOSPESA=287  DA_CLASSIFICARE=188  CHIUSA=187  APERTA=156  AGENDA=25
 ```
 
-### ✔ **FATTO IN QUESTO GIRO:** il punto `6`: ### **il referto `doc/REFERTO_indice_v3_segnali.md`, voce per voce** *(`298` righe, `8` sezioni)*, i controlli `6/6`, il collaudo dei presidi `20/20`. ### **LA CHIUSURA DEI SEGNALI E' FATTA: da `103` a `15`** -- punti `1`..`6`
+### ✔ **FATTO IN QUESTO GIRO:** il punto `1`: le ### **`4` voci da `APERTA` a `SOSPESA`** -- la fisica dell'era `1` non chiusa e' `SOSPESA`, e l'### **«APERTO» dell'intestazione e' lo stato DELL'ERA `1`**, che va in `stato_era_1`. ### **Nel giro scorso l'avevo messo in `stato`**, che e' lo stato di oggi: dichiarare la provenienza di un dato ### **non basta se lo si mette nel campo sbagliato**
 
-### ⛔ **RESTA:** ### **le decisioni di Luca**, nel referto §⑧: i `15` segnali che restano *(elencati, non chiusi)*, `ENERGIA-NON-DEFINITA` *(superata da `A16`?)*, ### **la seconda restrizione di `F1`**, la classe di `W5`, il ### **QUARTO CASO** e la classificazione delle `7` ripristinate
+### ⛔ **RESTA:** il punto `2` *(### **`F7`, un ERRORE** e non un segnale: `FISICA`/era `1` con stato diverso da `SOSPESA`/`CHIUSA` ⇒ la validazione fallisce)*, poi `3` *(gli `11` di `F1`)*, `4` *(i `3` di `F4`)*, `5` *(l'elenco `DA_DECIDERE_LUCA.md`, ### **generato**)* e `6` *(il referto)*
 
-**Ultimo lotto applicato:** `doc/indice/_lotti/v3_p5_f3.jsonl *(il punto `6` non passa da un lotto: scrive il referto)*`
+**Ultimo lotto applicato:** `doc/indice/_lotti/v3_q1.jsonl`

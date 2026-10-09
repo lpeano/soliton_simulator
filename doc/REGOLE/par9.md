@@ -220,3 +220,17 @@ Si toglie dall'inizio della riga, **ripetutamente**: i `#`, gli spazi, i **simbo
 ### ⛔ **E `F4` SI FERMA AL PRIMO FILE**, quindi **non può dire se un ID è un OMONIMO.** Per quello c'è **`python csv/_cerca_definizioni.py`**, che cerca **TUTTE** le definizioni in **tutto il repo** — e che esclude i file che **parlano dell'indice** *(referti, task history, attrezzi, `par9.md`)*: ### ⭐ **un file che parla dell'indice ELENCA gli ID, non li DEFINISCE**, ed è **la terza volta** che questo falso-uno si presenta — dopo `doc/INDICE.md` *(il controllo `C4`)* e `doc/LISTA_CHIUSA.md` *(il ripasso del blocco `C`)*.
 
 ### **Un'etichetta NON ha un `meta`**, perché non è una voce: la sua eccezione e la sua nota stanno in **campi suoi**, scritti con **`etichette-lotto`** — la stessa via, con la sua riga di storico.
+
+---
+
+## LO STATO DI UNA VOCE DELL'ERA `1` *(regola in vigore, 2026-10-09)*
+
+> ### ⭐ **La fisica dell'era `1` non chiusa è `SOSPESA`.**
+
+| | |
+|---|---|
+| ### **`stato`** | lo stato **DI OGGI**: per una voce `FISICA`/era `1` può essere solo **`SOSPESA`** o **`CHIUSA`** |
+| ### **`stato_era_1`** | lo stato **che la voce aveva nell'era `1`**: è lì che va l'*«APERTO»* di un'intestazione come `## APERTO CURA1-CORTO` |
+| ### ⛔ **il presidio** | **`F7`**, e **è un ERRORE, non un segnale**: `FISICA` + era `1` + stato diverso da `SOSPESA`/`CHIUSA` ⇒ **la validazione fallisce** |
+
+### ⚠ **Da dove viene la regola:** nel giro del punto `5` avevo ripristinato `4` voci leggendo lo stato da `## APERTO <ID>`, e avevo **dichiarato la provenienza del dato** — ma l'avevo messo nel campo **sbagliato**. ### **Dichiarare da dove viene un dato non basta se lo si mette nel campo sbagliato**, e per questo la regola ha un presidio e non solo una riga.

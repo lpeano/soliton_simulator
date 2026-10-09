@@ -44,6 +44,7 @@ commit**: cosi' non se ne accumulano di invisibili.)*
 | `csv/_presidio_commenti_flag.py|H-P5` | strumento di analisi STATICA. Non importa il simulatore e non lo fa girare: legge |
 | `csv/_presidio_indice.py|H-P5` | non importa il simulatore e non lo fa girare. E' un presidio su documenti. |
 | `csv/_presidio_righe.py|H-P5` | non importa il simulatore e non lo fa girare. Conta le righe di un documento. |
+| `csv/_pulizia_finale.py|H-P5` | non importa il simulatore e non lo fa girare. Costruisce lotti per l'indice. |
 | `csv/_punto_della_situazione.py|H-P5` | non importa il simulatore e non lo fa girare. Legge un TSV e `git log`. |
 | `csv/_registri_indice.py|H-P5` | non importa il simulatore e non lo fa girare. Estrae dai sorgenti e dai |
 | `csv/_regole_proposta.py|H-P5` | non importa il simulatore e non lo fa girare. Legge documenti e ne scrive uno. |
@@ -116,5 +117,5 @@ commit**: cosi' non se ne accumulano di invisibili.)*
 | `csv/_test_fork/_z43_tempo_proprio.py|H-P3` | la scena passa TUTTA dal CLI (`nmasse` e `sep` da `argv`), e la |
 
 ```
-esenzioni dichiarate   109
+esenzioni dichiarate   110
 ```

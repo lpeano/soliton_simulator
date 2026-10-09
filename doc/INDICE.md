@@ -185,8 +185,8 @@
 | `CS-LAMBDA-GLOBALE` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | _cs_nodo non e del tutto locale: il pavimento usa _Lam = mean(/psi/^2) su TUTTA  |
 | `CTRL-RISCELTA` | DIFETTO | METODO | ENTRAMBE | ### **CHIUSA** |  | i punti di controllo si RISCEGLIEVANO a ogni checkpoint: l'osservabile della PRO |
 | `CURA-3` | CURA | FISICA | 1 | ### **SOSPESA** |  | - phi su 2pi con le soglie che la seguono / nella forma decisa: frazioni che sul |
-| `CURA1-CORTO` | MISURA | FISICA | 1 | ### **APERTA** |  | APERTO CURA1-CORTO |
-| `CURA2-CORTO` | MISURA | FISICA | 1 | ### **APERTA** |  | APERTO CURA2-CORTO |
+| `CURA1-CORTO` | MISURA | FISICA | 1 | ### **SOSPESA** |  | APERTO CURA1-CORTO |
+| `CURA2-CORTO` | MISURA | FISICA | 1 | ### **SOSPESA** |  | APERTO CURA2-CORTO |
 | `CURA2-STRUTTURALE` | DIFETTO | INFRASTRUTTURA | 1 | ### **CHIUSA** |  | la CURA 2 diventa STRUTTURALE: i rami `else` di TEMPO_UNICO_MITOSI escono dal si |
 | `D0` | CURA | FISICA | 1 | ### **SOSPESA** |  | CHI FA SCAPPARE d0 / 21/9 / MISURATO: e' IL FRENO. Gli scrittori spingono giu' - |
 | `D01` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | S09 clippa al passo causale — quindi e' gia' una LUNGHEZZA — e poi moltiplica pe |
@@ -620,8 +620,8 @@
 | `SCUOT-INNESCO` | MISURA | FISICA | 1 | ### **CHIUSA** |  | lo scuotimento del vuoto e' l'innesco: senza di lui zero nascite e spin omogenei |
 | `SHAKE-THEN-FREEZE` | MISURA | FISICA | 1 | ### **CHIUSA** |  | ✅ SHAKE-THEN-FREEZE — CHIUSO (2026-09-14, commit `5cffa73`). ESITO B, come prede |
 | `SIGILLO-COMPARATORE-DUPLICATO` | FRONTE | INFRASTRUTTURA | ENTRAMBE | ### **APERTA** |  | il comparatore del lockstep e copiato in due sigilli: due copie che possono dive |
-| `SIGILLO-CURA2` | MISURA | FISICA | 1 | ### **APERTA** |  | APERTO SIGILLO-CURA2 |
-| `SIGILLO-CURA2-RIPARATO` | MISURA | FISICA | 1 | ### **APERTA** |  | APERTO SIGILLO-CURA2-RIPARATO |
+| `SIGILLO-CURA2` | MISURA | FISICA | 1 | ### **SOSPESA** |  | APERTO SIGILLO-CURA2 |
+| `SIGILLO-CURA2-RIPARATO` | MISURA | FISICA | 1 | ### **SOSPESA** |  | APERTO SIGILLO-CURA2-RIPARATO |
 | `SIGILLO-REGISTRO-NON-CONFRONTABILE` | FRONTE | INFRASTRUTTURA | ENTRAMBE | ### **APERTA** |  | il comparatore del sigillo non sa confrontare _veleno_registro (un dict di array |
 | `SIGILLO-SENZA-CONFIGURAZIONE` | FRONTE | INFRASTRUTTURA | ENTRAMBE | ### **APERTA** |  | il sigillo prende la configurazione dal CLI del driver ma NON la timbra nel suo  |
 | `SIM-PRIMA-STANTIO` | DIFETTO | METODO | ENTRAMBE | ### **CHIUSA** |  | il _sim_prima_controllo.py committato NON era il codice di prima: conteneva la c |

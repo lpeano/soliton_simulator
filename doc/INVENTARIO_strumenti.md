@@ -2324,3 +2324,15 @@ etichette rimosse, con ### **`0` persi, `0` doppi, `0` conflitti**.
 | **COMANDO** | `python csv/_doc_referto_segnali.py` |
 | **cosa misura** | i segnali **dopo** *(dalle stesse funzioni che gira il validatore)* e quelli **prima** da `git show 433d215:doc/REFERTO_indice_v3_presidi.md` — ### **dal referto committato che li ha misurati**, non da un numero ricopiato. Fa girare **lui** i controlli e il collaudo, e importa le tabelle di decisione da `_segnali_chiusura.py` e `_p5_etichette.py`, così **il referto e il lavoro non possono divergere** |
 | **l'uscita** | `doc/REFERTO_indice_v3_segnali.md` *(`298` righe)* |
+
+---
+
+### `csv/_pulizia_finale.py` — **L'ULTIMA PULIZIA DELL'INDICE `v3`** *(2026-10-09)*
+
+| | |
+|---|---|
+| **file** | `csv/_pulizia_finale.py` |
+| **BLOB** *(sha1 dei byte grezzi)* | `6d36fc4d` |
+| **COMANDO** | `python csv/_pulizia_finale.py 1` · `3` · `4`, poi `python csv/indice.py aggiorna-lotto doc/indice/_lotti/v3_q<n>.jsonl` *(e `crea-lotto` per il `4`)* |
+| **cosa misura** | niente: **porta le decisioni**. Il `1` le `4` voci da `APERTA` a `SOSPESA`; il `3` i due **omonimi** e le `8` eccezioni di `F1`, con la frase **ritagliata dal testo vivo**; il `4` i tre del «quarto caso» decisi **per EREDITÀ** dal difetto da cui nascono |
+| ### ⛔ **l'ordine non è libero** | il punto `1` **deve precedere `F7`**, perché `F7` fa **fallire la validazione** e la validazione gira **dentro `aggiorna-lotto`**: con `F7` acceso prima, **il lotto del punto `1` non sarebbe più applicabile** |
