@@ -51,6 +51,12 @@ FILE_FISICA = (
     'primo_ordine/driver.py',
     'primo_ordine/_genera.py',
     'primo_ordine/termini/__init__.py',
+    # ### I DUE GENERATI: entrano nella LISTA ### **nel commit in cui nascono**, e il
+    # ### mandato lo pretende. ### ⚠ **Sono `prova: true`**: la LISTA sorveglia
+    # ### ### **i file di fisica**, e un file di PROVA ### **e- un file di fisica FINTO
+    # ### che vive dove vivra- la fisica vera** -- quindi si sorveglia come gli altri.
+    'primo_ordine/termini/prova_hopping.py',
+    'primo_ordine/termini/prova_locale.py',
     'primo_ordine/osservatori/__init__.py',
     'primo_ordine/leggi/schema.py',
     'primo_ordine/leggi/leggi.yaml',

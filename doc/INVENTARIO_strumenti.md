@@ -2627,3 +2627,17 @@ etichette rimosse, con ### **`0` persi, `0` doppi, `0` conflitti**.
 | ### ⭐ **e il controllo che conta** | ### **un `termine_nodo` non può avere una variabile d'ARCO nell'ambito**: una variabile d'arco **collega due nodi**, quindi leggerla ### **È vedere il vicino** — e si vede **nella TABELLA**, prima di generare |
 | ### ⛔ **e le due decisioni aperte sono AMMESSE, non scelte** | `coppia_coniugata` è ### **nel vocabolario e nessuna legge la usa** *(decisione `13`)*; ### **non c'è niente per la posizione** e `pos` è un simbolo **vietato** *(decisione `9`, `A17`)* |
 | ### ⚠ **è PURO** | prende il dizionario e il vocabolario, ### **non legge il disco**: il collaudo lo prova **su righe costruite in memoria** |
+
+---
+
+### `primo_ordine/_genera.py` — **IL GENERATORE** *(2026-10-09)*
+
+| | |
+|---|---|
+| **file** | `primo_ordine/_genera.py` |
+| **BLOB** *(sha1 dei byte grezzi)* | `098c7c1c` |
+| **COMANDO** | `python primo_ordine/_genera.py` *(genera)* · `python primo_ordine/_genera.py --prova` *(il collaudo, `9`/`9`)* |
+| **cosa misura** | `(a)` i simboli liberi **dentro l'ambiente** e `pos` **mai**; `(b)` **`dH/dpsi*` simbolica** *(Wirtinger)*; `(c)` il **modulo numpy** con `LEGGE` e **l'IMPRONTA**; `(d)` la **scheda** |
+| ### ⭐ **e i nomi dei simboli SONO i nomi delle locali** | così l'espressione stampata da `sympy` ### **è già il codice**: ### **nessuna sostituzione testuale** fra la derivata e il file — e una sostituzione è ### **un posto dove la formula può cambiare senza che nessuno lo veda** |
+| ### ⛔ **e i simboli dei vicini NON ESISTONO** per un `termine_nodo` | è il ### **secondo** presidio contro *«un termine di nodo che vede i vicini»*: il primo è l'ambito nello schema |
+| **l'uscita** | `primo_ordine/termini/<id>.py` · `doc/leggi_era2/<id>.md` |

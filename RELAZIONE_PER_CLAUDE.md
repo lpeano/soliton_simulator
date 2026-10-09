@@ -11039,3 +11039,17 @@ Il task history e' committato ### **prima del lavoro** *(par.8)*: `doc/TASK_HIST
 ### ⚠ **E «ammettere senza scegliere» HA UN PREZZO, che dichiaro:** un tipo che nessuno usa ### **non e- collaudato dall'uso**, solo dallo schema. ### ✔ **Il collaudo ha il braccio che lo copre:** costruisce una legge che legge una `coppia_coniugata` e verifica che lo schema ### **l'accetti** — cosi' il tipo ### **non e- una parola nel vocabolario: e- una forma provata.**
 
 ### ⚠ **E UNA QUARTA VOLTA I CONFINI DI PAROLA:** il controllo di `pos` doveva non scattare su ### **`max`, `xi`, `index`** — che contengono `x`. ### **Il braccio c'e-**, e ### **e- la quarta volta in tre giorni che una parola dentro un'altra parola inganna** *(`infinito`/`FINITO`, `passato`/`PASS`, `CONTIENE`/`TIENE`)*.
+
+---
+
+## TAPPA `3`: **il generatore, e la derivata e' `5.5e-11` dalla differenza finita** (2026-10-09)
+
+Collaudo del generatore ### **`9`/`9`**; `dH/dpsi*` generata contro la differenza finita centrata: ### **errore relativo `5.515e-11`**, e la lettura fissata nel task history era ### **`< 1e-7`.** Due termini di PROVA → due moduli e due schede. Nessuna fisica nuova; il simulatore resta `b8c21049`.
+
+### ⭐ **LA SCELTA DI PROGETTO CHE CONTA: i nomi dei simboli SONO i nomi delle variabili locali del modulo generato.** Cosi' l'espressione stampata da `sympy` ### **E- GIA- IL CODICE**, e fra la derivata simbolica e il file ### **non c'e- NESSUNA sostituzione testuale.** ### ⛔ **Una sostituzione e- un posto dove la formula puo- cambiare senza che nessuno lo veda** — ed e- la forma del difetto che ho pagato tre volte in tre giorni *(una regola in due posti)*.
+
+### ✔ **E I CONIUGATI SONO SIMBOLI INDIPENDENTI, non `conjugate(psi)`:** la derivata che serve e' ### **quella di Wirtinger**, e `sympy` su `conjugate()` darebbe ### **zero o una forma inutilizzabile.** Il collaudo lo verifica ### **su due casi a risposta nota a mano**: `d(psi_0c*psi_0)/d(psi_0c) = psi_0`, e la derivata del quadrato e' `2*psi_0*(psi^dag psi)`.
+
+### ✔ **E IL TERMINE DI NODO E- CIECO SUI VICINI IN DUE MODI, non uno:** ### **l'ambito** nello schema *(una variabile d'arco nell'ambito di un `termine_nodo` e' un errore)*, e ### **l'AMBIENTE del generatore** *(per un `termine_nodo` i simboli `psi_i`/`psi_j` ### **non esistono**, quindi nominarli e' «fuori dall'ambito»)*. ### ⭐ **Due presidi sulla stessa cosa, e il criterio `9-ter` lo ammette solo se guardano COSE DIVERSE:** il primo guarda ### **la dichiarazione**, il secondo ### **l'espressione.**
+
+### ⚠ **E L'IMPRONTA NON DIPENDE DALL'ORDINE DELLE CHIAVI**, e il braccio lo prova: se dipendesse, ### **riordinare lo yaml rifiuterebbe ogni file** — e il presidio accuserebbe ### **una modifica che non c'e- stata.**

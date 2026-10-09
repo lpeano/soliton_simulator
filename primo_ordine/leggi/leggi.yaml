@@ -44,8 +44,58 @@ versione: 1
 
 # ### LE VARIABILI DI STATO: il vocabolario che l-ambito delle leggi puo- nominare.
 #     Ognuna ha una VOCE in doc/indice/variabili.jsonl (`P-E3` lo verifica in biiezione).
-variabili: []
+variabili:
+  - nome: psi
+    tipo: complesso_c2_nodo
+    voce: V-PSI-ERA2
+    scheda: >-
+      Lo spinore di nodo, C^2. `A16`: lo spinore E' il tempo proprio della massa, e vive
+      SUL NODO. I suoi simboli, per il generatore, sono `psi_0` e `psi_1` piu' i
+      CONIUGATI INDIPENDENTI `psi_0c` e `psi_1c` -- indipendenti perche' la derivata che
+      serve e' quella di WIRTINGER.
 
-# ### LE LEGGI. Alla tappa 2 la tabella e- VUOTA: i due termini di PROVA arrivano con il
-#     generatore (tappa 3), perche- UN GENERATORE CON NIENTE DA GENERARE NON SI VERIFICA.
-leggi: []
+# ### LE LEGGI. Sono DUE, ed ENTRAMBE `prova: true`: servono a collaudare la catena
+#     (tabella -> controllo -> derivata -> modulo -> scheda -> indice), NON a dire come va
+#     il mondo. ### NESSUNA FISICA E' DECISA QUI.
+leggi:
+
+  # ------------------------------------------------------------------ il salto d'arco
+  - id: PROVA-HOPPING
+    tipo: termine_arco
+    prova: true
+    espressione: >-
+      -K*(psi_i_0c*psi_j_0 + psi_i_1c*psi_j_1 + psi_j_0c*psi_i_0 + psi_j_1c*psi_i_1)
+    ambito: [psi]
+    parametri:
+      K:
+        valore: 1.0
+        origine: >-
+          ### VALORE DI PROVA, NON DERIVATO. `A1` pretende che un numero dica da dove
+          viene: questo viene DA NIENTE, ed e' per questo che la legge e'
+          `prova: true`. Una legge di fisica con un parametro cosi' NON SI SCRIVE.
+    assiomi: [A16]
+    scheda: >-
+      Il salto fra due nodi, nella forma BILINEARE `psi_i^dag (...) psi_j + c.c.`.
+      E' il termine piu' semplice che accoppia due nodi, e serve a collaudare che il
+      generatore sappia: (1) distinguere i due capi di un arco, (2) derivare rispetto ai
+      coniugati di ENTRAMBI, (3) accumulare il gradiente sui due capi con `np.add.at`.
+      ### NON E' LA LEGGE DEL SALTO: e' la FORMA PIU' SEMPLICE che ha quella forma.
+
+  # ------------------------------------------------------------------ il termine locale
+  - id: PROVA-LOCALE
+    tipo: termine_nodo
+    prova: true
+    espressione: (g/2)*(psi_0c*psi_0 + psi_1c*psi_1)**2
+    ambito: [psi]
+    parametri:
+      g:
+        valore: 0.5
+        origine: >-
+          ### VALORE DI PROVA, NON DERIVATO. Come `K`: viene DA NIENTE.
+    assiomi: [A16, A17]
+    scheda: >-
+      Il termine locale `(g/2) (psi^dag psi)^2`: dipende SOLO dal nodo, e serve a
+      collaudare che il generatore sappia (1) derivare una NON LINEARITA', (2) tenere il
+      termine di nodo CIECO sui vicini -- i simboli `psi_i`/`psi_j` NON ESISTONO nel suo
+      ambiente. ### Soddisfa `A17` perche' non nomina nessuna posizione: non potrebbe,
+      il simbolo e' VIETATO.
