@@ -10994,3 +10994,17 @@ Il task history e' committato ### **prima del lavoro** *(par.8)*: `doc/TASK_HIST
 `doc/REFERTO_indice_v3_fine_riordino.md`, `207` righe; `DA_DECIDERE_LUCA.md` rigenerato *(`43` voci)*. `6`/`6` i controlli, `67`/`67` i presidi, `26`/`26` l'indice, `17`/`17` `_file_fisica`, `11`/`11` `H-ID-OBBLIGATORIO`. I segnali scendono da `31` a ### **`18`** *(`F1`=`4`, `F8`=`14`, ### **gli altri a `0`**)*. Nessuna corsa; il simulatore resta `b8c21049`.
 
 ### ⭐ **LA COSA CHE PORTO FUORI DA QUESTO GIRO, e vale per tutti i presidi che ho scritto:** ### **un presidio esteso «alla lettera del mandato» ha prodotto segnali che poi ho ELENCATO COME DIFETTI DELL'INDICE** — due volte, `F1` *(le `9` coppie `D`/`Z`)* e `F8` *(il marcatore `.py`)*. ### ⛔ **E il collaudo non se ne accorge, perche' i suoi bracci provano che la regola scatta DOVE DICO IO, non che la regola sia GIUSTA.** ### **Chi se ne accorge e' chi legge i segnali** — e in entrambi i casi e' stato il guardiano.
+
+---
+
+## L'INFRASTRUTTURA DELL'ERA `2`: **la tabella delle leggi è l'unica fonte** (2026-10-09)
+
+Il task history e' committato ### **prima del lavoro** *(par.8)*: `doc/TASK_HISTORY/2026-10-09_era2_infrastruttura.md`, `130` righe. Sei tappe, ### **commit a ognuna** *(il PC si riavvia fra `00:00` e `02:00`)*. ### **Nessuna fisica nuova**; il simulatore `b8c21049` ### **non si tocca.**
+
+### ✔ **E QUATTRO FATTI LI HO VERIFICATI PRIMA DI CREDERCI:** `doc/indice/leggi.jsonl` esiste *(`21` righe, ### **senza campo `era`**: sono ancore di traduzione dell'era `1`)*, `doc/indice/variabili.jsonl` esiste *(`44`)*, ### **`sympy 1.14` c'e' gia'** *(piu' `numpy` e `yaml`: ### **nessuna dipendenza da installare**)*, e `primo_ordine/` ### **non esiste ancora.**
+
+### ⛔ **E IL PRIMO OSTACOLO E- UN PRESIDIO CHE HO SCRITTO IO STAMATTINA.** Il mandato dice *«aggiungi ogni file alla LISTA di `csv/_file_fisica.py`»*, e `H-REG-R` e `H-P7` hanno ### **`assert len(FILE_FISICA) == 1`** col commento *«va esteso, non adattato»*. ### ✔ **Lo estendo con una DISTINZIONE, non con un ciclo:** la LISTA ha ### **due consumatori con scopi diversi** — `H-FISICA-FUORI-LISTA` e `H-ID-OBBLIGATORIO` guardano ### **tutti** i file di fisica; `H-REG-R` e `H-P7` guardano ### **solo quelli la cui SCHEDA vive in `doc/REGISTRO_FISICA.md`.**
+
+### ⭐ **E il perche- non e- una comodita-:** la scheda di una legge dell'era `2` ### **si GENERA in `doc/leggi_era2/<id>.md`.** Pretendere che stia ### **anche** in `REGISTRO_FISICA.md` vorrebbe dire ### **DUE posti per la stessa scheda**, e ### **due copie divergono** — e- il difetto che ho pagato ### **due volte in tre giorni** *(la regola di `superata_da` duplicata, e il numero dei hook nel titolo del §`12`)*.
+
+### 📌 **E L'INTEGRATORE E- UNA DECISIONE APERTA: dichiaro la scelta e il perche-.** Uso il ### **PUNTO MEDIO IMPLICITO**, perche' e' ### **simmetrico** *(nessuna deriva SECOLARE dell'energia: l'errore oscilla, non cresce)* e ### **conserva ESATTAMENTE gli invarianti quadratici** — e la ### **norma e' quadratica**, quindi si conserva ### **al bit.** ### ⛔ **L'alternativa `RK4` perde energia MONOTONAMENTE**, che su una corsa lunga e' la cosa sbagliata. ### ⚠ **Il prezzo: e' implicito**, e quante iterazioni di punto fisso serva ### **lo misuro, non lo suppongo.**
