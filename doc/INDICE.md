@@ -7,8 +7,8 @@
 | `DA_CLASSIFICARE` | `DA_CLASSIFICARE` | 187 |
 | `DOCUMENTAZIONE` | `1` | 21 |
 | `DOCUMENTAZIONE` | `ENTRAMBE` | 6 |
-| `FISICA` | `1` | 347 |
-| `FISICA` | `2` | 25 |
+| `FISICA` | `1` | 348 |
+| `FISICA` | `2` | 24 |
 | `FISICA` | `DA_CLASSIFICARE` | 1 |
 | `FISICA` | `ENTRAMBE` | 16 |
 | `INFRASTRUTTURA` | `1` | 16 |
@@ -244,7 +244,7 @@
 | `E4b` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 5 volte, MAI definito in un registro) [E4b] |
 | `EM-CURVATURA-BIDIREZIONALE` | MISURA | FISICA | 2 | ### **AGENDA** |  | l accoppiamento EM-curvatura e' bidirezionale in natura: il verso EM->curvatura  |
 | `END-TO-END` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 4 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
-| `ENERGIA-NON-DEFINITA` | FRONTE | FISICA | 2 | ### **AGENDA** |  | il modello non ha un'energia totale, e senza quella bilancio e calore non hanno  |
+| `ENERGIA-NON-DEFINITA` | FRONTE | FISICA | 1 | ### **SUPERATA** |  | il modello non ha un'energia totale, e senza quella bilancio e calore non hanno  |
 | `ESENTE-P3` | DIFETTO | METODO | ENTRAMBE | ### **APERTA** |  | (CITATO 2 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
 | `ETC-C1-CONFINE` | CURA | INFRASTRUTTURA | 1 | ### **CHIUSA** |  | cura (c) pezzo 1: la fotografia si apre a inizio PASSO PIENO, non di step, e ide |
 | `ETC-PASSO` | CURA | FISICA | 1 | ### **CHIUSA** |  | LA CURA (a): il passo diventa SINCRONO -- fotografia a inizio passo, commit a fi |
