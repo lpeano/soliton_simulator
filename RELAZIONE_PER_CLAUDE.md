@@ -11607,3 +11607,13 @@ Ogni dato di `db_era2/` ha ### **il suo TIMBRO accanto**, col campo `versione_da
 ### ⛔ **E QUEL CHE RESTA APERTO E- SCRITTO, non taciuto** *(sezione `5.`)*: le due decisioni di fisica, il ### **buco di `H-FISICA-FUORI-LISTA`** *(legge la lista dal disco)*, `metadati.jsonl` come ### **reperto per necessita-**, la ### **CI mai osservata girare**, e il ### **budget del `pre-commit`** — che e- il punto `6` della TERZA parte, e ### **questo e- il primo posto dove e- servito.**
 
 ### ➡ **Passo al mandato `2` di `6`: le decisioni di Luca sulle `43` domande.**
+
+## IL TASK HISTORY DEL MANDATO `2` DI `6` — ### **le `43` decisioni** *(2026-10-10)*
+
+### ⛔ **E QUESTO MANDATO HA UNA FORMA DIVERSA DA TUTTI I PRECEDENTI: non mi chiede di decidere niente.** Mi porta ### **`43` decisioni GIA- PRESE**, e il mio lavoro e- ### **applicarle fedelmente.** ### ⭐ **Quindi il rischio non e- sbagliare una scelta: e- TRADIRE UNA DECISIONE** — scrivere nell-indice qualcosa che Luca non ha detto.
+
+### ✅ **LA MIA DIFESA, dichiarata PRIMA:** ogni voce che tocco porta un `motivo` che ### **CITA ALLA LETTERA** il pezzo del mandato che la decide. ### **Se una riga non ha una frase di Luca da citare, non la scrivo.**
+
+### ⚠ **E HO SCRITTO SUBITO UNA COSA CHE SO E CHE IL MANDATO NON PUO- SAPERE:** il mandato chiede che `DA_DECIDERE_LUCA.md` risulti ### **VUOTO**, e ### **oggi le domande sono `45`, non `43`** — ### **le due in piu- le ho aggiunte io** *(le decisioni di fisica dei punti `3` e `11(a)`)*. ### ⛔ **Quelle NON si chiudono: aspettano Luca.** ### **Quindi l-elenco NON POTRA- essere vuoto, e la lettura che fisso e- che resti SOLO quelle due.**
+
+**E tre cose che non so**, scritte prima di guardare: `(1)` ### **quali sono gli ID esatti delle `43`** — il mandato ne nomina `41`, e ### **i due che restano li devo trovare io**; `(2)` se il presidio nuovo del blocco `1` ### **trova violazioni fra le `~20` voci che ho creato IO** in questi due giorni, che ### **non ho mai confrontato con gli alias**; `(3)` se togliere la nota ### **basta** a far sparire un omonimo dall-elenco — perche- il ### **secondo criterio** di `da-decidere` e- ### **`meta.omonimo`**, e il mandato dice che ### **il metadato RESTA.**
