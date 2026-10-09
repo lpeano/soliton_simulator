@@ -2674,7 +2674,7 @@ etichette rimosse, con ### **`0` persi, `0` doppi, `0` conflitti**.
 | | |
 |---|---|
 | **file** | `csv/_referto_infrastruttura_era2.py` |
-| **BLOB** *(sha1 dei byte grezzi)* | `1edab867` |
+| **BLOB** *(sha1 dei byte grezzi)* | `ffec187a` |
 | **COMANDO** | `python csv/_referto_infrastruttura_era2.py` |
 | **cosa misura** | **FA GIRARE i sette collaudi** dell'era `2` e scrive `doc/REFERTO_infrastruttura_era2.md` **dalla loro uscita** |
 | ### ⛔ **e nessun numero e' ricopiato** | `L-NUMERI`: le cifre del referto escono **dallo `stdout` dei comandi**, e il referto porta **i comandi stessi**, verbatim. ### **Se un collaudo smette di passare, il referto LO DICE** invece di conservare il numero di ieri |
@@ -2688,7 +2688,7 @@ etichette rimosse, con ### **`0` persi, `0` doppi, `0` conflitti**.
 | | |
 |---|---|
 | **file** | `csv/_metodi_era2.py` |
-| **BLOB** *(sha1 dei byte grezzi)* | `b5a7ba05` |
+| **BLOB** *(sha1 dei byte grezzi)* | `74fe4442` |
 | **COMANDO** | `python csv/_metodi_era2.py` *(il presidio, e GENERA il documento)* · `--collaudo` *(nei due versi, `8`/`8`)* |
 | **cosa impedisce** | che `doc/METODI_era1_in_era2.md` **invecchi in silenzio**: ### **ogni metodo del perimetro DEVE avere una riga** *(come si applica · dove · stato)*, citato o no |
 | ### ⭐ **e il PERIMETRO lo calcola l'INDICE** | da ### **campi a vocabolario chiuso** *(`classe in (STANDARD, PRESIDIO)`, piu' le cure di architettura che il mandato nomina **per ID**)*. ### ⛔ **Nessun `titolo` e nessuna `descrizione` si leggono per decidere se una voce e' un metodo** — e' il principio del mandato **applicato a se stesso** |
@@ -2703,7 +2703,7 @@ etichette rimosse, con ### **`0` persi, `0` doppi, `0` conflitti**.
 | | |
 |---|---|
 | **file** | `csv/_controlli_nell_indice.py` |
-| **BLOB** *(sha1 dei byte grezzi)* | `b758e661` |
+| **BLOB** *(sha1 dei byte grezzi)* | `6e96b7c3` |
 | **COMANDO** | `python csv/_controlli_nell_indice.py` *(gli errori e i segnali)* · `--collaudo` *(nei due versi, `8`/`8`)* · `--segnali` |
 | ### ⛔ **cosa RIFIUTA** | il **codice dichiara un ID** che ### **non e' nell'indice** — un presidio che cita un ID inesistente ### **ha un riferimento rotto** · oppure la voce esiste e ### **non ha `classe: PRESIDIO`** |
 | ### ⚠ **cosa SEGNALA e non rifiuta** | una voce `classe: PRESIDIO` che ### **nessun codice dichiara**: potrebbe vivere ### **in shell** *(i `H-*` stanno in `.githooks/`)* o essere ### **proposta e non cablata** *(`H-ETC-1`, `H-ETC-2`)*. ### **Rifiutare un fatto VERO non e' un presidio: e' un impedimento** *(`A9`)* |
@@ -2755,5 +2755,20 @@ etichette rimosse, con ### **`0` persi, `0` doppi, `0` conflitti**.
 | ### ⚠ **e `toll` NON e' innocuo** | ### **il cono dell'integratore GLOBALE dipende da lui**, misurato *(`3` archi a `1e-4`, `5` a `1e-8`)*: per questo i parametri del risolutore ### **stanno nel file** |
 | **l'IMPRONTA** | `sha1` del `json` a chiavi ordinate: ### **stabile sull'ordine in cui si scrive lo `yaml`**, e ### **cambia se cambia un valore** |
 | **l'uscita** | a schermo. ### **E riproduce i numeri del collaudo della catena** *(norma `1.986e-15`, energia `3.979e-05` su `200` passi)*: ### **due vie indipendenti che concordano** |
+
+---
+
+### `csv/_replay_registri.py` — **`P-T2`: IL REPLAY SU TUTTI I REGISTRI, e i generati BYTE-IDENTICI** *(2026-10-10)*
+
+| | |
+|---|---|
+| **file** | `csv/_replay_registri.py` |
+| **BLOB** *(sha1 dei byte grezzi)* | `91519df8` |
+| **COMANDO** | `python csv/_replay_registri.py` *(i veloci)* · `--con-lenti` *(anche il referto: e' quello che la CI passa)* · `--collaudo` *(nei due versi, `11`/`11`)* |
+| ### ⛔ **cosa impedisce** | un record che ### **non coincide col `dopo` della sua ultima riga di storico** · un `REPERTO` il cui ### **BLOB e' cambiato** · un registro sul disco ### **non dichiarato** · un testo generato che ### **rigenerato e' DIVERSO** |
+| **due stati, vocabolario chiuso** | **`REPLAY`** *(si rigioca lo storico)* · **`REPERTO`** *(non cambia, e il blob lo dice)*. ### **`9` registri: `4` e `5`** — quindi *«tutti i registri»* ### **NON vuol dire «tutti hanno uno storico»** |
+| ### ⚠ **e `metadati.jsonl` e' il caso scomodo** | ha ### **una via di scrittura** *(`meta-aggiungi`)* e ### **ZERO righe di storico**: oggi e' un `REPERTO` ### **per necessita', non per scelta** — e il referto lo nomina come ### **un BUCO** |
+| ### ⭐ **e i generati si dividono in VELOCI e LENTI** | il generatore del referto ### **fa girare i sette collaudi** e dal punto `8` ### **supera i `120` secondi.** ### **Un presidio di `pre-commit` da due minuti e' una ragione per dare `--no-verify`**, quindi i lenti stanno ### **SOLO nella CI** |
+| **l'uscita** | a schermo; e ### **il repo resta come l'ha trovato** — se un generato risulta diverso, ### **rimette i byte di prima** |
 
 ---

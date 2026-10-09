@@ -11390,3 +11390,19 @@ Una legge e- in `leggi_attive` ### **PER ID**, oppure ### **non gira**; e ### **
 ### ⛔ **E NON E- NEMMENO <<UN RITROVATO>>, come avevo scritto che sarebbe stato:** avevo detto che se il locale non fosse migliore, ### **la composizione palindroma non comprerebbe la reversibilita- che promette.** ### **Non compra nulla QUI, perche- il globale e- GIA- al limite della macchina: non c-e- niente da comprare.** La differenza fra i due resta ### **IL CONO.**
 
 Il task history e- ### **ANNOTATO, non riscritto** *(par.`8`)*. Collaudo della catena: ### **`38`/`38`** *(da `33`)*.
+
+## PUNTO `13(c)(f)` — ### **IL REPLAY SU TUTTI I REGISTRI** *(2026-10-10)*
+
+### ⚠ **E <<TUTTI I REGISTRI>> NON VUOL DIRE <<TUTTI HANNO UNO STORICO>>**, e la misura lo dice: su ### **`9` registri**, ### **`4` hanno un replay e `5` NO.** Quindi il vocabolario ha ### **due stati**, e ognuno ha un presidio suo — `REPLAY` *(si rigioca lo storico)* e `REPERTO` *(non cambia, e ### **il BLOB dichiarato** lo verifica)*.
+
+### ⛔ **E `metadati.jsonl` E- IL CASO SCOMODO, e lo dichiaro invece di nasconderlo:** ha ### **una via di scrittura** *(`meta-aggiungi`, `meta-depreca`, `meta-rinomina`)* e ### **ZERO righe di storico.** ### **Oggi e- un `REPERTO` per NECESSITA-, non per scelta**, e il presidio lo tratta come tale — ### **ma e- un BUCO, e il referto lo nominera-.**
+
+### ⛔ **E LA MIA PRIMA REGOLA DI ATTRIBUZIONE ERA SBAGLIATA: `34` errori.** `voci.jsonl` ed `etichette_rimosse.jsonl` ### **condividono uno storico** che ### **non porta un campo `dove`**, e avevo filtrato ### **per CHIAVE.** ### ⚠ **Falso:** un ID puo- stare in `etichette_rimosse.jsonl` ### **E avere righe di storico da quando era una VOCE** — e quelle righe hanno ### **la forma di una voce.** ### ✅ **La regola giusta confronta L-INSIEME DEI CAMPI, record per record:** e- ### **struttura, non prosa** — due record con campi diversi ### **sono due cose diverse.**
+
+### `13(f)` ### **i generati BYTE-IDENTICI, e il primo che ha trovato era SCADUTO**
+
+`9` testi generati. ### ✅ **E al primo giro ha trovato che `doc/REFERTO_infrastruttura_era2.md` era SCADUTO**: i conti dei collaudi sono cambiati *(`33`→`38`, `13`→`22`)* e il referto portava ancora i vecchi. ### **Rigenerato** — ed e- esattamente il lavoro che il `13(f)` esiste per fare.
+
+### ⚠ **E UN COSTO MISURATO, che cambia la forma del presidio:** il generatore del referto ### **fa girare i sette collaudi**, e dal punto `8` *(che aggiunge `4` semi × `100` passi × `2` integratori)* ### **supera i `120` secondi.** ### ⛔ **Un presidio di `pre-commit` da due minuti NON E- UN PRESIDIO: e- una ragione per dare `--no-verify`.** ### ✅ **Quindi i generati si dividono in VELOCI e LENTI**, e i lenti stanno ### **SOLO nella CI** — e il punto `6` della TERZA parte chiedera- ### **il budget dichiarato**: ### **questo e- il primo posto dove serve.**
+
+Collaudo ### **`11`/`11`**, nei due versi. E il presidio ### **lascia il repo come l-ha trovato:** se un generato risulta diverso, ### **rimette i byte di prima.**

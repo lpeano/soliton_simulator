@@ -37,3 +37,9 @@ python "$(git rev-parse --show-toplevel)/csv/_testo_e_metadati.py" || exit 1
 #  ### `A8`: un ramo silenzioso non e' un ramo. Il CONTEGGIO lo misura l'AST, il
 #  ### RUOLO e' dichiarato a vocabolario chiuso. Un ramo nuovo non passa inosservato.
 python "$(git rev-parse --show-toplevel)/csv/_rami_era2.py" || exit 1
+
+#  `P-T2` -- IL REPLAY SU TUTTI I REGISTRI, e i generati BYTE-IDENTICI.
+#  ### Senza `--con-lenti`: i generati LENTI (il referto, che fa girare i sette
+#  ### collaudi) stanno SOLO nella CI. Un presidio di pre-commit da due minuti
+#  ### e' una ragione per dare --no-verify.
+python "$(git rev-parse --show-toplevel)/csv/_replay_registri.py" || exit 1

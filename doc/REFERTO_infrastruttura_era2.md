@@ -47,10 +47,10 @@ Io avevo scritto, nell'intestazione di quel file, *«LA CI NON SI PUO' DIMENTICA
 
 | il collaudo | il comando, ### **verbatim** | esito |
 |---|---|---|
-| la catena | `python primo_ordine/_collauda_passo.py` | ### ✅ **`33`/`33`** |
+| la catena | `python primo_ordine/_collauda_passo.py` | ### ✅ **`38`/`38`** |
 | i presidi dell-era 2 | `python csv/_presidi_era2.py --collaudo` | ### ✅ **`16`/`16`** |
 | lo schema della tabella | `python primo_ordine/leggi/schema.py` | ### ✅ **`25`/`25`** |
-| il generatore | `python primo_ordine/_genera.py --prova` | ### ✅ **`13`/`13`** |
+| il generatore | `python primo_ordine/_genera.py --prova` | ### ✅ **`22`/`22`** |
 | la lista dei file di fisica | `python csv/_collaudo_file_fisica.py` | ### ✅ **`17`/`17`** |
 | i presidi dell-indice | `python csv/_collaudo_presidi_indice.py` | ### ✅ **`67`/`67`** |
 | i controlli della migrazione | `python csv/_controlli_indice_v2.py` | ### ✅ **`6`/`6`** |

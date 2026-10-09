@@ -513,6 +513,12 @@ METODI["P-R1"] = (
     "RUOLO e- dichiarato a vocabolario chiuso. ### 27 rami in 12 funzioni, e NOVE SONO "
     "`default` -- un DEBITO che il punto 15(b) vietera-, dichiarato invece che nascosto",
     "`csv/_rami_era2.py::controlla`, `pre-commit` + CI", "PORTATO")
+METODI["P-T2"] = (
+    "NATO NELL-ERA 2: il REPLAY su TUTTI i registri (4 REPLAY, 5 REPERTO col blob "
+    "dichiarato) e i testi generati BYTE-IDENTICI (9 file, VELOCI nel pre-commit e "
+    "LENTI solo nella CI). ### E metadati.jsonl e- un REPERTO PER NECESSITA-: ha "
+    "una via di scrittura e ZERO storico",
+    "`csv/_replay_registri.py::controlla`, `pre-commit` + CI", "PORTATO")
 METODI["AUDIT-CURE"] = (
     "il censimento delle cure e del loro costo: ### IL PUNTO 10 chiede che ogni referto "
     "STAMPI il numero delle leggi, e che un commit che lo aumenta lo DICHIARI",
