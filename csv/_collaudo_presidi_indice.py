@@ -302,6 +302,32 @@ def main():
           IX._f9_era_stato([_sp9]) == [],
           "e- l-ASSENZA di uno stato: prima la classe, poi lo stato")
 
+    # ---------------------------------------------------------------- F12
+    # ### ⛔ **IL CASO A RISPOSTA NOTA E- L-INDICE DI IERI:** a `570d43a` *(dopo il punto
+    # ### `1`, prima della cura)* le `chiusura` ORFANE erano ### **41**, e tutte
+    # ### ### **venivano dalla migrazione** -- `commit` = `era-1-secondo-ordine`, il NOME
+    # ### del tag.
+    v_f12 = al_commit("570d43a", "doc/indice/voci.jsonl")
+    _orf = IX._f12_chiusura_orfana(v_f12)
+    print("  `F12` le `chiusura` ORFANE a 570d43a: %d   |   oggi: %d"
+          % (len(_orf), len(IX._f12_chiusura_orfana(voci))))
+    esito("F12 DEVE essere un ERRORE: a 570d43a le `chiusura` orfane erano %d" % len(_orf),
+          len(_orf) == 41,
+          "una voce che dice <<chiusa dal commit X>> e non e- chiusa MENTE")
+    esito("F12 NON deve scattare: su TUTTE le %d voci di oggi, DOPO la cura" % len(voci),
+          IX._f12_chiusura_orfana(voci) == [],
+          "40 righe NON chiudono -> la `chiusura` si svuota; 1 chiude -> CHIUSA")
+    # ### ⚠ **E IL BRACCIO CHE PROVA CHE GUARDA LA `chiusura` E NON LO STATO:** una voce
+    # ### `CHIUSA` con la `chiusura` piena ### **e- SANA**, e `F12` ### **tace.**
+    _ok12 = [v for v in voci if v["stato"] == "CHIUSA" and (v["chiusura"] or {})][0]
+    esito("F12 NON deve scattare: `CHIUSA` con la `chiusura` piena e- SANA",
+          IX._f12_chiusura_orfana([_ok12]) == [])
+    _ba12 = json.loads(json.dumps(_ok12))
+    _ba12["stato"] = "SOSPESA"
+    esito("F12 DEVE scattare: la STESSA voce portata a `SOSPESA` senza svuotare",
+          len(IX._f12_chiusura_orfana([_ba12])) == 1,
+          "e- esattamente la forma delle 41: lo stato si muove, la `chiusura` resta")
+
     # ---------------------------------------------------------------- F10
     # ### ⛔ **IL CASO A RISPOSTA NOTA E- UNA CURA DEL GIRO SCORSO:** a `4ec2684`
     # ### `REGISTRO_FISICA:D37` era ### **`CRITERIO`/`INFRASTRUTTURA`**, e il punto `4`

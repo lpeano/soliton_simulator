@@ -2519,3 +2519,17 @@ etichette rimosse, con ### **`0` persi, `0` doppi, `0` conflitti**.
 | ### ⛔ **la frase è quella del FILE, non quella del guardiano** | la citazione è **normalizzata** *(senza markdown, accenti piegati)* e `-S` cerca **i byte**: si ritrova **la riga GREZZA** che la contiene, e **quella riga è l'ago** |
 | ### ⚠ **a CONFINE DI PAROLA, e due falsi lo impongono** | *«PASS»* combacia dentro *«passato»* e *«TIENE»* dentro *«CONTIENE»*: le due citazioni trovavano **la riga `1` e la riga `11`** del registro, cioè **il titolo**, e il commit «ricavato» sarebbe stato **quello che ha creato il file** |
 | **l'uscita** | `doc/indice/_lotti/v3_chiusure.jsonl` · `doc/indice/_p1_chiusure.json` |
+
+---
+
+### `csv/_f12_chiusure_orfane.py` — **LE `chiusura` ORFANE** *(2026-10-09)*
+
+| | |
+|---|---|
+| **file** | `csv/_f12_chiusure_orfane.py` |
+| **BLOB** *(sha1 dei byte grezzi)* | `36e47a16` |
+| **COMANDO** | `python csv/_f12_chiusure_orfane.py`, poi `python csv/indice.py aggiorna-lotto doc/indice/_lotti/v3_f12.jsonl` |
+| **cosa misura** | le voci con `chiusura` **piena** e stato **diverso da `CHIUSA`**, e per ognuna **che cosa dice la riga**: se chiude → `CHIUSA` *(col commit ricavato)*, altrimenti **la `chiusura` si svuota** |
+| ### ⭐ **non sceglie fra i due campi: chiede al DOCUMENTO** | due campi si contraddicono *(`chiusura` dice chiusa, `stato` dice sospesa)*, e **il terzo arbitro è la riga d'origine** |
+| ### ⚠ **e svuota la `chiusura`, NON lo stato** | lo stato **l'ha deciso un lavoro che ha letto la riga**; la `chiusura` **è ciò che è rimasto indietro** dalla migrazione |
+| **l'uscita** | `doc/indice/_lotti/v3_f12.jsonl` · `doc/indice/_p2_f12.json` |

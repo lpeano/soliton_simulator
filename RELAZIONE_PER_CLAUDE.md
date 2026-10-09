@@ -10777,3 +10777,17 @@ Il punto `1` del mandato. `47` voci, `47` righe di storico, la validazione inter
 ### ⚠ **E DUE FALSI PRIMA DI SCRIVERE, trovati guardando l'uscita:** la citazione di `REGISTRO_FISICA:T4` e' *«PASS»* e ### **«passato» la contiene**; quella di `REGISTRO_FISICA:P3` e' *«TIENE»* e ### **«CONTIENE» la contiene.** Le due combaciavano con la ### **riga `1`** e la ### **riga `11`** del registro, cioe' col ### **titolo del documento** — e il commit *«ricavato»* sarebbe stato ### **quello che ha creato il file.** ### ⭐ **E- la terza volta che una parola dentro un'altra parola mi inganna** *(la prima: `infinito` contiene `FINITO`)*: adesso si cerca ### **a confine di parola.**
 
 ### ⚠ **E `9` frasi sono GENERICHE, e lo dichiaro invece di nasconderlo:** la citazione compare in ### **piu' di tre righe del file** — `88` righe per le cinque `C*-PEQ-*` *(la frase e- `✅`)*. ### **Il commit ricavato vale meno**, e il campo `dove` lo scrive: ### **<<ATTENZIONE: la frase e- GENERICA>>.**
+
+---
+
+## `F12`, LE `chiusura` ORFANE: **`40` si svuotano, `1` chiude** — ed era il ROVESCIO di un controllo che c'era gia- (2026-10-09)
+
+`41` voci, `41` righe di storico, `52`/`52` il collaudo dei presidi. `F12` e- ### **acceso nello stesso commit che lo rende vero.** Nessuna corsa; il simulatore resta `b8c21049`.
+
+### ⭐ **ERA IL ROVESCIO DI UN CONTROLLO CHE C'ERA GIA-:** `valida` pretendeva `chiusura.criterio` e `chiusura.commit` ### **quando lo stato e- `CHIUSA`**. Che una `chiusura` piena ### **implichi** `CHIUSA` ### **non lo chiedeva nessuno** — e ### **una delle due direzioni non e- un controllo: e- mezzo controllo.**
+
+### ⛔ **E VENIVANO DALLA MIGRAZIONE, tutte:** `commit` = `era-1-secondo-ordine` *(il NOME del tag, non uno sha)* e criterio *«chiusa nell'era `1` (stato `chiuso` al tag …)»*. Il lavoro dopo le ha portate a `SOSPESA` ### **lasciando la `chiusura` dietro.** ### ⚠ **Erano `42`; il punto `1` ne ha chiusa UNA**, quindi quando ci sono arrivato erano `41` — e ### **il numero del mandato era giusto al momento in cui l'ha scritto.**
+
+### ✔ **E LA CURA NON HA SCELTO FRA I DUE CAMPI: HA CHIESTO AL DOCUMENTO.** Due campi si contraddicevano, e ### **il terzo arbitro e- la riga d'origine**: `40` righe ### **non chiudono** *(«APERTA», «NON CURATO», «SI CHIUDE QUANDO», «CHIUDE CHI», o ### **nessuna parola**)* e la `chiusura` ### **si svuota**; `1` chiude — `Z22`, che dice *«FATTO»* ### **e non «IL FATTO»** — e va a `CHIUSA` col commit ricavato.
+
+### ⭐ **E SI SVUOTA LA `chiusura`, NON SI MUOVE LO STATO:** lo stato ### **l'ha deciso un lavoro che ha letto la riga**; la `chiusura` e- ### **cio- che e- rimasto indietro.** ### **Fra un campo deciso leggendo e un campo trascinato da una migrazione, cede il secondo.**

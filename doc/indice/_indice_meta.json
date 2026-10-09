@@ -6408,8 +6408,7 @@
    "STANDARD-6",
    "STANDARD-8",
    "TAGLIA-FINITA",
-   "Z125",
-   "Z22"
+   "Z125"
   ],
   "CHIUSA": [
    "A1-INERZIA",
@@ -6583,6 +6582,7 @@
    "Z144",
    "Z145",
    "Z16",
+   "Z22",
    "Z25",
    "Z26",
    "Z27",

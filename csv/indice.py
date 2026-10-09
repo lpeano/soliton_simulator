@@ -272,6 +272,10 @@ def valida(voci, reg, verboso=True, derivati=True):
     # ### stesso hook**, perche- `indice.py valida` gira nel `pre-commit`.
     err += _f9_era_stato(voci)
     err += _f10_criterio_metodo(voci)
+    # ### `F12` SI ACCENDE QUI, ### **nello stesso commit che cura le `41`** -- e- la
+    # ### ### **quarta volta** che l-ordine non e- libero, e stavolta stava scritto nel
+    # ### task history ### **prima di muovermi.**
+    err += _f12_chiusura_orfana(voci)
     err += _eccezioni_malformate(voci)
     # ### L'INDICE INVERTITO e le VISTE: DERIVATI, e si CONFRONTANO
     if not derivati:
@@ -1085,6 +1089,36 @@ def _f8_era1(voci):
             fuori.append((v["id"], "era `ENTRAMBE` ma nomina un oggetto dell-era 1: "
                                    + "; ".join(visti[:4])))
     return fuori
+
+
+def _f12_chiusura_orfana(voci):
+    """### `F12`: una `chiusura` non vuota ### **su una voce che non e- `CHIUSA`.**
+
+    ### ⛔ **E- UN ERRORE, non un segnale:** una voce che porta *<<chiusa dal commit `X`
+    con criterio `Y`>>* e ### **non e- chiusa MENTE** -- e mente ### **in un campo che
+    un programma legge** *(`valida` pretende `criterio` e `commit` quando lo stato e-
+    `CHIUSA`; il rovescio ### **non lo chiedeva nessuno**)*.
+
+    ### ⚠ **Da dove venivano le `41`:** ### **dalla migrazione.** Avevano tutte
+    `commit` = `era-1-secondo-ordine` *(il NOME del tag)* e criterio *<<chiusa
+    nell-era 1 (stato `chiuso` al tag …)>>*, e il lavoro dopo le ha portate a
+    `SOSPESA` ### **lasciando la `chiusura` dietro.**
+
+    ### ⭐ **E la cura NON ha scelto fra i due campi a caso: ha chiesto al DOCUMENTO.**
+    `40` righe ### **non chiudono** -> la `chiusura` ### **si svuota**; `1` chiude
+    *(`Z22`)* -> ### **`CHIUSA`**, col commit ricavato.
+
+    ### **E- PURA**, come `F7` e `F9`: il collaudo la prova ### **su una COPIA.**
+    """
+    err = []
+    for v in voci:
+        ch = v["chiusura"] or {}
+        if ch and v["stato"] != "CHIUSA":
+            err.append("`F12` `%s`: la `chiusura` e- piena (commit `%s`) ma lo stato e- "
+                       "`%s`. Una voce che dice <<chiusa dal commit X>> e non e- chiusa "
+                       "MENTE, e mente in un campo che un programma legge"
+                       % (v["id"], ch.get("commit", "")[:40], v["stato"]))
+    return err
 
 
 def _f9_era_stato(voci):

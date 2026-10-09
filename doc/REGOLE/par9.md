@@ -372,3 +372,15 @@ Si toglie dall'inizio della riga, **ripetutamente**: i `#`, gli spazi, i **simbo
 | ### ⚠ **`--reverse` dà il PRIMO** | l'ultimo sarebbe ### **quello che l'ha toccata per ultimo**, che non è la stessa cosa |
 | ### ⛔ **e si cerca a CONFINE DI PAROLA** | *«PASS»* sta dentro *«passato»*, *«TIENE»* dentro *«CONTIENE»*. ### **È la terza volta** che una parola dentro un'altra parola inganna *(la prima: `infinito` contiene `FINITO`)* |
 | ### ⭐ **e il tag non è una finzione** | dice ### **«ENTRO QUI»**, non «proprio qui», ed è ### **la stessa regola della migrazione** |
+
+---
+
+## `F12`: **la `chiusura` ORFANA** *(2026-10-09)*
+
+| | |
+|---|---|
+| ### **la regola** *(ERRORE)* | `chiusura` non vuota ### **⇒ stato `CHIUSA`** |
+| ### **il perché** | una voce che porta *«chiusa dal commit `X` con criterio `Y`»* e ### **non è chiusa MENTE** — e mente ### **in un campo che un programma legge** |
+| ### ⭐ **era il ROVESCIO di un controllo che c'era già** | `valida` pretendeva `criterio` e `commit` ### **quando lo stato è `CHIUSA`**; che una `chiusura` piena ### **implichi** `CHIUSA` ### **non lo chiedeva nessuno** |
+| ### **da dove venivano le `41`** | ### **dalla migrazione**: `commit` = `era-1-secondo-ordine` *(il NOME del tag)*, e il lavoro dopo le ha portate a `SOSPESA` ### **lasciando la `chiusura` dietro** |
+| ### **e la cura chiede al DOCUMENTO** | `40` righe ### **non chiudono** → la `chiusura` si svuota; `1` chiude *(`Z22`, «FATTO»)* → ### **`CHIUSA`** |

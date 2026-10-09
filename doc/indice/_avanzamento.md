@@ -83,8 +83,8 @@ era       1=538  DA_CLASSIFICARE=188  ENTRAMBE=96  2=24
 stato     SOSPESA=369  DA_CLASSIFICARE=188  CHIUSA=182  APERTA=82  AGENDA=24  SUPERATA=1
 ```
 
-### ✔ **FATTO IN QUESTO GIRO:** il punto `1`, ### **il commit di chiusura si RICAVA**: delle `47` chiusure che il giro scorso avevo lasciato, ### **`46` hanno un commit VERO ricavato da `git log -S --reverse`** e ### **`1` cade sul tag.** ### ⛔ **Avevo chiamato «prudenza» il non trovare**, e cercavo lo sha ### **dentro la riga.**
+### ✔ **FATTO IN QUESTO GIRO:** il punto `2`, ### **`F12` acceso nello stesso commit che cura le `41` `chiusura` orfane**: `40` righe ### **non chiudono** e la `chiusura` si svuota, `1` chiude e va a `CHIUSA`. ### ⭐ **Era il ROVESCIO di un controllo che c'era gia-.**
 
-### ⛔ **RESTA:** i punti `2`…`9` — `F12`, lo schema di `superata_da`, la nota di `G1`, le `59` righe della terza lettura, ### **`F11`**, `csv/_file_fisica.py`, l'ID nel messaggio, e i due referti.
+### ⛔ **RESTA:** i punti `3`…`9`.
 
-**Ultimo lotto applicato:** `doc/indice/_lotti/v3_chiusure.jsonl` *(`47` voci)*
+**Ultimo lotto applicato:** `doc/indice/_lotti/v3_f12.jsonl` *(`41` voci)*

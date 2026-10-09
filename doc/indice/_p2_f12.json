@@ -1,0 +1,252 @@
+{
+ "chiude": [
+  [
+   "Z22",
+   "APERTA",
+   "fa1089c",
+   "la riga dice <<FATTO>> (la PRIMA parola di stato): nei 74 script (tocca ogni strumento: va fatto in un commit dedicato, non dentro un es"
+  ]
+ ],
+ "svuota": [
+  [
+   "A1-TREVIE",
+   "SOSPESA",
+   "NESSUNA parola decide: | A1-TREVIE | la catena a TRE VIE di step — if CHI_CORE… / elif VERSO_CHI… / elif not(…) | :3623 · :3626 · :3632 ( era citata :3517-:3526: slittata di",
+   "chiusa nell'era 1 (stato `chiuso` al tag era-1-secondo-ordine)"
+  ],
+  [
+   "A2-ANELLO",
+   "SOSPESA",
+   "la riga dice <<NON CURATO>> (la PRIMA parola di stato): doc/RAMIFICAZIONI.md Z70 | registrato, NON curato. A6 nella sua lettera non è violato (og",
+   "chiusa nell'era 1 (stato `chiuso` al tag era-1-secondo-ordine)"
+  ],
+  [
+   "A3-CHIRALE",
+   "SOSPESA",
+   "la riga dice <<APERTA>> (la PRIMA parola di stato): i conserva | doc/RAMIFICAZIONI.md Z71 | APERTA. I due punti di scrittura sono verifica",
+   "chiusa nell'era 1 (stato `chiuso` al tag era-1-secondo-ordine)"
+  ],
+  [
+   "A5-PANNELLO",
+   "SOSPESA",
+   "la riga dice <<NON INIZIATO>> (la PRIMA parola di stato): ziale) | la ex-LISTA 3 di questo file | non iniziato | un pannello in più, che legge psi e n",
+   "chiusa nell'era 1 (stato `chiuso` al tag era-1-secondo-ordine)"
+  ],
+  [
+   "B1",
+   "SOSPESA",
+   "la riga dice <<NON INIZIATO>> (la PRIMA parola di stato): /RAMIFICAZIONI.md Z47, doc/ASSIOMI.md | NON INIZIATO, e il registro lo qualifica già «proget",
+   "chiusa nell'era 1 (stato `chiuso` al tag era-1-secondo-ordine)"
+  ],
+  [
+   "B10",
+   "SOSPESA",
+   "NESSUNA parola decide: | B10 | --override-blob e la COPIA del driver | csv/_test_fork/_scena_video_ripresa.py (e68bb8c5, 17466 byte) e csv/_seal_fork/_ab_reciprocita.py | DU",
+   "chiusa nell'era 1 (stato `chiuso` al tag era-1-secondo-ordine)"
+  ],
+  [
+   "B3",
+   "SOSPESA",
+   "nessuna riga d'origine",
+   "chiusa nell'era 1 (stato `chiuso` al tag era-1-secondo-ordine)"
+  ],
+  [
+   "B4",
+   "SOSPESA",
+   "NESSUNA parola decide: | B4 | i np.zeros | tutto il simulatore | mai guardati | sono 116, non ~10. Il numero utile non è questo: serve restringere al percorso fisico, e quel",
+   "chiusa nell'era 1 (stato `chiuso` al tag era-1-secondo-ordine)"
+  ],
+  [
+   "B5",
+   "SOSPESA",
+   "la riga dice <<APERTO>> (la PRIMA parola di stato): CLAUDE.md §9, registro C14, fronte A | aperto e noto: theta ~ 39-129 giri/passo | C14",
+   "chiusa nell'era 1 (stato `chiuso` al tag era-1-secondo-ordine)"
+  ],
+  [
+   "B8",
+   "SOSPESA",
+   "NESSUNA parola decide: | B8 | IL BLOCCO DEL RUN A 6000 AL PASSO 2700 | doc/REFERTO_blocco_run6000.md (131 righe), csv/_test_fork/_dump_2700.txt | NON «mai diagnosticato»: PA",
+   "chiusa nell'era 1 (stato `chiuso` al tag era-1-secondo-ordine)"
+  ],
+  [
+   "COPPIA-RAMP",
+   "SOSPESA",
+   "la riga dice <<APERTA>> (la PRIMA parola di stato): | ❓ COPPIA-RAMP — APERTA il 2026-09-26 | PERCHE' LA COPPIA NON P",
+   "chiusa nell'era 1 (stato `non-difetto` al tag era-1-secondo-ordine)"
+  ],
+  [
+   "D27",
+   "SOSPESA",
+   "la riga dice <<APERTO>> (la PRIMA parola di stato): | Z65 | DIFETTO | D27 (APERTO) | Il grafo e' in QUATTRO COMPONENTI ch",
+   "chiusa nell'era 1 (stato `non-difetto` al tag era-1-secondo-ordine)"
+  ],
+  [
+   "DRIVER-SCENA-II",
+   "SOSPESA",
+   "la riga dice <<APERTA>> (la PRIMA parola di stato): | OSSERVABILE-P1 — APERTA il 2026-09-26 (rilievo di Luca) | NON E",
+   "chiusa nell'era 1 (stato `chiuso` al tag era-1-secondo-ordine)"
+  ],
+  [
+   "H-FILE",
+   "APERTA",
+   "nessuna riga d'origine",
+   "chiusa nell'era 1 (stato `chiuso` al tag era-1-secondo-ordine)"
+  ],
+  [
+   "H-NON-TRACCIATI",
+   "APERTA",
+   "nessuna riga d'origine",
+   "chiusa nell'era 1 (stato `chiuso` al tag era-1-secondo-ordine)"
+  ],
+  [
+   "H-STASH",
+   "APERTA",
+   "nessuna riga d'origine",
+   "chiusa nell'era 1 (stato `chiuso` al tag era-1-secondo-ordine)"
+  ],
+  [
+   "LUNGA-BATTITO-CADUTA",
+   "SOSPESA",
+   "la riga dice <<APERTA>> (la PRIMA parola di stato): cade al passo 1, e cade su una STAMPA (Aperta il 2026-10-06. Strumento d95639a4, simu",
+   "chiusa nell'era 1 (stato `chiuso` al tag era-1-secondo-ordine)"
+  ],
+  [
+   "SOGLIA-MITOSI-3PI",
+   "SOSPESA",
+   "NESSUNA parola decide: ## SOGLIA-MITOSI-3PI — la soglia porta un π di dipolo che quasi nessun arco ha (Aperta il 2026-10-06 sera, ### su decisione di Luca. ### Cercata prima",
+   "la riga dice <<FATTO>> (la PRIMA parola di stato): teva una voce dedicata alla soglia.) IL"
+  ],
+  [
+   "X1",
+   "SOSPESA",
+   "la riga dice <<SI CHIUDE QUANDO>> (la PRIMA parola di stato): tingue materia e antimateria) e' buono. Si chiude quando (a), (b) e (c) sono trattati esplicitam",
+   "chiusa nell'era 1 (stato `chiuso` al tag era-1-secondo-ordine)"
+  ],
+  [
+   "Y2",
+   "SOSPESA",
+   "NESSUNA parola decide: | Y2 VALE SEMPRE [EPOCA 1 · MISURA] | Due osservabili U(1) hanno il nullo SBAGLIATO o NON VERIFICATO, e una e' scritta nei CSV | (a) u1_segno_ov_nullo",
+   "chiusa nell'era 1 (stato `chiuso` al tag era-1-secondo-ordine)"
+  ],
+  [
+   "Z10",
+   "SOSPESA",
+   "la riga dice <<SI CHIUDE QUANDO>> (la PRIMA parola di stato): ndipendenti e' una decisione di regime. Si chiude quando la separazione e' decisa e sigillata. -",
+   "chiusa nell'era 1 (stato `chiuso` al tag era-1-secondo-ordine)"
+  ],
+  [
+   "Z19",
+   "SOSPESA",
+   "NESSUNA parola decide: | Z19 VALE SEMPRE [EPOCA 1 · MISURA] | QUARTA VOLTA: una grandezza letta in un momento del passo diverso da quello che il codice dichiara (2026-09-17)",
+   "chiusa nell'era 1 (stato `chiuso` al tag era-1-secondo-ordine)"
+  ],
+  [
+   "Z2",
+   "SOSPESA",
+   "NESSUNA parola decide: | Z2 VALE SEMPRE [EPOCA 1 · MISURA] | spinta: A2 e A3 sono stati tolti, A1 NO (2026-09-17) | La correzione (2) ha sostituito 0.02median(self.d0)rep co",
+   "chiusa nell'era 1 (stato `chiuso` al tag era-1-secondo-ordine)"
+  ],
+  [
+   "Z20",
+   "SOSPESA",
+   "la riga dice <<APERTA>> (la PRIMA parola di stato): i, non dal codice del driver. Lacuna P6 aperta: # RUN_PARAMS non contiene ne' TAU_A ne",
+   "chiusa nell'era 1 (stato `chiuso` al tag era-1-secondo-ordine)"
+  ],
+  [
+   "Z31",
+   "SOSPESA",
+   "NESSUNA parola decide: | Z31 VALE SEMPRE [EPOCA 1 · MISURA] | QUATTRO SIGILLI NON SONO PIU' RI-GIRABILI: il loro termine di paragone viveva in una CARTELLA TEMPORANEA, e il ",
+   "chiusa nell'era 1 (stato `chiuso` al tag era-1-secondo-ordine)"
+  ],
+  [
+   "Z40",
+   "SOSPESA",
+   "la riga dice <<APERTO>> (la PRIMA parola di stato): la tensione esisteva in doc/ASSIOMI.md APERTO #2, oggi ha un numero) | _cs_nodo (:291",
+   "chiusa nell'era 1 (stato `chiuso` al tag era-1-secondo-ordine)"
+  ],
+  [
+   "Z55",
+   "SOSPESA",
+   "la riga dice <<CHIUDE CHI>> (la PRIMA parola di stato): e. Nessuna delle due tocca i VALORI.) | Chiude chi misura da dove nasce il secondo oggetto",
+   "chiusa nell'era 1 (stato `chiuso` al tag era-1-secondo-ordine)"
+  ],
+  [
+   "Z59",
+   "SOSPESA",
+   "la riga dice <<CHIUDE CHI>> (la PRIMA parola di stato): sistema degenerato la sta riempiendo. | Chiude chi misura se il tasso si stabilizzi o cont",
+   "chiusa nell'era 1 (stato `chiuso` al tag era-1-secondo-ordine)"
+  ],
+  [
+   "Z6",
+   "SOSPESA",
+   "NESSUNA parola decide: | Z6 VALE SEMPRE [EPOCA 1 · MISURA] | IL TRANSITORIO DI ACCENSIONE E' UN BLOCCO STRUTTURALE — ha fermato DUE correzioni (2026-09-17) | psi non viene c",
+   "chiusa nell'era 1 (stato `chiuso` al tag era-1-secondo-ordine)"
+  ],
+  [
+   "Z7",
+   "SOSPESA",
+   "la riga dice <<SI CHIUDE QUANDO>> (la PRIMA parola di stato): be cs^-4) non rompe nessun consumatore. Si chiude quando ① viene cablata, dichiarando _fatt_cs_u",
+   "chiusa nell'era 1 (stato `chiuso` al tag era-1-secondo-ordine)"
+  ],
+  [
+   "Z71",
+   "SOSPESA",
+   "la riga dice <<APERTA>> (la PRIMA parola di stato): _CRIT, cioe' un dato sulla TORSIONE). | APERTA, e la decisione e' di FISICA, non di co",
+   "chiusa nell'era 1 (stato `chiuso` al tag era-1-secondo-ordine)"
+  ],
+  [
+   "Z75",
+   "SOSPESA",
+   "la riga dice <<CHIUDE CHI>> (la PRIMA parola di stato): modo di saperlo. CRITERIO DI CHIUSURA: chiude chi registra nsub per passo con quei quattr",
+   "chiusa nell'era 1 (stato `chiuso` al tag era-1-secondo-ordine)"
+  ],
+  [
+   "Z76",
+   "SOSPESA",
+   "la riga dice <<APERTA>> (la PRIMA parola di stato): originali — sei ordini di grandezza. | APERTA. NON e' un difetto dichiarato: e' una C",
+   "chiusa nell'era 1 (stato `chiuso` al tag era-1-secondo-ordine)"
+  ],
+  [
+   "Z78",
+   "SOSPESA",
+   "la riga dice <<SI CHIUDE QUANDO>> (la PRIMA parola di stato): saturo in tutti i campioni. Questa voce si chiude quando Luca decide se quel clip sia un difetto",
+   "chiusa nell'era 1 (stato `chiuso` al tag era-1-secondo-ordine)"
+  ],
+  [
+   "Z8",
+   "SOSPESA",
+   "NESSUNA parola decide: | Z8 VALE SEMPRE [EPOCA 1 · MISURA] | Lo 0.3457 % di nodi ancora al pavimento 1e-6 NON e' caratterizzato (2026-09-17) | Dopo il cablaggio di ① il pavi",
+   "chiusa nell'era 1 (stato `chiuso` al tag era-1-secondo-ordine)"
+  ],
+  [
+   "Z80",
+   "SOSPESA",
+   "la riga dice <<CHIUDE CHI>> (la PRIMA parola di stato): due e' misurata). CRITERIO DI CHIUSURA: chiude chi deriva la scala locale che sostituisce",
+   "chiusa nell'era 1 (stato `chiuso` al tag era-1-secondo-ordine)"
+  ],
+  [
+   "Z81",
+   "SOSPESA",
+   "la riga dice <<CHIUDE CHI>> (la PRIMA parola di stato): curare il fratello S09: si REGISTRA»). CHIUDE chi decide se il tetto di S09 debba essere",
+   "chiusa nell'era 1 (stato `chiuso` al tag era-1-secondo-ordine)"
+  ],
+  [
+   "Z83",
+   "SOSPESA",
+   "la riga dice <<DOMANDA APERTA>> (la PRIMA parola di stato): | Z83 VALE SEMPRE [EPOCA 1 · MISURA] | DOMANDA APERTA: d0 DEVE STARE SOPRA LAM? Il sistema NA",
+   "chiusa nell'era 1 (stato `chiuso` al tag era-1-secondo-ordine)"
+  ],
+  [
+   "Z84",
+   "SOSPESA",
+   "la riga dice <<CHIUDE CHI>> (la PRIMA parola di stato): venga la LORO tensione non e' misurato. CHIUDE chi risale la catena: la tensione del vicin",
+   "chiusa nell'era 1 (stato `chiuso` al tag era-1-secondo-ordine)"
+  ],
+  [
+   "Z85",
+   "SOSPESA",
+   "la riga dice <<APERTA>> (la PRIMA parola di stato): CHI_DA_SPINORE (→ resta su perc_chi). | APERTA — serve UNA decisione di Luca, e riguar",
+   "chiusa nell'era 1 (stato `chiuso` al tag era-1-secondo-ordine)"
+  ]
+ ]
+}
