@@ -83,8 +83,8 @@ era       1=538  DA_CLASSIFICARE=188  ENTRAMBE=96  2=24
 stato     SOSPESA=369  DA_CLASSIFICARE=188  CHIUSA=182  APERTA=82  AGENDA=24  SUPERATA=1
 ```
 
-### ✔ **FATTO IN QUESTO GIRO:** il referto ### **`doc/REFERTO_indice_v3_verifica_completa.md`** *(`438` righe, riga per riga tutte e `165`)*. ### **Il mandato «correzioni della verifica completa» e' CHIUSO**, con l'ordine del punto `1` corretto da Luca.
+### ✔ **FATTO IN QUESTO GIRO:** il punto `1`, ### **il commit di chiusura si RICAVA**: delle `47` chiusure che il giro scorso avevo lasciato, ### **`46` hanno un commit VERO ricavato da `git log -S --reverse`** e ### **`1` cade sul tag.** ### ⛔ **Avevo chiamato «prudenza» il non trovare**, e cercavo lo sha ### **dentro la riga.**
 
-### ⛔ **RESTA, E NON E- LAVORO MIO FINCHE- NON ARRIVA:** il mandato *«gli strumenti diventano obbligatori anche per l'era `2`»* — ### **l'integrazione c'e'** *(`doc/CODA_2026-10-09.md`)*, ### **il testo base NO.**
+### ⛔ **RESTA:** i punti `2`…`9` — `F12`, lo schema di `superata_da`, la nota di `G1`, le `59` righe della terza lettura, ### **`F11`**, `csv/_file_fisica.py`, l'ID nel messaggio, e i due referti.
 
-**Ultimi lotti applicati:** `doc/indice/_lotti/v3_guardiano.jsonl` e `doc/indice/_lotti/v3_convenzioni.jsonl` — ### **il referto NON scrive sull'indice**: legge, conta e scrive un documento.
+**Ultimo lotto applicato:** `doc/indice/_lotti/v3_chiusure.jsonl` *(`47` voci)*

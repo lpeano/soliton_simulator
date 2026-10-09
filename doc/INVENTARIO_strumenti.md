@@ -2505,3 +2505,17 @@ etichette rimosse, con ### **`0` persi, `0` doppi, `0` conflitti**.
 | **l'uscita** | `doc/REFERTO_indice_v3_verifica_completa.md` *(`438` righe)* |
 | ### ⛔ **il PRIMA viene da `git show`** | `git show bfb1596:doc/indice/voci.jsonl`, il task history, cioè **prima di ogni scrittura del giro** |
 | ### ⚠ **gira i quattro collaudi DA SÉ** | i controlli, il collaudo dei presidi, quello dell'indice e **le sei attese del difetto «IL FATTO»**: nessun numero ricopiato dal terminale |
+
+---
+
+### `csv/_commit_di_chiusura.py` — **IL COMMIT DI CHIUSURA SI RICAVA** *(2026-10-09)*
+
+| | |
+|---|---|
+| **file** | `csv/_commit_di_chiusura.py` |
+| **BLOB** *(sha1 dei byte grezzi)* | `ca2dd54d` |
+| **COMANDO** | `python csv/_commit_di_chiusura.py`, poi `python csv/indice.py aggiorna-lotto doc/indice/_lotti/v3_chiusure.jsonl` |
+| **cosa misura** | per ognuna delle `47` chiusure: **il primo commit che INTRODUCE la frase** nel file della `fonte` *(`git log -S --reverse`)*, o **il tag** se non si trova — e **quale dei due** |
+| ### ⛔ **la frase è quella del FILE, non quella del guardiano** | la citazione è **normalizzata** *(senza markdown, accenti piegati)* e `-S` cerca **i byte**: si ritrova **la riga GREZZA** che la contiene, e **quella riga è l'ago** |
+| ### ⚠ **a CONFINE DI PAROLA, e due falsi lo impongono** | *«PASS»* combacia dentro *«passato»* e *«TIENE»* dentro *«CONTIENE»*: le due citazioni trovavano **la riga `1` e la riga `11`** del registro, cioè **il titolo**, e il commit «ricavato» sarebbe stato **quello che ha creato il file** |
+| **l'uscita** | `doc/indice/_lotti/v3_chiusure.jsonl` · `doc/indice/_p1_chiusure.json` |

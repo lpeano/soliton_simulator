@@ -1,0 +1,378 @@
+[
+ {
+  "id": "C13",
+  "come": "RICAVATO",
+  "commit": "fa42066",
+  "dove": "riga 215 di `doc/RAMIFICAZIONI.md`",
+  "citazione": "C. DIAGNOSI CHIUSE",
+  "stato_prima": "SOSPESA"
+ },
+ {
+  "id": "C17",
+  "come": "RICAVATO",
+  "commit": "fa42066",
+  "dove": "riga 215 di `doc/RAMIFICAZIONI.md`",
+  "citazione": "C. DIAGNOSI CHIUSE",
+  "stato_prima": "SOSPESA"
+ },
+ {
+  "id": "C18",
+  "come": "RICAVATO",
+  "commit": "fa42066",
+  "dove": "riga 215 di `doc/RAMIFICAZIONI.md`",
+  "citazione": "C. DIAGNOSI CHIUSE",
+  "stato_prima": "SOSPESA"
+ },
+ {
+  "id": "C22",
+  "come": "RICAVATO",
+  "commit": "fa42066",
+  "dove": "riga 215 di `doc/RAMIFICAZIONI.md`",
+  "citazione": "C. DIAGNOSI CHIUSE",
+  "stato_prima": "SOSPESA"
+ },
+ {
+  "id": "C23",
+  "come": "RICAVATO",
+  "commit": "fa42066",
+  "dove": "riga 215 di `doc/RAMIFICAZIONI.md`",
+  "citazione": "C. DIAGNOSI CHIUSE",
+  "stato_prima": "SOSPESA"
+ },
+ {
+  "id": "C24",
+  "come": "RICAVATO",
+  "commit": "fa42066",
+  "dove": "riga 215 di `doc/RAMIFICAZIONI.md`",
+  "citazione": "C. DIAGNOSI CHIUSE",
+  "stato_prima": "SOSPESA"
+ },
+ {
+  "id": "C1-PEQ-ESATTO",
+  "come": "RICAVATO",
+  "commit": "72df045",
+  "dove": "riga 42 di `doc/STATO_RUN.md`; ### ATTENZIONE: 88 righe del file contengono la frase, quindi e- GENERICA",
+  "citazione": "✅",
+  "stato_prima": "SOSPESA"
+ },
+ {
+  "id": "C1BIS-ANOM-SIMM",
+  "come": "RICAVATO",
+  "commit": "72df045",
+  "dove": "riga 42 di `doc/STATO_RUN.md`; ### ATTENZIONE: 88 righe del file contengono la frase, quindi e- GENERICA",
+  "citazione": "✅",
+  "stato_prima": "SOSPESA"
+ },
+ {
+  "id": "C2-PEQ-NASCITA",
+  "come": "RICAVATO",
+  "commit": "72df045",
+  "dove": "riga 42 di `doc/STATO_RUN.md`; ### ATTENZIONE: 88 righe del file contengono la frase, quindi e- GENERICA",
+  "citazione": "✅",
+  "stato_prima": "SOSPESA"
+ },
+ {
+  "id": "C3-SCALA-MIN-PASSO",
+  "come": "RICAVATO",
+  "commit": "72df045",
+  "dove": "riga 42 di `doc/STATO_RUN.md`; ### ATTENZIONE: 88 righe del file contengono la frase, quindi e- GENERICA",
+  "citazione": "✅",
+  "stato_prima": "SOSPESA"
+ },
+ {
+  "id": "C4-COES-CAUSALE",
+  "come": "RICAVATO",
+  "commit": "72df045",
+  "dove": "riga 42 di `doc/STATO_RUN.md`; ### ATTENZIONE: 88 righe del file contengono la frase, quindi e- GENERICA",
+  "citazione": "✅",
+  "stato_prima": "SOSPESA"
+ },
+ {
+  "id": "D0",
+  "come": "RICAVATO",
+  "commit": "a48cd96",
+  "dove": "riga 434 di `doc/STATO_RUN.md`",
+  "citazione": "MISURATO: e' IL FRENO",
+  "stato_prima": "SOSPESA"
+ },
+ {
+  "id": "CHK2",
+  "come": "RICAVATO",
+  "commit": "1b40fdb",
+  "dove": "riga 433 di `doc/STATO_RUN.md`",
+  "citazione": "raggiunto e riferito a Luca",
+  "stato_prima": "SOSPESA"
+ },
+ {
+  "id": "COMPONENTI:S3b",
+  "come": "RICAVATO",
+  "commit": "5c6e770",
+  "dove": "riga 76 di `doc/COMPONENTI_PROMOSSE.md`",
+  "citazione": "SIGILLATA con controllo positivo",
+  "stato_prima": "SOSPESA"
+ },
+ {
+  "id": "COMPONENTI:S3c",
+  "come": "RICAVATO",
+  "commit": "5c6e770",
+  "dove": "riga 76 di `doc/COMPONENTI_PROMOSSE.md`",
+  "citazione": "SIGILLATA con controllo positivo",
+  "stato_prima": "SOSPESA"
+ },
+ {
+  "id": "D34",
+  "come": "RICAVATO",
+  "commit": "29c7c0b",
+  "dove": "riga 652 di `doc/STATO_RUN.md`",
+  "citazione": "CURATO IN CODICE",
+  "stato_prima": "SOSPESA"
+ },
+ {
+  "id": "G2",
+  "come": "RICAVATO",
+  "commit": "fedda6c",
+  "dove": "riga 436 di `doc/STATO_RUN.md`",
+  "citazione": "FATTO. Il saldo vive sul CONFINE",
+  "stato_prima": "SOSPESA"
+ },
+ {
+  "id": "G3",
+  "come": "RICAVATO",
+  "commit": "52486f0",
+  "dove": "riga 437 di `doc/STATO_RUN.md`",
+  "citazione": "sigillo 7/7",
+  "stato_prima": "SOSPESA"
+ },
+ {
+  "id": "G4",
+  "come": "RICAVATO",
+  "commit": "f6d432c",
+  "dove": "riga 438 di `doc/STATO_RUN.md`",
+  "citazione": "FATTO (finito 14:39:27)",
+  "stato_prima": "SOSPESA"
+ },
+ {
+  "id": "S03",
+  "come": "RICAVATO",
+  "commit": "fbd3bc9",
+  "dove": "riga 721 di `doc/STATO_RUN.md`",
+  "citazione": "DECISO da Z109",
+  "stato_prima": "SOSPESA"
+ },
+ {
+  "id": "S04",
+  "come": "RICAVATO",
+  "commit": "8c97e76",
+  "dove": "riga 722 di `doc/STATO_RUN.md`",
+  "citazione": "CADE con Z108",
+  "stato_prima": "SOSPESA"
+ },
+ {
+  "id": "Z13",
+  "come": "RICAVATO",
+  "commit": "fa1089c",
+  "dove": "riga 322 di `doc/RAMIFICAZIONI.md`",
+  "citazione": "CHIUSA il 2026-09-17",
+  "stato_prima": "SOSPESA"
+ },
+ {
+  "id": "REGISTRO_FISICA:P2",
+  "come": "RICAVATO",
+  "commit": "afb461e",
+  "dove": "riga 4286 di `doc/REGISTRO_FISICA.md`",
+  "citazione": "P2 È FALLITA",
+  "stato_prima": "SOSPESA"
+ },
+ {
+  "id": "Z29",
+  "come": "RICAVATO",
+  "commit": "fa1089c",
+  "dove": "riga 338 di `doc/RAMIFICAZIONI.md`",
+  "citazione": "Sigillo 8/8",
+  "stato_prima": "SOSPESA"
+ },
+ {
+  "id": "Z30",
+  "come": "RICAVATO",
+  "commit": "fa1089c",
+  "dove": "riga 339 di `doc/RAMIFICAZIONI.md`",
+  "citazione": "CHIUSA il 2026-09-18",
+  "stato_prima": "SOSPESA"
+ },
+ {
+  "id": "Z53",
+  "come": "RICAVATO",
+  "commit": "fa1089c",
+  "dove": "riga 362 di `doc/RAMIFICAZIONI.md`",
+  "citazione": "CURATO, SIGILLO 9/9 PASS",
+  "stato_prima": "SOSPESA"
+ },
+ {
+  "id": "Z5",
+  "come": "RICAVATO",
+  "commit": "fa1089c",
+  "dove": "riga 448 di `doc/RAMIFICAZIONI.md`; ### ATTENZIONE: 8 righe del file contengono la frase, quindi e- GENERICA",
+  "citazione": "chiusa per DIMOSTRAZIONE",
+  "stato_prima": "SOSPESA"
+ },
+ {
+  "id": "Z28",
+  "come": "RICAVATO",
+  "commit": "fa1089c",
+  "dove": "riga 337 di `doc/RAMIFICAZIONI.md`",
+  "citazione": "CHIUSA PRIMA DI NASCERE",
+  "stato_prima": "SOSPESA"
+ },
+ {
+  "id": "REGISTRO_FISICA:T3",
+  "come": "RICAVATO",
+  "commit": "3c5e404",
+  "dove": "riga 3239 di `doc/REGISTRO_FISICA.md`",
+  "citazione": "PASS",
+  "stato_prima": "SOSPESA"
+ },
+ {
+  "id": "REGISTRO_FISICA:T4",
+  "come": "RICAVATO",
+  "commit": "0432dac",
+  "dove": "riga 3200 di `doc/REGISTRO_FISICA.md`",
+  "citazione": "PASS",
+  "stato_prima": "SOSPESA"
+ },
+ {
+  "id": "REGISTRO_FISICA:T5",
+  "come": "RICAVATO",
+  "commit": "3c5e404",
+  "dove": "riga 3239 di `doc/REGISTRO_FISICA.md`",
+  "citazione": "PASS",
+  "stato_prima": "SOSPESA"
+ },
+ {
+  "id": "REGISTRO_FISICA:U2-5",
+  "come": "RICAVATO",
+  "commit": "3c5e404",
+  "dove": "riga 3239 di `doc/REGISTRO_FISICA.md`",
+  "citazione": "PASS",
+  "stato_prima": "SOSPESA"
+ },
+ {
+  "id": "REGISTRO_FISICA:U2-6",
+  "come": "RICAVATO",
+  "commit": "3c5e404",
+  "dove": "riga 3239 di `doc/REGISTRO_FISICA.md`",
+  "citazione": "PASS",
+  "stato_prima": "SOSPESA"
+ },
+ {
+  "id": "T3a",
+  "come": "RICAVATO",
+  "commit": "6bc1bd2",
+  "dove": "riga 15 di `csv/_seal_fork/_sigillo_scena_ii.py`",
+  "citazione": "PASS",
+  "stato_prima": "SOSPESA"
+ },
+ {
+  "id": "T3b",
+  "come": "RICAVATO",
+  "commit": "6bc1bd2",
+  "dove": "riga 15 di `csv/_seal_fork/_sigillo_scena_ii.py`",
+  "citazione": "PASS",
+  "stato_prima": "SOSPESA"
+ },
+ {
+  "id": "Z142",
+  "come": "RICAVATO",
+  "commit": "3e5b7b3",
+  "dove": "riga 442 di `doc/RAMIFICAZIONI.md`",
+  "citazione": "E4-LAM PASSA",
+  "stato_prima": "SOSPESA"
+ },
+ {
+  "id": "C5",
+  "come": "RICAVATO",
+  "commit": "fa42066",
+  "dove": "riga 215 di `doc/RAMIFICAZIONI.md`",
+  "citazione": "C. DIAGNOSI CHIUSE",
+  "stato_prima": "SOSPESA"
+ },
+ {
+  "id": "H1",
+  "come": "RICAVATO",
+  "commit": "55a7edc",
+  "dove": "riga 9431 di `RELAZIONE_PER_CLAUDE.md`; ### ATTENZIONE: 6 righe del file contengono la frase, quindi e- GENERICA",
+  "citazione": "H1 NON BASTA",
+  "stato_prima": "SOSPESA"
+ },
+ {
+  "id": "H3",
+  "come": "RICAVATO",
+  "commit": "d90a547",
+  "dove": "riga 8 di `doc/REFERTO_h3_termostato_2026-10-07.md`; ### ATTENZIONE: 6 righe del file contengono la frase, quindi e- GENERICA",
+  "citazione": "500 su 500",
+  "stato_prima": "SOSPESA"
+ },
+ {
+  "id": "DE-ACCOPPIABILITA",
+  "come": "RICAVATO",
+  "commit": "515aaf7",
+  "dove": "riga 158 di `doc/INDAGINE_scuotimento.md`",
+  "citazione": "superata dai fatti",
+  "stato_prima": "SOSPESA"
+ },
+ {
+  "id": "REGISTRO_FISICA:P3",
+  "come": "RICAVATO",
+  "commit": "89ad8cd",
+  "dove": "riga 71 di `doc/REGISTRO_FISICA.md`; ### ATTENZIONE: 18 righe del file contengono la frase, quindi e- GENERICA",
+  "citazione": "TIENE",
+  "stato_prima": "SOSPESA"
+ },
+ {
+  "id": "Z27",
+  "come": "RICAVATO",
+  "commit": "fa1089c",
+  "dove": "riga 336 di `doc/RAMIFICAZIONI.md`",
+  "citazione": "Z24 MISURATA",
+  "stato_prima": "SOSPESA"
+ },
+ {
+  "id": "REGISTRO_FISICA:E4-LAM",
+  "come": "RICAVATO",
+  "commit": "e8d8ba1",
+  "dove": "riga 4913 di `doc/REGISTRO_FISICA.md`",
+  "citazione": "SI VERIFICA SEMPRE",
+  "stato_prima": "SOSPESA"
+ },
+ {
+  "id": "COMPONENTI:A1",
+  "come": "RICAVATO",
+  "commit": "5c6e770",
+  "dove": "riga 59 di `doc/COMPONENTI_PROMOSSE.md`",
+  "citazione": "PROMOSSA il 2026-09-16",
+  "stato_prima": "SOSPESA"
+ },
+ {
+  "id": "L-SOGLIA",
+  "come": "RICAVATO",
+  "commit": "33433dd",
+  "dove": "riga 137 di `doc/PATTERN_DI_PROVA.md`",
+  "citazione": "fusa dentro",
+  "stato_prima": "APERTA"
+ },
+ {
+  "id": "STANDARD-4",
+  "come": "RICAVATO",
+  "commit": "33433dd",
+  "dove": "riga 137 di `doc/PATTERN_DI_PROVA.md`",
+  "citazione": "fusa dentro",
+  "stato_prima": "APERTA"
+ },
+ {
+  "id": "MITOSI-2LAM-ACCESO",
+  "come": "DAL TAG",
+  "commit": "dde9bc8",
+  "dove": "la frase e- nel file (riga 23 di `doc/PIANO_riordino_mitosi.md`) ma `git log -S` non la trova nella storia",
+  "citazione": "ANNOTAZIONE DEL 2026-10-02",
+  "stato_prima": "SOSPESA"
+ }
+]

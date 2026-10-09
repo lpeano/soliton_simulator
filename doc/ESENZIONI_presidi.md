@@ -16,6 +16,7 @@ commit**: cosi' non se ne accumulano di invisibili.)*
 | `csv/_collaudo_lista_chiusa.py|H-P5` | non importa il simulatore e non lo fa girare. Collauda un generatore di documenti. |
 | `csv/_collaudo_presidi_indice.py|H-P5` | non importa il simulatore e non lo fa girare. Collauda i presidi dell'indice. |
 | `csv/_collisioni_id.py|H-P5` | non importa il simulatore e non lo fa girare. Conta occorrenze in documenti. |
+| `csv/_commit_di_chiusura.py|H-P5` | non importa il simulatore e non lo fa girare. Costruisce un lotto. |
 | `csv/_confronto_pds.py|H-P5` | non importa il simulatore e non lo fa girare. Confronta due documenti. |
 | `csv/_controlli_indice_v2.py|H-P5` | non importa il simulatore e non lo fa girare. Controlla una migrazione. |
 | `csv/_controlli_riordino.py|H-P5` | non importa il simulatore e non lo fa girare. Conta righe e cerca stringhe. |
@@ -133,5 +134,5 @@ commit**: cosi' non se ne accumulano di invisibili.)*
 | `csv/_test_fork/_z43_tempo_proprio.py|H-P3` | la scena passa TUTTA dal CLI (`nmasse` e `sep` da `argv`), e la |
 
 ```
-esenzioni dichiarate   126
+esenzioni dichiarate   127
 ```

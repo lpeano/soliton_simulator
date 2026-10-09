@@ -360,3 +360,15 @@ Si toglie dall'inizio della riga, **ripetutamente**: i `#`, gli spazi, i **simbo
 | ### **`F6` legge anche la TRIPLA dichiarata** | una nota che scrive `DOMINIO/era N/STATO` fa ### **un'asserzione**, e se la voce si è mossa ### **la nota è scaduta.** ### ⚠ **La via grossolana** — *«la nota nomina uno stato diverso»* — dava ### **`69` segnali**; la forma esatta ne dà ### **`1`: `G1`** |
 | ### **STANDARD contro PRESIDIO** | `PRESIDIO` è ### **solo ciò che è cablato** *(`A9`)*: le regole di lavoro del §`11` ### **non impediscono niente** e sono `STANDARD` |
 | ### **una regola in vigore è `APERTA`** | `CHIUSA` ### **solo se ritirata o fusa.** ### ⭐ **Una regola non si «finisce»: VALE** — la stessa frase degli assiomi |
+
+---
+
+## IL COMMIT DI CHIUSURA *(2026-10-09)*
+
+| | |
+|---|---|
+| ### **la regola** | `chiusura.commit` = ### **il primo commit che ha INTRODOTTO la frase di chiusura** nella riga d'origine *(`git log -S'<frase>' --reverse -- <file>`)*; se non si trova, il tag ### **`era-1-secondo-ordine`** — e ### **`chiusura.criterio` dice quale dei due** |
+| ### ⛔ **«non si inventa» ≠ «non si cerca»** | cercavo lo sha ### **dentro la riga**, e una riga di documento ### **non ha nessun motivo di portare lo sha del commit che l'ha scritta.** ### **Cercavo nel posto sbagliato, e ho chiamato «prudenza» il non trovare** |
+| ### ⚠ **`--reverse` dà il PRIMO** | l'ultimo sarebbe ### **quello che l'ha toccata per ultimo**, che non è la stessa cosa |
+| ### ⛔ **e si cerca a CONFINE DI PAROLA** | *«PASS»* sta dentro *«passato»*, *«TIENE»* dentro *«CONTIENE»*. ### **È la terza volta** che una parola dentro un'altra parola inganna *(la prima: `infinito` contiene `FINITO`)* |
+| ### ⭐ **e il tag non è una finzione** | dice ### **«ENTRO QUI»**, non «proprio qui», ed è ### **la stessa regola della migrazione** |

@@ -10765,3 +10765,15 @@ Il task history e' committato ### **prima del lavoro** *(par.8)*: `doc/TASK_HIST
 ### ✔ **E LA CODA SI CHIUDE:** il mandato dice *«questo mandato CONTIENE anche il mandato base «INDICE E FISICA» che non ti era arrivato: la voce ① di `doc/CODA_2026-10-09.md` e' assorbita qui (parte II)»*. ### **Le tre correzioni `A`, `B` e `C` della coda sono dentro i punti `6`, `7` e `8`**, e la voce si chiude ### **al punto `9`**, non adesso: ### **si chiude quando il lavoro e' fatto, non quando e' letto.**
 
 ### ⚠ **E UNA COSA LA DICHIARO PRIMA DI SCRIVERLA, perche' `A9` la condanna:** il presidio del punto `7` sulla ### **cartella dell'era `2`** ### **non impedira- NIENTE finche- la cartella e- vuota** — e la cartella ### **resta vuota, perche' il nome lo decide Luca.** ### ⭐ **Per `A9` quello non e' un presidio: e- una tenda.** Lo scrivo nel referto come tale, e il collaudo gira ### **su una cartella di PROVA in una COPIA**: e' esattamente cio- che il mandato chiede, e ### **il motivo e- questo.**
+
+---
+
+## LE `47` CHIUSURE: **`46` commit RICAVATI dalla storia, `1` dal tag** (2026-10-09)
+
+Il punto `1` del mandato. `47` voci, `47` righe di storico, la validazione intera passa. Nessuna corsa; il simulatore resta `b8c21049`.
+
+### ⛔ **ERA UNA RINUNCIA, E IL NUMERO LO DIMOSTRA:** `46` su `47` hanno un commit ### **vero**, trovato in un comando. ### ⭐ **E l'errore sotto l'errore: cercavo lo sha DENTRO LA RIGA** — una riga di documento ### **non ha nessun motivo di portare lo sha del commit che l'ha scritta.** ### **Cercavo nel posto sbagliato, e ho chiamato «prudenza» il non trovare.**
+
+### ⚠ **E DUE FALSI PRIMA DI SCRIVERE, trovati guardando l'uscita:** la citazione di `REGISTRO_FISICA:T4` e' *«PASS»* e ### **«passato» la contiene**; quella di `REGISTRO_FISICA:P3` e' *«TIENE»* e ### **«CONTIENE» la contiene.** Le due combaciavano con la ### **riga `1`** e la ### **riga `11`** del registro, cioe' col ### **titolo del documento** — e il commit *«ricavato»* sarebbe stato ### **quello che ha creato il file.** ### ⭐ **E- la terza volta che una parola dentro un'altra parola mi inganna** *(la prima: `infinito` contiene `FINITO`)*: adesso si cerca ### **a confine di parola.**
+
+### ⚠ **E `9` frasi sono GENERICHE, e lo dichiaro invece di nasconderlo:** la citazione compare in ### **piu' di tre righe del file** — `88` righe per le cinque `C*-PEQ-*` *(la frase e- `✅`)*. ### **Il commit ricavato vale meno**, e il campo `dove` lo scrive: ### **<<ATTENZIONE: la frase e- GENERICA>>.**
