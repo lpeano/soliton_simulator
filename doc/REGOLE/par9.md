@@ -409,3 +409,14 @@ Si toglie dall'inizio della riga, **ripetutamente**: i `#`, gli spazi, i **simbo
 | ### ⚠ **`aggiornata` non si confronta** | è ### **un timbro di QUANDO**, non un dato della voce, e lo riscrive ogni lotto anche quando non cambia niente |
 | ### ⚠ **e sta nel ramo dei DERIVATI, come `F5`** | ### **legge il disco**, non solo la lista: durante un lotto lo storico nuovo ### **non è ancora scritto**, e `F11` accuserebbe ### **ogni voce del lotto** |
 | ### ⛔ **se il tag non si legge, TACE** | senza il ### **punto di partenza** non si può dire se una voce senza storico sia giusta: ### **meglio tacere che accusare** |
+
+---
+
+## `F8`: **via il marcatore «un file `.py` del repo»** *(2026-10-09)*
+
+| | |
+|---|---|
+| ### **il perché** | ### **quasi ogni voce di METODO nomina un `.py`** — un presidio, un attrezzo, un collaudo — e un `.py` ### **non è un oggetto dell'era `1`: è un oggetto DEL REPO**, che vive in entrambe le ere |
+| ### ⛔ **e il marcatore l'avevo aggiunto IO** | nel mandato dell'era delle voci di metodo, con la scusa che `PAT-1` nomina `dovespingelagravita.py`. ### **Faceva `6` dei `20` segnali** |
+| ### ⚠ **e avevo già tolto un marcatore mio una volta** | il `FLAG-COSTANTE`, perché rompeva `FALSO-ZERO`. ### **Questo l'ho tenuto, e per quattro giri** |
+| **cosa resta** | funzioni e variabili del simulatore · `csv/_test_fork` · `csv/_seal_fork` · il sigillo di una cura · la scena `(ii)` · il pilota · un `.pkl` · `b8c21049` · un flag `--…` |

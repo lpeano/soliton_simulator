@@ -83,8 +83,10 @@ era       1=538  DA_CLASSIFICARE=188  ENTRAMBE=96  2=24
 stato     SOSPESA=369  DA_CLASSIFICARE=188  CHIUSA=182  APERTA=82  AGENDA=24  SUPERATA=1
 ```
 
-### ✔ **FATTO IN QUESTO GIRO:** il punto `3`: ### **lo STATO esce da `F1`.** La voce `D` e' ### **il DIFETTO**, la `Z` e' ### **il REPERTO che lo ha trovato**: possono stare in stati diversi ### **a ragione.** `F1` passa da `8` a ### **`4` segnali**, e i `4` che restano differiscono ### **anche per dominio o era** — e quelli sono veri.
+### ✔ **FATTO IN QUESTO GIRO:** il punto `4`: ### **`F8` perde il marcatore «un file `.py` del repo»**, che avevo aggiunto io. `F8` passa da `20` a ### **`14` segnali**, elencati nel commit.
 
-### ⛔ **RESTA:** i punti `4`…`6` — `F8` senza il `.py`, le note di `F6`/`F3`, e il referto.
+### ⛔ **E DUE RICHIESTE DEL PUNTO `4` SONO INCOMPATIBILI, misurato:** *«DEVE scattare su `CONFIG-1` a `80eaf82`»* — ### **la- `CONFIG-1` e' era `1`**, e `F8` guarda solo le `ENTRAMBE`. E anche dove e' `ENTRAMBE`, l'unico marcatore che la prenderebbe ### **fa scattare `FALSO-ZERO`**, che il mandato precedente vieta. ### **La misura va nel referto: non scelgo io quale cade.**
 
-**Ultimo lotto applicato:** `doc/indice/_lotti/v3_indirizzate.jsonl` — ### **il punto `3` NON scrive sull'indice**: corregge un presidio.
+### ⛔ **RESTA:** i punti `5` e `6`.
+
+**Ultimo lotto applicato:** `doc/indice/_lotti/v3_indirizzate.jsonl` — ### **il punto `4` NON scrive sull'indice**: corregge un presidio.

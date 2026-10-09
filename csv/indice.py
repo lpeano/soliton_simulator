@@ -1158,9 +1158,18 @@ ERA1_OGGETTI = (
      r"|\bomega_s\b|\bchiralita_core_locale\b|\bforma_passo0\b",
      "una funzione o una variabile del simulatore"),
     (r"csv/_test_fork|csv/_seal_fork", "uno script di csv/_test_fork o csv/_seal_fork"),
-    # ### ⚠ **`PAT-1` nomina `dovespingelagravita.py`** -- il DRIVER -- e non sta in
-    # ### `csv/`: ### **un file `.py` del repo e- un oggetto concreto** come uno script.
-    (r"[A-Za-z0-9_]+\.py\b", "un file `.py` del repo"),
+    # ### ⛔ **IL MARCATORE «un file `.py` del repo» E- USCITO IL 2026-10-09, e il guardiano
+    # ### ### dichiara l-errore suo -- ma IL MARCATORE L-AVEVO AGGIUNTO IO** *(mandato
+    # ### dell-era delle voci di metodo)*, con la scusa che `PAT-1` nomina
+    # ### `dovespingelagravita.py`.
+    # ### ⭐ **PERCHE- ERA SBAGLIATO:** ### **quasi ogni voce di METODO nomina un `.py`** --
+    # ### un presidio, un attrezzo, un collaudo -- e un `.py` ### **non e- un oggetto
+    # ### dell-era `1`: e- un oggetto DEL REPO**, che vive ### **in entrambe le ere.**
+    # ### ⛔ **Faceva `17` dei `20` segnali**, e quei `17` li avevo ### **elencati nel
+    # ### referto come «il confine fra le due frasi dell-era»**: non erano un confine,
+    # ### erano ### **rumore di un marcatore mio.**
+    # ### ⚠ **E AVEVO GIA- TOLTO UN MARCATORE MIO UNA VOLTA** *(il `FLAG-COSTANTE`, perche-
+    # ### rompeva `FALSO-ZERO`)*: ### **questo l-ho tenuto, e per quattro giri.**
     # ### ⛔ **UN PATTERN CHE AVEVO AGGIUNTO IO, E L-HO TOLTO.** Volevo far scattare
     # ### `CONFIG-1` su un ### **FLAG-COSTANTE** (`FORK_SU2`, `TAU_LUCE`), e il pattern
     # ### ### **faceva scattare `FALSO-ZERO` su `REGISTRO_STATO`** -- il caso che il mandato

@@ -10953,3 +10953,22 @@ Il task history e' committato ### **prima del lavoro** *(par.8)*: `doc/TASK_HIST
 ### ⚠ **E IL BRACCIO DI COLLAUDO PASSAVA.** Il caso diceva *«`D08` cita `Z14`, e sono LO STESSO FATTO con stati diversi: DEVE scattare»* — e scattava, perche' la coppia era davvero disallineata. ### ⛔ **Un caso a risposta nota con la RISPOSTA SBAGLIATA passa, e non si accorge di niente.** ### ⭐ **Il collaudo non puo' trovare un errore nella REGOLA: lo trova chi legge i segnali** — e il guardiano li ha letti.
 
 ### ✔ **I `4` SEGNALI CHE RESTANO SONO VERI**, e differiscono ### **anche per dominio o era**: `D05`→`C5`, `D06`→`Z7`, `D19`→`Z88`, `Z130`→`S10`. ### **Il difetto e il suo reperto parlano della stessa cosa, nella stessa era** — e li' il presidio ha ancora ragione.
+
+---
+
+## `F8` PERDE IL MARCATORE `.py`, **e due richieste del punto `4` sono INCOMPATIBILI** (2026-10-09)
+
+`F8` passa da `20` a ### **`14` segnali**; `65`/`65` il collaudo dei presidi. Nessuna corsa; il simulatore resta `b8c21049`.
+
+### ⛔ **IL MARCATORE L'AVEVO AGGIUNTO IO**, e il perche- era sbagliato e- semplice: ### **quasi ogni voce di METODO nomina un `.py`** — un presidio, un attrezzo, un collaudo — e un `.py` ### **non e' un oggetto dell'era `1`: e' un oggetto DEL REPO**, che vive in entrambe le ere. ### ⚠ **E avevo gia' tolto un marcatore mio una volta** *(il `FLAG-COSTANTE`, perche' rompeva `FALSO-ZERO`)*: ### **questo l'ho tenuto, e per quattro giri.**
+
+### ⚠ **E LA MIA PREVISIONE ERA SBAGLIATA, lo ANNOTO:** nel task history avevo scritto *«prevedo `3` segnali residui su `20`»*. Sono ### **`14`**: il marcatore `.py` ne faceva ### **`6`**, non `17`. ### **Avevo attribuito al marcatore piu' di quanto facesse**, e il numero l'ho saputo ### **solo dopo averlo tolto.**
+
+### ⛔ **E DUE RICHIESTE DEL PUNTO `4` SONO INCOMPATIBILI, E L'HO MISURATO.**
+
+| | il fatto misurato |
+|---|---|
+| `(a)` | *«DEVE scattare su `CONFIG-1` a `80eaf82`»*: ### **a quel commit `CONFIG-1` e' era `1`** — il mandato dell'era delle voci di metodo ### **l'ha spostata** — e `F8` per costruzione guarda ### **solo le `ENTRAMBE`.** ### **Nessun marcatore puo' farla scattare la-** |
+| `(b)` | anche a `ba400c0`, dove ### **e' `ENTRAMBE`**, dopo il taglio l'unico marcatore che la prenderebbe e' ### **un FLAG DEL SIMULATORE** *(`FORK_SU2`, `CAMPO_SPINORIALE`, `TAU_LUCE`)* — e ### **quello stesso marcatore fa scattare `FALSO-ZERO`**, che nomina `REGISTRO_STATO` e `REGISTRO_METRI`, ### **flag VERI del simulatore** *(verificato leggendo `soliton_simulator.py`: sono `140` costanti, e tutte e quattro sono fra quelle)*, e che il mandato precedente dichiara ### **NON DEVE scattare** |
+
+### 📌 **LA DOMANDA, e la mia raccomandazione:** `F8` esiste per ### **TROVARE** le voci `ENTRAMBE` che nominano oggetti dell'era `1`, ### **perche' siano spostate.** `CONFIG-1` ### **e' STATA spostata** — e chiedere che scatti ancora e' chiedere a un rilevatore ### **di continuare a segnalare un caso curato.** ### ✔ **Credo che `80eaf82` sia un lapsus per `ba400c0`**, e che la richiesta giusta sia ### **nessuna delle due**: il taglio del `.py` ### **toglie `CONFIG-1` da `F8`, e va bene cosi'.**

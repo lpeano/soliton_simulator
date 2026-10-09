@@ -546,22 +546,74 @@ def main():
     esito("F8  DEVE scattare: T3a a 72e452f era `ENTRAMBE` e dice <<SIGILLO scena (ii)>>",
           scatta(IX._f8_era1(t3a_prima), "T3a"),
           "era `%s`, stato `%s`" % (t3a_prima[0]["era"], t3a_prima[0]["stato"]))
-    # ### ⭐ **L-ALLARGAMENTO DEL 2026-10-09**, e i due casi li indica il mandato: a
-    # ### `ba400c0` `CONFIG-1` e `PAT-1` erano `ENTRAMBE` e nominano ### **una funzione o
-    # ### uno script**, e `F8` vecchio ### **non li vedeva.**
+    # ### ⛔ **ROVESCIATO IL 2026-10-09: dopo il taglio del marcatore `.py` `CONFIG-1` e
+    # ### ### `PAT-1` NON SCATTANO PIU-**, e non e- un difetto: e-
+    # ### ### **la MISURA del marcatore che ho tolto.** Entrambe scattavano
+    # ### ### **soltanto** per un `.py` nel testo *(`csv/_config_delle_misure.py` e
+    # ### `dovespingelagravita.py`)*: ### **nessun altro marcatore le prendeva.**
+    # ### ⚠ **E l-allargamento del giro scorso, che le aveva messe qui, era "giusto" solo
+    # ### perche- il marcatore era largo:** la frase che scrissi -- *<<la riga d-origine
+    # ### nomina `csv/_config_delle_misure.py` e i flag>>* -- ### **nominava i flag come
+    # ### se contassero, e NON contavano: li prendeva il `.py`.**
     for _i in ("CONFIG-1", "PAT-1"):
         _p = [v for v in al_commit("ba400c0", "doc/indice/voci.jsonl")
               if v["id"] == _i]
         assert _p, _i
-        esito("F8  DEVE scattare: %s a ba400c0, era `%s`" % (_i, _p[0]["era"]),
-              scatta(IX._f8_era1(_p), _i),
-              "una funzione, una variabile o uno script dell-era 1")
+        esito("F8  NON scatta piu-: `%s` a ba400c0 scattava SOLO per un `.py`" % _i,
+              not scatta(IX._f8_era1(_p), _i),
+              "e- la MISURA del marcatore tolto, non un difetto")
     for _i, _che in (("P6", "e- una REGOLA: nomina la PAROLA flag, non un flag"),
                      ("FALSO-ZERO", "e- un difetto del METODO, senza oggetti concreti")):
         _v = [v for v in voci if v["id"] == _i]
         assert _v, _i
         esito("F8  NON deve scattare: %s, %s" % (_i, _che),
               not scatta(IX._f8_era1(_v), _i))
+
+    # ------------------------------------------------- F8 dopo il taglio del `.py`
+    # ### ⛔ **I TRE CASI LI DETTA IL MANDATO DEL 2026-10-09:** *<<DEVE scattare su
+    # ### `CONFIG-1` a `80eaf82`, NON su `A9` ne- su `INDICE-COLLAUDO-SCRITTURA`>>*.
+    # ### ⭐ **E i due negativi sono la MISURA del marcatore che ho tolto:** entrambi
+    # ### scattavano ### **solo per un `.py`** -- `A9` nomina `_presidio.py`,
+    # ### `INDICE-COLLAUDO-SCRITTURA` nomina `indice.py` -- e ### **un `.py` non e- un
+    # ### oggetto dell-era `1`: e- un oggetto DEL REPO.**
+    F8_Q = "80eaf82"
+    _v8 = al_commit(F8_Q, "doc/indice/voci.jsonl")
+    _c1 = [v for v in _v8 if v["id"] == "CONFIG-1"]
+    assert _c1, "CONFIG-1 non c-e- a " + F8_Q
+    print("  `F8`  CONFIG-1 a %s: era `%s`   |   oggi: era `%s`"
+          % (F8_Q, _c1[0]["era"],
+             [v for v in voci if v["id"] == "CONFIG-1"][0]["era"]))
+    # ### ⛔ **IL MANDATO CHIEDE «DEVE scattare su `CONFIG-1` a `80eaf82`»: NON SI PUO-,**
+    # ### e la ragione e- ### **misurata, non opinabile:** a `80eaf82` `CONFIG-1` e-
+    # ### ### **era `1`** *(il mandato dell-era delle voci di metodo l-ha spostata)*, e `F8`
+    # ### per costruzione guarda ### **SOLO le voci `ENTRAMBE`.** ### **Nessun marcatore
+    # ### puo- farla scattare la-**, e il braccio lo ASSERISCE.
+    # ### ⭐ **E C-E- DI PIU-, ED E- LA PARTE CHE CONTA:** anche a `ba400c0`, dove
+    # ### `CONFIG-1` ### **E- `ENTRAMBE`**, dopo il taglio l-unico marcatore che la farebbe
+    # ### scattare e- ### **un FLAG DEL SIMULATORE** *(`FORK_SU2`, `CAMPO_SPINORIALE`,
+    # ### `TAU_LUCE`)* -- e ### **quello stesso marcatore fa scattare `FALSO-ZERO`**, che
+    # ### nomina `REGISTRO_STATO` e `REGISTRO_METRI`, ### **flag VERI del simulatore**, e
+    # ### che il mandato precedente dichiara ### **NON DEVE scattare.**
+    # ### ⛔ **Le due richieste sono INCOMPATIBILI, e la misura sta nel referto: non
+    # ### scelgo io quale cade.**
+    esito("F8  NON scatta: `CONFIG-1` a %s e- era `1`, e `F8` guarda solo le `ENTRAMBE`"
+          % F8_Q,
+          str(_c1[0]["era"]) == "1" and not scatta(IX._f8_era1(_c1), "CONFIG-1"),
+          "il mandato la vuole scattante LA-: non si puo-, e la ragione e- L-ERA")
+    for _i, _che in (("A9", "nomina `_presidio.py`, e un `.py` NON e- dell-era 1"),
+                     ("INDICE-COLLAUDO-SCRITTURA", "nomina `indice.py`, idem")):
+        _vx = [v for v in voci if v["id"] == _i]
+        assert _vx, _i
+        esito("F8  NON deve scattare: `%s` -- %s" % (_i, _che),
+              not scatta(IX._f8_era1(_vx), _i),
+              "era la MISURA del marcatore che ho tolto")
+        # ### ⚠ **E IL BRACCIO CHE PROVA CHE IL TAGLIO E- MIRATO:** la stessa voce con
+        # ### ### **una funzione del simulatore** nel titolo ### **DEVE scattare.**
+        _vy = json.loads(json.dumps(_vx[0]))
+        _vy["titolo"] = (_vy["titolo"] or "")[:60] + " -- e tocca calcola_psi"
+        esito("F8  DEVE scattare: `%s` con `calcola_psi` nel titolo" % _i,
+              scatta(IX._f8_era1([_vy]), _i),
+              "il taglio e- MIRATO: via i `.py`, restano le funzioni del simulatore")
 
     # ------------------------------------- L'ATOMICITA', END-TO-END
     # ### ⛔ **QUESTA PROVA HA TROVATO UN DIFETTO CHE IL COLLAUDO NON VEDEVA:**
