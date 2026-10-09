@@ -384,3 +384,15 @@ Si toglie dall'inizio della riga, **ripetutamente**: i `#`, gli spazi, i **simbo
 | ### ⭐ **era il ROVESCIO di un controllo che c'era già** | `valida` pretendeva `criterio` e `commit` ### **quando lo stato è `CHIUSA`**; che una `chiusura` piena ### **implichi** `CHIUSA` ### **non lo chiedeva nessuno** |
 | ### **da dove venivano le `41`** | ### **dalla migrazione**: `commit` = `era-1-secondo-ordine` *(il NOME del tag)*, e il lavoro dopo le ha portate a `SOSPESA` ### **lasciando la `chiusura` dietro** |
 | ### **e la cura chiede al DOCUMENTO** | `40` righe ### **non chiudono** → la `chiusura` si svuota; `1` chiude *(`Z22`, «FATTO»)* → ### **`CHIUSA`** |
+
+---
+
+## `superata_da` ACCETTA ANCHE UNA VOCE *(2026-10-09)*
+
+| | |
+|---|---|
+| ### **la regola** | `superata_da` può essere l'id di una ### **decisione**, di un ### **assioma** ### **o di una VOCE** |
+| ### **il perché** | una voce ### **promossa o fusa** in un'altra è superata ### **da quella.** `S02` è *«PROMOSSO»* a `D31`, e `D31` è una voce |
+| ### ⛔ **la mia regola di ieri era mezza vera** | avevo scritto *«un difetto non decide niente»*: ### **vero per una DECISIONE, falso per una PROMOZIONE.** Pretendere che ogni superamento venisse da ### **fuori l'indice** faceva ### **perdere la storia delle FUSIONI** |
+| ### **e `F9` ammette `SUPERATA` per `ENTRAMBE`** | *«superata»* non è *«rimandata»*: è ### **risolta da fuori**, e per questo ### **non cade nel divieto che colpisce `SOSPESA`** |
+| ### ⚠ **i due versi sono collaudati** | una voce come `superata_da` → ### **accettata**; un id che non è né decisione, né assioma, né voce → ### **rifiutato.** ### **Senza il verso negativo la regola nuova non è una regola: è un PERMESSO** |

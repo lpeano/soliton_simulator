@@ -575,7 +575,7 @@
 | `ROBUSTEZZA-FISICA` | STANDARD | METODO | ENTRAMBE | ### **APERTA** |  | i TRE GRADINI che una conclusione di fisica deve salire: rumore numerico, legge  |
 | `S0` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 6 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
 | `S01` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | Chi fa crescere d0: in G3 gli scrittori sommano -1.6e+03 e med d0 RADDOPPIA lo s |
-| `S02` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | Il freno di SCALAMIN e' il motore di d0 / DECISO da Z108: bilancio che CHIUDE a  |
+| `S02` | DIFETTO | FISICA | 1 | ### **SUPERATA** |  | Il freno di SCALAMIN e' il motore di d0 / DECISO da Z108: bilancio che CHIUDE a  |
 | `S03` | MISURA | FISICA | 1 | ### **CHIUSA** |  | La memoria del moto fa scappare d0 / DECISO da Z109: spegnendola d0 cresce ancor |
 | `S04` | MISURA | FISICA | 1 | ### **CHIUSA** |  | La crescita e' NUCLEAZIONE, non stiramento / CADE con Z108: nascite meno morti v |
 | `S05` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | La compressione d/d0 < 1 e' un difetto e non una fase / G3 dice che peggiora sen |

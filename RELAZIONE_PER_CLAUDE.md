@@ -10791,3 +10791,15 @@ Il punto `1` del mandato. `47` voci, `47` righe di storico, la validazione inter
 ### ✔ **E LA CURA NON HA SCELTO FRA I DUE CAMPI: HA CHIESTO AL DOCUMENTO.** Due campi si contraddicevano, e ### **il terzo arbitro e- la riga d'origine**: `40` righe ### **non chiudono** *(«APERTA», «NON CURATO», «SI CHIUDE QUANDO», «CHIUDE CHI», o ### **nessuna parola**)* e la `chiusura` ### **si svuota**; `1` chiude — `Z22`, che dice *«FATTO»* ### **e non «IL FATTO»** — e va a `CHIUSA` col commit ricavato.
 
 ### ⭐ **E SI SVUOTA LA `chiusura`, NON SI MUOVE LO STATO:** lo stato ### **l'ha deciso un lavoro che ha letto la riga**; la `chiusura` e- ### **cio- che e- rimasto indietro.** ### **Fra un campo deciso leggendo e un campo trascinato da una migrazione, cede il secondo.**
+
+---
+
+## `superata_da` ACCETTA UNA VOCE: **la mia regola di ieri era MEZZA VERA** (2026-10-09)
+
+Schema, validatore e collaudo ### **nei due versi**: `26`/`26` il collaudo dell'indice *(erano `22`: quattro casi nuovi)*, `52`/`52` quello dei presidi. `S02` → `SUPERATA` da `D31`. Nessuna corsa; il simulatore resta `b8c21049`.
+
+### ⛔ **IERI AVEVO RIFIUTATO `S02` SCRIVENDO «un difetto non decide niente».** La frase e- ### **vera per una DECISIONE e falsa per una PROMOZIONE:** `S02` e- ### **«PROMOSSO»** a `D31`, e *«promosso a»* ### **non e- «deciso da»**. ### ⭐ **Pretendere che ogni superamento venisse da FUORI l'indice faceva perdere la storia delle FUSIONI** — e un indice che non sa dire *«questa e- diventata quella»* ### **tiene due voci dove ce n'e- una.**
+
+### ✔ **E `F9` AMMETTE `SUPERATA` PER `ENTRAMBE`, che corregge un'altra mia strettezza:** avevo scritto *«`ENTRAMBE` ⇒ `APERTA` o `CHIUSA`»* ### **alla lettera del mandato.** ### ⭐ **«Superata» non e' «rimandata»: e' RISOLTA DA FUORI**, e per questo ### **non cade nel divieto che colpisce `SOSPESA`** — che era il motivo vero di `F9`: *«una cosa che vale anche nell'era 2 non si rimanda a se stessa»*.
+
+### ⚠ **E `Z21` NON l'ho applicata qui, benche' il mandato la nomini:** il file vecchio chiede `SUPERATA` ### **senza dire da che cosa**, e il `superata_da` lo porta ### **la terza lettura** *(`Z26`)*. ### **Applicarla adesso vorrebbe dire scegliere io da che cosa e- superata**, e la terza lettura lo dice fra due commit.

@@ -214,8 +214,18 @@ def valida(voci, reg, verboso=True, derivati=True):
             s = v["superata_da"]
             if not s:
                 err.append("`%s`: SUPERATA senza `superata_da`" % q)
-            elif s not in reg["decisioni"] and s not in reg["assiomi"]:
-                err.append("`%s`: superata_da `%s` non e' una decisione ne' un assioma"
+            # ### ⭐ **E DAL 2026-10-09 ACCETTA ANCHE L-ID DI UNA VOCE**, e il mandato lo
+            # ### dice: ### **una voce promossa o fusa in un-altra e- superata DA QUELLA.**
+            # ### ⛔ **La mia regola di ieri -- *<<un difetto non decide niente>>* -- era
+            # ### vera per una DECISIONE e falsa per una PROMOZIONE:** `S02` e-
+            # ### ### **PROMOSSO** a `D31`, e `D31` e- una voce. ### **Rifiutarla
+            # ### significava pretendere che ogni superamento venisse da FUORI l-indice**,
+            # ### e un indice che non sa dire *<<questa e- diventata quella>>*
+            # ### ### **perde la storia delle fusioni.**
+            elif (s not in reg["decisioni"] and s not in reg["assiomi"]
+                  and s not in {w["id"] for w in voci}):
+                err.append("`%s`: superata_da `%s` non e' una decisione, ne' un assioma, "
+                           "ne' una voce"
                            % (q, s))
         if v["stato"] == "SOSPESA" and not v["stato_era_1"]:
             err.append("`%s`: SOSPESA senza `stato_era_1`" % q)
@@ -705,6 +715,22 @@ def collaudo():
         ("### legge INESISTENTE", [base(leggi=["L-NON-ESISTE"])], False),
         ("### CHIUSA senza chiusura", [base(stato="CHIUSA")], False),
         ("### SUPERATA senza superata_da", [base(stato="SUPERATA")], False),
+        # ### ⭐ **I DUE VERSI DEL PUNTO `3`** *(2026-10-09)*: `superata_da` accetta
+        # ### ### **anche l-ID di una VOCE** -- una voce ### **promossa o fusa** in
+        # ### un-altra e- superata ### **da quella** -- e ### **rifiuta cio- che non e-
+        # ### ne- decisione, ne- assioma, ne- voce.** ### ⛔ **Senza il verso negativo
+        # ### la regola nuova non e- una regola: e- un PERMESSO.**
+        ("una VOCE come `superata_da` (il verso POSITIVO del punto 3)",
+         [base(stato="SUPERATA", superata_da="B", stato_era_1=""),
+          base(id="B")], True),
+        ("### `superata_da` che NON e- ne- decisione, ne- assioma, ne- voce",
+         [base(stato="SUPERATA", superata_da="NON-ESISTE-NIENTE")], False),
+        # ### ⭐ **E `F9` AMMETTE `SUPERATA` PER `ENTRAMBE`**, che corregge una mia
+        # ### strettezza; ma ### **`SOSPESA` resta VIETATA**, e il caso accanto lo prova.
+        ("era `ENTRAMBE` con `SUPERATA` (il verso POSITIVO di `F9`)",
+         [base(stato="SUPERATA", superata_da="B"), base(id="B")], True),
+        ("### `F9`: era `ENTRAMBE` con stato `SOSPESA`, che resta VIETATO",
+         [base(stato="SOSPESA", stato_era_1="aperto")], False),
         ("### SOSPESA senza stato_era_1", [base(stato="SOSPESA")], False),
         ("### `F7`: FISICA/era 1 con stato APERTA",
          [base(era="1", stato="APERTA")], False),
@@ -1154,7 +1180,13 @@ def _f9_era_stato(voci):
         if v["stato"] == "DA_CLASSIFICARE":
             continue
         e = str(v["era"])
-        if e == "ENTRAMBE" and v["stato"] not in ("APERTA", "CHIUSA"):
+        # ### ⭐ **`SUPERATA` ENTRA FRA GLI AMMESSI il 2026-10-09**, e corregge
+        # ### ### **una MIA strettezza:** avevo scritto *<<`ENTRAMBE` => `APERTA` o
+        # ### `CHIUSA`>>* ### **alla lettera del mandato**, e una voce che vale per entrambe
+        # ### le ere ### **puo- essere SUPERATA** da una decisione o da un-altra voce.
+        # ### ⛔ **<<Superata>> non e- <<rimandata>>:** e- ### **risolta da fuori**, e per
+        # ### questo non cade nel divieto che colpisce `SOSPESA`.
+        if e == "ENTRAMBE" and v["stato"] not in ("APERTA", "CHIUSA", "SUPERATA"):
             err.append("`F9` `%s`: era `ENTRAMBE` con stato `%s`. Una voce che vale per "
                        "ENTRAMBE le ere e- APERTA o CHIUSA: <<sospesa>> vuol dire "
                        "<<rimandata all-era 2>>, e una cosa che vale ANCHE nell-era 2 "

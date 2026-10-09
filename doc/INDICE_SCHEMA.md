@@ -50,7 +50,7 @@ cancella)*.
 | `assiomi` | lista di id | ### **da `assiomi.jsonl`** |
 | `collegate` | lista di id | altre voci |
 | `padre` | id di voce *(o `""`)* | per i criteri locali |
-| `superata_da` | id di decisione o assioma | ### **obbligatorio se `stato = SUPERATA`** |
+| `superata_da` | id di decisione, di assioma ### **o di VOCE** | ### **obbligatorio se `stato = SUPERATA`.** ### ⭐ **Una VOCE perche' una voce PROMOSSA o FUSA in un'altra e' superata DA QUELLA** *(2026-10-09)*: `S02` e' *«PROMOSSO»* a `D31`, e `D31` e' una voce. ### ⛔ **Pretendere che ogni superamento venisse da FUORI l'indice faceva perdere la storia delle FUSIONI** |
 | `chiusura` | `{criterio, commit, data}` | ### **obbligatorio se `stato = CHIUSA`** |
 | `fonte` | `percorso::ancora` | ### **l'ancora è un NOME, mai una riga** |
 | `creata`, `aggiornata` | `{data, commit}` | |
@@ -85,7 +85,7 @@ una riga nello `storico.jsonl` col suo `--motivo`.
 | stato | pretende |
 |---|---|
 | `CHIUSA` | `chiusura.criterio` **e** `chiusura.commit` |
-| `SUPERATA` | `superata_da`, che deve essere ### **un id di `decisioni.jsonl` o di `assiomi.jsonl`** |
+| `SUPERATA` | `superata_da`, che deve essere ### **un id di `decisioni.jsonl`, di `assiomi.jsonl` o di `voci.jsonl`** *(dal 2026-10-09)* |
 | `SOSPESA` | `stato_era_1` ### **non vuoto** |
 | `DA_CLASSIFICARE` | ### **nessuno** — ed è il punto: è lo stato di chi ### **non sa** |
 

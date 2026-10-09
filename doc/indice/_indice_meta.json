@@ -7042,7 +7042,6 @@
    "RITMO-FLAG-SENZA-OGGETTO",
    "RITMO-PAVIMENTO",
    "S01",
-   "S02",
    "S05",
    "S06",
    "S07",
@@ -7151,7 +7150,8 @@
    "Z92"
   ],
   "SUPERATA": [
-   "ENERGIA-NON-DEFINITA"
+   "ENERGIA-NON-DEFINITA",
+   "S02"
   ]
  },
  "variabili": {

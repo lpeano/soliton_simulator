@@ -83,8 +83,8 @@ era       1=538  DA_CLASSIFICARE=188  ENTRAMBE=96  2=24
 stato     SOSPESA=369  DA_CLASSIFICARE=188  CHIUSA=182  APERTA=82  AGENDA=24  SUPERATA=1
 ```
 
-### ✔ **FATTO IN QUESTO GIRO:** il punto `2`, ### **`F12` acceso nello stesso commit che cura le `41` `chiusura` orfane**: `40` righe ### **non chiudono** e la `chiusura` si svuota, `1` chiude e va a `CHIUSA`. ### ⭐ **Era il ROVESCIO di un controllo che c'era gia-.**
+### ✔ **FATTO IN QUESTO GIRO:** il punto `3`, ### **`superata_da` accetta anche una VOCE** e ### **`F9` ammette `SUPERATA` per `ENTRAMBE`**: schema, validatore e collaudo ### **nei due versi** *(`26`/`26`)*. `S02` → `SUPERATA` da `D31`.
 
-### ⛔ **RESTA:** i punti `3`…`9`.
+### ⛔ **RESTA:** i punti `4`…`9`. ### ⚠ **E `Z21` NON e' qui:** il mandato dice *«applica `S02` e `Z21`»*, ma ### **il file vecchio non porta il suo `superata_da`** — lo porta ### **la terza lettura** *(`superata_da=Z26`)*, quindi `Z21` si applica ### **al punto `5`.**
 
-**Ultimo lotto applicato:** `doc/indice/_lotti/v3_f12.jsonl` *(`41` voci)*
+**Ultimo lotto applicato:** `doc/indice/_lotti/v3_superate.jsonl` *(`1` voce)*
