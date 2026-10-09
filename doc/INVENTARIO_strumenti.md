@@ -2398,3 +2398,15 @@ etichette rimosse, con ### **`0` persi, `0` doppi, `0` conflitti**.
 | **cosa misura** | ### **LEGGE l'elenco dal documento**, non lo ricopia: trova la riga *«voci SOSPESE»* di `doc/CURE_fisica_ordine.md` e **pretende che sia unica e che porti `14` ID**. Poi le `38` nominate dal mandato |
 | **l'uscita** | `doc/indice/_lotti/v3_s3.jsonl` · `doc/indice/_p3_conflitti.json` |
 | ### ⚠ **i due CONFLITTI** | `PSI-FLASH` e `MASSA-ID-FISSO` erano `CHIUSA` **con una chiusura che viene dal TAG** *(«chiusa nell'era `1` (stato `chiuso` al tag `era-1-secondo-ordine`)»)*, e il documento le chiama **SOSPESE**: si riaprono, e il conflitto **è dichiarato** |
+
+---
+
+### `csv/_dominio_esplicite.py` — **DOMINIO E CLASSE DELLE ESPLICITE** *(2026-10-09)*
+
+| | |
+|---|---|
+| **file** | `csv/_dominio_esplicite.py` |
+| **BLOB** *(sha1 dei byte grezzi)* | `881d7a66` |
+| **COMANDO** | `python csv/_dominio_esplicite.py`, poi `python csv/indice.py aggiorna-lotto doc/indice/_lotti/v3_s4.jsonl` |
+| **cosa misura** | niente: **porta le `16` decisioni del mandato**, e ### **ogni motivo cita LA RIGA D'ORIGINE** — o, dove non si ritrova, **lo dichiara e cita il titolo** |
+| ### ⚠ **il nodo di `REGISTRO_FISICA:D37`** | era `CRITERIO`+`INFRASTRUTTURA`, e questo **viola la regola della classe**: un `CRITERIO` si aspetta in `METODO`. ### **Il mandato scioglie il nodo dalla parte della CLASSE:** non è un criterio, è un **`DIFETTO`** |

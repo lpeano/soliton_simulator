@@ -24,6 +24,7 @@ commit**: cosi' non se ne accumulano di invisibili.)*
 | `csv/_doc_referto_pulizia.py|H-P5` | non importa il simulatore e non lo fa girare. Scrive un referto sull'indice. |
 | `csv/_doc_referto_segnali.py|H-P5` | non importa il simulatore e non lo fa girare. Scrive un referto sull'indice. |
 | `csv/_doc_referto_v3.py|H-P5` | non importa il simulatore e non lo fa girare. Scrive un referto sull'indice. |
+| `csv/_dominio_esplicite.py|H-P5` | non importa il simulatore e non lo fa girare. Costruisce un lotto. |
 | `csv/_era_esplicite.py|H-P5` | non importa il simulatore e non lo fa girare. Costruisce un lotto. |
 | `csv/_era_metodo.py|H-P5` | non importa il simulatore e non lo fa girare. Costruisce un lotto per l'indice. |
 | `csv/_fase2_chiuse.py|H-P5` | non importa il simulatore e non lo fa girare. Costruisce lotti per l'indice. |
@@ -123,5 +124,5 @@ commit**: cosi' non se ne accumulano di invisibili.)*
 | `csv/_test_fork/_z43_tempo_proprio.py|H-P3` | la scena passa TUTTA dal CLI (`nmasse` e `sep` da `argv`), e la |
 
 ```
-esenzioni dichiarate   116
+esenzioni dichiarate   117
 ```

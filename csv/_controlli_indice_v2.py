@@ -153,6 +153,10 @@ def main():
     # ### tutto il senso del giro -- *<<la validita- non e- lo stato>>*.
     CORRETTE_V3["G1"] = ("FISICA", "1", "CHIUSA")
     CORRETTE_V3["REG-A"] = ("FISICA", "1", "CHIUSA")
+    # ### IL PUNTO 4 DEL MANDATO (dominio delle esplicite): il mandato DA- il dominio, e
+    # ### le liste del guardiano ne dicevano un altro. ### **Due ID, non una regola.**
+    CORRETTE_V3["PRESIDIO-RIFIUTO-SOLO-SIGILLI"] = ("DOCUMENTAZIONE", "ENTRAMBE", "APERTA")
+    CORRETTE_V3["CENS-A3"] = ("DOCUMENTAZIONE", "1", "SOSPESA")
     # ### IL PUNTO 3 DEL MANDATO (era delle esplicite): l-elenco DICHIARATO <<voci
     # ### SOSPESE>> di doc/CURE_fisica_ordine.md:26 e le 38 nominate vanno all-era 1.
     # ### ⚠ **Qui gli ID li DA- IL MANDATO**, quindi si scrivono come ID: non c-e- un

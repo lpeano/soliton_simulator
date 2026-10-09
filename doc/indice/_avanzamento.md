@@ -74,17 +74,17 @@ python csv/indice.py aggiorna-lotto doc/indice/_lotti/<nome>.jsonl
 | voci | `846` |
 | ### **`DA_CLASSIFICARE` vere** *(non segnaposto)* | ### **`1`** |
 | ### **segnaposto `NON_DEFINITA`** | ### **`187`** |
-| ### **righe di storico** | ### **`1578`** |
+| ### **righe di storico** | ### **`1594`** |
 
 ```
-classe    DIFETTO=202  NON_DEFINITA=187  MISURA=141  FRONTE=107  CRITERIO=92  CURA=54  PRESIDIO=34  STANDARD=29
-dominio   FISICA=389  METODO=196  DA_CLASSIFICARE=187  INFRASTRUTTURA=47  DOCUMENTAZIONE=27
-era       1=537  DA_CLASSIFICARE=188  ENTRAMBE=97  2=24
-stato     SOSPESA=368  DA_CLASSIFICARE=188  CHIUSA=182  APERTA=83  AGENDA=24  SUPERATA=1
+classe    DIFETTO=200  NON_DEFINITA=187  MISURA=141  FRONTE=109  CRITERIO=90  CURA=56  PRESIDIO=34  STANDARD=29
+dominio   FISICA=383  METODO=198  DA_CLASSIFICARE=187  INFRASTRUTTURA=49  DOCUMENTAZIONE=29
+era       1=538  DA_CLASSIFICARE=188  ENTRAMBE=96  2=24
+stato     SOSPESA=369  DA_CLASSIFICARE=188  CHIUSA=182  APERTA=82  AGENDA=24  SUPERATA=1
 ```
 
-### ✔ **FATTO IN QUESTO GIRO:** il punto `3`: ### **era `1` per le esplicite** *(l'elenco «voci SOSPESE» LETTO dal documento, piu' le `38` nominate)*, e ### **`F8` allargato**. ### ⛔ **`F8` leggeva un titolo TRONCATO -- l'errore `(d)` applicato a un presidio** -- e adesso legge la riga d'origine. Collaudo `32/32`, e ### **un marcatore che avevo aggiunto io l'ho TOLTO** perche' rompeva un caso negativo
+### ✔ **FATTO IN QUESTO GIRO:** il punto `4`: ### **dominio e classe delle `16` esplicite**, ogni motivo ### **con la frase della sua riga d'origine** -- e per tre, dove la riga non si ritrova, ### **il motivo lo DICHIARA** e cita il titolo. `REGISTRO_FISICA:D37` era `CRITERIO`+`INFRASTRUTTURA`, e il mandato scioglie il nodo ### **dalla parte della classe**
 
-### ⛔ **RESTA:** il punto `4` *(dominio delle esplicite)*, poi `5` *(a Luca, senza toccare)*, `6` *(gemelle e duplicati)*, `7` *(`da_dividere`)* e `8` *(i controlli e il referto `doc/REFERTO_indice_v3_righe_origine.md`)*
+### ⛔ **RESTA:** il punto `5` *(le `9` a Luca, ### **senza toccarle**)*, poi `6` *(gemelle e duplicati, con `F1` esteso allo stato)*, `7` *(`meta.da_dividere`)* e `8` *(i controlli e il referto `doc/REFERTO_indice_v3_righe_origine.md`)*
 
-**Ultimo lotto applicato:** `doc/indice/_lotti/v3_s3.jsonl`
+**Ultimo lotto applicato:** `doc/indice/_lotti/v3_s4.jsonl`
