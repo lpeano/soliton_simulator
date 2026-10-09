@@ -83,8 +83,8 @@ era       1=538  DA_CLASSIFICARE=188  ENTRAMBE=96  2=24
 stato     SOSPESA=369  DA_CLASSIFICARE=188  CHIUSA=182  APERTA=82  AGENDA=24  SUPERATA=1
 ```
 
-### ✔ **FATTO IN QUESTO GIRO:** il punto `8`, ### **`H-ID-OBBLIGATORIO`**: un commit che tocca la fisica o un referto ### **cita almeno un ID.** Collaudo nei due versi: ### **`11`/`11`.** ### ⛔ **E la definizione di «referto» era MIA e LARGA:** la correzione `C` della coda l'ha stretta a ### **due prefissi.**
+### ✔ **FATTO IN QUESTO GIRO:** il punto `9`, ### **i due referti** — `doc/REFERTO_indice_v3_chiusure.md` *(`390` righe)* e `doc/REFERTO_strumenti_era2.md` *(`111` righe)*. ### **Il mandato e' CHIUSO: `9` punti su `9`, due parti**, e ### **la voce ① della coda si chiude con esso.**
 
-### ⛔ **RESTA:** il punto `9` — i controlli e i ### **due referti**, con ### **la domanda a Luca sul nome della cartella dell'era `2`.**
+### 📌 **E UNA DOMANDA RESTA, in testa al secondo referto:** ### **come si chiama la cartella del codice dell'era `2`?** Finche' manca, `H-FISICA-FUORI-LISTA` ### **non impedisce niente** — per `A9` ### **e' una tenda.**
 
-**Ultimo lotto applicato:** `doc/indice/_lotti/v3_h_id.jsonl` *(`1` voce NUOVA: il presidio)*
+**Ultimi lotti applicati:** `v3_h_fisica.jsonl` e `v3_h_id.jsonl` — ### **il punto `9` NON scrive sull'indice**: legge, conta e scrive due documenti.

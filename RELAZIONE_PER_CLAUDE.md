@@ -10877,3 +10877,17 @@ Il punto `4`. `1` voce, `1` riga di storico; `F6` da `3` a `2` segnali; `6`/`6` 
 ### ✔ **E RIUSA IL PARSER DI `H-INDICE`, non uno suo:** ### **due presidi che leggono la stessa forma di ID con due parser diversi divergono** — ed e- ### **esattamente il difetto che ho pagato due commit fa** sul `superata_da`, dove la copia della regola nell'applicatore ### **era vecchia.**
 
 ### ⚠ **E LA SENTINELLA DEL COLLAUDO SI SCEGLIE A RUN TIME**, riusando quella di `H-INDICE`: un ID finto ### **scritto nel codice finisce nei referti** e al giro dopo ### **e- un ID NOTO** — e il caso che DEVE fallire ### **passa.** `H-INDICE` lo ha imparato ### **due volte**, e qui non si ripete.
+
+---
+
+## I DUE REFERTI, E IL MANDATO SI CHIUDE: **`9` punti su `9`** (2026-10-09)
+
+`doc/REFERTO_indice_v3_chiusure.md` *(`390` righe, voce per voce)* e `doc/REFERTO_strumenti_era2.md` *(`111` righe, ### **che cosa BLOCCA e che cosa e' solo scritto**)*. `6`/`6` i controlli, `59`/`59` il collaudo dei presidi, `26`/`26` quello dell'indice, `12`/`12` `_file_fisica`, `11`/`11` `H-ID-OBBLIGATORIO`. Nessuna corsa; il simulatore resta `b8c21049`.
+
+### ⭐ **LA COSA CHE PORTO FUORI DA QUESTO GIRO: DUE PRESIDI ERANO MEZZI CONTROLLI.** `F12` chiedeva *«se e' `CHIUSA`, dove sta la chiusura?»* ### **e non «se c'e' la chiusura, e' CHIUSA?»**; `H-ID-OBBLIGATORIO` chiedeva *«gli ID citati esistono?»* ### **e non «ce n'e' almeno uno?»**. ### ⛔ **Una sola delle due direzioni non e' un controllo: e' MEZZO controllo** — e la meta' che manca ### **non si vede, perche' TACE.**
+
+### ✔ **E IL SECONDO REFERTO LEGGE IL HOOK invece di credere alla propria tabella:** la colonna *«cablato davvero»* ### **apre `.githooks/` e `csv/_hook_presidi.py`** e cerca il nome. ### ⭐ **Un presidio dichiarato e non cablato e' esattamente cio' che `A9` condanna, e un referto sugli strumenti non puo- essere l'unico posto che non lo verifica.**
+
+### 📌 **E LA DOMANDA CHE RESTA, in testa al secondo referto: COME SI CHIAMA LA CARTELLA DEL CODICE DELL'ERA `2`?** Finche' manca, `H-FISICA-FUORI-LISTA` e' ### **nel `pre-commit` e non impedisce niente** — ### **una TENDA**, e lo scrivo in quattro posti perche' un presidio che non impedisce e ### **che non lo dice** e' peggio di un presidio che non c'e'.
+
+### ✔ **E LA VOCE ① DELLA CODA SI CHIUDE**: era arrivata ### **senza il suo mandato base**, il mandato di oggi l'ha assorbita, e le tre correzioni `A`/`B`/`C` sono finite ### **dentro `F11`, nella costante vuota, e dentro `H-ID-OBBLIGATORIO`.** ### **Si chiude quando il lavoro e' fatto, non quando e' letto.**

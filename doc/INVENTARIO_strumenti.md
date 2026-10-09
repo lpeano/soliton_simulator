@@ -2573,3 +2573,15 @@ etichette rimosse, con ### **`0` persi, `0` doppi, `0` conflitti**.
 | ### ⭐ **è il ROVESCIO di `H-INDICE`** | quello controlla che gli ID citati ### **esistano**; questo che ### **ce ne sia almeno UNO** |
 | ### ⛔ **e «un referto» è SOLO due prefissi** | `doc/REFERTO_*` e `doc/REPERTO_*`, non qualunque file sotto `doc/`: ### **la mia definizione era LARGA**, e una definizione larga in un presidio ### **rifiuta commit che nessuno voleva rifiutare** |
 | ### ⚠ **e riusa il parser di `H-INDICE`** | ### **due presidi che leggono la stessa forma di ID con due parser diversi divergono** — è il difetto che ho pagato sul `superata_da` due commit fa |
+
+---
+
+### `csv/_doc_referto_chiusure.py` e `csv/_doc_referto_strumenti_era2.py` — **I DUE REFERTI** *(2026-10-09)*
+
+| | |
+|---|---|
+| **i file** | `csv/_doc_referto_chiusure.py` *(BLOB `fe02739b`)* · `csv/_doc_referto_strumenti_era2.py` *(BLOB `9d93e400`)* |
+| **COMANDI** | `python csv/_doc_referto_chiusure.py` · `python csv/_doc_referto_strumenti_era2.py` |
+| **cosa misurano** | il primo: le `47` chiusure **voce per voce**, le `41` `chiusura` orfane **in due liste**, e le `59` righe della terza lettura **una per una**; il secondo: **che cosa BLOCCA e che cosa è solo scritto** |
+| ### ⭐ **e il secondo LEGGE IL HOOK** | non si crede alla propria tabella: la colonna *«cablato davvero»* **apre `.githooks/` e `csv/_hook_presidi.py`** e cerca il nome. ### **Un presidio dichiarato e non cablato è ciò che `A9` condanna, e un referto non può essere l'unico posto che non lo verifica** |
+| **l'uscita** | `doc/REFERTO_indice_v3_chiusure.md` *(`390` righe)* · `doc/REFERTO_strumenti_era2.md` *(`111` righe)* |
