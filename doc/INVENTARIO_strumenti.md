@@ -2654,7 +2654,7 @@ etichette rimosse, con ### **`0` persi, `0` doppi, `0` conflitti**.
 | **cosa impedisce** | `P-E1` la **biiezione** *(tabella ↔ file ↔ registro ↔ scheda)* · `P-E2` **l'impronta** · `P-E3` le **variabili nei due versi** · `P-E4` le **importazioni** *(`A17`)* · `P-E5` gli **osservatori in sola lettura**, misurato **al byte** · `P-E6` la tabella che cambia senza il registro e senza l'ID nel messaggio · `P-E7` i **riferimenti** |
 | ### ⛔ **e `LEGGE` si legge via AST** | una regex la troverebbe ### **anche dentro un commento o una stringa**, e ### **un presidio che si lascia ingannare da un commento non è un presidio** |
 | ### ⛔ **NESSUNA via d'uscita** | e ### **la sua ASSENZA è il presidio**: la prima stesura definiva una regex `_FUGA` ### **senza leggerla mai**, come promemoria — ### **codice morto che INVITA una scappatoia che il mandato vieta** |
-| **`P-E8`** | `.github/workflows/era2.yml`: ### **la CI, a ogni push** |
+| **`P-E8`** | `.github/workflows/era2.yml`: la CI, a ogni push. ### ⛔ **E NON E' UN PRESIDIO:** senza protezione del ramo *(decisione di Luca)* gira ### **dopo** il push e ### **non impedisce niente** — ### **e' una RETE CHE SEGNALA** *(`A9`)*. ### ⚠ **E non e' mai stata osservata girare** |
 
 ### `primo_ordine/passo.py` e `primo_ordine/_collauda_passo.py` — **LO SCHEDULATORE A STRATI, I DUE CANDIDATI, IL CONO** *(2026-10-09)*
 
@@ -2666,5 +2666,19 @@ etichette rimosse, con ### **`0` persi, `0` doppi, `0` conflitti**.
 | ### ⭐ **e il collaudo sta in un file SUO** | il cono si misura **sulla norma**, la norma e' **un osservatore**, e `P-E4` vieta a `passo.py` di importare `osservatori/` *(`A17`)*. ### **Il presidio ha imposto la forma, invece di lasciarmela scegliere** |
 | ### ⛔ **e NON SCEGLIE l'integratore** | la scelta e' **di Luca** *(il nodo `INT`)*: i due candidati stanno nella **stessa tavola**, con cono, deriva e costo |
 | **l'uscita** | **a schermo**, e il referto della tappa `6` prende i numeri **da qui** *(`L-NUMERI`)* |
+
+---
+
+### `csv/_referto_infrastruttura_era2.py` — **IL REFERTO DELL'INFRASTRUTTURA, GENERATO** *(2026-10-09)*
+
+| | |
+|---|---|
+| **file** | `csv/_referto_infrastruttura_era2.py` |
+| **BLOB** *(sha1 dei byte grezzi)* | `ffec187a` |
+| **COMANDO** | `python csv/_referto_infrastruttura_era2.py` |
+| **cosa misura** | **FA GIRARE i sette collaudi** dell'era `2` e scrive `doc/REFERTO_infrastruttura_era2.md` **dalla loro uscita** |
+| ### ⛔ **e nessun numero e' ricopiato** | `L-NUMERI`: le cifre del referto escono **dallo `stdout` dei comandi**, e il referto porta **i comandi stessi**, verbatim. ### **Se un collaudo smette di passare, il referto LO DICE** invece di conservare il numero di ieri |
+| ### ✅ **e la CI lo rigenera e fa `git diff`** | quindi ### **un referto scaduto non puo' passare inosservato** — e' lo stesso meccanismo che rende vera la frase *«i file generati non si modificano a mano»* |
+| **l'uscita** | `doc/REFERTO_infrastruttura_era2.md` |
 
 ---

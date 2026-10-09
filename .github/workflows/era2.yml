@@ -1,17 +1,33 @@
 # =====================================================================================
-#  P-E8 -- LA CI: i presidi girano A OGNI PUSH, e FUORI DAL PC DI LUCA
+#  P-E8 -- LA CI: i collaudi girano A OGNI PUSH, e FUORI DAL PC DI LUCA
 # -------------------------------------------------------------------------------------
 #  ### PERCHE' CONTA, e non e' una comodita': i hook del `pre-commit` vivono in
 #  ### `.githooks/`, e valgono SOLO SE qualcuno ha dato `git config core.hooksPath
 #  ### .githooks`. Per `A9` un presidio che dipende da un comando dato a mano
 #  ### E' UNA TENDA: chi clona il repo e non lo da' NON HA NESSUN PRESIDIO.
 #
-#  ### LA CI NON SI PUO' DIMENTICARE: gira sul server, a ogni push, e NON HA
-#  ### VIA D'USCITA -- come i presidi di primo_ordine/.
+#  ### ⛔ MA QUESTA CI NON E' UN PRESIDIO, E QUI PRIMA C'ERA SCRITTO IL CONTRARIO.
+#  ### Avevo scritto: <<LA CI NON SI PUO' DIMENTICARE: gira sul server, a ogni push,
+#  ### e NON HA VIA D'USCITA -- come i presidi di primo_ordine/>>, e stavo per
+#  ### dichiararla NEL REFERTO il gradino di robustezza di questo mandato.
 #
-#  ### ⚠ E QUESTA E' LA PRIMA VOLTA CHE UN PRESIDIO DI QUESTO REPO GIRA FUORI DAL PC DI
-#  ### LUCA. Il referto dell'infrastruttura lo dichiara come il gradino di
-#  ### ROBUSTEZZA-FISICA di questo mandato.
+#  ### E' FALSO, E LO ERA SEMPRE STATO. Luca ha deciso (2026-10-09): NESSUNA
+#  ### protezione del ramo su GitHub. Quindi QUESTA CI GIRA DOPO IL PUSH E NON PUO'
+#  ### IMPEDIRE NIENTE: e' UNA RETE CHE SEGNALA.
+#
+#  ### E non mi serviva la decisione di Luca per vederlo: bastava chiedermi
+#  ### <<questa CI PUO' impedire un commit?>>. Avevo trasferito alla CI una
+#  ### proprieta' VERA dei presidi di primo_ordine/ (che davvero non hanno fuga,
+#  ### perche' il loro codice non legge nessuna fuga) DOVE NON VALE.
+#
+#  ### A COSA SERVE ALLORA, e non e' poco: i hook locali valgono SOLO SE qualcuno ha
+#  ### dato `git config core.hooksPath .githooks`, e per A9 un presidio che dipende
+#  ### da un comando dato a mano E' UNA TENDA. Questa CI SEGNALA a chi guarda che
+#  ### quella tenda non ha tenuto -- e un --no-verify, che in locale NON E'
+#  ### IMPEDIBILE, qui si vede.
+#
+#  ### ⚠ E NON E' MAI STATA OSSERVATA GIRARE. Il referto lo dice: per A9 la
+#  ### differenza fra <<scritto>> e <<osservato>> e' quella fra una tenda e un muro.
 # =====================================================================================
 name: era2
 
@@ -56,13 +72,27 @@ jobs:
       - name: il collaudo del generatore
         run: python primo_ordine/_genera.py --prova
 
-      - name: ### E IL GENERATO E- RIPRODUCIBILE -- si rigenera e NON cambia
+      - name: "### E IL GENERATO E- RIPRODUCIBILE -- si rigenera e NON cambia"
         # ### ⛔ E' il controllo che rende VERA la frase <<i file generati non si
         # ### modificano a mano>>: se qualcuno tocca un file generato, la rigenerazione
         # ### lo riscrive e `git diff` NON E' VUOTO.
         run: |
           python primo_ordine/_genera.py
           git diff --exit-code -- primo_ordine doc/leggi_era2
+
+      - name: "### IL COLLAUDO DELLA CATENA -- lo schedulatore, il cono, i SEI casi"
+        # ### E- il collaudo che il mandato chiama <<di TUTTA LA CATENA>>: i tre
+        # ### livelli dello schedulatore, il CONO per passo e per strato, la deriva dei
+        # ### due candidati, `A8b`, e i sei casi che DEVONO fallire.
+        run: python primo_ordine/_collauda_passo.py
+
+      - name: "### E IL REFERTO SI RIGENERA, e NON cambia"
+        # ### ⛔ Il referto prende OGNI numero dall-uscita dei collaudi (`L-NUMERI`).
+        # ### Se un numero cambiasse e il referto restasse quello di ieri, `git diff`
+        # ### NON SAREBBE VUOTO -- quindi un referto scaduto NON PUO- passare inosservato.
+        run: |
+          python csv/_referto_infrastruttura_era2.py
+          git diff --exit-code -- doc/REFERTO_infrastruttura_era2.md
 
       - name: il collaudo dei presidi dell-indice
         run: python csv/_collaudo_presidi_indice.py

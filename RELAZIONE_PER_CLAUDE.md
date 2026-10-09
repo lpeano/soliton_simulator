@@ -11159,3 +11159,23 @@ Il mandato chiede, nella tappa `5`, ### **almeno un osservatore**, e la ragione 
 ### `A8b` e ### **i SEI casi che devono fallire**
 
 `senza_cache()` confronta ### **tutte le costanti di modulo** dei moduli di fisica prima e dopo tre passi: ### **`5` moduli, nessuno si ricorda niente** — e ### **il presidio scatta** se gliene si fa ricordare uno. ### ✅ **E i sei casi del mandato girano in UN SOLO POSTO** *(sezione `(F)`)*, ognuno verificato ### **per la chiave giusta**: un `termine_nodo` che legge un vicino · un-espressione con `pos` · un generato ritoccato a mano · una legge senza `voce` o senza `scheda` *(e in piu- ### **una `voce` che non e- nell-indice**)* · un osservatore che scrive · un termine che importa un osservatore. ### **Piu- il braccio che verifica che, tolti i finti, i presidi TACCIANO** — altrimenti scatterebbero per un residuo.
+
+## TAPPA `6` — ### **IL REFERTO, E LA CI CHE DICEVA IL FALSO** *(2026-10-09)*
+
+`doc/REFERTO_infrastruttura_era2.md`, generato da `csv/_referto_infrastruttura_era2.py`: ### **lo script FA GIRARE i sette collaudi e prende le cifre dalla loro uscita** *(`L-NUMERI`)*. ### ✅ **E la CI lo rigenera e fa `git diff --exit-code`**, quindi ### **un referto scaduto non puo- passare inosservato.**
+
+| il collaudo | |
+|---|---|
+| la catena *(lo schedulatore, il cono, i sei casi)* | ### **`33`/`33`** |
+| i presidi dell-era `2`, nei due versi | ### **`16`/`16`** |
+| lo schema della tabella | ### **`25`/`25`** |
+| il generatore | ### **`13`/`13`** |
+| la lista dei file di fisica | ### **`17`/`17`** |
+| i presidi dell-indice | ### **`67`/`67`** |
+| i controlli della migrazione | ### **`6`/`6`** |
+
+### ⛔ **E LA COSA CHE CONTA DI QUESTA TAPPA E- UNA CORREZIONE A ME STESSO.** In `.github/workflows/era2.yml` avevo scritto *«LA CI NON SI PUO- DIMENTICARE … e NON HA VIA D-USCITA»*, e stavo per dichiararla nel referto ### **il gradino di robustezza di questo mandato.** ### ⚠ **Luca ha deciso: NESSUNA protezione del ramo su GitHub** — quindi ### **la CI gira DOPO il push e non impedisce niente: e- una RETE CHE SEGNALA** *(`A9`)*.
+
+### ⭐ **E non mi serviva la sua decisione per vederlo:** bastava chiedermi *«questa CI PUO- impedire un commit?»*. ### **Avevo trasferito alla CI una proprieta- VERA dei presidi di `primo_ordine/`** *(che davvero non hanno fuga, perche- il loro codice non legge nessuna fuga)*, ### **dove non vale.** Corretto in ### **tre posti**: l-intestazione del workflow, la riga `P-E8` dell-inventario, e ### **il referto, che ora lo dichiara fra i LIMITI** — insieme al fatto che ### **un `--no-verify` non e- impedibile in locale** e che ### **la CI non e- mai stata osservata girare.**
+
+### ⚠ **E HO TROVATO UN DIFETTO PREESISTENTE NEL WORKFLOW, mio, della tappa `4`:** ### ⛔ **tre `name:` di passo cominciavano con `###`, e in YAML il `#` APRE UN COMMENTO** — quindi quei tre nomi erano ### **`null`**, non quello che credevo di aver scritto. ### **Trovato perche- ho fatto leggere il file a `yaml.safe_load` invece di guardarlo**, e la lezione e- la solita di questo repo: ### **VERIFICA DAL CODICE, NON DAL TESTO CHE HAI SCRITTO.** Curato quotando i tre nomi: `14` passi, ### **zero senza nome.**
