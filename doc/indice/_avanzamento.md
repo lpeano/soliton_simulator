@@ -64,3 +64,27 @@ python csv/indice.py aggiorna-lotto doc/indice/_lotti/<nome>.jsonl
 | ### ✔ **il dubbio e' un esito** | se il contenuto non basta, la voce ### **RESTA `DA_CLASSIFICARE`** con `meta.motivo_dubbio`. ### **Non c'e' un numero minimo da classificare** |
 | ### **la mescolanza non si forza** | due cose di dominio diverso in una voce ⇒ `meta.da_dividere = true` e una proposta in `nota_guardiano`. ### **La divisione la decide Luca** |
 | ### **le liste del guardiano NON cambiano** | salvo le correzioni `(c)` e `(d)` del punto `1`. ### **Un disaccordo va nel REFERTO, non nell'indice** |
+
+---
+
+## 📌 **STATO AL 2026-10-09** — *aggiornato a ogni lotto*
+
+| | |
+|---|--:|
+| voci | `867` |
+| ### **`DA_CLASSIFICARE` vere** *(non segnaposto)* | ### **`112`** |
+| ### **segnaposto `NON_DEFINITA`** | ### **`233`** |
+| ### **`CHIUSE` senza dominio** | ### **`184`** |
+
+```
+classe    NON_DEFINITA=233  DIFETTO=209  FRONTE=168  CRITERIO=95  MISURA=54  CURA=46  PRESIDIO=34  STANDARD=28
+dominio   DA_CLASSIFICARE=529  FISICA=226  METODO=76  INFRASTRUTTURA=22  DOCUMENTAZIONE=14
+era       DA_CLASSIFICARE=529  1=177  ENTRAMBE=114  2=47
+stato     DA_CLASSIFICARE=345  CHIUSA=187  SOSPESA=163  APERTA=125  AGENDA=47
+```
+
+### ✔ **FATTO IN QUESTO GIRO:** il punto 1 (le correzioni) e le QUATTRO REGOLE della classificazione per contenuto: 135 voci su 247
+
+### ⛔ **RESTA:** le 112 voci da LEGGERE, i 233 segnaposto e le 184 CHIUSE senza dominio
+
+**Ultimo lotto applicato:** `doc/indice/_lotti/contenuto_03.jsonl`
