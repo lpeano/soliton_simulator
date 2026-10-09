@@ -1,0 +1,10 @@
+# ====================================================================================
+#  LA TABELLA DELLE LEGGI -- L-UNICA FONTE
+# ------------------------------------------------------------------------------------
+#  TAPPA 1: SOLO L-INTESTAZIONE. Il formato arriva alla tappa 2, lo schema lo valida, e
+#  il generatore (tappa 3) ne ricava IL CODICE e LA SCHEDA.
+#
+#  NIENTE SI SCRIVE A MANO SOTTO primo_ordine/termini/: si scrive QUI, e SI GENERA.
+# ====================================================================================
+versione: 1
+leggi: []

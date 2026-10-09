@@ -53,10 +53,14 @@ RADICE = os.path.abspath(os.path.join(_QUI, ".."))
 # ### `csv/_file_fisica.py`. ### ⚠ **Anche `H-P7` guarda UN file per volta**, e
 # ### l-`assert` lo dichiara.
 import _file_fisica as _FF                                   # noqa: E402
-assert len(_FF.FILE_FISICA) == 1, (
-    "`H-P7` guarda UN file per volta e la LISTA ne ha %d: va esteso, non adattato"
-    % len(_FF.FILE_FISICA))
-SIM_REL = _FF.FILE_FISICA[0]
+# ### ✔ **ESTESO il 2026-10-09:** `H-P7` guarda ### **il commento di ogni FLAG**, e
+# ### i flag stanno nel file la cui scheda vive nel registro. ### **I file
+# ### dell-era `2` NON hanno flag**: la loro configurazione sta ### **nella
+# ### tabella delle leggi.**
+assert len(_FF.SCHEDA_NEL_REGISTRO) == 1, (
+    "`H-P7` guarda UN file per volta e SCHEDA_NEL_REGISTRO ne ha %d: va esteso"
+    % len(_FF.SCHEDA_NEL_REGISTRO))
+SIM_REL = _FF.SCHEDA_NEL_REGISTRO[0]
 SIM = os.path.join(RADICE, SIM_REL)
 NL = chr(10)
 

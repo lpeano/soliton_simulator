@@ -42,6 +42,35 @@ NL = chr(10)
 # ### DUE presidi.**
 FILE_FISICA = (
     "soliton_simulator.py",
+    'primo_ordine/__init__.py',
+    'primo_ordine/stato.py',
+    'primo_ordine/hamiltoniana.py',
+    'primo_ordine/passo.py',
+    'primo_ordine/crescita.py',
+    'primo_ordine/vuoto.py',
+    'primo_ordine/driver.py',
+    'primo_ordine/_genera.py',
+    'primo_ordine/termini/__init__.py',
+    'primo_ordine/osservatori/__init__.py',
+    'primo_ordine/leggi/leggi.yaml',
+    'primo_ordine/leggi/osservatori.yaml',
+)
+
+# ### ⛔ **E QUESTA E- UNA LISTA DIVERSA, non un sottoinsieme per comodita-.**
+# ### `H-REG-R` pretende che ### **una legge che cambia porti la sua SCHEDA**, e
+# ### `H-P7` che ### **ogni flag porti il suo commento**: entrambi cercano la
+# ### scheda ### **in `doc/REGISTRO_FISICA.md`.**
+# ### ⭐ **Ma la scheda di una legge dell-era `2` SI GENERA in
+# ### `doc/leggi_era2/<id>.md`** *(tappa `3`)*: pretendere che stia ### **anche**
+# ### nel registro vorrebbe dire ### **DUE POSTI PER LA STESSA SCHEDA**, e
+# ### ### **due copie divergono** -- il difetto pagato ### **due volte in tre
+# ### giorni** *(la regola di `superata_da` duplicata, e il numero dei hook nel
+# ### titolo del §12)*.
+# ### ✔ **Quindi i file dell-era `2` stanno in `FILE_FISICA`** *(li sorveglia
+# ### `H-FISICA-FUORI-LISTA`, e `H-ID-OBBLIGATORIO` pretende un ID nel messaggio)*
+# ### ### **e NON qui.** La loro scheda la sorvegliano ### **`P-E1` e `P-E2`.**
+SCHEDA_NEL_REGISTRO = (
+    "soliton_simulator.py",
 )
 
 # ### ✔ **LA CARTELLA DEL CODICE DELL-ERA `2`: `primo_ordine/`** -- ### **decisione di Luca
@@ -65,6 +94,15 @@ CARTELLA_ERA_2 = "primo_ordine/"   # decisione di Luca, 2026-10-09
 # =====================================================================================
 #   CHI LEGGE
 # =====================================================================================
+
+def nel_registro():
+    """### I file la cui SCHEDA vive in `doc/REGISTRO_FISICA.md`.
+
+    ### ⛔ **Sono MENO di `FILE_FISICA`, e la ragione sta nella costante:** la
+    scheda di una legge dell-era `2` ### **si genera altrove.**
+    """
+    return tuple(SCHEDA_NEL_REGISTRO)
+
 
 def sorvegliati():
     """### I file di fisica, ### **come tupla di percorsi relativi.**"""

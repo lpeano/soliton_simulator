@@ -116,3 +116,14 @@ la riga **`PUSHATO:`**, che Luca vede a colpo d'occhio.
 | ### ⚠ **la cartella NON esiste ancora, e NON l'ho creata** | il mandato dà ### **il nome**, non l'ordine di crearla — e creare la cartella del codice dell'era `2` è ### **un atto di FISICA**, non di indice |
 | ### ⭐ **e il presidio funziona comunque** | guarda ### **i percorsi staged, non il disco**: impedisce ### **dal primo `.py` che qualcuno metta là** |
 | ### **il collaudo** | sulla cartella ### **VERA**, nei due versi, piu' ### **una copia con la costante VUOTA** che conserva ### **la misura del vecchio stato** |
+
+---
+
+## `primo_ordine/`, E LA LISTA CHE SI SDOPPIA *(2026-10-09)*
+
+| | |
+|---|---|
+| ### **`FILE_FISICA`** | ### **tutti** i file di fisica *(`13`)*. La leggono ### **`H-FISICA-FUORI-LISTA`** *(un `.py` sotto `primo_ordine/` fuori lista → commit rifiutato)* e ### **`H-ID-OBBLIGATORIO`** *(un ID nel messaggio)* |
+| ### **`SCHEDA_NEL_REGISTRO`** *(nuova)* | ### **solo i file la cui SCHEDA vive in `doc/REGISTRO_FISICA.md`** *(`1`)*. La leggono ### **`H-REG-R`** e ### **`H-P7`** |
+| ### ⛔ **perché due liste e non un sottoinsieme** | la scheda di una legge dell'era `2` ### **si GENERA in `doc/leggi_era2/<id>.md`**: pretendere che stia ### **anche** nel registro vorrebbe dire ### **DUE posti per la stessa scheda**, e ### **due copie divergono** |
+| ### ⭐ **e l'`assert` chiedeva questo** | *«va esteso, non adattato»* — ### **un ciclo sarebbe stato l'adattamento**, la distinzione è ### **l'estensione** |

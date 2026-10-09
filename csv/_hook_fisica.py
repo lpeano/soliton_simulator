@@ -55,10 +55,16 @@ import sys
 # ### ### **questo `assert` lo dira-** invece di lasciarlo scoprire a un run.
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import _file_fisica as _FF                                   # noqa: E402
-assert len(_FF.FILE_FISICA) == 1, (
-    "`H-REG-R` guarda UN file per volta e la LISTA ne ha %d: va esteso, non adattato"
-    % len(_FF.FILE_FISICA))
-SIM = _FF.FILE_FISICA[0]
+# ### ✔ **ESTESO il 2026-10-09, e la via e- UNA DISTINZIONE, non un ciclo:**
+# ### `H-REG-R` cerca la scheda ### **in `doc/REGISTRO_FISICA.md`**, quindi guarda
+# ### ### **i file la cui scheda vive LA-** -- non tutti i file di fisica.
+# ### ⛔ **I file dell-era `2` hanno la scheda GENERATA in `doc/leggi_era2/`**, e
+# ### la sorvegliano ### **`P-E1` e `P-E2`.** ### **L-assert di prima chiedeva
+# ### <<esteso, non adattato>>: questa e- l-estensione.**
+assert len(_FF.SCHEDA_NEL_REGISTRO) == 1, (
+    "`H-REG-R` guarda UN file per volta e SCHEDA_NEL_REGISTRO ne ha %d: va esteso"
+    % len(_FF.SCHEDA_NEL_REGISTRO))
+SIM = _FF.SCHEDA_NEL_REGISTRO[0]
 REGISTRO = "doc/REGISTRO_FISICA.md"
 MARCATORE = re.compile(
     r"<!--\s*SCHEDA\s+nome=([\w\-]+)\s+funzioni=([^\s]*)\s+flag=([^\s]*)\s*-->")

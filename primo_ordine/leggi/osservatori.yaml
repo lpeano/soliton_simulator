@@ -1,0 +1,10 @@
+# ====================================================================================
+#  LA TABELLA DEGLI OSSERVATORI -- separata dalle leggi, e di proposito
+# ------------------------------------------------------------------------------------
+#  TAPPA 1: SOLO L-INTESTAZIONE.
+#
+#  PERCHE- SEPARATA: un osservatore NON E- FISICA (A17). Tenerlo nella stessa tabella
+#  delle leggi inviterebbe a scriverci UNA LEGGE TRAVESTITA DA MISURA.
+# ====================================================================================
+versione: 1
+osservatori: []

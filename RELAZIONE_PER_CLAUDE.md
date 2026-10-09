@@ -11008,3 +11008,15 @@ Il task history e' committato ### **prima del lavoro** *(par.8)*: `doc/TASK_HIST
 ### ⭐ **E il perche- non e- una comodita-:** la scheda di una legge dell'era `2` ### **si GENERA in `doc/leggi_era2/<id>.md`.** Pretendere che stia ### **anche** in `REGISTRO_FISICA.md` vorrebbe dire ### **DUE posti per la stessa scheda**, e ### **due copie divergono** — e- il difetto che ho pagato ### **due volte in tre giorni** *(la regola di `superata_da` duplicata, e il numero dei hook nel titolo del §`12`)*.
 
 ### 📌 **E L'INTEGRATORE E- UNA DECISIONE APERTA: dichiaro la scelta e il perche-.** Uso il ### **PUNTO MEDIO IMPLICITO**, perche' e' ### **simmetrico** *(nessuna deriva SECOLARE dell'energia: l'errore oscilla, non cresce)* e ### **conserva ESATTAMENTE gli invarianti quadratici** — e la ### **norma e' quadratica**, quindi si conserva ### **al bit.** ### ⛔ **L'alternativa `RK4` perde energia MONOTONAMENTE**, che su una corsa lunga e' la cosa sbagliata. ### ⚠ **Il prezzo: e' implicito**, e quante iterazioni di punto fisso serva ### **lo misuro, non lo suppongo.**
+
+---
+
+## TAPPA `1`: **`primo_ordine/` nasce, e la LISTA si sdoppia** (2026-10-09)
+
+`12` file nuovi *(vuoti, solo intestazioni)*, `FILE_FISICA` da `1` a ### **`13`**, `SCHEDA_NEL_REGISTRO` nuova con ### **`1`**. Collaudo `17`/`17`. Nessuna fisica nuova; il simulatore resta `b8c21049`.
+
+### ✔ **E IL PRIMO OSTACOLO ERA UN PRESIDIO CHE AVEVO SCRITTO IO STAMATTINA:** `assert len(FILE_FISICA) == 1` in `H-REG-R` e `H-P7`, col commento *«va esteso, non adattato»*. ### ⭐ **Un ciclo sarebbe stato l'ADATTAMENTO** — avrei fatto girare `H-REG-R` su dodici file, chiedendo a ciascuno ### **una scheda in `doc/REGISTRO_FISICA.md`.** ### ⛔ **E la scheda di una legge dell'era `2` SI GENERA altrove**: due posti per la stessa scheda, ### **e due copie divergono.**
+
+### ✔ **L'ESTENSIONE E- UNA DISTINZIONE:** `FILE_FISICA` per chi sorveglia ### **tutti** i file di fisica, `SCHEDA_NEL_REGISTRO` per chi cerca ### **la scheda nel registro.** ### **Due consumatori, due scopi, due costanti** — e l'`assert` resta, ### **sulla costante giusta.**
+
+### ⚠ **E I FILE SONO VUOTI DI PROPOSITO:** il mandato dice *«la struttura (vuota, solo intestazioni)»*, e ### **ogni tappa deve lasciare il repo valido** — il PC si riavvia fra `00:00` e `02:00`. ### **Un file con un'intestazione che dichiara cio' che fara' e' valido; un file a meta' no.**

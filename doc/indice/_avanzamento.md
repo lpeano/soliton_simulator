@@ -83,8 +83,10 @@ era       1=538  DA_CLASSIFICARE=188  ENTRAMBE=96  2=24
 stato     SOSPESA=369  DA_CLASSIFICARE=188  CHIUSA=182  APERTA=82  AGENDA=24  SUPERATA=1
 ```
 
-### ✔ **FATTO IN QUESTO GIRO:** il punto `6`, ### **il referto** `doc/REFERTO_indice_v3_fine_riordino.md` *(`207` righe)* e `DA_DECIDERE_LUCA.md` rigenerato *(`43` voci)*. ### **Il mandato «chiusura del riordino» e' CHIUSO: `6` punti su `6`.**
+### ✔ **FATTO IN QUESTO GIRO:** la ### **TAPPA `1`** dell'infrastruttura dell'era `2`: `primo_ordine/` con ### **`12` file, vuoti e con le sole intestazioni**, e ### **la LISTA che si sdoppia** — `FILE_FISICA` *(`13`)* per `H-FISICA-FUORI-LISTA` e `H-ID-OBBLIGATORIO`, ### **`SCHEDA_NEL_REGISTRO`** *(`1`)* per `H-REG-R` e `H-P7`. Collaudo ### **`17`/`17`.**
 
-### 📌 **E CINQUE DOMANDE RESTANO**, in fondo al referto — la prima e' ### **le due richieste incompatibili del punto `4`** *(`CONFIG-1` in `F8`)*, e la mia raccomandazione e' ### **nessuna delle due.**
+### ⛔ **RESTA:** le tappe `2`…`6` — il formato, il generatore, gli `8` presidi *(piu' la CI)*, il collaudo della catena, e il referto.
 
-**Ultimi lotti applicati:** `v3_note.jsonl` e `v3_note2.jsonl` — ### **il punto `6` NON scrive sull'indice**: legge, conta e scrive un documento.
+### 📌 **E IN CODA** *(`doc/CODA_2026-10-09.md`, voce ②)*: ### **le decisioni di Luca sulle `43` domande**, che lui stesso dice di eseguire ### **DOPO lo STOP di questo mandato.**
+
+**Ultimo lotto applicato:** `doc/indice/_lotti/v3_note2.jsonl` — ### **la tappa `1` NON scrive sull'indice.**
