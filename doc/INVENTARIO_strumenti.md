@@ -2599,3 +2599,17 @@ etichette rimosse, con ### **`0` persi, `0` doppi, `0` conflitti**.
 | ### ⭐ **è la cura di un mio difetto** | le citazioni erano **giuste**: ### **io cercavo nel file della `fonte`**, che per quelle voci **non è il file dove la frase sta** — e dichiaravo *«NON COMPARE»* una frase che c'era |
 | ### ⛔ **e un indirizzo sbagliato NON si corregge a mano** | se la riga `N` non porta la frase, **non si cerca a `N±1` e non si cerca altrove**: ### **si elenca** |
 | **l'uscita** | `doc/indice/_lotti/v3_indirizzate.jsonl` · `doc/indice/_p2_indirizzate.json` |
+
+---
+
+### `csv/_doc_referto_fine_riordino.py` — **IL REFERTO DELLA FINE DEL RIORDINO** *(2026-10-09)*
+
+| | |
+|---|---|
+| **file** | `csv/_doc_referto_fine_riordino.py` |
+| **BLOB** *(sha1 dei byte grezzi)* | `4a32cd5c` |
+| **COMANDO** | `python csv/_doc_referto_fine_riordino.py` |
+| **cosa misura** | i sei punti **uno per uno**, i conteggi **prima/dopo**, i segnali **per presidio voce per voce**, e l'elenco generato `DA_DECIDERE_LUCA.md` |
+| ### ⭐ **e lancia i CINQUE collaudi da sé** | i controlli, i presidi, l'indice, `_file_fisica` e `H-ID-OBBLIGATORIO`: **nessun numero ricopiato dal terminale** |
+| ### ✔ **e il PARI MERITO è risolto** | il nome è lo spareggio nelle tabelle prima/dopo: **un referto che non si rigenera identico non si può verificare** |
+| **l'uscita** | `doc/REFERTO_indice_v3_fine_riordino.md` *(`207` righe)* |

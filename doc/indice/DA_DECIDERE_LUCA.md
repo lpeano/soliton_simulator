@@ -4,8 +4,8 @@
 
 | | |
 |---|--:|
-| **voci che aspettano una decisione** | ### **`46`** |
-| **domande in tutto** | `46` |
+| **voci che aspettano una decisione** | ### **`43`** |
+| **domande in tutto** | `43` |
 | **segnaposto `NON_DEFINITA`**, che NON sono una domanda | `187` |
 
 ---
@@ -15,31 +15,30 @@
 | id | `classe`/`dominio`/era/stato | LA DOMANDA | LA FRASE |
 |---|---|---|---|
 | `C4` | `MISURA`/`FISICA`/`1`/`CHIUSA` | OMONIMO: quale dei 2 significati dichiarati in `meta.omonimo`? NON si scegli da se- | C4 VALE SEMPRE ⏳[EPOCA 1 · CODICE] / inerzia = T² — chiude il buco dimensionale; esponente cs^−2... titolo_breve INTERO: C4 VALE SEMPRE ⏳[EPOCA 1 · CO |
-| `C5` | `MISURA`/`FISICA`/`1`/`SOSPESA` | OMONIMO: quale dei 2 significati dichiarati in `meta.omonimo`? NON si scegli da se- | C5 🟨VALE PER QUELLA SCENA ⏳[EPOCA 1 · MISURA] / tauluce = d/cs e' PIATTO ⇒ la sostituzione rompe la… |
+| `C5` | `MISURA`/`FISICA`/`1`/`CHIUSA` | OMONIMO: quale dei 2 significati dichiarati in `meta.omonimo`? NON si scegli da se- | C5 🟨VALE PER QUELLA SCENA ⏳[EPOCA 1 · MISURA] / tauluce = d/cs e' PIATTO ⇒ la sostituzione rompe la… |
 | `D3` | `NON_DEFINITA`/`DA_CLASSIFICARE`/`DA_CLASSIFICARE`/`DA_CLASSIFICARE` | OMONIMO: quale di ALMENO 6 significati dichiarati in `meta.omonimo`? NON si scegli da se- | OMONIMO `D3`: 8 definizioni con significati DIVERSI le stesse DUE TAVOLE di D4, D5 e D6: doc/CENSIMENTO_intenzioni.md (una voce del censimento) e doc/ |
 | `D4` | `NON_DEFINITA`/`DA_CLASSIFICARE`/`DA_CLASSIFICARE`/`DA_CLASSIFICARE` | OMONIMO: quale dei 2 significati dichiarati in `meta.omonimo`? NON si scegli da se- | OMONIMO `D4`: 2 definizioni con significati DIVERSI le stesse DUE TAVOLE: doc/CENSIMENTO_intenzioni.md (l-evoluzione SU(2) congelata) e doc/MAPPA_acco |
 | `D5` | `NON_DEFINITA`/`DA_CLASSIFICARE`/`DA_CLASSIFICARE`/`DA_CLASSIFICARE` | OMONIMO: quale dei 2 significati dichiarati in `meta.omonimo`? NON si scegli da se- | OMONIMO `D5`: lo stesso ID nomina DUE OGGETTI DIVERSI / **`D5`** / `:936` (`SYNC_UPDATE`) e le sue motivazioni sparse nei documenti / **2026-08-28** i |
 | `D6` | `NON_DEFINITA`/`DA_CLASSIFICARE`/`DA_CLASSIFICARE`/`DA_CLASSIFICARE` | OMONIMO: quale dei 2 significati dichiarati in `meta.omonimo`? NON si scegli da se- | OMONIMO `D6`: lo stesso ID nomina DUE OGGETTI DIVERSI / **`D6`** / `Checkpoint.md` nel suo insieme (~640 righe) / file **2026-09-05 / 2026-09-07** / c |
 | `H2` | `NON_DEFINITA`/`DA_CLASSIFICARE`/`DA_CLASSIFICARE`/`DA_CLASSIFICARE` | OMONIMO: quale dei 3 significati dichiarati in `meta.omonimo`? NON si scegli da se- | OMONIMO `H2`: 3 definizioni con significati DIVERSI DUE oggetti: l-ipotesi dello scioglimento (<<la coppia non legge la fase corrente>>) e un CRITERIO |
-| `M1` | `DIFETTO`/`FISICA`/`2`/`AGENDA` | OMONIMO: quale dei 2 significati dichiarati in `meta.omonimo`? NON si scegli da se- | LA MATERIA È UNO STATO, NON UNA SOSTANZA — e non c'è SCARICO. Nel codice la materia è la... titolo_breve INTERO: LA MATERIA È UNO STATO, NON UNA SOSTA |
+| `M1` | `FRONTE`/`FISICA`/`2`/`AGENDA` | OMONIMO: quale dei 2 significati dichiarati in `meta.omonimo`? NON si scegli da se- | LA MATERIA È UNO STATO, NON UNA SOSTANZA — e non c'è SCARICO. Nel codice la materia è la... titolo_breve INTERO: LA MATERIA È UNO STATO, NON UNA SOSTA |
 | `S1` | `NON_DEFINITA`/`DA_CLASSIFICARE`/`DA_CLASSIFICARE`/`DA_CLASSIFICARE` | OMONIMO: quale di ALMENO 6 significati dichiarati in `meta.omonimo`? NON si scegli da se- | OMONIMO `S1`: 22 definizioni con significati DIVERSI e- UN CRITERIO LOCALE DI SIGILLO, e ogni sigillo gli da- un senso suo: <<il controllo forte, il b |
 | `S3` | `NON_DEFINITA`/`DA_CLASSIFICARE`/`DA_CLASSIFICARE`/`DA_CLASSIFICARE` | OMONIMO: quale di ALMENO 6 significati dichiarati in `meta.omonimo`? NON si scegli da se- | OMONIMO `S3`: 21 definizioni con significati DIVERSI idem: <<`d` sotto LAM>>, <<riduzione DETERMINISTICA: spengo il rumore del vuoto>>, <<0 differenze |
 | `T1` | `NON_DEFINITA`/`DA_CLASSIFICARE`/`DA_CLASSIFICARE`/`DA_CLASSIFICARE` | OMONIMO: quale di ALMENO 6 significati dichiarati in `meta.omonimo`? NON si scegli da se- | OMONIMO `T1`: 34 definizioni con significati DIVERSI idem: <<lo SCHEDULATORE DEL PASSO>>, <<T1 e- BYTE-IDENTICO>>, <<la nascita conserva -- RESTRINGE  |
 
 ---
 
-## le CLASSIFICAZIONI da confermare -- `20`
+## le CLASSIFICAZIONI da confermare -- `19`
 
 | id | `classe`/`dominio`/era/stato | LA DOMANDA | LA FRASE |
 |---|---|---|---|
 | `A1` | `STANDARD`/`FISICA`/`ENTRAMBE`/`APERTA` | CONFERMI `FISICA`/era `ENTRAMBE`? vincola la FORMA DELLE LEGGI o descrive il comportamento del sistema | LA LEGGE, NON IL NUMERO |
 | `A10` | `STANDARD`/`FISICA`/`ENTRAMBE`/`APERTA` | CONFERMI `FISICA`/era `ENTRAMBE`? vincola la FORMA DELLE LEGGI o descrive il comportamento del sistema | UNA SOLA GRANDEZZA PUO' LEGARE DUE DOMINI |
 | `A11` | `STANDARD`/`FISICA`/`ENTRAMBE`/`APERTA` | CONFERMI `FISICA`/era `ENTRAMBE`? vincola la FORMA DELLE LEGGI o descrive il comportamento del sistema | UN LIMITE E' UNA LEGGE, NON UNA TOPPA |
-| `A12` | `STANDARD`/`METODO`/`ENTRAMBE`/`APERTA` | CONFERMI `METODO`/era `ENTRAMBE`? parla di COME SI LAVORA e si verifica | UN DIFETTO DIMOSTRATO SI CURA. MISURARE NON È CURARE. |
 | `A13` | `STANDARD`/`FISICA`/`ENTRAMBE`/`APERTA` | CONFERMI `FISICA`/era `ENTRAMBE`? vincola la FORMA DELLE LEGGI o descrive il comportamento del sistema | LAM È LA SCALA DI PLANCK DEL SISTEMA (decisione di Luca, 2026-09-24) |
 | `A14` | `STANDARD`/`FISICA`/`ENTRAMBE`/`APERTA` | CONFERMI `FISICA`/era `ENTRAMBE`? vincola la FORMA DELLE LEGGI o descrive il comportamento del sistema | LE GRANDEZZE SI CONSERVANO LOCALMENTE E SI DISSIPANO GLOBALMENTE (decisione di Luca, 2026-10-03) ASSIOMA deciso da Luca il 2026-10-03, e doc/ASSIOMI.m |
 | `A15` | `STANDARD`/`FISICA`/`ENTRAMBE`/`APERTA` | CONFERMI `FISICA`/era `ENTRAMBE`? vincola la FORMA DELLE LEGGI o descrive il comportamento del sistema | LA MEMORIA E DINAMICA, LOCALE, E CIO CHE DIMENTICA SI TRASFORMA (decisione di Luca, 2026-10-07) ASSIOMA deciso da Luca il 2026-10-07, e doc/ASSIOMI.md |
-| `A2` | `STANDARD`/`FISICA`/`ENTRAMBE`/`SOSPESA` | CONFERMI `FISICA`/era `ENTRAMBE`? vincola la FORMA DELLE LEGGI o descrive il comportamento del sistema | NESSUNA SCORCIATOIA GLOBALE |
+| `A2` | `STANDARD`/`FISICA`/`ENTRAMBE`/`APERTA` | CONFERMI `FISICA`/era `ENTRAMBE`? vincola la FORMA DELLE LEGGI o descrive il comportamento del sistema | NESSUNA SCORCIATOIA GLOBALE |
 | `A3` | `STANDARD`/`FISICA`/`ENTRAMBE`/`APERTA` | CONFERMI `FISICA`/era `ENTRAMBE`? vincola la FORMA DELLE LEGGI o descrive il comportamento del sistema | NIENTE SI NORMALIZZA SUL PROPRIO INSIEME |
 | `A3c` | `STANDARD`/`FISICA`/`ENTRAMBE`/`APERTA` | CONFERMI `FISICA`/era `ENTRAMBE`? vincola la FORMA DELLE LEGGI o descrive il comportamento del sistema | un RAPPORTO confrontato con un MASSIMO / (115, accanto a due massimi di passi diversi) /... titolo_breve INTERO: un RAPPORTO confrontato con un MASSIM |
 | `A4` | `STANDARD`/`FISICA`/`ENTRAMBE`/`APERTA` | CONFERMI `FISICA`/era `ENTRAMBE`? vincola la FORMA DELLE LEGGI o descrive il comportamento del sistema | STRATIFICAZIONE CAUSALE |
@@ -55,7 +54,7 @@
 
 ---
 
-## le DOMANDE aperte -- `15`
+## le DOMANDE aperte -- `13`
 
 | id | `classe`/`dominio`/era/stato | LA DOMANDA | LA FRASE |
 |---|---|---|---|
@@ -68,10 +67,8 @@
 | `M-ISTERESI` | `CURA`/`FISICA`/`2`/`AGENDA` | era 1 o 2 | un isteresi sui flip di perc_geom e perc_chi: COMPLEMENTO di MEM-VERSO, non alternativa CANDIDATA REGISTRATA il 2026-10-07 e NON DECISA, dal rapporto  |
 | `M-LEGAMI` | `CURA`/`FISICA`/`2`/`AGENDA` | era 1 o 2 | cos(dph - tw) al posto di cos(phi0_i - phi0_j): rende viva una memoria congelata CANDIDATA REGISTRATA il 2026-10-07 e NON DECISA, dal rapporto doc/MEM |
 | `M-MASSA` | `CURA`/`FISICA`/`2`/`AGENDA` | era 1 o 2 | pesi di appartenenza con memoria: AGGIUNGE stato, e dipende da MASSA-ID CANDIDATA REGISTRATA il 2026-10-07 e NON DECISA, dal rapporto doc/MEMORIE_MANC |
-| `MASSA-CRITICA-LOCALE` | `DIFETTO`/`FISICA`/`1`/`SOSPESA` | contiene una DIREZIONE DI LUCA per l-era 2: va letta come programma dell-era 2 o come difetto dell-era 1? | la soglia di collasso deve essere LOCALE e DINAMICA, e dipendere da lambda: direzione di Luca APERTA il 2026-10-06 sera. DIREZIONE DI LUCA, registrata |
 | `MEM-VERSO` | `CURA`/`FISICA`/`2`/`AGENDA` | era 1 o 2 | il verso dell arco dalla sua MEMORIA (delta = twp - tw) invece che dal segno istantaneo CANDIDATA REGISTRATA il 2026-10-07 e NON DECISA, dal rapporto  |
 | `O4` | `FRONTE`/`FISICA`/`1`/`SOSPESA` | era 2? e- un-OBIEZIONE AL BERSAGLIO (la conservazione dell-energia), e un-obiezione al bersaglio non si chiude nell-era 1 | CONSERVAZIONE DELL'ENERGIA. L'energia assorbita non si riesce a bilanciare / **O4** / **CONSERVAZIONE DELL'ENERGIA.** L'energia assorbita non si riesc |
-| `SPINORE-SENZA-FASE` | `DIFETTO`/`FISICA`/`1`/`SOSPESA` | contiene una DIREZIONE DI LUCA per l-era 2: va letta come programma dell-era 2 o come difetto dell-era 1? | la coppia muove phivel ma deriva da un'ALTRA fase: lo spinore ha un orologio tutto suo APERTA il 2026-10-07 sera. MECCANISMO PROPOSTO DAL GUARDIANO, D |
 | `Z104` | `FRONTE`/`FISICA`/`2`/`AGENDA` | superata da A16/A17? | Z104 APERTA ⏳[EPOCA 3 · DERIVAZIONE] / MEMARCO: LA MEMORIA DEL MOTO TRADOTTA IN FORMA... titolo_breve INTERO: Z104 APERTA ⏳[EPOCA 3 · DERIVAZIONE] / M |
 | `Z47` | `FRONTE`/`FISICA`/`1`/`CHIUSA` | era 2? il testo dice <<PROGETTO DI LUNGO PERIODO -- NON INIZIATO. GEOMETRIA RELAZIONALE SENZA EMBEDDING>>, e un progetto non iniziato somiglia all-era 2 | Z47 VALE SEMPRE ⏳[EPOCA 1 · MISURA] / PROGETTO DI LUNGO PERIODO — NON INIZIATO. GEOMETRIA... titolo_breve INTERO: Z47 VALE SEMPRE ⏳[EPOCA 1 · MISURA]  |
 

@@ -83,8 +83,8 @@ era       1=538  DA_CLASSIFICARE=188  ENTRAMBE=96  2=24
 stato     SOSPESA=369  DA_CLASSIFICARE=188  CHIUSA=182  APERTA=82  AGENDA=24  SUPERATA=1
 ```
 
-### ✔ **FATTO IN QUESTO GIRO:** il punto `5`: le note di `POTATURA-GUARDIE` e `REGISTRO_FISICA:U2-6` ### **riscritte con lo stato attuale**, e `CENS-B15` chiude `F3` con `eccezione_presidio`. ### **`F3`=`0` e `F6`=`0`.**
+### ✔ **FATTO IN QUESTO GIRO:** il punto `6`, ### **il referto** `doc/REFERTO_indice_v3_fine_riordino.md` *(`207` righe)* e `DA_DECIDERE_LUCA.md` rigenerato *(`43` voci)*. ### **Il mandato «chiusura del riordino» e' CHIUSO: `6` punti su `6`.**
 
-### ⛔ **RESTA:** il punto `6` — i controlli e il referto ### **`doc/REFERTO_indice_v3_fine_riordino.md`**, con `DA_DECIDERE_LUCA.md` rigenerato.
+### 📌 **E CINQUE DOMANDE RESTANO**, in fondo al referto — la prima e' ### **le due richieste incompatibili del punto `4`** *(`CONFIG-1` in `F8`)*, e la mia raccomandazione e' ### **nessuna delle due.**
 
-**Ultimo lotto applicato:** `doc/indice/_lotti/v3_note2.jsonl`
+**Ultimi lotti applicati:** `v3_note.jsonl` e `v3_note2.jsonl` — ### **il punto `6` NON scrive sull'indice**: legge, conta e scrive un documento.

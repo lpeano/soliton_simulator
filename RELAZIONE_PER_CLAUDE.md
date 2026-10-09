@@ -10986,3 +10986,11 @@ Il task history e' committato ### **prima del lavoro** *(par.8)*: `doc/TASK_HIST
 ### ✔ **Perche' e' la forma piu' forte che avevo:** la nota ### **trascrive ALLA LETTERA la riga `265` di `doc/CENSIMENTO_intenzioni.md`** — *«# (B) COSTRUITA E MAI MISURATA -- 16 voci»* — ### **con l'indirizzo**, e quella riga ### **l'ho verificata.** ### ⭐ **Ma resta un anello che si chiude su di me, e un presidio che accetta un'eccezione scritta nello stesso atto che la cita e- piu- debole di quanto sembri.**
 
 ### ✔ **E L'ECCEZIONE E- COLLAUDATA NEI DUE VERSI:** `F3` ### **tace** con l'eccezione, e ### **scatta** sulla stessa voce ### **senza.** ### ⛔ **Un'eccezione che nessuno prova e- una riga che nessuno sa se serve.**
+
+---
+
+## IL REFERTO DELLA FINE DEL RIORDINO: **`6` punti su `6`** (2026-10-09)
+
+`doc/REFERTO_indice_v3_fine_riordino.md`, `207` righe; `DA_DECIDERE_LUCA.md` rigenerato *(`43` voci)*. `6`/`6` i controlli, `67`/`67` i presidi, `26`/`26` l'indice, `17`/`17` `_file_fisica`, `11`/`11` `H-ID-OBBLIGATORIO`. I segnali scendono da `31` a ### **`18`** *(`F1`=`4`, `F8`=`14`, ### **gli altri a `0`**)*. Nessuna corsa; il simulatore resta `b8c21049`.
+
+### ⭐ **LA COSA CHE PORTO FUORI DA QUESTO GIRO, e vale per tutti i presidi che ho scritto:** ### **un presidio esteso «alla lettera del mandato» ha prodotto segnali che poi ho ELENCATO COME DIFETTI DELL'INDICE** — due volte, `F1` *(le `9` coppie `D`/`Z`)* e `F8` *(il marcatore `.py`)*. ### ⛔ **E il collaudo non se ne accorge, perche' i suoi bracci provano che la regola scatta DOVE DICO IO, non che la regola sia GIUSTA.** ### **Chi se ne accorge e' chi legge i segnali** — e in entrambi i casi e' stato il guardiano.
