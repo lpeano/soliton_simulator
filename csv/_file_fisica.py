@@ -76,6 +76,31 @@ FILE_FISICA = (
     # ### biiezioni**, e il file era ### **VUOTO e NESSUNO LO LEGGEVA.**
     # ### ⭐ **`9-ter`: a parita- di effetto si toglie un-eccezione.**
     'primo_ordine/leggi/leggi.yaml',
+    # ### LA CONFIGURAZIONE *(punto `15(a)`)*: ### **una sola fonte**, e la
+    # ### riga di comando ### **sceglie SOLO il file.**
+    'primo_ordine/config/__init__.py',
+    'primo_ordine/config/schema_config.py',
+    'primo_ordine/config/prova.yaml',
+    # ### LA CONFIGURAZIONE *(punto `15(a)`)*: ### **una sola fonte**, e la
+    # ### riga di comando ### **sceglie SOLO il file.**
+    'primo_ordine/config/__init__.py',
+    'primo_ordine/config/schema_config.py',
+    'primo_ordine/config/prova.yaml',
+    # ### LA CONFIGURAZIONE *(punto `15(a)`)*: ### **una sola fonte**, e la
+    # ### riga di comando ### **sceglie SOLO il file.**
+    'primo_ordine/config/__init__.py',
+    'primo_ordine/config/schema_config.py',
+    'primo_ordine/config/prova.yaml',
+    # ### LA CONFIGURAZIONE *(punto `15(a)`)*: ### **una sola fonte**, e la
+    # ### riga di comando ### **sceglie SOLO il file.**
+    'primo_ordine/config/__init__.py',
+    'primo_ordine/config/schema_config.py',
+    'primo_ordine/config/prova.yaml',
+    # ### LA CONFIGURAZIONE *(punto `15(a)`)*: ### **una sola fonte**, e la
+    # ### riga di comando ### **sceglie SOLO il file.**
+    'primo_ordine/config/__init__.py',
+    'primo_ordine/config/schema_config.py',
+    'primo_ordine/config/prova.yaml',
 )
 
 # ### ⛔ **E QUESTA E- UNA LISTA DIVERSA, non un sottoinsieme per comodita-.**

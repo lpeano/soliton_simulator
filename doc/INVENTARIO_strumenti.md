@@ -2567,7 +2567,7 @@ etichette rimosse, con ### **`0` persi, `0` doppi, `0` conflitti**.
 | | |
 |---|---|
 | **file** | `csv/_hook_id_obbligatorio.py` |
-| **BLOB** *(sha1 dei byte grezzi)* | `435c6919` |
+| **BLOB** *(sha1 dei byte grezzi)* | `c5a338d3` |
 | **COMANDO** | `python csv/_hook_id_obbligatorio.py --collaudo` *(`11`/`11`)*; nel `commit-msg`: `--controlla $1` |
 | **cosa misura** | **quali commit contano** *(un file della LISTA, o un `doc/REFERTO_*`/`doc/REPERTO_*`)* e **se il messaggio cita almeno un ID NOTO** |
 | ### ⭐ **è il ROVESCIO di `H-INDICE`** | quello controlla che gli ID citati ### **esistano**; questo che ### **ce ne sia almeno UNO** |
@@ -2635,7 +2635,7 @@ etichette rimosse, con ### **`0` persi, `0` doppi, `0` conflitti**.
 | | |
 |---|---|
 | **file** | `primo_ordine/_genera.py` |
-| **BLOB** *(sha1 dei byte grezzi)* | `2b291c4f` |
+| **BLOB** *(sha1 dei byte grezzi)* | `a14dc3de` |
 | **COMANDO** | `python primo_ordine/_genera.py` *(genera)* · `python primo_ordine/_genera.py --prova` *(il collaudo, `13`/`13`)* |
 | **cosa misura** | `(a)` i simboli liberi **dentro l'ambiente** e `pos` **mai**; `(b)` **`dH/dpsi*` simbolica** *(Wirtinger)*; `(c)` il **modulo numpy** con `LEGGE` e **l'IMPRONTA**; `(d)` la **scheda** |
 | ### ⭐ **e i nomi dei simboli SONO i nomi delle locali** | così l'espressione stampata da `sympy` ### **è già il codice**: ### **nessuna sostituzione testuale** fra la derivata e il file — e una sostituzione è ### **un posto dove la formula può cambiare senza che nessuno lo veda** |
@@ -2660,7 +2660,7 @@ etichette rimosse, con ### **`0` persi, `0` doppi, `0` conflitti**.
 
 | | |
 |---|---|
-| **i file** | `primo_ordine/passo.py` *(BLOB `df1b1e50`)* · `primo_ordine/_collauda_passo.py` *(BLOB `197e6827`)* |
+| **i file** | `primo_ordine/passo.py` *(BLOB `df1b1e50`)* · `primo_ordine/_collauda_passo.py` *(BLOB `49dc612f`)* |
 | **COMANDO** | `python primo_ordine/_collauda_passo.py` *(il collaudo della catena, `33`/`33`)* |
 | **cosa misura** | i **tre livelli** dello schedulatore *(quali permutazioni sono byte-identiche e quali no)* · **IL CONO**, per `PASSO` e per `STRATO` · la **deriva** di norma ed energia dei due candidati · **`A8b`** *(nessuna cache nascosta)* · **i SEI casi che devono fallire** |
 | ### ⭐ **e il collaudo sta in un file SUO** | il cono si misura **sulla norma**, la norma e' **un osservatore**, e `P-E4` vieta a `passo.py` di importare `osservatori/` *(`A17`)*. ### **Il presidio ha imposto la forma, invece di lasciarmela scegliere** |
@@ -2674,7 +2674,7 @@ etichette rimosse, con ### **`0` persi, `0` doppi, `0` conflitti**.
 | | |
 |---|---|
 | **file** | `csv/_referto_infrastruttura_era2.py` |
-| **BLOB** *(sha1 dei byte grezzi)* | `ffec187a` |
+| **BLOB** *(sha1 dei byte grezzi)* | `1edab867` |
 | **COMANDO** | `python csv/_referto_infrastruttura_era2.py` |
 | **cosa misura** | **FA GIRARE i sette collaudi** dell'era `2` e scrive `doc/REFERTO_infrastruttura_era2.md` **dalla loro uscita** |
 | ### ⛔ **e nessun numero e' ricopiato** | `L-NUMERI`: le cifre del referto escono **dallo `stdout` dei comandi**, e il referto porta **i comandi stessi**, verbatim. ### **Se un collaudo smette di passare, il referto LO DICE** invece di conservare il numero di ieri |
@@ -2688,7 +2688,7 @@ etichette rimosse, con ### **`0` persi, `0` doppi, `0` conflitti**.
 | | |
 |---|---|
 | **file** | `csv/_metodi_era2.py` |
-| **BLOB** *(sha1 dei byte grezzi)* | `17f548d1` |
+| **BLOB** *(sha1 dei byte grezzi)* | `b5a7ba05` |
 | **COMANDO** | `python csv/_metodi_era2.py` *(il presidio, e GENERA il documento)* · `--collaudo` *(nei due versi, `8`/`8`)* |
 | **cosa impedisce** | che `doc/METODI_era1_in_era2.md` **invecchi in silenzio**: ### **ogni metodo del perimetro DEVE avere una riga** *(come si applica · dove · stato)*, citato o no |
 | ### ⭐ **e il PERIMETRO lo calcola l'INDICE** | da ### **campi a vocabolario chiuso** *(`classe in (STANDARD, PRESIDIO)`, piu' le cure di architettura che il mandato nomina **per ID**)*. ### ⛔ **Nessun `titolo` e nessuna `descrizione` si leggono per decidere se una voce e' un metodo** — e' il principio del mandato **applicato a se stesso** |
@@ -2733,12 +2733,27 @@ etichette rimosse, con ### **`0` persi, `0` doppi, `0` conflitti**.
 | | |
 |---|---|
 | **file** | `csv/_rami_era2.py` |
-| **BLOB** *(sha1 dei byte grezzi)* | `25709836` |
+| **BLOB** *(sha1 dei byte grezzi)* | `21ae870f` |
 | **COMANDO** | `python csv/_rami_era2.py` · `--collaudo` *(nei due versi, `10`/`10`)* |
 | ### ⛔ **cosa impedisce** | una funzione di fisica ### **con rami e NON dichiarata** · un ### **conteggio** che non coincide con l'AST · un ### **ruolo fuori vocabolario** · un `perche'` ### **troppo corto** |
 | ### ⭐ **e la parte che conta non e' contarli** | e' ### **dire a che servono:** un `if` non e' un difetto, ### **un `if` NON DICHIARATO lo e'** — perche' nessuno sa se smista, valida, o ### **sceglie in silenzio un pezzo di fisica** |
 | **i ruoli** *(vocabolario chiuso)* | `smistamento` · `validazione` · `iterazione` · ### **`default`** *(un DEBITO: il punto `15(b)` lo vietera')* · ### **`guardia`** *(`A11`: cercare l'errore)* |
 | **i numeri** | ### **`27` rami in `12` funzioni** — `smistamento` `7`, `validazione` `8`, `iterazione` `3`, ### **`default` `9`**, `guardia` ### **`0`** |
 | ### ⚠ **il limite, dichiarato** | ### **la classificazione la scrivo io**, il conteggio no: il presidio garantisce che un ramo ### **NUOVO** non passi inosservato, ### **NON che la mia etichetta sia giusta** |
+
+---
+
+### `primo_ordine/config/` e `primo_ordine/driver.py` — **LA CONFIGURAZIONE: UNA SOLA FONTE** *(2026-10-09)*
+
+| | |
+|---|---|
+| **i file** | `primo_ordine/config/schema_config.py` *(BLOB `78491ed8`)* · `primo_ordine/config/prova.yaml` · `primo_ordine/driver.py` *(BLOB `de83a39a`)* |
+| **COMANDO** | `python primo_ordine/driver.py primo_ordine/config/prova.yaml` · `python primo_ordine/config/schema_config.py` *(il collaudo dello schema, `24`/`24`)* |
+| ### ⛔ **LA RIGA DI COMANDO SCEGLIE SOLO IL FILE** | ### **un argomento, e un argomento in piu' e' un ERRORE.** Nessun flag che cambi un parametro, nessuna variabile d'ambiente, ### **nessun default nel codice** |
+| ### ⭐ **e NIENTE INTERRUTTORI PER LE LEGGI** *(`15(c)`)* | una legge e' in `leggi_attive` ### **PER ID**, oppure ### **non gira** — e un ID che non e' in `leggi.yaml` ### **fa RIFIUTARE il file.** ### **E' la lezione di `CONFIG-1`:** `28` leggi su `31` giravano SPENTE, e la cura ### **non e' un presidio sui flag: e' togliere i flag** |
+| **ogni campo e' OBBLIGATORIO** | `15(b)`: *«un parametro non presente e' un ERRORE»*, quindi ### **non esiste un campo facoltativo** — e il vocabolario e' ### **CHIUSO**, perche' un campo che nessuno legge e' ### **una manopola che qualcuno leggera'** |
+| ### ⚠ **e `toll` NON e' innocuo** | ### **il cono dell'integratore GLOBALE dipende da lui**, misurato *(`3` archi a `1e-4`, `5` a `1e-8`)*: per questo i parametri del risolutore ### **stanno nel file** |
+| **l'IMPRONTA** | `sha1` del `json` a chiavi ordinate: ### **stabile sull'ordine in cui si scrive lo `yaml`**, e ### **cambia se cambia un valore** |
+| **l'uscita** | a schermo. ### **E riproduce i numeri del collaudo della catena** *(norma `1.986e-15`, energia `3.979e-05` su `200` passi)*: ### **due vie indipendenti che concordano** |
 
 ---

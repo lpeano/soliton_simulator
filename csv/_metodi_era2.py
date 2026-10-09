@@ -135,13 +135,17 @@ METODI = {
     "H-P1-bis": ("un referto committato senza toccare la relazione: il referto "
                  "dell-infrastruttura e- stato committato CON il suo paragrafo",
                  "`.githooks/commit-msg`", "PORTATO"),
-    "H-P3": ("un sigillo che configura il modulo a mano invece di passare dal CLI: "
-             "### IL PUNTO 15(a) lo generalizza -- la riga di comando scegliera- SOLO il "
-             "file di configurazione",
-             "`.githooks/pre-commit`; punto 15", "DA_PORTARE"),
-    "H-P5": ("un referto che non dichiara la configurazione INTERA: ### oggi l-era 2 non "
-             "HA una configurazione, e il punto 15 la crea",
-             "`.githooks/pre-commit`; punto 15", "DA_PORTARE"),
+    "H-P3": (
+        'un sigillo che configura il modulo a mano invece di passare dal CLI. ### GENERALIZZATO dal punto 15(a): ### LA RIGA DI COMANDO SCEGLIE SOLO IL FILE, e un argomento in piu- e- UN ERRORE -- quindi non esiste un modo di configurare a mano',
+        '`primo_ordine/driver.py::main`, e lo schema della configurazione', "PORTATO"),
+    # ### ⚠ **QUESTA RIGA L-AVEVO INGHIOTTITA** con una sostituzione il cui indice
+    # ### di fine cercava ### **il primo `"DA_PORTARE"),` dopo l-inizio**, e quello era
+    # ### il terminatore ### **di H-P5, non di H-P3.** ### **Me l-ha detto `P-M1`.**
+    "H-P5": ("un referto che non dichiara la configurazione INTERA. ### ORA LA "
+             "CONFIGURAZIONE ESISTE (punto 15(a)) e il driver ne stampa l-IMPRONTA e "
+             "TUTTI i campi: ### MA NESSUN REFERTO DELL-ERA 2 LA DICHIARA ANCORA, e "
+             "quello e- il punto 5 (il timbro)",
+             "`primo_ordine/driver.py::main`; il referto e- il punto 5", "DA_PORTARE"),
     "H-P7": ("ogni flag porta il suo commento: ### l-era 2 NON HA FLAG di fisica, e il "
              "punto 15(c) dice che non ne avra- -- una legge e- in tabella o non c-e-",
              "`SCHEDA_NEL_REGISTRO` lo limita al simulatore", "NON_SI_APPLICA"),
@@ -473,10 +477,11 @@ METODI['PI-CHIUSURA-ORFANA'] = (
 # ### I TRE che la QUARTA versione del mandato aggiunge al punto `0`.
 METODI["CONFIG-1"] = (
     "28 leggi su 31 giravano SPENTE in sei misure, per 140 costanti di modulo. "
-    "### IL PUNTO 15(c) NON METTE UN PRESIDIO SUI FLAG: TOGLIE I FLAG -- una legge e- in "
-    "tabella e attiva per ID, oppure non c-e-. ### E- la sola forma che rende `CONFIG-1` "
-    "IMPOSSIBILE da ripetere, invece di sorvegliata",
-    "`leggi/leggi.yaml` oggi non ha flag; il punto 15 chiude il cerchio", "DA_PORTARE")
+    "### IL PUNTO 15 L-HA CHIUSO, e non con un presidio sui flag: ### TOGLIENDO I "
+    "FLAG. Una legge e- in `leggi_attive` PER ID, oppure NON GIRA -- e un ID che non "
+    "e- in `leggi.yaml` FA RIFIUTARE il file di configurazione",
+    "`primo_ordine/config/schema_config.py` + `driver.py::termini_attivi`",
+    "PORTATO")
 METODI["Z20"] = (
     "due bracci di un confronto che differivano in piu- di un posto: "
     "### IL PUNTO 15(d) lo rende un presidio -- un `A`/`B` dichiara IL CAMPO UNICO in cui "

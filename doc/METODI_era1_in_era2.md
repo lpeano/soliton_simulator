@@ -8,8 +8,8 @@
 
 | | quanti |
 |---|--:|
-| **`PORTATO`** | `67` |
-| **`DA_PORTARE`** | `30` |
+| **`PORTATO`** | `69` |
+| **`DA_PORTARE`** | `28` |
 | **`DA_DECIDERE`** | `5` |
 | **`NON_SI_APPLICA`** | `9` |
 | **in tutto** | ### **`111`** |
@@ -18,7 +18,7 @@
 
 ---
 
-## `PORTATO` — `67` metodi
+## `PORTATO` — `69` metodi
 
 > ### ✅ **GIA- NELL-ERA `2`**, e `dove` dice dove
 
@@ -34,6 +34,7 @@
 | **`A8b`** | `STANDARD` | nessuna cache cross-passo: `senza_cache()` confronta TUTTE le costanti di modulo prima e dopo tre passi, e il presidio scatta | `passo.py::senza_cache` + `_collauda_passo.py` sezione (E) |
 | **`A9`** | `STANDARD` | un presidio che non impedisce non e- un presidio: `P-E1`..`P-E7` sono SENZA VIA D-USCITA, e ### la CI e- dichiarata RETE CHE SEGNALA, non presidio | `csv/_presidi_era2.py` + il referto |
 | **`AUTO-MANUTENZIONE`** | `STANDARD` | tieni aggiornati i documenti vivi: l-inventario e la relazione sono stati aggiornati in OGNI commit, e ### DUE NUMERI DELL-INVENTARIO ERANO GIA- SCADUTI quando li ho guardati | `doc/INVENTARIO_strumenti.md` |
+| **`CONFIG-1`** | `DIFETTO` | 28 leggi su 31 giravano SPENTE in sei misure, per 140 costanti di modulo. ### IL PUNTO 15 L-HA CHIUSO, e non con un presidio sui flag: ### TOGLIENDO I FLAG. Una legge e- in `leggi_attive` PER ID, oppure NON GIRA -- e un ID che non e- in `leggi.yaml` FA RIFIUTARE il file di configurazione | `primo_ordine/config/schema_config.py` + `driver.py::termini_attivi` |
 | **`ETC-PASSO`** | `CURA` | il passo diventa SINCRONO, fotografia a inizio passo: ### SUPERATA, e il mandato stesso l-ha corretta -- la regola giusta e- LA FOTOGRAFIA PER STRATO, non <<lo stato di inizio passo>>, perche- quella contraddiceva i passi unitari arco per arco | `passo.py` + la correzione nella coda |
 | **`H-ETC-2`** | `PRESIDIO` | permutare le leggi deve dare lo STESSO stato: ### PORTATO E MISURATO -- e la misura dice che per il GRADIENTE serve l-ordine canonico, perche- `fsum` non si puo- usare su array complessi | `_collauda_passo.py` sezione (A), livelli 1 e 1-bis |
 | **`H-FILE`** | `PRESIDIO` | la lista `FILE CAMBIATI` si GENERA da `git diff --cached --name-only`, e vale per ogni commit -- compresi quelli dell-era 2 | `.githooks/commit-msg` + `cm.py` |
@@ -41,6 +42,7 @@
 | **`H-INDICE`** | `PRESIDIO` | un ID citato che non e- nell-indice fa rifiutare il commit: vale per gli ID dell-era 2 come per gli altri | `.githooks/commit-msg` |
 | **`H-NON-TRACCIATI`** | `PRESIDIO` | file non tracciati e non ignorati sotto `csv/` o `doc/` BLOCCANO: ha bloccato questo mandato piu- volte | `.githooks/commit-msg` |
 | **`H-P1-bis`** | `PRESIDIO` | un referto committato senza toccare la relazione: il referto dell-infrastruttura e- stato committato CON il suo paragrafo | `.githooks/commit-msg` |
+| **`H-P3`** | `PRESIDIO` | un sigillo che configura il modulo a mano invece di passare dal CLI. ### GENERALIZZATO dal punto 15(a): ### LA RIGA DI COMANDO SCEGLIE SOLO IL FILE, e un argomento in piu- e- UN ERRORE -- quindi non esiste un modo di configurare a mano | `primo_ordine/driver.py::main`, e lo schema della configurazione |
 | **`H-REG-R`** | `PRESIDIO` | una legge che cambia senza la sua scheda: ### nell-era 2 la scheda SI GENERA in `doc/leggi_era2/<id>.md`, quindi `SCHEDA_NEL_REGISTRO` limita `H-REG-R` al simulatore -- DUE POSTI PER LA STESSA SCHEDA SAREBBERO DUE FONTI | `csv/_file_fisica.py::SCHEDA_NEL_REGISTRO` |
 | **`H-RIGHE`** | `PRESIDIO` | `CLAUDE.md` sotto le 400 righe: ### IL PUNTO 2 DELLE REGOLE DI GESTIONE (mandato 6) genera la sezione delle regole dall-indice | `.githooks/pre-commit` |
 | **`H-STASH`** | `PRESIDIO` | `git stash` bloccato da `permissions.deny`: non e- un hook e non ha via d-uscita. Vale per ogni lavoro, era 2 compresa | `.claude/settings` |
@@ -94,7 +96,7 @@
 
 ---
 
-## `DA_PORTARE` — `30` metodi
+## `DA_PORTARE` — `28` metodi
 
 > ### ⚠ **SI APPLICA, E NON C-E- ANCORA**: `dove` dice **quale punto del mandato** lo porta
 
@@ -106,10 +108,8 @@
 | **`A6`** | `STANDARD` | inerzia come teorema: nessuna legge dell-era 2 la pretende ancora | nessun sito oggi |
 | **`A7b`** | `STANDARD` | uno stato non nasce indefinito: `stato.py::nuovo` azzera ESPLICITAMENTE, e ### il punto 3 del mandato lo estende alla NASCITA di un nodo | `stato.py`; `crescita.py` ancora da generare |
 | **`AUDIT-CURE`** | `FRONTE` | il censimento delle cure e del loro costo: ### IL PUNTO 10 chiede che ogni referto STAMPI il numero delle leggi, e che un commit che lo aumenta lo DICHIARI | punto 10, da fare |
-| **`CONFIG-1`** | `DIFETTO` | 28 leggi su 31 giravano SPENTE in sei misure, per 140 costanti di modulo. ### IL PUNTO 15(c) NON METTE UN PRESIDIO SUI FLAG: TOGLIE I FLAG -- una legge e- in tabella e attiva per ID, oppure non c-e-. ### E- la sola forma che rende `CONFIG-1` IMPOSSIBILE da ripetere, invece di sorvegliata | `leggi/leggi.yaml` oggi non ha flag; il punto 15 chiude il cerchio |
 | **`H-FISICA-FUORI-LISTA`** | `PRESIDIO` | un `.py` sotto `primo_ordine/` non nella LISTA fa rifiutare il commit. ### E HA UN BUCO MISURATO: legge `FILE_FISICA` DAL DISCO mentre giudica i percorsi STAGED | `.githooks/pre-commit` + `csv/_file_fisica.py` |
-| **`H-P3`** | `PRESIDIO` | un sigillo che configura il modulo a mano invece di passare dal CLI: ### IL PUNTO 15(a) lo generalizza -- la riga di comando scegliera- SOLO il file di configurazione | `.githooks/pre-commit`; punto 15 |
-| **`H-P5`** | `PRESIDIO` | un referto che non dichiara la configurazione INTERA: ### oggi l-era 2 non HA una configurazione, e il punto 15 la crea | `.githooks/pre-commit`; punto 15 |
+| **`H-P5`** | `PRESIDIO` | un referto che non dichiara la configurazione INTERA. ### ORA LA CONFIGURAZIONE ESISTE (punto 15(a)) e il driver ne stampa l-IMPRONTA e TUTTI i campi: ### MA NESSUN REFERTO DELL-ERA 2 LA DICHIARA ANCORA, e quello e- il punto 5 (il timbro) | `primo_ordine/driver.py::main`; il referto e- il punto 5 |
 | **`H-P8`** | `PRESIDIO` | un confronto che prende il codice di prima da `HEAD` invece che dal PADRE: l-era 2 non ha ancora confronti prima/dopo | `.githooks/pre-commit` |
 | **`H-P9`** | `PRESIDIO` | uno strumento che avanza una rete fuori dall-esecutore: ### IL PUNTO 9 LO GENERALIZZA all-era 2, e ### il caso da rifiutare potrebbe essere `_collauda_passo.py`, che chiama `mezzo_implicito` direttamente | `.githooks/pre-commit`; punto 9 |
 | **`MAX-NODI-FERMA`** | `CURA` | una guardia di MEMORIA non cambia la fisica in silenzio: deve FERMARE. ### L-era 2 non ha ancora una guardia di memoria, e quando l-avra- dovra- fermare | nessun sito oggi |

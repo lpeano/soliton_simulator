@@ -64,41 +64,24 @@ RAMI = {
         3, "smistamento",
         "salta i file che non sono `.py` e quelli senza `LEGGE`: ### la decisione viene "
         "da UN CAMPO (`LEGGE` esiste o no), non da un indovinello"),
-    ("primo_ordine/hamiltoniana.py", "energia"): (
-        2, "default",
-        "### E- UN DEFAULT, e lo dichiaro: `termini if termini is not None else "
-        "carica_termini()`. ### IL PUNTO 15(b) LO VIETERA- -- un parametro non presente "
-        "dev-essere un ERRORE"),
-    ("primo_ordine/hamiltoniana.py", "gradiente_grezzo"): (
-        1, "smistamento",
-        "`if m.TIPO == \"termine_arco\"`: smista su ### un campo dichiarato del modulo "
-        "generato"),
-    ("primo_ordine/hamiltoniana.py", "gradiente"): (
-        2, "default",
-        "lo stesso default di `energia`, piu- lo smistamento su `TIPO`. "
-        "### IL PUNTO 15(b) lo vietera-"),
     ("primo_ordine/passo.py", "strati"): (
         1, "iterazione",
         "cerca ### il primo strato libero per un arco: ferma il ciclo quando lo trova. "
-        "### Nessuna soglia: e- una ricerca esatta"),
+        "### Nessuna soglia: e- una ricerca ESATTA"),
     ("primo_ordine/passo.py", "valida_composizione"): (
         6, "validazione",
-        "### SONO IL PRESIDIO STESSO: i quattro controlli della composizione (vocabolario, "
-        "palindromo di nomi e pesi, doppioni, pesi a 1). Non cambiano nessun valore: "
-        "### costruiscono messaggi"),
+        "### SONO IL PRESIDIO STESSO: i quattro controlli della composizione "
+        "(vocabolario, palindromo di nomi e pesi, doppioni, pesi a 1). Non cambiano "
+        "nessun valore: ### costruiscono messaggi"),
     ("primo_ordine/passo.py", "mezzo_implicito"): (
         2, "iterazione",
-        "ferma il punto fisso quando lo scarto scende sotto `toll`. "
-        "### LA SOGLIA E- DICHIARATA (`toll=1e-14`), e ### IL CONO DEL GLOBALE DIPENDE DA "
-        "LEI -- misurato, e il referto lo dice"),
-    ("primo_ordine/passo.py", "passo_globale"): (
-        1, "default",
-        "`termini if termini is not None else ...`. ### IL PUNTO 15(b) lo vietera-"),
+        "ferma il punto fisso quando lo scarto scende sotto `toll`. ### LA SOGLIA "
+        "VIENE DALLA CONFIGURAZIONE (punto 15(a)), e ### IL CONO DEL GLOBALE DIPENDE "
+        "DA LEI -- misurato, e il referto lo dice"),
     ("primo_ordine/passo.py", "passo_locale"): (
-        4, "default",
-        "tre default (`termini`, `gli_strati`) piu- lo smistamento sul nome "
-        "dell-operazione, che viene ### dalla composizione DICHIARATA. "
-        "### IL PUNTO 15(b) vietera- i default"),
+        2, "smistamento",
+        "smista sul nome dell-operazione, che viene ### DALLA COMPOSIZIONE DICHIARATA, "
+        "e sceglie lo strato per indice. ### Nessun default: `gli_strati` SI PASSA"),
     ("primo_ordine/passo.py", "_costanti_di_modulo"): (
         2, "smistamento",
         "salta i nomi `__dunder__` e i callable: ### smista su un TIPO, non su un valore"),
@@ -107,6 +90,13 @@ RAMI = {
         "confronta i nomi prima e dopo: ### e- un confronto, non una scelta"),
 }
 
+# ### ⛔ **E QUATTRO FUNZIONI HANNO PERSO TUTTI I LORO RAMI** *(punto `15(b)`)*:
+# ### `energia`, `gradiente`, `gradiente_grezzo` e `passo_globale`. Avevano
+# ### ### **un default** *(`termini=None`)* e ### **uno smistamento su `TIPO`**;
+# ### togliere il default ha portato via il primo, e ### **rendere UNIFORME la firma
+# ### dei generati** *(`energia(st, ii, jj)` per tutti)* ha portato via il secondo.
+# ### ⭐ **UNA FIRMA UNIFORME E- UN RAMO IN MENO** *(`A8`)*, e non l-avevo
+# ### previsto: ### **cercavo di pagare un debito, e ne ho pagati due.**
 
 def _conta(p):
     """### I rami per funzione, ### **contati dall-AST.**"""
@@ -124,9 +114,38 @@ def _conta(p):
     return fuori
 
 
+def default_nelle_firme(p):
+    """### I parametri con ### **un valore di default** in un file di fisica.
+
+    ### \u26d4 **IL PUNTO `15(b)`:** *<<un parametro non presente e- un ERRORE, e un
+    controllo sull-AST RIFIUTA i valori di default nei moduli di fisica>>*.
+    ### \u2b50 **E la ragione e- `CONFIG-1`:** un default e- ### **un valore che gira
+    senza che nessuno l-abbia scelto**, e `CONFIG-1` ha misurato dove porta --
+    ### **`28` leggi su `31` che giravano SPENTE** senza che nessuno lo sapesse.
+    """
+    arb = ast.parse(io.open(os.path.join(RADICE, p), encoding="utf-8").read(), filename=p)
+    fuori = []
+    for fn in [n for n in ast.walk(arb) if isinstance(n, ast.FunctionDef)]:
+        a = fn.args
+        nomi = [x.arg for x in a.args][len(a.args) - len(a.defaults):]
+        nomi += [x.arg for x, v in zip(a.kwonlyargs, a.kw_defaults) if v is not None]
+        for x in nomi:
+            fuori.append((fn.name, x))
+    return fuori
+
+
 def controlla():
     err = []
     visti = set()
+    # ### \u26d4 **IL `15(b)`, PRIMA DI TUTTO:** nessun default nelle firme.
+    for p in file_fisica():
+        for fn, arg in default_nelle_firme(p):
+            err.append("`P-R1` `%s::%s`: il parametro `%s` HA UN VALORE DI DEFAULT. "
+                       "### Il punto 15(b): un parametro NON PRESENTE e- un ERRORE, non "
+                       "un comportamento a sorpresa -- e viene DALLA CONFIGURAZIONE. "
+                       "### `CONFIG-1` ha misurato dove porta un valore che gira senza "
+                       "che nessuno l-abbia scelto: 28 leggi su 31 SPENTE"
+                       % (p, fn, arg))
     for p in file_fisica():
         for fn, c in sorted(_conta(p).items()):
             visti.add((p, fn))
@@ -164,6 +183,28 @@ def rapporto():
     return per_ruolo
 
 
+def _finto_default():
+    """Il caso che DEVE fallire: un default, su una ### **COPIA** del sorgente."""
+    import tempfile
+    t = io.open(os.path.join(RADICE, "primo_ordine", "passo.py"),
+                encoding="utf-8").read()
+    t2 = t.replace("def senza_cache(moduli, azione):",
+                   "def senza_cache(moduli, azione=None):", 1)
+    assert t2 != t
+    d = tempfile.mkdtemp()
+    p = os.path.join(d, "finto.py")
+    io.open(p, "w", encoding="utf-8", newline=NL).write(t2)
+    arb = ast.parse(io.open(p, encoding="utf-8").read())
+    trovati = []
+    for fn in [n for n in ast.walk(arb) if isinstance(n, ast.FunctionDef)]:
+        a = fn.args
+        if a.defaults:
+            trovati.append(fn.name)
+    os.remove(p)
+    os.rmdir(d)
+    return "senza_cache" in trovati
+
+
 def collaudo():
     ok = [0, 0]
 
@@ -178,8 +219,9 @@ def collaudo():
     tot = sum(q for q, _r, _p in RAMI.values())
     esito("sul disco: `P-R1` TACE", controlla() == [],
           "%d rami in %d funzioni" % (tot, len(RAMI)))
-    esito("### il braccio sopra HA MATERIA (ci sono rami da dichiarare)", tot >= 20,
-          "%d: se fosse 0 il braccio sarebbe un FALSO-UNO" % tot)
+    esito("### il braccio sopra HA MATERIA (ci sono rami da dichiarare)", tot >= 15,
+          "%d rami: se fosse 0 il braccio sarebbe un FALSO-UNO. ### Erano 27, e il "
+          "punto 15(b) ne ha tolti 8" % tot)
     # --- un ramo NUOVO non dichiarato
     salva = dict(RAMI)
     try:
@@ -222,12 +264,19 @@ def collaudo():
         RAMI.pop(("primo_ordine/passo.py", "funzione_che_non_esiste"), None)
     esito("NON deve scattare: rimesso tutto a posto, `P-R1` TACE", controlla() == [],
           "### i bracci di sopra scattavano per i loro casi finti")
-    # --- E IL RAPPORTO: quanti `default`, che il punto `15(b)` vietera'
+    # --- E IL RAPPORTO: i `default` erano NOVE, e il punto `15(b)` li ha TOLTI
     r = rapporto()
-    nd = r.get("default", [0, 0])
-    esito("### e i `default` sono CONTATI e DICHIARATI (il punto `15(b)` li vietera-)",
-          nd[0] > 0, "%d funzioni, %d rami: ### SONO UN DEBITO, non una cura" % tuple(nd))
     ng = r.get("guardia", [0, 0])
+    # ### \u26d4 **IL `15(b)`: i default sono ZERO, e il braccio che DEVE scattare.**
+    esito("`15(b)` i DEFAULT nelle firme della fisica sono ZERO",
+          not any("VALORE DI DEFAULT" in e for e in controlla()),
+          "### erano NOVE il 2026-10-09, e il punto 15(b) li ha TOLTI")
+    esito("### DEVE scattare: un default in una firma di fisica",
+          _finto_default(),
+          "### misurato su una COPIA del sorgente, non sul file vero")
+    esito("### e i `default` NON sono piu- nella tabella dei ruoli",
+          "default" not in rapporto(),
+          "### il debito e- PAGATO: 27 rami -> 19, e 9 default -> 0")
     esito("### e le `guardia` sono ZERO oggi, e lo dico invece di lasciarlo credere",
           ng[0] == 0,
           "### `A11`: se ce ne fosse una, andrebbe cercato l-ERRORE da cui protegge")

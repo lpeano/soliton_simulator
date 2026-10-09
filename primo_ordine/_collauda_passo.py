@@ -27,12 +27,22 @@ sys.path.insert(0, os.path.join(RADICE, "csv"))
 sys.path.insert(0, os.path.join(_QUI, "leggi"))
 
 import hamiltoniana as HAM                                   # noqa: E402
+sys.path.insert(0, os.path.join(_QUI, "config"))
+import schema_config as CFG                                  # noqa: E402
 import passo as PA                                           # noqa: E402
 import schema as SCH                                         # noqa: E402
 import stato as ST                                           # noqa: E402
 
 NL = chr(10)
 OK = [0, 0]
+
+# ### ⛔ **I NUMERI VENGONO DALLA CONFIGURAZIONE** *(punto `15(a)`)*:
+# ### ### **la riga di comando sceglie SOLO il file**, e qui il file e-
+# ### `primo_ordine/config/prova.yaml`. ### ⭐ **Finche- i numeri
+# ### stavano nelle firme del collaudo** *(`n=9`, `dt=0.01`, `passi=200`)*,
+# ### ### **la configurazione era un file che nessuno leggeva.**
+CONFIG = os.path.join(_QUI, "config", "prova.yaml")
+C = CFG.carica(CONFIG)
 
 
 def esito(che, passa, nota=""):
@@ -48,7 +58,7 @@ def _modulo(p, nome):
     return m
 
 
-def catena(n=9):
+def catena(n):
     """### Una CATENA di `n` nodi: ### **le distanze sono senza ambiguita-.**"""
     ii = np.arange(n - 1, dtype=int)
     jj = np.arange(1, n, dtype=int)
@@ -89,12 +99,11 @@ def distanze(ii, jj, n, da):
 #   (A) LO SCHEDULATORE -- I TRE LIVELLI
 # =====================================================================================
 
-def livelli(T):
+def livelli(T, n, dt, iterazioni, toll):
     print()
     print("  (A) LO SCHEDULATORE -- I TRE LIVELLI, e quali permutazioni sono byte-identiche")
-    n = 9
     ii, jj = catena(n)
-    st = stato_seme(n, 11)
+    st = stato_seme(n, C["seme"])
 
     # --- livello 1: i TERMINI di H
     perm = list(reversed(T))
@@ -118,10 +127,12 @@ def livelli(T):
           "%d strati su %d archi" % (len(ss), len(ii)))
     archi = [m for m in T if m.TIPO == "termine_arco"]
     s0 = ss[0]
-    a, _sc, _us = PA.mezzo_implicito(st, ii[s0], jj[s0], 0.01, archi)
+    a, _sc, _us = PA.mezzo_implicito(st, ii[s0], jj[s0], dt, archi,
+                                     iterazioni, toll)
     rng = np.random.default_rng(5)
     p = rng.permutation(len(s0))
-    b, _sc, _us = PA.mezzo_implicito(st, ii[s0][p], jj[s0][p], 0.01, archi)
+    b, _sc, _us = PA.mezzo_implicito(st, ii[s0][p], jj[s0][p], dt, archi,
+                                     iterazioni, toll)
     esito("`2` gli ARCHI dentro UNO strato: permutati, il sotto-passo e- BYTE-IDENTICO",
           byte(a) == byte(b),
           "sono DISGIUNTI: ogni nodo riceve UN SOLO contributo, non c-e- somma da riordinare")
@@ -132,8 +143,9 @@ def livelli(T):
           PA.valida_composizione(comp, len(ss)) == [],
           "%d operazioni" % len(comp))
     if len(ss) >= 2:
-        u, _ = PA.passo_locale(st, ii, jj, 0.01, T, gli_strati=ss)
-        v, _ = PA.passo_locale(st, ii, jj, 0.01, T, gli_strati=tuple(reversed(ss)))
+        u, _ = PA.passo_locale(st, ii, jj, dt, T, iterazioni, toll, ss)
+        v, _ = PA.passo_locale(st, ii, jj, dt, T, iterazioni, toll,
+                               tuple(reversed(ss)))
         esito("`3` FRA STRATI: scambiarli NON e- byte-identico -- ### NON COMMUTANO",
               byte(u) != byte(v),
               "### due operatori che non commutano danno un RISULTATO diverso, non un "
@@ -176,7 +188,7 @@ def composizioni():
 #   (C) IL CONO -- deterministico, per PASSO e per STRATO
 # =====================================================================================
 
-def cono(T, n=9, dt=0.01):
+def cono(T, n, dt, iterazioni, toll):
     print()
     print("  (C) IL CONO -- perturbo UN nodo, e misuro FIN DOVE arriva")
     ii, jj = catena(n)
@@ -187,12 +199,12 @@ def cono(T, n=9, dt=0.01):
 
     def raggio(fun, passi, **kw):
         """La distanza MASSIMA a cui lo stato differisce, e se oltre e- ESATTAMENTE zero."""
-        a = stato_seme(n, 11)
+        a = stato_seme(n, C["seme"])
         b = {k: v.copy() for k, v in a.items()}
         b["psi"][0, 0] += 1e-3
         for _ in range(passi):
-            a = fun(a, ii, jj, dt, T, **kw)[0]
-            b = fun(b, ii, jj, dt, T, **kw)[0]
+            a = fun(a, ii, jj, dt, T, iterazioni, toll, **kw)[0]
+            b = fun(b, ii, jj, dt, T, iterazioni, toll, **kw)[0]
         diff = np.abs(a["psi"] - b["psi"]).max(axis=1)
         per_d = {}
         for k in range(n):
@@ -204,12 +216,12 @@ def cono(T, n=9, dt=0.01):
 
     # --- UN SOLO STRATO: il cono di UN sotto-passo
     archi = [m for m in T if m.TIPO == "termine_arco"]
-    a = stato_seme(n, 11)
+    a = stato_seme(n, C["seme"])
     b = {k: v.copy() for k, v in a.items()}
     b["psi"][0, 0] += 1e-3
     s0 = ss[0]
-    a1 = PA.mezzo_implicito(a, ii[s0], jj[s0], dt, archi)[0]
-    b1 = PA.mezzo_implicito(b, ii[s0], jj[s0], dt, archi)[0]
+    a1 = PA.mezzo_implicito(a, ii[s0], jj[s0], dt, archi, iterazioni, toll)[0]
+    b1 = PA.mezzo_implicito(b, ii[s0], jj[s0], dt, archi, iterazioni, toll)[0]
     df = np.abs(a1["psi"] - b1["psi"]).max(axis=1)
     rag = max([k for k in range(n) if df[k] != 0.0] or [-1])
     esito("`per STRATO`: un sotto-passo d-arco arriva a ESATTAMENTE `1` arco",
@@ -243,11 +255,11 @@ def cono(T, n=9, dt=0.01):
     # ### ⚠ **Un cono INFINITO si vedrebbe. Questo si nasconde.**
     raggi = {}
     for tl in (1e-4, 1e-8, 1e-14):
-        aa = stato_seme(n, 11)
+        aa = stato_seme(n, C["seme"])
         bb = {k: v.copy() for k, v in aa.items()}
         bb["psi"][0, 0] += 1e-3
-        a2, info = PA.passo_globale(aa, ii, jj, dt, T, toll=tl)
-        b2, _ = PA.passo_globale(bb, ii, jj, dt, T, toll=tl)
+        a2, info = PA.passo_globale(aa, ii, jj, dt, T, iterazioni, tl)
+        b2, _ = PA.passo_globale(bb, ii, jj, dt, T, iterazioni, tl)
         df2 = np.abs(a2["psi"] - b2["psi"]).max(axis=1)
         tocchi = [d[k] for k in range(n) if df2[k] != 0.0]
         raggi[tl] = (max(tocchi), info["iterazioni"])
@@ -271,7 +283,7 @@ def cono(T, n=9, dt=0.01):
 #   (D) NORMA ED ENERGIA -- la deriva, MISURATA
 # =====================================================================================
 
-def deriva(T, n=9, dt=0.01, passi=200):
+def deriva(T, n, dt, passi, iterazioni, toll):
     print()
     print("  (D) NORMA ED ENERGIA -- la deriva su `%d` passi, dt=%g" % (passi, dt))
     OSS = _modulo(os.path.join(_QUI, "osservatori", "prova_norma.py"), "_oss_norma")
@@ -280,10 +292,10 @@ def deriva(T, n=9, dt=0.01, passi=200):
     fuori = {}
     for nome, fun, kw in (("GLOBALE", PA.passo_globale, {}),
                           ("LOCALE", PA.passo_locale, {"gli_strati": ss})):
-        st = stato_seme(n, 11)
+        st = stato_seme(n, C["seme"])
         n0, e0 = OSS.misura(st), HAM.energia(st, ii, jj, T)
         for _ in range(passi):
-            st = fun(st, ii, jj, dt, T, **kw)[0]
+            st = fun(st, ii, jj, dt, T, iterazioni, toll, **kw)[0]
         n1, e1 = OSS.misura(st), HAM.energia(st, ii, jj, T)
         dn = abs(n1 - n0) / abs(n0)
         de = abs(e1 - e0) / max(abs(e0), 1e-300)
@@ -305,17 +317,18 @@ def deriva(T, n=9, dt=0.01, passi=200):
 #   (E) `A8b` -- NESSUNA CACHE NASCOSTA
 # =====================================================================================
 
-def cache(T, n=9):
+def cache(T, n, dt, iterazioni, toll):
     print()
     print("  (E) `A8b` -- NESSUNA CACHE NASCOSTA FRA I PASSI")
     ii, jj = catena(n)
     moduli = [HAM, PA, ST] + list(T)
-    st = stato_seme(n, 11)
+    st = stato_seme(n, C["seme"])
 
     def tre_passi():
         s = st
         for _ in range(3):
-            s = PA.passo_locale(s, ii, jj, 0.01, T)[0]
+            s = PA.passo_locale(s, ii, jj, dt, T, iterazioni, toll,
+                                PA.strati(ii, jj))[0]
         return s
     guai, _ = PA.senza_cache(moduli, tre_passi)
     esito("nessun modulo di fisica si RICORDA niente fra i passi", guai == [],
@@ -437,15 +450,27 @@ def main():
     import _presidio
     _presidio.avvia(__file__)
     T = HAM.carica_termini()
+    # ### ⛔ **LE LEGGI ATTIVE VENGONO DALLA CONFIGURAZIONE, PER ID**
+    # ### *(punto `15(c)`)*: ### **un termine sul disco che la configurazione non
+    # ### nomina NON GIRA**, e non c-e- nessun flag che lo accenda.
+    T = [m for m in T if m.LEGGE in C["leggi_attive"]]
     print("=" * 100)
     print("IL COLLAUDO DELLA CATENA -- lo schedulatore, i due candidati, IL CONO, i SEI casi")
     print("=" * 100)
-    print("  i termini caricati: %s" % ", ".join(m.LEGGE for m in T))
-    livelli(T)
+    print("  la configurazione: %s   impronta %s"
+          % (os.path.relpath(CONFIG, RADICE), CFG.impronta(C)))
+    print("  %s" % "   ".join("%s=%s" % (k, C[k]) for k in
+                              ("scena", "nodi", "seme", "dt", "passi", "integratore",
+                               "iterazioni", "toll")))
+    print("  le leggi ATTIVE (per ID, dalla configurazione): %s"
+          % ", ".join(m.LEGGE for m in T))
+    n, dt = C["nodi"], C["dt"]
+    it, tl = C["iterazioni"], C["toll"]
+    livelli(T, n, dt, it, tl)
     composizioni()
-    c = cono(T)
-    d = deriva(T)
-    cache(T)
+    c = cono(T, n, dt, it, tl)
+    d = deriva(T, n, dt, C["passi"], it, tl)
+    cache(T, n, dt, it, tl)
     sei_casi()
     print()
     print("=" * 100)

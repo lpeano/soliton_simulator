@@ -43,19 +43,19 @@ def carica_termini():
     return sorted(fuori, key=lambda m: m.LEGGE)
 
 
-def energia(st, ii, jj, termini=None):
+def energia(st, ii, jj, termini):
     """### `H(psi)`, ### **sommata in ordine canonico per ID.**
 
     ### ⭐ **Con `math.fsum`**: la somma ### **ad arrotondamento esatto** non dipende
     dall-ordine degli addendi, quindi ### **due permutazioni danno lo STESSO bit** -- e
     l-ordine canonico resta ### **come seconda difesa**, non come unica.
     """
-    t = sorted(termini if termini is not None else carica_termini(),
-               key=lambda m: m.LEGGE)
+    # ### \u26d4 **NESSUN DEFAULT** *(punto `15(b)`)*: `termini` ### **si passa**,
+    # ### e chi non lo passa ### **ha un errore**, non un comportamento a sorpresa.
+    t = sorted(termini, key=lambda m: m.LEGGE)
     pezzi = []
     for m in t:
-        pezzi.append(m.energia(st, ii, jj) if m.TIPO == "termine_arco"
-                     else m.energia(st))
+        pezzi.append(m.energia(st, ii, jj))
     return math.fsum(pezzi)
 
 
@@ -69,14 +69,11 @@ def gradiente_grezzo(st, ii, jj, termini):
     """
     fuori = {k: np.zeros_like(v) for k, v in st.items()}
     for m in termini:
-        if m.TIPO == "termine_arco":
-            m.gradiente(st, fuori, ii, jj)
-        else:
-            m.gradiente(st, fuori)
+        m.gradiente(st, fuori, ii, jj)
     return fuori
 
 
-def gradiente(st, ii, jj, termini=None):
+def gradiente(st, ii, jj, termini):
     """### `dH/dpsi*`, ### **accumulato in ordine canonico per ID.**
 
     ### ⚠ **Qui `fsum` NON si puo- usare:** gli addendi sono ### **array complessi**, e
@@ -92,12 +89,9 @@ def gradiente(st, ii, jj, termini=None):
     # ### ### **lo stesso bit** *(perche- si riordina)*, e che la somma ### **grezza**
     # ### ### **non lo dia** -- ### **altrimenti il primo braccio sarebbe un FALSO-UNO**,
     # ### vero per costruzione e non per misura.
-    t = sorted(termini if termini is not None else carica_termini(),
-               key=lambda m: m.LEGGE)
+    # ### \u26d4 **NESSUN DEFAULT** *(punto `15(b)`)*.
+    t = sorted(termini, key=lambda m: m.LEGGE)
     fuori = {k: np.zeros_like(v) for k, v in st.items()}
     for m in t:
-        if m.TIPO == "termine_arco":
-            m.gradiente(st, fuori, ii, jj)
-        else:
-            m.gradiente(st, fuori)
+        m.gradiente(st, fuori, ii, jj)
     return fuori

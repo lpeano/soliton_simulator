@@ -176,7 +176,7 @@ def _per_tipo(termini, tipo):
     return [m for m in termini if m.TIPO == tipo]
 
 
-def mezzo_implicito(st, ii, jj, dt, termini, iterazioni=64, toll=1e-14):
+def mezzo_implicito(st, ii, jj, dt, termini, iterazioni, toll):
     """### UN sotto-passo di ### **punto medio implicito**, su `(ii, jj)` e `termini`.
 
     `psi' = psi + dt * (-i) * dH/dpsi*((psi + psi')/2)`, risolto ### **per punto
@@ -215,7 +215,7 @@ def mezzo_implicito(st, ii, jj, dt, termini, iterazioni=64, toll=1e-14):
 #   I DUE CANDIDATI
 # =====================================================================================
 
-def passo_globale(st, ii, jj, dt, termini=None, iterazioni=64, toll=1e-14):
+def passo_globale(st, ii, jj, dt, termini, iterazioni, toll):
     """### CANDIDATO `1`: ### **punto medio implicito su TUTTO IL GRAFO**, un solo strato.
 
     ### ⛔ **IL CONO NON E- ESATTO, e lo dico:** il punto fisso ### **itera sul grafo
@@ -223,7 +223,11 @@ def passo_globale(st, ii, jj, dt, termini=None, iterazioni=64, toll=1e-14):
     convergenza ### **tutto il grafo.** ### ⚠ **Non e- un difetto
     dell-implementazione: e- cio- che significa <<implicito e globale>>.**
     """
-    T = termini if termini is not None else HAM.carica_termini()
+    # ### \u26d4 **NESSUN DEFAULT** *(punto `15(b)`)*: `termini`, `iterazioni` e
+    # ### `toll` ### **si passano**, e vengono ### **dal file di configurazione.**
+    # ### \u26a0 **E `toll` NON E- INNOCUO:** ### **il cono di questo integratore
+    # ### DIPENDE DA LUI**, misurato *(`3` archi a `1e-4`, `5` a `1e-8`)*.
+    T = termini
     err = valida_composizione(COMPOSIZIONE_GLOBALE, 1)
     assert not err, err
     nuovo, scarto, usate = mezzo_implicito(st, ii, jj, dt, T, iterazioni, toll)
@@ -231,8 +235,7 @@ def passo_globale(st, ii, jj, dt, termini=None, iterazioni=64, toll=1e-14):
                    "scarto": scarto, "iterazioni": usate}
 
 
-def passo_locale(st, ii, jj, dt, termini=None, iterazioni=64, toll=1e-14,
-                 gli_strati=None):
+def passo_locale(st, ii, jj, dt, termini, iterazioni, toll, gli_strati):
     """### CANDIDATO `2`: ### **uno strato per volta**, composizione simmetrica.
 
     ### ⭐ **IL CONO E- ESATTO:** ogni sotto-passo tocca ### **gli archi di UNO
@@ -243,8 +246,11 @@ def passo_locale(st, ii, jj, dt, termini=None, iterazioni=64, toll=1e-14,
     ### **un-altra cosa** *(un prodotto di esponenziali di strato)*, e il referto mette i
     due accanto ### **senza scegliere** — la scelta e- di Luca *(nodo `INT`)*.
     """
-    T = termini if termini is not None else HAM.carica_termini()
-    ss = strati(ii, jj) if gli_strati is None else gli_strati
+    # ### \u26d4 **NESSUN DEFAULT** *(punto `15(b)`)*. ### **`gli_strati` si passa**:
+    # ### ricalcolarli a ogni passo sarebbe ### **un lavoro ripetuto**, e farlo
+    # ### ### **solo se non arrivano** e- ### **un default travestito da comodita-.**
+    T = termini
+    ss = gli_strati
     L = max(len(ss), 1)
     comp = composizione_locale(L)
     err = valida_composizione(comp, L)

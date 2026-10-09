@@ -11339,3 +11339,33 @@ Nella descrizione di `P-T1` ho scritto i nomi dei caratteri ### **dentro un here
 ### ⛔ **E IL PRESIDIO MI HA CORRETTO SUBITO, con `24` errori:** le chiavi della tabella usano `/`, e `os.path.join` su Windows da- `\`. ### ⭐ **Una chiave che cambia col sistema operativo non e- una chiave** — e l-ho visto perche- il presidio ha parlato, non perche- l-ho pensato.
 
 **Collaudi:** `P-R1` ### **`10`/`10`**, generatore ### **`22`/`22`**, schema `25`/`25`.
+
+## PUNTO `15(a)(b)(c)` — ### **LA CONFIGURAZIONE, E IL DEBITO DEI NOVE `default` PAGATO** *(2026-10-09)*
+
+### `15(a)` ### **UNA SOLA FONTE, e la riga di comando sceglie SOLO IL FILE**
+
+`primo_ordine/config/schema_config.py` *(collaudo ### **`24`/`24`**)*, `primo_ordine/config/prova.yaml`, e `primo_ordine/driver.py` che prende ### **UN argomento** — ### **e un argomento in piu- e- UN ERRORE.** ### ⛔ **Nessun flag che cambi un parametro, nessuna variabile d-ambiente, nessun default nel codice.**
+
+### ⭐ **E IL COLLAUDO DELLA CATENA ORA PRENDE I SUOI NUMERI DA QUEL FILE.** Finche- stavano ### **nelle firme** *(`n=9`, `dt=0.01`, `passi=200`)*, ### **la configurazione era un file che nessuno leggeva** — cioe- ### **un ornamento.**
+
+### `15(c)` ### **NIENTE INTERRUTTORI PER LE LEGGI**
+
+Una legge e- in `leggi_attive` ### **PER ID**, oppure ### **non gira**; e ### **un ID che non e- in `leggi.yaml` fa RIFIUTARE il file.** ### ⭐ **E- la lezione di `CONFIG-1` detta nel modo piu- secco:** `28` leggi su `31` giravano SPENTE in sei misure, per `140` costanti di modulo. ### ⛔ **La cura non e- un presidio sui flag: e- TOGLIERE I FLAG** — un presidio li avrebbe resi ### **sorvegliati**, non ### **inesistenti.**
+
+### `15(b)` ### **NESSUN DEFAULT NASCOSTO — e il debito che `P-R1` aveva dichiarato E- PAGATO**
+
+| | prima | dopo |
+|---|--:|--:|
+| i rami della fisica | `27` | ### **`19`** |
+| di cui `default` | ### **`9`** | ### **`0`** |
+| funzioni con rami | `12` | `8` |
+
+### ⭐ **E NE HO PAGATI DUE INVECE DI UNO, senza averlo previsto.** Togliere i default ha portato via ### **i quattro `termini=None`**; e per toglierli ho dovuto rendere ### **UNIFORME la firma dei generati** *(`energia(st, ii, jj)` per tutti, anche per un termine di nodo che non li usa)* — e con la firma uniforme ### **lo smistamento su `TIPO` in `hamiltoniana.py` NON SERVE PIU-.** ### ⛔ **Quattro funzioni hanno perso TUTTI i loro rami:** `energia`, `gradiente`, `gradiente_grezzo`, `passo_globale`. ### **Una firma uniforme e- un ramo in meno** *(`A8`)*.
+
+### ✅ **E IL PRESIDIO C-E-:** `P-R1` ora ### **rifiuta un valore di default in una firma di fisica**, letto via AST, col caso che DEVE fallire misurato ### **su una COPIA del sorgente** e non sul file vero. Collaudo ### **`12`/`12`**.
+
+### ⚠ **E UNA COLLISIONE DI NOMI, che vale la pena scrivere:** avevo chiamato il file `primo_ordine/config/schema.py`, e ### **`primo_ordine/leggi/schema.py` esiste gia-.** ### ⛔ **Su un `sys.path` piatto due file con lo stesso nome sono LO STESSO MODULO**, e il secondo `import schema` ### **torna il primo**: il collaudo e- caduto con *«module schema has no attribute valida_legge»*. Rinominato ### **`schema_config.py`**, e il perche- e- scritto nel suo docstring.
+
+### ✅ **E IL DRIVER RIPRODUCE I NUMERI DEL COLLAUDO:** norma `26.836105950993492 → ...545` *(relativa `1.986e-15`)*, energia relativa `3.979e-05` su `200` passi. ### **Due vie indipendenti che concordano** — e non era garantito: il collaudo monta la scena ### **da `catena()`**, il driver ### **da `grafo("catena", 9)`.**
+
+### ⚠ **CHE COSA RESTA DEL PUNTO `15`:** `(d)` *(i confronti `A`/`B` col campo UNICO, la lezione di `Z20`)* e `(e)` *(la versione del formato, la scrittura ATOMICA, i reperti immutabili)*. ### **Sono un commit a se-.**

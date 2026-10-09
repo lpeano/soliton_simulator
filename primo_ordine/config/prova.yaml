@@ -1,0 +1,43 @@
+# ====================================================================================
+#  UNA CONFIGURAZIONE DI PROVA -- punto 15(a)
+# ------------------------------------------------------------------------------------
+#  ### LA RIGA DI COMANDO SCEGLIE SOLO QUESTO FILE. Nessun flag che cambi un
+#  ### parametro, nessuna variabile d'ambiente, nessun default nel codice.
+#
+#  ### E NIENTE INTERRUTTORI PER LE LEGGI (15(c)): una legge e' in `leggi_attive`
+#  ### PER ID, oppure NON GIRA. L'era 1 ha 140 costanti di modulo e CONFIG-1 ha
+#  ### misurato che 28 leggi su 31 giravano SPENTE: la cura non e' un presidio sui
+#  ### flag, e' TOGLIERE I FLAG.
+#
+#  ### OGNI CAMPO E' OBBLIGATORIO: il punto 15(b) dice che un parametro NON PRESENTE
+#  ### e' un ERRORE, quindi non esiste un campo facoltativo.
+# ====================================================================================
+versione: 1
+
+# la scena: `catena` oppure `anello`
+scena: catena
+nodi: 9
+
+# ### ESPLICITO, sempre: niente RNG globale
+seme: 11
+
+dt: 0.01
+passi: 200
+
+# ### `globale` oppure `locale`. LA SCELTA E' DI LUCA (il nodo INT del piano):
+# ### questo file DICHIARA quale gira, non decide quale e' giusto.
+integratore: locale
+
+# i parametri del RISOLUTORE, e NON sono innocui:
+# ### MISURATO: il cono dell'integratore GLOBALE dipende da `toll`
+# ### (3 archi a 1e-4, 5 a 1e-8 e a 1e-14). Per questo stanno nel file.
+iterazioni: 64
+toll: 1.0e-14
+
+# ### LE LEGGI ATTIVE, PER ID. Un ID che non e' in leggi.yaml fa RIFIUTARE il file.
+leggi_attive:
+  - PROVA-HOPPING
+  - PROVA-LOCALE
+
+osservatori:
+  - PROVA-NORMA

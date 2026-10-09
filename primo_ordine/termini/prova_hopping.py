@@ -23,7 +23,7 @@ TOLL_IM = 1e-10
 PARAMETRI = {'K': 1.0}
 
 
-def energia(st, ii=None, jj=None):
+def energia(st, ii, jj):
     """### Il contributo di questa legge a `H`. ### **Reale.**"""
     psi_i_0 = st['psi'][ii][:, 0]
     psi_i_1 = st['psi'][ii][:, 1]
@@ -49,7 +49,7 @@ def energia(st, ii=None, jj=None):
     return float(np.real(_s))
 
 
-def gradiente(st, fuori, ii=None, jj=None):
+def gradiente(st, fuori, ii, jj):
     """### `dH/dpsi*`, ### **accumulato in `fuori`**.
 
     ### ⚠ **Si ACCUMULA** *(`+=`)*: `hamiltoniana.py` somma i termini

@@ -293,7 +293,12 @@ def modulo(legge, variabili, e, grad, imp):
          "",
          ""]
     # ------------------------------------------------------------------ l'energia
-    L += ["def energia(st, ii=None, jj=None):",
+    # ### ⛔ **NESSUN DEFAULT NELLA FIRMA** *(punto `15(b)`)*: `ii` e `jj` si
+    # ### passano SEMPRE, anche a un termine di nodo che non li usa.
+    # ### ⭐ **La firma UNIFORME e- cio- che permette a `hamiltoniana.py` di
+    # ### chiamare tutti i termini NELLO STESSO MODO**, senza uno smistamento su
+    # ### `TIPO` -- e uno smistamento in meno e- ### **un ramo in meno** (`A8`).
+    L += ["def energia(st, ii, jj):",
           '    """### Il contributo di questa legge a `H`. ### **Reale.**"""']
     L += _locali(legge, variabili)
     L += ["    _e = %s" % _npy(e),
@@ -312,7 +317,7 @@ def modulo(legge, variabili, e, grad, imp):
           "",
           ""]
     # ------------------------------------------------------------------ il gradiente
-    L += ["def gradiente(st, fuori, ii=None, jj=None):",
+    L += ["def gradiente(st, fuori, ii, jj):",
           '    """### `dH/dpsi*`, ### **accumulato in `fuori`**.',
           "",
           "    ### ⚠ **Si ACCUMULA** *(`+=`)*: `hamiltoniana.py` somma i termini",
