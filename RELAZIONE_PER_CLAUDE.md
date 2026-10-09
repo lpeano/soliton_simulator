@@ -10972,3 +10972,17 @@ Il task history e' committato ### **prima del lavoro** *(par.8)*: `doc/TASK_HIST
 | `(b)` | anche a `ba400c0`, dove ### **e' `ENTRAMBE`**, dopo il taglio l'unico marcatore che la prenderebbe e' ### **un FLAG DEL SIMULATORE** *(`FORK_SU2`, `CAMPO_SPINORIALE`, `TAU_LUCE`)* — e ### **quello stesso marcatore fa scattare `FALSO-ZERO`**, che nomina `REGISTRO_STATO` e `REGISTRO_METRI`, ### **flag VERI del simulatore** *(verificato leggendo `soliton_simulator.py`: sono `140` costanti, e tutte e quattro sono fra quelle)*, e che il mandato precedente dichiara ### **NON DEVE scattare** |
 
 ### 📌 **LA DOMANDA, e la mia raccomandazione:** `F8` esiste per ### **TROVARE** le voci `ENTRAMBE` che nominano oggetti dell'era `1`, ### **perche' siano spostate.** `CONFIG-1` ### **e' STATA spostata** — e chiedere che scatti ancora e' chiedere a un rilevatore ### **di continuare a segnalare un caso curato.** ### ✔ **Credo che `80eaf82` sia un lapsus per `ba400c0`**, e che la richiesta giusta sia ### **nessuna delle due**: il taglio del `.py` ### **toglie `CONFIG-1` da `F8`, e va bene cosi'.**
+
+---
+
+## LE DUE NOTE E L'ECCEZIONE DI `CENS-B15`: **`F3` e `F6` a ZERO** (2026-10-09)
+
+`4` voci toccate in due lotti, `67`/`67` il collaudo dei presidi. I segnali scendono a ### **`18`** *(`F1`=`4`, `F8`=`14`, gli altri a `0`)*. Nessuna corsa; il simulatore resta `b8c21049`.
+
+### ⛔ **E LA NOTA NUOVA CITAVA LA VECCHIA, E COSI- RI-INNESCAVA IL PATTERN.** Avevo scritto nella nota di `POTATURA-GUARDIE`: *«la nota diceva «**lista 3 del guardiano**: fisica dell'era 1, sospesa»»* — e `F6` cerca ### **esattamente quella forma.** ### ⭐ **Una CITAZIONE dentro una nota e' indistinguibile da un'ASSERZIONE, per un presidio che legge una forma.** Riscritta ### **senza nominare la lista**: la storia vive ### **nello storico**, che e' il posto dove sta la storia.
+
+### ⚠ **E L'ECCEZIONE DI `CENS-B15` E- UN INDEBOLIMENTO, E LO DICHIARO.** `_eccezioni_malformate` pretende che il motivo citi ### **un pezzo letterale di almeno `20` caratteri del TESTO DELLA VOCE.** ### ⛔ **La frase «COSTRUITA E MAI MISURATA» NON era nel testo della voce**, e l'ho messa ### **nella nota, in questo stesso lotto** — quindi ### **l'eccezione cita una nota che ho scritto io.**
+
+### ✔ **Perche' e' la forma piu' forte che avevo:** la nota ### **trascrive ALLA LETTERA la riga `265` di `doc/CENSIMENTO_intenzioni.md`** — *«# (B) COSTRUITA E MAI MISURATA -- 16 voci»* — ### **con l'indirizzo**, e quella riga ### **l'ho verificata.** ### ⭐ **Ma resta un anello che si chiude su di me, e un presidio che accetta un'eccezione scritta nello stesso atto che la cita e- piu- debole di quanto sembri.**
+
+### ✔ **E L'ECCEZIONE E- COLLAUDATA NEI DUE VERSI:** `F3` ### **tace** con l'eccezione, e ### **scatta** sulla stessa voce ### **senza.** ### ⛔ **Un'eccezione che nessuno prova e- una riga che nessuno sa se serve.**

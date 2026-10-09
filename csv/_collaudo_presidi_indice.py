@@ -516,6 +516,22 @@ def main():
           "era la condizione di FERMO del task history: se l-estensione scatta su decine "
           "di voci, e- troppo grossa")
 
+    # ------------------------------------------------- F3 e l-eccezione di CENS-B15
+    # ### ⛔ **UN-ECCEZIONE VA COLLAUDATA COME UN PRESIDIO:** se nessuno prova che
+    # ### ### **senza di essa il segnale c-era**, l-eccezione e- ### **una riga che
+    # ### nessuno sa se serve.**
+    _b15 = [v for v in voci if v["id"] == "CENS-B15"]
+    assert _b15, "CENS-B15 non c-e-"
+    esito("F3  NON scatta: `CENS-B15` ha l-`eccezione_presidio`",
+          not scatta(IX._f3_fisica_strumenti(voci), "CENS-B15"),
+          "il <<commento>> del titolo NON e- uno strumento: e- CIO- DI CUI LA VOCE PARLA")
+    _b15s = json.loads(json.dumps(_b15[0]))
+    _b15s["meta"] = {k: w for k, w in _b15s["meta"].items()
+                     if k != "eccezione_presidio"}
+    esito("F3  DEVE scattare: la STESSA voce SENZA l-eccezione",
+          scatta(IX._f3_fisica_strumenti([_b15s]), "CENS-B15"),
+          "e- la prova che l-eccezione SERVE: senza, il segnale c-era")
+
     # ------------------------------------------------- LA FORMA DELL'ECCEZIONE
     base = json.loads(json.dumps([v for v in voci if v["id"] == "C28"][0]))
     vuota = json.loads(json.dumps(base))

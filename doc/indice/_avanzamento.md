@@ -83,10 +83,8 @@ era       1=538  DA_CLASSIFICARE=188  ENTRAMBE=96  2=24
 stato     SOSPESA=369  DA_CLASSIFICARE=188  CHIUSA=182  APERTA=82  AGENDA=24  SUPERATA=1
 ```
 
-### ✔ **FATTO IN QUESTO GIRO:** il punto `4`: ### **`F8` perde il marcatore «un file `.py` del repo»**, che avevo aggiunto io. `F8` passa da `20` a ### **`14` segnali**, elencati nel commit.
+### ✔ **FATTO IN QUESTO GIRO:** il punto `5`: le note di `POTATURA-GUARDIE` e `REGISTRO_FISICA:U2-6` ### **riscritte con lo stato attuale**, e `CENS-B15` chiude `F3` con `eccezione_presidio`. ### **`F3`=`0` e `F6`=`0`.**
 
-### ⛔ **E DUE RICHIESTE DEL PUNTO `4` SONO INCOMPATIBILI, misurato:** *«DEVE scattare su `CONFIG-1` a `80eaf82`»* — ### **la- `CONFIG-1` e' era `1`**, e `F8` guarda solo le `ENTRAMBE`. E anche dove e' `ENTRAMBE`, l'unico marcatore che la prenderebbe ### **fa scattare `FALSO-ZERO`**, che il mandato precedente vieta. ### **La misura va nel referto: non scelgo io quale cade.**
+### ⛔ **RESTA:** il punto `6` — i controlli e il referto ### **`doc/REFERTO_indice_v3_fine_riordino.md`**, con `DA_DECIDERE_LUCA.md` rigenerato.
 
-### ⛔ **RESTA:** i punti `5` e `6`.
-
-**Ultimo lotto applicato:** `doc/indice/_lotti/v3_indirizzate.jsonl` — ### **il punto `4` NON scrive sull'indice**: corregge un presidio.
+**Ultimo lotto applicato:** `doc/indice/_lotti/v3_note2.jsonl`
