@@ -1,0 +1,114 @@
+# ====================================================================================
+#  LA MAPPA DELLE DIPENDENZE -- punto 11(b)
+# ------------------------------------------------------------------------------------
+#  ### CHI IMPORTA CHI, DICHIARATO. Un import fuori mappa, un CICLO, o un modulo che
+#  ### non e' in mappa -> RIFIUTATO.
+#
+#  ### PERCHE' UNA MAPPA E NON SOLO UN DIVIETO: P-E4 vieta DUE import (osservatori/,
+#  ### driver) perche' lo strumento non e' fisica. Una mappa dice invece la COSA
+#  ### POSITIVA -- cio' che e' PREVISTO -- e un import che nessuno ha previsto e'
+#  ### esattamente quello che degrada la modularita' senza che nessuno lo decida.
+#
+#  ### E OGNI MODULO DICHIARA LA SUA RESPONSABILITA' IN UNA RIGA (punto 11(d)): se non
+#  ### si riesce a scriverla in una riga, IL MODULO FA DUE COSE.
+#
+#  ### IL TETTO DI RIGHE (punto 11(c)): oltre, SI DIVIDE, NON SI ALLUNGA. I generati
+#  ### non hanno tetto -- la loro lunghezza la decide la tabella, non chi scrive.
+# ====================================================================================
+versione: 1
+
+# ### IL TETTO, per i file NON generati. Misurato il 2026-10-10: il piu' lungo e'
+# ### _genera.py con 684 righe, e il tetto e' 700 -- ### DICHIARATO SUL MISURATO, non
+# ### scelto a caso, e la regola e' che oltre SI DIVIDE.
+tetto_righe: 700
+
+moduli:
+
+  # ------------------------------------------------------------------ LA FISICA
+  - nome: stato.py
+    responsabilita: lo stato, generato dalla tabella, e i suoi domini
+    generato: true
+    importa: []
+
+  - nome: hamiltoniana.py
+    responsabilita: somma i termini di H e il loro gradiente, in ordine canonico
+    importa: []
+
+  - nome: passo.py
+    responsabilita: lo schedulatore a strati e i due integratori candidati
+    importa: [hamiltoniana, stato]
+
+  - nome: crescita.py
+    responsabilita: la crescita del grafo, regola NON-H col suo bilancio
+    importa: []
+
+  - nome: vuoto.py
+    responsabilita: lo scambio col vuoto, regola NON-H col suo bilancio
+    importa: []
+
+  - nome: termini/prova_hopping.py
+    responsabilita: il salto d-arco, generato -- PROVA
+    generato: true
+    importa: []
+
+  - nome: termini/prova_locale.py
+    responsabilita: il termine locale, generato -- PROVA
+    generato: true
+    importa: []
+
+  # ------------------------------------------------------------------ GLI STRUMENTI
+  - nome: osservatori/prova_norma.py
+    responsabilita: la norma totale, generato -- osservatore in sola lettura
+    generato: true
+    importa: [_rif]
+
+  - nome: _rif.py
+    responsabilita: il costrutto @rif, byte-inerte, e il vocabolario dei ruoli
+    importa: [_presidio]
+
+  - nome: timbro.py
+    responsabilita: l-impronta di cio- che ha girato, e la ripresa che rifiuta
+    importa: []
+
+  - nome: driver.py
+    responsabilita: fa girare una configurazione, e non decide niente
+    importa: [_presidio, hamiltoniana, passo, schema_config, stato, timbro]
+
+  # ------------------------------------------------------------------ IL GENERATORE
+  - nome: leggi/schema.py
+    responsabilita: la forma di una riga di tabella, e i divieti
+    importa: [_presidio]
+
+  - nome: _genera.py
+    responsabilita: dalla tabella al modulo e alla scheda, passando dalla derivata
+    importa: [_genera_stato, _presidio, _rif, schema]
+
+  - nome: _genera_stato.py
+    responsabilita: il sorgente di stato.py, dalle variabili della tabella
+    importa: [schema]
+
+  - nome: config/schema_config.py
+    responsabilita: la forma di una configurazione, e nessun campo facoltativo
+    importa: [_presidio]
+
+  # ------------------------------------------------------------------ IL COLLAUDO
+  - nome: _collauda_passo.py
+    responsabilita: il collaudo della catena, e i casi che devono fallire
+    importa: [_genera, _presidio, hamiltoniana, passo, schema, schema_config, stato]
+
+  # ------------------------------------------------------------------ I PACCHETTI
+  - nome: __init__.py
+    responsabilita: il pacchetto dell-era 2, e cosa sta dove
+    importa: []
+
+  - nome: config/__init__.py
+    responsabilita: il pacchetto delle configurazioni
+    importa: []
+
+  - nome: termini/__init__.py
+    responsabilita: il pacchetto dei termini generati
+    importa: []
+
+  - nome: osservatori/__init__.py
+    responsabilita: il pacchetto degli osservatori generati
+    importa: []

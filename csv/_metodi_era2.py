@@ -560,6 +560,17 @@ METODI["P-ES1"] = (
     "funzione a una variabile, e un presidio che guardasse solo le chiamate NON "
     "VEDREBBE NIENTE",
     "`csv/_un_solo_esecutore.py::controlla`, `pre-commit` + CI", "PORTATO")
+METODI['P-MOD'] = (
+    'NATO NELL-ERA 2: la mappa dichiara CHI IMPORTA CHI, e un import fuori mappa, un CICLO, un modulo non in mappa o una dipendenza dichiarata e NON USATA sono rifiutati. ### Piu- il TETTO di righe e la responsabilita- in UNA RIGA: se non ci sta, IL MODULO FA DUE COSE',
+    '`csv/_modularita_era2.py::controlla` + `primo_ordine/_mappa.yaml`', "PORTATO")
+# ### ⚠ **E QUI AVEVO MESSO LE RIGHE DI `DEC-REGOLA-FORMA` e `DEC-NASCITA-PSI`,
+# ### e `P-M1` LE HA RIFIUTATE COME ORFANE** -- ### **giustamente:** sono di classe
+# ### `DECISIONE`, che ### **non e- nel perimetro dei METODI** *(`STANDARD` e
+# ### `PRESIDIO`)*. ### ⭐ **Una domanda a Luca NON E- UN METODO**, e il posto
+# ### dove vive e- ### **`DA_DECIDERE_LUCA.md`**, che la raccoglie ### **da se-.**
+METODI['VELENO-ARCHI-KEEP'] = (
+    'il veleno allunga le derivate d-arco e non applica `keep`. ### IL PUNTO 4 E- VERO E VUOTO, e il collaudo lo MISURA: zero derivati, perche- lo stato e- solo `psi`. ### E la garanzia arriva dall-altro lato -- `senza_cache` rifiuta una memoria non dichiarata (`A8b`) -- quindi non c-e- IL BERSAGLIO',
+    '`_collauda_passo.py` sezione (I); il braccio FALLIRA- al primo derivato', "PORTATO")
 METODI["AUDIT-CURE"] = (
     "il censimento delle cure e del loro costo: ### IL PUNTO 10 chiede che ogni referto "
     "STAMPI il numero delle leggi, e che un commit che lo aumenta lo DICHIARI",

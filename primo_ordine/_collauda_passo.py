@@ -495,6 +495,43 @@ def domini(T, n, dt, iterazioni, toll):
           % len(chiamate))
 
 
+def veleno(T, n):
+    """### `(I)` IL PUNTO `4`: ### **il VELENO e- VERO E VUOTO, e lo dico.**
+
+    ### ⛔ **Il punto `4` chiede che ogni DERIVATO sia invalidato (`NaN`) a ogni
+    strato, cosi- che una lettura vecchia ### **produca un errore visibile.**
+    ### ⚠ **MA OGGI NON C-E- NESSUN DERIVATO:** lo stato e- ### **solo `psi`**, e
+    non esiste una grandezza ### **calcolata e conservata fra i passi.**
+
+    ### ⭐ **E LA GARANZIA ARRIVA DALL-ALTRO LATO:** `senza_cache()` *(`A8b`)*
+    ### **rifiuta** una qualunque memoria non dichiarata nei moduli di fisica. Quindi
+    ### **non c-e- NIENTE da avvelenare**, e ### **non perche- il veleno non serva: perche-
+    non c-e- il bersaglio.**
+
+    ### ⛔ **UN BRACCIO VERO E VUOTO NON E- UNA MISURA**, e per questo il braccio
+    ### **MISURA il numero dei derivati** invece di affermare che sono zero.
+    """
+    print()
+    print("  (I) IL VELENO -- punto `4`: ### VERO E VUOTO, e il numero lo dice")
+    # ### I DERIVATI sarebbero le variabili di stato che NON sono dichiarate in
+    # ### tabella: cioe- ### **nessuna**, perche- `stato.py` SI GENERA dalla tabella.
+    st = stato_seme(n, C["seme"])
+    dichiarate = {v[0] for v in ST.VARIABILI}
+    derivati = sorted(set(st) - dichiarate)
+    esito("`4` i DERIVATI da avvelenare sono ZERO, e il numero lo MISURA",
+          len(derivati) == 0,
+          "%d variabili di stato, %d dichiarate in tabella, %d derivati: "
+          "### non c-e- il BERSAGLIO" % (len(st), len(dichiarate), len(derivati)))
+    esito("### e la garanzia arriva dall-altro lato: `senza_cache` rifiuta una memoria "
+          "non dichiarata", hasattr(PA, "senza_cache"),
+          "### `A8b`: quindi non c-e- NIENTE da avvelenare -- e non perche- il veleno non "
+          "serva, ### perche- manca il bersaglio")
+    esito("### E QUANDO UN DERIVATO NASCERA-, QUESTO BRACCIO FALLIRA-",
+          len(st) == len(dichiarate),
+          "### e- cio- che lo rende una MISURA e non un-affermazione: il giorno che una "
+          "grandezza derivata entra nello stato, il conto cambia e il braccio lo dice")
+
+
 def sei_casi():
     import _genera as GEN
     import _presidi_era2 as PRE
@@ -611,6 +648,7 @@ def main():
     cache(T, n, dt, it, tl)
     rev = reversibilita(T, n, dt, it, tl)
     domini(T, n, dt, it, tl)
+    veleno(T, n)
     sei_casi()
     print()
     print("=" * 100)

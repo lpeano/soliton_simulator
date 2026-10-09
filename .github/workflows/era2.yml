@@ -80,6 +80,11 @@ jobs:
           python primo_ordine/_genera.py
           git diff --exit-code -- primo_ordine doc/leggi_era2
 
+      - name: "### `P-MOD` -- la modularita- non si degrada"
+        run: |
+          python csv/_modularita_era2.py
+          python csv/_modularita_era2.py --collaudo
+
       - name: "### `P-ES1` -- un solo esecutore, e il TIMBRO"
         run: |
           python csv/_un_solo_esecutore.py

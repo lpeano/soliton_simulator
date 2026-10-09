@@ -77,8 +77,15 @@ BLOCCA = {"SI", "NO", "DA-DECIDERE", "DA VERIFICARE"}
 # ### ⚠ **E `non_definita` SI AGGIUNGE AL VOCABOLARIO DELLA VISTA** *(schema `3`)*: la
 # ### colonna `tipo` della vista porta la ### **classe** quando il metadato `tipo_era1` non
 # ### c'e', e un segnaposto non ha un `tipo` dell'era `1`.
-TIPI = {"difetto", "sospetto", "fronte", "misura", "cura", "presidio", "assioma", "standard",
-        "criterio-locale", "altro", "non_definita"}
+# ### ⚠ **E `decisione` E- ARRIVATO IL 2026-10-10**, perche- il vocabolario `CLASSI`
+# ### dello schema `v3` lo ammette ### **da sempre** *(`DECISIONE`)* e questa vista
+# ### ### **era rimasta indietro**: le prime due voci di quella classe hanno fatto
+# ### fallire il `pre-commit` con *<<tipo `decisione` non ammesso>>*.
+# ### ⛔ **NON l-ho aggirato scegliendo un-altra classe:** una domanda a Luca E- una
+# ### `DECISIONE`, e ### **piegare il dato per far tacere una vista vecchia sarebbe il
+# ### difetto peggiore** -- la vista esiste per RAPPRESENTARE il dato, non il contrario.
+TIPI = {"difetto", "sospetto", "fronte", "misura", "cura", "presidio", "assioma",
+        "standard", "criterio-locale", "decisione", "altro", "non_definita"}
 FAM = {"A", "B", "C", "D", "E", "F", "G", "?"}
 TITOLO_MAX = 100     # [INDICE-LEGGERO] un titolo breve dev'essere breve: la stampa e' UNA riga
 AVANZ = {"FATTO", "IN CORSO", "IN CODA", "BLOCCATO", "CON RISERVA", "(senza marcatore)"}

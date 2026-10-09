@@ -57,6 +57,10 @@ FILE_FISICA = (
     # ### IL TIMBRO *(punti `5`, `6`, `10`)*: l-impronta di cio- che ha
     # ### girato, ### **in un solo posto** -- tre posti divergerebbero.
     'primo_ordine/timbro.py',
+    # ### LA MAPPA DELLE DIPENDENZE *(punto `11(b)`)*: ### **chi importa chi**,
+    # ### e un import fuori mappa, un ciclo o un modulo non in mappa
+    # ### ### **fa rifiutare il commit.**
+    'primo_ordine/_mappa.yaml',
     # ### ⚠ **IL COLLAUDO DELLA CATENA STA SOTTO `primo_ordine/`**, quindi
     # ### la lista lo deve nominare. ### ⛔ **Ma NON e- in `FISICA` di
     # ### `P-E4`**: il cono si misura sulla NORMA, e la norma e- un osservatore

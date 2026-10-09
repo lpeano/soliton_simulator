@@ -11511,3 +11511,34 @@ Riprendere con una tabella diversa ### **continua una corsa che non e- quella**,
 ### ⚠ **E IL MIO COLLAUDO AVEVA UN DIFETTO DI ALIASING**, che il collaudo stesso ha trovato: `salva` era ### **lo stesso dizionario** che il ripristino rimetteva, quindi il caso successivo ### **mutava la copia di salvataggio** — e il braccio finale *(«rimesso tutto a posto, TACE»)* ### **e- quello che l-ha visto.**
 
 **Collaudi:** `P-ES1` ### **`8`/`8`** · `P-M1` `8`/`8` · i metodi vanno a ### **`PORTATO=84`** *(da `77`)*, `DA_PORTARE` scende a ### **`19`** *(da `25`)*.
+
+## PUNTI `3`, `4`, `11` — ### **LA MODULARITA-, IL VELENO VUOTO, E DUE DECISIONI CHE NON PRENDO** *(2026-10-10)*
+
+### `11` ### **LA MODULARITA- NON SI DEGRADA** — `P-MOD`, collaudo ### **`10`/`10`**
+
+### ⭐ **PERCHE- UNA MAPPA E NON SOLO UN DIVIETO:** `P-E4` vieta ### **due** import *(`osservatori/`, `driver`)* perche- lo strumento non e- fisica. Una mappa dice invece ### **la cosa POSITIVA** — cio- che e- ### **previsto** — e ### **un import che nessuno ha previsto e- esattamente quello che degrada la modularita- SENZA CHE NESSUNO LO DECIDA.**
+
+`20` moduli in mappa, `4` generati. Il tetto e- ### **`700` righe, DICHIARATO SUL MISURATO** *(il piu- lungo e- `_genera.py` con `684`)*, e ### **i generati non hanno tetto**: la loro lunghezza ### **la decide la tabella**, non chi scrive. E ### **`(d)` ha un criterio, non e- un adempimento:** se la responsabilita- ### **non si riesce a scrivere in una riga**, ### **il modulo fa due cose.**
+
+### ✅ **E IL PRESIDIO HA TROVATO DUE CHIAMATE CHE NON AVEVO DICHIARATO** in `passo.py`: `array` *(costruisce un array dagli strati: ### **struttura**, non fisica)* e `azione` *(### **il callable che `senza_cache` fa girare**)*. ### **Dichiarate, invece di allargare la regola** — e la differenza e- che allargare la regola ### **le avrebbe nascoste.**
+
+### `4` ### **IL VELENO E- VERO E VUOTO, e il numero lo DICE**
+
+Il punto `4` chiede che ### **ogni derivato** sia invalidato a ogni strato, cosi- che una lettura vecchia ### **produca un errore visibile.** ### ⛔ **MA OGGI NON C-E- NESSUN DERIVATO:** lo stato e- ### **solo `psi`** — ### **misurato**: `1` variabile, `1` dichiarata, ### **`0` derivati.**
+
+### ✅ **E LA GARANZIA ARRIVA DALL-ALTRO LATO:** `senza_cache()` *(`A8b`)* ### **rifiuta** una qualunque memoria non dichiarata. Quindi ### **non c-e- niente da avvelenare** — e ### **non perche- il veleno non serva: perche- manca il bersaglio.** ### ⭐ **E IL BRACCIO MISURA invece di affermare:** il giorno che una grandezza derivata entra nello stato, ### **il conto cambia e il braccio fallisce.**
+
+### ⛔ **`3` e `11(a)`: DUE DECISIONI DI FISICA CHE NON PRENDO AL POSTO DI LUCA**
+
+Luca ha autorizzato esattamente questo: *«se serve una decisione di Luca, la registri in `DA_DECIDERE_LUCA.md` e, se il resto non ne dipende, prosegui»*. ### **Registrate** *(`43` → `45` domande)*, e quel file e- ### **GENERATO** dalla `nota_guardiano` — quindi la domanda ### **si registra DOVE VIVE**, non in un elenco a parte.
+
+| | la domanda | perche- NON la decido io |
+|---|---|---|
+| `DEC-REGOLA-FORMA` | ### **che CODICE genera una `regola`?** | un `termine_*` e- un-espressione che ### **si DERIVA**, e il generatore sa che codice produrre. Una `regola` ha `ingressi`, `uscite`, `bilancio`, e ### **che codice ne venga fuori NON E- UNA QUESTIONE DI FORMATO:** che cosa ### **FA** la crescita? e `bilancio` e- ### **una formula** o ### **un nome di meccanismo?** |
+| `DEC-NASCITA-PSI` | ### **con che stato nasce un nodo?** | il vincolo e- stretto e lo dico: `A16.4` e `A14.3` dicono che ### **la nascita DEVE conservare la norma totale** — quindi ### **`psi = 0` e- VIETATO** *(aggiunge un grado di liberta- a norma zero)* e ### **la copia del padre la RADDOPPIA.** Le forme che conservano sono del tipo ### **<<si DIVIDE>>**, coerente con la mitosi *(la direzione `9(b)`)* — ### **ma QUALE divisione e con che FASE non lo decido io** |
+
+### ⚠ **E FINCHE- LA DECISIONE NON C-E-:** `crescita.py` e `vuoto.py` restano ### **DUE STUB** col patto scritto nel docstring, e ### **`P-E1` segnalerebbe una `regola` in tabella come <<manca il file generato>>** — che e- ### **il comportamento GIUSTO**, e ### **non il pezzo finito.**
+
+### ⛔ **E `P-M1` MI HA CORRETTO SUBITO:** avevo dato una riga nei METODI anche alle due `DEC-*`, e ### **le ha rifiutate come ORFANE** — ### **giustamente**: sono di classe `DECISIONE`, che ### **non e- nel perimetro dei metodi.** ### **Una domanda a Luca NON E- UN METODO**, e il posto dove vive e- `DA_DECIDERE_LUCA.md`, che la raccoglie ### **da se-.**
+
+**Collaudi:** la catena va a ### **`46`/`46`** *(da `43`)*, `P-MOD` ### **`10`/`10`**, `P-M1` `8`/`8`. I metodi: ### **`PORTATO=86`**, `DA_PORTARE=19`.

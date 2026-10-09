@@ -59,3 +59,9 @@ python "$(git rev-parse --show-toplevel)/csv/_rif_nel_codice.py" || exit 1
 #  ### Chi avanza lo stato passa dallo schedulatore. Le eccezioni sono
 #  ### DICHIARATE una per una con il loro perche', e il resto e' rifiutato.
 python "$(git rev-parse --show-toplevel)/csv/_un_solo_esecutore.py" || exit 1
+
+#  `P-MOD` -- LA MODULARITA' NON SI DEGRADA (punto 11).
+#  ### La mappa dice cio' che e' PREVISTO: un import fuori mappa, un ciclo, un
+#  ### modulo non in mappa, un file oltre il tetto, una responsabilita' che non
+#  ### sta in una riga -> RIFIUTATI. E hamiltoniana/passo SOLO sommano.
+python "$(git rev-parse --show-toplevel)/csv/_modularita_era2.py" || exit 1

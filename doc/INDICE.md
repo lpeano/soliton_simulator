@@ -8,11 +8,11 @@
 | `DOCUMENTAZIONE` | `1` | 11 |
 | `DOCUMENTAZIONE` | `ENTRAMBE` | 5 |
 | `FISICA` | `1` | 336 |
-| `FISICA` | `2` | 25 |
+| `FISICA` | `2` | 27 |
 | `FISICA` | `DA_CLASSIFICARE` | 1 |
 | `FISICA` | `ENTRAMBE` | 18 |
 | `INFRASTRUTTURA` | `1` | 39 |
-| `INFRASTRUTTURA` | `2` | 10 |
+| `INFRASTRUTTURA` | `2` | 11 |
 | `INFRASTRUTTURA` | `ENTRAMBE` | 14 |
 | `METODO` | `1` | 153 |
 | `METODO` | `2` | 1 |
@@ -238,6 +238,8 @@
 | `D5` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | OMONIMO `D5`: lo stesso ID nomina DUE OGGETTI DIVERSI |
 | `D6` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | OMONIMO `D6`: lo stesso ID nomina DUE OGGETTI DIVERSI |
 | `DE-ACCOPPIABILITA` | MISURA | FISICA | 1 | ### **CHIUSA** |  | 4. DE-ACCOPPIABILITA' — analisi, non piano |
+| `DEC-NASCITA-PSI` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | con che stato nasce un nodo? il punto 3 chiede UNA REGOLA DICHIARATA per ogni gr |
+| `DEC-REGOLA-FORMA` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | che CODICE genera una `regola`? il punto 11(a) chiede che crescita e vuoto si ge |
 | `DIVISIONE-AUTOCONSISTENTE` | FRONTE | FISICA | 2 | ### **AGENDA** |  | la divisione dell arco come UNA legge: dove si rompe, cosa ereditano i figli, il |
 | `DOPPIA-COP` | CURA | FISICA | 1 | ### **SOSPESA** |  | LA CURA (b): la doppia copertura 4 pi e' un ASSIOMA e va resa STRUTTURALE, non m |
 | `DRIVER-SCENA-II` | CURA | INFRASTRUTTURA | 1 | ### **CHIUSA** |  | APERTA il 2026-09-26 (rilievo di Luca) / IL DRIVER NON SA FARE LA SCENA (ii), e  |
@@ -441,6 +443,7 @@
 | `P-ES1` | PRESIDIO | INFRASTRUTTURA | 2 | ### **AGENDA** |  | UN SOLO ESECUTORE: chi avanza lo stato passa dallo schedulatore, o si dichiara |
 | `P-M1` | PRESIDIO | METODO | ENTRAMBE | ### **APERTA** |  | ogni METODO dell-era 1 ha una riga che dice come si applica all-era 2 |
 | `P-MEMORIA` | STANDARD | FISICA | ENTRAMBE | ### **APERTA** |  | uno scalare con memoria acquista un verso: la memoria da la direzione |
+| `P-MOD` | PRESIDIO | INFRASTRUTTURA | 2 | ### **AGENDA** |  | la MODULARITA- non si degrada: la mappa dice cio- che e- previsto, il resto e- r |
 | `P-R1` | PRESIDIO | INFRASTRUTTURA | 2 | ### **AGENDA** |  | ogni RAMO della fisica dell-era 2 e- dichiarato: quanti, e a che servono |
 | `P-RIF` | PRESIDIO | METODO | 2 | ### **AGENDA** |  | un ID nel codice e- un @rif, o non esiste: un riferimento non vive nella prosa |
 | `P-T1` | PRESIDIO | METODO | ENTRAMBE | ### **APERTA** |  | il TESTO LIBERO non si interpreta per decidere: chi RIFIUTA legge solo campi str |

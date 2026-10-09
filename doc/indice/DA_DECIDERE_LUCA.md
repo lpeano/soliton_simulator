@@ -4,8 +4,8 @@
 
 | | |
 |---|--:|
-| **voci che aspettano una decisione** | ### **`43`** |
-| **domande in tutto** | `43` |
+| **voci che aspettano una decisione** | ### **`45`** |
+| **domande in tutto** | `45` |
 | **segnaposto `NON_DEFINITA`**, che NON sono una domanda | `187` |
 
 ---
@@ -54,11 +54,13 @@
 
 ---
 
-## le DOMANDE aperte -- `13`
+## le DOMANDE aperte -- `15`
 
 | id | `classe`/`dominio`/era/stato | LA DOMANDA | LA FRASE |
 |---|---|---|---|
 | `A3-DISEGNO` | `DIFETTO`/`FISICA`/`2`/`AGENDA` | superata da A16/A17? le due decisioni di Luca del 2026-10-08 riscrivono cio- che questa voce chiede | IL DISEGNO ESCE DALLA DINAMICA — cura a sé, prima delle tre prove. pos entra nella fisica in… |
+| `DEC-NASCITA-PSI` | `DECISIONE`/`FISICA`/`2`/`AGENDA` | con che stato nasce un nodo -- la divisione dell-ampiezza del padre, e con che fase? Il vincolo e- che la norma totale si conservi (`A16.4`, `A14.3`) | con che stato nasce un nodo? il punto 3 chiede UNA REGOLA DICHIARATA per ogni grandezza Il punto 3 della seconda parte chiede che `crescita.py` assegn |
+| `DEC-REGOLA-FORMA` | `DECISIONE`/`FISICA`/`2`/`AGENDA` | che codice genera una `regola`, e che forma ha il suo `bilancio` -- una formula o un nome di meccanismo? | che CODICE genera una `regola`? il punto 11(a) chiede che crescita e vuoto si generino Il punto 11(a) della seconda parte chiede che ANCHE `crescita`  |
 | `G4-MEMARCO` | `CURA`/`FISICA`/`2`/`AGENDA` | superata da A16/A17? | MEMARCO — LA MEMORIA DEL MOTO TRADOTTA IN FORMA RELAZIONALE (aggiunta di Luca al §4, 2026-09-22) /… |
 | `I1` | `DIFETTO`/`FISICA`/`DA_CLASSIFICARE`/`DA_CLASSIFICARE` | CHE CLASSE, DOMINIO, ERA E STATO? <<IDEA DI LUCA, PER DOPO: costruire UNA massa, farla maturare, leggerne la struttura>>. ### E' FISICA, ma <<per dopo>> non dice SE e' dell'era 2: non sta nelle AGENDA di Luca, e indovinarlo sarebbe in | IDEA DI LUCA, per dopo: costruire UNA massa, farla maturare, leggerne la struttura sul grafo e... titolo_breve INTERO: IDEA DI LUCA, per dopo: costrui |
 | `K2a` | `CRITERIO`/`METODO`/`ENTRAMBE`/`APERTA` | era 1 o ENTRAMBE? dipende se cio- che dice riguarda un oggetto concreto dell-era 1 o una regola che sopravvive | SIGILLO osservabile-P1: si cambia SOLO `d` (un arco del cammino minimo x10) e la distanza DEVE... titolo_breve INTERO: SIGILLO osservabile-P1: si camb |

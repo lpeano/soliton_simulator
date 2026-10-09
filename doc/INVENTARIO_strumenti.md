@@ -2567,7 +2567,7 @@ etichette rimosse, con ### **`0` persi, `0` doppi, `0` conflitti**.
 | | |
 |---|---|
 | **file** | `csv/_hook_id_obbligatorio.py` |
-| **BLOB** *(sha1 dei byte grezzi)* | `b1fc8814` |
+| **BLOB** *(sha1 dei byte grezzi)* | `624dd4e3` |
 | **COMANDO** | `python csv/_hook_id_obbligatorio.py --collaudo` *(`11`/`11`)*; nel `commit-msg`: `--controlla $1` |
 | **cosa misura** | **quali commit contano** *(un file della LISTA, o un `doc/REFERTO_*`/`doc/REPERTO_*`)* e **se il messaggio cita almeno un ID NOTO** |
 | ### ⭐ **è il ROVESCIO di `H-INDICE`** | quello controlla che gli ID citati ### **esistano**; questo che ### **ce ne sia almeno UNO** |
@@ -2660,8 +2660,8 @@ etichette rimosse, con ### **`0` persi, `0` doppi, `0` conflitti**.
 
 | | |
 |---|---|
-| **i file** | `primo_ordine/passo.py` *(BLOB `df1b1e50`)* · `primo_ordine/_collauda_passo.py` *(BLOB `129e61d0`)* |
-| **COMANDO** | `python primo_ordine/_collauda_passo.py` *(il collaudo della catena, `43`/`43`)* |
+| **i file** | `primo_ordine/passo.py` *(BLOB `df1b1e50`)* · `primo_ordine/_collauda_passo.py` *(BLOB `a4466d34`)* |
+| **COMANDO** | `python primo_ordine/_collauda_passo.py` *(il collaudo della catena, `46`/`46`)* |
 | **cosa misura** | i **tre livelli** dello schedulatore *(quali permutazioni sono byte-identiche e quali no)* · **IL CONO**, per `PASSO` e per `STRATO` · la **deriva** di norma ed energia dei due candidati · **`A8b`** *(nessuna cache nascosta)* · **i SEI casi che devono fallire** |
 | ### ⭐ **e il collaudo sta in un file SUO** | il cono si misura **sulla norma**, la norma e' **un osservatore**, e `P-E4` vieta a `passo.py` di importare `osservatori/` *(`A17`)*. ### **Il presidio ha imposto la forma, invece di lasciarmela scegliere** |
 | ### ⛔ **e NON SCEGLIE l'integratore** | la scelta e' **di Luca** *(il nodo `INT`)*: i due candidati stanno nella **stessa tavola**, con cono, deriva e costo |
@@ -2688,7 +2688,7 @@ etichette rimosse, con ### **`0` persi, `0` doppi, `0` conflitti**.
 | | |
 |---|---|
 | **file** | `csv/_metodi_era2.py` |
-| **BLOB** *(sha1 dei byte grezzi)* | `fefd4d43` |
+| **BLOB** *(sha1 dei byte grezzi)* | `8916010f` |
 | **COMANDO** | `python csv/_metodi_era2.py` *(il presidio, e GENERA il documento)* · `--collaudo` *(nei due versi, `8`/`8`)* |
 | **cosa impedisce** | che `doc/METODI_era1_in_era2.md` **invecchi in silenzio**: ### **ogni metodo del perimetro DEVE avere una riga** *(come si applica · dove · stato)*, citato o no |
 | ### ⭐ **e il PERIMETRO lo calcola l'INDICE** | da ### **campi a vocabolario chiuso** *(`classe in (STANDARD, PRESIDIO)`, piu' le cure di architettura che il mandato nomina **per ID**)*. ### ⛔ **Nessun `titolo` e nessuna `descrizione` si leggono per decidere se una voce e' un metodo** — e' il principio del mandato **applicato a se stesso** |
@@ -2703,7 +2703,7 @@ etichette rimosse, con ### **`0` persi, `0` doppi, `0` conflitti**.
 | | |
 |---|---|
 | **file** | `csv/_controlli_nell_indice.py` |
-| **BLOB** *(sha1 dei byte grezzi)* | `6bcbcf42` |
+| **BLOB** *(sha1 dei byte grezzi)* | `1bbb874c` |
 | **COMANDO** | `python csv/_controlli_nell_indice.py` *(gli errori e i segnali)* · `--collaudo` *(nei due versi, `8`/`8`)* · `--segnali` |
 | ### ⛔ **cosa RIFIUTA** | il **codice dichiara un ID** che ### **non e' nell'indice** — un presidio che cita un ID inesistente ### **ha un riferimento rotto** · oppure la voce esiste e ### **non ha `classe: PRESIDIO`** |
 | ### ⚠ **cosa SEGNALA e non rifiuta** | una voce `classe: PRESIDIO` che ### **nessun codice dichiara**: potrebbe vivere ### **in shell** *(i `H-*` stanno in `.githooks/`)* o essere ### **proposta e non cablata** *(`H-ETC-1`, `H-ETC-2`)*. ### **Rifiutare un fatto VERO non e' un presidio: e' un impedimento** *(`A9`)* |
@@ -2816,5 +2816,19 @@ etichette rimosse, con ### **`0` persi, `0` doppi, `0` conflitti**.
 | **`9` UN SOLO ESECUTORE** | `P-ES1` guarda le chiamate ### **E I NOMI**: il driver scrive `avanza = PA.passo_locale if …` e poi chiama `avanza(…)`, e ### **un presidio che guardasse solo le chiamate NON VEDREBBE NIENTE** |
 | ### ⚠ **e le eccezioni sono DICHIARATE** | `5` su `2` file, ognuna col suo ### **perche' di almeno `40` caratteri**: *«una via di fuga a costo zero non e' un'eccezione, e' un buco»*. E ### **un'eccezione ORFANA e' rifiutata** |
 | **l'uscita** | `db_era2/stato_<impronta>.npz` *(### **non tracciato**)* + `.timbro.json` *(### **tracciato**: e' il comando che riproduce quel dato)* |
+
+---
+
+### `csv/_modularita_era2.py` e `primo_ordine/_mappa.yaml` — **`P-MOD`: LA MODULARITA' NON SI DEGRADA** *(2026-10-10)*
+
+| | |
+|---|---|
+| **i file** | `csv/_modularita_era2.py` *(BLOB `8fb73811`)* · `primo_ordine/_mappa.yaml` *(BLOB `ba9e8521`)* |
+| **COMANDO** | `python csv/_modularita_era2.py` · `--collaudo` *(nei due versi, `10`/`10`)* |
+| ### ⭐ **perche' una MAPPA e non solo un divieto** | `P-E4` vieta ### **due** import; una mappa dice ### **la cosa POSITIVA** — cio' che e' ### **previsto** — e ### **un import che nessuno ha previsto e' esattamente quello che degrada la modularita' senza che nessuno lo decida** |
+| ### ⛔ **cosa impedisce** | un import ### **fuori mappa** · un ### **CICLO** · un modulo ### **non in mappa** · una dipendenza ### **dichiarata e NON USATA** · un file ### **oltre il tetto** · una responsabilita' che ### **non sta in UNA RIGA** · `hamiltoniana`/`passo` che ### **calcolano una grandezza** |
+| **il tetto** | `700` righe, ### **DICHIARATO SUL MISURATO** *(il piu' lungo e' `_genera.py` con `684`)*. Oltre, ### **si divide, non si allunga** — e ### **i generati NON hanno tetto**, perche' la loro lunghezza ### **la decide la tabella** |
+| ### ⚠ **e `(d)` ha un CRITERIO** | se la responsabilita' ### **non si riesce a scrivere in una riga**, ### **il modulo fa due cose** — e quella e' l'informazione, non l'adempimento |
+| **i numeri** | `20` moduli in mappa, `4` generati |
 
 ---

@@ -3,11 +3,22 @@
   "A11": [
    "P-R1"
   ],
+  "A14": [
+   "DEC-NASCITA-PSI",
+   "DEC-REGOLA-FORMA"
+  ],
   "A16": [
+   "DEC-NASCITA-PSI",
+   "DEC-REGOLA-FORMA",
    "MISURA-NORMA-ERA2"
   ],
   "A17": [
-   "MISURA-NORMA-ERA2"
+   "MISURA-NORMA-ERA2",
+   "P-MOD"
+  ],
+  "A7b": [
+   "DEC-NASCITA-PSI",
+   "DEC-REGOLA-FORMA"
   ],
   "A8": [
    "P-R1"
@@ -24,6 +35,7 @@
    "P-E8",
    "P-ES1",
    "P-M1",
+   "P-MOD",
    "P-RIF",
    "P-T1",
    "P-T2",
@@ -254,6 +266,8 @@
    "D5",
    "D6",
    "DE-ACCOPPIABILITA",
+   "DEC-NASCITA-PSI",
+   "DEC-REGOLA-FORMA",
    "DIVISIONE-AUTOCONSISTENTE",
    "DOPPIA-COP",
    "DRIVER-SCENA-II",
@@ -457,6 +471,7 @@
    "P-ES1",
    "P-M1",
    "P-MEMORIA",
+   "P-MOD",
    "P-R1",
    "P-RIF",
    "P-T1",
@@ -1083,6 +1098,10 @@
    "Z97",
    "Z98",
    "Z99"
+  ],
+  "DECISIONE": [
+   "DEC-NASCITA-PSI",
+   "DEC-REGOLA-FORMA"
   ],
   "DIFETTO": [
    "A1-COSTANTI",
@@ -1751,6 +1770,7 @@
    "P-E8",
    "P-ES1",
    "P-M1",
+   "P-MOD",
    "P-R1",
    "P-RIF",
    "P-T1",
@@ -2170,6 +2190,8 @@
    "D36",
    "D38",
    "DE-ACCOPPIABILITA",
+   "DEC-NASCITA-PSI",
+   "DEC-REGOLA-FORMA",
    "DIVISIONE-AUTOCONSISTENTE",
    "DOPPIA-COP",
    "E3",
@@ -2456,6 +2478,7 @@
    "P-E7",
    "P-E8",
    "P-ES1",
+   "P-MOD",
    "P-R1",
    "PERC-TW-MORTA",
    "POTATURA-GUARDIE",
@@ -3260,6 +3283,8 @@
   "2": [
    "A3-DISEGNO",
    "CONSERVAZIONE-LOCALE",
+   "DEC-NASCITA-PSI",
+   "DEC-REGOLA-FORMA",
    "DIVISIONE-AUTOCONSISTENTE",
    "EM-CURVATURA-BIDIREZIONALE",
    "FASCE-TAU",
@@ -3289,6 +3314,7 @@
    "P-E7",
    "P-E8",
    "P-ES1",
+   "P-MOD",
    "P-R1",
    "P-RIF",
    "REVERSIBILITA-LOCALE",
@@ -6490,6 +6516,8 @@
   "AGENDA": [
    "A3-DISEGNO",
    "CONSERVAZIONE-LOCALE",
+   "DEC-NASCITA-PSI",
+   "DEC-REGOLA-FORMA",
    "DIVISIONE-AUTOCONSISTENTE",
    "EM-CURVATURA-BIDIREZIONALE",
    "FASCE-TAU",
@@ -6519,6 +6547,7 @@
    "P-E7",
    "P-E8",
    "P-ES1",
+   "P-MOD",
    "P-R1",
    "P-RIF",
    "REVERSIBILITA-LOCALE",

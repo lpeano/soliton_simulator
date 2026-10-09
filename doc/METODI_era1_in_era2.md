@@ -8,17 +8,17 @@
 
 | | quanti |
 |---|--:|
-| **`PORTATO`** | `84` |
+| **`PORTATO`** | `86` |
 | **`DA_PORTARE`** | `19` |
 | **`DA_DECIDERE`** | `5` |
-| **`NON_SI_APPLICA`** | `9` |
-| **in tutto** | ### **`117`** |
+| **`NON_SI_APPLICA`** | `8` |
+| **in tutto** | ### **`118`** |
 
-### ⚠ **E IL NUMERO `117` E- MISURATO, non stimato:** viene dal perimetro che l-indice calcola, e ### **il mandato ne nominava <<una decina>>** per nome piu- *<<e le cure di architettura>>*. ### **La decina era `20`.**
+### ⚠ **E IL NUMERO `118` E- MISURATO, non stimato:** viene dal perimetro che l-indice calcola, e ### **il mandato ne nominava <<una decina>>** per nome piu- *<<e le cure di architettura>>*. ### **La decina era `20`.**
 
 ---
 
-## `PORTATO` — `84` metodi
+## `PORTATO` — `86` metodi
 
 > ### ✅ **GIA- NELL-ERA `2`**, e `dove` dice dove
 
@@ -68,6 +68,7 @@
 | **`P-E8`** | `PRESIDIO` | NATO NELL-ERA 2, ed e- IL SOLO che NON IMPEDISCE: senza protezione del ramo la CI gira DOPO il push. ### E- UNA RETE CHE SEGNALA (`A9`), e qui avevo scritto il contrario. ### E non e- mai stata osservata girare | `.github/workflows/era2.yml`; ### SEGNALA, non impedisce |
 | **`P-ES1`** | `PRESIDIO` | NATO NELL-ERA 2, e generalizza `H-P9`: chi avanza lo stato passa dallo schedulatore. ### Le eccezioni sono DICHIARATE una per una con il loro perche- (almeno 40 caratteri), e guarda le chiamate E I NOMI -- il driver assegna la funzione a una variabile, e un presidio che guardasse solo le chiamate NON VEDREBBE NIENTE | `csv/_un_solo_esecutore.py::controlla`, `pre-commit` + CI |
 | **`P-M1`** | `PRESIDIO` | e- il presidio di questo punto: ### SI APPLICA A SE- STESSO -- appena la sua voce e- nata, il perimetro lo ha incluso e lui ha RIFIUTATO IL COMMIT chiedendo questa riga. ### Non l-ho previsto: me l-ha detto lui | `csv/_metodi_era2.py::controlla`, cablato nel `pre-commit` e nella CI |
+| **`P-MOD`** | `PRESIDIO` | NATO NELL-ERA 2: la mappa dichiara CHI IMPORTA CHI, e un import fuori mappa, un CICLO, un modulo non in mappa o una dipendenza dichiarata e NON USATA sono rifiutati. ### Piu- il TETTO di righe e la responsabilita- in UNA RIGA: se non ci sta, IL MODULO FA DUE COSE | `csv/_modularita_era2.py::controlla` + `primo_ordine/_mappa.yaml` |
 | **`P-R1`** | `PRESIDIO` | NATO NELL-ERA 2: `A8` e `P5` cablati. Il CONTEGGIO dei rami lo misura l-AST, il RUOLO e- dichiarato a vocabolario chiuso. ### 27 rami in 12 funzioni, e NOVE SONO `default` -- un DEBITO che il punto 15(b) vietera-, dichiarato invece che nascosto | `csv/_rami_era2.py::controlla`, `pre-commit` + CI |
 | **`P-RIF`** | `PRESIDIO` | NATO NELL-ERA 2: un ID nel codice e- un `@rif`, o non esiste. ### Un ID in un COMMENTO e- prosa, e un riferimento che una macchina segue non vive nella prosa; i DOCSTRING restano, ed e- una scelta DICHIARATA. ### E si e- fatto piu- forte quando l-indice si e- completato: appena `A16` e `A17` sono diventati voci, ha trovato 4 commenti in piu- | `csv/_rif_nel_codice.py::controlla` + `primo_ordine/_rif.py`, `pre-commit` + CI |
 | **`P-T1`** | `PRESIDIO` | NATO NELL-ERA 2, ed e- il principio del mandato CABLATO: un presidio dichiarato ERRORE non puo- NOMINARE un campo di testo (via AST), e chi legge la prosa PUO- SOLO SEGNALARE. ### Non ripara: MANTIENE -- la misura dice che oggi e- gia- vero | `csv/_testo_e_metadati.py::controlla`, `pre-commit` + CI |
@@ -104,6 +105,7 @@
 | **`STANDARD-8`** | `STANDARD` | un difetto dimostrato si cura: ### SUPERATA, assorbita in `A12` | vedi `A12` |
 | **`STATI-LOCALI`** | `PRESIDIO` | gli stati pesanti restano locali, in git solo sha1, percorso e comando. ### PORTATO: `db_era2/*.npz` e- nel `.gitignore`, e IL `.timbro.json` ACCANTO SI TRACCIA -- e- leggero e porta l-impronta della tabella, dei generati e della configurazione, cioe- IL COMANDO CHE RIPRODUCE QUEL DATO | `.gitignore` + `timbro.py::salva` |
 | **`U3`** | `PRESIDIO` | confrontava con uno sviluppo invece del valore esatto: ### LA LEZIONE E- PORTATA -- la derivata generata si confronta con la differenza finita, non con una forma approssimata scritta a mano | `_genera.py --prova` |
+| **`VELENO-ARCHI-KEEP`** | `DIFETTO` | il veleno allunga le derivate d-arco e non applica `keep`. ### IL PUNTO 4 E- VERO E VUOTO, e il collaudo lo MISURA: zero derivati, perche- lo stato e- solo `psi`. ### E la garanzia arriva dall-altro lato -- `senza_cache` rifiuta una memoria non dichiarata (`A8b`) -- quindi non c-e- IL BERSAGLIO | `_collauda_passo.py` sezione (I); il braccio FALLIRA- al primo derivato |
 | **`VELENO-ORIENTATO`** | `DIFETTO` | il veleno cade su UNO dei due archi figli, e quale dipende dall-orientamento: ### LA LEZIONE E- PORTATA -- `strati()` usa la chiave `(min, max)`, quindi l-arco `(3,7)` e `(7,3)` hanno LA STESSA chiave e lo strato non dipende da come e- scritto | `passo.py::strati` |
 | **`Z100`** | `CURA` | gli invarianti: il programma si ferma quando sono violati. ### PORTATO dal punto 1 nella forma dei DOMINI -- ogni tipo dichiara la sua forma, e il controllo FERMA. ### Gli invarianti di FISICA (norma, energia) si MISURANO invece, e la deriva e- stampata: fermare su una deriva numerica sarebbe fermare su un arrotondamento | `primo_ordine/stato.py::controlla_domini`; la deriva in `_collauda_passo.py` |
 | **`Z22`** | `STANDARD` | il par.5-quinquies esisteva ed e- stato violato: la lezione e- che ### UN OUTPUT DA UN FILE NON TRACCIATO NON E- RIPRODUCIBILE -- e il timbro di `_presidio.avvia` lo dice a ogni giro | `csv/_presidio.py` |
@@ -153,7 +155,7 @@
 
 ---
 
-## `NON_SI_APPLICA` — `9` metodi
+## `NON_SI_APPLICA` — `8` metodi
 
 > ### **NON SI APPLICA, E IL PERCHE- E- SCRITTO** — un *<<non si applica>>* senza il perche- **non e- una risposta**
 
@@ -166,7 +168,6 @@
 | **`H-P7`** | `PRESIDIO` | ogni flag porta il suo commento: ### l-era 2 NON HA FLAG di fisica, e il punto 15(c) dice che non ne avra- -- una legge e- in tabella o non c-e- | `SCHEDA_NEL_REGISTRO` lo limita al simulatore |
 | **`P2`** | `STANDARD` | prima di escludere un flag: forza o corregge? ### L-era 2 non ha flag di fisica, e il punto 15(c) dice che non ne avra- | nessun sito |
 | **`Q6`** | `PRESIDIO` | confrontava i valori dopo il passo, quando il rilassamento li aveva mossi: e- un presidio dell-era 1 SOSPESO per un difetto suo | nessun sito nell-era 2 |
-| **`VELENO-ARCHI-KEEP`** | `DIFETTO` | il veleno allunga le derivate d-arco e non applica `keep`: ### l-era 2 non ha derivati da avvelenare -- lo stato e- SOLO `psi`. ### Il punto 4 e- VERO E VUOTO oggi, e lo dico | nessun derivato; punto 4 |
 | **`VELENO-AUTORINFRESCO`** | `FRONTE` | il veleno romperebbe i siti AUTO-RINFRESCO: idem, nessun derivato nell-era 2 | nessun sito |
 
 ---
