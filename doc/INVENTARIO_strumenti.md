@@ -2423,3 +2423,16 @@ etichette rimosse, con ### **`0` persi, `0` doppi, `0` conflitti**.
 | **cosa misura** | niente: aggiunge ### **soltanto la domanda** in `nota_guardiano`, e `DA_DECIDERE_LUCA.md` **le raccoglie da sé** |
 | ### ⛔ **l'assert che garantisce il «senza toccare»** | il generatore ### **pretende `campi == {}`** su tutte e nove: se una decisione ci finisse dentro, **il lotto non partirebbe** |
 | ### ⚠ **la FRASE NON va nella nota** | l'elenco generato porta già una colonna **«LA FRASE»**: scriverla due volte vorrebbe dire **tenerla in due posti, e due copie divergono** |
+
+---
+
+### `csv/_gemelle_duplicati.py` — **GEMELLE E DUPLICATI, DICHIARATI E NON FUSI** *(2026-10-09)*
+
+| | |
+|---|---|
+| **file** | `csv/_gemelle_duplicati.py` |
+| **BLOB** *(sha1 dei byte grezzi)* | `5dc3ac5d` |
+| **COMANDO** | `python csv/_gemelle_duplicati.py`, poi `python csv/indice.py aggiorna-lotto doc/indice/_lotti/v3_s6.jsonl` |
+| **cosa misura** | le **coppie `D`→`Z`** *(una riga della tavola `D` che cita la sua `Z`)* e **quante sono disallineate**; e porta i `4` gruppi di duplicati |
+| **l'uscita** | `doc/indice/_lotti/v3_s6.jsonl` · `doc/indice/_p6_gemelle_dz.json` *(le coppie e le disallineate, **con le due righe d'origine**)* |
+| ### ⛔ **`duplicato_di` NON sceglie un originale** | ogni membro del gruppo nomina **gli altri**: scegliere sarebbe **fondere a metà**, e il mandato dice **NON FUSI** |

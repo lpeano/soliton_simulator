@@ -792,6 +792,9 @@ LISTE_GUARDIANO = {"1": (None, "ENTRAMBE", None),
 # ### `SUPERATA`)*. ### **Un vocabolario che non si usa piu- si cancella**, altrimenti
 # ### il prossimo lo riusa.
 _TOKEN = re.compile(r"[A-Za-z][A-Za-z0-9_:.-]*")
+# ### Lo schema `D`/`Z`: una riga della tavola `D` che cita la sua `Z`. (`F1`)
+_DZ = re.compile(r"^D\d+[a-z]?$")
+_ZZ = re.compile(r"^Z\d+[a-z]?$")
 _RIGA_NNNN = re.compile(r":\d{3,5}(?![0-9])")
 _FLAG = re.compile(r"(?<![A-Za-z0-9])--[a-z][a-z0-9-]{2,}")
 
@@ -1133,10 +1136,23 @@ def _f1_gemelle(voci):
             # ### ### **42 dei 49 segnali erano questo**, e io ne avevo dichiarati 12.
             if w["classe"] in ("STANDARD", "PRESIDIO", "NON_DEFINITA"):
                 continue
-            if w["dominio"] != v["dominio"] or str(w["era"]) != str(v["era"]):
-                fuori.append((v["id"], "il titolo cita `%s`, che e- `%s`/era `%s`, mentre "
-                                       "questa e- `%s`/era `%s`"
-                              % (w["id"], w["dominio"], w["era"], v["dominio"], v["era"])))
+            # ### ⭐ **LO STATO SI CONFRONTA SOLO PER LO SCHEMA `D`/`Z`**, e il mandato lo
+            # ### dice: una riga della tavola `D` che ### **cita la sua `Z`** *(es. `D15`
+            # ### -> «`Z71`, letto dal codice»)* e- ### **LO STESSO FATTO**, quindi
+            # ### `stato`, `dominio` ed `era` ### **devono coincidere.**
+            # ### ⛔ **Fuori da quello schema NO:** due voci diverse ### **possono stare in
+            # ### stati diversi senza contraddirsi**, e confrontare lo stato in generale
+            # ### farebbe segnalare mezzo indice.
+            dz = bool(_DZ.match(v["id"])) and bool(_ZZ.match(w["id"]))
+            diverso = (w["dominio"] != v["dominio"] or str(w["era"]) != str(v["era"])
+                       or (dz and w["stato"] != v["stato"]))
+            if diverso:
+                fuori.append((v["id"], "il titolo cita `%s`, che e- `%s`/era `%s`%s, "
+                                       "mentre questa e- `%s`/era `%s`%s"
+                              % (w["id"], w["dominio"], w["era"],
+                                 ("/`%s`" % w["stato"]) if dz else "",
+                                 v["dominio"], v["era"],
+                                 ("/`%s`" % v["stato"]) if dz else "")))
     return fuori
 
 

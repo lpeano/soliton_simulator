@@ -74,7 +74,7 @@ python csv/indice.py aggiorna-lotto doc/indice/_lotti/<nome>.jsonl
 | voci | `846` |
 | ### **`DA_CLASSIFICARE` vere** *(non segnaposto)* | ### **`1`** |
 | ### **segnaposto `NON_DEFINITA`** | ### **`187`** |
-| ### **righe di storico** | ### **`1603`** |
+| ### **righe di storico** | ### **`1612`** |
 
 ```
 classe    DIFETTO=200  NON_DEFINITA=187  MISURA=141  FRONTE=109  CRITERIO=90  CURA=56  PRESIDIO=34  STANDARD=29
@@ -83,8 +83,8 @@ era       1=538  DA_CLASSIFICARE=188  ENTRAMBE=96  2=24
 stato     SOSPESA=369  DA_CLASSIFICARE=188  CHIUSA=182  APERTA=82  AGENDA=24  SUPERATA=1
 ```
 
-### ✔ **FATTO IN QUESTO GIRO:** il punto `5`: le ### **nove a Luca SENZA toccarle** -- solo la domanda in `nota_guardiano`, e `DA_DECIDERE_LUCA.md` ### **le raccoglie da se'** *(`37`→`46` voci)*. ### **Zero campi di classificazione cambiati**, e ### **l'assert del generatore lo garantisce**: pretende `campi == {}` su tutte e nove
+### ✔ **FATTO IN QUESTO GIRO:** il punto `6`: ### **gemelle e duplicati** -- `4` gruppi dichiarati con `meta.duplicato_di` e ### **NON fusi** *(e `REGISTRO_FISICA:REG-R`/`REG-R`/`H-REG-R` sono ### **lo stesso fatto scritto TRE volte**, una come criterio, una come difetto, una come presidio)*; e ### **`F1` esteso allo STATO solo per lo schema `D`/`Z`**: `18` coppie, ### **`9` disallineate**, elencate senza indovinare. Collaudo `34/34`
 
-### ⛔ **RESTA:** il punto `6` *(gemelle e duplicati: `meta.duplicato_di` e `collegate`, ### **non fusi**, e `F1` esteso allo stato)*, `7` *(`meta.da_dividere`, ### **non dividere**)* e `8` *(i controlli e il referto)*
+### ⛔ **RESTA:** il punto `7` *(`meta.da_dividere` con le due parti e la frase, ### **senza dividere**)* e `8` *(i controlli e il referto `doc/REFERTO_indice_v3_righe_origine.md`, voce per voce)*
 
-**Ultimo lotto applicato:** `doc/indice/_lotti/v3_s5.jsonl`
+**Ultimo lotto applicato:** `doc/indice/_lotti/v3_s6.jsonl`

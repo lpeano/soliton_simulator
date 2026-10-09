@@ -111,6 +111,25 @@ def main():
     a2_finto["classe"] = "DIFETTO"
     esito("F1  DEVE scattare: con A2 finto DIFETTO -- e- LA CLASSE che lo zittisce",
           scatta(IX._f1_gemelle(con(voci, [a2_finto])), "D24"))
+    # ### ⭐ **L-ESTENSIONE ALLO STATO, SOLO PER LO SCHEMA `D`/`Z`** (punto 6 del
+    # ### 2026-10-09). `D08` cita `Z14` e sono ### **LO STESSO FATTO**: `D08` e- `SOSPESA`,
+    # ### `Z14` e- `CHIUSA`. ### **E il braccio negativo prova che NON e- un confronto
+    # ### generale:** con lo stesso disallineamento ### **fuori** dallo schema `D`/`Z`,
+    # ### `F1` ### **tace** -- due voci diverse possono stare in stati diversi senza
+    # ### contraddirsi.
+    _d16 = [v for v in voci if v["id"] in ("D08", "Z14")]
+    assert len(_d16) == 2, "D08 o Z14 non ci sono"
+    esito("F1  DEVE scattare: D08 cita Z14, e sono LO STESSO FATTO con stati diversi",
+          scatta(IX._f1_gemelle(_d16), "D08"),
+          "D08 `%s`, Z14 `%s`" % tuple(v["stato"] for v in
+                                       sorted(_d16, key=lambda x: x["id"])))
+    _finti = json.loads(json.dumps(_d16))
+    for _v in _finti:
+        _v["id"] = _v["id"].replace("D08", "Q08").replace("Z14", "Y14")
+        _v["titolo"] = (_v["titolo"] or "").replace("Z14", "Y14")
+    esito("F1  NON deve scattare: lo STESSO disallineamento FUORI dallo schema D/Z",
+          not scatta(IX._f1_gemelle(_finti), "Q08"),
+          "due voci diverse possono stare in stati diversi senza contraddirsi")
 
     # ---------------------------------------------------------------- F2
     d35_prima = [v for v in v_prima if v["id"] == "D35"]

@@ -1,0 +1,150 @@
+{
+ "coppie": [
+  [
+   "D06",
+   "Z7"
+  ],
+  [
+   "D07",
+   "Z10"
+  ],
+  [
+   "D08",
+   "Z14"
+  ],
+  [
+   "D09",
+   "Z73"
+  ],
+  [
+   "D10",
+   "Z75"
+  ],
+  [
+   "D11",
+   "Z87"
+  ],
+  [
+   "D13",
+   "Z11"
+  ],
+  [
+   "D14",
+   "Z41"
+  ],
+  [
+   "D15",
+   "Z71"
+  ],
+  [
+   "D16",
+   "Z91"
+  ],
+  [
+   "D17",
+   "Z94"
+  ],
+  [
+   "D18",
+   "Z92"
+  ],
+  [
+   "D19",
+   "Z88"
+  ],
+  [
+   "D21",
+   "Z4"
+  ],
+  [
+   "D23",
+   "Z37"
+  ],
+  [
+   "D25",
+   "Z46"
+  ],
+  [
+   "D26",
+   "Z53"
+  ],
+  [
+   "D27",
+   "Z65"
+  ]
+ ],
+ "disallineate": [
+  {
+   "D": "D08",
+   "Z": "Z14",
+   "D_stato": "FISICA/SOSPESA/era 1",
+   "Z_stato": "FISICA/CHIUSA/era 1",
+   "D_riga": "| D08 | Il terzo ramo di calcola_psi (elif sotto REPULS_LEGGE) e' DICHIARATO, non corretto | Z14, letto dal codice | — | APERTO |",
+   "Z_riga": "| Z14 VALE SEMPRE [EPOCA 1 · CODICE] | IL TERZO RAMO DI calcola_psi (elif sotto REPULS_LEGGE): DICHIARATO, non corretto (2026-09-17) | :3054 ha lo stesso difetto di letture miste di :3013 (calcola_psi() ricalcola i pesi,"
+  },
+  {
+   "D": "D11",
+   "Z": "Z87",
+   "D_stato": "FISICA/CHIUSA/era 1",
+   "Z_stato": "FISICA/SOSPESA/era 1",
+   "D_riga": "| D11 | d scende DIECI VOLTE sotto LAM mentre SCALA_MIN e' acceso, e la causa NON e' trovata | Z87 | la cura di Z87: il mondo si costruisce SEMPRE dopo i flag (01eda44, categoria D) | CURATO — decisione della revisione s",
+   "Z_riga": "| Z87 DA RIVERIFICARE [EPOCA 2 · MISURA] | d SCENDE A DIECI VOLTE SOTTO LAM MENTRE SCALA_MIN E' ACCESO, E LA CAUSA NON E' TROVATA: o esiste uno scrittore di d/d0 FUORI dai DODICI censiti in Z78, o uno dei dodici non pass"
+  },
+  {
+   "D": "D14",
+   "Z": "Z41",
+   "D_stato": "FISICA/SOSPESA/era 1",
+   "Z_stato": "FISICA/CHIUSA/era 1",
+   "D_riga": "| D14 | median(\\|f\\|) fa TRE mestieri, non due: e' anche il rompi-anello | Z41 | — | APERTO |",
+   "Z_riga": "| Z41 VALE PER QUELLA SCENA [EPOCA 1 · MISURA] | median(|f|) FA TRE MESTIERI, NON DUE: E' ANCHE IL ROMPI-ANELLO. NESSUN RIFERIMENTO ASSOLUTO E' CABLABILE OGGI (2026-09-18, blob f8f46683, 1 seme, 120 passi) | IL NUMERO CH"
+  },
+  {
+   "D": "D16",
+   "Z": "Z91",
+   "D_stato": "FISICA/CHIUSA/era 1",
+   "Z_stato": "FISICA/SOSPESA/era 1",
+   "D_riga": "(non si ritrova)",
+   "Z_riga": "| Z91 APERTA [EPOCA 2 · LETTURA DEL CODICE] | SCALA_MIN FRENA OGNI SCRITTURA SEPARATAMENTE, QUINDI IL RISULTATO DIPENDE DALL'ORDINE DELLE LEGGI E PRODUCE UN BIAS VERSO L'ALTO ANCHE A VARIAZIONE NETTA NULLA (2026-09-21, m"
+  },
+  {
+   "D": "D18",
+   "Z": "Z92",
+   "D_stato": "FISICA/CHIUSA/era 1",
+   "Z_stato": "FISICA/SOSPESA/era 1",
+   "D_riga": "(non si ritrova)",
+   "Z_riga": "| Z92 LIMITE DICHIARATO [EPOCA 2 · LETTURA DEL CODICE] | COES_ADIM legge ISTANTI MISTI, e il suo tetto e' GLOBALE: violerebbe A5, ma in questo run NON E' STATO ESERCITATO (2026-09-21, mandato §②, sola lettura; doc/REFERT"
+  },
+  {
+   "D": "D19",
+   "Z": "Z88",
+   "D_stato": "FISICA/CHIUSA/era 1",
+   "Z_stato": "FISICA/SOSPESA/era 1",
+   "D_riga": "| D19 | OTTO grandezze che la semina legge erano INERTI SUL VUOTO in ogni run di epoca 1 | Z88 | la cura del mondo-dopo-i-flag | CURATO |",
+   "Z_riga": "| Z88 DA RIVERIFICARE [EPOCA 1 · CODICE] | AVVERTENZA SULL'EPOCA 1: OTTO grandezze che la SEMINA legge sono state INERTI SUL VUOTO in OGNI run mai fatto, perche' il vuoto nasceva all'import, prima dei flag (2026-09-21, c"
+  },
+  {
+   "D": "D25",
+   "Z": "Z46",
+   "D_stato": "FISICA/SOSPESA/era 1",
+   "Z_stato": "FISICA/CHIUSA/era 1",
+   "D_riga": "| Z46 | DIFETTO | D25 (APERTO) | Il gauge del tempo e' la costante 1e-9, e il 93 % dei nodi non invecchia: sono sempre gli stessi, e sono le tre masse |",
+   "Z_riga": "| Z46 VALE PER QUELLA SCENA [EPOCA 1 · MISURA] | IL 93 % DEI NODI NON INVECCHIA, SONO SEMPRE GLI STESSI, E SONO LE TRE MASSE. E IL GAUGE DEL TEMPO E' LA COSTANTE 1e-9 (2026-09-18, blob a1ae5090 invariato, run CONTINUO a "
+  },
+  {
+   "D": "D26",
+   "Z": "Z53",
+   "D_stato": "METODO/SOSPESA/era 1",
+   "Z_stato": "FISICA/SOSPESA/era 1",
+   "D_riga": "| Z53 | DIFETTO | D26 (CURATO) | Le coorti non sopravvivevano allo SNAPSHOT: dopo un salva/ricarica il lignaggio ripartiva VUOTO |",
+   "Z_riga": "(non si ritrova)"
+  },
+  {
+   "D": "D27",
+   "Z": "Z65",
+   "D_stato": "FISICA/SOSPESA/era 1",
+   "Z_stato": "FISICA/CHIUSA/era 1",
+   "D_riga": "| Z65 | DIFETTO | D27 (APERTO) | Il grafo e' in QUATTRO COMPONENTI che non si toccano mai, e la bimodalita' del grado e' la semina. Una distanza SUL GRAFO fra componenti diverse non esiste, e le tre prove dell'ipotesi la",
+   "Z_riga": "| Z65 VALE PER QUELLA SCENA [EPOCA 1 · MISURA] | NESSUNA DELLE QUATTRO LETTURE: IL GRAFO E' IN QUATTRO COMPONENTI CHE NON SI TOCCANO MAI, E LA BIMODALITA' E' LA SEMINA (2026-09-20, blob 775ceab7, seme 42, i 45 snapshot d"
+  }
+ ]
+}

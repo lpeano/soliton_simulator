@@ -4368,6 +4368,38 @@
    "M2"
   ]
  },
+ "meta:duplicato_di": {
+  "A12": [
+   "STANDARD-8"
+  ],
+  "C5RES-INVARIANTI": [
+   "D05"
+  ],
+  "D05": [
+   "C5RES-INVARIANTI"
+  ],
+  "H-P9": [
+   "PASSO-PIENO"
+  ],
+  "H-REG-R": [
+   "REG-R",
+   "REGISTRO_FISICA:REG-R"
+  ],
+  "PASSO-PIENO": [
+   "H-P9"
+  ],
+  "REG-R": [
+   "H-REG-R",
+   "REGISTRO_FISICA:REG-R"
+  ],
+  "REGISTRO_FISICA:REG-R": [
+   "H-REG-R",
+   "REG-R"
+  ],
+  "STANDARD-8": [
+   "A12"
+  ]
+ },
  "meta:eccezione_presidio": {
   "F1: CRITERIO -- e- IL CRITERIO CHE VERIFICA il difetto che cita. Il testo dice << |posi − posj| per OGNI arco al passo zero | dice se la cura ha curato D02 a questo sito... titolo_breve INTERO: d == |posi >>": [
    "REGISTRO_FISICA:S6"

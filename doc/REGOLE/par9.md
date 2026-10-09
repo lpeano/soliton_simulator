@@ -325,3 +325,14 @@ Si toglie dall'inizio della riga, **ripetutamente**: i `#`, gli spazi, i **simbo
 | ### ⛔ **un `?` nella prosa NON è una domanda** | la prima stesura lo contava, e ### **gli ASSIOMI `A1`, `A7b`, `A10` diventavano `FRONTE`**: la loro sezione contiene un punto di domanda e la voce è aperta. ### **Un assioma non è un fronte: è una legge di FORMA, e non si apre né si chiude** |
 | ### **la PRIMA che compare vince** | come per lo stato: ### **una cura chiusa nomina il difetto che ha curato**, e la narrazione viene dopo |
 | ### ⛔ **un SEGNAPOSTO non prende una classe dalla riga** | la sua riga è **dove l'ID è CITATO**, non dove è definito |
+
+---
+
+## GEMELLE E DUPLICATI *(2026-10-09)*
+
+| | |
+|---|---|
+| ### **lo schema `D`/`Z`** | una riga della tavola `D` che **cita la sua `Z`** *(es. `D15` → «`Z71`, letto dal codice»)* è **LO STESSO FATTO**: `stato`, `dominio` ed `era` **devono coincidere** |
+| ### **`F1` confronta lo STATO solo lì** | fuori da quello schema **no**: due voci diverse **possono stare in stati diversi senza contraddirsi**, e confrontare lo stato in generale farebbe segnalare mezzo indice |
+| ### **`meta.duplicato_di`** | le altre voci che dicono lo stesso fatto. ### ⛔ **Non sceglie un originale**, e le voci **NON si fondono**: ogni membro nomina **gli altri** |
+| ### **e `collegate`** | porta gli stessi ID, perché è il campo che lo schema già valida |
