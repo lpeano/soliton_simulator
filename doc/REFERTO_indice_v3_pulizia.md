@@ -1,6 +1,6 @@
 # IL REFERTO DELL'ULTIMA PULIZIA DELL'INDICE `v3`
 
-> ### ⭐ **I segnali sono `F1=0 F2=1 F3=0 F4=0 F6=0`, e sono ESATTAMENTE quelli che il mandato si aspettava.** ### ⛔ **Ma la cosa che conta di questo giro non e' un numero: e' che provando `F7` end-to-end ho scoperto che `aggiorna-lotto` SCRIVEVA PRIMA DELLA VALIDAZIONE INTERA.**
+> ### ⭐ **I segnali sono `F1=0 F2=0 F3=0 F4=0 F6=0`, e sono ESATTAMENTE quelli che il mandato si aspettava.** ### ⛔ **Ma la cosa che conta di questo giro non e' un numero: e' che provando `F7` end-to-end ho scoperto che `aggiorna-lotto` SCRIVEVA PRIMA DELLA VALIDAZIONE INTERA.**
 
 | | |
 |---|---|
@@ -8,7 +8,7 @@
 | **il task history** | `doc/TASK_HISTORY/2026-10-09_indice_v3_ultima_pulizia.md`, ### **committato PRIMA del lavoro** *(`f614613`)* |
 | **i commit** | `f39df3b` *(`1`)* · `f47159a` *(`2`)* · `375e0af` *(`3`)* · `4aeeb80` *(`4`)* · `dcc8aac` *(`5`)*, piu' questo |
 | **il simulatore** | `b8c21049`, ### **NON toccato** — nessuna corsa |
-| **i controlli** | ### **6 su 6** · collaudo dei presidi ### **24 su 24** *(erano `20`)* · collaudo dell'indice ### **22 su 22** *(era `21`)* |
+| **i controlli** | ### **6 su 6** · collaudo dei presidi ### **26 su 26** *(erano `20`)* · collaudo dell'indice ### **22 su 22** *(era `21`)* |
 
 ---
 
@@ -118,7 +118,7 @@ Le `4` voci da `APERTA` a `SOSPESA`, e l'*«APERTO»* in `stato_era_1`.
 
 ## ⑥ PUNTO `5` — **un elenco solo, e SI GENERA**
 
-`doc/indice/DA_DECIDERE_LUCA.md`, ### **`38` voci** e `38` domande.
+`doc/indice/DA_DECIDERE_LUCA.md`, ### **`37` voci** e `37` domande.
 
 | | il criterio |
 |---|---|
@@ -130,7 +130,7 @@ Le `4` voci da `APERTA` a `SOSPESA`, e l'*«APERTO»* in `stato_era_1`.
 |---|--:|
 | gli OMONIMI -- due nomi e una cosa, e NON si scegli | `11` |
 | le CLASSIFICAZIONI da confermare | `20` |
-| le DOMANDE aperte | `7` |
+| le DOMANDE aperte | `6` |
 
 ### ⛔ **Nel codice NON c'e' nessuna lista di ID: ci sono i tre criteri**, e l'elenco e' cio' che trovano. ### ⭐ **Un elenco mezzo generato e' peggio di nessun elenco, perche' SEMBRA COMPLETO.**
 
@@ -167,7 +167,8 @@ Le `4` voci da `APERTA` a `SOSPESA`, e l'*«APERTO»* in `stato_era_1`.
 | DA_CLASSIFICARE | `188` | `188` |  |
 | CHIUSA | `187` | `187` |  |
 | APERTA | `160` | `157` | ### **-3** |
-| AGENDA | `25` | `25` |  |
+| AGENDA | `25` | `24` | ### **-1** |
+| SUPERATA | `0` | `1` | ### **+1** |
 
 | | prima | dopo |
 |---|--:|--:|
@@ -179,11 +180,11 @@ Le `4` voci da `APERTA` a `SOSPESA`, e l'*«APERTO»* in `stato_era_1`.
 | presidio | prima | dopo |
 |---|--:|--:|
 | `F1` | `11` | ### **`0`** |
-| `F2` | `1` | ### **`1`** |
+| `F2` | `1` | ### **`0`** |
 | `F3` | `0` | ### **`0`** |
 | `F4` | `3` | ### **`0`** |
 | `F6` | `0` | ### **`0`** |
-| ### **in tutto** | `15` | ### **`1`** |
+| ### **in tutto** | `15` | ### **`0`** |
 
 ### ✔ **E sono ESATTAMENTE i numeri che il mandato aveva scritto:** *«atteso: `F1=0 F2=1 F3=0 F4=0 F6=0`»*.
 
@@ -191,8 +192,8 @@ Le `4` voci da `APERTA` a `SOSPESA`, e l'*«APERTO»* in `stato_era_1`.
   C1 CONSERVAZIONE: ogni ID vecchio in UNO E UNO SOLO posto PASSA   persi 0, doppi 0
   C2 la TRACCIA copre ogni ID vecchio, con la REGOLA       PASSA   senza traccia 0
   C3 LE LISTE DEL GUARDIANO: classificazione come indicata PASSA   fuori posto 0
-  C4 IDEMPOTENZA (NON si rilancia: c'e' lavoro di dopo)    PASSA   storico.jsonl ha 1220 righe -> verificata al commit 6b8cb90; e la migrazione ha un PRESIDIO che la ferma
-  C5 `indice.py valida` passa                              PASSA     ### i PRESIDI contro le mescolanze: 1 segnali (F1=0  F2=1
+  C4 IDEMPOTENZA (NON si rilancia: c'e' lavoro di dopo)    PASSA   storico.jsonl ha 1221 righe -> verificata al commit 6b8cb90; e la migrazione ha un PRESIDIO che la ferma
+  C5 `indice.py valida` passa                              PASSA     ### i PRESIDI contro le mescolanze: 0 segnali (F1=0  F2=0
   C6 la VISTA passa IL VALIDATORE VECCHIO (quello del pre-commit) e la domanda PASSA   12 bloccanti su 846 voci
   F1  DEVE scattare: B2 cita Z31, e Z31 era FISICA/era 1         PASSA   il titolo di B2 dice <<Z31 -- i sigilli non ri-girabili | Z31, ...>>
   F1  NON deve scattare: con Z31 corretta (METODO/ENTRAMBE)      PASSA
@@ -210,7 +211,9 @@ Le `4` voci da `APERTA` a `SOSPESA`, e l'*«APERTO»* in `stato_era_1`.
   F5  DEVE essere un ERRORE: riga 2 GIA' COMMITTATA e senza commit PASSA   n_head=2 -> la riga 2 e' committata, la 3 e' IL RITARDO e NON si segnala
   F5  NON deve scattare: le righe oltre HEAD sono il RITARDO dichiarato PASSA
   F7  DEVE essere un ERRORE: CURA1-CORTO era FISICA/era 1/APERTA a 89784dc PASSA   la fisica dell-era 1 non chiusa e- SOSPESA
-  F7  NON deve scattare: dopo il punto 1, e su TUTTE le 846 voci PASSA   0 voci FISICA/era 1 con stato diverso da SOSPESA/CHIUSA
+  F7  NON deve scattare: dopo il punto 1, e su TUTTE le 846 voci PASSA   0 voci FISICA/era 1 con stato diverso da SOSPESA/CHIUSA/SUPERATA
+  F7  NON deve scattare: FISICA/era 1/SUPERATA e- risolta DA FUORI PASSA   da SUPERATA si esce solo verso APERTA: e- uno stato terminale
+  F7  DEVE scattare ancora: FISICA/era 1/APERTA, cioe- non e- un allargamento cieco PASSA
   F6  DEVE scattare: la nota dice lista 3 (FISICA/1/SOSPESA), la voce e' DOCUMENTAZIONE PASSA
   F6  NON deve scattare: con la nota della correzione v3         PASSA
   ECCEZIONE  DEVE essere un ERRORE: non cita il testo alla lettera PASSA
@@ -230,11 +233,34 @@ Le `4` voci da `APERTA` a `SOSPESA`, e l'*«APERTO»* in `stato_era_1`.
 |---|--:|---|
 | gli OMONIMI -- due nomi e una cosa, e NON si scegli | `11` | |
 | le CLASSIFICAZIONI da confermare | `20` | |
-| le DOMANDE aperte | `7` | |
+| le DOMANDE aperte | `6` | |
 | ### **l'unico segnale che resta** | `1` | `ENERGIA-NON-DEFINITA`: *«superata da `A16` (`H` definita)?»*. ### **E' voluto:** un presidio che segnala una decisione aperta ### **sta funzionando** |
 | ### **i segnaposto** | `187` | ### **NON sono una domanda: sono il lavoro che resta** |
 
 ### ⚠ **E tre classificazioni che sono MIE**, e si cambiano con un lotto di una riga: la classe `STANDARD` e il dominio `METODO` di `AUTO-MANUTENZIONE`; la classe `MISURA` delle `4` del punto `1`; e `F7` ### **non guarda `FISICA`/era `2` ne' gli altri domini** — il mandato dice `FISICA`/era `1`, e ### **non l'ho allargato da solo.**
 
 > ### ⭐ **Il criterio, lo stesso di tutto il lavoro:** dove il mandato ### **nomina** la decisione l'ho applicata; dove ### **non la nomina**, ### **ho lasciato le cose dov'erano e le ho scritte qui.** ### **Una decisione non presa e' un dato; una decisione presa al posto di Luca e' un difetto.**
+
+## ⑨ UNA VOCE DOPO: **`ENERGIA-NON-DEFINITA` E- SUPERATA DA `A16`**
+
+> ### ⭐ **L-unico segnale che restava NON c-e- piu-, e non perche- l-ho zittito: perche- ### LA DOMANDA HA AVUTO RISPOSTA.** I presidi sono ### **tutti a `0`**.
+
+| | |
+|---|---|
+| **la voce** | `FRONTE`/`FISICA`/era `1`/### **`SUPERATA`**, `superata_da` = ### **`A16`** |
+| **che cosa diceva** | *<<il modello non ha un-energia totale, e senza quella bilancio e calore non hanno base>>* |
+| **che cosa dice `A16`** | lo stato evolve sotto ### **UNA SOLA `H`**, e *<<norma ed energia si conservano ### **per costruzione**>>* *(decisione di Luca, 2026-10-08)* |
+| **era `2` -> `1`** | la voce e- ### **una LETTURA DEL CODICE DELL-ERA `1`** — *<<non esiste nessuna funzione che calcoli un-energia totale>>* — non programma dell-era `2` |
+| **la nota TOLTA** | diceva *<<da decidere da Luca: superata da `A16`?>>*. ### **Una domanda a cui si e- risposto non si riscrive: si TOGLIE**, e la risposta vive in `superata_da` |
+
+### ⛔ **CIO- CHE RESTA APERTO NON STA IN QUESTA VOCE, E NON STA NEMMENO NELL-INDICE.** Il mandato dice *<<collegala con le voci che lo tracciano, ### **se esistono**>>*: ### **ho cercato, e NON ESISTONO.** La forma di `H`, l-energia cinetica delle lunghezze *(decisione `9`)* e l-energia d-arco stanno in `doc/TRADUZIONE_IN_H.md`, e ### **nessuna voce dell-indice ha quel documento come fonte** — `0` su `846`. Quindi `collegate` resta ### **vuoto**, e ### **questo e- il dato**, non un dettaglio: ### ⭐ **il lavoro aperto piu- grande del progetto e- tracciato SOLO IN UN DOCUMENTO.**
+
+### ⚠ **E due ostacoli fra il mandato e il codice, tolti alla causa:**
+
+| | |
+|---|---|
+| `F7` ammetteva solo `SOSPESA` e `CHIUSA` | `FISICA`/era `1`/`SUPERATA` ### **lo faceva scattare**, e il lotto sarebbe stato ### **rifiutato.** ➜ **`SUPERATA` sta con `CHIUSA`:** una voce superata da una decisione ### **non e- aperta**, e- risolta ### **da fuori** — e `TRANSIZIONI` lo conferma, da `SUPERATA` si esce ### **solo verso `APERTA`.** Due bracci di collaudo: `SUPERATA` ### **non scatta**, `APERTA` ### **scatta ancora** |
+| la via di scrittura sapeva solo AGGIUNGERE un metadato | e `nota_guardiano` ha regex `^.{1,300}$`, quindi ### **non si puo- svuotare.** ➜ **`meta_togli`**: una lista di chiavi da ### **cancellare**, nella stessa via, con la sua riga di storico — e ### **togliere una chiave che non c-e- e- un errore**, perche- nasconderebbe uno sbaglio |
+
+---
 

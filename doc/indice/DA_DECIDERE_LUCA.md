@@ -4,8 +4,8 @@
 
 | | |
 |---|--:|
-| **voci che aspettano una decisione** | ### **`38`** |
-| **domande in tutto** | `38` |
+| **voci che aspettano una decisione** | ### **`37`** |
+| **domande in tutto** | `37` |
 | **segnaposto `NON_DEFINITA`**, che NON sono una domanda | `187` |
 
 ---
@@ -55,11 +55,10 @@
 
 ---
 
-## le DOMANDE aperte -- `7`
+## le DOMANDE aperte -- `6`
 
 | id | `classe`/`dominio`/era/stato | LA DOMANDA | LA FRASE |
 |---|---|---|---|
-| `ENERGIA-NON-DEFINITA` | `FRONTE`/`FISICA`/`2`/`AGENDA` | superata da A16 (H definita)? | il modello non ha un'energia totale, e senza quella bilancio e calore non hanno base APERTA il 2026-10-01 su domanda del guardiano (misura M0), e la r |
 | `I1` | `DIFETTO`/`FISICA`/`DA_CLASSIFICARE`/`DA_CLASSIFICARE` | CHE CLASSE, DOMINIO, ERA E STATO? <<IDEA DI LUCA, PER DOPO: costruire UNA massa, farla maturare, leggerne la struttura>>. ### E' FISICA, ma <<per dopo>> non dice SE e' dell'era 2: non sta nelle AGENDA di Luca, e indovinarlo sarebbe in | IDEA DI LUCA, per dopo: costruire UNA massa, farla maturare, leggerne la struttura sul grafo e... titolo_breve INTERO: IDEA DI LUCA, per dopo: costrui |
 | `M-FLUSSO` | `CURA`/`FISICA`/`2`/`AGENDA` | era 1 o 2 | memoria di flusso per ARCO, scalare e antisimmetrica, al posto di mem_mot CANDIDATA REGISTRATA il 2026-10-07 e NON DECISA, dal rapporto doc/MEMORIE_MA |
 | `M-ISTERESI` | `CURA`/`FISICA`/`2`/`AGENDA` | era 1 o 2 | un isteresi sui flip di perc_geom e perc_chi: COMPLEMENTO di MEM-VERSO, non alternativa CANDIDATA REGISTRATA il 2026-10-07 e NON DECISA, dal rapporto  |

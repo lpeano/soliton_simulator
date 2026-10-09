@@ -190,7 +190,19 @@ def main():
     esito("F7  NON deve scattare: dopo il punto 1, e su TUTTE le %d voci" % len(voci),
           IX._f7_stato([v for v in voci if v["id"] == "CURA1-CORTO"]) == []
           and IX._f7_stato(voci) == [],
-          "0 voci FISICA/era 1 con stato diverso da SOSPESA/CHIUSA")
+          "0 voci FISICA/era 1 con stato diverso da SOSPESA/CHIUSA/SUPERATA")
+    # ### ⭐ **`SUPERATA` STA CON `CHIUSA`:** una voce superata da una decisione
+    # ### ### **non e- aperta**, e- risolta ### **da fuori**. E il braccio accanto prova
+    # ### che ### **non e- un allargamento cieco**: `APERTA` ### **scatta ancora.**
+    _sup = json.loads(json.dumps([v for v in voci if v["id"] == "CURA1-CORTO"][0]))
+    _sup["stato"], _sup["superata_da"] = "SUPERATA", "A16"
+    esito("F7  NON deve scattare: FISICA/era 1/SUPERATA e- risolta DA FUORI",
+          IX._f7_stato([_sup]) == [],
+          "da SUPERATA si esce solo verso APERTA: e- uno stato terminale")
+    _ap = json.loads(json.dumps(_sup))
+    _ap["stato"] = "APERTA"
+    esito("F7  DEVE scattare ancora: FISICA/era 1/APERTA, cioe- non e- un allargamento "
+          "cieco", len(IX._f7_stato([_ap])) == 1)
 
     # ---------------------------------------------------------------- F6
     a6_prima = [v for v in v_pre_g if v["id"] == "CENS-A6"]

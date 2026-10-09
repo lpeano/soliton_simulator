@@ -111,6 +111,7 @@ python csv/indice.py etichette-lotto doc/indice/_lotti/<nome>.jsonl  # le ETICHE
 | ### **ogni modifica** | aggiunge una riga a **`doc/indice/storico.jsonl`**, che è **solo in aggiunta** |
 | ### **il COMMIT della riga** | `commit_base` lo **timbra la via di scrittura** *(`HEAD` al momento in cui scrive)*; `commit` — il commit che **contiene** la riga — lo riempie **`storico-commit`** dai log, perché lo storico è **solo-in-aggiunta** e per ogni commit le righe `[prima, dopo)` sono **esattamente le sue**. ### ⚠ **Resta UN LOTTO DI RITARDO**, e non è una scelta: quando il lotto gira, ### **il commit che lo conterrà NON ESISTE ANCORA** |
 | ### **il motivo CITA** | una frase della descrizione o della fonte. **Il lotto rifiuta un motivo sotto i `20` caratteri** |
+| ### **si TOGLIE un metadato** | con **`meta_togli`** nel lotto, e **non svuotandolo**: `nota_guardiano` ha regex `^.{1,300}$` e **non ammette la stringa vuota**. ### ⭐ **Una domanda a cui si è risposto non si riscrive: si TOGLIE**, e la risposta vive nel campo che la porta *(`superata_da`)*. ### ⚠ **Togliere una chiave che non c'è è un ERRORE**, perché nasconderebbe uno sbaglio |
 | ### **una voce NASCE** | solo con `crea-lotto`, e la sua riga di storico ha **`prima: null`**. ### ⚠ **Prima del 2026-10-09 non c'era**, e le voci nascevano **dentro la migrazione** — che gira una volta sola, dal tag: far nascere una voce dopo voleva dire **scrivere a mano in `voci.jsonl`**, cioè ### **una seconda via di scrittura** |
 | ### **togliere da `etichette_rimosse`** | fa parte dello **stesso atto** di `crea-lotto`, perché `C1` pretende che ogni ID vecchio stia in ### **UNO E UNO SOLO** posto. ### **Non è pulizia: è la conservazione** |
 | ### ⛔ **a mano, MAI** | e il validatore se ne accorge: le **viste** si confrontano con la fonte |
@@ -175,7 +176,7 @@ altre voci** *(un **collegamento**, non un alias)* e `6` erano **condivisi fra d
 | **`F3`** | **`FISICA` CHE PARLA DI STRUMENTI:** il **titolo** di una voce `FISICA` dice *sigillo, criterio, controllo positivo, caso che deve fallire, commento, docstring, README, hook, presidio, CRLF* |
 | **`F4`** | **ETICHETTA CON DEFINIZIONE:** un'etichetta rimossa che un documento **DEFINISCE** *(riga di tabella o intestazione)*. ### ⚠ **Le VISTE GENERATE sono escluse**, perché una riga in `doc/LISTA_CHIUSA.md` **elenca** un ID, non lo definisce |
 | ### ⛔ **`F5`** | **STORICO SENZA COMMIT: È UN ERRORE**, non un segnale, e sta in `valida`. ### ⚠ **Solo per le righe GIÀ COMMITTATE** *(quelle in `HEAD`)*: le altre sono **il ritardo** — nella forma letterale **bloccherebbe ogni commit di un lotto** |
-| ⛔ **`F7`** | **LO STATO DI UNA VOCE DELL'ERA `1`: È UN ERRORE**, non un segnale, e sta in `valida`. `FISICA` + era `1` + stato diverso da `SOSPESA`/`CHIUSA` ⇒ **la validazione fallisce**. ### ⚠ **Nasce da un errore mio**, e il perché sta nel suo sorgente |
+| ⛔ **`F7`** | **LO STATO DI UNA VOCE DELL'ERA `1`: È UN ERRORE**, non un segnale, e sta in `valida`. `FISICA` + era `1` + stato diverso da `SOSPESA`/`CHIUSA`/**`SUPERATA`** *(### **`SUPERATA` sta con `CHIUSA`:** una voce superata da una decisione **non è aperta**, è risolta **da fuori**)* ⇒ **la validazione fallisce**. ### ⚠ **Nasce da un errore mio**, e il perché sta nel suo sorgente |
 | **`F6`** | **NOTE COERENTI:** una `nota_guardiano` che **nomina una lista del guardiano** e la voce **non è più ciò che quella lista diceva**. ### ⚠ **Non legge la prosa**, e una nota che si dichiara *«correzione»* **non si guarda** |
 
 ### **UN SEGNALE SI CHIUDE IN DUE MODI SOLI:** **correggendo la voce**, oppure con ### **`meta.eccezione_presidio`** — forma obbligata **`F<n>: <motivo>`**, e il motivo deve contenere **un pezzo LETTERALE di almeno `20` caratteri** del testo della voce. ### ⛔ **La forma la impone `valida`:** senza quel controllo l'eccezione sarebbe **una via di fuga a costo zero.**
@@ -230,9 +231,9 @@ Si toglie dall'inizio della riga, **ripetutamente**: i `#`, gli spazi, i **simbo
 
 | | |
 |---|---|
-| ### **`stato`** | lo stato **DI OGGI**: per una voce `FISICA`/era `1` può essere solo **`SOSPESA`** o **`CHIUSA`** |
+| ### **`stato`** | lo stato **DI OGGI**: per una voce `FISICA`/era `1` può essere solo **`SOSPESA`**, **`CHIUSA`** o **`SUPERATA`** |
 | ### **`stato_era_1`** | lo stato **che la voce aveva nell'era `1`**: è lì che va l'*«APERTO»* di un'intestazione come `## APERTO CURA1-CORTO` |
-| ### ⛔ **il presidio** | **`F7`**, e **è un ERRORE, non un segnale**: `FISICA` + era `1` + stato diverso da `SOSPESA`/`CHIUSA` ⇒ **la validazione fallisce** |
+| ### ⛔ **il presidio** | **`F7`**, e **è un ERRORE, non un segnale**: `FISICA` + era `1` + stato diverso da `SOSPESA`/`CHIUSA`/**`SUPERATA`** *(### **`SUPERATA` sta con `CHIUSA`:** una voce superata da una decisione **non è aperta**, è risolta **da fuori**)* ⇒ **la validazione fallisce** |
 
 ### ⚠ **Da dove viene la regola:** nel giro del punto `5` avevo ripristinato `4` voci leggendo lo stato da `## APERTO <ID>`, e avevo **dichiarato la provenienza del dato** — ma l'avevo messo nel campo **sbagliato**. ### **Dichiarare da dove viene un dato non basta se lo si mette nel campo sbagliato**, e per questo la regola ha un presidio e non solo una riga.
 

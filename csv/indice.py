@@ -493,6 +493,14 @@ def aggiorna_lotto(voci, reg, percorso):
             assert spec.get("stato") == "ATTIVO", ("`%s`: la chiave meta `%s` e' DEPRECATA"
                                                    % (idv, k))
             v["meta"][k] = val
+        # ### TOGLIERE UN METADATO E- UNA COSA DIVERSA DA SVUOTARLO, e serve:
+        # ### `nota_guardiano` ha regex `^.{1,300}$`, quindi ### **non si puo- mettere a
+        # ### stringa vuota.** E una ### **domanda a cui si e- risposto non si riscrive: si
+        # ### TOGLIE** -- la risposta vive in `superata_da` e nello storico.
+        for k in (r.get("meta_togli") or []):
+            assert k in v["meta"], ("`%s`: la chiave meta `%s` NON ESISTE, e togliere "
+                                    "cio- che non esiste NASCONDE un errore" % (idv, k))
+            del v["meta"][k]
         v["aggiornata"] = {"data": r.get("quando") or _oggi(), "commit": r.get("commit", "")}
         storia.append({"quando": v["aggiornata"]["data"], "id": idv, "motivo": motivo,
                        "commit": r.get("commit", ""), "commit_base": _head(),
@@ -990,8 +998,13 @@ def _f7_stato(voci):
     """
     err = []
     for v in voci:
+        # ### ⭐ **`SUPERATA` STA CON `CHIUSA`, NON CON `APERTA`:** la regola dice *<<la
+        # ### fisica dell-era 1 ### **NON CHIUSA** e- SOSPESA>>*, e una voce
+        # ### ### **superata da una decisione NON E- APERTA** -- e- risolta ### **da
+        # ### fuori.** `TRANSIZIONI` lo conferma: da `SUPERATA` si esce ### **solo verso
+        # ### `APERTA`**, cioe- ### **solo riaprendola.**
         vietato = (v["dominio"] == "FISICA" and str(v["era"]) == "1"
-                   and v["stato"] not in ("SOSPESA", "CHIUSA"))
+                   and v["stato"] not in ("SOSPESA", "CHIUSA", "SUPERATA"))
         if vietato:
             err.append("`F7` `%s`: `FISICA`/era `1` con stato `%s`. La fisica dell-era 1 "
                        "NON CHIUSA e- SOSPESA; se quello stato viene da un documento "

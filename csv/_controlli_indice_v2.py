@@ -142,6 +142,11 @@ def main():
     # ### legge faccia.** ### ⚠ **Questo SI- e- un ID, non una regola:** l-ho deciso
     # ### ### **leggendo**, e un ID deciso leggendo va scritto come ID.
     CORRETTE_V3["W5"] = ("METODO", "1", "SOSPESA")                   # (punto 4)
+    # ### IL MANDATO DEL 2026-10-09 (una voce dopo l-ultima pulizia): la lista 2 la dava
+    # ### `FISICA`/era 2/`AGENDA`, e la voce e- ### **SUPERATA da `A16`** -- la decisione
+    # ### di Luca del 2026-10-08. ### **Era 1 perche- la voce e- UNA LETTURA DEL CODICE
+    # ### DELL-ERA 1**, non programma dell-era 2.
+    CORRETTE_V3["ENERGIA-NON-DEFINITA"] = ("FISICA", "1", "SUPERATA")
     for _i in ("CENS-A6", "CENS-A7", "SMP-APRI-COMMENTO", "MITOSI-2LAM-ACCESO"):
         CORRETTE_V3[_i] = ("DOCUMENTAZIONE", "1", "SOSPESA")        # (B) i FUORI POSTO
 

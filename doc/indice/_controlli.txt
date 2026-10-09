@@ -6,16 +6,16 @@ I CONTROLLI DELLA MIGRAZIONE ALLO SCHEMA 2
   C1 CONSERVAZIONE: ogni ID vecchio in UNO E UNO SOLO posto PASSA   persi 0, doppi 0
   C2 la TRACCIA copre ogni ID vecchio, con la REGOLA       PASSA   senza traccia 0
   C3 LE LISTE DEL GUARDIANO: classificazione come indicata PASSA   fuori posto 0
-  C4 IDEMPOTENZA (NON si rilancia: c'e' lavoro di dopo)    PASSA   storico.jsonl ha 1220 righe -> verificata al commit 6b8cb90; e la migrazione ha un PRESIDIO che la ferma
-  C5 `indice.py valida` passa                              PASSA     ### i PRESIDI contro le mescolanze: 1 segnali (F1=0  F2=1 
+  C4 IDEMPOTENZA (NON si rilancia: c'e' lavoro di dopo)    PASSA   storico.jsonl ha 1221 righe -> verificata al commit 6b8cb90; e la migrazione ha un PRESIDIO che la ferma
+  C5 `indice.py valida` passa                              PASSA     ### i PRESIDI contro le mescolanze: 0 segnali (F1=0  F2=0 
   C6 la VISTA passa IL VALIDATORE VECCHIO (quello del pre-commit) e la domanda PASSA   12 bloccanti su 846 voci
 ========================================================================================================
 C7 I CONTEGGI
 ========================================================================================================
   classe    DIFETTO=212  NON_DEFINITA=187  FRONTE=169  CRITERIO=94  MISURA=75  CURA=46  PRESIDIO=34  STANDARD=29
   dominio   FISICA=389  METODO=196  DA_CLASSIFICARE=187  INFRASTRUTTURA=47  DOCUMENTAZIONE=27
-  era       1=460  DA_CLASSIFICARE=188  ENTRAMBE=173  2=25
-  stato     SOSPESA=289  DA_CLASSIFICARE=188  CHIUSA=187  APERTA=157  AGENDA=25
+  era       1=461  DA_CLASSIFICARE=188  ENTRAMBE=173  2=24
+  stato     SOSPESA=289  DA_CLASSIFICARE=188  CHIUSA=187  APERTA=157  AGENDA=24  SUPERATA=1
 
   LE REGOLE DELLA MIGRAZIONE, per quante volte hanno deciso:
       (a)       629

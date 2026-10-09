@@ -376,6 +376,59 @@ def main():
       "dato; una decisione presa al posto di Luca e' un difetto.**")
     p()
 
+    # ======================================================================
+    p("## \u2468 UNA VOCE DOPO: **`ENERGIA-NON-DEFINITA` E- SUPERATA DA `A16`**")
+    p()
+    e = per["ENERGIA-NON-DEFINITA"]
+    p("> ### \u2b50 **L-unico segnale che restava NON c-e- piu-, e non perche- l-ho "
+      "zittito: perche- ### LA DOMANDA HA AVUTO RISPOSTA.** I presidi sono "
+      "### **tutti a `0`**.")
+    p()
+    p("| | |")
+    p("|---|---|")
+    p("| **la voce** | `%s`/`%s`/era `%s`/### **`%s`**, `superata_da` = "
+      "### **`%s`** |" % (e["classe"], e["dominio"], e["era"], e["stato"],
+                          e["superata_da"]))
+    p("| **che cosa diceva** | *<<il modello non ha un-energia totale, e senza quella "
+      "bilancio e calore non hanno base>>* |")
+    p("| **che cosa dice `A16`** | lo stato evolve sotto ### **UNA SOLA `H`**, e "
+      "*<<norma ed energia si conservano ### **per costruzione**>>* "
+      "*(decisione di Luca, 2026-10-08)* |")
+    p("| **era `2` -> `1`** | la voce e- ### **una LETTURA DEL CODICE DELL-ERA `1`** "
+      "\u2014 *<<non esiste nessuna funzione che calcoli un-energia totale>>* "
+      "\u2014 non programma dell-era `2` |")
+    p("| **la nota TOLTA** | diceva *<<da decidere da Luca: superata da `A16`?>>*. "
+      "### **Una domanda a cui si e- risposto non si riscrive: si TOGLIE**, e la "
+      "risposta vive in `superata_da` |")
+    p()
+    p("### \u26d4 **CIO- CHE RESTA APERTO NON STA IN QUESTA VOCE, E NON STA NEMMENO "
+      "NELL-INDICE.** Il mandato dice *<<collegala con le voci che lo tracciano, ### "
+      "**se esistono**>>*: ### **ho cercato, e NON ESISTONO.** La forma di `H`, "
+      "l-energia cinetica delle lunghezze *(decisione `9`)* e l-energia d-arco stanno "
+      "in `doc/TRADUZIONE_IN_H.md`, e ### **nessuna voce dell-indice ha quel documento "
+      "come fonte** \u2014 `0` su `%d`. Quindi `collegate` resta ### **vuoto**, e "
+      "### **questo e- il dato**, non un dettaglio: ### \u2b50 **il lavoro aperto piu- "
+      "grande del progetto e- tracciato SOLO IN UN DOCUMENTO.**" % len(voci))
+    p()
+    p("### \u26a0 **E due ostacoli fra il mandato e il codice, tolti alla causa:**")
+    p()
+    p("| | |")
+    p("|---|---|")
+    p("| `F7` ammetteva solo `SOSPESA` e `CHIUSA` | `FISICA`/era `1`/`SUPERATA` "
+      "### **lo faceva scattare**, e il lotto sarebbe stato ### **rifiutato.** "
+      "\u279c **`SUPERATA` sta con `CHIUSA`:** una voce superata da una decisione "
+      "### **non e- aperta**, e- risolta ### **da fuori** \u2014 e `TRANSIZIONI` lo "
+      "conferma, da `SUPERATA` si esce ### **solo verso `APERTA`.** Due bracci di "
+      "collaudo: `SUPERATA` ### **non scatta**, `APERTA` ### **scatta ancora** |")
+    p("| la via di scrittura sapeva solo AGGIUNGERE un metadato | e `nota_guardiano` ha "
+      "regex `^.{1,300}$`, quindi ### **non si puo- svuotare.** \u279c **`meta_togli`**: "
+      "una lista di chiavi da ### **cancellare**, nella stessa via, con la sua riga di "
+      "storico \u2014 e ### **togliere una chiave che non c-e- e- un errore**, perche- "
+      "nasconderebbe uno sbaglio |")
+    p()
+    p("---")
+    p()
+
     q4 = os.path.join(RADICE, "doc", "REFERTO_indice_v3_pulizia.md")
     io.open(q4, "w", encoding="utf-8", newline=NL).write(NL.join(R) + NL)
     print("scritto doc/REFERTO_indice_v3_pulizia.md: %d righe" % len(R))
