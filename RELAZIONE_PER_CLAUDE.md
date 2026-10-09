@@ -11589,3 +11589,21 @@ Ogni dato di `db_era2/` ha ### **il suo TIMBRO accanto**, col campo `versione_da
 ### ⛔ **E IL COLLAUDO MI HA TROVATO UN BUCO, al primo giro:** `pianifica` guardava solo `collegate`, `superata_da`, `padre` e `alias`, e ha detto ### **<<`0` voci>>** su `A17` — che e- nominato da piu- voci, ### **nel campo `assiomi`.** ### ✅ **`assiomi`, `leggi` e `variabili` SONO RIFERIMENTI STRUTTURATI:** rinominare senza toccarli lascerebbe ### **riferimenti rotti in campi che un presidio legge.**
 
 **Collaudi:** `P-AB` ### **`13`/`13`**, `rinomina` ### **`11`/`11`** *(### **sul PIANO, senza scrivere niente** — e un braccio verifica che ### **il disco non sia stato toccato**)*. I metodi: ### **`PORTATO=90`**, `DA_PORTARE=17`.
+
+# ✅ MANDATO `1` DI `6`: ### **CHIUSO** — la seconda parte, `16` punti *(2026-10-10)*
+
+`doc/REFERTO_seconda_parte_era2.md`, ### **generato**: `csv/_referto_seconda_parte.py` ### **fa girare `19` collaudi** *(`20` coi lenti)* e prende le cifre ### **dalla loro uscita**, piu- le ### **tabelle strutturate** dei presidi.
+
+### ⭐ **E LA SEZIONE CHE CONTA E- LA `4.`: <<che cosa ho sbagliato, e che cosa mi ha corretto>>.** ### **Un referto che elenca solo cio- che funziona NON DICE SE I PRESIDI FUNZIONANO** — lo dice ### **l-elenco delle volte che mi hanno fermato.** ### **`14` errori miei, e `9` me li hanno detti i presidi**, non io rileggendo.
+
+| | |
+|---|---|
+| i punti | ### **`14` su `16` CHIUSI**; `3` e `11(a)` ### **aperti su una decisione di Luca** |
+| i presidi nuovi | ### **undici**, tutti con la loro voce e ### **cablati nel `pre-commit` e nella CI** |
+| i collaudi | ### **`20` comandi, tutti passati** |
+| i metodi dell-era `1` | `120` nel perimetro: ### **`90` PORTATO** *(da `44` al punto `0`)* |
+| le leggi | ### **`3`, e `3` di prova**: ### **ZERO leggi vere**, e il punto `10` lo ### **stampa** |
+
+### ⛔ **E QUEL CHE RESTA APERTO E- SCRITTO, non taciuto** *(sezione `5.`)*: le due decisioni di fisica, il ### **buco di `H-FISICA-FUORI-LISTA`** *(legge la lista dal disco)*, `metadati.jsonl` come ### **reperto per necessita-**, la ### **CI mai osservata girare**, e il ### **budget del `pre-commit`** — che e- il punto `6` della TERZA parte, e ### **questo e- il primo posto dove e- servito.**
+
+### ➡ **Passo al mandato `2` di `6`: le decisioni di Luca sulle `43` domande.**

@@ -80,6 +80,14 @@ jobs:
           python primo_ordine/_genera.py
           git diff --exit-code -- primo_ordine doc/leggi_era2
 
+      - name: "### IL REFERTO DELLA SECONDA PARTE -- rigenerato CON i lenti"
+        # ### ⛔ Con `--con-lenti`: il collaudo della catena supera i 120
+        # ### secondi, e nel `pre-commit` NON sta. Qui ci sta, e `git diff`
+        # ### fa in modo che un referto SCADUTO non passi inosservato.
+        run: |
+          python csv/_referto_seconda_parte.py --con-lenti
+          git diff --exit-code -- doc/REFERTO_seconda_parte_era2.md
+
       - name: "### `P-AB` e `rinomina` -- i confronti, i dati, e il rinominamento"
         run: |
           python csv/_confronti_e_dati.py

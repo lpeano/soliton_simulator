@@ -90,3 +90,22 @@ stato     SOSPESA=369  DA_CLASSIFICARE=188  CHIUSA=182  APERTA=82  AGENDA=24  SU
 ### 📌 **E IN CODA, QUATTRO VOCI CON UN ORDINE DICHIARATO DA LUCA:** ① ### **chiusa** *(assorbita)* · ② le decisioni sulle `43` domande · ③ il piano d'azione e l'albero delle scelte · ④ ### **i metodi dell'era `1` nell'era `2`.**
 
 **Ultimo lotto applicato:** `doc/indice/_lotti/era2_registri.jsonl` — ### **la tappa `5a` NON scrive sull'indice.**
+
+---
+
+## ✅ **MANDATO `1` DI `6` DELLA CODA: CHIUSO** — *la seconda parte dell-infrastruttura, `16` punti* *(2026-10-10)*
+
+> ### ⛔ **Il referto: `doc/REFERTO_seconda_parte_era2.md`**, generato da `csv/_referto_seconda_parte.py` — ### **ogni numero esce dall-uscita dei collaudi** *(`L-NUMERI`)*.
+
+| | |
+|---|---|
+| **i punti** | ### **`14` su `16` CHIUSI**; `3` e `11(a)` ### **APERTI su una decisione di Luca** *(`DEC-NASCITA-PSI`, `DEC-REGOLA-FORMA`)* |
+| **i presidi nuovi** | `P-M1` · `P-C1` · `P-T1` · `P-T2` · `P-T3` · `P-R1` · `P-RIF` · `P-ES1` · `P-MOD` · `P-AB` · `P-E9` — ### **undici**, tutti con la loro voce e cablati |
+| **i collaudi** | ### **`20` comandi, tutti passati** *(il conto sta nella tavola `2.` del referto)* |
+| **i metodi dell-era `1`** | `120` nel perimetro: ### **`90` PORTATO**, `17` `DA_PORTARE`, `5` `DA_DECIDERE`, `8` `NON_SI_APPLICA` |
+| **le leggi** | ### **`3`, e `3` di prova** — cioe- ### **ZERO leggi vere**, e il punto `10` lo rende ### **stampato** |
+| **il simulatore** | `b8c21049`, ### **NON toccato** |
+
+### ⚠ **E QUEL CHE RESTA APERTO E- SCRITTO nella sezione `5.` del referto:** le due decisioni di fisica, il buco di `H-FISICA-FUORI-LISTA`, `metadati.jsonl` come ### **reperto per necessita-**, la CI ### **mai osservata girare**, e il ### **budget del `pre-commit`** — che e- il punto `6` della TERZA parte.
+
+### ➡ **PROSSIMO: il mandato `2` di `6`** — *le decisioni di Luca sulle `43` domande*.

@@ -2862,3 +2862,16 @@ etichette rimosse, con ### **`0` persi, `0` doppi, `0` conflitti**.
 | ### ⭐ **e l'altra meta' della regola e' GIA' vera** | *«rinominare a mano → i presidi lo rifiutano»*: lo rifiutano ### **DUE presidi indipendenti** — il ### **replay dello storico** e quello dei ### **riferimenti** |
 
 ---
+
+### `csv/_referto_seconda_parte.py` — **IL REFERTO DEL MANDATO A `16` PUNTI** *(2026-10-10)*
+
+| | |
+|---|---|
+| **file** | `csv/_referto_seconda_parte.py` |
+| **BLOB** *(sha1 dei byte grezzi)* | `1542bbfd` |
+| **COMANDO** | `python csv/_referto_seconda_parte.py` *(i veloci)* · `--con-lenti` *(anche il collaudo della catena: e' quello che la CI passa)* |
+| **cosa misura** | ### **FA GIRARE `19` collaudi** *(`20` con i lenti)* e prende le cifre ### **dalla loro uscita**, piu' le ### **tabelle strutturate** dei presidi *(il perimetro dei metodi, i rami, i registri, i riferimenti, le eccezioni, la mappa)* |
+| ### ⭐ **e la sezione che conta e' la `4.`** | *«che cosa ho sbagliato, e che cosa mi ha corretto»*: ### **`14` errori miei**, e ### **`9` me li hanno detti i presidi** — non io rileggendo. ### **Un referto che elenca solo cio' che funziona non dice se i presidi funzionano** |
+| **l'uscita** | `doc/REFERTO_seconda_parte_era2.md` — e la CI lo ### **rigenera e fa `git diff`** |
+
+---
