@@ -133,17 +133,38 @@ def main():
     # ### contraddirsi.
     _d16 = [v for v in voci if v["id"] in ("D08", "Z14")]
     assert len(_d16) == 2, "D08 o Z14 non ci sono"
-    esito("F1  DEVE scattare: D08 cita Z14, e sono LO STESSO FATTO con stati diversi",
-          scatta(IX._f1_gemelle(_d16), "D08"),
-          "D08 `%s`, Z14 `%s`" % tuple(v["stato"] for v in
-                                       sorted(_d16, key=lambda x: x["id"])))
-    _finti = json.loads(json.dumps(_d16))
-    for _v in _finti:
-        _v["id"] = _v["id"].replace("D08", "Q08").replace("Z14", "Y14")
-        _v["titolo"] = (_v["titolo"] or "").replace("Z14", "Y14")
-    esito("F1  NON deve scattare: lo STESSO disallineamento FUORI dallo schema D/Z",
-          not scatta(IX._f1_gemelle(_finti), "Q08"),
-          "due voci diverse possono stare in stati diversi senza contraddirsi")
+    # ### ⛔ **ROVESCIATO IL 2026-10-09, E L-ERRORE ERA MIO NELL-APPLICAZIONE:** il braccio
+    # ### di prima diceva *<<`D08` cita `Z14`, e sono LO STESSO FATTO con stati diversi:
+    # ### DEVE scattare>>*. ### **Non sono lo stesso fatto:** `D08` e- ### **il DIFETTO**,
+    # ### `Z14` e- ### **il REPERTO che lo ha trovato** -- e ### **una misura resta
+    # ### un-avvertenza anche dopo che il difetto e- curato** *(`D19` CURATO, `Z88` aperta
+    # ### come avvertenza)*.
+    # ### ⭐ **E il braccio di prima PASSAVA**, perche- la coppia era davvero disallineata:
+    # ### ### **un caso a risposta nota con la risposta SBAGLIATA passa**, e non si
+    # ### accorge di niente. ### **Il collaudo non puo- trovare un errore nella REGOLA: lo
+    # ### trova chi legge i segnali.**
+    _d08 = [v for v in voci if v["id"] == "D08"]
+    _z14 = [v for v in voci if v["id"] == "Z14"]
+    assert _d08 and _z14, "D08 o Z14 non c-e-"
+    print("  `F1`  D08 e Z14 oggi: `%s`/`%s`/era `%s`   e   `%s`/`%s`/era `%s`"
+          % (_d08[0]["dominio"], _d08[0]["stato"], _d08[0]["era"],
+             _z14[0]["dominio"], _z14[0]["stato"], _z14[0]["era"]))
+    esito("F1  NON deve scattare: `D08` e `Z14` con STATI DIVERSI, stesso dominio ed era",
+          not scatta(IX._f1_gemelle(con(voci, _d08 + _z14)), "D08"),
+          "`D` e- il DIFETTO, `Z` e- il REPERTO che lo ha trovato: possono stare in stati "
+          "diversi A RAGIONE")
+    # ### ✔ **E IL VERSO OPPOSTO, perche- `F1` deve ANCORA vedere dominio ed era:** la
+    # ### stessa coppia con ### **`Z14` portata a un altro dominio** ### **DEVE scattare.**
+    _z14b = json.loads(json.dumps(_z14[0]))
+    _z14b["dominio"] = "METODO" if _z14b["dominio"] != "METODO" else "FISICA"
+    esito("F1  DEVE scattare: la STESSA coppia con `Z14` in un altro DOMINIO",
+          scatta(IX._f1_gemelle(con(voci, _d08 + [_z14b])), "D08"),
+          "il difetto e il suo reperto parlano della STESSA COSA: il dominio resta")
+    _z14c = json.loads(json.dumps(_z14[0]))
+    _z14c["era"] = "2" if str(_z14c["era"]) != "2" else "1"
+    esito("F1  DEVE scattare: la STESSA coppia con `Z14` in un-altra ERA",
+          scatta(IX._f1_gemelle(con(voci, _d08 + [_z14c])), "D08"),
+          "e nella stessa ERA")
 
     # ---------------------------------------------------------------- F2
     d35_prima = [v for v in v_prima if v["id"] == "D35"]

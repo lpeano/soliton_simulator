@@ -1394,23 +1394,26 @@ def _f1_gemelle(voci):
             # ### ### **42 dei 49 segnali erano questo**, e io ne avevo dichiarati 12.
             if w["classe"] in ("STANDARD", "PRESIDIO", "NON_DEFINITA"):
                 continue
-            # ### ⭐ **LO STATO SI CONFRONTA SOLO PER LO SCHEMA `D`/`Z`**, e il mandato lo
-            # ### dice: una riga della tavola `D` che ### **cita la sua `Z`** *(es. `D15`
-            # ### -> «`Z71`, letto dal codice»)* e- ### **LO STESSO FATTO**, quindi
-            # ### `stato`, `dominio` ed `era` ### **devono coincidere.**
-            # ### ⛔ **Fuori da quello schema NO:** due voci diverse ### **possono stare in
-            # ### stati diversi senza contraddirsi**, e confrontare lo stato in generale
-            # ### farebbe segnalare mezzo indice.
-            dz = bool(_DZ.match(v["id"])) and bool(_ZZ.match(w["id"]))
-            diverso = (w["dominio"] != v["dominio"] or str(w["era"]) != str(v["era"])
-                       or (dz and w["stato"] != v["stato"]))
-            if diverso:
-                fuori.append((v["id"], "il titolo cita `%s`, che e- `%s`/era `%s`%s, "
-                                       "mentre questa e- `%s`/era `%s`%s"
+            # ### ⛔ **LO STATO E- USCITO DAL CONTROLLO IL 2026-10-09, ed e- un errore che
+            # ### ### il guardiano dichiara SUO -- ma l-applicazione era MIA.** Lo avevo
+            # ### esteso allo stato *<<solo per lo schema `D`/`Z`>>* ### **alla lettera del
+            # ### prompt**, e nel referto avevo scritto che le ### **`9` coppie
+            # ### disallineate erano «UN RITROVATO»**: ### **le ho elencate come un
+            # ### difetto, ed erano LA FORMA GIUSTA.**
+            # ### ⭐ **LA DISTINZIONE CHE NON AVEVO:** la voce `D` e- ### **il DIFETTO**, la
+            # ### `Z` e- ### **il REPERTO che lo ha trovato.** Io le leggevo come
+            # ### ### **<<la stessa cosa scritta due volte>>**, e sono ### **un difetto e
+            # ### la misura che lo ha scoperto** -- e ### **una misura resta
+            # ### un-AVVERTENZA anche dopo che il difetto e- curato** *(`D19` CURATO,
+            # ### `Z88` aperta come avvertenza)*.
+            # ### ✔ **Restano `dominio` ed `era`:** quelli ### **devono** coincidere,
+            # ### perche- il difetto e il suo reperto ### **parlano della stessa cosa,
+            # ### nella stessa era.**
+            if w["dominio"] != v["dominio"] or str(w["era"]) != str(v["era"]):
+                fuori.append((v["id"], "il titolo cita `%s`, che e- `%s`/era `%s`, mentre "
+                                       "questa e- `%s`/era `%s`"
                               % (w["id"], w["dominio"], w["era"],
-                                 ("/`%s`" % w["stato"]) if dz else "",
-                                 v["dominio"], v["era"],
-                                 ("/`%s`" % v["stato"]) if dz else "")))
+                                 v["dominio"], v["era"])))
     return fuori
 
 

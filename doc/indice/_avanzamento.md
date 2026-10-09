@@ -83,8 +83,8 @@ era       1=538  DA_CLASSIFICARE=188  ENTRAMBE=96  2=24
 stato     SOSPESA=369  DA_CLASSIFICARE=188  CHIUSA=182  APERTA=82  AGENDA=24  SUPERATA=1
 ```
 
-### ✔ **FATTO IN QUESTO GIRO:** il punto `2`: le `10` righe con la citazione a `file:riga`, ### **`10` su `10` applicate** — ### **la frase era ESATTAMENTE a quella riga in tutte.** E `STANDARD-6` ### **ritirata dai DATI**: il file passa da `59` a `58` righe.
+### ✔ **FATTO IN QUESTO GIRO:** il punto `3`: ### **lo STATO esce da `F1`.** La voce `D` e' ### **il DIFETTO**, la `Z` e' ### **il REPERTO che lo ha trovato**: possono stare in stati diversi ### **a ragione.** `F1` passa da `8` a ### **`4` segnali**, e i `4` che restano differiscono ### **anche per dominio o era** — e quelli sono veri.
 
-### ⛔ **RESTA:** i punti `3`…`6` — `F1` senza lo stato, `F8` senza il `.py`, le note di `F6`/`F3`, e il referto.
+### ⛔ **RESTA:** i punti `4`…`6` — `F8` senza il `.py`, le note di `F6`/`F3`, e il referto.
 
-**Ultimo lotto applicato:** `doc/indice/_lotti/v3_indirizzate.jsonl` *(`10` voci)*
+**Ultimo lotto applicato:** `doc/indice/_lotti/v3_indirizzate.jsonl` — ### **il punto `3` NON scrive sull'indice**: corregge un presidio.

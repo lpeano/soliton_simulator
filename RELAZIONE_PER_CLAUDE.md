@@ -10939,3 +10939,17 @@ Il task history e' committato ### **prima del lavoro** *(par.8)*: `doc/TASK_HIST
 ### ⚠ **E UNA L'HO GUARDATA DUE VOLTE:** `Z119` indirizza a `doc/STATO_RUN.md:653`, e quella riga ### **parla di `D35`.** La riga e' lunga ### **`440` caratteri**, e la frase *«`Z119`: letto dal sorgente»* sta ### **al carattere `167`**, nella colonna *«come si e' saputo»*. ### **Il match era genuino, e l'ho verificato invece di fidarmi del troncamento della mia stampa.**
 
 ### ✔ **E `STANDARD-6` SI RITIRA DAI DATI** *(citazione inesistente)*: il file del guardiano passa da `59` a `58` righe. ### ⭐ **Un dato che il guardiano RITIRA si TOGLIE, non si corregge** — e il commit `3926dbb` che asseriva `59` righe ### **era vero quando l'ha asserito.**
+
+---
+
+## `F1`: **lo STATO esce dal controllo**, e avevo elencato la forma giusta come un difetto (2026-10-09)
+
+`F1` passa da `8` a ### **`4` segnali**; `60`/`60` il collaudo dei presidi. Nessuna corsa; il simulatore resta `b8c21049`.
+
+### ⭐ **LA DISTINZIONE CHE NON AVEVO:** la voce `D` e' ### **il DIFETTO**, la `Z` e' ### **il REPERTO che lo ha trovato.** ### ⛔ **Io le leggevo come «la stessa cosa scritta due volte»**, e sono ### **un difetto e la misura che lo ha scoperto** — e ### **una misura resta un'AVVERTENZA anche dopo che il difetto e' curato** *(`D19` CURATO, `Z88` aperta come avvertenza)*.
+
+### ⛔ **E NEL REFERTO AVEVO SCRITTO CHE LE `9` COPPIE DISALLINEATE ERANO «UN RITROVATO».** *«Se danno stati diversi, sono le RIGHE a disaccordare»*: ### **le righe dicevano la verita-, e il presidio era sbagliato.** ### ⭐ **Le ho elencate come un difetto dell'indice, ed erano LA FORMA GIUSTA.**
+
+### ⚠ **E IL BRACCIO DI COLLAUDO PASSAVA.** Il caso diceva *«`D08` cita `Z14`, e sono LO STESSO FATTO con stati diversi: DEVE scattare»* — e scattava, perche' la coppia era davvero disallineata. ### ⛔ **Un caso a risposta nota con la RISPOSTA SBAGLIATA passa, e non si accorge di niente.** ### ⭐ **Il collaudo non puo' trovare un errore nella REGOLA: lo trova chi legge i segnali** — e il guardiano li ha letti.
+
+### ✔ **I `4` SEGNALI CHE RESTANO SONO VERI**, e differiscono ### **anche per dominio o era**: `D05`→`C5`, `D06`→`Z7`, `D19`→`Z88`, `Z130`→`S10`. ### **Il difetto e il suo reperto parlano della stessa cosa, nella stessa era** — e li' il presidio ha ancora ragione.

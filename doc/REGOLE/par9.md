@@ -332,8 +332,8 @@ Si toglie dall'inizio della riga, **ripetutamente**: i `#`, gli spazi, i **simbo
 
 | | |
 |---|---|
-| ### **lo schema `D`/`Z`** | una riga della tavola `D` che **cita la sua `Z`** *(es. `D15` → «`Z71`, letto dal codice»)* è **LO STESSO FATTO**: `stato`, `dominio` ed `era` **devono coincidere** |
-| ### **`F1` confronta lo STATO solo lì** | fuori da quello schema **no**: due voci diverse **possono stare in stati diversi senza contraddirsi**, e confrontare lo stato in generale farebbe segnalare mezzo indice |
+| ### ~~**lo schema `D`/`Z` è LO STESSO FATTO**~~ | ### ⛔ **ERRORE, corretto il 2026-10-09:** la voce `D` è ### **il DIFETTO**, la `Z` è ### **il REPERTO che lo ha trovato.** Io le leggevo come *«la stessa cosa scritta due volte»* |
+| ### ✔ **`F1` confronta `dominio` ed `era`, MAI lo stato** | il difetto e il suo reperto parlano ### **della stessa cosa, nella stessa era** — ma ### **una misura resta un'AVVERTENZA anche dopo che il difetto è curato** *(`D19` CURATO, `Z88` aperta come avvertenza)*. ### ⚠ **Avevo elencato `9` coppie disallineate come «un ritrovato»: erano LA FORMA GIUSTA** |
 | ### **`meta.duplicato_di`** | le altre voci che dicono lo stesso fatto. ### ⛔ **Non sceglie un originale**, e le voci **NON si fondono**: ogni membro nomina **gli altri** |
 | ### **e `collegate`** | porta gli stessi ID, perché è il campo che lo schema già valida |
 
