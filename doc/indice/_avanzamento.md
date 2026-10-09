@@ -83,8 +83,8 @@ era       1=458  DA_CLASSIFICARE=188  ENTRAMBE=172  2=25
 stato     SOSPESA=287  DA_CLASSIFICARE=188  CHIUSA=187  APERTA=156  AGENDA=25
 ```
 
-### ✔ **FATTO IN QUESTO GIRO:** il punto `1`: le ### **`4` voci da `APERTA` a `SOSPESA`** -- la fisica dell'era `1` non chiusa e' `SOSPESA`, e l'### **«APERTO» dell'intestazione e' lo stato DELL'ERA `1`**, che va in `stato_era_1`. ### **Nel giro scorso l'avevo messo in `stato`**, che e' lo stato di oggi: dichiarare la provenienza di un dato ### **non basta se lo si mette nel campo sbagliato**
+### ✔ **FATTO IN QUESTO GIRO:** il punto `2`: ### **il presidio `F7`, ed e' un ERRORE** *(`FISICA`/era `1` con stato diverso da `SOSPESA`/`CHIUSA` ⇒ la validazione fallisce)*. ### ⛔ **E provandolo END-TO-END ho scoperto che `aggiorna-lotto` SCRIVEVA PRIMA della validazione intera:** la promessa *«se non passa non si scrive niente»* ### **era falsa**, e l'indice si e' corrotto davvero. Curato alla causa, e ### **la prova e' diventata permanente**
 
-### ⛔ **RESTA:** il punto `2` *(### **`F7`, un ERRORE** e non un segnale: `FISICA`/era `1` con stato diverso da `SOSPESA`/`CHIUSA` ⇒ la validazione fallisce)*, poi `3` *(gli `11` di `F1`)*, `4` *(i `3` di `F4`)*, `5` *(l'elenco `DA_DECIDERE_LUCA.md`, ### **generato**)* e `6` *(il referto)*
+### ⛔ **RESTA:** il punto `3` *(gli `11` di `F1`: `M1` e `C4` omonimi, `8` eccezioni che citano la frase)*, `4` *(i `3` di `F4`)*, `5` *(l'elenco `DA_DECIDERE_LUCA.md`, ### **generato**)* e `6` *(il referto `doc/REFERTO_indice_v3_pulizia.md`)*
 
-**Ultimo lotto applicato:** `doc/indice/_lotti/v3_q1.jsonl`
+**Ultimo lotto applicato:** `doc/indice/_lotti/v3_q1.jsonl *(il punto `2` non passa da un lotto: aggiunge un presidio)*`

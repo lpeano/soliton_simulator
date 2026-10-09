@@ -250,6 +250,15 @@ def valida(voci, reg, verboso=True, derivati=True):
             if do and v["dominio"] not in do:
                 err.append("`%s`: meta `%s` non si applica al dominio `%s`"
                            % (q, k, v["dominio"]))
+    # ### ⛔ **QUESTI DUE VANNO PRIMA DEL RITORNO, e non e- un dettaglio:** dipendono
+    # ### ### **SOLO dalle voci**, e `aggiorna_lotto` valida con `derivati=False`
+    # ### ### **PRIMA DI SCRIVERE**. Finche- stavano dopo, un lotto che violava `F7`
+    # ### ### **VENIVA SCRITTO** e solo allora l-assert scattava: l-indice restava
+    # ### ### **CORROTTO**, e l-ho ripristinato con `git checkout`. L-ha dimostrato una
+    # ### prova end-to-end, e la promessa *<<se non passa NON SI SCRIVE NIENTE>>*
+    # ### ### **era falsa.**
+    err += _f7_stato(voci)
+    err += _eccezioni_malformate(voci)
     # ### L'INDICE INVERTITO e le VISTE: DERIVATI, e si CONFRONTANO
     if not derivati:
         return err
@@ -257,7 +266,6 @@ def valida(voci, reg, verboso=True, derivati=True):
     # ### mandato dice *<<storico senza commit -> ERRORE, non segnale>>*, e
     # ### un-eccezione che NON CITA non e- un-eccezione, e- una via di fuga.
     err += _f5_storico(voci)
-    err += _eccezioni_malformate(voci)
     atteso = invertito(voci, reg)
     if os.path.exists(INVERTITO):
         avuto = json.load(io.open(INVERTITO, encoding="utf-8"))
@@ -492,7 +500,10 @@ def aggiorna_lotto(voci, reg, percorso):
     # ### le viste sono ### **per costruzione stale** finche' non si riscrivono: controllarli
     # ### qui vorrebbe dire rifiutare OGNI lotto. ### ➜ **E si rivalida INTERO DOPO**, viste
     # ### comprese: cosi' nessun controllo si perde.
-    err = valida(voci, reg, verboso=False, derivati=False)
+    # ### ⛔ **`F5` NON dipende dalle voci** -- guarda `storico.jsonl` sul disco contro
+    # ### `HEAD` -- quindi ### **si chiede PRIMA di scrivere**, non alla fine: alla fine
+    # ### sarebbe ### **un allarme su un file GIA- SCRITTO.**
+    err = _f5_storico(voci) + valida(voci, reg, verboso=False, derivati=False)
     assert not err, ("IL LOTTO NON PASSA LA VALIDAZIONE, e NON SI SCRIVE NIENTE:" + NL
                      + NL.join(err[:10]))
     _scrivi_jsonl(VOCI, voci)
@@ -647,7 +658,10 @@ def citazioni(voci):
 def collaudo():
     def base(**kw):
         v = {"id": "X1", "alias": [], "titolo": "t", "descrizione": "", "classe": "DIFETTO",
-             "dominio": "FISICA", "era": "1", "stato": "APERTA", "blocca": False,
+        # ### ⚠ **La voce-modello era `FISICA`/era `1`/`APERTA`, che da oggi `F7` VIETA:**
+        # ### il caso SANO sarebbe diventato un fallimento. ### **Era `ENTRAMBE`**, e il
+        # ### caso di `F7` ce l-ha suo.
+             "dominio": "FISICA", "era": "ENTRAMBE", "stato": "APERTA", "blocca": False,
              "leggi": [], "variabili": [], "assiomi": [], "collegate": [], "padre": "",
              "superata_da": "", "chiusura": {}, "fonte": "doc/x.md::X1",
              "creata": {"data": "2026-10-08", "commit": ""},
@@ -666,6 +680,8 @@ def collaudo():
         ("### CHIUSA senza chiusura", [base(stato="CHIUSA")], False),
         ("### SUPERATA senza superata_da", [base(stato="SUPERATA")], False),
         ("### SOSPESA senza stato_era_1", [base(stato="SOSPESA")], False),
+        ("### `F7`: FISICA/era 1 con stato APERTA",
+         [base(era="1", stato="APERTA")], False),
         ("### id DUPLICATO", [base(), base()], False),
         ("### chiave meta NON REGISTRATA", [base(meta={"pippo": "x"})], False),
         ("### valore meta del TIPO SBAGLIATO", [base(meta={"seme": "undici"})], False),
@@ -853,6 +869,36 @@ def _f5_storico(voci):
     if q.returncode != 0:
         return []
     return _f5_righe(vive, len([r for r in q.stdout.split(NL) if r.strip()]))
+
+
+def _f7_stato(voci):
+    """### `F7`: una voce `FISICA` dell-era `1` con uno stato che non e- `SOSPESA` ne-
+    `CHIUSA`.
+
+    ### ⛔ **E- UN ERRORE, non un segnale**, e il mandato lo dice: *<<la validazione
+    fallisce>>*. ### **La regola in vigore: la fisica dell-era `1` NON CHIUSA e- `SOSPESA`**
+    -- e l-### **<<APERTO>>** che un documento scrive e- lo stato ### **dell-era `1`**, che
+    sta in `stato_era_1`.
+
+    ### ⚠ **Nasce da un errore mio:** nel punto `5` del 2026-10-09 ho ripristinato `4` voci
+    leggendo lo stato da `## APERTO <ID>` e ### **l-ho messo nel campo `stato`**, che e- lo
+    stato ### **di oggi**. Avevo ### **dichiarato la provenienza del dato**, e questo mi ha
+    fatto sembrare prudente ### **un errore di campo**: ### **per questo la regola ha un
+    presidio e non solo una riga in `par9.md`.**
+
+    ### ⛔ **E- PURA** *(prende la lista, non legge il disco)* perche- ### **il collaudo deve
+    poterla provare su una COPIA**, mai sull-indice vero.
+    """
+    err = []
+    for v in voci:
+        vietato = (v["dominio"] == "FISICA" and str(v["era"]) == "1"
+                   and v["stato"] not in ("SOSPESA", "CHIUSA"))
+        if vietato:
+            err.append("`F7` `%s`: `FISICA`/era `1` con stato `%s`. La fisica dell-era 1 "
+                       "NON CHIUSA e- SOSPESA; se quello stato viene da un documento "
+                       "(<<APERTO>>), e- lo stato DELL-ERA 1 e va in `stato_era_1`"
+                       % (v["id"], v["stato"]))
+    return err
 
 
 def _f1_gemelle(voci):
@@ -1276,7 +1322,10 @@ def crea_lotto(voci, reg, percorso):
         storia.append({"quando": v["creata"]["data"], "id": idv, "motivo": motivo,
                        "commit": r.get("commit", ""), "commit_base": _head(),
                        "prima": None, "dopo": json.loads(json.dumps(v))})
-    err = valida(voci, reg, verboso=False, derivati=False)
+    # ### ⛔ **`F5` NON dipende dalle voci** -- guarda `storico.jsonl` sul disco contro
+    # ### `HEAD` -- quindi ### **si chiede PRIMA di scrivere**, non alla fine: alla fine
+    # ### sarebbe ### **un allarme su un file GIA- SCRITTO.**
+    err = _f5_storico(voci) + valida(voci, reg, verboso=False, derivati=False)
     assert not err, ("il lotto NON passa la validazione, e NON SI SCRIVE NIENTE:" + NL
                      + NL.join(err[:10]))
     voci.sort(key=lambda v: v["id"])

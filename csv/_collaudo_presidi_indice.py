@@ -171,6 +171,27 @@ def main():
           IX._f5_righe(righe[:1] + [{"id": "Y", "commit": "def5678"}] + righe[2:], 2) == []
           and IX._f5_righe(righe, 0) == [])
 
+    # ---------------------------------------------------------------- F7
+    # ### ⛔ **IL CASO A RISPOSTA NOTA E- UN MIO ERRORE**, e il mandato lo indica: a
+    # ### `89784dc` `CURA1-CORTO` era `FISICA`/era `1`/### **`APERTA`**, perche- avevo
+    # ### messo nel campo `stato` l-<<APERTO>> che il documento scrive -- e quello e- lo
+    # ### stato ### **dell-era 1**.
+    PRIMA_Q1 = "89784dc"
+    v_pre_q = al_commit(PRIMA_Q1, "doc/indice/voci.jsonl")
+    c1_prima = [v for v in v_pre_q if v["id"] == "CURA1-CORTO"]
+    assert c1_prima, "CURA1-CORTO non c-e- a " + PRIMA_Q1
+    print("  `F7`  CURA1-CORTO a %s: `%s`/era `%s`/`%s`   |   oggi: `%s`"
+          % (PRIMA_Q1, c1_prima[0]["dominio"], c1_prima[0]["era"],
+             c1_prima[0]["stato"],
+             [v for v in voci if v["id"] == "CURA1-CORTO"][0]["stato"]))
+    esito("F7  DEVE essere un ERRORE: CURA1-CORTO era FISICA/era 1/APERTA a " + PRIMA_Q1,
+          len(IX._f7_stato(c1_prima)) == 1,
+          "la fisica dell-era 1 non chiusa e- SOSPESA")
+    esito("F7  NON deve scattare: dopo il punto 1, e su TUTTE le %d voci" % len(voci),
+          IX._f7_stato([v for v in voci if v["id"] == "CURA1-CORTO"]) == []
+          and IX._f7_stato(voci) == [],
+          "0 voci FISICA/era 1 con stato diverso da SOSPESA/CHIUSA")
+
     # ---------------------------------------------------------------- F6
     a6_prima = [v for v in v_pre_g if v["id"] == "CENS-A6"]
     print("  `F6`  la nota di CENS-A6 a %s: <<%s>>"
@@ -197,6 +218,37 @@ def main():
     storta["meta"]["eccezione_presidio"] = ["va bene cosi'"]
     esito("ECCEZIONE  DEVE essere un ERRORE: fuori forma (manca `F<n>:`)",
           len(IX._eccezioni_malformate([storta])) == 1)
+
+    # ------------------------------------- L'ATOMICITA', END-TO-END
+    # ### ⛔ **QUESTA PROVA HA TROVATO UN DIFETTO CHE IL COLLAUDO NON VEDEVA:**
+    # ### `aggiorna_lotto` validava con `derivati=False` *(che saltava `F7`)*,
+    # ### ### **SCRIVEVA**, e solo allora validava tutto -- quindi un lotto che violava
+    # ### `F7` ### **veniva scritto** e l-indice restava ### **CORROTTO.** La promessa
+    # ### *<<se non passa NON SI SCRIVE NIENTE>>* ### **era falsa.**
+    # ### ✔ **E non puo- fare danno:** fotografa i byte, tenta, e ### **se sono cambiati
+    # ### li RIMETTE** -- una regressione viene ### **riportata**, non subita.
+    _FILES = ("doc/indice/voci.jsonl", "doc/indice/storico.jsonl")
+    foto = {f: io.open(os.path.join(RADICE, f), "rb").read() for f in _FILES}
+    lotto = os.path.join(RADICE, "doc", "indice", "_lotti", "_prova_atomicita.jsonl")
+    io.open(lotto, "w", encoding="utf-8", newline=NL).write(json.dumps(
+        {"id": "CURA1-CORTO", "quando": "2026-10-09",
+         "campi": {"stato": "APERTA"}, "meta": {},
+         "motivo": "PROVA CHE DEVE FALLIRE: F7 deve impedire di riportare una voce "
+                   "FISICA/era 1 ad APERTA, e NON deve scrivere niente"},
+        ensure_ascii=False) + NL)
+    q = subprocess.run([sys.executable, os.path.join(_QUI, "indice.py"),
+                        "aggiorna-lotto", lotto], cwd=RADICE, capture_output=True,
+                       text=True, encoding="utf-8")
+    dopo = {f: io.open(os.path.join(RADICE, f), "rb").read() for f in _FILES}
+    cambiati = [f for f in _FILES if foto[f] != dopo[f]]
+    for f in cambiati:                      # ### si RIMETTE, qualunque cosa sia andata
+        io.open(os.path.join(RADICE, f), "wb").write(foto[f])
+    os.remove(lotto)
+    esito("ATOMICITA-  il lotto che viola F7 e- RIFIUTATO", q.returncode != 0,
+          "uscita %d" % q.returncode)
+    esito("ATOMICITA-  e NON ha scritto NIENTE: i byte sono IDENTICI", not cambiati,
+          ("### CAMBIATI: %s -- RIMESSI dalla fotografia" % " ".join(cambiati))
+          if cambiati else "voci.jsonl e storico.jsonl byte per byte")
 
     # ---------------------------------------------------------------- il verdetto
     print()
