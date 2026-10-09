@@ -30,6 +30,11 @@ VOCI = os.path.join(RADICE, "doc", "indice", "voci.jsonl")
 FUORI = os.path.join(RADICE, "doc", "METODI_era1_in_era2.md")
 
 # ### ⛔ **IL VOCABOLARIO CHIUSO DI `stato`.**
+# ### ⛔ **LA DICHIARAZIONE DELL-ID** *(punto `12(a)`)*: ### **un file, UN
+# ### presidio**, quindi `PRESIDIO`. `P-C1` verifica che la voce esista e che
+# ### abbia ### **`classe: PRESIDIO`** -- e la classe e- ### **un CAMPO.**
+PRESIDIO = "P-M1"
+
 STATI = ("PORTATO", "DA_PORTARE", "NON_SI_APPLICA", "DA_DECIDERE")
 
 # ### Le CLASSI che fanno di una voce ### **un METODO.**
@@ -354,6 +359,53 @@ METODI = {
             "punto 15(e), da fare", "DA_PORTARE"),
 }
 
+
+# ### ⚠ **E QUESTI OTTO SONO NATI NELL-ERA `2`, non portati dall-era `1`.**
+# ### Stanno qui perche- ### **il perimetro e- <<ogni metodo>>**, calcolato da
+# ### `classe`, e ### **non <<ogni metodo dell-era 1>>**: se il perimetro escludesse i
+# ### nati nell-era `2`, ### **un presidio nuovo sfuggirebbe al documento** -- che e-
+# ### esattamente cio- che `P-M1` esiste per impedire.
+# ### ⭐ **Il loro `stato` e- `PORTATO` nel senso preciso: SONO NELL-ERA `2`.**
+METODI["P-E1"] = (
+    "NATO NELL-ERA 2. La BIIEZIONE fra legge in tabella, file generato, riga di "
+    "registro e scheda, nei DUE VERSI, e `LEGGE` si legge VIA AST. "
+    "### Allargato agli OSSERVATORI il 2026-10-09: prima un osservatore in tabella era "
+    "INVISIBILE alla biiezione",
+    "`csv/_presidi_era2.py::pe1`, `pre-commit` + CI, SENZA via d-uscita", "PORTATO")
+METODI["P-E2"] = (
+    "NATO NELL-ERA 2. L-IMPRONTA: un generato ritoccato a mano, o una tabella cambiata "
+    "senza rigenerare. ### SI RIGENERA, NON SI CORREGGE IL FILE -- e la CI rigenera e "
+    "fa `git diff --exit-code`",
+    "`csv/_presidi_era2.py::pe2`, `pre-commit` + CI", "PORTATO")
+METODI["P-E3"] = (
+    "NATO NELL-ERA 2. Le variabili nei due versi: una variabile dichiarata in DUE "
+    "POSTI divergerebbe, e per questo `stato.py` SI GENERA",
+    "`csv/_presidi_era2.py::pe3`, `pre-commit` + CI", "PORTATO")
+METODI["P-E4"] = (
+    "NATO NELL-ERA 2, ed e- `A17` cablato: la fisica non importa `osservatori/` ne- "
+    "`driver`. ### E HA IMPOSTO UNA FORMA: il collaudo del cono misura la NORMA, che e- "
+    "un osservatore, quindi e- dovuto andare in un file SUO",
+    "`csv/_presidi_era2.py::pe4`, `pre-commit` + CI", "PORTATO")
+METODI["P-E5"] = (
+    "NATO NELL-ERA 2. Gli osservatori leggono, e si MISURA AL BYTE. ### Fino al "
+    "2026-10-09 PASSAVA A VUOTO e lo diceva da se-: un braccio vero e vuoto non e- una "
+    "misura. Con `PROVA-NORMA` ha materia",
+    "`csv/_presidi_era2.py::pe5`, `pre-commit` + CI", "PORTATO")
+METODI["P-E6"] = (
+    "NATO NELL-ERA 2. La tabella che cambia senza la riga di registro e senza l-ID nel "
+    "messaggio: lega il cambiamento della fonte unica alla sua tracciabilita-",
+    "`csv/_presidi_era2.py::pe6`, stadio `commit-msg`", "PORTATO")
+METODI["P-E7"] = (
+    "NATO NELL-ERA 2. I riferimenti esistono: la scheda sul disco, e ### dal 2026-10-09 "
+    "la `voce` di un osservatore RISOLVE nell-indice -- prima era una stringa che "
+    "nessuno verificava",
+    "`csv/_presidi_era2.py::pe7`, `pre-commit` + CI", "PORTATO")
+METODI["P-E8"] = (
+    "NATO NELL-ERA 2, ed e- IL SOLO che NON IMPEDISCE: senza protezione del ramo la CI "
+    "gira DOPO il push. ### E- UNA RETE CHE SEGNALA (`A9`), e qui avevo scritto il "
+    "contrario. ### E non e- mai stata osservata girare",
+    "`.github/workflows/era2.yml`; ### SEGNALA, non impedisce", "PORTATO")
+
 # ### I TRE che la QUARTA versione del mandato aggiunge al punto `0`.
 METODI["CONFIG-1"] = (
     "28 leggi su 31 giravano SPENTE in sei misure, per 140 costanti di modulo. "
@@ -376,6 +428,12 @@ METODI["P-M1"] = (
     "nata, il perimetro lo ha incluso e lui ha RIFIUTATO IL COMMIT chiedendo questa riga. "
     "### Non l-ho previsto: me l-ha detto lui",
     "`csv/_metodi_era2.py::controlla`, cablato nel `pre-commit` e nella CI", "PORTATO")
+METODI["P-C1"] = (
+    "NATO NELL-ERA 2, ed e- il presidio del punto 12(a): il codice dichiara l-ID e la "
+    "macchina verifica la biiezione, con DUE severita- -- un ID dichiarato e non "
+    "nell-indice RIFIUTA, una voce PRESIDIO che nessun codice dichiara SEGNALA (A9). "
+    "### E HA PRESO SE- STESSO, come P-M1",
+    "`csv/_controlli_nell_indice.py::controlla`, `pre-commit` + CI", "PORTATO")
 METODI["AUDIT-CURE"] = (
     "il censimento delle cure e del loro costo: ### IL PUNTO 10 chiede che ogni referto "
     "STAMPI il numero delle leggi, e che un commit che lo aumenta lo DICHIARI",
@@ -482,6 +540,13 @@ def documento():
       "riga**, citato o no. ### **Cosi- una voce `STANDARD` o `PRESIDIO` aggiunta domani "
       "FA RIFIUTARE IL COMMIT** finche- non si dice come si applica — e il documento "
       "### **non puo- invecchiare in silenzio** *(`A9`, `AUTO-MANUTENZIONE`)*.")
+    A("")
+    A("### ⚠ **E IL PERIMETRO E- <<OGNI METODO>>, non <<ogni metodo dell-era `1`>>:** "
+      "alcune righe sono di presidi ### **NATI NELL-ERA `2`** "
+      "*(`P-E1`…`P-E8`, `P-M1`)*, e il loro `come` comincia con "
+      "### **<<NATO NELL-ERA 2>>**. ### ⛔ **Se il perimetro li escludesse, un "
+      "presidio NUOVO sfuggirebbe al documento** — che e- esattamente cio- che "
+      "`P-M1` esiste per impedire.")
     A("")
     cont = {s: 0 for s in STATI}
     for i in METODI:

@@ -43,6 +43,32 @@ NL = chr(10)
 PO = os.path.join(RADICE, "primo_ordine")
 TERMINI = os.path.join(PO, "termini")
 OSSERV = os.path.join(PO, "osservatori")
+
+# =====================================================================================
+#   LA DICHIARAZIONE DELL-ID -- punto `12(a)`
+# -------------------------------------------------------------------------------------
+#   ### ⛔ **UN FILE, OTTO PRESIDI: quindi `PRESIDI` e non `PRESIDIO`.** Un solo
+#   ### `PRESIDIO = "<id>"` non potrebbe nominarne otto, e ### **tenerli in un
+#   ### secondo posto (un registro a parte) sarebbe UNA SECONDA FONTE.**
+#   ### ⭐ **Il valore e- IL BERSAGLIO, e `P-C1` lo VERIFICA:** se e- un nome, la
+#   ### funzione deve esistere nel modulo; se e- un percorso, il file deve esistere.
+#   ### **Una dichiarazione senza niente dietro e- una promessa**, e questo repo ne ha
+#   ### gia- avute.
+#   ### ⚠ **E `P-E8` non e- una funzione: e- la CI.** Il suo bersaglio e- il
+#   ### percorso del workflow, ### **e la sua voce dichiara che SEGNALA e non
+#   ### impedisce.**
+# =====================================================================================
+PRESIDI = {
+    "P-E1": "pe1",
+    "P-E2": "pe2",
+    "P-E3": "pe3",
+    "P-E4": "pe4",
+    "P-E5": "pe5",
+    "P-E6": "pe6",
+    "P-E7": "pe7",
+    "P-E8": ".github/workflows/era2.yml",
+}
+
 SCHEDE = os.path.join(RADICE, "doc", "leggi_era2")
 # ### I MODULI DI FISICA: ### **non importano lo strumento** *(`P-E4`)*.
 FISICA = ("stato.py", "hamiltoniana.py", "passo.py", "crescita.py", "vuoto.py")

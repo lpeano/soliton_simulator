@@ -11219,3 +11219,20 @@ Il mandato chiede una riga per ### **OGNI** metodo dell-era `1`, e ne nomina ###
 ### ⚠ **E IL CENSIMENTO HA TROVATO CHE `P-E1`…`P-E8` NON SONO NELL-INDICE.** Li ho scritti io ieri, ### **sono presidi cablati e senza via d-uscita**, e ### **nessuna voce li nomina** — quindi `P-M1` ### **non li vede**, perche- il perimetro lo calcola ### **dall-indice.** ### ✅ **E- esattamente il punto `12`, che viene subito dopo:** *«ogni controllo ha una VOCE, e il codice dichiara l-ID»*.
 
 **Collaudo `8`/`8`**, nei due versi: una voce `STANDARD` nuova senza riga → ### **scatta** · una riga orfana → ### **scatta** · uno `stato` fuori vocabolario → ### **scatta** · un `NON_SI_APPLICA` senza il perche- → ### **scatta** · ### **e rimesso tutto a posto TACE di nuovo** · ### **e il documento rigenerato e- BYTE-IDENTICO.**
+
+## PUNTO `12(a)` — ### **ANCHE I CONTROLLI STANNO NELL-INDICE** *(2026-10-09)*
+
+### ⛔ **IL BUCO CHE IL PUNTO `0` AVEVA TROVATO E- CHIUSO:** `P-E1`…`P-E8` ### **non erano nell-indice.** Li avevo scritti io, erano ### **cablati e senza via d-uscita**, e ### **nessuna voce li nominava** — quindi `P-M1`, che calcola il perimetro dei metodi ### **dall-indice**, ### **non li vedeva.** ### ✅ **Otto voci nuove**, piu- `P-C1`.
+
+### `P-C1`: ### **la biiezione HA DUE SEVERITA- DIVERSE**, e la differenza non e- arbitraria
+
+| | il caso | che succede | perche- |
+|---|---|---|---|
+| `1` | il codice dichiara un ID ### **non nell-indice** | ### ⛔ **RIFIUTATO** | un riferimento ### **ROTTO** |
+| `2` | una voce `PRESIDIO` che ### **nessun codice dichiara** | ### ⚠ **SEGNALE** | potrebbe vivere ### **in shell** *(i `H-*`)* o essere ### **proposta e non cablata.** ### **Rifiutare un fatto VERO non e- un presidio: e- un impedimento** *(`A9`)* |
+
+### ⭐ **E DUE VOLTE UN PRESIDIO HA PRESO SE- STESSO, senza che lo prevedessi.** `P-M1` ha rifiutato il commit chiedendo la propria riga appena la sua voce e- nata; ### **`P-C1` ha fatto lo stesso** appena ho scritto `PRESIDIO = "P-C1"`. ### **E poi `P-M1` ha chiesto le righe degli otto `P-E*` appena le loro voci sono nate** — ### **tre catene, nessuna prevista da me.**
+
+### ⚠ **E UNA FORMA CHE HO DOVUTO SCEGLIERE, e la dichiaro:** il mandato dice *«il codice dichiara l-ID (`PRESIDIO = "<id>"`)»*, ma ### **`csv/indice.py` tiene DODICI presidi**: un solo `PRESIDIO` ### **non potrebbe nominarli.** ### ✅ **Quindi DUE forme** — `PRESIDIO` per un file con uno, `PRESIDI = {id: bersaglio}` per un file che ne tiene molti — e ### ⭐ **il BERSAGLIO si VERIFICA** *(funzione nel modulo, o file sul disco, via AST)*: ### **una dichiarazione senza niente dietro e- una promessa.**
+
+**I numeri:** `10` presidi dichiarati dal codice, `8` sorgenti guardate, ### **`0` errori e `23` segnali** *(i tredici `H-*`, che vivono in shell, e i proposti)*. ### **`P-M1`: `97` metodi e `97` righe** *(da `88`)*. Collaudi ### **`8`/`8` e `8`/`8`**, nei due versi.

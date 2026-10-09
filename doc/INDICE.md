@@ -12,7 +12,8 @@
 | `FISICA` | `DA_CLASSIFICARE` | 1 |
 | `FISICA` | `ENTRAMBE` | 16 |
 | `INFRASTRUTTURA` | `1` | 39 |
-| `INFRASTRUTTURA` | `ENTRAMBE` | 13 |
+| `INFRASTRUTTURA` | `2` | 8 |
+| `INFRASTRUTTURA` | `ENTRAMBE` | 14 |
 | `METODO` | `1` | 153 |
 | `METODO` | `ENTRAMBE` | 64 |
 
@@ -423,7 +424,16 @@
 | `OKN-ASSERT` | DIFETTO | INFRASTRUTTURA | 1 | ### **CHIUSA** |  | CHIUSA il 2026-09-26, a run finito (residuo rilevato da Luca) / UN getattr(...,  |
 | `OMEGA-ETA` | MISURA | FISICA | 1 | ### **SOSPESA** |  | APERTA il 2026-09-26 (Luca: da seguire nel run base, NON una cura) / IL RAPPORTO |
 | `OSSERVABILE-P1` | DIFETTO | METODO | 1 | ### **CHIUSA** |  | APERTA il 2026-09-26 (rilievo di Luca) / NON ESISTE UNO STRUMENTO UFFICIALE PER  |
+| `P-C1` | PRESIDIO | INFRASTRUTTURA | ENTRAMBE | ### **APERTA** |  | anche i CONTROLLI stanno nell-indice: il codice dichiara l-ID, e la macchina lo  |
 | `P-DECADIMENTO` | STANDARD | FISICA | ENTRAMBE | ### **APERTA** |  | ogni decadimento e una trasformazione: cio che una grandezza perde diventa calor |
+| `P-E1` | PRESIDIO | INFRASTRUTTURA | 2 | ### **AGENDA** |  | la BIIEZIONE fra legge in tabella, file generato, riga di registro e scheda |
+| `P-E2` | PRESIDIO | INFRASTRUTTURA | 2 | ### **AGENDA** |  | l-IMPRONTA: un file generato ritoccato a mano, o una tabella cambiata senza rige |
+| `P-E3` | PRESIDIO | INFRASTRUTTURA | 2 | ### **AGENDA** |  | le VARIABILI nei due versi: tabella, stato.py e registro si corrispondono |
+| `P-E4` | PRESIDIO | INFRASTRUTTURA | 2 | ### **AGENDA** |  | le IMPORTAZIONI: la fisica non importa osservatori/ ne- driver (A17) |
+| `P-E5` | PRESIDIO | INFRASTRUTTURA | 2 | ### **AGENDA** |  | gli OSSERVATORI leggono e non scrivono, e si MISURA AL BYTE |
+| `P-E6` | PRESIDIO | INFRASTRUTTURA | 2 | ### **AGENDA** |  | la tabella che cambia senza la riga di registro e senza l-ID nel messaggio |
+| `P-E7` | PRESIDIO | INFRASTRUTTURA | 2 | ### **AGENDA** |  | i RIFERIMENTI esistono: la scheda sul disco, e la voce di un osservatore nell-in |
+| `P-E8` | PRESIDIO | INFRASTRUTTURA | 2 | ### **AGENDA** |  | la CI: i collaudi girano a ogni push, e FUORI dal PC di Luca -- ma SEGNALA, non  |
 | `P-EQ-MEDIANA-ARCHI` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | P_eq prende la mediana dei PRIMI n ARCHI su m: un sottoinsieme arbitrario, non t |
 | `P-M1` | PRESIDIO | METODO | ENTRAMBE | ### **APERTA** |  | ogni METODO dell-era 1 ha una riga che dice come si applica all-era 2 |
 | `P-MEMORIA` | STANDARD | FISICA | ENTRAMBE | ### **APERTA** |  | uno scalare con memoria acquista un verso: la memoria da la direzione |

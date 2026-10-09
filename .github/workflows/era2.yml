@@ -80,6 +80,11 @@ jobs:
           python primo_ordine/_genera.py
           git diff --exit-code -- primo_ordine doc/leggi_era2
 
+      - name: "### `P-C1` -- anche i controlli stanno nell-indice"
+        run: |
+          python csv/_controlli_nell_indice.py
+          python csv/_controlli_nell_indice.py --collaudo
+
       - name: "### `P-M1` -- il documento dei metodi non invecchia in silenzio"
         # ### Gira sul disco (e RIGENERA il documento), poi il collaudo nei due
         # ### versi, poi `git diff`: un documento scaduto NON passa inosservato.

@@ -2649,7 +2649,7 @@ etichette rimosse, con ### **`0` persi, `0` doppi, `0` conflitti**.
 | | |
 |---|---|
 | **file** | `csv/_presidi_era2.py` |
-| **BLOB** *(sha1 dei byte grezzi)* | `a2514b27` |
+| **BLOB** *(sha1 dei byte grezzi)* | `3a66cdfe` |
 | **COMANDO** | `python csv/_presidi_era2.py` *(sul disco)* · `--collaudo` *(nei due versi, `16`/`16`)* · `--pre-commit` · `--commit-msg FILE` |
 | **cosa impedisce** | `P-E1` la **biiezione** *(tabella ↔ file ↔ registro ↔ scheda)* · `P-E2` **l'impronta** · `P-E3` le **variabili nei due versi** · `P-E4` le **importazioni** *(`A17`)* · `P-E5` gli **osservatori in sola lettura**, misurato **al byte** · `P-E6` la tabella che cambia senza il registro e senza l'ID nel messaggio · `P-E7` i **riferimenti** |
 | ### ⛔ **e `LEGGE` si legge via AST** | una regex la troverebbe ### **anche dentro un commento o una stringa**, e ### **un presidio che si lascia ingannare da un commento non è un presidio** |
@@ -2688,12 +2688,27 @@ etichette rimosse, con ### **`0` persi, `0` doppi, `0` conflitti**.
 | | |
 |---|---|
 | **file** | `csv/_metodi_era2.py` |
-| **BLOB** *(sha1 dei byte grezzi)* | `a40e496c` |
+| **BLOB** *(sha1 dei byte grezzi)* | `f950042e` |
 | **COMANDO** | `python csv/_metodi_era2.py` *(il presidio, e GENERA il documento)* · `--collaudo` *(nei due versi, `8`/`8`)* |
 | **cosa impedisce** | che `doc/METODI_era1_in_era2.md` **invecchi in silenzio**: ### **ogni metodo del perimetro DEVE avere una riga** *(come si applica · dove · stato)*, citato o no |
 | ### ⭐ **e il PERIMETRO lo calcola l'INDICE** | da ### **campi a vocabolario chiuso** *(`classe in (STANDARD, PRESIDIO)`, piu' le cure di architettura che il mandato nomina **per ID**)*. ### ⛔ **Nessun `titolo` e nessuna `descrizione` si leggono per decidere se una voce e' un metodo** — e' il principio del mandato **applicato a se stesso** |
 | ### ⛔ **e `stato` e' a vocabolario CHIUSO** | `PORTATO` · `DA_PORTARE` · `DA_DECIDERE` · `NON_SI_APPLICA`, e ### **un `NON_SI_APPLICA` o un `DA_DECIDERE` DEVE dire il perche'** — *«una risposta senza il perche' non e' una risposta»* *(`L-STELLA`)* |
 | **i numeri** | ### **`88` metodi, `88` righe** *(`PORTATO` `44` · `DA_PORTARE` `30` · `DA_DECIDERE` `5` · `NON_SI_APPLICA` `9`)* |
 | **l'uscita** | `doc/METODI_era1_in_era2.md`, **generato** |
+
+---
+
+### `csv/_controlli_nell_indice.py` — **`P-C1`: ANCHE I CONTROLLI STANNO NELL'INDICE** *(2026-10-09)*
+
+| | |
+|---|---|
+| **file** | `csv/_controlli_nell_indice.py` |
+| **BLOB** *(sha1 dei byte grezzi)* | `1fda339d` |
+| **COMANDO** | `python csv/_controlli_nell_indice.py` *(gli errori e i segnali)* · `--collaudo` *(nei due versi, `8`/`8`)* · `--segnali` |
+| ### ⛔ **cosa RIFIUTA** | il **codice dichiara un ID** che ### **non e' nell'indice** — un presidio che cita un ID inesistente ### **ha un riferimento rotto** · oppure la voce esiste e ### **non ha `classe: PRESIDIO`** |
+| ### ⚠ **cosa SEGNALA e non rifiuta** | una voce `classe: PRESIDIO` che ### **nessun codice dichiara**: potrebbe vivere ### **in shell** *(i `H-*` stanno in `.githooks/`)* o essere ### **proposta e non cablata** *(`H-ETC-1`, `H-ETC-2`)*. ### **Rifiutare un fatto VERO non e' un presidio: e' un impedimento** *(`A9`)* |
+| ### ⭐ **e il BERSAGLIO si verifica** | se e' un nome, ### **la funzione deve esistere nel modulo**; se e' un percorso, ### **il file deve esistere** — letto **via AST**. ### **Una dichiarazione senza niente dietro e' una promessa**, e questo repo ne ha gia' avute |
+| **due forme di dichiarazione** | `PRESIDIO = "<id>"` *(un file, **un** presidio)* · `PRESIDI = {"<id>": "<bersaglio>"}` *(un file che ne tiene **molti**: `csv/indice.py` ne ha **dodici**, e un solo `PRESIDIO` non potrebbe nominarli)* |
+| **i numeri** | `10` presidi dichiarati dal codice · `8` sorgenti guardate · `23` segnali · `0` errori |
 
 ---

@@ -21,3 +21,9 @@ python "$(git rev-parse --show-toplevel)/csv/_presidi_era2.py" --pre-commit || e
 #  ### abbia una riga che dice COME SI APPLICA all'era 2. Una voce `STANDARD` o
 #  ### `PRESIDIO` nuova fa RIFIUTARE il commit finche' non ha la sua riga.
 python "$(git rev-parse --show-toplevel)/csv/_metodi_era2.py" || exit 1
+
+#  `P-C1` -- ANCHE I CONTROLLI STANNO NELL'INDICE.
+#  ### Un ID dichiarato dal codice e NON nell'indice fa RIFIUTARE il commit.
+#  ### Una voce `PRESIDIO` che nessun codice dichiara e' un SEGNALE, non un
+#  ### errore: potrebbe vivere in shell, o essere proposta e non cablata (`A9`).
+python "$(git rev-parse --show-toplevel)/csv/_controlli_nell_indice.py" || exit 1

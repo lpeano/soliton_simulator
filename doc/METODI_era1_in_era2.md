@@ -4,19 +4,21 @@
 
 > ### ⭐ **E IL PRESIDIO `P-M1` E- LA FORMA FORTE DI *<<un metodo citato senza riga e- rifiutato>>*:** pretende che ### **OGNI metodo del perimetro abbia una riga**, citato o no. ### **Cosi- una voce `STANDARD` o `PRESIDIO` aggiunta domani FA RIFIUTARE IL COMMIT** finche- non si dice come si applica — e il documento ### **non puo- invecchiare in silenzio** *(`A9`, `AUTO-MANUTENZIONE`)*.
 
+### ⚠ **E IL PERIMETRO E- <<OGNI METODO>>, non <<ogni metodo dell-era `1`>>:** alcune righe sono di presidi ### **NATI NELL-ERA `2`** *(`P-E1`…`P-E8`, `P-M1`)*, e il loro `come` comincia con ### **<<NATO NELL-ERA 2>>**. ### ⛔ **Se il perimetro li escludesse, un presidio NUOVO sfuggirebbe al documento** — che e- esattamente cio- che `P-M1` esiste per impedire.
+
 | | quanti |
 |---|--:|
-| **`PORTATO`** | `44` |
+| **`PORTATO`** | `53` |
 | **`DA_PORTARE`** | `30` |
 | **`DA_DECIDERE`** | `5` |
 | **`NON_SI_APPLICA`** | `9` |
-| **in tutto** | ### **`88`** |
+| **in tutto** | ### **`97`** |
 
-### ⚠ **E IL NUMERO `88` E- MISURATO, non stimato:** viene dal perimetro che l-indice calcola, e ### **il mandato ne nominava <<una decina>>** per nome piu- *<<e le cure di architettura>>*. ### **La decina era `20`.**
+### ⚠ **E IL NUMERO `97` E- MISURATO, non stimato:** viene dal perimetro che l-indice calcola, e ### **il mandato ne nominava <<una decina>>** per nome piu- *<<e le cure di architettura>>*. ### **La decina era `20`.**
 
 ---
 
-## `PORTATO` — `44` metodi
+## `PORTATO` — `53` metodi
 
 > ### ✅ **GIA- NELL-ERA `2`**, e `dove` dice dove
 
@@ -49,6 +51,15 @@
 | **`L-SOGLIA`** | `STANDARD` | una soglia non si calcola dai dati che giudica, e si collauda sul caso nullo: ### SUPERATA nell-era 1. Nell-era 2 le tolleranze sono DICHIARATE a priori (`TOLL_IM`, `toll` del punto fisso), non calcolate dai dati | i moduli generati + `passo.py` |
 | **`L-STELLA`** | `STANDARD` | le cinque domande per iscritto nel task history: ### FATTE per la tappa 5, e LA 3 HA TROVATO UN DIFETTO -- la dipendenza del cono globale dalla tolleranza | `doc/TASK_HISTORY/2026-10-09_era2_infrastruttura.md` |
 | **`L-UN-PROMPT`** | `STANDARD` | un prompt alla volta, i rilievi in CODA: in questo mandato sono arrivate SEI voci di coda, tutte registrate e nessuna eseguita fuori ordine | `doc/CODA_2026-10-09.md` |
+| **`P-C1`** | `PRESIDIO` | NATO NELL-ERA 2, ed e- il presidio del punto 12(a): il codice dichiara l-ID e la macchina verifica la biiezione, con DUE severita- -- un ID dichiarato e non nell-indice RIFIUTA, una voce PRESIDIO che nessun codice dichiara SEGNALA (A9). ### E HA PRESO SE- STESSO, come P-M1 | `csv/_controlli_nell_indice.py::controlla`, `pre-commit` + CI |
+| **`P-E1`** | `PRESIDIO` | NATO NELL-ERA 2. La BIIEZIONE fra legge in tabella, file generato, riga di registro e scheda, nei DUE VERSI, e `LEGGE` si legge VIA AST. ### Allargato agli OSSERVATORI il 2026-10-09: prima un osservatore in tabella era INVISIBILE alla biiezione | `csv/_presidi_era2.py::pe1`, `pre-commit` + CI, SENZA via d-uscita |
+| **`P-E2`** | `PRESIDIO` | NATO NELL-ERA 2. L-IMPRONTA: un generato ritoccato a mano, o una tabella cambiata senza rigenerare. ### SI RIGENERA, NON SI CORREGGE IL FILE -- e la CI rigenera e fa `git diff --exit-code` | `csv/_presidi_era2.py::pe2`, `pre-commit` + CI |
+| **`P-E3`** | `PRESIDIO` | NATO NELL-ERA 2. Le variabili nei due versi: una variabile dichiarata in DUE POSTI divergerebbe, e per questo `stato.py` SI GENERA | `csv/_presidi_era2.py::pe3`, `pre-commit` + CI |
+| **`P-E4`** | `PRESIDIO` | NATO NELL-ERA 2, ed e- `A17` cablato: la fisica non importa `osservatori/` ne- `driver`. ### E HA IMPOSTO UNA FORMA: il collaudo del cono misura la NORMA, che e- un osservatore, quindi e- dovuto andare in un file SUO | `csv/_presidi_era2.py::pe4`, `pre-commit` + CI |
+| **`P-E5`** | `PRESIDIO` | NATO NELL-ERA 2. Gli osservatori leggono, e si MISURA AL BYTE. ### Fino al 2026-10-09 PASSAVA A VUOTO e lo diceva da se-: un braccio vero e vuoto non e- una misura. Con `PROVA-NORMA` ha materia | `csv/_presidi_era2.py::pe5`, `pre-commit` + CI |
+| **`P-E6`** | `PRESIDIO` | NATO NELL-ERA 2. La tabella che cambia senza la riga di registro e senza l-ID nel messaggio: lega il cambiamento della fonte unica alla sua tracciabilita- | `csv/_presidi_era2.py::pe6`, stadio `commit-msg` |
+| **`P-E7`** | `PRESIDIO` | NATO NELL-ERA 2. I riferimenti esistono: la scheda sul disco, e ### dal 2026-10-09 la `voce` di un osservatore RISOLVE nell-indice -- prima era una stringa che nessuno verificava | `csv/_presidi_era2.py::pe7`, `pre-commit` + CI |
+| **`P-E8`** | `PRESIDIO` | NATO NELL-ERA 2, ed e- IL SOLO che NON IMPEDISCE: senza protezione del ramo la CI gira DOPO il push. ### E- UNA RETE CHE SEGNALA (`A9`), e qui avevo scritto il contrario. ### E non e- mai stata osservata girare | `.github/workflows/era2.yml`; ### SEGNALA, non impedisce |
 | **`P-M1`** | `PRESIDIO` | e- il presidio di questo punto: ### SI APPLICA A SE- STESSO -- appena la sua voce e- nata, il perimetro lo ha incluso e lui ha RIFIUTATO IL COMMIT chiedendo questa riga. ### Non l-ho previsto: me l-ha detto lui | `csv/_metodi_era2.py::controlla`, cablato nel `pre-commit` e nella CI |
 | **`P1`** | `STANDARD` | non usare l-associazione senza verificare lo storico: in questo mandato ho riletto dal disco prima di ogni cura, e due volte la rilettura mi ha smentito | metodo, non codice |
 | **`P1-bis`** | `STANDARD` | la relazione si scrive nello stesso commit del riscontro: ogni commit di questo mandato ha il suo paragrafo | `RELAZIONE_PER_CLAUDE.md` + `H-P1-bis` |
