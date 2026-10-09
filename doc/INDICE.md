@@ -8,7 +8,7 @@
 | `DOCUMENTAZIONE` | `1` | 11 |
 | `DOCUMENTAZIONE` | `ENTRAMBE` | 5 |
 | `FISICA` | `1` | 336 |
-| `FISICA` | `2` | 24 |
+| `FISICA` | `2` | 25 |
 | `FISICA` | `DA_CLASSIFICARE` | 1 |
 | `FISICA` | `ENTRAMBE` | 16 |
 | `INFRASTRUTTURA` | `1` | 39 |
@@ -394,6 +394,7 @@
 | `MEM-HEBB-VERSO` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | memoria_hebbiana_moto dipende dal verso dell'arco: d0 cambia segno e lo shift va |
 | `MEM-VERSO` | CURA | FISICA | 2 | ### **AGENDA** |  | il verso dell arco dalla sua MEMORIA (delta = twp - tw) invece che dal segno ist |
 | `MEMORIE-MANCANTI` | DIFETTO | FISICA | 2 | ### **AGENDA** |  | il rapporto sulle memorie: il censimento dello stato, il bilancio, e le memorie  |
+| `MISURA-NORMA-ERA2` | MISURA | FISICA | 2 | ### **AGENDA** |  | la norma totale sum_nodi psi^dag psi: l-invariante QUADRATICO su cui si misura l |
 | `MITOSI-2LAM-ACCESO` | DIFETTO | DOCUMENTAZIONE | 1 | ### **CHIUSA** |  | il piano dichiara MITOSI_2LAM e PLAST_DIN OFF, e il DRIVER li ACCENDE: --mitosi- |
 | `MITOSI-NON-DIVISA` | MISURA | INFRASTRUTTURA | 1 | ### **CHIUSA** |  | la mitosi NON si spezza per TIPO restando byte-identica: struttura e stato si al |
 | `MITOSI-SOGLIA-GRAD` | DIFETTO | FISICA | 1 | ### **CHIUSA** |  | la soglia di mitosi si abbassa col gradiente di tempo proprio: ampiezza 0.3 e ta |

@@ -72,23 +72,40 @@ def _generati():
     `LEGGE` ### **anche dentro un commento o una stringa**, e ### **un presidio che si
     lascia ingannare da un commento non e- un presidio.**
     """
+    # ### ⛔ **DUE CARTELLE, UNA SOLA BIIEZIONE.** Prima si guardava SOLO
+    # ### `termini/`, e ### **un osservatore in tabella era INVISIBILE a `P-E1`:**
+    # ### la tabella lo dichiarava, e ### **nessuno verificava che il file ci fosse.**
+    # ### ⚠ **La chiave resta l-ID**, e il valore porta ### **il percorso CON la
+    # ### cartella**, cosi- il messaggio di `P-E2` dice DOVE sta il file.
     fuori = {}
-    for f in sorted(os.listdir(TERMINI)):
-        if not f.endswith(".py") or f == "__init__.py":
+    for sotto, base in (("termini", TERMINI), ("osservatori", OSSERV)):
+        if not os.path.isdir(base):
             continue
-        p = os.path.join(TERMINI, f)
-        arb = ast.parse(io.open(p, encoding="utf-8").read(), filename=p)
-        d = {}
-        for n in arb.body:
-            if isinstance(n, ast.Assign) and len(n.targets) == 1 \
-                    and isinstance(n.targets[0], ast.Name):
-                try:
-                    d[n.targets[0].id] = ast.literal_eval(n.value)
-                except Exception:
-                    pass
-        if "LEGGE" in d:
-            fuori[d["LEGGE"]] = (f, d)
+        for f in sorted(os.listdir(base)):
+            if not f.endswith(".py") or f == "__init__.py":
+                continue
+            d = _costanti(os.path.join(base, f))
+            if "LEGGE" in d:
+                fuori[d["LEGGE"]] = (sotto + "/" + f, d)
     return fuori
+
+
+def _costanti(p):
+    """### Le costanti di modulo di UN file, lette ### **via AST.**
+
+    ### ⛔ **Via AST e non per regex**, e il mandato lo chiede: una regex
+    troverebbe `LEGGE` ### **anche dentro un commento o una stringa.**
+    """
+    arb = ast.parse(io.open(p, encoding="utf-8").read(), filename=p)
+    d = {}
+    for n in arb.body:
+        if isinstance(n, ast.Assign) and len(n.targets) == 1 \
+                and isinstance(n.targets[0], ast.Name):
+            try:
+                d[n.targets[0].id] = ast.literal_eval(n.value)
+            except Exception:
+                pass
+    return d
 
 
 def _impronta(riga):
@@ -103,7 +120,12 @@ def _impronta(riga):
 def pe1(leggi, gen, reg_l):
     """### `P-E1`: la ### **BIIEZIONE** fra i quattro posti."""
     err = []
-    t = {x["id"] for x in leggi if x["tipo"] in ("termine_nodo", "termine_arco")}
+    # ### \u26d4 **ANCHE GLI OSSERVATORI.** Il mandato chiede la biiezione fra
+    # ### ### **legge, file, voce del registro e scheda**, e un osservatore
+    # ### ### **E- UNA LEGGE DELLA TABELLA.** Tenerlo fuori avrebbe reso la biiezione
+    # ### vera ### **solo sui tipi che avevo implementato**, che non e- la stessa cosa.
+    t = {x["id"] for x in leggi
+         if x["tipo"] in ("termine_nodo", "termine_arco", "osservatore")}
     g = set(gen)
     r = {x["id"] for x in reg_l}
     s = {f[:-3] for f in os.listdir(SCHEDE) if f.endswith(".md")} \
@@ -130,7 +152,7 @@ def pe2(leggi, gen, varia):
             continue
         atteso = _impronta(per[idv])
         if d.get("IMPRONTA") != atteso:
-            err.append("`P-E2` `%s`: il file `termini/%s` porta l-impronta `%s`, e la riga "
+            err.append("`P-E2` `%s`: il file `%s` porta l-impronta `%s`, e la riga "
                        "di tabella da- `%s`. ### IL FILE E- STATO TOCCATO A MANO, o la "
                        "tabella e- cambiata senza rigenerare: si rigenera, NON si corregge "
                        "il file" % (idv, f, d.get("IMPRONTA"), atteso))
@@ -204,6 +226,15 @@ def pe4():
     return err
 
 
+def _voci():
+    """### Le voci dell-indice *(`doc/indice/voci.jsonl`)*, per `P-E7`."""
+    p = os.path.join(RADICE, "doc", "indice", "voci.jsonl")
+    if not os.path.exists(p):
+        return []
+    return [json.loads(r) for r in io.open(p, encoding="utf-8").read().split(NL)
+            if r.strip()]
+
+
 def pe7(reg_l, reg_v, leggi, varia):
     """### `P-E7`: i ### **riferimenti** delle righe dei registri esistono."""
     err = []
@@ -216,6 +247,22 @@ def pe7(reg_l, reg_v, leggi, varia):
         if not os.path.exists(os.path.join(RADICE, x.get("scheda", ""))):
             err.append("`P-E7` `%s`: la scheda `%s` non esiste"
                        % (x["id"], x.get("scheda")))
+    # ### ⛔ **IL CAMPO `voce` DI UN OSSERVATORE DEVE RISOLVERE NELL-INDICE.**
+    # ### Il mandato chiede la biiezione fra ### **legge, file, VOCE DELL-INDICE e
+    # ### scheda**, e prima di questo controllo `voce` era ### **una stringa che
+    # ### nessuno verificava**: un ID inventato sarebbe passato.
+    # ### ⚠ **Vale SOLO per l-osservatore**, perche- lo schema lo pretende solo
+    # ### a lui -- e un termine di prova ha `voce: "-"` per dire ### **che non ne
+    # ### ha**, cosa diversa da un ID sbagliato.
+    voci = {v["id"] for v in _voci()}
+    for x in leggi:
+        if x["tipo"] != "osservatore":
+            continue
+        if x.get("voce") not in voci:
+            err.append("`P-E7` `%s`: l-osservatore dichiara la voce `%s`, che NON E- "
+                       "NELL-INDICE. ### Una voce dichiarata e non esistente e- un "
+                       "riferimento ROTTO, e il campo serviva proprio a non averne"
+                       % (x["id"], x.get("voce")))
     for x in reg_v:
         if x["nome"] not in nomi_v:
             err.append("`P-E7` `%s`: la riga di `variabili.jsonl` nomina `%s`, che non e- "
@@ -348,8 +395,43 @@ def collaudo():
     print("=" * 100)
     esito("sul disco: `P-E1`, `P-E2`, `P-E3`, `P-E4`, `P-E7` TACCIONO",
           tutti(verboso=False) == [], "la catena e- in biiezione OGGI")
+    # ### ⛔ **LA NOTA DI PRIMA DICEVA <<zero osservatori oggi: il braccio e-
+    # ### VERO e VUOTO>>, ed ERA VERA. ORA E- FALSA**, perche- `PROVA-NORMA`
+    # ### esiste -- e ### **una nota che dice il falso e- peggio di nessuna nota.**
+    # ### ⚠ **Quindi il numero SI CONTA**, non si asserisce.
+    _n_oss = len([f for f in os.listdir(OSSERV)
+                  if f.endswith(".py") and f != "__init__.py"]) \
+        if os.path.isdir(OSSERV) else 0
     esito("`P-E5`: gli osservatori NON scrivono", pe5(verboso=False) == [],
-          "zero osservatori oggi: il braccio e- VERO e VUOTO, e lo dico")
+          ("%d osservatori, lo stato e- BYTE-IDENTICO" % _n_oss) if _n_oss
+          else "### ZERO osservatori: IL BRACCIO E- VERO E VUOTO, e lo dico")
+    esito("### il braccio di `P-E5` HA MATERIA (almeno un osservatore)", _n_oss > 0,
+          "### se fosse 0, il braccio sopra sarebbe un FALSO-UNO")
+    # ### ⛔ **IL CASO CHE DEVE FALLIRE: UN OSSERVATORE CHE SCRIVE LO STATO.**
+    # ### E- uno dei sei che la tappa 5 pretende, e ### **si prova per davvero:**
+    # ### si scrive un osservatore che tocca `st`, si fa girare `P-E5`, e si
+    # ### verifica che scatti ### **per la chiave giusta.**
+    _p = os.path.join(OSSERV, "_prova_scrive.py")
+    try:
+        io.open(_p, "w", encoding="utf-8", newline=NL).write(NL.join([
+            "# -*- coding: utf-8 -*-",
+            "LEGGE = 'PROVA-SCRIVE'",
+            "TIPO = 'osservatore'",
+            "",
+            "",
+            "def misura(st):",
+            "    st['psi'][0, 0] += 1.0",
+            "    return 0.0",
+        ]) + NL)
+        esito("### DEVE scattare: un OSSERVATORE CHE SCRIVE lo stato",
+              any("ha SCRITTO" in e for e in pe5(verboso=False)),
+              "`A17`: lo strumento non e- fisica, e NON la cambia")
+    finally:
+        if os.path.exists(_p):
+            os.remove(_p)
+    esito("NON deve scattare: tolto quello finto, `P-E5` TACE di nuovo",
+          pe5(verboso=False) == [],
+          "### il braccio di sopra scattava per LUI, non per un residuo")
     print()
     print("  (a) `P-E1` -- LA BIIEZIONE")
     esito("### DEVE scattare: una legge in tabella SENZA file generato",

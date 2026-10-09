@@ -2552,8 +2552,8 @@ etichette rimosse, con ### **`0` persi, `0` doppi, `0` conflitti**.
 
 | | |
 |---|---|
-| **i file** | `csv/_file_fisica.py` *(BLOB `a7a5ef99`)* · `csv/_collaudo_file_fisica.py` *(BLOB `8cc5f427`)* |
-| **COMANDO** | `python csv/_file_fisica.py` *(che cosa sorveglia, e che cosa no)* · `python csv/_collaudo_file_fisica.py` *(il collaudo, `12`/`12`)*
+| **i file** | `csv/_file_fisica.py` *(BLOB `7453444d`)* · `csv/_collaudo_file_fisica.py` *(BLOB `8cc5f427`)* |
+| **COMANDO** | `python csv/_file_fisica.py` *(che cosa sorveglia, e che cosa no)* · `python csv/_collaudo_file_fisica.py` *(il collaudo, `17`/`17`)*
 | **cosa misura** | **due costanti**: la LISTA dei file di fisica sorvegliati *(oggi `soliton_simulator.py`)* e la CARTELLA del codice dell'era `2`, **vuota** |
 | ### ⛔ **la CARTELLA è VUOTA, e il nome lo decide Luca** | *«NON la scegli tu»*. ### ⚠ **Quindi `H-FISICA-FUORI-LISTA` oggi NON IMPEDISCE NIENTE** — per `A9` **non è un presidio, è una TENDA**, e il referto lo dichiara |
 | ### ✔ **e allora il collaudo gira ALTROVE** | si copia `_file_fisica.py` in una cartella temporanea, si scrive **un nome di prova nella costante della COPIA**, e si fanno scattare i casi. **Il presidio diventa vero cambiando UNA STRINGA** |
@@ -2635,12 +2635,12 @@ etichette rimosse, con ### **`0` persi, `0` doppi, `0` conflitti**.
 | | |
 |---|---|
 | **file** | `primo_ordine/_genera.py` |
-| **BLOB** *(sha1 dei byte grezzi)* | `098c7c1c` |
-| **COMANDO** | `python primo_ordine/_genera.py` *(genera)* · `python primo_ordine/_genera.py --prova` *(il collaudo, `9`/`9`)* |
+| **BLOB** *(sha1 dei byte grezzi)* | `0428e9c7` |
+| **COMANDO** | `python primo_ordine/_genera.py` *(genera)* · `python primo_ordine/_genera.py --prova` *(il collaudo, `13`/`13`)* |
 | **cosa misura** | `(a)` i simboli liberi **dentro l'ambiente** e `pos` **mai**; `(b)` **`dH/dpsi*` simbolica** *(Wirtinger)*; `(c)` il **modulo numpy** con `LEGGE` e **l'IMPRONTA**; `(d)` la **scheda** |
 | ### ⭐ **e i nomi dei simboli SONO i nomi delle locali** | così l'espressione stampata da `sympy` ### **è già il codice**: ### **nessuna sostituzione testuale** fra la derivata e il file — e una sostituzione è ### **un posto dove la formula può cambiare senza che nessuno lo veda** |
 | ### ⛔ **e i simboli dei vicini NON ESISTONO** per un `termine_nodo` | è il ### **secondo** presidio contro *«un termine di nodo che vede i vicini»*: il primo è l'ambito nello schema |
-| **l'uscita** | `primo_ordine/termini/<id>.py` · `doc/leggi_era2/<id>.md` |
+| **l'uscita** | `primo_ordine/termini/<id>.py` *(i termini)* · ### **`primo_ordine/osservatori/<id>.py`** *(gli osservatori)* · `doc/leggi_era2/<id>.md` |
 
 ---
 
@@ -2649,8 +2649,8 @@ etichette rimosse, con ### **`0` persi, `0` doppi, `0` conflitti**.
 | | |
 |---|---|
 | **file** | `csv/_presidi_era2.py` |
-| **BLOB** *(sha1 dei byte grezzi)* | `c5613748` |
-| **COMANDO** | `python csv/_presidi_era2.py` *(sul disco)* · `--collaudo` *(nei due versi, `13`/`13`)* · `--pre-commit` · `--commit-msg FILE` |
+| **BLOB** *(sha1 dei byte grezzi)* | `a2514b27` |
+| **COMANDO** | `python csv/_presidi_era2.py` *(sul disco)* · `--collaudo` *(nei due versi, `16`/`16`)* · `--pre-commit` · `--commit-msg FILE` |
 | **cosa impedisce** | `P-E1` la **biiezione** *(tabella ↔ file ↔ registro ↔ scheda)* · `P-E2` **l'impronta** · `P-E3` le **variabili nei due versi** · `P-E4` le **importazioni** *(`A17`)* · `P-E5` gli **osservatori in sola lettura**, misurato **al byte** · `P-E6` la tabella che cambia senza il registro e senza l'ID nel messaggio · `P-E7` i **riferimenti** |
 | ### ⛔ **e `LEGGE` si legge via AST** | una regex la troverebbe ### **anche dentro un commento o una stringa**, e ### **un presidio che si lascia ingannare da un commento non è un presidio** |
 | ### ⛔ **NESSUNA via d'uscita** | e ### **la sua ASSENZA è il presidio**: la prima stesura definiva una regex `_FUGA` ### **senza leggerla mai**, come promemoria — ### **codice morto che INVITA una scappatoia che il mandato vieta** |

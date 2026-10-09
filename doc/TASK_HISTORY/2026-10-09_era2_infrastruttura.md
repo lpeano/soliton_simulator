@@ -113,7 +113,9 @@ vera, che ### **non è decisa.**
 ## ③ TODO DEL NEXT STEP — *la lista operativa*
 
 - [ ] `1` — la struttura + ### **la LISTA estesa** *(`SCHEDA_NEL_REGISTRO`)*
-- [ ] `2` — `leggi/leggi.yaml`, `leggi/osservatori.yaml`, lo schema validato
+- [x] `2` — `leggi/leggi.yaml`, ~~`leggi/osservatori.yaml`~~, lo schema validato
+
+  > ### ⚠ **ANNOTAZIONE DELLA TAPPA `5b`** *(e NON una riscrittura: il par.`8` dice che un ragionamento rivelato sbagliato ### **si ANNOTA**)*. ### ⛔ **`leggi/osservatori.yaml` E- STATO TOLTO.** L-avevo progettato ### **separato** perche- *«un osservatore non e- fisica, e tenerlo con le leggi inviterebbe a scriverci una legge travestita da misura»*. ### **Il ragionamento era buono e la forma sbagliata:** quella separazione decide ### **dalla posizione del file** cio- che va deciso ### **da un campo** *(`tipo: osservatore`)* — ed e- ### **la stessa forma dell-errore** che il principio della coda nomina. ### **Costava DUE fonti e DUE biiezioni, e il file era VUOTO e nessuno lo leggeva.** `PROVA-NORMA` sta in `leggi.yaml`, con gli altri.
 - [ ] `3` — `_genera.py`: ambito, `dH/dpsi*`, modulo numerico, scheda
 - [ ] `4` — `P-E1`…`P-E8`, e ### **la CI su GitHub**
 - [ ] `5` — il collaudo della catena e ### **i sei casi che DEVONO fallire**

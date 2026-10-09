@@ -11093,3 +11093,25 @@ Collaudo del generatore ### **`9`/`9`**; `dH/dpsi*` generata contro la differenz
 ### ✔ **E ALLORA L'ORDINE CANONICO NON E- UN ORNAMENTO: E- CIO- CHE RENDE LA SOMMA RIPRODUCIBILE** — e l'ho reso ### **imposto anche su una lista data** *(`sorted` dentro `gradiente()`)*. ### ⚠ **Ma cosi' il collaudo «permuta i termini → byte-identico» sarebbe VERO PER COSTRUZIONE: un FALSO-UNO.** ### ✔ **Quindi c'e- `gradiente_grezzo()`, che somma NELL'ORDINE DATO e serve SOLO al collaudo:** con quella una permutazione ### **cambia i bit**, e la coppia di misure prova ### **che il `sorted` fa un lavoro vero.**
 
 ### ⛔ **E IL MANDATO NON E' CHIUSO.** Restano lo ### **schedulatore a STRATI**, i ### **due integratori candidati**, il ### **cono di causalita'**, i ### **sei casi che DEVONO fallire** e il ### **referto** — piu' le tre integrazioni arrivate a mandato aperto. ### **Ogni tappa fatta e' committata e pushata**, e il repo e' valido: era la ragione per cui il mandato chiedeva un commit per tappa.
+
+## TAPPA `5b` — ### **L-OSSERVATORE, e il buco che apriva** *(2026-10-09)*
+
+Il mandato chiede, nella tappa `5`, ### **almeno un osservatore**, e la ragione e- scritta nel collaudo dei presidi: `P-E5` *(«gli osservatori non scrivono lo stato»)* dichiarava da se- ### **«zero osservatori oggi: il braccio e- VERO e VUOTO, e lo dico»**. ### **Un braccio vero e vuoto non e- una misura.**
+
+**Fatto:** `PROVA-NORMA`, un `osservatore` in `leggi.yaml`, ### **generato** in `primo_ordine/osservatori/prova_norma.py` con la sua scheda. Misura `sum_nodi psi^dag psi`. ### **Non ha `gradiente()`**, e non per dimenticanza: non entra in `H`, quindi ### **non ha derivata** — e il generatore ### **non gliene calcola una.**
+
+### ⛔ **MA LA PARTE CHE CONTA E- UN-ALTRA, ed e- un buco che stavo per aprire.** `P-E1` *(la biiezione)* filtrava ### **`tipo in (termine_nodo, termine_arco)`**, e `_generati()` guardava ### **solo `termini/`**. ### **Quindi un osservatore in tabella sarebbe stato INVISIBILE alla biiezione:** la tabella lo dichiarava e ### **nessuno verificava che il file esistesse.** ### **Aggiungere l-osservatore senza allargare il presidio avrebbe aperto un buco invece di chiuderne uno.**
+
+**Allargati, nello stesso commit:**
+
+| | |
+|---|---|
+| `P-E1` | la biiezione include ### **`osservatore`**, e `_generati()` legge ### **due cartelle** *(`termini/` e `osservatori/`)*, sempre ### **via AST** |
+| `P-E2` | l-impronta: il messaggio dice ora ### **il percorso con la cartella**, non `termini/` per forza |
+| `P-E7` | ### ⭐ **il campo `voce` di un osservatore DEVE risolvere in `voci.jsonl`.** Prima era ### **una stringa che nessuno verificava**, e ### **un ID inventato sarebbe passato** — il campo serviva proprio a non averne |
+
+### ✅ **E LA VOCE ESISTE DAVVERO:** `MISURA-NORMA-ERA2` *(classe `MISURA`, era `2`, stato `AGENDA`)*, nata dalla ### **via unica** *(`crea-lotto`)*. ### ⚠ **E il validatore mi ha fermato una volta:** ho provato a crearla ### **prima** della riga di registro di `PROVA-NORMA`, e ha detto *«leggi `PROVA-NORMA` NON e- nel registro»*. ### **Ordine giusto: tabella → genera → registro → voce.**
+
+**I numeri:** il collaudo dei presidi va da `13`/`13` a ### **`16`/`16`** *(il braccio di `P-E5` ora ### **conta** gli osservatori invece di asserire che sono zero; piu- ### **il caso che DEVE fallire** — un osservatore che scrive lo stato — piu- il controllo che tolto quello finto `P-E5` ### **taccia di nuovo**)*. Schema `25`/`25`, generatore `13`/`13`, controlli `6`/`6`, `valida` passa, `era2-valida`: `3` leggi e `1` variabile. ### **La rigenerazione e- IDEMPOTENTE su `9` file generati**, verificato per sha1.
+
+### ⚠ **E UN NUMERO DELL-INVENTARIO ERA GIA- SCADUTO:** diceva che il collaudo del generatore e- `9`/`9`, ed e- `13`/`13` ### **da ieri.** Corretto qui, insieme ai due blob.

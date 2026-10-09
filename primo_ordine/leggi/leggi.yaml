@@ -99,3 +99,22 @@ leggi:
       termine di nodo CIECO sui vicini -- i simboli `psi_i`/`psi_j` NON ESISTONO nel suo
       ambiente. ### Soddisfa `A17` perche' non nomina nessuna posizione: non potrebbe,
       il simbolo e' VIETATO.
+
+  # ------------------------------------------------------------------ l-osservatore
+  #     ### UN OSSERVATORE LEGGE E NON SCRIVE, e `P-E5` NON SI FIDA della regola
+  #     ### scritta: fa girare `misura()` e confronta lo stato AL BYTE.
+  - id: PROVA-NORMA
+    tipo: osservatore
+    prova: true
+    espressione: psi_0c*psi_0 + psi_1c*psi_1
+    ambito: [psi]
+    voce: MISURA-NORMA-ERA2
+    assiomi: [A16, A17]
+    scheda: >-
+      La NORMA TOTALE, somma su tutti i nodi di psi^dag psi. Serve a due cose, e
+      nessuna delle due e' fisica: (1) rendere `P-E5` UNA MISURA invece di un braccio
+      vero e vuoto -- prima di questa riga non c'era NESSUN osservatore, e il presidio
+      passava senza provare niente; (2) dare all'integratore la grandezza su cui si
+      misura la conservazione, perche' la norma e' l'invariante QUADRATICO che un
+      metodo simmetrico conserva. ### Soddisfa `A17` perche' e' DICHIARATO strumento:
+      non entra in H, non ha gradiente, e il generatore non gliene calcola uno.

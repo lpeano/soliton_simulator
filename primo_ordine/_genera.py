@@ -48,6 +48,7 @@ NL = chr(10)
 Q3 = chr(34) * 3
 TABELLA = os.path.join(_QUI, "leggi", "leggi.yaml")
 TERMINI = os.path.join(_QUI, "termini")
+OSSERVATORI = os.path.join(_QUI, "osservatori")
 SCHEDE = os.path.join(RADICE, "doc", "leggi_era2")
 
 
@@ -328,6 +329,54 @@ def modulo(legge, variabili, e, grad, imp):
 #   (d) LA SCHEDA
 # =====================================================================================
 
+def modulo_osservatore(legge, variabili, e, imp):
+    """### Il modulo di un ### **osservatore**: ### **`misura()`, e NIENTE ALTRO.**
+
+    ### ⛔ **Non ha `gradiente()`, e non per dimenticanza:** un osservatore
+    ### **non entra in `H`**, quindi ### **non ha derivata** -- e se un giorno la
+    avesse, vorrebbe dire che ### **non era uno strumento** *(`A17`)*.
+    """
+    idv = legge["id"]
+    L = ["# -*- coding: utf-8 -*-",
+         Q3 + "GENERATO da `primo_ordine/leggi/leggi.yaml` — "
+         "### **NON si modifica a mano.**",
+         "",
+         "### ⛔ **UN OSSERVATORE LEGGE.** `P-E5` fa girare `misura()` e "
+         "confronta lo stato ### **AL BYTE** prima e dopo: ### **una scrittura, "
+         "anche involontaria, e- un ERRORE** *(`A17`)*.",
+         "",
+         "### **La scheda:** `doc/leggi_era2/%s.md`." % idv,
+         Q3,
+         "import numpy as np",
+         "",
+         "# ### L-ID: `P-E1` lo legge ### **via AST**, non per regex.",
+         "LEGGE = %r" % idv,
+         "IMPRONTA = %r" % imp,
+         "TIPO = %r" % legge["tipo"],
+         "AMBITO = %r" % (tuple(legge["ambito"]),),
+         "PROVA = %r" % bool(legge["prova"]),
+         "# ### LA VOCE che questo osservatore MISURA: `P-E7` la verifica.",
+         "VOCE = %r" % legge["voce"],
+         "TOLL_IM = 1e-10",
+         "",
+         ""]
+    L += ["def misura(st):",
+          '    """### Il valore misurato. ### **Reale, e NON tocca `st`.**"""']
+    L += _locali(legge, variabili)
+    L += ["    _e = %s" % _npy(e),
+          "    _s = np.sum(_e)",
+          "    # ### " + chr(0x26D4) + " NON `np.real`: lo stesso motivo dei",
+          "    # ### termini (`A8`). L-espressione e- VERIFICATA REALE",
+          "    # ### SIMBOLICAMENTE dal generatore, e questo assert e- la rete",
+          "    # ### SOTTO quella verifica.",
+          "    _im = abs(float(np.imag(_s)))",
+          "    assert _im <= TOLL_IM * max(abs(float(np.real(_s))), 1.0), (",
+          "        '%s: |Im| = ' % LEGGE + repr(_im)",
+          "        + ' oltre la tolleranza ' + repr(TOLL_IM))",
+          "    return float(np.real(_s))",
+          ""]
+    return NL.join(L) + NL
+
 def scheda(legge, e, grad, imp):
     idv = legge["id"]
     L = ["# `%s`%s" % (idv, "  — ### ⚠ **PROVA: NON E' FISICA DECISA**"
@@ -358,13 +407,19 @@ def scheda(legge, e, grad, imp):
         for k, d in sorted(legge["parametri"].items()):
             L += ["| `%s` | `%s` | %s |" % (k, d["valore"], d["origine"])]
         L += [""]
-    L += ["## LA DERIVATA, GENERATA", "",
-          "> ### ⭐ **`dH/dpsi*` per differenziazione simbolica**, con `psi` e `psi*` "
-          "### **simboli INDIPENDENTI** *(Wirtinger)*. ### **Non e' scritta a mano in "
-          "nessun posto.**", "",
-          "| rispetto a | `dH/d(...)` |", "|---|---|"]
-    for c, g in sorted(grad.items()):
-        L += ["| `%s` | `%s` |" % (c, g)]
+    if legge["tipo"] == "osservatore":
+        L += ["| **la voce che misura** | `%s` |" % legge["voce"], ""]
+    # ### \u26d4 **LA SEZIONE DELLA DERIVATA SOLO SE C-E- UNA DERIVATA:** un
+    # ### osservatore non entra in `H`, quindi ### **non ne ha** -- e una tabella
+    # ### vuota sotto un titolo che promette una derivata ### **direbbe il falso.**
+    if grad:
+        L += ["## LA DERIVATA, GENERATA", "",
+              "> ### ⭐ **`dH/dpsi*` per differenziazione simbolica**, con `psi` e `psi*` "
+              "### **simboli INDIPENDENTI** *(Wirtinger)*. ### **Non e' scritta a mano "
+              "in nessun posto.**", "",
+              "| rispetto a | `dH/d(...)` |", "|---|---|"]
+        for c, g in sorted(grad.items()):
+            L += ["| `%s` | `%s` |" % (c, g)]
     L += ["", "## LA SCHEDA, dalla tabella", "", str(legge["scheda"]).strip(), ""]
     return NL.join(L) + NL
 
@@ -420,6 +475,28 @@ def genera(verboso=True):
             print("   %-18s %s" % (lg["id"], os.path.relpath(p1, RADICE)))
             print("   %-18s %s   impronta %s, %d derivate"
                   % ("", os.path.relpath(p2, RADICE), imp, len(grad)))
+    # ### \u26d4 **GLI OSSERVATORI, DALLA STESSA TABELLA.** Non sono un secondo
+    # ### formato: ### **sono una riga con `tipo: osservatore`**, e passano dagli
+    # ### ### **stessi** controlli `(a)` -- simboli vietati, ambito, REALTA-.
+    # ### \u26a0 **Non hanno derivata**, e il generatore ### **non gliene calcola una.**
+    os.makedirs(OSSERVATORI, exist_ok=True)
+    for lg in leggi:
+        if lg["tipo"] != "osservatore":
+            continue
+        guai, e = controlla(lg, vocab)
+        assert not guai, ("### IL CONTROLLO (a) RIFIUTA L-OSSERVATORE, e NON SI GENERA:"
+                          + NL + NL.join(guai))
+        imp = impronta(lg)
+        p1 = os.path.join(OSSERVATORI, lg["id"].lower().replace("-", "_") + ".py")
+        io.open(p1, "w", encoding="utf-8", newline=NL).write(
+            modulo_osservatore(lg, vocab, e, imp))
+        p2 = os.path.join(SCHEDE, lg["id"] + ".md")
+        io.open(p2, "w", encoding="utf-8", newline=NL).write(scheda(lg, e, {}, imp))
+        fatti.append((lg["id"], p1, p2, imp, 0))
+        if verboso:
+            print("   %-18s %s" % (lg["id"], os.path.relpath(p1, RADICE)))
+            print("   %-18s %s   impronta %s, OSSERVATORE (nessuna derivata)"
+                  % ("", os.path.relpath(p2, RADICE), imp))
     return fatti
 
 
@@ -429,7 +506,7 @@ def main(argv):
     if "--prova" in argv:
         return collaudo()
     fatti = genera()
-    print("  generati: %d termini" % len(fatti))
+    print("  generati: %d file di legge (termini e osservatori)" % len(fatti))
     return 0
 
 
