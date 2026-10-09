@@ -147,6 +147,12 @@ def main():
     # ### di Luca del 2026-10-08. ### **Era 1 perche- la voce e- UNA LETTURA DEL CODICE
     # ### DELL-ERA 1**, non programma dell-era 2.
     CORRETTE_V3["ENERGIA-NON-DEFINITA"] = ("FISICA", "1", "SUPERATA")
+    # ### IL MANDATO DEL 2026-10-09 (stato dalla RIGA D-ORIGINE): la lista del guardiano
+    # ### dava uno stato, e ### **la riga d-origine ne dice un altro.** `G1` dice
+    # ### *<<FATTO>>* e `REG-A` dice *<<CHIUSO>>*: ### **la riga vince sulla lista**, ed e-
+    # ### tutto il senso del giro -- *<<la validita- non e- lo stato>>*.
+    CORRETTE_V3["G1"] = ("FISICA", "1", "CHIUSA")
+    CORRETTE_V3["REG-A"] = ("FISICA", "1", "CHIUSA")
     # ### IL MANDATO DEL 2026-10-09 (era delle voci di metodo): il guardiano dichiara che
     # ### la regola ### **<<metodo = era ENTRAMBE>> era TROPPO GROSSA.** Queste 14 stanno
     # ### nella lista 1, che le dava `ENTRAMBE`, e ### **riguardano un OGGETTO CONCRETO

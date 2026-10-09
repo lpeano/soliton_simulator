@@ -293,3 +293,21 @@ Si toglie dall'inizio della riga, **ripetutamente**: i `#`, gli spazi, i **simbo
 | una **cura numerata** | `CURA n` |
 
 ### ⭐ **Un oggetto concreto si riconosce da COME SI SCRIVE, non dalla parola**, ed è per questo che `P6` — *«ogni csv di misura porta BLOB, SEME e TUTTI I FLAG»* — ### **NON scatta: è una REGOLA, e non nomina nessun flag.**
+
+---
+
+## LA VALIDITÀ **NON È LO STATO** *(2026-10-09)*
+
+> ### ⭐ *«VALE SEMPRE»*, *«VALE PER QUELLA SCENA»*, *«LIMITE DICHIARATO»* **non dicono se una cosa è fatta**: dicono **fin dove vale ciò che si è trovato.** Vanno in **`meta.validita`**.
+
+### **Lo stato si legge dalla RIGA D'ORIGINE INTERA**, non dal titolo: i titoli sono `<= 100` caratteri, e ### ⛔ **un troncamento taglia esattamente dove la riga dice lo stato** — il titolo di `Z83` finisce *«… | DO…»*, e la riga dice *«DOMANDA APERTA»*.
+
+| | |
+|---|---|
+| ### **CHIUSA** | la riga dice `CHIUSA`, `CHIUSO`, `CURATO E SIGILLATO`, `CURA IN CODICE`, `FATTO/A`, `FINITO`, `RITIRATA`, `✅` |
+| ### **SOSPESA** *(era `1`)* o **AGENDA** *(era `2`)* | `APERTA/O`, `DOMANDA APERTA`, `NON INIZIATO`, `NON CURATO`, `DA RIVERIFICARE`, *«Si chiude quando»*, *«Chiude chi»*, *«resta aperta»* |
+| ### ⚠ **la PRIMA parola di stato vince** | la riga racconta **anche la STORIA**: `Z25` dice *«✅ CHIUSA»* nella cella di stato e *«fronte aperto»* nella narrazione. ### **È ambigua solo se le due parole stanno NELLA STESSA CELLA** |
+| ### ⚠ **la NEGAZIONE conta** | `A2-ANELLO` dice *«la cura … **non** è stata fatta»*: la parola `FATTA` c'è, ma **negata** |
+| ### ⚠ **`APERTO` di un REGISTRO DI CORSE non conta** | `## APERTO CURA1-CORTO` è **il titolo del registro**, e il *«chiuso … FINITO»* sta **sotto**: si vede **solo aprendo la sezione** |
+| ### ⛔ **chiudere pretende il COMMIT** | `CHIUSA` senza `chiusura.commit` non passa, e ### **un commit non si inventa**: `20` righe dicono CHIUSA **senza portarlo**, e **restano come sono** |
+| ### ⛔ **un SEGNAPOSTO non prende uno stato** | prima la classe, poi lo stato |

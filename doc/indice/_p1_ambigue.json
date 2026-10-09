@@ -1,0 +1,1222 @@
+[
+ [
+  "A1",
+  "NESSUNA parola decide: ## A1 — LA LEGGE, NON IL NUMERO Una grandezza dinamica si esprime come relazione fra grandezze di stato, mai come costante scelta. Se una costante ser"
+ ],
+ [
+  "A1-COSTANTI",
+  "NESSUNA parola decide: | A1-COSTANTI | AUDIT DELLE COSTANTI TARATE — ~90 commenti «misurato/tarato» nel sorgente. Si separano le COSTANTI TARATE (es. 389/484 della massa cri"
+ ],
+ [
+  "A1-INERZIA",
+  "NESSUNA parola decide: | A1-INERZIA VALE SEMPRE [EPOCA 1 · CODICE] | Teorema di inerzia — lo Strato 0 e' inerte: la connessione costruita dagli stessi stati che trasporta e'"
+ ],
+ [
+  "A1-TREVIE",
+  "NESSUNA parola decide: | A1-TREVIE | la catena a TRE VIE di step — if CHI_CORE… / elif VERSO_CHI… / elif not(…) | :3623 · :3626 · :3632 ( era citata :3517-:3526: slittata di"
+ ],
+ [
+  "A10",
+  "NESSUNA parola decide: ## A10 — UNA SOLA GRANDEZZA PUO' LEGARE DUE DOMINI Dove due domini devono parlarsi — materia e geometria, geometria e tempo — il PONTE dev'essere UNO "
+ ],
+ [
+  "A11",
+  "NESSUNA parola decide: ## A11 — UN LIMITE E' UNA LEGGE, NON UNA TOPPA > Decisione di Luca, 2026-09-21. Nasce da cinque difetti trovati in due giorni, tutti della > stessa fa"
+ ],
+ [
+  "A12",
+  "NESSUNA parola decide: ## A12 — UN DIFETTO DIMOSTRATO SI CURA. MISURARE NON È CURARE. > Decisione di Luca, 2026-09-22. > Quando un difetto è acclarato e la sua cura è deriva"
+ ],
+ [
+  "A13",
+  "NESSUNA parola decide: ## A13 — ❗ LAM È LA SCALA DI PLANCK DEL SISTEMA (decisione di Luca, 2026-09-24) > ### «LAM è la scala di Planck del sistema.» > > Sotto LAM non esiste"
+ ],
+ [
+  "A14",
+  "NESSUNA parola decide: ## A14 — ❗ LE GRANDEZZE SI CONSERVANO LOCALMENTE E SI DISSIPANO GLOBALMENTE (decisione di Luca, 2026-10-03) > ### «Le grandezze si conservano LOCALMEN"
+ ],
+ [
+  "A2-BLOCH",
+  "NESSUNA parola decide: | A2-BLOCH VALE SEMPRE [EPOCA 1 · CODICE] | Invarianza del Bloch sotto Step 2 — _phc e' una fase globale, e nb = psi†σpsi non la vede | 3.3e-16 | csv/"
+ ],
+ [
+  "A2-DXD",
+  "NESSUNA parola decide: | A2-DXD | RIMISURARE NEL REGIME NUOVO: \\|dx\\|/d del freno-legge (criterio di riapertura: quota > 0.5 non nulla) e gli esiti del giro corto di CURA 2."
+ ],
+ [
+  "A3",
+  "NESSUNA parola decide: ## A3 — NIENTE SI NORMALIZZA SUL PROPRIO INSIEME Non si normalizza una grandezza su una statistica di POSIZIONE del proprio insieme (mediana, media de"
+ ],
+ [
+  "A3-DISEGNO",
+  "RISERVATA al punto 5: NON si tocca"
+ ],
+ [
+  "A3-FDT",
+  "NESSUNA parola decide: | A3-FDT VALE SEMPRE [EPOCA 1 · CODICE] | FDT del solo scuotimento — il drift di n → (n+a·g)/\\|n+a·g\\| e' −a²n, funzione del solo n, senza i vicini: u"
+ ],
+ [
+  "A3c",
+  "NESSUNA parola decide: | A3c — un RAPPORTO confrontato con un MASSIMO | (115, accanto a due massimi di passi diversi) | grandezze non commensurabili, stampate come se fosser"
+ ],
+ [
+  "A4",
+  "NESSUNA parola decide: ## A4 — STRATIFICAZIONE CAUSALE Cio' che DEFINISCE la struttura causale non puo' evolvere DENTRO di essa: avanza nel tempo di coordinata (il contatore"
+ ],
+ [
+  "A4-METRICHE",
+  "la riga dice CHIUSA ma NON PORTA IL COMMIT che ha chiuso, e lo schema lo pretende: non lo invento -- la riga dice <<FATTO>> (la PRIMA parola di stato): i i miei errori, §E) | punto 1 del TODO fatto (il §1 verificato dal c"
+ ],
+ [
+  "A5",
+  "la riga dice CHIUSA ma NON PORTA IL COMMIT che ha chiuso, e lo schema lo pretende: non lo invento -- la riga dice <<FINITA>> (la PRIMA parola di stato): nti distanti deve propagare a velocita' finita. Una funzione istanta"
+ ],
+ [
+  "A6",
+  "NESSUNA parola decide: ## A6 — INERZIA (TEOREMA, non assioma) Nessuna funzione istantanea di X puo' agire dinamicamente su X. DIMOSTRATO, non postulato (<psi_i|N|psi_j> = 2<"
+ ],
+ [
+  "A7",
+  "NESSUNA parola decide: ## A7 — CONSERVAZIONE E STATO Una grandezza senza stato non puo' conservare nulla. Un processo che aggiunge senza togliere, e senza memoria, e' un cri"
+ ],
+ [
+  "A7b",
+  "la riga dice CHIUSA ma NON PORTA IL COMMIT che ha chiuso, e lo schema lo pretende: non lo invento -- la riga dice <<FATTO>> (la PRIMA parola di stato): corretto e il difetto sta altrove — nel fatto che qualcuno legga quel"
+ ],
+ [
+  "A8",
+  "NESSUNA parola decide: ## A8 — UN RAMO SILENZIOSO NON E' UN RAMO Ogni fallback su un percorso fisico deve essere CONTATO. Un ramo che scatta senza segnalarlo non produce un "
+ ],
+ [
+  "A8b",
+  "NESSUNA parola decide: ### A8b — COROLLARIO: le cache CROSS-PASSO Una cache cross-passo va estesa a TUTTI i punti di crescita, e l'estensione va verificata DOVE AVVIENE, non"
+ ],
+ [
+  "A9",
+  "la riga dice CHIUSA ma NON PORTA IL COMMIT che ha chiuso, e lo schema lo pretende: non lo invento -- la riga dice <<FATTO>> (la PRIMA parola di stato): to. Perche': una regola che dipende dal fatto che qualcuno la ricordi"
+ ],
+ [
+  "AUTO-MANUTENZIONE",
+  "la riga dice CHIUSA ma NON PORTA IL COMMIT che ha chiuso, e lo schema lo pretende: non lo invento -- la riga dice <<FATTO>> (la PRIMA parola di stato): ) - Aggiorna CLAUDE.md quando cambia un FATTO stabile: un nuovo flag,"
+ ],
+ [
+  "B10",
+  "NESSUNA parola decide: | B10 | --override-blob e la COPIA del driver | csv/_test_fork/_scena_video_ripresa.py (e68bb8c5, 17466 byte) e csv/_seal_fork/_ab_reciprocita.py | DU"
+ ],
+ [
+  "B2",
+  "NESSUNA parola decide: | B2 | Z31 — i sigilli non ri-girabili | Z31, citata in 17 file | rifatta TRE volte, l'ultima ieri | il recupero sistematico → è il §2.2 del mandato d"
+ ],
+ [
+  "B4",
+  "NESSUNA parola decide: | B4 | i np.zeros | tutto il simulatore | mai guardati | sono 116, non ~10. Il numero utile non è questo: serve restringere al percorso fisico, e quel"
+ ],
+ [
+  "B4-FROZEN",
+  "NESSUNA parola decide: | B4-FROZEN VALE SEMPRE [EPOCA 1 · CODICE] | Bloch frozen-o-noise | senza scuotimento \\|<n>\\| = 1.000000; con, chi = 90.0 ± 39.2 contro il nullo 90.00"
+ ],
+ [
+  "B5-KURAMOTO",
+  "NESSUNA parola decide: | B5-KURAMOTO VALE SEMPRE [EPOCA 1 · CODICE] | Kuramoto refutato | K-frozen byte-identico a OFF; K-noise = NO-rumore | idem |"
+ ],
+ [
+  "B6-TURBO",
+  "NESSUNA parola decide: | B6-TURBO VALE SEMPRE [EPOCA 1 · MISURA] | Esito B del turbo — con cs al 5 % di CS_M lo Step 2 non muove lo spin | chi ON 89.9865 / OFF 89.9941 contr"
+ ],
+ [
+  "B7",
+  "NESSUNA parola decide: | B7 | i reperti DA RIMISURARE sulla scena nuova | Z43, Z46, Z48-Z52, coer_g | misurati su sep = 8 | rimisura sulla scena connessa. Marcatura già pres"
+ ],
+ [
+  "B7-SHAKE",
+  "NESSUNA parola decide: | B7-SHAKE VALE PER QUELLA SCENA [EPOCA 1 · MISURA] | shake-then-freeze — la precessione mutua non organizza | chi deriva di −0.33° in 600 passi da st"
+ ],
+ [
+  "B8",
+  "NESSUNA parola decide: | B8 | IL BLOCCO DEL RUN A 6000 AL PASSO 2700 | doc/REFERTO_blocco_run6000.md (131 righe), csv/_test_fork/_dump_2700.txt | NON «mai diagnosticato»: PA"
+ ],
+ [
+  "B9",
+  "NESSUNA parola decide: | B9 | Z63 / Z64 — i 1455 nodi a 10⁻¹³; la catena f → x → r che non riproduce r | registro, ex-LISTA 2 punto 3 | aperti | vedi le rispettive voci | io"
+ ],
+ [
+  "C1",
+  "NESSUNA parola decide: | C1 VALE SEMPRE [EPOCA 1 · MISURA] | ESITO (I): nessun bug. omega = coppia/inerzia porta esattamente il −1 richiesto | pendenza −1.056, r = −0.981, n"
+ ],
+ [
+  "C10",
+  "NESSUNA parola decide: | C10 VALE SEMPRE [EPOCA 1 · MISURA] | LA BARRA D'ERRORE USATA FINORA E' TRE VOLTE TROPPO PICCOLA. Su questo sistema caotico la pendenza trasversale c"
+ ],
+ [
+  "C11",
+  "NESSUNA parola decide: | C11 VALE SEMPRE [EPOCA 1 · MISURA] | _psi_spin_prec non era esteso alla mitosi ⇒ la guardia ESATTA di ritmo() scartava il ramo a 4π: la FASE 5 (orol"
+ ],
+ [
+  "C12",
+  "NESSUNA parola decide: | C12 VALE PER QUELLA SCENA [EPOCA 1 · MISURA] | SECONDO CASO DEL PUNTO FISSO AUTO-NORMALIZZANTE. r è normalizzato sulla propria mediana (x = f/median"
+ ],
+ [
+  "C13",
+  "NESSUNA parola decide: | C13 VALE PER QUELLA SCENA [EPOCA 1 · MISURA] | IL TEMPO-LUCE NON E' TESTABILE A QUESTA DENSITA'. cs non e' «quasi-costante per caso»: e' morto per d"
+ ],
+ [
+  "C14",
+  "NESSUNA parola decide: | C14 VALE SEMPRE [EPOCA 1 · MISURA] | ESITO (A) sui QUATTRO BRACCI — nessuna firma emerge nemmeno a risoluzione 6.4x migliore. E (A) NON è conclusivo"
+ ],
+ [
+  "C16",
+  "NESSUNA parola decide: | C16 VALE SEMPRE [EPOCA 1 · MISURA] | ESITO (I) CONFERMATO QUATTRO VOLTE, con la barra giusta. L'esponente di omega = coppia/inerzia non si muove fra"
+ ],
+ [
+  "C17",
+  "NESSUNA parola decide: | C17 VALE PER QUELLA SCENA [EPOCA 1 · MISURA] | LA DISPERSIONE DI r E' RUMORE: la FASE 5 non ha, a oggi, NESSUN effetto misurabile. Ne' sulla mediana"
+ ],
+ [
+  "C18",
+  "NESSUNA parola decide: | C18 VALE PER QUELLA SCENA [EPOCA 1 · MISURA] | IL FDT RIFATTO SUL SISTEMA NON CASTRATO (FASE 5 attiva, --cs-dinamico acceso): MIGLIORA DI DUE ORDINI"
+ ],
+ [
+  "C2",
+  "NESSUNA parola decide: | C2 VALE SEMPRE [EPOCA 1 · CODICE] | Il −1 e' cancellato da √tau, con tau ∝ rho^1.81 | +1.176 ± 0.019 (n=2195) | doc/TAU_tempo_luce.md |"
+ ],
+ [
+  "C20",
+  "NESSUNA parola decide: | C20 VALE PER QUELLA SCENA [EPOCA 1 · MISURA] | PRIMA MISURA DELLA CONSERVAZIONE DI L_tot = somma(inerzia\\|omega\\|), mai fatta prima. Cresce del ~3.4"
+ ],
+ [
+  "C22",
+  "NESSUNA parola decide: | C22 VALE PER QUELLA SCENA [EPOCA 1 · MISURA] | LA CRESCITA DI L_tot E' L'INERZIA CHE SI ACCENDE, NON UNA VIOLAZIONE. Il mandato la attribuiva alla m"
+ ],
+ [
+  "C23",
+  "NESSUNA parola decide: | C23 VALE PER QUELLA SCENA [EPOCA 1 · MISURA] | IL FATTORE (CS_M/cs)^2 NON E' ~1 SULLA CODA a 500 passi. La mediana resta 1.000020 — il nodo tipico n"
+ ],
+ [
+  "C24",
+  "la riga dice CHIUSA ma NON PORTA IL COMMIT che ha chiuso, e lo schema lo pretende: non lo invento -- la riga dice <<FATTO>> (la PRIMA parola di stato): t STA NELLA CODA, NON NEL NODO TIPICO — fatto nuovo, non spiegato. L_"
+ ],
+ [
+  "C25",
+  "NESSUNA parola decide: | C25 VALE SEMPRE [EPOCA 1 · CODICE] | UN FILE NON SI PUO' COMMITTARE PER IL SUO ESSERE CRLF: git lo NORMALIZZA ENTRANDO. Le tre copie ._sim.py erano "
+ ],
+ [
+  "C26",
+  "NESSUNA parola decide: | C26 VALE SEMPRE [EPOCA 1 · CODICE] | VERSO_CHI E' UN NO-OP SILENZIOSO SOTTO CHI_CORE, che e' acceso in OGNI run. :2880-2884: if FRAME_DRAG and len(_"
+ ],
+ [
+  "C27",
+  "NESSUNA parola decide: | C27 VALE SEMPRE [EPOCA 1 · CODICE] | TRE FLAG VIVONO DENTRO if VIRIALE: E NON LO DICHIARANO. LS_AZIM (:3744), ZETA_VIR (:3739) e OLON_PART (:3732), "
+ ],
+ [
+  "C28",
+  "NESSUNA parola decide: | C28 VALE SEMPRE [EPOCA 1 · CODICE] | 14 FLAG SU 16 NON HANNO ALCUN SIGILLO. Tier 2 (metrica) e Tier 3 (chiralita'/segno) sono a ZERO su dieci. Passa"
+ ],
+ [
+  "C3",
+  "NESSUNA parola decide: | C3 VALE SEMPRE [EPOCA 1 · MISURA] | Il residuo di 0.34 e' TRANSITORIO, non un termine mancante | 0.979 → 0.010 fra i passi 50 e 400 | doc/BARRE_ERRO"
+ ],
+ [
+  "C4",
+  "NESSUNA parola decide: | C4 VALE SEMPRE [EPOCA 1 · CODICE] | inerzia = T² — chiude il buco dimensionale; esponente cs^−2 derivato, verso confermato | stesso esponente dello "
+ ],
+ [
+  "C5",
+  "NESSUNA parola decide: | C5 VALE PER QUELLA SCENA [EPOCA 1 · MISURA] | tau_luce = d/cs e' PIATTO ⇒ la sostituzione rompe la cancellazione | +0.097 ± 0.0055, IC95 [+0.086, +0"
+ ],
+ [
+  "C5-INVARIANTI",
+  "NESSUNA parola decide: | C5-INVARIANTI | INVARIANTI — 42 domini, due livelli | mandato C5 | 3/3 (Z100); accesi di default |"
+ ],
+ [
+  "C5RES-INVARIANTI",
+  "NESSUNA parola decide: | C5RES-INVARIANTI | I RESIDUI DI C5 — I4 la scatola nera (rigiocare da solo il passo in cui scatta un invariante), I5 la tabella degli underflow per "
+ ],
+ [
+  "C6",
+  "NESSUNA parola decide: | C6 VALE SEMPRE [EPOCA 1 · CODICE] | Il rumore non guida omega | R_stoc = 0.041, sotto l'errore atteso 0.097 | doc/TRACING_omega.md §6.1 |"
+ ],
+ [
+  "C8",
+  "NESSUNA parola decide: | C8 VALE SEMPRE [EPOCA 1 · MISURA] | LA FASE 2 NON SI CHIUDE. Col tempo-luce cablato la pendenza resta lontanissima dall'attesa -0.69, e theta resta "
+ ],
+ [
+  "C9",
+  "NESSUNA parola decide: | C9 VALE SEMPRE [EPOCA 1 · MISURA] | --tau-luce ha un effetto GRANDE sulla pendenza (che pero' non basta): il contrasto ON-OFF e' 11 volte la dispers"
+ ],
+ [
+  "CHI-BASC-DESCRIZIONE",
+  "NESSUNA parola decide: ### Collegata a CHI-BASC-DESCRIZIONE, che viene dalla stessa misura. ---"
+ ],
+ [
+  "CHI-TORS-ZERO-FALSO",
+  "NESSUNA parola decide: ## CHI-TORS-ZERO-FALSO — un contatore che vale 0 dove la risposta giusta e' <<non lo so>> (Aperta il 2026-10-06 dalla misura del 0.3 a zero. Strumento"
+ ],
+ [
+  "CHK2",
+  "NESSUNA parola decide: | CHK2 | CHECKPOINT 2 | GLOBALE §3 | raggiunto e riferito a Luca. IL RUN LUNGO NON SI LANCIA |"
+ ],
+ [
+  "CHK3",
+  "NESSUNA parola decide: | CHK3 | CHECKPOINT: referto dei quattro esiti, ciascuno contro le sue letture fissate PRIMA | GLOBALE-DISEGNO §5 | ⏸ QUI CI SI FERMA. Le cure solo DE"
+ ],
+ [
+  "CHK3-D",
+  "NESSUNA parola decide: | CHK3-D | Nel referto del CHK3, la sezione «I DIFETTI NUOVI CONTRO LE MISURE GIA' FATTE» — D27 (quattro componenti) e D25 (il tempo che non scorre) c"
+ ],
+ [
+  "CLI-1",
+  "NESSUNA parola decide: | ❗ CLI-1 | I SIGILLI DI CURA 4 E CURA 5 NON HANNO MAI PROVATO IL PERCORSO CLI: impostavano S.SEMINA_MATURA = True e S.MITOSI_2LAM = True direttamente"
+ ],
+ [
+  "COMPONENTI:A2",
+  "NESSUNA parola decide: | A2 | peq è lo sfondo diffuso locale (Legge I, :265): nessuna statistica globale |"
+ ],
+ [
+  "COMPONENTI:A3",
+  "NESSUNA parola decide: | A3 | dopo la proiezione arco→nodo, numeratore e denominatore vivono entrambi sui nodi |"
+ ],
+ [
+  "COMPONENTI:A5",
+  "NESSUNA parola decide: | A5 | d/cs è il tempo causale |"
+ ],
+ [
+  "COMPONENTI:A6",
+  "NESSUNA parola decide: | A6 (ragione primaria) | l'inerzia si valuta sullo stato precedente. Una funzione istantanea di ciò che sta per essere modificato è uno specchio, non"
+ ],
+ [
+  "COMPONENTI:A8",
+  "NESSUNA parola decide: | A8 | il fallback dello sfondo è contato — e non basta quante volte scatta: si registra quando (Y5) |"
+ ],
+ [
+  "COMPONENTI:B1",
+  "NESSUNA parola decide: | B1 | --deparam-orologio | SÌ — «zero parametri» nel suo commento | byte-identità a OFF dichiarata; controllo positivo: non risulta | DIFETTO — ed è "
+ ],
+ [
+  "COMPONENTI:B10",
+  "NESSUNA parola decide: | B10 | --tau-luce | SÌ — d/cs, lo stesso tau già cablato nello Strato 1, coefficiente 1 | NO — criterio ② NON SODDISFATTO. I sigilli della FASE 2 non"
+ ],
+ [
+  "COMPONENTI:B11",
+  "NESSUNA parola decide: | B11 | --cs-dinamico | sì (cs = CS_M/(1+GAMMA√I), stesso GAMMA di G(rho)) | A/B storico; nessun controllo positivo | ⭐ DIFETTO — decisione di Luca, 2"
+ ],
+ [
+  "COMPONENTI:B2",
+  "NESSUNA parola decide: | B2 | --spinore-corretto | sì per costruzione (evaluate-then-commit, \\|psi\\|=1) | «Default off = byte-identico»; controllo positivo non risulta | PLA"
+ ],
+ [
+  "COMPONENTI:B3",
+  "NESSUNA parola decide: | B3 | --verlet | è una scelta di integratore, non una legge | «attivare per il confronto A/B» | PLAUSIBILE, e c'è una TENSIONE da risolvere. Il suo c"
+ ],
+ [
+  "COMPONENTI:B4",
+  "NESSUNA parola decide: | B4 | --spinore-vivo | sì (reinnesto nell'ordine ETC, zero parametri) | «Reversibile, per A/B; richiede rimisura di Berry» | NON STABILITO. Senza, lo"
+ ],
+ [
+  "COMPONENTI:B5",
+  "NESSUNA parola decide: | B5 | --chi-core | «nessun segno selezionato a priori» | «default off per A/B» | NON STABILITO. Il suo commento lo presenta come un A/B, non come una"
+ ],
+ [
+  "COMPONENTI:B6",
+  "NESSUNA parola decide: | B6 | --campo-spinoriale | sì (FASE 1, riduzione al limite esatta) | «Default off = byte-identico»; il FASE-5 ci si appoggia | ALTERNATIVA, non difet"
+ ],
+ [
+  "COMPONENTI:B7",
+  "NESSUNA parola decide: | B7 | --fork-su2 | sì (Berry non normalizzato, il peso cos(chi/2) è ciò che resta non normalizzando) | sigillato (Strato 0) | ALTERNATIVA — e c'è di "
+ ],
+ [
+  "COMPONENTI:B8",
+  "NESSUNA parola decide: | B8 | --fork-su2-mem | sì — tau = d/cs, «nessun numero nuovo, d e cs esistono già» | 23/23 PASS, S7 incluso — MA con cs COSTANTE: l'argv del sigillo "
+ ],
+ [
+  "COMPONENTI:B9",
+  "NESSUNA parola decide: | B9 | --step2-orologio | SÌ — orologio di Compton omega ∝ cs²; «fisica NECESSARIA e derivata: zero parametri nuovi, nessun floor, nessun coefficiente"
+ ],
+ [
+  "COMPONENTI:C1",
+  "NESSUNA parola decide: | C1 | --gamma-turbo | dichiarato dal codice stesso: «[DIAGNOSTICO, NON PERCORSO CERTIFICATO] amplificatore della SENSIBILITÀ di cs alla densità». Amp"
+ ],
+ [
+  "COMPONENTI:C2",
+  "NESSUNA parola decide: | C2 | --kuramoto-su2 | meccanismo di allineamento aggiunto a mano, non derivato. E refutato per misura: K-frozen byte-identico a OFF, K-noise = NO-ru"
+ ],
+ [
+  "COMPONENTI:C3",
+  "NESSUNA parola decide: | C3 | --regime (deterministico, ecc.) | cambia quattro interruttori insieme (TAU_A, G_PH, _CALORE_INIT, SCUOTIMENTO) — contro §1, un interruttore all"
+ ],
+ [
+  "COMPONENTI:S1",
+  "NESSUNA parola decide: | S1 | FAIL ATTESO — vs blob 2277e9a0, di quattro cambiamenti fa | nodi 3164 contro 2924, 32 shape |"
+ ],
+ [
+  "COMPONENTI:S2",
+  "NESSUNA parola decide: | S2 | riduzione al limite sul blob ATTUALE: ON (cs=CS_M) vs OFF byte-identico | 0.000e+00 con nodi 2924 = 2924 |"
+ ],
+ [
+  "COMPONENTI:S3",
+  "NESSUNA parola decide: | S3.0 | IL CONTROLLO POSITIVO: il test VEDE l'effetto | 39/40 nodi con \\|f(1)−f(0)\\| > 1e-13 |"
+ ],
+ [
+  "COMPONENTI:S3b",
+  "NESSUNA parola decide: | S3b | l'orologio rallenta dove cs è basso | 0.0100 volte a cs = 0.1·CS_M |"
+ ],
+ [
+  "COMPONENTI:Y0-Y10",
+  "NESSUNA parola decide: Y0-Y10, 11/11 PASS."
+ ],
+ [
+  "COMPONENTI:Z30",
+  "NESSUNA parola decide: Z30: la forma del denominatore — nudo (attuale, zero scelte) contro linea (la meno"
+ ],
+ [
+  "CURA-3",
+  "NESSUNA parola decide: | CURA-3 -- phi su 2pi con le soglie che la seguono | nella forma decisa: frazioni che sul dominio 4pi danno ESATTAMENTE i valori di oggi, flag spento"
+ ],
+ [
+  "CURA2-STRUTTURALE",
+  "NESSUNA parola decide: <!-- SCHEDA nome=tempo-nella-mitosi funzioni=mitosi,_cs_arco_da_nodo,_r_nodo_mitosi,_fattore_tempo_arco,_tau_arco_causale flag=TEMPO_UNICO_MITOSI,MITO"
+ ],
+ [
+  "D0",
+  "NESSUNA parola decide: | D0 | CHI FA SCAPPARE d0 | 21/9 | MISURATO: e' IL FRENO. Gli scrittori spingono giu' -1.543e+05, il vincolo aggiunge +3.205e+05. S10 inerte, S09 vers"
+ ],
+ [
+  "D02",
+  "NESSUNA parola decide: > non dal disegno), e la sua scheda e' ③ gravita-bifase, dove vive pozzo_grafo."
+ ],
+ [
+  "D03",
+  "NESSUNA parola decide: | D03 | La memoria del moto prende le direzioni da pos, normalizza su Imed GLOBALE, e ha un tetto 0.01median(d0) | Z104 f80503c, letto da :5631-5648 ·"
+ ],
+ [
+  "D11",
+  "NESSUNA parola decide: | D11 | d scende DIECI VOLTE sotto LAM mentre SCALA_MIN e' acceso, e la causa NON e' trovata | Z87 | la cura di Z87: il mondo si costruisce SEMPRE dop"
+ ],
+ [
+  "D17",
+  "NESSUNA parola decide: | D17 | peq diventava NEGATIVO e il pavimento max(peq, 1e-9) NE RIBALTAVA IL SEGNO (da -3.72 a +1.8e+06) | Z94 | PEQ_ESATTO + ANOM_SIMM (C1, C1-bis) |"
+ ],
+ [
+  "D19",
+  "NESSUNA parola decide: | D19 | OTTO grandezze che la semina legge erano INERTI SUL VUOTO in ogni run di epoca 1 | Z88 | la cura del mondo-dopo-i-flag | CURATO |"
+ ],
+ [
+  "D22",
+  "NESSUNA parola decide: | D22 | Il DENOMINATORE PER GRADO: la misura non distingue (A) da (B), ma (B) cade per DIMOSTRAZIONE, e lo stesso schema e' in almeno quattro punti | "
+ ],
+ [
+  "D26",
+  "NESSUNA parola decide: | Z53 | DIFETTO | D26 (CURATO) | Le coorti non sopravvivevano allo SNAPSHOT: dopo un salva/ricarica il lignaggio ripartiva VUOTO |"
+ ],
+ [
+  "D3",
+  "SEGNAPOSTO: classe NON_DEFINITA, e lo schema vieta uno stato deciso. Prima la classe, poi lo stato"
+ ],
+ [
+  "D32",
+  "NESSUNA parola decide: > commit — tempo-proprio per RITMO_WRAP_2PI, torsione-spinore per TW_SPINORE —"
+ ],
+ [
+  "D36",
+  "NESSUNA parola decide: | D36 | LA SOGLIA DELLA MITOSI E' IN UNITA' ASSOLUTE DI tw, MENTRE LA SCALA DI tw DIPENDE DAL DOMINIO DI phi: le due NON SI POSSONO CAMBIARE UNA PER V"
+ ],
+ [
+  "D38",
+  "la riga dice CHIUSA ma NON PORTA IL COMMIT che ha chiuso, e lo schema lo pretende: non lo invento -- la riga dice <<FATTA>> (la PRIMA parola di stato): o LAM» e' VERIFICATA sempre (E4-LAM) ma FATTA RISPETTARE ALLA NASCITA"
+ ],
+ [
+  "D4",
+  "SEGNAPOSTO: classe NON_DEFINITA, e lo schema vieta uno stato deciso. Prima la classe, poi lo stato"
+ ],
+ [
+  "D5",
+  "SEGNAPOSTO: classe NON_DEFINITA, e lo schema vieta uno stato deciso. Prima la classe, poi lo stato"
+ ],
+ [
+  "D6",
+  "SEGNAPOSTO: classe NON_DEFINITA, e lo schema vieta uno stato deciso. Prima la classe, poi lo stato"
+ ],
+ [
+  "DE-ACCOPPIABILITA",
+  "NESSUNA parola decide: ## 4. DE-ACCOPPIABILITA' — analisi, non piano La domanda \"e se il gate diventasse il solo SCUOTIMENTO?\" e' in parte superata dai fatti: la legge gia' "
+ ],
+ [
+  "E1",
+  "SEGNAPOSTO: classe NON_DEFINITA, e lo schema vieta uno stato deciso. Prima la classe, poi lo stato"
+ ],
+ [
+  "E3",
+  "NESSUNA parola decide: | E3 | EPOCA 3 + RUN LUNGO — tag epoca-3, 3000 passi, M1/M4 leggere durante il run | GLOBALE §4 | 🔒 solo dopo che i criteri REGGONO. Nessun confronto "
+ ],
+ [
+  "E4-LAM",
+  "la riga dice CHIUSA ma NON PORTA IL COMMIT che ha chiuso, e lo schema lo pretende: non lo invento -- la riga dice <<FATTO>> (la PRIMA parola di stato): | E4-LAM FATTO il 2026-09-24 | LA LEGGE «NESSUNA LUNGH"
+ ],
+ [
+  "F1",
+  "SEGNAPOSTO: classe NON_DEFINITA, e lo schema vieta uno stato deciso. Prima la classe, poi lo stato"
+ ],
+ [
+  "F2",
+  "SEGNAPOSTO: classe NON_DEFINITA, e lo schema vieta uno stato deciso. Prima la classe, poi lo stato"
+ ],
+ [
+  "F3",
+  "SEGNAPOSTO: classe NON_DEFINITA, e lo schema vieta uno stato deciso. Prima la classe, poi lo stato"
+ ],
+ [
+  "F4",
+  "la riga dice CHIUSA ma NON PORTA IL COMMIT che ha chiuso, e lo schema lo pretende: non lo invento -- la riga dice <<FATTO>> (la PRIMA parola di stato): ture di stato senza traccia | D04 — già fatto per d0: si RIUSA il cri"
+ ],
+ [
+  "F5",
+  "NESSUNA parola decide: | F5 | fasi col periodo sbagliato | D34, dal censimento in corso |"
+ ],
+ [
+  "FASCE-TAU",
+  "NESSUNA parola decide: | FASCE-TAU | LA CRESCITA E' COORDINATA COL TEMPO PROPRIO? — l'espansione non dev'essere omogenea in senso assoluto, ma omogenea DENTRO UNA FASCIA DI "
+ ],
+ [
+  "FRAG1",
+  "NESSUNA parola decide: | FRAG1 | mitosi() SU UNA RETE SENZA CAMPO VA IN IndexError INVECE DI DICHIARARLO. I = self._rho_sorgente() è vuoto finché non è girato un step(), e I"
+ ],
+ [
+  "FRECCE-IMPOSTE",
+  "NESSUNA parola decide: # §7 — ⭐ IL CENSIMENTO DELLE FRECCE IMPOSTE (2026-10-07) (Mandato di Luca, dopo la precisazione di A15.3. ### Ogni legge del passo che impone una dire"
+ ],
+ [
+  "FRENO-LEGGE",
+  "SEGNAPOSTO: classe NON_DEFINITA, e lo schema vieta uno stato deciso. Prima la classe, poi lo stato"
+ ],
+ [
+  "G2",
+  "la riga dice CHIUSA ma NON PORTA IL COMMIT che ha chiuso, e lo schema lo pretende: non lo invento -- la riga dice <<FATTO>> (la PRIMA parola di stato): INGE LA GRAVITA' | GLOBALE-DISEGNO §2 | FATTO. Il saldo vive sul CONF"
+ ],
+ [
+  "G3",
+  "la riga dice CHIUSA ma NON PORTA IL COMMIT che ha chiuso, e lo schema lo pretende: non lo invento -- la riga dice <<FATTA>> (la PRIMA parola di stato): GRAVITA' BIFASE | GLOBALE-DISEGNO §3 | FATTA. sigillo 7/7 · controllo"
+ ],
+ [
+  "G4",
+  "la riga dice CHIUSA ma NON PORTA IL COMMIT che ha chiuso, e lo schema lo pretende: non lo invento -- la riga dice <<FATTO>> (la PRIMA parola di stato): — flag MEM_MOTO | GLOBALE-DISEGNO §4 | FATTO (finito 14:39:27). La me"
+ ],
+ [
+  "H1",
+  "NESSUNA parola decide: ### H1 aiuta, in modo piccolo e sistematico. ### Ma 0.5536 sta sotto 0.60, e il criterio dice H1 NON BASTA."
+ ],
+ [
+  "H2",
+  "SEGNAPOSTO: classe NON_DEFINITA, e lo schema vieta uno stato deciso. Prima la classe, poi lo stato"
+ ],
+ [
+  "H3",
+  "la riga dice CHIUSA ma NON PORTA IL COMMIT che ha chiuso, e lo schema lo pretende: non lo invento -- la riga dice <<FATTO>> (la PRIMA parola di stato): stato | secondi | che cosa gli è stato fatto | |---|--:|---|--:|---| "
+ ],
+ [
+  "I1",
+  "NESSUNA parola decide: | I1 | IDEA DI LUCA, per dopo: costruire UNA massa, farla maturare, leggerne la struttura sul grafo e REPLICARLA come modello per le tre masse, invece"
+ ],
+ [
+  "I2",
+  "SEGNAPOSTO: classe NON_DEFINITA, e lo schema vieta uno stato deciso. Prima la classe, poi lo stato"
+ ],
+ [
+  "I4",
+  "SEGNAPOSTO: classe NON_DEFINITA, e lo schema vieta uno stato deciso. Prima la classe, poi lo stato"
+ ],
+ [
+  "I5",
+  "SEGNAPOSTO: classe NON_DEFINITA, e lo schema vieta uno stato deciso. Prima la classe, poi lo stato"
+ ],
+ [
+  "IC95",
+  "SEGNAPOSTO: classe NON_DEFINITA, e lo schema vieta uno stato deciso. Prima la classe, poi lo stato"
+ ],
+ [
+  "INDICE-COLLAUDO-SCRITTURA",
+  "NESSUNA parola decide: def collaudo():"
+ ],
+ [
+  "INERZIA-1",
+  "NESSUNA parola decide: | ❗ INERZIA-1 | LA LEGGE DELL'INERZIA CEDE A k = 2, ED È UN DIFETTO DIMOSTRATO (misura 3, f8b27d9): coppia ×2.39, inerzia ×0.016, rapporto ×1521 da k "
+ ],
+ [
+  "INTERO-BLOCCO",
+  "SEGNAPOSTO: classe NON_DEFINITA, e lo schema vieta uno stato deciso. Prima la classe, poi lo stato"
+ ],
+ [
+  "K1",
+  "SEGNAPOSTO: classe NON_DEFINITA, e lo schema vieta uno stato deciso. Prima la classe, poi lo stato"
+ ],
+ [
+  "K2",
+  "SEGNAPOSTO: classe NON_DEFINITA, e lo schema vieta uno stato deciso. Prima la classe, poi lo stato"
+ ],
+ [
+  "K3",
+  "SEGNAPOSTO: classe NON_DEFINITA, e lo schema vieta uno stato deciso. Prima la classe, poi lo stato"
+ ],
+ [
+  "K5",
+  "SEGNAPOSTO: classe NON_DEFINITA, e lo schema vieta uno stato deciso. Prima la classe, poi lo stato"
+ ],
+ [
+  "K7",
+  "SEGNAPOSTO: classe NON_DEFINITA, e lo schema vieta uno stato deciso. Prima la classe, poi lo stato"
+ ],
+ [
+  "K8",
+  "SEGNAPOSTO: classe NON_DEFINITA, e lo schema vieta uno stato deciso. Prima la classe, poi lo stato"
+ ],
+ [
+  "KAPPA-TW-COMMENTO",
+  "NESSUNA parola decide: Collegata a SCALE-TW (di cui e' un pezzo), ARCHI-OLTRE-4PI, KAPPA-TW-COMMENTO,"
+ ],
+ [
+  "L-MEMORIA-PRIMA",
+  "NESSUNA parola decide: ## ⭐ LA REGOLA PERMANENTE PER LA CHIUSURA DEI DIFETTI (decisione di Luca, 2026-10-07) > Per OGNI difetto da chiudere, PRIMA di proporre la cura si val"
+ ],
+ [
+  "M-FLUSSO",
+  "NESSUNA parola decide: # §5 — LE MEMORIE CHE MANCANO > ### 📌 Ogni scheda porta i SETTE CAMPI di L-MEMORIA-PRIMA, più la grandezza > esistente da cui nasce, i prerequisiti, l"
+ ],
+ [
+  "M-ISTERESI",
+  "NESSUNA parola decide: # §5 — LE MEMORIE CHE MANCANO > ### 📌 Ogni scheda porta i SETTE CAMPI di L-MEMORIA-PRIMA, più la grandezza > esistente da cui nasce, i prerequisiti, l"
+ ],
+ [
+  "M-LEGAMI",
+  "NESSUNA parola decide: # §5 — LE MEMORIE CHE MANCANO > ### 📌 Ogni scheda porta i SETTE CAMPI di L-MEMORIA-PRIMA, più la grandezza > esistente da cui nasce, i prerequisiti, l"
+ ],
+ [
+  "M-MASSA",
+  "NESSUNA parola decide: # §5 — LE MEMORIE CHE MANCANO > ### 📌 Ogni scheda porta i SETTE CAMPI di L-MEMORIA-PRIMA, più la grandezza > esistente da cui nasce, i prerequisiti, l"
+ ],
+ [
+  "M-SPINORE",
+  "NESSUNA parola decide: # §5 — LE MEMORIE CHE MANCANO > ### 📌 Ogni scheda porta i SETTE CAMPI di L-MEMORIA-PRIMA, più la grandezza > esistente da cui nasce, i prerequisiti, l"
+ ],
+ [
+  "M0",
+  "SEGNAPOSTO: classe NON_DEFINITA, e lo schema vieta uno stato deciso. Prima la classe, poi lo stato"
+ ],
+ [
+  "M1",
+  "NESSUNA parola decide: | ❗ M1 | LA MATERIA È UNO STATO, NON UNA SOSTANZA — e non c'è SCARICO. Nel codice la materia è la condizione I > Λ (:4117-4120: «sotto Λ sei vuoto, so"
+ ],
+ [
+  "M2",
+  "NESSUNA parola decide: | ❗ M2 | LA MITOSI — DUE DIFETTI DA ACCLARARE. ① il figlio nasce nel PUNTO MEDIO: pos_figlio = 0.5 (self.pos[a] + self.pos[b]) (:5529; lo Schwinger id"
+ ],
+ [
+  "M3",
+  "SEGNAPOSTO: classe NON_DEFINITA, e lo schema vieta uno stato deciso. Prima la classe, poi lo stato"
+ ],
+ [
+  "M4",
+  "SEGNAPOSTO: classe NON_DEFINITA, e lo schema vieta uno stato deciso. Prima la classe, poi lo stato"
+ ],
+ [
+  "MASSA-CRITICA-LOCALE",
+  "RISERVATA al punto 5: NON si tocca"
+ ],
+ [
+  "MEM-VERSO",
+  "NESSUNA parola decide: # §5 — LE MEMORIE CHE MANCANO > ### 📌 Ogni scheda porta i SETTE CAMPI di L-MEMORIA-PRIMA, più la grandezza > esistente da cui nasce, i prerequisiti, l"
+ ],
+ [
+  "O4",
+  "RISERVATA al punto 5: NON si tocca"
+ ],
+ [
+  "P-DECADIMENTO",
+  "NESSUNA parola decide: # ⭐ I DUE PRINCIPI DI LUCA: IL DECADIMENTO È UNA TRASFORMAZIONE, LA MEMORIA DÀ UN VERSO (decisione di Luca, 2026-10-07) > ### 📌 Sono i due principi ch"
+ ],
+ [
+  "P-MEMORIA",
+  "NESSUNA parola decide: # ⭐ I DUE PRINCIPI DI LUCA: IL DECADIMENTO È UNA TRASFORMAZIONE, LA MEMORIA DÀ UN VERSO (decisione di Luca, 2026-10-07) > ### 📌 Sono i due principi ch"
+ ],
+ [
+  "P7",
+  "SEGNAPOSTO: classe NON_DEFINITA, e lo schema vieta uno stato deciso. Prima la classe, poi lo stato"
+ ],
+ [
+  "P8",
+  "SEGNAPOSTO: classe NON_DEFINITA, e lo schema vieta uno stato deciso. Prima la classe, poi lo stato"
+ ],
+ [
+  "P9",
+  "SEGNAPOSTO: classe NON_DEFINITA, e lo schema vieta uno stato deciso. Prima la classe, poi lo stato"
+ ],
+ [
+  "PASSO-1",
+  "NESSUNA parola decide: | PASSO-1 | ❗ IL PASSO NON È step(): SONO CINQUE CHIAMATE, e 24 script sotto csv/ avanzano in modo INCOMPLETO (inventario generato: doc/INVENTARIO_pas"
+ ],
+ [
+  "PASSO-2",
+  "NESSUNA parola decide: | ❗ PASSO-2 | UN AVANZAMENTO INCOMPLETO NEL SIMULATORE STESSO, :8404: for _ in range(300): net.step() nel percorso di ricostruzione con --seed/--nodi,"
+ ],
+ [
+  "PERC-TW-MORTA",
+  "NESSUNA parola decide: # §2 — IL CENSIMENTO COMPLETO DELLO STATO LA LISTA NON E' SCRITTA A MANO: viene dai due registri del simulatore, letti ### dall'AST — REGISTRO_STATO ("
+ ],
+ [
+  "PHI0-CONGELATA",
+  "NESSUNA parola decide: ## (a) phi0 CONGELATA — CONFERMATA, e il conto è esatto AST: 5 scritture, TUTTE alla nascita o alla costruzione — __init__ (:3981), semina (:5059), _r"
+ ],
+ [
+  "POZZO-D",
+  "NESSUNA parola decide: > non dal disegno), e la sua scheda e' ③ gravita-bifase, dove vive pozzo_grafo."
+ ],
+ [
+  "PROBLEMI-CHK3",
+  "NESSUNA parola decide: | PROBLEMI-CHK3 | IL PIANO DEI PROBLEMI APERTI — per ciascuno: la domanda da chiudere · la misura o derivazione che la chiude · da che scheda dipende "
+ ],
+ [
+  "PROVA-COMB",
+  "NESSUNA parola decide: | PROVA-COMB | LA PROVA COMBINATA: TUTTE LE CURE APPROVATE ACCESE INSIEME — 600 passi, stesso seme e scena, letture della validazione (8 criteri) e BI"
+ ],
+ [
+  "R1",
+  "SEGNAPOSTO: classe NON_DEFINITA, e lo schema vieta uno stato deciso. Prima la classe, poi lo stato"
+ ],
+ [
+  "R2",
+  "NESSUNA parola decide: | R2 VALE PER QUELLA SCENA [EPOCA 1 · MISURA] | NUOVO: il residuo della catena theta = sigma + tau/2 non e' spiegato, E TENSIONE CON C3. C3 lo dava tr"
+ ],
+ [
+  "R3b",
+  "SEGNAPOSTO: classe NON_DEFINITA, e lo schema vieta uno stato deciso. Prima la classe, poi lo stato"
+ ],
+ [
+  "R4",
+  "SEGNAPOSTO: classe NON_DEFINITA, e lo schema vieta uno stato deciso. Prima la classe, poi lo stato"
+ ],
+ [
+  "REG-B",
+  "NESSUNA parola decide: | REG-B | FASE B: le SCHEDE, a lotti, un commit per lotto | MANDATO-REGISTRO §2 | LE QUATTRO DELL'ORDINE DI LUCA SONO SCRITTE. ① freno di SCALA_MIN (D"
+ ],
+ [
+  "REG-C",
+  "NESSUNA parola decide: | REG-C | FASE C: LA STORIA di ogni legge, e le schede delle leggi TOLTE | MANDATO-REGISTRO §2 | ⏸ cio' che non si ricostruisce si scrive NON RICOSTRU"
+ ],
+ [
+  "REG-R",
+  "la riga dice CHIUSA ma NON PORTA IL COMMIT che ha chiuso, e lo schema lo pretende: non lo invento -- la riga dice <<FATTA>> (la PRIMA parola di stato): rgo facendo il punto. Non poteva essere fatta prima: l'hook rifiutere"
+ ],
+ [
+  "REGISTRO_FISICA:A1",
+  "NESSUNA parola decide: | A1 | flag SPENTO = BYTE-IDENTICO al codice precedente, firma dei byte, un processo per braccio |"
+ ],
+ [
+  "REGISTRO_FISICA:A11",
+  "NESSUNA parola decide: ## A11 — IL PAVIMENTO 1e-6 Resta, e deve diventare INERTE. Misurato prima della cura: 0/20 — non morde mai, quindi non stava nascondendo il crollo. Co"
+ ],
+ [
+  "REGISTRO_FISICA:A13",
+  "NESSUNA parola decide: A13 dice che sotto LAM non esiste niente, nemmeno una distanza fra nodi. Quindi la cura"
+ ],
+ [
+  "REGISTRO_FISICA:A2",
+  "NESSUNA parola decide: | A2 | al passo 1, ramp == 1 su TUTTI i nodi della semina iniziale, ESATTO |"
+ ],
+ [
+  "REGISTRO_FISICA:A3",
+  "NESSUNA parola decide: | A3 | un nodo nato da MITOSI parte da ramp = 0 e arriva a 1 nel suo tempo-luce |"
+ ],
+ [
+  "REGISTRO_FISICA:A4",
+  "NESSUNA parola decide: | A4 | contrasto massa/vuoto e Lam al passo 1, contro P2 = 27 e P3 = 5 |"
+ ],
+ [
+  "REGISTRO_FISICA:A5",
+  "NESSUNA parola decide: | A5 | CONTROLLO POSITIVO: ON e OFF DEVONO differire |"
+ ],
+ [
+  "REGISTRO_FISICA:A6",
+  "NESSUNA parola decide: | A6 | CASO CHE DEVE FALLIRE: con maturi=False forzato, A2 deve dare FAIL |"
+ ],
+ [
+  "REGISTRO_FISICA:C1",
+  "NESSUNA parola decide: | C1 | flag spento: byte-identico | par.2.1. L'arresto vive dentro SEMINA_LAM: a flag spento non esiste |"
+ ],
+ [
+  "REGISTRO_FISICA:C2",
+  "NESSUNA parola decide: | C2 | la capienza è INDIPENDENTE da n chiesto (prova del raddoppio) | ❗ È IL CRITERIO CHE OGGI FALLISCE: misurato +0.61 %, +4.11 %, +2.77 % a tre rag"
+ ],
+ [
+  "REGISTRO_FISICA:C3",
+  "NESSUNA parola decide: | C3 | frazione di impacchettamento 0.384 NELLA SFERA INTERNA — i nodi a distanza >= R_CONN dal bordo, entro la dispersione fra QUATTRO semi | ❗ È IL "
+ ],
+ [
+  "REGISTRO_FISICA:C4",
+  "NESSUNA parola decide: | C4 | nessun rifiuto falso: con n sotto la capienza misurata la semina riesce sempre, su quattro semi | è il difetto che Luca ha trovato, e questo cr"
+ ],
+ [
+  "REGISTRO_FISICA:D33",
+  "NESSUNA parola decide: D33 — la repulsione si spegne dove servirebbe. Il segno si inverte oltre ~3.5π, ma"
+ ],
+ [
+  "REGISTRO_FISICA:D35",
+  "NESSUNA parola decide: D35 — l'antifase non è un'antifase. Il campo è F = Σ K·exp(iφ), e"
+ ],
+ [
+  "REGISTRO_FISICA:D37",
+  "la riga dice CHIUSA ma NON PORTA IL COMMIT che ha chiuso, e lo schema lo pretende: non lo invento -- la riga dice <<FATTO>> (la PRIMA parola di stato): a valida: cs > 0 era GIÀ un invariante, fatto da qualcun altro prima "
+ ],
+ [
+  "REGISTRO_FISICA:E1a",
+  "NESSUNA parola decide: | E1a la mitosi non muore | Luca | _g_nati_mitosi > 0 e n cresce | il nullo: se la cura rompesse fm, le nascite sarebbero 0 |"
+ ],
+ [
+  "REGISTRO_FISICA:E1b",
+  "NESSUNA parola decide: | E1b la mitosi non esplode | Luca | n finale < 10× il riferimento, e il run arriva a 600 passi | MISURATA: 178 archi per nodo (526672 / 2959). 10× n "
+ ],
+ [
+  "REGISTRO_FISICA:E1c",
+  "NESSUNA parola decide: | E1c il fattore | mio | le nascite salgono di un fattore fra 5× e 100× | DERIVATA dagli archi GIÀ SUL DISCO: la campana ha il picco a |tw| = soglia, "
+ ],
+ [
+  "REGISTRO_FISICA:E2",
+  "NESSUNA parola decide: | E2 le coppie annichilano | Luca | NON MISURABILE, e si dichiara | vedi il blocco qui sotto |"
+ ],
+ [
+  "REGISTRO_FISICA:E3",
+  "NESSUNA parola decide: | E3 la finestra di D33 | mio | si riporta la popolazione delle due finestre nei due bracci | il §E stesso dice «non è una cura di D33, è un effetto, "
+ ],
+ [
+  "REGISTRO_FISICA:E4",
+  "NESSUNA parola decide: | E4 i diagnostici di fase | mio | max(φ) < 2π nel braccio della cura | la riserva ② di Z120. Il nullo è il sigillo: a flag spento max(φ) = 12.565546 "
+ ],
+ [
+  "REGISTRO_FISICA:P1",
+  "NESSUNA parola decide: | P1 | somma dei pesi per nodo | ~50 | ~9 | 0.18 |"
+ ],
+ [
+  "REGISTRO_FISICA:P3b",
+  "NESSUNA parola decide: | P3b | ampiezza dello scuotimento | — | ~5× più bassa | 0.2 |"
+ ],
+ [
+  "REGISTRO_FISICA:REG-R",
+  "NESSUNA parola decide: REG-R, la regola mantenuta (da cablare quando le schede coprono le leggi attive): nessuna"
+ ],
+ [
+  "REGISTRO_FISICA:S1",
+  "NESSUNA parola decide: | S1 | flag SPENTO = byte-identico: firma dei byte su tutti i campi, un processo per braccio | par.2.1 · STANDARD 1 · STANDARD 2 |"
+ ],
+ [
+  "REGISTRO_FISICA:S10",
+  "NESSUNA parola decide: | S10 | le regioni restano coerenti: frazione di nodi della coorte con I > Λ, ai passi 0, 30, 60, 120 | ❗ SE CROLLA È UN RISULTATO, NON UN DIFETTO (Lu"
+ ],
+ [
+  "REGISTRO_FISICA:S2",
+  "NESSUNA parola decide: | S2 | passo ZERO: min distanza fra POSIZIONI >= LAM (cKDTree, k=2) | ❗ è A13 misurato direttamente, e è il criterio che NASCITA_LAM non poteva soddis"
+ ],
+ [
+  "REGISTRO_FISICA:S3",
+  "NESSUNA parola decide: | S3 | passo ZERO: sum(d < LAM) == 0 E sum(d == LAM) == 0 | i due INSIEME: il primo da solo lo darebbe anche _nasce. Lo zero sul secondo distingue «no"
+ ],
+ [
+  "REGISTRO_FISICA:S5",
+  "NESSUNA parola decide: | S5 | nodi isolati == 0 | un nodo isolato non è un nodo più semplice: è un nodo che esce dalla fisica |"
+ ],
+ [
+  "REGISTRO_FISICA:S7",
+  "NESSUNA parola decide: | S7 | giro corto di 120 passi: la mitosi viva, il bilancio di d0 CHIUDE | E1a e B, gli stessi di CURA 1 e CURA 2. ❗ è il solo che può BOCCIARE la cur"
+ ],
+ [
+  "REGISTRO_FISICA:S9",
+  "NESSUNA parola decide: | S9 | al passo ZERO: intensità media DENTRO le regioni / quella del vuoto, > 1 — e si riporta il valore | ❗ È IL CRITERIO CHE DECIDE SE LA STRADA (ii"
+ ],
+ [
+  "REGISTRO_FISICA:SCENA-1",
+  "la riga dice CHIUSA ma NON PORTA IL COMMIT che ha chiuso, e lo schema lo pretende: non lo invento -- la riga dice <<FATTO>> (la PRIMA parola di stato): 783/12812/12790). Scegliere 455 avrebbe fatto rifiutare i semi più > "
+ ],
+ [
+  "REGISTRO_FISICA:T2",
+  "NESSUNA parola decide: | _T2 | -0.15 … +0.44 | fa cio' che la geometria impone |"
+ ],
+ [
+  "REGISTRO_FISICA:T3",
+  "NESSUNA parola decide: | T3 | un arco sotto LAM a flag SPENTI FERMA il run | quello che prima non faceva |"
+ ],
+ [
+  "REGISTRO_FISICA:T5",
+  "NESSUNA parola decide: | T5 | byte-inerte: 206 campi identici, 0 diversi contro _cura1_corto | l'invariante legge soltanto |"
+ ],
+ [
+  "REGISTRO_FISICA:U2",
+  "NESSUNA parola decide: ### U2 È ATTIVA IN ENTRAMBI I BRACCI DI P-GONFIA E FABBRICA LUNGHEZZA (Luca, 2026-09-25) Non cambia il criterio, e va dichiarata come tale: serve a le"
+ ],
+ [
+  "REGISTRO_FISICA:U2-5",
+  "NESSUNA parola decide: U2-5 è MODEL-FREE: non confronta col mio conto, legge d e d0 e conta gli archi che"
+ ],
+ [
+  "REGISTRO_FISICA:U2-6",
+  "NESSUNA parola decide: U2-6 È IL CASO CHE DEVE FALLIRE (P1-sexies, ed è il criterio più importante): la"
+ ],
+ [
+  "REGISTRO_FISICA:U2a",
+  "NESSUNA parola decide: | U2a | la LUNGHEZZA FABBRICATA da _nasce, sum(LAM - v) sugli archi troncati, SEPARATA per grandezza (d, d0) e per sito (semina, mitosi, schwinger) e "
+ ],
+ [
+  "REGISTRO_FISICA:U2b",
+  "NESSUNA parola decide: | U2b | quanti archi sono stati troncati, e su quanti visti — stessa separazione | idem |"
+ ],
+ [
+  "REGISTRO_FISICA:U2c",
+  "NESSUNA parola decide: | U2c | frazione di archi sotto 2 LAM | ai passi 0 e 120 |"
+ ],
+ [
+  "REGISTRO_FISICA:V1",
+  "NESSUNA parola decide: | V1 | quanto vale a, il passo tipico di rumore, misurato | è il numero che decide la condizione a < LAM del par.4 |"
+ ],
+ [
+  "REGISTRO_FISICA:V2",
+  "NESSUNA parola decide: | V2 | la deriva di oggi sotto rumore simmetrico | deve riprodurre Z113: ≈ +1.582e-03 con i suoi parametri |"
+ ],
+ [
+  "REGISTRO_FISICA:V3",
+  "NESSUNA parola decide: | V3 | la deriva della proposta, stessa a, stessi d | deve essere del secondo ordine: raddoppiando a deve quadruplicare, non raddoppiare |"
+ ],
+ [
+  "REGISTRO_FISICA:V4",
+  "NESSUNA parola decide: | V4 | la deriva della proposta al confine (d → LAM) | → 0, mentre quella di oggi → a/2 |"
+ ],
+ [
+  "REGISTRO_FISICA:V5",
+  "NESSUNA parola decide: | V5 | la deriva della proposta lontano | decade come 1/d in assoluto, 1/d² in relativo |"
+ ],
+ [
+  "REGISTRO_FISICA:V6",
+  "NESSUNA parola decide: | V6 | il caso che DEVE fallire: la forma exp(dx/u) | deve esplodere vicino al confine, e il test lo deve mostrare |"
+ ],
+ [
+  "REGISTRO_FISICA:V7",
+  "NESSUNA parola decide: | V7 | mai sotto LAM: una discesa enorme, dx = −100·d | oggi attraversa; la proposta no, per qualunque passo |"
+ ],
+ [
+  "REGISTRO_FISICA:V8",
+  "NESSUNA parola decide: | V8 | la DISTRIBUZIONE di \\|dx\\|/d, non solo il suo tipico | è il numero che decide fra piana e Itô: p50, p99, max. Se max ≪ 1 la non-monotonia di It"
+ ],
+ [
+  "REGISTRO_FISICA:V9",
+  "NESSUNA parola decide: | V9 | quante scritture hanno \\|dx\\|/d > 1, e quante > 2 | > 1: Itô comprime; > 2: Itô inverte il verso. Se sono zero, la scelta è libera; se non lo s"
+ ],
+ [
+  "RIPIEGO-1",
+  "AMBIGUA, e nella STESSA CELLA: dice <<APERTA>> e <<CHIUSA>> -- | RIPIEGO-1 — APERTA E CHIUSA il 2026-09-25 (difetto mio, ri"
+ ],
+ [
+  "RITMO-PAVIMENTO",
+  "NESSUNA parola decide: > commit — tempo-proprio per RITMO_WRAP_2PI, torsione-spinore per TW_SPINORE —"
+ ],
+ [
+  "S0",
+  "SEGNAPOSTO: classe NON_DEFINITA, e lo schema vieta uno stato deciso. Prima la classe, poi lo stato"
+ ],
+ [
+  "S01",
+  "NESSUNA parola decide: | S01 | Chi fa crescere d0: in G3 gli scrittori sommano -1.6e+03 e med d0 RADDOPPIA lo stesso | il BILANCIO COMPLETO di G4 (scritture + freno + nascit"
+ ],
+ [
+  "S03",
+  "NESSUNA parola decide: | S03 | La memoria del moto fa scappare d0 | DECISO da Z109: spegnendola d0 cresce ancora (1.1607), quindi NON e' il motore — ma la crescita cala del "
+ ],
+ [
+  "S04",
+  "NESSUNA parola decide: | S04 | La crescita e' NUCLEAZIONE, non stiramento | ❌ CADE con Z108: nascite meno morti valgono lo 0.01 % del Δ (+254.4 su +1.731e+06) | NON E' IL MO"
+ ],
+ [
+  "S05",
+  "NESSUNA parola decide: | S05 | La compressione d/d0 < 1 e' un difetto e non una fase | G3 dice che peggiora senza gravita' (0.7489→0.6258): serve una misura che ne trovi la "
+ ],
+ [
+  "S06",
+  "NESSUNA parola decide: | S06 | Il «muro dell'1 %» dell'antifase e' causato da D35: l'antifase «non annichila» perche' +2π letto da exp(iφ) non e' un'antifase, e' la stessa f"
+ ],
+ [
+  "S08",
+  "NESSUNA parola decide: | S08 | Se φ non e' l'azimut del Bloch, CHE COS'E'? | Z121 ha refutato la frase del docstring (R ≤ 0.18 contro un nullo di 0.016, criterio ≥ 0.90), ma"
+ ],
+ [
+  "S09",
+  "NESSUNA parola decide: | S09 | IL TETTO DI r E' RAGGIUNTO PER UNA VIA CHE NON CONOSCIAMO — lettura di Luca, 2026-09-22: la quota di nodi al tetto SALE dopo aver tolto un mec"
+ ],
+ [
+  "S1",
+  "SEGNAPOSTO: classe NON_DEFINITA, e lo schema vieta uno stato deciso. Prima la classe, poi lo stato"
+ ],
+ [
+  "S11",
+  "NESSUNA parola decide: | S11 | r E' SATURO AL SUO TETTO PER UN TERZO DEI NODI, e la quota CRESCE: 0.76 % -> 29.57 % in 600 passi (A11 cor.6: un limite che satura e' un allar"
+ ],
+ [
+  "S12",
+  "NESSUNA parola decide: | S12 APPROVATO DA LUCA il 2026-09-24 | IL RILASSAMENTO DI _rep DENTRO mitosi() (:5280) E' UN EULERO ESPLICITO, e par.4 LO VIETA — self._rep += _dte(r"
+ ],
+ [
+  "S13",
+  "NESSUNA parola decide: | S13 | IL TEMPO D'ARCO DOVREBBE ESSERE min(r_i, r_j) INVECE DELLA MEDIA ARITMETICA? — proposta per TUTTO il sistema, non per la mitosi | misurare, su"
+ ],
+ [
+  "S2",
+  "NESSUNA parola decide: | S2 VALE PER QUELLA SCENA [EPOCA 1 · MISURA] | NON SI RIPRODUCE sul sistema corretto, E CAMBIA SEGNO (2026-09-16, baseline c57800c1). Il contrasto ch"
+ ],
+ [
+  "S3",
+  "SEGNAPOSTO: classe NON_DEFINITA, e lo schema vieta uno stato deciso. Prima la classe, poi lo stato"
+ ],
+ [
+  "SCALE-TW",
+  "la riga dice CHIUSA ma NON PORTA IL COMMIT che ha chiuso, e lo schema lo pretende: non lo invento -- la riga dice <<FATTO>> (la PRIMA parola di stato): SO. Posizione: dopo l'esito di G4-bis ( fatto) e REG-R, prima del CHK"
+ ],
+ [
+  "STANDARD-1",
+  "SEGNAPOSTO: classe NON_DEFINITA, e lo schema vieta uno stato deciso. Prima la classe, poi lo stato"
+ ],
+ [
+  "STANDARD-5",
+  "SEGNAPOSTO: classe NON_DEFINITA, e lo schema vieta uno stato deciso. Prima la classe, poi lo stato"
+ ],
+ [
+  "STANDARD-7",
+  "SEGNAPOSTO: classe NON_DEFINITA, e lo schema vieta uno stato deciso. Prima la classe, poi lo stato"
+ ],
+ [
+  "STANDARD-9",
+  "SEGNAPOSTO: classe NON_DEFINITA, e lo schema vieta uno stato deciso. Prima la classe, poi lo stato"
+ ],
+ [
+  "T0",
+  "SEGNAPOSTO: classe NON_DEFINITA, e lo schema vieta uno stato deciso. Prima la classe, poi lo stato"
+ ],
+ [
+  "T1",
+  "SEGNAPOSTO: classe NON_DEFINITA, e lo schema vieta uno stato deciso. Prima la classe, poi lo stato"
+ ],
+ [
+  "T1b",
+  "SEGNAPOSTO: classe NON_DEFINITA, e lo schema vieta uno stato deciso. Prima la classe, poi lo stato"
+ ],
+ [
+  "T7",
+  "SEGNAPOSTO: classe NON_DEFINITA, e lo schema vieta uno stato deciso. Prima la classe, poi lo stato"
+ ],
+ [
+  "T9",
+  "SEGNAPOSTO: classe NON_DEFINITA, e lo schema vieta uno stato deciso. Prima la classe, poi lo stato"
+ ],
+ [
+  "TERRA-BUCONERO",
+  "SEGNAPOSTO: classe NON_DEFINITA, e lo schema vieta uno stato deciso. Prima la classe, poi lo stato"
+ ],
+ [
+  "TORS-W8-AVVOLGIMENTO",
+  "NESSUNA parola decide: lunga di TORS-W8-AVVOLGIMENTO. La prova:"
+ ],
+ [
+  "TS-1",
+  "NESSUNA parola decide: | TS-1 | la soglia è raggiungibile nel regime A13: frazione di archi (o cicli) oltre il quanto > 0 su 4 semi | boccia la proposta se è 0, come oggi è "
+ ],
+ [
+  "TS-2",
+  "NESSUNA parola decide: | TS-2 | tw = 0 e tw = 4π danno lo STESSO passo, byte per byte | boccia qualunque residuo di lettura «accumulo» |"
+ ],
+ [
+  "TS-3",
+  "NESSUNA parola decide: | TS-3 | nessun φ nella formula: verifica dall'AST, non da un grep sul testo | boccia se dph sopravvive |"
+ ],
+ [
+  "TS-4",
+  "NESSUNA parola decide: | TS-4 | nessuna perdita: con incremento a media nulla la grandezza si conserva | boccia se resta un − dt/τ |"
+ ],
+ [
+  "TS-5",
+  "NESSUNA parola decide: | TS-5 | caso che DEVE fallire (P1-sexies): con il quanto messo a zero la creazione deve scattare su OGNI ciclo | boccia il criterio, non la legge, se"
+ ],
+ [
+  "TS-6",
+  "NESSUNA parola decide: | TS-6 | flag OFF = byte-identico, firma dei byte, un processo per braccio | è il presidio |"
+ ],
+ [
+  "TW-1",
+  "NESSUNA parola decide: | TW-1 | flag OFF = byte-identico, firma dei byte, un processo per braccio | nessuna: è il presidio |"
+ ],
+ [
+  "TW-2",
+  "NESSUNA parola decide: | TW-2 | tw = 0 e tw = periodo danno LO STESSO passo, byte per byte | boccia A se falliscono, perché in A sono lo stesso stato |"
+ ],
+ [
+  "TW-3",
+  "NESSUNA parola decide: | TW-3 | con l'incremento a media nulla, sum(tw) è CONSERVATA (nessuna perdita) | boccia A se non lo è |"
+ ],
+ [
+  "TW-4",
+  "NESSUNA parola decide: | TW-4 | la soglia non dipende da PHI_CRIT moltiplicato per un numero: la si cambia di ×2 e la mitosi scala come il bilancio prevede | boccia B se la "
+ ],
+ [
+  "TW-5",
+  "NESSUNA parola decide: | TW-5 | caso che DEVE fallire (P1-sexies): con E_nodo messa a zero la mitosi deve scattare su OGNI arco | boccia B se non scatta: vuol dire che la so"
+ ],
+ [
+  "TW-6",
+  "NESSUNA parola decide: | TW-6 | frazione di archi che raggiungono la soglia > 0 su 4 semi (non su uno) | nessuna: è la condizione perché la mitosi esista |"
+ ],
+ [
+  "U1",
+  "NESSUNA parola decide: | U1 | ❗ URGENTE, PRIMA DI QUALUNQUE GIRO LUNGO — massa_critica_collasso: 21 usi DENTRO LEGGI FISICHE (mitosi, step, lambda_nodi, _passo_spinoriale, c"
+ ],
+ [
+  "U2",
+  "NESSUNA parola decide: | U2 | ❗ M2 DIVENTA URGENTE — la mitosi mette figli SOTTO la scala di Planck. Con la semina nuova gli archi stanno fra 1 e 3 LAM, e una buona parte (s"
+ ],
+ [
+  "X3",
+  "NESSUNA parola decide: | X3 VALE SEMPRE [EPOCA 1 · CODICE] | AUDIT DI LETTURA DELLE LEGGI — registrato (2026-09-16) | Nove leggi escluse per DIMOSTRAZIONE (non per misura), "
+ ],
+ [
+  "Y2",
+  "NESSUNA parola decide: | Y2 VALE SEMPRE [EPOCA 1 · MISURA] | Due osservabili U(1) hanno il nullo SBAGLIATO o NON VERIFICATO, e una e' scritta nei CSV | (a) u1_segno_ov_nullo"
+ ],
+ [
+  "Z1",
+  "NESSUNA parola decide: | Z1 VALE PER QUELLA SCENA [EPOCA 1 · MISURA] | inerzia: la correzione (1) NON e' stata cablata — il gate che la autorizzava aveva misurato UN'ALTRA G"
+ ],
+ [
+  "Z104",
+  "RISERVATA al punto 5: NON si tocca"
+ ],
+ [
+  "Z11",
+  "la riga dice CHIUSA ma NON PORTA IL COMMIT che ha chiuso, e lo schema lo pretende: non lo invento -- la riga dice <<FINITA>> (la PRIMA parola di stato): b cambiera' ancora | DA FARE A BONIFICA FINITA, non ora (registrato "
+ ],
+ [
+  "Z12",
+  "NESSUNA parola decide: | Z12 VALE PER QUELLA SCENA [EPOCA 1 · MISURA] | _pesi() gira SEDICI volte per passo, a cavallo della scrittura di _cs_nodo_prev: A6 sarebbe violato i"
+ ],
+ [
+  "Z125",
+  "NESSUNA parola decide: | Z125 DIFETTO DI METODO, MIO [archivi delle cure · LETTURA] | IL §E NON ESISTE NEL REPO OLTRE E1 ED E2: ho citato «i quattro test E1-E4» undici volte"
+ ],
+ [
+  "Z127",
+  "NESSUNA parola decide: | Z127 LA LETTURA CADE [archivi delle cure · PROVA] | E1 NON PASSA: CON FASE_2PI LA GENERAZIONE DI MATERIA SI FERMA. E LA MIA PREVISIONE ERA SBAGLIATA"
+ ],
+ [
+  "Z14",
+  "NESSUNA parola decide: | Z14 VALE SEMPRE [EPOCA 1 · CODICE] | IL TERZO RAMO DI calcola_psi (elif sotto REPULS_LEGGE): DICHIARATO, non corretto (2026-09-17) | :3054 ha lo ste"
+ ],
+ [
+  "Z142",
+  "NESSUNA parola decide: | Z142 REPERTO, DIFETTI MIEI [archivi delle cure · SIGILLO FALLITO] | IL SIGILLO DI E4-LAM FALLISCE 4/5, E I DUE DIFETTI SONO MIEI: un CRITERIO che ce"
+ ],
+ [
+  "Z145",
+  "AMBIGUA, e nella STESSA CELLA: dice <<CHIUSO>> e <<APERTO>> -- ## Z145 — CHIUSO — T5 del sigillo di CURA 2 era invalido"
+ ],
+ [
+  "Z16",
+  "NESSUNA parola decide: | Z16 VALE SEMPRE [EPOCA 1 · MISURA] | Y5 ROSSO: la causa e' rho_sorgente <= 0, NON peq. E nessuna delle due porte ipotizzate (2026-09-17) | Strumenta"
+ ],
+ [
+  "Z17",
+  "NESSUNA parola decide: | Z17 VALE PER QUELLA SCENA [EPOCA 1 · MISURA] | A6 nell'inerzia e' garantito dall'ORDINE, non dalla STRUTTURA (2026-09-17, rilievo del guardiano veri"
+ ],
+ [
+  "Z19",
+  "NESSUNA parola decide: | Z19 VALE SEMPRE [EPOCA 1 · MISURA] | QUARTA VOLTA: una grandezza letta in un momento del passo diverso da quello che il codice dichiara (2026-09-17)"
+ ],
+ [
+  "Z1b",
+  "SEGNAPOSTO: classe NON_DEFINITA, e lo schema vieta uno stato deciso. Prima la classe, poi lo stato"
+ ],
+ [
+  "Z1c",
+  "SEGNAPOSTO: classe NON_DEFINITA, e lo schema vieta uno stato deciso. Prima la classe, poi lo stato"
+ ],
+ [
+  "Z2",
+  "NESSUNA parola decide: | Z2 VALE SEMPRE [EPOCA 1 · MISURA] | spinta: A2 e A3 sono stati tolti, A1 NO (2026-09-17) | La correzione (2) ha sostituito 0.02median(self.d0)rep co"
+ ],
+ [
+  "Z21",
+  "NESSUNA parola decide: | Z21 VALE PER QUELLA SCENA [EPOCA 1 · MISURA] | SPIN_FEEDBACK con TAU_A = 2.0: ESITO MISTO, e non si sceglie una delle quattro letture (2026-09-17) |"
+ ],
+ [
+  "Z24",
+  "NESSUNA parola decide: | Z24 VALE PER QUELLA SCENA [EPOCA 1 · MISURA] | IL DENOMINATORE PER GRADO: la misura NON distingue (A) da (B), ma (B) cade per DIMOSTRAZIONE. E lo st"
+ ],
+ [
+  "Z26",
+  "NESSUNA parola decide: | Z26 VALE PER QUELLA SCENA [EPOCA 1 · MISURA] | A QUATTRO SEMI SPIN_FEEDBACK NON PRODUCE EFFETTO MISURABILE. Il +3.0 punti era UN SEME, e cade anche "
+ ],
+ [
+  "Z28",
+  "la riga dice CHIUSA ma NON PORTA IL COMMIT che ha chiuso, e lo schema lo pretende: non lo invento -- la riga dice <<CHIUSA>> (la PRIMA parola di stato): E PER QUELLA SCENA [EPOCA 1 · MISURA] | CHIUSA PRIMA DI NASCERE — il"
+ ],
+ [
+  "Z31",
+  "NESSUNA parola decide: | Z31 VALE SEMPRE [EPOCA 1 · MISURA] | QUATTRO SIGILLI NON SONO PIU' RI-GIRABILI: il loro termine di paragone viveva in una CARTELLA TEMPORANEA, e il "
+ ],
+ [
+  "Z32",
+  "NESSUNA parola decide: | Z32 VALE PER QUELLA SCENA [EPOCA 1 · MISURA] | Z9 RIMISURATA SUL BLOB ATTUALE: INTATTA (+2.8 %). E il meccanismo che poteva cambiarla e' BLOCCATO da"
+ ],
+ [
+  "Z33",
+  "NESSUNA parola decide: | Z33 VALE PER QUELLA SCENA [EPOCA 1 · MISURA] | LA MEDIANA IN ritmo() E' ENTRAMBE: normalizzazione dimensionale E gauge del tempo. Z9 NON SI CURA DA "
+ ],
+ [
+  "Z34",
+  "NESSUNA parola decide: | Z34 VALE PER QUELLA SCENA [EPOCA 1 · MISURA] | Z33 MISURATA: NON e' un difetto del GAUGE, e' un difetto di ORDINE/SNAPSHOT. TRANSITORIO, 4 passi su "
+ ],
+ [
+  "Z35",
+  "NESSUNA parola decide: | Z35 VALE PER QUELLA SCENA [EPOCA 1 · MISURA] | NESSUNA delle due vie cura Z33: la (1) E' IL DIFETTO, la (2) NON CURA e INVENTEREBBE UN PASSATO. La c"
+ ],
+ [
+  "Z37",
+  "NESSUNA parola decide: | Z37 VALE PER QUELLA SCENA [EPOCA 1 · MISURA] | LA CUCITURA DELLO SNAPSHOT FALLISCE SU ENTRAMBI I FRONTI, e si DIMOSTRA perche'. NON CABLATA (2026-09"
+ ],
+ [
+  "Z4",
+  "NESSUNA parola decide: | Z4 VALE PER QUELLA SCENA [EPOCA 1 · MISURA] | _floor_d0: SOSPESA, e i due rami violano assiomi DIVERSI (2026-09-17) | PAV_COM = False (default) da' "
+ ],
+ [
+  "Z47",
+  "RISERVATA al punto 5: NON si tocca"
+ ],
+ [
+  "Z50",
+  "NESSUNA parola decide: | Z50 VALE PER QUELLA SCENA [EPOCA 1 · MISURA] | QUALIFICATA il 2026-09-18: VALE PER LA REGIONE DENSA. Il mandato chiedeva A_m sui nodi con rho_spin S"
+ ],
+ [
+  "Z51",
+  "NESSUNA parola decide: | Z51 VALE PER QUELLA SCENA [EPOCA 1 · MISURA] | LA Y NON C'E': NE' NEL DENSO, NE' NEL VUOTO, NE' NELLA VARIAZIONE. IL DIPOLO SI' (2026-09-18, blob a1"
+ ],
+ [
+  "Z58",
+  "AMBIGUA, e nella STESSA CELLA: dice <<CHIUSA>> e <<RESTA APERTO>> -- ta fermo mentre il sistema si dilata. | CHIUSA per MISURA (l'ipotesi, non il fenomeno)"
+ ],
+ [
+  "Z6",
+  "NESSUNA parola decide: | Z6 VALE SEMPRE [EPOCA 1 · MISURA] | IL TRANSITORIO DI ACCENSIONE E' UN BLOCCO STRUTTURALE — ha fermato DUE correzioni (2026-09-17) | psi non viene c"
+ ],
+ [
+  "Z79",
+  "AMBIGUA, e nella STESSA CELLA: dice <<CHIUDE CHI>> e <<FATTA>> -- cata: ~10 minuti. CRITERIO DI CHIUSURA: chiude chi misura coesione_relazionale PRIMA del c"
+ ],
+ [
+  "Z8",
+  "NESSUNA parola decide: | Z8 VALE SEMPRE [EPOCA 1 · MISURA] | Lo 0.3457 % di nodi ancora al pavimento 1e-6 NON e' caratterizzato (2026-09-17) | Dopo il cablaggio di ① il pavi"
+ ],
+ [
+  "Z82",
+  "la riga dice CHIUSA ma NON PORTA IL COMMIT che ha chiuso, e lo schema lo pretende: non lo invento -- la riga dice <<CHIUSO>> (la PRIMA parola di stato): 20, dato gia' in mano da doc/REFERTO_AB_chiuso.md; NON misurato appo"
+ ],
+ [
+  "Z86",
+  "AMBIGUA, e nella STESSA CELLA: dice <<APERTA>> e <<CHIUSA>> -- he e' la richiesta letterale di Luca. | APERTA: il criterio si CORREGGE, e si STRINGE."
+ ]
+]

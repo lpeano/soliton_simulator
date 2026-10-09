@@ -2373,3 +2373,15 @@ etichette rimosse, con ### **`0` persi, `0` doppi, `0` conflitti**.
 | **COMANDO** | `python csv/_doc_referto_era_metodo.py` |
 | **cosa misura** | i conteggi **prima** da `git show 72e452f:…` e **dopo** dal disco; i segnali dalle stesse funzioni che gira il validatore; e **importa** i tre gruppi, i `LIMITE` e le `ECCEZIONI` da `csv/_era_metodo.py` e la tavola `ERA1_OGGETTI` da `csv/indice.py`: ### **il referto e il lavoro non possono divergere** |
 | **l'uscita** | `doc/REFERTO_indice_v3_era_metodo.md` *(`250` righe)* |
+
+---
+
+### `csv/_righe_origine.py` e `csv/_stato_dalla_riga.py` — **LA RIGA D'ORIGINE** *(2026-10-09)*
+
+| | |
+|---|---|
+| **file** | `csv/_righe_origine.py` *(blob `1d94afe9`)* · `csv/_stato_dalla_riga.py` *(blob `e2913eb2`)* |
+| **COMANDO** | `python csv/_righe_origine.py` · `python csv/_righe_origine.py <ID> …` · `python csv/_stato_dalla_riga.py collaudo` · `1`, poi `aggiorna-lotto` |
+| **cosa misura** | la **riga d'origine INTERA** di una voce *(`452` su `846` si ritrovano)*, e da quella **lo stato**. ### ⛔ **Il collaudo sui `7` casi del mandato gira PRIMA, e se non passa il lotto non si scrive** |
+| ### ⚠ **tre correzioni al RITROVAMENTO** | il prefisso di `fonte` è **senza `**` e backtick** *(senza spogliarli: `1` caso su `7`)*; alcune **emoji di stato** sono nel titolo e altre no; un prefisso può essere **contenuto in un nome più lungo** → **vince la riga più corta** |
+| ### ⚠ **due correzioni alla REGOLA** | il **confine di parola** *(`infinito` contiene `FINITO`)* e **la PRIMA parola di stato vince** *(la riga racconta anche la STORIA)*. ### **Alla lettera la regola dava `5` su `7`, e il collaudo ha deciso** |

@@ -74,17 +74,17 @@ python csv/indice.py aggiorna-lotto doc/indice/_lotti/<nome>.jsonl
 | voci | `846` |
 | ### **`DA_CLASSIFICARE` vere** *(non segnaposto)* | ### **`1`** |
 | ### **segnaposto `NON_DEFINITA`** | ### **`187`** |
-| ### **righe di storico** | ### **`1272`** |
+| ### **righe di storico** | ### **`1446`** |
 
 ```
 classe    DIFETTO=212  NON_DEFINITA=187  FRONTE=169  CRITERIO=94  MISURA=75  CURA=46  PRESIDIO=34  STANDARD=29
 dominio   FISICA=389  METODO=196  DA_CLASSIFICARE=187  INFRASTRUTTURA=47  DOCUMENTAZIONE=27
 era       1=496  DA_CLASSIFICARE=188  ENTRAMBE=138  2=24
-stato     SOSPESA=340  DA_CLASSIFICARE=188  CHIUSA=187  APERTA=106  AGENDA=24  SUPERATA=1
+stato     SOSPESA=349  DA_CLASSIFICARE=188  CHIUSA=184  APERTA=100  AGENDA=24  SUPERATA=1
 ```
 
-### ✔ **FATTO IN QUESTO GIRO:** il punto `4`: ### **il referto `doc/REFERTO_indice_v3_era_metodo.md`** *(`250` righe)*, con ### **l'errore del guardiano dichiarato in testa** -- *«metodo = era `ENTRAMBE`» era troppo grossa, ### **e io l'ho applicata**: `35` voci erano `ENTRAMBE` ### **per inerzia***. `6/6` i controlli, `30/30` il collaudo dei presidi
+### ✔ **FATTO IN QUESTO GIRO:** il punto `1`: ### **LA VALIDITA' NON E' LO STATO** -- `129` voci prendono `meta.validita` *(«vale sempre», «vale per quella scena», «limite dichiarato»)* e ### **`54` cambiano stato leggendo LA RIGA D'ORIGINE INTERA**. Collaudo ### **`7` su `7`**, ### **PRIMA di applicare** -- e alla lettera la regola del mandato ne dava `5` su `7`: ### **il collaudo ha deciso**
 
-### ⛔ **RESTA:** ### **le decisioni di Luca** in `doc/indice/DA_DECIDERE_LUCA.md` *(si genera)*; i ### **`2` segnali di `F8`** *(elencati, non corretti)*; i ### **due casi limite** *(`REGISTRO_FISICA:A1` e `S1`: la forma e' generica, il soggetto e' un flag)*; e il ### **buco su `doc/TRADUZIONE_IN_H.md`**, che l'indice non vede
+### ⛔ **RESTA:** il punto `2` *(la classe dalla riga)*, poi `3` *(era `1` esplicite e ### **`F8` allargato**)*, `4` *(dominio)*, `5` *(a Luca, senza toccare)*, `6` *(gemelle e duplicati)*, `7` *(`da_dividere`)* e `8` *(il referto)*
 
-**Ultimo lotto applicato:** `doc/indice/_lotti/v3_r2.jsonl *(il punto `4` non passa da un lotto: scrive il referto)*`
+**Ultimo lotto applicato:** `doc/indice/_lotti/v3_s1.jsonl`
