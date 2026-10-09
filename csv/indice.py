@@ -9,6 +9,7 @@ python csv/indice.py aggiorna ID --campo nome=valore | --meta k=v --motivo "..."
 python csv/indice.py aggiorna-lotto LOTTO.jsonl     # la STESSA via, in blocco
 python csv/indice.py crea-lotto LOTTO.jsonl        # la STESSA via, per FAR NASCERE una voce
 python csv/indice.py storico-commit               # riempie il campo `commit` DAI LOG
+python csv/indice.py segnali                      # i PRESIDI: segnalano, NON decidono
 python csv/indice.py mostra [--stato X] [--segnaposto SI] [--da N] [--quante N]
 python csv/indice.py meta-aggiungi k --tipo T [--valori a,b] [--regex R] --descrizione "..."
 python csv/indice.py meta-depreca k --sostituito-da k2 --motivo "..."
@@ -251,6 +252,11 @@ def valida(voci, reg, verboso=True, derivati=True):
     # ### L'INDICE INVERTITO e le VISTE: DERIVATI, e si CONFRONTANO
     if not derivati:
         return err
+    # ### `F5` e la FORMA delle ECCEZIONI sono ERRORI, non segnali, e stanno QUI: il
+    # ### mandato dice *<<storico senza commit -> ERRORE, non segnale>>*, e
+    # ### un-eccezione che NON CITA non e- un-eccezione, e- una via di fuga.
+    err += _f5_storico(voci)
+    err += _eccezioni_malformate(voci)
     atteso = invertito(voci, reg)
     if os.path.exists(INVERTITO):
         avuto = json.load(io.open(INVERTITO, encoding="utf-8"))
@@ -276,6 +282,14 @@ def valida(voci, reg, verboso=True, derivati=True):
         else:
             print("  schema, vocabolari, riferimenti, transizioni, campi obbligatori,")
             print("  unicita', metadati, indice invertito e viste: **TUTTO A POSTO**")
+        # ### I SEGNALI NON CAMBIANO IL CODICE D-USCITA, e per questo si stampano
+        # ### DOPO il verdetto e FUORI da `err`: un segnale che blocca NON E- UN
+        # ### SEGNALE. La lista intera la da- `python csv/indice.py segnali`.
+        _s = segnali(voci, reg, verboso=False)
+        _n = sum(len(x[2]) for x in _s)
+        print("  ### i PRESIDI contro le mescolanze: %d segnali (%s). NON bloccano: "
+              "`indice.py segnali`"
+              % (_n, "  ".join("%s=%d" % (x[0], len(x[2])) for x in _s)))
     return err
 
 
@@ -717,6 +731,311 @@ def collaudo():
 
 
 # ==========================================================================
+# ==========================================================================
+#   I PRESIDI CONTRO LE MESCOLANZE  --  SEGNALANO, non decidono
+# ==========================================================================
+# ### ⛔ **LA REGOLA CHE LI GOVERNA:** sono ### **deterministici** e ### **SEGNALANO**; la
+# ### decisione e- di chi legge. ### **Un segnale si chiude in due modi soli:**
+# ### ### **correggendo la voce**, oppure con ### **`meta.eccezione_presidio`**, che deve
+# ### ### **CITARE IL TESTO ALLA LETTERA.**
+# ### ⚠ **`F5` e- L-UNICO che e- un ERRORE**, e il mandato lo dice: *«storico senza commit ->
+# ### errore, non segnale»*.
+# ### ⛔ **E `F1` non puo- leggere l-intenzione:** *«come lo stesso fatto»* non e- rilevabile
+# ### da un programma. `F1` segnala ### **che l-ID c-e-**; che sia *lo stesso fatto* lo decide
+# ### chi legge. ### **E- esattamente il motivo per cui questi presidi SEGNALANO.**
+
+# ### I simboli dell-ERA 1: se una voce dell-era `2` li nomina, sta ancora parlando del
+# ### vecchio codice. (`F2`)
+ERA1_SIMBOLI = ("phivel", "phidot", "M_PH", "perc_chi", "perc_geom", "mem_mot",
+                "dir_laterale", "Nose-Hoover", "scuotimento", "sync", "SCALAMIN")
+# ### Le parole degli STRUMENTI: se le dice il titolo di una voce `FISICA`, quella voce parla
+# ### del modo di verificare, non della natura. (`F3`)
+STRUMENTI = ("sigillo", "criterio", "controllo positivo", "caso che deve fallire",
+             "commento", "docstring", "README", "hook", "presidio", "CRLF")
+# ### GENERATE: una riga qui ELENCA un ID, non lo DEFINISCE. (`F4`)
+# ### ⛔ **E- lo stesso FALSO-UNO del controllo `C4`, che leggeva `doc/INDICE.md`.**
+VISTE_GENERATE = ("doc/LISTA_CHIUSA.md", "doc/INDICE.md", "doc/INDICE_ID.tsv",
+                  "doc/INDICE_ID_dettaglio.md", "doc/indice/")
+# ### Che cosa diceva ciascuna lista del guardiano. (`F6`)
+LISTE_GUARDIANO = {"1": (None, "ENTRAMBE", None),
+                   "2": ("FISICA", "2", "AGENDA"),
+                   "3": ("FISICA", "1", "SOSPESA")}
+# ### ⛔ **`_DOMINI_PAROLA` e `_STATI_PAROLA` SONO STATE TOLTE**, non lasciate morte:
+# ### servivano a `F6` per ### **leggere la prosa della nota**, ed e- proprio cio- che
+# ### ### **sbagliava** *(«candidata SUPERATA dalla decisione» letto come lo stato
+# ### `SUPERATA`)*. ### **Un vocabolario che non si usa piu- si cancella**, altrimenti
+# ### il prossimo lo riusa.
+_TOKEN = re.compile(r"[A-Za-z][A-Za-z0-9_:.-]*")
+_RIGA_NNNN = re.compile(r":\d{3,5}(?![0-9])")
+_FLAG = re.compile(r"(?<![A-Za-z0-9])--[a-z][a-z0-9-]{2,}")
+
+
+def _coperto(v, quale):
+    """### `meta.eccezione_presidio`: la voce dichiara che quel segnale ### **e- stato
+    guardato e va bene cosi-.** ### ⚠ **La FORMA la controlla `valida`** *(vedi
+    `_eccezioni_malformate`)*: senza quel controllo l-eccezione sarebbe ### **una via di
+    fuga a costo zero.**"""
+    for e in (v.get("meta") or {}).get("eccezione_presidio", []) or []:
+        if str(e).strip().upper().startswith(quale + ":"):
+            return True
+    return False
+
+
+def _testo_voce(v):
+    return " ".join([v.get("titolo") or "", v.get("descrizione") or "",
+                     v.get("fonte") or "", (v.get("meta") or {}).get("nota_guardiano") or ""])
+
+
+def _eccezioni_malformate(voci):
+    """### ⛔ **UN-ECCEZIONE CHE NON CITA NON E- UN-ECCEZIONE: e- una via di fuga.**
+
+    La forma obbligata e- ### **`F<n>: <motivo>`**, e il motivo deve contenere
+    ### **un pezzo LETTERALE di almeno `20` caratteri** del testo della voce
+    *(titolo, descrizione, fonte o nota)*. ### **Cosi- l-eccezione e- VERIFICABILE**, e non
+    si puo- zittire un presidio con una frase generica.
+    """
+    err = []
+    for v in voci:
+        for e in (v.get("meta") or {}).get("eccezione_presidio", []) or []:
+            s = str(e)
+            m = re.match(r"^(F[1-6]):\s*(.+)$", s.strip())
+            if not m:
+                err.append("`%s`: `eccezione_presidio` fuori forma: serve `F<n>: <motivo>`, "
+                           "trovato %r" % (v["id"], s[:60]))
+                continue
+            testo = " ".join(_testo_voce(v).split())
+            motivo = " ".join(m.group(2).split())
+            if not any(testo[k:k + 20] and testo[k:k + 20] in motivo
+                       for k in range(max(1, len(testo) - 19))):
+                err.append("`%s`: l-eccezione `%s` NON CITA IL TESTO ALLA LETTERA (serve un "
+                           "pezzo di almeno 20 caratteri del titolo, della descrizione, "
+                           "della fonte o della nota)" % (v["id"], m.group(1)))
+    return err
+
+
+def _f5_righe(vive, n_head):
+    """### LA LOGICA DI `F5`, PURA: nessun disco, nessun git.
+
+    ### ⛔ **Esiste per una ragione precisa:** il collaudo deve poterla provare
+    ### **senza toccare l-indice vero**, e il mandato lo dice. ### **Un collaudo che per
+    provare un presidio deve scrivere nell-indice e- lo stesso difetto che nel giro scorso
+    ha cancellato `867` classificazioni** *(`C4` che rilanciava la migrazione)*.
+    """
+    err = []
+    for k in range(min(n_head, len(vive))):
+        riga = vive[k] if isinstance(vive[k], dict) else json.loads(vive[k])
+        if not riga.get("commit"):
+            err.append("`F5` storico riga %d: GIA- COMMITTATA e senza `commit`. Gira "
+                       "`python csv/indice.py storico-commit`" % (k + 1))
+    return err[:20]
+
+
+def _f5_storico(voci):
+    """### `F5`: una riga di storico ### **GIA- COMMITTATA** senza il suo `commit`.
+
+    ### ⛔ **E- UN ERRORE, non un segnale**, e il mandato lo dice.
+    ### ⚠ **MA SOLO PER LE RIGHE GIA- COMMITTATE, e questa e- una MIA DERIVAZIONE:** nella
+    forma letterale *(«ogni riga senza commit e- un errore»)* il presidio
+    ### **bloccherebbe OGNI COMMIT DI UN LOTTO**, perche- `aggiorna-lotto` scrive righe con
+    `commit` vuoto -- ### **il commit che le conterra- non esiste ancora** *(e- il ritardo
+    dichiarato nel blocco `D`)*. ### ✔ **Le righe presenti in `HEAD` devono avere il loro
+    commit; quelle aggiunte DOPO `HEAD` sono esattamente il ritardo, e sono esenti.**
+    ### **Cosi- `F5` obbliga a girare `storico-commit` prima del commit successivo**, invece
+    di impedire il commit.
+    """
+    del voci
+    if not os.path.exists(STORICO):
+        return []
+    vive = [r for r in io.open(STORICO, encoding="utf-8").read().split(NL) if r.strip()]
+    q = subprocess.run(["git", "show", "HEAD:doc/indice/storico.jsonl"], cwd=RADICE,
+                       capture_output=True, text=True, encoding="utf-8")
+    if q.returncode != 0:
+        return []
+    return _f5_righe(vive, len([r for r in q.stdout.split(NL) if r.strip()]))
+
+
+def _f1_gemelle(voci):
+    """### `F1`: il titolo di una voce ### **cita l-ID di un-altra**, e ### **dominio o era
+    DIFFERISCONO.**"""
+    ids = {v["id"]: v for v in voci}
+    fuori = []
+    for v in voci:
+        if _coperto(v, "F1"):
+            continue
+        for tok in set(_TOKEN.findall(v.get("titolo") or "")):
+            w = ids.get(tok)
+            if w is None or w["id"] == v["id"]:
+                continue
+            if w["dominio"] != v["dominio"] or str(w["era"]) != str(v["era"]):
+                fuori.append((v["id"], "il titolo cita `%s`, che e- `%s`/era `%s`, mentre "
+                                       "questa e- `%s`/era `%s`"
+                              % (w["id"], w["dominio"], w["era"], v["dominio"], v["era"])))
+    return fuori
+
+
+def _f2_era2(voci):
+    """### `F2`: una voce dell-era `2` che ### **nomina il vecchio codice.**"""
+    fuori = []
+    for v in voci:
+        if str(v["era"]) != "2" or _coperto(v, "F2"):
+            continue
+        t = _testo_voce(v)
+        tl = t.lower()
+        visti = [s for s in ERA1_SIMBOLI if s.lower() in tl]
+        if _RIGA_NNNN.search(t):
+            visti.append("un numero di riga `" + _RIGA_NNNN.search(t).group(0) + "`")
+        m = _FLAG.search(t)
+        if m:
+            visti.append("un flag `" + m.group(0) + "`")
+        if visti:
+            fuori.append((v["id"], "era `2` ma nomina l-era `1`: " + ", ".join(visti[:5])))
+    return fuori
+
+
+def _f3_fisica_strumenti(voci):
+    """### `F3`: una voce `FISICA` il cui ### **TITOLO** parla di strumenti.
+
+    ### ⚠ **Solo il titolo**, e il mandato dice cosi-: *«il cui TITOLO parla di…»*.
+    ### **Preso alla lettera**, e se risulta troppo stretto lo si scrive invece di allargarlo.
+    """
+    fuori = []
+    for v in voci:
+        if v["dominio"] != "FISICA" or _coperto(v, "F3"):
+            continue
+        tl = (v.get("titolo") or "").lower()
+        visti = [s for s in STRUMENTI if s.lower() in tl]
+        if visti:
+            fuori.append((v["id"], "`FISICA`, ma il titolo parla di strumenti: "
+                          + ", ".join("`%s`" % s for s in visti[:5])))
+    return fuori
+
+
+def _f4_etichette(etich):
+    """### `F4`: un-etichetta rimossa che ### **in un documento E- DEFINITA.**"""
+    fuori = []
+    riga_t = "|"
+    for e in etich:
+        idv = e["id"]
+        q = re.escape(idv)
+        rt = re.compile(r"^\s*\|\s*\**\s*`?" + q + r"`?\s*\**\s*\|")
+        it = re.compile(r"^#{1,6}\s.*(?<![A-Za-z0-9_:-])" + q + r"(?![A-Za-z0-9_:-])")
+        for f in (e.get("file_citanti") or []):
+            fp = str(f).replace(chr(92), "/")
+            if any(fp == g or fp.startswith(g) for g in VISTE_GENERATE):
+                continue
+            p = os.path.join(RADICE, fp)
+            if not os.path.exists(p):
+                continue
+            trovata = None
+            for n, r in enumerate(io.open(p, encoding="utf-8",
+                                          errors="replace").read().split(NL), 1):
+                if rt.match(r):
+                    trovata = ("una riga di tabella", n)
+                    break
+                if it.match(r):
+                    trovata = ("un-intestazione", n)
+                    break
+            if trovata:
+                fuori.append((idv, "etichetta rimossa, ma %s la DEFINISCE in `%s:%d`"
+                              % (trovata[0], fp, trovata[1])))
+                break
+    del riga_t
+    return fuori
+
+
+def _f6_note(voci):
+    """### `F6`: una `nota_guardiano` che ### **nomina una lista del guardiano** e che
+    ### **contraddice** il dominio, l-era o lo stato della voce.
+
+    ### ⛔ **NON SI LEGGE LA PROSA, e la prima stesura lo faceva:** cercava nella nota le
+    parole `SUPERATA`, `SOSPESA`, `fisica`… e le prendeva per ### **asserzioni di stato.**
+    ### **`11` dei `13` segnali erano UNA SOLA FRASE** -- *«candidata ### **SUPERATA** dalla
+    decisione sulla sincronizzazione»*, che e- ### **prosa.** ### **Un presidio che legge la
+    prosa legge male**, e l-ha trovato il presidio stesso guardando la sua uscita.
+
+    ### ✔ **Si confronta con CIO- CHE LA LISTA `N` DICEVA** *(`LISTE_GUARDIANO`, una tabella
+    dichiarata)*. ### ⚠ **E una nota che si DICHIARA correzione non si guarda:**
+    *<<correzione della lista 2 …>>* ### **non e- incoerente, e- informativa.**
+    """
+    fuori = []
+    for v in voci:
+        nota = (v.get("meta") or {}).get("nota_guardiano") or ""
+        if not nota or _coperto(v, "F6"):
+            continue
+        m = re.search(r"list[ae]\s*([123])?\s*del guardiano", nota, re.I)
+        if not m:
+            continue
+        # ### UNA NOTA CHE SI DICHIARA CORREZIONE NON SI GUARDA: <<correzione della lista
+        # ### 2 ...>> NON e- incoerente, e- INFORMATIVA. Segnalarla sarebbe un FALSO-UNO.
+        if "correzione" in nota.lower() or not m.group(1):
+            continue
+        dom, era, stato = LISTE_GUARDIANO[m.group(1)]
+        guai = []
+        if dom and v["dominio"] != dom:
+            guai.append("la lista diceva `%s`, la voce e- `%s`" % (dom, v["dominio"]))
+        if era and str(v["era"]) != era:
+            guai.append("la lista diceva era `%s`, la voce e- era `%s`" % (era, v["era"]))
+        if stato and v["stato"] != stato:
+            guai.append("la lista diceva `%s`, la voce e- `%s`" % (stato, v["stato"]))
+        if guai:
+            fuori.append((v["id"], "la nota nomina la lista `%s` del guardiano e la voce "
+                                   "NON e- piu- cio- che quella lista diceva: %s"
+                          % (m.group(1), "; ".join(guai))))
+    return fuori
+
+
+def segnali(voci, reg, verboso=True):
+    """### I CINQUE PRESIDI CHE SEGNALANO. ### ⛔ **NON cambiano il codice d-uscita.**"""
+    del reg
+    etich = [json.loads(r) for r in io.open(ETICH, encoding="utf-8").read().split(NL)
+             if r.strip()] if os.path.exists(ETICH) else []
+    n_fisica = sum(1 for v in voci if v["dominio"] == "FISICA")
+    n_era2 = sum(1 for v in voci if str(v["era"]) == "2")
+    n_note = sum(1 for v in voci
+                 if re.search(r"list[ae]\s*[123]?\s*del guardiano",
+                              (v.get("meta") or {}).get("nota_guardiano") or "", re.I))
+    tutti = [("F1", "GEMELLE: il titolo cita l-ID di un-altra, e dominio o era differiscono",
+              _f1_gemelle(voci), len(voci)),
+             ("F2", "ERA 2 PULITA: una voce dell-era 2 che nomina simboli dell-era 1",
+              _f2_era2(voci), n_era2),
+             ("F3", "FISICA CHE PARLA DI STRUMENTI: il titolo di una voce FISICA",
+              _f3_fisica_strumenti(voci), n_fisica),
+             ("F4", "ETICHETTA CON DEFINIZIONE: un-etichetta che un documento DEFINISCE",
+              _f4_etichette(etich), len(etich)),
+             ("F6", "NOTE COERENTI: una nota che nomina una lista e la contraddice",
+              _f6_note(voci), n_note)]
+    if verboso:
+        print("=" * 96)
+        print("I PRESIDI CONTRO LE MESCOLANZE  --  SEGNALANO, NON DECIDONO")
+        print("=" * 96)
+        for sig, che, fuori, su in tutti:
+            # ### ⚠ **IL TOOL MISURA, LA LETTURA STA NEL REFERTO.** La soglia del
+            # ### `10%` l-ho fissata nel task history ### **prima di misurare**, ed e-
+            # ### un FATTO utile; ma ### **<<TROPPO GROSSO>> e- un GIUDIZIO**, e su un
+            # ### denominatore di `25` una percentuale non vuol dire niente. Quindi il
+            # ### tool dice ### **che la soglia e- superata**, e il referto dice
+            # ### ### **se il presidio e- troppo grosso DAVVERO.**
+            grosso = ""
+            if su and len(fuori) > su * 0.10:
+                grosso = ("   ### oltre il 10%% di %d -- la LETTURA sta nel referto"
+                          % su)
+            print("  %s  %-70s %4d segnali su %d%s"
+                  % (sig, che[:70], len(fuori), su, grosso))
+        print()
+        for sig, _che, fuori, _su in tutti:
+            if not fuori:
+                continue
+            print("-" * 96)
+            print("### `%s`: %d" % (sig, len(fuori)))
+            print("-" * 96)
+            for i, msg in fuori:
+                print("  %-26s %s" % (i, msg))
+        print()
+        print("  ### I SEGNALI NON SI CORREGGONO DA QUI: si chiudono correggendo la voce,")
+        print("  ### oppure con `meta.eccezione_presidio` CHE CITA IL TESTO ALLA LETTERA.")
+    return tutti
+
+
 def _head():
     """### `HEAD` adesso: il commit ### **su cui** la modifica e- fatta. Si sa, a differenza
     del commit che la ### **conterra-**."""
@@ -909,6 +1228,9 @@ def main(argv):
         return 0
     if cmd == "storico-commit":
         return storico_commit()
+    if cmd == "segnali":
+        segnali(voci, reg)
+        return 0
     if cmd == "mostra":
         mostra(voci, uno)
         return 0

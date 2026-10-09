@@ -102,6 +102,7 @@ python csv/indice.py aggiorna ID --campo stato=SOSPESA --motivo "...cita il test
 python csv/indice.py aggiorna-lotto doc/indice/_lotti/<nome>.jsonl
 python csv/indice.py crea-lotto    doc/indice/_lotti/<nome>.jsonl   # NASCE
 python csv/indice.py storico-commit                              # il campo `commit`
+python csv/indice.py segnali                                      # i PRESIDI
 ```
 
 | | |
@@ -159,3 +160,22 @@ standard scritto in due modi**.
 altre voci** *(un **collegamento**, non un alias)* e `6` erano **condivisi fra due voci**
 *(allora non è l'alias di nessuna)*. **Tutto tracciato in
 `doc/indice/migrazione_era1.jsonl`.**
+
+---
+
+## I PRESIDI CONTRO LE MESCOLANZE — **segnalano, NON decidono** *(dal 2026-10-09)*
+
+> ### ⛔ **Sono DETERMINISTICI e SEGNALANO: la decisione è di chi legge.** `python csv/indice.py segnali` dà la lista; `valida` ne stampa **il conteggio** e ### ⚠ **NON cambia il codice d'uscita** — un segnale che blocca **non è un segnale.**
+
+| id | che cosa segnala |
+|---|---|
+| **`F1`** | **GEMELLE:** il **titolo** di una voce cita l'**ID di un'altra**, e **dominio o era differiscono** |
+| **`F2`** | **ERA `2` PULITA:** una voce dell'era `2` che nomina **simboli dell'era `1`** *(`phivel`, `M_PH`, `mem_mot`, `Nose-Hoover`, `sync`…)*, **un numero di riga `:NNNN`**, o **un flag `--…`** |
+| **`F3`** | **`FISICA` CHE PARLA DI STRUMENTI:** il **titolo** di una voce `FISICA` dice *sigillo, criterio, controllo positivo, caso che deve fallire, commento, docstring, README, hook, presidio, CRLF* |
+| **`F4`** | **ETICHETTA CON DEFINIZIONE:** un'etichetta rimossa che un documento **DEFINISCE** *(riga di tabella o intestazione)*. ### ⚠ **Le VISTE GENERATE sono escluse**, perché una riga in `doc/LISTA_CHIUSA.md` **elenca** un ID, non lo definisce |
+| ### ⛔ **`F5`** | **STORICO SENZA COMMIT: È UN ERRORE**, non un segnale, e sta in `valida`. ### ⚠ **Solo per le righe GIÀ COMMITTATE** *(quelle in `HEAD`)*: le altre sono **il ritardo** — nella forma letterale **bloccherebbe ogni commit di un lotto** |
+| **`F6`** | **NOTE COERENTI:** una `nota_guardiano` che **nomina una lista del guardiano** e la voce **non è più ciò che quella lista diceva**. ### ⚠ **Non legge la prosa**, e una nota che si dichiara *«correzione»* **non si guarda** |
+
+### **UN SEGNALE SI CHIUDE IN DUE MODI SOLI:** **correggendo la voce**, oppure con ### **`meta.eccezione_presidio`** — forma obbligata **`F<n>: <motivo>`**, e il motivo deve contenere **un pezzo LETTERALE di almeno `20` caratteri** del testo della voce. ### ⛔ **La forma la impone `valida`:** senza quel controllo l'eccezione sarebbe **una via di fuga a costo zero.**
+
+### **IL COLLAUDO:** `python csv/_collaudo_presidi_indice.py`, **`15` su `15`** — ogni presidio si è visto **SCATTARE** sul suo caso a risposta nota *(`P1-sexies`)* e **non scattare** sulla voce corretta. ### ⛔ **Su una COPIA letta con `git show`, mai sull'indice vero.**

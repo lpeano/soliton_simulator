@@ -83,8 +83,8 @@ era       1=451  DA_CLASSIFICARE=182  ENTRAMBE=172  2=25
 stato     SOSPESA=280  CHIUSA=187  DA_CLASSIFICARE=182  APERTA=156  AGENDA=25
 ```
 
-### ✔ **FATTO IN QUESTO GIRO:** il blocco `G`, i tre residui: ### **`5` voci che VERIFICANO UN FLAG DELL'ERA `1`** tornano all'era `1` *(e nel referto `v3` avevo scritto che quella correzione era «presa prima di applicare»:* ### **era falsa su queste cinque**, *e l'applicazione acritica e' mia)*; la misura `G1` *(«`Ldisegno/d` per arco»)* pure; e ### **`9` note** che dicevano *«fisica dell'era `1`»* su voci che ### **non sono `FISICA`**
+### ✔ **FATTO IN QUESTO GIRO:** il blocco `F`: ### **sei presidi contro le mescolanze** nel validatore *(`F1`-`F4` e `F6` SEGNALANO, `F5` e' un ERRORE)*, collaudo ### **`15` su `15`** su una COPIA letta con `git show`, e ### **`103` segnali sull'indice vero CHE NON SI CORREGGONO.** E ### **`F6` ha trovato un difetto di SE STESSO**: leggeva la prosa, e `11` dei suoi `13` segnali erano ### **una sola frase**
 
-### ⛔ **RESTA:** il blocco `F`: ### **i sei presidi nel validatore** *(`F1`-`F4` e `F6` SEGNALANO, `F5` e' un ERRORE)*, il ### **collaudo su una COPIA di prova** con `12` esiti attesi, e il referto `doc/REFERTO_indice_v3_presidi.md`
+### ⛔ **RESTA:** ### **le decisioni di Luca**, nel referto `doc/REFERTO_indice_v3_presidi.md`: i `103` segnali *(uno per uno, con `meta.eccezione_presidio` che deve ### **citare il testo alla lettera**)*, se `F3` debba guardare anche la descrizione, se `F1` debba smettere di segnalare verso i ### **segnaposto**, e ### **la mia derivazione su `F5`**
 
-**Ultimo lotto applicato:** `doc/indice/_lotti/v3_G.jsonl`
+**Ultimo lotto applicato:** `doc/indice/_lotti/v3_G.jsonl *(il blocco `F` non passa da un lotto: aggiunge presidi, non cambia voci)*`

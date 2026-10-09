@@ -2141,7 +2141,7 @@ nessuna voce si cancella.**
 | | |
 |---|---|
 | **file** | `csv/indice.py` *(657 righe)* |
-| **COMANDO** | `python csv/indice.py collaudo` · `valida` · `cerca` · `aggiorna` · **`aggiorna-lotto`** · **`crea-lotto`** · **`storico-commit`** · `mostra` · `viste` · `citazioni` · `meta-aggiungi`/`meta-depreca`/`meta-rinomina` |
+| **COMANDO** | `python csv/indice.py collaudo` · `valida` · `cerca` · `aggiorna` · **`aggiorna-lotto`** · **`crea-lotto`** · **`storico-commit`** · **`segnali`** · `mostra` · `viste` · `citazioni` · `meta-aggiungi`/`meta-depreca`/`meta-rinomina` |
 | **cosa misura** | ### **valida** schema, vocabolari, riferimenti, transizioni, campi obbligatori, unicita', metadati, e l'### **allineamento dei DERIVATI** *(indice invertito e viste)*; ### **cerca** per campi e metadati ### **senza parsing di testo**; ### **scrive** solo con `aggiorna`, che aggiunge una riga a `storico.jsonl` |
 | **BLOB** | `23f29617` |
 
@@ -2249,3 +2249,29 @@ etichette rimosse, con ### **`0` persi, `0` doppi, `0` conflitti**.
 | **cosa misura** | niente: **applica** i tre residui. `G1` le `5` voci che **verificano un flag dell'era `1`** → `METODO/1/SOSPESA`; `G2` la voce `G1` *(«`Ldisegno/d` per arco»)* → `FISICA/1/SOSPESA`; `G3` le `9` **note superate** |
 | **l'uscita** | `doc/indice/_lotti/v3_G.jsonl` *(`10` voci)* |
 | ### ⚠ **la coda che NON si butta** | `CENS-A6` portava *«candidata SUPERATA dalla decisione sulla sincronizzazione»*: la nota nuova **la conserva**, perché **sostituire una nota non è cancellarne il contenuto** |
+
+---
+
+### `csv/_collaudo_presidi_indice.py` — **IL COLLAUDO DEI SEI PRESIDI** *(2026-10-09)*
+
+| | |
+|---|---|
+| **file** | `csv/_collaudo_presidi_indice.py` |
+| **BLOB** *(sha1 dei byte grezzi)* | `2b0f4d1c` |
+| **COMANDO** | `python csv/_collaudo_presidi_indice.py` |
+| **cosa misura** | che ogni presidio **SCATTI** sul suo caso a risposta nota *(`P1-sexies`)* **e NON scatti** sulla voce corretta. `F1` `B2`→`Z31` · `F2` `D35` · `F3` `C28` · `F4` `TW-1` · `F5` sintetico · `F6` `CENS-A6`, piu' `3` casi sulla **forma dell'eccezione** |
+| **l'uscita** | **`15` su `15`**, e la riga finale **riconta le voci** per provare che l'indice vero non e' stato toccato |
+| ### ⛔ **mai sull'indice vero** | lo stato di prima si legge con `git show <commit>:<path>`, le liste vivono **in memoria**, e `F5` ha una funzione **PURA** *(`_f5_righe`)* che esiste **solo per questo**. ### ⚠ **La ragione non è teorica:** nel giro scorso un controllo che per verificare **rilanciava il suo oggetto** ha cancellato **`867` classificazioni** |
+
+---
+
+### `csv/_doc_referto_presidi.py` — **IL REFERTO DEI PRESIDI** *(2026-10-09)*
+
+| | |
+|---|---|
+| **file** | `csv/_doc_referto_presidi.py` |
+| **BLOB** *(sha1 dei byte grezzi)* | `154a6a87` |
+| **COMANDO** | `python csv/_doc_referto_presidi.py` |
+| **cosa misura** | i segnali **voce per voce** *(dalle stesse funzioni che gira il validatore)*, e fa girare **lui** il collaudo riportandone le righe. Porta **l'atteso fissato nel task history PRIMA di misurare**, accanto al misurato |
+| **l'uscita** | `doc/REFERTO_indice_v3_presidi.md` |
+| ### ⚠ **la trappola, e è LA SECONDA VOLTA** | contare gli esiti cercando `PASSA` prende anche la riga di riepilogo *(«TUTTI **PASSA**TI»)*: `16` su `16` invece di `15` su `15`. **La prima volta fu il referto `v3`**, che dava `7` controlli su `7` invece di `6` su `6`. ### **Si conta sulla FORMA dell'esito**, non su una parola che compare anche altrove |

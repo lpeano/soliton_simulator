@@ -1,0 +1,184 @@
+# -*- coding: utf-8 -*-
+"""IL COLLAUDO DEI PRESIDI — **ogni presidio DEVE scattare** sul suo caso a risposta nota.
+
+> ### ⛔ **`P1-sexies`: un presidio che non si e' visto SCATTARE non protegge niente** (`A9`).
+> **Due bracci per ciascuno:** ### ① **il caso che DEVE scattare**, preso dalla verifica del
+> guardiano e riportato allo ### **stato di PRIMA**; ### ② **la voce CORRETTA, che NON deve
+> scattare** — altrimenti il presidio e' un ### **FALSO-UNO.**
+
+### ⛔ **MAI SULL'INDICE VERO.** Lo stato di prima si legge con `git show <commit>:<path>`,
+e le liste di voci vivono **in memoria**. ### **Niente si scrive in `doc/indice/`**, e la
+ragione non e' teorica: nel giro scorso un controllo che per verificare *rilanciava* il suo
+oggetto mi ha ### **cancellato `867` classificazioni.**
+
+| presidio | il caso che DEVE scattare | da dove si legge lo stato di prima |
+|---|---|---|
+| `F1` | `B2` cita `Z31` nel titolo, e `Z31` prima era `FISICA`/era `1` | `6e5e75b` |
+| `F2` | `D35`, prima `era 2`, nel titolo ha `(:5443)` | `6e5e75b` |
+| `F3` | `C28`, prima `FISICA`, nel titolo ha *«NON HANNO ALCUN SIGILLO»* | `6e5e75b` |
+| `F4` | `TW-1`, prima **etichetta rimossa**, ed e' definita in `doc/SCALE_TW_lettura.md` | `6e5e75b` |
+| `F5` | una riga di storico ### **gia' committata** e senza `commit` | **sintetico**, in memoria |
+| `F6` | `CENS-A6`, con la nota *«lista `3` … fisica dell'era `1`»* su una voce `DOCUMENTAZIONE` | `e00d2ae` |
+| ### **la FORMA dell'eccezione** | un `eccezione_presidio` che ### **non cita il testo** | **sintetico** |
+
+Gira con:  python csv/_collaudo_presidi_indice.py
+"""
+import io
+import json
+import os
+import subprocess
+import sys
+
+_QUI = os.path.dirname(os.path.abspath(__file__))
+RADICE = os.path.dirname(_QUI)
+sys.path.insert(0, _QUI)
+import _presidio                                             # noqa: E402
+_presidio.avvia(__file__)
+import indice as IX                                          # noqa: E402
+
+# ESENTE-H-P5: non importa il simulatore e non lo fa girare. Collauda i presidi dell'indice.
+NL = chr(10)
+PRIMA_V3 = "6e5e75b"        # ### prima dei blocchi `A`/`B`/`C`
+PRIMA_G = "e00d2ae"         # ### prima del blocco `G`
+ESITI = []
+
+
+def esito(nome, ok, dettaglio=""):
+    ESITI.append((nome, bool(ok), dettaglio))
+    print("  %-62s %s   %s" % (nome, "PASSA" if ok else "### FALLISCE", dettaglio))
+
+
+def al_commit(commit, percorso):
+    """### ⛔ **SOLO LETTURA.** `git show` non tocca il disco."""
+    q = subprocess.run(["git", "show", "%s:%s" % (commit, percorso)], cwd=RADICE,
+                       capture_output=True, text=True, encoding="utf-8")
+    assert q.returncode == 0, "%s:%s" % (commit, percorso)
+    return [json.loads(r) for r in q.stdout.split(NL) if r.strip()]
+
+
+def oggi(percorso):
+    return [json.loads(r) for r in
+            io.open(os.path.join(RADICE, percorso), encoding="utf-8").read().split(NL)
+            if r.strip()]
+
+
+def con(voci, sostituite):
+    """### UNA COPIA DELLA LISTA, con alcune voci rimpiazzate dalla loro versione di prima."""
+    per = {v["id"]: v for v in sostituite}
+    return [json.loads(json.dumps(per.get(v["id"], v))) for v in voci]
+
+
+def scatta(fuori, idv):
+    return any(i == idv for i, _m in fuori)
+
+
+def main():
+    voci = oggi("doc/indice/voci.jsonl")
+    etich = oggi("doc/indice/etichette_rimosse.jsonl")
+    v_prima = al_commit(PRIMA_V3, "doc/indice/voci.jsonl")
+    e_prima = al_commit(PRIMA_V3, "doc/indice/etichette_rimosse.jsonl")
+    v_pre_g = al_commit(PRIMA_G, "doc/indice/voci.jsonl")
+    print("=" * 100)
+    print("IL COLLAUDO DEI PRESIDI -- ogni presidio DEVE scattare sul suo caso a risposta nota")
+    print("=" * 100)
+    print("  oggi: %d voci, %d etichette   |   %s: %d voci, %d etichette   |   %s: %d voci"
+          % (len(voci), len(etich), PRIMA_V3, len(v_prima), len(e_prima), PRIMA_G,
+             len(v_pre_g)))
+    print("  ### NIENTE SI SCRIVE IN doc/indice/: lo stato di prima si LEGGE con `git show`.")
+    print()
+
+    # ---------------------------------------------------------------- F1
+    z31_prima = [v for v in v_prima if v["id"] == "Z31"]
+    assert z31_prima, "Z31 non c'e' a " + PRIMA_V3
+    print("  `F1`  Z31 a %s: `%s`/era `%s`   |   oggi: `%s`/era `%s`"
+          % (PRIMA_V3, z31_prima[0]["dominio"], z31_prima[0]["era"],
+             [v for v in voci if v["id"] == "Z31"][0]["dominio"],
+             [v for v in voci if v["id"] == "Z31"][0]["era"]))
+    esito("F1  DEVE scattare: B2 cita Z31, e Z31 era FISICA/era 1",
+          scatta(IX._f1_gemelle(con(voci, z31_prima)), "B2"),
+          "il titolo di B2 dice <<Z31 -- i sigilli non ri-girabili | Z31, ...>>")
+    esito("F1  NON deve scattare: con Z31 corretta (METODO/ENTRAMBE)",
+          not scatta(IX._f1_gemelle(voci), "B2"))
+
+    # ---------------------------------------------------------------- F2
+    d35_prima = [v for v in v_prima if v["id"] == "D35"]
+    esito("F2  DEVE scattare: D35 era era 2 e nel titolo ha (:5443)",
+          scatta(IX._f2_era2(con(voci, d35_prima)), "D35"),
+          "era `%s` a %s" % (d35_prima[0]["era"], PRIMA_V3))
+    esito("F2  NON deve scattare: D35 corretta (era 1)",
+          not scatta(IX._f2_era2(voci), "D35"))
+
+    # ---------------------------------------------------------------- F3
+    c28_prima = [v for v in v_prima if v["id"] == "C28"]
+    esito("F3  DEVE scattare: C28 era FISICA e il titolo dice <<ALCUN SIGILLO>>",
+          scatta(IX._f3_fisica_strumenti(con(voci, c28_prima)), "C28"),
+          "dominio `%s` a %s" % (c28_prima[0]["dominio"], PRIMA_V3))
+    esito("F3  NON deve scattare: C28 corretta (METODO)",
+          not scatta(IX._f3_fisica_strumenti(voci), "C28"))
+
+    # ---------------------------------------------------------------- F4
+    tw1_prima = [e for e in e_prima if e["id"] == "TW-1"]
+    assert tw1_prima, "TW-1 non era fra le etichette a " + PRIMA_V3
+    esito("F4  DEVE scattare: TW-1 era un'etichetta, ed e' DEFINITA in un documento",
+          scatta(IX._f4_etichette(tw1_prima), "TW-1"),
+          "doc/SCALE_TW_lettura.md la definisce con una riga di tabella")
+    esito("F4  NON deve scattare: TW-1 oggi NON e' fra le etichette",
+          not any(e["id"] == "TW-1" for e in etich)
+          and not scatta(IX._f4_etichette(etich), "TW-1"))
+
+    # ---------------------------------------------------------------- F5
+    # ### SINTETICO, e in memoria: `_f5_righe` e' PURA proprio per questo.
+    righe = [{"id": "X", "commit": "abc1234"}, {"id": "Y", "commit": ""},
+             {"id": "Z", "commit": ""}]
+    esito("F5  DEVE essere un ERRORE: riga 2 GIA' COMMITTATA e senza commit",
+          len(IX._f5_righe(righe, 2)) == 1,
+          "n_head=2 -> la riga 2 e' committata, la 3 e' IL RITARDO e NON si segnala")
+    esito("F5  NON deve scattare: le righe oltre HEAD sono il RITARDO dichiarato",
+          IX._f5_righe(righe[:1] + [{"id": "Y", "commit": "def5678"}] + righe[2:], 2) == []
+          and IX._f5_righe(righe, 0) == [])
+
+    # ---------------------------------------------------------------- F6
+    a6_prima = [v for v in v_pre_g if v["id"] == "CENS-A6"]
+    print("  `F6`  la nota di CENS-A6 a %s: <<%s>>"
+          % (PRIMA_G, " ".join((a6_prima[0]["meta"].get("nota_guardiano") or "").split())[:78]))
+    esito("F6  DEVE scattare: la nota dice lista 3 (FISICA/1/SOSPESA), la voce e' DOCUMENTAZIONE",
+          scatta(IX._f6_note(con(voci, a6_prima)), "CENS-A6"))
+    esito("F6  NON deve scattare: con la nota della correzione v3",
+          not scatta(IX._f6_note(voci), "CENS-A6"))
+
+    # ------------------------------------------------- LA FORMA DELL'ECCEZIONE
+    base = json.loads(json.dumps([v for v in voci if v["id"] == "C28"][0]))
+    vuota = json.loads(json.dumps(base))
+    vuota["meta"]["eccezione_presidio"] = ["F3: va bene cosi'"]
+    esito("ECCEZIONE  DEVE essere un ERRORE: non cita il testo alla lettera",
+          len(IX._eccezioni_malformate([vuota])) == 1)
+    piena = json.loads(json.dumps(base))
+    pezzo = " ".join(base["titolo"].split())[:40]
+    piena["meta"]["eccezione_presidio"] = ["F3: il titolo dice <<%s>>, e la parola `sigillo` "
+                                           "ci sta perche' la voce CONTA i flag senza "
+                                           "sigillo" % pezzo]
+    esito("ECCEZIONE  NON deve essere un errore: cita %d caratteri del titolo" % len(pezzo),
+          IX._eccezioni_malformate([piena]) == [])
+    storta = json.loads(json.dumps(base))
+    storta["meta"]["eccezione_presidio"] = ["va bene cosi'"]
+    esito("ECCEZIONE  DEVE essere un ERRORE: fuori forma (manca `F<n>:`)",
+          len(IX._eccezioni_malformate([storta])) == 1)
+
+    # ---------------------------------------------------------------- il verdetto
+    print()
+    print("=" * 100)
+    tutti = all(x[1] for x in ESITI)
+    print("IL COLLAUDO DEI PRESIDI: %d su %d   ### %s"
+          % (sum(1 for x in ESITI if x[1]), len(ESITI),
+             "TUTTI PASSATI" if tutti else "QUALCUNO FALLISCE: NON SI COMMITTA"))
+    print("=" * 100)
+    # ### ⛔ **E la prova che NON ho toccato l'indice vero:** se qualcosa fosse stato scritto,
+    # ### il file sarebbe diverso da quando il collaudo e' partito.
+    print("  ### doc/indice/voci.jsonl e etichette_rimosse.jsonl: %d e %d righe, come "
+          "all'inizio" % (len(oggi("doc/indice/voci.jsonl")),
+                          len(oggi("doc/indice/etichette_rimosse.jsonl"))))
+    return 0 if tutti else 1
+
+
+if __name__ == "__main__":
+    sys.exit(main())

@@ -7,7 +7,7 @@ I CONTROLLI DELLA MIGRAZIONE ALLO SCHEMA 2
   C2 la TRACCIA copre ogni ID vecchio, con la REGOLA       PASSA   senza traccia 0
   C3 LE LISTE DEL GUARDIANO: classificazione come indicata PASSA   fuori posto 0
   C4 IDEMPOTENZA (NON si rilancia: c'e' lavoro di dopo)    PASSA   storico.jsonl ha 1089 righe -> verificata al commit 6b8cb90; e la migrazione ha un PRESIDIO che la ferma
-  C5 `indice.py valida` passa                              PASSA     unicita', metadati, indice invertito e viste: **TUTTO A PO
+  C5 `indice.py valida` passa                              PASSA     ### i PRESIDI contro le mescolanze: 103 segnali (F1=49  F2
   C6 la VISTA passa IL VALIDATORE VECCHIO (quello del pre-commit) e la domanda PASSA   12 bloccanti su 830 voci
 ========================================================================================================
 C7 I CONTEGGI
