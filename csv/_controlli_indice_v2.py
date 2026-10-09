@@ -191,13 +191,24 @@ def main():
           (q5.stdout or "").strip().split(NL)[-1][:60])
 
     # ---------------------------------------------- C6 LA VISTA COMPATIBILE
+    # ### QUESTO CONTROLLO ERA PIU- DEBOLE DEL HOOK, e lo scrivo qui perche- non succeda a
+    # ### nessun altro: girava SOLO `--blocca SI`, che e- UN-INTERROGAZIONE, e passava
+    # ### mentre il `pre-commit` -- che gira `_indice_id.py` NUDO, cioe- IL VALIDATORE --
+    # ### bloccava con 12 righe rifiutate (`tipo criterio non ammesso`: alle voci nuove del
+    # ### blocco C mancava `tipo_era1`). UN CONTROLLO CHE GIRA UN COMANDO PIU- DEBOLE DI
+    # ### QUELLO DEL PRESIDIO NON PROTEGGE NIENTE (`A9`). Adesso gira ENTRAMBI.
+    q6v = subprocess.run([sys.executable, os.path.join(_QUI, "_indice_id.py")],
+                         cwd=RADICE, capture_output=True, text=True)
     q6 = subprocess.run([sys.executable, os.path.join(_QUI, "_indice_id.py"),
                          "--blocca", "SI"], cwd=RADICE, capture_output=True, text=True)
     m = re.search(r"blocca_run_base `SI`: (\d+) voci su (\d+)", q6.stdout or "")
-    esito("C6 la VISTA compatibile fa girare `_indice_id.py --blocca SI`",
-          q6.returncode == 0 and bool(m),
-          ("%s bloccanti su %s voci" % (m.group(1), m.group(2))) if m
-          else (q6.stdout or q6.stderr or "")[:60])
+    esito("C6 la VISTA passa IL VALIDATORE VECCHIO (quello del pre-commit) e la domanda",
+          q6v.returncode == 0 and q6.returncode == 0 and bool(m),
+          ("%s bloccanti su %s voci" % (m.group(1), m.group(2)))
+          if m and not q6v.returncode
+          else ("### il validatore NUDO esce %d: %s"
+                % (q6v.returncode,
+                   " ".join((q6v.stdout or "").split())[-120:])))
 
     # ---------------------------------------------- C7 I CONTEGGI
     riga("=")

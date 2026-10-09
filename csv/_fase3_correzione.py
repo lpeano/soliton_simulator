@@ -82,6 +82,23 @@ C_OMONIMI = {
 # ==========================================================================
 #   LA REGOLA CORRETTA: che cos'e' una DEFINIZIONE
 # ==========================================================================
+# ### GENERATE: una riga qui NON definisce niente, ELENCA.
+# ### E' LO STESSO DIFETTO DEL CONTROLLO `C4`, che leggeva `doc/INDICE.md` -- un file che
+# ### GENERA lui stesso. `doc/LISTA_CHIUSA.md` e' ### **la lista degli ID**: ogni ID ci
+# ### compare ### **per definizione di cosa e' quel file**, quindi trovarci una riga di
+# ### tabella e' un ### **FALSO-UNO** -- un verdetto garantito da qualcosa che ### **non parla
+# ### del merito.** ### ⛔ **Senza questa esclusione il ripasso dava `37` definizioni invece
+# ### di `28`**, e `TW-1` risultava definito in `LISTA_CHIUSA.md:711` invece che in
+# ### `doc/SCALE_TW_lettura.md:227`, che e' il posto dove la riga ### **dice che cosa e'.**
+GENERATE = ("doc/LISTA_CHIUSA.md", "doc/INDICE.md", "doc/INDICE_ID.tsv",
+            "doc/INDICE_ID_dettaglio.md", "doc/indice/")
+
+
+def e_generato(percorso):
+    p = percorso.replace(chr(92), "/")
+    return any(p == g or p.startswith(g) for g in GENERATE)
+
+
 def e_definito(idv, percorso):
     """### ⛔ **LA REGOLA CHE AVEVO SBAGLIATO.** La fase `2` diceva: *se tutte le citazioni
     stanno in documenti, e' un'etichetta*. ### **FALSO:** un documento e' ### **esattamente
@@ -93,19 +110,22 @@ def e_definito(idv, percorso):
     ### ⚠ **Una citazione nel corpo del testo NON e' una definizione**, ed e' la distinzione
     che mancava.
     """
+    if e_generato(percorso):
+        return None
     p = os.path.join(RADICE, percorso)
     if not os.path.exists(p):
         return None
     q = re.escape(idv)
     riga_tab = re.compile(r"^\s*\|\s*\**\s*`?" + q + r"`?\s*\**\s*\|")
     intest = re.compile(r"^#{1,6}\s.*(?<![A-Za-z0-9_:-])" + q + r"(?![A-Za-z0-9_:-])")
+    fuori = []
     for n, r in enumerate(io.open(p, encoding="utf-8", errors="replace").read().split(NL),
                           1):
         if riga_tab.match(r):
-            return ("riga di tabella", percorso, n, " ".join(r.split())[:150])
-        if intest.match(r):
-            return ("intestazione", percorso, n, " ".join(r.split())[:150])
-    return None
+            fuori.append(("riga di tabella", percorso, n, " ".join(r.split())[:150]))
+        elif intest.match(r):
+            fuori.append(("intestazione", percorso, n, " ".join(r.split())[:150]))
+    return fuori or None
 
 
 def cit(s, q=90):
@@ -236,30 +256,137 @@ def blocco_c():
     print("  le etichette della fase 2 da ripassare: %d" % len(nuove))
     definite, restano = [], []
     for e in nuove:
-        trovata = None
+        trovate = []
         for f in (e.get("file_citanti") or []):
-            trovata = e_definito(e["id"], f)
-            if trovata:
-                break
-        (definite if trovata else restano).append((e, trovata))
+            trovate.extend(e_definito(e["id"], f) or [])
+        (definite if trovate else restano).append((e, trovate))
     print("  -> DEFINITE da una riga di tabella o da un'intestazione: %d" % len(definite))
     print("  -> restano etichette:                                   %d" % len(restano))
-    d = {"definite": [{"id": e["id"], "come": t[0], "file": t[1], "riga": t[2],
-                       "testo": t[3]} for e, t in definite],
+    d = {"definite": [{"id": e["id"], "quante": len(t),
+                       "dove": [{"come": x[0], "file": x[1], "riga": x[2], "testo": x[3]}
+                                for x in t]} for e, t in definite],
          "restano": [{"id": e["id"], "citazioni_n": e.get("citazioni_n"),
                       "file_citanti": e.get("file_citanti")} for e, _t in restano]}
     io.open(os.path.join(D, "_ripasso_etichette.json"), "w", encoding="utf-8",
             newline=NL).write(json.dumps(d, ensure_ascii=False, indent=1))
     print("  scritto doc/indice/_ripasso_etichette.json")
     for x in d["definite"]:
-        print("      %-20s %-16s %s:%d" % (x["id"], x["come"], x["file"].split("/")[-1],
-                                           x["riga"]))
+        for y in x["dove"]:
+            print("      %-20s %-16s %-44s:%d%s"
+                  % (x["id"], y["come"], y["file"], y["riga"],
+                     "   ### OMONIMO?" if x["quante"] > 1 else ""))
     return d
 
 
+def blocco_c_lotto():
+    """### IL LOTTO che fa NASCERE le `16` voci del blocco `C`.
+
+    ### ⚠ **`stato_era_1` NON e- inventato:** e- il campo `stato` che ### **il vecchio indice
+    aveva davvero** per quell-ID, letto da `migra_indice_v2.vecchio_indice()`. Per tutte e
+    `16` e- `da-decidere`. ### **E il titolo vecchio diceva <<MAI definito in un registro>>:
+    era VERO alla lettera** *(non stanno in un registro)* ### **e FALSO nella sostanza** --
+    sono definiti, in un documento, da una riga di tabella o da un-intestazione.
+
+    ### IL PRE-COMMIT HA PRESO UN DIFETTO MIO: `tipo_era1` NON E- UN ORNAMENTO. La vista
+    compatibile mette nella colonna `tipo` quel metadato, e ### **se manca ci mette
+    `classe.lower()`** -- che per `CRITERIO` da- `criterio`, mentre il vocabolario dell-era
+    `1` ha ### **`criterio-locale`**. ### **Senza, il `pre-commit` BLOCCA**, e cosi- e- andata:
+    il validatore vecchio ha rifiutato `12` righe. ### **Il valore vero sta nel VECCHIO
+    INDICE**, e per tutte e `16` e- `criterio-locale`.
+    """
+    import migra_indice_v2 as MG
+    vecchie = MG.vecchio_indice()
+    rip = json.loads(io.open(os.path.join(D, "_ripasso_etichette.json"),
+                             encoding="utf-8").read())
+    dove = {x["id"]: x["dove"] for x in rip["definite"]}
+    # ### I titoli GIA- IN USO: l-unicita- e- su TUTTE le voci, non solo sul lotto.
+    titoli = {v["titolo"] for v in
+              (json.loads(r) for r in io.open(os.path.join(D, "voci.jsonl"),
+                                              encoding="utf-8") if r.strip())
+              if v["id"] not in C_RIPRISTINA and v["id"] not in C_OMONIMI}
+    lotto = []
+    for idv, (classe, dom, era, stato, atteso) in sorted(C_RIPRISTINA.items()):
+        dd = [y for y in dove.get(idv, []) if y["file"] == atteso]
+        assert dd, "`%s`: la definizione attesa in %s NON si trova" % (idv, atteso)
+        y = dd[0]
+        # ### IL TITOLO esce dalla CELLA DI CONTENUTO della riga, o dall-intestazione.
+        if y["come"] == "riga di tabella":
+            celle = [c.strip() for c in y["testo"].strip("| ").split("|")]
+            tit = next((c for c in celle[1:] if c and c != "-"), celle[-1])
+        else:
+            tit = y["testo"].lstrip("# ").strip()
+        tit = " ".join(tit.replace("**", "").replace("*", "").split())
+        # ### ⛔ **IL TITOLO DEVE ESSERE UNICO, e il validatore VECCHIO lo pretende.**
+        # ### `TW-1` e `TS-6` collidevano, e ### **non e- un difetto del generatore:** le due
+        # ### righe dicono ### **davvero la stessa cosa** -- *<<flag OFF = byte-identico,
+        # ### firma dei byte, un processo per braccio>>* -- scritte in ### **due documenti
+        # ### diversi**. ### ➜ **Il titolo porta il documento**, e due criteri gemelli
+        # ### restano distinguibili.
+        tag = os.path.basename(y["file"])[:-3]
+        tit = ("%s [%s]" % (tit[:100 - len(tag) - 3], tag)) if tit in titoli else tit[:100]
+        titoli.add(tit)
+        v = {"id": idv, "titolo": tit, "descrizione": y["testo"],
+             "classe": classe, "dominio": dom, "era": era, "stato": stato,
+             "fonte": "%s::%s" % (y["file"], tit[:60]),
+             "stato_era_1": (vecchie.get(idv) or {}).get("stato", "da-decidere"),
+             "meta": {"tipo_era1": (vecchie.get(idv) or {}).get("tipo", "altro"),
+                      "nota_guardiano":
+                      "etichetta rimossa PER SBAGLIO nella fase 2 e RIPRISTINATA: la "
+                      "regola corretta dice che una riga di tabella o un-intestazione "
+                      "che definisce l-ID E- UNA DEFINIZIONE (%s, %s:%d)"
+                      % (y["come"], y["file"], y["riga"])}}
+        if stato == "CHIUSA":
+            # ### La chiusura NON si inventa: ### **sta nell-intestazione stessa.**
+            v["chiusura"] = {"criterio": tit[:90], "commit": "5cffa73", "data": "2026-09-14"}
+        lotto.append({"campi": v, "quando": DATA, "togli_da_etichette": True,
+                      "motivo": ("(C) RIPRISTINATA: la fase 2 l-aveva tolta come ETICHETTA "
+                                 "perche- <<tutte le citazioni stanno in documenti>>, e la "
+                                 "regola era SBAGLIATA. E- DEFINITA da una %s in %s:%d, che "
+                                 "dice <<%s>>" % (y["come"], y["file"], y["riga"],
+                                                  cit(y["testo"], 110)))})
+    # ---------------------------------------------- GLI OMONIMI: non si scegli
+    for idv, due in sorted(C_OMONIMI.items()):
+        dd = dove.get(idv, [])
+        assert len(dd) == 2, "`%s`: mi aspettavo 2 definizioni, ne trovo %d" % (idv, len(dd))
+        lotto.append({"campi": {
+            "id": idv,
+            "titolo": "OMONIMO `%s`: lo stesso ID nomina DUE OGGETTI DIVERSI" % idv,
+            "descrizione": (" ||| ".join(y["testo"] for y in dd)),
+            "classe": "NON_DEFINITA", "dominio": "DA_CLASSIFICARE",
+            "era": "DA_CLASSIFICARE", "stato": "DA_CLASSIFICARE",
+            "fonte": "%s::%s" % (dd[0]["file"], idv),
+            "stato_era_1": (vecchie.get(idv) or {}).get("stato", "da-decidere"),
+            "meta": {"omonimo": due,
+                     "tipo_era1": (vecchie.get(idv) or {}).get("tipo", "altro"),
+                     "nota_guardiano": "OMONIMO: NON si scegli quale delle due. Il mandato "
+                                       "dice <<NON scegliere>>, e la scelta e- di Luca"}},
+            "quando": DATA, "togli_da_etichette": True,
+            "motivo": ("(C) OMONIMO, e NON SI SCEGLIE: lo stesso ID `%s` e- definito DUE "
+                       "VOLTE, su oggetti DIVERSI -- <<%s>> e <<%s>>. Nasce NON_DEFINITA, "
+                       "con le due definizioni nel meta `omonimo`"
+                       % (idv, cit(dd[0]["testo"], 70), cit(dd[1]["testo"], 70)))})
+    scrivi_lotto("v3_C.jsonl", lotto)
+    print("  (C) %d ripristinate, %d OMONIMI che restano NON_DEFINITA"
+          % (len(C_RIPRISTINA), len(C_OMONIMI)))
+    # ---------------------------------------------- CHE COSA CAMBIA, PER IL REFERTO
+    altre = sorted(x["id"] for x in rip["definite"]
+                   if x["id"] not in C_RIPRISTINA and x["id"] not in C_OMONIMI)
+    print()
+    print("  ### E LE ALTRE %d CHE LA REGOLA CORRETTA DICHIARA DEFINITE, e il mandato NON le"
+          % len(altre))
+    print("  ### nomina: NON le ripristino, perche- il mandato non dice CON QUALE CLASSE e")
+    print("  ### DOMINIO, e sceglierlo io sarebbe decidere al posto di Luca. Vanno nel referto:")
+    for i in altre:
+        y = dove[i][0]
+        print("      %-20s %-16s %s:%d" % (i, y["come"], y["file"], y["riga"]))
+    io.open(os.path.join(D, "_ripasso_restano_a_luca.json"), "w", encoding="utf-8",
+            newline=NL).write(json.dumps(
+                [{"id": i, "dove": dove[i]} for i in altre], ensure_ascii=False, indent=1))
+
+
 def main(argv):
-    assert argv and argv[0] in ("A", "B", "C"), __doc__
-    {"A": blocco_a, "B": blocco_b, "C": blocco_c}[argv[0]]()
+    assert argv and argv[0] in ("A", "B", "C", "C2"), __doc__
+    {"A": blocco_a, "B": blocco_b, "C": blocco_c, "C2": blocco_c_lotto}[argv[0]]()
     return 0
 
 

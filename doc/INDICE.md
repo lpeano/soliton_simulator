@@ -4,15 +4,16 @@
 
 | dominio | era | voci |
 |---|---|--:|
-| `DA_CLASSIFICARE` | `DA_CLASSIFICARE` | 179 |
+| `DA_CLASSIFICARE` | `DA_CLASSIFICARE` | 181 |
 | `DOCUMENTAZIONE` | `1` | 21 |
 | `DOCUMENTAZIONE` | `ENTRAMBE` | 6 |
-| `FISICA` | `1` | 394 |
+| `FISICA` | `1` | 396 |
 | `FISICA` | `2` | 26 |
 | `FISICA` | `DA_CLASSIFICARE` | 1 |
 | `FISICA` | `ENTRAMBE` | 16 |
 | `INFRASTRUTTURA` | `1` | 16 |
 | `INFRASTRUTTURA` | `ENTRAMBE` | 30 |
+| `METODO` | `1` | 12 |
 | `METODO` | `ENTRAMBE` | 124 |
 
 | id | classe | dominio | era | stato | blocca | titolo |
@@ -225,6 +226,8 @@
 | `D36` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | LA SOGLIA DELLA MITOSI E' IN UNITA' ASSOLUTE DI tw, MENTRE LA SCALA DI tw DIPEND |
 | `D37` | DIFETTO | FISICA | 1 | ### **CHIUSA** |  | D37 CURATO il 2026-09-24 / CHIAVE DUPLICATA NEI DOMINI: 'csnodoprev' compare DUE |
 | `D38` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | nasce (:3850) e' gated su SCALAMIN or SCALAMINPASSO: la legge «nessun arco sotto |
+| `D5` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | OMONIMO `D5`: lo stesso ID nomina DUE OGGETTI DIVERSI |
+| `D6` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | OMONIMO `D6`: lo stesso ID nomina DUE OGGETTI DIVERSI |
 | `DIVISIONE-AUTOCONSISTENTE` | FRONTE | FISICA | 2 | ### **AGENDA** |  | la divisione dell arco come UNA legge: dove si rompe, cosa ereditano i figli, il |
 | `DOPPIA-COP` | CURA | FISICA | 1 | ### **SOSPESA** |  | LA CURA (b): la doppia copertura 4 pi e' un ASSIOMA e va resa STRUTTURALE, non m |
 | `DRIVER-SCENA-II` | DIFETTO | INFRASTRUTTURA | 1 | ### **CHIUSA** |  | APERTA il 2026-09-26 (rilievo di Luca) / IL DRIVER NON SA FARE LA SCENA (ii), e  |
@@ -401,6 +404,7 @@
 | `O3` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 8 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
 | `O3a` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 2 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
 | `O3c` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 4 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
+| `O4` | FRONTE | FISICA | 1 | ### **SOSPESA** |  | CONSERVAZIONE DELL'ENERGIA. L'energia assorbita non si riesce a bilanciare |
 | `OKN-ASSERT` | DIFETTO | FISICA | 1 | ### **CHIUSA** |  | CHIUSA il 2026-09-26, a run finito (residuo rilevato da Luca) / UN getattr(...,  |
 | `OMEGA-ETA` | MISURA | FISICA | 1 | ### **SOSPESA** |  | APERTA il 2026-09-26 (Luca: da seguire nel run base, NON una cura) / IL RAPPORTO |
 | `OSSERVABILE-P1` | DIFETTO | METODO | ENTRAMBE | ### **CHIUSA** |  | APERTA il 2026-09-26 (rilievo di Luca) / NON ESISTE UNO STRUMENTO UFFICIALE PER  |
@@ -603,6 +607,7 @@
 | `SCHWINGER-UN-NODO` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | lo Schwinger crea UN solo nodo e il commento dice che la coppia e' neutra: la ca |
 | `SCIOGLIMENTO-FASE` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | perche' coer_campo va da 0.999 a 0.20 in 120 passi: la scena non tocca phivel e  |
 | `SCUOT-INNESCO` | MISURA | FISICA | 1 | ### **CHIUSA** |  | lo scuotimento del vuoto e' l'innesco: senza di lui zero nascite e spin omogenei |
+| `SHAKE-THEN-FREEZE` | MISURA | FISICA | 1 | ### **CHIUSA** |  | ✅ SHAKE-THEN-FREEZE — CHIUSO (2026-09-14, commit `5cffa73`). ESITO B, come prede |
 | `SIGILLO-COMPARATORE-DUPLICATO` | FRONTE | INFRASTRUTTURA | ENTRAMBE | ### **APERTA** |  | il comparatore del lockstep e copiato in due sigilli: due copie che possono dive |
 | `SIGILLO-REGISTRO-NON-CONFRONTABILE` | FRONTE | INFRASTRUTTURA | ENTRAMBE | ### **APERTA** |  | il comparatore del sigillo non sa confrontare _veleno_registro (un dict di array |
 | `SIGILLO-SENZA-CONFIGURAZIONE` | FRONTE | INFRASTRUTTURA | ENTRAMBE | ### **APERTA** |  | il sigillo prende la configurazione dal CLI del driver ma NON la timbra nel suo  |
@@ -641,6 +646,18 @@
 | `TORS-SPINTA` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | la spinta repulsiva di torsione: legge DINAMICA dentro mitosi(), con tre numeri  |
 | `TORS-W8-AVVOLGIMENTO` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | _w8 ha periodo 8pi ma l avvolgimento di dph e di 4pi: il ramo TORS_4PI inietta - |
 | `TRATTI-INTERNI` | MISURA | FISICA | 1 | ### **SOSPESA** |  | a 80 passi il calo di A(t) sta negli INTERNI, non nel varco: le regioni si contr |
+| `TS-1` | CRITERIO | METODO | 1 | ### **SOSPESA** |  | la soglia è raggiungibile nel regime `A13`: frazione di archi (o cicli) oltre il |
+| `TS-2` | CRITERIO | METODO | 1 | ### **SOSPESA** |  | `tw = 0` e `tw = 4π` danno lo STESSO passo, byte per byte |
+| `TS-3` | CRITERIO | METODO | 1 | ### **SOSPESA** |  | nessun `φ` nella formula: verifica dall'AST, non da un `grep` sul testo |
+| `TS-4` | CRITERIO | METODO | 1 | ### **SOSPESA** |  | nessuna perdita: con incremento a media nulla la grandezza si conserva |
+| `TS-5` | CRITERIO | METODO | 1 | ### **SOSPESA** |  | caso che DEVE fallire (`P1-sexies`): con il quanto messo a zero la creazione dev |
+| `TS-6` | CRITERIO | METODO | 1 | ### **SOSPESA** |  | flag OFF = byte-identico, firma dei byte, un processo per braccio |
+| `TW-1` | CRITERIO | METODO | 1 | ### **SOSPESA** |  | flag OFF = byte-identico, firma dei byte, un processo per braccio [SCALE_TW_lett |
+| `TW-2` | CRITERIO | METODO | 1 | ### **SOSPESA** |  | `tw = 0` e `tw = periodo` danno LO STESSO passo, byte per byte |
+| `TW-3` | CRITERIO | METODO | 1 | ### **SOSPESA** |  | con l'incremento a media nulla, `sum(tw)` è CONSERVATA (nessuna perdita) |
+| `TW-4` | CRITERIO | METODO | 1 | ### **SOSPESA** |  | la soglia non dipende da `PHI_CRIT` moltiplicato per un numero: la si cambia di  |
+| `TW-5` | CRITERIO | METODO | 1 | ### **SOSPESA** |  | caso che DEVE fallire (`P1-sexies`): con `E_nodo` messa a zero la mitosi deve sc |
+| `TW-6` | CRITERIO | METODO | 1 | ### **SOSPESA** |  | frazione di archi che raggiungono la soglia `> 0` su 4 semi (non su uno) |
 | `TW-DIVISIONE-INCOGNITA` | DIFETTO | FISICA | 1 | ### **CHIUSA** |  | il tw che sparisce a una divisione non torna con la soglia misurata: -7.19 contr |
 | `U1` | DIFETTO | FISICA | 1 | ### **SOSPESA** | SI | URGENTE, PRIMA DI QUALUNQUE GIRO LUNGO — massacriticacollasso: 21 usi DENTRO LEG |
 | `U2` | DIFETTO | FISICA | 1 | ### **CHIUSA** |  | M2 DIVENTA URGENTE — la mitosi mette figli SOTTO la scala di Planck. Con la semi |

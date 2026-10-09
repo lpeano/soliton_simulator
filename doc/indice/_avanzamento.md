@@ -71,20 +71,20 @@ python csv/indice.py aggiorna-lotto doc/indice/_lotti/<nome>.jsonl
 
 | | |
 |---|--:|
-| voci | `813` |
+| voci | `829` |
 | ### **`DA_CLASSIFICARE` vere** *(non segnaposto)* | ### **`1`** |
-| ### **segnaposto `NON_DEFINITA`** | ### **`179`** |
-| ### **righe di storico** | ### **`1030`** |
+| ### **segnaposto `NON_DEFINITA`** | ### **`181`** |
+| ### **righe di storico** | ### **`1046`** |
 
 ```
-classe    DIFETTO=209  NON_DEFINITA=179  FRONTE=168  CRITERIO=95  MISURA=54  CURA=46  PRESIDIO=34  STANDARD=28
-dominio   FISICA=437  DA_CLASSIFICARE=179  METODO=124  INFRASTRUTTURA=46  DOCUMENTAZIONE=27
-era       1=431  DA_CLASSIFICARE=180  ENTRAMBE=176  2=26
-stato     SOSPESA=261  CHIUSA=186  DA_CLASSIFICARE=180  APERTA=160  AGENDA=26
+classe    DIFETTO=209  NON_DEFINITA=181  FRONTE=169  CRITERIO=107  MISURA=55  CURA=46  PRESIDIO=34  STANDARD=28
+dominio   FISICA=439  DA_CLASSIFICARE=181  METODO=136  INFRASTRUTTURA=46  DOCUMENTAZIONE=27
+era       1=445  DA_CLASSIFICARE=182  ENTRAMBE=176  2=26
+stato     SOSPESA=274  CHIUSA=187  DA_CLASSIFICARE=182  APERTA=160  AGENDA=26
 ```
 
-### ✔ **FATTO IN QUESTO GIRO:** la correzione `v3`, blocchi `A` e `B`: la lista `2` del guardiano era un ERRORE SUO (`17` voci dall'era `2` all'era `1`, e `5` che decide Luca), le ### **gemelle** a `METODO/ENTRAMBE`, i ### **fuori posto** a `DOCUMENTAZIONE`/`INFRASTRUTTURA`, e `D13`/`Z11` ### **allineate su `APERTA`** perche' il lavoro NON e' fatto
+### ✔ **FATTO IN QUESTO GIRO:** il blocco `C`: ### **`16` etichette RIPRISTINATE come voci**, perche' la mia regola era sbagliata -- ### **un documento e' esattamente il posto in cui un ID si DEFINISCE.** `12` criteri di sigillo *(`TS-*`, `TW-*`)*, `O4` *(un'obiezione al bersaglio!)*, `SHAKE-THEN-FREEZE` *(con la sua chiusura, `5cffa73`)*, e `D5`/`D6` ### **OMONIMI, che NON si scelgono.** Piu' `crea-lotto`, ### **la via che mancava per far NASCERE una voce**
 
-### ⛔ **RESTA:** i blocchi `C` *(le etichette rimosse per sbaglio, e ### **la regola corretta**)*, `D` *(il campo `commit` dello storico)* e `E` *(il referto)*
+### ⛔ **RESTA:** il blocco `D` *(il campo `commit` dello storico, vuoto in `982` righe)* e il blocco `E` *(i controlli e il referto `doc/REFERTO_indice_v3_correzione.md`)*
 
-**Ultimo lotto applicato:** `doc/indice/_lotti/v3_B.jsonl`
+**Ultimo lotto applicato:** `doc/indice/_lotti/v3_C.jsonl`

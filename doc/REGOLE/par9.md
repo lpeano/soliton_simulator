@@ -100,12 +100,15 @@ effetto collaterale di uno strumento.**
 ```
 python csv/indice.py aggiorna ID --campo stato=SOSPESA --motivo "...cita il testo..."
 python csv/indice.py aggiorna-lotto doc/indice/_lotti/<nome>.jsonl
+python csv/indice.py crea-lotto    doc/indice/_lotti/<nome>.jsonl   # NASCE
 ```
 
 | | |
 |---|---|
 | ### **ogni modifica** | aggiunge una riga a **`doc/indice/storico.jsonl`**, che è **solo in aggiunta** |
 | ### **il motivo CITA** | una frase della descrizione o della fonte. **Il lotto rifiuta un motivo sotto i `20` caratteri** |
+| ### **una voce NASCE** | solo con `crea-lotto`, e la sua riga di storico ha **`prima: null`**. ### ⚠ **Prima del 2026-10-09 non c'era**, e le voci nascevano **dentro la migrazione** — che gira una volta sola, dal tag: far nascere una voce dopo voleva dire **scrivere a mano in `voci.jsonl`**, cioè ### **una seconda via di scrittura** |
+| ### **togliere da `etichette_rimosse`** | fa parte dello **stesso atto** di `crea-lotto`, perché `C1` pretende che ogni ID vecchio stia in ### **UNO E UNO SOLO** posto. ### **Non è pulizia: è la conservazione** |
 | ### ⛔ **a mano, MAI** | e il validatore se ne accorge: le **viste** si confrontano con la fonte |
 | ### **le viste** | `doc/INDICE_ID.tsv` *(compatibile, `15` colonne)*, `doc/INDICE.md`, `doc/indice/_indice_meta.json` *(indice invertito)*. **Tutte DERIVATE** |
 

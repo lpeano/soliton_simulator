@@ -2141,7 +2141,7 @@ nessuna voce si cancella.**
 | | |
 |---|---|
 | **file** | `csv/indice.py` *(657 righe)* |
-| **COMANDO** | `python csv/indice.py collaudo` · `valida` · `cerca` · `aggiorna` · `viste` · `citazioni` · `meta-aggiungi`/`meta-depreca`/`meta-rinomina` |
+| **COMANDO** | `python csv/indice.py collaudo` · `valida` · `cerca` · `aggiorna` · **`aggiorna-lotto`** · **`crea-lotto`** · `mostra` · `viste` · `citazioni` · `meta-aggiungi`/`meta-depreca`/`meta-rinomina` |
 | **cosa misura** | ### **valida** schema, vocabolari, riferimenti, transizioni, campi obbligatori, unicita', metadati, e l'### **allineamento dei DERIVATI** *(indice invertito e viste)*; ### **cerca** per campi e metadati ### **senza parsing di testo**; ### **scrive** solo con `aggiorna`, che aggiunge una riga a `storico.jsonl` |
 | **BLOB** | `23f29617` |
 
@@ -2184,3 +2184,16 @@ etichette rimosse, con ### **`0` persi, `0` doppi, `0` conflitti**.
 > ### **leggeva una vista che lei stessa scrive**, quindi non era idempotente)*; le colonne
 > `motivo` e `revisione` ### **perse**; e un ### **tetto di `1200` caratteri** su un testo
 > conservato, che ### **lo avrebbe troncato** *(`A11`: un numero scelto)*.
+
+---
+
+### `csv/_fase3_correzione.py` — **LA CORREZIONE `v3` DOPO LA VERIFICA DEL GUARDIANO** *(2026-10-09)*
+
+| | |
+|---|---|
+| **file** | `csv/_fase3_correzione.py` |
+| **BLOB** *(sha1 dei byte grezzi)* | `a6ddd8f0` |
+| **COMANDO** | `python csv/_fase3_correzione.py A` · `B` · `C` *(il ripasso delle `53`)* · `C2` *(il lotto)*, poi `python csv/indice.py aggiorna-lotto doc/indice/_lotti/v3_A.jsonl` · `v3_B.jsonl` · `python csv/indice.py crea-lotto doc/indice/_lotti/v3_C.jsonl` |
+| **cosa misura** | `A` la lista `2` del guardiano *(che era un **errore suo**)*; `B` le **gemelle** e i **fuori posto**, più `D13`/`Z11` che sono **lo stesso fatto**; `C` **ripassa le `53` etichette** con la regola corretta — ### **una riga di tabella o un'intestazione che definisce l'ID È UNA DEFINIZIONE** |
+| **l'uscita** | `doc/indice/_lotti/v3_A.jsonl` *(`22`)* · `v3_B.jsonl` *(`26`)* · `v3_C.jsonl` *(`16`)* · `doc/indice/_ripasso_etichette.json` · `doc/indice/_ripasso_restano_a_luca.json` |
+| ### ⚠ **la trappola, e l'ho presa** | il ripasso trovava `37` definizioni invece di `28`, perché cercava anche in **`doc/LISTA_CHIUSA.md`** — che è **la lista degli ID**: ogni ID ci compare **per definizione di cos'è quel file**. ### **È un FALSO-UNO**, ed è lo stesso difetto di `C4` che leggeva `doc/INDICE.md`. Le **viste generate** sono escluse, e il perché sta nel sorgente |

@@ -1,0 +1,592 @@
+{
+ "definite": [
+  {
+   "id": "ARCHI-PASSO",
+   "quante": 1,
+   "dove": [
+    {
+     "come": "intestazione",
+     "file": "RELAZIONE_PER_CLAUDE.md",
+     "riga": 5110,
+     "testo": "### ✅ **E L'ASSE `z`: CONFERMATO SU 70 773 112 ARCHI-PASSO**"
+    }
+   ]
+  },
+  {
+   "id": "AUTO-MANUTENZIONE",
+   "quante": 1,
+   "dove": [
+    {
+     "come": "intestazione",
+     "file": "doc/STORIA_REGOLE.md",
+     "riga": 479,
+     "testo": "## 5-bis. AUTO-MANUTENZIONE (tieni aggiornati i documenti vivi)"
+    }
+   ]
+  },
+  {
+   "id": "D5",
+   "quante": 2,
+   "dove": [
+    {
+     "come": "riga di tabella",
+     "file": "doc/CENSIMENTO_intenzioni.md",
+     "riga": 315,
+     "testo": "| **`D5`** | `:936` (`SYNC_UPDATE`) e le sue motivazioni sparse nei documenti | **2026-08-28** il flag, **2026-09-03** le promesse | era descritto com"
+    },
+    {
+     "come": "riga di tabella",
+     "file": "doc/MAPPA_accoppiamenti_spin.md",
+     "riga": 70,
+     "testo": "| **D5** | — | `omega_s` | **1984** | **`- omega_src/_tau`** — **il pozzo** |"
+    }
+   ]
+  },
+  {
+   "id": "D6",
+   "quante": 2,
+   "dove": [
+    {
+     "come": "riga di tabella",
+     "file": "doc/CENSIMENTO_intenzioni.md",
+     "riga": 316,
+     "testo": "| **`D6`** | `Checkpoint.md` nel suo insieme (~640 righe) | file **2026-09-05 / 2026-09-07** | contiene ~40 voci `[TODO]`, `[IN VERIFICA]`, `[DA VERIF"
+    },
+    {
+     "come": "riga di tabella",
+     "file": "doc/MAPPA_accoppiamenti_spin.md",
+     "riga": 71,
+     "testo": "| **D6** | nascita | `omega_s` | **1654** | `calcio_omega` in `semina()`: punto zero **alla nascita**, non per passo |"
+    }
+   ]
+  },
+  {
+   "id": "DA-DECIDERE",
+   "quante": 1,
+   "dove": [
+    {
+     "come": "intestazione",
+     "file": "RELAZIONE_PER_CLAUDE.md",
+     "riga": 5025,
+     "testo": "### ⚠ **E `blocca_run_base` di `MEM-HEBB-VERSO` RESTA `DA-DECIDERE`:** la decisione"
+    }
+   ]
+  },
+  {
+   "id": "DE-ACCOPPIABILITA",
+   "quante": 1,
+   "dove": [
+    {
+     "come": "intestazione",
+     "file": "doc/INDAGINE_scuotimento.md",
+     "riga": 156,
+     "testo": "## 4. DE-ACCOPPIABILITA' — analisi, non piano"
+    }
+   ]
+  },
+  {
+   "id": "DOMANDE-BUSSOLA",
+   "quante": 1,
+   "dove": [
+    {
+     "come": "intestazione",
+     "file": "doc/BUSSOLA_dev-spinoriale.md",
+     "riga": 50,
+     "testo": "## LE DOMANDE-BUSSOLA (le tenere vive)"
+    }
+   ]
+  },
+  {
+   "id": "FORK-FIRST",
+   "quante": 1,
+   "dove": [
+    {
+     "come": "intestazione",
+     "file": "CLAUDECONNECT.md",
+     "riga": 469,
+     "testo": "### §34 — Ordine di lavoro: FORK-FIRST (commit a936d3c, abe9925, c9fcc1e)"
+    }
+   ]
+  },
+  {
+   "id": "GLOBALE-DIS",
+   "quante": 1,
+   "dove": [
+    {
+     "come": "intestazione",
+     "file": "doc/relazioni/2026-09-26.md",
+     "riga": 1068,
+     "testo": "## ① **`GLOBALE-DIS` NON ESISTE: L'HO INVENTATO IO TRONCANDO**"
+    }
+   ]
+  },
+  {
+   "id": "O4",
+   "quante": 2,
+   "dove": [
+    {
+     "come": "riga di tabella",
+     "file": "doc/IPOTESI_gravita_a_spinta.md",
+     "riga": 47,
+     "testo": "| **O4** | **CONSERVAZIONE DELL'ENERGIA.** L'energia assorbita non si riesce a bilanciare | **Maxwell**, Poincare' | ai ritmi di assorbimento richiest"
+    },
+    {
+     "come": "riga di tabella",
+     "file": "doc/relazioni/2026-09-21.md",
+     "riga": 1876,
+     "testo": "| **O4** | **ENERGIA** non bilanciata | Maxwell, Poincare' | la massa della Terra **raddoppierebbe** |"
+    }
+   ]
+  },
+  {
+   "id": "POST-HOC",
+   "quante": 1,
+   "dove": [
+    {
+     "come": "intestazione",
+     "file": "doc/REFERTO_due_masse.md",
+     "riga": 69,
+     "testo": "### 1.2 ⚠ E LA LETTURA CHE DECIDE DAVVERO — **dichiarata POST-HOC, non era fissata prima**"
+    }
+   ]
+  },
+  {
+   "id": "RI-ETICHETTATO",
+   "quante": 1,
+   "dove": [
+    {
+     "come": "intestazione",
+     "file": "doc/REPERTO_cs_dinamico_spento.md",
+     "riga": 97,
+     "testo": "## 5. COSA RESTA VALIDO, E COSA VA RI-ETICHETTATO"
+    }
+   ]
+  },
+  {
+   "id": "RI-VERIFICATI",
+   "quante": 1,
+   "dove": [
+    {
+     "come": "intestazione",
+     "file": "doc/PIANO_merge_main.md",
+     "riga": 55,
+     "testo": "## 2. I TRE PRESIDI DEL REGISTRO, RI-VERIFICATI DAL DISCO"
+    }
+   ]
+  },
+  {
+   "id": "ROMPI-ANELLO",
+   "quante": 2,
+   "dove": [
+    {
+     "come": "intestazione",
+     "file": "doc/REFERTO_frequenza_riferimento.md",
+     "riga": 1,
+     "testo": "# REFERTO — **Il numero c'è. E la legge NON si può cablare: `median(|f|)` è anche il ROMPI-ANELLO**"
+    },
+    {
+     "come": "intestazione",
+     "file": "doc/REFERTO_frequenza_riferimento.md",
+     "riga": 138,
+     "testo": "## 3. ⚠ E QUI LA STRADA SI CHIUDE — **`median(|f|)` è anche il ROMPI-ANELLO**"
+    }
+   ]
+  },
+  {
+   "id": "SHAKE-THEN-FREEZE",
+   "quante": 1,
+   "dove": [
+    {
+     "come": "intestazione",
+     "file": "STATO_CLAUDE_fork-su2.md",
+     "riga": 398,
+     "testo": "## ✅ SHAKE-THEN-FREEZE — CHIUSO (2026-09-14, commit `5cffa73`). ESITO B, come predetto."
+    }
+   ]
+  },
+  {
+   "id": "SOVRA-CORREGGE",
+   "quante": 1,
+   "dove": [
+    {
+     "come": "intestazione",
+     "file": "CLAUDECONNECT.md",
+     "riga": 504,
+     "testo": "### §38 — Diagnosi di L: `sin(chi)` SOVRA-CORREGGE (commit aa42518, 83d9203)"
+    }
+   ]
+  },
+  {
+   "id": "TS-1",
+   "quante": 1,
+   "dove": [
+    {
+     "come": "riga di tabella",
+     "file": "doc/LETTURA_accensione_e_torsione.md",
+     "riga": 269,
+     "testo": "| **`TS-1`** | **la soglia è raggiungibile nel regime `A13`**: frazione di archi *(o cicli)* oltre il quanto **`> 0` su 4 semi** | **boccia la propost"
+    }
+   ]
+  },
+  {
+   "id": "TS-2",
+   "quante": 1,
+   "dove": [
+    {
+     "come": "riga di tabella",
+     "file": "doc/LETTURA_accensione_e_torsione.md",
+     "riga": 270,
+     "testo": "| **`TS-2`** | **`tw = 0` e `tw = 4π` danno lo STESSO passo, byte per byte** | **boccia** qualunque residuo di lettura «accumulo» |"
+    }
+   ]
+  },
+  {
+   "id": "TS-3",
+   "quante": 1,
+   "dove": [
+    {
+     "come": "riga di tabella",
+     "file": "doc/LETTURA_accensione_e_torsione.md",
+     "riga": 271,
+     "testo": "| **`TS-3`** | **nessun `φ` nella formula**: verifica dall'**AST**, non da un `grep` sul testo | **boccia** se `dph` sopravvive |"
+    }
+   ]
+  },
+  {
+   "id": "TS-4",
+   "quante": 1,
+   "dove": [
+    {
+     "come": "riga di tabella",
+     "file": "doc/LETTURA_accensione_e_torsione.md",
+     "riga": 272,
+     "testo": "| **`TS-4`** | **nessuna perdita**: con incremento a media nulla la grandezza **si conserva** | **boccia** se resta un `− dt/τ` |"
+    }
+   ]
+  },
+  {
+   "id": "TS-5",
+   "quante": 1,
+   "dove": [
+    {
+     "come": "riga di tabella",
+     "file": "doc/LETTURA_accensione_e_torsione.md",
+     "riga": 273,
+     "testo": "| **`TS-5`** | **caso che DEVE fallire** *(`P1-sexies`)*: con il quanto messo a **zero** la creazione **deve scattare su OGNI** ciclo | **boccia il cr"
+    }
+   ]
+  },
+  {
+   "id": "TS-6",
+   "quante": 1,
+   "dove": [
+    {
+     "come": "riga di tabella",
+     "file": "doc/LETTURA_accensione_e_torsione.md",
+     "riga": 274,
+     "testo": "| **`TS-6`** | **flag OFF = byte-identico**, firma dei byte, un processo per braccio | è il presidio |"
+    }
+   ]
+  },
+  {
+   "id": "TW-1",
+   "quante": 1,
+   "dove": [
+    {
+     "come": "riga di tabella",
+     "file": "doc/SCALE_TW_lettura.md",
+     "riga": 227,
+     "testo": "| **`TW-1`** | **flag OFF = byte-identico**, firma dei byte, un processo per braccio | nessuna: è il presidio |"
+    }
+   ]
+  },
+  {
+   "id": "TW-2",
+   "quante": 1,
+   "dove": [
+    {
+     "come": "riga di tabella",
+     "file": "doc/SCALE_TW_lettura.md",
+     "riga": 228,
+     "testo": "| **`TW-2`** | **`tw = 0` e `tw = periodo` danno LO STESSO passo**, byte per byte | **boccia A** se falliscono, perché in A sono lo stesso stato |"
+    }
+   ]
+  },
+  {
+   "id": "TW-3",
+   "quante": 1,
+   "dove": [
+    {
+     "come": "riga di tabella",
+     "file": "doc/SCALE_TW_lettura.md",
+     "riga": 229,
+     "testo": "| **`TW-3`** | **con l'incremento a media nulla, `sum(tw)` è CONSERVATA** *(nessuna perdita)* | **boccia A** se non lo è |"
+    }
+   ]
+  },
+  {
+   "id": "TW-4",
+   "quante": 1,
+   "dove": [
+    {
+     "come": "riga di tabella",
+     "file": "doc/SCALE_TW_lettura.md",
+     "riga": 230,
+     "testo": "| **`TW-4`** | la soglia **non dipende da `PHI_CRIT` moltiplicato per un numero**: la si cambia di `×2` e la mitosi **scala come il bilancio prevede**"
+    }
+   ]
+  },
+  {
+   "id": "TW-5",
+   "quante": 1,
+   "dove": [
+    {
+     "come": "riga di tabella",
+     "file": "doc/SCALE_TW_lettura.md",
+     "riga": 231,
+     "testo": "| **`TW-5`** | **caso che DEVE fallire** *(`P1-sexies`)*: con `E_nodo` messa a zero la mitosi **deve scattare su OGNI arco** | **boccia B** se non sca"
+    }
+   ]
+  },
+  {
+   "id": "TW-6",
+   "quante": 1,
+   "dove": [
+    {
+     "come": "riga di tabella",
+     "file": "doc/SCALE_TW_lettura.md",
+     "riga": 232,
+     "testo": "| **`TW-6`** | **frazione di archi che raggiungono la soglia `> 0` su 4 semi** *(non su uno)* | nessuna: è la condizione perché la mitosi esista |"
+    }
+   ]
+  }
+ ],
+ "restano": [
+  {
+   "id": "AAAA-MM-GG",
+   "citazioni_n": 11,
+   "file_citanti": [
+    "CLAUDE.md",
+    "csv/_archivio_relazioni.py",
+    "csv/_punto_della_situazione.py",
+    "csv/_regole_proposta.py",
+    "csv/indice.py",
+    "doc/LISTA_CHIUSA.md",
+    "doc/REGOLE/par0.md",
+    "doc/REGOLE/par8.md",
+    "doc/REGOLE_proposta.md",
+    "doc/STORIA_REGOLE.md",
+    "doc/TASK_HISTORY/README.md"
+   ]
+  },
+  {
+   "id": "ANTI-ALLINEAMENTO",
+   "citazioni_n": 2,
+   "file_citanti": [
+    "doc/LISTA_CHIUSA.md",
+    "doc/PREDIZIONE_shake_then_freeze.md"
+   ]
+  },
+  {
+   "id": "AUTO-ATTENUA",
+   "citazioni_n": 2,
+   "file_citanti": [
+    "doc/LISTA_CHIUSA.md",
+    "doc/RAMIFICAZIONI.md"
+   ]
+  },
+  {
+   "id": "AUTO-NORMALIZZANTE",
+   "citazioni_n": 2,
+   "file_citanti": [
+    "doc/LISTA_CHIUSA.md",
+    "doc/RAMIFICAZIONI.md"
+   ]
+  },
+  {
+   "id": "COME-MISURARE",
+   "citazioni_n": 2,
+   "file_citanti": [
+    "doc/BUSSOLA_TECNICA_dev-spinoriale.md",
+    "doc/LISTA_CHIUSA.md"
+   ]
+  },
+  {
+   "id": "CURE-FINE",
+   "citazioni_n": 3,
+   "file_citanti": [
+    "csv/_cure_verificate.py",
+    "doc/LISTA_CHIUSA.md",
+    "doc/STATO_RUN.md"
+   ]
+  },
+  {
+   "id": "CURE-INIZIO",
+   "citazioni_n": 3,
+   "file_citanti": [
+    "csv/_cure_verificate.py",
+    "doc/LISTA_CHIUSA.md",
+    "doc/STATO_RUN.md"
+   ]
+  },
+  {
+   "id": "DIFETTI-NUOVI-INIZIO",
+   "citazioni_n": 3,
+   "file_citanti": [
+    "csv/_cure_verificate.py",
+    "doc/LISTA_CHIUSA.md",
+    "doc/STATO_RUN.md"
+   ]
+  },
+  {
+   "id": "DOVE-VA",
+   "citazioni_n": 2,
+   "file_citanti": [
+    "doc/BUSSOLA_TECNICA_dev-spinoriale.md",
+    "doc/LISTA_CHIUSA.md"
+   ]
+  },
+  {
+   "id": "FASE-5",
+   "citazioni_n": 2,
+   "file_citanti": [
+    "doc/COMPONENTI_PROMOSSE.md",
+    "doc/LISTA_CHIUSA.md"
+   ]
+  },
+  {
+   "id": "GLOBALE-DISEGNO",
+   "citazioni_n": 6,
+   "file_citanti": [
+    "csv/_lista_chiusa.py",
+    "doc/LISTA_CHIUSA.md",
+    "doc/PUNTO_DELLA_SITUAZIONE.md",
+    "doc/SMISTAMENTO_run_base.md",
+    "doc/STATO_RUN.md",
+    "doc/relazioni/2026-09-26.md"
+   ]
+  },
+  {
+   "id": "IN-CHE-ORDINE",
+   "citazioni_n": 2,
+   "file_citanti": [
+    "doc/BUSSOLA_TECNICA_dev-spinoriale.md",
+    "doc/LISTA_CHIUSA.md"
+   ]
+  },
+  {
+   "id": "JHEP04",
+   "citazioni_n": 2,
+   "file_citanti": [
+    "doc/IPOTESI_gravita_a_spinta.md",
+    "doc/LISTA_CHIUSA.md"
+   ]
+  },
+  {
+   "id": "L206",
+   "citazioni_n": 2,
+   "file_citanti": [
+    "CLAUDECONNECT.md",
+    "doc/LISTA_CHIUSA.md"
+   ]
+  },
+  {
+   "id": "MANDATO-REGISTRO",
+   "citazioni_n": 4,
+   "file_citanti": [
+    "doc/LISTA_CHIUSA.md",
+    "doc/SMISTAMENTO_run_base.md",
+    "doc/SOSPENSIONE_era1_METODO.md",
+    "doc/STATO_RUN.md"
+   ]
+  },
+  {
+   "id": "QQ777",
+   "citazioni_n": 3,
+   "file_citanti": [
+    "csv/_presidio_indice.py",
+    "doc/LISTA_CHIUSA.md",
+    "doc/relazioni/2026-09-26.md"
+   ]
+  },
+  {
+   "id": "QUADRO-FINE",
+   "citazioni_n": 3,
+   "file_citanti": [
+    "csv/_quadro_unico.py",
+    "doc/LISTA_CHIUSA.md",
+    "doc/STATO_RUN.md"
+   ]
+  },
+  {
+   "id": "QUADRO-INIZIO",
+   "citazioni_n": 3,
+   "file_citanti": [
+    "csv/_quadro_unico.py",
+    "doc/LISTA_CHIUSA.md",
+    "doc/STATO_RUN.md"
+   ]
+  },
+  {
+   "id": "RI-GIRABILE",
+   "citazioni_n": 4,
+   "file_citanti": [
+    "doc/LISTA_CHIUSA.md",
+    "doc/RAMIFICAZIONI.md",
+    "doc/STORIA_REGOLE.md",
+    "doc/TASK_HISTORY/2026-09-20_censimento-sospeso-e-presidi.md"
+   ]
+  },
+  {
+   "id": "RI-GIRABILITA",
+   "citazioni_n": 2,
+   "file_citanti": [
+    "doc/INVENTARIO_strumenti.md",
+    "doc/LISTA_CHIUSA.md"
+   ]
+  },
+  {
+   "id": "RI-INTERROGA",
+   "citazioni_n": 2,
+   "file_citanti": [
+    "doc/FATTI_dal_codice.md",
+    "doc/LISTA_CHIUSA.md"
+   ]
+  },
+  {
+   "id": "RI-LETTA",
+   "citazioni_n": 3,
+   "file_citanti": [
+    "doc/LISTA_CHIUSA.md",
+    "doc/RAMIFICAZIONI.md",
+    "doc/SMISTAMENTO_run_base.md"
+   ]
+  },
+  {
+   "id": "VUOTO-MASSA",
+   "citazioni_n": 2,
+   "file_citanti": [
+    "doc/LISTA_CHIUSA.md",
+    "doc/RAMIFICAZIONI.md"
+   ]
+  },
+  {
+   "id": "Z147",
+   "citazioni_n": 2,
+   "file_citanti": [
+    "doc/LISTA_CHIUSA.md",
+    "doc/RAMIFICAZIONI.md"
+   ]
+  },
+  {
+   "id": "ZZ999",
+   "citazioni_n": 4,
+   "file_citanti": [
+    "csv/_presidio_indice.py",
+    "doc/INDICE_ID_referto.txt",
+    "doc/LISTA_CHIUSA.md",
+    "doc/relazioni/2026-09-26.md"
+   ]
+  }
+ ]
+}

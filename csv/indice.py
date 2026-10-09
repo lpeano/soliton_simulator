@@ -7,6 +7,7 @@ python csv/indice.py cerca [--dominio X] [--stato X] [--era X] [--blocca SI|NO]
                            [--legge ID] [--variabile ID] [--assioma ID] [--meta k=v]
 python csv/indice.py aggiorna ID --campo nome=valore | --meta k=v --motivo "..." [--commit SHA]
 python csv/indice.py aggiorna-lotto LOTTO.jsonl     # la STESSA via, in blocco
+python csv/indice.py crea-lotto LOTTO.jsonl        # la STESSA via, per FAR NASCERE una voce
 python csv/indice.py mostra [--stato X] [--segnaposto SI] [--da N] [--quante N]
 python csv/indice.py meta-aggiungi k --tipo T [--valori a,b] [--regex R] --descrizione "..."
 python csv/indice.py meta-depreca k --sostituito-da k2 --motivo "..."
@@ -37,6 +38,7 @@ TAB = chr(9)
 D = os.path.join(RADICE, "doc", "indice")
 VOCI = os.path.join(D, "voci.jsonl")
 STORICO = os.path.join(D, "storico.jsonl")
+ETICH = os.path.join(D, "etichette_rimosse.jsonl")
 META = os.path.join(D, "metadati.jsonl")
 INVERTITO = os.path.join(D, "_indice_meta.json")
 TSV = os.path.join(RADICE, "doc", "INDICE_ID.tsv")
@@ -712,6 +714,83 @@ def collaudo():
 
 
 # ==========================================================================
+def crea_lotto(voci, reg, percorso):
+    """### LA VIA PER FAR NASCERE UNA VOCE -- la STESSA via, non un-altra.
+
+    Prende un `jsonl` di `{campi: {...}, motivo, togli_da_etichette}` e lo applica
+    ### **atomicamente**: ogni voce passa dal ### **modello completo** delle `CHIAVI`, con
+    ### **una riga di storico** *(`prima: null`: prima non c-era niente)*, e ### **una sola
+    validazione alla fine.** ### Se non passa, ### **NON SI SCRIVE NIENTE.**
+
+    ### ⛔ **Perche- serviva:** `aggiorna` e `aggiorna_lotto` cominciano entrambi con
+    `assert idv in per`, quindi ### **una voce non poteva NASCERE dalla via di scrittura** --
+    la fase `1` le creava ### **dentro la migrazione**, che gira una volta sola e dal tag.
+    Il blocco `C` della correzione `v3` deve far nascere `16` voci, e scriverle a mano in
+    `voci.jsonl` sarebbe stata ### **una SECONDA via di scrittura.**
+
+    ### ⚠ **`togli_da_etichette`:** se l-ID stava in `etichette_rimosse.jsonl` ci va
+    ### **TOLTO NELLO STESSO ATTO**, perche- il controllo `C1` pretende che ogni ID vecchio
+    stia in ### **UNO E UNO SOLO** posto. ### **Non e- una pulizia: e- la conservazione.**
+    """
+    per = {v["id"]: v for v in voci}
+    righe = [json.loads(r) for r in io.open(percorso, encoding="utf-8").read().split(NL)
+             if r.strip()]
+    etich = [json.loads(r) for r in
+             io.open(ETICH, encoding="utf-8").read().split(NL) if r.strip()] \
+        if os.path.exists(ETICH) else []
+    per_et = {e["id"]: e for e in etich}
+    storia, togli = [], []
+    for r in righe:
+        campi = r["campi"]
+        idv = campi["id"]
+        motivo = r.get("motivo", "")
+        assert len(motivo) >= 20, ("`%s`: il motivo e- troppo corto per CITARE qualcosa: %r"
+                                   % (idv, motivo))
+        assert idv not in per, "`%s` ESISTE GIA-: si aggiorna, non si crea" % idv
+        for k in campi:
+            assert k in CHIAVI, "`%s`: `%s` non e- un campo dello schema" % (idv, k)
+        for k, val in (campi.get("meta") or {}).items():
+            spec = reg["metadati"].get(k)
+            assert spec, "`%s`: la chiave meta `%s` NON e- registrata" % (idv, k)
+            assert spec.get("stato") == "ATTIVO", ("`%s`: la chiave meta `%s` e- DEPRECATA"
+                                                   % (idv, k))
+        v = {"id": idv, "alias": [], "titolo": "", "descrizione": "",
+             "classe": "NON_DEFINITA", "dominio": "DA_CLASSIFICARE",
+             "era": "DA_CLASSIFICARE", "stato": "DA_CLASSIFICARE", "blocca": False,
+             "leggi": [], "variabili": [], "assiomi": [], "collegate": [], "padre": "",
+             "superata_da": "", "chiusura": {}, "fonte": "",
+             "creata": {"data": r.get("quando") or _oggi(), "commit": r.get("commit", "")},
+             "aggiornata": {"data": r.get("quando") or _oggi(),
+                            "commit": r.get("commit", "")},
+             "stato_era_1": "", "meta": {}}
+        v.update(campi)
+        v = {k: v[k] for k in CHIAVI}
+        voci.append(v)
+        per[idv] = v
+        if r.get("togli_da_etichette"):
+            assert idv in per_et, ("`%s`: non sta in etichette_rimosse.jsonl, e il lotto "
+                                   "dice di toglierlo" % idv)
+            togli.append(idv)
+        storia.append({"quando": v["creata"]["data"], "id": idv, "motivo": motivo,
+                       "commit": r.get("commit", ""), "prima": None,
+                       "dopo": json.loads(json.dumps(v))})
+    err = valida(voci, reg, verboso=False, derivati=False)
+    assert not err, ("il lotto NON passa la validazione, e NON SI SCRIVE NIENTE:" + NL
+                     + NL.join(err[:10]))
+    voci.sort(key=lambda v: v["id"])
+    _scrivi_jsonl(VOCI, voci)
+    if togli:
+        _scrivi_jsonl(ETICH, [e for e in etich if e["id"] not in togli])
+    with io.open(STORICO, "a", encoding="utf-8", newline=NL) as f:
+        for s in storia:
+            f.write(json.dumps(s, ensure_ascii=False) + NL)
+    viste(voci, reg)
+    err = valida(voci, reg, verboso=False)
+    assert not err, "DOPO le viste la validazione cade:" + NL + NL.join(err[:10])
+    print("  lotto CREATO: %d voci nuove, %d togliate dalle etichette, %d righe di storico; "
+          "e la validazione INTERA passa" % (len(righe), len(togli), len(storia)))
+
+
 def main(argv):
     if not argv:
         print(__doc__)
@@ -748,6 +827,9 @@ def main(argv):
         return 0
     if cmd == "aggiorna-lotto":
         aggiorna_lotto(voci, reg, pos[0])
+        return 0
+    if cmd == "crea-lotto":
+        crea_lotto(voci, reg, pos[0])
         return 0
     if cmd == "mostra":
         mostra(voci, uno)
