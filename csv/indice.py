@@ -16,6 +16,7 @@ python csv/indice.py mostra [--stato X] [--segnaposto SI] [--da N] [--quante N]
 python csv/indice.py meta-aggiungi k --tipo T [--valori a,b] [--regex R] --descrizione "..."
 python csv/indice.py meta-depreca k --sostituito-da k2 --motivo "..."
 python csv/indice.py meta-rinomina k k2 --motivo "..."
+python csv/indice.py rinomina VECCHIO NUOVO --motivo "..."
 python csv/indice.py citazioni
 python csv/indice.py viste
 python csv/indice.py collaudo
@@ -1861,6 +1862,43 @@ def etichette_lotto(percorso):
           % (len(righe), len(storia)))
 
 
+def rinomina(voci, reg, vecchio, nuovo, motivo):
+    """### `14(f)`: ### **un ID si rinomina TUTTO IN UN COLPO**, e in un commit.
+
+    ### ⛔ **DELEGATO a `csv/_rinomina.py`**, che ### **pianifica senza scrivere**:
+    cosi- ### **la via di scrittura resta UNA** *(questa funzione)* e il piano
+    ### **si puo- collaudare senza toccare il disco.**
+    ### ⭐ **E L-ALTRA META- DELLA REGOLA E- GIA- VERA:** rinominare a mano viene
+    ### **rifiutato da DUE presidi indipendenti** -- il replay dello storico
+    *(la voce non coincide piu- col suo `dopo`)* e quello dei riferimenti
+    *(un `@rif` verso un ID che non esiste piu-)*.
+    """
+    assert motivo and len(motivo) >= 20, (
+        "serve --motivo: un rinominamento senza motivo non si registra")
+    sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+    import _rinomina as RN
+    piano = RN.pianifica(voci, vecchio, nuovo)
+    voci, storia, scritture = RN.applica(voci, piano, motivo)
+    # ### ⛔ **SI VALIDA PRIMA DI SCRIVERE: o tutto, o niente.** Un rinominamento
+    # ### a meta- lascia ### **un indice che si contraddice.**
+    err = valida(voci, reg, verboso=False, derivati=False)
+    assert not err, ("il rinominamento NON passa la validazione, e NON SI SCRIVE "
+                     "NIENTE:" + NL + NL.join(err[:8]))
+    _scrivi_jsonl(VOCI, voci)
+    with io.open(STORICO, "a", encoding="utf-8", newline=NL) as f:
+        for r in storia:
+            r["quando"] = _oggi()
+            r["commit_base"] = _head()
+            f.write(json.dumps(r, ensure_ascii=False) + NL)
+    for rel, testo in sorted(scritture.items()):
+        io.open(os.path.join(os.path.dirname(os.path.dirname(
+            os.path.abspath(__file__))), rel), "w", encoding="utf-8",
+            newline=NL).write(testo)
+    viste(voci, reg)
+    print("  `%s` -> `%s`: %d righe di storico, %d file riscritti, e il nome vecchio "
+          "resta come ALIAS" % (vecchio, nuovo, len(storia), len(scritture)))
+
+
 def crea_lotto(voci, reg, percorso):
     """### LA VIA PER FAR NASCERE UNA VOCE -- la STESSA via, non un-altra.
 
@@ -1974,6 +2012,10 @@ def main(argv):
         return 0
     if cmd == "citazioni":
         citazioni(voci)
+        return 0
+    if cmd == "rinomina":
+        # ### ⛔ **`14(f)`: voce, alias, ogni `@rif` e ogni `[[ID]]`, IN UN COLPO.**
+        rinomina(voci, reg, pos[0], pos[1], uno.get("motivo") or "")
         return 0
     if cmd == "aggiorna-lotto":
         aggiorna_lotto(voci, reg, pos[0])

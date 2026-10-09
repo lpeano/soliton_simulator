@@ -8,17 +8,17 @@
 
 | | quanti |
 |---|--:|
-| **`PORTATO`** | `88` |
-| **`DA_PORTARE`** | `18` |
+| **`PORTATO`** | `90` |
+| **`DA_PORTARE`** | `17` |
 | **`DA_DECIDERE`** | `5` |
 | **`NON_SI_APPLICA`** | `8` |
-| **in tutto** | ### **`119`** |
+| **in tutto** | ### **`120`** |
 
-### ⚠ **E IL NUMERO `119` E- MISURATO, non stimato:** viene dal perimetro che l-indice calcola, e ### **il mandato ne nominava <<una decina>>** per nome piu- *<<e le cure di architettura>>*. ### **La decina era `20`.**
+### ⚠ **E IL NUMERO `120` E- MISURATO, non stimato:** viene dal perimetro che l-indice calcola, e ### **il mandato ne nominava <<una decina>>** per nome piu- *<<e le cure di architettura>>*. ### **La decina era `20`.**
 
 ---
 
-## `PORTATO` — `88` metodi
+## `PORTATO` — `90` metodi
 
 > ### ✅ **GIA- NELL-ERA `2`**, e `dove` dice dove
 
@@ -57,6 +57,7 @@
 | **`L-STELLA`** | `STANDARD` | le cinque domande per iscritto nel task history: ### FATTE per la tappa 5, e LA 3 HA TROVATO UN DIFETTO -- la dipendenza del cono globale dalla tolleranza | `doc/TASK_HISTORY/2026-10-09_era2_infrastruttura.md` |
 | **`L-UN-PROMPT`** | `STANDARD` | un prompt alla volta, i rilievi in CODA: in questo mandato sono arrivate SEI voci di coda, tutte registrate e nessuna eseguita fuori ordine | `doc/CODA_2026-10-09.md` |
 | **`MAX-NODI-FERMA`** | `CURA` | una guardia di MEMORIA non cambia la fisica in silenzio: deve FERMARE. ### PORTATO dal punto 1: ogni tipo dichiara la sua FORMA di dominio, e il controllo generato in `stato.py` SOLLEVA -- e il passo lo chiama a OGNI passo, verificato VIA AST | `primo_ordine/stato.py::controlla_domini`, chiamato da `passo.py` |
+| **`P-AB`** | `PRESIDIO` | NATO NELL-ERA 2: un `A`/`B` dichiara IL CAMPO UNICO in cui i bracci differiscono, e se ne differiscono due ### IL CONFRONTO NON PARTE (la lezione di `Z20`: due misure sovrapposte). ### Piu- i dati con la versione del formato e nessun file a meta- | `csv/_confronti_e_dati.py::controlla`, `pre-commit` + CI |
 | **`P-C1`** | `PRESIDIO` | NATO NELL-ERA 2, ed e- il presidio del punto 12(a): il codice dichiara l-ID e la macchina verifica la biiezione, con DUE severita- -- un ID dichiarato e non nell-indice RIFIUTA, una voce PRESIDIO che nessun codice dichiara SEGNALA (A9). ### E HA PRESO SE- STESSO, come P-M1 | `csv/_controlli_nell_indice.py::controlla`, `pre-commit` + CI |
 | **`P-E1`** | `PRESIDIO` | NATO NELL-ERA 2. La BIIEZIONE fra legge in tabella, file generato, riga di registro e scheda, nei DUE VERSI, e `LEGGE` si legge VIA AST. ### Allargato agli OSSERVATORI il 2026-10-09: prima un osservatore in tabella era INVISIBILE alla biiezione | `csv/_presidi_era2.py::pe1`, `pre-commit` + CI, SENZA via d-uscita |
 | **`P-E2`** | `PRESIDIO` | NATO NELL-ERA 2. L-IMPRONTA: un generato ritoccato a mano, o una tabella cambiata senza rigenerare. ### SI RIGENERA, NON SI CORREGGE IL FILE -- e la CI rigenera e fa `git diff --exit-code` | `csv/_presidi_era2.py::pe2`, `pre-commit` + CI |
@@ -110,12 +111,13 @@
 | **`VELENO-ARCHI-KEEP`** | `DIFETTO` | il veleno allunga le derivate d-arco e non applica `keep`. ### IL PUNTO 4 E- VERO E VUOTO, e il collaudo lo MISURA: zero derivati, perche- lo stato e- solo `psi`. ### E la garanzia arriva dall-altro lato -- `senza_cache` rifiuta una memoria non dichiarata (`A8b`) -- quindi non c-e- IL BERSAGLIO | `_collauda_passo.py` sezione (I); il braccio FALLIRA- al primo derivato |
 | **`VELENO-ORIENTATO`** | `DIFETTO` | il veleno cade su UNO dei due archi figli, e quale dipende dall-orientamento: ### LA LEZIONE E- PORTATA -- `strati()` usa la chiave `(min, max)`, quindi l-arco `(3,7)` e `(7,3)` hanno LA STESSA chiave e lo strato non dipende da come e- scritto | `passo.py::strati` |
 | **`Z100`** | `CURA` | gli invarianti: il programma si ferma quando sono violati. ### PORTATO dal punto 1 nella forma dei DOMINI -- ogni tipo dichiara la sua forma, e il controllo FERMA. ### Gli invarianti di FISICA (norma, energia) si MISURANO invece, e la deriva e- stampata: fermare su una deriva numerica sarebbe fermare su un arrotondamento | `primo_ordine/stato.py::controlla_domini`; la deriva in `_collauda_passo.py` |
+| **`Z20`** | `FRONTE` | due bracci di un confronto che differivano in piu- di un posto. ### PORTATO: `P-AB` pretende IL CAMPO UNICO dichiarato, e se i bracci differiscono anche altrove ### IL CONFRONTO NON PARTE -- non avverte, NON PARTE, perche- una corsa lunga non si rifa- per una diagnosi | `csv/_confronti_e_dati.py::valida_confronto` |
 | **`Z22`** | `STANDARD` | il par.5-quinquies esisteva ed e- stato violato: la lezione e- che ### UN OUTPUT DA UN FILE NON TRACCIATO NON E- RIPRODUCIBILE -- e il timbro di `_presidio.avvia` lo dice a ogni giro | `csv/_presidio.py` |
 | **`Z54`** | `MISURA` | l-archivio a serie. ### IL PUNTO 15(e) e il 6 lo rifanno meglio: versione del formato nel timbro, scrittura ATOMICA (temporaneo + rinomina, perche- il PC si riavvia fra 00:00 e 02:00), e la RIPRESA CHE RIFIUTA se la tabella e- cambiata | `timbro.py::scrivi_atomico`, `::salva`, `::riprendi` |
 
 ---
 
-## `DA_PORTARE` — `18` metodi
+## `DA_PORTARE` — `17` metodi
 
 > ### ⚠ **SI APPLICA, E NON C-E- ANCORA**: `dove` dice **quale punto del mandato** lo porta
 
@@ -138,7 +140,6 @@
 | **`SCHED-T3-REGOLE`** | `MISURA` | le regole di composizione, 94 scritture in cinque forme: ### nell-era 2 le regole non esistono ancora -- e- il punto 11(a) | punto 11(a), da fare |
 | **`STANDARD-6`** | `STANDARD` | ogni difetto acclarato si registra SUBITO: i difetti di questo mandato sono nei commit e nella relazione. ### MA DUE NON HANNO UNA VOCE: il buco di `H-FISICA-FUORI-LISTA` e la dipendenza del cono globale dalla tolleranza | la relazione; le voci mancano |
 | **`TAGLIA-FINITA`** | `STANDARD` | lo scaling di taglia finita come via al limite continuo: l-era 2 non ha ancora una misura di taglia | nessun sito oggi |
-| **`Z20`** | `FRONTE` | due bracci di un confronto che differivano in piu- di un posto: ### IL PUNTO 15(d) lo rende un presidio -- un `A`/`B` dichiara IL CAMPO UNICO in cui differiscono, e un controllo verifica che differiscano SOLO li- | punto 15(d), da fare |
 
 ---
 

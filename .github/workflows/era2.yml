@@ -80,6 +80,12 @@ jobs:
           python primo_ordine/_genera.py
           git diff --exit-code -- primo_ordine doc/leggi_era2
 
+      - name: "### `P-AB` e `rinomina` -- i confronti, i dati, e il rinominamento"
+        run: |
+          python csv/_confronti_e_dati.py
+          python csv/_confronti_e_dati.py --collaudo
+          python csv/_rinomina.py
+
       - name: "### IL MODELLO DI SIGILLO -- i quattro bracci del rito (punto 7)"
         run: python primo_ordine/sigilli/_modello.py
 

@@ -12,7 +12,7 @@
 | `FISICA` | `DA_CLASSIFICARE` | 1 |
 | `FISICA` | `ENTRAMBE` | 18 |
 | `INFRASTRUTTURA` | `1` | 39 |
-| `INFRASTRUTTURA` | `2` | 11 |
+| `INFRASTRUTTURA` | `2` | 12 |
 | `INFRASTRUTTURA` | `ENTRAMBE` | 14 |
 | `METODO` | `1` | 153 |
 | `METODO` | `2` | 2 |
@@ -429,6 +429,7 @@
 | `OKN-ASSERT` | DIFETTO | INFRASTRUTTURA | 1 | ### **CHIUSA** |  | CHIUSA il 2026-09-26, a run finito (residuo rilevato da Luca) / UN getattr(...,  |
 | `OMEGA-ETA` | MISURA | FISICA | 1 | ### **SOSPESA** |  | APERTA il 2026-09-26 (Luca: da seguire nel run base, NON una cura) / IL RAPPORTO |
 | `OSSERVABILE-P1` | DIFETTO | METODO | 1 | ### **CHIUSA** |  | APERTA il 2026-09-26 (rilievo di Luca) / NON ESISTE UNO STRUMENTO UFFICIALE PER  |
+| `P-AB` | PRESIDIO | INFRASTRUTTURA | 2 | ### **AGENDA** |  | un confronto A/B dichiara IL CAMPO UNICO, e i dati portano la versione del forma |
 | `P-C1` | PRESIDIO | INFRASTRUTTURA | ENTRAMBE | ### **APERTA** |  | anche i CONTROLLI stanno nell-indice: il codice dichiara l-ID, e la macchina lo  |
 | `P-DECADIMENTO` | STANDARD | FISICA | ENTRAMBE | ### **APERTA** |  | ogni decadimento e una trasformazione: cio che una grandezza perde diventa calor |
 | `P-E1` | PRESIDIO | INFRASTRUTTURA | 2 | ### **AGENDA** |  | la BIIEZIONE fra legge in tabella, file generato, riga di registro e scheda |

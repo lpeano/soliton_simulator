@@ -502,10 +502,11 @@ METODI["CONFIG-1"] = (
     "`primo_ordine/config/schema_config.py` + `driver.py::termini_attivi`",
     "PORTATO")
 METODI["Z20"] = (
-    "due bracci di un confronto che differivano in piu- di un posto: "
-    "### IL PUNTO 15(d) lo rende un presidio -- un `A`/`B` dichiara IL CAMPO UNICO in cui "
-    "differiscono, e un controllo verifica che differiscano SOLO li-",
-    "punto 15(d), da fare", "DA_PORTARE")
+    "due bracci di un confronto che differivano in piu- di un posto. ### PORTATO: "
+    "`P-AB` pretende IL CAMPO UNICO dichiarato, e se i bracci differiscono anche "
+    "altrove ### IL CONFRONTO NON PARTE -- non avverte, NON PARTE, perche- una corsa "
+    "lunga non si rifa- per una diagnosi",
+    "`csv/_confronti_e_dati.py::valida_confronto`", "PORTATO")
 # ### ⭐ **E QUESTO E' IL PRESIDIO CHE SI APPLICA A SE' STESSO.** Appena `P-M1` e'
 # ### diventato una voce `classe: PRESIDIO`, ### **il perimetro lo ha incluso e il
 # ### presidio HA RIFIUTATO IL COMMIT** chiedendogli la sua riga. ### **Non l'ho
@@ -570,6 +571,9 @@ METODI['P-MOD'] = (
 METODI['P-E9'] = (
     'NATO NELL-ERA 2: ogni sigillo dichiara `LEGGE` e `CRITERI`, letti VIA AST, e il criterio `deve-fallire` e- OBBLIGATORIO. ### Un sigillo che DICE di avere criteri senza averli e- PEGGIO di uno senza criteri: il primo SEMBRA FATTO',
     '`csv/_presidi_era2.py::pe9`, `pre-commit` + CI', "PORTATO")
+METODI['P-AB'] = (
+    'NATO NELL-ERA 2: un `A`/`B` dichiara IL CAMPO UNICO in cui i bracci differiscono, e se ne differiscono due ### IL CONFRONTO NON PARTE (la lezione di `Z20`: due misure sovrapposte). ### Piu- i dati con la versione del formato e nessun file a meta-',
+    '`csv/_confronti_e_dati.py::controlla`, `pre-commit` + CI', "PORTATO")
 METODI['VELENO-ARCHI-KEEP'] = (
     'il veleno allunga le derivate d-arco e non applica `keep`. ### IL PUNTO 4 E- VERO E VUOTO, e il collaudo lo MISURA: zero derivati, perche- lo stato e- solo `psi`. ### E la garanzia arriva dall-altro lato -- `senza_cache` rifiuta una memoria non dichiarata (`A8b`) -- quindi non c-e- IL BERSAGLIO',
     '`_collauda_passo.py` sezione (I); il braccio FALLIRA- al primo derivato', "PORTATO")

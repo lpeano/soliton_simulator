@@ -65,3 +65,9 @@ python "$(git rev-parse --show-toplevel)/csv/_un_solo_esecutore.py" || exit 1
 #  ### modulo non in mappa, un file oltre il tetto, una responsabilita' che non
 #  ### sta in una riga -> RIFIUTATI. E hamiltoniana/passo SOLO sommano.
 python "$(git rev-parse --show-toplevel)/csv/_modularita_era2.py" || exit 1
+
+#  `P-AB` -- I CONFRONTI COL CAMPO UNICO, e i DATI col loro formato (15d, 15e).
+#  ### Un A/B che differisce in DUE campi non parte: e' la lezione di Z20 -- un
+#  ### confronto con due variabili e' DUE MISURE SOVRAPPOSTE. E ogni dato ha il
+#  ### suo TIMBRO accanto, con la versione del formato.
+python "$(git rev-parse --show-toplevel)/csv/_confronti_e_dati.py" || exit 1

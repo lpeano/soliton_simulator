@@ -11563,3 +11563,29 @@ Letti ### **via AST**, come `LEGGE` nei generati: ### **una regex li troverebbe 
 ### ✅ **E DUE PRETESE IN PIU-, che il mandato non chiedeva per nome ma che il rito implica:** un criterio deve essere ### **`(che cosa, LA LETTURA)`** — ### **un criterio senza la lettura non e- un criterio: e- un-intenzione** — e il criterio ### **`deve-fallire` e- OBBLIGATORIO**, perche- `P1-sexies` dice che e- ### **il piu- importante.**
 
 **Collaudi:** i presidi dell-era `2` vanno a ### **`22`/`22`** *(da `16`)*, il sigillo ### **`4`/`4`**, `P-MOD` `10`/`10` *(`22` moduli in mappa)*. I metodi: ### **`PORTATO=88`**, `DA_PORTARE=18`.
+
+## PUNTI `15(d)(e)` e `14(f)` — ### **IL CAMPO UNICO, I DATI, E IL RINOMINAMENTO IN UN COLPO** *(2026-10-10)*
+
+### `15(d)` ### **IL CAMPO UNICO, e IL CONFRONTO NON PARTE**
+
+### ⭐ **LA LEZIONE DI `Z20`, detta come la ricordo:** due bracci di un confronto ### **differivano in piu- di un posto**, e il risultato ### **non diceva quale differenza lo avesse prodotto.** ### ⛔ **Un confronto con due variabili non e- un confronto: e- DUE MISURE SOVRAPPOSTE.**
+
+### ⚠ **E IL CONTROLLO NON AVVERTE: IL CONFRONTO NON PARTE.** Avvertire vorrebbe dire ### **lasciar girare una misura che non si sapra- leggere** — e ### **una corsa lunga non si rifa- per una diagnosi.**
+
+**Rifiuta anche:** due bracci ### **IDENTICI** *(un confronto fra due cose uguali ### **non misura niente**)* · il campo dichiarato che ### **non differisce** *(misurerebbe ### **una cosa diversa da quella dichiarata**)* · un campo che ### **non esiste** · un braccio che ### **non passa lo schema.**
+
+### `15(e)` ### **I DATI: la versione, l-atomicita-, e i reperti**
+
+Ogni dato di `db_era2/` ha ### **il suo TIMBRO accanto**, col campo `versione_dati` e le ### **tre impronte** *(tabella, generati, configurazione)*. E un file ### **`.parziale` che resta e- RIFIUTATO**: la scrittura e- ### **atomica**, quindi un `.parziale` vuol dire ### **processo morto in mezzo** — e ### **il PC si riavvia da solo fra `00:00` e `02:00`.**
+
+### `14(f)` ### **IL RINOMINAMENTO, IN UN COLPO**
+
+`python csv/indice.py rinomina VECCHIO NUOVO --motivo "…"`: aggiorna la voce, ### **l-alias**, ogni `@rif`, ogni `[[ID]]` nei documenti ### **vivi**, e i riferimenti ### **strutturati.** ### ⛔ **ATOMICO: si calcola il piano, SI VALIDA, e solo allora si scrive** — perche- un rinominamento a meta- lascia ### **un indice che si contraddice.**
+
+### ⭐ **E L-ALTRA META- DELLA REGOLA ERA GIA- VERA, e l-ho verificata:** *«rinominare a mano → i presidi lo rifiutano»*. Lo rifiutano ### **DUE presidi indipendenti** — il ### **replay dello storico** *(la voce non coincide piu- col suo `dopo`: ### **qualcuno ha scritto a mano**)* e quello dei ### **riferimenti** *(un `@rif` verso un ID che non esiste piu-)*. ### **Quindi il comando non e- una comodita-: e- L-UNICA VIA che non viene rifiutata.**
+
+### ✅ **E I REPERTI NON SI TOCCANO**, misurato: ### **`247` reperti** *(`doc/REFERTO_*`, `doc/REPERTO_*`, `doc/TASK_HISTORY/*`)*, e il piano ne tocca ### **ZERO.** ### **Il nome vecchio resta la- e si risolve con l-alias** *(par.`9`)*.
+
+### ⛔ **E IL COLLAUDO MI HA TROVATO UN BUCO, al primo giro:** `pianifica` guardava solo `collegate`, `superata_da`, `padre` e `alias`, e ha detto ### **<<`0` voci>>** su `A17` — che e- nominato da piu- voci, ### **nel campo `assiomi`.** ### ✅ **`assiomi`, `leggi` e `variabili` SONO RIFERIMENTI STRUTTURATI:** rinominare senza toccarli lascerebbe ### **riferimenti rotti in campi che un presidio legge.**
+
+**Collaudi:** `P-AB` ### **`13`/`13`**, `rinomina` ### **`11`/`11`** *(### **sul PIANO, senza scrivere niente** — e un braccio verifica che ### **il disco non sia stato toccato**)*. I metodi: ### **`PORTATO=90`**, `DA_PORTARE=17`.

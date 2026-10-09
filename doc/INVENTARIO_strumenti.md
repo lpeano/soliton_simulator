@@ -2688,7 +2688,7 @@ etichette rimosse, con ### **`0` persi, `0` doppi, `0` conflitti**.
 | | |
 |---|---|
 | **file** | `csv/_metodi_era2.py` |
-| **BLOB** *(sha1 dei byte grezzi)* | `a7ec0a9d` |
+| **BLOB** *(sha1 dei byte grezzi)* | `4c3e8acd` |
 | **COMANDO** | `python csv/_metodi_era2.py` *(il presidio, e GENERA il documento)* · `--collaudo` *(nei due versi, `8`/`8`)* |
 | **cosa impedisce** | che `doc/METODI_era1_in_era2.md` **invecchi in silenzio**: ### **ogni metodo del perimetro DEVE avere una riga** *(come si applica · dove · stato)*, citato o no |
 | ### ⭐ **e il PERIMETRO lo calcola l'INDICE** | da ### **campi a vocabolario chiuso** *(`classe in (STANDARD, PRESIDIO)`, piu' le cure di architettura che il mandato nomina **per ID**)*. ### ⛔ **Nessun `titolo` e nessuna `descrizione` si leggono per decidere se una voce e' un metodo** — e' il principio del mandato **applicato a se stesso** |
@@ -2703,7 +2703,7 @@ etichette rimosse, con ### **`0` persi, `0` doppi, `0` conflitti**.
 | | |
 |---|---|
 | **file** | `csv/_controlli_nell_indice.py` |
-| **BLOB** *(sha1 dei byte grezzi)* | `1bbb874c` |
+| **BLOB** *(sha1 dei byte grezzi)* | `d93040c8` |
 | **COMANDO** | `python csv/_controlli_nell_indice.py` *(gli errori e i segnali)* · `--collaudo` *(nei due versi, `8`/`8`)* · `--segnali` |
 | ### ⛔ **cosa RIFIUTA** | il **codice dichiara un ID** che ### **non e' nell'indice** — un presidio che cita un ID inesistente ### **ha un riferimento rotto** · oppure la voce esiste e ### **non ha `classe: PRESIDIO`** |
 | ### ⚠ **cosa SEGNALA e non rifiuta** | una voce `classe: PRESIDIO` che ### **nessun codice dichiara**: potrebbe vivere ### **in shell** *(i `H-*` stanno in `.githooks/`)* o essere ### **proposta e non cablata** *(`H-ETC-1`, `H-ETC-2`)*. ### **Rifiutare un fatto VERO non e' un presidio: e' un impedimento** *(`A9`)* |
@@ -2845,5 +2845,20 @@ etichette rimosse, con ### **`0` persi, `0` doppi, `0` conflitti**.
 | **i numeri misurati** | `zero` byte-identico · `g != 0` ### **differisce** · l'energia della legge a `g = 0.5` e' `23.766838` · il rapporto `energia/g` varia di ### **`1.49e-16` su tre decadi** *(la legge e' **lineare in `g`**, come la sua forma dice)* |
 | ### ⚠ **e dichiara cio' che NON prova** | mette `g` ### **sul modulo gia' caricato**, non nella tabella: e' ### **la stessa aritmetica** ma ### **non passa dal generatore**, quindi ### **non prova che la TABELLA sia la fonte.** ### **Quello lo prova `P-E2`**, che e' cablato e gira a ogni commit |
 | **`12(c)`** | dichiara ### **`LEGGE` e `CRITERI`**, e `P-E9` li legge ### **via AST** |
+
+---
+
+### `csv/_confronti_e_dati.py` e `csv/_rinomina.py` — **IL CAMPO UNICO, I DATI, E IL RINOMINAMENTO IN UN COLPO** *(2026-10-10)*
+
+| | |
+|---|---|
+| **i file** | `csv/_confronti_e_dati.py` *(BLOB `e43d20dc`)* · `csv/_rinomina.py` *(BLOB `0e3e8333`)* |
+| **COMANDO** | `python csv/_confronti_e_dati.py` · `--collaudo` *(nei due versi, `13`/`13`)* · `python csv/_rinomina.py` *(il collaudo del piano, `11`/`11`)* · `python csv/indice.py rinomina VECCHIO NUOVO --motivo "…"` |
+| ### ⛔ **`15(d)` il CAMPO UNICO** | i bracci devono differire ### **ESATTAMENTE** nel campo dichiarato — non *«almeno quello»*, non *«quello e poco altro»*. ### **E- la lezione di `Z20`:** un confronto con due variabili ### **non e' un confronto, e' DUE MISURE SOVRAPPOSTE** |
+| ### ⚠ **e non avverte: IL CONFRONTO NON PARTE** | avvertire vorrebbe dire ### **lasciar girare una misura che non si sapra' leggere** — e una corsa lunga ### **non si rifa' per una diagnosi** |
+| **`15(e)` i DATI** | ogni dato ha ### **il suo TIMBRO accanto** *(con `versione_dati` e le tre impronte)*, e un ### **`.parziale` che resta e' rifiutato**: la scrittura e' ### **atomica**, e un `.parziale` vuol dire ### **processo morto in mezzo** |
+| **`14(f)` il RINOMINAMENTO** | voce, ### **alias**, ogni `@rif`, ogni `[[ID]]` nei documenti ### **VIVI**, e i riferimenti strutturati *(`collegate`, `assiomi`, `leggi`, `variabili`, `padre`, `superata_da`)* — ### **in UN colpo**, e ### **o tutto o niente** |
+| ### ✅ **e i REPERTI non si toccano** | `247` reperti *(`doc/REFERTO_*`, `doc/REPERTO_*`, `doc/TASK_HISTORY/*`)*, e il piano ne tocca ### **zero** — ### **il nome vecchio resta la' e si risolve con l'alias** *(par.`9`)* |
+| ### ⭐ **e l'altra meta' della regola e' GIA' vera** | *«rinominare a mano → i presidi lo rifiutano»*: lo rifiutano ### **DUE presidi indipendenti** — il ### **replay dello storico** e quello dei ### **riferimenti** |
 
 ---
