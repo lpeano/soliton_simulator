@@ -1,0 +1,59 @@
+Z7 | classe=DIFETTO stato=CHIUSA | ① CABLATA | alta
+DRIVER-SCENA-II | classe=CURA stato=CHIUSA | 6/6 PASS | alta
+M0a | classe=MISURA stato=CHIUSA | 3/3 come atteso | media
+RAMI-OFF-CURA2 | classe=CURA stato=CHIUSA | COPIATI DAL SORGENTE | media
+INDICE-LEGGERO | stato=CHIUSA | IL TITOLO BREVE DEV'ESSERE BREVE | media
+REGISTRO_FISICA:V8 | stato=CHIUSA | LA MISURA CHE L'HA DECISA | media
+REGISTRO_FISICA:V9 | stato=CHIUSA | LA MISURA CHE L'HA DECISA | media
+B7-SHAKE | stato=CHIUSA | la precessione mutua non organizza | media
+Z24 | stato=CHIUSA | Z24 CHIUSA | media
+Z119 | classe=MISURA | non si corregge prima della decisione di Luca | media
+S02 | stato=SUPERATA superata_da=D31 | PROMOSSO | alta
+Z21 | stato=SUPERATA superata_da=Z26 | era UN SEME | media
+ETC-PASSO | stato=SUPERATA superata_da=SCHED-PASSO | chiusa come superata il 2026-09-28 | alta
+P6 | classe=STANDARD stato=SUPERATA superata_da=P3 | fuse dentro | alta
+STANDARD-8 | stato=SUPERATA superata_da=A12 | e non si duplica | media
+L-SOGLIA | stato=SUPERATA superata_da=P1-sexies | fusa dentro | media
+STANDARD-6 | stato=SUPERATA superata_da=H-INDICE | il hook | media
+P3 | classe=STANDARD | del hook | alta
+P4 | classe=STANDARD | LIBERA di cambiare | alta
+P5 | classe=STANDARD | va CONTATO | alta
+L-MEMORIA-PRIMA | classe=STANDARD | LA REGOLA PERMANENTE | alta
+P1-bis | classe=STANDARD | LA RELAZIONE SI SCRIVE NELLO STESSO COMMIT | media
+CENS-B1 | classe=FRONTE | COSTRUITA E MAI MISURATA | alta
+CENS-B2 | classe=FRONTE dominio=FISICA | COSTRUITA E MAI MISURATA | alta
+CENS-B3 | classe=FRONTE dominio=FISICA | COSTRUITA E MAI MISURATA | alta
+CENS-B5 | classe=FRONTE dominio=FISICA | COSTRUITA E MAI MISURATA | alta
+CENS-B6 | classe=FRONTE dominio=FISICA | COSTRUITA E MAI MISURATA | alta
+CENS-B7 | classe=FRONTE | COSTRUITA E MAI MISURATA | alta
+CENS-B9 | classe=FRONTE dominio=FISICA | COSTRUITA E MAI MISURATA | alta
+CENS-B10 | classe=FRONTE dominio=FISICA | COSTRUITA E MAI MISURATA | alta
+CENS-B11 | classe=FRONTE dominio=FISICA | COSTRUITA E MAI MISURATA | alta
+CENS-B12 | classe=FRONTE dominio=FISICA | COSTRUITA E MAI MISURATA | alta
+CENS-B13 | classe=FRONTE dominio=FISICA | COSTRUITA E MAI MISURATA | alta
+CENS-B14 | classe=FRONTE dominio=FISICA | COSTRUITA E MAI MISURATA | alta
+CENS-B15 | classe=FRONTE dominio=FISICA | COSTRUITA E MAI MISURATA | alta
+REG-B | classe=FRONTE dominio=METODO era=1 stato=SOSPESA | RESTANO | media
+REG-C | classe=FRONTE dominio=METODO era=1 stato=SOSPESA | FASE C | media
+REGISTRO_FISICA:P1 | classe=CRITERIO dominio=METODO | LE PREVISIONI ANALITICHE | alta
+REGISTRO_FISICA:P2 | classe=CRITERIO dominio=METODO | LE PREVISIONI ANALITICHE | alta
+REGISTRO_FISICA:P3 | classe=CRITERIO dominio=METODO | LE PREVISIONI ANALITICHE | alta
+REGISTRO_FISICA:P3b | classe=CRITERIO dominio=METODO | LE PREVISIONI ANALITICHE | alta
+REGISTRO_FISICA:P4 | classe=CRITERIO dominio=METODO | LE PREVISIONI ANALITICHE | alta
+REGISTRO_FISICA:P5 | classe=CRITERIO dominio=METODO | LE PREVISIONI ANALITICHE | alta
+M-SPINORE | classe=FRONTE | è un fronte, non una cura | alta
+M1 | classe=FRONTE | È una domanda di ontologia | media
+CELLE-NAN-APPESE-NOME-SCADUTO | classe=DIFETTO | NOME SCADUTO | media
+COMPONENTI:D1 | classe=CURA | 5/5 PASS | media
+COMPONENTI:D2 | classe=CURA | 6/6 PASS | media
+D09 | classe=MISURA | il difetto NON C'E' | media
+S10 | classe=MISURA | RITIRATA | media
+REG-V | classe=FRONTE | col collaudo | media
+REG-R | dominio=METODO | l'hook che RIFIUTA | media
+CURA-3 | classe=FRONTE | scheda da scrivere | media
+COPPIA-RAMP | classe=FRONTE | Aperta come domanda, NON come cura | media
+A3-CHIRALE | classe=FRONTE | una decisione di FISICA | media
+CARICA-ROTAZIONE | classe=FRONTE | LA MISURA IN CODA | media
+MITOSI-TASSO | classe=FRONTE | CRITERIO DI CHIUSURA: misurare | media
+FILI-CORTI | classe=FRONTE | o OVUNQUE? | media
+POTATURA-GUARDIE | classe=FRONTE | la pulizia SI RIMANDA | media
