@@ -11115,3 +11115,11 @@ Il mandato chiede, nella tappa `5`, ### **almeno un osservatore**, e la ragione 
 **I numeri:** il collaudo dei presidi va da `13`/`13` a ### **`16`/`16`** *(il braccio di `P-E5` ora ### **conta** gli osservatori invece di asserire che sono zero; piu- ### **il caso che DEVE fallire** — un osservatore che scrive lo stato — piu- il controllo che tolto quello finto `P-E5` ### **taccia di nuovo**)*. Schema `25`/`25`, generatore `13`/`13`, controlli `6`/`6`, `valida` passa, `era2-valida`: `3` leggi e `1` variabile. ### **La rigenerazione e- IDEMPOTENTE su `9` file generati**, verificato per sha1.
 
 ### ⚠ **E UN NUMERO DELL-INVENTARIO ERA GIA- SCADUTO:** diceva che il collaudo del generatore e- `9`/`9`, ed e- `13`/`13` ### **da ieri.** Corretto qui, insieme ai due blob.
+
+### ⛔ **E LA TAPPA `5b` HA LASCIATO FUORI UN FILE, E IL PRESIDIO NON L-HA VISTO** *(2026-10-09)*
+
+`c3b5970` ha ### **tolto `leggi/osservatori.yaml` e aggiunto `osservatori/prova_norma.py`**, ma ### **`csv/_file_fisica.py` non era nella lista di `git add`** — quindi la `FILE_FISICA` committata ### **nominava ancora il file tolto** e ### **non nominava quello nuovo.**
+
+### ⚠ **E `H-FISICA-FUORI-LISTA` HA LASCIATO PASSARE, per una ragione precisa:** giudica ### **i percorsi STAGED**, ma legge `FILE_FISICA` ### **dal DISCO.** ### ⛔ **Quindi una modifica NON COMMITTATA della lista basta ad autorizzare un commit** — ed e- la stessa classe del par.`7` *(«si confronta col BLOB a `HEAD`, mai con `git status`»)*, ### **applicata a un presidio invece che a un sorgente.**
+
+**Chiuso qui** *(la lista entra nel repo)*. ### ✅ **E il buco e- REGISTRATO, non curato:** la cura — ### **leggere `FILE_FISICA` dall-INDICE** *(`git show :csv/_file_fisica.py`)* ### **e non dal disco** — e- ### **un commit a se-**, e il referto della tappa `6` la nomina fra cio- che ### **resta aperto.**

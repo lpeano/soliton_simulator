@@ -52,16 +52,24 @@ FILE_FISICA = (
     'primo_ordine/_genera.py',
     'primo_ordine/_genera_stato.py',
     'primo_ordine/termini/__init__.py',
-    # ### I DUE GENERATI: entrano nella LISTA ### **nel commit in cui nascono**, e il
+    # ### I TRE GENERATI: entrano nella LISTA ### **nel commit in cui nascono**, e il
     # ### mandato lo pretende. ### ⚠ **Sono `prova: true`**: la LISTA sorveglia
     # ### ### **i file di fisica**, e un file di PROVA ### **e- un file di fisica FINTO
     # ### che vive dove vivra- la fisica vera** -- quindi si sorveglia come gli altri.
     'primo_ordine/termini/prova_hopping.py',
     'primo_ordine/termini/prova_locale.py',
     'primo_ordine/osservatori/__init__.py',
+    'primo_ordine/osservatori/prova_norma.py',
     'primo_ordine/leggi/schema.py',
+    # ### ⛔ **E `leggi/osservatori.yaml` NON C-E- PIU-, perche- IL FILE NON C-E-
+    # ### PIU-.** L-avevo creato nella tappa `2` come tabella ### **separata**, col
+    # ### ragionamento che un osservatore non e- fisica e che tenerlo con le leggi
+    # ### ### **inviterebbe a scriverci una legge travestita da misura.**
+    # ### ⚠ **Quella separazione decideva DALLA POSIZIONE DEL FILE cio- che va
+    # ### deciso DA UN CAMPO** *(`tipo: osservatore`)*, costava ### **DUE FONTI e DUE
+    # ### biiezioni**, e il file era ### **VUOTO e NESSUNO LO LEGGEVA.**
+    # ### ⭐ **`9-ter`: a parita- di effetto si toglie un-eccezione.**
     'primo_ordine/leggi/leggi.yaml',
-    'primo_ordine/leggi/osservatori.yaml',
 )
 
 # ### ⛔ **E QUESTA E- UNA LISTA DIVERSA, non un sottoinsieme per comodita-.**
