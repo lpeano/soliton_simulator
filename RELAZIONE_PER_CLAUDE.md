@@ -11179,3 +11179,24 @@ Il mandato chiede, nella tappa `5`, ### **almeno un osservatore**, e la ragione 
 ### ⭐ **E non mi serviva la sua decisione per vederlo:** bastava chiedermi *«questa CI PUO- impedire un commit?»*. ### **Avevo trasferito alla CI una proprieta- VERA dei presidi di `primo_ordine/`** *(che davvero non hanno fuga, perche- il loro codice non legge nessuna fuga)*, ### **dove non vale.** Corretto in ### **tre posti**: l-intestazione del workflow, la riga `P-E8` dell-inventario, e ### **il referto, che ora lo dichiara fra i LIMITI** — insieme al fatto che ### **un `--no-verify` non e- impedibile in locale** e che ### **la CI non e- mai stata osservata girare.**
 
 ### ⚠ **E HO TROVATO UN DIFETTO PREESISTENTE NEL WORKFLOW, mio, della tappa `4`:** ### ⛔ **tre `name:` di passo cominciavano con `###`, e in YAML il `#` APRE UN COMMENTO** — quindi quei tre nomi erano ### **`null`**, non quello che credevo di aver scritto. ### **Trovato perche- ho fatto leggere il file a `yaml.safe_load` invece di guardarlo**, e la lezione e- la solita di questo repo: ### **VERIFICA DAL CODICE, NON DAL TESTO CHE HAI SCRITTO.** Curato quotando i tre nomi: `14` passi, ### **zero senza nome.**
+
+# VIA ALLA CODA — ### **il mandato `1` di `6`: LA SECONDA PARTE, `16` PUNTI** *(2026-10-09)*
+
+Luca ha dato via alla coda, con l-ordine registrato in `677685c` e `080a0d0`: ### **seconda parte → le `43` decisioni → il piano e l-albero → terza parte → le regole di gestione.** ### ✅ **E lo STOP di ciascun mandato vale come CHECKPOINT**, non come attesa: referto, `_avanzamento.md`, push, ### **poi il successivo.**
+
+**Mi fermo davvero solo** se `(a)` il mandato e- finito, `(b)` un collaudo fallisce e ### **la cura non e- ovvia**, `(c)` serve ### **una decisione di Luca** — e in quel caso ### **la registro in `DA_DECIDERE_LUCA.md` e proseguo**, se il resto non ne dipende.
+
+## IL TASK HISTORY, ### **committato PRIMA del lavoro**
+
+`doc/TASK_HISTORY/2026-10-09_era2_metodi_era1.md`. ### **Tre sezioni**, e la cosa che conta e- la ### **seconda**: ### ⭐ **l-ordine dei punti NON e- `0`→`15`**, e il perche- e- scritto per dipendenza — ### **il punto `12` *(i controlli nell-indice)* va PRIMA di tutti i presidi nuovi**, perche- farlo dopo vorrebbe dire ### **tornare su ognuno.**
+
+### ⚠ **E HO SCRITTO QUATTRO COSE CHE NON SO**, prima di guardare:
+
+| | |
+|---|---|
+| `1` | ### **quanti metodi dell-era `1` esistono davvero.** Il punto `0` ne elenca una decina e poi dice *«e le cure di architettura»*: ### **il censimento lo devo fare IO con uno script** |
+| `2` | ### **se `F1`…`F12` collidono davvero** con ID veri. Il mandato lo dice; ### **lo verifico dall-indice, non dalla sua frase** |
+| `3` | ### **se il punto `9` *(un solo esecutore)* ha oggi qualcosa da impedire** — e ### ⭐ **sospetto che il caso da rifiutare sia `_collauda_passo.py`, che scrivevo io ieri**: chiama `mezzo_implicito` ### **direttamente** |
+| `4` | ### **se il punto `4` *(il veleno)* si puo- fare**: oggi lo stato e- ### **solo `psi`**, e ### **non c-e- NESSUN derivato da invalidare.** ### **Potrebbe essere vero e vuoto, e allora va DETTO** |
+
+### ⛔ **E UNA PREVISIONE CHE MI ESPONE, fissata prima della misura:** sul punto `8` *(reversibilita-)* ### **mi aspetto che il GLOBALE sia PEGGIORE del LOCALE**, perche- il punto fisso ha una tolleranza che ### **non e- simmetrica nel tempo**. ### ⭐ **E se il locale NON risultasse migliore, e- un RITROVATO** — vorrebbe dire che la composizione palindroma ### **non compra la reversibilita- che promette.** ### **Piu- il caso che DEVE fallire: un Euler esplicito, scritto SOLO per questo**, che se non sbagliasse direbbe che ### **la misura non distingue un metodo simmetrico da uno che non lo e-.**
