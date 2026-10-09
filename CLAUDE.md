@@ -257,7 +257,12 @@ qui**: sta in `doc/PATTERN_DI_PROVA.md`.)*
 
 > **IL DETTAGLIO:** **`doc/REGOLE/par11.md`**.
 
-## 12. I PRESIDI AUTOMATICI — **i hook, e sono UNDICI**
+## 12. I PRESIDI AUTOMATICI — **i hook**
+
+> ### ⚠ **IL NUMERO NON STA NEL TITOLO** *(dal 2026-10-09)*: ce lo avevo messo, e cosi' il
+> titolo **andava riscritto a ogni presidio nuovo** — e `csv/_struttura_regole.py`, che
+> verifica che **nessuna regola si perda**, **vedeva un titolo sparire.** ### **Il numero si
+> conta dalla tabella.**
 
 > ### ⚠ **UN COMANDO, UNA VOLTA PER CLONE, PRIMA DI LAVORARE:**
 > `git config core.hooksPath .githooks`. **Finche' non e' dato, i presidi NON impediscono
@@ -276,6 +281,7 @@ qui**: sta in `doc/PATTERN_DI_PROVA.md`.)*
 | **`H-INDICE`** | `commit-msg` | un **ID** citato **che non e' nell'indice** |
 | **`H-FILE`** | `commit-msg` | una lista **`FILE CAMBIATI`** che **non coincide** con `git diff --cached --name-only`, o che **manca** |
 | **`H-NON-TRACCIATI`** | `commit-msg` | **file NON TRACCIATI e NON ignorati** sotto `csv/` o `doc/`. **BLOCCA, non avvisa** |
+| **`H-FISICA-FUORI-LISTA`** | `pre-commit` | un **`.py` sotto la CARTELLA del codice dell'era `2`** che **non e' nella LISTA** di `csv/_file_fisica.py`. ### ⚠ **La cartella e' VUOTA** *(il nome lo decide Luca)*, quindi **oggi non impedisce niente** (`A9`) |
 | **`H-STASH`** | `permissions.deny` | **`git stash`**, qualunque forma. **Non e' un hook:** impedisce **prima** che il comando parta, e **non ha via d'uscita** |
 
 **LE VIE D'USCITA OBBLIGANO A DICHIARARE:** `[SENZA-RELAZIONE: …]` ·

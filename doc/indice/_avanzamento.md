@@ -83,8 +83,8 @@ era       1=538  DA_CLASSIFICARE=188  ENTRAMBE=96  2=24
 stato     SOSPESA=369  DA_CLASSIFICARE=188  CHIUSA=182  APERTA=82  AGENDA=24  SUPERATA=1
 ```
 
-### ✔ **FATTO IN QUESTO GIRO:** il punto `6`, ### **`F11`: l'indice e' il REPLAY del suo storico.** Passa con ### **`0` violazioni** *(`38` voci senza storico, tutte uguali al loro stato a `3ef2326`)*, e il collaudo gira ### **su una COPIA** come il mandato detta: `59`/`59`.
+### ✔ **FATTO IN QUESTO GIRO:** il punto `7`: `csv/_file_fisica.py` con ### **le due costanti**, i due presidi che ora ### **leggono la LISTA** invece del nome a mano, e `H-FISICA-FUORI-LISTA` — collaudo ### **`12`/`12` su una cartella di PROVA in una COPIA.** ### ⛔ **La CARTELLA resta VUOTA: il nome lo decide Luca.**
 
-### ⛔ **RESTA:** il punto `7` *(`csv/_file_fisica.py`)*, il punto `8` *(l'ID nel messaggio)* e il punto `9` *(i due referti)*.
+### ⛔ **RESTA:** il punto `8` *(l'ID nel messaggio)* e il punto `9` *(i due referti, ### **con la domanda sul nome della cartella**)*.
 
-**Ultimo lotto applicato:** `doc/indice/_lotti/v3_guardiano_b.jsonl` — ### **il punto `6` NON scrive sull'indice**: aggiunge un presidio.
+**Ultimo lotto applicato:** `doc/indice/_lotti/v3_h_fisica.jsonl` *(`1` voce NUOVA: il presidio)*

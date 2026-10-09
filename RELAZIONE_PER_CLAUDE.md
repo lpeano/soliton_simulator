@@ -10847,3 +10847,19 @@ Il punto `4`. `1` voce, `1` riga di storico; `F6` da `3` a `2` segnali; `6`/`6` 
 ### ⚠ **E LA MANOMISSIONE CHE IL MANDATO DETTA LA VEDE ANCHE `F7`, e lo dico:** `A2-ANELLO` e' ### **era `1`**, e `F7` vieta era `1` + `APERTA`. ### **Quindi quel caso prova che `F11` SCATTA, non che SERVA.** ### ✔ **Per provare che serve ho cercato una manomissione che nessun altro veda, e l'ho trovata: il `titolo`.** Nessun presidio lo confronta con niente — cambiarlo a mano passa ### **vocabolari, stati, ere e viste rigenerate** — e ### **solo `F11` lo vede, perche' solo `F11` chiede DA DOVE VIENE.**
 
 ### ⭐ **Il criterio `9-ter` lo pretendeva:** *«una cura non aumenta il numero delle leggi»*. ### **Un presidio che ripete cio- che un altro dice e' una legge in piu- e zero informazione in piu-** — e senza il braccio del `titolo` `F11` sarebbe stato ### **un presidio senza bisogno dimostrato.**
+
+---
+
+## DOVE VIVE LA FISICA: **due costanti, e una la decide Luca** (2026-10-09)
+
+`csv/_file_fisica.py`, `12`/`12` il collaudo, `1` voce nuova nell'indice *(`H-FISICA-FUORI-LISTA`)*, `CLAUDE.md` a `295` righe *(tetto `400`)*. Nessuna corsa; il simulatore resta `b8c21049`.
+
+### ⛔ **FINORA OGNI PRESIDIO SCRIVEVA `soliton_simulator.py` A MANO.** Erano `3`, e il censimento l'ho fatto ### **prima di dire il numero.** ### ⭐ **Il giorno in cui la fisica vive in due file, un presidio che scrive il nome a mano guarda ancora UN FILE SOLO — e PASSA**, perche' ### **un presidio che guarda il posto sbagliato non trova niente e tace.** Adesso `H-REG-R` e `H-P7` ### **leggono la LISTA**, e un `assert` dichiara che ### **guardano un file per volta**: se la lista ne avra- due, ### **lo dira- l'assert**, non un run.
+
+### ⛔ **E LA CARTELLA DELL'ERA `2` RESTA VUOTA, perche' il mandato dice «NON la scegli tu».** ### ⚠ **Quindi `H-FISICA-FUORI-LISTA` oggi NON IMPEDISCE NIENTE**, e per `A9` ### **non e- un presidio: e- una TENDA.** ### **Lo scrivo qui, nel referto e nella descrizione della voce**, invece di lasciarlo scoprire a qualcuno.
+
+### ✔ **E ALLORA IL COLLAUDO LO PROVA ALTROVE:** si copia `_file_fisica.py` in una cartella temporanea e ### **si scrive un nome di prova nella costante della COPIA** — non una variabile d'ambiente, perche' ### **una costante e- una costante** *(`A1`: zero manopole)*. ### ⭐ **E un braccio prova che con la cartella VUOTA il presidio TACE:** un presidio che tace ### **va provato che taccia**, altrimenti nessuno sa se tace perche' e- ### **spento** o perche' e- ### **rotto.**
+
+### 📌 **LA DOMANDA A LUCA, che va nel referto:** ### **come si chiama la cartella del codice dell'era `2`?** Il presidio diventa vero ### **cambiando UNA STRINGA** in `csv/_file_fisica.py`.
+
+### ⚠ **E UN DIFETTO DI `CLAUDE.md` CHE HO CURATO:** il titolo del §`12` conteneva ### **il numero dei hook** *(«e sono UNDICI»)*, quindi ### **andava riscritto a ogni presidio nuovo** — e `csv/_struttura_regole.py`, che verifica che ### **nessuna regola si perda**, ### **vedeva un titolo sparire.** Il numero ### **si conta dalla tabella**, e la rinomina sta in un elenco ### **dichiarato** *(`RINOMINATI`)*: ### ⛔ **la BASE del confronto NON si sposta, perche' spostarla avrebbe perdonato TUTTO CIO' CHE E' AVVENUTO PRIMA.**

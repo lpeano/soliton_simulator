@@ -14,7 +14,7 @@
 | `INFRASTRUTTURA` | `1` | 39 |
 | `INFRASTRUTTURA` | `ENTRAMBE` | 13 |
 | `METODO` | `1` | 153 |
-| `METODO` | `ENTRAMBE` | 61 |
+| `METODO` | `ENTRAMBE` | 62 |
 
 | id | classe | dominio | era | stato | blocca | titolo |
 |---|---|---|---|---|---|---|
@@ -288,6 +288,7 @@
 | `H-ETC-1` | PRESIDIO | METODO | 1 | ### **SOSPESA** |  | PRESIDIO PROPOSTO E NON CABLATO: zero calcola_psi senza w dentro passo_pieno |
 | `H-ETC-2` | PRESIDIO | METODO | 1 | ### **SOSPESA** |  | PRESIDIO PROPOSTO E NON CABLATO: permutare le cinque leggi deve dare lo STESSO s |
 | `H-FILE` | PRESIDIO | METODO | ENTRAMBE | ### **APERTA** |  | la lista FILE CAMBIATI nel messaggio e verificata da una macchina: il decimo hoo |
+| `H-FISICA-FUORI-LISTA` | PRESIDIO | METODO | ENTRAMBE | ### **APERTA** |  | H-FISICA-FUORI-LISTA: un .py sotto la cartella dell'era 2 che NON e' nella LISTA |
 | `H-INDICE` | PRESIDIO | METODO | ENTRAMBE | ### **APERTA** |  | PRESIDIO DEL HOOK: un ID citato in un documento vivo o nel messaggio che non e'  |
 | `H-NON-TRACCIATI` | PRESIDIO | METODO | ENTRAMBE | ### **APERTA** |  | l undicesimo hook: BLOCCA se ci sono file non tracciati e non ignorati sotto csv |
 | `H-P1-bis` | PRESIDIO | METODO | ENTRAMBE | ### **APERTA** |  | PRESIDIO DEL HOOK: un referto committato senza toccare la relazione |

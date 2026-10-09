@@ -81,3 +81,15 @@ risponde *«Permission to use Bash with command git stash list has been denied»
 I hook **non impediscono** cio' che **non guardano**. `H-P1-bis` guarda **i file toccati**,
 non la chat: sulla forma allargata del par.4 **non puo' impedire nulla** — il presidio li' e'
 la riga **`PUSHATO:`**, che Luca vede a colpo d'occhio.
+
+---
+
+## `H-FISICA-FUORI-LISTA`, e **la cartella che non scelgo io** *(2026-10-09)*
+
+| | |
+|---|---|
+| ### **la LISTA** | `csv/_file_fisica.py::FILE_FISICA`, ### **l'unica fonte**: chi sorveglia la fisica la legge da lì. Prima **ogni presidio scriveva il nome a mano** |
+| ### ⛔ **il perché** | il giorno in cui la fisica vive in due file, un presidio che scrive il nome a mano ### **guarda ancora UN FILE SOLO — e PASSA**, perché un presidio che guarda il posto sbagliato ### **non trova niente e tace** |
+| ### **la CARTELLA dell'era `2`** | ### **VUOTA**, *«da decidere da Luca»*. ### ⚠ **Finché è vuota `H-FISICA-FUORI-LISTA` non impedisce niente** *(`A9`: è una tenda)*, e il collaudo gira ### **su una cartella di PROVA in una COPIA** |
+| ### ⭐ **e mettere un file nella LISTA costa** | ciò che è nella lista è ### **soggetto a `H-REG-R`** *(nessuna legge senza la sua scheda)* ### **e a `H-P7`** *(il commento di ogni flag)*: ### **due presidi addosso** |
+| ### ⚠ **il numero dei hook NON sta nel titolo del §`12`** | ce lo avevo messo, e il titolo ### **andava riscritto a ogni presidio nuovo** — e `csv/_struttura_regole.py` ### **vedeva un titolo sparire** |

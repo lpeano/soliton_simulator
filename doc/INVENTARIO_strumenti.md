@@ -2545,3 +2545,17 @@ etichette rimosse, con ### **`0` persi, `0` doppi, `0` conflitti**.
 | ### ⭐ **che cosa è cambiato** | **il file arriva dall'argv** *(due file, un attrezzo: **due copie della stessa regola divergono**)*; le **chiusure usano il punto `1`** *(il commit si RICAVA)*; e le voci possono venire **da un commit** |
 | ### ⛔ **perché le voci da un commit** | applicato il lotto, rigirarlo **sul disco** dà `NIENTE_DA_FARE` su tutto e **il verdetto VERO si perde.** Il verdetto è ciò che la regola ha deciso **quando ha incontrato l'indice** |
 | **l'uscita** | `doc/indice/_lotti/v3_guardiano_b.jsonl` · `doc/indice/_p3_guardiano_b.json` |
+
+---
+
+### `csv/_file_fisica.py` e `csv/_collaudo_file_fisica.py` — **DOVE VIVE LA FISICA** *(2026-10-09)*
+
+| | |
+|---|---|
+| **i file** | `csv/_file_fisica.py` *(BLOB `a7a5ef99`)* · `csv/_collaudo_file_fisica.py` *(BLOB `8cc5f427`)* |
+| **COMANDO** | `python csv/_file_fisica.py` *(che cosa sorveglia, e che cosa no)* · `python csv/_collaudo_file_fisica.py` *(il collaudo, `12`/`12`)*
+| **cosa misura** | **due costanti**: la LISTA dei file di fisica sorvegliati *(oggi `soliton_simulator.py`)* e la CARTELLA del codice dell'era `2`, **vuota** |
+| ### ⛔ **la CARTELLA è VUOTA, e il nome lo decide Luca** | *«NON la scegli tu»*. ### ⚠ **Quindi `H-FISICA-FUORI-LISTA` oggi NON IMPEDISCE NIENTE** — per `A9` **non è un presidio, è una TENDA**, e il referto lo dichiara |
+| ### ✔ **e allora il collaudo gira ALTROVE** | si copia `_file_fisica.py` in una cartella temporanea, si scrive **un nome di prova nella costante della COPIA**, e si fanno scattare i casi. **Il presidio diventa vero cambiando UNA STRINGA** |
+| ### ⭐ **e prova anche che TACE** | con la cartella vuota `intrusi` è **sempre vuoto**: **un presidio che tace va provato che taccia**, altrimenti nessuno sa se tace perché è spento o perché è rotto |
+| **chi legge la LISTA** | `csv/_hook_fisica.py` *(`H-REG-R`)* e `csv/_presidio_commenti_flag.py` *(`H-P7`)*: prima scrivevano `soliton_simulator.py` **a mano** |

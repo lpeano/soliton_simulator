@@ -49,7 +49,15 @@ import _presidio
 _presidio.avvia(__file__)
 
 RADICE = os.path.abspath(os.path.join(_QUI, ".."))
-SIM = os.path.join(RADICE, "soliton_simulator.py")
+# ### ⛔ **IL NOME NON SI SCRIVE PIU- A MANO** *(2026-10-09, punto `7`)*: la LISTA sta in
+# ### `csv/_file_fisica.py`. ### ⚠ **Anche `H-P7` guarda UN file per volta**, e
+# ### l-`assert` lo dichiara.
+import _file_fisica as _FF                                   # noqa: E402
+assert len(_FF.FILE_FISICA) == 1, (
+    "`H-P7` guarda UN file per volta e la LISTA ne ha %d: va esteso, non adattato"
+    % len(_FF.FILE_FISICA))
+SIM_REL = _FF.FILE_FISICA[0]
+SIM = os.path.join(RADICE, SIM_REL)
 NL = chr(10)
 
 # le etichette `[CURA n]` / `[NOME-qualcosa]` che valgono come nome del flag, quando il testo
@@ -207,7 +215,7 @@ def pre_commit():
     verifica che **il risultato sia giusto**, e per saperlo serve il PRIMA.
     """
     import subprocess
-    q = subprocess.run(["git", "show", "HEAD:soliton_simulator.py"], cwd=RADICE,
+    q = subprocess.run(["git", "show", "HEAD:" + SIM_REL], cwd=RADICE,
                        capture_output=True)
     if q.returncode:
         print("[H-P7] `HEAD:soliton_simulator.py` non leggibile: il controllo NON e' girato,")

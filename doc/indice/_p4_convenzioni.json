@@ -21,9 +21,11 @@
   "H-INDICE",
   "H-FILE",
   "H-NON-TRACCIATI",
+  "H-FISICA-FUORI-LISTA",
   "H-STASH"
  ],
- "cambiate": [
+ "cambiate": [],
+ "gia_a_posto": [
   "P1",
   "P2",
   "P1-quater",
@@ -32,11 +34,6 @@
   "L-UN-PROMPT",
   "L-STELLA",
   "L-DOPO-STOP",
-  "H-FILE",
-  "H-NON-TRACCIATI",
-  "H-STASH"
- ],
- "gia_a_posto": [
   "H-P3",
   "H-P5",
   "H-P7",
@@ -45,7 +42,11 @@
   "H-RIGHE",
   "H-P1-bis",
   "H-REG-R",
-  "H-INDICE"
+  "H-INDICE",
+  "H-FILE",
+  "H-NON-TRACCIATI",
+  "H-FISICA-FUORI-LISTA",
+  "H-STASH"
  ],
  "citati_non_voci": []
 }

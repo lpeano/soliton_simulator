@@ -12,6 +12,7 @@ commit**: cosi' non se ne accumulano di invisibili.)*
 | `csv/_archivio_relazioni.py|H-P5` | non importa il simulatore e non lo fa girare. Divide un documento per giorno. |
 | `csv/_cerca_definizioni.py|H-P5` | non importa il simulatore e non lo fa girare. Cerca definizioni nei documenti. |
 | `csv/_collaudo_criterio_zero.py|H-P5` | non importa il simulatore e non lo fa girare. E' un collaudo di un CRITERIO |
+| `csv/_collaudo_file_fisica.py|H-P5` | non importa il simulatore e non lo fa girare. Collauda due costanti. |
 | `csv/_collaudo_istruzioni.py|H-P5` | non importa il simulatore e non lo fa girare. Collauda una sezione di documentazione. |
 | `csv/_collaudo_lista_chiusa.py|H-P5` | non importa il simulatore e non lo fa girare. Collauda un generatore di documenti. |
 | `csv/_collaudo_presidi_indice.py|H-P5` | non importa il simulatore e non lo fa girare. Collauda i presidi dell'indice. |
@@ -135,5 +136,5 @@ commit**: cosi' non se ne accumulano di invisibili.)*
 | `csv/_test_fork/_z43_tempo_proprio.py|H-P3` | la scena passa TUTTA dal CLI (`nmasse` e `sep` da `argv`), e la |
 
 ```
-esenzioni dichiarate   128
+esenzioni dichiarate   129
 ```

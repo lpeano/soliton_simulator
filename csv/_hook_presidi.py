@@ -418,7 +418,45 @@ def installa():
     stato_hook()
     return 0
 
+def fuori_lista(percorsi=None):
+    """### I `.py` ### **sotto la cartella dell-era `2` che NON sono nella LISTA** di
+    `csv/_file_fisica.py`.
+
+    ### ⭐ **IL PERCHE-:** un file di fisica che ### **nessuno sorveglia** e- peggio di un
+    file che non esiste, perche- ### **SEMBRA sorvegliato** -- e `H-REG-R` e `H-P7`
+    guardano ### **solo cio- che e- nella LISTA.** ### ⛔ **Un `.py` nuovo la- sotto
+    senza voce nella lista e- fisica SENZA REGISTRO e SENZA commenti dei flag.**
+
+    ### ⚠ **E CON LA CARTELLA VUOTA TORNA SEMPRE `[]`, cioe- NON IMPEDISCE NIENTE:** per
+    `A9` ### **non e- un presidio, e- una tenda**, e il referto lo dichiara. ### ✔ **Il
+    giorno in cui Luca da- il nome diventa vero cambiando UNA STRINGA.**
+    """
+    sys.path.insert(0, os.path.join(RADICE, "csv"))
+    import _file_fisica as _FF
+    return _FF.intrusi(percorsi if percorsi is not None else staged())
+
+
 def pre_commit():
+    # ### `H-FISICA-FUORI-LISTA`: un `.py` NUOVO sotto la cartella dell-era `2` che non e-
+    #   nella LISTA dei file di fisica. ### **Sta per primo perche- e- il piu- economico**
+    #   (legge due costanti e i nomi staged) e perche- se scatta ### **tutto il resto non
+    #   conta**: significa che c-e- fisica che nessun presidio sorveglia.
+    _int = fuori_lista()
+    if _int:
+        sys.stderr.write(NL + "[H-FISICA-FUORI-LISTA] *** COMMIT RIFIUTATO ***" + NL + NL)
+        for _x in _int:
+            sys.stderr.write("  %s" % _x + NL)
+        sys.stderr.write(NL + "  Questi `.py` stanno SOTTO la cartella del codice"
+                         " dell-era 2 e NON sono nella LISTA di" + NL
+                         + "  `csv/_file_fisica.py`. Un file di fisica che NESSUNO"
+                         " sorveglia e- peggio di un file che" + NL
+                         + "  non esiste, perche- SEMBRA sorvegliato: `H-REG-R` e `H-P7`"
+                         " guardano SOLO la LISTA." + NL + NL
+                         + "  CHE FARE: aggiungere il file a `FILE_FISICA` -- e sapere che"
+                         " cosi- gli si mettono" + NL
+                         + "  addosso DUE presidi (la scheda nel registro, e il commento"
+                         " di ogni flag)." + NL + NL)
+        return 1
     # `P7` sta in un modulo suo (`csv/_presidio_commenti_flag.py`) perche' NON guarda i file
     #   staged: e' una POSTCONDIZIONE, e confronta il disco con `HEAD`.
     import subprocess as _sp

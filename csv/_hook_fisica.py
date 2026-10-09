@@ -45,7 +45,20 @@ import re
 import subprocess
 import sys
 
-SIM = "soliton_simulator.py"
+# ### ⛔ **IL NOME NON SI SCRIVE PIU- A MANO** *(2026-10-09, punto `7`)*: la LISTA sta in
+# ### `csv/_file_fisica.py`, ed e- ### **l-unica fonte.** Il giorno in cui la fisica vive
+# ### in due file, un presidio che scrive il nome a mano ### **guarda ancora UN FILE SOLO
+# ### -- e PASSA**, perche- un presidio che guarda il posto sbagliato ### **non trova
+# ### niente e tace.**
+# ### ⚠ **`H-REG-R` sorveglia UN FILE PER VOLTA** *(la sua diff, le sue schede)*: prende
+# ### ### **il primo della lista**, e se un giorno la lista ne avra- due
+# ### ### **questo `assert` lo dira-** invece di lasciarlo scoprire a un run.
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import _file_fisica as _FF                                   # noqa: E402
+assert len(_FF.FILE_FISICA) == 1, (
+    "`H-REG-R` guarda UN file per volta e la LISTA ne ha %d: va esteso, non adattato"
+    % len(_FF.FILE_FISICA))
+SIM = _FF.FILE_FISICA[0]
 REGISTRO = "doc/REGISTRO_FISICA.md"
 MARCATORE = re.compile(
     r"<!--\s*SCHEDA\s+nome=([\w\-]+)\s+funzioni=([^\s]*)\s+flag=([^\s]*)\s*-->")

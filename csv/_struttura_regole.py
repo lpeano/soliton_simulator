@@ -104,12 +104,38 @@ def da_git(commit, percorso):
     return q.stdout.decode("utf-8", "replace")
 
 
+# ### ⛔ **LE RINOMINE DICHIARATE, e perche- esistono invece di spostare la BASE.**
+# ### Il controllo `(a)` confronta contro ### **un blob fisso**, e un titolo che cambia
+# ### ### **lo fa fallire per sempre.** La via comoda sarebbe ### **avanzare `PRIMA`**:
+# ### ⛔ **ed e- esattamente il modo in cui un presidio si indebolisce in silenzio** --
+# ### la base nuova contiene gia- ogni perdita avvenuta fino a la-.
+# ### ✔ **Quindi la base NON si sposta, e la rinomina SI DICHIARA, con il motivo.**
+RINOMINATI = {
+    # ### Il titolo del §12 conteneva ### **il NUMERO dei hook** *(<<e sono UNDICI>>)*, e
+    # ### cosi- ### **andava riscritto a ogni presidio nuovo** -- e questo controllo
+    # ### ### **vedeva un titolo sparire** ogni volta. ### **Il numero si conta dalla
+    # ### tabella**, e il titolo e- diventato stabile. *(2026-10-09, punto 7: nasce
+    # ### `H-FISICA-FUORI-LISTA`, il dodicesimo.)*
+    "## 12. I PRESIDI AUTOMATICI — **i hook, e sono UNDICI**":
+        "## 12. I PRESIDI AUTOMATICI — **i hook**",
+}
+
+
 def confronta(prima, dopo):
-    """`(perse, aggiunte)` per ciascuno dei tre insiemi. ### Le PERSE sono il difetto."""
+    """`(perse, aggiunte)` per ciascuno dei tre insiemi. ### Le PERSE sono il difetto.
+
+    ### ⚠ **Una PERDITA che `RINOMINATI` spiega non e- una perdita**, ed e- l-unica via
+    d-uscita: ### **dichiarata, con il motivo, e NELLA LISTA** -- non ### **una base
+    spostata**, che avrebbe perdonato ### **tutto cio- che e- avvenuto prima.**
+    """
     perse, aggiunte = {}, {}
     for k in ("titoli", "dichiarate", "punti"):
-        p = sorted(prima[k] - dopo[k])
-        a = sorted(dopo[k] - prima[k])
+        # ### UNA RINOMINA DICHIARATA: il vecchio e- <<perso>> solo se
+        # ### ### **il nuovo NON c-e-.** Cosi- la via d-uscita ### **non copre una
+        # ### cancellazione**: se spariscono entrambi, il controllo ### **fallisce ancora.**
+        p = sorted(x for x in (prima[k] - dopo[k])
+                   if RINOMINATI.get(x) not in dopo[k])
+        a = sorted(x for x in (dopo[k] - prima[k]) if x not in RINOMINATI.values())
         if p:
             perse[k] = p
         if a:
