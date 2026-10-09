@@ -11020,3 +11020,22 @@ Il task history e' committato ### **prima del lavoro** *(par.8)*: `doc/TASK_HIST
 ### ✔ **L'ESTENSIONE E- UNA DISTINZIONE:** `FILE_FISICA` per chi sorveglia ### **tutti** i file di fisica, `SCHEDA_NEL_REGISTRO` per chi cerca ### **la scheda nel registro.** ### **Due consumatori, due scopi, due costanti** — e l'`assert` resta, ### **sulla costante giusta.**
 
 ### ⚠ **E I FILE SONO VUOTI DI PROPOSITO:** il mandato dice *«la struttura (vuota, solo intestazioni)»*, e ### **ogni tappa deve lasciare il repo valido** — il PC si riavvia fra `00:00` e `02:00`. ### **Un file con un'intestazione che dichiara cio' che fara' e' valido; un file a meta' no.**
+
+---
+
+## TAPPA `2`: **il formato, e le due decisioni aperte AMMESSE senza scegliere** (2026-10-09)
+
+`primo_ordine/leggi/schema.py`, collaudo ### **`25`/`25` nei due versi.** Le due tabelle documentano il formato e restano vuote. Nessuna fisica nuova; il simulatore resta `b8c21049`.
+
+### ⭐ **IL CONTROLLO CHE CONTA, e vive NELLA TABELLA e non nel codice:** ### **un `termine_nodo` non puo- avere una variabile d'ARCO nell'ambito.** Una variabile d'arco ### **collega due nodi**, quindi leggerla ### **E- vedere il vicino** — e ### **si vede PRIMA di generare**, guardando una riga di tabella, invece di cercarla in un modulo numerico.
+
+### ✔ **E LE DUE DECISIONI APERTE SONO AMMESSE SENZA SCEGLIERLE, in due modi diversi:**
+
+| | la decisione | come |
+|---|---|---|
+| `13` | i ### **coniugati delle memorie** | il tipo `coppia_coniugata` e' ### **nel vocabolario**, e ### **nessuna legge lo usa.** ### **Ammesso, non scelto** |
+| `9` | la ### **geometria** | ### **non c'e' NIENTE per la posizione**, e `pos` *(con `x`, `y`, `z`, `coord`)* e' ### **un simbolo VIETATO** *(`A17`)*. ### ⭐ **Il formato NON PUO- esprimere una geometria, quindi non ne sceglie una** |
+
+### ⚠ **E «ammettere senza scegliere» HA UN PREZZO, che dichiaro:** un tipo che nessuno usa ### **non e- collaudato dall'uso**, solo dallo schema. ### ✔ **Il collaudo ha il braccio che lo copre:** costruisce una legge che legge una `coppia_coniugata` e verifica che lo schema ### **l'accetti** — cosi' il tipo ### **non e- una parola nel vocabolario: e- una forma provata.**
+
+### ⚠ **E UNA QUARTA VOLTA I CONFINI DI PAROLA:** il controllo di `pos` doveva non scattare su ### **`max`, `xi`, `index`** — che contengono `x`. ### **Il braccio c'e-**, e ### **e- la quarta volta in tre giorni che una parola dentro un'altra parola inganna** *(`infinito`/`FINITO`, `passato`/`PASS`, `CONTIENE`/`TIENE`)*.

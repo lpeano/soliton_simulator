@@ -52,6 +52,7 @@ FILE_FISICA = (
     'primo_ordine/_genera.py',
     'primo_ordine/termini/__init__.py',
     'primo_ordine/osservatori/__init__.py',
+    'primo_ordine/leggi/schema.py',
     'primo_ordine/leggi/leggi.yaml',
     'primo_ordine/leggi/osservatori.yaml',
 )

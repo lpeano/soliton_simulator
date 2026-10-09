@@ -83,10 +83,8 @@ era       1=538  DA_CLASSIFICARE=188  ENTRAMBE=96  2=24
 stato     SOSPESA=369  DA_CLASSIFICARE=188  CHIUSA=182  APERTA=82  AGENDA=24  SUPERATA=1
 ```
 
-### ✔ **FATTO IN QUESTO GIRO:** la ### **TAPPA `1`** dell'infrastruttura dell'era `2`: `primo_ordine/` con ### **`12` file, vuoti e con le sole intestazioni**, e ### **la LISTA che si sdoppia** — `FILE_FISICA` *(`13`)* per `H-FISICA-FUORI-LISTA` e `H-ID-OBBLIGATORIO`, ### **`SCHEDA_NEL_REGISTRO`** *(`1`)* per `H-REG-R` e `H-P7`. Collaudo ### **`17`/`17`.**
+### ✔ **FATTO IN QUESTO GIRO:** la ### **TAPPA `2`**: il formato della tabella, con `primo_ordine/leggi/schema.py` che lo valida — collaudo ### **`25`/`25` nei due versi**, su righe costruite in memoria. Le due tabelle ### **documentano il formato** e restano ### **vuote**: i due termini di PROVA arrivano con il generatore, perche' ### **un generatore con niente da generare non si verifica.**
 
-### ⛔ **RESTA:** le tappe `2`…`6` — il formato, il generatore, gli `8` presidi *(piu' la CI)*, il collaudo della catena, e il referto.
+### ⛔ **RESTA:** le tappe `3`…`6`.
 
-### 📌 **E IN CODA** *(`doc/CODA_2026-10-09.md`, voce ②)*: ### **le decisioni di Luca sulle `43` domande**, che lui stesso dice di eseguire ### **DOPO lo STOP di questo mandato.**
-
-**Ultimo lotto applicato:** `doc/indice/_lotti/v3_note2.jsonl` — ### **la tappa `1` NON scrive sull'indice.**
+**Ultimo lotto applicato:** `doc/indice/_lotti/v3_note2.jsonl` — ### **la tappa `2` NON scrive sull'indice.**

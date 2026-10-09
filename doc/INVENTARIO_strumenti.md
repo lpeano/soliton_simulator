@@ -2613,3 +2613,17 @@ etichette rimosse, con ### **`0` persi, `0` doppi, `0` conflitti**.
 | ### ⭐ **e lancia i CINQUE collaudi da sé** | i controlli, i presidi, l'indice, `_file_fisica` e `H-ID-OBBLIGATORIO`: **nessun numero ricopiato dal terminale** |
 | ### ✔ **e il PARI MERITO è risolto** | il nome è lo spareggio nelle tabelle prima/dopo: **un referto che non si rigenera identico non si può verificare** |
 | **l'uscita** | `doc/REFERTO_indice_v3_fine_riordino.md` *(`207` righe)* |
+
+---
+
+### `primo_ordine/leggi/schema.py` — **IL FORMATO DELLA TABELLA** *(2026-10-09)*
+
+| | |
+|---|---|
+| **file** | `primo_ordine/leggi/schema.py` |
+| **BLOB** *(sha1 dei byte grezzi)* | `4be1bb29` |
+| **COMANDO** | `python primo_ordine/leggi/schema.py` *(il collaudo, `25`/`25`)* |
+| **cosa misura** | che una riga di tabella abbia **la forma**: vocabolario **chiuso**, `prova` booleano, `scheda` non vuota, **l'ambito dichiarato**, i parametri con **valore E origine**, il **bilancio** di una regola, la **voce** di un osservatore |
+| ### ⭐ **e il controllo che conta** | ### **un `termine_nodo` non può avere una variabile d'ARCO nell'ambito**: una variabile d'arco **collega due nodi**, quindi leggerla ### **È vedere il vicino** — e si vede **nella TABELLA**, prima di generare |
+| ### ⛔ **e le due decisioni aperte sono AMMESSE, non scelte** | `coppia_coniugata` è ### **nel vocabolario e nessuna legge la usa** *(decisione `13`)*; ### **non c'è niente per la posizione** e `pos` è un simbolo **vietato** *(decisione `9`, `A17`)* |
+| ### ⚠ **è PURO** | prende il dizionario e il vocabolario, ### **non legge il disco**: il collaudo lo prova **su righe costruite in memoria** |

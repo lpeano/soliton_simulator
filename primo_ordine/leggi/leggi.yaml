@@ -1,10 +1,51 @@
 # ====================================================================================
 #  LA TABELLA DELLE LEGGI -- L-UNICA FONTE
 # ------------------------------------------------------------------------------------
-#  TAPPA 1: SOLO L-INTESTAZIONE. Il formato arriva alla tappa 2, lo schema lo valida, e
-#  il generatore (tappa 3) ne ricava IL CODICE e LA SCHEDA.
+#  Il codice e la scheda SI GENERANO da qui (primo_ordine/_genera.py). La macchina
+#  verifica che legge <-> file <-> voce dell-indice <-> scheda siano IN BIIEZIONE.
 #
 #  NIENTE SI SCRIVE A MANO SOTTO primo_ordine/termini/: si scrive QUI, e SI GENERA.
+#  Lo schema che valida questa tabella: primo_ordine/leggi/schema.py (25/25).
+# ====================================================================================
+#
+#  IL FORMATO DI UNA LEGGE
+#  -----------------------
+#    id            [A-Z][A-Z0-9-]{3,}  -- almeno 4 caratteri
+#    tipo          termine_nodo | termine_arco | regola | osservatore
+#    prova         true/false  -- SE LA LEGGE E- FINTA. Le due di oggi sono true.
+#    scheda        il testo da cui si genera doc/leggi_era2/<id>.md
+#    assiomi       la lista degli assiomi soddisfatti (anche vuota, e allora LO DICE)
+#
+#  per un TERMINE (entra in H):
+#    espressione   stringa simbolica (sympy)
+#    ambito        le variabili che PUO- leggere. ### UN termine_nodo NON PUO- avere
+#                  una variabile d-ARCO: leggerla E- VEDERE IL VICINO.
+#    parametri     ognuno con VALORE e ORIGINE. ### A1: la legge, NON il numero -- e un
+#                  numero senza origine E- UNA MANOPOLA.
+#
+#  per una REGOLA (NON entra in H):
+#    ingressi, uscite, bilancio   ### CIO- CHE ESCE DA H DEVE ANDARE DA QUALCHE PARTE.
+#                  Senza il campo `bilancio` la regola NON SI SCRIVE.
+#
+#  I TIPI DI VARIABILE AMMESSI
+#  ---------------------------
+#    complesso_c2_nodo   psi, C^2 sul NODO (A16)
+#    reale_nodo          un reale sul nodo
+#    reale_arco          un reale sull-arco
+#    fase_arco           una fase sull-arco
+#    coppia_coniugata    (q, p)  ### AMMESSA E NON USATA: e- la decisione 13, APERTA
+#
+#  ### E NON C-E- NIENTE PER LA POSIZIONE: e- la decisione 9, APERTA, e A17 vieta che
+#  ### una posizione entri nella fisica. Il simbolo `pos` (e x, y, z, coord) e- VIETATO,
+#  ### e il generatore RIFIUTA l-espressione che lo nomina.
+#  ### ⭐ IL FORMATO NON PUO- ESPRIMERE UNA GEOMETRIA, QUINDI NON NE SCEGLIE UNA.
 # ====================================================================================
 versione: 1
+
+# ### LE VARIABILI DI STATO: il vocabolario che l-ambito delle leggi puo- nominare.
+#     Ognuna ha una VOCE in doc/indice/variabili.jsonl (`P-E3` lo verifica in biiezione).
+variabili: []
+
+# ### LE LEGGI. Alla tappa 2 la tabella e- VUOTA: i due termini di PROVA arrivano con il
+#     generatore (tappa 3), perche- UN GENERATORE CON NIENTE DA GENERARE NON SI VERIFICA.
 leggi: []
