@@ -83,8 +83,8 @@ era       1=458  DA_CLASSIFICARE=188  ENTRAMBE=172  2=25
 stato     SOSPESA=283  DA_CLASSIFICARE=188  CHIUSA=187  APERTA=160  AGENDA=25
 ```
 
-### ✔ **FATTO IN QUESTO GIRO:** il punto `5`: ### **`F4` da `30` segnali a `3`** -- la ### **regola dell'intestazione** *(l'ID deve essere il SOGGETTO, e ci deve essere contenuto)*, `7` etichette ### **ripristinate**, `6` ### **OMONIMI che non si scelgono** *(`S1` ne ha `22`, `T1` `34`)*, e il ### **FALSO-UNO per la TERZA VOLTA** -- stavolta sui ### **miei referti**, che elencano gli ID e sembravano definirli
+### ✔ **FATTO IN QUESTO GIRO:** il punto `6`: ### **il referto `doc/REFERTO_indice_v3_segnali.md`, voce per voce** *(`298` righe, `8` sezioni)*, i controlli `6/6`, il collaudo dei presidi `20/20`. ### **LA CHIUSURA DEI SEGNALI E' FATTA: da `103` a `15`** -- punti `1`..`6`
 
-### ⛔ **RESTA:** il punto `6`: i controlli e il referto ### **`doc/REFERTO_indice_v3_segnali.md`**, voce per voce, con i segnali prima/dopo per presidio e i conteggi dominio/era/stato
+### ⛔ **RESTA:** ### **le decisioni di Luca**, nel referto §⑧: i `15` segnali che restano *(elencati, non chiusi)*, `ENERGIA-NON-DEFINITA` *(superata da `A16`?)*, ### **la seconda restrizione di `F1`**, la classe di `W5`, il ### **QUARTO CASO** e la classificazione delle `7` ripristinate
 
-**Ultimo lotto applicato:** `doc/indice/_lotti/v3_p5.jsonl`
+**Ultimo lotto applicato:** `doc/indice/_lotti/v3_p5_f3.jsonl *(il punto `6` non passa da un lotto: scrive il referto)*`

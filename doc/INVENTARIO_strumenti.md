@@ -2312,3 +2312,15 @@ etichette rimosse, con ### **`0` persi, `0` doppi, `0` conflitti**.
 | **COMANDO** | `python csv/_p5_etichette.py`, poi `python csv/indice.py crea-lotto doc/indice/_lotti/v3_p5.jsonl` e `python csv/indice.py etichette-lotto doc/indice/_lotti/v3_p5_etichette.jsonl` |
 | **cosa misura** | niente: **porta la decisione**, in quattro tabelle con il perché di ciascuna voce. `7` **ripristinate**, `6` **omonimi** *(non si scelgono)*, `1` che **resta etichetta**, `3` nel **quarto caso** |
 | ### ⚠ **il QUARTO caso, e lo avevo previsto** | `AUTO-MANUTENZIONE` *(una **regola di lavoro**, non una legge)*, `F4` e `F5` *(una **famiglia di difetti** che punta a un'altra voce)*: **nessuno dei tre esiti del mandato**, quindi **elencati**, con la nota «da decidere da Luca» e **il segnale LASCIATO ACCESO** |
+
+---
+
+### `csv/_doc_referto_segnali.py` — **IL REFERTO DELLA CHIUSURA DEI SEGNALI** *(2026-10-09)*
+
+| | |
+|---|---|
+| **file** | `csv/_doc_referto_segnali.py` |
+| **BLOB** *(sha1 dei byte grezzi)* | `986a2812` |
+| **COMANDO** | `python csv/_doc_referto_segnali.py` |
+| **cosa misura** | i segnali **dopo** *(dalle stesse funzioni che gira il validatore)* e quelli **prima** da `git show 433d215:doc/REFERTO_indice_v3_presidi.md` — ### **dal referto committato che li ha misurati**, non da un numero ricopiato. Fa girare **lui** i controlli e il collaudo, e importa le tabelle di decisione da `_segnali_chiusura.py` e `_p5_etichette.py`, così **il referto e il lavoro non possono divergere** |
+| **l'uscita** | `doc/REFERTO_indice_v3_segnali.md` *(`298` righe)* |
