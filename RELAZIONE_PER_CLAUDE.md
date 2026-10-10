@@ -12321,3 +12321,13 @@ Ogni dato di `db_era2/` ha ### **il suo TIMBRO accanto**, col campo `versione_da
 ### ✅ **E LE TRE RADICI GIA- PRESE SONO le tre decisioni di `3e8375b`, verificato nei due versi:** la tabella marca `PRESA` le decisioni ### **`1`** *(il freno della coesione e- la `(c)`)*, ### **`3`** *(la sincronizzazione si toglie)* e ### **`10`** *(il calore paga la nascita)*, e il commit porta ### **esattamente quelle tre**, nei blocchi `(C)`, `(B)` e `(A)`.
 
 ### ⚠ **E UN BRACCIO DI `P-ALB` SI E- ROTTO, per una ragione che vale piu- del braccio:** ### **cercava LA VITTIMA NEL REPO** — un nodo con `argomento_noto: false` — e il punto `5` ### **ha dato l-argomento agli ultimi cinque**, quindi ### **`TypeError`: la vittima era `None`.** ### ⭐ **Un braccio che DEVE fallire e che pesca la vittima nel repo SMETTE DI FUNZIONARE QUANDO IL REPO MIGLIORA.** ### ✅ **Ora la COSTRUISCE**, ed e- la stessa cura del braccio che asseriva *«nessun nodo e- PRESA, oggi»*.
+
+## MANDATO ⑧, PUNTO `6`: IL VUOTO LOCALE — ### **e l-albero dice IL CONTRARIO del mandato** *(2026-10-10)*
+
+### 📌 **IL MANDATO:** marcare il ### **VUOTO LOCALE** come il nodo che ### **BLOCCA la mitosi dell-era `2`**, e quindi che ### **PRECEDE `D9`** sul percorso critico.
+
+### ⛔ **L-ALBERO DICE IL CONTRARIO, verificato nel `yaml` e non nella prosa:** la catena e- ### **`D9` → `D13` → `D6` → `D7`** — `DEC-D6-VUOTO` ### **dipende da** `DEC-D13-MEMORIE`, che ### **dipende da** `DEC-D9-GEOMETRIA`, e `DEC-D9-GEOMETRIA` ### **non dipende da niente.** ### **Cioe-: `D9` viene PRIMO e il vuoto TERZO.**
+
+### ✅ **E IL MANDATO STESSO DICE CHE COSA FARE: «se l-albero dice altro, SCRIVI LA DIFFERENZA E NON CORREGGERE».** ### **L-ho fatto:** la differenza e- ### **una riga nel tabellone della catena**, e ### **le dipendenze non sono state toccate.**
+
+### ⭐ **E LA DOMANDA DA PORTARE A LUCA E- PRECISA, non generica:** ### **il vuoto locale si puo- decidere SENZA sapere che cos-e- una distanza?** ### ⚠ **Se si-, l-albero sbaglia e la catena va girata; se no, il mandato sbaglia** — e ### **non e- una cosa che decido io.** ### 📌 **E- la QUARTA volta oggi che una fonte del repo batte il prompt**, e la terza in cui la differenza riguarda ### **l-ordine delle decisioni di fisica.**

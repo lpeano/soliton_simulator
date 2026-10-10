@@ -85,6 +85,7 @@ in buona parte l'estensione di un presidio che c'è**, non un presidio nuovo —
 |---|---|
 | **INGRESSO** | ### **`F1` chiusa**: una decisione presa senza le regole di forma ### **può scegliere una forma che poi si dovrà disfare** |
 | **la catena** | `D9` geometria → `D13` memorie → `D6` vuoto → `D7` divisione |
+| ⛔ **LA DIFFERENZA COL MANDATO DEL `2026-10-10`** | il punto `6` delle sei decisioni chiede di marcare il ### **VUOTO LOCALE** come il nodo che ### **BLOCCA la mitosi dell-era `2`**, e quindi che ### **PRECEDE `D9`** sul percorso critico. ### ⚠ **L-ALBERO DICE IL CONTRARIO:** la catena e- ### **`D9` → `D13` → `D6` → `D7`**, cioe- ### **`D9` viene PRIMO e il vuoto TERZO** *(`DEC-D6-VUOTO` dipende da `DEC-D13-MEMORIE`, che dipende da `DEC-D9-GEOMETRIA`; `DEC-D9-GEOMETRIA` non dipende da niente)*. ### ✅ **E il mandato dice: «se l-albero dice altro, SCRIVI LA DIFFERENZA E NON CORREGGERE»** — quindi ### **la differenza e- questa riga, e le dipendenze NON SONO STATE TOCCATE.** ### 📌 **La decide Luca**, e la domanda e- precisa: ### **il vuoto locale si puo- decidere SENZA sapere che cos-e- una distanza?** |
 | **gli altri nodi** | `INT` *(l'integratore)*, e `D4`, `D2`, `D11`, `D12`, `T4` |
 | **le radici già prese** | `A16`, `A17` — ### **e sono ASSIOMI**, non scelte di questa fase |
 | ### ⛔ **USCITA** | ① ogni nodo dell'albero è ### **`presa: true`**; ② `P-ALB` ### **passa**, cioè ### **nessuno è stato preso prima di quelli da cui dipende**; ③ ogni decisione presa ha la sua ### **scheda in `doc/REGISTRO_FISICA.md`**, perché `H-REG-R` la pretende |
