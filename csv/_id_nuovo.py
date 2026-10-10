@@ -151,6 +151,43 @@ def collaudo():
           len(c["corti"]) > 10,
           "### se il presidio guardasse anche gli esistenti, rifiuterebbe %d voci VERE"
           % len(c["corti"]))
+
+    # ===================================================================================
+    #   ### ⭐ **LA CURA DEL CRITERIO ② DI `da-decidere`, NEI DUE VERSI**
+    # ===================================================================================
+    # ### ⛔ **Sta QUI e non in `indice.py` per una ragione precisa:** il criterio ②
+    # ### e- stato ### **TOLTO**, e ### **`P-ID` E- LA GUARDIA CHE LO SOSTITUISCE.** Un
+    # ### collaudo che prova la rimozione ### **deve stare attaccato a cio- che la rende
+    # ### sicura**, altrimenti domani qualcuno toglie `P-ID` e ### **nessuno misura che la
+    # ### rimozione del criterio era appoggiata a lui.**
+    D = os.path.join(RADICE, "doc", "indice")
+    voci = _jsonl(os.path.join(D, "voci.jsonl"))
+    omon = sorted(v["id"] for v in voci if (v.get("meta") or {}).get("omonimo"))
+    elenco = io.open(os.path.join(D, "DA_DECIDERE_LUCA.md"),
+                     encoding="utf-8").read() if os.path.exists(
+                         os.path.join(D, "DA_DECIDERE_LUCA.md")) else ""
+    print()
+    print("  la CURA del criterio ②: %d voci hanno ANCORA `meta.omonimo` -- %s"
+          % (len(omon), ", ".join(omon)))
+    esito("### il collaudo ha MATERIA: ci sono voci con `meta.omonimo`",
+          len(omon) >= 11,
+          "%d: ### il metadato RESTA, e- un FATTO -- la decisione di Luca lo dice" % len(omon))
+    dentro = [i for i in omon if ("`%s`" % i) in elenco]
+    esito("NON deve scattare: un omonimo NON e- piu- in `DA_DECIDERE_LUCA.md`",
+          dentro == [],
+          "### il criterio ② e- TOLTO: <<la domanda si chiude>> E <<il metadato resta>>"
+          if not dentro else "### ANCORA DENTRO: %s" % ", ".join(dentro))
+    rifiutati = [i for i in omon if controlla_nuovo(i, voci) != []]
+    esito("### DEVE scattare: `P-ID` RIFIUTA la rinascita di OGNI omonimo",
+          len(rifiutati) == len(omon),
+          "%d su %d: ### e- LA GUARDIA CHE SOSTITUISCE IL CRITERIO -- un ID prende un "
+          "secondo significato SOLO se qualcuno riusa un ID che esiste"
+          % (len(rifiutati), len(omon)))
+    sig = sorted(presi(voci)[2])
+    esito("### DEVE scattare: `P-ID` rifiuta anche un SIGNIFICATO dichiarato",
+          sig != [] and controlla_nuovo(sig[0], voci) != [],
+          "`%s` fra %d significati: ### un ID nuovo che ne prende uno NE CANCELLA LA "
+          "DICHIARAZIONE" % (sig[0] if sig else "-", len(sig)))
     print("=" * 100)
     print("IL COLLAUDO DI `P-ID`: %d su %d   %s"
           % (ok[0], ok[1], "### TUTTI PASSATI" if ok[0] == ok[1] else "### CI SONO BUCHI"))

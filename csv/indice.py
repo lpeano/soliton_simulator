@@ -1109,7 +1109,17 @@ def da_decidere(voci, reg):
 
       * ① la `nota_guardiano` dice *«da decidere / confermare da Luca»* -> la domanda e-
         ### **cio- che la nota stessa chiede**;
-      * ② la voce ha `meta.omonimo` -> ### **quale dei `N` significati?**;
+      * ② ### **TOLTO il 2026-10-10, per decisione di Luca** *(blocco `1` delle `43`
+        domande)*: diceva *<<la voce ha `meta.omonimo` -> quale dei `N` significati?>>*,
+        e la decisione e- ### **<<gli `11` OMONIMI restano omonimi dichiarati, non si
+        scegli un significato. La domanda si chiude (via la nota <<da decidere>>, il
+        metadato omonimo resta)>>.** ### ⛔ **QUELLE DUE COSE, INSIEME, OBBLIGANO A
+        TOGLIERE IL CRITERIO:** se il metadato resta ### **e** la domanda si chiude,
+        allora ### **non puo- essere il metadato a generare la domanda.** ### ⭐ **E
+        il criterio non ha piu- materia FUTURA, perche- `P-ID` vieta la NASCITA di un
+        omonimo nuovo** *(un ID nuovo non puo- coincidere con un ID esistente, che e-
+        l-unico modo in cui un ID prende un secondo significato)*: ### **quindi
+        togliendolo non si perde una guardia, si toglie una legge** (`9-ter`);
       * ③ `stato = DA_CLASSIFICARE` e la classe ### **NON e- `NON_DEFINITA`** -> che
         classe, dominio, era e stato?
 
@@ -1132,17 +1142,28 @@ def da_decidere(voci, reg):
                     % (v["dominio"], v["era"], coda))
             else:
                 dom(v["id"], coda or "la nota chiede una decisione e non dice quale")
-        om = (v.get("meta") or {}).get("omonimo") or []
-        if om:
-            # ### ⚠ **L-ULTIMA VOCE DI `omonimo` PUO- ESSERE UN TRONCAMENTO**
-            # ### *(<<... e altre N definizioni>>)*: contarla come un significato
-            # ### ### **direbbe un numero piu- piccolo del vero.** `D3` ha `8`
-            # ### definizioni e `7` voci nel meta: la domanda deve dire ### **ALMENO.**
-            tronco = bool(om) and str(om[-1]).strip().startswith("...")
-            dom(v["id"], "OMONIMO: quale %s significati dichiarati in `meta.omonimo`? "
-                         "NON si scegli da se-"
-                         % (("di ALMENO %d" % (len(om) - 1)) if tronco
-                            else ("dei %d" % len(om))))
+        # ### ⛔ **QUI STAVA IL CRITERIO ②, <<la voce ha `meta.omonimo`>>, e la
+        # ### DECISIONE DI LUCA DEL 2026-10-10 LO HA TOLTO.** Il blocco `1` delle `43`
+        # ### domande dice: *<<gli `11` OMONIMI (`C4` `C5` `D3` `D4` `D5` `D6` `H2` `M1`
+        # ### `S1` `S3` `T1`): restano omonimi dichiarati, non si scegli un significato.
+        # ### La domanda si chiude (via la nota <<da decidere>>, il metadato omonimo
+        # ### resta)>>.*
+        # ### ⚠ **E IO AVEVO PREVISTO CHE TOGLIERE LA NOTA NON BASTASSE**, nel task
+        # ### history, ### **prima di guardare** -- ed era vero: gli `11` hanno perso la
+        # ### nota e ### **erano ancora nell-elenco, per QUESTO criterio.**
+        # ### ⭐ **LE DUE META- DELLA DECISIONE, INSIEME, SONO LA CURA:** <<la
+        # ### domanda si chiude>> ### **e** <<il metadato omonimo resta>> si possono
+        # ### soddisfare entrambe ### **solo se non e- il metadato a generare la
+        # ### domanda.** ### **Non sto scegliendo al posto di Luca: sto eseguendo cio-
+        # ### che ha detto.**
+        # ### ✅ **E NON SI PERDE UNA GUARDIA, perche- il criterio non ha piu- materia
+        # ### FUTURA:** un ID prende un secondo significato ### **solo se qualcuno riusa
+        # ### un ID che esiste**, e ### **`P-ID` lo VIETA** *(nato nello stesso blocco `1`,
+        # ### per decisione di Luca)*. ### **Quindi la cura TOGLIE una legge invece di
+        # ### aggiungerne una** (`9-ter`), e il collaudo lo MISURA nei due versi.
+        # ### ⚠ **E IL METADATO `omonimo` NON SI TOCCA:** resta la dichiarazione dei
+        # ### significati, che e- ### **un FATTO**, e i `14` significati dichiarati
+        # ### restano quello che `P-ID` legge per rifiutare un ID nuovo.
         if v["stato"] == "DA_CLASSIFICARE" and v["classe"] != "NON_DEFINITA":
             d = (v.get("meta") or {}).get("motivo_dubbio") or ""
             dom(v["id"], "CHE CLASSE, DOMINIO, ERA E STATO? %s"
@@ -1152,7 +1173,7 @@ def da_decidere(voci, reg):
     R = [
          "# CIO' SU CUI L-INDICE ASPETTA LUCA — **un elenco solo, GENERATO**",
          "",
-         "> ### ⛔ **Questo file e' GENERATO da `python csv/indice.py da-decidere`: NON si scrive a mano.** Nel codice ### **non c'e' nessuna lista di ID**: ci sono ### **tre criteri** — la nota che dice *<<da decidere/confermare da Luca>>*, il metadato `omonimo`, e lo stato `DA_CLASSIFICARE` su una voce che ### **non e' un segnaposto.**",
+         "> ### ⛔ **Questo file e' GENERATO da `python csv/indice.py da-decidere`: NON si scrive a mano.** Nel codice ### **non c'e' nessuna lista di ID**: ci sono ### **DUE criteri** — la nota che dice *<<da decidere/confermare da Luca>>* e lo stato `DA_CLASSIFICARE` su una voce che ### **non e' un segnaposto.** ### ⛔ **IL TERZO** *(il metadato `omonimo`)* ### **e' stato TOLTO il 2026-10-10, per decisione di Luca:** gli `11` omonimi ### **restano omonimi dichiarati**, il metadato ### **resta**, e ### **la domanda si chiude** — e quelle due cose insieme vogliono dire che ### **non e' il metadato a generare la domanda.** ### ⭐ **La guardia non si perde: `P-ID` vieta la NASCITA di un omonimo nuovo.**",
          "",
          "| | |",
          "|---|--:|",
@@ -1161,9 +1182,12 @@ def da_decidere(voci, reg):
     R.append("| **domande in tutto** | `%d` |" % sum(len(x) for x in righe.values()))
     R.append("| **segnaposto `NON_DEFINITA`**, che NON sono una domanda | `%d` |" % nd)
     R += ["", "---", ""]
-    gruppi = [("gli OMONIMI -- due nomi e una cosa, e NON si scegli",
-               lambda i: bool((per[i].get("meta") or {}).get("omonimo"))),
-              ("le CLASSIFICAZIONI da confermare",
+    # ### ⚠ **IL GRUPPO <<gli OMONIMI>> E- TOLTO col criterio ②**, e non lo lascio
+    # ### come gruppo VUOTO: ### **un gruppo vuoto in un elenco generato dice <<qui non
+    # ### c-e- niente>>, che e- VERO e FUORVIANTE** -- suggerisce che il criterio guardi
+    # ### ancora. ### **Il criterio non c-e- piu-, e il posto dove e- scritto perche- e-
+    # ### il commento dentro `da_decidere`.**
+    gruppi = [("le CLASSIFICAZIONI da confermare",
                lambda i: any(q.startswith("CONFERMI") for q in righe[i])),
               ("le DOMANDE aperte", lambda i: True)]
     visti = set()
