@@ -11,7 +11,7 @@
 | `FISICA` | `2` | 20 |
 | `FISICA` | `ENTRAMBE` | 17 |
 | `INFRASTRUTTURA` | `1` | 39 |
-| `INFRASTRUTTURA` | `2` | 12 |
+| `INFRASTRUTTURA` | `2` | 13 |
 | `INFRASTRUTTURA` | `ENTRAMBE` | 15 |
 | `METODO` | `1` | 156 |
 | `METODO` | `2` | 9 |
@@ -436,6 +436,7 @@
 | `OSSERVABILE-P1` | DIFETTO | METODO | 1 | ### **CHIUSA** |  | APERTA il 2026-09-26 (rilievo di Luca) / NON ESISTE UNO STRUMENTO UFFICIALE PER  |
 | `P-AB` | PRESIDIO | INFRASTRUTTURA | 2 | ### **AGENDA** |  | un confronto A/B dichiara IL CAMPO UNICO, e i dati portano la versione del forma |
 | `P-ALB` | PRESIDIO | METODO | 2 | ### **AGENDA** |  | l-albero delle scelte: una decisione PRESA con una dipendenza NON PRESA e- rifiu |
+| `P-BARRIERA` | PRESIDIO | INFRASTRUTTURA | 2 | ### **AGENDA** |  | i hook locali sono la barriera: ogni strumento si RIFIUTA di partire se non sono |
 | `P-C1` | PRESIDIO | INFRASTRUTTURA | ENTRAMBE | ### **APERTA** |  | anche i CONTROLLI stanno nell-indice: il codice dichiara l-ID, e la macchina lo  |
 | `P-DECADIMENTO` | STANDARD | FISICA | ENTRAMBE | ### **APERTA** |  | ogni decadimento e una trasformazione: cio che una grandezza perde diventa calor |
 | `P-DET` | PRESIDIO | METODO | 2 | ### **AGENDA** |  | il determinismo: nessun RNG globale, un thread, versioni bloccate, due processi  |

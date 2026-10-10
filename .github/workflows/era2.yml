@@ -93,6 +93,13 @@ jobs:
           python csv/_referto_seconda_parte.py --con-lenti
           git diff --exit-code -- doc/REFERTO_seconda_parte_era2.md
 
+      - name: "### `P-BARRIERA` -- e in CI DEVE TACERE"
+        # ### ⛔ Qui si verifica LA MIA INFERENZA: fuori dal PC la barriera TACE,
+        # ### perche- la- i hook NON SONO ATTIVI e il mandato preso alla lettera
+        # ### ### **farebbe fallire SEMPRE la CI**. ### Se questo passo cade, la mia
+        # ### lettura era sbagliata -- ed e- il posto dove si vede.
+        run: python csv/_barriera.py --collaudo
+
       - name: "### `P-SIM` -- simmetrie simboliche e conservazioni misurate"
         run: python primo_ordine/_collauda_simmetrie.py
 

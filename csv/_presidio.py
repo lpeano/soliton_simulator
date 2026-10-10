@@ -123,4 +123,28 @@ def avvia(percorso, silenzioso=False):
               "         non e' nel repo. Committa lo script, poi rilancia. Per un diagnostico\n"
               "         questo controllo NON blocca: dichiara e prosegue.", flush=True)
         sys.exit(2)
+    # ### ⛔ **LA BARRIERA DEI HOOK, PUNTO `5` DELLA TERZA PARTE.** Sta QUI perche-
+    # ### ### **questo e- il punto d-avvio che OGNI strumento chiama** -- metterla in
+    # ### ogni strumento vorrebbe dire ### **ricordarselo ogni volta**, e il primo che
+    # ### la dimentica ### **non ha nessuna barriera.**
+    # ### ⚠ **E TACE FUORI DAL PC** *(`CI=true`)*, perche- la- non si committa: il
+    # ### mandato preso alla lettera farebbe ### **fallire SEMPRE la CI.** ### **E- una
+    # ### mia inferenza, dichiarata nel docstring di `csv/_barriera.py`.**
+    # ### ⚠ **E SE LA BARRIERA NON SI PUO- NEMMENO CARICARE, si DICE e non si
+    # ### blocca** *(`A8`: un presidio che si schianta non deve fermare in silenzio)*.
+    try:
+        import _barriera
+        _err = _barriera.errori()
+        if _err:
+            print("[BARRIERA] *** RIFIUTO DI GIRARE ***", flush=True)
+            for _x in _err:
+                print("  " + _x, flush=True)
+            print("  ### I hook LOCALI sono la BARRIERA, e la CI e- solo una RETE: senza",
+                  flush=True)
+            print("  ### di loro NIENTE impedisce un commit, e questo strumento non",
+                  flush=True)
+            print("  ### vuole far credere il contrario.", flush=True)
+            sys.exit(3)
+    except ImportError as _e:
+        print("[BARRIERA] NON E- GIRATA (%s): dichiarato, non nascosto" % _e, flush=True)
     return t

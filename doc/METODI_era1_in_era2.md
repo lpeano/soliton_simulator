@@ -8,17 +8,17 @@
 
 | | quanti |
 |---|--:|
-| **`PORTATO`** | `96` |
+| **`PORTATO`** | `97` |
 | **`DA_PORTARE`** | `17` |
 | **`DA_DECIDERE`** | `5` |
 | **`NON_SI_APPLICA`** | `7` |
-| **in tutto** | ### **`125`** |
+| **in tutto** | ### **`126`** |
 
-### ⚠ **E IL NUMERO `125` E- MISURATO, non stimato:** viene dal perimetro che l-indice calcola, e ### **il mandato ne nominava <<una decina>>** per nome piu- *<<e le cure di architettura>>*. ### **La decina era `20`.**
+### ⚠ **E IL NUMERO `126` E- MISURATO, non stimato:** viene dal perimetro che l-indice calcola, e ### **il mandato ne nominava <<una decina>>** per nome piu- *<<e le cure di architettura>>*. ### **La decina era `20`.**
 
 ---
 
-## `PORTATO` — `96` metodi
+## `PORTATO` — `97` metodi
 
 > ### ✅ **GIA- NELL-ERA `2`**, e `dove` dice dove
 
@@ -59,6 +59,7 @@
 | **`MAX-NODI-FERMA`** | `CURA` | una guardia di MEMORIA non cambia la fisica in silenzio: deve FERMARE. ### PORTATO dal punto 1: ogni tipo dichiara la sua FORMA di dominio, e il controllo generato in `stato.py` SOLLEVA -- e il passo lo chiama a OGNI passo, verificato VIA AST | `primo_ordine/stato.py::controlla_domini`, chiamato da `passo.py` |
 | **`P-AB`** | `PRESIDIO` | NATO NELL-ERA 2: un `A`/`B` dichiara IL CAMPO UNICO in cui i bracci differiscono, e se ne differiscono due ### IL CONFRONTO NON PARTE (la lezione di `Z20`: due misure sovrapposte). ### Piu- i dati con la versione del formato e nessun file a meta- | `csv/_confronti_e_dati.py::controlla`, `pre-commit` + CI |
 | **`P-ALB`** | `PRESIDIO` | NATO NELL-ERA 2: l-albero delle scelte ha la sua fonte in `doc/ALBERO_era2.yaml`, i nodi di `decisioni.jsonl` SI GENERANO da li-, e ### UN NODO `presa` CON UNA DIPENDENZA NON `presa` FA FALLIRE `valida`. ### Piu- il ciclo, l-arco rotto, l-etichetta locale usata come id, e un nodo PRESA di cui non si sa l-argomento. ### E- la differenza fra una DIREZIONE DICHIARATA e una DECISIONE PRESA: su `D9` Luca ha dichiarato una direzione e il mandato dice NELLA STESSA FRASE che non e- una decisione presa | `csv/_albero_era2.py::controlla`, dentro `indice.py valida` + `pre-commit` + CI |
+| **`P-BARRIERA`** | `PRESIDIO` | NATO NELL-ERA 2: ogni strumento verifica all-avvio che i hook LOCALI siano attivi (`core.hooksPath`, i due file, LA LORO IMPRONTA) e SI RIFIUTA DI PARTIRE (codice 3). ### Sta in `_presidio.avvia()`, che OGNI strumento chiama: metterla in ognuno vorrebbe dire ricordarsela ogni volta, e il primo che la dimentica non ha nessuna barriera. ### E TACE FUORI DAL PC (`CI=true`): la- non si committa, e il mandato preso alla lettera farebbe FALLIRE SEMPRE la CI -- E- UNA MIA INFERENZA, DICHIARATA. ### E cio- che NON puo- fare: `--no-verify` non e- impedibile in locale, e l-impronta e- in un file TRACCIATO -- non impedisce di cambiare un hook, LO RENDE VISIBILE IN UNA DIFF | `csv/_barriera.py::errori`, dentro `csv/_presidio.py::avvia`; collaudo 11/11 col ramo END-TO-END |
 | **`P-C1`** | `PRESIDIO` | NATO NELL-ERA 2, ed e- il presidio del punto 12(a): il codice dichiara l-ID e la macchina verifica la biiezione, con DUE severita- -- un ID dichiarato e non nell-indice RIFIUTA, una voce PRESIDIO che nessun codice dichiara SEGNALA (A9). ### E HA PRESO SE- STESSO, come P-M1 | `csv/_controlli_nell_indice.py::controlla`, `pre-commit` + CI |
 | **`P-DET`** | `PRESIDIO` | NATO NELL-ERA 2: nessun RNG globale (via AST: 6 usi, 6 `default_rng`, 0 globali), le CINQUE variabili dei thread fissate a 1 E TIMBRATE, e le versioni bloccate in `primo_ordine/versioni.lock`. ### E IL BRACCIO CHE CONTA SONO DUE PROCESSI CON LA STESSA CONFIGURAZIONE: 548 byte IDENTICI. ### Dice cio- che i thread non posso misurare (`threadpoolctl` non c-e-): se due processi danno byte identici, i thread NON stanno rompendo il determinismo | `primo_ordine/determinismo.py::controlla`; collaudo in `primo_ordine/_collauda_determinismo.py` (13/13) |
 | **`P-DIM`** | `PRESIDIO` | NATO NELL-ERA 2: ogni variabile e ogni parametro dichiarano la loro `dimensione`, e il generatore RIFIUTA un-espressione incoerente -- ogni ADDENDO ha la stessa dimensione, un TERMINE di `H` e- `E^1`, un OSSERVATORE dichiara la sua. ### UNA SOLA BASE, `E`, perche- `A16` implica `hbar = 1` e il tempo e- `E^-1`: una base in piu- sarebbe una manopola. ### E la dimensione sta SULLA VARIABILE, non sul tipo -- al contrario del dominio, perche- due `reale_nodo` possono essere un-energia e un tempo | `primo_ordine/leggi/schema.py::dimensioni_incoerenti`, dentro `valida_legge`; collaudi 34/34 e 24/24 col ramo END-TO-END |

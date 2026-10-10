@@ -581,6 +581,18 @@ METODI['P-E9'] = (
 METODI['P-AB'] = (
     'NATO NELL-ERA 2: un `A`/`B` dichiara IL CAMPO UNICO in cui i bracci differiscono, e se ne differiscono due ### IL CONFRONTO NON PARTE (la lezione di `Z20`: due misure sovrapposte). ### Piu- i dati con la versione del formato e nessun file a meta-',
     '`csv/_confronti_e_dati.py::controlla`, `pre-commit` + CI', "PORTATO")
+METODI['P-BARRIERA'] = (
+    "NATO NELL-ERA 2: ogni strumento verifica all-avvio che i hook LOCALI siano attivi "
+    "(`core.hooksPath`, i due file, LA LORO IMPRONTA) e SI RIFIUTA DI PARTIRE (codice 3). "
+    "### Sta in `_presidio.avvia()`, che OGNI strumento chiama: metterla in ognuno "
+    "vorrebbe dire ricordarsela ogni volta, e il primo che la dimentica non ha nessuna "
+    "barriera. ### E TACE FUORI DAL PC (`CI=true`): la- non si committa, e il mandato "
+    "preso alla lettera farebbe FALLIRE SEMPRE la CI -- E- UNA MIA INFERENZA, "
+    "DICHIARATA. ### E cio- che NON puo- fare: `--no-verify` non e- impedibile in "
+    "locale, e l-impronta e- in un file TRACCIATO -- non impedisce di cambiare un hook, "
+    "LO RENDE VISIBILE IN UNA DIFF",
+    "`csv/_barriera.py::errori`, dentro `csv/_presidio.py::avvia`; collaudo 11/11 col "
+    "ramo END-TO-END", "PORTATO")
 METODI['P-SIM'] = (
     "NATO NELL-ERA 2: ogni termine dichiara le `simmetrie` (almeno `U1-FASE-GLOBALE`) e "
     "cio- che `conserva`; il generatore verifica le simmetrie SIMBOLICAMENTE (la "

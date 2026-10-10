@@ -11865,3 +11865,21 @@ Ogni dato di `db_era2/` ha ### **il suo TIMBRO accanto**, col campo `versione_da
 ### ⚠ **E `PROVA-LOCALE` NON DICHIARA `SCAMBIO-DEI-CAPI`, e non e- una dimenticanza: e- un termine di NODO.** ### **Il presidio lo rifiuterebbe**, ed e- scritto nella tabella accanto alla riga.
 
 ### ⛔ **E CIO- CHE QUESTO PUNTO NON DICE: le tre leggi sono di PROVA.** Una simmetria verificata su `PROVA-HOPPING` ### **non dice niente sulla fisica** — dice che ### **la macchina funziona.** ### **Il referto lo scrivera- cosi-.**
+
+## PUNTO `5`: I HOOK SONO LA BARRIERA — ### **e il mandato preso alla lettera avrebbe ROTTO LA CI** *(2026-10-10)*
+
+### ⭐ **LA TRAPPOLA `(a)` DEL MIO TASK HISTORY ERA GIUSTA, e l-avevo scritta PRIMA di toccare niente.** Il mandato dice che ogni strumento *«verifica all-avvio che i hook siano ATTIVI … e ### **si RIFIUTA di partire** se non lo sono»*. ### ⛔ **Ma nella CI i hook NON SONO ATTIVI** — `core.hooksPath` non e- impostato in un `checkout` pulito — ### **quindi ogni strumento si rifiuterebbe di partire e la CI fallirebbe SEMPRE.** ### ✅ **La barriera TACE fuori dal PC** *(`CI=true`, che GitHub dichiara da se-)*, ### **e lo DICHIARO come mia inferenza: il mandato non lo dice.**
+
+### 📌 **E STA IN `csv/_presidio.py::avvia()`, che OGNI strumento chiama.** ### ⭐ **Metterla in ognuno vorrebbe dire ricordarsela ogni volta, e il primo che la dimentica NON HA NESSUNA BARRIERA.**
+
+### 📌 **QUATTRO COSE CHE GUARDA:** `core.hooksPath` ### **FERMA** · i due hook presenti ### **FERMA** · ### **la loro IMPRONTA** ### **FERMA** · le copie rimaste in `.git/hooks/` ### **SEGNALA** *(non girano piu-: `core.hooksPath` sostituisce quella cartella, e due verita- sono peggio di una)*.
+
+### ⭐ **E L-IMPRONTA SERVE A UNA COSA PRECISA: un hook SOSTITUITO DA UN GUSCIO VUOTO c-e- e non fa niente.** ### **Senza l-impronta, la barriera guarderebbe solo che il FILE CI SIA.**
+
+### ⛔ **E DUE COSE CHE QUESTA BARRIERA NON PUO- FARE, dette nel suo docstring e non in fondo a un referto.** ### **(1) `git commit --no-verify` NON E- IMPEDIBILE IN LOCALE:** nessun hook gira, e ### **nessuno strumento puo- accorgersene, perche- non viene chiamato.** ### **Quello lo trova la CI, che appunto non impedisce: FA VEDERE.** ### **(2) L-impronta sta in un file TRACCIATO**, quindi chi cambia un hook puo- cambiare anche lei: ### ⛔ **la barriera NON impedisce quella mossa, LA RENDE VISIBILE IN UNA DIFF.**
+
+### ⭐ **E la differenza fra <<impedire>> e <<rendere visibile>> e- esattamente cio- che `A9` chiede di non confondere — ed e- la STESSA CORREZIONE CHE LUCA MI HA FATTO SULLA CI.** ### **Due volte lo stesso errore sarebbe stato troppo.**
+
+### 📌 **Collaudo `11` su `11`**, col ramo ### **END-TO-END** che fa girare ### **uno strumento vero** con `core.hooksPath` sbagliato e pretende il ### **codice `3`.** ### ✅ **E rimette la configurazione di git in un `finally`, VERIFICANDOLA:** ### **un collaudo che lascia `core.hooksPath` storto SPEGNEREBBE LA BARRIERA CHE STA COLLAUDANDO.**
+
+### ⚠ **E UNA COSA DA SAPERE SULL-ORDINE: questo hook COLLAUDA SE STESSO.** Ho dovuto ### **aggiungere la riga al `pre-commit` PRIMA** di scrivere il `.lock`, altrimenti avrei dichiarato l-impronta ### **di un file che stavo per cambiare.** ### **D-ora in poi: si cambia un hook, poi `python csv/_barriera.py --scrivi`, e la diff del `.lock` lo mostra.**
