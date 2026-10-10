@@ -12889,3 +12889,13 @@ Ogni dato di `db_era2/` ha ### **il suo TIMBRO accanto**, col campo `versione_da
 ### ⛔ **E QUI NON C-E- FORMA CHIUSA, a differenza del `v3`:** `S` e- ### **una SOMMA**, quindi ruotare un-estremita- ### **cambia `S`** e con lui il generatore. ### ✅ **Percio- PUNTO MEDIO IMPLICITO per nodo** — locale, simmetrico, e ### **con la norma ESATTA per una ragione**: il campo e- `-i A(psi_m) psi_m` con ### **`A` hermitiana** *(`h^S = psi^dag M psi` con `M_ab = (sigma.n_a + sigma.n_b)/2`)*. ### **Misurato: norme `0`, e il ritorno avanti-indietro `0`.**
 
 ### ⚠ **E UN DIFETTO MIO, nello strumento e non nella fisica:** nei miei script di patch gli ### **`ok` si stampano PRIMA della scrittura**, che e- ### **l-ultima riga** — quindi quando un passo successivo fallisce, ### **un `ok` gia- stampato NON vuol dire <<applicato>>.** ### ⛔ **Mi e- costato un numero sbagliato in un braccio** *(<<`4` file guardati>> dove erano `5`)*, e l-ho visto ### **perche- il braccio stampa il numero** invece di dire solo <<passa>>.
+
+## ✅ **IN CODA: LE LETTURE <<GUSCIO>> E <<MOTO COLLETTIVO>>, E IL CONTROLLO DI IDEMPOTENZA FATTO PER PRIMO** *(2026-10-11)*
+
+### 📌 **IL MANDATO DICE DUE COSE CHE DECIDONO QUANDO:** *«se `v3` non e- ancora concluso, ### **aspetta che lo sia**: queste letture partono dallo stato `v3` FINALE»*, e *«prima di tutto controlla se `G1` e `G2` esistono gia-»*. ### ✅ **Il `v3` NON e- concluso** *(mancano le letture e il referto)*, quindi va ### **in coda** — ed e- la voce ⑤.
+
+### ✅ **E IL CONTROLLO DI IDEMPOTENZA L-HO FATTO PER PRIMO, come chiede:** ### **`G1` e `G2` NON esistono** — `0` occorrenze nel task history, e in `uscite/` ci sono `letture.json`, `letture_v2.json` e `spettro.json` ma ### **non `letture_guscio_moto.json`.** ### **Quindi si fanno**, e non c-e- niente da <<registrare come gia- fatto>>.
+
+### ⭐ **E I SEI ID CHE IL MANDATO CITA ESISTONO TUTTI** *(verificato, non assunto)*: `GUSCIO-ANTIFASE-EMERGENTE`, `D33`, `Z79`, `Z80`, `Z111`, `FASE-TRASCINAMENTO-3D`.
+
+### ⭐ **E IL VINCOLO CHE PESA PIU- DELLE LETTURE E- IL `V4`:** *«ogni confronto di fase fra nodi diversi si fa TRASPORTANDO lungo un cammino dichiarato; se ce n-e- piu- d-uno, riportare tutti e la loro dispersione, perche- l-olonomia dei cicli conta»*. ### ✅ **E il `v2` lo ha gia- PAGATO:** il braccio `G!` misura che ### **senza trasportare correttamente la densita- cambia di `1.2e-2`** — quindi ### **`V4` non e- una cautela: e- una cosa gia- misurata.**
