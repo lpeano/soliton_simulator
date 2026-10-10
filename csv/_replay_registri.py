@@ -41,6 +41,11 @@ RADICE = os.path.dirname(_QUI)
 sys.path.insert(0, _QUI)
 
 NL = chr(10)
+
+# ### ✅ **I CAMPI AGGIUNTI DALLA MIGRAZIONE DEL `2026-10-10`, col loro DEFAULT.**
+# ### ⚠ **Una riga di storico scritta PRIMA non li ha**, e quello non e- un difetto
+# ### della riga: e- ### **il momento in cui e- stata scritta.**
+NUOVI_MIGRAZIONE = {"priorita": "", "dipende_da": [], "sblocca": []}
 D = os.path.join(RADICE, "doc", "indice")
 
 PRESIDIO = "P-T2"
@@ -218,15 +223,32 @@ def replay(nome):
         # ### Senza il confronto dei campi si prenderebbe la riga di quando quell-ID
         # ### era ### **un-altra cosa** -- ed e- il difetto che `34` errori hanno
         # ### mostrato al primo giro.
+        # ### ⛔ **E I CAMPI AGGIUNTI DA UNA MIGRAZIONE NON ROMPONO IL CONFRONTO,
+        # ### dal `2026-10-10`.** ### ⚠ **IL DIFETTO, e l-ha preso IL BRACCIO CHE
+        # ### DEVE FALLIRE:** la migrazione dei tre campi nuovi *(`priorita`,
+        # ### `dipende_da`, `sblocca`)* ha portato ogni record a ### **`24` chiavi**,
+        # ### mentre le righe di storico vecchie ne hanno ### **`21`** -- e con
+        # ### ### **`set(dopo) == set(rec)`** non si trovava ### **nessun candidato**,
+        # ### quindi ### **OGNI VOCE VENIVA SALTATA.**
+        # ### ⭐ **Un presidio che SALTA tutto PASSA**, e questo l-aveva spento in
+        # ### silenzio: ### **se il braccio che deve fallire non ci fosse, non lo
+        # ### saprebbe nessuno.**
+        # ### ✅ **Ora il candidato va bene se gli manca SOLO un campo nuovo**, e il
+        # ### confronto legge ### **il DEFAULT** dove il campo non c-era -- cosi- un
+        # ### valore ### **diverso dal default** si vede ancora.
         cand = [r for r in righe
-                if r.get("id") == k and set(r["dopo"]) == set(rec)]
+                if r.get("id") == k
+                and not (set(r["dopo"]) - set(rec))
+                and not (set(rec) - set(r["dopo"]) - set(NUOVI_MIGRAZIONE))]
         if not cand:
             continue
         riga = cand[-1]
         dopo = riga["dopo"]
         campi = set(dopo) & set(rec)
+        campi = campi | (set(rec) & set(NUOVI_MIGRAZIONE))
         diversi = sorted(c for c in campi
-                         if c not in ("aggiornata",) and dopo.get(c) != rec.get(c))
+                         if c not in ("aggiornata",)
+                         and dopo.get(c, NUOVI_MIGRAZIONE.get(c)) != rec.get(c))
         if diversi:
             err.append("`P-T2` `%s` `%s`: NON coincide col `dopo` della sua ultima riga "
                        "di storico, e differisce in %s. ### Quel campo NON E- ARRIVATO "

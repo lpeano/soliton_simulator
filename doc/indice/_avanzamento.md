@@ -126,3 +126,29 @@ stato     SOSPESA=369  DA_CLASSIFICARE=188  CHIUSA=182  APERTA=82  AGENDA=24  SU
 ### ⚠ **E QUEL CHE RESTA APERTO E- SCRITTO nella sezione `5.` del referto:** le due decisioni di fisica, il buco di `H-FISICA-FUORI-LISTA`, `metadati.jsonl` come ### **reperto per necessita-**, la CI ### **mai osservata girare**, e il ### **budget del `pre-commit`** — che e- il punto `6` della TERZA parte.
 
 ### ➡ **PROSSIMO: il mandato `2` di `6`** — *le decisioni di Luca sulle `43` domande*.
+
+---
+
+## ✅ **LA CODA DEL `2026-10-10` E- FINITA** — *### **DODICI mandati**, e il quadro e- questo*
+
+| il mandato | esito |
+|---|---|
+| le ### **cinque voci** della coda del `2026-10-09` | ### ✅ **chiuse** *(`26` commit)* |
+| le ### **correzioni** della coda `+` le quattro regole di Luca | ### ✅ **`5` punti su `5`**, e la verifica su clone pulito e- ### **verde nei due ambienti** |
+| `Z47` da ### **CHIUSA** a ### **SUPERATA** | ### ✅ **`5` passi su `5`**, ogni fatto verificato con `git show` |
+| il `pre-commit` valida ### **lo STAGE** e non il disco | ### ✅ **`3` punti su `3`**, e la suite ### **lascia l-albero come l-ha trovato** |
+| le ### **sei decisioni** di fisica | ### ✅ **`6` su `6`** — con ### **DUE differenze** dall-albero, scritte e non corrette |
+| le ### **domande aperte** diventano voci | ### ✅ **`4` punti su `4`**: tre campi, il ciclo che blocca, `prossima`, e la lista |
+| la ### **camminata a moneta** | ### ✅ **`6` punti su `7`**; il punto `4` ### **non si puo- eseguire**, e il motivo e- registrato |
+| le ### **memorie** e il ### **disegno `3D`** | ### ✅ **`3` su `3`** |
+| il ### **tempo proprio locale** e la ### **`cs` locale** | ### ✅ **`8` punti su `8`** |
+
+### ⛔ **E UNA DECISIONE DI LUCA FERMA TRE PUNTI DI DUE MANDATI, e- UNA SOLA, ed e- QUESTA:** ### **il VUOTO LOCALE viene PRIMA o DOPO `D9`?**
+
+> ### ✅ **Se PRIMA** — come dice il punto `6` delle sei decisioni — la catena dell-albero va girata, e si sbloccano ### **il punto `4` della camminata** *(il vuoto locale da proposta a decisione)*, ### **il punto `1` delle sei** *(la divisione, che aspetta `D6`)*, e ### **la domanda `VUOTO-LOCALE-DETERMINISTICO`** della lista.
+> ### ⛔ **Se DOPO**, quei due punti vanno riscritti.
+>
+> ### ⚠ **L-albero dice `D9` → `D13` → `D6` → `D7`**, cioe- ### **il vuoto TERZO**; e ### **l-albero vince**, come Luca ha scritto ### **cinque volte** in questa coda. ### **Quindi la differenza e- SCRITTA e la catena NON e- stata toccata.**
+
+### ➡ **E LA PROSSIMA DOMANDA DELLA LISTA LA DICE IL COMANDO:** `python csv/indice.py prossima` — oggi ### **[[DOMANDA-QUANTITA-CONSERVATA]]: esiste una moneta isotropa, causale e simmetrica fra le bande con una quantita- conservata?** ### **Aperte `11`, di cui pronte `5`.**
+

@@ -12419,3 +12419,13 @@ Ogni dato di `db_era2/` ha ### **il suo TIMBRO accanto**, col campo `versione_da
 ### ✅ **E IL PROTOTIPO PRENDE DUE BRACCI IN PIU-:** con ### **`r_k = 1` e `cs_k = 1` ovunque** il risultato ### **coincide col `dt` globale AL BIT** *(il controllo che dice che il tempo proprio non ha cambiato niente dove non doveva)*; e ### **il GAUGE** — moltiplicare tutti gli `r_k` per una costante ### **lascia la fisica identica a meno della scala del tempo.** ### ⛔ **E se non la lascia identica, la dipendenza da un fattore comune E- un riferimento esterno**, cioe- cio- che `A17` vieta.
 
 ### 📌 **E `CS-LAMBDA-GLOBALE` NON SI CHIUDE, perche- il mandato lo dice esplicitamente:** si ANNOTA che la decisione sul vuoto locale ne da- la cura, e ### **si chiude quando la legge esiste ED E- MISURATA.**
+
+## ⛔ **LA MIGRAZIONE DEI TRE CAMPI AVEVA SPENTO `P-T2` IN SILENZIO** — ### **e l-ha preso IL BRACCIO CHE DEVE FALLIRE** *(2026-10-10)*
+
+### 📌 **LA VERIFICA SU CLONE PULITO L-HA MOSTRATO:** `valida` ### **codice `0`** nei due ambienti, ma `collauda.py` ### **codice `1`**, con ### **DUE collaudi rossi** — e ### **una causa sola.**
+
+### ⭐ **LA CAUSA:** `replay()` cerca la riga di storico ### **col MEDESIMO INSIEME DI CAMPI** del record *(`set(dopo) == set(rec)`)*, e la mia migrazione ha portato ogni voce a ### **`24` chiavi** mentre le righe vecchie ne hanno ### **`21`.** ### ⛔ **Quindi NESSUN candidato, e OGNI VOCE VENIVA SALTATA.**
+
+### ⚠ **E UN PRESIDIO CHE SALTA TUTTO PASSA:** il collaudo sarebbe rimasto verde sul verso sano. ### ✅ **L-ha preso IL BRACCIO CHE DEVE FALLIRE** *(«un `titolo` toccato a mano»)*, ### **che e- l-unica cosa che distingue un presidio vivo da uno spento.** ### 📌 **E- `P1-sexies` misurato sul campo: il caso che deve fallire e- il piu- importante.**
+
+### ✅ **LA CURA, della stessa forma di quella su `PI-REPLAY`:** un candidato va bene ### **se gli manca SOLO un campo della migrazione**, e il confronto legge ### **il DEFAULT** dove il campo non c-era — cosi- ### **un valore diverso dal default si vede ancora.** ### **`P-T2`: `27` su `27`.**
