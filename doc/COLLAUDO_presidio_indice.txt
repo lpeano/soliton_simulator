@@ -2,7 +2,7 @@
 COLLAUDO DEL PRESIDIO DELL'INDICE -- i DUE versi   (2026-09-26)
 ================================================================================================
 
-  indice: 816 fra id e alias      esclusi: 61      forme nude AMBIGUE: 0
+  indice: 974 fra id e alias      esclusi: 118      forme nude AMBIGUE: 0
 
   sentinelle scelte ORA e verificate ignote: `QX700`, `QX701`
 
@@ -13,13 +13,32 @@ COLLAUDO DEL PRESIDIO DELL'INDICE -- i DUE versi   (2026-09-26)
   DEVE FALLIRE  una seconda sentinella: `QX701`            -> RIFIUTA  PASS
                   ignoti: QX701
 
-  END-TO-END NON ESEGUITO: c'erano modifiche in STAGE, e non le tocco.
-    (lo dichiaro invece di dare per buono un ramo che non ho provato.)
+------------------------------------------------------------------------------------------------
+`estendi`: IL MATCH SI ALLUNGA FINO AL PIU- LUNGO ID NOTO   (cura del 2026-10-10)
+------------------------------------------------------------------------------------------------
+  ogni ID DELL-INDICE si legge intero: 0 NON letti su 887
+  ### e il collaudo ha MATERIA: 33 ID hanno la forma <lettera><cifre>-<PAROLE>, che era ESATTAMENTE quella che si spezzava
+  NON deve scattare  ogni ID dell-indice si legge INTERO                  PASS
+                     ### prima della cura ne mancavano 122 su 887, e H-INDICE verificava IL PREFISSO
+  NON deve scattare  un INTERVALLO col trattino: `A1-A2b`                 PASS
+                     ### e- il motivo per cui RIORDINARE LE ALTERNATIVE NON BASTAVA: diventerebbe un ID
+  ### DEVE scattare  un ID SBAGLIATO col prefisso NOTO: `A1-QX700`        PASS
+                     ### E- IL BUCO CHE SI CHIUDE: prima `A1` era noto e la coda SPARIVA
+  ### DEVE scattare  e lo scatto nomina l-ID INTERO, non il prefisso      PASS
+                     ### un presidio che accusa il PREFISSO manda a cercare la cosa sbagliata
+  NON deve scattare  lo stem di UNA lettera, ammesso il 2026-09-26        PASS
+                     ### `L-DOPO-STOP` era letto `DOPO-STOP`: 2 falsi ignoti su 6, e la cura NON lo rompe
 
-  PUNTO 3 NON ESEGUITO: c'erano modifiche in STAGE, e non le tocco.
-    (lo dichiaro invece di dare per buono un ramo che non ho provato.)
+  DEVE FALLIRE  il HOOK VERO su una riga con `QX700`      -> uscita 1, ID segnalato True
+                il documento e' tornato identico: True
+                esito: PASS
 
-  ESITO: 4/4 PASS -- il presidio IMPEDISCE e non solo avvisa
+  PUNTO 3, NEI DUE VERSI (sentinella `QX700`):
+    DEVE FALLIRE  l'ID nuovo SOLO in `STATO_RUN` -> uscita 1, segnalato True   PASS
+    DEVE PASSARE  lo stesso ID **con la RIGA nell'indice** -> uscita 0   PASS
+    i due documenti sono tornati identici (sha1): True   PASS
+
+  ESITO: 13/13 PASS -- il presidio IMPEDISCE e non solo avvisa
 
 COSA QUESTO COLLAUDO *NON* DICE:
   - **non dice che l'indice sia completo**: dice che un ID FUORI dall'indice viene

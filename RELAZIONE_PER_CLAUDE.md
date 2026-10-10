@@ -11645,3 +11645,19 @@ Ogni dato di `db_era2/` ha ### **il suo TIMBRO accanto**, col campo `versione_da
 ### ⚠ **E IL GRUPPO <<gli OMONIMI>> DEL GENERATO NON L-HO LASCIATO VUOTO:** ### **un gruppo vuoto in un elenco generato dice <<qui non c-e- niente>>, che e- VERO e FUORVIANTE** — suggerisce che il criterio guardi ancora. ### **E- tolto, e il posto dove e- scritto perche- e- il commento dentro `da_decidere`.**
 
 ### ✅ **E ADESSO L-ELENCO E- QUELLO CHE AVEVO FISSATO COME LETTURA, PRIMA DI GUARDARE:** ### **`4` voci, `4` domande** — `DEC-NASCITA-PSI`, `DEC-REGOLA-FORMA` *(le mie due di fisica)*, e ### **`DEC-Z47-TRANSIZIONE` + `Z47`**, che sono ### **una domanda sola in due righe.** ### ⛔ **Non e- VUOTO, e il mandato chiedeva che lo fosse: la ragione e- scritta, non aggirata.**
+
+## `H-INDICE` VERIFICAVA IL PREFISSO INVECE DELL-ID — ### **`122` su `887`, e il difetto era MUTO** *(2026-10-10)*
+
+### ⛔ **E NON L-HO TROVATO RILEGGENDO: `H-INDICE` MI HA RIFIUTATO UN COMMIT.** Cercava `BOOLEANI-CRESCIUTI`, che non esiste — la ### **coda** della voce `P5-BOOLEANI-CRESCIUTI` che avevo appena creato. ### ⭐ **E quella voce ha fatto scattare il difetto per CASO: la sua coda AVEVA un trattino, quindi matchava la terza alternativa della regex.** ### **Gli altri `122` non ce l-hanno, e per questo il difetto era MUTO.**
+
+### **CHE COSA FACEVA, esattamente.** `FORMA` e- un-alternanza, e ### **Python prova le alternative IN ORDINE**: su `A1-COSTANTI` la prima *(`[A-Z]\d{1,3}[a-z]?`)* matcha ### **`A1`** e ### **VINCE**, prima che la forma lunga venga provata. ### ⚠ **E poi `COSTANTI` non matcha NESSUNA alternativa** *(non ha cifre, non ha trattini)*: ### **viene buttato in silenzio.** ### ⛔ **Quindi `H-INDICE` verificava IL PREFISSO invece dell-ID, e una citazione sbagliata come `A1-PIPPO` PASSAVA:** `A1` e- noto, `PIPPO` spariva. ### **E- un presidio che non impediva cio- che dichiara** *(`A9`)*.
+
+### ⚠ **E `P-ID` NON LO VEDE: confronta l-UGUAGLIANZA, non il PREFISSO.** Il presidio che Luca ha ordinato ieri impedisce a un ID nuovo di ### **coincidere** con uno esistente, ### **non di COMINCIARE con uno esistente** — e quello e- il caso che rompe l-estrattore.
+
+### ⛔ **E RIORDINARE LE ALTERNATIVE NON BASTAVA, ed e- MISURATO:** un ### **intervallo** scritto col trattino — ### **`A1-A7b`, che il mandato delle `43` domande USA** — diventerebbe ### **un ID solo, `A1-A7`, che non esiste.** ### ⭐ **La forma lunga DA SOLA non sa distinguere un ID da un intervallo: serve L-INSIEME DEI NOTI.**
+
+### ✅ **LA CURA, in tre righe:** `estendi()` allunga il match al ### **piu- lungo ID NOTO** che comincia li-; se nessun prefisso piu- lungo e- noto ### **e la coda dopo il trattino e- essa stessa un ID noto**, allora e- un ### **intervallo** e si tiene il comportamento di prima; altrimenti si restituisce ### **il candidato LUNGO INTERO come ignoto** — ed e- il buco che si chiude.
+
+### 📌 **I NUMERI, prima e dopo.** ID non letti interi: ### **`122` su `887` → `0`.** `A1-A7b`: ### **resta un intervallo.** `A1-QX700`: ### **adesso si VEDE**, e lo scatto ### **nomina l-ID intero, non il prefisso** — perche- un presidio che accusa il prefisso ### **manda a cercare la cosa sbagliata.** `L-DOPO-STOP`: ### **non si rompe** *(era il falso-ignoto curato il 2026-09-26, `2` su `6`)*. ### **Il collaudo: `8` bracci → `13`, tutti passati, col ramo end-to-end ESEGUITO.**
+
+### ⚠ **E LA VOCE SI APRE `APERTA`, NON `CHIUSA`:** una `chiusura` deve citare ### **il commit che ha chiuso**, e ### **quel commit non esiste ancora mentre lo sto scrivendo.** ### **La chiusura e- il commit immediatamente successivo, col numero vero.**

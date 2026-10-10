@@ -70,6 +70,49 @@ FORMA = re.compile(r"(?:[A-Z]\d{1,3}[a-z]?|STANDARD\s+[0-9①-⑳]+"
                    r"|[A-Z][A-Z0-9]*(?:-[A-Z0-9()/]+)+|[A-Z]{2,}\d{1,3})")
 
 
+# ### ⛔ **IL DIFETTO, MISURATO il 2026-10-10: `122` ID SU `887` NON ERANO LETTI
+# ### INTERI.** `FORMA` e- un-alternanza, e ### **Python prova le alternative IN
+# ### ORDINE**: su `A1-COSTANTI` la prima (`[A-Z]\d{1,3}[a-z]?`) matcha ### **`A1`** e
+# ### ### **VINCE**, prima che la forma lunga venga provata. ### ⚠ **E poi `COSTANTI`
+# ### NON matcha NESSUNA alternativa** *(non ha cifre, non ha trattini)*: ### **viene
+# ### BUTTATO IN SILENZIO.**
+# ### ⭐ **QUINDI `H-INDICE` VERIFICAVA IL PREFISSO INVECE DELL-ID**, per `122` ID --
+# ### e una citazione sbagliata come `A1-PIPPO` ### **passava**: `A1` e- noto e `PIPPO`
+# ### spariva. ### **E- un presidio che non impediva cio- che dichiara** (`A9`).
+# ### ⚠ **PERCHE- NON BASTA RIORDINARE LE ALTERNATIVE:** MISURATO -- un INTERVALLO
+# ### scritto col trattino *(`A1-A7b`, che il mandato delle `43` usa)* diventerebbe
+# ### ### **un ID solo, `A1-A7`, che non esiste.** ### **La forma lunga da sola non sa
+# ### distinguere un ID da un intervallo: SERVE L-INSIEME DEI NOTI.**
+_LUNGO = re.compile(r"[A-Z][A-Za-z0-9]*(?:[-:][A-Za-z0-9()/_]+)*")
+
+
+def estendi(testo, base, inizio, noti):
+    """### `(token, dove_riprendere)`: il ### **piu- lungo ID NOTO** che comincia a `inizio`.
+
+    ### ⭐ **LA REGOLA, in tre righe:**
+
+      * se un ### **prefisso piu- lungo di `base`** e- un ID ### **NOTO**, vince quello --
+        e cosi- `A1-COSTANTI` si legge ### **intero**;
+      * se no, e la parte dopo il primo trattino e- ### **essa stessa un ID noto**, allora
+        e- ### **un INTERVALLO** *(`A1-A7b`)*: si tiene `base` e si riprende subito dopo,
+        ### **che e- il comportamento di prima**;
+      * se no, si restituisce ### **il candidato LUNGO INTERO come ignoto** -- ed e- il
+        buco che si chiude: ### **`A1-PIPPO` adesso si vede.**
+    """
+    g = _LUNGO.match(testo, inizio)
+    cand = g.group(0) if g else base
+    if len(cand) > len(base):
+        for k in range(len(cand), len(base), -1):
+            if cand[:k] in noti:
+                return cand[:k], inizio + k
+        coda = cand[len(base):].lstrip("-:")
+        primo = re.match(r"[A-Z][A-Za-z0-9]*", coda)
+        if primo and primo.group(0) in noti:
+            return base, inizio + len(base)          # ### un INTERVALLO
+        return cand, inizio + len(cand)              # ### un IGNOTO, INTERO
+    return base, inizio + len(base)
+
+
 def carica():
     """`(noti, esclusi, ambigue)`: gli id e gli alias, le forme escluse, le forme nude ambigue."""
     noti, ambigue = set(), set()
@@ -122,8 +165,17 @@ def esamina(testo):
     """Gli ID di un testo, divisi in `(ignoti, ambigui)`."""
     noti, escl, amb = carica()
     ign, ambi = set(), set()
-    for m in FORMA.finditer(testo or ""):
-        t = _ripulisci(m.group(0))
+    # ### ⛔ **NON `finditer`: si scorre A MANO**, perche- ogni match ### **si estende
+    # ### al piu- lungo ID NOTO** e la scansione deve ### **riprendere da dopo cio- che si
+    # ### e- consumato** -- altrimenti la coda di `A1-COSTANTI` si rileggerebbe da sola.
+    testo = testo or ""
+    pos = 0
+    while True:
+        m = FORMA.search(testo, pos)
+        if not m:
+            break
+        tok, pos = estendi(testo, m.group(0), m.start(), noti)
+        t = _ripulisci(tok)
         if not t:
             continue
         if t in noti or t in escl:
@@ -245,6 +297,51 @@ def collaudo():
           % (atteso, che, "passa" if passa else "RIFIUTA", "PASS" if ok else "FAIL"))
         if ign:
             P("                  ignoti: %s" % ", ".join(ign[:6]))
+    P()
+    # ================================================================================
+    #   ### ⭐ **I BRACCI DI `estendi` -- la cura del 2026-10-10, nei DUE VERSI**
+    # ================================================================================
+    P("-" * 96)
+    P("`estendi`: IL MATCH SI ALLUNGA FINO AL PIU- LUNGO ID NOTO   (cura del 2026-10-10)")
+    P("-" * 96)
+    import json as _json
+    _vv = [_json.loads(x) for x in io.open(
+        os.path.join(RADICE, "doc", "indice", "voci.jsonl"),
+        encoding="utf-8").read().split(NL) if x.strip()]
+    _rotti = [v["id"] for v in _vv if any(esamina(v["id"]))]
+    _lunghi = [v["id"] for v in _vv if "-" in v["id"] and re.match(r"^[A-Z]\d", v["id"])]
+    P("  ogni ID DELL-INDICE si legge intero: %d NON letti su %d"
+      % (len(_rotti), len(_vv)))
+    P("  ### e il collaudo ha MATERIA: %d ID hanno la forma <lettera><cifre>-<PAROLE>, "
+      "che era ESATTAMENTE quella che si spezzava" % len(_lunghi))
+    # ### ⚠ **L-INTERVALLO si costruisce DAI NOTI, non a mano:** un caso scritto a
+    # ### mano puo- smettere di essere un intervallo se un ID cambia.
+    _a = sorted(x for x in noti if re.fullmatch(r"A\d", x))[:1]
+    _b = sorted(x for x in noti if re.fullmatch(r"A\d[a-z]", x))[:1]
+    _interv = ("%s-%s" % (_a[0], _b[0])) if (_a and _b) else None
+    _sbagliato = "%s-%s" % (_a[0], _sent) if _a else None
+    _bracci = [
+        ("NON deve scattare", "ogni ID dell-indice si legge INTERO",
+         len(_rotti) == 0,
+         "### prima della cura ne mancavano 122 su 887, e H-INDICE verificava IL PREFISSO"),
+        ("NON deve scattare", "un INTERVALLO col trattino: `%s`" % _interv,
+         _interv is not None and not any(esamina(_interv)),
+         "### e- il motivo per cui RIORDINARE LE ALTERNATIVE NON BASTAVA: diventerebbe un ID"),
+        ("### DEVE scattare", "un ID SBAGLIATO col prefisso NOTO: `%s`" % _sbagliato,
+         _sbagliato is not None and _sbagliato in esamina(_sbagliato)[0],
+         "### E- IL BUCO CHE SI CHIUDE: prima `%s` era noto e la coda SPARIVA"
+         % (_a[0] if _a else "A1")),
+        ("### DEVE scattare", "e lo scatto nomina l-ID INTERO, non il prefisso",
+         _sbagliato is not None and (_a[0] not in esamina(_sbagliato)[0]),
+         "### un presidio che accusa il PREFISSO manda a cercare la cosa sbagliata"),
+        ("NON deve scattare", "lo stem di UNA lettera, ammesso il 2026-09-26",
+         not any(esamina("L-DOPO-STOP")),
+         "### `L-DOPO-STOP` era letto `DOPO-STOP`: 2 falsi ignoti su 6, e la cura NON lo rompe"),
+    ]
+    for atteso, che, ok, nota in _bracci:
+        esiti.append(ok)
+        P("  %-18s %-52s %s" % (atteso, che, "PASS" if ok else "### FAIL"))
+        P("                     %s" % nota)
     P()
     # ---------------------------------------------------------------- il ramo END-TO-END
     #   Provare la FUNZIONE non prova il HOOK: fra i due c'e' `git diff --cached`, ed e' la' che un
