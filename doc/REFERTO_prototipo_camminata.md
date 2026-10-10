@@ -71,6 +71,24 @@ un fattore comune **CAMBIA** lo stato: `c=0.5` -> **0.204**, `c=2` -> **0.159**,
 | **[[TEMPO-PROPRIO-LOCALE]]** | la lettura `7` **conferma la correzione del punto `0`**: un fattore comune sugli `r_k` cambia lo stato di **`0.16`-`0.20`**, contro un arrotondamento di **`8e-14`** | non dicono **da dove viene `r_k`**: resta la domanda aperta, e adesso ### **con il vincolo in piu- della SCALA ASSOLUTA** |
 | **[[DOMANDA-FORME-VUOTO]]** e la divisione del lavoro | ### ⛔ **NIENTE: questo prototipo non le ha toccate**, e dirlo e- parte del referto | il vuoto locale non e- implementato: ### **`cs_k = 1` ovunque**, dichiarato |
 
+## ⛔ **ANNOTAZIONE DEL 2026-10-10 — LA LETTURA DEL GUARDIANO: IL `v1` E- DUE CAMMINATE SCALARI**
+
+> ### ⛔ **E NIENTE QUI SOPRA SI RISCRIVE:** i numeri sono quelli, e i verdetti sono calcolati. ### **Cambia che cosa SIGNIFICANO.**
+
+### 📌 **IL FATTO, verificato SUL CODICE e non dedotto:** nel `v1` le due componenti dello spinore ### **NON SI MESCOLANO MAI** — Grover e- ### **uguale sulle due**, la moneta di banda e- ### **DIAGONALE** *(`exp(-i dtau sigma_z)`)*, lo spostamento ### **non le distingue.**
+
+### ✅ **MISURATO, e adesso e- un BRACCIO del collaudo e non una nota:** un pacchetto messo ### **solo nella componente `0`** lascia l-altra a ### **ZERO ESATTO** dopo `60` tick, ### **con la camminata lineare E con entrambe le non linearita-**; e con `r` ### **uniforme** la fase della componente `0` e- ### **COSTANTE su tutte le estremita-**, cioe- la <<massa>> e- ### **una fase GLOBALE per componente.**
+
+### ⛔ **CHE COSA CAMBIA, lettura per lettura** *(e non e- poco)*:
+
+| la lettura | che cosa vale ANCORA | che cosa NON vale piu- |
+|---|---|---|
+| `5` materia/antimateria | ### **l-ALGEBRA**: una fase scalare commuta con `C` ### **solo se e- dispari**, e la misura lo conferma al bit | ### ⛔ **NON e- una prova FISICA**: con le componenti scollegate la simmetria passa ### **PER COSTRUZIONE** |
+| `7` il gauge | la scala assoluta di `r` ### **cambia** le osservabili | vale ### **per la non linearita- che scala con `dtau`**, ### **non per la massa** |
+| `3` e `4` | i numeri sono quelli | riguardano ### **una camminata SCALARE**, non uno spinore |
+
+### ⭐ **E QUINDI LE DECISIONI CHE NE DIPENDONO SI RIFANNO SUL `v2`**, dove ### **lo spin si lega al moto** con una moneta `exp(-i eps dtau sigma.n)` e il ### **trasporto `U(2)` sugli archi.**
+
 ## ⚠ **I LIMITI, dichiarati**
 
 | | il limite |

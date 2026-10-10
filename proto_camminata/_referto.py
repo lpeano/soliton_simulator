@@ -261,6 +261,42 @@ def main():
       "questo prototipo non le ha toccate**, e dirlo e- parte del referto | il vuoto locale "
       "non e- implementato: ### **`cs_k = 1` ovunque**, dichiarato |")
     a("")
+    a("## ⛔ **ANNOTAZIONE DEL 2026-10-10 — LA LETTURA DEL GUARDIANO: IL "
+      "`v1` E- DUE CAMMINATE SCALARI**")
+    a("")
+    a("> ### ⛔ **E NIENTE QUI SOPRA SI RISCRIVE:** i numeri sono quelli, e i "
+      "verdetti sono calcolati. ### **Cambia che cosa SIGNIFICANO.**")
+    a("")
+    a("### 📌 **IL FATTO, verificato SUL CODICE e non dedotto:** nel `v1` le "
+      "due componenti dello spinore ### **NON SI MESCOLANO MAI** — Grover e- "
+      "### **uguale sulle due**, la moneta di banda e- ### **DIAGONALE** "
+      "*(`exp(-i dtau sigma_z)`)*, lo spostamento ### **non le distingue.**")
+    a("")
+    a("### ✅ **MISURATO, e adesso e- un BRACCIO del collaudo e non una nota:** "
+      "un pacchetto messo ### **solo nella componente `0`** lascia l-altra a "
+      "### **ZERO ESATTO** dopo `60` tick, ### **con la camminata lineare E con "
+      "entrambe le non linearita-**; e con `r` ### **uniforme** la fase della "
+      "componente `0` e- ### **COSTANTE su tutte le estremita-**, cioe- la "
+      "<<massa>> e- ### **una fase GLOBALE per componente.**")
+    a("")
+    a("### ⛔ **CHE COSA CAMBIA, lettura per lettura** *(e non e- poco)*:")
+    a("")
+    a("| la lettura | che cosa vale ANCORA | che cosa NON vale piu- |")
+    a("|---|---|---|")
+    a("| `5` materia/antimateria | ### **l-ALGEBRA**: una fase scalare commuta con "
+      "`C` ### **solo se e- dispari**, e la misura lo conferma al bit | ### ⛔ "
+      "**NON e- una prova FISICA**: con le componenti scollegate la simmetria "
+      "passa ### **PER COSTRUZIONE** |")
+    a("| `7` il gauge | la scala assoluta di `r` ### **cambia** le osservabili | "
+      "vale ### **per la non linearita- che scala con `dtau`**, ### **non per la "
+      "massa** |")
+    a("| `3` e `4` | i numeri sono quelli | riguardano ### **una camminata SCALARE**, "
+      "non uno spinore |")
+    a("")
+    a("### ⭐ **E QUINDI LE DECISIONI CHE NE DIPENDONO SI RIFANNO SUL `v2`**, "
+      "dove ### **lo spin si lega al moto** con una moneta "
+      "`exp(-i eps dtau sigma.n)` e il ### **trasporto `U(2)` sugli archi.**")
+    a("")
     a("## ⚠ **I LIMITI, dichiarati**")
     a("")
     a("| | il limite |")

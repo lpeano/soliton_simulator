@@ -107,7 +107,11 @@ TESTI = (
     # ### spegnere un passo di CI** *(`A9` dal lato del tempo)*.
     ("doc/REFERTO_prototipo_camminata.md", REPERTO,
      "le sette letture del prototipo della camminata, al `2026-10-10`",
-     "python proto_camminata/_referto.py", "1aef7bdf39599e1f"),
+     # ### ⚠ **IL BLOB CAMBIA PERCHE- IL REFERTO E- STATO ANNOTATO** *(la lettura
+     # ### del guardiano sul `v1`, 2026-10-10)*, e l-annotazione sta ### **NEL
+     # ### GENERATORE**, non nel file: ### **un REPERTO ritoccato a mano si vede**, ma uno
+     # ### ### **rigenerato con l-annotazione dentro resta RIPRODUCIBILE.**
+     "python proto_camminata/_referto.py", "5d2223c98bca09df"),
     ("doc/ARCHIVIO_E_2026-10-10.tsv", REPERTO,
      "lo spostamento su `E:` del `2026-10-10`",
      "python csv/_archivia_su_e.py --esegui", "20fa1129a49ee9dd"),

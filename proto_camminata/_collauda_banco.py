@@ -150,6 +150,42 @@ def main():
             esito("### NON deve rompere `C`: la fase DISPARI (B), AL BIT", d == 0.0,
                   "### max|C(U psi) - U(C psi)| = %.3g" % d)
 
+    # ================================================================ IL LIMITE DEL v1
+    # ### ⛔ **IL LIMITE DEL `v1`, MISURATO E NON SUPPOSTO** *(lettura del guardiano,
+    # ### 2026-10-10)*: ### **le due componenti dello spinore NON SI MESCOLANO MAI.**
+    # ### Grover e- ### **uguale sulle due**, la moneta di banda e- ### **DIAGONALE**, lo
+    # ### spostamento ### **non le distingue** -- quindi il `v1` e- ### **DUE camminate
+    # ### SCALARI indipendenti.**
+    # ### ⚠ **PERCHE- E- UN BRACCIO E NON UNA NOTA:** questo limite ### **cambia il
+    # ### significato della lettura 5** *(passata PER COSTRUZIONE)*, e un limite che vive
+    # ### solo in un commento ### **si dimentica.** ### ✅ **Il giorno in cui una
+    # ### moneta MESCOLA le componenti, questo braccio diventa ROSSO e dice che il banco
+    # ### non e- piu- il `v1`.**
+    _solo0 = CM.stato_casuale(sc, SEME)
+    _solo0[:, 1] = 0.0
+    _solo0 = _solo0 / math.sqrt(CM.norma(_solo0))
+    _mix = 0.0
+    for _nome, _f in (("lineare", None), ("(A)", NL.fase_pari), ("(B)", NL.fase_dispari)):
+        _fine, _ = CM.corri(_solo0, sc, r, 1.0, PASSI, 1.0 if _f else 0.0, _f)
+        _mix = max(_mix, float(np.max(np.abs(_fine[:, 1]))))
+    esito("### IL LIMITE DEL v1: le due componenti NON si mescolano, AL BIT",
+          _mix == 0.0,
+          "### |componente 1| = %.3g dopo %d tick partendo da ZERO, con la lineare e con "
+          "le due non lineari: il v1 e- DUE camminate SCALARI" % (_mix, PASSI))
+    # ### ⭐ **E CON `r` UNIFORME LA <<MASSA>> E- UNA FASE GLOBALE PER COMPONENTE**, che
+    # ### e- la seconda meta- della lettura: la moneta di banda ### **non distingue un nodo
+    # ### da un altro** se i ritmi sono uguali.
+    _uni = np.ones(sc["n"], dtype=float)
+    _con, _ = CM.corri(_solo0, sc, _uni, 1.0, PASSI)
+    _senza, _ = CM.corri(_solo0, sc, _uni * 0.0, 1.0, PASSI)
+    _buone = np.abs(_senza[:, 0]) > 1e-12
+    _fase = _con[_buone, 0] / _senza[_buone, 0]
+    _scarto = float(np.max(np.abs(_fase - _fase[0]))) if _fase.size else -1.0
+    esito("### e con `r` UNIFORME la massa e- una FASE GLOBALE per componente",
+          _scarto <= PASSI * 2 * sc["m"] * EPS,
+          "### la fase e- costante su %d estremita- entro %.3g, e |fase| = %.17g"
+          % (int(_buone.sum()), _scarto, float(np.mean(np.abs(_fase)))))
+
     # ================================================================ LA NORMA (S3)
     tolN = PASSI * nest * EPS
     for nome, f in (("lineare", None), ("(A)", NL.fase_pari), ("(B)", NL.fase_dispari)):

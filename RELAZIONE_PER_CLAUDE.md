@@ -12714,3 +12714,15 @@ Ogni dato di `db_era2/` ha ### **il suo TIMBRO accanto**, col campo `versione_da
 ### 📌 **LA PROSSIMA DOMANDA, dal comando:** ### **`DOMANDA-QUANTITA-CONSERVATA`** *(aperte `12`, di cui pronte `6`)* — ed e- ### **la stessa di stamattina**, ma adesso ### **con una misura sotto**: la norma si conserva, e ### **nessuna delle tre candidate oltre la norma** si conserva per le `8` varianti provate.
 
 ### ⛔ **E QUI MI FERMO, perche- il mandato lo dice:** *«STOP: dopo il referto Luca decide»*. ### **Le due proposte sono voci**, e ### **nessuna decisione e- mia.**
+
+## ⛔ **IL `v2`, PUNTO `0`: LA LETTURA DEL GUARDIANO SUL `v1` E- GIUSTA, E L-HO VERIFICATA SUL CODICE** *(2026-10-10)*
+
+### 📌 **CHE COSA DICE:** nel `v1` le due componenti dello spinore ### **NON SI MESCOLANO MAI** — Grover e- ### **uguale sulle due**, la moneta di banda e- ### **DIAGONALE**, lo spostamento ### **non le distingue** — quindi il `v1` e- ### **DUE CAMMINATE SCALARI INDIPENDENTI.**
+
+### ✅ **VERIFICATO SUL CODICE, non accettato sulla parola:** un pacchetto messo ### **solo nella componente `0`** lascia l-altra a ### **ZERO ESATTO** dopo `200` tick, ### **anche con entrambe le non linearita- accese**; `max|U(a+b) - U(a) - U(b)| = 2.3e-16`; la moneta di banda manda `(1,0)` in ### **`(0.765-0.644j, 0)`** e `(0,1)` in ### **`(0, 0.765+0.644j)`**; e con `r` ### **uniforme** la fase della componente `0` e- ### **costante su `416` estremita- entro `1.43e-14`**, con modulo `1`.
+
+### ⭐ **E L-HO RESO UN BRACCIO, non una nota** *(il collaudo del banco passa da `19` a `21`)*: ### **un limite che vive in un commento si dimentica**, e il giorno in cui una moneta MESCOLA le componenti ### **quel braccio diventa rosso e dice che il banco non e- piu- il `v1`.**
+
+### ⛔ **CHE COSA CAMBIA, e non e- poco:** la lettura `5` e- passata ### **PER COSTRUZIONE** — vale come ### **ALGEBRA** della fase dispari, ### **non come prova fisica**; la lettura `7` conferma ### **per la non linearita- che scala con `dtau`**, non per la ### **massa**; le letture `3` e `4` riguardano ### **una camminata SCALARE.** ### ✅ **I numeri restano quelli: cambia che cosa SIGNIFICANO.**
+
+### ✅ **ANNOTATO IN TRE POSTI, e nessun paragrafo riscritto:** il referto del `v1` *(### **l-annotazione sta NEL GENERATORE**, cosi- il `REPERTO` resta ### **riproducibile** invece di essere ritoccato a mano)*, la voce `CAMMINATA-A-MONETA`, e ### **il collaudo**, che adesso lo misura.
