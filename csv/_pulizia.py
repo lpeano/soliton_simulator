@@ -26,6 +26,7 @@ import io
 import os
 import shutil
 import stat
+import subprocess
 import sys
 import tempfile
 
@@ -33,6 +34,15 @@ _QUI = os.path.dirname(os.path.abspath(__file__))
 
 NL = chr(10)
 PRESIDIO = "P-PULIZIA"
+
+# ### ⛔ **LA PIATTAFORMA, e NON e- un dettaglio di portabilita-: cambia QUALI
+# ### BRACCI POSSONO AVERE MATERIA** *(trovato il 2026-10-10, e sulla CI di GitHub)*.
+# ### ⚠ **Su Linux un file in SOLA LETTURA, o APERTO, SI CANCELLA**: il permesso che
+# ### conta e- quello della ### **CARTELLA**, non del file. ### ⛔ **Quindi i due
+# ### bracci che provano <<`rmtree` non ce la fa>> la- NON POSSONO SCATTARE**, e un braccio
+# ### che non puo- avere materia ### **non deve PASSARE ne- FALLIRE in silenzio: deve
+# ### DICHIARARSI non applicabile.**
+NT = (os.name == "nt")
 
 # ### ⭐ **DOVE STO GIRANDO**, in assoluto: serve a `residui()` per non contare
 # ### ### **la cartella che contiene questo file stesso.**
@@ -164,10 +174,23 @@ def _albero(con_sola_lettura=True):
     return d
 
 
-def collaudo():
-    ok = [0, 0]
+def collaudo(finge=None):
+    """### `finge` serve ### **SOLO al braccio che prova la logica di piattaforma**, e il
+    comando normale ### **non lo passa**: `"posix"` fa come se non fossimo su Windows."""
+    nt = NT if finge is None else (finge == "nt")
+    ok = [0, 0, 0]
 
-    def esito(che, passa, nota=""):
+    def esito(che, passa, nota="", solo_nt=False):
+        # ### ⛔ **TRE ESITI, non due:** ### **PASSA**, ### **FALLISCE**, e
+        # ### ### **NON APPLICABILE col motivo** -- che e- l-unico modo onesto di dire
+        # ### ### **<<qui questo braccio non puo- avere materia>>.**
+        if solo_nt and not nt:
+            ok[2] += 1
+            print("  %-62s %s   %s" % (che[:62], "### NON APPLICABILE",
+                                       "### su questa piattaforma un file in sola lettura "
+                                       "o aperto SI CANCELLA: il braccio non avrebbe "
+                                       "MATERIA"))
+            return
         ok[1] += 1
         ok[0] += 1 if passa else 0
         print("  %-62s %s   %s" % (che, "PASSA" if passa else "### FALLISCE", nota))
@@ -191,7 +214,8 @@ def collaudo():
     shutil.rmtree(d, ignore_errors=True)
     resta = os.path.exists(d)
     esito("### il CONTROLLO: `ignore_errors=True` NON cancella e NON LO DICE", resta,
-          "### e- il difetto del 2026-10-10: 24 cartelle lasciate, e nessun errore")
+          "### e- il difetto del 2026-10-10: 24 cartelle lasciate, e nessun errore",
+          solo_nt=True)
 
     # ------------------------------------------------- il caso sano
     buono = False
@@ -215,7 +239,7 @@ def collaudo():
     f.close()
     esito("### DEVE ALZARE: un file APERTO non si puo- cancellare", bool(alzata),
           "### ha alzato `%s`: un fallimento della pulizia e- un ERRORE VISIBILE"
-          % (alzata or "NIENTE"))
+          % (alzata or "NIENTE"), solo_nt=True)
     # ### ✅ **E dopo aver chiuso il file la stessa chiamata riesce**, cosi- il braccio
     # ### di sopra ### **non ha fallito per un altro motivo.**
     rifatto = False
@@ -225,7 +249,8 @@ def collaudo():
     except Exception as e:
         print("     %s" % e)
     esito("### e CHIUSO il file la STESSA chiamata riesce", rifatto,
-          "### quindi il braccio di sopra e- fallito per il FILE APERTO, non per altro")
+          "### quindi il braccio di sopra e- fallito per il FILE APERTO, non per altro",
+          solo_nt=True)
 
     # ------------------------------------------------- la CASA non e- un residuo
     # ### ⛔ **IL BRACCIO CHE LA VERIFICA SU CLONE PULITO HA FATTO NASCERE**
@@ -248,6 +273,28 @@ def collaudo():
           "### altrimenti la cura avrebbe spento il controllo invece di correggerlo")
     via(_t)
 
+    # ------------------------------------------------- la LOGICA DI PIATTAFORMA
+    # ### ⛔ **E LA LOGICA DI PIATTAFORMA SI PROVA, non si promette** *(punto 6 del
+    # ### mandato del `v2`)*: si rigira QUESTO collaudo ### **fingendo posix**, in un
+    # ### processo a parte, e si controlla che ### **dichiari esattamente 3 non
+    # ### applicabili** e che ### **esca comunque a ZERO.**
+    # ### ⚠ **Solo su Windows**, perche- su posix sarebbe ### **lo stesso giro due
+    # ### volte** -- e un braccio che si confronta con se stesso non prova niente.
+    _cod, _nonapp = -1, -1
+    if nt and finge is None:
+        _r = subprocess.run([sys.executable, os.path.abspath(__file__), "--collaudo",
+                             "--finge-posix"], capture_output=True, text=True,
+                            encoding="utf-8", errors="replace")
+        _cod = _r.returncode
+        for _riga in (_r.stdout or "").split(NL):
+            if _riga.startswith("NON APPLICABILI:"):
+                _nonapp = int(_riga.split(":")[1].split()[0])
+    esito("### la LOGICA DI PIATTAFORMA, provata FINGENDO posix",
+          _cod == 0 and _nonapp == 4,
+          "### fingendo posix: codice %d e %d non applicabili (attesi 0 e 4: i TRE bracci "
+          "che vogliono Windows, piu- QUESTO braccio, che la- non puo- girare)"
+          % (_cod, _nonapp), solo_nt=True)
+
     # ------------------------------------------------- niente residui nostri
     r = residui()
     esito("### e il collaudo NON LASCIA RESIDUI dei nostri prefissi", not r,
@@ -256,6 +303,14 @@ def collaudo():
     print("=" * 100)
     print("IL COLLAUDO DELLA PULIZIA: %d su %d   ### %s"
           % (ok[0], ok[1], "TUTTI PASSATI" if ok[0] == ok[1] else "CI SONO BUCHI"))
+    # ### ⛔ **E I NON APPLICABILI SI STAMPANO SEMPRE, anche quando sono ZERO:** cosi-
+    # ### ### **non si scopre su un-altra piattaforma che mezzo collaudo non girava.**
+    print("NON APPLICABILI: %d   ### piattaforma `%s`%s"
+          % (ok[2], (os.name if finge is None else "%s (FINTA: la vera e- %s)"
+                     % (finge, os.name)),
+             "   (su Windows girano tutti)" if nt else
+             "   ### su questa piattaforma un file in sola lettura o aperto SI CANCELLA, "
+             "quindi i bracci che provano il contrario NON AVREBBERO MATERIA"))
     print("=" * 100)
     return 0 if ok[0] == ok[1] else 1
 
@@ -265,7 +320,7 @@ if __name__ == "__main__":
     import _presidio
     _presidio.avvia(__file__)
     if "--collaudo" in sys.argv:
-        sys.exit(collaudo())
+        sys.exit(collaudo(finge="posix" if "--finge-posix" in sys.argv else None))
     if "--residui" in sys.argv:
         for p, n, b in residui():
             print("  %s   %d file   %d byte" % (p, n, b))

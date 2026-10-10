@@ -12726,3 +12726,15 @@ Ogni dato di `db_era2/` ha ### **il suo TIMBRO accanto**, col campo `versione_da
 ### ⛔ **CHE COSA CAMBIA, e non e- poco:** la lettura `5` e- passata ### **PER COSTRUZIONE** — vale come ### **ALGEBRA** della fase dispari, ### **non come prova fisica**; la lettura `7` conferma ### **per la non linearita- che scala con `dtau`**, non per la ### **massa**; le letture `3` e `4` riguardano ### **una camminata SCALARE.** ### ✅ **I numeri restano quelli: cambia che cosa SIGNIFICANO.**
 
 ### ✅ **ANNOTATO IN TRE POSTI, e nessun paragrafo riscritto:** il referto del `v1` *(### **l-annotazione sta NEL GENERATORE**, cosi- il `REPERTO` resta ### **riproducibile** invece di essere ritoccato a mano)*, la voce `CAMMINATA-A-MONETA`, e ### **il collaudo**, che adesso lo misura.
+
+## ✅ **IL `v2`, PUNTO `6`: IL COLLAUDO DELLA PULIZIA DICHIARA LA PIATTAFORMA — ### **tre esiti, non due** *(2026-10-10)*
+
+### 📌 **IL FATTO che Luca porta:** su Linux — ### **e nella CI di GitHub** — un file ### **in sola lettura, o APERTO, SI CANCELLA**, perche- il permesso che conta e- quello della ### **CARTELLA.** ### ⛔ **Quindi i bracci che provano <<`rmtree` non ce la fa>> la- NON POSSONO AVERE MATERIA.**
+
+### ⭐ **E LA CURA NON E- <<SALTARLI>>: e- UN TERZO ESITO.** Un braccio che non puo- avere materia ### **non deve PASSARE ne- FALLIRE in silenzio** — quindi si dichiara ### **NON APPLICABILE, col motivo**, e il verdetto li ### **CONTA a parte.**
+
+### ✅ **E I NON APPLICABILI SI STAMPANO SEMPRE, anche quando sono ZERO**, che e- la parte che vale: cosi- ### **non si scopre su un-altra piattaforma che mezzo collaudo non girava.**
+
+### ⛔ **E LA LOGICA DI PIATTAFORMA SI PROVA, non si promette:** un braccio rigira il collaudo ### **FINGENDO posix**, in un processo a parte, e pretende ### **codice `0`** e ### **`4` non applicabili** — i ### **tre** bracci che vogliono Windows, ### **piu- il braccio stesso**, che la- non puo- girare. ### ⚠ **E l-etichetta dice che la piattaforma e- FINTA**, perche- un-uscita che dice <<posix>> su una macchina Windows ### **sarebbe una bugia leggibile.**
+
+### 📌 **I NUMERI:** su Windows ### **`9` su `9`, `0` non applicabili**; fingendo posix ### **`5` su `5`, `4` non applicabili, codice `0`.**

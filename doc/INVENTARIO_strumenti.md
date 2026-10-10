@@ -3018,8 +3018,9 @@ etichette rimosse, con ### **`0` persi, `0` doppi, `0` conflitti**.
 
 | | |
 |---|---|
-| **il file** | `csv/_pulizia.py` *(BLOB `4f9fbdc3`)* |
-| **COMANDO** | `python csv/_pulizia.py --collaudo` *(nei due versi, ### **`8`/`8`**, con ### **UN braccio che DEVE ALZARE** e ### **DUE sulla casa**)* · `--residui` · `--pulisci` |
+| **il file** | `csv/_pulizia.py` *(BLOB `4a62b548`)* |
+| **COMANDO** | `python csv/_pulizia.py --collaudo` *(nei due versi, ### **`9`/`9`** su Windows, ### **`5`/`5` piu- `4` NON APPLICABILI** su posix)* · `--collaudo --finge-posix` · `--residui` · `--pulisci` |
+| ⛔ **LA PIATTAFORMA E- UN TERZO ESITO** | su Linux ### **un file in sola lettura, o APERTO, SI CANCELLA** *(il permesso che conta e- quello della CARTELLA)*, quindi i ### **tre** bracci che provano <<`rmtree` non ce la fa>> ### **non possono avere MATERIA**: la- si dichiarano ### **NON APPLICABILI col motivo**, e il collaudo ### **esce a zero senza fingere di aver provato.** ### ⭐ **E la logica si PROVA**, rigirando il collaudo ### **che finge posix** in un processo a parte: ### **codice `0` e `4` non applicabili** |
 | **che cosa impedisce** | che una cartella temporanea ### **resti senza che nessuno lo dica**: `via()` ### **toglie la sola lettura e riprova**, e poi ### **CONTROLLA CHE IL PERCORSO NON ESISTA PIU-** — perche- ### **un `rmtree` che non alza NON E- LA PROVA che abbia cancellato** |
 | ⛔ **IL DIFETTO CHE CURA** | `shutil.rmtree(..., ignore_errors=True)` in ### **`7` siti**: `git` scrive i suoi oggetti ### **in sola lettura**, su Windows `rmtree` non li tocca, e ### **il flag SILENZIA il fallimento** |
 | ⭐ **IL NUMERO CHE DECIDE** | nel `%TEMP%` c-erano ### **`24` cartelle `repo_*`** con ### **`120` file e TUTTI E `120` in sola lettura**, ### **`10941` byte**: ### **il numero di cartelle era il numero di volte che il collaudo era girato** |
