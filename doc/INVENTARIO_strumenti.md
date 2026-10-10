@@ -2823,8 +2823,9 @@ etichette rimosse, con ### **`0` persi, `0` doppi, `0` conflitti**.
 
 | | |
 |---|---|
-| **i file** | `csv/_modularita_era2.py` *(BLOB `8fb73811`)* · `primo_ordine/_mappa.yaml` *(BLOB `1413d7e2`)* |
+| **i file** | `csv/_modularita_era2.py` *(BLOB `5b00ee61`)* · `primo_ordine/_mappa.yaml` *(BLOB `1413d7e2`)* |
 | **COMANDO** | `python csv/_modularita_era2.py` · `--collaudo` *(nei due versi, `10`/`10`)* |
+| ⛔ **LA CURA DEL `2026-10-10`** | le ### **SEI sabotature** erano su ### **un letterale**, e ### **DUE erano morte** per un mio commit: `P-MOD` girava a ### **`8`/`10`** senza che nessuno lo sapesse. Ora `_sabota()` ### **CONTA l-ancora e SOLLEVA**, e le ancore si ### **CALCOLANO dalla mappa vera**. ### **Provato: ancora non unica, il collaudo MUORE (codice `1`).** |
 | ### ⭐ **perche' una MAPPA e non solo un divieto** | `P-E4` vieta ### **due** import; una mappa dice ### **la cosa POSITIVA** — cio' che e' ### **previsto** — e ### **un import che nessuno ha previsto e' esattamente quello che degrada la modularita' senza che nessuno lo decida** |
 | ### ⛔ **cosa impedisce** | un import ### **fuori mappa** · un ### **CICLO** · un modulo ### **non in mappa** · una dipendenza ### **dichiarata e NON USATA** · un file ### **oltre il tetto** · una responsabilita' che ### **non sta in UNA RIGA** · `hamiltoniana`/`passo` che ### **calcolano una grandezza** |
 | **il tetto** | `700` righe, ### **DICHIARATO SUL MISURATO** *(il piu' lungo e' `_genera.py` con `684`)*. Oltre, ### **si divide, non si allunga** — e ### **i generati NON hanno tetto**, perche' la loro lunghezza ### **la decide la tabella** |

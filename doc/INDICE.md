@@ -16,7 +16,7 @@
 | `INFRASTRUTTURA` | `ENTRAMBE` | 18 |
 | `METODO` | `1` | 156 |
 | `METODO` | `2` | 9 |
-| `METODO` | `ENTRAMBE` | 85 |
+| `METODO` | `ENTRAMBE` | 86 |
 
 | id | classe | dominio | era | stato | blocca | titolo |
 |---|---|---|---|---|---|---|
@@ -671,6 +671,7 @@
 | `S8b` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 6 volte, MAI definito in un registro) [S8b] |
 | `S8c` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 3 volte, MAI definito in un registro) [S8c] |
 | `S8d` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 4 volte, MAI definito in un registro) [S8d] |
+| `SABOTATURA-NO-OP` | DIFETTO | METODO | ENTRAMBE | ### **APERTA** |  | la sabotatura di un braccio che DEVE fallire era un no-op silenzioso: P-MOD da 1 |
 | `SCALE-TW` | FRONTE | FISICA | 1 | ### **SOSPESA** | SI | LE SCALE DELLA TORSIONE: un'analisi completa, DA CAPO / mandato di Luca ricevuto |
 | `SCENA-1` | MISURA | FISICA | 1 | ### **CHIUSA** |  | CHIUSA il 2026-09-25, strada (1) (decisione di Luca) / SEMINALAM era approvata m |
 | `SCHED-PASSO` | CURA | FISICA | 1 | ### **SOSPESA** | SI | il passo pieno diventa uno SCHEDULATORE: le regole del passo sono architettura,  |

@@ -209,6 +209,29 @@ def controlla():
     return err
 
 
+def _sabota(testo, a, b, che):
+    """### Una sabotatura SI ASSERISCE, come ogni altra sostituzione (`P1-quater`).
+
+    ### ⛔ **IL DIFETTO, trovato il `2026-10-10` da un referto che e- diventato
+    rosso:** i bracci che DEVONO fallire sabotavano la mappa con un `t.replace` su
+    ### **un letterale**, e il mio controllo del grafo ha aggiunto `grafo` alla riga
+    `importa` di `passo.py`. ### **La sostituzione e- diventata un NO-OP SILENZIOSO**, e
+    ### **due bracci che devono fallire NON fallivano piu-** -- `P-MOD` da `10`/`10` a
+    ### **`8`/`10`**, e ### **nessuno se ne e- accorto per un commit intero.**
+
+    ### ⭐ **E NON E- UN CASO ISOLATO: in questo collaudo le sabotature erano SEI,
+    tutte su un letterale.** ### **Due erano gia- morte.** ### ✅ **Quindi
+    l-ancora si CONTA, e se non e- unica il collaudo MUORE invece di passare.**
+    """
+    k = testo.count(a)
+    if k != 1:
+        raise AssertionError(
+            "### LA SABOTATURA DI <<%s>> NON MORDE: l-ancora compare %d volte, non 1. "
+            "### Un braccio che DEVE fallire e che sabota NIENTE passerebbe per "
+            "vacuita- -- ed e- il difetto che ha portato `P-MOD` a 8 su 10." % (che, k))
+    return testo.replace(a, b)
+
+
 def collaudo():
     ok = [0, 0]
 
@@ -242,42 +265,49 @@ def collaudo():
     # --- un import in piu'
     per = {x["nome"]: x for x in (m.get("moduli") or [])}
     salva = list(per["passo.py"]["importa"])
-    import yaml
     t = io.open(MAPPA, encoding="utf-8").read()
+    # ### ✅ **E L-ANCORA SI CALCOLA DALLA MAPPA VERA, non si scrive a mano:** la
+    # ### riga di `passo.py` e- cambiata una volta (e- arrivato `grafo`), e un letterale
+    # ### ### **sarebbe morto di nuovo.**
+    _imp = "    importa: [%s]" % ", ".join(salva)
+    _senza = "    importa: [%s]" % ", ".join(
+        x for x in salva if x != "hamiltoniana")
     try:
         io.open(MAPPA, "w", encoding="utf-8", newline=NL).write(
-            t.replace("    importa: [hamiltoniana, stato]", "    importa: [stato]"))
+            _sabota(t, _imp, _senza, "un import togliato dalla mappa"))
         esito("### DEVE scattare: un import NON in mappa",
               any("NON E- IN MAPPA" in e for e in controlla()),
               "`passo.py` importa `hamiltoniana`, e la mappa non lo prevede piu-")
         io.open(MAPPA, "w", encoding="utf-8", newline=NL).write(
-            t.replace("    importa: [hamiltoniana, stato]",
-                      "    importa: [hamiltoniana, stato, timbro]"))
+            _sabota(t, _imp, "    importa: [%s]" % ", ".join(salva + ["timbro"]),
+                    "un permesso in piu- nella mappa"))
         esito("### DEVE scattare: una dipendenza DICHIARATA e NON USATA",
               any("NON LO IMPORTA" in e for e in controlla()),
               "### un permesso che nessuno ha chiesto")
         io.open(MAPPA, "w", encoding="utf-8", newline=NL).write(
-            t.replace("tetto_righe: 700", "tetto_righe: 60"))
+            _sabota(t, "tetto_righe: %d" % m.get("tetto_righe"),
+                    "tetto_righe: 60", "il tetto abbassato"))
         esito("### DEVE scattare: un file oltre il TETTO",
               any("oltre il tetto" in e for e in controlla()),
               "### oltre SI DIVIDE, NON SI ALLUNGA")
         io.open(MAPPA, "w", encoding="utf-8", newline=NL).write(
-            t.replace("    responsabilita: lo schedulatore a strati e i due integratori "
-                      "candidati",
-                      "    responsabilita: \"" + "x" * 130 + "\""))
+            _sabota(t, "    responsabilita: " + per["passo.py"]["responsabilita"],
+                    "    responsabilita: \"" + "x" * 130 + "\"",
+                    "una responsabilita- che non sta in una riga"))
         esito("### DEVE scattare: una responsabilita- che NON sta in una riga",
               any("non sta in UNA RIGA" in e for e in controlla()),
               "### se non ci sta, IL MODULO FA DUE COSE")
     finally:
         io.open(MAPPA, "w", encoding="utf-8", newline=NL).write(t)
-    del salva, yaml
+    del salva
     # --- `(a)`: una funzione di FISICA in `passo.py`
     pp = os.path.join(RADICE, "primo_ordine", "passo.py")
     src = io.open(pp, encoding="utf-8").read()
     try:
         io.open(pp, "w", encoding="utf-8", newline=NL).write(
-            src.replace("    nuovo = {k: v.copy() for k, v in st.items()}",
-                        "    nuovo = {k: np.exp(v) for k, v in st.items()}", 1))
+            _sabota(src, "    nuovo = {k: v.copy() for k, v in st.items()}",
+                    "    nuovo = {k: np.exp(v) for k, v in st.items()}",
+                    "`exp` dentro `passo.py`"))
         esito("### DEVE scattare: `passo.py` che chiama `exp` (FISICA a mano)",
               any("CALCOLA UNA GRANDEZZA" in e for e in controlla()),
               "### il punto 11(a): somma, integra, ordina -- ### la fisica SI GENERA")

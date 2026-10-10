@@ -12007,3 +12007,17 @@ Ogni dato di `db_era2/` ha ### **il suo TIMBRO accanto**, col campo `versione_da
 ### ⚠ **E UN TERZO MANDATO E- ARRIVATO: SEI DECISIONI DI FISICA** *(Luca, 2026-10-10)*. ### ✅ **In CODA, dopo i due in corso**, come Luca dice. ### ⭐ **E DUE DELLE SEI PARLANO DI COSE CHE HO SCRITTO IERI:** la barriera di `lambda` ### **non deve essere un pavimento** -- e il generatore ### **gia- li rifiuta** *(`rami_vietati`, `A14.2`)*; e il controllo del grafo deve ### **FERMARE e non troncare** -- ed e- esattamente la forma che gli ho dato. ### ⚠ **Ma oggi NON C-E- NESSUNA VARIABILE DI LUNGHEZZA** *(`leggi.yaml` ha solo `psi`)*: il controllo di `lambda` ### **nascera- senza materia**, e il mandato lo prevede -- ### **<<il braccio lo costruisce su uno stato finto e la voce lo dichiara>>.**
 
 ### ⚠ **E UN QUARTO MANDATO: LE DOMANDE APERTE PER LUCA DIVENTANO VOCI DELL-INDICE** *(Luca, 2026-10-10 -- ### **il SECONDO mandato arrivato oggi a mandato aperto**)*. ### ✅ **In CODA, quarto**, come Luca dice. ### 📌 **Lo scopo e- suo:** *<<Luca ha troppe domande aperte per tenerle a mente>>* -- e la cura e- ### **una VOCE per domanda**, con ### **TRE CAMPI NUOVI** *(`priorita-`, `dipende_da`, `sblocca`)* e ### **un CICLO che fa fallire `valida`**. ### ⭐ **E DUE MANDATI DI FILA METTONO PER ISCRITTO CHE UNA FONTE DEL REPO BATTE IL PROMPT DI LUCA:** *<<se l-albero dice altro, VINCE L-ALBERO e scrivi la differenza>>*. ### ✅ **E le due richieste sul VUOTO LOCALE non sono due lavori:** quella delle sei decisioni CREA il nodo, questa lo COMPLETA come voce -- ### **non si duplica.**
+
+## LA SABOTATURA DI UN BRACCIO CHE DEVE FALLIRE ERA UN NO-OP SILENZIOSO — ### **e `P-MOD` girava a `8`/`10`** *(2026-10-10)*
+
+### ⭐ **E L-HA TROVATO LA CURA DEL PUNTO `3`:** il referto rigenerato ha scritto ### **`⛔ 8/10`** dove prima scriveva ### **`✅ 8/10`.** ### **Il verdetto rosso ha reso visibile un collaudo che era rotto da un commit intero.**
+
+### ⛔ **LA CAUSA E- MIA:** i bracci di `P-MOD` che DEVONO fallire sabotavano `primo_ordine/_mappa.yaml` con un `t.replace` su ### **un letterale** — e il mio controllo del grafo ha aggiunto `grafo` alla riga `importa` di `passo.py`. ### **La sostituzione e- diventata un NO-OP**, e ### **due bracci che devono fallire non fallivano piu-.**
+
+### ⚠ **E NON ERA UN CASO ISOLATO: le sabotature in quel collaudo erano SEI, TUTTE su un letterale, e DUE erano gia- morte.**
+
+### 📌 **IL PUNTO CHE MI ERO PERSO:** `P1-quater` dice che ### **ogni sostituzione di testo si asserisce per se-** — e l-avevo applicato ### **ai patch script** e ### **mai dentro un collaudo**, dove un letterale morto ### **non da- un errore: da- un PASSA.**
+
+### ✅ **LA CURA, in due pezzi.** ### **(1)** `_sabota(testo, a, b, che)` ### **CONTA l-ancora e SOLLEVA** se non e- unica: il collaudo ### **MUORE** invece di passare per vacuita-. ### **(2)** l-ancora si ### **CALCOLA dal contenuto vero** *(la lista `importa` letta dalla mappa, il `tetto_righe`, la `responsabilita-`)*, cosi- ### **non puo- scadere.**
+
+### 📌 **MISURATO, non asserito:** rendendo l-ancora ### **non unica** *(due moduli con la stessa riga `importa`)*, il collaudo esce ### **`1`** e stampa *«### **LA SABOTATURA NON MORDE: l-ancora compare 2 volte, non 1**»*. ### **E la mappa e- stata RIPRISTINATA.** ### ✅ **`P-MOD`: `10`/`10`.**
