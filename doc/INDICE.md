@@ -9,7 +9,7 @@
 | `DOCUMENTAZIONE` | `2` | 1 |
 | `DOCUMENTAZIONE` | `ENTRAMBE` | 8 |
 | `FISICA` | `1` | 343 |
-| `FISICA` | `2` | 33 |
+| `FISICA` | `2` | 35 |
 | `FISICA` | `ENTRAMBE` | 17 |
 | `INFRASTRUTTURA` | `1` | 39 |
 | `INFRASTRUTTURA` | `2` | 14 |
@@ -259,6 +259,7 @@
 | `DOMANDA-D9-GEOMETRIA` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | D9: la geometria viene da d e p_d dentro H, o dalle relazioni fra gli psi? |
 | `DOMANDA-FUSIONE` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | la FUSIONE di due nodi: si vieta, e con che cosa? |
 | `DOMANDA-GRAFO-INIZIALE` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | il grafo iniziale SENZA pos: reticolo, k-regolare, espansore? |
+| `DOMANDA-GRANDEZZA-LOCALE-TEMPO` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | da dove viene la grandezza locale da cui escono r_k e cs_k? |
 | `DOMANDA-LAMBDA-GRANDEZZA` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | lambda: su quale grandezza si misura, e da dove viene il suo valore? |
 | `DOMANDA-QUANTITA-CONSERVATA` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | esiste una moneta isotropa, causale e simmetrica fra le bande con una quantita-  |
 | `DOMANDA-REGOLE-FUORI-CLAUDE` | DECISIONE | METODO | 2 | ### **AGENDA** |  | le regole di gestione fuori da CLAUDE.md, e quelle dentro senza presidio: vanno  |
@@ -746,6 +747,7 @@
 | `T8` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 4 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
 | `T9` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 7 volte, MAI definito in un registro) [T9] |
 | `TAGLIA-FINITA` | STANDARD | METODO | ENTRAMBE | ### **APERTA** |  | lo scaling di taglia finita come via al limite continuo: reti diverse e si estra |
+| `TEMPO-PROPRIO-LOCALE` | STANDARD | FISICA | 2 | ### **AGENDA** |  | in TUTTI gli step si usa il tempo proprio LOCALE del nodo, e anche la cs LOCALE |
 | `TERMOSTATO-E-FRENO` | MISURA | FISICA | 1 | ### **SOSPESA** |  | il termostato frena piu' di quanto rifornisca: togliergli il freno, non la sorge |
 | `TERRA-BUCONERO` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 3 volte, MAI definito in un registro) [TERRA-BUCONERO] |
 | `TETTO-CAUSALE-TEMPO-COORDINATO` | DIFETTO | FISICA | 1 | ### **SOSPESA** | SI | il tetto causale usa c_s LOCALE ma DT COORDINATO: dove r e piccolo permette moti |

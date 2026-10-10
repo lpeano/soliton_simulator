@@ -12409,3 +12409,13 @@ Ogni dato di `db_era2/` ha ### **il suo TIMBRO accanto**, col campo `versione_da
 ### ✅ **PUNTO `2`:** [[DISEGNO-3D-OSSERVATORE]]. Il disegno ### **legge e non scrive**, e la ### **BYTE-INERZIA e- il suo collaudo OBBLIGATORIO** — e ### **la forma esiste gia- nel repo** *(`_rif.py`, `14` su `14`)*. ### ⭐ **E la parte che conta: IL `3D` CHE DISTORCE E- UNA MISURA**, con ### **l-indice di `G1`** — ### **lo strumento che serviva a GUARDARE diventa uno strumento che MISURA**, e la misura e- ### **la stessa che ha fatto scattare `Z47`.**
 
 ### ✅ **PUNTO `3`, la correzione piccola:** la fase `F4` nominava ancora ### **`Z47`** fra le misure, e `Z47` e- ### **SUPERATA da `A17`** dal commit `195dd62`. ### 📌 **Al suo posto la misura che conta: [[Z103]] e il PROTOTIPO.** ### ⚠ **L-avevo VISTA quando ho scritto la nota d-ingresso nel nodo `D9`, e non l-avevo corretta perche- non era nel mandato.** ### **Adesso lo era.**
+
+## MANDATO ⑫: IL TEMPO PROPRIO LOCALE E LA `cs` LOCALE — ### **e il gauge del tempo TOGLIE un problema invece di aggiungerlo** *(2026-10-10)*
+
+### ✅ **OGNI RIFERIMENTO VERIFICATO SUL REPO, come Luca chiede** — e ### **DUE coincidono ALLA LETTERA:** `D32` dice *«I TEMPI PROPRI DICHIARATI SONO TRE, E SONO TRE GRANDEZZE DIVERSE: `r`, `taupp` e `d/cs`»*; `CS-LAMBDA-GLOBALE` dice *«`_cs_nodo` non e- del tutto locale: il pavimento usa `_Lam = mean(|psi|^2)` su TUTTA la rete»*. ### 📌 **E `A4` e- ### **STRATIFICAZIONE CAUSALE**, `A3` e- ### **NIENTE SI NORMALIZZA SUL PROPRIO INSIEME**: entrambi esattamente come il mandato li usa.
+
+### ⭐ **E IL PUNTO `6` E- LA PARTE CHE VALE PIU- DI TUTTE:** un fattore comune su tutti gli `r_k` e- ### **INVISIBILE alla fisica** — cambia solo l-unita- del tempo — quindi ### **contano SOLO I RAPPORTI fra vicini**, e ### **NON SERVE FISSARE NIENTE CON UNA MEDIANA.** ### ✅ **E- la cura della violazione `(b)`, e viene DALLO STESSO PRINCIPIO che la vietava** — un mandato che chiude un difetto dell-era `1` con ### **un argomento di simmetria** invece di aggiungere una regola.
+
+### ✅ **E IL PROTOTIPO PRENDE DUE BRACCI IN PIU-:** con ### **`r_k = 1` e `cs_k = 1` ovunque** il risultato ### **coincide col `dt` globale AL BIT** *(il controllo che dice che il tempo proprio non ha cambiato niente dove non doveva)*; e ### **il GAUGE** — moltiplicare tutti gli `r_k` per una costante ### **lascia la fisica identica a meno della scala del tempo.** ### ⛔ **E se non la lascia identica, la dipendenza da un fattore comune E- un riferimento esterno**, cioe- cio- che `A17` vieta.
+
+### 📌 **E `CS-LAMBDA-GLOBALE` NON SI CHIUDE, perche- il mandato lo dice esplicitamente:** si ANNOTA che la decisione sul vuoto locale ne da- la cura, e ### **si chiude quando la legge esiste ED E- MISURATA.**

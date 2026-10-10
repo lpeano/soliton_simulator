@@ -9,13 +9,13 @@
 | | quanti |
 |---|--:|
 | **`PORTATO`** | `107` |
-| **`PRONTO`** | `5` |
+| **`PRONTO`** | `6` |
 | **`DA_PORTARE`** | `16` |
 | **`DA_DECIDERE`** | `5` |
 | **`NON_SI_APPLICA`** | `7` |
-| **in tutto** | ### **`140`** |
+| **in tutto** | ### **`141`** |
 
-### ⚠ **E IL NUMERO `140` E- MISURATO, non stimato:** viene dal perimetro che l-indice calcola, e ### **il mandato ne nominava <<una decina>>** per nome piu- *<<e le cure di architettura>>*. ### **La decina era `20`.**
+### ⚠ **E IL NUMERO `141` E- MISURATO, non stimato:** viene dal perimetro che l-indice calcola, e ### **il mandato ne nominava <<una decina>>** per nome piu- *<<e le cure di architettura>>*. ### **La decina era `20`.**
 
 ---
 
@@ -135,7 +135,7 @@
 
 ---
 
-## `PRONTO` — `5` metodi
+## `PRONTO` — `6` metodi
 
 > ### ✅ **DECISO E NON BLOCCATO**: si fa ### **quando c-e- la materia**, e `dove` dice ### **che cosa lo fa rispettare GIA- OGGI**
 
@@ -146,6 +146,7 @@
 | **`LAMBDA-INVARIANTE-OGNI-ARCO`** | `STANDARD` | DECISIONE DI LUCA del 2026-10-10 (punto 4 delle sei): la lunghezza minima lambda e- un INVARIANTE SU OGNI ARCO, non una regola di mitosi -- nessun arco, in nessun istante, per effetto di nessuna legge o regola, sta sotto lambda. ### SI APPLICA ALL-ERA 2 CON TRE LIVELLI, e oggi UNO SOLO e- coperto: (a) la BARRIERA dentro H MAI come pavimento -- e il generatore GIA- RIFIUTA max/clip (`rami_vietati`, A14), quindi il DIVIETO e- coperto per costruzione mentre la FORMA della barriera e- una legge da DERIVARE (A1) e oggi NON esiste; (b) il CANCELLO nelle regole di nascita: le regole non esistono ancora (punto 11a), quindi NON e- coperto; (c) il controllo del grafo a ogni passo: il controllo ESISTE e FERMA (5999019), ma NON c-e- nessuna variabile di lunghezza da controllare -- `leggi.yaml` dichiara solo `psi`. ### IL CENSIMENTO DELL-ERA 1 E- CONFERMATO rifacendolo con lo strumento originale: 27 punti, 24 cancelli, 3 PAVIMENTI (`lambda_nodi`, `_smorza`, `_nasce`), 0 scritti come 2*LAM. | `primo_ordine/leggi/schema.py::rami_vietati` copre il divieto del pavimento; il resto NON e- coperto, e la voce dice quale livello manca e perche- |
 | **`MEMORIE-NELLA-CAMMINATA`** | `STANDARD` | VALUTAZIONE DEL GUARDIANO accettata da Luca il 2026-10-10: nella camminata la memoria di moto diventa NATIVA, e l-oblio diventa SCAMBIO col vuoto locale. ### SI APPLICA ALL-ERA 2 COSI-, e OGGI NIENTE E- COSTRUITO (il mandato dice <<registra soltanto>>). ### CIO- CHE E- GIA- VERO: la REGOLA (<<ampiezza o coppia coniugata; una memoria che DECADE soltanto non entra>>) e- gia- impedita dal vocabolario chiuso dei tipi (MEMORIA-DENTRO-H). ### IL LAVORO: il CENSIMENTO delle memorie dell-era 1, a vocabolario chiuso (nativa, campo d-arco, vuoto, da togliere) col motivo -- nel piano come passo DOPO il prototipo. | nessun codice: la voce e- il posto, e il censimento e- un passo del piano |
 | **`SCHED-T3-REGOLE`** | `MISURA` | le regole di composizione, 94 scritture in cinque forme: ### nell-era 2 le regole non esistono ancora -- e- il punto 11(a). ### DAL 2026-10-10 E- `PRONTO`, non piu- soltanto da fare: la DECISIONE DI LUCA sulla FORMA di una regola e- presa (il `bilancio` e- una FORMULA che il generatore verifica, non il nome di un meccanismo), e lo schema la fa rispettare. ### Resta da fare QUANDO esiste la prima regola vera, e NON prima | `leggi/schema.py::valida_legge`, il ramo `regola`; il collaudo dello schema da 34 a 37, coi TRE bracci che devono fallire |
+| **`TEMPO-PROPRIO-LOCALE`** | `STANDARD` | DECISIONI DI LUCA del 2026-10-10: in TUTTI gli step si usa il TEMPO PROPRIO LOCALE del nodo (d tau_k = r_k * dt), e anche la cs LOCALE; il dt nudo e- legittimo SOLO nello spostamento, che e- la struttura causale (A4). ### SI APPLICA ALL-ERA 2 COSI-, e OGGI NIENTE E- COSTRUITO: il mandato dice <<registra soltanto>>. ### CIO- CHE E- GIA- VERO: A17 vieta per costruzione le grandezze globali nelle espressioni (`simboli_vietati`), ma SOLO per `pos` -- una MEDIANA su tutta la rete NON e- ancora rifiutata da niente. ### IL PRESIDIO CHE MANCA, e il mandato lo dice: via AST, una legge che usa il dt GLOBALE invece di d tau_k deve essere RIFIUTATA -- da costruire QUANDO ESISTERA- LA MONETA, non oggi. ### E il GAUGE DEL TEMPO toglie un problema: contano solo i RAPPORTI fra vicini, quindi non serve fissare niente con una mediana. | nessun codice: la voce e- il posto, e i due bracci (r_k = cs_k = 1; il gauge) stanno nel prototipo del piano |
 
 ---
 

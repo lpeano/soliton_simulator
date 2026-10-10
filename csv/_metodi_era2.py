@@ -605,6 +605,21 @@ METODI['P-GUIDA'] = (
     "SILENZIO",
     "`primo_ordine/_collauda_guida.py` (12/12), nel comando unico e nel `pre-commit`",
     "PORTATO")
+METODI['TEMPO-PROPRIO-LOCALE'] = (
+    "DECISIONI DI LUCA del 2026-10-10: in TUTTI gli step si usa il TEMPO PROPRIO LOCALE "
+    "del nodo (d tau_k = r_k * dt), e anche la cs LOCALE; il dt nudo e- legittimo SOLO "
+    "nello spostamento, che e- la struttura causale (A4). ### SI APPLICA ALL-ERA 2 COSI-, "
+    "e OGGI NIENTE E- COSTRUITO: il mandato dice <<registra soltanto>>. ### CIO- CHE E- "
+    "GIA- VERO: A17 vieta per costruzione le grandezze globali nelle espressioni "
+    "(`simboli_vietati`), ma SOLO per `pos` -- una MEDIANA su tutta la rete NON e- ancora "
+    "rifiutata da niente. ### IL PRESIDIO CHE MANCA, e il mandato lo dice: via AST, una "
+    "legge che usa il dt GLOBALE invece di d tau_k deve essere RIFIUTATA -- da costruire "
+    "QUANDO ESISTERA- LA MONETA, non oggi. ### E il GAUGE DEL TEMPO toglie un problema: "
+    "contano solo i RAPPORTI fra vicini, quindi non serve fissare niente con una mediana.",
+    "nessun codice: la voce e- il posto, e i due bracci (r_k = cs_k = 1; il gauge) stanno "
+    "nel prototipo del piano",
+    "PRONTO")
+
 METODI['MEMORIE-NELLA-CAMMINATA'] = (
     "VALUTAZIONE DEL GUARDIANO accettata da Luca il 2026-10-10: nella camminata la memoria "
     "di moto diventa NATIVA, e l-oblio diventa SCAMBIO col vuoto locale. ### SI APPLICA "

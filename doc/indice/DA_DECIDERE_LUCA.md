@@ -24,12 +24,13 @@
 | **[[DOMANDA-D9-GEOMETRIA]]** D9: la geometria viene da d e p_d dentro H, o dalle relazioni fra gli ps | ### ⏳ aspetta | ### **aspetta:** `DOMANDA-QUANTITA-CONSERVATA` |
 | **[[VUOTO-LOCALE-DETERMINISTICO]]** termostato locale + scuotimento DETERMINISTICO: UNA legge per nodo, fase | ### ⏳ aspetta | ### **aspetta:** `DOMANDA-D13-CONIUGATI` |
 
-### `DIPENDENTE` — **4**
+### `DIPENDENTE` — **5**
 
 | la domanda | pronta? | che cosa aspetta |
 |---|---|---|
 | **[[DOMANDA-FUSIONE]]** la FUSIONE di due nodi: si vieta, e con che cosa? | ### ✅ **PRONTA** | ### **niente** |
 | **[[DOMANDA-GRAFO-INIZIALE]]** il grafo iniziale SENZA pos: reticolo, k-regolare, espansore? | ### ✅ **PRONTA** | ### **niente** |
+| **[[DOMANDA-GRANDEZZA-LOCALE-TEMPO]]** da dove viene la grandezza locale da cui escono r_k e cs_k? | ### ⏳ aspetta | ### **aspetta:** `DOMANDA-QUANTITA-CONSERVATA`, `VUOTO-LOCALE-DETERMINISTICO` |
 | **[[DOMANDA-LAMBDA-GRANDEZZA]]** lambda: su quale grandezza si misura, e da dove viene il suo valore? | ### ⏳ aspetta | ### **aspetta:** `DOMANDA-D9-GEOMETRIA` |
 | **[[DOMANDA-UNITA-DI-STATO]]** l-unita- di stato: qual e- la capacita- di un nodo? | ### ⏳ aspetta | ### **aspetta:** `DOMANDA-D9-GEOMETRIA` |
 
@@ -44,7 +45,7 @@
 
 ## IL CONTO
 
-> ### ⛔ **aperte `10`, di cui pronte `5`.**
+> ### ⛔ **aperte `11`, di cui pronte `5`.**
 >
 > ### ✅ **E una domanda DECISA esce da sola:** si chiude con la decisione di Luca e il commit, e ### **nessuno la spunta a mano** -- la lista ### **si genera dai campi**, e un campo che cambia ### **cambia la lista.**
 
