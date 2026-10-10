@@ -12,10 +12,10 @@
 | `FISICA` | `ENTRAMBE` | 17 |
 | `INFRASTRUTTURA` | `1` | 39 |
 | `INFRASTRUTTURA` | `2` | 12 |
-| `INFRASTRUTTURA` | `ENTRAMBE` | 14 |
+| `INFRASTRUTTURA` | `ENTRAMBE` | 15 |
 | `METODO` | `1` | 156 |
 | `METODO` | `2` | 3 |
-| `METODO` | `ENTRAMBE` | 81 |
+| `METODO` | `ENTRAMBE` | 83 |
 
 | id | classe | dominio | era | stato | blocca | titolo |
 |---|---|---|---|---|---|---|
@@ -244,6 +244,7 @@
 | `DIVISIONE-AUTOCONSISTENTE` | FRONTE | FISICA | 2 | ### **AGENDA** |  | la divisione dell arco come UNA legge: dove si rompe, cosa ereditano i figli, il |
 | `DOPPIA-COP` | CURA | FISICA | 1 | ### **SOSPESA** |  | LA CURA (b): la doppia copertura 4 pi e' un ASSIOMA e va resa STRUTTURALE, non m |
 | `DRIVER-SCENA-II` | CURA | INFRASTRUTTURA | 1 | ### **CHIUSA** |  | APERTA il 2026-09-26 (rilievo di Luca) / IL DRIVER NON SA FARE LA SCENA (ii), e  |
+| `DUE-VIE-SU-LEGGI-JSONL` | DIFETTO | INFRASTRUTTURA | ENTRAMBE | ### **APERTA** |  | due vie di scrittura si contendono leggi.jsonl e variabili.jsonl, e vince chi gi |
 | `E1` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 56 volte, MAI definito in un registro) |
 | `E3` | FRONTE | FISICA | 1 | ### **SOSPESA** |  | EPOCA 3 + RUN LUNGO — tag epoca-3, 3000 passi, M1/M4 leggere durante il run / GL |
 | `E4-LAM` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | LAM FATTO il 2026-09-24 / LA LEGGE «NESSUNA LUNGHEZZA SOTTO LAM» DEVE DIVENTARE  |
@@ -299,6 +300,7 @@
 | `H-FISICA-FUORI-LISTA` | PRESIDIO | METODO | ENTRAMBE | ### **APERTA** |  | H-FISICA-FUORI-LISTA: un .py sotto la cartella dell'era 2 che NON e' nella LISTA |
 | `H-ID-OBBLIGATORIO` | PRESIDIO | METODO | ENTRAMBE | ### **APERTA** |  | H-ID-OBBLIGATORIO: un commit che tocca la fisica o un referto CITA almeno un ID  |
 | `H-INDICE` | PRESIDIO | METODO | ENTRAMBE | ### **APERTA** |  | PRESIDIO DEL HOOK: un ID citato in un documento vivo o nel messaggio che non e'  |
+| `H-INDICE-IGNORA-I-VOCABOLARI` | DIFETTO | METODO | ENTRAMBE | ### **APERTA** |  | H-INDICE legge solo le voci: un ID di legge, variabile, assioma o decisione risu |
 | `H-NON-TRACCIATI` | PRESIDIO | METODO | ENTRAMBE | ### **APERTA** |  | l undicesimo hook: BLOCCA se ci sono file non tracciati e non ignorati sotto csv |
 | `H-P1-bis` | PRESIDIO | METODO | ENTRAMBE | ### **APERTA** |  | PRESIDIO DEL HOOK: un referto committato senza toccare la relazione |
 | `H-P3` | PRESIDIO | METODO | ENTRAMBE | ### **APERTA** |  | PRESIDIO DEL HOOK: un sigillo che configura il modulo A MANO invece di passare d |
@@ -601,6 +603,7 @@
 | `REGISTRO_FISICA:V9` | CRITERIO | METODO | 1 | ### **CHIUSA** |  | quante scritture hanno \/dx\//d 1, e quante 2 / 1: Itô comprime; 2: Itô inverte  |
 | `RELAZIONE-BINARIA` | DIFETTO | INFRASTRUTTURA | ENTRAMBE | ### **APERTA** |  | un NUL letterale rende RELAZIONE_PER_CLAUDE.md binaria per git, e i suoi diff il |
 | `REPERTI-IMMUTABILI` | DIFETTO | METODO | ENTRAMBE | ### **APERTA** |  | APERTA il 2026-09-26 (proposta di Luca), famiglia G / UN COMMIT PUO' TOCCARE UN  |
+| `REPLAY-CIECO-ALLE-CANCELLAZIONI` | DIFETTO | METODO | ENTRAMBE | ### **APERTA** |  | il REPLAY di P-T2 non vedeva una cancellazione: 13 su 13 con 4 record tolti |
 | `REVERSIBILITA-LOCALE` | FRONTE | FISICA | 2 | ### **AGENDA** |  | reversibilita' LOCALE, irreversibilita' GLOBALE: la sola freccia e' la crescita  |
 | `RI-ANCORATA` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 2 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
 | `RI-MISURA` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 3 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |

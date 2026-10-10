@@ -201,6 +201,49 @@ def replay(nome):
     return err
 
 
+def mancanti(nome):
+    """### ⛔ **GLI ID CHE LO STORICO HA CREATO E CHE NON SONO PIU- NEL FILE.**
+
+    ### ⚠ **E- IL BUCO DEL `REPLAY`, MISURATO il 2026-10-10:** `replay()` cicla su
+    ### **i record PRESENTI NEL FILE**, quindi ### **un record CANCELLATO non viene
+    ### mai guardato** -- e il collaudo passava ### **`13` su `13` con QUATTRO record
+    ### cancellati.**
+    ### ⭐ **E <<ogni record coincide col suo storico>> NON E- <<lo storico si
+    ### rigioca in QUESTO file>>:** la prima frase e- vera anche su un file ### **meta-
+    ### vuoto.** ### **La seconda e- quella che la parola REPLAY promette.**
+
+    ### ⚠ **LA PRESENZA SI CERCA NEI REGISTRI CHE CONDIVIDONO LO STORICO, non nel
+    ### solo `nome`:** `voci.jsonl` ed `etichette_rimosse.jsonl` ### **condividono
+    ### `storico.jsonl`**, e una voce che diventa un-etichetta ### **sparisce dal primo
+    ### e compare nel secondo** -- cercarla nel solo `nome` la direbbe ### **persa
+    ### mentre e- solo MIGRATA.**
+
+    ### ✅ **E UN `alias` VALE COME PRESENZA:** `rinomina` lascia il nome vecchio
+    ### come alias, e le righe di storico di prima del rinominamento portano ### **il
+    ### nome vecchio.** ### **Un ID risolto da un alias NON e- perso: e- lo stesso
+    ### oggetto con un nome nuovo** -- ed e- la regola del par. `9`.
+    """
+    stato, chiave, storico, _dove, _b = REGISTRI[nome]
+    if stato != "REPLAY" or not storico:
+        return []
+    fratelli = [n for n, v in REGISTRI.items() if v[2] == storico]
+    ci_sono = set()
+    for n in fratelli:
+        for r in _jsonl(os.path.join(D, n)):
+            ci_sono.add(r[REGISTRI[n][1]])
+            ci_sono |= set(r.get("alias") or [])
+    err = []
+    for k in sorted({r.get("id") for r in _righe_storico(nome) if r.get("id")}):
+        if k not in ci_sono:
+            err.append("`P-T2` `%s` `%s`: LO STORICO LO HA CREATO E NON E- PIU- NEL "
+                       "FILE, ne- in %s, ne- come `alias`. ### Un `REPLAY` promette che "
+                       "lo storico SI RIGIOCHI IN QUESTO FILE, e un record cancellato "
+                       "rompe la promessa SENZA toccare nessun record rimasto"
+                       % (nome, k, " o ".join("`%s`" % x for x in fratelli if x != nome)
+                          or "nessun fratello"))
+    return err
+
+
 def reperto(nome):
     stato, _c, _s, _d, b = REGISTRI[nome]
     p = os.path.join(D, nome)
@@ -268,6 +311,11 @@ def controlla():
                 err.append("`P-T2` `%s`: `REPLAY` senza uno storico dichiarato" % nome)
                 continue
             err += replay(nome)
+            # ### ⛔ **E LA PRESENZA, che `replay()` NON PUO- GUARDARE:** cicla sui
+            # ### record ### **del file**, quindi ### **un record cancellato non viene
+            # ### mai raggiunto.** ### **Due controlli, perche- sono due domande
+            # ### diverse:** <<cio- che c-e- coincide?>> e <<c-e- tutto?>>.
+            err += mancanti(nome)
         else:
             if not b:
                 err.append("`P-T2` `%s`: `REPERTO` senza il blob dichiarato" % nome)
@@ -437,6 +485,47 @@ def collaudo():
              len({c for _f, c in GENERATI if c not in LENTI})))
     esito("### e il braccio sopra HA MATERIA (ci sono generati da rigenerare)",
           len(GENERATI) >= 5, "%d file dichiarati" % len(GENERATI))
+    # ===================================================================================
+    #   ### ⭐ **IL BUCO DEL `REPLAY`, e i bracci che lo chiudono** *(2026-10-10)*
+    # ===================================================================================
+    # ### ⛔ **IL CASO CHE DEVE FALLIRE SI COSTRUISCE DAI DATI VERI** (`P1-sexies`):
+    # ### si toglie ### **un record che lo storico ha creato**, si guarda, e
+    # ### ### **si rimette** -- e l-ultimo braccio verifica che il file sia tornato
+    # ### ### **IDENTICO AL BYTE**, altrimenti il collaudo ### **lascia danno.**
+    import hashlib as _hl
+    _reg = "leggi.jsonl"
+    _p = os.path.join(D, _reg)
+    _b0 = io.open(_p, "rb").read()
+    _sha0 = _hl.sha1(_b0).hexdigest()
+    _ids_st = sorted({r.get("id") for r in _righe_storico(_reg) if r.get("id")})
+    esito("### il collaudo ha MATERIA: lo storico di `%s` ha creato dei record" % _reg,
+          len(_ids_st) > 0,
+          "%d: %s" % (len(_ids_st), ", ".join("`%s`" % x for x in _ids_st[:4])))
+    esito("NON deve scattare: col file INTATTO, nessun record manca",
+          mancanti(_reg) == [],
+          "### e nessun falso positivo: un `alias` vale come presenza, perche- "
+          "`rinomina` lascia il nome vecchio")
+    try:
+        _vittima = _ids_st[0] if _ids_st else None
+        _righe = [r for r in io.open(_p, encoding="utf-8").read().split(NL) if r.strip()]
+        _tolte = [r for r in _righe if json.loads(r)["id"] != _vittima]
+        io.open(_p, "w", encoding="utf-8", newline=NL).write(NL.join(_tolte) + NL)
+        _m = mancanti(_reg)
+        esito("### DEVE scattare: un record CANCELLATO si vede",
+              _vittima is not None and any(_vittima in x for x in _m),
+              "`%s` tolto: ### e- il buco che PASSAVA 13 su 13 con QUATTRO record "
+              "cancellati" % _vittima)
+        esito("### e `replay()` DA SOLO NON LO VEDE: e- il motivo per cui `mancanti` "
+              "esiste",
+              replay(_reg) == [],
+              "### `replay()` cicla sui record DEL FILE: cio- che non c-e- NON SI "
+              "GUARDA -- e <<ogni record coincide>> e- vero anche su un file META- VUOTO")
+    finally:
+        io.open(_p, "wb").write(_b0)
+    esito("### e il file e- tornato IDENTICO AL BYTE",
+          _hl.sha1(io.open(_p, "rb").read()).hexdigest() == _sha0,
+          "`%s`: ### un collaudo che lascia danno non e- un collaudo" % _sha0[:8])
+
     esito("NON deve scattare: alla fine, `P-T2` TACE di nuovo",
           controlla() == [] and generati(con_lenti=False) == [],
           "### e il repo e- come l-ho trovato")
