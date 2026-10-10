@@ -2888,7 +2888,7 @@ etichette rimosse, con ### **`0` persi, `0` doppi, `0` conflitti**.
 | `primo_ordine/simmetrie.py` | `0a916916` | ### **`P-SIM`**: le simmetrie ### **SIMBOLICHE** *(zero in sympy)* e le conservazioni ### **NUMERICHE** contro soglie ### **DERIVATE** *(`passi*eps`, `dt^2`)* | `_collauda_simmetrie.py` ### **`13`/`13`** |
 | `primo_ordine/grafo.py` | `a42249db` | ### **`P-GRAFO`**: il grafo valido ### **A OGNI PASSO**, e una violazione ### **FERMA**. ### **Costo MISURATO: il `5.7%` di un passo** | `_collauda_grafo.py` ### **`11`/`11`** |
 | `csv/_barriera.py` | `576c303d` | ### **`P-BARRIERA`**: i hook locali, l'### **impronta**, e il rifiuto col ### **codice `3`**. ### ⚠ **Tace fuori dal PC: è una MIA INFERENZA** | `--collaudo` ### **`11`/`11`** |
-| `primo_ordine/collauda.py` | `807562ad` | ### **`P-TEMPI`**: un solo comando, i tempi, e il budget che ### **SEGNALA invece di rifiutare** | ### **`17` collaudi**, `pre-commit` `44.4` s su `120` |
+| `primo_ordine/collauda.py` | `b9c4a91a` | ### **`P-TEMPI`**: un solo comando, i tempi, e il budget che ### **SEGNALA invece di rifiutare** | ### **`29` collaudi** *(erano ### **`19`**, e ### **DIECI giravano in CI senza stare qui**)*, `pre-commit` `67.6` s su `120` *(`56`%)*, piu- `76.4` s di lenti |
 | `primo_ordine/_collauda_guida.py` | `922a097a` | ### **`P-GUIDA`**: ### **ESEGUE** `doc/COME_SI_AGGIUNGE_UNA_LEGGE.md` su una legge di prova, e rimette tutto col ### **`sha1`** | ### **`12`/`12`** |
 
 | | |

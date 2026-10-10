@@ -209,6 +209,10 @@ def collaudo():
     casi.append(("(a) una regola TOLTA e' scoperta col nome", ok,
                  "perse=%s" % perse.get("dichiarate")))
     # (a) una CITAZIONE IN PROSA che sparisce NON e' una perdita
+    # ### ✅ **E ANCHE QUESTA SI ASSERISCE**, per il censimento del `2026-10-10`:
+    # ### l-impasto e- ### **interno al collaudo** e non puo- scadere per un commit
+    # ### sul repo, ma ### **un letterale morto qui darebbe un PASSA, non un errore.**
+    assert base.count("il testo cita `A9` in prosa") == 1
     senza_prosa = base.replace("il testo cita `A9` in prosa", "")
     perse2, _ = confronta(regole_di(base), regole_di(senza_prosa))
     casi.append(("(a) una CITAZIONE in prosa NON e' una perdita", not perse2,

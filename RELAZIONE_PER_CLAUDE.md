@@ -12045,3 +12045,15 @@ Ogni dato di `db_era2/` ha ### **il suo TIMBRO accanto**, col campo `versione_da
 ### ✅ **LA CURA NON E- «queste otto sono ammesse»:** e- ### **LA REGOLA** — *«una voce spostata da una ### **SCRITTURA DICHIARATA** non e- fuori posto»* — perche- ### **l-autorita- su dove sta una voce e- lo STORICO**, non la lista della migrazione. ### 📌 **Cosi- il controllo NON VA RISCRITTO alla prossima decisione**, ed e- il criterio che ### **quel file stesso dichiara:** *«si scrive la REGOLA, non i `6` ID che oggi la esercitano»*.
 
 ### ⚠ **E I DENTI RESTANO, MISURATO:** spostando ### **a mano** una voce di `L2` senza riga di storico *(`FRECCE-IMPOSTE`, da `FISICA` a `METODO`)*, `C3` grida ### **«fuori posto `1`»** e il controllo ### **esce NON ZERO**. ### **E i byte di `voci.jsonl` sono stati ripristinati.** ### ✅ **I controlli da `4` su `6` a `6` SU `6`**, e la riga ### **dice i nomi delle otto spostate** invece di nasconderle.
+
+## IL COMANDO CHE SI CHIAMA «LA SUITE COMPLETA» COPRIVA `19` COLLAUDI SU `29` — ### **e il guardiano lo usa per dire se il repo e- verde** *(2026-10-10)*
+
+### 📌 **IL CENSIMENTO, non un-occhiata:** ho letto ### **il workflow della CI** e ### **il `pre-commit`** e li ho confrontati con la lista di `primo_ordine/collauda.py`. ### ⛔ **DIECI collaudi giravano nel `pre-commit` E in CI e NON stavano nella lista.**
+
+### ⭐ **E CONTA PER UNA RAGIONE PRECISA:** il guardiano ### **usa quel comando** per dire se il repo e- verde. Su un clone pulito ha letto ### **`17` su `19`** e ha concluso che fallivano ### **DUE** collaudi — mentre in CI era rosso ### **anche `P-MOD`**, che da li- ### **non si vedeva.** ### ⚠ **Un comando che si chiama «completa» e che ne copre `19` su `29` e- un FALSO-UNO: il suo verde NON vuol dire che la CI e- verde.**
+
+### ✅ **E AGGIUNGERLI HA TROVATO SUBITO ALTRO ROSSO:** `P-RIF` falliva ### **perche- la frase che spiega questa cura l-avevo scritta IN UN COMMENTO** di `primo_ordine/` — ed e- esattamente cio- che `P-RIF` vieta. ### **Il presidio ha morso il commit che lo rendeva visibile**, ed e- la ### **terza volta** che mi prende sullo stesso punto. La frase e- andata nel ### **docstring**, che e- documentazione.
+
+### 📌 **E IL CENSIMENTO CHE AVEVO PROMESSO, sulle sabotature su un letterale: ne ho trovate TRE.** ### ✅ **E il risultato e- rassicurante, e lo dico com-e-:** ### **DUE erano GIA- ASSERITE** *(`csv/_albero_era2.py`, `primo_ordine/_collauda_genera.py`: entrambe contano l-ancora prima di sostituire)* e ### **UNA lavora su un impasto INTERNO al collaudo** *(`csv/_struttura_regole.py`: non puo- scadere per un commit sul repo)*. ### **L-ho asserita comunque**, perche- un letterale morto ### **li- darebbe un PASSA, non un errore.** ### ⭐ **Quindi `_modularita_era2.py` era l-UNICO che sabotava un FILE DEL REPO senza asserire.**
+
+### 📌 **MISURATO:** ### **`29` collaudi**, `pre-commit` ### **`67.6` s** su un budget di `120` *(`56`%)*, piu- ### **`76.4` s** di lenti solo in CI.

@@ -13,7 +13,7 @@
 | `FISICA` | `ENTRAMBE` | 17 |
 | `INFRASTRUTTURA` | `1` | 39 |
 | `INFRASTRUTTURA` | `2` | 14 |
-| `INFRASTRUTTURA` | `ENTRAMBE` | 19 |
+| `INFRASTRUTTURA` | `ENTRAMBE` | 20 |
 | `METODO` | `1` | 156 |
 | `METODO` | `2` | 9 |
 | `METODO` | `ENTRAMBE` | 87 |
@@ -154,6 +154,7 @@
 | `CLIP-INVENTARIO` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | INVENTARIO dei clip, tetti e pavimenti del passo pieno: 27 TETTI FISICI su 117 g |
 | `COER-4PI` | CRITERIO | METODO | 1 | ### **CHIUSA** |  | la coerenza della massa e' `/<e^{i phi}>/`: il campo NON distingue `phi` da `phi |
 | `COLLAUDO-NON-ESEGUITO` | DIFETTO | METODO | ENTRAMBE | ### **APERTA** |  | un collaudo che si RIFIUTA di girare esce con 2, e il controllo C4 lo conta come |
+| `COMANDO-UNICO-INCOMPLETO` | DIFETTO | INFRASTRUTTURA | ENTRAMBE | ### **APERTA** |  | il comando che si chiama LA SUITE COMPLETA copriva 19 collaudi su 29 |
 | `COMPONENTI:A1` | CURA | METODO | 1 | ### **CHIUSA** |  | A1. STEP2OROLOGIO — aggancio OROLOGIO ↔ METRICA · omegaclk = (cs/CSM)² |
 | `COMPONENTI:A2` | CRITERIO | METODO | 1 | ### **SOSPESA** |  | peq è lo sfondo diffuso locale (Legge I, :265): nessuna statistica globale |
 | `COMPONENTI:A3` | CRITERIO | METODO | 1 | ### **SOSPESA** |  | dopo la proiezione arco→nodo, numeratore e denominatore vivono entrambi sui nodi |
@@ -187,7 +188,7 @@
 | `CONSERVAZIONE-LOCALE` | FRONTE | FISICA | 2 | ### **AGENDA** |  | A14: ogni legge si giudica su tre domande -- energia locale, carica locale, tota |
 | `CONTA-RIGHE` | FRONTE | METODO | ENTRAMBE | ### **APERTA** |  | DUE CONVENZIONI PER CONTARE LE RIGHE: i miei strumenti contavano uno in piu' di  |
 | `CONTO-BOOLEANI-P5` | DIFETTO | METODO | 1 | ### **SOSPESA** |  | i booleani di modulo contati da P5 sono passati da 79 a 82 col simulatore INTATT |
-| `CONTROLLO-CONTRO-ATTESA-CONGELATA` | DIFETTO | METODO | ENTRAMBE | ### **APERTA** |  | un controllo della migrazione gridava fuori posto su un lavoro CHIESTO da Luca |
+| `CONTROLLO-CONTRO-ATTESA-CONGELATA` | DIFETTO | METODO | ENTRAMBE | ### **CHIUSA** |  | un controllo della migrazione gridava fuori posto su un lavoro CHIESTO da Luca |
 | `COPPIA-RAMP` | FRONTE | FISICA | 1 | ### **SOSPESA** |  | APERTA il 2026-09-26 / PERCHE' LA COPPIA NON PORTA ramp? Misurato sui figli (2 s |
 | `COSA-RICONTROLLARE` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 3 volte, MAI definito in un registro) [COSA-RICONTROLLARE] |
 | `CRESCITA-DOPO-Z43` | MISURA | FISICA | 1 | ### **SOSPESA** |  | con r = cs/CS_M la rete quasi non cresce: ~25 nascite contro ~1500 in 150 passi |

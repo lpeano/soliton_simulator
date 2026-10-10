@@ -21,6 +21,20 @@ l'ho tarato io: era già la riga di divisione fra `VELOCI` e `LENTI`.**
 ### ⚠ **E I TEMPI NON SONO UN NUMERO DEL REPO: sono una MISURA DI QUESTA MACCHINA.** Il
 referto li stampa ### **con la piattaforma accanto**, perché ### **un tempo senza la
 macchina che l'ha prodotto non si può confrontare con niente.**
+
+### ⛔ **I DIECI CHE MANCAVANO, trovati il `2026-10-10` col censimento.** Dieci
+collaudi giravano ### **nel `pre-commit` E in CI**, e ### **non stavano in `COLLAUDI`.**
+
+### ⭐ **E conta perche- il guardiano USA QUESTO COMANDO per dire se il repo e-
+verde:** su un clone pulito ha letto ### **`17` su `19`** e ha concluso che fallivano
+### **DUE** collaudi -- mentre in CI era rosso ### **anche `P-MOD`**, che da qui
+### **non si vedeva.** ### ⚠ **Un comando che si chiama <<LA SUITE COMPLETA>> e che
+ne copre `19` su `29` e- un FALSO-UNO: il suo verde NON vuol dire che la CI e- verde.**
+
+### ✅ **E aggiungerli ha trovato SUBITO altro rosso: `P-RIF`**, perche- la frase
+che stai leggendo ### **l-avevo scritta in un COMMENTO** -- e un ID in un commento di
+`primo_ordine/` e- esattamente cio- che `P-RIF` vieta. ### **Il presidio ha morso il
+commit che lo rendeva visibile.**
 """
 import io
 import os
@@ -80,6 +94,25 @@ COLLAUDI = (
     ("l-arbitro fra le due vie", "csv/_registri_indice.py --collaudo", "pre-commit"),
     ("i presidi dell-indice", "csv/_presidio_indice.py --collaudo", "pre-commit"),
     ("`P-REG` le regole di gestione", "csv/_collauda_regole.py", "pre-commit"),
+    # ------------------------------------------------- I DIECI CHE MANCAVANO
+    # ### ⛔ **Perche- mancavano, e perche- conta: sta nel DOCSTRING del modulo** --
+    # ### ### **e sta la- perche- un ID in un commento di `primo_ordine/` e- vietato**,
+    # ### e il presidio dei riferimenti me lo ha detto ### **per la terza volta.**
+    ("`P-E1`..`P-E5` i presidi dell-era 2", "csv/_presidi_era2.py --collaudo",
+     "pre-commit"),
+    ("`P-M1` il documento dei metodi", "csv/_metodi_era2.py --collaudo", "pre-commit"),
+    ("`P-C1` i controlli nell-indice", "csv/_controlli_nell_indice.py --collaudo",
+     "pre-commit"),
+    ("`P-T1` il testo non si interpreta", "csv/_testo_e_metadati.py --collaudo",
+     "pre-commit"),
+    ("`P-R1` ogni ramo e- dichiarato", "csv/_rami_era2.py --collaudo", "pre-commit"),
+    ("`P-T3` le citazioni strutturate", "csv/_citazioni_strutturate.py --collaudo",
+     "pre-commit"),
+    ("`P-RIF` un ID nel codice e- un costrutto", "csv/_rif_nel_codice.py --collaudo",
+     "pre-commit"),
+    ("`P-ES1` un solo esecutore", "csv/_un_solo_esecutore.py --collaudo", "pre-commit"),
+    ("`P-MOD` la modularita-", "csv/_modularita_era2.py --collaudo", "pre-commit"),
+    ("`P-AB` i confronti e i dati", "csv/_confronti_e_dati.py --collaudo", "pre-commit"),
 )
 
 
