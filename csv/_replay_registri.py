@@ -20,6 +20,7 @@ misura lo dice: su ### **dieci** registri, ### **quattro** hanno uno storico, e
 |---|---|---|
 | **`REPLAY`** | ogni record coincide col `dopo` della sua ultima riga di storico | ### **si rigioca lo storico** |
 | **`REPERTO`** | il file ### **non cambia**: non ha una via di scrittura, e non deve averla | ### **il BLOB dichiarato** |
+| **`GENERATO`** | il file lo ### **produce un generatore dichiarato**, e la sua fonte sta altrove | ### **si rigenera e si confronta AL BYTE** *(la macchina di `13(f)`)* |
 
 ### ⛔ **E `metadati.jsonl` E' IL CASO SCOMODO, e lo dichiaro invece di nasconderlo:**
 ha ### **una via di scrittura** *(`meta-aggiungi`, `meta-depreca`, `meta-rinomina`)* e
@@ -54,7 +55,23 @@ PRESIDIO = "P-T2"
 # ### ⭐ **E il presidio e- PIU- FORTE di un blob:** il blob direbbe solo
 # ### *<<e- cambiato>>*; questo dice ### **<<una riga che c-era NON C-E- PIU-,
 # ### o e- CAMBIATA>>**, e lo verifica ### **contro `git show HEAD`.**
-STATI = ("REPLAY", "REPERTO", "SOLO-AGGIUNTE")
+# ### ⛔ **IL QUARTO STATO, e nasce da una DICHIARAZIONE FALSA MIA** *(2026-10-10)*.
+# ### `assiomi.jsonl` e `decisioni.jsonl` erano dichiarati ### **`REPERTO`**, che dice
+# ### alla lettera *<<non ha una via di scrittura, ### **e non deve averla**>>* --
+# ### ### **e invece SONO GENERATI** da `csv/_registri_indice.py`, che legge le schede di
+# ### `doc/REGISTRO_FISICA.md` e di `doc/ASSIOMI.md`.
+# ### ⚠ **IL BLOB NON SE NE ACCORGEVA**, perche- un generatore ### **stabile** da-
+# ### sempre gli stessi byte: il controllo passava ### **per la ragione sbagliata.**
+# ### ⭐ **E L-HO SCOPERTO PERCHE- IL MANDATO `3` CHIEDE DI SCRIVERE NODI IN
+# ### `decisioni.jsonl`:** un nodo scritto a mano la- dentro ### **sarebbe cancellato al
+# ### primo giro del generatore**, e la dichiarazione `REPERTO` ### **mi avrebbe fatto
+# ### credere che fosse sicuro.**
+# ### ✅ **`GENERATO` si verifica RIGENERANDO E CONFRONTANDO AL BYTE** -- cioe- con
+# ### la macchina di `13(f)`, che esiste gia-. ### **Quindi il quarto stato NON porta un
+# ### controllo nuovo: porta la DICHIARAZIONE GIUSTA su un controllo che c-era** -- e un
+# ### registro `GENERATO` che ### **non e- fra i `GENERATI`** e- rifiutato, perche-
+# ### ### **nessuno lo verificherebbe.**
+STATI = ("REPLAY", "REPERTO", "SOLO-AGGIUNTE", "GENERATO")
 
 # ### ⛔ **I CAMPI DI TESTO LIBERO**, gli stessi di `P-T1`: ### **una sola lista**,
 # ### e qui si importa invece di ricopiarla -- ### **due liste divergerebbero.**
@@ -79,8 +96,9 @@ REGISTRI = {
     "variabili.jsonl": ("REPLAY", "id", "storico_era2.jsonl", "variabili", None),
     # ### ⛔ **IL CASO SCOMODO:** ha una via di scrittura e ZERO storico.
     "metadati.jsonl": ("REPERTO", "chiave", None, None, "e876fb9cfe10b65d"),
-    "assiomi.jsonl": ("REPERTO", "id", None, None, "06d3c6fa5496d3d7"),
-    "decisioni.jsonl": ("REPERTO", "id", None, None, "d8a4fd2fae8c4b3f"),
+    # ### ✅ **GENERATI, non reperti:** `csv/_registri_indice.py` li produce.
+    "assiomi.jsonl": ("GENERATO", "id", None, None, None),
+    "decisioni.jsonl": ("GENERATO", "id", None, None, None),
     "migrazione_era1.jsonl": ("REPERTO", None, None, None, "9a5c45b40fb853fd"),
     "conflitti_era1.jsonl": ("REPERTO", None, None, None, "da39a3ee5e6b4b0d"),
     # ### \u2705 **IL TERZO STATO:** le citazioni strutturate ### **crescono e non si
@@ -103,6 +121,20 @@ REGISTRI = {
 LENTI = ("csv/_referto_infrastruttura_era2.py",)
 
 GENERATI = (
+    # ### ✅ **I QUATTRO REGISTRI DI VOCABOLARIO**, che `csv/_registri_indice.py`
+    # ### produce in un giro solo. ### ⚠ **`leggi.jsonl` e `variabili.jsonl` sono
+    # ### ANCHE `REPLAY`**, e non e- una contraddizione: ### **la loro parte dell-era `1`
+    # ### si GENERA, la loro parte dell-era `2` si RIGIOCA dallo storico** -- ed e-
+    # ### esattamente la somma che l-arbitro di `scrivi()` tiene insieme.
+    # ### ✅ **E ANCHE IL SUO REFERTO**, perche- era proprio LUI a essere
+    # ### ### **committato inquinato** da un `collaudo()` che chiama `main()`
+    # ### quattro volte: ### **il file che diceva i numeri era quello che non si
+    # ### controllava.**
+    ("doc/indice/_registri.txt", "csv/_registri_indice.py"),
+    ("doc/indice/leggi.jsonl", "csv/_registri_indice.py"),
+    ("doc/indice/variabili.jsonl", "csv/_registri_indice.py"),
+    ("doc/indice/assiomi.jsonl", "csv/_registri_indice.py"),
+    ("doc/indice/decisioni.jsonl", "csv/_registri_indice.py"),
     ("doc/METODI_era1_in_era2.md", "csv/_metodi_era2.py"),
     ("doc/REFERTO_infrastruttura_era2.md", "csv/_referto_infrastruttura_era2.py"),
     ("primo_ordine/stato.py", "primo_ordine/_genera.py"),
@@ -302,6 +334,16 @@ def controlla():
         if stato not in STATI:
             err.append("`P-T2` `%s`: stato %r fuori vocabolario: %s"
                        % (nome, stato, list(STATI)))
+            continue
+        if stato == "GENERATO":
+            # ### ⛔ **UN REGISTRO `GENERATO` DEVE ESSERE FRA I `GENERATI`**, o
+            # ### ### **nessuno lo verifica** -- e una dichiarazione che non porta un
+            # ### controllo e- ### **peggio** di nessuna dichiarazione, perche- SEMBRA
+            # ### un controllo.
+            if not any(f.endswith("/" + nome) for f, _c in GENERATI):
+                err.append("`P-T2` `%s`: dichiarato `GENERATO` e NON E- fra i `GENERATI`. "
+                           "### Quindi NESSUNO lo verifica, e la dichiarazione SEMBRA un "
+                           "controllo senza esserlo" % nome)
             continue
         if stato == "SOLO-AGGIUNTE":
             err += solo_aggiunte(nome)
@@ -525,6 +567,39 @@ def collaudo():
     esito("### e il file e- tornato IDENTICO AL BYTE",
           _hl.sha1(io.open(_p, "rb").read()).hexdigest() == _sha0,
           "`%s`: ### un collaudo che lascia danno non e- un collaudo" % _sha0[:8])
+
+    # ===================================================================================
+    #   ### ⭐ **IL QUARTO STATO `GENERATO`** *(2026-10-10)*
+    # ===================================================================================
+    _gen = sorted(n for n, v in REGISTRI.items() if v[0] == "GENERATO")
+    _in_gen = {f.rsplit("/", 1)[-1] for f, _c in GENERATI}
+    print()
+    print("  i registri `GENERATO`: %s" % (", ".join(_gen) or "nessuno"))
+    esito("### il collaudo ha MATERIA: ci sono registri `GENERATO`",
+          len(_gen) >= 2,
+          "%d: ### erano dichiarati `REPERTO`, cioe- <<non ha una via di scrittura, e non "
+          "deve averla>> -- e INVECE LA HANNO" % len(_gen))
+    esito("NON deve scattare: ogni `GENERATO` e- fra i `GENERATI`",
+          all(n in _in_gen for n in _gen),
+          "### senza questo, la dichiarazione SEMBRA un controllo senza esserlo")
+    # ### ⛔ **IL CASO CHE DEVE FALLIRE: si dichiara `GENERATO` un registro che NON
+    # ### e- fra i `GENERATI`**, e si rimette subito. ### **Si tocca la TABELLA, non un
+    # ### file:** cosi- il braccio ### **non puo- lasciare danno sul disco.**
+    _vittima = "metadati.jsonl"
+    _prima = REGISTRI[_vittima]
+    try:
+        REGISTRI[_vittima] = ("GENERATO", _prima[1], None, None, None)
+        _e = controlla()
+        esito("### DEVE scattare: un `GENERATO` che NON e- fra i `GENERATI`",
+              any("NON E- fra i `GENERATI`" in x and _vittima in x for x in _e),
+              "`%s` dichiarato `GENERATO` per finta: ### nessuno lo verificherebbe"
+              % _vittima)
+    finally:
+        REGISTRI[_vittima] = _prima
+    esito("### e la tabella e- tornata come era",
+          REGISTRI[_vittima] == _prima,
+          "### `%s` di nuovo `%s`: si tocca la TABELLA, non il disco"
+          % (_vittima, _prima[0]))
 
     esito("NON deve scattare: alla fine, `P-T2` TACE di nuovo",
           controlla() == [] and generati(con_lenti=False) == [],

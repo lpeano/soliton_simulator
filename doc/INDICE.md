@@ -300,7 +300,7 @@
 | `H-FISICA-FUORI-LISTA` | PRESIDIO | METODO | ENTRAMBE | ### **APERTA** |  | H-FISICA-FUORI-LISTA: un .py sotto la cartella dell'era 2 che NON e' nella LISTA |
 | `H-ID-OBBLIGATORIO` | PRESIDIO | METODO | ENTRAMBE | ### **APERTA** |  | H-ID-OBBLIGATORIO: un commit che tocca la fisica o un referto CITA almeno un ID  |
 | `H-INDICE` | PRESIDIO | METODO | ENTRAMBE | ### **APERTA** |  | PRESIDIO DEL HOOK: un ID citato in un documento vivo o nel messaggio che non e'  |
-| `H-INDICE-IGNORA-I-VOCABOLARI` | DIFETTO | METODO | ENTRAMBE | ### **APERTA** |  | H-INDICE legge solo le voci: un ID di legge, variabile, assioma o decisione risu |
+| `H-INDICE-IGNORA-I-VOCABOLARI` | DIFETTO | METODO | ENTRAMBE | ### **CHIUSA** |  | H-INDICE legge solo le voci: un ID di legge, variabile, assioma o decisione risu |
 | `H-NON-TRACCIATI` | PRESIDIO | METODO | ENTRAMBE | ### **APERTA** |  | l undicesimo hook: BLOCCA se ci sono file non tracciati e non ignorati sotto csv |
 | `H-P1-bis` | PRESIDIO | METODO | ENTRAMBE | ### **APERTA** |  | PRESIDIO DEL HOOK: un referto committato senza toccare la relazione |
 | `H-P3` | PRESIDIO | METODO | ENTRAMBE | ### **APERTA** |  | PRESIDIO DEL HOOK: un sigillo che configura il modulo A MANO invece di passare d |

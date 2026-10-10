@@ -272,6 +272,13 @@ def leggi_le_decisioni():
 
 
 def main():
+    # ### ⛔ **`P` SI SVUOTA A OGNI GIRO, e me l-ha insegnato un file COMMITTATO
+    # ### INQUINATO:** `collaudo()` chiama `main()` ### **quattro volte**, e `P` e- una
+    # ### lista di MODULO -- quindi `_registri.txt` si ritrovava con ### **quattro
+    # ### intestazioni** e il file committato in `4553d6a` le portava.
+    # ### ⭐ **Un generatore che ACCUMULA non e- idempotente**, e l-idempotenza e-
+    # ### esattamente cio- che la CI misura col `git diff`.
+    del P[:]
     os.makedirs(FUORI, exist_ok=True)
     stampa("=" * 104)
     stampa("I QUATTRO REGISTRI DEI VOCABOLARI -- generati dalle fonti, non scritti a mano")

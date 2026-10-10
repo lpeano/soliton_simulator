@@ -11727,3 +11727,19 @@ Ogni dato di `db_era2/` ha ### **il suo TIMBRO accanto**, col campo `versione_da
 ### ⚠ **E UNA COSA CHE IL VALIDATORE MI HA INSEGNATO, PER LA TERZA VOLTA: una voce curata nel commit `N` si puo- CHIUDERE solo in `N+1`.** La `chiusura` pretende un `commit` ### **non vuoto**, e il commit che cura ### **non esiste ancora mentre scrivo la voce.** ### ⛔ **E- gia- costato tre commit amministrativi** *(`FORMA-SPEZZA-ID`, `DUE-VIE-SU-LEGGI-JSONL`, e ora questa)*: ### **va REGOLATO, e il posto e- il mandato `5` di `6`, le regole di gestione.** ### **Lo scrivo qui perche- non si perda.**
 
 ### ✅ **`DUE-VIE-SU-LEGGI-JSONL` e- CHIUSA**, col numero vero `4553d6a` e un criterio ### **misurato**, non asserito.
+
+## IL QUARTO STATO DI `P-T2`: `GENERATO` — ### **due registri dichiaravano una cosa FALSA, e il BLOB non se ne accorgeva** *(2026-10-10)*
+
+### ⛔ **`assiomi.jsonl` e `decisioni.jsonl` erano dichiarati `REPERTO`**, che dice alla lettera *«non ha una via di scrittura, ### **e non deve averla**»* — ### **e invece li GENERA `csv/_registri_indice.py`**, leggendo le schede di `doc/REGISTRO_FISICA.md` e di `doc/ASSIOMI.md`. ### ⭐ **E IL BLOB NON SE NE ACCORGEVA, perche- un generatore STABILE da- sempre gli stessi byte: il controllo passava PER LA RAGIONE SBAGLIATA.**
+
+### 📌 **E L-HO SCOPERTO PERCHE- IL MANDATO `3` CHIEDE DI SCRIVERE NODI IN `decisioni.jsonl`:** un nodo scritto a mano la- dentro ### **sarebbe cancellato al primo giro**, e la dichiarazione `REPERTO` ### **mi avrebbe fatto credere che fosse sicuro.** ### **Il mandato non e- ancora cominciato e ha gia- pagato quattro difetti.**
+
+### ✅ **`GENERATO` NON PORTA UN CONTROLLO NUOVO: porta la DICHIARAZIONE GIUSTA su un controllo che c-era.** Si verifica ### **rigenerando e confrontando al byte**, cioe- con la macchina di `13(f)` che esiste gia- — e ### ⛔ **un registro `GENERATO` che non e- fra i `GENERATI` e- RIFIUTATO**, perche- ### **una dichiarazione che non porta un controllo e- PEGGIO di nessuna dichiarazione: SEMBRA un controllo.**
+
+### ⚠ **E I QUATTRO REGISTRI SONO ENTRATI FRA I `GENERATI`, compresi i due `REPLAY`.** Non e- una contraddizione: ### **la parte dell-era `1` di `leggi.jsonl` e `variabili.jsonl` si GENERA, la loro parte dell-era `2` si RIGIOCA dallo storico** — ed e- ### **esattamente la somma che l-arbitro tiene insieme.**
+
+### ⛔ **E UN DIFETTO MIO, DI DUE COMMIT FA: `doc/indice/_registri.txt` L-AVEVO COMMITTATO INQUINATO.** `collaudo()` chiama `main()` ### **quattro volte**, e `P` e- una lista ### **di modulo**: il referto si ritrovava con ### **quattro intestazioni**, e quella versione e- in `4553d6a`. ### ⭐ **Un generatore che ACCUMULA non e- idempotente, e l-idempotenza e- esattamente cio- che la CI misura col `git diff`.** ### ✅ **Curato** *(`del P[:]` a ogni giro)*, ### **e il file che diceva i numeri e- entrato fra i `GENERATI`: era proprio lui a non essere controllato.**
+
+### 📌 **I NUMERI:** `P-T2` ### **`18` → `22` bracci**, tutti passati; i registri ### **`4` `REPLAY` · `3` `REPERTO` · `1` `SOLO-AGGIUNTE` · `2` `GENERATO`**; i testi generati ### **`9` → `14`**. ### ✅ **E il caso che DEVE fallire si costruisce toccando LA TABELLA, non un file: cosi- quel braccio non puo- lasciare danno sul disco.**
+
+### ✅ **E `H-INDICE-IGNORA-I-VOCABOLARI` e- CHIUSA**, col numero vero `1ad971c`.
