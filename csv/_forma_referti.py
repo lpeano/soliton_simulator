@@ -99,6 +99,15 @@ TESTI = (
     # ### TUTTI:** e- la fotografia di una operazione ### **IRREVERSIBILE** -- i file
     # ### ### **non sono piu- nel repo** -- e rigenerarlo vorrebbe dire ### **rifare lo
     # ### spostamento**, che non si puo- rifare due volte.
+    # ### ⛔ **IL REFERTO DEL PROTOTIPO E- UN `REPERTO`, e il motivo e- doppio:**
+    # ### ### **nasce da una CORSA** *(`python proto_camminata/_letture.py`, minuti)*, e
+    # ### ### **dice che cosa si e- misurato il 2026-10-10** -- non <<com-e- il repo
+    # ### oggi>>. ### ⚠ **Rigenerarlo in CI vorrebbe dire RIFARE LA CORSA a ogni
+    # ### commit**, e un referto che costa minuti ### **e- la ragione numero uno per
+    # ### spegnere un passo di CI** *(`A9` dal lato del tempo)*.
+    ("doc/REFERTO_prototipo_camminata.md", REPERTO,
+     "le sette letture del prototipo della camminata, al `2026-10-10`",
+     "python proto_camminata/_referto.py", "1aef7bdf39599e1f"),
     ("doc/ARCHIVIO_E_2026-10-10.tsv", REPERTO,
      "lo spostamento su `E:` del `2026-10-10`",
      "python csv/_archivia_su_e.py --esegui", "20fa1129a49ee9dd"),

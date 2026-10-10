@@ -3050,3 +3050,15 @@ etichette rimosse, con ### **`0` persi, `0` doppi, `0` conflitti**.
 | ✅ **LA CANDIDATA** | ### **`(B)`**, con fase proporzionale allo ### **SBILANCIAMENTO DI BANDA** `ρ₊ − ρ₋` *(### **dispari sotto `C`**)*: ### **rispetta `C` AL BIT** |
 | 📌 **I NUMERI** | grafo ### **`120` nodi, `208` archi, gradi `2`-`6`** *(`5` distinti)*, ### **`416` estremita-**; norma conservata entro ### **`1.2e-15`** su soglia `5.5e-12`; cono ### **`0.0` esatto** oltre `3` archi; isotropia ### **`0.0` con `fsum`**, `1.07e-16` con `numpy`; `r=1` coincide col `dt` globale ### **al bit** |
 | ⚠ **NON E- UNA LEGGE** | ### **non entra in `leggi.yaml`** *(un braccio lo verifica leggendo la tabella)*, ### **non importa il simulatore** *(due bracci: il sorgente e `sys.modules`)*, e ### **non ha ne- clip ne- pavimenti** *(un braccio cerca `6` forme nei file di fisica del banco)* |
+
+### `proto_camminata/_letture.py` e `_referto.py` — **LE SETTE LETTURE, E IL REFERTO GENERATO DAI NUMERI** *(2026-10-10)*
+
+| | |
+|---|---|
+| **i file** | `proto_camminata/_letture.py` *(BLOB `f3378afc`)* · `proto_camminata/_referto.py` *(BLOB `b83d2ae6`)* |
+| **COMANDO** | `python proto_camminata/_letture.py` *(scrive `proto_camminata/uscite/letture.json`)* → `python proto_camminata/_referto.py` *(scrive `doc/REFERTO_prototipo_camminata.md`)* |
+| **che cosa misura** | le ### **sette letture** del task history: isotropia *(nei due modi di somma)*, anisotropia dell-integratore a strati *(in funzione di `dt`)*, cono, ### **quattro quantita- candidate** su `4` semi, cluster *(dispersione pesata e frazione intrappolata)*, ### **materia/antimateria col coniugato `C`**, `r=1`, e il ### **gauge ROVESCIATO** |
+| ⭐ **ANCHE I VERDETTI SONO GENERATI** | il confronto fra la previsione e il numero ### **lo fa il codice**, con le soglie del task history: ### **un verdetto non puo- addolcirsi mentre lo scrivo** |
+| ⛔ **IL DIFETTO CHE LE LETTURE HANNO TROVATO IN SE STESSE** | al primo giro la lettura `3` diceva ### **<<la norma DERIVA>> anche per la camminata LINEARE**, dove il collaudo misura `1.2e-15`: un ### **FALSO ROSSO**, perche- un test di pendenza su una grandezza che varia ### **solo per arrotondamento** trova sempre una tendenza *(il suo sigma E- l-arrotondamento)*. ### ✅ **Cura: prima la RISOLUZIONE, poi la statistica**, e la risoluzione e- ### **la stessa formula di `S3`** |
+| 📌 **I VERDETTI** | `5` conferme, `1` smentita *(`dt^2` del piano: misurato ### **`dt^2.885`**)*, `1` ### **<<nessuna trovata>>** *(la quantita- conservata: criterio di RIAPERTURA)*, `1` ### **<<la non linearita- non basta>>** *(il cluster)* |
+| ⚠ **NON STA NELLA SUITE** | la corsa costa ### **minuti**, e un referto che la CI rigenera a ogni commit e- ### **la ragione numero uno per spegnere un passo di CI** *(`A9` dal lato del tempo)*: per questo e- un ### **`REPERTO`** |

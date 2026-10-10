@@ -9,7 +9,7 @@
 | `DOCUMENTAZIONE` | `2` | 1 |
 | `DOCUMENTAZIONE` | `ENTRAMBE` | 8 |
 | `FISICA` | `1` | 343 |
-| `FISICA` | `2` | 36 |
+| `FISICA` | `2` | 38 |
 | `FISICA` | `ENTRAMBE` | 17 |
 | `INFRASTRUTTURA` | `1` | 39 |
 | `INFRASTRUTTURA` | `2` | 16 |
@@ -554,6 +554,8 @@
 | `PRESIDIO-RIFIUTO-SOLO-SIGILLI` | DIFETTO | DOCUMENTAZIONE | ENTRAMBE | ### **APERTA** |  | _presidio.avvia rifiuta di girare SOLO se il nome comincia con _sigillo_: A9 lo  |
 | `PRESTAZIONI-CORSE` | FRONTE | INFRASTRUTTURA | ENTRAMBE | ### **APERTA** |  | le corse costano: sei strade per il tempo di calcolo, da affrontare a modello ST |
 | `PROBLEMI-CHK3` | FRONTE | FISICA | 1 | ### **SOSPESA** |  | IL PIANO DEI PROBLEMI APERTI — per ciascuno: la domanda da chiudere · la misura  |
+| `PROPOSTA-FASE-DISPARI-COESIONE` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | la fase DISPARI sotto coniugazione di carica come forma della coesione |
+| `PROPOSTA-SCANSIONE-FORZA-NONLINEARE` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | la coerenza del cluster migliora con la forza: si estende la scansione? |
 | `PROVA-COMB` | FRONTE | FISICA | 1 | ### **SOSPESA** |  | LA PROVA COMBINATA: TUTTE LE CURE APPROVATE ACCESE INSIEME — 600 passi, stesso s |
 | `PROVA1-40-80` | MISURA | FISICA | 1 | ### **SOSPESA** |  | i NODI delle masse del passo 0 si avvicinano piu' dei controlli a 40-80 passi; i |
 | `PSI-FLASH` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | /psi/ SALTA di 1.6x nei passi con nascite: due siti ricalcolano psi dopo la mito |

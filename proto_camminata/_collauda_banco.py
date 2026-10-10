@@ -48,7 +48,8 @@ PASSI = 60
 
 # ### ⛔ **I FILE DEL BANCO, dichiarati:** servono ai due bracci che guardano
 # ### ### **il SORGENTE** *(niente simulatore, niente clip)*.
-MIEI = ("scena.py", "camminata.py", "nonlineare.py", "_collauda_banco.py", "_letture.py")
+MIEI = ("scena.py", "camminata.py", "nonlineare.py", "_collauda_banco.py",
+        "_letture.py", "_referto.py")
 # ### ⛔ **I FILE DI FISICA DEL BANCO, cioe- MIEI MENO QUESTO** -- e la ragione e-
 # ### precisa: ### **questo file NOMINA le forme di un clip per cercarle**, quindi
 # ### ### **non puo- essere il soggetto della propria ricerca.**

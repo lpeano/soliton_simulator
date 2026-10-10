@@ -1,0 +1,1196 @@
+{
+ "letture": {
+  "1a_isotropia_camminata": {
+   "fsum": 0.0,
+   "numpy": 1.067242711932372e-16,
+   "soglia": 7.993605777301126e-14
+  },
+  "1b_anisotropia_integratore": {
+   "differenze": [
+    0.027938696142590584,
+    0.00432292312419212,
+    0.000561711723383933,
+    7.019218975409203e-05
+   ],
+   "dt": [
+    0.5,
+    0.25,
+    0.125,
+    0.0625
+   ],
+   "nota": "",
+   "pendenza": 2.8854320762910013,
+   "sigma": 0.05066446313005449,
+   "strati": 7
+  },
+  "2_cono": {
+   "T": 3,
+   "eccentricita": 6,
+   "estremita_fuori": 178,
+   "max_fuori": 0.0,
+   "nodi_oltre": 57
+  },
+  "3_conservata": {
+   "(A) g=0.25": {
+    "energia + termine DISPARI": {
+     "accordo": false,
+     "esiti": [
+      "DERIVA",
+      "DERIVA",
+      "OSCILLANTE LIMITATA",
+      "DERIVA"
+     ],
+     "pendenze": [
+      2.036845112413441e-05,
+      -8.420400861684367e-06,
+      -1.1783699620532702e-06,
+      2.298104178141595e-05
+     ],
+     "sigma": [
+      2.4270866936705277e-06,
+      1.525579475685682e-06,
+      1.1138819394992017e-06,
+      3.6409962984815724e-06
+     ]
+    },
+    "energia + termine PARI": {
+     "accordo": false,
+     "esiti": [
+      "DERIVA",
+      "DERIVA",
+      "OSCILLANTE LIMITATA",
+      "DERIVA"
+     ],
+     "pendenze": [
+      2.036845112413441e-05,
+      -8.420400861684367e-06,
+      -1.1783699620532702e-06,
+      2.298104178141595e-05
+     ],
+     "sigma": [
+      2.4270866936705277e-06,
+      1.525579475685682e-06,
+      1.1138819394992017e-06,
+      3.6409962984815724e-06
+     ]
+    },
+    "la norma": {
+     "accordo": true,
+     "esiti": [
+      "CONSERVATA",
+      "CONSERVATA",
+      "CONSERVATA",
+      "CONSERVATA"
+     ],
+     "pendenze": [
+      0.0,
+      0.0,
+      0.0,
+      0.0
+     ],
+     "sigma": [
+      0.0,
+      0.0,
+      0.0,
+      0.0
+     ]
+    },
+    "la quasi-energia del passo": {
+     "accordo": false,
+     "esiti": [
+      "DERIVA",
+      "DERIVA",
+      "OSCILLANTE LIMITATA",
+      "DERIVA"
+     ],
+     "pendenze": [
+      2.3173813155628088e-05,
+      -6.792286548241074e-06,
+      1.075657626639886e-06,
+      2.7760736292094418e-05
+     ],
+     "sigma": [
+      1.7346317891829164e-06,
+      1.2693799299010648e-06,
+      8.484960258104281e-07,
+      2.6902376540755025e-06
+     ]
+    }
+   },
+   "(A) g=0.5": {
+    "energia + termine DISPARI": {
+     "accordo": true,
+     "esiti": [
+      "DERIVA",
+      "DERIVA",
+      "DERIVA",
+      "DERIVA"
+     ],
+     "pendenze": [
+      2.6063747185491584e-05,
+      -2.1281990430659082e-05,
+      -1.3151121179844674e-05,
+      6.458992847533764e-05
+     ],
+     "sigma": [
+      5.227473784447042e-06,
+      3.1151654573433175e-06,
+      2.4092998780941034e-06,
+      8.370204441090531e-06
+     ]
+    },
+    "energia + termine PARI": {
+     "accordo": true,
+     "esiti": [
+      "DERIVA",
+      "DERIVA",
+      "DERIVA",
+      "DERIVA"
+     ],
+     "pendenze": [
+      2.6063747185491584e-05,
+      -2.1281990430659082e-05,
+      -1.3151121179844674e-05,
+      6.458992847533764e-05
+     ],
+     "sigma": [
+      5.227473784447042e-06,
+      3.1151654573433175e-06,
+      2.4092998780941034e-06,
+      8.370204441090531e-06
+     ]
+    },
+    "la norma": {
+     "accordo": true,
+     "esiti": [
+      "CONSERVATA",
+      "CONSERVATA",
+      "CONSERVATA",
+      "CONSERVATA"
+     ],
+     "pendenze": [
+      0.0,
+      0.0,
+      0.0,
+      0.0
+     ],
+     "sigma": [
+      0.0,
+      0.0,
+      0.0,
+      0.0
+     ]
+    },
+    "la quasi-energia del passo": {
+     "accordo": true,
+     "esiti": [
+      "DERIVA",
+      "DERIVA",
+      "DERIVA",
+      "DERIVA"
+     ],
+     "pendenze": [
+      3.216159112700188e-05,
+      -1.8117368763340467e-05,
+      -8.701451765648742e-06,
+      7.707993532925923e-05
+     ],
+     "sigma": [
+      3.8955872123832615e-06,
+      2.6179206173067776e-06,
+      1.8880723724141321e-06,
+      6.432416694487081e-06
+     ]
+    }
+   },
+   "(A) g=1": {
+    "energia + termine DISPARI": {
+     "accordo": false,
+     "esiti": [
+      "OSCILLANTE LIMITATA",
+      "DERIVA",
+      "DERIVA",
+      "DERIVA"
+     ],
+     "pendenze": [
+      -4.070706318496065e-06,
+      -6.0239729954276464e-05,
+      -6.445135744346809e-05,
+      0.0002083964257551283
+     ],
+     "sigma": [
+      1.1651171090287326e-05,
+      6.387233748449686e-06,
+      5.693467072480787e-06,
+      2.1696637136251917e-05
+     ]
+    },
+    "energia + termine PARI": {
+     "accordo": false,
+     "esiti": [
+      "OSCILLANTE LIMITATA",
+      "DERIVA",
+      "DERIVA",
+      "DERIVA"
+     ],
+     "pendenze": [
+      -4.070706318496065e-06,
+      -6.0239729954276464e-05,
+      -6.445135744346809e-05,
+      0.0002083964257551283
+     ],
+     "sigma": [
+      1.1651171090287326e-05,
+      6.387233748449686e-06,
+      5.693467072480787e-06,
+      2.1696637136251917e-05
+     ]
+    },
+    "la norma": {
+     "accordo": true,
+     "esiti": [
+      "CONSERVATA",
+      "CONSERVATA",
+      "CONSERVATA",
+      "CONSERVATA"
+     ],
+     "pendenze": [
+      0.0,
+      0.0,
+      0.0,
+      0.0
+     ],
+     "sigma": [
+      0.0,
+      0.0,
+      0.0,
+      0.0
+     ]
+    },
+    "la quasi-energia del passo": {
+     "accordo": false,
+     "esiti": [
+      "CONSERVATA",
+      "DERIVA",
+      "DERIVA",
+      "DERIVA"
+     ],
+     "pendenze": [
+      6.743789635369665e-06,
+      -5.491548360814442e-05,
+      -5.730027789907288e-05,
+      0.00025292849156420853
+     ],
+     "sigma": [
+      9.357600622463786e-06,
+      5.441173431028897e-06,
+      4.786910494216816e-06,
+      1.852045381355578e-05
+     ]
+    }
+   },
+   "(A) g=2": {
+    "energia + termine DISPARI": {
+     "accordo": true,
+     "esiti": [
+      "DERIVA",
+      "DERIVA",
+      "DERIVA",
+      "DERIVA"
+     ],
+     "pendenze": [
+      -0.00017091477059293968,
+      -0.00018437509038258165,
+      -0.00021463830809631106,
+      0.0005949216957723209
+     ],
+     "sigma": [
+      2.5582682057835703e-05,
+      1.3346187902876429e-05,
+      1.694173556697617e-05,
+      5.335994175737904e-05
+     ]
+    },
+    "energia + termine PARI": {
+     "accordo": true,
+     "esiti": [
+      "DERIVA",
+      "DERIVA",
+      "DERIVA",
+      "DERIVA"
+     ],
+     "pendenze": [
+      -0.00017091477059293968,
+      -0.00018437509038258165,
+      -0.00021463830809631106,
+      0.0005949216957723209
+     ],
+     "sigma": [
+      2.5582682057835703e-05,
+      1.3346187902876429e-05,
+      1.694173556697617e-05,
+      5.335994175737904e-05
+     ]
+    },
+    "la norma": {
+     "accordo": true,
+     "esiti": [
+      "CONSERVATA",
+      "CONSERVATA",
+      "CONSERVATA",
+      "CONSERVATA"
+     ],
+     "pendenze": [
+      0.0,
+      0.0,
+      0.0,
+      0.0
+     ],
+     "sigma": [
+      0.0,
+      0.0,
+      0.0,
+      0.0
+     ]
+    },
+    "la quasi-energia del passo": {
+     "accordo": true,
+     "esiti": [
+      "DERIVA",
+      "DERIVA",
+      "DERIVA",
+      "DERIVA"
+     ],
+     "pendenze": [
+      -0.00017639621997903664,
+      -0.00018280481818935186,
+      -0.0002134981935519692,
+      0.00081653391164292
+     ],
+     "sigma": [
+      2.35715504788697e-05,
+      1.1696502751876146e-05,
+      1.6814423278545866e-05,
+      5.216144575290664e-05
+     ]
+    }
+   },
+   "(B) g=0.25": {
+    "energia + termine DISPARI": {
+     "accordo": false,
+     "esiti": [
+      "DERIVA",
+      "DERIVA",
+      "OSCILLANTE LIMITATA",
+      "DERIVA"
+     ],
+     "pendenze": [
+      2.036845112413441e-05,
+      -8.420400861684367e-06,
+      -1.1783699620532702e-06,
+      2.298104178141595e-05
+     ],
+     "sigma": [
+      2.4270866936705277e-06,
+      1.525579475685682e-06,
+      1.1138819394992017e-06,
+      3.6409962984815724e-06
+     ]
+    },
+    "energia + termine PARI": {
+     "accordo": false,
+     "esiti": [
+      "DERIVA",
+      "DERIVA",
+      "OSCILLANTE LIMITATA",
+      "DERIVA"
+     ],
+     "pendenze": [
+      2.036845112413441e-05,
+      -8.420400861684367e-06,
+      -1.1783699620532702e-06,
+      2.298104178141595e-05
+     ],
+     "sigma": [
+      2.4270866936705277e-06,
+      1.525579475685682e-06,
+      1.1138819394992017e-06,
+      3.6409962984815724e-06
+     ]
+    },
+    "la norma": {
+     "accordo": true,
+     "esiti": [
+      "CONSERVATA",
+      "CONSERVATA",
+      "CONSERVATA",
+      "CONSERVATA"
+     ],
+     "pendenze": [
+      0.0,
+      0.0,
+      0.0,
+      0.0
+     ],
+     "sigma": [
+      0.0,
+      0.0,
+      0.0,
+      0.0
+     ]
+    },
+    "la quasi-energia del passo": {
+     "accordo": false,
+     "esiti": [
+      "DERIVA",
+      "DERIVA",
+      "OSCILLANTE LIMITATA",
+      "DERIVA"
+     ],
+     "pendenze": [
+      2.3173813155628088e-05,
+      -6.792286548241074e-06,
+      1.075657626639886e-06,
+      2.7760736292094418e-05
+     ],
+     "sigma": [
+      1.7346317891829164e-06,
+      1.2693799299010648e-06,
+      8.484960258104281e-07,
+      2.6902376540755025e-06
+     ]
+    }
+   },
+   "(B) g=0.5": {
+    "energia + termine DISPARI": {
+     "accordo": true,
+     "esiti": [
+      "DERIVA",
+      "DERIVA",
+      "DERIVA",
+      "DERIVA"
+     ],
+     "pendenze": [
+      2.6063747185491584e-05,
+      -2.1281990430659082e-05,
+      -1.3151121179844674e-05,
+      6.458992847533764e-05
+     ],
+     "sigma": [
+      5.227473784447042e-06,
+      3.1151654573433175e-06,
+      2.4092998780941034e-06,
+      8.370204441090531e-06
+     ]
+    },
+    "energia + termine PARI": {
+     "accordo": true,
+     "esiti": [
+      "DERIVA",
+      "DERIVA",
+      "DERIVA",
+      "DERIVA"
+     ],
+     "pendenze": [
+      2.6063747185491584e-05,
+      -2.1281990430659082e-05,
+      -1.3151121179844674e-05,
+      6.458992847533764e-05
+     ],
+     "sigma": [
+      5.227473784447042e-06,
+      3.1151654573433175e-06,
+      2.4092998780941034e-06,
+      8.370204441090531e-06
+     ]
+    },
+    "la norma": {
+     "accordo": true,
+     "esiti": [
+      "CONSERVATA",
+      "CONSERVATA",
+      "CONSERVATA",
+      "CONSERVATA"
+     ],
+     "pendenze": [
+      0.0,
+      0.0,
+      0.0,
+      0.0
+     ],
+     "sigma": [
+      0.0,
+      0.0,
+      0.0,
+      0.0
+     ]
+    },
+    "la quasi-energia del passo": {
+     "accordo": true,
+     "esiti": [
+      "DERIVA",
+      "DERIVA",
+      "DERIVA",
+      "DERIVA"
+     ],
+     "pendenze": [
+      3.216159112700188e-05,
+      -1.8117368763340467e-05,
+      -8.701451765648742e-06,
+      7.707993532925923e-05
+     ],
+     "sigma": [
+      3.8955872123832615e-06,
+      2.6179206173067776e-06,
+      1.8880723724141321e-06,
+      6.432416694487081e-06
+     ]
+    }
+   },
+   "(B) g=1": {
+    "energia + termine DISPARI": {
+     "accordo": false,
+     "esiti": [
+      "OSCILLANTE LIMITATA",
+      "DERIVA",
+      "DERIVA",
+      "DERIVA"
+     ],
+     "pendenze": [
+      -4.070706318496065e-06,
+      -6.0239729954276464e-05,
+      -6.445135744346809e-05,
+      0.0002083964257551283
+     ],
+     "sigma": [
+      1.1651171090287326e-05,
+      6.387233748449686e-06,
+      5.693467072480787e-06,
+      2.1696637136251917e-05
+     ]
+    },
+    "energia + termine PARI": {
+     "accordo": false,
+     "esiti": [
+      "OSCILLANTE LIMITATA",
+      "DERIVA",
+      "DERIVA",
+      "DERIVA"
+     ],
+     "pendenze": [
+      -4.070706318496065e-06,
+      -6.0239729954276464e-05,
+      -6.445135744346809e-05,
+      0.0002083964257551283
+     ],
+     "sigma": [
+      1.1651171090287326e-05,
+      6.387233748449686e-06,
+      5.693467072480787e-06,
+      2.1696637136251917e-05
+     ]
+    },
+    "la norma": {
+     "accordo": true,
+     "esiti": [
+      "CONSERVATA",
+      "CONSERVATA",
+      "CONSERVATA",
+      "CONSERVATA"
+     ],
+     "pendenze": [
+      0.0,
+      0.0,
+      0.0,
+      0.0
+     ],
+     "sigma": [
+      0.0,
+      0.0,
+      0.0,
+      0.0
+     ]
+    },
+    "la quasi-energia del passo": {
+     "accordo": false,
+     "esiti": [
+      "CONSERVATA",
+      "DERIVA",
+      "DERIVA",
+      "DERIVA"
+     ],
+     "pendenze": [
+      6.743789635369665e-06,
+      -5.491548360814442e-05,
+      -5.730027789907288e-05,
+      0.00025292849156420853
+     ],
+     "sigma": [
+      9.357600622463786e-06,
+      5.441173431028897e-06,
+      4.786910494216816e-06,
+      1.852045381355578e-05
+     ]
+    }
+   },
+   "(B) g=2": {
+    "energia + termine DISPARI": {
+     "accordo": true,
+     "esiti": [
+      "DERIVA",
+      "DERIVA",
+      "DERIVA",
+      "DERIVA"
+     ],
+     "pendenze": [
+      -0.00017091477059293968,
+      -0.00018437509038258165,
+      -0.00021463830809631106,
+      0.0005949216957723209
+     ],
+     "sigma": [
+      2.5582682057835703e-05,
+      1.3346187902876429e-05,
+      1.694173556697617e-05,
+      5.335994175737904e-05
+     ]
+    },
+    "energia + termine PARI": {
+     "accordo": true,
+     "esiti": [
+      "DERIVA",
+      "DERIVA",
+      "DERIVA",
+      "DERIVA"
+     ],
+     "pendenze": [
+      -0.00017091477059293968,
+      -0.00018437509038258165,
+      -0.00021463830809631106,
+      0.0005949216957723209
+     ],
+     "sigma": [
+      2.5582682057835703e-05,
+      1.3346187902876429e-05,
+      1.694173556697617e-05,
+      5.335994175737904e-05
+     ]
+    },
+    "la norma": {
+     "accordo": true,
+     "esiti": [
+      "CONSERVATA",
+      "CONSERVATA",
+      "CONSERVATA",
+      "CONSERVATA"
+     ],
+     "pendenze": [
+      0.0,
+      0.0,
+      0.0,
+      0.0
+     ],
+     "sigma": [
+      0.0,
+      0.0,
+      0.0,
+      0.0
+     ]
+    },
+    "la quasi-energia del passo": {
+     "accordo": true,
+     "esiti": [
+      "DERIVA",
+      "DERIVA",
+      "DERIVA",
+      "DERIVA"
+     ],
+     "pendenze": [
+      -0.00017639621997903664,
+      -0.00018280481818935186,
+      -0.0002134981935519692,
+      0.00081653391164292
+     ],
+     "sigma": [
+      2.35715504788697e-05,
+      1.1696502751876146e-05,
+      1.6814423278545866e-05,
+      5.216144575290664e-05
+     ]
+    }
+   },
+   "lineare": {
+    "energia + termine DISPARI": {
+     "accordo": true,
+     "esiti": [
+      "CONSERVATA",
+      "CONSERVATA",
+      "CONSERVATA",
+      "CONSERVATA"
+     ],
+     "pendenze": [
+      0.0,
+      0.0,
+      0.0,
+      0.0
+     ],
+     "sigma": [
+      0.0,
+      0.0,
+      0.0,
+      0.0
+     ]
+    },
+    "energia + termine PARI": {
+     "accordo": true,
+     "esiti": [
+      "CONSERVATA",
+      "CONSERVATA",
+      "CONSERVATA",
+      "CONSERVATA"
+     ],
+     "pendenze": [
+      0.0,
+      0.0,
+      0.0,
+      0.0
+     ],
+     "sigma": [
+      0.0,
+      0.0,
+      0.0,
+      0.0
+     ]
+    },
+    "la norma": {
+     "accordo": true,
+     "esiti": [
+      "CONSERVATA",
+      "CONSERVATA",
+      "CONSERVATA",
+      "CONSERVATA"
+     ],
+     "pendenze": [
+      0.0,
+      0.0,
+      0.0,
+      0.0
+     ],
+     "sigma": [
+      0.0,
+      0.0,
+      0.0,
+      0.0
+     ]
+    },
+    "la quasi-energia del passo": {
+     "accordo": true,
+     "esiti": [
+      "CONSERVATA",
+      "CONSERVATA",
+      "CONSERVATA",
+      "CONSERVATA"
+     ],
+     "pendenze": [
+      0.0,
+      0.0,
+      0.0,
+      0.0
+     ],
+     "sigma": [
+      0.0,
+      0.0,
+      0.0,
+      0.0
+     ]
+    }
+   }
+  },
+  "4_cluster": {
+   "(A) g=0.25": {
+    "dispersione_finale": [
+     0.9676160536442263,
+     1.2660812324850832,
+     0.890369687988067,
+     0.7002872195469627
+    ],
+    "dispersione_iniziale": [
+     1.1009287222364015,
+     1.0299621160138015,
+     0.7604690936883831,
+     0.08634787947712651
+    ],
+    "intrappolata_finale": [
+     0.05787640216478767,
+     0.0878491799064964,
+     0.08560696268609663,
+     0.0752373406374294
+    ],
+    "media_finale": 0.9560885484160848,
+    "media_iniziale": 0.7444269528539282,
+    "perde_coerenza": false,
+    "sigma_finale": 0.23521737182179148
+   },
+   "(A) g=0.5": {
+    "dispersione_finale": [
+     1.0140712612470963,
+     1.344042134423236,
+     0.9067887551048077,
+     0.5989911341963545
+    ],
+    "dispersione_iniziale": [
+     1.1251195459707366,
+     1.0362882151278299,
+     0.7720238931605543,
+     0.12224402428809591
+    ],
+    "intrappolata_finale": [
+     0.05790409101169162,
+     0.08875539929000563,
+     0.08200012708291478,
+     0.06906374792081185
+    ],
+    "media_finale": 0.9659733212428736,
+    "media_iniziale": 0.7639189196368041,
+    "perde_coerenza": false,
+    "sigma_finale": 0.307369580912325
+   },
+   "(A) g=1": {
+    "dispersione_finale": [
+     1.224503172452924,
+     1.2005107273492028,
+     0.9473189297521118,
+     0.36270766227727247
+    ],
+    "dispersione_iniziale": [
+     1.1764030120198135,
+     1.0493043879282398,
+     0.7968908794821868,
+     0.19625487825191643
+    ],
+    "intrappolata_finale": [
+     0.05493455521650935,
+     0.09049448259414844,
+     0.07592083866005464,
+     0.05710094377956962
+    ],
+    "media_finale": 0.9337601229578778,
+    "media_iniziale": 0.8047132894205391,
+    "perde_coerenza": false,
+    "sigma_finale": 0.400820890949176
+   },
+   "(A) g=2": {
+    "dispersione_finale": [
+     1.5015801345950217,
+     0.9663725004602997,
+     1.1544263750006039,
+     0.15457009628807297
+    ],
+    "dispersione_iniziale": [
+     1.2939320943544157,
+     1.0768300709679002,
+     0.8501574394485818,
+     0.3477782361619191
+    ],
+    "intrappolata_finale": [
+     0.04333285627135706,
+     0.0925642188032262,
+     0.07209044106062534,
+     0.048218871294749756
+    ],
+    "media_finale": 0.9442372765859997,
+    "media_iniziale": 0.8921744602332042,
+    "perde_coerenza": false,
+    "sigma_finale": 0.5712193805773904
+   },
+   "(B) g=0.25": {
+    "dispersione_finale": [
+     0.9676160536442263,
+     1.2660812324850832,
+     0.890369687988067,
+     0.7002872195469627
+    ],
+    "dispersione_iniziale": [
+     1.1009287222364015,
+     1.0299621160138015,
+     0.7604690936883831,
+     0.08634787947712651
+    ],
+    "intrappolata_finale": [
+     0.05787640216478767,
+     0.0878491799064964,
+     0.08560696268609663,
+     0.0752373406374294
+    ],
+    "media_finale": 0.9560885484160848,
+    "media_iniziale": 0.7444269528539282,
+    "perde_coerenza": false,
+    "sigma_finale": 0.23521737182179148
+   },
+   "(B) g=0.5": {
+    "dispersione_finale": [
+     1.0140712612470963,
+     1.344042134423236,
+     0.9067887551048077,
+     0.5989911341963545
+    ],
+    "dispersione_iniziale": [
+     1.1251195459707366,
+     1.0362882151278299,
+     0.7720238931605543,
+     0.12224402428809591
+    ],
+    "intrappolata_finale": [
+     0.05790409101169162,
+     0.08875539929000563,
+     0.08200012708291478,
+     0.06906374792081185
+    ],
+    "media_finale": 0.9659733212428736,
+    "media_iniziale": 0.7639189196368041,
+    "perde_coerenza": false,
+    "sigma_finale": 0.307369580912325
+   },
+   "(B) g=1": {
+    "dispersione_finale": [
+     1.224503172452924,
+     1.2005107273492028,
+     0.9473189297521118,
+     0.36270766227727247
+    ],
+    "dispersione_iniziale": [
+     1.1764030120198135,
+     1.0493043879282398,
+     0.7968908794821868,
+     0.19625487825191643
+    ],
+    "intrappolata_finale": [
+     0.05493455521650935,
+     0.09049448259414844,
+     0.07592083866005464,
+     0.05710094377956962
+    ],
+    "media_finale": 0.9337601229578778,
+    "media_iniziale": 0.8047132894205391,
+    "perde_coerenza": false,
+    "sigma_finale": 0.400820890949176
+   },
+   "(B) g=2": {
+    "dispersione_finale": [
+     1.5015801345950217,
+     0.9663725004602997,
+     1.1544263750006039,
+     0.15457009628807297
+    ],
+    "dispersione_iniziale": [
+     1.2939320943544157,
+     1.0768300709679002,
+     0.8501574394485818,
+     0.3477782361619191
+    ],
+    "intrappolata_finale": [
+     0.04333285627135706,
+     0.0925642188032262,
+     0.07209044106062534,
+     0.048218871294749756
+    ],
+    "media_finale": 0.9442372765859997,
+    "media_iniziale": 0.8921744602332042,
+    "perde_coerenza": false,
+    "sigma_finale": 0.5712193805773904
+   },
+   "lineare": {
+    "dispersione_finale": [
+     0.9506690835426737,
+     1.247392973158607,
+     0.8756516444708974,
+     0.7790750759339439
+    ],
+    "dispersione_iniziale": [
+     1.077582356111156,
+     1.0237558670638378,
+     0.7494825917681873,
+     0.05295232529995307
+    ],
+    "intrappolata_finale": [
+     0.05698848082613339,
+     0.08698197422696895,
+     0.08924036063637344,
+     0.08094782655481042
+    ],
+    "media_finale": 0.9631971942765305,
+    "media_iniziale": 0.7259432850607835,
+    "perde_coerenza": false,
+    "sigma_finale": 0.20206382823807761
+   }
+  },
+  "5_materia_antimateria": {
+   "(A) g=0.25": {
+    "11": {
+     "asimmetria": 0.020766737951420502,
+     "coniugazione_al_bit": 0.20397350585568833,
+     "intrappolata_meno": 0.055521497694175165,
+     "intrappolata_piu": 0.05787640216478767
+    },
+    "23": {
+     "asimmetria": 0.009469465876072374,
+     "coniugazione_al_bit": 0.1811801836370376,
+     "intrappolata_meno": 0.0862010175014185,
+     "intrappolata_piu": 0.0878491799064964
+    }
+   },
+   "(A) g=0.5": {
+    "11": {
+     "asimmetria": 0.0367566888095939,
+     "coniugazione_al_bit": 0.2140972802642846,
+     "intrappolata_meno": 0.05379828166010124,
+     "intrappolata_piu": 0.05790409101169162
+    },
+    "23": {
+     "asimmetria": 0.018403616436093798,
+     "coniugazione_al_bit": 0.2287855626994146,
+     "intrappolata_meno": 0.08554759386040243,
+     "intrappolata_piu": 0.08875539929000563
+    }
+   },
+   "(A) g=1": {
+    "11": {
+     "asimmetria": 0.03962710450903255,
+     "coniugazione_al_bit": 0.18509584892930567,
+     "intrappolata_meno": 0.050746712573161025,
+     "intrappolata_piu": 0.05493455521650935
+    },
+    "23": {
+     "asimmetria": 0.032868821541766506,
+     "coniugazione_al_bit": 0.10956216171840394,
+     "intrappolata_meno": 0.08473489931142025,
+     "intrappolata_piu": 0.09049448259414844
+    }
+   },
+   "(A) g=2": {
+    "11": {
+     "asimmetria": 0.07627054950608403,
+     "coniugazione_al_bit": 0.20705188638914607,
+     "intrappolata_meno": 0.05048867610089129,
+     "intrappolata_piu": 0.04333285627135706
+    },
+    "23": {
+     "asimmetria": 0.04157943118037186,
+     "coniugazione_al_bit": 0.1669959227648826,
+     "intrappolata_meno": 0.08517396617288767,
+     "intrappolata_piu": 0.0925642188032262
+    }
+   },
+   "(B) g=0.25": {
+    "11": {
+     "asimmetria": 0.0,
+     "coniugazione_al_bit": 0.0,
+     "intrappolata_meno": 0.05787640216478767,
+     "intrappolata_piu": 0.05787640216478767
+    },
+    "23": {
+     "asimmetria": 0.0,
+     "coniugazione_al_bit": 0.0,
+     "intrappolata_meno": 0.0878491799064964,
+     "intrappolata_piu": 0.0878491799064964
+    }
+   },
+   "(B) g=0.5": {
+    "11": {
+     "asimmetria": 0.0,
+     "coniugazione_al_bit": 0.0,
+     "intrappolata_meno": 0.05790409101169162,
+     "intrappolata_piu": 0.05790409101169162
+    },
+    "23": {
+     "asimmetria": 0.0,
+     "coniugazione_al_bit": 0.0,
+     "intrappolata_meno": 0.08875539929000563,
+     "intrappolata_piu": 0.08875539929000563
+    }
+   },
+   "(B) g=1": {
+    "11": {
+     "asimmetria": 0.0,
+     "coniugazione_al_bit": 0.0,
+     "intrappolata_meno": 0.05493455521650935,
+     "intrappolata_piu": 0.05493455521650935
+    },
+    "23": {
+     "asimmetria": 0.0,
+     "coniugazione_al_bit": 0.0,
+     "intrappolata_meno": 0.09049448259414844,
+     "intrappolata_piu": 0.09049448259414844
+    }
+   },
+   "(B) g=2": {
+    "11": {
+     "asimmetria": 0.0,
+     "coniugazione_al_bit": 0.0,
+     "intrappolata_meno": 0.04333285627135706,
+     "intrappolata_piu": 0.04333285627135706
+    },
+    "23": {
+     "asimmetria": 0.0,
+     "coniugazione_al_bit": 0.0,
+     "intrappolata_meno": 0.0925642188032262,
+     "intrappolata_piu": 0.0925642188032262
+    }
+   },
+   "lineare": {
+    "11": {
+     "asimmetria": 0.0,
+     "coniugazione_al_bit": 0.0,
+     "intrappolata_meno": 0.05698848082613339,
+     "intrappolata_piu": 0.05698848082613339
+    },
+    "23": {
+     "asimmetria": 0.0,
+     "coniugazione_al_bit": 0.0,
+     "intrappolata_meno": 0.08698197422696895,
+     "intrappolata_piu": 0.08698197422696895
+    }
+   }
+  },
+  "6_r_uguale_uno": {
+   "max_differenza": 0.0
+  },
+  "7_gauge_rovesciato": {
+   "fattori": {
+    "0.5": {
+     "delta_dispersione": 0.27194440478320914,
+     "delta_intrappolata": 0.018247209205020404,
+     "delta_stato": 0.20365173112941637,
+     "oltre_arrotondamento": true
+    },
+    "2": {
+     "delta_dispersione": 0.4139612170046343,
+     "delta_intrappolata": 0.020544695421688422,
+     "delta_stato": 0.15880706913050083,
+     "oltre_arrotondamento": true
+    }
+   },
+   "soglia_arrotondamento": 7.993605777301126e-14
+  }
+ },
+ "scena": {
+  "archi": 208,
+  "estremita": 416,
+  "gradi": [
+   2,
+   3,
+   4,
+   5,
+   6
+  ],
+  "n": 120,
+  "nome": "irregolare(n=120,gmin=2,gmax=6,seme=11)",
+  "regolare": "regolare(n=120,salti=(1, 2))",
+  "semi": [
+   11,
+   23,
+   37,
+   53
+  ]
+ }
+}
