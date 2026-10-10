@@ -2990,3 +2990,14 @@ etichette rimosse, con ### **`0` persi, `0` doppi, `0` conflitti**.
 | **l'uscita** | `doc/REFERTO_seconda_parte_era2.md` — e la CI lo ### **rigenera e fa `git diff`** |
 
 ---
+
+### `csv/_spazio_disco.py` — **LO SPAZIO SU DISCO: CHE COSA OCCUPA, E CHE COSA LASCIANO I COLLAUDI** *(2026-10-10)*
+
+| | |
+|---|---|
+| **il file** | `csv/_spazio_disco.py` *(BLOB `74630de2`)* |
+| **COMANDO** | `python csv/_spazio_disco.py` |
+| **che cosa misura** | i ### **dischi** *(`shutil.disk_usage`)*; il ### **peso del repo** per cartella, per estensione e i piu- grossi *(un solo `os.walk`, e il peso sommato in ### **tutti** gli antenati: cosi- nessuna cartella puo- pesare meno dei suoi figli)*; e ### **che cosa resta nel `%TEMP%`** per ### **prefisso dichiarato**, coi file ### **`read-only`** |
+| ⭐ **IL NUMERO CHE DECIDE** | `C:` e- piena al ### **`99.3%`** *(`3.17` GB liberi su `475.1`)*, e il repo pesa ### **`9.3` GB**: col `%TEMP%` fanno ### **`10.8` GB su `472` occupati**, cioe- ### **il `2.3%`.** ### **Il repo NON e- la causa**, e il numero lo dice invece di farmelo supporre |
+| ⚠ **IL BUCO CHE HA TROVATO** | ### **`24` cartelle `repo_*`** nel `%TEMP%`, con ### **`120` file e TUTTI E `120` `read-only`**: le lascia `csv/_stage.py --collaudo`, perche- `shutil.rmtree(..., ignore_errors=True)` ### **non tocca gli oggetti di `git`** e ### **il flag silenzia il fallimento** |
+| ⛔ **NON CANCELLA NIENTE** | legge e conta: le uniche scritture sono `io.open(DEST, "w")` e le `print` |

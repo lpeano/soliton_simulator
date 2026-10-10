@@ -90,6 +90,14 @@ TESTI = (
     ("doc/LETTORI_INDICE_analisi.md", REPERTO,
      "l-analisi dei sei lettori, al mandato del `2026-09-26`",
      "python csv/_analisi_lettori_indice.py", "33579194ec0ccf02"),
+    # ### ⛔ **E QUESTO E- UN `REPERTO` PER FORZA, non per scelta:** dice
+    # ### ### **quanto spazio era libero a un istante**, e lo spazio libero
+    # ### ### **cambia da un minuto all-altro.** ### **Un `VIVO` fallirebbe un minuto
+    # ### dopo averlo scritto** -- ed e- esattamente il caso che il presidio descrive
+    # ### nella sua riga <<non FALLIRE il giorno dopo averla scritta>>.
+    ("doc/SPAZIO_DISCO_2026-10-10.md", REPERTO,
+     "lo spazio su disco al mandato del `2026-10-10`",
+     "python csv/_spazio_disco.py", "25bfc8c629cdd777"),
     ("doc/REFERTO_infrastruttura_era2.md", VIVO,
      "lo stato dell-infrastruttura dell-era `2` OGGI",
      "python csv/_referto_infrastruttura_era2.py", ""),
