@@ -4,17 +4,9 @@
 
 | | |
 |---|--:|
-| **voci che aspettano una decisione** | ### **`1`** |
-| **domande in tutto** | `1` |
+| **voci che aspettano una decisione** | ### **`0`** |
+| **domande in tutto** | `0` |
 | **segnaposto `NON_DEFINITA`**, che NON sono una domanda | `187` |
-
----
-
-## le DOMANDE aperte -- `1`
-
-| id | `classe`/`dominio`/era/stato | LA DOMANDA | LA FRASE |
-|---|---|---|---|
-| `DEC-ALBERO-CINQUE-SENZA-ARGOMENTO` | `DECISIONE`/`METODO`/`2`/`AGENDA` | di che cosa decidono i nodi `D4`, `D2`, `D11`, `D12`, `T4`, e quali sono <<le decisioni 1, 3, 10>> date come radici gia- prese | di CINQUE nodi dell-albero il repo non dice l-argomento, e delle decisioni 1, 3, 10 nemmeno Il mandato del piano elenca i nodi dell-albero cosi-: <<`D |
 
 ---
 

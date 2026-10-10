@@ -248,11 +248,17 @@ def collaudo():
           "### e- il braccio che dice che il presidio non rifiuta SEMPRE")
 
     # ------------------------------------------------- l-ARGOMENTO che non si sa
-    senza = next((n for n in nodi if n.get("argomento_noto") is False), None)
+    # ### ⛔ **LA VITTIMA SI COSTRUISCE, NON SI CERCA NEL REPO.** ### ⚠ **Il
+    # ### `2026-10-10` questo braccio si e- ROTTO** *(`TypeError`, `senza` era `None`)*:
+    # ### cercava ### **un nodo del repo con `argomento_noto: false`**, e il punto `5`
+    # ### del mandato ### **ha dato l-argomento agli ultimi cinque.**
+    # ### ⭐ **Un braccio che DEVE fallire e che PESCA LA VITTIMA NEL REPO smette di
+    # ### funzionare quando il repo MIGLIORA** -- ed e- la stessa forma del braccio che
+    # ### asseriva <<nessun nodo e- PRESA, oggi>>.
     n4 = copy.deepcopy(nodi)
-    for n in n4:
-        if n["id"] == senza["id"]:
-            n["presa"] = True
+    senza = n4[0]
+    senza["argomento_noto"] = False
+    senza["presa"] = True
     esito("### DEVE scattare: PRESA una decisione di cui NON si sa l-argomento",
           any("NON SI SA" in x and senza["id"] in x for x in controlla(n4, radici)),
           "`%s`: ### il repo non dice di che cosa decida, e il mandato non lo dice"

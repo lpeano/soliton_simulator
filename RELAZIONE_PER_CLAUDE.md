@@ -12305,3 +12305,19 @@ Ogni dato di `db_era2/` ha ### **il suo TIMBRO accanto**, col campo `versione_da
 ### ⚠ **E QUI UN MIO ERRORE, corretto prima di scriverlo:** il primo censimento, con una regex, contava ### **`17` pavimenti**. ### **Erano falsi:** le guardie `max(…, 1e-9)` ### **contro la divisione per zero**, i valori di ### **default** *(`min(li) if li else LAM`)* e ### **la prosa.** ### ⭐ **E- la classe della regex che non distingue un commento da un uso** — qui ### **un epsilon da un pavimento** — e ci sono cascato di nuovo.
 
 ### ⛔ **E UNA COSA CHE LA VOCE DICHIARA INVECE DI TACERE: oggi NON C-E- NESSUNA VARIABILE DI LUNGHEZZA** — `leggi.yaml` dichiara ### **solo `psi`.** Quindi il controllo del passo ### **nascera- SENZA MATERIA**, e il braccio che deve fallire ### **va costruito su uno stato finto.** ### ✅ **Il mandato lo prevede**, e la voce lo scrive.
+
+## MANDATO ⑧, PUNTO `5`: I CINQUE NODI SENZA ARGOMENTO — ### **e OGNI riferimento del mandato COINCIDE col repo** *(2026-10-10)*
+
+### ✅ **IL MANDATO DICEVA «verifica sul repo che coincidano; se uno non coincide, scrivilo e lascia quel nodo aperto». ### Coincidono TUTTI E CINQUE, ALLA LETTERA.**
+
+| il nodo | che cosa decide | il numero che lo rende una decisione |
+|---|---|---|
+| `D2` | `w_ij` ### **come oggi**, o `w_ij/sqrt(s_i s_j)` | il `PR` del Perron a `g=0` da ### **`24.6` a `348.2`** su `400`: ### **la geometria da sola concentra** |
+| `D4` | `phi0` ### **congelata**, o una ### **memoria d-arco che evolve** | `phi0` congelata ### **viola `A15.1`** *(non dimentica niente)* |
+| `D11` | la forma `U(2)` della coppia: tenerla o no | ### **`1.054` di scarto, il `105`%**, dieci volte sopra la soglia → ### **NON e- una traduzione: e- UNA LEGGE NUOVA** |
+| `D12` | la scomparsa degli archi: tenerla o vietarla | ### **`A14.2`: la crescita e- l-unica freccia**, quindi un arco che muore e- ### **gia- una violazione** |
+| `T4` | le cure dei siti che leggono `pos` | `8455a16`: ### **`57` funzioni, `11` letture di `pos`**; poi `a34cc48`: ### **`14` leggi su `20`** |
+
+### ✅ **E LE TRE RADICI GIA- PRESE SONO le tre decisioni di `3e8375b`, verificato nei due versi:** la tabella marca `PRESA` le decisioni ### **`1`** *(il freno della coesione e- la `(c)`)*, ### **`3`** *(la sincronizzazione si toglie)* e ### **`10`** *(il calore paga la nascita)*, e il commit porta ### **esattamente quelle tre**, nei blocchi `(C)`, `(B)` e `(A)`.
+
+### ⚠ **E UN BRACCIO DI `P-ALB` SI E- ROTTO, per una ragione che vale piu- del braccio:** ### **cercava LA VITTIMA NEL REPO** — un nodo con `argomento_noto: false` — e il punto `5` ### **ha dato l-argomento agli ultimi cinque**, quindi ### **`TypeError`: la vittima era `None`.** ### ⭐ **Un braccio che DEVE fallire e che pesca la vittima nel repo SMETTE DI FUNZIONARE QUANDO IL REPO MIGLIORA.** ### ✅ **Ora la COSTRUISCE**, ed e- la stessa cura del braccio che asseriva *«nessun nodo e- PRESA, oggi»*.

@@ -173,43 +173,84 @@ nodi:
 
   - id: DEC-D2-DA-CHIEDERE
     etichetta: D2
-    titolo: "nodo D2 dell-albero: l-argomento NON e- nel repo"
-    argomento_noto: false
+    titolo: "l-interferenza NORMALIZZATA sul grado, o no"
+    argomento_noto: true
     dipende_da: []
     presa: false
     fonte: "doc/CODA_2026-10-09.md::albero delle scelte, punto 2"
+    nota: >
+      DECISIONE DI LUCA, 2026-10-10 (punto 5 delle sei): l-argomento c-era, e
+      sta nella tabella delle 13 di doc/TRADUZIONE_IN_H.md -- VERIFICATO
+      ALLA LETTERA sul repo. ### LE DUE VIE: `w_ij` COME OGGI, oppure
+      `w_ij/sqrt(s_i s_j)`. ### IL NUMERO CHE LA RENDE UNA DECISIONE: il PR
+      del Perron a g = 0 passa da 24.6 a 348.2 su 400 -- cioe- LA GEOMETRIA
+      DA SOLA CONCENTRA, e la normalizzazione glielo toglie quasi tutto.
+      ### E TOCCA `A3`: `s_k` e- del proprio intorno, ma e- una SOMMA e non
+      una statistica di posizione (`s~_k` da 0.3856 a 0.1160 di deviazione,
+      media 0.98 e NON 1).
 
   - id: DEC-D4-DA-CHIEDERE
     etichetta: D4
-    titolo: "nodo D4 dell-albero: l-argomento NON e- nel repo"
-    argomento_noto: false
+    titolo: "`A` da phi0 congelata o dalla MEMORIA VIVA dei legami"
+    argomento_noto: true
     dipende_da: []
     presa: false
     fonte: "doc/CODA_2026-10-09.md::albero delle scelte, punto 2"
+    nota: >
+      DECISIONE DI LUCA, 2026-10-10 (punto 5 delle sei): l-argomento sta
+      nella tabella delle 13, VERIFICATO sul repo. ### LE DUE VIE: `phi0`
+      CONGELATA (come oggi), oppure UNA MEMORIA D-ARCO CHE EVOLVE.
+      ### E NON E- NEUTRA: `phi0` congelata VIOLA `A15.1` (non dimentica
+      niente) ed e- la voce `PHI0-CONGELATA`. Con la memoria viva `A`
+      diventa un grado di liberta- DENTRO `H` (`A16.3`), e la `H` candidata
+      acquista un termine.
 
   - id: DEC-D11-DA-CHIEDERE
     etichetta: D11
-    titolo: "nodo D11 dell-albero: l-argomento NON e- nel repo"
-    argomento_noto: false
+    titolo: "la forma U(2) della coppia: tenerla o no"
+    argomento_noto: true
     dipende_da: []
     presa: false
     fonte: "doc/CODA_2026-10-09.md::albero delle scelte, punto 2"
+    nota: >
+      DECISIONE DI LUCA, 2026-10-10 (punto 5 delle sei): l-argomento sta
+      nella tabella delle 13, VERIFICATO sul repo. ### E LA TABELLA DICE LA
+      COSA PIU- IMPORTANTE: <<NON e- una traduzione: e- UNA LEGGE NUOVA>> --
+      1.054 di scarto, il 105 per cento, DIECI VOLTE sopra la soglia del 10
+      per cento. ### Va decisa COME FISICA NUOVA, non adottata come
+      riscrittura: e- la differenza fra tradurre e inventare.
 
   - id: DEC-D12-DA-CHIEDERE
     etichetta: D12
-    titolo: "nodo D12 dell-albero: l-argomento NON e- nel repo"
-    argomento_noto: false
+    titolo: "la SCOMPARSA degli archi: tenerla o vietarla"
+    argomento_noto: true
     dipende_da: []
     presa: false
     fonte: "doc/CODA_2026-10-09.md::albero delle scelte, punto 2"
+    nota: >
+      DECISIONE DI LUCA, 2026-10-10 (punto 5 delle sei): l-argomento sta
+      nella tabella delle 13, VERIFICATO sul repo. ### E LA TENSIONE CON
+      `A14.2` E- IL PUNTO: l-assioma dice che LA CRESCITA E- L-UNICA FRECCIA
+      AMMESSA, quindi un arco che muore e- GIA- UNA VIOLAZIONE.
+      ### <<Non e- una legge da tradurre: e- un DIFETTO da decidere>>, e la
+      frase e- della tabella, non mia.
 
   - id: DEC-T4-DA-CHIEDERE
     etichetta: T4
-    titolo: "nodo T4 dell-albero: l-argomento NON e- nel repo"
-    argomento_noto: false
+    titolo: "le cure dei siti che leggono pos"
+    argomento_noto: true
     dipende_da: []
     presa: false
     fonte: "doc/CODA_2026-10-09.md::albero delle scelte, punto 2"
+    nota: >
+      DECISIONE DI LUCA, 2026-10-10 (punto 5 delle sei): l-argomento viene
+      dal PIANO DELLO SCHEDULATORE, 8455a16 -- VERIFICATO: quel commit dice
+      <<SCHEDULATORE DEL PASSO: analisi e piano. 57 funzioni tipizzate, 11
+      letture di pos>>. ### E il censimento successivo (a34cc48) dice 14
+      leggi su 20 che leggono pos, di cui 9 sono IL CENTRO DI MASSA della
+      sincronizzazione -- che la decisione 3 ha TOLTO (3e8375b).
+      ### Quindi il nodo decide COME SI CURANO i siti che restano, e `A17`
+      ne fa un obbligo per costruzione nell-era 2.
 
 # ====================================================================================
 #  LE RADICI GIA- PRESE
