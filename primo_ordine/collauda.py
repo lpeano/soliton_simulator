@@ -82,8 +82,15 @@ COLLAUDI = (
     ("la GUIDA, eseguita", "primo_ordine/_collauda_guida.py", "pre-commit"),
     # ### ⚠ **I LENTI VERI, e stanno SOLO in CI**: non perche- superino il budget da
     # ### soli, ma perche- ### **lo superano SOMMATI a tutto il resto.**
-    ("il referto della seconda parte (LENTO)", "csv/_referto_seconda_parte.py",
-     "solo-CI"),
+    # ### ⛔ **TOLTO il `2026-10-10`, e l-ha trovato IL MIO PRESIDIO su un clone
+    # ### pulito:** `csv/_referto_seconda_parte.py` ### **GENERA UN REPERTO**, e farlo
+    # ### girare qui ### **lo RIGENERAVA** -- gli toglieva la riga `CONGELATO` e poi
+    # ### ### **il presidio della forma, che gira DOPO, lo vedeva mancare.**
+    # ### ⭐ **Cioe-: il comando unico faceva <<ENTRAMBE>>**, la cosa che il mandato
+    # ### di Luca VIETA, ### **e l-ho commessa io nello stesso giro in cui l-ho vietata.**
+    # ### ✅ **E i collaudi che quel generatore chiamava sono TUTTI dichiarati qui
+    # ### uno per uno** *(sono i dieci + i tre del censimento)*: ### **non si perde
+    # ### copertura, si perde una RIGENERAZIONE.**
     ("il referto dell-infrastruttura (LENTO)", "csv/_referto_infrastruttura_era2.py",
      "solo-CI"),
     # ------------------------------------------------------------------ `csv/`

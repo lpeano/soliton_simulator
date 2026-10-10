@@ -12138,3 +12138,15 @@ Ogni dato di `db_era2/` ha ### **il suo TIMBRO accanto**, col campo `versione_da
 ### 📌 **E UN BRACCIO IN PIU-, che prima non c-era:** *«in un ambiente SENZA le variabili della CI siamo in locale»* — e ### **lo dice un FIGLIO con l-ambiente costruito**, cosi- l-esito ### **non dipende da come il collaudo e- stato lanciato** in nessuno dei due versi.
 
 ### ✅ **MISURATO NEI DUE VERSI: `11` su `11` senza `CI`, e `11` su `11` con `CI=true`.**
+
+## ⛔ **IL COMANDO UNICO RIGENERAVA UN REPERTO — e <<ENTRAMBE>> l-ho commesso io, NELLO STESSO GIRO in cui l-ho vietato** *(2026-10-10)*
+
+### ⭐ **L-HA TROVATO IL MIO PRESIDIO, SU UN CLONE PULITO.** `collauda.py` faceva girare `csv/_referto_seconda_parte.py`, che ### **GENERA UN REPERTO**: lo ### **rigenerava**, gli ### **toglieva la riga `CONGELATO`**, e poi il presidio della forma — che gira ### **dopo** — ### **la vedeva mancare.**
+
+### 📌 **E- esattamente <<ENTRAMBE>>, la cosa che il mandato VIETA.** ### ⚠ **E NON L-AVREI VISTA SUL MIO PC:** qui il collaudo passava, perche- il referto sul disco ### **aveva ancora la riga** — il generatore l-aveva riscritto ### **prima** che aggiungessi la riga, non dopo. ### **Serviva un clone pulito**, ed e- il motivo per cui il mandato lo chiede.
+
+### ✅ **LA CURA, in due pezzi.** ### **(1)** il generatore del reperto ### **esce da `COLLAUDI`** — e ### **non si perde copertura**, perche- i collaudi che chiamava sono ### **tutti dichiarati uno per uno** *(i dieci piu- i tre del censimento)*: ### **si perde una RIGENERAZIONE, non una garanzia.** ### **(2)** il presidio ### **guarda anche il comando unico**: ### **«ENTRAMBE» non riguarda SOLO la CI, riguarda OGNI cosa che rigenera** — e il comando unico e- ### **la piu- facile da dimenticare.**
+
+### ⚠ **E IL PRESIDIO HA MORSO ME UNA TERZA VOLTA, nello stesso giro:** il controllo nuovo cercava il nome del generatore ### **in tutto il file**, e ### **il mio stesso commento che spiega la cura lo faceva scattare.** ### ⛔ **E- la classe della regex che non distingue un COMMENTO da un USO**, e ci sono cascato di nuovo. ### ✅ **Ora guarda SOLO il blocco `COLLAUDI`, SENZA i commenti** — e se il blocco non si legge ### **lo dice**, invece di tacere per vacuita-.
+
+### ✅ **Collaudo della forma: `13` su `13`** *(un braccio in piu-: ### **un reperto che il comando unico rigenera**)*.

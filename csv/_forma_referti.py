@@ -219,6 +219,39 @@ def controlla(testo=DISCO, registro=None):
     # ### la forma e- una scelta attiva, e ### **li- si decide.** Il resto si
     # ### ### **CONTA e si DICHIARA** -- sotto, come segnale — invece di coprirlo a
     # ### meta-.
+    # ### ⛔ **E IL COMANDO UNICO NON PUO- RIGENERARE UN REPERTO.** ### ⭐ **Il
+    # ### primo giro di questo presidio me l-ha trovato addosso, su un clone pulito:**
+    # ### `collauda.py` faceva girare il generatore della seconda parte, che
+    # ### ### **riscriveva un reperto** e gli ### **toglieva la riga `CONGELATO`** -- e
+    # ### poi questo presidio, che gira dopo, ### **lo vedeva mancare.**
+    # ### ⚠ **<<ENTRAMBE>> non riguarda SOLO la CI: riguarda OGNI cosa che rigenera**,
+    # ### e il comando unico e- la piu- facile da dimenticare.
+    # ### ⚠ **E SI GUARDA SOLO IL BLOCCO `COLLAUDI`, non tutto il file:** al primo
+    # ### giro cercavo il nome ### **in tutto il testo**, e ### **il mio stesso commento
+    # ### che spiega la cura faceva scattare il presidio.** ### **E- la classe della
+    # ### regex che non distingue un COMMENTO da un USO**, e ci sono cascato di nuovo.
+    _cl = os.path.join(RADICE, "primo_ordine", "collauda.py")
+    _tutto = (io.open(_cl, encoding="utf-8", errors="replace").read()
+              if os.path.exists(_cl) else "")
+    _m = re.search(r"^COLLAUDI = \((.*?)^\)", _tutto, re.S | re.M)
+    # ### ⛔ **E DAL BLOCCO SI TOLGONO I COMMENTI**, perche- il commento che spiega
+    # ### questa cura ### **sta dentro il blocco**, accanto alla riga che ha togliato --
+    # ### ed e- il posto giusto. ### ✅ **Un controllo deve guardare il CODICE**, non
+    # ### le parole che lo descrivono.
+    _testo_cl = NL.join(r for r in (_m.group(1) if _m else "").split(NL)
+                        if not r.strip().startswith("#"))
+    if _tutto and not _testo_cl:
+        err.append("### `%s`: `collauda.py` c-e- ma il blocco `COLLAUDI` NON SI LEGGE -- "
+                   "e senza quel blocco questo controllo tace per VACUITA-" % PRESIDIO)
+    for rel, stato, _che, cmd, _b in reg:
+        if stato != REPERTO or not cmd:
+            continue
+        _vai = cmd.replace("python ", "").split()[0]
+        if _vai and _vai in _testo_cl:
+            err.append(
+                "### `%s` `%s`: e- un `%s` e IL COMANDO UNICO (`collauda.py`) fa girare "
+                "`%s`, che lo RIGENERA. ### <<ENTRAMBE>> non riguarda solo la CI: "
+                "riguarda OGNI cosa che rigenera" % (PRESIDIO, rel, REPERTO, _vai))
     for rel in sorted(nom):
         if rel.endswith(".md") and rel not in noti:
             err.append("### `%s` `%s`: LA CI LO RIGENERA e NON STA NEL REGISTRO -- "
@@ -300,6 +333,13 @@ def collaudo():
     esito("### DEVE scattare: un testo che la CI rigenera e che NON sta nel registro",
           any("NON STA NEL REGISTRO" in x for x in controlla(registro=fuori)),
           "### chi legge non saprebbe se congelarlo o rigenerarlo: `%s`" % viv[0][0])
+    # ### ⛔ **IL BRACCIO DEL CASO NUOVO:** si dichiara reperto un testo il cui
+    # ### generatore ### **E- in `collauda.py`** -- cioe- il difetto vero di stamattina.
+    _vivo_in_cl = [(a, REPERTO if a == viv[0][0] else b, c, d,
+                    ("0" * 16) if a == viv[0][0] else e) for a, b, c, d, e in TESTI]
+    esito("### DEVE scattare: un reperto che IL COMANDO UNICO rigenera",
+          any("IL COMANDO UNICO" in x for x in controlla(registro=_vivo_in_cl)),
+          "### e- il difetto che il presidio ha trovato ADDOSSO A ME su un clone pulito")
     esito("### DEVE scattare: il registro VUOTO",
           any("REGISTRO E- VUOTO" in x for x in controlla(registro=())),
           "### un presidio su un registro vuoto tace per VACUITA-")
