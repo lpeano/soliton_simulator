@@ -12439,3 +12439,19 @@ Ogni dato di `db_era2/` ha ### **il suo TIMBRO accanto**, col campo `versione_da
 ### ⛔ **E IL DIFETTO SOTTO ERA PEGGIO: `schema.py` girato nudo USCIVA `0` SENZA DIRE NIENTE** — ### **un falso-verde silenzioso** per chiunque lo chiamasse aspettandosi un collaudo. ### ✅ **Ora esce `1` e dice dove andare:** un chiamante sbagliato ### **fallisce RUMOROSAMENTE**, che e- l-unica forma utile. ### ⚠ **E al primo giro ci ho messo un simbolo e sono cascato nella DECIMA volta del difetto dell-encoding:** il messaggio e- in ### **ASCII puro**, di proposito.
 
 ### ⭐ **E QUESTO E- IL TERZO DIFETTO VERO CHE IL CLONE PULITO HA TROVATO OGGI** *(dopo `P-MOD` e `P-T2`)*, e tutti e tre ### **sul mio PC passavano.** ### **La verifica su un clone non e- una formalita-: e- lo strumento che vede cio- che il mio disco nasconde.**
+
+## ✅ **LA CODA DEL `2026-10-10` E- FINITA, E LA PROVA E- UN CLONE PULITO** *(2026-10-10)*
+
+### 📌 **Su un clone di `a8b2780`, simulatore `b8c21049`, nei DUE ambienti:**
+
+| il comando | senza `CI` | con `CI=true` |
+|---|---|---|
+| `python csv/indice.py valida` | ### ✅ **`0`** | ### ✅ **`0`** |
+| `python primo_ordine/collauda.py` | ### ✅ **`0`**, `33`/`33` | ### ✅ **`0`**, `33`/`33` |
+| l-albero dopo la suite | ### ✅ **PULITO** | ### ✅ **PULITO** |
+
+### ⭐ **E «pulito» non e- un-asserzione: e- IL CODICE D-USCITA.** Il braccio dell-albero sporco ### **entra nel codice**, e due giri prima ### **valeva `1` e nominava un file.**
+
+### 📌 **TRE GIRI DI VERIFICA, e ognuno ha trovato un difetto VERO che sul mio PC passava:** `P-MOD` *(la sabotatura diventata un no-op)*, `P-T2` *(la migrazione che lo spegneva in silenzio)*, e ### **un referto `VIVO` scaduto** *(un residuo della divisione di `schema.py`)*. ### ⚠ **Il terzo era il piu- insidioso: `schema.py` girato nudo USCIVA `0` senza dire niente.**
+
+### ⛔ **E UNA DECISIONE DI LUCA FERMA TRE PUNTI DI DUE MANDATI, ed e- UNA SOLA:** ### **il VUOTO LOCALE viene PRIMA o DOPO `D9`?** ### **L-albero dice `D9` → `D13` → `D6` → `D7`** — il vuoto ### **TERZO** — e ### **l-albero vince**, come Luca ha scritto ### **cinque volte** in questa coda.
