@@ -209,10 +209,19 @@ def collaudo():
           c["archi"] > 0,
           "%d archi su %d nodi: ### senza archi il punto 3 non si potrebbe nemmeno provare"
           % (c["archi"], c["nodi"]))
-    esito("### e NESSUN nodo e- PRESA, oggi",
-          c["prese"] == 0,
-          "### e- il fatto del mandato: <<nessuna scelta di fisica>>. "
-          "Le radici prese sono `A16` e `A17`, che sono ASSIOMI")
+    # ### ⛔ **ERA <<NESSUN nodo e- PRESA>>, e il 2026-10-10 NON E- PIU- VERO:**
+    # ### Luca ha preso il nodo `INT` *(l-integratore locale a strati)*. ### ⚠ **Un
+    # ### braccio che asserisce UN FATTO DI OGGI scade il giorno in cui il fatto
+    # ### cambia** -- ed e- la stessa forma del referto-fotografia.
+    # ### ✅ **Allora si dichiara IL NUMERO E I NOMI**: cosi- un nodo che diventa
+    # ### PRESO ### **in silenzio fa ancora scattare il braccio**, e un nodo preso
+    # ### ### **per una decisione di Luca** si aggiunge QUI, dove si vede.
+    PRESI_DICHIARATI = ("DEC-INT-INTEGRATORE",)
+    _presi = sorted(x["id"] for x in nodi if x.get("presa"))
+    esito("### i nodi PRESI sono esattamente quelli DICHIARATI",
+          _presi == sorted(PRESI_DICHIARATI),
+          "%d presi: %s   ### un nodo che diventa PRESO senza passare da qui FA "
+          "SCATTARE" % (len(_presi), ", ".join(_presi) or "nessuno"))
 
     # ------------------------------------------------- ### IL PUNTO 3, che DEVE fallire
     # ### ⛔ **COSTRUITO DAI NODI VERI, IN MEMORIA** (`P1-sexies`): si prende il nodo che

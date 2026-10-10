@@ -1,0 +1,74 @@
+{
+ "config": {
+  "confronto": false,
+  "dt": 0.01,
+  "integratore": "locale",
+  "iterazioni": 64,
+  "leggi_attive": [
+   "PROVA-HOPPING",
+   "PROVA-LOCALE"
+  ],
+  "nodi": 9,
+  "osservatori": [
+   "PROVA-NORMA"
+  ],
+  "passi": 200,
+  "scena": "catena",
+  "seme": 11,
+  "toll": 1e-14,
+  "versione": 1
+ },
+ "conto_leggi": {
+  "di_prova": 3,
+  "per_tipo": {
+   "osservatore": 1,
+   "termine_arco": 1,
+   "termine_nodo": 1
+  },
+  "totale": 3,
+  "variabili": 1
+ },
+ "determinismo": {
+  "rng_globali": 0,
+  "un_thread": [
+   "MKL_NUM_THREADS",
+   "NUMEXPR_NUM_THREADS",
+   "OMP_NUM_THREADS",
+   "OPENBLAS_NUM_THREADS",
+   "VECLIB_MAXIMUM_THREADS"
+  ],
+  "un_thread_in_tempo": true,
+  "versioni": {
+   "numpy": "2.3.0",
+   "piattaforma": "windows",
+   "python": "3.13.2",
+   "sympy": "1.14.0",
+   "yaml": "6.0.3"
+  },
+  "versioni_blocco": {
+   "numpy": "2.3.0",
+   "piattaforma": "windows",
+   "python": "3.13.2",
+   "sympy": "1.14.0",
+   "yaml": "6.0.3"
+  },
+  "versioni_differenze": []
+ },
+ "generati": [
+  "osservatori/prova_norma.py=97a979de08e6f361",
+  "stato.py=924136cfa40a0a57",
+  "termini/prova_hopping.py=50643d0cf0d9642f",
+  "termini/prova_locale.py=7326fa65e394ab4f"
+ ],
+ "impronta_config": "0bc547638e5fda6f",
+ "impronta_generati": "e43364b07dd98950",
+ "impronta_tabella": "36e82be0f95f7c18",
+ "passo": 200,
+ "versione_dati": 1,
+ "versioni": {
+  "macchina": "AMD64",
+  "numpy": "2.3.0",
+  "piattaforma": "Windows-11-10.0.26300-SP0",
+  "python": "3.13.2"
+ }
+}

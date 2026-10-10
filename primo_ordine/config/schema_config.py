@@ -47,8 +47,16 @@ VERSIONE = 1
 # ### ⛔ **IL VOCABOLARIO CHIUSO DEI CAMPI.** Tutti ### **obbligatori**: il punto
 # ### `15(b)` dice che ### **un parametro non presente e- un ERRORE**, quindi
 # ### ### **non esiste un campo facoltativo.**
+# ### ✅ **`confronto` E- ENTRATO IL `2026-10-10`, per la decisione di Luca sul
+# ### nodo `INT`:** l-integratore e- ### **il LOCALE a strati**, e il GLOBALE resta nel
+# ### codice ### **SOLO come termine di confronto dei collaudi.**
+# ### ⛔ **Quindi una configurazione che chiede `globale` DEVE dichiarare
+# ### `confronto: true`**, e senza quella dichiarazione ### **viene RIFIUTATA**: cosi-
+# ### ### **nessuna corsa di FISICA puo- girare col globale per distrazione.**
+# ### ⭐ **E- un CAMPO e non un giudizio** (par. 9): la differenza fra una corsa di
+# ### fisica e un confronto ### **la dice il file**, non chi legge.
 CAMPI = ("versione", "scena", "nodi", "seme", "dt", "passi", "integratore",
-         "iterazioni", "toll", "leggi_attive", "osservatori")
+         "iterazioni", "toll", "leggi_attive", "osservatori", "confronto")
 
 SCENE = ("catena", "anello")
 INTEGRATORI = ("globale", "locale")
@@ -78,6 +86,20 @@ def valida(d, leggi_in_tabella=None, osservatori_in_tabella=None):
                 "versione non si sa leggere domani" % (d.get("versione"), VERSIONE))
     if d.get("scena") not in SCENE:
         _err(f, "`scena` %r fuori vocabolario: %s" % (d.get("scena"), list(SCENE)))
+    # ### ⛔ **IL GLOBALE SOLO COME CONFRONTO** -- decisione di Luca, 2026-10-10,
+    # ### nodo `INT`. ### **La ragione e- MISURATA, non di gusto:** il cono del LOCALE e-
+    # ### ### **esatto**, quello del GLOBALE ### **dipende dalla tolleranza** -- cioe-
+    # ### ### **non e- una causalita-** -- e sulla reversibilita- ### **i due sono
+    # ### UGUALI** *(b99bb4c: entrambi tornano a `4e-16`)*. ### ✅ **Quindi il
+    # ### discrimine non e- la precisione: e- la CAUSALITA-.**
+    if d.get("integratore") == "globale" and not d.get("confronto"):
+        _err(f, "`integratore: globale` SENZA `confronto: true`. ### Decisione di Luca "
+                "del 2026-10-10 (nodo `INT`): l-integratore e- il LOCALE a strati, e il "
+                "GLOBALE resta SOLO come termine di confronto dei collaudi -- il suo "
+                "cono DIPENDE DALLA TOLLERANZA, cioe- NON E- UNA CAUSALITA-. ### Una "
+                "corsa di FISICA non lo puo- scegliere, e un confronto lo DICHIARA")
+    if d.get("confronto") is not None and not isinstance(d.get("confronto"), bool):
+        _err(f, "`confronto` deve essere un booleano: e- un CAMPO, non una frase")
     if d.get("integratore") not in INTEGRATORI:
         _err(f, "`integratore` %r fuori vocabolario: %s. ### La scelta e- di Luca (nodo "
                 "`INT`), e il file la DICHIARA" % (d.get("integratore"),
@@ -158,7 +180,7 @@ def collaudo():
     BUONA = {"versione": 1, "scena": "catena", "nodi": 9, "seme": 11, "dt": 0.01,
              "passi": 200, "integratore": "locale", "iterazioni": 64, "toll": 1e-14,
              "leggi_attive": ["PROVA-HOPPING", "PROVA-LOCALE"],
-             "osservatori": ["PROVA-NORMA"]}
+             "osservatori": ["PROVA-NORMA"], "confronto": False}
     LG = {"PROVA-HOPPING", "PROVA-LOCALE"}
     OS_ = {"PROVA-NORMA"}
     print("=" * 100)
@@ -179,6 +201,18 @@ def collaudo():
           any("versione" in e for e in valida(dict(BUONA, versione=99), LG, OS_)))
     esito("### DEVE scattare: una `scena` fuori vocabolario",
           any("scena" in e for e in valida(dict(BUONA, scena="spirale"), LG, OS_)))
+    # ### ⛔ **IL GLOBALE SOLO COME CONFRONTO -- decisione di Luca del 2026-10-10.**
+    esito("### DEVE scattare: `integratore: globale` SENZA `confronto: true`",
+          any("SOLO come termine di confronto" in e
+              for e in valida(dict(BUONA, integratore="globale"), LG, OS_)),
+          "### il suo cono DIPENDE DALLA TOLLERANZA: non e- una causalita-")
+    esito("NON deve scattare: `globale` CON `confronto: true` dichiarato",
+          valida(dict(BUONA, integratore="globale", confronto=True), LG, OS_) == [],
+          "### un confronto e- legittimo, e si DICHIARA")
+    esito("### DEVE scattare: `confronto` che non e- un booleano",
+          any("deve essere un booleano" in e
+              for e in valida(dict(BUONA, confronto="si"), LG, OS_)),
+          "### e- un CAMPO, non una frase")
     esito("### DEVE scattare: un `integratore` fuori vocabolario",
           any("integratore" in e for e in valida(dict(BUONA, integratore="rk4"), LG, OS_)),
           "### la scelta e- di Luca, e il file la DICHIARA")

@@ -120,9 +120,31 @@ nodi:
     titolo: "quale integratore: il GLOBALE o il LOCALE"
     argomento_noto: true
     dipende_da: []
-    presa: false
-    fonte: "doc/CODA_2026-10-09.md::integrazione la causalita-, punto 2"
+    presa: true
+    fonte: "doc/CODA_2026-10-09.md::le sei decisioni del 2026-10-10, punto 3"
     nota: >
+      DECISIONE DI LUCA, 2026-10-10 (punto 3 delle sei): l-integratore e- il
+      LOCALE A STRATI. ### LA RAGIONE E- MISURATA, non di gusto: il cono del
+      LOCALE e- ESATTO, quello del GLOBALE DIPENDE DALLA TOLLERANZA -- cioe-
+      NON E- UNA CAUSALITA- (il braccio sta in _collauda_passo.py, blocco C).
+      ### E sulla REVERSIBILITA- i due sono UGUALI: b99bb4c dice che entrambi
+      tornano a 4e-16. ### Quindi il discrimine NON e- la precisione: e- la
+      CAUSALITA-.
+      ### IL GLOBALE RESTA NEL CODICE, solo come TERMINE DI CONFRONTO dei
+      collaudi, e la configurazione NON PUO- SCEGLIERLO per una corsa di
+      fisica: dal 2026-10-10 `integratore: globale` senza `confronto: true`
+      viene RIFIUTATO dallo schema della configurazione. Collaudo da 25 a 28.
+      ### ⚠ E QUESTA DECISIONE E- POI STATA SUPERATA, LO STESSO GIORNO: il
+      mandato della CAMMINATA QUANTISTICA A MONETA (voce 10 della coda, nella
+      sua SECONDA versione) dice <<l-integratore a strati: SUPERATO da questa
+      decisione>>, perche- nella camminata lo spostamento aggiorna TUTTI gli
+      archi INSIEME e l-anisotropia dell-ordine degli strati sparisce per
+      costruzione (A17: l-ordine di esecuzione non e- fisica).
+      ### Lo scrivo QUI e non lo applico QUI: la voce 10 viene DOPO nella coda,
+      e applicare una decisione prima del suo turno nasconderebbe l-ordine.
+      ### La prima versione di quel mandato diceva il CONTRARIO (<<resta il
+      locale a strati, non riaprirla>>): la differenza e- scritta nella coda.
+      --- la nota di prima:
       L-ARGOMENTO LO DICE IL MANDATO: <<un secondo integratore come CANDIDATO, non
       come scelta (la decide Luca: nodo INT del piano)>>.
       ### E LE DUE ALTERNATIVE SONO GIA- MISURATE, cosa che nessun altro nodo ha:

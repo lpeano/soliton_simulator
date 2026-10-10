@@ -28,6 +28,12 @@ passi: 200
 # ### questo file DICHIARA quale gira, non decide quale e' giusto.
 integratore: locale
 
+# ### ⛔ **`confronto`: dal `2026-10-10` l-integratore e- il LOCALE** (nodo
+# ### `INT`, decisione di Luca), e il GLOBALE resta ### **solo come termine di
+# ### confronto dei collaudi**. ### **Una configurazione che chiede `globale`
+# ### DEVE dichiarare `confronto: true`**, e questa non lo chiede.
+confronto: false
+
 # i parametri del RISOLUTORE, e NON sono innocui:
 # ### MISURATO: il cono dell'integratore GLOBALE dipende da `toll`
 # ### (3 archi a 1e-4, 5 a 1e-8 e a 1e-14). Per questo stanno nel file.
