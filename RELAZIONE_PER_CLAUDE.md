@@ -12919,3 +12919,11 @@ Ogni dato di `db_era2/` ha ### **il suo TIMBRO accanto**, col campo `versione_da
 ### ⭐ **E UNA COSA CHE NON CERCAVO: LA PROPAGAZIONE NON E- ISOTROPA SU UN GRAFO REGOLARE.** Da quattro nodi dello ### **stesso reticolo** le velocita- differiscono del ### **`~14%`**, fuori da `3 sigma`. ### ⛔ **E non e- il reticolo: sono i VERSORI**, assegnati ### **per indice d-arco**, quindi ### **diversi fra nodi equivalenti.** ### ✅ **E- la prova piu- diretta che `PROVV-VERSORI-NON-RELAZIONALI` non e- innocua**, ed e- annotata la-.
 
 ### ✅ **LE PROPOSTE PER LUCA SONO DUE VOCI NUOVE E DUE ANNOTAZIONI**, e `DA_DECIDERE_LUCA.md` e- a ### **`9` voci, `9` domande.**
+
+## ✅ **IL `v3` E- CONCLUSO, E LA CONDIZIONE E- VERIFICATA SU UN CLONE PULITO** *(2026-10-11)*
+
+### 📌 **LA VERIFICA** *(`python csv/_verifica_clone.py`, su `25886ea`)*: `valida` ### **ok** *(`7.50` e `7.55` s)*, la suite ### **ok** *(`181.7` e `176.6` s, ### **`37` collaudi su `37`**)*, `prossima` ### **ok**; `git status` ### **VUOTO**; residui ### **NESSUNO**; clone ### **cancellato**; simulatore ### **`b8c21049`.**
+
+### ⭐ **E CON QUESTO LE LETTURE `G1` e `G2` SI SBLOCCANO:** il loro mandato dice *«se `v3` non e- ancora concluso, aspetta che lo sia»*, e ### **adesso lo e-** — la regressione `(R)` e- verde ### **al bit** e il referto e- committato. ### ✅ **Quindi passo alla voce ⑤ della coda.**
+
+### 📌 **E IL BILANCIO DEI TRE PROTOTIPI, in tre righe:** il `v1` era ### **due camminate scalari** *(misurato)*; il `v2` ha legato ### **spin e moto** e reso la simmetria materia/antimateria ### **una prova fisica**; il `v3` ha aggiunto ### **il vuoto** e una saturazione ### **senza `g`**, e ha trovato ### **la prima grandezza conservata oltre le norme.** ### ⛔ **E nessuno dei tre lega un grumo.**
