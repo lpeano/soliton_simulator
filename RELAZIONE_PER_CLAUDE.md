@@ -12057,3 +12057,23 @@ Ogni dato di `db_era2/` ha ### **il suo TIMBRO accanto**, col campo `versione_da
 ### 📌 **E IL CENSIMENTO CHE AVEVO PROMESSO, sulle sabotature su un letterale: ne ho trovate TRE.** ### ✅ **E il risultato e- rassicurante, e lo dico com-e-:** ### **DUE erano GIA- ASSERITE** *(`csv/_albero_era2.py`, `primo_ordine/_collauda_genera.py`: entrambe contano l-ancora prima di sostituire)* e ### **UNA lavora su un impasto INTERNO al collaudo** *(`csv/_struttura_regole.py`: non puo- scadere per un commit sul repo)*. ### **L-ho asserita comunque**, perche- un letterale morto ### **li- darebbe un PASSA, non un errore.** ### ⭐ **Quindi `_modularita_era2.py` era l-UNICO che sabotava un FILE DEL REPO senza asserire.**
 
 ### 📌 **MISURATO:** ### **`29` collaudi**, `pre-commit` ### **`67.6` s** su un budget di `120` *(`56`%)*, piu- ### **`76.4` s** di lenti solo in CI.
+
+## PUNTO `4`: LA FORMA DI UN TESTO GENERATO — ### **`REPERTO` CONGELATO o `VISTA VIVA`, mai ENTRAMBE** *(2026-10-10)*
+
+### 📌 **LA DECISIONE, come Luca chiede** *(«decidi e DICHIARA una forma … non entrambe»)*: ### **un referto di mandato chiuso e- un `REPERTO` CONGELATO AL SUO COMMIT**, ### **la CI non lo rigenera**, e il presidio verifica ### **il suo BLOB**. ### **Si rimisura rigirando il suo comando AL SUO COMMIT**, come un sigillo.
+
+### ⭐ **E IL NUMERO LA DECIDE, non un ragionamento: in `doc/` ci sono `119` referti, e la CI ne rigenerava `5`.** ### **La forma «congelato» e- quella che il repo ha SEMPRE avuto per `114` su `119`** — e ### **le cinque eccezioni sono ESATTAMENTE quelle che si sono rotte.**
+
+### ⛔ **LA MISURA CHE IL MANDATO CHIEDE: rigenerati oggi, cadono `3` testi generati su `8`.** ### ✅ **E sono TUTTI E TRE REPERTI** *(la seconda parte, le `43` decisioni, la terza parte)*, ### **NESSUNO dei tre VIVI** *(i metodi, i riferimenti, lo stato dell-infrastruttura)*. ### **E- la prova che i due oggetti sono diversi**, e non una mia classificazione a gusto.
+
+### 📌 **E NON E- UNA REGOLA NUOVA** *(`9-ter`)*: `CLAUDE.md` par.`6` dice ### **gia-** che un ### **sigillo** si rigira ### **al suo commit**, e che ### **un sigillo vecchio che non passa sul blob di oggi NON E- UN DIFETTO.** ### **Un referto di mandato chiuso e- lo stesso oggetto**, e questa e- ### **quella regola, applicata dove mancava.**
+
+### ⚠ **E UNA COSA CHE IL PASSO DI CI CHE HO TOLTO DICEVA GIUSTA:** *«un referto SCADUTO dice numeri che non sono quelli di oggi, e ### **sembra fatto**»*. ### ✅ **Per un reperto «scaduto» e- la parola sbagliata** — non ha mai parlato di oggi — ### **ma il «sembra fatto» resta vero**, e si cura facendogli ### **DIRE IN TESTA che e- congelato**, non pretendendolo identico a una misura di oggi. ### **Ed e- un controllo, non una buona intenzione.**
+
+### ⚠ **E IL PRESIDIO HA MORSO ME DUE VOLTE MENTRE LO SCRIVEVO.** ### **(1)** cercando «GENERATO» nelle prime righe ha preso ### **un modello** *(`_corpo_punto_ripresa.md` dice «### **RI**GENERATO per intero»: ### **<<RIGENERATO>> contiene <<GENERATO>>**)*. ### **(2)** allargando il criterio sono arrivato a ### **sedici errori** su documenti che nessuno aveva chiesto di classificare. ### ✅ **Quindi il perimetro con i DENTI e- <<cio- che la CI rigenera>>**, dove la forma e- ### **una scelta attiva**.
+
+### ⛔ **IL BUCO NOTO, col numero invece che taciuto:** `113` referti su `119` sono `REPERTO` ### **per la forma** e ### **non hanno un blob dichiarato**. ### **Il presidio lo CONTA e lo stampa come SEGNALE** — perche- ### **un perimetro che non dice quanto lascia fuori sembra coprire tutto.**
+
+### ✅ **E IL PRESIDIO HA TROVATO DA SOLO un testo generato fuori registro:** `doc/LETTORI_INDICE_analisi.md`, l-analisi del punto `5` del mandato del `2026-09-26` — ### **un reperto**, e ora lo dichiara.
+
+### ✅ **Collaudo `12` su `12`, con OTTO bracci che DEVONO fallire**, fra cui ### **il caso centrale del mandato**: la CI che rigenera un reperto, cioe- ### **«ENTRAMBE»** — armato ### **sabotando il workflow IN MEMORIA**, senza toccare il disco.

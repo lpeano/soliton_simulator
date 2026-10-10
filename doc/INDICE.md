@@ -7,7 +7,7 @@
 | `DA_CLASSIFICARE` | `DA_CLASSIFICARE` | 187 |
 | `DOCUMENTAZIONE` | `1` | 11 |
 | `DOCUMENTAZIONE` | `2` | 1 |
-| `DOCUMENTAZIONE` | `ENTRAMBE` | 7 |
+| `DOCUMENTAZIONE` | `ENTRAMBE` | 8 |
 | `FISICA` | `1` | 343 |
 | `FISICA` | `2` | 20 |
 | `FISICA` | `ENTRAMBE` | 17 |
@@ -154,7 +154,7 @@
 | `CLIP-INVENTARIO` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | INVENTARIO dei clip, tetti e pavimenti del passo pieno: 27 TETTI FISICI su 117 g |
 | `COER-4PI` | CRITERIO | METODO | 1 | ### **CHIUSA** |  | la coerenza della massa e' `/<e^{i phi}>/`: il campo NON distingue `phi` da `phi |
 | `COLLAUDO-NON-ESEGUITO` | DIFETTO | METODO | ENTRAMBE | ### **APERTA** |  | un collaudo che si RIFIUTA di girare esce con 2, e il controllo C4 lo conta come |
-| `COMANDO-UNICO-INCOMPLETO` | DIFETTO | INFRASTRUTTURA | ENTRAMBE | ### **APERTA** |  | il comando che si chiama LA SUITE COMPLETA copriva 19 collaudi su 29 |
+| `COMANDO-UNICO-INCOMPLETO` | DIFETTO | INFRASTRUTTURA | ENTRAMBE | ### **CHIUSA** |  | il comando che si chiama LA SUITE COMPLETA copriva 19 collaudi su 29 |
 | `COMPONENTI:A1` | CURA | METODO | 1 | ### **CHIUSA** |  | A1. STEP2OROLOGIO — aggancio OROLOGIO ↔ METRICA · omegaclk = (cs/CSM)² |
 | `COMPONENTI:A2` | CRITERIO | METODO | 1 | ### **SOSPESA** |  | peq è lo sfondo diffuso locale (Legge I, :265): nessuna statistica globale |
 | `COMPONENTI:A3` | CRITERIO | METODO | 1 | ### **SOSPESA** |  | dopo la proiezione arco→nodo, numeratore e denominatore vivono entrambi sui nodi |
@@ -554,6 +554,7 @@
 | `RAMI-OFF-CURA2` | CURA | INFRASTRUTTURA | 1 | ### **CHIUSA** |  | i rami a flag spento di TEMPO_UNICO_MITOSI, archiviati COPIATI dal sorgente |
 | `RAMPA-1` | CURA | FISICA | 1 | ### **CHIUSA** |  | CHIUSA il 2026-09-25, strada (3) (decisione di Luca): sigillo 9/9 dal CLI, ramp  |
 | `RAMPA-2` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | APERTA il 2026-09-25 (richiesta di Luca) / AL PASSO 0 TUTTI LEGGONO cs = CSM. La |
+| `REFERTO-FOTOGRAFIA-RIGENERATA` | PRESIDIO | DOCUMENTAZIONE | ENTRAMBE | ### **APERTA** |  | un referto di mandato chiuso era FOTOGRAFIA e VISTA VIVA insieme, e la CI cadeva |
 | `REFERTO-VERDE-SU-FALLIMENTO` | DIFETTO | DOCUMENTAZIONE | ENTRAMBE | ### **APERTA** |  | un referto scriveva il segno VERDE su un collaudo FALLITO: 20 su 22 con la spunt |
 | `REG-A` | DIFETTO | FISICA | 1 | ### **CHIUSA** |  | FASE A del registro della fisica: l'INVENTARIO degli scrittori di stato / MANDAT |
 | `REG-B` | FRONTE | METODO | 1 | ### **SOSPESA** |  | FASE B: le SCHEDE, a lotti, un commit per lotto / MANDATO-REGISTRO §2 / LE QUATT |

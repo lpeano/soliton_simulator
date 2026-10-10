@@ -70,7 +70,7 @@ Io avevo scritto, nell'intestazione di quel file, *«LA CI NON SI PUO' DIMENTICA
 | il generatore | `python primo_ordine/_collauda_genera.py` | ### ✅ **`24`/`24`** |
 | la lista dei file di fisica | `python csv/_collaudo_file_fisica.py` | ### ✅ **`17`/`17`** |
 | i presidi dell-indice | `python csv/_collaudo_presidi_indice.py` | ### ✅ **`67`/`67`** |
-| i controlli della migrazione | `python csv/_controlli_indice_v2.py` | ### ✅ **`5`/`6`** |
+| i controlli della migrazione | `python csv/_controlli_indice_v2.py` | ### ⛔ **`5`/`6`** |
 
 ## `5.` QUALI PERMUTAZIONI SONO **BYTE-IDENTICHE**, E QUALI NO — ### **con il perche' FISICO**
 

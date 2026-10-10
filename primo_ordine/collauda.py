@@ -113,7 +113,101 @@ COLLAUDI = (
     ("`P-ES1` un solo esecutore", "csv/_un_solo_esecutore.py --collaudo", "pre-commit"),
     ("`P-MOD` la modularita-", "csv/_modularita_era2.py --collaudo", "pre-commit"),
     ("`P-AB` i confronti e i dati", "csv/_confronti_e_dati.py --collaudo", "pre-commit"),
+    # ------------------------------------- E I TRE CHE IL CENSIMENTO HA TROVATO
+    # ### ✅ **Questi non li ho messi a mano: li ha trovati `censimento()`**,
+    # ### ### **e il nome non diceva che erano collaudi.** `_rinomina.py` lo e-
+    # ### perche- ### **la lista del referto della seconda parte lo dichiara tale.**
+    ("i presidi dell-indice, nei due versi", "csv/_collaudo_presidi_indice.py",
+     "pre-commit"),
+    ("i controlli della migrazione", "csv/_controlli_indice_v2.py", "pre-commit"),
+    ("il rinominamento, sul piano", "csv/_rinomina.py", "pre-commit"),
+    ("la FORMA dei testi generati", "csv/_forma_referti.py --collaudo",
+     "pre-commit"),
 )
+
+
+# ### ⛔ **LE FONTI DEL CENSIMENTO: dove un collaudo PUO- girare senza stare qui.**
+# ### ⚠ **IL DIFETTO che questo chiude, visto il `2026-10-10`:** la lista era
+# ### ### **a mano**, e ### **DIECI collaudi giravano in CI e nel `pre-commit` senza
+# ### esserci.** ### ⭐ **Aggiungerli non basta: la prossima volta ne mancherebbe un
+# ### altro.** ### ✅ **Quindi il comando SI CONTA**, e ### **se manca qualcosa ESCE
+# ### NON ZERO** -- il suo verde vuol dire ### **<<ho girato tutto cio- che gira>>**, non
+# ### ### **<<ho girato la mia lista>>.**
+FONTI = (".github/workflows/era2.yml", ".githooks/pre-commit",
+         "csv/_referto_seconda_parte.py")
+
+
+def _normale(s):
+    """`python csv/x.py --collaudo` -> `csv/x.py --collaudo`, e via i prefissi del hook."""
+    s = s.strip().strip('"')
+    s = s.replace('"$(git rev-parse --show-toplevel)/', "").replace('"', "")
+    s = s.replace("$R/", "")
+    if s.startswith("python "):
+        s = s[7:]
+    pezzi = s.split()
+    if not pezzi:
+        return ""
+    via = pezzi[0].replace(os.sep, "/")
+    coda = " --collaudo" if "--collaudo" in pezzi else ""
+    return via + coda
+
+
+def _e_un_collaudo(via):
+    """### Un collaudo si riconosce dal NOME o dal `--collaudo`, non a gusto."""
+    b = os.path.basename(via.split()[0])
+    return (via.endswith("--collaudo") or b.startswith("_collaud")
+            or b.startswith("collaud") or "collaudo" in b
+            or b.startswith("_controlli"))
+
+
+def censimento():
+    """### `[]` se ogni collaudo che gira altrove e- ### **dichiarato qui.**
+
+    ### ⛔ **E le FONTI sono tre file del repo**, non una scansione cieca: il workflow
+    della CI, il `pre-commit`, e ### **la lista `VELOCI`+`LENTI` del referto della seconda
+    parte** -- che e- ### **essa stessa una dichiarazione di collaudi.**
+    """
+    import re
+    dich = set()
+    for _n, cmd, _d in COLLAUDI:
+        dich.add(_normale(cmd))
+    fuori, err = set(), []
+    for rel in FONTI:
+        p = os.path.join(RADICE, rel)
+        if not os.path.exists(p):
+            err.append("### la fonte del censimento `%s` NON ESISTE: il censimento "
+                       "sarebbe un FALSO-UNO" % rel)
+            continue
+        testo = io.open(p, encoding="utf-8", errors="replace").read()
+        # ### ⭐ **LA LISTA DEL REFERTO E- ESSA STESSA UNA DICHIARAZIONE:**
+        # ### li- ogni comando ### **E-** un collaudo, anche se il nome non lo
+        # ### dice *(`_rinomina.py`)*. ### **Nel workflow e nel hook, invece,
+        # ### girano anche i GENERATORI**, e li- serve il riconoscimento dal
+        # ### nome o dal `--collaudo`.
+        tutto = rel.startswith("csv/_referto_")
+        for m in re.finditer(r'python[^\n"\']*?((?:csv|primo_ordine)/[\w/]+\.py)'
+                             r'((?:\s+--?[\w-]+)*)', testo):
+            c = _normale("python " + m.group(1) + (m.group(2) or ""))
+            if c and (tutto or _e_un_collaudo(c)):
+                fuori.add(c)
+    # ### ⚠ **IL RUNNER NON CENSISCE SE STESSO:** sarebbe una ricorsione, e
+    # ### ### **un comando che si conta fra i propri collaudi direbbe sempre di esserci.**
+    fuori.discard("primo_ordine/collauda.py")
+    fuori.discard("primo_ordine/collauda.py --collaudo")
+    # ### ⚠ **E IL FALSO POSITIVO VA TOLTO, non ammesso a mano:** nel workflow
+    # ### molti strumenti girano DUE volte -- ### **la forma GENERATORE** *(senza
+    # ### `--collaudo`, che SCRIVE)* e ### **la forma COLLAUDO**. ### **La prima
+    # ### non e- un collaudo**, e se la seconda e- dichiarata ### **e- coperta.**
+    manca = [c for c in sorted(fuori - dich)
+             if (c + " --collaudo") not in dich]
+    for c in manca:
+        err.append("### `%s` GIRA (in CI, nel `pre-commit` o nel referto) e NON e- "
+                   "dichiarato in `COLLAUDI`: il comando unico direbbe VERDE senza "
+                   "averlo girato" % c)
+    if not fuori:
+        err.append("### IL CENSIMENTO NON HA TROVATO NESSUN COLLAUDO nelle fonti: "
+                   "sarebbe un FALSO-ZERO, e il verde non vorrebbe dire niente")
+    return err
 
 
 def gira(cmd):
@@ -131,9 +225,68 @@ def macchina():
                                  sys.version.split()[0])
 
 
+def collaudo_censimento():
+    """### I DUE VERSI del censimento. ### **Senza il verso che DEVE fallire, un
+    censimento che non trova niente direbbe <<tutto a posto>>.**"""
+    global COLLAUDI, FONTI
+    ok = [0, 0]
+
+    def esito(che, passa, nota=""):
+        ok[1] += 1
+        ok[0] += 1 if passa else 0
+        print("  %-62s %s   %s" % (che, "PASSA" if passa else "### FALLISCE", nota))
+
+    print("=" * 100)
+    print("IL COLLAUDO DEL CENSIMENTO -- nei DUE VERSI")
+    print("=" * 100)
+    esito("sul disco: il censimento TACE", censimento() == [],
+          "%d collaudi dichiarati, %d fonti" % (len(COLLAUDI), len(FONTI)))
+    # ### \u26d4 **IL VERSO CHE DEVE FALLIRE: si toglie un collaudo dalla lista**, e il
+    # ### censimento ### **deve accorgersene.**
+    salva = COLLAUDI
+    try:
+        COLLAUDI = tuple(x for x in salva
+                         if "_modularita_era2.py" not in x[1])
+        e = censimento()
+        esito("### DEVE scattare: togliendo `P-MOD` dalla lista",
+              any("_modularita_era2.py" in x for x in e),
+              "### e- il difetto vero del 2026-10-10: DIECI collaudi giravano fuori")
+        COLLAUDI = ()
+        e2 = censimento()
+        esito("### DEVE scattare: lista VUOTA, tutto risulta fuori",
+              len(e2) >= 10, "%d mancanti: ### se fosse 0 il censimento sarebbe CIECO"
+              % len(e2))
+    finally:
+        COLLAUDI = salva
+    # ### \u26a0 **E IL FALSO-ZERO: se le FONTI non si leggono, il censimento tace per
+    # ### VACUITA-** -- e un verde per vacuita- e- ### **peggio di un rosso.**
+    sf = FONTI
+    try:
+        FONTI = ("csv/_non_esiste_proprio.py",)
+        e3 = censimento()
+        esito("### DEVE scattare: una FONTE che non esiste",
+              any("NON ESISTE" in x for x in e3) and any("FALSO-ZERO" in x for x in e3),
+              "### un censimento che non trova NIENTE non e- un censimento pulito")
+    finally:
+        FONTI = sf
+    esito("NON deve scattare: rimesso tutto, il censimento TACE di nuovo",
+          censimento() == [], "### i bracci di sopra scattavano per i loro casi finti")
+    print("=" * 100)
+    print("IL COLLAUDO DEL CENSIMENTO: %d su %d   %s"
+          % (ok[0], ok[1], "### TUTTI PASSATI" if ok[0] == ok[1] else "### CI SONO BUCHI"))
+    print("=" * 100)
+    return 0 if ok[0] == ok[1] else 1
+
+
 def main(argv):
+    if "--collaudo" in argv:
+        return collaudo_censimento()
     solo_veloci = "--solo-veloci" in argv
     scelti = [x for x in COLLAUDI if not solo_veloci or x[2] == "pre-commit"]
+    # ### \u26d4 **IL CENSIMENTO PRIMA DI TUTTO, e nel CODICE D-USCITA:** se un collaudo
+    # ### gira altrove e non e- dichiarato qui, ### **questo comando NON PUO- dire
+    # ### <<tutto verde>>** -- direbbe verde su cio- che non ha girato.
+    fuori_lista = censimento()
     print("=" * 100)
     print("TUTTI I COLLAUDI, CON I TEMPI   (punto 6)")
     print("=" * 100)
@@ -179,9 +332,18 @@ def main(argv):
         print("  ### il `pre-commit` sta nel budget: %.1f s su %.0f s (%.0f%%)"
               % (tot["pre-commit"], BUDGET, 100.0 * tot["pre-commit"] / BUDGET))
     print("=" * 100)
-    # ### ⛔ **IL CODICE D-USCITA GUARDA I COLLAUDI, NON I TEMPI:** il budget
-    # ### ### **segnala** e ### **non rifiuta**, ed e- scritto sopra.
-    return 1 if rotti else 0
+    if fuori_lista:
+        print()
+        print("  ### ⛔ IL CENSIMENTO TROVA %d COLLAUDI CHE GIRANO E NON SONO "
+              "DICHIARATI:" % len(fuori_lista))
+        for e in fuori_lista[:8]:
+            print("     %s" % e)
+        print("  ### Finche- sono fuori, IL VERDE DI QUESTO COMANDO NON VUOL DIRE CHE LA")
+        print("  ### CI E- VERDE -- ed e- esattamente cio- che e- successo il 2026-10-10.")
+    print("=" * 100)
+    # ### ⛔ **IL CODICE D-USCITA GUARDA I COLLAUDI E IL CENSIMENTO, NON I TEMPI:**
+    # ### il budget ### **segnala** e ### **non rifiuta**, ed e- scritto sopra.
+    return 1 if (rotti or fuori_lista) else 0
 
 
 if __name__ == "__main__":

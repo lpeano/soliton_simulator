@@ -85,14 +85,6 @@ jobs:
           python csv/_id_nuovo.py
           python csv/_id_nuovo.py --collaudo
 
-      - name: "### IL REFERTO DELLA SECONDA PARTE -- rigenerato CON i lenti"
-        # ### ⛔ Con `--con-lenti`: il collaudo della catena supera i 120
-        # ### secondi, e nel `pre-commit` NON sta. Qui ci sta, e `git diff`
-        # ### fa in modo che un referto SCADUTO non passi inosservato.
-        run: |
-          python csv/_referto_seconda_parte.py --con-lenti
-          git diff --exit-code -- doc/REFERTO_seconda_parte_era2.md
-
       - name: "### `P-BARRIERA` -- e in CI DEVE TACERE"
         # ### ⛔ Qui si verifica LA MIA INFERENZA: fuori dal PC la barriera TACE,
         # ### perche- la- i hook NON SONO ATTIVI e il mandato preso alla lettera
@@ -127,11 +119,6 @@ jobs:
           python csv/_registri_indice.py
           git diff --exit-code -- doc/indice/leggi.jsonl doc/indice/variabili.jsonl doc/indice/assiomi.jsonl doc/indice/decisioni.jsonl
 
-      - name: "### IL REFERTO DELLE REGOLE -- rigenerato, e `git diff`"
-        run: |
-          python csv/_referto_regole.py
-          git diff --exit-code -- doc/REFERTO_regole_era2.md
-
       - name: "### `P-REG` -- le regole di gestione, e CLAUDE.md generato"
         run: python csv/_collauda_regole.py
 
@@ -145,21 +132,9 @@ jobs:
         # ### ⚠ E il budget SEGNALA e non rifiuta: il tempo di una macchina NON E-
         # ### una proprieta- del repo, e fermare su quello vorrebbe dire rifiutare un
         # ### commit perche- il computer era occupato.
-        run: python primo_ordine/collauda.py
-
-      - name: "### IL REFERTO DEL PIANO -- rigenerato, e `git diff`"
         run: |
-          python csv/_referto_piano_era2.py
-          git diff --exit-code -- doc/REFERTO_piano_era2.md
-
-      - name: "### IL REFERTO DELLE 43 DECISIONI -- rigenerato, e `git diff`"
-        # ### ⛔ Un referto SCADUTO dice numeri che non sono quelli di oggi, e
-        # ### ### **sembra fatto**. Qui si rigenera e si pretende che la diff sia
-        # ### VUOTA: cosi- un numero che si muove ### **fa cadere la CI**, invece di
-        # ### restare scritto in un file che nessuno rigira.
-        run: |
-          python csv/_referto_decisioni_43.py
-          git diff --exit-code -- doc/REFERTO_decisioni_43_era2.md
+          python primo_ordine/collauda.py --collaudo
+          python primo_ordine/collauda.py
 
       - name: "### `P-AB` e `rinomina` -- i confronti, i dati, e il rinominamento"
         run: |
@@ -234,6 +209,16 @@ jobs:
         run: |
           python csv/_referto_infrastruttura_era2.py
           git diff --exit-code -- doc/REFERTO_infrastruttura_era2.md
+
+      - name: "### LA FORMA DEI TESTI GENERATI -- REPERTO o VIVO, mai ENTRAMBE"
+        # ### ⛔ **Al posto dei QUATTRO passi che rigeneravano un referto di
+        # ### mandato chiuso e pretendevano la diff vuota.** Quei passi
+        # ### ### **facevano fallire la CI il giorno dopo** che il referto era
+        # ### scritto, perche- i numeri del repo si muovono. ### ✅ **Ora un
+        # ### reperto si verifica dal BLOB**, e un `VIVO` resta rigenerato.
+        run: |
+          python csv/_forma_referti.py
+          python csv/_forma_referti.py --collaudo
 
       - name: il collaudo dei presidi dell-indice
         run: python csv/_collaudo_presidi_indice.py

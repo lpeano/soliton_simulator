@@ -88,6 +88,7 @@ python "$(git rev-parse --show-toplevel)/primo_ordine/_collauda_passo.py" || exi
 #  ### `python csv/_barriera.py --scrivi` e la diff del `.lock` LO MOSTRA --
 #  ### che e' tutto cio' che la barriera puo' fare: non impedisce, RENDE VISIBILE.
 python "$(git rev-parse --show-toplevel)/csv/_barriera.py" --collaudo || exit 1
+python "$(git rev-parse --show-toplevel)/csv/_forma_referti.py" || exit 1
 
 #  `P-SIM` -- LE SIMMETRIE (simboliche) E LE CONSERVAZIONI (numeriche).
 #  ### Le soglie sono DERIVATE dall'ordine del metodo, e il collaudo ha un

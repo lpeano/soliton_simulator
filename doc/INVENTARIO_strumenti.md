@@ -2819,6 +2819,16 @@ etichette rimosse, con ### **`0` persi, `0` doppi, `0` conflitti**.
 
 ---
 
+### `csv/_forma_referti.py` — **LA FORMA DI UN TESTO GENERATO: `REPERTO` o `VIVO`, mai ENTRAMBE** *(2026-10-10)*
+
+| | |
+|---|---|
+| **il file** | `csv/_forma_referti.py` *(BLOB `d8fcfd31`)* |
+| **COMANDO** | `python csv/_forma_referti.py` · `--collaudo` *(nei due versi, ### **`12`/`12`**, con ### **OTTO** bracci che DEVONO fallire)* |
+| **che cosa misura** | che ogni testo generato ### **dichiari UNA forma**: un ### **`REPERTO`** porta il ### **BLOB** *(dai byte COMMITTATI, `HEAD` o stage)*, ### **dice in testa di essere CONGELATO**, e ### **la CI NON lo rigenera**; un ### **`VIVO`** non ha blob e ### **la CI lo rigenera** pretendendo la diff vuota. ### ⛔ **Il caso centrale che impedisce: <<ENTRAMBE>>** |
+| ⭐ **IL NUMERO CHE DECIDE** | in `doc/` ci sono ### **`119` referti**, e la CI ne rigenerava ### **`5`**. ### **La forma <<congelato>> e- quella che il repo ha SEMPRE avuto per `114` su `119`**, e ### **le cinque eccezioni sono quelle che si sono rotte** |
+| ⚠ **IL BUCO NOTO** | `113` referti su `119` sono `REPERTO` ### **per la forma** e ### **non hanno un blob dichiarato**. ### **Il presidio lo CONTA e lo DICHIARA come segnale**, invece di coprirlo a meta- |
+
 ### `csv/_modularita_era2.py` e `primo_ordine/_mappa.yaml` — **`P-MOD`: LA MODULARITA' NON SI DEGRADA** *(2026-10-10)*
 
 | | |

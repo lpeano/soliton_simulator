@@ -1,5 +1,7 @@
 # IL REFERTO DELLE `43` DECISIONI — **il mandato `2` di `6`**
 
+> ### ⛔ **CONGELATO** *(la forma dichiarata il `2026-10-10`: `csv/_forma_referti.py`)*: questo e- un ### **REPERTO**, cioe- ### **che cosa si e- misurato A UN ISTANTE** — ### **la CI NON lo rigenera**, e il presidio verifica ### **il suo BLOB**. ### **Per rimisurarlo si rigira il suo comando AL SUO COMMIT**, come un sigillo *(`CLAUDE.md` par. `6`)*.
+
 > ### ⛔ **Questo file e' GENERATO da `python csv/_referto_decisioni_43.py`: non si scrive a mano, e NESSUN numero e' ricopiato** *(`L-NUMERI`)*.
 > **Il simulatore:** `b8c21049`, ### **non toccato** *(sha1 dei byte grezzi, ASSERITO da questo script)*.
 
@@ -15,9 +17,9 @@
 | decisioni ### **non applicabili** | ### **`1`** *(`Z47`)* |
 | voci toccate dai lotti | `43` |
 | ID ### **PRIMA** *(a `a7485c8`, il commit del task history)* | `990` |
-| ID ### **ORA** | `1012` |
+| ID ### **ORA** | `1017` |
 | ### **ID PERSI** | ### **`0`** |
-| ID nati | `22` — `BARRIERA-ROTTA-NEL-COMMIT`, `BLOB-DAL-DISCO-NON-DAL-REPO`, `CONTO-BOOLEANI-P5`, `DEC-ALBERO-CINQUE-SENZA-ARGOMENTO`, `DEC-Z47-TRANSIZIONE`, `DECISIONE-VUOLE-UN-CAMPO`, `DUE-VIE-SU-LEGGI-JSONL`, `FORMA-SPEZZA-ID`, `H-INDICE-IGNORA-I-VOCABOLARI`, `METADATI-REPERTO-PER-NECESSITA`, `P-ALB`, `P-BARRIERA`, `P-DET`, `P-DIM`, `P-GRAFO`, `P-GUIDA`, `P-ID`, `P-REG`, `P-SIM`, `P-TEMPI`, `PRECEDENZA-IN-CODA`, `REPLAY-CIECO-ALLE-CANCELLAZIONI` |
+| ID nati | `27` — `AGGIORNA-RIFIUTAVA-SE-STESSO`, `BARRIERA-ROTTA-NEL-COMMIT`, `BLOB-DAL-DISCO-NON-DAL-REPO`, `COMANDO-UNICO-INCOMPLETO`, `CONTO-BOOLEANI-P5`, `CONTROLLO-CONTRO-ATTESA-CONGELATA`, `DEC-ALBERO-CINQUE-SENZA-ARGOMENTO`, `DEC-Z47-TRANSIZIONE`, `DECISIONE-VUOLE-UN-CAMPO`, `DUE-VIE-SU-LEGGI-JSONL`, `FORMA-SPEZZA-ID`, `H-INDICE-IGNORA-I-VOCABOLARI`, `METADATI-REPERTO-PER-NECESSITA`, `P-ALB`, `P-BARRIERA`, `P-DET`, `P-DIM`, `P-GRAFO`, `P-GUIDA`, `P-ID`, `P-REG`, `P-SIM`, `P-TEMPI`, `PRECEDENZA-IN-CODA`, `REFERTO-VERDE-SU-FALLIMENTO`, `REPLAY-CIECO-ALLE-CANCELLAZIONI`, `SABOTATURA-NO-OP` |
 
 ### ✅ **NESSUN ID PERSO, e questa e' la lettura che conta.** Nel task history avevo fissato *<<deve restare `953`>>*, e ### **era una lettura SBAGLIATA:** `953` e' il conteggio delle voci dello ### **schema `1`** alla verifica del guardiano, ### **un numero storico.** ### ⭐ **L'invariante vero e' <<nessun ID si perde>>, e si misura sull'INSIEME** — non su un totale che cresce ogni volta che nasce una voce.
 

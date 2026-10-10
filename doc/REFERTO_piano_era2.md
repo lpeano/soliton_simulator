@@ -1,5 +1,7 @@
 # IL REFERTO DEL PIANO E DELL'ALBERO — **il mandato `3` di `6`**
 
+> ### ⛔ **CONGELATO** *(la forma dichiarata il `2026-10-10`: `csv/_forma_referti.py`)*: questo e- un ### **REPERTO**, cioe- ### **che cosa si e- misurato A UN ISTANTE** — ### **la CI NON lo rigenera**, e il presidio verifica ### **il suo BLOB**. ### **Per rimisurarlo si rigira il suo comando AL SUO COMMIT**, come un sigillo *(`CLAUDE.md` par. `6`)*.
+
 > ### ⛔ **Questo file e' GENERATO da `python csv/_referto_piano_era2.py`: non si scrive a mano, e NESSUN numero e' ricopiato** *(`L-NUMERI`)*.
 > **Il simulatore:** `b8c21049`, ### **non toccato** *(sha1 dei byte grezzi, ASSERITO da questo script)*.
 > **Il mandato dice:** *<<solo scrittura del piano: nessun codice di fisica, nessuna corsa>>* e *<<nessuna scelta di fisica in questo mandato>>*.

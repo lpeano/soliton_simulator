@@ -1,5 +1,7 @@
 # IL CONTRATTO DELL'ORDINE NELLA NASCITA
 
+> ### ⛔ **CONGELATO** *(la forma dichiarata il `2026-10-10`: `csv/_forma_referti.py`)*: questo e- un ### **REPERTO**, cioe- ### **che cosa si e- misurato A UN ISTANTE** — ### **la CI NON lo rigenera**, e il presidio verifica ### **il suo BLOB**. ### **Per rimisurarlo si rigira il suo comando AL SUO COMMIT**, come un sigillo *(`CLAUDE.md` par. `6`)*.
+
 > ### **GENERATO da `csv/_contratto_nascita.py` dal referto della misura. NON si modifica a mano** *(`L-NUMERI`)*.
 > **Passo 2 del `COMMIT 3` del riordino** *(`doc/PIANO_riordino_mitosi.md`, parte (c))*.
 > **Il referto:** `csv/_test_fork/_ordine_estrazioni/_ordine_estrazioni.json` *(strumento `a4c65607`, simulatore `3ddc56d9`)*.

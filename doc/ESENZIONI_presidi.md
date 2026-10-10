@@ -48,6 +48,7 @@ commit**: cosi' non se ne accumulano di invisibili.)*
 | `csv/_fase2_segnaposto.py|H-P5` | non importa il simulatore e non lo fa girare. Sposta voci dell'indice. |
 | `csv/_fase3_correzione.py|H-P5` | non importa il simulatore e non lo fa girare. Costruisce lotti per l'indice. |
 | `csv/_fase3_residui.py|H-P5` | non importa il simulatore e non lo fa girare. Costruisce un lotto per l'indice. |
+| `csv/_forma_referti.py|H-P5` | non importa il simulatore e non lo fa girare. Guarda la FORMA dei testi |
 | `csv/_gemelle_duplicati.py|H-P5` | non importa il simulatore e non lo fa girare. Costruisce un lotto. |
 | `csv/_indice_id.py|H-P5` | non importa il simulatore e non lo fa girare. Valida un TSV. |
 | `csv/_indice_riordino.py|H-P5` | non importa il simulatore e non lo fa girare. Aggiunge righe a un TSV. |
@@ -144,5 +145,5 @@ commit**: cosi' non se ne accumulano di invisibili.)*
 | `csv/_test_fork/_z43_tempo_proprio.py|H-P3` | la scena passa TUTTA dal CLI (`nmasse` e `sep` da `argv`), e la |
 
 ```
-esenzioni dichiarate   137
+esenzioni dichiarate   138
 ```

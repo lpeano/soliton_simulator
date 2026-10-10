@@ -1,5 +1,7 @@
 # IL REFERTO DELLE REGOLE DI GESTIONE — **il mandato `5` di `6`, l'ULTIMO**
 
+> ### ⛔ **CONGELATO** *(la forma dichiarata il `2026-10-10`: `csv/_forma_referti.py`)*: questo e- un ### **REPERTO**, cioe- ### **che cosa si e- misurato A UN ISTANTE** — ### **la CI NON lo rigenera**, e il presidio verifica ### **il suo BLOB**. ### **Per rimisurarlo si rigira il suo comando AL SUO COMMIT**, come un sigillo *(`CLAUDE.md` par. `6`)*.
+
 > ### ⛔ **Questo file e' GENERATO da `python csv/_referto_regole.py`: non si scrive a mano, e NESSUN numero e' ricopiato** *(`L-NUMERI`)*.
 > **Il simulatore:** `b8c21049`, ### **non toccato.** **Nessuna fisica:** questo mandato tocca ### **il flusso di lavoro.**
 

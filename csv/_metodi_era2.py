@@ -591,6 +591,24 @@ METODI['P-GUIDA'] = (
     "SILENZIO",
     "`primo_ordine/_collauda_guida.py` (12/12), nel comando unico e nel `pre-commit`",
     "PORTATO")
+METODI['REFERTO-FOTOGRAFIA-RIGENERATA'] = (
+    "NATO NELL-ERA 2, e nasce da una DOMANDA DI LUCA: <<o il referto di un mandato chiuso "
+    "e- un REPERTO congelato al suo commit, o si rigenera e allora non e- una fotografia. "
+    "NON ENTRAMBE>>. ### SI APPLICA ALL-ERA 2 COSI-: ogni testo generato dichiara UNA "
+    "forma nel registro `TESTI` di `csv/_forma_referti.py`. Un `REPERTO` porta il BLOB "
+    "dei byte COMMITTATI (`HEAD` o stage), DICE IN TESTA di essere CONGELATO, e LA CI NON "
+    "LO RIGENERA: si rimisura rigirando il suo comando AL SUO COMMIT, come un sigillo. Un "
+    "`VIVO` non ha blob e la CI lo rigenera pretendendo la diff VUOTA. ### E IL NUMERO "
+    "DECIDE: in `doc/` ci sono 119 referti e la CI ne rigenerava 5 -- la forma "
+    "<<congelato>> e- quella che il repo ha SEMPRE avuto per 114 su 119, e le cinque "
+    "eccezioni sono quelle che si sono rotte. ### NON E- UNA REGOLA NUOVA: `CLAUDE.md` "
+    "par. 6 dice gia- che un sigillo si rigira AL SUO COMMIT. ### IL BUCO NOTO, "
+    "dichiarato come segnale: 113 referti su 119 non hanno un blob dichiarato.",
+    "`csv/_forma_referti.py`; MISURATO: 10 testi (7 REPERTO + 3 VIVO), cadono 3 su 8 "
+    "rigenerati e sono TUTTI E TRE reperti; collaudo 12/12 con 8 bracci che devono "
+    "fallire; 4 passi di CI togliati e 1 aggiunto",
+    "PORTATO")
+
 METODI['P-TEMPI'] = (
     "NATO NELL-ERA 2: `python primo_ordine/collauda.py` fa girare TUTTI i collaudi "
     "dichiarati, stampa il tempo di ognuno, e confronta il totale col budget di 120 s. "

@@ -1,5 +1,7 @@
 # 🔎 **I SEI LETTORI E L'INDICE — che cosa aprono, e QUALE CAMPO MANCA**
 
+> ### ⛔ **CONGELATO** *(la forma dichiarata il `2026-10-10`: `csv/_forma_referti.py`)*: questo e- un ### **REPERTO**, cioe- ### **che cosa si e- misurato A UN ISTANTE** — ### **la CI NON lo rigenera**, e il presidio verifica ### **il suo BLOB**. ### **Per rimisurarlo si rigira il suo comando AL SUO COMMIT**, come un sigillo *(`CLAUDE.md` par. `6`)*.
+
 *(**Generata** da `csv/_analisi_lettori_indice.py`. Punto 5 del mandato del 2026-09-26.)*
 
 > ## ⛔ **NESSUNO DEI SEI SI CONVERTE COM'E', e i motivi sono di TRE tipi**

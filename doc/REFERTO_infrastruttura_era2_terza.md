@@ -1,5 +1,7 @@
 # IL REFERTO DELLA TERZA PARTE — **il mandato `4` di `6`**
 
+> ### ⛔ **CONGELATO** *(la forma dichiarata il `2026-10-10`: `csv/_forma_referti.py`)*: questo e- un ### **REPERTO**, cioe- ### **che cosa si e- misurato A UN ISTANTE** — ### **la CI NON lo rigenera**, e il presidio verifica ### **il suo BLOB**. ### **Per rimisurarlo si rigira il suo comando AL SUO COMMIT**, come un sigillo *(`CLAUDE.md` par. `6`)*.
+
 > ### ⛔ **Questo file e' GENERATO da `python csv/_referto_terza_parte.py`: non si scrive a mano, e NESSUN numero e' ricopiato** *(`L-NUMERI`)*.
 > **Il simulatore:** `b8c21049`, ### **non toccato.** **Nessuna fisica nuova:** la tabella ha ancora ### **`3` leggi, tutte `prova: true`.**
 
@@ -11,14 +13,14 @@
 
 | | il punto | il presidio | il collaudo |
 |---|---|---|--:|
-| `1` | DETERMINISMO | `P-DET` | ### **`13`/`13`** |
-| `2` | DIMENSIONI | `P-DIM` | ### **`34`/`34`** |
-| `3` | SIMMETRIE E CONSERVAZIONI | `P-SIM` | ### **`13`/`13`** |
-| `4` | IL GRAFO VALIDO A OGNI PASSO | `P-GRAFO` | ### **`11`/`11`** |
-| `5` | HOOK COME BARRIERA, CI COME RETE | `P-BARRIERA` | ### **`11`/`11`** |
-| `6` | I TEMPI, E UN SOLO COMANDO | `P-TEMPI` | ### **`18`/`18`** |
-| `7` | LA GUIDA, ESEGUITA | `P-GUIDA` | ### **`12`/`12`** |
-| | ### **IN TUTTO** | | ### **`112`/`112`** |
+| `1` | DETERMINISMO | `P-DET` | ### ✅ **`14`/`14`** |
+| `2` | DIMENSIONI | `P-DIM` | ### ✅ **`34`/`34`** |
+| `3` | SIMMETRIE E CONSERVAZIONI | `P-SIM` | ### ✅ **`13`/`13`** |
+| `4` | IL GRAFO VALIDO A OGNI PASSO | `P-GRAFO` | ### ✅ **`11`/`11`** |
+| `5` | HOOK COME BARRIERA, CI COME RETE | `P-BARRIERA` | ### ✅ **`11`/`11`** |
+| `6` | I TEMPI, E UN SOLO COMANDO | `P-TEMPI` | ### ⛔ **FALLISCE** *(codice `1`)* |
+| `7` | LA GUIDA, ESEGUITA | `P-GUIDA` | ### ✅ **`12`/`12`** |
+| | ### **IN TUTTO** | | ### ⛔ **`95`/`95`** -- e 1 collaudi NON sono pieni: `0`/`0` |
 
 ---
 
@@ -26,10 +28,10 @@
 
 | | |
 |---|--:|
-| i collaudi del comando unico | `### **18 su 18, TUTTI PASSANO**` |
-| il `pre-commit` | `46.69` s su un budget di `120` |
-| i LENTI, solo in CI | `70.93` s |
-| in tutto | `117.62` s |
+| i collaudi del comando unico | `### **QUALCUNO FALLISCE**` |
+| il `pre-commit` | `84.75` s su un budget di `120` |
+| i LENTI, solo in CI | `74.76` s |
+| in tutto | `159.51` s |
 | la macchina | Windows AMD64, python 3.13.2 |
 
 | il determinismo | |
@@ -46,9 +48,9 @@
 
 | il grafo, controllato A OGNI PASSO | |
 |---|--:|
-| il controllo | `37.158` us |
-| un passo GLOBALE | `770.4` us |
-| ### **il rapporto** | ### **`4.8232`%** |
+| il controllo | `37.584` us |
+| un passo GLOBALE | `612.3` us |
+| ### **il rapporto** | ### **`6.1383`%** |
 | archi scambiati TUTTI | ### **stesso stato AL BIT** |
 
 ---

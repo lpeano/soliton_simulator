@@ -3,7 +3,7 @@
  "e_in_ci": "la barriera TACE fuori dal PC (`CI=true`): la- non si committa, si GUARDA, e il mandato preso alla lettera farebbe FALLIRE SEMPRE la CI. ### E- una MIA INFERENZA, dichiarata.",
  "impronte": {
   "commit-msg": "46688e2ace37da1d8f517e569dca242a4697192e",
-  "pre-commit": "d10445fe3e954eebb2ed723c4852058d0e92c95a"
+  "pre-commit": "ca15a81008a1d26eafa1fea0f8ec01104374d1f3"
  },
  "perche": "le impronte dei due hook. ### NON IMPEDISCONO che qualcuno li cambi: lo RENDONO VISIBILE IN UNA DIFF, perche- questo file e- TRACCIATO. ### La differenza fra <<impedire>> e <<rendere visibile>> e- cio- che `A9` chiede di non confondere."
 }
