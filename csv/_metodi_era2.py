@@ -581,6 +581,15 @@ METODI['P-E9'] = (
 METODI['P-AB'] = (
     'NATO NELL-ERA 2: un `A`/`B` dichiara IL CAMPO UNICO in cui i bracci differiscono, e se ne differiscono due ### IL CONFRONTO NON PARTE (la lezione di `Z20`: due misure sovrapposte). ### Piu- i dati con la versione del formato e nessun file a meta-',
     '`csv/_confronti_e_dati.py::controlla`, `pre-commit` + CI', "PORTATO")
+METODI['P-GRAFO'] = (
+    "NATO NELL-ERA 2: il grafo si controlla A OGNI PASSO, dentro `passo_globale` e "
+    "`passo_locale`, PRIMA di avanzare -- auto-archi, doppioni (anche nei due versi), "
+    "indici fuori intervallo, liste di lunghezza diversa. ### E FERMA, NON CORREGGE: "
+    "correggere cambierebbe la fisica IN SILENZIO. ### Il costo e- MISURATO: 5.70% di un "
+    "passo globale, perche- un presidio che decuplicasse il costo si spegnerebbe il primo "
+    "giorno",
+    "`primo_ordine/grafo.py::controlla`, dentro il passo; collaudo in "
+    "`primo_ordine/_collauda_grafo.py` (11/11)", "PORTATO")
 METODI['P-ALB'] = (
     "NATO NELL-ERA 2: l-albero delle scelte ha la sua fonte in `doc/ALBERO_era2.yaml`, i "
     "nodi di `decisioni.jsonl` SI GENERANO da li-, e ### UN NODO `presa` CON UNA "

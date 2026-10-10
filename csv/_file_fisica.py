@@ -46,6 +46,7 @@ FILE_FISICA = (
     'primo_ordine/stato.py',
     'primo_ordine/hamiltoniana.py',
     'primo_ordine/passo.py',
+    'primo_ordine/grafo.py',
     'primo_ordine/crescita.py',
     'primo_ordine/vuoto.py',
     'primo_ordine/driver.py',
@@ -71,6 +72,7 @@ FILE_FISICA = (
     # ### -- un file che importa `osservatori/` ### **non puo- essere fisica**
     # ### *(`A17`)*. ### **Il presidio mi ha costretto alla forma giusta.**
     'primo_ordine/_collauda_passo.py',
+    'primo_ordine/_collauda_grafo.py',
     'primo_ordine/termini/__init__.py',
     # ### I TRE GENERATI: entrano nella LISTA ### **nel commit in cui nascono**, e il
     # ### mandato lo pretende. ### ⚠ **Sono `prova: true`**: la LISTA sorveglia

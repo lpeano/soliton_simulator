@@ -14,7 +14,7 @@
 | `INFRASTRUTTURA` | `2` | 12 |
 | `INFRASTRUTTURA` | `ENTRAMBE` | 15 |
 | `METODO` | `1` | 156 |
-| `METODO` | `2` | 5 |
+| `METODO` | `2` | 6 |
 | `METODO` | `ENTRAMBE` | 83 |
 
 | id | classe | dominio | era | stato | blocca | titolo |
@@ -449,6 +449,7 @@
 | `P-E9` | PRESIDIO | METODO | 2 | ### **AGENDA** |  | ogni SIGILLO dichiara LEGGE e CRITERI, letti via AST: i criteri si fissano PRIMA |
 | `P-EQ-MEDIANA-ARCHI` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | P_eq prende la mediana dei PRIMI n ARCHI su m: un sottoinsieme arbitrario, non t |
 | `P-ES1` | PRESIDIO | INFRASTRUTTURA | 2 | ### **AGENDA** |  | UN SOLO ESECUTORE: chi avanza lo stato passa dallo schedulatore, o si dichiara |
+| `P-GRAFO` | PRESIDIO | METODO | 2 | ### **AGENDA** |  | il grafo e- valido A OGNI PASSO, e una violazione FERMA invece di correggere |
 | `P-ID` | PRESIDIO | METODO | ENTRAMBE | ### **APERTA** |  | un ID che NASCE non puo- collidere con un ID, un alias o un omonimo, e ha 4 cara |
 | `P-M1` | PRESIDIO | METODO | ENTRAMBE | ### **APERTA** |  | ogni METODO dell-era 1 ha una riga che dice come si applica all-era 2 |
 | `P-MEMORIA` | STANDARD | FISICA | ENTRAMBE | ### **APERTA** |  | uno scalare con memoria acquista un verso: la memoria da la direzione |

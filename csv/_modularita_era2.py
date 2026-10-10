@@ -60,6 +60,12 @@ AMMESSE_SOMMA = (
     "energia", "gradiente", "_per_tipo", "_costanti_di_modulo", "senza_cache",
     "nuovo", "reversed", "setdefault", "pop", "count", "index", "tobytes",
     "FunctionType", "ModuleType", "add_at",
+    # ### ✅ **`controlla` e- il controllo del GRAFO** *(punto `4`)*: guarda indici,
+    # ### doppioni e auto-archi, e ### **non calcola nessuna grandezza fisica.**
+    # ### ⚠ **E se un giorno calcolasse, questa riga sarebbe la bugia che lo
+    # ### nasconde** -- per questo il nome e- qui ### **con il suo perche-**, e non in
+    # ### fondo a un elenco.
+    "controlla",
     # ### ⚠ **E QUESTE DUE LE HA TROVATE IL PRESIDIO, al primo giro:** `array`
     # ### *(costruisce un array dagli strati: ### **struttura**, non fisica)* e
     # ### `azione` *(### **il callable che `senza_cache` fa girare**: e- un argomento,

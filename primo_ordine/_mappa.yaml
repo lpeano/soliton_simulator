@@ -36,7 +36,15 @@ moduli:
 
   - nome: passo.py
     responsabilita: lo schedulatore a strati e i due integratori candidati
-    importa: [hamiltoniana, stato]
+    importa: [grafo, hamiltoniana, stato]
+
+  - nome: grafo.py
+    responsabilita: la validita- del grafo, controllata A OGNI PASSO (punto 4)
+    importa: []
+
+  - nome: _collauda_grafo.py
+    responsabilita: il collaudo del grafo, e i cinque casi che devono fallire
+    importa: [driver, grafo, passo, schema_config, stato]
 
   - nome: crescita.py
     responsabilita: la crescita del grafo, regola NON-H col suo bilancio

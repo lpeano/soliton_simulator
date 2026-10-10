@@ -39,6 +39,7 @@ import os
 
 import numpy as np
 
+import grafo as GR
 import hamiltoniana as HAM
 import stato as ST
 
@@ -229,6 +230,13 @@ def passo_globale(st, ii, jj, dt, termini, iterazioni, toll):
     # ### \u26a0 **E `toll` NON E- INNOCUO:** ### **il cono di questo integratore
     # ### DIPENDE DA LUI**, misurato *(`3` archi a `1e-4`, `5` a `1e-8`)*.
     T = termini
+    # ### ⛔ **IL GRAFO SI CONTROLLA PRIMA DI AVANZARE, A OGNI PASSO** *(punto `4`
+    # ### della terza parte)*: un passo fatto su un grafo non valido
+    # ### ### **ha gia- prodotto numeri sbagliati** quando lo si scopre.
+    # ### ⚠ **E il costo e- MISURATO, non stimato: `5.84%` di un passo globale**
+    # ### *(`python primo_ordine/grafo.py --collaudo`)* -- ### **un presidio che
+    # ### decuplicasse il costo si spegnerebbe il primo giorno** (`A9`).
+    GR.controlla(ii, jj, len(st["psi"]), "prima di un passo GLOBALE")
     err = valida_composizione(COMPOSIZIONE_GLOBALE, 1)
     assert not err, err
     nuovo, scarto, usate = mezzo_implicito(st, ii, jj, dt, T, iterazioni, toll)
@@ -255,6 +263,11 @@ def passo_locale(st, ii, jj, dt, termini, iterazioni, toll, gli_strati):
     # ### ricalcolarli a ogni passo sarebbe ### **un lavoro ripetuto**, e farlo
     # ### ### **solo se non arrivano** e- ### **un default travestito da comodita-.**
     T = termini
+    # ### ⛔ **ANCHE QUI, PRIMA DI AVANZARE** *(punto `4`)*: il controllo e- UNO per
+    # ### passo, ### **non uno per strato** -- gli strati sono una PARTIZIONE degli
+    # ### stessi archi, e controllarli uno a uno ### **ripeterebbe lo stesso lavoro `L`
+    # ### volte** senza guardare niente di nuovo.
+    GR.controlla(ii, jj, len(st["psi"]), "prima di un passo LOCALE")
     ss = gli_strati
     L = max(len(ss), 1)
     comp = composizione_locale(L)

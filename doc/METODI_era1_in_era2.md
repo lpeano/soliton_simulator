@@ -8,17 +8,17 @@
 
 | | quanti |
 |---|--:|
-| **`PORTATO`** | `92` |
+| **`PORTATO`** | `93` |
 | **`DA_PORTARE`** | `17` |
 | **`DA_DECIDERE`** | `5` |
 | **`NON_SI_APPLICA`** | `7` |
-| **in tutto** | ### **`121`** |
+| **in tutto** | ### **`122`** |
 
-### ⚠ **E IL NUMERO `121` E- MISURATO, non stimato:** viene dal perimetro che l-indice calcola, e ### **il mandato ne nominava <<una decina>>** per nome piu- *<<e le cure di architettura>>*. ### **La decina era `20`.**
+### ⚠ **E IL NUMERO `122` E- MISURATO, non stimato:** viene dal perimetro che l-indice calcola, e ### **il mandato ne nominava <<una decina>>** per nome piu- *<<e le cure di architettura>>*. ### **La decina era `20`.**
 
 ---
 
-## `PORTATO` — `92` metodi
+## `PORTATO` — `93` metodi
 
 > ### ✅ **GIA- NELL-ERA `2`**, e `dove` dice dove
 
@@ -70,6 +70,7 @@
 | **`P-E8`** | `PRESIDIO` | NATO NELL-ERA 2, ed e- IL SOLO che NON IMPEDISCE: senza protezione del ramo la CI gira DOPO il push. ### E- UNA RETE CHE SEGNALA (`A9`), e qui avevo scritto il contrario. ### E non e- mai stata osservata girare | `.github/workflows/era2.yml`; ### SEGNALA, non impedisce |
 | **`P-E9`** | `PRESIDIO` | NATO NELL-ERA 2: ogni sigillo dichiara `LEGGE` e `CRITERI`, letti VIA AST, e il criterio `deve-fallire` e- OBBLIGATORIO. ### Un sigillo che DICE di avere criteri senza averli e- PEGGIO di uno senza criteri: il primo SEMBRA FATTO | `csv/_presidi_era2.py::pe9`, `pre-commit` + CI |
 | **`P-ES1`** | `PRESIDIO` | NATO NELL-ERA 2, e generalizza `H-P9`: chi avanza lo stato passa dallo schedulatore. ### Le eccezioni sono DICHIARATE una per una con il loro perche- (almeno 40 caratteri), e guarda le chiamate E I NOMI -- il driver assegna la funzione a una variabile, e un presidio che guardasse solo le chiamate NON VEDREBBE NIENTE | `csv/_un_solo_esecutore.py::controlla`, `pre-commit` + CI |
+| **`P-GRAFO`** | `PRESIDIO` | NATO NELL-ERA 2: il grafo si controlla A OGNI PASSO, dentro `passo_globale` e `passo_locale`, PRIMA di avanzare -- auto-archi, doppioni (anche nei due versi), indici fuori intervallo, liste di lunghezza diversa. ### E FERMA, NON CORREGGE: correggere cambierebbe la fisica IN SILENZIO. ### Il costo e- MISURATO: 5.70% di un passo globale, perche- un presidio che decuplicasse il costo si spegnerebbe il primo giorno | `primo_ordine/grafo.py::controlla`, dentro il passo; collaudo in `primo_ordine/_collauda_grafo.py` (11/11) |
 | **`P-ID`** | `PRESIDIO` | un ID che NASCE non puo- collidere con un ID, un alias o uno dei significati dichiarati di un omonimo, e ha almeno 4 caratteri. ### Decisione di Luca, blocco 1 delle 43. ### E <<che NASCE>> e- MISURATO: 420 ID esistenti sono piu- corti di 4, e rinominarli PERDEREBBE degli ID | `csv/_id_nuovo.py::controlla_nuovo`, cablato in `crea-lotto` |
 | **`P-M1`** | `PRESIDIO` | e- il presidio di questo punto: ### SI APPLICA A SE- STESSO -- appena la sua voce e- nata, il perimetro lo ha incluso e lui ha RIFIUTATO IL COMMIT chiedendo questa riga. ### Non l-ho previsto: me l-ha detto lui | `csv/_metodi_era2.py::controlla`, cablato nel `pre-commit` e nella CI |
 | **`P-MOD`** | `PRESIDIO` | NATO NELL-ERA 2: la mappa dichiara CHI IMPORTA CHI, e un import fuori mappa, un CICLO, un modulo non in mappa o una dipendenza dichiarata e NON USATA sono rifiutati. ### Piu- il TETTO di righe e la responsabilita- in UNA RIGA: se non ci sta, IL MODULO FA DUE COSE | `csv/_modularita_era2.py::controlla` + `primo_ordine/_mappa.yaml` |

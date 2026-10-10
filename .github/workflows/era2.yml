@@ -93,6 +93,9 @@ jobs:
           python csv/_referto_seconda_parte.py --con-lenti
           git diff --exit-code -- doc/REFERTO_seconda_parte_era2.md
 
+      - name: "### `P-GRAFO` -- il grafo valido a ogni passo, e il COSTO misurato"
+        run: python primo_ordine/_collauda_grafo.py
+
       - name: "### `P-ALB` -- l-albero delle scelte, nei due versi"
         run: |
           python csv/_albero_era2.py --collaudo

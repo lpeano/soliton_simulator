@@ -66,6 +66,16 @@ ECCEZIONI = {
             "idem: i due candidati si misurano NELLO STESSO MODO, e la tavola del referto "
             "esiste perche- il collaudo li ha fatti girare entrambi",
     },
+    "primo_ordine/_collauda_grafo.py": {
+        "passo_globale":
+            "il secondo significato di <<archi simmetrici>> e- che LA FISICA tratti "
+            "`(i,j)` e `(j,i)` allo stesso modo, e si misura SCAMBIANDO `ii` e `jj` su "
+            "tutti gli archi e PRETENDENDO LO STESSO STATO AL BIT. ### Senza far "
+            "avanzare lo stato DUE VOLTE quella misura non esiste -- e il controllo per "
+            "passo, che e- quello cablato, NON PUO- vederla. ### E lo stesso passo serve "
+            "a MISURARE IL COSTO del controllo in rapporto a un passo vero: un budget "
+            "stimato invece che misurato e- un numero senza provenienza (`L-NUMERI`)",
+    },
     "primo_ordine/sigilli/_modello.py": {
         "passo_locale":
             "un SIGILLO fa girare i suoi bracci, ed e- il suo mestiere: chiama l-esecutore "
