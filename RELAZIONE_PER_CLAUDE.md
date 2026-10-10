@@ -12604,3 +12604,19 @@ Ogni dato di `db_era2/` ha ### **il suo TIMBRO accanto**, col campo `versione_da
 ### ⭐ **E QUESTO E- IL PUNTO DEL MANDATO, non un dettaglio:** prima la verifica era ### **tre righe di shell che riscrivevo ogni volta**, e ### **lasciava un clone per corsa** — ### **`11` cloni, `6.8` GB**, ed e- cosi- che il disco si e- riempito. ### **Adesso e- uno STRUMENTO con un `finally`**, e il clone se ne va ### **anche quando tutto va storto.**
 
 ### ⚠ **E IL CLONE COSTA QUASI NIENTE, perche- `--local` HARDLINKA gli oggetti:** la storia resta ### **intera** — e serve intera, perche- `H-P8` pretende il codice di prima ### **dal PADRE** e `_replay_registri` legge ### **lo storico dei commit**. ### ⛔ **Con `--depth 1` quei presidi passerebbero PER VACUITA-**, che e- peggio che non girarli.
+
+## ✅ **IL PROTOTIPO, PUNTO `0`: LA CORREZIONE DEL GUARDIANO — ### **un fattore comune sugli `r_k` E- FISICA, e il braccio `(7)` si ROVESCIA** *(2026-10-10)*
+
+### 📌 **CHE COSA AVEVO SCRITTO IO, ed e- il punto di partenza:** in `3040def` ho registrato come ### **<<la parte che vale piu- di tutte>>** l-argomento del guardiano secondo cui ### **un fattore comune su tutti gli `r_k` e- invisibile alla fisica** — cambia solo l-unita- del tempo, quindi ### **contano solo i rapporti fra vicini** e ### **non serve fissare niente con una mediana.**
+
+### ⛔ **E NELLA CAMMINATA E- FALSO.** Il motivo e- di merito, non formale: lo ### **SPOSTAMENTO e- FISSO a un arco per tick**, mentre la ### **MONETA ruota di un angolo PROPORZIONALE a `d tau`** — quindi moltiplicare tutti gli `r` per una costante cambia il ### **rapporto fra orologio interno e avanzamento sul grafo**, cioe- la ### **MASSA IN UNITA- D-ARCO.**
+
+### ⭐ **E LA RAGIONE PER CUI L-ARGOMENTO ERA GIUSTO PRIMA E SBAGLIATO ADESSO SI PUO- DIRE IN UNA RIGA:** valeva ### **in tempo continuo**, dove il passo e- ### **un artefatto dell-integratore** e si puo- riscalare; ### **nella camminata il tick e- una unita- di LUNGHEZZA**, e ### **una lunghezza non si riscala senza cambiare la fisica.**
+
+### ✅ **CHE COSA RESTA e CHE COSA DIVENTA VERO** *(e sono due cose diverse, quindi le separo)*: ### **RESTA** il divieto di normalizzare con una ### **statistica GLOBALE** *(`A3`)*; ### **DIVENTA VERO** che la ### **SCALA ASSOLUTA** di `r` ### **va DERIVATA da una grandezza locale** *(`A1`)*, e si aggiunge alla domanda ### **<<da dove viene `r_k`>>.**
+
+### ⛔ **E IL BRACCIO `(7)` DEL PIANO SI ROVESCIA:** deve ### **MISURARE che un fattore comune CAMBIA la fisica**, e ### **quanto.** ### ⚠ **Previsione, fissata PRIMA: SI-, PER COSTRUZIONE** — e ### **un braccio che misurasse l-invarianza sarebbe UN BRACCIO CHE DEVE FALLIRE.**
+
+### ✅ **ANNOTATO IN DUE POSTI, e NESSUNO DEI DUE PARAGRAFI SBAGLIATI E- STATO RISCRITTO** *(il mandato dice <<annota, non riscrivere>>)*: la voce `TEMPO-PROPRIO-LOCALE` *(via `indice.py aggiorna-lotto`, che e- l-unica via di scrittura)* e ### **`doc/PIANO_era2.md`**, dove l-annotazione sta ### **PRIMA del paragrafo che resta**, cosi- chi legge ### **incontra la correzione prima dell-errore.**
+
+### ⚠ **E UNA COSA CHE IL MANDATO MI HA FATTO TOGLIERE:** avevo messo l-annotazione anche in una ### **chiave `meta` nuova** della voce, e ### **`indice.py` l-ha RIFIUTATA** *(<<la chiave meta non e- registrata>>)*. ### ✅ **Ha fatto bene, e l-ho tolta invece di registrarla:** ### **nessun programma legge quella chiave**, e per `DECISIONE-VUOLE-UN-CAMPO` ### **un campo si aggiunge quando serve a un PROGRAMMA**, non per annotare una prosa che sta gia- nella descrizione.
