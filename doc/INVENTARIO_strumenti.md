@@ -3012,3 +3012,27 @@ etichette rimosse, con ### **`0` persi, `0` doppi, `0` conflitti**.
 | ⛔ **L-ORDINE E- LA GARANZIA** | ### **copia → `sha1` della COPIA contro l-ORIGINALE → e SOLO SE COINCIDE si cancella**, ### **un file per volta.** Cosi- un-interruzione a meta- lascia ### **ogni singolo file in uno dei due stati buoni** *(nel repo, oppure su `E:` verificato)*: ### **mai in nessuno dei due** |
 | ⚠ **CHI E- TRACCIATO NON SI TOCCA** | l-insieme esce da ### **`git ls-files`**, non dal `.gitignore`: ### **<<ignorato>> e <<non tracciato>> sono due cose diverse**, e qui conta ### **la seconda** |
 | ⭐ **E NON PARTE SE NON CI STA** | controlla lo spazio su `E:` ### **prima di cominciare**: <<niente a meta->> vuol dire ### **non partire**, non ### **accorgersene a meta-** |
+
+### `csv/_pulizia.py` — **`P-PULIZIA`: UNA TEMPORANEA SI CANCELLA DAVVERO, E SE NON CI SI RIESCE SI DICE** *(2026-10-10)*
+
+| | |
+|---|---|
+| **il file** | `csv/_pulizia.py` *(BLOB `74e22346`)* |
+| **COMANDO** | `python csv/_pulizia.py --collaudo` *(nei due versi, ### **`6`/`6`**, con ### **UN braccio che DEVE ALZARE**)* · `--residui` · `--pulisci` |
+| **che cosa impedisce** | che una cartella temporanea ### **resti senza che nessuno lo dica**: `via()` ### **toglie la sola lettura e riprova**, e poi ### **CONTROLLA CHE IL PERCORSO NON ESISTA PIU-** — perche- ### **un `rmtree` che non alza NON E- LA PROVA che abbia cancellato** |
+| ⛔ **IL DIFETTO CHE CURA** | `shutil.rmtree(..., ignore_errors=True)` in ### **`7` siti**: `git` scrive i suoi oggetti ### **in sola lettura**, su Windows `rmtree` non li tocca, e ### **il flag SILENZIA il fallimento** |
+| ⭐ **IL NUMERO CHE DECIDE** | nel `%TEMP%` c-erano ### **`24` cartelle `repo_*`** con ### **`120` file e TUTTI E `120` in sola lettura**, ### **`10941` byte**: ### **il numero di cartelle era il numero di volte che il collaudo era girato** |
+| ⚠ **E `via_finale()` PER UN `finally`** | cancella e ### **lo dice sempre**, ma ### **non SOSTITUISCE un-eccezione in volo** — perche- un `raise` dentro un `finally` ### **cancella l-errore vero**, che e- quello che spiega il fallimento. ### **Se invece non c-era niente in volo, ALZA** |
+| ✅ **IL BRACCIO CHE DEVE ALZARE** | un file ### **APERTO** non si puo- cancellare su Windows: `via()` deve dare ### **`PermissionError`**, e ### **chiuso il file la STESSA chiamata riesce** — cosi- il braccio ### **non e- fallito per un altro motivo** |
+
+### `csv/_verifica_clone.py` — **`P-CLONE-PULITO`: UN SOLO CLONE, E SEMPRE CANCELLATO** *(2026-10-10)*
+
+| | |
+|---|---|
+| **il file** | `csv/_verifica_clone.py` *(BLOB `7a8ad2ff`)* |
+| **COMANDO** | `python csv/_verifica_clone.py` |
+| **che cosa misura** | i ### **tre comandi nei DUE ambienti** *(`valida`, la suite, `prossima`, con e senza `CI=true`)* su un clone ### **pulito**, piu- ### **`git status` VUOTO**, piu- ### **nessun residuo nel `%TEMP%`**, piu- il ### **blob del simulatore** |
+| ⛔ **IL DIFETTO CHE CURA** | la verifica la facevo ### **a mano, un clone per corsa**, e ### **nessuno li cancellava**: ### **`11` cloni, `6.8` GB**, ed e- cosi- che il disco si e- riempito |
+| ⭐ **QUALE CLONE, E PERCHE-** | ### **`git clone --local`**: gli oggetti si ### **HARDLINKANO**, quindi sullo stesso volume il clone costa ### **quasi zero byte** e ### **la storia resta INTERA** |
+| ⚠ **E `--depth 1` NON SI PUO-** | `H-P8` pretende il codice di prima ### **dal PADRE**, `_replay_registri` legge ### **lo storico dei commit**, e `indice.py storico-commit` ### **ricava il commit dai log**: un clone superficiale li farebbe passare ### **PER VACUITA-**, che e- peggio che non girarli |
+| ⛔ **NON STA NELLA SUITE, di proposito** | fa un clone e ci fa girare ### **la suite**: metterlo fra i collaudi sarebbe ### **una ricorsione senza fondo** |

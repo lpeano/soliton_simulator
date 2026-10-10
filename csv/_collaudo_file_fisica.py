@@ -27,6 +27,11 @@ _QUI = os.path.dirname(os.path.abspath(__file__))
 RADICE = os.path.dirname(_QUI)
 sys.path.insert(0, _QUI)
 import _presidio                                             # noqa: E402
+# ### ⛔ **LA PULIZIA NON SI SILENZIA** *(decisione di Luca, 2026-10-10)*:
+# ### `shutil.rmtree(..., ignore_errors=True)` ### **non cancella gli oggetti di
+# ### `git`, che sono in SOLA LETTURA, e NON LO DICE** -- e cosi- il `%TEMP%` si era
+# ### riempito di ### **24 cartelle** che nessuno vedeva.
+import _pulizia                                              # noqa: E402
 _presidio.avvia(__file__)
 import _file_fisica as FF                                    # noqa: E402
 
@@ -110,7 +115,7 @@ def main():
               _m0.intrusi(["x.py", "%s/x.py" % VERA, "a/b/c.py"]) == [],
               "e- la misura di cio- che il presidio NON faceva: non un ricordo")
     finally:
-        shutil.rmtree(_tv, ignore_errors=True)
+        _pulizia.via_finale(_tv)
     print()
     tmp = tempfile.mkdtemp(prefix="ff_")
     try:
@@ -144,7 +149,7 @@ def main():
               mod.intrusi([PROVA + chr(92) + "nuova.py"]) != [],
               "due forme dello stesso percorso NON sono lo stesso percorso per una `==`")
     finally:
-        shutil.rmtree(tmp, ignore_errors=True)
+        _pulizia.via_finale(tmp)
     print()
     # ### ✔ **E I DUE PRESIDI LEGGONO LA LISTA, non il nome a mano.**
     for f in ("csv/_hook_fisica.py", "csv/_presidio_commenti_flag.py"):

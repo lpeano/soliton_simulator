@@ -66,6 +66,7 @@ commit**: cosi' non se ne accumulano di invisibili.)*
 | `csv/_presidio_commenti_flag.py|H-P5` | strumento di analisi STATICA. Non importa il simulatore e non lo fa girare: legge |
 | `csv/_presidio_indice.py|H-P5` | non importa il simulatore e non lo fa girare. E' un presidio su documenti. |
 | `csv/_presidio_righe.py|H-P5` | non importa il simulatore e non lo fa girare. Conta le righe di un documento. |
+| `csv/_pulizia.py|H-P5` | non importa il simulatore e non lo fa girare. Cancella cartelle temporanee. |
 | `csv/_pulizia_finale.py|H-P5` | non importa il simulatore e non lo fa girare. Costruisce lotti per l'indice. |
 | `csv/_punto_della_situazione.py|H-P5` | non importa il simulatore e non lo fa girare. Legge un TSV e `git log`. |
 | `csv/_referto_decisioni_43.py|H-P5` | questo referto NON misura il simulatore. Non fa girare nessuna scena, non |
@@ -89,6 +90,7 @@ commit**: cosi' non se ne accumulano di invisibili.)*
 | `csv/_stage.py|H-P5` | non importa il simulatore e non lo fa girare. Esporta l'indice di git e fa |
 | `csv/_stato_dalla_riga.py|H-P5` | non importa il simulatore e non lo fa girare. Legge documenti. |
 | `csv/_titoli_brevi.py|H-P5` | non importa il simulatore e non lo fa girare. Accorcia titoli in un TSV. |
+| `csv/_verifica_clone.py|H-P5` | non importa il simulatore e non lo fa girare. Clona e fa girare i collaudi. |
 | `csv/_vista_smistamento.py|H-P5` | non importa il simulatore e non lo fa girare. Legge due TSV e scrive un documento. |
 | `csv/indice.py|H-P5` | non importa il simulatore e non lo fa girare. Legge e scrive l'indice. |
 | `csv/migra_indice_v2.py|H-P5` | non importa il simulatore e non lo fa girare. Migra un indice. |
@@ -148,5 +150,5 @@ commit**: cosi' non se ne accumulano di invisibili.)*
 | `csv/_test_fork/_z43_tempo_proprio.py|H-P3` | la scena passa TUTTA dal CLI (`nmasse` e `sep` da `argv`), e la |
 
 ```
-esenzioni dichiarate   141
+esenzioni dichiarate   143
 ```

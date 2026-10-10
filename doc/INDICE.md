@@ -12,7 +12,7 @@
 | `FISICA` | `2` | 36 |
 | `FISICA` | `ENTRAMBE` | 17 |
 | `INFRASTRUTTURA` | `1` | 39 |
-| `INFRASTRUTTURA` | `2` | 14 |
+| `INFRASTRUTTURA` | `2` | 16 |
 | `INFRASTRUTTURA` | `ENTRAMBE` | 24 |
 | `METODO` | `1` | 156 |
 | `METODO` | `2` | 14 |
@@ -467,6 +467,7 @@
 | `P-ALB` | PRESIDIO | METODO | 2 | ### **AGENDA** |  | l-albero delle scelte: una decisione PRESA con una dipendenza NON PRESA e- rifiu |
 | `P-BARRIERA` | PRESIDIO | INFRASTRUTTURA | 2 | ### **AGENDA** |  | i hook locali sono la barriera: ogni strumento si RIFIUTA di partire se non sono |
 | `P-C1` | PRESIDIO | INFRASTRUTTURA | ENTRAMBE | ### **APERTA** |  | anche i CONTROLLI stanno nell-indice: il codice dichiara l-ID, e la macchina lo  |
+| `P-CLONE-PULITO` | PRESIDIO | INFRASTRUTTURA | 2 | ### **AGENDA** |  | la verifica su clone pulito: UN SOLO clone, e sempre cancellato |
 | `P-DECADIMENTO` | STANDARD | FISICA | ENTRAMBE | ### **APERTA** |  | ogni decadimento e una trasformazione: cio che una grandezza perde diventa calor |
 | `P-DET` | PRESIDIO | METODO | 2 | ### **AGENDA** |  | il determinismo: nessun RNG globale, un thread, versioni bloccate, due processi  |
 | `P-DIM` | PRESIDIO | METODO | 2 | ### **AGENDA** |  | le dimensioni: ogni addendo ha la stessa, un termine di H e- E^1, e il generator |
@@ -487,6 +488,7 @@
 | `P-M1` | PRESIDIO | METODO | ENTRAMBE | ### **APERTA** |  | ogni METODO dell-era 1 ha una riga che dice come si applica all-era 2 |
 | `P-MEMORIA` | STANDARD | FISICA | ENTRAMBE | ### **APERTA** |  | uno scalare con memoria acquista un verso: la memoria da la direzione |
 | `P-MOD` | PRESIDIO | INFRASTRUTTURA | 2 | ### **AGENDA** |  | la MODULARITA- non si degrada: la mappa dice cio- che e- previsto, il resto e- r |
+| `P-PULIZIA` | PRESIDIO | INFRASTRUTTURA | 2 | ### **AGENDA** |  | una cartella temporanea si cancella DAVVERO, e se non ci si riesce SI DICE |
 | `P-R1` | PRESIDIO | INFRASTRUTTURA | 2 | ### **AGENDA** |  | ogni RAMO della fisica dell-era 2 e- dichiarato: quanti, e a che servono |
 | `P-REG` | PRESIDIO | DOCUMENTAZIONE | ENTRAMBE | ### **APERTA** |  | ogni regola di gestione e- una VOCE, e la sezione delle regole di CLAUDE.md SI G |
 | `P-RIF` | PRESIDIO | METODO | 2 | ### **AGENDA** |  | un ID nel codice e- un @rif, o non esiste: un riferimento non vive nella prosa |

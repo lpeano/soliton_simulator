@@ -853,6 +853,25 @@ METODI['P-ALB'] = (
     "una decisione presa",
     "`csv/_albero_era2.py::controlla`, dentro `indice.py valida` + `pre-commit` + CI",
     "PORTATO")
+METODI['P-PULIZIA'] = (
+    "NATO NELL-ERA 2: una cartella temporanea si cancella DAVVERO -- si toglie la SOLA "
+    "LETTURA, si riprova, e poi SI CONTROLLA CHE IL PERCORSO NON ESISTA PIU-. ### Perche- "
+    "un `rmtree` che non alza NON E- LA PROVA che abbia cancellato: "
+    "`shutil.rmtree(..., ignore_errors=True)` non tocca gli oggetti di `git`, che sono in "
+    "sola lettura, e SILENZIA il fallimento -- misurato il 2026-10-10: 24 cartelle "
+    "lasciate nel TEMP, e il numero di cartelle ERA il numero di volte che il collaudo era "
+    "girato. ### E in un `finally` non sostituisce l-eccezione in volo, perche- un `raise` "
+    "dentro un `finally` cancella l-errore vero",
+    "`csv/_pulizia.py::via`, usato nei 7 siti che cancellano temporanee", "PORTATO")
+METODI['P-CLONE-PULITO'] = (
+    "NATO NELL-ERA 2: la verifica su clone pulito usa UN SOLO clone, `--local` (oggetti "
+    "HARDLINKATI, quindi quasi zero byte e storia INTERA), e lo cancella in un `finally` "
+    "ANCHE se tutto e- andato storto. ### `--depth 1` NON si puo-: `H-P8` pretende il "
+    "codice di prima DAL PADRE e `_replay_registri` legge lo storico dei commit, quindi un "
+    "clone superficiale li farebbe passare PER VACUITA-. ### Misura i tre comandi nei DUE "
+    "ambienti, `git status` vuoto, nessun residuo, e il blob del simulatore",
+    "`csv/_verifica_clone.py::verifica` -- a mano, NON nella suite: farebbe ricorsione",
+    "PORTATO")
 METODI['P-ID'] = (
     "un ID che NASCE non puo- collidere con un ID, un alias o uno dei significati "
     "dichiarati di un omonimo, e ha almeno 4 caratteri. ### Decisione di Luca, blocco 1 "

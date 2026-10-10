@@ -33,6 +33,11 @@ _QUI = os.path.dirname(os.path.abspath(__file__))
 RADICE = os.path.dirname(_QUI)
 sys.path.insert(0, _QUI)
 import _presidio                                             # noqa: E402
+# ### ⛔ **LA PULIZIA NON SI SILENZIA** *(decisione di Luca, 2026-10-10)*:
+# ### `shutil.rmtree(..., ignore_errors=True)` ### **non cancella gli oggetti di
+# ### `git`, che sono in SOLA LETTURA, e NON LO DICE** -- e cosi- il `%TEMP%` si era
+# ### riempito di ### **24 cartelle** che nessuno vedeva.
+import _pulizia                                              # noqa: E402
 _presidio.avvia(__file__)
 import indice as IX                                          # noqa: E402
 
@@ -410,7 +415,7 @@ def main():
               cita(IX._f11_righe([_nuova], _ult, _nati), "VOCE-SCRITTA-A-MANO"),
               "una voce nuova si crea con `crea-lotto`, che scrive la sua riga")
     finally:
-        shutil.rmtree(_tmp, ignore_errors=True)
+        _pulizia.via_finale(_tmp)
 
     # ---------------------------------------------------------------- PI-CHIUSURA-ORFANA
     # ### ⛔ **IL CASO A RISPOSTA NOTA E- L-INDICE DI IERI:** a `570d43a` *(dopo il punto

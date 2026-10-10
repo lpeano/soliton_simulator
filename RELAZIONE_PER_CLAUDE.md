@@ -12558,3 +12558,21 @@ Ogni dato di `db_era2/` ha ### **il suo TIMBRO accanto**, col campo `versione_da
 ### ⚠ **E UNA COSA CHE AVREI DOVUTO CERCARE PRIMA DI SCRIVERE LO STRUMENTO:** nel repo c-era ### **GIA-** `csv/_sposta_su_E.py`, del ### **`2026-09-22`**, che fa la stessa cosa con ### **una lista ESPLICITA di tre cartelle** e un-altra destinazione *(`E:/soliton_archivio/spostati_2026-09-22`)*. ### ⛔ **E il suo commit `31001eb` si chiama <<lo strumento spostava anche FILE TRACCIATI DA GIT: difetto mio>>** — cioe- ### **la trappola in cui sono appena NON caduto era GIA- SCRITTA NEL REPO**, e ci sono passato accanto senza leggerla.
 
 ### ✅ **La differenza fra i due, dichiarata invece di lasciata implicita:** quello del `2026-09-22` sposta ### **cio- che e- SCRITTO in una lista** *(tre cartelle che avevano gia- servito il loro sigillo)*; questo sposta ### **per REGOLA** *(tre estensioni, due radici, e ### **solo i NON tracciati**)*. ### ⚠ **Due strumenti per lo stesso mestiere sono UNO DI TROPPO**, e ### **quale dei due resti e- una decisione di Luca**, non mia: la metto in `DA_DECIDERE_LUCA.md` invece di deciderla.
+
+## ✅ **PUNTO `2`: L-IGIENE DELLE VERIFICHE — ### **una temporanea si cancella DAVVERO, e un rosso dice SEMPRE perche-** *(2026-10-10)*
+
+### 📌 **LA DECISIONE DI LUCA, e il motivo che ha dato:** *«il disco pieno l-hanno causato ### **11 cloni lasciati in `%TEMP%` (6,8 GB)**»* — e ha ragione: ### **quei cloni li facevo io, a mano, uno per corsa, e nessuno li cancellava.**
+
+### ✅ **LA PULIZIA, in `csv/_pulizia.py`:** `via()` ### **toglie la sola lettura e riprova** *(`onexc`, e `onerror` prima di Python `3.12`: si prova l-uno e si ricade sull-altro invece di leggere la versione e scommetterci)*, e poi ### **CONTROLLA CHE IL PERCORSO NON ESISTA PIU-.** ### ⭐ **Perche- un `rmtree` che non alza NON E- LA PROVA che abbia cancellato** — ed e- esattamente l-errore che ha fatto `ignore_errors=True` per `24` volte.
+
+### ⛔ **E IL BRACCIO CHE DEVE ALZARE non e- un caso finto:** un file ### **APERTO** non si puo- cancellare su Windows, e `via()` da- ### **`PermissionError`**; ### ✅ **e CHIUSO il file la STESSA chiamata riesce** — cosi- quel braccio ### **non e- passato per un altro motivo.** ### **`6` su `6`.**
+
+### ✅ **I `24` RESIDUI VERI SONO ANDATI VIA COL NUOVO STRUMENTO**, che e- la prova sul campo: ### **`24` cartelle, `10941` byte**, e ### **`0` residui** dopo. ### ⚠ **E il collaudo di `_stage.py` adesso ha un braccio che li CONTA**: se tornano, ### **il collaudo diventa rosso** invece di lasciarli crescere.
+
+### 📌 **I SETTE SITI CURATI**, perche- la decisione dice *«ogni clone o cartella temporanea»* e non <<quello che ha dato problemi>>: `_stage.py` *(tre siti)*, `_collaudo_file_fisica.py` *(due)*, `_collaudo_presidi_indice.py`, e ### **`_sposta_su_E.py`**, che e- lo strumento del `2026-09-22`.
+
+### ⭐ **E UN ROSSO DICE SEMPRE PERCHE-, nei due posti che lo buttavano — e l-ho PROVATO, non promesso:** `esporta()` verso un percorso impossibile restituisce ### **`fatal: cannot create directory ... No such file or directory`**, e ora ### **il braccio lo STAMPA**; e `collauda.gira()` su un comando che fallisce ### **tiene l-uscita** *(`2` righe, codice `1`)* e la stampa in coda al verdetto, ### **venti righe per collaudo** — perche- uno che ne stampa `400` ### **seppellirebbe gli altri.**
+
+### ⚠ **E SE UN COLLAUDO FALLISCE SENZA SCRIVERE NIENTE, ADESSO LO DICE:** ### **<<e NON HA SCRITTO NIENTE, che e- un difetto a se->>** — perche- ### **un rosso muto e- un difetto, non un dettaglio.**
+
+### ✅ **LA SUITE INTERA, dopo le cure:** ### **`34` su `34`**, e il `pre-commit` sta nel budget *(`108.5` s su `120`, il `90%`)*. ### ⚠ **E il `90%` e- un SEGNALE**: il collaudo nuovo costa `0.18` s, quindi il margine che si e- ridotto ### **non e- colpa sua** — va guardato, e lo dico invece di lasciarlo scoprire a chi commttera- domani.

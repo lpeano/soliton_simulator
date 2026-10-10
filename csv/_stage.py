@@ -37,6 +37,11 @@ _QUI = os.path.dirname(os.path.abspath(__file__))
 RADICE = os.path.dirname(_QUI)
 sys.path.insert(0, _QUI)
 import _presidio                                             # noqa: E402
+# ### ⛔ **LA PULIZIA NON SI SILENZIA** *(decisione di Luca, 2026-10-10)*:
+# ### `shutil.rmtree(..., ignore_errors=True)` ### **non cancella gli oggetti di
+# ### `git`, che sono in SOLA LETTURA, e NON LO DICE** -- e cosi- il `%TEMP%` si era
+# ### riempito di ### **24 cartelle** che nessuno vedeva.
+import _pulizia                                              # noqa: E402
 
 # ESENTE-H-P5: non importa il simulatore e non lo fa girare. Esporta l'indice di git e fa
 # girare i controlli del contenuto su quei byte.
@@ -163,7 +168,7 @@ def controlla(dove=None, rapido=False):
         return err
     finally:
         if proprio:
-            shutil.rmtree(dove, ignore_errors=True)
+            _pulizia.via_finale(dove)
 
 
 # =====================================================================================
@@ -187,6 +192,18 @@ sys.exit(0)
 '''
 
 
+def _perche(err):
+    """### \u26d4 **UN ROSSO DICE SEMPRE PERCHE-:** gli errori si ### **STAMPANO.**
+
+    ### \u2705 **E quando la lista e- vuota non stampa niente**, cosi- il verde resta
+    leggibile: ### **la verbosita- serve al rosso, non al verde.**
+    """
+    for x in err:
+        for riga in str(x).split(NL):
+            if riga.strip():
+                print("        %s" % riga.strip())
+
+
 def collaudo():
     ok = [0, 0]
 
@@ -198,15 +215,23 @@ def collaudo():
     print("=" * 100)
     print("IL COLLAUDO DEI CONTROLLI SULLO STAGE -- nei DUE VERSI")
     print("=" * 100)
-    esito("### e il modo RAPIDO passa (e- quello del `pre-commit`)",
-          controlla(rapido=True) == [],
+    # ### \u26d4 **E GLI ERRORI SI STAMPANO, NON SI CONTANO** *(decisione di Luca,
+    # ### 2026-10-10)*. ### \u26a0 **Il 2026-10-10 questi due bracci sono diventati rossi
+    # ### su un clone pulito e NON HANNO DETTO PERCHE-**: `esporta()` restituiva il
+    # ### messaggio di `git` *(<<No space left on device>>)*, e qui ### **si guardava solo
+    # ### se la lista era vuota.** ### **Tre corse da tre minuti per trovare una cosa che
+    # ### il programma SAPEVA GIA-.**
+    _e1 = controlla(rapido=True)
+    esito("### e il modo RAPIDO passa (e- quello del `pre-commit`)", _e1 == [],
           "### %d controllo su %d: il validatore dell-indice, che e- quello che prende "
           "l-incoerenza fra `voci.jsonl` e `storico.jsonl`"
           % (RAPIDI, len(SULLO_STAGE)))
-    esito("sul disco: i controlli del contenuto passano SULLO STAGE",
-          controlla() == [],
+    _perche(_e1)
+    _e2 = controlla()
+    esito("sul disco: i controlli del contenuto passano SULLO STAGE", _e2 == [],
           "%d controlli sullo stage, %d dichiarati sul disco col motivo"
           % (len(SULLO_STAGE), len(SUL_DISCO)))
+    _perche(_e2)
     esito("### il collaudo ha MATERIA: le due liste non sono vuote",
           len(SULLO_STAGE) >= 3 and len(SUL_DISCO) >= 3,
           "### se una fosse vuota, o non si controllerebbe niente o non si "
@@ -245,7 +270,7 @@ def collaudo():
                                    errors="replace")
                 return r.returncode
             finally:
-                shutil.rmtree(d, ignore_errors=True)
+                _pulizia.via_finale(d)
 
         esito("### il caso SANO: tutto committato, il controllo PASSA", prova() == 0,
               "### se questo fallisse, i due casi sotto non direbbero niente")
@@ -269,7 +294,16 @@ def collaudo():
         esito("### (b) entrambi in stage: il controllo PASSA", prova() == 0,
               "### la cura non deve rifiutare il caso GIUSTO")
     finally:
-        shutil.rmtree(t, ignore_errors=True)
+        _pulizia.via_finale(t)
+    # ### \u26d4 **E IL COLLAUDO NON LASCIA NIENTE DIETRO DI SE-** *(decisione di Luca,
+    # ### 2026-10-10)*: ### **questo braccio e- la ragione per cui le 24 cartelle non
+    # ### possono tornare in silenzio.** ### \u26a0 **Guarda TUTTI i nostri prefissi**, non
+    # ### solo quelli di questa corsa: ### **un residuo di ieri e- un residuo.**
+    _r = _pulizia.residui()
+    esito("### e il collaudo NON LASCIA RESIDUI nel `%TEMP%`", not _r,
+          "### %d residui dei nostri prefissi%s"
+          % (len(_r), (": " + ", ".join(os.path.basename(x[0]) for x in _r[:4]))
+             if _r else ""))
     print("=" * 100)
     print("IL COLLAUDO DELLO STAGE: %d su %d   %s"
           % (ok[0], ok[1], "### TUTTI PASSATI" if ok[0] == ok[1] else "### CI SONO BUCHI"))

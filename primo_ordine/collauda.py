@@ -136,6 +136,15 @@ COLLAUDI = (
     # ### ⚠ **`solo-CI` per il TEMPO, non per importanza:** i controlli sullo stage
     # ### costano `46.5` s, e nel `pre-commit` gira ### **il solo modo rapido.**
     ("i controlli sullo STAGE e non sul disco", "csv/_stage.py --collaudo", "solo-CI"),
+    # ### ⛔ **LA PULIZIA DELLE TEMPORANEE** *(decisione di Luca, 2026-10-10)*: il
+    # ### disco pieno l-hanno causato ### **11 cloni lasciati nel `%TEMP%`**, e
+    # ### ### **24 cartelle che `rmtree` non riusciva a cancellare in silenzio.**
+    # ### ✅ **Costa meno di un secondo**, quindi sta nel `pre-commit`.
+    ("la pulizia delle temporanee", "csv/_pulizia.py --collaudo", "pre-commit"),
+    # ### ⚠ **E `csv/_verifica_clone.py` NON STA QUI, DI PROPOSITO:** fa un clone e
+    # ### ### **ci fa girare QUESTA suite** -- metterlo fra i collaudi vorrebbe dire
+    # ### ### **una ricorsione senza fondo.** Si lancia a mano, ed e- il punto 3 del
+    # ### mandato.
 )
 
 
@@ -236,11 +245,19 @@ def _sporchi():
 
 
 def gira(cmd):
-    """### `(secondi, codice)`. ### **Il tempo lo misura `perf_counter`**, non `time`."""
+    """### `(secondi, codice, uscita)`. ### **Il tempo lo misura `perf_counter`**, non `time`.
+
+    ### \u26d4 **E L-USCITA SI TIENE** *(decisione di Luca, 2026-10-10)*: prima
+    `capture_output=True` la prendeva e ### **nessuno la leggeva**, quindi un collaudo
+    rosso diceva ### **soltanto <<codice 1>>.** ### \u26a0 **Cosi- un rosso d-AMBIENTE
+    *(il disco pieno)* e un rosso da DIFETTO erano INDISTINGUIBILI**, e la diagnosi e-
+    costata ### **tre corse da tre minuti.**
+    """
     pezzi = cmd.split()
     t0 = time.perf_counter()
     r = subprocess.run([sys.executable] + pezzi, cwd=RADICE, capture_output=True)
-    return time.perf_counter() - t0, r.returncode
+    uscita = ((r.stdout or b"") + (r.stderr or b"")).decode("utf-8", "replace")
+    return time.perf_counter() - t0, r.returncode, uscita
 
 
 def macchina():
@@ -345,10 +362,10 @@ def main(argv):
     tot = {"pre-commit": 0.0, "solo-CI": 0.0}
     rotti = []
     for nome, cmd, dove in scelti:
-        s, rc = gira(cmd)
+        s, rc, uscita = gira(cmd)
         tot[dove] += s
         if rc != 0:
-            rotti.append((nome, cmd, rc))
+            rotti.append((nome, cmd, rc, uscita))
         print("  %-38s %-10s %9.2f  %s"
               % (nome, dove, s, "ok" if rc == 0 else "### FALLISCE (codice %d)" % rc))
     print("  " + "-" * 94)
@@ -360,8 +377,16 @@ def main(argv):
     # ------------------------------------------------------------------ il VERDETTO
     if rotti:
         print("  ### %d COLLAUDI FALLISCONO:" % len(rotti))
-        for nome, cmd, rc in rotti:
+        for nome, cmd, rc, uscita in rotti:
             print("     %-38s `%s` -> codice %d" % (nome, cmd, rc))
+            # ### \u2705 **E SI STAMPA LA CODA DELLA SUA USCITA**, perche- ### **<<codice
+            # ### 1>> non e- una diagnosi.** ### \u26a0 **Venti righe, non tutto:** un
+            # ### collaudo che stampa 400 righe ### **seppellirebbe gli altri.**
+            coda = [x for x in uscita.split(NL) if x.strip()][-20:]
+            for riga in coda:
+                print("        | %s" % riga[:160])
+            if not coda:
+                print("        | ### e NON HA SCRITTO NIENTE, che e- un difetto a se-")
     else:
         print("  ### TUTTI I COLLAUDI PASSANO: %d su %d" % (len(scelti), len(scelti)))
     if tot["pre-commit"] > BUDGET:

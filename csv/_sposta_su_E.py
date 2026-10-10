@@ -28,6 +28,11 @@ import sys
 _QUI = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, _QUI)
 import _presidio
+# ### ⛔ **LA PULIZIA NON SI SILENZIA** *(decisione di Luca, 2026-10-10)*:
+# ### `shutil.rmtree(..., ignore_errors=True)` ### **non cancella gli oggetti di
+# ### `git`, che sono in SOLA LETTURA, e NON LO DICE** -- e cosi- il `%TEMP%` si era
+# ### riempito di ### **24 cartelle** che nessuno vedeva.
+import _pulizia                                              # noqa: E402
 
 _presidio.avvia(__file__)
 
@@ -87,7 +92,7 @@ def collaudo(W):
     W("K3 nessuna cartella di RUN ATTIVO nella lista da spostare -> %s\n"
       % ("OK" if ok3 else "*** STO PER SPOSTARE UN RUN VIVO ***"))
     e.append(ok3)
-    shutil.rmtree(d, ignore_errors=True)
+    _pulizia.via(d)
     ok = all(e)
     W("-" * 90 + "\n  -> %s\n\n" % ("si sposta" if ok else "*** NON sposto ***"))
     return ok
