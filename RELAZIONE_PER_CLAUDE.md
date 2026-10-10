@@ -12863,3 +12863,13 @@ Ogni dato di `db_era2/` ha ### **il suo TIMBRO accanto**, col campo `versione_da
 ### ⭐ **E IL `v3` TOGLIE UN NUMERO: `g` NON C-E- PIU-.** Conta solo il rapporto `h/Lambda`, e la saturazione e- ### **`G'` limitata** — `0.015` a `x = 1/8`, `0.5` a `x = 1`, `0.9998` a `x = 64`: ### **il ginocchio e- a `x ~ 1`**, e ### **nessuno l-ha messo li-.**
 
 ### ⚠ **E IL `pre-commit` E- AL `96%` DEL BUDGET** *(`115.8` s su `120`)*: i due collaudi nuovi del `v3` e del `v2` costano ### **`0.93` s ciascuno**, quindi ### **non sono loro** — ma il margine ### **va guardato**, e lo dico adesso.
+
+## ✅ **DUE AGGIUNTE AL `v3` ARRIVATE A MANDATO APERTO, E LE TRATTO IN DUE MODI DIVERSI** *(2026-10-11)*
+
+### 📌 **LA SECONDA** *(l-autointerazione dell-interferenza dell-era `1`, portata nella camminata)* ### **riguarda il `v3` in corso**, e il mandato dice: *«se il task history e- gia- committato, AGGIUNGI come ANNOTAZIONE»*. ### ✅ **Lo e- *(`5456168`)*, quindi sara- un-annotazione** — con previsioni e soglie ### **fissate prima dei numeri.**
+
+### 📌 **LA TERZA** *(la camminata entra nella TABELLA)* dice ### **<<da eseguire DOPO il `v3`, non toccare il `v3` in corso, registra soltanto: nessun codice>>**. ### ✅ **Quindi va in CODA** *(`L-UN-PROMPT`)*, ed e- la ### **voce ④** di `doc/CODA_2026-10-09.md`.
+
+### ⭐ **E LA DECISIONE DELLA TERZA E- IMPORTANTE ANCHE PER COME LEGGO IL BANCO:** *«la camminata NON resta nel banco»* — il modello resta ### **TABELLA → GENERATORE → CODICE GENERATO**, e il motivo e- ### **il difetto dell-era `1`: codice di prova che diventa implementazione.** ### ⚠ **Quindi i banchi `v1`-`v3` sono STRUMENTI PER FISSARE LE FORME**, non l-implementazione — e il loro destino e- ### **diventare il collaudo della tabella.**
+
+### ⭐ **E UN PEZZO DI QUELLA VOCE IL `v3` LO HA GIA- INCONTRATO:** il generatore dovra- ### **dire se ha usato il flusso ESATTO o il punto medio implicito, e perche-** — e la distinzione ### **esiste gia- nei numeri**: la saturazione su `h/Lambda` ### **si integra esattamente** *(gli invarianti sono misurati)*, quella sull-### **elicita- dell-interferenza NO.**
