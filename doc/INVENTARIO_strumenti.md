@@ -3076,3 +3076,15 @@ etichette rimosse, con ### **`0` persi, `0` doppi, `0` conflitti**.
 | ✅ **LA CANDIDATA E- L-ELICITA-** | `h_k = somma di (psi^dagger sigma psi) . n`: ### **invariante di gauge** *(`3.5e-18`)* e ### **dispari sotto `C`** *(`4.4e-17`)*. ### **Senza i versori quello scalare NON ESISTE** |
 | 📌 **E LA DIFFERENZA COL `v1`, misurata** | con `eps = 0` e identita- le componenti ### **non si mescolano** *(`0` esatto, come il `v1`)*; con `eps > 0` ### **si mescolano** *(`0.089`)*; e con `eps = 0` ma trasporto ### **curvo** si mescolano ### **lo stesso** *(`0.072`)* — ### **mescola anche il TRASPORTO** |
 | ⚠ **NON E- UNA LEGGE** | non entra in `leggi.yaml`, non importa il simulatore, nessun clip — ### **tre bracci lo verificano** |
+
+### `proto_camminata/_letture2.py` e `_referto2.py` — **LE DIECI LETTURE DEL `v2`, E I VERDETTI GENERATI** *(2026-10-10)*
+
+| | |
+|---|---|
+| **i file** | `_letture2.py` *(BLOB `75e112b1`)* · `_referto2.py` *(BLOB `873f882a`)* |
+| **COMANDO** | `python proto_camminata/_letture2.py` *(scrive `uscite/letture_v2.json`)* → `python proto_camminata/_referto2.py` *(scrive `doc/REFERTO_prototipo_camminata_v2.md`)* |
+| **che cosa misura** | le ### **dieci letture**: gauge *(piu- il braccio che DEVE fallire)*, isotropia ### **che PORTA i versori**, cono, ### **bande accoppiate** al variare di `eps`, ### **il GAP dello spettro**, quantita- conservata, cluster, ### **materia/antimateria col coniugato**, olonomia |
+| ⭐ **I VERDETTI** | `7` conferme *(una delle quali e- ### **un braccio che DEVE fallire e FALLISCE**)*, `1` ### **<<nessuna trovata>>**, `1` ### **<<non decidibile>>** |
+| ⭐ **IL RISULTATO PIU- FORTE** | la lettura `5`: l-### **ELICITA-** tiene la coniugazione di carica su ### **tutte** le varianti *(`<= 7.1e-16`)* mentre la densita- la rompe *(fino a `0.198`)* — e ### **questa volta e- una prova FISICA**, perche- la lettura `B` mostra che le due componenti ### **si equilibrano** |
+| ⛔ **IL GAP NON E- UNA MASSA** | gap/spaziatura va da ### **`64.9` a `eps=0`** a ### **`3.24` a `eps=1`**: `eps` ### **CHIUDE** il gap invece di aprirlo, e il gap grosso a `eps=0` e- ### **lo spettro della camminata SCALARE**, cioe- il `v1` |
+| ⚠ **E UNA PROPOSTA DEL `v1` CADE** | la ### **tendenza monotona** della crescita della dispersione ### **non sopravvive**: era una proprieta- della camminata ### **scalare** |

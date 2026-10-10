@@ -1,0 +1,959 @@
+{
+ "letture": {
+  "1_isotropia": {
+   "curva": 1.1210461722654977e-16,
+   "gauge_puro": 1.20672091447384e-16,
+   "identita": 8.568901862535442e-17,
+   "soglia": 5.329070518200751e-14
+  },
+  "2_cono": {
+   "T": 3,
+   "curva": 0.0,
+   "estremita_fuori": 178,
+   "gauge_puro": 0.0,
+   "identita": 0.0
+  },
+  "3_conservata": {
+   "curva (A) g=0.5": {
+    "energia + termine su rho": {
+     "accordo": true,
+     "esiti": [
+      "DERIVA",
+      "DERIVA",
+      "DERIVA",
+      "DERIVA"
+     ]
+    },
+    "energia + termine sull-elicita": {
+     "accordo": true,
+     "esiti": [
+      "DERIVA",
+      "DERIVA",
+      "DERIVA",
+      "DERIVA"
+     ]
+    },
+    "la norma": {
+     "accordo": true,
+     "esiti": [
+      "CONSERVATA",
+      "CONSERVATA",
+      "CONSERVATA",
+      "CONSERVATA"
+     ]
+    },
+    "la quasi-energia del passo": {
+     "accordo": true,
+     "esiti": [
+      "DERIVA",
+      "DERIVA",
+      "DERIVA",
+      "DERIVA"
+     ]
+    }
+   },
+   "curva (A) g=1": {
+    "energia + termine su rho": {
+     "accordo": true,
+     "esiti": [
+      "DERIVA",
+      "DERIVA",
+      "DERIVA",
+      "DERIVA"
+     ]
+    },
+    "energia + termine sull-elicita": {
+     "accordo": true,
+     "esiti": [
+      "DERIVA",
+      "DERIVA",
+      "DERIVA",
+      "DERIVA"
+     ]
+    },
+    "la norma": {
+     "accordo": true,
+     "esiti": [
+      "CONSERVATA",
+      "CONSERVATA",
+      "CONSERVATA",
+      "CONSERVATA"
+     ]
+    },
+    "la quasi-energia del passo": {
+     "accordo": true,
+     "esiti": [
+      "DERIVA",
+      "DERIVA",
+      "DERIVA",
+      "DERIVA"
+     ]
+    }
+   },
+   "curva (A) g=2": {
+    "energia + termine su rho": {
+     "accordo": false,
+     "esiti": [
+      "DERIVA",
+      "DERIVA",
+      "DERIVA",
+      "CONSERVATA"
+     ]
+    },
+    "energia + termine sull-elicita": {
+     "accordo": true,
+     "esiti": [
+      "DERIVA",
+      "DERIVA",
+      "DERIVA",
+      "DERIVA"
+     ]
+    },
+    "la norma": {
+     "accordo": true,
+     "esiti": [
+      "CONSERVATA",
+      "CONSERVATA",
+      "CONSERVATA",
+      "CONSERVATA"
+     ]
+    },
+    "la quasi-energia del passo": {
+     "accordo": true,
+     "esiti": [
+      "DERIVA",
+      "DERIVA",
+      "DERIVA",
+      "DERIVA"
+     ]
+    }
+   },
+   "curva (B) g=0.5": {
+    "energia + termine su rho": {
+     "accordo": false,
+     "esiti": [
+      "DERIVA",
+      "DERIVA",
+      "OSCILLANTE LIMITATA",
+      "OSCILLANTE LIMITATA"
+     ]
+    },
+    "energia + termine sull-elicita": {
+     "accordo": false,
+     "esiti": [
+      "DERIVA",
+      "DERIVA",
+      "OSCILLANTE LIMITATA",
+      "OSCILLANTE LIMITATA"
+     ]
+    },
+    "la norma": {
+     "accordo": true,
+     "esiti": [
+      "CONSERVATA",
+      "CONSERVATA",
+      "CONSERVATA",
+      "CONSERVATA"
+     ]
+    },
+    "la quasi-energia del passo": {
+     "accordo": false,
+     "esiti": [
+      "OSCILLANTE LIMITATA",
+      "DERIVA",
+      "OSCILLANTE LIMITATA",
+      "OSCILLANTE LIMITATA"
+     ]
+    }
+   },
+   "curva (B) g=1": {
+    "energia + termine su rho": {
+     "accordo": false,
+     "esiti": [
+      "DERIVA",
+      "DERIVA",
+      "OSCILLANTE LIMITATA",
+      "OSCILLANTE LIMITATA"
+     ]
+    },
+    "energia + termine sull-elicita": {
+     "accordo": false,
+     "esiti": [
+      "DERIVA",
+      "DERIVA",
+      "OSCILLANTE LIMITATA",
+      "OSCILLANTE LIMITATA"
+     ]
+    },
+    "la norma": {
+     "accordo": true,
+     "esiti": [
+      "CONSERVATA",
+      "CONSERVATA",
+      "CONSERVATA",
+      "CONSERVATA"
+     ]
+    },
+    "la quasi-energia del passo": {
+     "accordo": false,
+     "esiti": [
+      "OSCILLANTE LIMITATA",
+      "DERIVA",
+      "OSCILLANTE LIMITATA",
+      "OSCILLANTE LIMITATA"
+     ]
+    }
+   },
+   "curva (B) g=2": {
+    "energia + termine su rho": {
+     "accordo": false,
+     "esiti": [
+      "DERIVA",
+      "DERIVA",
+      "OSCILLANTE LIMITATA",
+      "OSCILLANTE LIMITATA"
+     ]
+    },
+    "energia + termine sull-elicita": {
+     "accordo": false,
+     "esiti": [
+      "DERIVA",
+      "DERIVA",
+      "OSCILLANTE LIMITATA",
+      "OSCILLANTE LIMITATA"
+     ]
+    },
+    "la norma": {
+     "accordo": true,
+     "esiti": [
+      "CONSERVATA",
+      "CONSERVATA",
+      "CONSERVATA",
+      "CONSERVATA"
+     ]
+    },
+    "la quasi-energia del passo": {
+     "accordo": false,
+     "esiti": [
+      "DERIVA",
+      "DERIVA",
+      "DERIVA",
+      "OSCILLANTE LIMITATA"
+     ]
+    }
+   },
+   "curva lineare": {
+    "energia + termine su rho": {
+     "accordo": true,
+     "esiti": [
+      "CONSERVATA",
+      "CONSERVATA",
+      "CONSERVATA",
+      "CONSERVATA"
+     ]
+    },
+    "energia + termine sull-elicita": {
+     "accordo": true,
+     "esiti": [
+      "CONSERVATA",
+      "CONSERVATA",
+      "CONSERVATA",
+      "CONSERVATA"
+     ]
+    },
+    "la norma": {
+     "accordo": true,
+     "esiti": [
+      "CONSERVATA",
+      "CONSERVATA",
+      "CONSERVATA",
+      "CONSERVATA"
+     ]
+    },
+    "la quasi-energia del passo": {
+     "accordo": true,
+     "esiti": [
+      "CONSERVATA",
+      "CONSERVATA",
+      "CONSERVATA",
+      "CONSERVATA"
+     ]
+    }
+   },
+   "identita (A) g=0.5": {
+    "energia + termine su rho": {
+     "accordo": true,
+     "esiti": [
+      "DERIVA",
+      "DERIVA",
+      "DERIVA",
+      "DERIVA"
+     ]
+    },
+    "energia + termine sull-elicita": {
+     "accordo": true,
+     "esiti": [
+      "DERIVA",
+      "DERIVA",
+      "DERIVA",
+      "DERIVA"
+     ]
+    },
+    "la norma": {
+     "accordo": true,
+     "esiti": [
+      "CONSERVATA",
+      "CONSERVATA",
+      "CONSERVATA",
+      "CONSERVATA"
+     ]
+    },
+    "la quasi-energia del passo": {
+     "accordo": true,
+     "esiti": [
+      "DERIVA",
+      "DERIVA",
+      "DERIVA",
+      "DERIVA"
+     ]
+    }
+   },
+   "identita (A) g=1": {
+    "energia + termine su rho": {
+     "accordo": true,
+     "esiti": [
+      "DERIVA",
+      "DERIVA",
+      "DERIVA",
+      "DERIVA"
+     ]
+    },
+    "energia + termine sull-elicita": {
+     "accordo": true,
+     "esiti": [
+      "DERIVA",
+      "DERIVA",
+      "DERIVA",
+      "DERIVA"
+     ]
+    },
+    "la norma": {
+     "accordo": true,
+     "esiti": [
+      "CONSERVATA",
+      "CONSERVATA",
+      "CONSERVATA",
+      "CONSERVATA"
+     ]
+    },
+    "la quasi-energia del passo": {
+     "accordo": true,
+     "esiti": [
+      "DERIVA",
+      "DERIVA",
+      "DERIVA",
+      "DERIVA"
+     ]
+    }
+   },
+   "identita (A) g=2": {
+    "energia + termine su rho": {
+     "accordo": true,
+     "esiti": [
+      "DERIVA",
+      "DERIVA",
+      "DERIVA",
+      "DERIVA"
+     ]
+    },
+    "energia + termine sull-elicita": {
+     "accordo": true,
+     "esiti": [
+      "DERIVA",
+      "DERIVA",
+      "DERIVA",
+      "DERIVA"
+     ]
+    },
+    "la norma": {
+     "accordo": true,
+     "esiti": [
+      "CONSERVATA",
+      "CONSERVATA",
+      "CONSERVATA",
+      "CONSERVATA"
+     ]
+    },
+    "la quasi-energia del passo": {
+     "accordo": true,
+     "esiti": [
+      "DERIVA",
+      "DERIVA",
+      "DERIVA",
+      "DERIVA"
+     ]
+    }
+   },
+   "identita (B) g=0.5": {
+    "energia + termine su rho": {
+     "accordo": false,
+     "esiti": [
+      "OSCILLANTE LIMITATA",
+      "CONSERVATA",
+      "DERIVA",
+      "DERIVA"
+     ]
+    },
+    "energia + termine sull-elicita": {
+     "accordo": false,
+     "esiti": [
+      "OSCILLANTE LIMITATA",
+      "OSCILLANTE LIMITATA",
+      "DERIVA",
+      "DERIVA"
+     ]
+    },
+    "la norma": {
+     "accordo": true,
+     "esiti": [
+      "CONSERVATA",
+      "CONSERVATA",
+      "CONSERVATA",
+      "CONSERVATA"
+     ]
+    },
+    "la quasi-energia del passo": {
+     "accordo": false,
+     "esiti": [
+      "CONSERVATA",
+      "OSCILLANTE LIMITATA",
+      "DERIVA",
+      "DERIVA"
+     ]
+    }
+   },
+   "identita (B) g=1": {
+    "energia + termine su rho": {
+     "accordo": false,
+     "esiti": [
+      "OSCILLANTE LIMITATA",
+      "DERIVA",
+      "DERIVA",
+      "DERIVA"
+     ]
+    },
+    "energia + termine sull-elicita": {
+     "accordo": false,
+     "esiti": [
+      "OSCILLANTE LIMITATA",
+      "DERIVA",
+      "DERIVA",
+      "DERIVA"
+     ]
+    },
+    "la norma": {
+     "accordo": true,
+     "esiti": [
+      "CONSERVATA",
+      "CONSERVATA",
+      "CONSERVATA",
+      "CONSERVATA"
+     ]
+    },
+    "la quasi-energia del passo": {
+     "accordo": false,
+     "esiti": [
+      "OSCILLANTE LIMITATA",
+      "DERIVA",
+      "DERIVA",
+      "DERIVA"
+     ]
+    }
+   },
+   "identita (B) g=2": {
+    "energia + termine su rho": {
+     "accordo": false,
+     "esiti": [
+      "OSCILLANTE LIMITATA",
+      "DERIVA",
+      "DERIVA",
+      "DERIVA"
+     ]
+    },
+    "energia + termine sull-elicita": {
+     "accordo": true,
+     "esiti": [
+      "DERIVA",
+      "DERIVA",
+      "DERIVA",
+      "DERIVA"
+     ]
+    },
+    "la norma": {
+     "accordo": true,
+     "esiti": [
+      "CONSERVATA",
+      "CONSERVATA",
+      "CONSERVATA",
+      "CONSERVATA"
+     ]
+    },
+    "la quasi-energia del passo": {
+     "accordo": true,
+     "esiti": [
+      "DERIVA",
+      "DERIVA",
+      "DERIVA",
+      "DERIVA"
+     ]
+    }
+   },
+   "identita lineare": {
+    "energia + termine su rho": {
+     "accordo": true,
+     "esiti": [
+      "CONSERVATA",
+      "CONSERVATA",
+      "CONSERVATA",
+      "CONSERVATA"
+     ]
+    },
+    "energia + termine sull-elicita": {
+     "accordo": true,
+     "esiti": [
+      "CONSERVATA",
+      "CONSERVATA",
+      "CONSERVATA",
+      "CONSERVATA"
+     ]
+    },
+    "la norma": {
+     "accordo": true,
+     "esiti": [
+      "CONSERVATA",
+      "CONSERVATA",
+      "CONSERVATA",
+      "CONSERVATA"
+     ]
+    },
+    "la quasi-energia del passo": {
+     "accordo": true,
+     "esiti": [
+      "CONSERVATA",
+      "CONSERVATA",
+      "CONSERVATA",
+      "CONSERVATA"
+     ]
+    }
+   }
+  },
+  "4_cluster": {
+   "curva (A) g=0.5": {
+    "crescita": 0.04617827513830752,
+    "intrappolata": 0.05039847522325713,
+    "media_finale": 1.4988597669570125,
+    "media_iniziale": 1.452681491818705
+   },
+   "curva (A) g=1": {
+    "crescita": 0.05662561132909083,
+    "intrappolata": 0.05070451431909376,
+    "media_finale": 1.4882513637616885,
+    "media_iniziale": 1.4316257524325977
+   },
+   "curva (A) g=2": {
+    "crescita": 0.031728616879657556,
+    "intrappolata": 0.05144141458614138,
+    "media_finale": 1.4356161017494988,
+    "media_iniziale": 1.4038874848698413
+   },
+   "curva (B) g=0.5": {
+    "crescita": 0.059959001762590614,
+    "intrappolata": 0.05030744280216242,
+    "media_finale": 1.5354402676046508,
+    "media_iniziale": 1.4754812658420602
+   },
+   "curva (B) g=1": {
+    "crescita": 0.07084663151800363,
+    "intrappolata": 0.050492879463098536,
+    "media_finale": 1.5514152616988124,
+    "media_iniziale": 1.4805686301808088
+   },
+   "curva (B) g=2": {
+    "crescita": 0.09226041170741528,
+    "intrappolata": 0.05095339724239903,
+    "media_finale": 1.582977129670149,
+    "media_iniziale": 1.4907167179627336
+   },
+   "curva lineare": {
+    "crescita": 0.04950500706961458,
+    "intrappolata": 0.050148744277590813,
+    "media_finale": 1.519910243047299,
+    "media_iniziale": 1.4704052359776845
+   },
+   "identita (A) g=0.5": {
+    "crescita": 0.39141351982978345,
+    "intrappolata": 0.06501006730810162,
+    "media_finale": 1.0578366571576772,
+    "media_iniziale": 0.6664231373278937
+   },
+   "identita (A) g=1": {
+    "crescita": 0.3720837876262434,
+    "intrappolata": 0.06496772727839885,
+    "media_finale": 1.0724848597088528,
+    "media_iniziale": 0.7004010720826094
+   },
+   "identita (A) g=2": {
+    "crescita": 0.47855519885164,
+    "intrappolata": 0.0656687437246566,
+    "media_finale": 1.2552051527520693,
+    "media_iniziale": 0.7766499539004293
+   },
+   "identita (B) g=0.5": {
+    "crescita": 0.48763076248689885,
+    "intrappolata": 0.06563976389029658,
+    "media_finale": 1.1458800796647686,
+    "media_iniziale": 0.6582493171778697
+   },
+   "identita (B) g=1": {
+    "crescita": 0.503167884513091,
+    "intrappolata": 0.06602288158106268,
+    "media_finale": 1.1723303020163456,
+    "media_iniziale": 0.6691624175032546
+   },
+   "identita (B) g=2": {
+    "crescita": 0.4989937833676241,
+    "intrappolata": 0.06680337392138905,
+    "media_finale": 1.1908538648523501,
+    "media_iniziale": 0.691860081484726
+   },
+   "identita lineare": {
+    "crescita": 0.46793509326883576,
+    "intrappolata": 0.0652654872269375,
+    "media_finale": 1.1160553747757074,
+    "media_iniziale": 0.6481202815068716
+   }
+  },
+  "5_materia_antimateria": {
+   "curva (A) g=0.5": {
+    "11": {
+     "asimmetria": 0.00783629176198055,
+     "coniugazione": 0.1571647881235282,
+     "intrappolata_meno": 0.03935243512954166,
+     "intrappolata_piu": 0.0399740606952805
+    },
+    "23": {
+     "asimmetria": 0.004575318303461229,
+     "coniugazione": 0.12485259886134084,
+     "intrappolata_meno": 0.08322342590886998,
+     "intrappolata_piu": 0.08246534703334941
+    }
+   },
+   "curva (A) g=1": {
+    "11": {
+     "asimmetria": 0.015382556961806695,
+     "coniugazione": 0.19821780367438058,
+     "intrappolata_meno": 0.039025059571215714,
+     "intrappolata_piu": 0.04024442696316398
+    },
+    "23": {
+     "asimmetria": 0.009021447012926408,
+     "coniugazione": 0.17298177274293988,
+     "intrappolata_meno": 0.08360995489902745,
+     "intrappolata_piu": 0.08211487710834679
+    }
+   },
+   "curva (A) g=2": {
+    "11": {
+     "asimmetria": 0.030708057384441084,
+     "coniugazione": 0.08997518229931242,
+     "intrappolata_meno": 0.03832329091401989,
+     "intrappolata_piu": 0.040751524895564724
+    },
+    "23": {
+     "asimmetria": 0.017000701792899357,
+     "coniugazione": 0.03899225394267042,
+     "intrappolata_meno": 0.08434266157275083,
+     "intrappolata_piu": 0.08152283178248632
+    }
+   },
+   "curva (B) g=0.5": {
+    "11": {
+     "asimmetria": 0.0,
+     "coniugazione": 7.037078491466242e-16,
+     "intrappolata_meno": 0.04058646444285903,
+     "intrappolata_piu": 0.04058646444285903
+    },
+    "23": {
+     "asimmetria": 8.368531741505523e-17,
+     "coniugazione": 6.395179909531725e-16,
+     "intrappolata_meno": 0.08291650337528506,
+     "intrappolata_piu": 0.08291650337528504
+    }
+   },
+   "curva (B) g=1": {
+    "11": {
+     "asimmetria": 7.518279472868355e-16,
+     "coniugazione": 7.09620650312465e-16,
+     "intrappolata_meno": 0.04153213867649643,
+     "intrappolata_piu": 0.041532138676496494
+    },
+    "23": {
+     "asimmetria": 3.344062380201752e-16,
+     "coniugazione": 6.344352399033053e-16,
+     "intrappolata_meno": 0.08299957494798399,
+     "intrappolata_piu": 0.08299957494798405
+    }
+   },
+   "curva (B) g=2": {
+    "11": {
+     "asimmetria": 2.390685533731755e-16,
+     "coniugazione": 6.242016219233095e-16,
+     "intrappolata_meno": 0.04353705541361551,
+     "intrappolata_piu": 0.04353705541361553
+    },
+    "23": {
+     "asimmetria": 8.341595882280847e-17,
+     "coniugazione": 6.04002714990216e-16,
+     "intrappolata_meno": 0.08318424917523004,
+     "intrappolata_piu": 0.08318424917523003
+    }
+   },
+   "curva lineare": {
+    "11": {
+     "asimmetria": 1.7489394438868434e-16,
+     "coniugazione": 6.071532165918825e-16,
+     "intrappolata_meno": 0.039674866549331333,
+     "intrappolata_piu": 0.03967486654933135
+    },
+    "23": {
+     "asimmetria": 4.1882118521662515e-16,
+     "coniugazione": 7.090245861277861e-16,
+     "intrappolata_meno": 0.08283838245095278,
+     "intrappolata_piu": 0.08283838245095285
+    }
+   },
+   "identita (A) g=0.5": {
+    "11": {
+     "asimmetria": 0.006029893820991066,
+     "coniugazione": 0.14813122482234692,
+     "intrappolata_meno": 0.05771903460033037,
+     "intrappolata_piu": 0.057027127426939696
+    },
+    "23": {
+     "asimmetria": 0.011945902316078338,
+     "coniugazione": 0.1236985867018315,
+     "intrappolata_meno": 0.08626254650190693,
+     "intrappolata_piu": 0.08834843219675599
+    }
+   },
+   "identita (A) g=1": {
+    "11": {
+     "asimmetria": 0.010385646211508743,
+     "coniugazione": 0.17729029611500866,
+     "intrappolata_meno": 0.058734494944365584,
+     "intrappolata_piu": 0.057527043735629516
+    },
+    "23": {
+     "asimmetria": 0.023901541074458754,
+     "coniugazione": 0.16265911885811074,
+     "intrappolata_meno": 0.08547277493589163,
+     "intrappolata_piu": 0.0896586867610716
+    }
+   },
+   "identita (A) g=2": {
+    "11": {
+     "asimmetria": 0.010821855068811143,
+     "coniugazione": 0.11160125702854361,
+     "intrappolata_meno": 0.06168339525248272,
+     "intrappolata_piu": 0.06036263084631716
+    },
+    "23": {
+     "asimmetria": 0.04743944683588048,
+     "coniugazione": 0.0562304754112907,
+     "intrappolata_meno": 0.08433534587026298,
+     "intrappolata_piu": 0.09273548829377276
+    }
+   },
+   "identita (B) g=0.5": {
+    "11": {
+     "asimmetria": 7.258136371010884e-16,
+     "coniugazione": 2.2501309446033924e-16,
+     "intrappolata_meno": 0.05736095506517028,
+     "intrappolata_piu": 0.05736095506517036
+    },
+    "23": {
+     "asimmetria": 7.904606554085477e-17,
+     "coniugazione": 2.1638893634591086e-16,
+     "intrappolata_meno": 0.08778291312071539,
+     "intrappolata_piu": 0.08778291312071537
+    }
+   },
+   "identita (B) g=1": {
+    "11": {
+     "asimmetria": 1.2044098174650325e-16,
+     "coniugazione": 2.4404791236594356e-16,
+     "intrappolata_meno": 0.05761239906290191,
+     "intrappolata_piu": 0.057612399062901894
+    },
+    "23": {
+     "asimmetria": 7.854013210545821e-17,
+     "coniugazione": 2.327375768669319e-16,
+     "intrappolata_meno": 0.0883483859511487,
+     "intrappolata_piu": 0.08834838595114872
+    }
+   },
+   "identita (B) g=2": {
+    "11": {
+     "asimmetria": 1.193996400624134e-16,
+     "coniugazione": 2.5018537765542007e-16,
+     "intrappolata_meno": 0.058114864502774734,
+     "intrappolata_piu": 0.05811486450277472
+    },
+    "23": {
+     "asimmetria": 7.755943791312424e-17,
+     "coniugazione": 2.8752485607825645e-16,
+     "intrappolata_meno": 0.08946550014557365,
+     "intrappolata_piu": 0.08946550014557367
+    }
+   },
+   "identita lineare": {
+    "11": {
+     "asimmetria": 0.0,
+     "coniugazione": 0.0,
+     "intrappolata_meno": 0.05711692672453854,
+     "intrappolata_piu": 0.05711692672453854
+    },
+    "23": {
+     "asimmetria": 0.0,
+     "coniugazione": 0.0,
+     "intrappolata_meno": 0.08721734104512222,
+     "intrappolata_piu": 0.08721734104512222
+    }
+   }
+  },
+  "B_bande": {
+   "curva": {
+    "0": 0.3528367979385092,
+    "0.25": 0.5101129895110996,
+    "0.5": 0.49136615831057084,
+    "1": 0.49129183796735243
+   },
+   "gauge_puro": {
+    "0": 0.3845909771134213,
+    "0.25": 0.5097947427646597,
+    "0.5": 0.49018839914936296,
+    "1": 0.45774308227707783
+   },
+   "identita": {
+    "0": 0.0,
+    "0.25": 0.4891270082988606,
+    "0.5": 0.5033197482395633,
+    "1": 0.4849240957473064
+   }
+  },
+  "G_deve_fallire": {
+   "densita_senza_ruotare_versori": 0.012284830245689961
+  },
+  "G_gauge": {
+   "densita": 5.551115123125783e-17,
+   "olonomie": 1.484923295436147e-15,
+   "soglia": 5.329070518200751e-14,
+   "spettro": 1.021405182655144e-14
+  },
+  "M_gap": {
+   "curva": {
+    "0": {
+     "gap": 0.47372079155058344,
+     "rapporto": 62.72864467640636,
+     "spaziatura": 0.007551905417283156
+    },
+    "0.25": {
+     "gap": 0.3136487859821093,
+     "rapporto": 41.53240389694213,
+     "spaziatura": 0.007551905417283156
+    },
+    "0.5": {
+     "gap": 0.1774166435580214,
+     "rapporto": 23.492964193114606,
+     "spaziatura": 0.007551905417283156
+    },
+    "1": {
+     "gap": 0.022479232821099426,
+     "rapporto": 2.976630608965766,
+     "spaziatura": 0.007551905417283156
+    }
+   },
+   "gauge_puro": {
+    "0": {
+     "gap": 0.490187690904349,
+     "rapporto": 64.90914064979074,
+     "spaziatura": 0.007551905417283156
+    },
+    "0.25": {
+     "gap": 0.3264082262475134,
+     "rapporto": 43.22196958406038,
+     "spaziatura": 0.007551905417283156
+    },
+    "0.5": {
+     "gap": 0.18093507129849762,
+     "rapporto": 23.958863531899226,
+     "spaziatura": 0.007551905417283156
+    },
+    "1": {
+     "gap": 0.02445999147956268,
+     "rapporto": 3.238916555229092,
+     "spaziatura": 0.007551905417283156
+    }
+   },
+   "identita": {
+    "0": {
+     "gap": 0.4901876909043521,
+     "rapporto": 64.90914064979115,
+     "spaziatura": 0.007551905417283156
+    },
+    "0.25": {
+     "gap": 0.32640822624751475,
+     "rapporto": 43.22196958406056,
+     "spaziatura": 0.007551905417283156
+    },
+    "0.5": {
+     "gap": 0.18093507129849717,
+     "rapporto": 23.958863531899166,
+     "spaziatura": 0.007551905417283156
+    },
+    "1": {
+     "gap": 0.024459991479561127,
+     "rapporto": 3.2389165552288866,
+     "spaziatura": 0.007551905417283156
+    }
+   }
+  },
+  "O_olonomia": {
+   "curva": 0.0,
+   "gauge_puro": 0.0,
+   "identita": 0.0
+  }
+ },
+ "scena": {
+  "archi": 208,
+  "eps_riferimento": 0.5,
+  "estremita": 416,
+  "gradi": [
+   2,
+   3,
+   4,
+   5,
+   6
+  ],
+  "n": 120,
+  "nome": "irregolare(n=120,gmin=2,gmax=6,seme=11)",
+  "passi_corti": 40,
+  "passi_lunghi": 200,
+  "semi": [
+   11,
+   23,
+   37,
+   53
+  ]
+ }
+}

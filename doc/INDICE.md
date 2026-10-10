@@ -9,7 +9,7 @@
 | `DOCUMENTAZIONE` | `2` | 1 |
 | `DOCUMENTAZIONE` | `ENTRAMBE` | 8 |
 | `FISICA` | `1` | 343 |
-| `FISICA` | `2` | 41 |
+| `FISICA` | `2` | 43 |
 | `FISICA` | `ENTRAMBE` | 17 |
 | `INFRASTRUTTURA` | `1` | 39 |
 | `INFRASTRUTTURA` | `2` | 16 |
@@ -155,6 +155,7 @@
 | `CLI-1` | DIFETTO | METODO | 1 | ### **SOSPESA** | SI | I SIGILLI DI CURA 4 E CURA 5 NON HANNO MAI PROVATO IL PERCORSO CLI: impostavano  |
 | `CLIP-INVENTARIO` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | INVENTARIO dei clip, tetti e pavimenti del passo pieno: 27 TETTI FISICI su 117 g |
 | `COER-4PI` | CRITERIO | METODO | 1 | ### **CHIUSA** |  | la coerenza della massa e' `/<e^{i phi}>/`: il campo NON distingue `phi` da `phi |
+| `COESIONE-TERMINE-O-CAMPO` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | la coesione simmetrica viene da un termine LOCALE o da un CAMPO? |
 | `COLLAUDO-LEGGE-L-AMBIENTE` | DIFETTO | METODO | ENTRAMBE | ### **CHIUSA** |  | il collaudo della barriera dipendeva dall-ambiente in cui era lanciato: 6 su 11  |
 | `COLLAUDO-NON-ESEGUITO` | DIFETTO | METODO | ENTRAMBE | ### **APERTA** |  | un collaudo che si RIFIUTA di girare esce con 2, e il controllo C4 lo conta come |
 | `COMANDO-UNICO-INCOMPLETO` | DIFETTO | INFRASTRUTTURA | ENTRAMBE | ### **CHIUSA** |  | il comando che si chiama LA SUITE COMPLETA copriva 19 collaudi su 29 |
@@ -255,6 +256,7 @@
 | `DISEGNO-3D-OSSERVATORE` | STANDARD | METODO | 2 | ### **AGENDA** |  | il disegno 3D e- un OSSERVATORE, e il 3D che distorce E- UNA MISURA |
 | `DIVISIONE-AUTOCONSISTENTE` | FRONTE | FISICA | 2 | ### **AGENDA** |  | la divisione dell arco come UNA legge: dove si rompe, cosa ereditano i figli, il |
 | `DOMANDA-A3B-CLASSE` | DECISIONE | METODO | 2 | ### **AGENDA** |  | A3b: con che classe entra nell-indice? |
+| `DOMANDA-C2-O-C4` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | due componenti o quattro: il gap c-e- solo con C4? |
 | `DOMANDA-D13-CONIUGATI` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | D13: i coniugati delle memorie -- tw come fase U(1) sull-arco? |
 | `DOMANDA-D9-GEOMETRIA` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | D9: la geometria viene da d e p_d dentro H, o dalle relazioni fra gli psi? |
 | `DOMANDA-FORME-VUOTO` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | le TRE forme del vuoto locale: che cos-e- un grado, quanti per nodo, l-accoppiam |

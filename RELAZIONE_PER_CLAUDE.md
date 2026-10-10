@@ -12778,3 +12778,17 @@ Ogni dato di `db_era2/` ha ### **il suo TIMBRO accanto**, col campo `versione_da
 ### 📌 **`(c)` la trasformazione di gauge include la FASE `U(1)`, e averla dimenticata era il secondo errore:** `rho` e- invariante per fase, quindi ### **sembrava innocuo** — ma se le `U` portano `e^{i(fi_v - fi_u)}` e lo stato ### **no**, quello stato ### **non e- il trasformato di gauge**: ### **le fasi RELATIVE fra i nodi sono diverse.** ### ⭐ **La misura l-ha detto al primo giro:** `1.2e-2` contro `5.3e-14`; con la fase, ### **`5.6e-17`.**
 
 ### ✅ **E LE TRE SCENE SONO QUELLE CHE DICO, verificato prima di usarle:** identita- e gauge puro hanno ### **olonomie BANALI** *(traccia `SU(2)` = `2` entro `8.9e-16`)*, la scena curva ### **no** *(traccia da `-1.92` a `1.59`)*.
+
+## ✅ **IL `v2`, PUNTI `5` e `7`: LE DIECI LETTURE, E LA PROVA DI MATERIA/ANTIMATERIA ADESSO E- FISICA** *(2026-10-10)*
+
+### 📌 **I VERDETTI:** ### **`7` conferme** *(una delle quali e- ### **un braccio che DEVE fallire e FALLISCE**)*, ### **`1` <<nessuna trovata>>**, ### **`1` <<non decidibile>>** — e ### **anche i verdetti sono generati dal codice.**
+
+### ⭐ **IL RISULTATO PIU- FORTE E- LA LETTURA `5`, E QUESTA VOLTA CONTA DAVVERO:** l-### **ELICITA-** tiene la coniugazione di carica su ### **tutte** le varianti *(al massimo `7.1e-16`)*, mentre la densita- la ### **rompe** *(fino a `0.198`, con asimmetria fino a `0.047`)*. ### ✅ **E NON PASSA PER COSTRUZIONE, come nel `v1`:** la lettura `B` dice che il peso nell-altra componente arriva a ### **`0.49` su `1`** — ### **le due componenti si EQUILIBRANO.**
+
+### ⛔ **IL GAP C-E-, MA A `eps = 0`, E NON E- UNA MASSA.** Il rapporto gap/spaziatura va da ### **`64.9`** a `eps = 0` a ### **`3.24`** a `eps = 1`, ### **in modo monotono**: ### ⭐ **`eps` CHIUDE il gap invece di aprirlo**, e la previsione *(nessuna massa con due componenti e versori isotropi)* ### **regge.** ### ⚠ **E il gap grosso a `eps = 0` e- lo spettro della camminata di Grover SCALARE**, cioe- ### **esattamente il `v1`** — quindi ### **quel gap era nel `v1`, e non era una massa nemmeno la-.**
+
+### ⛔ **E UNA PROPOSTA DEL `v1` CADE, e l-ho annotata invece di lasciarla:** la ### **tendenza monotona** della crescita della dispersione *(su cui avevo costruito `PROPOSTA-SCANSIONE-FORZA-NONLINEARE`)* ### **non sopravvive**: nel `v2` fa `+0.488`, `+0.503`, `+0.499`. ### ✅ **Era una proprieta- della camminata SCALARE**, e la domanda per Luca cambia forma: non piu- *«si estende la scansione perche- la tendenza promette»*, ma ### **<<da dove viene `g`>>** *(`A1`)*, ### **perche- la promessa non c-e- piu-.**
+
+### ⚠ **E UNA LETTURA NON E- DECIDIBILE, e il motivo e- nei numeri:** nella scena ### **curva** la dispersione ### **PARTE da `~1.47`** contro `~0.65` dell-identita-, cioe- ### **vicina alla saturazione** — il trasporto casuale ### **scompiglia le fasi subito.** ### ⛔ **Quindi la crescita piccola *(`+0.05`)* NON vuol dire piu- coerenza**, e chiamarla *«il cluster tiene»* sarebbe ### **leggere un artefatto.**
+
+### ✅ **E LE PROPOSTE PER LUCA SONO DUE VOCI NUOVE, piu- DUE ANNOTAZIONI:** `COESIONE-TERMINE-O-CAMPO` *(l-elicita- tiene la simmetria ma ### **non tiene il cluster**: o la forza va derivata, o la coesione viene da un ### **CAMPO** — e un campo ### **FISSO non ha energia propria e non reagisce**, quindi non puo- tenere niente nemmeno in principio)* e `DOMANDA-C2-O-C4` *(si prova `C^4`, oppure la massa si cerca altrove?)*. ### **`DA_DECIDERE_LUCA.md`: `7` voci, `7` domande.**
