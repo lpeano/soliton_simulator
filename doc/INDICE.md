@@ -13,7 +13,7 @@
 | `FISICA` | `ENTRAMBE` | 17 |
 | `INFRASTRUTTURA` | `1` | 39 |
 | `INFRASTRUTTURA` | `2` | 14 |
-| `INFRASTRUTTURA` | `ENTRAMBE` | 22 |
+| `INFRASTRUTTURA` | `ENTRAMBE` | 23 |
 | `METODO` | `1` | 156 |
 | `METODO` | `2` | 11 |
 | `METODO` | `ENTRAMBE` | 88 |
@@ -514,6 +514,7 @@
 | `PHI-FUORI-DOMINIO` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | una delle dieci scritture di phi NON normalizza, e il sito della fase lo copriva |
 | `PHI0-CONGELATA` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | phi0 e CONGELATA: 5 scritture tutte alla nascita, e lo step la legge come memori |
 | `PI-CHIUSURA-ORFANA` | PRESIDIO | METODO | ENTRAMBE | ### **APERTA** |  | una chiusura PIENA su una voce che non e- CHIUSA: la chiusura e- orfana |
+| `PI-CICLO-DIPENDENZE` | PRESIDIO | INFRASTRUTTURA | ENTRAMBE | ### **APERTA** |  | un ciclo in dipende_da fa FALLIRE valida: una lista senza ordine non e- una list |
 | `PI-CRITERIO-METODO` | PRESIDIO | METODO | ENTRAMBE | ### **APERTA** |  | una voce classe CRITERIO in un dominio che non e- METODO |
 | `PI-ERA-STATO` | PRESIDIO | METODO | ENTRAMBE | ### **APERTA** |  | l-era e lo stato si contraddicono: era ENTRAMBE o era 2 con uno stato impossibil |
 | `PI-ETICHETTA-DEFINITA` | PRESIDIO | METODO | ENTRAMBE | ### **APERTA** |  | un-etichetta RIMOSSA che in un documento vivo e- ancora DEFINITA |

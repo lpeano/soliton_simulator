@@ -605,6 +605,18 @@ METODI['P-GUIDA'] = (
     "SILENZIO",
     "`primo_ordine/_collauda_guida.py` (12/12), nel comando unico e nel `pre-commit`",
     "PORTATO")
+METODI['PI-CICLO-DIPENDENZE'] = (
+    "NATO NELL-ERA 2, per il mandato di Luca del 2026-10-10 che trasforma le domande "
+    "aperte in voci: un CICLO in `dipende_da` fa FALLIRE `valida`. ### SI APPLICA "
+    "ALL-ERA 2 COSI-: `DA_DECIDERE_LUCA.md` e- la lista da spuntare UNA ALLA VOLTA "
+    "NELL-ORDINE DELLE DIPENDENZE, e una lista ordinata per dipendenze con un ciclo NON "
+    "HA UN ORDINE -- quindi non direbbe quale domanda viene prima, cioe- non sarebbe una "
+    "lista. ### Severita- ERRORE: RIFIUTA, non segnala. E guarda SOLO le voci con una "
+    "`priorita`, perche- una voce che non e- una domanda non entra nella lista.",
+    "`csv/indice.py::_cicli`, chiamato da `valida`, che gira nel `pre-commit` e sullo "
+    "STAGE; collaudo di `indice.py` da 38 a 46",
+    "PORTATO")
+
 METODI['LAMBDA-INVARIANTE-OGNI-ARCO'] = (
     "DECISIONE DI LUCA del 2026-10-10 (punto 4 delle sei): la lunghezza minima lambda e- "
     "un INVARIANTE SU OGNI ARCO, non una regola di mitosi -- nessun arco, in nessun "

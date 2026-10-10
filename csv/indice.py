@@ -86,9 +86,28 @@ TRANSIZIONI = {
 
 # ### L'ORDINE FISSO DELLE CHIAVI. Una voce scritta con un ordine diverso NON e' valida:
 # ### cosi' il file e' confrontabile al byte fra due esecuzioni.
+# ### ✅ **TRE CAMPI NUOVI il `2026-10-10`, per un mandato di Luca:** le domande
+# ### aperte diventano voci, e ### **`DA_DECIDERE_LUCA.md` diventa la lista da spuntare
+# ### UNA ALLA VOLTA, nell-ordine delle DIPENDENZE.**
+# ### ⛔ **`priorita`, `dipende_da`, `sblocca` sono CAMPI e non prosa** (par. 9): la
+# ### lista si ordina ### **da loro**, e ### **nessuno strumento legge il titolo.**
 CHIAVI = ("id", "alias", "titolo", "descrizione", "classe", "dominio", "era", "stato",
-          "blocca", "leggi", "variabili", "assiomi", "collegate", "padre", "superata_da",
+          "blocca", "leggi", "variabili", "assiomi", "collegate", "priorita",
+          "dipende_da", "sblocca", "padre", "superata_da",
           "chiusura", "fonte", "creata", "aggiornata", "stato_era_1", "meta")
+
+# ### ⛔ **IL VOCABOLARIO DI `priorita`, CHIUSO.** ### ⚠ **E il vuoto CI STA, ed
+# ### e- il valore di quasi tutte le voci:** `priorita` dice ### **dove sta una DOMANDA
+# ### APERTA PER LUCA nella lista**, e una voce che non e- una domanda ### **non ha una
+# ### priorita-** -- scriverne una sarebbe ### **mettere in lista cose che nessuno deve
+# ### decidere.**
+PRIORITA = ("", "CRITICA", "DIPENDENTE", "MINORE")
+
+# ### ⭐ **I DEFAULT DEI CAMPI NUOVI, e servono a `PI-REPLAY`:** una voce dove il
+# ### campo ### **vale il default** non e- una differenza rispetto a una riga di storico
+# ### ### **scritta prima che il campo esistesse.** ### ✅ **Ma se il valore NON e-
+# ### il default, nello storico DEVE esserci** -- cosi- i denti restano dove sta il dato.
+DEFAULT_NUOVI = {"priorita": "", "dipende_da": [], "sblocca": []}
 
 # =====================================================================================
 #   LA DICHIARAZIONE DEGLI ID -- punto `12(a)`, e i nomi sono quelli NUOVI del `12(b)`
@@ -114,6 +133,7 @@ PRESIDI = {
     "PI-CRITERIO-METODO": "_f10_criterio_metodo",
     "PI-REPLAY": "_f11_replay",
     "PI-CHIUSURA-ORFANA": "_f12_chiusura_orfana",
+    "PI-CICLO-DIPENDENZE": "_cicli",
 }
 
 # =====================================================================================
@@ -141,6 +161,7 @@ PRESIDI_SEVERITA = {
     "PI-CRITERIO-METODO": "ERRORE",
     "PI-REPLAY": "ERRORE",
     "PI-CHIUSURA-ORFANA": "ERRORE",
+    "PI-CICLO-DIPENDENZE": "ERRORE",
 }
 
 # ### ⛔ **LA FORMA DI UN-ECCEZIONE SI COSTRUISCE DALLA TABELLA `PRESIDI`.**
@@ -237,6 +258,12 @@ def valida(voci, reg, verboso=True, derivati=True):
             continue
         if not RE_ID.match(q):
             err.append("`%s`: id fuori regex" % q)
+        if v.get("priorita") not in PRIORITA:
+            err.append("`%s`: `priorita` %r fuori vocabolario: %s"
+                       % (q, v.get("priorita"), list(PRIORITA)))
+        for k in ("dipende_da", "sblocca"):
+            if not isinstance(v.get(k), list):
+                err.append("`%s`: `%s` deve essere una lista" % (q, k))
         if v["classe"] not in CLASSI:
             err.append("`%s`: classe `%s` fuori vocabolario" % (q, v["classe"]))
         if v["dominio"] not in DOMINI:
@@ -346,6 +373,9 @@ def valida(voci, reg, verboso=True, derivati=True):
     # ### ### **quarta volta** che l-ordine non e- libero, e stavolta stava scritto nel
     # ### task history ### **prima di muovermi.**
     err += _f12_chiusura_orfana(voci)
+    # ### ⛔ **IL CICLO DELLE DIPENDENZE: il mandato lo vuole BLOCCANTE**, e
+    # ### la ragione e- che ### **una lista senza ordine non e- una lista.**
+    err += _cicli(voci)
     err += _eccezioni_malformate(voci)
     # ### L'INDICE INVERTITO e le VISTE: DERIVATI, e si CONFRONTANO
     if not derivati:
@@ -790,6 +820,7 @@ def collaudo():
         # ### caso di `PI-FISICA-ERA1-NON-SOSPESA` ce l-ha suo.
              "dominio": "FISICA", "era": "ENTRAMBE", "stato": "APERTA", "blocca": False,
              "leggi": [], "variabili": [], "assiomi": [], "collegate": [], "padre": "",
+             "priorita": "", "dipende_da": [], "sblocca": [],
              "superata_da": "", "chiusura": {}, "fonte": "doc/x.md::X1",
              "creata": {"data": "2026-10-08", "commit": ""},
              "aggiornata": {"data": "2026-10-08", "commit": ""}, "stato_era_1": "",
@@ -880,6 +911,43 @@ def collaudo():
     print("  %-52s %-12s %s" % ("### vista TSV MODIFICATA A MANO",
                                 "VISTO" if buono else "non visto",
                                 "ok" if buono else "### SBAGLIATO"))
+    # ===================================================================
+    #   LA LISTA DA SPUNTARE  --  il CICLO, e `prossima`
+    # -------------------------------------------------------------------
+    # ### ⛔ **Il mandato lo chiede alla lettera:** *<<il braccio che DEVE fallire
+    # ### e- un CICLO di dipendenze, e un caso con DUE domande in cui la seconda dipende
+    # ### dalla prima deve dare ### **LA PRIMA** come prossima>>*.
+    sotto9 = 0
+
+    def _dom(idv, pri, dip=(), st="AGENDA"):
+        return base(id=idv, priorita=pri, dipende_da=list(dip), stato=st)
+
+    _A, _B = _dom("Q1", "CRITICA"), _dom("Q2", "CRITICA", ["Q1"])
+    _ciclo = [_dom("Q1", "CRITICA", ["Q2"]), _dom("Q2", "CRITICA", ["Q1"])]
+    for _che, _v, _buono in (
+            ("### DEVE scattare: un CICLO nelle dipendenze",
+             _cicli(_ciclo) != [], True),
+            ("una CATENA (la seconda dipende dalla prima) NON e- un ciclo",
+             _cicli([_A, _B]) == [], True),
+            ("### e `prossima` da- LA PRIMA, non la seconda",
+             (prossima([_A, _B]) or {}).get("id") == "Q1", True),
+            ("### e PRONTE e- UNA SOLA: la seconda ASPETTA",
+             [x["id"] for x in pronte([_A, _B])] == ["Q1"], True),
+            ("### e una voce SENZA `priorita` NON e- una domanda",
+             _domande([base(id="Q3")]) == [], True),
+            ("### e una domanda DECISA esce da sola (stato `CHIUSA`)",
+             _domande([_dom("Q4", "CRITICA", (), "CHIUSA")]) == [], True),
+            ("### DEVE scattare: `priorita` fuori vocabolario",
+             any("fuori vocabolario" in e
+                 for e in valida([base(priorita="SUBITO")], reg, verboso=False,
+                                 derivati=False)), True),
+            ("### e se nessuna CRITICA e- pronta, `prossima` da- NIENTE",
+             prossima([_dom("Q5", "MINORE")]) is None, True)):
+        buono = _v if _buono else not _v
+        sotto9 += 1 if buono else 0
+        ok += 1 if buono else 0
+        print("  %-62s %s" % (_che, "ok" if buono else "### SBAGLIATO"))
+
     # ===================================================================
     #   `PI-STORICO-SENZA-COMMIT`: I TRE CASI DEL MANDATO  --  nei DUE versi
     # -------------------------------------------------------------------
@@ -976,7 +1044,7 @@ def collaudo():
     ok += 1 if buono else 0
     print("  %-62s %s" % ("### DEVE fallire: `CHIUSA` -> `AGENDA` resta VIETATA",
                           "ok" if buono else "### SBAGLIATO"))
-    tot = len(casi) + len(vietate) + 2 + sotto + sotto5
+    tot = len(casi) + len(vietate) + 2 + sotto + sotto5 + sotto9
     print()
     print("  COLLAUDO: %d su %d" % (ok, tot))
     print("  ### I DUE CONTROLLI SUI DERIVATI sono provati IN MEMORIA sulla loro LOGICA")
@@ -1191,7 +1259,7 @@ def _f11_righe(voci, ultimo, nati):
                 continue
             d = [k for k in CHIAVI_F11
                  if json.dumps(v[k], sort_keys=True)
-                 != json.dumps(m.get(k), sort_keys=True)]
+                 != json.dumps(m.get(k, DEFAULT_NUOVI.get(k)), sort_keys=True)]
             if d:
                 err.append("`PI-REPLAY` `%s`: NON ha storico, quindi deve coincidere col suo "
                            "stato a %s (fine della migrazione), e invece differisce in %s"
@@ -1199,7 +1267,8 @@ def _f11_righe(voci, ultimo, nati):
             continue
         d = [k for k in CHIAVI_F11
              if json.dumps(v[k], sort_keys=True)
-             != json.dumps((u.get("dopo") or {}).get(k), sort_keys=True)]
+             != json.dumps((u.get("dopo") or {}).get(k, DEFAULT_NUOVI.get(k)),
+                           sort_keys=True)]
         if d:
             err.append("`PI-REPLAY` `%s`: NON coincide col `dopo` della sua ULTIMA riga di storico "
                        "(%s), e differisce in %s. Il campo non e- arrivato da una scrittura "
@@ -1407,8 +1476,108 @@ def _f5_storico(voci, vive=None, da_git=None):
     return err[:20]
 
 
+def _cicli(voci):
+    """### `PI-CICLO-DIPENDENZE`: un CICLO in `dipende_da` ### **FA FALLIRE `valida`.**
+
+    ### ⛔ **Il mandato lo chiede alla lettera:** *«un ciclo nelle dipendenze FA
+    FALLIRE `valida`»*. ### ⭐ **E la ragione non e- formale: una lista da
+    spuntare «nell-ordine delle dipendenze»**, se c-e- un ciclo,
+    ### **non ha un ordine** -- e la lista ### **non direbbe quale viene prima**, cioe-
+    ### **non sarebbe una lista.**
+
+    ### ⚠ **E si guardano SOLO le voci con una `priorita`:** `dipende_da` vuoto non
+    fa ciclo, e una voce che non e- una domanda ### **non entra nella lista.**
+    """
+    arco = {v["id"]: [x for x in (v.get("dipende_da") or [])]
+            for v in voci if v.get("priorita")}
+    stato, err = {}, []
+
+    def giro(n, via):
+        if stato.get(n) == 1:
+            err.append("`PI-CICLO-DIPENDENZE`: un CICLO in `dipende_da`: %s. ### Una "
+                       "lista da spuntare NELL-ORDINE DELLE DIPENDENZE, con un ciclo, "
+                       "NON HA UN ORDINE" % " -> ".join(via + [n]))
+            return
+        if stato.get(n) == 2 or n not in arco:
+            return
+        stato[n] = 1
+        for s in arco[n]:
+            giro(s, via + [n])
+        stato[n] = 2
+
+    for n in sorted(arco):
+        if stato.get(n) is None:
+            giro(n, [])
+    return err[:8]
+
+
 DA_DECIDERE = os.path.join(D, "DA_DECIDERE_LUCA.md")
 _DD_NOTA = re.compile(r"da\s+(decidere|confermare)\s+da\s+Luca[\s:,-]*(.*)$", re.I)
+
+
+# =====================================================================================
+#   LA LISTA DA SPUNTARE  --  `prossima`, e l-ordine viene DAI CAMPI
+# -------------------------------------------------------------------------------------
+#   ### \u26d4 **IL MANDATO DI LUCA, 2026-10-10:** *<<Luca ha troppe domande aperte per
+#   ### tenerle a mente. Ogni domanda aperta diventa UNA VOCE, e `DA_DECIDERE_LUCA.md`
+#   ### diventa ### **la lista da spuntare UNA ALLA VOLTA, nell-ordine delle
+#   ### DIPENDENZE**>>.
+#   ### \u2b50 **E L-ORDINE VIENE DAI CAMPI, non dal titolo:** `priorita`, `dipende_da`,
+#   ### `sblocca`. ### **Nessuna funzione qui legge `titolo` o `descrizione`** -- e- la
+#   ### regola che questo file fa rispettare.
+# =====================================================================================
+APERTI = ("AGENDA", "APERTA", "IN_CORSO", "SOSPESA", "DA_CLASSIFICARE")
+
+
+def _domande(voci):
+    """### Le DOMANDE APERTE: hanno una `priorita` e uno stato ### **aperto.**
+
+    ### \u26a0 **Una voce senza `priorita` NON e- una domanda**, e una domanda
+    ### **decisa** *(stato `CHIUSA` o `SUPERATA`)* ### **esce dalla lista DA SOLA** --
+    che e- cio- che il mandato chiede: ### **nessuna spunta a mano.**
+    """
+    return [v for v in voci if v.get("priorita") and v["stato"] in APERTI]
+
+
+def _ordine_albero():
+    """### L-ordine in cui i nodi stanno nell-albero, per rompere le parita-.
+
+    ### \u26d4 **Il mandato lo dice: <<a parita-, l-ordine dell-albero>>** -- e
+    l-albero e- `doc/ALBERO_era2.yaml`, che e- ### **la fonte delle dipendenze di
+    fisica.** ### \u26a0 **Se non si legge, si torna all-ordine alfabetico e NON si
+    tace:** chi guarda deve sapere ### **con che criterio** la lista e- ordinata.
+    """
+    p = os.path.join(RADICE, "doc", "ALBERO_era2.yaml")
+    if not os.path.exists(p):
+        return {}, False
+    try:
+        import yaml
+        d = yaml.safe_load(io.open(p, encoding="utf-8").read()) or {}
+    except Exception:                                        # noqa: BLE001
+        return {}, False
+    return {n["id"]: i for i, n in enumerate(d.get("nodi") or [])}, True
+
+
+def pronte(voci):
+    """### Le domande ### **PRONTE**: tutte le loro dipendenze sono ### **DECISE.**"""
+    aperte = {v["id"] for v in _domande(voci)}
+    return [v for v in _domande(voci)
+            if not [x for x in (v.get("dipende_da") or []) if x in aperte]]
+
+
+def prossima(voci):
+    """### `LA PROSSIMA`: la domanda ### **`CRITICA` con TUTTE le dipendenze decise.**
+
+    ### \u26d4 **E se nessuna `CRITICA` e- pronta, NON si scende di priorita- in
+    silenzio:** si ritorna ### **`None`**, e chi stampa ### **lo dice** -- perche-
+    *<<la prossima e- una MINORE>>* sarebbe ### **una bugia utile**, e il mandato vuole
+    ### **l-ordine delle dipendenze**, non un suggerimento qualunque.
+    """
+    ord_alb, _ok = _ordine_albero()
+    cand = [v for v in pronte(voci) if v.get("priorita") == "CRITICA"]
+    if not cand:
+        return None
+    return sorted(cand, key=lambda v: (ord_alb.get(v["id"], 10 ** 6), v["id"]))[0]
 
 
 def da_decidere(voci, reg):
@@ -2385,6 +2554,24 @@ def main(argv):
     if cmd == "era2-valida":
         import _indice_era2 as _E2
         return 1 if _E2.valida() else 0
+    if cmd == "prossima":
+        # ### \u26d4 **STAMPA SOLO LA PROSSIMA**, come il mandato chiede: *<<un comando:
+        # ### `python csv/indice.py prossima` stampa SOLO la prossima domanda>>*.
+        _v, _r = carica()
+        _p = prossima(_v)
+        _pr = pronte(_v)
+        _ap = _domande(_v)
+        if _p is None:
+            print("  ### NESSUNA domanda `CRITICA` e- PRONTA.")
+            print("  ### aperte %d, di cui pronte %d -- e NON si scende di priorita- in "
+                  "silenzio" % (len(_ap), len(_pr)))
+            return 1
+        print("  LA PROSSIMA:  %s" % _p["id"])
+        print("    %s" % _p["titolo"])
+        print("    priorita- %s   sblocca %s"
+              % (_p["priorita"], ", ".join(_p.get("sblocca") or []) or "(niente)"))
+        print("  ### aperte %d, di cui pronte %d" % (len(_ap), len(_pr)))
+        return 0
     if cmd == "storico-commit":
         return storico_commit()
     if cmd == "segnali":

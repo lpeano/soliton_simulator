@@ -12331,3 +12331,19 @@ Ogni dato di `db_era2/` ha ### **il suo TIMBRO accanto**, col campo `versione_da
 ### ✅ **E IL MANDATO STESSO DICE CHE COSA FARE: «se l-albero dice altro, SCRIVI LA DIFFERENZA E NON CORREGGERE».** ### **L-ho fatto:** la differenza e- ### **una riga nel tabellone della catena**, e ### **le dipendenze non sono state toccate.**
 
 ### ⭐ **E LA DOMANDA DA PORTARE A LUCA E- PRECISA, non generica:** ### **il vuoto locale si puo- decidere SENZA sapere che cos-e- una distanza?** ### ⚠ **Se si-, l-albero sbaglia e la catena va girata; se no, il mandato sbaglia** — e ### **non e- una cosa che decido io.** ### 📌 **E- la QUARTA volta oggi che una fonte del repo batte il prompt**, e la terza in cui la differenza riguarda ### **l-ordine delle decisioni di fisica.**
+
+## MANDATO ⑨, PUNTI `2` e `4`: TRE CAMPI, IL CICLO CHE BLOCCA, E `prossima` *(2026-10-10)*
+
+### 📌 **I TRE CAMPI, a vocabolario chiuso e CONTROLLATI DA `valida`:** `priorita` *(`CRITICA` · `DIPENDENTE` · `MINORE`, ### **e il vuoto**)*, `dipende_da`, `sblocca`. ### ⭐ **E sono CAMPI e non prosa:** la lista si ordina ### **da loro**, e ### **nessuna funzione legge il titolo.**
+
+### ✅ **IL VUOTO E- UN VALORE, ed e- quello di quasi tutte le `920` voci:** `priorita` dice ### **dove sta una DOMANDA APERTA PER LUCA**, e una voce che non e- una domanda ### **non ha una priorita-** — scriverne una sarebbe ### **mettere in lista cose che nessuno deve decidere.**
+
+### ⛔ **IL CICLO FA FALLIRE `valida`, come il mandato chiede** — `PI-CICLO-DIPENDENZE`, severita- ### **`ERRORE`.** ### ⭐ **E la ragione non e- formale:** una lista da spuntare *«nell-ordine delle dipendenze»*, con un ciclo, ### **non ha un ordine** — e allora ### **non direbbe quale viene prima, cioe- non sarebbe una lista.**
+
+### ⚠ **E LA MIGRAZIONE HA DOVUTO TOCCARE `PI-REPLAY`, e lo dico:** quel presidio confronta ogni voce col `dopo` della sua ultima riga di storico, e ### **le righe vecchie non hanno i campi nuovi** — `[]` contro `null` su ### **`920` voci.** ### ✅ **La regola che ho scritto e- generale: un campo aggiunto da una migrazione, dove la voce ha IL DEFAULT, non e- una differenza.** ### ⛔ **E i denti restano dove sta il dato: se il valore NON e- il default, nello storico DEVE esserci.**
+
+### ✅ **`python csv/indice.py prossima` stampa SOLO la prossima**, e ### **se nessuna `CRITICA` e- pronta NON scende di priorita- in silenzio:** dice ### **che non ce n-e- nessuna**, ed esce ### **`1`.** ### ⚠ **«La prossima e- una MINORE» sarebbe una bugia utile**, e il mandato vuole ### **l-ordine delle dipendenze**, non un suggerimento qualunque.
+
+### 📌 **E A PARITA- L-ORDINE E- QUELLO DELL-ALBERO**, come il mandato dice — letto da `doc/ALBERO_era2.yaml`; e ### **se non si legge, si torna all-alfabetico e NON si tace.**
+
+### ✅ **Collaudo di `indice.py` da `38` a `46`**, e fra gli otto bracci nuovi c-e- ### **esattamente il caso che il mandato chiede**: due domande, la seconda dipende dalla prima, ### **e `prossima` da- LA PRIMA.**

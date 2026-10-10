@@ -50,6 +50,9 @@ cancella)*.
 | `assiomi` | lista di id | ### **da `assiomi.jsonl`** |
 | `collegate` | lista di id | altre voci |
 | `padre` | id di voce *(o `""`)* | per i criteri locali |
+| `priorita` | enum | `` *(vuoto)* `CRITICA` `DIPENDENTE` `MINORE`. ### ⛔ **Dice dove sta una DOMANDA APERTA PER LUCA nella lista**, e il ### **vuoto e- il valore di quasi tutte le voci**: una voce che non e- una domanda ### **non ha una priorita-** *(decisione di Luca, 2026-10-10)* |
+| `dipende_da` | lista di id | le domande che vanno decise ### **PRIMA**. ### ⭐ **Un CICLO qui FA FALLIRE `valida`** *(`PI-CICLO-DIPENDENZE`)*: una lista da spuntare «nell-ordine delle dipendenze», con un ciclo, ### **non ha un ordine** |
+| `sblocca` | lista di id | le domande che questa ### **apre** quando e- decisa. ### ⚠ **Non e- l-inverso automatico di `dipende_da`:** si scrive, e serve a dire ### **che cosa si guadagna** a deciderla |
 | `superata_da` | id di decisione, di assioma ### **o di VOCE** | ### **obbligatorio se `stato = SUPERATA`.** ### ⭐ **Una VOCE perche' una voce PROMOSSA o FUSA in un'altra e' superata DA QUELLA** *(2026-10-09)*: `S02` e' *«PROMOSSO»* a `D31`, e `D31` e' una voce. ### ⛔ **Pretendere che ogni superamento venisse da FUORI l'indice faceva perdere la storia delle FUSIONI** |
 | `chiusura` | `{criterio, commit, data}` | ### **obbligatorio se `stato = CHIUSA`** |
 | `fonte` | `percorso::ancora` | ### **l'ancora è un NOME, mai una riga** |

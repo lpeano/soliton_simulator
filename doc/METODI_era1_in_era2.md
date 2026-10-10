@@ -8,18 +8,18 @@
 
 | | quanti |
 |---|--:|
-| **`PORTATO`** | `106` |
+| **`PORTATO`** | `107` |
 | **`PRONTO`** | `2` |
 | **`DA_PORTARE`** | `16` |
 | **`DA_DECIDERE`** | `5` |
 | **`NON_SI_APPLICA`** | `7` |
-| **in tutto** | ### **`136`** |
+| **in tutto** | ### **`137`** |
 
-### ⚠ **E IL NUMERO `136` E- MISURATO, non stimato:** viene dal perimetro che l-indice calcola, e ### **il mandato ne nominava <<una decina>>** per nome piu- *<<e le cure di architettura>>*. ### **La decina era `20`.**
+### ⚠ **E IL NUMERO `137` E- MISURATO, non stimato:** viene dal perimetro che l-indice calcola, e ### **il mandato ne nominava <<una decina>>** per nome piu- *<<e le cure di architettura>>*. ### **La decina era `20`.**
 
 ---
 
-## `PORTATO` — `106` metodi
+## `PORTATO` — `107` metodi
 
 > ### ✅ **GIA- NELL-ERA `2`**, e `dove` dice dove
 
@@ -96,6 +96,7 @@
 | **`P4`** | `STANDARD` | prima di misurare se una grandezza cambia, verificare che sia LIBERA di cambiare: il braccio <<il cono del globale cambia con la tolleranza>> l-ha fatto -- ho misurato a TRE tolleranze invece di una | `_collauda_passo.py` sezione (C) |
 | **`P6`** | `STANDARD` | ogni csv di misura porta blob, seme e flag. ### SUPERATA nell-era 1, e IL PUNTO 5 LA RIFA- MEGLIO: il TIMBRO porta l-impronta della TABELLA, dei GENERATI e della CONFIGURAZIONE, piu- la scena, il seme e le versioni -- non una lista di flag, perche- ### i flag non ci sono | `primo_ordine/timbro.py::timbro`, stampato dal driver |
 | **`PI-CHIUSURA-ORFANA`** | `PRESIDIO` | una `chiusura` piena su una voce che non e- CHIUSA: una chiusura che nessuno ha applicato | `csv/indice.py::_f12_chiusura_orfana`, ### ERRORE (rifiuta) |
+| **`PI-CICLO-DIPENDENZE`** | `PRESIDIO` | NATO NELL-ERA 2, per il mandato di Luca del 2026-10-10 che trasforma le domande aperte in voci: un CICLO in `dipende_da` fa FALLIRE `valida`. ### SI APPLICA ALL-ERA 2 COSI-: `DA_DECIDERE_LUCA.md` e- la lista da spuntare UNA ALLA VOLTA NELL-ORDINE DELLE DIPENDENZE, e una lista ordinata per dipendenze con un ciclo NON HA UN ORDINE -- quindi non direbbe quale domanda viene prima, cioe- non sarebbe una lista. ### Severita- ERRORE: RIFIUTA, non segnala. E guarda SOLO le voci con una `priorita`, perche- una voce che non e- una domanda non entra nella lista. | `csv/indice.py::_cicli`, chiamato da `valida`, che gira nel `pre-commit` e sullo STAGE; collaudo di `indice.py` da 38 a 46 |
 | **`PI-CRITERIO-METODO`** | `PRESIDIO` | una voce classe CRITERIO in un dominio che non e- METODO: un criterio e- un MODO DI VERIFICARE, e dirlo FISICA confonderebbe cio- che si misura con come si misura (`A17`) | `csv/indice.py::_f10_criterio_metodo`, ### ERRORE (rifiuta) |
 | **`PI-ERA-STATO`** | `PRESIDIO` | era ENTRAMBE o era 2 con uno stato impossibile. ### L-era 2 ammette solo AGENDA, perche- NON E- COMINCIATA. Acceso NELLO STESSO COMMIT delle correzioni che lo rendono vero, e l-ordine giusto me l-ha corretto Luca | `csv/indice.py::_f9_era_stato`, ### ERRORE (rifiuta) |
 | **`PI-ETICHETTA-DEFINITA`** | `PRESIDIO` | un-etichetta rimossa che un documento vivo DEFINISCE ancora. ### E le viste GENERATE non contano: una riga di `doc/INDICE.md` ELENCA un ID, non lo DEFINISCE | `csv/indice.py::_f4_etichette`, ### SEGNALA |
