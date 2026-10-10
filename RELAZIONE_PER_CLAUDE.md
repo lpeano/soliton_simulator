@@ -12632,3 +12632,19 @@ Ogni dato di `db_era2/` ha ### **il suo TIMBRO accanto**, col campo `versione_da
 ### 📌 **LA SECONDA: l-inventario diceva che i `.pkl` sono <<`~36` file, `~18` MB l-uno, oltre `650` MB>>**, ed era il conteggio del ### **`2026-09-17`.** ### **Al `2026-10-10` erano `104` file per `1835` MB**, e adesso ### **non sono piu- sul disco del repo**: stanno su `E:` col manifest. ### ✅ **Annotato, non riscritto**, e la sezione ### **vale ancora piu- di prima** — adesso ### **il dato E- il comando anche sul disco**, non solo in linea di principio.
 
 ### ⛔ **E NON APRO UNA VOCE PER NESSUNO DEI DUE, e lo dico invece di farlo in silenzio:** sono ### **curati nello stesso giro in cui sono stati trovati**, e il primo ### **ha un braccio che ne impedisce il ritorno** — cioe- ### **non possono perdersi**, che e- la ragione per cui il par. `9` pretende una voce. ### ⚠ **Se Luca preferisce la voce comunque, si apre: e- una riga.**
+
+## ✅ **IL PROTOTIPO, PUNTO `1`: IL TASK HISTORY, E L-OPERATORE `C` NON E- UNA SCELTA MA L-UNICO CHE CHIUDE** *(2026-10-10)*
+
+### 📌 **`doc/TASK_HISTORY/2026-10-10_prototipo_camminata.md`, committato PRIMA del codice** *(par. `8`)*: ### **tre sezioni** piu- ### **la STELLA POLARE con le cinque risposte** *(`L-STELLA`)*.
+
+### ⭐ **E LA PARTE CHE VALE E- UNA DERIVAZIONE, non un elenco:** il mandato chiede *«almeno UNA candidata `C`-SIMMETRICA, scelta e motivata da te»* — e la risposta esce da ### **una riga di algebra.** Posto `C ψ = σ_x ψ*` *(scambio delle bande piu- coniugazione)*: la moneta di banda `exp(-i θ σ_z)` ### **commuta con `C`** perche- `σ_x σ_z = −σ_z σ_x`; Grover e- ### **reale e identica sulle due componenti**; lo spostamento e- ### **una permutazione reale.** ### ✅ **Quindi la camminata lineare DEVE essere `C`-simmetrica**, e il braccio `0` lo ### **misura al bit** invece di crederlo.
+
+### ⛔ **E PER UNA FASE SCALARE LA CONDIZIONE E- SECCA:** `exp(-iφ)` commuta con `C` ### **SOLO SE `φ` e- `C`-DISPARI.** ### ⚠ **`(A)` ha `φ ∝ ρ₊+ρ₋`, che e- `C`-PARI** — quindi ### **rompe `C` per costruzione**, ed e- il braccio che ### **DEVE fallire** la lettura `5`. ### ✅ **`(B)` la scelgo con `φ ∝ ρ₊ − ρ₋`, lo SBILANCIAMENTO DI BANDA, che e- `C`-DISPARI** — e non e- un trucco: su un cluster tutto in banda `+` ### **agisce come `(A)`**, e sul coniugato ### **cambia segno**, che e- ### **esattamente cio- che serve perche- il coniugato evolva coniugato.**
+
+### ⛔ **E LE SOGLIE SONO SEI, E NESSUNA E- SCELTA A OCCHIO** *(`A1` vale anche per le soglie)*: isotropia `= T · g_max · ε · ‖ψ‖` *(un CONTEGGIO DI OPERAZIONI)*; cono e `r=1` ### **`0.0` al bit**; norma `= passi · n_est · ε`; pendenza nulla ### **entro `3σ` della PROPRIA stima**; `dt²` su ### **almeno `4`** valori *(due punti sono una retta, non uno scaling)*.
+
+### ⭐ **E UNA SCELTA CHE SEMBRA UN DETTAGLIO E NON LO E-:** il fattore della lettura `7` e- ### **`1/2` e `2`, e SOLO potenze di due** — perche- ### **`c·r` deve essere ESATTO AL BIT**, altrimenti ### **misurerei il mio arrotondamento invece della fisica.**
+
+### ⚠ **E IL RISCHIO PIU- SERIO L-HO SCRITTO PRIMA DI INCONTRARLO:** la <<frequenza di un nodo>> ### **potrebbe non essere una grandezza ben definita**, perche- ### **l-argomento di un numero quasi nullo e- rumore.** ### ✅ **La difesa, decisa ORA:** la dispersione si misura ### **pesata con `ρ`** e la fase si prende ### **sull-ampiezza TOTALE del cluster** — cosi- ### **nessun pavimento e nessuna soglia a mano** *(`A11`)*.
+
+### ✅ **E DUE COSE CHE IL DOCUMENTO DICHIARA DI NON FARE**, perche- non diventino una sorpresa: ### **`cs_k = 1` ovunque** — quindi ### **questo prototipo NON prova la `cs` locale**, e i punti `3`-`6` di `TEMPO-PROPRIO-LOCALE` restano da provare altrove; e ### **`r_k` resta DATO**, perche- derivarlo sarebbe ### **prendere al posto di Luca la decisione che l-albero chiama `DOMANDA-LAMBDA-GRANDEZZA`.**
