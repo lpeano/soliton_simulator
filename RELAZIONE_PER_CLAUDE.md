@@ -12704,3 +12704,13 @@ Ogni dato di `db_era2/` ha ### **il suo TIMBRO accanto**, col campo `versione_da
 ### 📌 **LA DIFFERENZA ERA UNA RIGA:** il collaudo della lista dei file di fisica da ### **`17`/`17` a `22`/`22`** — e il `17` veniva da ### **prima del braccio sui duplicati e dei quattro bracci sui banchi.** ### ⛔ **Quindi il difetto e- MIO e viene da `403fea0`:** quel commit ha ### **cambiato un conteggio che un `VIVO` racconta** e ### **non ha rigenerato il `VIVO`.**
 
 ### ✅ **E- la seconda volta oggi che un `VIVO` scade per la stessa ragione**, e lo scrivo perche- la cura non e- <<ricordarsene>>: ### **il contratto di un `VIVO` e- che la CI lo rigeneri e pretenda la diff VUOTA**, e la suite ### **lo fa davvero** — ### **l-ha preso in meno di tre minuti.**
+
+## ✅ **IL MANDATO DEL PROTOTIPO E- CHIUSO, E LA CONDIZIONE E- VERIFICATA SU UN CLONE PULITO** *(2026-10-10)*
+
+### 📌 **LA VERIFICA, con UN comando e UN clone** *(`python csv/_verifica_clone.py`, su `3705fdc`)*: `valida` ### **ok** *(`7.60` e `7.15` s)*, la suite ### **ok** *(`172.4` e `169.2` s, `35` collaudi su `35`)*, `prossima` ### **ok**; `git status` ### **VUOTO**; residui nel `%TEMP%` ### **NESSUNO**; il clone ### **cancellato**; simulatore ### **`b8c21049`.**
+
+### ⭐ **E IL CLONE NON C-E- PIU-, che e- la differenza con stamattina:** la verifica di oggi ha girato ### **cinque volte** e ha lasciato ### **zero cloni** — mentre ### **undici cloni, `6.8` GB**, sono la ragione per cui il disco si e- riempito.
+
+### 📌 **LA PROSSIMA DOMANDA, dal comando:** ### **`DOMANDA-QUANTITA-CONSERVATA`** *(aperte `12`, di cui pronte `6`)* — ed e- ### **la stessa di stamattina**, ma adesso ### **con una misura sotto**: la norma si conserva, e ### **nessuna delle tre candidate oltre la norma** si conserva per le `8` varianti provate.
+
+### ⛔ **E QUI MI FERMO, perche- il mandato lo dice:** *«STOP: dopo il referto Luca decide»*. ### **Le due proposte sono voci**, e ### **nessuna decisione e- mia.**
