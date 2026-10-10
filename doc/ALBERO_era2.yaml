@@ -38,6 +38,74 @@ nodi:
   #    D9 geometria -> D13 memorie -> D6 vuoto -> D7 divisione
   # ----------------------------------------------------------------------------------
 
+  # ----------------------------------------------------------------------------------
+  #  LA CATENA RICABLATA SULLA CAMMINATA  --  decisione di Luca, 2026-10-10
+  # ----------------------------------------------------------------------------------
+  #  L-albero vecchio era D9 -> D13 -> D6 -> D7, e lo scrivo perche- la differenza
+  #  conta: era costruito PRIMA della decisione sulla camminata, quando la dinamica
+  #  era <<densita- di H>>. Con la camminata il vuoto e- STATO INTERNO del nodo,
+  #  mescolato dalla moneta e condotto dallo spostamento: NON USA DISTANZE. Quindi
+  #  la geometria NON viene prima del vuoto, e la risposta alla domanda che avevo
+  #  registrato in c9f194a e c38d32b (<<il vuoto locale si puo- decidere senza
+  #  sapere che cos-e- una distanza?>>) e- SI-.
+
+  - id: DEC-CAM-CAMMINATA
+    etichetta: CAM
+    titolo: "la dinamica e- una camminata quantistica a moneta"
+    argomento_noto: true
+    dipende_da: []
+    presa: true
+    fonte: "doc/CODA_2026-10-09.md::la camminata quantistica a moneta, punto 1"
+    nota: >
+      DECISIONE DI LUCA, 2026-10-10: la dinamica dell-era 2 e- una CAMMINATA
+      QUANTISTICA A MONETA, un-unica regola per tutte le grandezze. Il contenuto
+      sta nella voce CAMMINATA-A-MONETA. ### E- LA RADICE DELLA CATENA NUOVA:
+      l-anisotropia dell-integratore a strati nasce dall-ORDINE degli strati, che
+      A17 esclude dalla fisica -- quindi la direzione viene DA UN ASSIOMA.
+
+  - id: DEC-QC-CONSERVATA
+    etichetta: QC
+    titolo: "esiste una quantita- conservata su cui fare il bilancio della nascita?"
+    argomento_noto: true
+    dipende_da: [DEC-CAM-CAMMINATA]
+    presa: false
+    fonte: "doc/CODA_2026-10-09.md::la camminata quantistica a moneta, punto 5"
+    nota: >
+      E- LA PROSSIMA, e il comando lo dice: `python csv/indice.py prossima`.
+      La camminata conserva la NORMA esattamente, ma una quantita- usabile come
+      ENERGIA non e- garantita -- e la decisione 10 (il calore paga la nascita) E-
+      UN BILANCIO D-ENERGIA. Il contenuto sta nella voce
+      DOMANDA-QUANTITA-CONSERVATA, col criterio di RIAPERTURA.
+
+  - id: DEC-D6F-FORME-VUOTO
+    etichetta: D6f
+    titolo: "le TRE forme del vuoto locale: tipo, quanti per nodo, accoppiamento"
+    argomento_noto: true
+    dipende_da: [DEC-QC-CONSERVATA]
+    presa: false
+    fonte: "doc/CODA_2026-10-09.md::la camminata a moneta, punto 4"
+    nota: >
+      IL PRINCIPIO del vuoto locale e- PRESO (nodo D6); QUESTE SONO LE FORME, e
+      restano aperte: (a) che cos-e- un grado di liberta- del vuoto (coppia
+      coniugata / ampiezza complessa / stato interno della moneta); (b) quanti per
+      nodo; (c) la forma dell-accoppiamento con la fase, DA DERIVARE (A1).
+      ### Dipendono dalla QUANTITA- CONSERVATA, perche- l-accoppiamento sposta
+      energia e senza una grandezza conservata non si scrive un bilancio.
+
+  - id: DEC-FC-COESIONE
+    etichetta: FC
+    titolo: "la forza che tiene insieme il cluster, simmetrica fra le due bande"
+    argomento_noto: true
+    dipende_da: [DEC-QC-CONSERVATA]
+    presa: false
+    fonte: "doc/CODA_2026-10-09.md::la camminata a moneta, punto 2"
+    nota: >
+      Dalla voce MATERIA-ANTIMATERIA-SPAZIO: la forza che tiene il cluster deve
+      agire ALLO STESSO MODO sulle due bande, e la sua FORMA e- da DERIVARE (A1).
+      ### E una non linearita- A SEGNO FISSO e- attrattiva per UNA banda e
+      repulsiva per l-altra: terrebbe la materia e DISFEREBBE l-antimateria PER
+      COSTRUZIONE -- e il prototipo ne fa un BRACCIO CHE DEVE FALLIRE.
+
   - id: DEC-D9-GEOMETRIA
     etichetta: D9
     titolo: "come nasce la geometria: la topologia e la metrica"
@@ -58,7 +126,7 @@ nodi:
     etichetta: D13
     titolo: "le memorie dentro H"
     argomento_noto: true
-    dipende_da: [DEC-D9-GEOMETRIA]
+    dipende_da: [DEC-CAM-CAMMINATA]
     presa: false
     fonte: "doc/CODA_2026-10-09.md::albero delle scelte, punto 2"
     nota: >
@@ -71,15 +139,15 @@ nodi:
     etichetta: D6
     titolo: "il vuoto"
     argomento_noto: true
-    dipende_da: [DEC-D13-MEMORIE]
-    presa: false
+    dipende_da: [DEC-CAM-CAMMINATA]
+    presa: true
     fonte: "doc/CODA_2026-10-09.md::albero delle scelte, punto 2"
 
   - id: DEC-D7-DIVISIONE
     etichetta: D7
     titolo: "la divisione"
     argomento_noto: true
-    dipende_da: [DEC-D6-VUOTO]
+    dipende_da: [DEC-D6F-FORME-VUOTO, DEC-FC-COESIONE]
     presa: false
     fonte: "doc/CODA_2026-10-09.md::le sei decisioni del 2026-10-10, punto 1"
     nota: >

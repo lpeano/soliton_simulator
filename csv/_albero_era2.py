@@ -108,9 +108,17 @@ def controlla(nodi=None, radici=None):
         if len(i) < MIN_CARATTERI:
             err.append("`P-ALB` `%s`: ha %d caratteri e il minimo e- %d (`P-ID`)"
                        % (i, len(i), MIN_CARATTERI))
-        if i in gia and not i.startswith("DEC-D") and not i.startswith("DEC-INT") \
-                and not i.startswith("DEC-T"):
-            err.append("`P-ALB` `%s`: COLLIDE con una decisione che c-e- gia-" % i)
+        # ### ⛔ **ERA UNA LISTA DI PREFISSI** -- `DEC-D`, `DEC-INT`, `DEC-T` --
+        # ### e il `2026-10-10`, quando Luca ha RICABLATO l-albero sulla camminata,
+        # ### i quattro nodi nuovi sono stati accusati di ### **collidere con se
+        # ### stessi.** ### ⭐ **Il difetto era LA FORMA del controllo: una LISTA
+        # ### dove serviva una REGOLA.** ### ✅ **La regola e-: collide se quell-id
+        # ### esiste fra le decisioni CHE NON VENGONO DA QUESTO ALBERO** -- cosi- non
+        # ### c-e- niente da aggiungere quando nasce un nodo, e il controllo
+        # ### ### **non va riscritto a ogni decisione nuova** (`9-ter`).
+        if i in (gia - {str(x.get("id") or "") for x in nodi}):
+            err.append("`P-ALB` `%s`: COLLIDE con una decisione che c-e- gia- e "
+                       "che NON viene da questo albero" % i)
         # ### ⛔ **L-ETICHETTA LOCALE NON PUO- ESSERE L-ID** *(par. `9`)*.
         if i in etich:
             err.append("`P-ALB` `%s`: l-id E- un-etichetta locale. ### Par. 9: "
@@ -216,7 +224,12 @@ def collaudo():
     # ### ✅ **Allora si dichiara IL NUMERO E I NOMI**: cosi- un nodo che diventa
     # ### PRESO ### **in silenzio fa ancora scattare il braccio**, e un nodo preso
     # ### ### **per una decisione di Luca** si aggiunge QUI, dove si vede.
-    PRESI_DICHIARATI = ("DEC-INT-INTEGRATORE",)
+    # ### ✅ **TRE dal 2026-10-10**, per la decisione di Luca che RICABLA l-albero
+    # ### sulla camminata: la camminata e- ### **la radice PRESA**, e il PRINCIPIO del
+    # ### vuoto locale e- ### **preso perche- NON USA DISTANZE** -- cioe- la risposta
+    # ### alla domanda che bloccava tre punti di due mandati.
+    PRESI_DICHIARATI = ("DEC-CAM-CAMMINATA", "DEC-D6-VUOTO",
+                        "DEC-INT-INTEGRATORE")
     _presi = sorted(x["id"] for x in nodi if x.get("presa"))
     esito("### i nodi PRESI sono esattamente quelli DICHIARATI",
           _presi == sorted(PRESI_DICHIARATI),
@@ -226,11 +239,25 @@ def collaudo():
     # ------------------------------------------------- ### IL PUNTO 3, che DEVE fallire
     # ### ⛔ **COSTRUITO DAI NODI VERI, IN MEMORIA** (`P1-sexies`): si prende il nodo che
     # ### ### **ha davvero una dipendenza** e si marca `presa`.
-    figlio = next((n for n in nodi if n.get("dipende_da")), None)
+    # ### ⚠ **E LA VITTIMA SI SCEGLIE COL PADRE NON PRESO, dal `2026-10-10`:** il
+    # ### primo nodo con una dipendenza era ### **`DEC-QC-CONSERVATA`**, e da quando la
+    # ### camminata e- ### **PRESA** marcarlo `presa` ### **non e- piu- una violazione**
+    # ### -- il braccio ### **smetteva di mordere.**
+    # ### ⭐ **E- la TERZA volta oggi, in questo file, che un braccio che DEVE
+    # ### fallire PESCA LA VITTIMA NEL REPO e si rompe quando il repo cambia.**
+    # ### ✅ **Ora si cerca un figlio il cui padre NON e- preso, e se non ce n-e-
+    # ### nessuno SI COSTRUISCE** invece di arrendersi.
+    _pr = {n["id"] for n in nodi if n.get("presa")}
+    figlio = next((n for n in nodi if n.get("dipende_da")
+                   and any(x not in _pr for x in n["dipende_da"])), None)
     n2 = copy.deepcopy(nodi)
+    if figlio is None:
+        figlio = n2[0]
+        figlio["dipende_da"] = [x["id"] for x in n2 if not x.get("presa")][:1]
     for n in n2:
         if n["id"] == figlio["id"]:
             n["presa"] = True
+            n["dipende_da"] = figlio["dipende_da"]
     e = controlla(n2, radici)
     esito("### DEVE scattare: un nodo PRESA con una dipendenza NON PRESA",
           any("E- IL PUNTO 3 DEL MANDATO" in x and figlio["id"] in x for x in e),

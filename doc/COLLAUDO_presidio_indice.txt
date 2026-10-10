@@ -2,7 +2,7 @@
 COLLAUDO DEL PRESIDIO DELL'INDICE -- i DUE versi   (2026-09-26)
 ================================================================================================
 
-  indice: 1128 fra id e alias      esclusi: 123      forme nude AMBIGUE: 0
+  indice: 1132 fra id e alias      esclusi: 123      forme nude AMBIGUE: 0
 
   sentinelle scelte ORA e verificate ignote: `QX700`, `QX701`
 
@@ -32,11 +32,11 @@ COLLAUDO DEL PRESIDIO DELL'INDICE -- i DUE versi   (2026-09-26)
 ------------------------------------------------------------------------------------------------
 `id_dei_vocabolari`: UN ID DI LEGGE, VARIABILE, ASSIOMA O DECISIONE NON E- IGNOTO
 ------------------------------------------------------------------------------------------------
-  gli id dei quattro registri di vocabolario: 125
+  gli id dei quattro registri di vocabolario: 129
   ### il collaudo ha MATERIA: i vocabolari non sono vuoti        PASS
-     125 id: ### senza di loro questo braccio non proverebbe niente
+     129 id: ### senza di loro questo braccio non proverebbe niente
   NON deve scattare: OGNI id dei vocabolari e- NOTO              PASS
-     ### 125 su 125: prima erano TUTTI IGNOTI, e citarne uno RIFIUTAVA IL COMMIT
+     ### 129 su 129: prima erano TUTTI IGNOTI, e citarne uno RIFIUTAVA IL COMMIT
   ### DEVE scattare ANCORA: una sentinella ignota                PASS
      `QX700`: ### e- il braccio che dice che la cura NON ha spento il presidio -- aggiungere nomi noti puo- solo RIDURRE le segnalazioni, e questo verifica che non le abbia ridotte A ZERO
 

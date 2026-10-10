@@ -12455,3 +12455,18 @@ Ogni dato di `db_era2/` ha ### **il suo TIMBRO accanto**, col campo `versione_da
 ### 📌 **TRE GIRI DI VERIFICA, e ognuno ha trovato un difetto VERO che sul mio PC passava:** `P-MOD` *(la sabotatura diventata un no-op)*, `P-T2` *(la migrazione che lo spegneva in silenzio)*, e ### **un referto `VIVO` scaduto** *(un residuo della divisione di `schema.py`)*. ### ⚠ **Il terzo era il piu- insidioso: `schema.py` girato nudo USCIVA `0` senza dire niente.**
 
 ### ⛔ **E UNA DECISIONE DI LUCA FERMA TRE PUNTI DI DUE MANDATI, ed e- UNA SOLA:** ### **il VUOTO LOCALE viene PRIMA o DOPO `D9`?** ### **L-albero dice `D9` → `D13` → `D6` → `D7`** — il vuoto ### **TERZO** — e ### **l-albero vince**, come Luca ha scritto ### **cinque volte** in questa coda.
+
+## ✅ **PUNTO `1`: L-ALBERO SI RICABLA SULLA CAMMINATA** — ### **e Luca risponde alla domanda che bloccava tre punti di due mandati** *(2026-10-10)*
+
+### 📌 **LA RISPOSTA E- SI-:** *«il vuoto locale si puo- decidere senza sapere che cos-e- una distanza?»* — la domanda che avevo registrato in `c9f194a` e `c38d32b`. ### ⭐ **E il motivo e- di merito, non di comodo:** con la camminata il vuoto e- ### **stato interno del nodo**, mescolato dalla moneta e condotto dallo spostamento — ### **NON USA DISTANZE.**
+
+| | l-albero |
+|---|---|
+| ### **VECCHIO** | `D9` → `D13` → `D6` → `D7`, con ### **la geometria come RADICE** |
+| ### **NUOVO** | `CAM` *(### **PRESA**)* → `QC` → `{D6f` forme del vuoto`, FC` forza di coesione`}` → `D7`; ### **`D13` dipende dalla CAMMINATA**; ### **`D9` e- UN RAMO A PARTE** da cui dipendono `lambda` e la geometria |
+
+### ⚠ **E L-ALBERO VECCHIO NON ERA SBAGLIATO: era VECCHIO.** Era stato costruito ### **prima** della decisione sulla camminata, quando la dinamica era *«densita- di `H`»* — e ### **cinque volte oggi ha battuto il prompt proprio perche- era la fonte.** ### 📌 **Adesso la fonte cambia, e lo cambia LUCA: non io.**
+
+### ✅ **`P-ALB`: `14` nodi, `7` archi, `3` PRESE, `0` senza argomento**, e il collaudo ### **`14` su `14`.**
+
+### ⛔ **E DUE BRACCI CHE DEVONO FALLIRE SI SONO ROTTI, per la TERZA volta oggi nello stesso file, e per LA STESSA RAGIONE:** ### **pescavano la vittima nel repo.** Il primo nodo con una dipendenza era `DEC-QC-CONSERVATA`, e da quando la camminata e- ### **PRESA** marcarlo `presa` ### **non e- piu- una violazione.** ### ✅ **Ora si cerca un figlio il cui PADRE NON E- PRESO, e se non ce n-e- nessuno SI COSTRUISCE.**
