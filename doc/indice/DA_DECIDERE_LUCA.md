@@ -56,19 +56,21 @@
 
 > ### 📌 **Queste arrivano dai DUE criteri vecchi** *(la nota che dice <<da decidere da Luca>>, e lo stato `DA_CLASSIFICARE`)*, e ### **non hanno una `priorita`**: quindi ### **non stanno nell-ordine delle dipendenze.** ### ✅ **Non le tolgo: le DICHIARO**, perche- una lista che ne nasconde una parte ### **sembra completa.**
 
-| **voci che aspettano una decisione** | ### **`7`** |
-| **domande in tutto** | `7` |
+| **voci che aspettano una decisione** | ### **`9`** |
+| **domande in tutto** | `9` |
 | **segnaposto `NON_DEFINITA`**, che NON sono una domanda | `187` |
 
 ---
 
-## le DOMANDE aperte -- `7`
+## le DOMANDE aperte -- `9`
 
 | id | `classe`/`dominio`/era/stato | LA DOMANDA | LA FRASE |
 |---|---|---|---|
 | `COESIONE-TERMINE-O-CAMPO` | `DECISIONE`/`FISICA`/`2`/`AGENDA` | la coesione e- un termine locale con una forza da derivare, oppure un campo dinamico | la coesione simmetrica viene da un termine LOCALE o da un CAMPO? ### DOMANDA APERTA PER LUCA, da decidere da Luca. ### IL FATTO MISURATO (referto doc/ |
+| `DERIVA-DELLA-FORMA-D` | `DECISIONE`/`FISICA`/`2`/`AGENDA` | se vale la pena cercare la causa: la forma N funziona, (D) deriva e non so perche- | la forma (D) non conserva la sua conservazione modificata: perche-? ### DOMANDA APERTA PER LUCA, e anche per me: NON SO PERCHE-. ### IL FATTO MISURATO |
 | `DOMANDA-C2-O-C4` | `DECISIONE`/`FISICA`/`2`/`AGENDA` | C2 senza massa come misurato, oppure si prova C4 | due componenti o quattro: il gap c-e- solo con C4? ### DOMANDA APERTA PER LUCA, da decidere da Luca, ed e- la domanda C2 contro C4 di A16. ### IL FATT |
 | `DUE-STRUMENTI-ARCHIVIO-E` | `DIFETTO`/`INFRASTRUTTURA`/`ENTRAMBE`/`APERTA` | quale dei due strumenti resta, e un solo registro degli archiviati | due strumenti per lo stesso mestiere: spostare gli output su E- ### DOMANDA APERTA PER LUCA, da decidere da Luca: QUALE DEI DUE RESTA. ### IL FATTO: ` |
+| `PROMOZIONE-CONSERVAZIONE-MODIFICATA` | `DECISIONE`/`FISICA`/`2`/`AGENDA` | la conservazione modificata si conserva; promuoverla a energia e- una sua decisione | la conservazione modificata si conserva: si promuove a energia? ### DOMANDA APERTA PER LUCA, da decidere da Luca. ### IL FATTO MISURATO (referto doc/R |
 | `PROPOSTA-FASE-DISPARI-COESIONE` | `DECISIONE`/`FISICA`/`2`/`AGENDA` | la fase dispari sotto C e- ammissibile al bit; la sua forza g resta da derivare | la fase DISPARI sotto coniugazione di carica come forma della coesione ### DOMANDA APERTA PER LUCA, da decidere da Luca. ### IL FATTO MISURATO (refert |
 | `PROPOSTA-SCANSIONE-FORZA-NONLINEARE` | `DECISIONE`/`FISICA`/`2`/`AGENDA` | estendere la scansione della forza, oppure derivarla prima | la coerenza del cluster migliora con la forza: si estende la scansione? ### DOMANDA APERTA PER LUCA, da decidere da Luca. ### IL FATTO MISURATO (refer |
 | `PROVV-U-FISSE-TRE-SCENE` | `DECISIONE`/`FISICA`/`2`/`AGENDA` | le U sono fisse in tre scene; le dinamiche sono D13 | le matrici d-arco sono FISSE, in tre scene dichiarate: provvisorio ### SCELTA PROVVISORIA DICHIARATA (punto 2b del mandato del v2), da decidere da Luc |

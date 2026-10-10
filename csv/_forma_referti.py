@@ -105,6 +105,9 @@ TESTI = (
     # ### oggi>>. ### ⚠ **Rigenerarlo in CI vorrebbe dire RIFARE LA CORSA a ogni
     # ### commit**, e un referto che costa minuti ### **e- la ragione numero uno per
     # ### spegnere un passo di CI** *(`A9` dal lato del tempo)*.
+    ("doc/REFERTO_prototipo_camminata_v3.md", REPERTO,
+     "le tredici letture del prototipo `v3`, al `2026-10-11`",
+     "python proto_camminata/_referto3.py", "9ce687507b3cd08b"),
     ("doc/REFERTO_prototipo_camminata_v2.md", REPERTO,
      "le dieci letture del prototipo `v2`, al `2026-10-10`",
      # ### ⚠ **IL BLOB CAMBIA perche- il referto e- stato ANNOTATO**

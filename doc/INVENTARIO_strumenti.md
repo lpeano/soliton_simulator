@@ -3128,3 +3128,15 @@ etichette rimosse, con ### **`0` persi, `0` doppi, `0` conflitti**.
 | ⛔ **NIENTE FORMA CHIUSA, e il motivo** | `S` e- ### **una SOMMA**: ruotare un-estremita- ### **cambia `S`** e con lui il generatore. ### **Quindi PUNTO MEDIO IMPLICITO per nodo**, con tolleranza `n_est*eps` e ### **`64`** iterazioni *(il valore che `config/prova.yaml` usa gia-)*, e ### **FERMA se non converge** |
 | ⭐ **E LA NORMA E- ESATTA PER UNA RAGIONE, non per fortuna** | il campo e- `-i A(psi_m) psi_m` con ### **`A` HERMITIANA** *(`h^S = psi^dag M psi` con `M_ab = (sigma.n_a + sigma.n_b)/2`)*, e allora il punto medio conserva la norma ### **esattamente**: misurato ### **`0`**, e il ritorno avanti-indietro ### **`0`** |
 | ⛔ **IL CONTROLLO CHE DEVE FALLIRE** | `(E)` sul passo intero ### **rompe `C`**: `1.1e-4` |
+
+### `proto_camminata/_letture3.py` e `_referto3.py` — **LE TREDICI LETTURE DEL `v3`** *(2026-10-11)*
+
+| | |
+|---|---|
+| **i file** | `_letture3.py` *(BLOB `35efe139`)* · `_referto3.py` *(BLOB `4c305aee`)* |
+| **COMANDO** | `python proto_camminata/_letture3.py` *(scrive `uscite/letture_v3.json`)* → `python proto_camminata/_referto3.py` |
+| **che cosa misura** | ### **tredici letture**: regressione al `v2`, gauge, isotropia, cono, `C` coi ### **due controlli**, reversibilita-, ### **conservazione modificata contro `dtau`**, autointrappolamento, frequenza del grumo, materia/antimateria, ### **il vuoto che risponde**, risonanza dei cicli, e ### **la velocita- rispetto al CONO** |
+| ⭐ **IL RISULTATO CHE CONTA** | la ### **conservazione modificata di `N`** *(quasi-energia lineare piu- la somma delle energie locali)* ### **SI CONSERVA** con la non linearita- accesa: ### **e- la prima volta in tre prototipi** |
+| ⛔ **E DUE SMENTITE** | ### **nessun autointrappolamento** *(il rapporto col fondo uniforme resta quello del lineare)*, e ### **`eps` RALLENTA la luce** invece di avvicinarla al cono *(`0.768` archi/tick a `eps=0`, `0.477` a `eps=1`)* |
+| ⚠ **UN DIFETTO TROVATO DAI NUMERI** | al primo giro misuravo la ### **`N` del `v3`** anche per `(D)` ed `(E)`, che conservano ### **un-altra `N`**: l-esponente contro `dtau` veniva `~0`, e ### **un-anomalia nel numero ha trovato un errore nel codice** |
+| ✅ **E IL SOTTO-PASSO E- DERIVATO** | il punto medio implicito ### **non convergeva** con un grumo forte: si ### **raddoppiano i sotto-passi finche- converge**, e il numero *(`D: 4`, `E: 4`)* ### **si dichiara** |

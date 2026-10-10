@@ -48,6 +48,16 @@ import vuoto3 as V3                                            # noqa: E402
 EPS = float(np.finfo(float).eps)
 # ### ⛔ **LE DUE COSTANTI DEL PUNTO MEDIO, DICHIARATE E DERIVATE.**
 ITERAZIONI = 64
+# ### ⛔ **IL MASSIMO DEI SOTTO-PASSI, DICHIARATO** *(e la cura e- nata da un
+# ### FALLIMENTO MISURATO: con un grumo forte il punto medio ### **non convergeva**
+# ### -- scarto `1.9e-10` dopo `64` iterazioni, contro una tolleranza di `9.2e-14`)*.
+# ### ⭐ **E IL NUMERO DI SOTTO-PASSI NON SI TARA: SI RADDOPPIA FINCHE- CONVERGE**,
+# ### e si DICHIARA quanti sono serviti. ### **Cosi- non c-e- nessuna manopola: c-e- un
+# ### criterio** *(la convergenza)* **e un conto** *(quante volte ha raddoppiato)*.
+MAX_SOTTO = 64
+# ### ⚠ **E I SOTTO-PASSI USATI SI CONTANO**, perche- un numero che nessuno guarda
+# ### ### **non e- una dichiarazione.**
+SOTTO_USATI = {}
 
 
 def _tolleranza(sc):
@@ -121,13 +131,46 @@ def _x_e_pezzi(psi, phi, sc, geo, quale):
     return num, lam, al, be
 
 
-def flusso_implicito(psi, phi, sc, geo, dtau, quale="D"):
-    """### **IL PUNTO MEDIO IMPLICITO PER NODO**, iterato fino alla macchina.
+class NonConverge(Exception):
+    """Il punto medio non ha raggiunto la tolleranza: ### **non si procede.**"""
 
-    ### ⛔ **E FERMA se non converge:** <<procedere col meglio che ho>> sarebbe
-    ### **un errore silenzioso**, e un errore silenzioso in un passo ### **sporca tutta la
-    corsa.**
+
+def flusso_implicito(psi, phi, sc, geo, dtau, quale="D", sotto=None):
+    """### **IL PUNTO MEDIO IMPLICITO**, con ### **SOTTO-PASSI RADDOPPIATI** se serve.
+
+    ### ⭐ **Il numero di sotto-passi e- DERIVATO da un criterio**, non scelto: si
+    prova `1`, e se il punto fisso non converge ### **si raddoppia**, fino a `MAX_SOTTO`.
+    ### ✅ **E ogni sotto-passo e- simmetrico**, quindi la composizione resta
+    ### **simmetrica e reversibile**, e ### **ogni sotto-passo conserva la norma
+    esattamente** *(`A` hermitiana)*.
+    ### ⛔ **Se nemmeno `MAX_SOTTO` basta, FERMA:** <<procedere col meglio che ho>>
+    sarebbe ### **un errore silenzioso**, e in un passo ### **sporca tutta la corsa.**
     """
+    # ### ⛔ **E `sotto` SI PUO- FISSARE, per una ragione di MISURA:** col numero
+    # ### **adattivo** il sotto-passo effettivo `dtau/s` **cambia con `dtau`**, e
+    # ### allora una deriva **non puo- scalare** come dovrebbe. ### ✅ **Per misurare
+    # ### l-esponente serve il sotto-passo FISSO**, e la differenza fra i due numeri
+    # ### **e- essa stessa un risultato.**
+    s = 1 if sotto is None else int(sotto)
+    while s <= MAX_SOTTO:
+        try:
+            p, f = psi, phi
+            for _ in range(s):
+                p, f = _un_colpo(p, f, sc, geo, dtau / s, quale)
+            SOTTO_USATI[quale] = max(SOTTO_USATI.get(quale, 1), s)
+            return p, f
+        except NonConverge as e:
+            ultimo = e
+            if sotto is not None:
+                raise SystemExit("[FERMO] sotto-passo FISSATO a %d e non converge: %s"
+                                 % (sotto, e))
+            s *= 2
+    raise SystemExit("[FERMO] il punto medio implicito NON converge nemmeno con %d "
+                     "sotto-passi: %s" % (MAX_SOTTO, ultimo))
+
+
+def _un_colpo(psi, phi, sc, geo, dtau, quale):
+    """Un solo punto medio implicito, iterato. ### **Alza `NonConverge` se non ce la fa.**"""
     tol = _tolleranza(sc)
     dt_est = dtau[sc["nodo"]].reshape(-1, 1) if np.ndim(dtau) else dtau
     dt_nod = dtau if np.ndim(dtau) else np.full(sc["n"], dtau)
@@ -146,8 +189,8 @@ def flusso_implicito(psi, phi, sc, geo, dtau, quale="D"):
         p1, f1 = p2, f2
         if scarto <= tol:
             return p1, f1
-    raise SystemExit("[FERMO] il punto medio implicito NON converge: scarto %.3g dopo %d "
-                     "iterazioni, tolleranza %.3g" % (scarto, ITERAZIONI, tol))
+    raise NonConverge("scarto %.3g dopo %d iterazioni, tolleranza %.3g"
+                      % (scarto, ITERAZIONI, tol))
 
 
 def flusso_D(psi, phi, sc, geo, dtau):
@@ -158,6 +201,17 @@ def flusso_D(psi, phi, sc, geo, dtau):
 def flusso_E(psi, phi, sc, geo, dtau):
     """### **`(E)`**: il porto letterale su `|S|^2`. ### ⛔ **PARI: DEVE rompere `C`.**"""
     return flusso_implicito(psi, phi, sc, geo, dtau, "E")
+
+
+def flusso_D_fisso(psi, phi, sc, geo, dtau):
+    """### `(D)` col sotto-passo ### **FISSATO a 4**: serve SOLO alla misura
+    dell-esponente."""
+    return flusso_implicito(psi, phi, sc, geo, dtau, "D", sotto=4)
+
+
+def flusso_E_fisso(psi, phi, sc, geo, dtau):
+    """### `(E)` col sotto-passo ### **FISSATO a 4**: la stessa ragione."""
+    return flusso_implicito(psi, phi, sc, geo, dtau, "E", sotto=4)
 
 
 LE_DUE_INTERF = (

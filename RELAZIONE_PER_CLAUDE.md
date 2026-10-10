@@ -12899,3 +12899,23 @@ Ogni dato di `db_era2/` ha ### **il suo TIMBRO accanto**, col campo `versione_da
 ### ⭐ **E I SEI ID CHE IL MANDATO CITA ESISTONO TUTTI** *(verificato, non assunto)*: `GUSCIO-ANTIFASE-EMERGENTE`, `D33`, `Z79`, `Z80`, `Z111`, `FASE-TRASCINAMENTO-3D`.
 
 ### ⭐ **E IL VINCOLO CHE PESA PIU- DELLE LETTURE E- IL `V4`:** *«ogni confronto di fase fra nodi diversi si fa TRASPORTANDO lungo un cammino dichiarato; se ce n-e- piu- d-uno, riportare tutti e la loro dispersione, perche- l-olonomia dei cicli conta»*. ### ✅ **E il `v2` lo ha gia- PAGATO:** il braccio `G!` misura che ### **senza trasportare correttamente la densita- cambia di `1.2e-2`** — quindi ### **`V4` non e- una cautela: e- una cosa gia- misurata.**
+
+## ✅ **IL `v3`, PUNTI `4` e `5`: LE TREDICI LETTURE — E PER LA PRIMA VOLTA UNA GRANDEZZA OLTRE LE NORME SI CONSERVA** *(2026-10-11)*
+
+### 📌 **I VERDETTI:** ### **`6` conferme**, ### **`2` risposte** a domande che non avevano previsione, ### **`1` <<letto>>**, ### **`1` non decidibile**, ### **`2` smentite** — e anche i verdetti li calcola il codice.
+
+### ⭐ **IL RISULTATO CHE CONTA: `N` CONSERVA LA SUA CONSERVAZIONE MODIFICATA.** Quasi-energia del passo lineare ### **piu- la somma delle energie locali**: ### **CONSERVATA** nella scena curva, su `4` semi e `200` passi. ### ✅ **E- la PRIMA volta in tre prototipi** — nel `v1` e nel `v2` ### **non c-era nemmeno la candidata**, e il motivo era che quelle non linearita- ### **non erano hamiltoniane.** ### ⚠ **E il controllo c-e-:** la fase non hamiltoniana del `v2` da- ### **<<oscillante limitata>>**, e la camminata lineare ### **<<conservata>>.**
+
+### ⛔ **E `(D)` DERIVA, e NON e- splitting: l-ho controllato.** Col sotto-passo del punto medio ### **FISSATO a `4`** l-esponente della deriva contro `dtau` resta ### **`-0.05 +/- 0.12`**, mentre uno splitting darebbe ### **`~2`.** ### ⚠ **E non so perche-**: tre ipotesi scritte, ### **nessuna verificata**, ed e- la voce `DERIVA-DELLA-FORMA-D` — ### **un buco dichiarato, non una cosa risolta.**
+
+### ⭐ **E UN DIFETTO MIO L-HANNO TROVATO I NUMERI:** al primo giro misuravo ### **la `N` del `v3`** anche mentre giravano `(D)` ed `(E)`, che conservano ### **un-altra `N`** — e il risultato *(<<`(D)` deriva>>)* ### **non diceva niente di `(D)`: diceva che misuravo la grandezza sbagliata.** ### ✅ **L-ho visto perche- l-esponente contro `dtau` veniva `~0`**, e una deriva che ### **non scende con `dtau`** o non e- splitting o non e- la sua.
+
+### ⛔ **LA SATURAZIONE FA META- DI CIO- CHE PROMETTEVA, e la meta- che fa e- quella che conta meno.** ### **Non lega:** il rapporto fra la frazione entro un arco e il ### **fondo uniforme** resta quello del lineare *(`~1.8`)* a ### **ogni** `x0` da `1/8` a `8`, e a `x0 = 8` e- perfino ### **piu- basso.** ### ✅ **Ma non fa collassare:** il massimo su un singolo nodo resta ### **sotto il `4%`.** ### ⚠ **Era la previsione scritta, e si e- avverata ESATTAMENTE A META-.**
+
+### ⭐ **E LA LETTURA `(A)` E- IL PEZZO PIU- PULITO:** `(D)` tiene la coniugazione ### **AL BIT** *(`0`, asimmetria ### **esattamente `0`**)*, `N` a `1.7e-14`, e il controllo PARI `(E)` ### **rompe** *(fino a `2.4`, asimmetria `8.3e-2`)*. ### **Due forme dispari tengono, due pari rompono** — e non e- una coincidenza: ### **e- il conto della parita-.**
+
+### ⛔ **E `eps` RALLENTA LA LUCE invece di avvicinarla al cono:** il fronte e- ### **piu- veloce a `eps = 0`** *(`0.768` archi/tick)* e scende ### **monotono** a `0.477` a `eps = 1`. ### ✅ **E ha senso: `eps` e- il termine di MASSA, e una massa rallenta** — quindi la previsione ### **era sbagliata NEL VERSO**, e il massimo e- ### **il caso senza massa.** ### ⚠ **Il cono resta `1` per costruzione, e il fronte non lo raggiunge mai.**
+
+### ⭐ **E UNA COSA CHE NON CERCAVO: LA PROPAGAZIONE NON E- ISOTROPA SU UN GRAFO REGOLARE.** Da quattro nodi dello ### **stesso reticolo** le velocita- differiscono del ### **`~14%`**, fuori da `3 sigma`. ### ⛔ **E non e- il reticolo: sono i VERSORI**, assegnati ### **per indice d-arco**, quindi ### **diversi fra nodi equivalenti.** ### ✅ **E- la prova piu- diretta che `PROVV-VERSORI-NON-RELAZIONALI` non e- innocua**, ed e- annotata la-.
+
+### ✅ **LE PROPOSTE PER LUCA SONO DUE VOCI NUOVE E DUE ANNOTAZIONI**, e `DA_DECIDERE_LUCA.md` e- a ### **`9` voci, `9` domande.**

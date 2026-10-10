@@ -9,7 +9,7 @@
 | `DOCUMENTAZIONE` | `2` | 1 |
 | `DOCUMENTAZIONE` | `ENTRAMBE` | 8 |
 | `FISICA` | `1` | 343 |
-| `FISICA` | `2` | 43 |
+| `FISICA` | `2` | 45 |
 | `FISICA` | `ENTRAMBE` | 17 |
 | `INFRASTRUTTURA` | `1` | 39 |
 | `INFRASTRUTTURA` | `2` | 16 |
@@ -253,6 +253,7 @@
 | `DEC-REGOLA-FORMA` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | che CODICE genera una `regola`? il punto 11(a) chiede che crescita e vuoto si ge |
 | `DEC-Z47-TRANSIZIONE` | DECISIONE | METODO | ENTRAMBE | ### **CHIUSA** |  | Z47 non si puo- portare ad AGENDA: CHIUSA -> AGENDA e- una transizione VIETATA |
 | `DECISIONE-VUOLE-UN-CAMPO` | STANDARD | METODO | ENTRAMBE | ### **APERTA** |  | una decisione che serve a un programma vuole un CAMPO, non una frase nel titolo |
+| `DERIVA-DELLA-FORMA-D` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | la forma (D) non conserva la sua conservazione modificata: perche-? |
 | `DISEGNO-3D-OSSERVATORE` | STANDARD | METODO | 2 | ### **AGENDA** |  | il disegno 3D e- un OSSERVATORE, e il 3D che distorce E- UNA MISURA |
 | `DIVISIONE-AUTOCONSISTENTE` | FRONTE | FISICA | 2 | ### **AGENDA** |  | la divisione dell arco come UNA legge: dove si rompe, cosa ereditano i figli, il |
 | `DOMANDA-A3B-CLASSE` | DECISIONE | METODO | 2 | ### **AGENDA** |  | A3b: con che classe entra nell-indice? |
@@ -556,6 +557,7 @@
 | `PRESIDIO-RIFIUTO-SOLO-SIGILLI` | DIFETTO | DOCUMENTAZIONE | ENTRAMBE | ### **APERTA** |  | _presidio.avvia rifiuta di girare SOLO se il nome comincia con _sigillo_: A9 lo  |
 | `PRESTAZIONI-CORSE` | FRONTE | INFRASTRUTTURA | ENTRAMBE | ### **APERTA** |  | le corse costano: sei strade per il tempo di calcolo, da affrontare a modello ST |
 | `PROBLEMI-CHK3` | FRONTE | FISICA | 1 | ### **SOSPESA** |  | IL PIANO DEI PROBLEMI APERTI — per ciascuno: la domanda da chiudere · la misura  |
+| `PROMOZIONE-CONSERVAZIONE-MODIFICATA` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | la conservazione modificata si conserva: si promuove a energia? |
 | `PROPOSTA-FASE-DISPARI-COESIONE` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | la fase DISPARI sotto coniugazione di carica come forma della coesione |
 | `PROPOSTA-SCANSIONE-FORZA-NONLINEARE` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | la coerenza del cluster migliora con la forza: si estende la scansione? |
 | `PROVA-COMB` | FRONTE | FISICA | 1 | ### **SOSPESA** |  | LA PROVA COMBINATA: TUTTE LE CURE APPROVATE ACCESE INSIEME — 600 passi, stesso s |
