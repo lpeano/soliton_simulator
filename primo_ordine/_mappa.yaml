@@ -52,7 +52,7 @@ moduli:
 
   - nome: collauda.py
     responsabilita: un solo comando per tutti i collaudi, coi TEMPI e il budget
-    importa: []
+    importa: [_presidio]
 
   - nome: _collauda_guida.py
     responsabilita: ESEGUE la guida passo per passo, su una legge di prova

@@ -97,6 +97,15 @@ TESTI = (
      "python csv/_rif_nel_codice.py", ""),
     ("doc/METODI_era1_in_era2.md", VIVO, "i metodi dell-era `1` OGGI",
      "python csv/_metodi_era2.py", ""),
+    # ### ⭐ **E QUESTI DUE sono il caso piu- puro di `VIVO`:** contano
+    # ### ### **le voci e gli ID dell-indice**, quindi ### **scadono al commit che cambia
+    # ### l-indice.** ### ✅ **Il `pre-commit` li rigenera e li mette in stage**, e la
+    # ### CI pretende la diff vuota: e- ### **esattamente il contratto di un `VIVO`.**
+    ("doc/indice/_controlli.txt", VIVO, "i controlli della migrazione, OGGI",
+     "python csv/_controlli_indice_v2.py --scrivi", ""),
+    ("doc/COLLAUDO_presidio_indice.txt", VIVO,
+     "il collaudo dei presidi dell-indice, OGGI",
+     "python csv/_presidio_indice.py --collaudo --scrivi", ""),
 )
 
 
@@ -131,7 +140,7 @@ def _nominati(testo):
     fuori = set()
     for m in re.finditer(r"git diff --exit-code --([^\n]*)", testo or ""):
         for x in m.group(1).split():
-            if x.endswith((".md", ".jsonl", ".tsv")):
+            if x.endswith((".md", ".jsonl", ".tsv", ".txt")):
                 fuori.add(x.strip())
     return fuori
 
@@ -253,7 +262,7 @@ def controlla(testo=DISCO, registro=None):
                 "`%s`, che lo RIGENERA. ### <<ENTRAMBE>> non riguarda solo la CI: "
                 "riguarda OGNI cosa che rigenera" % (PRESIDIO, rel, REPERTO, _vai))
     for rel in sorted(nom):
-        if rel.endswith(".md") and rel not in noti:
+        if rel.endswith((".md", ".txt")) and rel not in noti:
             err.append("### `%s` `%s`: LA CI LO RIGENERA e NON STA NEL REGISTRO -- "
                        "quindi nessuno ha deciso se e- un `%s` o un `%s`"
                        % (PRESIDIO, rel, REPERTO, VIVO))

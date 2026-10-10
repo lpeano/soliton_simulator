@@ -526,6 +526,12 @@ def collaudo():
     P("  - il presidio guarda **solo le righe AGGIUNTE** ai documenti vivi e il messaggio: il")
     P("    debito vecchio resta visibile nell'indice, e **non blocca ogni commit**. E' una scelta,")
     P("    e senza di essa il presidio verrebbe aggirato il primo giorno (`A9`).")
+    # ### ⛔ **SI SCRIVE SOLO CON `--scrivi`, dal `2026-10-10`**, per la stessa
+    # ### ragione: ### **un collaudo deve lasciare l-albero come l-ha trovato**, e il
+    # ### contenuto di questo file ### **dipende dal commit che si sta facendo** (conta
+    # ### gli ID dell-indice).
+    if "--scrivi" not in sys.argv:
+        return 0 if _tutto else 1
     io.open(os.path.join(RADICE, "doc", "COLLAUDO_presidio_indice.txt"), "w",
             encoding="utf-8", newline=NL).write(NL.join(R) + NL)
     return 0 if _tutto else 1

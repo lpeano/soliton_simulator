@@ -110,6 +110,18 @@ python "$(git rev-parse --show-toplevel)/csv/_forma_referti.py" || exit 1
 # ### ### **in CI e nel comando unico.**
 python "$(git rev-parse --show-toplevel)/csv/_stage.py" --rapido || exit 1
 
+# ### ⛔ **I DUE GENERATI CHE DIPENDONO DAL COMMIT STESSO, rigenerati QUI e
+# ### messi in stage.** Contano le voci e gli ID dell-indice, quindi
+# ### ### **scadono al commit che cambia l-indice** -- e lasciarli scadere
+# ### faceva trovare ### **l-albero sporco dopo la suite, su un clone pulito.**
+# ### ✅ **Rigenerarli qui e- l-unico posto dove il numero PUO- essere
+# ### giusto:** il commit che cambia l-indice ### **porta anche il suo generato.**
+R="$(git rev-parse --show-toplevel)"
+python "$R/csv/_controlli_indice_v2.py" --scrivi >/dev/null || exit 1
+python "$R/csv/_presidio_indice.py" --collaudo --scrivi >/dev/null || exit 1
+git add -- "$R/doc/indice/_controlli.txt" "$R/doc/COLLAUDO_presidio_indice.txt"
+
+
 #  `P-SIM` -- LE SIMMETRIE (simboliche) E LE CONSERVAZIONI (numeriche).
 #  ### Le soglie sono DERIVATE dall'ordine del metodo, e il collaudo ha un
 #  ### braccio che lo PROVA: cambia `dt` e la soglia dell'energia cambia col

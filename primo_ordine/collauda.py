@@ -301,6 +301,16 @@ def collaudo_censimento():
 
 
 def main(argv):
+    # ### ⛔ **IL PRESIDIO DELL-ENCODING, e questa e- LA NONA VOLTA.** `CLAUDE.md`
+    # ### par. `7` dice *<<ogni script di sigillo o di misura comincia con
+    # ### `_presidio.avvia(__file__)`>>*, e dice anche ### **<<e- successo OTTO volte>>**.
+    # ### ⚠ **Questo comando NON lo chiamava**, e si e- visto SOLO su un clone
+    # ### pulito, quando il braccio dell-albero sporco ha provato a stampare un `⛔`:
+    # ### ### **`UnicodeEncodeError`, codec `cp1252`.** ### ⭐ **Il presidio non
+    # ### serviva finche- questo file stampava solo ASCII: il primo carattere non-ASCII
+    # ### su un ramo che scatta L-HA FATTO CADERE.**
+    import _presidio
+    _presidio.avvia(__file__)
     if "--collaudo" in argv:
         return collaudo_censimento()
     solo_veloci = "--solo-veloci" in argv

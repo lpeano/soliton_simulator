@@ -379,6 +379,14 @@ def main():
     stampa("I CONTROLLI: %d su %d   ### %s"
            % (sum(1 for x in ESITI if x[1]), len(ESITI),
               "TUTTI PASSATI" if tutti else "QUALCUNO FALLISCE: NON SI VA AVANTI"))
+    # ### ⛔ **SI SCRIVE SOLO CON `--scrivi`, dal `2026-10-10`:** questo
+    # ### strumento gira ### **anche come collaudo**, e Luca chiede che
+    # ### ### **ogni collaudo lasci l-albero come l-ha trovato.**
+    # ### ⚠ **E il contenuto di questo file DIPENDE DAL COMMIT CHE SI STA FACENDO**
+    # ### *(conta le voci e le righe di storico)*: scritto a ogni giro, ### **scadeva al
+    # ### commit dopo** e la suite trovava l-albero sporco ### **su un clone pulito.**
+    if "--scrivi" not in sys.argv:
+        return 0 if tutti else 1
     io.open(os.path.join(D, "_controlli.txt"), "w", encoding="utf-8",
             newline=NL).write(NL.join(P) + NL)
     return 0 if tutti else 1

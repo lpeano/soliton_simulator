@@ -232,5 +232,13 @@ jobs:
       - name: il collaudo dei presidi dell-indice
         run: python csv/_collaudo_presidi_indice.py
 
-      - name: i controlli della migrazione
-        run: python csv/_controlli_indice_v2.py
+      - name: "### I DUE GENERATI CHE DIPENDONO DAL COMMIT -- rigenerati, e `git diff`"
+        # ### ⛔ Contano le voci e gli ID: ### **scadono al commit che cambia
+        # ### l-indice**, e il `pre-commit` li rigenera e li mette in stage. Qui si
+        # ### pretende che la diff sia ### **VUOTA**: se non lo e-, un commit non ha
+        # ### portato il suo generato.
+        run: |
+          python csv/_controlli_indice_v2.py --scrivi
+          python csv/_presidio_indice.py --collaudo --scrivi
+          git diff --exit-code -- doc/indice/_controlli.txt doc/COLLAUDO_presidio_indice.txt
+
