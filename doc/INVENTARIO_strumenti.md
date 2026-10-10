@@ -170,6 +170,7 @@ varrebbe piu' nulla.
 > risultato: verificato decine di volte dalle byte-identita'), **quindi un `.pkl` non e' un dato
 > irripetibile: e' il RISULTATO DI UN COMANDO.**
 > **Se il comando non e' scritto, il dato e' perso come riproducibilita' anche se il file c'e'.**
+> ### ⛔ **ANNOTAZIONE DEL 2026-10-10, e il paragrafo sopra RESTA:** quei file ### **non sono piu- sul disco del repo.** Su decisione di Luca ne sono stati ### **SPOSTATI `309` su `E:`** *(`.pkl`, `.gz`, `.npz`: ### **`5.25` GB**)*, ### **con lo `sha1` verificato prima di cancellare l-originale**, e il manifest e- ### **`doc/ARCHIVIO_E_2026-10-10.tsv`.** ### ✅ **E la sezione vale ANCORA PIU- DI PRIMA:** adesso ### **il dato E- il comando** anche sul disco, non solo in linea di principio. ### ⚠ **E il <<`~36` file, `~18` MB l-uno>> del paragrafo sopra era il conteggio del `2026-09-17`**: al `2026-10-10` erano ### **`104` file di `.pkl` per `1835` MB**, piu- `.gz` e `.npz`.
 > Regola in `CLAUDE.md`, presidio *«un `.pkl` senza il suo comando non e' un dato»*.
 
 **Tre esiti, e si dichiarano:** **RICOSTRUITO** (comando completo, blob, seme, passi) ·

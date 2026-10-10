@@ -12620,3 +12620,15 @@ Ogni dato di `db_era2/` ha ### **il suo TIMBRO accanto**, col campo `versione_da
 ### ✅ **ANNOTATO IN DUE POSTI, e NESSUNO DEI DUE PARAGRAFI SBAGLIATI E- STATO RISCRITTO** *(il mandato dice <<annota, non riscrivere>>)*: la voce `TEMPO-PROPRIO-LOCALE` *(via `indice.py aggiorna-lotto`, che e- l-unica via di scrittura)* e ### **`doc/PIANO_era2.md`**, dove l-annotazione sta ### **PRIMA del paragrafo che resta**, cosi- chi legge ### **incontra la correzione prima dell-errore.**
 
 ### ⚠ **E UNA COSA CHE IL MANDATO MI HA FATTO TOGLIERE:** avevo messo l-annotazione anche in una ### **chiave `meta` nuova** della voce, e ### **`indice.py` l-ha RIFIUTATA** *(<<la chiave meta non e- registrata>>)*. ### ✅ **Ha fatto bene, e l-ho tolta invece di registrarla:** ### **nessun programma legge quella chiave**, e per `DECISIONE-VUOLE-UN-CAMPO` ### **un campo si aggiunge quando serve a un PROGRAMMA**, non per annotare una prosa che sta gia- nella descrizione.
+
+## ⛔ **DUE LISTE CHE NON DICEVANO LA VERITA-, trovate preparando il banco** *(2026-10-10)*
+
+### 📌 **LA PRIMA: `FILE_FISICA` AVEVA `48` VOCI E `36` FILE.** I tre file di `primo_ordine/config/` c-erano ### **CINQUE VOLTE**, ed e- il residuo di una patch ### **non idempotente** applicata piu- volte — ### **la stessa classe di errore che oggi mi ha gia- morso una volta.**
+
+### ⚠ **NON IMPEDIVA NIENTE, e proprio per questo e- un difetto:** l-appartenenza a una tupla non cambia con le ripetizioni, quindi ### **nessun presidio sbagliava un verdetto** — ma ### **la lista CONTAVA 48 dove i file sono 36**, e in questo repo ### **un numero sbagliato prima o poi finisce in un referto.** ### ✅ **Ho verificato che non ci fosse ancora finito:** `48 file` non compare in `doc/`.
+
+### ✅ **E LA CURA NON E- LA CANCELLAZIONE, E- IL BRACCIO:** togliere i quattro blocchi ripetuti lascia il repo come prima; ### **cio- che impedisce il ritorno e- il braccio nuovo** — e ### **l-ho provato provocandolo**: duplicata UNA voce, il collaudo passa da ### **`18` su `18` a `17` su `18`** e ### **stampa il nome del duplicato.** ### **Byte ripristinati** *(`sha1 a7a3d501`)*.
+
+### 📌 **LA SECONDA: l-inventario diceva che i `.pkl` sono <<`~36` file, `~18` MB l-uno, oltre `650` MB>>**, ed era il conteggio del ### **`2026-09-17`.** ### **Al `2026-10-10` erano `104` file per `1835` MB**, e adesso ### **non sono piu- sul disco del repo**: stanno su `E:` col manifest. ### ✅ **Annotato, non riscritto**, e la sezione ### **vale ancora piu- di prima** — adesso ### **il dato E- il comando anche sul disco**, non solo in linea di principio.
+
+### ⛔ **E NON APRO UNA VOCE PER NESSUNO DEI DUE, e lo dico invece di farlo in silenzio:** sono ### **curati nello stesso giro in cui sono stati trovati**, e il primo ### **ha un braccio che ne impedisce il ritorno** — cioe- ### **non possono perdersi**, che e- la ragione per cui il par. `9` pretende una voce. ### ⚠ **Se Luca preferisce la voce comunque, si apre: e- una riga.**

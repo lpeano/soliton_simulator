@@ -104,26 +104,12 @@ FILE_FISICA = (
     'primo_ordine/leggi/leggi.yaml',
     # ### LA CONFIGURAZIONE *(punto `15(a)`)*: ### **una sola fonte**, e la
     # ### riga di comando ### **sceglie SOLO il file.**
-    'primo_ordine/config/__init__.py',
-    'primo_ordine/config/schema_config.py',
-    'primo_ordine/config/prova.yaml',
-    # ### LA CONFIGURAZIONE *(punto `15(a)`)*: ### **una sola fonte**, e la
-    # ### riga di comando ### **sceglie SOLO il file.**
-    'primo_ordine/config/__init__.py',
-    'primo_ordine/config/schema_config.py',
-    'primo_ordine/config/prova.yaml',
-    # ### LA CONFIGURAZIONE *(punto `15(a)`)*: ### **una sola fonte**, e la
-    # ### riga di comando ### **sceglie SOLO il file.**
-    'primo_ordine/config/__init__.py',
-    'primo_ordine/config/schema_config.py',
-    'primo_ordine/config/prova.yaml',
-    # ### LA CONFIGURAZIONE *(punto `15(a)`)*: ### **una sola fonte**, e la
-    # ### riga di comando ### **sceglie SOLO il file.**
-    'primo_ordine/config/__init__.py',
-    'primo_ordine/config/schema_config.py',
-    'primo_ordine/config/prova.yaml',
-    # ### LA CONFIGURAZIONE *(punto `15(a)`)*: ### **una sola fonte**, e la
-    # ### riga di comando ### **sceglie SOLO il file.**
+    # ### ⛔ **E QUESTO BLOCCO ERA RIPETUTO CINQUE VOLTE** *(trovato il 2026-10-10)*:
+    # ### il residuo di una patch ### **non idempotente**, applicata piu- volte.
+    # ### ⚠ **Non impediva niente** -- l-appartenenza a una tupla non cambia --
+    # ### ma ### **la LISTA diceva 48 file dove i file sono 36**, e un presidio che
+    # ### conta sbagliato ### **prima o poi scrive quel numero in un referto.**
+    # ### ✅ **Adesso un braccio del collaudo RIFIUTA i duplicati.**
     'primo_ordine/config/__init__.py',
     'primo_ordine/config/schema_config.py',
     'primo_ordine/config/prova.yaml',

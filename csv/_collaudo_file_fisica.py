@@ -116,6 +116,17 @@ def main():
               "e- la misura di cio- che il presidio NON faceva: non un ricordo")
     finally:
         _pulizia.via_finale(_tv)
+    # ### ⛔ **E LA LISTA NON PUO- RIPETERSI** *(trovato il 2026-10-10)*: i tre
+    # ### file di `config/` c-erano ### **CINQUE VOLTE**, residuo di una patch non
+    # ### idempotente. ### ⚠ **Non impediva niente**, ma ### **il conteggio era
+    # ### sbagliato: 48 dove i file sono 36** -- e un presidio che conta sbagliato
+    # ### ### **prima o poi scrive quel numero in un referto.**
+    _dupl = sorted(set(x for x in FF.FILE_FISICA
+                       if list(FF.FILE_FISICA).count(x) > 1))
+    esito("### la LISTA non ha DUPLICATI", not _dupl,
+          "### %d file in lista, %d distinti%s"
+          % (len(FF.FILE_FISICA), len(set(FF.FILE_FISICA)),
+             (": " + ", ".join(_dupl[:3])) if _dupl else ""))
     print()
     tmp = tempfile.mkdtemp(prefix="ff_")
     try:
