@@ -12347,3 +12347,15 @@ Ogni dato di `db_era2/` ha ### **il suo TIMBRO accanto**, col campo `versione_da
 ### 📌 **E A PARITA- L-ORDINE E- QUELLO DELL-ALBERO**, come il mandato dice — letto da `doc/ALBERO_era2.yaml`; e ### **se non si legge, si torna all-alfabetico e NON si tace.**
 
 ### ✅ **Collaudo di `indice.py` da `38` a `46`**, e fra gli otto bracci nuovi c-e- ### **esattamente il caso che il mandato chiede**: due domande, la seconda dipende dalla prima, ### **e `prossima` da- LA PRIMA.**
+
+## MANDATO ⑨, PUNTI `1` e `3`: LE DIECI DOMANDE SONO VOCI, E LA LISTA SI SPUNTA UNA ALLA VOLTA *(2026-10-10)*
+
+### 📌 **LO SCOPO, nelle parole di Luca:** *«Luca ha troppe domande aperte per tenerle a mente»*. ### ✅ **Nove voci, e la lista le ordina DAI CAMPI.**
+
+### ✅ **E DUE DELLE DIECI NON ERANO DA CREARE, come il mandato dice:** ### **`(a)` il VUOTO LOCALE esisteva gia-** — `VUOTO-LOCALE-DETERMINISTICO`, `FRONTE`/era `2`/`AGENDA` — e ### **si e- COMPLETATA**, non duplicata; ### **`(g)` `D2`/`D4`/`D11`/`D12` era GIA- FATTA** dal punto `5` del mandato precedente ### **nell-albero**, e ### **non serviva una voce.**
+
+### ⛔ **E L-ALBERO HA BATTUTO IL MANDATO UN-ALTRA VOLTA, sulle dipendenze:** il punto `1c` dice che ### **`D13` dipende dal vuoto per l-oblio**, e l-albero dice ### **`D9` → `D13` → `D6`(vuoto)** — cioe- ### **`D13` viene PRIMA del vuoto.** ### ✅ **Il mandato dice «se l-albero dice altro, vince l-albero e scrivi la differenza»: le dipendenze seguono L-ALBERO, e la differenza e- scritta in DUE voci.** ### **E- la QUINTA volta oggi.**
+
+### ✅ **LA LISTA E- NELLA FORMA CHE IL MANDATO CHIEDE:** in cima ### **LA PROSSIMA, da sola** *(oggi `DOMANDA-D9-GEOMETRIA`: e- la `CRITICA` senza dipendenze aperte)*; sotto ### **le altre per priorita-**, ciascuna con ### **«aspetta: …»**; in fondo ### **il conto** — ### **aperte `9`, di cui pronte `5`.**
+
+### ⭐ **E C-E- UNA SEZIONE IN PIU- CHE IL MANDATO NON CHIEDEVA, e la dichiaro:** ### **le domande che vivono ancora in una NOTA e non nei campi** *(i due criteri vecchi: la nota «da decidere da Luca» e lo stato `DA_CLASSIFICARE`)*. ### ⚠ **Non le ho tolte:** una lista che ne nasconde una parte ### **sembra completa**, e questa dice ### **che non lo e-.**

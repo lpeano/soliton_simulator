@@ -9,13 +9,13 @@
 | `DOCUMENTAZIONE` | `2` | 1 |
 | `DOCUMENTAZIONE` | `ENTRAMBE` | 8 |
 | `FISICA` | `1` | 343 |
-| `FISICA` | `2` | 23 |
+| `FISICA` | `2` | 29 |
 | `FISICA` | `ENTRAMBE` | 17 |
 | `INFRASTRUTTURA` | `1` | 39 |
 | `INFRASTRUTTURA` | `2` | 14 |
 | `INFRASTRUTTURA` | `ENTRAMBE` | 23 |
 | `METODO` | `1` | 156 |
-| `METODO` | `2` | 11 |
+| `METODO` | `2` | 13 |
 | `METODO` | `ENTRAMBE` | 88 |
 
 | id | classe | dominio | era | stato | blocca | titolo |
@@ -252,6 +252,14 @@
 | `DEC-Z47-TRANSIZIONE` | DECISIONE | METODO | ENTRAMBE | ### **CHIUSA** |  | Z47 non si puo- portare ad AGENDA: CHIUSA -> AGENDA e- una transizione VIETATA |
 | `DECISIONE-VUOLE-UN-CAMPO` | STANDARD | METODO | ENTRAMBE | ### **APERTA** |  | una decisione che serve a un programma vuole un CAMPO, non una frase nel titolo |
 | `DIVISIONE-AUTOCONSISTENTE` | FRONTE | FISICA | 2 | ### **AGENDA** |  | la divisione dell arco come UNA legge: dove si rompe, cosa ereditano i figli, il |
+| `DOMANDA-A3B-CLASSE` | DECISIONE | METODO | 2 | ### **AGENDA** |  | A3b: con che classe entra nell-indice? |
+| `DOMANDA-D13-CONIUGATI` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | D13: i coniugati delle memorie -- tw come fase U(1) sull-arco? |
+| `DOMANDA-D9-GEOMETRIA` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | D9: la geometria viene da d e p_d dentro H, o dalle relazioni fra gli psi? |
+| `DOMANDA-FUSIONE` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | la FUSIONE di due nodi: si vieta, e con che cosa? |
+| `DOMANDA-GRAFO-INIZIALE` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | il grafo iniziale SENZA pos: reticolo, k-regolare, espansore? |
+| `DOMANDA-LAMBDA-GRANDEZZA` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | lambda: su quale grandezza si misura, e da dove viene il suo valore? |
+| `DOMANDA-REGOLE-FUORI-CLAUDE` | DECISIONE | METODO | 2 | ### **AGENDA** |  | le regole di gestione fuori da CLAUDE.md, e quelle dentro senza presidio: vanno  |
+| `DOMANDA-UNITA-DI-STATO` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | l-unita- di stato: qual e- la capacita- di un nodo? |
 | `DOPPIA-COP` | CURA | FISICA | 1 | ### **SOSPESA** |  | LA CURA (b): la doppia copertura 4 pi e' un ASSIOMA e va resa STRUTTURALE, non m |
 | `DRIVER-SCENA-II` | CURA | INFRASTRUTTURA | 1 | ### **CHIUSA** |  | APERTA il 2026-09-26 (rilievo di Luca) / IL DRIVER NON SA FARE LA SCENA (ii), e  |
 | `DUE-VIE-SU-LEGGI-JSONL` | DIFETTO | INFRASTRUTTURA | ENTRAMBE | ### **CHIUSA** |  | due vie di scrittura si contendono leggi.jsonl e variabili.jsonl, e vince chi gi |

@@ -1221,7 +1221,8 @@ def _campo(v, c):
             % (v["stato"], val))
     if k == "blocca":
         val = val.upper() in ("SI", "TRUE", "1")
-    elif k in ("alias", "leggi", "variabili", "assiomi", "collegate"):
+    elif k in ("alias", "leggi", "variabili", "assiomi", "collegate",
+                "dipende_da", "sblocca"):
         val = [x for x in val.split(",") if x]
     v[k] = val
 
@@ -1658,6 +1659,65 @@ def da_decidere(voci, reg):
          "| | |",
          "|---|--:|",
     ]
+    # ===================================================================
+    #   LA LISTA DA SPUNTARE  --  dai CAMPI, e nella forma che Luca chiede
+    # -------------------------------------------------------------------
+    #   ### \u26d4 **IL MANDATO, alla lettera:** *<<IN CIMA, da sola: LA PROSSIMA = la
+    #   ### domanda CRITICA con tutte le dipendenze decise (a parita-, l-ordine
+    #   ### dell-albero). SOTTO: le altre, raggruppate per priorita-, ciascuna con
+    #   ### <<aspetta: ...>> se ha dipendenze aperte. IN FONDO: il conto>>.
+    #   ### \u2b50 **E tutto viene DAI CAMPI**: `priorita`, `dipende_da`, `sblocca`.
+    #   ### **Nessuna riga legge il titolo per DECIDERE qualcosa** -- il titolo si
+    #   ### ### **stampa**, che e- un-altra cosa.
+    _ap = _domande(voci)
+    _pr = {x["id"] for x in pronte(voci)}
+    _p = prossima(voci)
+    _aperte = {x["id"] for x in _ap}
+    R += ["## \u2b50 **LA PROSSIMA**", ""]
+    if _p is None:
+        R += ["> ### \u26d4 **NESSUNA domanda `CRITICA` e- PRONTA**, e non si scende di "
+              "priorita- in silenzio: *<<la prossima e- una MINORE>>* sarebbe ### **una "
+              "bugia utile**, e il mandato vuole ### **l-ordine delle dipendenze.**", ""]
+    else:
+        R += ["> ### \u2705 **[[%s]]** \u2014 %s" % (_p["id"], _p["titolo"]), ">",
+              "> ### \U0001F4CC **Che cosa SBLOCCA:** %s"
+              % (", ".join("`%s`" % x for x in (_p.get("sblocca") or []))
+                 or "### **niente di dichiarato**"), ">",
+              "> ### **Le alternative e i numeri stanno nella voce**, e la voce e- la "
+              "fonte: ### **qui non si ricopia niente** (`L-NUMERI`).", ""]
+    R += ["---", ""]
+    R += ["## LE ALTRE, per priorita-", ""]
+    for _liv in ("CRITICA", "DIPENDENTE", "MINORE"):
+        _g = sorted([x for x in _ap if x.get("priorita") == _liv
+                     and (_p is None or x["id"] != _p["id"])],
+                    key=lambda x: x["id"])
+        if not _g:
+            continue
+        R += ["### `%s` \u2014 **%d**" % (_liv, len(_g)), "",
+              "| la domanda | pronta? | che cosa aspetta |", "|---|---|---|"]
+        for x in _g:
+            _att = [y for y in (x.get("dipende_da") or []) if y in _aperte]
+            R.append("| **[[%s]]** %s | %s | %s |"
+                     % (x["id"], x["titolo"][:72],
+                        "### \u2705 **PRONTA**" if x["id"] in _pr
+                        else "### \u23f3 aspetta",
+                        ("### **aspetta:** " + ", ".join("`%s`" % y for y in _att))
+                        if _att else "### **niente**"))
+        R += [""]
+    R += ["---", "",
+          "## IL CONTO", "",
+          "> ### \u26d4 **aperte `%d`, di cui pronte `%d`.**" % (len(_ap), len(_pr)),
+          ">",
+          "> ### \u2705 **E una domanda DECISA esce da sola:** si chiude con la "
+          "decisione di Luca e il commit, e ### **nessuno la spunta a mano** -- la lista "
+          "### **si genera dai campi**, e un campo che cambia ### **cambia la lista.**",
+          "", "---", ""]
+    R += ["## \u26a0 **E LE DOMANDE CHE VIVONO ANCORA IN UNA NOTA, non nei campi**", "",
+          "> ### \U0001F4CC **Queste arrivano dai DUE criteri vecchi** *(la nota che dice "
+          "<<da decidere da Luca>>, e lo stato `DA_CLASSIFICARE`)*, e ### **non hanno una "
+          "`priorita`**: quindi ### **non stanno nell-ordine delle dipendenze.** "
+          "### \u2705 **Non le tolgo: le DICHIARO**, perche- una lista che ne nasconde "
+          "una parte ### **sembra completa.**", ""]
     R.append("| **voci che aspettano una decisione** | ### **`%d`** |" % len(righe))
     R.append("| **domande in tutto** | `%d` |" % sum(len(x) for x in righe.values()))
     R.append("| **segnaposto `NON_DEFINITA`**, che NON sono una domanda | `%d` |" % nd)
