@@ -12792,3 +12792,11 @@ Ogni dato di `db_era2/` ha ### **il suo TIMBRO accanto**, col campo `versione_da
 ### ⚠ **E UNA LETTURA NON E- DECIDIBILE, e il motivo e- nei numeri:** nella scena ### **curva** la dispersione ### **PARTE da `~1.47`** contro `~0.65` dell-identita-, cioe- ### **vicina alla saturazione** — il trasporto casuale ### **scompiglia le fasi subito.** ### ⛔ **Quindi la crescita piccola *(`+0.05`)* NON vuol dire piu- coerenza**, e chiamarla *«il cluster tiene»* sarebbe ### **leggere un artefatto.**
 
 ### ✅ **E LE PROPOSTE PER LUCA SONO DUE VOCI NUOVE, piu- DUE ANNOTAZIONI:** `COESIONE-TERMINE-O-CAMPO` *(l-elicita- tiene la simmetria ma ### **non tiene il cluster**: o la forza va derivata, o la coesione viene da un ### **CAMPO** — e un campo ### **FISSO non ha energia propria e non reagisce**, quindi non puo- tenere niente nemmeno in principio)* e `DOMANDA-C2-O-C4` *(si prova `C^4`, oppure la massa si cerca altrove?)*. ### **`DA_DECIDERE_LUCA.md`: `7` voci, `7` domande.**
+
+## ✅ **IL MANDATO DEL `v2` E- CHIUSO, E LA CONDIZIONE E- VERIFICATA SU UN CLONE PULITO** *(2026-10-10)*
+
+### 📌 **LA VERIFICA, con UN comando e UN clone** *(su `e709d94`)*: `valida` ### **ok** *(`7.39` e `7.40` s)*, la suite ### **ok** *(`177.6` e `174.4` s, ### **`36` collaudi su `36`**)*, `prossima` ### **ok**; `git status` ### **VUOTO**; residui nel `%TEMP%` ### **NESSUNO**; il clone ### **cancellato**; simulatore ### **`b8c21049`.**
+
+### ⭐ **E LA COSA CHE RESTA, in una riga:** il `v1` diceva che la simmetria materia/antimateria ### **si puo- scrivere**; il `v2` dice che ### **si puo- MISURARE** — perche- le due componenti ### **si mescolano davvero**, e l-### **ELICITA-** la tiene ### **a virgola mobile** mentre la densita- la rompe.
+
+### ⛔ **E LA COSA CHE NON TORNA, detta per intera:** quella stessa elicita- ### **non tiene un cluster**, con nessuna forza provata. ### ⚠ **Quindi la coesione simmetrica o ha una forza che va DERIVATA, o non viene da un termine locale affatto** — ed e- la voce `COESIONE-TERMINE-O-CAMPO`, con ### **l-argomento scritto dentro**: un campo ### **FISSO** non ha energia propria e non reagisce, quindi ### **non puo- tenere niente nemmeno in principio.**
