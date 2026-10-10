@@ -12694,3 +12694,13 @@ Ogni dato di `db_era2/` ha ### **il suo TIMBRO accanto**, col campo `versione_da
 ### 📌 **E `(A)` e `(B)` SONO INDISTINGUIBILI SULLA LETTURA `4`, che non e- un difetto ma LA DERIVAZIONE:** su un cluster ### **tutto nella banda `+`** vale `s = rho`, quindi le due fasi ### **sono la stessa fase**, e i numeri coincidono ### **cifra per cifra.** ### ⭐ **Solo la lettura `5`, che costruisce il CONIUGATO, le separa** — e le separa ### **al bit.**
 
 ### ✅ **LE PROPOSTE PER LUCA SONO DUE VOCI, non due paragrafi:** `PROPOSTA-FASE-DISPARI-COESIONE` e `PROPOSTA-SCANSIONE-FORZA-NONLINEARE`, e ### **compaiono da sole in `doc/indice/DA_DECIDERE_LUCA.md`**, che e- ### **GENERATO** *(adesso `3` voci, `3` domande)*. ### ⛔ **Nessuna decisione e- mia**, e ognuna porta ### **le due vie** fra cui scegliere.
+
+## ⛔ **UN REFERTO `VIVO` ERA SCADUTO, E L-HA TROVATO LA VERIFICA SU CLONE PULITO** *(2026-10-10)*
+
+### 📌 **IL FATTO:** su clone pulito la suite dava ### **codice `1` nei due ambienti**, con ### **`35` collaudi su `35` PASSATI** — e il rosso era ### **l-ultimo controllo**, quello che pretende che ### **un collaudo lasci l-albero come l-ha trovato**: `doc/REFERTO_infrastruttura_era2.md` ### **si sporcava.**
+
+### ⭐ **E LA SUITE HA DETTO DA SE- CHE COSA VOLEVA DIRE:** *«un file GENERATO e COMMITTATO e- SCADUTO: il commit che ha cambiato cio- che quel file racconta ### **NON HA PORTATO IL SUO GENERATO**»*. ### ✅ **Rimette i byte a posto e LASCIA IL DIFETTO SCRITTO**, che e- esattamente la forma giusta.
+
+### 📌 **LA DIFFERENZA ERA UNA RIGA:** il collaudo della lista dei file di fisica da ### **`17`/`17` a `22`/`22`** — e il `17` veniva da ### **prima del braccio sui duplicati e dei quattro bracci sui banchi.** ### ⛔ **Quindi il difetto e- MIO e viene da `403fea0`:** quel commit ha ### **cambiato un conteggio che un `VIVO` racconta** e ### **non ha rigenerato il `VIVO`.**
+
+### ✅ **E- la seconda volta oggi che un `VIVO` scade per la stessa ragione**, e lo scrivo perche- la cura non e- <<ricordarsene>>: ### **il contratto di un `VIVO` e- che la CI lo rigeneri e pretenda la diff VUOTA**, e la suite ### **lo fa davvero** — ### **l-ha preso in meno di tre minuti.**
