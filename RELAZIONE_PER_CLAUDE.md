@@ -12393,3 +12393,11 @@ Ogni dato di `db_era2/` ha ### **il suo TIMBRO accanto**, col campo `versione_da
 ### 📌 **E PERCHE- `D9` DIPENDE DA LEI SENZA CONTRADDIRE L-ALBERO:** l-albero da- `DEC-D9-GEOMETRIA` come radice ### **fra i SUOI nodi**, e questa domanda ### **non e- un nodo dell-albero** — quindi ### **non contraddice niente.** ### **E la ragione e- di merito:** non si decide la forma della geometria ### **prima di sapere se la dinamica ha un-energia** su cui scrivere un bilancio.
 
 ### ✅ **E IL CRITERIO DI RIAPERTURA E- SCRITTO NELLA VOCE:** se la quantita- conservata ### **non esiste per nessuna moneta non lineare ammissibile**, la decisione `10` ### **va riformulata** — e allora ### **la direzione stessa si riapre.** ### ⚠ **Una direzione che dichiara in anticipo come si riapre e- piu- forte di una che si difende.**
+
+## MANDATO ⑩, PUNTI `6` e `7`: IL PROTOTIPO, CON LE CINQUE LETTURE FISSATE PRIMA — ### **e la lettura `5` e- la piu- forte di tutto il piano** *(2026-10-10)*
+
+### 📌 **Le cinque letture si fissano ADESSO, prima dei numeri**, ed e- il `PATTERN_DI_PROVA`: ### **una lettura decisa dopo aver visto i numeri non e- una lettura, e- una spiegazione.**
+
+### ⭐ **E LA LETTURA `5` E- LA PIU- FORTE DI TUTTO IL PIANO:** un cluster nella banda `+` e uno nella banda `-`, ### **costruiti speculari**, ### **devono comportarsi allo stesso modo** — e ### **il braccio di controllo e- PROPRIO la non linearita- a segno fisso, CHE DEVE FALLIRE.** ### ✅ **Un prototipo che dichiara in anticipo quale forma deve ROMPERSI nelle sue mani NON PUO- CONFERMARE SE STESSO**, ed e- la prima volta che un mandato di fisica di questo repo ha quella forma.
+
+### ✅ **E IL PUNTO `7` DA- A [[ISOTROPIA-MISURATA]] LA SUA PRIMA MATERIA.** Quando l-ho creata stamattina *(punto `5` del mandato delle correzioni)* diceva ### **«oggi NON ha materia»**, e il criterio era ### **senza presidio per mancanza di materia.** ### 📌 **Ora la materia c-e-: il collaudo delle DUE NUMERAZIONI**, come requisito ### **per qualunque dinamica** usata in una corsa di fisica.

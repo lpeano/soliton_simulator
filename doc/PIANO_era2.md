@@ -143,6 +143,26 @@ alla lista ### **autorizza un commit.** ### **In `F3` quel buco conta più che i
 
 ---
 
+## ⭐ **IL PROTOTIPO DI CONFRONTO** — **il PRIMO lavoro di fisica dopo la coda** *(mandato di Luca, 2026-10-10)*
+
+> ### ⛔ **DA NON ESEGUIRE OGGI**, e il mandato lo dice. ### **Una scena piccola, un grafo IRREGOLARE**, e i due candidati sulla ### **STESSA scena**: ### **l-integratore a strati** e ### **la camminata a moneta** *([[CAMMINATA-A-MONETA]])*.
+
+### ⚠ **LE CINQUE LETTURE SI FISSANO ADESSO, PRIMA DEI NUMERI** — e- il ### **`PATTERN_DI_PROVA`**, e il motivo e- che ### **una lettura decisa dopo aver visto i numeri non e- una lettura: e- una spiegazione.**
+
+| | la lettura | il criterio, fissato PRIMA |
+|---|---|---|
+| `1` | ### **ISOTROPIA** | ### **due numerazioni diverse degli archi.** Con la moneta ### **invariante per permutazione** i risultati ### **coincidono a meno della rinumerazione** *(al limite della macchina)*; ### **se no, LA MONETA NON E- ISOTROPA.** ### 📌 **Per confronto, l-integratore a strati: una differenza che scende come `dt^2`** |
+| `2` | ### **CONO** | ### **oltre UN arco per tick l-effetto e- ZERO.** ### ⚠ **E- un criterio a soglia dura**, non statistico: ### **un effetto piccolo ma non nullo e- una violazione** |
+| `3` | ### **LA QUANTITA- CONSERVATA** | con moneta ### **lineare** e con una ### **non lineare di prova**: ### **esiste e si conserva?** ### ⛔ **E se NON esiste per nessuna moneta non lineare ammissibile, LA DECISIONE `10` VA RIFORMULATA** — ed e- il ### **criterio di RIAPERTURA**, scritto prima *([[DOMANDA-QUANTITA-CONSERVATA]])* |
+| `4` | ### **IL CLUSTER** | un cluster di solitoni ### **in fase** resta coerente? Si misura ### **la dispersione delle frequenze dentro il cluster nel tempo**: con moneta lineare, con moneta non lineare, e sull-intrappolamento del grafo irregolare con moneta lineare. ### ✅ **LA LETTURA: con la LINEARE ci si aspetta che la coerenza SI PERDA — e- IL CONTROLLO**; ### ⛔ **se si perde anche con la non lineare, la non linearita- scelta NON BASTA** |
+| `5` | ### **MATERIA E ANTIMATERIA** | un cluster nella banda `+` e uno nella banda `-`, ### **costruiti speculari.** ### **Devono comportarsi allo stesso modo**; se uno resta e l-altro si disfa, ### **la non linearita- e- sbagliata** *(condizione `(b)` di [[MATERIA-ANTIMATERIA-SPAZIO]])*. ### ⭐ **E IL BRACCIO DI CONTROLLO E- PROPRIO LA NON LINEARITA- A SEGNO FISSO, CHE DEVE FALLIRE QUESTA PROVA** |
+
+### ⭐ **E LA LETTURA `5` E- LA PIU- FORTE DI TUTTO IL PIANO:** il braccio di controllo ### **non e- una variante innocua** — e- ### **una proposta di fisica che DEVE fallire.** ### ✅ **Un prototipo che dichiara in anticipo quale forma deve ROMPERSI nelle sue mani non puo- confermare se stesso.**
+
+### 📌 **E DOPO IL PROTOTIPO, nell-ordine che il mandato da-:** il ### **censimento delle memorie dell-era `1`** *(a vocabolario chiuso: nativa · campo d-arco · vuoto · da togliere)*, e il ### **disegno `3D` come osservatore e come MISURA**, insieme alle prime misure dell-isotropia.
+
+---
+
 ## `F4` — **LE PRIME MISURE**
 
 | | |
