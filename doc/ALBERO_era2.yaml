@@ -178,6 +178,16 @@ nodi:
       false finche- D6 non e- preso -- e D6 si prende nella voce 10 della coda
       (VUOTO-LOCALE-DETERMINISTICO da proposta a decisione di Luca). ### Non e-
       un rifiuto del mandato: e- l-ORDINE che il mandato stesso implica.
+      ### ✅ AGGIORNAMENTO DEL 2026-10-10, dopo il RICABLAGGIO: D6 (il
+      PRINCIPIO del vuoto) E- PRESO, ma D7 ora dipende da D6f (le FORME del
+      vuoto) e da FC (la forza di coesione), e NESSUNA DELLE DUE e- presa.
+      ### PROVATO, non asserito: marcando D7 presa, P-ALB risponde <<e-
+      marcata PRESA e dipende da DEC-FC-COESIONE, che NON e- PRESA>>, e i
+      byte dell-albero sono stati ripristinati (sha1 7ee0a029).
+      ### QUINDI LA DIPENDENZA CHE MANCA E- LA QUANTITA- CONSERVATA: le forme
+      del vuoto e la forza di coesione dipendono ENTRAMBE da QC, che e- LA
+      PROSSIMA. Il PRINCIPIO della divisione resta preso e registrato; cio-
+      che manca e- CHI PAGA, ed e- esattamente cio- che il mandato prevede.
 
   # ----------------------------------------------------------------------------------
   #  IL NODO DI METODO, il solo fuori dalla catena di cui il repo sappia l-argomento

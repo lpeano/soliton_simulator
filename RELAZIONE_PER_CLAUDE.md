@@ -12482,3 +12482,11 @@ Ogni dato di `db_era2/` ha ### **il suo TIMBRO accanto**, col campo `versione_da
 ### ⛔ **E IL PRESIDIO CHE IMPEDISCE ANCORA LO STATO, PROVATO E NON ASSERITO:** ho tentato `stato=CHIUSA` e la risposta e- stata, alla lettera: *«`PI-ERA-STATO` `VUOTO-LOCALE-DETERMINISTICO`: era `2` con stato `CHIUSA`. ### **L-era `2` NON E- COMINCIATA: una sua voce e- `AGENDA`**»* — piu- *«`CHIUSA` senza `chiusura.criterio` e `chiusura.commit`»*. ### ✅ **NON l-ho aggirato**, come il mandato dice.
 
 ### 📌 **E LA DECISIONE VIVE DOVE PUO- VIVERE, in TRE posti verificabili:** il nodo `D6` dell-albero *(`presa: true`, che e- il campo che dice «presa»)*, la `nota_guardiano` della voce, e ### **la riga di storico col motivo.** ### ⚠ **Cio- che manca e- SOLO lo stato della voce**, e il motivo e- ### **una regola del repo, non una mia scelta.**
+
+## ⛔ **PUNTO `3`: `D7` NON SI PUO- MARCARE PRESA, e la dipendenza che manca e- LA QUANTITA- CONSERVATA** *(2026-10-10)*
+
+### 📌 **PROVATO, non asserito:** ho marcato `D7` ### **presa** sull-albero nuovo, e `P-ALB` ha risposto — *«e- marcata PRESA e dipende da `DEC-FC-COESIONE`, che ### **NON e- PRESA**»* — con ### **`2` errori.** ### ✅ **E i byte dell-albero sono stati ripristinati** *(`sha1 7ee0a029`, confronto byte-a-byte)*.
+
+### ⭐ **LA DIPENDENZA CHE MANCA, per nome:** ### **le FORME del vuoto** *(`D6f`)* e ### **la FORZA DI COESIONE** *(`FC`)* — e ### **dipendono ENTRAMBE dalla QUANTITA- CONSERVATA**, che e- ### **LA PROSSIMA.**
+
+### ✅ **E IL PRINCIPIO DELLA DIVISIONE RESTA PRESO E REGISTRATO:** `psi → psi/sqrt(2)` con la ### **stessa fase**, che conserva la somma di `rho` ### **in aritmetica esatta** e in virgola mobile ### **entro l-arrotondamento** *(la mia misura di `4e476b4`: al bit solo nel `23.7`% dei casi, errore relativo massimo `9.4e-16`)*. ### 📌 **Cio- che manca e- CHI PAGA**, ed e- ### **esattamente cio- che il mandato prevede.**
