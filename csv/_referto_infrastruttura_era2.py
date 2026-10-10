@@ -27,7 +27,7 @@ FUORI = os.path.join(RADICE, "doc", "REFERTO_infrastruttura_era2.md")
 COMANDI = (
     ("la catena", "python primo_ordine/_collauda_passo.py"),
     ("i presidi dell-era 2", "python csv/_presidi_era2.py --collaudo"),
-    ("lo schema della tabella", "python primo_ordine/leggi/schema.py"),
+    ("lo schema della tabella", "python primo_ordine/leggi/_collauda_schema.py"),
     ("il generatore", "python primo_ordine/_collauda_genera.py"),
     ("la lista dei file di fisica", "python csv/_collaudo_file_fisica.py"),
     ("i presidi dell-indice", "python csv/_collaudo_presidi_indice.py"),

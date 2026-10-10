@@ -527,3 +527,28 @@ def rami_vietati(espressione):
     ### **non puo- entrare nella fisica senza passare da una DECISIONE.**
     """
     return _nominati(espressione, RAMI)
+
+
+# =====================================================================================
+#   IL COLLAUDO SE N'E' ANDATO  --  e chi lo cerca qui DEVE accorgersene
+# -------------------------------------------------------------------------------------
+#   ### ⛔ **Dal `2026-10-10` il collaudo sta in `_collauda_schema.py`**, perche' questo
+#   ### file era a `736` righe e ### **oltre il tetto SI DIVIDE.**
+#   ### ⚠ **E SENZA QUESTO BLOCCO, girare `schema.py` USCIVA `0` SENZA DIRE NIENTE** --
+#   ### cioe' ### **un FALSO-VERDE silenzioso** per chiunque lo chiamasse aspettandosi
+#   ### un collaudo. ### **E' esattamente il difetto che ha fatto trovare un referto
+#   ### scaduto sul clone pulito: il referto chiamava QUESTO file e leggeva <<passa>>.**
+#   ### ✅ **Ora esce `1` e dice dove andare:** un chiamante sbagliato ### **FALLISCE
+#   ### RUMOROSAMENTE**, che e' l'unica forma utile.
+# =====================================================================================
+if __name__ == "__main__":
+    # ### ⚠ **E IL MESSAGGIO E- IN ASCII PURO, di proposito:** questo file
+    # ### ### **non chiama `_presidio.avvia()`** -- non e- un collaudo ne- una misura, e
+    # ### la sua mappa non prevede quell-import. ### ⛔ **Al primo giro ci ho messo un
+    # ### simbolo e sono cascato NELLA DECIMA VOLTA dello stesso difetto:
+    # ### `UnicodeEncodeError`, codec `cp1252`.** ### ✅ **Un messaggio che deve solo
+    # ### essere RUMOROSO non ha bisogno di simboli.**
+    print("  IL COLLAUDO DELLO SCHEMA NON STA PIU- QUI.")
+    print("  ### Gira:  python primo_ordine/leggi/_collauda_schema.py")
+    print("  ### (diviso il 2026-10-10: questo file era oltre il tetto di 700 righe)")
+    sys.exit(1)

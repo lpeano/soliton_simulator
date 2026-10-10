@@ -66,7 +66,7 @@ Io avevo scritto, nell'intestazione di quel file, *«LA CI NON SI PUO' DIMENTICA
 |---|---|---|
 | la catena | `python primo_ordine/_collauda_passo.py` | ### ✅ **`46`/`46`** |
 | i presidi dell-era 2 | `python csv/_presidi_era2.py --collaudo` | ### ✅ **`22`/`22`** |
-| lo schema della tabella | `python primo_ordine/leggi/schema.py` | ### ✅ **`34`/`34`** |
+| lo schema della tabella | `python primo_ordine/leggi/_collauda_schema.py` | ### ✅ **`37`/`37`** |
 | il generatore | `python primo_ordine/_collauda_genera.py` | ### ✅ **`24`/`24`** |
 | la lista dei file di fisica | `python csv/_collaudo_file_fisica.py` | ### ✅ **`17`/`17`** |
 | i presidi dell-indice | `python csv/_collaudo_presidi_indice.py` | ### ✅ **`67`/`67`** |

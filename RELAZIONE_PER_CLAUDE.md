@@ -12429,3 +12429,13 @@ Ogni dato di `db_era2/` ha ### **il suo TIMBRO accanto**, col campo `versione_da
 ### ⚠ **E UN PRESIDIO CHE SALTA TUTTO PASSA:** il collaudo sarebbe rimasto verde sul verso sano. ### ✅ **L-ha preso IL BRACCIO CHE DEVE FALLIRE** *(«un `titolo` toccato a mano»)*, ### **che e- l-unica cosa che distingue un presidio vivo da uno spento.** ### 📌 **E- `P1-sexies` misurato sul campo: il caso che deve fallire e- il piu- importante.**
 
 ### ✅ **LA CURA, della stessa forma di quella su `PI-REPLAY`:** un candidato va bene ### **se gli manca SOLO un campo della migrazione**, e il confronto legge ### **il DEFAULT** dove il campo non c-era — cosi- ### **un valore diverso dal default si vede ancora.** ### **`P-T2`: `27` su `27`.**
+
+## ⛔ **UN REFERTO `VIVO` ERA SCADUTO, E IL BRACCIO DELL-ALBERO SPORCO L-HA TROVATO SUL CLONE** — ### **e la causa era un residuo della divisione** *(2026-10-10)*
+
+### 📌 **Sul clone di `527e70c`: `valida` codice `0` nei due ambienti, e ### **TUTTI I COLLAUDI PASSANO, `33` su `33`** — ma il codice d-uscita era ### **`1`**, e il motivo lo diceva il braccio: *«### **LA SUITE HA SPORCATO `1` FILE**»*, `doc/REFERTO_infrastruttura_era2.md`.
+
+### ⭐ **E LA CAUSA NON ERA IL REFERTO: era un RESIDUO della divisione di `schema.py`.** Quel referto chiamava ancora ### **`primo_ordine/leggi/schema.py`**, che dopo la divisione ### **non ha piu- un collaudo** — quindi leggeva ### **«passa»** dove prima leggeva `34`/`34`. ### ✅ **Ora chiama `_collauda_schema.py` e legge `37`/`37`.**
+
+### ⛔ **E IL DIFETTO SOTTO ERA PEGGIO: `schema.py` girato nudo USCIVA `0` SENZA DIRE NIENTE** — ### **un falso-verde silenzioso** per chiunque lo chiamasse aspettandosi un collaudo. ### ✅ **Ora esce `1` e dice dove andare:** un chiamante sbagliato ### **fallisce RUMOROSAMENTE**, che e- l-unica forma utile. ### ⚠ **E al primo giro ci ho messo un simbolo e sono cascato nella DECIMA volta del difetto dell-encoding:** il messaggio e- in ### **ASCII puro**, di proposito.
+
+### ⭐ **E QUESTO E- IL TERZO DIFETTO VERO CHE IL CLONE PULITO HA TROVATO OGGI** *(dopo `P-MOD` e `P-T2`)*, e tutti e tre ### **sul mio PC passavano.** ### **La verifica su un clone non e- una formalita-: e- lo strumento che vede cio- che il mio disco nasconde.**
