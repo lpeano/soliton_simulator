@@ -279,6 +279,47 @@ def main():
       "DINAMICHE**: in questo banco sono **una memoria congelata**, ed e' "
       "`PROVV-U-FISSE-TRE-SCENE` |")
     a("")
+    a("## ⛔ **ANNOTAZIONE DEL 2026-10-11 \u2014 LA LETTURA `M` MISURAVA LA COSA "
+      "SBAGLIATA**")
+    a("")
+    a("> ### ⛔ **E IL VERDETTO <<CONFERMA>> RESTA, ma per un ALTRO MOTIVO** \u2014 "
+      "e i numeri qui sopra ### **non si riscrivono.**")
+    a("")
+    a("### 📌 **CHE COSA MISURAVA:** il ### **gap MASSIMO ovunque sul cerchio** "
+      "delle quasi-energie \u2014 non il gap ### **dove le bande si incontrano.** "
+      "### ⭐ **E il `64.9` a `eps = 0` veniva dalle BANDE PIATTE della camminata "
+      "di Grover**, cioe- ### **dagli stati INTRAPPOLATI sui cicli.**")
+    a("")
+    a("### ✅ **IL CONTO, rifatto con `python proto_camminata/_spettro.py` e con "
+      "DUE METODI INDIPENDENTI** *(autovalori e ### **rango** di `U \u2213 I`, che "
+      "danno ### **gli stessi numeri**)*, su `832` stati e `89` cicli indipendenti:")
+    a("")
+    a("| la scena | `+1` | `-1` | in tutto | per ciclo |")
+    a("|---|---|---|---|---|")
+    a("| identita-, `eps = 0` | **180** | **176** | **356** su `832` = **42.8%** | ### **4.00** |")
+    a("| curva, `eps = 0` | **176** | **176** | **352** | ### **3.96** |")
+    a("| **qualunque scena, `eps > 0`** | ### **0** | ### **0** | ### **0** | ### **0** |")
+    a("")
+    a("### ⭐ **E IL NUMERO NON E- <<CIRCA>>: E- ESATTO, e vale su DUE GRAFI.** "
+      "Con `c = m - n + 1` cicli indipendenti: nella scena ### **identita-** le "
+      "molteplicita- sono ### **`2(m-n)+4` e `2(m-n)`** *(cioe- `4c` in tutto)*, nella "
+      "### **curva** sono ### **`2(m-n)` e `2(m-n)`** *(`4c-4`)*. ### ✅ **Verificato "
+      "sul grafo irregolare *(`356` e `352`)* e sul REGOLARE *(`484 = 4x121` e "
+      "`480`)*.**")
+    a("")
+    a("### ⛔ **CHE COSA VUOL DIRE:** l-interferenza ### **intrappola il `43%` "
+      "degli stati** \u2014 stati che ### **non vanno da nessuna parte**, `4` per ciclo "
+      "\u2014 e il ### **legame spin-direzione li DISTRUGGE TUTTI**, gia- a `eps = 0.25`.")
+    a("")
+    a("### ✅ **E IL GAP VERO, misurato DOVE LE BANDE SI INCONTRANO** *(`omega = 0` "
+      "e `omega = pi`)*, con la ### **scala di taglia** sul grafo regolare: a `eps = 1` "
+      "il gap assoluto e- ### **`3.7e-5`, `1.5e-3`, `1.2e-4`** per `n = 60, 120, 240` "
+      "\u2014 cioe- ### **NON cresce con la taglia**, e in spaziature resta ### **O(0.1)**. "
+      "### ⭐ **Un gap VERO sarebbe `O(1)` in quasi-energia, quindi crescerebbe "
+      "come `dim` in spaziature: questo NON lo fa.** ### ✅ **Quindi <<nessuna "
+      "massa>> REGGE**, ma il motivo e- ### **che il gap al punto d-incontro e- nullo**, "
+      "non che ### **`eps` chiuda un gap.**")
+    a("")
     a("## ⚠ **I LIMITI, dichiarati**")
     a("")
     a("| | il limite |")

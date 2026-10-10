@@ -107,7 +107,11 @@ TESTI = (
     # ### spegnere un passo di CI** *(`A9` dal lato del tempo)*.
     ("doc/REFERTO_prototipo_camminata_v2.md", REPERTO,
      "le dieci letture del prototipo `v2`, al `2026-10-10`",
-     "python proto_camminata/_referto2.py", "d523a9ab53ac0931"),
+     # ### ⚠ **IL BLOB CAMBIA perche- il referto e- stato ANNOTATO**
+     # ### *(la lettura `M` misurava il gap MASSIMO ovunque, non quello dove le bande si
+     # ### incontrano)*, e l-annotazione sta ### **NEL GENERATORE**: cosi- il `REPERTO`
+     # ### resta ### **riproducibile** invece di essere ritoccato a mano.
+     "python proto_camminata/_referto2.py", "2227ce1fec43683a"),
     ("doc/REFERTO_prototipo_camminata.md", REPERTO,
      "le sette letture del prototipo della camminata, al `2026-10-10`",
      # ### ⚠ **IL BLOB CAMBIA PERCHE- IL REFERTO E- STATO ANNOTATO** *(la lettura

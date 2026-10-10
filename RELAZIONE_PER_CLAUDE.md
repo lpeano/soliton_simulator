@@ -12800,3 +12800,25 @@ Ogni dato di `db_era2/` ha ### **il suo TIMBRO accanto**, col campo `versione_da
 ### ⭐ **E LA COSA CHE RESTA, in una riga:** il `v1` diceva che la simmetria materia/antimateria ### **si puo- scrivere**; il `v2` dice che ### **si puo- MISURARE** — perche- le due componenti ### **si mescolano davvero**, e l-### **ELICITA-** la tiene ### **a virgola mobile** mentre la densita- la rompe.
 
 ### ⛔ **E LA COSA CHE NON TORNA, detta per intera:** quella stessa elicita- ### **non tiene un cluster**, con nessuna forza provata. ### ⚠ **Quindi la coesione simmetrica o ha una forza che va DERIVATA, o non viene da un termine locale affatto** — ed e- la voce `COESIONE-TERMINE-O-CAMPO`, con ### **l-argomento scritto dentro**: un campo ### **FISSO** non ha energia propria e non reagisce, quindi ### **non puo- tenere niente nemmeno in principio.**
+
+## ⛔ **IL `v3`, PUNTO `0`: LA LETTURA `M` DEL `v2` MISURAVA LA COSA SBAGLIATA — e il conto del guardiano e- ESATTO** *(2026-10-11)*
+
+### 📌 **CHE COSA MISURAVA:** il ### **gap MASSIMO ovunque sul cerchio** delle quasi-energie, non il gap ### **dove le bande si incontrano** — e il ### **`64.9`** a `eps = 0` veniva ### **dalle bande PIATTE di Grover**, cioe- ### **dagli stati INTRAPPOLATI sui cicli.**
+
+### ✅ **RIFATTO, CON DUE METODI INDIPENDENTI CHE DANNO GLI STESSI NUMERI** *(autovalori, e il ### **RANGO** di `U` meno `I`)*, piu- il ### **plateau su quattro decadi di tolleranza**:
+
+| la scena | `+1` | `-1` | in tutto | per ciclo |
+|---|---|---|---|---|
+| identita-, `eps = 0` | **180** | **176** | **356** su `832` = **42.8%** | ### **4.00** |
+| curva, `eps = 0` | **176** | **176** | **352** | ### **3.96** |
+| **qualunque scena, `eps > 0`** | ### **0** | ### **0** | ### **0** | ### **0** |
+
+### ⭐ **E IL NUMERO NON E- <<CIRCA>>: E- ESATTO, e vale su DUE GRAFI.** Con `c = m - n + 1`: nella scena ### **identita-** le molteplicita- sono ### **`2(m-n)+4` e `2(m-n)`** *(cioe- ### **`4c`** in tutto)*, nella ### **curva** sono ### **`2(m-n)` due volte** *(`4c-4`)*. ### ✅ **Verificato sull-irregolare *(`356` e `352`)* e sul REGOLARE *(`484 = 4x121` e `480`)*.** ### ⚠ **Il mandato diceva <<circa 2 per ciclo>>: sono ESATTAMENTE `4`**, e lo scrivo perche- ### **un numero esatto e- un fatto, <<circa>> e- un ricordo.**
+
+### ⛔ **E IL GAP VERO, misurato DOVE LE BANDE SI INCONTRANO**, con la ### **scala di taglia** sul grafo regolare: a `eps = 1` il gap assoluto e- ### **`3.7e-5`, `1.5e-3`, `1.2e-4`** per `n = 60, 120, 240` — cioe- ### **NON cresce con la taglia**, e in spaziature resta ### **`O(0.1)`.** ### ⭐ **Un gap VERO sarebbe `O(1)` in quasi-energia, quindi crescerebbe come `dim` in spaziature: questo non lo fa.**
+
+### ✅ **QUINDI <<NESSUNA MASSA>> REGGE, ma per un ALTRO MOTIVO:** ### **il gap al punto d-incontro e- NULLO**, non che `eps` ### **chiuda** un gap. ### ⚠ **E la differenza conta:** la prima volta avevo letto ### **la distruzione degli stati intrappolati** come se fosse ### **la chiusura di un gap.**
+
+### ⭐ **E DUE COSE METODOLOGICHE, perche- sono il motivo per cui il numero si puo- scrivere:** la molteplicita- ### **non si conta dagli autovettori** *(su un autospazio DEGENERE `eig` da- una base qualunque, quindi <<sono localizzati?>> non vuol dire niente)*, e un conteggio vale ### **solo se ha un PLATEAU** sulla tolleranza — ### **qui e- stabile da `1e-12` a `1e-6`.**
+
+### ✅ **E LA PRECISAZIONE DI LUCA SULLA VELOCITA- DELLA LUCE E- REGISTRATA:** ### **la velocita- della luce del sistema E- IL CONO**, un arco per tick, fissata dallo ### **SPOSTAMENTO**; ### **`eps` NON la fissa**, decide ### **quanto vicino al cono** si muovono le eccitazioni. ### 📌 **Ed e- la lettura `(S)` del `v3`**, che entra ### **nel task history** *(non come annotazione: il task history non e- ancora committato)*, con la previsione fissata ### **prima dei numeri.**

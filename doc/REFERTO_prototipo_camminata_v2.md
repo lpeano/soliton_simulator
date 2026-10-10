@@ -86,6 +86,26 @@ le olonomie **non cambiano** durante la corsa nelle tre scene: **0** — ed e' *
 | **`C^2` contro `C^4`** *(`A16`)* | con **`C^2`** e versori isotropi ### **nessun gap si apre con `eps`** | non dicono che `C^4` ne aprirebbe uno: **non l'ho provato**, ed e' una proposta per Luca |
 | **[[D13]]** e **[[M-SPINORE]]** | con le `U` **fisse** tutto e' coerente, e le olonomie **non cambiano** *(controllo)* | ### ⛔ **niente sulle `U` DINAMICHE**: in questo banco sono **una memoria congelata**, ed e' `PROVV-U-FISSE-TRE-SCENE` |
 
+## ⛔ **ANNOTAZIONE DEL 2026-10-11 — LA LETTURA `M` MISURAVA LA COSA SBAGLIATA**
+
+> ### ⛔ **E IL VERDETTO <<CONFERMA>> RESTA, ma per un ALTRO MOTIVO** — e i numeri qui sopra ### **non si riscrivono.**
+
+### 📌 **CHE COSA MISURAVA:** il ### **gap MASSIMO ovunque sul cerchio** delle quasi-energie — non il gap ### **dove le bande si incontrano.** ### ⭐ **E il `64.9` a `eps = 0` veniva dalle BANDE PIATTE della camminata di Grover**, cioe- ### **dagli stati INTRAPPOLATI sui cicli.**
+
+### ✅ **IL CONTO, rifatto con `python proto_camminata/_spettro.py` e con DUE METODI INDIPENDENTI** *(autovalori e ### **rango** di `U ∓ I`, che danno ### **gli stessi numeri**)*, su `832` stati e `89` cicli indipendenti:
+
+| la scena | `+1` | `-1` | in tutto | per ciclo |
+|---|---|---|---|---|
+| identita-, `eps = 0` | **180** | **176** | **356** su `832` = **42.8%** | ### **4.00** |
+| curva, `eps = 0` | **176** | **176** | **352** | ### **3.96** |
+| **qualunque scena, `eps > 0`** | ### **0** | ### **0** | ### **0** | ### **0** |
+
+### ⭐ **E IL NUMERO NON E- <<CIRCA>>: E- ESATTO, e vale su DUE GRAFI.** Con `c = m - n + 1` cicli indipendenti: nella scena ### **identita-** le molteplicita- sono ### **`2(m-n)+4` e `2(m-n)`** *(cioe- `4c` in tutto)*, nella ### **curva** sono ### **`2(m-n)` e `2(m-n)`** *(`4c-4`)*. ### ✅ **Verificato sul grafo irregolare *(`356` e `352`)* e sul REGOLARE *(`484 = 4x121` e `480`)*.**
+
+### ⛔ **CHE COSA VUOL DIRE:** l-interferenza ### **intrappola il `43%` degli stati** — stati che ### **non vanno da nessuna parte**, `4` per ciclo — e il ### **legame spin-direzione li DISTRUGGE TUTTI**, gia- a `eps = 0.25`.
+
+### ✅ **E IL GAP VERO, misurato DOVE LE BANDE SI INCONTRANO** *(`omega = 0` e `omega = pi`)*, con la ### **scala di taglia** sul grafo regolare: a `eps = 1` il gap assoluto e- ### **`3.7e-5`, `1.5e-3`, `1.2e-4`** per `n = 60, 120, 240` — cioe- ### **NON cresce con la taglia**, e in spaziature resta ### **O(0.1)**. ### ⭐ **Un gap VERO sarebbe `O(1)` in quasi-energia, quindi crescerebbe come `dim` in spaziature: questo NON lo fa.** ### ✅ **Quindi <<nessuna massa>> REGGE**, ma il motivo e- ### **che il gap al punto d-incontro e- nullo**, non che ### **`eps` chiuda un gap.**
+
 ## ⚠ **I LIMITI, dichiarati**
 
 | | il limite |

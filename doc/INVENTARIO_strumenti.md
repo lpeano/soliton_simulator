@@ -3088,3 +3088,15 @@ etichette rimosse, con ### **`0` persi, `0` doppi, `0` conflitti**.
 | ⭐ **IL RISULTATO PIU- FORTE** | la lettura `5`: l-### **ELICITA-** tiene la coniugazione di carica su ### **tutte** le varianti *(`<= 7.1e-16`)* mentre la densita- la rompe *(fino a `0.198`)* — e ### **questa volta e- una prova FISICA**, perche- la lettura `B` mostra che le due componenti ### **si equilibrano** |
 | ⛔ **IL GAP NON E- UNA MASSA** | gap/spaziatura va da ### **`64.9` a `eps=0`** a ### **`3.24` a `eps=1`**: `eps` ### **CHIUDE** il gap invece di aprirlo, e il gap grosso a `eps=0` e- ### **lo spettro della camminata SCALARE**, cioe- il `v1` |
 | ⚠ **E UNA PROPOSTA DEL `v1` CADE** | la ### **tendenza monotona** della crescita della dispersione ### **non sopravvive**: era una proprieta- della camminata ### **scalare** |
+
+### `proto_camminata/_spettro.py` — **GLI STATI INTRAPPOLATI SUI CICLI, E IL GAP DOVE LE BANDE SI INCONTRANO** *(2026-10-11)*
+
+| | |
+|---|---|
+| **il file** | `proto_camminata/_spettro.py` |
+| **COMANDO** | `python proto_camminata/_spettro.py` *(scrive `uscite/spettro.json`; costa ~`90` s, quindi ### **NON sta nella suite**)* |
+| **che cosa misura** | la ### **molteplicita- di `+1` e `-1`** *(stati intrappolati sui cicli)*, con il ### **plateau su quattro decadi di tolleranza** e il ### **secondo metodo dal RANGO**; il ### **rapporto di partecipazione** sugli stati non degeneri; e il ### **gap e la densita- di stati vicino a `omega = 0` e `omega = pi`**, con la ### **scala di taglia** |
+| ⛔ **IL DIFETTO CHE CORREGGE** | la lettura `M` del `v2` misurava il ### **gap MASSIMO ovunque sul cerchio**, non quello ### **dove le bande si incontrano**: il `64.9` a `eps = 0` erano ### **gli stati intrappolati** |
+| ⭐ **IL NUMERO ESATTO** | con `c` cicli indipendenti: identita- ### **`2(m-n)+4` e `2(m-n)`** *(`4c` in tutto)*, curva ### **`2(m-n)` due volte** *(`4c-4`)*. ### **Verificato su DUE grafi**: `356`/`352` sull-irregolare, `484 = 4x121`/`480` sul regolare |
+| ✅ **E `eps` LI DISTRUGGE TUTTI** | `0` stati intrappolati gia- a `eps = 0.25`, in tutte le scene e su entrambi i grafi |
+| ⚠ **LA MOLTEPLICITA- NON SI CONTA DAGLI AUTOVETTORI** | su un autospazio ### **degenere** `eig` da- ### **una base qualunque**, quindi <<sono localizzati?>> ### **non vuol dire niente**: si contano gli ### **autovalori**, e si conferma col ### **rango** |
