@@ -66,6 +66,7 @@ commit**: cosi' non se ne accumulano di invisibili.)*
 | `csv/_presidio_righe.py|H-P5` | non importa il simulatore e non lo fa girare. Conta le righe di un documento. |
 | `csv/_pulizia_finale.py|H-P5` | non importa il simulatore e non lo fa girare. Costruisce lotti per l'indice. |
 | `csv/_punto_della_situazione.py|H-P5` | non importa il simulatore e non lo fa girare. Legge un TSV e `git log`. |
+| `csv/_referto_decisioni_43.py|H-P5` | questo referto NON misura il simulatore. Non fa girare nessuna scena, non |
 | `csv/_registri_indice.py|H-P5` | non importa il simulatore e non lo fa girare. Estrae dai sorgenti e dai |
 | `csv/_regole_proposta.py|H-P5` | non importa il simulatore e non lo fa girare. Legge documenti e ne scrive uno. |
 | `csv/_righe_indirizzate.py|H-P5` | non importa il simulatore e non lo fa girare. Costruisce un lotto. |
@@ -140,5 +141,5 @@ commit**: cosi' non se ne accumulano di invisibili.)*
 | `csv/_test_fork/_z43_tempo_proprio.py|H-P3` | la scena passa TUTTA dal CLI (`nmasse` e `sep` da `argv`), e la |
 
 ```
-esenzioni dichiarate   133
+esenzioni dichiarate   134
 ```

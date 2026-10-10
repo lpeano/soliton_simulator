@@ -93,6 +93,15 @@ jobs:
           python csv/_referto_seconda_parte.py --con-lenti
           git diff --exit-code -- doc/REFERTO_seconda_parte_era2.md
 
+      - name: "### IL REFERTO DELLE 43 DECISIONI -- rigenerato, e `git diff`"
+        # ### ⛔ Un referto SCADUTO dice numeri che non sono quelli di oggi, e
+        # ### ### **sembra fatto**. Qui si rigenera e si pretende che la diff sia
+        # ### VUOTA: cosi- un numero che si muove ### **fa cadere la CI**, invece di
+        # ### restare scritto in un file che nessuno rigira.
+        run: |
+          python csv/_referto_decisioni_43.py
+          git diff --exit-code -- doc/REFERTO_decisioni_43_era2.md
+
       - name: "### `P-AB` e `rinomina` -- i confronti, i dati, e il rinominamento"
         run: |
           python csv/_confronti_e_dati.py

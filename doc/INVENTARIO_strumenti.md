@@ -2863,6 +2863,34 @@ etichette rimosse, con ### **`0` persi, `0` doppi, `0` conflitti**.
 
 ---
 
+### `csv/_id_nuovo.py` — **`P-ID`: UN ID CHE NASCE NON PUO' COLLIDERE** *(2026-10-10)*
+
+| | |
+|---|---|
+| **file** | `csv/_id_nuovo.py` |
+| **BLOB** *(sha1 dei byte grezzi)* | `f2ae8d03` |
+| **COMANDO** | `python csv/_id_nuovo.py --collaudo` *(i due versi)* · `python csv/_id_nuovo.py` *(il censimento)* |
+| **cosa misura** | un ID che ### **nasce** non puo' coincidere con un ### **ID**, un ### **alias** o uno dei ### **significati dichiarati di un omonimo**, e ha almeno ### **`4` caratteri**. Decisione di Luca, blocco `1` delle `43` |
+| ### ⚠ **e <<DA OGGI>> e' MISURATO** | ### **`420` ID esistenti** sono piu' corti di `4`, e ### **`11`** collidono con un alias o un omonimo: rinominarli ### **perderebbe degli ID**, e un ID ### **non si perde.** Il presidio guarda ### **CHI NASCE** |
+| ### ⭐ **e porta il collaudo di una CURA che non e' sua** | i `5` bracci della ### **rimozione del criterio `②` di `da-decidere`** stanno qui, non in `indice.py`: ### **`P-ID` e' la guardia che sostituisce il criterio**, e un collaudo che prova una rimozione deve stare attaccato a cio' che la rende sicura — ### **altrimenti domani qualcuno toglie `P-ID` e nessuno misura che la rimozione era appoggiata a lui** |
+| **l'uscita** | a schermo; ### **`11` bracci su `11`** |
+
+---
+
+### `csv/_referto_decisioni_43.py` — **IL REFERTO DELLE `43` DECISIONI** *(2026-10-10)*
+
+| | |
+|---|---|
+| **file** | `csv/_referto_decisioni_43.py` |
+| **BLOB** *(sha1 dei byte grezzi)* | `9990516a` |
+| **COMANDO** | `python csv/_referto_decisioni_43.py` |
+| **cosa misura** | il mandato `2` di `6`. Ogni cifra esce ### **dall'indice sul disco**, dallo ### **storico** *(che dice quale lotto ha toccato cosa)*, da ### **`git`** *(l'insieme degli ID a `a7485c8` contro ora)*, o dall'uscita di ### **`4` collaudi che fa girare** |
+| ### ⭐ **e il verdetto non e' <<ho scelto bene>>** | il mandato ### **non chiedeva di decidere niente**: portava `43` decisioni ### **gia' prese**. ### **Quindi il verdetto e' <<ho tradito una decisione, si' o no>>** — e la sezione `6.` elenca ### **`7` errori miei**, di cui ### **`6` me li hanno detti i presidi** |
+| ### ⚠ **ESENTE-H-P5, dichiarato nel file** | non misura il simulatore: non fa girare nessuna scena e non produce nessun numero di fisica. ### **Dichiarare la configurazione del driver direbbe DOVE NON SI E' MISURATO.** Il blob e' ### **asserito** comunque |
+| **l'uscita** | `doc/REFERTO_decisioni_43_era2.md` |
+
+---
+
 ### `csv/_referto_seconda_parte.py` — **IL REFERTO DEL MANDATO A `16` PUNTI** *(2026-10-10)*
 
 | | |

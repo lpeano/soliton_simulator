@@ -11663,3 +11663,15 @@ Ogni dato di `db_era2/` ha ### **il suo TIMBRO accanto**, col campo `versione_da
 ### ⚠ **E LA VOCE SI APRE `APERTA`, NON `CHIUSA`:** una `chiusura` deve citare ### **il commit che ha chiuso**, e ### **quel commit non esiste ancora mentre lo sto scrivendo.** ### **La chiusura e- il commit immediatamente successivo, col numero vero.**
 
 ### ✅ **E `FORMA-SPEZZA-ID` E- CHIUSA, col numero VERO: `7ee9d4b`.** Il criterio di chiusura e- ### **misurato, non asserito**: *`0` ID non letti interi su `887`* *(erano `122`)*, l-intervallo regge, l-ID sbagliato scatta e ### **lo scatto nomina l-ID intero**, `L-DOPO-STOP` non si rompe, collaudo ### **`13/13` col ramo end-to-end eseguito.**
+
+## IL REFERTO DEL MANDATO `2` DI `6`, E IL CHECKPOINT — ### **`42` decisioni su `43`** *(2026-10-10)*
+
+### ✅ **`doc/REFERTO_decisioni_43_era2.md`, generato da `csv/_referto_decisioni_43.py`**: ### **nessun numero ricopiato** *(`L-NUMERI`)* — ogni cifra esce dall-indice sul disco, dallo ### **storico** *(che dice quale lotto ha toccato cosa)*, da ### **`git`** *(l-insieme degli ID a `a7485c8` contro ora)*, o dall-uscita di ### **`4` collaudi che lo script FA GIRARE.**
+
+### 📌 **I NUMERI DEL CHECKPOINT:** ### **`42`** decisioni applicate, ### **`1`** non applicabile; ### **`43`** voci toccate dai lotti; ID ### **`990` → `994`**, ### **PERSI `0`**; `valida` ### **PASSA INTERA**, segnali ### **`19`**, non cresciuti; `DA_DECIDERE_LUCA.md` ### **`15` → `4` voci**; i collaudi ### **`11/11`**, ### **`13/13`**, ### **`8/8`**, ### **`8/8`**.
+
+### ⭐ **E LA SEZIONE CHE CONTA E- LA `6.`: <<che cosa ho sbagliato, e chi me l-ha detto>>.** ### **`7` errori miei, e `6` me li hanno detti i presidi** — non io rileggendo. ### ⛔ **Il quarto non l-ha visto nessuno** *(tre file da `0` byte alla radice: `H-NON-TRACCIATI` guarda solo sotto `csv/` e `doc/`)*, ### **ed e- quello da ricordare.**
+
+### ⚠ **E DUE COSE CHE IL REFERTO DICHIARA APERTE E CHE NON HO CURATO:** ### **`A3b`** sta nell-intervallo del blocco `2`, esiste in `ASSIOMI.md` ### **solo come corollario in linea**, e ### **non e- una voce** — ### ⛔ **non l-ho creata indovinandone la classe**, perche- suo fratello `A3c` e- stato riclassificato ### **da questo stesso mandato** e la classe e- ### **genuinamente ambigua**. E ### **`P-ID` rifiuta un ID che COINCIDE con uno esistente, non uno che COMINCIA con uno esistente** — ed e- ### **esattamente il caso che ha rotto `H-INDICE`.**
+
+### ➡ **Il mandato `2` di `6` e- CHIUSO. Passo al mandato `3`: il piano d-azione dell-era `2` e l-albero delle scelte, con l-integrazione su `D9`.**

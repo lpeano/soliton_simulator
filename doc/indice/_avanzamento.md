@@ -23,6 +23,11 @@
 | ### **punto `1` (c)** | ### **`20`** assiomi e principi: `16` → `FISICA`, `4` → `METODO`, tutti era `ENTRAMBE`, con `nota_guardiano` ### **«da confermare da Luca»** |
 | ### **punto `1` (d)** | ### **`9`** voci da `INFRASTRUTTURA` a `METODO`, col motivo di ciascuna |
 
+| ### **il mandato `2` di `6`** | le ### **`43` decisioni di Luca**: ### **`42` applicate**, una ### **non applicabile** *(`Z47`: `CHIUSA` -> `AGENDA` e' una transizione ### **vietata**)*. Nove lotti, ### **uno per blocco**, cosi' si vede ### **quale decisione ha prodotto quale riga**. ### **ID persi: `0`** *(`990` a `a7485c8` -> `994`)*. Referto: `doc/REFERTO_decisioni_43_era2.md` |
+| ### **`P-ID`** | un ID che ### **nasce** non puo' coincidere con un ID, un alias o un significato di omonimo, e ha ### **>= `4` caratteri**. Collaudo ### **`11`/`11`** |
+| ### **il criterio `②` di `da-decidere`** | ### **TOLTO**, per decisione di Luca: *<<la domanda si chiude>>* ### **e** *<<il metadato omonimo resta>>* si possono soddisfare entrambe ### **solo se non e' il metadato a generare la domanda.** `DA_DECIDERE_LUCA.md`: ### **`15` -> `4` voci** |
+| ### **`H-INDICE` curato** | verificava ### **il PREFISSO invece dell'ID**, per ### **`122` ID su `887`** *(`A9`)*. `estendi()` allunga il match al ### **piu' lungo ID NOTO**, e un intervallo resta un intervallo. ### **`122` -> `0`**, collaudo `13`/`13` |
+
 **L'ultimo lotto applicato:** `doc/indice/_lotti/correzioni.jsonl` — ### **`313` voci**,
 `313` righe di storico, e la validazione ### **intera** passa.
 
