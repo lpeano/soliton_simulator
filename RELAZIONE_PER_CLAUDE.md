@@ -12588,3 +12588,19 @@ Ogni dato di `db_era2/` ha ### **il suo TIMBRO accanto**, col campo `versione_da
 ### ⛔ **E SI PROVA NEI DUE VERSI, con due cartelle SORELLE:** quella ### **viva** *(che contiene il file che gira)* ### **non e- contata**; quella ### **morta**, sorella nella stessa cartella e con lo stesso prefisso, ### **SI-.** ### ⚠ **Senza il secondo verso la cura avrebbe potuto SPEGNERE il controllo invece di correggerlo**, ed e- esattamente cio- che ha fatto la migrazione dei campi di `527e70c`. ### **`8` su `8`.**
 
 ### ⭐ **E LA <<CASA>> SI PUO- INIETTARE**, che non e- un lusso: senza iniezione quel braccio si potrebbe provare ### **solo stando davvero dentro un clone** — cioe- ### **solo nel caso che non si riesce a girare a mano.**
+
+## ✅ **PUNTO `3`: LA VERIFICA SU UN CLONE PULITO, TUTTA VERDE — e il clone NON C-E- PIU-** *(2026-10-10)*
+
+### 📌 **UN COMANDO SOLO, `python csv/_verifica_clone.py`**, su un clone di ### **`5a6dd0d`**, simulatore ### **`b8c21049`** *(verificato, non assunto)*:
+
+| il comando | senza CI | con `CI=true` |
+|---|---|---|
+| `valida` | ### **ok** `7.21` s | ### **ok** `7.44` s |
+| la suite dei collaudi | ### **ok** `169.03` s | ### **ok** `168.94` s |
+| la prossima domanda | ### **ok** `0.47` s | ### **ok** `0.35` s |
+
+### ✅ **E le tre cose che non sono comandi:** `git status` dopo tutto ### **VUOTO**; residui nel `%TEMP%` dei nostri prefissi ### **NESSUNO**; il clone ### **cancellato** *(e il `finally` lo dice: <<il clone e- stato cancellato: True>>)*.
+
+### ⭐ **E QUESTO E- IL PUNTO DEL MANDATO, non un dettaglio:** prima la verifica era ### **tre righe di shell che riscrivevo ogni volta**, e ### **lasciava un clone per corsa** — ### **`11` cloni, `6.8` GB**, ed e- cosi- che il disco si e- riempito. ### **Adesso e- uno STRUMENTO con un `finally`**, e il clone se ne va ### **anche quando tutto va storto.**
+
+### ⚠ **E IL CLONE COSTA QUASI NIENTE, perche- `--local` HARDLINKA gli oggetti:** la storia resta ### **intera** — e serve intera, perche- `H-P8` pretende il codice di prima ### **dal PADRE** e `_replay_registri` legge ### **lo storico dei commit**. ### ⛔ **Con `--depth 1` quei presidi passerebbero PER VACUITA-**, che e- peggio che non girarli.
