@@ -245,3 +245,35 @@ psi_a^dag (sigma.n) S   ->   - [ psi_a^dag (sigma.n) S ]*
 ### ⭐ **LA PREVISIONE, FISSATA ADESSO:** ### **`(D)` lega MEGLIO dell'elicita' locale del `v3`**, perche' ### **premia proprio l'interferenza COSTRUTTIVA** *(`c_k` alto)*: dove le ampiezze arrivano in fase, `|S|` e' grande e `h^S` lo e' con lei. ### ⛔ **E se non lega meglio, o non lega affatto, SI SCRIVE: e' un risultato.**
 
 ### ⚠ **E UNA COSA CHE NON PREVEDO, ma che misuro:** `(E)` e `(D)` ### **potrebbero coincidere su un grumo tutto in fase**, come `(A)` e `(B)` del `v1` coincidevano su un cluster in una sola banda. ### **Se succede, la lettura `(5)` e' l'unica che le separa** — e lo dico adesso per non chiamarlo una scoperta dopo.
+
+---
+
+## ⛔ **ANNOTAZIONE: LE LETTURE `G1` E `G2`, E LE LORO SOGLIE SCRITTE PRIMA DI MISURARE** *(mandato di Luca, `2026-10-11`, arrivato a `v3` in corso — e si esegue **ora che il `v3` e' concluso**: `R` verde al bit, referto committato)*
+
+### ✅ **IL CONTROLLO DI IDEMPOTENZA, FATTO PER PRIMO** *(il mandato lo mette prima di tutto)*: **`G1` e `G2` NON esistono** — `0` occorrenze qui, e in `uscite/` c'erano `letture.json`, `letture_v2.json`, `letture_v3.json`, `spettro.json` ma **non `letture_guscio_moto.json`.**
+
+### ⭐ **E SONO OSSERVATORI, NON LEGGI:** la dinamica resta **solo il passo `v3`**, e le letture **non retroagiscono.** ### ⛔ **Niente tocca `soliton_simulator.py` ne' `leggi.yaml`.**
+
+### **LE SOGLIE DI `G1`, fissate adesso**
+
+| | la domanda | la soglia |
+|---|---|---|
+| `a` | **esiste un anello in ANTIFASE?** | `cos dphi(r) < 0` **e** `\|cos dphi(r)\| > 3 sigma(r)`, con `sigma(r)` l'**errore standard pesato** sui nodi dell'anello. ### ⛔ **Un `cos` negativo ma dentro `3 sigma` NON e' un anello in antifase** |
+| `b` | la **fase** come si confronta | ### **SOLO TRASPORTATA** *(`V4`)*: `z = S_c^dag (prodotto U lungo il cammino) S_k`, e `cos dphi = Re(z)/\|z\|` — ### **invariante di gauge per costruzione.** ### ⚠ **Se i cammini piu' corti sono piu' d'uno, si riportano TUTTI e la loro dispersione** |
+| `c` | la **cancellazione** sul bordo | `1 - c_k` con `c_k = \|S_k\|^2/(d_k rho_k)`, cioe' **il complemento della coerenza**: ### **non una grandezza nuova.** <<Significativa>> = differisce dal **lineare** di piu' di `3 sigma` sui `4` semi |
+| `d` | i **controlli** | `N` **spento** *(il `v2` lineare)* e il **controllo PARI** `\|S\|^2` *(`V7`)* |
+
+### **LE SOGLIE DI `G2`, fissate adesso**
+
+| | la domanda | la soglia |
+|---|---|---|
+| `a` | **si avvicinano?** | la pendenza della **separazione** *(distanza di grafo fra i centri)* nel tempo: ### **<<si avvicinano>>** se `< -3 sigma`, ### **<<si allontanano>>** se `> +3 sigma`, ### **<<restano>>** altrimenti |
+| `b` | **sono LEGATI?** | `Q(D) - 2 Q(inf)` con `Q` la **conservazione modificata del `v3`** *(`V8`: col nome che ha, e **non** <<energia>>)*: ### **legati** se `< -3 sigma_Q` |
+| `c` | **la fase relativa conta?** | si confronta `Q(D)` a fase **`0`** e **`pi`** *(definite per trasporto)*: ### **conta** se la differenza supera `3 sigma_Q` |
+| `d` | a `D = 0`: **saturazione o REPULSIONE?** | ### **SATURAZIONE** = la separazione cresce **come nel lineare** *(entro `3 sigma`)*; ### **REPULSIONE** = cresce **di piu'**, e ### **la velocita' di separazione CRESCE con l'ampiezza iniziale** |
+| `e` | **il composito si muove?** | la distanza del **secondo** centro dal suo nodo di partenza ha pendenza compatibile con quella del **primo** entro `3 sigma` ⇒ ### **segue**; se la **separazione** cresce oltre `3 sigma` ⇒ ### **si separano** |
+| `f` | `D` disponibili | ### ⚠ **MISURATO PRIMA: l'eccentricita' dell'irregolare e' `6`**, quindi `D = 1..8` **non esiste la'**: si usa `D = 1..6` sull'irregolare e `D = 1..8` sul **regolare** *(eccentricita' `30`)*, e ### **lo si dichiara invece di troncare in silenzio** |
+
+### ⛔ **E I NOVE VINCOLI SI RISPETTANO COSI':** `V1` le letture **leggono** e la dinamica e' **solo** il passo `v3`; `V2` **nessuna costante nuova** — i parametri delle condizioni iniziali *(ampiezza, distanza, spinta)* sono ### **parametri di LETTURA, scansionati e dichiarati**; `V3` si riporta ### **il tick E il `tau` locale** *(nel banco `r = 1`, quindi coincidono: e lo scrivo invece di lasciarlo sottinteso)*; `V4` **ogni** fase e' trasportata; `V5` ### **niente assi**: distanze di grafo e nodi; `V6` **scala minima un arco**; `V7` le condizioni iniziali **anche coniugate**; `V8` `Q` **si chiama conservazione modificata**; `V9` a `N` spento ### **tutto coincide col `v2` AL BIT.**
+
+### ⭐ **E UNA PREVISIONE, perche' una lettura senza previsione e' una pesca:** ### ⛔ **mi aspetto NESSUN anello in antifase e NESSUNO stato legato** — perche' il `v3` ha gia' misurato che ### **nessuna delle tre forme lega un grumo** *(il rapporto col fondo uniforme resta quello del lineare)*. ### ✅ **Se un anello in antifase c'e' ANCHE senza grumo, e' una scoperta; se non c'e', e' la conferma che il guscio ha bisogno di un nucleo.**
