@@ -172,7 +172,20 @@ def collaudo():
     esito("### il collaudo ha MATERIA: ci sono voci con `meta.omonimo`",
           len(omon) >= 11,
           "%d: ### il metadato RESTA, e- un FATTO -- la decisione di Luca lo dice" % len(omon))
-    dentro = [i for i in omon if ("`%s`" % i) in elenco]
+    # ### ⛔ **LA COLONNA DELL-ID, NON UNA SOTTOSTRINGA -- e me l-ha insegnato un
+    # ### FALSO FALLIMENTO.** Cercavo ### **`` `D4` `` nel testo**, e `D4` compariva
+    # ### ### **nella DOMANDA di un-altra voce** *(`DEC-ALBERO-CINQUE-SENZA-ARGOMENTO`,
+    # ### che chiede di che cosa decidano i nodi `D4`, `D2`, `D11`, `D12`, `T4`)*.
+    # ### ⚠ **Quindi il braccio diceva <<ANCORA DENTRO>> mentre l-omonimo era fuori**,
+    # ### ed e- ### **lo stesso errore di una regex che non distingue un commento da un
+    # ### uso** -- il terzo della giornata.
+    # ### ✅ **Adesso guarda la PRIMA COLONNA della riga**, che e- dove il generato
+    # ### mette l-id: ### **la struttura, non il testo.**
+    _in_col = set()
+    for _r in elenco.split(NL):
+        if _r.startswith("| `"):
+            _in_col.add(_r.split("`")[1])
+    dentro = [i for i in omon if i in _in_col]
     esito("NON deve scattare: un omonimo NON e- piu- in `DA_DECIDERE_LUCA.md`",
           dentro == [],
           "### il criterio ② e- TOLTO: <<la domanda si chiude>> E <<il metadato resta>>"

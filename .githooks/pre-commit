@@ -44,6 +44,14 @@ python "$(git rev-parse --show-toplevel)/csv/_rami_era2.py" || exit 1
 #  ### e' una ragione per dare --no-verify.
 python "$(git rev-parse --show-toplevel)/csv/_replay_registri.py" || exit 1
 
+#  IL COLLAUDO DELLA CATENA -- e sta QUI perche' L'HO MISURATO: 2.55 s.
+#  ### Era classificato <<LENTO, oltre i 120 secondi>>, e quel numero era di
+#  ### un'altra cosa: i lenti veri sono i GENERATORI DI REFERTO (45.99 e 28.33 s).
+#  ### Un comando che STAMPA I TEMPI (`primo_ordine/collauda.py`) l'ha trovato,
+#  ### e una classificazione ASSERITA invece che misurata e' esattamente cio' che
+#  ### il par. 2 dice di non fare.
+python "$(git rev-parse --show-toplevel)/primo_ordine/_collauda_passo.py" || exit 1
+
 #  `P-BARRIERA` -- I HOOK LOCALI SONO LA BARRIERA.
 #  ### E qui c'e' una cosa da sapere: questo hook COLLAUDA SE STESSO, cioe'
 #  ### l'impronta DI QUESTO FILE. Quindi ogni volta che si cambia un hook,

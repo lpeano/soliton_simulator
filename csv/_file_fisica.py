@@ -49,6 +49,7 @@ FILE_FISICA = (
     'primo_ordine/grafo.py',
     'primo_ordine/determinismo.py',
     'primo_ordine/simmetrie.py',
+    'primo_ordine/collauda.py',
     'primo_ordine/crescita.py',
     'primo_ordine/vuoto.py',
     'primo_ordine/driver.py',

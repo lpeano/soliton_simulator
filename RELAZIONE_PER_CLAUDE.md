@@ -11883,3 +11883,19 @@ Ogni dato di `db_era2/` ha ### **il suo TIMBRO accanto**, col campo `versione_da
 ### 📌 **Collaudo `11` su `11`**, col ramo ### **END-TO-END** che fa girare ### **uno strumento vero** con `core.hooksPath` sbagliato e pretende il ### **codice `3`.** ### ✅ **E rimette la configurazione di git in un `finally`, VERIFICANDOLA:** ### **un collaudo che lascia `core.hooksPath` storto SPEGNEREBBE LA BARRIERA CHE STA COLLAUDANDO.**
 
 ### ⚠ **E UNA COSA DA SAPERE SULL-ORDINE: questo hook COLLAUDA SE STESSO.** Ho dovuto ### **aggiungere la riga al `pre-commit` PRIMA** di scrivere il `.lock`, altrimenti avrei dichiarato l-impronta ### **di un file che stavo per cambiare.** ### **D-ora in poi: si cambia un hook, poi `python csv/_barriera.py --scrivi`, e la diff del `.lock` lo mostra.**
+
+## PUNTO `6`: UN SOLO COMANDO E I TEMPI — ### **e al primo giro ha corretto un numero CHE AVEVO SCRITTO IO** *(2026-10-10)*
+
+### ⭐ **LA COSA PIU- UTILE DI QUESTO PUNTO NON E- IL BUDGET: E- CHE UN COMANDO CHE STAMPA I TEMPI HA TROVATO UNA MIA CLASSIFICAZIONE ASSERITA INVECE CHE MISURATA.** Il collaudo della catena era dichiarato ### **LENTO, <<oltre i `120` secondi>>**, e ### ⛔ **misura `2.55` SECONDI.** ### **Quel numero era di un-altra cosa.**
+
+### 📌 **I LENTI VERI SONO I GENERATORI DI REFERTO:** `csv/_referto_seconda_parte.py` ### **`45.99 s`** e `csv/_referto_infrastruttura_era2.py` ### **`28.33 s`** — ### ⚠ **e nemmeno loro superano i `120` da soli: li superano SOMMATI a tutto il resto.** ### ✅ **Quindi la catena e- ENTRATA nel `pre-commit`, che adesso e- piu- forte di prima** — e ho corretto il numero sbagliato ### **in tutti e tre i posti dove l-avevo scritto.**
+
+### 📌 **I NUMERI MISURATI** *(Windows AMD64, python `3.13.2`, `2026-10-10`)*: ### **`17` collaudi, TUTTI PASSANO**; il `pre-commit` costa ### **`44.4 s` su `120`, il `37%`**; i lenti ### **`72.7 s`**; in tutto ### **`117.1 s`.**
+
+### ⛔ **E <<OLTRE IL BUDGET → SEGNALE>> E- LA PARTE CHE CONTA, non il budget.** Un budget che ### **FERMA** sarebbe un presidio sul ### **tempo di una macchina** — e il tempo di una macchina ### **non e- una proprieta- del repo**: cambia col PC, col carico, col disco. ### **Fermare su quello vorrebbe dire rifiutare un commit perche- il computer era occupato.** ### ✅ **Un SEGNALE invece dice una cosa vera: <<questo `pre-commit` sta diventando una ragione per dare `--no-verify`>>** — ed e- ### **il difetto di `A9` arrivato dal lato del tempo.**
+
+### ⚠ **E I COLLAUDI SONO DICHIARATI UNO A UNO, non scoperti con un `glob`:** un `glob` prenderebbe ### **anche un file nuovo che nessuno ha ancora guardato**, e ### **un collaudo che nessuno ha DECISO di far girare non e- una garanzia.**
+
+### 📌 **E I TEMPI NON SONO UN NUMERO DEL REPO: sono una MISURA DI QUESTA MACCHINA**, e il comando li stampa ### **con la piattaforma accanto** — ### **un tempo senza la macchina che l-ha prodotto non si confronta con niente.**
+
+### ⚠ **E DUE FALSI FALLIMENTI MIEI, trovati dal comando unico.** ### **(1)** Il braccio di `P-ID` cercava ### **`` `D4` `` come SOTTOSTRINGA** in `DA_DECIDERE_LUCA.md`, e `D4` compariva ### **nella DOMANDA di un-altra voce** — quindi diceva *«ancora dentro»* mentre l-omonimo era fuori. ### ⭐ **E- lo stesso errore di una regex che non distingue un commento da un uso: il TERZO della giornata.** ### ✅ **Adesso guarda la PRIMA COLONNA della riga: la struttura, non il testo.** ### **(2)** Il braccio end-to-end di `P-ALB` falliva perche- ### **`valida` usciva `1` per la ricorrenza dello storico** — e il braccio ### **ha fatto il suo lavoro**: dice *«scattava per l-albero, non per qualcos-altro»*, e non era per l-albero.

@@ -112,7 +112,10 @@ REGISTRI = {
 # =====================================================================================
 # ### ⚠ **E I GENERATI SI DIVIDONO IN VELOCI E LENTI, per una ragione MISURATA:**
 # ### `csv/_referto_infrastruttura_era2.py` ### **FA GIRARE I SETTE COLLAUDI** per
-# ### prendere i numeri, e dal punto `8` ### **supera i 120 secondi.**
+# ### prendere i numeri. ### ⚠ **E QUI AVEVO SCRITTO <<supera i 120 secondi>>:**
+# ### ### **MISURATO il 2026-10-10 dal punto `6` della terza parte: `28.33` s** -- e
+# ### il collaudo della catena, che avevo chiamato lento, ### **`2.55` s.**
+# ### ⭐ **Il numero era di un-altra cosa, e l-ho scoperto SOLO MISURANDO.**
 # ### ⛔ **Un presidio di `pre-commit` che costa due minuti NON E- UN PRESIDIO: e-
 # ### una ragione per dare `--no-verify`.**
 # ### ✅ **Quindi i VELOCI stanno nel `pre-commit`, i LENTI SOLO nella CI**, e il

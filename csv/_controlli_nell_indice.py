@@ -66,6 +66,7 @@ SORGENTI = (
     "primo_ordine/determinismo.py",
     "primo_ordine/leggi/schema.py",
     "primo_ordine/simmetrie.py",
+    "primo_ordine/collauda.py",
     "csv/indice.py",
     "csv/_hook_presidi.py",
     "csv/_hook_id_obbligatorio.py",

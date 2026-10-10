@@ -11,7 +11,7 @@
 | `FISICA` | `2` | 20 |
 | `FISICA` | `ENTRAMBE` | 17 |
 | `INFRASTRUTTURA` | `1` | 39 |
-| `INFRASTRUTTURA` | `2` | 13 |
+| `INFRASTRUTTURA` | `2` | 14 |
 | `INFRASTRUTTURA` | `ENTRAMBE` | 15 |
 | `METODO` | `1` | 156 |
 | `METODO` | `2` | 9 |
@@ -463,6 +463,7 @@
 | `P-T1` | PRESIDIO | METODO | ENTRAMBE | ### **APERTA** |  | il TESTO LIBERO non si interpreta per decidere: chi RIFIUTA legge solo campi str |
 | `P-T2` | PRESIDIO | METODO | ENTRAMBE | ### **APERTA** |  | il REPLAY su TUTTI i registri, e i testi generati che si rigenerano byte-identic |
 | `P-T3` | PRESIDIO | METODO | ENTRAMBE | ### **APERTA** |  | le CITAZIONI sono STRUTTURATE e si ri-verificano su git show, non a occhio |
+| `P-TEMPI` | PRESIDIO | INFRASTRUTTURA | 2 | ### **AGENDA** |  | un solo comando per tutti i collaudi, coi TEMPI, e il budget SEGNALA invece di r |
 | `P0` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 12 volte, MAI definito in un registro; citato solo in referti/sigilli/ta |
 | `P1` | STANDARD | METODO | ENTRAMBE | ### **APERTA** |  | NON USARE L'ASSOCIAZIONE SENZA VERIFICARE LO STORICO. |
 | `P1-bis` | STANDARD | METODO | ENTRAMBE | ### **APERTA** |  | LA RELAZIONE SI SCRIVE NELLO STESSO COMMIT DEL RISCONTRO |

@@ -50,6 +50,10 @@ moduli:
     responsabilita: le simmetrie simboliche e le soglie DERIVATE delle conservazioni
     importa: []
 
+  - nome: collauda.py
+    responsabilita: un solo comando per tutti i collaudi, coi TEMPI e il budget
+    importa: []
+
   - nome: _collauda_simmetrie.py
     responsabilita: il collaudo delle simmetrie e delle conservazioni misurate
     importa: [driver, hamiltoniana, passo, schema_config, simmetrie, stato]

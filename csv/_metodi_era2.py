@@ -581,6 +581,17 @@ METODI['P-E9'] = (
 METODI['P-AB'] = (
     'NATO NELL-ERA 2: un `A`/`B` dichiara IL CAMPO UNICO in cui i bracci differiscono, e se ne differiscono due ### IL CONFRONTO NON PARTE (la lezione di `Z20`: due misure sovrapposte). ### Piu- i dati con la versione del formato e nessun file a meta-',
     '`csv/_confronti_e_dati.py::controlla`, `pre-commit` + CI', "PORTATO")
+METODI['P-TEMPI'] = (
+    "NATO NELL-ERA 2: `python primo_ordine/collauda.py` fa girare TUTTI i collaudi "
+    "dichiarati, stampa il tempo di ognuno, e confronta il totale col budget di 120 s. "
+    "### E OLTRE IL BUDGET E- UN SEGNALE, NON UN RIFIUTO: il tempo di una macchina non e- "
+    "una proprieta- del repo, e fermare su quello vorrebbe dire rifiutare un commit "
+    "perche- il computer era occupato. ### Ma un `pre-commit` troppo lento E- UNA RAGIONE "
+    "PER DARE `--no-verify`, che e- `A9` dal lato del tempo. ### AL PRIMO GIRO HA "
+    "CORRETTO UNA MIA CLASSIFICAZIONE SBAGLIATA: la catena era dichiarata <<lenta, oltre "
+    "120 s>> e misura 2.55 s",
+    "`primo_ordine/collauda.py`; MISURATO: 17 collaudi, pre-commit 44.4 s su 120 (37%)",
+    "PORTATO")
 METODI['P-BARRIERA'] = (
     "NATO NELL-ERA 2: ogni strumento verifica all-avvio che i hook LOCALI siano attivi "
     "(`core.hooksPath`, i due file, LA LORO IMPRONTA) e SI RIFIUTA DI PARTIRE (codice 3). "

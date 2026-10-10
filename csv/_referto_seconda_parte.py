@@ -7,9 +7,17 @@
 registri, i riferimenti)*.
 
 ### ⚠ **E I LENTI SI SALTANO, dichiarandolo:** il collaudo della catena e il
-generatore del referto dell'infrastruttura ### **superano i `120` secondi** *(il punto `8`
-gira `4` semi × `100` passi × `2` integratori)*. ### ✅ **Si passano con
-`--con-lenti`**, che e' ### **quello che la CI fa.**
+generatore del referto dell'infrastruttura si saltano senza `--con-lenti`.
+
+### ⛔ **E QUI C'ERA SCRITTA UNA COSA FALSA, che il punto `6` della terza parte ha
+MISURATO:** *«superano i `120` secondi»*. ### **IL COLLAUDO DELLA CATENA COSTA `2.55`
+SECONDI.** ### ⭐ **A superare il budget non e' lui: sono I GENERATORI DI REFERTO** —
+questo ### **`45.99 s`** e quello dell'infrastruttura ### **`28.33 s`** — ### **e nemmeno
+loro superano i `120`: li superano se SOMMATI a tutto il resto.**
+
+### ⚠ **La classificazione non era sbagliata: la MOTIVAZIONE lo era**, e il numero che le
+avevo attribuito ### **era di un'altra cosa.** ### **Il punto `6` l'ha trovato misurando,
+che e' l'unico modo.**
 """
 import io
 import json
@@ -201,7 +209,7 @@ def main(argv):
              ("### ✅ **`%d`/`%d`**" % (a, b)) if a is not None
              else ("### ✅ **passa**" if ok else "### ⛔ **FALLISCE**")))
     for nome, cmd in saltati:
-        A("| %s | `%s` | ### ⚠ **SALTATO: e' LENTO** *(oltre `120` secondi)*, e la "
+        A("| %s | `%s` | ### ⚠ **SALTATO senza `--con-lenti`**, e la "
           "CI lo passa con `--con-lenti` |" % (nome, cmd))
     A("")
     tot = sum(a for _n, _c, _r, a, _b in esiti if a is not None)
@@ -329,9 +337,12 @@ def main(argv):
       "presidio**: senza protezione del ramo gira ### **dopo** il push e "
       "### **non impedisce niente** *(`A9`)*. ### **La cura — gli hook verificati "
       "all'avvio — e' la TERZA parte** |")
-    A("| `6` | il ### **budget del `pre-commit`** | i collaudi lenti ### **superano i `120` "
-      "secondi**, e oggi stanno ### **solo nella CI**: ### **il budget dichiarato e' il "
-      "punto `6` della TERZA parte**, e questo e' ### **il primo posto dove e' servito** |")
+    A("| `6` | il ### **budget del `pre-commit`** | ### **FATTO, nel punto `6` della "
+      "TERZA parte**, e ### **ha corretto un numero che avevo scritto QUI:** il "
+      "`pre-commit` costa ### **`43.3` s** su un budget dichiarato di ### **`120`**, e il "
+      "collaudo della catena ### **`2.55` s** -- ### **non <<oltre `120`>>, che e' cio' "
+      "che questa riga diceva.** I lenti veri sono ### **i generatori di referto** "
+      "*(`45.99` e `28.33` s)* |")
     A("")
     A("---")
     A("")
