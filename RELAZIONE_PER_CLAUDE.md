@@ -12191,3 +12191,13 @@ Ogni dato di `db_era2/` ha ### **il suo TIMBRO accanto**, col campo `versione_da
 ### ✅ **E `Z47` e `DEC-Z47-TRANSIZIONE` sono USCITE DA `DA_DECIDERE_LUCA.md`, come il mandato chiede: `0` occorrenze, e restano `3` domande.** ### ⚠ **E sono uscite perche- la loro `nota_guardiano` PORTA LA RISPOSTA**, non perche- le ho cancellate: ### **la lista si genera dai criteri**, e una domanda esce ### **quando ha una risposta scritta.**
 
 ### ⛔ **IL `pre-commit` VALIDA IL DISCO E NON LO STAGE** *(mandato di Luca, 2026-10-10, subito dopo la voce ⑦)*. ### 📌 **Il guardiano, su un clone pulito di `c68b635`:** `valida` FALLISCE — `PI-REPLAY` su `Z47` e `Z103`, perche- quel commit porta ### **4 righe di storico SENZA `voci.jsonl`**. ### ⭐ **E L-ESPOSIZIONE L-HO CREATA IO poche ore prima:** `_stage_storico()` mette lo storico ### **in stage appena ci scrive**, e `git commit` committa ### **l-INDICE** — quindi un commit che non fa `git add` di `voci.jsonl` ### **si porta le righe da sole.** ### ⚠ **Il presidio non l-ha visto perche- guarda IL DISCO**, dove la voce era gia- cambiata: ### **validava uno stato che il commit NON conteneva.** ### ✅ **E il punto 1 e- GIA- a posto: su un clone pulito di `e59c151` `valida` passa** — verificato, non dato per buono.
+
+## LA SUITE LASCIA L-ALBERO COME L-HA TROVATO — ### **e un albero sporco non e- un fastidio: e- una DIAGNOSI** *(2026-10-10)*
+
+### 📌 **RICHIESTA DI LUCA, punto `3`:** *«ogni collaudo deve lasciare l-albero come l-ha trovato. ### **Braccio: dopo la suite, `git status` VUOTO**»*.
+
+### ✅ **MISURATO: la suite sporcava TRE file**, non quattro — `doc/REFERTO_infrastruttura_era2.md`, `doc/indice/_controlli.txt`, `doc/COLLAUDO_presidio_indice.txt`. ### ⚠ **E la causa non era un collaudo capriccioso: quei tre sono GENERATI, e le versioni COMMITTATE erano SCADUTE** — scadute ### **per i miei commit di oggi**, che hanno fatto crescere l-indice *(`916` → `918` voci, `2099` → `2110` righe di storico)* ### **senza riportare i generati.**
+
+### ⭐ **QUINDI IL BRACCIO GIUSTO NON DICE «non scrivere»: DICE QUALE FILE E PERCHE-.** Un albero sporco dopo la suite vuol dire ### **che un file generato e committato e- scaduto**, e che ### **il commit che ha cambiato cio- che quel file racconta non ha portato il suo generato.** ### **E- una diagnosi, non un fastidio.**
+
+### ✅ **E I BYTE SI RIMETTONO A POSTO — ma SOLO quelli che la suite ha sporcato LEI.** ### ⛔ **Non cio- che era gia- sporco:** rimettere a posto il lavoro di qualcun altro ### **sarebbe peggio del difetto**, e il braccio confronta ### **il PRIMA col DOPO** invece di guardare solo il dopo. ### ⚠ **E il ripristino NON e- silenzioso: i nomi restano stampati**, e l-albero sporco ### **entra nel codice d-uscita.**

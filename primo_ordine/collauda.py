@@ -217,6 +217,18 @@ def censimento():
     return err
 
 
+def _sporchi():
+    """### I file che `git` vede ### **cambiati adesso**, come insieme di percorsi."""
+    r = subprocess.run(["git", "status", "--porcelain"], cwd=RADICE,
+                       capture_output=True, text=True, encoding="utf-8",
+                       errors="replace")
+    fuori = set()
+    for riga in (r.stdout or "").split(NL):
+        if len(riga) > 3:
+            fuori.add(riga[3:].strip().strip('"'))
+    return fuori
+
+
 def gira(cmd):
     """### `(secondi, codice)`. ### **Il tempo lo misura `perf_counter`**, non `time`."""
     pezzi = cmd.split()
@@ -294,6 +306,17 @@ def main(argv):
     # ### gira altrove e non e- dichiarato qui, ### **questo comando NON PUO- dire
     # ### <<tutto verde>>** -- direbbe verde su cio- che non ha girato.
     fuori_lista = censimento()
+    # ### \u26d4 **L-ALBERO PRIMA, perche- la suite deve lasciarlo COME L-HA TROVATO.**
+    # ### \u26a0 **Richiesta di Luca, 2026-10-10:** *<<ogni collaudo deve lasciare
+    # ### l-albero come l-ha trovato. Braccio: dopo la suite, `git status` VUOTO>>*.
+    # ### \u2b50 **E un albero sporco dopo la suite NON e- un fastidio: e- una
+    # ### DIAGNOSI** -- vuol dire che ### **un file generato COMMITTATO e- SCADUTO**, e
+    # ### che il commit che l-ha cambiato ### **non ha portato il suo generato.**
+    # ### \u2705 **Quindi si misura, si DICE QUALE, e si RIMETTE A POSTO** -- ma
+    # ### ### **solo cio- che la suite ha sporcato LEI**, non cio- che era gia- sporco:
+    # ### rimettere a posto il lavoro di qualcun altro sarebbe ### **peggio del
+    # ### difetto.**
+    _prima = _sporchi()
     print("=" * 100)
     print("TUTTI I COLLAUDI, CON I TEMPI   (punto 6)")
     print("=" * 100)
@@ -339,6 +362,21 @@ def main(argv):
         print("  ### il `pre-commit` sta nel budget: %.1f s su %.0f s (%.0f%%)"
               % (tot["pre-commit"], BUDGET, 100.0 * tot["pre-commit"] / BUDGET))
     print("=" * 100)
+    _sporcati = sorted(_sporchi() - _prima)
+    if _sporcati:
+        print()
+        print("  ### ⛔ LA SUITE HA SPORCATO %d FILE, e un collaudo deve lasciare "
+              "l-albero come l-ha trovato:" % len(_sporcati))
+        for f in _sporcati[:8]:
+            print("     %s" % f)
+        print("  ### Vuol dire che un file GENERATO e COMMITTATO e- SCADUTO: il commit")
+        print("  ### che ha cambiato cio- che quel file racconta NON HA PORTATO IL SUO")
+        print("  ### GENERATO. ### I byte si RIMETTONO A POSTO adesso, e il difetto RESTA")
+        print("  ### SCRITTO QUI: rimetterli a posto in silenzio sarebbe nasconderlo.")
+        for f in _sporcati:
+            subprocess.run(["git", "checkout", "--", f], cwd=RADICE,
+                           capture_output=True)
+        print("  ### byte RIMESSI A POSTO: %d file" % len(_sporcati))
     if fuori_lista:
         print()
         print("  ### ⛔ IL CENSIMENTO TROVA %d COLLAUDI CHE GIRANO E NON SONO "
@@ -350,7 +388,7 @@ def main(argv):
     print("=" * 100)
     # ### ⛔ **IL CODICE D-USCITA GUARDA I COLLAUDI E IL CENSIMENTO, NON I TEMPI:**
     # ### il budget ### **segnala** e ### **non rifiuta**, ed e- scritto sopra.
-    return 1 if (rotti or fuori_lista) else 0
+    return 1 if (rotti or fuori_lista or _sporcati) else 0
 
 
 if __name__ == "__main__":
