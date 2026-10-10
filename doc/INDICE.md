@@ -16,7 +16,7 @@
 | `INFRASTRUTTURA` | `ENTRAMBE` | 19 |
 | `METODO` | `1` | 156 |
 | `METODO` | `2` | 9 |
-| `METODO` | `ENTRAMBE` | 86 |
+| `METODO` | `ENTRAMBE` | 87 |
 
 | id | classe | dominio | era | stato | blocca | titolo |
 |---|---|---|---|---|---|---|
@@ -54,7 +54,7 @@
 | `A8b` | STANDARD | METODO | ENTRAMBE | ### **APERTA** |  | COROLLARIO: le cache CROSS-PASSO |
 | `A9` | STANDARD | METODO | ENTRAMBE | ### **APERTA** |  | UN PRESIDIO CHE NON IMPEDISCE NON E' UN PRESIDIO |
 | `AB-CONTROLLI` | DIFETTO | METODO | 1 | ### **SOSPESA** |  | l'A/B di W5 non ha salvato i punti di CONTROLLO nel vuoto, e senza quelli la den |
-| `AGGIORNA-RIFIUTAVA-SE-STESSO` | DIFETTO | INFRASTRUTTURA | ENTRAMBE | ### **APERTA** |  | il percorso UNICO di scrittura dell-indice falliva per qualunque modifica |
+| `AGGIORNA-RIFIUTAVA-SE-STESSO` | DIFETTO | INFRASTRUTTURA | ENTRAMBE | ### **CHIUSA** |  | il percorso UNICO di scrittura dell-indice falliva per qualunque modifica |
 | `ALLUNG-RELATIVO` | DIFETTO | METODO | 1 | ### **SOSPESA** |  | il criterio V6 dell'allungamento sottrae variazioni relative con DENOMINATORI DI |
 | `ANCORE-1` | DIFETTO | METODO | 1 | ### **SOSPESA** |  | APERTA il 2026-09-25 / 25 SIGILLI PRENDONO «IL CODICE DI PRIMA» DA HEAD (43 occo |
 | `ARCH-LCONSERVA` | CURA | INFRASTRUTTURA | 1 | ### **CHIUSA** |  | _togli_rotazione_rigida esce dal simulatore; L_CONSERVA diventa un no-op accetta |
@@ -187,6 +187,7 @@
 | `CONSERVAZIONE-LOCALE` | FRONTE | FISICA | 2 | ### **AGENDA** |  | A14: ogni legge si giudica su tre domande -- energia locale, carica locale, tota |
 | `CONTA-RIGHE` | FRONTE | METODO | ENTRAMBE | ### **APERTA** |  | DUE CONVENZIONI PER CONTARE LE RIGHE: i miei strumenti contavano uno in piu' di  |
 | `CONTO-BOOLEANI-P5` | DIFETTO | METODO | 1 | ### **SOSPESA** |  | i booleani di modulo contati da P5 sono passati da 79 a 82 col simulatore INTATT |
+| `CONTROLLO-CONTRO-ATTESA-CONGELATA` | DIFETTO | METODO | ENTRAMBE | ### **APERTA** |  | un controllo della migrazione gridava fuori posto su un lavoro CHIESTO da Luca |
 | `COPPIA-RAMP` | FRONTE | FISICA | 1 | ### **SOSPESA** |  | APERTA il 2026-09-26 / PERCHE' LA COPPIA NON PORTA ramp? Misurato sui figli (2 s |
 | `COSA-RICONTROLLARE` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 3 volte, MAI definito in un registro) [COSA-RICONTROLLARE] |
 | `CRESCITA-DOPO-Z43` | MISURA | FISICA | 1 | ### **SOSPESA** |  | con r = cs/CS_M la rete quasi non cresce: ~25 nascite contro ~1500 in 150 passi |

@@ -247,6 +247,31 @@ def main():
             d = "METODO"
         return d, e, s
 
+    # ### ⛔ **LA REGOLA DEL `2026-10-10`, e non un-altra lista di ID.**
+    # ### `C3` confronta lo stato di OGGI con ### **l-attesa della MIGRAZIONE**, e una
+    # ### ### **decisione di Luca presa DOPO** sposta legittimamente una voce: le
+    # ### ### **43 decisioni** hanno portato OTTO voci a `SUPERATA` *(sette da `A16`, una
+    # ### da `A17`)*, e il controllo gridava ### **<<fuori posto>>** su un lavoro
+    # ### ### **CHIESTO.**
+    # ### ⭐ **E LA REGOLA GIUSTA NON E- <<queste otto sono ammesse>>:** e-
+    # ### ### **<<una voce spostata da una SCRITTURA DICHIARATA non e- fuori posto>>** --
+    # ### perche- ### **l-autorita- su dove sta una voce e- lo STORICO**, non la lista
+    # ### della migrazione. ### ✅ **Cosi- il controllo non va riscritto alla
+    # ### prossima decisione**, ed e- il criterio che questo stesso file dichiara:
+    # ### *<<si scrive la REGOLA, non i 6 ID che oggi la esercitano>>*.
+    # ### ⚠ **E I DENTI RESTANO: una voce mossa SENZA una riga di storico grida
+    # ### ancora** -- e- il caso <<qualcuno ha scritto a mano>>, che `PI-REPLAY` vede dal
+    # ### suo lato e che qui si vede da questo.
+    mosse = {}
+    for _l in io.open(os.path.join(D, "storico.jsonl"), encoding="utf-8"):
+        if not _l.strip():
+            continue
+        _r = json.loads(_l)
+        _p, _d = _r.get("prima") or {}, _r.get("dopo") or {}
+        if any(str(_p.get(_k, "")) != str(_d.get(_k, ""))
+               for _k in ("dominio", "era", "stato")):
+            mosse.setdefault(_r["id"], []).append(_r.get("motivo", ""))
+
     guai = []
     for idv, (dom, _p) in MG.L1.items():
         v = per.get(idv)
@@ -265,9 +290,13 @@ def main():
             guai.append("L3 " + idv)
     nei_conflitti = {x["id"] for x in confl}
     guai = [g for g in guai if g.split(" ", 1)[1] not in nei_conflitti]
+    spostate = [g for g in guai if g.split(" ", 1)[1] in mosse]
+    guai = [g for g in guai if g.split(" ", 1)[1] not in mosse]
     esito("C3 LE LISTE DEL GUARDIANO: classificazione come indicata",
-          not guai, "fuori posto %d%s" % (len(guai),
-                                          ("  " + " ".join(guai[:6])) if guai else ""))
+          not guai, "fuori posto %d%s; e %d SPOSTATE da una scrittura DICHIARATA%s"
+          % (len(guai), ("  " + " ".join(guai[:6])) if guai else "", len(spostate),
+             ("  " + " ".join(x.split(" ", 1)[1] for x in spostate[:8]))
+             if spostate else ""))
 
     # ---------------------------------------------- C4 IDEMPOTENZA
     # ### ⛔ **QUESTO CONTROLLO MI HA CANCELLATO 867 CLASSIFICAZIONI, e lo scrivo qui
