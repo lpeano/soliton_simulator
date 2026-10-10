@@ -3100,3 +3100,17 @@ etichette rimosse, con ### **`0` persi, `0` doppi, `0` conflitti**.
 | ⭐ **IL NUMERO ESATTO** | con `c` cicli indipendenti: identita- ### **`2(m-n)+4` e `2(m-n)`** *(`4c` in tutto)*, curva ### **`2(m-n)` due volte** *(`4c-4`)*. ### **Verificato su DUE grafi**: `356`/`352` sull-irregolare, `484 = 4x121`/`480` sul regolare |
 | ✅ **E `eps` LI DISTRUGGE TUTTI** | `0` stati intrappolati gia- a `eps = 0.25`, in tutte le scene e su entrambi i grafi |
 | ⚠ **LA MOLTEPLICITA- NON SI CONTA DAGLI AUTOVETTORI** | su un autospazio ### **degenere** `eig` da- ### **una base qualunque**, quindi <<sono localizzati?>> ### **non vuol dire niente**: si contano gli ### **autovalori**, e si conferma col ### **rango** |
+
+### `proto_camminata/` **`v3`** — **IL VUOTO LOCALE DETERMINISTICO E LA SATURAZIONE SENZA `g`** *(2026-10-11)*
+
+| | |
+|---|---|
+| **i file** | `vuoto3.py` *(BLOB `ff7c12df`)* · `saturazione3.py` *(BLOB `cb72fd11`)* · `camminata3.py` *(BLOB `60d9abb2`)* · `_collauda_banco3.py` *(BLOB `f809c964`)* |
+| **COMANDO** | `python proto_camminata/_collauda_banco3.py` *(### **`21`/`21`**, `0.93` s)* · `python proto_camminata/vuoto3.py` · `python proto_camminata/saturazione3.py` · `python proto_camminata/camminata3.py` |
+| **che cosa misura** | il ### **vuoto locale** *(un-ampiezza NEUTRA per estremita-, mescolata da Grover e spostata SENZA `U`)* e la ### **saturazione hamiltoniana** `N = Lambda G(h/Lambda)` con `G(x) = x - arctan x`, in ### **composizione simmetrica di Strang** |
+| ⭐ **IL PRIMO BRACCIO E- LA REGRESSIONE** | con `N` spento e il vuoto presente, lo spinore evolve ### **AL BIT come nel `v2`** *(`0` esatto, nelle TRE scene)*: ### **il `v3` NON invalida il `v2`** |
+| ✅ **IL FLUSSO E- IN FORMA CHIUSA, e il motivo e- misurato** | una rotazione ### **attorno al versore** lascia `h` invariante *(`3.5e-18`)* e una fase lascia `Lambda` *(`8.9e-16`)*, quindi ### **`x`, `G'` e `b` sono COSTANTI durante il flusso** — ### **nessun integratore, nessun troncamento** |
+| ✅ **LE DERIVATE SI VERIFICANO, non si assumono** | `dN/dh` contro `G'(x)`: ### **`4.5e-12`**; `dN/dLambda` contro `b(x)`: ### **`2.0e-12`** *(differenza centrata)* |
+| ⭐ **E TOGLIE UN NUMERO** | ### **`g` NON C-E- PIU-**: conta solo il rapporto `h/Lambda`. ### **E il limite `Lambda -> 0` e- ANALITICO** *(`G' -> 1`, `b -> -pi/2`)*, non un pavimento |
+| ⛔ **IL CONTROLLO CHE DEVE FALLIRE** | la stessa saturazione su `rho` *(PARI sotto `C`)* ### **rompe `C`**: `3.9e-5` |
+| ✅ **E LA REVERSIBILITA- E- UN BRACCIO** | `20` passi avanti e `20` indietro: ### **`1.6e-16`** sullo spinore e ### **`2.7e-15`** sul vuoto |

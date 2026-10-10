@@ -154,6 +154,11 @@ COLLAUDI = (
     # ### il gauge puro ### **coi versori non ruotati.**
     # ### ⚠ **Costa `0.90` s misurati**, quindi sta nel `pre-commit`.
     ("il banco della camminata v2", "proto_camminata/_collauda_banco2.py", "pre-commit"),
+    # ### ⭐ **IL BANCO `v3`: IL VUOTO E LA SATURAZIONE** *(decisione di Luca,
+    # ### 2026-10-11)*. ### **Il primo braccio e- la REGRESSIONE**: con la non linearita-
+    # ### spenta il `v3` coincide ### **AL BIT** col `v2` -- cioe- ### **non lo invalida.**
+    # ### ⚠ **Costa `0.93` s misurati.**
+    ("il banco della camminata v3", "proto_camminata/_collauda_banco3.py", "pre-commit"),
     # ### ⚠ **E `csv/_verifica_clone.py` NON STA QUI, DI PROPOSITO:** fa un clone e
     # ### ### **ci fa girare QUESTA suite** -- metterlo fra i collaudi vorrebbe dire
     # ### ### **una ricorsione senza fondo.** Si lancia a mano, ed e- il punto 3 del

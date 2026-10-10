@@ -12845,3 +12845,21 @@ Ogni dato di `db_era2/` ha ### **il suo TIMBRO accanto**, col campo `versione_da
 ### 📌 **LA LETTURA `(R)` E- LA PRIMA, E BLOCCA TUTTO IL RESTO:** con `N` spento e il vuoto presente, lo spinore deve evolvere ### **AL BIT come nel `v2`.** ### ⛔ **Se non lo fa, il `v3` ha invalidato il `v2` e mi fermo** — ed e- la regola di fondo del mandato.
 
 ### ⭐ **E LA LETTURA `(S)`, arrivata dopo, E- ENTRATA NEL TASK HISTORY e non come annotazione**, perche- il documento ### **non era ancora committato** — e il mandato dell-aggiunta lo dice. ### 📌 **La precisazione di Luca e- registrata:** ### **la velocita- della luce del sistema E- IL CONO**, e `eps` ### **decide quanto vicino al cono** si muovono le eccitazioni. ### ⚠ **E ho dichiarato un limite PRIMA di misurare:** sull-irregolare l-eccentricita- e- `6`, quindi il fronte ### **satura in sei tick** — ### **la scena principale della `(S)` e- il grafo REGOLARE.**
+
+## ✅ **IL `v3`, PUNTI `1`-`3`: IL BANCO ESISTE, E LA REGRESSIONE AL `v2` E- ZERO ESATTO** *(2026-10-11)*
+
+### 📌 **IL BANCO:** `vuoto3.py`, `saturazione3.py`, `camminata3.py`, `_collauda_banco3.py`; collaudo ### **`21` su `21`** in `0.93` s, ### **nella suite** *(che passa a `37` su `37`)*.
+
+### ⭐ **IL PRIMO RISULTATO E- QUELLO CHE IL MANDATO METTE PRIMA DI TUTTO:** con `N` spento e il vuoto presente, lo spinore evolve ### **AL BIT come nel `v2`** — ### **`0` esatto, nelle TRE scene, su `40` tick.** ### ✅ **Il `v3` NON invalida il `v2`**, e non e- una promessa: e- ### **il primo braccio del collaudo.**
+
+### ⭐ **E IL FLUSSO E- IN FORMA CHIUSA, col motivo MISURATO:** una rotazione ### **attorno al versore** lascia `h` invariante *(### **`3.5e-18`**)* e una fase lascia `Lambda` *(### **`8.9e-16`**)*, quindi `x`, `G'` e `b` ### **sono costanti durante il flusso** — ### **nessun integratore, nessun errore di troncamento.**
+
+### ✅ **E LE DERIVATE NON LE HO ASSUNTE: le ho verificate** con una differenza centrata — `dN/dh` contro `G'(x)`: ### **`4.5e-12`**; `dN/dLambda` contro `b(x)`: ### **`2.0e-12`**. ### ⚠ **Un conto scritto in un task history e- una promessa; un conto misurato e- un fatto.**
+
+### 📌 **GLI ALTRI NUMERI:** le ### **due norme** a `2e-15` e `2.3e-13`; la ### **reversibilita-** *(`20` avanti, `20` indietro)* a ### **`1.6e-16`** e `2.7e-15`; la ### **`C` estesa** commuta ### **AL BIT** nella scena identita- e manda nella ### **anti-camminata** nelle altre *(`4e-17`)*; il ### **gauge** regge col vuoto e `N` accesi *(`4.9e-17`)*; il ### **cono** resta ### **`0.0` esatto.**
+
+### ⛔ **E IL CONTROLLO CHE DEVE FALLIRE, FALLISCE:** la stessa saturazione su `rho` *(PARI sotto `C`)* ### **rompe `C`** — `3.9e-5`.
+
+### ⭐ **E IL `v3` TOGLIE UN NUMERO: `g` NON C-E- PIU-.** Conta solo il rapporto `h/Lambda`, e la saturazione e- ### **`G'` limitata** — `0.015` a `x = 1/8`, `0.5` a `x = 1`, `0.9998` a `x = 64`: ### **il ginocchio e- a `x ~ 1`**, e ### **nessuno l-ha messo li-.**
+
+### ⚠ **E IL `pre-commit` E- AL `96%` DEL BUDGET** *(`115.8` s su `120`)*: i due collaudi nuovi del `v3` e del `v2` costano ### **`0.93` s ciascuno**, quindi ### **non sono loro** — ma il margine ### **va guardato**, e lo dico adesso.
