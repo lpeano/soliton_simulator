@@ -144,6 +144,13 @@ nodi:
       e applicare una decisione prima del suo turno nasconderebbe l-ordine.
       ### La prima versione di quel mandato diceva il CONTRARIO (<<resta il
       locale a strati, non riaprirla>>): la differenza e- scritta nella coda.
+      ### ✅ E DAL 2026-10-10 IL SUPERAMENTO E- FORMALE: la voce che supera
+      questa decisione e- `CAMMINATA-A-MONETA`. ### ⚠ `decisioni.jsonl` NON
+      HA un campo `superata_da` -- i suoi campi sono argomento_noto, data,
+      dipende_da, etichetta, fonte, id, nome_scheda, presa, titolo -- quindi il
+      legame vive QUI, nella nota, e NON e- leggibile da un programma.
+      ### Se servisse a un programma, servirebbe un CAMPO (par. 9): lo dico
+      invece di far finta che il legame sia strutturato.
       --- la nota di prima:
       L-ARGOMENTO LO DICE IL MANDATO: <<un secondo integratore come CANDIDATO, non
       come scelta (la decide Luca: nodo INT del piano)>>.

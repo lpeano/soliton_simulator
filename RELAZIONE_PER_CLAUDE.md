@@ -12369,3 +12369,17 @@ Ogni dato di `db_era2/` ha ### **il suo TIMBRO accanto**, col campo `versione_da
 ### ⛔ **IL VINCOLO CHE TAGLIA:** ogni grandezza dinamica deve essere ### **un-ampiezza o una coppia coniugata** — ### **un numero che DECADE soltanto non puo- entrare.** ### ✅ **E- `A16` con [[MEMORIA-DENTRO-H]]**, e quella voce dice che ### **il vocabolario chiuso dei tipi lo impedisce gia- per costruzione.**
 
 ### ⚠ **E IL PUNTO `2` SI REGISTRA COME IPOTESI DA MISURARE, non come fatto** — lo chiede il mandato. ### ⭐ **Ma le sue DUE CONDIZIONI valgono piu- dell-ipotesi, perche- ESCLUDONO delle forme:** la moneta deve trattare le due ### **bande** simmetricamente *(o l-asimmetria materia/antimateria e- ### **messa a mano**)*, e una non linearita- ### **a segno fisso** sarebbe ### **attrattiva per una banda e repulsiva per l-altra** — terrebbe la materia e ### **disferebbe l-antimateria PER COSTRUZIONE.**
+
+## MANDATO ⑩, PUNTI `3` e `4`: IL SUPERAMENTO E- FORMALE, E IL PUNTO `4` NON SI PUO- ESEGUIRE *(2026-10-10)*
+
+### ✅ **PUNTO `3`:** la voce che supera la decisione sull-integratore e- ### **[[CAMMINATA-A-MONETA]]**, e il nodo `INT` ora ### **la nomina.** ### ⚠ **E `decisioni.jsonl` NON HA un campo `superata_da`** — i suoi campi sono `argomento_noto`, `data`, `dipende_da`, `etichetta`, `fonte`, `id`, `nome_scheda`, `presa`, `titolo` — quindi ### **il legame vive nella nota e NON e- leggibile da un programma.** ### 📌 **Se servisse a un programma, servirebbe un CAMPO** *(par.`9`)*: lo dico ### **invece di far finta che il legame sia strutturato.**
+
+### ⛔ **PUNTO `4`: NON SI PUO- ESEGUIRE, e il motivo e- una DECISIONE DI LUCA che manca.** Il punto chiede `VUOTO-LOCALE-DETERMINISTICO` ### **da PROPOSTA a DECISIONE DI LUCA.** ### **Tre cose lo impediscono, tutte e tre dei presidi del repo:**
+
+| | che cosa impedisce |
+|---|---|
+| `PI-ERA-STATO` | ### **una voce dell-era `2` E- `AGENDA`** — *«l-era `2` non e- cominciata»* — e ### **nessuna sua voce si puo- portare altrove** |
+| `PI-CHIUSURA-ORFANA` | e ### **non si puo- nemmeno riempire la `chiusura`** lasciando lo stato: *«mente in un campo che un programma legge»* |
+| `P-ALB` | il nodo dell-albero `DEC-D6-VUOTO` ### **dipende da `DEC-D13-MEMORIE`**, che dipende da `DEC-D9-GEOMETRIA`, e ### **nessuno dei due e- preso**: ### **una decisione non si prende prima di quelle da cui dipende** |
+
+### ⭐ **E LA DOMANDA PER LUCA E- UNA SOLA, e risolve TRE punti di DUE mandati:** ### **il vuoto locale viene PRIMA o DOPO `D9`?** ### ✅ **Se prima** — come dice il punto `6` del mandato ⑧ — la catena dell-albero va girata, e allora ### **si sbloccano il punto `4` di questo mandato, il punto `1` del mandato ⑧** *(la divisione, che aspetta `D6`)* ### **e la domanda `VUOTO-LOCALE-DETERMINISTICO` della lista.** ### ⛔ **Se dopo**, il mandato ⑧ punto `6` e questo punto `4` ### **vanno riscritti.** ### **Non e- una cosa che decido io**, e la registro cosi-.
