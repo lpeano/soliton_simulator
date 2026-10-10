@@ -161,6 +161,12 @@ alla lista ### **autorizza un commit.** ### **In `F3` quel buco conta più che i
 
 ### 📌 **E DOPO IL PROTOTIPO, nell-ordine che il mandato da-:** il ### **censimento delle memorie dell-era `1`** *(a vocabolario chiuso: nativa · campo d-arco · vuoto · da togliere)*, e il ### **disegno `3D` come osservatore e come MISURA**, insieme alle prime misure dell-isotropia.
 
+| | il passo DOPO il prototipo | la forma |
+|---|---|---|
+| `a` | ### **IL CENSIMENTO DELLE MEMORIE DELL-ERA `1`** *([[MEMORIE-NELLA-CAMMINATA]])* | ciascuna, con ### **la sua fonte nel repo**, classificata a ### **vocabolario CHIUSO** — *nativa* · *campo d-arco* · *vuoto* · *da togliere* — ### **col MOTIVO.** ### ⚠ **Un censimento senza vocabolario chiuso diventa un elenco di opinioni** |
+| `b` | ### **IL DISEGNO `3D` COME OSSERVATORE E COME MISURA** *([[DISEGNO-3D-OSSERVATORE]])* | la ### **BYTE-INERZIA** e- il collaudo ### **obbligatorio**; e la distorsione si misura ### **con l-indice di `G1`** *(distanza disegnata contro distanza vera: mediana, `p05`, `p95`, e stabilita- dell-orientamento)*. ### **Insieme alle prime misure di [[ISOTROPIA-MISURATA]]** |
+
+
 ---
 
 ## `F4` — **LE PRIME MISURE**
@@ -168,7 +174,8 @@ alla lista ### **autorizza un commit.** ### **In `F3` quel buco conta più che i
 | | |
 |---|---|
 | **INGRESSO** | ### **`F3` chiusa** per le leggi che quella misura coinvolge. ### ⛔ **Una misura su leggi finte misura il simulatore, non la natura** |
-| **le misure** | `O4` · `Z47` · `I1` · la ### **dilatazione degli orologi come gravità** · ### **`U(1)` come elettromagnetismo** |
+| **le misure** | `O4` · ### **[[Z103]] / il prototipo** · `I1` · la ### **dilatazione degli orologi come gravità** · ### **`U(1)` come elettromagnetismo** |
+| ⛔ **E `Z47` NON E- PIU- UNA MISURA DI `F4`** | dal `2026-10-10` e- ### **SUPERATA da `A17`** *(commit `195dd62`)*: non e- un lavoro da fare, e- ### **un lavoro che l-era `2` fa PER COSTRUZIONE.** ### ✅ **Al suo posto la misura che conta: [[Z103]]** — *quanto mente il disegno* — ### **e il PROTOTIPO**, che la rifa- sulla camminata |
 | ### ⛔ **USCITA** | per ognuna: un referto con ① i criteri ### **fissati PRIMA** di vedere i numeri; ② le ### **barre d'errore** e ### **più di un seme** *(`P3`: niente statistica senza una barra)*; ③ un ### **controllo positivo** e un caso che ### **DEVE fallire**; ④ la ### **configurazione INTERA** dichiarata *(`P5`)* |
 | **dove si misura** | `doc/REFERTO_*`, e l'indice |
 | ### ⭐ **E UN CRITERIO IN PIU', deciso da Luca il `2026-10-10`** | ### **[[ISOTROPIA-MISURATA]]**: l'### **isotropia del supporto** — in particolare del grafo ### **nato dalla mitosi** — e' un criterio ### **MISURATO**, e la propagazione deve venire ### **uguale lungo direzioni diverse**, ### **PRIMA** di dire che un campo e' emerso. ### ⚠ **Oggi NON ha materia** *(nessuna geometria, nessuna direzione)*, e ### **dipende da `D9`**: senza `D9` non c'e' niente su cui misurare una direzione — ### **non e' un ritardo, e' una DIPENDENZA** |

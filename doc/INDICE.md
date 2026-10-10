@@ -9,13 +9,13 @@
 | `DOCUMENTAZIONE` | `2` | 1 |
 | `DOCUMENTAZIONE` | `ENTRAMBE` | 8 |
 | `FISICA` | `1` | 343 |
-| `FISICA` | `2` | 32 |
+| `FISICA` | `2` | 33 |
 | `FISICA` | `ENTRAMBE` | 17 |
 | `INFRASTRUTTURA` | `1` | 39 |
 | `INFRASTRUTTURA` | `2` | 14 |
 | `INFRASTRUTTURA` | `ENTRAMBE` | 23 |
 | `METODO` | `1` | 156 |
-| `METODO` | `2` | 13 |
+| `METODO` | `2` | 14 |
 | `METODO` | `ENTRAMBE` | 88 |
 
 | id | classe | dominio | era | stato | blocca | titolo |
@@ -252,6 +252,7 @@
 | `DEC-REGOLA-FORMA` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | che CODICE genera una `regola`? il punto 11(a) chiede che crescita e vuoto si ge |
 | `DEC-Z47-TRANSIZIONE` | DECISIONE | METODO | ENTRAMBE | ### **CHIUSA** |  | Z47 non si puo- portare ad AGENDA: CHIUSA -> AGENDA e- una transizione VIETATA |
 | `DECISIONE-VUOLE-UN-CAMPO` | STANDARD | METODO | ENTRAMBE | ### **APERTA** |  | una decisione che serve a un programma vuole un CAMPO, non una frase nel titolo |
+| `DISEGNO-3D-OSSERVATORE` | STANDARD | METODO | 2 | ### **AGENDA** |  | il disegno 3D e- un OSSERVATORE, e il 3D che distorce E- UNA MISURA |
 | `DIVISIONE-AUTOCONSISTENTE` | FRONTE | FISICA | 2 | ### **AGENDA** |  | la divisione dell arco come UNA legge: dove si rompe, cosa ereditano i figli, il |
 | `DOMANDA-A3B-CLASSE` | DECISIONE | METODO | 2 | ### **AGENDA** |  | A3b: con che classe entra nell-indice? |
 | `DOMANDA-D13-CONIUGATI` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | D13: i coniugati delle memorie -- tw come fase U(1) sull-arco? |
@@ -428,6 +429,7 @@
 | `MEM-VERSO` | CURA | FISICA | 1 | ### **SUPERATA** |  | il verso dell arco dalla sua MEMORIA (delta = twp - tw) invece che dal segno ist |
 | `MEMORIA-DENTRO-H` | STANDARD | FISICA | 2 | ### **AGENDA** |  | una memoria e- una VARIABILE DINAMICA dentro H: nessun nucleo K(t-t'), nessun bu |
 | `MEMORIE-MANCANTI` | DIFETTO | FISICA | 2 | ### **AGENDA** |  | il rapporto sulle memorie: il censimento dello stato, il bilancio, e le memorie  |
+| `MEMORIE-NELLA-CAMMINATA` | STANDARD | FISICA | 2 | ### **AGENDA** |  | le memorie nella camminata: la memoria di moto diventa NATIVA, e l-oblio diventa |
 | `METADATI-REPERTO-PER-NECESSITA` | DIFETTO | INFRASTRUTTURA | ENTRAMBE | ### **APERTA** |  | metadati.jsonl ha una via di scrittura e ZERO storico: e- un REPERTO per necessi |
 | `MISURA-NORMA-ERA2` | MISURA | FISICA | 2 | ### **AGENDA** |  | la norma totale sum_nodi psi^dag psi: l-invariante QUADRATICO su cui si misura l |
 | `MITOSI-2LAM-ACCESO` | DIFETTO | DOCUMENTAZIONE | 1 | ### **CHIUSA** |  | il piano dichiara MITOSI_2LAM e PLAST_DIN OFF, e il DRIVER li ACCENDE: --mitosi- |

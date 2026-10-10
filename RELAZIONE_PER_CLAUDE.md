@@ -12401,3 +12401,11 @@ Ogni dato di `db_era2/` ha ### **il suo TIMBRO accanto**, col campo `versione_da
 ### ⭐ **E LA LETTURA `5` E- LA PIU- FORTE DI TUTTO IL PIANO:** un cluster nella banda `+` e uno nella banda `-`, ### **costruiti speculari**, ### **devono comportarsi allo stesso modo** — e ### **il braccio di controllo e- PROPRIO la non linearita- a segno fisso, CHE DEVE FALLIRE.** ### ✅ **Un prototipo che dichiara in anticipo quale forma deve ROMPERSI nelle sue mani NON PUO- CONFERMARE SE STESSO**, ed e- la prima volta che un mandato di fisica di questo repo ha quella forma.
 
 ### ✅ **E IL PUNTO `7` DA- A [[ISOTROPIA-MISURATA]] LA SUA PRIMA MATERIA.** Quando l-ho creata stamattina *(punto `5` del mandato delle correzioni)* diceva ### **«oggi NON ha materia»**, e il criterio era ### **senza presidio per mancanza di materia.** ### 📌 **Ora la materia c-e-: il collaudo delle DUE NUMERAZIONI**, come requisito ### **per qualunque dinamica** usata in una corsa di fisica.
+
+## MANDATO ⑪: LE MEMORIE NELLA CAMMINATA, IL DISEGNO `3D`, E `Z47` FUORI DA `F4` *(2026-10-10)*
+
+### ✅ **PUNTO `1`:** [[MEMORIE-NELLA-CAMMINATA]]. ### **La memoria di moto diventa NATIVA** — lo stato sulle estremita- d-arco ### **ricorda da quale strada e- arrivata l-ampiezza**, ed e- cio- che rende la camminata ### **balistica**: ### **non va scritta.** ### ⚠ **Nell-era `1` era un-AGGIUNTA che leggeva `pos`**, e questo e- il confronto che vale: ### **la stessa cosa, una volta come toppa e una volta per costruzione.**
+
+### ✅ **PUNTO `2`:** [[DISEGNO-3D-OSSERVATORE]]. Il disegno ### **legge e non scrive**, e la ### **BYTE-INERZIA e- il suo collaudo OBBLIGATORIO** — e ### **la forma esiste gia- nel repo** *(`_rif.py`, `14` su `14`)*. ### ⭐ **E la parte che conta: IL `3D` CHE DISTORCE E- UNA MISURA**, con ### **l-indice di `G1`** — ### **lo strumento che serviva a GUARDARE diventa uno strumento che MISURA**, e la misura e- ### **la stessa che ha fatto scattare `Z47`.**
+
+### ✅ **PUNTO `3`, la correzione piccola:** la fase `F4` nominava ancora ### **`Z47`** fra le misure, e `Z47` e- ### **SUPERATA da `A17`** dal commit `195dd62`. ### 📌 **Al suo posto la misura che conta: [[Z103]] e il PROTOTIPO.** ### ⚠ **L-avevo VISTA quando ho scritto la nota d-ingresso nel nodo `D9`, e non l-avevo corretta perche- non era nel mandato.** ### **Adesso lo era.**

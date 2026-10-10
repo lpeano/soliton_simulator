@@ -605,6 +605,31 @@ METODI['P-GUIDA'] = (
     "SILENZIO",
     "`primo_ordine/_collauda_guida.py` (12/12), nel comando unico e nel `pre-commit`",
     "PORTATO")
+METODI['MEMORIE-NELLA-CAMMINATA'] = (
+    "VALUTAZIONE DEL GUARDIANO accettata da Luca il 2026-10-10: nella camminata la memoria "
+    "di moto diventa NATIVA, e l-oblio diventa SCAMBIO col vuoto locale. ### SI APPLICA "
+    "ALL-ERA 2 COSI-, e OGGI NIENTE E- COSTRUITO (il mandato dice <<registra soltanto>>). "
+    "### CIO- CHE E- GIA- VERO: la REGOLA (<<ampiezza o coppia coniugata; una memoria che "
+    "DECADE soltanto non entra>>) e- gia- impedita dal vocabolario chiuso dei tipi "
+    "(MEMORIA-DENTRO-H). ### IL LAVORO: il CENSIMENTO delle memorie dell-era 1, a "
+    "vocabolario chiuso (nativa, campo d-arco, vuoto, da togliere) col motivo -- nel piano "
+    "come passo DOPO il prototipo.",
+    "nessun codice: la voce e- il posto, e il censimento e- un passo del piano",
+    "PRONTO")
+
+METODI['DISEGNO-3D-OSSERVATORE'] = (
+    "VALUTAZIONE DEL GUARDIANO accettata da Luca il 2026-10-10: il disegno 3D e- un "
+    "OSSERVATORE (legge e non scrive), e IL 3D CHE DISTORCE E- UNA MISURA. ### SI APPLICA "
+    "ALL-ERA 2 COSI-: la BYTE-INERZIA e- il collaudo OBBLIGATORIO, e LA FORMA ESISTE GIA- "
+    "NEL REPO (`primo_ordine/_rif.py` prova la byte-inerzia di `@rif`, 14 su 14) -- quindi "
+    "non c-e- niente da inventare, c-e- da riusare. ### E la posizione SI CALCOLA dalle "
+    "relazioni, solo per disegnare: la continuita- fra fotogrammi e- un TRUCCO DEL "
+    "DISEGNATORE, fuori dalla fisica. ### La distorsione si misura con l-indice di G1, e "
+    "le due letture (disegno fedele = indizio di 3D; deformato = altra dimensione, da "
+    "confermare con la dimensione spettrale) SI FISSANO PRIMA dei numeri.",
+    "`primo_ordine/_rif.py` da- la forma della byte-inerzia; il resto e- un passo del piano",
+    "PRONTO")
+
 METODI['CAMMINATA-A-MONETA'] = (
     "DECISIONE DI LUCA del 2026-10-10: la dinamica dell-era 2 e- una CAMMINATA QUANTISTICA "
     "A MONETA, UN-UNICA REGOLA per tutte le grandezze. ### SI APPLICA ALL-ERA 2 COSI-, e "
