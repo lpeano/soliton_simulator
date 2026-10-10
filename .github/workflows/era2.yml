@@ -127,6 +127,11 @@ jobs:
           python csv/_registri_indice.py
           git diff --exit-code -- doc/indice/leggi.jsonl doc/indice/variabili.jsonl doc/indice/assiomi.jsonl doc/indice/decisioni.jsonl
 
+      - name: "### IL REFERTO DELLE REGOLE -- rigenerato, e `git diff`"
+        run: |
+          python csv/_referto_regole.py
+          git diff --exit-code -- doc/REFERTO_regole_era2.md
+
       - name: "### `P-REG` -- le regole di gestione, e CLAUDE.md generato"
         run: python csv/_collauda_regole.py
 

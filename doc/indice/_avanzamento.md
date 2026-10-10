@@ -36,6 +36,10 @@
 | ### ⭐ **e i presidi mi hanno corretto `12` volte** | e ### **TRE hanno cambiato il DISEGNO**: due volte `P-MOD` mi ha detto che ### **il collaudo di un modulo in fondo alla catena degli import non puo' vivere dentro quel modulo**, e una volta mi ha ### **impedito di alzare un tetto** — la manopola piu' facile di tutte |
 | ### ⚠ **e due previsioni del task history** | la trappola `(a)` *(il punto `5` rompe la CI)* ### **ha TENUTO**; la `(b)` *(due processi non daranno byte identici)* era ### **SBAGLIATA**, e il perche' e' misurato: `numpy.savez` ### **azzera l'ora nello ZIP** |
 
+| ### **il mandato `5` di `6`, l'ULTIMO** | le ### **regole di gestione**: ogni regola è una ### **VOCE** col suo dettaglio e ### **CHI LA FA RISPETTARE**, e le ### **DUE** sezioni di `CLAUDE.md` ### **si generano dall'indice** *(modificate a mano: RIFIUTATE)*. Piu' la sezione ### **«LAVORARE NELL'ERA `2`»** e il suo `doc/REGOLE/par13.md`. Referto: `doc/REFERTO_regole_era2.md` |
+| ### ⭐ **e il numero che prima non esisteva** | ### **`9` regole su `25` non hanno NESSUNO che le faccia rispettare** *(`A9`)*: fino a oggi `CLAUDE.md` lo diceva ### **in prosa**, e una prosa ### **non si conta** |
+| ### ⚠ **e due contatori mi hanno detto il FALSO** | *«ne hai perse OTTO»* e *«le hai perse TUTTE»* — ### **nessuno dei due riconosceva `[[ID]]`.** ### **Il confronto con `git` diceva `0` PERSE, ed era quello giusto** |
+
 **L'ultimo lotto applicato:** `doc/indice/_lotti/correzioni.jsonl` — ### **`313` voci**,
 `313` righe di storico, e la validazione ### **intera** passa.
 

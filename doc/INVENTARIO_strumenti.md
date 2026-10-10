@@ -2863,6 +2863,21 @@ etichette rimosse, con ### **`0` persi, `0` doppi, `0` conflitti**.
 
 ---
 
+### `csv/_regole_gestione.py` + `csv/_referto_regole.py` — **`P-REG`: LE REGOLE DI GESTIONE, E `CLAUDE.md` GENERATO** *(2026-10-10)*
+
+| | |
+|---|---|
+| **file** | `csv/_regole_gestione.py` *(il presidio)* · `csv/_collauda_regole.py` *(il collaudo)* · `csv/_referto_regole.py` *(il referto)* |
+| **BLOB** *(sha1 dei byte grezzi)* | `4c69eca3` · `cae9e8fd` · `1f1f8af5` |
+| **COMANDO** | `python csv/_regole_gestione.py` *(i numeri)* · `--scrivi` *(rigenera le due sezioni)* · `python csv/_collauda_regole.py` *(i due versi)* · `python csv/_referto_regole.py` |
+| **cosa misura** | ogni regola di gestione è una ### **VOCE**, e porta ### **il file di dettaglio** e ### **CHI LA FA RISPETTARE**; le ### **DUE** sezioni delle regole di `CLAUDE.md` ### **si generano**, e modificate a mano sono ### **RIFIUTATE** |
+| ### ⭐ **e il numero che prima non esisteva** | ### **`9` regole su `25` NON HANNO NESSUNO CHE LE FACCIA RISPETTARE** *(`A9`)*. ### **Fino a oggi `CLAUDE.md` lo diceva in PROSA, e una prosa non si conta** |
+| ### ⛔ **e il braccio che conta** | ### **<<NESSUNA REGOLA SI PERDE>>**, misurato ### **contro `git`**: un errore qui ### **non fa cadere un collaudo, FA SPARIRE UNA REGOLA.** ### **`CLAUDE.md` più corto NON è un successo: è un SOSPETTO** |
+| ### ⚠ **e due contatori mi hanno detto il FALSO** | il mio diceva *«ne hai perse OTTO»*, `_struttura_regole.py` *«le hai perse TUTTE»*: ### **nessuno dei due riconosceva la forma `[[ID]]`.** ### **Il confronto con `git` diceva `0`, ed era quello giusto** |
+| **l'uscita** | le due sezioni in `CLAUDE.md` *(`339` righe su `400`)*, e `doc/REFERTO_regole_era2.md` |
+
+---
+
 ### I SETTE PRESIDI DELLA TERZA PARTE — **`P-DET` `P-DIM` `P-SIM` `P-GRAFO` `P-BARRIERA` `P-TEMPI` `P-GUIDA`** *(2026-10-10)*
 
 | il file | BLOB | che cosa misura | il collaudo |

@@ -11965,3 +11965,15 @@ Ogni dato di `db_era2/` ha ### **il suo TIMBRO accanto**, col campo `versione_da
 ### ⚠ **E IL PRESIDIO DELLA STRUTTURA MI HA RIFIUTATO DUE VIOLAZIONI VERE del par. `0`:** il mio dettaglio nuovo ### **rimandava a un altro file di `doc/REGOLE/`** e ### **citava `CLAUDE.md` fuori dall-intestazione.** ### ⛔ **Entrambe sono vietate perche- la struttura NON PUO- CRESCERE IN CATENE**, e ### **un dettaglio che per capirsi ne richiede un altro non e- un dettaglio: e- un rinvio.** ### ✅ **Riscritto dicendo la cosa, invece di puntarci.**
 
 ### ⚠ **E UN BUCO CHE AVEVO DICHIARATO HA MORSO, nello stesso giro: `doc/indice/metadati.jsonl`.** `P-T2` lo chiama `REPERTO` -- *«non ha una via di scrittura, e non deve averla»* -- ### **e ne ha TRE** *(`meta-aggiungi`, `meta-depreca`, `meta-rinomina`)* ### **con ZERO righe di storico.** ### ⛔ **Registrando le due chiavi nuove il file e- cambiato, e `P-T2` HA RIFIUTATO IL COMMIT: ha ragione.** ### ⚠ **E l-unica cosa che posso fare oggi e- aggiornare il blob A MANO, che e- UNA DICHIARAZIONE E NON UN CONTROLLO:** il presidio dira- *«coincide»* ### **perche- gliel-ho detto io.** ### ✅ **Adesso ha una voce, `METADATI-REPERTO-PER-NECESSITA`, e la cura -- uno storico per `meta-aggiungi` -- va in CODA** *(`L-UN-PROMPT`)*.
+
+## IL REFERTO DEL MANDATO `5` DI `6`, E LA CODA E- FINITA *(2026-10-10)*
+
+### ✅ **`doc/REFERTO_regole_era2.md`, generato da `csv/_referto_regole.py`:** `96` righe, e le cifre escono dall-### **indice**, da `CLAUDE.md`, dall-uscita dei ### **collaudi che lo script fa girare**, e da ### **`git`.**
+
+### ⭐ **E LA SEZIONE CHE CONTA E- LA `2.`: <<che cosa mi ha detto il FALSO>>.** Una tabella di tre righe: il mio contatore *«ne hai perse OTTO»* — ### **NO**; `csv/_struttura_regole.py`, ### **il presidio che il repo ha costruito PROPRIO per non perdere regole**, *«le hai perse TUTTE»* — ### **NO**; il confronto dell-insieme con `git`, ### **`0` perse** — ### ✅ **SI-.**
+
+### ⚠ **E LA SEZIONE `5.` E- TRE GIRI SU UN SOLO BRACCIO, e ogni volta IL BRACCIO AVEVA RAGIONE:** la vittima della sabotatura doveva essere citata ### **al <<prima>>**, presente ### **nella sezione generata**, e citata ### **una volta sola nel file.** ### ⛔ **Un caso che DEVE fallire e non puo- fallire PER COSTRUZIONE e- un FALSO-UNO**, e il verde che dava ### **non provava niente.**
+
+### 📌 **I NUMERI DEL CHECKPOINT:** `94` regole di gestione nell-indice, ### **`25` in `CLAUDE.md`** *(par.`11`: `10`, par.`12`: `15`)*, ### **`9` senza presidio**, ### **`339` righe su `400`**, `0` duplicati, ### **`0` PERSE.**
+
+### ➡ **E LA CODA E- FINITA: cinque mandati su cinque, nell-ordine registrato** — e l-ordine ### **si verifica da `git`**, perche- il task history di ognuno e- ### **antenato** dei commit del suo lavoro.
