@@ -6,9 +6,9 @@
 |---|--:|
 ## ⭐ **LA PROSSIMA**
 
-> ### ✅ **[[DOMANDA-D9-GEOMETRIA]]** — D9: la geometria viene da d e p_d dentro H, o dalle relazioni fra gli psi?
+> ### ✅ **[[DOMANDA-QUANTITA-CONSERVATA]]** — esiste una moneta isotropa, causale e simmetrica fra le bande con una quantita- conservata?
 >
-> ### 📌 **Che cosa SBLOCCA:** `DOMANDA-D13-CONIUGATI`, `DOMANDA-LAMBDA-GRANDEZZA`
+> ### 📌 **Che cosa SBLOCCA:** `VUOTO-LOCALE-DETERMINISTICO`, `DOMANDA-D9-GEOMETRIA`, `DOMANDA-LAMBDA-GRANDEZZA`
 >
 > ### **Le alternative e i numeri stanno nella voce**, e la voce e- la fonte: ### **qui non si ricopia niente** (`L-NUMERI`).
 
@@ -16,11 +16,12 @@
 
 ## LE ALTRE, per priorita-
 
-### `CRITICA` — **2**
+### `CRITICA` — **3**
 
 | la domanda | pronta? | che cosa aspetta |
 |---|---|---|
 | **[[DOMANDA-D13-CONIUGATI]]** D13: i coniugati delle memorie -- tw come fase U(1) sull-arco? | ### ⏳ aspetta | ### **aspetta:** `DOMANDA-D9-GEOMETRIA` |
+| **[[DOMANDA-D9-GEOMETRIA]]** D9: la geometria viene da d e p_d dentro H, o dalle relazioni fra gli ps | ### ⏳ aspetta | ### **aspetta:** `DOMANDA-QUANTITA-CONSERVATA` |
 | **[[VUOTO-LOCALE-DETERMINISTICO]]** termostato locale + scuotimento DETERMINISTICO: UNA legge per nodo, fase | ### ⏳ aspetta | ### **aspetta:** `DOMANDA-D13-CONIUGATI` |
 
 ### `DIPENDENTE` — **4**
@@ -43,7 +44,7 @@
 
 ## IL CONTO
 
-> ### ⛔ **aperte `9`, di cui pronte `5`.**
+> ### ⛔ **aperte `10`, di cui pronte `5`.**
 >
 > ### ✅ **E una domanda DECISA esce da sola:** si chiude con la decisione di Luca e il commit, e ### **nessuno la spunta a mano** -- la lista ### **si genera dai campi**, e un campo che cambia ### **cambia la lista.**
 

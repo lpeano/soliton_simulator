@@ -9,7 +9,7 @@
 | `DOCUMENTAZIONE` | `2` | 1 |
 | `DOCUMENTAZIONE` | `ENTRAMBE` | 8 |
 | `FISICA` | `1` | 343 |
-| `FISICA` | `2` | 31 |
+| `FISICA` | `2` | 32 |
 | `FISICA` | `ENTRAMBE` | 17 |
 | `INFRASTRUTTURA` | `1` | 39 |
 | `INFRASTRUTTURA` | `2` | 14 |
@@ -259,6 +259,7 @@
 | `DOMANDA-FUSIONE` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | la FUSIONE di due nodi: si vieta, e con che cosa? |
 | `DOMANDA-GRAFO-INIZIALE` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | il grafo iniziale SENZA pos: reticolo, k-regolare, espansore? |
 | `DOMANDA-LAMBDA-GRANDEZZA` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | lambda: su quale grandezza si misura, e da dove viene il suo valore? |
+| `DOMANDA-QUANTITA-CONSERVATA` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | esiste una moneta isotropa, causale e simmetrica fra le bande con una quantita-  |
 | `DOMANDA-REGOLE-FUORI-CLAUDE` | DECISIONE | METODO | 2 | ### **AGENDA** |  | le regole di gestione fuori da CLAUDE.md, e quelle dentro senza presidio: vanno  |
 | `DOMANDA-UNITA-DI-STATO` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | l-unita- di stato: qual e- la capacita- di un nodo? |
 | `DOPPIA-COP` | CURA | FISICA | 1 | ### **SOSPESA** |  | LA CURA (b): la doppia copertura 4 pi e' un ASSIOMA e va resa STRUTTURALE, non m |

@@ -12383,3 +12383,13 @@ Ogni dato di `db_era2/` ha ### **il suo TIMBRO accanto**, col campo `versione_da
 | `P-ALB` | il nodo dell-albero `DEC-D6-VUOTO` ### **dipende da `DEC-D13-MEMORIE`**, che dipende da `DEC-D9-GEOMETRIA`, e ### **nessuno dei due e- preso**: ### **una decisione non si prende prima di quelle da cui dipende** |
 
 ### ⭐ **E LA DOMANDA PER LUCA E- UNA SOLA, e risolve TRE punti di DUE mandati:** ### **il vuoto locale viene PRIMA o DOPO `D9`?** ### ✅ **Se prima** — come dice il punto `6` del mandato ⑧ — la catena dell-albero va girata, e allora ### **si sbloccano il punto `4` di questo mandato, il punto `1` del mandato ⑧** *(la divisione, che aspetta `D6`)* ### **e la domanda `VUOTO-LOCALE-DETERMINISTICO` della lista.** ### ⛔ **Se dopo**, il mandato ⑧ punto `6` e questo punto `4` ### **vanno riscritti.** ### **Non e- una cosa che decido io**, e la registro cosi-.
+
+## MANDATO ⑩, PUNTO `5`: LA QUANTITA- CONSERVATA E- LA PROSSIMA — ### **e viene dai CAMPI, non da un caso speciale** *(2026-10-10)*
+
+### ⛔ **IL PROBLEMA, come Luca lo scrive:** la camminata conserva la ### **NORMA** esattamente, ### **ma una quantita- usabile come ENERGIA non e- garantita** — specie con la moneta non lineare. ### ⭐ **E la decisione `10` (il calore paga la nascita) E- UN BILANCIO D-ENERGIA:** senza una quantita- conservata su cui scriverlo, ### **quella decisione non ha un oggetto.**
+
+### ✅ **E ADESSO `python csv/indice.py prossima` DA- LEI**, e ### **non perche- l-ho messa in cima a mano:** viene ### **dai campi** — e- `CRITICA`, ha ### **zero dipendenze aperte**, e ### **`D9` dipende da lei.**
+
+### 📌 **E PERCHE- `D9` DIPENDE DA LEI SENZA CONTRADDIRE L-ALBERO:** l-albero da- `DEC-D9-GEOMETRIA` come radice ### **fra i SUOI nodi**, e questa domanda ### **non e- un nodo dell-albero** — quindi ### **non contraddice niente.** ### **E la ragione e- di merito:** non si decide la forma della geometria ### **prima di sapere se la dinamica ha un-energia** su cui scrivere un bilancio.
+
+### ✅ **E IL CRITERIO DI RIAPERTURA E- SCRITTO NELLA VOCE:** se la quantita- conservata ### **non esiste per nessuna moneta non lineare ammissibile**, la decisione `10` ### **va riformulata** — e allora ### **la direzione stessa si riapre.** ### ⚠ **Una direzione che dichiara in anticipo come si riapre e- piu- forte di una che si difende.**
