@@ -12201,3 +12201,19 @@ Ogni dato di `db_era2/` ha ### **il suo TIMBRO accanto**, col campo `versione_da
 ### ⭐ **QUINDI IL BRACCIO GIUSTO NON DICE «non scrivere»: DICE QUALE FILE E PERCHE-.** Un albero sporco dopo la suite vuol dire ### **che un file generato e committato e- scaduto**, e che ### **il commit che ha cambiato cio- che quel file racconta non ha portato il suo generato.** ### **E- una diagnosi, non un fastidio.**
 
 ### ✅ **E I BYTE SI RIMETTONO A POSTO — ma SOLO quelli che la suite ha sporcato LEI.** ### ⛔ **Non cio- che era gia- sporco:** rimettere a posto il lavoro di qualcun altro ### **sarebbe peggio del difetto**, e il braccio confronta ### **il PRIMA col DOPO** invece di guardare solo il dopo. ### ⚠ **E il ripristino NON e- silenzioso: i nomi restano stampati**, e l-albero sporco ### **entra nel codice d-uscita.**
+
+## PUNTO `2`: I CONTROLLI VALIDANO LO **STAGE**, NON IL **DISCO** — ### **cioe- cio- che il commit contiene davvero** *(2026-10-10)*
+
+### ⛔ **MISURATO DAL GUARDIANO su un clone pulito di `c68b635`:** `valida` FALLISCE — `PI-REPLAY` su `Z47` e `Z103` — e cadono `P-ALB`, `P-T2`, i presidi dell-indice e i controlli della migrazione. ### **Perche- quel commit porta `4` righe di storico SENZA `voci.jsonl`**, e il `pre-commit` ### **non l-ha fermato**: i controlli ### **leggono il DISCO**, dove la voce era gia- modificata.
+
+### ⭐ **E L-ESPOSIZIONE L-HO CREATA IO, poche ore prima.** `_stage_storico()` mette `storico.jsonl` ### **in stage appena ci scrive**, e `git commit` committa ### **l-INDICE** — quindi un commit che non fa `git add` di `voci.jsonl` ### **si porta via le righe da sole.** ### ⚠ **La cura di stamattina CHIUDEVA un buco e NE APRIVA un altro**, e ### **il presidio non poteva vederlo perche- guardava il disco.**
+
+### ✅ **LA CURA: `csv/_stage.py` esporta l-INDICE** *(`git checkout-index`)* ### **in una cartella temporanea**, e fa girare i controlli del CONTENUTO ### **la- dentro**, con `GIT_DIR` che punta al repo vero — cosi- `git show` e `git diff --cached` vedono ### **lo stesso indice**, e gli strumenti leggono ### **i byte che il commit conterra-.**
+
+### ⛔ **E IL LIMITE E- DICHIARATO, non taciuto** *(`A9`)*: la tabella `SUL_DISCO` dice ### **quali controlli NON possono girare sullo stage, uno per uno, col motivo.** ### ⚠ **Uno che guarda lo STATO DELL-ALBERO** *(i file non tracciati, l-impronta dei hook)* ### **la- non vedrebbe NIENTE e tacerebbe per vacuita-** — che e- ### **peggio** di leggere il disco.
+
+### 📌 **LA DIVISIONE RAPIDO/INTERO E- MISURATA, non comoda:** i cinque controlli costano ### **`46.5` s** e il `pre-commit` ne costa gia- ### **`80`** — insieme ### **`126`, OLTRE il budget di `120`**, e un `pre-commit` troppo lento e- ### **la ragione numero uno per dare `--no-verify`** *(`A9` dal lato del tempo)*. ### ✅ **Nel hook gira il solo validatore dell-indice** *(`~10` s)*, che e- ### **quello che prende questo difetto**; la serie intera gira ### **in CI e nel comando unico.**
+
+### ⭐ **E IL BRACCIO PROVA LA PROPRIETA- NEI DUE VERSI, su un REPO USA-E-GETTA** *(non sul repo vero: un collaudo che per provarsi scrive nell-indice e- il difetto che nel giro scorso ha cancellato `867` classificazioni)*. ### ⛔ **Con una modifica sul disco e non in stage: SUL DISCO il controllo PASSA** — ed e- ### **esattamente perche- nessuno lo vedeva** — ### **e SULLO STAGE e- RIFIUTATO.**
+
+### ✅ **E IL PRESIDIO HA PRESO IL DIFETTO DAL VIVO, sul repo vero:** mentre lo scrivevo, lo storico era in stage e `voci.jsonl` no — e ### **ha rifiutato.** ### **Non e- una prova costruita: e- il difetto che si ripresenta e viene fermato.** ### ✅ **Poi la cura locale: chi scrive mette in stage l-INSIEME COERENTE** *(storico, voci, le viste)*, non un pezzo solo.

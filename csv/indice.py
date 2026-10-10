@@ -1251,7 +1251,7 @@ def _f11_replay(voci):
 
 
 def _stage_storico():
-    """### Mette `storico.jsonl` IN STAGE, subito dopo averci scritto.
+    """### Mette ### **L-INSIEME COERENTE** in stage, subito dopo averci scritto.
 
     ### ⛔ **PERCHE- QUI E NON NEL `pre-commit`:** dal `2026-10-10` il commit di una
     riga ### **si ricava da git**, e una riga ### **che niente contiene** non e- una
@@ -1263,8 +1263,16 @@ def _stage_storico():
     ### ⚠ **Se `git` non c-e- o non risponde NON SI FERMA NIENTE:** scrivere
     nell-indice ### **non deve dipendere** dal poter mettere in stage.
     """
-    subprocess.run(["git", "add", "--", "doc/indice/storico.jsonl"], cwd=RADICE,
-                   capture_output=True)
+    # ### ⛔ **E L-INSIEME E- COERENTE, non il solo storico** -- e questa riga
+    # ### nasce da un difetto MISURATO dal guardiano poche ore dopo la prima versione:
+    # ### mettendo in stage ### **solo lo storico**, un commit successivo che non facesse
+    # ### `git add` di `voci.jsonl` ### **si portava via le righe da sole**, e l-HEAD
+    # ### restava ### **incoerente** *(`PI-REPLAY` su `Z47` e `Z103`)*.
+    # ### ⭐ **La prima versione CHIUDEVA un buco e NE APRIVA un altro**, e il
+    # ### presidio non poteva vederlo perche- guardava ### **il disco.**
+    for _f in ("doc/indice/storico.jsonl", "doc/indice/voci.jsonl",
+               "doc/indice/_indice_meta.json", "doc/INDICE_ID.tsv", "doc/INDICE.md"):
+        subprocess.run(["git", "add", "--", _f], cwd=RADICE, capture_output=True)
 
 
 def _storico_da_git():

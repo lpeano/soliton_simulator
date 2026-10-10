@@ -130,6 +130,9 @@ COLLAUDI = (
     ("il rinominamento, sul piano", "csv/_rinomina.py", "pre-commit"),
     ("la FORMA dei testi generati", "csv/_forma_referti.py --collaudo",
      "pre-commit"),
+    # ### ⚠ **`solo-CI` per il TEMPO, non per importanza:** i controlli sullo stage
+    # ### costano `46.5` s, e nel `pre-commit` gira ### **il solo modo rapido.**
+    ("i controlli sullo STAGE e non sul disco", "csv/_stage.py --collaudo", "solo-CI"),
 )
 
 

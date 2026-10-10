@@ -8,17 +8,17 @@
 
 | | quanti |
 |---|--:|
-| **`PORTATO`** | `105` |
+| **`PORTATO`** | `106` |
 | **`DA_PORTARE`** | `17` |
 | **`DA_DECIDERE`** | `5` |
 | **`NON_SI_APPLICA`** | `7` |
-| **in tutto** | ### **`134`** |
+| **in tutto** | ### **`135`** |
 
-### ⚠ **E IL NUMERO `134` E- MISURATO, non stimato:** viene dal perimetro che l-indice calcola, e ### **il mandato ne nominava <<una decina>>** per nome piu- *<<e le cure di architettura>>*. ### **La decina era `20`.**
+### ⚠ **E IL NUMERO `135` E- MISURATO, non stimato:** viene dal perimetro che l-indice calcola, e ### **il mandato ne nominava <<una decina>>** per nome piu- *<<e le cure di architettura>>*. ### **La decina era `20`.**
 
 ---
 
-## `PORTATO` — `105` metodi
+## `PORTATO` — `106` metodi
 
 > ### ✅ **GIA- NELL-ERA `2`**, e `dove` dice dove
 
@@ -107,6 +107,7 @@
 | **`PI-SIMBOLI-ERA1`** | `PRESIDIO` | una voce dell-era 2 che nomina un simbolo dell-era 1. ### E HA SCATTATO SULLA SUA PROPRIA VOCE, che elenca i simboli che cerca: chiuso con l-eccezione che cita il testo | `csv/indice.py::_f2_era2`, ### SEGNALA |
 | **`PI-STORICO-SENZA-COMMIT`** | `PRESIDIO` | una riga di storico GIA- COMMITTATA e senza `commit`. ### E- L-UNICO DEI DODICI CHE ERA UN ERRORE DAL PRIMO GIORNO, e ha fermato questo mandato CINQUE volte: non e- una tenda | `csv/indice.py::_f5_storico`, ### ERRORE (rifiuta) |
 | **`PRECEDENZA-IN-CODA`** | `STANDARD` | fra piu- versioni di un mandato in coda vale SOLO L-ULTIMA, e l-ordine di esecuzione si REGISTRA. ### PORTATA nell-era 2: i cinque mandati del 2026-10-09 sono stati eseguiti NELL-ORDINE REGISTRATO, e lo si verifica DA GIT -- ogni task history e- ANTENATO dei commit del suo lavoro. ### Ma e- una REGOLA SCRITTA: nessun presidio la impedisce (`A9`) | `doc/CODA_2026-10-09.md`; la verifica e- `git merge-base --is-ancestor` |
+| **`PRESIDI-SUL-DISCO-NON-SULLO-STAGE`** | `PRESIDIO` | NATO NELL-ERA 2, e il difetto l-ha misurato il guardiano su un clone pulito di c68b635: `valida` FALLIVA (PI-REPLAY su Z47 e Z103) perche- quel commit portava 4 righe di storico SENZA `voci.jsonl` -- e il `pre-commit` non l-aveva fermato perche- i controlli LEGGONO I FILE SUL DISCO, dove la voce era gia- modificata, e NON il contenuto IN STAGE. ### SI APPLICA ALL-ERA 2 COSI-: `csv/_stage.py` esporta l-INDICE in una cartella temporanea (`git checkout-index`) e fa girare i controlli del CONTENUTO la- dentro, con `GIT_DIR` che punta al repo vero -- cosi- `git show` e `git diff --cached` vedono lo STESSO indice e gli strumenti leggono i byte che il commit conterra-. ### E IL LIMITE E- DICHIARATO: la tabella `SUL_DISCO` dice quali controlli NON possono girare sullo stage e PERCHE- -- uno che guarda lo STATO DELL-ALBERO (i file non tracciati, l-impronta dei hook) la- non vedrebbe niente e TACEREBBE PER VACUITA-. ### E la divisione rapido/intero e- MISURATA: 46.5 s per i cinque, e nel `pre-commit` gira il solo validatore dell-indice (10 s). | `csv/_stage.py`; collaudo 7 su 7 su un REPO USA-E-GETTA, e il braccio prova la proprieta- nei DUE versi: sul DISCO il caso incoerente PASSA, sullo STAGE e- RIFIUTATO |
 | **`R3`** | `PRESIDIO` | pretendeva `bias == 0.0` esatto e falliva su due ulp: ### LA LEZIONE E- PORTATA -- nessun braccio dell-era 2 pretende l-uguaglianza esatta di un float calcolato, e la norma si misura con una tolleranza DICHIARATA | `_collauda_passo.py` sezione (D) |
 | **`R5`** | `PRESIDIO` | contava 25 aperture su 24 passi perche- l-iniezione del test apriva il freno: ### LA LEZIONE E- PORTATA -- i casi che devono fallire dell-era 2 verificano anche che, TOLTO il finto, il presidio TACCIA | `_collauda_passo.py` sezione (F), ultimo braccio |
 | **`REFERTO-FOTOGRAFIA-RIGENERATA`** | `PRESIDIO` | NATO NELL-ERA 2, e nasce da una DOMANDA DI LUCA: <<o il referto di un mandato chiuso e- un REPERTO congelato al suo commit, o si rigenera e allora non e- una fotografia. NON ENTRAMBE>>. ### SI APPLICA ALL-ERA 2 COSI-: ogni testo generato dichiara UNA forma nel registro `TESTI` di `csv/_forma_referti.py`. Un `REPERTO` porta il BLOB dei byte COMMITTATI (`HEAD` o stage), DICE IN TESTA di essere CONGELATO, e LA CI NON LO RIGENERA: si rimisura rigirando il suo comando AL SUO COMMIT, come un sigillo. Un `VIVO` non ha blob e la CI lo rigenera pretendendo la diff VUOTA. ### E IL NUMERO DECIDE: in `doc/` ci sono 119 referti e la CI ne rigenerava 5 -- la forma <<congelato>> e- quella che il repo ha SEMPRE avuto per 114 su 119, e le cinque eccezioni sono quelle che si sono rotte. ### NON E- UNA REGOLA NUOVA: `CLAUDE.md` par. 6 dice gia- che un sigillo si rigira AL SUO COMMIT. ### IL BUCO NOTO, dichiarato come segnale: 113 referti su 119 non hanno un blob dichiarato. | `csv/_forma_referti.py`; MISURATO: 10 testi (7 REPERTO + 3 VIVO), cadono 3 su 8 rigenerati e sono TUTTI E TRE reperti; collaudo 12/12 con 8 bracci che devono fallire; 4 passi di CI togliati e 1 aggiunto |

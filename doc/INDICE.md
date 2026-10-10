@@ -13,7 +13,7 @@
 | `FISICA` | `ENTRAMBE` | 17 |
 | `INFRASTRUTTURA` | `1` | 39 |
 | `INFRASTRUTTURA` | `2` | 14 |
-| `INFRASTRUTTURA` | `ENTRAMBE` | 21 |
+| `INFRASTRUTTURA` | `ENTRAMBE` | 22 |
 | `METODO` | `1` | 156 |
 | `METODO` | `2` | 11 |
 | `METODO` | `ENTRAMBE` | 88 |
@@ -154,7 +154,7 @@
 | `CLI-1` | DIFETTO | METODO | 1 | ### **SOSPESA** | SI | I SIGILLI DI CURA 4 E CURA 5 NON HANNO MAI PROVATO IL PERCORSO CLI: impostavano  |
 | `CLIP-INVENTARIO` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | INVENTARIO dei clip, tetti e pavimenti del passo pieno: 27 TETTI FISICI su 117 g |
 | `COER-4PI` | CRITERIO | METODO | 1 | ### **CHIUSA** |  | la coerenza della massa e' `/<e^{i phi}>/`: il campo NON distingue `phi` da `phi |
-| `COLLAUDO-LEGGE-L-AMBIENTE` | DIFETTO | METODO | ENTRAMBE | ### **APERTA** |  | il collaudo della barriera dipendeva dall-ambiente in cui era lanciato: 6 su 11  |
+| `COLLAUDO-LEGGE-L-AMBIENTE` | DIFETTO | METODO | ENTRAMBE | ### **CHIUSA** |  | il collaudo della barriera dipendeva dall-ambiente in cui era lanciato: 6 su 11  |
 | `COLLAUDO-NON-ESEGUITO` | DIFETTO | METODO | ENTRAMBE | ### **APERTA** |  | un collaudo che si RIFIUTA di girare esce con 2, e il controllo C4 lo conta come |
 | `COMANDO-UNICO-INCOMPLETO` | DIFETTO | INFRASTRUTTURA | ENTRAMBE | ### **CHIUSA** |  | il comando che si chiama LA SUITE COMPLETA copriva 19 collaudi su 29 |
 | `COMPONENTI:A1` | CURA | METODO | 1 | ### **CHIUSA** |  | A1. STEP2OROLOGIO — aggancio OROLOGIO ↔ METRICA · omegaclk = (cs/CSM)² |
@@ -530,6 +530,7 @@
 | `POZZO-D` | CURA | FISICA | 1 | ### **CHIUSA** |  | la cura di D02 (flag `POZZO_D` nel codice): nel pozzo del grafo `L` viene da `se |
 | `PRE-RILASSAMENTO-FUORI-PASSO` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | 300 step() girano in _applica_flag, FUORI da esegui_passo: sei voci del passo no |
 | `PRECEDENZA-IN-CODA` | STANDARD | METODO | ENTRAMBE | ### **APERTA** |  | fra piu- versioni di un mandato in coda vale SOLO L-ULTIMA, e l-ordine si REGIST |
+| `PRESIDI-SUL-DISCO-NON-SULLO-STAGE` | PRESIDIO | INFRASTRUTTURA | ENTRAMBE | ### **APERTA** |  | i presidi del pre-commit leggevano il DISCO e non lo STAGE: un commit incoerente |
 | `PRESIDIO-RIFIUTO-SOLO-SIGILLI` | DIFETTO | DOCUMENTAZIONE | ENTRAMBE | ### **APERTA** |  | _presidio.avvia rifiuta di girare SOLO se il nome comincia con _sigillo_: A9 lo  |
 | `PRESTAZIONI-CORSE` | FRONTE | INFRASTRUTTURA | ENTRAMBE | ### **APERTA** |  | le corse costano: sei strade per il tempo di calcolo, da affrontare a modello ST |
 | `PROBLEMI-CHK3` | FRONTE | FISICA | 1 | ### **SOSPESA** |  | IL PIANO DEI PROBLEMI APERTI — per ciascuno: la domanda da chiudere · la misura  |

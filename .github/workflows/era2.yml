@@ -210,6 +210,15 @@ jobs:
           python csv/_referto_infrastruttura_era2.py
           git diff --exit-code -- doc/REFERTO_infrastruttura_era2.md
 
+      - name: "### I CONTROLLI SULLO STAGE -- e non sul disco"
+        # ### ⛔ **Il difetto che chiude:** un commit con 4 righe di storico
+        # ### ### **senza `voci.jsonl`** passava il `pre-commit`, perche- i
+        # ### presidi ### **leggevano il DISCO** e non cio- che il commit
+        # ### ### **conteneva davvero.** Qui gira la serie ### **INTERA**.
+        run: |
+          python csv/_stage.py
+          python csv/_stage.py --collaudo
+
       - name: "### LA FORMA DEI TESTI GENERATI -- REPERTO o VIVO, mai ENTRAMBE"
         # ### ⛔ **Al posto dei QUATTRO passi che rigeneravano un referto di
         # ### mandato chiuso e pretendevano la diff vuota.** Quei passi

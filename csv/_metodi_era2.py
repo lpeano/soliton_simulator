@@ -620,6 +620,25 @@ METODI['VETTORI-DAI-BILINEARI'] = (
     "e- MANCANZA DI MATERIA",
     "PORTATO")
 
+METODI['PRESIDI-SUL-DISCO-NON-SULLO-STAGE'] = (
+    "NATO NELL-ERA 2, e il difetto l-ha misurato il guardiano su un clone pulito di "
+    "c68b635: `valida` FALLIVA (PI-REPLAY su Z47 e Z103) perche- quel commit portava 4 "
+    "righe di storico SENZA `voci.jsonl` -- e il `pre-commit` non l-aveva fermato perche- "
+    "i controlli LEGGONO I FILE SUL DISCO, dove la voce era gia- modificata, e NON il "
+    "contenuto IN STAGE. ### SI APPLICA ALL-ERA 2 COSI-: `csv/_stage.py` esporta "
+    "l-INDICE in una cartella temporanea (`git checkout-index`) e fa girare i controlli "
+    "del CONTENUTO la- dentro, con `GIT_DIR` che punta al repo vero -- cosi- `git show` e "
+    "`git diff --cached` vedono lo STESSO indice e gli strumenti leggono i byte che il "
+    "commit conterra-. ### E IL LIMITE E- DICHIARATO: la tabella `SUL_DISCO` dice quali "
+    "controlli NON possono girare sullo stage e PERCHE- -- uno che guarda lo STATO "
+    "DELL-ALBERO (i file non tracciati, l-impronta dei hook) la- non vedrebbe niente e "
+    "TACEREBBE PER VACUITA-. ### E la divisione rapido/intero e- MISURATA: 46.5 s per i "
+    "cinque, e nel `pre-commit` gira il solo validatore dell-indice (10 s).",
+    "`csv/_stage.py`; collaudo 7 su 7 su un REPO USA-E-GETTA, e il braccio prova la "
+    "proprieta- nei DUE versi: sul DISCO il caso incoerente PASSA, sullo STAGE e- "
+    "RIFIUTATO",
+    "PORTATO")
+
 METODI['REFERTO-FOTOGRAFIA-RIGENERATA'] = (
     "NATO NELL-ERA 2, e nasce da una DOMANDA DI LUCA: <<o il referto di un mandato chiuso "
     "e- un REPERTO congelato al suo commit, o si rigenera e allora non e- una fotografia. "

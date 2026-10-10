@@ -97,6 +97,19 @@ python "$(git rev-parse --show-toplevel)/primo_ordine/_collauda_passo.py" || exi
 python "$(git rev-parse --show-toplevel)/csv/_barriera.py" --collaudo || exit 1
 python "$(git rev-parse --show-toplevel)/csv/_forma_referti.py" || exit 1
 
+# ### ⛔ **I CONTROLLI DEL CONTENUTO SULLO STAGE, non sul disco** -- e il
+# ### difetto che chiude l-ha misurato il guardiano: un commit con
+# ### ### **4 righe di storico SENZA `voci.jsonl`** passava, perche- i presidi
+# ### ### **leggevano il DISCO**, dove la voce era gia- cambiata.
+# ### ⚠ **MODO RAPIDO, e la ragione e- MISURATA:** i cinque controlli sullo
+# ### stage costano `46.5` s e il `pre-commit` ne costa gia- `80` -- insieme
+# ### ### **`126`, OLTRE il budget**, e un `pre-commit` troppo lento e-
+# ### ### **la ragione numero uno per dare `--no-verify`.** Qui gira il primo
+# ### *(il validatore dell-indice, `~10` s)*, che e- ### **quello che prende
+# ### l-incoerenza fra `voci.jsonl` e `storico.jsonl`**; la serie INTERA gira
+# ### ### **in CI e nel comando unico.**
+python "$(git rev-parse --show-toplevel)/csv/_stage.py" --rapido || exit 1
+
 #  `P-SIM` -- LE SIMMETRIE (simboliche) E LE CONSERVAZIONI (numeriche).
 #  ### Le soglie sono DERIVATE dall'ordine del metodo, e il collaudo ha un
 #  ### braccio che lo PROVA: cambia `dt` e la soglia dell'energia cambia col
