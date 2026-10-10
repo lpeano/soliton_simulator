@@ -12231,3 +12231,27 @@ Ogni dato di `db_era2/` ha ### **il suo TIMBRO accanto**, col campo `versione_da
 ### ✅ **LA CURA, in tre pezzi.** ### **(1)** i due strumenti scrivono ### **solo con `--scrivi`**: girati come collaudo ### **non toccano niente**, ed e- la richiesta di Luca alla lettera. ### **(2)** il `pre-commit` li ### **rigenera e li mette in stage** — ### **l-unico posto dove quel numero PUO- essere giusto**, perche- il commit che cambia l-indice ### **porta anche il suo generato.** ### **(3)** la CI li rigenera e ### **pretende la diff vuota.**
 
 ### ⭐ **E ADESSO SONO NEL REGISTRO DELLA FORMA, come `VIVO`** — e sono ### **il caso piu- puro**: un testo che dice *«com-e- il repo OGGI»*, rigenerato e ### **con la diff pretesa vuota.** ### ✅ **Il contratto che avevo scritto al punto `4` si applica a loro senza una riga di eccezione.**
+
+## MANDATO ⑧, PUNTO `1`: LA DIVISIONE — ### **e la misura corregge una parola del mandato** *(2026-10-10)*
+
+### 📌 **LA DECISIONE DI LUCA:** alla nascita ### **`psi -> psi/sqrt(2)`** per il padre ### **e** per il figlio, ### **con la stessa fase** — conserva la somma di `rho` e ### **dimezza** la somma di `rho^2`.
+
+### ⛔ **E LA PAROLA «AL BIT» NON REGGE, MISURATO:** su `200000` spinori casuali *(seme `11`)* la somma di `rho` coincide ### **al bit nel `23.7`% dei casi**, con errore relativo massimo ### **`9.4e-16`.** ### ⭐ **Il motivo e- preciso: `(1/sqrt(2))^2 - 0.5 = -1.11e-16`** — ### **il quadrato del fattore NON e- esattamente un mezzo.** ### ✅ **Scalare `rho` per `0.5` sarebbe esatto al `100`%** *(`0.5` e `2` sono esatti in binario)*, ### **ma si scala `psi`, non `rho`.**
+
+### ✅ **QUINDI LA FORMA GIUSTA E- QUELLA CHE IL REPO USA GIA- PER LA NORMA: esatta in ARITMETICA ESATTA, e in virgola mobile resta SOLO L-ARROTONDAMENTO** — cioe- la soglia `passi * eps`, ### **non una soglia al bit.** ### 📌 **E la somma di `rho^2` si dimezza con la stessa precisione: mediana `0.49999999999999983`.**
+
+### ⭐ **E `P-ALB` HA RIFIUTATO DI MARCARLA PRESA, e ha ragione:** `D7` ### **dipende da `D6`** *(il vuoto)*, che ### **non e- preso** — e una decisione ### **non si prende prima di quelle da cui dipende.** ### ⚠ **Ed e- una tensione NEL MANDATO STESSO: il suo punto `6` dice che il VUOTO LOCALE blocca la mitosi e PRECEDE `D9`**, cioe- ### **mette il vuoto prima.**
+
+### ✅ **LUCA HA SCRITTO TRE VOLTE «se l-albero dice altro, VINCE L-ALBERO e scrivi la differenza»: l-ho rispettato.** Il ### **CONTENUTO** della decisione e- registrato nel nodo, ### **verificabile**, e `presa` resta ### **false** finche- `D6` non e- preso — e ### **`D6` si prende nella voce ⑩ della coda** *(`VUOTO-LOCALE-DETERMINISTICO` da proposta a decisione di Luca)*. ### ⛔ **Non e- un rifiuto del mandato: e- l-ORDINE che il mandato stesso implica.**
+
+## MANDATO ⑧, PUNTO `1`: LA DIVISIONE — ### **e la misura corregge una parola del mandato** *(2026-10-10)*
+
+### 📌 **LA DECISIONE DI LUCA:** alla nascita ### **`psi -> psi/sqrt(2)`** per il padre ### **e** per il figlio, ### **con la stessa fase** — conserva la somma di `rho` e ### **dimezza** la somma di `rho^2`.
+
+### ⛔ **E LA PAROLA «AL BIT» NON REGGE, MISURATO:** su `200000` spinori casuali *(seme `11`)* la somma di `rho` coincide ### **al bit nel `23.7`% dei casi**, con errore relativo massimo ### **`9.4e-16`.** ### ⭐ **Il motivo e- preciso: `(1/sqrt(2))^2 - 0.5 = -1.11e-16`** — ### **il quadrato del fattore NON e- esattamente un mezzo.** ### ✅ **Scalare `rho` per `0.5` sarebbe esatto al `100`%** *(`0.5` e `2` sono esatti in binario)*, ### **ma si scala `psi`, non `rho`.**
+
+### ✅ **QUINDI LA FORMA GIUSTA E- QUELLA CHE IL REPO USA GIA- PER LA NORMA: esatta in ARITMETICA ESATTA, e in virgola mobile resta SOLO L-ARROTONDAMENTO** — cioe- la soglia `passi * eps`, ### **non una soglia al bit.** ### 📌 **E la somma di `rho^2` si dimezza con la stessa precisione: mediana `0.49999999999999983`.**
+
+### ⭐ **E `P-ALB` HA RIFIUTATO DI MARCARLA PRESA, e ha ragione:** `D7` ### **dipende da `D6`** *(il vuoto)*, che ### **non e- preso** — e una decisione ### **non si prende prima di quelle da cui dipende.** ### ⚠ **Ed e- una tensione NEL MANDATO STESSO: il suo punto `6` dice che il VUOTO LOCALE blocca la mitosi e PRECEDE `D9`**, cioe- ### **mette il vuoto prima.**
+
+### ✅ **LUCA HA SCRITTO TRE VOLTE «se l-albero dice altro, VINCE L-ALBERO e scrivi la differenza»: l-ho rispettato.** Il ### **CONTENUTO** della decisione e- registrato nel nodo, ### **verificabile**, e `presa` resta ### **false** finche- `D6` non e- preso — e ### **`D6` si prende nella voce ⑩ della coda** *(`VUOTO-LOCALE-DETERMINISTICO` da proposta a decisione di Luca)*. ### ⛔ **Non e- un rifiuto del mandato: e- l-ORDINE che il mandato stesso implica.**

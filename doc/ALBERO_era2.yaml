@@ -81,7 +81,35 @@ nodi:
     argomento_noto: true
     dipende_da: [DEC-D6-VUOTO]
     presa: false
-    fonte: "doc/CODA_2026-10-09.md::albero delle scelte, punto 2"
+    fonte: "doc/CODA_2026-10-09.md::le sei decisioni del 2026-10-10, punto 1"
+    nota: >
+      DECISIONE DI LUCA, 2026-10-10 (da CANDIDATA a PRESA). Alla nascita
+      psi -> psi/sqrt(2) per il padre E per il figlio, CON LA STESSA FASE.
+      Conserva la somma di rho e DIMEZZA la somma di rho^2.
+      ### MISURATO, e corregge la parola del mandato: la conservazione e-
+      ESATTA IN ARITMETICA ESATTA, non AL BIT. Su 200000 spinori casuali
+      (seme 11) la somma di rho coincide al bit nel 23.7% dei casi, con
+      errore relativo massimo 9.4e-16, perche- (1/sqrt(2))^2 - 0.5 vale
+      -1.11e-16: il quadrato del fattore NON e- esattamente un mezzo.
+      Scalare rho per 0.5 sarebbe esatto al 100% (0.5 e 2 sono esatti in
+      binario), ma si scala PSI, non rho. ### E la somma di rho^2 si
+      dimezza con la stessa precisione: mediana 0.49999999999999983.
+      ### Quindi la soglia giusta e- quella della NORMA (passi * eps), la
+      stessa famiglia del punto medio implicito, e NON una soglia al bit.
+      ### E CIO- CHE ERA GIA- SCRITTO RESTA VERO: la divisione ALZA H,
+      quindi va PAGATA -- e- la decisione 10, PRESA in 3e8375b (il calore
+      paga la nascita, e LA SOGLIA E- IL BILANCIO).
+      ### ⛔ E QUI UNA DIFFERENZA DAL MANDATO, e L-ALBERO VINCE -- come Luca
+      scrive tre volte: <<se l-albero dice altro, VINCE L-ALBERO e scrivi la
+      differenza>>. Il mandato chiede di portare questa decisione a PRESA, ma
+      D7 DIPENDE DA D6 (il vuoto), che NON e- preso -- e P-ALB rifiuta, perche-
+      una decisione non si prende PRIMA di quelle da cui dipende. ### E il
+      punto 6 DELLO STESSO MANDATO dice che il VUOTO LOCALE blocca la mitosi e
+      PRECEDE D9: cioe- il mandato stesso mette il vuoto PRIMA. ### QUINDI il
+      CONTENUTO della decisione e- registrato QUI, verificabile, e presa resta
+      false finche- D6 non e- preso -- e D6 si prende nella voce 10 della coda
+      (VUOTO-LOCALE-DETERMINISTICO da proposta a decisione di Luca). ### Non e-
+      un rifiuto del mandato: e- l-ORDINE che il mandato stesso implica.
 
   # ----------------------------------------------------------------------------------
   #  IL NODO DI METODO, il solo fuori dalla catena di cui il repo sappia l-argomento
