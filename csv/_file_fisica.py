@@ -40,6 +40,49 @@ NL = chr(10)
 # ### ### SOGGETTO A `H-REG-R`** -- nessuna legge cambia senza la sua scheda nel registro --
 # ### e a `H-P7`, il commento di ogni flag. ### **Mettere un file qui gli mette addosso
 # ### DUE presidi.**
+# ### ⛔ **I BANCHI: codice di fisica che NON E- UNA LEGGE** *(dal 2026-10-10)*.
+# ### ⚠ **E NON STANNO IN `FILE_FISICA`, di proposito:** questo file dichiara due righe
+# ### sopra che ### **mettere un file in quella lista gli mette addosso DUE presidi**
+# ### -- `H-REG-R` *(nessuna legge cambia senza la sua scheda nel registro)* e `H-P7`
+# ### *(il commento di ogni flag)*. ### ⛔ **Un banco NON HA una scheda nel registro
+# ### delle leggi, perche- NON E- UNA LEGGE**: pretenderla vorrebbe dire
+# ### ### **registrare come legge una cosa che non lo e-**, e sarebbe peggio del silenzio.
+# ### ✅ **CIO- CHE UN BANCO HA, e qui si dichiara, e- UN COLLAUDO CHE SI RIGIRA.**
+#   `(cartella, che cos-e-, il comando che lo collauda)`
+BANCHI = (
+    ("proto_camminata/",
+     "il prototipo della camminata a moneta (mandato di Luca, 2026-10-10)",
+     "python proto_camminata/_collauda_banco.py"),
+    ("proto_primo_ordine/",
+     "il banco di `A16` al primo ordine (2026-10-08)",
+     "python proto_primo_ordine/proto.py"),
+)
+
+# ### ⛔ **I PRESIDI CHE VALGONO PER UN BANCO, e quelli che NON valgono -- col
+# ### MOTIVO.** ### ⚠ **Non e- una cortesia: e- la differenza fra <<non si applica>> e
+# ### ### <<nessuno ci ha pensato>>**, e `A9` dice che la seconda e- una tenda.
+PRESIDI_DI_UN_BANCO = (
+    ("il collaudo nella suite", True,
+     "un banco senza collaudo nel comando unico e- un banco che invecchia in silenzio"),
+    ("`_presidio.avvia` (encoding e timbro)", True,
+     "ogni script che misura timbra il suo blob: e- il par. 7, ed e- successo DIECI volte"),
+    ("nessun import del simulatore", True,
+     "un banco che importa il simulatore non e- un banco: `_niente_simulatore()` guarda "
+     "`sys.modules` e FERMA"),
+    ("determinismo byte-identico fra due processi", True,
+     "una misura non riproducibile non e- una misura"),
+    ("`H-REG-R` (la scheda nel registro delle leggi)", False,
+     "un banco NON E- UNA LEGGE: pretendere la scheda vorrebbe dire registrare come legge "
+     "una cosa che non lo e-"),
+    ("`H-P7` (il commento di ogni flag)", False,
+     "un banco non ha flag di configurazione del simulatore: le sue scelte stanno nel task "
+     "history, e il task history e- committato PRIMA"),
+    ("`leggi.yaml` e il generatore", False,
+     "un banco non entra nella tabella delle leggi, e un braccio del suo collaudo lo "
+     "verifica"),
+)
+
+
 FILE_FISICA = (
     "soliton_simulator.py",
     'primo_ordine/__init__.py',
@@ -226,6 +269,15 @@ def main():
         print("  ### ⛔ QUINDI IL PRESIDIO SULLA CARTELLA NON IMPEDISCE NIENTE (`A9`): il")
         print("  ###    codice c-e- e il collaudo gira su una cartella di PROVA, ma")
         print("  ###    SULL-ALBERO VERO non guarda niente. E- UNA TENDA, e lo dichiaro.")
+    print()
+    print("  I BANCHI (fisica che NON e- una legge):")
+    for cart, che, cmd in BANCHI:
+        print("   %-24s %s" % (cart, che))
+        print("   %-24s   %s" % ("", cmd))
+    print()
+    print("  I PRESIDI DI UN BANCO, e quelli che NON valgono -- col motivo:")
+    for nome, vale, motivo in PRESIDI_DI_UN_BANCO:
+        print("   %-4s %-44s %s" % ("SI" if vale else "NO", nome, motivo[:70]))
     print()
     print("  CHI LEGGE LA LISTA (e prima scriveva il nome a mano):")
     for f in ("csv/_hook_fisica.py", "csv/_presidio_commenti_flag.py"):

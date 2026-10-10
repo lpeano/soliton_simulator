@@ -12648,3 +12648,25 @@ Ogni dato di `db_era2/` ha ### **il suo TIMBRO accanto**, col campo `versione_da
 ### ⚠ **E IL RISCHIO PIU- SERIO L-HO SCRITTO PRIMA DI INCONTRARLO:** la <<frequenza di un nodo>> ### **potrebbe non essere una grandezza ben definita**, perche- ### **l-argomento di un numero quasi nullo e- rumore.** ### ✅ **La difesa, decisa ORA:** la dispersione si misura ### **pesata con `ρ`** e la fase si prende ### **sull-ampiezza TOTALE del cluster** — cosi- ### **nessun pavimento e nessuna soglia a mano** *(`A11`)*.
 
 ### ✅ **E DUE COSE CHE IL DOCUMENTO DICHIARA DI NON FARE**, perche- non diventino una sorpresa: ### **`cs_k = 1` ovunque** — quindi ### **questo prototipo NON prova la `cs` locale**, e i punti `3`-`6` di `TEMPO-PROPRIO-LOCALE` restano da provare altrove; e ### **`r_k` resta DATO**, perche- derivarlo sarebbe ### **prendere al posto di Luca la decisione che l-albero chiama `DOMANDA-LAMBDA-GRANDEZZA`.**
+
+## ✅ **IL PROTOTIPO, PUNTI `2` e `3`: IL BANCO ESISTE, E IL BRACCIO `0` E- ZERO AL BIT** *(2026-10-10)*
+
+### 📌 **IL BANCO:** `proto_camminata/` con ### **quattro file** *(`scena.py`, `camminata.py`, `nonlineare.py`, `_collauda_banco.py`)*, collaudo ### **`19` su `19`**, e ### **dentro la suite** *(`pre-commit`)*.
+
+### ⭐ **IL RISULTATO CHE CONTA PIU- DI TUTTI, ed e- il braccio `0`:** la camminata ### **LINEARE e- simmetrica sotto la coniugazione di carica AL BIT** — ### **`max|C(U psi) - U(C psi)| = 0`**, non <<piccolo>>. ### ✅ **E la derivazione del task history diceva ESATTAMENTE questo:** la previsione era scritta ### **prima**, e la misura l-ha confermata ### **senza margine.**
+
+### ✅ **E LE DUE NON LINEARITA- SI COMPORTANO COME IL CONTO DICEVA:** ### **`(A)`** *(fase PARI sotto `C`)* ### **ROMPE `C`: `2.01e-3`** — ed e- ### **il braccio che DEVE fallire**; ### **`(B)`** *(fase proporzionale allo SBILANCIAMENTO DI BANDA, DISPARI sotto `C`)* ### **la rispetta AL BIT: `0`.**
+
+### 📌 **GLI ALTRI NUMERI, tutti contro soglie DERIVATE:** norma ### **`1.2e-15`** su soglia ### **`5.5e-12`** *(`= 60 x 416 x eps`)*; cono ### **`0.0` ESATTO** oltre `3` archi, su `178` estremita-; isotropia ### **`0.0` con `fsum`** e ### **`1.07e-16`** con `numpy`, su soglia `7.99e-14`; `r=1` coincide col `dt` globale ### **AL BIT**; determinismo fra ### **DUE PROCESSI: impronta identica.**
+
+### ⛔ **E TRE COSE LE HA PRECISATE LA MISURA, non il mio piano — e le ho ANNOTATE, non riscritte** *(par. `8`)*:
+
+### 📌 **`(a)` il `T` del cono NON puo- essere `60`:** il grafo ha ### **eccentricita- `6` archi**, quindi a `60` tick ### **tutto il grafo e- dentro il cono** e il braccio ### **passerebbe per VACUITA-.** ### ✅ **La cura e- una REGOLA, non un numero:** `T = eccentricita- // 2`, e il braccio dichiara ### **`57` nodi oltre il cono.**
+
+### 📌 **`(b)` l-isotropia ha DUE MODI**, e la differenza e- misurata: ### **con `fsum` e- ZERO AL BIT.** ### ⭐ **Ed e- un risultato per l-era `2`, non un dettaglio:** ### **l-isotropia della camminata e- ESATTA**, e cio- che si vede con `numpy` e- ### **solo l-arrotondamento della somma** — quindi ### **chi la vuole al bit somma con `fsum`**, esattamente come fa gia- `primo_ordine/hamiltoniana.py`.
+
+### 📌 **`(c)` la lettura `1b` si precisa, e senza la precisazione non misurerebbe niente:** *«camminata contro integratore a strati, con la differenza che scende come `dt^2`»* ### ⛔ **non si puo- fare** — sono ### **due dinamiche diverse** *(tick FISSO contro passo che si rimpicciolisce)*, e la loro differenza ### **non tende a zero.** ### ✅ **Cio- che si misura e- l-ANISOTROPIA dell-integratore** *(due decomposizioni in strati)*, che deve scendere come `dt^2`, ### **contro la camminata, che non ha strati e ha anisotropia `0.0`.**
+
+### ✅ **E IL BANCO E- DICHIARATO, ma NON in `FILE_FISICA` — e il motivo era gia- scritto in quel file:** quella lista mette addosso ### **`H-REG-R`**, che pretende ### **la scheda nel registro delle leggi** — e ### **un banco NON E- UNA LEGGE.** ### ⛔ **Quindi c-e- `BANCHI`, e accanto `PRESIDI_DI_UN_BANCO` nei DUE VERSI:** `4` presidi che ### **valgono**, `3` che ### **NON valgono CON IL MOTIVO** — perche- ### **<<non si applica>> senza il motivo e- una tenda** *(`A9`)*. ### **Quattro bracci nuovi lo verificano**, e il collaudo di quel file passa da `18` a ### **`22` su `22`.**
+
+### ⚠ **E DUE BRACCI MIEI ERANO TROPPO GROSSOLANI, e li ha trovati LORO STESSI al primo giro:** cercavano ### **la parola <<simulatore>>** e ### **le forme di un clip** ### **anche nel file che le NOMINA per cercarle** — cioe- ### **accusavano se stessi.** ### ✅ **La cura:** si cerca ### **un IMPORT** *(due forme sole)* e si guardano ### **solo i file di FISICA del banco**; al collaudo stesso ci pensa ### **`sys.modules` A RUNTIME**, che per un file ### **che gira** e- ### **piu- forte di una ricerca nel testo** — vede anche ### **gli import indiretti.**

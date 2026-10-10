@@ -141,6 +141,12 @@ COLLAUDI = (
     # ### ### **24 cartelle che `rmtree` non riusciva a cancellare in silenzio.**
     # ### ✅ **Costa meno di un secondo**, quindi sta nel `pre-commit`.
     ("la pulizia delle temporanee", "csv/_pulizia.py --collaudo", "pre-commit"),
+    # ### ⭐ **IL BANCO DELLA CAMMINATA** *(mandato di Luca, 2026-10-10)*: e-
+    # ### ### **il primo codice di fisica dell-era 2**, e il suo collaudo porta
+    # ### ### **il braccio 0** -- la simmetria di coniugazione di carica, AL BIT.
+    # ### ⚠ **Sta nel `pre-commit` perche- costa pochi secondi**, e il
+    # ### ### **determinismo fra due processi** e- la parte piu- lenta.
+    ("il banco della camminata", "proto_camminata/_collauda_banco.py", "pre-commit"),
     # ### ⚠ **E `csv/_verifica_clone.py` NON STA QUI, DI PROPOSITO:** fa un clone e
     # ### ### **ci fa girare QUESTA suite** -- metterlo fra i collaudi vorrebbe dire
     # ### ### **una ricorsione senza fondo.** Si lancia a mano, ed e- il punto 3 del

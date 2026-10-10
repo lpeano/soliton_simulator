@@ -3037,3 +3037,16 @@ etichette rimosse, con ### **`0` persi, `0` doppi, `0` conflitti**.
 | ⭐ **QUALE CLONE, E PERCHE-** | ### **`git clone --local`**: gli oggetti si ### **HARDLINKANO**, quindi sullo stesso volume il clone costa ### **quasi zero byte** e ### **la storia resta INTERA** |
 | ⚠ **E `--depth 1` NON SI PUO-** | `H-P8` pretende il codice di prima ### **dal PADRE**, `_replay_registri` legge ### **lo storico dei commit**, e `indice.py storico-commit` ### **ricava il commit dai log**: un clone superficiale li farebbe passare ### **PER VACUITA-**, che e- peggio che non girarli |
 | ⛔ **NON STA NELLA SUITE, di proposito** | fa un clone e ci fa girare ### **la suite**: metterlo fra i collaudi sarebbe ### **una ricorsione senza fondo** |
+
+### `proto_camminata/` — **IL BANCO DELLA CAMMINATA A MONETA: il primo codice di fisica dell-era `2`** *(2026-10-10)*
+
+| | |
+|---|---|
+| **i file** | `proto_camminata/scena.py` · `camminata.py` · `nonlineare.py` · `_collauda_banco.py` |
+| **COMANDO** | `python proto_camminata/_collauda_banco.py` *(### **`19`/`19`**)* · `python proto_camminata/scena.py` · `python proto_camminata/camminata.py --impronta` · `python proto_camminata/nonlineare.py` |
+| **che cosa misura** | la camminata quantistica a moneta su un grafo ### **irregolare costruito senza `pos`**: moneta di ### **Grover** sulle estremita- del nodo, moneta di ### **banda** `exp(-i dτ_k σ_z)` *(la massa)*, ### **spostamento** di tutti gli archi insieme, e ### **due non linearita- di prova** |
+| ⭐ **IL BRACCIO `0`** | ### **la camminata lineare e- simmetrica sotto `C ψ = σ_x ψ*` AL BIT** *(`0.0`)*, e `C` e- ### **un-involuzione esatta**. ### **Senza questo, la lettura `5` non si potrebbe nemmeno formulare** |
+| ⛔ **IL BRACCIO CHE DEVE FALLIRE** | la non linearita- ### **`(A)`**, con fase ### **pari sotto `C`**, ### **ROMPE `C`**: misurato ### **`2.01e-3`**, e ### **deve** essere diverso da zero |
+| ✅ **LA CANDIDATA** | ### **`(B)`**, con fase proporzionale allo ### **SBILANCIAMENTO DI BANDA** `ρ₊ − ρ₋` *(### **dispari sotto `C`**)*: ### **rispetta `C` AL BIT** |
+| 📌 **I NUMERI** | grafo ### **`120` nodi, `208` archi, gradi `2`-`6`** *(`5` distinti)*, ### **`416` estremita-**; norma conservata entro ### **`1.2e-15`** su soglia `5.5e-12`; cono ### **`0.0` esatto** oltre `3` archi; isotropia ### **`0.0` con `fsum`**, `1.07e-16` con `numpy`; `r=1` coincide col `dt` globale ### **al bit** |
+| ⚠ **NON E- UNA LEGGE** | ### **non entra in `leggi.yaml`** *(un braccio lo verifica leggendo la tabella)*, ### **non importa il simulatore** *(due bracci: il sorgente e `sys.modules`)*, e ### **non ha ne- clip ne- pavimenti** *(un braccio cerca `6` forme nei file di fisica del banco)* |

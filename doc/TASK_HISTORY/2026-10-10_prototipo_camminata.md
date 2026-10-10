@@ -141,3 +141,19 @@ la STESSA fase alle due bande, e cosi' tiene una e disfa l'altra.**
 tocchero' **`leggi.yaml`** *(il banco non e' una legge)*, e non derivero' `r_k` — ### **il
 mandato dice <<dato>>**, e derivarlo sarebbe **prendere al posto di Luca la decisione che
 l'albero chiama `DOMANDA-LAMBDA-GRANDEZZA`.**
+
+---
+
+## ⛔ **ANNOTAZIONI — che cosa la MISURA ha precisato** *(par. `8`: ### **non si riscrive, si ANNOTA**)*
+
+### 📌 **`(a)` IL `T` DEL CONO NON PUO' ESSERE `60`, E IL MOTIVO E' UNA MISURA.** Il grafo irregolare costruito come dichiarato ha ### **eccentricita' `6` archi** *(misurata con una `BFS`, `python proto_camminata/scena.py`)* — quindi a `60` tick ### **tutto il grafo e' DENTRO il cono**, e il braccio ### **passerebbe per VACUITA'.**
+
+### ✅ **LA CURA E' UNA REGOLA, NON UN NUMERO:** `T_cono = eccentricita' // 2`, ### **cosi' i nodi oltre il cono ESISTONO SEMPRE** — e il collaudo ### **lo dichiara nella nota del braccio** *(`T=3`, `57` nodi oltre, `178` estremita' confrontate)*. ### ⚠ **I `60` tick restano** per norma e isotropia, dove non c'entra la distanza.
+
+### 📌 **`(b)` L'ISOTROPIA HA DUE MODI, e la differenza e' MISURATA.** La somma sulle estremita' di un nodo e' ### **l'unico pezzo che dipende dall'ORDINE**: con `numpy` cambia gli ultimi bit, con **`math.fsum`** e' ### **esatta.** ### ✅ **Misurato:** con `fsum` la differenza fra la scena e la sua rinumerazione e' ### **`0.0` AL BIT**; con `numpy` e' ### **`1.07e-16`** contro una soglia di ### **`7.99e-14`.**
+
+### ⭐ **E QUESTO E' UN RISULTATO PER L'ERA `2`, non un dettaglio di implementazione:** ### **l'isotropia della camminata e' ESATTA**, e cio' che si vede con `numpy` e' ### **solo arrotondamento** — quindi ### **se si vuole l'isotropia AL BIT basta sommare con `fsum`**, esattamente come fa gia' `primo_ordine/hamiltoniana.py`.
+
+### 📌 **`(c)` LA LETTURA `1b` SI PRECISA, e senza la precisazione non misurerebbe niente.** *«Il confronto con l'integratore a strati, con la differenza che scende come `dt²`»* ### ⛔ **non puo' essere <<la camminata contro l'integratore>>:** sono ### **due dinamiche diverse** — la camminata ha un tick ### **fisso** *(un arco)*, l'integratore un passo ### **che si rimpicciolisce** — e una differenza fra due dinamiche diverse ### **non tende a zero.**
+
+### ✅ **CIO' CHE SI MISURA, e che e' il confronto che conta:** ### **l'ANISOTROPIA dell'integratore a strati** — la differenza fra ### **due decomposizioni in strati** della stessa scena — deve scendere come ### **`dt²`**, mentre la camminata ### **non ha strati** e la sua anisotropia e' ### **`0.0` al bit.** ### ⭐ **Cosi' il confronto dice una cosa di FISICA:** l'anisotropia dell'integratore e' ### **un artefatto che si paga in `dt²`**, quella della camminata ### **non esiste.**

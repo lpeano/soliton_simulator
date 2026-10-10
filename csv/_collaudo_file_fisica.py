@@ -116,6 +116,34 @@ def main():
               "e- la misura di cio- che il presidio NON faceva: non un ricordo")
     finally:
         _pulizia.via_finale(_tv)
+    # ### ⛔ **I BANCHI SONO DICHIARATI, E LA DICHIARAZIONE DEVE ESSERE VERA**
+    # ### *(dal 2026-10-10)*. ### ⚠ **Tre bracci, e il terzo e- quello che conta:**
+    # ### un banco ### **NON PUO- STARE IN `FILE_FISICA`**, perche- quella lista mette
+    # ### addosso `H-REG-R` -- e ### **un banco non ha una scheda nel registro delle leggi,
+    # ### perche- NON E- UNA LEGGE.**
+    _mancanti = [c for c, _che, _cmd in FF.BANCHI
+                 if not os.path.isdir(os.path.join(FF.RADICE, c))]
+    esito("### ogni BANCO dichiarato ESISTE", not _mancanti,
+          "### %d banchi dichiarati%s" % (len(FF.BANCHI),
+                                          (": MANCA %s" % _mancanti) if _mancanti else ""))
+    _senza = [c for c, _che, cmd in FF.BANCHI
+              if not os.path.isfile(os.path.join(FF.RADICE,
+                                                 cmd.split()[-1].replace("/", os.sep)))]
+    esito("### e ogni BANCO ha un COLLAUDO che esiste", not _senza,
+          "### un banco senza collaudo invecchia in silenzio%s"
+          % ((": %s" % _senza) if _senza else ""))
+    _dentro = [x for x in FF.FILE_FISICA
+               if any(x.startswith(c) for c, _che, _cmd in FF.BANCHI)]
+    esito("### e NESSUN file di un BANCO sta in `FILE_FISICA`", not _dentro,
+          "### un banco non e- una legge: `H-REG-R` pretenderebbe una scheda che non "
+          "esiste%s" % ((": %s" % _dentro) if _dentro else ""))
+    _si = [x for x in FF.PRESIDI_DI_UN_BANCO if x[1]]
+    _no = [x for x in FF.PRESIDI_DI_UN_BANCO if not x[1]]
+    esito("### MATERIA: i presidi di un banco sono dichiarati NEI DUE VERSI",
+          len(_si) >= 2 and len(_no) >= 2,
+          "### %d valgono, %d NON valgono col motivo -- e <<non si applica>> senza il "
+          "motivo e- una tenda (`A9`)" % (len(_si), len(_no)))
+
     # ### ⛔ **E LA LISTA NON PUO- RIPETERSI** *(trovato il 2026-10-10)*: i tre
     # ### file di `config/` c-erano ### **CINQUE VOLTE**, residuo di una patch non
     # ### idempotente. ### ⚠ **Non impediva niente**, ma ### **il conteggio era
