@@ -2863,6 +2863,35 @@ etichette rimosse, con ### **`0` persi, `0` doppi, `0` conflitti**.
 
 ---
 
+### `csv/_albero_era2.py` + `doc/ALBERO_era2.yaml` — **`P-ALB`: L'ALBERO DELLE SCELTE** *(2026-10-10)*
+
+| | |
+|---|---|
+| **file** | `csv/_albero_era2.py` *(il presidio)* · `doc/ALBERO_era2.yaml` *(### **la fonte**)* |
+| **BLOB** *(sha1 dei byte grezzi)* | `678daec8` · `f6958a51` |
+| **COMANDO** | `python csv/_albero_era2.py --collaudo` *(i due versi)* · `python csv/_albero_era2.py` *(i numeri)*. ### **E gira da se' dentro `python csv/indice.py valida`** |
+| **cosa misura** | ### **sei cose**: una dipendenza che non esiste · ### ⛔ **un nodo `presa` con una dipendenza NON `presa`** *(il punto `3` del mandato)* · un ### **ciclo** · un nodo `presa` di cui ### **non si sa l'argomento** · un id corto o che collide · ### **un'etichetta locale usata come id** |
+| ### ⭐ **e perché è il cuore del mandato** | il mandato `2` portava `43` decisioni ### **già prese** e il rischio era ### **tradirne una**; questo scrive il piano di quelle ### **non ancora prese**, e il rischio è ### **farne sembrare presa una che non lo è.** ### **E il caso vero è già sul tavolo: su `D9` Luca ha dichiarato una DIREZIONE, e il mandato dice nella stessa frase che non è una DECISIONE PRESA** |
+| ### ⚠ **e i nodi NON si scrivono a mano** | `doc/indice/decisioni.jsonl` è ### **GENERATO**: un nodo scritto a mano là dentro ### **sarebbe cancellato al primo giro** *(misurato, `DUE-VIE-SU-LEGGI-JSONL`)*. ### **La fonte è il `yaml`, e il generatore RIFIUTA di generare se `P-ALB` non passa** |
+| **l'uscita** | a schermo; ### **`14` bracci su `14`**, col ramo ### **END-TO-END** che verifica che `indice.py valida` ### **esca `1`** |
+
+---
+
+### `csv/_referto_piano_era2.py` — **IL REFERTO DEL PIANO E DELL'ALBERO** *(2026-10-10)*
+
+| | |
+|---|---|
+| **file** | `csv/_referto_piano_era2.py` |
+| **BLOB** *(sha1 dei byte grezzi)* | `969ffd76` |
+| **COMANDO** | `python csv/_referto_piano_era2.py` |
+| **cosa misura** | il mandato `3` di `6`. Le cifre escono dall'### **albero sul disco**, dall'### **indice**, dalla ### **tabella delle leggi**, e dall'uscita di ### **`4` collaudi che fa girare** |
+| ### ⭐ **e la sezione che conta è la `2.`** | *«che cosa ho trovato PRIMA di cominciare»*: ### **quattro difetti**, trovati eseguendo il primo passo del task history *(«leggere ### **dal codice** chi valida `decisioni.jsonl`»)*. ### **Il peggiore: un presidio che passava `13` su `13` con QUATTRO record cancellati** |
+| ### 📌 **e la sezione `7.` non si fida di me** | verifica con `git merge-base --is-ancestor` che il commit del ### **task history** sia ### **antenato** di `HEAD`: *«il ragionamento l'ho scritto prima»* diventa ### **una proprietà del grafo dei commit**, non una mia affermazione |
+| ### ⚠ **ESENTE-H-P5, dichiarato nel file** | non misura il simulatore. Il blob è ### **asserito** comunque |
+| **l'uscita** | `doc/REFERTO_piano_era2.md` |
+
+---
+
 ### `csv/_id_nuovo.py` — **`P-ID`: UN ID CHE NASCE NON PUO' COLLIDERE** *(2026-10-10)*
 
 | | |

@@ -11773,3 +11773,17 @@ Ogni dato di `db_era2/` ha ### **il suo TIMBRO accanto**, col campo `versione_da
 ### ⭐ **E DUE COSE CHE IL PIANO DICE E CHE NON SONO BUONE NOTIZIE.** La prima: ### **la regola `(a)` di `F1` e- GIA- VERA senza essere una regola** — `PROVA-HOPPING` ha ### **esattamente** la forma bilineare, ### **ma il generatore OGGI NON LA PRETENDE**, e ### **finche- non la pretende non e- una regola: e- un-abitudine.** La seconda: ### **`F2` non puo- nemmeno cominciare** prima che Luca risponda su `DEC-ALBERO-CINQUE-SENZA-ARGOMENTO`, ### **e lo dico nella fase, non in una nota a margine.**
 
 ### ⚠ **E HO RIPORTATO NEL PIANO UN DIFETTO APERTO DOVE FA PIU- MALE:** ### **`H-FISICA-FUORI-LISTA` legge la lista dal DISCO**, quindi una modifica non committata alla lista ### **autorizza un commit** — ### **e in `F3`, dove le leggi entrano una alla volta, quel buco conta piu- che in `F0`.**
+
+## IL REFERTO DEL MANDATO `3` DI `6`, E IL CHECKPOINT *(2026-10-10)*
+
+### ✅ **`doc/REFERTO_piano_era2.md`, generato da `csv/_referto_piano_era2.py`:** le cifre escono dall-### **albero sul disco**, dall-### **indice**, dalla ### **tabella delle leggi**, e dall-uscita di ### **quattro collaudi che lo script FA GIRARE.** ### **Quattro punti su quattro fatti.**
+
+### ⭐ **E LA SEZIONE CHE CONTA E- LA `2.`: <<che cosa ho trovato PRIMA di cominciare>>.** Il task history ordinava come primo passo *«leggere ### **dal codice** chi valida `decisioni.jsonl`»*, e quella lettura — ### **fatta prima di scrivere una riga del piano** — ha trovato ### **quattro difetti.** ### ⛔ **Il peggiore: un presidio che passava `13` su `13` con QUATTRO record cancellati.** ### **Non e- un contorno del mandato: e- metà del mandato.**
+
+### 📌 **E LA SEZIONE `7.` NON SI FIDA DI ME.** Verifica con `git merge-base --is-ancestor` che il commit del task history *(`ccafeca`)* sia ### **antenato di `HEAD`**: ### ⭐ **cosi- <<il ragionamento l-ho scritto prima>> diventa UNA PROPRIETA- DEL GRAFO DEI COMMIT, non una mia affermazione.** ### ✅ **Verificato: lo e-.**
+
+### 📌 **I NUMERI DEL CHECKPOINT:** `valida` ### **PASSA INTERA** *(con `P-ALB` dentro)*, segnali ### **`19`**; i collaudi ### **`P-ALB` `14/14`** · ### **`P-T2` `22/22`** · ### **arbitro `6/6`** · ### **presidi dell-indice `16/16`**; l-albero ### **`10` nodi, `3` archi, `0` PRESA, `5` senza argomento noto**; `decisioni.jsonl` ### **`25` → `35`**; il simulatore ### **`b8c21049` intatto.**
+
+### ⚠ **E LO STATO DELLE FASI, misurato e non sperato:** `F0` ### **NON chiusa** *(restano i mandati `4` e `5`)*; `F1` ### **non cominciata**, e la sua regola `(a)` e- ### **gia- vera senza essere una regola**; `F2` ### **NON PUO- COMINCIARE** *(aspetta Luca su `DEC-ALBERO-CINQUE-SENZA-ARGOMENTO`)*; `F3` ### **zero leggi vere**; `F4` non cominciata.
+
+### ➡ **Il mandato `3` di `6` e- CHIUSO. Passo al mandato `4`: la TERZA parte dell-infrastruttura** — determinismo, dimensioni, simmetrie, grafo valido, hook e CI, tempi, e la guida.

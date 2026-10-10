@@ -28,6 +28,10 @@
 | ### **il criterio `②` di `da-decidere`** | ### **TOLTO**, per decisione di Luca: *<<la domanda si chiude>>* ### **e** *<<il metadato omonimo resta>>* si possono soddisfare entrambe ### **solo se non e' il metadato a generare la domanda.** `DA_DECIDERE_LUCA.md`: ### **`15` -> `4` voci** |
 | ### **`H-INDICE` curato** | verificava ### **il PREFISSO invece dell'ID**, per ### **`122` ID su `887`** *(`A9`)*. `estendi()` allunga il match al ### **piu' lungo ID NOTO**, e un intervallo resta un intervallo. ### **`122` -> `0`**, collaudo `13`/`13` |
 
+| ### **il mandato `3` di `6`** | il ### **piano** `doc/PIANO_era2.md` *(`F0`-`F4`, ognuna con ### **ingresso e uscita misurabile**)*, l'### **albero delle scelte** *(`doc/ALBERO_era2.yaml`, `10` nodi, `3` archi, ### **`0` PRESA**)*, e ### **`P-ALB`** dentro `indice.py valida`. Referto: `doc/REFERTO_piano_era2.md` |
+| ### ⭐ **e quattro difetti trovati PRIMA di cominciare** | eseguendo il primo passo del task history *(«leggere ### **dal codice** chi valida `decisioni.jsonl`»)*: `REPLAY-CIECO-ALLE-CANCELLAZIONI` *(### **`13` su `13` con `4` record cancellati**)*, `DUE-VIE-SU-LEGGI-JSONL`, `H-INDICE-IGNORA-I-VOCABOLARI`, `FORMA-SPEZZA-ID` *(### **`122` ID su `887`**)*. ### **Tutti curati, tutti con un collaudo** |
+| ### **il quarto stato di `P-T2`** | ### **`GENERATO`**: `assiomi.jsonl` e `decisioni.jsonl` erano dichiarati `REPERTO` *(«non ha una via di scrittura»)* e ### **invece sono generati** — e ### **il blob non se ne accorgeva**, perché un generatore stabile dà sempre gli stessi byte |
+
 **L'ultimo lotto applicato:** `doc/indice/_lotti/correzioni.jsonl` — ### **`313` voci**,
 `313` righe di storico, e la validazione ### **intera** passa.
 
