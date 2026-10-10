@@ -91,6 +91,7 @@ def conto_leggi():
 def timbro(config, impronta_config):
     """### `5`: ### **TUTTO cio- che distingue questa corsa da un-altra.**"""
     gen, pezzi = impronta_generati()
+    import determinismo as _DET
     import numpy
     tab = os.path.join(_QUI, "leggi", "leggi.yaml")
     return {
@@ -106,6 +107,14 @@ def timbro(config, impronta_config):
         "versioni": {"python": sys.version.split()[0], "numpy": numpy.__version__,
                      "piattaforma": platform.platform(),
                      "macchina": platform.machine()},
+        # ### ✅ **IL DETERMINISMO, TIMBRATO** *(punto `1` della terza parte)*: le
+        # ### cinque variabili dei thread, ### **se sono state fissate IN TEMPO**
+        # ### *(prima dell-`import numpy`: dopo non servono a niente)*, le versioni
+        # ### ### **confrontate col blocco**, e il conto degli RNG globali.
+        # ### ⚠ **E le DIFFERENZE dal blocco stanno QUI e non fanno fermare**, perche-
+        # ### ### **una corsa con versioni diverse dal blocco non e- confrontabile AL BIT
+        # ### con una che coincide** -- e quello e- il contenuto vero.
+        "determinismo": _DET.per_il_timbro(),
     }
 
 

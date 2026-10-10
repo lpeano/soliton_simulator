@@ -62,6 +62,7 @@ SORGENTI = (
     # ### ### **dentro il passo**, non in un `pre-commit` -- e se le `SORGENTI` guardassero
     # ### ### **solo `csv/`**, la sua voce risulterebbe ### **una tenda** mentre e- cablata.
     "primo_ordine/grafo.py",
+    "primo_ordine/determinismo.py",
     "csv/indice.py",
     "csv/_hook_presidi.py",
     "csv/_hook_id_obbligatorio.py",

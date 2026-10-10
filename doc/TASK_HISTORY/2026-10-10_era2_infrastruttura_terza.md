@@ -113,3 +113,14 @@ n'è.**
 - [ ] punto **`6`**: **`primo_ordine/collauda.py`**, i tempi, e il **budget dichiarato**
 - [ ] punto **`7`**: **`doc/COME_SI_AGGIUNGE_UNA_LEGGE.md`**, e il collaudo **che la esegue**
 - [ ] il **referto** `doc/REFERTO_infrastruttura_era2_terza.md`, e `_avanzamento.md`
+
+---
+
+## `4.` ANNOTAZIONI — ### **scritte DOPO, e il sopra NON si riscrive** *(par. `8`)*
+
+| | che cosa avevo scritto sopra | che cosa ho MISURATO |
+|---|---|---|
+| `b` | la trappola `(b)`: *«il punto `1` chiede due processi ### **byte-identici**, e i dati sono in `.npz` — che è ### **uno ZIP**, e un'intestazione ZIP porta ### **la data e l'ora**. Quindi due processi ### **NON daranno file byte-identici**»* | ### ⛔ **ERA SBAGLIATA, e il perché è MISURATO:** `numpy.savez` scrive `date_time = (1980, 1, 1, 0, 0, 0)` nell'intestazione dello ZIP — ### **AZZERA l'ora.** ### ✅ **Quindi l'identità al byte è STRUTTURALE, non fortuna, e il criterio del mandato vale COME E' SCRITTO:** `548` byte di dati e `1442` di timbro, ### **identici fra due processi.** ### ⭐ **E l'ho verificato invece di assumerlo in ENTRAMBE le direzioni: prima ho confrontato due corse, poi ho letto l'intestazione dello ZIP per sapere se l'identità era FORTUNA** *(due corse a meno di `2` secondi starebbero nella stessa finestra dello ZIP)*. ### **Era struttura.** |
+| `g` | *(nulla: non l'avevo previsto)* | ### ⚠ **IL TIMBRO STAVA PER MENTIRE.** `avvia()` restituisce *«ero in tempo?»*, e il timbro lo richiama — ### **quando `numpy` c'è già.** Il driver lo chiama ### **prima** di `import numpy`, e il timbro diceva `in_tempo: false`. ### ✅ **Curato: il verdetto è quello della PRIMA chiamata del processo** *(`_PRIMO`)*. ### **L'ho visto perché ho guardato il timbro dopo averlo scritto, non perché l'avessi previsto.** |
+| `h` | *(nulla)* | ### ⚠ **NON POSSO VERIFICARE IL NUMERO DI THREAD: `threadpoolctl` non è installato.** ### ⛔ **Quindi lo DICHIARO nel docstring invece di far finta** — e la cosa che conta si misura altrimenti: ### ✅ **se due processi danno byte identici, i thread NON stanno rompendo il determinismo, qualunque sia il loro numero.** ### **Quello è il controllo vero, e c'è.** |
+| `i` | l'ordine dei punti: `4` prima, poi `1` | ### ✅ **rispettato**, e il punto `4` ha dato subito il numero che il punto `6` dovrà mettere in budget: ### **`5.70%` di un passo.** |

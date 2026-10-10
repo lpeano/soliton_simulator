@@ -27,6 +27,16 @@ for _p in (_QUI, os.path.join(_QUI, "config"), os.path.join(_QUI, "leggi"),
            os.path.join(RADICE, "csv")):
     sys.path.insert(0, _p)
 
+# ### ⛔ **IL DETERMINISMO VA PRIMA DI `numpy`, E NON E- UNO STILE: LE BLAS LEGGONO
+# ### LE VARIABILI DEI THREAD QUANDO VENGONO CARICATE.** Se `DET.avvia()` girasse
+# ### ### **dopo** l-`import numpy`, le variabili sarebbero scritte
+# ### ### **e non servirebbero a niente** -- e il timbro direbbe `in_tempo: false`.
+# ### ✅ **L-ORDINE DI QUESTE DUE RIGHE E- UN PRESIDIO**, e
+# ### `_collauda_determinismo.py` lo verifica ### **via AST.**
+import determinismo as DET                                   # noqa: E402
+
+_DET = DET.avvia()
+
 import numpy as np                                           # noqa: E402
 
 import hamiltoniana as HAM                                   # noqa: E402

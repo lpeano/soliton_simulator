@@ -581,6 +581,15 @@ METODI['P-E9'] = (
 METODI['P-AB'] = (
     'NATO NELL-ERA 2: un `A`/`B` dichiara IL CAMPO UNICO in cui i bracci differiscono, e se ne differiscono due ### IL CONFRONTO NON PARTE (la lezione di `Z20`: due misure sovrapposte). ### Piu- i dati con la versione del formato e nessun file a meta-',
     '`csv/_confronti_e_dati.py::controlla`, `pre-commit` + CI', "PORTATO")
+METODI['P-DET'] = (
+    "NATO NELL-ERA 2: nessun RNG globale (via AST: 6 usi, 6 `default_rng`, 0 globali), "
+    "le CINQUE variabili dei thread fissate a 1 E TIMBRATE, e le versioni bloccate in "
+    "`primo_ordine/versioni.lock`. ### E IL BRACCIO CHE CONTA SONO DUE PROCESSI CON LA "
+    "STESSA CONFIGURAZIONE: 548 byte IDENTICI. ### Dice cio- che i thread non posso "
+    "misurare (`threadpoolctl` non c-e-): se due processi danno byte identici, i thread "
+    "NON stanno rompendo il determinismo",
+    "`primo_ordine/determinismo.py::controlla`; collaudo in "
+    "`primo_ordine/_collauda_determinismo.py` (13/13)", "PORTATO")
 METODI['P-GRAFO'] = (
     "NATO NELL-ERA 2: il grafo si controlla A OGNI PASSO, dentro `passo_globale` e "
     "`passo_locale`, PRIMA di avanzare -- auto-archi, doppioni (anche nei due versi), "

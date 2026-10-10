@@ -14,7 +14,7 @@
 | `INFRASTRUTTURA` | `2` | 12 |
 | `INFRASTRUTTURA` | `ENTRAMBE` | 15 |
 | `METODO` | `1` | 156 |
-| `METODO` | `2` | 6 |
+| `METODO` | `2` | 7 |
 | `METODO` | `ENTRAMBE` | 83 |
 
 | id | classe | dominio | era | stato | blocca | titolo |
@@ -438,6 +438,7 @@
 | `P-ALB` | PRESIDIO | METODO | 2 | ### **AGENDA** |  | l-albero delle scelte: una decisione PRESA con una dipendenza NON PRESA e- rifiu |
 | `P-C1` | PRESIDIO | INFRASTRUTTURA | ENTRAMBE | ### **APERTA** |  | anche i CONTROLLI stanno nell-indice: il codice dichiara l-ID, e la macchina lo  |
 | `P-DECADIMENTO` | STANDARD | FISICA | ENTRAMBE | ### **APERTA** |  | ogni decadimento e una trasformazione: cio che una grandezza perde diventa calor |
+| `P-DET` | PRESIDIO | METODO | 2 | ### **AGENDA** |  | il determinismo: nessun RNG globale, un thread, versioni bloccate, due processi  |
 | `P-E1` | PRESIDIO | INFRASTRUTTURA | 2 | ### **AGENDA** |  | la BIIEZIONE fra legge in tabella, file generato, riga di registro e scheda |
 | `P-E2` | PRESIDIO | INFRASTRUTTURA | 2 | ### **AGENDA** |  | l-IMPRONTA: un file generato ritoccato a mano, o una tabella cambiata senza rige |
 | `P-E3` | PRESIDIO | INFRASTRUTTURA | 2 | ### **AGENDA** |  | le VARIABILI nei due versi: tabella, stato.py e registro si corrispondono |

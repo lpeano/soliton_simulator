@@ -1,0 +1,11 @@
+{
+ "come_si_riscrive": "python primo_ordine/determinismo.py --scrivi-blocco",
+ "perche": "le versioni VERIFICATE. Si FERMA solo per una PIU- VECCHIA: fermare su qualunque differenza romperebbe la CI (installa con >= e gira su Linux), e il repo ha GIA- MISURATO che la piattaforma cambia i numeri assoluti. Le differenze vanno NEL TIMBRO.",
+ "versioni": {
+  "numpy": "2.3.0",
+  "piattaforma": "windows",
+  "python": "3.13.2",
+  "sympy": "1.14.0",
+  "yaml": "6.0.3"
+ }
+}

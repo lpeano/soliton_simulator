@@ -44,6 +44,12 @@ python "$(git rev-parse --show-toplevel)/csv/_rami_era2.py" || exit 1
 #  ### e' una ragione per dare --no-verify.
 python "$(git rev-parse --show-toplevel)/csv/_replay_registri.py" || exit 1
 
+#  `P-DET` -- IL DETERMINISMO: RNG, THREAD, VERSIONI, DUE PROCESSI.
+#  ### Il braccio che conta fa girare IL DRIVER DUE VOLTE in due processi e
+#  ### confronta i BYTE. E' il piu' lento di questo hook, e sta qui e non solo
+#  ### in CI perche' un determinismo rotto si vede DOPO, su ogni misura.
+python "$(git rev-parse --show-toplevel)/primo_ordine/_collauda_determinismo.py" || exit 1
+
 #  `P-GRAFO` -- IL GRAFO VALIDO A OGNI PASSO.
 #  ### Il collaudo misura anche IL COSTO del controllo in rapporto a un passo
 #  ### vero, e pretende che stia sotto il 10%: un presidio che decuplicasse il
