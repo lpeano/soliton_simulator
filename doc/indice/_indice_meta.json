@@ -4957,6 +4957,12 @@
   "PI-SIMBOLI-ERA1: il <<flag>> che il presidio vede e- DI GIT, non del simulatore -- la descrizione dice <<E la CI rigenera tutto e fa git diff --exit-code>>, e --exit-code e- un-opzione di git diff. Il presidio legge la prosa, e qui legge male": [
    "P-E2"
   ],
+  "PI-SIMBOLI-ERA1: il testo citato e- <<### CIO- CHE NON PUO- FARE, detto nel suo docstring: (1) `git commit --no-verify` NON E- IMPEDIBILE IN LOCALE -- nessun hook gira e nessuno strumento puo- accor>>. ### `--no-verify` E- UN FLAG DI GIT, non un flag dell-era 1: il simulatore non ne ha nessuno con quel nome. ### E la voce lo nomina per DICHIARARE UN LIMITE -- non e- impedibile in locale, perche- nessun hook gira e nessuno strumento puo- accorgersene (NON VIENE CHIAMATO). ### Togliere la parola toglierebbe IL LIMITE DICHIARATO, che e- peggio del segnale.": [
+   "P-BARRIERA"
+  ],
+  "PI-SIMBOLI-ERA1: il testo citato e- <<dice una cosa vera: <<questo `pre-commit` sta diventando una ragione per dare `--no-verify`>>, che e- il difetto di `A9` arrivato dal lato del tempo>>. ### `--no-verify` E- UN FLAG DI GIT, non un flag dell-era 1: il simulatore non ne ha nessuno con quel nome. ### E la voce lo nomina per DICHIARARE UN LIMITE -- non e- impedibile in locale, perche- nessun hook gira e nessuno strumento puo- accorgersene (NON VIENE CHIAMATO). ### Togliere la parola toglierebbe IL LIMITE DICHIARATO, che e- peggio del segnale.": [
+   "P-TEMPI"
+  ],
   "PI-SIMBOLI-ERA1: la voce e- di PROGRAMMA e nomina l-era 1 perche- dice CHE COSA SOSTITUISCE o PRESCRIVE: <<NERE A PIU MASSE, con peso diverso. UNA MASSA E UNA CONFIGURAZIONE DEL CAMPO, NON UN INSIEME DI NODI. COME E OGGI, verific>>": [
    "MASSE-PESI-SOVRAPPOSTE"
   ],

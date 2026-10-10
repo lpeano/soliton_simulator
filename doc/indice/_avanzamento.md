@@ -32,6 +32,10 @@
 | ### ⭐ **e quattro difetti trovati PRIMA di cominciare** | eseguendo il primo passo del task history *(«leggere ### **dal codice** chi valida `decisioni.jsonl`»)*: `REPLAY-CIECO-ALLE-CANCELLAZIONI` *(### **`13` su `13` con `4` record cancellati**)*, `DUE-VIE-SU-LEGGI-JSONL`, `H-INDICE-IGNORA-I-VOCABOLARI`, `FORMA-SPEZZA-ID` *(### **`122` ID su `887`**)*. ### **Tutti curati, tutti con un collaudo** |
 | ### **il quarto stato di `P-T2`** | ### **`GENERATO`**: `assiomi.jsonl` e `decisioni.jsonl` erano dichiarati `REPERTO` *(«non ha una via di scrittura»)* e ### **invece sono generati** — e ### **il blob non se ne accorgeva**, perché un generatore stabile dà sempre gli stessi byte |
 
+| ### **il mandato `4` di `6`** | la ### **terza parte dell'infrastruttura**, ### **sette punti su sette**: `P-DET` *(determinismo, ### **due processi byte-identici**)* · `P-DIM` *(le dimensioni, e il generatore ### **rifiuta**)* · `P-SIM` *(simmetrie ### **simboliche**, conservazioni ### **numeriche** con soglie ### **DERIVATE**)* · `P-GRAFO` *(il grafo valido ### **a ogni passo**, costo ### **`5.7%`**)* · `P-BARRIERA` *(i hook come barriera, ### **codice `3`**)* · `P-TEMPI` *(un comando, i tempi, ### **budget `44.4` s su `120`**)* · `P-GUIDA` *(la guida ### **ESEGUITA**)*. Referto: `doc/REFERTO_infrastruttura_era2_terza.md` |
+| ### ⭐ **e i presidi mi hanno corretto `12` volte** | e ### **TRE hanno cambiato il DISEGNO**: due volte `P-MOD` mi ha detto che ### **il collaudo di un modulo in fondo alla catena degli import non puo' vivere dentro quel modulo**, e una volta mi ha ### **impedito di alzare un tetto** — la manopola piu' facile di tutte |
+| ### ⚠ **e due previsioni del task history** | la trappola `(a)` *(il punto `5` rompe la CI)* ### **ha TENUTO**; la `(b)` *(due processi non daranno byte identici)* era ### **SBAGLIATA**, e il perche' e' misurato: `numpy.savez` ### **azzera l'ora nello ZIP** |
+
 **L'ultimo lotto applicato:** `doc/indice/_lotti/correzioni.jsonl` — ### **`313` voci**,
 `313` righe di storico, e la validazione ### **intera** passa.
 

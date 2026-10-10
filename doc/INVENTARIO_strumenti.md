@@ -2863,6 +2863,38 @@ etichette rimosse, con ### **`0` persi, `0` doppi, `0` conflitti**.
 
 ---
 
+### I SETTE PRESIDI DELLA TERZA PARTE — **`P-DET` `P-DIM` `P-SIM` `P-GRAFO` `P-BARRIERA` `P-TEMPI` `P-GUIDA`** *(2026-10-10)*
+
+| il file | BLOB | che cosa misura | il collaudo |
+|---|---|---|--:|
+| `primo_ordine/determinismo.py` | `00d4fc2a` | ### **`P-DET`**: nessun RNG globale *(AST)*, le ### **cinque** variabili dei thread fissate **e timbrate**, le versioni bloccate in `primo_ordine/versioni.lock`. ### ⭐ **E il braccio che conta sono DUE PROCESSI byte-identici** | `_collauda_determinismo.py` ### **`13`/`13`** |
+| `primo_ordine/leggi/schema.py` | `635a2580` | ### **`P-DIM`**: ogni variabile e ogni parametro dichiarano la `dimensione`, e il generatore ### **RIFIUTA** un'espressione incoerente. ### **Una sola base, `E`, perché `A16` implica `hbar = 1`** | `schema.py` ### **`34`/`34`** · `_collauda_genera.py` ### **`24`/`24`** |
+| `primo_ordine/simmetrie.py` | `0a916916` | ### **`P-SIM`**: le simmetrie ### **SIMBOLICHE** *(zero in sympy)* e le conservazioni ### **NUMERICHE** contro soglie ### **DERIVATE** *(`passi*eps`, `dt^2`)* | `_collauda_simmetrie.py` ### **`13`/`13`** |
+| `primo_ordine/grafo.py` | `a42249db` | ### **`P-GRAFO`**: il grafo valido ### **A OGNI PASSO**, e una violazione ### **FERMA**. ### **Costo MISURATO: il `5.7%` di un passo** | `_collauda_grafo.py` ### **`11`/`11`** |
+| `csv/_barriera.py` | `576c303d` | ### **`P-BARRIERA`**: i hook locali, l'### **impronta**, e il rifiuto col ### **codice `3`**. ### ⚠ **Tace fuori dal PC: è una MIA INFERENZA** | `--collaudo` ### **`11`/`11`** |
+| `primo_ordine/collauda.py` | `807562ad` | ### **`P-TEMPI`**: un solo comando, i tempi, e il budget che ### **SEGNALA invece di rifiutare** | ### **`17` collaudi**, `pre-commit` `44.4` s su `120` |
+| `primo_ordine/_collauda_guida.py` | `922a097a` | ### **`P-GUIDA`**: ### **ESEGUE** `doc/COME_SI_AGGIUNGE_UNA_LEGGE.md` su una legge di prova, e rimette tutto col ### **`sha1`** | ### **`12`/`12`** |
+
+| | |
+|---|---|
+| **COMANDO, uno per tutti** | `python primo_ordine/collauda.py` *(i tempi)* · `--solo-veloci` *(senza i lenti)* |
+| ### ⭐ **e la cosa che il comando unico ha trovato AL PRIMO GIRO** | una mia classificazione ### **asserita invece che misurata**: il collaudo della catena era dichiarato *«oltre `120` secondi»* e ### **costa `2.55`.** ### **Quel numero era di un'altra cosa** |
+
+---
+
+### `csv/_referto_terza_parte.py` — **IL REFERTO DELLA TERZA PARTE** *(2026-10-10)*
+
+| | |
+|---|---|
+| **file** | `csv/_referto_terza_parte.py` |
+| **BLOB** *(sha1 dei byte grezzi)* | `11e31cb7` |
+| **COMANDO** | `python csv/_referto_terza_parte.py` ### ⚠ **supera i `120` s**, perché fa girare ### **tutti** i collaudi |
+| ### ⭐ **e la sezione che conta è la `3.`** | *«che cosa i presidi mi hanno detto»*: ### **`12` correzioni in `7` punti**, e ### **TRE hanno cambiato il DISEGNO** — due volte `P-MOD` mi ha detto ### **dove deve vivere un collaudo**, e una volta mi ha ### **impedito di alzare un tetto** |
+| ### 📌 **e la `4.` elenca i MIEI errori** | ### **`6` su `8` trovati FACENDO GIRARE qualcosa, non rileggendo** |
+| **l'uscita** | `doc/REFERTO_infrastruttura_era2_terza.md` |
+
+---
+
 ### `csv/_albero_era2.py` + `doc/ALBERO_era2.yaml` — **`P-ALB`: L'ALBERO DELLE SCELTE** *(2026-10-10)*
 
 | | |

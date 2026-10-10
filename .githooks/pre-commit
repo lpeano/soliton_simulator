@@ -11,6 +11,19 @@
 #  `python csv/_hook_presidi.py` LO DICE, invece di tacere (`A9`).
 # ============================================================================================
 python "$(git rev-parse --show-toplevel)/csv/_hook_presidi.py" --pre-commit || exit 1
+
+#  IL RITO DELLO STORICO, FATTO DALL'HOOK E NON DA ME.
+#  ### MISURATO: in due giorni `PI-STORICO-SENZA-COMMIT` mi ha rifiutato NOVE
+#  ### commit, sempre per la stessa ragione -- le righe di storico del commit
+#  ### PRECEDENTE non avevano il loro campo `commit`, e la cura era sempre lo
+#  ### stesso comando. ### NOVE RICORRENZE NON SONO UNA DIMENTICANZA: SONO UN
+#  ### PRESIDIO CHE MANCA. Adesso lo fa il hook, e mette il file in stage: la
+#  ### riga si riempie NELLO STESSO COMMIT, e nessuno deve ricordarselo.
+#  ### ⚠ E se il comando FALLISSE, il commit SI FERMA: una via di scrittura
+#  ### dell'indice che non gira e' peggio di una che non c'e'.
+R="$(git rev-parse --show-toplevel)"
+python "$R/csv/indice.py" storico-commit >/dev/null || exit 1
+git add "$R/doc/indice/storico.jsonl" || exit 1
 # `P-E1`..`P-E5` e `P-E7` (era 2): la biiezione tabella <-> file <-> registro <-> scheda,
 # le impronte, le variabili, le importazioni, e gli osservatori in sola lettura.
 # ### NESSUNA VIA D-USCITA per i file di primo_ordine/: il mandato lo dice.

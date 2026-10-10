@@ -11915,3 +11915,19 @@ Ogni dato di `db_era2/` ha ### **il suo TIMBRO accanto**, col campo `versione_da
 ### ⚠ **E LA BARRIERA MI HA FERMATO, facendo esattamente il suo lavoro.** Ho cambiato il `pre-commit` *(per aggiungerci questo collaudo)* e ### **lo strumento dell-indice si e- RIFIUTATO di partire**, perche- l-impronta non tornava. ### ⭐ **L-ordine e-: si cambia un hook, POI `python csv/_barriera.py --scrivi`, POI gli strumenti.** ### **Me lo ha insegnato lei, un-ora dopo averla scritta.**
 
 ### 📌 **Collaudo `12` su `12`, e i sette punti del mandato `4` sono FATTI.**
+
+## IL REFERTO DELLA TERZA PARTE, E IL CHECKPOINT — ### **sette punti su sette** *(2026-10-10)*
+
+### ✅ **`doc/REFERTO_infrastruttura_era2_terza.md`, generato da `csv/_referto_terza_parte.py`:** le cifre escono dall-### **uscita dei collaudi che lo script FA GIRARE**, dalla tabella delle leggi, dalla guida, e da `git`. ### ⚠ **Supera i `120` s, perche- fa girare TUTTO.**
+
+### 📌 **I NUMERI DEL CHECKPOINT:** ### **`112/112`** bracci di collaudo in tutto; il comando unico ### **`18 su 18`**; il `pre-commit` ### **`46.69` s su `120`**; `valida` passa, segnali ### **`19` — tornati a quelli di prima del mandato.**
+
+### ⭐ **E LA SEZIONE CHE CONTA E- LA `3.`: <<che cosa i presidi mi hanno detto>>.** In sette punti i presidi del repo mi hanno corretto ### **dodici volte** — e ### **il numero che conta e- un altro: TRE hanno cambiato il DISEGNO, non una riga.** ### **Due volte `P-MOD` mi ha detto che IL COLLAUDO DI UN MODULO IN FONDO ALLA CATENA DEGLI IMPORT NON PUO- VIVERE DENTRO QUEL MODULO** *(e la prima volta non avevo capito perche- `_collauda_passo.py` esistesse)*, ### **e una volta mi ha impedito di alzare un tetto** — che e- ### **la manopola piu- facile di tutte.**
+
+### 📌 **E LA `4.` ELENCA I MIEI OTTO ERRORI, con una cosa che le otto righe dicono insieme: SEI SU OTTO SONO STATE TROVATE FACENDO GIRARE QUALCOSA, non rileggendo.** ### **Due le ho viste perche- ho guardato un-uscita DOPO averla scritta** *(il timbro, i tempi)*, ### **e una perche- ho rotto la tabella A POSTA.**
+
+### ⚠ **E UNA DELLE DUE TRAPPOLE CHE AVEVO SCRITTO PRIMA ERA SBAGLIATA, e il perche- si legge nell-intestazione di uno ZIP:** `numpy.savez` ### **azzera l-ora**, quindi due processi danno ### **byte identici** e il criterio del mandato ### **vale come e- scritto.** ### ✅ **L-altra ha tenuto: il punto `5` preso alla lettera avrebbe fatto FALLIRE SEMPRE la CI.**
+
+### ✅ **E LA NONA RICORRENZA DI `PI-STORICO-SENZA-COMMIT` E- CURATA ALLA RADICE:** il `pre-commit` fa ### **`storico-commit`** da se- e mette il file ### **in stage**. ### ⭐ **Nove ricorrenze in due giorni non sono una dimenticanza: sono un presidio che manca** — e l-ho visto perche- ### **il comando unico ha fatto cadere `P-ALB`** per quella ragione, non per l-albero.
+
+### ➡ **Il mandato `4` di `6` e- CHIUSO. Passo al mandato `5`: le regole di gestione dell-era `2`, l-ultimo della coda.**
