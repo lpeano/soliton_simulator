@@ -3001,3 +3001,14 @@ etichette rimosse, con ### **`0` persi, `0` doppi, `0` conflitti**.
 | ⭐ **IL NUMERO CHE DECIDE** | `C:` e- piena al ### **`99.3%`** *(`3.17` GB liberi su `475.1`)*, e il repo pesa ### **`9.3` GB**: col `%TEMP%` fanno ### **`10.8` GB su `472` occupati**, cioe- ### **il `2.3%`.** ### **Il repo NON e- la causa**, e il numero lo dice invece di farmelo supporre |
 | ⚠ **IL BUCO CHE HA TROVATO** | ### **`24` cartelle `repo_*`** nel `%TEMP%`, con ### **`120` file e TUTTI E `120` `read-only`**: le lascia `csv/_stage.py --collaudo`, perche- `shutil.rmtree(..., ignore_errors=True)` ### **non tocca gli oggetti di `git`** e ### **il flag silenzia il fallimento** |
 | ⛔ **NON CANCELLA NIENTE** | legge e conta: le uniche scritture sono `io.open(DEST, "w")` e le `print` |
+
+### `csv/_archivia_su_e.py` — **L-ARCHIVIO FREDDO SU `E:`: SI COPIA, SI VERIFICA, E SOLO ALLORA SI CANCELLA** *(2026-10-10)*
+
+| | |
+|---|---|
+| **il file** | `csv/_archivia_su_e.py` *(BLOB `46b40510`)* |
+| **COMANDO** | `python csv/_archivia_su_e.py` *(### **PROVA**, non scrive niente)* · `--esegui` |
+| **che cosa fa** | sposta su `E:` gli output ### **rigenerabili e NON TRACCIATI** *(`.pkl`, `.gz`, `.npz` sotto `csv/` e `db/`)*, con lo ### **stesso percorso relativo**, e scrive il manifest `doc/ARCHIVIO_E_2026-10-10.tsv` *(percorso, percorso su `E:`, byte, `sha1`)* |
+| ⛔ **L-ORDINE E- LA GARANZIA** | ### **copia → `sha1` della COPIA contro l-ORIGINALE → e SOLO SE COINCIDE si cancella**, ### **un file per volta.** Cosi- un-interruzione a meta- lascia ### **ogni singolo file in uno dei due stati buoni** *(nel repo, oppure su `E:` verificato)*: ### **mai in nessuno dei due** |
+| ⚠ **CHI E- TRACCIATO NON SI TOCCA** | l-insieme esce da ### **`git ls-files`**, non dal `.gitignore`: ### **<<ignorato>> e <<non tracciato>> sono due cose diverse**, e qui conta ### **la seconda** |
+| ⭐ **E NON PARTE SE NON CI STA** | controlla lo spazio su `E:` ### **prima di cominciare**: <<niente a meta->> vuol dire ### **non partire**, non ### **accorgersene a meta-** |

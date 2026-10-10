@@ -9,6 +9,7 @@ commit**: cosi' non se ne accumulano di invisibili.)*
 | `csv/_analisi_lettori_indice.py|H-P5` | non importa il simulatore e non lo fa girare. Legge sorgenti e conta. |
 | `csv/_ancore_prima.py|H-P5` | strumento di analisi STATICA. Non importa il simulatore e non lo fa girare: |
 | `csv/_applica_correzioni_guardiano.py|H-P5` | non importa il simulatore e non lo fa girare. Costruisce un lotto. |
+| `csv/_archivia_su_e.py|H-P5` | non importa il simulatore e non lo fa girare. Copia byte e confronta sha1. |
 | `csv/_archivio_relazioni.py|H-P5` | non importa il simulatore e non lo fa girare. Divide un documento per giorno. |
 | `csv/_cerca_definizioni.py|H-P5` | non importa il simulatore e non lo fa girare. Cerca definizioni nei documenti. |
 | `csv/_collaudo_criterio_zero.py|H-P5` | non importa il simulatore e non lo fa girare. E' un collaudo di un CRITERIO |
@@ -147,5 +148,5 @@ commit**: cosi' non se ne accumulano di invisibili.)*
 | `csv/_test_fork/_z43_tempo_proprio.py|H-P3` | la scena passa TUTTA dal CLI (`nmasse` e `sep` da `argv`), e la |
 
 ```
-esenzioni dichiarate   140
+esenzioni dichiarate   141
 ```

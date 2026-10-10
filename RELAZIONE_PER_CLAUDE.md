@@ -12534,3 +12534,17 @@ Ogni dato di `db_era2/` ha ### **il suo TIMBRO accanto**, col campo `versione_da
 ### ⭐ **E LA CURA STA NELLA FORMA DELLA SCRITTURA, non nella prudenza:** adesso ### **si CODIFICA PRIMA** *(`.encode`)* ### **e il file si apre SOLO se la codifica e- riuscita.** ### **Cosi- un errore di codifica non puo- piu- distruggere il file che sta scrivendo** — ### ⚠ **e la prudenza non c-entra: era l-ORDINE delle due operazioni.**
 
 ### ⛔ **E SUBITO DOPO, LA SETTIMA VOLTA DELLA STESSA REGOLA:** ho provato a scrivere la cura con un `python -c` ### **fra virgolette doppie**, e bash ha ### **eseguito i backtick** *(`ud83dudccc: command not found`, e perfino ### **la relazione lanciata COME COMANDO**)*. ### ✅ **Niente e- stato scritto** — python e- morto di `SyntaxError` ### **prima** — e il file era ### **ancora intatto** *(`git diff`: le sole `24` righe di prima)*. ### **La regola non riguarda il flag di `git`: riguarda CHI SCRIVE IL TESTO**, e il testo non deve ### **mai** attraversare la shell.
+
+## ✅ **LA DECISIONE DI LUCA SULLO SPAZIO: SI SPOSTA SU `E:`, NON SI CANCELLA** — ### **e lo strumento si committa PRIMA del run** *(2026-10-10)*
+
+### 📌 **LA DECISIONE, nelle sue parole:** *«SPOSTA SU `E:` (non cancellare) gli output RIGENERABILI e NON TRACCIATI da git [...] Prima di cancellare l-originale: copia, verifica `sha1` della copia contro l-originale, e ### **solo se coincide cancella l-originale**»*, e *«Se `E:` non e- collegato a meta- lavoro: ti fermi, ### **niente a meta-**»*.
+
+### ⭐ **E L-ORDINE DELLE TRE OPERAZIONI E- LA GARANZIA, non la prudenza:** ### **copia → `sha1` della COPIA contro l-ORIGINALE → e SOLO ALLORA si cancella**, ### **un file per volta.** ### ✅ **Cosi- un-interruzione a meta- lascia ogni singolo file in uno dei DUE STATI BUONI** *(nel repo, oppure su `E:` verificato)* — ### **mai in nessuno dei due.**
+
+### ⛔ **E LO SPAZIO SU `E:` SI CONTROLLA PRIMA DI COMINCIARE**, perche- ### **<<niente a meta->> vuol dire <<non partire>>**, non ### **<<accorgersene a meta->>.**
+
+### 📌 **LA PROVA A VUOTO, prima di toccare un byte** *(`python csv/_archivia_su_e.py`, senza `--esegui`)*: ### **`309` file, `5.25` GB**, e ### **`0` TRACCIATI** — cioe- ### **non c-e- nemmeno un file che git conosca** fra quelli che sposto. `C:` liberi ### **`3.16` GB**, `E:` liberi ### **`232.39` GB**.
+
+### ⚠ **E <<TRACCIATO>> NON E- <<IGNORATO>>:** l-insieme da non toccare esce da ### **`git ls-files`**, non dal `.gitignore` — ### **sono due domande diverse**, e quella giusta qui e- ### **<<git lo conosce?>>**, non ### **<<git lo guarda?>>**.
+
+### ⛔ **E QUESTO COMMIT NON PORTA IL MANIFEST, DI PROPOSITO:** par. `5` dice che ### **il codice che genera un output dev-essere GIA- COMMITTATO quando l-output nasce.** ### **Quindi: prima lo strumento, poi il run, poi il manifest** — e il manifest sara- ### **un commit a se-.**
