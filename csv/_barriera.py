@@ -89,6 +89,19 @@ def attese():
         "impronte", {})
 
 
+def _senza_ci():
+    """### L-ambiente di adesso, con le variabili della CI ### **TOLTE.**"""
+    e = dict(os.environ)
+    for v in FUORI_DAL_PC:
+        e.pop(v, None)
+    return e
+
+
+def _con_ci():
+    """### L-ambiente di adesso, con `CI=true` ### **MESSO.**"""
+    return dict(os.environ, CI="true")
+
+
 def errori():
     """### Gli errori della barriera, o `[]`. ### **Vuoto se non siamo in locale.**"""
     if not in_locale():
@@ -195,21 +208,33 @@ def collaudo():
           errori() == [],
           "### se scattasse, sarebbe LA BARRIERA a essere giu-, non il collaudo")
     # ------------------------------------------------- ### fuori dal PC: DEVE TACERE
-    _vero = {v: os.environ.get(v) for v in FUORI_DAL_PC}
-    try:
-        os.environ["CI"] = "true"
-        esito("NON deve scattare: fuori dal PC (`CI=true`) la barriera TACE",
-              errori() == [] and not in_locale(),
-              "### la- non si committa, si GUARDA -- e il mandato preso alla lettera "
-              "farebbe FALLIRE SEMPRE la CI. E- UNA MIA INFERENZA, dichiarata")
-    finally:
-        for v, x in _vero.items():
-            if x is None:
-                os.environ.pop(v, None)
-            else:
-                os.environ[v] = x
-    esito("### e rimesso l-ambiente, siamo di nuovo in locale",
-          in_locale(), "### un collaudo che lascia l-ambiente storto non e- un collaudo")
+    # ### \u26d4 **IL DIFETTO, trovato dal guardiano il `2026-10-10`:** questo braccio
+    # ### ### **metteva `CI=true` NEL PROPRIO PROCESSO** e poi ### **rimetteva
+    # ### l-ambiente di partenza** -- e il braccio dopo pretendeva ### **di essere in
+    # ### locale.** ### \u26a0 **Lanciato con `CI=true`, <<rimesso l-ambiente>> rimetteva
+    # ### LA CI**, e il collaudo cadeva da `11` su `11` a ### **`6` su `11`.**
+    # ### \u2b50 **E- LA STESSA FORMA DEL DIFETTO DEL `git config` CHE HO CURATO IERI:**
+    # ### un collaudo che ### **LEGGE l-ambiente invece di COSTRUIRSELO** non prova
+    # ### niente. ### **L-avevo curato per il config e NON per le variabili.**
+    # ### \u2705 **LA CURA: il braccio gira in un SOTTOPROCESSO** con l-ambiente
+    # ### ### **costruito**, e ### **non tocca il proprio.** Cosi- il collaudo
+    # ### ### **da- lo stesso esito** da qualunque ambiente sia lanciato.
+    def _stato(env):
+        import subprocess as _sp
+        r = _sp.run([sys.executable, os.path.abspath(__file__), "--stato"],
+                           cwd=RADICE, capture_output=True, text=True,
+                           encoding="utf-8", errors="replace", env=env)
+        return (r.stdout or "") + (r.stderr or "")
+    _in_ci = _stato(_con_ci())
+    esito("NON deve scattare: fuori dal PC (`CI=true`) la barriera TACE",
+          "locale=0" in _in_ci and "errori=0" in _in_ci,
+          "### la- non si committa, si GUARDA -- e il mandato preso alla lettera "
+          "farebbe FALLIRE SEMPRE la CI. E- UNA MIA INFERENZA, dichiarata")
+    _in_loc = _stato(_senza_ci())
+    esito("### e in un ambiente SENZA le variabili della CI siamo in locale",
+          "locale=1" in _in_loc,
+          "### e lo dice un FIGLIO con l-ambiente COSTRUITO: cosi- l-esito NON dipende "
+          "da come questo collaudo e- stato lanciato")
     # ------------------------------------------------- ### l-impronta che non torna
     _att_vere = dict(att)
     try:
@@ -286,7 +311,22 @@ def collaudo():
 
 
 def main(argv):
+    # ### \u2705 **`--stato`: una riga sola, per il FIGLIO del collaudo.**
+    if "--stato" in argv:
+        print("locale=%d errori=%d" % (1 if in_locale() else 0, len(errori())))
+        return 0
     if "--collaudo" in argv:
+        # ### \u26d4 **SE SIAMO FUORI DAL PC, IL COLLAUDO SI RILANCIA IN UN FIGLIO
+        # ### SENZA LE VARIABILI DELLA CI:** i bracci che DEVONO scattare chiamano
+        # ### `errori()`, che ### **in CI tace per scelta** -- quindi in CI
+        # ### ### **non scatterebbero**, e il collaudo direbbe <<buchi>> dove invece
+        # ### ### **la barriera e- spenta a ragione.** ### \u2b50 **Il mandato lo dice:
+        # ### <<il collaudo che la prova deve girare UGUALE>>.**
+        if not in_locale() and "--figlio" not in argv:
+            r = subprocess.run([sys.executable, os.path.abspath(__file__),
+                                "--collaudo", "--figlio"], cwd=RADICE,
+                               env=_senza_ci())
+            return r.returncode
         return collaudo()
     if "--scrivi" in argv:
         d = scrivi()

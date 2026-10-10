@@ -16,7 +16,7 @@
 | `INFRASTRUTTURA` | `ENTRAMBE` | 21 |
 | `METODO` | `1` | 156 |
 | `METODO` | `2` | 11 |
-| `METODO` | `ENTRAMBE` | 87 |
+| `METODO` | `ENTRAMBE` | 88 |
 
 | id | classe | dominio | era | stato | blocca | titolo |
 |---|---|---|---|---|---|---|
@@ -154,6 +154,7 @@
 | `CLI-1` | DIFETTO | METODO | 1 | ### **SOSPESA** | SI | I SIGILLI DI CURA 4 E CURA 5 NON HANNO MAI PROVATO IL PERCORSO CLI: impostavano  |
 | `CLIP-INVENTARIO` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | INVENTARIO dei clip, tetti e pavimenti del passo pieno: 27 TETTI FISICI su 117 g |
 | `COER-4PI` | CRITERIO | METODO | 1 | ### **CHIUSA** |  | la coerenza della massa e' `/<e^{i phi}>/`: il campo NON distingue `phi` da `phi |
+| `COLLAUDO-LEGGE-L-AMBIENTE` | DIFETTO | METODO | ENTRAMBE | ### **APERTA** |  | il collaudo della barriera dipendeva dall-ambiente in cui era lanciato: 6 su 11  |
 | `COLLAUDO-NON-ESEGUITO` | DIFETTO | METODO | ENTRAMBE | ### **APERTA** |  | un collaudo che si RIFIUTA di girare esce con 2, e il controllo C4 lo conta come |
 | `COMANDO-UNICO-INCOMPLETO` | DIFETTO | INFRASTRUTTURA | ENTRAMBE | ### **CHIUSA** |  | il comando che si chiama LA SUITE COMPLETA copriva 19 collaudi su 29 |
 | `COMPONENTI:A1` | CURA | METODO | 1 | ### **CHIUSA** |  | A1. STEP2OROLOGIO — aggancio OROLOGIO ↔ METRICA · omegaclk = (cs/CSM)² |
@@ -715,7 +716,7 @@
 | `STANDARD-8` | STANDARD | METODO | ENTRAMBE | ### **SUPERATA** |  | UN DIFETTO DIMOSTRATO SI CURA: MISURARE NON E' CURARE |
 | `STANDARD-9` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 13 volte, MAI definito in un registro) [STANDARD 9] |
 | `STATI-LOCALI` | PRESIDIO | INFRASTRUTTURA | 1 | ### **SOSPESA** |  | gli stati .npz del grafo restano LOCALI: in git vanno solo sha1, percorso e coma |
-| `STORICO-COMMIT-STRUTTURALE` | DIFETTO | INFRASTRUTTURA | ENTRAMBE | ### **APERTA** |  | il commit di una riga di storico si pretendeva SCRITTO, e nessun clone poteva av |
+| `STORICO-COMMIT-STRUTTURALE` | DIFETTO | INFRASTRUTTURA | ENTRAMBE | ### **CHIUSA** |  | il commit di una riga di storico si pretendeva SCRITTO, e nessun clone poteva av |
 | `SYNCDB-HEADLESS` | DIFETTO | INFRASTRUTTURA | 1 | ### **SOSPESA** |  | `--sync-db` in headless CARICA ma non SALVA: lo dice il docstring del driver |
 | `T0` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 32 volte, MAI definito in un registro) |
 | `T1` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | OMONIMO `T1`: 34 definizioni con significati DIVERSI |

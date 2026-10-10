@@ -12124,3 +12124,17 @@ Ogni dato di `db_era2/` ha ### **il suo TIMBRO accanto**, col campo `versione_da
 ### ✅ **E ADESSO: `P-ALB` `14`/`14`, i controlli della migrazione `6`/`6`, `valida` passa.**
 
 ### ⛔ **IL MANDATO ⑩ E- ARRIVATO UNA SECONDA VOLTA, E SU UN PUNTO DICE IL CONTRARIO** *(2026-10-10)*. ### ⭐ **La differenza e- il punto `3`:** prima *<<l-integratore a strati ### **RESTA**, annotato, ### **non riaprirla**>>*; ora *<<### **SUPERATO** da questa decisione>>*. ### ✅ **Vale la seconda**, ed e- coerente col punto `1` nuovo, che non registra piu- una *<<direzione>>* ma ### **UNA DECISIONE PRESA**. ### ⚠ **E la differenza RESTA SCRITTA**: una voce di coda riscritta in silenzio ### **nasconderebbe che Luca ha cambiato idea su un punto**, e quel cambiamento e- un fatto del progetto. ### 📌 **E il punto `2` nuovo porta DUE VINCOLI che valgono piu- di un-ipotesi, perche- ESCLUDONO delle forme:** la moneta deve trattare le due bande ### **simmetricamente** *(o l-asimmetria materia/antimateria e- messa a mano)*, e una non linearita- ### **a segno fisso** sarebbe ### **attrattiva per una banda e repulsiva per l-altra** — ### **e il prototipo ne fa un BRACCIO CHE DEVE FALLIRE.**
+
+## IL COLLAUDO DELLA BARRIERA DIPENDEVA DALL-AMBIENTE IN CUI ERA LANCIATO — ### **`6` su `11` in CI** *(2026-10-10)*
+
+### ⛔ **MISURATO DAL GUARDIANO:** `CI=true python csv/_barriera.py --collaudo` dava ### **`6` su `11`.**
+
+### 📌 **LA CAUSA:** il braccio *«fuori dal PC la barriera TACE»* metteva `CI=true` ### **nel proprio processo** e poi ### **rimetteva l-ambiente di partenza** — e il braccio dopo pretendeva ### **di essere in locale.** ### ⚠ **Lanciato con `CI=true`, «rimesso l-ambiente» RIMETTEVA LA CI**, e i bracci che DEVONO scattare chiamano `errori()`, che ### **in CI tace per SCELTA**: non scattavano, e il collaudo diceva ### **«buchi» dove la barriera era spenta A RAGIONE.**
+
+### ⭐ **E- LA STESSA FORMA DEL DIFETTO CHE HO CURATO IERI** *([[BARRIERA-ROTTA-NEL-COMMIT]], il `git config`)*: ### **un collaudo che LEGGE l-ambiente invece di COSTRUIRSELO non prova niente.** ### ⛔ **E la lezione su di me e- piu- scomoda: avevo curato IL CASO e non LA FORMA** — il config si-, ### **le variabili d-ambiente no.**
+
+### ✅ **LA CURA, in due pezzi.** ### **(1)** il braccio della CI gira in un ### **SOTTOPROCESSO** con l-ambiente ### **costruito** *(`_con_ci()` / `_senza_ci()`)*, e ### **non tocca il proprio**; il figlio risponde con `--stato`, ### **una riga sola**. ### **(2)** se il collaudo stesso e- lanciato fuori dal PC, ### **SI RILANCIA in un figlio SENZA le variabili della CI** — cosi- i bracci girano ### **sempre** in un ambiente locale, come il mandato chiede: *«il collaudo che la prova deve girare UGUALE»*.
+
+### 📌 **E UN BRACCIO IN PIU-, che prima non c-era:** *«in un ambiente SENZA le variabili della CI siamo in locale»* — e ### **lo dice un FIGLIO con l-ambiente costruito**, cosi- l-esito ### **non dipende da come il collaudo e- stato lanciato** in nessuno dei due versi.
+
+### ✅ **MISURATO NEI DUE VERSI: `11` su `11` senza `CI`, e `11` su `11` con `CI=true`.**
