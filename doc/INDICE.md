@@ -13,7 +13,7 @@
 | `FISICA` | `ENTRAMBE` | 17 |
 | `INFRASTRUTTURA` | `1` | 39 |
 | `INFRASTRUTTURA` | `2` | 14 |
-| `INFRASTRUTTURA` | `ENTRAMBE` | 16 |
+| `INFRASTRUTTURA` | `ENTRAMBE` | 17 |
 | `METODO` | `1` | 156 |
 | `METODO` | `2` | 9 |
 | `METODO` | `ENTRAMBE` | 85 |
@@ -77,6 +77,7 @@
 | `B7-SHAKE` | MISURA | FISICA | 1 | ### **CHIUSA** |  | SHAKE 🟨VALE PER QUELLA SCENA ⏳[EPOCA 1 · MISURA] / shake-then-freeze — la preces |
 | `B8` | DIFETTO | INFRASTRUTTURA | 1 | ### **SOSPESA** |  | IL BLOCCO DEL RUN A 6000 AL PASSO 2700 / doc/REFERTObloccorun6000.md (131 righe) |
 | `B9` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | Z63 / Z64 — i 1455 nodi a 10⁻¹³; la catena f → x → r che non riproduce r / regis |
+| `BARRIERA-ROTTA-NEL-COMMIT` | DIFETTO | INFRASTRUTTURA | ENTRAMBE | ### **APERTA** |  | il collaudo della barriera scriveva git config e falliva DENTRO un commit, 9 su  |
 | `C1` | MISURA | FISICA | 1 | ### **CHIUSA** |  | C1 VALE SEMPRE ⏳[EPOCA 1 · MISURA] / ESITO (I): nessun bug. omega = coppia/inerz |
 | `C1-PEQ-ESATTO` | CURA | FISICA | 1 | ### **CHIUSA** |  | PEQESATTO — rilassamento in forma esatta / GLOBALE §2① / 7/7 (Z95) |
 | `C10` | MISURA | METODO | 1 | ### **CHIUSA** |  | C10 VALE SEMPRE ⏳[EPOCA 1 · MISURA] / LA BARRA D'ERRORE USATA FINORA E' TRE VOLT |

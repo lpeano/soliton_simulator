@@ -232,16 +232,31 @@ def collaudo():
     q = subprocess.run(["git", "config", "--get", "core.hooksPath"], cwd=RADICE,
                        capture_output=True, text=True)
     via0 = (q.stdout or "").strip()
+    # ### ⛔ **L-OVERRIDE SI PASSA PER AMBIENTE, NON SCRIVENDO `git config`** -- e me
+    # ### lo hanno insegnato ### **TRE commit rifiutati.** Prima questo braccio scriveva
+    # ### `core.hooksPath` nel file e lo rimetteva in un `finally`: ### **da solo
+    # ### funzionava, DENTRO UN COMMIT no**, e il collaudo dava ### **`9` su `11`.**
+    # ### ⚠ **Durante un `git commit` la configurazione e- CONTESA**, e una scrittura
+    # ### che non riesce fa cadere ### **due** bracci -- quello che pretende lo scatto e
+    # ### quello end-to-end. ### ⭐ **Un presidio che fallisce DENTRO il hook e passa
+    # ### FUORI e- peggio di nessun presidio: insegna a non credergli.**
+    # ### ✅ **`GIT_CONFIG_COUNT` e le sue chiavi sovrascrivono la configurazione
+    # ### SOLO PER IL PROCESSO**, senza toccare un file: nessuna contesa, e
+    # ### ### **nessun `finally` che possa lasciare la barriera spenta.**
+    SOVRA = {"GIT_CONFIG_COUNT": "1",
+             "GIT_CONFIG_KEY_0": "core.hooksPath",
+             "GIT_CONFIG_VALUE_0": ".githooks-NON-ESISTE"}
+    _prima_env = {k: os.environ.get(k) for k in SOVRA}
     try:
-        subprocess.run(["git", "config", "core.hooksPath", ".githooks-NON-ESISTE"],
-                       cwd=RADICE, capture_output=True)
+        os.environ.update(SOVRA)
         esito("### DEVE scattare: `core.hooksPath` SBAGLIATO",
               any("core.hooksPath" in x for x in errori()),
               "### i hook di `.git/hooks/` NON VIAGGIANO COL REPO: senza il comando, chi "
               "clona NON HA NESSUN PRESIDIO (`A9`: una tenda)")
         r = subprocess.run([sys.executable, os.path.join("csv", "_metodi_era2.py")],
                            cwd=RADICE, capture_output=True, text=True,
-                           encoding="utf-8", errors="replace")
+                           encoding="utf-8", errors="replace",
+                           env=dict(os.environ, **SOVRA))
         fuori = (r.stdout or "") + (r.stderr or "")
         esito("### DEVE scattare END-TO-END: uno STRUMENTO VERO si RIFIUTA di partire",
               r.returncode == 3 and "RIFIUTO DI GIRARE" in fuori,
@@ -249,18 +264,18 @@ def collaudo():
               "chiama -- metterla in ognuno vorrebbe dire ricordarsela ogni volta, e il "
               "primo che la dimentica NON HA NESSUNA BARRIERA" % r.returncode)
     finally:
-        if via0:
-            subprocess.run(["git", "config", "core.hooksPath", via0], cwd=RADICE,
-                           capture_output=True)
-        else:
-            subprocess.run(["git", "config", "--unset", "core.hooksPath"], cwd=RADICE,
-                           capture_output=True)
+        for k, v in _prima_env.items():
+            if v is None:
+                os.environ.pop(k, None)
+            else:
+                os.environ[k] = v
     q2 = subprocess.run(["git", "config", "--get", "core.hooksPath"], cwd=RADICE,
                         capture_output=True, text=True)
-    esito("### e `core.hooksPath` e- tornato `%s`" % (via0 or "<non impostato>"),
+    esito("### e `core.hooksPath` sul DISCO non e- stato toccato: `%s`"
+          % (via0 or "<non impostato>"),
           (q2.stdout or "").strip() == via0,
-          "### un collaudo che lascia `core.hooksPath` storto SPEGNE LA BARRIERA CHE STA "
-          "COLLAUDANDO")
+          "### e adesso NON PUO- esserlo: l-override vive nell-AMBIENTE di un processo, "
+          "quindi questo braccio NON PUO- PIU- lasciare la barriera spenta")
     esito("NON deve scattare: alla fine la barriera e- di nuovo in piedi",
           errori() == [], "### e il repo e- come l-ho trovato")
     print("=" * 100)

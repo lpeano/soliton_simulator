@@ -11989,3 +11989,15 @@ Ogni dato di `db_era2/` ha ### **il suo TIMBRO accanto**, col campo `versione_da
 ### 📌 **E ADESSO SONO DUE BRACCI, non uno riscritto:** ### **<<niente ferma, qualunque siano le differenze>>** e ### **<<le differenze FINISCONO nel timbro>>.** ### **Il secondo non c-era, e senza di lui <<vanno nel timbro>> era una frase nel docstring.**
 
 ### ✅ **RIPRODOTTO E VERIFICATO nella condizione esatta del guardiano** *(blocco `numpy 2.2.0`/`linux`, `CI=true`)*: ### **prima `12` su `13`, adesso `14` su `14`**, con ### **`2` differenze dal blocco e nessuna che ferma.** ### **Il braccio dei due processi byte-identici non e- stato toccato.**
+
+## LA BARRIERA FALLIVA DENTRO UN COMMIT — ### **e un presidio che fallisce nel hook e passa fuori INSEGNA A NON CREDERGLI** *(2026-10-10)*
+
+### ⛔ **TROVATO COMMITTANDO IL PUNTO `1`, e misurato TRE VOLTE:** il collaudo di `P-BARRIERA` dava ### **`9` su `11` dentro un `git commit`** e ### **`11` su `11` da solo** — e il primo tentativo rifiutava, il secondo passava.
+
+### 📌 **LA CAUSA:** il ramo end-to-end sabotava `core.hooksPath` ### **scrivendolo nel file di configurazione** e lo rimetteva in un `finally`. ### ⚠ **Durante un `git commit` la configurazione e- CONTESA**, e una scrittura che non riesce lascia la barriera a vedere il percorso ### **giusto** — quindi ### **i due bracci che si aspettano quello SBAGLIATO cadono.**
+
+### ⭐ **E CONTA PIU- DI UN FALSO ALLARME: un presidio che fallisce DENTRO il hook e passa FUORI insegna a NON CREDERGLI**, e ### **il primo rosso che si impara a ignorare e- quello che poi copre un difetto vero.** ### **E- `A9` dal lato della fiducia.**
+
+### ✅ **LA CURA: l-override si passa per AMBIENTE** *(`GIT_CONFIG_COUNT` e le sue chiavi)*, che sovrascrive la configurazione ### **solo per il processo.** ### ⭐ **Nessun file toccato, nessuna contesa — e la parte che conta: QUEL BRACCIO NON PUO- PIU- LASCIARE LA BARRIERA SPENTA, perche- non c-e- piu- niente da rimettere.**
+
+### 📌 **MISURATO DOPO: `11` su `11` da solo E `11` su `11` dentro il commit.**
