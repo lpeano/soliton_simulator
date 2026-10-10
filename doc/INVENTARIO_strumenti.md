@@ -3063,3 +3063,16 @@ etichette rimosse, con ### **`0` persi, `0` doppi, `0` conflitti**.
 | ⛔ **IL DIFETTO CHE LE LETTURE HANNO TROVATO IN SE STESSE** | al primo giro la lettura `3` diceva ### **<<la norma DERIVA>> anche per la camminata LINEARE**, dove il collaudo misura `1.2e-15`: un ### **FALSO ROSSO**, perche- un test di pendenza su una grandezza che varia ### **solo per arrotondamento** trova sempre una tendenza *(il suo sigma E- l-arrotondamento)*. ### ✅ **Cura: prima la RISOLUZIONE, poi la statistica**, e la risoluzione e- ### **la stessa formula di `S3`** |
 | 📌 **I VERDETTI** | `5` conferme, `1` smentita *(`dt^2` del piano: misurato ### **`dt^2.885`**)*, `1` ### **<<nessuna trovata>>** *(la quantita- conservata: criterio di RIAPERTURA)*, `1` ### **<<la non linearita- non basta>>** *(il cluster)* |
 | ⚠ **NON STA NELLA SUITE** | la corsa costa ### **minuti**, e un referto che la CI rigenera a ogni commit e- ### **la ragione numero uno per spegnere un passo di CI** *(`A9` dal lato del tempo)*: per questo e- un ### **`REPERTO`** |
+
+### `proto_camminata/` **`v2`** — **SPIN LEGATO AL MOTO, CON `U(2)` SUGLI ARCHI** *(2026-10-10)*
+
+| | |
+|---|---|
+| **i file** | `geometria.py` *(BLOB `89bd594b`)* · `camminata2.py` *(BLOB `904fc438`)* · `nonlineare2.py` *(BLOB `d4941977`)* · `_collauda_banco2.py` *(BLOB `91acb494`)* |
+| **COMANDO** | `python proto_camminata/_collauda_banco2.py` *(### **`24`/`24`**, `0.90` s)* · `python proto_camminata/geometria.py` · `python proto_camminata/camminata2.py` · `python proto_camminata/nonlineare2.py` |
+| **che cosa misura** | la camminata con ### **moneta di spin `exp(-i eps dtau sigma.n)` per estremita-**, ### **Grover**, e ### **spostamento CON TRASPORTO `U(2)`**; in ### **tre scene** *(identita-, gauge puro, curvatura vera)* |
+| ⭐ **IL BRACCIO `0`, in DUE PEZZI** | nella scena ### **identita- `C` COMMUTA AL BIT** *(`0`)*; con un campo `U(1)` acceso ### **`C` manda la camminata nell-ANTI-camminata** *(`4e-17`, mentre `|C U - U C| = 0.15`)*. ### **E `C^2 = -I` al bit: e- la DOPPIA COPERTURA** |
+| ⛔ **DUE BRACCI CHE DEVONO FALLIRE** | la fase ### **PARI** *(la densita-)* ### **rompe `C`** *(`2.4e-3`)*; e il gauge puro ### **coi versori NON ruotati** da- una densita- ### **diversa** *(`1.2e-2`)* |
+| ✅ **LA CANDIDATA E- L-ELICITA-** | `h_k = somma di (psi^dagger sigma psi) . n`: ### **invariante di gauge** *(`3.5e-18`)* e ### **dispari sotto `C`** *(`4.4e-17`)*. ### **Senza i versori quello scalare NON ESISTE** |
+| 📌 **E LA DIFFERENZA COL `v1`, misurata** | con `eps = 0` e identita- le componenti ### **non si mescolano** *(`0` esatto, come il `v1`)*; con `eps > 0` ### **si mescolano** *(`0.089`)*; e con `eps = 0` ma trasporto ### **curvo** si mescolano ### **lo stesso** *(`0.072`)* — ### **mescola anche il TRASPORTO** |
+| ⚠ **NON E- UNA LEGGE** | non entra in `leggi.yaml`, non importa il simulatore, nessun clip — ### **tre bracci lo verificano** |

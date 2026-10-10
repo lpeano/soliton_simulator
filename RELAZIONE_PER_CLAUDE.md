@@ -12756,3 +12756,25 @@ Ogni dato di `db_era2/` ha ### **il suo TIMBRO accanto**, col campo `versione_da
 ### ✅ **E LE SCELTE PROVVISORIE SONO VOCI, non aggettivi:** `PROVV-VERSORI-NON-RELAZIONALI` *(i versori sono DATI: l-origine relazionale e- `D9`)* e `PROVV-U-FISSE-TRE-SCENE` *(un campo fisso e- una memoria congelata: `A15` la vuole dentro `H`, ed e- `D13`)*. ### **`DA_DECIDERE_LUCA.md`: `5` voci, `5` domande.**
 
 ### ⛔ **E IL TASK HISTORY DICHIARA UN BRACCIO CHE DEVE FALLIRE, PRIMA di scriverlo:** la scena di ### **gauge puro coi versori NON ruotati** deve dare osservabili ### **DIVERSE** — ### ⭐ **e- la PROVA che i versori non sono ridondanti**, e se quel braccio ### **NON fallisse, il punto `1` del mandato cadrebbe.**
+
+## ✅ **IL `v2`, PUNTI `1`, `3` e `4`: IL BANCO ESISTE, E I VERSORI SERVONO — MISURATO** *(2026-10-10)*
+
+### 📌 **IL BANCO:** `geometria.py`, `camminata2.py`, `nonlineare2.py`, `_collauda_banco2.py`; collaudo ### **`24` su `24`** in `0.90` s, ### **nella suite** *(che passa a `36` su `36`, `pre-commit` al `94%` del budget)*.
+
+### ⭐ **IL BRACCIO `0` E- IN DUE PEZZI, e li avevo scritti PRIMA:** nella scena ### **identita- `C` COMMUTA AL BIT** *(`0`)*; con un campo `U(1)` acceso ### **`C` manda la camminata nell-ANTI-camminata** *(`4e-17`, mentre `|C U - U C| = 0.15`)*. ### ✅ **E `C^2 = -I` AL BIT**, che e- la ### **doppia copertura** e non un difetto.
+
+### ⭐ **E LA COSA CHE IL MANDATO CHIEDEVA DI <<SCRIVERE>>, L-HO MISURATA:** *«perche- i versori servono»*. ### ✅ **Due bracci, nei due versi:** l-elicita- ruotando ### **anche** i versori e- invariante *(`3.5e-18`)* e ### **senza** ruotarli ### **non lo e-** *(`2.1e-2`)*; e la densita- per nodo della scena di gauge puro coincide con l-identita- *(`5.6e-17`)* ### **solo se i versori ruotano** — altrimenti ### **`1.2e-2`.**
+
+### ⛔ **E IL PUNTO `4` HA UNA RISPOSTA POSITIVA, derivata e poi misurata: L-ELICITA-.** `h_k = somma di (psi^dagger sigma psi) . n` e- ### **invariante di gauge** *(perche- `s` e `n` ruotano INSIEME)* e ### **dispari sotto `C`** *(perche- `s` lo e-)*. ### ⭐ **E senza i versori quello scalare NON ESISTE**: e- il secondo motivo per cui i riferimenti locali servono, e non era nel mandato.
+
+### 📌 **LA DIFFERENZA COL `v1`, in tre numeri:** con `eps = 0` e identita- le componenti ### **non si mescolano** *(`0` esatto, come il `v1`)*; con `eps > 0` ### **si mescolano** *(`0.089`)*; e con `eps = 0` ma trasporto ### **curvo** si mescolano ### **lo stesso** *(`0.072`)* — cioe- ### **mescola anche il TRASPORTO**, non solo la moneta.
+
+### ⚠ **E TRE COSE LE HA CORRETTE LA MISURA, DUE DELLE QUALI ERANO ERRORI MIEI — annotate, non riscritte:**
+
+### 📌 **`(a)` la camminata coniugata NON e- `U*`:** il conto dice `M' = sigma_y M* sigma_y^{-1}`, che per `e^{i t}V` fa ### **`e^{-i t} V`** — ### **la stessa `V`**, non `V*`. ### ✅ **Si costruisce con `U/det(U)`**, e ### **con `U*` il braccio dava `0.16`; adesso da- `4e-17`.**
+
+### 📌 **`(b)` la soglia del braccio `0` nelle scene con campo NON puo- essere <<al bit>>**, e la mia `S6` diceva `0.0`: `C(U psi)` e `U_coniugata(C psi)` fanno ### **le stesse moltiplicazioni in ORDINE DIVERSO.** ### ✅ **Il criterio diventa `<= S1`**, e ### **nella scena identita- resta `0.0` al bit.**
+
+### 📌 **`(c)` la trasformazione di gauge include la FASE `U(1)`, e averla dimenticata era il secondo errore:** `rho` e- invariante per fase, quindi ### **sembrava innocuo** — ma se le `U` portano `e^{i(fi_v - fi_u)}` e lo stato ### **no**, quello stato ### **non e- il trasformato di gauge**: ### **le fasi RELATIVE fra i nodi sono diverse.** ### ⭐ **La misura l-ha detto al primo giro:** `1.2e-2` contro `5.3e-14`; con la fase, ### **`5.6e-17`.**
+
+### ✅ **E LE TRE SCENE SONO QUELLE CHE DICO, verificato prima di usarle:** identita- e gauge puro hanno ### **olonomie BANALI** *(traccia `SU(2)` = `2` entro `8.9e-16`)*, la scena curva ### **no** *(traccia da `-1.92` a `1.59`)*.

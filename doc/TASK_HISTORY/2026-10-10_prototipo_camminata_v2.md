@@ -187,3 +187,15 @@ psi' = SPOSTAMENTO_CON_TRASPORTO( NONLINEARE( GROVER( MONETA_DI_SPIN( psi ) ) ) 
 ### ⛔ **E TRE COSE CHE NON FARO', scritte perche' non diventino una sorpresa:** non tocchero'
 **`leggi.yaml`**; non derivero' `r_k`, `eps`, `g`, i versori ne' le `U` — ### **sono tutte
 sonde o decisioni di Luca**; e non fara' nascere **nessun arco** *(punto `2d`)*.
+
+---
+
+## ⛔ **ANNOTAZIONI — che cosa la MISURA ha corretto** *(par. `8`: **non si riscrive, si ANNOTA**)*
+
+### 📌 **`(a)` LA CAMMINATA CONIUGATA NON E- `U*`, ED E- STATO IL MIO PRIMO ERRORE.** Il conto dice `C M = M' C` con **`M' = σ_y M* σ_y^{-1}`**, e per `M = e^{iθ}V` quello fa **`e^{-iθ} V`** — cioe' **la stessa `V`** e **la fase opposta**, *non* `V*`. ### ✅ **Si costruisce con `U / det(U)`**, perche' `det(e^{iθ}V) = e^{2iθ}`. ### ⭐ **MISURATO: con `U*` il braccio dava `0.16`; con `U/det(U)` da' `4e-17`.**
+
+### 📌 **`(b)` LA SOGLIA DEL BRACCIO `0` NELLE SCENE CON CAMPO NON PUO' ESSERE <<AL BIT>>**, e la soglia `S6` del piano diceva `0.0`. ### ⚠ **Il motivo e' di virgola mobile, non di fisica:** `C(Uψ)` e `U_coniugata(Cψ)` fanno **le stesse moltiplicazioni in ORDINE DIVERSO**, quindi gli ultimi bit non coincidono. ### ✅ **Il criterio diventa `≤ S1`** *(il conteggio delle operazioni)*, e **nella scena IDENTITA' resta `0.0` AL BIT** — misurato.
+
+### 📌 **`(c)` LA TRASFORMAZIONE DI GAUGE INCLUDE LA FASE `U(1)`, e averla dimenticata e' stato il secondo errore.** `ρ` e' invariante per fase, quindi **sembrava innocuo** — ma se le `U` della scena portano `e^{i(φ_v−φ_u)}` e lo stato **non porta `e^{iφ_k}`**, quello stato **non e' il trasformato di gauge**: ### **le fasi RELATIVE fra i nodi sono diverse.** ### ✅ **La misura l'ha detto subito:** `max|ρ − ρ'| = 1.2e-2` contro una soglia di `5.3e-14`; con la fase, **`5.6e-17`.**
+
+### ⭐ **E UNA COSA CHE IL MANDATO CHIEDEVA DI <<SCRIVERE>> E CHE INVECE SI PUO' MISURARE:** *«perche' i versori servono»*. ### ✅ **Due bracci lo provano:** l'elicita' ruotando **anche** i versori e' invariante *(`3.5e-18`)* e **senza** ruotarli **non lo e'** *(`2.1e-2`)*; e la densita' per nodo della scena di gauge puro coincide con l'identita' *(`5.6e-17`)* **solo se i versori ruotano** — altrimenti **`1.2e-2`.**

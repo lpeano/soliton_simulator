@@ -147,6 +147,13 @@ COLLAUDI = (
     # ### ⚠ **Sta nel `pre-commit` perche- costa pochi secondi**, e il
     # ### ### **determinismo fra due processi** e- la parte piu- lenta.
     ("il banco della camminata", "proto_camminata/_collauda_banco.py", "pre-commit"),
+    # ### ⭐ **IL BANCO `v2`: SPIN LEGATO AL MOTO** *(decisione di Luca,
+    # ### 2026-10-10)*. ### **Porta il braccio `0` in DUE PEZZI** -- `C` commuta al bit
+    # ### nella scena identita-, e manda la camminata ### **nell-ANTI-camminata** quando
+    # ### c-e- un campo `U(1)` -- e ### **DUE bracci che DEVONO fallire**: la fase pari, e
+    # ### il gauge puro ### **coi versori non ruotati.**
+    # ### ⚠ **Costa `0.90` s misurati**, quindi sta nel `pre-commit`.
+    ("il banco della camminata v2", "proto_camminata/_collauda_banco2.py", "pre-commit"),
     # ### ⚠ **E `csv/_verifica_clone.py` NON STA QUI, DI PROPOSITO:** fa un clone e
     # ### ### **ci fa girare QUESTA suite** -- metterlo fra i collaudi vorrebbe dire
     # ### ### **una ricorsione senza fondo.** Si lancia a mano, ed e- il punto 3 del
