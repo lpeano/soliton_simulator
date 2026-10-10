@@ -86,6 +86,16 @@ leggi:
     espressione: >-
       -K*(psi_i_0c*psi_j_0 + psi_i_1c*psi_j_1 + psi_j_0c*psi_i_0 + psi_j_1c*psi_i_1)
     ambito: [psi]
+    # ### LE SIMMETRIE (punto 3): U(1) e- il minimo che il mandato chiede. ### E lo
+    # ### SCAMBIO DEI CAPI c-e- perche- il grafo e- NON ORIENTATO -- ed e- la stessa
+    # ### proprieta- che il punto 4 ha MISURATO numericamente (scambiando ii e jj su
+    # ### tutti gli archi lo stato resta IDENTICO AL BIT). ### Qui si verifica
+    # ### SIMBOLICAMENTE: due vie diverse sulla stessa cosa.
+    simmetrie: [U1-FASE-GLOBALE, SCAMBIO-DEI-CAPI]
+    # ### LA NORMA SI CONSERVA PER NOETHER, dalla U(1). ### L-ENERGIA NO, e non e- un
+    # ### difetto della legge: e- l-INTEGRATORE che la conserva solo approssimata --
+    # ### misurato 3.9e-05 contro la soglia DERIVATA dt^2 = 1.0e-04.
+    conserva: [NORMA]
     parametri:
       K:
         valore: 1.0
@@ -110,6 +120,12 @@ leggi:
     prova: true
     espressione: (g/2)*(psi_0c*psi_0 + psi_1c*psi_1)**2
     ambito: [psi]
+    # ### ⚠ E QUI LO SCAMBIO DEI CAPI NON SI DICHIARA, e non e- una dimenticanza:
+    # ### e- un termine di NODO, e non ha due capi. ### Dichiararlo darebbe una
+    # ### sostituzione CHE NON TOCCA NESSUN SIMBOLO, cioe- un FALSO-UNO -- e il
+    # ### presidio lo RIFIUTA proprio per questo.
+    simmetrie: [U1-FASE-GLOBALE]
+    conserva: [NORMA]
     parametri:
       g:
         valore: 0.5
@@ -134,6 +150,10 @@ leggi:
     # ### NORMA e- un CONTEGGIO, cioe- E^0. ### Pretendere E^1 da ogni osservatore
     # ### VIETEREBBE DI MISURARE LA NORMA, che e- la prima cosa che si misura.
     dimensione: E^0
+    simmetrie: [U1-FASE-GLOBALE]
+    # ### ⛔ UN OSSERVATORE NON CONSERVA NIENTE: MISURA. ### La lista VUOTA lo DICE,
+    # ### e <<non dichiarato>> sarebbe un-altra cosa.
+    conserva: []
     prova: true
     espressione: psi_0c*psi_0 + psi_1c*psi_1
     ambito: [psi]

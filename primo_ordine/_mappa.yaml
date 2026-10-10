@@ -46,6 +46,14 @@ moduli:
     responsabilita: RNG col seme, thread a uno, versioni bloccate (punto 1)
     importa: []
 
+  - nome: simmetrie.py
+    responsabilita: le simmetrie simboliche e le soglie DERIVATE delle conservazioni
+    importa: []
+
+  - nome: _collauda_simmetrie.py
+    responsabilita: il collaudo delle simmetrie e delle conservazioni misurate
+    importa: [driver, hamiltoniana, passo, schema_config, simmetrie, stato]
+
   - nome: _collauda_determinismo.py
     responsabilita: il collaudo del determinismo, e i due processi byte-identici
     importa: [determinismo, schema_config]
@@ -97,7 +105,7 @@ moduli:
   # ------------------------------------------------------------------ IL GENERATORE
   - nome: leggi/schema.py
     responsabilita: la forma di una riga di tabella, e i divieti
-    importa: [_presidio]
+    importa: [_presidio, simmetrie]
 
   - nome: _genera.py
     responsabilita: dalla tabella al modulo e alla scheda, passando dalla derivata

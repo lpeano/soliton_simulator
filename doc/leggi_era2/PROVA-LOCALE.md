@@ -9,7 +9,7 @@
 | **tipo** | `termine_nodo` |
 | **espressione** | `(g/2)*(psi_0c*psi_0 + psi_1c*psi_1)**2` |
 | **ambito** | `psi` |
-| **impronta della riga** | `5518865ea31421ca` |
+| **impronta della riga** | `ed99fa6a0651ef9b` |
 | **assiomi soddisfatti** | `A16` · `A17` |
 
 ## I PARAMETRI

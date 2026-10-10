@@ -48,6 +48,7 @@ FILE_FISICA = (
     'primo_ordine/passo.py',
     'primo_ordine/grafo.py',
     'primo_ordine/determinismo.py',
+    'primo_ordine/simmetrie.py',
     'primo_ordine/crescita.py',
     'primo_ordine/vuoto.py',
     'primo_ordine/driver.py',
@@ -76,6 +77,7 @@ FILE_FISICA = (
     'primo_ordine/_collauda_grafo.py',
     'primo_ordine/_collauda_genera.py',
     'primo_ordine/_collauda_determinismo.py',
+    'primo_ordine/_collauda_simmetrie.py',
     'primo_ordine/termini/__init__.py',
     # ### I TRE GENERATI: entrano nella LISTA ### **nel commit in cui nascono**, e il
     # ### mandato lo pretende. ### ⚠ **Sono `prova: true`**: la LISTA sorveglia

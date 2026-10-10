@@ -581,6 +581,17 @@ METODI['P-E9'] = (
 METODI['P-AB'] = (
     'NATO NELL-ERA 2: un `A`/`B` dichiara IL CAMPO UNICO in cui i bracci differiscono, e se ne differiscono due ### IL CONFRONTO NON PARTE (la lezione di `Z20`: due misure sovrapposte). ### Piu- i dati con la versione del formato e nessun file a meta-',
     '`csv/_confronti_e_dati.py::controlla`, `pre-commit` + CI', "PORTATO")
+METODI['P-SIM'] = (
+    "NATO NELL-ERA 2: ogni termine dichiara le `simmetrie` (almeno `U1-FASE-GLOBALE`) e "
+    "cio- che `conserva`; il generatore verifica le simmetrie SIMBOLICAMENTE (la "
+    "differenza deve essere ZERO in sympy) e il collaudo le conservazioni "
+    "NUMERICAMENTE. ### E LE SOGLIE SONO DERIVATE DALL-ORDINE DEL METODO: `NORMA` -> "
+    "`passi * eps` (invariante quadratico: solo arrotondamento), `ENERGIA` -> `dt^2` "
+    "(metodo simmetrico, nessuna deriva secolare). ### Undici ordini di grandezza di "
+    "differenza, e dicono una cosa vera: la norma e- conservata DALLA STRUTTURA, "
+    "l-energia solo APPROSSIMATA",
+    "`primo_ordine/simmetrie.py::rompe` dentro `valida_legge`; collaudo in "
+    "`primo_ordine/_collauda_simmetrie.py` (13/13)", "PORTATO")
 METODI['P-DIM'] = (
     "NATO NELL-ERA 2: ogni variabile e ogni parametro dichiarano la loro `dimensione`, "
     "e il generatore RIFIUTA un-espressione incoerente -- ogni ADDENDO ha la stessa "

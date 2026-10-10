@@ -11847,3 +11847,21 @@ Ogni dato di `db_era2/` ha ### **il suo TIMBRO accanto**, col campo `versione_da
 ### ⚠ **E `P-MOD` MI HA RIFIUTATO IL COMMIT, per la terza volta in due punti:** `_genera.py` era arrivato a ### **`738` righe** sul tetto di `700`, e il presidio dice *«oltre ### **SI DIVIDE, NON SI ALLUNGA**»*. ### ⭐ **Alzare il tetto sarebbe stato ESATTAMENTE la manopola che `A1` vieta.** ### ✅ **Il collaudo e- andato in `primo_ordine/_collauda_genera.py`** *(`565` + `169` righe)* — ### **la stessa lezione del grafo, due punti prima.** ### ⛔ **E `--prova` non c-e- piu-: ho cercato e corretto TUTTI gli otto rimandi** *(la CI, `METODI`, due generatori di referto, l-inventario, il docstring, e due referti ### **rigenerati**)*.
 
 ### ⚠ **E UN ERRORE MIO IN UNO SCRIPT DI PATCH, che annoto perche- e- lo stesso di una regex sbagliata:** avevo asserito *«`--prova` non c-e- piu- nel testo»* — ### **ma il commento che inserivo CONTENEVA lui stesso la parola `--prova`**, quindi l-asserzione diceva ### **<<non togliato>> mentre il ramo era via.** ### ⭐ **E- la stessa classe d-errore di una regex che non distingue un commento da un uso:** l-asserzione adesso guarda ### **`return collaudo()`**, cioe- ### **il codice.**
+
+## PUNTO `3`: SIMMETRIE E CONSERVAZIONI — ### **e il punto difficile non era la simmetria: era LA SOGLIA** *(2026-10-10)*
+
+### ⭐ **LE DUE META- SONO DUE COSE DIVERSE, non due modi di dire la stessa.** La simmetria si verifica ### **in sympy**, su un-espressione, e il verdetto e- ### **esatto: zero o non zero.** La conservazione si verifica ### **su una corsa**, e il verdetto e- ### **un numero contro una soglia** — ### ⛔ **e la soglia e- il punto in cui un collaudo del genere diventa una manopola.**
+
+### ✅ **LE DUE SOGLIE SONO DERIVATE DALL-ORDINE DEL METODO, e nessuna delle due e- stata tarata.** ### **`NORMA` → `passi * eps`**, perche- la norma e- ### **un invariante quadratico** e il punto medio implicito ### **li conserva esattamente in aritmetica esatta** — quindi l-unico errore e- ### **l-arrotondamento**, e in `N` passi non puo- superare `N` epsilon. ### **`ENERGIA` → `dt^2`**, perche- il metodo e- ### **simmetrico e del secondo ordine** e ### **non ha deriva secolare.**
+
+### 📌 **MISURATO** *(`200` passi, `dt = 0.01`, integratore LOCALE, `9` nodi)*: norma ### **`1.853e-15`** contro la soglia ### **`4.441e-14`**; energia ### **`3.979e-05`** contro ### **`1.000e-04`.** ### **L-energia sta al `40%` della sua soglia: il margine e- onesto, non comodo.**
+
+### ⭐ **E LE DUE SOGLIE SONO LONTANE DI NOVE ORDINI DI GRANDEZZA, che dice una cosa VERA: la norma e- conservata DALLA STRUTTURA del metodo, l-energia solo APPROSSIMATA.** ### ⛔ **Dichiararle con la stessa soglia nasconderebbe esattamente questo.**
+
+### ✅ **E IL COLLAUDO HA UN BRACCIO CHE DICE CHE LE SOGLIE NON SONO MANOPOLE:** si dimezza `dt` e ### **la soglia dell-energia cambia col QUADRATO**; si raddoppiano i passi e ### **quella della norma raddoppia.** ### **Un numero scritto a mano non si muoverebbe** *(`A1`)*.
+
+### 📌 **E UNA DISTINZIONE CHE IL COLLAUDO MI HA INSEGNATO, perche- ha rifiutato la mia riga di prova.** Avevo scritto che ### **zero sostituzioni = falso-uno**, e non e- vero: ### ✅ **zero sostituzioni di `U(1)` su una legge SENZA `psi` e- INVARIANZA VERA** — la legge ### **non coinvolge la fase.** ### ⛔ **Mentre `SCAMBIO-DEI-CAPI` con zero sostituzioni E- un falso-uno:** la legge ### **non ha due capi**, quindi la dichiarazione ### **sembra verificata senza aver guardato niente.** ### **Due casi che trattavo allo stesso modo, e il presidio me li ha separati.**
+
+### ⚠ **E `PROVA-LOCALE` NON DICHIARA `SCAMBIO-DEI-CAPI`, e non e- una dimenticanza: e- un termine di NODO.** ### **Il presidio lo rifiuterebbe**, ed e- scritto nella tabella accanto alla riga.
+
+### ⛔ **E CIO- CHE QUESTO PUNTO NON DICE: le tre leggi sono di PROVA.** Una simmetria verificata su `PROVA-HOPPING` ### **non dice niente sulla fisica** — dice che ### **la macchina funziona.** ### **Il referto lo scrivera- cosi-.**

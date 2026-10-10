@@ -9,7 +9,7 @@
 | **tipo** | `termine_arco` |
 | **espressione** | `-K*(psi_i_0c*psi_j_0 + psi_i_1c*psi_j_1 + psi_j_0c*psi_i_0 + psi_j_1c*psi_i_1)` |
 | **ambito** | `psi` |
-| **impronta della riga** | `d455b21811801ac0` |
+| **impronta della riga** | `f36ea3785e292916` |
 | **assiomi soddisfatti** | `A16` |
 
 ## I PARAMETRI

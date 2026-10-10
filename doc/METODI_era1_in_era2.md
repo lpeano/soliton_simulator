@@ -8,17 +8,17 @@
 
 | | quanti |
 |---|--:|
-| **`PORTATO`** | `95` |
+| **`PORTATO`** | `96` |
 | **`DA_PORTARE`** | `17` |
 | **`DA_DECIDERE`** | `5` |
 | **`NON_SI_APPLICA`** | `7` |
-| **in tutto** | ### **`124`** |
+| **in tutto** | ### **`125`** |
 
-### ⚠ **E IL NUMERO `124` E- MISURATO, non stimato:** viene dal perimetro che l-indice calcola, e ### **il mandato ne nominava <<una decina>>** per nome piu- *<<e le cure di architettura>>*. ### **La decina era `20`.**
+### ⚠ **E IL NUMERO `125` E- MISURATO, non stimato:** viene dal perimetro che l-indice calcola, e ### **il mandato ne nominava <<una decina>>** per nome piu- *<<e le cure di architettura>>*. ### **La decina era `20`.**
 
 ---
 
-## `PORTATO` — `95` metodi
+## `PORTATO` — `96` metodi
 
 > ### ✅ **GIA- NELL-ERA `2`**, e `dove` dice dove
 
@@ -78,6 +78,7 @@
 | **`P-MOD`** | `PRESIDIO` | NATO NELL-ERA 2: la mappa dichiara CHI IMPORTA CHI, e un import fuori mappa, un CICLO, un modulo non in mappa o una dipendenza dichiarata e NON USATA sono rifiutati. ### Piu- il TETTO di righe e la responsabilita- in UNA RIGA: se non ci sta, IL MODULO FA DUE COSE | `csv/_modularita_era2.py::controlla` + `primo_ordine/_mappa.yaml` |
 | **`P-R1`** | `PRESIDIO` | NATO NELL-ERA 2: `A8` e `P5` cablati. Il CONTEGGIO dei rami lo misura l-AST, il RUOLO e- dichiarato a vocabolario chiuso. ### 27 rami in 12 funzioni, e NOVE SONO `default` -- un DEBITO che il punto 15(b) vietera-, dichiarato invece che nascosto | `csv/_rami_era2.py::controlla`, `pre-commit` + CI |
 | **`P-RIF`** | `PRESIDIO` | NATO NELL-ERA 2: un ID nel codice e- un `@rif`, o non esiste. ### Un ID in un COMMENTO e- prosa, e un riferimento che una macchina segue non vive nella prosa; i DOCSTRING restano, ed e- una scelta DICHIARATA. ### E si e- fatto piu- forte quando l-indice si e- completato: appena `A16` e `A17` sono diventati voci, ha trovato 4 commenti in piu- | `csv/_rif_nel_codice.py::controlla` + `primo_ordine/_rif.py`, `pre-commit` + CI |
+| **`P-SIM`** | `PRESIDIO` | NATO NELL-ERA 2: ogni termine dichiara le `simmetrie` (almeno `U1-FASE-GLOBALE`) e cio- che `conserva`; il generatore verifica le simmetrie SIMBOLICAMENTE (la differenza deve essere ZERO in sympy) e il collaudo le conservazioni NUMERICAMENTE. ### E LE SOGLIE SONO DERIVATE DALL-ORDINE DEL METODO: `NORMA` -> `passi * eps` (invariante quadratico: solo arrotondamento), `ENERGIA` -> `dt^2` (metodo simmetrico, nessuna deriva secolare). ### Undici ordini di grandezza di differenza, e dicono una cosa vera: la norma e- conservata DALLA STRUTTURA, l-energia solo APPROSSIMATA | `primo_ordine/simmetrie.py::rompe` dentro `valida_legge`; collaudo in `primo_ordine/_collauda_simmetrie.py` (13/13) |
 | **`P-T1`** | `PRESIDIO` | NATO NELL-ERA 2, ed e- il principio del mandato CABLATO: un presidio dichiarato ERRORE non puo- NOMINARE un campo di testo (via AST), e chi legge la prosa PUO- SOLO SEGNALARE. ### Non ripara: MANTIENE -- la misura dice che oggi e- gia- vero | `csv/_testo_e_metadati.py::controlla`, `pre-commit` + CI |
 | **`P-T2`** | `PRESIDIO` | NATO NELL-ERA 2: il REPLAY su TUTTI i registri (4 REPLAY, 5 REPERTO col blob dichiarato) e i testi generati BYTE-IDENTICI (9 file, VELOCI nel pre-commit e LENTI solo nella CI). ### E metadati.jsonl e- un REPERTO PER NECESSITA-: ha una via di scrittura e ZERO storico | `csv/_replay_registri.py::controlla`, `pre-commit` + CI |
 | **`P-T3`** | `PRESIDIO` | NATO NELL-ERA 2: una citazione e- {file, riga, commit, impronta, frase} e si RI-VERIFICA su `git show`. ### Il par.2 dice che i numeri di riga SONO SHIFTATI: con il commit una citazione e- vera PER SEMPRE, senza e- destinata a diventare falsa | `csv/_citazioni_strutturate.py::controlla`, `pre-commit` + CI |

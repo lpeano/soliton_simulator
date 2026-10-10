@@ -44,6 +44,13 @@ python "$(git rev-parse --show-toplevel)/csv/_rami_era2.py" || exit 1
 #  ### e' una ragione per dare --no-verify.
 python "$(git rev-parse --show-toplevel)/csv/_replay_registri.py" || exit 1
 
+#  `P-SIM` -- LE SIMMETRIE (simboliche) E LE CONSERVAZIONI (numeriche).
+#  ### Le soglie sono DERIVATE dall'ordine del metodo, e il collaudo ha un
+#  ### braccio che lo PROVA: cambia `dt` e la soglia dell'energia cambia col
+#  ### QUADRATO. Un numero scritto a mano NON si muoverebbe, e sarebbe una
+#  ### manopola (`A1`).
+python "$(git rev-parse --show-toplevel)/primo_ordine/_collauda_simmetrie.py" || exit 1
+
 #  `P-DET` -- IL DETERMINISMO: RNG, THREAD, VERSIONI, DUE PROCESSI.
 #  ### Il braccio che conta fa girare IL DRIVER DUE VOLTE in due processi e
 #  ### confronta i BYTE. E' il piu' lento di questo hook, e sta qui e non solo

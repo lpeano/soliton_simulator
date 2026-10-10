@@ -66,6 +66,15 @@ ECCEZIONI = {
             "idem: i due candidati si misurano NELLO STESSO MODO, e la tavola del referto "
             "esiste perche- il collaudo li ha fatti girare entrambi",
     },
+    "primo_ordine/_collauda_simmetrie.py": {
+        "passo_locale":
+            "una CONSERVAZIONE si misura SU UNA CORSA: non c-e- un altro modo di sapere "
+            "se la norma si conserva in 200 passi. ### E la corsa deve essere QUELLA DEL "
+            "DRIVER -- stesso integratore, stessa scena, stesso seme -- altrimenti la "
+            "deriva misurata e- quella di un ALTRO sistema, e la soglia derivata non le "
+            "si applica. ### Chiamare l-esecutore e- cio- che rende la misura VERA; "
+            "scriverne uno qui la renderebbe FINTA",
+    },
     "primo_ordine/_collauda_grafo.py": {
         "passo_globale":
             "il secondo significato di <<archi simmetrici>> e- che LA FISICA tratti "

@@ -14,7 +14,7 @@
 | `INFRASTRUTTURA` | `2` | 12 |
 | `INFRASTRUTTURA` | `ENTRAMBE` | 15 |
 | `METODO` | `1` | 156 |
-| `METODO` | `2` | 8 |
+| `METODO` | `2` | 9 |
 | `METODO` | `ENTRAMBE` | 83 |
 
 | id | classe | dominio | era | stato | blocca | titolo |
@@ -458,6 +458,7 @@
 | `P-MOD` | PRESIDIO | INFRASTRUTTURA | 2 | ### **AGENDA** |  | la MODULARITA- non si degrada: la mappa dice cio- che e- previsto, il resto e- r |
 | `P-R1` | PRESIDIO | INFRASTRUTTURA | 2 | ### **AGENDA** |  | ogni RAMO della fisica dell-era 2 e- dichiarato: quanti, e a che servono |
 | `P-RIF` | PRESIDIO | METODO | 2 | ### **AGENDA** |  | un ID nel codice e- un @rif, o non esiste: un riferimento non vive nella prosa |
+| `P-SIM` | PRESIDIO | METODO | 2 | ### **AGENDA** |  | simmetrie SIMBOLICHE e conservazioni NUMERICHE, con soglie DERIVATE e non tarate |
 | `P-T1` | PRESIDIO | METODO | ENTRAMBE | ### **APERTA** |  | il TESTO LIBERO non si interpreta per decidere: chi RIFIUTA legge solo campi str |
 | `P-T2` | PRESIDIO | METODO | ENTRAMBE | ### **APERTA** |  | il REPLAY su TUTTI i registri, e i testi generati che si rigenerano byte-identic |
 | `P-T3` | PRESIDIO | METODO | ENTRAMBE | ### **APERTA** |  | le CITAZIONI sono STRUTTURATE e si ri-verificano su git show, non a occhio |

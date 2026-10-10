@@ -135,12 +135,17 @@ RAMI = ("Min", "Max", "Piecewise", "Abs", "sign", "Heaviside", "floor",
 
 # ### LE CHIAVI OBBLIGATORIE, per tipo.
 CHIAVI_COMUNI = ("id", "tipo", "scheda", "assiomi", "prova")
-CHIAVI_TERMINE = ("espressione", "ambito", "parametri")
+# ### ⛔ **E OGNI TERMINE DICHIARA `simmetrie` E `conserva`** *(punto `3`)*: una
+# ### simmetria non dichiarata e- ### **una simmetria che nessuno verifica**, e una
+# ### lista `conserva` vuota ### **dice <<non conserva niente>>**, che non e- la stessa
+# ### cosa di ### **<<non dichiarato>>.**
+CHIAVI_TERMINE = ("espressione", "ambito", "parametri", "simmetrie", "conserva")
 CHIAVI_REGOLA = ("ingressi", "uscite", "bilancio")
 # ### ⛔ **E UN OSSERVATORE DICHIARA LA SUA `dimensione`** *(punto `2`)*: puo-
 # ### misurare qualunque cosa, e ### **pretendere `E^1` da tutti vieterebbe di misurare
 # ### la norma** -- che e- la prima cosa che si misura.
-CHIAVI_OSSERVATORE = ("espressione", "ambito", "voce", "dimensione")
+CHIAVI_OSSERVATORE = ("espressione", "ambito", "voce", "dimensione",
+                      "simmetrie", "conserva")
 
 _ID = re.compile(r"^[A-Z][A-Z0-9-]{3,}$")
 
@@ -389,6 +394,23 @@ def valida_legge(d, variabili, dimensioni=None):
     if dimensioni:
         fuori += dimensioni_incoerenti(d, dimensioni)
 
+    # --------------------------------------------- ### LE SIMMETRIE E LE CONSERVAZIONI
+    # ### ⛔ **IL CONTROLLO SIMBOLICO GIRA QUI**, dentro il validatore che il
+    # ### generatore chiama -- ### **cosi- un termine che rompe una simmetria DICHIARATA
+    # ### non si genera** *(punto `3`)*.
+    # ### ⚠ **E l-import e- LOCALE perche- `simmetrie` sta in `primo_ordine/` e
+    # ### questo file in `primo_ordine/leggi/`:** un import in testa
+    # ### ### **legherebbe lo schema al percorso del padre**, e lo schema
+    # ### ### **si prova da solo.**
+    if tipo in ("termine_nodo", "termine_arco", "osservatore"):
+        try:
+            sys.path.insert(0, os.path.dirname(_QUI))
+            import simmetrie as _SM
+            fuori += _SM.rompe(d)
+            fuori += _SM.conservazioni_valide(d)
+        except ImportError as _e:                           # noqa: BLE001
+            _err(fuori, idv, "`P-SIM` NON E- GIRATO (%s): dichiarato, non nascosto" % _e)
+
     # ------------------------------------------------------------------ il BILANCIO
     if tipo == "regola":
         for k in ("ingressi", "uscite"):
@@ -488,7 +510,11 @@ def collaudo():
     def base(**kw):
         d = {"id": "PROVA-UNO", "tipo": "termine_nodo", "espressione": "rho**2",
              "ambito": ["rho"], "parametri": {}, "assiomi": [], "prova": True,
-             "scheda": "una scheda"}
+             "scheda": "una scheda",
+             # ### ⚠ **`rho` NON E- `psi`**, quindi la sostituzione di `U(1)`
+             # ### ### **non tocca nessun simbolo** -- ed e- ### **invariante
+             # ### davvero**, non per vacuita-: la legge NON COINVOLGE LA FASE.
+             "simmetrie": ["U1-FASE-GLOBALE"], "conserva": []}
         d.update(kw)
         return {k: v for k, v in d.items() if v is not None}
 
@@ -540,7 +566,7 @@ def collaudo():
     # ### ⛔ **L-OSSERVATORE dichiara la sua VOCE.**
     oss = {"id": "PROVA-OSS", "tipo": "osservatore", "espressione": "rho",
            "ambito": ["rho"], "voce": "", "assiomi": [], "prova": True, "scheda": "s",
-           "dimensione": "E^0"}
+           "dimensione": "E^0", "simmetrie": ["U1-FASE-GLOBALE"], "conserva": []}
     esito("### un `osservatore` senza `voce`",
           any("MISURA/CRITERIO" in e for e in valida_legge(oss, VAR)))
     esito("NON deve scattare: lo stesso osservatore con la `voce`",

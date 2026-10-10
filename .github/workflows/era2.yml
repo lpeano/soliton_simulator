@@ -93,6 +93,9 @@ jobs:
           python csv/_referto_seconda_parte.py --con-lenti
           git diff --exit-code -- doc/REFERTO_seconda_parte_era2.md
 
+      - name: "### `P-SIM` -- simmetrie simboliche e conservazioni misurate"
+        run: python primo_ordine/_collauda_simmetrie.py
+
       - name: "### `P-DET` -- il determinismo, e DUE PROCESSI byte-identici"
         # ### \u26a0 In CI la piattaforma e- Linux e le versioni sono PIU- NUOVE del
         # ### blocco: il presidio NON ferma (ferma solo per una PIU- VECCHIA) e la

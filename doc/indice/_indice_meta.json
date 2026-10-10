@@ -1,7 +1,8 @@
 {
  "assiomi": {
   "A1": [
-   "P-DIM"
+   "P-DIM",
+   "P-SIM"
   ],
   "A11": [
    "P-R1"
@@ -14,7 +15,8 @@
    "DEC-NASCITA-PSI",
    "DEC-REGOLA-FORMA",
    "MISURA-NORMA-ERA2",
-   "P-DIM"
+   "P-DIM",
+   "P-SIM"
   ],
   "A17": [
    "MISURA-NORMA-ERA2",
@@ -502,6 +504,7 @@
    "P-MOD",
    "P-R1",
    "P-RIF",
+   "P-SIM",
    "P-T1",
    "P-T2",
    "P-T3",
@@ -1817,6 +1820,7 @@
    "P-MOD",
    "P-R1",
    "P-RIF",
+   "P-SIM",
    "P-T1",
    "P-T2",
    "P-T3",
@@ -2655,6 +2659,7 @@
    "P-ID",
    "P-M1",
    "P-RIF",
+   "P-SIM",
    "P-T1",
    "P-T2",
    "P-T3",
@@ -3386,6 +3391,7 @@
    "P-MOD",
    "P-R1",
    "P-RIF",
+   "P-SIM",
    "REVERSIBILITA-LOCALE",
    "VUOTO-LOCALE-DETERMINISTICO"
   ],
@@ -6623,6 +6629,7 @@
    "P-MOD",
    "P-R1",
    "P-RIF",
+   "P-SIM",
    "REVERSIBILITA-LOCALE",
    "VUOTO-LOCALE-DETERMINISTICO"
   ],
