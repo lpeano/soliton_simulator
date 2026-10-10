@@ -12873,3 +12873,19 @@ Ogni dato di `db_era2/` ha ### **il suo TIMBRO accanto**, col campo `versione_da
 ### ⭐ **E LA DECISIONE DELLA TERZA E- IMPORTANTE ANCHE PER COME LEGGO IL BANCO:** *«la camminata NON resta nel banco»* — il modello resta ### **TABELLA → GENERATORE → CODICE GENERATO**, e il motivo e- ### **il difetto dell-era `1`: codice di prova che diventa implementazione.** ### ⚠ **Quindi i banchi `v1`-`v3` sono STRUMENTI PER FISSARE LE FORME**, non l-implementazione — e il loro destino e- ### **diventare il collaudo della tabella.**
 
 ### ⭐ **E UN PEZZO DI QUELLA VOCE IL `v3` LO HA GIA- INCONTRATO:** il generatore dovra- ### **dire se ha usato il flusso ESATTO o il punto medio implicito, e perche-** — e la distinzione ### **esiste gia- nei numeri**: la saturazione su `h/Lambda` ### **si integra esattamente** *(gli invarianti sono misurati)*, quella sull-### **elicita- dell-interferenza NO.**
+
+## ✅ **LA SECONDA CANDIDATA DEL `v3`: L'AUTOINTERAZIONE DELL'INTERFERENZA, DALL'ERA `1`** *(2026-10-11)*
+
+### 📌 **L'ORIGINE L-HO VERIFICATA SUL CODICE, non ricopiata** *(e il mandato lo chiede)*: `H_int = -(mu/2) somma |Psi_k|^2`, e il commento dice ### **<<la forma NON e- scelta: e- la derivata di `|Psi|^2` rispetto a `phi`>>.**
+
+### ⚠ **E HO TROVATO DUE COSE CHE IL MANDATO NON DICEVA, leggendo il codice invece del commento** *(par. `2`)*: `MU_PSI = -0.05` ### **c-e- ma quel ramo NON GIRA** — e- un `elif` escluso da `REPULS_LEGGE = True`, e ### **il suo stesso commento lo dichiara LATENTEMENTE DIFETTOSO** *(letture miste `t`/`t+1`, voce `Z13`)*; e la legge che ### **gira** ha intensita- ### **`u(u+2)`**, cioe- ### **e- GIA- una saturazione senza parametro** — lo stesso mestiere del `v3`, con un-altra funzione.
+
+### 📌 **E UNA TERZA:** `REGISTRO_FISICA` `~2799` parla di ### **un-ALTRA autointerazione** — la- e- ### **la torsione dell-arco nella DIVISIONE**, voce `DIVISIONE-AUTOCONSISTENTE`. ### **Sono due autointerazioni diverse**, e quella da portare e- ### **quella dell-interferenza.**
+
+### ⭐ **E IL REGALO STA IN UN DETTAGLIO DELL-ERA `1`:** la sua ### **coerenza** non e- la media sui vicini *(che <<il guscio in antifase abbatte>>)* ma ### **l-allineamento col campo `Psi` locale** — e nella camminata quello ha ### **una forma ESATTA**: `c_k = |S_k|^2/(d_k rho_k)`, che sta in ### **`[0,1]`** per Cauchy-Schwarz. ### ✅ **Misurato: `0.026` .. `0.945`.**
+
+### ✅ **LE DUE DERIVAZIONI SONO SCRITTE PRIMA E MISURATE DOPO:** `h^S` e- ### **DISPARI sotto `C` AL BIT** *(`0`)* e ### **invariante di gauge** *(`6.9e-18`)*; `|S|^2` e- ### **PARI al bit** *(`0`)*, ed e- per questo che ### **DEVE rompere `C`** — e sul passo intero lo fa *(`1.1e-4`)*.
+
+### ⛔ **E QUI NON C-E- FORMA CHIUSA, a differenza del `v3`:** `S` e- ### **una SOMMA**, quindi ruotare un-estremita- ### **cambia `S`** e con lui il generatore. ### ✅ **Percio- PUNTO MEDIO IMPLICITO per nodo** — locale, simmetrico, e ### **con la norma ESATTA per una ragione**: il campo e- `-i A(psi_m) psi_m` con ### **`A` hermitiana** *(`h^S = psi^dag M psi` con `M_ab = (sigma.n_a + sigma.n_b)/2`)*. ### **Misurato: norme `0`, e il ritorno avanti-indietro `0`.**
+
+### ⚠ **E UN DIFETTO MIO, nello strumento e non nella fisica:** nei miei script di patch gli ### **`ok` si stampano PRIMA della scrittura**, che e- ### **l-ultima riga** — quindi quando un passo successivo fallisce, ### **un `ok` gia- stampato NON vuol dire <<applicato>>.** ### ⛔ **Mi e- costato un numero sbagliato in un braccio** *(<<`4` file guardati>> dove erano `5`)*, e l-ho visto ### **perche- il braccio stampa il numero** invece di dire solo <<passa>>.

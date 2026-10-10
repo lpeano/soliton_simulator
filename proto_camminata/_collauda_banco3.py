@@ -31,6 +31,7 @@ import camminata2 as C2                                        # noqa: E402
 import camminata3 as C3                                        # noqa: E402
 import geometria as GE                                         # noqa: E402
 import nonlineare2 as N2                                       # noqa: E402
+import interferenza3 as I3                                     # noqa: E402
 import saturazione3 as S3                                      # noqa: E402
 import scena as SC                                             # noqa: E402
 import vuoto3 as V3                                            # noqa: E402
@@ -40,7 +41,8 @@ NLN = chr(10)
 SEME = 11
 PASSI = 40
 EPS_SPIN = 0.5
-FISICA3 = ("vuoto3.py", "saturazione3.py", "camminata3.py", "_letture3.py")
+FISICA3 = ("vuoto3.py", "saturazione3.py", "camminata3.py", "interferenza3.py",
+           "_letture3.py")
 CLIP = ("np.clip", ".clip(", "np.maximum", "np.minimum", "np.fmax", "np.fmin")
 
 
@@ -201,6 +203,78 @@ def main():
           fuori.size > 0 and float(np.max(fuori)) == 0.0,
           "### max fuori = %.3g su %d estremita-"
           % (float(np.max(fuori)) if fuori.size else -1, int(fuori.size)))
+
+    # ================================================================ L-INTERFERENZA
+    # ### ⭐ **LA SECONDA CANDIDATA, dall-era 1** *(aggiunta di Luca,
+    # ### 2026-10-11)*: `S_k` e- ### **il campo di interferenza locale**, e i bracci qui
+    # ### sotto provano le ### **DUE derivazioni** del task history prima di usarla.
+    cc = I3.coerenza(st["psi"], sc)
+    esito("### MATERIA: la coerenza `c_k` sta in [0,1] e NON e- degenere",
+          float(cc.min()) >= 0.0 and float(cc.max()) <= 1.0 and float(cc.max()) > 0.5,
+          "### min %.6f  max %.6f: e- la <<coerenza>> dell-era 1, e qui ha una forma ESATTA"
+          % (cc.min(), cc.max()))
+    hS = I3.elicita_interferenza(st["psi"], sc, ident)
+    hSc = I3.elicita_interferenza(C2.coniuga2(st["psi"]), sc, ident)
+    esito("### `(D)` l-elicita- dell-INTERFERENZA e- DISPARI sotto `C`, AL BIT",
+          float(np.max(np.abs(hSc + hS))) == 0.0,
+          "### max|h^S(C psi) + h^S(psi)| = %.3g: la derivazione usava "
+          "`sigma_y (sigma.n) sigma_y = -(sigma.n)*`"
+          % float(np.max(np.abs(hSc + hS))))
+    se = np.sum(np.abs(I3.campo_S(st["psi"], sc)) ** 2, axis=1)
+    sec = np.sum(np.abs(I3.campo_S(C2.coniuga2(st["psi"]), sc)) ** 2, axis=1)
+    esito("### e `(E)` su `|S|^2` e- PARI sotto `C`, AL BIT",
+          float(np.max(np.abs(sec - se))) == 0.0,
+          "### max differenza = %.3g: ### e- per questo che DEVE rompere `C`"
+          % float(np.max(np.abs(sec - se))))
+    ruo = np.empty_like(st["psi"])
+    for e in range(2 * sc["m"]):
+        kk = int(sc["nodo"][e])
+        ruo[e] = np.exp(1j * gauge["fi"][kk]) * (gauge["g"][kk] @ st["psi"][e])
+    hg = I3.elicita_interferenza(ruo, sc, gauge)
+    hb = I3.elicita_interferenza(ruo, sc, {"n": gauge["n_non_ruotati"]})
+    d1 = float(np.max(np.abs(hS - hg)))
+    d2 = float(np.max(np.abs(hS - hb)))
+    esito("### e `h^S` e- INVARIANTE DI GAUGE", d1 <= tol,
+          "### max|h^S - h^S-| = %.3g (soglia %.3g)" % (d1, tol))
+    esito("### DEVE FALLIRE: `h^S` senza ruotare i versori NON e- invariante", d2 > 1e-6,
+          "### %.3g, cioe- %d ordini sopra: ### **i versori servono anche qui**"
+          % (d2, int(round(math.log10(d2 / max(d1, EPS))))))
+
+    # ### \u26d4 **IL PUNTO MEDIO IMPLICITO: converge, conserva, e SI INVERTE.**
+    for et, fl, _n in I3.LE_DUE_INTERF:
+        p1, f1 = fl(st["psi"], st["phi"], sc, ident, np.full(sc["n"], 0.25))
+        p0, f0 = fl(p1, f1, sc, ident, np.full(sc["n"], -0.25))
+        dn = abs(CM.norma(p1) - CM.norma(st["psi"]))
+        dv = abs(V3.norma_vuoto(f1) - V3.norma_vuoto(st["phi"]))
+        dr = float(np.max(np.abs(p0 - st["psi"])))
+        esito("### il PUNTO MEDIO `(%s)`: norme ESATTE e ritorno esatto" % et,
+              dn <= tolN and dv <= tolN * V3.norma_vuoto(st["phi"]) and dr <= tol,
+              "### norma psi %.3g   phi %.3g   ritorno %.3g: `A` e- HERMITIANA, e per "
+              "questo la norma e- esatta" % (dn, dv, dr))
+
+    # ### \u26d4 **E SUL PASSO INTERO: `(D)` tiene `C`, `(E)` la ROMPE.**
+    for et, fl, _n in I3.LE_DUE_INTERF:
+        a = C3.coniuga3(C3.passo3(st, sc, ident, uno, 1.0, EPS_SPIN, fl))
+        b = C3.passo3(C3.coniuga3(st), sc, ident, uno, 1.0, EPS_SPIN, fl)
+        d = float(np.max(np.abs(a["psi"] - b["psi"])))
+        if et == "D":
+            esito("### `(D)` tiene la `C` sul passo INTERO", d <= tol,
+                  "### max|C U - U C| = %.3g (soglia %.3g)" % (d, tol))
+        else:
+            esito("### DEVE ROMPERE `C`: `(E)`, il porto letterale", d > 1e-6,
+                  "### max|C U - U C| = %.3g: ### il braccio che DEVE fallire" % d)
+
+    # ### \u2705 **E la REGRESSIONE vale anche per loro: con le due spente, e- il v2.**
+    for et, fl, _n in I3.LE_DUE_INTERF:
+        aa = st["psi"].copy()
+        for _ in range(PASSI):
+            aa = C2.passo2(aa, sc, ident, uno, 1.0, EPS_SPIN)
+        bb = dict(st)
+        for _ in range(PASSI):
+            bb = C3.passo3(bb, sc, ident, uno, 1.0, EPS_SPIN, None)
+        esito("### (R) e con `(%s)` SPENTA resta il v2, AL BIT" % et,
+              float(np.max(np.abs(bb["psi"] - aa))) == 0.0,
+              "### max|psi3 - psi2| = %.3g" % float(np.max(np.abs(bb["psi"] - aa))))
 
     # ================================================================ IL BANCO
     testi = {}

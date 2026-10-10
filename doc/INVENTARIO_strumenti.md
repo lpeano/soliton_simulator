@@ -3114,3 +3114,17 @@ etichette rimosse, con ### **`0` persi, `0` doppi, `0` conflitti**.
 | ⭐ **E TOGLIE UN NUMERO** | ### **`g` NON C-E- PIU-**: conta solo il rapporto `h/Lambda`. ### **E il limite `Lambda -> 0` e- ANALITICO** *(`G' -> 1`, `b -> -pi/2`)*, non un pavimento |
 | ⛔ **IL CONTROLLO CHE DEVE FALLIRE** | la stessa saturazione su `rho` *(PARI sotto `C`)* ### **rompe `C`**: `3.9e-5` |
 | ✅ **E LA REVERSIBILITA- E- UN BRACCIO** | `20` passi avanti e `20` indietro: ### **`1.6e-16`** sullo spinore e ### **`2.7e-15`** sul vuoto |
+
+### `proto_camminata/interferenza3.py` — **L'AUTOINTERAZIONE DELL'INTERFERENZA, DALL'ERA `1`** *(2026-10-11)*
+
+| | |
+|---|---|
+| **il file** | `proto_camminata/interferenza3.py` *(BLOB `c116a82c`)* |
+| **COMANDO** | `python proto_camminata/interferenza3.py` · i bracci stanno in `python proto_camminata/_collauda_banco3.py` *(### **`32`/`32`**, `1.02` s)* |
+| **che cosa misura** | il ### **campo di interferenza locale** `S_k = somma_a psi_{k,a}` *(la somma di Grover)*, la ### **coerenza** `c_k = |S_k|^2/(d_k rho_k)` in `[0,1]`, e le ### **due forme**: `(D)` l-### **elicita- dell-interferenza** *(DISPARI sotto `C`)* e `(E)` il porto ### **letterale** su `|S|^2` *(PARI)* |
+| ⭐ **L-ORIGINE, VERIFICATA SUL CODICE** | `soliton_simulator.py`: `H_int = -(mu/2) somma |Psi_k|^2`, e il commento dice ### **<<la forma NON e- scelta: e- la derivata di `|Psi|^2` rispetto a `phi`>>** |
+| ⚠ **E DUE PRECISAZIONI DAL CODICE** | `MU_PSI = -0.05` c-e- ma ### **quel ramo NON GIRA** *(un `elif` escluso da `REPULS_LEGGE = True`, e il suo commento lo dichiara LATENTEMENTE DIFETTOSO: voce `Z13`)*; e la legge che gira ha intensita- ### **`u(u+2)`**, cioe- ### **gia- una saturazione senza parametro** |
+| ✅ **LE DUE DERIVAZIONI, MISURATE** | `h^S` e- ### **DISPARI sotto `C` AL BIT** *(`0`)* e ### **invariante di gauge** *(`6.9e-18`)*; `|S|^2` e- ### **PARI al bit** *(`0`)*. ### **E senza ruotare i versori `h^S` NON e- invariante** *(`2.3e-2`)* |
+| ⛔ **NIENTE FORMA CHIUSA, e il motivo** | `S` e- ### **una SOMMA**: ruotare un-estremita- ### **cambia `S`** e con lui il generatore. ### **Quindi PUNTO MEDIO IMPLICITO per nodo**, con tolleranza `n_est*eps` e ### **`64`** iterazioni *(il valore che `config/prova.yaml` usa gia-)*, e ### **FERMA se non converge** |
+| ⭐ **E LA NORMA E- ESATTA PER UNA RAGIONE, non per fortuna** | il campo e- `-i A(psi_m) psi_m` con ### **`A` HERMITIANA** *(`h^S = psi^dag M psi` con `M_ab = (sigma.n_a + sigma.n_b)/2`)*, e allora il punto medio conserva la norma ### **esattamente**: misurato ### **`0`**, e il ritorno avanti-indietro ### **`0`** |
+| ⛔ **IL CONTROLLO CHE DEVE FALLIRE** | `(E)` sul passo intero ### **rompe `C`**: `1.1e-4` |

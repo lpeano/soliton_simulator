@@ -191,3 +191,57 @@ Luca**, non una decisione mia.
 *(la `(S)` dice **se si puo'**, e la decisione e' di Luca)*; non rendero' **dinamiche le `U`**
 *(e' `D13`)*; e non **mescolero' `φ` con `ψ`** — ### **romperebbe il gauge, ed e' scritto nel
 mandato.**
+
+---
+
+## ⛔ **ANNOTAZIONE: LA SECONDA CANDIDATA, DALL'ERA `1`** *(aggiunta di Luca, `2026-10-11`, arrivata **a task history GIA' COMMITTATO** — quindi si **ANNOTA**, e niente qui sopra si riscrive)*
+
+### ⭐ **L'ORIGINE, VERIFICATA SUL CODICE e non ricopiata** *(e il mandato lo chiede)*: in `soliton_simulator.py` c'e' **`H_int = -(mu/2) Σ_k |Psi_k|²`**, derivato in una **forza sulle fasi**, e il commento dice una cosa che conta: ### **<<la forma NON e' scelta: e' la derivata di `|Psi|²` rispetto a `phi`>>**, e **<<con `MU_PSI<0` e' REPULSIVO: l'interferenza alta ALZA l'energia, la materia si oppone alla propria concentrazione (pressione interna)>>.**
+
+### ⚠ **E DUE PRECISAZIONI CHE IL MANDATO NON AVEVA, trovate leggendo il codice invece del commento** *(par. `2`)*:
+
+| | che cosa | perche' conta |
+|---|---|---|
+| `a` | **`MU_PSI = -0.05` c'e'**, ma quel ramo ### **NON GIRA**: e' un `elif` escluso da **`REPULS_LEGGE = True`** *(il default)* | il suo stesso commento lo dichiara ### **LATENTEMENTE DIFETTOSO** *(letture miste `t`/`t+1`, voce `Z13`)*, e dice che ### **<<un ramo sotto flag non si corregge e non si cancella: SI DICHIARA>>** |
+| `b` | la legge che **gira** e' `REPULS_LEGGE`: `u = riempimento · coerenza`, intensita' ### **`u(u+2) = (1+u)² − 1`**, <<la legge dalla saturazione>> | ### ⭐ **E' GIA' una saturazione, e senza parametro** — cioe' **lo stesso mestiere del `v3`**, fatto con un'altra funzione |
+| `c` | e la **coerenza** dell'era `1` ### **NON e' la media sui vicini** | il commento spiega perche': la media coi vicini ### **la abbatte il guscio in antifase**, quindi si usa ### **l'allineamento del nodo con la FASE DEL CAMPO `Psi` locale** |
+| `d` | `REGISTRO_FISICA` `~2799` parla di ### **un'ALTRA autointerazione** | la' e' ### **la torsione dell'arco nella DIVISIONE** *(<<decide QUANTO FORTE e' il calcio>>)*, e la voce e' `DIVISIONE-AUTOCONSISTENTE`: ### **sono due autointerazioni diverse**, e quella da portare e' ### **quella dell'INTERFERENZA** |
+
+### ✅ **E IL PUNTO `(c)` E' UN REGALO:** <<l'allineamento col campo `Psi` locale>> nella camminata ### **ha una forma esatta** — e' **`c_k = |S_k|² / (d_k ρ_k)`**, che sta in **`[0, 1]`** per Cauchy-Schwarz. ### **La <<coerenza>> dell'era `1` diventa un'osservabile SENZA scelte.**
+
+### ⭐ **LA TRADUZIONE: `S_k` E' IL CAMPO DI INTERFERENZA, e non e' un'analogia.** Dopo lo spostamento le estremita' del nodo `k` contengono le ampiezze **appena arrivate dai vicini**, ### **gia' trasportate con `U` nel riferimento di `k`** — quindi la somma della moneta di Grover **`S_k = Σ_a ψ_{k,a}`** *(in `C²`)* e' ### **locale al nodo** *(nessuna lettura dei vicini)* e ### **covariante di gauge** *(`S → g_k S`)*.
+
+### **LE DUE FORME, e la parita' sotto `C` le separa**
+
+| | la forma | `x` | sotto `C` | che cosa deve fare |
+|---|---|---|---|---|
+| **`(E)`** | il **porto letterale** | `\|S_k\|² / Λ_k` | ### **PARI** | ### ⛔ **DEVE ROMPERE** la simmetria materia/antimateria |
+| **`(D)`** | l'**ELICITA' DELL'INTERFERENZA** | `h^S_k / Λ_k`, con `h^S_k = Σ_a Re[ψ_a† (σ·n_a) S_k]` | ### **DISPARI** | ### ✅ **e' la candidata** |
+
+### ⭐ **E LA PARITA' DI `(D)` SI DIMOSTRA, non si spera.** Con `C: ψ → iσ_y ψ*` *(e quindi `S → iσ_y S*`)*, usando **`σ_y (σ·n) σ_y = −(σ·n)*`**:
+
+```
+psi_a^dag (sigma.n) S   ->   - [ psi_a^dag (sigma.n) S ]*
+```
+
+### e prendendo la **parte REALE**: `Re(−z*) = −Re(z)` ⟹ ### **`h^S → −h^S`: DISPARI.**
+
+### ✅ **E L'INVARIANZA DI GAUGE viene da `g†(σ·R(g)n)g = (σ·n)`:** `(gψ_a)†(σ·R(g)n_a)(gS) = ψ_a†(σ·n_a)S` — ### **invariante**, *purche' si ruotino ANCHE i versori* *(e' la lezione del `v2`)*; e la fase `U(1)` **si cancella** fra `ψ†` e `S`.
+
+### ✅ **E PER `(E)` NON SERVE UNA SECONDA FUNZIONE `G`, e lo dichiaro invece di inventarla** *(`9-ter`: una cura non aumenta il numero delle leggi)*: ### **si usa LA STESSA `G(x) = x − arctan x`**, e la **parita' viene da `x`**, non da `G` — perche' `|S|²` e' **`C`-pari** e **`≥ 0`**, quindi `G'` resta ### **limitata in `[0,1)`** esattamente come nel `v3`.
+
+### ⛔ **IL FLUSSO: NIENTE FORMA CHIUSA, E IL MOTIVO E' PRECISO.** Nel `v3` il flusso conserva `h` perche' **ruota attorno a `n`**; qui ### **`h^S` e `|S|²` NON sono invarianti sotto il proprio flusso** *(il campo `S` e' una SOMMA: ruotare un'estremita' cambia `S`, e quindi cambia il generatore)*. ### ✅ **Quindi: PUNTO MEDIO IMPLICITO PER NODO.**
+
+| | la proprieta' | perche' vale |
+|---|---|---|
+| `1` | **locale**: solo le estremita' del nodo | ### **niente strati, isotropia e cono intatti** |
+| `2` | **simmetrico** ⟹ reversibile | il punto medio implicito e' simmetrico **per costruzione** |
+| `3` | ### **conserva la norma ESATTAMENTE** | perche' il campo e' `−i A(ψ_m) ψ_m` con **`A` hermitiana**: allora `\|ψ₁\|² − \|ψ₀\|² = 2 dτ Im[ψ_m† A ψ_m] = 0`. ### ⭐ **E `A` E' hermitiana**, perche' `h^S = ψ† M ψ` con **`M_{ab} = ½(σ·n_a + σ·n_b)`** |
+
+### **LA TOLLERANZA E IL MASSIMO DI ITERAZIONI, DICHIARATI E DERIVATI:** tolleranza **`n_est · ε ≈ 9.2e-14`** *(lo stesso conteggio di operazioni delle altre soglie)*, massimo ### **`64` iterazioni** *(e' il valore che `primo_ordine/config/prova.yaml` usa gia' per il punto medio implicito dell'era `2`: ### **un precedente, non un gusto**)*. ### ⛔ **E se non converge, SI FERMA** — non <<procede col meglio che ha>>.
+
+### **LE LETTURE, le STESSE del `v3`, per `(D)` ed `(E)` affiancate all'elicita' locale** — `(R)`, `(G)`, `(1)`, `(2)`, `(5)`, `(V)`, `(3)`, `(T)`, `(F)`, `(A)` — ### **con in piu' la coerenza `c_k` del grumo nel tempo** nella `(T)`.
+
+### ⭐ **LA PREVISIONE, FISSATA ADESSO:** ### **`(D)` lega MEGLIO dell'elicita' locale del `v3`**, perche' ### **premia proprio l'interferenza COSTRUTTIVA** *(`c_k` alto)*: dove le ampiezze arrivano in fase, `|S|` e' grande e `h^S` lo e' con lei. ### ⛔ **E se non lega meglio, o non lega affatto, SI SCRIVE: e' un risultato.**
+
+### ⚠ **E UNA COSA CHE NON PREVEDO, ma che misuro:** `(E)` e `(D)` ### **potrebbero coincidere su un grumo tutto in fase**, come `(A)` e `(B)` del `v1` coincidevano su un cluster in una sola banda. ### **Se succede, la lettura `(5)` e' l'unica che le separa** — e lo dico adesso per non chiamarlo una scoperta dopo.
