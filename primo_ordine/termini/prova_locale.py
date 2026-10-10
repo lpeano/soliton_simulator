@@ -10,7 +10,7 @@ import numpy as np
 # ### L-ID DELLA LEGGE: un presidio lo legge ### **via AST**, non per regex.
 LEGGE = 'PROVA-LOCALE'
 # ### L-IMPRONTA della riga di tabella *(`sha1` del `json` a chiavi ordinate)*.
-IMPRONTA = '0e656d1cd4c84340'
+IMPRONTA = '5518865ea31421ca'
 TIPO = 'termine_nodo'
 AMBITO = ('psi',)
 PROVA = True

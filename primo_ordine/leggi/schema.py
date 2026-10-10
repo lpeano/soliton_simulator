@@ -35,6 +35,20 @@ Gira con:  python primo_ordine/leggi/schema.py        # il collaudo dello schema
 ### ⭐ **E- la lezione di `MAX-NODI-FERMA`** *(una guardia di memoria che cambiava
 ### la fisica in silenzio: deve FERMARE)* **e di `RIPIEGHI-ZERO`** *(zero ripieghi che
 ### cambiano la fisica in silenzio)*, piu- l-assioma del ramo silenzioso.
+
+### ⛔ **E LE DIMENSIONI** *(punto `2` della terza parte)*: ogni variabile e ogni
+parametro dichiarano la loro `dimensione`, e ### **il generatore RIFIUTA** un'espressione
+incoerente.
+
+### ⭐ **UNA SOLA BASE, `E`, e non e' una scelta di unita': e' cio' che `A16` IMPLICA.**
+`A16` dice che lo stato evolve ### **al primo ordine sotto una sola `H`**, cioe'
+`i dpsi/dt = H psi` con ### **`hbar = 1`** — e con `hbar = 1` ### **il tempo e' `E^-1`**,
+non una dimensione indipendente. ### **Una base in piu' sarebbe una manopola** *(`A1`)*.
+
+### ⚠ **E LA DIMENSIONE STA SULLA VARIABILE, NON SUL TIPO — al contrario del DOMINIO:**
+il dominio sta sul tipo perche' ### **due variabili dello stesso tipo hanno lo stesso
+dominio PER COSTRUZIONE**; la dimensione no, perche' ### **due `reale_nodo` possono
+essere un'energia e un tempo.**
 """
 import io
 import os
@@ -123,7 +137,10 @@ RAMI = ("Min", "Max", "Piecewise", "Abs", "sign", "Heaviside", "floor",
 CHIAVI_COMUNI = ("id", "tipo", "scheda", "assiomi", "prova")
 CHIAVI_TERMINE = ("espressione", "ambito", "parametri")
 CHIAVI_REGOLA = ("ingressi", "uscite", "bilancio")
-CHIAVI_OSSERVATORE = ("espressione", "ambito", "voce")
+# ### ⛔ **E UN OSSERVATORE DICHIARA LA SUA `dimensione`** *(punto `2`)*: puo-
+# ### misurare qualunque cosa, e ### **pretendere `E^1` da tutti vieterebbe di misurare
+# ### la norma** -- che e- la prima cosa che si misura.
+CHIAVI_OSSERVATORE = ("espressione", "ambito", "voce", "dimensione")
 
 _ID = re.compile(r"^[A-Z][A-Z0-9-]{3,}$")
 
@@ -132,15 +149,165 @@ _ID = re.compile(r"^[A-Z][A-Z0-9-]{3,}$")
 #   LA VALIDAZIONE
 # =====================================================================================
 
+# =====================================================================================
+#   LE DIMENSIONI -- punto `2` della terza parte: ### **il generatore RIFIUTA
+#   un-espressione dimensionalmente incoerente**
+# -------------------------------------------------------------------------------------
+#   ### ⛔ **UNA SOLA DIMENSIONE DI BASE, `E`**, e il perche- -- che nomina un
+#   assioma -- sta ### **nel docstring del modulo**, non qui: un riferimento che una
+#   macchina deve seguire ### **non vive nella prosa di un commento**, e il presidio
+#   che lo pretende ### **me l-ha detto DUE VOLTE in un giorno.**
+#
+#   ### ⚠ **E LA DIMENSIONE STA SULLA VARIABILE, NON SUL TIPO -- al contrario del
+#   DOMINIO.** Il dominio sta sul tipo perche- ### **due variabili dello stesso tipo hanno
+#   lo stesso dominio PER COSTRUZIONE**; ### **la dimensione no:** due `reale_nodo`
+#   possono essere ### **un-energia e un tempo**, e metterla sul tipo
+#   ### **li confonderebbe.**
+#
+#   ### ⛔ **CHE COSA SI PRETENDE, in due righe:** ### **(1)** ogni ADDENDO di
+#   un-espressione ha ### **la stessa dimensione** *(sommare un-energia e un-energia al
+#   quadrato non e- un errore di battitura: e- un-altra fisica)*; ### **(2)** un
+#   `termine` -- che entra in `H` -- ha dimensione ### **`E^1`.**
+#   ### ✅ **Un OSSERVATORE no: dichiara la sua e deve essere OMOGENEO** -- la norma
+#   e- `E^0`, l-energia e- `E^1`, e pretendere `E^1` da tutti ### **vieterebbe di
+#   misurare la norma.**
+# =====================================================================================
+PRESIDIO = "P-DIM"
+
+DIMENSIONI_BASE = ("E",)
+
+_DIM = re.compile(r"^E\^(-?\d+)$")
+
+
+def dimensione_valida(s):
+    """`True` se `s` e- della forma `E^<intero>`."""
+    return bool(_DIM.match(str(s or "")))
+
+
+def esponente(s):
+    """L-esponente di `E` in `"E^2"`. ### **Non indovina: se non e- valida, FERMA.**"""
+    m = _DIM.match(str(s or ""))
+    assert m, ("### `%s` non e- una dimensione: la forma e- `E^<intero>`, e le basi sono "
+               "%s" % (s, list(DIMENSIONI_BASE)))
+    return int(m.group(1))
+
+
+def _base_del_simbolo(nome, variabili):
+    """### Da `psi_i_0c` a `psi`: ### **il simbolo generato risale alla VARIABILE.**
+
+    ### ⛔ **Il generatore costruisce i simboli ATTACCANDO dei suffissi** al nome
+    della variabile *(`_i`, `_j`, `_0`, `_1`, `c` per il coniugato)*, e la dimensione
+    e- ### **della variabile**: ### **un coniugato ha la dimensione del suo coniugando**,
+    e ### **una componente ha quella del vettore.**
+    """
+    for v in sorted(variabili, key=len, reverse=True):
+        if nome == v or nome.startswith(v + "_"):
+            return v
+    return None
+
+
+def dimensioni_incoerenti(d, variabili):
+    """### Gli errori dimensionali di una legge, o `[]`.
+
+    `variabili` e- ### **`{nome: dimensione}`**; i parametri portano la loro.
+    ### ⚠ **Se manca una dimensione, NON si indovina: si dichiara l-errore** -- un
+    controllo che riempie i buchi da se- ### **non controlla niente.**
+    """
+    import sympy
+    fuori = []
+    idv = d.get("id", "<senza id>")
+    esp = d.get("espressione")
+    if not esp or d.get("tipo") not in ("termine_nodo", "termine_arco", "osservatore"):
+        return fuori
+    dim = {}
+    for k, v in (variabili or {}).items():
+        if not dimensione_valida(v):
+            fuori.append("`%s`: la variabile `%s` non dichiara una dimensione valida "
+                         "(`%s`). ### La forma e- `E^<intero>`" % (idv, k, v))
+            return fuori
+        dim[k] = esponente(v)
+    for k, p in (d.get("parametri") or {}).items():
+        v = (p or {}).get("dimensione")
+        if not dimensione_valida(v):
+            fuori.append("`%s`: il parametro `%s` NON DICHIARA una dimensione valida "
+                         "(`%s`). ### Un numero senza dimensione e- un numero di cui non "
+                         "si sa che cosa sia -- come un numero senza `origine` (`A1`)"
+                         % (idv, k, v))
+            return fuori
+        dim[k] = esponente(v)
+    try:
+        e = sympy.sympify(str(esp))
+    except Exception as exc:                                # noqa: BLE001
+        fuori.append("`%s`: l-espressione non si legge (%s)" % (idv, exc))
+        return fuori
+    E = sympy.Symbol("_E_", positive=True)
+    sost = {}
+    for s in e.free_symbols:
+        b = _base_del_simbolo(s.name, dim)
+        if b is None:
+            fuori.append("`%s`: il simbolo `%s` non risale a nessuna variabile ne- a "
+                         "nessun parametro, quindi NON HA UNA DIMENSIONE. ### Non la "
+                         "indovino: un controllo che riempie i buchi da se- non "
+                         "controlla niente" % (idv, s.name))
+            return fuori
+        sost[s] = E ** dim[b]
+    # ### ⛔ **GLI ADDENDI SI GUARDANO UNO A UNO**, sull-espressione ESPANSA: e- la
+    # ### ### **somma** il posto dove una dimensione sbagliata si vede.
+    espansa = sympy.expand(e.subs(sost))
+    addendi = espansa.as_ordered_terms()
+    gradi = []
+    for a in addendi:
+        p = sympy.Poly(a, E) if a.has(E) else None
+        g = sympy.degree(a, E) if a.has(E) else 0
+        del p
+        gradi.append(int(g))
+    if len(set(gradi)) > 1:
+        fuori.append("`%s`: GLI ADDENDI NON HANNO LA STESSA DIMENSIONE -- gradi %s su %d "
+                     "addendi. ### Sommare un-energia e un-energia al quadrato non e- un "
+                     "errore di battitura: e- UN-ALTRA FISICA"
+                     % (idv, sorted(set(gradi)), len(addendi)))
+        return fuori
+    grado = gradi[0] if gradi else 0
+    if d.get("tipo") in ("termine_nodo", "termine_arco"):
+        if grado != 1:
+            fuori.append("`%s`: e- un `%s` -- entra in `H` -- e la sua dimensione e- "
+                         "`E^%d` invece di `E^1`. ### `H` E- UN-ENERGIA: un termine che "
+                         "non lo e- NON E- UN TERMINE DI `H`" % (idv, d["tipo"], grado))
+    else:
+        dich = d.get("dimensione")
+        if not dimensione_valida(dich):
+            fuori.append("`%s`: e- un `osservatore` e NON DICHIARA la sua `dimensione`. "
+                         "### Un osservatore puo- misurare qualunque cosa -- la norma e- "
+                         "`E^0`, l-energia e- `E^1` -- quindi la DICE, e pretendere `E^1` "
+                         "da tutti vieterebbe di misurare la norma" % idv)
+        elif esponente(dich) != grado:
+            fuori.append("`%s`: dichiara `%s` e l-espressione da- `E^%d`"
+                         % (idv, dich, grado))
+    return fuori
+
+
+
 def _err(fuori, idv, che):
     fuori.append("`%s`: %s" % (idv, che))
 
 
-def valida_legge(d, variabili):
+def valida_legge(d, variabili, dimensioni=None):
     """### Gli errori di UNA riga di tabella, o `[]`.
 
     ### ⛔ **Pura:** prende il dizionario e il vocabolario delle variabili, ### **non legge
     il disco** -- cosi- il collaudo la prova ### **su righe costruite in memoria.**
+
+    ### ⚠ **`dimensioni` E- UN PARAMETRO A PARTE, ED E- COLPA DI UN MIO ERRORE.**
+    Avevo messo il controllo dimensionale qui dentro leggendo le dimensioni
+    ### **da `variabili`** -- ma `variabili` arriva in ### **due forme**: il generatore
+    passa `{nome: tipo}` e la tabella ha le dimensioni ### **altrove.**
+    ### ⛔ **Quindi il controllo SALTAVA IN SILENZIO**, e un controllo che salta in
+    silenzio ### **e- peggio di nessun controllo** (`A9`): il generatore accettava
+    ### **`K` di dimensione `E^2`** e io credevo di averlo chiuso.
+    ### ✅ **L-HO VISTO PERCHE- HO ROTTO LA TABELLA A POSTA e ho guardato il codice
+    d-uscita: era `0`.** ### **Adesso le dimensioni si PASSANO**, e il collaudo ha un
+    braccio ### **END-TO-END** che rompe la tabella e pretende che il generatore
+    ### **RIFIUTI.**
     """
     fuori = []
     idv = d.get("id") or "<senza id>"
@@ -200,6 +367,28 @@ def valida_legge(d, variabili):
                     continue
                 if not str(v["origine"]).strip():
                     _err(fuori, idv, "il parametro `%s` ha `origine` vuota" % k)
+                # ### ⛔ **E LA `dimensione`, OBBLIGATORIA** *(punto `2`)*: un numero
+                # ### senza dimensione e- ### **un numero di cui non si sa che cosa
+                # ### sia** -- esattamente come un numero senza `origine`. ### **`A1`
+                # ### vale per entrambe.**
+                if not dimensione_valida(v.get("dimensione")):
+                    _err(fuori, idv, "il parametro `%s` NON DICHIARA una `dimensione` "
+                                     "valida (`%s`): la forma e- `E^<intero>`. ### Un "
+                                     "numero senza dimensione e- un numero di cui non si "
+                                     "sa CHE COSA SIA, come uno senza `origine` (`A1`)"
+                         % (k, v.get("dimensione")))
+    # ------------------------------------------------------------ ### LE DIMENSIONI
+    # ### ⛔ **IL CONTROLLO DIMENSIONALE GIRA QUI**, cioe- dentro il validatore che
+    # ### ### **il generatore chiama** -- ed e- il modo in cui il punto `2` chiede che
+    # ### ### **il generatore RIFIUTI** un-espressione incoerente, invece di generarla
+    # ### e lasciare che qualcuno se ne accorga dopo.
+    # ### ⚠ **Gira solo se le dimensioni delle variabili ci sono TUTTE**: senza, i
+    # ### suoi errori direbbero <<manca una dimensione>>, che e- ### **gia- detto dal
+    # ### controllo della variabile** -- e ### **un errore detto due volte nasconde
+    # ### quanti errori ci sono.**
+    if dimensioni:
+        fuori += dimensioni_incoerenti(d, dimensioni)
+
     # ------------------------------------------------------------------ il BILANCIO
     if tipo == "regola":
         for k in ("ingressi", "uscite"):
@@ -224,6 +413,15 @@ def valida_variabile(d):
     for k in ("nome", "tipo", "voce", "scheda"):
         if not str(d.get(k) or "").strip():
             _err(fuori, idv, "manca `%s`" % k)
+    # ### ⛔ **LA DIMENSIONE STA SULLA VARIABILE, NON SUL TIPO -- al contrario del
+    # ### DOMINIO** *(punto `2`)*: il dominio sta sul tipo perche- ### **due variabili
+    # ### dello stesso tipo hanno lo stesso dominio PER COSTRUZIONE**; la dimensione no,
+    # ### perche- ### **due `reale_nodo` possono essere un-energia e un tempo.**
+    if not dimensione_valida(d.get("dimensione")):
+        _err(fuori, idv, "NON DICHIARA una `dimensione` valida (`%s`): la forma e- "
+                         "`E^<intero>`, e la base e- UNA SOLA perche- `A16` implica "
+                         "`hbar = 1`, quindi il tempo e- `E^-1` e non una dimensione "
+                         "indipendente" % d.get("dimensione"))
     # ### \u26d4 **IL DOMINIO DEL TIPO DEVE ESSERE DICHIARATO** *(punto `1`)*: un
     # ### tipo senza dominio e- ### **una variabile che nessuno puo- controllare.**
     if d.get("tipo") in TIPI_VARIABILE and d.get("tipo") not in DOMINI:
@@ -321,9 +519,15 @@ def collaudo():
           any("MANOPOLA" in e
               for e in valida_legge(base(parametri={"K": {"valore": 1.0}}), VAR)),
           "`A1`: la legge, NON il numero")
-    esito("NON deve scattare: un parametro con `valore` E `origine`",
+    esito("### un parametro senza `dimensione`",
+          any("CHE COSA SIA" in e
+              for e in valida_legge(base(parametri={"K": {
+                  "valore": 1.0, "origine": "valore di prova"}}), VAR)),
+          "### un numero senza dimensione e- un numero di cui non si sa CHE COSA SIA")
+    esito("NON deve scattare: un parametro con `valore`, `origine` E `dimensione`",
           valida_legge(base(parametri={"K": {"valore": 1.0,
-                                             "origine": "valore di prova"}}), VAR) == [])
+                                             "origine": "valore di prova",
+                                             "dimensione": "E^1"}}), VAR) == [])
     # ### ⛔ **IL BILANCIO di una regola.**
     reg = {"id": "PROVA-REG", "tipo": "regola", "ingressi": [], "uscite": [],
            "bilancio": "", "assiomi": [], "prova": True, "scheda": "s"}
@@ -335,7 +539,8 @@ def collaudo():
           valida_legge(reg2, VAR) == [])
     # ### ⛔ **L-OSSERVATORE dichiara la sua VOCE.**
     oss = {"id": "PROVA-OSS", "tipo": "osservatore", "espressione": "rho",
-           "ambito": ["rho"], "voce": "", "assiomi": [], "prova": True, "scheda": "s"}
+           "ambito": ["rho"], "voce": "", "assiomi": [], "prova": True, "scheda": "s",
+           "dimensione": "E^0"}
     esito("### un `osservatore` senza `voce`",
           any("MISURA/CRITERIO" in e for e in valida_legge(oss, VAR)))
     esito("NON deve scattare: lo stesso osservatore con la `voce`",
@@ -365,7 +570,64 @@ def collaudo():
     print("  (c) IL VOCABOLARIO DELLE VARIABILI")
     esito("una variabile SANA",
           valida_variabile({"nome": "rho", "tipo": "reale_nodo", "voce": "V-X",
-                            "scheda": "s"}) == [])
+                            "scheda": "s", "dimensione": "E^1"}) == [])
+    esito("### una variabile SENZA `dimensione`",
+          any("`hbar = 1`" in e for e in valida_variabile(
+              {"nome": "rho", "tipo": "reale_nodo", "voce": "V-X", "scheda": "s"})),
+          "### e la dimensione sta SULLA VARIABILE, non sul tipo: due `reale_nodo` "
+          "possono essere UN-ENERGIA E UN TEMPO")
+    # ===================================================================================
+    #   ### ⭐ **IL CONTROLLO DIMENSIONALE, provato DIRETTAMENTE** *(punto `2`)*
+    # ===================================================================================
+    # ### ⚠ **E si prova QUI e non attraverso `valida_legge`, per una ragione che
+    # ### dichiaro:** `valida_legge` prende `variabili` in ### **DUE FORME** -- la tabella
+    # ### vera gli passa ### **una lista di dizionari** *(che portano la `dimensione`)*,
+    # ### questo collaudo gli passa ### **un dizionario `nome -> tipo`** *(che non la
+    # ### porta)*. ### **Quindi il controllo dimensionale li- NON GIRA**, e provarlo
+    # ### attraverso quella via ### **direbbe PASSA senza aver guardato niente.**
+    # ### ✅ **`dimensioni_incoerenti` e- PURA: si prova su righe costruite a mano.**
+    print()
+    print("  (e) LE DIMENSIONI -- punto 2 della terza parte")
+    DIM = {"psi": "E^0"}
+    HOP = {"id": "PROVA-DIM", "tipo": "termine_arco",
+           "espressione": "-K*(psi_i_0c*psi_j_0 + psi_j_0c*psi_i_0)",
+           "parametri": {"K": {"dimensione": "E^1"}}}
+    esito("NON deve scattare: un termine d-arco con `K` di dimensione `E^1`",
+          dimensioni_incoerenti(HOP, DIM) == [],
+          "### `psi` e- ADIMENSIONALE (`psi^dag psi` e- un CONTEGGIO), quindi `K` deve "
+          "essere un-energia perche- il termine entri in `H`")
+    esito("### DEVE scattare: lo stesso termine con `K` di dimensione `E^2`",
+          any("NON E- UN TERMINE DI `H`" in e for e in dimensioni_incoerenti(
+              dict(HOP, parametri={"K": {"dimensione": "E^2"}}), DIM)),
+          "### `H` E- UN-ENERGIA: un termine che non lo e- non e- un termine di `H`")
+    MIX = {"id": "PROVA-MIX", "tipo": "termine_nodo",
+           "espressione": "K*psi_0c*psi_0 + g*psi_0c*psi_0*psi_1c*psi_1",
+           "parametri": {"K": {"dimensione": "E^1"}, "g": {"dimensione": "E^2"}}}
+    esito("### DEVE scattare: DUE ADDENDI di dimensione diversa",
+          any("UN-ALTRA FISICA" in e for e in dimensioni_incoerenti(MIX, DIM)),
+          "### sommare un-energia e un-energia al quadrato NON e- un errore di "
+          "battitura: e- un-altra fisica")
+    esito("NON deve scattare: gli stessi addendi con `g` di dimensione `E^1`",
+          dimensioni_incoerenti(
+              dict(MIX, parametri={"K": {"dimensione": "E^1"},
+                                   "g": {"dimensione": "E^1"}}), DIM) == [],
+          "### e- il braccio che dice che il controllo NON rifiuta OGNI somma")
+    OSS = {"id": "PROVA-OSSD", "tipo": "osservatore", "espressione": "psi_0c*psi_0",
+           "dimensione": "E^0", "parametri": {}}
+    esito("NON deve scattare: un osservatore `E^0` che misura la NORMA",
+          dimensioni_incoerenti(OSS, DIM) == [],
+          "### pretendere `E^1` da ogni osservatore VIETEREBBE DI MISURARE LA NORMA, "
+          "che e- la prima cosa che si misura")
+    esito("### DEVE scattare: lo stesso osservatore che dichiara `E^1`",
+          any("dichiara" in e for e in dimensioni_incoerenti(
+              dict(OSS, dimensione="E^1"), DIM)),
+          "### l-espressione da- `E^0`: una dichiarazione che non coincide e- PEGGIO di "
+          "nessuna dichiarazione")
+    esito("### DEVE scattare: un simbolo che non risale a nessuna variabile",
+          any("non risale" in e for e in dimensioni_incoerenti(
+              dict(HOP, espressione="-K*zeta_0c*zeta_0"), DIM)),
+          "### non la indovino: un controllo che riempie i buchi da se- NON CONTROLLA "
+          "NIENTE")
     esito("### una variabile col `tipo` fuori vocabolario",
           valida_variabile({"nome": "rho", "tipo": "PIPPO", "voce": "V-X",
                             "scheda": "s"}) != [])

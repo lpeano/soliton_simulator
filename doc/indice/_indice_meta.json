@@ -1,5 +1,8 @@
 {
  "assiomi": {
+  "A1": [
+   "P-DIM"
+  ],
   "A11": [
    "P-R1"
   ],
@@ -10,7 +13,8 @@
   "A16": [
    "DEC-NASCITA-PSI",
    "DEC-REGOLA-FORMA",
-   "MISURA-NORMA-ERA2"
+   "MISURA-NORMA-ERA2",
+   "P-DIM"
   ],
   "A17": [
    "MISURA-NORMA-ERA2",
@@ -32,6 +36,7 @@
    "P-ALB",
    "P-C1",
    "P-DET",
+   "P-DIM",
    "P-E1",
    "P-E2",
    "P-E3",
@@ -478,6 +483,7 @@
    "P-C1",
    "P-DECADIMENTO",
    "P-DET",
+   "P-DIM",
    "P-E1",
    "P-E2",
    "P-E3",
@@ -1794,6 +1800,7 @@
    "P-ALB",
    "P-C1",
    "P-DET",
+   "P-DIM",
    "P-E1",
    "P-E2",
    "P-E3",
@@ -2642,6 +2649,7 @@
    "OSSERVABILE-P1",
    "P-ALB",
    "P-DET",
+   "P-DIM",
    "P-E9",
    "P-GRAFO",
    "P-ID",
@@ -3363,6 +3371,7 @@
    "P-AB",
    "P-ALB",
    "P-DET",
+   "P-DIM",
    "P-E1",
    "P-E2",
    "P-E3",
@@ -6599,6 +6608,7 @@
    "P-AB",
    "P-ALB",
    "P-DET",
+   "P-DIM",
    "P-E1",
    "P-E2",
    "P-E3",

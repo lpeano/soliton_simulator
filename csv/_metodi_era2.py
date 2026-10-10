@@ -210,7 +210,7 @@ METODI = {
     "U3": ("confrontava con uno sviluppo invece del valore esatto: ### LA LEZIONE E- "
            "PORTATA -- la derivata generata si confronta con la differenza finita, non "
            "con una forma approssimata scritta a mano",
-           "`_genera.py --prova`", "PORTATO"),
+           "`_collauda_genera.py`", "PORTATO"),
     "REG-R": ("la regola mantenuta del registro della fisica: nell-era 2 la scheda si "
               "genera, e il registro resta la casa delle leggi dell-era 1",
               "`csv/_file_fisica.py::SCHEDA_NEL_REGISTRO`", "PORTATO"),
@@ -581,6 +581,16 @@ METODI['P-E9'] = (
 METODI['P-AB'] = (
     'NATO NELL-ERA 2: un `A`/`B` dichiara IL CAMPO UNICO in cui i bracci differiscono, e se ne differiscono due ### IL CONFRONTO NON PARTE (la lezione di `Z20`: due misure sovrapposte). ### Piu- i dati con la versione del formato e nessun file a meta-',
     '`csv/_confronti_e_dati.py::controlla`, `pre-commit` + CI', "PORTATO")
+METODI['P-DIM'] = (
+    "NATO NELL-ERA 2: ogni variabile e ogni parametro dichiarano la loro `dimensione`, "
+    "e il generatore RIFIUTA un-espressione incoerente -- ogni ADDENDO ha la stessa "
+    "dimensione, un TERMINE di `H` e- `E^1`, un OSSERVATORE dichiara la sua. ### UNA "
+    "SOLA BASE, `E`, perche- `A16` implica `hbar = 1` e il tempo e- `E^-1`: una base in "
+    "piu- sarebbe una manopola. ### E la dimensione sta SULLA VARIABILE, non sul tipo -- "
+    "al contrario del dominio, perche- due `reale_nodo` possono essere un-energia e un "
+    "tempo",
+    "`primo_ordine/leggi/schema.py::dimensioni_incoerenti`, dentro `valida_legge`; "
+    "collaudi 34/34 e 24/24 col ramo END-TO-END", "PORTATO")
 METODI['P-DET'] = (
     "NATO NELL-ERA 2: nessun RNG globale (via AST: 6 usi, 6 `default_rng`, 0 globali), "
     "le CINQUE variabili dei thread fissate a 1 E TIMBRATE, e le versioni bloccate in "

@@ -12,7 +12,7 @@ esiste.**
 import numpy as np
 
 # ### L-IMPRONTA del blocco `variabili` della tabella: un presidio la confronta.
-IMPRONTA = 'ff5c058ce3e855b7'
+IMPRONTA = '825d6e697bae0a9a'
 
 # ### (nome, tipo, ID della voce in `doc/indice/variabili.jsonl`)
 VARIABILI = (

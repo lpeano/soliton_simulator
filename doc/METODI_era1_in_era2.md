@@ -8,17 +8,17 @@
 
 | | quanti |
 |---|--:|
-| **`PORTATO`** | `94` |
+| **`PORTATO`** | `95` |
 | **`DA_PORTARE`** | `17` |
 | **`DA_DECIDERE`** | `5` |
 | **`NON_SI_APPLICA`** | `7` |
-| **in tutto** | ### **`123`** |
+| **in tutto** | ### **`124`** |
 
-### ⚠ **E IL NUMERO `123` E- MISURATO, non stimato:** viene dal perimetro che l-indice calcola, e ### **il mandato ne nominava <<una decina>>** per nome piu- *<<e le cure di architettura>>*. ### **La decina era `20`.**
+### ⚠ **E IL NUMERO `124` E- MISURATO, non stimato:** viene dal perimetro che l-indice calcola, e ### **il mandato ne nominava <<una decina>>** per nome piu- *<<e le cure di architettura>>*. ### **La decina era `20`.**
 
 ---
 
-## `PORTATO` — `94` metodi
+## `PORTATO` — `95` metodi
 
 > ### ✅ **GIA- NELL-ERA `2`**, e `dove` dice dove
 
@@ -61,6 +61,7 @@
 | **`P-ALB`** | `PRESIDIO` | NATO NELL-ERA 2: l-albero delle scelte ha la sua fonte in `doc/ALBERO_era2.yaml`, i nodi di `decisioni.jsonl` SI GENERANO da li-, e ### UN NODO `presa` CON UNA DIPENDENZA NON `presa` FA FALLIRE `valida`. ### Piu- il ciclo, l-arco rotto, l-etichetta locale usata come id, e un nodo PRESA di cui non si sa l-argomento. ### E- la differenza fra una DIREZIONE DICHIARATA e una DECISIONE PRESA: su `D9` Luca ha dichiarato una direzione e il mandato dice NELLA STESSA FRASE che non e- una decisione presa | `csv/_albero_era2.py::controlla`, dentro `indice.py valida` + `pre-commit` + CI |
 | **`P-C1`** | `PRESIDIO` | NATO NELL-ERA 2, ed e- il presidio del punto 12(a): il codice dichiara l-ID e la macchina verifica la biiezione, con DUE severita- -- un ID dichiarato e non nell-indice RIFIUTA, una voce PRESIDIO che nessun codice dichiara SEGNALA (A9). ### E HA PRESO SE- STESSO, come P-M1 | `csv/_controlli_nell_indice.py::controlla`, `pre-commit` + CI |
 | **`P-DET`** | `PRESIDIO` | NATO NELL-ERA 2: nessun RNG globale (via AST: 6 usi, 6 `default_rng`, 0 globali), le CINQUE variabili dei thread fissate a 1 E TIMBRATE, e le versioni bloccate in `primo_ordine/versioni.lock`. ### E IL BRACCIO CHE CONTA SONO DUE PROCESSI CON LA STESSA CONFIGURAZIONE: 548 byte IDENTICI. ### Dice cio- che i thread non posso misurare (`threadpoolctl` non c-e-): se due processi danno byte identici, i thread NON stanno rompendo il determinismo | `primo_ordine/determinismo.py::controlla`; collaudo in `primo_ordine/_collauda_determinismo.py` (13/13) |
+| **`P-DIM`** | `PRESIDIO` | NATO NELL-ERA 2: ogni variabile e ogni parametro dichiarano la loro `dimensione`, e il generatore RIFIUTA un-espressione incoerente -- ogni ADDENDO ha la stessa dimensione, un TERMINE di `H` e- `E^1`, un OSSERVATORE dichiara la sua. ### UNA SOLA BASE, `E`, perche- `A16` implica `hbar = 1` e il tempo e- `E^-1`: una base in piu- sarebbe una manopola. ### E la dimensione sta SULLA VARIABILE, non sul tipo -- al contrario del dominio, perche- due `reale_nodo` possono essere un-energia e un tempo | `primo_ordine/leggi/schema.py::dimensioni_incoerenti`, dentro `valida_legge`; collaudi 34/34 e 24/24 col ramo END-TO-END |
 | **`P-E1`** | `PRESIDIO` | NATO NELL-ERA 2. La BIIEZIONE fra legge in tabella, file generato, riga di registro e scheda, nei DUE VERSI, e `LEGGE` si legge VIA AST. ### Allargato agli OSSERVATORI il 2026-10-09: prima un osservatore in tabella era INVISIBILE alla biiezione | `csv/_presidi_era2.py::pe1`, `pre-commit` + CI, SENZA via d-uscita |
 | **`P-E2`** | `PRESIDIO` | NATO NELL-ERA 2. L-IMPRONTA: un generato ritoccato a mano, o una tabella cambiata senza rigenerare. ### SI RIGENERA, NON SI CORREGGE IL FILE -- e la CI rigenera e fa `git diff --exit-code` | `csv/_presidi_era2.py::pe2`, `pre-commit` + CI |
 | **`P-E3`** | `PRESIDIO` | NATO NELL-ERA 2. Le variabili nei due versi: una variabile dichiarata in DUE POSTI divergerebbe, e per questo `stato.py` SI GENERA | `csv/_presidi_era2.py::pe3`, `pre-commit` + CI |
@@ -111,7 +112,7 @@
 | **`STANDARD-4`** | `STANDARD` | snapshot contro snapshot allo stesso istante. ### PORTATO nel modello di sigillo (punto 7): i bracci partono dallo STESSO SEME e fanno lo STESSO numero di passi, e il confronto e- AL BYTE. ### E il <<prima>> NON E- PIU- UNA COPIA PATCHATA: si ottiene mettendo a ZERO il coefficiente, quindi il braccio zero e- byte-identico PER COSTRUZIONE | `primo_ordine/sigilli/_modello.py` |
 | **`STANDARD-8`** | `STANDARD` | un difetto dimostrato si cura: ### SUPERATA, assorbita in `A12` | vedi `A12` |
 | **`STATI-LOCALI`** | `PRESIDIO` | gli stati pesanti restano locali, in git solo sha1, percorso e comando. ### PORTATO: `db_era2/*.npz` e- nel `.gitignore`, e IL `.timbro.json` ACCANTO SI TRACCIA -- e- leggero e porta l-impronta della tabella, dei generati e della configurazione, cioe- IL COMANDO CHE RIPRODUCE QUEL DATO | `.gitignore` + `timbro.py::salva` |
-| **`U3`** | `PRESIDIO` | confrontava con uno sviluppo invece del valore esatto: ### LA LEZIONE E- PORTATA -- la derivata generata si confronta con la differenza finita, non con una forma approssimata scritta a mano | `_genera.py --prova` |
+| **`U3`** | `PRESIDIO` | confrontava con uno sviluppo invece del valore esatto: ### LA LEZIONE E- PORTATA -- la derivata generata si confronta con la differenza finita, non con una forma approssimata scritta a mano | `_collauda_genera.py` |
 | **`VELENO-ARCHI-KEEP`** | `DIFETTO` | il veleno allunga le derivate d-arco e non applica `keep`. ### IL PUNTO 4 E- VERO E VUOTO, e il collaudo lo MISURA: zero derivati, perche- lo stato e- solo `psi`. ### E la garanzia arriva dall-altro lato -- `senza_cache` rifiuta una memoria non dichiarata (`A8b`) -- quindi non c-e- IL BERSAGLIO | `_collauda_passo.py` sezione (I); il braccio FALLIRA- al primo derivato |
 | **`VELENO-ORIENTATO`** | `DIFETTO` | il veleno cade su UNO dei due archi figli, e quale dipende dall-orientamento: ### LA LEZIONE E- PORTATA -- `strati()` usa la chiave `(min, max)`, quindi l-arco `(3,7)` e `(7,3)` hanno LA STESSA chiave e lo strato non dipende da come e- scritto | `passo.py::strati` |
 | **`Z100`** | `CURA` | gli invarianti: il programma si ferma quando sono violati. ### PORTATO dal punto 1 nella forma dei DOMINI -- ogni tipo dichiara la sua forma, e il controllo FERMA. ### Gli invarianti di FISICA (norma, energia) si MISURANO invece, e la deriva e- stampata: fermare su una deriva numerica sarebbe fermare su un arrotondamento | `primo_ordine/stato.py::controlla_domini`; la deriva in `_collauda_passo.py` |

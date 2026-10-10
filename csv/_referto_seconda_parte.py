@@ -41,7 +41,7 @@ VELOCI = (
     ("`@rif` byte-inerte", "python primo_ordine/_rif.py"),
     ("lo schema delle leggi", "python primo_ordine/leggi/schema.py"),
     ("lo schema della configurazione", "python primo_ordine/config/schema_config.py"),
-    ("il generatore", "python primo_ordine/_genera.py --prova"),
+    ("il generatore", "python primo_ordine/_collauda_genera.py"),
     ("il modello di sigillo", "python primo_ordine/sigilli/_modello.py"),
     ("i presidi dell-indice", "python csv/_collaudo_presidi_indice.py"),
     ("i controlli della migrazione", "python csv/_controlli_indice_v2.py"),

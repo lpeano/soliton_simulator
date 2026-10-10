@@ -63,6 +63,7 @@ SORGENTI = (
     # ### ### **solo `csv/`**, la sua voce risulterebbe ### **una tenda** mentre e- cablata.
     "primo_ordine/grafo.py",
     "primo_ordine/determinismo.py",
+    "primo_ordine/leggi/schema.py",
     "csv/indice.py",
     "csv/_hook_presidi.py",
     "csv/_hook_id_obbligatorio.py",

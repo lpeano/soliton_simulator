@@ -2636,7 +2636,7 @@ etichette rimosse, con ### **`0` persi, `0` doppi, `0` conflitti**.
 |---|---|
 | **file** | `primo_ordine/_genera.py` |
 | **BLOB** *(sha1 dei byte grezzi)* | `b0796177` |
-| **COMANDO** | `python primo_ordine/_genera.py` *(genera)* · `python primo_ordine/_genera.py --prova` *(il collaudo, `13`/`13`)* |
+| **COMANDO** | `python primo_ordine/_genera.py` *(genera)* · `python primo_ordine/_collauda_genera.py` *(il collaudo, `24`/`24`)*. ### ⚠ **`--prova` NON C'E' PIU':** il collaudo sta in un file suo, perché `P-MOD` ha rifiutato `_genera.py` a ### **`738` righe** sul tetto di `700` — e *«oltre ### **SI DIVIDE, NON SI ALLUNGA**»* |
 | **cosa misura** | `(a)` i simboli liberi **dentro l'ambiente** e `pos` **mai**; `(b)` **`dH/dpsi*` simbolica** *(Wirtinger)*; `(c)` il **modulo numpy** con `LEGGE` e **l'IMPRONTA**; `(d)` la **scheda** |
 | ### ⭐ **e i nomi dei simboli SONO i nomi delle locali** | così l'espressione stampata da `sympy` ### **è già il codice**: ### **nessuna sostituzione testuale** fra la derivata e il file — e una sostituzione è ### **un posto dove la formula può cambiare senza che nessuno lo veda** |
 | ### ⛔ **e i simboli dei vicini NON ESISTONO** per un `termine_nodo` | è il ### **secondo** presidio contro *«un termine di nodo che vede i vicini»*: il primo è l'ambito nello schema |

@@ -70,7 +70,7 @@ jobs:
         run: python primo_ordine/leggi/schema.py
 
       - name: il collaudo del generatore
-        run: python primo_ordine/_genera.py --prova
+        run: python primo_ordine/_collauda_genera.py
 
       - name: "### E IL GENERATO E- RIPRODUCIBILE -- si rigenera e NON cambia"
         # ### ⛔ E' il controllo che rende VERA la frase <<i file generati non si

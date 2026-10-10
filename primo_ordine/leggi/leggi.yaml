@@ -20,8 +20,24 @@
 #    espressione   stringa simbolica (sympy)
 #    ambito        le variabili che PUO- leggere. ### UN termine_nodo NON PUO- avere
 #                  una variabile d-ARCO: leggerla E- VEDERE IL VICINO.
-#    parametri     ognuno con VALORE e ORIGINE. ### A1: la legge, NON il numero -- e un
-#                  numero senza origine E- UNA MANOPOLA.
+#    parametri     ognuno con VALORE, ORIGINE e DIMENSIONE. ### A1: la legge, NON il
+#                  numero -- e un numero senza origine E- UNA MANOPOLA, uno senza
+#                  dimensione e- un numero DI CUI NON SI SA CHE COSA SIA.
+#
+#  LE DIMENSIONI (punto 2 della terza parte)
+#  -----------------------------------------
+#    dimensione    E^<intero>, su OGNI variabile e OGNI parametro.
+#    ### UNA SOLA BASE, E, e non e- una scelta di unita-: A16 dice che lo stato evolve
+#    ### al primo ordine sotto una sola H, cioe- hbar = 1 -- e con hbar = 1 IL TEMPO E-
+#    ### E^-1, non una dimensione indipendente. Una base in piu- sarebbe una manopola.
+#    ### E LA DIMENSIONE STA SULLA VARIABILE, NON SUL TIPO -- al contrario del DOMINIO:
+#    ### due variabili dello stesso tipo hanno lo stesso dominio PER COSTRUZIONE, ma
+#    ### due reale_nodo possono essere UN-ENERGIA E UN TEMPO.
+#    ### CHE COSA SI PRETENDE: (1) ogni ADDENDO ha la stessa dimensione (sommare
+#    ### un-energia e un-energia al quadrato non e- un errore di battitura: e- un-altra
+#    ### fisica); (2) un TERMINE, che entra in H, ha dimensione E^1; (3) un
+#    ### OSSERVATORE dichiara la SUA e deve essere omogeneo -- pretendere E^1 da tutti
+#    ### VIETEREBBE DI MISURARE LA NORMA, che e- E^0.
 #
 #  per una REGOLA (NON entra in H):
 #    ingressi, uscite, bilancio   ### CIO- CHE ESCE DA H DEVE ANDARE DA QUALCHE PARTE.
@@ -48,6 +64,10 @@ variabili:
   - nome: psi
     tipo: complesso_c2_nodo
     voce: V-PSI-ERA2
+    # ### psi e- ADIMENSIONALE: psi^dag psi e- LA NORMA, cioe- un CONTEGGIO. ### E con
+    # ### hbar = 1 (che e- cio- che A16 implica) il tempo e- E^-1, quindi la sola base
+    # ### dimensionale e- E.
+    dimensione: E^0
     scheda: >-
       Lo spinore di nodo, C^2. `A16`: lo spinore E' il tempo proprio della massa, e vive
       SUL NODO. I suoi simboli, per il generatore, sono `psi_0` e `psi_1` piu' i
@@ -69,6 +89,9 @@ leggi:
     parametri:
       K:
         valore: 1.0
+        # ### K MOLTIPLICA UN ADIMENSIONALE E IL TERMINE ENTRA IN H: quindi K E-
+        # ### UN-ENERGIA. ### Non e- una scelta: e- cio- che la coerenza impone.
+        dimensione: E^1
         origine: >-
           ### VALORE DI PROVA, NON DERIVATO. `A1` pretende che un numero dica da dove
           viene: questo viene DA NIENTE, ed e' per questo che la legge e'
@@ -90,6 +113,8 @@ leggi:
     parametri:
       g:
         valore: 0.5
+        # ### g moltiplica (psi^dag psi)^2, che e- adimensionale: g E- UN-ENERGIA.
+        dimensione: E^1
         origine: >-
           ### VALORE DI PROVA, NON DERIVATO. Come `K`: viene DA NIENTE.
     assiomi: [A16, A17]
@@ -105,6 +130,10 @@ leggi:
   #     ### scritta: fa girare `misura()` e confronta lo stato AL BYTE.
   - id: PROVA-NORMA
     tipo: osservatore
+    # ### ⛔ UN OSSERVATORE DICHIARA LA SUA DIMENSIONE, e non deve essere E^1: la
+    # ### NORMA e- un CONTEGGIO, cioe- E^0. ### Pretendere E^1 da ogni osservatore
+    # ### VIETEREBBE DI MISURARE LA NORMA, che e- la prima cosa che si misura.
+    dimensione: E^0
     prova: true
     espressione: psi_0c*psi_0 + psi_1c*psi_1
     ambito: [psi]

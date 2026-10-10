@@ -74,6 +74,7 @@ FILE_FISICA = (
     # ### *(`A17`)*. ### **Il presidio mi ha costretto alla forma giusta.**
     'primo_ordine/_collauda_passo.py',
     'primo_ordine/_collauda_grafo.py',
+    'primo_ordine/_collauda_genera.py',
     'primo_ordine/_collauda_determinismo.py',
     'primo_ordine/termini/__init__.py',
     # ### I TRE GENERATI: entrano nella LISTA ### **nel commit in cui nascono**, e il

@@ -9,7 +9,7 @@
 | **tipo** | `osservatore` |
 | **espressione** | `psi_0c*psi_0 + psi_1c*psi_1` |
 | **ambito** | `psi` |
-| **impronta della riga** | `dbaed7132e12fbae` |
+| **impronta della riga** | `2c2e2da4a24ef660` |
 | **assiomi soddisfatti** | `A16` · `A17` |
 
 | **la voce che misura** | `MISURA-NORMA-ERA2` |

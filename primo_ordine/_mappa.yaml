@@ -54,6 +54,10 @@ moduli:
     responsabilita: il collaudo del grafo, e i cinque casi che devono fallire
     importa: [driver, grafo, passo, schema_config, stato]
 
+  - nome: _collauda_genera.py
+    responsabilita: il collaudo del generatore, e il ramo end-to-end delle dimensioni
+    importa: [_genera, _presidio]
+
   - nome: crescita.py
     responsabilita: la crescita del grafo, regola NON-H col suo bilancio
     importa: []

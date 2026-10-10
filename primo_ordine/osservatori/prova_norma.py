@@ -16,7 +16,7 @@ from _rif import rif
 
 # ### L-ID: un presidio lo legge ### **via AST**, non per regex.
 LEGGE = 'PROVA-NORMA'
-IMPRONTA = 'dbaed7132e12fbae'
+IMPRONTA = '2c2e2da4a24ef660'
 TIPO = 'osservatore'
 AMBITO = ('psi',)
 PROVA = True

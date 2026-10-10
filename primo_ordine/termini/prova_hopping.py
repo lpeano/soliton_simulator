@@ -10,7 +10,7 @@ import numpy as np
 # ### L-ID DELLA LEGGE: un presidio lo legge ### **via AST**, non per regex.
 LEGGE = 'PROVA-HOPPING'
 # ### L-IMPRONTA della riga di tabella *(`sha1` del `json` a chiavi ordinate)*.
-IMPRONTA = '19547a22540dac81'
+IMPRONTA = 'd455b21811801ac0'
 TIPO = 'termine_arco'
 AMBITO = ('psi',)
 PROVA = True
