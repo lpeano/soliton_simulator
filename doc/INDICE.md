@@ -9,13 +9,13 @@
 | `DOCUMENTAZIONE` | `2` | 1 |
 | `DOCUMENTAZIONE` | `ENTRAMBE` | 8 |
 | `FISICA` | `1` | 343 |
-| `FISICA` | `2` | 20 |
+| `FISICA` | `2` | 22 |
 | `FISICA` | `ENTRAMBE` | 17 |
 | `INFRASTRUTTURA` | `1` | 39 |
 | `INFRASTRUTTURA` | `2` | 14 |
 | `INFRASTRUTTURA` | `ENTRAMBE` | 20 |
 | `METODO` | `1` | 156 |
-| `METODO` | `2` | 9 |
+| `METODO` | `2` | 11 |
 | `METODO` | `ENTRAMBE` | 87 |
 
 | id | classe | dominio | era | stato | blocca | titolo |
@@ -119,6 +119,7 @@
 | `CARICA-PERCORSO` | FRONTE | FISICA | 1 | ### **SOSPESA** |  | l ordine in cui si chiude il filone della carica: cinque punti, e il primo si pu |
 | `CARICA-ROTAZIONE` | FRONTE | FISICA | 1 | ### **SOSPESA** |  | la carica e' il verso di rotazione collettivo: somma di /psi/^2 * phivel per mas |
 | `CARICA-SIMMETRIA-FASE` | MISURA | FISICA | 1 | ### **SOSPESA** |  | la carica e il verso di rotazione: il test dello spostamento globale, e quale fr |
+| `CAUSALITA-DAI-COLLAUDI` | CRITERIO | METODO | 2 | ### **AGENDA** |  | causalita- ed energia si dimostrano coi collaudi che le MISURANO, mai con una ta |
 | `CBIS-CRITERIO-VACUO` | DIFETTO | METODO | 1 | ### **CHIUSA** |  | il criterio del braccio C-bis era vacuo: _eventi stava sempre fra le sbagliate |
 | `CELLE-NAN-APPESE-NOME-SCADUTO` | DIFETTO | INFRASTRUTTURA | 1 | ### **SOSPESA** |  | celle_nan_appese misura len_dopo - len_prima, che coincideva col veleno solo pri |
 | `CENS-A1` | DIFETTO | FISICA | 1 | ### **SOSPESA** | SI | [A] la RIDUZIONE AL LIMITE dello spinore: lo stato che la garantisce non e' ragg |
@@ -346,6 +347,7 @@
 | `INTERO-BLOCCO` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 7 volte, MAI definito in un registro) [INTERO-BLOCCO] |
 | `INVARIANZA-LOCALE-CS` | FRONTE | FISICA | 2 | ### **AGENDA** |  | ogni legge che usa una grandezza GLOBALE da all osservatore locale un riferiment |
 | `INVENTARIO-SIGILLI-SENZA-COMMIT` | DIFETTO | INFRASTRUTTURA | 1 | ### **SOSPESA** |  | 79 voci di sigillo su 82 non hanno il commit con cui rigirarle, piu una riga dup |
+| `ISOTROPIA-MISURATA` | CRITERIO | METODO | 2 | ### **AGENDA** |  | l-isotropia del supporto e- un criterio MISURATO, prima di dire che un campo e-  |
 | `J2` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 3 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
 | `K0` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 2 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
 | `K1` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 26 volte, MAI definito in un registro) |
@@ -411,6 +413,7 @@
 | `MEM-HEBB-PIANO-XY` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | dir_laterale ruota di 90 gradi nel SOLO piano xy e azzera z: un piano preferito |
 | `MEM-HEBB-VERSO` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | memoria_hebbiana_moto dipende dal verso dell'arco: d0 cambia segno e lo shift va |
 | `MEM-VERSO` | CURA | FISICA | 1 | ### **SUPERATA** |  | il verso dell arco dalla sua MEMORIA (delta = twp - tw) invece che dal segno ist |
+| `MEMORIA-DENTRO-H` | STANDARD | FISICA | 2 | ### **AGENDA** |  | una memoria e- una VARIABILE DINAMICA dentro H: nessun nucleo K(t-t'), nessun bu |
 | `MEMORIE-MANCANTI` | DIFETTO | FISICA | 2 | ### **AGENDA** |  | il rapporto sulle memorie: il censimento dello stato, il bilancio, e le memorie  |
 | `METADATI-REPERTO-PER-NECESSITA` | DIFETTO | INFRASTRUTTURA | ENTRAMBE | ### **APERTA** |  | metadati.jsonl ha una via di scrittura e ZERO storico: e- un REPERTO per necessi |
 | `MISURA-NORMA-ERA2` | MISURA | FISICA | 2 | ### **AGENDA** |  | la norma totale sum_nodi psi^dag psi: l-invariante QUADRATICO su cui si misura l |
@@ -764,6 +767,7 @@
 | `VELENO-AUTORINFRESCO` | FRONTE | METODO | 1 | ### **CHIUSA** |  | il veleno NaN romperebbe i due siti AUTO-RINFRESCO: il disallineamento E il loro |
 | `VELENO-DOMINI` | DIFETTO | METODO | 1 | ### **SOSPESA** |  | DOMINI include 9 delle 10 derivate: una derivata avvelenata VIOLA il dominio per |
 | `VELENO-ORIENTATO` | DIFETTO | METODO | 1 | ### **SOSPESA** |  | il VELENO del commit 4 cade su UNO dei due archi figli, e QUALE dipende dall ori |
+| `VETTORI-DAI-BILINEARI` | STANDARD | FISICA | 2 | ### **AGENDA** |  | vettori e tensori SOLO dai bilineari dello spinore e dalle fasi sugli archi |
 | `VIDEO-SCENA` | DIFETTO | INFRASTRUTTURA | 1 | ### **SOSPESA** |  | il video della scena del pilota: diagnostico, mostra `pos` che NON e' la distanz |
 | `VUOTO-LOCALE-DETERMINISTICO` | FRONTE | FISICA | 2 | ### **AGENDA** |  | termostato locale + scuotimento DETERMINISTICO: UNA legge per nodo, fase <-> vuo |
 | `W1` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 8 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |

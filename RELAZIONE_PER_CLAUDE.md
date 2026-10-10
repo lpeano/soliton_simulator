@@ -12077,3 +12077,28 @@ Ogni dato di `db_era2/` ha ### **il suo TIMBRO accanto**, col campo `versione_da
 ### ✅ **E IL PRESIDIO HA TROVATO DA SOLO un testo generato fuori registro:** `doc/LETTORI_INDICE_analisi.md`, l-analisi del punto `5` del mandato del `2026-09-26` — ### **un reperto**, e ora lo dichiara.
 
 ### ✅ **Collaudo `12` su `12`, con OTTO bracci che DEVONO fallire**, fra cui ### **il caso centrale del mandato**: la CI che rigenera un reperto, cioe- ### **«ENTRAMBE»** — armato ### **sabotando il workflow IN MEMORIA**, senza toccare il disco.
+
+## PUNTO `5`: LE QUATTRO REGOLE DI LUCA DEL `2026-10-10` — ### **e per ciascuna, SE un presidio la copre gia-** *(2026-10-10)*
+
+### ⛔ **PRIMA COSA, E NON E- UN DETTAGLIO: GLI ID `R1`…`R4` SONO TUTTI E QUATTRO GIA- PRESI.** `R1` e `R4` sono voci ### **citate e mai definite** *(`30` e `13` citazioni)*, `R2` esiste, `R3` e- ### **un difetto dell-era `1`** *(un collaudo che pretendeva `bias == 0.0` esatto)*. ### ⭐ **E par.`9` dice che un ID NON E- UN NOME: E- UNA CHIAVE** — quindi i nomi sono ### **descrittivi**, e la corrispondenza con `R1`…`R4` sta ### **nel campo `origine`**, non nel titolo.
+
+| la regola di Luca | la voce | il presidio |
+|---|---|---|
+| `R1` la memoria dentro `H` | **[[MEMORIA-DENTRO-H]]** | ### ✅ **GIA- COPERTA, e verificata dal codice** |
+| `R2` vettori dai bilineari | **[[VETTORI-DAI-BILINEARI]]** | ### ⚠ **META-: il divieto si-, la prescrizione NO** |
+| `R3` l-isotropia misurata | **[[ISOTROPIA-MISURATA]]** | ### ⛔ **SENZA presidio: NON HA MATERIA** |
+| `R4` causalita- dai collaudi | **[[CAUSALITA-DAI-COLLAUDI]]** | ### ⚠ **META-: i collaudi ci sono, il <<mai tarare>> no** |
+
+### ✅ **`R1` E- GIA- COPERTA PER COSTRUZIONE, e il mandato chiedeva proprio di dirlo.** `primo_ordine/leggi/schema.py` tiene `TIPI_VARIABILE`, un ### **vocabolario CHIUSO di CINQUE tipi**, e ### **tutti e cinque sono grandezze dello stato DI ADESSO**: ### **non esiste un tipo «serie temporale» ne- un tipo «buffer»**, e lo schema ### **RIFIUTA** un tipo fuori da quel vocabolario. ### ⭐ **Quindi un nucleo `K(t-t-)` NON SI PUO- NEANCHE DICHIARARE.** ### 📌 **E il meccanismo che la regola PRESCRIVE c-e- gia-, dichiarato e non usato:** il tipo `coppia_coniugata`, che lo schema descrive come *«AMMESSA e NON USATA: e- la decisione `13`, APERTA»* — ### **l-incastro markoviano di una memoria E- esattamente una coppia `(q, p)` col suo termine in `H`.**
+
+### ⚠ **E CIO- CHE `R1` NON COPRE, che dico invece di tacere:** niente vieta a un termine di ### **trattare come storia accumulata** una variabile che nessuna legge fa evolvere. ### **Il vocabolario chiuso chiude la FORMA, non l-INTENZIONE.**
+
+### ⚠ **`R2` E- COPERTA A META-, e la meta- che manca non PUO- essere coperta oggi.** Il ### **divieto** e- un presidio: `VIETATI = (pos, pos_x, …, xyz)` e `simboli_vietati()` fanno ### **rifiutare dal generatore** ogni espressione che li nomini — `A17` per costruzione. ### ⛔ **La PRESCRIZIONE** *(«SOLO dai bilineari»)* ### **non ha presidio perche- NON ESISTE un tipo vettore**: non c-e- niente da controllare, e un vettore ### **non si puo- nemmeno dichiarare.** ### ✅ **Il presidio nascera- INSIEME al tipo**, e il controllo sara- che l-espressione si riduca a bilineari di `psi` e a fasi d-arco.
+
+### ⛔ **`R3` E- SENZA PRESIDIO PER MANCANZA DI MATERIA**, come il mandato stesso dice. ### ✅ **E il presidio `PI-CRITERIO-METODO` mi ha corretto il dominio:** l-avevo messa in `FISICA`, e la risposta e- stata *«un criterio e- una REGOLA DI GIUDIZIO, e una regola di giudizio non e- fisica: dice COME SI DECIDE, non come va il mondo»*. ### **Ha ragione**, ed e- `METODO`.
+
+### ✅ **`R4`: i collaudi che la misurano GIA-, letti dal codice, sono TRE blocchi di `primo_ordine/_collauda_passo.py`.** ### **`(C)` IL CONO** — perturba UN nodo e misura ### **fin dove arriva**, e porta un braccio che vale piu- del verdetto: *«il cono del GLOBALE CAMBIA con la TOLLERANZA: ### **NON e- una causalita-**»*. ### **`(D)` NORMA ED ENERGIA** — la deriva misurata, con le soglie ### **DERIVATE**: `passi * eps` per la norma, `dt^2` per l-energia. ### **`(G)` LA REVERSIBILITA-** — `k` passi avanti e `k` indietro, col ### **controllo positivo** di un integratore ### **apposta non reversibile.**
+
+### ⚠ **E LA PARTE DI `R4` SENZA PRESIDIO:** il *«MAI con una taratura»* ### **non ha oggi un controllo che lo impedisca.** C-e- `A1` come ### **regola scritta**, e `rami_vietati()` che rifiuta un `Max`/`clip` dentro un termine di `H` — ### **ma un parametro tarato a mano in una `regola` non e- ancora rifiutato da niente.**
+
+### 📌 **E DUE COSE SUGLI STRUMENTI.** ### **(1)** la chiave meta `origine` ### **NON ESISTEVA**: l-ho registrata io, e al secondo giro lo strumento mi ha risposto *«esiste gia-»* — ### **stava trovando il mio stesso lavoro**, e per un momento l-ho scritto come se ci fosse da prima. ### **(2)** `CLAUDE.md` ### **NON cambia** *(`339` righe)*, e ### **e- giusto**: il generatore prende solo le voci con `meta.in_claude`, e queste sono ### **regole di FISICA** — `CLAUDE.md` e- ### **il flusso di lavoro**, e la fisica sta altrove.

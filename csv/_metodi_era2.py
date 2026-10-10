@@ -591,6 +591,35 @@ METODI['P-GUIDA'] = (
     "SILENZIO",
     "`primo_ordine/_collauda_guida.py` (12/12), nel comando unico e nel `pre-commit`",
     "PORTATO")
+METODI['MEMORIA-DENTRO-H'] = (
+    "DECISIONE DI LUCA del 2026-10-10 (la regola che ha chiamato R1): nessun nucleo di "
+    "memoria K(t-t-) e nessun buffer di storia -- UNA MEMORIA E- UNA VARIABILE DINAMICA "
+    "DENTRO `H`, col suo termine in `leggi.yaml` (incastro markoviano). ### SI APPLICA "
+    "ALL-ERA 2 COSI-, ed e- GIA- COPERTA PER COSTRUZIONE: `TIPI_VARIABILE` e- un "
+    "vocabolario CHIUSO di cinque tipi, tutti grandezze dello stato DI ADESSO, e lo schema "
+    "RIFIUTA un tipo fuori da quel vocabolario: un nucleo di memoria NON SI PUO- NEANCHE "
+    "DICHIARARE. ### E il meccanismo prescritto c-e- gia-, dichiarato e non usato: il tipo "
+    "`coppia_coniugata` (la decisione 13). ### CIO- CHE NON COPRE: il vocabolario chiude la "
+    "FORMA, non l-INTENZIONE -- una variabile che nessuna legge fa evolvere potrebbe essere "
+    "usata come storia accumulata",
+    "`primo_ordine/leggi/schema.py::TIPI_VARIABILE`; il controllo `tipo not in "
+    "TIPI_VARIABILE` RIFIUTA; e la voce dichiara cio- che NON copre",
+    "PORTATO")
+
+METODI['VETTORI-DAI-BILINEARI'] = (
+    "DECISIONE DI LUCA del 2026-10-10 (la regola che ha chiamato R2): vettori e tensori "
+    "SOLO dai bilineari dello spinore (psi^dag sigma psi sul nodo, psi_i^dag psi_j "
+    "sull-arco) e dalle fasi e olonomie sugli archi -- MAI dalle posizioni. Rafforza A17. "
+    "### SI APPLICA ALL-ERA 2 A META-, e la meta- che manca NON PUO- essere coperta oggi: "
+    "il DIVIETO e- un presidio (`VIETATI` + `simboli_vietati()` fanno rifiutare dal "
+    "generatore ogni espressione che nomini una posizione, A17 per costruzione); la "
+    "PRESCRIZIONE non ha presidio perche- NON ESISTE un tipo vettore ne- un tipo tensore, "
+    "quindi non c-e- niente da controllare e un vettore non si puo- nemmeno dichiarare. "
+    "### IL PRESIDIO NASCERA- INSIEME AL TIPO, con la decisione 9",
+    "`primo_ordine/leggi/schema.py::VIETATI`; META- coperta, e il motivo dell-altra meta- "
+    "e- MANCANZA DI MATERIA",
+    "PORTATO")
+
 METODI['REFERTO-FOTOGRAFIA-RIGENERATA'] = (
     "NATO NELL-ERA 2, e nasce da una DOMANDA DI LUCA: <<o il referto di un mandato chiuso "
     "e- un REPERTO congelato al suo commit, o si rigenera e allora non e- una fotografia. "

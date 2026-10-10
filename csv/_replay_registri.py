@@ -104,7 +104,7 @@ REGISTRI = {
     # ### <<coincide>> perche- gliel-ho detto io, non perche- l-abbia verificato.
     # ### ⭐ **E- esattamente cio- che <<`REPERTO` per necessita->> significa**, e
     # ### adesso ha una voce: `METADATI-REPERTO-PER-NECESSITA`.
-    "metadati.jsonl": ("REPERTO", "chiave", None, None, "a274e89b100075cb"),
+    "metadati.jsonl": ("REPERTO", "chiave", None, None, "2a3e4acd0d204761"),
     # ### ✅ **GENERATI, non reperti:** `csv/_registri_indice.py` li produce.
     "assiomi.jsonl": ("GENERATO", "id", None, None, None),
     "decisioni.jsonl": ("GENERATO", "id", None, None, None),

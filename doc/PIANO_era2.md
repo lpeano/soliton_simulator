@@ -96,6 +96,16 @@ dice di che cosa si decida, e nemmeno quali siano «le decisioni `1`, `3`, `10`�
 ### **`DEC-NASCITA-PSI`** con ### **`DEC-REGOLA-FORMA`**, che sono decisioni di fisica che
 aspettano Luca. ### **`F2` non può nemmeno cominciare prima che Luca risponda al primo.**
 
+### ⛔ **E DUE REGOLE DI LUCA DEL `2026-10-10` VINCOLANO `D9` PRIMA CHE SIA PRESA.**
+### **[[VETTORI-DAI-BILINEARI]]**: vettori e tensori ### **SOLO dai bilineari dello
+spinore** *(`psi^dag sigma psi` sul nodo, `psi_i^dag psi_j` sull'arco)* e dalle ### **fasi
+e olonomie sugli archi** — ### **MAI dalle posizioni**, che rafforza `A17`.
+### **[[ISOTROPIA-MISURATA]]**: qualunque esito di `D9` dovra' ### **farsi misurare
+l'isotropia** prima che si parli di un campo emerso.
+### ⚠ **Non decidono `D9`: ne restringono le USCITE AMMESSE** — ed e' la ragione
+per cui stanno qui e non nel `yaml` dell'albero, che tiene ### **le scelte**, non i vincoli
+su di esse.
+
 ### 📌 **E SU `D9` LUCA HA GIA' DICHIARATO UNA DIREZIONE:** *«lo spazio emerge grazie alla
 mitosi»* — la mitosi crea ### **i nodi e gli archi** *(la topologia)*, le relazioni fra gli
 stati `psi` ne danno ### **la metrica**: è la ### **`9(b)`**. ### ⚠ **E IL MANDATO DICE,
@@ -138,6 +148,7 @@ alla lista ### **autorizza un commit.** ### **In `F3` quel buco conta più che i
 | **le misure** | `O4` · `Z47` · `I1` · la ### **dilatazione degli orologi come gravità** · ### **`U(1)` come elettromagnetismo** |
 | ### ⛔ **USCITA** | per ognuna: un referto con ① i criteri ### **fissati PRIMA** di vedere i numeri; ② le ### **barre d'errore** e ### **più di un seme** *(`P3`: niente statistica senza una barra)*; ③ un ### **controllo positivo** e un caso che ### **DEVE fallire**; ④ la ### **configurazione INTERA** dichiarata *(`P5`)* |
 | **dove si misura** | `doc/REFERTO_*`, e l'indice |
+| ### ⭐ **E UN CRITERIO IN PIU', deciso da Luca il `2026-10-10`** | ### **[[ISOTROPIA-MISURATA]]**: l'### **isotropia del supporto** — in particolare del grafo ### **nato dalla mitosi** — e' un criterio ### **MISURATO**, e la propagazione deve venire ### **uguale lungo direzioni diverse**, ### **PRIMA** di dire che un campo e' emerso. ### ⚠ **Oggi NON ha materia** *(nessuna geometria, nessuna direzione)*, e ### **dipende da `D9`**: senza `D9` non c'e' niente su cui misurare una direzione — ### **non e' un ritardo, e' una DIPENDENZA** |
 
 ### ⭐ **E QUESTA FASE E' LA PRIMA CHE PARLA DEL BERSAGLIO.** Le tre prove di
 `doc/IPOTESI_gravita_a_spinta.md` — ### **due masse si avvicinano? con che legge? tutti i

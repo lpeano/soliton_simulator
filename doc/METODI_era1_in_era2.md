@@ -8,17 +8,17 @@
 
 | | quanti |
 |---|--:|
-| **`PORTATO`** | `103` |
+| **`PORTATO`** | `105` |
 | **`DA_PORTARE`** | `17` |
 | **`DA_DECIDERE`** | `5` |
 | **`NON_SI_APPLICA`** | `7` |
-| **in tutto** | ### **`132`** |
+| **in tutto** | ### **`134`** |
 
-### ⚠ **E IL NUMERO `132` E- MISURATO, non stimato:** viene dal perimetro che l-indice calcola, e ### **il mandato ne nominava <<una decina>>** per nome piu- *<<e le cure di architettura>>*. ### **La decina era `20`.**
+### ⚠ **E IL NUMERO `134` E- MISURATO, non stimato:** viene dal perimetro che l-indice calcola, e ### **il mandato ne nominava <<una decina>>** per nome piu- *<<e le cure di architettura>>*. ### **La decina era `20`.**
 
 ---
 
-## `PORTATO` — `103` metodi
+## `PORTATO` — `105` metodi
 
 > ### ✅ **GIA- NELL-ERA `2`**, e `dove` dice dove
 
@@ -58,6 +58,7 @@
 | **`L-STELLA`** | `STANDARD` | le cinque domande per iscritto nel task history: ### FATTE per la tappa 5, e LA 3 HA TROVATO UN DIFETTO -- la dipendenza del cono globale dalla tolleranza | `doc/TASK_HISTORY/2026-10-09_era2_infrastruttura.md` |
 | **`L-UN-PROMPT`** | `STANDARD` | un prompt alla volta, i rilievi in CODA: in questo mandato sono arrivate SEI voci di coda, tutte registrate e nessuna eseguita fuori ordine | `doc/CODA_2026-10-09.md` |
 | **`MAX-NODI-FERMA`** | `CURA` | una guardia di MEMORIA non cambia la fisica in silenzio: deve FERMARE. ### PORTATO dal punto 1: ogni tipo dichiara la sua FORMA di dominio, e il controllo generato in `stato.py` SOLLEVA -- e il passo lo chiama a OGNI passo, verificato VIA AST | `primo_ordine/stato.py::controlla_domini`, chiamato da `passo.py` |
+| **`MEMORIA-DENTRO-H`** | `STANDARD` | DECISIONE DI LUCA del 2026-10-10 (la regola che ha chiamato R1): nessun nucleo di memoria K(t-t-) e nessun buffer di storia -- UNA MEMORIA E- UNA VARIABILE DINAMICA DENTRO `H`, col suo termine in `leggi.yaml` (incastro markoviano). ### SI APPLICA ALL-ERA 2 COSI-, ed e- GIA- COPERTA PER COSTRUZIONE: `TIPI_VARIABILE` e- un vocabolario CHIUSO di cinque tipi, tutti grandezze dello stato DI ADESSO, e lo schema RIFIUTA un tipo fuori da quel vocabolario: un nucleo di memoria NON SI PUO- NEANCHE DICHIARARE. ### E il meccanismo prescritto c-e- gia-, dichiarato e non usato: il tipo `coppia_coniugata` (la decisione 13). ### CIO- CHE NON COPRE: il vocabolario chiude la FORMA, non l-INTENZIONE -- una variabile che nessuna legge fa evolvere potrebbe essere usata come storia accumulata | `primo_ordine/leggi/schema.py::TIPI_VARIABILE`; il controllo `tipo not in TIPI_VARIABILE` RIFIUTA; e la voce dichiara cio- che NON copre |
 | **`P-AB`** | `PRESIDIO` | NATO NELL-ERA 2: un `A`/`B` dichiara IL CAMPO UNICO in cui i bracci differiscono, e se ne differiscono due ### IL CONFRONTO NON PARTE (la lezione di `Z20`: due misure sovrapposte). ### Piu- i dati con la versione del formato e nessun file a meta- | `csv/_confronti_e_dati.py::controlla`, `pre-commit` + CI |
 | **`P-ALB`** | `PRESIDIO` | NATO NELL-ERA 2: l-albero delle scelte ha la sua fonte in `doc/ALBERO_era2.yaml`, i nodi di `decisioni.jsonl` SI GENERANO da li-, e ### UN NODO `presa` CON UNA DIPENDENZA NON `presa` FA FALLIRE `valida`. ### Piu- il ciclo, l-arco rotto, l-etichetta locale usata come id, e un nodo PRESA di cui non si sa l-argomento. ### E- la differenza fra una DIREZIONE DICHIARATA e una DECISIONE PRESA: su `D9` Luca ha dichiarato una direzione e il mandato dice NELLA STESSA FRASE che non e- una decisione presa | `csv/_albero_era2.py::controlla`, dentro `indice.py valida` + `pre-commit` + CI |
 | **`P-BARRIERA`** | `PRESIDIO` | NATO NELL-ERA 2: ogni strumento verifica all-avvio che i hook LOCALI siano attivi (`core.hooksPath`, i due file, LA LORO IMPRONTA) e SI RIFIUTA DI PARTIRE (codice 3). ### Sta in `_presidio.avvia()`, che OGNI strumento chiama: metterla in ognuno vorrebbe dire ricordarsela ogni volta, e il primo che la dimentica non ha nessuna barriera. ### E TACE FUORI DAL PC (`CI=true`): la- non si committa, e il mandato preso alla lettera farebbe FALLIRE SEMPRE la CI -- E- UNA MIA INFERENZA, DICHIARATA. ### E cio- che NON puo- fare: `--no-verify` non e- impedibile in locale, e l-impronta e- in un file TRACCIATO -- non impedisce di cambiare un hook, LO RENDE VISIBILE IN UNA DIFF | `csv/_barriera.py::errori`, dentro `csv/_presidio.py::avvia`; collaudo 11/11 col ramo END-TO-END |
@@ -123,6 +124,7 @@
 | **`U3`** | `PRESIDIO` | confrontava con uno sviluppo invece del valore esatto: ### LA LEZIONE E- PORTATA -- la derivata generata si confronta con la differenza finita, non con una forma approssimata scritta a mano | `_collauda_genera.py` |
 | **`VELENO-ARCHI-KEEP`** | `DIFETTO` | il veleno allunga le derivate d-arco e non applica `keep`. ### IL PUNTO 4 E- VERO E VUOTO, e il collaudo lo MISURA: zero derivati, perche- lo stato e- solo `psi`. ### E la garanzia arriva dall-altro lato -- `senza_cache` rifiuta una memoria non dichiarata (`A8b`) -- quindi non c-e- IL BERSAGLIO | `_collauda_passo.py` sezione (I); il braccio FALLIRA- al primo derivato |
 | **`VELENO-ORIENTATO`** | `DIFETTO` | il veleno cade su UNO dei due archi figli, e quale dipende dall-orientamento: ### LA LEZIONE E- PORTATA -- `strati()` usa la chiave `(min, max)`, quindi l-arco `(3,7)` e `(7,3)` hanno LA STESSA chiave e lo strato non dipende da come e- scritto | `passo.py::strati` |
+| **`VETTORI-DAI-BILINEARI`** | `STANDARD` | DECISIONE DI LUCA del 2026-10-10 (la regola che ha chiamato R2): vettori e tensori SOLO dai bilineari dello spinore (psi^dag sigma psi sul nodo, psi_i^dag psi_j sull-arco) e dalle fasi e olonomie sugli archi -- MAI dalle posizioni. Rafforza A17. ### SI APPLICA ALL-ERA 2 A META-, e la meta- che manca NON PUO- essere coperta oggi: il DIVIETO e- un presidio (`VIETATI` + `simboli_vietati()` fanno rifiutare dal generatore ogni espressione che nomini una posizione, A17 per costruzione); la PRESCRIZIONE non ha presidio perche- NON ESISTE un tipo vettore ne- un tipo tensore, quindi non c-e- niente da controllare e un vettore non si puo- nemmeno dichiarare. ### IL PRESIDIO NASCERA- INSIEME AL TIPO, con la decisione 9 | `primo_ordine/leggi/schema.py::VIETATI`; META- coperta, e il motivo dell-altra meta- e- MANCANZA DI MATERIA |
 | **`Z100`** | `CURA` | gli invarianti: il programma si ferma quando sono violati. ### PORTATO dal punto 1 nella forma dei DOMINI -- ogni tipo dichiara la sua forma, e il controllo FERMA. ### Gli invarianti di FISICA (norma, energia) si MISURANO invece, e la deriva e- stampata: fermare su una deriva numerica sarebbe fermare su un arrotondamento | `primo_ordine/stato.py::controlla_domini`; la deriva in `_collauda_passo.py` |
 | **`Z20`** | `FRONTE` | due bracci di un confronto che differivano in piu- di un posto. ### PORTATO: `P-AB` pretende IL CAMPO UNICO dichiarato, e se i bracci differiscono anche altrove ### IL CONFRONTO NON PARTE -- non avverte, NON PARTE, perche- una corsa lunga non si rifa- per una diagnosi | `csv/_confronti_e_dati.py::valida_confronto` |
 | **`Z22`** | `STANDARD` | il par.5-quinquies esisteva ed e- stato violato: la lezione e- che ### UN OUTPUT DA UN FILE NON TRACCIATO NON E- RIPRODUCIBILE -- e il timbro di `_presidio.avvia` lo dice a ogni giro | `csv/_presidio.py` |

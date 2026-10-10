@@ -84,8 +84,17 @@ BLOCCA = {"SI", "NO", "DA-DECIDERE", "DA VERIFICARE"}
 # ### ⛔ **NON l-ho aggirato scegliendo un-altra classe:** una domanda a Luca E- una
 # ### `DECISIONE`, e ### **piegare il dato per far tacere una vista vecchia sarebbe il
 # ### difetto peggiore** -- la vista esiste per RAPPRESENTARE il dato, non il contrario.
+# ### ⚠ **`criterio` E- ENTRATO IL `2026-10-10`, e il motivo e- preciso:** la
+# ### vista compatibile scrive `meta.tipo_era1` ### **se c-e-**, e altrimenti
+# ### ### **`classe.lower()`**. ### **Le 97 voci `CRITERIO` di prima portavano
+# ### TUTTE un `tipo_era1`** *(94 su 97: `criterio-locale`)*, quindi la parola
+# ### `criterio` ### **non era mai arrivata qui.** ### ⛔ **Le prime DUE
+# ### voci `CRITERIO` dell-era 2 non hanno un tipo dell-era 1 -- e metterglielo
+# ### SAREBBE UNA BUGIA**, perche- `tipo_era1` dice *<<che cosa era nell-era 1>>*
+# ### e queste ### **nell-era 1 non c-erano.**
 TIPI = {"difetto", "sospetto", "fronte", "misura", "cura", "presidio", "assioma",
-        "standard", "criterio-locale", "decisione", "altro", "non_definita"}
+        "standard", "criterio", "criterio-locale", "decisione", "altro",
+        "non_definita"}
 FAM = {"A", "B", "C", "D", "E", "F", "G", "?"}
 TITOLO_MAX = 100     # [INDICE-LEGGERO] un titolo breve dev'essere breve: la stampa e' UNA riga
 AVANZ = {"FATTO", "IN CORSO", "IN CODA", "BLOCCATO", "CON RISERVA", "(senza marcatore)"}
