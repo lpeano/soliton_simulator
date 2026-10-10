@@ -28,6 +28,7 @@
 {"id": "V-PHIVEL", "nome": "phivel", "censita_in": "doc/MEMORIE_MANCANTI.md", "scritta_da": ["scuoti_vuoto", "semina", "step"], "scritture": 4}
 {"id": "V-POS", "nome": "pos", "censita_in": "doc/MEMORIE_MANCANTI.md", "scritta_da": ["rilassa_disegno", "semina"], "scritture": 4}
 {"id": "V-PSI", "nome": "psi", "censita_in": "doc/MEMORIE_MANCANTI.md", "scritta_da": ["calcola_psi", "step"], "scritture": 3}
+{"id": "V-PSI-ERA2", "era": "2", "nome": "psi", "tipo": "complesso_c2_nodo", "voce": "-", "fonte": "primo_ordine/leggi/leggi.yaml::variabili", "scheda": "lo spinore di nodo, C^2 (`A16`). I suoi simboli per il generatore sono psi_0, psi_1 e i CONIUGATI INDIPENDENTI psi_0c, psi_1c -- indipendenti perche- la derivata che serve e- quella di WIRTINGER. Impronta del blocco variabili: ff5c058ce3e855b7"}
 {"id": "V-PSI-PREC", "nome": "_psi_prec", "censita_in": "doc/MEMORIE_MANCANTI.md", "scritta_da": ["step"], "scritture": 1}
 {"id": "V-PSI-SPIN", "nome": "psi_spin", "censita_in": "doc/MEMORIE_MANCANTI.md", "scritta_da": ["calcola_psi"], "scritture": 1}
 {"id": "V-PSI-SPIN-PREC", "nome": "_psi_spin_prec", "censita_in": "doc/MEMORIE_MANCANTI.md", "scritta_da": ["step"], "scritture": 1}
@@ -42,4 +43,3 @@
 {"id": "V-TWP-DIP", "nome": "twp_dip", "censita_in": "doc/MEMORIE_MANCANTI.md", "scritta_da": ["_allaccia", "step"], "scritture": 2}
 {"id": "V-VD", "nome": "vd", "censita_in": "doc/MEMORIE_MANCANTI.md", "scritta_da": ["_allaccia", "step"], "scritture": 3}
 {"id": "V-XI-TERMO", "nome": "xi_termo", "censita_in": "csv/_test_fork/_censimento_leggi (NON in doc/MEMORIE_MANCANTI.md)", "scritta_da": ["step"], "scritture": 2}
-{"id": "V-PSI-ERA2", "era": "2", "nome": "psi", "tipo": "complesso_c2_nodo", "voce": "-", "fonte": "primo_ordine/leggi/leggi.yaml::variabili", "scheda": "lo spinore di nodo, C^2 (`A16`). I suoi simboli per il generatore sono psi_0, psi_1 e i CONIUGATI INDIPENDENTI psi_0c, psi_1c -- indipendenti perche- la derivata che serve e- quella di WIRTINGER. Impronta del blocco variabili: ff5c058ce3e855b7"}

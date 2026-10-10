@@ -93,6 +93,16 @@ jobs:
           python csv/_referto_seconda_parte.py --con-lenti
           git diff --exit-code -- doc/REFERTO_seconda_parte_era2.md
 
+      - name: "### L-ARBITRO FRA LE DUE VIE -- e il `git diff` dei registri"
+        # ### ⛔ Qui si pretende di piu- che nel `pre-commit`: oltre al collaudo,
+        # ### ### **un giro del generatore e la diff VUOTA**. Cosi- un record
+        # ### dell-era 2 cancellato ### **fa cadere la CI**, che e- esattamente cio-
+        # ### che prima NON succedeva.
+        run: |
+          python csv/_registri_indice.py --collaudo
+          python csv/_registri_indice.py
+          git diff --exit-code -- doc/indice/leggi.jsonl doc/indice/variabili.jsonl doc/indice/assiomi.jsonl doc/indice/decisioni.jsonl
+
       - name: "### IL REFERTO DELLE 43 DECISIONI -- rigenerato, e `git diff`"
         # ### ⛔ Un referto SCADUTO dice numeri che non sono quelli di oggi, e
         # ### ### **sembra fatto**. Qui si rigenera e si pretende che la diff sia

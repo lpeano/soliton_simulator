@@ -41,8 +41,70 @@ def stampa(s=""):
     print(s, flush=True)
 
 
+# ### ⛔ **DUE VIE DI SCRITTURA SU DUE FILE, E PRIMA NON C-ERA NESSUN ARBITRO.**
+# ### `leggi.jsonl` e `variabili.jsonl` li ### **genera questo script**, leggendo le
+# ### schede di `doc/REGISTRO_FISICA.md` *(l-era `1`)*; ### **ma gli stessi due file
+# ### ricevono anche i record dell-era `2`** per la via dell-indice, con le loro righe
+# ### in `storico_era2.jsonl`.
+# ### ⚠ **MISURATO il 2026-10-10:** un giro di questo script ### **cancellava
+# ### QUATTRO record** -- `PROVA-HOPPING`, `PROVA-LOCALE`, `PROVA-NORMA` e
+# ### `V-PSI-ERA2` -- cioe- ### **esattamente quelli dell-era `2`**, perche- `scrivi()`
+# ### apre in modo `w` e ### **riscrive da zero.**
+# ### ⭐ **E CONTA PERCHE- IL CONTO DELLE LEGGI DI `primo_ordine/timbro.py` ESCE
+# ### DALLA TABELLA:** un giro del generatore dell-era `1` lo avrebbe portato a
+# ### ### **zero senza toccare un file di codice.**
+# ### ✅ **L-ARBITRO, in una riga: cio- che l-ALTRA VIA ha dichiarato in uno
+# ### storico NON SI TOCCA.** ### **La fonte dell-era `1` e- il REGISTRO_FISICA, la
+# ### fonte dell-era `2` e- lo STORICO, e il file e- la somma delle due.**
+STORICO_ERA2 = "storico_era2.jsonl"
+DOVE_ERA2 = {"leggi.jsonl": "leggi", "variabili.jsonl": "variabili"}
+
+
+def dell_era_2(nome):
+    """### Gli ID che ### **l-altra via** ha scritto in questo registro."""
+    dove = DOVE_ERA2.get(nome)
+    if not dove:
+        return set()
+    p = os.path.join(FUORI, STORICO_ERA2)
+    if not os.path.exists(p):
+        return set()
+    fuori = set()
+    for r in io.open(p, encoding="utf-8").read().split(NL):
+        if not r.strip():
+            continue
+        d = json.loads(r)
+        if d.get("dove") == dove and d.get("id"):
+            fuori.add(d["id"])
+    return fuori
+
+
+def _sul_disco(nome):
+    """I record che ci sono ### **adesso**, per `id`."""
+    p = os.path.join(FUORI, nome)
+    if not os.path.exists(p):
+        return {}
+    return {d["id"]: d for d in (json.loads(r) for r in
+                                 io.open(p, encoding="utf-8").read().split(NL) if r.strip())}
+
+
 def scrivi(nome, righe):
     """### Una voce per riga, ### **ordinate per `id`**, chiavi in ordine fisso."""
+    # ### ✅ **L-ARBITRO: i record dell-ALTRA VIA si TENGONO.**
+    tenuti = dell_era_2(nome)
+    if tenuti:
+        ora = _sul_disco(nome)
+        gia = {r["id"] for r in righe}
+        persi = sorted(k for k in tenuti if k not in ora and k not in gia)
+        # ### ⛔ **UN RECORD DELL-ALTRA VIA CHE NON E- NE- SUL DISCO NE- FRA I
+        # ### GENERATI E- GIA- PERSO**, e questo script ### **non lo puo- ricostruire**:
+        # ### si FERMA e dice come riaverlo. ### **Tacere qui vorrebbe dire scrivere il
+        # ### file senza di lui, cioe- RENDERE DEFINITIVA la perdita.**
+        assert not persi, (
+            "### IL RECORD DELL-ERA 2 %s NON E- PIU- NEL FILE %s, e lo storico dice che "
+            "c-era: NON POSSO RICOSTRUIRLO. ### Riprendilo coi byte committati -- "
+            "`git cat-file -p HEAD:doc/indice/%s` -- e rilancia" % (persi, nome, nome))
+        for k in sorted(tenuti - gia):
+            righe = list(righe) + [ora[k]]
     righe = sorted(righe, key=lambda r: r["id"])
     ids = [r["id"] for r in righe]
     assert len(ids) == len(set(ids)), "id duplicati in %s: %s" % (
@@ -50,7 +112,9 @@ def scrivi(nome, righe):
     p = os.path.join(FUORI, nome)
     io.open(p, "w", encoding="utf-8", newline=NL).write(
         NL.join(json.dumps(r, ensure_ascii=False, sort_keys=False) for r in righe) + NL)
-    stampa("  %-20s %4d voci" % (nome, len(righe)))
+    stampa("  %-20s %4d voci%s" % (nome, len(righe),
+                                     ("   (di cui %d TENUTI dall-altra via: l-era 2)"
+                                      % len(tenuti)) if tenuti else ""))
     return len(righe)
 
 
@@ -223,5 +287,83 @@ def main():
     return 0
 
 
+def collaudo():
+    """### L-ARBITRO fra le due vie, ### **nei due versi.**
+
+    ### ⛔ **IL CASO CHE DEVE FALLIRE SI COSTRUISCE DAI DATI VERI** (`P1-sexies`):
+    si toglie ### **un record dell-era `2`** dal file, si fa girare il generatore, e
+    ### **si pretende che SI FERMI** -- poi si rimette, e si verifica che il file sia
+    tornato ### **identico al byte.**
+    """
+    import hashlib
+    ok = [0, 0]
+
+    def esito(che, passa, nota=""):
+        ok[1] += 1
+        ok[0] += 1 if passa else 0
+        print("  %-62s %s   %s" % (che, "PASSA" if passa else "### FALLISCE", nota))
+
+    print("=" * 100)
+    print("IL COLLAUDO DELL-ARBITRO fra le DUE VIE -- nei DUE VERSI")
+    print("=" * 100)
+    nomi = sorted(DOVE_ERA2)
+    tutti = {n: sorted(dell_era_2(n)) for n in nomi}
+    for n in nomi:
+        print("  %-20s id dell-era 2: %s" % (n, ", ".join(tutti[n]) or "nessuno"))
+    esito("### il collaudo ha MATERIA: ci sono record dell-altra via",
+          sum(len(v) for v in tutti.values()) > 0,
+          "%d in tutto: ### senza di loro questo collaudo non proverebbe NIENTE"
+          % sum(len(v) for v in tutti.values()))
+
+    # ------------------------------------------------- 1) IDEMPOTENZA, al byte
+    main()
+    b1 = {n: io.open(os.path.join(FUORI, n), "rb").read() for n in nomi}
+    main()
+    b2 = {n: io.open(os.path.join(FUORI, n), "rb").read() for n in nomi}
+    esito("NON deve scattare: DUE giri di seguito danno gli STESSI BYTE",
+          b1 == b2,
+          "### un generatore che non e- idempotente non si puo- mettere in una CI col "
+          "`git diff`")
+    for n in nomi:
+        d = set(_sul_disco(n))          # ### le CHIAVI sono gli `id`
+        esito("NON deve scattare: `%s` contiene TUTTI i record dell-altra via" % n,
+              set(tutti[n]) <= d,
+              "%d su %d: ### e- la cancellazione che un giro FACEVA, e adesso non fa piu-"
+              % (len(set(tutti[n]) & d), len(tutti[n])))
+
+    # ------------------------------------------------- 2) il caso che DEVE GRIDARE
+    n = next((x for x in nomi if tutti[x]), None)
+    p = os.path.join(FUORI, n)
+    b0 = io.open(p, "rb").read()
+    sha0 = hashlib.sha1(b0).hexdigest()
+    try:
+        vittima = tutti[n][0]
+        resto = [r for r in io.open(p, encoding="utf-8").read().split(NL)
+                 if r.strip() and json.loads(r)["id"] != vittima]
+        io.open(p, "w", encoding="utf-8", newline=NL).write(NL.join(resto) + NL)
+        gridato = False
+        try:
+            main()
+        except AssertionError as e:
+            gridato = "NON E- PIU- NEL FILE" in str(e)
+        esito("### DEVE scattare: un record dell-altra via GIA- PERSO FERMA il generatore",
+              gridato,
+              "`%s` tolto da `%s`: ### tacere qui vorrebbe dire scrivere il file senza di "
+              "lui, cioe- RENDERE DEFINITIVA la perdita" % (vittima, n))
+    finally:
+        io.open(p, "wb").write(b0)
+        main()
+    esito("### e il file e- tornato IDENTICO AL BYTE",
+          hashlib.sha1(io.open(p, "rb").read()).hexdigest() == sha0,
+          "`%s`: ### un collaudo che lascia danno non e- un collaudo" % sha0[:8])
+    print("=" * 100)
+    print("IL COLLAUDO DELL-ARBITRO: %d su %d   %s"
+          % (ok[0], ok[1], "### TUTTI PASSATI" if ok[0] == ok[1] else "### CI SONO BUCHI"))
+    print("=" * 100)
+    return 0 if ok[0] == ok[1] else 1
+
+
 if __name__ == "__main__":
+    if "--collaudo" in sys.argv[1:]:
+        sys.exit(collaudo())
     sys.exit(main())
