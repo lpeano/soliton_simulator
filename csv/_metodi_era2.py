@@ -605,6 +605,21 @@ METODI['P-GUIDA'] = (
     "SILENZIO",
     "`primo_ordine/_collauda_guida.py` (12/12), nel comando unico e nel `pre-commit`",
     "PORTATO")
+METODI['CAMMINATA-A-MONETA'] = (
+    "DECISIONE DI LUCA del 2026-10-10: la dinamica dell-era 2 e- una CAMMINATA QUANTISTICA "
+    "A MONETA, UN-UNICA REGOLA per tutte le grandezze. ### SI APPLICA ALL-ERA 2 COSI-, e "
+    "OGGI NIENTE E- COSTRUITO: il mandato dice <<registra soltanto: nessun codice di "
+    "fisica, nessuna legge, nessuna corsa>>. ### CIO- CHE E- GIA- VERO: il vincolo "
+    "<<ampiezza o coppia coniugata, e un numero che decade soltanto NON entra>> e- gia- "
+    "impedito dal vocabolario chiuso dei tipi (MEMORIA-DENTRO-H); e il divieto di "
+    "pavimenti/rami e- gia- in rami_vietati. ### CIO- CHE VA RIFATTO, dopo il prototipo: "
+    "A16 (la forma dello stato: lo stato vive sulle ESTREMITA- D-ARCO), leggi.yaml e il "
+    "generatore (la legge diventa LA MONETA, e H emerge nel limite continuo), e la mitosi "
+    "(la regola delle estremita- nuove). ### E la DECISIONE sull-integratore a strati e- "
+    "SUPERATA da questa.",
+    "nessun codice: la voce e- il posto, e il prototipo del piano e- il primo lavoro",
+    "PRONTO")
+
 METODI['PI-CICLO-DIPENDENZE'] = (
     "NATO NELL-ERA 2, per il mandato di Luca del 2026-10-10 che trasforma le domande "
     "aperte in voci: un CICLO in `dipende_da` fa FALLIRE `valida`. ### SI APPLICA "

@@ -12359,3 +12359,13 @@ Ogni dato di `db_era2/` ha ### **il suo TIMBRO accanto**, col campo `versione_da
 ### ✅ **LA LISTA E- NELLA FORMA CHE IL MANDATO CHIEDE:** in cima ### **LA PROSSIMA, da sola** *(oggi `DOMANDA-D9-GEOMETRIA`: e- la `CRITICA` senza dipendenze aperte)*; sotto ### **le altre per priorita-**, ciascuna con ### **«aspetta: …»**; in fondo ### **il conto** — ### **aperte `9`, di cui pronte `5`.**
 
 ### ⭐ **E C-E- UNA SEZIONE IN PIU- CHE IL MANDATO NON CHIEDEVA, e la dichiaro:** ### **le domande che vivono ancora in una NOTA e non nei campi** *(i due criteri vecchi: la nota «da decidere da Luca» e lo stato `DA_CLASSIFICARE`)*. ### ⚠ **Non le ho tolte:** una lista che ne nasconde una parte ### **sembra completa**, e questa dice ### **che non lo e-.**
+
+## MANDATO ⑩, PUNTI `1` e `2`: LA CAMMINATA A MONETA — ### **e la direzione viene da un ASSIOMA, non da una preferenza** *(2026-10-10)*
+
+### 📌 **DECISIONE DI LUCA:** la dinamica dell-era `2` e- una ### **camminata quantistica a moneta**, ed e- ### **UN-UNICA REGOLA PER TUTTE LE GRANDEZZE.** Lo stato vive ### **sulle estremita- d-arco**; un passo e- ### **moneta** *(unitaria, invariante per permutazione — nessun arco privilegiato)* ### **+ spostamento** *(tutti gli archi INSIEME: niente strati, niente ordine)*; e il cono e- ### **esattamente un arco per passo.**
+
+### ⭐ **E L-ARGOMENTO PIU- FORTE E- QUESTO: l-anisotropia dell-integratore a strati nasce DALL-ORDINE DEGLI STRATI**, cioe- ### **dall-ordine di esecuzione**, e ### **`A17` lo esclude dalla fisica.** ### **Quindi la direzione viene DA UN ASSIOMA**, non da una preferenza — e questo ### **la rende discutibile sul merito**, che e- il contrario di un gusto.
+
+### ⛔ **IL VINCOLO CHE TAGLIA:** ogni grandezza dinamica deve essere ### **un-ampiezza o una coppia coniugata** — ### **un numero che DECADE soltanto non puo- entrare.** ### ✅ **E- `A16` con [[MEMORIA-DENTRO-H]]**, e quella voce dice che ### **il vocabolario chiuso dei tipi lo impedisce gia- per costruzione.**
+
+### ⚠ **E IL PUNTO `2` SI REGISTRA COME IPOTESI DA MISURARE, non come fatto** — lo chiede il mandato. ### ⭐ **Ma le sue DUE CONDIZIONI valgono piu- dell-ipotesi, perche- ESCLUDONO delle forme:** la moneta deve trattare le due ### **bande** simmetricamente *(o l-asimmetria materia/antimateria e- ### **messa a mano**)*, e una non linearita- ### **a segno fisso** sarebbe ### **attrattiva per una banda e repulsiva per l-altra** — terrebbe la materia e ### **disferebbe l-antimateria PER COSTRUZIONE.**

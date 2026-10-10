@@ -9,13 +9,13 @@
 | | quanti |
 |---|--:|
 | **`PORTATO`** | `107` |
-| **`PRONTO`** | `2` |
+| **`PRONTO`** | `3` |
 | **`DA_PORTARE`** | `16` |
 | **`DA_DECIDERE`** | `5` |
 | **`NON_SI_APPLICA`** | `7` |
-| **in tutto** | ### **`137`** |
+| **in tutto** | ### **`138`** |
 
-### ⚠ **E IL NUMERO `137` E- MISURATO, non stimato:** viene dal perimetro che l-indice calcola, e ### **il mandato ne nominava <<una decina>>** per nome piu- *<<e le cure di architettura>>*. ### **La decina era `20`.**
+### ⚠ **E IL NUMERO `138` E- MISURATO, non stimato:** viene dal perimetro che l-indice calcola, e ### **il mandato ne nominava <<una decina>>** per nome piu- *<<e le cure di architettura>>*. ### **La decina era `20`.**
 
 ---
 
@@ -135,12 +135,13 @@
 
 ---
 
-## `PRONTO` — `2` metodi
+## `PRONTO` — `3` metodi
 
 > ### ✅ **DECISO E NON BLOCCATO**: si fa ### **quando c-e- la materia**, e `dove` dice ### **che cosa lo fa rispettare GIA- OGGI**
 
 | id | classe | come si applica all-era `2` | dove |
 |---|---|---|---|
+| **`CAMMINATA-A-MONETA`** | `STANDARD` | DECISIONE DI LUCA del 2026-10-10: la dinamica dell-era 2 e- una CAMMINATA QUANTISTICA A MONETA, UN-UNICA REGOLA per tutte le grandezze. ### SI APPLICA ALL-ERA 2 COSI-, e OGGI NIENTE E- COSTRUITO: il mandato dice <<registra soltanto: nessun codice di fisica, nessuna legge, nessuna corsa>>. ### CIO- CHE E- GIA- VERO: il vincolo <<ampiezza o coppia coniugata, e un numero che decade soltanto NON entra>> e- gia- impedito dal vocabolario chiuso dei tipi (MEMORIA-DENTRO-H); e il divieto di pavimenti/rami e- gia- in rami_vietati. ### CIO- CHE VA RIFATTO, dopo il prototipo: A16 (la forma dello stato: lo stato vive sulle ESTREMITA- D-ARCO), leggi.yaml e il generatore (la legge diventa LA MONETA, e H emerge nel limite continuo), e la mitosi (la regola delle estremita- nuove). ### E la DECISIONE sull-integratore a strati e- SUPERATA da questa. | nessun codice: la voce e- il posto, e il prototipo del piano e- il primo lavoro |
 | **`LAMBDA-INVARIANTE-OGNI-ARCO`** | `STANDARD` | DECISIONE DI LUCA del 2026-10-10 (punto 4 delle sei): la lunghezza minima lambda e- un INVARIANTE SU OGNI ARCO, non una regola di mitosi -- nessun arco, in nessun istante, per effetto di nessuna legge o regola, sta sotto lambda. ### SI APPLICA ALL-ERA 2 CON TRE LIVELLI, e oggi UNO SOLO e- coperto: (a) la BARRIERA dentro H MAI come pavimento -- e il generatore GIA- RIFIUTA max/clip (`rami_vietati`, A14), quindi il DIVIETO e- coperto per costruzione mentre la FORMA della barriera e- una legge da DERIVARE (A1) e oggi NON esiste; (b) il CANCELLO nelle regole di nascita: le regole non esistono ancora (punto 11a), quindi NON e- coperto; (c) il controllo del grafo a ogni passo: il controllo ESISTE e FERMA (5999019), ma NON c-e- nessuna variabile di lunghezza da controllare -- `leggi.yaml` dichiara solo `psi`. ### IL CENSIMENTO DELL-ERA 1 E- CONFERMATO rifacendolo con lo strumento originale: 27 punti, 24 cancelli, 3 PAVIMENTI (`lambda_nodi`, `_smorza`, `_nasce`), 0 scritti come 2*LAM. | `primo_ordine/leggi/schema.py::rami_vietati` copre il divieto del pavimento; il resto NON e- coperto, e la voce dice quale livello manca e perche- |
 | **`SCHED-T3-REGOLE`** | `MISURA` | le regole di composizione, 94 scritture in cinque forme: ### nell-era 2 le regole non esistono ancora -- e- il punto 11(a). ### DAL 2026-10-10 E- `PRONTO`, non piu- soltanto da fare: la DECISIONE DI LUCA sulla FORMA di una regola e- presa (il `bilancio` e- una FORMULA che il generatore verifica, non il nome di un meccanismo), e lo schema la fa rispettare. ### Resta da fare QUANDO esiste la prima regola vera, e NON prima | `leggi/schema.py::valida_legge`, il ramo `regola`; il collaudo dello schema da 34 a 37, coi TRE bracci che devono fallire |
 

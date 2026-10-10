@@ -9,7 +9,7 @@
 | `DOCUMENTAZIONE` | `2` | 1 |
 | `DOCUMENTAZIONE` | `ENTRAMBE` | 8 |
 | `FISICA` | `1` | 343 |
-| `FISICA` | `2` | 29 |
+| `FISICA` | `2` | 31 |
 | `FISICA` | `ENTRAMBE` | 17 |
 | `INFRASTRUTTURA` | `1` | 39 |
 | `INFRASTRUTTURA` | `2` | 14 |
@@ -115,6 +115,7 @@
 | `C7` | MISURA | FISICA | 1 | ### **CHIUSA** |  | C7 VALE SEMPRE ⏳[EPOCA 1 · MISURA] / La cache csnodoprev veniva scartata a ogni  |
 | `C8` | MISURA | FISICA | 1 | ### **CHIUSA** |  | C8 VALE SEMPRE ⏳[EPOCA 1 · MISURA] / LA FASE 2 NON SI CHIUDE. Col tempo-luce cab |
 | `C9` | MISURA | FISICA | 1 | ### **CHIUSA** |  | C9 VALE SEMPRE ⏳[EPOCA 1 · MISURA] / --tau-luce ha un effetto GRANDE sulla pende |
+| `CAMMINATA-A-MONETA` | STANDARD | FISICA | 2 | ### **AGENDA** |  | la dinamica dell-era 2 e- una CAMMINATA QUANTISTICA A MONETA: una regola per tut |
 | `CARICA-DI-GAUGE` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | il segno di perc_chi dipende al 100 per cento dal rappresentante canonico: e' un |
 | `CARICA-PERCORSO` | FRONTE | FISICA | 1 | ### **SOSPESA** |  | l ordine in cui si chiude il filone della carica: cinque punti, e il primo si pu |
 | `CARICA-ROTAZIONE` | FRONTE | FISICA | 1 | ### **SOSPESA** |  | la carica e' il verso di rotazione collettivo: somma di /psi/^2 * phivel per mas |
@@ -418,6 +419,7 @@
 | `MASSA-MIGRA` | FRONTE | FISICA | 1 | ### **SOSPESA** |  | la massa segue i NODI o la COERENZA? E come cambia la sua FORMA? |
 | `MASSA-VUOTO` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 2 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
 | `MASSE-PESI-SOVRAPPOSTE` | FRONTE | FISICA | 2 | ### **AGENDA** |  | un nodo appartiene a PIU masse con peso diverso: una massa e una configurazione  |
+| `MATERIA-ANTIMATERIA-SPAZIO` | TEORIA | FISICA | 2 | ### **AGENDA** |  | materia, antimateria e spazio nella camminata: IPOTESI DA MISURARE |
 | `MAX-NODI-FERMA` | CURA | FISICA | 1 | ### **CHIUSA** |  | MAX_NODI e' una guardia di MEMORIA che oggi cambia la FISICA in silenzio: deve F |
 | `MCRIT-RICALCOLO` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | massa_critica_adattiva si ricalcola 7 volte per passo su stati diversi: e' una l |
 | `MEM-HEBB-PIANO-XY` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | dir_laterale ruota di 90 gradi nel SOLO piano xy e azzera z: un piano preferito |

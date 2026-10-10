@@ -93,7 +93,8 @@ BLOCCA = {"SI", "NO", "DA-DECIDERE", "DA VERIFICARE"}
 # ### SAREBBE UNA BUGIA**, perche- `tipo_era1` dice *<<che cosa era nell-era 1>>*
 # ### e queste ### **nell-era 1 non c-erano.**
 TIPI = {"difetto", "sospetto", "fronte", "misura", "cura", "presidio", "assioma",
-        "standard", "criterio", "criterio-locale", "decisione", "altro",
+        "standard", "criterio", "criterio-locale", "decisione", "teoria",
+        "altro",
         "non_definita"}
 FAM = {"A", "B", "C", "D", "E", "F", "G", "?"}
 TITOLO_MAX = 100     # [INDICE-LEGGERO] un titolo breve dev'essere breve: la stampa e' UNA riga
