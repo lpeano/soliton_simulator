@@ -4,8 +4,8 @@
 
 | | |
 |---|--:|
-| **voci che aspettano una decisione** | ### **`45`** |
-| **domande in tutto** | `45` |
+| **voci che aspettano una decisione** | ### **`15`** |
+| **domande in tutto** | `15` |
 | **segnaposto `NON_DEFINITA`**, che NON sono una domanda | `187` |
 
 ---
@@ -28,50 +28,13 @@
 
 ---
 
-## le CLASSIFICAZIONI da confermare -- `19`
+## le DOMANDE aperte -- `4`
 
 | id | `classe`/`dominio`/era/stato | LA DOMANDA | LA FRASE |
 |---|---|---|---|
-| `A1` | `STANDARD`/`FISICA`/`ENTRAMBE`/`APERTA` | CONFERMI `FISICA`/era `ENTRAMBE`? vincola la FORMA DELLE LEGGI o descrive il comportamento del sistema | LA LEGGE, NON IL NUMERO |
-| `A10` | `STANDARD`/`FISICA`/`ENTRAMBE`/`APERTA` | CONFERMI `FISICA`/era `ENTRAMBE`? vincola la FORMA DELLE LEGGI o descrive il comportamento del sistema | UNA SOLA GRANDEZZA PUO' LEGARE DUE DOMINI |
-| `A11` | `STANDARD`/`FISICA`/`ENTRAMBE`/`APERTA` | CONFERMI `FISICA`/era `ENTRAMBE`? vincola la FORMA DELLE LEGGI o descrive il comportamento del sistema | UN LIMITE E' UNA LEGGE, NON UNA TOPPA |
-| `A13` | `STANDARD`/`FISICA`/`ENTRAMBE`/`APERTA` | CONFERMI `FISICA`/era `ENTRAMBE`? vincola la FORMA DELLE LEGGI o descrive il comportamento del sistema | LAM È LA SCALA DI PLANCK DEL SISTEMA (decisione di Luca, 2026-09-24) |
-| `A14` | `STANDARD`/`FISICA`/`ENTRAMBE`/`APERTA` | CONFERMI `FISICA`/era `ENTRAMBE`? vincola la FORMA DELLE LEGGI o descrive il comportamento del sistema | LE GRANDEZZE SI CONSERVANO LOCALMENTE E SI DISSIPANO GLOBALMENTE (decisione di Luca, 2026-10-03) ASSIOMA deciso da Luca il 2026-10-03, e doc/ASSIOMI.m |
-| `A15` | `STANDARD`/`FISICA`/`ENTRAMBE`/`APERTA` | CONFERMI `FISICA`/era `ENTRAMBE`? vincola la FORMA DELLE LEGGI o descrive il comportamento del sistema | LA MEMORIA E DINAMICA, LOCALE, E CIO CHE DIMENTICA SI TRASFORMA (decisione di Luca, 2026-10-07) ASSIOMA deciso da Luca il 2026-10-07, e doc/ASSIOMI.md |
-| `A2` | `STANDARD`/`FISICA`/`ENTRAMBE`/`APERTA` | CONFERMI `FISICA`/era `ENTRAMBE`? vincola la FORMA DELLE LEGGI o descrive il comportamento del sistema | NESSUNA SCORCIATOIA GLOBALE |
-| `A3` | `STANDARD`/`FISICA`/`ENTRAMBE`/`APERTA` | CONFERMI `FISICA`/era `ENTRAMBE`? vincola la FORMA DELLE LEGGI o descrive il comportamento del sistema | NIENTE SI NORMALIZZA SUL PROPRIO INSIEME |
-| `A3c` | `STANDARD`/`FISICA`/`ENTRAMBE`/`APERTA` | CONFERMI `FISICA`/era `ENTRAMBE`? vincola la FORMA DELLE LEGGI o descrive il comportamento del sistema | un RAPPORTO confrontato con un MASSIMO / (115, accanto a due massimi di passi diversi) /... titolo_breve INTERO: un RAPPORTO confrontato con un MASSIM |
-| `A4` | `STANDARD`/`FISICA`/`ENTRAMBE`/`APERTA` | CONFERMI `FISICA`/era `ENTRAMBE`? vincola la FORMA DELLE LEGGI o descrive il comportamento del sistema | STRATIFICAZIONE CAUSALE |
-| `A5` | `STANDARD`/`FISICA`/`ENTRAMBE`/`APERTA` | CONFERMI `FISICA`/era `ENTRAMBE`? vincola la FORMA DELLE LEGGI o descrive il comportamento del sistema | CAUSALITA' DELLA MEDIAZIONE |
-| `A6` | `STANDARD`/`FISICA`/`ENTRAMBE`/`APERTA` | CONFERMI `FISICA`/era `ENTRAMBE`? vincola la FORMA DELLE LEGGI o descrive il comportamento del sistema | INERZIA (TEOREMA, non assioma) |
-| `A7` | `STANDARD`/`FISICA`/`ENTRAMBE`/`APERTA` | CONFERMI `FISICA`/era `ENTRAMBE`? vincola la FORMA DELLE LEGGI o descrive il comportamento del sistema | CONSERVAZIONE E STATO |
-| `A7b` | `STANDARD`/`FISICA`/`ENTRAMBE`/`APERTA` | CONFERMI `FISICA`/era `ENTRAMBE`? vincola la FORMA DELLE LEGGI o descrive il comportamento del sistema | COROLLARIO: uno stato non nasce indefinito (aggiunto 2026-09-17) |
-| `A8` | `STANDARD`/`METODO`/`ENTRAMBE`/`APERTA` | CONFERMI `METODO`/era `ENTRAMBE`? parla di COME SI LAVORA e si verifica | UN RAMO SILENZIOSO NON E' UN RAMO |
-| `A8b` | `STANDARD`/`METODO`/`ENTRAMBE`/`APERTA` | CONFERMI `METODO`/era `ENTRAMBE`? parla di COME SI LAVORA e si verifica | COROLLARIO: le cache CROSS-PASSO |
-| `A9` | `STANDARD`/`METODO`/`ENTRAMBE`/`APERTA` | CONFERMI `METODO`/era `ENTRAMBE`? parla di COME SI LAVORA e si verifica | UN PRESIDIO CHE NON IMPEDISCE NON E' UN PRESIDIO |
-| `P-DECADIMENTO` | `STANDARD`/`FISICA`/`ENTRAMBE`/`APERTA` | CONFERMI `FISICA`/era `ENTRAMBE`? vincola la FORMA DELLE LEGGI o descrive il comportamento del sistema | ogni decadimento e una trasformazione: cio che una grandezza perde diventa calore del vuoto locale PRINCIPIO deciso da Luca il 2026-10-07, reso VINCOL |
-| `P-MEMORIA` | `STANDARD`/`FISICA`/`ENTRAMBE`/`APERTA` | CONFERMI `FISICA`/era `ENTRAMBE`? vincola la FORMA DELLE LEGGI o descrive il comportamento del sistema | uno scalare con memoria acquista un verso: la memoria da la direzione PRINCIPIO deciso da Luca il 2026-10-07, reso VINCOLANTE da A15 di cui e la CONSE |
-
----
-
-## le DOMANDE aperte -- `15`
-
-| id | `classe`/`dominio`/era/stato | LA DOMANDA | LA FRASE |
-|---|---|---|---|
-| `A3-DISEGNO` | `DIFETTO`/`FISICA`/`2`/`AGENDA` | superata da A16/A17? le due decisioni di Luca del 2026-10-08 riscrivono cio- che questa voce chiede | IL DISEGNO ESCE DALLA DINAMICA — cura a sé, prima delle tre prove. pos entra nella fisica in… |
 | `DEC-NASCITA-PSI` | `DECISIONE`/`FISICA`/`2`/`AGENDA` | con che stato nasce un nodo -- la divisione dell-ampiezza del padre, e con che fase? Il vincolo e- che la norma totale si conservi (`A16.4`, `A14.3`) | con che stato nasce un nodo? il punto 3 chiede UNA REGOLA DICHIARATA per ogni grandezza Il punto 3 della seconda parte chiede che `crescita.py` assegn |
 | `DEC-REGOLA-FORMA` | `DECISIONE`/`FISICA`/`2`/`AGENDA` | che codice genera una `regola`, e che forma ha il suo `bilancio` -- una formula o un nome di meccanismo? | che CODICE genera una `regola`? il punto 11(a) chiede che crescita e vuoto si generino Il punto 11(a) della seconda parte chiede che ANCHE `crescita`  |
-| `G4-MEMARCO` | `CURA`/`FISICA`/`2`/`AGENDA` | superata da A16/A17? | MEMARCO — LA MEMORIA DEL MOTO TRADOTTA IN FORMA RELAZIONALE (aggiunta di Luca al §4, 2026-09-22) /… |
-| `I1` | `DIFETTO`/`FISICA`/`DA_CLASSIFICARE`/`DA_CLASSIFICARE` | CHE CLASSE, DOMINIO, ERA E STATO? <<IDEA DI LUCA, PER DOPO: costruire UNA massa, farla maturare, leggerne la struttura>>. ### E' FISICA, ma <<per dopo>> non dice SE e' dell'era 2: non sta nelle AGENDA di Luca, e indovinarlo sarebbe in | IDEA DI LUCA, per dopo: costruire UNA massa, farla maturare, leggerne la struttura sul grafo e... titolo_breve INTERO: IDEA DI LUCA, per dopo: costrui |
-| `K2a` | `CRITERIO`/`METODO`/`ENTRAMBE`/`APERTA` | era 1 o ENTRAMBE? dipende se cio- che dice riguarda un oggetto concreto dell-era 1 o una regola che sopravvive | SIGILLO osservabile-P1: si cambia SOLO `d` (un arco del cammino minimo x10) e la distanza DEVE... titolo_breve INTERO: SIGILLO osservabile-P1: si camb |
-| `K2b` | `CRITERIO`/`METODO`/`ENTRAMBE`/`APERTA` | era 1 o ENTRAMBE? | SIGILLO osservabile-P1: si cambia SOLO `pos` (un nodo di 10 LAM) e la distanza NON deve... titolo_breve INTERO: SIGILLO osservabile-P1: si cambia SOLO |
-| `M-FLUSSO` | `CURA`/`FISICA`/`2`/`AGENDA` | era 1 o 2 | memoria di flusso per ARCO, scalare e antisimmetrica, al posto di mem_mot CANDIDATA REGISTRATA il 2026-10-07 e NON DECISA, dal rapporto doc/MEMORIE_MA |
-| `M-ISTERESI` | `CURA`/`FISICA`/`2`/`AGENDA` | era 1 o 2 | un isteresi sui flip di perc_geom e perc_chi: COMPLEMENTO di MEM-VERSO, non alternativa CANDIDATA REGISTRATA il 2026-10-07 e NON DECISA, dal rapporto  |
-| `M-LEGAMI` | `CURA`/`FISICA`/`2`/`AGENDA` | era 1 o 2 | cos(dph - tw) al posto di cos(phi0_i - phi0_j): rende viva una memoria congelata CANDIDATA REGISTRATA il 2026-10-07 e NON DECISA, dal rapporto doc/MEM |
-| `M-MASSA` | `CURA`/`FISICA`/`2`/`AGENDA` | era 1 o 2 | pesi di appartenenza con memoria: AGGIUNGE stato, e dipende da MASSA-ID CANDIDATA REGISTRATA il 2026-10-07 e NON DECISA, dal rapporto doc/MEMORIE_MANC |
-| `MEM-VERSO` | `CURA`/`FISICA`/`2`/`AGENDA` | era 1 o 2 | il verso dell arco dalla sua MEMORIA (delta = twp - tw) invece che dal segno istantaneo CANDIDATA REGISTRATA il 2026-10-07 e NON DECISA, dal rapporto  |
-| `O4` | `FRONTE`/`FISICA`/`1`/`SOSPESA` | era 2? e- un-OBIEZIONE AL BERSAGLIO (la conservazione dell-energia), e un-obiezione al bersaglio non si chiude nell-era 1 | CONSERVAZIONE DELL'ENERGIA. L'energia assorbita non si riesce a bilanciare / **O4** / **CONSERVAZIONE DELL'ENERGIA.** L'energia assorbita non si riesc |
-| `Z104` | `FRONTE`/`FISICA`/`2`/`AGENDA` | superata da A16/A17? | Z104 APERTA ⏳[EPOCA 3 · DERIVAZIONE] / MEMARCO: LA MEMORIA DEL MOTO TRADOTTA IN FORMA... titolo_breve INTERO: Z104 APERTA ⏳[EPOCA 3 · DERIVAZIONE] / M |
+| `DEC-Z47-TRANSIZIONE` | `DECISIONE`/`METODO`/`ENTRAMBE`/`APERTA` | Z47 e- CHIUSA e CHIUSA -> AGENDA e- una transizione VIETATA. Tre vie: due passaggi (ma e- barare col presidio), ammettere la transizione, oppure una voce nuova per il programma della decisione 9 | Z47 non si puo- portare ad AGENDA: CHIUSA -> AGENDA e- una transizione VIETATA Il blocco 3 delle 43 decisioni dice <<Z47 -> era 2, AGENDA (e' il progr |
 | `Z47` | `FRONTE`/`FISICA`/`1`/`CHIUSA` | era 2? il testo dice <<PROGETTO DI LUNGO PERIODO -- NON INIZIATO. GEOMETRIA RELAZIONALE SENZA EMBEDDING>>, e un progetto non iniziato somiglia all-era 2 | Z47 VALE SEMPRE ⏳[EPOCA 1 · MISURA] / PROGETTO DI LUNGO PERIODO — NON INIZIATO. GEOMETRIA... titolo_breve INTERO: Z47 VALE SEMPRE ⏳[EPOCA 1 · MISURA]  |
 
 ---

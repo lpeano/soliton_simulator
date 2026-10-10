@@ -1932,6 +1932,17 @@ def crea_lotto(voci, reg, percorso):
         assert len(motivo) >= 20, ("`%s`: il motivo e- troppo corto per CITARE qualcosa: %r"
                                    % (idv, motivo))
         assert idv not in per, "`%s` ESISTE GIA-: si aggiorna, non si crea" % idv
+        # ### ⛔ **`P-ID`: UN ID CHE NASCE NON PUO- COLLIDERE** *(decisione di Luca,
+        # ### blocco `1` delle `43`)*: ne- con un ID, ne- con un ALIAS, ne- con uno dei
+        # ### ### **significati dichiarati di un omonimo**, e deve avere
+        # ### ### **almeno `4` caratteri.**
+        # ### ⚠ **<<CHE NASCE>> E- LA PAROLA CHE CONTA:** ### **`420` ID esistenti
+        # ### sono piu- corti di `4`** -- misurato -- e rinominarli ### **perderebbe
+        # ### degli ID.** Il presidio guarda ### **chi nasce**, non chi c-e-.
+        sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+        import _id_nuovo as IDN
+        _e = IDN.controlla_nuovo(idv, voci, etich)
+        assert not _e, ("`%s` NON PUO- NASCERE:" % idv) + NL + NL.join(_e)
         for k in campi:
             assert k in CHIAVI, "`%s`: `%s` non e- un campo dello schema" % (idv, k)
         for k, val in (campi.get("meta") or {}).items():

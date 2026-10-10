@@ -80,6 +80,11 @@ jobs:
           python primo_ordine/_genera.py
           git diff --exit-code -- primo_ordine doc/leggi_era2
 
+      - name: "### `P-ID` -- un ID che nasce non puo- collidere"
+        run: |
+          python csv/_id_nuovo.py
+          python csv/_id_nuovo.py --collaudo
+
       - name: "### IL REFERTO DELLA SECONDA PARTE -- rigenerato CON i lenti"
         # ### ⛔ Con `--con-lenti`: il collaudo della catena supera i 120
         # ### secondi, e nel `pre-commit` NON sta. Qui ci sta, e `git diff`

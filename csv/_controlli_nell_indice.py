@@ -56,6 +56,7 @@ SORGENTI = (
     "csv/_un_solo_esecutore.py",
     "csv/_modularita_era2.py",
     "csv/_confronti_e_dati.py",
+    "csv/_id_nuovo.py",
     "csv/indice.py",
     "csv/_hook_presidi.py",
     "csv/_hook_id_obbligatorio.py",

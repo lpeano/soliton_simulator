@@ -8,17 +8,17 @@
 
 | | quanti |
 |---|--:|
-| **`PORTATO`** | `90` |
+| **`PORTATO`** | `91` |
 | **`DA_PORTARE`** | `17` |
 | **`DA_DECIDERE`** | `5` |
-| **`NON_SI_APPLICA`** | `8` |
+| **`NON_SI_APPLICA`** | `7` |
 | **in tutto** | ### **`120`** |
 
 ### ⚠ **E IL NUMERO `120` E- MISURATO, non stimato:** viene dal perimetro che l-indice calcola, e ### **il mandato ne nominava <<una decina>>** per nome piu- *<<e le cure di architettura>>*. ### **La decina era `20`.**
 
 ---
 
-## `PORTATO` — `90` metodi
+## `PORTATO` — `91` metodi
 
 > ### ✅ **GIA- NELL-ERA `2`**, e `dove` dice dove
 
@@ -69,6 +69,7 @@
 | **`P-E8`** | `PRESIDIO` | NATO NELL-ERA 2, ed e- IL SOLO che NON IMPEDISCE: senza protezione del ramo la CI gira DOPO il push. ### E- UNA RETE CHE SEGNALA (`A9`), e qui avevo scritto il contrario. ### E non e- mai stata osservata girare | `.github/workflows/era2.yml`; ### SEGNALA, non impedisce |
 | **`P-E9`** | `PRESIDIO` | NATO NELL-ERA 2: ogni sigillo dichiara `LEGGE` e `CRITERI`, letti VIA AST, e il criterio `deve-fallire` e- OBBLIGATORIO. ### Un sigillo che DICE di avere criteri senza averli e- PEGGIO di uno senza criteri: il primo SEMBRA FATTO | `csv/_presidi_era2.py::pe9`, `pre-commit` + CI |
 | **`P-ES1`** | `PRESIDIO` | NATO NELL-ERA 2, e generalizza `H-P9`: chi avanza lo stato passa dallo schedulatore. ### Le eccezioni sono DICHIARATE una per una con il loro perche- (almeno 40 caratteri), e guarda le chiamate E I NOMI -- il driver assegna la funzione a una variabile, e un presidio che guardasse solo le chiamate NON VEDREBBE NIENTE | `csv/_un_solo_esecutore.py::controlla`, `pre-commit` + CI |
+| **`P-ID`** | `PRESIDIO` | un ID che NASCE non puo- collidere con un ID, un alias o uno dei significati dichiarati di un omonimo, e ha almeno 4 caratteri. ### Decisione di Luca, blocco 1 delle 43. ### E <<che NASCE>> e- MISURATO: 420 ID esistenti sono piu- corti di 4, e rinominarli PERDEREBBE degli ID | `csv/_id_nuovo.py::controlla_nuovo`, cablato in `crea-lotto` |
 | **`P-M1`** | `PRESIDIO` | e- il presidio di questo punto: ### SI APPLICA A SE- STESSO -- appena la sua voce e- nata, il perimetro lo ha incluso e lui ha RIFIUTATO IL COMMIT chiedendo questa riga. ### Non l-ho previsto: me l-ha detto lui | `csv/_metodi_era2.py::controlla`, cablato nel `pre-commit` e nella CI |
 | **`P-MOD`** | `PRESIDIO` | NATO NELL-ERA 2: la mappa dichiara CHI IMPORTA CHI, e un import fuori mappa, un CICLO, un modulo non in mappa o una dipendenza dichiarata e NON USATA sono rifiutati. ### Piu- il TETTO di righe e la responsabilita- in UNA RIGA: se non ci sta, IL MODULO FA DUE COSE | `csv/_modularita_era2.py::controlla` + `primo_ordine/_mappa.yaml` |
 | **`P-R1`** | `PRESIDIO` | NATO NELL-ERA 2: `A8` e `P5` cablati. Il CONTEGGIO dei rami lo misura l-AST, il RUOLO e- dichiarato a vocabolario chiuso. ### 27 rami in 12 funzioni, e NOVE SONO `default` -- un DEBITO che il punto 15(b) vietera-, dichiarato invece che nascosto | `csv/_rami_era2.py::controlla`, `pre-commit` + CI |
@@ -125,7 +126,7 @@
 |---|---|---|---|
 | **`A11`** | `STANDARD` | un limite e- una legge: ### IL PUNTO 2 DEL MANDATO lo rende un presidio -- il generatore rifiutera- `Min`, `Max`, `Piecewise`, `clip`, `Abs` con soglia | `_genera.py` (da fare, punto 2) |
 | **`A13`** | `STANDARD` | `lam` e- la scala di Planck del sistema: l-era 2 non ha ancora `lam` | nessun sito oggi |
-| **`A3`** | `STANDARD` | niente si normalizza sul proprio insieme: nessuna legge dell-era 2 normalizza, e il generatore non ha nessuna forma che lo faccia | nessun sito: da verificare a ogni legge nuova |
+| **`A3`** | `STANDARD` | niente si normalizza sul proprio insieme: nessuna legge dell-era 2 normalizza, e il generatore non ha nessuna forma che lo faccia. ### E CI STA DENTRO ANCHE IL CASO `A3c` (un rapporto confrontato con un massimo): non c-e- nessun rapporto cosi- nell-era 2 | nessun sito: da verificare a ogni legge nuova |
 | **`A6`** | `STANDARD` | inerzia come teorema: nessuna legge dell-era 2 la pretende ancora | nessun sito oggi |
 | **`A7b`** | `STANDARD` | uno stato non nasce indefinito: `stato.py::nuovo` azzera ESPLICITAMENTE, e ### il punto 3 del mandato lo estende alla NASCITA di un nodo | `stato.py`; `crescita.py` ancora da generare |
 | **`AUDIT-CURE`** | `FRONTE` | il censimento delle cure e del loro costo: ### IL PUNTO 10 chiede che ogni referto STAMPI il numero delle leggi, e che un commit che lo aumenta lo DICHIARI | punto 10, da fare |
@@ -157,14 +158,13 @@
 
 ---
 
-## `NON_SI_APPLICA` — `8` metodi
+## `NON_SI_APPLICA` — `7` metodi
 
 > ### **NON SI APPLICA, E IL PERCHE- E- SCRITTO** — un *<<non si applica>>* senza il perche- **non e- una risposta**
 
 | id | classe | come si applica all-era `2` | dove |
 |---|---|---|---|
 | **`A10`** | `STANDARD` | una sola grandezza puo- legare due domini: oggi lo stato e- solo `psi`, quindi non ci sono due domini da legare | nessun sito oggi; torna vero alla decisione 9 |
-| **`A3c`** | `STANDARD` | un rapporto confrontato con un massimo: non c-e- nessun rapporto cosi- nell-era 2 | nessun sito oggi |
 | **`C5`** | `MISURA` | `tauluce = d/cs` e- piatto: e- una misura dell-era 1 su una scena dell-era 1 | nessun sito nell-era 2 |
 | **`H-ETC-1`** | `PRESIDIO` | presidio PROPOSTO e NON CABLATO nell-era 1: non ha un corrispondente nell-era 2, dove non esiste `calcola_psi` | nessun sito |
 | **`H-P7`** | `PRESIDIO` | ogni flag porta il suo commento: ### l-era 2 NON HA FLAG di fisica, e il punto 15(c) dice che non ne avra- -- una legge e- in tabella o non c-e- | `SCHEDA_NEL_REGISTRO` lo limita al simulatore |

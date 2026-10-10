@@ -68,10 +68,17 @@ METODI = {
            "d-arco nell-ambito, e i simboli dei vicini non esistono nel suo ambiente",
            "`leggi/schema.py` + `_genera.py::ambiente`", "PORTATO"),
     "A3": ("niente si normalizza sul proprio insieme: nessuna legge dell-era 2 "
-           "normalizza, e il generatore non ha nessuna forma che lo faccia",
+           "normalizza, e il generatore non ha nessuna forma che lo faccia. "
+           "### E CI STA DENTRO ANCHE IL CASO `A3c` (un rapporto confrontato con un "
+           "massimo): non c-e- nessun rapporto cosi- nell-era 2",
            "nessun sito: da verificare a ogni legge nuova", "DA_PORTARE"),
-    "A3c": ("un rapporto confrontato con un massimo: non c-e- nessun rapporto cosi- "
-            "nell-era 2", "nessun sito oggi", "NON_SI_APPLICA"),
+    # ### ⛔ **LA RIGA DI `A3c` STAVA QUI, E LA DECISIONE DI LUCA LA HA TOLTA DAL
+    # ### PERIMETRO:** il blocco `2` delle `43` dice *<<`A3c` NON e- un assioma ma un
+    # ### caso della tabella di `A3` -> `CRITERIO`/`METODO`/`ENTRAMBE`>>*, e
+    # ### `CRITERIO` ### **non e- nel perimetro dei metodi** *(`STANDARD` e
+    # ### `PRESIDIO`)*. ### **`P-M1` ha RIFIUTATO IL COMMIT chiedendo questa cura**,
+    # ### e ha ragione. ### ⭐ **E il fatto MISURATO non si perde: e- ripiegato
+    # ### dentro `A3`**, che la decisione stessa nomina come suo padre.
     "A4": ("stratificazione causale: ### E- IL CUORE DELLA FOTOGRAFIA PER STRATO, e il "
            "cono si MISURA (1 arco per strato, esattamente zero oltre)",
            "`passo.py::strati` + `_collauda_passo.py` sezione (C)", "PORTATO"),
@@ -574,6 +581,12 @@ METODI['P-E9'] = (
 METODI['P-AB'] = (
     'NATO NELL-ERA 2: un `A`/`B` dichiara IL CAMPO UNICO in cui i bracci differiscono, e se ne differiscono due ### IL CONFRONTO NON PARTE (la lezione di `Z20`: due misure sovrapposte). ### Piu- i dati con la versione del formato e nessun file a meta-',
     '`csv/_confronti_e_dati.py::controlla`, `pre-commit` + CI', "PORTATO")
+METODI['P-ID'] = (
+    "un ID che NASCE non puo- collidere con un ID, un alias o uno dei significati "
+    "dichiarati di un omonimo, e ha almeno 4 caratteri. ### Decisione di Luca, blocco 1 "
+    "delle 43. ### E <<che NASCE>> e- MISURATO: 420 ID esistenti sono piu- corti di 4, e "
+    "rinominarli PERDEREBBE degli ID",
+    "`csv/_id_nuovo.py::controlla_nuovo`, cablato in `crea-lotto`", "PORTATO")
 METODI['VELENO-ARCHI-KEEP'] = (
     'il veleno allunga le derivate d-arco e non applica `keep`. ### IL PUNTO 4 E- VERO E VUOTO, e il collaudo lo MISURA: zero derivati, perche- lo stato e- solo `psi`. ### E la garanzia arriva dall-altro lato -- `senza_cache` rifiuta una memoria non dichiarata (`A8b`) -- quindi non c-e- IL BERSAGLIO',
     '`_collauda_passo.py` sezione (I); il braccio FALLIRA- al primo derivato', "PORTATO")

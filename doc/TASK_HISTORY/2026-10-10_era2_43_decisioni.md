@@ -83,3 +83,17 @@ una riga non ha una frase di Luca da citare, ### **non la scrivo.**
 - [ ] **blocco `3`**: le `13` domande, una per una, ### **col `git log -S` per `K2a` e `K2b`**
 - [ ] i **controlli**: `valida`, `953` ID, e `DA_DECIDERE_LUCA.md` ### **rigenerato**
 - [ ] il **referto**, e `_avanzamento.md`
+
+---
+
+## `4.` ANNOTAZIONI — ### **scritte DOPO, e il sopra NON si riscrive** *(par. `8`)*
+
+| | che cosa avevo scritto sopra | che cosa ho MISURATO |
+|---|---|---|
+| `a` | *«il blocco `1` chiude `11` domande senza scegliere: togliere la nota basta»*, col dubbio accanto | ### ⭐ **IL DUBBIO ERA GIUSTO E LA PREVISIONE NO:** togliere la nota ### **NON basta**. Gli `11` omonimi restano nell-elenco per il criterio `②` *(`meta.omonimo`)*, e il mandato dice che ### **il metadato RESTA.** ### ➜ **La cosa da curare e- IL CRITERIO, non le voci** — ed e- un commit a se- |
+| `b` | *«gli ID conservati: `953` — DEVE restare `953`»* | ### ⛔ **LETTURA SBAGLIATA.** `953` e- il conteggio delle voci dello ### **schema `1`** alla verifica del guardiano: ### **un numero storico.** L-invariante vero e- ### **<<nessun ID si perde>>**, e si misura sull-INSIEME: `990` a `a7485c8` → `992` ora, ### **persi `0`** |
+| `c` | *«una transizione vietata e- una regola, e aggirarla sarebbe barare col presidio»* *(il caso di FERMO `b`)* | ### ✅ **SI E- PRESENTATO, su `Z47`:** `CHIUSA → AGENDA` non esiste nella tabella. ### **Non l-ho aggirata:** la domanda e- `DEC-Z47-TRANSIZIONE`, e il resto non ne dipende |
+| `d` | il blocco `3` *(nulla: non avevo previsto questo)* | ### ⚠ **TRE VOCI SONO ERA `2`, dove `SUPERATA` e- VIETATO** *(`A3-DISEGNO`, `G4-MEMARCO`, `Z104`)*. Ho applicato ### **`era 1`** e ### **l-ho dichiarato come MIA INFERENZA** nel `motivo` di ogni riga: e- il trattamento che il mandato da- ### **esplicitamente** al gruppo `M-*` nella stessa frase |
+| `e` | la `nota_guardiano` *(nulla)* | ### ⚠ **LA SUA REGEX E- `^.{1,300}$`: LA STRINGA VUOTA NON PASSA.** Quindi una nota ### **non si svuota**: si ### **sostituisce con la decisione** — che e- anche cio- che il campo deve dire adesso. ### **Ha rifiutato `21` righe prima che lo capissi** |
+
+### ⚠ **E L-ORDINE DEI PUNTI DEL MANDATO `1` NON E- STATO QUELLO FISSATO** *(il `14` saltato, l-`8` anticipato)*: annotato, su rilievo di Luca.

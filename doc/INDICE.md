@@ -7,16 +7,15 @@
 | `DA_CLASSIFICARE` | `DA_CLASSIFICARE` | 187 |
 | `DOCUMENTAZIONE` | `1` | 11 |
 | `DOCUMENTAZIONE` | `ENTRAMBE` | 5 |
-| `FISICA` | `1` | 336 |
-| `FISICA` | `2` | 27 |
-| `FISICA` | `DA_CLASSIFICARE` | 1 |
-| `FISICA` | `ENTRAMBE` | 18 |
+| `FISICA` | `1` | 343 |
+| `FISICA` | `2` | 20 |
+| `FISICA` | `ENTRAMBE` | 17 |
 | `INFRASTRUTTURA` | `1` | 39 |
 | `INFRASTRUTTURA` | `2` | 12 |
 | `INFRASTRUTTURA` | `ENTRAMBE` | 14 |
-| `METODO` | `1` | 153 |
-| `METODO` | `2` | 2 |
-| `METODO` | `ENTRAMBE` | 79 |
+| `METODO` | `1` | 156 |
+| `METODO` | `2` | 3 |
+| `METODO` | `ENTRAMBE` | 80 |
 
 | id | classe | dominio | era | stato | blocca | titolo |
 |---|---|---|---|---|---|---|
@@ -39,9 +38,9 @@
 | `A2b` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 2 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
 | `A3` | STANDARD | FISICA | ENTRAMBE | ### **APERTA** |  | NIENTE SI NORMALIZZA SUL PROPRIO INSIEME |
 | `A3-CHIRALE` | FRONTE | FISICA | 1 | ### **SOSPESA** |  | Z71 — la carica chirale non si conserva / doc/RAMIFICAZIONI.md Z71 / APERTA. I d |
-| `A3-DISEGNO` | DIFETTO | FISICA | 2 | ### **AGENDA** |  | IL DISEGNO ESCE DALLA DINAMICA — cura a sé, prima delle tre prove. pos entra nel |
+| `A3-DISEGNO` | DIFETTO | FISICA | 1 | ### **SUPERATA** |  | IL DISEGNO ESCE DALLA DINAMICA — cura a sé, prima delle tre prove. pos entra nel |
 | `A3-FDT` | MISURA | FISICA | 1 | ### **CHIUSA** |  | FDT VALE SEMPRE ⏳[EPOCA 1 · CODICE] / FDT del solo scuotimento — il drift di n → |
-| `A3c` | STANDARD | FISICA | ENTRAMBE | ### **APERTA** |  | un RAPPORTO confrontato con un MASSIMO / (115, accanto a due massimi di passi di |
+| `A3c` | CRITERIO | METODO | ENTRAMBE | ### **APERTA** |  | un RAPPORTO confrontato con un MASSIMO / (115, accanto a due massimi di passi di |
 | `A4` | STANDARD | FISICA | ENTRAMBE | ### **APERTA** |  | STRATIFICAZIONE CAUSALE |
 | `A4-METRICHE` | FRONTE | METODO | 1 | ### **SOSPESA** |  | le METRICHE DEL SETTORE CHIRALE / doc/TASKHISTORY/2026-09-20metriche-settore-chi |
 | `A5` | STANDARD | FISICA | ENTRAMBE | ### **APERTA** |  | CAUSALITA' DELLA MEDIAZIONE |
@@ -183,6 +182,7 @@
 | `CONFIG-1` | DIFETTO | METODO | 1 | ### **SOSPESA** |  | APERTA il 2026-09-25 / LE SEI MISURE DI OGGI GIRAVANO CON 28 LEGGI SU 31 SPENTE, |
 | `CONSERVAZIONE-LOCALE` | FRONTE | FISICA | 2 | ### **AGENDA** |  | A14: ogni legge si giudica su tre domande -- energia locale, carica locale, tota |
 | `CONTA-RIGHE` | FRONTE | METODO | ENTRAMBE | ### **APERTA** |  | DUE CONVENZIONI PER CONTARE LE RIGHE: i miei strumenti contavano uno in piu' di  |
+| `CONTO-BOOLEANI-P5` | DIFETTO | METODO | 1 | ### **SOSPESA** |  | i booleani di modulo contati da P5 sono passati da 79 a 82 col simulatore INTATT |
 | `COPPIA-RAMP` | FRONTE | FISICA | 1 | ### **SOSPESA** |  | APERTA il 2026-09-26 / PERCHE' LA COPPIA NON PORTA ramp? Misurato sui figli (2 s |
 | `COSA-RICONTROLLARE` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 3 volte, MAI definito in un registro) [COSA-RICONTROLLARE] |
 | `CRESCITA-DOPO-Z43` | MISURA | FISICA | 1 | ### **SOSPESA** |  | con r = cs/CS_M la rete quasi non cresce: ~25 nascite contro ~1500 in 150 passi |
@@ -240,6 +240,7 @@
 | `DE-ACCOPPIABILITA` | MISURA | FISICA | 1 | ### **CHIUSA** |  | 4. DE-ACCOPPIABILITA' — analisi, non piano |
 | `DEC-NASCITA-PSI` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | con che stato nasce un nodo? il punto 3 chiede UNA REGOLA DICHIARATA per ogni gr |
 | `DEC-REGOLA-FORMA` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | che CODICE genera una `regola`? il punto 11(a) chiede che crescita e vuoto si ge |
+| `DEC-Z47-TRANSIZIONE` | DECISIONE | METODO | ENTRAMBE | ### **APERTA** |  | Z47 non si puo- portare ad AGENDA: CHIUSA -> AGENDA e- una transizione VIETATA |
 | `DIVISIONE-AUTOCONSISTENTE` | FRONTE | FISICA | 2 | ### **AGENDA** |  | la divisione dell arco come UNA legge: dove si rompe, cosa ereditano i figli, il |
 | `DOPPIA-COP` | CURA | FISICA | 1 | ### **SOSPESA** |  | LA CURA (b): la doppia copertura 4 pi e' un ASSIOMA e va resa STRUTTURALE, non m |
 | `DRIVER-SCENA-II` | CURA | INFRASTRUTTURA | 1 | ### **CHIUSA** |  | APERTA il 2026-09-26 (rilievo di Luca) / IL DRIVER NON SA FARE LA SCENA (ii), e  |
@@ -280,7 +281,7 @@
 | `G2` | MISURA | FISICA | 1 | ### **CHIUSA** |  | §2 DOVE SPINGE LA GRAVITA' / GLOBALE-DISEGNO §2 / FATTO. Il saldo vive sul CONFI |
 | `G3` | MISURA | FISICA | 1 | ### **CHIUSA** |  | §3 PROVA DI SPEGNIMENTO: la GRAVITA' BIFASE / GLOBALE-DISEGNO §3 / FATTA. sigill |
 | `G4` | MISURA | FISICA | 1 | ### **CHIUSA** |  | §4 PROVA DI SPEGNIMENTO: la MEMORIA DEL MOTO — flag MEMMOTO / GLOBALE-DISEGNO §4 |
-| `G4-MEMARCO` | CURA | FISICA | 2 | ### **AGENDA** |  | MEMARCO — LA MEMORIA DEL MOTO TRADOTTA IN FORMA RELAZIONALE (aggiunta di Luca al |
+| `G4-MEMARCO` | CURA | FISICA | 1 | ### **SUPERATA** |  | MEMARCO — LA MEMORIA DEL MOTO TRADOTTA IN FORMA RELAZIONALE (aggiunta di Luca al |
 | `G5` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 4 volte, MAI definito in un registro) [G5] |
 | `G5b` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 2 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
 | `G6` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 16 volte, MAI definito in un registro) |
@@ -319,7 +320,7 @@
 | `H6b` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 2 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
 | `HASHSEED-RIPROD` | DIFETTO | INFRASTRUTTURA | ENTRAMBE | ### **CHIUSA** |  | FALSO ALLARME: PYTHONHASHSEED non cambia lo stato del simulatore (23/23 identich |
 | `HDF5` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 8 volte, MAI definito in un registro) |
-| `I1` | DIFETTO | FISICA | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | IDEA DI LUCA, per dopo: costruire UNA massa, farla maturare, leggerne la struttu |
+| `I1` | FRONTE | METODO | 2 | ### **AGENDA** |  | IDEA DI LUCA, per dopo: costruire UNA massa, farla maturare, leggerne la struttu |
 | `I2` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 28 volte, MAI definito in un registro) |
 | `I3` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 8 volte, MAI definito in un registro) [I3] |
 | `I4` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 14 volte, MAI definito in un registro) [I4] |
@@ -341,8 +342,8 @@
 | `K11` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 2 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
 | `K12` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 2 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
 | `K2` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 19 volte, MAI definito in un registro) [K2] |
-| `K2a` | CRITERIO | METODO | ENTRAMBE | ### **APERTA** |  | SIGILLO osservabile-P1: si cambia SOLO `d` (un arco del cammino minimo x10) e la |
-| `K2b` | CRITERIO | METODO | ENTRAMBE | ### **APERTA** |  | SIGILLO osservabile-P1: si cambia SOLO `pos` (un nodo di 10 LAM) e la distanza N |
+| `K2a` | CRITERIO | METODO | 1 | ### **CHIUSA** |  | SIGILLO osservabile-P1: si cambia SOLO `d` (un arco del cammino minimo x10) e la |
+| `K2b` | CRITERIO | METODO | 1 | ### **CHIUSA** |  | SIGILLO osservabile-P1: si cambia SOLO `pos` (un nodo di 10 LAM) e la distanza N |
 | `K3` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 17 volte, MAI definito in un registro) [K3] |
 | `K4` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 12 volte, MAI definito in un registro) |
 | `K5` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 12 volte, MAI definito in un registro) [K5] |
@@ -366,10 +367,10 @@
 | `LOSCHMIDT-ECO` | FRONTE | METODO | ENTRAMBE | ### **APERTA** |  | l'eco di Loschmidt PER VOCE: un errore subito grande e' irreversibilita' del COD |
 | `LUNGA-BATTITO-CADUTA` | DIFETTO | INFRASTRUTTURA | 1 | ### **SOSPESA** |  | la corsa da 1000 passi cade al passo 1: la stampa cita un contatore RINOMINATO |
 | `LUNGHEZZA-COME-SEGNALE` | FRONTE | METODO | 1 | ### **SOSPESA** |  | usare len(x) < n come segnale di <<nodo nuovo>> e una toppa implicita: serve una |
-| `M-FLUSSO` | CURA | FISICA | 2 | ### **AGENDA** |  | memoria di flusso per ARCO, scalare e antisimmetrica, al posto di mem_mot |
-| `M-ISTERESI` | CURA | FISICA | 2 | ### **AGENDA** |  | un isteresi sui flip di perc_geom e perc_chi: COMPLEMENTO di MEM-VERSO, non alte |
-| `M-LEGAMI` | CURA | FISICA | 2 | ### **AGENDA** |  | cos(dph - tw) al posto di cos(phi0_i - phi0_j): rende viva una memoria congelata |
-| `M-MASSA` | CURA | FISICA | 2 | ### **AGENDA** |  | pesi di appartenenza con memoria: AGGIUNGE stato, e dipende da MASSA-ID |
+| `M-FLUSSO` | CURA | FISICA | 1 | ### **SUPERATA** |  | memoria di flusso per ARCO, scalare e antisimmetrica, al posto di mem_mot |
+| `M-ISTERESI` | CURA | FISICA | 1 | ### **SUPERATA** |  | un isteresi sui flip di perc_geom e perc_chi: COMPLEMENTO di MEM-VERSO, non alte |
+| `M-LEGAMI` | CURA | FISICA | 1 | ### **SUPERATA** |  | cos(dph - tw) al posto di cos(phi0_i - phi0_j): rende viva una memoria congelata |
+| `M-MASSA` | CURA | FISICA | 1 | ### **SUPERATA** |  | pesi di appartenenza con memoria: AGGIUNGE stato, e dipende da MASSA-ID |
 | `M-SPINORE` | FRONTE | FISICA | 2 | ### **AGENDA** |  | trasporto SU(2) per arco con memoria: il candidato campo di gauge della carica |
 | `M0` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 3 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
 | `M0a` | MISURA | INFRASTRUTTURA | 1 | ### **CHIUSA** |  | MISURA 0 di DRIVER-SCENA-II: `--nodi 0` NON e' rispettato -- net.n = 455 dopo `_ |
@@ -398,7 +399,7 @@
 | `MCRIT-RICALCOLO` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | massa_critica_adattiva si ricalcola 7 volte per passo su stati diversi: e' una l |
 | `MEM-HEBB-PIANO-XY` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | dir_laterale ruota di 90 gradi nel SOLO piano xy e azzera z: un piano preferito |
 | `MEM-HEBB-VERSO` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | memoria_hebbiana_moto dipende dal verso dell'arco: d0 cambia segno e lo shift va |
-| `MEM-VERSO` | CURA | FISICA | 2 | ### **AGENDA** |  | il verso dell arco dalla sua MEMORIA (delta = twp - tw) invece che dal segno ist |
+| `MEM-VERSO` | CURA | FISICA | 1 | ### **SUPERATA** |  | il verso dell arco dalla sua MEMORIA (delta = twp - tw) invece che dal segno ist |
 | `MEMORIE-MANCANTI` | DIFETTO | FISICA | 2 | ### **AGENDA** |  | il rapporto sulle memorie: il censimento dello stato, il bilancio, e le memorie  |
 | `MISURA-NORMA-ERA2` | MISURA | FISICA | 2 | ### **AGENDA** |  | la norma totale sum_nodi psi^dag psi: l-invariante QUADRATICO su cui si misura l |
 | `MITOSI-2LAM-ACCESO` | DIFETTO | DOCUMENTAZIONE | 1 | ### **CHIUSA** |  | il piano dichiara MITOSI_2LAM e PLAST_DIN OFF, e il DRIVER li ACCENDE: --mitosi- |
@@ -425,7 +426,7 @@
 | `O3` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 8 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
 | `O3a` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 2 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
 | `O3c` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 4 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
-| `O4` | FRONTE | FISICA | 1 | ### **SOSPESA** |  | CONSERVAZIONE DELL'ENERGIA. L'energia assorbita non si riesce a bilanciare |
+| `O4` | FRONTE | FISICA | 2 | ### **AGENDA** |  | CONSERVAZIONE DELL'ENERGIA. L'energia assorbita non si riesce a bilanciare |
 | `OKN-ASSERT` | DIFETTO | INFRASTRUTTURA | 1 | ### **CHIUSA** |  | CHIUSA il 2026-09-26, a run finito (residuo rilevato da Luca) / UN getattr(...,  |
 | `OMEGA-ETA` | MISURA | FISICA | 1 | ### **SOSPESA** |  | APERTA il 2026-09-26 (Luca: da seguire nel run base, NON una cura) / IL RAPPORTO |
 | `OSSERVABILE-P1` | DIFETTO | METODO | 1 | ### **CHIUSA** |  | APERTA il 2026-09-26 (rilievo di Luca) / NON ESISTE UNO STRUMENTO UFFICIALE PER  |
@@ -443,6 +444,7 @@
 | `P-E9` | PRESIDIO | METODO | 2 | ### **AGENDA** |  | ogni SIGILLO dichiara LEGGE e CRITERI, letti via AST: i criteri si fissano PRIMA |
 | `P-EQ-MEDIANA-ARCHI` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | P_eq prende la mediana dei PRIMI n ARCHI su m: un sottoinsieme arbitrario, non t |
 | `P-ES1` | PRESIDIO | INFRASTRUTTURA | 2 | ### **AGENDA** |  | UN SOLO ESECUTORE: chi avanza lo stato passa dallo schedulatore, o si dichiara |
+| `P-ID` | PRESIDIO | METODO | ENTRAMBE | ### **APERTA** |  | un ID che NASCE non puo- collidere con un ID, un alias o un omonimo, e ha 4 cara |
 | `P-M1` | PRESIDIO | METODO | ENTRAMBE | ### **APERTA** |  | ogni METODO dell-era 1 ha una riga che dice come si applica all-era 2 |
 | `P-MEMORIA` | STANDARD | FISICA | ENTRAMBE | ### **APERTA** |  | uno scalare con memoria acquista un verso: la memoria da la direzione |
 | `P-MOD` | PRESIDIO | INFRASTRUTTURA | 2 | ### **AGENDA** |  | la MODULARITA- non si degrada: la mappa dice cio- che e- previsto, il resto e- r |
@@ -767,7 +769,7 @@
 | `Z101` | MISURA | FISICA | 1 | ### **SOSPESA** |  | Z101 APERTA ⏳[EPOCA 3 · MISURA] / VALIDAZIONE A 600 PASSI: 6 criteri su 8 REGGON |
 | `Z102` | MISURA | FISICA | 1 | ### **CHIUSA** |  | Z102 CHIUSA PER MISURA ⏳[EPOCA 3 · MISURA] / CHI FA SCAPPARE d0: E' IL FRENO DEL |
 | `Z103` | MISURA | FISICA | 1 | ### **CHIUSA** |  | Z103 CHIUSA PER MISURA ⏳[EPOCA 3 · MISURA] / IL POZZO GRAVITAZIONALE USA IL DISE |
-| `Z104` | FRONTE | FISICA | 2 | ### **AGENDA** |  | Z104 APERTA ⏳[EPOCA 3 · DERIVAZIONE] / MEMARCO: LA MEMORIA DEL MOTO TRADOTTA IN  |
+| `Z104` | FRONTE | FISICA | 1 | ### **SUPERATA** |  | Z104 APERTA ⏳[EPOCA 3 · DERIVAZIONE] / MEMARCO: LA MEMORIA DEL MOTO TRADOTTA IN  |
 | `Z105` | MISURA | FISICA | 1 | ### **CHIUSA** |  | Z105 CHIUSA PER MISURA ⏳[EPOCA 3 · MISURA] / DOVE SPINGE LA GRAVITA': TUTTO IL S |
 | `Z106` | MISURA | FISICA | 1 | ### **CHIUSA** |  | Z106 CHIUSA PER MISURA ⏳[EPOCA 3 · MISURA] / GLI ARCHI PIU' SPINTI DA S09 NON SO |
 | `Z107` | MISURA | FISICA | 1 | ### **CHIUSA** |  | Z107 CHIUSA PER MISURA ⏳[EPOCA 3 · MISURA] / LA GRAVITA' NON E' IL MOTORE DELLA  |
