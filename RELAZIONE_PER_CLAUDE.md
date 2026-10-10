@@ -11977,3 +11977,15 @@ Ogni dato di `db_era2/` ha ### **il suo TIMBRO accanto**, col campo `versione_da
 ### 📌 **I NUMERI DEL CHECKPOINT:** `94` regole di gestione nell-indice, ### **`25` in `CLAUDE.md`** *(par.`11`: `10`, par.`12`: `15`)*, ### **`9` senza presidio**, ### **`339` righe su `400`**, `0` duplicati, ### **`0` PERSE.**
 
 ### ➡ **E LA CODA E- FINITA: cinque mandati su cinque, nell-ordine registrato** — e l-ordine ### **si verifica da `git`**, perche- il task history di ognuno e- ### **antenato** dei commit del suo lavoro.
+
+## PUNTO `1`: `P-DET` PRETENDEVA <<NESSUNA DIFFERENZA>>, e in CI FALLIVA SEMPRE *(2026-10-10)*
+
+### ⛔ **IL GUARDIANO HA RAGIONE, e l-ho RIPRODOTTO prima di curare.** Il braccio *«le versioni di ADESSO coincidono col blocco»* pretendeva ### **`scarti()[1] == []`**, cioe- ### **nessuna differenza.** ### ⚠ **In CI la piattaforma e- LINUX e `requirements.txt` installa con `>=`:** le versioni sono ### **piu- nuove del blocco**, quindi ### **quel braccio FALLIVA SEMPRE la-.**
+
+### ⭐ **E LA PARTE PEGGIORE E- CHE CONTRADDICEVA UN ALTRO BRACCIO DELLO STESSO COLLAUDO:** due righe sotto c-era *«una versione PIU- NUOVA del blocco NON ferma»*. ### ⛔ **Due bracci dello stesso collaudo pretendevano cose OPPOSTE**, e nessuno dei due lo diceva.
+
+### ✅ **CIO- CHE IL BLOCCO PROMETTE E- <<NIENTE FERMA>>, NON <<niente cambia>>:** che una versione ### **piu- vecchia** fermi, e che le differenze ### **finiscano NEL TIMBRO.** ### ⭐ **E il timbro e- il posto dove una corsa dichiara di NON ESSERE CONFRONTABILE AL BIT con un-altra: il blocco non serve a impedire, serve a DIRE DOVE SI E- MISURATO.**
+
+### 📌 **E ADESSO SONO DUE BRACCI, non uno riscritto:** ### **<<niente ferma, qualunque siano le differenze>>** e ### **<<le differenze FINISCONO nel timbro>>.** ### **Il secondo non c-era, e senza di lui <<vanno nel timbro>> era una frase nel docstring.**
+
+### ✅ **RIPRODOTTO E VERIFICATO nella condizione esatta del guardiano** *(blocco `numpy 2.2.0`/`linux`, `CI=true`)*: ### **prima `12` su `13`, adesso `14` su `14`**, con ### **`2` differenze dal blocco e nessuna che ferma.** ### **Il braccio dei due processi byte-identici non e- stato toccato.**

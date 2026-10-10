@@ -127,9 +127,32 @@ def collaudo():
                                 "  ".join("%s=%s" % (k, v) for k, v in
                                           sorted(((bl or {}).get("versioni")
                                                   or {}).items()))))
-    esito("NON deve scattare: le versioni di ADESSO coincidono col blocco",
-          DET.scarti()[0] == [] and DET.scarti()[1] == [],
-          "### nessuna differenza")
+    # ### ⛔ **QUESTO BRACCIO PRETENDEVA <<NESSUNA DIFFERENZA>>, E ERA SBAGLIATO
+    # ### -- me lo ha detto il guardiano, su un clone Linux.** In CI la piattaforma e-
+    # ### ### **Linux** e `requirements.txt` installa con ### **`>=`**, quindi le
+    # ### versioni sono ### **PIU- NUOVE del blocco** e `scarti()[1]` ### **non e- mai
+    # ### vuoto.** ### ⚠ **Quindi il braccio FALLIVA SEMPRE in CI**, e
+    # ### ### **contraddiceva il braccio qui sotto**, che dice *<<una versione PIU- NUOVA
+    # ### NON ferma>>*: ### **due bracci dello stesso collaudo pretendevano cose
+    # ### opposte.**
+    # ### ✅ **CIO- CHE IL BLOCCO PROMETTE E- <<NIENTE FERMA>>, non <<niente
+    # ### cambia>>:** la promessa e- che una versione ### **piu- vecchia** fermi e che le
+    # ### differenze ### **finiscano NEL TIMBRO** -- e il timbro e- il posto dove una
+    # ### corsa dichiara di ### **non essere confrontabile al bit** con un-altra.
+    _ferma, _diff = DET.scarti()
+    esito("NON deve scattare: NIENTE FERMA, qualunque siano le differenze dal blocco",
+          _ferma == [],
+          "%d differenze dal blocco, e NESSUNA ferma. ### In CI ce ne sono SEMPRE "
+          "(Linux, e `requirements.txt` installa con `>=`): un braccio che pretendesse "
+          "ZERO differenze FALLIREBBE SEMPRE la- -- ed e- quello che faceva"
+          % len(_diff))
+    _t = DET.per_il_timbro()
+    esito("### e le differenze dal blocco FINISCONO NEL TIMBRO",
+          _t.get("versioni_differenze") == _diff
+          and "versioni_blocco" in _t and "versioni" in _t,
+          "%s. ### E- qui che una corsa dichiara di NON ESSERE CONFRONTABILE AL BIT con "
+          "un-altra: il blocco non serve a impedire, serve a DIRE DOVE SI E- MISURATO"
+          % (_diff or "nessuna differenza su questa macchina"))
     # ### ⛔ **IL CASO CHE DEVE FERMARE: un blocco che chiede una versione PIU- NUOVA**
     # ### *(cioe- quella di adesso e- PIU- VECCHIA del blocco)*. ### ⚠ **Si costruisce
     # ### IN MEMORIA**, passando il blocco finto: ### **il file sul disco non si tocca.**
