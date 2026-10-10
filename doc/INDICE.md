@@ -9,7 +9,7 @@
 | `DOCUMENTAZIONE` | `2` | 1 |
 | `DOCUMENTAZIONE` | `ENTRAMBE` | 8 |
 | `FISICA` | `1` | 343 |
-| `FISICA` | `2` | 38 |
+| `FISICA` | `2` | 41 |
 | `FISICA` | `ENTRAMBE` | 17 |
 | `INFRASTRUTTURA` | `1` | 39 |
 | `INFRASTRUTTURA` | `2` | 16 |
@@ -558,6 +558,8 @@
 | `PROPOSTA-SCANSIONE-FORZA-NONLINEARE` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | la coerenza del cluster migliora con la forza: si estende la scansione? |
 | `PROVA-COMB` | FRONTE | FISICA | 1 | ### **SOSPESA** |  | LA PROVA COMBINATA: TUTTE LE CURE APPROVATE ACCESE INSIEME — 600 passi, stesso s |
 | `PROVA1-40-80` | MISURA | FISICA | 1 | ### **SOSPESA** |  | i NODI delle masse del passo 0 si avvicinano piu' dei controlli a 40-80 passi; i |
+| `PROVV-U-FISSE-TRE-SCENE` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | le matrici d-arco sono FISSE, in tre scene dichiarate: provvisorio |
+| `PROVV-VERSORI-NON-RELAZIONALI` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | i versori del riferimento locale sono DATI e non relazionali: provvisorio |
 | `PSI-FLASH` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | /psi/ SALTA di 1.6x nei passi con nascite: due siti ricalcolano psi dopo la mito |
 | `Q0` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 3 volte, MAI definito in un registro) [Q0] |
 | `Q1` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 13 volte, MAI definito in un registro) [Q1] |
@@ -727,6 +729,7 @@
 | `SOGLIA-MITOSI-3PI` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | la soglia di mitosi e 2pi + pi col pi di dipolo MASSIMO, e in questa scena il di |
 | `SOGLIA-NON-MODULATA` | MISURA | FISICA | 1 | ### **CHIUSA** |  | la modulazione 0.3 della soglia non agisce: il gradiente di tempo proprio e' zer |
 | `SOTTO-PASSO` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 4 volte, MAI definito in un registro) [SOTTO-PASSO] |
+| `SPIN-LEGATO-AL-MOTO` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | lo spin si lega al moto: una moneta exp(-i eps dtau sigma.n) e il trasporto U(2) |
 | `SPINORE-SENZA-FASE` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | la coppia muove phivel ma deriva da un'ALTRA fase: lo spinore ha un orologio tut |
 | `STANDARD-1` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 10 volte, MAI definito in un registro) [STANDARD 1] |
 | `STANDARD-10` | STANDARD | METODO | ENTRAMBE | ### **APERTA** |  | STANDARD 10 — UNA CURA NON AUMENTA IL NUMERO DELLE LEGGI (criterio di Luca, 2026 |

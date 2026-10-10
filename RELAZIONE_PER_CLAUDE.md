@@ -12738,3 +12738,21 @@ Ogni dato di `db_era2/` ha ### **il suo TIMBRO accanto**, col campo `versione_da
 ### ⛔ **E LA LOGICA DI PIATTAFORMA SI PROVA, non si promette:** un braccio rigira il collaudo ### **FINGENDO posix**, in un processo a parte, e pretende ### **codice `0`** e ### **`4` non applicabili** — i ### **tre** bracci che vogliono Windows, ### **piu- il braccio stesso**, che la- non puo- girare. ### ⚠ **E l-etichetta dice che la piattaforma e- FINTA**, perche- un-uscita che dice <<posix>> su una macchina Windows ### **sarebbe una bugia leggibile.**
 
 ### 📌 **I NUMERI:** su Windows ### **`9` su `9`, `0` non applicabili**; fingendo posix ### **`5` su `5`, `4` non applicabili, codice `0`.**
+
+## ✅ **IL `v2`, PUNTI `1` e `2`: LA DECISIONE E- UNA VOCE, E IL TASK HISTORY VIENE PRIMA DEL CODICE** *(2026-10-10)*
+
+### 📌 **LA DECISIONE:** `SPIN-LEGATO-AL-MOTO`, collegata a `CAMMINATA-A-MONETA`, `Z47`, `DOMANDA-D9-GEOMETRIA`, `D13`, `DOPPIA-COP`, `M-SPINORE` e `MATERIA-ANTIMATERIA-SPAZIO`. ### ⭐ **E `M-SPINORE` non l-avevo cercata io: l-ho TROVATA nell-indice** — e- del `2026-10-07`, si chiama *<<trasporto `SU(2)` per arco con memoria: il candidato campo di gauge della carica>>*, ed e- ### **esattamente questa decisione, ma con le `U` DINAMICHE.** ### ✅ **Quindi la decisione di oggi ne prende la parte STATICA**, e la dinamica ### **resta aperta dove era.**
+
+### ⭐ **E DUE DERIVAZIONI STANNO NEL TASK HISTORY, scritte PRIMA di qualunque numero.**
+
+### 📌 **LA PRIMA: `C = i sigma_y K` commuta con TUTTO `SU(2)`**, e il conto e- corto — per `M = aI + i b.sigma` con `a, b` reali vale ### **`M* = sigma_y^{-1} M sigma_y`**, perche- `sigma_x` e `sigma_z` sono ### **reali** e `sigma_y` e- ### **immaginaria**. ### ✅ **E la moneta di spin `exp(-i a sigma.n)` E- di quella forma**, quindi ### **commuta anche lei.**
+
+### ⛔ **MA LA FASE `U(1)` NON COMMUTA: LA INVERTE** — `C(e^{i t} psi) = e^{-i t} C psi`. ### ⚠ **Quindi il braccio `0` si dice in DUE PEZZI, e li ho scritti PRIMA di misurare:** senza `U(1)` ### **`C` commuta AL BIT**; con `t` diverso da zero ### **`C` manda la camminata in quella con `-t`**, cioe- ### **nell-ANTI-camminata.** ### ⭐ **Non e- un fallimento: e- che la coniugazione di CARICA inverte la CARICA**, quindi e- una simmetria ### **della coppia**, non della singola camminata con un campo acceso.
+
+### 📌 **LA SECONDA, ed e- la risposta al punto `4` del mandato:** la grandezza ### **locale, invariante di gauge e DISPARI sotto `C`** esiste, e ### **e- L-ELICITA-** — `h_k = somma sulle estremita- di (psi^dagger sigma psi) . n`. ### ✅ **`rho` e- invariante ma PARI**; `s = psi^dagger sigma psi` e- ### **DISPARI ma RUOTA**; ### ⭐ **il prodotto `s.n` e- invariante PERCHE- `s` e `n` ruotano INSIEME**, ed e- dispari perche- `s` lo e-.
+
+### ⚠ **E QUESTO DA- AL PUNTO `1` DEL MANDATO UNA SECONDA RAGIONE, che non era nel mandato:** i versori non servono solo perche- ### **senza di loro il gauge puro si toglie e lo spin si scollega** — servono anche perche- ### **senza una direzione NON ESISTE uno scalare locale invariante e dispari**, cioe- ### **la non linearita- simmetrica non si potrebbe nemmeno scrivere.**
+
+### ✅ **E LE SCELTE PROVVISORIE SONO VOCI, non aggettivi:** `PROVV-VERSORI-NON-RELAZIONALI` *(i versori sono DATI: l-origine relazionale e- `D9`)* e `PROVV-U-FISSE-TRE-SCENE` *(un campo fisso e- una memoria congelata: `A15` la vuole dentro `H`, ed e- `D13`)*. ### **`DA_DECIDERE_LUCA.md`: `5` voci, `5` domande.**
+
+### ⛔ **E IL TASK HISTORY DICHIARA UN BRACCIO CHE DEVE FALLIRE, PRIMA di scriverlo:** la scena di ### **gauge puro coi versori NON ruotati** deve dare osservabili ### **DIVERSE** — ### ⭐ **e- la PROVA che i versori non sono ridondanti**, e se quel braccio ### **NON fallisse, il punto `1` del mandato cadrebbe.**
