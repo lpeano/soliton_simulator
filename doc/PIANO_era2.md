@@ -96,6 +96,8 @@ dice di che cosa si decida, e nemmeno quali siano «le decisioni `1`, `3`, `10`�
 ### **`DEC-NASCITA-PSI`** con ### **`DEC-REGOLA-FORMA`**, che sono decisioni di fisica che
 aspettano Luca. ### **`F2` non può nemmeno cominciare prima che Luca risponda al primo.**
 
+### 📌 **NOTA D-INGRESSO, e NON una decisione** *(Luca, `2026-10-10`)*: il materiale tecnico di ### **[[Z47]]** entra come ### **INGRESSO della decisione `9`** — la geometria ### **dalle sole distanze** *(legge dei cosini)*, un ### **riferimento locale per nodo**, una ### **connessione** fra riferimenti vicini la cui ### **incompatibilita- E- LA CURVATURA**, gli archi ### **dalla topologia e non dal disegno**, e la ### **dimensione spettrale** come misura della dimensione emersa. ### ⚠ **Si applica con [[ISOTROPIA-MISURATA]]**, che pretende la misura dell-isotropia prima di dire che un campo e- emerso. ### ⛔ **E- una nota d-INGRESSO: non decide niente, e `presa: false` resta.**
+
 ### ⛔ **E DUE REGOLE DI LUCA DEL `2026-10-10` VINCOLANO `D9` PRIMA CHE SIA PRESA.**
 ### **[[VETTORI-DAI-BILINEARI]]**: vettori e tensori ### **SOLO dai bilineari dello
 spinore** *(`psi^dag sigma psi` sul nodo, `psi_i^dag psi_j` sull'arco)* e dalle ### **fasi

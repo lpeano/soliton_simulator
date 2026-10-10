@@ -937,6 +937,16 @@ def collaudo():
     ok += 1 if buono else 0
     print("  %-62s %s" % ("`_campo` CHIUDE una voce col punto",
                           "ok" if buono else "### SBAGLIATO"))
+    # ### ✅ **E UN CAMPO-DIZIONARIO SI SVUOTA**, perche- la regola vuole `chiusura`
+    # ### piena ### **solo con stato `CHIUSA`**: una voce che passa a `SUPERATA`
+    # ### ### **deve poterla svuotare**, e la sua storia vive nello STORICO.
+    _s = base(stato="CHIUSA", chiusura={"data": "x", "criterio": "c", "commit": "abc1234"})
+    _campo(_s, "chiusura=")
+    buono = _s["chiusura"] == {} and isinstance(_s["chiusura"], dict)
+    sotto += 1 if buono else 0
+    ok += 1 if buono else 0
+    print("  %-62s %s" % ("`_campo` SVUOTA un campo-dizionario, e resta un dizionario",
+                          "ok" if buono else "### SBAGLIATO"))
     # ### ⛔ **E IL VERSO CHE DEVE FALLIRE, che e- il piu- importante** (`P1-sexies`):
     # ### ### **un sotto-campo che NON ESISTE si rifiuta**, invece di nascere come un
     # ### campo fantasma che nessuno legge mai.
@@ -1111,6 +1121,16 @@ def _campo(v, c):
     ### **un campo fantasma che nessuno legge.**
     """
     k, _, val = c.partition("=")
+    # ### ✅ **UN CAMPO-DIZIONARIO SI SVUOTA con il valore VUOTO**, e serve: la
+    # ### regola vuole `chiusura` piena ### **solo con stato `CHIUSA`**, quindi una voce
+    # ### che passa a `SUPERATA` ### **deve poterla svuotare** -- e la sua storia
+    # ### ### **vive nello STORICO**, non in quel campo.
+    # ### ⚠ **Senza questo, `--campo chiusura=` ci metterebbe LA STRINGA VUOTA** dove
+    # ### il validatore aspetta un dizionario: ### **un campo di tipo sbagliato invece di
+    # ### un campo vuoto.**
+    if k in SOTTOCAMPI and val == "":
+        v[k] = {}
+        return
     if "." in k:
         radice, _, sotto = k.partition(".")
         assert radice in SOTTOCAMPI, (

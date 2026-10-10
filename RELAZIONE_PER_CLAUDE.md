@@ -12150,3 +12150,34 @@ Ogni dato di `db_era2/` ha ### **il suo TIMBRO accanto**, col campo `versione_da
 ### ⚠ **E IL PRESIDIO HA MORSO ME UNA TERZA VOLTA, nello stesso giro:** il controllo nuovo cercava il nome del generatore ### **in tutto il file**, e ### **il mio stesso commento che spiega la cura lo faceva scattare.** ### ⛔ **E- la classe della regex che non distingue un COMMENTO da un USO**, e ci sono cascato di nuovo. ### ✅ **Ora guarda SOLO il blocco `COLLAUDI`, SENZA i commenti** — e se il blocco non si legge ### **lo dice**, invece di tacere per vacuita-.
 
 ### ✅ **Collaudo della forma: `13` su `13`** *(un braccio in piu-: ### **un reperto che il comando unico rigenera**)*.
+
+## `Z47` DA `CHIUSA` A `SUPERATA` — ### **lo stato «chiusa» era FALSO, e «mai cominciata» anche** *(decisione di Luca, 2026-10-10)*
+
+### 📌 **OGNI FATTO VERIFICATO CON `git show`, non ricopiato dal prompt** — Luca lo scrive due volte, e i ### **dieci** commit che il mandato cita ### **esistono tutti e dicono quello che il mandato dice.**
+
+| | il fatto | il commit |
+|---|---|---|
+| la registrazione | *«`pos` e- l-UNICO SFONDO RIMASTO, e nessuno lo aveva scritto»* | `53b9443` *(2026-09-18)* |
+| il criterio di avvio, ### **MISURATO** | lo strumento `G1`, committato ### **PRIMA** di girarlo | `78a8a79` |
+| l-esito | *«IL POZZO USA IL DISEGNO, e la differenza CRESCE»* | `3c03223` |
+| le cure parziali | `A3-DISEGNO` | `b3b3dd7`, `9ca9748` |
+| | `L_CONSERVA` archiviato | `a51b24d` |
+| i censimenti di `pos` | `11` letture, poi ### **`14` leggi su `20`** | `8455a16`, `a34cc48` |
+| la decisione `3` di Luca | la sincronizzazione si toglie | `3e8375b` |
+| l-assioma che la supera | `A17` | `4f830bd` |
+
+### ⛔ **LO STATO «CHIUSA» ERA FALSO, e il campo lo diceva da se-:** la sua `chiusura` portava *«chiusa nell-era `1` (stato `chiuso` ### **al tag** `era-1-secondo-ordine`)»* — cioe- ### **NON un criterio di merito**: una chiusura ### **IN BLOCCO.**
+
+### ⚠ **E NON E- «MAI COMINCIATA»:** dopo la registrazione c-e- stato lavoro vero, e ### **il criterio di avvio scritto in `Z47` STESSA e- stato MISURATO** — per la regola scritta la- dentro, l-esito rendeva il progetto ### **PRIORITARIO.**
+
+### ⛔ **MA IL CUORE NON E- MAI STATO SCRITTO, e l-ho VERIFICATO sul blob congelato `b8c21049`, cercando PER NOME e non per riga** *(par.`2`)*: gli archi nascono ### **ancora** da `cKDTree(self.pos)` dentro `_allaccia`, e c-e- ### **ancora il centro di massa** *(`cmv` e `r_cm` leggono `self.pos`)*.
+
+### ⭐ **E QUI UNA DIFFERENZA DAL MANDATO, letta col tokenizer e non con una regex:** `riferimento_locale` e `connessione` ### **non esistono come identificatori** — il mandato ha ragione — ### **ma `olonomia` e `olonomia_lift_ciclo` SI-.** ### **E- il solo pezzo relazionale che l-era `1` ha gia- scritto**, e vale dirlo.
+
+### ✅ **QUINDI: `SUPERATA`, e `superata_da` `=` `A17`.** Il campo ammette ### **UN SOLO valore** *(un id di decisione, di assioma o di voce)*, quindi ### **`A17` e- la scelta, dichiarata.** E `A17` ### **e- anche una voce**, quindi il campo lo accetta.
+
+### ⚠ **E DUE COSE CHE IL MANDATO CHIEDE E CHE NON SI POSSONO FARE COSI-, dette invece che aggirate.** ### **(1)** *«aggiungi `Z47` e `Z103` ai `collegate` del nodo `D9`»*: il nodo ### **HA un ID nell-indice** *(`DEC-D9-GEOMETRIA`)*, ma sta in ### **`decisioni.jsonl`**, e quel registro ### **non ha un campo `collegate`.** ### **(2)** `Z47 → D9` nei `collegate` di `Z47`: il campo accetta ### **SOLO id di voci**, e il validatore l-ha rifiutato. ### ✅ **Quindi il legame vive dove PUO- vivere: la NOTA D-INGRESSO nel nodo `D9` del piano**, e `Z47` ↔ `Z103` nei due versi.
+
+### ⚠ **E UNA TENSIONE NEL MANDATO, che dichiaro invece di scegliere in silenzio:** il passo `1` dice *«lascia i metadati come sono»*, e il passo `5` dice *«`Z47` non deve piu- stare in `DA_DECIDERE_LUCA.md`»* — ma ### **cio- che la teneva nella lista era la sua `nota_guardiano`**, che diceva *«da decidere da Luca: era `2`?»*. ### ✅ **Tenere aperta una domanda a cui Luca HA risposto sarebbe FALSO**, quindi la nota ### **porta la risposta**, e i metadati dell-era `1` *(tipo, famiglia, avanzamento, validita-)* ### **restano come sono.**
+
+### ✅ **E `chiusura` si SVUOTA**, perche- la regola la vuole piena ### **solo con stato `CHIUSA`**: la storia di `Z47` ### **vive nello STORICO**, non in quel campo. ### 📌 **E per svuotarla ho dovuto insegnare al percorso unico a farlo:** `--campo chiusura=` ora mette ### **un dizionario vuoto** e non ### **la stringa vuota**, che sarebbe stata ### **un campo di tipo sbagliato invece di un campo vuoto.**
