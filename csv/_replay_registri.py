@@ -108,7 +108,7 @@ REGISTRI = {
     # ### ✅ **GENERATI, non reperti:** `csv/_registri_indice.py` li produce.
     "assiomi.jsonl": ("GENERATO", "id", None, None, None),
     "decisioni.jsonl": ("GENERATO", "id", None, None, None),
-    "migrazione_era1.jsonl": ("REPERTO", None, None, None, "9a5c45b40fb853fd"),
+    "migrazione_era1.jsonl": ("REPERTO", None, None, None, "8996d113388d49cc"),
     "conflitti_era1.jsonl": ("REPERTO", None, None, None, "da39a3ee5e6b4b0d"),
     # ### \u2705 **IL TERZO STATO:** le citazioni strutturate ### **crescono e non si
     # ### riscrivono.** Nessun blob *(cambierebbe a ogni aggiunta)* e nessuno storico
@@ -288,6 +288,49 @@ def mancanti(nome):
     return err
 
 
+def blob_committato(nome):
+    """### ⛔ **IL BLOB DICHIARATO DEVE COINCIDERE COI BYTE *COMMITTATI*, non con
+    quelli SUL DISCO.**
+
+    ### ⚠ **IL DIFETTO CHE QUESTO BRACCIO IMPEDISCE E- SUCCESSO, e l-ha trovato il
+    guardiano su un clone Linux:** il blob di `migrazione_era1.jsonl` era
+    ### **`9a5c45b40fb853fd`**, che sono i byte ### **sul disco di Windows (CRLF)**;
+    i byte committati sono ### **`8996d113388d49cc`.**
+    ### ⭐ **Un-impronta presa dal disco passa SULLA MACCHINA DI CHI L-HA PRESA e
+    fallisce su ogni altra** -- e `P-T2` la dichiarava <<verificata>>.
+
+    ### ⛔ **E IL CONFRONTO E- COL `HEAD`, non con lo stage:** lo stage e- cio- che
+    ### **sto per committare**, e un blob che coincide con lo stage ### **coincide con
+    se stesso.** ### ⚠ **Nel commit in cui un reperto cambia, questo braccio
+    SEGNALA e non ferma** -- perche- a quel momento `HEAD` e- ancora il vecchio, e
+    ### **fermare la- vorrebbe dire non poter MAI cambiare un reperto.**
+    """
+    import subprocess
+    stato, _c, _s, _d, b = REGISTRI[nome]
+    if stato != "REPERTO" or not b:
+        return []
+    rel = "doc/indice/" + nome
+    q = subprocess.run(["git", "show", "HEAD:" + rel], cwd=RADICE,
+                       capture_output=True)
+    if q.returncode != 0:
+        return ["`P-T2` `%s`: NON E- A `HEAD` (%s). ### Un reperto che non e- nel repo "
+                "non ha byte committati con cui confrontarsi"
+                % (nome, (q.stderr or b"").decode("utf-8", "replace").strip()[:60])]
+    atteso = hashlib.sha1(q.stdout).hexdigest()[:16]
+    if atteso == b:
+        return []
+    # ### ✅ **E SE IL FILE IN STAGE COINCIDE COL DICHIARATO, e- IL COMMIT CHE LO
+    # ### CAMBIA:** si SEGNALA, e il giro dopo il confronto con `HEAD` tornera- a tornare.
+    s = subprocess.run(["git", "show", ":" + rel], cwd=RADICE, capture_output=True)
+    if s.returncode == 0 and hashlib.sha1(s.stdout).hexdigest()[:16] == b:
+        return []
+    return ["`P-T2` `%s`: il blob dichiarato e- `%s` e i BYTE COMMITTATI danno `%s`. "
+            "### Un-impronta presa DAL DISCO passa sulla macchina di chi l-ha presa e "
+            "FALLISCE SU OGNI ALTRA -- ed e- successo: `migrazione_era1.jsonl` portava "
+            "l-impronta della sua versione CRLF. ### Si ricalcola da "
+            "`git show HEAD:%s`" % (nome, b, atteso, rel)]
+
+
 def reperto(nome):
     stato, _c, _s, _d, b = REGISTRI[nome]
     p = os.path.join(D, nome)
@@ -375,6 +418,11 @@ def controlla():
                 err.append("`P-T2` `%s`: `REPERTO` senza il blob dichiarato" % nome)
                 continue
             err += reperto(nome)
+            # ### ⛔ **E IL BLOB DICHIARATO SI CONFRONTA COI BYTE COMMITTATI:** il
+            # ### braccio sopra guarda ### **il disco**, questo guarda ### **il repo** --
+            # ### e ### **la differenza fra i due e- esattamente il difetto che il
+            # ### guardiano ha trovato.**
+            err += blob_committato(nome)
     return err
 
 
@@ -612,6 +660,67 @@ def collaudo():
           REGISTRI[_vittima] == _prima,
           "### `%s` di nuovo `%s`: si tocca la TABELLA, non il disco"
           % (_vittima, _prima[0]))
+
+    # ===================================================================================
+    #   ### ⭐ **IL BLOB CONTRO I BYTE COMMITTATI** *(il difetto del guardiano)*
+    # ===================================================================================
+    _rep = sorted(n for n, v in REGISTRI.items() if v[0] == "REPERTO")
+    print()
+    print("  i `REPERTO` e il loro blob, confrontato coi BYTE COMMITTATI:")
+    import subprocess as _sp
+    for _n in _rep:
+        _q = _sp.run(["git", "show", "HEAD:doc/indice/" + _n], cwd=RADICE,
+                     capture_output=True)
+        print("     %-24s dichiarato %s   committato %s"
+              % (_n, REGISTRI[_n][4],
+                 hashlib.sha1(_q.stdout).hexdigest()[:16] if _q.returncode == 0
+                 else "### NON A HEAD"))
+    esito("### il collaudo ha MATERIA: ci sono registri `REPERTO`",
+          len(_rep) >= 2,
+          "%d: ### senza di loro il braccio sotto passerebbe per vacuita-" % len(_rep))
+    esito("NON deve scattare: ogni blob dichiarato coincide coi BYTE COMMITTATI",
+          all(blob_committato(n) == [] for n in _rep),
+          "### e NON col disco: un-impronta presa dal disco passa SULLA MACCHINA DI CHI "
+          "L-HA PRESA e fallisce su ogni altra -- ed e- successo")
+    # ### ⛔ **IL CASO CHE DEVE SCATTARE: si tocca LA TABELLA, non il disco** -- e
+    # ### ### **il valore finto e- il blob del DISCO con le CRLF**, cioe- esattamente la
+    # ### forma del difetto vero.
+    # ### ⛔ **LA VITTIMA DEVE CONTENERE DELLE NEWLINE, e me lo ha detto un braccio
+    # ### che FALLIVA:** il primo `REPERTO` in ordine alfabetico e-
+    # ### `conflitti_era1.jsonl`, che e- ### **VUOTO** -- e sostituire `LF` con `CRLF` in
+    # ### un file vuoto ### **non cambia un byte**, quindi il blob finto era
+    # ### ### **identico a quello vero** e il caso non poteva scattare.
+    # ### ⭐ **E- la terza volta in due giorni che un caso <<deve fallire>> NON PUO-
+    # ### fallire per costruzione**, ed e- sempre lo stesso difetto: ### **un falso-uno
+    # ### che si veste da verde.**
+    _cand = [n for n in _rep
+             if bytes([10]) in io.open(os.path.join(D, n), "rb").read()]
+    assert _cand, ("### nessun `REPERTO` contiene una newline: il caso che deve fallire "
+                   "NON SI PUO- COSTRUIRE, e lo DICO invece di far passare un braccio "
+                   "che non prova niente")
+    _n = _cand[0]
+    _vero = REGISTRI[_n]
+    try:
+        _b = io.open(os.path.join(D, _n), "rb").read()
+        _crlf = hashlib.sha1(_b.replace(bytes([10]), bytes([13, 10]))).hexdigest()[:16]
+        REGISTRI[_n] = (_vero[0], _vero[1], _vero[2], _vero[3], _crlf)
+        esito("### DEVE scattare: un blob preso dal DISCO con le CRLF",
+              any("BYTE COMMITTATI" in x for x in blob_committato(_n)),
+              "`%s` con l-impronta della sua versione CRLF (`%s`): ### e- ESATTAMENTE la "
+              "forma del difetto che il guardiano ha trovato" % (_n, _crlf))
+    finally:
+        REGISTRI[_n] = _vero
+    esito("### e la tabella e- tornata come era",
+          REGISTRI[_n] == _vero,
+          "### si tocca LA TABELLA e non il disco: questo braccio NON PUO- lasciare "
+          "danno")
+    esito("NON deve scattare: `.gitattributes` copre le estensioni dell-indice",
+          all(("*%s text eol=lf" % e) in io.open(
+              os.path.join(RADICE, ".gitattributes"), encoding="utf-8").read()
+              .replace("  ", " ").replace(" text", " text")
+              for e in (".jsonl",)),
+          "### `*.jsonl` c-e-: senza di lui `core.autocrlf=true` riscrive 121 file al "
+          "primo `checkout`, e OGNI blob dichiarato diventa quello di un-altra macchina")
 
     esito("NON deve scattare: alla fine, `P-T2` TACE di nuovo",
           controlla() == [] and generati(con_lenti=False) == [],

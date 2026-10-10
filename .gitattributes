@@ -26,6 +26,25 @@
 *.txt text eol=lf
 *.json text eol=lf
 
+# ------------------------------------------------------------------------------------------
+# LE ESTENSIONI DELL'INDICE (2026-10-10, su rilievo del guardiano).
+#
+# MISURATO: il blob dichiarato di doc/indice/migrazione_era1.jsonl in
+# csv/_replay_registri.py era 9a5c45b40fb853fd, che sono i byte SUL DISCO DI WINDOWS (CRLF);
+# i byte COMMITTATI sono 8996d113388d49cc. Con `core.autocrlf = true` e NESSUNA regola per
+# `.jsonl`, `git checkout` riscrive LF -> CRLF, e un'impronta presa dal disco NON E' quella
+# del repo. Su un clone Linux lo stesso file ha LF, e `P-T2` FALLISCE.
+#
+# Erano 121 file .jsonl, 4 .yaml, 1 .yml, 2 .lock SENZA regola. E i due .bash: su Linux uno
+# script con i ^M muore con `bad interpreter`, ed e' la stessa lezione dei hook qui sotto --
+# misurata una volta, e dimenticata per questi due.
+# ------------------------------------------------------------------------------------------
+*.jsonl text eol=lf
+*.yaml  text eol=lf
+*.yml   text eol=lf
+*.lock  text eol=lf
+*.bash  text eol=lf
+
 # Binari: mai toccati.
 *.pkl binary
 *.npy binary
