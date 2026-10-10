@@ -12021,3 +12021,15 @@ Ogni dato di `db_era2/` ha ### **il suo TIMBRO accanto**, col campo `versione_da
 ### ✅ **LA CURA, in due pezzi.** ### **(1)** `_sabota(testo, a, b, che)` ### **CONTA l-ancora e SOLLEVA** se non e- unica: il collaudo ### **MUORE** invece di passare per vacuita-. ### **(2)** l-ancora si ### **CALCOLA dal contenuto vero** *(la lista `importa` letta dalla mappa, il `tetto_righe`, la `responsabilita-`)*, cosi- ### **non puo- scadere.**
 
 ### 📌 **MISURATO, non asserito:** rendendo l-ancora ### **non unica** *(due moduli con la stessa riga `importa`)*, il collaudo esce ### **`1`** e stampa *«### **LA SABOTATURA NON MORDE: l-ancora compare 2 volte, non 1**»*. ### **E la mappa e- stata RIPRISTINATA.** ### ✅ **`P-MOD`: `10`/`10`.**
+
+## `aggiorna` RIFIUTAVA SE STESSO — ### **il percorso UNICO di scrittura dell'indice falliva per QUALUNQUE modifica** *(2026-10-10)*
+
+### ⛔ **`CLAUDE.md` par. `9` dice:** *«### **SI SCRIVE SOLO CON** `python csv/indice.py aggiorna ID --campo … --motivo "…"`. ### **A mano, mai.**»* — e ### **quel comando falliva per qualunque modifica.** ### ⭐ **L-ho scoperto provando a chiudere la voce del commit precedente: il comando e- morto con TRE errori, e NESSUNO dei tre era un difetto della voce.**
+
+### 📌 **DUE difetti, uno sopra l-altro.** ### **(1) L-ORDINE:** validava ### **PRIMA** di scrivere la riga di storico e di rigenerare le viste — e in quel momento lo stato ### **non PUO- essere valido**: `PI-REPLAY` vede una voce che non coincide col `dopo` della sua ultima riga *(la riga non c-e- ancora)*, e le viste derivate sono ### **stale per costruzione**. ### **(2) I CAMPI-DIZIONARIO:** `--campo` prendeva solo campi ### **piatti**, quindi `chiusura` si poteva solo ### **schiacciare a stringa** — cioe- ### **il percorso unico NON SAPEVA CHIUDERE UNA VOCE.**
+
+### ⭐ **E `aggiorna_lotto` SAPEVA GIA- LA RISPOSTA, scritta nei suoi commenti:** *«le viste sono per costruzione stale finche- non si riscrivono: controllarli qui vorrebbe dire ### **rifiutare OGNI lotto** — e si rivalida ### **INTERO DOPO**»*. ### **Quindi tutte le scritture vere sono passate DAI LOTTI**, e la regola scritta in `CLAUDE.md` ### **non si poteva eseguire.** ### ⚠ **E- `A9` dal lato del percorso di scrittura: UNA VIA CHE NON SI PUO- PERCORRERE NON E- UNA VIA.**
+
+### ✅ **LA CURA, e NON aggiunge una regola** *(`9-ter`)*: `aggiorna` fa ### **esattamente cio- che fa `aggiorna_lotto`** — `derivati=False` prima, scrittura, viste, e ### **rivalidazione INTERA dopo**; e `_campo(v, c)` capisce ### **il PUNTO** *(`chiusura.criterio=`)*, con i sotto-campi ### **a vocabolario chiuso.**
+
+### 📌 **MISURATO NEI DUE VERSI:** prima, la chiusura di `SABOTATURA-NO-OP` moriva con ### **tre errori**; dopo la cura passa e stampa *«### **la validazione INTERA passa**»*. ### **Collaudo di `indice.py` da `26` a `31`, e QUATTRO dei cinque bracci nuovi DEVONO fallire** — un sotto-campo inventato, il punto su un campo che non e- dizionario, un campo fuori schema, e ### **la transizione `CHIUSA -> AGENDA`, che resta VIETATA: `_campo` non e- una scorciatoia che salta le regole degli stati.**

@@ -527,17 +527,7 @@ def aggiorna(voci, reg, idv, campi, metas, motivo, commit):
     v = per[idv]
     prima = json.loads(json.dumps(v))
     for c in campi:
-        k, _, val = c.partition("=")
-        assert k in CHIAVI, "`%s` non e' un campo dello schema" % k
-        if k == "stato":
-            assert val in TRANSIZIONI.get(v["stato"], set()), (
-                "TRANSIZIONE VIETATA: `%s` -> `%s` (vedi doc/INDICE_SCHEMA.md)"
-                % (v["stato"], val))
-        if k == "blocca":
-            val = val.upper() in ("SI", "TRUE", "1")
-        elif k in ("alias", "leggi", "variabili", "assiomi", "collegate"):
-            val = [x for x in val.split(",") if x]
-        v[k] = val
+        _campo(v, c)
     for m in metas:
         k, _, val = m.partition("=")
         spec = reg["metadati"].get(k)
@@ -551,7 +541,20 @@ def aggiorna(voci, reg, idv, campi, metas, motivo, commit):
             val = [x for x in val.split(",") if x]
         v.setdefault("meta", {})[k] = val
     v["aggiornata"] = {"data": _oggi(), "commit": commit or ""}
-    err = valida(voci, reg, verboso=False)
+    # ### ⛔ **IL DIFETTO, visto il `2026-10-10`: `aggiorna` RIFIUTAVA SE STESSO.**
+    # ### Validava ### **PRIMA** di scrivere la riga di storico e di rigenerare le viste --
+    # ### e in quel momento ### **lo stato NON PUO- essere valido**: `PI-REPLAY` vede una
+    # ### voce che non coincide col `dopo` della sua ultima riga *(la riga non c-e- ancora)*,
+    # ### e le viste derivate ### **sono stale per costruzione.**
+    # ### ⭐ **Quindi il comando che `CLAUDE.md` indica come IL SOLO MODO DI SCRIVERE
+    # ### fallisce per QUALUNQUE modifica**, e tutte le scritture vere sono passate dai
+    # ### ### **lotti.** ### ⚠ **E- `A9` dal lato del percorso di scrittura: una via
+    # ### che non si puo- percorrere non e- una via.**
+    # ### 📌 **E `aggiorna_lotto` SAPEVA GIA- LA RISPOSTA, scritta nei suoi
+    # ### commenti:** *<<le viste sono per costruzione stale finche- non si riscrivono:
+    # ### controllarli qui vorrebbe dire rifiutare OGNI lotto -- e si rivalida INTERO
+    # ### DOPO>>*. ### **Qui si fa LA STESSA COSA, e non una seconda regola** (`9-ter`).
+    err = _f5_storico(voci) + valida(voci, reg, verboso=False, derivati=False)
     assert not err, "la modifica NON passa la validazione:" + NL + NL.join(err[:8])
     _scrivi_jsonl(VOCI, voci)
     io.open(STORICO, "a", encoding="utf-8", newline=NL).write(
@@ -560,7 +563,12 @@ def aggiorna(voci, reg, idv, campi, metas, motivo, commit):
                     "prima": prima, "dopo": v},
                    ensure_ascii=False) + NL)
     viste(voci, reg)
-    print("  `%s` aggiornata, e lo storico ha una riga in piu'" % idv)
+    v2, r2 = carica()
+    err2 = valida(v2, r2, verboso=False)
+    assert not err2, ("### SCRITTO, MA LA VALIDAZIONE INTERA FALLISCE:" + NL
+                      + NL.join(err2[:10]))
+    print("  `%s` aggiornata, lo storico ha una riga in piu', e la validazione INTERA "
+          "passa" % idv)
 
 
 def aggiorna_lotto(voci, reg, percorso):
@@ -868,7 +876,55 @@ def collaudo():
     print("  %-52s %-12s %s" % ("### vista TSV MODIFICATA A MANO",
                                 "VISTO" if buono else "non visto",
                                 "ok" if buono else "### SBAGLIATO"))
-    tot = len(casi) + len(vietate) + 2
+    # ===================================================================
+    #   `_campo()`: IL PERCORSO UNICO IMPARA A CHIUDERE  --  nei DUE versi
+    # -------------------------------------------------------------------
+    # ### ⛔ **Prima del `2026-10-10` il percorso unico NON SAPEVA CHIUDERE:**
+    # ### `chiusura` si poteva solo ### **schiacciare a stringa**, e il validatore,
+    # ### che pretende `chiusura.criterio` e `chiusura.commit`, sarebbe ANDATO IN ERRORE.
+    sotto = 0
+    _v = base(stato="APERTA")
+    _campo(_v, "stato=CHIUSA")
+    _campo(_v, "chiusura.criterio=il criterio")
+    _campo(_v, "chiusura.commit=abc1234")
+    _campo(_v, "chiusura.data=2026-10-10")
+    buono = (_v["stato"] == "CHIUSA" and isinstance(_v["chiusura"], dict)
+             and _v["chiusura"]["criterio"] == "il criterio"
+             and _v["chiusura"]["commit"] == "abc1234")
+    sotto += 1 if buono else 0
+    ok += 1 if buono else 0
+    print("  %-62s %s" % ("`_campo` CHIUDE una voce col punto",
+                          "ok" if buono else "### SBAGLIATO"))
+    # ### ⛔ **E IL VERSO CHE DEVE FALLIRE, che e- il piu- importante** (`P1-sexies`):
+    # ### ### **un sotto-campo che NON ESISTE si rifiuta**, invece di nascere come un
+    # ### campo fantasma che nessuno legge mai.
+    for _c, _che in (("chiusura.motivo=x", "un sotto-campo INVENTATO"),
+                     ("titolo.x=y", "il punto su un campo che NON e- dizionario"),
+                     ("pippo=y", "un campo che non sta nello schema")):
+        _w = base(stato="APERTA")
+        try:
+            _campo(_w, _c)
+            buono = False
+        except AssertionError:
+            buono = True
+        sotto += 1 if buono else 0
+        ok += 1 if buono else 0
+        print("  %-62s %s" % ("### DEVE fallire: " + _che,
+                              "ok" if buono else "### SBAGLIATO"))
+    # ### ⚠ **E LA TRANSIZIONE RESTA CONTROLLATA:** `_campo` non e- una
+    # ### ### **scorciatoia** che salta le regole degli stati.
+    _z = base(stato="CHIUSA", chiusura={"data": "2026-10-10", "criterio": "c",
+                                        "commit": "abc1234"})
+    try:
+        _campo(_z, "stato=AGENDA")
+        buono = False
+    except AssertionError:
+        buono = True
+    sotto += 1 if buono else 0
+    ok += 1 if buono else 0
+    print("  %-62s %s" % ("### DEVE fallire: `CHIUSA` -> `AGENDA` resta VIETATA",
+                          "ok" if buono else "### SBAGLIATO"))
+    tot = len(casi) + len(vietate) + 2 + sotto
     print()
     print("  COLLAUDO: %d su %d" % (ok, tot))
     print("  ### I DUE CONTROLLI SUI DERIVATI sono provati IN MEMORIA sulla loro LOGICA")
@@ -993,6 +1049,53 @@ FINE_MIGRAZIONE = "3ef2326"
 # ### I campi che `PI-REPLAY` confronta: ### **tutti quelli dello schema tranne `aggiornata`**, che
 # ### e- ### **un timbro di QUANDO**, non un dato della voce -- e lo riscrive ogni lotto,
 # ### anche quando non cambia niente.
+# ### ⛔ **I CAMPI CHE SONO DIZIONARI, e che si scrivono CON IL PUNTO.**
+# ### ⚠ **IL DIFETTO, visto il `2026-10-10`:** `aggiorna` prendeva solo campi PIATTI,
+# ### quindi ### **`chiusura` si poteva solo SCHIACCIARE A STRINGA** -- e il validatore,
+# ### che pretende `chiusura.criterio` e `chiusura.commit`, sarebbe andato in errore.
+# ### ⭐ **Cioe-: il percorso UNICO di scrittura NON SAPEVA CHIUDERE UNA VOCE.**
+# ### ### **E lo storico lo diceva da tre volte:** *<<TERZA volta che questo rito costa un
+# ### commit>>*. ### **Non era un rito: era un campo che non si poteva scrivere.**
+SOTTOCAMPI = {"chiusura": ("data", "criterio", "commit", "come"),
+              "creata": ("data", "commit"),
+              "aggiornata": ("data", "commit")}
+
+
+def _campo(v, c):
+    """### Applica UN `--campo k=val` alla voce. ### **Il PUNTO entra in un dizionario.**
+
+    ### ⛔ **E il sotto-campo e- a VOCABOLARIO CHIUSO**, come tutto il resto: un
+    `chiusura.motivo` *(che non esiste)* ### **si rifiuta**, invece di nascere come
+    ### **un campo fantasma che nessuno legge.**
+    """
+    k, _, val = c.partition("=")
+    if "." in k:
+        radice, _, sotto = k.partition(".")
+        assert radice in SOTTOCAMPI, (
+            "`%s` non e- un campo-dizionario: col punto si scrivono solo %s"
+            % (radice, ", ".join(sorted(SOTTOCAMPI))))
+        assert sotto in SOTTOCAMPI[radice], (
+            "`%s` non e- un sotto-campo di `%s`: sono %s"
+            % (sotto, radice, ", ".join(SOTTOCAMPI[radice])))
+        vecchio = v.get(radice) or {}
+        assert isinstance(vecchio, dict), (
+            "`%s` non e- un dizionario nella voce: e- `%s`" % (radice, type(vecchio)))
+        d = dict(vecchio)
+        d[sotto] = val
+        v[radice] = d
+        return
+    assert k in CHIAVI, "`%s` non e' un campo dello schema" % k
+    if k == "stato":
+        assert val in TRANSIZIONI.get(v["stato"], set()), (
+            "TRANSIZIONE VIETATA: `%s` -> `%s` (vedi doc/INDICE_SCHEMA.md)"
+            % (v["stato"], val))
+    if k == "blocca":
+        val = val.upper() in ("SI", "TRUE", "1")
+    elif k in ("alias", "leggi", "variabili", "assiomi", "collegate"):
+        val = [x for x in val.split(",") if x]
+    v[k] = val
+
+
 CHIAVI_F11 = tuple(k for k in CHIAVI if k != "aggiornata")
 
 
