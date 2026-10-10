@@ -249,7 +249,7 @@
 | `DEC-ALBERO-CINQUE-SENZA-ARGOMENTO` | DECISIONE | METODO | 2 | ### **AGENDA** |  | di CINQUE nodi dell-albero il repo non dice l-argomento, e delle decisioni 1, 3, |
 | `DEC-NASCITA-PSI` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | con che stato nasce un nodo? il punto 3 chiede UNA REGOLA DICHIARATA per ogni gr |
 | `DEC-REGOLA-FORMA` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | che CODICE genera una `regola`? il punto 11(a) chiede che crescita e vuoto si ge |
-| `DEC-Z47-TRANSIZIONE` | DECISIONE | METODO | ENTRAMBE | ### **APERTA** |  | Z47 non si puo- portare ad AGENDA: CHIUSA -> AGENDA e- una transizione VIETATA |
+| `DEC-Z47-TRANSIZIONE` | DECISIONE | METODO | ENTRAMBE | ### **CHIUSA** |  | Z47 non si puo- portare ad AGENDA: CHIUSA -> AGENDA e- una transizione VIETATA |
 | `DECISIONE-VUOLE-UN-CAMPO` | STANDARD | METODO | ENTRAMBE | ### **APERTA** |  | una decisione che serve a un programma vuole un CAMPO, non una frase nel titolo |
 | `DIVISIONE-AUTOCONSISTENTE` | FRONTE | FISICA | 2 | ### **AGENDA** |  | la divisione dell arco come UNA legge: dove si rompe, cosa ereditano i figli, il |
 | `DOPPIA-COP` | CURA | FISICA | 1 | ### **SOSPESA** |  | LA CURA (b): la doppia copertura 4 pi e' un ASSIOMA e va resa STRUTTURALE, non m |

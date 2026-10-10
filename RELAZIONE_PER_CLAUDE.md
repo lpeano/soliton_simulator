@@ -12181,3 +12181,11 @@ Ogni dato di `db_era2/` ha ### **il suo TIMBRO accanto**, col campo `versione_da
 ### ⚠ **E UNA TENSIONE NEL MANDATO, che dichiaro invece di scegliere in silenzio:** il passo `1` dice *«lascia i metadati come sono»*, e il passo `5` dice *«`Z47` non deve piu- stare in `DA_DECIDERE_LUCA.md`»* — ma ### **cio- che la teneva nella lista era la sua `nota_guardiano`**, che diceva *«da decidere da Luca: era `2`?»*. ### ✅ **Tenere aperta una domanda a cui Luca HA risposto sarebbe FALSO**, quindi la nota ### **porta la risposta**, e i metadati dell-era `1` *(tipo, famiglia, avanzamento, validita-)* ### **restano come sono.**
 
 ### ✅ **E `chiusura` si SVUOTA**, perche- la regola la vuole piena ### **solo con stato `CHIUSA`**: la storia di `Z47` ### **vive nello STORICO**, non in quel campo. ### 📌 **E per svuotarla ho dovuto insegnare al percorso unico a farlo:** `--campo chiusura=` ora mette ### **un dizionario vuoto** e non ### **la stringa vuota**, che sarebbe stata ### **un campo di tipo sbagliato invece di un campo vuoto.**
+
+## `DEC-Z47-TRANSIZIONE` CHIUSA — ### **e la via non era NESSUNA delle tre che la voce elencava** *(2026-10-10)*
+
+### ⭐ **LA VOCE CHIEDEVA A LUCA QUALE DI TRE VIE PRENDERE:** *«due passaggi (ma e- barare col presidio), ammettere la transizione, oppure una voce nuova»*. ### ✅ **E la risposta e- che NESSUNA DELLE TRE serviva:** ### **`CHIUSA` → `SUPERATA` e- AMMESSA dalla tavola delle transizioni**, e ### **nessuno l-aveva guardata.**
+
+### 📌 **La voce era nata guardando `CHIUSA → AGENDA`**, che e- vietata — ### **e aveva ragione su quella.** Ma la domanda giusta non era *«come arrivo ad `AGENDA`?»*: era ### **«dove deve arrivare?»**, e la risposta e- ### **`SUPERATA`.**
+
+### ✅ **E `Z47` e `DEC-Z47-TRANSIZIONE` sono USCITE DA `DA_DECIDERE_LUCA.md`, come il mandato chiede: `0` occorrenze, e restano `3` domande.** ### ⚠ **E sono uscite perche- la loro `nota_guardiano` PORTA LA RISPOSTA**, non perche- le ho cancellate: ### **la lista si genera dai criteri**, e una domanda esce ### **quando ha una risposta scritta.**
