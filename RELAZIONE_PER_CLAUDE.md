@@ -11715,3 +11715,15 @@ Ogni dato di `db_era2/` ha ### **il suo TIMBRO accanto**, col campo `versione_da
 ### ⚠ **E UNA COSA CHE QUESTO COMMIT CAMBIA E CHE NON E- LA CURA: `variabili.jsonl` SI RIORDINA.** Il contratto del generatore e- *«ordinate per `id`»*, ### **ma la via dell-indice APPENDEVA in coda** — quindi `V-PSI-ERA2` stava ### **in fondo** e adesso va ### **al suo posto.** ### ✅ **E L-HO VERIFICATO RECORD PER RECORD, non a occhio: l-insieme dei record e- IDENTICO** *(`45` prima, `45` dopo, stesse chiavi e stessi valori)*, ### **e cambia solo la POSIZIONE di una riga.** ### **`leggi.jsonl` non cambia affatto**, perche- i suoi tre record erano gia- al posto giusto.
 
 ### 📌 **E L-ARBITRO E- NEL `pre-commit` E NELLA CI, e la CI pretende di piu-:** oltre al collaudo, ### **un giro del generatore e la `git diff` VUOTA** sui quattro registri. ### ⛔ **Cosi- un record dell-era `2` cancellato FA CADERE LA CI** — che e- esattamente cio- che prima ### **non succedeva.**
+
+## `H-INDICE` CONOSCE I CINQUE VOCABOLARI — ### **e `115` ID che erano IGNOTI adesso sono NOTI** *(2026-10-10)*
+
+### ⛔ **IL DIFETTO:** `carica()` leggeva ### **solo `doc/INDICE_ID.tsv`**, che e- la vista delle ### **VOCI** — mentre l-indice ha ### **cinque vocabolari** *(`voci`, `leggi`, `variabili`, `assiomi`, `decisioni`)* e `csv/indice.py` ### **li carica tutti**, perche- una voce li riferisce nei campi `leggi`, `variabili`, `assiomi`. ### **Quindi citare l-id di una legge faceva RIFIUTARE il commit.**
+
+### ⭐ **E LA PARTE CHE CONTA NON E- IL DIFETTO: E- CHE NESSUNA DELLE DUE VIE D-USCITA ERA GIUSTA.** `[SENZA-INDICE]` dichiarerebbe un-eccezione ### **per una cosa che non e- un-eccezione**, e `INDICE_ID_ESCLUSI.tsv` scriverebbe *«locuzione del testo, non un identificatore»* ### **su quelli che SONO identificatori.** ### ⛔ **Una via d-uscita usata per il caso sbagliato e- il modo in cui un presidio diventa rumore che si impara a saltare** — e l-ho usata ### **due volte, dichiarandolo**, per non lasciare il lavoro bloccato.
+
+### 📌 **I NUMERI:** ### **`115` su `115`** gli id dei vocabolari adesso NOTI *(prima erano ### **tutti ignoti**)*; collaudo ### **`13` → `16`**, e ### ✅ **il braccio che conta e- il terzo: la sentinella ignota CONTINUA A SCATTARE.** ### ⭐ **Aggiungere nomi noti puo- solo RIDURRE le segnalazioni, quindi il pericolo vero era ridurle a ZERO** — e quel braccio e- l-unico che lo misura.
+
+### ⚠ **E UNA COSA CHE IL VALIDATORE MI HA INSEGNATO, PER LA TERZA VOLTA: una voce curata nel commit `N` si puo- CHIUDERE solo in `N+1`.** La `chiusura` pretende un `commit` ### **non vuoto**, e il commit che cura ### **non esiste ancora mentre scrivo la voce.** ### ⛔ **E- gia- costato tre commit amministrativi** *(`FORMA-SPEZZA-ID`, `DUE-VIE-SU-LEGGI-JSONL`, e ora questa)*: ### **va REGOLATO, e il posto e- il mandato `5` di `6`, le regole di gestione.** ### **Lo scrivo qui perche- non si perda.**
+
+### ✅ **`DUE-VIE-SU-LEGGI-JSONL` e- CHIUSA**, col numero vero `4553d6a` e un criterio ### **misurato**, non asserito.

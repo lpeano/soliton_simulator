@@ -113,9 +113,47 @@ def estendi(testo, base, inizio, noti):
     return base, inizio + len(base)
 
 
+# ### ⛔ **L-INDICE HA CINQUE VOCABOLARI, NON UNO** -- e `csv/indice.py` li carica
+# ### tutti come `reg`, perche- una voce li ### **riferisce** nei campi `leggi`,
+# ### `variabili`, `assiomi`. ### ⚠ **MISURATO il 2026-10-10: `carica()` leggeva
+# ### SOLO la vista delle VOCI**, quindi citare l-id di una legge faceva
+# ### ### **RIFIUTARE IL COMMIT** -- e sono stati rifiutati `PROVA-HOPPING`,
+# ### `PROVA-LOCALE`, `PROVA-NORMA` e `V-PSI-ERA2`, che sono ### **record VERI.**
+# ### ⭐ **E NESSUNA DELLE DUE VIE D-USCITA ERA GIUSTA:** `[SENZA-INDICE]`
+# ### dichiarerebbe un-eccezione per una cosa che ### **non e- un-eccezione**, e
+# ### `INDICE_ID_ESCLUSI.tsv` scriverebbe *<<locuzione del testo, non un
+# ### identificatore>>* su quelli che ### **SONO identificatori.** ### **Una via
+# ### d-uscita usata per il caso sbagliato e- il modo in cui un presidio diventa
+# ### rumore che si impara a saltare.**
+# ### ✅ **IL RISCHIO DELLA CURA E- NOTO E PICCOLO:** aggiungere nomi noti puo-
+# ### ### **solo ridurre** le segnalazioni, quindi il pericolo e- ### **mascherare un
+# ### errore di battitura che per caso coincida con l-id di una legge** -- e gli id di
+# ### legge sono ### **maiuscoli e lunghi.** ### **Il collaudo tiene una sentinella
+# ### ignota, che DEVE continuare a scattare.**
+VOCABOLARI = ("leggi.jsonl", "variabili.jsonl", "assiomi.jsonl", "decisioni.jsonl")
+
+
+def id_dei_vocabolari():
+    """### Gli `id` dei ### **quattro registri di vocabolario**, o un insieme vuoto."""
+    import json
+    fuori = set()
+    for nome in VOCABOLARI:
+        p = os.path.join(RADICE, "doc", "indice", nome)
+        if not os.path.exists(p):
+            continue
+        for r in io.open(p, encoding="utf-8").read().split(NL):
+            if r.strip():
+                d = json.loads(r)
+                if d.get("id"):
+                    fuori.add(d["id"])
+    return fuori
+
+
 def carica():
     """`(noti, esclusi, ambigue)`: gli id e gli alias, le forme escluse, le forme nude ambigue."""
     noti, ambigue = set(), set()
+    # ### ✅ **I CINQUE VOCABOLARI, non uno.**
+    noti |= id_dei_vocabolari()
     nudo_a = {}
     for k, riga in enumerate(io.open(INDICE, encoding="utf-8", newline="").read().split(NL)):
         if k == 0 or not riga.strip():
@@ -342,6 +380,33 @@ def collaudo():
         esiti.append(ok)
         P("  %-18s %-52s %s" % (atteso, che, "PASS" if ok else "### FAIL"))
         P("                     %s" % nota)
+    P()
+    # ================================================================================
+    #   ### ⭐ **I CINQUE VOCABOLARI -- la cura del 2026-10-10**
+    # ================================================================================
+    P("-" * 96)
+    P("`id_dei_vocabolari`: UN ID DI LEGGE, VARIABILE, ASSIOMA O DECISIONE NON E- IGNOTO")
+    P("-" * 96)
+    _voc = sorted(id_dei_vocabolari())
+    P("  gli id dei quattro registri di vocabolario: %d" % len(_voc))
+    _bracci = [
+        ("### il collaudo ha MATERIA: i vocabolari non sono vuoti",
+         len(_voc) > 50,
+         "%d id: ### senza di loro questo braccio non proverebbe niente" % len(_voc)),
+        ("NON deve scattare: OGNI id dei vocabolari e- NOTO",
+         all(not any(esamina(x)) for x in _voc),
+         "### %d su %d: prima erano TUTTI IGNOTI, e citarne uno RIFIUTAVA IL COMMIT"
+         % (sum(1 for x in _voc if not any(esamina(x))), len(_voc))),
+        ("### DEVE scattare ANCORA: una sentinella ignota",
+         bool(esamina(_sent)[0]),
+         "`%s`: ### e- il braccio che dice che la cura NON ha spento il presidio -- "
+         "aggiungere nomi noti puo- solo RIDURRE le segnalazioni, e questo verifica che "
+         "non le abbia ridotte A ZERO" % _sent),
+    ]
+    for che, ok, nota in _bracci:
+        esiti.append(ok)
+        P("  %-62s %s" % (che, "PASS" if ok else "### FAIL"))
+        P("     %s" % nota)
     P()
     # ---------------------------------------------------------------- il ramo END-TO-END
     #   Provare la FUNZIONE non prova il HOOK: fra i due c'e' `git diff --cached`, ed e' la' che un
