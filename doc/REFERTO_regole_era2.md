@@ -51,11 +51,11 @@
 
 | il controllo | l'esito |
 |---|---|
-| `P-REG`, nei due versi | ### **`339`/`400`** |
-| la struttura delle regole | ### **passa** |
-| `P-M1` i metodi | ### **passa** |
-| `P-T2` i registri | ### **passa** |
-| `P-C1` i controlli nell'indice | ### **passa** |
+| `P-REG`, nei due versi | ### ⛔ **`339`/`400`** |
+| la struttura delle regole | ### ✅ **passa** *(nessun numero da leggere)* |
+| `P-M1` i metodi | ### ✅ **passa** *(nessun numero da leggere)* |
+| `P-T2` i registri | ### ✅ **passa** *(nessun numero da leggere)* |
+| `P-C1` i controlli nell'indice | ### ✅ **passa** *(nessun numero da leggere)* |
 | `python csv/indice.py valida` | ### **FALLISCE** |
 | i segnali *(non bloccano, `A9`)* | `?` |
 | ### **`CLAUDE.md` rigenerato** | ### **BYTE-IDENTICO** *(un braccio del collaudo)* |

@@ -71,12 +71,12 @@
 
 | il controllo | l'esito |
 |---|---|
-| `python csv/indice.py valida` ### **(con `P-ALB` dentro)** | ### **PASSA INTERA** |
+| `python csv/indice.py valida` ### **(con `P-ALB` dentro)** | ### **FALLISCE** |
 | i segnali *(non bloccano, `A9`)* | `19` |
-| `P-ALB` l-albero delle scelte | ### **`14`/`14`** |
-| `P-T2` il replay, col buco chiuso | ### **`22`/`22`** |
-| l-ARBITRO fra le due vie | ### **`6`/`6`** |
-| i presidi dell-indice, coi vocabolari | ### **`16`/`16`** |
+| `P-ALB` l-albero delle scelte | ### ⛔ **`13`/`14`** *(codice `1`)* |
+| `P-T2` il replay, col buco chiuso | ### ✅ **`27`/`27`** |
+| l-ARBITRO fra le due vie | ### ✅ **`6`/`6`** |
+| i presidi dell-indice, coi vocabolari | ### ✅ **`16`/`16`** |
 | il simulatore | `b8c21049`, ASSERITO |
 
 ### ⛔ **E IL BRACCIO CHE CONTA DI `P-ALB` E' QUELLO END-TO-END:** provare `controlla()` ### **non prova `valida`**, perche' fra le due c'e' ### **un `import` dentro un `try`** — ed e' ### **il posto dove un presidio si spegne in silenzio.** ### **Misurato: `indice.py valida` ESCE `1`** col nodo marcato `presa` ### **nel file**, e la fonte torna ### **identica al byte.**

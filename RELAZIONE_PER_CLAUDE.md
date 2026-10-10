@@ -12001,3 +12001,5 @@ Ogni dato di `db_era2/` ha ### **il suo TIMBRO accanto**, col campo `versione_da
 ### ✅ **LA CURA: l-override si passa per AMBIENTE** *(`GIT_CONFIG_COUNT` e le sue chiavi)*, che sovrascrive la configurazione ### **solo per il processo.** ### ⭐ **Nessun file toccato, nessuna contesa — e la parte che conta: QUEL BRACCIO NON PUO- PIU- LASCIARE LA BARRIERA SPENTA, perche- non c-e- piu- niente da rimettere.**
 
 ### 📌 **MISURATO DOPO: `11` su `11` da solo E `11` su `11` dentro il commit.**
+
+### ⚠ **E UN MANDATO NUOVO E- ARRIVATO A MANDATO APERTO: `Z47` da `CHIUSA` a `SUPERATA`** *(decisione di Luca, 2026-10-10)*. ### ✅ **Luca dice <<DOPO il mandato in corso>>, quindi e- andato in CODA** -- ed e- `L-UN-PROMPT` alla lettera: ### **un rilievo che arriva durante un lavoro non lo interrompe.** ### ⭐ **E la decisione scioglie il nodo in un modo che non avevo visto: non porta `Z47` in `AGENDA`, la dichiara SUPERATA -- e `CHIUSA -> SUPERATA` E- AMMESSA.** ### **Le tre vie che avevo elencato erano tre, e la quarta era quella giusta.**

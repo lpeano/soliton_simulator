@@ -34,6 +34,10 @@ RADICE = os.path.dirname(_QUI)
 sys.path.insert(0, _QUI)
 
 NL = chr(10)
+
+import _verdetto as VD                                      # noqa: E402
+VERDETTO = VD.verdetto
+
 FUORI = os.path.join(RADICE, "doc", "REFERTO_piano_era2.md")
 
 # ### ⛔ **IL COMMIT DEL TASK HISTORY**, che per il rito del par. `8` e- ### **antenato**
@@ -212,8 +216,7 @@ def main(argv):
     for che, cmd in COLLAUDI:
         rc2, t2 = gira(cmd)
         a, b = conta(t2)
-        P("| %s | %s |" % (che, ("### **`%d`/`%d`**" % (a, b)) if b
-                           else ("passa" if rc2 == 0 else "### **FALLISCE**")))
+        P("| %s | %s |" % (che, VERDETTO(a, b, rc2)))
     P("| il simulatore | `%s`, ASSERITO |" % blob)
     P()
     P("### ⛔ **E IL BRACCIO CHE CONTA DI `P-ALB` E' QUELLO END-TO-END:** provare"

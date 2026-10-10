@@ -29,6 +29,10 @@ RADICE = os.path.dirname(_QUI)
 sys.path.insert(0, _QUI)
 
 NL = chr(10)
+
+import _verdetto as VD                                      # noqa: E402
+VERDETTO = VD.verdetto
+
 FUORI = os.path.join(RADICE, "doc", "REFERTO_infrastruttura_era2_terza.md")
 
 # ### il commit del TASK HISTORY: per il rito del par. `8` e- ### **antenato** dei commit
@@ -95,16 +99,18 @@ def main(argv):
     P("| | il punto | il presidio | il collaudo |")
     P("|---|---|---|--:|")
     tot = [0, 0]
+    coppie = []
     for n, titolo, pres, cmd in PUNTI:
         rc, t = gira(cmd)
         a, b = conta(t)
         tot[0] += a
         tot[1] += b
-        P("| `%s` | %s | %s | %s |"
-          % (n, titolo, pres,
-             ("### **`%d`/`%d`**" % (a, b)) if b else
-             ("passa" if rc == 0 else "### **FALLISCE**")))
-    P("| | ### **IN TUTTO** | | ### **`%d`/`%d`** |" % (tot[0], tot[1]))
+        coppie.append((a, b))
+        P("| `%s` | %s | %s | %s |" % (n, titolo, pres, VERDETTO(a, b, rc)))
+    # ### ⛔ **E IL TOTALE E- VERDE SOLO SE NESSUN ADDENDO ERA ROSSO:** sommare
+    # ### `12`+`14` e scrivere `26`/`27` con un ✅ sarebbe ### **lo stesso difetto un
+    # ### livello piu- in su.**
+    P("| | ### **IN TUTTO** | | %s |" % VD.totale(coppie))
     P()
     P("---")
     P()

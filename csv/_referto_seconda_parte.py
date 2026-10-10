@@ -58,6 +58,9 @@ LENTI = (
     ("il collaudo della catena", "python primo_ordine/_collauda_passo.py"),
 )
 
+import _verdetto as VD                                      # noqa: E402
+VERDETTO = VD.verdetto
+
 _SUSU = re.compile(r":\s*(\d+)\s+su\s+(\d+)")
 
 
@@ -206,7 +209,7 @@ def main(argv):
         ok = (rc == 0) and (a is None or a == b)
         A("| %s | `%s` | %s |"
           % (nome, cmd,
-             ("### ✅ **`%d`/`%d`**" % (a, b)) if a is not None
+             VERDETTO(a, b) if a is not None
              else ("### ✅ **passa**" if ok else "### ⛔ **FALLISCE**")))
     for nome, cmd in saltati:
         A("| %s | `%s` | ### ⚠ **SALTATO senza `--con-lenti`**, e la "

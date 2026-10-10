@@ -7,7 +7,7 @@
 | `DA_CLASSIFICARE` | `DA_CLASSIFICARE` | 187 |
 | `DOCUMENTAZIONE` | `1` | 11 |
 | `DOCUMENTAZIONE` | `2` | 1 |
-| `DOCUMENTAZIONE` | `ENTRAMBE` | 6 |
+| `DOCUMENTAZIONE` | `ENTRAMBE` | 7 |
 | `FISICA` | `1` | 343 |
 | `FISICA` | `2` | 20 |
 | `FISICA` | `ENTRAMBE` | 17 |
@@ -551,6 +551,7 @@
 | `RAMI-OFF-CURA2` | CURA | INFRASTRUTTURA | 1 | ### **CHIUSA** |  | i rami a flag spento di TEMPO_UNICO_MITOSI, archiviati COPIATI dal sorgente |
 | `RAMPA-1` | CURA | FISICA | 1 | ### **CHIUSA** |  | CHIUSA il 2026-09-25, strada (3) (decisione di Luca): sigillo 9/9 dal CLI, ramp  |
 | `RAMPA-2` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | APERTA il 2026-09-25 (richiesta di Luca) / AL PASSO 0 TUTTI LEGGONO cs = CSM. La |
+| `REFERTO-VERDE-SU-FALLIMENTO` | DIFETTO | DOCUMENTAZIONE | ENTRAMBE | ### **APERTA** |  | un referto scriveva il segno VERDE su un collaudo FALLITO: 20 su 22 con la spunt |
 | `REG-A` | DIFETTO | FISICA | 1 | ### **CHIUSA** |  | FASE A del registro della fisica: l'INVENTARIO degli scrittori di stato / MANDAT |
 | `REG-B` | FRONTE | METODO | 1 | ### **SOSPESA** |  | FASE B: le SCHEDE, a lotti, un commit per lotto / MANDATO-REGISTRO §2 / LE QUATT |
 | `REG-C` | FRONTE | METODO | 1 | ### **SOSPESA** |  | FASE C: LA STORIA di ogni legge, e le schede delle leggi TOLTE / MANDATO-REGISTR |

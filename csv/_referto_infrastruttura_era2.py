@@ -16,6 +16,10 @@ RADICE = os.path.dirname(_QUI)
 sys.path.insert(0, _QUI)
 
 NL = chr(10)
+
+import _verdetto as VD                                      # noqa: E402
+VERDETTO = VD.verdetto
+
 BT = chr(96)
 FUORI = os.path.join(RADICE, "doc", "REFERTO_infrastruttura_era2.md")
 
@@ -223,7 +227,7 @@ def main():
         ok = (rc == 0) and (a is None or a == b)
         A("| %s | `%s` | %s |"
           % (nome, cmd,
-             ("### ✅ **`%d`/`%d`**" % (a, b)) if a is not None
+             VERDETTO(a, b) if a is not None
              else ("### ✅ **passa**" if ok else "### ⛔ **FALLISCE**")))
     A("")
     A("## `5.` QUALI PERMUTAZIONI SONO **BYTE-IDENTICHE**, E QUALI NO — "

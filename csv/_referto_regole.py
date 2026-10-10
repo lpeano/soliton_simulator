@@ -32,6 +32,10 @@ sys.path.insert(0, _QUI)
 import _regole_gestione as RG                               # noqa: E402
 
 NL = chr(10)
+
+import _verdetto as VD                                      # noqa: E402
+VERDETTO = VD.verdetto
+
 FUORI = os.path.join(RADICE, "doc", "REFERTO_regole_era2.md")
 
 # ### il commit del task history di questo mandato: ### **antenato** dei commit del lavoro.
@@ -161,8 +165,8 @@ def main(argv):
         rc, t = gira(cmd)
         m = _SUSU.search(t)
         P("| %s | %s |"
-          % (che, ("### **`%s`/`%s`**" % m.groups()) if m
-             else ("### **passa**" if rc == 0 else "### **FALLISCE**")))
+          % (che, VERDETTO(int(m.group(1)), int(m.group(2)), rc) if m
+             else VERDETTO(None, None, rc)))
     rc, t = gira("indice.py valida")
     seg = re.search(r"(\d+) segnali", t)
     P("| `python csv/indice.py valida` | %s |"

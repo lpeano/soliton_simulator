@@ -60,6 +60,7 @@ SORGENTI = (
     "csv/_albero_era2.py",
     "csv/_barriera.py",
     "csv/_regole_gestione.py",
+    "csv/_verdetto.py",
     # ### ⚠ **E UN PRESIDIO PUO- VIVERE SOTTO `primo_ordine/`:** `P-GRAFO` gira
     # ### ### **dentro il passo**, non in un `pre-commit` -- e se le `SORGENTI` guardassero
     # ### ### **solo `csv/`**, la sua voce risulterebbe ### **una tenda** mentre e- cablata.

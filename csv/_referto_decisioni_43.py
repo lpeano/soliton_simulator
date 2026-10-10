@@ -35,6 +35,10 @@ RADICE = os.path.dirname(_QUI)
 sys.path.insert(0, _QUI)
 
 NL = chr(10)
+
+import _verdetto as VD                                      # noqa: E402
+VERDETTO = VD.verdetto
+
 FUORI = os.path.join(RADICE, "doc", "REFERTO_decisioni_43_era2.md")
 D = os.path.join(RADICE, "doc", "indice")
 
@@ -204,8 +208,7 @@ def main(argv):
     for che, cmd in COLLAUDI:
         rc2, t2 = gira(cmd)
         a, b = conta(t2)
-        P("| %s | %s |" % (che, ("### **`%d`/`%d`**" % (a, b)) if b
-                           else ("passa" if rc2 == 0 else "### **FALLISCE**")))
+        P("| %s | %s |" % (che, VERDETTO(a, b, rc2)))
     P()
     P("### ⛔ **E `DA_DECIDERE_LUCA.md` NON E' VUOTO, e il mandato chiedeva che lo"
       " fosse.** ### ✅ **La ragione e' scritta, non aggirata**, ed e' quella che"
