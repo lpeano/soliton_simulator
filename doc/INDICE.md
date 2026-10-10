@@ -272,7 +272,7 @@
 | `FINESTRA-PRE-NASCITA` | FRONTE | METODO | ENTRAMBE | ### **APERTA** |  | una finestra PRIMA della prima nascita (216) non dice niente sulle nascite: e' c |
 | `FOGLIO-NULLO` | DIFETTO | METODO | 1 | ### **SOSPESA** |  | il diagnostico dei fogli vale il suo NULLO sulla scena (ii): la fase sta sul con |
 | `FORMA-N-VUOTO` | DIFETTO | METODO | 1 | ### **SOSPESA** |  | `n` in forma_passo0 non puo' cambiare: e' l'insieme congelato del passo 0 (P4) |
-| `FORMA-SPEZZA-ID` | DIFETTO | METODO | ENTRAMBE | ### **APERTA** |  | la regex FORMA di H-INDICE spezzava 122 ID su 887, e verificava il PREFISSO |
+| `FORMA-SPEZZA-ID` | DIFETTO | METODO | ENTRAMBE | ### **CHIUSA** |  | la regex FORMA di H-INDICE spezzava 122 ID su 887, e verificava il PREFISSO |
 | `FRAG1` | DIFETTO | INFRASTRUTTURA | 1 | ### **SOSPESA** |  | mitosi() SU UNA RETE SENZA CAMPO VA IN IndexError INVECE DI DICHIARARLO. I = sel |
 | `FRECCE-IMPOSTE` | DIFETTO | FISICA | 2 | ### **AGENDA** |  | il censimento delle leggi che impongono una direzione nel tempo: NOVE, e DUE cur |
 | `FRENO-LEGGE` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 5 volte, MAI definito in un registro) [FRENO-LEGGE] |

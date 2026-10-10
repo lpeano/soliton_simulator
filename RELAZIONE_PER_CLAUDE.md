@@ -11661,3 +11661,5 @@ Ogni dato di `db_era2/` ha ### **il suo TIMBRO accanto**, col campo `versione_da
 ### 📌 **I NUMERI, prima e dopo.** ID non letti interi: ### **`122` su `887` → `0`.** `A1-A7b`: ### **resta un intervallo.** `A1-QX700`: ### **adesso si VEDE**, e lo scatto ### **nomina l-ID intero, non il prefisso** — perche- un presidio che accusa il prefisso ### **manda a cercare la cosa sbagliata.** `L-DOPO-STOP`: ### **non si rompe** *(era il falso-ignoto curato il 2026-09-26, `2` su `6`)*. ### **Il collaudo: `8` bracci → `13`, tutti passati, col ramo end-to-end ESEGUITO.**
 
 ### ⚠ **E LA VOCE SI APRE `APERTA`, NON `CHIUSA`:** una `chiusura` deve citare ### **il commit che ha chiuso**, e ### **quel commit non esiste ancora mentre lo sto scrivendo.** ### **La chiusura e- il commit immediatamente successivo, col numero vero.**
+
+### ✅ **E `FORMA-SPEZZA-ID` E- CHIUSA, col numero VERO: `7ee9d4b`.** Il criterio di chiusura e- ### **misurato, non asserito**: *`0` ID non letti interi su `887`* *(erano `122`)*, l-intervallo regge, l-ID sbagliato scatta e ### **lo scatto nomina l-ID intero**, `L-DOPO-STOP` non si rompe, collaudo ### **`13/13` col ramo end-to-end eseguito.**
