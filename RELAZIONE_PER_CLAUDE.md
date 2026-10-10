@@ -12255,3 +12255,17 @@ Ogni dato di `db_era2/` ha ### **il suo TIMBRO accanto**, col campo `versione_da
 ### ⭐ **E `P-ALB` HA RIFIUTATO DI MARCARLA PRESA, e ha ragione:** `D7` ### **dipende da `D6`** *(il vuoto)*, che ### **non e- preso** — e una decisione ### **non si prende prima di quelle da cui dipende.** ### ⚠ **Ed e- una tensione NEL MANDATO STESSO: il suo punto `6` dice che il VUOTO LOCALE blocca la mitosi e PRECEDE `D9`**, cioe- ### **mette il vuoto prima.**
 
 ### ✅ **LUCA HA SCRITTO TRE VOLTE «se l-albero dice altro, VINCE L-ALBERO e scrivi la differenza»: l-ho rispettato.** Il ### **CONTENUTO** della decisione e- registrato nel nodo, ### **verificabile**, e `presa` resta ### **false** finche- `D6` non e- preso — e ### **`D6` si prende nella voce ⑩ della coda** *(`VUOTO-LOCALE-DETERMINISTICO` da proposta a decisione di Luca)*. ### ⛔ **Non e- un rifiuto del mandato: e- l-ORDINE che il mandato stesso implica.**
+
+## LA VERIFICA SU CLONE PULITO, NEI DUE AMBIENTI — ### **TUTTO VERDE** *(2026-10-10)*
+
+### 📌 **Il mandato chiede i due comandi e le due uscite nel commit.** Il clone e- ### **`git clone --branch primo-ordine`** in una cartella temporanea, con ### **`git config core.hooksPath .githooks`** dato subito dopo.
+
+| il comando | senza `CI` | con `CI=true` |
+|---|---|---|
+| `python csv/indice.py valida` | ### ✅ **codice `0`** | ### ✅ **codice `0`** |
+| `python primo_ordine/collauda.py` | ### ✅ **codice `0`**, `33`/`33` | ### ✅ **codice `0`**, `33`/`33` |
+| `git status` dopo la suite | ### ✅ **VUOTO** | ### ✅ **VUOTO** |
+
+### ⭐ **E L-ALBERO VUOTO NON E- UN-ASSERZIONE: e- il CODICE D-USCITA.** Il braccio dell-albero sporco ### **entra nel codice d-uscita**, quindi ### **`0` vuol dire che non ha scattato** — e nel giro prima, sullo stesso comando, ### **valeva `1` e nominava due file.**
+
+### 📌 **I tempi: `167.6` s in tutto, `pre-commit` `80.2` s su `120` (`67`%) senza `CI`; `169.9` s e `81.8` s con `CI=true`.** ### ✅ **Il `pre-commit` sta nel budget anche coi controlli sullo stage**, perche- nel hook gira ### **il solo modo rapido.**
