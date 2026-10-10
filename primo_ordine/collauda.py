@@ -63,6 +63,9 @@ COLLAUDI = (
     # ### ⚠ **Questo e- il punto in cui un comando che STAMPA I TEMPI ha pagato: la
     # ### classificazione era asserita, non misurata.**
     ("la catena", "primo_ordine/_collauda_passo.py", "pre-commit"),
+    # ### \u26d4 **E LA GUIDA SI ESEGUE**: nasce una legge di prova nella tabella VERA,
+    # ### si genera, e si rimette tutto verificando lo ### **sha1.**
+    ("la GUIDA, eseguita", "primo_ordine/_collauda_guida.py", "pre-commit"),
     # ### ⚠ **I LENTI VERI, e stanno SOLO in CI**: non perche- superino il budget da
     # ### soli, ma perche- ### **lo superano SOMMATI a tutto il resto.**
     ("il referto della seconda parte (LENTO)", "csv/_referto_seconda_parte.py",

@@ -11899,3 +11899,19 @@ Ogni dato di `db_era2/` ha ### **il suo TIMBRO accanto**, col campo `versione_da
 ### 📌 **E I TEMPI NON SONO UN NUMERO DEL REPO: sono una MISURA DI QUESTA MACCHINA**, e il comando li stampa ### **con la piattaforma accanto** — ### **un tempo senza la macchina che l-ha prodotto non si confronta con niente.**
 
 ### ⚠ **E DUE FALSI FALLIMENTI MIEI, trovati dal comando unico.** ### **(1)** Il braccio di `P-ID` cercava ### **`` `D4` `` come SOTTOSTRINGA** in `DA_DECIDERE_LUCA.md`, e `D4` compariva ### **nella DOMANDA di un-altra voce** — quindi diceva *«ancora dentro»* mentre l-omonimo era fuori. ### ⭐ **E- lo stesso errore di una regex che non distingue un commento da un uso: il TERZO della giornata.** ### ✅ **Adesso guarda la PRIMA COLONNA della riga: la struttura, non il testo.** ### **(2)** Il braccio end-to-end di `P-ALB` falliva perche- ### **`valida` usciva `1` per la ricorrenza dello storico** — e il braccio ### **ha fatto il suo lavoro**: dice *«scattava per l-albero, non per qualcos-altro»*, e non era per l-albero.
+
+## PUNTO `7`: LA GUIDA, E UN COLLAUDO CHE LA ESEGUE DAVVERO — ### **nasce una legge nella tabella VERA** *(2026-10-10)*
+
+### ⭐ **<<LA ESEGUE>> VUOL DIRE QUESTO: il collaudo aggiunge una legge di prova alla TABELLA VERA**, fa girare il generatore, verifica che ### **il file del termine e la scheda SIANO NATI senza che nessuno li scrivesse**, e poi ### **rimette tutto — verificando lo `sha1` della tabella e dei generati.** ### ⛔ **Un collaudo che lasciasse una legge finta nella tabella CAMBIEREBBE LA FISICA DEL REPO, e sarebbe il difetto peggiore di tutti.**
+
+### 📌 **E IL LIMITE CHE IL TASK HISTORY AVEVA PREVISTO E- RISOLTO COME LO AVEVO DICHIARATO:** *«se la guida contiene un passo che richiede una ### **DECISIONE**, quel passo ### **non e- eseguibile** — e allora la guida va scritta in modo che ### **ogni passo eseguibile sia MECCANICO**»*. ### ✅ **Ogni passo dichiara il suo tipo: `5` MECCANICI e `3` di DECISIONE.** ### ⛔ **Un passo di decisione NON si esegue, e fingere di eseguirlo sarebbe UN FALSO-UNO** — il collaudo verifica che sia ### **dichiarato tale.**
+
+### ⭐ **E IL COLLAUDO LEGGE LA TABELLA DEI PASSI DALLA GUIDA, non da una lista sua.** ### **Una lista sua divergerebbe, e la guida potrebbe invecchiare in silenzio** — che e- esattamente cio- che il mandato vuole impedire.
+
+### 📌 **E VERIFICA CHE OGNI COMANDO CITATO ESISTA:** ### **`6` su `6` vivi.** ### **Una guida che cita un comando morto e- PEGGIO di nessuna guida.**
+
+### ⛔ **E LA GUIDA DICHIARA UN BUCO CHE NESSUN PRESIDIO COPRE.** `P-ALB` verifica che una ### **decisione** non sia presa prima delle sue, ### **ma nessuno verifica che una LEGGE non sia scritta prima della sua DECISIONE.** ### ✅ **Per questo il passo `1` e- <<la decisione che governa la legge e- `presa`?>>, ed e- un passo di DECISIONE:** oggi ### **`0` nodi su `10` sono `presa`**, quindi ### **ferma tutto** — ### **ed e- giusto che lo dica una guida, non che si scopra dopo.**
+
+### ⚠ **E LA BARRIERA MI HA FERMATO, facendo esattamente il suo lavoro.** Ho cambiato il `pre-commit` *(per aggiungerci questo collaudo)* e ### **lo strumento dell-indice si e- RIFIUTATO di partire**, perche- l-impronta non tornava. ### ⭐ **L-ordine e-: si cambia un hook, POI `python csv/_barriera.py --scrivi`, POI gli strumenti.** ### **Me lo ha insegnato lei, un-ora dopo averla scritta.**
+
+### 📌 **Collaudo `12` su `12`, e i sette punti del mandato `4` sono FATTI.**

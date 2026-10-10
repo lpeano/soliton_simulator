@@ -581,6 +581,16 @@ METODI['P-E9'] = (
 METODI['P-AB'] = (
     'NATO NELL-ERA 2: un `A`/`B` dichiara IL CAMPO UNICO in cui i bracci differiscono, e se ne differiscono due ### IL CONFRONTO NON PARTE (la lezione di `Z20`: due misure sovrapposte). ### Piu- i dati con la versione del formato e nessun file a meta-',
     '`csv/_confronti_e_dati.py::controlla`, `pre-commit` + CI', "PORTATO")
+METODI['P-GUIDA'] = (
+    "NATO NELL-ERA 2: `doc/COME_SI_AGGIUNGE_UNA_LEGGE.md` si ESEGUE, e un collaudo la "
+    "esegue DAVVERO -- aggiunge una legge di prova alla tabella VERA, genera, verifica, e "
+    "rimette tutto controllando lo sha1. ### E OGNI PASSO DICHIARA SE E- `MECCANICO` O DI "
+    "`DECISIONE`: un passo di decisione NON SI ESEGUE (fingere di eseguirlo sarebbe un "
+    "falso-uno), e il collaudo verifica che sia DICHIARATO tale. ### Legge la tabella dei "
+    "passi DALLA GUIDA, non da una lista sua: cosi- la guida NON PUO- INVECCHIARE IN "
+    "SILENZIO",
+    "`primo_ordine/_collauda_guida.py` (12/12), nel comando unico e nel `pre-commit`",
+    "PORTATO")
 METODI['P-TEMPI'] = (
     "NATO NELL-ERA 2: `python primo_ordine/collauda.py` fa girare TUTTI i collaudi "
     "dichiarati, stampa il tempo di ognuno, e confronta il totale col budget di 120 s. "

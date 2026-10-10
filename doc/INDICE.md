@@ -6,6 +6,7 @@
 |---|---|--:|
 | `DA_CLASSIFICARE` | `DA_CLASSIFICARE` | 187 |
 | `DOCUMENTAZIONE` | `1` | 11 |
+| `DOCUMENTAZIONE` | `2` | 1 |
 | `DOCUMENTAZIONE` | `ENTRAMBE` | 5 |
 | `FISICA` | `1` | 343 |
 | `FISICA` | `2` | 20 |
@@ -453,6 +454,7 @@
 | `P-EQ-MEDIANA-ARCHI` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | P_eq prende la mediana dei PRIMI n ARCHI su m: un sottoinsieme arbitrario, non t |
 | `P-ES1` | PRESIDIO | INFRASTRUTTURA | 2 | ### **AGENDA** |  | UN SOLO ESECUTORE: chi avanza lo stato passa dallo schedulatore, o si dichiara |
 | `P-GRAFO` | PRESIDIO | METODO | 2 | ### **AGENDA** |  | il grafo e- valido A OGNI PASSO, e una violazione FERMA invece di correggere |
+| `P-GUIDA` | PRESIDIO | DOCUMENTAZIONE | 2 | ### **AGENDA** |  | la guida per aggiungere una legge SI ESEGUE, e un collaudo la esegue davvero |
 | `P-ID` | PRESIDIO | METODO | ENTRAMBE | ### **APERTA** |  | un ID che NASCE non puo- collidere con un ID, un alias o un omonimo, e ha 4 cara |
 | `P-M1` | PRESIDIO | METODO | ENTRAMBE | ### **APERTA** |  | ogni METODO dell-era 1 ha una riga che dice come si applica all-era 2 |
 | `P-MEMORIA` | STANDARD | FISICA | ENTRAMBE | ### **APERTA** |  | uno scalare con memoria acquista un verso: la memoria da la direzione |

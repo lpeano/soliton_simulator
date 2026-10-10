@@ -54,6 +54,10 @@ moduli:
     responsabilita: un solo comando per tutti i collaudi, coi TEMPI e il budget
     importa: []
 
+  - nome: _collauda_guida.py
+    responsabilita: ESEGUE la guida passo per passo, su una legge di prova
+    importa: []
+
   - nome: _collauda_simmetrie.py
     responsabilita: il collaudo delle simmetrie e delle conservazioni misurate
     importa: [driver, hamiltoniana, passo, schema_config, simmetrie, stato]

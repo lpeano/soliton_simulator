@@ -44,6 +44,12 @@ python "$(git rev-parse --show-toplevel)/csv/_rami_era2.py" || exit 1
 #  ### e' una ragione per dare --no-verify.
 python "$(git rev-parse --show-toplevel)/csv/_replay_registri.py" || exit 1
 
+#  LA GUIDA, ESEGUITA -- `doc/COME_SI_AGGIUNGE_UNA_LEGGE.md`.
+#  ### Una guida che invecchia e' peggio di nessuna guida: questo collaudo la
+#  ### ESEGUE (legge di prova nella tabella vera, genera, rimette tutto con lo
+#  ### sha1 verificato), e LEGGE I PASSI DALLA GUIDA -- non da una lista sua.
+python "$(git rev-parse --show-toplevel)/primo_ordine/_collauda_guida.py" || exit 1
+
 #  IL COLLAUDO DELLA CATENA -- e sta QUI perche' L'HO MISURATO: 2.55 s.
 #  ### Era classificato <<LENTO, oltre i 120 secondi>>, e quel numero era di
 #  ### un'altra cosa: i lenti veri sono i GENERATORI DI REFERTO (45.99 e 28.33 s).

@@ -127,6 +127,9 @@ jobs:
           python csv/_registri_indice.py
           git diff --exit-code -- doc/indice/leggi.jsonl doc/indice/variabili.jsonl doc/indice/assiomi.jsonl doc/indice/decisioni.jsonl
 
+      - name: "### LA GUIDA, ESEGUITA -- e non raccontata (punto 7)"
+        run: python primo_ordine/_collauda_guida.py
+
       - name: "### LA SUITE COMPLETA, CON I TEMPI -- un solo comando (punto 6)"
         # ### ⛔ I passi per presidio restano, e NON e- ridondanza: quelli dicono
         # ### ### **QUALE** presidio cade, questo dice ### **QUANTO COSTA** -- e il
