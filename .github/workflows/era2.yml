@@ -93,6 +93,11 @@ jobs:
           python csv/_referto_seconda_parte.py --con-lenti
           git diff --exit-code -- doc/REFERTO_seconda_parte_era2.md
 
+      - name: "### `P-ALB` -- l-albero delle scelte, nei due versi"
+        run: |
+          python csv/_albero_era2.py --collaudo
+          python csv/indice.py valida
+
       - name: "### L-ARBITRO FRA LE DUE VIE -- e il `git diff` dei registri"
         # ### ⛔ Qui si pretende di piu- che nel `pre-commit`: oltre al collaudo,
         # ### ### **un giro del generatore e la diff VUOTA**. Cosi- un record

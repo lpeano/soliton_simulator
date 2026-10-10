@@ -267,6 +267,29 @@ def leggi_le_decisioni():
                                                "suo ambito: niente pos nella fisica")):
         fuori.append({"id": "DEC-" + a, "nome_scheda": "", "titolo": tit, "data": data,
                       "presa": True, "fonte": "doc/ASSIOMI.md::%s" % a})
+    # ### ✅ **E I NODI DELL-ALBERO DELLE SCELTE, da `doc/ALBERO_era2.yaml`.**
+    # ### ⛔ **Entrano QUI, PER GENERAZIONE, e non a mano:** `decisioni.jsonl` e-
+    # ### ### **un file generato** -- un nodo scritto a mano la- dentro
+    # ### ### **sarebbe cancellato al primo giro** *(misurato il 2026-10-10,
+    # ### `DUE-VIE-SU-LEGGI-JSONL`)*. ### **La fonte dell-albero e- il `yaml`, e il
+    # ### presidio che lo valida e- `P-ALB`.**
+    # ### ⚠ **E UN NODO DELL-ALBERO PORTA TRE CAMPI IN PIU-** -- `etichetta`,
+    # ### `dipende_da`, `argomento_noto` -- ### **che i record dell-era `1` non hanno.**
+    # ### **Lo dichiaro invece di uniformare:** `dipende_da` su una decisione dell-era
+    # ### `1` sarebbe ### **una lista vuota inventata**, e l-`etichetta` locale
+    # ### ### **non esiste** per loro. ### **Un campo assente dice <<non si applica>>;
+    # ### un campo vuoto direbbe <<nessuna dipendenza>>, che e- un-altra cosa.**
+    import _albero_era2
+    alb, _radici = _albero_era2.carica()
+    rotto = _albero_era2.controlla(alb, _radici)
+    assert not rotto, ("### L-ALBERO NON PASSA `P-ALB` e NON LO GENERO: %s"
+                       % rotto[:2])
+    for n in alb:
+        fuori.append({"id": n["id"], "nome_scheda": "", "titolo": n["titolo"][:100],
+                      "data": "2026-10-10", "presa": bool(n["presa"]),
+                      "fonte": n["fonte"], "etichetta": n["etichetta"],
+                      "dipende_da": list(n["dipende_da"]),
+                      "argomento_noto": bool(n["argomento_noto"])})
     assert len(fuori) >= 5, "trovate solo %d decisioni: la fonte e' cambiata" % len(fuori)
     return fuori
 
@@ -282,6 +305,8 @@ def main():
     os.makedirs(FUORI, exist_ok=True)
     stampa("=" * 104)
     stampa("I QUATTRO REGISTRI DEI VOCABOLARI -- generati dalle fonti, non scritti a mano")
+    stampa("  le fonti: doc/REGISTRO_FISICA.md, doc/ASSIOMI.md, doc/ALBERO_era2.yaml,")
+    stampa("            primo_ordine/leggi/leggi.yaml, e doc/indice/storico_era2.jsonl")
     stampa("=" * 104)
     n1 = scrivi("leggi.jsonl", leggi_le_leggi())
     n2 = scrivi("variabili.jsonl", leggi_le_variabili())

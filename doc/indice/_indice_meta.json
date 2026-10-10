@@ -28,6 +28,7 @@
    "FORMA-SPEZZA-ID",
    "H-INDICE-IGNORA-I-VOCABOLARI",
    "P-AB",
+   "P-ALB",
    "P-C1",
    "P-E1",
    "P-E2",
@@ -273,6 +274,7 @@
    "D5",
    "D6",
    "DE-ACCOPPIABILITA",
+   "DEC-ALBERO-CINQUE-SENZA-ARGOMENTO",
    "DEC-NASCITA-PSI",
    "DEC-REGOLA-FORMA",
    "DEC-Z47-TRANSIZIONE",
@@ -469,6 +471,7 @@
    "OMEGA-ETA",
    "OSSERVABILE-P1",
    "P-AB",
+   "P-ALB",
    "P-C1",
    "P-DECADIMENTO",
    "P-E1",
@@ -1116,6 +1119,7 @@
    "Z99"
   ],
   "DECISIONE": [
+   "DEC-ALBERO-CINQUE-SENZA-ARGOMENTO",
    "DEC-NASCITA-PSI",
    "DEC-REGOLA-FORMA",
    "DEC-Z47-TRANSIZIONE"
@@ -1782,6 +1786,7 @@
    "H-STASH",
    "H-VALIDATORE",
    "P-AB",
+   "P-ALB",
    "P-C1",
    "P-E1",
    "P-E2",
@@ -2582,6 +2587,7 @@
    "D12",
    "D13",
    "D26",
+   "DEC-ALBERO-CINQUE-SENZA-ARGOMENTO",
    "DEC-Z47-TRANSIZIONE",
    "ESENTE-P3",
    "FALSO-UNO",
@@ -2627,6 +2633,7 @@
    "MASSA-ID",
    "MASSA-ID-FISSO",
    "OSSERVABILE-P1",
+   "P-ALB",
    "P-E9",
    "P-ID",
    "P-M1",
@@ -3325,6 +3332,7 @@
   ],
   "2": [
    "CONSERVAZIONE-LOCALE",
+   "DEC-ALBERO-CINQUE-SENZA-ARGOMENTO",
    "DEC-NASCITA-PSI",
    "DEC-REGOLA-FORMA",
    "DIVISIONE-AUTOCONSISTENTE",
@@ -3344,6 +3352,7 @@
    "MODELLO-MINIMO",
    "O4",
    "P-AB",
+   "P-ALB",
    "P-E1",
    "P-E2",
    "P-E3",
@@ -6557,6 +6566,7 @@
  "stato": {
   "AGENDA": [
    "CONSERVAZIONE-LOCALE",
+   "DEC-ALBERO-CINQUE-SENZA-ARGOMENTO",
    "DEC-NASCITA-PSI",
    "DEC-REGOLA-FORMA",
    "DIVISIONE-AUTOCONSISTENTE",
@@ -6576,6 +6586,7 @@
    "MODELLO-MINIMO",
    "O4",
    "P-AB",
+   "P-ALB",
    "P-E1",
    "P-E2",
    "P-E3",

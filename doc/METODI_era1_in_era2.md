@@ -8,17 +8,17 @@
 
 | | quanti |
 |---|--:|
-| **`PORTATO`** | `91` |
+| **`PORTATO`** | `92` |
 | **`DA_PORTARE`** | `17` |
 | **`DA_DECIDERE`** | `5` |
 | **`NON_SI_APPLICA`** | `7` |
-| **in tutto** | ### **`120`** |
+| **in tutto** | ### **`121`** |
 
-### ⚠ **E IL NUMERO `120` E- MISURATO, non stimato:** viene dal perimetro che l-indice calcola, e ### **il mandato ne nominava <<una decina>>** per nome piu- *<<e le cure di architettura>>*. ### **La decina era `20`.**
+### ⚠ **E IL NUMERO `121` E- MISURATO, non stimato:** viene dal perimetro che l-indice calcola, e ### **il mandato ne nominava <<una decina>>** per nome piu- *<<e le cure di architettura>>*. ### **La decina era `20`.**
 
 ---
 
-## `PORTATO` — `91` metodi
+## `PORTATO` — `92` metodi
 
 > ### ✅ **GIA- NELL-ERA `2`**, e `dove` dice dove
 
@@ -58,6 +58,7 @@
 | **`L-UN-PROMPT`** | `STANDARD` | un prompt alla volta, i rilievi in CODA: in questo mandato sono arrivate SEI voci di coda, tutte registrate e nessuna eseguita fuori ordine | `doc/CODA_2026-10-09.md` |
 | **`MAX-NODI-FERMA`** | `CURA` | una guardia di MEMORIA non cambia la fisica in silenzio: deve FERMARE. ### PORTATO dal punto 1: ogni tipo dichiara la sua FORMA di dominio, e il controllo generato in `stato.py` SOLLEVA -- e il passo lo chiama a OGNI passo, verificato VIA AST | `primo_ordine/stato.py::controlla_domini`, chiamato da `passo.py` |
 | **`P-AB`** | `PRESIDIO` | NATO NELL-ERA 2: un `A`/`B` dichiara IL CAMPO UNICO in cui i bracci differiscono, e se ne differiscono due ### IL CONFRONTO NON PARTE (la lezione di `Z20`: due misure sovrapposte). ### Piu- i dati con la versione del formato e nessun file a meta- | `csv/_confronti_e_dati.py::controlla`, `pre-commit` + CI |
+| **`P-ALB`** | `PRESIDIO` | NATO NELL-ERA 2: l-albero delle scelte ha la sua fonte in `doc/ALBERO_era2.yaml`, i nodi di `decisioni.jsonl` SI GENERANO da li-, e ### UN NODO `presa` CON UNA DIPENDENZA NON `presa` FA FALLIRE `valida`. ### Piu- il ciclo, l-arco rotto, l-etichetta locale usata come id, e un nodo PRESA di cui non si sa l-argomento. ### E- la differenza fra una DIREZIONE DICHIARATA e una DECISIONE PRESA: su `D9` Luca ha dichiarato una direzione e il mandato dice NELLA STESSA FRASE che non e- una decisione presa | `csv/_albero_era2.py::controlla`, dentro `indice.py valida` + `pre-commit` + CI |
 | **`P-C1`** | `PRESIDIO` | NATO NELL-ERA 2, ed e- il presidio del punto 12(a): il codice dichiara l-ID e la macchina verifica la biiezione, con DUE severita- -- un ID dichiarato e non nell-indice RIFIUTA, una voce PRESIDIO che nessun codice dichiara SEGNALA (A9). ### E HA PRESO SE- STESSO, come P-M1 | `csv/_controlli_nell_indice.py::controlla`, `pre-commit` + CI |
 | **`P-E1`** | `PRESIDIO` | NATO NELL-ERA 2. La BIIEZIONE fra legge in tabella, file generato, riga di registro e scheda, nei DUE VERSI, e `LEGGE` si legge VIA AST. ### Allargato agli OSSERVATORI il 2026-10-09: prima un osservatore in tabella era INVISIBILE alla biiezione | `csv/_presidi_era2.py::pe1`, `pre-commit` + CI, SENZA via d-uscita |
 | **`P-E2`** | `PRESIDIO` | NATO NELL-ERA 2. L-IMPRONTA: un generato ritoccato a mano, o una tabella cambiata senza rigenerare. ### SI RIGENERA, NON SI CORREGGE IL FILE -- e la CI rigenera e fa `git diff --exit-code` | `csv/_presidi_era2.py::pe2`, `pre-commit` + CI |

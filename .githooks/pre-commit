@@ -44,6 +44,13 @@ python "$(git rev-parse --show-toplevel)/csv/_rami_era2.py" || exit 1
 #  ### e' una ragione per dare --no-verify.
 python "$(git rev-parse --show-toplevel)/csv/_replay_registri.py" || exit 1
 
+#  `P-ALB` -- L'ALBERO DELLE SCELTE.
+#  ### Il collaudo, non il solo `controlla()`: `indice.py valida` lo chiama GIA'
+#  ### (ed e' quello che il mandato chiede), ma il collaudo ha il ramo
+#  ### END-TO-END che verifica che `valida` ESCA 1 -- cioe' che il presidio non
+#  ### si sia spento nel `try` dell'import.
+python "$(git rev-parse --show-toplevel)/csv/_albero_era2.py" --collaudo || exit 1
+
 #  L'ARBITRO FRA LE DUE VIE su `leggi.jsonl` e `variabili.jsonl`.
 #  ### Un giro del generatore dell'era 1 CANCELLAVA i record dell'era 2 (misurato:
 #  ### QUATTRO, e `P-T2` passava 13 su 13 senza vederlo). Il collaudo verifica

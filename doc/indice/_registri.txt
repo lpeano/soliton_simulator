@@ -1,9 +1,11 @@
 ========================================================================================================
 I QUATTRO REGISTRI DEI VOCABOLARI -- generati dalle fonti, non scritti a mano
+  le fonti: doc/REGISTRO_FISICA.md, doc/ASSIOMI.md, doc/ALBERO_era2.yaml,
+            primo_ordine/leggi/leggi.yaml, e doc/indice/storico_era2.jsonl
 ========================================================================================================
   leggi.jsonl            24 voci   (di cui 3 TENUTI dall-altra via: l-era 2)
   variabili.jsonl        45 voci   (di cui 1 TENUTI dall-altra via: l-era 2)
   assiomi.jsonl          21 voci
-  decisioni.jsonl        25 voci
+  decisioni.jsonl        35 voci
 
-  in tutto: 115 ID di vocabolario
+  in tutto: 125 ID di vocabolario

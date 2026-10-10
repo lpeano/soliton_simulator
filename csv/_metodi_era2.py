@@ -581,6 +581,16 @@ METODI['P-E9'] = (
 METODI['P-AB'] = (
     'NATO NELL-ERA 2: un `A`/`B` dichiara IL CAMPO UNICO in cui i bracci differiscono, e se ne differiscono due ### IL CONFRONTO NON PARTE (la lezione di `Z20`: due misure sovrapposte). ### Piu- i dati con la versione del formato e nessun file a meta-',
     '`csv/_confronti_e_dati.py::controlla`, `pre-commit` + CI', "PORTATO")
+METODI['P-ALB'] = (
+    "NATO NELL-ERA 2: l-albero delle scelte ha la sua fonte in `doc/ALBERO_era2.yaml`, i "
+    "nodi di `decisioni.jsonl` SI GENERANO da li-, e ### UN NODO `presa` CON UNA "
+    "DIPENDENZA NON `presa` FA FALLIRE `valida`. ### Piu- il ciclo, l-arco rotto, "
+    "l-etichetta locale usata come id, e un nodo PRESA di cui non si sa l-argomento. "
+    "### E- la differenza fra una DIREZIONE DICHIARATA e una DECISIONE PRESA: su `D9` "
+    "Luca ha dichiarato una direzione e il mandato dice NELLA STESSA FRASE che non e- "
+    "una decisione presa",
+    "`csv/_albero_era2.py::controlla`, dentro `indice.py valida` + `pre-commit` + CI",
+    "PORTATO")
 METODI['P-ID'] = (
     "un ID che NASCE non puo- collidere con un ID, un alias o uno dei significati "
     "dichiarati di un omonimo, e ha almeno 4 caratteri. ### Decisione di Luca, blocco 1 "

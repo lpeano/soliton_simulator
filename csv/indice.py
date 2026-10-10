@@ -371,6 +371,19 @@ def valida(voci, reg, verboso=True, derivati=True):
         if io.open(TSV, encoding="utf-8").read() != vista_tsv(voci):
             err.append("la VISTA `doc/INDICE_ID.tsv` NON coincide con voci.jsonl: e' stata "
                        "modificata a mano, oppure va rigenerata con `viste`")
+    # ### ⛔ **`P-ALB` DENTRO `valida`, E IL MANDATO LO CHIEDE ALLA LETTERA:**
+    # ### *<<una decisione marcata PRESA con una dipendenza ancora APERTA ->
+    # ### ### **la validazione FALLISCE**>>*. ### **Quindi entra in `err`, non fra i
+    # ### segnali:** un segnale che non blocca ### **non e- quello che il mandato ha
+    # ### chiesto.**
+    # ### ⚠ **E se il presidio SI SCHIANTA, l-errore si DICHIARA e non si
+    # ### nasconde** *(`A8`: un presidio che si schianta non deve bloccare in
+    # ### silenzio -- deve DIRLO)*.
+    try:
+        import _albero_era2 as _ALB
+        err += _ALB.controlla()
+    except Exception as _e:                                 # noqa: BLE001
+        err.append("`P-ALB` NON E- GIRATO (%s): dichiarato, non nascosto" % _e)
     if verboso:
         print("=" * 96)
         print("VALIDAZIONE dell'indice v%d -- %d voci, %d chiavi di metadato"

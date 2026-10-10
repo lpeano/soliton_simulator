@@ -14,7 +14,7 @@
 | `INFRASTRUTTURA` | `2` | 12 |
 | `INFRASTRUTTURA` | `ENTRAMBE` | 15 |
 | `METODO` | `1` | 156 |
-| `METODO` | `2` | 3 |
+| `METODO` | `2` | 5 |
 | `METODO` | `ENTRAMBE` | 83 |
 
 | id | classe | dominio | era | stato | blocca | titolo |
@@ -238,6 +238,7 @@
 | `D5` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | OMONIMO `D5`: lo stesso ID nomina DUE OGGETTI DIVERSI |
 | `D6` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | OMONIMO `D6`: lo stesso ID nomina DUE OGGETTI DIVERSI |
 | `DE-ACCOPPIABILITA` | MISURA | FISICA | 1 | ### **CHIUSA** |  | 4. DE-ACCOPPIABILITA' — analisi, non piano |
+| `DEC-ALBERO-CINQUE-SENZA-ARGOMENTO` | DECISIONE | METODO | 2 | ### **AGENDA** |  | di CINQUE nodi dell-albero il repo non dice l-argomento, e delle decisioni 1, 3, |
 | `DEC-NASCITA-PSI` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | con che stato nasce un nodo? il punto 3 chiede UNA REGOLA DICHIARATA per ogni gr |
 | `DEC-REGOLA-FORMA` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | che CODICE genera una `regola`? il punto 11(a) chiede che crescita e vuoto si ge |
 | `DEC-Z47-TRANSIZIONE` | DECISIONE | METODO | ENTRAMBE | ### **APERTA** |  | Z47 non si puo- portare ad AGENDA: CHIUSA -> AGENDA e- una transizione VIETATA |
@@ -434,6 +435,7 @@
 | `OMEGA-ETA` | MISURA | FISICA | 1 | ### **SOSPESA** |  | APERTA il 2026-09-26 (Luca: da seguire nel run base, NON una cura) / IL RAPPORTO |
 | `OSSERVABILE-P1` | DIFETTO | METODO | 1 | ### **CHIUSA** |  | APERTA il 2026-09-26 (rilievo di Luca) / NON ESISTE UNO STRUMENTO UFFICIALE PER  |
 | `P-AB` | PRESIDIO | INFRASTRUTTURA | 2 | ### **AGENDA** |  | un confronto A/B dichiara IL CAMPO UNICO, e i dati portano la versione del forma |
+| `P-ALB` | PRESIDIO | METODO | 2 | ### **AGENDA** |  | l-albero delle scelte: una decisione PRESA con una dipendenza NON PRESA e- rifiu |
 | `P-C1` | PRESIDIO | INFRASTRUTTURA | ENTRAMBE | ### **APERTA** |  | anche i CONTROLLI stanno nell-indice: il codice dichiara l-ID, e la macchina lo  |
 | `P-DECADIMENTO` | STANDARD | FISICA | ENTRAMBE | ### **APERTA** |  | ogni decadimento e una trasformazione: cio che una grandezza perde diventa calor |
 | `P-E1` | PRESIDIO | INFRASTRUTTURA | 2 | ### **AGENDA** |  | la BIIEZIONE fra legge in tabella, file generato, riga di registro e scheda |

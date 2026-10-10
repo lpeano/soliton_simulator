@@ -1,0 +1,175 @@
+# ====================================================================================
+#  L-ALBERO DELLE SCELTE DELL-ERA 2 -- L-UNICA FONTE
+# ------------------------------------------------------------------------------------
+#  I nodi di doc/indice/decisioni.jsonl SI GENERANO da qui
+#  (csv/_registri_indice.py::leggi_le_decisioni), e lo schema che valida questa
+#  tabella e- csv/_albero_era2.py, che e- anche IL PRESIDIO.
+#
+#  NIENTE SI SCRIVE A MANO IN doc/indice/decisioni.jsonl: quel file e- GENERATO, e un
+#  nodo scritto la- dentro SAREBBE CANCELLATO al primo giro del generatore. Misurato
+#  il 2026-10-10, ed e- il difetto DUE-VIE-SU-LEGGI-JSONL.
+# ====================================================================================
+#
+#  IL FORMATO DI UN NODO
+#  ---------------------
+#    id              DEC-[A-Z0-9-]{3,}  -- almeno 4 caratteri, unico
+#    etichetta       l-ETICHETTA LOCALE con cui Luca lo ha nominato (D9, D13, INT...).
+#                    ### E- UN CAMPO, non l-id: par. 9 dice che un-etichetta locale NON
+#                    e- un ID, e D2/D4/D5/D6 SONO GIA- OMONIMI DELL-ERA 1 -- un id di
+#                    due caratteri sarebbe anche RIFIUTATO da P-ID.
+#    titolo          una riga
+#    argomento_noto  true/false. ### FALSE VUOL DIRE CHE IL REPO NON DICE DI CHE COSA
+#                    SI DECIDE, e allora il nodo NON PUO- essere `presa` e porta una
+#                    DOMANDA. Non si indovina: si chiede.
+#    dipende_da      la lista degli id da cui dipende (anche vuota)
+#    presa           true/false
+#    fonte           dove Luca lo ha detto
+#
+#  IL PRESIDIO, in una riga: UN NODO `presa` CON UNA DIPENDENZA NON `presa` FA FALLIRE
+#  LA VALIDAZIONE. ### E- la differenza fra una DIREZIONE DICHIARATA e una DECISIONE
+#  PRESA, che e- esattamente cio- che questo albero serve a tenere separato.
+#
+# ====================================================================================
+
+nodi:
+
+  # ----------------------------------------------------------------------------------
+  #  LA CATENA, come il mandato la scrive:
+  #    D9 geometria -> D13 memorie -> D6 vuoto -> D7 divisione
+  # ----------------------------------------------------------------------------------
+
+  - id: DEC-D9-GEOMETRIA
+    etichetta: D9
+    titolo: "come nasce la geometria: la topologia e la metrica"
+    argomento_noto: true
+    dipende_da: []
+    presa: false
+    fonte: "doc/CODA_2026-10-09.md::albero delle scelte, punto 2"
+    nota: >
+      LA DIREZIONE DICHIARATA DA LUCA (2026-10-09): <<lo spazio emerge grazie alla
+      mitosi>> -- la mitosi crea i NODI e gli ARCHI (la topologia), le relazioni fra
+      gli stati psi dei nodi ne danno la METRICA: e- la 9(b).
+      ### MA IL MANDATO DICE, ALLA LETTERA, CHE LA DIREZIONE NON E- UNA DECISIONE
+      PRESA: <<il confronto (a)/(b) su PROVA resta, con i criteri fissati PRIMA>>.
+      ### Quindi `presa` e- false, e la direzione sta QUI come nota e non come stato.
+      E- la prima cosa che questo albero serve a tenere separata.
+
+  - id: DEC-D13-MEMORIE
+    etichetta: D13
+    titolo: "le memorie dentro H"
+    argomento_noto: true
+    dipende_da: [DEC-D9-GEOMETRIA]
+    presa: false
+    fonte: "doc/CODA_2026-10-09.md::albero delle scelte, punto 2"
+    nota: >
+      Cinque voci dell-era 1 sono SUPERATE da A16 con la nota <<idea da rileggere
+      quando si scrivono le memorie dentro H, decisione 13>>: M-FLUSSO, M-ISTERESI,
+      M-LEGAMI, M-MASSA, MEM-VERSO. ### Sono il materiale di questo nodo, e il mandato
+      2 le ha marcate proprio per questo.
+
+  - id: DEC-D6-VUOTO
+    etichetta: D6
+    titolo: "il vuoto"
+    argomento_noto: true
+    dipende_da: [DEC-D13-MEMORIE]
+    presa: false
+    fonte: "doc/CODA_2026-10-09.md::albero delle scelte, punto 2"
+
+  - id: DEC-D7-DIVISIONE
+    etichetta: D7
+    titolo: "la divisione"
+    argomento_noto: true
+    dipende_da: [DEC-D6-VUOTO]
+    presa: false
+    fonte: "doc/CODA_2026-10-09.md::albero delle scelte, punto 2"
+
+  # ----------------------------------------------------------------------------------
+  #  IL NODO DI METODO, il solo fuori dalla catena di cui il repo sappia l-argomento
+  # ----------------------------------------------------------------------------------
+
+  - id: DEC-INT-INTEGRATORE
+    etichetta: INT
+    titolo: "quale integratore: il GLOBALE o il LOCALE"
+    argomento_noto: true
+    dipende_da: []
+    presa: false
+    fonte: "doc/CODA_2026-10-09.md::integrazione la causalita-, punto 2"
+    nota: >
+      L-ARGOMENTO LO DICE IL MANDATO: <<un secondo integratore come CANDIDATO, non
+      come scelta (la decide Luca: nodo INT del piano)>>.
+      ### E LE DUE ALTERNATIVE SONO GIA- MISURATE, cosa che nessun altro nodo ha:
+      il LOCALE ha un cono ESATTO (1 arco per strato, 3 archi per passo, esattamente
+      zero oltre); il GLOBALE ne ha 5, E IL SUO RAGGIO DIPENDE DALLA TOLLERANZA
+      (3 archi a 1e-4, 5 a 1e-8 e a 1e-14) -- quindi il suo orizzonte e- un ARTEFATTO
+      DEL SOLUTORE, non causalita-. Deriva di norma 1.191e-15 (globale) contro
+      1.986e-15 (locale); energia 3.9e-5 per entrambi; reversibilita- 4e-15 per
+      entrambi, e la differenza fra i due E- RUMORE DI ARROTONDAMENTO (su 4 semi il
+      rapporto oscilla di un fattore 3.7, e tutti gli 8 valori stanno al pavimento
+      del float64).
+      ### IL REFERTO MISURA LE ALTERNATIVE E NON SCEGLIE: e- la forma dell-albero
+      applicata a una decisione di metodo.
+
+  # ----------------------------------------------------------------------------------
+  #  I CINQUE NODI DI CUI IL REPO NON DICE L-ARGOMENTO
+  #  ### Il mandato li elenca -- <<piu- D4, D2, D11, D12, T4>> -- e NON dice di che
+  #  ### cosa decidano. La lista numerata delle decisioni di Luca NON E- NEL REPO:
+  #  ### cercata in CODA_2026-10-09.md, PUNTO_DELLA_SITUAZIONE.md, nella relazione,
+  #  ### nei task history e nell-indice.
+  #  ### NON INVENTO il loro argomento. Il nodo esiste, l-etichetta e- quella di Luca,
+  #  ### e `argomento_noto: false` PORTA UNA DOMANDA: il presidio pretende che un nodo
+  #  ### cosi- NON sia `presa`, perche- NON SI PUO- PRENDERE UNA DECISIONE DI CUI NON
+  #  ### SI SA L-ARGOMENTO.
+  # ----------------------------------------------------------------------------------
+
+  - id: DEC-D2-DA-CHIEDERE
+    etichetta: D2
+    titolo: "nodo D2 dell-albero: l-argomento NON e- nel repo"
+    argomento_noto: false
+    dipende_da: []
+    presa: false
+    fonte: "doc/CODA_2026-10-09.md::albero delle scelte, punto 2"
+
+  - id: DEC-D4-DA-CHIEDERE
+    etichetta: D4
+    titolo: "nodo D4 dell-albero: l-argomento NON e- nel repo"
+    argomento_noto: false
+    dipende_da: []
+    presa: false
+    fonte: "doc/CODA_2026-10-09.md::albero delle scelte, punto 2"
+
+  - id: DEC-D11-DA-CHIEDERE
+    etichetta: D11
+    titolo: "nodo D11 dell-albero: l-argomento NON e- nel repo"
+    argomento_noto: false
+    dipende_da: []
+    presa: false
+    fonte: "doc/CODA_2026-10-09.md::albero delle scelte, punto 2"
+
+  - id: DEC-D12-DA-CHIEDERE
+    etichetta: D12
+    titolo: "nodo D12 dell-albero: l-argomento NON e- nel repo"
+    argomento_noto: false
+    dipende_da: []
+    presa: false
+    fonte: "doc/CODA_2026-10-09.md::albero delle scelte, punto 2"
+
+  - id: DEC-T4-DA-CHIEDERE
+    etichetta: T4
+    titolo: "nodo T4 dell-albero: l-argomento NON e- nel repo"
+    argomento_noto: false
+    dipende_da: []
+    presa: false
+    fonte: "doc/CODA_2026-10-09.md::albero delle scelte, punto 2"
+
+# ====================================================================================
+#  LE RADICI GIA- PRESE
+#  ### Il mandato dice: <<Gia- prese, come radici: A16, A17, le decisioni 1, 3, 10>>.
+#  ### A16 e A17 CI SONO, come DEC-A16 e DEC-A17 (li genera il generatore dagli
+#  ### assiomi). ### <<Le decisioni 1, 3, 10>> appartengono alla STESSA LISTA NUMERATA
+#  ### CHE NON E- NEL REPO: non le indovino, e la domanda e- la stessa dei cinque nodi
+#  ### sopra.
+# ====================================================================================
+
+radici_prese:
+  - DEC-A16
+  - DEC-A17
