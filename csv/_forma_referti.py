@@ -95,6 +95,13 @@ TESTI = (
     # ### ### **cambia da un minuto all-altro.** ### **Un `VIVO` fallirebbe un minuto
     # ### dopo averlo scritto** -- ed e- esattamente il caso che il presidio descrive
     # ### nella sua riga <<non FALLIRE il giorno dopo averla scritta>>.
+    # ### ⛔ **E IL MANIFEST DELL-ARCHIVIO E- IL `REPERTO` PIU- STRETTO DI
+    # ### TUTTI:** e- la fotografia di una operazione ### **IRREVERSIBILE** -- i file
+    # ### ### **non sono piu- nel repo** -- e rigenerarlo vorrebbe dire ### **rifare lo
+    # ### spostamento**, che non si puo- rifare due volte.
+    ("doc/ARCHIVIO_E_2026-10-10.tsv", REPERTO,
+     "lo spostamento su `E:` del `2026-10-10`",
+     "python csv/_archivia_su_e.py --esegui", "20fa1129a49ee9dd"),
     ("doc/SPAZIO_DISCO_2026-10-10.md", REPERTO,
      "lo spazio su disco al mandato del `2026-10-10`",
      "python csv/_spazio_disco.py", "25bfc8c629cdd777"),

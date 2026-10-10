@@ -16,36 +16,37 @@
 
 ## LE ALTRE, per priorita-
 
-### `CRITICA` — **3**
+### `CRITICA` — **2**
 
 | la domanda | pronta? | che cosa aspetta |
 |---|---|---|
 | **[[DOMANDA-D13-CONIUGATI]]** D13: i coniugati delle memorie -- tw come fase U(1) sull-arco? | ### ⏳ aspetta | ### **aspetta:** `DOMANDA-D9-GEOMETRIA` |
 | **[[DOMANDA-D9-GEOMETRIA]]** D9: la geometria viene da d e p_d dentro H, o dalle relazioni fra gli ps | ### ⏳ aspetta | ### **aspetta:** `DOMANDA-QUANTITA-CONSERVATA` |
-| **[[VUOTO-LOCALE-DETERMINISTICO]]** termostato locale + scuotimento DETERMINISTICO: UNA legge per nodo, fase | ### ⏳ aspetta | ### **aspetta:** `DOMANDA-D13-CONIUGATI` |
 
-### `DIPENDENTE` — **5**
+### `DIPENDENTE` — **6**
 
 | la domanda | pronta? | che cosa aspetta |
 |---|---|---|
+| **[[DOMANDA-FORME-VUOTO]]** le TRE forme del vuoto locale: che cos-e- un grado, quanti per nodo, l-a | ### ⏳ aspetta | ### **aspetta:** `DOMANDA-QUANTITA-CONSERVATA` |
 | **[[DOMANDA-FUSIONE]]** la FUSIONE di due nodi: si vieta, e con che cosa? | ### ✅ **PRONTA** | ### **niente** |
 | **[[DOMANDA-GRAFO-INIZIALE]]** il grafo iniziale SENZA pos: reticolo, k-regolare, espansore? | ### ✅ **PRONTA** | ### **niente** |
-| **[[DOMANDA-GRANDEZZA-LOCALE-TEMPO]]** da dove viene la grandezza locale da cui escono r_k e cs_k? | ### ⏳ aspetta | ### **aspetta:** `DOMANDA-QUANTITA-CONSERVATA`, `VUOTO-LOCALE-DETERMINISTICO` |
+| **[[DOMANDA-GRANDEZZA-LOCALE-TEMPO]]** da dove viene la grandezza locale da cui escono r_k e cs_k? | ### ⏳ aspetta | ### **aspetta:** `DOMANDA-QUANTITA-CONSERVATA` |
 | **[[DOMANDA-LAMBDA-GRANDEZZA]]** lambda: su quale grandezza si misura, e da dove viene il suo valore? | ### ⏳ aspetta | ### **aspetta:** `DOMANDA-D9-GEOMETRIA` |
 | **[[DOMANDA-UNITA-DI-STATO]]** l-unita- di stato: qual e- la capacita- di un nodo? | ### ⏳ aspetta | ### **aspetta:** `DOMANDA-D9-GEOMETRIA` |
 
-### `MINORE` — **2**
+### `MINORE` — **3**
 
 | la domanda | pronta? | che cosa aspetta |
 |---|---|---|
 | **[[DOMANDA-A3B-CLASSE]]** A3b: con che classe entra nell-indice? | ### ✅ **PRONTA** | ### **niente** |
 | **[[DOMANDA-REGOLE-FUORI-CLAUDE]]** le regole di gestione fuori da CLAUDE.md, e quelle dentro senza presidio | ### ✅ **PRONTA** | ### **niente** |
+| **[[DUE-STRUMENTI-ARCHIVIO-E]]** due strumenti per lo stesso mestiere: spostare gli output su E- | ### ✅ **PRONTA** | ### **niente** |
 
 ---
 
 ## IL CONTO
 
-> ### ⛔ **aperte `11`, di cui pronte `5`.**
+> ### ⛔ **aperte `12`, di cui pronte `6`.**
 >
 > ### ✅ **E una domanda DECISA esce da sola:** si chiude con la decisione di Luca e il commit, e ### **nessuno la spunta a mano** -- la lista ### **si genera dai campi**, e un campo che cambia ### **cambia la lista.**
 
@@ -55,9 +56,17 @@
 
 > ### 📌 **Queste arrivano dai DUE criteri vecchi** *(la nota che dice <<da decidere da Luca>>, e lo stato `DA_CLASSIFICARE`)*, e ### **non hanno una `priorita`**: quindi ### **non stanno nell-ordine delle dipendenze.** ### ✅ **Non le tolgo: le DICHIARO**, perche- una lista che ne nasconde una parte ### **sembra completa.**
 
-| **voci che aspettano una decisione** | ### **`0`** |
-| **domande in tutto** | `0` |
+| **voci che aspettano una decisione** | ### **`1`** |
+| **domande in tutto** | `1` |
 | **segnaposto `NON_DEFINITA`**, che NON sono una domanda | `187` |
+
+---
+
+## le DOMANDE aperte -- `1`
+
+| id | `classe`/`dominio`/era/stato | LA DOMANDA | LA FRASE |
+|---|---|---|---|
+| `DUE-STRUMENTI-ARCHIVIO-E` | `DIFETTO`/`INFRASTRUTTURA`/`ENTRAMBE`/`APERTA` | quale dei due strumenti resta, e un solo registro degli archiviati | due strumenti per lo stesso mestiere: spostare gli output su E- ### DOMANDA APERTA PER LUCA, da decidere da Luca: QUALE DEI DUE RESTA. ### IL FATTO: ` |
 
 ---
 

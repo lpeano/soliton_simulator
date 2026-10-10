@@ -12548,3 +12548,13 @@ Ogni dato di `db_era2/` ha ### **il suo TIMBRO accanto**, col campo `versione_da
 ### ⚠ **E <<TRACCIATO>> NON E- <<IGNORATO>>:** l-insieme da non toccare esce da ### **`git ls-files`**, non dal `.gitignore` — ### **sono due domande diverse**, e quella giusta qui e- ### **<<git lo conosce?>>**, non ### **<<git lo guarda?>>**.
 
 ### ⛔ **E QUESTO COMMIT NON PORTA IL MANIFEST, DI PROPOSITO:** par. `5` dice che ### **il codice che genera un output dev-essere GIA- COMMITTATO quando l-output nasce.** ### **Quindi: prima lo strumento, poi il run, poi il manifest** — e il manifest sara- ### **un commit a se-.**
+
+## ✅ **LO SPOSTAMENTO E- FATTO: `5.25` GB SU `E:`, `309` FILE, E LA VERIFICA NON VIENE DAL MANIFEST** *(2026-10-10)*
+
+### 📌 **I NUMERI:** ### **`309` file su `309`**, ### **`5.25` GB**, in ### **`41` s**; `C:` da ### **`3.16` GB liberi a `8.42`** *(guadagnati `5.25`)*; manifest `doc/ARCHIVIO_E_2026-10-10.tsv`, ### **`309` righe**, `53337` byte, blob `20fa1129a49ee9dd`.
+
+### ⭐ **E LA VERIFICA E- INDIPENDENTE DAL MANIFEST, perche- un manifest che verifica se stesso non verifica niente** *(e- la forma del FALSO-UNO)*: ho ricontato ### **dal DISCO** — ### **`0` originali ancora nel repo**, ### **`0` copie mancanti su `E:`**, ### **`0` file di quelle estensioni rimasti sotto `csv/` e `db/`**, e un ### **campione di `6` file riletti da `E:` e riverificato byte e `sha1`: `6` su `6`.**
+
+### ⚠ **E UNA COSA CHE AVREI DOVUTO CERCARE PRIMA DI SCRIVERE LO STRUMENTO:** nel repo c-era ### **GIA-** `csv/_sposta_su_E.py`, del ### **`2026-09-22`**, che fa la stessa cosa con ### **una lista ESPLICITA di tre cartelle** e un-altra destinazione *(`E:/soliton_archivio/spostati_2026-09-22`)*. ### ⛔ **E il suo commit `31001eb` si chiama <<lo strumento spostava anche FILE TRACCIATI DA GIT: difetto mio>>** — cioe- ### **la trappola in cui sono appena NON caduto era GIA- SCRITTA NEL REPO**, e ci sono passato accanto senza leggerla.
+
+### ✅ **La differenza fra i due, dichiarata invece di lasciata implicita:** quello del `2026-09-22` sposta ### **cio- che e- SCRITTO in una lista** *(tre cartelle che avevano gia- servito il loro sigillo)*; questo sposta ### **per REGOLA** *(tre estensioni, due radici, e ### **solo i NON tracciati**)*. ### ⚠ **Due strumenti per lo stesso mestiere sono UNO DI TROPPO**, e ### **quale dei due resti e- una decisione di Luca**, non mia: la metto in `DA_DECIDERE_LUCA.md` invece di deciderla.

@@ -379,6 +379,7 @@
    "DOMANDA-UNITA-DI-STATO",
    "DOPPIA-COP",
    "DRIVER-SCENA-II",
+   "DUE-STRUMENTI-ARCHIVIO-E",
    "DUE-VIE-SU-LEGGI-JSONL",
    "E1",
    "E3",
@@ -1337,6 +1338,7 @@
    "D36",
    "D37",
    "D38",
+   "DUE-STRUMENTI-ARCHIVIO-E",
    "DUE-VIE-SU-LEGGI-JSONL",
    "E4-LAM",
    "ESENTE-P3",
@@ -2670,6 +2672,7 @@
    "D32-CONTATORE",
    "D37",
    "DRIVER-SCENA-II",
+   "DUE-STRUMENTI-ARCHIVIO-E",
    "DUE-VIE-SU-LEGGI-JSONL",
    "ETC-C1-CONFINE",
    "FATTI-AVVIO",
@@ -3832,6 +3835,7 @@
    "CONTROLLO-CONTRO-ATTESA-CONGELATA",
    "DEC-Z47-TRANSIZIONE",
    "DECISIONE-VUOLE-UN-CAMPO",
+   "DUE-STRUMENTI-ARCHIVIO-E",
    "DUE-VIE-SU-LEGGI-JSONL",
    "ESENTE-P3",
    "ETICHETTA-A13",
@@ -6161,6 +6165,9 @@
   "misura del guardiano su un clone pulito, 2026-10-10": [
    "COLLAUDO-LEGGE-L-AMBIENTE"
   ],
+  "trovato il 2026-10-10 mentre eseguivo la decisione di Luca sullo spazio": [
+   "DUE-STRUMENTI-ARCHIVIO-E"
+  ],
   "valutazione del guardiano accettata da Luca, 2026-10-10": [
    "DISEGNO-3D-OSSERVATORE",
    "MEMORIE-NELLA-CAMMINATA"
@@ -7092,6 +7099,7 @@
    "COLLAUDO-NON-ESEGUITO",
    "CONTA-RIGHE",
    "DECISIONE-VUOLE-UN-CAMPO",
+   "DUE-STRUMENTI-ARCHIVIO-E",
    "ESENTE-P3",
    "FALSO-UNO",
    "FALSO-ZERO",

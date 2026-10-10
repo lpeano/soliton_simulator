@@ -13,7 +13,7 @@
 | `FISICA` | `ENTRAMBE` | 17 |
 | `INFRASTRUTTURA` | `1` | 39 |
 | `INFRASTRUTTURA` | `2` | 14 |
-| `INFRASTRUTTURA` | `ENTRAMBE` | 23 |
+| `INFRASTRUTTURA` | `ENTRAMBE` | 24 |
 | `METODO` | `1` | 156 |
 | `METODO` | `2` | 14 |
 | `METODO` | `ENTRAMBE` | 88 |
@@ -267,6 +267,7 @@
 | `DOMANDA-UNITA-DI-STATO` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | l-unita- di stato: qual e- la capacita- di un nodo? |
 | `DOPPIA-COP` | CURA | FISICA | 1 | ### **SOSPESA** |  | LA CURA (b): la doppia copertura 4 pi e' un ASSIOMA e va resa STRUTTURALE, non m |
 | `DRIVER-SCENA-II` | CURA | INFRASTRUTTURA | 1 | ### **CHIUSA** |  | APERTA il 2026-09-26 (rilievo di Luca) / IL DRIVER NON SA FARE LA SCENA (ii), e  |
+| `DUE-STRUMENTI-ARCHIVIO-E` | DIFETTO | INFRASTRUTTURA | ENTRAMBE | ### **APERTA** |  | due strumenti per lo stesso mestiere: spostare gli output su E- |
 | `DUE-VIE-SU-LEGGI-JSONL` | DIFETTO | INFRASTRUTTURA | ENTRAMBE | ### **CHIUSA** |  | due vie di scrittura si contendono leggi.jsonl e variabili.jsonl, e vince chi gi |
 | `E1` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 56 volte, MAI definito in un registro) |
 | `E3` | FRONTE | FISICA | 1 | ### **SOSPESA** |  | EPOCA 3 + RUN LUNGO — tag epoca-3, 3000 passi, M1/M4 leggere durante il run / GL |
