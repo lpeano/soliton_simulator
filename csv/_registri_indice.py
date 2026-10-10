@@ -285,11 +285,21 @@ def leggi_le_decisioni():
     assert not rotto, ("### L-ALBERO NON PASSA `P-ALB` e NON LO GENERO: %s"
                        % rotto[:2])
     for n in alb:
-        fuori.append({"id": n["id"], "nome_scheda": "", "titolo": n["titolo"][:100],
-                      "data": "2026-10-10", "presa": bool(n["presa"]),
-                      "fonte": n["fonte"], "etichetta": n["etichetta"],
-                      "dipende_da": list(n["dipende_da"]),
-                      "argomento_noto": bool(n["argomento_noto"])})
+        riga = {"id": n["id"], "nome_scheda": "", "titolo": n["titolo"][:100],
+                "data": "2026-10-10", "presa": bool(n["presa"]),
+                "fonte": n["fonte"], "etichetta": n["etichetta"],
+                "dipende_da": list(n["dipende_da"]),
+                "argomento_noto": bool(n["argomento_noto"])}
+        # ### \u2705 **`superata_da` SOLO DOVE C-E-, dal `2026-10-10`** *(decisione di
+        # ### Luca)*, e per la ragione che questo file dichiara otto righe sopra:
+        # ### ### **un campo assente dice <<non si applica>>, un campo vuoto direbbe
+        # ### <<niente la supera>>** -- e sono due cose diverse.
+        # ### \u26a0 **E COSI- LA MIGRAZIONE NON TOCCA LE ALTRE RIGHE:** e- la lezione
+        # ### di `527e70c`, dove aggiungere tre campi a tutte le voci ### **ha spento un
+        # ### confronto col passato in silenzio.**
+        if n.get("superata_da"):
+            riga["superata_da"] = n["superata_da"]
+        fuori.append(riga)
     assert len(fuori) >= 5, "trovate solo %d decisioni: la fonte e' cambiata" % len(fuori)
     return fuori
 

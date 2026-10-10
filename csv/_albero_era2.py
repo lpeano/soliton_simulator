@@ -48,7 +48,12 @@ CAMPI = ("id", "etichetta", "titolo", "argomento_noto", "dipende_da", "presa", "
 # ### ⚠ **`nota` e- OPZIONALE**, e il resto e- ### **obbligatorio**: un nodo senza
 # ### `dipende_da` e- un nodo che ### **non dice se dipende da qualcosa**, che non e- la
 # ### stessa cosa di ### **una lista vuota.**
-OPZIONALI = ("nota",)
+# ### ✅ **E `superata_da` E- OPZIONALE dal 2026-10-10** *(decisione di Luca)*: si
+# ### mette ### **solo dove serve**, perche- ### **un campo ASSENTE dice <<non si
+# ### applica>>** e un campo vuoto direbbe ### **<<niente la supera>>** -- due cose
+# ### diverse. ### ⚠ **E cosi- la migrazione NON tocca le altre 13 righe:** e- la
+# ### lezione di `527e70c`.
+OPZIONALI = ("nota", "superata_da")
 
 MIN_CARATTERI = 4
 _FORMA_ID = re.compile(r"^DEC-[A-Z0-9-]{3,}$")
@@ -70,6 +75,30 @@ def decisioni_esistenti():
         return set()
     return {json.loads(r)["id"] for r in io.open(p, encoding="utf-8").read().split(NL)
             if r.strip()}
+
+
+def id_noti():
+    """### Gli `id` che il repo CONOSCE: voci, assiomi, decisioni.
+
+    ### \u26d4 **Serve a `superata_da`, che dal `2026-10-10` sta anche sui nodi
+    dell-albero** *(decisione di Luca)*: il campo e- ### **a vocabolario controllato** --
+    ### **deve essere un ID che ESISTE** -- perche- un `superata_da` che punta nel vuoto
+    e- ### **un riferimento rotto in un campo che un programma legge.**
+    """
+    import json
+    fuori = set()
+    for nome in ("voci.jsonl", "assiomi.jsonl", "decisioni.jsonl"):
+        p = os.path.join(RADICE, "doc", "indice", nome)
+        if not os.path.exists(p):
+            continue
+        for r in io.open(p, encoding="utf-8").read().split(NL):
+            if not r.strip():
+                continue
+            d = json.loads(r)
+            fuori.add(d.get("id"))
+            for a in (d.get("alias") or []):
+                fuori.add(a)
+    return fuori - {None}
 
 
 def controlla(nodi=None, radici=None):
@@ -119,6 +148,23 @@ def controlla(nodi=None, radici=None):
         if i in (gia - {str(x.get("id") or "") for x in nodi}):
             err.append("`P-ALB` `%s`: COLLIDE con una decisione che c-e- gia- e "
                        "che NON viene da questo albero" % i)
+        # ### ⛔ **`superata_da`, SE C-E-, DEVE ESSERE UN ID CHE ESISTE**
+        # ### *(decisione di Luca, 2026-10-10)*. ### ⚠ **E il campo si mette SOLO
+        # ### dove serve**, non su tutti i nodi: questo file dice da se- che
+        # ### ### **<<un campo ASSENTE dice "non si applica"; un campo VUOTO direbbe
+        # ### un-altra cosa>>** -- e mettere `superata_da: ""` su `13` nodi sarebbe
+        # ### ### **dichiarare 13 volte che niente li supera**, che non e- la stessa cosa
+        # ### di ### **non dirlo.**
+        if "superata_da" in n:
+            _s = str(n.get("superata_da") or "")
+            if not _s:
+                err.append("`P-ALB` `%s`: ha il campo `superata_da` ed e- VUOTO. Un "
+                           "campo che non si applica SI OMETTE: vuoto direbbe <<niente "
+                           "la supera>>, che e- un-altra cosa" % i)
+            elif _s not in id_noti():
+                err.append("`P-ALB` `%s`: `superata_da` e- `%s`, che NON E- UN ID "
+                           "ESISTENTE. Un riferimento rotto in un campo che un programma "
+                           "legge e- peggio di un campo assente" % (i, _s))
         # ### ⛔ **L-ETICHETTA LOCALE NON PUO- ESSERE L-ID** *(par. `9`)*.
         if i in etich:
             err.append("`P-ALB` `%s`: l-id E- un-etichetta locale. ### Par. 9: "
@@ -290,6 +336,26 @@ def collaudo():
           any("NON SI SA" in x and senza["id"] in x for x in controlla(n4, radici)),
           "`%s`: ### il repo non dice di che cosa decida, e il mandato non lo dice"
           % senza["id"])
+
+    # ------------------------------------------------- `superata_da`, nei DUE versi
+    # ### ⛔ **Il campo e- nato il `2026-10-10`, e nasce COI SUOI DUE BRACCI:** un
+    # ### `superata_da` ### **vuoto** e uno che ### **punta nel vuoto.**
+    n6 = copy.deepcopy(nodi)
+    n6[0]["superata_da"] = ""
+    esito("### DEVE scattare: `superata_da` VUOTO",
+          any("ed e- VUOTO" in x for x in controlla(n6, radici)),
+          "### un campo che non si applica SI OMETTE: vuoto direbbe <<niente la supera>>")
+    n7 = copy.deepcopy(nodi)
+    n7[0]["superata_da"] = "NON-ESISTE-QUESTO-ID"
+    esito("### DEVE scattare: `superata_da` che punta a un ID INESISTENTE",
+          any("NON E- UN ID ESISTENTE" in x for x in controlla(n7, radici)),
+          "### un riferimento rotto in un campo che un programma legge e- PEGGIO di un "
+          "campo assente")
+    n8 = copy.deepcopy(nodi)
+    n8[0]["superata_da"] = "A17"
+    esito("NON deve scattare: `superata_da` a un ID che ESISTE",
+          not any("superata_da" in x for x in controlla(n8, radici)),
+          "### `A17` e- un assioma registrato: il campo accetta voci, assiomi e decisioni")
 
     # ------------------------------------------------- l-arco ROTTO
     n5 = copy.deepcopy(nodi)

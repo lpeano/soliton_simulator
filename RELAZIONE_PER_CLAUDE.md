@@ -12490,3 +12490,15 @@ Ogni dato di `db_era2/` ha ### **il suo TIMBRO accanto**, col campo `versione_da
 ### ⭐ **LA DIPENDENZA CHE MANCA, per nome:** ### **le FORME del vuoto** *(`D6f`)* e ### **la FORZA DI COESIONE** *(`FC`)* — e ### **dipendono ENTRAMBE dalla QUANTITA- CONSERVATA**, che e- ### **LA PROSSIMA.**
 
 ### ✅ **E IL PRINCIPIO DELLA DIVISIONE RESTA PRESO E REGISTRATO:** `psi → psi/sqrt(2)` con la ### **stessa fase**, che conserva la somma di `rho` ### **in aritmetica esatta** e in virgola mobile ### **entro l-arrotondamento** *(la mia misura di `4e476b4`: al bit solo nel `23.7`% dei casi, errore relativo massimo `9.4e-16`)*. ### 📌 **Cio- che manca e- CHI PAGA**, ed e- ### **esattamente cio- che il mandato prevede.**
+
+## ✅ **PUNTO `4`: `superata_da` E- UN CAMPO, non una nota** — ### **e la lezione di `527e70c` e- stata applicata PRIMA, non dopo** *(2026-10-10)*
+
+### 📌 **In `c38d32b` avevo dichiarato il limite:** *«`decisioni.jsonl` non ha un campo `superata_da`, quindi il legame vive nella nota e ### **NON e- leggibile da un programma**»*. ### ✅ **Adesso e- un CAMPO**, e `P-ALB` verifica che ### **l-ID ESISTA.**
+
+### ⭐ **E IL CAMPO SI METTE SOLO DOVE SERVE, per la ragione che quel file DICHIARA DA SE-:** *«un campo ASSENTE dice <<non si applica>>; un campo VUOTO direbbe <<nessuna dipendenza>>, che e- un-altra cosa»*. ### ⛔ **Mettere `superata_da: ""` su `13` nodi sarebbe dichiarare TREDICI VOLTE che niente li supera.**
+
+### ✅ **E COSI- LA MIGRAZIONE NON TOCCA LE ALTRE RIGHE — che e- esattamente la lezione di `527e70c`, applicata PRIMA e non dopo:** la- aggiungere tre campi a tutte le voci ### **aveva spento un confronto col passato in silenzio.**
+
+### 📌 **E IL MANDATO CHIEDE DI VERIFICARLO, non di prometterlo. MISURATO, nei due versi:** `P-T2` e- ### **`27` su `27`** a disco pulito *(codice `0`)*; e cambiando ### **`superata_da` A MANO** nel registro generato ### **esce `1`** — ### **il braccio MORDE ancora.** ### **E i byte sono stati ripristinati.**
+
+### ✅ **E il campo nasce COI SUOI DUE BRACCI:** un `superata_da` ### **vuoto** e uno che ### **punta a un ID inesistente**, piu- il verso sano *(`A17`, che e- un assioma registrato)*. ### **`P-ALB`: `17` su `17`.**

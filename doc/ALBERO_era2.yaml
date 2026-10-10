@@ -195,6 +195,12 @@ nodi:
 
   - id: DEC-INT-INTEGRATORE
     etichetta: INT
+    # ### ✅ **IL CAMPO `superata_da`, dal 2026-10-10** *(decisione di Luca)*:
+    # ### prima il superamento stava ### **solo nella nota**, cioe-
+    # ### ### **non lo leggeva nessun programma** -- e l-avevo dichiarato come un
+    # ### limite in `c38d32b`. ### **Adesso e- un CAMPO, e `P-ALB` verifica che
+    # ### l-ID ESISTA.**
+    superata_da: CAMMINATA-A-MONETA
     titolo: "quale integratore: il GLOBALE o il LOCALE"
     argomento_noto: true
     dipende_da: []
