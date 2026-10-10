@@ -241,17 +241,24 @@ vive in **`doc/COMPONENTI_PROMOSSE.md`**, insieme al registro che governa.
 
 ## 11. LE REGOLE DI LAVORO
 
-| id | la regola |
-|---|---|
-| **`P1`** | **Non usare l'associazione senza verificare lo storico:** prima di una diagnosi o di una cura, **rileggi dal DISCO** cio' che e' gia' stabilito. Le frasi *«manca X»*, *«il problema e' Y»*, *«basta fare Z»* sono **il segnale d'allarme**. |
-| **`P2`** | **Prima di escludere un flag da una misura: FORZA il sistema o lo CORREGGE?** Escludere un **forzante** protegge la misura; escludere una **correzione** significa **misurare un sistema che si sa difettoso**. |
-| **`P1-quater`** | **Ogni sostituzione di testo si asserisce per se', mai in blocco:** un helper che **conta l'ancora e fallisce se non e' unica**, **una alla volta**. **Niente escape nei patch script**, **ancore ASCII**, e **le patch si lanciano in primo piano**. |
-| **`L-PATCH`** | **Non si fa `git stash` con una patch in corso.** ### **Dal 2026-10-03 e' `H-STASH`: BLOCCATO.** La strada giusta e' `git add <i file>` e `git commit` — **git committa SOLO L'INDICE.** |
-| **`L-NUMERI`** | **Ogni numero scritto in un commit o in un referto esce da uno script:** un numero ricopiato **non ha provenienza**. |
-| **`L-UN-PROMPT`** | **Un prompt alla volta.** I rilievi che arrivano durante un lavoro **vanno in CODA**, non lo interrompono. |
-| **`L-STELLA`** | **Le CINQUE DOMANDE di `doc/STELLA_POLARE.md` si rispondono PER ISCRITTO nel task history di ogni commit che cambia la fisica** — *anche solo con «non si applica, perche' …», e **il «perche'» e' parte della risposta***. ### ⛔ **Regola scritta, NON un presidio** (`A9`). |
-| **`L-DOPO-STOP`** | **Dopo uno `STOP`, se Luca non risponde, si lavora SOLO la coda:** nessuna cura fisica, nessun run lungo, **nessuna decisione presa al suo posto**. |
+<!-- REGOLE GENERATE par11.md -- NON SI SCRIVE A MANO: python csv/_regole_gestione.py --scrivi -->
 
+| id | la regola | chi la fa rispettare |
+|---|---|---|
+| **`[[DECISIONE-VUOLE-UN-CAMPO]]`** | Una decisione che serve a un PROGRAMMA vuole un CAMPO: nessuno strumento legge `titolo` o `descrizione` per decidere | ⚠ **regola scritta** *(`A9`)* |
+| **`[[L-DOPO-STOP]]`** | Dopo uno STOP, se Luca non risponde si lavora SOLO la coda: nessuna decisione presa al suo posto | ⚠ **regola scritta** *(`A9`)* |
+| **`[[L-NUMERI]]`** | Ogni numero scritto in un commit o in un referto esce da uno script: un numero ricopiato NON HA PROVENIENZA | ⚠ **regola scritta** *(`A9`)* |
+| **`[[L-PATCH]]`** | Non si fa `git stash` con una patch in corso: git committa SOLO L-INDICE | **`H-STASH`** |
+| **`[[L-STELLA]]`** | Le CINQUE DOMANDE di `doc/STELLA_POLARE.md` si rispondono PER ISCRITTO nel task history di ogni commit che cambia la fisica | ⚠ **regola scritta** *(`A9`)* |
+| **`[[L-UN-PROMPT]]`** | Un prompt alla volta: i rilievi che arrivano durante un lavoro vanno in CODA, non lo interrompono | ⚠ **regola scritta** *(`A9`)* |
+| **`[[P1]]`** | Non usare l-associazione senza verificare lo storico: prima di una diagnosi o di una cura si RILEGGE DAL DISCO | ⚠ **regola scritta** *(`A9`)* |
+| **`[[P1-quater]]`** | Ogni sostituzione di testo si asserisce per se-, mai in blocco: un helper che CONTA l-ancora e fallisce se non e- unica | ⚠ **regola scritta** *(`A9`)* |
+| **`[[P2]]`** | Prima di escludere un flag da una misura: FORZA il sistema o lo CORREGGE? Escludere una correzione significa misurare un sistema che si sa difettoso | ⚠ **regola scritta** *(`A9`)* |
+| **`[[PRECEDENZA-IN-CODA]]`** | Fra piu- versioni di un mandato in coda vale SOLO L-ULTIMA, e l-ordine di esecuzione si REGISTRA | ⚠ **regola scritta** *(`A9`)* |
+
+> ### ⚠ **`9` di queste `10` NON HANNO NESSUN PRESIDIO che le faccia rispettare** *(`A9`)*: `DECISIONE-VUOLE-UN-CAMPO`, `L-DOPO-STOP`, `L-NUMERI`, `L-STELLA`, `L-UN-PROMPT`, `P1`, `P1-quater`, `P2`, `PRECEDENZA-IN-CODA`. ### **E il numero esiste perche' <<chi la fa rispettare>> e' UN CAMPO: in prosa non si contava.** ### **IL DETTAGLIO:** `doc/REGOLE/par11.md`.
+
+<!-- FINE REGOLE GENERATE par11.md -->
 *(Il **metodo di una misura** — barre d'errore, semi, soglie, criteri, epoche — **non e'
 qui**: sta in `doc/PATTERN_DI_PROVA.md`.)*
 
@@ -268,23 +275,29 @@ qui**: sta in `doc/PATTERN_DI_PROVA.md`.)*
 > `git config core.hooksPath .githooks`. **Finche' non e' dato, i presidi NON impediscono
 > niente** (`A9`).
 
-| id | stadio | che cosa **impedisce** |
-|---|---|---|
-| **`H-P3`** | `pre-commit` | un **sigillo** che configura il modulo **a mano** invece di passare dal CLI |
-| **`H-P5`** | `pre-commit` | un **referto** che non dichiara **la configurazione INTERA** |
-| **`H-P7`** | `pre-commit` | un **flag** il cui commento cambia senza nominare quel flag |
-| **`H-P8`** | `pre-commit` | un confronto che prende **il codice di prima da `HEAD`** invece che dal PADRE |
-| **`H-VALIDATORE`** | `pre-commit` | un **indice** mal formato, o con una voce persa |
-| **`H-RIGHE`** | `pre-commit` | **`CLAUDE.md` oltre le 400 righe** |
-| **`H-P1-bis`** | `commit-msg` | un **referto** committato **senza toccare la relazione** |
-| **`H-REG-R`** | `commit-msg` | una **legge** che cambia **senza la sua scheda** in `REGISTRO_FISICA` |
-| **`H-INDICE`** | `commit-msg` | un **ID** citato **che non e' nell'indice** |
-| **`H-FILE`** | `commit-msg` | una lista **`FILE CAMBIATI`** che **non coincide** con `git diff --cached --name-only`, o che **manca** |
-| **`H-NON-TRACCIATI`** | `commit-msg` | **file NON TRACCIATI e NON ignorati** sotto `csv/` o `doc/`. **BLOCCA, non avvisa** |
-| **`H-FISICA-FUORI-LISTA`** | `pre-commit` | un **`.py` sotto `primo_ordine/`** *(la cartella del codice dell'era `2`, **decisione di Luca del 2026-10-09**)* che **non e' nella LISTA** di `csv/_file_fisica.py` |
-| **`H-ID-OBBLIGATORIO`** | `commit-msg` | un commit che tocca **un file della LISTA di `csv/_file_fisica.py`**, o un **`doc/REFERTO_*` / `doc/REPERTO_*`**, e **non cita nessun ID** dell'indice. ### **E' il ROVESCIO di `H-INDICE`** |
-| **`H-STASH`** | `permissions.deny` | **`git stash`**, qualunque forma. **Non e' un hook:** impedisce **prima** che il comando parta, e **non ha via d'uscita** |
+<!-- REGOLE GENERATE par12.md -- NON SI SCRIVE A MANO: python csv/_regole_gestione.py --scrivi -->
 
+| id | che cosa **impedisce** | chi la fa rispettare |
+|---|---|---|
+| **`[[H-FILE]]`** | una lista FILE CAMBIATI che non coincide con `git diff --cached --name-only`, o che manca | **`H-FILE`** |
+| **`[[H-FISICA-FUORI-LISTA]]`** | un `.py` sotto `primo_ordine/` che non e- nella LISTA di `csv/_file_fisica.py` | **`H-FISICA-FUORI-LISTA`** |
+| **`[[H-ID-OBBLIGATORIO]]`** | un commit che tocca un file della LISTA, o un referto, e NON CITA NESSUN ID: e- il rovescio di `H-INDICE` | **`H-ID-OBBLIGATORIO`** |
+| **`[[H-INDICE]]`** | un ID citato CHE NON E- nell-indice | **`H-INDICE`** |
+| **`[[H-NON-TRACCIATI]]`** | file NON TRACCIATI e NON ignorati sotto `csv/` o `doc/`: BLOCCA, non avvisa | **`H-NON-TRACCIATI`** |
+| **`[[H-P1-bis]]`** | un referto committato SENZA toccare la relazione | **`H-P1-bis`** |
+| **`[[H-P3]]`** | un sigillo che configura il modulo A MANO invece di passare dal CLI | **`H-P3`** |
+| **`[[H-P5]]`** | un referto che non dichiara LA CONFIGURAZIONE INTERA | **`H-P5`** |
+| **`[[H-P7]]`** | un flag il cui commento cambia senza nominare quel flag | **`H-P7`** |
+| **`[[H-P8]]`** | un confronto che prende il codice di prima da HEAD invece che dal PADRE | **`H-P8`** |
+| **`[[H-REG-R]]`** | una legge che cambia SENZA la sua scheda in `REGISTRO_FISICA` | **`H-REG-R`** |
+| **`[[H-RIGHE]]`** | `CLAUDE.md` oltre le 400 righe | **`H-RIGHE`** |
+| **`[[H-STASH]]`** | `git stash`, qualunque forma: impedisce PRIMA che il comando parta, e non ha via d-uscita | **`H-STASH`** |
+| **`[[H-VALIDATORE]]`** | un indice mal formato, o con una voce persa | **`H-VALIDATORE`** |
+| **`[[P-REG]]`** | una regola di gestione e- una VOCE, e le due sezioni delle regole SI GENERANO dall-indice: modificate a mano, RIFIUTATE | **`P-REG`** |
+
+> ### ⚠ **`0` di queste `15` NON HANNO NESSUN PRESIDIO che le faccia rispettare** *(`A9`)*. ### **E il numero esiste perche' <<chi la fa rispettare>> e' UN CAMPO: in prosa non si contava.** ### **IL DETTAGLIO:** `doc/REGOLE/par12.md`.
+
+<!-- FINE REGOLE GENERATE par12.md -->
 **LE VIE D'USCITA OBBLIGANO A DICHIARARE:** `[SENZA-RELAZIONE: …]` ·
 `[SENZA-INDICE: …]` · `[CLAUDE-OLTRE-400: …]` · `[SENZA-FILE-CAMBIATI: …]` ·
 `[SENZA-NON-TRACCIATI: …]` nel **messaggio**, ### **a INIZIO RIGA**; `# ESENTE-H-P5: …`
@@ -293,3 +306,34 @@ in un **commento del file**, **e** elencata in `doc/ESENZIONI_presidi.md`.
 ### ⚠ **IL LIMITE, per `A9`:** i hook non impediscono cio' che **non guardano**.
 
 > **IL DETTAGLIO:** **`doc/REGOLE/par12.md`**.
+
+## 13. LAVORARE NELL'ERA `2` — **che cosa si legge, e IN CHE ORDINE**
+
+> ### ⛔ **L'ERA `2` NON E' COMINCIATA**, e il piano lo dice col suo criterio: la tabella
+> ha **`3` leggi, TUTTE `prova: true`** → ### **ZERO LEGGI VERE.** ### **Questo paragrafo
+> dice come si lavora quando comincera'.**
+
+**L'ORDINE DI LETTURA, e il perche' di ognuno:**
+
+| | che cosa | perche' PRIMA di quello dopo |
+|---|---|---|
+| `1` | **`doc/PIANO_era2.md`** | dice **in che FASE siamo**, e ogni fase ha un **criterio d'ingresso**: leggere il resto senza sapere la fase e' **lavorare fuori ordine** |
+| `2` | **`doc/ALBERO_era2.yaml`** | dice **quali decisioni sono PRESE**; una legge scritta prima della sua decisione e' **una decisione presa di nascosto** |
+| `3` | **`primo_ordine/leggi/leggi.yaml`** | **l'UNICA fonte** delle leggi: il codice sotto `primo_ordine/termini/` **si genera**, e **niente si scrive a mano** |
+| `4` | **`primo_ordine/config/prova.yaml`** | la configurazione e' **UNA**, e la riga di comando sceglie **SOLO IL FILE** |
+| `5` | **`doc/COME_SI_AGGIUNGE_UNA_LEGGE.md`** | gli `8` passi dall'idea al referto, e **un collaudo LA ESEGUE** -- quindi **non puo' invecchiare in silenzio** |
+| `6` | **`python primo_ordine/collauda.py`** | **un solo comando** per tutti i collaudi, **coi TEMPI**: oltre il budget e' **un SEGNALE, non un rifiuto** |
+
+### ⭐ **E I DUE COMANDI CHE DICONO LO STATO, prima di toccare qualunque cosa:**
+
+```
+python csv/indice.py valida            # l'indice intero, e `P-ALB` dentro
+python primo_ordine/collauda.py        # tutti i collaudi, coi tempi
+```
+
+### ⛔ **E UNA COSA CHE VALE SOLO NELL'ERA `2`: il generatore RIFIUTA.** Dimensioni
+incoerenti, una simmetria dichiarata e non vera, un grafo non valido, un `default` in una
+firma, un id corto: ### **non sono avvisi, sono rifiuti** -- e la cura e' **cambiare la
+tabella**, non aggirare il controllo.
+
+> **IL DETTAGLIO:** **`doc/REGOLE/par13.md`**.

@@ -79,3 +79,58 @@ risposta.**
 | 5 | **emergente o imposto**: sopravvive se si toglie la legge pratica? |
 
 ### \u26d4 **E' una REGOLA SCRITTA, NON un presidio: nessun hook la controlla** *(`A9`)*.
+
+
+---
+
+## `[[PRECEDENZA-IN-CODA]]` — **fra più versioni di un mandato vale SOLO L'ULTIMA**
+
+> ### ⛔ **Decisione di Luca, 2026-10-09** *(commit `677685c`)*: *«del mandato … hai
+> ricevuto **PIU' VERSIONI** e alcune integrazioni. **VALE SOLO L'ULTIMA** … Le altre
+> versioni … sono **SUPERATE: segnale in `CODA_2026-10-09.md` come assorbite, non
+> eseguirle.»*
+
+### 📌 **E L'ORDINE DI ESECUZIONE SI REGISTRA.** `doc/CODA_2026-10-09.md` porta la tabella
+dell'ordine, e ### ⭐ **due voci della coda hanno DICHIARATO DA SE' di essere ultime,
+citando quella tabella** — che è ### **esattamente a cosa serviva scriverla.**
+
+### ⚠ **CHI LA FA RISPETTARE: NESSUNO.** È una ### **regola scritta** *(`A9`)*, e il suo
+effetto si vede ### **solo nel fatto che i cinque mandati sono stati eseguiti NELL'ORDINE
+REGISTRATO** — cosa che ### ✅ **si verifica da `git`**, perché il task history di ogni
+mandato è ### **antenato** dei commit del suo lavoro
+*(`git merge-base --is-ancestor`)*.
+
+### ⛔ **E PERCHE' NON AVEVA UNA VOCE FINO AL `2026-10-10`:** era scritta
+### **solo in `doc/CODA_2026-10-09.md`** e ### **in nessuna voce.** ### **Quindi una regola
+che ha governato CINQUE mandati non era nell'indice, e non si poteva né cercare né
+contare.** ### **Il mandato `5` la nomina esplicitamente:** *«è esatto: non ha voce»*.
+
+---
+
+## `[[DECISIONE-VUOLE-UN-CAMPO]]` — **una decisione che serve a un PROGRAMMA vuole un CAMPO**
+
+> ### ⛔ **La regola, alla lettera:** *«**NESSUNO STRUMENTO LEGGE `titolo` O
+> `descrizione` PER DECIDERE QUALCOSA:** se una decisione serve a un programma, **serve un
+> CAMPO**»*.
+
+### ⚠ **E QUESTO PEZZO NON RIMANDA DA NESSUNA PARTE, e non è una scelta di stile: due
+righe sopra l'avevo scritto con un rimando a un altro file di questa cartella, e il
+presidio della struttura L'HA RIFIUTATO.** ### ⛔ **Un file di `doc/REGOLE/` non rimanda
+MAI a un altro file di `doc/REGOLE/`**, perché così ### **la struttura non può crescere in
+catene** — e un dettaglio che per capirsi ne richiede un altro ### **non è un dettaglio:
+è un rinvio.** ### ✅ **Quindi la regola si dice QUI, per intero.**
+
+### ⭐ **PERCHE' CONTA, e non è un gusto di forma:** un titolo ### **si riscrive** — è
+prosa, e la prosa migliora — mentre ### **un campo ha un vocabolario chiuso e un
+validatore.** ### ⛔ **Una decisione appesa a una parola nel titolo cambia quando qualcuno
+migliora la frase**, e ### **nessuno si accorge che la decisione è cambiata.**
+
+### 📌 **CHI LA FA RISPETTARE, parzialmente:** `[[PI-PAROLE-STRUMENTO]]` guarda
+### **il titolo di una voce `FISICA`**, e `[[P-T1]]` ### **vieta di interpretare il testo
+libero.** ### ⚠ **Ma la regola GENERALE non ha un presidio: nessuno conta quante volte uno
+strumento legge un titolo per decidere.** ### **È una regola scritta** *(`A9`)*.
+
+### ✅ **E QUESTO MANDATO LA APPLICA A SE STESSO, che è la prova migliore che si possa
+dare:** `csv/_regole_gestione.py` sceglie le regole ### **da `classe` e `dominio`**, quelle
+da mettere in `CLAUDE.md` ### **dal metadato `in_claude`**, e il loro gruppo
+### **da `dettaglio_regola`** — ### **tre campi, zero titoli.**

@@ -32,8 +32,10 @@
    "P-R1"
   ],
   "A9": [
+   "DECISIONE-VUOLE-UN-CAMPO",
    "FORMA-SPEZZA-ID",
    "H-INDICE-IGNORA-I-VOCABOLARI",
+   "METADATI-REPERTO-PER-NECESSITA",
    "P-AB",
    "P-ALB",
    "P-BARRIERA",
@@ -54,6 +56,7 @@
    "P-GUIDA",
    "P-M1",
    "P-MOD",
+   "P-REG",
    "P-RIF",
    "P-T1",
    "P-T2",
@@ -71,6 +74,7 @@
    "PI-REPLAY",
    "PI-SIMBOLI-ERA1",
    "PI-STORICO-SENZA-COMMIT",
+   "PRECEDENZA-IN-CODA",
    "REPLAY-CIECO-ALLE-CANCELLAZIONI"
   ]
  },
@@ -291,6 +295,7 @@
    "DEC-NASCITA-PSI",
    "DEC-REGOLA-FORMA",
    "DEC-Z47-TRANSIZIONE",
+   "DECISIONE-VUOLE-UN-CAMPO",
    "DIVISIONE-AUTOCONSISTENTE",
    "DOPPIA-COP",
    "DRIVER-SCENA-II",
@@ -454,6 +459,7 @@
    "MEM-HEBB-VERSO",
    "MEM-VERSO",
    "MEMORIE-MANCANTI",
+   "METADATI-REPERTO-PER-NECESSITA",
    "MISURA-NORMA-ERA2",
    "MITOSI-2LAM-ACCESO",
    "MITOSI-NON-DIVISA",
@@ -508,6 +514,7 @@
    "P-MEMORIA",
    "P-MOD",
    "P-R1",
+   "P-REG",
    "P-RIF",
    "P-SIM",
    "P-T1",
@@ -565,6 +572,7 @@
    "POTENZE-1",
    "POZZO-D",
    "PRE-RILASSAMENTO-FUORI-PASSO",
+   "PRECEDENZA-IN-CODA",
    "PRESIDIO-RIFIUTO-SOLO-SIGILLI",
    "PRESTAZIONI-CORSE",
    "PROBLEMI-CHK3",
@@ -1249,6 +1257,7 @@
    "MEM-HEBB-PIANO-XY",
    "MEM-HEBB-VERSO",
    "MEMORIE-MANCANTI",
+   "METADATI-REPERTO-PER-NECESSITA",
    "MITOSI-2LAM-ACCESO",
    "MITOSI-SOGLIA-GRAD",
    "OKN-ASSERT",
@@ -1827,6 +1836,7 @@
    "P-M1",
    "P-MOD",
    "P-R1",
+   "P-REG",
    "P-RIF",
    "P-SIM",
    "P-T1",
@@ -1873,6 +1883,7 @@
    "A8b",
    "A9",
    "AUTO-MANUTENZIONE",
+   "DECISIONE-VUOLE-UN-CAMPO",
    "L-DOPO-STOP",
    "L-MEMORIA-PRIMA",
    "L-NUMERI",
@@ -1891,6 +1902,7 @@
    "P4",
    "P5",
    "P6",
+   "PRECEDENZA-IN-CODA",
    "ROBUSTEZZA-FISICA",
    "STANDARD-10",
    "STANDARD-4",
@@ -2102,6 +2114,7 @@
    "KAPPA-TW-COMMENTO",
    "MITOSI-2LAM-ACCESO",
    "P-GUIDA",
+   "P-REG",
    "PRESIDIO-RIFIUTO-SOLO-SIGILLI",
    "REGIME-COMMENTI",
    "RIORDINO-NOMI-H",
@@ -2520,6 +2533,7 @@
    "LETTORI-INDICE",
    "LUNGA-BATTITO-CADUTA",
    "M0a",
+   "METADATI-REPERTO-PER-NECESSITA",
    "MITOSI-NON-DIVISA",
    "NASCITA-PUNTO-UNICO",
    "NON-TRACCIATI",
@@ -2619,6 +2633,7 @@
    "D26",
    "DEC-ALBERO-CINQUE-SENZA-ARGOMENTO",
    "DEC-Z47-TRANSIZIONE",
+   "DECISIONE-VUOLE-UN-CAMPO",
    "ESENTE-P3",
    "FALSO-UNO",
    "FALSO-ZERO",
@@ -2703,6 +2718,7 @@
    "PI-SIMBOLI-ERA1",
    "PI-STORICO-SENZA-COMMIT",
    "PIATTAFORMA-NON-TIMBRATA",
+   "PRECEDENZA-IN-CODA",
    "Q6",
    "R3",
    "R5",
@@ -3627,6 +3643,7 @@
    "COLLAUDO-NON-ESEGUITO",
    "CONTA-RIGHE",
    "DEC-Z47-TRANSIZIONE",
+   "DECISIONE-VUOLE-UN-CAMPO",
    "DUE-VIE-SU-LEGGI-JSONL",
    "ESENTE-P3",
    "ETICHETTA-A13",
@@ -3666,12 +3683,14 @@
    "LETTORI-INDICE",
    "LINGUAGGIO-REGOLE",
    "LOSCHMIDT-ECO",
+   "METADATI-REPERTO-PER-NECESSITA",
    "NON-TRACCIATI",
    "P-C1",
    "P-DECADIMENTO",
    "P-ID",
    "P-M1",
    "P-MEMORIA",
+   "P-REG",
    "P-T1",
    "P-T2",
    "P-T3",
@@ -3699,6 +3718,7 @@
    "PI-SIMBOLI-ERA1",
    "PI-STORICO-SENZA-COMMIT",
    "PIATTAFORMA-NON-TIMBRATA",
+   "PRECEDENZA-IN-CODA",
    "PRESIDIO-RIFIUTO-SOLO-SIGILLI",
    "PRESTAZIONI-CORSE",
    "REG-R",
@@ -4843,6 +4863,37 @@
    "Z78"
   ]
  },
+ "meta:dettaglio_regola": {
+  "par11.md": [
+   "DECISIONE-VUOLE-UN-CAMPO",
+   "L-DOPO-STOP",
+   "L-NUMERI",
+   "L-PATCH",
+   "L-STELLA",
+   "L-UN-PROMPT",
+   "P1",
+   "P1-quater",
+   "P2",
+   "PRECEDENZA-IN-CODA"
+  ],
+  "par12.md": [
+   "H-FILE",
+   "H-FISICA-FUORI-LISTA",
+   "H-ID-OBBLIGATORIO",
+   "H-INDICE",
+   "H-NON-TRACCIATI",
+   "H-P1-bis",
+   "H-P3",
+   "H-P5",
+   "H-P7",
+   "H-P8",
+   "H-REG-R",
+   "H-RIGHE",
+   "H-STASH",
+   "H-VALIDATORE",
+   "P-REG"
+  ]
+ },
  "meta:duplicato_di": {
   "A12": [
    "STANDARD-8"
@@ -5637,6 +5688,83 @@
    "Z145",
    "Z15",
    "Z22"
+  ]
+ },
+ "meta:in_claude": {
+  "Dopo uno STOP, se Luca non risponde si lavora SOLO la coda: nessuna decisione presa al suo posto || regola scritta": [
+   "L-DOPO-STOP"
+  ],
+  "Fra piu- versioni di un mandato in coda vale SOLO L-ULTIMA, e l-ordine di esecuzione si REGISTRA || regola scritta": [
+   "PRECEDENZA-IN-CODA"
+  ],
+  "Le CINQUE DOMANDE di `doc/STELLA_POLARE.md` si rispondono PER ISCRITTO nel task history di ogni commit che cambia la fisica || regola scritta": [
+   "L-STELLA"
+  ],
+  "Non si fa `git stash` con una patch in corso: git committa SOLO L-INDICE || H-STASH": [
+   "L-PATCH"
+  ],
+  "Non usare l-associazione senza verificare lo storico: prima di una diagnosi o di una cura si RILEGGE DAL DISCO || regola scritta": [
+   "P1"
+  ],
+  "Ogni numero scritto in un commit o in un referto esce da uno script: un numero ricopiato NON HA PROVENIENZA || regola scritta": [
+   "L-NUMERI"
+  ],
+  "Ogni sostituzione di testo si asserisce per se-, mai in blocco: un helper che CONTA l-ancora e fallisce se non e- unica || regola scritta": [
+   "P1-quater"
+  ],
+  "Prima di escludere un flag da una misura: FORZA il sistema o lo CORREGGE? Escludere una correzione significa misurare un sistema che si sa difettoso || regola scritta": [
+   "P2"
+  ],
+  "Un prompt alla volta: i rilievi che arrivano durante un lavoro vanno in CODA, non lo interrompono || regola scritta": [
+   "L-UN-PROMPT"
+  ],
+  "Una decisione che serve a un PROGRAMMA vuole un CAMPO: nessuno strumento legge `titolo` o `descrizione` per decidere || regola scritta": [
+   "DECISIONE-VUOLE-UN-CAMPO"
+  ],
+  "`CLAUDE.md` oltre le 400 righe || H-RIGHE": [
+   "H-RIGHE"
+  ],
+  "`git stash`, qualunque forma: impedisce PRIMA che il comando parta, e non ha via d-uscita || H-STASH": [
+   "H-STASH"
+  ],
+  "file NON TRACCIATI e NON ignorati sotto `csv/` o `doc/`: BLOCCA, non avvisa || H-NON-TRACCIATI": [
+   "H-NON-TRACCIATI"
+  ],
+  "un ID citato CHE NON E- nell-indice || H-INDICE": [
+   "H-INDICE"
+  ],
+  "un `.py` sotto `primo_ordine/` che non e- nella LISTA di `csv/_file_fisica.py` || H-FISICA-FUORI-LISTA": [
+   "H-FISICA-FUORI-LISTA"
+  ],
+  "un commit che tocca un file della LISTA, o un referto, e NON CITA NESSUN ID: e- il rovescio di `H-INDICE` || H-ID-OBBLIGATORIO": [
+   "H-ID-OBBLIGATORIO"
+  ],
+  "un confronto che prende il codice di prima da HEAD invece che dal PADRE || H-P8": [
+   "H-P8"
+  ],
+  "un flag il cui commento cambia senza nominare quel flag || H-P7": [
+   "H-P7"
+  ],
+  "un indice mal formato, o con una voce persa || H-VALIDATORE": [
+   "H-VALIDATORE"
+  ],
+  "un referto che non dichiara LA CONFIGURAZIONE INTERA || H-P5": [
+   "H-P5"
+  ],
+  "un referto committato SENZA toccare la relazione || H-P1-bis": [
+   "H-P1-bis"
+  ],
+  "un sigillo che configura il modulo A MANO invece di passare dal CLI || H-P3": [
+   "H-P3"
+  ],
+  "una legge che cambia SENZA la sua scheda in `REGISTRO_FISICA` || H-REG-R": [
+   "H-REG-R"
+  ],
+  "una lista FILE CAMBIATI che non coincide con `git diff --cached --name-only`, o che manca || H-FILE": [
+   "H-FILE"
+  ],
+  "una regola di gestione e- una VOCE, e le due sezioni delle regole SI GENERANO dall-indice: modificate a mano, RIFIUTATE || P-REG": [
+   "P-REG"
   ]
  },
  "meta:motivo_dubbio": {
@@ -6684,6 +6812,7 @@
    "COLLAUDO-NON-ESEGUITO",
    "CONTA-RIGHE",
    "DEC-Z47-TRANSIZIONE",
+   "DECISIONE-VUOLE-UN-CAMPO",
    "ESENTE-P3",
    "FALSO-UNO",
    "FALSO-ZERO",
@@ -6715,12 +6844,14 @@
    "L-UN-PROMPT",
    "LINGUAGGIO-REGOLE",
    "LOSCHMIDT-ECO",
+   "METADATI-REPERTO-PER-NECESSITA",
    "NON-TRACCIATI",
    "P-C1",
    "P-DECADIMENTO",
    "P-ID",
    "P-M1",
    "P-MEMORIA",
+   "P-REG",
    "P-T1",
    "P-T2",
    "P-T3",
@@ -6746,6 +6877,7 @@
    "PI-SIMBOLI-ERA1",
    "PI-STORICO-SENZA-COMMIT",
    "PIATTAFORMA-NON-TIMBRATA",
+   "PRECEDENZA-IN-CODA",
    "PRESIDIO-RIFIUTO-SOLO-SIGILLI",
    "PRESTAZIONI-CORSE",
    "REG-R",

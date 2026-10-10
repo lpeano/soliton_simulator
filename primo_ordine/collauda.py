@@ -79,6 +79,7 @@ COLLAUDI = (
     ("`P-T2` il replay dei registri", "csv/_replay_registri.py --collaudo", "pre-commit"),
     ("l-arbitro fra le due vie", "csv/_registri_indice.py --collaudo", "pre-commit"),
     ("i presidi dell-indice", "csv/_presidio_indice.py --collaudo", "pre-commit"),
+    ("`P-REG` le regole di gestione", "csv/_collauda_regole.py", "pre-commit"),
 )
 
 

@@ -7,16 +7,16 @@
 | `DA_CLASSIFICARE` | `DA_CLASSIFICARE` | 187 |
 | `DOCUMENTAZIONE` | `1` | 11 |
 | `DOCUMENTAZIONE` | `2` | 1 |
-| `DOCUMENTAZIONE` | `ENTRAMBE` | 5 |
+| `DOCUMENTAZIONE` | `ENTRAMBE` | 6 |
 | `FISICA` | `1` | 343 |
 | `FISICA` | `2` | 20 |
 | `FISICA` | `ENTRAMBE` | 17 |
 | `INFRASTRUTTURA` | `1` | 39 |
 | `INFRASTRUTTURA` | `2` | 14 |
-| `INFRASTRUTTURA` | `ENTRAMBE` | 15 |
+| `INFRASTRUTTURA` | `ENTRAMBE` | 16 |
 | `METODO` | `1` | 156 |
 | `METODO` | `2` | 9 |
-| `METODO` | `ENTRAMBE` | 83 |
+| `METODO` | `ENTRAMBE` | 85 |
 
 | id | classe | dominio | era | stato | blocca | titolo |
 |---|---|---|---|---|---|---|
@@ -243,6 +243,7 @@
 | `DEC-NASCITA-PSI` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | con che stato nasce un nodo? il punto 3 chiede UNA REGOLA DICHIARATA per ogni gr |
 | `DEC-REGOLA-FORMA` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | che CODICE genera una `regola`? il punto 11(a) chiede che crescita e vuoto si ge |
 | `DEC-Z47-TRANSIZIONE` | DECISIONE | METODO | ENTRAMBE | ### **APERTA** |  | Z47 non si puo- portare ad AGENDA: CHIUSA -> AGENDA e- una transizione VIETATA |
+| `DECISIONE-VUOLE-UN-CAMPO` | STANDARD | METODO | ENTRAMBE | ### **APERTA** |  | una decisione che serve a un programma vuole un CAMPO, non una frase nel titolo |
 | `DIVISIONE-AUTOCONSISTENTE` | FRONTE | FISICA | 2 | ### **AGENDA** |  | la divisione dell arco come UNA legge: dove si rompe, cosa ereditano i figli, il |
 | `DOPPIA-COP` | CURA | FISICA | 1 | ### **SOSPESA** |  | LA CURA (b): la doppia copertura 4 pi e' un ASSIOMA e va resa STRUTTURALE, non m |
 | `DRIVER-SCENA-II` | CURA | INFRASTRUTTURA | 1 | ### **CHIUSA** |  | APERTA il 2026-09-26 (rilievo di Luca) / IL DRIVER NON SA FARE LA SCENA (ii), e  |
@@ -406,6 +407,7 @@
 | `MEM-HEBB-VERSO` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | memoria_hebbiana_moto dipende dal verso dell'arco: d0 cambia segno e lo shift va |
 | `MEM-VERSO` | CURA | FISICA | 1 | ### **SUPERATA** |  | il verso dell arco dalla sua MEMORIA (delta = twp - tw) invece che dal segno ist |
 | `MEMORIE-MANCANTI` | DIFETTO | FISICA | 2 | ### **AGENDA** |  | il rapporto sulle memorie: il censimento dello stato, il bilancio, e le memorie  |
+| `METADATI-REPERTO-PER-NECESSITA` | DIFETTO | INFRASTRUTTURA | ENTRAMBE | ### **APERTA** |  | metadati.jsonl ha una via di scrittura e ZERO storico: e- un REPERTO per necessi |
 | `MISURA-NORMA-ERA2` | MISURA | FISICA | 2 | ### **AGENDA** |  | la norma totale sum_nodi psi^dag psi: l-invariante QUADRATICO su cui si misura l |
 | `MITOSI-2LAM-ACCESO` | DIFETTO | DOCUMENTAZIONE | 1 | ### **CHIUSA** |  | il piano dichiara MITOSI_2LAM e PLAST_DIN OFF, e il DRIVER li ACCENDE: --mitosi- |
 | `MITOSI-NON-DIVISA` | MISURA | INFRASTRUTTURA | 1 | ### **CHIUSA** |  | la mitosi NON si spezza per TIPO restando byte-identica: struttura e stato si al |
@@ -460,6 +462,7 @@
 | `P-MEMORIA` | STANDARD | FISICA | ENTRAMBE | ### **APERTA** |  | uno scalare con memoria acquista un verso: la memoria da la direzione |
 | `P-MOD` | PRESIDIO | INFRASTRUTTURA | 2 | ### **AGENDA** |  | la MODULARITA- non si degrada: la mappa dice cio- che e- previsto, il resto e- r |
 | `P-R1` | PRESIDIO | INFRASTRUTTURA | 2 | ### **AGENDA** |  | ogni RAMO della fisica dell-era 2 e- dichiarato: quanti, e a che servono |
+| `P-REG` | PRESIDIO | DOCUMENTAZIONE | ENTRAMBE | ### **APERTA** |  | ogni regola di gestione e- una VOCE, e la sezione delle regole di CLAUDE.md SI G |
 | `P-RIF` | PRESIDIO | METODO | 2 | ### **AGENDA** |  | un ID nel codice e- un @rif, o non esiste: un riferimento non vive nella prosa |
 | `P-SIM` | PRESIDIO | METODO | 2 | ### **AGENDA** |  | simmetrie SIMBOLICHE e conservazioni NUMERICHE, con soglie DERIVATE e non tarate |
 | `P-T1` | PRESIDIO | METODO | ENTRAMBE | ### **APERTA** |  | il TESTO LIBERO non si interpreta per decidere: chi RIFIUTA legge solo campi str |
@@ -517,6 +520,7 @@
 | `POTENZE-1` | CURA | FISICA | 1 | ### **CHIUSA** |  | CHIUSA il 2026-09-26 con la CURA A (rhos/W^2), sigillo 6/6: F2 da x47 000 a x1.4 |
 | `POZZO-D` | CURA | FISICA | 1 | ### **CHIUSA** |  | la cura di D02 (flag `POZZO_D` nel codice): nel pozzo del grafo `L` viene da `se |
 | `PRE-RILASSAMENTO-FUORI-PASSO` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | 300 step() girano in _applica_flag, FUORI da esegui_passo: sei voci del passo no |
+| `PRECEDENZA-IN-CODA` | STANDARD | METODO | ENTRAMBE | ### **APERTA** |  | fra piu- versioni di un mandato in coda vale SOLO L-ULTIMA, e l-ordine si REGIST |
 | `PRESIDIO-RIFIUTO-SOLO-SIGILLI` | DIFETTO | DOCUMENTAZIONE | ENTRAMBE | ### **APERTA** |  | _presidio.avvia rifiuta di girare SOLO se il nome comincia con _sigillo_: A9 lo  |
 | `PRESTAZIONI-CORSE` | FRONTE | INFRASTRUTTURA | ENTRAMBE | ### **APERTA** |  | le corse costano: sei strade per il tempo di calcolo, da affrontare a modello ST |
 | `PROBLEMI-CHK3` | FRONTE | FISICA | 1 | ### **SOSPESA** |  | IL PIANO DEI PROBLEMI APERTI — per ciascuno: la domanda da chiudere · la misura  |

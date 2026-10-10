@@ -8,17 +8,17 @@
 
 | | quanti |
 |---|--:|
-| **`PORTATO`** | `99` |
+| **`PORTATO`** | `102` |
 | **`DA_PORTARE`** | `17` |
 | **`DA_DECIDERE`** | `5` |
 | **`NON_SI_APPLICA`** | `7` |
-| **in tutto** | ### **`128`** |
+| **in tutto** | ### **`131`** |
 
-### ⚠ **E IL NUMERO `128` E- MISURATO, non stimato:** viene dal perimetro che l-indice calcola, e ### **il mandato ne nominava <<una decina>>** per nome piu- *<<e le cure di architettura>>*. ### **La decina era `20`.**
+### ⚠ **E IL NUMERO `131` E- MISURATO, non stimato:** viene dal perimetro che l-indice calcola, e ### **il mandato ne nominava <<una decina>>** per nome piu- *<<e le cure di architettura>>*. ### **La decina era `20`.**
 
 ---
 
-## `PORTATO` — `99` metodi
+## `PORTATO` — `102` metodi
 
 > ### ✅ **GIA- NELL-ERA `2`**, e `dove` dice dove
 
@@ -37,6 +37,7 @@
 | **`A9`** | `STANDARD` | un presidio che non impedisce non e- un presidio: `P-E1`..`P-E7` sono SENZA VIA D-USCITA, e ### la CI e- dichiarata RETE CHE SEGNALA, non presidio | `csv/_presidi_era2.py` + il referto |
 | **`AUTO-MANUTENZIONE`** | `STANDARD` | tieni aggiornati i documenti vivi: l-inventario e la relazione sono stati aggiornati in OGNI commit, e ### DUE NUMERI DELL-INVENTARIO ERANO GIA- SCADUTI quando li ho guardati | `doc/INVENTARIO_strumenti.md` |
 | **`CONFIG-1`** | `DIFETTO` | 28 leggi su 31 giravano SPENTE in sei misure, per 140 costanti di modulo. ### IL PUNTO 15 L-HA CHIUSO, e non con un presidio sui flag: ### TOGLIENDO I FLAG. Una legge e- in `leggi_attive` PER ID, oppure NON GIRA -- e un ID che non e- in `leggi.yaml` FA RIFIUTARE il file di configurazione | `primo_ordine/config/schema_config.py` + `driver.py::termini_attivi` |
+| **`DECISIONE-VUOLE-UN-CAMPO`** | `STANDARD` | una decisione che serve a un PROGRAMMA vuole un CAMPO: nessuno strumento legge `titolo` o `descrizione` per decidere qualcosa. ### PORTATA, e questo mandato la APPLICA A SE STESSO: `_regole_gestione.py` sceglie le regole da `classe` e `dominio`, quelle in `CLAUDE.md` dal metadato `in_claude`, e il loro gruppo da `dettaglio_regola` -- TRE CAMPI, ZERO TITOLI | `csv/_regole_gestione.py`; e `PI-PAROLE-STRUMENTO` + `P-T1` la coprono in parte |
 | **`ETC-PASSO`** | `CURA` | il passo diventa SINCRONO, fotografia a inizio passo: ### SUPERATA, e il mandato stesso l-ha corretta -- la regola giusta e- LA FOTOGRAFIA PER STRATO, non <<lo stato di inizio passo>>, perche- quella contraddiceva i passi unitari arco per arco | `passo.py` + la correzione nella coda |
 | **`H-ETC-2`** | `PRESIDIO` | permutare le leggi deve dare lo STESSO stato: ### PORTATO E MISURATO -- e la misura dice che per il GRADIENTE serve l-ordine canonico, perche- `fsum` non si puo- usare su array complessi | `_collauda_passo.py` sezione (A), livelli 1 e 1-bis |
 | **`H-FILE`** | `PRESIDIO` | la lista `FILE CAMBIATI` si GENERA da `git diff --cached --name-only`, e vale per ogni commit -- compresi quelli dell-era 2 | `.githooks/commit-msg` + `cm.py` |
@@ -79,6 +80,7 @@
 | **`P-M1`** | `PRESIDIO` | e- il presidio di questo punto: ### SI APPLICA A SE- STESSO -- appena la sua voce e- nata, il perimetro lo ha incluso e lui ha RIFIUTATO IL COMMIT chiedendo questa riga. ### Non l-ho previsto: me l-ha detto lui | `csv/_metodi_era2.py::controlla`, cablato nel `pre-commit` e nella CI |
 | **`P-MOD`** | `PRESIDIO` | NATO NELL-ERA 2: la mappa dichiara CHI IMPORTA CHI, e un import fuori mappa, un CICLO, un modulo non in mappa o una dipendenza dichiarata e NON USATA sono rifiutati. ### Piu- il TETTO di righe e la responsabilita- in UNA RIGA: se non ci sta, IL MODULO FA DUE COSE | `csv/_modularita_era2.py::controlla` + `primo_ordine/_mappa.yaml` |
 | **`P-R1`** | `PRESIDIO` | NATO NELL-ERA 2: `A8` e `P5` cablati. Il CONTEGGIO dei rami lo misura l-AST, il RUOLO e- dichiarato a vocabolario chiuso. ### 27 rami in 12 funzioni, e NOVE SONO `default` -- un DEBITO che il punto 15(b) vietera-, dichiarato invece che nascosto | `csv/_rami_era2.py::controlla`, `pre-commit` + CI |
+| **`P-REG`** | `PRESIDIO` | NATO NELL-ERA 2: ogni regola di gestione e- una VOCE (`STANDARD` se scritta, `PRESIDIO` se cablata), e porta IL FILE DI DETTAGLIO e CHI LA FA RISPETTARE. ### E la sezione delle regole di `CLAUDE.md` SI GENERA da quei campi: modificata a mano, e- RIFIUTATA. ### E <<chi la fa rispettare>> e- UN CAMPO, quindi <<quante regole non hanno nessuno che le faccia rispettare>> e- UN NUMERO (9 su 24) -- in prosa non si contava. ### Il braccio che conta e- <<NESSUNA REGOLA SI PERDE>>, misurato contro `git`: `CLAUDE.md` piu- corto NON e- un successo, e- un SOSPETTO | `csv/_regole_gestione.py::errori`; collaudo in `csv/_collauda_regole.py` (13/13) |
 | **`P-RIF`** | `PRESIDIO` | NATO NELL-ERA 2: un ID nel codice e- un `@rif`, o non esiste. ### Un ID in un COMMENTO e- prosa, e un riferimento che una macchina segue non vive nella prosa; i DOCSTRING restano, ed e- una scelta DICHIARATA. ### E si e- fatto piu- forte quando l-indice si e- completato: appena `A16` e `A17` sono diventati voci, ha trovato 4 commenti in piu- | `csv/_rif_nel_codice.py::controlla` + `primo_ordine/_rif.py`, `pre-commit` + CI |
 | **`P-SIM`** | `PRESIDIO` | NATO NELL-ERA 2: ogni termine dichiara le `simmetrie` (almeno `U1-FASE-GLOBALE`) e cio- che `conserva`; il generatore verifica le simmetrie SIMBOLICAMENTE (la differenza deve essere ZERO in sympy) e il collaudo le conservazioni NUMERICAMENTE. ### E LE SOGLIE SONO DERIVATE DALL-ORDINE DEL METODO: `NORMA` -> `passi * eps` (invariante quadratico: solo arrotondamento), `ENERGIA` -> `dt^2` (metodo simmetrico, nessuna deriva secolare). ### Undici ordini di grandezza di differenza, e dicono una cosa vera: la norma e- conservata DALLA STRUTTURA, l-energia solo APPROSSIMATA | `primo_ordine/simmetrie.py::rompe` dentro `valida_legge`; collaudo in `primo_ordine/_collauda_simmetrie.py` (13/13) |
 | **`P-T1`** | `PRESIDIO` | NATO NELL-ERA 2, ed e- il principio del mandato CABLATO: un presidio dichiarato ERRORE non puo- NOMINARE un campo di testo (via AST), e chi legge la prosa PUO- SOLO SEGNALARE. ### Non ripara: MANTIENE -- la misura dice che oggi e- gia- vero | `csv/_testo_e_metadati.py::controlla`, `pre-commit` + CI |
@@ -103,6 +105,7 @@
 | **`PI-REPLAY`** | `PRESIDIO` | l-indice e- il REPLAY del suo storico. ### E- IL PRESIDIO CHE RENDE VERA la frase <<si scrive SOLO con la via unica>>. ### E HA UN LIMITE MISURATO: blocca `aggiorna` singolo, perche- quello valida CON i derivati PRIMA di appendere la sua riga -- la via che funziona e- `aggiorna-lotto` | `csv/indice.py::_f11_replay`, ### ERRORE (rifiuta) |
 | **`PI-SIMBOLI-ERA1`** | `PRESIDIO` | una voce dell-era 2 che nomina un simbolo dell-era 1. ### E HA SCATTATO SULLA SUA PROPRIA VOCE, che elenca i simboli che cerca: chiuso con l-eccezione che cita il testo | `csv/indice.py::_f2_era2`, ### SEGNALA |
 | **`PI-STORICO-SENZA-COMMIT`** | `PRESIDIO` | una riga di storico GIA- COMMITTATA e senza `commit`. ### E- L-UNICO DEI DODICI CHE ERA UN ERRORE DAL PRIMO GIORNO, e ha fermato questo mandato CINQUE volte: non e- una tenda | `csv/indice.py::_f5_storico`, ### ERRORE (rifiuta) |
+| **`PRECEDENZA-IN-CODA`** | `STANDARD` | fra piu- versioni di un mandato in coda vale SOLO L-ULTIMA, e l-ordine di esecuzione si REGISTRA. ### PORTATA nell-era 2: i cinque mandati del 2026-10-09 sono stati eseguiti NELL-ORDINE REGISTRATO, e lo si verifica DA GIT -- ogni task history e- ANTENATO dei commit del suo lavoro. ### Ma e- una REGOLA SCRITTA: nessun presidio la impedisce (`A9`) | `doc/CODA_2026-10-09.md`; la verifica e- `git merge-base --is-ancestor` |
 | **`R3`** | `PRESIDIO` | pretendeva `bias == 0.0` esatto e falliva su due ulp: ### LA LEZIONE E- PORTATA -- nessun braccio dell-era 2 pretende l-uguaglianza esatta di un float calcolato, e la norma si misura con una tolleranza DICHIARATA | `_collauda_passo.py` sezione (D) |
 | **`R5`** | `PRESIDIO` | contava 25 aperture su 24 passi perche- l-iniezione del test apriva il freno: ### LA LEZIONE E- PORTATA -- i casi che devono fallire dell-era 2 verificano anche che, TOLTO il finto, il presidio TACCIA | `_collauda_passo.py` sezione (F), ultimo braccio |
 | **`REG-R`** | `PRESIDIO` | la regola mantenuta del registro della fisica: nell-era 2 la scheda si genera, e il registro resta la casa delle leggi dell-era 1 | `csv/_file_fisica.py::SCHEDA_NEL_REGISTRO` |

@@ -59,7 +59,21 @@ REGOLE = "doc/REGOLE"
 #   un BLOB COMMITTATO e non contro una copia sul disco, cosi' non si puo' <<aggiustare il
 #   prima>> per far passare il dopo.
 PRIMA = "da79cc1"
-ID = re.compile(r"`([A-Z][A-Z0-9-]{1,})`")
+# ### ⛔ **LE DOPPIE PARENTESI DI `[[ID]]` SONO OPZIONALI, ed e- il TERZO falso
+#   allarme di questo presidio** -- i primi due stanno nei commenti qui sotto.
+#   ### Il `par.9` dice *<<negli scritti NUOVI un ID si cita `[[ID]]`>>*, e dal
+#   2026-10-10 la sezione delle regole di `CLAUDE.md` ### **si GENERA** usando
+#   quella forma. ### ⚠ **Senza questa modifica il controllo diceva
+#   <<dichiarate: prima 17, dopo 0>>, cioe- TUTTE PERSE** -- che e- il segno di un
+#   problema di FORMATO, non di una perdita: una perdita vera ne fa sparire
+#   ### **alcune**, non tutte.
+#   ### ✅ **E l-ho verificato per un-altra via prima di toccare il presidio:**
+#   il confronto dell-insieme delle regole citate fra il commit del task history e
+#   adesso, da `git`, dice ### **0 PERSE e 2 NUOVE.**
+#   ### ⭐ **Toccare un presidio che grida <<regole perse>> e- la cosa piu-
+#   pericolosa di questo mandato: va fatto solo con una misura INDIPENDENTE in
+#   mano, e questa c-era.**
+ID = re.compile(r"`\[?\[?([A-Z][A-Z0-9-]{1,})\]?\]?`")
 
 
 def regole_di(testo):

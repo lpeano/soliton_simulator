@@ -95,7 +95,16 @@ REGISTRI = {
     "leggi.jsonl": ("REPLAY", "id", "storico_era2.jsonl", "leggi", None),
     "variabili.jsonl": ("REPLAY", "id", "storico_era2.jsonl", "variabili", None),
     # ### ⛔ **IL CASO SCOMODO:** ha una via di scrittura e ZERO storico.
-    "metadati.jsonl": ("REPERTO", "chiave", None, None, "e876fb9cfe10b65d"),
+    # ### ⛔ **E IL BLOB E- CAMBIATO IL 2026-10-10, perche- il buco HA MORSO.**
+    # ### `meta-aggiungi` ha registrato due chiavi nuove *(`in_claude` e
+    # ### `dettaglio_regola`, per il mandato `5`)* e ha scritto questo file
+    # ### ### **senza lasciare una riga di storico** -- misurato: `0` righe.
+    # ### ⚠ **Quindi l-unica cosa che posso fare e- AGGIORNARE IL BLOB A MANO**,
+    # ### che e- ### **una DICHIARAZIONE e non un controllo**: il presidio dira-
+    # ### <<coincide>> perche- gliel-ho detto io, non perche- l-abbia verificato.
+    # ### ⭐ **E- esattamente cio- che <<`REPERTO` per necessita->> significa**, e
+    # ### adesso ha una voce: `METADATI-REPERTO-PER-NECESSITA`.
+    "metadati.jsonl": ("REPERTO", "chiave", None, None, "a274e89b100075cb"),
     # ### ✅ **GENERATI, non reperti:** `csv/_registri_indice.py` li produce.
     "assiomi.jsonl": ("GENERATO", "id", None, None, None),
     "decisioni.jsonl": ("GENERATO", "id", None, None, None),

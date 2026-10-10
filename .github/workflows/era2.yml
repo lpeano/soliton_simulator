@@ -127,6 +127,9 @@ jobs:
           python csv/_registri_indice.py
           git diff --exit-code -- doc/indice/leggi.jsonl doc/indice/variabili.jsonl doc/indice/assiomi.jsonl doc/indice/decisioni.jsonl
 
+      - name: "### `P-REG` -- le regole di gestione, e CLAUDE.md generato"
+        run: python csv/_collauda_regole.py
+
       - name: "### LA GUIDA, ESEGUITA -- e non raccontata (punto 7)"
         run: python primo_ordine/_collauda_guida.py
 

@@ -61,6 +61,13 @@ python "$(git rev-parse --show-toplevel)/csv/_rami_era2.py" || exit 1
 #  ### e' una ragione per dare --no-verify.
 python "$(git rev-parse --show-toplevel)/csv/_replay_registri.py" || exit 1
 
+#  `P-REG` -- LE REGOLE DI GESTIONE, E LA SEZIONE GENERATA DI `CLAUDE.md`.
+#  ### Il braccio che conta e' <<NESSUNA REGOLA SI PERDE>>, misurato contro
+#  ### `git`: un errore qui non fa cadere un collaudo, FA SPARIRE UNA REGOLA --
+#  ### e una regola sparita NON SI VEDE, perche' il file e' piu' corto e SEMBRA
+#  ### PIU' PULITO. `CLAUDE.md` piu' corto NON e' un successo: e' un SOSPETTO.
+python "$(git rev-parse --show-toplevel)/csv/_collauda_regole.py" || exit 1
+
 #  LA GUIDA, ESEGUITA -- `doc/COME_SI_AGGIUNGE_UNA_LEGGE.md`.
 #  ### Una guida che invecchia e' peggio di nessuna guida: questo collaudo la
 #  ### ESEGUE (legge di prova nella tabella vera, genera, rimette tutto con lo

@@ -602,6 +602,32 @@ METODI['P-TEMPI'] = (
     "120 s>> e misura 2.55 s",
     "`primo_ordine/collauda.py`; MISURATO: 17 collaudi, pre-commit 44.4 s su 120 (37%)",
     "PORTATO")
+METODI['DECISIONE-VUOLE-UN-CAMPO'] = (
+    "una decisione che serve a un PROGRAMMA vuole un CAMPO: nessuno strumento legge "
+    "`titolo` o `descrizione` per decidere qualcosa. ### PORTATA, e questo mandato la "
+    "APPLICA A SE STESSO: `_regole_gestione.py` sceglie le regole da `classe` e "
+    "`dominio`, quelle in `CLAUDE.md` dal metadato `in_claude`, e il loro gruppo da "
+    "`dettaglio_regola` -- TRE CAMPI, ZERO TITOLI",
+    "`csv/_regole_gestione.py`; e `PI-PAROLE-STRUMENTO` + `P-T1` la coprono in parte",
+    "PORTATO")
+METODI['PRECEDENZA-IN-CODA'] = (
+    "fra piu- versioni di un mandato in coda vale SOLO L-ULTIMA, e l-ordine di esecuzione "
+    "si REGISTRA. ### PORTATA nell-era 2: i cinque mandati del 2026-10-09 sono stati "
+    "eseguiti NELL-ORDINE REGISTRATO, e lo si verifica DA GIT -- ogni task history e- "
+    "ANTENATO dei commit del suo lavoro. ### Ma e- una REGOLA SCRITTA: nessun presidio la "
+    "impedisce (`A9`)",
+    "`doc/CODA_2026-10-09.md`; la verifica e- `git merge-base --is-ancestor`",
+    "PORTATO")
+METODI['P-REG'] = (
+    "NATO NELL-ERA 2: ogni regola di gestione e- una VOCE (`STANDARD` se scritta, "
+    "`PRESIDIO` se cablata), e porta IL FILE DI DETTAGLIO e CHI LA FA RISPETTARE. ### E la "
+    "sezione delle regole di `CLAUDE.md` SI GENERA da quei campi: modificata a mano, e- "
+    "RIFIUTATA. ### E <<chi la fa rispettare>> e- UN CAMPO, quindi <<quante regole non "
+    "hanno nessuno che le faccia rispettare>> e- UN NUMERO (9 su 24) -- in prosa non si "
+    "contava. ### Il braccio che conta e- <<NESSUNA REGOLA SI PERDE>>, misurato contro "
+    "`git`: `CLAUDE.md` piu- corto NON e- un successo, e- un SOSPETTO",
+    "`csv/_regole_gestione.py::errori`; collaudo in `csv/_collauda_regole.py` (13/13)",
+    "PORTATO")
 METODI['P-BARRIERA'] = (
     "NATO NELL-ERA 2: ogni strumento verifica all-avvio che i hook LOCALI siano attivi "
     "(`core.hooksPath`, i due file, LA LORO IMPRONTA) e SI RIFIUTA DI PARTIRE (codice 3). "
