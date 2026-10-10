@@ -34,6 +34,10 @@ _QUI = os.path.dirname(os.path.abspath(__file__))
 NL = chr(10)
 PRESIDIO = "P-PULIZIA"
 
+# ### ⭐ **DOVE STO GIRANDO**, in assoluto: serve a `residui()` per non contare
+# ### ### **la cartella che contiene questo file stesso.**
+_CASA = os.path.abspath(__file__)
+
 # ### ⛔ **I PREFISSI CHE QUESTO REPO SI LASCIA DIETRO, DICHIARATI UNO A UNO** -- e non
 # ### <<tutto cio- che sta nel `%TEMP%`>>: ### **una cartella che non sappiamo chi ha fatto
 # ### NON SI CANCELLA.** ### ⚠ **Le `tmp*` senza prefisso NON sono qui, per decisione di
@@ -89,9 +93,16 @@ def via_finale(dove):
         return False
 
 
-def residui(prefissi=NOSTRI, radice=None):
-    """### Le cartelle ### **NOSTRE** rimaste nel `%TEMP%`: `[(percorso, file, byte)]`."""
+def residui(prefissi=NOSTRI, radice=None, casa=None):
+    """### Le cartelle ### **NOSTRE** rimaste nel `%TEMP%`: `[(percorso, file, byte)]`.
+
+    ### ⭐ **`casa` SI PUO- INIETTARE, e non e- un lusso:** e- cio- che permette al
+    collaudo di ### **PROVARE** che la cartella viva non si conta, invece di
+    ### **asserirlo** -- e senza iniezione il braccio potrebbe provarlo
+    ### **solo stando davvero dentro un clone.**
+    """
     T = radice or tempfile.gettempdir()
+    _casa = os.path.abspath(casa or _CASA)
     fuori = []
     try:
         voci = sorted(os.listdir(T))
@@ -102,6 +113,15 @@ def residui(prefissi=NOSTRI, radice=None):
             continue
         p = os.path.join(T, v)
         if not os.path.isdir(p):
+            continue
+        # ### ⛔ **LA CARTELLA IN CUI STO GIRANDO NON E- UN RESIDUO: E- LA CASA.**
+        # ### ⚠ **Trovato dalla verifica su clone pulito del 2026-10-10**, e il
+        # ### braccio ha fatto esattamente il suo mestiere: `csv/_verifica_clone.py`
+        # ### clona in `clone_verifica_*` e ### **ci fa girare la suite**, quindi il
+        # ### collaudo della pulizia ### **vedeva il clone VIVO e lo chiamava residuo.**
+        # ### ✅ **Un residuo e- cio- che NESSUNO sta usando**, e <<nessuno>> si
+        # ### misura: ### **la cartella che CONTIENE questo file non si conta.**
+        if _casa == p or _casa.startswith(p + os.sep):
             continue
         n = b = 0
         for qui, _s, nomi in os.walk(p):
@@ -115,9 +135,9 @@ def residui(prefissi=NOSTRI, radice=None):
     return fuori
 
 
-def via_residui(prefissi=NOSTRI, radice=None):
+def via_residui(prefissi=NOSTRI, radice=None, casa=None):
     """### Cancella i residui NOSTRI. ### `(quante, byte)`, e ### **ALZA al primo che resta.**"""
-    r = residui(prefissi, radice)
+    r = residui(prefissi, radice, casa)
     byte = sum(b for _p, _n, b in r)
     for p, _n, _b in r:
         via(p)
@@ -206,6 +226,27 @@ def collaudo():
         print("     %s" % e)
     esito("### e CHIUSO il file la STESSA chiamata riesce", rifatto,
           "### quindi il braccio di sopra e- fallito per il FILE APERTO, non per altro")
+
+    # ------------------------------------------------- la CASA non e- un residuo
+    # ### ⛔ **IL BRACCIO CHE LA VERIFICA SU CLONE PULITO HA FATTO NASCERE**
+    # ### *(2026-10-10)*: `csv/_verifica_clone.py` clona in `clone_verifica_*` e ### **ci
+    # ### fa girare la suite**, quindi questo collaudo ### **vedeva il clone VIVO e lo
+    # ### chiamava residuo.** ### ✅ **Si prova nei DUE VERSI, con due cartelle
+    # ### SORELLE**: una e- la casa, l-altra no.
+    _t = tempfile.mkdtemp(prefix="st_casa_")
+    _viva = os.path.join(_t, "clone_verifica_viva")
+    _morta = os.path.join(_t, "clone_verifica_morta")
+    for _d in (_viva, _morta):
+        os.makedirs(os.path.join(_d, "csv"))
+        io.open(os.path.join(_d, "csv", "_pulizia.py"), "wb").write(b"x")
+    _finta = os.path.join(_viva, "csv", "_pulizia.py")
+    _vedo = [x[0] for x in residui(prefissi=("clone_verifica_",), radice=_t,
+                                   casa=_finta)]
+    esito("### la cartella in cui STO GIRANDO non e- un residuo", _viva not in _vedo,
+          "### la casa non si conta: e- VIVA, e un residuo e- cio- che nessuno usa")
+    esito("### ma la SORELLA, che nessuno usa, SI- CHE E- un residuo", _morta in _vedo,
+          "### altrimenti la cura avrebbe spento il controllo invece di correggerlo")
+    via(_t)
 
     # ------------------------------------------------- niente residui nostri
     r = residui()

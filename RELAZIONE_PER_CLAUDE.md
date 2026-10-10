@@ -12576,3 +12576,15 @@ Ogni dato di `db_era2/` ha ### **il suo TIMBRO accanto**, col campo `versione_da
 ### ⚠ **E SE UN COLLAUDO FALLISCE SENZA SCRIVERE NIENTE, ADESSO LO DICE:** ### **<<e NON HA SCRITTO NIENTE, che e- un difetto a se->>** — perche- ### **un rosso muto e- un difetto, non un dettaglio.**
 
 ### ✅ **LA SUITE INTERA, dopo le cure:** ### **`34` su `34`**, e il `pre-commit` sta nel budget *(`108.5` s su `120`, il `90%`)*. ### ⚠ **E il `90%` e- un SEGNALE**: il collaudo nuovo costa `0.18` s, quindi il margine che si e- ridotto ### **non e- colpa sua** — va guardato, e lo dico invece di lasciarlo scoprire a chi commttera- domani.
+
+## ✅ **LA CORREZIONE: <<LA CARTELLA IN CUI STO GIRANDO NON E- UN RESIDUO, E- LA CASA>>** — ### **e l-ha trovata la verifica su clone pulito** *(2026-10-10)*
+
+### 📌 **IL FATTO:** `csv/_verifica_clone.py` clona in `clone_verifica_*` e ### **ci fa girare la suite** — e dentro la suite il collaudo della pulizia ### **vedeva il clone VIVO e lo chiamava residuo.** ### **Codice `1` nei due ambienti**, su un difetto che sul mio disco ### **non si vedeva.**
+
+### ⭐ **E QUESTA VOLTA L-OUTPUT HA DETTO PERCHE-, al primo colpo:** la cura del punto `2` *(un rosso stampa la coda dell-uscita del figlio)* ha mostrato ### **la riga esatta del braccio e il nome della cartella** — ### **nessuna corsa in piu-.** ### ✅ **E- la prima volta oggi che un rosso si diagnostica senza rigirare niente.**
+
+### ✅ **LA CURA E- UNA DEFINIZIONE, non un-eccezione:** ### **un residuo e- cio- che NESSUNO sta usando**, e <<nessuno>> si misura — ### **la cartella che CONTIENE il file in esecuzione non si conta.**
+
+### ⛔ **E SI PROVA NEI DUE VERSI, con due cartelle SORELLE:** quella ### **viva** *(che contiene il file che gira)* ### **non e- contata**; quella ### **morta**, sorella nella stessa cartella e con lo stesso prefisso, ### **SI-.** ### ⚠ **Senza il secondo verso la cura avrebbe potuto SPEGNERE il controllo invece di correggerlo**, ed e- esattamente cio- che ha fatto la migrazione dei campi di `527e70c`. ### **`8` su `8`.**
+
+### ⭐ **E LA <<CASA>> SI PUO- INIETTARE**, che non e- un lusso: senza iniezione quel braccio si potrebbe provare ### **solo stando davvero dentro un clone** — cioe- ### **solo nel caso che non si riesce a girare a mano.**
