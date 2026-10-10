@@ -12470,3 +12470,15 @@ Ogni dato di `db_era2/` ha ### **il suo TIMBRO accanto**, col campo `versione_da
 ### ✅ **`P-ALB`: `14` nodi, `7` archi, `3` PRESE, `0` senza argomento**, e il collaudo ### **`14` su `14`.**
 
 ### ⛔ **E DUE BRACCI CHE DEVONO FALLIRE SI SONO ROTTI, per la TERZA volta oggi nello stesso file, e per LA STESSA RAGIONE:** ### **pescavano la vittima nel repo.** Il primo nodo con una dipendenza era `DEC-QC-CONSERVATA`, e da quando la camminata e- ### **PRESA** marcarlo `presa` ### **non e- piu- una violazione.** ### ✅ **Ora si cerca un figlio il cui PADRE NON E- PRESO, e se non ce n-e- nessuno SI COSTRUISCE.**
+
+## ✅ **PUNTO `2`: IL PUNTO `4` DEL MANDATO ⑩, CHE ERA BLOCCATO, E- ESEGUITO** *(2026-10-10)*
+
+### 📌 **Lo sblocca la decisione di Luca che RICABLA l-albero:** il vuoto dipende ### **SOLO dalla camminata**, perche- ### **non usa distanze** — e il nodo `D6` e- ### **`presa: true`.**
+
+### ✅ **E CHIUDE IL PUNTO APERTO DELLA DECISIONE `10`:** la grandezza contabile e- ### **l-energia dei gradi di liberta- del vuoto del nodo**, e l-estensione ### **NON SI SCEGLIE** — il vuoto si conduce ### **un arco per passo**, cioe- ### **E- IL CONO.**
+
+### ⭐ **E LE TRE FORME SONO UNA VOCE A PARTE, [[DOMANDA-FORME-VUOTO]]:** un ### **principio preso** e ### **tre forme aperte** ### **non sono la stessa voce.** ### 📌 **E dipendono dalla QUANTITA- CONSERVATA per una ragione di merito:** l-accoppiamento ### **sposta energia**, e senza una grandezza conservata ### **non si scrive un bilancio** — che e- cio- che la decisione `10` pretende.
+
+### ⛔ **E IL PRESIDIO CHE IMPEDISCE ANCORA LO STATO, PROVATO E NON ASSERITO:** ho tentato `stato=CHIUSA` e la risposta e- stata, alla lettera: *«`PI-ERA-STATO` `VUOTO-LOCALE-DETERMINISTICO`: era `2` con stato `CHIUSA`. ### **L-era `2` NON E- COMINCIATA: una sua voce e- `AGENDA`**»* — piu- *«`CHIUSA` senza `chiusura.criterio` e `chiusura.commit`»*. ### ✅ **NON l-ho aggirato**, come il mandato dice.
+
+### 📌 **E LA DECISIONE VIVE DOVE PUO- VIVERE, in TRE posti verificabili:** il nodo `D6` dell-albero *(`presa: true`, che e- il campo che dice «presa»)*, la `nota_guardiano` della voce, e ### **la riga di storico col motivo.** ### ⚠ **Cio- che manca e- SOLO lo stato della voce**, e il motivo e- ### **una regola del repo, non una mia scelta.**
