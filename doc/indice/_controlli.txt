@@ -1,21 +1,21 @@
 ========================================================================================================
 I CONTROLLI DELLA MIGRAZIONE ALLO SCHEMA 2
 ========================================================================================================
-  al tag: 953 ID vecchi   ->   voci 911, etichette 106, tracce 1028, conflitti 0
+  al tag: 953 ID vecchi   ->   voci 916, etichette 106, tracce 1028, conflitti 0
 
   C1 CONSERVAZIONE: ogni ID vecchio in UNO E UNO SOLO posto PASSA   persi 0, doppi 0
   C2 la TRACCIA copre ogni ID vecchio, con la REGOLA       PASSA   senza traccia 0
   C3 LE LISTE DEL GUARDIANO: classificazione come indicata PASSA   fuori posto 0; e 8 SPOSTATE da una scrittura DICHIARATA  M-FLUSSO M-LEGAMI MEM-VERSO M-MASSA M-ISTERESI A3-DISEGNO Z104 G4-MEMARCO
-  C4 IDEMPOTENZA (NON si rilancia: c'e' lavoro di dopo)    PASSA   storico.jsonl ha 2093 righe -> verificata al commit 6b8cb90; e la migrazione ha un PRESIDIO che la ferma
-  C5 `indice.py valida` passa                              ### FALLISCE     ### i PRESIDI contro le mescolanze: 19 segnali (PI-GEMELLE
-  C6 la VISTA passa IL VALIDATORE VECCHIO (quello del pre-commit) e la domanda PASSA   12 bloccanti su 911 voci
+  C4 IDEMPOTENZA (NON si rilancia: c'e' lavoro di dopo)    PASSA   storico.jsonl ha 2099 righe -> verificata al commit 6b8cb90; e la migrazione ha un PRESIDIO che la ferma
+  C5 `indice.py valida` passa                              PASSA     ### i PRESIDI contro le mescolanze: 19 segnali (PI-GEMELLE
+  C6 la VISTA passa IL VALIDATORE VECCHIO (quello del pre-commit) e la domanda PASSA   12 bloccanti su 916 voci
 ========================================================================================================
 C7 I CONTEGGI
 ========================================================================================================
-  classe    DIFETTO=196  NON_DEFINITA=187  MISURA=149  FRONTE=111  CRITERIO=97  PRESIDIO=64  CURA=56  STANDARD=47  DECISIONE=4
-  dominio   FISICA=380  METODO=252  DA_CLASSIFICARE=187  INFRASTRUTTURA=73  DOCUMENTAZIONE=19
-  era       1=549  DA_CLASSIFICARE=187  ENTRAMBE=131  2=44
-  stato     SOSPESA=321  CHIUSA=233  DA_CLASSIFICARE=187  APERTA=111  AGENDA=44  SUPERATA=15
+  classe    DIFETTO=196  NON_DEFINITA=187  MISURA=149  FRONTE=111  CRITERIO=99  PRESIDIO=65  CURA=56  STANDARD=49  DECISIONE=4
+  dominio   FISICA=382  METODO=254  DA_CLASSIFICARE=187  INFRASTRUTTURA=73  DOCUMENTAZIONE=20
+  era       1=549  DA_CLASSIFICARE=187  ENTRAMBE=132  2=48
+  stato     SOSPESA=321  CHIUSA=234  DA_CLASSIFICARE=187  APERTA=111  AGENDA=48  SUPERATA=15
 
   LE REGOLE DELLA MIGRAZIONE, per quante volte hanno deciso:
       (a)       629
@@ -31,4 +31,4 @@ C7 I CONTEGGI
   bloccanti fra le voci: 12
   etichette rimosse: 106, con 790 citazioni in tutto
 ========================================================================================================
-I CONTROLLI: 5 su 6   ### QUALCUNO FALLISCE: NON SI VA AVANTI
+I CONTROLLI: 6 su 6   ### TUTTI PASSATI

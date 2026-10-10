@@ -24,8 +24,15 @@
 #  ### ⚠ E se il comando FALLISSE, il commit SI FERMA: una via di scrittura
 #  ### dell'indice che non gira e' peggio di una che non c'e'.
 R="$(git rev-parse --show-toplevel)"
-python "$R/csv/indice.py" storico-commit >/dev/null || exit 1
-git add "$R/doc/indice/storico.jsonl" || exit 1
+# ### ✅ **IL RITO DELLO STORICO E- USCITO DA QUI il 2026-10-10, e la domanda
+# ### la fa Luca:** *<<poi decidi se `storico-commit` nel `pre-commit` serve
+# ### ancora, e DILLO>>*. ### **NON SERVE PIU-:** il `commit` di una riga
+# ### ### **SI RICAVA DA GIT** *(`indice.py::_storico_da_git`)*, quindi
+# ### ### **riempire il campo era una scrittura che non serviva a niente.**
+# ### ⭐ **E TOGLIERLO CURA UN SECONDO DIFETTO:** quel `git add` cambiava
+# ### ### **l-insieme dei file in stage A META- DEL COMMIT**, e `H-FILE`
+# ### ### **mi ha rifiutato DUE commit oggi** per una lista che era giusta quando
+# ### l-avevo generata. ### **Il comando resta disponibile a mano.**
 
 python "$(git rev-parse --show-toplevel)/csv/_hook_presidi.py" --pre-commit || exit 1
 # `P-E1`..`P-E5` e `P-E7` (era 2): la biiezione tabella <-> file <-> registro <-> scheda,

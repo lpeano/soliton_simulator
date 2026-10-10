@@ -13,7 +13,7 @@
 | `FISICA` | `ENTRAMBE` | 17 |
 | `INFRASTRUTTURA` | `1` | 39 |
 | `INFRASTRUTTURA` | `2` | 14 |
-| `INFRASTRUTTURA` | `ENTRAMBE` | 20 |
+| `INFRASTRUTTURA` | `ENTRAMBE` | 21 |
 | `METODO` | `1` | 156 |
 | `METODO` | `2` | 11 |
 | `METODO` | `ENTRAMBE` | 87 |
@@ -557,7 +557,7 @@
 | `RAMI-OFF-CURA2` | CURA | INFRASTRUTTURA | 1 | ### **CHIUSA** |  | i rami a flag spento di TEMPO_UNICO_MITOSI, archiviati COPIATI dal sorgente |
 | `RAMPA-1` | CURA | FISICA | 1 | ### **CHIUSA** |  | CHIUSA il 2026-09-25, strada (3) (decisione di Luca): sigillo 9/9 dal CLI, ramp  |
 | `RAMPA-2` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | APERTA il 2026-09-25 (richiesta di Luca) / AL PASSO 0 TUTTI LEGGONO cs = CSM. La |
-| `REFERTO-FOTOGRAFIA-RIGENERATA` | PRESIDIO | DOCUMENTAZIONE | ENTRAMBE | ### **APERTA** |  | un referto di mandato chiuso era FOTOGRAFIA e VISTA VIVA insieme, e la CI cadeva |
+| `REFERTO-FOTOGRAFIA-RIGENERATA` | PRESIDIO | DOCUMENTAZIONE | ENTRAMBE | ### **CHIUSA** |  | un referto di mandato chiuso era FOTOGRAFIA e VISTA VIVA insieme, e la CI cadeva |
 | `REFERTO-VERDE-SU-FALLIMENTO` | DIFETTO | DOCUMENTAZIONE | ENTRAMBE | ### **APERTA** |  | un referto scriveva il segno VERDE su un collaudo FALLITO: 20 su 22 con la spunt |
 | `REG-A` | DIFETTO | FISICA | 1 | ### **CHIUSA** |  | FASE A del registro della fisica: l'INVENTARIO degli scrittori di stato / MANDAT |
 | `REG-B` | FRONTE | METODO | 1 | ### **SOSPESA** |  | FASE B: le SCHEDE, a lotti, un commit per lotto / MANDATO-REGISTRO §2 / LE QUATT |
@@ -715,6 +715,7 @@
 | `STANDARD-8` | STANDARD | METODO | ENTRAMBE | ### **SUPERATA** |  | UN DIFETTO DIMOSTRATO SI CURA: MISURARE NON E' CURARE |
 | `STANDARD-9` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 13 volte, MAI definito in un registro) [STANDARD 9] |
 | `STATI-LOCALI` | PRESIDIO | INFRASTRUTTURA | 1 | ### **SOSPESA** |  | gli stati .npz del grafo restano LOCALI: in git vanno solo sha1, percorso e coma |
+| `STORICO-COMMIT-STRUTTURALE` | DIFETTO | INFRASTRUTTURA | ENTRAMBE | ### **APERTA** |  | il commit di una riga di storico si pretendeva SCRITTO, e nessun clone poteva av |
 | `SYNCDB-HEADLESS` | DIFETTO | INFRASTRUTTURA | 1 | ### **SOSPESA** |  | `--sync-db` in headless CARICA ma non SALVA: lo dice il docstring del driver |
 | `T0` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 32 volte, MAI definito in un registro) |
 | `T1` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | OMONIMO `T1`: 34 definizioni con significati DIVERSI |

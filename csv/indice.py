@@ -562,6 +562,7 @@ def aggiorna(voci, reg, idv, campi, metas, motivo, commit):
                     "commit": commit or "", "commit_base": _head(),
                     "prima": prima, "dopo": v},
                    ensure_ascii=False) + NL)
+    _stage_storico()
     viste(voci, reg)
     v2, r2 = carica()
     err2 = valida(v2, r2, verboso=False)
@@ -632,6 +633,7 @@ def aggiorna_lotto(voci, reg, percorso):
     _scrivi_jsonl(VOCI, voci)
     io.open(STORICO, "a", encoding="utf-8", newline=NL).write(
         NL.join(json.dumps(x, ensure_ascii=False) for x in storia) + NL)
+    _stage_storico()
     viste(voci, reg)
     v2, r2 = carica()
     err2 = valida(v2, r2, verboso=False)
@@ -717,6 +719,7 @@ def meta_depreca(voci, reg, k, nuovo, motivo):
     io.open(STORICO, "a", encoding="utf-8", newline=NL).write(
         json.dumps({"quando": _oggi(), "meta_deprecata": k, "sostituito_da": nuovo or "",
                     "voci_migrate": n, "motivo": motivo}, ensure_ascii=False) + NL)
+    _stage_storico()
     print("  `%s` DEPRECATA, e %d voci migrate%s"
           % (k, n, (" a `%s`" % nuovo) if nuovo else " (chiave rimossa)"))
 
@@ -739,6 +742,7 @@ def meta_rinomina(voci, reg, k, k2, motivo):
     io.open(STORICO, "a", encoding="utf-8", newline=NL).write(
         json.dumps({"quando": _oggi(), "meta_rinominata": [k, k2], "voci_migrate": n,
                     "motivo": motivo}, ensure_ascii=False) + NL)
+    _stage_storico()
     print("  `%s` -> `%s`, e %d voci migrate" % (k, k2, n))
 
 
@@ -877,6 +881,44 @@ def collaudo():
                                 "VISTO" if buono else "non visto",
                                 "ok" if buono else "### SBAGLIATO"))
     # ===================================================================
+    #   `PI-STORICO-SENZA-COMMIT`: I TRE CASI DEL MANDATO  --  nei DUE versi
+    # -------------------------------------------------------------------
+    # ### \u26d4 **La forma vecchia PRETENDEVA il campo scritto, ed era STRUTTURALMENTE
+    # ### ROSSA:** le ultime righe di `HEAD` ### **non possono** portare l-hash del commit
+    # ### che le contiene. ### **Diagnosi del guardiano, 2026-10-10.**
+    # ### \u26a0 **E i bracci girano su RIGHE FINTE:** un collaudo che per provare questo
+    # ### presidio dovesse scrivere nello storico vero ### **sarebbe lo stesso difetto che
+    # ### nel giro scorso ha cancellato 867 classificazioni.**
+    _R = ['{"quando": "2026-10-10", "id": "X1", "motivo": "m", "commit": "%s"}' % c
+          for c in ("aaa1111", "bbb2222", "")]
+    # ### ⚠ **UN CONTATORE SUO, e non quello del blocco dopo:** il blocco di
+    # ### `_campo` comincia con `sotto = 0`, e ### **avrebbe azzerato questi sei** --
+    # ### ### **`ok` sarebbe cresciuto e `tot` no**, cioe- il collaudo avrebbe detto
+    # ### ### **piu- passati che bracci.** ### **Visto prima di girarlo.**
+    sotto5 = 0
+
+    def _f5(vive, per_riga, n_head, n_stage):
+        return _f5_storico(None, vive=vive, da_git=(per_riga, n_head, n_stage))
+
+    for _che, _a, _buono in (
+            ("(a) righe TUTTE in un commit, campo pieno e GIUSTO",
+             _f5(_R[:2], ["aaa1111", "bbb2222"], 2, 2), True),
+            ("(a) e col campo VUOTO va bene uguale: il commit SI RICAVA",
+             _f5([_R[2]], ["ccc3333"], 1, 1), True),
+            ("### (b) DEVE scattare: un `commit` scritto che NON COINCIDE",
+             _f5(_R[:1], ["zzz9999"], 1, 1), False),
+            ("(c) una riga NELLO STAGE va bene: e- il ritardo inevitabile",
+             _f5(_R[:2], ["aaa1111"], 1, 2), True),
+            ("### (c) DEVE scattare: una riga sul DISCO e FUORI dallo stage",
+             _f5(_R[:2], ["aaa1111"], 1, 1), False),
+            ("### e senza `HEAD` il presidio TACE invece di accusare",
+             _f5(_R[:2], [], -1, -1), True)):
+        buono = (_a == []) if _buono else (_a != [])
+        sotto5 += 1 if buono else 0
+        ok += 1 if buono else 0
+        print("  %-62s %s" % (_che, "ok" if buono else "### SBAGLIATO"))
+
+    # ===================================================================
     #   `_campo()`: IL PERCORSO UNICO IMPARA A CHIUDERE  --  nei DUE versi
     # -------------------------------------------------------------------
     # ### ⛔ **Prima del `2026-10-10` il percorso unico NON SAPEVA CHIUDERE:**
@@ -924,7 +966,7 @@ def collaudo():
     ok += 1 if buono else 0
     print("  %-62s %s" % ("### DEVE fallire: `CHIUSA` -> `AGENDA` resta VIETATA",
                           "ok" if buono else "### SBAGLIATO"))
-    tot = len(casi) + len(vietate) + 2 + sotto
+    tot = len(casi) + len(vietate) + 2 + sotto + sotto5
     print()
     print("  COLLAUDO: %d su %d" % (ok, tot))
     print("  ### I DUE CONTROLLI SUI DERIVATI sono provati IN MEMORIA sulla loro LOGICA")
@@ -1188,28 +1230,153 @@ def _f11_replay(voci):
     return _f11_righe(voci, _f11_ultimo(), nati)
 
 
-def _f5_storico(voci):
-    """### `PI-STORICO-SENZA-COMMIT`: una riga di storico ### **GIA- COMMITTATA** senza il suo `commit`.
+def _stage_storico():
+    """### Mette `storico.jsonl` IN STAGE, subito dopo averci scritto.
 
-    ### ⛔ **E- UN ERRORE, non un segnale**, e il mandato lo dice.
-    ### ⚠ **MA SOLO PER LE RIGHE GIA- COMMITTATE, e questa e- una MIA DERIVAZIONE:** nella
-    forma letterale *(«ogni riga senza commit e- un errore»)* il presidio
-    ### **bloccherebbe OGNI COMMIT DI UN LOTTO**, perche- `aggiorna-lotto` scrive righe con
-    `commit` vuoto -- ### **il commit che le conterra- non esiste ancora** *(e- il ritardo
-    dichiarato nel blocco `D`)*. ### ✔ **Le righe presenti in `HEAD` devono avere il loro
-    commit; quelle aggiunte DOPO `HEAD` sono esattamente il ritardo, e sono esenti.**
-    ### **Cosi- `PI-STORICO-SENZA-COMMIT` obbliga a girare `storico-commit` prima del commit successivo**, invece
-    di impedire il commit.
+    ### ⛔ **PERCHE- QUI E NON NEL `pre-commit`:** dal `2026-10-10` il commit di una
+    riga ### **si ricava da git**, e una riga ### **che niente contiene** non e- una
+    scrittura dichiarata. ### **Chi scrive la riga la mette in stage**: e- un atto solo, e
+    si vede.
+    ### ⭐ **E NEL `pre-commit` ERA IL POSTO SBAGLIATO:** la- cambiava
+    ### **l-insieme dei file in stage A META- DEL COMMIT**, e `H-FILE` ha rifiutato
+    ### **due commit** per una lista che era giusta quando era stata generata.
+    ### ⚠ **Se `git` non c-e- o non risponde NON SI FERMA NIENTE:** scrivere
+    nell-indice ### **non deve dipendere** dal poter mettere in stage.
+    """
+    subprocess.run(["git", "add", "--", "doc/indice/storico.jsonl"], cwd=RADICE,
+                   capture_output=True)
+
+
+def _storico_da_git():
+    """### Per ogni riga di `storico.jsonl`: ### **il commit che l-ha INTRODOTTA.**
+
+    ### ⛔ **IL DIFETTO CHE QUESTO CHIUDE, diagnosticato dal guardiano il
+    `2026-10-10`, ed e- STRUTTURALE:** una riga di storico scritta ### **in** un commit
+    ### **non puo- contenere l-hash di quel commit** -- quindi ### **l-HEAD pushato ha
+    SEMPRE le ultime righe senza `commit`**, e ### **chi clona, e la CI, trovano `valida`
+    ROSSA fino al commit successivo.**
+    ### ⭐ **E io la curavo A MANO con `storico-commit`, e l-ho chiamata <<l-ottava
+    volta>> SENZA CHIEDERMI PERCHE- TORNASSE.** ### **Ho contato le volte invece di
+    guardare la causa**, ed e- esattamente il segnale d-allarme di `P1`.
+
+    ### ✅ **LA CURA: il commit SI RICAVA**, invece di pretenderlo scritto. E il
+    codice per ricavarlo ### **c-era gia-**, dentro `storico_commit()`: era usato
+    ### **come SCRITTORE** e non come ### **LETTORE** -- quindi questa non e- una legge
+    nuova *(`9-ter`)*.
+
+    Ritorna `(per_riga, n_head, n_stage)`:
+      * `per_riga[i]` -- il commit corto che ha introdotto la riga `i`, oppure `""` se
+        quella riga ### **non e- in nessun commit**;
+      * `n_head` -- quante righe ci sono ### **a `HEAD`**;
+      * `n_stage` -- quante ce ne sono ### **nello STAGE** *(`-1` se non si legge)*.
+    """
+    rel = "doc/indice/storico.jsonl"
+
+    def _righe(testo):
+        return len([x for x in (testo or "").split(NL) if x.strip()])
+
+    def _quante(arg):
+        r = subprocess.run(["git", "show", arg + ":" + rel], cwd=RADICE,
+                           capture_output=True, text=True, encoding="utf-8",
+                           errors="replace")
+        return -1 if r.returncode != 0 else _righe(r.stdout)
+
+    # ### \u26d4 **E NON SI USA `git blame`, e il motivo e- MISURATO:** `storico-commit`
+    # ### ### **RISCRIVE le righe vecchie** per riempire il loro campo `commit`, quindi
+    # ### blame attribuisce una riga ### **al commit che ha RIEMPITO il campo**, non a
+    # ### quello che ### **l-ha aggiunta.** ### \u26a0 **Provato: sulle prime righe blame
+    # ### dava `85b5313` dove il campo dice `a7569dd`** -- e avrei <<curato>> `2000` righe
+    # ### giuste.
+    # ### \u2705 **La derivazione giusta e- PER CONTEGGIO DI RIGHE**, ed e- quella che
+    # ### `storico_commit()` usa gia-: per ogni commit che ha toccato il file, le righe
+    # ### `[quante_prima, quante_dopo)` sono ### **esattamente quelle che ha aggiunto.**
+    # ### \u2b50 **E costa DUE processi invece di uno per commit:** un `git log` per gli
+    # ### sha, e ### **un solo `git cat-file --batch`** per tutti i contenuti.
+    q = subprocess.run(["git", "log", "--reverse", "--format=%h", "--", rel],
+                       cwd=RADICE, capture_output=True, text=True, encoding="utf-8",
+                       errors="replace")
+    sha = [c for c in (q.stdout or "").split() if c]
+    per_riga = []
+    if sha:
+        dentro = NL.join("%s:%s" % (c, rel) for c in sha) + NL
+        b = subprocess.run(["git", "cat-file", "--batch"], cwd=RADICE,
+                           input=dentro.encode("utf-8"), capture_output=True)
+        dati, pos, prec = b.stdout, 0, 0
+        for c in sha:
+            fine = dati.find(b"\n", pos)
+            if fine < 0:
+                break
+            testa = dati[pos:fine].decode("utf-8", "replace").split()
+            if len(testa) < 3:
+                break
+            lung = int(testa[2])
+            corpo = dati[fine + 1:fine + 1 + lung].decode("utf-8", "replace")
+            pos = fine + 1 + lung + 1
+            n = _righe(corpo)
+            # ### \u26a0 **SOLO IN AGGIUNTA, e la premessa SI VERIFICA:** se un commit
+            # ### ### **togliesse** righe la derivazione sarebbe sbagliata, e allora
+            # ### ### **si FERMA** invece di scrivere numeri falsi.
+            if n < prec:
+                return [], -1, -1
+            per_riga.extend([c] * (n - prec))
+            prec = n
+    return per_riga, _quante("HEAD"), _quante("")
+
+
+def _f5_storico(voci, vive=None, da_git=None):
+    """### `PI-STORICO-SENZA-COMMIT`: una riga di storico ### **che NON E- IN NESSUN
+    COMMIT**, oppure il cui `commit` scritto ### **NON COINCIDE con quello vero.**
+
+    ### ⛔ **LA FORMA VECCHIA PRETENDEVA IL CAMPO SCRITTO, ed era STRUTTURALMENTE
+    ROSSA:** le ultime righe di `HEAD` ### **non possono** portare l-hash del commit che
+    le contiene, quindi ### **ogni clone e la CI vedevano `valida` fallire** fino al
+    commit dopo. ### **Diagnosi del guardiano, `2026-10-10`.**
+
+    ### ✅ **LA FORMA NUOVA, e sono i TRE casi che il mandato fissa:**
+
+      * una riga ### **presente in un commit** va bene, ### **col campo vuoto o pieno**;
+      * una riga ### **nello STAGE** del commit in corso va bene: e- il ritardo
+        ### **inevitabile**, e il commit che la conterra- ### **non esiste ancora**;
+      * una riga ### **sul disco e FUORI dallo stage** e- un errore: ### **non la
+        contiene niente**, e non e- nemmeno in viaggio;
+      * un `commit` ### **scritto che NON COINCIDE** con quello ricavato da git e- un
+        errore: ### **e- un numero che dice una cosa falsa**, e un numero falso e- peggio
+        di un numero assente *(`L-NUMERI`)*.
     """
     del voci
-    if not os.path.exists(STORICO):
+    if vive is None:
+        if not os.path.exists(STORICO):
+            return []
+        vive = [r for r in io.open(STORICO, encoding="utf-8").read().split(NL)
+                if r.strip()]
+    per_riga, n_head, n_stage = _storico_da_git() if da_git is None else da_git
+    if n_head < 0:
+        # ### ⚠ **Senza `HEAD` non si puo- dire niente, e TACERE E- GIUSTO:** e- il
+        # ### caso del primo commit di un repo, e accusare la- sarebbe un FALSO.
         return []
-    vive = [r for r in io.open(STORICO, encoding="utf-8").read().split(NL) if r.strip()]
-    q = subprocess.run(["git", "show", "HEAD:doc/indice/storico.jsonl"], cwd=RADICE,
-                       capture_output=True, text=True, encoding="utf-8")
-    if q.returncode != 0:
-        return []
-    return _f5_righe(vive, len([r for r in q.stdout.split(NL) if r.strip()]))
+    err = []
+    for k, riga in enumerate(vive):
+        try:
+            d = json.loads(riga)
+        except ValueError:
+            err.append("`PI-STORICO-SENZA-COMMIT` storico riga %d: NON E- JSON" % (k + 1))
+            continue
+        vero = per_riga[k] if k < len(per_riga) else ""
+        scritto = str(d.get("commit") or "")
+        if not vero:
+            if n_stage >= 0 and k < n_stage:
+                continue          # ### nello STAGE: e- il ritardo, ed e- ammesso
+            err.append(
+                "`PI-STORICO-SENZA-COMMIT` storico riga %d: NON E- IN NESSUN COMMIT e "
+                "NON E- NELLO STAGE. ### Una riga di storico che niente contiene non e- "
+                "una scrittura dichiarata: `git add doc/indice/storico.jsonl`" % (k + 1))
+            continue
+        if scritto and not (vero.startswith(scritto) or scritto.startswith(vero)):
+            err.append(
+                "`PI-STORICO-SENZA-COMMIT` storico riga %d: il `commit` scritto e- `%s` "
+                "e quello RICAVATO DA GIT e- `%s`. ### Un numero che dice una cosa falsa "
+                "e- PEGGIO di un numero assente (`L-NUMERI`)" % (k + 1, scritto, vero))
+    return err[:20]
 
 
 DA_DECIDERE = os.path.join(D, "DA_DECIDERE_LUCA.md")
@@ -1998,6 +2165,7 @@ def etichette_lotto(percorso):
     with io.open(STORICO, "a", encoding="utf-8", newline=NL) as f:
         for s in storia:
             f.write(json.dumps(s, ensure_ascii=False) + NL)
+    _stage_storico()
     print("  lotto ETICHETTE applicato: %d etichette, %d righe di storico"
           % (len(righe), len(storia)))
 
@@ -2030,6 +2198,7 @@ def rinomina(voci, reg, vecchio, nuovo, motivo):
             r["quando"] = _oggi()
             r["commit_base"] = _head()
             f.write(json.dumps(r, ensure_ascii=False) + NL)
+    _stage_storico()
     for rel, testo in sorted(scritture.items()):
         io.open(os.path.join(os.path.dirname(os.path.dirname(
             os.path.abspath(__file__))), rel), "w", encoding="utf-8",
@@ -2123,6 +2292,7 @@ def crea_lotto(voci, reg, percorso):
     with io.open(STORICO, "a", encoding="utf-8", newline=NL) as f:
         for s in storia:
             f.write(json.dumps(s, ensure_ascii=False) + NL)
+    _stage_storico()
     viste(voci, reg)
     err = valida(voci, reg, verboso=False)
     assert not err, "DOPO le viste la validazione cade:" + NL + NL.join(err[:10])
