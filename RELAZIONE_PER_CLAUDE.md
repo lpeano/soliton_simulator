@@ -12293,3 +12293,15 @@ Ogni dato di `db_era2/` ha ### **il suo TIMBRO accanto**, col campo `versione_da
 ### ⛔ **E QUESTA DECISIONE E- GIA- SUPERATA, LO STESSO GIORNO:** il mandato della ### **camminata a moneta** *(voce ⑩, seconda versione)* dice *«l-integratore a strati: ### **SUPERATO**»*. ### ✅ **L-ho scritto nel nodo e NON l-ho applicato qui:** la voce ⑩ viene ### **dopo** nella coda, e ### **applicare una decisione prima del suo turno nasconderebbe l-ordine.**
 
 ### ⛔ **L-ULTIMO DELLA CODA, ANCORA PIU- IN FONDO: IL TEMPO PROPRIO LOCALE E LA `cs` LOCALE** *(Luca, 2026-10-10)*. ### ✅ **Arrivato in DUE versioni, e la seconda dice di SOSTITUIRE la prima:** nessuna delle due era registrata, quindi ### **una voce sola, la seconda**, e ### **la differenza e- in tabella** — la `cs` locale, la grandezza locale UNICA, e il gauge del tempo. ### ⭐ **E il punto 6 TOGLIE un problema invece di aggiungerlo:** un fattore comune su tutti gli `r_k` e- ### **invisibile alla fisica**, quindi ### **contano solo i rapporti fra vicini** e ### **non serve fissare niente con una mediana** -- che e- esattamente ### **la cura della violazione che `A3` e `CS-LAMBDA-GLOBALE` registravano.**
+
+## MANDATO ⑧, PUNTO `4`: `lambda` E- UN INVARIANTE SU OGNI ARCO — ### **e il censimento dell-era `1` e- CONFERMATO, rifatto sul repo** *(2026-10-10)*
+
+### 📌 **LA REGOLA, nelle parole di Luca:** *«non si puo- andare sotto la distanza tipica del sistema»* — e ### **non e- una regola di mitosi: e- un INVARIANTE.** ### **Nessun arco, in nessun istante, per effetto di nessuna legge o regola, sta sotto `lambda`.**
+
+### ✅ **IL CENSIMENTO RIFATTO, e CONFERMA il mandato:** girando ### **lo strumento originale** *(`csv/_test_fork/_tetto_e_lam.py`, blob `d23944bf`)*: ### **`27` punti**, ### **`24` cancelli**, ### **`3` pavimenti**, e ### **ZERO scritti come `2*LAM`** — il `2` ### **non e- scritto: e- DERIVATO.**
+
+### ⛔ **E I TRE PAVIMENTI SONO `lambda_nodi` (riga `5354`), `_smorza` (`6547`) e `_nasce` (`6930`):** il terzo e- ### **esattamente quello che il mandato nomina** *(«il difetto di `_nasce`»)*. ### ✅ **E un censimento mio, indipendente, via AST, trova GLI STESSI TRE.**
+
+### ⚠ **E QUI UN MIO ERRORE, corretto prima di scriverlo:** il primo censimento, con una regex, contava ### **`17` pavimenti**. ### **Erano falsi:** le guardie `max(…, 1e-9)` ### **contro la divisione per zero**, i valori di ### **default** *(`min(li) if li else LAM`)* e ### **la prosa.** ### ⭐ **E- la classe della regex che non distingue un commento da un uso** — qui ### **un epsilon da un pavimento** — e ci sono cascato di nuovo.
+
+### ⛔ **E UNA COSA CHE LA VOCE DICHIARA INVECE DI TACERE: oggi NON C-E- NESSUNA VARIABILE DI LUNGHEZZA** — `leggi.yaml` dichiara ### **solo `psi`.** Quindi il controllo del passo ### **nascera- SENZA MATERIA**, e il braccio che deve fallire ### **va costruito su uno stato finto.** ### ✅ **Il mandato lo prevede**, e la voce lo scrive.

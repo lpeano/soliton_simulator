@@ -605,6 +605,23 @@ METODI['P-GUIDA'] = (
     "SILENZIO",
     "`primo_ordine/_collauda_guida.py` (12/12), nel comando unico e nel `pre-commit`",
     "PORTATO")
+METODI['LAMBDA-INVARIANTE-OGNI-ARCO'] = (
+    "DECISIONE DI LUCA del 2026-10-10 (punto 4 delle sei): la lunghezza minima lambda e- "
+    "un INVARIANTE SU OGNI ARCO, non una regola di mitosi -- nessun arco, in nessun "
+    "istante, per effetto di nessuna legge o regola, sta sotto lambda. ### SI APPLICA "
+    "ALL-ERA 2 CON TRE LIVELLI, e oggi UNO SOLO e- coperto: (a) la BARRIERA dentro H MAI "
+    "come pavimento -- e il generatore GIA- RIFIUTA max/clip (`rami_vietati`, A14), quindi "
+    "il DIVIETO e- coperto per costruzione mentre la FORMA della barriera e- una legge da "
+    "DERIVARE (A1) e oggi NON esiste; (b) il CANCELLO nelle regole di nascita: le regole "
+    "non esistono ancora (punto 11a), quindi NON e- coperto; (c) il controllo del grafo a "
+    "ogni passo: il controllo ESISTE e FERMA (5999019), ma NON c-e- nessuna variabile di "
+    "lunghezza da controllare -- `leggi.yaml` dichiara solo `psi`. ### IL CENSIMENTO "
+    "DELL-ERA 1 E- CONFERMATO rifacendolo con lo strumento originale: 27 punti, 24 "
+    "cancelli, 3 PAVIMENTI (`lambda_nodi`, `_smorza`, `_nasce`), 0 scritti come 2*LAM.",
+    "`primo_ordine/leggi/schema.py::rami_vietati` copre il divieto del pavimento; il resto "
+    "NON e- coperto, e la voce dice quale livello manca e perche-",
+    "PRONTO")
+
 METODI['MEMORIA-DENTRO-H'] = (
     "DECISIONE DI LUCA del 2026-10-10 (la regola che ha chiamato R1): nessun nucleo di "
     "memoria K(t-t-) e nessun buffer di storia -- UNA MEMORIA E- UNA VARIABILE DINAMICA "
