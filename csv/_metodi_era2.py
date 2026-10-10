@@ -35,7 +35,14 @@ FUORI = os.path.join(RADICE, "doc", "METODI_era1_in_era2.md")
 # ### abbia ### **`classe: PRESIDIO`** -- e la classe e- ### **un CAMPO.**
 PRESIDIO = "P-M1"
 
-STATI = ("PORTATO", "DA_PORTARE", "NON_SI_APPLICA", "DA_DECIDERE")
+# ### ✅ **`PRONTO` E- ENTRATO IL `2026-10-10`, per una decisione di Luca**, e
+# ### divide `DA_PORTARE` in due: ### **<<non si fa perche- manca una DECISIONE>>**
+# ### e ### **<<si fa quando c-e- la MATERIA, e niente lo blocca>>.**
+# ### ⚠ **Il mandato dice <<da APERTO a PRONTO>>, e NESSUNA DELLE DUE PAROLE
+# ### era in questo vocabolario** *(c-erano `PORTATO`, `DA_PORTARE`,
+# ### `NON_SI_APPLICA`, `DA_DECIDERE`)*. ### **Aggiungere `PRONTO` fa una
+# ### distinzione VERA**, invece di piegare una parola a significare un-altra cosa.
+STATI = ("PORTATO", "PRONTO", "DA_PORTARE", "NON_SI_APPLICA", "DA_DECIDERE")
 
 # ### Le CLASSI che fanno di una voce ### **un METODO.**
 CLASSI_METODO = ("STANDARD", "PRESIDIO")
@@ -332,8 +339,15 @@ METODI = {
                         "### ognuno ha il suo caso che deve fallire",
                         "`passo.py::valida_composizione`", "PORTATO"),
     "SCHED-T3-REGOLE": ("le regole di composizione, 94 scritture in cinque forme: "
-                        "### nell-era 2 le regole non esistono ancora -- e- il punto 11(a)",
-                        "punto 11(a), da fare", "DA_PORTARE"),
+                        "### nell-era 2 le regole non esistono ancora -- e- il punto "
+                        "11(a). ### DAL 2026-10-10 E- `PRONTO`, non piu- soltanto da "
+                        "fare: la DECISIONE DI LUCA sulla FORMA di una regola e- presa "
+                        "(il `bilancio` e- una FORMULA che il generatore verifica, non il "
+                        "nome di un meccanismo), e lo schema la fa rispettare. ### Resta "
+                        "da fare QUANDO esiste la prima regola vera, e NON prima",
+                        "`leggi/schema.py::valida_legge`, il ramo `regola`; il collaudo "
+                        "dello schema da 34 a 37, coi TRE bracci che devono fallire",
+                        "PRONTO"),
     "NASCITA-PUNTO-UNICO": ("le grandezze della nascita si scrivono in UN SOLO punto, con "
                             "una regola dichiarata per ciascuna: ### e- IL PUNTO 3, e "
                             "`crescita.py` e- ancora uno stub",
@@ -843,9 +857,15 @@ def controlla(v=None):
 #   IL DOCUMENTO, GENERATO
 # =====================================================================================
 
-ORDINE = ("PORTATO", "DA_PORTARE", "DA_DECIDERE", "NON_SI_APPLICA")
+# ### ⚠ **E `PRONTO` ENTRA ANCHE QUI, o il riepilogo MENTE:** al
+# ### primo giro l-avevo messo solo in `STATI`, e la riga dei conti
+# ### ### **sommava a 134 come prima** -- cioe- ### **una voce
+# ### `PRONTO` non si vedeva da nessuna parte.**
+ORDINE = ("PORTATO", "PRONTO", "DA_PORTARE", "DA_DECIDERE",
+          "NON_SI_APPLICA")
 SPIEGA = {
     "PORTATO": "### ✅ **GIA- NELL-ERA `2`**, e `dove` dice dove",
+    "PRONTO": "### ✅ **DECISO E NON BLOCCATO**: si fa ### **quando c-e- la materia**, e `dove` dice ### **che cosa lo fa rispettare GIA- OGGI**",
     "DA_PORTARE": "### ⚠ **SI APPLICA, E NON C-E- ANCORA**: `dove` dice "
                   "**quale punto del mandato** lo porta",
     "DA_DECIDERE": "### ⛔ **SERVE UNA DECISIONE DI LUCA**, e `come` dice quale",

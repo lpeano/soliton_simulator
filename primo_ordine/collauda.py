@@ -64,7 +64,10 @@ COLLAUDI = (
     ("il determinismo", "primo_ordine/_collauda_determinismo.py", "pre-commit"),
     ("le simmetrie e le conservazioni", "primo_ordine/_collauda_simmetrie.py",
      "pre-commit"),
-    ("lo schema della tabella", "primo_ordine/leggi/schema.py", "pre-commit"),
+    # ### ⚠ **Il collaudo e- uscito da `schema.py` il `2026-10-10`**, perche-
+    # ### quel file era a `736` righe e ### **oltre il tetto SI DIVIDE.**
+    ("lo schema della tabella", "primo_ordine/leggi/_collauda_schema.py",
+     "pre-commit"),
     ("il generatore", "primo_ordine/_collauda_genera.py", "pre-commit"),
     ("lo schema della configurazione", "primo_ordine/config/schema_config.py",
      "pre-commit"),

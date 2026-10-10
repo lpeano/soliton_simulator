@@ -90,6 +90,9 @@ FILE_FISICA = (
     'primo_ordine/osservatori/__init__.py',
     'primo_ordine/osservatori/prova_norma.py',
     'primo_ordine/leggi/schema.py',
+    # ### ✅ **Nato il `2026-10-10` dividendo `schema.py`**, che era
+    # ### oltre il tetto: ### **il collaudo e- la parte che cresce.**
+    'primo_ordine/leggi/_collauda_schema.py',
     # ### ⛔ **E `leggi/osservatori.yaml` NON C-E- PIU-, perche- IL FILE NON C-E-
     # ### PIU-.** L-avevo creato nella tappa `2` come tabella ### **separata**, col
     # ### ragionamento che un osservatore non e- fisica e che tenerlo con le leggi

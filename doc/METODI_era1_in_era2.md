@@ -9,7 +9,8 @@
 | | quanti |
 |---|--:|
 | **`PORTATO`** | `106` |
-| **`DA_PORTARE`** | `17` |
+| **`PRONTO`** | `1` |
+| **`DA_PORTARE`** | `16` |
 | **`DA_DECIDERE`** | `5` |
 | **`NON_SI_APPLICA`** | `7` |
 | **in tutto** | ### **`135`** |
@@ -133,7 +134,17 @@
 
 ---
 
-## `DA_PORTARE` — `17` metodi
+## `PRONTO` — `1` metodi
+
+> ### ✅ **DECISO E NON BLOCCATO**: si fa ### **quando c-e- la materia**, e `dove` dice ### **che cosa lo fa rispettare GIA- OGGI**
+
+| id | classe | come si applica all-era `2` | dove |
+|---|---|---|---|
+| **`SCHED-T3-REGOLE`** | `MISURA` | le regole di composizione, 94 scritture in cinque forme: ### nell-era 2 le regole non esistono ancora -- e- il punto 11(a). ### DAL 2026-10-10 E- `PRONTO`, non piu- soltanto da fare: la DECISIONE DI LUCA sulla FORMA di una regola e- presa (il `bilancio` e- una FORMULA che il generatore verifica, non il nome di un meccanismo), e lo schema la fa rispettare. ### Resta da fare QUANDO esiste la prima regola vera, e NON prima | `leggi/schema.py::valida_legge`, il ramo `regola`; il collaudo dello schema da 34 a 37, coi TRE bracci che devono fallire |
+
+---
+
+## `DA_PORTARE` — `16` metodi
 
 > ### ⚠ **SI APPLICA, E NON C-E- ANCORA**: `dove` dice **quale punto del mandato** lo porta
 
@@ -153,7 +164,6 @@
 | **`P3`** | `STANDARD` | nessuna statistica senza barra d-errore: ### l-era 2 non ha ancora una statistica -- le misure fatte sono DETERMINISTICHE (byte, cono, deriva) | nessun sito oggi |
 | **`P5`** | `STANDARD` | ogni ramo `else`/fallback su un percorso fisico va CONTATO: ### IL PUNTO 2 lo rende un presidio -- le guardie fuori dalla fisica avranno un contatore | punto 2, da fare |
 | **`SCHED-T1`** | `CURA` | la composizione e- una LISTA e c-e- UN SOLO esecutore: ### PORTATO -- `COMPOSIZIONE_GLOBALE` e `composizione_locale()` sono liste dichiarate. ### MA <<un solo esecutore>> NON E- ANCORA UN PRESIDIO: e- il punto 9 | `passo.py`; il presidio e- il punto 9 |
-| **`SCHED-T3-REGOLE`** | `MISURA` | le regole di composizione, 94 scritture in cinque forme: ### nell-era 2 le regole non esistono ancora -- e- il punto 11(a) | punto 11(a), da fare |
 | **`STANDARD-6`** | `STANDARD` | ogni difetto acclarato si registra SUBITO: i difetti di questo mandato sono nei commit e nella relazione. ### MA DUE NON HANNO UNA VOCE: il buco di `H-FISICA-FUORI-LISTA` e la dipendenza del cono globale dalla tolleranza | la relazione; le voci mancano |
 | **`TAGLIA-FINITA`** | `STANDARD` | lo scaling di taglia finita come via al limite continuo: l-era 2 non ha ancora una misura di taglia | nessun sito oggi |
 

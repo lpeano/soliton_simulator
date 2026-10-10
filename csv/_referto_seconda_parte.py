@@ -47,7 +47,7 @@ VELOCI = (
     ("`P-AB` i confronti e i dati", "python csv/_confronti_e_dati.py --collaudo"),
     ("il rinominamento, sul piano", "python csv/_rinomina.py"),
     ("`@rif` byte-inerte", "python primo_ordine/_rif.py"),
-    ("lo schema delle leggi", "python primo_ordine/leggi/schema.py"),
+    ("lo schema delle leggi", "python primo_ordine/leggi/_collauda_schema.py"),
     ("lo schema della configurazione", "python primo_ordine/config/schema_config.py"),
     ("il generatore", "python primo_ordine/_collauda_genera.py"),
     ("il modello di sigillo", "python primo_ordine/sigilli/_modello.py"),

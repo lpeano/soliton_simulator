@@ -113,7 +113,11 @@ moduli:
   # ------------------------------------------------------------------ IL GENERATORE
   - nome: leggi/schema.py
     responsabilita: la forma di una riga di tabella, e i divieti
-    importa: [_presidio, simmetrie]
+    importa: [simmetrie]
+
+  - nome: leggi/_collauda_schema.py
+    responsabilita: il collaudo dello schema, nei due versi, in memoria
+    importa: [_presidio, schema]
 
   - nome: _genera.py
     responsabilita: dalla tabella al modulo e alla scheda, passando dalla derivata

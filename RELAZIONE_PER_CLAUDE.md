@@ -12269,3 +12269,15 @@ Ogni dato di `db_era2/` ha ### **il suo TIMBRO accanto**, col campo `versione_da
 ### ⭐ **E L-ALBERO VUOTO NON E- UN-ASSERZIONE: e- il CODICE D-USCITA.** Il braccio dell-albero sporco ### **entra nel codice d-uscita**, quindi ### **`0` vuol dire che non ha scattato** — e nel giro prima, sullo stesso comando, ### **valeva `1` e nominava due file.**
 
 ### 📌 **I tempi: `167.6` s in tutto, `pre-commit` `80.2` s su `120` (`67`%) senza `CI`; `169.9` s e `81.8` s con `CI=true`.** ### ✅ **Il `pre-commit` sta nel budget anche coi controlli sullo stage**, perche- nel hook gira ### **il solo modo rapido.**
+
+## MANDATO ⑧, PUNTO `2`: IL BILANCIO DI UNA REGOLA E- UNA FORMULA — ### **e il caso che DEVE fallire era nel collaudo come caso SANO** *(2026-10-10)*
+
+### 📌 **LA DECISIONE DI LUCA:** una regola ha in `leggi.yaml` un `bilancio` ### **scritto come FORMULA che il generatore verifica**, non ### **il nome di un meccanismo.** ### **E- la conseguenza della decisione `10`** *(«la soglia E- IL BILANCIO, ed e- una LEGGE»)*.
+
+### ⭐ **E IL CASO CHE DEVE FALLIRE ERA GIA- NEL COLLAUDO DELLO SCHEMA, COME CASO SANO:** `bilancio: «l-energia va nel vuoto»` era ### **il valore con cui si provava che una regola dichiarata PASSA.** ### ✅ **Da oggi quello e- esattamente cio- che si RIFIUTA**, e il collaudo lo dice.
+
+### ✅ **CHE COSA VERIFICA ORA LO SCHEMA**, tre cose: che il bilancio ### **si legga come formula** *(`sympify`)*; che i suoi simboli stiano ### **nell-ambito dichiarato** *(le variabili, piu- `ingressi` e `uscite`)*; e che ### **non nomini simboli ne- rami VIETATI** — ### **`A17` e `A11` valgono per un bilancio come per un termine di `H`.** ### **Collaudo dello schema da `34` a `37`.**
+
+### 📌 **E IL PUNTO `11(a)`: il mandato dice «da APERTO a PRONTO», e NESSUNA delle due parole era nel vocabolario** *(c-erano `PORTATO`, `DA_PORTARE`, `NON_SI_APPLICA`, `DA_DECIDERE`)*. ### ✅ **`PRONTO` e- entrato, e fa una distinzione VERA:** ### **«non si fa perche- manca una DECISIONE»** contro ### **«si fa quando c-e- la MATERIA, e niente lo blocca».** ### ⚠ **E al primo giro l-avevo messo SOLO in `STATI`: la riga dei conti sommava a `134` come prima, cioe- una voce `PRONTO` NON SI VEDEVA.** Ora c-e- anche nell-ordine e nella legenda.
+
+### ⛔ **E UNA COSA CHE IL MANDATO CHIEDE E CHE L-INDICE VIETA, detta invece che aggirata:** il mandato dice *«chiude `DEC-NASCITA-PSI`»* e *«chiude `DEC-REGOLA-FORMA`»*, ma ### **`PI-ERA-STATO` dice che una voce dell-era `2` E- `AGENDA`** — *«l-era `2` non e- cominciata»* — e ### **NESSUNA voce dell-era 2 si puo- chiudere.** ### ✅ **Allora «chiudere» si realizza come RISPOSTA REGISTRATA:** la `nota_guardiano` porta la risposta, e ### **le due voci escono da `DA_DECIDERE_LUCA.md` da sole** — che e- ### **l-obiettivo operativo che Luca chiede** nella voce ⑨.

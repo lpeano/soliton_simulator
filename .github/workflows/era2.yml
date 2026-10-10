@@ -67,7 +67,7 @@ jobs:
         run: python csv/_presidi_era2.py --collaudo
 
       - name: lo schema della tabella
-        run: python primo_ordine/leggi/schema.py
+        run: python primo_ordine/leggi/_collauda_schema.py
 
       - name: il collaudo del generatore
         run: python primo_ordine/_collauda_genera.py
