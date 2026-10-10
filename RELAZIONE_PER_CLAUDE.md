@@ -12822,3 +12822,26 @@ Ogni dato di `db_era2/` ha ### **il suo TIMBRO accanto**, col campo `versione_da
 ### ⭐ **E DUE COSE METODOLOGICHE, perche- sono il motivo per cui il numero si puo- scrivere:** la molteplicita- ### **non si conta dagli autovettori** *(su un autospazio DEGENERE `eig` da- una base qualunque, quindi <<sono localizzati?>> non vuol dire niente)*, e un conteggio vale ### **solo se ha un PLATEAU** sulla tolleranza — ### **qui e- stabile da `1e-12` a `1e-6`.**
 
 ### ✅ **E LA PRECISAZIONE DI LUCA SULLA VELOCITA- DELLA LUCE E- REGISTRATA:** ### **la velocita- della luce del sistema E- IL CONO**, un arco per tick, fissata dallo ### **SPOSTAMENTO**; ### **`eps` NON la fissa**, decide ### **quanto vicino al cono** si muovono le eccitazioni. ### 📌 **Ed e- la lettura `(S)` del `v3`**, che entra ### **nel task history** *(non come annotazione: il task history non e- ancora committato)*, con la previsione fissata ### **prima dei numeri.**
+
+## ✅ **IL `v3`: IL TASK HISTORY PRIMA DEL CODICE — e il flusso della saturazione si INTEGRA ESATTAMENTE** *(2026-10-11)*
+
+### 📌 **`doc/TASK_HISTORY/2026-10-11_prototipo_camminata_v3.md`**: il vuoto, la non linearita-, il passo di Strang, ### **DODICI letture** con previsioni e soglie, piu- la ### **stella polare.**
+
+### ⭐ **E LA PARTE CHE VALE E- UN CONTO CHE CHIUDE, non un elenco.** Con `N = Lambda G(x)`, `x = h/Lambda`, `G(x) = x - arctan x`:
+
+| | il conto | l-esito |
+|---|---|---|
+| `a` | `G'(x) = x^2/(1+x^2)` | ### **PARI e LIMITATA**: e- **la saturazione** |
+| `b` | `dN/dh = G'(x)` | lo spinore ### **ruota attorno al SUO versore** di `G' dtau` |
+| `c` | `dN/dLambda = x/(1+x^2) - arctan x` | ### **DISPARI**, ed e- la fase del vuoto |
+| `d` | ### ⭐ **I DUE INVARIANTI** | una rotazione ### **attorno a `n`** lascia `s.n` invariante, quindi ### **`h` COSTANTE**; una fase lascia il modulo quadro, quindi ### **`Lambda` COSTANTE** |
+
+### ⛔ **E DA LI- SEGUE TUTTO:** se `h` e `Lambda` non cambiano durante il flusso, allora `x`, `G'` e `b` ### **sono COSTANTI** — quindi ### **il flusso si integra ESATTAMENTE**, ed e- ### **unitario** *(una rotazione e una fase)* e ### **reversibile.** ### ✅ **Nessun integratore, nessun passo, nessun errore di troncamento.**
+
+### ⭐ **E IL `v3` TOGLIE UN NUMERO invece di aggiungerlo:** ### **`g` non c-e- piu-** — conta ### **solo il rapporto `h/Lambda`**, cioe- ### **due grandezze locali**. ### ✅ **E il limite `Lambda -> 0` si gestisce col LIMITE ANALITICO** *(`G' -> 1`, `b -> -pi/2 sign(h)`)*, ### **non con un pavimento** *(`A11`)*.
+
+### ✅ **E LA `C` ESTESA COMMUTA, per lo stesso motivo in due pezzi:** `G'` e- ### **PARI**, quindi l-angolo non cambia e la rotazione *(che sta in `SU(2)`)* commuta; `b` e- ### **DISPARI**, quindi la fase del vuoto commuta — ### **una fase scalare commuta con `C` se e solo se e- dispari**, ed e- il conto del `v2`.
+
+### 📌 **LA LETTURA `(R)` E- LA PRIMA, E BLOCCA TUTTO IL RESTO:** con `N` spento e il vuoto presente, lo spinore deve evolvere ### **AL BIT come nel `v2`.** ### ⛔ **Se non lo fa, il `v3` ha invalidato il `v2` e mi fermo** — ed e- la regola di fondo del mandato.
+
+### ⭐ **E LA LETTURA `(S)`, arrivata dopo, E- ENTRATA NEL TASK HISTORY e non come annotazione**, perche- il documento ### **non era ancora committato** — e il mandato dell-aggiunta lo dice. ### 📌 **La precisazione di Luca e- registrata:** ### **la velocita- della luce del sistema E- IL CONO**, e `eps` ### **decide quanto vicino al cono** si muovono le eccitazioni. ### ⚠ **E ho dichiarato un limite PRIMA di misurare:** sull-irregolare l-eccentricita- e- `6`, quindi il fronte ### **satura in sei tick** — ### **la scena principale della `(S)` e- il grafo REGOLARE.**
