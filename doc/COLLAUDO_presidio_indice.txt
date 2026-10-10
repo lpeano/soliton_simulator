@@ -2,7 +2,7 @@
 COLLAUDO DEL PRESIDIO DELL'INDICE -- i DUE versi   (2026-09-26)
 ================================================================================================
 
-  indice: 1073 fra id e alias      esclusi: 118      forme nude AMBIGUE: 0
+  indice: 1092 fra id e alias      esclusi: 123      forme nude AMBIGUE: 0
 
   sentinelle scelte ORA e verificate ignote: `QX700`, `QX701`
 
@@ -16,7 +16,7 @@ COLLAUDO DEL PRESIDIO DELL'INDICE -- i DUE versi   (2026-09-26)
 ------------------------------------------------------------------------------------------------
 `estendi`: IL MATCH SI ALLUNGA FINO AL PIU- LUNGO ID NOTO   (cura del 2026-10-10)
 ------------------------------------------------------------------------------------------------
-  ogni ID DELL-INDICE si legge intero: 0 NON letti su 891
+  ogni ID DELL-INDICE si legge intero: 0 NON letti su 900
   ### e il collaudo ha MATERIA: 33 ID hanno la forma <lettera><cifre>-<PAROLE>, che era ESATTAMENTE quella che si spezzava
   NON deve scattare  ogni ID dell-indice si legge INTERO                  PASS
                      ### prima della cura ne mancavano 122 su 887, e H-INDICE verificava IL PREFISSO
@@ -32,11 +32,11 @@ COLLAUDO DEL PRESIDIO DELL'INDICE -- i DUE versi   (2026-09-26)
 ------------------------------------------------------------------------------------------------
 `id_dei_vocabolari`: UN ID DI LEGGE, VARIABILE, ASSIOMA O DECISIONE NON E- IGNOTO
 ------------------------------------------------------------------------------------------------
-  gli id dei quattro registri di vocabolario: 115
+  gli id dei quattro registri di vocabolario: 125
   ### il collaudo ha MATERIA: i vocabolari non sono vuoti        PASS
-     115 id: ### senza di loro questo braccio non proverebbe niente
+     125 id: ### senza di loro questo braccio non proverebbe niente
   NON deve scattare: OGNI id dei vocabolari e- NOTO              PASS
-     ### 115 su 115: prima erano TUTTI IGNOTI, e citarne uno RIFIUTAVA IL COMMIT
+     ### 125 su 125: prima erano TUTTI IGNOTI, e citarne uno RIFIUTAVA IL COMMIT
   ### DEVE scattare ANCORA: una sentinella ignota                PASS
      `QX700`: ### e- il braccio che dice che la cura NON ha spento il presidio -- aggiungere nomi noti puo- solo RIDURRE le segnalazioni, e questo verifica che non le abbia ridotte A ZERO
 

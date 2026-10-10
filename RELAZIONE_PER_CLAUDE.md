@@ -11931,3 +11931,5 @@ Ogni dato di `db_era2/` ha ### **il suo TIMBRO accanto**, col campo `versione_da
 ### ✅ **E LA NONA RICORRENZA DI `PI-STORICO-SENZA-COMMIT` E- CURATA ALLA RADICE:** il `pre-commit` fa ### **`storico-commit`** da se- e mette il file ### **in stage**. ### ⭐ **Nove ricorrenze in due giorni non sono una dimenticanza: sono un presidio che manca** — e l-ho visto perche- ### **il comando unico ha fatto cadere `P-ALB`** per quella ragione, non per l-albero.
 
 ### ➡ **Il mandato `4` di `6` e- CHIUSO. Passo al mandato `5`: le regole di gestione dell-era `2`, l-ultimo della coda.**
+
+### ✅ **E I CINQUE GENERATI CHE I COLLAUDI HANNO RINFRESCATO SONO COMMITTATI**, perche- ### **la CI pretende la `git diff` VUOTA su di loro**: il ### **timbro dei dati** ha preso il blocco del determinismo, i ### **due referti** e i ### **controlli della migrazione** hanno i numeri di adesso, e il ### **collaudo dei presidi dell-indice** i suoi bracci nuovi. ### ⚠ **Un generato non committato e- una CI che cade DOPO il push.**

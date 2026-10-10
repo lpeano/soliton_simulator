@@ -10,7 +10,7 @@
 
 | | il punto | che cosa c'e' | dove |
 |---|---|---|---|
-| **`0`** | il censimento dei metodi | ### **`126` metodi, `126` righe** — e il mandato ne nominava *«una decina»* | `P-M1` |
+| **`0`** | il censimento dei metodi | ### **`128` metodi, `128` righe** — e il mandato ne nominava *«una decina»* | `P-M1` |
 | **`1`** | i domini che FERMANO | `3` forme a vocabolario chiuso, il controllo ### **generato** e chiamato ### **a ogni passo** *(`2` chiamate, via AST)* | `stato.py::controlla_domini` |
 | **`2`** | nessun ramo nei termini | `11` nomi vietati; ### **`21` rami dichiarati** in `9` funzioni, e ### **`0` default** | `P-R1` |
 | **`3`** | la nascita in un solo punto | ### ⛔ **APERTO: serve una decisione di Luca** *(`DEC-NASCITA-PSI`)* | `DA_DECIDERE_LUCA.md` |
@@ -21,8 +21,8 @@
 | **`8`** | la REVERSIBILITA' | entrambi gli integratori tornano entro ### **`4e-15`** su `4` semi — ### **quattro ordini sotto la lettura fissata** *(`1e-9`)* | `_collauda_passo.py` sez. `(G)` |
 | **`9`** | un solo esecutore | `8` eccezioni ### **dichiarate** su `5` file, e guarda ### **le chiamate E I NOMI** | `P-ES1` |
 | **`10`** | il conto delle leggi | ### **`3`, di cui `3` di prova** — stampato dal ### **timbro** E dal ### **referto** | `timbro.py::conto_leggi` |
-| **`11`** | la modularita' | `29` moduli ### **in mappa**, tetto `700` righe; ### ⛔ **`11(a)` e' APERTO** *(`DEC-REGOLA-FORMA`)* | `P-MOD` |
-| **`12`** | i controlli nell'indice | ### **`38` presidi dichiarati dal codice**; `F1`…`F12` ### **rinominati** con alias namespaced; ogni sigillo dichiara `LEGGE` e `CRITERI` | `P-C1`, `P-E9` |
+| **`11`** | la modularita' | `31` moduli ### **in mappa**, tetto `700` righe; ### ⛔ **`11(a)` e' APERTO** *(`DEC-REGOLA-FORMA`)* | `P-MOD` |
+| **`12`** | i controlli nell'indice | ### **`40` presidi dichiarati dal codice**; `F1`…`F12` ### **rinominati** con alias namespaced; ogni sigillo dichiara `LEGGE` e `CRITERI` | `P-C1`, `P-E9` |
 | **`13`** | metadati e testo libero | ### **`6` `ERRORE` non toccano la prosa**, `6` `SEGNALE` la leggono; `10` registri *(2 GENERATO, 3 REPERTO, 4 REPLAY, 1 SOLO-AGGIUNTE)*; `10` citazioni ### **ri-verificate su `git show`** | `P-T1`, `P-T2`, `P-T3` |
 | **`14`** | i riferimenti nel codice | `@rif` ### **byte-inerte, verificato con `is`**; `4` riferimenti e ### **il verso opposto GENERATO**; e `indice.py rinomina` ### **in un colpo** | `P-RIF`, `_rinomina.py` |
 | **`15`** | la configurazione e i dati | `11` campi ### **tutti obbligatori**, ### **zero default** nella fisica, ### **nessun interruttore per le leggi**, e il ### **campo UNICO** in un `A`/`B` | `schema_config.py`, `P-AB` |
@@ -44,7 +44,7 @@
 | `P-R1` i rami dichiarati | `python csv/_rami_era2.py --collaudo` | ### ✅ **`12`/`12`** |
 | `P-RIF` i riferimenti nel codice | `python csv/_rif_nel_codice.py --collaudo` | ### ✅ **`10`/`10`** |
 | `P-ES1` un solo esecutore | `python csv/_un_solo_esecutore.py --collaudo` | ### ✅ **`8`/`8`** |
-| `P-MOD` la modularita- | `python csv/_modularita_era2.py --collaudo` | ### ✅ **`7`/`10`** |
+| `P-MOD` la modularita- | `python csv/_modularita_era2.py --collaudo` | ### ✅ **`8`/`10`** |
 | `P-AB` i confronti e i dati | `python csv/_confronti_e_dati.py --collaudo` | ### ✅ **`13`/`13`** |
 | il rinominamento, sul piano | `python csv/_rinomina.py` | ### ✅ **`11`/`11`** |
 | `@rif` byte-inerte | `python primo_ordine/_rif.py` | ### ✅ **`14`/`14`** |
@@ -56,7 +56,7 @@
 | i controlli della migrazione | `python csv/_controlli_indice_v2.py` | ### ✅ **`5`/`6`** |
 | il collaudo della catena | `python primo_ordine/_collauda_passo.py` | ### ⚠ **SALTATO senza `--con-lenti`**, e la CI lo passa con `--con-lenti` |
 
-### **In tutto: `318` bracci passati**, su `19` comandi *(e `1` saltato perche' LENTO, dichiarato)*.
+### **In tutto: `319` bracci passati**, su `19` comandi *(e `1` saltato perche' LENTO, dichiarato)*.
 
 ---
 
@@ -64,11 +64,11 @@
 
 | | quanti |
 |---|--:|
-| **`PORTATO`** | `97` |
+| **`PORTATO`** | `99` |
 | **`DA_PORTARE`** | `17` |
 | **`DA_DECIDERE`** | `5` |
 | **`NON_SI_APPLICA`** | `7` |
-| **in tutto** | ### **`126`** |
+| **in tutto** | ### **`128`** |
 
 ### ⚠ **E `DA_PORTARE` NON E' ZERO, ed e' giusto che non lo sia:** `17` metodi ### **si applicano e non ci sono ancora** — e la colonna `dove` di ciascuno ### **dice quale punto li portera'.** ### **Dichiarati, non nascosti.**
 

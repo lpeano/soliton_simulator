@@ -8,6 +8,23 @@
 
 ---
 
+## `0.` IL CONTO DELLE LEGGI — ### **`3`** *(punto `10`)*
+
+> ### ⛔ **OGNI REFERTO LO STAMPA, e un commit che lo AUMENTA deve DICHIARARLO** *(`STANDARD-10`, `AUDIT-CURE`)*: ### **una cura non aumenta il numero delle leggi**, e a parita- di effetto ### **si preferisce togliere un-eccezione.**
+
+| | quante |
+|---|--:|
+| `osservatore` | `1` |
+| `termine_arco` | `1` |
+| `termine_nodo` | `1` |
+| **in tutto** | ### **`3`** |
+| di cui ### **`prova: true`** | ### **`3`** |
+| le **variabili** | `1` |
+
+### ⚠ **E `3` SU `3` SONO DI PROVA**, cioe- ### **non sono fisica decisa**: valori che vengono ### **da niente**, e la scheda di ognuna lo dice. ### **Il conto delle leggi VERE dell-era `2` e- `0`.**
+
+---
+
 ## `1.` CHE COSA BLOCCA, E DOVE
 
 > ### ⚠ **LA DISTINZIONE CHE CONTA, e che ho dovuto correggere in corsa:** ### **blocca** significa *«il commit NON si fa»*. ### **Segnala** significa *«qualcuno lo legge, se guarda»*. ### ⛔ **`A9`: un presidio che non impedisce NON E' UN PRESIDIO.**
@@ -47,13 +64,13 @@ Io avevo scritto, nell'intestazione di quel file, *«LA CI NON SI PUO' DIMENTICA
 
 | il collaudo | il comando, ### **verbatim** | esito |
 |---|---|---|
-| la catena | `python primo_ordine/_collauda_passo.py` | ### ✅ **`38`/`38`** |
-| i presidi dell-era 2 | `python csv/_presidi_era2.py --collaudo` | ### ✅ **`16`/`16`** |
-| lo schema della tabella | `python primo_ordine/leggi/schema.py` | ### ✅ **`25`/`25`** |
-| il generatore | `python primo_ordine/_genera.py --prova` | ### ✅ **`22`/`22`** |
+| la catena | `python primo_ordine/_collauda_passo.py` | ### ✅ **`46`/`46`** |
+| i presidi dell-era 2 | `python csv/_presidi_era2.py --collaudo` | ### ✅ **`22`/`22`** |
+| lo schema della tabella | `python primo_ordine/leggi/schema.py` | ### ✅ **`34`/`34`** |
+| il generatore | `python primo_ordine/_collauda_genera.py` | ### ✅ **`24`/`24`** |
 | la lista dei file di fisica | `python csv/_collaudo_file_fisica.py` | ### ✅ **`17`/`17`** |
 | i presidi dell-indice | `python csv/_collaudo_presidi_indice.py` | ### ✅ **`67`/`67`** |
-| i controlli della migrazione | `python csv/_controlli_indice_v2.py` | ### ✅ **`6`/`6`** |
+| i controlli della migrazione | `python csv/_controlli_indice_v2.py` | ### ✅ **`5`/`6`** |
 
 ## `5.` QUALI PERMUTAZIONI SONO **BYTE-IDENTICHE**, E QUALI NO — ### **con il perche' FISICO**
 
