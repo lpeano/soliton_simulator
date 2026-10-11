@@ -3162,8 +3162,8 @@ etichette rimosse, con ### **`0` persi, `0` doppi, `0` conflitti**.
 
 | | |
 |---|---|
-| **i file** | `frazione4.py` *(BLOB `ac2126df`)* · `cslocale4.py` *(BLOB `eeaa7213`)* · `vuoto4.py` *(BLOB `2eba5ada`)* · `camminata4.py` *(BLOB `d1e085f4`)* · `_collauda_banco4.py` *(BLOB `0c4dc643`)* |
-| **COMANDO** | `python proto_camminata/frazione4.py` · i bracci: `python proto_camminata/cslocale4.py` · `python proto_camminata/vuoto4.py` · i bracci: `python proto_camminata/_collauda_banco4.py` *(### **`46`/`46`**, `4.42` s)* |
+| **i file** | `frazione4.py` *(BLOB `ac2126df`)* · `cslocale4.py` *(BLOB `eeaa7213`)* · `vuoto4.py` *(BLOB `2eba5ada`)* · `camminata4.py` *(BLOB `d1e085f4`)* · `_collauda_banco4.py` *(BLOB `d62571a5`)* |
+| **COMANDO** | `python proto_camminata/frazione4.py` · i bracci: `python proto_camminata/cslocale4.py` · `python proto_camminata/vuoto4.py` · i bracci: `python proto_camminata/_collauda_banco4.py` *(### **`50`/`50`**, `4.84` s)* |
 | **che cosa misura** | la ### **frazione unitaria** di un'involuzione ermitiana, `X(cs)`, nelle ### **due famiglie** — `(A)` del mandato *(`e^{i pi cs} e^{i pi cs Q}`)* e `(B)` ### **senza fase globale** *(`Q + e^{i pi cs}(I - Q)`)* — piu' il `cs` dell'### **ARCO** dalle sue due estremita', in ### **tre forme dichiarate** *(`min`, `armonica`, `media`)* |
 | ⭐ **IL RISULTATO CHE TOGLIE UNA LEGGE** | il mandato chiedeva ### **due forme frazionarie** *(una per Grover, una per lo spostamento)*: ### **non servono.** Tutti e quattro i pezzi discreti sono ### **INVOLUZIONI ERMITIANE** *(`max|X(X(v)) - v|` = **`9.39e-16`**, `max|<a,Xb> - <Xa,b>|` = **`5.02e-15`**)*, quindi `X = 2Q - I` e ### **UNA famiglia** li copre. ### **E' `9-ter` prima di scrivere il codice** |
 | ✅ **E IL CORTOCIRCUITO E' `W1`, non un'ottimizzazione** | a `cs = 1` la famiglia da' `X` a `~2e-16`, e ### **`2e-16` non e' `0`**: `W1` pretende il `v3` ### **AL BIT**, quindi a `cs` identicamente `1` si restituisce `X psi`. ### **Misurato: `0` su `8` casi**, e `0` anche a `cs = 0` |
@@ -3207,3 +3207,18 @@ etichette rimosse, con ### **`0` persi, `0` doppi, `0` conflitti**.
 | ✅ **`W4` e `W9`** | l'inverso: `(F)` `1.39e-16`, `(S)` `6.82e-17` su `12+12` tick *(relativi)* · le norme di `psi` e `phi`, ### **separatamente**: `1.11e-16` .. `2.73e-16` |
 | ⛔ **`W8` VERIFICATO SUL SORGENTE, PEZZO PER PEZZO** | `5` pezzi guardati, ### **`0` senza la loro frazione** e ### **`0` con un tick FISSO**. ### ⭐ **E col gemello che DEVE scattare:** lo stesso controllo su un sorgente ### **FINTO** col tick fisso ### **lo trova** *(`moneta_grover`)* — senza quel gemello il braccio sarebbe ### **un falso-uno** |
 | **le voci** | `[[CS-LOCALE-DAL-VUOTO]]` · `[[INVARIANZA-LOCALE-CS]]` |
+
+### `proto_camminata/_letture4.py` e `_referto4.py` — **LE SEI LETTURE DEL `v4`** *(2026-10-11)*
+
+| | |
+|---|---|
+| **i file** | `_letture4.py` *(BLOB `bae54245`)* · `_referto4.py` *(BLOB `8c3fe752`)* |
+| **COMANDO** | `python proto_camminata/_letture4.py` *(scrive `uscite/letture_v4.json`)* → `python proto_camminata/_referto4.py` |
+| **che cosa misura** | ### **sei letture, ognuna per `(F)` E per `(S)`**: `L0` l'invarianza locale della luce, `L1` l'impronta su `Lambda` e su `cs`, `L2` collettivo contro passaggio, `L3` la luce sente la massa, `L4` materia e antimateria, `L5` due grumi col `cs` acceso |
+| ⭐ **IL RISULTATO CHE DECIDE** | `L0`: in tempo proprio `(S)` da' rapporti **`1.041 / 1.019 / 1.013 / 1.000`** — ### **tutti entro `3 sigma`**; `(F)` da' **`1.067 / 1.090 / 1.133 / 1.000`** — ### **due casi FUORI**, scarto peggiore **`13.3%`** |
+| ⛔ **E LA CONSEGUENZA FISICA, che conta piu' del numero del banco** | `L4`: il grumo e il suo coniugato lasciano impronte che differiscono di ### **`12.5`** su `Lambda` con `(F)` *(soglia `3e-11`)* e di ### **`4.44e-15`** con `(S)`. ### **Cioe' `(F)` fa piegare il tempo in modo DIVERSO a materia e antimateria**, ed e' esattamente cio' che `W5` esiste per impedire |
+| ⛔ **QUATTRO RISULTATI NEGATIVI, e sono risultati** | `L1` ### **nessun anello fuori dal grumo** oltre `3 sigma` *(e il fronte resta nel cono)* · `L2` grumo e pacchetto ### **non si distinguono** *(`0.90` e `0.19 sigma`, norme **pareggiate**)* · `L3` ### **nessun ritardo** della luce *(`0.15` e `0.87 sigma`)* · `L5` ### **nessun avvicinamento** *(`0.06` a `1.84 sigma`)* |
+| ⭐ **E `L2` CONFERMA IL PUNTO `1` DI LUCA NEL VERSO CHE LO MOTIVA** | *«una `rho` di nodo non distingue un grumo legato da un pacchetto di passaggio»* — ### **misurato: non li distingue** |
+| ⚠ **TRE DIFETTI MIEI, tutti trovati da un numero** | `L0` girava sull'### **irregolare**, dove l'eccentricita' e' `6` e il fronte ### **satura in sei tick**: `v = 0.060` a `cs = 1` *(il `v3` misura `0.768`)* e ### **non dipendeva da `cs`** · `L2` ### **non pareggiava le norme** *(il grumo del `v3` e' riscalato DOPO la normalizzazione)*, e ### **il braccio stesso lo diceva** · `L3` metteva la ### **`rho` del grumo DENTRO la media**, e il *«ritardo di `7.96 sigma`»* che avevo misurato era ### **in gran parte quello** |
+| ⛔ **IL LIMITE, dichiarato PRIMA di misurare** | `L1`, `L2` e `L5` usano un ### **PACCHETTO**, non un grumo legato: il `v3` ### **non ne ha trovato nessuno** |
+| **le voci** | `[[MISURA-INVARIANZA-LOCALE-V4]]` · `[[MISURA-ANTIMATERIA-PIEGA-DIVERSO]]` · `[[MISURA-CS-NESSUN-EFFETTO-SULLA-MATERIA]]` · `[[MISURA-C-ESATTA-OPPURE-LOCALITA]]` · le TRE domande: `[[DOMANDA-PASSO-FRAZIONARIO-O-ASINCRONO]]`, `[[DOMANDA-COME-LA-MATERIA-CAMBIA-LAMBDA]]`, `[[DOMANDA-QUALE-FORMA-FISSA-CS]]` |

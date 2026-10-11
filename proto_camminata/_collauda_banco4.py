@@ -564,6 +564,42 @@ def main():
           "(%s): ### **il controllo VEDE**"
           % (len(f_man), len(f_nud), ", ".join(f_man) or "nessuno"))
 
+    # ================================================================ le LETTURE
+    # ### ⛔ **UN OSSERVATORE SI PROVA SU DUE COSE**, e la prima e- che ### **non
+    # ### cambi cio- che guarda.**
+    import _letture4 as L4
+    stL = {"psi": psiG.copy(), "phi": phiF.copy()}
+    pr_p, pr_f = stL["psi"].copy(), stL["phi"].copy()
+    _r = L4.l2(sc, GE.scena_identita(sc), "F", "scatter")
+    esito("### le LETTURE del `v4` non modificano lo stato che ricevono",
+          float(np.max(np.abs(stL["psi"] - pr_p))) == 0.0
+          and float(np.max(np.abs(stL["phi"] - pr_f))) == 0.0,
+          "### confronto byte a byte, prima e dopo una lettura intera")
+    # ### ⭐ **E LE NORME DI `L2` SI PAREGGIANO**, altrimenti la lettura misurerebbe
+    # ### ### **la norma** invece del <<collettivo contro passaggio>>.
+    esito("### `L2` pareggia le norme di grumo e pacchetto",
+          bool(_r["confronto"]["norme_pari"]),
+          "### grumo %.6f contro pacchetto %.6f"
+          % (_r["grumo"]["norma_psi"], _r["passaggio"]["norma_psi"]))
+    pL = os.path.join(_QUI, "uscite", "letture_v4.json")
+    datiL = {}
+    if os.path.exists(pL):
+        import json as _json
+        datiL = _json.loads(open(pL, encoding="utf-8").read())
+    esito("### le uscite `letture_v4.json` esistono e hanno le SEI letture",
+          all(bool(datiL.get(k)) for k in ("L0", "L1", "L2", "L3", "L4", "L5")),
+          "### %s" % ", ".join("%s: %d" % (k, len(datiL.get(k, {})))
+                               for k in ("L0", "L1", "L2", "L3", "L4", "L5")))
+    # ### ⛔ **E IL RISULTATO CHE DEVE ESSERCI: `L4` TIENE PER `(S)` E NON PER `(F)`.**
+    # ### Se tenessero entrambe, il braccio della `C` di sopra ### **non avrebbe
+    # ### conseguenze fisiche** -- e una rottura senza conseguenze non e- un costo.
+    if datiL.get("L4"):
+        esito("### DEVE: `L4` (materia/antimateria) TIENE per `(S)` e NON per `(F)`",
+              bool(datiL["L4"]["S"]["tiene"]) and not bool(datiL["L4"]["F"]["tiene"]),
+              "### `(F)` max|dLambda| **%.3g**, `(S)` **%.3g**: ### **e- la CONSEGUENZA "
+              "FISICA della `C` rotta**"
+              % (datiL["L4"]["F"]["max_dLambda"], datiL["L4"]["S"]["max_dLambda"]))
+
     # ================================================================ il sorgente
     for f in ("frazione4.py", "cslocale4.py", "vuoto4.py", "camminata4.py"):
         testo = open(os.path.join(_QUI, f), encoding="utf-8").read()

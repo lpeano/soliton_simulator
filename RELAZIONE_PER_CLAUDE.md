@@ -13219,3 +13219,50 @@ Ogni dato di `db_era2/` ha ### **il suo TIMBRO accanto**, col campo `versione_da
 | le leggi contate | la famiglia frazionaria | ### **la famiglia NON serve**, ma serve ### **uno stato nuovo** |
 
 ### ⛔ **E `W8` E' VERIFICATO SUL SORGENTE, PEZZO PER PEZZO, come il mandato chiede alla lettera:** `5` pezzi, ### **`0` senza la loro frazione** e ### **`0` con un tick fisso**. ### ⭐ **E col gemello che DEVE scattare:** lo stesso controllo su un sorgente ### **FINTO**, in cui `moneta_grover` prende `1.0` invece di `cs_e`, ### **lo trova** — ### **senza quel gemello il braccio sarebbe un falso-uno.**
+
+## ⭐ **IL `v4` E' CONCLUSO: `(S)` RISPETTA L'INVARIANZA LOCALE E L'EQUIVALENZA MATERIA/ANTIMATERIA, `(F)` NO** *(2026-10-11)*
+
+> ### ⛔ **E LA SCELTA NON E' MIA:** `[[DOMANDA-PASSO-FRAZIONARIO-O-ASINCRONO]]` e' adesso ### **LA PROSSIMA domanda `CRITICA`** di `doc/indice/DA_DECIDERE_LUCA.md`, e il comando lo dice da se'.
+
+### ⭐ **`L0` — L'INVARIANZA LOCALE DELLA LUCE, IN TEMPO PROPRIO**
+
+| `cs` | `(F)` rapporto | entro `3 sigma`? | `(S)` rapporto | entro `3 sigma`? |
+|---|---|---|---|---|
+| `0.25` | `1.0671` | ### ✅ si | `1.0405` | ### ✅ si |
+| `0.50` | **`1.0895`** | ### ⛔ **NO** | `1.0194` | ### ✅ si |
+| `0.75` | **`1.1331`** | ### ⛔ **NO** | `1.0132` | ### ✅ si |
+| `1.00` | `1.0000` | ### ✅ si *(il riferimento)* | `1.0000` | ### ✅ si |
+
+### ⛔ **E SI LEGGE COME UN RAPPORTO, non come <<vale `1`>>:** la velocita' del fronte a `cs = 1` e' ### **`0.6193` archi/tick e NON `1`** — la camminata di Grover ### **non satura il cono**, e il `v3` aveva gia' misurato lo stesso fatto. ### ⭐ **Quindi la domanda giusta e': la velocita' in tempo proprio e' LA STESSA a ogni `cs`?** ### **`(S)` si, `(F)` no** *(fino al `13.3%`)*.
+
+### ⚠ **E LA MIA PREVISIONE ERA GIUSTA SU `(S)`, GIUSTA NEL VERSO SU `(F)`, SBAGLIATA SU *DOVE*:** avevo scritto *<<lo scarto cresce quando `cs` scende>>*, e invece ### **cresce verso `cs` INTERMEDI** *(`1.133` a `0.75` contro `1.067` a `0.25`)*. ### ⭐ **E il motivo e' il punto `A4`:** a `cs = 0` e a `cs = 1` la famiglia frazionaria e' ### **esatta**, quindi l'errore di composizione e' ### **massimo in mezzo** — e questo ### **non l'avevo visto scrivendo la previsione.**
+
+### ⛔ **`L4` — E QUESTA E' LA CONSEGUENZA *FISICA* DELLA `C` ROTTA, e conta piu' del numero del banco**
+
+| la candidata | `max|dLambda|` | `max|dcs|` | la soglia | tiene? |
+|---|---|---|---|---|
+| `(F)` | ### **`12.5`** | ### **`0.624`** | `3e-11` | ### ⛔ **NO** |
+| `(S)` | `4.44e-15` | `1.55e-15` | `2.34e-11` | ### ✅ **SI** |
+
+### ⛔ **Il vincolo `W5` esiste per far si' che materia e antimateria pieghino il tempo allo STESSO modo, e `(F)` NON lo fa:** il grumo e il suo coniugato lasciano impronte che differiscono di ### **`12.5`.** ### ⭐ **Il numero del banco *(`4.6475` sulla `C`)* diceva che una simmetria si rompe; QUESTO dice che la rottura ### **ha una conseguenza fisica** — e una rottura senza conseguenze non sarebbe un costo.**
+
+### ⛔ **`L1`, `L2`, `L3`, `L5` — QUATTRO RISULTATI NEGATIVI, E SONO RISULTATI**
+
+| la lettura | il numero | il verdetto |
+|---|---|---|
+| `L1` l'impronta fuori dal grumo | ### **NESSUN anello** oltre `3 sigma`, per entrambe le candidate di `A1` e del passo; fronte ### **entro il cono** | ### ⛔ **SMENTITA** |
+| `L2` collettivo contro passaggio | `0.90 sigma` *(`F`)* e `0.19 sigma` *(`S`)*, con le norme ### **pareggiate** | ### ⛔ **non si distinguono** |
+| `L3` la luce sente la massa | ritardo `+0.50` tick a `0.15 sigma` *(`F`)*, `-2.00` a `0.87 sigma` *(`S`)* | ### ⛔ **non significativo** |
+| `L5` due grumi col `cs` | da `0.06` a `1.84 sigma` | ### ⛔ **nessun avvicinamento** |
+
+### ⭐ **E `L2` CONFERMA IL PUNTO `1` DELLA DECISIONE DI LUCA, NEL VERSO CHE LA MOTIVA:** *«una `rho` di nodo non distingue un grumo legato da un pacchetto di luce di passaggio»* — ### **misurato: non li distingue**, con le norme pareggiate. ### ⚠ **E `L5` era previsto:** `G2` aveva dato `0.69 sigma` fra `N` e lineare, e un effetto di gravita' ### **non poteva essere piu' grande di quello.**
+
+### ⚠ **TRE DIFETTI MIEI NELLE LETTURE, E TUTTI LI HA TROVATI UN NUMERO**
+
+1. ### **`L0` girava sull'IRREGOLARE**, dove l'eccentricita' e' `6` e il fronte ### **satura in sei tick**: adattare una retta su una curva satura dava `v = 0.060` a `cs = 1` *(il `v3` misura `0.768`)*, e la velocita' ### **non dipendeva da `cs`** *(`0.060`, `0.074`, `0.077`, `0.074`)* — ### **che e' la firma di una misura che non misura la velocita'.** La cura: il ### **REGOLARE** *(eccentricita' `30`)*, e la finestra che ### **scala con `cs`**.
+2. ### **`L2` non pareggiava le norme**, e ### **il braccio stesso lo diceva** *(`norme_pari: False`)*: `L3.grumo` ### **riscala `psi` DOPO averlo normalizzato**, per portare `x0` al valore voluto, quindi la sua norma ### **non e' `1`.** ### ⛔ **Confrontare due impronte di norma diversa misura la norma**, non il collettivo contro il passaggio.
+3. ### **`L3` metteva la `rho` del grumo DENTRO la media delle distanze:** lo stato *«con grumo»* ### **contiene il grumo**, la cui `rho` sta ferma a distanza fissa dal lancio. ### ⭐ **Il <<ritardo di `7.96 sigma`>> che avevo misurato era in gran parte QUELLO**, non la luce che sente la massa. La cura: il ### **tick di arrivo al bersaglio** *(`argmax`, che non ha soglie)*, col bersaglio ### **lontano dal grumo.**
+
+### 📌 **LE SETTE VOCI, E LE TRE DOMANDE SONO DI LUCA**
+
+### **Le misure:** `[[MISURA-INVARIANZA-LOCALE-V4]]` · `[[MISURA-ANTIMATERIA-PIEGA-DIVERSO]]` · `[[MISURA-CS-NESSUN-EFFETTO-SULLA-MATERIA]]` · `[[MISURA-C-ESATTA-OPPURE-LOCALITA]]`. ### **Le tre scelte, UNA voce per scelta** come il mandato chiede: `[[DOMANDA-PASSO-FRAZIONARIO-O-ASINCRONO]]` *(e il comando `prossima` la da' come ### **LA PROSSIMA `CRITICA`**)*, `[[DOMANDA-COME-LA-MATERIA-CAMBIA-LAMBDA]]`, `[[DOMANDA-QUALE-FORMA-FISSA-CS]]`. ### ⛔ **Non scelgo io.**

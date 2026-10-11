@@ -105,6 +105,13 @@ TESTI = (
     # ### oggi>>. ### ⚠ **Rigenerarlo in CI vorrebbe dire RIFARE LA CORSA a ogni
     # ### commit**, e un referto che costa minuti ### **e- la ragione numero uno per
     # ### spegnere un passo di CI** *(`A9` dal lato del tempo)*.
+    # ### ⛔ **IL REFERTO DEL `v4` E- UN `REPERTO` per le stesse due ragioni del
+    # ### `v3`:** nasce da ### **una CORSA** *(`python proto_camminata/_letture4.py`,
+    # ### minuti)* e dice ### **che cosa si e- misurato il 2026-10-11**, non <<com-e- il
+    # ### repo oggi>>.
+    ("doc/REFERTO_prototipo_camminata_v4.md", REPERTO,
+     "le sei letture del prototipo `v4`, per `(F)` e per `(S)`, al `2026-10-11`",
+     "python proto_camminata/_referto4.py", "37a987fc70640030"),
     ("doc/REFERTO_prototipo_camminata_v3.md", REPERTO,
      "le tredici letture del prototipo `v3` piu- le due del guscio e del moto, al "
      "`2026-10-11`",
