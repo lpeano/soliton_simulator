@@ -143,3 +143,32 @@ archi e a LEGGERE** *(osservatore)*, ### **mai alla dinamica** — e il collaudo
 ### ⛔ **E LA COSA CHE NON FARO': SCEGLIERE LA SCENA.** Il grado `15.5` della Delaunay
 ### **cambia la fisica locale**, e il mandato lo dice: ### **la scelta fra le varianti e' di
 Luca.**
+
+---
+
+## ⭐ **ANNOTAZIONE: L'AGGIUNTA DI LUCA — IL COMPROMESSO POTREBBE ESSERE TAGLIA FINITA** *(`2026-10-11`, a `I1` e `I2` GIA' MISURATE: quindi si **ANNOTA**, e niente qui sopra si riscrive)*
+
+### ⛔ **E IL RILIEVO E' GIUSTO, E L'ARGOMENTO STA NEI MIEI NUMERI:** ho confrontato ### **tutte le varianti a `n = 1728`**, e ### **la stessa `(i)` passa da `d_s = 2.578` a `n = 1728` a `d_s = 2.92` a `n = 4000`.** ### ⭐ **Quindi <<`(ii)` ha `d_s = 2.83`>> non dice che `(ii)` NON e' tridimensionale: dice che ### **a `n = 1728` NESSUNA scena geometrica lo e' ancora.** ### ⚠ **E questo e' il mio errore di presentazione:** ho messo in tabella un compromesso ### **confrontando una grandezza che SO dipendere dalla taglia**, senza la colonna della taglia che varia — ed e' lo stesso difetto che il mandato del legame chiama ### **`TAGLIA-FINITA`.**
+
+### **E LE TRE MISURE CHE CHIEDE:**
+
+| | che cosa | perche'|
+|---|---|---|
+| `M-A` | `d_s` di `(i)`, `(ii)` e `(iv-U)` a ### **`n = 4000`, `10000`, `26000`** | ### **`(ii)` tende a `3` crescendo la taglia?** |
+| `M-B` | ### **LA COMBINAZIONE `(ii)+(iv-U)`** *(punti respinti **+** Delaunay **+** pesi uguali)*, con ### **tutte** le misure delle altre varianti | i due effetti ### **si SOMMANO** o ### **si SOVRAPPONGONO**? |
+| `M-C` | il ### **PAVIMENTO di `(ii)`** a taglia grande, come per `(i)` a `n = 26000` | il pavimento scende sotto lo ### **`0.17`** di `(i)`? |
+
+### ⭐ **LE SOGLIE, SCRITTE PRIMA DI GUARDARE** *(e il numero continua la serie di sopra)*
+
+| | che cosa decide | la soglia, FISSATA ORA | la mia previsione |
+|---|---|---|---|
+| `s8` | **`(ii)` tende a `3`?** | `d_s` ### **cresce in modo monotono** con `n` ### **E** a `n = 26000` vale `|d_s - 3| <= 0.3` | ### **si'** — a parita' di taglia `(ii)` sta ### **sopra** `(i)` *(`2.83` contro `2.58`)*, quindi se `(i)` arriva a `3` ### **`(ii)` ci arriva prima** |
+| `s9` | **chi e' la piu' tridimensionale a taglia grande** | si confronta ### **`|d_s - 3|` a `n = 26000`**, non `d_s` — ### **perche' SOPRA `3` e' un difetto come sotto** | ### **`(iv-U)` PEGGIORA**: a `1728` sta ### **gia' a `3.25`**, e se `d_s` cresce con `n` va ### **oltre** — e ### **un grafo con `d_s > 3` non e' uno spazio `3D`** |
+| `s10` | **i due effetti si SOMMANO?** | il guadagno di `(ii)+(iv-U)` contro `(i)` confrontato con la ### **SOMMA dei due guadagni separati**, entro `3 sigma` | ### **NO, si sovrappongono:** entrambi riducono ### **la stessa cosa** *(l'irregolarita' del vicinato)*, quindi prevedo il guadagno ### **fra il massimo dei due e la loro somma** |
+| `s11` | **il pavimento di `(ii)` scende?** | il pavimento di `(ii)` sotto quello di `(i)` *(`0.1700 ± 0.0071`)* di ### **piu' di `3 sigma`** | ### **si'** — a `t = 10` `(ii)` sta ### **`42%` sotto**, e non vedo perche' il pavimento sia comune |
+| `s12` | **e' la STESSA legge di attenuazione?** | l'esponente di `(ii)` contro quello di `(i)` *(`-0.339 ± 0.033`)*, entro `3 sigma` | ### **si'** — prevedo che cambi ### **solo il prefattore**, perche' l'attenuazione viene dalla ### **media su piu' archi**, che e' geometria del fronte e ### **non della scena** |
+
+### ⛔ **E UNA COSA CHE NON CAMBIA: NESSUNA VARIANTE DIVENTA LA SCENA DI DEFAULT.** La combinazione `(ii)+(iv-U)` e' ### **una variante in piu' da misurare**, non una promozione — e il grado della Delaunay ### **cambia la fisica locale** *(Grover dipende dal grado)*: ### **la scelta resta di Luca.**
+
+### ⚠ **E IL LIMITE DI COSTO, dichiarato ORA:** la Delaunay periodica a `n = 26000` costruisce ### **`27 n` punti** *(le copie del toro)*, e il `d_s` a `n = 26000` costa ### **una camminata classica fino al diametro.** ### **Se una taglia sfora, si DICHIARA e si ferma alla precedente** — ### **senza ridurre la precisione**, come il mandato del legame ha gia' stabilito.
+

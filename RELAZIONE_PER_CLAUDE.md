@@ -13611,3 +13611,16 @@ Ogni dato di `db_era2/` ha ### **il suo TIMBRO accanto**, col campo `versione_da
 ### **E la via con l'ALBERO SPAZIALE per le taglie grandi** *(la matrice `n x n` costa `5.4` GB a `n = 26000`)*: ### ✅ **la regressione verifica che le due vie danno lo STESSO insieme di archi** su `n = 512`, `1000` e `2000` — ### **`0` archi di differenza.**
 
 ### ⚠ **E `scipy.spatial` e' una DIPENDENZA NUOVA, dichiarata:** entra ### **solo nel costruttore di scena** *(la Delaunay e l'albero)*, cioe' in una ### **condizione iniziale**, e ### **mai nel passo.**
+
+## ⭐ **L'AGGIUNTA DI LUCA: IL COMPROMESSO CHE HO PRESENTATO PUO' ESSERE UN EFFETTO DELLA TAGLIA** *(2026-10-11)*
+
+### ⛔ **E IL RILIEVO E' GIUSTO, CON UN ARGOMENTO CHE STA NEI MIEI NUMERI.** Ho confrontato le sette varianti ### **tutte a `n = 1728`**, e ### **la dimensione spettrale dipende dalla taglia**: la stessa `(i)` passa da ### **`2.578` a `n = 1728`** a ### **`2.92` a `n = 4000`.** ### ⭐ **Quindi la mia frase *«`(ii)` ha l'irregolarita' minima ma `d_s = 2.83`»* non dice che `(ii)` non sia tridimensionale:** dice che ### **a `n = 1728` NESSUNA scena geometrica lo e' ancora.**
+
+### ⚠ **E IL DIFETTO E' MIO, ED E' DI PRESENTAZIONE:** ho messo in tabella un **compromesso** confrontando una grandezza che ### **SO dipendere dalla taglia**, ### **senza la colonna della taglia che varia** — cioe' ### **lo stesso difetto che il mandato del legame mi aveva gia' fatto dichiarare**, applicato a una grandezza diversa.
+
+### **LE TRE MISURE CHE CHIEDE**, e la quarta variante che nasce: `d_s` di `(i)`, `(ii)` e `(iv-U)` a ### **`n = 4000`, `10000`, `26000`** · la ### **COMBINAZIONE `(ii)+(iv-U)`** *(punti respinti **+** Delaunay **+** pesi uguali)*, con **tutte** le misure delle altre varianti · il ### **PAVIMENTO di `(ii)`** a taglia grande, per vedere se scende sotto lo ### **`0.17`** di `(i)`.
+
+### ✅ **E LE CINQUE SOGLIE SONO SCRITTE PRIMA**, committate in questo giro e ### **prima di qualunque misura** *(`s8`..`s12`, nel task history)*. ### 📌 **La piu' importante e' la seconda, perche' rovescia il criterio:** si confronta ### **lo SCARTO da `3`, non il valore** — e allora `(iv-U)`, che a `n = 1728` sta a ### **`3.247`**, ### **PEGGIORA se `d_s` cresce con la taglia.**
+
+### ⛔ **E UNA COSA CHE NON CAMBIA:** nessuna variante diventa la scena di default, la combinazione e' ### **una variante in piu' da misurare** e non una promozione, e ### **la scelta resta di Luca** *(cambiare i gradi ### **cambia la fisica locale**: la moneta di Grover dipende dal grado)*.
+
