@@ -13066,3 +13066,67 @@ Ogni dato di `db_era2/` ha ### **il suo TIMBRO accanto**, col campo `versione_da
 ### ⭐ **E QUESTA VOLTA IL CLONE NON HA TROVATO NIENTE ADDOSSO A ME** — ed e' la prima volta in sei verifiche: le cinque precedenti avevano ### **ognuna** trovato un difetto invisibile sul mio disco.
 
 ### 📌 **E I DUE RILIEVI CHE HO MISURATO MENTRE CHIUDEVO SONO IN `doc/CODA_2026-10-09.md`, NON ESEGUITI** *(`L-UN-PROMPT`)*: ### **l'elenco generato che sembra completo** *(`5` voci `DECISIONE` aperte che non ci sono, `13` su `26` senza `priorita`)* e ### **il `pre-commit` che non chiama `collauda.py`** *(quindi il campo `dove` e' contabilita', non esecuzione)*. ### ⚠ **E il secondo mi riguarda: ho spostato un collaudo in `solo-CI` GUARDANDO QUEL NUMERO.** ### ✅ **La decisione resta giusta per un'altra ragione** *(`36` s su `251` e' un terzo del tempo della suite)*, ### **ma la motivazione che avevo scritto poggiava su un numero che non dice quello che sembra.**
+
+## ⭐ **IL `v4`, PARTE `A`: L'ALGEBRA DICE UNA COSA CHE NESSUNA LETTURA DOVRA' MISURARE** *(2026-10-11)*
+
+> ### ⛔ **`C` ESATTA *oppure* LOCALITA'. ### Non entrambe** — e non e' un'opinione: e' ### **`det(G_k) = (-1)^(d-1)`**.
+
+### **Il mandato `v4` chiede la derivazione nella task history PRIMA del codice** *(parte `A`)*, e il file e' `doc/TASK_HISTORY/2026-10-11_camminata_v4_cs_locale.md`. ### ⭐ **E l'ho scritta sui NUMERI, non sulla memoria:** prima di derivare ho ### **misurato l'algebra sul codice `v3` che gira.**
+
+### ✅ **` 1 ` E IL PRIMO NUMERO TOGLIE UNA LEGGE** *(`9-ter`, prima di scrivere il codice)*
+
+### **Il mandato chiede una forma frazionaria per Grover e un'ALTRA per lo spostamento.** ### ⭐ **Non servono due forme:** tutti e quattro i pezzi discreti sono ### **INVOLUZIONI ERMITIANE** — `max|M^2 - I|` da **`0`** a **`5.55e-16`**, `max|M - M^dag|` ### **`0` per tutti e quattro** — e allora `X = 2Q - I` con `Q = (I+X)/2` proiettore, e ### **UNA SOLA famiglia** copre Grover dello spinore, Grover del vuoto, spostamento con trasporto e spostamento del vuoto.
+
+| | la forma | `|X(0) - I|` | `|X(1) - X|` | unitaria |
+|---|---|---|---|---|
+| `(A)` | **del mandato**: `e^{i pi cs} e^{i pi cs Q}` | ### **`0` ESATTO** | `1.8e-16` .. `2e-16` | `2.2e-16` .. `5.6e-16` |
+| `(B)` | **senza fase globale**: `Q + e^{i pi cs}(I - Q)` | ### **`0` ESATTO** | `6.1e-17` .. `1.6e-16` | `6.2e-17` .. `5.6e-16` |
+
+### ✅ **E il regalo del mandato e' confermato alla lettera:** `P^2 = P` a **`2.78e-17`** e `max|G + e^{i pi P}|` = **`6.12e-17`**, ### **lo stesso numero per il Grover scalare e per quello dello spinore.**
+
+### ⛔ **` 2 ` E IL SECONDO NUMERO E' QUELLO CHE CAMBIA IL PIANO: *OGNI* FRAZIONE ROMPE LA `C`**
+
+| il pezzo | a `cs = 1` *(il `v3`)* | `(A)` a `cs = 0.25/0.5/0.75` | `(B)` a `cs = 0.25/0.5/0.75` |
+|---|---|---|---|
+| Grover scalare | ### ✅ **`0`** | `0.230` / `0.252` / `0.218` | `0.178` / `0.252` / `0.178` |
+| spostamento scalare | ### ✅ **`0`** | `0.261` / `0.192` / `0.261` | `0.135` / `0.192` / `0.135` |
+| Grover dello spinore | ### ✅ **`0`** | `0.178` / `0.183` / `0.198` | `0.129` / `0.183` / `0.129` |
+
+### ⛔ **E IL CONTO SPIEGA PERCHE', quindi NON e' un errore di implementazione:** `C` e' ### **antiunitaria**, quindi `C e^{i t} = e^{-i t} C` — una fase scalare commuta con `C` ### **solo se `t` e' `C`-DISPARI**, e qui `t = pi cs` con `cs` ### **`C`-PARI, perche' `W5` lo PRETENDE** *(cosi' materia e antimateria piegano il tempo allo stesso modo)*. ### ⭐ **Le due richieste del mandato sono incompatibili per costruzione**, e lo scrivo prima di scrivere una riga di codice.
+
+### ⭐ **` 3 ` LA TERZA CANDIDATA, CHE IL DETERMINANTE APRE E LA LOCALITA' CHIUDE**
+
+### **Se la rottura viene dalle FASI COMPLESSE, un cammino REALE da `I` a `X` darebbe `C` esatta**, perche' una matrice reale commuta con la coniugazione. ### ✅ **E funziona:** sulla matrice intera il cammino reale e' ortogonale a `2e-15`, reale a `0`, da' `I` a `cs = 0` e `X` a `cs = 1` *(`1.11e-15`)*, e ### **`|C M - M C| = 0` ESATTO.**
+
+### ⚠ **E QUI HO FATTO UN ERRORE E L'HO CORRETTO DA SOLO:** la prima lettura era *<<gli autovettori toccano mezzo grafo, quindi la `(R)` viola la localita'>>* — ### **ma Grover e' a BLOCCHI PER NODO**, quindi una base ### **locale** esiste, e `eigh` me l'aveva solo delocalizzata. ### ⭐ **La domanda vera e' se il BLOCCO di un nodo ammetta un cammino reale**, e la' la risposta e' ### **un teorema esatto:**
+
+| grado | nodi | `dim` del `-1` | `det(G_k)` | cammino reale? |
+|---|---|---|---|---|
+| `2` | `31` | `1` | **`-1`** | ### ⛔ **NO** |
+| `3` | `38` | `2` | `+1` | ### ✅ **SI** |
+| `4` | `26` | `3` | **`-1`** | ### ⛔ **NO** |
+| `5` | `14` | `4` | `+1` | ### ✅ **SI** |
+| `6` | `11` | `5` | **`-1`** | ### ⛔ **NO** |
+
+### ⛔ **`det(G_k) = (-1)^(d-1)` ESATTAMENTE** *(il `+1` ha molteplicita' `1`, il `-1` ne ha `d-1`)*, e ### **un cammino reale continuo non cambia il determinante** — quindi la `(R)` LOCALE e' ### **IMPOSSIBILE su ogni nodo di grado PARI: `68` dei `120`, il `57%` di questa scena.** ### ⚠ **E per lo spostamento e' peggio:** il blocco e' `2x2` su ogni arco con `det = -1` ### **sempre** — ### **la `(R)` locale non esiste su NESSUN arco.** ### ⭐ **Una via c'e' e la dichiaro senza scegliere:** accoppiando le due componenti di spin il blocco diventa `4x4` con `det = +1` e il cammino esiste *(misurato)* — ### ⛔ **ma mescolerebbe le componenti in un pezzo che nel `v3` non le mescola: sarebbe una legge NUOVA sullo spin, non una frazione del tempo.**
+
+### ⛔ **` 4 ` E `A4` E' PIU' SECCO DI COME IL MANDATO LO SCRIVE**
+
+### **Il mandato dice `sqrt(G) sqrt(S) != sqrt(G S)`.** ### ⭐ **Misurato, il fatto e' piu' forte:** il prodotto `spostamento * Grover` ### **NON E' UN'INVOLUZIONE** *(`max|M^2 - I| = 1`, non `~1e-16`)* — quindi ### **<<la frazione del tick intero>> NON ESISTE** in questa famiglia: ### **non c'e' niente da confrontare.** ### ⛔ **Quindi in una zona a `cs` uniforme `< 1` la camminata `(F)` non e' <<una copia rallentata con un errore piccolo>>: e' una DINAMICA DIVERSA**, e `L0` ne misura la distanza.
+
+### ⛔ **` 5 ` UN FALSO-ZERO MIO, E GARANTITO DALL'INSIEME CHE AVEVO SCELTO**
+
+| | Grover scalare | spostamento scalare |
+|---|---|---|
+| vuoto di modulo **UNIFORME** *(il mio primo giro)* | `2.66e-15` | ### ⛔ **`8.88e-16`** |
+| vuoto **NON uniforme** | `7.11e-15` ### **(teorema)** | ### ⭐ **`56.5`** |
+
+### ⛔ **Avrei concluso <<lo spostamento non muove `Lambda`>>, che e' il CONTRARIO del vero:** il fondo del `v3` ha ### **modulo uniforme**, e lo spostamento ### **scambia estremita' di modulo uguale** — quindi `Lambda` ### **non PUO' cambiare, qualunque sia la legge.** ### ✅ **E la nota di partenza del mandato e' confermata nella sua forma FORTE:** `Lambda_k` e' conservata da Grover ### **per teorema** *(Grover e' a blocchi per nodo, quindi unitario DENTRO il nodo)*, e la densita' del vuoto ### **si sposta fra i nodi SOLO nello spostamento.**
+
+### ⛔ **` 6 ` E UNA FORMA DI `A2` E' ESCLUSA PRIMA DI PROVARLA, DA UN NUMERO**
+
+### **Col fondo uniforme `Lambda_k = grado_k * lambda_0`:** ### **`min 2.000`, `max 6.000`** su gradi da `2` a `6`. ### ⛔ **Quindi `cs_k = f(Lambda_k)` NON e' relazionale: sarebbe `cs` che dipende dal GRADO**, cioe' dalla geometria del grafo e non dal vuoto — e il grado violerebbe lo scopo del mandato *(<<`cs` viene dal vuoto>>)*. ### ✅ **La candidata che resta e' `cs` dell'ARCO dal contrasto fra le sue DUE ESTREMITA'**, che e' ### **l'unica coppia che la camminata legge** — e la domanda e' gia' una voce: `[[DOMANDA-LAMBDA-GRANDEZZA]]`.
+
+### 📌 **E LE PREVISIONI SONO SCRITTE PRIMA DEI NUMERI, nel file:** ### ⛔ **prevedo che `L0` FALLISCA per `(F)`** *(per il punto `4`)*, ### **che `(S)` non si chiuda unitaria con tick per NODO** *(uno scambio e' una rotazione su DUE lati: o scatta l'arco, o serve una memoria)*, ### **che `L2` non distingua un grumo da un pacchetto di passaggio** — e ### **che `L5` non veda niente**, perche' `G2` ha dato `0.69 sigma` fra `N` e lineare e un effetto di gravita' sara' piu' piccolo di quello.
+
+### ⚠ **E IL LIMITE LO DICHIARO ADESSO, NON DOPO:** `L1`, `L2` e `L5` dicono *<<partendo da un grumo `v3` auto-intrappolato>>*, e il ### **`v3` non ne ha trovato nessuno** *(misurato due volte: referto `v3`, e di nuovo in `G1`)*. ### **Quindi useranno un PACCHETTO**, e ogni risultato va letto come ### **<<l'impronta di un pacchetto>>, non <<l'impronta di una massa>>** — che e' lo stesso errore che `G1` mi ha fatto correggere.
