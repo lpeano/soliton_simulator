@@ -1108,7 +1108,12 @@ def collaudo():
 # ### come si applica -- che e' il presidio che funziona: una voce di classe `STANDARD`
 # ### ### **non puo' entrare senza dire COME SI PORTA nell'era 2.**
 METODI["SCENA-3D-PRINCIPALE"] = (
-    "NATO DA UNA DECISIONE DI LUCA. La scena `3D` principale e' la variante dei PUNTI "
+    "NATO DA UNA DECISIONE DI LUCA, e ### \u26d4 **RIFORMULATO DALLA DECISIONE DELLO "
+    "STESSO GIORNO:** la `(ii)` e' il ### **BANCO DI MISURA** delle proprieta' LOCALI "
+    "della regola *(isotropia, legame)* in condizioni controllate, e ### **NON la scena "
+    "del sistema** -- quella ### **NASCE DALLA DINAMICA** "
+    "*(`[[SPAZIO-DALLA-DINAMICA]]`)*. "
+    "Il banco e' la variante dei PUNTI "
     "CHE SI RESPINGONO, gradi `2..6`, dal generatore deterministico col SEME DICHIARATO; "
     "le posizioni costruiscono gli archi e poi ### **si SCARTANO** *(la scena non ha "
     "nessun campo di posizione)*, e il disegno `3D` puo' ricostruirle dal seme ### **da "
@@ -1117,8 +1122,9 @@ METODI["SCENA-3D-PRINCIPALE"] = (
     "grafo casuale *(controlli di DIMENSIONE)*. "
     "### ⚠ **I gradi `2..6` sono una CONDIZIONE INIZIALE, non una legge** -- la "
     "moneta di Grover dipende dal grado -- e ### **la scelta e' di Luca, NON derivata.**",
-    "`proto_camminata/scene3d.py::geometrico3d(rilassati=True)`; nell'era `2` la scena "
-    "e' la Parte F di `[[SIMULATORE-ERA-2]]`, che NON e' ancora scritta", "DA_PORTARE")
+    "`proto_camminata/scene3d.py::geometrico3d(rilassati=True)`; nell'era `2` e' il "
+    "### **BANCO** della Parte F di `[[SIMULATORE-ERA-2]]`, non la scena del sistema",
+    "DA_PORTARE")
 
 
 def main(argv):

@@ -13762,3 +13762,45 @@ Ogni dato di `db_era2/` ha ### **il suo TIMBRO accanto**, col campo `versione_da
 
 ### ⭐ **E L'ORDINE DELLE SCENE E' CAMBIATO, e non per estetica:** la ### **`(ii)` principale va PRIMA** *(decisione di Luca)*, poi la `(i)` di confronto, poi il cubico di controllo. ### **Il primo run e' caduto sulla quarta scena, e cio' che viene DOPO non si misura** — quindi ### **cio' che conta di piu' sta davanti.**
 
+## ⭐ **LO SPAZIO NASCE DALLA DINAMICA: LE QUATTRO DECISIONI SONO REGISTRATE, E TRE PREMESSE DEL MANDATO LE HO CORRETTE DAL CODICE** *(2026-10-11)*
+
+### ⛔ **E QUESTO MANDATO SOSTITUISCE QUELLO DI POCHE ORE PRIMA**, quindi la prima cosa che ho fatto e' ### **annotare la sostituzione** *(`PRECEDENZA-IN-CODA`)*: la `(ii)` ### **resta scelta**, ma come ### **BANCO DI MISURA** e ### **non come scena del simulatore.** ### **La scena del simulatore NASCE DALLA DINAMICA.**
+
+### ✅ **LE QUATTRO VOCI NUOVE:** `[[SPAZIO-CHE-NASCE]]` *(il fronte, coi vincoli e le parti `A` e `B`)*, `[[SPAZIO-DALLA-DINAMICA]]`, `[[U-ARCO-DINAMICA]]`, `[[MITOSI-QUANTO-OLONOMIA]]`. ### **E le tre di fisica sono `TEORIA`, non `STANDARD`:** la ### **DIREZIONE e' decisa da Luca**, la ### **FORMA e' da derivare** — chiamarle standard direbbe che valgono gia'.
+
+### ⚠ **E ADESSO I TRE FATTI CHE HO LETTO DAL CODICE, PER NOME E NON PER RIGA, E CHE CORREGGONO IL MANDATO.** Il mandato cita *«`PHI_CRIT = 2pi`, quanto di olonomia; spegnimento a `4pi`»*: ### **il quanto e' confermato** *(il commento del codice dice <<un giro, non due>>)*, ### **ma tre cose intorno no.**
+
+| | il fatto, dal codice | perche' conta |
+|---|---|---|
+| `1` | ### **LA SOGLIA IN FORZA NON E' `2pi`: E' `3pi`.** In `decidi_divisione` la soglia e' `PHI_CRIT + twist_max = 2pi + pi`, e vale ### **quando `TORS_4PI` e' vero e `FASE_2PI` e' falso** — che e' il ### **DEFAULT** *(`TORS_4PI = True`, `FASE_2PI = False`)* | ### **il passaggio all'era `2` ABBASSA la soglia da `3pi` a `2pi`**, e questo va ### **detto, non scoperto dopo** |
+| `2` | ### **LA MODULAZIONE `0.3` E' GIA' FUORI**, per una decisione di Luca del `2026-10-06`: la riga che la toglie e' nel codice con la sua annotazione | su quel pezzo del mandato si annota ### **GIA' FATTO** |
+| `3` | ### **IL TETTO `4pi` NON E' MAI STATO RAGGIUNTO nell'era `1`:** il commento dice che la saturazione della torsione fa che ### **<<non raggiunge mai il tetto `4pi` di spegnimento>>** | il tetto che si tiene come ### **topologia** non ha ### **nessuno scatto misurato dietro**, e un braccio del banco ### **DEVE farlo scattare** — altrimenti e' un presidio che non impedisce niente *(`A9`)* |
+
+### ⭐ **E IL `pi` IN PIU' NON E' UN DETTAGLIO: c'e' una voce aperta che lo misura.** `[[SOGLIA-MITOSI-3PI]]` dice che il dipolo e' ### **NULLO sul `98%` degli archi**, cioe' ### **la soglia porta un termine che quasi nessun arco ha** — e il codice stesso annota che con la fase su `2pi` *«il `2pi + pi` CADE, e con esso la sua derivazione a posteriori: e' il punto PIU' INCERTO della cura»*. ### ✅ **Quindi il mandato di Luca <<si tengono il quanto e il tetto, si buttano i numeri tarati>> CADE ESATTAMENTE SU QUEL `pi`** — ed e' coerente: quel `pi` e' il ### **massimo possibile**, non ### **il dipolo che l'arco ha.**
+
+### ⛔ **E IL VINCOLO PIU' DURO DELLA PARTE `A`, che dico adesso perche' e' quello che mi puo' fermare:** *«unitarieta' e conservazione delle norme ### **ANCHE ATTRAVERSO LA NASCITA DI UN NODO**»*. Una nascita cambia ### **la dimensione dello spazio di Hilbert**, quindi *«immersione isometrica dichiarata»* vuol dire che ### **la mappa dal prima al dopo deve essere scritta e verificata al bit** — e ### **il passo deve restare REVERSIBILE con le nascite**, cioe' bisogna dire ### **che cosa va nello STATO** per poter tornare indietro. ### **Questa e' la parte che non so ancora fare**, e la derivazione dovra' dirlo o fermarsi.
+
+### 📌 **E NIENTE CODICE, come il mandato chiede:** la Parte `A` e' ### **solo task history**, e il codice delle leggi nuove si scrive ### **nel simulatore**, al punto `(c)` del riordino, ### **quando Luca avra' risposto alle domande che la derivazione apre.**
+
+## ⛔ **LA NASCITA DELL'ERA `1` DA' GRADO `2`, E CIO' CHE EVITAVA I FILI LEGGE LE POSIZIONI: IL RILIEVO E' GIUSTO E PEGGIORE DI COME E' SCRITTO** *(2026-10-11)*
+
+### ⚠ **IL MANDATO MI CHIEDE DI VERIFICARE CHE <<nell'era `1` la nascita creava altri archi oltre ai due verso i genitori>>. L'HO VERIFICATO PER NOME, E LA PREMESSA NON REGGE COSI' COM'E' SCRITTA.** Le vie che scrivono gli estremi degli archi sono ### **TRE, e tutte e sole**: le ho cercate con `grep` su `net.i =` e `self.i =`.
+
+| | la via | che cosa fa |
+|---|---|---|
+| `1` | la ### **MITOSI** | `net.i = concatenate([net.i[keep], a, m])` e `net.j = concatenate([net.j[keep], m, b])` — l'arco diviso ### **SPARISCE** e nascono ### **ESATTAMENTE DUE** archi, `(a,m)` e `(m,b)`. ### **Il nodo nuovo ha GRADO `2`** |
+| `2` | la nascita di ### **SCHWINGER** | e la sua regola lo dice a parole: *<<l'antinodo si allaccia a ENTRAMBI i genitori: `aa-k` e `k-bb`. Nessun arco sparisce (non c'e' `keep`): la coppia AGGIUNGE>>*. Siccome l'arco `(aa,bb)` ### **RESTA**, il nato piu' i due genitori formano ### **un TRIANGOLO** |
+| `3` | ### **`_allaccia`** | costruisce ### **due `cKDTree` su `self.pos`** e collega tutto cio' che sta entro `rc = 3` volte la mediana di `lambda_nodi` |
+
+### ⭐ **QUINDI FRA LE DUE NASCITE DELL'ERA `1` UNA CHIUDE UN CICLO E L'ALTRA NO**, e la mitosi ### **e' quella che non lo chiude.**
+
+### ⛔ **E IL FATTO CHE CONTA PER L'ERA `2` E' IL TERZO: il meccanismo che impediva al grafo di diventare un FILO e' GEOMETRICO.** `_allaccia` ### **legge le POSIZIONI** — ed e' esattamente cio' che `D9` vieta nella fisica dell'era `2`. ### ⭐ **Quindi il timore del rilievo e' GIUSTO e PEGGIORE di come e' scritto:** non basta dire che l'era `1` collegava di piu', perche' ### **lo faceva con uno strumento che l'era `2` ha PROIBITO** — e la regola di connessione ### **relazionale va derivata da zero.**
+
+### ✅ **E la candidata di Luca non e' campata in aria: <<i VICINI COMUNI dei due genitori>> e' la forma RELAZIONALE di cio' che `_allaccia` faceva con le posizioni**, ed e' ### **la forma che la nascita di Schwinger ha GIA'** — chiude il triangolo. ### **Cioe' l'era `1` conteneva gia' la regola giusta, in una delle sue due nascite.**
+
+### ✅ **E IL PUNTO `(e)` L'HO VERIFICATO ANCHE LUI: `ANTIFASE_ADD` c'e', e il codice la giudica da se'.** E' un interruttore ### **esplorativo con default `False`**, e l'intestazione del file dice *<<NON annichila: sfasare un nodo non lo cancella, resta e la massa cresce, muro dell'`1%`>>* — ### **imposta e misurata inefficace.**
+
+### 📌 **E LE TRE IDEE SONO REGISTRATE COME `TEORIA`, non come `STANDARD`:** la ### **direzione e' decisa da Luca**, la ### **forma e' da derivare** — `[[NATURA-DEL-NATO-NON-SI-ASSEGNA]]`, `[[GENERA-NUOVO-SPAZIO]]`, `[[PRIMA-LO-SPAZIO-POI-LA-MATERIA]]`.
+
+### ⭐ **E `I2` HA UN LEGAME CON IL RILIEVO CHE VALE LA PENA DIRE:** la cascata ### **esiste solo se la regola di connessione chiude cicli.** Se il nodo nuovo si collega ### **solo ai due genitori** non chiude nessun ciclo, quindi ### **non puo' generare niente** — cioe' ### **la stessa scelta decide se lo spazio e' tridimensionale E se sa crescere.**
+

@@ -9,13 +9,13 @@
 | `DOCUMENTAZIONE` | `2` | 1 |
 | `DOCUMENTAZIONE` | `ENTRAMBE` | 8 |
 | `FISICA` | `1` | 343 |
-| `FISICA` | `2` | 74 |
+| `FISICA` | `2` | 81 |
 | `FISICA` | `ENTRAMBE` | 17 |
 | `INFRASTRUTTURA` | `1` | 39 |
 | `INFRASTRUTTURA` | `2` | 16 |
 | `INFRASTRUTTURA` | `ENTRAMBE` | 24 |
 | `METODO` | `1` | 156 |
-| `METODO` | `2` | 14 |
+| `METODO` | `2` | 15 |
 | `METODO` | `ENTRAMBE` | 88 |
 
 | id | classe | dominio | era | stato | blocca | titolo |
@@ -332,6 +332,7 @@
 | `G7` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 3 volte, MAI definito in un registro) [G7] |
 | `G8` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 3 volte, MAI definito in un registro) [G8] |
 | `G9` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 6 volte, MAI definito in un registro) [G9] |
+| `GENERA-NUOVO-SPAZIO` | TEORIA | FISICA | 2 | ### **AGENDA** |  | un nodo nuovo puo- generare nuovo spazio: chiude cicli, e l-olonomia puo- accumu |
 | `GEOM-SENZA-VERSO` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | perc_geom nasce da /tw/: perde il VERSO, ma la catena della torsione la usa come |
 | `GEOMETRIA-DELLA-CRESCITA` | FRONTE | FISICA | 2 | ### **AGENDA** |  | SPECULATIVA: lo spazio delle fasi CRESCE, e una forza nuova come OSTRUZIONE fra  |
 | `GRAFO-PESATO-TUTTI-I-VICINI` | TEORIA | FISICA | 2 | ### **AGENDA** |  | tutti i vicini collegati, e un peso d-arco che NON viene dalle posizioni |
@@ -452,6 +453,7 @@
 | `MEM-HEBB-VERSO` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | memoria_hebbiana_moto dipende dal verso dell'arco: d0 cambia segno e lo shift va |
 | `MEM-VERSO` | CURA | FISICA | 1 | ### **SUPERATA** |  | il verso dell arco dalla sua MEMORIA (delta = twp - tw) invece che dal segno ist |
 | `MEMORIA-DENTRO-H` | STANDARD | FISICA | 2 | ### **AGENDA** |  | una memoria e- una VARIABILE DINAMICA dentro H: nessun nucleo K(t-t'), nessun bu |
+| `MEMORIA-PER-TICK` | CRITERIO | METODO | 2 | ### **AGENDA** |  | la memoria per tick si misura e si timbra, e cresce in proporzione agli archi |
 | `MEMORIE-MANCANTI` | DIFETTO | FISICA | 2 | ### **AGENDA** |  | il rapporto sulle memorie: il censimento dello stato, il bilancio, e le memorie  |
 | `MEMORIE-NELLA-CAMMINATA` | STANDARD | FISICA | 2 | ### **AGENDA** |  | le memorie nella camminata: la memoria di moto diventa NATIVA, e l-oblio diventa |
 | `METADATI-REPERTO-PER-NECESSITA` | DIFETTO | INFRASTRUTTURA | ENTRAMBE | ### **APERTA** |  | metadati.jsonl ha una via di scrittura e ZERO storico: e- un REPERTO per necessi |
@@ -467,6 +469,7 @@
 | `MISURA-SEGNO-LEGA-IN-1D` | MISURA | FISICA | 2 | ### **AGENDA** |  | la forma (D) col segno diretto LEGA IN 1D, e in 3D l-effetto cala con la taglia |
 | `MITOSI-2LAM-ACCESO` | DIFETTO | DOCUMENTAZIONE | 1 | ### **CHIUSA** |  | il piano dichiara MITOSI_2LAM e PLAST_DIN OFF, e il DRIVER li ACCENDE: --mitosi- |
 | `MITOSI-NON-DIVISA` | MISURA | INFRASTRUTTURA | 1 | ### **CHIUSA** |  | la mitosi NON si spezza per TIPO restando byte-identica: struttura e stato si al |
+| `MITOSI-QUANTO-OLONOMIA` | TEORIA | FISICA | 2 | ### **AGENDA** |  | la mitosi scatta al quanto di olonomia, col tetto della doppia copertura |
 | `MITOSI-SOGLIA-GRAD` | DIFETTO | FISICA | 1 | ### **CHIUSA** |  | la soglia di mitosi si abbassa col gradiente di tempo proprio: ampiezza 0.3 e ta |
 | `MITOSI-TASSO` | FRONTE | FISICA | 1 | ### **SOSPESA** |  | APERTA il 2026-09-26 (era una voce PERSA: viveva senza ID) / CHE IL TASSO DI MIT |
 | `MODELLO-MINIMO` | FRONTE | FISICA | 2 | ### **AGENDA** |  | un modello semplice (spinore, grafo, LAM) da costruire DOPO il simulatore comple |
@@ -482,6 +485,7 @@
 | `N7b` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 3 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
 | `N7c` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 2 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
 | `NASCITA-PUNTO-UNICO` | CURA | INFRASTRUTTURA | 1 | ### **CHIUSA** |  | le grandezze della nascita si scrivono in UN SOLO punto, con UNA regola dichiara |
+| `NATURA-DEL-NATO-NON-SI-ASSEGNA` | TEORIA | FISICA | 2 | ### **AGENDA** |  | la natura di un nodo appena nato non si assegna: si LEGGE, e la decide la dinami |
 | `NODI-1` | MISURA | FISICA | 1 | ### **CHIUSA** |  | RITIRATA (Luca, 2026-09-25). NON cancellata: resta come storia, col motivo. PERC |
 | `NON-TRACCIATI` | FRONTE | INFRASTRUTTURA | ENTRAMBE | ### **APERTA** |  | 484 file non tracciati: 98 CITATI e non tracciati sono riferimenti al vuoto, e i |
 | `O1` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 12 volte, MAI definito in un registro; citato solo in referti/sigilli/ta |
@@ -583,6 +587,7 @@
 | `PRESIDI-SUL-DISCO-NON-SULLO-STAGE` | PRESIDIO | INFRASTRUTTURA | ENTRAMBE | ### **APERTA** |  | i presidi del pre-commit leggevano il DISCO e non lo STAGE: un commit incoerente |
 | `PRESIDIO-RIFIUTO-SOLO-SIGILLI` | DIFETTO | DOCUMENTAZIONE | ENTRAMBE | ### **APERTA** |  | _presidio.avvia rifiuta di girare SOLO se il nome comincia con _sigillo_: A9 lo  |
 | `PRESTAZIONI-CORSE` | FRONTE | INFRASTRUTTURA | ENTRAMBE | ### **APERTA** |  | le corse costano: sei strade per il tempo di calcolo, da affrontare a modello ST |
+| `PRIMA-LO-SPAZIO-POI-LA-MATERIA` | TEORIA | FISICA | 2 | ### **AGENDA** |  | prima lo spazio, poi la materia, in modo causale: la materia ci arriva camminand |
 | `PROBLEMI-CHK3` | FRONTE | FISICA | 1 | ### **SOSPESA** |  | IL PIANO DEI PROBLEMI APERTI — per ciascuno: la domanda da chiudere · la misura  |
 | `PROMOZIONE-CONSERVAZIONE-MODIFICATA` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | la conservazione modificata si conserva: si promuove a energia? |
 | `PROPOSTA-FASE-DISPARI-COESIONE` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | la fase DISPARI sotto coniugazione di carica come forma della coesione |
@@ -738,7 +743,7 @@
 | `SABOTATURA-NO-OP` | DIFETTO | METODO | ENTRAMBE | ### **CHIUSA** |  | la sabotatura di un braccio che DEVE fallire era un no-op silenzioso: P-MOD da 1 |
 | `SCALE-TW` | FRONTE | FISICA | 1 | ### **SOSPESA** | SI | LE SCALE DELLA TORSIONE: un'analisi completa, DA CAPO / mandato di Luca ricevuto |
 | `SCENA-1` | MISURA | FISICA | 1 | ### **CHIUSA** |  | CHIUSA il 2026-09-25, strada (1) (decisione di Luca) / SEMINALAM era approvata m |
-| `SCENA-3D-PRINCIPALE` | STANDARD | FISICA | 2 | ### **AGENDA** |  | la scena 3D principale e- la (ii): punti che si respingono, gradi da 2 a 6 |
+| `SCENA-3D-PRINCIPALE` | STANDARD | FISICA | 2 | ### **AGENDA** |  | la (ii) e- il BANCO DI MISURA: punti che si respingono, gradi 2-6 |
 | `SCHED-PASSO` | CURA | FISICA | 1 | ### **SOSPESA** | SI | il passo pieno diventa uno SCHEDULATORE: le regole del passo sono architettura,  |
 | `SCHED-T1` | CURA | INFRASTRUTTURA | 1 | ### **CHIUSA** |  | T1 dello schedulatore: la composizione e' una LISTA e c'e' UN SOLO esecutore, es |
 | `SCHED-T2-TIPI` | CURA | INFRASTRUTTURA | 1 | ### **CHIUSA** |  | T2 (i tipi): gli 8 tipi del registro del passo, e dopo L_CONSERVA sono coerenti  |
@@ -762,6 +767,8 @@
 | `SOGLIA-MITOSI-3PI` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | la soglia di mitosi e 2pi + pi col pi di dipolo MASSIMO, e in questa scena il di |
 | `SOGLIA-NON-MODULATA` | MISURA | FISICA | 1 | ### **CHIUSA** |  | la modulazione 0.3 della soglia non agisce: il gradiente di tempo proprio e' zer |
 | `SOTTO-PASSO` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 4 volte, MAI definito in un registro) [SOTTO-PASSO] |
+| `SPAZIO-CHE-NASCE` | FRONTE | FISICA | 2 | ### **AGENDA** |  | lo spazio nasce dalla dinamica: U d-arco dinamica, mitosi al quanto di olonomia |
+| `SPAZIO-DALLA-DINAMICA` | TEORIA | FISICA | 2 | ### **AGENDA** |  | lo spazio nasce dalla dinamica: un seme minimo, e nodi e archi dove la fisica li |
 | `SPIN-LEGATO-AL-MOTO` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | lo spin si lega al moto: una moneta exp(-i eps dtau sigma.n) e il trasporto U(2) |
 | `SPINORE-SENZA-FASE` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | la coppia muove phivel ma deriva da un'ALTRA fase: lo spinore ha un orologio tut |
 | `STANDARD-1` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 10 volte, MAI definito in un registro) [STANDARD 1] |
@@ -809,6 +816,7 @@
 | `TW-5` | CRITERIO | METODO | 1 | ### **SOSPESA** |  | caso che DEVE fallire (`P1-sexies`): con `E_nodo` messa a zero la mitosi deve sc |
 | `TW-6` | CRITERIO | METODO | 1 | ### **SOSPESA** |  | frazione di archi che raggiungono la soglia `> 0` su 4 semi (non su uno) |
 | `TW-DIVISIONE-INCOGNITA` | DIFETTO | FISICA | 1 | ### **CHIUSA** |  | il tw che sparisce a una divisione non torna con la soglia misurata: -7.19 contr |
+| `U-ARCO-DINAMICA` | TEORIA | FISICA | 2 | ### **AGENDA** |  | la U d-arco diventa dinamica: la memoria d-arco dell-era 1 tradotta in coppia co |
 | `U1` | DIFETTO | FISICA | 1 | ### **SOSPESA** | SI | URGENTE, PRIMA DI QUALUNQUE GIRO LUNGO — massacriticacollasso: 21 usi DENTRO LEG |
 | `U2` | DIFETTO | FISICA | 1 | ### **CHIUSA** |  | M2 DIVENTA URGENTE — la mitosi mette figli SOTTO la scala di Planck. Con la semi |
 | `U3` | PRESIDIO | METODO | 1 | ### **SOSPESA** |  | confrontava con il mio sviluppo e/2 invece del valore esatto e/(2+e); il numero  |
