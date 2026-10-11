@@ -13729,3 +13729,36 @@ Ogni dato di `db_era2/` ha ### **il suo TIMBRO accanto**, col campo `versione_da
 
 ### ✅ **E LE QUATTRO CONSEGUENZE SONO REGISTRATE:** il legame alle taglie grandi usa la `(ii)` come principale e il cubico come controllo · la Parte F del simulatore prende la `(ii)` col suo generatore deterministico e il seme dichiarato, ### **posizioni scartate dopo gli archi** · la variante pesata resta una strada per la ### **memoria d'arco dinamica** e ### **non e' una scena** · e i ### **gradi `2..6` restano una CONDIZIONE INIZIALE** *(Grover dipende dal grado)*, con la scelta ### **di Luca e non derivata.**
 
+## ⛔ **IL RUN DI `C1`/`C2` E' CADUTO DOPO `2.8` ORE E HA PERSO TUTTO: IL `json` SI SCRIVEVA SOLO ALLA FINE** *(2026-10-11)*
+
+### ⚠ **E IL DANNO E' MIO, non della macchina.** Il modulo scriveva il `json` ### **in fondo a `main`**, quindi le tre scene gia' misurate *(`255` + `1631` + `8114` secondi)* ### **sono andate perse** quando la quarta e' caduta. ### **Un risultato che esiste e non e' su disco non esiste.**
+
+### ⭐ **MA TRE COSE SONO MISURATE, e le riporto perche' valgono:**
+
+| la scena | casi | `RESTA CONCENTRATO` | chi |
+|---|---|---|---|
+| `regolare n=2000` *(limite noto `1D`)* | `28` | ### ⭐ **`1`** | ### **`+D` a `x0 = 8`** |
+| `cubico L=20` | `28` | `0` | — |
+| `cubico L=30` | `28` | `0` | — |
+| `cubico L=40` | — | ### ⛔ **CADUTO** | `MemoryError` |
+
+### ✅ **IL LIMITE NOTO E' RITROVATO DAL CRITERIO INTERO, non solo da una gamba:** `+D` a `x0 = 8` sull'anello passa ### **ENTRAMBE** le condizioni di `C2` *(il raggio e la frazione)*, cioe' ### **il misurando nuovo sa trovare un legame quando c'e'** — ed e' la cosa che avevo dichiarato come controllo nel task history.
+
+### ⛔ **E SUL CUBICO NON TROVA NIENTE, su DUE taglie ammissibili** *(`L = 20` e `L = 30`, `56` casi in tutto)*: il fronte ### **non arrivava a meta' del diametro** in nessuna delle due, quindi ### **questa volta non e' taglia finita.**
+
+### ⭐ **LE TRE CURE, e ognuna nasce da un numero misurato:**
+
+| | la cura | il numero che la motiva |
+|---|---|---|
+| `1` | il **CHECKPOINT**: il `json` si scrive ### **dopo OGNI scena** | `2.8` ore di misura perse in una volta |
+| `2` | la **GUARDIA** `MemoryError` ### **per scena**, sulla costruzione **e** sulla misura | il run e' caduto ### **dentro `profilo`**, non costruendo: a `m = 192000` il passo implicito tiene piu' array `complex128` da `384000` elementi insieme |
+| `3` | la **GRIGLIA DI `x0` RIDOTTA** sopra `50000` estremita' d'arco, ### **dichiarata nel `json`** | `0.05` s per passo-caso a `m = 4000`, ### **`0.49` a `24000`, `1.61` a `81000`** |
+
+### ✅ **E LA RIDUZIONE NON TOCCA LA PRECISIONE DI UN CASO: toglie PUNTI DI SCAN.** I `4` semi restano `4`, i `6` tempi restano `6`; cio' che si riduce e' la ### **griglia di `x0`**, da `7` valori a `3` *(`1`, `4`, `8`)*. ### ⭐ **E la scelta non e' a caso: nel `1D` l'unico caso che lega e' `x0 = 8`, il piu' saturo** — quindi la sotto-griglia tiene ### **il piu' saturo piu' due riferimenti.**
+
+### ✅ **E L'HO VERIFICATO INVECE DI SPERARLO:** con la griglia ridotta forzata, l'anello ### **ritrova `+D` a `x0 = 8`** — cioe' ### **la riduzione non nasconde il segnale.**
+
+### 📌 **E `cubico L=40` E' DICHIARATO NON PAGABILE, con DUE motivi misurati:** il `MemoryError` a `n = 64000`, e il ### **tempo** — il salto `L = 20` → `L = 30` costa ### **`4.98` volte** *(`1631` → `8114` s)*, quindi `L = 40` costerebbe ### **~`11` ore.** ### ✅ **Il mandato dice cosa fare: <<una taglia che sfora si DICHIARA e si ferma alla precedente>>, senza ridurre la precisione** — e il cubico resta con ### **DUE taglie ammissibili**, che e' ### **il minimo che `c2-quater` chiede.**
+
+### ⭐ **E L'ORDINE DELLE SCENE E' CAMBIATO, e non per estetica:** la ### **`(ii)` principale va PRIMA** *(decisione di Luca)*, poi la `(i)` di confronto, poi il cubico di controllo. ### **Il primo run e' caduto sulla quarta scena, e cio' che viene DOPO non si misura** — quindi ### **cio' che conta di piu' sta davanti.**
+

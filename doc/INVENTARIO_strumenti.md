@@ -3270,7 +3270,8 @@ etichette rimosse, con ### **`0` persi, `0` doppi, `0` conflitti**.
 
 | | |
 |---|---|
-| **i file** | `_letture_legame_grandi.py` *(BLOB `e08cc7ad`)* |
+| **i file** | `_letture_legame_grandi.py` *(BLOB `70720dfc`)* |
+| ⛔ **E IL PRIMO RUN E' CADUTO DOPO `2.8` ORE PERDENDO TUTTO** | il `json` si scriveva ### **solo alla fine**: adesso c'e' il ### **CHECKPOINT dopo ogni scena**, la ### **guardia `MemoryError` per scena** *(costruzione **e** misura)*, e la ### **griglia di `x0` RIDOTTA sopra `50000` estremita' d'arco**, dichiarata nel `json`. ### **`cubico L=40` e' dichiarato non pagabile**: `MemoryError` a `n = 64000`, e ### **~`11` ore** estrapolando il salto `L = 20` → `L = 30` *(`4.98` volte)* |
 | **COMANDO** | `python proto_camminata/_letture_legame_grandi.py` *(scrive `uscite/letture_legame_grandi.json`)* |
 | **che cosa misura** | `C1` le ### **scene ammissibili** *(il fronte non arriva a meta' del diametro: `0.6193 t < diametro/2`)* col loro ### **costo per tick** · `C2` il ### **raggio IN ARCHI** che contiene il `50%` e il `90%` della norma, e la ### **frazione entro `1, 2, 3` archi**, sempre contro il ### **lineare alla STESSA taglia** · e la ### **misura vecchia ACCANTO** |
 | ⛔ **PERCHE' UN MISURANDO NUOVO** | il vecchio divide per il ### **fondo uniforme**, che e' `(nodi entro r)/n` — cioe' ### **dipende dalla taglia attraverso il DENOMINATORE.** Il nuovo ### **conta archi** e non ha denominatore |
