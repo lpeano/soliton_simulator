@@ -13624,3 +13624,31 @@ Ogni dato di `db_era2/` ha ### **il suo TIMBRO accanto**, col campo `versione_da
 
 ### ⛔ **E UNA COSA CHE NON CAMBIA:** nessuna variante diventa la scena di default, la combinazione e' ### **una variante in piu' da misurare** e non una promozione, e ### **la scelta resta di Luca** *(cambiare i gradi ### **cambia la fisica locale**: la moneta di Grover dipende dal grado)*.
 
+## ✅ **IL BANCO DELL'ISOTROPIA: `27` SU `27` — E DUE BRACCI FALLIVANO PER COLPA LORO** *(2026-10-11)*
+
+### ⭐ **IL BRACCIO CHE VALE PIU' DI TUTTI, perche' le taglie grandi hanno richiesto DUE VIE NUOVE:**
+
+| | la via nuova | perche' serviva | e la regressione dice |
+|---|---|---|---|
+| `1` | gli archi della Delaunay ### **senza cicli Python** | a `n = 26000` le copie del toro fanno ### **`702000` punti** e ### **~`4.5` milioni di simplessi**, cioe' ### **`27` milioni di giri di ciclo** — ### **non finisce** | ### ✅ **lo STESSO INSIEME, ESATTAMENTE** *(sono interi: `3998` archi a `n = 512`, `13405` a `n = 1728`, ### **zero differenze**)* |
+| `2` | il rilassamento con l'### **albero spaziale** | la matrice `n x n` del rilassamento costa ### **`5.4` GB a `n = 26000`** | ### ⭐ **la STESSA SCENA, `0` archi di differenza** — e i ### **punti differiscono di `3.2e-11`**, cioe' ### **non e' bit-identica e lo dico**, ma ### **nessun arco cambia** |
+
+### ⛔ **E IL SECONDO E' IL BRACCIO PIU' ONESTO CHE HO SCRITTO OGGI:** c'e' anche il suo ### **rovescio** *(`2-bis`)*, che ### **pretende che la differenza sia `> 0`** — perche' se le due vie fossero bit-identiche il braccio `2` sarebbe ### **un FALSO-ZERO**: verificherebbe che ### **una cosa uguale a se stessa e' uguale a se stessa.**
+
+### ⚠ **E DUE BRACCI FALLIVANO PER COLPA LORO, non del codice** — e sono due casi che valgono la pena:
+
+| | il braccio | perche' falliva |
+|---|---|---|
+| `8` | *«`U`, `R` e `Rn` non leggono le posizioni»* | cercava `pos` nel ### **TESTO GREZZO**, e la ### **docstring di `peso_di` contiene la frase *<<`U`, `R` e `Rn` NON toccano `pos`>>*** — cioe' ### **la riga che DICHIARA il vincolo faceva fallire il braccio che lo verifica** |
+| — | *«nessun `clip`»* | trovava `np.minimum` e `np.maximum` in `scene3d.py` e `pesi4.py`, e i due erano ### **I MIEI COMMENTI che dicono <<qui non c'e' nessun `np.maximum`>>** |
+
+### ⭐ **E LA CURA E' LA STESSA PER TUTTI E DUE: si guarda il CODICE, con l'albero sintattico, e non la PROSA.** ### ⛔ **Un presidio che si accende sulla propria dichiarazione di conformita' non sta guardando il codice** *(`A9`)*.
+
+### 📌 **E L'UNICO `clip` AMMESSO non e' un clip:** `np.minimum(d, 1 - d)` e' la ### **convenzione dell'immagine minima sul toro** — la distanza fra due punti del cubo periodico ### **E'** la minore fra le due vie. ### **Non protegge da nessun errore**, e `A11` chiede l'errore ### **solo a un clip**, cioe' a qualcosa che ALTERA una grandezza.
+
+### ⚠ **E UN BRACCIO MIO ERA SOTTODIMENSIONATO, e il misurando lo spiega:** il controllo sul cubico falliva con `L = 6` e ### **`12` nodi** *(`3.28`, `2.73`, `1.25` volte il rumore)*, mentre a `L = 20` con `40` nodi sta stabile a ### **`~6`.** ### ⭐ **Il motivo e' che il rumore atteso e' `irregolarita'/sqrt(N)`:** con un terzo dei nodi il rumore e' ### **`1.8` volte piu' grande** e il rapporto si schiaccia. ### ⛔ **Quindi <<SISTEMATICA>> non e' una proprieta' della SCENA soltanto: e' della scena E DEL CAMPIONE** — adesso il braccio gira a `L = 8` con `40` nodi, e ### **il perche' sta scritto accanto.**
+
+### ⛔ **E UN MIO DIFETTO CHE SI E' ROTTO DIECI MINUTI DOPO AVERLO SCRITTO:** ricavavo il ### **braccio dei pesi dal NOME della variante** *(`nome.split(...)`)*, e la combinazione `(ii)+(iv-U)` l'ha fatto esplodere subito *(`KeyError: '(ii'`)*. ### ⭐ **E' esattamente la cosa che `[[DECISIONE-VUOLE-UN-CAMPO]]` vieta** — adesso il braccio e' ### **un campo della tupla.**
+
+### ⚠ **E UNA RIGA DELL'INVENTARIO ERA SCADUTA, e l'ho corretta nello stesso giro:** diceva *«quindi il `~14%` del `v3` e' del GRAFO»*, che e' ### **la conclusione che il rilievo del guardiano ha rovesciato** *(l'anello e' ### **vertice-transitivo**, quindi il grafo ### **non puo' distinguere una direzione**)*. ### ⛔ **Un commento scaduto nell'inventario e' la trappola che `CLAUDE.md` nomina al par.2**, e questa l'avevo lasciata io.
+

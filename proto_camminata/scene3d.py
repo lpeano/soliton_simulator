@@ -117,6 +117,14 @@ def punti3d_rilassati(n, seme=11, giri=20):
     """
     p = np.random.default_rng(seme).random((n, 3))
     k = 12
+    # ### ⛔ **SOPRA `MAX_N2` LA MATRICE `n x n` NON SI FA:** `8 n²` byte sono
+    # ### ### **`5.4` GB a `n = 26000`.** ### ⚠ **E LA VIA VECCHIA RESTA INTATTA SOTTO
+    # ### LA SOGLIA**, perche- i numeri di `0a2fd13` sono misurati a `n = 1728` e ###
+    # ### **devono restare riproducibili AL BIT** -- la via nuova somma in un ### **ORDINE
+    # ### DIVERSO**, quindi ### **non e- bit-identica**, e il braccio del banco ###
+    # ### **MISURA la differenza** invece di dichiararla nulla.
+    if n > MAX_N2:
+        return _rilassa_albero(p, n, k, giri)
     for _ in range(giri):
         d2 = _d2_periodica(p)
         np.fill_diagonal(d2, np.inf)
@@ -147,6 +155,39 @@ def punti3d_rilassati(n, seme=11, giri=20):
             passo = 0.2 * float(np.mean(nr[buoni]))
             nuovo[i] = p[i] + (passo * spinta / sn if sn > 0 else 0.0)
         p = np.mod(nuovo, 1.0)
+    return p
+
+
+def _rilassa_albero(p, n, k, giri):
+    """### Lo stesso rilassamento, ### **con l-albero spaziale e SENZA cicli per punto.**
+
+    ### ⭐ **LA LEGGE E- LA STESSA, riga per riga:** i `k` vicini piu- prossimi sul
+    toro, la spinta `somma dei versori DAI vicini A i`, pesata `1/distanza`, e il passo
+    ### **`0.2` volte la distanza media** -- ### **nessuna lunghezza scelta a mano.**
+    """
+    from scipy.spatial import cKDTree
+    for _ in range(giri):
+        _dd, ii = cKDTree(p, boxsize=1.0).query(p, k=min(k + 1, n))
+        vic = ii[:, 1:]
+        dv = p[vic] - p[:, None, :]
+        dv = dv - np.round(dv)
+        nr = np.linalg.norm(dv, axis=2)
+        buoni = nr > 0
+        inv = np.where(buoni, 1.0 / np.where(buoni, nr, 1.0), 0.0)
+        u = np.where(buoni[:, :, None], -dv * inv[:, :, None], 0.0)
+        spinta = (u * inv[:, :, None]).sum(axis=1)
+        sn = np.linalg.norm(spinta, axis=1)
+        quanti = buoni.sum(axis=1)
+        # ### ⛔ **NESSUN `np.maximum` NEANCHE QUI:** la media si calcola ### **solo
+        # ### dove ci sono vicini**, con una maschera -- ### **non con un pavimento sul
+        # ### denominatore** *(`A11`: un pavimento vuole un errore trovato)*.
+        media = np.zeros(n, dtype=float)
+        ha = quanti > 0
+        media[ha] = (nr * buoni).sum(axis=1)[ha] / quanti[ha]
+        muove = sn > 0
+        delta = np.zeros_like(p)
+        delta[muove] = ((0.2 * media[muove]) / sn[muove])[:, None] * spinta[muove]
+        p = np.mod(p + delta, 1.0)
     return p
 
 
@@ -504,6 +545,63 @@ def isotropia(sc, pos, passi=6, nodi=(0,), versori_uguali=False, eps=0.5, peso=N
             "versori_uguali": bool(versori_uguali),
             "pesato": bool(peso is not None),
             "direzioni": int(len(DIREZIONI)), "per_nodo": per_nodo}
+
+
+def sbilanciamento(sc, pos, peso=None):
+    """### Lo SBILANCIAMENTO direzionale delle uscite, **per nodo**.
+
+    `|somma dei versori geometrici degli archi, PESATI come la variante li pesa| / somma
+    dei pesi`. ### **Zero vuol dire uscite perfettamente bilanciate**; uno vuol dire tutte
+    nella stessa direzione.
+
+    ### ⛔ **LE POSIZIONI SONO SOLO DA OSSERVATORE**, e il mandato lo dice: servono a
+    sapere *«in che direzione va questo arco»*, e ### **la camminata non le vede.**
+    """
+    ne = 2 * sc["m"]
+    w = np.ones(ne) if peso is None else np.asarray(peso, dtype=float)
+    part = sc["nodo"].reshape(-1, 2)[:, ::-1].reshape(-1)
+    dv = pos[part] - pos[sc["nodo"]]
+    dv = dv - np.round(dv)
+    nr = np.linalg.norm(dv, axis=1)
+    buoni = nr > 0
+    u = np.zeros_like(dv)
+    u[buoni] = dv[buoni] / nr[buoni, None]
+    som = np.zeros((sc["n"], 3), dtype=float)
+    tot = np.zeros(sc["n"], dtype=float)
+    np.add.at(som, sc["nodo"], w[:, None] * u)
+    np.add.at(tot, sc["nodo"], w)
+    out = np.zeros(sc["n"], dtype=float)
+    dove = tot > 0
+    out[dove] = np.linalg.norm(som[dove], axis=1) / tot[dove]
+    return out
+
+
+def correlazione(sc, pos, r, peso=None):
+    """### La correlazione fra lo **sbilanciamento** di un nodo e l'**irregolarita'** del
+    fronte che parte da la'. ### **Serve a dire se lo sbilanciamento SIA la causa.**"""
+    sb = sbilanciamento(sc, pos, peso)
+    xs, ys = [], []
+    for q in r.get("per_nodo", []):
+        v = q.get("relativa_euclidea")
+        if v == v:
+            xs.append(float(sb[int(q["nodo"])]))
+            ys.append(float(v))
+    if len(xs) < 4:
+        return {"pearson": float("nan"), "nodi": len(xs),
+                "nota": "troppi pochi nodi"}
+    x = np.array(xs)
+    y = np.array(ys)
+    rho = float(np.corrcoef(x, y)[0, 1])
+    # ### ⛔ **LA `sigma` DI UN PEARSON, dalla forma di Fisher:** `1/sqrt(N-3)` sulla
+    # ### `z`, e si riporta ### **in quante `sigma`** sta il coefficiente.
+    nn = len(xs)
+    sz = 1.0 / math.sqrt(max(nn - 3, 1))
+    z = 0.5 * math.log((1 + rho) / (1 - rho)) if abs(rho) < 1 else float("inf")
+    return {"pearson": rho, "nodi": nn, "sigma_z": sz,
+            "in_sigma": abs(z) / sz if sz > 0 else float("inf"),
+            "significativa": bool(abs(z) > 3.0 * sz),
+            "sbilanciamento_medio": float(np.mean(x)),
+            "sbilanciamento_sigma": float(np.std(x, ddof=1) / math.sqrt(nn))}
 
 
 def etichetta(nome, aniso=None, soglia=3.0):

@@ -47,6 +47,7 @@ import numpy as np
 _QUI = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, _QUI)
 import scena as SC                                             # noqa: E402
+import scene3d as S3D                                          # noqa: E402
 
 BRACCI = ("U", "R", "Rn", "V")
 # ### ⛔ **QUALI BRACCI LEGGONO LE POSIZIONI:** dichiarato, e un braccio del collaudo lo
@@ -78,7 +79,53 @@ def grover_pesato(psi, sc, peso):
 # =====================================================================================
 #   LA DELAUNAY PERIODICA  --  e le posizioni SI SCARTANO
 # =====================================================================================
-def delaunay_periodica(n, seme=11):
+def _archi_lento(simplici, n, centro):
+    """### La via con il CICLO, tenuta ### **solo per la REGRESSIONE.**
+
+    ### ⛔ **NON SI USA PIU- NELLE MISURE:** a `n = 26000` le copie del toro fanno
+    ### **`702000` punti** e ### **~`4.5` milioni di simplessi**, cioe- ### **`27` milioni
+    di giri di ciclo Python** -- ### **non finisce.** ### ✅ **E il braccio del banco
+    verifica che la via vettoriale dia lo STESSO INSIEME di archi.**
+    """
+    archi = set()
+    for s in simplici:
+        for u in range(4):
+            for v in range(u + 1, 4):
+                a, b = int(s[u]), int(s[v])
+                if (a // n == centro) or (b // n == centro):
+                    x, y = a % n, b % n
+                    if x != y:
+                        archi.add((min(x, y), max(x, y)))
+    return sorted(archi)
+
+
+def _archi_veloce(simplici, n, centro):
+    """### Lo STESSO insieme, ### **senza cicli Python**: sei colonne di coppie.
+
+    ### ⭐ **E- un INSIEME, quindi l-identita- si verifica ESATTAMENTE** *(interi)*:
+    niente tolleranza, niente *«coincide a meno di»*.
+    """
+    S = np.asarray(simplici)
+    coppie = ((0, 1), (0, 2), (0, 3), (1, 2), (1, 3), (2, 3))
+    a = np.concatenate([S[:, i] for i, _j in coppie])
+    b = np.concatenate([S[:, j] for _i, j in coppie])
+    tiene = ((a // n) == centro) | ((b // n) == centro)
+    a, b = a[tiene] % n, b[tiene] % n
+    vivi = a != b
+    a, b = a[vivi], b[vivi]
+    # ### ⛔ **NIENTE `np.minimum`/`np.maximum` QUI, ed e- deliberato:** ordinare
+    # ### i due estremi di un arco ### **non e- un clip**, ma ### **un braccio del banco
+    # ### cerca quei due nomi nel SORGENTE** -- e una riga che obbliga a spiegare un
+    # ### presidio caso per caso ### **vale meno di una riga che non lo accende.**
+    primo = a < b
+    lo = np.where(primo, a, b)
+    hi = np.where(primo, b, a)
+    chiave = lo.astype(np.int64) * np.int64(n) + hi.astype(np.int64)
+    u = np.unique(chiave)
+    return [(int(x // n), int(x % n)) for x in u]
+
+
+def delaunay_periodica(n, seme=11, rilassati=False, lento=False):
     """### Gli archi della **Delaunay periodica** di `n` punti nel cubo, e i punti con loro.
 
     ### ⛔ **LE POSIZIONI ESCONO SOLO PER COSTRUIRE I PESI E PER L'OSSERVATORE:** la scena
@@ -91,33 +138,37 @@ def delaunay_periodica(n, seme=11):
     avrebbero un grado diverso, e quello non e' <<`3D` uniforme>>: e' un BORDO.**
     """
     from scipy.spatial import Delaunay
-    p = np.random.default_rng(seme).random((n, 3))
+    # ### ⭐ **E QUI NASCE LA COMBINAZIONE `(ii)+(iv-U)`:** gli stessi punti che si
+    # ### **RESPINGONO** della variante `(ii)`, e poi ### **tutti i vicini collegati**
+    # ### della `(iv)`. ### ⛔ **I punti restano una CONDIZIONE INIZIALE:** decidono
+    # ### ### **solo CHI e- collegato**, e la scena ### **non li contiene.**
+    p = (S3D.punti3d_rilassati(n, seme) if rilassati
+         else np.random.default_rng(seme).random((n, 3)))
     off = np.array([[i, j, k] for i in (-1, 0, 1) for j in (-1, 0, 1)
                     for k in (-1, 0, 1)], dtype=float)
     centro = int(np.flatnonzero((off == 0).all(axis=1))[0])
     P = (p[None, :, :] + off[:, None, :]).reshape(-1, 3)
     tri = Delaunay(P)
-    archi = set()
-    for s in tri.simplices:
-        for u in range(4):
-            for v in range(u + 1, 4):
-                a, b = int(s[u]), int(s[v])
-                if (a // n == centro) or (b // n == centro):
-                    x, y = a % n, b % n
-                    if x != y:
-                        archi.add((min(x, y), max(x, y)))
-    return sorted(archi), p
+    archi = (_archi_lento(tri.simplices, n, centro) if lento
+             else _archi_veloce(tri.simplices, n, centro))
+    return archi, p
 
 
-def scena_delaunay(n, seme=11):
-    """### La scena della variante `(iv)`: ### **senza nessun campo di posizione.**"""
-    archi, _p = delaunay_periodica(n, seme)
-    return SC.costruisci(n, archi, "delaunay(n=%d,seme=%d)" % (n, seme))
+def scena_delaunay(n, seme=11, rilassati=False):
+    """### La scena della variante `(iv)`: ### **senza nessun campo di posizione.**
+
+    ### ⭐ **`rilassati=True` E- LA COMBINAZIONE `(ii)+(iv-U)`** che l-aggiunta di Luca
+    chiede: ### **punti che si respingono** `+` ### **tutti i vicini** `+` **pesi uguali**.
+    """
+    archi, _p = delaunay_periodica(n, seme, rilassati)
+    return SC.costruisci(n, archi, "delaunay%s(n=%d,seme=%d)"
+                         % ("-respinti" if rilassati else "", n, seme))
 
 
-def punti_delaunay(n, seme=11):
-    """### I punti, **per l'OSSERVATORE**: si ricostruiscono dal seme, identici."""
-    return np.random.default_rng(seme).random((n, 3))
+def punti_delaunay(n, seme=11, rilassati=False):
+    """### I punti, **per l-OSSERVATORE**: si ricostruiscono dal seme, identici."""
+    return (S3D.punti3d_rilassati(n, seme) if rilassati
+            else np.random.default_rng(seme).random((n, 3)))
 
 
 # =====================================================================================
