@@ -9,7 +9,7 @@
 | `DOCUMENTAZIONE` | `2` | 1 |
 | `DOCUMENTAZIONE` | `ENTRAMBE` | 8 |
 | `FISICA` | `1` | 343 |
-| `FISICA` | `2` | 58 |
+| `FISICA` | `2` | 60 |
 | `FISICA` | `ENTRAMBE` | 17 |
 | `INFRASTRUTTURA` | `1` | 39 |
 | `INFRASTRUTTURA` | `2` | 16 |
@@ -116,6 +116,7 @@
 | `C8` | MISURA | FISICA | 1 | ### **CHIUSA** |  | C8 VALE SEMPRE ⏳[EPOCA 1 · MISURA] / LA FASE 2 NON SI CHIUDE. Col tempo-luce cab |
 | `C9` | MISURA | FISICA | 1 | ### **CHIUSA** |  | C9 VALE SEMPRE ⏳[EPOCA 1 · MISURA] / --tau-luce ha un effetto GRANDE sulla pende |
 | `CAMMINATA-A-MONETA` | STANDARD | FISICA | 2 | ### **AGENDA** |  | la dinamica dell-era 2 e- una CAMMINATA QUANTISTICA A MONETA: una regola per tut |
+| `CAMMINATA-NELLA-TABELLA` | FRONTE | FISICA | 2 | ### **AGENDA** |  | la camminata NON resta nel banco: entra nella tabella delle leggi, col generator |
 | `CARICA-DI-GAUGE` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | il segno di perc_chi dipende al 100 per cento dal rappresentante canonico: e' un |
 | `CARICA-PERCORSO` | FRONTE | FISICA | 1 | ### **SOSPESA** |  | l ordine in cui si chiude il filone della carica: cinque punti, e il primo si pu |
 | `CARICA-ROTAZIONE` | FRONTE | FISICA | 1 | ### **SOSPESA** |  | la carica e' il verso di rotazione collettivo: somma di /psi/^2 * phivel per mas |
@@ -272,6 +273,7 @@
 | `DOMANDA-PASSO-FRAZIONARIO-O-ASINCRONO` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | pezzi frazionari o tick asincroni: la C esatta vale uno stato nuovo? |
 | `DOMANDA-PRIMA-LEGARE-POI-MISURARE` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | senza stato legato tre letture non sono decidibili: si cerca prima un legame? |
 | `DOMANDA-QUALE-FORMA-FISSA-CS` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | quale forma del vuoto fissa cs: nessuna delle tre e- libera da tutti i difetti |
+| `DOMANDA-QUANDO-LA-CAMMINATA-IN-TABELLA` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | quando si porta la camminata nella tabella? il porting aspetta TRE decisioni ape |
 | `DOMANDA-QUANTITA-CONSERVATA` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | esiste una moneta isotropa, causale e simmetrica fra le bande con una quantita-  |
 | `DOMANDA-REGOLE-FUORI-CLAUDE` | DECISIONE | METODO | 2 | ### **AGENDA** |  | le regole di gestione fuori da CLAUDE.md, e quelle dentro senza presidio: vanno  |
 | `DOMANDA-UNITA-DI-STATO` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | l-unita- di stato: qual e- la capacita- di un nodo? |

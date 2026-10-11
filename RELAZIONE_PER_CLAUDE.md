@@ -13266,3 +13266,18 @@ Ogni dato di `db_era2/` ha ### **il suo TIMBRO accanto**, col campo `versione_da
 ### 📌 **LE SETTE VOCI, E LE TRE DOMANDE SONO DI LUCA**
 
 ### **Le misure:** `[[MISURA-INVARIANZA-LOCALE-V4]]` · `[[MISURA-ANTIMATERIA-PIEGA-DIVERSO]]` · `[[MISURA-CS-NESSUN-EFFETTO-SULLA-MATERIA]]` · `[[MISURA-C-ESATTA-OPPURE-LOCALITA]]`. ### **Le tre scelte, UNA voce per scelta** come il mandato chiede: `[[DOMANDA-PASSO-FRAZIONARIO-O-ASINCRONO]]` *(e il comando `prossima` la da' come ### **LA PROSSIMA `CRITICA`**)*, `[[DOMANDA-COME-LA-MATERIA-CAMBIA-LAMBDA]]`, `[[DOMANDA-QUALE-FORMA-FISSA-CS]]`. ### ⛔ **Non scelgo io.**
+
+### ✅ **IL CHECKPOINT DEL `v4`, E LA VOCE ④: VERDE SU UN CLONE PULITO, E POI `FERMO`**
+
+| | il numero |
+|---|---|
+| i commit del `v4` | **`db40a3c`** *(la derivazione, PRIMA del codice)*, **`faedba6`**, **`eb2c7a3`**, **`c00948c`**, **`d8ccc93`** |
+| la suite, qui | ### ✅ **`39` su `39`** |
+| il clone pulito | ### ✅ **`6` comandi nei DUE ambienti**, `HEAD` **`d8ccc93`**, simulatore **`b8c21049`** |
+| la suite SUL CLONE | **`223.31` s** senza `CI`, **`218.53` s** con `CI=true` |
+| l'igiene | `git status` ### **VUOTO**, residui ### **NESSUNO**, il clone ### **cancellato** |
+| il banco del `v4` | **`50`** bracci, `4.80` s |
+
+### ⚠ **E IL `pre-commit` DICHIARATO SFORA DI `0.11` s** *(`120.11` su `120`)*: ### **lo dichiaro come segnale e NON sposto etichette per tenerlo verde** — quel totale e' ### **contabilita' e non esecuzione** *(il hook non chiama `collauda.py`)*, ed e' il rilievo che sta in coda. ### ⛔ **Spostare un collaudo per far tornare un numero che non misura il hook sarebbe truccare una metrica.**
+
+### 📌 **LA VOCE ④ E' REGISTRATA, e la sua chiusura e' <<un checkpoint, poi STOP>>:** `[[CAMMINATA-NELLA-TABELLA]]` e `[[DOMANDA-QUANDO-LA-CAMMINATA-IN-TABELLA]]`. ### ⛔ **E il porting NON PUO' partire**, perche' la voce ⑥ pretende *«la regola col `cs` locale»* e ### **quale regola sia non e' deciso**: sono le ### **TRE scelte** che il `v4` ha misurato e consegnato. ### ⭐ **E `python csv/indice.py prossima` dice da se' `DOMANDA-PASSO-FRAZIONARIO-O-ASINCRONO`**, senza che io gliel'abbia detto.
