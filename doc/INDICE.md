@@ -9,7 +9,7 @@
 | `DOCUMENTAZIONE` | `2` | 1 |
 | `DOCUMENTAZIONE` | `ENTRAMBE` | 8 |
 | `FISICA` | `1` | 343 |
-| `FISICA` | `2` | 66 |
+| `FISICA` | `2` | 68 |
 | `FISICA` | `ENTRAMBE` | 17 |
 | `INFRASTRUTTURA` | `1` | 39 |
 | `INFRASTRUTTURA` | `2` | 16 |
@@ -273,6 +273,7 @@
 | `DOMANDA-GUSCIO-E-INTERFERENZA` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | il guscio e- interferenza e non materia: che cosa resta dell-ipotesi del guscio? |
 | `DOMANDA-LAMBDA-GRANDEZZA` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | lambda: su quale grandezza si misura, e da dove viene il suo valore? |
 | `DOMANDA-PASSO-FRAZIONARIO-O-ASINCRONO` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | pezzi frazionari o tick asincroni, e l-invarianza locale dei secondi NON e- dimo |
+| `DOMANDA-PESO-ARCO-COME-MEMORIA` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | il peso d-arco come memoria dinamica: la geometria nasce dalla dinamica? |
 | `DOMANDA-PRIMA-LEGARE-POI-MISURARE` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | senza stato legato tre letture non sono decidibili: si cerca prima un legame? |
 | `DOMANDA-QUALE-FORMA-FISSA-CS` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | quale forma del vuoto fissa cs: nessuna delle tre e- libera da tutti i difetti |
 | `DOMANDA-QUALE-SCENA-3D-PRINCIPALE` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | quale scena 3D fa da principale, se nessuna delle due provate e- isotropa? |
@@ -331,6 +332,7 @@
 | `G9` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 6 volte, MAI definito in un registro) [G9] |
 | `GEOM-SENZA-VERSO` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | perc_geom nasce da /tw/: perde il VERSO, ma la catena della torsione la usa come |
 | `GEOMETRIA-DELLA-CRESCITA` | FRONTE | FISICA | 2 | ### **AGENDA** |  | SPECULATIVA: lo spazio delle fasi CRESCE, e una forza nuova come OSTRUZIONE fra  |
+| `GRAFO-PESATO-TUTTI-I-VICINI` | TEORIA | FISICA | 2 | ### **AGENDA** |  | tutti i vicini collegati, e un peso d-arco che NON viene dalle posizioni |
 | `GRAVITA-POTENZIALE` | FRONTE | FISICA | 2 | ### **AGENDA** |  | due potenziali nel codice e nessun Poisson risolto: Poisson e un VINCOLO DI SCAL |
 | `GUSCIO-ANTIFASE-EMERGENTE` | FRONTE | FISICA | 1 | ### **SOSPESA** |  | il guscio in antifase si forma DA SOLO e scherma? Oggi emergente e imposta sono  |
 | `H-ETC-1` | PRESIDIO | METODO | 1 | ### **SOSPESA** |  | PRESIDIO PROPOSTO E NON CABLATO: zero calcola_psi senza w dentro passo_pieno |

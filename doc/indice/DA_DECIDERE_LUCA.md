@@ -25,7 +25,7 @@
 | **[[DOMANDA-QUALE-SCENA-3D-PRINCIPALE]]** quale scena 3D fa da principale, se nessuna delle due provate e- isotrop | ### ✅ **PRONTA** | ### **niente** |
 | **[[DOMANDA-QUANTITA-CONSERVATA]]** esiste una moneta isotropa, causale e simmetrica fra le bande con una qu | ### ✅ **PRONTA** | ### **niente** |
 
-### `DIPENDENTE` — **12**
+### `DIPENDENTE` — **13**
 
 | la domanda | pronta? | che cosa aspetta |
 |---|---|---|
@@ -37,6 +37,7 @@
 | **[[DOMANDA-GRANDEZZA-LOCALE-TEMPO]]** da dove viene la grandezza locale da cui escono r_k e cs_k? | ### ⏳ aspetta | ### **aspetta:** `DOMANDA-QUANTITA-CONSERVATA` |
 | **[[DOMANDA-GUSCIO-E-INTERFERENZA]]** il guscio e- interferenza e non materia: che cosa resta dell-ipotesi del | ### ✅ **PRONTA** | ### **niente** |
 | **[[DOMANDA-LAMBDA-GRANDEZZA]]** lambda: su quale grandezza si misura, e da dove viene il suo valore? | ### ⏳ aspetta | ### **aspetta:** `DOMANDA-D9-GEOMETRIA` |
+| **[[DOMANDA-PESO-ARCO-COME-MEMORIA]]** il peso d-arco come memoria dinamica: la geometria nasce dalla dinamica? | ### ✅ **PRONTA** | ### **niente** |
 | **[[DOMANDA-PRIMA-LEGARE-POI-MISURARE]]** senza stato legato tre letture non sono decidibili: si cerca prima un le | ### ✅ **PRONTA** | ### **niente** |
 | **[[DOMANDA-QUALE-FORMA-FISSA-CS]]** quale forma del vuoto fissa cs: nessuna delle tre e- libera da tutti i d | ### ⏳ aspetta | ### **aspetta:** `DOMANDA-PASSO-FRAZIONARIO-O-ASINCRONO` |
 | **[[DOMANDA-QUANDO-LA-CAMMINATA-IN-TABELLA]]** quando si porta la camminata nella tabella? il porting aspetta TRE decis | ### ⏳ aspetta | ### **aspetta:** `DOMANDA-PASSO-FRAZIONARIO-O-ASINCRONO`, `DOMANDA-COME-LA-MATERIA-CAMBIA-LAMBDA`, `DOMANDA-QUALE-FORMA-FISSA-CS` |
@@ -54,7 +55,7 @@
 
 ## IL CONTO
 
-> ### ⛔ **aperte `20`, di cui pronte `10`.**
+> ### ⛔ **aperte `21`, di cui pronte `11`.**
 >
 > ### ✅ **E una domanda DECISA esce da sola:** si chiude con la decisione di Luca e il commit, e ### **nessuno la spunta a mano** -- la lista ### **si genera dai campi**, e un campo che cambia ### **cambia la lista.**
 
@@ -64,13 +65,13 @@
 
 > ### 📌 **Queste arrivano dai DUE criteri vecchi** *(la nota che dice <<da decidere da Luca>>, e lo stato `DA_CLASSIFICARE`)*, e ### **non hanno una `priorita`**: quindi ### **non stanno nell-ordine delle dipendenze.** ### ✅ **Non le tolgo: le DICHIARO**, perche- una lista che ne nasconde una parte ### **sembra completa.**
 
-| **voci che aspettano una decisione** | ### **`17`** |
-| **domande in tutto** | `17` |
+| **voci che aspettano una decisione** | ### **`18`** |
+| **domande in tutto** | `18` |
 | **segnaposto `NON_DEFINITA`**, che NON sono una domanda | `187` |
 
 ---
 
-## le DOMANDE aperte -- `17`
+## le DOMANDE aperte -- `18`
 
 | id | `classe`/`dominio`/era/stato | LA DOMANDA | LA FRASE |
 |---|---|---|---|
@@ -81,6 +82,7 @@
 | `DOMANDA-COME-LA-MATERIA-CAMBIA-LAMBDA` | `DECISIONE`/`FISICA`/`2`/`AGENDA` | scattering nel nodo o trasmissione sull-arco | come la materia cambia la densita- del vuoto: scattering nel nodo o trasmissione sull-arco? ### DOMANDA APERTA PER LUCA, da decidere da Luca. ### E- i |
 | `DOMANDA-GUSCIO-E-INTERFERENZA` | `DECISIONE`/`FISICA`/`2`/`AGENDA` | il guscio e- interferenza, quindi l-ipotesi si riformula o manca qualcosa | il guscio e- interferenza e non materia: che cosa resta dell-ipotesi del guscio? ### DOMANDA APERTA PER LUCA, da decidere da Luca. ### IL FATTO MISURA |
 | `DOMANDA-PASSO-FRAZIONARIO-O-ASINCRONO` | `DECISIONE`/`FISICA`/`2`/`AGENDA` | e l-invarianza locale dei tick asincroni NON e- dimostrata dove cs varia, perche- la frequenza dell-arco e- una COINCIDENZA | pezzi frazionari o tick asincroni, e l-invarianza locale dei secondi NON e- dimostrata dove cs varia ### DOMANDA APERTA PER LUCA, da decidere da Luca. |
+| `DOMANDA-PESO-ARCO-COME-MEMORIA` | `DECISIONE`/`FISICA`/`2`/`AGENDA` | il peso d-arco come memoria dinamica e- la strada per far nascere la geometria dalla dinamica | il peso d-arco come memoria dinamica: la geometria nasce dalla dinamica? ### DOMANDA APERTA PER LUCA, da decidere da Luca. ### E- il punto (d) dell-id |
 | `DOMANDA-PRIMA-LEGARE-POI-MISURARE` | `DECISIONE`/`FISICA`/`2`/`AGENDA` | cercare prima un legame, o riformulare le letture come letture sulla dispersione | senza stato legato tre letture non sono decidibili: si cerca prima un legame? ### DOMANDA APERTA PER LUCA, da decidere da Luca. ### IL FATTO: tre lett |
 | `DOMANDA-QUALE-FORMA-FISSA-CS` | `DECISIONE`/`FISICA`/`2`/`AGENDA` | quale forma fissa cs, e nessuna delle tre e- libera da tutti i difetti | quale forma del vuoto fissa cs: nessuna delle tre e- libera da tutti i difetti ### DOMANDA APERTA PER LUCA, da decidere da Luca. ### E- il punto A2 de |
 | `DOMANDA-QUALE-SCENA-3D-PRINCIPALE` | `DECISIONE`/`FISICA`/`2`/`AGENDA` | nessuna delle due scene 3D provate e- isotropa, e il geometrico sta peggio del cubico | quale scena 3D fa da principale, se nessuna delle due provate e- isotropa? ### DOMANDA APERTA PER LUCA, da decidere da Luca. ### IL FATTO MISURATO: il |
