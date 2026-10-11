@@ -13507,3 +13507,11 @@ Ogni dato di `db_era2/` ha ### **il suo TIMBRO accanto**, col campo `versione_da
 ### 📌 **LE QUATTRO VOCI, e le DUE domande sono quelle che il mandato chiede:** `[[MISURA-BUCO-SPETTRO-PER-FAMIGLIA]]` · `[[MISURA-SEGNO-LEGA-IN-1D]]` · `[[DOMANDA-QUALE-SEGNO]]` *(**`CRITICA`**: il segno che lega lega solo dove quasi tutto lega)* · `[[DOMANDA-VIA-DEL-CAMPO]]` *(in `3D` nessun termine locale lega: si passa al campo?)*. ### ⛔ **Non scelgo io.**
 
 ### ⚠ **E `M2` NON E' GIRATA su queste famiglie:** resta il pezzo aperto del mandato, e la sonda sul `n=120` irregolare dice che il selettore prescritto *(«il piu' localizzato»)* ### **oscilla a `O(1)`** mentre quello a ### **massima sovrapposizione** converge a `1.9e-13`.
+
+### 📌 **IN CODA: IL COMPLETAMENTO DEL LEGAME** *(mandato di Luca, `2026-10-11`)*
+
+### ⭐ **E NASCE DAI TRE LIMITI CHE AVEVO DICHIARATO IO nel referto** — ### **che e' il modo in cui un limite dichiarato serve a qualcosa**, invece di restare una riga in fondo: `(1)` sulle scene `3D` piccole il fronte riempie il grafo, quindi *«cala con la taglia»* puo' essere ### **taglia finita e non dimensione**; `(2)` il misurando dipende dalla taglia ### **attraverso il denominatore**; `(3)` ### **`M2` non e' girata.**
+
+### ⛔ **E IL MANDATO METTE UNA CONDIZIONE CHE ACCETTO E REGISTRO:** `[[DOMANDA-QUALE-SEGNO]]` e `[[DOMANDA-VIA-DEL-CAMPO]]` ### **non si decidono finche' i tre buchi non sono chiusi** — quindi le ho rese ### **DIPENDENTI** da `[[LEGAME-SCENE-GRANDI]]`, e la prima ### **non e' piu' `CRITICA` pronta**: deve dire ### **per famiglia E per taglia** se in `3D` un termine locale lega.
+
+### ✅ **E la posizione in coda la dice il mandato:** ### **dopo `ISOTROPIA-LOCALE` e la variante `(iv)`, prima del simulatore** — cosi' le scene grandi si costruiscono ### **sulla famiglia che quelle misure indicano migliore**, invece di rifarle due volte.
