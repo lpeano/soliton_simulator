@@ -1,0 +1,573 @@
+{
+ "blob": "3ae310d5d4395372acaba24d0d05ba565f693253",
+ "controllo_trattenuti": {
+  "TIENE cio' che torna": {
+   "prime_righe": [
+    {
+     "crescita_MB": 0.00029754638671875,
+     "file": "C:\\Users\\lpeano\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\tracemalloc.py",
+     "riga": 560
+    },
+    {
+     "crescita_MB": 0.00029754638671875,
+     "file": "C:\\Users\\lpeano\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\tracemalloc.py",
+     "riga": 423
+    },
+    {
+     "crescita_MB": 5.340576171875e-05,
+     "file": "C:\\Users\\lpeano\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\tracemalloc.py",
+     "riga": 558
+    }
+   ],
+   "privata_MB": 859.8515625,
+   "tenuti": 0,
+   "tracciato_MB": 0.00243377685546875
+  },
+  "butta cio' che torna": {
+   "prime_righe": [
+    {
+     "crescita_MB": 0.00031280517578125,
+     "file": "C:\\Users\\lpeano\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\tracemalloc.py",
+     "riga": 560
+    },
+    {
+     "crescita_MB": 0.00031280517578125,
+     "file": "C:\\Users\\lpeano\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\tracemalloc.py",
+     "riga": 423
+    },
+    {
+     "crescita_MB": 5.340576171875e-05,
+     "file": "C:\\Users\\lpeano\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\tracemalloc.py",
+     "riga": 558
+    }
+   ],
+   "privata_MB": 859.8515625,
+   "tenuti": 0,
+   "tracciato_MB": 0.002838134765625
+  }
+ },
+ "due_metri": {
+  "chiamate_chieste": 8,
+  "nframe": 4,
+  "pendenza_privata": {
+   "a_MB": 858.49609375,
+   "cresce": false,
+   "da_MB": 858.3515625,
+   "giri": 8,
+   "in_sigma": 4.178381883533006e-13,
+   "per_giro_MB": 1.1348904146467975e-14,
+   "sigma": 0.027161002662762782,
+   "totale_MB": 0.14453125
+  },
+  "pendenza_tracemalloc": {
+   "a_MB": 0.004146575927734375,
+   "cresce": true,
+   "da_MB": 0.002117156982421875,
+   "giri": 8,
+   "in_sigma": 49.264429695917734,
+   "per_giro_MB": 0.00028328668503534225,
+   "sigma": 5.7503291276061725e-06,
+   "totale_MB": 0.0020294189453125
+  },
+  "per_chiamata": [
+   {
+    "chiamata": 1,
+    "privata_MB": 858.3515625,
+    "privata_delta_MB": 0.34375,
+    "tracemalloc_MB": 0.002117156982421875,
+    "tracemalloc_delta_MB": 0.00116729736328125
+   },
+   {
+    "chiamata": 2,
+    "privata_MB": 858.66796875,
+    "privata_delta_MB": 0.66015625,
+    "tracemalloc_MB": 0.002513885498046875,
+    "tracemalloc_delta_MB": 0.00156402587890625
+   },
+   {
+    "chiamata": 3,
+    "privata_MB": 858.296875,
+    "privata_delta_MB": 0.2890625,
+    "tracemalloc_MB": 0.002780914306640625,
+    "tracemalloc_delta_MB": 0.0018310546875
+   },
+   {
+    "chiamata": 4,
+    "privata_MB": 858.5,
+    "privata_delta_MB": 0.4921875,
+    "tracemalloc_MB": 0.003047943115234375,
+    "tracemalloc_delta_MB": 0.00209808349609375
+   },
+   {
+    "chiamata": 5,
+    "privata_MB": 858.14453125,
+    "privata_delta_MB": 0.13671875,
+    "tracemalloc_MB": 0.003314971923828125,
+    "tracemalloc_delta_MB": 0.0023651123046875
+   },
+   {
+    "chiamata": 6,
+    "privata_MB": 858.33203125,
+    "privata_delta_MB": 0.32421875,
+    "tracemalloc_MB": 0.003612518310546875,
+    "tracemalloc_delta_MB": 0.00266265869140625
+   },
+   {
+    "chiamata": 7,
+    "privata_MB": 858.515625,
+    "privata_delta_MB": 0.5078125,
+    "tracemalloc_MB": 0.003879547119140625,
+    "tracemalloc_delta_MB": 0.0029296875
+   },
+   {
+    "chiamata": 8,
+    "privata_MB": 858.49609375,
+    "privata_delta_MB": 0.48828125,
+    "tracemalloc_MB": 0.004146575927734375,
+    "tracemalloc_delta_MB": 0.00319671630859375
+   }
+  ],
+  "verdetto": "NESSUNA CRESCE: a questa taglia non c'e' niente"
+ },
+ "fermato_dal_tetto": null,
+ "giri": 12,
+ "giri_dei_blocchi": {
+  "controllo": 0,
+  "due_metri": 8,
+  "pezzi": 12,
+  "tracemalloc": 0
+ },
+ "n_scena": 26000,
+ "pezzi": {
+  "1 moneta_spin": {
+   "a_MB": 827.85546875,
+   "campioni": [
+    [
+     0,
+     827.85546875
+    ],
+    [
+     5,
+     827.85546875
+    ],
+    [
+     10,
+     827.85546875
+    ]
+   ],
+   "cresce": false,
+   "da_MB": 827.85546875,
+   "giri": 10,
+   "in_sigma": 0.22558874165614098,
+   "per_giro_MB": -1.701194407819087e-14,
+   "secondi": 0.21186375617980957,
+   "sigma": 7.541131686492462e-14,
+   "totale_MB": 0.0
+  },
+  "10 la MISURA (raggi, frazioni, fondo)": {
+   "a_MB": 859.015625,
+   "campioni": [
+    [
+     0,
+     858.1953125
+    ],
+    [
+     5,
+     859.015625
+    ],
+    [
+     10,
+     859.015625
+    ]
+   ],
+   "cresce": false,
+   "da_MB": 858.1953125,
+   "giri": 10,
+   "in_sigma": 1.7320508075688366,
+   "per_giro_MB": 0.08203124999999807,
+   "secondi": 0.18664264678955078,
+   "sigma": 0.04736076426946149,
+   "totale_MB": 0.8203125
+  },
+  "11 grumo (la condizione iniziale)": {
+   "a_MB": 859.45703125,
+   "campioni": [
+    [
+     0,
+     859.015625
+    ],
+    [
+     5,
+     858.69140625
+    ],
+    [
+     10,
+     859.45703125
+    ]
+   ],
+   "cresce": false,
+   "da_MB": 859.015625,
+   "giri": 10,
+   "in_sigma": 0.7015116174026447,
+   "per_giro_MB": 0.04414062500000773,
+   "secondi": 1.0620462894439697,
+   "sigma": 0.06292215824370655,
+   "totale_MB": 0.44140625
+  },
+  "12 profilo +D (come il run)": {
+   "a_MB": 858.19140625,
+   "campioni": [
+    [
+     0,
+     859.45703125
+    ],
+    [
+     1,
+     859.04296875
+    ],
+    [
+     2,
+     858.12890625
+    ],
+    [
+     3,
+     858.3828125
+    ],
+    [
+     4,
+     858.42578125
+    ],
+    [
+     5,
+     858.1875
+    ],
+    [
+     6,
+     858.5703125
+    ],
+    [
+     7,
+     858.4140625
+    ],
+    [
+     8,
+     858.19140625
+    ]
+   ],
+   "cresce": false,
+   "da_MB": 859.45703125,
+   "giri": 8,
+   "in_sigma": 2.2428515394961086,
+   "per_giro_MB": -0.10436197916664712,
+   "secondi": 2004.611032962799,
+   "sigma": 0.04653093498560037,
+   "totale_MB": -1.265625
+  },
+  "12 profilo +N (come il run)": {
+   "a_MB": 858.0,
+   "campioni": [
+    [
+     0,
+     858.19921875
+    ],
+    [
+     1,
+     858.8515625
+    ],
+    [
+     2,
+     858.19140625
+    ],
+    [
+     3,
+     858.234375
+    ],
+    [
+     4,
+     858.6953125
+    ],
+    [
+     5,
+     858.8515625
+    ],
+    [
+     6,
+     858.19140625
+    ],
+    [
+     7,
+     858.84375
+    ],
+    [
+     8,
+     858.0
+    ]
+   ],
+   "cresce": false,
+   "da_MB": 858.19921875,
+   "giri": 8,
+   "in_sigma": 0.06999010614017444,
+   "per_giro_MB": -0.0033854166666075973,
+   "secondi": 24.282451629638672,
+   "sigma": 0.048369931884763386,
+   "totale_MB": -0.19921875
+  },
+  "2 moneta_grover": {
+   "a_MB": 859.91796875,
+   "campioni": [
+    [
+     0,
+     859.91796875
+    ],
+    [
+     5,
+     859.91796875
+    ],
+    [
+     10,
+     859.91796875
+    ]
+   ],
+   "cresce": false,
+   "da_MB": 859.91796875,
+   "giri": 10,
+   "in_sigma": 0.029757554366305786,
+   "per_giro_MB": -2.4860181903447528e-15,
+   "secondi": 0.16562128067016602,
+   "sigma": 8.354242286656625e-14,
+   "totale_MB": 0.0
+  },
+  "3 spostamento_trasporto": {
+   "a_MB": 859.91796875,
+   "campioni": [
+    [
+     0,
+     859.91796875
+    ],
+    [
+     5,
+     859.91796875
+    ],
+    [
+     10,
+     859.91796875
+    ]
+   ],
+   "cresce": false,
+   "da_MB": 859.91796875,
+   "giri": 10,
+   "in_sigma": 0.029757554366305786,
+   "per_giro_MB": -2.4860181903447528e-15,
+   "secondi": 0.08850955963134766,
+   "sigma": 8.354242286656625e-14,
+   "totale_MB": 0.0
+  },
+  "4 grover_scalare + spostamento_scalare": {
+   "a_MB": 859.91796875,
+   "campioni": [
+    [
+     0,
+     859.91796875
+    ],
+    [
+     5,
+     859.91796875
+    ],
+    [
+     10,
+     859.91796875
+    ]
+   ],
+   "cresce": false,
+   "da_MB": 859.91796875,
+   "giri": 10,
+   "in_sigma": 0.029757554366305786,
+   "per_giro_MB": -2.4860181903447528e-15,
+   "secondi": 0.06523537635803223,
+   "sigma": 8.354242286656625e-14,
+   "totale_MB": 0.0
+  },
+  "5 passo2 (il lineare intero)": {
+   "a_MB": 859.91796875,
+   "campioni": [
+    [
+     0,
+     859.91796875
+    ],
+    [
+     5,
+     859.91796875
+    ],
+    [
+     10,
+     859.91796875
+    ]
+   ],
+   "cresce": false,
+   "da_MB": 859.91796875,
+   "giri": 10,
+   "in_sigma": 0.029757554366305786,
+   "per_giro_MB": -2.4860181903447528e-15,
+   "secondi": 0.4282877445220947,
+   "sigma": 8.354242286656625e-14,
+   "totale_MB": 0.0
+  },
+  "6 flusso +N": {
+   "a_MB": 858.9140625,
+   "campioni": [
+    [
+     0,
+     859.91796875
+    ],
+    [
+     5,
+     858.9140625
+    ],
+    [
+     10,
+     858.9140625
+    ]
+   ],
+   "cresce": false,
+   "da_MB": 859.91796875,
+   "giri": 10,
+   "in_sigma": 1.7320508075684613,
+   "per_giro_MB": -0.10039062499997588,
+   "secondi": 0.44391822814941406,
+   "sigma": 0.05796055436786477,
+   "totale_MB": -1.00390625
+  },
+  "7 flusso +D (punto medio IMPLICITO)": {
+   "a_MB": 859.6015625,
+   "campioni": [
+    [
+     0,
+     858.953125
+    ],
+    [
+     5,
+     859.6015625
+    ],
+    [
+     10,
+     859.6015625
+    ]
+   ],
+   "cresce": false,
+   "da_MB": 858.953125,
+   "giri": 10,
+   "in_sigma": 1.7320508075682366,
+   "per_giro_MB": 0.06484374999998738,
+   "secondi": 1.0674066543579102,
+   "sigma": 0.03743755651777136,
+   "totale_MB": 0.6484375
+  },
+  "8 passo3 con +N": {
+   "a_MB": 858.640625,
+   "campioni": [
+    [
+     0,
+     859.640625
+    ],
+    [
+     5,
+     858.640625
+    ],
+    [
+     10,
+     858.640625
+    ]
+   ],
+   "cresce": false,
+   "da_MB": 859.640625,
+   "giri": 10,
+   "in_sigma": 1.7320508075689456,
+   "per_giro_MB": -0.10000000000000393,
+   "secondi": 1.3523533344268799,
+   "sigma": 0.057735026918962574,
+   "totale_MB": -1.0
+  },
+  "9 passo3 con +D": {
+   "a_MB": 858.1484375,
+   "campioni": [
+    [
+     0,
+     858.6796875
+    ],
+    [
+     5,
+     858.15625
+    ],
+    [
+     10,
+     858.1484375
+    ]
+   ],
+   "cresce": false,
+   "da_MB": 858.6796875,
+   "giri": 10,
+   "in_sigma": 1.7845371956770233,
+   "per_giro_MB": -0.05312499999999994,
+   "secondi": 3.5918946266174316,
+   "sigma": 0.029769623255090076,
+   "totale_MB": -0.53125
+  }
+ },
+ "priorita": "BELOW_NORMAL",
+ "privata_finale_MB": 859.8515625,
+ "run_in_volo_dopo": null,
+ "run_in_volo_prima": null,
+ "scena": {
+  "estremita": 139400,
+  "m": 69700,
+  "n": 26000,
+  "nome": "geometrico3d(n=26000,seme=11,rilassati)",
+  "stato_MB": 4.254150390625
+ },
+ "seme": 11,
+ "tempi_del_run": [
+  4,
+  8,
+  13,
+  17,
+  22,
+  26
+ ],
+ "tetto_MB": 1536.0,
+ "tracemalloc": {
+  "meta_vs_inizio_MB": NaN,
+  "nota": "tracemalloc vede solo l'allocatore di Python: i buffer di numpy di norma usano malloc diretto e NON compaiono",
+  "righe": [
+   {
+    "blocchi": 1,
+    "crescita_MB": 0.00028228759765625,
+    "file": "C:\\Users\\lpeano\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\tracemalloc.py",
+    "riga": 560,
+    "totale_MB": 0.00028228759765625
+   },
+   {
+    "blocchi": 1,
+    "crescita_MB": 0.00028228759765625,
+    "file": "C:\\Users\\lpeano\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\tracemalloc.py",
+    "riga": 423,
+    "totale_MB": 0.00028228759765625
+   },
+   {
+    "blocchi": 1,
+    "crescita_MB": 5.340576171875e-05,
+    "file": "C:\\Users\\lpeano\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\tracemalloc.py",
+    "riga": 558,
+    "totale_MB": 0.0001068115234375
+   },
+   {
+    "blocchi": 1,
+    "crescita_MB": 5.340576171875e-05,
+    "file": "C:\\Users\\lpeano\\soliton_simulator\\proto_camminata\\_diagnosi_memoria.py",
+    "riga": 336,
+    "totale_MB": 5.340576171875e-05
+   }
+  ],
+  "tracciato_totale_MB": 0.00072479248046875
+ },
+ "x0": 8.0
+}

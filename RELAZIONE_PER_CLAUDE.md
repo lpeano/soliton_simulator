@@ -13850,3 +13850,27 @@ Ogni dato di `db_era2/` ha ### **il suo TIMBRO accanto**, col campo `versione_da
 
 ### ⭐ **E UN NUMERO DALLA DIAGNOSI SU SCENA GRANDE, gia' arrivato:** a ### **`n = 26000`** anche i ### **pezzi del passo sono TUTTI FERMI** *(entro `±0.1` MB per giro)*, punto medio implicito compreso. ### **Quindi la crescita non e' nemmeno in un pezzo a taglia grande**, e resta il blocco dei due metri a dire se e' ### **frammentazione.**
 
+## ⛔ **LA DIAGNOSI SU SCENA GRANDE NON RIPRODUCE LA CRESCITA: NESSUNO DEI DUE METRI SALE** *(2026-10-12)*
+
+### ⭐ **STESSA SCENA DEL RUN, STESSA VARIANTE, SUA FUNZIONE:** `geometrico3d` a punti respinti `n = 26000`, `m = 69700`, stato `4.254` MB, variante `+D` *(quella col punto medio implicito)*, e la funzione ### **importata, non copiata.**
+
+| | il metro | per chiamata |
+|---|---|---|
+| `1` | memoria ### **PRIVATA** del processo | `+0.000` MB, con un'oscillazione totale di `0.5` MB — ### **rumore** |
+| `2` | memoria vista da ### **`tracemalloc`** | `+0.000` MB — ### **zero** |
+| `3` | i ### **pezzi del passo** | ### **`0` su `13` crescono**, punto medio implicito compreso |
+
+### ⛔ **QUINDI LE DUE ALTERNATIVE DEL MANDATO NON SI PRESENTANO:** non e' ### **frammentazione** *(la privata non cresce)* e non e' un ### **riferimento trattenuto** *(non crescono entrambe)*. ### **La replica NON riproduce il fenomeno, e questo E' il risultato** — non ne invento la causa.
+
+### ⚠ **CHE COSA RESTA DIVERSO, detto con precisione:** il run fa ### **`60` chiamate per scena** *(`5` varianti x `3` ampiezze x `4` semi)*, la replica ne fa ### **`8`**, con ### **UNA** variante e ### **UNA** ampiezza. ### **La differenza residua e' lo spazzamento intero.**
+
+### ⛔ **E COMPLETARLO VORREBBE DIRE UN'ALTRA CORSA SUL BANCO, che `[[BANCO-CONGELATO]]` VIETA** — quindi ### **la causa puo' restare indeterminata**, e lo dichiaro invece di riempire il buco.
+
+### ⭐ **MA UNA COSA DIPENDENTE DALLA TAGLIA E' MISURATA, ED E' LA SCENA E NON IL PASSO:** la base del processo passa da `419` MB a `n = 2000` a `860` a `n = 26000`, cioe' ### **`441` MB in piu' per la SCENA** — circa ### **`104` volte lo stato** di quella taglia.
+
+### ✅ **E QUESTO SPIEGA LA FORMA del fenomeno, anche se non la grandezza:** memoria trattenuta ### **per la durata di UNA scena** e rilasciata alla sua fine — ed e' esattamente cio' che il run ha fatto, ### **crollando da `6210` a `1851` MB quando la scena e' finita.**
+
+### 📌 **IL VINCOLO DI PROGETTO CHE NE SEGUE, e vale dal primo commit di codice del simulatore:** la memoria di una scena ### **non deve essere un centinaio di volte lo stato.** Nel simulatore il grafo ### **CRESCE per mitosi**, quindi le strutture della scena *(liste di vicini, liste di archi)* vanno ### **in array e non in liste di liste Python**, e la memoria per tick va ### **misurata e timbrata con la corsa.**
+
+### ⚠ **E DUE BLOCCHI SONO STATI SALTATI PER BUDGET, dichiarato nel `json`:** il blocco di `tracemalloc` per riga e il controllo sui trattenuti hanno girato a ### **zero giri**, perche' sono ### **gia' fatti su scena piccola** e il mandato dava mezz'ora. ### **Il campo `giri_dei_blocchi` lo dice**, invece di tacere.
+
