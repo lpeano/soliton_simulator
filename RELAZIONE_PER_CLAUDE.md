@@ -13052,3 +13052,17 @@ Ogni dato di `db_era2/` ha ### **il suo TIMBRO accanto**, col campo `versione_da
 | ogni pendenza di `G2(b)` ### **porta il suo `sigma`** | `12` righe, `0` senza barra | ### **una pendenza senza barra non decide niente** |
 
 ### ⛔ **E NON HO COMMITTATO IL NUMERO SBAGLIATO E POI LA CURA:** il difetto e' uscito ### **prima del primo commit di questo mandato**, quindi ### **la cura e' dentro lo stesso cambiamento logico** — e cio' che committo e' ### **il referto rigenerato sui numeri giusti**, col difetto ### **scritto, non cancellato.**
+
+### ✅ **IL CHECKPOINT DELLE LETTURE `G1` E `G2`: COMMITTATO, PUSHATO, E VERDE SU UN CLONE PULITO**
+
+| | il numero |
+|---|---|
+| il commit | **`9184913`**, `18` file, `+2834` righe |
+| la suite, qui | ### ✅ **`38` su `38`**, e il `pre-commit` dichiarato torna ### **nel budget**: `114.93` s su `120` *(`96%`)* |
+| il clone pulito | ### ✅ **`6` comandi nei DUE ambienti** *(`valida`, la suite, `prossima`, con e senza `CI=true`)*, `HEAD` **`9184913`**, simulatore **`b8c21049`** |
+| la suite SUL CLONE | **`216.99` s** senza `CI`, **`213.14` s** con `CI=true` |
+| l'igiene | `git status` ### **VUOTO**, residui nel `%TEMP%` ### **NESSUNO**, il clone ### **cancellato** |
+
+### ⭐ **E QUESTA VOLTA IL CLONE NON HA TROVATO NIENTE ADDOSSO A ME** — ed e' la prima volta in sei verifiche: le cinque precedenti avevano ### **ognuna** trovato un difetto invisibile sul mio disco.
+
+### 📌 **E I DUE RILIEVI CHE HO MISURATO MENTRE CHIUDEVO SONO IN `doc/CODA_2026-10-09.md`, NON ESEGUITI** *(`L-UN-PROMPT`)*: ### **l'elenco generato che sembra completo** *(`5` voci `DECISIONE` aperte che non ci sono, `13` su `26` senza `priorita`)* e ### **il `pre-commit` che non chiama `collauda.py`** *(quindi il campo `dove` e' contabilita', non esecuzione)*. ### ⚠ **E il secondo mi riguarda: ho spostato un collaudo in `solo-CI` GUARDANDO QUEL NUMERO.** ### ✅ **La decisione resta giusta per un'altra ragione** *(`36` s su `251` e' un terzo del tempo della suite)*, ### **ma la motivazione che avevo scritto poggiava su un numero che non dice quello che sembra.**
