@@ -13352,3 +13352,15 @@ Ogni dato di `db_era2/` ha ### **il suo TIMBRO accanto**, col campo `versione_da
 ### 📌 **E LA TRAPPOLA CHE NON DEVO RIFARE E' SCRITTA NEL REPO:** la lettura `M` del `v2` misurava *«il gap MASSIMO ovunque sul cerchio»* e otteneva **`64.9`** a `eps = 0` — ### **dalle BANDE PIATTE di Grover**, cioe' dalle spigole di `±1` degli stati intrappolati sui cicli. ### ⛔ **`M0` cerca i buchi su TUTTO il cerchio, quindi ci cadrebbe di nuovo:** percio' le spigole di `±1` ### **si escludono dalla caccia e si riportano a parte**, ed e' scritto nella progettazione ### **prima di misurare.**
 
 ### ⭐ **E LA PREVISIONE, scritta prima:** ### **nessun buco** *(e quindi `M1` e `M2` sono attese NEGATIVE)*, perche' `_spettro.py` ha gia' misurato che il gap ai due punti d'incontro resta ### **`O(1)` in spaziature** crescendo la taglia — e ### **un gap che resta `O(1)` in spaziature non e' un gap: e' la spaziatura media.**
+
+### 📌 **IN CODA: IL SIMULATORE DELL'ERA `2`** *(mandato di Luca, `2026-10-11`, arrivato mentre lavoravo al `LEGAME`)*
+
+### **Registrato e NON eseguito**, e la condizione d'ingresso la dice il mandato stesso: ### **il `LEGAME` concluso, con referto e checkpoint.** ### ✅ **E il punto `0` *(«registrala come voce indice prima di tutto il resto»)* l'ho fatto subito:** `[[SIMULATORE-ERA-2]]`, piu' la voce di coda ⑧.
+
+### ⭐ **E ASSORBE LA VOCE ④** *(`[[CAMMINATA-NELLA-TABELLA]]`, che avevo registrato poche ore prima)*: i suoi ### **quattro punti sono ripresi** dentro la voce nuova, e la ④ porta `superata_da`.
+
+### ⛔ **MA IL PRESIDIO MI HA FERMATO SU UNA COSA, E AVEVA RAGIONE:** avevo messo la ④ a `SUPERATA`, e `PI-ERA-STATO` ha rifiutato il lotto — *«era `2` con stato `SUPERATA`: l'era `2` NON E' COMINCIATA»*. ### ⭐ **Una voce <<superata>> in un'era che non esiste sarebbe una storia raccontata al passato di una cosa mai fatta.** ### ✅ **L'assorbimento si registra con `superata_da` e col testo**, e lo stato cambiera' ### **quando l'era `2` comincia** — che e' esattamente cio' che questo mandato va a fare.
+
+### ⚠ **E UNA COSA DA CORREGGERE NEL MANDATO, perche' e' un'etichetta e non un ID:** il mandato cita **`D9`**, che e' ### **l'etichetta locale** con cui Luca lo nomina in `doc/ALBERO_era2.yaml`; l'ID e' ### **`DOMANDA-D9-GEOMETRIA`** *(par. `9`: le etichette locali NON sono ID)*, e la voce lo collega con quello.
+
+### ✅ **E DUE PEZZI DEL MANDATO SONO GIA' PRONTI, e li ho dichiarati nella coda** *(il mandato chiede di riusare cio' che e' fatto)*: la **misura del costo per tick** sulle taglie e il **generatore di scene scalabile** *(`scena.irregolare(n)`, gradi `2..6`, deterministico)*, entrambi misurati nel task history del `LEGAME` — e la ### **PARTE `F`** li chiede.

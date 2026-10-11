@@ -9,7 +9,7 @@
 | `DOCUMENTAZIONE` | `2` | 1 |
 | `DOCUMENTAZIONE` | `ENTRAMBE` | 8 |
 | `FISICA` | `1` | 343 |
-| `FISICA` | `2` | 61 |
+| `FISICA` | `2` | 62 |
 | `FISICA` | `ENTRAMBE` | 17 |
 | `INFRASTRUTTURA` | `1` | 39 |
 | `INFRASTRUTTURA` | `2` | 16 |
@@ -116,7 +116,7 @@
 | `C8` | MISURA | FISICA | 1 | ### **CHIUSA** |  | C8 VALE SEMPRE ⏳[EPOCA 1 · MISURA] / LA FASE 2 NON SI CHIUDE. Col tempo-luce cab |
 | `C9` | MISURA | FISICA | 1 | ### **CHIUSA** |  | C9 VALE SEMPRE ⏳[EPOCA 1 · MISURA] / --tau-luce ha un effetto GRANDE sulla pende |
 | `CAMMINATA-A-MONETA` | STANDARD | FISICA | 2 | ### **AGENDA** |  | la dinamica dell-era 2 e- una CAMMINATA QUANTISTICA A MONETA: una regola per tut |
-| `CAMMINATA-NELLA-TABELLA` | FRONTE | FISICA | 2 | ### **AGENDA** |  | la camminata NON resta nel banco: entra nella tabella delle leggi, col generator |
+| `CAMMINATA-NELLA-TABELLA` | FRONTE | FISICA | 2 | ### **AGENDA** |  | la camminata entra nella tabella -- ASSORBITA da SIMULATORE-ERA-2, e i quattro p |
 | `CARICA-DI-GAUGE` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | il segno di perc_chi dipende al 100 per cento dal rappresentante canonico: e' un |
 | `CARICA-PERCORSO` | FRONTE | FISICA | 1 | ### **SOSPESA** |  | l ordine in cui si chiude il filone della carica: cinque punti, e il primo si pu |
 | `CARICA-ROTAZIONE` | FRONTE | FISICA | 1 | ### **SOSPESA** |  | la carica e' il verso di rotazione collettivo: somma di /psi/^2 * phivel per mas |
@@ -745,6 +745,7 @@
 | `SIGILLO-REGISTRO-NON-CONFRONTABILE` | DIFETTO | INFRASTRUTTURA | 1 | ### **SOSPESA** |  | il comparatore del sigillo non sa confrontare _veleno_registro (un dict di array |
 | `SIGILLO-SENZA-CONFIGURAZIONE` | DIFETTO | INFRASTRUTTURA | 1 | ### **SOSPESA** |  | il sigillo prende la configurazione dal CLI del driver ma NON la timbra nel suo  |
 | `SIM-PRIMA-STANTIO` | DIFETTO | METODO | 1 | ### **CHIUSA** |  | il _sim_prima_controllo.py committato NON era il codice di prima: conteneva la c |
+| `SIMULATORE-ERA-2` | FRONTE | FISICA | 2 | ### **AGENDA** |  | basta prototipi: la camminata entra in primo_ordine e DIVENTA il simulatore |
 | `SMP-APRI-COMMENTO` | DIFETTO | DOCUMENTAZIONE | 1 | ### **SOSPESA** |  | il docstring di _smp_apri dice che la chiamano cinque leggi: oggi la chiama solo |
 | `SOGLIA-MITOSI-3PI` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | la soglia di mitosi e 2pi + pi col pi di dipolo MASSIMO, e in questa scena il di |
 | `SOGLIA-NON-MODULATA` | MISURA | FISICA | 1 | ### **CHIUSA** |  | la modulazione 0.3 della soglia non agisce: il gradiente di tempo proprio e' zer |

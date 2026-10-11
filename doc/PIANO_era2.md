@@ -212,3 +212,20 @@ non far sembrare `F4` la fine.**
 ### ⛔ **E UNA REGOLA CHE VALE PER TUTTE LE FASI:** un criterio di uscita che
 ### **non esce da un comando** non è un criterio. ### **Se una fase si dichiara chiusa, si
 dice CON QUALE COMANDO.**
+
+---
+
+## ⭐ **LA DECISIONE DI LUCA DEL `2026-10-11`: IL SIMULATORE DELL'ERA `2` NASCE DALLA CAMMINATA**
+
+> ### ⛔ **QUESTA SEZIONE *REGISTRA* UNA DECISIONE, e non cambia una fase.** Il mandato dice: *«aggiornamento di `doc/PIANO_era2.md` **SOLO per registrare questa decisione di Luca**»* — ### **quindi nessun criterio d'uscita e nessuna fase sono stati toccati.**
+
+### **La decisione, in una riga:** ### **basta prototipi** — il banco `proto_camminata` ha fissato la regola *(gauge `U(2)`, `C`, cono, reversibilita', una grandezza conservata oltre le norme)*, e da qui si costruisce il ### **simulatore completo** sulla fisica della camminata, ### **dentro `primo_ordine`**, col modello che resta: ### **tabella — generatore — codice generato — driver.**
+
+| | che cosa cambia nel piano |
+|---|---|
+| `1` | ### **le leggi dell'era `1` NON si riportano:** il simulatore nasce dalla fisica dell'era `2`, e l'era `1` resta ### **congelata a `b8c21049`** come ### **termine di confronto** |
+| `2` | ### **il banco `proto_camminata` diventa RIFERIMENTO CONGELATO:** non si cancella e ### **non si estende piu'** — nessun prototipo nuovo senza una decisione di Luca |
+| `3` | ### **le scelte di fisica non decise diventano POSTI DICHIARATI** che si comportano come `v3`, e ### **il generatore RIFIUTA** una tabella che accende un'alternativa non decisa senza la sua voce di decisione |
+| `4` | ### **il criterio di passaggio e' AL BIT:** il codice generato riproduce i numeri del banco `v3` sulle tre scene, o ### **entro ulp dichiarati e motivati PEZZO PER PEZZO**. ### ⛔ **Finche' non passa, il porting non e' fatto** |
+
+### 📌 **Il fronte e' `[[SIMULATORE-ERA-2]]`**, con le sette parti; e `[[CAMMINATA-NELLA-TABELLA]]` ### **e' ASSORBITA** da quello *(i suoi quattro punti sono ripresi la')*. ### ⚠ **E il suo stato resta `AGENDA` e non `SUPERATA`**, perche' `PI-ERA-STATO` pretende `AGENDA` ### **finche' l'era `2` non e' cominciata** — che e' esattamente cio' che questo mandato va a fare.
