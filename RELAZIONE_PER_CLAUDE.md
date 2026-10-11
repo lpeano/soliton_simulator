@@ -13804,3 +13804,15 @@ Ogni dato di `db_era2/` ha ### **il suo TIMBRO accanto**, col campo `versione_da
 
 ### ⭐ **E `I2` HA UN LEGAME CON IL RILIEVO CHE VALE LA PENA DIRE:** la cascata ### **esiste solo se la regola di connessione chiude cicli.** Se il nodo nuovo si collega ### **solo ai due genitori** non chiude nessun ciclo, quindi ### **non puo' generare niente** — cioe' ### **la stessa scelta decide se lo spazio e' tridimensionale E se sa crescere.**
 
+## ⭐ **LA DIAGNOSI DELLA MEMORIA PARTE IN PARALLELO, E PRIMA HO ESCLUSO LA SPIEGAZIONE PIU' FACILE** *(2026-10-11)*
+
+### ✅ **IL CONTROLLO DA DUE MINUTI CHE HO FATTO PRIMA DI SCRIVERE IL PROFILATORE:** un ### **accumulatore a livello di modulo** nel percorso caldo sarebbe esattamente questo difetto. ### **Cercato in nove moduli** *(`camminata`, `camminata2`, `camminata3`, `interferenza3`, `vuoto3`, `geometria`, `segni1`, `_letture3`, `scena`)*: l'unico contenitore mutabile di modulo e' ### **`SOTTO_USATI`** in `interferenza3`, e ### **tiene soltanto INTERI** — non e' lui.
+
+### ⛔ **QUINDI LA CAUSA NON E' OVVIA, E VA MISURATA** — che e' il motivo per cui il mandato chiede un profilatore e non un'ispezione.
+
+### ⭐ **E IL PROFILATORE E' COSTRUITO PER RISPONDERE A <<DOVE>>, non a <<quanto>>:** ripete ### **ogni pezzo del passo `60` volte** ripartendo ### **dallo STESSO stato** *(altrimenti misurerei anche la crescita dello stato, che non e' una perdita)*, fa `gc.collect()` ### **PRIMA del campione** *(cosi' si misura cio' che **non si libera**, non la spazzatura che aspetta)*, e adatta una retta per avere i ### **MB per giro con la loro `sigma`.**
+
+### 📌 **E IMPORTA il modulo del run invece di copiarne la funzione:** importare e' ### **leggere**, e misurare una copia vorrebbe dire ### **misurare un'altra funzione** — la domanda e' su ### **quella.**
+
+### ⚠ **IL TETTO E IL RISPETTO DEL RUN:** sopra `1.5` GB di privata si ferma ### **da solo** e scrive cio' che ha misurato; gira a ### **priorita' BASSA**; e controlla che il run ### **sia vivo PRIMA e DOPO**, riportandolo nel `json`.
+

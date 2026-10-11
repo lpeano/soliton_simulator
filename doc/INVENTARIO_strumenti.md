@@ -3279,3 +3279,14 @@ etichette rimosse, con ### **`0` persi, `0` doppi, `0` conflitti**.
 | ⚠ **E L'AFFINAMENTO MI SMENTISCE** | il raggio del `+D` cresce con pendenza `0.6302` contro `0.6537` del lineare, cioe' ### **rapporto `0.964`** — quindi ### **cio' che lega in `1D` e' il NUCLEO, non l'estensione**: un ### **picco che sopravvive sopra un fronte che si allarga alla velocita' della luce del grafo.** ### **Il *<<lega in `1D`>>* del referto vecchio e' TROPPO FORTE** |
 | 📌 **il TETTO del tempo, dichiarato** | `40` tick, per ### **due motivi misurati**: `M1` osservava a `min(40, t_max)` *(confrontabilita')*, e le differenze dal lineare ### **CALANO con `t`** *(`0.5052` a `t = 4`, `0.0709` a `t = 80`)* — osservare piu' a lungo ### **DILUISCE** |
 
+### ⭐ **LA DIAGNOSI DELLA MEMORIA, in parallelo al run** *(`[[MEMORIA-PER-TICK]]`, 2026-10-11)*
+
+| | |
+|---|---|
+| **i file** | `_diagnosi_memoria.py` *(BLOB `a3d14717`)* |
+| **COMANDO** | `python proto_camminata/_diagnosi_memoria.py [PID_DEL_RUN]` *(scrive `uscite/diagnosi_memoria.json`)* |
+| **che cosa misura** | la crescita della memoria ### **PRIVATA per GIRO**, pezzo per pezzo del passo *(moneta di spin, Grover, spostamento, flusso `N`, punto medio implicito di `D`, la misura, il grumo, il passo intero, e la `profilo` del run)*, piu' le ### **righe che crescono** secondo `tracemalloc` |
+| ⛔ **E NON TOCCA NESSUN FILE DEL RUN** | i moduli del run si ### **IMPORTANO e si LEGGONO** *(par.5)*, e ### **importare e' leggere** — misurare una COPIA della `profilo` vorrebbe dire misurare ### **un'altra funzione** |
+| ⚠ **il TETTO di sicurezza** | sopra `1.5` GB di privata ### **si ferma da solo** e scrive cio' che ha misurato; e gira a ### **priorita' BASSA**, per non rallentare il run |
+| 📌 **e il limite di `tracemalloc`, dichiarato** | vede ### **solo l'allocatore di Python**, e i buffer di `numpy` di norma usano ### **`malloc` diretto** — se il totale tracciato e' molto piu' piccolo della crescita vista dal sistema, ### **la causa e' fuori dal suo sguardo** -- e il confronto fra i due numeri e' ### **esso stesso un risultato** |
+
