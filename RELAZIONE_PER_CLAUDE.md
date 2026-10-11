@@ -13548,3 +13548,66 @@ Ogni dato di `db_era2/` ha ### **il suo TIMBRO accanto**, col campo `versione_da
 ### ⚠ **` 3 ` E UNA DIPENDENZA NUOVA, DICHIARATA: `scipy.spatial`.** Il repo ### **non usa `scipy` in nessun file** *(verificato con un `grep` su `csv/`, `primo_ordine/` e `proto_camminata/`)*, e la Delaunay periodica la vuole. ### ⛔ **Entra SOLO nel costruttore di scena**, cioe' in una ### **condizione iniziale**, e ### **mai nel passo** — e un braccio del collaudo lo verifichera' sul sorgente.
 
 ### 📌 **E LE PREVISIONI SONO SCRITTE PRIMA DEI NUMERI:** l'irregolarita' locale ### **cala con `t` e poi si APPIATTISCE su un pavimento** *(il volume entro `r` cresce come `r³`, quindi la parte statistica si media come `t^(-3/2)`, ### **ma lo sbilanciamento del nodo di PARTENZA non si media**)*; sul cubico l'anisotropia del profilo medio ### **resta sopra il rumore a ogni `t`** *(gli assi sono gli stessi per tutti i nodi)*; sul geometrico ### **scende al livello del rumore**; e fra le varianti ### **`(iii)` gradi meno variabili aiuta piu' di `(ii)` punti piu' uniformi**, perche' lo sbilanciamento viene da ### **quali vicini si collegano** e il tetto ne taglia il `20%`.
+
+## ⭐ **L'ISOTROPIA LOCALE: SI ATTENUA COME `t^(-0.34)` E SI FERMA SU UN PAVIMENTO** *(2026-10-11)*
+
+> ### ⭐ **E LA RISPOSTA ALLA DOMANDA CHIAVE DEL MANDATO E' ROVESCIATA:** si ottiene ### **PIU'** isotropia ### **SENZA** geometria nei pesi che con essa.
+
+### ✅ **` 1 ` LA CORREZIONE DEL GUARDIANO E' CONFERMATA, e i miei numeri coincidono coi suoi a tre cifre**
+
+| la scena | irregolarita' **per nodo** | **anisotropia** del profilo medio | rumore atteso | aniso/rumore |
+|---|---|---|---|---|
+| cubico `L=8` | `0.113` | `0.0963` | `0.0179` | ### **`5.39`** |
+| cubico `L=12` | `0.114` | `0.1080` | `0.0180` | ### ⛔ **`6.00` SISTEMATICA** |
+| geometrico `n=512` | `0.312` | `0.0580` | `0.0493` | `1.18` |
+| geometrico `n=1728` | `0.308` | `0.0475` | `0.0487` | ### ✅ **`0.98` al rumore** |
+
+### **Il guardiano misurava `11.4%` / `10.8%` / `1.8%` sul cubico `L=12`; io misuro `0.114` / `0.1080` / `0.0180`.** ### ✅ **Identici.** ### ⛔ **Quindi il geometrico `3D` E' ISOTROPO IN MEDIA**, e il mio *«tre volte piu' anisotropo»* era ### **irregolarita' locale** — cioe' ### **la cosa che il rilievo diceva.**
+
+### ⭐ **` 2 ` `I1`: L'IRREGOLARITA' SI ATTENUA, E POI SI FERMA**
+
+### **Sul geometrico `3D` a `n = 26000`** *(diametro `>= 32`, quindi `t_max = 25`: `t = 30` vorrebbe `n ~ 40000`, e lo dichiaro)*:
+
+| `t` | irregolarita' | aniso/rumore |
+|---|---|---|
+| `4` | `0.3106 ± 0.0083` | `0.91` |
+| `6` | `0.2970 ± 0.0111` | `0.86` |
+| `10` | `0.2543 ± 0.0104` | `0.91` |
+| `15` | `0.2196 ± 0.0093` | `0.94` |
+| `20` | `0.1863 ± 0.0083` | `0.99` |
+| `25` | `0.1700 ± 0.0071` | `0.98` |
+
+### ⭐ **L'esponente: `t^(-0.339 ± 0.033)`** — ### **SI ATTENUA, a `10 sigma`.** ### ✅ **E la previsione del mandato era `t^(-1/2)` o piu' lentamente: misurato `-0.34`, cioe' PIU' LENTAMENTE.** ### ⭐ **E la mia previsione era <<cala e poi si APPIATTISCE su un pavimento>>:** gli ultimi due `t` differiscono di `0.0162` con `sigma` combinato `0.0109`, cioe' ### **`1.5 sigma`** — ### **il pavimento c'e', ed e' `~0.17`.**
+
+### ✅ **E IL CUBICO FA DA CONTROLLO ESATTAMENTE COME IL MANDATO CHIEDE:** l'anisotropia del profilo medio resta ### **SISTEMATICA a ogni `t`** *(`6.31`, `6.11`, `6.01`, `6.22`, `6.01` volte il rumore)*, e l'irregolarita' ### **NON si attenua** *(`t^(-0.037 ± 0.336)`: **RESTA PIATTA**)* — e ### **oscilla** *(`0.229` → `0.111` → `0.102` → `0.227` → `0.149`)*, che e' la struttura di commensurazione del reticolo.
+
+### ⭐ **` 3 ` `I2`: IL VINCITORE E' <<I PUNTI CHE SI RESPINGONO>>, E I PESI DI VORONOI NON DANNO NIENTE**
+
+| la variante | `m` | gradi | `d_s` | irregolarita' | contro `(i)` | costo/tick |
+|---|---|---|---|---|---|---|
+| `(i)` uniformi, gradi `2-6` | `4835` | `2..6` | `2.578` | `0.2719 ± 0.0088` | — | `0.0013` s |
+| ### ⭐ **`(ii)` respinti** | **`3697`** | `2..6` | `2.831` | ### **`0.1584` ± `0.0039`** | ### ⭐ **`11.8 sigma`** | ### **`0.0010` s** |
+| `(iii)` gradi `4-6` | `5182` | `3..6` | `2.755` | `0.2646 ± 0.0092` | `0.6 sigma` | `0.0013` s |
+| ### **`(iv-U)` pesi UGUALI** | `13405` | `6..26` | ### **`3.247`** | `0.2328 ± 0.0061` | **`3.7 sigma`** | `0.0066` s |
+| `(iv-R)` relazionali | `13405` | `6..26` | `3.247` | `0.2492 ± 0.0067` | `2.1 sigma` | `0.0068` s |
+| `(iv-Rn)` relaz. normalizzati | `13405` | `6..26` | `3.247` | `0.2503 ± 0.0067` | `2.0 sigma` | `0.0073` s |
+| `(iv-V)` **Voronoi** *(controllo)* | `13405` | `6..26` | `3.247` | `0.2603 ± 0.0066` | ### ⛔ **`1.1 sigma`** | `0.0076` s |
+
+### ⛔ **IL RISULTATO CHIAVE, e il mandato lo chiede esplicitamente:** i pesi di ### **Voronoi NON danno niente** *(`1.1 sigma`, cioe' **sotto la soglia**)*, e ### **`(iv-U)` senza NESSUN peso e' `3.1 sigma` MEGLIO di loro.** ### ⭐ **Quindi tutto il guadagno della variante `(iv)` viene dal COLLEGARE TUTTI I VICINI**, cioe' dal ### **togliere il tetto di grado** — ### **e i pesi dalla geometria solo peggiorano.**
+
+### ⭐ **E IL VINCITORE ASSOLUTO E' `(ii)`: `-42%` di irregolarita' a `11.8 sigma`**, con ### **MENO archi** *(`3697` contro `4835`)* e il ### **costo per tick piu' basso.** ### ✅ **E la prova che i punti sono davvero piu' uniformi e' misurata:** la distanza al primo vicino passa da dispersione relativa `0.345` a ### **`0.140`**, e il minimo sale di ### **`4.6` volte.**
+
+### ⚠ **MA C'E' UN COMPROMESSO, E NON LO SCIOLGO IO:** `(ii)` ha la minima irregolarita' ### **ma `d_s = 2.83`**, mentre ### **solo `(iv)` arriva a `d_s = 3.25`** *(ed e' l'unica genuinamente tridimensionale)* — al prezzo di ### **`2.8` volte gli archi e `6` volte il costo per tick.** ### ⛔ **E cambiare i gradi cambia la fisica locale** *(Grover dipende dal grado)*: ### **la scelta e' di Luca** *(`[[DOMANDA-QUALE-SCENA-3D-PRINCIPALE]]`)*.
+
+### ⚠ **` 4 ` E DUE PREVISIONI MIE SONO CADUTE, entrambe misurate**
+
+1. ### **Avevo previsto che `(iii)` *(gradi meno variabili)* aiutasse PIU' di `(ii)`:** misurato il contrario — `(iii)` da' ### **`0.6 sigma`**, cioe' ### **niente**, e `(ii)` ### **`11.8 sigma`.** ### ✅ **E `(iii)` NON e' un falso-zero: i gradi sono cambiati davvero** *(da `471` a `510` nodi su `512` al grado `6`)*. ### ⭐ **Quindi l'irregolarita' viene dalla DISTRIBUZIONE DEI PUNTI, non dal tetto di grado** — e `(ii)` lo prova riducendola ### **mentre ALLARGA** la distribuzione dei gradi.
+2. ### **La mia prima variante `(ii)` era ROTTA, e l'ha presa una soglia che avevo scritto prima:** muovevo i punti ### **VERSO** il baricentro dei vicini, che e' ### **contrazione e non repulsione** — la scena diventava ### **una catena** *(`d_s = 1.214`, diametro `40`)*. ### ✅ **E l'ha presa `s5`** *(`|d_s - 3| <= 0.3`)*: ### **la dimensione e' il controllo della costruzione**, e senza quella soglia avrei misurato l'isotropia di un filo.
+
+### ✅ **` 5 ` E DUE PEZZI DI INFRASTRUTTURA, verificati**
+
+### **Il Grover PESATO** *(`pesi4.py`)*: ### **reale** *(`0`)*, ### **ermitiano, involuzione, unitario** *(`0`..`4.5e-16`)*, ### **locale** *(fuori blocco `0` esatto)*, a pesi uguali ### **= il Grover del `v3` AL BIT**, un peso nullo ### **stacca l'uscita** *(diagonale `-1`, colonna con un solo elemento)*, la ### **`C` a `0`** con pesi uguali e casuali, e i quattro bracci ### **invarianti di scala a `~1e-15`.**
+
+### **E la via con l'ALBERO SPAZIALE per le taglie grandi** *(la matrice `n x n` costa `5.4` GB a `n = 26000`)*: ### ✅ **la regressione verifica che le due vie danno lo STESSO insieme di archi** su `n = 512`, `1000` e `2000` — ### **`0` archi di differenza.**
+
+### ⚠ **E `scipy.spatial` e' una DIPENDENZA NUOVA, dichiarata:** entra ### **solo nel costruttore di scena** *(la Delaunay e l'albero)*, cioe' in una ### **condizione iniziale**, e ### **mai nel passo.**

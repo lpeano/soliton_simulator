@@ -47,6 +47,15 @@ sys.path.insert(0, _QUI)
 import scena as SC                                             # noqa: E402
 
 FAMIGLIE = ("cubico", "geometrico3d", "anello", "casuale")
+# ### ⛔ **LA SOGLIA FRA LE DUE VIE, e il motivo e- la MEMORIA:** la matrice `n x n` costa
+# ### `8 n²` byte, cioe- ### **`0.5` GB a `n = 8000`** e ### **`5.4` GB a `n = 26000`.**
+# ### **Sotto la soglia si fanno tutte le coppie** *(ed e- la via che la regressione
+# ### verifica)*, sopra si usa un ### **albero spaziale periodico.**
+MAX_N2 = 4000
+# ### ⚠ **E `K_ALBERO` NON E- UNA COSTANTE DI UNA LEGGE: e- un BUDGET di candidati**, e
+# ### ### **la regressione a `n = 512` dimostra che basta** -- un nodo di grado `<= 6` non
+# ### si collega mai oltre il suo ventesimo vicino.
+K_ALBERO = 20
 
 
 def cubico(L):
@@ -93,6 +102,54 @@ def punti3d(n, seme=11):
     return np.random.default_rng(seme).random((n, 3))
 
 
+def punti3d_rilassati(n, seme=11, giri=20):
+    """### `(ii)` **PUNTI CHE SI RESPINGONO**: rilassamento di Lloyd **sul toro**.
+
+    ### \u26d4 **E LA FORMA SI DICHIARA, perche' non e' il Lloyd esatto:** il Lloyd vero
+    sposta ogni punto nel ### **baricentro della sua cella di Voronoi**, che in `3D`
+    periodico vuole il diagramma. ### **Qui si sposta ogni punto nel baricentro dei suoi
+    vicini piu' prossimi**, sul toro, per un numero di giri ### **dichiarato** -- e
+    l'effetto si ### **MISURA** *(la distribuzione della distanza al primo vicino)* invece
+    di affermarlo.
+
+    ### \u26a0 **E il baricentro si calcola CON LE DIFFERENZE PERIODICHE**, altrimenti due
+    punti ai lati opposti del cubo si attirerebbero ### **attraverso il centro.**
+    """
+    p = np.random.default_rng(seme).random((n, 3))
+    k = 12
+    for _ in range(giri):
+        d2 = _d2_periodica(p)
+        np.fill_diagonal(d2, np.inf)
+        vic = np.argpartition(d2, k, axis=1)[:, :k]
+        nuovo = np.empty_like(p)
+        for i in range(n):
+            dv = p[vic[i]] - p[i]
+            dv = dv - np.round(dv)
+            nr = np.linalg.norm(dv, axis=1)
+            buoni = nr > 0
+            if not np.any(buoni):
+                nuovo[i] = p[i]
+                continue
+            # ### ⛔ **SI RESPINGONO, E AL PRIMO GIRO AVEVO IL SEGNO SBAGLIATO:**
+            # ### muovere ogni punto ### **VERSO** il baricentro dei vicini e-
+            # ### ### **CONTRAZIONE**, non repulsione -- i punti si ammassano, e la scena
+            # ### diventava ### **una catena** *(`d_s = 1.214`, diametro `40`)*.
+            # ### ⭐ **E L-HA PRESO LA SOGLIA `s5` CHE AVEVO SCRITTO PRIMA**
+            # ### *(`|d_s - 3| <= 0.3`)*: ### **la dimensione e- il controllo della
+            # ### costruzione.**
+            # ### ✅ **La repulsione: la somma dei versori che vanno DAI vicini A `i`**,
+            # ### pesata come `1/distanza` *(i piu- vicini spingono di piu-)*, e un passo
+            # ### proporzionale alla distanza media -- cosi- ### **non c-e- una lunghezza
+            # ### scelta a mano.**
+            u = -dv[buoni] / nr[buoni, None]
+            spinta = (u / nr[buoni, None]).sum(axis=0)
+            sn = np.linalg.norm(spinta)
+            passo = 0.2 * float(np.mean(nr[buoni]))
+            nuovo[i] = p[i] + (passo * spinta / sn if sn > 0 else 0.0)
+        p = np.mod(nuovo, 1.0)
+    return p
+
+
 def _d2_periodica(p):
     """### Le distanze al quadrato **SUL TORO**: `min(|d|, 1-|d|)` per asse.
 
@@ -105,7 +162,7 @@ def _d2_periodica(p):
     return (d ** 2).sum(axis=2)
 
 
-def geometrico3d(n, gmin=2, gmax=6, seme=11):
+def geometrico3d(n, gmin=2, gmax=6, seme=11, rilassati=False):
     """### `G3`, **LA SCENA PRINCIPALE**: grafo geometrico `3D` **PERIODICO**, posizioni SCARTATE.
 
     ### ⛔ **Le posizioni vivono SOLO dentro questa funzione:** la scena che esce
@@ -113,7 +170,7 @@ def geometrico3d(n, gmin=2, gmax=6, seme=11):
     l-osservatore si richiamano con `punti3d(n, seme)`**, che le ricostruisce
     ### **identiche** perche' il seme e' lo stesso.
     """
-    p = punti3d(n, seme)
+    p = punti3d_rilassati(n, seme) if rilassati else punti3d(n, seme)
     archi = set()
     grado = np.zeros(n, dtype=int)
 
@@ -128,14 +185,42 @@ def geometrico3d(n, gmin=2, gmax=6, seme=11):
         grado[v] += 1
         return True
 
-    # ### ⭐ **TUTTE le coppie, ordinate per DISTANZA**: cosi- il grafo e- ### **geometrico**
-    # ### *(i vicini sono vicini)*, e ### **deterministico** *(l-ordine e- quello delle
-    # ### distanze, e i pari merito si rompono con l-indice)*.
-    d2 = _d2_periodica(p)
-    iu = np.triu_indices(n, 1)
-    ordine = np.lexsort((iu[1], iu[0], d2[iu]))
-    for q in ordine:
-        u, v = int(iu[0][q]), int(iu[1][q])
+    # ### ⭐ **TUTTE le coppie CANDIDATE, ordinate per DISTANZA**: cosi- il grafo e-
+    # ### ### **geometrico** *(i vicini sono vicini)*, e ### **deterministico** *(l-ordine
+    # ### e- quello delle distanze, e i pari merito si rompono con l-indice)*.
+    # ### ⛔ **E SOPRA `MAX_N2` LE COPPIE NON SI FANNO TUTTE:** la matrice `n x n` costa
+    # ### ### **`5.4` GB a `n = 26000`**, e un albero spaziale periodico da- gli stessi
+    # ### archi ### **perche- un nodo di grado `<= gmax` non si collega mai oltre il suo
+    # ### `K_ALBERO`-esimo vicino.** ### ✅ **E LA REGRESSIONE LO VERIFICA:** a `n = 512` le
+    # ### due vie danno ### **lo STESSO insieme di archi.**
+    if n <= MAX_N2:
+        d2 = _d2_periodica(p)
+        iu = np.triu_indices(n, 1)
+        ordine = np.lexsort((iu[1], iu[0], d2[iu]))
+        coppie = [(int(iu[0][q]), int(iu[1][q])) for q in ordine]
+
+        def dist2(x, y):
+            return float(d2[x, y])
+    else:
+        from scipy.spatial import cKDTree
+        tr = cKDTree(p, boxsize=1.0)
+        dd, ii = tr.query(p, k=min(K_ALBERO + 1, n))
+        cand = {}
+        for x in range(n):
+            for j in range(1, ii.shape[1]):
+                y = int(ii[x, j])
+                if y == x:
+                    continue
+                a2, b2 = (x, y) if x < y else (y, x)
+                cand[(a2, b2)] = float(dd[x, j]) ** 2
+        chiavi = sorted(cand, key=lambda k2: (cand[k2], k2[0], k2[1]))
+        coppie = list(chiavi)
+
+        def dist2(x, y):
+            a2, b2 = (x, y) if x < y else (y, x)
+            return cand.get((a2, b2), float("inf"))
+
+    for u, v in coppie:
         if grado.min() >= gmin and len(archi) >= n:
             # ### si continua solo finche- serve: ### **gradi almeno `gmin`**
             if grado[u] >= gmin and grado[v] >= gmin:
@@ -145,7 +230,10 @@ def geometrico3d(n, gmin=2, gmax=6, seme=11):
             break
     # ### ⛔ **E IL GRAFO DEVE ESSERE CONNESSO**, altrimenti ### **meta- delle letture non
     # ### vorrebbe dire niente** -- si attacca il resto al piu- vicino gia- connesso.
-    sc = SC.costruisci(n, sorted(archi), "geometrico3d(n=%d,seme=%d)" % (n, seme))
+    nome = "geometrico3d(n=%d,seme=%d%s%s)" % (
+        n, seme, ",rilassati" if rilassati else "",
+        ",gradi=%d-%d" % (gmin, gmax) if (gmin, gmax) != (2, 6) else "")
+    sc = SC.costruisci(n, sorted(archi), nome)
     d = SC.distanze(sc, 0)
     giro = 0
     while int(np.sum(d < 0)) > 0 and giro < 64:
@@ -154,8 +242,8 @@ def geometrico3d(n, gmin=2, gmax=6, seme=11):
         dentro = [k for k in range(n) if d[k] >= 0]
         best = None
         for u in fuori:
-            j = min(dentro, key=lambda w: d2[u, w])
-            if best is None or d2[u, j] < d2[best[0], best[1]]:
+            j = min(dentro, key=lambda w: dist2(u, w))
+            if best is None or dist2(u, j) < dist2(best[0], best[1]):
                 best = (u, j)
         if best is None or not aggiungi(best[0], best[1]):
             # ### se non si puo- attaccare, si alza il tetto SOLO per quell-arco e
@@ -164,11 +252,10 @@ def geometrico3d(n, gmin=2, gmax=6, seme=11):
             archi.add((min(u, j), max(u, j)))
             grado[u] += 1
             grado[j] += 1
-        sc = SC.costruisci(n, sorted(archi),
-                           "geometrico3d(n=%d,seme=%d)" % (n, seme))
+        sc = SC.costruisci(n, sorted(archi), nome)
         d = SC.distanze(sc, 0)
     # ### ⛔ **E QUI LE POSIZIONI MUOIONO:** `sc` non le contiene, e `p` esce di scope.
-    del p, d2
+    del p
     return sc
 
 
@@ -273,7 +360,13 @@ def _direzioni():
 DIREZIONI = _direzioni()
 
 
-def isotropia(sc, pos, passi=6, nodi=(0,), versori_uguali=False, eps=0.5):
+def nodi_a_caso(sc, quanti=40, seme=1):
+    """### I nodi di partenza, **deterministici dal seme**: il mandato dice `40`, seme `1`."""
+    return np.random.default_rng(seme).choice(sc["n"], size=min(quanti, sc["n"]),
+                                              replace=False)
+
+
+def isotropia(sc, pos, passi=6, nodi=(0,), versori_uguali=False, eps=0.5, peso=None):
     """### La dispersione della velocita' del fronte **fra DIREZIONI**.
 
     ### ⛔ **LE POSIZIONI SERVONO SOLO A LEGGERE:** si usano per dire *«in che direzione
@@ -296,6 +389,15 @@ def isotropia(sc, pos, passi=6, nodi=(0,), versori_uguali=False, eps=0.5):
         u[:, 2] = 1.0
         geo["n"] = u
     uno_r = np.ones(sc["n"], dtype=float)
+
+    def passo(v):
+        """### Il passo lineare `v2`, col Grover ### **PESATO** se `peso` c-e-."""
+        if peso is None:
+            return C2.passo2(v, sc, geo, uno_r, 1.0, eps)
+        import pesi4 as P4
+        x = C2.moneta_spin(v, geo, eps, uno_r * 1.0, sc)
+        x = P4.grover_pesato(x, sc, peso)
+        return C2.spostamento_trasporto(x, geo, sc)
     per_nodo = []
     for da in nodi:
         da = int(da)
@@ -313,7 +415,7 @@ def isotropia(sc, pos, passi=6, nodi=(0,), versori_uguali=False, eps=0.5):
                 psi[e, 0] = 1.0
         psi = psi / math.sqrt(CM.norma(psi))
         for _ in range(passi):
-            psi = C2.passo2(psi, sc, geo, uno_r, 1.0, eps)
+            psi = passo(psi)
         rho = CM.rho_nodo(psi, sc)
         # ### \u26d4 **DUE MISURANDI, E RISPONDONO A DUE DOMANDE DIVERSE:**
         # ### \u2b50 **`grafo`**: la distanza DI GRAFO media per cono. ### **E- isotropa
@@ -325,45 +427,91 @@ def isotropia(sc, pos, passi=6, nodi=(0,), versori_uguali=False, eps=0.5):
         # ### gli assi** -- gli <<spigoli>> che il rilievo nomina.
         # ### \u26a0 **Riportarne uno solo sarebbe rispondere a una domanda diversa da
         # ### quella posta**, e il primo giro l-ho fatto.
-        vel_g, vel_e = [], []
+        # ### \u26d4 **IL PROFILO PER DIREZIONE SI CONSERVA, allineato alle `26`
+        # ### direzioni**, con `nan` dove il cono e- VUOTO: ### **senza l-allineamento il
+        # ### profilo MEDIO non si puo- fare.**
+        pg = np.full(len(DIREZIONI), np.nan)
+        pe = np.full(len(DIREZIONI), np.nan)
         for j in range(len(DIREZIONI)):
             dove = (cono == j) & (d >= 0)
             w = float(np.sum(rho[dove]))
             if w <= 0:
                 continue
-            vel_g.append(float(np.sum(rho[dove] * d[dove]) / w) / passi)
-            vel_e.append(float(np.sum(rho[dove] * nr[dove]) / w) / passi)
-        if len(vel_g) < 4:
+            pg[j] = float(np.sum(rho[dove] * d[dove]) / w) / passi
+            pe[j] = float(np.sum(rho[dove] * nr[dove]) / w) / passi
+        vel_g = pg[np.isfinite(pg)]
+        vel_e = pe[np.isfinite(pe)]
+        if vel_g.size < 4:
             continue
 
         def disp(v):
             m = float(np.mean(v))
             return (float(np.std(v, ddof=1) / m) if m > 0 else float("nan"))
-        per_nodo.append({"nodo": da, "coni_usati": len(vel_g),
+        per_nodo.append({"nodo": da, "coni_usati": int(vel_g.size),
                          "velocita_media_grafo": float(np.mean(vel_g)),
                          "velocita_media_euclidea": float(np.mean(vel_e)),
                          "relativa": disp(vel_g),
-                         "relativa_euclidea": disp(vel_e)})
+                         "relativa_euclidea": disp(vel_e),
+                         "profilo_grafo": pg.tolist(),
+                         "profilo_euclideo": pe.tolist()})
     if not per_nodo:
-        return {"anisotropia": float("nan"), "nota": "coni troppo pochi",
-                "per_nodo": []}
-    rel = [x["relativa"] for x in per_nodo]
-    rel_e = [x["relativa_euclidea"] for x in per_nodo]
-    return {"anisotropia": float(np.mean(rel)),
-            "anisotropia_euclidea": float(np.mean(rel_e)),
-            "sigma": (float(np.std(rel, ddof=1)) / math.sqrt(len(rel))
-                      if len(rel) > 1 else 0.0),
-            "sigma_euclidea": (float(np.std(rel_e, ddof=1)) / math.sqrt(len(rel_e))
-                               if len(rel_e) > 1 else 0.0),
+        return {"irregolarita": float("nan"), "anisotropia": float("nan"),
+                "rumore": float("nan"), "nota": "coni troppo pochi", "per_nodo": []}
+    # ### \u26d4 **LE TRE GRANDEZZE, E SONO TRE COSE DIVERSE** *(correzione del guardiano,
+    # ### `2026-10-11`)*:
+    # ### \u2b50 **`irregolarita`** = la media delle dispersioni ### **PER NODO**. Su un
+    # ### grafo irregolare misura ### **quanto e- irregolare il vicinato di quel nodo**,
+    # ### non una dipendenza dalla direzione. ### **E- quello che misuravo prima, e lo
+    # ### chiamavo <<anisotropia>>: era il difetto.**
+    # ### \u2b50 **`anisotropia`** = la dispersione del ### **PROFILO MEDIO**: si media il
+    # ### profilo per direzione ### **su tutti i nodi**, e POI si guarda la dispersione.
+    # ### **Questa e- l-anisotropia**, cioe- una dipendenza ### **SISTEMATICA** dalla
+    # ### direzione.
+    # ### \u2b50 **`rumore`** = il livello atteso dal solo rumore: la dispersione per nodo
+    # ### ### **diviso la radice del numero di nodi.** ### **Senza di lui l-anisotropia non
+    # ### si sa leggere.**
+    def tre(chiave, prof):
+        rel = [x[chiave] for x in per_nodo]
+        # ### il profilo MEDIO per direzione: `nanmean` perche- un cono puo- essere VUOTO
+        M = np.array([x[prof] for x in per_nodo], dtype=float)
+        with np.errstate(invalid="ignore"):
+            medio = np.nanmean(M, axis=0)
+        buoni = np.isfinite(medio)
+        mm = float(np.mean(medio[buoni])) if np.any(buoni) else float("nan")
+        aniso = (float(np.std(medio[buoni], ddof=1)) / mm
+                 if (np.sum(buoni) > 1 and mm > 0) else float("nan"))
+        irr = float(np.mean(rel))
+        return {
+            "irregolarita": irr,
+            "sigma_irregolarita": (float(np.std(rel, ddof=1)) / math.sqrt(len(rel))
+                                   if len(rel) > 1 else 0.0),
+            "anisotropia": aniso,
+            "rumore": irr / math.sqrt(len(per_nodo)),
+            "coni_usati": int(np.sum(buoni)),
+            # ### \u26d4 **IL VERDETTO E- UN RAPPORTO, non un numero nudo:** l-anisotropia
+            # ### ### **contro il rumore atteso.** Sopra `3` e- sistematica.
+            "aniso_su_rumore": (aniso / (irr / math.sqrt(len(per_nodo))))
+            if (aniso == aniso and irr > 0) else float("nan"),
+            "sistematica": bool(aniso == aniso and irr > 0
+                                and aniso > 3.0 * irr / math.sqrt(len(per_nodo)))}
+    g = tre("relativa", "profilo_grafo")
+    e = tre("relativa_euclidea", "profilo_euclideo")
+    return {"grafo": g, "euclideo": e,
+            # ### le vecchie chiavi restano, per non rompere chi le legge
+            "irregolarita": g["irregolarita"], "anisotropia": e["anisotropia"],
+            "rumore": e["rumore"],
             "nodi": len(per_nodo), "passi": passi,
             "versori_uguali": bool(versori_uguali),
+            "pesato": bool(peso is not None),
             "direzioni": int(len(DIREZIONI)), "per_nodo": per_nodo}
 
 
-def etichetta(nome, aniso=None, soglia=0.10):
-    # ### \u26d4 **L-ETICHETTA USA IL MISURANDO *EUCLIDEO*, perche- e- quello che il
-    # ### rilievo nomina** *(<<il fronte ha spigoli lungo gli assi>>)*. ### **La soglia e-
-    # ### `10%`, dichiarata PRIMA della corsa** *(sta in questa firma, scritta col codice)*.
+def etichetta(nome, aniso=None, soglia=3.0):
+    # ### \u26d4 **L-ETICHETTA USA L-ANISOTROPIA DEL PROFILO MEDIO CONTRO IL RUMORE
+    # ### ATTESO** *(correzione del guardiano)*: `aniso` e- il ### **rapporto
+    # ### `anisotropia / rumore`**, e la soglia e- ### **`3`.**
+    # ### \u26a0 **Prima era <<il `10%` della dispersione per nodo>>, e quella e-
+    # ### IRREGOLARITA- LOCALE, non anisotropia.**
     """### `1D` / `3D isotropa` / `3D anisotropa` / `casuale`.
 
     ### ⛔ **E <<isotropa>> E- UNA SOGLIA DICHIARATA**, non un giudizio: anisotropia
@@ -384,26 +532,19 @@ if __name__ == "__main__":
     import _presidio
     _presidio.avvia(__file__)
     SC._niente_simulatore()
-    print("  (aniso: dispersione della velocita- del fronte fra 26 direzioni;")
-    print("   `graf` = distanza di GRAFO, `eucl` = distanza EUCLIDEA; `=` = versori uguali)")
-    print("  %-22s %-7s %-10s %-7s %-7s %-9s %-9s %-9s %-9s %s"
-          % ("la scena", "n", "gradi", "diam", "d_s", "graf v3", "eucl v3",
-             "graf =", "eucl =", "etichetta"))
-    # ### ⭐ **LA DIMENSIONE SI MISURA SU SCENE GRANDI, e il motivo e- la FINESTRA:**
-    # ### la potenza vale finche- la diffusione non satura, e su un reticolo piccolo quella
-    # ### finestra e- ### **di pochi punti.** ### **La dimensione e- una proprieta- della
-    # ### FAMIGLIA**, non della taglia usata per lo spettro -- e la passeggiata classica
-    # ### costa ### **`O(m)` per passo**, quindi `n = 8000` e- gratis.
-    for nome, sc in (("cubico L=5", cubico(5)),
-                     ("cubico L=8", cubico(8)),
+    print("  LE TRE GRANDEZZE: irregolarita- per nodo, anisotropia del PROFILO MEDIO,")
+    print("  e il RUMORE ATTESO. ### **La terza e- quella che fa leggere la seconda.**")
+    print()
+    print("  %-30s %-7s %-6s %-7s %-9s %-9s %-9s %s"
+          % ("la scena", "n", "diam", "d_s", "irregol.", "aniso", "rumore",
+             "aniso/rumore"))
+    for nome, sc in (("cubico L=8", cubico(8)),
                      ("cubico L=12", cubico(12)),
-                     ("cubico L=20", cubico(20)),
-                     ("geometrico3d n=512", geometrico3d(512)),
-                     ("geometrico3d n=4000", geometrico3d(4000)),
-                     ("regolare n=120", SC.regolare(120)),
-                     ("regolare n=2000", SC.regolare(2000)),
-                     ("irregolare n=120", SC.irregolare(120)),
-                     ("irregolare n=2000", SC.irregolare(2000))):
+                     ("(i) geometrico n=512", geometrico3d(512)),
+                     ("(i) geometrico n=1728", geometrico3d(1728)),
+                     ("(ii) rilassati n=512", geometrico3d(512, rilassati=True)),
+                     ("(iii) gradi 4-6 n=512", geometrico3d(512, gmin=4, gmax=6)),
+                     ("regolare n=120", SC.regolare(120))):
         diam = max(int(SC.distanze(sc, k).max())
                    for k in range(0, sc["n"], max(1, sc["n"] // 24)))
         ds = dimensione_spettrale(sc, diam, semi_nodi=(0, sc["n"] // 3, sc["n"] // 2))
@@ -411,19 +552,15 @@ if __name__ == "__main__":
         if sc["nome"].startswith("cubico"):
             pos = punti_cubico(int(round(sc["n"] ** (1.0 / 3.0))))
         elif sc["nome"].startswith("geometrico3d"):
-            pos = punti3d(sc["n"], 11)
-        ag = ae = agu = aeu = float("nan")
-        if pos is not None:
-            nodi = (0, sc["n"] // 3, sc["n"] // 2, 2 * sc["n"] // 3)
-            r1 = isotropia(sc, pos, nodi=nodi)
-            r2 = isotropia(sc, pos, nodi=nodi, versori_uguali=True)
-            ag, ae = r1["anisotropia"], r1["anisotropia_euclidea"]
-            agu, aeu = r2["anisotropia"], r2["anisotropia_euclidea"]
-        print("  %-22s %-7d %-10s %-7d %-7.3f %-9s %-9s %-9s %-9s %s"
-              % (nome, sc["n"],
-                 "%d..%d" % (sc["grado"].min(), sc["grado"].max()), diam, ds["d_s"],
-                 ("%.1f%%" % (100 * ag)) if ag == ag else "--",
-                 ("%.1f%%" % (100 * ae)) if ae == ae else "--",
-                 ("%.1f%%" % (100 * agu)) if agu == agu else "--",
-                 ("%.1f%%" % (100 * aeu)) if aeu == aeu else "--",
-                 etichetta(sc["nome"], ae)))
+            pos = (punti3d_rilassati(sc["n"], 11) if "rilassati" in sc["nome"]
+                   else punti3d(sc["n"], 11))
+        if pos is None:
+            print("  %-30s %-7d %-6d %-7.3f %-9s %-9s %-9s %s"
+                  % (nome, sc["n"], diam, ds["d_s"], "--", "--", "--", "1D"))
+            continue
+        r = isotropia(sc, pos, nodi=nodi_a_caso(sc, 40, 1))
+        e = r["euclideo"]
+        print("  %-30s %-7d %-6d %-7.3f %-9.3f %-9.4f %-9.4f %.2f  %s"
+              % (nome, sc["n"], diam, ds["d_s"], e["irregolarita"], e["anisotropia"],
+                 e["rumore"], e["aniso_su_rumore"],
+                 "### SISTEMATICA" if e["sistematica"] else "al livello del rumore"))
