@@ -2,7 +2,7 @@
 COLLAUDO DEL PRESIDIO DELL'INDICE -- i DUE versi   (2026-09-26)
 ================================================================================================
 
-  indice: 1145 fra id e alias      esclusi: 123      forme nude AMBIGUE: 0
+  indice: 1146 fra id e alias      esclusi: 123      forme nude AMBIGUE: 0
 
   sentinelle scelte ORA e verificate ignote: `QX700`, `QX701`
 
@@ -16,7 +16,7 @@ COLLAUDO DEL PRESIDIO DELL'INDICE -- i DUE versi   (2026-09-26)
 ------------------------------------------------------------------------------------------------
 `estendi`: IL MATCH SI ALLUNGA FINO AL PIU- LUNGO ID NOTO   (cura del 2026-10-10)
 ------------------------------------------------------------------------------------------------
-  ogni ID DELL-INDICE si legge intero: 0 NON letti su 949
+  ogni ID DELL-INDICE si legge intero: 0 NON letti su 950
   ### e il collaudo ha MATERIA: 33 ID hanno la forma <lettera><cifre>-<PAROLE>, che era ESATTAMENTE quella che si spezzava
   NON deve scattare  ogni ID dell-indice si legge INTERO                  PASS
                      ### prima della cura ne mancavano 122 su 887, e H-INDICE verificava IL PREFISSO

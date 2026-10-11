@@ -12927,3 +12927,34 @@ Ogni dato di `db_era2/` ha ### **il suo TIMBRO accanto**, col campo `versione_da
 ### ⭐ **E CON QUESTO LE LETTURE `G1` e `G2` SI SBLOCCANO:** il loro mandato dice *«se `v3` non e- ancora concluso, aspetta che lo sia»*, e ### **adesso lo e-** — la regressione `(R)` e- verde ### **al bit** e il referto e- committato. ### ✅ **Quindi passo alla voce ⑤ della coda.**
 
 ### 📌 **E IL BILANCIO DEI TRE PROTOTIPI, in tre righe:** il `v1` era ### **due camminate scalari** *(misurato)*; il `v2` ha legato ### **spin e moto** e reso la simmetria materia/antimateria ### **una prova fisica**; il `v3` ha aggiunto ### **il vuoto** e una saturazione ### **senza `g`**, e ha trovato ### **la prima grandezza conservata oltre le norme.** ### ⛔ **E nessuno dei tre lega un grumo.**
+
+## ✅ **IN CODA IL `v4`: IL `cs` LOCALE VIENE DAL VUOTO — e va PRIMA della voce ④** *(2026-10-11)*
+
+### 📌 **LA DECISIONE E- GIA- UNA VOCE D-INDICE** *(il mandato dice <<registrala prima di tutto il resto>>)*: `CS-LOCALE-DAL-VUOTO`, coi suoi ### **quattro punti.**
+
+### ⭐ **E IL PUNTO `1` SMONTA UNA STRADA CHE SEMBRAVA OVVIA:** ### **`r_k = f(rho_k)` non puo- funzionare**, perche- la materia e- ### **COLLETTIVA** *(un grumo su molti nodi)* e una `rho` di nodo ### **non distingue un grumo legato da un pacchetto di luce di passaggio**; e perche- il tempo rallenterebbe ### **SOLO DENTRO il grumo** — e fuori ### **non ci sarebbe gravita-.**
+
+### ✅ **E IL PUNTO `3` TOCCA UN NUMERO CHE IL `v3` HA GIA- MISURATO:** nel `v3` il flusso lascia `Lambda` invariante — ### **`8.88e-16`**, ed e- ### **un braccio del collaudo.** ### ⭐ **Quindi <<il vuoto e- passivo>> non e- un-impressione: e- un numero**, e il `v4` deve ### **cambiarlo di proposito.**
+
+### ⛔ **LA CONDIZIONE D-INGRESSO E- DETTATA DAL MANDATO:** ### **`v3` concluso** *(c-e-)* ### **e voce ⑤ conclusa** *(in corso)* — perche- il `v4` ### **modifica il passo** e le letture `G1`/`G2` ### **misurano lo stato `v3` finale.**
+
+### ✅ **E VA ESEGUITA PRIMA DELLA VOCE ④, e il mandato dice perche-:** ### **nella tabella deve entrare la regola col `cs` locale.** ### **La voce ④ non e- partita**, quindi l-ordine e- ### **`16` poi `14`**, e la coda lo dichiara.
+
+## ✅ **IN CODA IL `v4`: IL `cs` LOCALE DAL VUOTO, IN TUTTE LE LEGGI — e il mandato e- arrivato TRE VOLTE** *(2026-10-11)*
+
+### ⛔ **TRE VERSIONI, tutte PRIMA che potessi committare la prima:** vale ### **la TERZA** *(`PRECEDENZA-IN-CODA`)*, e il mandato stesso lo dice — *«se la voce `16` esiste gia-, ### **sostituiscila e annota la sostituzione**»*. ### ✅ **La differenza fra le tre e- una tabella nella voce ⑥**, e non ho cancellato niente: la prima versione ### **resta scritta**, e la terza ### **dice in che cosa la supera.**
+
+### ⭐ **E LA DIFFERENZA NON E- COSMETICA:** nella prima `cs` entrava ### **nello spostamento e nelle rotazioni**; nella terza entra ### **IN TUTTE LE LEGGI** — ### **Grover dello spinore e del vuoto compresi** — e ### **ogni pezzo avanza di `d tau = cs dt`, MAI di un tick fisso.** ### 📌 **Lo scopo, nelle sue parole: <<in una zona lenta la fisica RALLENTA e non CAMBIA>>.**
+
+### ⭐ **E IL MANDATO REGALA DUE PEZZI DI MATEMATICA, che ho VERIFICATO PRIMA di registrarli** — perche- ### **un regalo non verificato e- un debito:**
+
+| | che cosa | misurato |
+|---|---|---|
+| `a` | ### **`Grover = -e^{i pi P}`** | `max|G + e^{i pi P}|` = ### **`2.45e-17`** |
+| `b` | la famiglia ### **`G(cs) = e^{i pi cs} e^{i pi cs P}`** | ### **`G(0) = I` ESATTO**, ### **`G(1) = G` a `7.35e-17`**, ### **unitaria a ogni `cs`** |
+
+### ✅ **E la fase globale `e^{i pi cs}` non e- un aggiustamento: e- cio- che rende `G(0) = I`** — senza di lei ### **a `cs = 0` il vuoto girerebbe di mezzo giro invece di stare fermo.**
+
+### ⛔ **E LA PARTE CHE IL MANDATO CHIEDE DI NON NASCONDERE E- `A4`:** ### **i pezzi frazionari NON compongono in un tick rallentato** *(`sqrt(G) sqrt(S)` non e- `sqrt(G S)`)*, quindi in una zona a `cs` uniforme `< 1` la camminata ### **non e- una copia rallentata.** ### ⭐ **E le due candidate dicono che cosa si sacrifica:** `(F)` ### **l-esattezza dell-invarianza locale** *(e `L0` misura quanto)*; `(S)` ### **la ottiene esatta ma il moto va a scatti**, e serve ### **una regola degli archi** — e il mandato aggiunge: ### **<<se non si chiude in modo unitario, SCRIVILO>>.**
+
+### ⚠ **E IL MIO PRIMO COMMIT DELLA REGISTRAZIONE E- STATO RIFIUTATO DA `H-INDICE`**, per una ragione che e- sempre la stessa: avevo scritto ### **<<`W1-W9`>>** nel messaggio, e il hook ### **lo legge come un ID.** ### ✅ **Le etichette locali di un mandato NON sono ID** *(par. `9`)*, e si scrivono ### **senza farle sembrare tali.**
