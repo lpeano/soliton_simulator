@@ -13652,3 +13652,30 @@ Ogni dato di `db_era2/` ha ### **il suo TIMBRO accanto**, col campo `versione_da
 
 ### ⚠ **E UNA RIGA DELL'INVENTARIO ERA SCADUTA, e l'ho corretta nello stesso giro:** diceva *«quindi il `~14%` del `v3` e' del GRAFO»*, che e' ### **la conclusione che il rilievo del guardiano ha rovesciato** *(l'anello e' ### **vertice-transitivo**, quindi il grafo ### **non puo' distinguere una direzione**)*. ### ⛔ **Un commento scaduto nell'inventario e' la trappola che `CLAUDE.md` nomina al par.2**, e questa l'avevo lasciata io.
 
+## ⭐ **IL COMPROMESSO NON ESISTE PIU': A `n = 26000` TUTTE LE QUATTRO SCENE SONO TRIDIMENSIONALI** *(2026-10-11)*
+
+> ### ⛔ **E LA RISPOSTA ALLA DOMANDA DI LUCA E' SI':** `(ii)` tende a `3` crescendo la taglia — `3.071` → `3.126` → `3.046`, cioe' ### **`|d_s - 3| = 0.046`.**
+
+### **LA TABELLA CHE DECIDE, alla taglia massima:**
+
+| la variante | `d_s` a `n = 26000` | `\|d_s-3\|` | irregolarita' | pavimento | costo/tick | `m` | gradi |
+|---|---|---|---|---|---|---|---|
+| (i) uniformi, gradi 2-6 | `2.962` | `0.038` | `0.2719` | `0.1700` | `0.0013` s | `4835` | `2..6` |
+| ### ⭐ **(ii) respinti, gradi 2-6** | `3.046` | `0.046` | `0.1584` | `0.0897` | `0.0010` s | `3697` | `2..6` |
+| (ii)+(iv-U) respinti + tutti i vicini, pesi uguali | `3.070` | `0.070` | `0.1697` | `0.1751` | `0.0075` s | `14032` | `10..23` |
+| (iv-U) Delaunay, pesi U | `3.109` | `0.109` | `0.2328` | — | `0.0067` s | `13405` | `6..26` |
+
+### ⭐ **E ALLORA LA SCELTA SI SEMPLIFICA, perche' `(ii)` VINCE SU TUTTO TRANNE UNA COSA:** ha l'### **irregolarita' minima** *(`0.1584`)*, il ### **pavimento piu' basso** *(`0.0897` contro `0.1700`, cioe' `7.0 sigma`)*, il ### **costo per tick piu' basso** *(`0.0010` s)*, ### **meno archi di tutti** *(`3697`)*, e ### **lo scarto da `3` secondo soltanto a `(i)`** *(`0.046` contro `0.038`)* — ### ⚠ **e i due scarti NON sono distinguibili, perche' `d_s` non ha una `sigma`.**
+
+### ⛔ **E LA COMBINAZIONE `(ii)+(iv-U)` NON SERVE: PEGGIORA.** Il guadagno della combinazione e' `0.1022`, quello dei soli punti respinti e' `0.1135` — ### **aggiungere tutti i vicini a punti GIA' respinti ALZA l'irregolarita'**, costa ### **`7.4` volte di piu' per tick**, e il suo esponente di attenuazione e' `-0.102 ± 0.037`, cioe' ### **RESTA PIATTA.**
+
+### ⭐ **E IL FATTO PIU' BELLO E' UNA MIA PREVISIONE CADUTA** *(`s12`)*: avevo scritto che l'attenuazione fosse ### **la stessa legge con un prefattore diverso**, perche' viene dalla *<<media su piu' archi, geometria del FRONTE e non della scena>>*. ### ⛔ **Misurato: `-0.527 ± 0.025` contro `-0.339 ± 0.033`, cioe' `4.5 sigma` — SONO DUE LEGGI DIVERSE.**
+
+### ✅ **E la caduta dice una cosa fisica:** i punti ### **respinti** danno `-0.527 ± 0.025`, ### **compatibile con `t^(-1/2)` a `1.1 sigma`**; i punti ### **uniformi** danno `-0.339 ± 0.033`, che da `-1/2` sta a ### **`4.8 sigma`.** ### ⭐ **Quindi il *<<piu' lentamente di `t^(-1/2)`>>* che avevo riportato come fatto sulla scena NON ERA DEL MEZZO: ERA DEI PUNTI** — ### **la <<correlazione lunga>> era l'addensamento dei punti.**
+
+### ⚠ **E UNA SOGLIA MIA E' DIFETTOSA, e lo dichiaro invece di riscriverla:** `s8` chiedeva ### **monotonia E vicinanza a `3` in CONGIUNZIONE**, ma ### **`d_s` non ha una `sigma`** — quindi la monotonia leggeva ### **l'ordine di tre numeri con oscillazione `~0.08`**, piu' grande della tendenza. ### ⛔ **Risultato: `4` famiglie su `4` stanno entro `0.3` da `3` e NESSUNA e' monotona, quindi il verdetto composto dice <<NON ARRIVA A 3>> per tutte** — ### **un verdetto che contraddice i suoi stessi numeri.** ### ✅ **I due pezzi erano registrati ENTRAMBI prima, quindi li riporto separati**, e la forma giusta per il prossimo giro e' ### **far tornare a `d_s` la sua `sigma`.**
+
+### ⚠ **E `s10` NON DECIDE:** `2.96 sigma` contro una soglia di `3` — la ### **stima puntuale** dice sovrapposizione *(la combinazione prende il `67%` della somma dei due)*, la ### **significativita' non arriva.** ### **E non serve, perche' il fatto che decide e' un altro:** la combinazione ### **non batte il migliore dei due da solo.**
+
+### ⛔ **E LA SCELTA RESTA DI LUCA, ma adesso e' una scelta SENZA COMPROMESSO:** `[[DOMANDA-QUALE-SCENA-3D-PRINCIPALE]]` ha la tabella intera, e ### **cambiare i gradi cambia la fisica locale** *(la moneta di Grover dipende dal grado)*. ### 📌 **Il referto e' `doc/REFERTO_isotropia_locale.md`.**
+

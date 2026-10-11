@@ -3011,3 +3011,22 @@ raccomandare di non farlo.**
 ### **Perché lo apro invece di chiuderlo in silenzio:** in questo stesso giro il `pre-commit` ha preso **due** difetti che il collaudo non vedeva — il `tipo_era1` mancante e **il controllo `C6` più debole del hook**. ### ⛔ **Un presidio che non guarda la via di scrittura non impedisce niente** (`A9`), e queste due vie sono entrate in uso **oggi**, su `64` voci, **senza un caso che DEBBA fallire.**
 
 **Che cosa chiuderebbe questa voce:** un caso sano e un **caso che deve fallire** per ciascuna delle quattro vie — per `crea-lotto` almeno *id già esistente*, *motivo sotto i `20` caratteri*, *chiave meta non registrata*, *`togli_da_etichette` su un ID che non è fra le etichette*; per `storico-commit` almeno *uno storico che NON è solo-in-aggiunta* — e la verifica che **su un fallimento non si scrive niente**.
+
+## ⭐ **`[[ISOTROPIA-LOCALE]]` — MISURATO: SI ATTENUA COME `t^(-0.339)` E SI FERMA, E I PESI DALLA GEOMETRIA NON SERVONO** *(2026-10-11)*
+
+### ⛔ **IL REFERTO E' `doc/REFERTO_isotropia_locale.md`**, e ogni numero esce da `proto_camminata/uscite/letture_isotropia_locale.json`.
+
+| | il fatto | il numero |
+|---|---|---|
+| `I1` | l'irregolarita' locale ### **si attenua** | `t^(-0.339 ± 0.033)`, cioe' ### **SI ATTENUA** |
+| `I1` | e poi ### **si ferma su un pavimento** | `0.1700`, e gli ultimi due `t` differiscono di `1.5 sigma` |
+| `I1` | il ### **cubico, controllo**: non si attenua | `t^(-0.037 ± 0.336)` — ### **RESTA PIATTA** |
+| `I2` | i pesi di ### **Voronoi NON danno niente** | `1.1 sigma`, e i pesi ### **UGUALI** guadagnano `3.7 sigma` |
+| `s7` | lo sbilanciamento ### **NON spiega** l'irregolarita' | `0` varianti su `8` sopra `3 sigma` |
+| `M-A` | la ### **piu' tridimensionale** alla taglia massima | `(i) uniformi, gradi 2-6` |
+| `M-B` | i due effetti ### **ADDITIVI** | differenza `-0.0503`, cioe' `3.0 sigma` |
+
+### ⚠ **E LE DUE PREVISIONI MIE CHE SONO CADUTE, misurate:** la ### **correlazione `s7`** *(prevedevo <<positiva e significativa>>)* e ### **l'esponente** *(prevedevo `t^(-1/2)` o piu' lentamente: misurato piu' lentamente, quindi questa ### **regge**)*.
+
+### ⛔ **E LA SCELTA DELLA SCENA RESTA DI LUCA:** `[[DOMANDA-QUALE-SCENA-3D-PRINCIPALE]]` ha ora ### **la tabella intera**, e cambiare i gradi ### **cambia la fisica locale** *(la moneta di Grover dipende dal grado)*.
+

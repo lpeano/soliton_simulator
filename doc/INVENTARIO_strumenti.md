@@ -3258,8 +3258,8 @@ etichette rimosse, con ### **`0` persi, `0` doppi, `0` conflitti**.
 
 | | |
 |---|---|
-| **i file** | `scene3d.py` *(BLOB `1afe51d7`)* · `pesi4.py` *(BLOB `b0058212`)* · `_letture_isotropia_locale.py` *(BLOB `4e2c6118`)* · `_collauda_isotropia.py` *(BLOB `6e9f2ec8`)* |
-| **COMANDO** | i bracci: `python proto_camminata/_collauda_isotropia.py` *(### **`27`/`27`**)* · le letture: `python proto_camminata/_letture_isotropia_locale.py` *(scrive `uscite/letture_isotropia_locale.json`)* |
+| **i file** | `scene3d.py` *(BLOB `1afe51d7`)* · `pesi4.py` *(BLOB `b0058212`)* · `_letture_isotropia_locale.py` *(BLOB `4e2c6118`)* · `_referto_isotropia.py` *(BLOB `6a55c11c`)* · `_collauda_isotropia.py` *(BLOB `6e9f2ec8`)* |
+| **COMANDO** | i bracci: `python proto_camminata/_collauda_isotropia.py` *(### **`27`/`27`**)* · le letture: `python proto_camminata/_letture_isotropia_locale.py` *(scrive `uscite/letture_isotropia_locale.json`)* → il referto: `python proto_camminata/_referto_isotropia.py` *(### **REPERTO congelato**, blob `19af0a917a3909de`)* |
 | **che cosa misura** | `I1` l'### **irregolarita' locale contro `t`**, con l'esponente e il ### **PAVIMENTO** · `I2` le ### **sette varianti di scena** piu' la ### **combinazione**, tutte alla ### **STESSA taglia** · `M-A` la ### **dimensione spettrale a `n = 4000`, `10000`, `26000`** · `M-C` il ### **pavimento a taglia grande** · e la ### **correlazione** fra sbilanciamento direzionale e irregolarita' *(soglia `s7`)* |
 | ⛔ **LE TRE GRANDEZZE, dopo la correzione del guardiano** | **irregolarita' per nodo** *(dispersione fra direzioni, mediata sui nodi)* · **anisotropia del profilo MEDIO** · **rumore atteso** *(`irregolarita'/sqrt(N)`)*. ### **Solo la seconda sopra la terza e' anisotropia VERA**, e il mio misurando vecchio ### **confondeva la prima con la seconda** |
 | ✅ **I DUE BRACCI CHE VALGONO PIU' DI TUTTI** | le ### **due vie** di costruzione danno lo ### **STESSO RISULTATO**: gli archi della Delaunay ### **ESATTAMENTE uguali** *(interi, `3998` e `13405`)*, e il rilassamento ### **la STESSA SCENA** *(`0` archi di differenza)* ### **pur avendo punti diversi di `3.2e-11`** |

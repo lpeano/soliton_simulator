@@ -172,3 +172,28 @@ Luca.**
 
 ### ⚠ **E IL LIMITE DI COSTO, dichiarato ORA:** la Delaunay periodica a `n = 26000` costruisce ### **`27 n` punti** *(le copie del toro)*, e il `d_s` a `n = 26000` costa ### **una camminata classica fino al diametro.** ### **Se una taglia sfora, si DICHIARA e si ferma alla precedente** — ### **senza ridurre la precisione**, come il mandato del legame ha gia' stabilito.
 
+---
+
+## ⭐ **ANNOTAZIONE: GLI ESITI DELLE SOGLIE — `2` PREVISIONI CADUTE, `1` TENUTA, `1` NON DECISA, E UNA SOGLIA MIA DIFETTOSA** *(`2026-10-11`, a misure FATTE)*
+
+### ⛔ **E IL RISULTATO CHE ROVESCIA IL MANDATO: IL COMPROMESSO NON ESISTE PIU'.** Alla taglia massima ### **tutte e `4` le famiglie stanno entro `0.109` da `3`** *(la migliore `0.038`, la peggiore `0.109`)* — cioe' ### **la dimensione NON distingue piu' le varianti**, e il *<<`(ii)` ha l'irregolarita' minima ma `d_s = 2.83`>>* era ### **TAGLIA FINITA, esattamente come Luca sospettava.**
+
+| | la soglia | che cosa avevo previsto | che cosa dice la misura |
+|---|---|---|---|
+| `s7` | la correlazione sbilanciamento/irregolarita' | ### **positiva e significativa** | ### ⛔ **CADE**: `0` su `8` sopra `3 sigma` *(la massima `1.6 sigma`)* |
+| `s8` | `(ii)` tende a `3`? | ### **si'** | ### ✅ **REGGE sul pezzo che risponde** *(`|d_s - 3| = 0.046` a `n = 26000`)*, ### ⚠ **ma la soglia COMPOSTA e' difettosa** *(sotto)* |
+| `s9` | `(iv-U)` ### **PEGGIORA** crescendo la taglia | *(perche' a `n = 1728` sta gia' a `3.247`)* | ### ⛔ **CADE**: fa `3.135`, `3.098`, `3.109` — ### **sta FERMO**, non peggiora |
+| `s10` | i due effetti ### **si sovrappongono** | *(riducono la stessa cosa)* | ### ⚠ **NON DECISA**: `2.96 sigma` contro una soglia di `3` — la ### **stima puntuale mi da' ragione** *(`67%` della somma)*, la ### **significativita' non arriva** |
+| `s11` | il pavimento di `(ii)` ### **scende** | *(a `t = 10` sta `42%` sotto)* | ### ✅ **REGGE, e di molto**: `0.0897` contro `0.1700`, cioe' ### **`7.0 sigma`** |
+| `s12` | ### **la STESSA legge**, cambia solo il prefattore | *(l'attenuazione e' geometria del FRONTE)* | ### ⛔ **CADE**: `-0.527 ± 0.025` contro `-0.339 ± 0.033`, cioe' ### **`4.5 sigma`** |
+
+### ⭐ **E `s12` E' LA CADUTA PIU' INTERESSANTE, perche' dice una cosa FISICA.** L'esponente dei punti ### **respinti** e' `-0.527 ± 0.025`, ### **compatibile con `t^(-1/2)`** *(`1.1 sigma`)*; quello dei punti ### **uniformi** e' `-0.339 ± 0.033`, che da `-1/2` sta a ### **`4.8 sigma`.**
+
+### ⛔ **QUINDI IL *<<piu' lentamente di `t^(-1/2)`>>* CHE AVEVO RIPORTATO COME FATTO SULLA SCENA NON ERA DEL MEZZO: ERA DEI PUNTI.** Il mandato prevedeva *<<se il mezzo e' casuale e senza correlazioni lunghe, l'irregolarita' dovrebbe calare circa come `t^(-1/2)` o piu' lentamente>>*, e ### **con punti uniformi cala piu' lentamente**, ### **con punti respinti cala ESATTAMENTE come `t^(-1/2)`** — ### **cioe' la <<correlazione lunga>> era l'addensamento dei punti**, e togliendola si ritrova la media indipendente.
+
+### ⚠ **E IL DIFETTO DELLA SOGLIA `s8`, che e' mio e lo dichiaro:** `s8` chiede ### **monotonia E vicinanza a `3` in CONGIUNZIONE**, e ### **`d_s` non ha una `sigma`** *(il misurando torna `d_s` e `r2`, nessuna incertezza)* — quindi *<<cresce in modo monotono>>* leggeva ### **l'ordine di tre numeri la cui oscillazione** *(`~0.08`)* ### **e' piu' grande della tendenza.** ### **Nessuna delle `4` famiglie e' monotona, e tutte e `4` stanno entro `0.3` da `3`:** il verdetto composto dice ### **<<NON ARRIVA A 3>> per tutte**, che ### **contraddice i suoi stessi numeri.**
+
+### ✅ **E NON LA RISCRIVO A POSTERIORI:** riporto i ### **due pezzi separati**, che erano ### **entrambi registrati prima**, e dico quale risponde alla domanda *(il secondo)*. ### 📌 **La forma giusta per il prossimo giro e' un'altra: `d_s` deve tornare la sua `sigma`** — e ### **finche' non ce l'ha, una soglia non puo' chiedergli una monotonia.**
+
+### ⛔ **E UN ARTEFATTO DI COSTRUZIONE, visto nei numeri e dichiarato:** la variante `(i)` a `n = 10000` ha ### **grado minimo `1`** *(`gradi 1..6`)*, mentre a tutte le altre taglie il minimo e' `2`. ### **Un nodo di grado `1` e' un vicolo cieco**, e viene dal giro di connessione che attacca le componenti isolate — ### **non invalida la `d_s`** *(e' un nodo su diecimila)*, ma ### **va detto invece di lasciarlo nel `json`.**
+

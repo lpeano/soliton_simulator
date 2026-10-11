@@ -1,0 +1,870 @@
+{
+ "I1": {
+  "cubico L=20 (controllo)": {
+   "diametro": 30,
+   "diametro_esatto": false,
+   "etichetta": "3D, da misurare",
+   "m": 24000,
+   "n": 8000,
+   "nodi": 40,
+   "oltre_t_max": [
+    25,
+    30
+   ],
+   "pavimento": {
+    "differenza": 0.07758942281553563,
+    "in_sigma": 27.598431249205365,
+    "sigma": 0.002811370766509406,
+    "valore": 0.1490318829129166,
+    "verdetto": "ANCORA IN DISCESA"
+   },
+   "potenza": {
+    "esponente": -0.03679409745403657,
+    "in_sigma": 0.10962245898002596,
+    "sigma": 0.33564378865776706,
+    "verdetto": "RESTA PIATTA"
+   },
+   "t_max": 24,
+   "tempi": {
+    "10": {
+     "aniso_su_rumore": 6.009402529959876,
+     "anisotropia": 0.09676055773221678,
+     "irregolarita": 0.10183499892927457,
+     "rumore": 0.016101527106865788,
+     "secondi": 6.355478286743164,
+     "sigma_irregolarita": 0.0010701223453752201,
+     "sistematica": true
+    },
+    "15": {
+     "aniso_su_rumore": 6.223483030647359,
+     "anisotropia": 0.22299968600939876,
+     "irregolarita": 0.22662130572845224,
+     "rumore": 0.035831974621163644,
+     "secondi": 8.783463716506958,
+     "sigma_irregolarita": 0.0025255121419891008,
+     "sistematica": true
+    },
+    "20": {
+     "aniso_su_rumore": 6.009178078868179,
+     "anisotropia": 0.1416003305359755,
+     "irregolarita": 0.1490318829129166,
+     "rumore": 0.02356400969941729,
+     "secondi": 10.70100450515747,
+     "sigma_irregolarita": 0.0012351493866934915,
+     "sistematica": true
+    },
+    "4": {
+     "aniso_su_rumore": 6.31308303060747,
+     "anisotropia": 0.22873632672191022,
+     "irregolarita": 0.2291519919997221,
+     "rumore": 0.03623211125419022,
+     "secondi": 3.0092849731445312,
+     "sigma_irregolarita": 0.00028958599402061124,
+     "sistematica": true
+    },
+    "6": {
+     "aniso_su_rumore": 6.112034473221796,
+     "anisotropia": 0.10753155491449441,
+     "irregolarita": 0.11127052223251925,
+     "rumore": 0.01759341433455823,
+     "secondi": 4.101733922958374,
+     "sigma_irregolarita": 0.0009474584380693633,
+     "sistematica": true
+    }
+   }
+  },
+  "geometrico3d n=26000": {
+   "diametro": 32,
+   "diametro_esatto": false,
+   "etichetta": "3D, da misurare",
+   "m": 76634,
+   "n": 26000,
+   "nodi": 40,
+   "oltre_t_max": [
+    30
+   ],
+   "pavimento": {
+    "differenza": 0.016245584757448528,
+    "in_sigma": 1.487561384061998,
+    "sigma": 0.010920950847142622,
+    "valore": 0.17001903970218685,
+    "verdetto": "PAVIMENTO"
+   },
+   "potenza": {
+    "esponente": -0.33916600769794736,
+    "in_sigma": 10.139850063432046,
+    "sigma": 0.03344881882633573,
+    "verdetto": "SI ATTENUA"
+   },
+   "t_max": 25,
+   "tempi": {
+    "10": {
+     "aniso_su_rumore": 0.9104399374039245,
+     "anisotropia": 0.03661187660215712,
+     "irregolarita": 0.25433181195011095,
+     "rumore": 0.04021339035999905,
+     "secondi": 20.523144483566284,
+     "sigma_irregolarita": 0.010381675423728186,
+     "sistematica": false
+    },
+    "15": {
+     "aniso_su_rumore": 0.9401495229364937,
+     "anisotropia": 0.03264200708568086,
+     "irregolarita": 0.21958866599792798,
+     "rumore": 0.03472001664557117,
+     "secondi": 29.549609661102295,
+     "sigma_irregolarita": 0.009282018699633682,
+     "sistematica": false
+    },
+    "20": {
+     "aniso_su_rumore": 0.9903913786802456,
+     "anisotropia": 0.029168039312543144,
+     "irregolarita": 0.18626462445963538,
+     "rumore": 0.02945102304041788,
+     "secondi": 38.17957258224487,
+     "sigma_irregolarita": 0.008321352446109608,
+     "sistematica": false
+    },
+    "25": {
+     "aniso_su_rumore": 0.9774469723892886,
+     "anisotropia": 0.026276091707359447,
+     "irregolarita": 0.17001903970218685,
+     "rumore": 0.026882370552675307,
+     "secondi": 49.838067054748535,
+     "sigma_irregolarita": 0.007072641718151061,
+     "sistematica": false
+    },
+    "4": {
+     "aniso_su_rumore": 0.9099493828145969,
+     "anisotropia": 0.044689316401412015,
+     "irregolarita": 0.31061074291244545,
+     "rumore": 0.049111870666016494,
+     "secondi": 10.216873407363892,
+     "sigma_irregolarita": 0.008343605772941638,
+     "sistematica": false
+    },
+    "6": {
+     "aniso_su_rumore": 0.864325754294629,
+     "anisotropia": 0.04058348617253986,
+     "irregolarita": 0.2969626927289921,
+     "rumore": 0.04695392445601693,
+     "secondi": 13.707146883010864,
+     "sigma_irregolarita": 0.011084189605190463,
+     "sistematica": false
+    }
+   }
+  }
+ },
+ "I2": {
+  "confronto_col_riferimento": {
+   "(ii) respinti, gradi 2-6": {
+    "contro_voronoi_in_sigma": 13.311986950694736,
+    "guadagno": 0.1134548191296825,
+    "in_sigma": 11.848254400523707,
+    "quota_del_guadagno_di_voronoi": 9.777079726368209,
+    "sopra_soglia": true
+   },
+   "(ii)+(iv-U) respinti + tutti i vicini, pesi uguali": {
+    "contro_voronoi_in_sigma": 12.80585867309914,
+    "guadagno": 0.10217931503324384,
+    "in_sigma": 11.203411954864281,
+    "quota_del_guadagno_di_voronoi": 8.805402160342014,
+    "sopra_soglia": true
+   },
+   "(iii) uniformi, gradi 4-6": {
+    "contro_voronoi_in_sigma": 0.38280851811873645,
+    "guadagno": 0.007281468457337237,
+    "in_sigma": 0.5744578798119787,
+    "quota_del_guadagno_di_voronoi": 0.6274876481980667,
+    "sopra_soglia": false
+   },
+   "(iv-R) Delaunay, pesi R": {
+    "contro_voronoi_in_sigma": 1.1797452020556236,
+    "guadagno": 0.022693701177165487,
+    "in_sigma": 2.0586990588875778,
+    "quota_del_guadagno_di_voronoi": 1.9556518391863922,
+    "sopra_soglia": false
+   },
+   "(iv-Rn) Delaunay, pesi Rn": {
+    "contro_voronoi_in_sigma": 1.055131675246918,
+    "guadagno": 0.02153466275768412,
+    "in_sigma": 1.9517913554334225,
+    "quota_del_guadagno_di_voronoi": 1.85577057261595,
+    "sopra_soglia": false
+   },
+   "(iv-U) Delaunay, pesi U": {
+    "contro_voronoi_in_sigma": 3.0576931019769966,
+    "guadagno": 0.03904337293681609,
+    "in_sigma": 3.6618216547233096,
+    "quota_del_guadagno_di_voronoi": 3.36460075400806,
+    "sopra_soglia": true
+   },
+   "(iv-V) Delaunay, pesi V": {
+    "contro_voronoi_in_sigma": 0.0,
+    "guadagno": 0.011604162214582492,
+    "in_sigma": 1.057849422629455,
+    "quota_del_guadagno_di_voronoi": 1.0,
+    "sopra_soglia": false
+   }
+  },
+  "controllo_pesi": "(iv-V) Delaunay, pesi V",
+  "n": 1728,
+  "nodi": 40,
+  "passi": 10,
+  "riferimento": "(i) uniformi, gradi 2-6",
+  "s10_additivita": {
+   "differenza": -0.050318877033254744,
+   "guadagno_combinazione": 0.10217931503324384,
+   "guadagno_respinti": 0.1134548191296825,
+   "guadagno_tutti_vicini": 0.03904337293681609,
+   "in_sigma": 2.9621965065983398,
+   "sigma_combinazione": 0.0025373367371273547,
+   "sigma_differenza": 0.01698701518321578,
+   "sigma_somma": 0.014330996128172523,
+   "somma_dei_due": 0.1524981920664986,
+   "sopra_il_massimo_dei_due": false,
+   "verdetto": "ADDITIVI"
+  },
+  "varianti": {
+   "(i) uniformi, gradi 2-6": {
+    "aniso_su_rumore": 0.9957222089554666,
+    "anisotropia": 0.042800051369386916,
+    "braccio": null,
+    "correlazione": {
+     "in_sigma": 0.7842671501072267,
+     "nodi": 40,
+     "pearson": 0.1282230001048084,
+     "sbilanciamento_medio": 0.35906047531192653,
+     "sbilanciamento_sigma": 0.026373246576317066,
+     "sigma_z": 0.1643989873053573,
+     "significativa": false
+    },
+    "costo_per_tick": 0.0012656331062316894,
+    "d_s": 2.578379010000422,
+    "diametro": 15,
+    "diametro_esatto": false,
+    "gradi": [
+     2,
+     6
+    ],
+    "irregolarita": 0.27185422818167676,
+    "m": 4835,
+    "n": 1728,
+    "pesi_dalle_posizioni": false,
+    "r2_d_s": 0.99314712944331,
+    "rumore": 0.04298392763006167,
+    "sigma_irregolarita": 0.008760317179847515,
+    "sistematica": false
+   },
+   "(ii) respinti, gradi 2-6": {
+    "aniso_su_rumore": 1.1967738097252931,
+    "anisotropia": 0.029973374352474862,
+    "braccio": null,
+    "correlazione": {
+     "in_sigma": 0.7293894608932342,
+     "nodi": 40,
+     "pearson": -0.11933945730526382,
+     "sbilanciamento_medio": 0.26585393301853016,
+     "sbilanciamento_sigma": 0.01423837772673822,
+     "sigma_z": 0.1643989873053573,
+     "significativa": false
+    },
+    "costo_per_tick": 0.0010180354118347168,
+    "d_s": 2.830671771025836,
+    "diametro": 16,
+    "diametro_esatto": false,
+    "gradi": [
+     2,
+     6
+    ],
+    "irregolarita": 0.15839940905199426,
+    "m": 3697,
+    "n": 1728,
+    "pesi_dalle_posizioni": false,
+    "r2_d_s": 0.9897348659022528,
+    "rumore": 0.02504514563144972,
+    "sigma_irregolarita": 0.0038665292161342538,
+    "sistematica": false
+   },
+   "(ii)+(iv-U) respinti + tutti i vicini, pesi uguali": {
+    "aniso_su_rumore": 1.1349438906737168,
+    "anisotropia": 0.030448228582836353,
+    "braccio": "U",
+    "correlazione": {
+     "in_sigma": 0.5198356875106278,
+     "nodi": 40,
+     "pearson": 0.085253013390623,
+     "sbilanciamento_medio": 0.12124120526104902,
+     "sbilanciamento_sigma": 0.006387853044259005,
+     "sigma_z": 0.1643989873053573,
+     "significativa": false
+    },
+    "costo_per_tick": 0.007547640800476074,
+    "d_s": 3.516998360910876,
+    "diametro": 9,
+    "diametro_esatto": false,
+    "gradi": [
+     10,
+     23
+    ],
+    "irregolarita": 0.16967491314843292,
+    "m": 14032,
+    "n": 1728,
+    "pesi_dalle_posizioni": false,
+    "r2_d_s": 0.9979398687633347,
+    "rumore": 0.02682795936701497,
+    "sigma_irregolarita": 0.0025373367371273547,
+    "sistematica": false
+   },
+   "(iii) uniformi, gradi 4-6": {
+    "aniso_su_rumore": 1.0329124067783366,
+    "anisotropia": 0.04320943879423652,
+    "braccio": null,
+    "correlazione": {
+     "in_sigma": 0.6204713469196022,
+     "nodi": 40,
+     "pearson": 0.10165254079169943,
+     "sbilanciamento_medio": 0.350745804050968,
+     "sbilanciamento_sigma": 0.02365097619962969,
+     "sigma_z": 0.1643989873053573,
+     "significativa": false
+    },
+    "costo_per_tick": 0.0014594316482543946,
+    "d_s": 2.7550752772050173,
+    "diametro": 12,
+    "diametro_esatto": false,
+    "gradi": [
+     3,
+     6
+    ],
+    "irregolarita": 0.2645727597243395,
+    "m": 5182,
+    "n": 1728,
+    "pesi_dalle_posizioni": false,
+    "r2_d_s": 0.9937939799138529,
+    "rumore": 0.04183262637826876,
+    "sigma_irregolarita": 0.00916089232657092,
+    "sistematica": false
+   },
+   "(iv-R) Delaunay, pesi R": {
+    "aniso_su_rumore": 1.0473813128274376,
+    "anisotropia": 0.04126236022311617,
+    "braccio": "R",
+    "correlazione": {
+     "in_sigma": 1.4444719574515095,
+     "nodi": 40,
+     "pearson": 0.23310438120465443,
+     "sbilanciamento_medio": 0.16339507200231482,
+     "sbilanciamento_sigma": 0.01056583848025451,
+     "sigma_z": 0.1643989873053573,
+     "significativa": false
+    },
+    "costo_per_tick": 0.007328462600708008,
+    "d_s": 3.247394205245135,
+    "diametro": 8,
+    "diametro_esatto": false,
+    "gradi": [
+     6,
+     26
+    ],
+    "irregolarita": 0.24916052700451127,
+    "m": 13405,
+    "n": 1728,
+    "pesi_dalle_posizioni": false,
+    "r2_d_s": 0.9981962499755697,
+    "rumore": 0.03939573841710731,
+    "sigma_irregolarita": 0.006691072806026729,
+    "sistematica": false
+   },
+   "(iv-Rn) Delaunay, pesi Rn": {
+    "aniso_su_rumore": 1.0479427740702623,
+    "anisotropia": 0.04147652546432525,
+    "braccio": "Rn",
+    "correlazione": {
+     "in_sigma": 1.6377075986393166,
+     "nodi": 40,
+     "pearson": 0.26291515796887843,
+     "sbilanciamento_medio": 0.16640137342210184,
+     "sbilanciamento_sigma": 0.01056707410069593,
+     "sigma_z": 0.1643989873053573,
+     "significativa": false
+    },
+    "costo_per_tick": 0.006787395477294922,
+    "d_s": 3.247394205245135,
+    "diametro": 8,
+    "diametro_esatto": false,
+    "gradi": [
+     6,
+     26
+    ],
+    "irregolarita": 0.25031956542399264,
+    "m": 13405,
+    "n": 1728,
+    "pesi_dalle_posizioni": false,
+    "r2_d_s": 0.9981962499755697,
+    "rumore": 0.03957899848216745,
+    "sigma_irregolarita": 0.006707468650465422,
+    "sistematica": false
+   },
+   "(iv-U) Delaunay, pesi U": {
+    "aniso_su_rumore": 1.1515120408655224,
+    "anisotropia": 0.04238788175298666,
+    "braccio": "U",
+    "correlazione": {
+     "in_sigma": 1.6216852180938064,
+     "nodi": 40,
+     "pearson": 0.26046147923095087,
+     "sbilanciamento_medio": 0.16166477073360366,
+     "sbilanciamento_sigma": 0.00953399276375259,
+     "sigma_z": 0.1643989873053573,
+     "significativa": false
+    },
+    "costo_per_tick": 0.0066531658172607425,
+    "d_s": 3.247394205245135,
+    "diametro": 8,
+    "diametro_esatto": false,
+    "gradi": [
+     6,
+     26
+    ],
+    "irregolarita": 0.23281085524486067,
+    "m": 13405,
+    "n": 1728,
+    "pesi_dalle_posizioni": false,
+    "r2_d_s": 0.9981962499755697,
+    "rumore": 0.03681062832927586,
+    "sigma_irregolarita": 0.00607791803691141,
+    "sistematica": false
+   },
+   "(iv-V) Delaunay, pesi V": {
+    "aniso_su_rumore": 1.100838732937403,
+    "anisotropia": 0.045298576477758895,
+    "braccio": "V",
+    "correlazione": {
+     "in_sigma": 1.2556965141935195,
+     "nodi": 40,
+     "pearson": 0.20355192742938433,
+     "sbilanciamento_medio": 0.10816298624987315,
+     "sbilanciamento_sigma": 0.009162667726145957,
+     "sigma_z": 0.1643989873053573,
+     "significativa": false
+    },
+    "costo_per_tick": 0.00687565803527832,
+    "d_s": 3.247394205245135,
+    "diametro": 8,
+    "diametro_esatto": false,
+    "gradi": [
+     6,
+     26
+    ],
+    "irregolarita": 0.26025006596709427,
+    "m": 13405,
+    "n": 1728,
+    "pesi_dalle_posizioni": true,
+    "r2_d_s": 0.9981962499755697,
+    "rumore": 0.04114914848325446,
+    "sigma_irregolarita": 0.006602158280678766,
+    "sistematica": false
+   }
+  }
+ },
+ "M_A": {
+  "famiglie": {
+   "(i) uniformi, gradi 2-6": {
+    "d_s_massima": 2.962413233425634,
+    "monotona": false,
+    "per_taglia": {
+     "10000": {
+      "d_s": 2.8799990230195918,
+      "diametro": 23,
+      "diametro_esatto": false,
+      "gradi": [
+       1,
+       6
+      ],
+      "m": 29552,
+      "n": 10000,
+      "potenza": true,
+      "r2": 0.9879865472778976,
+      "scarto_da_3": 0.12000097698040824,
+      "secondi": 2.3018975257873535
+     },
+     "26000": {
+      "d_s": 2.962413233425634,
+      "diametro": 32,
+      "diametro_esatto": false,
+      "gradi": [
+       2,
+       6
+      ],
+      "m": 76634,
+      "n": 26000,
+      "potenza": true,
+      "r2": 0.996560301723337,
+      "scarto_da_3": 0.03758676657436588,
+      "secondi": 8.617913722991943
+     },
+     "4000": {
+      "d_s": 2.9228901713862356,
+      "diametro": 19,
+      "diametro_esatto": false,
+      "gradi": [
+       2,
+       6
+      ],
+      "m": 11614,
+      "n": 4000,
+      "potenza": true,
+      "r2": 0.9866531559772564,
+      "scarto_da_3": 0.07710982861376436,
+      "secondi": 9.96712350845337
+     }
+    },
+    "scarto_da_3": 0.03758676657436588,
+    "taglia_massima": 26000,
+    "verdetto_s8": "NON ARRIVA A 3"
+   },
+   "(ii) respinti, gradi 2-6": {
+    "d_s_massima": 3.046263397592911,
+    "monotona": false,
+    "per_taglia": {
+     "10000": {
+      "d_s": 3.126184468667494,
+      "diametro": 25,
+      "diametro_esatto": false,
+      "gradi": [
+       2,
+       6
+      ],
+      "m": 26048,
+      "n": 10000,
+      "potenza": true,
+      "r2": 0.9980337875358781,
+      "scarto_da_3": 0.126184468667494,
+      "secondi": 2.7351431846618652
+     },
+     "26000": {
+      "d_s": 3.046263397592911,
+      "diametro": 33,
+      "diametro_esatto": false,
+      "gradi": [
+       2,
+       6
+      ],
+      "m": 69700,
+      "n": 26000,
+      "potenza": true,
+      "r2": 0.9991825864375586,
+      "scarto_da_3": 0.046263397592911204,
+      "secondi": 9.090732097625732
+     },
+     "4000": {
+      "d_s": 3.0707796987612372,
+      "diametro": 20,
+      "diametro_esatto": false,
+      "gradi": [
+       2,
+       6
+      ],
+      "m": 9307,
+      "n": 4000,
+      "potenza": true,
+      "r2": 0.9967608830997774,
+      "scarto_da_3": 0.07077969876123724,
+      "secondi": 30.873279571533203
+     }
+    },
+    "scarto_da_3": 0.046263397592911204,
+    "taglia_massima": 26000,
+    "verdetto_s8": "NON ARRIVA A 3"
+   },
+   "(ii)+(iv-U) respinti + tutti i vicini, pesi uguali": {
+    "d_s_massima": 3.069658941429035,
+    "monotona": false,
+    "per_taglia": {
+     "10000": {
+      "d_s": 3.165515320461471,
+      "diametro": 15,
+      "diametro_esatto": false,
+      "gradi": [
+       9,
+       24
+      ],
+      "m": 81805,
+      "n": 10000,
+      "potenza": true,
+      "r2": 0.9981286213698217,
+      "scarto_da_3": 0.16551532046147122,
+      "secondi": 15.22676420211792
+     },
+     "26000": {
+      "d_s": 3.069658941429035,
+      "diametro": 20,
+      "diametro_esatto": false,
+      "gradi": [
+       9,
+       24
+      ],
+      "m": 212416,
+      "n": 26000,
+      "potenza": true,
+      "r2": 0.9993867040349543,
+      "scarto_da_3": 0.06965894142903517,
+      "secondi": 42.7240469455719
+     },
+     "4000": {
+      "d_s": 3.19889934546918,
+      "diametro": 11,
+      "diametro_esatto": false,
+      "gradi": [
+       10,
+       24
+      ],
+      "m": 32624,
+      "n": 4000,
+      "potenza": true,
+      "r2": 0.9982467437561056,
+      "scarto_da_3": 0.19889934546917987,
+      "secondi": 26.389856576919556
+     }
+    },
+    "scarto_da_3": 0.06965894142903517,
+    "taglia_massima": 26000,
+    "verdetto_s8": "NON ARRIVA A 3"
+   },
+   "(iv-U) Delaunay, pesi U": {
+    "d_s_massima": 3.108980431892583,
+    "monotona": false,
+    "per_taglia": {
+     "10000": {
+      "d_s": 3.0976480141405083,
+      "diametro": 14,
+      "diametro_esatto": false,
+      "gradi": [
+       5,
+       30
+      ],
+      "m": 77773,
+      "n": 10000,
+      "potenza": true,
+      "r2": 0.9993491645352973,
+      "scarto_da_3": 0.09764801414050828,
+      "secondi": 14.047624111175537
+     },
+     "26000": {
+      "d_s": 3.108980431892583,
+      "diametro": 19,
+      "diametro_esatto": false,
+      "gradi": [
+       6,
+       34
+      ],
+      "m": 202119,
+      "n": 26000,
+      "potenza": true,
+      "r2": 0.9998154842898233,
+      "scarto_da_3": 0.10898043189258289,
+      "secondi": 38.72373580932617
+     },
+     "4000": {
+      "d_s": 3.1349425769339643,
+      "diametro": 11,
+      "diametro_esatto": false,
+      "gradi": [
+       5,
+       30
+      ],
+      "m": 31094,
+      "n": 4000,
+      "potenza": true,
+      "r2": 0.9984940034332727,
+      "scarto_da_3": 0.13494257693396428,
+      "secondi": 4.852348327636719
+     }
+    },
+    "scarto_da_3": 0.10898043189258289,
+    "taglia_massima": 26000,
+    "verdetto_s8": "NON ARRIVA A 3"
+   }
+  },
+  "piu_tridimensionale": "(i) uniformi, gradi 2-6",
+  "taglie": [
+   4000,
+   10000,
+   26000
+  ]
+ },
+ "M_C": {
+  "(ii) respinti, gradi 2-6 n=26000": {
+   "diametro": 33,
+   "diametro_esatto": false,
+   "etichetta": "3D, da misurare",
+   "m": 69700,
+   "n": 26000,
+   "nodi": 40,
+   "oltre_t_max": [
+    30
+   ],
+   "pavimento": {
+    "differenza": 0.0071390788806676014,
+    "in_sigma": 1.916653226027304,
+    "sigma": 0.0037247629272327745,
+    "valore": 0.08971036457618257,
+    "verdetto": "PAVIMENTO"
+   },
+   "potenza": {
+    "esponente": -0.5270798441133719,
+    "in_sigma": 20.688832761790692,
+    "sigma": 0.025476538487314414,
+    "verdetto": "SI ATTENUA"
+   },
+   "t_max": 26,
+   "tempi": {
+    "10": {
+     "aniso_su_rumore": 0.9878877060923343,
+     "anisotropia": 0.023719626143488694,
+     "irregolarita": 0.1518554050192612,
+     "rumore": 0.02401044774341154,
+     "secondi": 18.591220140457153,
+     "sigma_irregolarita": 0.003650940869236548,
+     "sistematica": false
+    },
+    "15": {
+     "aniso_su_rumore": 1.1419289644627373,
+     "anisotropia": 0.02244432020264331,
+     "irregolarita": 0.12430750875625204,
+     "rumore": 0.01965474289655405,
+     "secondi": 26.316388845443726,
+     "sigma_irregolarita": 0.003241402701395647,
+     "sistematica": false
+    },
+    "20": {
+     "aniso_su_rumore": 1.1692346021544027,
+     "anisotropia": 0.01790477191732682,
+     "irregolarita": 0.09684944345685018,
+     "rumore": 0.015313241572166895,
+     "secondi": 33.51759576797485,
+     "sigma_irregolarita": 0.002866793184012218,
+     "sistematica": false
+    },
+    "25": {
+     "aniso_su_rumore": 1.1470767453063537,
+     "anisotropia": 0.01627065743063413,
+     "irregolarita": 0.08971036457618257,
+     "rumore": 0.014184454089241143,
+     "secondi": 41.59753489494324,
+     "sigma_irregolarita": 0.002378099178795694,
+     "sistematica": false
+    },
+    "4": {
+     "aniso_su_rumore": 1.2483044771791996,
+     "anisotropia": 0.04594897049263229,
+     "irregolarita": 0.23280122046013974,
+     "rumore": 0.03680910493605168,
+     "secondi": 9.432762145996094,
+     "sigma_irregolarita": 0.004432562513777076,
+     "sistematica": false
+    },
+    "6": {
+     "aniso_su_rumore": 1.139611173745089,
+     "anisotropia": 0.03437077623642832,
+     "irregolarita": 0.19074916139671955,
+     "rumore": 0.03016009058903494,
+     "secondi": 12.547632932662964,
+     "sigma_irregolarita": 0.004320234507013789,
+     "sistematica": false
+    }
+   }
+  },
+  "(ii)+(iv-U) respinti + tutti i vicini, pesi uguali n=26000": {
+   "diametro": 20,
+   "diametro_esatto": false,
+   "etichetta": "casuale",
+   "m": 212416,
+   "n": 26000,
+   "nodi": 40,
+   "oltre_t_max": [
+    20,
+    25,
+    30
+   ],
+   "pavimento": {
+    "differenza": 0.003671372245392379,
+    "in_sigma": 0.9541940183379861,
+    "sigma": 0.00384761607685109,
+    "valore": 0.17511616047535858,
+    "verdetto": "PAVIMENTO"
+   },
+   "potenza": {
+    "esponente": -0.10212583895690551,
+    "in_sigma": 2.7599363589425803,
+    "sigma": 0.03700296879165474,
+    "verdetto": "RESTA PIATTA"
+   },
+   "t_max": 16,
+   "tempi": {
+    "10": {
+     "aniso_su_rumore": 1.0369090705142154,
+     "anisotropia": 0.028108324934151264,
+     "irregolarita": 0.1714447882299662,
+     "rumore": 0.02710780118859604,
+     "secondi": 52.67517066001892,
+     "sigma_irregolarita": 0.0029174009255732666,
+     "sistematica": false
+    },
+    "15": {
+     "aniso_su_rumore": 0.9630233153455461,
+     "anisotropia": 0.02666447471639524,
+     "irregolarita": 0.17511616047535858,
+     "rumore": 0.027688296110284366,
+     "secondi": 75.34498953819275,
+     "sigma_irregolarita": 0.0025085695753371525,
+     "sistematica": false
+    },
+    "4": {
+     "aniso_su_rumore": 1.2137346993282716,
+     "anisotropia": 0.038211569966181004,
+     "irregolarita": 0.19911368461475204,
+     "rumore": 0.03148263783455214,
+     "secondi": 25.587942361831665,
+     "sigma_irregolarita": 0.003074993031346268,
+     "sistematica": false
+    },
+    "6": {
+     "aniso_su_rumore": 1.1398989799432273,
+     "anisotropia": 0.03311217579103667,
+     "irregolarita": 0.18371784803032032,
+     "rumore": 0.02904834233002456,
+     "secondi": 34.16342806816101,
+     "sigma_irregolarita": 0.0027725969134115235,
+     "sistematica": false
+    }
+   }
+  }
+ },
+ "blob": "4e2c611853eb838bebd243c1f0abb26815a35190",
+ "tempi_chiesti": [
+  4,
+  6,
+  10,
+  15,
+  20,
+  25,
+  30
+ ],
+ "uniformita": {
+  "(i) uniformi": {
+   "dispersione_relativa": 0.36582944181619875,
+   "media": 0.04631301425786516,
+   "minimo": 0.0022716598959487164
+  },
+  "(ii) respinti": {
+   "dispersione_relativa": 0.13749396986538792,
+   "media": 0.059406084079812245,
+   "minimo": 0.029645962560007462
+  },
+  "rapporto_dispersioni": 0.3758417288198146,
+  "rapporto_minimi": 13.050352569448508
+ },
+ "velocita_fronte": 0.6193
+}

@@ -112,6 +112,9 @@ TESTI = (
     # ### ⛔ **IL REFERTO DEL LEGAME E- UN `REPERTO` per le stesse ragioni degli altri:**
     # ### nasce da ### **una CORSA** *(`python proto_camminata/_letture_legame.py`, mezz-ora)*
     # ### e dice ### **che cosa si e- misurato il 2026-10-11.**
+    ("doc/REFERTO_isotropia_locale.md", REPERTO,
+     "l-isotropia locale: l-attenuazione, le otto varianti e la dimensione a taglia grande, al `2026-10-11`",
+     "python proto_camminata/_referto_isotropia.py", "19af0a917a3909de"),
     ("doc/REFERTO_legame.md", REPERTO,
      "le tre misure del legame, per famiglia di scena, al `2026-10-11`",
      "python proto_camminata/_referto_legame.py", "2c0aa34c6241042a"),
