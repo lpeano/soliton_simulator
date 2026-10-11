@@ -10,12 +10,12 @@
 |---|--:|
 | **`PORTATO`** | `109` |
 | **`PRONTO`** | `6` |
-| **`DA_PORTARE`** | `16` |
+| **`DA_PORTARE`** | `17` |
 | **`DA_DECIDERE`** | `5` |
 | **`NON_SI_APPLICA`** | `7` |
-| **in tutto** | ### **`143`** |
+| **in tutto** | ### **`144`** |
 
-### ⚠ **E IL NUMERO `143` E- MISURATO, non stimato:** viene dal perimetro che l-indice calcola, e ### **il mandato ne nominava <<una decina>>** per nome piu- *<<e le cure di architettura>>*. ### **La decina era `20`.**
+### ⚠ **E IL NUMERO `144` E- MISURATO, non stimato:** viene dal perimetro che l-indice calcola, e ### **il mandato ne nominava <<una decina>>** per nome piu- *<<e le cure di architettura>>*. ### **La decina era `20`.**
 
 ---
 
@@ -152,7 +152,7 @@
 
 ---
 
-## `DA_PORTARE` — `16` metodi
+## `DA_PORTARE` — `17` metodi
 
 > ### ⚠ **SI APPLICA, E NON C-E- ANCORA**: `dove` dice **quale punto del mandato** lo porta
 
@@ -171,6 +171,7 @@
 | **`P-DECADIMENTO`** | `STANDARD` | ogni decadimento e- una trasformazione: ### lo pretende il campo `bilancio` di una `regola`, che lo schema rende OBBLIGATORIO | `leggi/schema.py`; nessuna `regola` ancora |
 | **`P3`** | `STANDARD` | nessuna statistica senza barra d-errore: ### l-era 2 non ha ancora una statistica -- le misure fatte sono DETERMINISTICHE (byte, cono, deriva) | nessun sito oggi |
 | **`P5`** | `STANDARD` | ogni ramo `else`/fallback su un percorso fisico va CONTATO: ### IL PUNTO 2 lo rende un presidio -- le guardie fuori dalla fisica avranno un contatore | punto 2, da fare |
+| **`SCENA-3D-PRINCIPALE`** | `STANDARD` | NATO DA UNA DECISIONE DI LUCA. La scena `3D` principale e' la variante dei PUNTI CHE SI RESPINGONO, gradi `2..6`, dal generatore deterministico col SEME DICHIARATO; le posizioni costruiscono gli archi e poi ### **si SCARTANO** *(la scena non ha nessun campo di posizione)*, e il disegno `3D` puo' ricostruirle dal seme ### **da OSSERVATORE.** ### I CONTROLLI: cubico periodico *(dichiarato, `3D` ma NON isotropo)*, anello e grafo casuale *(controlli di DIMENSIONE)*. ### ⚠ **I gradi `2..6` sono una CONDIZIONE INIZIALE, non una legge** -- la moneta di Grover dipende dal grado -- e ### **la scelta e' di Luca, NON derivata.** | `proto_camminata/scene3d.py::geometrico3d(rilassati=True)`; nell'era `2` la scena e' la Parte F di `[[SIMULATORE-ERA-2]]`, che NON e' ancora scritta |
 | **`SCHED-T1`** | `CURA` | la composizione e- una LISTA e c-e- UN SOLO esecutore: ### PORTATO -- `COMPOSIZIONE_GLOBALE` e `composizione_locale()` sono liste dichiarate. ### MA <<un solo esecutore>> NON E- ANCORA UN PRESIDIO: e- il punto 9 | `passo.py`; il presidio e- il punto 9 |
 | **`STANDARD-6`** | `STANDARD` | ogni difetto acclarato si registra SUBITO: i difetti di questo mandato sono nei commit e nella relazione. ### MA DUE NON HANNO UNA VOCE: il buco di `H-FISICA-FUORI-LISTA` e la dipendenza del cono globale dalla tolleranza | la relazione; le voci mancano |
 | **`TAGLIA-FINITA`** | `STANDARD` | lo scaling di taglia finita come via al limite continuo: l-era 2 non ha ancora una misura di taglia | nessun sito oggi |

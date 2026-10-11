@@ -1104,6 +1104,23 @@ def collaudo():
     return 0 if ok[0] == ok[1] else 1
 
 
+# ### ⭐ **NATO DA UNA DECISIONE DI LUCA del 2026-10-11**, e `P-M1` ha chiesto subito
+# ### come si applica -- che e' il presidio che funziona: una voce di classe `STANDARD`
+# ### ### **non puo' entrare senza dire COME SI PORTA nell'era 2.**
+METODI["SCENA-3D-PRINCIPALE"] = (
+    "NATO DA UNA DECISIONE DI LUCA. La scena `3D` principale e' la variante dei PUNTI "
+    "CHE SI RESPINGONO, gradi `2..6`, dal generatore deterministico col SEME DICHIARATO; "
+    "le posizioni costruiscono gli archi e poi ### **si SCARTANO** *(la scena non ha "
+    "nessun campo di posizione)*, e il disegno `3D` puo' ricostruirle dal seme ### **da "
+    "OSSERVATORE.** "
+    "### I CONTROLLI: cubico periodico *(dichiarato, `3D` ma NON isotropo)*, anello e "
+    "grafo casuale *(controlli di DIMENSIONE)*. "
+    "### ⚠ **I gradi `2..6` sono una CONDIZIONE INIZIALE, non una legge** -- la "
+    "moneta di Grover dipende dal grado -- e ### **la scelta e' di Luca, NON derivata.**",
+    "`proto_camminata/scene3d.py::geometrico3d(rilassati=True)`; nell'era `2` la scena "
+    "e' la Parte F di `[[SIMULATORE-ERA-2]]`, che NON e' ancora scritta", "DA_PORTARE")
+
+
 def main(argv):
     import _presidio
     _presidio.avvia(__file__)

@@ -149,3 +149,21 @@ difetto**, perché il suo denominatore dipende dalla taglia.
 indicano i **punti respinti** su ogni asse tranne uno, ma ### **la scelta è di Luca**
 *(`[[DOMANDA-QUALE-SCENA-3D-PRINCIPALE]]`)*. ### **Quindi `C1` gira su ENTRAMBE le
 varianti geometriche**, uniformi e respinti, e la decisione **resta aperta**.
+
+---
+
+## ⭐ **ANNOTAZIONE: LA SCENA `3D` PRINCIPALE E' DECISA, ED E' LA `(ii)`** *(decisione di Luca, `2026-10-11`, arrivata a CORSA IN VOLO — quindi si **ANNOTA**)*
+
+### ✅ **E LA CORSA IN VOLO NON SI TOCCA, NE' HA BISOGNO DI ESSERE RIFATTA:** `C1` era gia' scritto per girare su ### **ENTRAMBE le varianti geometriche** *(uniformi e respinti, a `n = 4000`, `10000`, `26000`)* piu' il ### **cubico `L = 20, 30, 40`** e l'### **anello come limite noto `1D`**. ### **Quindi la scena decisa e' GIA' DENTRO la corsa**, e la decisione ### **non obbliga a rifare niente** — cambia soltanto ### **quale colonna del referto e' la PRINCIPALE e quale il CONTROLLO.**
+
+### ⭐ **E IL MOTIVO PER CUI `C1` girava su due varianti era PROPRIO QUESTO:** nel paragrafo `2` di questo file avevo scritto *<<la scelta e' di Luca, quindi `C1` gira su ENTRAMBE le varianti geometriche e la decisione resta aperta>>*. ### **Non decidere al posto suo e' costato una colonna in piu' e ha risparmiato una corsa intera.**
+
+| | che cosa cambia nel referto |
+|---|---|
+| `1` | la ### **`(ii)` e' la scena `3D` PRINCIPALE** alle taglie grandi |
+| `2` | il ### **cubico periodico** resta il ### **CONTROLLO dichiarato** *(e' `3D` ma **non isotropo**: l'anisotropia del profilo medio e' sistematica a ogni `t`, `~6` volte il rumore)* |
+| `3` | l'### **anello** e il ### **grafo casuale** restano controlli di ### **DIMENSIONE** |
+| `4` | la ### **`(i)` uniformi resta come colonna**, perche' e' la scena su cui il referto vecchio ha misurato — ### **togliere la colonna renderebbe il confronto col referto vecchio impossibile** |
+
+### 📌 **E LA VOCE DELLA DECISIONE E' `[[SCENA-3D-PRINCIPALE]]`**, con i numeri e ### **la taglia accanto a ciascuno.**
+

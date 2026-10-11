@@ -13705,3 +13705,27 @@ Ogni dato di `db_era2/` ha ### **il suo TIMBRO accanto**, col campo `versione_da
 
 ### ✅ **E IL CONFRONTO COL LINEARE SI FA ADESSO A OGNI `t`, non solo all'ultimo:** sull'anello le differenze calano, quindi ### **riportare solo l'ultimo nasconderebbe l'andamento** — e l'andamento e' ### **meta' del fatto.**
 
+## ⭐ **LA DECISIONE DI LUCA: LA SCENA `3D` PRINCIPALE E' LA `(ii)` — registrata, e la corsa in volo NON va rifatta** *(2026-10-11)*
+
+### ✅ **PRIMA DI TUTTO: HO RILETTO I NUMERI DEL MANDATO DALLA FONTE, invece di ricopiarli.** Tutti e cinque combaciano col `json`: irregolarita' `0.158` contro `0.272`, pavimento `0.090` contro `0.170`, esponente `-0.527 ± 0.025` *(a `1.1 sigma` da `-1/2`)*, costo `0.0010` s contro `0.0013` s, e il costo della combinazione `7.4` volte. ### **Il <<7.4>> del mandato e' esatto** — nel mio messaggio di prima avevo detto `7.5`, ed era un mio arrotondamento.
+
+### ⚠ **E UN DIFETTO MIO, trovato scrivendo la voce e corretto prima di committarla:** nel primo giro ho messo nella ### **stessa frase** l'irregolarita' e gli archi a `n = 1728` e il pavimento a `n = 26000`, ### **senza dire la taglia** — che e' ### **esattamente la colpa per cui Luca mi ha corretto sul compromesso.** ### **Riscritto con la taglia accanto a OGNI numero**, in cinque punti numerati.
+
+### ⛔ **E UN PRESIDIO MI HA IMPEDITO DI FARE UNA COSA CHE IL MANDATO CHIEDEVA, e lo dichiaro invece di aggirarlo.** Il mandato dice *<<Chiudi `[[DOMANDA-QUALE-SCENA-3D-PRINCIPALE]]`>>*, e ### **`PI-ERA-STATO` RIFIUTA**: *<<era `2` con stato `CHIUSA`. L'era 2 NON E' COMINCIATA: una sua voce e' `AGENDA`>>* — e con `CHIUSA` rifiuta anche `SUPERATA`. ### **Non ho forzato il campo.**
+
+### ⭐ **LA DECISIONE E' REGISTRATA IN TRE CAMPI CHE UN PROGRAMMA LEGGE, e il risultato operativo e' quello che il mandato voleva:**
+
+| | il campo | che cosa fa |
+|---|---|---|
+| `1` | `superata_da` = `[[SCENA-3D-PRINCIPALE]]` | dice ### **da chi** e' superata |
+| `2` | `priorita` ### **svuotata** | il generatore di `DA_DECIDERE_LUCA.md` dice *<<una voce senza `priorita` NON e' una domanda>>* — ### **e la domanda ESCE DALLA LISTA** |
+| `3` | `nota_guardiano` ### **TOLTA** *(non svuotata)* | e' il campo su cui l'elenco raccoglie le domande di Luca |
+
+### ✅ **E IL RISULTATO SI VEDE: la domanda e' fuori dalla lista, e `[[DOMANDA-CHI-CAUSA-L-ANISOTROPIA]]` e' diventata `PRONTA` DA SOLA** — perche' dipendeva proprio da questa. ### **Nessuna spunta a mano.**
+
+### ⚠ **MA IL CAMPO `stato` DICE ANCORA `AGENDA` SU UNA DOMANDA DECISA, e questo e' un limite dell'indice che va detto:** `PI-ERA-STATO` fa dipendere lo stato dall'### **era** e non dal ### **fatto**, quindi finche' l'era `2` non comincia ### **nessuna voce dell'era `2` puo' dire di essere chiusa.** ### **Non e' un difetto che posso curare dentro questo mandato** — e non voglio curarlo di nascosto.
+
+### ⭐ **E LA CORSA IN VOLO NON VA RIFATTA, per una ragione che e' la regola che ho seguito:** `C1` era scritto per girare su ### **ENTRAMBE le varianti geometriche**, proprio perche' ### **la scelta era di Luca e non mia** — quindi la scena decisa e' ### **GIA' DENTRO la corsa.** ### **Non decidere al posto suo e' costato una colonna in piu' e ha risparmiato una corsa intera.**
+
+### ✅ **E LE QUATTRO CONSEGUENZE SONO REGISTRATE:** il legame alle taglie grandi usa la `(ii)` come principale e il cubico come controllo · la Parte F del simulatore prende la `(ii)` col suo generatore deterministico e il seme dichiarato, ### **posizioni scartate dopo gli archi** · la variante pesata resta una strada per la ### **memoria d'arco dinamica** e ### **non e' una scena** · e i ### **gradi `2..6` restano una CONDIZIONE INIZIALE** *(Grover dipende dal grado)*, con la scelta ### **di Luca e non derivata.**
+

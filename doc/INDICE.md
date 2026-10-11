@@ -9,7 +9,7 @@
 | `DOCUMENTAZIONE` | `2` | 1 |
 | `DOCUMENTAZIONE` | `ENTRAMBE` | 8 |
 | `FISICA` | `1` | 343 |
-| `FISICA` | `2` | 73 |
+| `FISICA` | `2` | 74 |
 | `FISICA` | `ENTRAMBE` | 17 |
 | `INFRASTRUTTURA` | `1` | 39 |
 | `INFRASTRUTTURA` | `2` | 16 |
@@ -738,6 +738,7 @@
 | `SABOTATURA-NO-OP` | DIFETTO | METODO | ENTRAMBE | ### **CHIUSA** |  | la sabotatura di un braccio che DEVE fallire era un no-op silenzioso: P-MOD da 1 |
 | `SCALE-TW` | FRONTE | FISICA | 1 | ### **SOSPESA** | SI | LE SCALE DELLA TORSIONE: un'analisi completa, DA CAPO / mandato di Luca ricevuto |
 | `SCENA-1` | MISURA | FISICA | 1 | ### **CHIUSA** |  | CHIUSA il 2026-09-25, strada (1) (decisione di Luca) / SEMINALAM era approvata m |
+| `SCENA-3D-PRINCIPALE` | STANDARD | FISICA | 2 | ### **AGENDA** |  | la scena 3D principale e- la (ii): punti che si respingono, gradi da 2 a 6 |
 | `SCHED-PASSO` | CURA | FISICA | 1 | ### **SOSPESA** | SI | il passo pieno diventa uno SCHEDULATORE: le regole del passo sono architettura,  |
 | `SCHED-T1` | CURA | INFRASTRUTTURA | 1 | ### **CHIUSA** |  | T1 dello schedulatore: la composizione e' una LISTA e c'e' UN SOLO esecutore, es |
 | `SCHED-T2-TIPI` | CURA | INFRASTRUTTURA | 1 | ### **CHIUSA** |  | T2 (i tipi): gli 8 tipi del registro del passo, e dopo L_CONSERVA sono coerenti  |
