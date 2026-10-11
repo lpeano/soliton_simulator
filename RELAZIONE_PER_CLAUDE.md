@@ -13281,3 +13281,41 @@ Ogni dato di `db_era2/` ha ### **il suo TIMBRO accanto**, col campo `versione_da
 ### ⚠ **E IL `pre-commit` DICHIARATO SFORA DI `0.11` s** *(`120.11` su `120`)*: ### **lo dichiaro come segnale e NON sposto etichette per tenerlo verde** — quel totale e' ### **contabilita' e non esecuzione** *(il hook non chiama `collauda.py`)*, ed e' il rilievo che sta in coda. ### ⛔ **Spostare un collaudo per far tornare un numero che non misura il hook sarebbe truccare una metrica.**
 
 ### 📌 **LA VOCE ④ E' REGISTRATA, e la sua chiusura e' <<un checkpoint, poi STOP>>:** `[[CAMMINATA-NELLA-TABELLA]]` e `[[DOMANDA-QUANDO-LA-CAMMINATA-IN-TABELLA]]`. ### ⛔ **E il porting NON PUO' partire**, perche' la voce ⑥ pretende *«la regola col `cs` locale»* e ### **quale regola sia non e' deciso**: sono le ### **TRE scelte** che il `v4` ha misurato e consegnato. ### ⭐ **E `python csv/indice.py prossima` dice da se' `DOMANDA-PASSO-FRAZIONARIO-O-ASINCRONO`**, senza che io gliel'abbia detto.
+
+## ⛔ **CORREZIONE: <<I TICK ASINCRONI RISPETTANO L'INVARIANZA LOCALE>> VALE SOLO A `cs` UNIFORME** *(rilievo del guardiano, `2026-10-11`, verificato da me)*
+
+> ### ⭐ **E IL RILIEVO E' GIUSTO.** L'ho ### **rimisurato io**, con la regola esatta di `camminata4.passo4_S` e non ricopiando i suoi numeri — ### **un regalo non verificato e' un debito, e questo era un regalo che mi correggeva.**
+
+### **IL FATTO:** con la regola degli archi che ho dichiarato — *«l'arco si scambia solo se scattano ENTRAMBE le estremita' nello stesso tick»* — la frequenza di scambio dell'arco ### **non e' il `cs` dei nodi e non e' il loro `min`:** e' la ### **frequenza di COINCIDENZA** dei due orologi.
+
+| il caso | freq. dell'ARCO | il `min` | il prodotto |
+|---|---|---|---|
+| `cs 0.5` e `0.5`, **in fase** | `0.5000` | `0.5000` | `0.2500` |
+| `cs 0.5` e `0.5`, **sfasati di mezzo tick** | ### ⛔ **`0.0000`** *(l'arco e' **bloccato per sempre**)* | `0.5000` | `0.2500` |
+| `cs 0.3` e `0.31`, in fase | ### ⛔ **`0.0900`** | `0.3000` | `0.0930` |
+| `cs 0.3` e `0.7`, ### **IN FASE** | ### ⛔ **`0.0999`** | `0.3000` | `0.2100` |
+| `cs 0.5` e `1.0`, in fase | `0.5000` | `0.5000` | `0.5000` |
+| `cs 0.25` e `0.75`, in fase | `0.2500` | `0.2500` | `0.1875` |
+
+### ⭐ **E I TRE CASI CHE HO AGGIUNTO IO DICONO UNA COSA CHE IL RILIEVO NON DICEVA: nemmeno <<in fase>> basta.** `cs = 0.3` e `0.7` ### **partono entrambi da `tau = 0`** e danno ### **`0.0999`**, mentre `0.25` e `0.75` danno ### **`0.2500` = il `min`.** ### **Quindi decide la COMMENSURABILITA':** dove gli istanti di scatto del lento sono ### **un sottoinsieme** di quelli del veloce la frequenza e' il `min`, altrimenti ### **crolla verso il prodotto.**
+
+### ⛔ **E PERCHE' LA MIA LETTURA `L0` VEDEVA `(S)` PERFETTO:** misurava ### **solo `cs` UNIFORME**, con tutti gli orologi a `tau = 0` — cioe' ### **l'unico caso in cui ogni arco coincide SEMPRE.** Misurato sulla scena irregolare:
+
+| il campo di `cs` | freq. dei NODI | freq. degli ARCHI | il `min` atteso |
+|---|---|---|---|
+| uniforme `1.00`, `0.75`, `0.50`, `0.25` | `= cs` | ### ✅ **`= cs`, esattamente** | — |
+| casuale in `[0.3, 1.0]` | `0.6552` | ### ⛔ **`0.4193`** | `0.5283` |
+| due zone `0.5` e `1.0` *(commensurabili)* | `0.8833` | `0.8149` | `0.8149` |
+
+### ⛔ **QUINDI <<`(S)` RISPETTA L'INVARIANZA LOCALE>> E' VERO DOVE `cs` E' UNIFORME, E NON E' DIMOSTRATO ALTROVE** — ed e' ### **proprio il caso che conta**, perche' ### **un `cs` che non varia non piega niente.** ### ⚠ **E non e' solo una lacuna di copertura: la frequenza di un arco NON E' UNA FUNZIONE DELLE SUE DUE ESTREMITA'**, cioe' ### **non e' locale** *(`W3`)*.
+
+### ✅ **UNA PRECISAZIONE MIA, che il rilievo non diceva:** nel codice ### **tutti i `tau` partono da ZERO**, quindi il caso *«bloccato per sempre»* ### **non si presenta dalle condizioni iniziali** — in `200` tick ### **nessun arco e' risultato mai scambiato.** ### ⛔ **Ma la non localita' c'e' comunque**, e il `0.4193` contro `0.5283` lo misura.
+
+### 📌 **CHE COSA HO FATTO, e che cosa NON ho fatto**
+
+| | |
+|---|---|
+| ### ✅ **registrato** | `[[MISURA-ARCO-E-COINCIDENZA]]` *(la misura, coi numeri rimisurati)* |
+| ### ✅ **corretto** | `[[DOMANDA-PASSO-FRAZIONARIO-O-ASINCRONO]]` *(il titolo e la descrizione: l'informazione per la scelta `F`/`S`, che resta di Luca)* e `[[MISURA-INVARIANZA-LOCALE-V4]]` *(il titolo dice adesso **<<misurata SOLO a `cs` uniforme>>**)* |
+| ### ✅ **corretto il REFERTO** | il caveat sta ### **dentro la sezione `L0`**, dove la lettura si fa, e ### **non solo in fondo** — piu' un limite nuovo nella lista. ### **Il referto e' rigenerato e il suo blob aggiornato nello stesso commit**, come il presidio della forma pretende |
+| ### ⛔ **NON ho fatto** | ### **nessun codice**, come il mandato dice: l'*«orologio proprio dell'arco»* e' ### **dichiarato come correzione possibile e NON implementato** — e la scelta resta di Luca |

@@ -45,6 +45,8 @@
 | **`0.75`** | `37` | 0.4706 ± 0.0069 | **0.6275** ± 0.0091 | ### **1.0132** | ### ✅ **SI** |
 | **`1.00`** | `28` | 0.6193 ± 0.0094 | **0.6193** ± 0.0094 | ### **1.0000** | ### ✅ **SI** |
 
+> ### ⛔ **E UN CAVEAT CHE VALE PIU' DEL VERDETTO, aggiunto il `2026-10-11` da un RILIEVO DEL GUARDIANO che ho VERIFICATO:** questa lettura misura ### **SOLO `cs` UNIFORME**, con tutti gli orologi a `tau = 0` — cioe' ### **l'unico caso in cui `(S)` e' esatto PER COSTRUZIONE.** ### **Quindi <<`(S)` rispetta l'invarianza locale>> e' vero DOVE `cs` E' UNIFORME e ### NON e' dimostrato altrove**, ed e' proprio il caso che conta, perche' ### **un `cs` che non varia non piega niente.** ### ⭐ **Il motivo, misurato:** con la regola degli archi di `(S)` la frequenza di scambio dell'arco e' la ### **frequenza di COINCIDENZA** dei due orologi, non il `cs` dei nodi e nemmeno il loro `min` — `cs = 0.3` e `0.7` ### **in fase** danno **`0.0999`** invece di `0.3000`, e con `cs` uniforme nodi e archi coincidono ### **esattamente**, mentre con un `cs` casuale i nodi scattano a `0.6552` e gli archi a **`0.4193`** *(minimo atteso `0.5283`)*. ### `[[MISURA-ARCO-E-COINCIDENZA]]`
+
 ### ✅ **CONFERMA** **`(S)` RISPETTA L'INVARIANZA LOCALE: `0` casi su `4` fuori da `3 sigma`, e lo scarto peggiore e' il `4.0%`.** ### ⛔ **SMENTITA** **`(F)` NO: `2` casi fuori, e lo scarto peggiore e' il `13.3%`.**
 
 ### ⚠ **E LA MIA PREVISIONE ERA GIUSTA SU `(S)` E GIUSTA NEL VERSO SU `(F)`, MA SBAGLIATA SU *DOVE*:** avevo scritto *<<lo scarto cresce quando `cs` scende>>*, e invece ### **cresce verso `cs` INTERMEDI** *(`1.133` a `cs = 0.75`, `1.067` a `cs = 0.25`)*. ### ⭐ **E il motivo e' il punto `A4`:** a `cs = 0` e a `cs = 1` la famiglia frazionaria e' ### **esatta**, quindi l'errore di composizione e' ### **massimo in mezzo.**
@@ -100,5 +102,6 @@
 | `2` | ### **La velocita' a `cs = 1` non e' `1`** *(e' `0.6193`)*: la camminata di Grover ### **non satura il cono**, quindi `L0` si legge come un ### **rapporto** e non come un valore assoluto |
 | `3` | ### **`L0` gira sul REGOLARE**, perche' sull'irregolare l'eccentricita' e' `6` e il fronte ### **satura in sei tick** — e adattare una retta su una curva satura da' ### **una pendenza che non e' una velocita'** |
 | `4` | ### **La <<conservazione modificata>> del `v3` NON e' derivata per un `cs` non uniforme**, quindi ### **non e' misurata qui**, e ### **non la chiamo energia** *(quella scelta e' di Luca)* |
-| `5` | ### **Un solo grafo per la scena principale**, `n = 120`: ### **due taglie non sono uno scaling** *(`TAGLIA-FINITA`)*, e nessun limite continuo si afferma |
+| `5` | ### ⛔ **IL VERDETTO DI `L0` SU `(S)` VALE SOLO A `cs` UNIFORME**, e questo limite e' stato aggiunto ### **dopo**, da un rilievo del guardiano che ho verificato: la frequenza di scambio di un arco in `(S)` e' una ### **COINCIDENZA di orologi**, non una funzione delle sue due estremita' — quindi ### **non e' nemmeno LOCALE**, e dove `cs` varia l'invarianza ### **non e' misurata.** ### ⭐ **Una correzione possibile, dichiarata e NON implementata:** un ### **orologio proprio dell'arco**, cosi' lo scambio non dipende dalla coincidenza |
+| `6` | ### **Un solo grafo per la scena principale**, `n = 120`: ### **due taglie non sono uno scaling** *(`TAGLIA-FINITA`)*, e nessun limite continuo si afferma |
 

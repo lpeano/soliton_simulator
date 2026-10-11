@@ -104,6 +104,20 @@ def main():
                  "### ✅ **SI**" if v["entro_3sigma_fronte"]
                  else "### ⛔ **NO**"))
         a("")
+    a("> ### ⛔ **E UN CAVEAT CHE VALE PIU' DEL VERDETTO, aggiunto il `2026-10-11` da un "
+      "RILIEVO DEL GUARDIANO che ho VERIFICATO:** questa lettura misura ### **SOLO `cs` "
+      "UNIFORME**, con tutti gli orologi a `tau = 0` — cioe' ### **l'unico caso in cui "
+      "`(S)` e' esatto PER COSTRUZIONE.** ### **Quindi <<`(S)` rispetta l'invarianza "
+      "locale>> e' vero DOVE `cs` E' UNIFORME e ### NON e' dimostrato altrove**, ed e' "
+      "proprio il caso che conta, perche' ### **un `cs` che non varia non piega niente.** "
+      "### ⭐ **Il motivo, misurato:** con la regola degli archi di `(S)` la frequenza "
+      "di scambio dell'arco e' la ### **frequenza di COINCIDENZA** dei due orologi, non il "
+      "`cs` dei nodi e nemmeno il loro `min` — `cs = 0.3` e `0.7` ### **in fase** "
+      "danno **`0.0999`** invece di `0.3000`, e con `cs` uniforme nodi e archi coincidono "
+      "### **esattamente**, mentre con un `cs` casuale i nodi scattano a `0.6552` e gli "
+      "archi a **`0.4193`** *(minimo atteso `0.5283`)*. ### "
+      "`[[MISURA-ARCO-E-COINCIDENZA]]`")
+    a("")
     fuoriF = [k for k in d["L0"]["F"] if k.startswith("cs=")
               and not d["L0"]["F"][k]["entro_3sigma_fronte"]]
     fuoriS = [k for k in d["L0"]["S"] if k.startswith("cs=")
@@ -258,7 +272,14 @@ def main():
     a("| `4` | ### **La <<conservazione modificata>> del `v3` NON e' derivata per un `cs` "
       "non uniforme**, quindi ### **non e' misurata qui**, e ### **non la chiamo energia** "
       "*(quella scelta e' di Luca)* |")
-    a("| `5` | ### **Un solo grafo per la scena principale**, `n = %d`: ### **due taglie "
+    a("| `5` | ### ⛔ **IL VERDETTO DI `L0` SU `(S)` VALE SOLO A `cs` UNIFORME**, e "
+      "questo limite e' stato aggiunto ### **dopo**, da un rilievo del guardiano che ho "
+      "verificato: la frequenza di scambio di un arco in `(S)` e' una ### **COINCIDENZA di "
+      "orologi**, non una funzione delle sue due estremita' — quindi ### **non e' nemmeno "
+      "LOCALE**, e dove `cs` varia l'invarianza ### **non e' misurata.** ### ⭐ **Una "
+      "correzione possibile, dichiarata e NON implementata:** un ### **orologio proprio "
+      "dell'arco**, cosi' lo scambio non dipende dalla coincidenza |")
+    a("| `6` | ### **Un solo grafo per la scena principale**, `n = %d`: ### **due taglie "
       "non sono uno scaling** *(`TAGLIA-FINITA`)*, e nessun limite continuo si afferma |"
       % sc["n"])
     a("")

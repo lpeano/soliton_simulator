@@ -6,7 +6,7 @@
 |---|--:|
 ## ⭐ **LA PROSSIMA**
 
-> ### ✅ **[[DOMANDA-PASSO-FRAZIONARIO-O-ASINCRONO]]** — pezzi frazionari o tick asincroni: la C esatta vale uno stato nuovo?
+> ### ✅ **[[DOMANDA-PASSO-FRAZIONARIO-O-ASINCRONO]]** — pezzi frazionari o tick asincroni, e l-invarianza locale dei secondi NON e- dimostrata dove cs varia
 >
 > ### 📌 **Che cosa SBLOCCA:** ### **niente di dichiarato**
 >
@@ -77,7 +77,7 @@
 | `DOMANDA-C2-O-C4` | `DECISIONE`/`FISICA`/`2`/`AGENDA` | C2 senza massa come misurato, oppure si prova C4 | due componenti o quattro: il gap c-e- solo con C4? ### DOMANDA APERTA PER LUCA, da decidere da Luca, ed e- la domanda C2 contro C4 di A16. ### IL FATT |
 | `DOMANDA-COME-LA-MATERIA-CAMBIA-LAMBDA` | `DECISIONE`/`FISICA`/`2`/`AGENDA` | scattering nel nodo o trasmissione sull-arco | come la materia cambia la densita- del vuoto: scattering nel nodo o trasmissione sull-arco? ### DOMANDA APERTA PER LUCA, da decidere da Luca. ### E- i |
 | `DOMANDA-GUSCIO-E-INTERFERENZA` | `DECISIONE`/`FISICA`/`2`/`AGENDA` | il guscio e- interferenza, quindi l-ipotesi si riformula o manca qualcosa | il guscio e- interferenza e non materia: che cosa resta dell-ipotesi del guscio? ### DOMANDA APERTA PER LUCA, da decidere da Luca. ### IL FATTO MISURA |
-| `DOMANDA-PASSO-FRAZIONARIO-O-ASINCRONO` | `DECISIONE`/`FISICA`/`2`/`AGENDA` | pezzi frazionari o tick asincroni, cioe- se un bit per nodo vale la C esatta | pezzi frazionari o tick asincroni: la C esatta vale uno stato nuovo? ### DOMANDA APERTA PER LUCA, da decidere da Luca. ### E- il punto A4 del mandato  |
+| `DOMANDA-PASSO-FRAZIONARIO-O-ASINCRONO` | `DECISIONE`/`FISICA`/`2`/`AGENDA` | e l-invarianza locale dei tick asincroni NON e- dimostrata dove cs varia, perche- la frequenza dell-arco e- una COINCIDENZA | pezzi frazionari o tick asincroni, e l-invarianza locale dei secondi NON e- dimostrata dove cs varia ### DOMANDA APERTA PER LUCA, da decidere da Luca. |
 | `DOMANDA-PRIMA-LEGARE-POI-MISURARE` | `DECISIONE`/`FISICA`/`2`/`AGENDA` | cercare prima un legame, o riformulare le letture come letture sulla dispersione | senza stato legato tre letture non sono decidibili: si cerca prima un legame? ### DOMANDA APERTA PER LUCA, da decidere da Luca. ### IL FATTO: tre lett |
 | `DOMANDA-QUALE-FORMA-FISSA-CS` | `DECISIONE`/`FISICA`/`2`/`AGENDA` | quale forma fissa cs, e nessuna delle tre e- libera da tutti i difetti | quale forma del vuoto fissa cs: nessuna delle tre e- libera da tutti i difetti ### DOMANDA APERTA PER LUCA, da decidere da Luca. ### E- il punto A2 de |
 | `DOMANDA-QUANDO-LA-CAMMINATA-IN-TABELLA` | `DECISIONE`/`FISICA`/`2`/`AGENDA` | quando si porta la camminata nella tabella, e il porting aspetta le tre scelte del v4 | quando si porta la camminata nella tabella? il porting aspetta TRE decisioni aperte ### DOMANDA APERTA PER LUCA, da decidere da Luca. ### E- il punto  |

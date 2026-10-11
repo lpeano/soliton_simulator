@@ -111,7 +111,7 @@ TESTI = (
     # ### repo oggi>>.
     ("doc/REFERTO_prototipo_camminata_v4.md", REPERTO,
      "le sei letture del prototipo `v4`, per `(F)` e per `(S)`, al `2026-10-11`",
-     "python proto_camminata/_referto4.py", "37a987fc70640030"),
+     "python proto_camminata/_referto4.py", "db83b8dc150f866a"),
     ("doc/REFERTO_prototipo_camminata_v3.md", REPERTO,
      "le tredici letture del prototipo `v3` piu- le due del guscio e del moto, al "
      "`2026-10-11`",
