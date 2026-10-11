@@ -29,7 +29,7 @@
 
 | la domanda | pronta? | che cosa aspetta |
 |---|---|---|
-| **[[DOMANDA-CHI-CAUSA-L-ANISOTROPIA]]** l-anisotropia e- del grafo e non dei versori: si cura il grafo o si lasc | ### ⏳ aspetta | ### **aspetta:** `DOMANDA-QUALE-SCENA-3D-PRINCIPALE` |
+| **[[DOMANDA-CHI-CAUSA-L-ANISOTROPIA]]** sul cubico i versori del v3 RIDUCONO l-anisotropia direzionale: e- una l | ### ⏳ aspetta | ### **aspetta:** `DOMANDA-QUALE-SCENA-3D-PRINCIPALE` |
 | **[[DOMANDA-COME-LA-MATERIA-CAMBIA-LAMBDA]]** come la materia cambia la densita- del vuoto: scattering nel nodo o tras | ### ⏳ aspetta | ### **aspetta:** `DOMANDA-PASSO-FRAZIONARIO-O-ASINCRONO` |
 | **[[DOMANDA-FORME-VUOTO]]** le TRE forme del vuoto locale: che cos-e- un grado, quanti per nodo, l-a | ### ⏳ aspetta | ### **aspetta:** `DOMANDA-QUANTITA-CONSERVATA` |
 | **[[DOMANDA-FUSIONE]]** la FUSIONE di due nodi: si vieta, e con che cosa? | ### ✅ **PRONTA** | ### **niente** |
@@ -77,7 +77,7 @@
 | `COESIONE-TERMINE-O-CAMPO` | `DECISIONE`/`FISICA`/`2`/`AGENDA` | la coesione e- un termine locale con una forza da derivare, oppure un campo dinamico | la coesione simmetrica viene da un termine LOCALE o da un CAMPO? ### DOMANDA APERTA PER LUCA, da decidere da Luca. ### IL FATTO MISURATO (referto doc/ |
 | `DERIVA-DELLA-FORMA-D` | `DECISIONE`/`FISICA`/`2`/`AGENDA` | se vale la pena cercare la causa: la forma N funziona, (D) deriva e non so perche- | la forma (D) non conserva la sua conservazione modificata: perche-? ### DOMANDA APERTA PER LUCA, e anche per me: NON SO PERCHE-. ### IL FATTO MISURATO |
 | `DOMANDA-C2-O-C4` | `DECISIONE`/`FISICA`/`2`/`AGENDA` | C2 senza massa come misurato, oppure si prova C4 | due componenti o quattro: il gap c-e- solo con C4? ### DOMANDA APERTA PER LUCA, da decidere da Luca, ed e- la domanda C2 contro C4 di A16. ### IL FATT |
-| `DOMANDA-CHI-CAUSA-L-ANISOTROPIA` | `DECISIONE`/`FISICA`/`2`/`AGENDA` | l-anisotropia e- del grafo, e i versori la riducono invece di causarla | l-anisotropia e- del grafo e non dei versori: si cura il grafo o si lascia? ### DOMANDA APERTA PER LUCA, da decidere da Luca. ### IL FATTO MISURATO: i |
+| `DOMANDA-CHI-CAUSA-L-ANISOTROPIA` | `DECISIONE`/`FISICA`/`2`/`AGENDA` | sul cubico i versori riducono l-anisotropia direzionale; e l-attribuzione del 14 per cento del v3 ai versori RESTA, perche- l-anello e- vertex-transitivo | sul cubico i versori del v3 RIDUCONO l-anisotropia direzionale: e- una leva o si lascia? ### DOMANDA APERTA PER LUCA, da decidere da Luca. ### ####### |
 | `DOMANDA-COME-LA-MATERIA-CAMBIA-LAMBDA` | `DECISIONE`/`FISICA`/`2`/`AGENDA` | scattering nel nodo o trasmissione sull-arco | come la materia cambia la densita- del vuoto: scattering nel nodo o trasmissione sull-arco? ### DOMANDA APERTA PER LUCA, da decidere da Luca. ### E- i |
 | `DOMANDA-GUSCIO-E-INTERFERENZA` | `DECISIONE`/`FISICA`/`2`/`AGENDA` | il guscio e- interferenza, quindi l-ipotesi si riformula o manca qualcosa | il guscio e- interferenza e non materia: che cosa resta dell-ipotesi del guscio? ### DOMANDA APERTA PER LUCA, da decidere da Luca. ### IL FATTO MISURA |
 | `DOMANDA-PASSO-FRAZIONARIO-O-ASINCRONO` | `DECISIONE`/`FISICA`/`2`/`AGENDA` | e l-invarianza locale dei tick asincroni NON e- dimostrata dove cs varia, perche- la frequenza dell-arco e- una COINCIDENZA | pezzi frazionari o tick asincroni, e l-invarianza locale dei secondi NON e- dimostrata dove cs varia ### DOMANDA APERTA PER LUCA, da decidere da Luca. |

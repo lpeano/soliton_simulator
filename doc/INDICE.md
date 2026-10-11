@@ -9,7 +9,7 @@
 | `DOCUMENTAZIONE` | `2` | 1 |
 | `DOCUMENTAZIONE` | `ENTRAMBE` | 8 |
 | `FISICA` | `1` | 343 |
-| `FISICA` | `2` | 65 |
+| `FISICA` | `2` | 66 |
 | `FISICA` | `ENTRAMBE` | 17 |
 | `INFRASTRUTTURA` | `1` | 39 |
 | `INFRASTRUTTURA` | `2` | 16 |
@@ -257,12 +257,12 @@
 | `DECISIONE-VUOLE-UN-CAMPO` | STANDARD | METODO | ENTRAMBE | ### **APERTA** |  | una decisione che serve a un programma vuole un CAMPO, non una frase nel titolo |
 | `DERIVA-DELLA-FORMA-D` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | la forma (D) non conserva la sua conservazione modificata: perche-? |
 | `DIFETTO-TERNARIO-CHE-NON-SCEGLIE` | DIFETTO | FISICA | 2 | ### **AGENDA** |  | un ternario che non scegliE: per il braccio lineare misuravo la Q di N |
-| `DIMENSIONE-E-ISOTROPIA-DELLE-SCENE` | MISURA | FISICA | 2 | ### **AGENDA** |  | le scene del banco non hanno dimensione 3, e nessuna scena 3D provata e- isotrop |
+| `DIMENSIONE-E-ISOTROPIA-DELLE-SCENE` | MISURA | FISICA | 2 | ### **AGENDA** |  | le scene del banco non hanno dimensione 3, e la mia misura dell-isotropia era co |
 | `DISEGNO-3D-OSSERVATORE` | STANDARD | METODO | 2 | ### **AGENDA** |  | il disegno 3D e- un OSSERVATORE, e il 3D che distorce E- UNA MISURA |
 | `DIVISIONE-AUTOCONSISTENTE` | FRONTE | FISICA | 2 | ### **AGENDA** |  | la divisione dell arco come UNA legge: dove si rompe, cosa ereditano i figli, il |
 | `DOMANDA-A3B-CLASSE` | DECISIONE | METODO | 2 | ### **AGENDA** |  | A3b: con che classe entra nell-indice? |
 | `DOMANDA-C2-O-C4` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | due componenti o quattro: il gap c-e- solo con C4? |
-| `DOMANDA-CHI-CAUSA-L-ANISOTROPIA` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | l-anisotropia e- del grafo e non dei versori: si cura il grafo o si lascia? |
+| `DOMANDA-CHI-CAUSA-L-ANISOTROPIA` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | sul cubico i versori del v3 RIDUCONO l-anisotropia direzionale: e- una leva o si |
 | `DOMANDA-COME-LA-MATERIA-CAMBIA-LAMBDA` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | come la materia cambia la densita- del vuoto: scattering nel nodo o trasmissione |
 | `DOMANDA-D13-CONIUGATI` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | D13: i coniugati delle memorie -- tw come fase U(1) sull-arco? |
 | `DOMANDA-D9-GEOMETRIA` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | D9: la geometria viene da d e p_d dentro H, o dalle relazioni fra gli psi? |
@@ -377,6 +377,7 @@
 | `INTERO-BLOCCO` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 7 volte, MAI definito in un registro) [INTERO-BLOCCO] |
 | `INVARIANZA-LOCALE-CS` | FRONTE | FISICA | 2 | ### **AGENDA** |  | ogni legge che usa una grandezza GLOBALE da all osservatore locale un riferiment |
 | `INVENTARIO-SIGILLI-SENZA-COMMIT` | DIFETTO | INFRASTRUTTURA | 1 | ### **SOSPESA** |  | 79 voci di sigillo su 82 non hanno il commit con cui rigirarle, piu una riga dup |
+| `ISOTROPIA-LOCALE` | FRONTE | FISICA | 2 | ### **AGENDA** |  | l-irregolarita- locale si attenua con la distanza? e si riduce costruendo meglio |
 | `ISOTROPIA-MISURATA` | CRITERIO | METODO | 2 | ### **AGENDA** |  | l-isotropia del supporto e- un criterio MISURATO, prima di dire che un campo e-  |
 | `J2` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 3 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
 | `K0` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 2 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |

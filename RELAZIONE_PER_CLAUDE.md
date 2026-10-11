@@ -13399,3 +13399,25 @@ Ogni dato di `db_era2/` ha ### **il suo TIMBRO accanto**, col campo `versione_da
 ### 📌 **LE TRE VOCI:** `[[DIMENSIONE-E-ISOTROPIA-DELLE-SCENE]]` *(la misura)*, e le ### **due domande che sono di Luca**: `[[DOMANDA-QUALE-SCENA-3D-PRINCIPALE]]` *(adesso **`CRITICA`**: nessuna delle due scene `3D` provate e' isotropa, e quella scelta come principale sta peggio)* e `[[DOMANDA-CHI-CAUSA-L-ANISOTROPIA]]`. ### ⛔ **Non scelgo io.**
 
 ### ⚠ **E DICHIARO UN'INFRAZIONE AL MIO RITO:** le soglie dell'isotropia erano ### **fissate nel codice prima della corsa** *(`etichetta(soglia=0.10)`)*, ma la ### **corsa e' arrivata prima dell'annotazione nel task history** — perche' la seconda versione del rilievo e' arrivata ### **mentre costruivo il modulo delle scene.** ### **<<Soglia prima del numero>> e' rispettato; <<task history prima della misura>> NO**, e l'ho scritto nel task history stesso, dove si vede.
+
+## ⛔ **UN MIO ERRORE DI LOGICA, TROVATO DAL GUARDIANO: <<IL `14%` DEL `v3` E' DEL GRAFO>> NON REGGE** *(`2026-10-11`)*
+
+> ### ⭐ **E non e' un numero sbagliato: e' un RAGIONAMENTO sbagliato**, che e' peggio — perche' un numero lo ricontrolli, un ragionamento ### **te lo porti dietro.**
+
+### **Avevo scritto:** *«i versori del `v3` abbassano l'anisotropia, quindi il `~14%` misurato nel `v3` e' del GRAFO e non dei versori»*. ### ⛔ **Il guardiano ha ragione, e il conto e' di una riga:** il `14%` del `v3` era la differenza di velocita' fra ### **QUATTRO NODI DELLO STESSO ANELLO CIRCOLANTE**, che e' un grafo ### **VERTEX-TRANSITIVO** — ### **tutti i suoi nodi sono equivalenti, quindi il grafo NON PUO' distinguerli**, e la differenza viene ### **per necessita'** dai versori assegnati per indice d'arco.
+
+### ⛔ **E LA MIA MISURA NUOVA RIGUARDA UN'ALTRA GRANDEZZA:** la dispersione fra ### **direzioni** su cubico e geometrico. ### **Due cose diverse, e la seconda non puo' smentire la prima.** ### ✅ **Quindi l'attribuzione del `v3` ai versori RESTA**, e `[[PROVV-VERSORI-NON-RELAZIONALI]]` ### **resta un difetto con la sua ragione intatta.**
+
+### ✅ **E IL FATTO NUOVO RESTA, come fatto DISTINTO:** sul reticolo cubico i versori del `v3` ### **RIDUCONO** l'anisotropia direzionale *(`15.4%` con versori tutti uguali contro `11.4%` con quelli del `v3`)*. ### **E' registrato a parte**, in `[[DOMANDA-CHI-CAUSA-L-ANISOTROPIA]]`, che adesso chiede ### **se e' una leva o si lascia** invece di chiedere chi causa che cosa.
+
+### ⚠ **E IL PRIMO RILIEVO E' GIUSTO ANCHE LUI, e la rimisura e' il passo successivo:** la mia `isotropia()` mediava ### **le dispersioni PER NODO**, e su un grafo irregolare quelle misurano ### **quanto e' irregolare il vicinato di quel nodo**, non una dipendenza ### **SISTEMATICA** dalla direzione. ### ⭐ **L'anisotropia si misura sul PROFILO MEDIO** *(si media il profilo per direzione su molti nodi, POI si guarda la dispersione del profilo medio)*, contro il ### **livello di rumore atteso** *(dispersione per nodo diviso radice del numero di nodi)*. ### ⛔ **Quindi il mio <<`32%`, tre volte il cubico>> era IRREGOLARITA' LOCALE**, e la conclusione che `G3` non e' isotropa ### **non regge.**
+
+### ⚠ **E UNA SECONDA COSA CHE AVEVO SBAGLIATO, e il guardiano la nomina:** *«non cala con `n`»* a ### **`6` passi FISSI** non e' un controllo di taglia — ### **il fronte dopo `6` passi NON VEDE il grafo piu' grande.** Per un controllo di taglia i passi vanno ### **scalati con la taglia**, entro la regola sul raggio.
+
+### ⛔ **E I NUMERI DEL RILIEVO NON LI RICOPIO: li rimisuro io**, con le ### **tre grandezze** *(irregolarita' per nodo, anisotropia del profilo medio, rumore atteso)* e col braccio di collaudo che ### **DEVE separare i due casi.**
+
+### 📌 **IN CODA: <<L'ISOTROPIA LOCALE>>** *(mandato di Luca, `2026-10-11`)*
+
+### **La posizione la dice il mandato:** ### **dopo la correzione e PRIMA del simulatore**, perche' la scelta della scena principale ### **deve avere questi numeri.** ### 📌 **La voce:** `[[ISOTROPIA-LOCALE]]`, piu' la voce di coda ⑨. ### **Chiede due cose:** se l'irregolarita' locale ### **si attenua con la distanza** *(adattando `t^(-a)`)*, e se si ### **riduce costruendo meglio la scena** *(punti che si respingono, gradi meno variabili)*. ### ⛔ **E nessuna variante diventa il default:** cambiare l'intervallo dei gradi ### **cambia la fisica locale**, perche' ### **Grover dipende dal grado** — quindi e' una scelta di Luca.
+
+### ⚠ **E UN RISULTATO DEL `LEGAME` CHE STA ARRIVANDO MENTRE SCRIVO, e vale la pena dirlo subito:** `M1` da' ### **`0` casi DECIDIBILI** su tutte le scene provate finora *(cubico `L = 5, 8, 12`, geometrico `n = 512`)* — ### **la regola sul raggio rifiuta tutto**, perche' il raggio del grumo supera `diametro/3`. ### ⭐ **E <<NON DECIDIBILE PER TAGLIA>> non e' <<non lega>>:** sono due verdetti diversi, ed e' esattamente per questo che la regola esiste.
