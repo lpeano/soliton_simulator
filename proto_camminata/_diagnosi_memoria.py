@@ -71,6 +71,12 @@ GIRI = int(os.environ.get("DIAG_GIRI", "60"))
 # non viene restituito al sistema); se crescono ENTRAMBE, c'e' un riferimento
 # trattenuto e si cerca chi lo tiene.
 DUE_METRI = int(os.environ.get("DIAG_DUE_METRI", "8"))
+# QUANTI GIRI PER I DUE BLOCCHI DI `tracemalloc`, e il motivo e' un BUDGET DI
+# TEMPO dichiarato dal mandato (<<al piu' mezz'ora>>): su scena GRANDE quei due
+# blocchi sono GIA' FATTI su scena piccola, e cio' che DECIDE e' (b-bis), i due
+# metri. A ZERO il blocco non gira, e il risultato lo DICHIARA invece di tacere.
+TRAC_GIRI = int(os.environ.get("DIAG_TRAC_GIRI", "6"))
+CTRL_GIRI = int(os.environ.get("DIAG_CTRL_GIRI", "3"))
 USCITE = os.path.join(_QUI, "uscite")
 FONTE = os.path.join(USCITE, "diagnosi_memoria%s.json"
                      % ("" if N_SCENA == 2000 else "_n%d" % N_SCENA))
@@ -300,7 +306,7 @@ def main():
         tracemalloc.start(4)
         s_a = tracemalloc.take_snapshot()
         tenuti = []
-        for _ in range(3):
+        for _ in range(CTRL_GIRI):
             r = LG.profilo(sc, geo, fl_D, X0, SEME, tempi, d)
             if tiene:
                 tenuti.append(r)
@@ -329,9 +335,9 @@ def main():
     s0 = tracemalloc.take_snapshot()
     meta = []
     try:
-        for k in range(6):
+        for k in range(TRAC_GIRI):
             LG.profilo(sc, geo, fl_D, X0, SEME, tempi, d)
-            if k == 2:
+            if k == TRAC_GIRI // 2:
                 meta = tracemalloc.take_snapshot()
             _guarda()
     except Tetto as e:
@@ -352,6 +358,8 @@ def main():
                       "riga": (t.lineno if t else 0),
                       "crescita_MB": mb(st_.size_diff),
                       "blocchi": st_.count_diff, "totale_MB": mb(st_.size)})
+    fuori["giri_dei_blocchi"] = {"pezzi": GIRI, "due_metri": DUE_METRI,
+                                 "tracemalloc": TRAC_GIRI, "controllo": CTRL_GIRI}
     fuori["tracemalloc"] = {
         "tracciato_totale_MB": mb(tot_trac), "righe": righe,
         "meta_vs_inizio_MB": (mb(sum(x.size_diff for x in meta.compare_to(s0, "filename")))
