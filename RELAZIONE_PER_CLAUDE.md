@@ -13816,3 +13816,25 @@ Ogni dato di `db_era2/` ha ### **il suo TIMBRO accanto**, col campo `versione_da
 
 ### ⚠ **IL TETTO E IL RISPETTO DEL RUN:** sopra `1.5` GB di privata si ferma ### **da solo** e scrive cio' che ha misurato; gira a ### **priorita' BASSA**; e controlla che il run ### **sia vivo PRIMA e DOPO**, riportandolo nel `json`.
 
+## ⛔ **LA DIAGNOSI DELLA MEMORIA: ZERO SU `13` CASI CRESCONO. LA PERDITA PER CHIAMATA NON ESISTE, E LA MIA IPOTESI ERA SBAGLIATA** *(2026-10-11)*
+
+### ⚠ **AVEVO SCRITTO che <<il sospetto piu' diretto e' che qualcosa trattenga un riferimento per sotto-passo, perche' il punto medio implicito di `D` fa piu' sotto-passi per tick>>. MISURATO: FALSO.** Su una scena piccola *(`n = 2000`, `m = 4687`, stato `0.286` MB)*, ripetendo ogni pezzo `60` volte: ### **nessuno dei `13` casi cresce sopra `3 sigma`**, e il peggiore e' `+0.0608` MB per giro.
+
+### **E NON CRESCE NEMMENO LA FUNZIONE DEL RUN**, chiamata ### **come la chiama il run** — `+0.06` MB per chiamata su `8` chiamate, cioe' ### **un megabyte in tutto.** ### ✅ **Il profilatore e' finito a `419` MB, dove era cominciato.**
+
+### ⭐ **MA LA MISURA HA TROVATO UN'ALTRA COSA, e viola GIA' il punto `(d)` di `D2`.** `tracemalloc` traccia ### **`104.0` MB in sei chiamate**, cioe' `17.33` MB per chiamata, cioe' ### **`61` volte lo stato per chiamata** e ### **`~5` volte lo stato per tick** — e le righe che allocano sono ### **tutte dentro il punto medio implicito** di `interferenza3.py`:
+
+| MB | dove |
+|---|---|
+| `+31.8` | `interferenza3.py:186` |
+| `+15.9` | `interferenza3.py:187` |
+| `+14.6` | `interferenza3.py:183` |
+| `+14.6` | `interferenza3.py:179` |
+| `+7.3` | `interferenza3.py:180` |
+
+### 📌 **`D2(d)` dice che i passi impliciti NON devono creare temporanei piu' grandi dello stato SENZA DICHIARARLO** — adesso e' ### **misurato e dichiarato.**
+
+### ⛔ **E CHE COSA RESTA DA SPIEGARE, detto con precisione:** la crescita del run ### **non e' per chiamata** *(sarebbe comparsa qui, proporzionale al numero di chiamate)* e ### **non e' nei pezzi del passo** *(tutti fermi)*. ### **Quindi e' DIPENDENTE DALLA TAGLIA**, e una scena piccola ### **non puo' mostrarla**: lo stato qui e' `0.286` MB, a `n = 26000` e' `4.5`. ### ✅ **La misura che decide e' proprio quella che il mandato chiede in `D1`** *(`L = 30` e `L = 40`)*, e parte quando il run chiude.
+
+### ✅ **E IL RUN NON E' STATO DISTURBATO:** vivo ### **prima** e vivo ### **dopo**, priorita' del profilatore ### **BELOW_NORMAL**, tetto `1.5` GB ### **non scattato.** ### ⚠ **Ma nel frattempo il run e' passato da `5985` a `6210` MB di privata** — ### **continua a crescere, e la crescita e' SUA.**
+
