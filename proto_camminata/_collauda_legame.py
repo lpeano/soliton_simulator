@@ -198,25 +198,37 @@ def main():
 
     # ============================================================ 5) la regola sul raggio
     diam, esatto = LL.diametro(sc)
-    # ### concentrato: UN NODO SOLO ⟹ raggio `0` ⟹ ### **DECIDIBILE**
+    # ### concentrato: UN NODO SOLO ⟹ raggio iniziale `0` ⟹ ### **DECIDIBILE**
     p_conc = CM.stato_zero(sc)
     p_conc[int(np.argmax(sc["nodo"] == 0)), 0] = 1.0
     r_conc = LL.raggio(sc, {"psi": p_conc}, 0)
-    d_conc = LL.decidibile(sc, diam, r_conc, 4)
-    # ### diffuso: TUTTE le estremita- uguali ⟹ raggio grande ⟹ ### **NON DECIDIBILE**
+    # ### diffuso: TUTTE le estremita- uguali ⟹ raggio grande
     p_dif = np.ones((n_est, 2), dtype=complex)
     r_dif = LL.raggio(sc, {"psi": p_dif}, 0)
-    d_dif = LL.decidibile(sc, diam, r_dif, 4)
+    # ### \u26d4 **IL CASO CHE MI HA CORRETTO IL GUARDIANO: parte CONCENTRATO e finisce
+    # ### DIFFUSO.** ### **Prima dava <<NON DECIDIBILE PER TAGLIA>>, perche- guardavo il
+    # ### raggio FINALE** -- e ### **<<si disperde>> e- il risultato piu- chiaro
+    # ### possibile**, non un-assenza di risultato.
+    d_disp = LL.decidibile(sc, diam, r_conc, 4, r_dif)
+    esito("### (5) DEVE: un caso che SI DISPERDE resta DECIDIBILE",
+          d_disp["decidibile"] and d_disp["raggio_finale"] > diam / 3.0,
+          "### raggio iniziale **%.0f** (soglia %.2f) e finale **%.0f** (oltre la soglia): "
+          "**%s** \u2014 ### **il finale e- una MISURA, non una condizione**"
+          % (r_conc, diam / 3.0, r_dif, d_disp["verdetto"]))
+    # ### \u26d4 **E IL CASO PER CUI LA REGOLA ESISTE: uno STAZIONARIO troppo grande.**
+    d_grande = LL.decidibile(sc, diam, r_dif, 4, r_dif)
+    esito("### (5) DEVE: uno stato INIZIALE troppo grande e- NON DECIDIBILE PER TAGLIA",
+          not d_grande["decidibile"] and not d_grande["raggio_ok"],
+          "### raggio iniziale **%.0f** oltre la soglia %.2f: **%s** \u2014 ### **e- il "
+          "caso per cui la regola esiste** (uno stato LEGATO ma GRANDE)"
+          % (r_dif, diam / 3.0, d_grande["verdetto"]))
     # ### e il TEMPO: un `t_oss` oltre `T_max` ⟹ ### **NON DECIDIBILE**, anche se concentrato
     d_tempo = LL.decidibile(sc, diam, r_conc, LL.t_max(diam) + 1)
-    esito("### (5) la REGOLA SUL RAGGIO scatta nei DUE versi, e anche sul TEMPO",
-          d_conc["decidibile"] and not d_dif["decidibile"]
-          and not d_tempo["decidibile"] and d_tempo["raggio_ok"],
-          "### concentrato r=%.0f **%s** | diffuso r=%.0f **%s** | tempo %d > %d **%s** "
-          "(diametro %s, soglia %.2f)"
-          % (r_conc, d_conc["verdetto"], r_dif, d_dif["verdetto"],
-             LL.t_max(diam) + 1, LL.t_max(diam), d_tempo["verdetto"],
-             ("%d" % diam) if esatto else (">=%d" % diam), diam / 3.0))
+    esito("### (5) e la condizione di TEMPO scatta da sola, col raggio a posto",
+          not d_tempo["decidibile"] and d_tempo["raggio_ok"],
+          "### `t_oss` %d > `t_max` %d: **%s** (diametro %s)"
+          % (LL.t_max(diam) + 1, LL.t_max(diam), d_tempo["verdetto"],
+             ("%d" % diam) if esatto else (">=%d" % diam)))
     # ### ⛔ **E IL DIAMETRO DELL-IRREGOLARE CRESCE COME `log n`:** e- il fatto che rende
     # ### la regola ### **quasi sempre negativa** la-, e si misura invece di crederlo.
     d120, _e = LL.diametro(SC.irregolare(120))

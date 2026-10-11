@@ -13433,3 +13433,39 @@ Ogni dato di `db_era2/` ha ### **il suo TIMBRO accanto**, col campo `versione_da
 ### ⛔ **E DUE NUMERI CHE AGGIUNGO IO, e il secondo decide:** il ### **massimo** di quel rapporto e' **`31.2`**, e lo ### **SBILANCIAMENTO DIREZIONALE** delle uscite vale ### **`0.3496` a `n = 512` e `0.3507` a `n = 4000`** — ### **non migliora con la taglia**, quindi e' ### **strutturale**, ed e' coerente col `~30%` di irregolarita' locale del fronte.
 
 ### 📌 **Registrate `[[GRAFO-PESATO-TUTTI-I-VICINI]]`** *(con i tre bracci e il Grover pesato da derivare prima del codice)* **e `[[DOMANDA-PESO-ARCO-COME-MEMORIA]]`** *(il punto `(d)`: il peso come memoria dinamica e' ### **la strada per far nascere la geometria dalla DINAMICA invece che dalla costruzione**, e con quella la decisione `9` passerebbe ### **da vincolo a conseguenza**)*. ### ⛔ **Nessuna delle due implementata: e' quello che il mandato chiede.**
+
+## ⛔ **LA REGOLA SUL RAGGIO ERA APPLICATA ALLO STATO SBAGLIATO, E HA NASCOSTO OTTO VERDETTI SU NOVE** *(rilievo del guardiano, `2026-10-11`)*
+
+> ### ⭐ **E l'errore e' di FORMULAZIONE, non di codice** — la regola diceva *«il raggio dello stato»*, e ### **<<lo stato>> era ambiguo.** Io l'ho implementata sullo stato ### **DOPO `t_oss` passi.**
+
+### ⛔ **CHE COSA PRODUCEVA:** un grumo che ### **SI DISPERDE** superava `diametro/3` e diventava ### **<<NON DECIDIBILE PER TAGLIA>>** — mentre *«si disperde»* e' ### **il risultato piu' chiaro possibile:** ### **non lega a quell'ampiezza.**
+
+### ⛔ **E SI VEDE NEI NUMERI: `0` casi decidibili su OTTO scene su NOVE.** L'unica che decideva era ### **l'anello `n = 2000`**, che ha `diametro >= 500` e quindi una soglia di `166.7` archi — ### **che nessuna dispersione puo' superare.** ### ⚠ **Quindi il mio <<non decidibile>> non misurava la taglia della scena: misurava se il grumo si fosse disperso.**
+
+### ⭐ **E LA REGOLA ESISTEVA PER UN CASO DIVERSO:** uno stato ### **LEGATO ma GRANDE**, che il grafo ### **non contiene** — e quello si vede sul raggio dello stato ### **STAZIONARIO** *(`M2`)*, non sul finale di una dispersione.
+
+### ✅ **LA REGOLA CORRETTA, e il collaudo la separa nei tre casi** *(`24`/`24`)*
+
+| il braccio | il numero |
+|---|---|
+| un caso che **SI DISPERDE** resta ### **DECIDIBILE** | raggio iniziale **`0`** *(soglia `2.67`)*, finale **`4`**: ### **`DECIDIBILE`** |
+| uno stato **INIZIALE** troppo grande e' ### **NON DECIDIBILE** | raggio iniziale **`4`** oltre `2.67`: ### **`NON DECIDIBILE PER TAGLIA`** |
+| la condizione di **TEMPO** scatta ### **da sola** | `t_oss = 26 > t_max = 25`, col raggio a posto |
+
+### **E il verdetto della dinamica adesso e' UNA PAROLA e non un `bool`:** ### **`RESTA CONCENTRATO`** *(oltre `3 sigma` sopra il lineare, la soglia del `v3`)* oppure ### **`SI DISPERDE`**, col raggio ### **finale riportato come MISURA.** ### 📌 **E per ogni caso si riportano CINQUE cose:** raggio iniziale, raggio finale, `t_oss`, tempo di ritorno, verdetto.
+
+### ⭐ **E IL RISULTATO CHE *RESTA VALIDO* DELLA PRIMA CORSA E' QUELLO SULL'ANELLO**, perche' la' la regola non scattava per la ragione sbagliata:
+
+| `x0` | `+D`, rapporto | il lineare | sopra di | verdetto |
+|---|---|---|---|---|
+| `0.125` | `62.59` ± `0.11` | `61.89` | **`6.50 sigma`** | ### ⭐ **RESTA CONCENTRATO** |
+| `0.25` | `65.73` ± `0.48` | `61.89` | **`8.04 sigma`** | ### ⭐ **RESTA CONCENTRATO** |
+| `0.5` | `75.82` ± `2.16` | `61.89` | **`6.46 sigma`** | ### ⭐ **RESTA CONCENTRATO** |
+| `1` | **`77.13`** ± `1.67` | `61.89` | **`9.11 sigma`** | ### ⭐ **RESTA CONCENTRATO** |
+| `2` | `62.07` ± `4.25` | `61.89` | `0.04 sigma` | si disperde |
+
+### ⛔ **E SI SCRIVE <<LEGA IN `1D`>>, NON <<LEGA>>**, perche' l'anello e' ### **`d_s = 1.001`** — ed e' esattamente la distinzione che il mandato aveva preregistrato: *«un legame trovato solo sull'anello va scritto come `lega in 1D`»*.
+
+### ⚠ **E `-N`, `-D` VANNO NEL VERSO OPPOSTO, come il segno predice:** a `x0 = 1` `+N` sta **`2.16 sigma`** sopra il lineare e `-N` **`7.46 sigma`** SOTTO; `+D` **`9.11`** sopra e `-D` **`1.59`** sotto. ### ⭐ **Il segno rovescia l'effetto, e il numero lo mostra su entrambe le coppie.**
+
+### 📌 **La corsa con la regola corretta e' in volo:** gli otto verdetti che erano nascosti diventano ### **`RESTA CONCENTRATO` o `SI DISPERDE`**, e ### **la domanda `3D` diventa rispondibile.**

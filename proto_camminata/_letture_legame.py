@@ -85,12 +85,28 @@ def raggio(sc, st, centro, frazione=0.90):
     return float(d.max())
 
 
-def decidibile(sc, diam, rag, t_oss):
-    """### La REGOLA SUL RAGGIO, applicata. ### **Ritorna il verdetto, non un `bool` muto.**"""
-    ok_r = (rag == rag) and rag < diam / 3.0
+def decidibile(sc, diam, rag_iniziale, t_oss, rag_finale=float("nan")):
+    """### La REGOLA SUL RAGGIO, **CORRETTA il 2026-10-11** *(rilievo del guardiano)*.
+
+    ### \u26d4 **IL DIFETTO CHE C-ERA, ed era di FORMULAZIONE e non di codice:** la regola
+    usava il raggio dello stato ### **DOPO `t_oss` passi.** ### **Cosi- un grumo che SI
+    DISPERDE superava `diametro/3` e diventava <<NON DECIDIBILE PER TAGLIA>>** -- mentre
+    ### **<<si disperde>> e- il risultato piu- chiaro possibile:** non lega a
+    quell-ampiezza.
+
+    ### \u2b50 **La regola esisteva per un caso DIVERSO:** uno stato ### **LEGATO ma
+    GRANDE**, che il grafo ### **non contiene** -- e quello si vede sul raggio dello stato
+    ### **STAZIONARIO** *(`M2`)*, non sul finale di una dispersione.
+
+    ### \u2705 **QUINDI: la condizione di TAGLIA sta sul grumo INIZIALE**, quella di TEMPO
+    resta, e il raggio FINALE si riporta ### **come MISURA e non come condizione.**
+    """
+    ok_r = (rag_iniziale == rag_iniziale) and rag_iniziale < diam / 3.0
     ok_t = t_oss <= t_max(diam)
-    return {"raggio": rag, "diametro": diam, "raggio_su_diametro":
-            (rag / diam) if diam else float("nan"),
+    return {"raggio_iniziale": rag_iniziale, "raggio_finale": rag_finale,
+            "diametro": diam,
+            "raggio_iniziale_su_diametro": (rag_iniziale / diam) if diam else float("nan"),
+            "raggio_finale_su_diametro": (rag_finale / diam) if diam else float("nan"),
             "soglia_raggio": diam / 3.0, "t_oss": t_oss, "t_max": t_max(diam),
             "raggio_ok": bool(ok_r), "tempo_ok": bool(ok_t),
             "decidibile": bool(ok_r and ok_t),
@@ -234,26 +250,35 @@ def m1():
             fl = S1.flusso_di(et)
             per_x0 = {}
             for x0 in S1.X0_GRIGLIA:
-                fr, fo, rr = [], [], []
+                fr, fo, r_in, r_fi = [], [], [], []
                 for s in SEMI:
                     st, dentro, d = L3.grumo(sc, geo, 0, 1, x0, seme=s)
+                    # ### \u26d4 **IL RAGGIO INIZIALE E- LA CONDIZIONE DI TAGLIA**
+                    r_in.append(raggio(sc, st, 0))
                     z = dict(st)
                     for _ in range(t_oss):
                         z = C3.passo3(z, sc, geo, np.ones(sc["n"]), 1.0, EPS_RIF, fl)
                     fr.append(L3.frazione_entro(sc, z, 0, d, 1))
                     fo.append(L3.fondo_uniforme(sc, d, 1))
-                    rr.append(raggio(sc, z, 0))
+                    # ### \u2705 **e quello FINALE e- una MISURA, non una condizione**
+                    r_fi.append(raggio(sc, z, 0))
                     del dentro
                 rap = [a / b for a, b in zip(fr, fo)]
-                reg = decidibile(sc, diam, float(np.mean(rr)), t_oss)
+                reg = decidibile(sc, diam, float(np.mean(r_in)), t_oss,
+                                 float(np.mean(r_fi)))
                 per_x0["%g" % x0] = {
                     "x0": x0, "rapporto": float(np.mean(rap)),
                     "sigma": (float(np.std(rap, ddof=1)) / math.sqrt(len(rap))
                               if len(rap) > 1 else 0.0),
                     "frazione": float(np.mean(fr)), "fondo": float(np.mean(fo)),
-                    "raggio": float(np.mean(rr)), "regola": reg, "semi": len(SEMI)}
+                    "raggio_iniziale": float(np.mean(r_in)),
+                    "raggio_finale": float(np.mean(r_fi)),
+                    "regola": reg, "semi": len(SEMI)}
             per_var[et] = per_x0
         # ### il confronto col LINEARE, con il `sigma` COMBINATO
+        # ### \u2b50 **E IL VERDETTO DELLA DINAMICA E- UNA PAROLA, non un `bool`:**
+        # ### ### **RESTA CONCENTRATO** *(oltre `3 sigma` sopra il lineare)* oppure
+        # ### ### **SI DISPERDE** -- e ### **<<si disperde>> NON e- <<non decidibile>>.**
         for et in S1.VARIANTI:
             if et == "lineare":
                 continue
@@ -262,28 +287,40 @@ def m1():
                 b = per_var["lineare"][k]
                 sg = math.sqrt(a["sigma"] ** 2 + b["sigma"] ** 2)
                 dd = a["rapporto"] - b["rapporto"]
+                piu = bool(dd > 3.0 * sg and sg > 0.0)
                 a["contro_lineare"] = {
                     "differenza": dd, "sigma_combinato": sg,
                     "in_sigma": (abs(dd) / sg) if sg > 0 else 0.0,
-                    "piu_concentrato": bool(dd > 3.0 * sg and sg > 0.0),
-                    "decidibile": a["regola"]["decidibile"]}
+                    "piu_concentrato": piu,
+                    "decidibile": a["regola"]["decidibile"],
+                    "verdetto": ("NON DECIDIBILE PER TAGLIA"
+                                 if not a["regola"]["decidibile"]
+                                 else ("RESTA CONCENTRATO" if piu else "SI DISPERDE")),
+                    "cresce_il_raggio": (a["raggio_finale"] - a["raggio_iniziale"])}
         per_var["_scena"] = {"diametro": diam, "diametro_esatto": esatto,
                              "t_oss": t_oss, "t_max": t_max(diam),
                              "n": sc["n"], "m": sc["m"],
                              "famiglia": famiglia(nome),
                              "etichetta_dimensione": S3D.etichetta(sc["nome"])}
         fuori["per_scena"][nome] = per_var
-        decid = [k for et in S1.VARIANTI if et != "lineare"
-                 for k, v in per_var[et].items()
-                 if v.get("contro_lineare", {}).get("decidibile")]
-        vinti = [(et, k) for et in S1.VARIANTI if et != "lineare"
-                 for k, v in per_var[et].items()
-                 if v.get("contro_lineare", {}).get("piu_concentrato")
-                 and v["regola"]["decidibile"]]
-        print("    %-18s diam %-4s t_oss %-4d  casi DECIDIBILI %-4d  piu- concentrati "
-              "del lineare: %s"
+        conta = {"RESTA CONCENTRATO": 0, "SI DISPERDE": 0,
+                 "NON DECIDIBILE PER TAGLIA": 0}
+        vinti = []
+        for et in S1.VARIANTI:
+            if et == "lineare":
+                continue
+            for k, v in per_var[et].items():
+                c = v.get("contro_lineare")
+                if not c:
+                    continue
+                conta[c["verdetto"]] = conta.get(c["verdetto"], 0) + 1
+                if c["verdetto"] == "RESTA CONCENTRATO":
+                    vinti.append((et, k))
+        print("    %-18s diam %-5s t_oss %-4d  RESTA %-3d  DISPERDE %-3d  non dec. %-3d  "
+              "concentrati: %s"
               % (nome, ("%d" % diam) if esatto else (">=%d" % diam), t_oss,
-                 len(decid), vinti or "NESSUNO"))
+                 conta["RESTA CONCENTRATO"], conta["SI DISPERDE"],
+                 conta["NON DECIDIBILE PER TAGLIA"], vinti or "NESSUNO"))
     return fuori
 
 
