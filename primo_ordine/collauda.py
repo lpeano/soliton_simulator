@@ -159,6 +159,22 @@ COLLAUDI = (
     # ### spenta il `v3` coincide ### **AL BIT** col `v2` -- cioe- ### **non lo invalida.**
     # ### ⚠ **Costa `0.93` s misurati.**
     ("il banco della camminata v3", "proto_camminata/_collauda_banco3.py", "pre-commit"),
+    # ### ⭐ **LE LETTURE `G1` e `G2`** *(mandato di Luca, 2026-10-11)*: sono
+    # ### ### **OSSERVATORI**, e un osservatore si prova su ### **DUE cose** -- che
+    # ### ### **non cambi cio- che guarda** e che cio- che misura sia
+    # ### ### **INVARIANTE DI GAUGE.** ### ⚠ **E il braccio che DEVE cambiare e-
+    # ### il piu- importante:** senza trasporto il `cos` fra due nodi ### **cambia SEGNO.**
+    # ### ⚠ **E STA IN `solo-CI`, PER IL TEMPO E NON PER IMPORTANZA:** costa
+    # ### ### **`35.77` s** -- quasi tutto nei ### **DUE processi** del braccio del
+    # ### determinismo -- e messo in `pre-commit` portava il totale dichiarato a
+    # ### ### **`151` s contro un budget di `120`.** ### ⛔ **E un `pre-commit`
+    # ### cosi- E- LA RAGIONE NUMERO UNO PER DARE `--no-verify`**, che e- `A9` dal
+    # ### lato del tempo: ### **un presidio che si spegne perche- costa troppo non e-
+    # ### un presidio.** ### ⭐ **E il precedente e- dichiarato QUI SOPRA:**
+    # ### *<<`solo-CI` per il TEMPO, non per importanza>>*, con il referto
+    # ### dell-infrastruttura a `39.91` s.
+    ("le letture del guscio e del moto", "proto_camminata/_collauda_guscio.py",
+     "solo-CI"),
     # ### ⚠ **E `csv/_verifica_clone.py` NON STA QUI, DI PROPOSITO:** fa un clone e
     # ### ### **ci fa girare QUESTA suite** -- metterlo fra i collaudi vorrebbe dire
     # ### ### **una ricorsione senza fondo.** Si lancia a mano, ed e- il punto 3 del

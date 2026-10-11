@@ -23,7 +23,7 @@
 | **[[DOMANDA-D13-CONIUGATI]]** D13: i coniugati delle memorie -- tw come fase U(1) sull-arco? | ### ⏳ aspetta | ### **aspetta:** `DOMANDA-D9-GEOMETRIA` |
 | **[[DOMANDA-D9-GEOMETRIA]]** D9: la geometria viene da d e p_d dentro H, o dalle relazioni fra gli ps | ### ⏳ aspetta | ### **aspetta:** `DOMANDA-QUANTITA-CONSERVATA` |
 
-### `DIPENDENTE` — **6**
+### `DIPENDENTE` — **8**
 
 | la domanda | pronta? | che cosa aspetta |
 |---|---|---|
@@ -31,7 +31,9 @@
 | **[[DOMANDA-FUSIONE]]** la FUSIONE di due nodi: si vieta, e con che cosa? | ### ✅ **PRONTA** | ### **niente** |
 | **[[DOMANDA-GRAFO-INIZIALE]]** il grafo iniziale SENZA pos: reticolo, k-regolare, espansore? | ### ✅ **PRONTA** | ### **niente** |
 | **[[DOMANDA-GRANDEZZA-LOCALE-TEMPO]]** da dove viene la grandezza locale da cui escono r_k e cs_k? | ### ⏳ aspetta | ### **aspetta:** `DOMANDA-QUANTITA-CONSERVATA` |
+| **[[DOMANDA-GUSCIO-E-INTERFERENZA]]** il guscio e- interferenza e non materia: che cosa resta dell-ipotesi del | ### ✅ **PRONTA** | ### **niente** |
 | **[[DOMANDA-LAMBDA-GRANDEZZA]]** lambda: su quale grandezza si misura, e da dove viene il suo valore? | ### ⏳ aspetta | ### **aspetta:** `DOMANDA-D9-GEOMETRIA` |
+| **[[DOMANDA-PRIMA-LEGARE-POI-MISURARE]]** senza stato legato tre letture non sono decidibili: si cerca prima un le | ### ✅ **PRONTA** | ### **niente** |
 | **[[DOMANDA-UNITA-DI-STATO]]** l-unita- di stato: qual e- la capacita- di un nodo? | ### ⏳ aspetta | ### **aspetta:** `DOMANDA-D9-GEOMETRIA` |
 
 ### `MINORE` — **3**
@@ -46,7 +48,7 @@
 
 ## IL CONTO
 
-> ### ⛔ **aperte `12`, di cui pronte `6`.**
+> ### ⛔ **aperte `14`, di cui pronte `8`.**
 >
 > ### ✅ **E una domanda DECISA esce da sola:** si chiude con la decisione di Luca e il commit, e ### **nessuno la spunta a mano** -- la lista ### **si genera dai campi**, e un campo che cambia ### **cambia la lista.**
 
@@ -56,19 +58,21 @@
 
 > ### 📌 **Queste arrivano dai DUE criteri vecchi** *(la nota che dice <<da decidere da Luca>>, e lo stato `DA_CLASSIFICARE`)*, e ### **non hanno una `priorita`**: quindi ### **non stanno nell-ordine delle dipendenze.** ### ✅ **Non le tolgo: le DICHIARO**, perche- una lista che ne nasconde una parte ### **sembra completa.**
 
-| **voci che aspettano una decisione** | ### **`9`** |
-| **domande in tutto** | `9` |
+| **voci che aspettano una decisione** | ### **`11`** |
+| **domande in tutto** | `11` |
 | **segnaposto `NON_DEFINITA`**, che NON sono una domanda | `187` |
 
 ---
 
-## le DOMANDE aperte -- `9`
+## le DOMANDE aperte -- `11`
 
 | id | `classe`/`dominio`/era/stato | LA DOMANDA | LA FRASE |
 |---|---|---|---|
 | `COESIONE-TERMINE-O-CAMPO` | `DECISIONE`/`FISICA`/`2`/`AGENDA` | la coesione e- un termine locale con una forza da derivare, oppure un campo dinamico | la coesione simmetrica viene da un termine LOCALE o da un CAMPO? ### DOMANDA APERTA PER LUCA, da decidere da Luca. ### IL FATTO MISURATO (referto doc/ |
 | `DERIVA-DELLA-FORMA-D` | `DECISIONE`/`FISICA`/`2`/`AGENDA` | se vale la pena cercare la causa: la forma N funziona, (D) deriva e non so perche- | la forma (D) non conserva la sua conservazione modificata: perche-? ### DOMANDA APERTA PER LUCA, e anche per me: NON SO PERCHE-. ### IL FATTO MISURATO |
 | `DOMANDA-C2-O-C4` | `DECISIONE`/`FISICA`/`2`/`AGENDA` | C2 senza massa come misurato, oppure si prova C4 | due componenti o quattro: il gap c-e- solo con C4? ### DOMANDA APERTA PER LUCA, da decidere da Luca, ed e- la domanda C2 contro C4 di A16. ### IL FATT |
+| `DOMANDA-GUSCIO-E-INTERFERENZA` | `DECISIONE`/`FISICA`/`2`/`AGENDA` | il guscio e- interferenza, quindi l-ipotesi si riformula o manca qualcosa | il guscio e- interferenza e non materia: che cosa resta dell-ipotesi del guscio? ### DOMANDA APERTA PER LUCA, da decidere da Luca. ### IL FATTO MISURA |
+| `DOMANDA-PRIMA-LEGARE-POI-MISURARE` | `DECISIONE`/`FISICA`/`2`/`AGENDA` | cercare prima un legame, o riformulare le letture come letture sulla dispersione | senza stato legato tre letture non sono decidibili: si cerca prima un legame? ### DOMANDA APERTA PER LUCA, da decidere da Luca. ### IL FATTO: tre lett |
 | `DUE-STRUMENTI-ARCHIVIO-E` | `DIFETTO`/`INFRASTRUTTURA`/`ENTRAMBE`/`APERTA` | quale dei due strumenti resta, e un solo registro degli archiviati | due strumenti per lo stesso mestiere: spostare gli output su E- ### DOMANDA APERTA PER LUCA, da decidere da Luca: QUALE DEI DUE RESTA. ### IL FATTO: ` |
 | `PROMOZIONE-CONSERVAZIONE-MODIFICATA` | `DECISIONE`/`FISICA`/`2`/`AGENDA` | la conservazione modificata si conserva; promuoverla a energia e- una sua decisione | la conservazione modificata si conserva: si promuove a energia? ### DOMANDA APERTA PER LUCA, da decidere da Luca. ### IL FATTO MISURATO (referto doc/R |
 | `PROPOSTA-FASE-DISPARI-COESIONE` | `DECISIONE`/`FISICA`/`2`/`AGENDA` | la fase dispari sotto C e- ammissibile al bit; la sua forza g resta da derivare | la fase DISPARI sotto coniugazione di carica come forma della coesione ### DOMANDA APERTA PER LUCA, da decidere da Luca. ### IL FATTO MISURATO (refert |

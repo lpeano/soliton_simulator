@@ -12958,3 +12958,97 @@ Ogni dato di `db_era2/` ha ### **il suo TIMBRO accanto**, col campo `versione_da
 ### ⛔ **E LA PARTE CHE IL MANDATO CHIEDE DI NON NASCONDERE E- `A4`:** ### **i pezzi frazionari NON compongono in un tick rallentato** *(`sqrt(G) sqrt(S)` non e- `sqrt(G S)`)*, quindi in una zona a `cs` uniforme `< 1` la camminata ### **non e- una copia rallentata.** ### ⭐ **E le due candidate dicono che cosa si sacrifica:** `(F)` ### **l-esattezza dell-invarianza locale** *(e `L0` misura quanto)*; `(S)` ### **la ottiene esatta ma il moto va a scatti**, e serve ### **una regola degli archi** — e il mandato aggiunge: ### **<<se non si chiude in modo unitario, SCRIVILO>>.**
 
 ### ⚠ **E IL MIO PRIMO COMMIT DELLA REGISTRAZIONE E- STATO RIFIUTATO DA `H-INDICE`**, per una ragione che e- sempre la stessa: avevo scritto ### **<<`W1-W9`>>** nel messaggio, e il hook ### **lo legge come un ID.** ### ✅ **Le etichette locali di un mandato NON sono ID** *(par. `9`)*, e si scrivono ### **senza farle sembrare tali.**
+
+## ⭐ **LE LETTURE `G1` E `G2` — IL GUSCIO IN ANTIFASE C'E', MA E' INTERFERENZA DI GROVER** *(2026-10-11)*
+
+> ### ⛔ **E LA MIA PREVISIONE SCRITTA PRIMA DI MISURARE ERA SBAGLIATA, MA SBAGLIATA NEL VERSO OPPOSTO:** avevo scritto *<<nessun anello in antifase>>*, e invece ### **l'anello c'e'** — ### **solo che non e' un effetto della materia.**
+
+### `G1` — **IL GUSCIO: `cos dphi(r=1)` = `-0.615` ± `0.110`, E SOLO NELLA CAMMINATA *LINEARE***
+
+| la variante | `r=1` | c'e' un anello in antifase? |
+|---|---|---|
+| ### ⭐ **lineare** | ### **`-0.615` ± `0.110`** | ### ⭐ **SI', a `r=1`** *(oltre `3 sigma`)* |
+| `N` *(saturazione sull'elicita')* | `+0.301` | no |
+| `D` *(elicita' dell'interferenza)* | `+0.329` | no |
+
+### ⛔ **QUINDI IL GUSCIO IN ANTIFASE NON E' UN EFFETTO DELLA MATERIA: E' L'INTERFERENZA DELLA MONETA DI GROVER** — e la saturazione ### **LO DISTRUGGE.** ### ⚠ **Che e' il contrario di come l'ipotesi dell'era `1` lo leggeva** *(`[[GUSCIO-ANTIFASE-EMERGENTE]]`: il guscio EMERGE attorno a una massa)*: qui emerge attorno a ### **un pacchetto qualunque**, e ### **sparisce** quando si accende la non linearita'.
+
+### ⛔ **E IL LIMITE CAMBIA COME SI LEGGE TUTTO `G1`, e lo dichiaro:** il mandato dice *<<attorno a ogni grumo auto-intrappolato trovato dal `v3`>>*, e il ### **`v3` non ne ha trovato NESSUNO.** ### **Quindi gli anelli sono misurati attorno al nodo di partenza** — ### **lo stesso per tutte le varianti, che e' l'unico confronto che vale** — ### **e non attorno a un nucleo.**
+
+### `G2` — **DUE GRUMI: NESSUNA INTERAZIONE, A NESSUNA DISTANZA, CON NESSUNA FASE**
+
+### ⛔ **Le pendenze della separazione COINCIDONO A TRE DECIMALI con quelle della camminata lineare, a ogni `D` da `0` a `6`:** ### **niente attrazione, niente repulsione, nessuno stato legato**, e la fase relativa *(`0` o `pi`, definita ### **per trasporto** lungo il cammino piu' corto)* ### **non cambia niente.**
+
+### ⛔ **E `G2(b)` NON TROVA NIENTE DI MISURABILE, E LA CORREZIONE E' MIA: avevo scritto <<rallenta del `~20%`>> GUARDANDO SOLO LE PENDENZE**
+
+| `x0` | la pendenza di `N` | il lineare | lo scarto, in `sigma` |
+|---|---|---|---|
+| `1` | **`-0.00888`** ± `0.00181` | `-0.00881` ± `0.00181` | **`0.03 sigma`** ### ⛔ **dentro la barra** |
+| `8` | **`-0.00703`** ± `0.00183` | `-0.00881` ± `0.00181` | **`0.69 sigma`** ### ⛔ **dentro la barra** |
+| `64` | **`-0.00699`** ± `0.00191` | `-0.00881` ± `0.00181` | **`0.69 sigma`** ### ⛔ **dentro la barra** |
+
+### ⛔ **LA SOGLIA L'AVEVO SCRITTA IO, PRIMA DI MISURARE:** *<<saturazione = la separazione cresce COME NEL LINEARE, entro `3 sigma`>>* — e lo scarto piu' grande e' ### **`0.69 sigma`**. ### ⭐ **Quindi l'allargamento di `N` NON SI DISTINGUE da quello lineare**, e il `~20%` che avevo annunciato ### **e' un rapporto che la barra d'errore si mangia.** ### ⚠ **E il `sigma` stava nel `json` DAL PRIMO GIRO: non l'ho guardato.** ### ✅ **La cura e' nel REFERTO, non nella mia attenzione: adesso lo scarto in `sigma` LO CALCOLA il generatore**, e un braccio di collaudo ### **pretende che ogni pendenza porti la sua barra.**
+
+### ✅ **E CIO' CHE RESTA, SOLIDO, E' LA NEGAZIONE:** ### ⛔ **non e' una repulsione**, perche' la velocita' di allargamento ### **non CRESCE con l'ampiezza** — che e' ### **la firma che la soglia nominava**, e le pendenze vanno ### **nel verso opposto.**
+
+### ⭐ **E PRIMA DEI NUMERI DI `G2(b)`, LA RIDUZIONE ONESTA:** a `D = 0` due grumi ### **IN FASE SONO un grumo di ampiezza radice di due** — quindi la domanda *<<rimbalza, si fonde o si allarga>>* ### **si riduce alla scansione di `x0`**, e la separazione a `D = 0` e' `0` ### **per costruzione, non per fisica.** ### ⚠ **Al primo giro avevo normalizzato via l'ampiezza che portava `x0`:** cosi' la lettura ### **misurava l'ampiezza sbagliata**, e la cura e' stata ### **togliere la normalizzazione** e dichiarare la riduzione.
+
+### `G2(c)` — ### ⚠ **NON DECIDIBILE, e non lo maschero:** senza stato legato ### **non c'e' un composito da spingere** — i due centri si disperdono entrambi, e la separazione ### **non cresce ne' cala in modo significativo.** ### ⛔ **Riportare questi numeri come <<il composito si muove>> sarebbe leggere un artefatto.**
+
+### ⭐ **IL BRACCIO DI COLLAUDO CHE VALE PIU' DI TUTTI E' QUELLO CHE *DEVE* CAMBIARE** *(`10`/`10`)*
+
+| il braccio | il numero | che cosa prova |
+|---|---|---|
+| `V9` | ### **`0.0` al bit** | a `N` spento le letture girano ### **sul `v2`** |
+| `V1` | ### **`0.0` byte a byte** | le letture ### **non modificano** lo stato che ricevono |
+| `V4` | ### **scarto `0`** | il `cos` ### **trasportato** e' invariante di gauge |
+| ### ⭐ **e DEVE cambiare** | ### **`+0.999507` contro `-0.996671`** | il `cos` ### **NON trasportato cambia SEGNO** |
+
+### ⛔ **SENZA QUEL QUARTO BRACCIO IL TERZO SAREBBE UN FALSO-UNO:** se il trasporto non facesse niente, l'invarianza del `cos` trasportato ### **sarebbe garantita da nulla.** ### ✅ **Cosi' il numero dice che il trasporto E' cio' che rende il confronto sensato** — ed e' il vincolo `V4`, ### **misurato e non asserito.**
+
+### ⚠ **DUE DIFETTI MIEI, ED ENTRAMBI LI HA TROVATI UN NUMERO, NON UNA RILETTURA**
+
+1. **`G1`:** misuravo gli anelli attorno al ### **massimo CORRENTE** di densita', che ### **cambia da variante a variante** — e ### **confrontare varianti su centri diversi NON E' UN CONFRONTO.** La cura: misurare ### **anche** dal centro iniziale — ### **ed e' da li' che l'anello in antifase e' comparso.**
+2. **`G2`:** la separazione veniva ### **esattamente `0.000` SEMPRE**, anche con la spinta accesa. ### ⭐ **Uno zero troppo pulito e' un sospetto**, e il motivo era che le mie zone erano ### **UN NODO SOLO**: il centro ### **non poteva muoversi.** La cura: una ### **partizione di Voronoi SUL GRAFO**, che e' ### **relazionale** *(`A17`)*.
+
+### 📌 **LE QUATTRO VOCI, e le DUE domande sono di LUCA e non mie:** `[[MISURA-GUSCIO-ANTIFASE]]` · `[[MISURA-DUE-GRUMI-NESSUNA-INTERAZIONE]]` · `[[DOMANDA-GUSCIO-E-INTERFERENZA]]` *(il guscio e' interferenza: l'ipotesi si riformula, o manca un pezzo?)* · `[[DOMANDA-PRIMA-LEGARE-POI-MISURARE]]` *(tre letture presuppongono un legame che non c'e': si cerca prima il legame, o si riformulano le letture?)*. ### ⛔ **Non scelgo io.**
+
+### ⚠ **E UN RILIEVO CHE HO MISURATO MENTRE REGISTRAVO, E CHE VA IN CODA perche' non e' di questo mandato:** `doc/indice/DA_DECIDERE_LUCA.md` si dichiara *<<un elenco solo>>* di cio' su cui l'indice aspetta Luca, e ### **`5` voci `DECISIONE` APERTE non ci sono affatto** — `CS-LOCALE-DAL-VUOTO`, `DEC-ALBERO-CINQUE-SENZA-ARGOMENTO`, `DEC-NASCITA-PSI`, `DEC-REGOLA-FORMA`, `SPIN-LEGATO-AL-MOTO` — perche' hanno ### **ne' una `priorita` ne' la nota <<da decidere da Luca>>**, e i due criteri del generatore ### **guardano solo quelle due cose.** ### **Su `26` decisioni aperte, `13` sono senza `priorita`.** ### ⭐ **E' `A9` nella sua forma piu' pulita: un elenco generato che SEMBRA completo** — ma non lo scrivo come difetto da solo: ### **in coda, e decide Luca.**
+
+### ⚠ **E IL COLLAUDO COSTA `35.77` s, QUINDI L'HO MESSO IN `solo-CI` — PER IL TEMPO, NON PER IMPORTANZA**
+
+### **In `pre-commit` portava il totale dichiarato a `151` s contro un budget di `120`**, e la suite stessa lo dice con le parole che contano: ### ⛔ **<<un `pre-commit` cosi' e' la ragione numero uno per dare `--no-verify`>>** — che e' `A9` ### **dal lato del tempo.** ### ⭐ **E il precedente e' dichiarato nel file:** *<<`solo-CI` per il TEMPO, non per importanza>>*, col referto dell'infrastruttura a `39.91` s. ### ✅ **Il costo sta quasi tutto nei DUE PROCESSI del braccio del determinismo**, e quel braccio ### **non si toglie**: e' l'unico che prova che la lettura ### **non dipende dallo stato di un processo.**
+
+### ⚠ **E UNA COSA CHE HO MISURATO MENTRE GUARDAVO IL BUDGET, E CHE VA IN CODA:** il `pre-commit` di `.githooks/pre-commit` ### **NON chiama `primo_ordine/collauda.py`**: ha ### **la sua lista di script**, e ### **nessuno dei banchi della camminata ci sta.** ### **Quindi il campo `dove` e' CONTABILITA', non esecuzione**, e il budget misura ### **un `pre-commit` che non e' quello che gira.** ### ⛔ **Non e' un difetto che apro da solo** — ma e' `A9`: ### **un numero che sembra il costo di un presidio e non lo e'.**
+
+### ⛔ **E UN ERRORE DI PROCEDURA MIO, DICHIARATO PER INTERO: HO MODIFICATO DUE FILE MENTRE LA SUITE GIRAVA**
+
+### **Il par. `5` lo vieta alla lettera** — *<<durante un run, nessun file del percorso in uso si modifica>>* — e io ho scritto ### **la relazione e l'inventario** con la suite in corso. ### ⭐ **E LA SUITE ME LI HA RIMESSI A POSTO**, perche' ha un presidio che fa esattamente questo: *<<LA SUITE HA SPORCATO `2` FILE>>* — ### **e le mie due modifiche sono state CANCELLATE.** ### ✅ **Il presidio ha funzionato: ha visto una differenza che non sapeva spiegare e NON l'ha ignorata.** ### ⚠ **Il difetto e' MIO, non suo**, e il costo e' stato ### **rifare i due file** — che e' il motivo per cui la regola esiste.
+
+### ⛔ **E DUE COLLAUDI SONO FALLITI PER LO STESSO MOTIVO, cioe' PER IL MIO STATO A META':**
+
+| il collaudo | perche' falliva | ora |
+|---|---|---|
+| **la FORMA dei testi generati** | il blob del referto `v3` ### **si confronta coi BYTE IN STAGE**, non col disco: dichiaravo `e3074af9f2c34896` e lo stage aveva ancora `9ce687507b3cd08b` | ### ✅ **`0` errori**, dopo `git add` del referto |
+| **i controlli sullo STAGE** | `[[PRESIDI-SUL-DISCO-NON-SULLO-STAGE]]`: ### **il disco era coerente e lo STAGE no** — `voci.jsonl` in stage, le ### **viste generate** ancora fuori | ### **si ricontrolla a stage COMPLETO**, ed e' l'ordine che la mia memoria gia' dice: ### **add, generatori, add, poi la lista** |
+
+### ⭐ **E QUESTO E' IL PUNTO CHE NON VOGLIO ADDOLCIRE:** nessuno dei due era un difetto del repo. ### **Erano DUE PRESIDI CHE LEGGEVANO BENE UNO STATO MIO SBAGLIATO** — ed e' il caso in cui un verde ottenuto *aggirando* il controllo ### **avrebbe nascosto l'unica cosa vera.**
+
+### ⛔ **E UN TERZO DIFETTO MIO, TROVATO PRIMA DI COMMITTARE, DA UN NUMERO IMPOSSIBILE: UN TERNARIO CHE NON SCEGLIE**
+
+### **In `due_grumi` avevo scritto `"N" if nome == "N" else "N"`** — cioe' ### **SEMPRE `"N"`** — e `Q_finale` era ### **`"N"` cablato.** ### **Quindi per il braccio `lineare` misuravo la `Q` di `N`**: la quasi-energia lineare ### **piu' la somma delle energie locali**, che nel lineare ### **non e' conservata**, perche' quella non linearita' ### **non sta nella sua dinamica.**
+
+### ⭐ **E L'HA TROVATO UN NUMERO CHE NON POTEVA ESSERE QUELLO:** la quasi-energia lineare e' ### **esattamente conservata per unitarieta'** *(`<U^t psi|U U^t psi> = <psi|U psi>`)*, e nel `json` andava ### **da `0.002305` a `0.000002`.** ### ⛔ **Un invariante che deriva NON E' UN RISULTATO: E' UN BUG.**
+
+### ⚠ **ED E' LO STESSO DIFETTO CHE AVEVO GIA' CURATO** in `conservazione_modificata`, col parametro `quale`, e di cui il codice porta il commento: *<<al primo giro misuravo sempre la `N` del `v3`, anche mentre girava `(D)`>>*. ### **L'ho rimesso**, travestito da scelta — ed e' `P1`: ### **l'l-associazione non sostituisce la rilettura.**
+
+### ✅ **LA CURA, E IL BRACCIO CHE L'AVREBBE PRESO** *(e adesso il collaudo e' `14`/`14`)*
+
+| il braccio | il numero | che cosa prova |
+|---|---|---|
+| la `Q` del braccio `lineare` ### **si conserva** | ### **`9.54e-18`** contro la soglia `6 * 416 * eps` = `5.54e-13` | la soglia e' ### **l'errore di macchina**, non una tolleranza scelta |
+| ### ⭐ **e DEVE scattare** | la `Q` di `N` sulla ### **stessa corsa lineare**: ### **`0.00231`** | ### **e' esattamente il numero che il ternario produceva** |
+| `quale_Q` ### **si dichiara** in ogni riga | `32` righe, `0` senza il campo | senza quel campo ### **nessuno potrebbe accorgersene** |
+| ogni pendenza di `G2(b)` ### **porta il suo `sigma`** | `12` righe, `0` senza barra | ### **una pendenza senza barra non decide niente** |
+
+### ⛔ **E NON HO COMMITTATO IL NUMERO SBAGLIATO E POI LA CURA:** il difetto e' uscito ### **prima del primo commit di questo mandato**, quindi ### **la cura e' dentro lo stesso cambiamento logico** — e cio' che committo e' ### **il referto rigenerato sui numeri giusti**, col difetto ### **scritto, non cancellato.**

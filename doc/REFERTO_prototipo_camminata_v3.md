@@ -103,6 +103,72 @@ il **fronte** va da **0.768** archi/tick a `eps = 0` a **0.477** a `eps = 1`, **
 | **[[DOMANDA-C2-O-C4]]** | gli stati intrappolati sui cicli sono ### **`4` per ciclo** e `eps` li distrugge **tutti**, e ### **nessuna olonomia li riporta** | non dicono niente su `C^4` |
 | **[[VUOTO-LOCALE-DETERMINISTICO]]** | la forma provvisoria ### **regge tutti i collaudi** *(gauge, cono, norme, reversibilita-, `C`)* e ### **il vuoto risponde** | non dicono che sia **la** forma: e' ### **dichiarata provvisoria** |
 
+## ⭐ **LE LETTURE `G1` E `G2` — IL GUSCIO, E DUE GRUMI**
+
+> ### ⛔ **SONO OSSERVATORI, NON LEGGI:** la dinamica resta **solo il passo `v3`**, e le letture **non retroagiscono** — un braccio del collaudo lo verifica **byte a byte.**
+
+### `G1` **IL GUSCIO IN ANTIFASE** — ### ⛔ **SMENTITA, E AL CONTRARIO DI COME ME L-ASPETTAVO**
+
+| la variante | `r=1` | `r=2` | `r=3` | c-e- un anello in antifase? |
+|---|---|---|---|---|
+| `N` | **+0.301** ± 0.240 | **+0.075** ± 0.146 | **+0.090** ± 0.117 | no |
+| `E` | **+0.329** ± 0.262 | **-0.108** ± 0.166 | **+0.035** ± 0.121 | no |
+| `lineare` | **-0.615** ± 0.110 | **-0.210** ± 0.137 | **-0.186** ± 0.119 | ### ⭐ **SI-, a `r=1`** |
+
+### ⭐ **E L-ANELLO IN ANTIFASE C-E-, MA NELLA CAMMINATA *LINEARE*:** `cos dphi(r=1)` = **-0.615 ± 0.110**, cioe' **oltre `3 sigma`** — e con le non linearita' accese ### **NON c-e- piu-.**
+
+### ⛔ **QUINDI IL GUSCIO NON E- UN EFFETTO DELLA MATERIA: E- L-INTERFERENZA DI GROVER** — e la saturazione ### **lo DISTRUGGE.** ### ⚠ **E la mia previsione era <<nessun anello in antifase>>: sbagliata, ma sbagliata NEL VERSO OPPOSTO** a quello che il mandato cercava *(un guscio attorno a un nucleo)*.
+
+### ⚠ **E UN LIMITE CHE CAMBIA COME SI LEGGE TUTTO `G1`:** la lettura presuppone *«ogni grumo auto-intrappolato trovato da `v3`»*, e ### **il `v3` non ne ha trovato nessuno.** ### **Quindi gli anelli sono misurati attorno al nodo di partenza** *(lo stesso per tutte le varianti: e- l-unico confronto che vale)*, ### **non attorno a un nucleo** — e il <<guscio>> qui vuol dire **la struttura di fase che resta**, non un guscio di materia.
+
+### `G2` **DUE GRUMI** — ### ⛔ **NESSUNA INTERAZIONE, A NESSUNA DISTANZA, CON NESSUNA FASE**
+
+| `D` | separazione, `N` | separazione, lineare | pendenza `N` | pendenza lineare |
+|---|---|---|---|---|
+| `0` | 0.0 → 0.0 | 0.0 → 0.0 | **+0.000** | **+0.000** |
+| `1` | 3.0 → 2.0 | 3.0 → 2.0 | **+0.032** | **+0.032** |
+| `2` | 4.0 → 3.0 | 4.0 → 3.0 | **+0.003** | **+0.003** |
+| `3` | 5.0 → 4.0 | 5.0 → 4.0 | **+0.003** | **+0.003** |
+| `4` | 4.0 → 4.0 | 4.0 → 4.0 | **-0.004** | **-0.004** |
+| `5` | 3.0 → 3.0 | 3.0 → 3.0 | **-0.005** | **-0.005** |
+| `6` | 5.0 → 5.0 | 5.0 → 5.0 | **-0.018** | **-0.015** |
+
+### ⛔ **I DUE GRUMI SI COMPORTANO COME NEL LINEARE:** le pendenze della separazione coincidono a tre decimali su **tutti** i `D` — quindi ### **niente attrazione, niente repulsione, nessuno stato legato**, e la fase relativa *(`0` o `pi`)* ### **non cambia niente.**
+
+### `G2(b)` **A MASSIMA DENSITA-: NIENTE DI MISURABILE, E NESSUNA REPULSIONE**
+
+### ⭐ **E PRIMA DEI NUMERI, LA RIDUZIONE ONESTA:** a `D = 0` due grumi **in fase** ### **SONO un grumo di ampiezza radice di due** — quindi la domanda *«rimbalza, si fonde o si allarga»* ### **si riduce alla scansione di `x0`**, e la separazione a `D = 0` e' `0` ### **per costruzione**, non per fisica.
+
+| `x0` | `N`, uno | `N`, due sovrapposti | lineare | lo scarto, in `sigma` |
+|---|---|---|---|---|
+| `1` | **-0.00888** ± 0.00181 | **-0.00900** | -0.00881 ± 0.00181 | ### **0.03 `sigma`** ### ⛔ **dentro la barra** |
+| `8` | **-0.00703** ± 0.00183 | **-0.00680** | -0.00881 ± 0.00181 | ### **0.69 `sigma`** ### ⛔ **dentro la barra** |
+| `64` | **-0.00699** ± 0.00191 | **-0.00715** | -0.00881 ± 0.00181 | ### **0.69 `sigma`** ### ⛔ **dentro la barra** |
+
+### ⛔ **E IL VERDETTO LO DA- LA SOGLIA SCRITTA PRIMA, non l-occhio:** *<<come nel lineare = entro `3 sigma`>>*, e lo scarto piu- grande e- ### **0.69 `sigma`** — ### **quindi l-allargamento di `N` NON SI DISTINGUE da quello lineare.** ### ⚠ **E io avevo scritto <<rallenta del `~20%`>>:** il rapporto c-e-, ### **ma la barra d-errore se lo mangia** — e il `sigma` ### **stava nel `json` dal primo giro.**
+
+### ✅ **E CIO- CHE RESTA, SOLIDO, E- LA NEGAZIONE:** ### ⛔ **NON e- una repulsione**, perche' la velocita' di allargamento ### **non CRESCE con l-ampiezza** — che e' ### **la firma di una repulsione**, e la soglia scritta prima la nomina esplicitamente. ### **Le pendenze vanno nel verso OPPOSTO** *(meno negative al crescere di `x0`)*, e ### **<<due sovrapposti>> si comporta come uno piu- forte**, non come due che si respingono.
+
+### `G2(c)` **IL MOTO COLLETTIVO** — ### ⚠ **NON DECIDIBILE: non c-e- un composito da spingere**
+
+| la spinta | pendenza del primo | del secondo | della separazione |
+|---|---|---|---|
+| `0` | **+0.016** | **+0.029** | **+0.003** |
+| `0.25` | **+0.019** | **+0.029** | **-0.006** |
+| `0.5` | **+0.019** | **+0.018** | **-0.012** |
+| `1` | **+0.019** | **+0.015** | **-0.010** |
+
+### ⛔ **Senza stato legato la domanda <<il secondo segue?>> non si pone:** i due centri ### **si disperdono entrambi**, e la separazione ### **non cresce ne- cala in modo significativo.** ### ⚠ **Riportare questi numeri come <<il composito si muove>> sarebbe leggere un artefatto.**
+
+### `V7` **I CONIUGATI** — ### ✅ **la `C` tiene anche sui grumi**
+
+| la variante | coniugazione | che cosa dice |
+|---|---|---|
+| `E` | **2.4** | ### ⛔ **rompe, e DEVE** |
+| `N` | **1.66e-14** | ### ✅ **tiene** |
+
+### ⭐ **E IL BRACCIO DI COLLAUDO CHE VALE PIU- DI TUTTI E- QUELLO CHE DEVE CAMBIARE:** il `cos` fra due nodi, ### **trasportato**, e' invariante di gauge *(scarto **`0`**)*; ### **NON trasportato cambia SEGNO** *(`+0.9995` contro `-0.9967`)*. ### ⛔ **Senza trasporto, un confronto di fase fra nodi distinti NON VUOL DIRE NIENTE** — ed e' il vincolo `V4`, misurato.
+
 ## ⚠ **I LIMITI, dichiarati**
 
 | | il limite |

@@ -277,3 +277,25 @@ psi_a^dag (sigma.n) S   ->   - [ psi_a^dag (sigma.n) S ]*
 ### ⛔ **E I NOVE VINCOLI SI RISPETTANO COSI':** `V1` le letture **leggono** e la dinamica e' **solo** il passo `v3`; `V2` **nessuna costante nuova** — i parametri delle condizioni iniziali *(ampiezza, distanza, spinta)* sono ### **parametri di LETTURA, scansionati e dichiarati**; `V3` si riporta ### **il tick E il `tau` locale** *(nel banco `r = 1`, quindi coincidono: e lo scrivo invece di lasciarlo sottinteso)*; `V4` **ogni** fase e' trasportata; `V5` ### **niente assi**: distanze di grafo e nodi; `V6` **scala minima un arco**; `V7` le condizioni iniziali **anche coniugate**; `V8` `Q` **si chiama conservazione modificata**; `V9` a `N` spento ### **tutto coincide col `v2` AL BIT.**
 
 ### ⭐ **E UNA PREVISIONE, perche' una lettura senza previsione e' una pesca:** ### ⛔ **mi aspetto NESSUN anello in antifase e NESSUNO stato legato** — perche' il `v3` ha gia' misurato che ### **nessuna delle tre forme lega un grumo** *(il rapporto col fondo uniforme resta quello del lineare)*. ### ✅ **Se un anello in antifase c'e' ANCHE senza grumo, e' una scoperta; se non c'e', e' la conferma che il guscio ha bisogno di un nucleo.**
+
+## ⭐ **ANNOTAZIONE: CHE COSA HANNO DETTO `G1` E `G2`, CONTRO LE SOGLIE SCRITTE QUI SOPRA** *(`2026-10-11`, a misura fatta — e **niente qui sopra si riscrive**)*
+
+### ⛔ **LA MIA PREVISIONE ERA SBAGLIATA SU `G1`, E QUESTO FILE AVEVA GIA' DETTO COME LEGGERLO:** *<<se un anello in antifase c'e' ANCHE senza grumo, e' una scoperta>>*. ### **E' quel caso.**
+
+| | la soglia, come l'avevo scritta | il numero | il verdetto |
+|---|---|---|---|
+| `G1(a)` | `cos dphi(r) < 0` **e** `|cos| > 3 sigma` | **`-0.615` ± `0.110`** = **`5.6 sigma`**, e ### **solo nella camminata LINEARE** *(`N`: `+0.301`)* | ### ⭐ **ANELLO IN ANTIFASE, e NON e' un effetto della materia** |
+| `G1(b)` | **solo trasportata** | il `cos` trasportato e' invariante *(scarto **`0`**)*, e ### **NON trasportato cambia SEGNO** *(`+0.999507` contro `-0.996671`)* | ### ✅ **rispettata, e MISURATA nei due versi** |
+| `G2(a)` | pendenza della separazione, `3 sigma` | ### **coincide a tre decimali col lineare** a ogni `D` da `0` a `6`, con entrambe le fasi | ### ⛔ **<<restano>>: nessuna interazione** |
+| `G2(d)` | saturazione = **come nel lineare, entro `3 sigma`**; repulsione = cresce di piu' **e** la velocita' **cresce con l'ampiezza** | scarto ### **`0.69 sigma`** *(`-0.00703` ± `0.00183` contro `-0.00881` ± `0.00181`)*, e la velocita' ### **non cresce** | ### ⛔ **<<come nel lineare>>: NIENTE DI MISURABILE**, e ### **nessuna repulsione** |
+| `G2(e)` | il secondo segue entro `3 sigma` | ### **non c'e' un composito da spingere** | ### ⚠ **NON DECIDIBILE, e lo si scrive** |
+| `G2(f)` | `D = 1..6` sull'irregolare | rispettato, ed e' nelle uscite | ### ✅ **dichiarato** |
+
+### ⛔ **E LA SOGLIA `G2(b)`/`G2(c)` SU `Q` NON L'HO APPLICATA, e il motivo e' un DIFETTO MIO:** `Q` era misurata ### **con la grandezza sbagliata** sul braccio `lineare` — un ternario `"N" if nome == "N" else "N"`, che ### **da' sempre `N`.** ### ⭐ **L'ha preso un invariante che DERIVAVA** *(`0.002305` verso `0.000002`, dove l'unitarieta' pretende `0`)*, ed e' la voce `[[DIFETTO-TERNARIO-CHE-NON-SCEGLIE]]`. ### ✅ **Curato PRIMA del primo commit**, con ### **due bracci che l'avrebbero preso.** ### ⚠ **E il verdetto <<nessuno stato legato>> NON POGGIA SU `Q`:** poggia su `G2(a)`, cioe' sulle ### **pendenze della separazione** — e lo dico perche' ### **un verdetto giusto per una ragione sbagliata resta un verdetto che non ho provato.**
+
+### ⚠ **E DUE ERRORI DI METODO MIEI, nello stesso mandato:**
+
+1. ### **Ho guardato le pendenze senza la loro barra**, e ho annunciato un `~20%` che e' ### **`0.69 sigma`** — mentre il `sigma` ### **stava nel `json` dal primo giro.** La cura non e' la mia attenzione: ### **lo scarto in `sigma` lo CALCOLA il generatore**, e un braccio pretende la barra su ogni pendenza.
+2. ### **Ho modificato due file mentre la suite girava** *(par. `5`)*, e ### **la suite me li ha rimessi a posto** — le mie modifiche a `RELAZIONE_PER_CLAUDE.md` e a `doc/INVENTARIO_strumenti.md` ### **sono state cancellate**, e le ho rifatte. ### ✅ **Il presidio ha funzionato: il difetto era mio.**
+
+### 📌 **LE CINQUE VOCI:** `[[MISURA-GUSCIO-ANTIFASE]]` · `[[MISURA-DUE-GRUMI-NESSUNA-INTERAZIONE]]` · `[[DIFETTO-TERNARIO-CHE-NON-SCEGLIE]]` · `[[DOMANDA-GUSCIO-E-INTERFERENZA]]` · `[[DOMANDA-PRIMA-LEGARE-POI-MISURARE]]` — e le ### **due domande sono di Luca**, non mie.

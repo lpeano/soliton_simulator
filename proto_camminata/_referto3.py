@@ -7,6 +7,7 @@ Gira con:  python proto_camminata/_referto3.py
 """
 import io
 import json
+import math
 import os
 import sys
 
@@ -183,6 +184,169 @@ def verdetti(d):
     return v
 
 
+def sezione_guscio(a, d):
+    """### La sezione delle letture `G1` e `G2` *(mandato del 2026-10-11)*."""
+    p = os.path.join(_QUI, "uscite", "letture_guscio_moto.json")
+    if not os.path.exists(p):
+        return
+    g = json.loads(io.open(p, encoding="utf-8").read())
+    a("## \u2b50 **LE LETTURE `G1` E `G2` \u2014 IL GUSCIO, E DUE GRUMI**")
+    a("")
+    a("> ### \u26d4 **SONO OSSERVATORI, NON LEGGI:** la dinamica resta **solo il passo "
+      "`v3`**, e le letture **non retroagiscono** \u2014 un braccio del collaudo lo "
+      "verifica **byte a byte.**")
+    a("")
+    a("### `G1` **IL GUSCIO IN ANTIFASE** \u2014 ### \u26d4 **SMENTITA, E AL CONTRARIO DI "
+      "COME ME L-ASPETTAVO**")
+    a("")
+    a("| la variante | `r=1` | `r=2` | `r=3` | c-e- un anello in antifase? |")
+    a("|---|---|---|---|---|")
+    for et in ("N", "D", "E", "lineare"):
+        ch = "%s identita dal centro iniziale" % et
+        if ch not in g["G1"]:
+            continue
+        an = g["G1"][ch]["anelli"]
+        righe = []
+        for r in ("1", "2", "3"):
+            if r in an:
+                righe.append("**%+.3f** \u00b1 %.3f" % (an[r]["cos_dphi"],
+                                                        an[r]["errore_standard"]))
+            else:
+                righe.append("\u2014")
+        anti = [r for r in an if an[r].get("antifase")]
+        a("| `%s` | %s | %s | %s | %s |"
+          % (et, righe[0], righe[1], righe[2],
+             ("### \u2b50 **SI-, a `r=%s`**" % anti[0]) if anti else "no"))
+    a("")
+    a("### \u2b50 **E L-ANELLO IN ANTIFASE C-E-, MA NELLA CAMMINATA *LINEARE*:** `cos "
+      "dphi(r=1)` = **%+.3f \u00b1 %.3f**, cioe' **oltre `3 sigma`** \u2014 e con le non "
+      "linearita' accese ### **NON c-e- piu-.**"
+      % (g["G1"]["lineare identita dal centro iniziale"]["anelli"]["1"]["cos_dphi"],
+         g["G1"]["lineare identita dal centro iniziale"]["anelli"]["1"]
+         ["errore_standard"]))
+    a("")
+    a("### \u26d4 **QUINDI IL GUSCIO NON E- UN EFFETTO DELLA MATERIA: E- "
+      "L-INTERFERENZA DI GROVER** \u2014 e la saturazione ### **lo DISTRUGGE.** "
+      "### \u26a0 **E la mia previsione era <<nessun anello in antifase>>: sbagliata, ma "
+      "sbagliata NEL VERSO OPPOSTO** a quello che il mandato cercava *(un guscio attorno a "
+      "un nucleo)*.")
+    a("")
+    a("### \u26a0 **E UN LIMITE CHE CAMBIA COME SI LEGGE TUTTO `G1`:** la lettura presuppone "
+      "*«ogni grumo auto-intrappolato trovato da `v3`»*, e ### **il `v3` non ne ha trovato "
+      "nessuno.** ### **Quindi gli anelli sono misurati attorno al nodo di partenza** *(lo "
+      "stesso per tutte le varianti: e- l-unico confronto che vale)*, ### **non attorno a un "
+      "nucleo** \u2014 e il <<guscio>> qui vuol dire **la struttura di fase che resta**, non "
+      "un guscio di materia.")
+    a("")
+    a("### `G2` **DUE GRUMI** \u2014 ### \u26d4 **NESSUNA INTERAZIONE, A NESSUNA "
+      "DISTANZA, CON NESSUNA FASE**")
+    a("")
+    inter = g["G2"].get("interazione", {})
+    sep_n = [(k, v) for k, v in sorted(inter.items()) if k.startswith("N fase=0")]
+    sep_l = {k.replace("lineare", "N"): v for k, v in inter.items()
+             if k.startswith("lineare fase=0")}
+    a("| `D` | separazione, `N` | separazione, lineare | pendenza `N` | pendenza lineare |")
+    a("|---|---|---|---|---|")
+    for k, v in sep_n:
+        w = sep_l.get(k)
+        if w is None:
+            continue
+        a("| `%d` | %.1f \u2192 %.1f | %.1f \u2192 %.1f | **%+.3f** | **%+.3f** |"
+          % (v["D"], v["separazione_iniziale"], v["separazione_finale"],
+             w["separazione_iniziale"], w["separazione_finale"],
+             v["pendenza_separazione"], w["pendenza_separazione"]))
+    a("")
+    a("### \u26d4 **I DUE GRUMI SI COMPORTANO COME NEL LINEARE:** le pendenze della "
+      "separazione coincidono a tre decimali su **tutti** i `D` \u2014 quindi "
+      "### **niente attrazione, niente repulsione, nessuno stato legato**, e la fase "
+      "relativa *(`0` o `pi`)* ### **non cambia niente.**")
+    a("")
+    md = g["G2"].get("massima_densita", {})
+    if md:
+        a("### `G2(b)` **A MASSIMA DENSITA-: NIENTE DI MISURABILE, E NESSUNA "
+      "REPULSIONE**")
+        a("")
+        a("### \u2b50 **E PRIMA DEI NUMERI, LA RIDUZIONE ONESTA:** a `D = 0` due grumi "
+          "**in fase** ### **SONO un grumo di ampiezza radice di due** \u2014 quindi la "
+          "domanda *«rimbalza, si fonde o si allarga»* ### **si riduce alla scansione di "
+          "`x0`**, e la separazione a `D = 0` e' `0` ### **per costruzione**, non per "
+          "fisica.")
+        a("")
+        a("| `x0` | `N`, uno | `N`, due sovrapposti | lineare | lo scarto, in `sigma` |")
+        a("|---|---|---|---|---|")
+        peggio = 0.0
+        for x0 in ("1", "8", "64"):
+            ka = "N x0=%s uno" % x0
+            kb = "N x0=%s due_sovrapposti" % x0
+            kc = "lineare x0=%s uno" % x0
+            if ka in md and kb in md and kc in md:
+                # ### \u26d4 **LO SCARTO IN `sigma` SI CALCOLA QUI, e non a occhio:** la
+                # ### soglia scritta PRIMA dice *<<come nel lineare = entro `3 sigma`>>*,
+                # ### e ### **un rapporto si legge solo contro la sua barra.**
+                sg = math.sqrt(md[ka]["sigma"] ** 2 + md[kc]["sigma"] ** 2)
+                ns = abs(md[ka]["pendenza_allargamento"]
+                         - md[kc]["pendenza_allargamento"]) / sg if sg > 0 else float("inf")
+                peggio = max(peggio, ns)
+                a("| `%s` | **%+.5f** \u00b1 %.5f | **%+.5f** | %+.5f \u00b1 %.5f | "
+                  "### **%.2f `sigma`** %s |"
+                  % (x0, md[ka]["pendenza_allargamento"], md[ka]["sigma"],
+                     md[kb]["pendenza_allargamento"], md[kc]["pendenza_allargamento"],
+                     md[kc]["sigma"], ns,
+                     "### \u26d4 **dentro la barra**" if ns < 3.0
+                     else "### \u2b50 **oltre `3 sigma`**"))
+        a("")
+        a("### \u26d4 **E IL VERDETTO LO DA- LA SOGLIA SCRITTA PRIMA, non l-occhio:** "
+          "*<<come nel lineare = entro `3 sigma`>>*, e lo scarto piu- grande e- ### "
+          "**%.2f `sigma`** \u2014 ### **quindi l-allargamento di `N` NON SI DISTINGUE da "
+          "quello lineare.** ### \u26a0 **E io avevo scritto <<rallenta del `~20%%`>>:** "
+          "il rapporto c-e-, ### **ma la barra d-errore se lo mangia** \u2014 e il `sigma` "
+          "### **stava nel `json` dal primo giro.**" % peggio)
+        a("")
+        a("### \u2705 **E CIO- CHE RESTA, SOLIDO, E- LA NEGAZIONE:** "
+          "### \u26d4 **NON e- una repulsione**, perche' la velocita' di allargamento "
+          "### **non CRESCE con l-ampiezza** \u2014 che e' ### **la firma di una "
+          "repulsione**, e la soglia scritta prima la nomina esplicitamente. ### **Le "
+          "pendenze vanno nel verso OPPOSTO** *(meno negative al crescere di `x0`)*, e "
+          "### **<<due sovrapposti>> si comporta come uno piu- forte**, non come due che "
+          "si respingono.")
+        a("")
+    mc = g["G2"].get("moto_collettivo", {})
+    if mc:
+        a("### `G2(c)` **IL MOTO COLLETTIVO** \u2014 ### \u26a0 **NON DECIDIBILE: non c-e- "
+          "un composito da spingere**")
+        a("")
+        a("| la spinta | pendenza del primo | del secondo | della separazione |")
+        a("|---|---|---|---|")
+        for k, v in sorted(mc.items()):
+            a("| `%s` | **%+.3f** | **%+.3f** | **%+.3f** |"
+              % (k.replace("spinta=", ""), v["pendenza_primo"], v["pendenza_secondo"],
+                 v["pendenza_separazione"]))
+        a("")
+        a("### \u26d4 **Senza stato legato la domanda <<il secondo segue?>> non si pone:** "
+          "i due centri ### **si disperdono entrambi**, e la separazione ### **non cresce "
+          "ne- cala in modo significativo.** ### \u26a0 **Riportare questi numeri come "
+          "<<il composito si muove>> sarebbe leggere un artefatto.**")
+        a("")
+    cg = g.get("G1_coniugato", {})
+    if cg:
+        a("### `V7` **I CONIUGATI** \u2014 ### \u2705 **la `C` tiene anche sui grumi**")
+        a("")
+        a("| la variante | coniugazione | che cosa dice |" )
+        a("|---|---|---|")
+        for k, v in sorted(cg.items()):
+            a("| `%s` | **%.3g** | %s |"
+              % (k, v["coniugazione"],
+                 "### \u2705 **tiene**" if v["coniugazione"] < 1e-10
+                 else "### \u26d4 **rompe, e DEVE**"))
+        a("")
+    a("### \u2b50 **E IL BRACCIO DI COLLAUDO CHE VALE PIU- DI TUTTI E- QUELLO CHE DEVE "
+      "CAMBIARE:** il `cos` fra due nodi, ### **trasportato**, e' invariante di gauge "
+      "*(scarto **`0`**)*; ### **NON trasportato cambia SEGNO** *(`+0.9995` contro "
+      "`-0.9967`)*. ### \u26d4 **Senza trasporto, un confronto di fase fra nodi distinti "
+      "NON VUOL DIRE NIENTE** \u2014 ed e' il vincolo `V4`, misurato.")
+    a("")
+
+
 def main():
     d = json.loads(io.open(FONTE, encoding="utf-8").read())
     v = verdetti(d)
@@ -283,6 +447,7 @@ def main():
       "collaudi** *(gauge, cono, norme, reversibilita-, `C`)* e ### **il vuoto risponde** | "
       "non dicono che sia **la** forma: e' ### **dichiarata provvisoria** |")
     a("")
+    sezione_guscio(a, d)
     a("## ⚠ **I LIMITI, dichiarati**")
     a("")
     a("| | il limite |")
