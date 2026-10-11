@@ -175,6 +175,16 @@ COLLAUDI = (
     # ### dell-infrastruttura a `39.91` s.
     ("le letture del guscio e del moto", "proto_camminata/_collauda_guscio.py",
      "solo-CI"),
+    # ### ⭐ **IL BANCO DEL `v4`** *(mandato di Luca, 2026-10-11)*: per ora
+    # ### prova ### **UNA COSA SOLA**, la ### **frazione di un-involuzione** -- e
+    # ### ### **una famiglia per tutti e quattro i pezzi discreti**, perche- sono
+    # ### ### **tutti involuzioni ERMITIANE** *(misurato)*. ### ⛔ **E i
+    # ### bracci che DEVONO scattare sono il cuore:** la `C` ### **si rompe** alle
+    # ### frazioni *(e- un conto, non un difetto)*, il ### **tick intero non e-
+    # ### un-involuzione** *(`A4`)*, e un `cs` storto dentro un blocco ### **rompe
+    # ### l-unitarieta-.**
+    ("il banco del v4, la frazione", "proto_camminata/_collauda_banco4.py",
+     "pre-commit"),
     # ### ⚠ **E `csv/_verifica_clone.py` NON STA QUI, DI PROPOSITO:** fa un clone e
     # ### ### **ci fa girare QUESTA suite** -- metterlo fra i collaudi vorrebbe dire
     # ### ### **una ricorsione senza fondo.** Si lancia a mano, ed e- il punto 3 del

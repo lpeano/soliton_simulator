@@ -13130,3 +13130,24 @@ Ogni dato di `db_era2/` ha ### **il suo TIMBRO accanto**, col campo `versione_da
 ### 📌 **E LE PREVISIONI SONO SCRITTE PRIMA DEI NUMERI, nel file:** ### ⛔ **prevedo che `L0` FALLISCA per `(F)`** *(per il punto `4`)*, ### **che `(S)` non si chiuda unitaria con tick per NODO** *(uno scambio e' una rotazione su DUE lati: o scatta l'arco, o serve una memoria)*, ### **che `L2` non distingua un grumo da un pacchetto di passaggio** — e ### **che `L5` non veda niente**, perche' `G2` ha dato `0.69 sigma` fra `N` e lineare e un effetto di gravita' sara' piu' piccolo di quello.
 
 ### ⚠ **E IL LIMITE LO DICHIARO ADESSO, NON DOPO:** `L1`, `L2` e `L5` dicono *<<partendo da un grumo `v3` auto-intrappolato>>*, e il ### **`v3` non ne ha trovato nessuno** *(misurato due volte: referto `v3`, e di nuovo in `G1`)*. ### **Quindi useranno un PACCHETTO**, e ogni risultato va letto come ### **<<l'impronta di un pacchetto>>, non <<l'impronta di una massa>>** — che e' lo stesso errore che `G1` mi ha fatto correggere.
+
+### ✅ **IL `v4`, PARTE `B` PASSO `1`: LA FAMIGLIA FRAZIONARIA, E IL BANCO E' `17`/`17`**
+
+### **`proto_camminata/frazione4.py`:** `X(cs)` per un'involuzione ermitiana, nelle ### **due famiglie**, con ### **UNA sola applicazione di `X`** *(`Q psi = (psi + X psi)/2`)* — quindi ### **la frazione e' locale esattamente come il pezzo che frazione**: niente matrici, niente autovettori.
+
+| il braccio | il numero |
+|---|---|
+| ### ⭐ **MATERIA**: i quattro pezzi sono involuzioni ermitiane | `9.39e-16` e `5.02e-15` |
+| `W1` a `cs = 1` e' il `v3` ### **AL BIT** | ### **`0`** su `8` casi |
+| `W1-bis` a `cs = 0` e' l'identita' ### **AL BIT** | ### **`0`** su `8` casi |
+| `W4` l'inversa e' `cs -> -cs` | `6.2e-17` *(relativo)* su `32` casi |
+| `W9` la norma a ogni `cs` | `2.22e-16` *(relativo)* |
+| unitaria su `M^dag M` **e** `M M^dag` | `4.45e-16` |
+| ### ⛔ **DEVE**: la `C` si rompe alle frazioni | `(A)` `0.156/0.147/0.139`, `(B)` `0.104/0.147/0.104` |
+| ### ⛔ **DEVE**: il tick intero non e' un'involuzione | ### **`0.11`** |
+| ### ⛔ **DEVE**: un `cs` storto nel blocco rompe l'unitarieta' | ### **`0.441`** |
+| le tre forme dell'arco danno numeri **diversi** | la coppia piu' vicina: ### **`0.171`** |
+
+### ⚠ **E UNA SOGLIA MIA ERA SBAGLIATA, e il rosso era MIO:** avevo scritto la soglia di `W9` come `n_est * eps` ### **senza la TAGLIA del vettore**, e il braccio e' diventato rosso a `1.14e-13` contro `9.24e-14` — su un `phi` di norma `~832`. ### ⛔ **L'errore di macchina e' RELATIVO:** pretendere `n_est * eps` su una grandezza di taglia `832` vorrebbe dire ### **pretendere sette cifre in piu' di quante il `float64` ne abbia.** ### ✅ **E NON e' una soglia allargata per far passare un braccio:** e' la soglia ### **dimensionalmente giusta**, `n_est * eps * taglia`, e il peggiore adesso e' `2.22e-16` *(cioe' **un `eps`**)*. ### ⭐ **E il `phi` non normalizzato resta di proposito:** un vettore di norma `1` ### **non eserciterebbe la scala**, e quella soglia sbagliata ### **non si sarebbe vista.**
+
+### ⭐ **E IL `np.minimum` IN `frazione4.py` E' DICHIARATO, non ammesso in silenzio:** e' la forma `min` del `cs` dell'arco, cioe' ### **una SCELTA DI LEGGE accendibile** *(l'estremita' lenta fa da collo, ed e' la scelta causale)*, ### **non un clip su un valore fuori intervallo** *(`A11`)*. ### **Il braccio cerca gli altri cinque e dichiara l'ammesso.**

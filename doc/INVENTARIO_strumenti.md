@@ -3157,3 +3157,20 @@ etichette rimosse, con ### **`0` persi, `0` doppi, `0` conflitti**.
 | ⭐ **E I DUE BRACCI NATI DA QUEL DIFETTO** | la `Q` del braccio `lineare` ### **si conserva all-errore di macchina** *(`9.54e-18` contro `6*416*eps` = `5.54e-13`)*, e il ### **gemello che DEVE scattare** — la `Q` di `N` sulla ### **stessa corsa lineare** — da- ### **`0.00231`**, che e- ### **esattamente il numero che il ternario produceva** |
 | ✅ **E DUE CAMPI CHE RENDONO IL DIFETTO VISIBILE** | `quale_Q` ### **si dichiara in ogni riga** *(`32` righe, `0` senza)*, e ### **ogni pendenza di `G2(b)` porta il suo `sigma`** *(`12` righe, `0` senza barra)* |
 | **le voci** | `[[MISURA-GUSCIO-ANTIFASE]]` · `[[MISURA-DUE-GRUMI-NESSUNA-INTERAZIONE]]` · `[[DOMANDA-GUSCIO-E-INTERFERENZA]]` · `[[DOMANDA-PRIMA-LEGARE-POI-MISURARE]]` |
+
+### `proto_camminata/frazione4.py` e `_collauda_banco4.py` — **LA FRAZIONE DI UN'INVOLUZIONE** *(il `v4`, 2026-10-11)*
+
+| | |
+|---|---|
+| **i file** | `frazione4.py` *(BLOB `ac2126df`)* · `_collauda_banco4.py` *(BLOB `1d19a0c1`)* |
+| **COMANDO** | `python proto_camminata/frazione4.py` · i bracci: `python proto_camminata/_collauda_banco4.py` *(### **`17`/`17`**, `1.24` s)* |
+| **che cosa misura** | la ### **frazione unitaria** di un'involuzione ermitiana, `X(cs)`, nelle ### **due famiglie** — `(A)` del mandato *(`e^{i pi cs} e^{i pi cs Q}`)* e `(B)` ### **senza fase globale** *(`Q + e^{i pi cs}(I - Q)`)* — piu' il `cs` dell'### **ARCO** dalle sue due estremita', in ### **tre forme dichiarate** *(`min`, `armonica`, `media`)* |
+| ⭐ **IL RISULTATO CHE TOGLIE UNA LEGGE** | il mandato chiedeva ### **due forme frazionarie** *(una per Grover, una per lo spostamento)*: ### **non servono.** Tutti e quattro i pezzi discreti sono ### **INVOLUZIONI ERMITIANE** *(`max|X(X(v)) - v|` = **`9.39e-16`**, `max|<a,Xb> - <Xa,b>|` = **`5.02e-15`**)*, quindi `X = 2Q - I` e ### **UNA famiglia** li copre. ### **E' `9-ter` prima di scrivere il codice** |
+| ✅ **E IL CORTOCIRCUITO E' `W1`, non un'ottimizzazione** | a `cs = 1` la famiglia da' `X` a `~2e-16`, e ### **`2e-16` non e' `0`**: `W1` pretende il `v3` ### **AL BIT**, quindi a `cs` identicamente `1` si restituisce `X psi`. ### **Misurato: `0` su `8` casi**, e `0` anche a `cs = 0` |
+| ⛔ **IL BRACCIO CHE DEVE SCATTARE, E CHE VALE PIU' DI TUTTI** | alle frazioni la `C` ### **NON commuta**: `(A)` da' `0.156/0.147/0.139` e `(B)` `0.104/0.147/0.104` a `cs = 0.25/0.5/0.75`, mentre a `cs = 1` e' ### **`0` al bit.** ### **Se NON si rompesse, la derivazione sarebbe sbagliata** — `C` e' antiunitaria, quindi una fase scalare commuta solo se l'angolo e' dispari sotto `C`, e `cs` e' ### **pari per `W5`** |
+| ⭐ **E `(B)` ROMPE MENO, E IN MODO SIMMETRICO** | `0.104240` a `cs = 0.25` e `0.104240` a `cs = 0.75`, differenza ### **`1.39e-17`** |
+| ⛔ **IL SECONDO BRACCIO CHE DEVE SCATTARE: `A4`** | il ### **tick intero non e' un'involuzione** *(`max|T(T(psi)) - psi|` = **`0.11`**, non `~1e-16`)* — quindi ### **<<la frazione del tick intero>> NON ESISTE** in questa famiglia |
+| ⛔ **E IL TERZO: l'assunzione conta** | un `cs` che varia ### **dentro** un blocco ### **rompe l'unitarieta-** *(`max|M^dag M - I|` = **`0.441`**)*, e per questo `frazione()` lo assume e `blocco_costante` lo verifica |
+| ⚠ **UNA SOGLIA MIA SBAGLIATA, e il rosso era MIO** | avevo scritto la soglia di `W9` come `n_est * eps` ### **senza la TAGLIA**, e il braccio e' diventato rosso a `1.14e-13` contro `9.24e-14` su un `phi` di norma `~832`. ### **L'errore di macchina e' RELATIVO**: la soglia giusta e' `n_est * eps * taglia`, e ora il peggiore e' `2.22e-16` |
+| ✅ **E LE TRE FORME DELL'ARCO DANNO NUMERI DIVERSI** | la coppia piu' vicina differisce di ### **`0.171`** — cioe' ### **la scelta e' una scelta vera**, e ### **e' di Luca** *(`[[DOMANDA-LAMBDA-GRANDEZZA]]`)* |
+| **le voci** | `[[CS-LOCALE-DAL-VUOTO]]` · `[[INVARIANZA-LOCALE-CS]]` · `[[DOMANDA-LAMBDA-GRANDEZZA]]` |
