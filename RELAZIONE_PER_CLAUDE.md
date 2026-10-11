@@ -13189,3 +13189,33 @@ Ogni dato di `db_era2/` ha ### **il suo TIMBRO accanto**, col campo `versione_da
 
 1. ### **Pretendevo `cs` e la QUOTA pari sotto `C` <<al bit>>**, e il braccio dava `4.16e-17` = ### **`0.19 eps`**. ### ⭐ **Il motivo e' l'ORDINE DELLA SOMMA:** `cs` legge `|phi|^2` ### **elemento per elemento** *(e la' e' `0` al bit, davvero)*, ma la quota legge anche `rho`, che e' ### **una somma sulle estremita-**, e `C` ne cambia l'ordine. ### **Con tre addendi l'ordine conta**, ed e' un fatto del `float64`. ### ✅ **Ho separato i due bracci**, invece di allargare l'unico.
 2. ### **Il mio primo riepilogo di `A1` era il numero sbagliato:** stampavo `max|Lambda(dopo) - Lambda(prima)|` e veniva ### **`3.63` per TUTTE**, spenta compresa — perche' il `max` cadeva su un nodo ### **senza materia**, dove le candidate non fanno niente. ### ⛔ **Un riepilogo sbagliato nascondeva la risposta**, e il numero giusto e' ### **la differenza dal `v3`.**
+
+### ⭐ **IL `v4`, PASSI `5` E `6`: IL PASSO, E IL NUMERO CHE SEPARA `(F)` DA `(S)`** *(banco `46`/`46`)*
+
+> ### ⛔ **`(F)` ROMPE LA `C` DI `4.6475`. ### `(S)` LA TIENE A `0` ESATTO.** ### **E a `cs = 1` entrambe danno `0`**, quindi il braccio non e' un falso-uno.
+
+| il braccio | `(F)` pezzi frazionari | `(S)` tick asincroni |
+|---|---|---|
+| `W1` a `cs = 1` e' il `v3` | ### ✅ **`0` AL BIT** *(con e senza `N`)* | ### ✅ **`0` AL BIT**, e `120`/`120` nodi scattano |
+| `W5` la `C` con `cs` **non uniforme** | ### ⛔ **`4.6475`** | ### ⭐ **`0` ESATTO** |
+| `W7` il cono, raggi su `t = 1..6` | `[1, 2, 3, 4, 5, 6]` = ### **esattamente `t`** | `[0, 1, 2, 3, 4, 4]` = ### **`<= t`, e a volte MENO** |
+| `W4` l'inverso *(relativo)* | `1.39e-16` | `6.82e-17`, ### **leggendo il BIT** |
+| `W9` le norme, separate | `1.11e-16` e `0` | `2.22e-16` e `2.73e-16` |
+
+### ⭐ **E LA REGOLA DEGLI ARCHI DI `(S)` *SI CHIUDE* UNITARIA, CONTRO LA MIA PREVISIONE SCRITTA**
+
+### **Avevo previsto nel task history:** *«`(S)` NON si chiude in modo unitario con tick per NODO»*, col ragionamento *«uno scambio e' una rotazione su DUE lati»*. ### ✅ **La regola che chiude e' piu' semplice di quanto pensassi:** ### **l'arco si scambia solo se scattano ENTRAMBE le sue estremita'** — e un arco che non scatta applica ### **l'identita'**, che e' unitaria. ### **Quindi il passo e' unitario, e il mandato chiedeva di scriverlo se non lo fosse: non lo e'.**
+
+### ⛔ **MA L'ALTRO RAMO DELLA MIA PREVISIONE ERA GIUSTO, E IL PREZZO E' QUELLO:** *«o si accumula un debito, e allora serve una MEMORIA, che e' uno stato nuovo»*. ### **Per invertire `(S)` serve sapere CHI HA SCATTATO**, e dal solo `tau` DOPO ### **non si deduce** — `tau < cs dt` e' compatibile sia con *«ha scattato»* sia con *«`tau` era quasi zero»*. ### ⭐ **Quindi `(S)` porta un BIT PER NODO nello stato**, e ### **uno stato nuovo e' una legge in piu'** *(`9-ter`)*: va contato nel confronto, e ### **non e' gratis.**
+
+### 📌 **IL CONFRONTO, COME LO CONSEGNO A LUCA** *(e non scelgo io: e' `A4` del mandato)*
+
+| | `(F)` | `(S)` |
+|---|---|---|
+| la dinamica | ### **liscia** | ### **a scatti** *(e il cono lo mostra: raggio `0` al primo tick)* |
+| la `C` | ### ⛔ **rotta**, `4.6475` | ### ⭐ **esatta**, `0` |
+| lo stato | `psi`, `phi` | ### ⛔ `psi`, `phi`, **`tau` E un BIT per nodo** |
+| l'invarianza locale della luce | ### **da misurare** *(`L0`)* | ### **esatta per costruzione** *(dentro il nodo e' il `v3`)* |
+| le leggi contate | la famiglia frazionaria | ### **la famiglia NON serve**, ma serve ### **uno stato nuovo** |
+
+### ⛔ **E `W8` E' VERIFICATO SUL SORGENTE, PEZZO PER PEZZO, come il mandato chiede alla lettera:** `5` pezzi, ### **`0` senza la loro frazione** e ### **`0` con un tick fisso**. ### ⭐ **E col gemello che DEVE scattare:** lo stesso controllo su un sorgente ### **FINTO**, in cui `moneta_grover` prende `1.0` invece di `cs_e`, ### **lo trova** — ### **senza quel gemello il braccio sarebbe un falso-uno.**

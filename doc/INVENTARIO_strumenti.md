@@ -3162,8 +3162,8 @@ etichette rimosse, con ### **`0` persi, `0` doppi, `0` conflitti**.
 
 | | |
 |---|---|
-| **i file** | `frazione4.py` *(BLOB `ac2126df`)* · `cslocale4.py` *(BLOB `eeaa7213`)* · `vuoto4.py` *(BLOB `2eba5ada`)* · `_collauda_banco4.py` *(BLOB `d2313ee5`)* |
-| **COMANDO** | `python proto_camminata/frazione4.py` · i bracci: `python proto_camminata/cslocale4.py` · `python proto_camminata/vuoto4.py` · i bracci: `python proto_camminata/_collauda_banco4.py` *(### **`34`/`34`**, `3.45` s)* |
+| **i file** | `frazione4.py` *(BLOB `ac2126df`)* · `cslocale4.py` *(BLOB `eeaa7213`)* · `vuoto4.py` *(BLOB `2eba5ada`)* · `camminata4.py` *(BLOB `d1e085f4`)* · `_collauda_banco4.py` *(BLOB `0c4dc643`)* |
+| **COMANDO** | `python proto_camminata/frazione4.py` · i bracci: `python proto_camminata/cslocale4.py` · `python proto_camminata/vuoto4.py` · i bracci: `python proto_camminata/_collauda_banco4.py` *(### **`46`/`46`**, `4.42` s)* |
 | **che cosa misura** | la ### **frazione unitaria** di un'involuzione ermitiana, `X(cs)`, nelle ### **due famiglie** — `(A)` del mandato *(`e^{i pi cs} e^{i pi cs Q}`)* e `(B)` ### **senza fase globale** *(`Q + e^{i pi cs}(I - Q)`)* — piu' il `cs` dell'### **ARCO** dalle sue due estremita', in ### **tre forme dichiarate** *(`min`, `armonica`, `media`)* |
 | ⭐ **IL RISULTATO CHE TOGLIE UNA LEGGE** | il mandato chiedeva ### **due forme frazionarie** *(una per Grover, una per lo spostamento)*: ### **non servono.** Tutti e quattro i pezzi discreti sono ### **INVOLUZIONI ERMITIANE** *(`max|X(X(v)) - v|` = **`9.39e-16`**, `max|<a,Xb> - <Xa,b>|` = **`5.02e-15`**)*, quindi `X = 2Q - I` e ### **UNA famiglia** li copre. ### **E' `9-ter` prima di scrivere il codice** |
 | ✅ **E IL CORTOCIRCUITO E' `W1`, non un'ottimizzazione** | a `cs = 1` la famiglia da' `X` a `~2e-16`, e ### **`2e-16` non e' `0`**: `W1` pretende il `v3` ### **AL BIT**, quindi a `cs` identicamente `1` si restituisce `X psi`. ### **Misurato: `0` su `8` casi**, e `0` anche a `cs = 0` |
@@ -3191,3 +3191,19 @@ etichette rimosse, con ### **`0` persi, `0` doppi, `0` conflitti**.
 | ⚠ **UN FALSO-ZERO MIO, e garantito dall'insieme scelto** | col fondo del `v3` *(modulo uniforme)* lo spostamento dava `8.88e-16`, e avrei concluso ### **<<non muove `Lambda`>>** — il contrario del vero: scambia estremita' di ### **modulo uguale**. Con un vuoto non uniforme: ### **`56.5`** |
 | ⛔ **E LA TERZA CANDIDATA DEL MANDATO E' ESCLUSA DA UN VINCOLO** | lo ### **scambio di NORMA fra `psi` e `phi`** romperebbe il gauge *(`psi` si trasforma, `phi` no)*, ed e' il motivo per cui `vuoto3.py` lo vieta. ### **Dichiarata e NON implementata** |
 | **le voci** | `[[CS-LOCALE-DAL-VUOTO]]` · `[[DOMANDA-LAMBDA-GRANDEZZA]]` · `[[VUOTO-LOCALE-DETERMINISTICO]]` |
+
+### `proto_camminata/camminata4.py` — **IL PASSO DEL `v4`, NELLE DUE CANDIDATE** *(2026-10-11)*
+
+| | |
+|---|---|
+| **il file** | `camminata4.py` *(BLOB `d1e085f4`)* — i bracci stanno in `_collauda_banco4.py` |
+| **COMANDO** | `python proto_camminata/camminata4.py` |
+| **che cosa misura** | `(F)` ### **pezzi frazionari sincroni**: `cs` entra in ### **ogni** pezzo che evolve *(moneta di spin, `N`, Grover dello spinore, spostamento, Grover e spostamento del vuoto, e la scrittura della materia)* · `(S)` ### **tick asincroni**: `tau_k += cs_k dt`, e chi supera `1` esegue ### **un tick INTERO del `v3`** |
+| ✅ **`W1`: ENTRAMBE LE CANDIDATE SONO IL `v3` AL BIT a `cs = 1`** | `(F)` ### **`0`** con e senza `N`, su `12` tick · `(S)` ### **`0`**, e ### **`120` nodi su `120` scattano** a ogni tick |
+| ⭐ **E LA REGOLA DEGLI ARCHI DI `(S)` SI CHIUDE UNITARIA, contro la mia previsione** | l'arco si scambia ### **solo se scattano ENTRAMBE** le estremita'; un arco che non scatta applica ### **l'identita'**, che e' unitaria. ### **Avevo previsto che non si chiudesse, e il numero mi ha smentito** |
+| ⛔ **MA IL PREZZO DI `(S)` C'E', ed e' l'altro ramo della previsione** | per invertire serve sapere ### **CHI HA SCATTATO**, e dal solo `tau` DOPO ### **non si deduce** *(`tau < cs dt` e' compatibile con entrambi i casi)*. ### **Quindi `(S)` porta un BIT PER NODO nello stato**, e ### **uno stato nuovo e' una legge in piu'** *(`9-ter`)* |
+| ⭐ **IL BRACCIO CHE SEPARA LE DUE CANDIDATE, E VALE PIU' DI TUTTI** | con `cs` non uniforme: `(F)` ### **ROMPE la `C` di `4.6475`**, `(S)` la tiene a ### **`0` ESATTO.** ### **E a `cs = 1` entrambe danno `0`**, quindi non e' un falso-uno |
+| ✅ **`W7` IL CONO** | `(F)` raggi **`[1, 2, 3, 4, 5, 6]`** = ### **esattamente `t`**; `(S)` **`[0, 1, 2, 3, 4, 4]`** = ### **`<= t`, e a volte MENO** — che e' il *«moto a scatti»* che il mandato nomina |
+| ✅ **`W4` e `W9`** | l'inverso: `(F)` `1.39e-16`, `(S)` `6.82e-17` su `12+12` tick *(relativi)* · le norme di `psi` e `phi`, ### **separatamente**: `1.11e-16` .. `2.73e-16` |
+| ⛔ **`W8` VERIFICATO SUL SORGENTE, PEZZO PER PEZZO** | `5` pezzi guardati, ### **`0` senza la loro frazione** e ### **`0` con un tick FISSO**. ### ⭐ **E col gemello che DEVE scattare:** lo stesso controllo su un sorgente ### **FINTO** col tick fisso ### **lo trova** *(`moneta_grover`)* — senza quel gemello il braccio sarebbe ### **un falso-uno** |
+| **le voci** | `[[CS-LOCALE-DAL-VUOTO]]` · `[[INVARIANZA-LOCALE-CS]]` |

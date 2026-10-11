@@ -44,6 +44,8 @@ _presidio.avvia(__file__)
 
 import camminata as CM                                         # noqa: E402
 import camminata2 as C2                                        # noqa: E402
+import camminata3 as C3                                        # noqa: E402
+import camminata4 as C4                                        # noqa: E402
 import cslocale4 as CS4                                       # noqa: E402
 import frazione4 as F4                                         # noqa: E402
 import geometria as GE                                         # noqa: E402
@@ -52,6 +54,7 @@ import vuoto3 as V3                                            # noqa: E402
 import vuoto4 as V4                                            # noqa: E402
 
 EPS = float(np.finfo(float).eps)
+NL = chr(10)
 SEME = 11
 CLIP = ("np.clip", ".clip(", "np.maximum", "np.minimum", "np.fmax", "np.fmin")
 # ### ⚠ **`np.minimum` STA in `frazione4.py`, ed e- DICHIARATO:** e- la forma `min` del
@@ -63,7 +66,8 @@ CLIP = ("np.clip", ".clip(", "np.maximum", "np.minimum", "np.fmax", "np.fmin")
 # ### ### **per mostrare che e- un artefatto degli estremi.** ### **Non sono clip.**
 CLIP_AMMESSI = {"frazione4.py": ("np.minimum",),
                 "cslocale4.py": ("np.minimum", "np.maximum"),
-                "vuoto4.py": ()}
+                "vuoto4.py": (),
+                "camminata4.py": ()}
 
 
 def main():
@@ -392,8 +396,176 @@ def main():
           "### max scarto = %.3g (= %.2f eps), soglia %.3g: ### **lo scarto e- l-ORDINE "
           "DELLA SOMMA di `rho`, non una rottura**" % (max(cG), max(cG) / EPS, tol))
 
+    # ================================================================ il PASSO del v4
+    import saturazione3 as S3
+    K = 12
+    st3 = C3.stato3(sc, SEME)
+    uno_n = np.ones(sc["n"], dtype=float)
+    reg = []
+    for fl in (None, S3.flusso):
+        a, b = dict(st3), dict(st3)
+        for _ in range(K):
+            a = C3.passo3(a, sc, geo, uno_n, 1.0, 0.5, fl)
+            b = C4.passo4_F(b, sc, geo, 1.0, 0.5, None, fl)
+        reg.append(max(float(np.max(np.abs(b["psi"] - a["psi"]))),
+                       float(np.max(np.abs(b["phi"] - a["phi"])))))
+    esito("### (W1) `(F)` con `cs = 1` imposto e tutto spento E- IL `v3`, AL BIT",
+          max(reg) == 0.0,
+          "### senza `N` %.3g, con `N` %.3g, su %d tick: ### **e- la REGRESSIONE, il primo "
+          "braccio del mandato**" % (reg[0], reg[1], K))
+    # ### \u2b50 **E `(S)` CON `cs = 1` SCATTA OVUNQUE A OGNI TICK, quindi DEVE essere il
+    # ### `v3` AL BIT TOO:** `tau += 1` supera `1`, ### **tutti i nodi scattano e tutti
+    # ### gli archi scattano** -- cioe- il tick intero del `v3`. ### **Se non lo fosse,
+    # ### la regola degli archi sarebbe sbagliata.**
+    a, s = dict(st3), C4.stato_S(st3, sc)
+    for _ in range(K):
+        a = C3.passo3(a, sc, geo, uno_n, 1.0, 0.5, None)
+        s = C4.passo4_S(s, sc, geo, 1.0, 0.5, None)
+    d_S = max(float(np.max(np.abs(s["psi"] - a["psi"]))),
+              float(np.max(np.abs(s["phi"] - a["phi"]))))
+    esito("### (W1) `(S)` con `cs = 1` e- il `v3` AL BIT: scattano TUTTI, e tutti gli archi",
+          d_S == 0.0,
+          "### max scarto = %.3g, nodi scattati nell-ultimo tick %d su %d"
+          % (d_S, int(np.sum(s["scattato"])), sc["n"]))
+
+    # ### un `cs` imposto NON uniforme: e- il controllo di `L0`
+    cs_nu = 0.3 + 0.7 * np.random.default_rng(5).random(sc["n"])
+    nF, nS, iF, iS = [], [], 0.0, 0.0
+    cF = dict(st3)
+    for _ in range(K):
+        cF = C4.passo4_F(cF, sc, geo, 1.0, 0.5, cs_nu)
+    nF = [abs(CM.norma(cF["psi"]) - CM.norma(st3["psi"])) / CM.norma(st3["psi"]),
+          abs(V3.norma_vuoto(cF["phi"]) - V3.norma_vuoto(st3["phi"]))
+          / V3.norma_vuoto(st3["phi"])]
+    dF = dict(cF)
+    for _ in range(K):
+        dF = C4.passo4_F(dF, sc, geo, 1.0, 0.5, cs_nu, inverso=True)
+    iF = max(float(np.max(np.abs(dF["psi"] - st3["psi"]))),
+             float(np.max(np.abs(dF["phi"] - st3["phi"])))) \
+        / max(math.sqrt(V3.norma_vuoto(st3["phi"])), 1.0)
+    sS = C4.stato_S(st3, sc)
+    storia = []
+    for _ in range(K):
+        sS = C4.passo4_S(sS, sc, geo, 1.0, 0.5, cs_nu)
+        storia.append(sS["scattato"].copy())
+    nS = [abs(CM.norma(sS["psi"]) - CM.norma(st3["psi"])) / CM.norma(st3["psi"]),
+          abs(V3.norma_vuoto(sS["phi"]) - V3.norma_vuoto(st3["phi"]))
+          / V3.norma_vuoto(st3["phi"])]
+    # ### \u26d4 **L-INVERSO DI `(S)` LEGGE IL BIT, e per questo il bit sta nello STATO.**
+    dS = dict(sS)
+    for t in range(K - 1, -1, -1):
+        dS["scattato"] = storia[t]
+        dS = C4.passo4_S(dS, sc, geo, 1.0, 0.5, cs_nu, inverso=True)
+    iS = max(float(np.max(np.abs(dS["psi"] - st3["psi"]))),
+             float(np.max(np.abs(dS["phi"] - st3["phi"])))) \
+        / max(math.sqrt(V3.norma_vuoto(st3["phi"])), 1.0)
+    esito("### (W9) le norme di `psi` e di `phi` si conservano, separatamente, in `(F)` e `(S)`",
+          max(nF + nS) <= tol,
+          "### `(F)` %.3g e %.3g, `(S)` %.3g e %.3g (relative), soglia %.3g"
+          % (nF[0], nF[1], nS[0], nS[1], tol))
+    esito("### (W4) l-INVERSO e- esatto, per `(F)` e per `(S)`",
+          max(iF, iS) <= tol,
+          "### `(F)` %.3g, `(S)` %.3g su %d+%d tick (relativi), soglia %.3g"
+          % (iF, iS, K, K, tol))
+
+    # ### \u26d4 **`W7`: IL CONO.** Si parte da UNA estremita- e si guarda ### **il raggio
+    # ### del supporto**: dopo `t` tick non deve superare `t` archi. ### **E in `(S)` puo-
+    # ### essere MINORE**, che e- il <<moto a scatti>>.
+    d0 = SC.distanze(sc, 0)
+    raggi = {}
+    for et in ("F", "S"):
+        p0 = np.zeros((n_est, 2), dtype=complex)
+        p0[int(np.argmax(sc["nodo"] == 0)), 0] = 1.0
+        z = {"psi": p0, "phi": np.zeros(n_est, dtype=complex)}
+        if et == "S":
+            z = C4.stato_S(z, sc)
+        peggio = []
+        for t in range(1, 7):
+            z = (C4.passo4_F(z, sc, geo, 1.0, 0.5, cs_nu) if et == "F"
+                 else C4.passo4_S(z, sc, geo, 1.0, 0.5, cs_nu))
+            vivi = np.abs(z["psi"]).sum(axis=1) > 1e-14
+            peggio.append(int(np.max(d0[sc["nodo"][vivi]])) if np.any(vivi) else 0)
+        raggi[et] = peggio
+    esito("### (W7) IL CONO: dopo `t` tick il supporto sta entro `t` archi, in `(F)` e `(S)`",
+          all(r <= t + 1 for et in raggi for t, r in enumerate(raggi[et])),
+          "### `(F)` raggi %s, `(S)` raggi %s, su `t = 1..6`"
+          % (raggi["F"], raggi["S"]))
+
+    # ### \u2b50 **`W5` SUL PASSO: ed e- QUI che `(F)` e `(S)` si separano.**
+    def C_passo(et, cs):
+        z = {"psi": psiG, "phi": phiF}
+        if et == "S":
+            z = C4.stato_S(z, sc)
+            a1 = C3.coniuga3(C4.passo4_S(z, sc, geo, 1.0, 0.5, cs))
+            z2 = C4.stato_S(C3.coniuga3(z), sc)
+            a2 = C4.passo4_S(z2, sc, geo, 1.0, 0.5, cs)
+        else:
+            a1 = C3.coniuga3(C4.passo4_F(z, sc, geo, 1.0, 0.5, cs))
+            a2 = C4.passo4_F(C3.coniuga3(z), sc, geo, 1.0, 0.5, cs)
+        return max(float(np.max(np.abs(a1["psi"] - a2["psi"]))),
+                   float(np.max(np.abs(a1["phi"] - a2["phi"]))))
+
+    geo_i = GE.scena_identita(sc)
+    geo_sal = geo
+    geo = geo_i
+    cF1, cS1 = C_passo("F", None), C_passo("S", None)
+    cFn, cSn = C_passo("F", cs_nu), C_passo("S", cs_nu)
+    geo = geo_sal
+    esito("### (W5) a `cs = 1` la `C` tiene su ENTRAMBE le candidate",
+          max(cF1, cS1) <= tol,
+          "### `(F)` %.3g, `(S)` %.3g: ### **e- il `v3`**" % (cF1, cS1))
+    esito("### DEVE SCATTARE: con `cs` non uniforme `(F)` ROMPE la `C` e `(S)` NO",
+          cFn > 1e-3 and cSn <= tol,
+          "### `(F)` **%.4f** contro `(S)` **%.3g**: ### **e- il PREZZO di `(F)`, e il "
+          "GUADAGNO di `(S)`**" % (cFn, cSn))
+
+    # ### \u26d4 **`W8` SUL SORGENTE, PEZZO PER PEZZO** -- il mandato lo chiede alla
+    # ### lettera: *<<un collaudo lo verifica sul sorgente, pezzo per pezzo>>*.
+    src = open(os.path.join(_QUI, "camminata4.py"), encoding="utf-8").read()
+    corpo = src.split("def _lineare4(")[1].split("def _lineare4_inverso(")[0]
+    pezzi_w8 = (("moneta_spin", "cs_k * dt"), ("moneta_grover", "cs_e"),
+                ("spostamento_trasporto", "cs_a"), ("grover_scalare", "cs_e"),
+                ("spostamento_scalare", "cs_a"))
+    mancanti = []
+    for nome, atteso in pezzi_w8:
+        righe = [r for r in corpo.split(NL) if nome in r]
+        if not righe or not all(atteso in r for r in righe):
+            mancanti.append("%s (atteso `%s`)" % (nome, atteso))
+    # ### \u26a0 **E NESSUN PEZZO PRENDE UN TICK FISSO:** si cerca `dt` NUDO e `1.0`.
+    nudo = [r.strip() for r in corpo.split(NL)
+            if ("moneta_grover" in r or "spostamento_trasporto" in r
+                or "grover_scalare" in r or "spostamento_scalare" in r)
+            and ("cs_e" not in r and "cs_a" not in r)]
+    esito("### (W8) UNA SOLA grandezza, verificata SUL SORGENTE pezzo per pezzo",
+          not mancanti and not nudo,
+          "### %d pezzi guardati, %d senza la loro frazione, %d con un tick FISSO"
+          % (len(pezzi_w8), len(mancanti), len(nudo)))
+
+    # ### ⛔ **E SENZA UN GEMELLO CHE FALLISCE, IL BRACCIO DI SOPRA SAREBBE UN
+    # ### FALSO-UNO:** si rifa' lo STESSO controllo su un sorgente FINTO in cui un pezzo
+    # ### prende ### **un tick fisso** -- e ### **deve trovarlo.**
+    def guarda(testo):
+        man, nud = [], []
+        for nome, atteso in pezzi_w8:
+            rr = [r for r in testo.split(NL) if nome in r]
+            if not rr or not all(atteso in r for r in rr):
+                man.append(nome)
+        nud = [r for r in testo.split(NL)
+               if ("moneta_grover" in r or "spostamento_trasporto" in r
+                   or "grover_scalare" in r or "spostamento_scalare" in r)
+               and ("cs_e" not in r and "cs_a" not in r)]
+        return man, nud
+
+    finto = corpo.replace("x, cs_e, famiglia", "x, 1.0, famiglia")
+    f_man, f_nud = guarda(finto)
+    esito("### DEVE SCATTARE: lo stesso controllo su un sorgente FINTO col tick fisso",
+          bool(f_man) or bool(f_nud),
+          "### sul finto: %d pezzi senza la frazione, %d con un tick fisso "
+          "(%s): ### **il controllo VEDE**"
+          % (len(f_man), len(f_nud), ", ".join(f_man) or "nessuno"))
+
     # ================================================================ il sorgente
-    for f in ("frazione4.py", "cslocale4.py", "vuoto4.py"):
+    for f in ("frazione4.py", "cslocale4.py", "vuoto4.py", "camminata4.py"):
         testo = open(os.path.join(_QUI, f), encoding="utf-8").read()
         trovati = [c for c in CLIP if c in testo and c not in CLIP_AMMESSI.get(f, ())]
         esito("### (W2) nessun `clip` non dichiarato in `%s`" % f,
@@ -406,7 +578,7 @@ def main():
               and "from soliton_simulator" not in testo, "### cercate le due forme")
 
     # ================================================================ il determinismo
-    for f in ("frazione4.py", "cslocale4.py", "vuoto4.py"):
+    for f in ("frazione4.py", "cslocale4.py", "vuoto4.py", "camminata4.py"):
         imp = []
         for _ in range(2):
             pr = subprocess.run([sys.executable, os.path.join(_QUI, f)],
