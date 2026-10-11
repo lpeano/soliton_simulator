@@ -13515,3 +13515,36 @@ Ogni dato di `db_era2/` ha ### **il suo TIMBRO accanto**, col campo `versione_da
 ### ⛔ **E IL MANDATO METTE UNA CONDIZIONE CHE ACCETTO E REGISTRO:** `[[DOMANDA-QUALE-SEGNO]]` e `[[DOMANDA-VIA-DEL-CAMPO]]` ### **non si decidono finche' i tre buchi non sono chiusi** — quindi le ho rese ### **DIPENDENTI** da `[[LEGAME-SCENE-GRANDI]]`, e la prima ### **non e' piu' `CRITICA` pronta**: deve dire ### **per famiglia E per taglia** se in `3D` un termine locale lega.
 
 ### ✅ **E la posizione in coda la dice il mandato:** ### **dopo `ISOTROPIA-LOCALE` e la variante `(iv)`, prima del simulatore** — cosi' le scene grandi si costruiscono ### **sulla famiglia che quelle misure indicano migliore**, invece di rifarle due volte.
+
+## ⭐ **L'ISOTROPIA LOCALE, LA DERIVAZIONE PRIMA DEL CODICE: LA DELAUNAY `3D` HA GRADO MEDIO `15.5`, NON `2..6`** *(2026-10-11)*
+
+### **La task history e' `doc/TASK_HISTORY/2026-10-11_isotropia_locale.md`** — ### **nuova e non un'annotazione**, e il mandato lo permette purche' lo si dichiari.
+
+### ✅ **` 1 ` LA MATEMATICA DEL GROVER PESATO REGGE, E UN PUNTO VA MEGLIO DEL PREVISTO**
+
+| | misurato |
+|---|---|
+| **reale** *(e quindi `C` regge)* | `max|Im M|` = **`0`** |
+| **ermitiana** | **`0`** *(pesi uguali)*, **`1.11e-16`** *(casuali)* |
+| **involuzione** e **unitaria** | **`2.2e-16`** .. **`4.5e-16`** |
+| **locale** | elementi fra nodi diversi: ### **`0` ESATTO** |
+| a pesi **uguali** = il Grover del `v3` | ### ⭐ **`0`, AL BIT** |
+| un peso **nullo** stacca l'uscita | colonna con ### **UN SOLO** elemento, diagonale ### **`-1`** |
+| la **`C`** | **`0`** con pesi uguali ### **e** casuali |
+
+### ⭐ **E IL PUNTO SUI PESI UGUALI VA MEGLIO DI QUANTO SPERASSI: `0` AL BIT, SENZA CORTOCIRCUITO.** ### **La famiglia frazionaria del `v4` ne aveva bisogno** *(dava `2e-16`)*; qui `(2/d)Σ - I` e `2(Σw)/<w|w> - I` con `w = 1` ### **danno gli stessi byte**, perche' `<w|w> = d` e la divisione e' la stessa.
+
+### ⛔ **` 2 ` MA IL FATTO CHE CAMBIA IL QUADRO E' UN ALTRO: LA DELAUNAY TRIPLICA IL GRADO**
+
+| `N` | archi | **gradi** | media | vicini comuni per arco |
+|---|---|---|---|---|
+| `200` | `1556` | **`9..23`** | **`15.6`** | min **`3`**, mediana `6` |
+| `1000` | `7750` | **`6..26`** | **`15.5`** | min **`3`**, mediana `6` |
+
+### ⛔ **La scena attuale ha gradi `2..6` *(media `5.8`)*; la Delaunay ne ha `15.5`** — e `m` passa da `~2.9n` a `~7.8n`, cioe' lo spazio di stato ### **quasi triplica.** ### ⭐ **Quindi la variante `(iv)` NON e' <<la stessa scena con dei pesi>>: e' una scena DIVERSA**, e il mandato lo avverte — *«cambiare l'intervallo dei gradi cambia la fisica locale, perche' Grover dipende dal grado»*. ### **Il confronto con le altre varianti va letto sapendolo.**
+
+### ✅ **E una cosa buona, misurata:** i vicini comuni per arco sono ### **almeno `3`** su entrambe le taglie, quindi il peso relazionale `w = |N(i) ∩ N(j)|` ### **non e' mai zero** — ### **nessun arco si stacca per caso.**
+
+### ⚠ **` 3 ` E UNA DIPENDENZA NUOVA, DICHIARATA: `scipy.spatial`.** Il repo ### **non usa `scipy` in nessun file** *(verificato con un `grep` su `csv/`, `primo_ordine/` e `proto_camminata/`)*, e la Delaunay periodica la vuole. ### ⛔ **Entra SOLO nel costruttore di scena**, cioe' in una ### **condizione iniziale**, e ### **mai nel passo** — e un braccio del collaudo lo verifichera' sul sorgente.
+
+### 📌 **E LE PREVISIONI SONO SCRITTE PRIMA DEI NUMERI:** l'irregolarita' locale ### **cala con `t` e poi si APPIATTISCE su un pavimento** *(il volume entro `r` cresce come `r³`, quindi la parte statistica si media come `t^(-3/2)`, ### **ma lo sbilanciamento del nodo di PARTENZA non si media**)*; sul cubico l'anisotropia del profilo medio ### **resta sopra il rumore a ogni `t`** *(gli assi sono gli stessi per tutti i nodi)*; sul geometrico ### **scende al livello del rumore**; e fra le varianti ### **`(iii)` gradi meno variabili aiuta piu' di `(ii)` punti piu' uniformi**, perche' lo sbilanciamento viene da ### **quali vicini si collegano** e il tetto ne taglia il `20%`.
