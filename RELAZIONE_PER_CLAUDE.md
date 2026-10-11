@@ -13679,3 +13679,13 @@ Ogni dato di `db_era2/` ha ### **il suo TIMBRO accanto**, col campo `versione_da
 
 ### ⛔ **E LA SCELTA RESTA DI LUCA, ma adesso e' una scelta SENZA COMPROMESSO:** `[[DOMANDA-QUALE-SCENA-3D-PRINCIPALE]]` ha la tabella intera, e ### **cambiare i gradi cambia la fisica locale** *(la moneta di Grover dipende dal grado)*. ### 📌 **Il referto e' `doc/REFERTO_isotropia_locale.md`.**
 
+## ⭐ **IL PROSSIMO IN CODA: IL COMPLETAMENTO DEL LEGAME, E LE SOGLIE SONO SCRITTE PRIMA** *(2026-10-11)*
+
+### ⛔ **E IL DUBBIO CENTRALE E' LO STESSO CHE MI HA PRESO DUE VOLTE OGGI.** Il *<<in `3D` l'effetto cala con la taglia fino a sparire>>* del referto del legame e' stato misurato ### **su scene dove il fronte RIEMPIVA il grafo** *(raggio finale `11` su un diametro `18`)* — quindi ### **non distinguo** fra *«e' la DIMENSIONE»* e *«era TAGLIA FINITA»*.
+
+### ⚠ **E lo dico adesso perche' e' il mio difetto ricorrente:** nel referto dell'isotropia ho presentato un compromesso che era ### **taglia finita**, e Luca l'ha visto prima di me. ### **Non e' una ragione per aspettarmi che l'effetto ricompaia: e' una ragione per non ESCLUDERLO come ho fatto l'altra volta.**
+
+### ⭐ **LA MIA PREVISIONE, con il suo argomento debole dichiarato:** credo che ### **in `3D` il segno NON leghi**, perche' il meccanismo del `+D` in `1D` e' un'### **interferenza fra due sole direzioni di uscita**, e in `3D` con grado `6..34` le direzioni che non interferiscono sono molte di piu'. ### ⛔ **Ma questo e' un argomento di plausibilita', non un conto** — ### **e non ho un conto.**
+
+### 📌 **E LA COSA CHE NON HO FATTO: scegliere la scena.** Le misure dell'isotropia indicano i ### **punti respinti** su ogni asse tranne uno *(lo scarto da `3`, dove `(i)` sta a `0.038` contro `0.046` — e i due ### **non sono distinguibili**)*, ma la scelta e' di Luca: ### **quindi `C1` girera' su ENTRAMBE le varianti geometriche**, e la decisione resta aperta.
+
