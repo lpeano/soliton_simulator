@@ -54,16 +54,26 @@ import _letture_legame_grandi as LG                           # noqa: E402
 
 SC._niente_simulatore()
 
-N_SCENA = 2000
+# LA TAGLIA SI PUO' CHIEDERE DALL'AMBIENTE: la diagnosi su scena PICCOLA dice
+# che la perdita per chiamata NON c'e', quindi la domanda che resta e' SE LA
+# CRESCITA DIPENDE DALLA TAGLIA -- e per rispondere serve LA STESSA diagnosi su
+# una taglia grande, non un'altra diagnosi.
+N_SCENA = int(os.environ.get("DIAG_N", "2000"))
 SEME = 11
 X0 = 8.0
 EPS_RIF = 0.5
 # ### ⛔ **IL TETTO, in byte.** Non e' una scelta di comodo: e' il numero del mandato.
 TETTO = int(1.5 * 1024 ** 3)
 # ### quante volte si ripete un pezzo per vedere se la memoria SALE
-GIRI = 60
+GIRI = int(os.environ.get("DIAG_GIRI", "60"))
+# I DUE METRI INSIEME, ed e' il cuore della diagnosi nuova: se la PRIVATA cresce
+# e tracemalloc NO, allora e' FRAMMENTAZIONE (il traffico di array da qualche MB
+# non viene restituito al sistema); se crescono ENTRAMBE, c'e' un riferimento
+# trattenuto e si cerca chi lo tiene.
+DUE_METRI = int(os.environ.get("DIAG_DUE_METRI", "8"))
 USCITE = os.path.join(_QUI, "uscite")
-FONTE = os.path.join(USCITE, "diagnosi_memoria.json")
+FONTE = os.path.join(USCITE, "diagnosi_memoria%s.json"
+                     % ("" if N_SCENA == 2000 else "_n%d" % N_SCENA))
 IO = psutil.Process()
 
 
@@ -128,10 +138,15 @@ def misura(nome, fai, giri=GIRI, ogni=5):
     p = pendenza(xs, ys)
     p["secondi"] = time.time() - t0
     p["campioni"] = [[int(a), float(mb(b))] for a, b in zip(xs, ys)]
+    # ### ⚠ **`.get` E NON `[...]`: con pochi giri `pendenza` torna SOLO una nota**
+    # ### *(<<meno di tre punti>>)*, e il mio `print` ### **si rompeva proprio sul caso
+    # ### piu' piccolo** -- cioe' il collaudo rapido non si poteva fare.
     print("    %-44s %+8.4f MB/giro  (%s)  %6.1f -> %6.1f MB   %.0f s"
-          % (nome, p["per_giro_MB"],
-             "### CRESCE" if p["cresce"] else "ferma",
-             p["da_MB"], p["a_MB"], p["secondi"]))
+          % (nome, p.get("per_giro_MB", float("nan")),
+             ("### CRESCE" if p.get("cresce") else "ferma") if "cresce" in p
+             else p.get("nota", "?"),
+             p.get("da_MB", float("nan")), p.get("a_MB", float("nan")),
+             p.get("secondi", float("nan"))))
     return p
 
 
@@ -226,6 +241,88 @@ def main():
     except Tetto as e:
         fermato = str(e)
 
+    # ================================================ (b-bis) I DUE METRI INSIEME
+    # ### ⛔ **IL CUORE DELLA DIAGNOSI NUOVA, e i due casi sono quelli del mandato:** se
+    # ### la ### **PRIVATA cresce e `tracemalloc` NO**, e' ### **FRAMMENTAZIONE** *(il
+    # ### traffico di array da qualche MB su Windows non viene restituito)*; se crescono
+    # ### ### **ENTRAMBE**, c'e' un ### **riferimento trattenuto** e si cerca chi lo tiene.
+    print("  --- (b-bis) I DUE METRI A OGNI CHIAMATA: privata contro tracemalloc ---")
+    gc.collect()
+    tracemalloc.start(4)
+    due = {"per_chiamata": [], "nframe": 4, "chiamate_chieste": DUE_METRI}
+    base_p, base_t = privata(), tracemalloc.get_traced_memory()[0]
+    try:
+        for k in range(1, DUE_METRI + 1):
+            LG.profilo(sc, geo, fl_D, X0, SEME, tempi, d)
+            gc.collect()
+            pp, tt = privata(), tracemalloc.get_traced_memory()[0]
+            due["per_chiamata"].append(
+                {"chiamata": k, "privata_MB": mb(pp), "tracemalloc_MB": mb(tt),
+                 "privata_delta_MB": mb(pp - base_p),
+                 "tracemalloc_delta_MB": mb(tt - base_t)})
+            print("    chiamata %-3d privata %9.1f MB (%+9.1f)   tracemalloc %8.2f MB "
+                  "(%+8.2f)" % (k, mb(pp), mb(pp - base_p), mb(tt), mb(tt - base_t)))
+            _guarda()
+    except Tetto as e:
+        print("    ### TETTO: %s" % e)
+        due["fermato_dal_tetto"] = str(e)
+    if len(due["per_chiamata"]) >= 3:
+        xs = [r["chiamata"] for r in due["per_chiamata"]]
+        due["pendenza_privata"] = pendenza(
+            xs, [r["privata_MB"] * 1048576 for r in due["per_chiamata"]])
+        due["pendenza_tracemalloc"] = pendenza(
+            xs, [r["tracemalloc_MB"] * 1048576 for r in due["per_chiamata"]])
+        cp = due["pendenza_privata"]["cresce"]
+        ct = due["pendenza_tracemalloc"]["cresce"]
+        due["verdetto"] = (
+            "FRAMMENTAZIONE: la privata cresce e tracemalloc NO" if (cp and not ct)
+            else ("RIFERIMENTO TRATTENUTO: crescono ENTRAMBE" if (cp and ct)
+                  else ("NESSUNA CRESCE: a questa taglia non c'e' niente" if not cp
+                        else "SOLO tracemalloc cresce: caso NON previsto, da guardare")))
+        print("    ### privata %+.3f MB/chiamata, tracemalloc %+.3f MB/chiamata  ->  %s"
+              % (due["pendenza_privata"]["per_giro_MB"],
+                 due["pendenza_tracemalloc"]["per_giro_MB"], due["verdetto"]))
+    tracemalloc.stop()
+    fuori["due_metri"] = due
+
+    # ================================================ (b-ter) IL CONTROLLO del mandato
+    # ### ⛔ **IL SOSPETTO DI LUCA, VERIFICATO NEI DUE VERSI:** *<<se il profilatore
+    # ### TRATTIENE gli stati che riceve, `tracemalloc` li attribuisce alla riga dove
+    # ### nasce `p2` e sembra una perdita del codice di `D`>>*. ### ⭐ **Una volta si
+    # ### BUTTA cio' che la funzione torna, una volta si TIENE** — e si guarda se
+    # ### l'attribuzione cambia. ### **Se cambia, la riga NON accusa il codice di `D`:
+    # ### accusa CHI CHIAMA.**
+    print("  --- (b-ter) IL CONTROLLO: il profilatore trattiene, o no? ---")
+    ctrl = {}
+    for nome, tiene in (("butta cio' che torna", False),
+                        ("TIENE cio' che torna", True)):
+        gc.collect()
+        tracemalloc.start(4)
+        s_a = tracemalloc.take_snapshot()
+        tenuti = []
+        for _ in range(3):
+            r = LG.profilo(sc, geo, fl_D, X0, SEME, tempi, d)
+            if tiene:
+                tenuti.append(r)
+        gc.collect()
+        s_b = tracemalloc.take_snapshot()
+        top = s_b.compare_to(s_a, "lineno")[:3]
+        ctrl[nome] = {
+            "tracciato_MB": mb(tracemalloc.get_traced_memory()[0]),
+            "privata_MB": mb(privata()), "tenuti": len(tenuti),
+            "prime_righe": [{"file": (x.traceback[0].filename if x.traceback else "?"),
+                             "riga": (x.traceback[0].lineno if x.traceback else 0),
+                             "crescita_MB": mb(x.size_diff)} for x in top]}
+        tracemalloc.stop()
+        del tenuti
+        gc.collect()
+        pr = ctrl[nome]["prime_righe"][0]
+        print("    %-24s tracciato %8.2f MB   privata %9.1f MB   prima riga: %s:%d "
+              "(%+.2f MB)"
+              % (nome, ctrl[nome]["tracciato_MB"], ctrl[nome]["privata_MB"],
+                 os.path.basename(pr["file"]), pr["riga"], pr["crescita_MB"]))
+    fuori["controllo_trattenuti"] = ctrl
+
     # ================================================ (b) `tracemalloc`
     print("  --- (b) tracemalloc: le righe che crescono di piu' ---")
     tracemalloc.start(12)
@@ -239,6 +336,13 @@ def main():
             _guarda()
     except Tetto as e:
         fermato = fermato or str(e)
+    # ### ⛔ **IL `gc.collect()` QUI DENTRO E' LA CURA DI UN MIO ERRORE DI MISURA.**
+    # ### Nel primo giro lo snapshot finale si prendeva ### **SENZA raccolta**, e cosi'
+    # ### contava ### **la spazzatura in attesa** come se fosse memoria trattenuta:
+    # ### `+104` MB attribuiti a `interferenza3.py`, che sembravano una perdita del codice
+    # ### di `D`. ### ✅ **E il metro accanto lo smentiva nello stesso file:**
+    # ### `get_traced_memory()` ### **dopo** la raccolta legge `~0.00` MB.
+    gc.collect()
     s1 = tracemalloc.take_snapshot()
     tot_trac = sum(x.size for x in s1.statistics("filename"))
     righe = []
