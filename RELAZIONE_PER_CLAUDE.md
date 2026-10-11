@@ -13151,3 +13151,41 @@ Ogni dato di `db_era2/` ha ### **il suo TIMBRO accanto**, col campo `versione_da
 ### ⚠ **E UNA SOGLIA MIA ERA SBAGLIATA, e il rosso era MIO:** avevo scritto la soglia di `W9` come `n_est * eps` ### **senza la TAGLIA del vettore**, e il braccio e' diventato rosso a `1.14e-13` contro `9.24e-14` — su un `phi` di norma `~832`. ### ⛔ **L'errore di macchina e' RELATIVO:** pretendere `n_est * eps` su una grandezza di taglia `832` vorrebbe dire ### **pretendere sette cifre in piu' di quante il `float64` ne abbia.** ### ✅ **E NON e' una soglia allargata per far passare un braccio:** e' la soglia ### **dimensionalmente giusta**, `n_est * eps * taglia`, e il peggiore adesso e' `2.22e-16` *(cioe' **un `eps`**)*. ### ⭐ **E il `phi` non normalizzato resta di proposito:** un vettore di norma `1` ### **non eserciterebbe la scala**, e quella soglia sbagliata ### **non si sarebbe vista.**
 
 ### ⭐ **E IL `np.minimum` IN `frazione4.py` E' DICHIARATO, non ammesso in silenzio:** e' la forma `min` del `cs` dell'arco, cioe' ### **una SCELTA DI LEGGE accendibile** *(l'estremita' lenta fa da collo, ed e' la scelta causale)*, ### **non un clip su un valore fuori intervallo** *(`A11`)*. ### **Il braccio cerca gli altri cinque e dichiara l'ammesso.**
+
+### ✅ **IL `v4`, PASSI `3` E `4`: LE DUE LEGGI NUOVE, E IL BANCO E' `34`/`34`**
+
+### **`cslocale4.py`** *(come il vuoto fissa `cs`)* e **`vuoto4.py`** *(come la materia scrive su `Lambda`)*, ### **tutte spente di default** e ### **spente = `v3` AL BIT.** ### ⛔ **Nessuna camminata le usa ancora:** il passo del `v3` non e' toccato.
+
+### ⛔ **` 1 ` LA FORMA PIU' OVVIA DI `cs` E' ESCLUSA DA UN NUMERO, PRIMA DI PROVARLA**
+
+### **Col fondo del `v3`: `Lambda_k = grado_k * lambda_0`**, correlazione col grado ### **`1.0000` ESATTA** *(`min 2.000`, `max 6.000` su gradi da `2` a `6`)*. ### **Quindi `cs_k = f(Lambda_k)` NON e' il vuoto: e' il GRADO**, cioe' la geometria del grafo.
+
+### ⭐ **` 2 ` E LA FORMA CHE RESTA SODDISFA `W1` AL BIT, che non mi aspettavo**
+
+| la forma | sul fondo del `v3` | invariante di scala? | correlazione col GRADO |
+|---|---|---|---|
+| `dispersione` *(varianza non distorta / media²)* | ### ⭐ **`cs = 1.0` AL BIT** *(`D = 2.47e-31`)* | ### ✅ **`3.33e-16`** | **`-0.171`** |
+| `contrasto` *(`min/max`)* | ### ⛔ **`0.99999999999999933`** | ### ✅ **`3.33e-16`** | ### ⛔ **`-0.416`** |
+| `densita` *(il CONTROLLO)* | ### ⛔ **`0.99999999999999956`** | ### ⛔ **`0.974`**: ### **ha una SCALA** | **`+0.006`** |
+
+### ⛔ **E NESSUNA DELLE TRE E' LIBERA DA TUTTI I DIFETTI, e questo e' il confronto che consegno:** `dispersione` ### **non ha scala** e arriva a `1` al bit, ma ### **correla col grado a `-0.17`** — ed e' ### **Jensen**: l'attesa di `D` e' senza bias nel grado, quella di `1/(1+D)` no. `contrasto` correla ### **due volte e mezzo di piu'** *(`-0.42`)*, perche' con piu' estremita' il `min` scende e il `max` sale ### **per statistica, non per fisica**. `densita` non correla col grado ### **ma ha una scala**, e il braccio che lo dimostra moltiplica `phi` per `7`: le prime due ### **non cambiano** *(`3.33e-16`)*, la terza ### **cambia di `0.974`.** ### 📌 **La scelta e' di Luca:** `[[DOMANDA-LAMBDA-GRANDEZZA]]`.
+
+### ✅ **` 3 ` E LA MATERIA *SCRIVE* SUL VUOTO: la legge non e' muta**
+
+| la candidata | a `forza = 0` | a `forza = 1`, `max|Lambda - Lambda_v3|` |
+|---|---|---|
+| `scatter` *(la moneta del vuoto verso la riflessione)* | ### ✅ **`0` AL BIT** | ### ⭐ **`2.759`** |
+| `trasmissione` *(lo spostamento del vuoto parziale)* | ### ✅ **`0` AL BIT** | ### ⭐ **`2.565`** |
+
+### ⭐ **E IL BRACCIO DEVE SCATTARE, perche' una legge che non cambia niente non e' una legge:** se `max|Lambda - Lambda_v3|` fosse `~0`, il punto `A1` del mandato ### **sarebbe fallito** — e lo avrei scritto.
+
+### ⭐ **` 4 ` UN TEOREMA, E PERCHE' IL MECCANISMO E' IN *DUE* TEMPI**
+
+### **`scatter` DA SOLO non muove `Lambda`** *(`2.22e-15`)*, e non e' un difetto: Grover e l'identita' sono ### **entrambe a blocchi per nodo**, quindi ### **ogni** loro interpolazione conserva `Lambda_k` ### **per teorema.** ### ✅ **Il meccanismo e': `scatter` cambia DOVE sta il vuoto dentro il nodo, e lo SPOSTAMENTO trasforma quello in un flusso netto.** ### **Per questo `scatter` si misura sul TICK, non sul pezzo** — e se l'avessi misurato sul pezzo avrei concluso che non fa niente.
+
+### ⛔ **` 5 ` E LA TERZA CANDIDATA DEL MANDATO E' ESCLUSA DA UN VINCOLO, non da un gusto:** lo ### **scambio di NORMA fra `psi` e `phi`** romperebbe il gauge *(`W6`)*, perche' `psi` si trasforma con `e^{i f_k} g_k` e `phi` ### **no** — mescolarle vorrebbe dire ### **sommare due cose che si trasformano diversamente**, ed e' il motivo per cui `vuoto3.py` lo vieta. ### **Dichiarata, e NON implementata.**
+
+### ⚠ **` 6 ` E DUE SOGLIE MIE ERANO SBAGLIATE, entrambe PER ECCESSO**
+
+1. ### **Pretendevo `cs` e la QUOTA pari sotto `C` <<al bit>>**, e il braccio dava `4.16e-17` = ### **`0.19 eps`**. ### ⭐ **Il motivo e' l'ORDINE DELLA SOMMA:** `cs` legge `|phi|^2` ### **elemento per elemento** *(e la' e' `0` al bit, davvero)*, ma la quota legge anche `rho`, che e' ### **una somma sulle estremita-**, e `C` ne cambia l'ordine. ### **Con tre addendi l'ordine conta**, ed e' un fatto del `float64`. ### ✅ **Ho separato i due bracci**, invece di allargare l'unico.
+2. ### **Il mio primo riepilogo di `A1` era il numero sbagliato:** stampavo `max|Lambda(dopo) - Lambda(prima)|` e veniva ### **`3.63` per TUTTE**, spenta compresa — perche' il `max` cadeva su un nodo ### **senza materia**, dove le candidate non fanno niente. ### ⛔ **Un riepilogo sbagliato nascondeva la risposta**, e il numero giusto e' ### **la differenza dal `v3`.**

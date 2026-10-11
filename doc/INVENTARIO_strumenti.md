@@ -3162,8 +3162,8 @@ etichette rimosse, con ### **`0` persi, `0` doppi, `0` conflitti**.
 
 | | |
 |---|---|
-| **i file** | `frazione4.py` *(BLOB `ac2126df`)* · `_collauda_banco4.py` *(BLOB `1d19a0c1`)* |
-| **COMANDO** | `python proto_camminata/frazione4.py` · i bracci: `python proto_camminata/_collauda_banco4.py` *(### **`17`/`17`**, `1.24` s)* |
+| **i file** | `frazione4.py` *(BLOB `ac2126df`)* · `cslocale4.py` *(BLOB `eeaa7213`)* · `vuoto4.py` *(BLOB `2eba5ada`)* · `_collauda_banco4.py` *(BLOB `d2313ee5`)* |
+| **COMANDO** | `python proto_camminata/frazione4.py` · i bracci: `python proto_camminata/cslocale4.py` · `python proto_camminata/vuoto4.py` · i bracci: `python proto_camminata/_collauda_banco4.py` *(### **`34`/`34`**, `3.45` s)* |
 | **che cosa misura** | la ### **frazione unitaria** di un'involuzione ermitiana, `X(cs)`, nelle ### **due famiglie** — `(A)` del mandato *(`e^{i pi cs} e^{i pi cs Q}`)* e `(B)` ### **senza fase globale** *(`Q + e^{i pi cs}(I - Q)`)* — piu' il `cs` dell'### **ARCO** dalle sue due estremita', in ### **tre forme dichiarate** *(`min`, `armonica`, `media`)* |
 | ⭐ **IL RISULTATO CHE TOGLIE UNA LEGGE** | il mandato chiedeva ### **due forme frazionarie** *(una per Grover, una per lo spostamento)*: ### **non servono.** Tutti e quattro i pezzi discreti sono ### **INVOLUZIONI ERMITIANE** *(`max|X(X(v)) - v|` = **`9.39e-16`**, `max|<a,Xb> - <Xa,b>|` = **`5.02e-15`**)*, quindi `X = 2Q - I` e ### **UNA famiglia** li copre. ### **E' `9-ter` prima di scrivere il codice** |
 | ✅ **E IL CORTOCIRCUITO E' `W1`, non un'ottimizzazione** | a `cs = 1` la famiglia da' `X` a `~2e-16`, e ### **`2e-16` non e' `0`**: `W1` pretende il `v3` ### **AL BIT**, quindi a `cs` identicamente `1` si restituisce `X psi`. ### **Misurato: `0` su `8` casi**, e `0` anche a `cs = 0` |
@@ -3174,3 +3174,20 @@ etichette rimosse, con ### **`0` persi, `0` doppi, `0` conflitti**.
 | ⚠ **UNA SOGLIA MIA SBAGLIATA, e il rosso era MIO** | avevo scritto la soglia di `W9` come `n_est * eps` ### **senza la TAGLIA**, e il braccio e' diventato rosso a `1.14e-13` contro `9.24e-14` su un `phi` di norma `~832`. ### **L'errore di macchina e' RELATIVO**: la soglia giusta e' `n_est * eps * taglia`, e ora il peggiore e' `2.22e-16` |
 | ✅ **E LE TRE FORME DELL'ARCO DANNO NUMERI DIVERSI** | la coppia piu' vicina differisce di ### **`0.171`** — cioe' ### **la scelta e' una scelta vera**, e ### **e' di Luca** *(`[[DOMANDA-LAMBDA-GRANDEZZA]]`)* |
 | **le voci** | `[[CS-LOCALE-DAL-VUOTO]]` · `[[INVARIANZA-LOCALE-CS]]` · `[[DOMANDA-LAMBDA-GRANDEZZA]]` |
+
+### `proto_camminata/cslocale4.py` e `vuoto4.py` — **LE DUE LEGGI NUOVE DEL `v4`** *(2026-10-11)*
+
+| | |
+|---|---|
+| **i file** | `cslocale4.py` *(BLOB `eeaa7213`)* · `vuoto4.py` *(BLOB `2eba5ada`)* — i bracci stanno in `_collauda_banco4.py` |
+| **COMANDO** | `python proto_camminata/cslocale4.py` · `python proto_camminata/vuoto4.py` |
+| **che cosa misura** | `cslocale4` ### **tre forme** per `cs_k` dal vuoto *(`dispersione`, `contrasto`, `densita`)* · `vuoto4` ### **due candidate** per come la materia scrive su `Lambda` *(`scatter`, `trasmissione`)*, piu' la ### **quota del vuoto** `s_k = Lambda_k/(Lambda_k + rho_k)` |
+| ⛔ **LA FORMA PIU' OVVIA E' ESCLUSA DA UN NUMERO, prima di provarla** | col fondo del `v3` ### **`Lambda_k = grado_k * lambda_0`** *(`min 2.000`, `max 6.000`, correlazione col grado **`1.0000` ESATTA**)*: ### **`cs_k = f(Lambda_k)` non e' il vuoto, e' il GRADO** |
+| ⭐ **E `dispersione` SODDISFA `W1` AL BIT, che non mi aspettavo** | sul fondo del `v3` la dispersione vale ### **`2.47e-31`**, e `1/(1 + 2.47e-31)` e' ### **esattamente `1.0` in `float64`** su tutti i `120` nodi. ### ⛔ **`contrasto` NO**: `0.99999999999999933`, cioe' `7e-16` sotto `1`, e ### **si propagherebbe nella frazione** |
+| ⛔ **IL BRACCIO CHE SEPARA IL RELAZIONALE DALLO SCALATO** | si moltiplica `phi` per `7`: `dispersione` **`3.33e-16`**, `contrasto` **`3.33e-16`**, ### **`densita` `0.974`** — ### **la terza ha una SCALA**, ed e' il suo difetto dichiarato |
+| ⚠ **E NESSUNA DELLE TRE E' LIBERA DA TUTTI I DIFETTI** | correlazione col grado *(media su tre semi)*: `dispersione` **`-0.171`**, `contrasto` **`-0.416`** *(artefatto degli ESTREMI)*, `densita` **`+0.006`** ### **ma con una scala**. ### ⭐ **Il costo di `dispersione` e' Jensen:** l'attesa di `D` e' senza bias nel grado, quella di `1/(1+D)` no |
+| ✅ **`A1`: le candidate SPENTE sono il `v3` AL BIT, accese CAMBIANO `Lambda`** | a `forza = 0`: ### **`0` entrambe**; a `forza = 1`: `max|Lambda - Lambda_v3|` = **`2.759`** *(`scatter`)* e **`2.565`** *(`trasmissione`)*. ### **Una legge che non cambia niente non e' una legge**, e il braccio DEVE scattare |
+| ⭐ **IL TEOREMA, misurato** | `scatter` ### **DA SOLO non muove `Lambda`** *(`2.22e-15`)*, perche' Grover e l'identita' sono ### **entrambe a blocchi per nodo** ⟹ ogni loro interpolazione conserva `Lambda_k`. ### **Il meccanismo e' in DUE tempi**, e lo spostamento e' il secondo |
+| ⚠ **UN FALSO-ZERO MIO, e garantito dall'insieme scelto** | col fondo del `v3` *(modulo uniforme)* lo spostamento dava `8.88e-16`, e avrei concluso ### **<<non muove `Lambda`>>** — il contrario del vero: scambia estremita' di ### **modulo uguale**. Con un vuoto non uniforme: ### **`56.5`** |
+| ⛔ **E LA TERZA CANDIDATA DEL MANDATO E' ESCLUSA DA UN VINCOLO** | lo ### **scambio di NORMA fra `psi` e `phi`** romperebbe il gauge *(`psi` si trasforma, `phi` no)*, ed e' il motivo per cui `vuoto3.py` lo vieta. ### **Dichiarata e NON implementata** |
+| **le voci** | `[[CS-LOCALE-DAL-VUOTO]]` · `[[DOMANDA-LAMBDA-GRANDEZZA]]` · `[[VUOTO-LOCALE-DETERMINISTICO]]` |

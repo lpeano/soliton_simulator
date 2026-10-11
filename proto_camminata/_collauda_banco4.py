@@ -14,6 +14,13 @@ r"""IL BANCO DEL `v4` — **la famiglia frazionaria, e i bracci che DEVONO scatt
 | ### ⛔ **DEVE** | la `C` **si rompe** alle frazioni | ### **se NON si rompesse, la derivazione del `2.3` sarebbe sbagliata** |
 | ### ⛔ **DEVE** | il **tick intero** NON e' un'involuzione | ### **quindi <<la frazione del tick>> non esiste** *(`A4`)* |
 | ### ⛔ **DEVE** | un `cs` che varia **dentro** un blocco rompe l'unitarieta' | ### **percio' l'assunzione di `frazione()` conta** |
+| `A1` | le due candidate, a `forza = 0`, sono il `v3` | ### **AL BIT** |
+| ### ⛔ **DEVE** | accese, **cambiano `Lambda`** | ### **una legge che non cambia niente non e' una legge** |
+| — | il **TEOREMA**: `scatter` da solo non muove `Lambda` | ### **a blocchi per nodo**, quindi il meccanismo e' in **DUE tempi** |
+| `A2` | `dispersione` da' `cs = 1.0` **AL BIT** sul fondo del `v3` | e ### ⛔ **`contrasto` NO**, e si dichiara |
+| ### ⛔ **DEVE** | `densita` **NON** e' invariante di scala | ### **e' il braccio che separa il RELAZIONALE dallo SCALATO** |
+| ### ⛔ **DEVE** | `contrasto` correla col **grado** piu' di `dispersione` | ### **l'artefatto degli estremi e' REALE** |
+| `W5` `W6` | `cs` e la quota sono **pari sotto `C`** e **gauge-invarianti** | ### **AL BIT** |
 | `W2` | nessun `clip`, nessuna costante tarata | sul **sorgente** |
 | — | la lettura non importa il simulatore | sul **sorgente** |
 | — | determinismo fra **DUE processi** | uscita identica |
@@ -37,10 +44,12 @@ _presidio.avvia(__file__)
 
 import camminata as CM                                         # noqa: E402
 import camminata2 as C2                                        # noqa: E402
+import cslocale4 as CS4                                       # noqa: E402
 import frazione4 as F4                                         # noqa: E402
 import geometria as GE                                         # noqa: E402
 import scena as SC                                             # noqa: E402
 import vuoto3 as V3                                            # noqa: E402
+import vuoto4 as V4                                            # noqa: E402
 
 EPS = float(np.finfo(float).eps)
 SEME = 11
@@ -48,7 +57,13 @@ CLIP = ("np.clip", ".clip(", "np.maximum", "np.minimum", "np.fmax", "np.fmin")
 # ### ⚠ **`np.minimum` STA in `frazione4.py`, ed e- DICHIARATO:** e- la forma `min` del
 # ### `cs` dell-arco, cioe- ### **una SCELTA DI LEGGE dichiarata e accendibile**, non un
 # ### clip su un valore fuori intervallo. ### **Il braccio cerca gli ALTRI.**
-CLIP_AMMESSI = {"frazione4.py": ("np.minimum",)}
+# ### ⚠ **`np.minimum.at` e `np.maximum.at` STANNO in `cslocale4.py`, e sono
+# ### DICHIARATI:** sono il `min` e il `max` della forma `contrasto`, cioe-
+# ### ### **la grandezza stessa di una candidata** -- e la candidata esiste
+# ### ### **per mostrare che e- un artefatto degli estremi.** ### **Non sono clip.**
+CLIP_AMMESSI = {"frazione4.py": ("np.minimum",),
+                "cslocale4.py": ("np.minimum", "np.maximum"),
+                "vuoto4.py": ()}
 
 
 def main():
@@ -248,8 +263,137 @@ def main():
           "### la coppia piu- vicina differisce di %.3f: ### **e- una DECISIONE DI LUCA**"
           % sep)
 
+    # ================================================================ `A1`: il vuoto
+    import _letture3 as L3
+    st, _z, _d = L3.grumo(sc, GE.scena_identita(sc), 0, 1, 8.0, seme=SEME)
+    psiG = st["psi"]
+    phiF = V3.vuoto_fondo(sc, V3.LAMBDA0, SEME)
+    rif = V4.passo_vuoto(phiF, psiG, sc, None)
+    l_rif = V3.lambda_nodo(rif, sc)
+    n_phi = V3.norma_vuoto(phiF)
+    spenti, accesi, norme = [], [], []
+    for cand in V4.CANDIDATE:
+        spenti.append(float(np.max(np.abs(
+            V4.passo_vuoto(phiF, psiG, sc, cand, forza=0.0) - rif))))
+        f1 = V4.passo_vuoto(phiF, psiG, sc, cand, forza=1.0)
+        accesi.append(float(np.max(np.abs(V3.lambda_nodo(f1, sc) - l_rif))))
+        norme.append(abs(V3.norma_vuoto(f1) - n_phi) / n_phi)
+    esito("### (W1) le due candidate di `A1`, a `forza = 0`, sono il `v3` AL BIT",
+          max(spenti) == 0.0,
+          "### `scatter` %.3g, `trasmissione` %.3g" % tuple(spenti))
+    # ### \u26d4 **E QUESTO BRACCIO DEVE SCATTARE: una legge che non cambia NIENTE non e-
+    # ### una legge.** ### **Se `max|Lambda - Lambda_v3|` fosse `~0`, la materia NON
+    # ### starebbe scrivendo sul vuoto**, e il punto `A1` sarebbe fallito.
+    esito("### DEVE SCATTARE: accese, le candidate CAMBIANO `Lambda` rispetto al `v3`",
+          min(accesi) > 1e-3,
+          "### max|Lambda - Lambda_v3|: `scatter` **%.3f**, `trasmissione` **%.3f**"
+          % tuple(accesi))
+    esito("### (W9) la norma del vuoto si conserva con le candidate accese",
+          max(norme) <= tol,
+          "### max|dnorma|/norma = %.3g, soglia %.3g" % (max(norme), tol))
+    # ### \u2b50 **IL TEOREMA, MISURATO:** `scatter` da solo NON puo- muovere `Lambda`,
+    # ### perche- Grover e l-identita- sono ### **entrambe a blocchi per nodo** -- quindi
+    # ### ogni loro interpolazione conserva `Lambda_k`. ### **Il meccanismo e- in DUE
+    # ### tempi**, e per questo `scatter` si misura SUL TICK.
+    solo = V4.scatter(phiF, psiG, sc)
+    d_solo = float(np.max(np.abs(V3.lambda_nodo(solo, sc)
+                                 - V3.lambda_nodo(phiF, sc))))
+    esito("### IL TEOREMA: `scatter` DA SOLO non muove `Lambda` (a blocchi per nodo)",
+          d_solo <= tol * max(float(np.max(V3.lambda_nodo(phiF, sc))), 1.0),
+          "### max|dLambda| = %.3g: ### **il meccanismo e- in DUE tempi, e lo spostamento "
+          "e- il secondo**" % d_solo)
+    # ### \u26d4 **E LA QUOTA DEL VUOTO E- `1` DOVE NON C-E- MATERIA**, cioe- il `v3`:
+    # ### se non lo fosse, la legge agirebbe ### **anche nel vuoto puro.**
+    q = V4.quota_vuoto(psiG, phiF, sc)
+    senza = CM.rho_nodo(psiG, sc) == 0.0
+    esito("### la QUOTA del vuoto e- `1` ESATTO dove non c-e- materia",
+          bool(np.any(senza)) and float(np.max(np.abs(q[senza] - 1.0))) == 0.0
+          and float(np.min(q)) < 1.0,
+          "### %d nodi senza materia, scarto da `1`: %.3g; e il minimo e- %.6f"
+          % (int(np.sum(senza)), float(np.max(np.abs(q[senza] - 1.0))),
+             float(np.min(q))))
+
+    # ================================================================ `A2`: il `cs`
+    # ### \u2b50 **LA RIDUZIONE A `cs = 1` SUL FONDO DEL `v3`, forma per forma** -- e solo
+    # ### una delle tre ci arriva ### **AL BIT.**
+    al_bit = {f: bool(np.all(CS4.cs_nodo(phiF, sc, f) == 1.0)) for f in CS4.FORME}
+    esito("### (W1) la forma `dispersione` da- `cs = 1.0` AL BIT sul fondo del `v3`",
+          al_bit["dispersione"],
+          "### dispersione %s, contrasto %s, densita %s -- ### **e la differenza e- "
+          "DICHIARATA, non taciuta**"
+          % tuple("AL BIT" if al_bit[f] else "NO" for f in CS4.FORME))
+    esito("### DEVE SCATTARE: `contrasto` NON ci arriva al bit",
+          not al_bit["contrasto"],
+          "### `cs` minimo = %.17g: ### **`7e-16` sotto `1`, e si propagherebbe nella "
+          "frazione**" % float(np.min(CS4.cs_nodo(phiF, sc, "contrasto"))))
+
+    # ### \u26d4 **IL BRACCIO CHE SEPARA IL RELAZIONALE DALLO SCALATO, e vale piu- di
+    # ### tutti gli altri di `A2`:** si moltiplica `phi` per una costante. ### **Una
+    # ### grandezza relazionale NON cambia; una che ha una SCALA cambia.**
+    rngc = np.random.default_rng(SEME + 1)
+    pnu = rngc.normal(size=n_est) + 1j * rngc.normal(size=n_est)
+    scala = {}
+    for f in CS4.FORME:
+        a = CS4.cs_nodo(pnu, sc, f)
+        b = CS4.cs_nodo(7.0 * pnu, sc, f)
+        scala[f] = float(np.max(np.abs(a - b)))
+    esito("### `dispersione` e `contrasto` sono INVARIANTI DI SCALA, `densita` NO",
+          scala["dispersione"] <= tol and scala["contrasto"] <= tol
+          and scala["densita"] > 1e-3,
+          "### moltiplicando `phi` per `7`: dispersione %.3g, contrasto %.3g, "
+          "### **densita %.3f** -- ### **la terza ha una SCALA, ed e- il suo difetto "
+          "dichiarato**" % (scala["dispersione"], scala["contrasto"], scala["densita"]))
+
+    # ### \u26a0 **E LA CORRELAZIONE COL GRADO SI MISURA, perche- e- il costo di ognuna.**
+    gr = sc["grado"].astype(float)
+    corr = {}
+    for f in CS4.FORME:
+        v = []
+        for seme in (3, 17, 101):
+            rr = np.random.default_rng(seme)
+            pp = rr.normal(size=n_est) + 1j * rr.normal(size=n_est)
+            v.append(float(np.corrcoef(CS4.cs_nodo(pp, sc, f), gr)[0, 1]))
+        corr[f] = float(np.mean(v))
+    esito("### DEVE: `contrasto` correla col GRADO piu- di `dispersione` (artefatto estremi)",
+          abs(corr["contrasto"]) > abs(corr["dispersione"]) + 0.1,
+          "### correlazione media su tre semi: dispersione **%+.3f**, contrasto "
+          "**%+.3f**, densita **%+.3f**"
+          % (corr["dispersione"], corr["contrasto"], corr["densita"]))
+
+    # ### \u2705 **`W5` e `W6` SU `cs`: PARI sotto `C`, e invariante di GAUGE** -- e- cio-
+    # ### che fa piegare il tempo allo stesso modo a materia e antimateria.
+    gauge = GE.scena_gauge_puro(sc, SEME)
+    psi_g = np.empty_like(psiG)
+    for e in range(n_est):
+        kk = int(sc["nodo"][e])
+        psi_g[e] = np.exp(1j * gauge["fi"][kk]) * (gauge["g"][kk] @ psiG[e])
+    cC, cG = [], []
+    for f in CS4.FORME:
+        cC.append(float(np.max(np.abs(CS4.cs_nodo(np.conj(pnu), sc, f)
+                                      - CS4.cs_nodo(pnu, sc, f)))))
+        qa = V4.quota_vuoto(psiG, phiF, sc)
+        qb = V4.quota_vuoto(C2.coniuga2(psiG), np.conj(phiF), sc)
+        qc = V4.quota_vuoto(psi_g, phiF, sc)
+        cG.append(max(float(np.max(np.abs(qa - qb))), float(np.max(np.abs(qa - qc)))))
+    # ### ⛔ **E I DUE CASI SI SEPARANO, perche- NON hanno la stessa soglia:**
+    # ### `cs` legge `|phi|^2` ### **elemento per elemento**, e la coniugazione non lo
+    # ### tocca ⟹ ### **`0` AL BIT.** ### ⚠ **La QUOTA legge anche `rho`**, che e-
+    # ### una ### **SOMMA sulle estremita-**, e `C` ne cambia ### **l-ORDINE** ⟹ lo
+    # ### scarto e- l-errore di somma, ### **`0.19 eps` misurato.**
+    # ### ⭐ **Al primo giro pretendevo `0` anche la-, e il braccio era rosso per una
+    # ### soglia MIA**: con tre addendi l-ordine conta, e questo e- un fatto del
+    # ### `float64`, non una rottura di `C`.
+    esito("### (W5) `cs` e- PARI sotto `C`, AL BIT",
+          max(cC) == 0.0,
+          "### max scarto sulle tre forme = %.3g: `|phi|^2` non cambia sotto "
+          "coniugazione" % max(cC))
+    esito("### (W5, W6) la QUOTA e- pari sotto `C` e invariante di GAUGE",
+          max(cG) <= tol,
+          "### max scarto = %.3g (= %.2f eps), soglia %.3g: ### **lo scarto e- l-ORDINE "
+          "DELLA SOMMA di `rho`, non una rottura**" % (max(cG), max(cG) / EPS, tol))
+
     # ================================================================ il sorgente
-    for f in ("frazione4.py",):
+    for f in ("frazione4.py", "cslocale4.py", "vuoto4.py"):
         testo = open(os.path.join(_QUI, f), encoding="utf-8").read()
         trovati = [c for c in CLIP if c in testo and c not in CLIP_AMMESSI.get(f, ())]
         esito("### (W2) nessun `clip` non dichiarato in `%s`" % f,
@@ -262,15 +406,16 @@ def main():
               and "from soliton_simulator" not in testo, "### cercate le due forme")
 
     # ================================================================ il determinismo
-    imp = []
-    for _ in range(2):
-        pr = subprocess.run([sys.executable, os.path.join(_QUI, "frazione4.py")],
-                            cwd=RADICE, capture_output=True, text=True,
-                            encoding="utf-8", errors="replace")
-        imp.append((pr.stdout or "").strip())
-    esito("### il DETERMINISMO fra DUE PROCESSI: uscita identica",
-          len(imp) == 2 and imp[0] == imp[1] and bool(imp[0]),
-          "### %d caratteri confrontati" % len(imp[0] if imp else ""))
+    for f in ("frazione4.py", "cslocale4.py", "vuoto4.py"):
+        imp = []
+        for _ in range(2):
+            pr = subprocess.run([sys.executable, os.path.join(_QUI, f)],
+                                cwd=RADICE, capture_output=True, text=True,
+                                encoding="utf-8", errors="replace")
+            imp.append((pr.stdout or "").strip())
+        esito("### il DETERMINISMO di `%s` fra DUE PROCESSI" % f,
+              len(imp) == 2 and imp[0] == imp[1] and bool(imp[0]),
+              "### %d caratteri confrontati" % len(imp[0] if imp else ""))
 
     print("=" * 100)
     print("IL BANCO DEL v4: %d su %d   ### %s"

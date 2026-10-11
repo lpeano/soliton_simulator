@@ -183,7 +183,7 @@ COLLAUDI = (
     # ### frazioni *(e- un conto, non un difetto)*, il ### **tick intero non e-
     # ### un-involuzione** *(`A4`)*, e un `cs` storto dentro un blocco ### **rompe
     # ### l-unitarieta-.**
-    ("il banco del v4, la frazione", "proto_camminata/_collauda_banco4.py",
+    ("il banco del v4", "proto_camminata/_collauda_banco4.py",
      "pre-commit"),
     # ### ⚠ **E `csv/_verifica_clone.py` NON STA QUI, DI PROPOSITO:** fa un clone e
     # ### ### **ci fa girare QUESTA suite** -- metterlo fra i collaudi vorrebbe dire
