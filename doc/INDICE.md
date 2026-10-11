@@ -9,7 +9,7 @@
 | `DOCUMENTAZIONE` | `2` | 1 |
 | `DOCUMENTAZIONE` | `ENTRAMBE` | 8 |
 | `FISICA` | `1` | 343 |
-| `FISICA` | `2` | 62 |
+| `FISICA` | `2` | 65 |
 | `FISICA` | `ENTRAMBE` | 17 |
 | `INFRASTRUTTURA` | `1` | 39 |
 | `INFRASTRUTTURA` | `2` | 16 |
@@ -257,10 +257,12 @@
 | `DECISIONE-VUOLE-UN-CAMPO` | STANDARD | METODO | ENTRAMBE | ### **APERTA** |  | una decisione che serve a un programma vuole un CAMPO, non una frase nel titolo |
 | `DERIVA-DELLA-FORMA-D` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | la forma (D) non conserva la sua conservazione modificata: perche-? |
 | `DIFETTO-TERNARIO-CHE-NON-SCEGLIE` | DIFETTO | FISICA | 2 | ### **AGENDA** |  | un ternario che non scegliE: per il braccio lineare misuravo la Q di N |
+| `DIMENSIONE-E-ISOTROPIA-DELLE-SCENE` | MISURA | FISICA | 2 | ### **AGENDA** |  | le scene del banco non hanno dimensione 3, e nessuna scena 3D provata e- isotrop |
 | `DISEGNO-3D-OSSERVATORE` | STANDARD | METODO | 2 | ### **AGENDA** |  | il disegno 3D e- un OSSERVATORE, e il 3D che distorce E- UNA MISURA |
 | `DIVISIONE-AUTOCONSISTENTE` | FRONTE | FISICA | 2 | ### **AGENDA** |  | la divisione dell arco come UNA legge: dove si rompe, cosa ereditano i figli, il |
 | `DOMANDA-A3B-CLASSE` | DECISIONE | METODO | 2 | ### **AGENDA** |  | A3b: con che classe entra nell-indice? |
 | `DOMANDA-C2-O-C4` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | due componenti o quattro: il gap c-e- solo con C4? |
+| `DOMANDA-CHI-CAUSA-L-ANISOTROPIA` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | l-anisotropia e- del grafo e non dei versori: si cura il grafo o si lascia? |
 | `DOMANDA-COME-LA-MATERIA-CAMBIA-LAMBDA` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | come la materia cambia la densita- del vuoto: scattering nel nodo o trasmissione |
 | `DOMANDA-D13-CONIUGATI` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | D13: i coniugati delle memorie -- tw come fase U(1) sull-arco? |
 | `DOMANDA-D9-GEOMETRIA` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | D9: la geometria viene da d e p_d dentro H, o dalle relazioni fra gli psi? |
@@ -273,6 +275,7 @@
 | `DOMANDA-PASSO-FRAZIONARIO-O-ASINCRONO` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | pezzi frazionari o tick asincroni, e l-invarianza locale dei secondi NON e- dimo |
 | `DOMANDA-PRIMA-LEGARE-POI-MISURARE` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | senza stato legato tre letture non sono decidibili: si cerca prima un legame? |
 | `DOMANDA-QUALE-FORMA-FISSA-CS` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | quale forma del vuoto fissa cs: nessuna delle tre e- libera da tutti i difetti |
+| `DOMANDA-QUALE-SCENA-3D-PRINCIPALE` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | quale scena 3D fa da principale, se nessuna delle due provate e- isotropa? |
 | `DOMANDA-QUANDO-LA-CAMMINATA-IN-TABELLA` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | quando si porta la camminata nella tabella? il porting aspetta TRE decisioni ape |
 | `DOMANDA-QUANTITA-CONSERVATA` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | esiste una moneta isotropa, causale e simmetrica fra le bande con una quantita-  |
 | `DOMANDA-REGOLE-FUORI-CLAUDE` | DECISIONE | METODO | 2 | ### **AGENDA** |  | le regole di gestione fuori da CLAUDE.md, e quelle dentro senza presidio: vanno  |

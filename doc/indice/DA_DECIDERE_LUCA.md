@@ -16,18 +16,20 @@
 
 ## LE ALTRE, per priorita-
 
-### `CRITICA` — **3**
+### `CRITICA` — **4**
 
 | la domanda | pronta? | che cosa aspetta |
 |---|---|---|
 | **[[DOMANDA-D13-CONIUGATI]]** D13: i coniugati delle memorie -- tw come fase U(1) sull-arco? | ### ⏳ aspetta | ### **aspetta:** `DOMANDA-D9-GEOMETRIA` |
 | **[[DOMANDA-D9-GEOMETRIA]]** D9: la geometria viene da d e p_d dentro H, o dalle relazioni fra gli ps | ### ⏳ aspetta | ### **aspetta:** `DOMANDA-QUANTITA-CONSERVATA` |
+| **[[DOMANDA-QUALE-SCENA-3D-PRINCIPALE]]** quale scena 3D fa da principale, se nessuna delle due provate e- isotrop | ### ✅ **PRONTA** | ### **niente** |
 | **[[DOMANDA-QUANTITA-CONSERVATA]]** esiste una moneta isotropa, causale e simmetrica fra le bande con una qu | ### ✅ **PRONTA** | ### **niente** |
 
-### `DIPENDENTE` — **11**
+### `DIPENDENTE` — **12**
 
 | la domanda | pronta? | che cosa aspetta |
 |---|---|---|
+| **[[DOMANDA-CHI-CAUSA-L-ANISOTROPIA]]** l-anisotropia e- del grafo e non dei versori: si cura il grafo o si lasc | ### ⏳ aspetta | ### **aspetta:** `DOMANDA-QUALE-SCENA-3D-PRINCIPALE` |
 | **[[DOMANDA-COME-LA-MATERIA-CAMBIA-LAMBDA]]** come la materia cambia la densita- del vuoto: scattering nel nodo o tras | ### ⏳ aspetta | ### **aspetta:** `DOMANDA-PASSO-FRAZIONARIO-O-ASINCRONO` |
 | **[[DOMANDA-FORME-VUOTO]]** le TRE forme del vuoto locale: che cos-e- un grado, quanti per nodo, l-a | ### ⏳ aspetta | ### **aspetta:** `DOMANDA-QUANTITA-CONSERVATA` |
 | **[[DOMANDA-FUSIONE]]** la FUSIONE di due nodi: si vieta, e con che cosa? | ### ✅ **PRONTA** | ### **niente** |
@@ -52,7 +54,7 @@
 
 ## IL CONTO
 
-> ### ⛔ **aperte `18`, di cui pronte `9`.**
+> ### ⛔ **aperte `20`, di cui pronte `10`.**
 >
 > ### ✅ **E una domanda DECISA esce da sola:** si chiude con la decisione di Luca e il commit, e ### **nessuno la spunta a mano** -- la lista ### **si genera dai campi**, e un campo che cambia ### **cambia la lista.**
 
@@ -62,24 +64,26 @@
 
 > ### 📌 **Queste arrivano dai DUE criteri vecchi** *(la nota che dice <<da decidere da Luca>>, e lo stato `DA_CLASSIFICARE`)*, e ### **non hanno una `priorita`**: quindi ### **non stanno nell-ordine delle dipendenze.** ### ✅ **Non le tolgo: le DICHIARO**, perche- una lista che ne nasconde una parte ### **sembra completa.**
 
-| **voci che aspettano una decisione** | ### **`15`** |
-| **domande in tutto** | `15` |
+| **voci che aspettano una decisione** | ### **`17`** |
+| **domande in tutto** | `17` |
 | **segnaposto `NON_DEFINITA`**, che NON sono una domanda | `187` |
 
 ---
 
-## le DOMANDE aperte -- `15`
+## le DOMANDE aperte -- `17`
 
 | id | `classe`/`dominio`/era/stato | LA DOMANDA | LA FRASE |
 |---|---|---|---|
 | `COESIONE-TERMINE-O-CAMPO` | `DECISIONE`/`FISICA`/`2`/`AGENDA` | la coesione e- un termine locale con una forza da derivare, oppure un campo dinamico | la coesione simmetrica viene da un termine LOCALE o da un CAMPO? ### DOMANDA APERTA PER LUCA, da decidere da Luca. ### IL FATTO MISURATO (referto doc/ |
 | `DERIVA-DELLA-FORMA-D` | `DECISIONE`/`FISICA`/`2`/`AGENDA` | se vale la pena cercare la causa: la forma N funziona, (D) deriva e non so perche- | la forma (D) non conserva la sua conservazione modificata: perche-? ### DOMANDA APERTA PER LUCA, e anche per me: NON SO PERCHE-. ### IL FATTO MISURATO |
 | `DOMANDA-C2-O-C4` | `DECISIONE`/`FISICA`/`2`/`AGENDA` | C2 senza massa come misurato, oppure si prova C4 | due componenti o quattro: il gap c-e- solo con C4? ### DOMANDA APERTA PER LUCA, da decidere da Luca, ed e- la domanda C2 contro C4 di A16. ### IL FATT |
+| `DOMANDA-CHI-CAUSA-L-ANISOTROPIA` | `DECISIONE`/`FISICA`/`2`/`AGENDA` | l-anisotropia e- del grafo, e i versori la riducono invece di causarla | l-anisotropia e- del grafo e non dei versori: si cura il grafo o si lascia? ### DOMANDA APERTA PER LUCA, da decidere da Luca. ### IL FATTO MISURATO: i |
 | `DOMANDA-COME-LA-MATERIA-CAMBIA-LAMBDA` | `DECISIONE`/`FISICA`/`2`/`AGENDA` | scattering nel nodo o trasmissione sull-arco | come la materia cambia la densita- del vuoto: scattering nel nodo o trasmissione sull-arco? ### DOMANDA APERTA PER LUCA, da decidere da Luca. ### E- i |
 | `DOMANDA-GUSCIO-E-INTERFERENZA` | `DECISIONE`/`FISICA`/`2`/`AGENDA` | il guscio e- interferenza, quindi l-ipotesi si riformula o manca qualcosa | il guscio e- interferenza e non materia: che cosa resta dell-ipotesi del guscio? ### DOMANDA APERTA PER LUCA, da decidere da Luca. ### IL FATTO MISURA |
 | `DOMANDA-PASSO-FRAZIONARIO-O-ASINCRONO` | `DECISIONE`/`FISICA`/`2`/`AGENDA` | e l-invarianza locale dei tick asincroni NON e- dimostrata dove cs varia, perche- la frequenza dell-arco e- una COINCIDENZA | pezzi frazionari o tick asincroni, e l-invarianza locale dei secondi NON e- dimostrata dove cs varia ### DOMANDA APERTA PER LUCA, da decidere da Luca. |
 | `DOMANDA-PRIMA-LEGARE-POI-MISURARE` | `DECISIONE`/`FISICA`/`2`/`AGENDA` | cercare prima un legame, o riformulare le letture come letture sulla dispersione | senza stato legato tre letture non sono decidibili: si cerca prima un legame? ### DOMANDA APERTA PER LUCA, da decidere da Luca. ### IL FATTO: tre lett |
 | `DOMANDA-QUALE-FORMA-FISSA-CS` | `DECISIONE`/`FISICA`/`2`/`AGENDA` | quale forma fissa cs, e nessuna delle tre e- libera da tutti i difetti | quale forma del vuoto fissa cs: nessuna delle tre e- libera da tutti i difetti ### DOMANDA APERTA PER LUCA, da decidere da Luca. ### E- il punto A2 de |
+| `DOMANDA-QUALE-SCENA-3D-PRINCIPALE` | `DECISIONE`/`FISICA`/`2`/`AGENDA` | nessuna delle due scene 3D provate e- isotropa, e il geometrico sta peggio del cubico | quale scena 3D fa da principale, se nessuna delle due provate e- isotropa? ### DOMANDA APERTA PER LUCA, da decidere da Luca. ### IL FATTO MISURATO: il |
 | `DOMANDA-QUANDO-LA-CAMMINATA-IN-TABELLA` | `DECISIONE`/`FISICA`/`2`/`AGENDA` | quando si porta la camminata nella tabella, e il porting aspetta le tre scelte del v4 | quando si porta la camminata nella tabella? il porting aspetta TRE decisioni aperte ### DOMANDA APERTA PER LUCA, da decidere da Luca. ### E- il punto  |
 | `DUE-STRUMENTI-ARCHIVIO-E` | `DIFETTO`/`INFRASTRUTTURA`/`ENTRAMBE`/`APERTA` | quale dei due strumenti resta, e un solo registro degli archiviati | due strumenti per lo stesso mestiere: spostare gli output su E- ### DOMANDA APERTA PER LUCA, da decidere da Luca: QUALE DEI DUE RESTA. ### IL FATTO: ` |
 | `PROMOZIONE-CONSERVAZIONE-MODIFICATA` | `DECISIONE`/`FISICA`/`2`/`AGENDA` | la conservazione modificata si conserva; promuoverla a energia e- una sua decisione | la conservazione modificata si conserva: si promuove a energia? ### DOMANDA APERTA PER LUCA, da decidere da Luca. ### IL FATTO MISURATO (referto doc/R |

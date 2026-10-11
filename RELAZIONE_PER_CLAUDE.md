@@ -13364,3 +13364,38 @@ Ogni dato di `db_era2/` ha ### **il suo TIMBRO accanto**, col campo `versione_da
 ### ⚠ **E UNA COSA DA CORREGGERE NEL MANDATO, perche' e' un'etichetta e non un ID:** il mandato cita **`D9`**, che e' ### **l'etichetta locale** con cui Luca lo nomina in `doc/ALBERO_era2.yaml`; l'ID e' ### **`DOMANDA-D9-GEOMETRIA`** *(par. `9`: le etichette locali NON sono ID)*, e la voce lo collega con quello.
 
 ### ✅ **E DUE PEZZI DEL MANDATO SONO GIA' PRONTI, e li ho dichiarati nella coda** *(il mandato chiede di riusare cio' che e' fatto)*: la **misura del costo per tick** sulle taglie e il **generatore di scene scalabile** *(`scena.irregolare(n)`, gradi `2..6`, deterministico)*, entrambi misurati nel task history del `LEGAME` — e la ### **PARTE `F`** li chiede.
+
+## ⭐ **LA DIMENSIONE E L'ISOTROPIA DELLE SCENE: UNA PREMESSA REGGE, DUE NO** *(rilievi del guardiano, `2026-10-11`, verificati e MISURATI)*
+
+> ### ⚠ **E l'aggiunta e' arrivata in DUE versioni:** la seconda ### **sostituisce la prima** *(`PRECEDENZA-IN-CODA`)* e aggiunge ### **l'isotropia** e il ribaltamento fra scena principale e controllo. ### **La sostituzione e' annotata nel task history, con la tabella delle differenze.**
+
+| la scena | `d_s` | `r²` | aniso **GRAFO** | aniso **EUCLIDEA** | eucl, versori **uguali** | etichetta |
+|---|---|---|---|---|---|---|
+| anello `n=2000` | ### **`1.001`** | **`1.0000`** | — | — | — | ### **`1D`** |
+| cubico `L=8` | `3.125` | `0.9999` | `10.4%` | **`11.2%`** | `14.3%` | `3D anisotropa` |
+| cubico `L=12` | `3.090` | `0.9999` | `9.6%` | **`11.9%`** | `15.4%` | `3D anisotropa` |
+| cubico `L=20` | `3.048` | `0.9999` | `8.3%` | **`11.4%`** | `15.4%` | `3D anisotropa` |
+| `G3` `n=512` | `2.126` | `0.9868` | `37.6%` | **`33.0%`** | `31.8%` | `3D anisotropa` |
+| `G3` `n=4000` | `2.923` | `0.9928` | `38.2%` | **`31.9%`** | `31.9%` | `3D anisotropa` |
+| casuale `n=120` | `2.363` | `0.9935` | — | — | — | `casuale` |
+| casuale `n=2000` | ### **`3.927`** | `0.9831` | — | — | — | `casuale` |
+
+### ✅ **` 1 ` LA PRIMA PREMESSA REGGE, E IN MODO PULITO:** l'anello e' ### **`d_s = 1.001` con `r² = 1.0000`** — *una* dimensione, esatta; il casuale ha `d_s` che ### **CRESCE con `n`** *(`2.36` · `3.93`)*, cioe' ### **non ha una dimensione fissa**; il cubico sta a ### **`3.04`..`3.13`** su quattro taglie. ### ⭐ **E questo spiega un numero che avevo gia' misurato senza interpretarlo:** il regolare dava `56`..`90` buchi oltre soglia e l'irregolare `0`..`14` — ### **non era la camminata: era la DIMENSIONE.** Un anello e' ### **un cristallo `1D`**, e un cristallo ha bande con gap.
+
+### ⚠ **E LA MIA PREVISIONE ERA GIUSTA IN SOSTANZA E SBAGLIATA IN FORMA:** avevo scritto *«il casuale: NESSUNA legge di potenza»*, e invece ### **la potenza si adatta** *(`r² = 0.983`)* — ### **ma l'esponente cresce con `n`**, e *quella* e' la firma. ### **Un `r²` alto non vuol dire <<ha una dimensione>>.**
+
+### ✅ **` 2 ` LA SECONDA PREMESSA REGGE, MA SOLO SUL MISURANDO GIUSTO — e il misurando sbagliato dava il CONTRARIO**
+
+### **Sul misurando EUCLIDEO** *(quello che il rilievo nomina: «il fronte ha spigoli lungo gli assi»)* l'anisotropia del cubico e' ### **`11.2%` · `11.9%` · `11.4%`** a `L = 8, 12, 20` — ### **STABILE: non sparisce con la taglia.** ### ⛔ **Ma sul misurando di GRAFO sembrava CALARE** *(`33%` · `10%` · `9.6%` · `8.3%`)*, e con quello avrei scritto che il rilievo era sbagliato. ### ⭐ **La ragione e' che la distanza di grafo del cubico E' la `L1`, quindi e' isotropa PER COSTRUZIONE:** il misurando di grafo dice ### **se il GRAFO e' regolare**, non se le onde lo sono. ### **Riporto entrambi, e dico quale risponde alla domanda.**
+
+### ⛔ **` 3 ` MA LA TERZA PREMESSA *NON* REGGE: `G3` NON E' ISOTROPA, ED E' TRE VOLTE PEGGIO DEL CUBICO**
+
+### **`31.9%` contro `11.4%`, e non cala con `n`** *(`33.0%` · `31.9%`)*. ### ⛔ **E il mandato la fa SCENA PRINCIPALE proprio perche' il cubico non e' isotropo** — ma misurata, ### **`G3` sta peggio.** ### ⚠ **L'ipotesi, e la scrivo come ipotesi e non come fatto:** i gradi in `[2, 6]` su un processo di punti casuale danno una connettivita' locale ### **molto irregolare**, e la dispersione fra direzioni misura ### **quella**, non un'anisotropia di direzione.
+
+### ⛔ **` 4 ` E LA QUARTA PREMESSA NON REGGE NEL VERSO: I VERSORI *ABBASSANO* L'ANISOTROPIA**
+
+### **Sul cubico: versori tutti uguali `15.4%`, versori del `v3` `11.4%`** — ### **i versori la RIDUCONO di quattro punti.** Su `G3` i due bracci ### **coincidono** *(`31.9%`)*. ### ⭐ **Quindi il `~14%` del `v3` e' del GRAFO, non dei versori**, e il mandato attribuisce l'effetto alla causa sbagliata — ### **e il braccio di controllo che il mandato STESSO chiede e' cio' che lo mostra.** ### ✅ **E una cosa del rilievo resta vera comunque:** i versori per indice d'arco sono ### **non relazionali**, e quello e' un difetto ### **a prescindere** da quanto pesino sull'isotropia *(`[[PROVV-VERSORI-NON-RELAZIONALI]]`)*.
+
+### 📌 **LE TRE VOCI:** `[[DIMENSIONE-E-ISOTROPIA-DELLE-SCENE]]` *(la misura)*, e le ### **due domande che sono di Luca**: `[[DOMANDA-QUALE-SCENA-3D-PRINCIPALE]]` *(adesso **`CRITICA`**: nessuna delle due scene `3D` provate e' isotropa, e quella scelta come principale sta peggio)* e `[[DOMANDA-CHI-CAUSA-L-ANISOTROPIA]]`. ### ⛔ **Non scelgo io.**
+
+### ⚠ **E DICHIARO UN'INFRAZIONE AL MIO RITO:** le soglie dell'isotropia erano ### **fissate nel codice prima della corsa** *(`etichetta(soglia=0.10)`)*, ma la ### **corsa e' arrivata prima dell'annotazione nel task history** — perche' la seconda versione del rilievo e' arrivata ### **mentre costruivo il modulo delle scene.** ### **<<Soglia prima del numero>> e' rispettato; <<task history prima della misura>> NO**, e l'ho scritto nel task history stesso, dove si vede.

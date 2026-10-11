@@ -185,6 +185,15 @@ COLLAUDI = (
     # ### l-unitarieta-.**
     ("il banco del v4", "proto_camminata/_collauda_banco4.py",
      "pre-commit"),
+    # ### ⭐ **IL BANCO DEL LEGAME** *(mandato di Luca, 2026-10-11)*: i
+    # ### ### **cinque bracci** che la seconda versione chiede, piu- i ### **tre che
+    # ### DEVONO scattare.** ### ⚠ **E sta in `solo-CI` per il TEMPO:** costa
+    # ### ### **`33.3` s**, quasi tutto in ### **due `eig` su `dim 960`** e nei
+    # ### ### **due processi** del determinismo. ### ⛔ **Il mandato lo dice:
+    # ### <<se il tempo della suite sfora il budget, le taglie grandi vanno nelle
+    # ### letture e non nel pre-commit, dichiarandolo, MAI togliendo un collaudo>>.
+    ("il banco del legame", "proto_camminata/_collauda_legame.py",
+     "solo-CI"),
     # ### ⚠ **E `csv/_verifica_clone.py` NON STA QUI, DI PROPOSITO:** fa un clone e
     # ### ### **ci fa girare QUESTA suite** -- metterlo fra i collaudi vorrebbe dire
     # ### ### **una ricorsione senza fondo.** Si lancia a mano, ed e- il punto 3 del
