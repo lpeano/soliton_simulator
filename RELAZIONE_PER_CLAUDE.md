@@ -13319,3 +13319,36 @@ Ogni dato di `db_era2/` ha ### **il suo TIMBRO accanto**, col campo `versione_da
 | ### ✅ **corretto** | `[[DOMANDA-PASSO-FRAZIONARIO-O-ASINCRONO]]` *(il titolo e la descrizione: l'informazione per la scelta `F`/`S`, che resta di Luca)* e `[[MISURA-INVARIANZA-LOCALE-V4]]` *(il titolo dice adesso **<<misurata SOLO a `cs` uniforme>>**)* |
 | ### ✅ **corretto il REFERTO** | il caveat sta ### **dentro la sezione `L0`**, dove la lettura si fa, e ### **non solo in fondo** — piu' un limite nuovo nella lista. ### **Il referto e' rigenerato e il suo blob aggiornato nello stesso commit**, come il presidio della forma pretende |
 | ### ⛔ **NON ho fatto** | ### **nessun codice**, come il mandato dice: l'*«orologio proprio dell'arco»* e' ### **dichiarato come correzione possibile e NON implementato** — e la scelta resta di Luca |
+
+## ⭐ **IL MANDATO <<IL LEGAME>>, SECONDA VERSIONE: LA REGOLA SUL RAGGIO DICE CHE L'IRREGOLARE NON PUO' DECIDERE** *(`2026-10-11`)*
+
+> ### ⚠ **Il mandato e' arrivato in DUE versioni, la seconda mentre verificavo il rilievo del guardiano della prima.** ### **Vale la seconda** *(`PRECEDENZA-IN-CODA`)*, e la differenza e' una tabella nel task history. ### ✅ **E il rilievo, identico nelle due, e' gia' verificato e registrato** *(`0ef747e`)*: ### **non lo rifaccio.**
+
+### **La derivazione sta in `doc/TASK_HISTORY/2026-10-11_legame.md`, committata PRIMA delle misure.** ### ⭐ **E due fatti misurati prima di disegnare cambiano il disegno:**
+
+### ⛔ **` 1 ` IL GRAFO IRREGOLARE E' UN ESPANSORE, QUINDI NON PUO' DECIDERE SUL LEGAME**
+
+| la scena | `n` | **diametro** | `diametro/3` = il raggio ammesso | `T_max` |
+|---|---|---|---|---|
+| irregolare | `120` | **`8`** | ### ⛔ **`<= 2` archi** | `25` tick |
+| irregolare | `500` | **`10`** | ### ⛔ **`<= 3`** | `32` tick |
+| irregolare | `2000` | **`>= 11`** | ### ⛔ **`<= 3`** | `35` tick |
+| regolare | `120` | **`30`** | **`<= 9`** | `96` tick |
+| regolare | `500` | **`125`** | **`<= 41`** | `403` tick |
+
+### ⛔ **Il diametro dell'irregolare cresce come `log n`** *(`8` — `10` — `>= 11`)*, quindi la regola sul raggio chiede un raggio ### **`< 3` archi a QUALUNQUE taglia**, e ### **crescere la taglia non aiuta.** ### ⭐ **Sul REGOLARE il diametro cresce LINEARE** *(`30` — `125`)*. ### **Percio' la scala di taglie che conta per il legame e' quella del REGOLARE**, e sull'irregolare mi aspetto ### **`NON DECIDIBILE PER TAGLIA`** quasi sempre. ### ⚠ **E non e' una scelta mia: e' la regola del mandato applicata a un diametro MISURATO.**
+
+### ⛔ **` 2 ` LO SPETTRO E' CUBICO, LA CAMMINATA NO: `n = 2000` E' OLTRE IL RAGIONEVOLE *PER `M0`* E NON PER `M1`/`M2`**
+
+| | `dim` | `eig` | memoria |
+|---|---|---|---|
+| irregolare `500` | `3468` | **`36.1` s** | `0.19` GB |
+| regolare `500` | `4000` | **`47.0` s** | `0.26` GB |
+| irregolare `2000` | `13880` | ### ⛔ **`2033` s previsti** | ### ⛔ **`3.1` GB** |
+| regolare `2000` | `16000` | ### ⛔ **`3113` s previsti** | ### ⛔ **`4.1` GB** *(e `LAPACK` ne vuole altrettanta: `~10` GB)* |
+
+### ✅ **Ma un passo e' LINEARE: `0.0004` s/tick a `n = 120`, `0.0043` a `n = 2000`.** ### **Quindi `M1` e `M2` arrivano a `n = 2000` e `M0` no** — e questa asimmetria ### **si dichiara**, invece di fermare tutto alla taglia piu' piccola o di far finta che `M0` ci arrivi.
+
+### 📌 **E LA TRAPPOLA CHE NON DEVO RIFARE E' SCRITTA NEL REPO:** la lettura `M` del `v2` misurava *«il gap MASSIMO ovunque sul cerchio»* e otteneva **`64.9`** a `eps = 0` — ### **dalle BANDE PIATTE di Grover**, cioe' dalle spigole di `±1` degli stati intrappolati sui cicli. ### ⛔ **`M0` cerca i buchi su TUTTO il cerchio, quindi ci cadrebbe di nuovo:** percio' le spigole di `±1` ### **si escludono dalla caccia e si riportano a parte**, ed e' scritto nella progettazione ### **prima di misurare.**
+
+### ⭐ **E LA PREVISIONE, scritta prima:** ### **nessun buco** *(e quindi `M1` e `M2` sono attese NEGATIVE)*, perche' `_spettro.py` ha gia' misurato che il gap ai due punti d'incontro resta ### **`O(1)` in spaziature** crescendo la taglia — e ### **un gap che resta `O(1)` in spaziature non e' un gap: e' la spaziatura media.**
