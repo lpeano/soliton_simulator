@@ -3266,3 +3266,15 @@ etichette rimosse, con ### **`0` persi, `0` doppi, `0` conflitti**.
 | ⚠ **E DUE BRACCI FALLIVANO PER COLPA LORO, non del codice** | uno cercava `pos` nel ### **TESTO GREZZO**, e la ### **docstring che DICHIARA il vincolo** lo faceva fallire · l'altro trovava `np.maximum` ### **nei miei commenti che dicono <<qui non c'e' nessun `np.maximum`>>.** ### ⛔ **Un presidio che si accende sulla propria dichiarazione di conformita' non guarda il codice** *(`A9`)*: adesso passano dall'### **albero sintattico** |
 | 📌 **e l'UNICO `clip` ammesso NON e' un clip** | `np.minimum(d, 1 - d)` e' la ### **convenzione dell'IMMAGINE MINIMA sul toro** *(la distanza fra due punti del cubo periodico **E'** la minore fra le due vie)*: ### **non altera nessuna grandezza**, e `A11` chiede l'errore ### **solo a un clip** |
 
+### ⭐ **IL COMPLETAMENTO DEL LEGAME: SCENE `3D` GRANDI E MISURA IN ARCHI ASSOLUTI** *(`[[LEGAME-SCENE-GRANDI]]`, 2026-10-11)*
+
+| | |
+|---|---|
+| **i file** | `_letture_legame_grandi.py` *(BLOB `e08cc7ad`)* |
+| **COMANDO** | `python proto_camminata/_letture_legame_grandi.py` *(scrive `uscite/letture_legame_grandi.json`)* |
+| **che cosa misura** | `C1` le ### **scene ammissibili** *(il fronte non arriva a meta' del diametro: `0.6193 t < diametro/2`)* col loro ### **costo per tick** · `C2` il ### **raggio IN ARCHI** che contiene il `50%` e il `90%` della norma, e la ### **frazione entro `1, 2, 3` archi**, sempre contro il ### **lineare alla STESSA taglia** · e la ### **misura vecchia ACCANTO** |
+| ⛔ **PERCHE' UN MISURANDO NUOVO** | il vecchio divide per il ### **fondo uniforme**, che e' `(nodi entro r)/n` — cioe' ### **dipende dalla taglia attraverso il DENOMINATORE.** Il nuovo ### **conta archi** e non ha denominatore |
+| ✅ **E IL CONTROLLO CHE VALE PIU' DI TUTTI** | ### **l'anello `1D` e' il LIMITE NOTO**: il `+D` lega la', misurato. ### **Se il misurando nuovo non lo ritrovasse, il misurando sarebbe rotto** — e lo ritrova *(`+0.0275` a `3.6 sigma`, e la misura vecchia dice la stessa cosa)* |
+| ⚠ **E L'AFFINAMENTO MI SMENTISCE** | il raggio del `+D` cresce con pendenza `0.6302` contro `0.6537` del lineare, cioe' ### **rapporto `0.964`** — quindi ### **cio' che lega in `1D` e' il NUCLEO, non l'estensione**: un ### **picco che sopravvive sopra un fronte che si allarga alla velocita' della luce del grafo.** ### **Il *<<lega in `1D`>>* del referto vecchio e' TROPPO FORTE** |
+| 📌 **il TETTO del tempo, dichiarato** | `40` tick, per ### **due motivi misurati**: `M1` osservava a `min(40, t_max)` *(confrontabilita')*, e le differenze dal lineare ### **CALANO con `t`** *(`0.5052` a `t = 4`, `0.0709` a `t = 80`)* — osservare piu' a lungo ### **DILUISCE** |
+

@@ -13689,3 +13689,19 @@ Ogni dato di `db_era2/` ha ### **il suo TIMBRO accanto**, col campo `versione_da
 
 ### 📌 **E LA COSA CHE NON HO FATTO: scegliere la scena.** Le misure dell'isotropia indicano i ### **punti respinti** su ogni asse tranne uno *(lo scarto da `3`, dove `(i)` sta a `0.038` contro `0.046` — e i due ### **non sono distinguibili**)*, ma la scelta e' di Luca: ### **quindi `C1` girera' su ENTRAMBE le varianti geometriche**, e la decisione resta aperta.
 
+## ⭐ **IL MISURANDO IN ARCHI RITROVA IL LIMITE NOTO `1D`, E DICE UNA COSA PIU' FINE DI QUELLA CHE AVEVO SCRITTO** *(2026-10-11, sonda su scene piccole, PRIMA del run)*
+
+### ✅ **IL CONTROLLO CHE AVEVO DICHIARATO NEL TASK HISTORY HA FUNZIONATO:** avevo scritto che *«se il misurando nuovo non ritrovasse il `+D` che lega in `1D`, il misurando sarebbe rotto e non la fisica»*. ### **Lo ritrova:** sull'anello a `n = 400`, `+D` a `x0 = 1` tiene la frazione entro un arco a `0.1429` contro `0.1155` del lineare, cioe' `+0.0275` a ### **`3.6 sigma`** — e ### **la misura VECCHIA dice la stessa cosa** *(`11.44` contro `9.24`, `3.6 sigma`, <<piu' concentrato>>)*.
+
+### ⛔ **LE DUE MISURE NON SI CONTRADDICONO: LA NUOVA AFFINA LA VECCHIA, e l'affinamento mi smentisce.** Il raggio che contiene il `90%` della norma cresce con una pendenza di `0.6302` contro `0.6537` del lineare, cioe' ### **un rapporto di `0.964`** — ### **il fronte si allarga praticamente alla stessa velocita' del lineare.**
+
+### ⭐ **QUINDI CIO' CHE <<LEGA>> IN `1D` E' IL NUCLEO, NON L'ESTENSIONE.** Una frazione di norma ### **resta nel primo arco**, ma il ### **resto si disperde alla velocita' della luce del grafo**: non e' uno stato legato, e' ### **un picco che sopravvive sopra un fronte che si allarga.**
+
+### ⚠ **E IL REFERTO VECCHIO DICEVA *<<la forma `(D)` col segno diretto LEGA in `1D`>>*: con il misurando nuovo quella frase e' TROPPO FORTE.** Il misurando vecchio ### **non poteva vedere la differenza**, perche' guardava ### **solo il nucleo** *(la frazione entro un arco)* e ### **mai l'estensione** — ed e' esattamente il buco che `C2` e' stato scritto per chiudere.
+
+### ⭐ **E IL VERDETTO COMPOSTO DEL MANDATO E' QUELLO CHE RIVELA LA COSA:** `RESTA CONCENTRATO` chiede *(il raggio **si ferma** OPPURE **cresce piu' lentamente**)* ### **E** *(la frazione entro pochi archi resta **SOPRA**)* — e sull'anello ### **la seconda gamba passa e la PRIMA NO.** ### **La congiunzione non e' mia: e' del mandato** — e qui si vede ### **perche' era la forma giusta.**
+
+### 📌 **E UNA COSA CHE HO DICHIARATO INVECE DI SCEGLIERLA: il TETTO del tempo di osservazione, `40` tick.** I motivi sono ### **due, e misurati**: `M1` osservava a `min(40, t_max)`, quindi lo stesso tetto rende la misura nuova ### **confrontabile** col referto vecchio; e le differenze dal lineare ### **CALANO in modo monotono con `t`** *(per `+D` a `x0 = 4`: `0.5052` a `t = 4`, `0.0709` a `t = 80`)*, quindi osservare piu' a lungo ### **non aggiunge informazione: DILUISCE.** ### ⛔ **E l'ammissibilita' resta un limite superiore: il tetto la stringe, non la sostituisce.**
+
+### ✅ **E IL CONFRONTO COL LINEARE SI FA ADESSO A OGNI `t`, non solo all'ultimo:** sull'anello le differenze calano, quindi ### **riportare solo l'ultimo nasconderebbe l'andamento** — e l'andamento e' ### **meta' del fatto.**
+
