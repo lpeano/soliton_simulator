@@ -9,13 +9,13 @@
 | | quanti |
 |---|--:|
 | **`PORTATO`** | `109` |
-| **`PRONTO`** | `6` |
-| **`DA_PORTARE`** | `17` |
+| **`PRONTO`** | `7` |
+| **`DA_PORTARE`** | `18` |
 | **`DA_DECIDERE`** | `5` |
 | **`NON_SI_APPLICA`** | `7` |
-| **in tutto** | ### **`144`** |
+| **in tutto** | ### **`146`** |
 
-### ⚠ **E IL NUMERO `144` E- MISURATO, non stimato:** viene dal perimetro che l-indice calcola, e ### **il mandato ne nominava <<una decina>>** per nome piu- *<<e le cure di architettura>>*. ### **La decina era `20`.**
+### ⚠ **E IL NUMERO `146` E- MISURATO, non stimato:** viene dal perimetro che l-indice calcola, e ### **il mandato ne nominava <<una decina>>** per nome piu- *<<e le cure di architettura>>*. ### **La decina era `20`.**
 
 ---
 
@@ -137,12 +137,13 @@
 
 ---
 
-## `PRONTO` — `6` metodi
+## `PRONTO` — `7` metodi
 
 > ### ✅ **DECISO E NON BLOCCATO**: si fa ### **quando c-e- la materia**, e `dove` dice ### **che cosa lo fa rispettare GIA- OGGI**
 
 | id | classe | come si applica all-era `2` | dove |
 |---|---|---|---|
+| **`BANCO-CONGELATO`** | `STANDARD` | NATO DA UNA DECISIONE DI LUCA. Il banco `proto_camminata` e' un ### **RIFERIMENTO CONGELATO**: serve ### **solo come termine di confronto AL BIT** per il simulatore, non ci girano piu' corse e ### **non si estende.** ### ⭐ **E NELL'ERA 2 SI APPLICA COSI':** i suoi numeri sono la base del ### **CRITERIO DI PASSAGGIO** -- il codice generato deve riprodurre il banco ### **al bit** *(o entro ulp dichiarati)* sulle sue scene. | `proto_camminata/` (congelato); i suoi referti sono REPERTI col loro blob in `csv/_forma_referti.py` |
 | **`CAMMINATA-A-MONETA`** | `STANDARD` | DECISIONE DI LUCA del 2026-10-10: la dinamica dell-era 2 e- una CAMMINATA QUANTISTICA A MONETA, UN-UNICA REGOLA per tutte le grandezze. ### SI APPLICA ALL-ERA 2 COSI-, e OGGI NIENTE E- COSTRUITO: il mandato dice <<registra soltanto: nessun codice di fisica, nessuna legge, nessuna corsa>>. ### CIO- CHE E- GIA- VERO: il vincolo <<ampiezza o coppia coniugata, e un numero che decade soltanto NON entra>> e- gia- impedito dal vocabolario chiuso dei tipi (MEMORIA-DENTRO-H); e il divieto di pavimenti/rami e- gia- in rami_vietati. ### CIO- CHE VA RIFATTO, dopo il prototipo: A16 (la forma dello stato: lo stato vive sulle ESTREMITA- D-ARCO), leggi.yaml e il generatore (la legge diventa LA MONETA, e H emerge nel limite continuo), e la mitosi (la regola delle estremita- nuove). ### E la DECISIONE sull-integratore a strati e- SUPERATA da questa. | nessun codice: la voce e- il posto, e il prototipo del piano e- il primo lavoro |
 | **`DISEGNO-3D-OSSERVATORE`** | `STANDARD` | VALUTAZIONE DEL GUARDIANO accettata da Luca il 2026-10-10: il disegno 3D e- un OSSERVATORE (legge e non scrive), e IL 3D CHE DISTORCE E- UNA MISURA. ### SI APPLICA ALL-ERA 2 COSI-: la BYTE-INERZIA e- il collaudo OBBLIGATORIO, e LA FORMA ESISTE GIA- NEL REPO (`primo_ordine/_rif.py` prova la byte-inerzia di `@rif`, 14 su 14) -- quindi non c-e- niente da inventare, c-e- da riusare. ### E la posizione SI CALCOLA dalle relazioni, solo per disegnare: la continuita- fra fotogrammi e- un TRUCCO DEL DISEGNATORE, fuori dalla fisica. ### La distorsione si misura con l-indice di G1, e le due letture (disegno fedele = indizio di 3D; deformato = altra dimensione, da confermare con la dimensione spettrale) SI FISSANO PRIMA dei numeri. | `primo_ordine/_rif.py` da- la forma della byte-inerzia; il resto e- un passo del piano |
 | **`LAMBDA-INVARIANTE-OGNI-ARCO`** | `STANDARD` | DECISIONE DI LUCA del 2026-10-10 (punto 4 delle sei): la lunghezza minima lambda e- un INVARIANTE SU OGNI ARCO, non una regola di mitosi -- nessun arco, in nessun istante, per effetto di nessuna legge o regola, sta sotto lambda. ### SI APPLICA ALL-ERA 2 CON TRE LIVELLI, e oggi UNO SOLO e- coperto: (a) la BARRIERA dentro H MAI come pavimento -- e il generatore GIA- RIFIUTA max/clip (`rami_vietati`, A14), quindi il DIVIETO e- coperto per costruzione mentre la FORMA della barriera e- una legge da DERIVARE (A1) e oggi NON esiste; (b) il CANCELLO nelle regole di nascita: le regole non esistono ancora (punto 11a), quindi NON e- coperto; (c) il controllo del grafo a ogni passo: il controllo ESISTE e FERMA (5999019), ma NON c-e- nessuna variabile di lunghezza da controllare -- `leggi.yaml` dichiara solo `psi`. ### IL CENSIMENTO DELL-ERA 1 E- CONFERMATO rifacendolo con lo strumento originale: 27 punti, 24 cancelli, 3 PAVIMENTI (`lambda_nodi`, `_smorza`, `_nasce`), 0 scritti come 2*LAM. | `primo_ordine/leggi/schema.py::rami_vietati` copre il divieto del pavimento; il resto NON e- coperto, e la voce dice quale livello manca e perche- |
@@ -152,7 +153,7 @@
 
 ---
 
-## `DA_PORTARE` — `17` metodi
+## `DA_PORTARE` — `18` metodi
 
 > ### ⚠ **SI APPLICA, E NON C-E- ANCORA**: `dove` dice **quale punto del mandato** lo porta
 
@@ -164,6 +165,7 @@
 | **`A6`** | `STANDARD` | inerzia come teorema: nessuna legge dell-era 2 la pretende ancora | nessun sito oggi |
 | **`A7b`** | `STANDARD` | uno stato non nasce indefinito: `stato.py::nuovo` azzera ESPLICITAMENTE, e ### il punto 3 del mandato lo estende alla NASCITA di un nodo | `stato.py`; `crescita.py` ancora da generare |
 | **`AUDIT-CURE`** | `FRONTE` | il censimento delle cure e del loro costo: ### IL PUNTO 10 chiede che ogni referto STAMPI il numero delle leggi, e che un commit che lo aumenta lo DICHIARI | punto 10, da fare |
+| **`CARTA-FISICA-SIMULATORE`** | `STANDARD` | NATO DA UNA DECISIONE DI LUCA. L'elenco di cio' che entra ### **IN TABELLA**: ### **`F1`..`F10` DECISO** *(entra come LEGGE)* e ### **`A1`..`A5` APERTO** *(entra come ### **POSTO DICHIARATO** col comportamento attuale)*. ### ⛔ **E IL PRESIDIO CHE LA DECISIONE PRETENDE:** il generatore ### **RIFIUTA di accendere un'alternativa di un posto aperto SENZA la sua voce di decisione** -- cioe' ### **un posto dichiarato non si accende di nascosto.** | `primo_ordine/leggi/leggi.yaml` + `leggi/schema.py`: il posto c'e', la tabella ancora NO (le `3` leggi di oggi sono tutte `prova: true`) |
 | **`H-FISICA-FUORI-LISTA`** | `PRESIDIO` | un `.py` sotto `primo_ordine/` non nella LISTA fa rifiutare il commit. ### E HA UN BUCO MISURATO: legge `FILE_FISICA` DAL DISCO mentre giudica i percorsi STAGED | `.githooks/pre-commit` + `csv/_file_fisica.py` |
 | **`H-P8`** | `PRESIDIO` | un confronto che prende il codice di prima da `HEAD` invece che dal PADRE: l-era 2 non ha ancora confronti prima/dopo | `.githooks/pre-commit` |
 | **`H-P9`** | `PRESIDIO` | uno strumento che avanza una rete fuori dall-esecutore: ### IL PUNTO 9 LO GENERALIZZA all-era 2, e ### il caso da rifiutare potrebbe essere `_collauda_passo.py`, che chiama `mezzo_implicito` direttamente | `.githooks/pre-commit`; punto 9 |

@@ -1127,6 +1127,28 @@ METODI["SCENA-3D-PRINCIPALE"] = (
     "DA_PORTARE")
 
 
+# ### ⭐ **NATI DALLA DECISIONE DI LUCA del 2026-10-12 <<basta prototipi>>**, e `P-M1`
+# ### ha chiesto subito come si applicano -- che e' il presidio che funziona.
+METODI["BANCO-CONGELATO"] = (
+    "NATO DA UNA DECISIONE DI LUCA. Il banco `proto_camminata` e' un ### **RIFERIMENTO "
+    "CONGELATO**: serve ### **solo come termine di confronto AL BIT** per il simulatore, "
+    "non ci girano piu' corse e ### **non si estende.** "
+    "### ⭐ **E NELL'ERA 2 SI APPLICA COSI':** i suoi numeri sono la base del ### "
+    "**CRITERIO DI PASSAGGIO** -- il codice generato deve riprodurre il banco ### **al "
+    "bit** *(o entro ulp dichiarati)* sulle sue scene.",
+    "`proto_camminata/` (congelato); i suoi referti sono REPERTI col loro blob in "
+    "`csv/_forma_referti.py`", "PRONTO")
+METODI["CARTA-FISICA-SIMULATORE"] = (
+    "NATO DA UNA DECISIONE DI LUCA. L'elenco di cio' che entra ### **IN TABELLA**: "
+    "### **`F1`..`F10` DECISO** *(entra come LEGGE)* e ### **`A1`..`A5` APERTO** *(entra "
+    "come ### **POSTO DICHIARATO** col comportamento attuale)*. "
+    "### ⛔ **E IL PRESIDIO CHE LA DECISIONE PRETENDE:** il generatore ### **RIFIUTA "
+    "di accendere un'alternativa di un posto aperto SENZA la sua voce di decisione** -- "
+    "cioe' ### **un posto dichiarato non si accende di nascosto.**",
+    "`primo_ordine/leggi/leggi.yaml` + `leggi/schema.py`: il posto c'e', la tabella "
+    "ancora NO (le `3` leggi di oggi sono tutte `prova: true`)", "DA_PORTARE")
+
+
 def main(argv):
     import _presidio
     _presidio.avvia(__file__)

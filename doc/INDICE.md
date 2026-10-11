@@ -9,13 +9,13 @@
 | `DOCUMENTAZIONE` | `2` | 1 |
 | `DOCUMENTAZIONE` | `ENTRAMBE` | 8 |
 | `FISICA` | `1` | 343 |
-| `FISICA` | `2` | 81 |
+| `FISICA` | `2` | 84 |
 | `FISICA` | `ENTRAMBE` | 17 |
 | `INFRASTRUTTURA` | `1` | 39 |
 | `INFRASTRUTTURA` | `2` | 16 |
 | `INFRASTRUTTURA` | `ENTRAMBE` | 24 |
 | `METODO` | `1` | 156 |
-| `METODO` | `2` | 15 |
+| `METODO` | `2` | 16 |
 | `METODO` | `ENTRAMBE` | 88 |
 
 | id | classe | dominio | era | stato | blocca | titolo |
@@ -62,6 +62,7 @@
 | `ARCH-SYNC` | CURA | INFRASTRUTTURA | 1 | ### **CHIUSA** |  | SYNC_UPDATE e i suoi rami escono dal simulatore; --sync diventa un no-op accetta |
 | `ARCHI-OLTRE-4PI` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | circa 109 archi sono oltre il tetto 4pi dal passo 2 e non rilassano, in tutti i  |
 | `ARCHI-PRIMI` | DIFETTO | INFRASTRUTTURA | 1 | ### **SOSPESA** |  | la vista disegna i PRIMI 24000 archi per indice: il 100 % finisce in un quadrant |
+| `ARCHITETTURA-ERA1-RIUSATA` | CRITERIO | METODO | 2 | ### **AGENDA** |  | si riusano gli SCHEMI dell-era 1, non le leggi: il censimento prima del codice |
 | `AUDIT-CURE` | FRONTE | METODO | ENTRAMBE | ### **APERTA** |  | per ogni legge aggiunta: compensava un difetto che ORA e' curato? Non il numero: |
 | `AUTO-MANUTENZIONE` | STANDARD | METODO | ENTRAMBE | ### **APERTA** |  | 5-bis. AUTO-MANUTENZIONE (tieni aggiornati i documenti vivi) |
 | `B1` | FRONTE | FISICA | 1 | ### **SOSPESA** |  | Z47 — pos nella fisica: l'ultimo SFONDO / doc/RAMIFICAZIONI.md Z47, doc/ASSIOMI. |
@@ -78,7 +79,9 @@
 | `B7-SHAKE` | MISURA | FISICA | 1 | ### **CHIUSA** |  | SHAKE 🟨VALE PER QUELLA SCENA ⏳[EPOCA 1 · MISURA] / shake-then-freeze — la preces |
 | `B8` | DIFETTO | INFRASTRUTTURA | 1 | ### **SOSPESA** |  | IL BLOCCO DEL RUN A 6000 AL PASSO 2700 / doc/REFERTObloccorun6000.md (131 righe) |
 | `B9` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | Z63 / Z64 — i 1455 nodi a 10⁻¹³; la catena f → x → r che non riproduce r / regis |
+| `BANCO-CONGELATO` | STANDARD | FISICA | 2 | ### **AGENDA** |  | il banco proto_camminata e- un RIFERIMENTO CONGELATO: solo confronto al bit |
 | `BARRIERA-ROTTA-NEL-COMMIT` | DIFETTO | INFRASTRUTTURA | ENTRAMBE | ### **CHIUSA** |  | il collaudo della barriera scriveva git config e falliva DENTRO un commit, 9 su  |
+| `BASTA-PROTOTIPI` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | basta prototipi: il simulatore riusa l-architettura provata dell-era 1, adattata |
 | `BLOB-DAL-DISCO-NON-DAL-REPO` | DIFETTO | INFRASTRUTTURA | ENTRAMBE | ### **APERTA** |  | il blob dichiarato di un reperto era quello del DISCO con le CRLF, non dei commi |
 | `C1` | MISURA | FISICA | 1 | ### **CHIUSA** |  | C1 VALE SEMPRE ⏳[EPOCA 1 · MISURA] / ESITO (I): nessun bug. omega = coppia/inerz |
 | `C1-PEQ-ESATTO` | CURA | FISICA | 1 | ### **CHIUSA** |  | PEQESATTO — rilassamento in forma esatta / GLOBALE §2① / 7/7 (Z95) |
@@ -121,6 +124,7 @@
 | `CARICA-PERCORSO` | FRONTE | FISICA | 1 | ### **SOSPESA** |  | l ordine in cui si chiude il filone della carica: cinque punti, e il primo si pu |
 | `CARICA-ROTAZIONE` | FRONTE | FISICA | 1 | ### **SOSPESA** |  | la carica e' il verso di rotazione collettivo: somma di /psi/^2 * phivel per mas |
 | `CARICA-SIMMETRIA-FASE` | MISURA | FISICA | 1 | ### **SOSPESA** |  | la carica e il verso di rotazione: il test dello spostamento globale, e quale fr |
+| `CARTA-FISICA-SIMULATORE` | STANDARD | FISICA | 2 | ### **AGENDA** |  | la carta della fisica del simulatore: F1-F10 deciso, A1-A5 posti dichiarati |
 | `CAUSALITA-DAI-COLLAUDI` | CRITERIO | METODO | 2 | ### **AGENDA** |  | causalita- ed energia si dimostrano coi collaudi che le MISURANO, mai con una ta |
 | `CBIS-CRITERIO-VACUO` | DIFETTO | METODO | 1 | ### **CHIUSA** |  | il criterio del braccio C-bis era vacuo: _eventi stava sempre fra le sbagliate |
 | `CELLE-NAN-APPESE-NOME-SCADUTO` | DIFETTO | INFRASTRUTTURA | 1 | ### **SOSPESA** |  | celle_nan_appese misura len_dopo - len_prima, che coincideva col veleno solo pri |

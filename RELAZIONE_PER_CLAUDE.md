@@ -13838,3 +13838,15 @@ Ogni dato di `db_era2/` ha ### **il suo TIMBRO accanto**, col campo `versione_da
 
 ### ✅ **E IL RUN NON E' STATO DISTURBATO:** vivo ### **prima** e vivo ### **dopo**, priorita' del profilatore ### **BELOW_NORMAL**, tetto `1.5` GB ### **non scattato.** ### ⚠ **Ma nel frattempo il run e' passato da `5985` a `6210` MB di privata** — ### **continua a crescere, e la crescita e' SUA.**
 
+## ⭐ **BASTA PROTOTIPI: REGISTRATO, E IL PASSO `1` ERA GIA' FATTO** *(2026-10-12)*
+
+### ⛔ **IL MANDATO SOSTITUISCE DUE MANDATI PRECEDENTI, e la cosa piu' importante da dire e' CHE COSA NON SI FA PIU':** la ### **cura di `_un_colpo`** che il mandato di poche ore prima chiedeva *(buffer preallocati, operazioni in-place)* ### **non si fa**, perche' il banco e' ### **congelato** — e la lezione della memoria diventa un ### **vincolo di progetto del simulatore**, non una modifica a un riferimento.
+
+### ✅ **E IL PASSO `1` ERA GIA' FATTO, pochi minuti prima:** il run `35776` e' fermo, e il salvataggio delle `23:57` contiene ### **tre scene**, fra cui ### **la principale alla taglia grande** *(`geometrico3d n=26000 respinti`)*. ### **Copia di sicurezza con `sha1` identico.**
+
+### 📌 **LE QUATTRO VOCI NUOVE:** `[[BASTA-PROTOTIPI]]` *(la decisione)*, `[[BANCO-CONGELATO]]` *(il banco e' un riferimento, e il legame si chiude PARZIALE)*, `[[CARTA-FISICA-SIMULATORE]]` *(`F1`..`F10` deciso, `A1`..`A5` posti dichiarati, ognuno con la sua voce)*, `[[ARCHITETTURA-ERA1-RIUSATA]]` *(il censimento degli schemi, **prima del codice**)*.
+
+### ✅ **E `P-M1` HA FATTO IL SUO LAVORO DI NUOVO:** ha rifiutato le due voci `STANDARD` perche' non dicevano ### **come si applicano all'era `2`**. Aggiunte le righe: il banco e' ### **`PRONTO`** *(i suoi numeri sono la base del criterio di passaggio)*, la carta della fisica e' ### **`DA_PORTARE`** *(il posto c'e' in `leggi.yaml`, la tabella ancora no: le `3` leggi di oggi sono tutte `prova: true`)*.
+
+### ⭐ **E UN NUMERO DALLA DIAGNOSI SU SCENA GRANDE, gia' arrivato:** a ### **`n = 26000`** anche i ### **pezzi del passo sono TUTTI FERMI** *(entro `±0.1` MB per giro)*, punto medio implicito compreso. ### **Quindi la crescita non e' nemmeno in un pezzo a taglia grande**, e resta il blocco dei due metri a dire se e' ### **frammentazione.**
+
