@@ -13469,3 +13469,41 @@ Ogni dato di `db_era2/` ha ### **il suo TIMBRO accanto**, col campo `versione_da
 ### ⚠ **E `-N`, `-D` VANNO NEL VERSO OPPOSTO, come il segno predice:** a `x0 = 1` `+N` sta **`2.16 sigma`** sopra il lineare e `-N` **`7.46 sigma`** SOTTO; `+D` **`9.11`** sopra e `-D` **`1.59`** sotto. ### ⭐ **Il segno rovescia l'effetto, e il numero lo mostra su entrambe le coppie.**
 
 ### 📌 **La corsa con la regola corretta e' in volo:** gli otto verdetti che erano nascosti diventano ### **`RESTA CONCENTRATO` o `SI DISPERDE`**, e ### **la domanda `3D` diventa rispondibile.**
+
+## ⭐ **IL LEGAME E' MISURATO: `(D)` COL SEGNO DIRETTO LEGA IN `1D`, E IN `3D` L'EFFETTO CALA CON LA TAGLIA** *(2026-10-11)*
+
+> ### ⛔ **E si scrive <<LEGA IN `1D`>>, non <<lega>>** — l'anello ha ### **`d_s = 1.001`**, e il mandato aveva ### **preregistrato** questa distinzione.
+
+### ⭐ **LA PROVA CHE DECIDE E' LA TAGLIA, come il mandato chiede**
+
+| famiglia | il caso | taglia piccola | taglia grande | che cosa fa |
+|---|---|---|---|---|
+| **anello `1D`** | `+D` a `x0 = 1` | `+18.44%` | **`+24.61%`** | ### ⭐ **CRESCE** |
+| **cubico `3D`** | `+D` a `x0 = 2` | `+24.08%` | `+8.55%` | ### ⛔ **CALA** |
+| **geometrico `3D`** | `+D` a `x0 = 1` | `+11.86%` | ### **NIENTE** | ### ⛔ **SPARISCE** |
+| **casuale** | `+N` a `x0 = 2` | `+8.94%` | `+12.44%` | ### ⭐ **CRESCE** |
+
+### ⭐ **E IL RISULTATO PIU' INFORMATIVO DI TUTTO IL MANDATO:** il geometrico `3D` ### **HA un buco nello spettro E NON LEGA** — quindi un buco e' ### **necessario ma non sufficiente.**
+
+### ⚠ **E UNA COSA CHE NON LASCIO AMBIGUA: anche il CASUALE cresce.** Le due famiglie che crescono sono ### **`1D` e l'ESPANSORE**, le due che calano sono le ### **`3D`**. ### ⛔ **Ma sull'espansore il misurando stesso e' sospetto:** il *«fondo uniforme»* su un grafo dove il volume cresce ### **esponenzialmente** con la distanza e' ### **minuscolo**, quindi il rapporto puo' crescere ### **per la geometria del denominatore.** ### **Non concludo <<lega anche nell'espansore>>: dico che il misurando non lo distingue.**
+
+### `M0` — **IL BUCO: C'E' SULL'ANELLO E SUL GEOMETRICO `3D`, NON SUL CUBICO**
+
+| la famiglia | il verdetto a `eps = 0.5` |
+|---|---|
+| anello `1D` | ### ⭐ **BUCO PRESENTE E STABILE** |
+| geometrico `3D` | ### ⭐ **BUCO PRESENTE E STABILE** |
+| cubico `3D` | ### ⛔ **NESSUN BUCO** *(solo a `eps = 0`, che e' degenere)* |
+| casuale | ### ⛔ **NESSUN BUCO** a `0.5` *(solo fino a `0.375`)* |
+
+### ⚠ **E IL MIO PRIMO VERDETTO ERA UN FALSO-UNO MIO:** collassavo gli `eps` con un ### **OR**, e tutte e quattro le famiglie dicevano *«buco presente e stabile»*. ### ⭐ **Ma il buco veniva TUTTO da `eps = 0`**, dove ### **non c'e' moneta di spin** e ### **il `43%` degli stati sta a `±1`** — un buco la' e' la ### **struttura a bande piatte di Grover**, non un gap in cui uno stato legato possa vivere. ### **Trovato leggendo i numeri, non rileggendo il codice.** ### ✅ **E la soglia che l'ha preso era scritta PRIMA** *(`s2`)*: a `eps = 0.5` la larghezza cala del ### **`71%`** con la taglia, cioe' scala come ### **la spaziatura della griglia di momenti**, e ### **una spaziatura non e' un gap.**
+
+### ⚠ **E UN SECONDO FALSO-UNO, ED E' IL ROVESCIO ESATTO DI UN MIO ERRORE PRECEDENTE**
+
+### **Dei `39` casi che la soglia dichiara <<RESTA CONCENTRATO>>, `8` hanno un effetto ### **sotto l'`1%`**, e il peggiore e' ### **`+0.016%` a `3.55 sigma`**:** il rapporto e' `1.742` contro `1.742` del lineare — ### **uguale a tre decimali.** ### ⭐ **E' SIGNIFICATIVITA' SENZA EFFETTO**, il rovescio esatto di `G2(b)` del `v4`, dove avevo un effetto del `20%` ### **senza significativita'.** ### ✅ **La cura e' la stessa in entrambi i versi: l'effetto e il `sigma` si riportano ACCANTO**, e nel referto i casi sono ordinati ### **per EFFETTO e non per `sigma`.**
+
+### ⛔ **E UN LIMITE CHE NON STA NELLA REGOLA DEL MANDATO, e lo dichiaro:** sulle scene `3D` piccole il fronte ### **RIEMPIE il grafo** *(raggio finale `5` su un diametro `6` sul cubico `L=5`; `11` su `18` a `L=12`)*. ### **La regola sul raggio INIZIALE passa, ma il confronto <<frazione entro un arco contro fondo uniforme>> e' allora dominato dalla taglia finita** — e questo ### **la regola del mandato non lo prende.**
+
+### 📌 **LE QUATTRO VOCI, e le DUE domande sono quelle che il mandato chiede:** `[[MISURA-BUCO-SPETTRO-PER-FAMIGLIA]]` · `[[MISURA-SEGNO-LEGA-IN-1D]]` · `[[DOMANDA-QUALE-SEGNO]]` *(**`CRITICA`**: il segno che lega lega solo dove quasi tutto lega)* · `[[DOMANDA-VIA-DEL-CAMPO]]` *(in `3D` nessun termine locale lega: si passa al campo?)*. ### ⛔ **Non scelgo io.**
+
+### ⚠ **E `M2` NON E' GIRATA su queste famiglie:** resta il pezzo aperto del mandato, e la sonda sul `n=120` irregolare dice che il selettore prescritto *(«il piu' localizzato»)* ### **oscilla a `O(1)`** mentre quello a ### **massima sovrapposizione** converge a `1.9e-13`.

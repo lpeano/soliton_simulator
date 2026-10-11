@@ -9,7 +9,7 @@
 | `DOCUMENTAZIONE` | `2` | 1 |
 | `DOCUMENTAZIONE` | `ENTRAMBE` | 8 |
 | `FISICA` | `1` | 343 |
-| `FISICA` | `2` | 68 |
+| `FISICA` | `2` | 72 |
 | `FISICA` | `ENTRAMBE` | 17 |
 | `INFRASTRUTTURA` | `1` | 39 |
 | `INFRASTRUTTURA` | `2` | 16 |
@@ -277,10 +277,12 @@
 | `DOMANDA-PRIMA-LEGARE-POI-MISURARE` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | senza stato legato tre letture non sono decidibili: si cerca prima un legame? |
 | `DOMANDA-QUALE-FORMA-FISSA-CS` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | quale forma del vuoto fissa cs: nessuna delle tre e- libera da tutti i difetti |
 | `DOMANDA-QUALE-SCENA-3D-PRINCIPALE` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | quale scena 3D fa da principale, se nessuna delle due provate e- isotropa? |
+| `DOMANDA-QUALE-SEGNO` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | quale segno della non linearita-, se quello che lega lega solo in 1D? |
 | `DOMANDA-QUANDO-LA-CAMMINATA-IN-TABELLA` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | quando si porta la camminata nella tabella? il porting aspetta TRE decisioni ape |
 | `DOMANDA-QUANTITA-CONSERVATA` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | esiste una moneta isotropa, causale e simmetrica fra le bande con una quantita-  |
 | `DOMANDA-REGOLE-FUORI-CLAUDE` | DECISIONE | METODO | 2 | ### **AGENDA** |  | le regole di gestione fuori da CLAUDE.md, e quelle dentro senza presidio: vanno  |
 | `DOMANDA-UNITA-DI-STATO` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | l-unita- di stato: qual e- la capacita- di un nodo? |
+| `DOMANDA-VIA-DEL-CAMPO` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | si passa alla via del campo, dato che nessuna non linearita- locale lega in 3D? |
 | `DOPPIA-COP` | CURA | FISICA | 1 | ### **SOSPESA** |  | LA CURA (b): la doppia copertura 4 pi e' un ASSIOMA e va resa STRUTTURALE, non m |
 | `DRIVER-SCENA-II` | CURA | INFRASTRUTTURA | 1 | ### **CHIUSA** |  | APERTA il 2026-09-26 (rilievo di Luca) / IL DRIVER NON SA FARE LA SCENA (ii), e  |
 | `DUE-STRUMENTI-ARCHIVIO-E` | DIFETTO | INFRASTRUTTURA | ENTRAMBE | ### **APERTA** |  | due strumenti per lo stesso mestiere: spostare gli output su E- |
@@ -454,12 +456,14 @@
 | `METADATI-REPERTO-PER-NECESSITA` | DIFETTO | INFRASTRUTTURA | ENTRAMBE | ### **APERTA** |  | metadati.jsonl ha una via di scrittura e ZERO storico: e- un REPERTO per necessi |
 | `MISURA-ANTIMATERIA-PIEGA-DIVERSO` | MISURA | FISICA | 2 | ### **AGENDA** |  | i pezzi frazionari fanno piegare il tempo in modo diverso a materia e antimateri |
 | `MISURA-ARCO-E-COINCIDENZA` | MISURA | FISICA | 2 | ### **AGENDA** |  | nei tick asincroni la frequenza dell-arco e- una COINCIDENZA, non il minimo dei  |
+| `MISURA-BUCO-SPETTRO-PER-FAMIGLIA` | MISURA | FISICA | 2 | ### **AGENDA** |  | il buco nello spettro c-e- sull-anello e sul geometrico 3D, non sul cubico |
 | `MISURA-C-ESATTA-OPPURE-LOCALITA` | MISURA | FISICA | 2 | ### **AGENDA** |  | C esatta oppure localita-, non entrambe: il conto e- il determinante del blocco |
 | `MISURA-CS-NESSUN-EFFETTO-SULLA-MATERIA` | MISURA | FISICA | 2 | ### **AGENDA** |  | a queste taglie il cs locale non produce nessun effetto misurabile sulla materia |
 | `MISURA-DUE-GRUMI-NESSUNA-INTERAZIONE` | MISURA | FISICA | 2 | ### **AGENDA** |  | due grumi non interagiscono, e il 20 per cento di G2(b) sta dentro la barra d-er |
 | `MISURA-GUSCIO-ANTIFASE` | MISURA | FISICA | 2 | ### **AGENDA** |  | il guscio in antifase c-e-, ma e- interferenza di Grover e la saturazione lo dis |
 | `MISURA-INVARIANZA-LOCALE-V4` | MISURA | FISICA | 2 | ### **AGENDA** |  | l-invarianza locale della luce: misurata SOLO a cs UNIFORME, e la- i tick asincr |
 | `MISURA-NORMA-ERA2` | MISURA | FISICA | 2 | ### **AGENDA** |  | la norma totale sum_nodi psi^dag psi: l-invariante QUADRATICO su cui si misura l |
+| `MISURA-SEGNO-LEGA-IN-1D` | MISURA | FISICA | 2 | ### **AGENDA** |  | la forma (D) col segno diretto LEGA IN 1D, e in 3D l-effetto cala con la taglia |
 | `MITOSI-2LAM-ACCESO` | DIFETTO | DOCUMENTAZIONE | 1 | ### **CHIUSA** |  | il piano dichiara MITOSI_2LAM e PLAST_DIN OFF, e il DRIVER li ACCENDE: --mitosi- |
 | `MITOSI-NON-DIVISA` | MISURA | INFRASTRUTTURA | 1 | ### **CHIUSA** |  | la mitosi NON si spezza per TIPO restando byte-identica: struttura e stato si al |
 | `MITOSI-SOGLIA-GRAD` | DIFETTO | FISICA | 1 | ### **CHIUSA** |  | la soglia di mitosi si abbassa col gradiente di tempo proprio: ampiezza 0.3 e ta |

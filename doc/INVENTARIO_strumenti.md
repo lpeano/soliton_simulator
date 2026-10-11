@@ -3227,8 +3227,8 @@ etichette rimosse, con ### **`0` persi, `0` doppi, `0` conflitti**.
 
 | | |
 |---|---|
-| **i file** | `buchi0.py` *(BLOB `ca27d6b0`)* · `segni1.py` *(BLOB `cb354193`)* · `autostati2.py` *(BLOB `d70a262a`)* · `scene3d.py` *(BLOB `010dee10`)* · `_letture_legame.py` *(BLOB `6d64620d`)* · `_collauda_legame.py` *(BLOB `0aac81df`)* |
-| **COMANDO** | `python proto_camminata/scene3d.py` · `python proto_camminata/buchi0.py` · `python proto_camminata/segni1.py` · `python proto_camminata/autostati2.py` · i bracci: `python proto_camminata/_collauda_legame.py` *(### **`22`/`22`**, `33.3` s, e per il tempo sta in `solo-CI`)* |
+| **i file** | `buchi0.py` *(BLOB `3a8b524f`)* · `segni1.py` *(BLOB `cb354193`)* · `autostati2.py` *(BLOB `d70a262a`)* · `scene3d.py` *(BLOB `010dee10`)* · `_letture_legame.py` *(BLOB `6d64620d`)* · `_collauda_legame.py` *(BLOB `7a3fedb7`)* · `_referto_legame.py` *(BLOB `a5291ad3`)* |
+| **COMANDO** | `python proto_camminata/scene3d.py` · `python proto_camminata/buchi0.py` · `python proto_camminata/segni1.py` · `python proto_camminata/autostati2.py` · i bracci: `python proto_camminata/_collauda_legame.py` *(### **`24`/`24`**, `33.3` s, e per il tempo sta in `solo-CI`)* · e il referto: `python proto_camminata/_letture_legame.py` → `python proto_camminata/_referto_legame.py` |
 | **che cosa misura** | `buchi0` i ### **buchi su TUTTO il cerchio** delle quasi-energie, con le spigole di `±1` ### **escluse e riportate a parte** · `segni1` le candidate ### **`-N` e `-D`**, accendibili e mai di default · `autostati2` l'### **iterazione autoconsistente** con `FERMO` se non converge · `scene3d` le scene ### **`3D`** *(cubico periodico e geometrico periodico con le posizioni SCARTATE)*, la ### **dimensione spettrale** e l'### **isotropia** |
 | ⭐ **IL RISULTATO CHE DECIDE COME SI LEGGE TUTTO** | le scene del banco ### **non hanno dimensione `3`**: l'anello e' ### **`d_s = 1.001` con `r² = 1.0000`** e il casuale ha `d_s` che ### **CRESCE con `n`** *(`2.36` · `3.93`)*. ### **Un verdetto sul legame su quelle due non dice niente su uno spazio a tre dimensioni** |
 | ⛔ **E NESSUNA SCENA `3D` PROVATA E' ISOTROPA** | cubico ### **`11.4%`** *(stabile con `L`)*, geometrico `3D` ### **`31.9%`** *(tre volte peggio, e non cala)* — sul misurando ### **EUCLIDEO**, che e' quello che il rilievo nomina |
@@ -3238,3 +3238,17 @@ etichette rimosse, con ### **`0` persi, `0` doppi, `0` conflitti**.
 | ✅ **E `-N` e `-D` SONO GRATIS, ed e' un conto** | `dtau → -dtau` flippa ### **entrambi** i pezzi del flusso, quindi sono hamiltoniani, esatti, reversibili e ### **rispettano `C` AL BIT** *(`0`, come `+N`)*. ### **E deviano dal lineare in modo ANTISIMMETRICO** *(residuo relativo `1.6e-06`)*: ### **il segno rovescia il flusso, misurato** |
 | ⚠ **TRE SOGLIE MIE SBAGLIATE, e sempre lo stesso errore** | una tolleranza ### **ASSOLUTA** su una grandezza la cui scala ### **non e' `1`**: la soglia delle norme del `v4`, la `C` della quota, e l'antisimmetria del segno. ### **Tutte e tre curate con una soglia RELATIVA**, e la terza volta l'ho scritto nel codice |
 | **le voci** | `[[DIMENSIONE-E-ISOTROPIA-DELLE-SCENE]]` · `[[DOMANDA-QUALE-SCENA-3D-PRINCIPALE]]` · `[[DOMANDA-CHI-CAUSA-L-ANISOTROPIA]]` · `[[COESIONE-TERMINE-O-CAMPO]]` |
+
+### `doc/REFERTO_legame.md` — **LE TRE MISURE DEL LEGAME, PER FAMIGLIA DI SCENA** *(2026-10-11)*
+
+| | |
+|---|---|
+| **il file** | `doc/REFERTO_legame.md` *(BLOB `2c0aa34c6241042a`)*, `REPERTO` dichiarato in `csv/_forma_referti.py` |
+| **COMANDO** | `python proto_camminata/_letture_legame.py` *(scrive `uscite/letture_legame.json`, ~mezz'ora)* → `python proto_camminata/_referto_legame.py` |
+| ⭐ **IL VERDETTO** | la forma `(D)` col segno diretto ### **LEGA IN `1D`** *(l'effetto **CRESCE** con la taglia: `+18.4%` a `n=120`, `+24.6%` a `n=2000`)*, e in ### **`3D` CALA o SPARISCE** *(cubico `+24.1%` a `L=8` → `+8.6%` a `L=12`; geometrico `+11.9%` a `n=512` → **NIENTE** a `n=1728`)* |
+| ⛔ **E SI SCRIVE <<LEGA IN `1D`>>, NON <<LEGA>>** | l'anello ha ### **`d_s = 1.001`**, e su un anello ### **lega quasi tutto** |
+| ⭐ **IL RISULTATO PIU' INFORMATIVO** | il geometrico `3D` ### **HA un buco nello spettro E NON LEGA**: un buco e' ### **necessario ma non sufficiente** |
+| ⚠ **DUE FALSI-UNO MIEI, trovati leggendo i numeri** | `M0`: collassavo gli `eps` con un ### **OR**, e il buco veniva ### **tutto da `eps = 0`**, dove non c'e' moneta di spin e il `43%` degli stati sta a `±1` · `M1`: ### **`8` casi su `39`** hanno un effetto ### **sotto l'`1%`**, e il peggiore e' **`+0.016%` a `3.55 sigma`** — ### **significativita' senza effetto**, il rovescio dell'errore di `G2(b)` |
+| ✅ **E LA SOGLIA CHE HA PRESO IL PRIMO ERA SCRITTA PRIMA** | `s2`: la larghezza non cala piu' del `50%`. A `eps = 0.5` cala del ### **`71%`**, cioe' scala come ### **la spaziatura della griglia di momenti** |
+| ⛔ **E UN LIMITE CHE NON STA NELLA REGOLA DEL MANDATO** | sulle scene `3D` piccole il fronte ### **RIEMPIE il grafo** *(raggio finale `5/6` sul cubico `L=5`, `11/18` su `L=12`)*: la regola sul raggio ### **INIZIALE** passa, ma il confronto frazione-contro-fondo e' ### **dominato dalla taglia finita** |
+| **le voci** | `[[MISURA-BUCO-SPETTRO-PER-FAMIGLIA]]` · `[[MISURA-SEGNO-LEGA-IN-1D]]` · `[[DOMANDA-QUALE-SEGNO]]` · `[[DOMANDA-VIA-DEL-CAMPO]]` |

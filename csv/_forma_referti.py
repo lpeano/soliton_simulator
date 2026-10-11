@@ -109,6 +109,12 @@ TESTI = (
     # ### `v3`:** nasce da ### **una CORSA** *(`python proto_camminata/_letture4.py`,
     # ### minuti)* e dice ### **che cosa si e- misurato il 2026-10-11**, non <<com-e- il
     # ### repo oggi>>.
+    # ### ⛔ **IL REFERTO DEL LEGAME E- UN `REPERTO` per le stesse ragioni degli altri:**
+    # ### nasce da ### **una CORSA** *(`python proto_camminata/_letture_legame.py`, mezz-ora)*
+    # ### e dice ### **che cosa si e- misurato il 2026-10-11.**
+    ("doc/REFERTO_legame.md", REPERTO,
+     "le tre misure del legame, per famiglia di scena, al `2026-10-11`",
+     "python proto_camminata/_referto_legame.py", "2c0aa34c6241042a"),
     ("doc/REFERTO_prototipo_camminata_v4.md", REPERTO,
      "le sei letture del prototipo `v4`, per `(F)` e per `(S)`, al `2026-10-11`",
      "python proto_camminata/_referto4.py", "db83b8dc150f866a"),

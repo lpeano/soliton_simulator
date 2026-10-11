@@ -176,8 +176,32 @@ def verdetto(per_taglia):
             "regge_con_la_taglia": bool(regge),
             "buco": c_e,
             "rapporto_larghezza": float(larg[-1] / larg[0]) if larg[0] > 0 else 0.0}
-    fuori["verdetto"] = ("NESSUN BUCO" if tutti_no
-                         else "BUCO PRESENTE E STABILE CON LA TAGLIA")
+    # ### ⛔ **IL VERDETTO E- PER `eps`, E IL MIO <<OR>> ERA UN DIFETTO:** collassando
+    # ### gli `eps` con un OR, ### **un solo `eps` degenere decideva per tutta la
+    # ### famiglia** -- e a `eps = 0` ### **il `43%` degli stati sta a `± 1`** e non
+    # ### c-e- ### **nessuna moneta di spin.** ### ⚠ **Trovato leggendo i numeri:**
+    # ### sul cubico il <<buco>> veniva ### **tutto da `eps = 0`** *(rapporto `0.643`)*,
+    # ### mentre a `eps = 0.5` e `1` le larghezze calano del ### **`71%` e `69%`** con la
+    # ### taglia, cioe- scalano come ### **la spaziatura della griglia di momenti.**
+    con = [k for k, v in fuori["per_eps"].items() if v["buco"]]
+    senza = [k for k, v in fuori["per_eps"].items() if not v["buco"]]
+    fisico = fuori["per_eps"].get("0.5", {}).get("buco")
+    fuori["eps_col_buco"] = sorted(con, key=float)
+    fuori["eps_senza_buco"] = sorted(senza, key=float)
+    fuori["buco_all_eps_della_fisica"] = bool(fisico)
+    fuori["eps_degenere"] = "0"
+    fuori["nota_eps_zero"] = ("a `eps = 0` non c-e- moneta di spin e metà degli stati "
+                              "sta a +-1: un buco la- e- la struttura a BANDE PIATTE di "
+                              "Grover, non un gap in cui uno stato legato possa vivere")
+    if fisico:
+        v = "BUCO PRESENTE E STABILE a `eps = 0.5`"
+    elif con == ["0"]:
+        v = "NESSUN BUCO ai `eps` della fisica (solo a `eps = 0`, che e- degenere)"
+    elif not con:
+        v = "NESSUN BUCO"
+    else:
+        v = "BUCO solo a `eps` = " + ", ".join(sorted(con, key=float))
+    fuori["verdetto"] = v
     fuori["taglie"] = nomi
     return fuori
 
