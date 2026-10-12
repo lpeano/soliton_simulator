@@ -13874,3 +13874,19 @@ Ogni dato di `db_era2/` ha ### **il suo TIMBRO accanto**, col campo `versione_da
 
 ### ⚠ **E DUE BLOCCHI SONO STATI SALTATI PER BUDGET, dichiarato nel `json`:** il blocco di `tracemalloc` per riga e il controllo sui trattenuti hanno girato a ### **zero giri**, perche' sono ### **gia' fatti su scena piccola** e il mandato dava mezz'ora. ### **Il campo `giri_dei_blocchi` lo dice**, invece di tacere.
 
+## ⭐ **IL CENSIMENTO E' FATTO, E LA COSA CHE NON MI ASPETTAVO: L'ERA `1` HA GIA' LA STRUTTURA COMPATTA DEI VICINI, ED E' UNA `CSR`** *(2026-10-12)*
+
+### ✅ **MI ASPETTAVO DI DOVERLA INVENTARE.** `_costruisci_struttura` fa `coo_matrix(...).tocsr()`, tiene in cache `_perm`, e la sua docstring dichiara il criterio: *<<la topologia cambia SOLO alla nascita, i pesi a ogni passo>>*. ### **Quindi il lavoro non e' inventare: e' ADATTARE.**
+
+### ✅ **E `primo_ordine` HA GIA' META' DEL PUNTO `(a)`:** `passo.py` lavora su `(ii, jj)`, `grafo.py` li ### **valida a ogni passo e una violazione FERMA**, e il generatore emette `np.add.at`. ### ⚠ **Ma la struttura compatta dei vicini NO:** `grep` su `indptr`, `csr`, `bincount` in `primo_ordine` trova ### **solo** l'`np.add.at` del generatore.
+
+### ⭐ **E UNA SCELTA CHE HO MOTIVATO CON UN CONTO, NON CON UN GUSTO:** niente matrice sparsa, ### **due array** — perche' nella camminata ### **non c'e' nessun prodotto matrice-vettore**: lo spostamento e' ### **una PERMUTAZIONE**, e una permutazione vuole ### **un array di indici.**
+
+### ⭐ **E LA CRESCITA: capacita' preallocata col RADDOPPIO**, e il conto e' questo — la ricostruzione a evento costa `O(m)` ### **a OGNI nascita**, cioe' ### **`O(m^2)` su una corsa che cresce**; il raddoppio costa `O(m)` ### **ammortizzato.** ### ⚠ **E il prezzo del raddoppio e' DICHIARATO** *(fino al doppio della memoria utile)* e sta ### **DENTRO la soglia, non accanto.**
+
+### ⛔ **LA LEZIONE PIU' IMPORTANTE DEL CENSIMENTO NON E' UNO SCHEMA: E' UN DIFETTO.** La regola `A8b` dell'era `1`: una cache riempita a un passo e letta al successivo ### **quando il grafo e' cresciuto** ha la lunghezza sbagliata, e il sistema cadeva nei ripieghi ### **nell'80 per cento dei passi** su una cache. ### ⛔ **Nel simulatore il grafo CRESCE PER MITOSI, quindi non e' un caso di bordo: e' IL CASO NORMALE** — e la cura e' che ### **ogni cache porti la TAGLIA a cui e' stata riempita.**
+
+### ⚠ **E UNO SCHEMA L'ERA `1` NON LO HA:** `checkpoint` e `ripresa` — ### **zero definizioni.** Quello schema viene ### **dal banco**, e l'ho scritto ### **dopo averci perso `2.8` ore.**
+
+### 📌 **LE QUATTRO SOGLIE DEL VINCOLO SONO FISSATE PRIMA DELLE MISURE:** la memoria della scena ### **entro `4` volte lo stato**, il rapporto fra due taglie ### **stabile entro il `20` per cento**, la memoria per tick ### **piatta a `3 sigma`**, e tutte e tre ### **TIMBRATE con la corsa.** ### ⭐ **E il numero da battere e' misurato: il banco sta a `104` volte lo stato, quindi la prima soglia chiede `26` volte meglio.**
+
