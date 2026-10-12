@@ -14295,3 +14295,75 @@ Ogni dato di `db_era2/` ha ### **il suo TIMBRO accanto**, col campo `versione_da
 ### ✅ **E `[[MOTORE-MEMORIA-M1-ROSSO]]` SI E' POTUTA CHIUDERE — la prima prova che la restrizione di `[[PI-ERA-STATO]]` serviva.** Due ore prima **non si poteva**.
 
 ### ⚠ **E `[[P-RIF]]` MI HA PRESO DUE VOLTE DI FILA:** la prima perche' l'ID della voce stava **in un commento**; la seconda perche' nel commento in cui spiegavo la sua regola ### **nominavo LUI.**
+
+---
+
+## LE DUE DECISIONI SONO REGISTRATE, E CERCANDO LA CARTA PER CITARLA HO TROVATO CHE NON ESISTE *(2026-10-12)*
+
+### ✅ **`[[D-ENERGIA]]`: la grandezza conservata del `v3` e' l'ENERGIA DEL SISTEMA**, promossa **in via provvisoria** su **una** condizione -- la riconferma col **tempo proprio locale** *(la misura `M3`)*. ### E `[[PROMOZIONE-CONSERVAZIONE-MODIFICATA]]` **e' chiusa**.
+
+### ⭐ **E LA DERIVAZIONE DELLA LOCALITA' E' SCRITTA, perche' la verifica esterna l'aveva messa in dubbio per errore.** La parte lineare si conserva **per un'IDENTITA'**, non per una misura: se `psi' = W psi`, allora `<psi'|W|psi'> = <psi|W^dag W W|psi> = <psi|W|psi>`, ### **esatta per ogni `W` unitario FISSO** -- perche' `W^dag W = I`, e nient'altro serve. ### ✅ **E la localita' viene da dove `W` agisce:** `W` tocca **un arco per tick**, quindi `E` e' **una somma di densita' locali**. ### ⛔ **Niente logaritmo dell'operatore, quindi nessuna ambiguita' di ramo.**
+
+### ⚠ **E CHE COSA L'IDENTITA' NON DICE:** **niente sulla parte `N`**. La saturazione **non e' `W`**, e la sua conservazione e' **un fatto misurato**. ### **Se con `N` la corrente locale non esiste in forma chiusa VA SCRITTO** -- ed e' il limite della promozione.
+
+### ✅ **`[[D-BILANCIO-NASCITA]]`: la nascita si paga, e chi paga e' deciso.** I **genitori** con la **tensione** dell'arco; il **vuoto locale** col suo termine, attraverso **la FASE e non la norma** *(lo scambio diretto di norma **rompe il gauge**, e **e' gia' misurato)*; ### **la materia NON paga**; e ### ⛔ **la proporzione NON si sceglie: e' quella che chiude il bilancio LOCALE di `E`.**
+
+---
+
+### ⛔ **E POI, CERCANDO LA CARTA PER CITARLA, UN DISALLINEAMENTO DELLA STESSA FAMIGLIA DEI TRE PRECEDENTI.**
+
+### ⛔ **La carta NON HA UN DOCUMENTO NEL REPO:** nessun file con *<<carta>>* nel nome, e i soli file che contengono la locuzione sono `doc/INDICE.md` *(generato)* e il confronto **che ho scritto io ieri**. I punti vivono **nei mandati**, e ### **dieci schede di legge li citano.**
+
+### ⛔ **E LE SUE ETICHETTE COLLIDONO CON ID CHE SIGNIFICANO ALTRO** -- verificato con uno script, non a occhio:
+
+| l'etichetta della carta | che cos'e' **nell'indice** |
+|---|---|
+| `F1`, `F2`, `F3` | ### **segnaposti `NON_DEFINITA`** -- *<<CITATO n volte, MAI definito>>* |
+| `F4` | ### ⛔ **un DIFETTO dell'era `1`**: *<<scritture di stato senza traccia>>* |
+| `F5` | ### ⛔ **un DIFETTO dell'era `1`**: *<<fasi col periodo sbagliato>>* |
+| `F6`, `F10` | ### **non esistono affatto** |
+| `A1`..`A5` | **STANDARD dell'era `1`**: `A1` e' *<<la legge, non il numero>>*, `A3` e' *<<niente si normalizza sul proprio insieme>>* |
+
+### ⛔ **PERCHE' NON E' UNA PEDANTERIA:** la scheda di `CAMM-GROVER-VUOTO` dice *<<il Grover sul vuoto `phi` (punto `F4`)>>*, e **`F4` letto come ID porta a un difetto dell'era `1`**. ### `[[H-INDICE]]` **lo trova e PASSA** -- cioe' ### **il presidio non protegge, perche' la voce sbagliata ESISTE.**
+
+### ⚠ **E L'HO COMMESSO IO nello stesso giro:** avevo citato **`A3`** fra gli assiomi di `[[D-ENERGIA]]` **credendo fosse il punto della carta**. ### **L'ho corretto solo perche' sono andato a guardare** -- e `H-INDICE` non avrebbe detto niente.
+
+### ⛔ **E C'E' UNA CONSEGUENZA SU `[[P-E10]]`, il presidio che ho scritto ieri:** pretende il **punto della carta** per una variabile `NUOVA`, e cerca **una `F` o una `A` con cifre**. ### **Quindi oggi ACCETTA `F4`.** ### ⭐ **Verifica LA FORMA del riferimento e non il suo BERSAGLIO, perche' il bersaglio non esiste come registro.**
+
+### 📌 **LA MIA RACCOMANDAZIONE, DUE cose, e non le faccio io:** `(a)` **la carta diventa un documento** -- oggi **il riferimento piu' citato della fisica dell'era `2` non esiste come testo**; `(b)` **le etichette prendono un namespace** *(`CARTA:F1`)*, come il repo fa per `REGISTRO_FISICA:V8`. ### ⛔ **Scrivere la carta vuol dire scrivere la FISICA, e rinominare tocca dieci schede piu' i mandati, che non si riscrivono.** Sta in `[[DOMANDA-LA-CARTA-NON-ESISTE]]`, **CRITICA**.
+
+---
+
+## LE DUE DECISIONI SONO REGISTRATE, E CERCANDO LA CARTA PER CITARLA HO TROVATO CHE NON ESISTE *(2026-10-12)*
+
+### ✅ **`[[D-ENERGIA]]`: la grandezza conservata del `v3` e' l'ENERGIA DEL SISTEMA**, promossa **in via provvisoria** su **una** condizione -- la riconferma col **tempo proprio locale** *(la misura `M3`)*. ### E `[[PROMOZIONE-CONSERVAZIONE-MODIFICATA]]` **e' chiusa**.
+
+### ⭐ **E LA DERIVAZIONE DELLA LOCALITA' E' SCRITTA, perche' la verifica esterna l'aveva messa in dubbio per errore.** La parte lineare si conserva **per un'IDENTITA'**, non per una misura: se `psi' = W psi`, allora `<psi'|W|psi'> = <psi|W^dag W W|psi> = <psi|W|psi>`, ### **esatta per ogni `W` unitario FISSO** -- perche' `W^dag W = I`, e nient'altro serve. ### ✅ **E la localita' viene da dove `W` agisce:** `W` tocca **un arco per tick**, quindi `E` e' **una somma di densita' locali**. ### ⛔ **Niente logaritmo dell'operatore, quindi nessuna ambiguita' di ramo.**
+
+### ⚠ **E CHE COSA L'IDENTITA' NON DICE:** **niente sulla parte `N`**. La saturazione **non e' `W`**, e la sua conservazione e' **un fatto misurato**. ### **Se con `N` la corrente locale non esiste in forma chiusa VA SCRITTO** -- ed e' il limite della promozione.
+
+### ✅ **`[[D-BILANCIO-NASCITA]]`: la nascita si paga, e chi paga e' deciso.** I **genitori** con la **tensione** dell'arco; il **vuoto locale** col suo termine, attraverso **la FASE e non la norma** *(lo scambio diretto di norma **rompe il gauge**, e **e' gia' misurato)*; ### **la materia NON paga**; e ### ⛔ **la proporzione NON si sceglie: e' quella che chiude il bilancio LOCALE di `E`.**
+
+---
+
+### ⛔ **E POI, CERCANDO LA CARTA PER CITARLA, UN DISALLINEAMENTO DELLA STESSA FAMIGLIA DEI TRE PRECEDENTI.**
+
+### ⛔ **La carta NON HA UN DOCUMENTO NEL REPO:** nessun file con *<<carta>>* nel nome, e i soli file che contengono la locuzione sono `doc/INDICE.md` *(generato)* e il confronto **che ho scritto io ieri**. I punti vivono **nei mandati**, e ### **dieci schede di legge li citano.**
+
+### ⛔ **E LE SUE ETICHETTE COLLIDONO CON ID CHE SIGNIFICANO ALTRO** -- verificato con uno script, non a occhio:
+
+| l'etichetta della carta | che cos'e' **nell'indice** |
+|---|---|
+| `F1`, `F2`, `F3` | ### **segnaposti `NON_DEFINITA`** -- *<<CITATO n volte, MAI definito>>* |
+| `F4` | ### ⛔ **un DIFETTO dell'era `1`**: *<<scritture di stato senza traccia>>* |
+| `F5` | ### ⛔ **un DIFETTO dell'era `1`**: *<<fasi col periodo sbagliato>>* |
+| `F6`, `F10` | ### **non esistono affatto** |
+| `A1`..`A5` | **STANDARD dell'era `1`**: `A1` e' *<<la legge, non il numero>>*, `A3` e' *<<niente si normalizza sul proprio insieme>>* |
+
+### ⛔ **PERCHE' NON E' UNA PEDANTERIA:** la scheda di `CAMM-GROVER-VUOTO` dice *<<il Grover sul vuoto `phi` (punto `F4`)>>*, e **`F4` letto come ID porta a un difetto dell'era `1`**. ### `[[H-INDICE]]` **lo trova e PASSA** -- cioe' ### **il presidio non protegge, perche' la voce sbagliata ESISTE.**
+
+### ⚠ **E L'HO COMMESSO IO nello stesso giro:** avevo citato **`A3`** fra gli assiomi di `[[D-ENERGIA]]` **credendo fosse il punto della carta**. ### **L'ho corretto solo perche' sono andato a guardare** -- e `H-INDICE` non avrebbe detto niente.
+
+### ⛔ **E C'E' UNA CONSEGUENZA SU `[[P-E10]]`, il presidio che ho scritto ieri:** pretende il **punto della carta** per una variabile `NUOVA`, e cerca **una `F` o una `A` con cifre**. ### **Quindi oggi ACCETTA `F4`.** ### ⭐ **Verifica LA FORMA del riferimento e non il suo BERSAGLIO, perche' il bersaglio non esiste come registro.**
+
+### 📌 **LA MIA RACCOMANDAZIONE, DUE cose, e non le faccio io:** `(a)` **la carta diventa un documento** -- oggi **il riferimento piu' citato della fisica dell'era `2` non esiste come testo**; `(b)` **le etichette prendono un namespace** *(`CARTA:F1`)*, come il repo fa per `REGISTRO_FISICA:V8`. ### ⛔ **Scrivere la carta vuol dire scrivere la FISICA, e rinominare tocca dieci schede piu' i mandati, che non si riscrivono.** Sta in `[[DOMANDA-LA-CARTA-NON-ESISTE]]`, **CRITICA**.

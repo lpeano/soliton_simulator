@@ -7,10 +7,10 @@
 | `DA_CLASSIFICARE` | `DA_CLASSIFICARE` | 187 |
 | `DOCUMENTAZIONE` | `1` | 11 |
 | `DOCUMENTAZIONE` | `2` | 1 |
-| `DOCUMENTAZIONE` | `ENTRAMBE` | 8 |
+| `DOCUMENTAZIONE` | `ENTRAMBE` | 9 |
 | `FISICA` | `1` | 343 |
 | `FISICA` | `2` | 91 |
-| `FISICA` | `ENTRAMBE` | 17 |
+| `FISICA` | `ENTRAMBE` | 19 |
 | `INFRASTRUTTURA` | `1` | 39 |
 | `INFRASTRUTTURA` | `2` | 20 |
 | `INFRASTRUTTURA` | `ENTRAMBE` | 24 |
@@ -211,7 +211,9 @@
 | `CURA2-CORTO` | MISURA | FISICA | 1 | ### **CHIUSA** |  | APERTO CURA2-CORTO |
 | `CURA2-STRUTTURALE` | CURA | INFRASTRUTTURA | 1 | ### **CHIUSA** |  | la CURA 2 diventa STRUTTURALE: i rami `else` di TEMPO_UNICO_MITOSI escono dal si |
 | `D-AGGIORNA-COMMIT-FALSO` | DIFETTO | METODO | ENTRAMBE | ### **APERTA** |  | il flag --commit di aggiorna era falso per costruzione: la riga finisce in un co |
+| `D-BILANCIO-NASCITA` | DECISIONE | FISICA | ENTRAMBE | ### **APERTA** |  | la nascita si paga: i genitori con la tensione, il vuoto col suo termine |
 | `D-CREA-LOTTO-ROTTA` | DIFETTO | METODO | ENTRAMBE | ### **CHIUSA** |  | crea-lotto non poteva far nascere NESSUNA voce: il modello non copriva i tre cam |
+| `D-ENERGIA` | DECISIONE | FISICA | ENTRAMBE | ### **APERTA** |  | l energia del sistema e la grandezza conservata del v3, promossa in via provviso |
 | `D-ERA2-NON-SI-CHIUDE` | DIFETTO | METODO | ENTRAMBE | ### **CHIUSA** |  | due presidi insieme vietano di registrare una domanda dell era 2 come decisa |
 | `D0` | MISURA | FISICA | 1 | ### **CHIUSA** |  | CHI FA SCAPPARE d0 / 21/9 / MISURATO: e' IL FRENO. Gli scrittori spingono giu' - |
 | `D01` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | S09 clippa al passo causale — quindi e' gia' una LUNGHEZZA — e poi moltiplica pe |
@@ -283,6 +285,7 @@
 | `DOMANDA-GRANDEZZA-LOCALE-TEMPO` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | da dove viene la grandezza locale da cui escono r_k e cs_k? |
 | `DOMANDA-GUSCIO-E-INTERFERENZA` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | il guscio e- interferenza e non materia: che cosa resta dell-ipotesi del guscio? |
 | `DOMANDA-IL-V4-ENTRA-NELL-ERA-2` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | cinque gruppi di operatori del v4 sono nel banco e non in tabella |
+| `DOMANDA-LA-CARTA-NON-ESISTE` | DECISIONE | DOCUMENTAZIONE | ENTRAMBE | ### **APERTA** |  | la carta della fisica non ha un documento, e le sue etichette collidono con ID v |
 | `DOMANDA-LAMBDA-GRANDEZZA` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | lambda: su quale grandezza si misura, e da dove viene il suo valore? |
 | `DOMANDA-MASSA-E-FORME-MANCANTI` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | il termine di massa e due forme del flusso sono nel banco e non in tabella |
 | `DOMANDA-PASSO-FRAZIONARIO-O-ASINCRONO` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | pezzi frazionari o tick asincroni, e l-invarianza locale dei secondi NON e- dimo |
@@ -611,7 +614,7 @@
 | `PRESTAZIONI-CORSE` | FRONTE | INFRASTRUTTURA | ENTRAMBE | ### **APERTA** |  | le corse costano: sei strade per il tempo di calcolo, da affrontare a modello ST |
 | `PRIMA-LO-SPAZIO-POI-LA-MATERIA` | TEORIA | FISICA | 2 | ### **AGENDA** |  | prima lo spazio, poi la materia, in modo causale: la materia ci arriva camminand |
 | `PROBLEMI-CHK3` | FRONTE | FISICA | 1 | ### **SOSPESA** |  | IL PIANO DEI PROBLEMI APERTI — per ciascuno: la domanda da chiudere · la misura  |
-| `PROMOZIONE-CONSERVAZIONE-MODIFICATA` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | la conservazione modificata si conserva: si promuove a energia? |
+| `PROMOZIONE-CONSERVAZIONE-MODIFICATA` | DECISIONE | FISICA | 2 | ### **CHIUSA** |  | la conservazione modificata si conserva: si promuove a energia? |
 | `PROPOSTA-FASE-DISPARI-COESIONE` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | la fase DISPARI sotto coniugazione di carica come forma della coesione |
 | `PROPOSTA-SCANSIONE-FORZA-NONLINEARE` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | la coerenza del cluster migliora con la forza: si estende la scansione? |
 | `PROVA-COMB` | FRONTE | FISICA | 1 | ### **SOSPESA** |  | LA PROVA COMBINATA: TUTTE LE CURE APPROVATE ACCESE INSIEME — 600 passi, stesso s |

@@ -22,17 +22,18 @@
 |---|---|---|
 | **[[DOMANDA-D13-CONIUGATI]]** D13: i coniugati delle memorie -- tw come fase U(1) sull-arco? | ### ⏳ aspetta | ### **aspetta:** `DOMANDA-D9-GEOMETRIA` |
 | **[[DOMANDA-D9-GEOMETRIA]]** D9: la geometria viene da d e p_d dentro H, o dalle relazioni fra gli ps | ### ⏳ aspetta | ### **aspetta:** `DOMANDA-QUANTITA-CONSERVATA` |
+| **[[DOMANDA-LA-CARTA-NON-ESISTE]]** la carta della fisica non ha un documento, e le sue etichette collidono  | ### ✅ **PRONTA** | ### **niente** |
 | **[[DOMANDA-PASSO-FRAZIONARIO-O-ASINCRONO]]** pezzi frazionari o tick asincroni, e l-invarianza locale dei secondi NON | ### ✅ **PRONTA** | ### **niente** |
 | **[[DOMANDA-QUANTITA-CONSERVATA]]** esiste una moneta isotropa, causale e simmetrica fra le bande con una qu | ### ✅ **PRONTA** | ### **niente** |
-| **[[MOTORE-MEMORIA-M1-ROSSO]]** m1 fallisce a 5.00x contro 4x, e la soglia era derivata da un conto senz | ### ✅ **PRONTA** | ### **niente** |
 | **[[SCENA-3D-PRINCIPALE]]** la (ii) e- il BANCO DI MISURA: punti che si respingono, gradi 2-6 | ### ✅ **PRONTA** | ### **niente** |
 
-### `DIPENDENTE` — **16**
+### `DIPENDENTE` — **17**
 
 | la domanda | pronta? | che cosa aspetta |
 |---|---|---|
 | **[[DOMANDA-CHI-CAUSA-L-ANISOTROPIA]]** sul cubico i versori del v3 RIDUCONO l-anisotropia direzionale: e- una l | ### ✅ **PRONTA** | ### **niente** |
 | **[[DOMANDA-COME-LA-MATERIA-CAMBIA-LAMBDA]]** come la materia cambia la densita- del vuoto: scattering nel nodo o tras | ### ⏳ aspetta | ### **aspetta:** `DOMANDA-PASSO-FRAZIONARIO-O-ASINCRONO` |
+| **[[DOMANDA-ESTREMITA-NUOVE-INIZIALI]]** con che psi e che phi nascono le estremita di un arco nuovo | ### ✅ **PRONTA** | ### **niente** |
 | **[[DOMANDA-FORME-VUOTO]]** le TRE forme del vuoto locale: che cos-e- un grado, quanti per nodo, l-a | ### ⏳ aspetta | ### **aspetta:** `DOMANDA-QUANTITA-CONSERVATA` |
 | **[[DOMANDA-FUSIONE]]** la FUSIONE di due nodi: si vieta, e con che cosa? | ### ✅ **PRONTA** | ### **niente** |
 | **[[DOMANDA-GRAFO-INIZIALE]]** il grafo iniziale SENZA pos: reticolo, k-regolare, espansore? | ### ✅ **PRONTA** | ### **niente** |
@@ -48,11 +49,10 @@
 | **[[DOMANDA-QUANDO-LA-CAMMINATA-IN-TABELLA]]** quando si porta la camminata nella tabella? il porting aspetta TRE decis | ### ⏳ aspetta | ### **aspetta:** `DOMANDA-PASSO-FRAZIONARIO-O-ASINCRONO`, `DOMANDA-COME-LA-MATERIA-CAMBIA-LAMBDA`, `DOMANDA-QUALE-FORMA-FISSA-CS` |
 | **[[DOMANDA-UNITA-DI-STATO]]** l-unita- di stato: qual e- la capacita- di un nodo? | ### ⏳ aspetta | ### **aspetta:** `DOMANDA-D9-GEOMETRIA` |
 
-### `MINORE` — **5**
+### `MINORE` — **4**
 
 | la domanda | pronta? | che cosa aspetta |
 |---|---|---|
-| **[[D-ERA2-NON-SI-CHIUDE]]** due presidi insieme vietano di registrare una domanda dell era 2 come de | ### ✅ **PRONTA** | ### **niente** |
 | **[[DOMANDA-A3B-CLASSE]]** A3b: con che classe entra nell-indice? | ### ✅ **PRONTA** | ### **niente** |
 | **[[DOMANDA-DOVE-STA-LA-C-IN-TABELLA]]** la C e decisa al punto F3 e nessuna legge della tabella la dichiara | ### ✅ **PRONTA** | ### **niente** |
 | **[[DOMANDA-REGOLE-FUORI-CLAUDE]]** le regole di gestione fuori da CLAUDE.md, e quelle dentro senza presidio | ### ✅ **PRONTA** | ### **niente** |
@@ -95,7 +95,7 @@
 | `DOMANDA-QUALE-SEGNO` | `DECISIONE`/`FISICA`/`2`/`AGENDA` | il segno che lega in 1D in 3D e- PEGGIO del lineare, e il segno va scelto sulla misura CON LA U DINAMICA ACCESA | quale segno della non linearita-, se quello che lega lega solo in 1D? ### DOMANDA APERTA PER LUCA, da decidere da Luca. E- una delle due domande che i |
 | `DOMANDA-QUANDO-LA-CAMMINATA-IN-TABELLA` | `DECISIONE`/`FISICA`/`2`/`AGENDA` | quando si porta la camminata nella tabella, e il porting aspetta le tre scelte del v4 | quando si porta la camminata nella tabella? il porting aspetta TRE decisioni aperte ### DOMANDA APERTA PER LUCA, da decidere da Luca. ### E- il punto  |
 | `DUE-STRUMENTI-ARCHIVIO-E` | `DIFETTO`/`INFRASTRUTTURA`/`ENTRAMBE`/`APERTA` | quale dei due strumenti resta, e un solo registro degli archiviati | due strumenti per lo stesso mestiere: spostare gli output su E- ### DOMANDA APERTA PER LUCA, da decidere da Luca: QUALE DEI DUE RESTA. ### IL FATTO: ` |
-| `PROMOZIONE-CONSERVAZIONE-MODIFICATA` | `DECISIONE`/`FISICA`/`2`/`AGENDA` | la conservazione modificata si conserva; promuoverla a energia e- una sua decisione | la conservazione modificata si conserva: si promuove a energia? ### DOMANDA APERTA PER LUCA, da decidere da Luca. ### IL FATTO MISURATO (referto doc/R |
+| `PROMOZIONE-CONSERVAZIONE-MODIFICATA` | `DECISIONE`/`FISICA`/`2`/`CHIUSA` | la conservazione modificata si conserva; promuoverla a energia e- una sua decisione | la conservazione modificata si conserva: si promuove a energia? ### DOMANDA APERTA PER LUCA, da decidere da Luca. ### IL FATTO MISURATO (referto doc/R |
 | `PROPOSTA-FASE-DISPARI-COESIONE` | `DECISIONE`/`FISICA`/`2`/`AGENDA` | la fase dispari sotto C e- ammissibile al bit; la sua forza g resta da derivare | la fase DISPARI sotto coniugazione di carica come forma della coesione ### DOMANDA APERTA PER LUCA, da decidere da Luca. ### IL FATTO MISURATO (refert |
 | `PROPOSTA-SCANSIONE-FORZA-NONLINEARE` | `DECISIONE`/`FISICA`/`2`/`AGENDA` | estendere la scansione della forza, oppure derivarla prima | la coerenza del cluster migliora con la forza: si estende la scansione? ### DOMANDA APERTA PER LUCA, da decidere da Luca. ### IL FATTO MISURATO (refer |
 | `PROVV-U-FISSE-TRE-SCENE` | `DECISIONE`/`FISICA`/`2`/`AGENDA` | le U sono fisse in tre scene; le dinamiche sono D13 | le matrici d-arco sono FISSE, in tre scene dichiarate: provvisorio ### SCELTA PROVVISORIA DICHIARATA (punto 2b del mandato del v2), da decidere da Luc |
