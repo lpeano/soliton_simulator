@@ -110,6 +110,11 @@ FILE_FISICA = (
     # ### posto, ### **le cache che portano la loro taglia**, e i cinque pezzi
     # ### unitari. ### ⛔ **E LA REGOLA DEL TICK: `cresci()` AL PIU- UNA VOLTA**,
     # ### perche- la ricostruzione dei derivati costa `O(m log m)` ### **a chiamata.**
+    # ### LE QUATTRO FUNZIONI DEL GENERATORE DELLA SATURAZIONE, uscite da
+    # ### `motore.py` quando quello ha superato il tetto delle `700` righe:
+    # ### ### **oltre, SI DIVIDE, NON SI ALLUNGA.** ### ⛔ **E il limite
+    # ### `Lambda -> 0` NON e- un pavimento: e- il valore che la funzione PRENDE.**
+    'primo_ordine/saturazione.py',
     'primo_ordine/motore.py',
     'primo_ordine/_collauda_motore.py',
     # ### IL CHECKPOINT *(sotto-pezzo `5c`)*: salva e riprende ### **stato, grafo,
@@ -130,6 +135,10 @@ FILE_FISICA = (
     # ### file sta qui ### **rosso**: un fallimento che nessuno fa girare
     # ### ### **e- un fallimento che si dimentica.**
     'primo_ordine/_collauda_memoria.py',
+    # ### IL COLLAUDO DEL FLUSSO DI SATURAZIONE *(`P1`)*: il suo inverso lo
+    # ### ### **ANNULLA AL BIT**, e la CAUSA e- provata direttamente -- il flusso
+    # ### ### **conserva `h` e `Lambda`**, cioe- i suoi propri coefficienti.
+    'primo_ordine/_collauda_saturazione.py',
     # ### IL COSTRUTTO `@rif` *(punto `14`)*: ### **byte-inerte**, e il suo
     # ### collaudo lo verifica ### **con `is`.**
     'primo_ordine/_rif.py',

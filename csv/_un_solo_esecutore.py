@@ -108,6 +108,16 @@ ECCEZIONI = {
 FORMA_PASSO = "-1j"
 
 SCRITTI_A_MANO = {
+    "primo_ordine/motore.py::_saturazione":
+        "NON integra: APPLICA IL FLUSSO ESATTO. La saturazione e- `N = Lambda G(h/Lambda)`"
+        " e il suo flusso per un tempo `dtau` e- ### **una rotazione attorno a `n` piu- una"
+        " FASE su `phi`**, e nient-altro -- niente integratore, niente passo interno,"
+        " niente troncamento. ### Quindi quel `-1j` e- ### **la forma chiusa della fase**,"
+        " non un passo a mano. ### E IL COLLAUDO LO PROVA, e nei DUE versi: il suo INVERSO"
+        " lo ANNULLA al bit (`0.7` ulp) -- ### **un integratore NON passerebbe** -- e la"
+        " CAUSA e- provata direttamente, perche- il flusso ### **CONSERVA `h` e `Lambda`**,"
+        " cioe- i suoi propri coefficienti: la rotazione attorno a `n` conserva `s.n` e la"
+        " fase conserva `|phi|^2`",
     "primo_ordine/motore.py::_ruota_attorno_a_n":
         "NON integra: APPLICA UNA FORMA ESATTA. `exp(-i a sigma.n) = cos a I - i "
         "sin a (sigma.n)` vale ESATTAMENTE perche- `(sigma.n)^2 = I` quando"

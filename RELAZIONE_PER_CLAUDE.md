@@ -14367,3 +14367,25 @@ Ogni dato di `db_era2/` ha ### **il suo TIMBRO accanto**, col campo `versione_da
 ### ⛔ **E C'E' UNA CONSEGUENZA SU `[[P-E10]]`, il presidio che ho scritto ieri:** pretende il **punto della carta** per una variabile `NUOVA`, e cerca **una `F` o una `A` con cifre**. ### **Quindi oggi ACCETTA `F4`.** ### ⭐ **Verifica LA FORMA del riferimento e non il suo BERSAGLIO, perche' il bersaglio non esiste come registro.**
 
 ### 📌 **LA MIA RACCOMANDAZIONE, DUE cose, e non le faccio io:** `(a)` **la carta diventa un documento** -- oggi **il riferimento piu' citato della fisica dell'era `2` non esiste come testo**; `(b)` **le etichette prendono un namespace** *(`CARTA:F1`)*, come il repo fa per `REGISTRO_FISICA:V8`. ### ⛔ **Scrivere la carta vuol dire scrivere la FISICA, e rinominare tocca dieci schede piu' i mandati, che non si riscrivono.** Sta in `[[DOMANDA-LA-CARTA-NON-ESISTE]]`, **CRITICA**.
+
+---
+
+## `P1`: IL FLUSSO DI SATURAZIONE, E UNA MISURA MI HA CORRETTO SU UN FATTO FISICO *(2026-10-12)*
+
+### ✅ **ERA BLOCCATO SOLO DAL TIPO DI `phi`**, e Luca lo ha deciso complesso. ### La parte su `phi` **gli da' una FASE** -- `phi -> phi exp(-i beta dtau)` -- e ### **su un reale non esisterebbe.**
+
+### ⭐ **IL BRACCIO CHE CONTA: il suo INVERSO lo ANNULLA al bit.** `frazione = +f` poi `-f` riporta lo stato entro **`0.7` ulp** su `psi` e **`2.3e-16`** su `phi`. ### ⛔ **Un INTEGRATORE non passerebbe questo braccio**, ed e' il modo di provare che qui **non c'e' troncamento**.
+
+### ⚠ **E UNA MISURA MI HA CORRETTO SU UN FATTO FISICO, non su un numero.** Avevo scritto nel collaudo che **due meta' NON fanno l'intero al bit**, perche' *«fra le due meta' lo stato e' cambiato, quindi `h` e `Lambda` sono ricalcolati»*. ### **La misura dice `0.8` ulp: AL BIT.**
+
+### ✅ **E IL MOTIVO E' PIU' FORTE DEL MIO SOSPETTO: il flusso CONSERVA I PROPRI COEFFICIENTI.** La rotazione attorno a `n` conserva **`s . n`** *(e' la componente lungo l'asse di rotazione)*, e la fase su `phi` conserva **`|phi|^2`**. ### **Quindi `h` e `Lambda` non cambiano, e l'angolo della seconda meta' E' quello della prima.** ### ⭐ **Cioe' il flusso non e' <<esatto a stato fisso>>: E' ESATTO.** E la causa e' **provata direttamente** da un braccio, non dedotta: `|dh|` **`3.6e-15`** *(`1.9` ulp)*, `|dLambda|` **`8.9e-16`**.
+
+### ⛔ **E LA NORMA SI CONSERVA SU ENTRAMBI, con scarto `0.000e+00` ESATTO:** su `psi` perche' e' **una rotazione**, su `phi` perche' e' ### **una FASE e non un trasferimento** -- e **lo scambio diretto di norma romperebbe il gauge, ed e' GIA' misurato**. ### **E' il punto `(2)` di `[[D-BILANCIO-NASCITA]]`, verificato nel codice.**
+
+### ⭐ **IL LIMITE `Lambda -> 0` NON E' UN PAVIMENTO**, e il collaudo lo verifica **contro il limite calcolato a mano** piu' **il verso opposto** *(con `Lambda > 0` il limite **non** si usa, `G'(2) = 0.8`)*. ### ⛔ **Un pavimento violerebbe l'assioma che vieta una cura dove non c'e' un errore; un limite E' la funzione.**
+
+### ⚠ **E UN BRACCIO MIO ERA SBAGLIATO, e il collaudo me l'ha detto:** pretendevo che il flusso **alzasse fuori da un tick**. ### **Non alza, e NON DEVE:** il tick conta **le CRESCITE**, e nessuno dei sei pezzi lo chiede -- **solo `cresci()`**. ### ⛔ **Un braccio che pretende una cosa che il codice non promette non prova niente: prova solo che non avevo letto.** L'ho sostituito col `dtau` della taglia sbagliata.
+
+### ⛔ **E UN MODULO NUOVO, non per gusto:** `motore.py` ha superato **il tetto di `700` righe** quando il flusso e' entrato, e la regola dice **oltre, SI DIVIDE, NON SI ALLUNGA**. ### ✅ **E il taglio e' quello giusto:** in `saturazione.py` **le funzioni del GENERATORE** *(la forma della legge, che vive in tabella)*, in `motore.py` **il motore che le applica**. ### **E sono PURE: il collaudo le prova sui NUMERI, senza costruire un motore.**
+
+### 📌 **E la suite e' tutta verde: `48` su `48`**, `pre-commit` **`135.5` s su `500`** *(`27%`)*. ### ⚠ **E `[[P-ES1]]` mi ha chiesto di dichiarare anche questo passo scritto a mano**, come per la moneta: **non integra, applica il flusso ESATTO** -- e il collaudo lo prova **nei due versi**.

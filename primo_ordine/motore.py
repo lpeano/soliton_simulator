@@ -57,6 +57,7 @@ if _QUI not in sys.path:
     sys.path.insert(0, _QUI)
 
 import incidenza as IN                                        # noqa: E402
+import saturazione as SAT                                     # noqa: E402
 
 # ### ⚠ **I MODI DI SOMMARE, a vocabolario CHIUSO.** Un terzo modo si aggiunge qui, e
 # ### ### **chi passa una stringa fuori elenco ALZA** invece di prendere un default.
@@ -67,6 +68,17 @@ SOMMATORIE = ("numpy", "esatta")
 # ### quello e- lo stato normale finche- l-operatore non e- scritto.
 OPERATORI = ("moneta_spin", "grover", "spostamento_trasporto",
              "grover_scalare", "spostamento_scalare")
+
+# ### ⛔ **I FLUSSI SI CERCANO PER `id` DI LEGGE, non per nome di operatore**, e
+# ### non e- una mia scelta: il legame generato per un `flusso` fa `quale = ID`, mentre
+# ### quello di un `pezzo_unitario` fa `quale = OPERATORE`. ### **Il motivo e- che un
+# ### flusso NON ha un operatore in tabella: ha un GENERATORE**, e il generatore e- scritto
+# ### nella sua riga.
+FLUSSI = ("CAMM-SATURAZIONE",)
+
+# ### ⛔ **E LE FUNZIONI DELLA SATURAZIONE STANNO IN `saturazione.py`**, perche-
+# ### questo file ha superato ### **il tetto di `700` righe** quando il flusso e- entrato:
+# ### la regola dice ### **oltre, SI DIVIDE, NON SI ALLUNGA.**
 
 
 def _versori_validi(n):
@@ -147,7 +159,7 @@ class Motore(object):
         # ### buffer e- stato ### **allocato** *(cioe- quante volte la taglia e-
         # ### cambiata)*, e quante volte ogni operatore e- stato applicato.
         self.ripieghi = 0
-        self.applicazioni = dict((o, 0) for o in OPERATORI)
+        self.applicazioni = dict((o, 0) for o in OPERATORI + FLUSSI)
         # ### ⛔ **IL CONTATORE DELLE CRESCITE DEL TICK, e il suo TETTO e- `1`.**
         # ### ⚠ **Comincia a `-1` e non a `0`**, e la differenza conta: `-1` vuol
         # ### dire ### **nessun tick aperto**, e crescere fuori da un tick e-
@@ -161,6 +173,9 @@ class Motore(object):
             "spostamento_trasporto": self._spostamento_trasporto,
             "grover_scalare": self._grover_scalare,
             "spostamento_scalare": self._spostamento_scalare,
+            # ### ✅ **IL FLUSSO, per `id` di legge e non per nome di
+            # ### operatore**: il legame generato di un `flusso` cerca ### **l-`ID`.**
+            "CAMM-SATURAZIONE": self._saturazione,
         }
 
     # ------------------------------------------------------------------ le porte del tick
@@ -478,6 +493,81 @@ class Motore(object):
         np.einsum("aji,aj->ai", np.conj(U), v[:, 1, :], out=v[:, 0, :])
         np.einsum("aij,aj->ai", U, t0, out=v[:, 1, :])
         self.applicazioni["spostamento_trasporto"] += 1
+        return st
+
+    def elicita(self, st):
+        """### `h_k`: l'elicita' ### **sommata sulle estremita' del nodo.**
+
+        ### ⭐ **E' `s_h . n_h`**, cioe' ### **lo spin proiettato sulla
+        direzione** -- ed e' qui che la geometria entra nella saturazione.
+        ### ⚠ **`s_h = psi^dag sigma psi` sono TRE NUMERI REALI**, e si scrivono
+        a mano per non costruire tre matrici per estremita'.
+        """
+        psi = st["psi_h"]
+        a, c = psi[:, 0], psi[:, 1]
+        nn = self.geo.n
+        ac = np.conj(a) * c
+        # ### `s . n` in una riga: ### **niente array (2m, 3) costruito** -- e- la somma
+        # ### ### **mentre si calcola**, quindi un buffer in meno.
+        sn = self._b("sn", (psi.shape[0],), float)
+        np.multiply(2.0 * np.real(ac), nn[:, 0], out=sn)
+        sn += 2.0 * np.imag(ac) * nn[:, 1]
+        sn += (np.abs(a) ** 2 - np.abs(c) ** 2) * nn[:, 2]
+        h = st["h_int"]
+        h.fill(0)
+        np.add.at(h, self.inc.nodo, sn)
+        return h
+
+    def densita_vuoto(self, st):
+        """### `Lambda_k`: la densita' del vuoto del nodo, ### **somma di `|phi|^2`.**
+
+        ### ⛔ **E' LA SCALA RISPETTO A CUI LA SATURAZIONE SI MISURA**, ed e'
+        per questo che ### **non serve nessuna costante**: la scala e' **RELAZIONALE**,
+        cioe' presa dal sistema e non messa a mano.
+        ### ⭐ **E il modulo quadro ha senso come enunciato solo perche' `phi` e'
+        COMPLESSO** -- di un reale sarebbe il quadrato.
+        """
+        phi = st["phi_h"]
+        lam = st["Lambda"]
+        lam.fill(0)
+        np.add.at(lam, self.inc.nodo, np.abs(phi) ** 2)
+        return lam
+
+    def _saturazione(self, st, parametri, frazione):
+        """### **IL FLUSSO ESATTO di `N` per un tempo `frazione * dtau`.**
+
+        ### ✅ **Una rotazione e una fase, e nient'altro:** niente integratore,
+        niente passo interno, ### **niente troncamento** -- e il suo inverso e'
+        `frazione -> -frazione`.
+
+        ### ⛔ **E QUESTO E' UN FLUSSO, quindi PRENDE la frazione**, al contrario
+        dei cinque pezzi unitari: `exp(-i a) exp(-i b) = exp(-i(a+b))`, quindi
+        ### **due mezzi fanno l'intero** -- e la composizione di Strang lo usa
+        ### **due volte a meta' passo.**
+
+        ### ⚠ **E LA PARTE SU `phi` E' LA RAGIONE PER CUI `phi` DEVE ESSERE
+        COMPLESSO:** `phi -> phi exp(-i beta dtau)` ### **da' una FASE a `phi`**, e su un
+        reale ### **non esisterebbe.** *(Era la domanda che Luca ha deciso il
+        `2026-10-12`.)*
+        """
+        h = self.elicita(st)
+        lam = self.densita_vuoto(st)
+        al, be = SAT.pezzi(h, lam)
+        nodo = self.inc.nodo
+        f = float(frazione)
+        # ### l-angolo e la fase ### **per ESTREMITA-**, prese dal loro nodo
+        ang = self._b("sat_ang", (st["psi_h"].shape[0],), float)
+        np.take(al * self.dtau * f, nodo, out=ang)
+        self._ruota_attorno_a_n(st["psi_h"], ang)
+        fas = self._b("sat_fas", (st["phi_h"].shape[0],), float)
+        np.take(be * self.dtau * f, nodo, out=fas)
+        # ### ⛔ **e la fase su `phi` si applica IN POSTO:** `exp(-i fas)` si
+        # ### costruisce in un buffer complesso, e ### **non si alloca.**
+        ef = self._b("sat_ef", fas.shape, st["phi_h"].dtype)
+        np.multiply(fas, -1j, out=ef)
+        np.exp(ef, out=ef)
+        np.multiply(st["phi_h"], ef, out=st["phi_h"])
+        self.applicazioni["CAMM-SATURAZIONE"] += 1
         return st
 
     def _spostamento_scalare(self, st, parametri, frazione):

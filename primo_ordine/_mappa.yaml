@@ -86,9 +86,13 @@ moduli:
     responsabilita: il collaudo della struttura compatta, e i sette casi che devono fallire
     importa: [_presidio, incidenza]
 
+  - nome: saturazione.py
+    responsabilita: le quattro funzioni del generatore della saturazione, e il LIMITE
+    importa: []
+
   - nome: motore.py
-    responsabilita: il doppio contenitore, i cinque pezzi unitari, e la regola del tick
-    importa: [_presidio, incidenza, stato]
+    responsabilita: il doppio contenitore, i pezzi unitari, il flusso, e la regola del tick
+    importa: [_presidio, incidenza, saturazione, stato]
 
   - nome: _collauda_motore.py
     responsabilita: il collaudo del motore -- zero allocazioni, unitarieta-, regola del tick
@@ -109,6 +113,10 @@ moduli:
   - nome: _collauda_confronto.py
     responsabilita: il confronto tabella/banco ESEGUIBILE, e i cinque casi che falliscono
     importa: [_presidio]
+
+  - nome: _collauda_saturazione.py
+    responsabilita: il collaudo del flusso di saturazione, e la causa della sua esattezza
+    importa: [_presidio, incidenza, motore, saturazione, stato]
 
   - nome: crescita.py
     responsabilita: la crescita del grafo, regola NON-H col suo bilancio

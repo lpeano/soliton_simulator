@@ -3417,3 +3417,21 @@ scena **cresca** come gli archi *(`4.00x` su `4.00x` atteso)*; `m3` **`0.005114`
 | ### ⭐ **meglio della previsione, e il merito NON e' tutto mio** | avevo previsto `4.5625x`. Parte del guadagno viene da **`phi` diventato COMPLESSO**: lo stato e' cresciuto, e lo stato e' **il DENOMINATORE** |
 | ### ⛔ **cosa NON ho fatto** | **condividere i buffer fra operatori diversi** *(un altro `-0.5x`)*: Luca dice *«il rischio di corruzione silenziosa non vale `-0.5x`»*, e sono d'accordo |
 | ### ⛔ **e `cresci()` non ha piu' un default di fisica** | riceve i valori iniziali **dalla legge**, e **SI BLOCCA** senza: `None` non vuol dire *<<zero>>*, vuol dire ### **<<nessuno ha deciso>>** |
+
+---
+
+## `P1` -- IL FLUSSO DI SATURAZIONE *(2026-10-12)*
+
+| file | BLOB *(`sha1` dei BYTE grezzi)* | che cosa misura | il collaudo |
+|---|---|---|---|
+| `primo_ordine/saturazione.py` | `e58e04de` | le **quattro funzioni del generatore**, **PURE**, e ### **il LIMITE che non e' un pavimento** | provate **sui numeri**, senza costruire un motore |
+| `primo_ordine/_collauda_saturazione.py` | `b7a5c628` | ### **il suo INVERSO lo ANNULLA al bit**, e la **CAUSA** provata direttamente | ### **`18`/`18`** |
+
+| | |
+|---|---|
+| **IL COMANDO, verbatim** | `python primo_ordine/_collauda_saturazione.py` |
+| ### ⭐ **il braccio che conta** | `frazione = +f` poi `-f` riporta lo stato: **`0.7` ulp** su `psi`, **`2.3e-16`** su `phi`. ### **Un INTEGRATORE non passerebbe** |
+| ### ⚠ **e una misura MI HA CORRETTO** | avevo previsto che **due meta' NON facessero l'intero**: la misura dice **`0.8` ulp**. ### **Il flusso CONSERVA i propri coefficienti** -- la rotazione attorno a `n` conserva `s.n`, la fase conserva `|phi|^2` |
+| ### ✅ **e la CAUSA e' provata, non dedotta** | `|dh|` **`3.6e-15`** *(`1.9` ulp)*, `|dLambda|` **`8.9e-16`** |
+| ### ⛔ **la norma si conserva su ENTRAMBI** | scarto **`0.000e+00` esatto**: su `psi` perche' e' una **rotazione**, su `phi` perche' e' ### **una FASE e non un trasferimento** -- lo scambio diretto di norma **romperebbe il gauge** |
+| ### ⛔ **perche' un modulo nuovo** | `motore.py` ha superato **il tetto di `700` righe**: ### **oltre, SI DIVIDE** |

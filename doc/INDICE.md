@@ -12,7 +12,7 @@
 | `FISICA` | `2` | 91 |
 | `FISICA` | `ENTRAMBE` | 19 |
 | `INFRASTRUTTURA` | `1` | 39 |
-| `INFRASTRUTTURA` | `2` | 20 |
+| `INFRASTRUTTURA` | `2` | 21 |
 | `INFRASTRUTTURA` | `ENTRAMBE` | 24 |
 | `METODO` | `1` | 156 |
 | `METODO` | `2` | 16 |
@@ -496,6 +496,7 @@
 | `MOTORE-CONTENITORE` | CURA | INFRASTRUTTURA | 2 | ### **AGENDA** |  | il doppio contenitore del motore, le cache con la taglia e la regola del tick |
 | `MOTORE-INCIDENZA` | CURA | INFRASTRUTTURA | 2 | ### **AGENDA** |  | la struttura compatta delle estremita d arco, col punto unico di scrittura |
 | `MOTORE-MEMORIA-M1-ROSSO` | MISURA | INFRASTRUTTURA | 2 | ### **CHIUSA** |  | m1 fallisce a 5.00x contro 4x, e la soglia era derivata da un conto senza i buff |
+| `MOTORE-SATURAZIONE` | CURA | INFRASTRUTTURA | 2 | ### **AGENDA** |  | il flusso di saturazione nel motore: esatto, e il suo inverso lo annulla al bit |
 | `N1` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 15 volte, MAI definito in un registro) [N1] |
 | `N1b` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 8 volte, MAI definito in un registro) [N1b] |
 | `N2` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 17 volte, MAI definito in un registro) [N2] |

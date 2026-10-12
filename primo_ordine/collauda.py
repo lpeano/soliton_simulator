@@ -119,6 +119,15 @@ COLLAUDI = (
     # ### ### **una soglia senza il suo conto e- un numero** -- ed e- il numero che mi ha
     # ### fregato.
     ("la memoria: `m1`..`m4`", "primo_ordine/_collauda_memoria.py", "pre-commit"),
+    # ### ⭐ **IL FLUSSO DI SATURAZIONE** *(`P1` del mandato su energia e mitosi)*:
+    # ### era bloccato ### **SOLO dal tipo di `phi`**, e Luca lo ha deciso complesso.
+    # ### ⛔ **Il braccio che conta e- che IL SUO INVERSO LO ANNULLA AL BIT:** un
+    # ### integratore ### **non passerebbe**, ed e- il modo di provare che qui
+    # ### ### **non c-e- troncamento.**
+    # ### ⚠ **E un braccio mi ha CORRETTO:** avevo previsto che due meta- NON
+    # ### facessero l-intero, e la misura dice ### **`0.8` ulp** -- perche- il flusso
+    # ### ### **conserva i propri coefficienti.**
+    ("il flusso di saturazione", "primo_ordine/_collauda_saturazione.py", "pre-commit"),
     # ### ⭐ **LO SCHEMA DELLA CAMMINATA, nei DUE VERSI** *(pezzo `2` del
     # ### simulatore)*: i tipi sulle estremita-, i pezzi unitari, i flussi, e
     # ### l-### **ordine di composizione con le ripetizioni AMMESSE.**
