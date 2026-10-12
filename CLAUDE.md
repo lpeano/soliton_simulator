@@ -294,9 +294,10 @@ qui**: sta in `doc/PATTERN_DI_PROVA.md`.)*
 | **`[[H-STASH]]`** | `git stash`, qualunque forma: impedisce PRIMA che il comando parta, e non ha via d-uscita | **`H-STASH`** |
 | **`[[H-STOP-CODA]]`** | che un turno finisca mentre la coda ha lavoro PRONTO: legge la coda, NOMINA il pezzo successivo, e non blocca due volte senza un commit nuovo | **`H-STOP-CODA`** |
 | **`[[H-VALIDATORE]]`** | un indice mal formato, o con una voce persa | **`H-VALIDATORE`** |
+| **`[[P-E10]]`** | una variabile in tabella SENZA la sua riga nel confronto tabella/banco, o NUOVA senza il punto della carta che la decide | **`P-E10`** |
 | **`[[P-REG]]`** | una regola di gestione e- una VOCE, e le due sezioni delle regole SI GENERANO dall-indice: modificate a mano, RIFIUTATE | **`P-REG`** |
 
-> ### ⚠ **`0` di queste `16` NON HANNO NESSUN PRESIDIO che le faccia rispettare** *(`A9`)*. ### **E il numero esiste perche' <<chi la fa rispettare>> e' UN CAMPO: in prosa non si contava.** ### **IL DETTAGLIO:** `doc/REGOLE/par12.md`.
+> ### ⚠ **`0` di queste `17` NON HANNO NESSUN PRESIDIO che le faccia rispettare** *(`A9`)*. ### **E il numero esiste perche' <<chi la fa rispettare>> e' UN CAMPO: in prosa non si contava.** ### **IL DETTAGLIO:** `doc/REGOLE/par12.md`.
 
 <!-- FINE REGOLE GENERATE par12.md -->
 **LE VIE D'USCITA OBBLIGANO A DICHIARARE:** `[SENZA-RELAZIONE: …]` ·

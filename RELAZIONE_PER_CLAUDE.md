@@ -14220,3 +14220,32 @@ Ogni dato di `db_era2/` ha ### **il suo TIMBRO accanto**, col campo `versione_da
 ### ⚠ **E NON E' UN CASO LIMITE: ogni domanda del simulatore dell'era `2` e' in questo stato**, e ce ne sono **`18`**. ### **La prima a cui Luca ha risposto ha trovato il muro.** ### ✅ **Intanto la decisione vive nella riga di STORICO**, `priorita` e' svuotata e `blocca` e' `NO`, quindi **la domanda ESCE da `DA_DECIDERE_LUCA` come il mandato chiede**. ### ⛔ **Ma il CAMPO che un programma legge per saperlo NON C'E'**, ed e' esattamente cio' che `[[DECISIONE-VUOLE-UN-CAMPO]]` vieta. Sta in **`[[D-ERA2-NON-SI-CHIUDE]]`**.
 
 ### 📌 **LA MIA RACCOMANDAZIONE, e non e' una decisione:** `PI-ERA-STATO` va **stretto**. La sua ragione e' *<<una voce dell'era `2` e' in agenda perche' l'era `2` non e' cominciata>>*, e quella ragione ### **non si applica a una domanda GIA' RISPOSTA: una domanda decisa non e' <<in agenda>>.** Quindi dovrebbe pretendere `AGENDA` **solo per le voci APERTE** dell'era `2`. ### ⚠ **Ma toccare un presidio e' una decisione di Luca, e l'ho trovato DENTRO il mandato di un'altra cosa: non lo cambio qui.**
+
+---
+
+## IL CONFRONTO COMPLETO TABELLA / BANCO: UN SOLO CONFLITTO, E UN BUCO MIO NEL CENSIMENTO TROVATO PRIMA DI SCRIVERE *(2026-10-12)*
+
+### ⭐ **LA COSA CHE LO RENDE UN CONFRONTO E NON UN'OPINIONE:** lo stato di riferimento **lo costruisce il BANCO**, girando le sue funzioni — `camminata.stato_casuale`, `vuoto3.vuoto_fondo`, `vuoto3.lambda_nodo`, `nonlineare2.elicita_nodo` su una scena di `6` nodi. ### **Non lo descrivo: lo FACCIO PRODURRE.** E il perimetro del verso `(a)` **si calcola**: dai `14` file che hanno prodotto le misure registrate si segue **via `AST`** la chiusura delle chiamate attraverso i `42` moduli del banco.
+
+### ⛔ **UN BUCO MIO NEL CENSIMENTO, E L'HO TROVATO PRIMA DI SCRIVERE IL CONFRONTO.** La prima versione guardava **solo `ast.Call`**, e **una funzione passata come VALORE** — `flusso=S3.flusso` — **le sfuggiva**: diceva *«la saturazione NON e' usata nelle misure»*, ### **che e' falso.** Corretto a guardare **il nome dovunque sia** *(come fa `[[P-ES1]]`)*, e `saturazione3` passa da **`2/8`** a **`8/8`**. ### ⚠ **Senza quella correzione il confronto sarebbe stato FALSO**, e lo avrei committato come un fatto.
+
+| esito | variabili | leggi |
+|---|---|---|
+| **`COINCIDE`** | `4` *(`psi_h`, `phi_h`, `Lambda`, `h_int`)* | `7` |
+| **`NUOVA`** | `1` *(`psi` di nodo, punto `A16`)* | `3` *(le leggi di prova)* |
+| ### ⛔ **`CONFLITTO`** | ### **`1`: le condizioni iniziali** | `0` |
+| **`ORFANA`** | `0` | `0` |
+
+### ✅ **E L'ORDINE COINCIDE AL PEZZO**, letto dal codice: `camminata3.passo3` fa **`flusso(mezzo)` → `_lineare` → `flusso(mezzo)`**, e `_lineare` fa moneta, Grover e spostamento sullo spinore, Grover e spostamento sul vuoto. ### **La tabella dichiara esattamente quella sequenza**, con `0.5 + 0.5` sulla saturazione.
+
+### ⛔ **L'UNICO CONFLITTO: LE CONDIZIONI INIZIALI.** Il banco costruisce `psi_h` **normalizzato dal seme** e `phi_h` **con le fasi dal seme**; la tabella **non ha un CAMPO** per le condizioni iniziali, e il generato fa **`np.zeros`**. ### ⛔ **E con tutto a zero OGNI OPERATORE E' L'IDENTITA': non e' una scena, e' il vuoto assoluto** — quindi il criterio di passaggio **non ha niente da riprodurre**. ### ⚠ **E non e' un errore di trascrizione: la tabella non dice una cosa sbagliata, NON HA IL CAMPO per dirla** — e aggiungerlo **cambia la sua forma**. Sta in `[[DOMANDA-CONDIZIONI-INIZIALI-IN-TABELLA]]`, **CRITICA e BLOCCA**.
+
+### 📌 **IL VERSO `(a)`: DODICI OPERATORI DEL BANCO SENZA LEGGE — e non sono lo stesso buco.** Tre famiglie: **`A`** la fisica del `v2`/`v3` che la tabella non porta *(il termine di **massa**, la forma **`(E)`** — ### **sorella della `(D)`, e la tabella ha la `(D)` e non la `(E)`** — e l'implicita)*; **`B`** **tutto il `v4`** *(Grover **pesato**, campo `cs`, frazione, **velocita' locale della luce**, vuoto `v4`)*; **`C`** superati o non-leggi *(lo spostamento del `v1`, i due **controlli** della saturazione — ### **un controllo non e' una legge, e metterlo in tabella lo renderebbe ACCENDIBILE** — e la `C`)*.
+
+### ⭐ **E LA `C` E' LA QUARTA DOMANDA:** il banco la ha in **tre** versioni e **la misura**, la carta la decide al punto **`F3`**, e ### **nessuna legge della tabella la dichiara fra le sue simmetrie.** O e' **un valore morto** del vocabolario, o le leggi **dichiarano meno simmetrie di quelle che hanno** — e allora un collaudo delle simmetrie **non verificherebbe la `C`**.
+
+### ✅ **E IL PRESIDIO CHE LO RENDE UN IMPEDIMENTO — la riga che mi era arrivata TRONCATA.** `[[P-E10]]`: una variabile in tabella **senza la sua riga** fa **rifiutare il commit**. ### ⭐ **E <<IMPEDIRE>> era la parola che non potevo indovinare**: un collaudo dice *<<e' sbagliato>>* a chi lo fa girare, **un presidio del `pre-commit` RIFIUTA**. ### **L'ho segnalata invece di inventarla**, e Luca l'ha ridetta.
+
+### 📌 **I NUMERI.** Il confronto eseguibile: **`15` su `15`**, di cui **`4`** casi che **devono fallire** — fra cui **`phi` dichiarato reale contro il banco complesso**, ### **il disallineamento sfuggito TRE volte**. I presidi dell'era `2`: **`27` su `27`**, coi **tre** casi che devono scattare per `P-E10` e il braccio che verifica **che il documento vero sia tornato al suo posto** *(un collaudo che lasciasse il presidio puntato altrove **lo spegnerebbe**)*. La suite: **`46` su `48`**, e i due rossi sono **`m1`** *(dichiarato, in attesa di Luca)* e **lo stage** *(gira a stage vuoto)*.
+
+### ⚠ **E TRE PRESIDI MI HANNO CORRETTO:** `[[P-C1]]` *(`P-E10` dichiarato dal codice e **non nell'indice**: un riferimento ROTTO)*, `[[P-RIF]]` *(l'ID in un **commento** invece che nel docstring)*, `[[P-M1]]` *(il metodo **senza la sua riga**)*. ### E `[[P-REG]]` ha visto crescere l'elenco letterale **per la terza volta**, e la cura e' quella che il suo commento prescrive: **si aggiorna l'elenco.**

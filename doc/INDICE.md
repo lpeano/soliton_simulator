@@ -9,14 +9,14 @@
 | `DOCUMENTAZIONE` | `2` | 1 |
 | `DOCUMENTAZIONE` | `ENTRAMBE` | 8 |
 | `FISICA` | `1` | 343 |
-| `FISICA` | `2` | 86 |
+| `FISICA` | `2` | 90 |
 | `FISICA` | `ENTRAMBE` | 17 |
 | `INFRASTRUTTURA` | `1` | 39 |
 | `INFRASTRUTTURA` | `2` | 20 |
 | `INFRASTRUTTURA` | `ENTRAMBE` | 24 |
 | `METODO` | `1` | 156 |
 | `METODO` | `2` | 16 |
-| `METODO` | `ENTRAMBE` | 94 |
+| `METODO` | `ENTRAMBE` | 95 |
 
 | id | classe | dominio | era | stato | blocca | titolo |
 |---|---|---|---|---|---|---|
@@ -272,14 +272,18 @@
 | `DOMANDA-C2-O-C4` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | due componenti o quattro: il gap c-e- solo con C4? |
 | `DOMANDA-CHI-CAUSA-L-ANISOTROPIA` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | sul cubico i versori del v3 RIDUCONO l-anisotropia direzionale: e- una leva o si |
 | `DOMANDA-COME-LA-MATERIA-CAMBIA-LAMBDA` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | come la materia cambia la densita- del vuoto: scattering nel nodo o trasmissione |
+| `DOMANDA-CONDIZIONI-INIZIALI-IN-TABELLA` | DECISIONE | FISICA | 2 | ### **AGENDA** | SI | la tabella non ha un posto dove dichiarare le condizioni iniziali |
 | `DOMANDA-D13-CONIUGATI` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | D13: i coniugati delle memorie -- tw come fase U(1) sull-arco? |
 | `DOMANDA-D9-GEOMETRIA` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | D9: la geometria viene da d e p_d dentro H, o dalle relazioni fra gli psi? |
+| `DOMANDA-DOVE-STA-LA-C-IN-TABELLA` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | la C e decisa al punto F3 e nessuna legge della tabella la dichiara |
 | `DOMANDA-FORME-VUOTO` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | le TRE forme del vuoto locale: che cos-e- un grado, quanti per nodo, l-accoppiam |
 | `DOMANDA-FUSIONE` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | la FUSIONE di due nodi: si vieta, e con che cosa? |
 | `DOMANDA-GRAFO-INIZIALE` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | il grafo iniziale SENZA pos: reticolo, k-regolare, espansore? |
 | `DOMANDA-GRANDEZZA-LOCALE-TEMPO` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | da dove viene la grandezza locale da cui escono r_k e cs_k? |
 | `DOMANDA-GUSCIO-E-INTERFERENZA` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | il guscio e- interferenza e non materia: che cosa resta dell-ipotesi del guscio? |
+| `DOMANDA-IL-V4-ENTRA-NELL-ERA-2` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | cinque gruppi di operatori del v4 sono nel banco e non in tabella |
 | `DOMANDA-LAMBDA-GRANDEZZA` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | lambda: su quale grandezza si misura, e da dove viene il suo valore? |
+| `DOMANDA-MASSA-E-FORME-MANCANTI` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | il termine di massa e due forme del flusso sono nel banco e non in tabella |
 | `DOMANDA-PASSO-FRAZIONARIO-O-ASINCRONO` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | pezzi frazionari o tick asincroni, e l-invarianza locale dei secondi NON e- dimo |
 | `DOMANDA-PESO-ARCO-COME-MEMORIA` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | il peso d-arco come memoria dinamica: la geometria nasce dalla dinamica? |
 | `DOMANDA-PHI-REALE-O-COMPLESSO` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | la tabella dichiara phi_h reale, il banco congelato lo tiene complesso: quale de |
@@ -521,6 +525,7 @@
 | `P-DET` | PRESIDIO | METODO | 2 | ### **AGENDA** |  | il determinismo: nessun RNG globale, un thread, versioni bloccate, due processi  |
 | `P-DIM` | PRESIDIO | METODO | 2 | ### **AGENDA** |  | le dimensioni: ogni addendo ha la stessa, un termine di H e- E^1, e il generator |
 | `P-E1` | PRESIDIO | INFRASTRUTTURA | 2 | ### **AGENDA** |  | la BIIEZIONE fra legge in tabella, file generato, riga di registro e scheda |
+| `P-E10` | PRESIDIO | METODO | ENTRAMBE | ### **APERTA** |  | una variabile in tabella senza la sua riga di confronto fa rifiutare il commit |
 | `P-E2` | PRESIDIO | INFRASTRUTTURA | 2 | ### **AGENDA** |  | l-IMPRONTA: un file generato ritoccato a mano, o una tabella cambiata senza rige |
 | `P-E3` | PRESIDIO | INFRASTRUTTURA | 2 | ### **AGENDA** |  | le VARIABILI nei due versi: tabella, stato.py e registro si corrispondono |
 | `P-E4` | PRESIDIO | INFRASTRUTTURA | 2 | ### **AGENDA** |  | le IMPORTAZIONI: la fisica non importa osservatori/ ne- driver (A17) |

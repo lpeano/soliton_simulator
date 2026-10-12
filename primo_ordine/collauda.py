@@ -101,6 +101,13 @@ COLLAUDI = (
     # ### tolleranza. ### **Una ripresa che perde un bit non e- una ripresa.**
     ("il checkpoint e la ripresa",
      "primo_ordine/_collauda_checkpoint.py", "pre-commit"),
+    # ### ⛔ **IL CONFRONTO TABELLA / BANCO, ESEGUIBILE** *(mandato del `2026-10-12`,
+    # ### parte `2`)*: ### **lo stato di riferimento lo COSTRUISCE IL BANCO**, girando le
+    # ### sue funzioni -- ### **non lo descrivo, lo faccio produrre.** ### E il caso che
+    # ### il mandato nomina, ### **`phi` dichiarato reale contro il banco complesso**, e-
+    # ### ### **il disallineamento che e- sfuggito TRE VOLTE.**
+    ("il confronto tabella / banco", "primo_ordine/_collauda_confronto.py",
+     "pre-commit"),
     # ### ⛔ **IL SOTTO-PEZZO `5d`: L-ACCETTAZIONE DEL PEZZO `5`, E OGGI E- ROSSO.**
     # ### `m1` misura `5.00x` contro una soglia di `4x` fissata ### **prima** nel task
     # ### history. ### ⚠ **STA QUI COMUNQUE, e rosso:** un collaudo che fallisce e

@@ -6,7 +6,7 @@
 |---|--:|
 ## ⭐ **LA PROSSIMA**
 
-> ### ✅ **[[DOMANDA-PASSO-FRAZIONARIO-O-ASINCRONO]]** — pezzi frazionari o tick asincroni, e l-invarianza locale dei secondi NON e- dimostrata dove cs varia
+> ### ✅ **[[DOMANDA-CONDIZIONI-INIZIALI-IN-TABELLA]]** — la tabella non ha un posto dove dichiarare le condizioni iniziali
 >
 > ### 📌 **Che cosa SBLOCCA:** ### **niente di dichiarato**
 >
@@ -16,17 +16,18 @@
 
 ## LE ALTRE, per priorita-
 
-### `CRITICA` — **5**
+### `CRITICA` — **6**
 
 | la domanda | pronta? | che cosa aspetta |
 |---|---|---|
 | **[[DOMANDA-D13-CONIUGATI]]** D13: i coniugati delle memorie -- tw come fase U(1) sull-arco? | ### ⏳ aspetta | ### **aspetta:** `DOMANDA-D9-GEOMETRIA` |
 | **[[DOMANDA-D9-GEOMETRIA]]** D9: la geometria viene da d e p_d dentro H, o dalle relazioni fra gli ps | ### ⏳ aspetta | ### **aspetta:** `DOMANDA-QUANTITA-CONSERVATA` |
+| **[[DOMANDA-PASSO-FRAZIONARIO-O-ASINCRONO]]** pezzi frazionari o tick asincroni, e l-invarianza locale dei secondi NON | ### ✅ **PRONTA** | ### **niente** |
 | **[[DOMANDA-QUANTITA-CONSERVATA]]** esiste una moneta isotropa, causale e simmetrica fra le bande con una qu | ### ✅ **PRONTA** | ### **niente** |
 | **[[MOTORE-MEMORIA-M1-ROSSO]]** m1 fallisce a 5.00x contro 4x, e la soglia era derivata da un conto senz | ### ✅ **PRONTA** | ### **niente** |
 | **[[SCENA-3D-PRINCIPALE]]** la (ii) e- il BANCO DI MISURA: punti che si respingono, gradi 2-6 | ### ✅ **PRONTA** | ### **niente** |
 
-### `DIPENDENTE` — **14**
+### `DIPENDENTE` — **16**
 
 | la domanda | pronta? | che cosa aspetta |
 |---|---|---|
@@ -37,7 +38,9 @@
 | **[[DOMANDA-GRAFO-INIZIALE]]** il grafo iniziale SENZA pos: reticolo, k-regolare, espansore? | ### ✅ **PRONTA** | ### **niente** |
 | **[[DOMANDA-GRANDEZZA-LOCALE-TEMPO]]** da dove viene la grandezza locale da cui escono r_k e cs_k? | ### ⏳ aspetta | ### **aspetta:** `DOMANDA-QUANTITA-CONSERVATA` |
 | **[[DOMANDA-GUSCIO-E-INTERFERENZA]]** il guscio e- interferenza e non materia: che cosa resta dell-ipotesi del | ### ✅ **PRONTA** | ### **niente** |
+| **[[DOMANDA-IL-V4-ENTRA-NELL-ERA-2]]** cinque gruppi di operatori del v4 sono nel banco e non in tabella | ### ✅ **PRONTA** | ### **niente** |
 | **[[DOMANDA-LAMBDA-GRANDEZZA]]** lambda: su quale grandezza si misura, e da dove viene il suo valore? | ### ⏳ aspetta | ### **aspetta:** `DOMANDA-D9-GEOMETRIA` |
+| **[[DOMANDA-MASSA-E-FORME-MANCANTI]]** il termine di massa e due forme del flusso sono nel banco e non in tabel | ### ✅ **PRONTA** | ### **niente** |
 | **[[DOMANDA-PESO-ARCO-COME-MEMORIA]]** il peso d-arco come memoria dinamica: la geometria nasce dalla dinamica? | ### ✅ **PRONTA** | ### **niente** |
 | **[[DOMANDA-PRIMA-LEGARE-POI-MISURARE]]** senza stato legato tre letture non sono decidibili: si cerca prima un le | ### ✅ **PRONTA** | ### **niente** |
 | **[[DOMANDA-QUALE-FORMA-FISSA-CS]]** quale forma del vuoto fissa cs: nessuna delle tre e- libera da tutti i d | ### ⏳ aspetta | ### **aspetta:** `DOMANDA-PASSO-FRAZIONARIO-O-ASINCRONO` |
@@ -45,11 +48,13 @@
 | **[[DOMANDA-QUANDO-LA-CAMMINATA-IN-TABELLA]]** quando si porta la camminata nella tabella? il porting aspetta TRE decis | ### ⏳ aspetta | ### **aspetta:** `DOMANDA-PASSO-FRAZIONARIO-O-ASINCRONO`, `DOMANDA-COME-LA-MATERIA-CAMBIA-LAMBDA`, `DOMANDA-QUALE-FORMA-FISSA-CS` |
 | **[[DOMANDA-UNITA-DI-STATO]]** l-unita- di stato: qual e- la capacita- di un nodo? | ### ⏳ aspetta | ### **aspetta:** `DOMANDA-D9-GEOMETRIA` |
 
-### `MINORE` — **3**
+### `MINORE` — **5**
 
 | la domanda | pronta? | che cosa aspetta |
 |---|---|---|
+| **[[D-ERA2-NON-SI-CHIUDE]]** due presidi insieme vietano di registrare una domanda dell era 2 come de | ### ✅ **PRONTA** | ### **niente** |
 | **[[DOMANDA-A3B-CLASSE]]** A3b: con che classe entra nell-indice? | ### ✅ **PRONTA** | ### **niente** |
+| **[[DOMANDA-DOVE-STA-LA-C-IN-TABELLA]]** la C e decisa al punto F3 e nessuna legge della tabella la dichiara | ### ✅ **PRONTA** | ### **niente** |
 | **[[DOMANDA-REGOLE-FUORI-CLAUDE]]** le regole di gestione fuori da CLAUDE.md, e quelle dentro senza presidio | ### ✅ **PRONTA** | ### **niente** |
 | **[[DUE-STRUMENTI-ARCHIVIO-E]]** due strumenti per lo stesso mestiere: spostare gli output su E- | ### ✅ **PRONTA** | ### **niente** |
 
@@ -57,7 +62,7 @@
 
 ## IL CONTO
 
-> ### ⛔ **aperte `23`, di cui pronte `14`.**
+> ### ⛔ **aperte `28`, di cui pronte `19`.**
 >
 > ### ✅ **E una domanda DECISA esce da sola:** si chiude con la decisione di Luca e il commit, e ### **nessuno la spunta a mano** -- la lista ### **si genera dai campi**, e un campo che cambia ### **cambia la lista.**
 

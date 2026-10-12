@@ -193,6 +193,15 @@ METODI = {
     "H-STASH": ("`git stash` bloccato da `permissions.deny`: non e- un hook e non ha via "
                 "d-uscita. Vale per ogni lavoro, era 2 compresa",
                 "`.claude/settings`", "PORTATO"),
+    "P-E10": ("una variabile in tabella SENZA la sua riga nel confronto tabella/banco, "
+              "o NUOVA senza il punto della carta che la decide: RIFIUTA IL COMMIT. "
+              "### SI APPLICA ALL-ERA 2 PER COSTRUZIONE: nasce nell-era 2, legge "
+              "`primo_ordine/leggi/leggi.yaml` e il documento del confronto, e sta nella "
+              "catena di `--pre-commit` accanto a `P-E1`..`P-E9`. ### E il suo compagno "
+              "eseguibile costruisce lo stato iniziale CON LE FUNZIONI DEL BANCO: non "
+              "descrive il riferimento, LO FA PRODURRE",
+              "`csv/_presidi_era2.py::pe10` + `primo_ordine/_collauda_confronto.py`",
+              "PORTATO"),
     "H-STOP-CODA": ("un turno non si chiude se la coda ha lavoro PRONTO: e- un hook "
                     "`Stop` di Claude Code, non di git. ### SI APPLICA ALL-ERA 2 NEL "
                     "SENSO PIU- DIRETTO: l-elenco dei pezzi che il presidio guarda E- "

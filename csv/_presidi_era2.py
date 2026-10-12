@@ -68,7 +68,19 @@ PRESIDI = {
     "P-E7": "pe7",
     "P-E8": ".github/workflows/era2.yml",
     "P-E9": "pe9",
+    "P-E10": "pe10",
 }
+
+# ### \u26d4 **IL DOCUMENTO DEL CONFRONTO, e i suoi esiti a VOCABOLARIO CHIUSO.** Un
+# ### esito fuori elenco non e- <<un esito nuovo>>: e- ### **una parola che nessuno ha
+# ### deciso**, e il presidio la rifiuta come se la riga non ci fosse.
+CONFRONTO = os.path.join(RADICE, "doc", "CONFRONTO_tabella_banco.md")
+ESITI_CONFRONTO = ("COINCIDE", "ERRORE DI TRASCRIZIONE", "CONFLITTO", "MANCANTE")
+# ### \u26a0 **`NUOVA` e `ORFANA` NON BASTANO DA SOLE:** `NUOVA` vuole ### **il punto
+# ### della carta** che la decide, e `ORFANA` vuol dire ### **che quel punto NON C-E-** --
+# ### quindi `ORFANA` si ammette ### **solo se la riga lo dice a parole**, e resta
+# ### ### **segnalata e non togliata.**
+PUNTO_CARTA = __import__("re").compile(r"\*\*`(?:F|A)\d+[a-z]?`\*\*|`(?:F|A)\d+[a-z]?`")
 
 SCHEDE = os.path.join(RADICE, "doc", "leggi_era2")
 # ### I MODULI DI FISICA: ### **non importano lo strumento** *(`P-E4`)*.
@@ -304,6 +316,67 @@ def pe7(reg_l, reg_v, leggi, varia):
     return err
 
 
+def pe10(varia):
+    """### `P-E10`: ### **ogni variabile della tabella ha la sua RIGA nel confronto.**
+
+    ### \u26d4 **IL MANDATO, alla lettera:** *<<Il presidio deve IMPEDIRE che una
+    variabile nuova entri in tabella senza la sua riga di confronto, oppure senza la
+    dichiarazione NUOVA con il punto della carta che la decide.>>*
+
+    ### \u2b50 **E <<IMPEDIRE>> E- LA PAROLA CHE CONTA:** un collaudo dice *<<e-
+    sbagliato>>* a chi lo fa girare; questo sta nel `pre-commit`, quindi
+    ### **RIFIUTA IL COMMIT.** ### \u26a0 **Era la differenza che non potevo indovinare**,
+    e la riga del mandato mi era arrivata troncata: l-ho ### **segnalata** invece di
+    inventarla, e Luca l-ha ridetta.
+
+    ### \u26d4 **PERCHE- IL PUNTO DELLA CARTA E NON UNA FRASE:** *<<nuova>>* senza il
+    punto che la decide e- ### **una variabile che nessuno ha deciso**, e la regola
+    `DECISIONE-VUOLE-UN-CAMPO` dice che una decisione che serve a un programma
+    ### **vuole un CAMPO.** ### Qui il campo e- ### **il punto `F`/`A`**, e il presidio
+    ### **lo cerca nella riga.**
+    """
+    err = []
+    if not os.path.exists(CONFRONTO):
+        return ["`P-E10`: `doc/CONFRONTO_tabella_banco.md` NON C-E-. ### Il confronto fra "
+                "la tabella e il banco e- il documento che impedisce al quarto "
+                "disallineamento di uscire da solo: senza di lui il presidio non ha "
+                "niente da leggere"]
+    t = io.open(CONFRONTO, encoding="utf-8").read()
+    righe = [r for r in t.split(NL) if r.startswith("|")]
+    for v in varia:
+        nome = v.get("nome", "")
+        if not nome:
+            continue
+        sue = [r for r in righe if ("`%s`" % nome) in r]
+        if not sue:
+            err.append("`P-E10` `%s`: NESSUNA RIGA in `doc/CONFRONTO_tabella_banco.md`. "
+                       "### Una variabile che entra in tabella senza la sua riga di "
+                       "confronto e- il quarto disallineamento che aspetta di uscire da "
+                       "solo mentre si scrive il codice che la usa" % nome)
+            continue
+        buone = [r for r in sue if any(e in r for e in ESITI_CONFRONTO)]
+        nuove = [r for r in sue if "NUOVA" in r]
+        orfane = [r for r in sue if "ORFANA" in r]
+        if buone:
+            continue
+        if nuove:
+            # ### \u26d4 **`NUOVA` VUOLE IL PUNTO DELLA CARTA, nella sua riga.**
+            if not any(PUNTO_CARTA.search(r) for r in nuove):
+                err.append("`P-E10` `%s`: dichiarata `NUOVA` e SENZA il punto della carta "
+                           "che la decide. ### <<nuova>> senza il punto e- una variabile "
+                           "che NESSUNO HA DECISO: si scrive il punto `F` o `A` nella "
+                           "sua riga" % nome)
+            continue
+        if orfane:
+            # ### \u2705 **`ORFANA` si ammette, e NON si toglie:** il mandato dice
+            # ### ### **<<si segnala e non si toglie: la decide Luca>>.**
+            continue
+        err.append("`P-E10` `%s`: la sua riga NON porta nessun esito del vocabolario "
+                   "chiuso %r. ### Un esito inventato non e- un esito: e- una parola che "
+                   "nessuno ha deciso" % (nome, ESITI_CONFRONTO + ("NUOVA", "ORFANA")))
+    return err
+
+
 def tutti(verboso=True):
     """### `P-E1`…`P-E4` e `P-E7` sul disco. ### **`P-E5` e `P-E6` hanno il loro stadio.**"""
     leggi, varia = _tabella()
@@ -311,7 +384,7 @@ def tutti(verboso=True):
     gen = _generati()
     err = (pe1(leggi, gen, reg_l) + pe2(leggi, gen, varia)
            + pe3(varia, reg_v) + pe4() + pe7(reg_l, reg_v, leggi, varia)
-           + pe9(leggi, verboso=False))
+           + pe9(leggi, verboso=False) + pe10(varia))
     if verboso:
         print("  la tabella: %d leggi, %d variabili   |   i generati: %d   |   "
               "i registri: %d + %d" % (len(leggi), len(varia), len(gen),
@@ -320,7 +393,7 @@ def tutti(verboso=True):
             for e in err[:14]:
                 print("   ### %s" % e)
         else:
-            print("  ### P-E1, P-E2, P-E3, P-E4, P-E7, P-E9: TUTTO A POSTO")
+            print("  ### P-E1, P-E2, P-E3, P-E4, P-E7, P-E9, P-E10: TUTTO A POSTO")
     return err
 
 
@@ -619,6 +692,59 @@ def collaudo():
           not any("FUGA" in x.upper() or "SENZA" in x.upper() for x in _nomi),
           "la prima stesura ne definiva uno SENZA leggerlo: codice morto che INVITA "
           "una scappatoia che il mandato vieta")
+    # =================================================================== `P-E10`
+    # ### ✅ **IL VERSO SANO: la tabella di oggi PASSA.** ### Se questo fallisse, i
+    # ### due bracci sotto ### **non direbbero niente**: direbbero solo che il presidio
+    # ### rifiuta sempre.
+    esito("NON deve scattare: `P-E10` tace sulla tabella di oggi",
+          pe10(varia) == [],
+          "### %d variabili, e ognuna ha la sua riga nel confronto" % len(varia))
+    # ### ⛔ **IL CASO CHE DEVE FALLIRE: una variabile FINTA, senza riga.** ### Si
+    # ### aggiunge ### **in memoria** e non sul disco: un presidio provato toccando la
+    # ### tabella vera ### **lascerebbe danno se il collaudo morisse a meta-.**
+    finta = list(varia) + [{"nome": "zzz_variabile_finta", "tipo": "reale_nodo"}]
+    e10 = pe10(finta)
+    esito("### DEVE scattare: una variabile SENZA la sua riga di confronto",
+          any("zzz_variabile_finta" in x and "NESSUNA RIGA" in x for x in e10),
+          "### e- il mandato: una variabile nuova NON entra senza la sua riga")
+    # ### ⛔ **E IL SECONDO CASO: `NUOVA` SENZA il punto della carta.** ### Si fa
+    # ### leggendo il documento VERO e togliendo il punto dalla riga di `psi`, ### **in
+    # ### memoria.**
+    _vero = CONFRONTO
+    import tempfile
+    _t = io.open(CONFRONTO, encoding="utf-8").read()
+    _righe = []
+    for _r in _t.split(NL):
+        if _r.startswith("|") and "`psi`" in _r and "NUOVA" in _r:
+            # ### si toglie il punto della carta, e NIENTE ALTRO
+            _r = _r.replace("**`A16`**", "qualcosa").replace("`A16`", "qualcosa")
+        _righe.append(_r)
+    _fd, _p = tempfile.mkstemp(suffix=".md", prefix="_pe10_")
+    os.close(_fd)
+    io.open(_p, "wb").write(NL.join(_righe).encode("utf-8"))
+    try:
+        globals()["CONFRONTO"] = _p
+        e10b = pe10(varia)
+        esito("### DEVE scattare: `NUOVA` SENZA il punto della carta che la decide",
+              any("`psi`" in x and "punto della carta" in x for x in e10b),
+              "### <<nuova>> senza il punto e- una variabile che NESSUNO HA DECISO")
+    finally:
+        globals()["CONFRONTO"] = _vero
+        if os.path.exists(_p):
+            os.remove(_p)
+    # ### ⛔ **E IL TERZO: il documento che NON C-E-.**
+    try:
+        globals()["CONFRONTO"] = os.path.join(RADICE, "doc", "_non_esisto_.md")
+        e10c = pe10(varia)
+        esito("### DEVE scattare: il documento del confronto che NON C-E-",
+              any("NON C-E-" in x for x in e10c),
+              "### senza il documento il presidio non ha niente da leggere")
+    finally:
+        globals()["CONFRONTO"] = _vero
+    esito("### e il documento VERO e- tornato al suo posto",
+          CONFRONTO == _vero and os.path.exists(CONFRONTO),
+          "### un collaudo che lasciasse il presidio puntato altrove lo SPEGNEREBBE")
+
     print("=" * 100)
     print("COLLAUDO DEI PRESIDI DELL-ERA 2: %d su %d   %s"
           % (ok[0], ok[1], "### TUTTI PASSATI" if ok[0] == ok[1]

@@ -106,6 +106,10 @@ moduli:
     responsabilita: i quattro collaudi della memoria, e sono l-accettazione del pezzo 5
     importa: [_presidio, incidenza, motore, stato, timbro]
 
+  - nome: _collauda_confronto.py
+    responsabilita: il confronto tabella/banco ESEGUIBILE, e i cinque casi che falliscono
+    importa: [_presidio]
+
   - nome: crescita.py
     responsabilita: la crescita del grafo, regola NON-H col suo bilancio
     importa: []

@@ -8,18 +8,18 @@
 
 | | quanti |
 |---|--:|
-| **`PORTATO`** | `110` |
+| **`PORTATO`** | `111` |
 | **`PRONTO`** | `7` |
 | **`DA_PORTARE`** | `18` |
 | **`DA_DECIDERE`** | `5` |
 | **`NON_SI_APPLICA`** | `7` |
-| **in tutto** | ### **`147`** |
+| **in tutto** | ### **`148`** |
 
-### ⚠ **E IL NUMERO `147` E- MISURATO, non stimato:** viene dal perimetro che l-indice calcola, e ### **il mandato ne nominava <<una decina>>** per nome piu- *<<e le cure di architettura>>*. ### **La decina era `20`.**
+### ⚠ **E IL NUMERO `148` E- MISURATO, non stimato:** viene dal perimetro che l-indice calcola, e ### **il mandato ne nominava <<una decina>>** per nome piu- *<<e le cure di architettura>>*. ### **La decina era `20`.**
 
 ---
 
-## `PORTATO` — `110` metodi
+## `PORTATO` — `111` metodi
 
 > ### ✅ **GIA- NELL-ERA `2`**, e `dove` dice dove
 
@@ -69,6 +69,7 @@
 | **`P-DET`** | `PRESIDIO` | NATO NELL-ERA 2: nessun RNG globale (via AST: 6 usi, 6 `default_rng`, 0 globali), le CINQUE variabili dei thread fissate a 1 E TIMBRATE, e le versioni bloccate in `primo_ordine/versioni.lock`. ### E IL BRACCIO CHE CONTA SONO DUE PROCESSI CON LA STESSA CONFIGURAZIONE: 548 byte IDENTICI. ### Dice cio- che i thread non posso misurare (`threadpoolctl` non c-e-): se due processi danno byte identici, i thread NON stanno rompendo il determinismo | `primo_ordine/determinismo.py::controlla`; collaudo in `primo_ordine/_collauda_determinismo.py` (13/13) |
 | **`P-DIM`** | `PRESIDIO` | NATO NELL-ERA 2: ogni variabile e ogni parametro dichiarano la loro `dimensione`, e il generatore RIFIUTA un-espressione incoerente -- ogni ADDENDO ha la stessa dimensione, un TERMINE di `H` e- `E^1`, un OSSERVATORE dichiara la sua. ### UNA SOLA BASE, `E`, perche- `A16` implica `hbar = 1` e il tempo e- `E^-1`: una base in piu- sarebbe una manopola. ### E la dimensione sta SULLA VARIABILE, non sul tipo -- al contrario del dominio, perche- due `reale_nodo` possono essere un-energia e un tempo | `primo_ordine/leggi/schema.py::dimensioni_incoerenti`, dentro `valida_legge`; collaudi 34/34 e 24/24 col ramo END-TO-END |
 | **`P-E1`** | `PRESIDIO` | NATO NELL-ERA 2. La BIIEZIONE fra legge in tabella, file generato, riga di registro e scheda, nei DUE VERSI, e `LEGGE` si legge VIA AST. ### Allargato agli OSSERVATORI il 2026-10-09: prima un osservatore in tabella era INVISIBILE alla biiezione | `csv/_presidi_era2.py::pe1`, `pre-commit` + CI, SENZA via d-uscita |
+| **`P-E10`** | `PRESIDIO` | una variabile in tabella SENZA la sua riga nel confronto tabella/banco, o NUOVA senza il punto della carta che la decide: RIFIUTA IL COMMIT. ### SI APPLICA ALL-ERA 2 PER COSTRUZIONE: nasce nell-era 2, legge `primo_ordine/leggi/leggi.yaml` e il documento del confronto, e sta nella catena di `--pre-commit` accanto a `P-E1`..`P-E9`. ### E il suo compagno eseguibile costruisce lo stato iniziale CON LE FUNZIONI DEL BANCO: non descrive il riferimento, LO FA PRODURRE | `csv/_presidi_era2.py::pe10` + `primo_ordine/_collauda_confronto.py` |
 | **`P-E2`** | `PRESIDIO` | NATO NELL-ERA 2. L-IMPRONTA: un generato ritoccato a mano, o una tabella cambiata senza rigenerare. ### SI RIGENERA, NON SI CORREGGE IL FILE -- e la CI rigenera e fa `git diff --exit-code` | `csv/_presidi_era2.py::pe2`, `pre-commit` + CI |
 | **`P-E3`** | `PRESIDIO` | NATO NELL-ERA 2. Le variabili nei due versi: una variabile dichiarata in DUE POSTI divergerebbe, e per questo `stato.py` SI GENERA | `csv/_presidi_era2.py::pe3`, `pre-commit` + CI |
 | **`P-E4`** | `PRESIDIO` | NATO NELL-ERA 2, ed e- `A17` cablato: la fisica non importa `osservatori/` ne- `driver`. ### E HA IMPOSTO UNA FORMA: il collaudo del cono misura la NORMA, che e- un osservatore, quindi e- dovuto andare in un file SUO | `csv/_presidi_era2.py::pe4`, `pre-commit` + CI |

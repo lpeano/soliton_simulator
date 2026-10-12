@@ -146,3 +146,19 @@ la riga **`PUSHATO:`**, che Luca vede a colpo d'occhio.
 | ### ⚠ **il POSTO APERTO, dichiarato** | `args` e' forma **exec**, quindi **nessuna shell espande `CLAUDE_PROJECT_DIR`**, e che Claude Code lo espanda **li'** **non e' verificabile dai file installati**. ### Percio' la registrazione usa il **percorso relativo**, e lo script risolve la radice da **`__file__`** |
 | ### ⚠ **IL LIMITE CHE RESTA** | **non ho trovato il nome esatto del campo d'uscita che blocca uno `Stop`** *(le occorrenze di `stopReason` nel bundle JS sono **lo schema MCP di sampling**)*. Lo script **emette le forme note insieme** piu' **il codice d'uscita `2`**, e ### **il collaudo prova che lo script DECIDE bene, non che Claude Code onori quel campo** |
 | ### **il collaudo** | `python csv/_stop_coda.py --collaudo`, **9 bracci**, dichiarato in `primo_ordine/collauda.py` nel **`pre-commit`** |
+
+---
+
+## `P-E10`: UNA VARIABILE NON ENTRA SENZA LA SUA RIGA DI CONFRONTO *(mandato di Luca, 2026-10-12)*
+
+| | |
+|---|---|
+| ### ⛔ **l'incidente, e sono TRE** | era il **terzo** disallineamento della stessa famiglia fra la tabella e il banco congelato. I primi due in `9429351` *(lo stato vive sulle **estremita'** e non sul nodo; i pezzi del passo **si compongono** invece di sommarsi)*, il terzo **`phi` reale contro `phi` complesso**. ### **Tutti e tre sono usciti UNO ALLA VOLTA mentre si scriveva il codice che li usava** |
+| ### ⚠ **e la riga che lo chiede mi e' arrivata TRONCATA** | *<<Il presidio deve imp>>*. ### **L'ho segnalata invece di inventarla** *(in `doc/CODA_2026-10-12.md`)*, e Luca l'ha ridetta: *<<deve **IMPEDIRE** che una variabile nuova entri in tabella senza la sua riga di confronto, oppure senza la dichiarazione **NUOVA** con il punto della carta che la decide>>* |
+| ### ⭐ **e <<IMPEDIRE>> E' la parola che conta** | e' la differenza fra **un collaudo** e **un presidio**: un collaudo dice *<<e' sbagliato>>* a chi lo fa girare, un presidio del `pre-commit` ### **rifiuta il commit**. ### **Era la cosa che non potevo indovinare** |
+| **che cosa pretende** | per ogni variabile di `leggi.yaml`, una riga in `doc/CONFRONTO_tabella_banco.md` con uno dei **quattro** esiti del vocabolario **chiuso** *(`COINCIDE`, `ERRORE DI TRASCRIZIONE`, `CONFLITTO`, `MANCANTE`)*, **oppure** `NUOVA` **col punto della carta**, **oppure** `ORFANA` |
+| ### ⛔ **perche' il punto della carta e non una frase** | *<<nuova>>* senza il punto che la decide e' **una variabile che nessuno ha deciso**, e `[[DECISIONE-VUOLE-UN-CAMPO]]` dice che una decisione che serve a un programma **vuole un CAMPO**. ### Qui il campo e' **il punto `F`/`A`**, e il presidio **lo cerca nella riga** |
+| ### ✅ **e `ORFANA` si AMMETTE** | il mandato dice *<<si segnala e **non si toglie**: la decide Luca>>* |
+| **il collaudo, nei DUE versi** | dentro il collaudo dei presidi dell'era `2`: il verso **sano** *(tace oggi)* e **TRE** casi che **devono scattare** -- una variabile **finta senza riga**, una `NUOVA` **senza il punto**, e il **documento che non c'e'** |
+| ### ⭐ **e i casi cattivi si provano IN MEMORIA** | un presidio provato **modificando la fonte** lascerebbe danno se il collaudo morisse a meta'. ### E un braccio verifica che **il documento vero sia tornato al suo posto**: un collaudo che lasciasse il presidio **puntato altrove lo SPEGNEREBBE** |
+| **il compagno eseguibile** | `primo_ordine/_collauda_confronto.py`: costruisce lo stato iniziale **con le funzioni del banco** e confronta `dtype`, forma e dove-vive. ### **`15`/`15`**, di cui **`4`** casi che devono fallire |

@@ -119,6 +119,11 @@ FILE_FISICA = (
     # ### misura.**
     'primo_ordine/checkpoint.py',
     'primo_ordine/_collauda_checkpoint.py',
+    # ### IL CONFRONTO TABELLA / BANCO, ### **eseguibile**: costruisce lo stato
+    # ### iniziale ### **con le funzioni del banco** e confronta `dtype`, forma e
+    # ### dove-vive coi tipi dichiarati. ### ⛔ **E il presidio che lo rende un
+    # ### IMPEDIMENTO e- `P-E10`**, in `csv/_presidi_era2.py`.
+    'primo_ordine/_collauda_confronto.py',
     # ### I QUATTRO COLLAUDI DELLA MEMORIA *(sotto-pezzo `5d`)*: sono
     # ### ### **l-ACCETTAZIONE del pezzo `5`**, e le soglie stanno nel task history
     # ### fissate ### **prima** delle misure. ### ⛔ **Oggi `m1` e- ROSSO**, e il
