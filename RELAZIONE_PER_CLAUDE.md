@@ -14530,3 +14530,21 @@ Ogni dato di `db_era2/` ha ### **il suo TIMBRO accanto**, col campo `versione_da
 ### 📌 **QUATTRO FORME VANNO A TE, e NESSUNA la raccomando** -- in `[[DOMANDA-MITOSI-LE-FORME]]`: lo **spareggio**, la **ripartizione del modulo di `phi`** *(tre vincoli la stringono, fra cui la **`C`**, ma non la determinano)*, il **ramo della radice**, e la **connessione quando i vicini comuni non ci sono** *(sul seme minimo e' **il caso normale**)*.
 
 ### ✅ **E la proporzione fra genitori e vuoto NON si sceglie, come avevi deciso:** una volta fissate le forme ### **e' DETERMINATA da `Delta E = 0`** -- non e' un parametro, **e' la soluzione di un'equazione.**
+
+---
+
+## IL DIFETTO DEI CICLI E' UNO, NON TRE -- e lo registro perche' l'ho detto a Luca e non al repo *(2026-10-12)*
+
+### ⭐ **Derivando `P3`, `P4` e `P5` nello stesso giro, lo STESSO difetto strutturale e' comparso TRE VOLTE**, e in tutti e tre ha **la stessa forma**: ### **una somma su una base non unica non e' un osservabile.**
+
+| | dove | la forma |
+|---|---|---|
+| `1` | **`P3`, la corrente di `E`** | i cambiamenti per nodo sommano a zero, quindi **una** corrente esiste -- ma **si puo' aggiungere qualunque CIRCOLAZIONE SUI CICLI**, quindi non e' unica |
+| `2` | **`P4`, il termine magnetico di `U`** | l'olonomia di un arco solo **non e' invariante di gauge**, quella su un **ciclo** si' -- quindi l'energia e' una somma **sui cicli** |
+| `3` | **`P5`, il criterio della mitosi** | lo stesso: l'olonomia su un **ciclo**, e **la stessa domanda su quali** |
+
+### ✅ **PERCHE' CREDO CHE LA RISPOSTA SIA UNA E NON TRE:** in tutti e tre il problema **non e' il contenuto fisico** ma ### **la scelta di una base di cicli sul grafo** -- e **il grafo e' lo stesso**. ### **Se esiste un insieme di cicli DETERMINATO dal grafo, risolve tutti e tre in un colpo; e se non esiste, tutti e tre hanno lo stesso limite, e il limite va dichiarato UNA VOLTA invece che tre.**
+
+### ⚠ **E il candidato e' gia' nel banco** *(`geometria.cicli_corti`)*, ma **i pareggi sono lo stesso problema dello spareggio fra archi di `P5`:** ### **su un grafo regolare capitano SEMPRE**, e ogni spareggio che so costruire e' **non deterministico oppure POSIZIONALE** -- e `A17` vieta le posizioni.
+
+### 📌 **LA DOMANDA VERA, e non la decido io:** esiste un insieme di cicli **determinato dal grafo e dallo STATO**, non dalla numerazione? ### ⭐ **E la mia raccomandazione e' di TRATTARLO COME UNO:** se decidi l'insieme, **tre domande si chiudono insieme**; se decidi che non esiste, **tre limiti si dichiarano insieme**. ### **In entrambi i casi la decisione e' UNA.** Sta in `[[DOMANDA-BASE-DI-CICLI]]`.

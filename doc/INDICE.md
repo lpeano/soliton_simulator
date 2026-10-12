@@ -10,7 +10,7 @@
 | `DOCUMENTAZIONE` | `ENTRAMBE` | 9 |
 | `FISICA` | `1` | 343 |
 | `FISICA` | `2` | 93 |
-| `FISICA` | `ENTRAMBE` | 20 |
+| `FISICA` | `ENTRAMBE` | 21 |
 | `INFRASTRUTTURA` | `1` | 39 |
 | `INFRASTRUTTURA` | `2` | 21 |
 | `INFRASTRUTTURA` | `ENTRAMBE` | 24 |
@@ -271,6 +271,7 @@
 | `DISEGNO-3D-OSSERVATORE` | STANDARD | METODO | 2 | ### **AGENDA** |  | il disegno 3D e- un OSSERVATORE, e il 3D che distorce E- UNA MISURA |
 | `DIVISIONE-AUTOCONSISTENTE` | FRONTE | FISICA | 2 | ### **AGENDA** |  | la divisione dell arco come UNA legge: dove si rompe, cosa ereditano i figli, il |
 | `DOMANDA-A3B-CLASSE` | DECISIONE | METODO | 2 | ### **AGENDA** |  | A3b: con che classe entra nell-indice? |
+| `DOMANDA-BASE-DI-CICLI` | DECISIONE | FISICA | ENTRAMBE | ### **APERTA** | SI | la base di cicli non e unica, e lo stesso difetto compare in tre pezzi diversi |
 | `DOMANDA-C2-O-C4` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | due componenti o quattro: il gap c-e- solo con C4? |
 | `DOMANDA-CHI-CAUSA-L-ANISOTROPIA` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | sul cubico i versori del v3 RIDUCONO l-anisotropia direzionale: e- una leva o si |
 | `DOMANDA-COME-LA-MATERIA-CAMBIA-LAMBDA` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | come la materia cambia la densita- del vuoto: scattering nel nodo o trasmissione |
