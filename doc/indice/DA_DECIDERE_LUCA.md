@@ -16,15 +16,18 @@
 
 ## LE ALTRE, per priorita-
 
-### `CRITICA` — **6**
+### `CRITICA` — **9**
 
 | la domanda | pronta? | che cosa aspetta |
 |---|---|---|
+| **[[DOMANDA-CORRENTE-LOCALE-NON-ESISTE]]** la corrente locale di E non esiste in forma chiusa, nemmeno per la parte | ### ✅ **PRONTA** | ### **niente** |
 | **[[DOMANDA-D13-CONIUGATI]]** D13: i coniugati delle memorie -- tw come fase U(1) sull-arco? | ### ⏳ aspetta | ### **aspetta:** `DOMANDA-D9-GEOMETRIA` |
 | **[[DOMANDA-D9-GEOMETRIA]]** D9: la geometria viene da d e p_d dentro H, o dalle relazioni fra gli ps | ### ⏳ aspetta | ### **aspetta:** `DOMANDA-QUANTITA-CONSERVATA` |
 | **[[DOMANDA-LA-CARTA-NON-ESISTE]]** la carta della fisica non ha un documento, e le sue etichette collidono  | ### ✅ **PRONTA** | ### **niente** |
+| **[[DOMANDA-MITOSI-LE-FORME]]** le quattro forme della mitosi: lo spareggio, phi, il ramo della radice,  | ### ✅ **PRONTA** | ### **niente** |
 | **[[DOMANDA-PASSO-FRAZIONARIO-O-ASINCRONO]]** pezzi frazionari o tick asincroni, e l-invarianza locale dei secondi NON | ### ✅ **PRONTA** | ### **niente** |
 | **[[DOMANDA-QUANTITA-CONSERVATA]]** esiste una moneta isotropa, causale e simmetrica fra le bande con una qu | ### ✅ **PRONTA** | ### **niente** |
+| **[[DOMANDA-U-DINAMICA-LE-FORME]]** le quattro forme della U d arco dinamica: la scala, il caso senza vuoto, | ### ✅ **PRONTA** | ### **niente** |
 | **[[SCENA-3D-PRINCIPALE]]** la (ii) e- il BANCO DI MISURA: punti che si respingono, gradi 2-6 | ### ✅ **PRONTA** | ### **niente** |
 
 ### `DIPENDENTE` — **17**
@@ -49,12 +52,13 @@
 | **[[DOMANDA-QUANDO-LA-CAMMINATA-IN-TABELLA]]** quando si porta la camminata nella tabella? il porting aspetta TRE decis | ### ⏳ aspetta | ### **aspetta:** `DOMANDA-PASSO-FRAZIONARIO-O-ASINCRONO`, `DOMANDA-COME-LA-MATERIA-CAMBIA-LAMBDA`, `DOMANDA-QUALE-FORMA-FISSA-CS` |
 | **[[DOMANDA-UNITA-DI-STATO]]** l-unita- di stato: qual e- la capacita- di un nodo? | ### ⏳ aspetta | ### **aspetta:** `DOMANDA-D9-GEOMETRIA` |
 
-### `MINORE` — **4**
+### `MINORE` — **5**
 
 | la domanda | pronta? | che cosa aspetta |
 |---|---|---|
 | **[[DOMANDA-A3B-CLASSE]]** A3b: con che classe entra nell-indice? | ### ✅ **PRONTA** | ### **niente** |
 | **[[DOMANDA-DOVE-STA-LA-C-IN-TABELLA]]** la C e decisa al punto F3 e nessuna legge della tabella la dichiara | ### ✅ **PRONTA** | ### **niente** |
+| **[[DOMANDA-FLUSSO-SENZA-AZIONE]]** un flusso non dichiara dove agisce: lo schema non ha il campo azione per | ### ✅ **PRONTA** | ### **niente** |
 | **[[DOMANDA-REGOLE-FUORI-CLAUDE]]** le regole di gestione fuori da CLAUDE.md, e quelle dentro senza presidio | ### ✅ **PRONTA** | ### **niente** |
 | **[[DUE-STRUMENTI-ARCHIVIO-E]]** due strumenti per lo stesso mestiere: spostare gli output su E- | ### ✅ **PRONTA** | ### **niente** |
 
@@ -62,7 +66,7 @@
 
 ## IL CONTO
 
-> ### ⛔ **aperte `28`, di cui pronte `19`.**
+> ### ⛔ **aperte `32`, di cui pronte `23`.**
 >
 > ### ✅ **E una domanda DECISA esce da sola:** si chiude con la decisione di Luca e il commit, e ### **nessuno la spunta a mano** -- la lista ### **si genera dai campi**, e un campo che cambia ### **cambia la lista.**
 

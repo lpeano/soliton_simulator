@@ -14510,3 +14510,23 @@ Ogni dato di `db_era2/` ha ### **il suo TIMBRO accanto**, col campo `versione_da
 ### 📌 **LE QUATTRO FORME VANNO A TE**, in `[[DOMANDA-U-DINAMICA-LE-FORME]]`, con la raccomandazione **separata**. ### ⛔ **E nessun codice: il mandato dice <<il codice dopo la sua risposta>>.**
 
 ### ⚠ **E `9-ter` chiede di contarle: questa derivazione AGGIUNGE DUE LEGGI** *(l'energia di `U` e la sua evoluzione)*, e ### **non si poteva togliere niente in cambio.**
+
+---
+
+## `P5`: LA MITOSI -- E I DUE PUNTI DEL MANDATO SONO LO STESSO FATTO, VISTO DA DUE LATI *(2026-10-12)*
+
+### ⭐ **LA SCOPERTA DEL PEZZO.** Il mandato chiede **due** cose separate: il **tetto `4pi`**, e la `U` dei due archi nuovi come **<<l'olonomia restante divisa a meta'>>**. ### ⛔ **Ma la radice quadrata in `SU(2)` NON E' UNICA: ha due rami che differiscono per `-I`** -- e ### **`-I` E' esattamente la rotazione di `2pi`.** ### ✅ **Cioe' l'ambiguita' della <<meta'>> E' LA DOPPIA COPERTURA, la stessa del tetto: i due punti sono LO STESSO FATTO.** ### **E la scelta del ramo e' FISICA, non convenzionale: i due rami danno due stati diversi.**
+
+### ✅ **E IL TETTO `4pi` NON E' UN NUMERO SCELTO:** in `SU(2)` una rotazione di `2pi` da' **`-I`**, non `I`, e l'olonomia torna all'identita' **solo a `4pi`**. ### **E' un fatto del GRUPPO, non una soglia tarata** -- quindi `A1` e' rispettato **senza doverlo argomentare.**
+
+### ✅ **E `psi = 0` SULLE ESTREMITA' NUOVE ADESSO E' DERIVATO, dove prima era il mio DEFAULT INVISIBILE.** La norma deve essere invariata e le estremita' vecchie **tengono il loro `psi`**, quindi le nuove **devono portare zero**; e qualunque valore diverso da zero **dovrebbe venire da qualche parte**, e prenderlo ai vicini ### **sarebbe un trasferimento di MATERIA alla nascita, che `[[D-BILANCIO-NASCITA]]` vieta.** ### ⭐ **Quindi e' l'unico valore ammesso, e NON e' una scelta** -- e questo chiude `[[DOMANDA-ESTREMITA-NUOVE-INIZIALI]]` **per la parte di `psi`.**
+
+### ⚠ **UNA COSA CHE SEMBRAVA UN BLOCCO E NON LO E', e lo dico perche' me lo sono chiesto:** `P3` ha trovato che `E` **non ha una corrente locale**, e il punto `(b)` chiede un bilancio **LOCALE**. ### ✅ **Ma `P3` ha rotto la decomposizione in FLUSSI, non la LOCALIZZAZIONE:** `E_k` resta ben definita per nodo, e ### **un bilancio su un INTORNO non ha bisogno di una corrente.** ### ⛔ **A una condizione che DICHIARO: la nascita e' ISTANTANEA**, un passo **fra due tick** -- altrimenti l'energia potrebbe **uscire dall'intorno** e `Delta E` locale non sarebbe zero **senza che niente sia sbagliato.**
+
+### ⛔ **E UNA DIPENDENZA VERA: il punto `(b)` NON SI PUO' CHIUDERE PRIMA DI `P4`.** Il quanto che i genitori cedono entra in `E` **attraverso il termine delle olonomie di `U`**, e quel termine e' **una delle quattro forme che aspettano te**. ### **Senza, il bilancio ha un addendo che non si sa scrivere.**
+
+### ⛔ **E UN PROBLEMA MIO, NON DEL MANDATO: lo SPAREGGIO per <<quale arco del ciclo si divide>>.** Tutte le candidate che so costruire hanno un difetto: per **indice d'arco** ### **non e' relazionale -- dipende dalla NUMERAZIONE, e `A17` vieta le posizioni**; per una grandezza dello stato e' relazionale ma **sposta il problema**; dividere **tutti** gli archi in pareggio ### **cambia il numero dei nati, quindi e' un'altra regola.** ### ⚠ **E non lo nascondo dicendo che i pareggi non capitano: su un grafo regolare capitano SEMPRE** -- ed e' proprio **il controllo cubico.**
+
+### 📌 **QUATTRO FORME VANNO A TE, e NESSUNA la raccomando** -- in `[[DOMANDA-MITOSI-LE-FORME]]`: lo **spareggio**, la **ripartizione del modulo di `phi`** *(tre vincoli la stringono, fra cui la **`C`**, ma non la determinano)*, il **ramo della radice**, e la **connessione quando i vicini comuni non ci sono** *(sul seme minimo e' **il caso normale**)*.
+
+### ✅ **E la proporzione fra genitori e vuoto NON si sceglie, come avevi deciso:** una volta fissate le forme ### **e' DETERMINATA da `Delta E = 0`** -- non e' un parametro, **e' la soluzione di un'equazione.**

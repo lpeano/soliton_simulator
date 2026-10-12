@@ -9,7 +9,7 @@
 | `DOCUMENTAZIONE` | `2` | 1 |
 | `DOCUMENTAZIONE` | `ENTRAMBE` | 9 |
 | `FISICA` | `1` | 343 |
-| `FISICA` | `2` | 92 |
+| `FISICA` | `2` | 93 |
 | `FISICA` | `ENTRAMBE` | 20 |
 | `INFRASTRUTTURA` | `1` | 39 |
 | `INFRASTRUTTURA` | `2` | 21 |
@@ -290,6 +290,7 @@
 | `DOMANDA-LA-CARTA-NON-ESISTE` | DECISIONE | DOCUMENTAZIONE | ENTRAMBE | ### **APERTA** |  | la carta della fisica non ha un documento, e le sue etichette collidono con ID v |
 | `DOMANDA-LAMBDA-GRANDEZZA` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | lambda: su quale grandezza si misura, e da dove viene il suo valore? |
 | `DOMANDA-MASSA-E-FORME-MANCANTI` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | il termine di massa e due forme del flusso sono nel banco e non in tabella |
+| `DOMANDA-MITOSI-LE-FORME` | DECISIONE | FISICA | 2 | ### **AGENDA** | SI | le quattro forme della mitosi: lo spareggio, phi, il ramo della radice, la conne |
 | `DOMANDA-PASSO-FRAZIONARIO-O-ASINCRONO` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | pezzi frazionari o tick asincroni, e l-invarianza locale dei secondi NON e- dimo |
 | `DOMANDA-PESO-ARCO-COME-MEMORIA` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | il peso d-arco come memoria dinamica: la geometria nasce dalla dinamica? |
 | `DOMANDA-PHI-REALE-O-COMPLESSO` | DECISIONE | FISICA | 2 | ### **CHIUSA** |  | la tabella dichiara phi_h reale, il banco congelato lo tiene complesso: quale de |
