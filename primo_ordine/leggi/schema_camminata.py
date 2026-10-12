@@ -55,7 +55,20 @@ CHIAVI_PEZZO = ("operatore", "azione", "ambito", "parametri", "simmetrie")
 # ### `esatto` non e- una promessa: e- una DICHIARAZIONE che un collaudo verifica** --
 # ### un flusso <<esatto>> che sbaglia all-ordine `dtau^2` ### **e- un flusso approssimato
 # ### che mente.**
-CHIAVI_FLUSSO = ("generatore", "ambito", "parametri", "esatto", "simmetrie", "conserva")
+CHIAVI_FLUSSO = ("generatore", "ambito", "parametri", "esatto", "simmetrie",
+                 "conserva")
+
+# ### ⛔ **LE DUE CHIAVI DEL POSTO DICHIARATO, e sono il contenuto del presidio
+# ### che la decisione di Luca pretende:** *<<il generatore RIFIUTA di accendere
+# ### un-alternativa di un posto aperto SENZA la sua voce di decisione>>.**
+# ### ⭐ **`posto`** dice a quale posto aperto la legge appartiene *(`A1`..`A5`
+# ### della carta della fisica)*; **`voce_decisione`** dice ### **quale voce
+# ### dell-indice deve averlo deciso.**
+# ### ⚠ **SONO FACOLTATIVE, e il motivo e- che la maggior parte delle leggi NON
+# ### sta in un posto aperto:** pretenderle da tutte vorrebbe dire ### **chiamare
+# ### <<posto aperto>> anche cio- che e- deciso.**
+CHIAVI_POSTO = ("posto", "voce_decisione")
+
 
 
 def errori_pezzo(d, idv, err):
@@ -158,3 +171,45 @@ def errori_ordine(ordine, leggi, err):
             err("le frazioni di `%s` sommano a %r e NON a 1. ### La composizione non "
                 "integra il passo intero, e questo non e- uno stile: e- un PASSO "
                 "SBAGLIATO" % (idl, s))
+
+
+def errori_posti_accesi(ordine, leggi, voci_decise, err):
+    """### ⛔ **IL PRESIDIO CHE LA DECISIONE DI LUCA PRETENDE, come IMPEDIMENTO VERO.**
+
+    La decisione del `2026-10-12` dice: *«il generatore **RIFIUTA** di accendere
+    un'alternativa di un posto aperto **senza la sua voce di decisione**»*. ### **E
+    <<accendere>> ha un significato preciso: ESSERE NELL'ORDINE DI COMPOSIZIONE.** Una
+    legge in tabella e **fuori** dall'ordine **esiste e non agisce**; una legge
+    **nell'ordine** agisce a ogni tick.
+
+    ### ⭐ **QUINDI IL CONTROLLO E' QUESTO:** se una legge dichiara un `posto` *(cioe'
+    dice «io appartengo a un posto aperto»)* **e sta nell'ordine**, allora la sua
+    `voce_decisione` deve essere **fra le voci DECISE**. ### **Altrimenti si RIFIUTA**,
+    e il messaggio nomina la voce che manca.
+
+    ### ⚠ **E <<decisa>> NON LO DECIDE QUESTO MODULO:** l'elenco arriva da fuori
+    *(`voci_decise`)*, perche' **chi sa se una domanda e' decisa e' l'INDICE**, non lo
+    schema. ### **Uno schema che decidesse da se' quali domande sono chiuse sarebbe una
+    seconda fonte.**
+    """
+    per_id = {str(x.get("id")): x for x in (leggi or []) if isinstance(x, dict)}
+    nell_ordine = {str(e.get("legge")) for e in (ordine or [])
+                   if isinstance(e, dict)}
+    for idl in sorted(nell_ordine):
+        lg = per_id.get(idl)
+        if not lg:
+            continue
+        posto = str(lg.get("posto") or "").strip()
+        if not posto:
+            continue
+        voce = str(lg.get("voce_decisione") or "").strip()
+        if not voce:
+            err("`%s` dichiara il posto aperto `%s` e STA NELL-ORDINE, ma NON dice "
+                "quale voce lo decide. ### Accendere un posto aperto senza nominare la "
+                "sua decisione e- accenderlo DI NASCOSTO" % (idl, posto))
+            continue
+        if voce not in (voci_decise or ()):
+            err("`%s` STA NELL-ORDINE e appartiene al posto aperto `%s`, ma la sua voce "
+                "di decisione `%s` NON E- FRA LE VOCI DECISE. ### Il posto resta APERTO, "
+                "quindi la legge NON SI ACCENDE: o Luca decide, o la legge esce "
+                "dall-ordine" % (idl, posto, voce))

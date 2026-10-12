@@ -151,8 +151,15 @@ def pe1(leggi, gen, reg_l):
     # ### ### **legge, file, voce del registro e scheda**, e un osservatore
     # ### ### **E- UNA LEGGE DELLA TABELLA.** Tenerlo fuori avrebbe reso la biiezione
     # ### vera ### **solo sui tipi che avevo implementato**, che non e- la stessa cosa.
+    # ### ⭐ **E ANCHE I PEZZI UNITARI E I FLUSSI, dal pezzo `2` del simulatore.**
+    # ### ⛔ **Il motivo e- lo stesso che vale per gli osservatori:** un
+    # ### `pezzo_unitario` ### **E- UNA LEGGE DELLA TABELLA**, ha il suo file generato,
+    # ### la sua riga di registro e la sua scheda -- e tenerlo fuori renderebbe la
+    # ### biiezione vera ### **solo sui tipi che avevo implementato prima**, che e-
+    # ### esattamente la trappola che questo commento gia- descriveva.
     t = {x["id"] for x in leggi
-         if x["tipo"] in ("termine_nodo", "termine_arco", "osservatore")}
+         if x["tipo"] in ("termine_nodo", "termine_arco", "osservatore",
+                          "pezzo_unitario", "flusso")}
     g = set(gen)
     r = {x["id"] for x in reg_l}
     s = {f[:-3] for f in os.listdir(SCHEDE) if f.endswith(".md")} \
@@ -336,7 +343,12 @@ def pe5(verboso=True):
         spec = importlib.util.spec_from_file_location("_oss_" + f[:-3], p)
         m = importlib.util.module_from_spec(spec)
         spec.loader.exec_module(m)
-        st = ST.nuovo(5)
+        # ### ⭐ **E `2` ARCHI NON SONO UN NUMERO SCELTO: sono la TAGLIA**
+        # ### minima che serve a far esistere lo stato di camminata *(lo spinore
+        # ### vive sulle ### **estremita- d-arco**, e sono `2 m`)*. ### **Un
+        # ### osservatore si prova su uno stato CHE ESISTE**, e la sua taglia qui
+        # ### non entra in cio- che si misura.
+        st = ST.nuovo(5, 2)
         rng = np.random.default_rng(7)
         for k in st:
             st[k][...] = (rng.normal(size=st[k].shape)

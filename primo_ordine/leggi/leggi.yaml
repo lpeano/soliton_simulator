@@ -74,6 +74,84 @@ variabili:
       CONIUGATI INDIPENDENTI `psi_0c` e `psi_1c` -- indipendenti perche' la derivata che
       serve e' quella di WIRTINGER.
 
+  # ==================================================================================
+  #  LE VARIABILI DELLA CAMMINATA -- sulle ESTREMITA' D'ARCO
+  # ----------------------------------------------------------------------------------
+  #  ### I NOMI PORTANO IL SUFFISSO `_h`, e NON e' una decorazione: `h` e' l'indice di
+  #  ### ESTREMITA' che il banco usa in ogni riga (`psi[h]`, `partner[h]`, `nodo[h]`),
+  #  ### quindi il nome dice DOVE VIVE la variabile.
+  #  ### ⚠ E CONVIVONO CON `psi`, che e' lo spinore DI NODO delle leggi di PROVA: quelle
+  #  ### servono a collaudare la catena del formalismo di `H`, e quando andranno via
+  #  ### ANDRA' VIA ANCHE `psi`. Due spinori nella stessa tabella sono un fatto
+  #  ### TRANSITORIO, e sta scritto qui invece di essere scoperto dopo.
+  # ==================================================================================
+  - nome: psi_h
+    tipo: complesso_c2_estremita
+    voce: V-PSI-H-ERA2
+    dimensione: E^0
+    scheda: >-
+      Lo spinore della camminata, `C^2` SULL'ESTREMITA' D'ARCO (punto `F1` della carta
+      della fisica). E' ADIMENSIONALE perche' `psi^dag psi` e' LA NORMA, cioe' un
+      CONTEGGIO. ### Vive sull'estremita' e NON sul nodo, e il punto `F1` lo DECIDE:
+      un'estremita' porta uno spinore, un nodo ne porta tanti quanto il suo grado.
+  - nome: phi_h
+    tipo: reale_estremita
+    voce: V-PHI-H-ERA2
+    dimensione: E^0
+    scheda: >-
+      Il vuoto locale, uno SCALARE NEUTRO sull'estremita' d'arco (punto `F4`). E'
+      l'erede dello scuotimento dell'era `1`: deterministico, col caso SOLO nelle
+      condizioni iniziali e da un seme. ### E' NEUTRO, quindi lo spostamento lo porta
+      SENZA `U` -- ed e' la differenza che lo distingue da `psi_h`.
+  - nome: Lambda
+    tipo: reale_nodo
+    voce: V-LAMBDA-ERA2
+    dimensione: E^0
+    scheda: >-
+      La densita' locale del vuoto nel nodo, `Lambda_k = somma |phi_h|^2` sulle
+      estremita' del nodo (punto `F4`). ### E' LA SCALA RISPETTO A CUI LA SATURAZIONE
+      SI MISURA (punto `F5`), ed e' per questo che non serve nessuna costante `g`: la
+      scala e' RELAZIONALE, cioe' presa dal sistema e non messa a mano.
+  - nome: h_int
+    tipo: reale_nodo
+    voce: V-H-INT-ERA2
+    dimensione: E^0
+    scheda: >-
+      L'elicita' del nodo, cioe' il campo di interferenza da cui nasce la saturazione
+      (punti `F5` e `F6`). ### E' DISPARI SOTTO `C` (punto `F3`), e questo la rende la
+      grandezza da cui si legge MATERIA o ANTIMATERIA.
+
+# ### ⚠ **E L-ORDINE STA QUI, PRIMA DELLE LEGGI, PER UNA RAGIONE PRATICA E DICHIARATA:
+#     la GUIDA documenta che una legge nuova SI AGGIUNGE IN CODA AL FILE, e il suo
+#     collaudo lo FA. ### Con l-ordine in fondo, <<aggiungere in coda>> metteva la
+#     legge SOTTO la chiave `ordine`, e la tabella non era piu- leggibile.
+#     ### ✅ Spostarlo qui tiene vivo un modo di lavorare CHE LA GUIDA PROMETTE,
+#     invece di cambiare la promessa.
+# ====================================================================================
+#  L-ORDINE DI COMPOSIZIONE -- UNA LISTA, e le ripetizioni sono AMMESSE
+# ------------------------------------------------------------------------------------
+#  ### ⭐ E- UNA LISTA, e il posto `P2` del piano si e- CHIUSO su questo argomento
+#  ### (del guardiano, 2026-10-12): la composizione di Strang usa LO STESSO PEZZO DUE
+#  ### VOLTE -- mezzo flusso, passo lineare, mezzo flusso -- e UN CAMPO PER PEZZO NON
+#  ### PUO- ESPRIMERE un pezzo che compare due volte, perche- vorrebbe due valori nello
+#  ### stesso campo. Una lista ammette ripetizioni.
+#  ### ⛔ E OGNI ELEMENTO PORTA LA SUA FRAZIONE DI PASSO: senza la frazione la lista
+#  ### direbbe l-ORDINE e non il PASSO.
+#  ### ⭐ E IL CONTROLLO CHE VALE PIU- DI TUTTI: la somma delle frazioni di una legge
+#  ### deve fare 1 ESATTO. Una composizione dove le due meta- fanno 0.9 NON INTEGRA IL
+#  ### PASSO INTERO, e non e- uno stile: e- un PASSO SBAGLIATO.
+#  ### ⚠ E `CAMM-FORMA-D` NON C-E-, ed e- il punto: una legge DICHIARATA SPENTA sta
+#  ### in tabella e NON nell-ordine. Il suo posto esiste, il suo effetto no.
+# ====================================================================================
+ordine:
+  - {legge: CAMM-SATURAZIONE, frazione: 0.5}
+  - {legge: CAMM-MONETA-SPIN, frazione: 1}
+  - {legge: CAMM-GROVER, frazione: 1}
+  - {legge: CAMM-SPOSTAMENTO, frazione: 1}
+  - {legge: CAMM-GROVER-VUOTO, frazione: 1}
+  - {legge: CAMM-SPOSTAMENTO-VUOTO, frazione: 1}
+  - {legge: CAMM-SATURAZIONE, frazione: 0.5}
+
 # ### LE LEGGI. Sono DUE, ed ENTRAMBE `prova: true`: servono a collaudare la catena
 #     (tabella -> controllo -> derivata -> modulo -> scheda -> indice), NON a dire come va
 #     il mondo. ### NESSUNA FISICA E' DECISA QUI.
@@ -167,3 +245,161 @@ leggi:
       misura la conservazione, perche' la norma e' l'invariante QUADRATICO che un
       metodo simmetrico conserva. ### Soddisfa `A17` perche' e' DICHIARATO strumento:
       non entra in H, non ha gradiente, e il generatore non gliene calcola uno.
+
+  # ==================================================================================
+  #  LA FISICA DELLA CAMMINATA -- i pezzi del passo, il flusso, e la forma SPENTA
+  # ----------------------------------------------------------------------------------
+  #  ### ⛔ QUESTE NON SONO LEGGI DI PROVA: `prova: false`. Vengono dalla CARTA DELLA
+  #  ### FISICA (`CARTA-FISICA-SIMULATORE`), che Luca ha deciso il 2026-10-12, e sono
+  #  ### la fisica GIA' MISURATA sul banco congelato -- non fisica nuova.
+  #  ### ⭐ E IL CONTO DELLE LEGGI NON SALE: la tabella TOGLIE una duplicazione, perche'
+  #  ### oggi la stessa fisica vive nel BANCO CONGELATO E qui.
+  #  ### ⚠ IL FRAME (`n`, `U`) NON E' UNA VARIABILE DI QUESTA TABELLA, ed e' una scelta
+  #  ### dichiarata: i versori sono PROVVISORI (`PROVV-VERSORI-NON-RELAZIONALI`, posto
+  #  ### `A5`) e `U` e' FERMA finche' la `U` dinamica non si deriva (posto `A2`).
+  #  ### Metterli fra le variabili di stato direbbe che sono DECISI, e non lo sono.
+  # ==================================================================================
+
+  # ---------------------------------------------------------------- F1: la moneta di spin
+  - id: CAMM-MONETA-SPIN
+    tipo: pezzo_unitario
+    prova: false
+    operatore: moneta_spin
+    azione: estremita
+    ambito: [psi_h]
+    parametri:
+      eps:
+        valore: 0.5
+        dimensione: E^1
+        origine: >-
+          ### IL VALORE DEL BANCO, NON UNA TARATURA. `0.5` e' il valore con cui tutte le
+          letture del banco congelato sono state fatte, e il CRITERIO DI PASSAGGIO
+          pretende che il generato riproduca quelle letture: cambiarlo qui vorrebbe dire
+          confrontare DUE ESPERIMENTI. ### La sua origine FISICA resta aperta, ed e' il
+          posto `A1` (il tempo proprio locale): `eps * dtau` e' cio' che conta, e la
+          forma di `dtau` NON e' decisa.
+    simmetrie: [U1-FASE-GLOBALE]
+    assiomi: [A16, A13]
+    scheda: >-
+      `exp(-i eps dtau sigma.n)` per ESTREMITA' (punto `F1`). E' qui che SPIN e DIREZIONE
+      si legano, ed e' ESATTA e non un'esponenziale numerica: `exp(-i a sigma.n) =
+      cos a I - i sin a (sigma.n)` perche' `(sigma.n)^2 = I` quando `|n| = 1`. ### Quindi
+      nessun errore di troncamento, e la forma e' UNITARIA AL BIT.
+      ### AZIONE `estremita`: agisce su una estremita' per volta, e NON legge il vicino.
+
+  # ---------------------------------------------------------------- F1: il Grover
+  - id: CAMM-GROVER
+    tipo: pezzo_unitario
+    prova: false
+    operatore: grover
+    azione: nodo
+    ambito: [psi_h]
+    parametri: {}
+    simmetrie: [U1-FASE-GLOBALE]
+    assiomi: [A16]
+    scheda: >-
+      `(2/d) Somma - I` nel NODO (punto `F1`): mescola le estremita' di uno stesso nodo,
+      ed e' un'INVOLUZIONE (`G^2 = I`). ### NON HA PARAMETRI, e non e' una semplificazione:
+      il `2/d` viene dal GRADO del nodo, cioe' da una proprieta' del grafo -- `A1` e'
+      rispettato perche' non c'e' nessun numero da tarare.
+      ### AZIONE `nodo`: e' il SOLO pezzo che mescola estremita' diverse dello stesso
+      nodo, ed e' per questo che NON si puo' scrivere come espressione in questo formato
+      (un termine di nodo non vede i vicini): e' il posto `P4` del piano.
+
+  # ---------------------------------------------------------------- F1 e F2: lo spostamento
+  - id: CAMM-SPOSTAMENTO
+    tipo: pezzo_unitario
+    prova: false
+    operatore: spostamento_trasporto
+    azione: arco
+    ambito: [psi_h]
+    parametri: {}
+    simmetrie: [U1-FASE-GLOBALE]
+    assiomi: [A13, A16]
+    scheda: >-
+      `psi'[partner(h)] = U[h] psi[h]` (punti `F1` e `F2`): E' IL CONO, un arco per tick,
+      cioe' LA VELOCITA' DELLA LUCE del sistema. ### E' una PERMUTAZIONE composta col
+      trasporto `U(2)`, e non un prodotto matrice-vettore: la parte `U(1)` di `U` e'
+      l'elettromagnetismo, la parte `SU(2)` la geometria.
+      ### E `A13` c'e' perche' la SCALA MINIMA E' UN ARCO: sotto l'arco non esiste
+      niente, nemmeno una distanza.
+      ### AZIONE `arco`: scambia le due estremita' dello stesso arco.
+
+  # ---------------------------------------------------------------- F4: il vuoto
+  - id: CAMM-GROVER-VUOTO
+    tipo: pezzo_unitario
+    prova: false
+    operatore: grover_scalare
+    azione: nodo
+    ambito: [phi_h]
+    parametri: {}
+    simmetrie: [U1-FASE-GLOBALE]
+    assiomi: [A16]
+    scheda: >-
+      Il Grover sul vuoto `phi` (punto `F4`), che e' uno SCALARE NEUTRO. ### Mescola le
+      estremita' del nodo come quello dello spinore, e la differenza sta nel pezzo dopo:
+      il vuoto si sposta SENZA `U`.
+  - id: CAMM-SPOSTAMENTO-VUOTO
+    tipo: pezzo_unitario
+    prova: false
+    operatore: spostamento_scalare
+    azione: arco
+    ambito: [phi_h]
+    parametri: {}
+    simmetrie: [U1-FASE-GLOBALE]
+    assiomi: [A13]
+    scheda: >-
+      Lo spostamento del vuoto (punto `F4`), SENZA `U`. ### E il <<senza `U`>> non e' una
+      semplificazione: `phi` e' NEUTRO, quindi non ha carica da trasportare -- e dargli
+      una `U` vorrebbe dire dargli una carica che non ha.
+
+  # ---------------------------------------------------------------- F5: la saturazione
+  - id: CAMM-SATURAZIONE
+    tipo: flusso
+    prova: false
+    generatore: Lambda*(h_int/Lambda - atan(h_int/Lambda))
+    esatto: true
+    ambito: [psi_h, phi_h, Lambda, h_int]
+    parametri: {}
+    simmetrie: [U1-FASE-GLOBALE]
+    conserva: [NORMA]
+    scheda: >-
+      La saturazione `N_k = Lambda_k G(h_k / Lambda_k)` con `G(x) = x - arctan x`
+      (punto `F5`). ### SENZA NESSUNA COSTANTE `g`, e la scala e' IL VUOTO LOCALE: e'
+      questo che rende il termine RELAZIONALE invece di tarato.
+      ### `esatto: true` NON E' UNA PROMESSA: il flusso si integra in forma CHIUSA, e un
+      collaudo lo verifica -- un flusso <<esatto>> che sbaglia all'ordine `dtau^2`
+      sarebbe un flusso APPROSSIMATO CHE MENTE.
+      ### E LA SUA DERIVATA E' AL PIU' `1` (`G'(x) = x^2/(1+x^2)`), che e' il fatto
+      misurato dietro l'ipotesi <<la saturazione e' una LENTE e non una BUCA>>
+      (`PERCHE-NON-LEGA`).
+    assiomi: [A1, A16]
+
+  # ---------------------------------------------------------------- F6: la forma (D), SPENTA
+  - id: CAMM-FORMA-D
+    tipo: flusso
+    prova: false
+    # ### ⛔ IL POSTO APERTO, E LA SUA VOCE: questa legge appartiene al posto `A4`
+    # ### (il segno della saturazione), e la sua decisione e- `DOMANDA-QUALE-SEGNO`,
+    # ### che e- APERTA. ### Finche- quella voce non e- decisa, il generatore IMPEDISCE
+    # ### di metterla nell-ordine di composizione -- cioe- di ACCENDERLA.
+    posto: A4
+    voce_decisione: DOMANDA-QUALE-SEGNO
+    generatore: Lambda*(h_int/Lambda - atan(h_int/Lambda))
+    esatto: true
+    ambito: [psi_h, phi_h, Lambda, h_int]
+    parametri: {}
+    simmetrie: [U1-FASE-GLOBALE]
+    conserva: [NORMA]
+    scheda: >-
+      La forma `(D)` dell'auto-interazione dell'interferenza (punto `F6`), DICHIARATA
+      SPENTA: NON entra nell'ordine di composizione, e il suo posto nella tabella serve a
+      dire CHE ESISTE e che il suo posto e' dichiarato.
+      ### ⛔ PERCHE' SPENTA, con un numero: sulla scena principale a `26000` nodi il segno
+      diretto di questa forma e' PEGGIO del lineare -- meno `21.6%` della frazione entro
+      un arco, a `6.5 sigma` (`doc/REFERTO_legame.md`). ### Non e' neutro: e'
+      SFAVOREVOLE.
+      ### E IL SUO SEGNO E' UN POSTO APERTO (`DOMANDA-QUALE-SEGNO`): la domanda non e' piu'
+      <<quale segno lega>> ma <<quale segno serve QUANDO IL CAMPO C'E'>>, e si decide
+      sulla prova con la `U` dinamica accesa.
+    assiomi: [A1]

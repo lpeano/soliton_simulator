@@ -142,6 +142,33 @@ def main():
                                  "quando": "dopo"}], LEGGI)),
           "### il vocabolario e' CHIUSO anche dentro l'ordine")
 
+    # ======================================= IL PRESIDIO SUI POSTI APERTI, tre versi
+    # ### ⛔ **E- L-IMPEDIMENTO che la decisione di Luca pretende**, e <<accendere>>
+    # ### ha un significato preciso: ### **stare nell-ORDINE.** Una legge in tabella e
+    # ### ### **fuori** dall-ordine ### **esiste e non agisce.**
+    APERTA = _flusso(id="PROVA-APERTA", posto="A4",
+                     voce_decisione="DOMANDA-FINTA-APERTA")
+    LEGGI2 = LEGGI + [APERTA]
+    fuori_ordine = [{"legge": "PROVA-ENNE", "frazione": 1}]
+    dentro = [{"legge": "PROVA-APERTA", "frazione": 1}]
+    esito("### (5) un posto aperto FUORI dall'ordine PASSA",
+          not S.valida_posti(fuori_ordine, LEGGI2),
+          "### in tabella e fuori dall'ordine: ESISTE e NON AGISCE")
+    esito("### (5-bis) e DENTRO l'ordine, con la voce NON decisa, e' RIFIUTATO",
+          bool(S.valida_posti(dentro, LEGGI2)),
+          "### accendere un posto aperto senza la sua decisione e' accenderlo di nascosto")
+    esito("### (5-ter) e DENTRO l'ordine con la voce DECISA PASSA",
+          not S.valida_posti(dentro, LEGGI2,
+                             voci_decise=("DOMANDA-FINTA-APERTA",)),
+          "### il braccio (5-bis) NON e' un falso-uno: scatta per la VOCE, non per l'id")
+    esito("### (5-quater) e un posto DICHIARATO SENZA la sua voce e' RIFIUTATO",
+          bool(S.valida_posti(dentro, LEGGI + [_flusso(id="PROVA-APERTA",
+                                                       posto="A4")])),
+          "### <<appartengo a un posto aperto>> senza dire QUALE decisione non basta")
+    esito("### (5-quinquies) e il valore di comodo e' il piu' SEVERO",
+          bool(S.valida_posti(dentro, LEGGI2)),
+          "### chi chiama senza l'elenco ottiene NESSUNA decisa, non TUTTE")
+
     # ============================================== e i VIETATI valgono ancora
     esito("### (4) una POSIZIONE nell'`ambito` resta VIETATA anche sui tipi nuovi",
           bool(S.valida_legge(_flusso(generatore="pos_x*psi_0"), VAR)),

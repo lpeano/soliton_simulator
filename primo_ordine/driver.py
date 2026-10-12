@@ -101,7 +101,11 @@ def gira(c):
     OS_ = osservatori_attivi(c)
     ii, jj = grafo(c["scena"], c["nodi"])
     strati = PA.strati(ii, jj)
-    st = ST.nuovo(c["nodi"])
+    # ### ⭐ **E `len(...)` NON E- UN-AGGIUNTA DI COMODO: lo stato della
+    # ### camminata e- DIMENSIONATO DAGLI ARCHI** *(lo spinore vive sulle
+    # ### ### **estremita- d-arco**, e sono `2 m`)*. ### **Senza, `nuovo` ALZA**
+    # ### invece di tornare uno stato della taglia sbagliata.
+    st = ST.nuovo(c["nodi"], len(ii))
     rng = np.random.default_rng(c["seme"])
     for k in st:
         st[k][...] = (rng.normal(size=st[k].shape)

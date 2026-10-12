@@ -86,6 +86,50 @@ moduli:
     responsabilita: lo scambio col vuoto, regola NON-H col suo bilancio
     importa: []
 
+  - nome: _genera_camminata.py
+    responsabilita: gli emettitori della camminata -- i legami e l-ordine
+    importa: []
+
+  - nome: composizione.py
+    responsabilita: l-ordine di composizione, generato dalla tabella
+    generato: true
+    importa: []
+
+  - nome: termini/camm_moneta_spin.py
+    responsabilita: la moneta di spin, generata -- legame
+    generato: true
+    importa: []
+
+  - nome: termini/camm_grover.py
+    responsabilita: il Grover dello spinore, generato -- legame
+    generato: true
+    importa: []
+
+  - nome: termini/camm_spostamento.py
+    responsabilita: lo spostamento con trasporto, generato -- legame
+    generato: true
+    importa: []
+
+  - nome: termini/camm_grover_vuoto.py
+    responsabilita: il Grover del vuoto, generato -- legame
+    generato: true
+    importa: []
+
+  - nome: termini/camm_spostamento_vuoto.py
+    responsabilita: lo spostamento del vuoto, generato -- legame
+    generato: true
+    importa: []
+
+  - nome: termini/camm_saturazione.py
+    responsabilita: la saturazione, generata -- flusso esatto
+    generato: true
+    importa: []
+
+  - nome: termini/camm_forma_d.py
+    responsabilita: la forma (D), generata -- flusso SPENTO
+    generato: true
+    importa: []
+
   - nome: termini/prova_hopping.py
     responsabilita: il salto d-arco, generato -- PROVA
     generato: true
@@ -129,7 +173,7 @@ moduli:
 
   - nome: _genera.py
     responsabilita: dalla tabella al modulo e alla scheda, passando dalla derivata
-    importa: [_genera_stato, _presidio, _rif, schema]
+    importa: [_genera_stato, _presidio, _rif, schema, _genera_camminata]
 
   - nome: _genera_stato.py
     responsabilita: il sorgente di stato.py, dalle variabili della tabella

@@ -8,8 +8,10 @@
 {"id": "V-DT-N", "nome": "dt_n", "censita_in": "doc/MEMORIE_MANCANTI.md", "scritta_da": [], "scritture": 0}
 {"id": "V-ETA", "nome": "eta", "censita_in": "doc/MEMORIE_MANCANTI.md", "scritta_da": ["semina", "step"], "scritture": 4}
 {"id": "V-FATTORE-TEMPO-ARCO", "nome": "_fattore_tempo_arco", "censita_in": "doc/MEMORIE_MANCANTI.md", "scritta_da": [], "scritture": 0}
+{"id": "V-H-INT-ERA2", "era": "2", "nome": "h_int", "tipo": "reale_nodo", "voce": "-", "fonte": "primo_ordine/leggi/leggi.yaml::variabili", "scheda": "L'elicita' del nodo, cioe' il campo di interferenza da cui nasce la saturazione (punti `F5` e `F6`). ### E' DISPARI SOTTO `C` (punto `F3`), e questo la rende la grandezza da cui si legge MATERIA o ANTIMATERIA."}
 {"id": "V-I", "nome": "i", "censita_in": "doc/MEMORIE_MANCANTI.md", "scritta_da": ["_allaccia"], "scritture": 1}
 {"id": "V-J", "nome": "j", "censita_in": "doc/MEMORIE_MANCANTI.md", "scritta_da": ["_allaccia"], "scritture": 1}
+{"id": "V-LAMBDA-ERA2", "era": "2", "nome": "Lambda", "tipo": "reale_nodo", "voce": "-", "fonte": "primo_ordine/leggi/leggi.yaml::variabili", "scheda": "La densita' locale del vuoto nel nodo, `Lambda_k = somma |phi_h|^2` sulle estremita' del nodo (punto `F4`). ### E' LA SCALA RISPETTO A CUI LA SATURAZIONE SI MISURA (punto `F5`), ed e' per questo che non serve nessuna costante `g`: la scala e' RELAZIONALE, cioe' presa dal sistema e non messa a mano."}
 {"id": "V-LAMBDA-NODI", "nome": "lambda_nodi", "censita_in": "doc/MEMORIE_MANCANTI.md", "scritta_da": [], "scritture": 0}
 {"id": "V-MEM-MOT", "nome": "mem_mot", "censita_in": "doc/MEMORIE_MANCANTI.md", "scritta_da": ["memoria_hebbiana_moto", "semina"], "scritture": 3}
 {"id": "V-NATI", "nome": "nati", "censita_in": "csv/_test_fork/_censimento_leggi (NON in doc/MEMORIE_MANCANTI.md)", "scritta_da": ["mitosi"], "scritture": 2}
@@ -23,12 +25,14 @@
 {"id": "V-PERC-GEOM", "nome": "perc_geom", "censita_in": "doc/MEMORIE_MANCANTI.md", "scritta_da": ["semina", "step"], "scritture": 2}
 {"id": "V-PERC-TW", "nome": "perc_tw", "censita_in": "doc/MEMORIE_MANCANTI.md", "scritta_da": ["semina"], "scritture": 1}
 {"id": "V-PHI", "nome": "phi", "censita_in": "doc/MEMORIE_MANCANTI.md", "scritta_da": ["memoria_hebbiana_moto", "mitosi", "semina", "step"], "scritture": 6}
+{"id": "V-PHI-H-ERA2", "era": "2", "nome": "phi_h", "tipo": "reale_estremita", "voce": "-", "fonte": "primo_ordine/leggi/leggi.yaml::variabili", "scheda": "Il vuoto locale, uno SCALARE NEUTRO sull'estremita' d'arco (punto `F4`). E' l'erede dello scuotimento dell'era `1`: deterministico, col caso SOLO nelle condizioni iniziali e da un seme. ### E' NEUTRO, quindi lo spostamento lo porta SENZA `U` -- ed e' la differenza che lo distingue da `psi_h`."}
 {"id": "V-PHI-S", "nome": "phi_s", "censita_in": "doc/MEMORIE_MANCANTI.md", "scritta_da": ["_passo_spinoriale", "semina"], "scritture": 2}
 {"id": "V-PHI0", "nome": "phi0", "censita_in": "doc/MEMORIE_MANCANTI.md", "scritta_da": ["semina"], "scritture": 1}
 {"id": "V-PHIVEL", "nome": "phivel", "censita_in": "doc/MEMORIE_MANCANTI.md", "scritta_da": ["scuoti_vuoto", "semina", "step"], "scritture": 4}
 {"id": "V-POS", "nome": "pos", "censita_in": "doc/MEMORIE_MANCANTI.md", "scritta_da": ["rilassa_disegno", "semina"], "scritture": 4}
 {"id": "V-PSI", "nome": "psi", "censita_in": "doc/MEMORIE_MANCANTI.md", "scritta_da": ["calcola_psi", "step"], "scritture": 3}
 {"id": "V-PSI-ERA2", "era": "2", "nome": "psi", "tipo": "complesso_c2_nodo", "voce": "-", "fonte": "primo_ordine/leggi/leggi.yaml::variabili", "scheda": "lo spinore di nodo, C^2 (`A16`). I suoi simboli per il generatore sono psi_0, psi_1 e i CONIUGATI INDIPENDENTI psi_0c, psi_1c -- indipendenti perche- la derivata che serve e- quella di WIRTINGER. Impronta del blocco variabili: ff5c058ce3e855b7"}
+{"id": "V-PSI-H-ERA2", "era": "2", "nome": "psi_h", "tipo": "complesso_c2_estremita", "voce": "-", "fonte": "primo_ordine/leggi/leggi.yaml::variabili", "scheda": "Lo spinore della camminata, `C^2` SULL'ESTREMITA' D'ARCO (punto `F1` della carta della fisica). E' ADIMENSIONALE perche' `psi^dag psi` e' LA NORMA, cioe' un CONTEGGIO. ### Vive sull'estremita' e NON sul nodo, e il punto `F1` lo DECIDE: un'estremita' porta uno spinore, un nodo ne porta tanti quanto il suo grado."}
 {"id": "V-PSI-PREC", "nome": "_psi_prec", "censita_in": "doc/MEMORIE_MANCANTI.md", "scritta_da": ["step"], "scritture": 1}
 {"id": "V-PSI-SPIN", "nome": "psi_spin", "censita_in": "doc/MEMORIE_MANCANTI.md", "scritta_da": ["calcola_psi"], "scritture": 1}
 {"id": "V-PSI-SPIN-PREC", "nome": "_psi_spin_prec", "censita_in": "doc/MEMORIE_MANCANTI.md", "scritta_da": ["step"], "scritture": 1}

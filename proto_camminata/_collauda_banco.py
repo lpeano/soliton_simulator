@@ -122,9 +122,20 @@ def main():
     # ### ### **leggendo la tabella**, non promettendolo.
     _leggi = os.path.join(RADICE, "primo_ordine", "leggi", "leggi.yaml")
     _t = io.open(_leggi, encoding="utf-8").read() if os.path.exists(_leggi) else ""
+    # ### ⛔ **E QUESTO CONTROLLO L-HO CORRETTO IL 2026-10-12, perche- cercava
+    # ### ### **LA PAROLA invece della PROPRIETA-.** Cercava `"camminata" not in _t`, che
+    # ### era ### **un PROXY** per *<<il banco non e- una legge>>* -- e il proxy si e-
+    # ### rotto quando ### **la FISICA della camminata e- entrata in tabella**, per
+    # ### decisione di Luca *(la carta della fisica)*: da allora la parola
+    # ### ### **DEVE** comparire, perche- e- ### **il nome della fisica.**
+    # ### ✅ **La proprieta- vera e- un-altra: la tabella non nomina IL BANCO**, cioe-
+    # ### il suo percorso e i suoi moduli. ### **Quella si verifica ancora, ed e- quella
+    # ### che il mandato chiedeva.**
     esito("### il banco NON entra in `leggi.yaml`",
-          "camminata" not in _t and "proto_camminata" not in _t,
-          "### la tabella delle leggi non lo nomina: un banco NON E- UNA LEGGE")
+          "proto_camminata" not in _t,
+          "### la tabella non nomina il BANCO (il suo percorso): un banco NON E- UNA "
+          "LEGGE. ### E la PAROLA <<camminata>> ora c-e-, perche- e- il nome della "
+          "FISICA che la tabella porta")
 
     # ================================================================ IL BRACCIO 0
     a = CM.coniuga(CM.passo(psi, sc, r, 1.0))

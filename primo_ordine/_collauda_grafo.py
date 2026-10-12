@@ -94,7 +94,11 @@ def collaudo():
     # ### ⛔ **LO STATO SI COSTRUISCE COME LO COSTRUISCE IL DRIVER**, non in un
     # ### modo mio: `ST.nuovo(n)` e poi il riempimento con `default_rng(seme)`.
     # ### ⚠ **Se lo costruissi diversamente, misurerei un altro sistema.**
-    st = ST.nuovo(c["nodi"])
+    # ### ⭐ **E `len(...)` NON E- UN-AGGIUNTA DI COMODO: lo stato della
+    # ### camminata e- DIMENSIONATO DAGLI ARCHI** *(lo spinore vive sulle
+    # ### ### **estremita- d-arco**, e sono `2 m`)*. ### **Senza, `nuovo` ALZA**
+    # ### invece di tornare uno stato della taglia sbagliata.
+    st = ST.nuovo(c["nodi"], len(gi))
     rng = np.random.default_rng(c["seme"])
     for k in st:
         st[k][...] = (rng.normal(size=st[k].shape)

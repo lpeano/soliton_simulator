@@ -128,6 +128,7 @@ FILE_FISICA = (
     # ### schema -- ### **la forma di una legge E- fisica**, perche- decide
     # ### ### **che cosa si puo- scrivere.**
     'primo_ordine/_collauda_schema_camminata.py',
+    'primo_ordine/_genera_camminata.py',
     'primo_ordine/termini/__init__.py',
     # ### I TRE GENERATI: entrano nella LISTA ### **nel commit in cui nascono**, e il
     # ### mandato lo pretende. ### ⚠ **Sono `prova: true`**: la LISTA sorveglia
@@ -139,6 +140,19 @@ FILE_FISICA = (
     'primo_ordine/osservatori/prova_norma.py',
     'primo_ordine/leggi/schema.py',
     'primo_ordine/leggi/schema_camminata.py',
+    # ### ⭐ **I GENERATI DEL PEZZO `3`: l-ordine e i sette LEGAMI.**
+    # ### ⛔ **Ci stanno perche- il presidio ha ragione:** un file di fisica che
+    # ### ### **nessuno sorveglia e- peggio di un file che non esiste**, perche-
+    # ### ### **SEMBRA sorvegliato.** ### **E sono GENERATI, quindi cambiarli a mano
+    # ### si vede due volte:** dalla lista e dall-impronta.
+    'primo_ordine/composizione.py',
+    'primo_ordine/termini/camm_moneta_spin.py',
+    'primo_ordine/termini/camm_grover.py',
+    'primo_ordine/termini/camm_spostamento.py',
+    'primo_ordine/termini/camm_grover_vuoto.py',
+    'primo_ordine/termini/camm_spostamento_vuoto.py',
+    'primo_ordine/termini/camm_saturazione.py',
+    'primo_ordine/termini/camm_forma_d.py',
     # ### ✅ **Nato il `2026-10-10` dividendo `schema.py`**, che era
     # ### oltre il tetto: ### **il collaudo e- la parte che cresce.**
     'primo_ordine/leggi/_collauda_schema.py',

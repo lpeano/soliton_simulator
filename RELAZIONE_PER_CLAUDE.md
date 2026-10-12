@@ -13988,3 +13988,25 @@ Ogni dato di `db_era2/` ha ### **il suo TIMBRO accanto**, col campo `versione_da
 
 ### ✅ **E LA SUITE PASSA `41` SU `41`** *(era `40`)*, col `pre-commit` a ### **`127.3` s su `500`.**
 
+## ⭐ **I PEZZI `3` E `4`: LA FISICA E' IN TABELLA, E IL PRESIDIO SUI POSTI APERTI IMPEDISCE DAVVERO** *(2026-10-12)*
+
+### ⛔ **E PRIMA DI TUTTO UNA COSA SULL'ORDINE DEL PIANO: i pezzi `3` e `4` NON SI POSSONO SEPARARE.** Il generatore ### **salta i tipi che non conosce**, quindi una tabella con leggi che non sa leggere ### **non genera i loro file** — e la biiezione diventa rossa. ### **Una tabella senza il suo generatore e' una suite rossa, e un commit rosso non si fa.** ### **Quindi un commit solo, e lo dico invece di farlo di nascosto.**
+
+### ✅ **CHE COSA C'E' ADESSO IN TABELLA:** `5` variabili *(fra cui `psi_h` e `phi_h` sulle ### **estremita' d'arco**)*, `10` leggi *(`3` di prova piu' ### **`7` della carta della fisica**)*, e l'### **ordine di composizione** in `7` elementi. ### **E `0` errori di schema.**
+
+### ⭐ **E IL PRESIDIO CHE LA TUA DECISIONE PRETENDEVA IMPEDISCE, provato nei TRE casi:** `CAMM-FORMA-D` dichiara il posto `A4` e la voce `DOMANDA-QUALE-SEGNO`; ### **fuori dall'ordine passa** *(esiste e non agisce)*, ### **dentro l'ordine con la voce non decisa RIFIUTA**, ### **dentro con la voce decisa passa.** ### **E il valore di comodo e' il piu' SEVERO:** chi chiama senza l'elenco ottiene ### **nessuna decisa**, non tutte.
+
+### ⚠ **E NOVE PRESIDI MI HANNO CORRETTO, uno per volta. Ne elenco i tre che valgono:**
+
+| | il presidio | che cosa ha preso |
+|---|---|---|
+| `1` | `15(b)` *(i default nelle firme)* | avevo messo ### **tre valori di comodo** *(`m=None`, `frazione=1.0`)*, e la regola e' *<<un parametro non presente e' un ERRORE>>*. ### **Toglierli ha reso `m` OBBLIGATORIO** — che e' giusto: un `m` di comodo darebbe ### **uno stato della taglia sbagliata che gira senza che nessuno l'abbia scelto** |
+| `2` | `P-MOD` | ### **due volte**: `schema.py` a `731` righe e `_genera.py` a `745`, contro un tetto di `700`. ### **Ho diviso due volte e NON ho alzato il tetto** *(`leggi/schema_camminata.py`, `_genera_camminata.py`)* |
+| `3` | il collaudo del ### **banco** | diceva *<<il banco non entra in `leggi.yaml`>>* cercando ### **la PAROLA `camminata`** — ed era ### **un PROXY** per *<<il banco non e' una legge>>*. ### **Il proxy si e' rotto quando la FISICA della camminata e' entrata in tabella**, per tua decisione: ora il controllo guarda ### **la proprieta' vera** *(il PERCORSO del banco)* |
+
+### 📌 **E DUE COSE LE HO IMPARATE DOVE IL GENERATO VIENE USATO, non dove viene scritto:** una stringa non chiusa nel modulo che ### **emetto** *(l'ha presa il collaudo del grafo, che importa i termini)*, e la costante che si chiama ### **`LEGGE` e non `ID`** *(senza quel nome i miei sette moduli erano ### **invisibili alla biiezione**)*.
+
+### ⛔ **E UN BRACCIO DI COLLAUDO ASSERIVA UNA COSA CHE NON E' PIU' VERA:** *<<le `guardia` sono ZERO>>*. Adesso sono ### **sette**, una per legame, e `A11` chiede ### **l'errore da cui proteggono**, non il permesso: ### **la tabella dichiara un operatore che il MOTORE non ha** — e oggi quell'errore ### **e' lo stato normale**, perche' il motore e' il pezzo `5`.
+
+### ✅ **E la suite passa `41` su `41`**, col `pre-commit` a ### **`120.1` s su `500`.**
+

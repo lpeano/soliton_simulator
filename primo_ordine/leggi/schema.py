@@ -376,10 +376,18 @@ def valida_legge(d, variabili, dimensioni=None):
                   else CHIAVI_PEZZO if tipo == "pezzo_unitario"
                   else CHIAVI_FLUSSO if tipo == "flusso"
                   else CHIAVI_TERMINE)
+    # ### ⭐ **LE DUE CHIAVI DEL POSTO SONO FACOLTATIVE, e <<facoltativo>> vuol dire
+    # ### DUE COSE DIVERSE:** ### **non si pretendono** *(una legge che non sta in un
+    # ### posto aperto non le ha)* ma ### **si ammettono** *(chi le mette non prende un
+    # ### <<chiave non prevista>>)*. ### ⚠ **Metterle fra le ATTESE le rendeva
+    # ### OBBLIGATORIE, e il generatore ha rifiutato SETTE leggi di fila:** i due insiemi
+    # ### ### **non sono lo stesso insieme**, e confonderli e- quello che ho fatto.
+    facoltative = set(_cam.CHIAVI_POSTO) if tipo in ("pezzo_unitario",
+                                                     "flusso") else set()
     manca = sorted(attese - set(d))
     if manca:
         _err(fuori, idv, "mancano le chiavi %s" % manca)
-    extra = sorted(set(d) - attese - {"nota"})
+    extra = sorted(set(d) - attese - facoltative - {"nota"})
     if extra:
         _err(fuori, idv, "chiavi NON previste %s: il vocabolario e- CHIUSO" % extra)
     if not isinstance(d.get("prova"), bool):
@@ -538,6 +546,22 @@ def valida_ordine(ordine, leggi):
     fuori = []
     _cam.errori_ordine(ordine, leggi,
                        lambda che: _err(fuori, "<ordine>", che))
+    return fuori
+
+
+def valida_posti(ordine, leggi, voci_decise=None):
+    """### Gli errori dei POSTI APERTI accesi senza la loro decisione, o `[]`.
+
+    ### ⛔ **E <<decise>> ARRIVA DA FUORI, perche- chi sa se una domanda e- decisa
+    ### e- L-INDICE** -- non lo schema. ### **Uno schema che decidesse da se- quali
+    domande sono chiuse sarebbe una SECONDA FONTE.**
+
+    ### ⭐ **E il valore di comodo e- `()`, cioe- NESSUNA DECISA:** chi chiama senza
+    passare l-elenco ottiene ### **il controllo piu- severo**, non il piu- permissivo.
+    """
+    fuori = []
+    _cam.errori_posti_accesi(ordine, leggi, voci_decise or (),
+                             lambda che: _err(fuori, "<posti>", che))
     return fuori
 
 

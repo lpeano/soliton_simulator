@@ -52,6 +52,9 @@ sys.path.insert(0, os.path.join(RADICE, "csv"))
 # ### involucro, e il collaudo lo verifica con `is`.
 from _rif import rif                                         # noqa: E402
 import schema as SCH                                         # noqa: E402
+# ### ⭐ **GLI EMETTITORI DELLA CAMMINATA STANNO A PARTE**, come `_genera_stato.py`:
+# ### con loro dentro questo file passava ### **il tetto delle righe.**
+import _genera_camminata as GC                               # noqa: E402
 import _genera_stato as GS                                   # noqa: E402
 
 NL = chr(10)
@@ -433,13 +436,34 @@ def scheda(legge, e, grad, imp):
               "### **Nessuna fisica e' decisa qui.**", ""]
     L += ["| | |", "|---|---|",
           "| **tipo** | `%s` |" % legge["tipo"],
-          "| **espressione** | `%s` |" % legge["espressione"],
+          # ### ⭐ **E QUI LA RIGA CAMBIA NOME COL TIPO, e non e- un dettaglio:**
+          # ### un termine ha un-### **espressione**, un `flusso` ha un
+          # ### ### **generatore**, e un `pezzo_unitario` ### **non ha NESSUNA
+          # ### formula** -- ha un ### **operatore** e un-### **azione**.
+          # ### ⚠ **Chiamarle tutte <<espressione>> direbbe che un unitario e- una
+          # ### formula, e non lo e-.**
+          ("| **espressione** | `%s` |" % legge["espressione"]
+           if "espressione" in legge else
+           "| **generatore** | `%s` |" % legge["generatore"]
+           if legge["tipo"] == "flusso" else
+           "| **operatore** | `%s`, azione `%s` |" % (legge["operatore"],
+                                                      legge["azione"])),
           "| **ambito** | %s |" % " · ".join("`%s`" % x for x in legge["ambito"]),
           "| **impronta della riga** | `%s` |" % imp,
           "| **assiomi soddisfatti** | %s |"
           % (" · ".join("`%s`" % x for x in legge["assiomi"])
              if legge["assiomi"] else "### ⚠ **nessuno dichiarato**"),
           ""]
+    # ### ⛔ **E IL POSTO APERTO, QUANDO C-E-, STA NELLA SCHEDA:** una legge che
+    # ### appartiene a un posto aperto e- una legge ### **la cui forma NON e- decisa**, e
+    # ### chi legge la scheda ### **deve saperlo dalla scheda**, non da un-altra parte.
+    if legge.get("posto"):
+        L += ["> ### ⚠ **QUESTA LEGGE APPARTIENE AL POSTO APERTO `%s`**, e la sua "
+              "decisione e- la voce `%s`. ### **Finche- quella voce non e- decisa, la "
+              "legge NON si accende** — cioe- ### **non entra nell-ordine di "
+              "composizione**, e il generatore lo ### **IMPEDISCE.**"
+              % (legge["posto"], legge.get("voce_decisione") or "### NON DICHIARATA"),
+              ""]
     if legge.get("parametri"):
         L += ["## I PARAMETRI", "",
               "> ### ⛔ **`A1`: LA LEGGE, NON IL NUMERO.** Ogni parametro porta "
@@ -475,11 +499,12 @@ def carica():
     d = yaml.safe_load(io.open(TABELLA, encoding="utf-8").read()) or {}
     leggi = d.get("leggi") or []
     varia = d.get("variabili") or []
-    return leggi, varia
+    ordine = d.get("ordine") or []
+    return leggi, varia, ordine
 
 
 def genera(verboso=True):
-    leggi, varia = carica()
+    leggi, varia, ordine = carica()
     err = []
     for v in varia:
         err += SCH.valida_variabile(v)
@@ -493,6 +518,16 @@ def genera(verboso=True):
     dimens = {v["nome"]: v.get("dimensione") for v in varia}
     for lg in leggi:
         err += SCH.valida_legge(lg, vocab, dimens)
+    # ### ⛔ **L-ORDINE PASSA DALLO SCHEMA COME LE LEGGI**, e se e- sbagliato
+    # ### ### **non si genera niente**: un passo con le frazioni che non fanno `1`
+    # ### ### **non integra il passo intero.**
+    if ordine:
+        err += SCH.valida_ordine(ordine, leggi)
+        # ### ⛔ **E IL PRESIDIO SUI POSTI APERTI, come IMPEDIMENTO VERO:** la
+        # ### decisione di Luca del `2026-10-12` dice che il generatore ### **RIFIUTA di
+        # ### accendere un posto aperto senza la sua voce di decisione** -- e
+        # ### ### **<<accendere>> vuol dire STARE NELL-ORDINE.**
+        err += SCH.valida_posti(ordine, leggi)
     assert not err, ("### LA TABELLA NON PASSA LO SCHEMA, e NON SI GENERA NIENTE:" + NL
                      + NL.join(err[:12]))
     os.makedirs(SCHEDE, exist_ok=True)
@@ -546,6 +581,36 @@ def genera(verboso=True):
             print("   %-18s %s" % (lg["id"], os.path.relpath(p1, RADICE)))
             print("   %-18s %s   impronta %s, OSSERVATORE (nessuna derivata)"
                   % ("", os.path.relpath(p2, RADICE), imp))
+    # ### ⭐ **I PEZZI UNITARI E I FLUSSI: un LEGAME ciascuno.** ### ⛔ **Non
+    # ### passano dal controllo `(a)`**, e non e- una scorciatoia: quel controllo
+    # ### ### **deriva un-espressione**, e questi ### **non hanno un-espressione** -- il
+    # ### loro contenuto e- ### **l-operatore** *(da un elenco chiuso)* o ### **il
+    # ### generatore** *(che lo schema ha gia- passato dai divieti)*.
+    for lg in leggi:
+        if lg["tipo"] not in ("pezzo_unitario", "flusso"):
+            continue
+        imp = impronta(lg)
+        p1 = os.path.join(TERMINI, lg["id"].lower().replace("-", "_") + ".py")
+        io.open(p1, "w", encoding="utf-8", newline=NL).write(GC.modulo_legame(lg, imp))
+        p2 = os.path.join(SCHEDE, lg["id"] + ".md")
+        io.open(p2, "w", encoding="utf-8", newline=NL).write(scheda(lg, None, {}, imp))
+        fatti.append((lg["id"], p1, p2, imp, 0))
+        if verboso:
+            che = ("operatore `%s`, azione `%s`" % (lg["operatore"], lg["azione"])
+                   if lg["tipo"] == "pezzo_unitario"
+                   else "flusso %s" % ("ESATTO" if lg.get("esatto") else "approssimato"))
+            print("   %-18s %s" % (lg["id"], os.path.relpath(p1, RADICE)))
+            print("   %-18s %s   impronta %s, %s"
+                  % ("", os.path.relpath(p2, RADICE), imp, che))
+    # ### ⭐ **E L-ORDINE, come DATO.**
+    if ordine:
+        imp_o = impronta({"ordine": ordine})
+        po = os.path.join(_QUI, "composizione.py")
+        io.open(po, "w", encoding="utf-8", newline=NL).write(
+            GC.modulo_composizione(ordine, leggi, imp_o))
+        if verboso:
+            print("   %-18s primo_ordine/composizione.py   impronta %s, %d pezzi"
+                  % ("(l-ordine)", imp_o, len(ordine)))
     return fatti
 
 

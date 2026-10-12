@@ -98,7 +98,11 @@ def _corsa(g, n, dt, passi, seme, iterazioni, toll, senza=False):
     ii = np.arange(n - 1, dtype=int)
     jj = np.arange(1, n, dtype=int)
     ss = PA.strati(ii, jj)
-    st = ST.nuovo(n)
+    # ### ⭐ **E `len(...)` NON E- UN-AGGIUNTA DI COMODO: lo stato della
+    # ### camminata e- DIMENSIONATO DAGLI ARCHI** *(lo spinore vive sulle
+    # ### ### **estremita- d-arco**, e sono `2 m`)*. ### **Senza, `nuovo` ALZA**
+    # ### invece di tornare uno stato della taglia sbagliata.
+    st = ST.nuovo(n, len(ii))
     rng = np.random.default_rng(seme)
     for k in st:
         st[k][...] = (rng.normal(size=st[k].shape)
@@ -115,7 +119,11 @@ def energia_della_legge(g, n, seme):
     mio = [m for m in T if m.LEGGE == LEGGE]
     ii = np.arange(n - 1, dtype=int)
     jj = np.arange(1, n, dtype=int)
-    st = ST.nuovo(n)
+    # ### ⭐ **E `len(...)` NON E- UN-AGGIUNTA DI COMODO: lo stato della
+    # ### camminata e- DIMENSIONATO DAGLI ARCHI** *(lo spinore vive sulle
+    # ### ### **estremita- d-arco**, e sono `2 m`)*. ### **Senza, `nuovo` ALZA**
+    # ### invece di tornare uno stato della taglia sbagliata.
+    st = ST.nuovo(n, len(ii))
     rng = np.random.default_rng(seme)
     for k in st:
         st[k][...] = (rng.normal(size=st[k].shape)

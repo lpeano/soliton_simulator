@@ -35,7 +35,17 @@ def carica_termini():
         spec = importlib.util.spec_from_file_location("_t_" + f[:-3], p)
         m = importlib.util.module_from_spec(spec)
         spec.loader.exec_module(m)
-        if hasattr(m, "LEGGE"):
+        # ### ⛔ **DUE CAMPI, NON UNO: `LEGGE` dice CHE E- UNA LEGGE, `TIPO` dice
+        # ### SE ENTRA IN `H`.** ### ⭐ **Dal pezzo `2` del simulatore in `termini/`
+        # ### vivono anche i LEGAMI della camminata** *(`pezzo_unitario`, `flusso`)*, che
+        # ### ### **non sono addendi di un-hamiltoniana: si COMPONGONO.**
+        # ### ⚠ **E senza questo filtro il caricatore chiedeva `energia()` a loro**,
+        # ### e alzava `AttributeError` -- cioe- ### **il difetto si vedeva dove il
+        # ### generato viene USATO**, non dove viene scritto.
+        # ### ✅ **E il campo C-ERA GIA-:** i moduli dei termini dichiarano `TIPO` da
+        # ### prima -- mancava ### **chi lo leggesse.**
+        if hasattr(m, "LEGGE") and getattr(m, "TIPO", "") in ("termine_nodo",
+                                                              "termine_arco"):
             fuori.append(m)
     # ### ⛔ **L-ORDINE CANONICO E- PER ID**, non per nome di file: il nome del file e-
     # ### ### **una conseguenza** dell-ID, e se un giorno cambiasse la regola di nomina

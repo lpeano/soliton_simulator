@@ -54,12 +54,37 @@ def file_fisica():
 #   ### ⛔ **MISURATA il 2026-10-09: `27` rami in `12` funzioni.** Il conteggio lo
 #   ### fa l'AST; ### **il ruolo e il perche- li ho scritti io, leggendoli.**
 # =====================================================================================
+# ### ⭐ **LA MOTIVAZIONE DEI LEGAMI E- UNA SOLA, e sta in UNA COSTANTE:** i
+# ### sette moduli generati hanno ### **lo STESSO ramo**, perche- vengono ### **dalla
+# ### stessa riga del generatore** -- e scriverla sette volte vorrebbe dire ### **sette
+# ### copie che possono divergere.**
+_LEGAME = ("se il motore non ha l-operatore, il legame ALZA invece di tornare un"
+           " risultato finto. ### Non e- uno smistamento: e- una GUARDIA, e un"
+           " legame senza il suo operatore NON DEVE sembrare funzionante")
+
 RAMI = {
     ("primo_ordine/stato.py", "nuovo"): (
-        2, "validazione",
-        "solleva `NotImplementedError` per i tipi d-arco e per `coppia_coniugata`: "
-        "### NON sceglie un valore, DICHIARA CHE NON SA FARLO -- ed e- il segnaposto "
-        "ONESTO della decisione 13"),
+        4, "smistamento",
+        "### QUATTRO RAMI, e sono UNO SMISTAMENTO SUI TIPI: i due di NODO (lo spinore "
+        "`C^2` e il reale), i due di ESTREMITA- D-ARCO (lo spinore della camminata e il "
+        "vuoto, che hanno taglia `2 m` e non `n`), e il ramo finale che "
+        "### SOLLEVA per cio- che non sa costruire. ### Il ramo che solleva NON sceglie "
+        "un valore: DICHIARA CHE NON SA FARLO -- ed e- il segnaposto ONESTO della "
+        "decisione 13. ### E i due rami di estremita- sono nati col pezzo 2 del "
+        "simulatore, quando lo stato della camminata e- entrato in tabella"),
+    # ### ⛔ **I LEGAMI GENERATI: UN RAMO CIASCUNO, e lo stesso in tutti**, perche-
+    # ### ### **sono generati dalla stessa riga di codice.** ### ⭐ **E il ramo e- una
+    # ### GUARDIA, non uno smistamento:** se il motore non ha l-operatore, il legame
+    # ### ### **ALZA** invece di tornare un risultato finto.
+    ("primo_ordine/termini/camm_moneta_spin.py", "applica"): (
+        1, "guardia", _LEGAME),
+    ("primo_ordine/termini/camm_grover.py", "applica"): (1, "guardia", _LEGAME),
+    ("primo_ordine/termini/camm_spostamento.py", "applica"): (1, "guardia", _LEGAME),
+    ("primo_ordine/termini/camm_grover_vuoto.py", "applica"): (1, "guardia", _LEGAME),
+    ("primo_ordine/termini/camm_spostamento_vuoto.py", "applica"): (
+        1, "guardia", _LEGAME),
+    ("primo_ordine/termini/camm_saturazione.py", "applica"): (1, "guardia", _LEGAME),
+    ("primo_ordine/termini/camm_forma_d.py", "applica"): (1, "guardia", _LEGAME),
     ("primo_ordine/stato.py", "controlla_domini"): (
         2, "validazione",
         "i DUE controlli di dominio (punto 1): le componenti FINITE, e `> 0` per la "
@@ -282,9 +307,23 @@ def collaudo():
     esito("### e i `default` NON sono piu- nella tabella dei ruoli",
           "default" not in rapporto(),
           "### il debito e- PAGATO: 27 rami -> 19, e 9 default -> 0")
-    esito("### e le `guardia` sono ZERO oggi, e lo dico invece di lasciarlo credere",
-          ng[0] == 0,
-          "### `A11`: se ce ne fosse una, andrebbe cercato l-ERRORE da cui protegge")
+    # ### ⛔ **QUESTO BRACCIO ASSERIVA <<ZERO GUARDIE>>, E DAL 2026-10-12 NON E-
+    # ### PIU- VERO: ce ne sono SETTE**, una per ogni LEGAME generato della camminata.
+    # ### ⭐ **E `A11` CHIEDE L-ERRORE DA CUI PROTEGGONO, non il permesso: eccolo.**
+    # ### Un legame e- la riga di tabella di un `pezzo_unitario` o di un `flusso`, e
+    # ### ### **il suo operatore vive nel MOTORE**: la guardia scatta quando
+    # ### ### **la tabella dichiara un operatore che il motore NON HA**, cioe- quando la
+    # ### biiezione ### **tabella <-> motore** e- rotta.
+    # ### ⚠ **E oggi quell-errore E- LO STATO NORMALE, perche- il motore non c-e-
+    # ### ancora** *(e- il pezzo `5` del simulatore)*: la guardia e- cio- che fa
+    # ### ### **ALZARE** invece di far sembrare funzionante un legame vuoto.
+    # ### ✅ **Quando il motore arrivera-, quell-errore diventera- un difetto di
+    # ### COSTRUZIONE** *(una legge in tabella senza il suo operatore)*, e la guardia
+    # ### restera- a nominarlo.
+    esito("### e le `guardia` sono SETTE: una per LEGAME, e `A11` ha il suo errore",
+          ng[0] == 7,
+          "### l-errore: la tabella dichiara un operatore che il MOTORE non ha -- e "
+          "oggi e- lo stato normale, perche- il motore e- il pezzo 5")
     print("=" * 100)
     print("IL COLLAUDO DI `P-R1`: %d su %d   %s"
           % (ok[0], ok[1], "### TUTTI PASSATI" if ok[0] == ok[1] else "### CI SONO BUCHI"))

@@ -65,8 +65,14 @@ def catena(n):
     return ii, jj
 
 
-def stato_seme(n, seme):
-    st = ST.nuovo(n)
+def stato_seme(n, seme, m=None):
+    # ### ⭐ **E `m` NON E- UN-AGGIUNTA DI COMODO: lo stato della camminata e-
+    # ### DIMENSIONATO DAGLI ARCHI** *(lo spinore vive sulle ### **estremita-
+    # ### d-arco**, e sono `2 m`)*. ### **Senza, `nuovo` ALZA** invece di tornare
+    # ### uno stato della taglia sbagliata.
+    # ### ⚠ **E il valore di comodo e- la CATENA di questo collaudo**, che e-
+    # ### un cammino con `n - 1` archi: ### **non e- un numero scelto, e- la scena.**
+    st = ST.nuovo(n, n - 1 if m is None else m)
     rng = np.random.default_rng(seme)
     for k in st:
         st[k][...] = (rng.normal(size=st[k].shape) + 1j * rng.normal(size=st[k].shape))

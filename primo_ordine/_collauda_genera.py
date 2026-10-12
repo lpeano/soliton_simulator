@@ -92,9 +92,21 @@ def collaudo():
     # ### ✅ **E NON deve rifiutare le DUE leggi VERE**, altrimenti il braccio
     # ### ### **sarebbe vero per costruzione**: una lista di nomi vietati che
     # ### ### **rifiuta tutto** non distingue niente.
-    _leggi_vere, _varia_vere = carica()
+    # ### ⚠ **`carica()` TORNA TRE COSE da quando l-ordine di composizione e-
+    # ### in tabella:** leggi, variabili e ### **ordine.** ### **Lo scompattamento
+    # ### a due si e- rotto subito**, ed e- il modo giusto: un chiamante che non sa
+    # ### di una cosa nuova ### **deve ROMPERSI**, non ignorarla.
+    _leggi_vere, _varia_vere, _ordine_vero = carica()
     _voc_vero = {v["nome"]: v["tipo"] for v in _varia_vere}
+    # ### ⛔ **E SOLO SULLE LEGGI CHE HANNO UN-ESPRESSIONE:** `controlla()`
+    # ### ### **DERIVA un-espressione**, e un `pezzo_unitario` ### **non ne ha
+    # ### nessuna** *(il suo contenuto e- un operatore da un elenco chiuso)*, un
+    # ### `flusso` ha ### **un generatore** che lo schema ha gia- passato dai divieti.
+    # ### ⚠ **Chiamarlo su loro dava `KeyError: 'espressione'`**, ed e- la prova
+    # ### che i due formalismi ### **non sono lo stesso formalismo.**
     for _lg in _leggi_vere:
+        if _lg["tipo"] not in ("termine_nodo", "termine_arco", "osservatore"):
+            continue
         esito("NON deve rifiutare: la legge vera `%s`" % _lg["id"],
               controlla(_lg, _voc_vero)[0] == [],
               "### se rifiutasse, la lista dei rami sarebbe TROPPO LARGA")
