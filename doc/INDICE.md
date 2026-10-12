@@ -10,12 +10,12 @@
 | `DOCUMENTAZIONE` | `ENTRAMBE` | 9 |
 | `FISICA` | `1` | 343 |
 | `FISICA` | `2` | 91 |
-| `FISICA` | `ENTRAMBE` | 19 |
+| `FISICA` | `ENTRAMBE` | 20 |
 | `INFRASTRUTTURA` | `1` | 39 |
 | `INFRASTRUTTURA` | `2` | 21 |
 | `INFRASTRUTTURA` | `ENTRAMBE` | 24 |
 | `METODO` | `1` | 156 |
-| `METODO` | `2` | 16 |
+| `METODO` | `2` | 17 |
 | `METODO` | `ENTRAMBE` | 95 |
 
 | id | classe | dominio | era | stato | blocca | titolo |
@@ -275,10 +275,12 @@
 | `DOMANDA-CHI-CAUSA-L-ANISOTROPIA` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | sul cubico i versori del v3 RIDUCONO l-anisotropia direzionale: e- una leva o si |
 | `DOMANDA-COME-LA-MATERIA-CAMBIA-LAMBDA` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | come la materia cambia la densita- del vuoto: scattering nel nodo o trasmissione |
 | `DOMANDA-CONDIZIONI-INIZIALI-IN-TABELLA` | DECISIONE | FISICA | 2 | ### **AGENDA** | SI | la tabella non ha un posto dove dichiarare le condizioni iniziali |
+| `DOMANDA-CORRENTE-LOCALE-NON-ESISTE` | MISURA | FISICA | ENTRAMBE | ### **APERTA** | SI | la corrente locale di E non esiste in forma chiusa, nemmeno per la parte lineare |
 | `DOMANDA-D13-CONIUGATI` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | D13: i coniugati delle memorie -- tw come fase U(1) sull-arco? |
 | `DOMANDA-D9-GEOMETRIA` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | D9: la geometria viene da d e p_d dentro H, o dalle relazioni fra gli psi? |
 | `DOMANDA-DOVE-STA-LA-C-IN-TABELLA` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | la C e decisa al punto F3 e nessuna legge della tabella la dichiara |
 | `DOMANDA-ESTREMITA-NUOVE-INIZIALI` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | con che psi e che phi nascono le estremita di un arco nuovo |
+| `DOMANDA-FLUSSO-SENZA-AZIONE` | DECISIONE | METODO | 2 | ### **AGENDA** |  | un flusso non dichiara dove agisce: lo schema non ha il campo azione per lui |
 | `DOMANDA-FORME-VUOTO` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | le TRE forme del vuoto locale: che cos-e- un grado, quanti per nodo, l-accoppiam |
 | `DOMANDA-FUSIONE` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | la FUSIONE di due nodi: si vieta, e con che cosa? |
 | `DOMANDA-GRAFO-INIZIALE` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | il grafo iniziale SENZA pos: reticolo, k-regolare, espansore? |

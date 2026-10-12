@@ -3435,3 +3435,43 @@ scena **cresca** come gli archi *(`4.00x` su `4.00x` atteso)*; `m3` **`0.005114`
 | ### ✅ **e la CAUSA e' provata, non dedotta** | `|dh|` **`3.6e-15`** *(`1.9` ulp)*, `|dLambda|` **`8.9e-16`** |
 | ### ⛔ **la norma si conserva su ENTRAMBI** | scarto **`0.000e+00` esatto**: su `psi` perche' e' una **rotazione**, su `phi` perche' e' ### **una FASE e non un trasferimento** -- lo scambio diretto di norma **romperebbe il gauge** |
 | ### ⛔ **perche' un modulo nuovo** | `motore.py` ha superato **il tetto di `700` righe**: ### **oltre, SI DIVIDE** |
+
+---
+
+## `P3` -- L'ENERGIA E LA CORRENTE *(2026-10-12)*
+
+> ### ⛔ **E IL SUO COLLAUDO AFFERMA UN FALLIMENTO MISURATO**, invece di togliere
+> il braccio.
+
+| file | BLOB *(`sha1` dei BYTE grezzi)* | che cosa misura | l'esito |
+|---|---|---|---|
+| `primo_ordine/energia.py` | `b7a2eb60` | `E` come **somma di densita' locali**, la corrente, e `bilancio()` **PURA** | — |
+| `primo_ordine/_collauda_energia.py` | `5208718e` | lo **strumento** prima, poi il **verso invertito**, poi la corrente vera | ### **`9`/`9`** |
+
+| | |
+|---|---|
+| **IL COMANDO, verbatim** | `python primo_ordine/_collauda_energia.py` |
+| ### ✅ **che cosa REGGE** | `E` **e'** la somma delle densita' *(`1.8e-15`)*; il **primo termine** e' conservato dal tick lineare *(**`0.6` ulp**, l'identita')*; i cambiamenti per nodo **sommano a zero**, quindi **una corrente ESISTE** |
+| ### ⛔ **che cosa NON regge** | la corrente derivata **non chiude**: residuo **`1.342e+01`** su scala `4.93`, contro **`7.768e+00`** *senza* nessuna corrente. ### **Non toglie: AGGIUNGE** |
+| ### ⭐ **e la CAUSA, provata** | `e_h` cambia su **TUTTI** i nodi *(`16`/`16`)*, anche dove gli archi non portano niente: ### **e' una correlazione fra DUE TEMPI, non una carica trasportata** |
+| ### ⚠ **l'ordine dei bracci** | prima **lo strumento** *(corrente costruita: `4.4e-16`)*, poi **il verso invertito** *(rompe **esattamente** i due nodi di quell'arco)*, **poi** la corrente vera |
+
+---
+
+## `P3` -- L'ENERGIA E LA CORRENTE *(2026-10-12)*
+
+> ### ⛔ **E IL SUO COLLAUDO AFFERMA UN FALLIMENTO MISURATO**, invece di togliere
+> il braccio.
+
+| file | BLOB *(`sha1` dei BYTE grezzi)* | che cosa misura | l'esito |
+|---|---|---|---|
+| `primo_ordine/energia.py` | `b7a2eb60` | `E` come **somma di densita' locali**, la corrente, e `bilancio()` **PURA** | — |
+| `primo_ordine/_collauda_energia.py` | `5208718e` | lo **strumento** prima, poi il **verso invertito**, poi la corrente vera | ### **`9`/`9`** |
+
+| | |
+|---|---|
+| **IL COMANDO, verbatim** | `python primo_ordine/_collauda_energia.py` |
+| ### ✅ **che cosa REGGE** | `E` **e'** la somma delle densita' *(`1.8e-15`)*; il **primo termine** e' conservato dal tick lineare *(**`0.6` ulp**, l'identita')*; i cambiamenti per nodo **sommano a zero**, quindi **una corrente ESISTE** |
+| ### ⛔ **che cosa NON regge** | la corrente derivata **non chiude**: residuo **`1.342e+01`** su scala `4.93`, contro **`7.768e+00`** *senza* nessuna corrente. ### **Non toglie: AGGIUNGE** |
+| ### ⭐ **e la CAUSA, provata** | `e_h` cambia su **TUTTI** i nodi *(`16`/`16`)*, anche dove gli archi non portano niente: ### **e' una correlazione fra DUE TEMPI, non una carica trasportata** |
+| ### ⚠ **l'ordine dei bracci** | prima **lo strumento** *(corrente costruita: `4.4e-16`)*, poi **il verso invertito** *(rompe **esattamente** i due nodi di quell'arco)*, **poi** la corrente vera |

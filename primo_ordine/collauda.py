@@ -128,6 +128,15 @@ COLLAUDI = (
     # ### facessero l-intero, e la misura dice ### **`0.8` ulp** -- perche- il flusso
     # ### ### **conserva i propri coefficienti.**
     ("il flusso di saturazione", "primo_ordine/_collauda_saturazione.py", "pre-commit"),
+    # ### \u26d4 **`P3`: L-ENERGIA E LA CORRENTE, E QUESTO COLLAUDO AFFERMA UN
+    # ### FALLIMENTO.** La previsione scritta ### **prima** dei numeri diceva *<<la parte
+    # ### lineare chiude il bilancio locale ESATTAMENTE>>*: ### **non chiude**, e il
+    # ### collaudo lo ### **inchioda** invece di togliere il braccio.
+    # ### \u2b50 **E l-ordine dei bracci serve a crederci:** prima si prova che
+    # ### ### **lo STRUMENTO funziona** *(il bilancio chiude su una corrente COSTRUITA)*,
+    # ### poi che ### **il verso invertito lo rompe**, e solo dopo si usa sulla corrente
+    # ### vera.
+    ("`P3` l-energia e la corrente", "primo_ordine/_collauda_energia.py", "pre-commit"),
     # ### ⭐ **LO SCHEMA DELLA CAMMINATA, nei DUE VERSI** *(pezzo `2` del
     # ### simulatore)*: i tipi sulle estremita-, i pezzi unitari, i flussi, e
     # ### l-### **ordine di composizione con le ripetizioni AMMESSE.**

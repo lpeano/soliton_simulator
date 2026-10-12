@@ -14406,3 +14406,63 @@ Ogni dato di `db_era2/` ha ### **il suo TIMBRO accanto**, col campo `versione_da
 ### ⭐ **E il secondo chiude un cerchio che vale la pena dire:** quel ramo esiste perche' **sono andato a leggere le stringhe del binario**, e il braccio `(3-ter)` del collaudo lo copre. ### **Oggi copre un caso che ACCADE, non uno che immaginavo** — e senza quella lettura avrei cablato un presidio **che viola il contratto dello strumento su cui gira**.
 
 ### ⛔ **CHE COSA RESTA NON SAPUTO, e lo lascio scritto:** **QUALE** delle forme emesse sia quella onorata. Lo script le emette **insieme**, e dal fuori **non si distingue**. ### ⚠ **Per saperlo servirebbe emetterne una per volta, cioe' SPEGNERE IL PRESIDIO PER UN TURNO.** ### **Non lo faccio: il presidio funziona, e il prezzo di saperlo sarebbe non averlo.**
+
+---
+
+## `P3`: LA MIA PREVISIONE E' FALSA, E IL FALLIMENTO E' PIU' GRANDE DI QUELLO CHE IL MANDATO SI ASPETTAVA *(2026-10-12)*
+
+### ✅ **CHE COSA REGGE, ed e' esatto.** `E` **e'** la somma delle densita' locali e **non** un'approssimazione della forma globale *(scarto `1.8e-15`)*. Il **primo termine** e' conservato dal tick lineare per l'identita' `W^dag W W = W` *(**`0.6` ulp**)*. E i cambiamenti per nodo **sommano a zero**, quindi ### **una corrente ESISTE** -- un campo a divergenza nulla su un grafo **ammette** un flusso.
+
+### ⛔ **CHE COSA NON REGGE: la previsione `1`, che avevo scritto PRIMA dei numeri.** Dicevo *«la parte lineare chiude il bilancio locale ESATTAMENTE»*. ### **Non chiude**, e non di poco:
+
+| | |
+|---|---|
+| residuo **con** la corrente derivata | **`1.342e+01`** su scala `4.93` |
+| cambiamento **senza** nessuna corrente | `7.768e+00` |
+| ### ⛔ **quindi** | ### **la corrente NON TOGLIE niente: AGGIUNGE.** E' **peggio** di non averla |
+
+### ⭐ **E L'ERRORE DELLA DERIVAZIONE E' PRECISO, e non e' un conto sbagliato.** L'argomento del campo `azione` *(solo `arco` attraversa)* ### **e' VERO** -- ma dice **dove si muove `psi`**. ### ⛔ **E `e_h = Re[conj(psi_h) . (W psi)_h]` NON e' una funzione di `psi` a un tempo: e' una CORRELAZIONE FRA DUE TEMPI.** ### **Non e' una carica che si trasporta, e l'argomento non si trasferisce.**
+
+### ✅ **E LA PROVA E' DIRETTA, non dedotta:** `e_h` cambia su **tutti** i nodi *(`16` su `16`)*, **anche su quelli i cui archi non portano niente**. ### **Una carica trasportata non si comporta cosi'.**
+
+### ⚠ **E UNA SECONDA COSA CHE NON AVEVO VISTO: `E` NON E' CONSERVATA DAL TICK LINEARE.** Il primo termine si', ma ### **il termine del vuoto cambia di `2.633`**, perche' il tick lineare **cambia `h_k`**. ### ⭐ **Quindi la conservazione di `E` e' una proprieta' della COMPOSIZIONE INTERA**, non della somma di due pezzi conservati -- e questo **cambia come si legge** `[[D-ENERGIA]]`.
+
+### 📌 **E SUL TICK INTERO LA DERIVA C'E' E SCENDE:** a tempo totale fisso `T = 20`, l'ultimo dimezzamento di `dtau` da' **rapporto `4.20`** -- ### **la firma dell'esponente `2`, cioe' dello splitting di Strang.** ### ⚠ **E ai passi grandi il rapporto e' erratico** *(`0.39`, `2.48`)*: **fuori dal regime asintotico**, e lo dico invece di citare solo il numero buono.
+
+### ⭐ **IL COLLAUDO AFFERMA IL FALLIMENTO INVECE DI TOGLIERE IL BRACCIO**, e l'ordine serve a crederci: prima **lo strumento** *(su una corrente **costruita** il bilancio chiude a `4.4e-16`)*, poi **il verso invertito** *(rompe **esattamente** i due nodi di quell'arco, non tutti)*, ### **e solo dopo** la corrente vera. ### ⛔ **Senza i primi due, <<il bilancio non chiude>> direbbe solo che il mio bilancio e' rotto.**
+
+### 📌 **LA MIA RACCOMANDAZIONE, e non la eseguo:** una grandezza **la cui densita' contiene l'operatore di evoluzione** non puo' avere una corrente locale, perche' **la sua densita' non vive a un tempo**. Se si vuole una corrente locale, la densita' deve essere funzione dello **stato a un tempo** -- per esempio il valore di aspettazione di **una hamiltoniana** e non di `W`. ### ⛔ **Ma quello CAMBIA LA GRANDEZZA PROMOSSA, e cambiare la grandezza promossa e' una decisione di fisica.** Sta in `[[DOMANDA-CORRENTE-LOCALE-NON-ESISTE]]`, **CRITICA e BLOCCA**.
+
+### ⚠ **E UN'ALTERNATIVA CHE NON RACCOMANDO E DICHIARO:** si potrebbe **trovare** una corrente risolvendo il problema di flusso sul grafo *(l'esistenza e' garantita)*. ### **Ma la soluzione NON E' UNICA** -- si puo' aggiungere qualunque circolazione sui cicli -- e ### **una corrente non determinata non e' una corrente locale in senso fisico: e' una scelta travestita da misura.**
+
+### ⛔ **E UN BUCO DELLO SCHEMA, trovato derivando:** `azione` e' il campo che dice **se un pezzo attraversa**, e ### **un flusso non lo ha.** Per la saturazione ho dovuto dedurlo **dal suo GENERATORE**, cioe' **leggendo una formula invece di un campo** -- che e' esattamente cio' che `[[DECISIONE-VUOLE-UN-CAMPO]]` vieta. Sta in `[[DOMANDA-FLUSSO-SENZA-AZIONE]]`.
+
+---
+
+## `P3`: LA MIA PREVISIONE E' FALSA, E IL FALLIMENTO E' PIU' GRANDE DI QUELLO CHE IL MANDATO SI ASPETTAVA *(2026-10-12)*
+
+### ✅ **CHE COSA REGGE, ed e' esatto.** `E` **e'** la somma delle densita' locali e **non** un'approssimazione della forma globale *(scarto `1.8e-15`)*. Il **primo termine** e' conservato dal tick lineare per l'identita' `W^dag W W = W` *(**`0.6` ulp**)*. E i cambiamenti per nodo **sommano a zero**, quindi ### **una corrente ESISTE** -- un campo a divergenza nulla su un grafo **ammette** un flusso.
+
+### ⛔ **CHE COSA NON REGGE: la previsione `1`, che avevo scritto PRIMA dei numeri.** Dicevo *«la parte lineare chiude il bilancio locale ESATTAMENTE»*. ### **Non chiude**, e non di poco:
+
+| | |
+|---|---|
+| residuo **con** la corrente derivata | **`1.342e+01`** su scala `4.93` |
+| cambiamento **senza** nessuna corrente | `7.768e+00` |
+| ### ⛔ **quindi** | ### **la corrente NON TOGLIE niente: AGGIUNGE.** E' **peggio** di non averla |
+
+### ⭐ **E L'ERRORE DELLA DERIVAZIONE E' PRECISO, e non e' un conto sbagliato.** L'argomento del campo `azione` *(solo `arco` attraversa)* ### **e' VERO** -- ma dice **dove si muove `psi`**. ### ⛔ **E `e_h = Re[conj(psi_h) . (W psi)_h]` NON e' una funzione di `psi` a un tempo: e' una CORRELAZIONE FRA DUE TEMPI.** ### **Non e' una carica che si trasporta, e l'argomento non si trasferisce.**
+
+### ✅ **E LA PROVA E' DIRETTA, non dedotta:** `e_h` cambia su **tutti** i nodi *(`16` su `16`)*, **anche su quelli i cui archi non portano niente**. ### **Una carica trasportata non si comporta cosi'.**
+
+### ⚠ **E UNA SECONDA COSA CHE NON AVEVO VISTO: `E` NON E' CONSERVATA DAL TICK LINEARE.** Il primo termine si', ma ### **il termine del vuoto cambia di `2.633`**, perche' il tick lineare **cambia `h_k`**. ### ⭐ **Quindi la conservazione di `E` e' una proprieta' della COMPOSIZIONE INTERA**, non della somma di due pezzi conservati -- e questo **cambia come si legge** `[[D-ENERGIA]]`.
+
+### 📌 **E SUL TICK INTERO LA DERIVA C'E' E SCENDE:** a tempo totale fisso `T = 20`, l'ultimo dimezzamento di `dtau` da' **rapporto `4.20`** -- ### **la firma dell'esponente `2`, cioe' dello splitting di Strang.** ### ⚠ **E ai passi grandi il rapporto e' erratico** *(`0.39`, `2.48`)*: **fuori dal regime asintotico**, e lo dico invece di citare solo il numero buono.
+
+### ⭐ **IL COLLAUDO AFFERMA IL FALLIMENTO INVECE DI TOGLIERE IL BRACCIO**, e l'ordine serve a crederci: prima **lo strumento** *(su una corrente **costruita** il bilancio chiude a `4.4e-16`)*, poi **il verso invertito** *(rompe **esattamente** i due nodi di quell'arco, non tutti)*, ### **e solo dopo** la corrente vera. ### ⛔ **Senza i primi due, <<il bilancio non chiude>> direbbe solo che il mio bilancio e' rotto.**
+
+### 📌 **LA MIA RACCOMANDAZIONE, e non la eseguo:** una grandezza **la cui densita' contiene l'operatore di evoluzione** non puo' avere una corrente locale, perche' **la sua densita' non vive a un tempo**. Se si vuole una corrente locale, la densita' deve essere funzione dello **stato a un tempo** -- per esempio il valore di aspettazione di **una hamiltoniana** e non di `W`. ### ⛔ **Ma quello CAMBIA LA GRANDEZZA PROMOSSA, e cambiare la grandezza promossa e' una decisione di fisica.** Sta in `[[DOMANDA-CORRENTE-LOCALE-NON-ESISTE]]`, **CRITICA e BLOCCA**.
+
+### ⚠ **E UN'ALTERNATIVA CHE NON RACCOMANDO E DICHIARO:** si potrebbe **trovare** una corrente risolvendo il problema di flusso sul grafo *(l'esistenza e' garantita)*. ### **Ma la soluzione NON E' UNICA** -- si puo' aggiungere qualunque circolazione sui cicli -- e ### **una corrente non determinata non e' una corrente locale in senso fisico: e' una scelta travestita da misura.**
+
+### ⛔ **E UN BUCO DELLO SCHEMA, trovato derivando:** `azione` e' il campo che dice **se un pezzo attraversa**, e ### **un flusso non lo ha.** Per la saturazione ho dovuto dedurlo **dal suo GENERATORE**, cioe' **leggendo una formula invece di un campo** -- che e' esattamente cio' che `[[DECISIONE-VUOLE-UN-CAMPO]]` vieta. Sta in `[[DOMANDA-FLUSSO-SENZA-AZIONE]]`.

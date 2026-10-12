@@ -118,6 +118,14 @@ moduli:
     responsabilita: il collaudo del flusso di saturazione, e la causa della sua esattezza
     importa: [_presidio, incidenza, motore, saturazione, stato]
 
+  - nome: energia.py
+    responsabilita: E come somma di densita- locali, la corrente sugli archi e il bilancio
+    importa: [saturazione]
+
+  - nome: _collauda_energia.py
+    responsabilita: il collaudo di E e del bilancio, e il fallimento affermato come fatto
+    importa: [_presidio, energia, incidenza, motore, stato]
+
   - nome: crescita.py
     responsabilita: la crescita del grafo, regola NON-H col suo bilancio
     importa: []

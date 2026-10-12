@@ -144,3 +144,50 @@ che **non sto misurando il bilancio.**
    deve fallire** *(verso invertito)*; e **misura** il residuo con `N` acceso.
 4. la **domanda per Luca** sul **limite della promozione**, e il **buco dello schema**
    *(un flusso non dichiara dove agisce)*.
+
+---
+
+## ⛔ ANNOTAZIONE DEL `2026-10-12`, DOPO LA MISURA — **la previsione `1` E' FALSA**
+
+> ### ⚠ **Il par.`8` dice che un ragionamento che si rivela sbagliato NON SI
+> RISCRIVE: si ANNOTA.** ### **Quindi quello che sta sopra resta**, e qui c'e' che cosa
+> la misura ha detto.
+
+### ✅ **CHE COSA REGGE, e regge esattamente:**
+
+| | il fatto | la misura |
+|---|---|---|
+| `a` | **`E` e' la somma delle densita' locali**, e non un'approssimazione della forma globale | scarto **`1.8e-15`** |
+| `b` | **il PRIMO termine e' conservato dal tick lineare**, per l'identita' `W^dag W W = W` | **`0.6` ulp** |
+| `c` | **i cambiamenti per nodo sommano a zero**, quindi ### **UNA corrente ESISTE** | `0.6` ulp |
+
+### ⛔ **CHE COSA E' FALSO: la previsione `1`.** Avevo scritto *«la parte lineare
+chiude il bilancio locale ESATTAMENTE»*. ### **NON CHIUDE**, e non chiude **di tanto**:
+
+| | |
+|---|---|
+| il residuo con la corrente derivata | **`1.342e+01`** su scala `4.93` |
+| il cambiamento **senza nessuna corrente** | `7.768e+00` |
+| ### ⛔ **quindi** | ### **la corrente NON TOGLIE niente: AGGIUNGE.** E' **peggio** di non averla |
+
+### ⭐ **E L'ERRORE DELLA DERIVAZIONE E' PRECISO, e non e' un conto sbagliato:**
+l'argomento del campo `azione` *(solo `arco` attraversa)* e' **vero**, ma dice
+**dove si muove `psi`**. ### ⛔ **E `e_h = Re[conj(psi_h) . (W psi)_h]` NON E' UNA
+FUNZIONE DI `psi` A UN TEMPO: e' una CORRELAZIONE FRA DUE TEMPI** — `psi` e `W psi`.
+### **Quindi non e' una carica che si trasporta, e l'argomento non si trasferisce.**
+
+### ✅ **E LA PROVA E' DIRETTA, non dedotta:** `e_h` cambia su **TUTTI** i nodi
+*(`16` su `16`)*, anche su quelli i cui archi **non portano niente**. ### **Una carica
+trasportata non si comporta cosi'.**
+
+### ⚠ **E C'E' UNA SECONDA COSA CHE NON AVEVO VISTO:** `E` **non e' conservata
+dal tick LINEARE**. Il primo termine si', ma ### **il termine del vuoto cambia di
+`2.633`**, perche' il tick lineare **cambia `h_k`** e `Lambda_k G(h_k/Lambda_k)` dipende
+da `h_k`. ### ⛔ **Quindi la conservazione di `E` e' una proprieta' della
+COMPOSIZIONE INTERA**, non della somma di due pezzi conservati.
+
+### 📌 **E sul tick intero la deriva c'e' e scende:** a tempo totale fisso
+`T = 20`, l'ultimo dimezzamento di `dtau` *(da `0.1` a `0.05`)* da' **rapporto `4.20`**
+— ### **la firma dell'esponente `2`, cioe' dello splitting di Strang.** ### ⚠ **E
+ai passi grandi il rapporto e' erratico** *(`0.39`, `2.48`)*: ### **fuori dal regime
+asintotico**, e va detto invece di citare solo il numero buono.

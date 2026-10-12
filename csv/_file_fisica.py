@@ -139,6 +139,12 @@ FILE_FISICA = (
     # ### ### **ANNULLA AL BIT**, e la CAUSA e- provata direttamente -- il flusso
     # ### ### **conserva `h` e `Lambda`**, cioe- i suoi propri coefficienti.
     'primo_ordine/_collauda_saturazione.py',
+    # ### `P3`: L-ENERGIA COME SOMMA DI DENSITA- LOCALI, e la corrente sugli archi.
+    # ### \u26d4 **E il suo collaudo AFFERMA UN FALLIMENTO MISURATO:** la corrente
+    # ### derivata ### **non chiude il bilancio**, e il motivo e- che `e_h` e- una
+    # ### ### **correlazione fra DUE TEMPI** e non una carica trasportata.
+    'primo_ordine/energia.py',
+    'primo_ordine/_collauda_energia.py',
     # ### IL COSTRUTTO `@rif` *(punto `14`)*: ### **byte-inerte**, e il suo
     # ### collaudo lo verifica ### **con `is`.**
     'primo_ordine/_rif.py',
