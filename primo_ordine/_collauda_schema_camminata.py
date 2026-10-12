@@ -54,8 +54,8 @@ def _flusso(**k):
     return d
 
 
-VAR = {"psi": "complesso_c2_estremita", "phi": "reale_estremita",
-       "h": "reale_estremita", "Lambda": "reale_nodo"}
+VAR = {"psi": "complesso_c2_estremita", "phi": "complesso_estremita",
+       "h": "reale_nodo", "Lambda": "reale_nodo"}
 
 
 def main():
@@ -76,10 +76,10 @@ def main():
           "### %s" % list(S.TIPI))
     esito("### i due tipi di variabile delle ESTREMITA' esistono",
           "complesso_c2_estremita" in S.TIPI_VARIABILE
-          and "reale_estremita" in S.TIPI_VARIABILE)
+          and "complesso_estremita" in S.TIPI_VARIABILE)
     esito("### e hanno un DOMINIO dichiarato (senza, nessuno li controlla)",
           S.DOMINI.get("complesso_c2_estremita") == "finito"
-          and S.DOMINI.get("reale_estremita") == "finito")
+          and S.DOMINI.get("complesso_estremita") == "finito")
     esito("### e `estremita` e' un TERZO posto, non un sinonimo di `arco`",
           S.DOVE.get("complesso_c2_estremita") == "estremita"
           and S.DOVE.get("reale_arco") == "arco",

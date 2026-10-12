@@ -95,14 +95,28 @@ variabili:
       CONTEGGIO. ### Vive sull'estremita' e NON sul nodo, e il punto `F1` lo DECIDE:
       un'estremita' porta uno spinore, un nodo ne porta tanti quanto il suo grado.
   - nome: phi_h
-    tipo: reale_estremita
+    tipo: complesso_estremita
     voce: V-PHI-H-ERA2
     dimensione: E^0
     scheda: >-
-      Il vuoto locale, uno SCALARE NEUTRO sull'estremita' d'arco (punto `F4`). E'
-      l'erede dello scuotimento dell'era `1`: deterministico, col caso SOLO nelle
-      condizioni iniziali e da un seme. ### E' NEUTRO, quindi lo spostamento lo porta
-      SENZA `U` -- ed e' la differenza che lo distingue da `psi_h`.
+      Il vuoto locale, uno SCALARE COMPLESSO sull'estremita' d'arco (punto `F4`).
+      ### DECISIONE DI LUCA del 2026-10-12: e' COMPLESSO, non reale. E qui la tabella
+      diceva `reale_estremita`, che era un ERRORE DI TRASCRIZIONE mio: il banco
+      congelato -- il riferimento del criterio di passaggio -- lo tiene COMPLESSO.
+      ### <<NEUTRO>> VUOL DIRE SOLO <<TRASPORTATO SENZA U>>, e non <<reale>>: nella
+      teoria dei campi <<scalare neutro>> ha un altro significato, e QUI NON E' QUELLO
+      INTESO. E' l'erede dello scuotimento dell'era 1: deterministico, col caso SOLO
+      nelle condizioni iniziali.
+      ### QUINDI phi PORTA UNA FASE, e quella fase non e' un ornamento: (a) la `C`
+      decisa (punto `F3`) agisce come `phi -> coniugato(phi)`, e su un reale sarebbe
+      L'IDENTITA'; (b) il flusso esatto della saturazione agisce PROPRIO SU QUELLA
+      FASE, `phi -> phi exp(-i beta dtau)`; (c) `Lambda` e' la somma di `|phi|^2`
+      sulle estremita' del nodo, e scrivere IL MODULO QUADRO ha senso come enunciato
+      solo se phi e' complesso -- di un reale sarebbe il quadrato.
+      ### E IL TRASPORTO RESTA SENZA U: lo spostamento del vuoto e' una PERMUTAZIONE
+      PURA delle due estremita' dell'arco, e il Grover scalare e' lo stesso
+      `(2/d) Somma - I` dello spinore. E' questo che <<neutro>> dice.
+
   - nome: Lambda
     tipo: reale_nodo
     voce: V-LAMBDA-ERA2

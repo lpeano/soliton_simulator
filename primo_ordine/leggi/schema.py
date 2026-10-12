@@ -102,8 +102,29 @@ TIPI_VARIABILE = {
     # ### i vicini>> lavorano.
     "complesso_c2_estremita": ("un complesso C^2 sull-ESTREMITA- d-arco (psi della "
                                "camminata: F1 della carta della fisica)"),
-    "reale_estremita": ("un reale sull-ESTREMITA- d-arco (phi, il vuoto locale "
-                        "neutro: F4)"),
+    # ### ⛔ **IL VUOTO E- COMPLESSO -- DECISIONE DI LUCA, `2026-10-12`.** Il tipo
+    # ### si chiamava `reale_estremita`, ed era ### **un ERRORE DI TRASCRIZIONE: il banco
+    # ### congelato lo tiene COMPLESSO**, e la tabella diceva reale.
+    # ### ⭐ **E L-ERRORE NASCEVA DA UNA PAROLA:** <<scalare NEUTRO>> *(punto `F4`)*
+    # ### vuol dire ### **SOLO <<trasportato senza `U`>>**, non <<reale>> -- e nella
+    # ### teoria dei campi <<neutro>> ha ### **un altro significato**, che qui
+    # ### ### **non e- quello inteso.**
+    # ### ✅ **QUATTRO PROVE, lette DAL CODICE del banco** -- e ### **per NOME DI
+    # ### FUNZIONE e non per riga**, perche- i numeri di riga sono di blob vecchi e
+    # ### ### **sono shiftati** *(e il presidio dei riferimenti me l-ha appena rifiutate
+    # ### scritte a riga)*: il vuoto ### **nasce** complesso in
+    # ### `proto_camminata.vuoto3.vuoto_zero`; `vuoto3.grover_scalare` accumula in un
+    # ### array `complex` e `vuoto3.lambda_nodo` somma `|phi|^2`;
+    # ### `saturazione3.flusso` ### **da- una FASE a `phi`**; e
+    # ### `camminata3.coniuga3` ### **lo CONIUGA** -- ### **su un reale sarebbe
+    # ### l-identita-.**
+    # ### ⚠ **Il tipo vecchio NON resta accanto:** un tipo senza utenti e-
+    # ### ### **una manopola morta**, e lasciarlo vorrebbe dire che qualcuno
+    # ### ### **potrebbe ancora dichiarare un vuoto reale.**
+    "complesso_estremita": ("uno SCALARE COMPLESSO sull-ESTREMITA- d-arco (phi, il "
+                            "vuoto locale: F4). <<NEUTRO>> vuol dire TRASPORTATO SENZA "
+                            "U, non reale: phi porta una FASE, la C lo CONIUGA, e la "
+                            "saturazione agisce SU QUELLA FASE"),
 }
 
 # =====================================================================================
@@ -125,7 +146,10 @@ TIPI_VARIABILE = {
 # =====================================================================================
 DOMINI = {
     "complesso_c2_estremita": "finito",
-    "reale_estremita": "finito",
+    # ### ⛔ **FINITO come il suo compagno su `C^2`:** il criterio di finitezza di
+    # ### uno scalare complesso e- ### **il suo MODULO**, e `Lambda` lo somma -- quindi
+    # ### un `phi` non finito ### **renderebbe non finita la scala del nodo.**
+    "complesso_estremita": "finito",
     "complesso_c2_nodo": "finito",
     "reale_nodo": "finito",
     "reale_arco": "finito",
@@ -143,7 +167,7 @@ FORME_DOMINIO = ("finito", "finito-pos", "fase-2pi")
 # ### quindi confonderli vorrebbe dire ### **dimezzare o raddoppiare lo stato.**
 DOVE = {"complesso_c2_nodo": "nodo", "reale_nodo": "nodo", "coppia_coniugata": "nodo",
         "reale_arco": "arco", "fase_arco": "arco",
-        "complesso_c2_estremita": "estremita", "reale_estremita": "estremita"}
+        "complesso_c2_estremita": "estremita", "complesso_estremita": "estremita"}
 
 # ### ⛔ **GLI OPERATORI, LE AZIONI E I CONTROLLI DEI DUE TIPI NUOVI STANNO
 # ### IN UN FILE A PARTE**, e il motivo e- un presidio: con tutto qui dentro

@@ -58,7 +58,7 @@
  },
  "generati": [
   "osservatori/prova_norma.py=97a979de08e6f361",
-  "stato.py=f5e561e0cfd34255",
+  "stato.py=9f3435722c72e783",
   "termini/camm_forma_d.py=0d3e0bb972c00d53",
   "termini/camm_grover.py=f49defb2ab5e971e",
   "termini/camm_grover_vuoto.py=a62ff99b3a295619",
@@ -70,8 +70,8 @@
   "termini/prova_locale.py=7326fa65e394ab4f"
  ],
  "impronta_config": "0bc547638e5fda6f",
- "impronta_generati": "98b23e65bf0e15e6",
- "impronta_tabella": "6fbc41dbad19d3fd",
+ "impronta_generati": "4af5010a74382fd4",
+ "impronta_tabella": "7825809bb4a39a8b",
  "passo": 200,
  "versione_dati": 1,
  "versioni": {

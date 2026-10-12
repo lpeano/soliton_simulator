@@ -14197,3 +14197,26 @@ Ogni dato di `db_era2/` ha ### **il suo TIMBRO accanto**, col campo `versione_da
 ### ⚠ **E UN TERZO DIFETTO, DENTRO LA CURA DI (2), NASCOSTO DA UN `except` TROPPO LARGO.** Mancava `import io`, quindi `io.open` alzava `NameError` -- e il mio `except Exception` **lo trasformava in <<il referto e' vuoto>>**: `m4` diceva FALLISCE con *<<nan nel referto committato>>* **mentre il referto era perfetto**. ### ⛔ **Un `except` largo non e' prudenza: nasconde il difetto e lascia passare un verdetto FALSO.** L'`except` e' **TOLTO**.
 
 ### ⭐ **I NUMERI.** Il presidio sullo STOP: **`11` su `11`**, coi due bracci nuovi *(un pezzo che aspetta Luca **non** blocca e lo **dice**; una voce che **non** aspetta **non** ferma il pezzo)*. Col processo: la coda e' riconosciuta **BLOCCATA**, e il motivo **nomina entrambe le voci**. La suite: ### **`45` su `46`, e l'unico rosso e' `m1`** -- lo stato dichiarato, in attesa di Luca. E ### **l'albero non si sporca piu': zero file toccati dalla suite.**
+
+---
+
+## IL VUOTO E' COMPLESSO -- DECISIONE DI LUCA, E L'ERRORE NASCEVA DA UNA PAROLA *(2026-10-12)*
+
+### ✅ **LUCA HA RISPOSTO a `[[DOMANDA-PHI-REALE-O-COMPLESSO]]`: `phi_h` e' COMPLESSO**, uno scalare complesso sull'estremita' d'arco, **come nel banco congelato**.
+
+### ⭐ **E L'ERRORE NASCEVA DA UNA PAROLA, che e' la parte che non avevo visto:** *<<NEUTRO>>* *(punto `F4`)* vuol dire **SOLO <<trasportato senza `U`>>**. ### ⛔ **Non vuol dire <<reale>>:** nella teoria dei campi *<<scalare neutro>>* ha **un altro significato**, e ### **qui non e' quello inteso.** ### **La mia diagnosi aveva ragione sul fatto e non sulla causa**, e la causa e' quella che impedisce di rifarlo.
+
+### ✅ **E LA QUARTA PROVA, trovata dalla verifica esterna**, si aggiunge alle tre di `05014b0`: la **`C` decisa** *(punto `F3`)* agisce come **`phi -> coniugato(phi)`** -- `camminata3.coniuga3` fa `np.conj(st["phi"])`. ### ⛔ **Su un reale sarebbe l'IDENTITA'.** ### ⚠ **E le cito per NOME DI FUNZIONE e non per riga**, perche' `[[P-RIF]]` me le ha **rifiutate scritte a riga**: i numeri di riga sono di blob vecchi e **sono shiftati**.
+
+| | che cosa ho fatto |
+|---|---|
+| **lo schema** | `reale_estremita` **TOLTO**, e al suo posto **`complesso_estremita`** col suo criterio di finitezza. ### **Un tipo senza utenti e' una manopola morta**, e lasciarlo vorrebbe dire che qualcuno **potrebbe ancora dichiarare un vuoto reale** |
+| **la tabella** | `phi_h` passa al tipo nuovo, e **la scheda e' riscritta**: dichiara che *<<neutro>>* significa **senza `U`**, che `phi` **porta una fase**, che **`C` lo coniuga** e che **la saturazione agisce su quella fase** |
+| **il generato** | `phi_h` e' **`complex128` di forma `(2m,)`** -- verificato dallo stato generato, non dedotto |
+| **la coerenza di `Lambda`** | adesso torna: *<<somma di `|phi_h|^2`>>* ha senso come enunciato ### **solo perche' `phi` e' complesso** -- di un reale sarebbe il quadrato |
+
+### ⛔ **E NON HO POTUTO CHIUDERE LA VOCE: DUE PRESIDI INSIEME LO VIETANO.** `PI-ERA-STATO` dice che una voce dell'era `2` ha stato **AGENDA** *(l'era `2` non e' cominciata)*, quindi **rifiuta `CHIUSA`**; `PI-CHIUSURA-ORFANA` dice che una voce col campo `chiusura` pieno **deve essere `CHIUSA`**, perche' una voce che dice *<<chiusa dal commit X>>* e non e' chiusa **mente in un campo che un programma legge**. ### ⛔ **Insieme rendono IRRAGGIUNGIBILE uno stato legittimo: una domanda dell'era `2` a cui LUCA HA RISPOSTO non si puo' registrare come decisa.**
+
+### ⚠ **E NON E' UN CASO LIMITE: ogni domanda del simulatore dell'era `2` e' in questo stato**, e ce ne sono **`18`**. ### **La prima a cui Luca ha risposto ha trovato il muro.** ### ✅ **Intanto la decisione vive nella riga di STORICO**, `priorita` e' svuotata e `blocca` e' `NO`, quindi **la domanda ESCE da `DA_DECIDERE_LUCA` come il mandato chiede**. ### ⛔ **Ma il CAMPO che un programma legge per saperlo NON C'E'**, ed e' esattamente cio' che `[[DECISIONE-VUOLE-UN-CAMPO]]` vieta. Sta in **`[[D-ERA2-NON-SI-CHIUDE]]`**.
+
+### 📌 **LA MIA RACCOMANDAZIONE, e non e' una decisione:** `PI-ERA-STATO` va **stretto**. La sua ragione e' *<<una voce dell'era `2` e' in agenda perche' l'era `2` non e' cominciata>>*, e quella ragione ### **non si applica a una domanda GIA' RISPOSTA: una domanda decisa non e' <<in agenda>>.** Quindi dovrebbe pretendere `AGENDA` **solo per le voci APERTE** dell'era `2`. ### ⚠ **Ma toccare un presidio e' una decisione di Luca, e l'ho trovato DENTRO il mandato di un'altra cosa: non lo cambio qui.**

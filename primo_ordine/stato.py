@@ -12,13 +12,13 @@ esiste.**
 import numpy as np
 
 # ### L-IMPRONTA del blocco `variabili` della tabella: un presidio la confronta.
-IMPRONTA = '4472669bfda2b0a9'
+IMPRONTA = 'd5ef6e68d2388410'
 
 # ### (nome, tipo, ID della voce in `doc/indice/variabili.jsonl`)
 VARIABILI = (
     ('psi', 'complesso_c2_nodo', 'V-PSI-ERA2'),
     ('psi_h', 'complesso_c2_estremita', 'V-PSI-H-ERA2'),
-    ('phi_h', 'reale_estremita', 'V-PHI-H-ERA2'),
+    ('phi_h', 'complesso_estremita', 'V-PHI-H-ERA2'),
     ('Lambda', 'reale_nodo', 'V-LAMBDA-ERA2'),
     ('h_int', 'reale_nodo', 'V-H-INT-ERA2'),
 )
@@ -30,7 +30,7 @@ VARIABILI = (
 DOMINI = (
     ('psi', 'complesso_c2_nodo', 'finito'),
     ('psi_h', 'complesso_c2_estremita', 'finito'),
-    ('phi_h', 'reale_estremita', 'finito'),
+    ('phi_h', 'complesso_estremita', 'finito'),
     ('Lambda', 'reale_nodo', 'finito'),
     ('h_int', 'reale_nodo', 'finito'),
 )
@@ -87,10 +87,15 @@ def nuovo(n, m):
             st[nome] = np.zeros((n, 2), dtype=complex)
         elif tipo == 'reale_nodo':
             st[nome] = np.zeros(n, dtype=float)
-        elif tipo in ('complesso_c2_estremita', 'reale_estremita'):
-            st[nome] = (np.zeros((ne, 2), dtype=complex)
-                        if tipo == 'complesso_c2_estremita'
-                        else np.zeros(ne, dtype=float))
+        elif tipo in ('complesso_c2_estremita', 'complesso_estremita'):
+            # ### ⛔ **ENTRAMBI COMPLESSI, e il vuoto
+            # ### lo e- per DECISIONE DI LUCA del 2026-10-12:** la `C` lo
+            # ### CONIUGA e la saturazione gli da- una FASE, e su un reale
+            # ### ### **la prima sarebbe l-identita- e la seconda
+            # ### impossibile.**
+            st[nome] = np.zeros((ne, 2), dtype=complex) \
+                if tipo == 'complesso_c2_estremita' \
+                else np.zeros(ne, dtype=complex)
         else:
             # ### ⛔ **Un tipo d-ARCO o una `coppia_coniugata`
             # ### non si costruisce qui:** il primo e- ### **dell-arco e non
