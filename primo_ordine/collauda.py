@@ -122,6 +122,13 @@ COLLAUDI = (
     ("l-arbitro fra le due vie", "csv/_registri_indice.py --collaudo", "pre-commit"),
     ("i presidi dell-indice", "csv/_presidio_indice.py --collaudo", "pre-commit"),
     ("`P-REG` le regole di gestione", "csv/_collauda_regole.py", "pre-commit"),
+    # ### ⛔ **IL PRESIDIO SULLO STOP, e perche- sta QUI dentro:** e- un presidio come
+    # ### gli altri, ### **e un presidio che nessuno fa girare e- una testimonianza**
+    # ### -- cioe- esattamente la forma che quel presidio esiste per togliere.
+    # ### ⭐ **E il suo braccio `(7)` legge `.claude/settings.json`:** cosi- un percorso
+    # ### sbagliato nella registrazione ### **diventa un collaudo ROSSO**, invece di un
+    # ### hook che falliva a vuoto a ogni turno senza dirlo.
+    ("il presidio sullo STOP", "csv/_stop_coda.py --collaudo", "pre-commit"),
     # ------------------------------------------------- I DIECI CHE MANCAVANO
     # ### ⛔ **Perche- mancavano, e perche- conta: sta nel DOCSTRING del modulo** --
     # ### ### **e sta la- perche- un ID in un commento di `primo_ordine/` e- vietato**,

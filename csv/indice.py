@@ -2516,6 +2516,17 @@ def crea_lotto(voci, reg, percorso):
             assert spec, "`%s`: la chiave meta `%s` NON e- registrata" % (idv, k)
             assert spec.get("stato") == "ATTIVO", ("`%s`: la chiave meta `%s` e- DEPRECATA"
                                                    % (idv, k))
+        # ### ⛔ **IL MODELLO COPRE `CHIAVI` INTERE, E I TRE CAMPI NUOVI VENGONO DA
+        # ### `DEFAULT_NUOVI`** -- non riscritti a mano qui.
+        # ### ⚠ **PERCHE- LA CORREZIONE E- SERVITA, ed e- un difetto che NESSUNO AVEVA
+        # ### VISTO:** `priorita`, `dipende_da` e `sblocca` sono nati ### **dopo** questo
+        # ### modello, e la riga `{k: v[k] for k in CHIAVI}` che viene dopo
+        # ### ### **ALZAVA `KeyError`** -- cioe- ### **`crea-lotto` non poteva far nascere
+        # ### NESSUNA voce**, e il blocco `C` delle `16` era passato ### **prima che i tre
+        # ### campi esistessero.** ### **La via unica di scrittura era rotta in silenzio**,
+        # ### e si e- vista solo alla prima voce nata dopo.
+        # ### ⭐ **E LA FONTE E- `DEFAULT_NUOVI`, non una copia**: un terzo elenco degli
+        # ### stessi default ### **sarebbe il prossimo a restare indietro.**
         v = {"id": idv, "alias": [], "titolo": "", "descrizione": "",
              "classe": "NON_DEFINITA", "dominio": "DA_CLASSIFICARE",
              "era": "DA_CLASSIFICARE", "stato": "DA_CLASSIFICARE", "blocca": False,
@@ -2525,7 +2536,16 @@ def crea_lotto(voci, reg, percorso):
              "aggiornata": {"data": r.get("quando") or _oggi(),
                             "commit": r.get("commit", "")},
              "stato_era_1": "", "meta": {}}
+        v.update(DEFAULT_NUOVI)
         v.update(campi)
+        # ### ⛔ **E QUI SI CONTROLLA, invece di alzare `KeyError` su un campo:** se un
+        # ### campo nuovo nasce domani e nessuno aggiorna il modello, ### **il messaggio
+        # ### deve DIRE QUALE** -- un `KeyError` nudo manda a leggere il codice.
+        manca = [k for k in CHIAVI if k not in v]
+        assert not manca, ("il MODELLO di `crea_lotto` non copre `CHIAVI`: mancano %r."
+                           " Il campo nuovo va aggiunto al modello (o a `DEFAULT_NUOVI`"
+                           " se ha un default), altrimenti NESSUNA voce puo- nascere"
+                           % (manca,))
         v = {k: v[k] for k in CHIAVI}
         voci.append(v)
         per[idv] = v

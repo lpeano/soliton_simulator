@@ -127,3 +127,22 @@ la riga **`PUSHATO:`**, che Luca vede a colpo d'occhio.
 | ### **`SCHEDA_NEL_REGISTRO`** *(nuova)* | ### **solo i file la cui SCHEDA vive in `doc/REGISTRO_FISICA.md`** *(`1`)*. La leggono ### **`H-REG-R`** e ### **`H-P7`** |
 | ### ⛔ **perché due liste e non un sottoinsieme** | la scheda di una legge dell'era `2` ### **si GENERA in `doc/leggi_era2/<id>.md`**: pretendere che stia ### **anche** nel registro vorrebbe dire ### **DUE posti per la stessa scheda**, e ### **due copie divergono** |
 | ### ⭐ **e l'`assert` chiedeva questo** | *«va esteso, non adattato»* — ### **un ciclo sarebbe stato l'adattamento**, la distinzione è ### **l'estensione** |
+
+---
+
+## `H-STOP-CODA`: IL PRESIDIO SULLO STOP *(mandato di Luca, 2026-10-12)*
+
+| | |
+|---|---|
+| ### ⛔ **l'incidente, ed e' MIO** | la regola **`L-NON-FERMARSI-AL-CHECKPOINT`** era **scritta**, e **nello stesso giorno** mi sono fermato **due volte** dopo un commit senza proseguire. ### **Una regola scritta che non impedisce non e' un presidio** *(`A9`)* |
+| ### **che cos'e', tecnicamente** | un **hook `Stop` di Claude Code** *(non un hook di git)*, registrato in **`.claude/settings.json`** -- lo stesso file di `H-STASH`, che e' **tracciato** |
+| ### ⭐ **la decisione** | se c'e' **lavoro PRONTO** che **non aspetta una decisione di Luca**, **blocca la chiusura del turno NOMINANDO il pezzo successivo** |
+| ### ✅ **il contratto, VERIFICATO e non supposto** | dalle stringhe del binario, **alla lettera**: *«For Stop/SubagentStop hooks, **check `stop_hook_active` in the input and return success while it's true**. Set `CLAUDE_CODE_STOP_HOOK_BLOCK_CAP` to raise this limit»* |
+| ### ⛔ **e quel contratto mi ha trovato un DIFETTO** | la prima stesura **ignorava `stop_hook_active`**: il braccio `(3-ter)` del collaudo **sarebbe stato rosso**, ed e' il motivo per cui quel braccio esiste |
+| ### ⚠ **DUE protezioni dai cicli, e sono DISTINTE** | `stop_hook_active` e' **del TURNO** ed e' il contratto; il promemoria del presidio e' **del COMMIT** *(la chiave e' `HEAD`)*, ed e' quello che il mandato chiede: **mai due volte senza un commit nuovo** |
+| ### ⛔ **e il promemoria vive FUORI dal repo** | il mandato dice **<<legge soltanto>>**, e uno stato dentro il repo sarebbe **un file scritto a ogni turno** |
+| ### ⛔ **perche' NON chiama `_presidio.avvia()`** | `avvia()` **STAMPA il timbro su stdout**, e qui **stdout e' il canale JSON del hook**: un timbro davanti alla graffa **romperebbe il JSON a ogni turno**. ### Quindi: **la riconfigurazione si', il timbro solo nel collaudo**, e l'uscita resta **ASCII puro per costruzione** -- **provato dal braccio `(5)`** |
+| ### ⭐ **il braccio che vale piu' degli altri** | il `(7)` legge **`.claude/settings.json`** e pretende che la registrazione punti a **un file che ESISTE**: un percorso sbagliato sarebbe **un hook che falliva a vuoto a ogni turno senza dirlo**, cioe' **ancora `A9`** |
+| ### ⚠ **il POSTO APERTO, dichiarato** | `args` e' forma **exec**, quindi **nessuna shell espande `CLAUDE_PROJECT_DIR`**, e che Claude Code lo espanda **li'** **non e' verificabile dai file installati**. ### Percio' la registrazione usa il **percorso relativo**, e lo script risolve la radice da **`__file__`** |
+| ### ⚠ **IL LIMITE CHE RESTA** | **non ho trovato il nome esatto del campo d'uscita che blocca uno `Stop`** *(le occorrenze di `stopReason` nel bundle JS sono **lo schema MCP di sampling**)*. Lo script **emette le forme note insieme** piu' **il codice d'uscita `2`**, e ### **il collaudo prova che lo script DECIDE bene, non che Claude Code onori quel campo** |
+| ### **il collaudo** | `python csv/_stop_coda.py --collaudo`, **9 bracci**, dichiarato in `primo_ordine/collauda.py` nel **`pre-commit`** |

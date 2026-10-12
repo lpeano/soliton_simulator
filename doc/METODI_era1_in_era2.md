@@ -8,18 +8,18 @@
 
 | | quanti |
 |---|--:|
-| **`PORTATO`** | `109` |
+| **`PORTATO`** | `110` |
 | **`PRONTO`** | `7` |
 | **`DA_PORTARE`** | `18` |
 | **`DA_DECIDERE`** | `5` |
 | **`NON_SI_APPLICA`** | `7` |
-| **in tutto** | ### **`146`** |
+| **in tutto** | ### **`147`** |
 
-### ⚠ **E IL NUMERO `146` E- MISURATO, non stimato:** viene dal perimetro che l-indice calcola, e ### **il mandato ne nominava <<una decina>>** per nome piu- *<<e le cure di architettura>>*. ### **La decina era `20`.**
+### ⚠ **E IL NUMERO `147` E- MISURATO, non stimato:** viene dal perimetro che l-indice calcola, e ### **il mandato ne nominava <<una decina>>** per nome piu- *<<e le cure di architettura>>*. ### **La decina era `20`.**
 
 ---
 
-## `PORTATO` — `109` metodi
+## `PORTATO` — `110` metodi
 
 > ### ✅ **GIA- NELL-ERA `2`**, e `dove` dice dove
 
@@ -51,6 +51,7 @@
 | **`H-REG-R`** | `PRESIDIO` | una legge che cambia senza la sua scheda: ### nell-era 2 la scheda SI GENERA in `doc/leggi_era2/<id>.md`, quindi `SCHEDA_NEL_REGISTRO` limita `H-REG-R` al simulatore -- DUE POSTI PER LA STESSA SCHEDA SAREBBERO DUE FONTI | `csv/_file_fisica.py::SCHEDA_NEL_REGISTRO` |
 | **`H-RIGHE`** | `PRESIDIO` | `CLAUDE.md` sotto le 400 righe: ### IL PUNTO 2 DELLE REGOLE DI GESTIONE (mandato 6) genera la sezione delle regole dall-indice | `.githooks/pre-commit` |
 | **`H-STASH`** | `PRESIDIO` | `git stash` bloccato da `permissions.deny`: non e- un hook e non ha via d-uscita. Vale per ogni lavoro, era 2 compresa | `.claude/settings` |
+| **`H-STOP-CODA`** | `PRESIDIO` | un turno non si chiude se la coda ha lavoro PRONTO: e- un hook `Stop` di Claude Code, non di git. ### SI APPLICA ALL-ERA 2 NEL SENSO PIU- DIRETTO: l-elenco dei pezzi che il presidio guarda E- il piano del simulatore dell-era 2, e il pezzo che nomina oggi e- `primo_ordine/motore.py`. ### E il braccio (7) del suo collaudo legge `.claude/settings.json`, cosi- una registrazione sbagliata e- un collaudo ROSSO e non un hook che falliva a vuoto | `.claude/settings.json` + `csv/_stop_coda.py` |
 | **`H-VALIDATORE`** | `PRESIDIO` | un indice mal formato o con una voce persa: gira nel `pre-commit` e ha fermato questo mandato (`PI-STORICO-SENZA-COMMIT`, riga di storico senza `commit`) | `.githooks/pre-commit` + `csv/indice.py valida` |
 | **`L-DOPO-STOP`** | `STANDARD` | dopo uno STOP si lavora solo la coda: ### e Luca ha cambiato la regola per questa coda -- lo STOP vale come CHECKPOINT e si passa al mandato successivo SENZA aspettare | metodo; la deroga e- in `doc/CODA_2026-10-09.md` |
 | **`L-NUMERI`** | `STANDARD` | ogni numero di un commit o di un referto esce da uno script: il referto dell-infrastruttura e- GENERATO dall-uscita dei sette collaudi, e la CI lo rigenera facendo `git diff` | `csv/_referto_infrastruttura_era2.py` |

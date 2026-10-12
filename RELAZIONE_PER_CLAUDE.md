@@ -14010,3 +14010,37 @@ Ogni dato di `db_era2/` ha ### **il suo TIMBRO accanto**, col campo `versione_da
 
 ### ✅ **E la suite passa `41` su `41`**, col `pre-commit` a ### **`120.1` s su `500`.**
 
+---
+
+## IL PRESIDIO SULLO STOP: la regola e' diventata un IMPEDIMENTO, e il contratto dello strumento mi ha trovato un difetto *(2026-10-12)*
+
+### ⛔ **L'INCIDENTE E' MIO, e lo scrivo per primo.** Dopo `7e1d395` mi sono fermato **oltre due ore senza un commit**, ed era **la seconda volta nello stesso giorno**: la regola `L-NON-FERMARSI-AL-CHECKPOINT` era **registrata e scritta**, e **non ha impedito niente**. ### **Luca ha ragione: la regola scritta non basta** (`A9`).
+
+### ⭐ **ADESSO E' UN MECCANISMO.** `.claude/settings.json` -- lo stesso file **tracciato** di `[[H-STASH]]` -- registra un **hook `Stop` di Claude Code** su `csv/_stop_coda.py`: se la coda ha **lavoro PRONTO** che non aspetta una decisione di Luca, **blocca la chiusura del turno NOMINANDO il pezzo successivo**. La voce e' **`[[H-STOP-CODA]]`**.
+
+### ✅ **CHE COSA HO VERIFICATO DAI FILE INSTALLATI, e il mandato lo chiedeva.** ① la **forma della configurazione** e l'elenco degli eventi, da `claude-code-settings.schema.json`, dove `args` e' la **forma exec** -- il comando **non passa da una shell**; ② il **protocollo d'uscita** `continue`/`hookSpecificOutput`, letto **nel codice dell'estensione stessa**.
+
+### ⭐ **E IL TERZO RISCONTRO NON ME L'ASPETTAVO, ed e' il piu' importante.** Dalle stringhe del binario `claude.exe`, **alla lettera**:
+
+> *<<For Stop/SubagentStop hooks, **check `stop_hook_active` in the input and return success while it's true**. Set `CLAUDE_CODE_STOP_HOOK_BLOCK_CAP` to raise this limit.>>*
+> *<<A hook blocked the turn from ending ... consecutive times ... overriding and ending turn.>>*
+
+### ⛔ **E QUESTO MI HA TROVATO UN DIFETTO VERO: la mia prima stesura IGNORAVA `stop_hook_active`.** Avrei cablato un presidio **che viola il contratto dello strumento su cui gira**. ### **Il braccio `(3-ter)` del collaudo esiste per questo, e sarebbe stato ROSSO.**
+
+### ⚠ **E UNA PREMESSA MIA CADE, e la dico invece di cancellarla:** avevo scritto nel file *<<Claude Code non ha una protezione dai cicli, quindi la devo fare io>>*. ### **FALSO: ce l'ha** -- un **tetto ai blocchi consecutivi**. La mia protezione **resta**, ma per **un'altra ragione**: la sua e' **del TURNO**, la mia e' **del COMMIT** *(la chiave e' `HEAD`)* -- ed e' quest'ultima che il mandato chiede, *<<mai due volte senza un commit nuovo>>*.
+
+### ⚠ **IL LIMITE CHE RESTA, dichiarato nel file e nella voce:** **non ho trovato il nome esatto del campo d'uscita che blocca uno `Stop`** -- le occorrenze di `stopReason` nel bundle JS sono **lo schema MCP di sampling**, non i hook. Lo script **emette le forme note insieme** piu' **il codice d'uscita `2`**, e ### **il collaudo prova che lo script DECIDE bene, non che Claude Code onori quel campo.**
+
+### ⛔ **E IL PRESIDIO NON SCRIVE NEL REPO: il promemoria vive FUORI**, nella cartella temporanea. Il mandato dice *<<legge soltanto>>*, e uno stato dentro il repo sarebbe **un file scritto a ogni turno**.
+
+### ⛔ **PERCHE' NON CHIAMA `_presidio.avvia()`, e non e' una dimenticanza:** `avvia()` **STAMPA il timbro su stdout**, e qui **stdout e' il canale JSON del hook** -- un timbro davanti alla graffa **romperebbe il JSON a ogni turno**. ### **Quindi: la riconfigurazione si', il timbro solo nel collaudo**, e l'uscita resta **ASCII puro per costruzione** -- e il braccio `(5)` **lo prova sui messaggi veri**, invece di dichiararlo.
+
+### ⭐ **IL BRACCIO CHE VALE PIU' DEGLI ALTRI e' il `(7)`:** legge **`.claude/settings.json`** e pretende che la registrazione punti a **un file che ESISTE**. ### **Un percorso sbagliato sarebbe un hook che falliva a vuoto a ogni turno senza dirlo, cioe' ANCORA `A9`** -- la forma che questo presidio esiste per togliere.
+
+### 📌 **I NUMERI.** `python csv/_stop_coda.py --collaudo` -> **`9` su `9`**; col **processo** e non solo in memoria: memo assente -> **uscita `2`**, stesso commit subito dopo -> **uscita `0`**, memo di un altro commit -> **uscita `2`**, `stop_hook_active` vero -> **uscita `0` e il memo NON viene scritto**, stdin vuoto e stdin rotto -> **non si rompe**. I collaudi interi: `pre-commit` **`139.8` s su `500`** *(`28%`)*, e il presidio nuovo costa **`0.24` s**.
+
+### ⛔ **UN DIFETTO TROVATO PER CASO, CHE NON C'ENTRAVA COL MANDATO -- e che era GRAVE.** `python csv/indice.py crea-lotto`, **la via UNICA per far nascere una voce**, **alzava `KeyError: 'priorita'`**: il suo modello interno non copriva i tre campi nati **dopo** di lui *(`priorita`, `dipende_da`, `sblocca`)*. ### **Cioe' la via unica di scrittura non poteva far nascere NESSUNA voce**, e il difetto era **silenzioso** perche' le `16` voci per cui `crea_lotto` fu scritto erano nate **prima** che quei campi esistessero. ### ⭐ **Si e' visto solo alla prima voce nata dopo, che e' questa.** La cura prende i tre campi da **`DEFAULT_NUOVI`** invece di ricopiarli *(un terzo elenco degli stessi default sarebbe il prossimo a restare indietro)*, e la riduzione a `CHIAVI` e' precedura da un controllo **che NOMINA il campo mancante** invece di alzare un `KeyError` nudo. Sta in **`[[D-CREA-LOTTO-ROTTA]]`**, e nasce **APERTA** perche' il validatore pretende `chiusura.commit` **e quel commit non esisteva ancora**.
+
+### ⚠ **TRE PRESIDI HANNO SCATTATO SUL MIO CAMBIAMENTO, e NON ne ho aggirato nessuno:** `P-REG` *(l'elenco letterale delle regole nuove -- e il suo stesso commento prescrive la cura: **si aggiorna l'elenco**, perche' derivarlo dall'indice lo farebbe **coincidere sempre**, cioe' passare per costruzione)*; `P-M1` *(un metodo **senza la sua riga**, e ha preteso la cosa giusta: **come si applica all'era `2`**)*; `P-T2` *(a cascata da `P-M1`, perche' un testo generato da un comando che non gira **non e' riproducibile**)*.
+
+### 📌 **E IL RITO DEL TASK HISTORY NON L'HO RISPETTATO: lo scrivo invece di aggiustarlo.** Il par.`8` vuole che si committi **PRIMA**, cosi' l'ordine e' **verificabile da git**; `doc/TASK_HISTORY/2026-10-12_presidio_stop.md` e' stato scritto **dopo**, col presidio gia' funzionante. ### **Quindi l'ordine, li', e' ASSERITO e non verificabile** -- ed e' esattamente il difetto che il rito esiste per impedire.

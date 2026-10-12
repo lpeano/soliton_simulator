@@ -193,6 +193,14 @@ METODI = {
     "H-STASH": ("`git stash` bloccato da `permissions.deny`: non e- un hook e non ha via "
                 "d-uscita. Vale per ogni lavoro, era 2 compresa",
                 "`.claude/settings`", "PORTATO"),
+    "H-STOP-CODA": ("un turno non si chiude se la coda ha lavoro PRONTO: e- un hook "
+                    "`Stop` di Claude Code, non di git. ### SI APPLICA ALL-ERA 2 NEL "
+                    "SENSO PIU- DIRETTO: l-elenco dei pezzi che il presidio guarda E- "
+                    "il piano del simulatore dell-era 2, e il pezzo che nomina oggi e- "
+                    "`primo_ordine/motore.py`. ### E il braccio (7) del suo collaudo "
+                    "legge `.claude/settings.json`, cosi- una registrazione sbagliata "
+                    "e- un collaudo ROSSO e non un hook che falliva a vuoto",
+                    "`.claude/settings.json` + `csv/_stop_coda.py`", "PORTATO"),
     "H-VALIDATORE": ("un indice mal formato o con una voce persa: gira nel `pre-commit` e "
                      "ha fermato questo mandato (`PI-STORICO-SENZA-COMMIT`, riga di storico senza `commit`)",
                      "`.githooks/pre-commit` + `csv/indice.py valida`", "PORTATO"),

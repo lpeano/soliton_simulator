@@ -16,7 +16,7 @@
 | `INFRASTRUTTURA` | `ENTRAMBE` | 24 |
 | `METODO` | `1` | 156 |
 | `METODO` | `2` | 16 |
-| `METODO` | `ENTRAMBE` | 90 |
+| `METODO` | `ENTRAMBE` | 92 |
 
 | id | classe | dominio | era | stato | blocca | titolo |
 |---|---|---|---|---|---|---|
@@ -210,6 +210,7 @@
 | `CURA1-CORTO` | MISURA | FISICA | 1 | ### **CHIUSA** |  | APERTO CURA1-CORTO |
 | `CURA2-CORTO` | MISURA | FISICA | 1 | ### **CHIUSA** |  | APERTO CURA2-CORTO |
 | `CURA2-STRUTTURALE` | CURA | INFRASTRUTTURA | 1 | ### **CHIUSA** |  | la CURA 2 diventa STRUTTURALE: i rami `else` di TEMPO_UNICO_MITOSI escono dal si |
+| `D-CREA-LOTTO-ROTTA` | DIFETTO | METODO | ENTRAMBE | ### **APERTA** |  | crea-lotto non poteva far nascere NESSUNA voce: il modello non copriva i tre cam |
 | `D0` | MISURA | FISICA | 1 | ### **CHIUSA** |  | CHI FA SCAPPARE d0 / 21/9 / MISURATO: e' IL FRENO. Gli scrittori spingono giu' - |
 | `D01` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | S09 clippa al passo causale — quindi e' gia' una LUNGHEZZA — e poi moltiplica pe |
 | `D02` | DIFETTO | FISICA | 1 | ### **CHIUSA** |  | pozzografo calcola L da self.pos — IL DISEGNO — mentre il suo docstring dichiara |
@@ -361,6 +362,7 @@
 | `H-REGR-LARGA` | DIFETTO | INFRASTRUTTURA | ENTRAMBE | ### **APERTA** |  | H-REG-R associa una scheda per NOME DI FUNZIONE: scatta su qualunque modifica a  |
 | `H-RIGHE` | PRESIDIO | METODO | ENTRAMBE | ### **APERTA** |  | PRESIDIO DEL HOOK: CLAUDE.md oltre le 400 righe |
 | `H-STASH` | PRESIDIO | METODO | ENTRAMBE | ### **APERTA** |  | git stash e BLOCCATO da permissions.deny: il decimo presidio, e NON e un hook |
+| `H-STOP-CODA` | PRESIDIO | METODO | ENTRAMBE | ### **APERTA** |  | il presidio sullo STOP: un turno non finisce se la coda ha lavoro PRONTO |
 | `H-VALIDATORE` | PRESIDIO | METODO | ENTRAMBE | ### **APERTA** |  | PRESIDIO DEL HOOK: un indice mal formato o con una voce persa rispetto al tag |
 | `H1` | MISURA | FISICA | 1 | ### **CHIUSA** |  | `H1` aiuta, in modo piccolo e sistematico. ### ⛔ Ma `0.5536` sta sotto `0.60`, e |
 | `H2` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | OMONIMO `H2`: 3 definizioni con significati DIVERSI |

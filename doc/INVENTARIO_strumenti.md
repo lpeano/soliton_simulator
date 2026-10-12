@@ -3290,3 +3290,19 @@ etichette rimosse, con ### **`0` persi, `0` doppi, `0` conflitti**.
 | ⚠ **il TETTO di sicurezza** | sopra `1.5` GB di privata ### **si ferma da solo** e scrive cio' che ha misurato; e gira a ### **priorita' BASSA**, per non rallentare il run |
 | 📌 **e il limite di `tracemalloc`, dichiarato** | vede ### **solo l'allocatore di Python**, e i buffer di `numpy` di norma usano ### **`malloc` diretto** — se il totale tracciato e' molto piu' piccolo della crescita vista dal sistema, ### **la causa e' fuori dal suo sguardo** -- e il confronto fra i due numeri e' ### **esso stesso un risultato** |
 
+---
+
+## `H-STOP-CODA` -- IL PRESIDIO SULLO STOP *(2026-10-12)*
+
+| file | BLOB *(`sha1` dei BYTE grezzi)* | che cosa misura | il collaudo |
+|---|---|---|---|
+| `csv/_stop_coda.py` | `8cd90065` | ### **`H-STOP-CODA`**: se la coda ha **lavoro PRONTO** che non aspetta Luca, **blocca la chiusura del turno NOMINANDO il pezzo**. ### ⚠ **Non e' un hook di git: e' un hook `Stop` di Claude Code** | `--collaudo` ### **`9`/`9`** |
+
+| | |
+|---|---|
+| **IL COMANDO, verbatim** | `python csv/_stop_coda.py --collaudo` |
+| **e come gira DAVVERO** | `echo {"hook_event_name":"Stop"} \| python csv/_stop_coda.py` -- legge il JSON del hook da **stdin**, e **uscita `2`** vuol dire **bloccato** |
+| ### **la registrazione** | `.claude/settings.json`, `hooks.Stop[].hooks[] = {type: "command", command: "python", args: ["csv/_stop_coda.py"]}` |
+| ### ⭐ **e il braccio `(7)` LEGGE quella registrazione** | cosi' un percorso sbagliato e' **un collaudo ROSSO**, non **un hook che falliva a vuoto a ogni turno senza dirlo** |
+| ### ⛔ **perche' NON chiama `_presidio.avvia()`** | `avvia()` **stampa il timbro su stdout**, e qui **stdout e' il canale JSON del hook**. ### **La riconfigurazione si', il timbro solo nel collaudo**, e l'uscita e' **ASCII puro** -- provato dal braccio `(5)` |
+| ### ⚠ **e il promemoria NON sta nel repo** | il mandato dice *<<legge soltanto>>*: sta in `%TEMP%`, sovrascrivibile con `CLAUDE_STOP_MEMO` *(che e' come il collaudo lo prova col processo)* |
