@@ -3342,3 +3342,21 @@ etichette rimosse, con ### **`0` persi, `0` doppi, `0` conflitti**.
 | ### ⭐ **il rapporto `cresci()` / passo, MISURATO** | **`0.88x`** a `m=1000`, **`0.77x`** a `m=1e4`, **`0.50x`** a `m=1e5` -- ### **il PASSO domina, e il rapporto MIGLIORA con la taglia** |
 | ### ⛔ **la regola del tick** | `apri_tick()` azzera, `chiudi_tick()` **ALZA** oltre una `cresci()`. ### **Il contatore comincia a `-1`**: crescere **fuori** da un tick e' **un errore diverso** da crescere **due volte dentro** |
 | ### ⚠ **che cosa NON c'e' ancora** | il flusso di saturazione **per intero**: la sua parte su `phi` **da' una fase a `phi`**, e **il tipo di `phi` e' una domanda aperta per Luca** |
+
+---
+
+## IL SOTTO-PEZZO `5c` DEL MOTORE -- CHECKPOINT E RIPRESA *(2026-10-12)*
+
+| file | BLOB *(`sha1` dei BYTE grezzi)* | che cosa misura | il collaudo |
+|---|---|---|---|
+| `primo_ordine/checkpoint.py` | `df523226` | salva **stato + grafo + geometria + contatori**, riusando `timbro.py` | `python primo_ordine/checkpoint.py` *(il costo del giro)* |
+| `primo_ordine/_collauda_checkpoint.py` | `31c94d9b` | ### **la ripresa coincide AL BIT** su una corsa spezzata a meta' | ### **`18`/`18`**, di cui **`5`** casi che DEVONO fallire |
+
+| | |
+|---|---|
+| **IL COMANDO, verbatim** | `python primo_ordine/_collauda_checkpoint.py` |
+| ### ⭐ **il braccio che conta** | si gira, **si salva a META'**, si finisce; poi **si riprende** e si finisce di nuovo. ### **I due stati finali coincidono AL BIT** -- scarto **esattamente zero** |
+| ### ⛔ **perche' si salva anche il GRAFO** | `timbro.py` salvava **solo lo stato**, e lo stato e' **dimensionato da `2m`**: riprenderlo su un altro grafo sarebbe ### **un'altra corsa che sembra la stessa misura** |
+| ### ⚠ **l'unico contatore che NON si rimette** | i **ripieghi dei buffer**: quelli **ricominciano davvero**, perche' i buffer del processo nuovo **non esistono ancora** -- e dire il contrario **nasconderebbe le allocazioni della ripresa** |
+| ### ✅ **e il collaudo usa una geometria NON banale** | versori **casuali** e trasporto **unitario non banale**: ### **con versori tutti uguali, un salvataggio che li scambiasse passerebbe comunque** |
+| **il costo, MISURATO** | salva `174` ms, riprendi `162` ms a `m=4096`, file di `1.09` MB |

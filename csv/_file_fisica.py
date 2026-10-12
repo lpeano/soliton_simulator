@@ -112,6 +112,13 @@ FILE_FISICA = (
     # ### perche- la ricostruzione dei derivati costa `O(m log m)` ### **a chiamata.**
     'primo_ordine/motore.py',
     'primo_ordine/_collauda_motore.py',
+    # ### IL CHECKPOINT *(sotto-pezzo `5c`)*: salva e riprende ### **stato, grafo,
+    # ### geometria e contatori**, riusando `timbro.py`. ### ⛔ **E il grafo si
+    # ### salva perche- senza di lui la ripresa MENTE:** lo stato e- dimensionato da
+    # ### `2m`, e un grafo diverso sarebbe ### **un-altra corsa che sembra la stessa
+    # ### misura.**
+    'primo_ordine/checkpoint.py',
+    'primo_ordine/_collauda_checkpoint.py',
     # ### IL COSTRUTTO `@rif` *(punto `14`)*: ### **byte-inerte**, e il suo
     # ### collaudo lo verifica ### **con `is`.**
     'primo_ordine/_rif.py',

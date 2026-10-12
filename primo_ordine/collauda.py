@@ -95,6 +95,12 @@ COLLAUDI = (
     # ### ### **non toglie** la ricostruzione *(`argsort`, `O(m log m)` a chiamata)*.
     ("il motore: contenitore e pezzi unitari",
      "primo_ordine/_collauda_motore.py", "pre-commit"),
+    # ### ⭐ **IL SOTTO-PEZZO `5c`: la ripresa.** ### Il braccio che conta: si salva
+    # ### a META- corsa, si finisce, si RIPRENDE dal checkpoint e si finisce di nuovo --
+    # ### e i due stati finali devono coincidere ### **AL BIT**, non entro una
+    # ### tolleranza. ### **Una ripresa che perde un bit non e- una ripresa.**
+    ("il checkpoint e la ripresa",
+     "primo_ordine/_collauda_checkpoint.py", "pre-commit"),
     # ### ⭐ **LO SCHEMA DELLA CAMMINATA, nei DUE VERSI** *(pezzo `2` del
     # ### simulatore)*: i tipi sulle estremita-, i pezzi unitari, i flussi, e
     # ### l-### **ordine di composizione con le ripetizioni AMMESSE.**

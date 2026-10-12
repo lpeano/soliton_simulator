@@ -94,6 +94,14 @@ moduli:
     responsabilita: il collaudo del motore -- zero allocazioni, unitarieta-, regola del tick
     importa: [_presidio, incidenza, motore, stato]
 
+  - nome: checkpoint.py
+    responsabilita: salva e riprende stato, grafo, geometria e contatori, e il timbro
+    importa: [_presidio, incidenza, motore, stato, timbro]
+
+  - nome: _collauda_checkpoint.py
+    responsabilita: il collaudo della ripresa -- coincide AL BIT, e i cinque casi che falliscono
+    importa: [_presidio, checkpoint, incidenza, motore, stato, timbro]
+
   - nome: crescita.py
     responsabilita: la crescita del grafo, regola NON-H col suo bilancio
     importa: []

@@ -14133,3 +14133,23 @@ Ogni dato di `db_era2/` ha ### **il suo TIMBRO accanto**, col campo `versione_da
 ### 📌 **I NUMERI.** `python primo_ordine/_collauda_motore.py`: **`30` su `30`**, di cui **`12`** casi che **DEVONO fallire**. Unitarieta': **`1.3e-16`** per il Grover, **`2.5e-16`** per la moneta, **`0` esatto** per lo spostamento. Il Grover e' **un'involuzione entro `0.6` ulp**. Le due sommatorie: **scarto `0.000e+00`**. ### E la suite intera: ### **`44` su `44`**, `pre-commit` **`131.7` s su `500`** *(`26%`)*.
 
 ### ⚠ **CHE COSA NON C'E' ANCORA, e il perche' non e' mio:** il flusso di saturazione **per intero**. La sua parte su `phi` **da' una fase a `phi`**, e ### **il tipo di `phi` e' la domanda aperta `[[DOMANDA-PHI-REALE-O-COMPLESSO]]`**. ### ✅ **I cinque pezzi unitari invece non dipendono da quella risposta:** lavorano **su qualunque tipo lo stato dichiari.**
+
+---
+
+## IL SOTTO-PEZZO `5c`: LA RIPRESA COINCIDE AL BIT, E `timbro.py` SALVAVA SOLO META' DI CIO' CHE SERVE *(2026-10-12)*
+
+### ✅ **PRIMA COSA: `timbro.py` SI RIUSA, non si riscrive.** `scrivi_atomico`, `salva` e `riprendi` c'erano gia', col rifiuto sulla tabella e sui generati. ### ⛔ **Ma salvavano LO STATO e non IL GRAFO** -- e senza il grafo **una ripresa non vuol dire niente**, perche' lo stato della camminata e' **dimensionato da `2m`**: riprendere lo stesso stato su **un altro grafo** sarebbe ### **un'altra corsa che sembra la stessa misura**, che e' esattamente cio' che la ripresa **rifiuta** per la tabella.
+
+### ⭐ **QUINDI SI SALVANO QUATTRO COSE, e tutte per lo stesso motivo:** lo **stato**; il **grafo** *(perche' dimensiona lo stato)*; la **geometria** e `dtau` *(perche' la camminata ci legge dentro a ogni tick, e una geometria diversa e' **un'altra fisica**)*; i **contatori** *(perche' ### **un contatore che riparte da zero dice una cosa falsa** sulla corsa che continua)*. ### E anche **la sommatoria**: cambiarla **cambierebbe i numeri senza che nessuno l'abbia deciso**.
+
+### ⛔ **E LA GEOMETRIA SI SALVA INVECE DI CHIEDERLA DI NUOVO**, di proposito: chiederla vorrebbe dire **fidarsi che chi riprende passi la stessa** -- e ### **una ripresa che si fida non e' una ripresa, e' una speranza.**
+
+### ⚠ **L'UNICO CONTATORE CHE NON SI RIMETTE, e lo dichiaro:** i **ripieghi dei buffer**. Quelli **ricominciano davvero**, perche' i buffer del processo nuovo **non esistono ancora** -- e rimetterli ### **nasconderebbe le allocazioni della ripresa.** Ha il suo braccio.
+
+### 📌 **I NUMERI.** `python primo_ordine/_collauda_checkpoint.py`: **`18` su `18`**, di cui **`5`** casi che **DEVONO fallire**. ### ⭐ **Il braccio che conta:** si gira una corsa, **si salva a meta'**, si finisce; poi **si riprende** e si finisce di nuovo -- e ### **i due stati finali coincidono AL BIT**, scarto **esattamente zero** su tutte le variabili. ### **Non <<entro una tolleranza>>: AL BIT**, perche' una ripresa che perde un bit **non e' una ripresa.**
+
+### ✅ **E IL COLLAUDO USA UNA GEOMETRIA NON BANALE**, versori **casuali** e trasporto **unitario non banale**: ### **con versori tutti uguali, un salvataggio che li scambiasse passerebbe comunque** -- cioe' il braccio **non avrebbe potuto fallire.**
+
+### ⛔ **IL PREFISSO RISERVATO E IL SUO PRESIDIO:** grafo, geometria e contatori vivono nello stesso `npz` sotto un prefisso riservato, e un nome di stato che cominciasse con quel prefisso **sovrascriverebbe un pezzo del motore in silenzio**. ### **Quindi si controlla, e un nome che collide ALZA.** ### ⚠ **E i contatori da salvare sono DICHIARATI uno a uno**, non scoperti guardando gli attributi: ### **un attributo nuovo che nessuno ha deciso di salvare sparirebbe alla ripresa senza che nessuno lo veda.**
+
+### 📌 **Il costo, misurato:** salva `174` ms, riprendi `162` ms a `m=4096`, con un file di `1.09` MB. La suite intera: ### **`45` su `45`**, `pre-commit` **`128.6` s su `500`** *(`26%`)*.
