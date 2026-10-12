@@ -98,6 +98,15 @@ PEZZI = (
     ("il pezzo 5 del simulatore: IL MOTORE (doppio contenitore, CSR, punto unico di "
      "scrittura, checkpoint) -- il suo collaudo di accettazione e- la MEMORIA",
      "primo_ordine/_collauda_memoria.py", ()),
+    # ### ⛔ **E QUESTO IL PRESIDIO ME L-HA DETTO DAL VIVO, non in collaudo:** ha
+    # ### bloccato il mio stop nominando ### **il pezzo `6`** -- ma la coda dice che
+    # ### ### **il CONFRONTO viene PRIMA**, e la sua lista ### **non lo conteneva.**
+    # ### ⭐ **Un elenco dichiarato si legge, ma va anche TENUTO:** un presidio che
+    # ### nomina il pezzo sbagliato ### **manda a lavorare fuori ordine**, che e- la
+    # ### cosa che il paragrafo `13` chiama <<lavorare fuori ordine>>.
+    ("il CONFRONTO COMPLETO fra la tabella delle leggi e il banco congelato -- PRIMA "
+     "del flusso di saturazione e PRIMA del criterio di passaggio, per mandato",
+     "doc/CONFRONTO_tabella_banco.md", ()),
     # ### \u26d4 **IL PEZZO `6` ASPETTA DUE RISPOSTE, e sono di fisica:** il criterio di
     # ### passaggio pretende che il generato ### **riproduca il banco congelato**, e per
     # ### farlo serve sapere ### **di che tipo e- il vuoto** *(la tabella lo dice reale, il
