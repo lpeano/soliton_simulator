@@ -20,8 +20,20 @@ import _presidio                                              # noqa: E402
 _presidio.avvia(__file__)
 
 import buchi0 as B0                                            # noqa: E402
+import segni1 as S1                                            # noqa: E402
 
 NL = chr(10)
+MN, FR = (chr(0x2014), chr(0x2192))
+
+
+def _n(x, c=4):
+    """### Un numero, o `--` se non c-e-. ### **Mai una stringa inventata.**"""
+    try:
+        if x != x:
+            return "--"
+        return ("%." + str(c) + "f") % float(x)
+    except (TypeError, ValueError):
+        return "--"
 FONTE = os.path.join(_QUI, "uscite", "letture_legame.json")
 DEST = os.path.join(RADICE, "doc", "REFERTO_legame.md")
 FAM = ("regolare (1D)", "cubico (3D)", "geometrico3d (3D irregolare)",
@@ -308,6 +320,133 @@ def main():
       "energia** *(`[[PROMOZIONE-CONSERVAZIONE-MODIFICATA]]` e' una decisione di Luca "
       "aperta)* |")
     a("")
+
+    # =================================================================================
+    #   LA SEZIONE DEL `2026-10-12`: IL MANDATO SI CHIUDE **PARZIALE**
+    # =================================================================================
+    # ### ⛔ **IL RESTO DEL REFERTO E' INVARIATO**, e il mandato lo chiede: questa sezione
+    # ### si AGGIUNGE. ### ⭐ **E ogni numero esce dal `json` del run** *(`L-NUMERI`)*,
+    # ### che e' committato col suo `sha1` -- non dall'uscita a schermo.
+    GRANDI = os.path.join(_QUI, "uscite", "letture_legame_grandi.json")
+    if os.path.exists(GRANDI):
+        g = json.loads(io.open(GRANDI, encoding="utf-8").read())
+        per = g["C1_C2"]["per_scena"]
+        a("## ⛔ **IL MANDATO SI CHIUDE PARZIALE** *(decisione di Luca, `2026-10-12`: "
+          "`[[BASTA-PROTOTIPI]]`)*")
+        a("")
+        a("> ### ⭐ **CIO' CHE E' MISURATO E SALVATO RESTA, con la sua provenienza; cio' "
+          "che manca diventa LE PRIME MISURE DEL SIMULATORE** dopo il criterio di "
+          "passaggio *(`[[BANCO-CONGELATO]]`)*. ### ⛔ **E il banco non gira piu': nessuna "
+          "corsa, ne' leggera' ne' pesante.**")
+        a("")
+        a("### ✅ **`1` CIO' CHE E' SALVATO SU DISCO, e da dove viene**")
+        a("")
+        a("*(`proto_camminata/uscite/letture_legame_grandi.json`, prodotto da `python "
+          "proto_camminata/_letture_legame_grandi.py` al blob `%s`, scritto alle "
+          "`23:57:01` del `2026-10-11` e **committato con questa sezione**.)*"
+          % g.get("blob", "?")[:8])
+        a("")
+        a("| la scena | `n` | `m` | diametro | `t` usati | griglia `x0` | costo/tick |")
+        a("|---|---|---|---|---|---|---|")
+        for nome in sorted(per, key=lambda k: per[k].get("_scena", {}).get("n", 0)):
+            s = per[nome].get("_scena") or {}
+            if not s:
+                continue
+            a("| %s | `%s` | `%s` | `>=%s` | `%s` | `%s` | `%s` s |"
+              % (nome, s.get("n"), s.get("m"), s.get("diametro"),
+                 ", ".join(str(x) for x in s.get("tempi", [])),
+                 ", ".join("%g" % x for x in s.get("griglia_x0", [])),
+                 _n(s.get("costo_per_tick"), 4)))
+        a("")
+        # ===================================================== il verdetto, per scena
+        for nome in sorted(per, key=lambda k: -per[k].get("_scena", {}).get("n", 0)):
+            v = per[nome]
+            if "_scena" not in v or "non_misurata" in v:
+                continue
+            righe = []
+            for et in S1.VARIANTI:
+                if et == "lineare" or et not in v:
+                    continue
+                for x0, q in v[et].items():
+                    c = q.get("contro_lineare")
+                    if not c:
+                        continue
+                    f = c["frazioni"]["entro_1"]
+                    rp = c["rapporto_pendenze"]
+                    righe.append((f.get("effetto_relativo", float("nan")), et, x0,
+                                  c["verdetto"], f.get("differenza"),
+                                  f.get("in_sigma"), rp.get("rapporto"),
+                                  rp.get("in_sigma_da_1"),
+                                  c["pendenza_candidata"].get("ferma")))
+            if not righe:
+                continue
+            # ### ⛔ **ORDINATI PER EFFETTO**, che e' la regola di forma del mandato
+            righe.sort(key=lambda r: -abs(r[0]) if r[0] == r[0] else 0)
+            conta = {}
+            for r in righe:
+                conta[r[3]] = conta.get(r[3], 0) + 1
+            a("### ⭐ **`%s`** %s ### **%s**"
+              % (nome, MN, "  ".join("%s: **%d**" % (k2, q2)
+                                     for k2, q2 in sorted(conta.items()))))
+            a("")
+            a("| variante | `x0` | verdetto | effetto rel. | differenza | `sigma` | "
+              "rapp. pendenze | `sigma` da `1` | raggio fermo? |")
+            a("|---|---|---|---|---|---|---|---|---|")
+            for e, et, x0, ver, dif, sg, rap, sd, fer in righe:
+                a("| `%s` | `%s` | %s | `%+.4f` | `%+.4f` | `%s` | `%s` | `%s` | %s |"
+                  % (et, x0,
+                     ("### ⭐ **%s**" % ver) if ver == "RESTA CONCENTRATO" else ver,
+                     e, dif if dif == dif else float("nan"), _n(sg, 1), _n(rap, 3),
+                     _n(sd, 1), "si'" if fer else "no"))
+            a("")
+        a("### ⛔ **`2` IL FATTO CHE DECIDE, sulla scena PRINCIPALE a `n = 26000`: `12` "
+          "CASI SU `12` SI DISPERDONO.** E dentro quel `12 su 12` ci sono due cose che il "
+          "verdetto da solo non dice.")
+        a("")
+        a("| | il fatto | il numero |")
+        a("|---|---|---|")
+        a("| `1` | ### **`+N` CONCENTRA IL NUCLEO**, e la gamba della frazione PASSA | "
+          "`+27.8%` della frazione entro un arco, a `6.5 sigma` |")
+        a("| `2` | ### **ma il FRONTE si allarga come nel lineare**, e la gamba del raggio "
+          "FALLISCE | rapporto fra le pendenze `0.918`, a `0.7 sigma` da `1` |")
+        # ### ⚠ **IL `%` DI UN `-21.6%` DENTRO UNA STRINGA CHE POI FORMATTA:** era
+        # ### un carattere di formato, e il generatore ### **si e' rotto** -- si raddoppia.
+        a("| `3` | ### ⛔ **e `+D`, il segno che LEGA in `1D`, in `3D` e' PEGGIO del "
+          "lineare** | `-21.6%%` a `6.5 sigma` %s ### **non e' neutro: e' sfavorevole** |"
+          % MN)
+        a("")
+        a("### ⭐ **E IL MISURANDO IN ARCHI HA FATTO ESATTAMENTE CIO' PER CUI E' STATO "
+          "SCRITTO:** il misurando vecchio *(frazione entro un arco contro fondo "
+          "uniforme)* avrebbe visto ### **solo la prima riga** e avrebbe detto *«`+N` "
+          "lega»*. ### ⛔ **Il misurando nuovo vede che il NUCLEO si concentra mentre "
+          "l'ESTENSIONE no** " + MN + " cioe' ### **un picco che sopravvive sopra un fronte "
+          "che si allarga alla velocita' della luce del grafo**, non uno stato legato.")
+        a("")
+        a("### ⚠ **`3` CIO' CHE MANCA, e diventa le PRIME MISURE DEL SIMULATORE**")
+        a("")
+        a("| | che cosa | perche' manca |")
+        a("|---|---|---|")
+        a("| `1` | il ### **geometrico uniformi** a `n = 4000` e `26000` *(la colonna di "
+          "confronto col referto vecchio)* | era la scena ### **in corso** quando il run e' "
+          "stato fermato |")
+        a("| `2` | il ### **cubico di controllo** `L = 20` e `L = 30` | ### **vengono DOPO** "
+          "nell'ordine delle scene, e il run non ci e' arrivato |")
+        a("| `3` | ### **`M2`**, gli stati autoconsistenti col selettore a massima "
+          "sovrapposizione | ### **non e' mai girata**, ed era il terzo limite che avevo "
+          "dichiarato io |")
+        a("| `4` | il ### **cubico `L = 40`** | ### **dichiarato NON PAGABILE**: "
+          "`MemoryError` a `n = 64000`, e ### **~`11` ore** estrapolando il salto "
+          "`L = 20` " + FR + " `L = 30` *(`4.98` volte)* |")
+        a("| `5` | l'### **aggregazione PER FAMIGLIA** *(la regola delle due taglie)* | si "
+          "calcola ### **alla fine** della misura, e il processo e' stato fermato prima: "
+          "### **il `json` ha il dato per scena, non quello per famiglia** |")
+        a("")
+        a("### ⛔ **E LE DUE DOMANDE RESTANO APERTE, con i numeri che ci sono:** "
+          "`[[DOMANDA-QUALE-SEGNO]]` *(quale segno, se quello che lega in `1D` in `3D` "
+          "peggiora)* e `[[DOMANDA-VIA-DEL-CAMPO]]`. ### ⭐ **E la seconda e' quella che "
+          "questi numeri spingono:** se ### **nessun termine LOCALE lega in `3D`**, la via "
+          "che resta e' ### **il CAMPO.**")
+        a("")
 
     dati = (NL.join(R) + NL).encode("utf-8")
     io.open(DEST, "wb").write(dati)

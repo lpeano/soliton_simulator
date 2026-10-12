@@ -13890,3 +13890,21 @@ Ogni dato di `db_era2/` ha ### **il suo TIMBRO accanto**, col campo `versione_da
 
 ### 📌 **LE QUATTRO SOGLIE DEL VINCOLO SONO FISSATE PRIMA DELLE MISURE:** la memoria della scena ### **entro `4` volte lo stato**, il rapporto fra due taglie ### **stabile entro il `20` per cento**, la memoria per tick ### **piatta a `3 sigma`**, e tutte e tre ### **TIMBRATE con la corsa.** ### ⭐ **E il numero da battere e' misurato: il banco sta a `104` volte lo stato, quindi la prima soglia chiede `26` volte meglio.**
 
+## ⛔ **IL LEGAME SI CHIUDE PARZIALE: `12` SU `12` SI DISPERDONO A `n = 26000`, E IL SEGNO CHE LEGA IN `1D` IN `3D` E' PEGGIO DEL LINEARE** *(2026-10-12)*
+
+### ✅ **PRIMA DI TUTTO UN DEBITO CHIUSO:** il risultato del run era ### **su disco e NON nel repo** *(non tracciato)*, e ora e' committato col suo `sha1`. ### **Un numero che vive solo sul mio disco non ha provenienza per chi legge.**
+
+### ⭐ **IL VERDETTO DELLA SCENA PRINCIPALE** *(`geometrico3d` respinti, `n = 26000`, `m = 69700`, diametro `>= 33`, `t` fino a `26`)*: ### **`12` casi su `12` SI DISPERDONO.** ### **E dentro quel numero ci sono due cose che il verdetto da solo non dice.**
+
+| | il fatto | il numero |
+|---|---|---|
+| `1` | ### **`+N` CONCENTRA IL NUCLEO**, e la gamba della frazione ### **PASSA** | ### **`+27.8%`** della frazione entro un arco, a ### **`6.5 sigma`** |
+| `2` | ### ⚠ **ma il FRONTE si allarga come nel lineare**, e la gamba del raggio ### **FALLISCE** | rapporto fra le pendenze `0.918`, a ### **`0.7 sigma` da `1`** |
+| `3` | ### ⛔ **e `+D`, il segno che LEGA in `1D`, in `3D` e' PEGGIO del lineare** | ### **`-21.6%`** a `6.5 sigma` — ### **non e' neutro: e' SFAVOREVOLE** |
+
+### ⭐ **E IL MISURANDO IN ARCHI HA FATTO ESATTAMENTE CIO' PER CUI L'HO SCRITTO:** il misurando vecchio avrebbe visto ### **solo la prima riga** e avrebbe detto *<<`+N` lega>>*. ### **Quello nuovo vede che il NUCLEO si concentra mentre l'ESTENSIONE no** — cioe' ### **un picco che sopravvive sopra un fronte che si allarga alla velocita' della luce del grafo.**
+
+### ⚠ **E CIO' CHE MANCA E' SCRITTO IN CINQUE VOCI**, fra cui una che e' un mio limite dichiarato da giorni *(`M2` non e' mai girata)* e una che e' una conseguenza dello stop *(l'aggregazione ### **per famiglia** si calcola alla fine, e il processo e' stato fermato prima)*. ### ⛔ **Quindi <<`12` su `12`>> e' un verdetto su UNA SCENA, non su una FAMIGLIA**, e la sezione lo dice.
+
+### ✅ **E `H-P1-bis` MI HA PRESO:** ho provato a committare il referto ### **senza toccare la relazione**, e il presidio ha ### **rifiutato.** ### **Questo paragrafo esiste perche' un presidio ha funzionato.**
+

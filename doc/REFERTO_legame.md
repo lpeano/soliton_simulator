@@ -122,3 +122,122 @@
 | `5` | ### **L'anisotropia delle scene `3D` non e' risolta**: nessuna delle due provate e' isotropa sul misurando di grafo, e il mandato `[[ISOTROPIA-LOCALE]]` e' in coda proprio per questo |
 | `6` | ### **La grandezza conservata di `-N` e' `-N`**, e ### **NON la chiamo energia** *(`[[PROMOZIONE-CONSERVAZIONE-MODIFICATA]]` e' una decisione di Luca aperta)* |
 
+## ⛔ **IL MANDATO SI CHIUDE PARZIALE** *(decisione di Luca, `2026-10-12`: `[[BASTA-PROTOTIPI]]`)*
+
+> ### ⭐ **CIO' CHE E' MISURATO E SALVATO RESTA, con la sua provenienza; cio' che manca diventa LE PRIME MISURE DEL SIMULATORE** dopo il criterio di passaggio *(`[[BANCO-CONGELATO]]`)*. ### ⛔ **E il banco non gira piu': nessuna corsa, ne' leggera' ne' pesante.**
+
+### ✅ **`1` CIO' CHE E' SALVATO SU DISCO, e da dove viene**
+
+*(`proto_camminata/uscite/letture_legame_grandi.json`, prodotto da `python proto_camminata/_letture_legame_grandi.py` al blob `70720dfc`, scritto alle `23:57:01` del `2026-10-11` e **committato con questa sezione**.)*
+
+| la scena | `n` | `m` | diametro | `t` usati | griglia `x0` | costo/tick |
+|---|---|---|---|---|---|---|
+| regolare n=2000 (limite noto 1D) | `2000` | `4000` | `>=500` | `4, 11, 18, 26, 33, 40` | `0.125, 0.25, 0.5, 1, 2, 4, 8` | `0.0019` s |
+| geometrico3d n=4000 respinti (PRINCIPALE) | `4000` | `9307` | `>=20` | `4, 6, 9, 11, 14, 16` | `0.125, 0.25, 0.5, 1, 2, 4, 8` | `0.0045` s |
+| geometrico3d n=26000 respinti (PRINCIPALE) | `26000` | `69700` | `>=33` | `4, 8, 13, 17, 22, 26` | `1, 4, 8` | `0.0576` s |
+
+### ⭐ **`geometrico3d n=26000 respinti (PRINCIPALE)`** — ### **SI DISPERDE: **12****
+
+| variante | `x0` | verdetto | effetto rel. | differenza | `sigma` | rapp. pendenze | `sigma` da `1` | raggio fermo? |
+|---|---|---|---|---|---|---|---|---|
+| `+N` | `8` | SI DISPERDE | `+0.2780` | `+0.0173` | `6.5` | `0.918` | `0.7` | no |
+| `-N` | `8` | SI DISPERDE | `-0.2406` | `-0.0149` | `8.3` | `1.129` | `0.8` | no |
+| `+D` | `8` | SI DISPERDE | `-0.2156` | `-0.0134` | `6.5` | `0.918` | `0.7` | no |
+| `+N` | `4` | SI DISPERDE | `+0.1270` | `+0.0079` | `1.9` | `0.906` | `0.8` | no |
+| `-D` | `4` | SI DISPERDE | `-0.0987` | `-0.0061` | `1.2` | `0.932` | `0.6` | no |
+| `-N` | `4` | SI DISPERDE | `-0.0646` | `-0.0040` | `1.8` | `1.097` | `0.6` | no |
+| `-D` | `1` | SI DISPERDE | `-0.0525` | `-0.0033` | `2.5` | `1.129` | `0.8` | no |
+| `+D` | `4` | SI DISPERDE | `-0.0314` | `-0.0020` | `1.5` | `0.918` | `0.7` | no |
+| `-D` | `8` | SI DISPERDE | `+0.0256` | `+0.0016` | `0.2` | `0.918` | `0.7` | no |
+| `+N` | `1` | SI DISPERDE | `-0.0256` | `-0.0016` | `2.5` | `1.000` | `0.0` | no |
+| `-N` | `1` | SI DISPERDE | `+0.0145` | `+0.0009` | `3.9` | `1.000` | `0.0` | no |
+| `+D` | `1` | SI DISPERDE | `+0.0107` | `+0.0007` | `0.4` | `0.953` | `0.3` | no |
+
+### ⭐ **`geometrico3d n=4000 respinti (PRINCIPALE)`** — ### **SI DISPERDE: **28****
+
+| variante | `x0` | verdetto | effetto rel. | differenza | `sigma` | rapp. pendenze | `sigma` da `1` | raggio fermo? |
+|---|---|---|---|---|---|---|---|---|
+| `+D` | `4` | SI DISPERDE | `-0.2402` | `-0.0206` | `3.4` | `0.959` | `0.3` | no |
+| `+D` | `8` | SI DISPERDE | `-0.1370` | `-0.0118` | `2.1` | `0.946` | `0.5` | no |
+| `+D` | `1` | SI DISPERDE | `+0.1151` | `+0.0099` | `1.5` | `1.000` | `0.0` | no |
+| `+N` | `8` | SI DISPERDE | `-0.1084` | `-0.0093` | `2.8` | `0.946` | `0.5` | no |
+| `+D` | `0.5` | SI DISPERDE | `+0.0876` | `+0.0075` | `1.9` | `1.000` | `0.0` | no |
+| `-N` | `4` | SI DISPERDE | `+0.0872` | `+0.0075` | `2.4` | `1.000` | `0.0` | no |
+| `-D` | `2` | SI DISPERDE | `-0.0826` | `-0.0071` | `3.4` | `1.000` | `0.0` | no |
+| `-D` | `1` | SI DISPERDE | `-0.0784` | `-0.0067` | `15.8` | `1.000` | `0.0` | no |
+| `-D` | `8` | SI DISPERDE | `-0.0705` | `-0.0061` | `2.1` | `0.919` | `0.7` | no |
+| `-D` | `0.5` | SI DISPERDE | `-0.0568` | `-0.0049` | `7.0` | `1.000` | `0.0` | no |
+| `-N` | `2` | SI DISPERDE | `+0.0493` | `+0.0042` | `6.1` | `1.000` | `0.0` | no |
+| `+N` | `4` | SI DISPERDE | `-0.0437` | `-0.0038` | `0.9` | `0.973` | `0.2` | no |
+| `-N` | `8` | SI DISPERDE | `-0.0371` | `-0.0032` | `1.1` | `1.000` | `0.0` | no |
+| `+D` | `0.25` | SI DISPERDE | `+0.0346` | `+0.0030` | `2.2` | `1.000` | `0.0` | no |
+| `-D` | `4` | SI DISPERDE | `+0.0288` | `+0.0025` | `0.6` | `0.973` | `0.2` | no |
+| `+D` | `2` | SI DISPERDE | `-0.0265` | `-0.0023` | `0.7` | `1.000` | `0.0` | no |
+| `-D` | `0.25` | SI DISPERDE | `-0.0261` | `-0.0022` | `3.9` | `1.000` | `0.0` | no |
+| `+N` | `2` | SI DISPERDE | `-0.0163` | `-0.0014` | `0.4` | `1.000` | `0.0` | no |
+| `-N` | `1` | SI DISPERDE | `+0.0128` | `+0.0011` | `1.6` | `1.000` | `0.0` | no |
+| `+D` | `0.125` | SI DISPERDE | `+0.0098` | `+0.0008` | `2.7` | `1.000` | `0.0` | no |
+| `-D` | `0.125` | SI DISPERDE | `-0.0088` | `-0.0008` | `3.2` | `1.000` | `0.0` | no |
+| `+N` | `0.5` | SI DISPERDE | `+0.0061` | `+0.0005` | `0.5` | `1.000` | `0.0` | no |
+| `+N` | `1` | SI DISPERDE | `+0.0059` | `+0.0005` | `0.2` | `1.000` | `0.0` | no |
+| `+N` | `0.25` | SI DISPERDE | `+0.0020` | `+0.0002` | `0.5` | `1.000` | `0.0` | no |
+| `-N` | `0.5` | SI DISPERDE | `-0.0015` | `-0.0001` | `0.2` | `1.000` | `0.0` | no |
+| `-N` | `0.25` | SI DISPERDE | `-0.0015` | `-0.0001` | `0.5` | `1.000` | `0.0` | no |
+| `+N` | `0.125` | SI DISPERDE | `+0.0005` | `+0.0000` | `0.6` | `1.000` | `0.0` | no |
+| `-N` | `0.125` | SI DISPERDE | `-0.0005` | `-0.0000` | `0.5` | `1.000` | `0.0` | no |
+
+### ⭐ **`regolare n=2000 (limite noto 1D)`** — ### **RESTA CONCENTRATO: **1**  SI DISPERDE: **27****
+
+| variante | `x0` | verdetto | effetto rel. | differenza | `sigma` | rapp. pendenze | `sigma` da `1` | raggio fermo? |
+|---|---|---|---|---|---|---|---|---|
+| `-D` | `4` | SI DISPERDE | `-0.2988` | `-0.0462` | `8.4` | `0.938` | `2.9` | no |
+| `-N` | `8` | SI DISPERDE | `-0.2667` | `-0.0413` | `4.8` | `0.973` | `0.9` | no |
+| `-D` | `8` | SI DISPERDE | `-0.2510` | `-0.0388` | `2.5` | `0.853` | `6.5` | no |
+| `+D` | `1` | SI DISPERDE | `+0.2461` | `+0.0381` | `9.1` | `1.012` | `0.4` | no |
+| `+N` | `8` | SI DISPERDE | `-0.2315` | `-0.0358` | `10.5` | `0.872` | `3.1` | no |
+| `+D` | `0.5` | SI DISPERDE | `+0.2251` | `+0.0348` | `6.5` | `1.012` | `0.4` | no |
+| `+D` | `4` | SI DISPERDE | `-0.2185` | `-0.0338` | `3.7` | `0.939` | `2.3` | no |
+| `-N` | `4` | SI DISPERDE | `-0.2088` | `-0.0323` | `2.9` | `1.007` | `0.3` | no |
+| `-D` | `2` | SI DISPERDE | `-0.1831` | `-0.0283` | `2.3` | `0.994` | `0.2` | no |
+| `-N` | `2` | SI DISPERDE | `-0.1830` | `-0.0283` | `7.5` | `1.016` | `0.5` | no |
+| `-D` | `1` | SI DISPERDE | `-0.1545` | `-0.0239` | `1.6` | `1.008` | `0.3` | no |
+| `+N` | `4` | SI DISPERDE | `-0.1007` | `-0.0156` | `1.2` | `0.956` | `1.2` | no |
+| `-N` | `1` | SI DISPERDE | `-0.0726` | `-0.0112` | `7.5` | `1.032` | `1.0` | no |
+| `+N` | `1` | SI DISPERDE | `+0.0702` | `+0.0109` | `2.2` | `1.005` | `0.2` | no |
+| `+D` | `0.25` | SI DISPERDE | `+0.0620` | `+0.0096` | `8.0` | `1.000` | `0.0` | no |
+| `+D` | `8` | ### ⭐ **RESTA CONCENTRATO** | `+0.0542` | `+0.0084` | `0.5` | `0.772` | `5.9` | no |
+| `-D` | `0.5` | SI DISPERDE | `-0.0470` | `-0.0073` | `1.2` | `1.034` | `1.1` | no |
+| `+N` | `0.5` | SI DISPERDE | `+0.0215` | `+0.0033` | `2.1` | `1.000` | `0.0` | no |
+| `-N` | `0.5` | SI DISPERDE | `-0.0194` | `-0.0030` | `2.8` | `1.032` | `1.0` | no |
+| `+N` | `2` | SI DISPERDE | `+0.0178` | `+0.0028` | `0.4` | `1.007` | `0.2` | no |
+| `-D` | `0.25` | SI DISPERDE | `-0.0134` | `-0.0021` | `1.2` | `1.032` | `1.0` | no |
+| `+D` | `0.125` | SI DISPERDE | `+0.0113` | `+0.0018` | `6.5` | `1.000` | `0.0` | no |
+| `-D` | `0.125` | SI DISPERDE | `-0.0062` | `-0.0010` | `2.3` | `1.032` | `1.0` | no |
+| `+N` | `0.25` | SI DISPERDE | `+0.0049` | `+0.0008` | `1.8` | `1.000` | `0.0` | no |
+| `-N` | `0.25` | SI DISPERDE | `-0.0046` | `-0.0007` | `1.9` | `1.032` | `1.0` | no |
+| `+D` | `2` | SI DISPERDE | `+0.0029` | `+0.0004` | `0.0` | `0.972` | `0.7` | no |
+| `+N` | `0.125` | SI DISPERDE | `+0.0011` | `+0.0002` | `1.6` | `1.000` | `0.0` | no |
+| `-N` | `0.125` | SI DISPERDE | `-0.0011` | `-0.0002` | `1.6` | `1.008` | `0.3` | no |
+
+### ⛔ **`2` IL FATTO CHE DECIDE, sulla scena PRINCIPALE a `n = 26000`: `12` CASI SU `12` SI DISPERDONO.** E dentro quel `12 su 12` ci sono due cose che il verdetto da solo non dice.
+
+| | il fatto | il numero |
+|---|---|---|
+| `1` | ### **`+N` CONCENTRA IL NUCLEO**, e la gamba della frazione PASSA | `+27.8%` della frazione entro un arco, a `6.5 sigma` |
+| `2` | ### **ma il FRONTE si allarga come nel lineare**, e la gamba del raggio FALLISCE | rapporto fra le pendenze `0.918`, a `0.7 sigma` da `1` |
+| `3` | ### ⛔ **e `+D`, il segno che LEGA in `1D`, in `3D` e' PEGGIO del lineare** | `-21.6%` a `6.5 sigma` — ### **non e' neutro: e' sfavorevole** |
+
+### ⭐ **E IL MISURANDO IN ARCHI HA FATTO ESATTAMENTE CIO' PER CUI E' STATO SCRITTO:** il misurando vecchio *(frazione entro un arco contro fondo uniforme)* avrebbe visto ### **solo la prima riga** e avrebbe detto *«`+N` lega»*. ### ⛔ **Il misurando nuovo vede che il NUCLEO si concentra mentre l'ESTENSIONE no** — cioe' ### **un picco che sopravvive sopra un fronte che si allarga alla velocita' della luce del grafo**, non uno stato legato.
+
+### ⚠ **`3` CIO' CHE MANCA, e diventa le PRIME MISURE DEL SIMULATORE**
+
+| | che cosa | perche' manca |
+|---|---|---|
+| `1` | il ### **geometrico uniformi** a `n = 4000` e `26000` *(la colonna di confronto col referto vecchio)* | era la scena ### **in corso** quando il run e' stato fermato |
+| `2` | il ### **cubico di controllo** `L = 20` e `L = 30` | ### **vengono DOPO** nell'ordine delle scene, e il run non ci e' arrivato |
+| `3` | ### **`M2`**, gli stati autoconsistenti col selettore a massima sovrapposizione | ### **non e' mai girata**, ed era il terzo limite che avevo dichiarato io |
+| `4` | il ### **cubico `L = 40`** | ### **dichiarato NON PAGABILE**: `MemoryError` a `n = 64000`, e ### **~`11` ore** estrapolando il salto `L = 20` → `L = 30` *(`4.98` volte)* |
+| `5` | l'### **aggregazione PER FAMIGLIA** *(la regola delle due taglie)* | si calcola ### **alla fine** della misura, e il processo e' stato fermato prima: ### **il `json` ha il dato per scena, non quello per famiglia** |
+
+### ⛔ **E LE DUE DOMANDE RESTANO APERTE, con i numeri che ci sono:** `[[DOMANDA-QUALE-SEGNO]]` *(quale segno, se quello che lega in `1D` in `3D` peggiora)* e `[[DOMANDA-VIA-DEL-CAMPO]]`. ### ⭐ **E la seconda e' quella che questi numeri spingono:** se ### **nessun termine LOCALE lega in `3D`**, la via che resta e' ### **il CAMPO.**
+
