@@ -123,6 +123,11 @@ FILE_FISICA = (
     'primo_ordine/_collauda_determinismo.py',
     'primo_ordine/_collauda_simmetrie.py',
     'primo_ordine/_collauda_guida.py',
+    # ### ⭐ **I DUE FILE DEL PEZZO `2` DEL SIMULATORE** *(lo schema della
+    # ### camminata)*: ci stanno per la stessa ragione degli altri due dello
+    # ### schema -- ### **la forma di una legge E- fisica**, perche- decide
+    # ### ### **che cosa si puo- scrivere.**
+    'primo_ordine/_collauda_schema_camminata.py',
     'primo_ordine/termini/__init__.py',
     # ### I TRE GENERATI: entrano nella LISTA ### **nel commit in cui nascono**, e il
     # ### mandato lo pretende. ### ⚠ **Sono `prova: true`**: la LISTA sorveglia
@@ -133,6 +138,7 @@ FILE_FISICA = (
     'primo_ordine/osservatori/__init__.py',
     'primo_ordine/osservatori/prova_norma.py',
     'primo_ordine/leggi/schema.py',
+    'primo_ordine/leggi/schema_camminata.py',
     # ### ✅ **Nato il `2026-10-10` dividendo `schema.py`**, che era
     # ### oltre il tetto: ### **il collaudo e- la parte che cresce.**
     'primo_ordine/leggi/_collauda_schema.py',

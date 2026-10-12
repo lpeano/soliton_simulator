@@ -146,6 +146,12 @@ python "$(git rev-parse --show-toplevel)/primo_ordine/_collauda_determinismo.py"
 #  ### costo si spegnerebbe il primo giorno, ed e' il difetto di `A9`.
 python "$(git rev-parse --show-toplevel)/primo_ordine/_collauda_grafo.py" || exit 1
 
+#  LO SCHEMA DELLA CAMMINATA -- nei DUE VERSI (pezzo 2 del simulatore).
+#  ### Prova che i tipi nuovi PASSANO e che le forme sbagliate RIFIUTANO:
+#  ### un operatore fuori vocabolario, un flusso senza generatore, l-ordine
+#  ### assente, e le frazioni di Strang che NON sommano a 1.
+python "$(git rev-parse --show-toplevel)/primo_ordine/_collauda_schema_camminata.py" || exit 1
+
 #  `P-ALB` -- L'ALBERO DELLE SCELTE.
 #  ### Il collaudo, non il solo `controlla()`: `indice.py valida` lo chiama GIA'
 #  ### (ed e' quello che il mandato chiede), ma il collaudo ha il ramo

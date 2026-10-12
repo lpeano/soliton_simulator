@@ -13966,3 +13966,25 @@ Ogni dato di `db_era2/` ha ### **il suo TIMBRO accanto**, col campo `versione_da
 
 ### ✅ **E L'IMPRONTA DEL HOOK E' RIGENERATA, con la diff visibile:** `pre-commit` da `b85fc070...` a `22695521...` in `csv/_barriera.lock` — che e' esattamente cio' che quel file serve a fare: ### **non impedire, ma RENDERE VISIBILE.**
 
+## ⭐ **IL PEZZO `2`: LO SCHEMA SA ESPRIMERE LA CAMMINATA, E QUATTRO PRESIDI MI HANNO CORRETTO STRADA FACENDO** *(2026-10-12)*
+
+### ✅ **CHE COSA LO SCHEMA SA FARE ADESSO:** due tipi di variabile sulle ### **ESTREMITA' D'ARCO** *(`complesso_c2_estremita` per `psi`, `reale_estremita` per `phi`)*, due tipi di legge nuovi *(`pezzo_unitario` e `flusso`)*, il ### **vocabolario chiuso degli operatori** e delle ### **azioni** *(`estremita` / `nodo` / `arco`, cioe' ### **quante estremita' un pezzo mescola**)*, e l'### **ordine di composizione come LISTA di `(legge, frazione)`.**
+
+### ⭐ **E IL CONTROLLO CHE VALE PIU' DI TUTTI NELL'ORDINE: LA SOMMA DELLE FRAZIONI DI UNA LEGGE DEVE FARE `1` ESATTO.** Una composizione dove le due meta' fanno `0.9` ### **non integra il passo intero** — e ### **non e' uno stile: e' un PASSO SBAGLIATO**, che nessun altro controllo vedrebbe. ### **E il confronto e' esatto e non <<vicino>>:** quelle frazioni sono ### **numeri scritti a mano in tabella**, non il risultato di un conto, quindi una tolleranza ### **nasconderebbe un `0.9` scritto per sbaglio.**
+
+### ⛔ **E IL COLLAUDO NEI DUE VERSI HA PRESO UN BUCO CHE AVEVO APERTO IO, AL PRIMO GIRO:** il divieto delle posizioni guardava ### **`espressione`**, e un `flusso` ha ### **`generatore`** — quindi un generatore che nominava una coordinata ### **passava.** ### **Un braccio che prova solo <<il buono passa>> non e' un collaudo.**
+
+### ⚠ **E IL SECONDO ROSSO ERA MIO E NON DELLO SCHEMA:** il mio caso di prova usava `x` come argomento del generatore, e ### **`x` e' un nome di coordinata**, vietato. ### **Il presidio aveva ragione e il mio fixture era sbagliato** — il generatore vero e' `Lambda * G(h/Lambda)`.
+
+### 📌 **E POI TRE PRESIDI DI ARCHITETTURA MI HANNO CORRETTO, uno per volta:**
+
+| | il presidio | che cosa ha preso |
+|---|---|---|
+| `1` | `P-MOD` | `schema.py` era arrivato a ### **`731` righe** contro un tetto di `700`, e la sua regola e' *<<oltre SI DIVIDE, NON SI ALLUNGA>>* — ### **ho diviso per SOGGETTO** *(`leggi/schema_camminata.py`)*, e ora sta a ### **`623`.** ### **Non ho alzato il tetto** |
+| `2` | `P-MOD` | il file nuovo ### **non era in mappa**, la sua responsabilita' ### **non stava in una riga** *(`163` caratteri: <<se non si riesce a scriverla in una riga, IL MODULO FA DUE COSE>>)*, e ### **un import non dichiarato** |
+| `3` | `P-RIF` | due ID stavano ### **in un COMMENTO** — *<<un riferimento che una macchina deve seguire NON PUO' VIVERE NELLA PROSA>>*: le due frasi sono ### **andate nel docstring**, dove un ID e' ### **documentazione** |
+
+### ⚠ **E UNA COSA L'HO IMPARATA GIRANDO, non ragionandoci:** l'import relativo `from . import schema_camminata` ### **alza <<attempted relative import with no known parent package>>**, perche' `schema` si importa come modulo di ### **primo livello.** ### **Import piatto.**
+
+### ✅ **E LA SUITE PASSA `41` SU `41`** *(era `40`)*, col `pre-commit` a ### **`127.3` s su `500`.**
+

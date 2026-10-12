@@ -82,6 +82,11 @@ COLLAUDI = (
     ("lo schema della tabella", "primo_ordine/leggi/_collauda_schema.py",
      "pre-commit"),
     ("il generatore", "primo_ordine/_collauda_genera.py", "pre-commit"),
+    # ### ⭐ **LO SCHEMA DELLA CAMMINATA, nei DUE VERSI** *(pezzo `2` del
+    # ### simulatore)*: i tipi sulle estremita-, i pezzi unitari, i flussi, e
+    # ### l-### **ordine di composizione con le ripetizioni AMMESSE.**
+    ("lo schema della camminata",
+     "primo_ordine/_collauda_schema_camminata.py", "pre-commit"),
     ("lo schema della configurazione", "primo_ordine/config/schema_config.py",
      "pre-commit"),
     ("`@rif` byte-inerte", "primo_ordine/_rif.py", "pre-commit"),

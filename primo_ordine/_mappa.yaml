@@ -66,6 +66,10 @@ moduli:
     responsabilita: il collaudo del determinismo, e i due processi byte-identici
     importa: [determinismo, schema_config]
 
+  - nome: _collauda_schema_camminata.py
+    responsabilita: il collaudo dello schema della camminata, nei DUE VERSI
+    importa: [_presidio, schema]
+
   - nome: _collauda_grafo.py
     responsabilita: il collaudo del grafo, e i cinque casi che devono fallire
     importa: [driver, grafo, passo, schema_config, stato]
@@ -113,7 +117,11 @@ moduli:
   # ------------------------------------------------------------------ IL GENERATORE
   - nome: leggi/schema.py
     responsabilita: la forma di una riga di tabella, e i divieti
-    importa: [simmetrie]
+    importa: [schema_camminata, simmetrie]
+
+  - nome: leggi/schema_camminata.py
+    responsabilita: cio- che la camminata aggiunge allo schema
+    importa: []
 
   - nome: leggi/_collauda_schema.py
     responsabilita: il collaudo dello schema, nei due versi, in memoria

@@ -66,7 +66,17 @@ NL = chr(10)
 
 # ### I TIPI DI LEGGE. ### ⛔ **Un `termine_*` entra in `H`; una `regola` NO** -- e per
 # ### questo una regola ### **deve dichiarare il BILANCIO.**
-TIPI = ("termine_nodo", "termine_arco", "regola", "osservatore")
+# ### ⛔ **E DUE TIPI NUOVI, perche- LO SCHEMA DI PRIMA NON SAPEVA ESPRIMERE LA
+# ### CAMMINATA** *(disallineamento `2` del piano, `doc/TASK_HISTORY/
+# ### 2026-10-12_simulatore_era2.md`)*: la moneta di spin, il Grover e lo spostamento con
+# ### trasporto sono ### **OPERATORI UNITARI**, e si ### **COMPONGONO** -- non si
+# ### ### **SOMMANO** come gli addendi di `H`.
+# ### ⭐ **`pezzo_unitario`**: un fattore della composizione, ### **unitario per
+# ### costruzione** *(e il suo `operatore` viene da un vocabolario CHIUSO)*.
+# ### ⭐ **`flusso`**: il flusso ESATTO di un generatore *(come `N`)*, cioe-
+# ### ### **non un-approssimazione numerica** -- e lo dichiara.
+TIPI = ("termine_nodo", "termine_arco", "regola", "osservatore",
+        "pezzo_unitario", "flusso")
 
 # ### I TIPI DI VARIABILE. ### ⭐ **`psi` e- `C^2` di NODO** *(lo spinore e- il tempo
 # ### proprio della massa, e vive sul nodo)*.
@@ -80,6 +90,20 @@ TIPI_VARIABILE = {
     "reale_nodo": "un reale sul NODO",
     "coppia_coniugata": ("una coppia (q, p) coniugata -- ### AMMESSA e NON USATA: "
                          "e- la decisione 13, APERTA"),
+    # ### ⛔ **I DUE TIPI DELLE ESTREMITA- D-ARCO, e nascono da un DISALLINEAMENTO
+    # ### dello schema di prima:** `complesso_c2_nodo` dice *<<`psi`, `C^2` sul NODO>>*,
+    # ### ma `F1` della carta della fisica dice ### **<<stato sulle ESTREMITA- d-arco>>.**
+    # ### ✅ **NON E- UNA SCELTA DI FISICA** *(`F1` e- DECISO)*: e- un-estensione che
+    # ### `F1` ### **pretende.** ### ⚠ **Ma la FORMA e- una scelta di progetto, ed e-
+    # ### il posto `P1`:** tipo NUOVO e non un campo `dominio` su quello vecchio, perche-
+    # ### il dominio decide ### **quanti simboli esistono** e ### **quali lati** *(`i`/`j`)*
+    # ### ha una legge -- e nasconderlo in un campo lo renderebbe ### **invisibile
+    # ### all-ambiente**, che e- il posto dove i due presidi contro <<un termine che vede
+    # ### i vicini>> lavorano.
+    "complesso_c2_estremita": ("un complesso C^2 sull-ESTREMITA- d-arco (psi della "
+                               "camminata: F1 della carta della fisica)"),
+    "reale_estremita": ("un reale sull-ESTREMITA- d-arco (phi, il vuoto locale "
+                        "neutro: F4)"),
 }
 
 # =====================================================================================
@@ -100,6 +124,8 @@ TIPI_VARIABILE = {
 #                    ### **non si tronca**, si riduce -- e la riduzione e- ESATTA)*
 # =====================================================================================
 DOMINI = {
+    "complesso_c2_estremita": "finito",
+    "reale_estremita": "finito",
     "complesso_c2_nodo": "finito",
     "reale_nodo": "finito",
     "reale_arco": "finito",
@@ -112,8 +138,28 @@ FORME_DOMINIO = ("finito", "finito-pos", "fase-2pi")
 # ### DOVE VIVE UNA VARIABILE: sul nodo o sull-arco. ### **Serve all-AMBITO:** un
 # ### `termine_nodo` ### **non puo- leggere una variabile d-arco**, ed e- il controllo che
 # ### impedisce a un termine di nodo ### **di vedere i vicini.**
+# ### ⛔ **E <<estremita->> E- UN TERZO POSTO, non un sinonimo di <<arco>>:** un arco
+# ### ha ### **DUE** estremita-, e una variabile d-arco ### **ne ha UNA SOLA copia** --
+# ### quindi confonderli vorrebbe dire ### **dimezzare o raddoppiare lo stato.**
 DOVE = {"complesso_c2_nodo": "nodo", "reale_nodo": "nodo", "coppia_coniugata": "nodo",
-        "reale_arco": "arco", "fase_arco": "arco"}
+        "reale_arco": "arco", "fase_arco": "arco",
+        "complesso_c2_estremita": "estremita", "reale_estremita": "estremita"}
+
+# ### ⛔ **GLI OPERATORI, LE AZIONI E I CONTROLLI DEI DUE TIPI NUOVI STANNO
+# ### IN UN FILE A PARTE**, e il motivo e- un presidio: con tutto qui dentro
+# ### questo file arrivava a ### **`731` righe** contro un tetto di ### **`700`**,
+# ### e la regola e- ### **<<oltre SI DIVIDE, NON SI ALLUNGA>>.**
+# ### ⭐ **E la divisione e- PER SOGGETTO:** qui la forma generale di una
+# ### legge, la- ### **cio- che la camminata aggiunge.**
+# ### ⚠ **IMPORT PIATTO E NON RELATIVO, e il motivo e- MISURATO:** `schema` si
+# ### importa come modulo di ### **PRIMO LIVELLO** *(`_genera.py` fa
+# ### `import schema as SCH` con `leggi/` nel percorso)*, quindi un
+# ### `from . import ...` alza ### **<<attempted relative import with no known
+# ### parent package>>.** ### **L-ho visto girando il collaudo, non ragionandoci.**
+import schema_camminata as _cam
+
+OPERATORI = _cam.OPERATORI
+AZIONI = _cam.AZIONI
 
 # ### ⛔ **I SIMBOLI VIETATI, e il perche- sta nel docstring:** uno strumento non e- fisica, e
 # ### ### **una POSIZIONE e- lo strumento con cui GUARDIAMO**, non una proprieta- del
@@ -146,6 +192,8 @@ CHIAVI_REGOLA = ("ingressi", "uscite", "bilancio")
 # ### la norma** -- che e- la prima cosa che si misura.
 CHIAVI_OSSERVATORE = ("espressione", "ambito", "voce", "dimensione",
                       "simmetrie", "conserva")
+CHIAVI_PEZZO = _cam.CHIAVI_PEZZO
+CHIAVI_FLUSSO = _cam.CHIAVI_FLUSSO
 
 _ID = re.compile(r"^[A-Z][A-Z0-9-]{3,}$")
 
@@ -325,6 +373,8 @@ def valida_legge(d, variabili, dimensioni=None):
     attese = set(CHIAVI_COMUNI)
     attese |= set(CHIAVI_REGOLA if tipo == "regola"
                   else CHIAVI_OSSERVATORE if tipo == "osservatore"
+                  else CHIAVI_PEZZO if tipo == "pezzo_unitario"
+                  else CHIAVI_FLUSSO if tipo == "flusso"
                   else CHIAVI_TERMINE)
     manca = sorted(attese - set(d))
     if manca:
@@ -338,6 +388,16 @@ def valida_legge(d, variabili, dimensioni=None):
         _err(fuori, idv, "`scheda` vuota: una legge senza scheda NON si genera")
     if not isinstance(d.get("assiomi"), list):
         _err(fuori, idv, "`assiomi` deve essere una lista (anche vuota, e allora lo dice)")
+    # =================================================================================
+    #   I DUE TIPI NUOVI: i loro controlli PROPRI
+    # =================================================================================
+    if tipo in ("pezzo_unitario", "flusso"):
+        def _e(che):
+            _err(fuori, idv, che)
+        if tipo == "pezzo_unitario":
+            _cam.errori_pezzo(d, idv, _e)
+        else:
+            _cam.errori_flusso(d, idv, _e, simboli_vietati, rami_vietati)
     # ------------------------------------------------------------------ l-AMBITO
     if tipo in ("termine_nodo", "termine_arco", "osservatore"):
         amb = d.get("ambito")
@@ -465,6 +525,19 @@ def valida_legge(d, variabili, dimensioni=None):
         if not str(d.get("voce") or "").strip():
             _err(fuori, idv, "`voce` vuota: un osservatore DICHIARA l-ID della voce "
                              "MISURA/CRITERIO che calcola")
+    return fuori
+
+
+def valida_ordine(ordine, leggi):
+    """### Gli errori dell-ORDINE DI COMPOSIZIONE, o `[]`.
+
+    ### ⭐ **Il corpo sta in `schema_camminata.py`**, per il tetto delle righe:
+    qui resta ### **la porta**, perche- chi valida una tabella ### **chiama UN
+    SOLO modulo.**
+    """
+    fuori = []
+    _cam.errori_ordine(ordine, leggi,
+                       lambda che: _err(fuori, "<ordine>", che))
     return fuori
 
 

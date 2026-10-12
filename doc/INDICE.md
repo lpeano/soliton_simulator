@@ -16,7 +16,7 @@
 | `INFRASTRUTTURA` | `ENTRAMBE` | 24 |
 | `METODO` | `1` | 156 |
 | `METODO` | `2` | 16 |
-| `METODO` | `ENTRAMBE` | 89 |
+| `METODO` | `ENTRAMBE` | 90 |
 
 | id | classe | dominio | era | stato | blocca | titolo |
 |---|---|---|---|---|---|---|
@@ -408,6 +408,7 @@
 | `KAPPA-TW-COMMENTO` | DIFETTO | DOCUMENTAZIONE | 1 | ### **CHIUSA** |  | il commento di _tau_tw_locale dice kappa_tw = TAU_TW/(2pi) = 3.1831, il codice r |
 | `L-DOPO-STOP` | STANDARD | METODO | ENTRAMBE | ### **APERTA** |  | DOPO UNO STOP, se Luca non risponde si lavora SOLO la coda: nessuna cura fisica, |
 | `L-MEMORIA-PRIMA` | STANDARD | METODO | ENTRAMBE | ### **APERTA** |  | PRIMA di proporre una cura si valuta se una MEMORIA la cura, e la valutazione st |
+| `L-NON-FERMARSI-AL-CHECKPOINT` | CRITERIO | METODO | ENTRAMBE | ### **APERTA** |  | un checkpoint non chiude il turno: si passa SUBITO al pezzo successivo |
 | `L-NUMERI` | STANDARD | METODO | ENTRAMBE | ### **APERTA** |  | OGNI NUMERO SCRITTO IN UN COMMIT O IN UN REFERTO ESCE DA UNO SCRIPT |
 | `L-PATCH` | STANDARD | METODO | ENTRAMBE | ### **APERTA** |  | LE PATCH SI LANCIANO IN PRIMO PIANO; niente git stash con una patch in corso; ne |
 | `L-SOGLIA` | STANDARD | METODO | ENTRAMBE | ### **SUPERATA** |  | UNA SOGLIA NON SI CALCOLA DAI DATI CHE GIUDICA, e si collauda sul caso nullo |
