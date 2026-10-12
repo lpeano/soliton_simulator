@@ -146,8 +146,19 @@ PEZZI = (
     # ### sul tipo di `phi`**, e Luca ha deciso che e- complesso.
     ("il flusso di SATURAZIONE nel motore (`P1` del mandato energia e mitosi), che era "
      "bloccato SOLO dal tipo di phi", "primo_ordine/_collauda_saturazione.py", ()),
-    ("la derivazione di SPAZIO-CHE-NASCE (solo task history, nessun codice)",
-     "doc/TASK_HISTORY/2026-10-13_spazio_che_nasce.md",
+    # ### ⚠ **QUINTA VOLTA, e questa e- un MARCATORE CHE PUNTAVA A UN FILE
+    # ### CHE NON AVREI MAI SCRITTO:** il pezzo si chiamava
+    # ### `2026-10-13_spazio_che_nasce.md`, e la derivazione l-ho scritta in
+    # ### `2026-10-12_mitosi.md`. ### **Un marcatore cosi- non e- <<sbagliato una volta>>:
+    # ### sbaglia PER SEMPRE**, perche- il file atteso non arrivera- mai.
+    # ### ⛔ **E LA LEZIONE, dopo cinque volte, NON e- ancora <<derivare la
+    # ### lista>>** *(coinciderebbe sempre)*: ### **e- che il marcatore di un pezzo e- un
+    # ### FILE, e un file lo decide chi lo scrive** -- quindi il marcatore si fissa
+    # ### ### **quando il pezzo si apre**, non quando si progetta.
+    # ### ✅ **Il pezzo e- FATTO: la derivazione della mitosi e- `P5`**, e il suo
+    # ### file esiste.
+    ("la derivazione di SPAZIO-CHE-NASCE, cioe- la MITOSI (`P5`): solo task history",
+     "doc/TASK_HISTORY/2026-10-12_mitosi.md",
      ("DOMANDA-QUALE-SEGNO",)),
 )
 
