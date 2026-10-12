@@ -14249,3 +14249,21 @@ Ogni dato di `db_era2/` ha ### **il suo TIMBRO accanto**, col campo `versione_da
 ### 📌 **I NUMERI.** Il confronto eseguibile: **`15` su `15`**, di cui **`4`** casi che **devono fallire** — fra cui **`phi` dichiarato reale contro il banco complesso**, ### **il disallineamento sfuggito TRE volte**. I presidi dell'era `2`: **`27` su `27`**, coi **tre** casi che devono scattare per `P-E10` e il braccio che verifica **che il documento vero sia tornato al suo posto** *(un collaudo che lasciasse il presidio puntato altrove **lo spegnerebbe**)*. La suite: **`46` su `48`**, e i due rossi sono **`m1`** *(dichiarato, in attesa di Luca)* e **lo stage** *(gira a stage vuoto)*.
 
 ### ⚠ **E TRE PRESIDI MI HANNO CORRETTO:** `[[P-C1]]` *(`P-E10` dichiarato dal codice e **non nell'indice**: un riferimento ROTTO)*, `[[P-RIF]]` *(l'ID in un **commento** invece che nel docstring)*, `[[P-M1]]` *(il metodo **senza la sua riga**)*. ### E `[[P-REG]]` ha visto crescere l'elenco letterale **per la terza volta**, e la cura e' quella che il suo commento prescrive: **si aggiorna l'elenco.**
+
+---
+
+## `PI-ERA-STATO` SI RESTRINGE: UNA DOMANDA DELL'ERA `2` A CUI LUCA HA RISPOSTO ADESSO SI PUO' CHIUDERE *(2026-10-12)*
+
+### ✅ **LUCA APPROVA LA RACCOMANDAZIONE di `[[D-ERA2-NON-SI-CHIUDE]]`:** `PI-ERA-STATO` pretende `AGENDA` **solo per le voci APERTE** dell'era `2`.
+
+### ⛔ **PERCHE' SERVIVA, e non era un caso limite:** insieme a `PI-CHIUSURA-ORFANA` *(una `chiusura` piena vuole stato `CHIUSA`)*, la forma vecchia **rendeva irraggiungibile lo stato <<DECISA>>** per una voce dell'era `2`. ### **La prima domanda a cui Luca ha risposto ha trovato il muro**, e in attesa ce ne sono **`18`**. ### ⚠ **E il ripiego che avevo messo — la decisione solo nello STORICO — era esattamente cio' che `[[DECISIONE-VUOLE-UN-CAMPO]]` vieta:** il campo che un programma legge **non c'era**.
+
+### ⭐ **E LA RAGIONE DEL PRESIDIO NON SI APPLICAVA:** *<<una voce dell'era `2` e' in agenda perche' l'era `2` non e' cominciata>>* vale per cio' che **si deve ancora fare**. ### **Una domanda DECISA non e' <<in agenda>>.** ### ✅ **E non e' una legge nuova: e' UN'ECCEZIONE TOLTA** *(`9-ter`)* — il presidio guarda **meno** casi, non piu'.
+
+### ⭐ **GLI STATI <<APERTI>> SONO DICHIARATI PER ENUMERAZIONE e non per complemento** *(<<tutti tranne `CHIUSA`>>)*: col complemento, ### **uno stato NUOVO sarebbe <<aperto>> per default** — e un default che nessuno ha deciso e' la cosa che questo repo vieta.
+
+### 📌 **I NUMERI, e i DUE VERSI che il mandato pretende.** `python csv/indice.py collaudo`: **`52` su `52`**, con **quattro** bracci nuovi — era `2` **`APERTA`** non `AGENDA` **RIFIUTA**; era `2` **`IN_CORSO`** **RIFIUTA**; era `2` **`CHIUSA` con la sua chiusura PASSA** *(### **il verso che prima era IRRAGGIUNGIBILE**)*; era `2` `AGENDA` **resta buono**, cosi' il caso normale **non si rompe**.
+
+### ✅ **E `[[DOMANDA-PHI-REALE-O-COMPLESSO]]` E' ORA CHIUSA NEL MODO GIUSTO**, col criterio e col commit `4e0659e` — ### **il ripiego e' TOLTO.**
+
+### ⚠ **E `[[D-ERA2-NON-SI-CHIUDE]]` resta APERTA UN GIRO**, per la stessa ragione di prima: il validatore pretende `chiusura.commit`, e **il commit della sua cura non esiste ancora**. Si chiude col suo sha **subito dopo** — ed e' la forma a **due atti** che l'indice prevede.

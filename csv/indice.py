@@ -64,6 +64,11 @@ CLASSI = ("DIFETTO", "CURA", "MISURA", "CRITERIO", "PRESIDIO", "STANDARD", "TEOR
 DOMINI = ("FISICA", "METODO", "INFRASTRUTTURA", "DOCUMENTAZIONE", "DA_CLASSIFICARE")
 ERE = ("1", "2", "ENTRAMBE", "DA_CLASSIFICARE")
 STATI = ("APERTA", "IN_CORSO", "CHIUSA", "SOSPESA", "SUPERATA", "AGENDA", "DA_CLASSIFICARE")
+# ### ⛔ **GLI STATI <<APERTI>>, DICHIARATI -- e serve a `PI-ERA-STATO` RISTRETTO.**
+# ### ⭐ **E l-elenco e- per ENUMERAZIONE e non per complemento** *(<<tutti tranne
+# ### `CHIUSA`>>)*: con il complemento, ### **uno stato NUOVO sarebbe <<aperto>> per
+# ### default**, e un default che nessuno ha deciso e- la cosa che questo repo vieta.
+APERTI_ERA2 = ("APERTA", "IN_CORSO", "SOSPESA")
 # ### ⚠ **LA REGEX E' PIU' LARGA DI COME L'AVEVO SCRITTA, e il motivo e' una REGOLA:**
 # ### *«i REPERTI non si riscrivono -- il nome vecchio RESTA»* (`CLAUDE.md` par.9). La
 # ### migrazione ha trovato ### **96 ID esistenti** che la regex stretta avrebbe rifiutato:
@@ -873,6 +878,23 @@ def collaudo():
          [base(stato="SUPERATA", superata_da="B"), base(id="B")], True),
         ("### `PI-ERA-STATO`: era `ENTRAMBE` con stato `SOSPESA`, che resta VIETATO",
          [base(stato="SOSPESA", stato_era_1="aperto")], False),
+        # ### ✅ **I DUE VERSI DEL `PI-ERA-STATO` RISTRETTO** *(decisione di Luca,
+        # ### `2026-10-12`)*. ### ⛔ **Il verso che DEVE ancora scattare:** una voce
+        # ### ### **APERTA** dell-era `2` che non sia `AGENDA`.
+        ("### `PI-ERA-STATO`: era `2` APERTA e non `AGENDA`, che resta VIETATO",
+         [base(era="2", stato="APERTA")], False),
+        ("### e lo stesso con `IN_CORSO`, che e- aperto anche lui",
+         [base(era="2", stato="IN_CORSO")], False),
+        # ### ⭐ **E IL VERSO NUOVO, QUELLO CHE PRIMA ERA IMPOSSIBILE:** una domanda
+        # ### dell-era `2` ### **DECISA da Luca** si registra come `CHIUSA`, col suo
+        # ### criterio e il suo commit. ### **Prima era irraggiungibile**, e la prima
+        # ### risposta di Luca ci ha sbattuto contro.
+        ("era `2` CHIUSA con la sua chiusura (il verso NUOVO di `PI-ERA-STATO`)",
+         [base(era="2", stato="CHIUSA",
+               chiusura={"criterio": "deciso da Luca", "commit": "abc1234",
+                         "data": "2026-10-12"})], True),
+        ("### e era `2` `AGENDA` resta buono: il caso normale non si rompe",
+         [base(era="2", stato="AGENDA")], True),
         ("### SOSPESA senza stato_era_1", [base(stato="SOSPESA")], False),
         ("### `PI-FISICA-ERA1-NON-SOSPESA`: FISICA/era 1 con stato APERTA",
          [base(era="1", stato="APERTA")], False),
@@ -1982,9 +2004,25 @@ def _f9_era_stato(voci):
                        "<<rimandata all-era 2>>, e una cosa che vale ANCHE nell-era 2 "
                        "non si puo- rimandare a se stessa"
                        % (v["id"], v["stato"]))
-        if e == "2" and v["stato"] != "AGENDA":
+        # ### ✅ **RISTRETTO il 2026-10-12, DECISIONE DI LUCA** *(`D-ERA2-NON-SI-CHIUDE`,
+        # ### e la raccomandazione era mia)*: la pretesa di `AGENDA` vale
+        # ### ### **SOLO PER LE VOCI APERTE** dell-era `2`.
+        # ### ⛔ **PERCHE- LA VECCHIA FORMA RENDEVA IRRAGGIUNGIBILE UNO STATO
+        # ### LEGITTIMO:** insieme a `PI-CHIUSURA-ORFANA` *(una `chiusura` piena vuole
+        # ### stato `CHIUSA`)* vietava di registrare come ### **DECISA** una domanda
+        # ### dell-era `2` ### **a cui Luca aveva risposto** -- la prima a cui ha
+        # ### risposto ### **ha trovato il muro**, e ce ne sono `18`.
+        # ### ⭐ **E LA RAGIONE DEL PRESIDIO NON SI APPLICA A UNA DOMANDA RISPOSTA:**
+        # ### *<<una voce dell-era `2` e- in agenda perche- l-era `2` non e- cominciata>>*
+        # ### vale per cio- che ### **si deve ancora fare**; ### **una domanda decisa non
+        # ### e- <<in agenda>>.**
+        # ### ⚠ **E NON E- UNA LEGGE NUOVA: e- UN-ECCEZIONE TOLTA** *(`9-ter`)* --
+        # ### il presidio guarda ### **meno** casi, non piu-.
+        if e == "2" and v["stato"] in APERTI_ERA2:
             err.append("`PI-ERA-STATO` `%s`: era `2` con stato `%s`. L-era 2 NON E- COMINCIATA: "
-                       "una sua voce e- AGENDA" % (v["id"], v["stato"]))
+                       "una sua voce APERTA e- AGENDA. ### Una voce DECISA o CHIUSA invece "
+                       "puo- stare cosi-: una domanda a cui Luca ha risposto NON E- <<in "
+                       "agenda>>" % (v["id"], v["stato"]))
     return err
 
 
