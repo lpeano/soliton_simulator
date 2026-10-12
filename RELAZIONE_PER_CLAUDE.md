@@ -13908,3 +13908,19 @@ Ogni dato di `db_era2/` ha ### **il suo TIMBRO accanto**, col campo `versione_da
 
 ### ✅ **E `H-P1-bis` MI HA PRESO:** ho provato a committare il referto ### **senza toccare la relazione**, e il presidio ha ### **rifiutato.** ### **Questo paragrafo esiste perche' un presidio ha funzionato.**
 
+## ⭐ **`H1` VERIFICATA SUL CODICE E REGGE: LA SATURAZIONE E' UNA LENTE, NON UNA BUCA** *(2026-10-12)*
+
+### ✅ **ME L'HAI CHIESTO DI RIVERIFICARE, E L'HO FATTO PER NOME:** `saturazione3._ruota_attorno_a_n` e `camminata2.moneta_spin` usano ### **LO STESSO `geo["n"]`** *(il versore per estremita')*, e calcolano ### **la STESSA espansione esatta** `cos a I — i sin a (sigma.n)` — le righe che costruiscono `a0` e `a1` sono ### **strutturalmente identiche nei due file.**
+
+### ⭐ **STESSO ASSE VUOL DIRE CHE LE DUE ROTAZIONI COMMUTANO**, quindi il flusso di `N` equivale a ### **una moneta PIU' FORTE dove c'e' piu' materia**, cioe' a un ### **rallentamento locale.** ### **Focalizza un poco, NON intrappola** — e la derivata di `G` al piu' `1` mette ### **un tetto.**
+
+### ⛔ **E QUESTO SPIEGA I NUMERI INVECE DI COMMENTARLI:** `+N` a `x0 = 8` ### **concentra il nucleo del `27.8%`** — perche' una lente ### **focalizza**; e il ### **fronte si allarga come nel lineare** *(rapporto `0.918`, `0.7 sigma` da `1`)* perche' una lente ### **non ha una buca che trattenga.**
+
+### 📌 **E `H1` PIU' `H4` INSIEME DANNO LA DIREZIONE, e non sono due osservazioni slegate:** se la saturazione e' ### **una lente** e se in natura ### **lega un campo** *(l'atomo, il protone coi gluoni)*, allora la cosa che manca ### **non e' un segno diverso: e' UN CAMPO CHE REAGISCE** — ed e' esattamente cio' che la `U` dinamica deve diventare.
+
+### ✅ **QUINDI LA TUA DECISIONE E' REGISTRATA: `[[DOMANDA-VIA-DEL-CAMPO]]` CHIUSA A FAVORE DELLA VIA DEL CAMPO**, e ### **`[[DOMANDA-QUALE-SEGNO]]` cambia forma invece di chiudersi:** non e' piu' *<<quale segno lega>>* ma ### **<<quale segno serve QUANDO IL CAMPO C'E'>>** — e si decide sulla ### **prova preregistrata `(a4)`**, con la `U` dinamica accesa.
+
+### ⚠ **E IL CAMPO `stato` DI `DOMANDA-VIA-DEL-CAMPO` DICE ANCORA `AGENDA`, per lo stesso limite di ieri:** `PI-ERA-STATO` vieta qualunque stato diverso in era `2`. La decisione sta in ### **tre campi che un programma legge** *(`superata_da`, `priorita` svuotata, nota TOLTA)*, e ### **la domanda e' uscita dalla lista: da `19` a `18`.**
+
+### ⭐ **E IL RIORDINO E' REGISTRATO: `(b)` IL SIMULATORE VIENE PRIMA.** La derivazione passa dopo, e il ### **presidio che rifiuta di accendere un posto aperto senza la sua voce nasce COL GENERATORE** — cioe' come ### **impedimento vero**, non come regola scritta *(`A9`)*.
+

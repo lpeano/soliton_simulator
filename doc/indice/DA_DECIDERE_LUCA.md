@@ -25,7 +25,7 @@
 | **[[DOMANDA-QUANTITA-CONSERVATA]]** esiste una moneta isotropa, causale e simmetrica fra le bande con una qu | ### ✅ **PRONTA** | ### **niente** |
 | **[[SCENA-3D-PRINCIPALE]]** la (ii) e- il BANCO DI MISURA: punti che si respingono, gradi 2-6 | ### ✅ **PRONTA** | ### **niente** |
 
-### `DIPENDENTE` — **15**
+### `DIPENDENTE` — **14**
 
 | la domanda | pronta? | che cosa aspetta |
 |---|---|---|
@@ -43,7 +43,6 @@
 | **[[DOMANDA-QUALE-SEGNO]]** quale segno della non linearita-, se quello che lega lega solo in 1D? | ### ✅ **PRONTA** | ### **niente** |
 | **[[DOMANDA-QUANDO-LA-CAMMINATA-IN-TABELLA]]** quando si porta la camminata nella tabella? il porting aspetta TRE decis | ### ⏳ aspetta | ### **aspetta:** `DOMANDA-PASSO-FRAZIONARIO-O-ASINCRONO`, `DOMANDA-COME-LA-MATERIA-CAMBIA-LAMBDA`, `DOMANDA-QUALE-FORMA-FISSA-CS` |
 | **[[DOMANDA-UNITA-DI-STATO]]** l-unita- di stato: qual e- la capacita- di un nodo? | ### ⏳ aspetta | ### **aspetta:** `DOMANDA-D9-GEOMETRIA` |
-| **[[DOMANDA-VIA-DEL-CAMPO]]** si passa alla via del campo, dato che nessuna non linearita- locale lega | ### ⏳ aspetta | ### **aspetta:** `DOMANDA-QUALE-SEGNO` |
 
 ### `MINORE` — **3**
 
@@ -57,7 +56,7 @@
 
 ## IL CONTO
 
-> ### ⛔ **aperte `23`, di cui pronte `13`.**
+> ### ⛔ **aperte `22`, di cui pronte `13`.**
 >
 > ### ✅ **E una domanda DECISA esce da sola:** si chiude con la decisione di Luca e il commit, e ### **nessuno la spunta a mano** -- la lista ### **si genera dai campi**, e un campo che cambia ### **cambia la lista.**
 
@@ -67,13 +66,13 @@
 
 > ### 📌 **Queste arrivano dai DUE criteri vecchi** *(la nota che dice <<da decidere da Luca>>, e lo stato `DA_CLASSIFICARE`)*, e ### **non hanno una `priorita`**: quindi ### **non stanno nell-ordine delle dipendenze.** ### ✅ **Non le tolgo: le DICHIARO**, perche- una lista che ne nasconde una parte ### **sembra completa.**
 
-| **voci che aspettano una decisione** | ### **`19`** |
-| **domande in tutto** | `19` |
+| **voci che aspettano una decisione** | ### **`18`** |
+| **domande in tutto** | `18` |
 | **segnaposto `NON_DEFINITA`**, che NON sono una domanda | `187` |
 
 ---
 
-## le DOMANDE aperte -- `19`
+## le DOMANDE aperte -- `18`
 
 | id | `classe`/`dominio`/era/stato | LA DOMANDA | LA FRASE |
 |---|---|---|---|
@@ -87,9 +86,8 @@
 | `DOMANDA-PESO-ARCO-COME-MEMORIA` | `DECISIONE`/`FISICA`/`2`/`AGENDA` | il peso d-arco resta una strada per la MEMORIA DINAMICA, e NON e- una scena -- la scena e- decisa (SCENA-3D-PRINCIPALE) | il peso d-arco come memoria dinamica: la geometria nasce dalla dinamica? ### DOMANDA APERTA PER LUCA, da decidere da Luca. ### E- il punto (d) dell-id |
 | `DOMANDA-PRIMA-LEGARE-POI-MISURARE` | `DECISIONE`/`FISICA`/`2`/`AGENDA` | cercare prima un legame, o riformulare le letture come letture sulla dispersione | senza stato legato tre letture non sono decidibili: si cerca prima un legame? ### DOMANDA APERTA PER LUCA, da decidere da Luca. ### IL FATTO: tre lett |
 | `DOMANDA-QUALE-FORMA-FISSA-CS` | `DECISIONE`/`FISICA`/`2`/`AGENDA` | quale forma fissa cs, e nessuna delle tre e- libera da tutti i difetti | quale forma del vuoto fissa cs: nessuna delle tre e- libera da tutti i difetti ### DOMANDA APERTA PER LUCA, da decidere da Luca. ### E- il punto A2 de |
-| `DOMANDA-QUALE-SEGNO` | `DECISIONE`/`FISICA`/`2`/`AGENDA` | e NON si decide finche- i tre buchi del referto non sono chiusi (LEGAME-SCENE-GRANDI), perche- deve dire PER FAMIGLIA E PER TAGLIA se in 3D un termine locale lega | quale segno della non linearita-, se quello che lega lega solo in 1D? ### DOMANDA APERTA PER LUCA, da decidere da Luca. E- una delle due domande che i |
+| `DOMANDA-QUALE-SEGNO` | `DECISIONE`/`FISICA`/`2`/`AGENDA` | il segno che lega in 1D in 3D e- PEGGIO del lineare, e il segno va scelto sulla misura CON LA U DINAMICA ACCESA | quale segno della non linearita-, se quello che lega lega solo in 1D? ### DOMANDA APERTA PER LUCA, da decidere da Luca. E- una delle due domande che i |
 | `DOMANDA-QUANDO-LA-CAMMINATA-IN-TABELLA` | `DECISIONE`/`FISICA`/`2`/`AGENDA` | quando si porta la camminata nella tabella, e il porting aspetta le tre scelte del v4 | quando si porta la camminata nella tabella? il porting aspetta TRE decisioni aperte ### DOMANDA APERTA PER LUCA, da decidere da Luca. ### E- il punto  |
-| `DOMANDA-VIA-DEL-CAMPO` | `DECISIONE`/`FISICA`/`2`/`AGENDA` | e NON si decide finche- i tre buchi del referto non sono chiusi (LEGAME-SCENE-GRANDI) | si passa alla via del campo, dato che nessuna non linearita- locale lega in 3D? ### DOMANDA APERTA PER LUCA, da decidere da Luca. E- la seconda domand |
 | `DUE-STRUMENTI-ARCHIVIO-E` | `DIFETTO`/`INFRASTRUTTURA`/`ENTRAMBE`/`APERTA` | quale dei due strumenti resta, e un solo registro degli archiviati | due strumenti per lo stesso mestiere: spostare gli output su E- ### DOMANDA APERTA PER LUCA, da decidere da Luca: QUALE DEI DUE RESTA. ### IL FATTO: ` |
 | `PROMOZIONE-CONSERVAZIONE-MODIFICATA` | `DECISIONE`/`FISICA`/`2`/`AGENDA` | la conservazione modificata si conserva; promuoverla a energia e- una sua decisione | la conservazione modificata si conserva: si promuove a energia? ### DOMANDA APERTA PER LUCA, da decidere da Luca. ### IL FATTO MISURATO (referto doc/R |
 | `PROPOSTA-FASE-DISPARI-COESIONE` | `DECISIONE`/`FISICA`/`2`/`AGENDA` | la fase dispari sotto C e- ammissibile al bit; la sua forza g resta da derivare | la fase DISPARI sotto coniugazione di carica come forma della coesione ### DOMANDA APERTA PER LUCA, da decidere da Luca. ### IL FATTO MISURATO (refert |

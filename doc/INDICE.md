@@ -9,7 +9,7 @@
 | `DOCUMENTAZIONE` | `2` | 1 |
 | `DOCUMENTAZIONE` | `ENTRAMBE` | 8 |
 | `FISICA` | `1` | 343 |
-| `FISICA` | `2` | 84 |
+| `FISICA` | `2` | 85 |
 | `FISICA` | `ENTRAMBE` | 17 |
 | `INFRASTRUTTURA` | `1` | 39 |
 | `INFRASTRUTTURA` | `2` | 16 |
@@ -566,6 +566,7 @@
 | `PEQ-SEL-STANTIO` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | mitosi legge self.peq[sel] DOPO che peq e' stato rifiltrato con keep: archi sbag |
 | `PER-ARCO` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 2 volte, MAI definito in un registro) [PER-ARCO] |
 | `PERC-TW-MORTA` | DIFETTO | INFRASTRUTTURA | 1 | ### **SOSPESA** |  | perc_tw e STATO MORTO: scritta sempre a zero da quattro siti di nascita, e NESSU |
+| `PERCHE-NON-LEGA` | TEORIA | FISICA | 2 | ### **AGENDA** |  | perche- nessun termine locale lega in 3D: quattro ipotesi, una verificata |
 | `PESO-MAX` | CRITERIO | METODO | 1 | ### **CHIUSA** |  | partecipazioni multiple: l'opacita' di un nodo e' il MAX su tutte le masse, non  |
 | `PHI-FUORI-DOMINIO` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | una delle dieci scritture di phi NON normalizza, e il sito della fase lo copriva |
 | `PHI0-CONGELATA` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | phi0 e CONGELATA: 5 scritture tutte alla nascita, e lo step la legge come memori |
