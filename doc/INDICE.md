@@ -210,7 +210,7 @@
 | `CURA1-CORTO` | MISURA | FISICA | 1 | ### **CHIUSA** |  | APERTO CURA1-CORTO |
 | `CURA2-CORTO` | MISURA | FISICA | 1 | ### **CHIUSA** |  | APERTO CURA2-CORTO |
 | `CURA2-STRUTTURALE` | CURA | INFRASTRUTTURA | 1 | ### **CHIUSA** |  | la CURA 2 diventa STRUTTURALE: i rami `else` di TEMPO_UNICO_MITOSI escono dal si |
-| `D-CREA-LOTTO-ROTTA` | DIFETTO | METODO | ENTRAMBE | ### **APERTA** |  | crea-lotto non poteva far nascere NESSUNA voce: il modello non copriva i tre cam |
+| `D-CREA-LOTTO-ROTTA` | DIFETTO | METODO | ENTRAMBE | ### **CHIUSA** |  | crea-lotto non poteva far nascere NESSUNA voce: il modello non copriva i tre cam |
 | `D0` | MISURA | FISICA | 1 | ### **CHIUSA** |  | CHI FA SCAPPARE d0 / 21/9 / MISURATO: e' IL FRENO. Gli scrittori spingono giu' - |
 | `D01` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | S09 clippa al passo causale — quindi e' gia' una LUNGHEZZA — e poi moltiplica pe |
 | `D02` | DIFETTO | FISICA | 1 | ### **CHIUSA** |  | pozzografo calcola L da self.pos — IL DISEGNO — mentre il suo docstring dichiara |
