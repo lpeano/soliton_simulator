@@ -14389,3 +14389,20 @@ Ogni dato di `db_era2/` ha ### **il suo TIMBRO accanto**, col campo `versione_da
 ### ⛔ **E UN MODULO NUOVO, non per gusto:** `motore.py` ha superato **il tetto di `700` righe** quando il flusso e' entrato, e la regola dice **oltre, SI DIVIDE, NON SI ALLUNGA**. ### ✅ **E il taglio e' quello giusto:** in `saturazione.py` **le funzioni del GENERATORE** *(la forma della legge, che vive in tabella)*, in `motore.py` **il motore che le applica**. ### **E sono PURE: il collaudo le prova sui NUMERI, senza costruire un motore.**
 
 ### 📌 **E la suite e' tutta verde: `48` su `48`**, `pre-commit` **`135.5` s su `500`** *(`27%`)*. ### ⚠ **E `[[P-ES1]]` mi ha chiesto di dichiarare anche questo passo scritto a mano**, come per la moneta: **non integra, applica il flusso ESATTO** -- e il collaudo lo prova **nei due versi**.
+
+---
+
+## IL LIMITE DICHIARATO DEL PRESIDIO SULLO STOP SI CHIUDE — **per osservazione, non per lettura** *(2026-10-12)*
+
+### ⚠ **AVEVO DICHIARATO UN LIMITE, e lo avevo scritto nel file e nella voce:** *«non ho trovato il nome esatto del campo d'uscita che blocca uno `Stop`»*, e *«il collaudo prova che lo script DECIDE bene, **non che Claude Code onori quel campo**»*.
+
+### ✅ **ADESSO SI SA, e si sa in DUE modi — entrambi OSSERVATI e non dedotti.**
+
+| | che cosa e' accaduto | che cosa chiude |
+|---|---|---|
+| `1` | provando a chiudere un turno **con lavoro pronto**, Claude Code **ha RIFIUTATO lo stop** e ha riportato **il motivo del hook alla lettera** | ### **almeno UNA delle forme che lo script emette viene onorata**, e il presidio ### **IMPEDISCE davvero: non e' piu' una tenda** |
+| `2` | in un turno successivo il hook ha ricevuto **`stop_hook_active = true`**, e lo script **ha restituito successo** | ### **il contratto trovato nel binario e' VERO**, e ### **il ramo che avevo aggiunto SOLO perche' avevo trovato quella stringa SI ESEGUE PER DAVVERO** |
+
+### ⭐ **E il secondo chiude un cerchio che vale la pena dire:** quel ramo esiste perche' **sono andato a leggere le stringhe del binario**, e il braccio `(3-ter)` del collaudo lo copre. ### **Oggi copre un caso che ACCADE, non uno che immaginavo** — e senza quella lettura avrei cablato un presidio **che viola il contratto dello strumento su cui gira**.
+
+### ⛔ **CHE COSA RESTA NON SAPUTO, e lo lascio scritto:** **QUALE** delle forme emesse sia quella onorata. Lo script le emette **insieme**, e dal fuori **non si distingue**. ### ⚠ **Per saperlo servirebbe emetterne una per volta, cioe' SPEGNERE IL PRESIDIO PER UN TURNO.** ### **Non lo faccio: il presidio funziona, e il prezzo di saperlo sarebbe non averlo.**
