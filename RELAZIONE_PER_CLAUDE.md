@@ -14060,3 +14060,23 @@ Ogni dato di `db_era2/` ha ### **il suo TIMBRO accanto**, col campo `versione_da
 ### ⛔ **E UN TERZO DIFETTO, DENTRO LA MIA CURA, preso da un altro presidio.** Avevo fatto correggere a `storico-commit` cio' che i log smentiscono -- giusto, perche' *<<non si indovina: si LEGGE DAI LOG>>* e' **il principio di quella funzione**. Ma scriveva il file **solo se aveva RIEMPITO qualcosa**: una **correzione** veniva **STAMPATA e non SCRITTA**. ### ⚠ **Cioe' il comando diceva <<CORRETTO>> e il file restava sbagliato**, e l'ho visto **perche' il validatore ha rifiutato lo stesso errore subito dopo** -- un presidio ha preso **il buco della cura di un altro presidio.**
 
 ### 📌 **I NUMERI.** `python csv/indice.py collaudo`: **`48` su `48`**, coi **due bracci nuovi** -- `aggiorna` **rifiuta** `--commit`, **e senza `--commit` il rifiuto non e' quello** *(senza il secondo, il primo passerebbe anche se `aggiorna` rifiutasse SEMPRE)*. ### ⭐ **E il braccio POTEVA fallire: fino a oggi quel flag era accettato.** Il validatore intero: **TUTTO A POSTO**, `996` voci.
+
+---
+
+## IL SOTTO-PEZZO `5a`: LA STRUTTURA COMPATTA, E UNA SCOPERTA CHE TOGLIE UN ARRAY INVECE DI AGGIUNGERLO *(2026-10-12)*
+
+### ✅ **PRIMO SOTTO-PEZZO DEL MOTORE, e il censimento non mi ha lasciato inventare niente.** `primo_ordine/incidenza.py` tiene **quattro** cose: `ii`/`jj` come vettori paralleli, `nodo[2m]`, e `offset[n+1]`/`estremita[2m]` che sono la `CSR`. La voce e' **`[[MOTORE-INCIDENZA]]`**.
+
+### ⛔ **E LA `CSR` E' NODO -> SUE ESTREMITA', non nodo -> nodi vicini.** Il motivo e' **la fisica**: il Grover di un nodo mescola **le estremita' che stanno su quel nodo**, e il grado e' `offset[v+1] - offset[v]`. I nodi vicini sono **derivati** *(`nodo[compagna(h)]`)*, **non tenuti**. ### E **nessuna matrice sparsa**, anche questo per la fisica: lo spostamento con trasporto e' **una PERMUTAZIONE**, non un prodotto matrice-vettore -- e una permutazione vuole **un array di indici**.
+
+### ⭐ **LA COSA CHE NON MI ASPETTAVO, e TOGLIE un array invece di aggiungerlo.** Il censimento prevedeva **due** derivati, `nodo[h]` e `compagna[h]`. Con la numerazione **arco `k` -> estremita' `2k` e `2k+1`**, la compagna e' **`h ^ 1`**: un'identita' aritmetica. ### ⛔ **E la differenza non e' <<un array in meno>>: e' CHE NON PUO' DIVERGERE.** Un array derivato tenuto accanto al grafo **puo'** restare indietro, e allora **serve disciplina**; un'identita' **non puo'**, e la disciplina **non serve**. ### ⚠ **Vale solo se la numerazione resta quella, e c'e' un braccio che lo pretende DOPO OGNI CRESCITA.**
+
+### ⛔ **IL PUNTO UNICO DI SCRITTURA, e che cosa TORNA.** `cresci()` e' l'unica funzione che cambia `m`, e **ricostruisce i derivati da `(ii, jj)`** invece di aggiornarli a pezzi -- aggiornarli a pezzi vorrebbe dire **DUE verita' sullo stesso fatto**. ### ⭐ **E torna LA PERMUTAZIONE delle estremita'**, perche' quando gli archi si compattano le estremita' **si rinumerano** e lo spinore **va permutato con loro**: se non la tornasse, chi tiene lo stato dovrebbe **ricalcolarla**, cioe' ci sarebbero **due verita' sulla stessa rinumerazione**. ### Le estremita' degli archi **morti** valgono **`-1`**: ### **un indice impossibile e' piu' onesto di uno plausibile**, perche' usarlo per sbaglio **ALZA** invece di leggere il dato di un altro arco.
+
+### 📌 **I NUMERI.** `python primo_ordine/_collauda_incidenza.py`: **`24` su `24`**, di cui **`7`** casi che **DEVONO fallire**, ciascuno verificato **sulla chiave giusta**. Il braccio che conta e' **l'invariante dopo ogni crescita**: i derivati si ricalcolano da `(ii, jj)` e si confrontano **al bit** -- non su una proprieta', perche' ### **una proprieta' puo' valere anche per una struttura sbagliata.** Il costo di una ricostruzione, **misurato**: `0.092` ms a `n=100`, `0.160` a `1000`, `2.152` a `10000`.
+
+### ⚠ **E UN BRACCIO MI HA CORRETTO SUBITO:** il caso del **doppione** alzava, ma **non per la chiave che avevo scritto io** -- avevo scritto `doppio` e il grafo dice `archi DOPPI`. ### **Un braccio che accetta un'eccezione qualunque non sa di quale eccezione si tratta**, e questo me l'ha detto al primo giro.
+
+### ⚠ **E `P-MOD` ME NE HA PRESO UN ALTRO:** `incidenza.py` importa `_presidio` nel suo `main`, e **non l'avevo dichiarato in mappa**. ### **La mappa dice cio' che e' PREVISTO**, e un import che nessuno ha previsto e' proprio quello che degrada la modularita' senza che nessuno lo decida.
+
+### ✅ **E LA CORREZIONE DEL MARCATORE E' DENTRO QUESTO COMMIT, come il task history diceva:** `[[H-STOP-CODA]]` adesso segna il pezzo `5` fatto quando esiste **`primo_ordine/_collauda_memoria.py`**, cioe' **il suo collaudo di accettazione**, non `motore.py` che e' solo il sotto-pezzo `5b`.

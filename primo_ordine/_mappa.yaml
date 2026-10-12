@@ -78,6 +78,14 @@ moduli:
     responsabilita: il collaudo del generatore, e il ramo end-to-end delle dimensioni
     importa: [_genera, _presidio]
 
+  - nome: incidenza.py
+    responsabilita: la struttura compatta delle estremita- d-arco, e il suo punto unico
+    importa: [_presidio, grafo]
+
+  - nome: _collauda_incidenza.py
+    responsabilita: il collaudo della struttura compatta, e i sette casi che devono fallire
+    importa: [_presidio, incidenza]
+
   - nome: crescita.py
     responsabilita: la crescita del grafo, regola NON-H col suo bilancio
     importa: []

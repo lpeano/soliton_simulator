@@ -12,7 +12,7 @@
 | `FISICA` | `2` | 85 |
 | `FISICA` | `ENTRAMBE` | 17 |
 | `INFRASTRUTTURA` | `1` | 39 |
-| `INFRASTRUTTURA` | `2` | 16 |
+| `INFRASTRUTTURA` | `2` | 17 |
 | `INFRASTRUTTURA` | `ENTRAMBE` | 24 |
 | `METODO` | `1` | 156 |
 | `METODO` | `2` | 16 |
@@ -482,6 +482,7 @@
 | `MITOSI-SOGLIA-GRAD` | DIFETTO | FISICA | 1 | ### **CHIUSA** |  | la soglia di mitosi si abbassa col gradiente di tempo proprio: ampiezza 0.3 e ta |
 | `MITOSI-TASSO` | FRONTE | FISICA | 1 | ### **SOSPESA** |  | APERTA il 2026-09-26 (era una voce PERSA: viveva senza ID) / CHE IL TASSO DI MIT |
 | `MODELLO-MINIMO` | FRONTE | FISICA | 2 | ### **AGENDA** |  | un modello semplice (spinore, grafo, LAM) da costruire DOPO il simulatore comple |
+| `MOTORE-INCIDENZA` | CURA | INFRASTRUTTURA | 2 | ### **AGENDA** |  | la struttura compatta delle estremita d arco, col punto unico di scrittura |
 | `N1` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 15 volte, MAI definito in un registro) [N1] |
 | `N1b` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 8 volte, MAI definito in un registro) [N1b] |
 | `N2` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 17 volte, MAI definito in un registro) [N2] |

@@ -3306,3 +3306,20 @@ etichette rimosse, con ### **`0` persi, `0` doppi, `0` conflitti**.
 | ### ⭐ **e il braccio `(7)` LEGGE quella registrazione** | cosi' un percorso sbagliato e' **un collaudo ROSSO**, non **un hook che falliva a vuoto a ogni turno senza dirlo** |
 | ### ⛔ **perche' NON chiama `_presidio.avvia()`** | `avvia()` **stampa il timbro su stdout**, e qui **stdout e' il canale JSON del hook**. ### **La riconfigurazione si', il timbro solo nel collaudo**, e l'uscita e' **ASCII puro** -- provato dal braccio `(5)` |
 | ### ⚠ **e il promemoria NON sta nel repo** | il mandato dice *<<legge soltanto>>*: sta in `%TEMP%`, sovrascrivibile con `CLAUDE_STOP_MEMO` *(che e' come il collaudo lo prova col processo)* |
+
+---
+
+## IL SOTTO-PEZZO `5a` DEL MOTORE -- LA STRUTTURA COMPATTA *(2026-10-12)*
+
+| file | BLOB *(`sha1` dei BYTE grezzi)* | che cosa misura | il collaudo |
+|---|---|---|---|
+| `primo_ordine/incidenza.py` | `35232b96` | ### **`offset` + le estremita' raggruppate per nodo**, la capacita' **col raddoppio**, e ### **il PUNTO UNICO DI SCRITTURA**. ### ⭐ **E la compagna di un'estremita' NON e' un array: e' `h ^ 1`** | `python primo_ordine/incidenza.py` *(il costo)* |
+| `primo_ordine/_collauda_incidenza.py` | `629a1836` | ### **l'invariante DOPO OGNI CRESCITA**: i derivati ricalcolati da `(ii, jj)` e confrontati **al bit** | ### **`24`/`24`**, di cui **`7`** casi che DEVONO fallire |
+
+| | |
+|---|---|
+| **IL COMANDO, verbatim** | `python primo_ordine/_collauda_incidenza.py` |
+| **e la misura del costo** | `python primo_ordine/incidenza.py` -- `0.092` ms a `n=100`/`300` archi, `0.160` ms a `1000`/`3000`, `2.152` ms a `10000`/`30000` |
+| ### ⛔ **perche' NESSUNA matrice sparsa** | lo spostamento con trasporto e' **una PERMUTAZIONE delle estremita'**, non un prodotto matrice-vettore: una permutazione vuole **un array di indici**, e una sparsa porterebbe una struttura **che nessuno usa** |
+| ### ⭐ **la cosa che TOGLIE un array** | il censimento prevedeva **due** derivati, `nodo[h]` e `compagna[h]`. Con la numerazione *(arco `k` -> estremita' `2k`, `2k+1`)* la compagna e' **`h ^ 1`**. ### **E la differenza non e' <<un array in meno>>: e' che NON PUO' DIVERGERE** |
+| ### ⚠ **il prezzo del raddoppio, dichiarato** | tiene **fino al doppio** della memoria utile, e `byte()` conta **la CAPACITA'** e non gli archi vivi: ### **dichiarare i vivi direbbe un numero piu' bello e falso** |

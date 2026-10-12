@@ -82,6 +82,12 @@ COLLAUDI = (
     ("lo schema della tabella", "primo_ordine/leggi/_collauda_schema.py",
      "pre-commit"),
     ("il generatore", "primo_ordine/_collauda_genera.py", "pre-commit"),
+    # ### ⭐ **IL SOTTO-PEZZO `5a` DEL MOTORE: la struttura compatta.** ### Il
+    # ### braccio che conta e- ### **l-invariante DOPO OGNI CRESCITA**: i derivati si
+    # ### ricalcolano da `(ii, jj)` e si confrontano ### **al bit** -- cosi- non possono
+    # ### diventare ### **una seconda verita- accanto al grafo.**
+    ("la struttura compatta delle estremita-",
+     "primo_ordine/_collauda_incidenza.py", "pre-commit"),
     # ### ⭐ **LO SCHEMA DELLA CAMMINATA, nei DUE VERSI** *(pezzo `2` del
     # ### simulatore)*: i tipi sulle estremita-, i pezzi unitari, i flussi, e
     # ### l-### **ordine di composizione con le ripetizioni AMMESSE.**

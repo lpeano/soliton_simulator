@@ -98,6 +98,14 @@ FILE_FISICA = (
     'primo_ordine/driver.py',
     'primo_ordine/_genera.py',
     'primo_ordine/_genera_stato.py',
+    # ### LA STRUTTURA COMPATTA DELLE ESTREMITA- D-ARCO *(sotto-pezzo `5a` del
+    # ### motore)*: `offset` piu- le estremita- raggruppate per nodo, la capacita-
+    # ### col raddoppio, e ### **il PUNTO UNICO DI SCRITTURA.**
+    # ### ⭐ **E la compagna di un-estremita- NON e- un array: e- `h ^ 1`** --
+    # ### un-identita- aritmetica ### **non puo- divergere dal grafo**, un array
+    # ### derivato tenuto accanto si-.
+    'primo_ordine/incidenza.py',
+    'primo_ordine/_collauda_incidenza.py',
     # ### IL COSTRUTTO `@rif` *(punto `14`)*: ### **byte-inerte**, e il suo
     # ### collaudo lo verifica ### **con `is`.**
     'primo_ordine/_rif.py',

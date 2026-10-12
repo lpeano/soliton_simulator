@@ -79,9 +79,18 @@ except Exception:                                             # noqa: BLE001
 # ### e' la stessa: ### **un elenco dichiarato si legge**, e un pezzo che spariva da un
 # ### `glob` ### **spariva in silenzio.**
 # ### Ogni riga: `(nome del pezzo, il file che ESISTE quando il pezzo e' fatto)`.
+# ### ⛔ **E IL MARCATORE E- IL COLLAUDO DI ACCETTAZIONE, NON IL PRIMO FILE** --
+# ### correzione del `2026-10-12`, trovata progettando il pezzo `5`. ### Prima il pezzo
+# ### `5` era segnato FATTO quando esisteva `primo_ordine/motore.py`: ma quello e- il
+# ### sotto-pezzo `5b`, e dopo vengono il checkpoint e i collaudi della memoria.
+# ### ### **Cioe- il presidio lasciava chiudere il turno col pezzo a META-**, che e-
+# ### ### **la forma del difetto che esiste per impedire.**
+# ### ⭐ **E VALE IN GENERALE: un pezzo e- fatto quando il suo COLLAUDO esiste**, non
+# ### quando esiste il suo codice.
 PEZZI = (
     ("il pezzo 5 del simulatore: IL MOTORE (doppio contenitore, CSR, punto unico di "
-     "scrittura, checkpoint)", "primo_ordine/motore.py"),
+     "scrittura, checkpoint) -- il suo collaudo di accettazione e- la MEMORIA",
+     "primo_ordine/_collauda_memoria.py"),
     ("il pezzo 6 del simulatore: IL CRITERIO DI PASSAGGIO (il generato riproduce il "
      "banco congelato al bit)", "primo_ordine/_collauda_passaggio.py"),
     ("la derivazione di SPAZIO-CHE-NASCE (solo task history, nessun codice)",
