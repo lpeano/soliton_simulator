@@ -111,9 +111,23 @@ PEZZI = (
     # ### passaggio pretende che il generato ### **riproduca il banco congelato**, e per
     # ### farlo serve sapere ### **di che tipo e- il vuoto** *(la tabella lo dice reale, il
     # ### banco lo tiene complesso)* e ### **da dove nasce la geometria** nell-era `2`.
+    # ### ⚠ **TERZA VOLTA CHE QUESTA LISTA INVECCHIA, e lo scrivo invece di
+    # ### aggiustarla in silenzio.** La prima: non conteneva il confronto. La seconda: il
+    # ### marcatore del pezzo `5` era il suo PRIMO FILE invece del suo COLLAUDO. La
+    # ### terza: il bloccante del pezzo `6` era ### **la domanda su `phi`, che Luca ha
+    # ### CHIUSO** -- e appena chiusa il presidio ha ricominciato a nominare il pezzo
+    # ### `6`, che invece aspetta ### **un-ALTRA risposta** *(le condizioni iniziali,
+    # ### l-unico `CONFLITTO` del confronto)*.
+    # ### ⛔ **E LA LEZIONE NON E- <<derivare la lista>>:** derivarla la farebbe
+    # ### ### **coincidere sempre**, cioe- il presidio ### **non direbbe piu- niente.**
+    # ### ⭐ **La lezione e- che IL BLOCCANTE DI UN PEZZO CAMBIA quando una
+    # ### domanda si chiude**, e va riguardato ### **a ogni risposta di Luca.**
+    ("la SOGLIA DELLA MEMORIA a 5x con le tre riduzioni sicure, e lo stato iniziale "
+     "delle estremita- nuove come POSTO APERTO (mandato di Luca: decide `m1`)",
+     "doc/TASK_HISTORY/2026-10-12_soglia_memoria.md", ()),
     ("il pezzo 6 del simulatore: IL CRITERIO DI PASSAGGIO (il generato riproduce il "
      "banco congelato al bit)", "primo_ordine/_collauda_passaggio.py",
-     ("DOMANDA-PHI-REALE-O-COMPLESSO",)),
+     ("DOMANDA-CONDIZIONI-INIZIALI-IN-TABELLA",)),
     ("la derivazione di SPAZIO-CHE-NASCE (solo task history, nessun codice)",
      "doc/TASK_HISTORY/2026-10-13_spazio_che_nasce.md",
      ("DOMANDA-QUALE-SEGNO",)),
