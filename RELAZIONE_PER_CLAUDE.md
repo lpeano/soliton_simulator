@@ -14466,3 +14466,47 @@ Ogni dato di `db_era2/` ha ### **il suo TIMBRO accanto**, col campo `versione_da
 ### ⚠ **E UN'ALTERNATIVA CHE NON RACCOMANDO E DICHIARO:** si potrebbe **trovare** una corrente risolvendo il problema di flusso sul grafo *(l'esistenza e' garantita)*. ### **Ma la soluzione NON E' UNICA** -- si puo' aggiungere qualunque circolazione sui cicli -- e ### **una corrente non determinata non e' una corrente locale in senso fisico: e' una scelta travestita da misura.**
 
 ### ⛔ **E UN BUCO DELLO SCHEMA, trovato derivando:** `azione` e' il campo che dice **se un pezzo attraversa**, e ### **un flusso non lo ha.** Per la saturazione ho dovuto dedurlo **dal suo GENERATORE**, cioe' **leggendo una formula invece di un campo** -- che e' esattamente cio' che `[[DECISIONE-VUOLE-UN-CAMPO]]` vieta. Sta in `[[DOMANDA-FLUSSO-SENZA-AZIONE]]`.
+
+---
+
+## `P4`: LA DERIVAZIONE DELLA `U` DINAMICA -- E UN VINCOLO DI LUCA RISOLVEVA IN ANTICIPO LA TENSIONE CON `A1` *(2026-10-12)*
+
+### ⭐ **PRIMA LA COSA CHE MI HA SORPRESO.** Stavo per scrivere: *<<un termine cinetico per `U` vuole una costante d'accoppiamento, e `A1` la vieta>>*. ### ✅ **Ma `[[U-ARCO-DINAMICA]]` lo diceva GIA':** *<<la scala dell'accoppiamento SOLO RELAZIONALE (rispetto al vuoto locale), MAI un numero>>*. ### **La tensione era gia' risolta da Luca, e l'ho trovata perche' ho letto la voce PRIMA di derivare.** ### ⚠ **Se avessi derivato prima, l'avrei presentata come una mia scoperta.**
+
+### ✅ **LA COPPIA CONIUGATA, e il conto torna:** `U(2)` ha **quattro** generatori, e `U_k = exp(i theta_k) . V_k` da' **`(theta_k, p_k)`** per `U(1)` e **`(V_k, L_k^a)`** per `SU(2)` -- in tutto ### **`4` coordinate e `4` momenti per arco.** ### ⚠ **Se non coincidesse coi quattro generatori, la parametrizzazione starebbe perdendo o inventando gradi di liberta'.** ### E i momenti vivono **sull'ARCO**, non sull'estremita': ### **confonderli raddoppierebbe lo stato di `U`.**
+
+### ⭐ **LA SCALA VIENE DAL VUOTO DELL'ARCO**, e non e' una scelta di comodo: sull'arco **non c'e' nient'altro di relazionale** -- lo spinore vive sulle estremita' ed e' **materia** *(usarlo renderebbe l'energia di `U` dipendente dalla materia che la sorgente)*, e **il grado e' del NODO**.
+
+### ✅ **E LA `C` IMPONE L'ESPONENTE, non lo scelgo io.** La `C` richiede `U -> sigma_y U* sigma_y`, cioe' per `U(1)` ### **`theta -> -theta`: la fase e' DISPARI sotto `C`**, quindi `p -> -p`. ### **Allora `p^2` e' PARI e l'energia e' invariante -- e un termine LINEARE nei momenti ROMPEREBBE `C`.**
+
+### ✅ **E LA SORGENTE VIENE DA UNA VARIAZIONE, non da un innesto:** la derivata del termine dello spostamento rispetto a `theta_k` e' la **corrente di carica**, rispetto a `V_k` la **corrente di spin**. ### **La sorgente E' la derivata del termine che `U` ha GIA'.**
+
+### ✅ **IL RUOLO DEL VUOTO, che la voce chiede di DICHIARARE, ha due meta':** `phi` ### **NON e' una sorgente** *(e' **neutro**, non trasportato, quindi la sua variazione rispetto a `U` e' **zero**)*; ### **ma `phi` E' LA SCALA.** ### ⭐ **Il vuoto non spinge `U`: ne decide l'INERZIA.**
+
+### ⛔ **E IL PROBLEMA VERO E' LO STESSO DI `P3`: il termine delle OLONOMIE.** L'olonomia di un arco solo **non e' invariante di gauge**; quella su un **ciclo** si'. ### ⛔ **Ma <<quali cicli>> e' una SCELTA, e una base di cicli NON E' UNICA** -- cioe' **una somma su una base non unica non e' un osservabile**, ### **esattamente il difetto che `P3` ha trovato per la corrente.** ### ⚠ **Non raccomando una base arbitraria:** il candidato e' **`geometria.cicli_corti`** *(determinati a meno di pareggi)*, e **se nemmeno quelli bastano, il termine magnetico non e' un osservabile.**
+
+### 📌 **LE QUATTRO FORME VANNO A TE**, in `[[DOMANDA-U-DINAMICA-LE-FORME]]`, con la raccomandazione **separata**. ### ⛔ **E nessun codice: il mandato dice <<il codice dopo la sua risposta>>.**
+
+### ⚠ **E `9-ter` chiede di contarle: questa derivazione AGGIUNGE DUE LEGGI** *(l'energia di `U` e la sua evoluzione)*, e ### **non si poteva togliere niente in cambio.**
+
+---
+
+## `P4`: LA DERIVAZIONE DELLA `U` DINAMICA -- E UN VINCOLO DI LUCA RISOLVEVA IN ANTICIPO LA TENSIONE CON `A1` *(2026-10-12)*
+
+### ⭐ **PRIMA LA COSA CHE MI HA SORPRESO.** Stavo per scrivere: *<<un termine cinetico per `U` vuole una costante d'accoppiamento, e `A1` la vieta>>*. ### ✅ **Ma `[[U-ARCO-DINAMICA]]` lo diceva GIA':** *<<la scala dell'accoppiamento SOLO RELAZIONALE (rispetto al vuoto locale), MAI un numero>>*. ### **La tensione era gia' risolta da Luca, e l'ho trovata perche' ho letto la voce PRIMA di derivare.** ### ⚠ **Se avessi derivato prima, l'avrei presentata come una mia scoperta.**
+
+### ✅ **LA COPPIA CONIUGATA, e il conto torna:** `U(2)` ha **quattro** generatori, e `U_k = exp(i theta_k) . V_k` da' **`(theta_k, p_k)`** per `U(1)` e **`(V_k, L_k^a)`** per `SU(2)` -- in tutto ### **`4` coordinate e `4` momenti per arco.** ### ⚠ **Se non coincidesse coi quattro generatori, la parametrizzazione starebbe perdendo o inventando gradi di liberta'.** ### E i momenti vivono **sull'ARCO**, non sull'estremita': ### **confonderli raddoppierebbe lo stato di `U`.**
+
+### ⭐ **LA SCALA VIENE DAL VUOTO DELL'ARCO**, e non e' una scelta di comodo: sull'arco **non c'e' nient'altro di relazionale** -- lo spinore vive sulle estremita' ed e' **materia** *(usarlo renderebbe l'energia di `U` dipendente dalla materia che la sorgente)*, e **il grado e' del NODO**.
+
+### ✅ **E LA `C` IMPONE L'ESPONENTE, non lo scelgo io.** La `C` richiede `U -> sigma_y U* sigma_y`, cioe' per `U(1)` ### **`theta -> -theta`: la fase e' DISPARI sotto `C`**, quindi `p -> -p`. ### **Allora `p^2` e' PARI e l'energia e' invariante -- e un termine LINEARE nei momenti ROMPEREBBE `C`.**
+
+### ✅ **E LA SORGENTE VIENE DA UNA VARIAZIONE, non da un innesto:** la derivata del termine dello spostamento rispetto a `theta_k` e' la **corrente di carica**, rispetto a `V_k` la **corrente di spin**. ### **La sorgente E' la derivata del termine che `U` ha GIA'.**
+
+### ✅ **IL RUOLO DEL VUOTO, che la voce chiede di DICHIARARE, ha due meta':** `phi` ### **NON e' una sorgente** *(e' **neutro**, non trasportato, quindi la sua variazione rispetto a `U` e' **zero**)*; ### **ma `phi` E' LA SCALA.** ### ⭐ **Il vuoto non spinge `U`: ne decide l'INERZIA.**
+
+### ⛔ **E IL PROBLEMA VERO E' LO STESSO DI `P3`: il termine delle OLONOMIE.** L'olonomia di un arco solo **non e' invariante di gauge**; quella su un **ciclo** si'. ### ⛔ **Ma <<quali cicli>> e' una SCELTA, e una base di cicli NON E' UNICA** -- cioe' **una somma su una base non unica non e' un osservabile**, ### **esattamente il difetto che `P3` ha trovato per la corrente.** ### ⚠ **Non raccomando una base arbitraria:** il candidato e' **`geometria.cicli_corti`** *(determinati a meno di pareggi)*, e **se nemmeno quelli bastano, il termine magnetico non e' un osservabile.**
+
+### 📌 **LE QUATTRO FORME VANNO A TE**, in `[[DOMANDA-U-DINAMICA-LE-FORME]]`, con la raccomandazione **separata**. ### ⛔ **E nessun codice: il mandato dice <<il codice dopo la sua risposta>>.**
+
+### ⚠ **E `9-ter` chiede di contarle: questa derivazione AGGIUNGE DUE LEGGI** *(l'energia di `U` e la sua evoluzione)*, e ### **non si poteva togliere niente in cambio.**
