@@ -2,7 +2,7 @@
 COLLAUDO DEL PRESIDIO DELL'INDICE -- i DUE versi   (2026-09-26)
 ================================================================================================
 
-  indice: 1214 fra id e alias      esclusi: 127      forme nude AMBIGUE: 0
+  indice: 1214 fra id e alias      esclusi: 132      forme nude AMBIGUE: 0
 
   sentinelle scelte ORA e verificate ignote: `QX700`, `QX701`
 
