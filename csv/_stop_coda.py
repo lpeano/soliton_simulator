@@ -128,6 +128,24 @@ PEZZI = (
     ("il pezzo 6 del simulatore: IL CRITERIO DI PASSAGGIO (il generato riproduce il "
      "banco congelato al bit)", "primo_ordine/_collauda_passaggio.py",
      ("DOMANDA-CONDIZIONI-INIZIALI-IN-TABELLA",)),
+    # ### ⛔ **QUARTA VOLTA CHE QUESTA LISTA INVECCHIA -- E LA PRIMA NEL VERSO
+    # ### PEGGIORE.** Le prime tre nominavano ### **il pezzo sbagliato**; questa
+    # ### ### **mi ha lasciato FERMARE mentre c-era da fare**, dicendo *<<la coda e-
+    # ### BLOCCATA>>* quando il mandato su energia e mitosi aveva ### **lavoro pronto.**
+    # ### ⭐ **E il verso conta: un presidio troppo severo si fa notare, uno
+    # ### troppo permissivo NO** -- e questo esiste proprio per impedire che io mi fermi
+    # ### quando c-e- da fare.
+    # ### ⚠ **La causa e- sempre la stessa:** un mandato nuovo porta pezzi
+    # ### nuovi, e ### **la lista non si aggiorna da sola.** ### La lezione non e-
+    # ### <<derivarla>> *(coinciderebbe sempre)*: e- che ### **un mandato nuovo si
+    # ### registra QUI nello stesso giro in cui si registra nella coda.**
+    ("il mandato ENERGIA E MITOSI, parte 0: REGISTRARE le decisioni (energia promossa "
+     "provvisoria, e chi paga la nascita) -- nessuna dipendenza",
+     "doc/TASK_HISTORY/2026-10-12_energia_e_mitosi.md", ()),
+    # ### ✅ **E IL FLUSSO DI SATURAZIONE E- SBLOCCATO:** era fermo ### **solo
+    # ### sul tipo di `phi`**, e Luca ha deciso che e- complesso.
+    ("il flusso di SATURAZIONE nel motore (`P1` del mandato energia e mitosi), che era "
+     "bloccato SOLO dal tipo di phi", "primo_ordine/_collauda_saturazione.py", ()),
     ("la derivazione di SPAZIO-CHE-NASCE (solo task history, nessun codice)",
      "doc/TASK_HISTORY/2026-10-13_spazio_che_nasce.md",
      ("DOMANDA-QUALE-SEGNO",)),
