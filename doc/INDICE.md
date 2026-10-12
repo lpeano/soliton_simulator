@@ -9,7 +9,7 @@
 | `DOCUMENTAZIONE` | `2` | 1 |
 | `DOCUMENTAZIONE` | `ENTRAMBE` | 8 |
 | `FISICA` | `1` | 343 |
-| `FISICA` | `2` | 85 |
+| `FISICA` | `2` | 86 |
 | `FISICA` | `ENTRAMBE` | 17 |
 | `INFRASTRUTTURA` | `1` | 39 |
 | `INFRASTRUTTURA` | `2` | 17 |
@@ -281,6 +281,7 @@
 | `DOMANDA-LAMBDA-GRANDEZZA` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | lambda: su quale grandezza si misura, e da dove viene il suo valore? |
 | `DOMANDA-PASSO-FRAZIONARIO-O-ASINCRONO` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | pezzi frazionari o tick asincroni, e l-invarianza locale dei secondi NON e- dimo |
 | `DOMANDA-PESO-ARCO-COME-MEMORIA` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | il peso d-arco come memoria dinamica: la geometria nasce dalla dinamica? |
+| `DOMANDA-PHI-REALE-O-COMPLESSO` | DECISIONE | FISICA | 2 | ### **AGENDA** | SI | la tabella dichiara phi_h reale, il banco congelato lo tiene complesso: quale de |
 | `DOMANDA-PRIMA-LEGARE-POI-MISURARE` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | senza stato legato tre letture non sono decidibili: si cerca prima un legame? |
 | `DOMANDA-QUALE-FORMA-FISSA-CS` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | quale forma del vuoto fissa cs: nessuna delle tre e- libera da tutti i difetti |
 | `DOMANDA-QUALE-SCENA-3D-PRINCIPALE` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | quale scena 3D fa da principale, se nessuna delle due provate e- isotropa? |

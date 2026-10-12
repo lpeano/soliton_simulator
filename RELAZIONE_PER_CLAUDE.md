@@ -14080,3 +14080,27 @@ Ogni dato di `db_era2/` ha ### **il suo TIMBRO accanto**, col campo `versione_da
 ### ⚠ **E `P-MOD` ME NE HA PRESO UN ALTRO:** `incidenza.py` importa `_presidio` nel suo `main`, e **non l'avevo dichiarato in mappa**. ### **La mappa dice cio' che e' PREVISTO**, e un import che nessuno ha previsto e' proprio quello che degrada la modularita' senza che nessuno lo decida.
 
 ### ✅ **E LA CORREZIONE DEL MARCATORE E' DENTRO QUESTO COMMIT, come il task history diceva:** `[[H-STOP-CODA]]` adesso segna il pezzo `5` fatto quando esiste **`primo_ordine/_collauda_memoria.py`**, cioe' **il suo collaudo di accettazione**, non `motore.py` che e' solo il sotto-pezzo `5b`.
+
+---
+
+## UNA DOMANDA PER LUCA, TROVATA SCRIVENDO IL MOTORE: IL VUOTO E' REALE IN TABELLA E COMPLESSO NEL BANCO *(2026-10-12)*
+
+### ⛔ **`primo_ordine/leggi/leggi.yaml` riga `98` dichiara `phi_h` di tipo `reale_estremita`. Il banco congelato lo tiene COMPLESSO**, e le prove sono **tre e indipendenti**, lette **dal codice** e non dai commenti:
+
+| | la prova | dove |
+|---|---|---|
+| `1` | il vuoto **NASCE** complesso: `np.zeros(2 * sc["m"], dtype=complex)` | `proto_camminata/vuoto3.py:45` |
+| `2` | il Grover scalare accumula in un array **`complex`**, e `Lambda` e' **somma di `np.abs(phi)**2`** | `vuoto3.py:68` e `:62` |
+| `3` | ### il flusso esatto torna **`phi * np.exp(-1j * fas)`**, cioe' ### **DA' A `phi` UNA FASE** | `saturazione3.py:117` |
+
+### ⛔ **E UNA FASE SU UN REALE NON ESISTE.** ### ⚠ **Perche' BLOCCA, e non e' una pedanteria di tipi:** il criterio di passaggio del pezzo `6` pretende che il generato **riproduca il banco al bit**; con `phi` reale la riga `(3)` **non e' scrivibile**, quindi il pezzo `6` fallirebbe ### **per un disallineamento dello SCHEMA, non per la fisica.**
+
+### ⭐ **E LA TABELLA SI CONTRADDICE DA SOLA:** la scheda di `Lambda` dice *«somma del modulo quadro di `phi_h`»*, e il modulo quadro di un reale **e' il quadrato** -- scrivere *<<modulo quadro>>* ha senso come enunciato **solo se `phi` e' complesso.**
+
+### ⚠ **LA MIA RACCOMANDAZIONE, e NON e' una decisione:** il tipo va portato a **complesso sull'estremita'**, perche' **tre punti indipendenti del banco piu' la scheda di `Lambda` lo pretendono, e NESSUNO pretende il reale**. ### ⛔ **Ma il tipo di una variabile di stato e' la FORMA di una legge, quindi decide Luca:** un vuoto reale e un vuoto complesso sono **due fisiche**, non due implementazioni -- il complesso porta **una fase per estremita'**, cioe' **un grado di liberta' in piu'**, e quella fase e' **cio' su cui la saturazione agisce**.
+
+### 📌 **COSA NON SO, e lo scrivo:** se il reale in tabella fosse **una SCELTA di Luca** per togliere quel grado di liberta', allora **il banco non e' il riferimento per `phi`** e il criterio di passaggio va scritto **su `psi` soltanto**. ### **E quella e' una decisione piu' grossa**, perche' cambierebbe **che cosa vuol dire <<riprodurre il banco>>.** Sta in **`[[DOMANDA-PHI-REALE-O-COMPLESSO]]`**, priorita' **CRITICA**.
+
+### ✅ **E IL LAVORO NON SI FERMA:** la regola dice che una decisione di fisica non presa va in `DA_DECIDERE_LUCA` e, **se c'e' altro lavoro indipendente, si continua con quello**. Il contenitore del motore e i **tre operatori su `psi`** *(Grover, moneta di spin, spostamento con trasporto)* **non dipendono da questa risposta**.
+
+### ⭐ **E UNA BUONA NOTIZIA, verificata e non assunta:** la numerazione delle estremita' del banco **COINCIDE con la mia**. `camminata2.py` fa `psi.reshape(-1, 2, 2)`, cioe' *(arco, lato, componente)* -- che e' **esattamente** *<<l'arco `k` porta le estremita' `2k` e `2k+1`>>*. ### **Il sotto-pezzo `5a` e' allineato al banco PER COSTRUZIONE**, e non per fortuna.

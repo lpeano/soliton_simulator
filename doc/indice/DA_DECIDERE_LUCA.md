@@ -16,12 +16,13 @@
 
 ## LE ALTRE, per priorita-
 
-### `CRITICA` — **4**
+### `CRITICA` — **5**
 
 | la domanda | pronta? | che cosa aspetta |
 |---|---|---|
 | **[[DOMANDA-D13-CONIUGATI]]** D13: i coniugati delle memorie -- tw come fase U(1) sull-arco? | ### ⏳ aspetta | ### **aspetta:** `DOMANDA-D9-GEOMETRIA` |
 | **[[DOMANDA-D9-GEOMETRIA]]** D9: la geometria viene da d e p_d dentro H, o dalle relazioni fra gli ps | ### ⏳ aspetta | ### **aspetta:** `DOMANDA-QUANTITA-CONSERVATA` |
+| **[[DOMANDA-PHI-REALE-O-COMPLESSO]]** la tabella dichiara phi_h reale, il banco congelato lo tiene complesso:  | ### ✅ **PRONTA** | ### **niente** |
 | **[[DOMANDA-QUANTITA-CONSERVATA]]** esiste una moneta isotropa, causale e simmetrica fra le bande con una qu | ### ✅ **PRONTA** | ### **niente** |
 | **[[SCENA-3D-PRINCIPALE]]** la (ii) e- il BANCO DI MISURA: punti che si respingono, gradi 2-6 | ### ✅ **PRONTA** | ### **niente** |
 
@@ -56,7 +57,7 @@
 
 ## IL CONTO
 
-> ### ⛔ **aperte `22`, di cui pronte `13`.**
+> ### ⛔ **aperte `23`, di cui pronte `14`.**
 >
 > ### ✅ **E una domanda DECISA esce da sola:** si chiude con la decisione di Luca e il commit, e ### **nessuno la spunta a mano** -- la lista ### **si genera dai campi**, e un campo che cambia ### **cambia la lista.**
 
