@@ -9,7 +9,7 @@
 | `DOCUMENTAZIONE` | `2` | 1 |
 | `DOCUMENTAZIONE` | `ENTRAMBE` | 8 |
 | `FISICA` | `1` | 343 |
-| `FISICA` | `2` | 90 |
+| `FISICA` | `2` | 91 |
 | `FISICA` | `ENTRAMBE` | 17 |
 | `INFRASTRUTTURA` | `1` | 39 |
 | `INFRASTRUTTURA` | `2` | 20 |
@@ -276,6 +276,7 @@
 | `DOMANDA-D13-CONIUGATI` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | D13: i coniugati delle memorie -- tw come fase U(1) sull-arco? |
 | `DOMANDA-D9-GEOMETRIA` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | D9: la geometria viene da d e p_d dentro H, o dalle relazioni fra gli psi? |
 | `DOMANDA-DOVE-STA-LA-C-IN-TABELLA` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | la C e decisa al punto F3 e nessuna legge della tabella la dichiara |
+| `DOMANDA-ESTREMITA-NUOVE-INIZIALI` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | con che psi e che phi nascono le estremita di un arco nuovo |
 | `DOMANDA-FORME-VUOTO` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | le TRE forme del vuoto locale: che cos-e- un grado, quanti per nodo, l-accoppiam |
 | `DOMANDA-FUSIONE` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | la FUSIONE di due nodi: si vieta, e con che cosa? |
 | `DOMANDA-GRAFO-INIZIALE` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | il grafo iniziale SENZA pos: reticolo, k-regolare, espansore? |
@@ -491,7 +492,7 @@
 | `MOTORE-CHECKPOINT` | CURA | INFRASTRUTTURA | 2 | ### **AGENDA** |  | checkpoint e ripresa: si salva anche il grafo, e la ripresa coincide al bit |
 | `MOTORE-CONTENITORE` | CURA | INFRASTRUTTURA | 2 | ### **AGENDA** |  | il doppio contenitore del motore, le cache con la taglia e la regola del tick |
 | `MOTORE-INCIDENZA` | CURA | INFRASTRUTTURA | 2 | ### **AGENDA** |  | la struttura compatta delle estremita d arco, col punto unico di scrittura |
-| `MOTORE-MEMORIA-M1-ROSSO` | MISURA | INFRASTRUTTURA | 2 | ### **AGENDA** | SI | m1 fallisce a 5.00x contro 4x, e la soglia era derivata da un conto senza i buff |
+| `MOTORE-MEMORIA-M1-ROSSO` | MISURA | INFRASTRUTTURA | 2 | ### **CHIUSA** |  | m1 fallisce a 5.00x contro 4x, e la soglia era derivata da un conto senza i buff |
 | `N1` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 15 volte, MAI definito in un registro) [N1] |
 | `N1b` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 8 volte, MAI definito in un registro) [N1b] |
 | `N2` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 17 volte, MAI definito in un registro) [N2] |

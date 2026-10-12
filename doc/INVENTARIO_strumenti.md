@@ -3399,3 +3399,21 @@ rapporto `5.000x` a entrambe le taglie *(scarto `0.0%` su `20%`)*, col controllo
 scena **cresca** come gli archi *(`4.00x` su `4.00x` atteso)*; `m3` **`0.005114` MB/tick,
 `1.73 sigma`** da zero, **e la CAUSA provata direttamente** *(`10` buffer in `60` tick)*;
 `m4` timbrata in `db_era2/memoria_era2.json`, **`0.960` ms per tick**.
+
+---
+
+## LA SOGLIA DELLA MEMORIA A `5x`, E `m1` E' VERDE *(2026-10-12)*
+
+| file | BLOB *(`sha1` dei BYTE grezzi)* | che cosa cambia | l'esito |
+|---|---|---|---|
+| `primo_ordine/motore.py` | `71d9f9b4` | le **tre riduzioni sicure** *(`cos`+`sin` in uno, lo spostamento e quello scalare salvano **un lato**)*, e ### **`cresci()` SENZA default di fisica** | `34`/`34` nel collaudo del motore |
+| `primo_ordine/_collauda_memoria.py` | `d2e7b3ab` | la soglia a **`5x`**, e ### **la SCOMPOSIZIONE voce per voce STAMPATA**, col margine | ### ✅ **`10`/`10`** |
+
+| | |
+|---|---|
+| **IL COMANDO, verbatim** | `python primo_ordine/_collauda_memoria.py` *(e `--scrivi` per rigenerare il referto)* |
+| ### ✅ **`m1` MISURATO** | **`4.389x`** a `n=4096` **e** a `n=16384` *(scarto `0.0%`)*, margine **`0.611x`** sotto `5x` |
+| ### 📌 **la scomposizione** | stato `1.000x` · struttura `0.389x` · geometria `n` `0.333x` · geometria `U` `0.444x` · `dtau` `0.056x` · ### **buffer `2.167x`** *(`12`)* |
+| ### ⭐ **meglio della previsione, e il merito NON e' tutto mio** | avevo previsto `4.5625x`. Parte del guadagno viene da **`phi` diventato COMPLESSO**: lo stato e' cresciuto, e lo stato e' **il DENOMINATORE** |
+| ### ⛔ **cosa NON ho fatto** | **condividere i buffer fra operatori diversi** *(un altro `-0.5x`)*: Luca dice *«il rischio di corruzione silenziosa non vale `-0.5x`»*, e sono d'accordo |
+| ### ⛔ **e `cresci()` non ha piu' un default di fisica** | riceve i valori iniziali **dalla legge**, e **SI BLOCCA** senza: `None` non vuol dire *<<zero>>*, vuol dire ### **<<nessuno ha deciso>>** |

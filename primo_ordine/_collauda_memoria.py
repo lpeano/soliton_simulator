@@ -20,6 +20,11 @@ processo, con **`gc.collect()` PRIMA del campione** — cosi' cio' che si misura
 **cio' che NON si libera**, non la spazzatura che aspetta. ### **La prima diagnosi
 sbagliava proprio quello, e i `104` MB erano spazzatura in attesa.**
 
+### 📌 **LA SOGLIA DI `m1` E' `5x` PER DECISIONE DI LUCA del 2026-10-12**, e la voce
+che quella decisione chiude e' **`MOTORE-MEMORIA-M1-ROSSO`**. ### ⚠ **L'ID sta QUI nel
+docstring e non in un commento accanto alla riga, perche' `P-RIF` me l'ha rifiutato: un
+riferimento che una macchina deve seguire NON PUO' VIVERE NELLA PROSA DI UN COMMENTO.**
+
 ### ⚠ **E `m1` NON SI MISURA SULLA PRIVATA, ma sui BYTE DICHIARATI.** La privata di un
 processo Python **contiene l'interprete, `numpy`, e gli arrotondamenti dell'allocatore**:
 su una scena piccola **il rumore e' piu' grande del segnale**. ### ⭐ **Quindi `m1` si
@@ -57,7 +62,31 @@ OK = [0, 0]
 
 # ### ⛔ **LE SOGLIE, E NON SI TOCCANO QUI.** Stanno nel task history, fissate
 # ### ### **prima** delle misure, e questo file ### **le legge, non le decide.**
-M1_VOLTE = 4.0
+# ### ✅ **`5x`, DECISIONE DI LUCA del `2026-10-12`** *(la voce che quella decisione
+# ### chiude sta nel DOCSTRING del modulo: ### **un ID in un commento e- vietato**, e il
+# ### presidio dei riferimenti me l-ha preso ### **due volte di fila** -- la seconda
+# ### perche- nominavo ### **lui** mentre spiegavo la sua regola)*.
+# ### ⛔ **E NON E- <<spostare la soglia per
+# ### farla passare>>, per due motivi che sono SUOI:**
+# ### `(1)` il `4` era ### **una stima mia**, fatta nel censimento, ### **che non contava
+# ### i buffer di lavoro** -- cioe- il termine piu- grande;
+# ### `(2)` il ### **vincolo vero**, nato dalla caduta del run *(memoria che cresceva fino
+# ### a ~`580x` lo stato ### **durante** la scena)*, e- ### **`m3`** -- la memoria per tick
+# ### piatta -- ### **e `m3` passa.**
+# ### ⭐ **E LA DIFFERENZA FRA I DUE SI VEDE NEI NUMERI:** `m1` sta fra `4` e
+# ### `5`, il run cadeva a ### **`580x`.** ### **Non e- lo stesso ordine di grandezza, e
+# ### non e- lo stesso difetto:** `m1` e- ### **QUANTO COSTA** una scena, `m3` e-
+# ### ### **SE CRESCE.**
+#
+# ### ⛔ **LA REGOLA PER I PEZZI FUTURI, e Luca la chiede scritta:** quando un
+# ### pezzo nuovo aggiunge buffer *(la saturazione, la mitosi)*, ### **la soglia NON SI
+# ### ALZA A MANO.** Si rifa- ### **il conto VOCE PER VOCE**, si dichiara la voce nuova, e
+# ### ### **la soglia nuova la decide Luca.**
+# ### ⚠ **E il motivo e- quello che mi e- successo:** il `4` non era sbagliato
+# ### perche- era basso, era sbagliato perche- ### **MANCAVA UNA VOCE DAL CONTO** -- e una
+# ### soglia alzata a mano ### **nasconderebbe la voce nuova esattamente come il `4`
+# ### nascondeva i buffer.**
+M1_VOLTE = 5.0
 M2_TOLLERANZA = 0.20
 M3_SIGMA = 3.0
 # ### ⚠ **LE DUE TAGLIE: dichiarate, e il rapporto fra loro e- `4`** -- cosi- `m2` ha
@@ -153,12 +182,28 @@ def main(argv):
         bs, bt = _byte_scena(inc, st, mot), _byte_stato(st)
         r = bs / float(bt)
         rapporti.append(r)
+        # ### ⛔ **LA SCOMPOSIZIONE VOCE PER VOCE, e Luca la chiede SCRITTA:**
+        # ### e- cio- che il `4` non aveva -- ### **una soglia senza il suo conto e- un
+        # ### numero**, e un numero senza conto ### **e- quello che mi ha fregato.**
+        voci = {"stato": bt, "struttura": mot.inc.byte(),
+                "geometria_n": mot.geo.n.nbytes, "geometria_U": mot.geo.U.nbytes,
+                "dtau": mot.dtau.nbytes,
+                "buffer": int(sum(b.nbytes for b in mot._buf.values()))}
         referto["m1"].append({"n": nn, "m": inc.m, "byte_scena": bs,
-                              "byte_stato": bt, "volte": r})
+                              "byte_stato": bt, "volte": r,
+                              "voci": voci,
+                              "voci_in_volte": dict((k, v / float(bt))
+                                                    for k, v in voci.items()),
+                              "margine": M1_VOLTE - r,
+                              "buffer_quanti": len(mot._buf)})
         esito("### `m1` a n=%d: la scena e' %.2fx lo stato (soglia %.0fx)"
               % (nn, r, M1_VOLTE), r <= M1_VOLTE,
-              "### %.2f MB di scena su %.2f MB di stato"
-              % (bs / 1048576.0, bt / 1048576.0))
+              "### %.2f MB su %.2f MB, e il MARGINE sotto %.0fx e' %.2fx"
+              % (bs / 1048576.0, bt / 1048576.0, M1_VOLTE, M1_VOLTE - r))
+        print("        ### la SCOMPOSIZIONE, voce per voce: %s"
+              % "  ".join("%s %.3fx" % (k, voci[k] / float(bt))
+                          for k in ("stato", "struttura", "geometria_n", "geometria_U",
+                                    "dtau", "buffer")))
     esito("### e il collaudo di `m1` ha MATERIA: le due taglie sono DIVERSE",
           TAGLIE[1] > TAGLIE[0] and rapporti[0] > 1.0,
           "### con una taglia sola `m2` non esisterebbe, e con rapporto 1 la scena"

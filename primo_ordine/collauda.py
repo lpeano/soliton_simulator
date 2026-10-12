@@ -108,13 +108,17 @@ COLLAUDI = (
     # ### ### **il disallineamento che e- sfuggito TRE VOLTE.**
     ("il confronto tabella / banco", "primo_ordine/_collauda_confronto.py",
      "pre-commit"),
-    # ### ⛔ **IL SOTTO-PEZZO `5d`: L-ACCETTAZIONE DEL PEZZO `5`, E OGGI E- ROSSO.**
-    # ### `m1` misura `5.00x` contro una soglia di `4x` fissata ### **prima** nel task
-    # ### history. ### ⚠ **STA QUI COMUNQUE, e rosso:** un collaudo che fallisce e
-    # ### che nessuno fa girare ### **e- un fallimento che si dimentica**, e il piano
-    # ### dice ### **FERMO e si guarda dove** -- non ### **togli il collaudo.**
-    ("la memoria: `m1`..`m4` (### `m1` ROSSO)",
-     "primo_ordine/_collauda_memoria.py", "pre-commit"),
+    # ### ✅ **IL SOTTO-PEZZO `5d`: L-ACCETTAZIONE DEL PEZZO `5`, E ADESSO E-
+    # ### VERDE.** ### Era rosso -- `m1` a `5.00x` contro una soglia di `4x` -- e
+    # ### ### **ha fatto il suo lavoro: ha fermato il pezzo e ha fatto guardare DOVE.**
+    # ### ⭐ **La scomposizione ha mostrato che la soglia era sbagliata e non il
+    # ### motore:** il `4` contava la struttura *(`0.438x`)* e ### **non i buffer**
+    # ### *(`2.625x`)*. Luca ha deciso `5x`, e con le tre riduzioni sicure `m1` misura
+    # ### ### **`4.389x`, margine `0.611x`.**
+    # ### ⛔ **E IL COLLAUDO STAMPA LA SCOMPOSIZIONE voce per voce**, perche-
+    # ### ### **una soglia senza il suo conto e- un numero** -- ed e- il numero che mi ha
+    # ### fregato.
+    ("la memoria: `m1`..`m4`", "primo_ordine/_collauda_memoria.py", "pre-commit"),
     # ### ⭐ **LO SCHEMA DELLA CAMMINATA, nei DUE VERSI** *(pezzo `2` del
     # ### simulatore)*: i tipi sulle estremita-, i pezzi unitari, i flussi, e
     # ### l-### **ordine di composizione con le ripetizioni AMMESSE.**

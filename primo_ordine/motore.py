@@ -194,14 +194,48 @@ class Motore(object):
             % quante)
         return quante
 
-    def cresci(self, tieni, nuovi_ii, nuovi_jj, nodi_nuovi):
+    def cresci(self, tieni, nuovi_ii, nuovi_jj, nodi_nuovi, iniziali):
         """### La crescita, ### **dal motore**: conta, cresce, e **permuta lo stato.**
 
         ### ⭐ **E- qui e non sulla struttura perche- la struttura NON SA dello
         stato:** `Incidenza.cresci` torna la permutazione, e ### **qualcuno deve
         applicarla allo spinore** -- se non lo facesse il motore, lo stato e il grafo
         ### **si disallineerebbero in silenzio.**
+
+        ## ⛔ `iniziali`: NESSUN DEFAULT DI FISICA, e SI BLOCCA senza
+
+        ### ⛔ **ERA UNA SCELTA DI FISICA CHE AVEVO PRESO IO SENZA ACCORGERMENE:** le
+        estremita- nuove nascevano con `psi_h = 0` e `phi_h = 0` *(`np.zeros`)*, e la
+        verifica esterna l-ha trovata. ### **Va contro TRE decisioni di Luca:** *<<seme
+        piu- vuoto di fondo>>* *(un arco nuovo con `phi = 0` nasce **SENZA vuoto**)*,
+        *<<la natura del nato non si assegna>>* *(**zero e- un valore ASSEGNATO**)*, e il
+        principio per cui le estremita- nuove nascono con un `phi` ### **DERIVATO dai
+        genitori, mai zero per default.**
+
+        ### ✅ **QUINDI `iniziali` ARRIVA DA CHI CHIAMA, cioe- DALLA LEGGE**, ed e- un
+        dizionario `{nome: array}` con ### **una riga per estremita- nuova**. ### ⛔
+        **E senza, SI BLOCCA:** `None` non vuol dire *<<zero>>*, vuol dire
+        ### **<<nessuno ha deciso>>.**
+
+        ### ⭐ **E LO ZERO RESTA AMMESSO, ma SCRITTO:** un collaudo che vuole zero
+        ### **passa un array di zeri**, e la differenza e- tutta qui --
+        ### **un default e- una decisione invisibile, un argomento esplicito e- una
+        decisione dichiarata.**
         """
+        nuove = 2 * int(np.asarray(nuovi_ii).size)
+        if nuove:
+            assert iniziali is not None, (
+                "`cresci()` fa nascere %d estremita' e `iniziali` e' `None`: il motore"
+                " NON HA UN DEFAULT DI FISICA. Con che `psi` e che `phi` nasce"
+                " un'estremita' nuova e' una DECISIONE, e `None` non vuol dire <<zero>>:"
+                " vuol dire <<nessuno ha deciso>>. ### Lo zero si ottiene PASSANDO un"
+                " array di zeri, e allora e' dichiarato" % nuove)
+            for nome in sorted(iniziali):
+                a = np.asarray(iniziali[nome])
+                assert a.shape[0] == nuove, (
+                    "`iniziali[%r]` ha %d righe e nascono %d estremita': un valore"
+                    " iniziale della taglia sbagliata si propagherebbe in silenzio"
+                    % (nome, a.shape[0], nuove))
         assert self.cresciute_nel_tick >= 0, (
             "`cresci()` fuori da un tick: le crescite si contano PER TICK, e fuori da un"
             " tick quel conto non esiste")
@@ -223,6 +257,25 @@ class Motore(object):
                 continue
             nuovo = np.zeros((2 * self.inc.m,) + v.shape[1:], dtype=v.dtype)
             nuovo[dove[vive]] = v[:vecchio][vive]
+            # ### ⛔ **E LE ESTREMITA- NUOVE PRENDONO CIO- CHE LA LEGGE HA DECISO**,
+            # ### non lo zero dell-allocazione. ### ⚠ **Lo `np.zeros` qui sopra e- un
+            # ### ALLOCATORE e non una scelta di fisica:** ogni posto nuovo viene
+            # ### ### **scritto subito dopo**, e il controllo della taglia in testa
+            # ### garantisce che ### **non ne resti uno vuoto.**
+            if nuove:
+                # ### ⚠ **`nuovo_m` e- un locale di `Incidenza.cresci`, non di
+                # ### qui:** dopo la crescita gli archi vivi sono `self.inc.m`, e
+                # ### ### **i nuovi sono gli ULTIMI** -- quindi le loro estremita-
+                # ### cominciano a `2*m - nuove`. ### **L-interprete me l-ha detto
+                # ### subito**, invece di scrivere nel posto sbagliato.
+                base = 2 * self.inc.m - nuove
+                val = iniziali.get(nome)
+                assert val is not None, (
+                    "`iniziali` non porta %r, e lo stato lo ha: ogni variabile che vive"
+                    " sulle estremita' DEVE dire con che valore nasce -- altrimenti"
+                    " nascerebbe con lo zero dell'allocatore, che e' una scelta di"
+                    " fisica presa dal motore" % nome)
+                nuovo[base:base + nuove] = np.asarray(val, dtype=v.dtype)
             self.st[nome] = nuovo
         # ### ⚠ **E I BUFFER SI BUTTANO, perche- la taglia e- cambiata:** tenerli
         # ### sarebbe ### **esattamente il difetto della cache che non porta la taglia.**
@@ -371,10 +424,17 @@ class Motore(object):
         """
         a0 = self._b("a0", (psi.shape[0],), psi.dtype)
         a1 = self._b("a1", (psi.shape[0],), psi.dtype)
-        c = self._b("cos", ang.shape, float)
+        # ### ✅ **RIDUZIONE `(a)` del mandato della soglia: `cos` e `sin` in UN
+        # ### SOLO buffer.** Il seno va nel suo, e ### **il coseno si scrive IN POSTO
+        # ### dentro `ang`** -- si puo-, perche- dopo il seno ### **`ang` non serve piu-.**
+        # ### ⭐ **`-0.125x` della memoria della scena, e ZERO perdita di
+        # ### precisione:** e- una riscrittura, non un-approssimazione.
+        # ### ⚠ **E L-ORDINE DELLE DUE RIGHE CONTA:** il seno PRIMA, perche- il
+        # ### coseno ### **distrugge `ang`.** Scambiarle darebbe `cos` del `cos`.
         s = self._b("sin", ang.shape, float)
-        np.cos(ang, out=c)
         np.sin(ang, out=s)
+        c = ang
+        np.cos(ang, out=c)
         nx, ny, nz = self.geo.n[:, 0], self.geo.n[:, 1], self.geo.n[:, 2]
         p0, p1 = psi[:, 0], psi[:, 1]
         # ### `(sigma.n) psi`, scritto a mano: ### **nessuna matrice 2x2 costruita.**
@@ -404,13 +464,19 @@ class Motore(object):
         psi = st["psi_h"]
         m = self.inc.m
         v = psi.reshape(m, 2, 2)
-        fuori = self._b("sposta", (m, 2, 2), psi.dtype)
         U = self.geo.U
-        # ### il lato `0` (su `ii`) va sul lato `1` (su `jj`) trasportato da `U`
-        np.einsum("aij,aj->ai", U, v[:, 0, :], out=fuori[:, 1, :])
-        # ### e il lato `1` torna sul lato `0` con `U^dagger`
-        np.einsum("aji,aj->ai", np.conj(U), v[:, 1, :], out=fuori[:, 0, :])
-        v[...] = fuori
+        # ### ✅ **RIDUZIONE `(b)`: lo spostamento e- uno SCAMBIO, quindi basta
+        # ### salvare UN LATO.** ### ⭐ **`-0.250x`**, ed e- la riduzione piu-
+        # ### grossa delle tre.
+        # ### ⛔ **E L-ORDINE E- OBBLIGATO, non comodo:** si salva il lato `0`,
+        # ### poi si scrive il lato `0` ### **leggendo il lato 1** *(che e- ancora
+        # ### intatto)*, poi si scrive il lato `1` ### **dalla copia.** ### **Qualunque
+        # ### altro ordine distrugge un dato che serve ancora**, e darebbe un risultato
+        # ### sbagliato senza sembrarlo.
+        t0 = self._b("sposta_lato0", (m, 2), psi.dtype)
+        t0[...] = v[:, 0, :]
+        np.einsum("aji,aj->ai", np.conj(U), v[:, 1, :], out=v[:, 0, :])
+        np.einsum("aij,aj->ai", U, t0, out=v[:, 1, :])
         self.applicazioni["spostamento_trasporto"] += 1
         return st
 
@@ -426,9 +492,13 @@ class Motore(object):
             " non ha significato" % (frazione,))
         phi = st["phi_h"]
         v = phi.reshape(self.inc.m, 2)
-        fuori = self._b("sposta_s", (self.inc.m, 2), phi.dtype)
-        fuori[...] = v[:, ::-1]
-        v[...] = fuori
+        # ### ✅ **RIDUZIONE `(c)`: lo stesso scambio, e lo stesso lato solo.**
+        # ### ### **`-0.062x`**. ### Uno scalare non ha nulla da trasportare, quindi lo
+        # ### scambio e- ### **la permutazione pura.**
+        t0 = self._b("sposta_s_lato0", (self.inc.m,), phi.dtype)
+        t0[...] = v[:, 0]
+        v[:, 0] = v[:, 1]
+        v[:, 1] = t0
         self.applicazioni["spostamento_scalare"] += 1
         return st
 
@@ -503,7 +573,7 @@ def main(argv):
         t0 = time.perf_counter()
         for _ in range(giri):
             mot.apri_tick()
-            mot.cresci(tieni, [], [], 0)
+            mot.cresci(tieni, [], [], 0, None)
             mot.chiudi_tick()
         tc = (time.perf_counter() - t0) / giri
         print("  n=%-7d m=%-7d  passo %8.3f ms   cresci() %8.3f ms   rapporto %6.2fx  %s"

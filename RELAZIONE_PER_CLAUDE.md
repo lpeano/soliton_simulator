@@ -14267,3 +14267,31 @@ Ogni dato di `db_era2/` ha ### **il suo TIMBRO accanto**, col campo `versione_da
 ### ✅ **E `[[DOMANDA-PHI-REALE-O-COMPLESSO]]` E' ORA CHIUSA NEL MODO GIUSTO**, col criterio e col commit `4e0659e` — ### **il ripiego e' TOLTO.**
 
 ### ⚠ **E `[[D-ERA2-NON-SI-CHIUDE]]` resta APERTA UN GIRO**, per la stessa ragione di prima: il validatore pretende `chiusura.commit`, e **il commit della sua cura non esiste ancora**. Si chiude col suo sha **subito dopo** — ed e' la forma a **due atti** che l'indice prevede.
+
+---
+
+## LA SOGLIA A `5x` E `m1` E' VERDE — E IL COLLAUDO ROSSO HA FATTO ESATTAMENTE IL SUO LAVORO *(2026-10-12)*
+
+### ✅ **LUCA DECIDE `5x`, e scioglie la mia obiezione con due argomenti che accetto.** Era **io** a dire *«spostare una soglia per farla passare e' la mossa vietata»*. ### `(1)` **il `4` era una stima mia** che **non contava i buffer** — cioe' il termine piu' grande, e **l'ho misurato io**. ### `(2)` **il vincolo vero e' `m3`**, la memoria **per tick piatta**, nato dalla caduta del run — e **`m3` passa**. ### ⭐ **E la differenza si vede nei numeri: `m1` sta fra `4` e `5`, il run cadeva a `580x`.** ### **Non e' lo stesso ordine di grandezza, e non e' lo stesso difetto:** `m1` e' **quanto costa** una scena, `m3` e' **se cresce**.
+
+### ⭐ **E IL COLLAUDO ROSSO HA FATTO ESATTAMENTE IL SUO LAVORO:** ha **fermato il pezzo**, ha fatto **guardare dove**, e la scomposizione ha mostrato che ### **era sbagliata la soglia e non il motore.** ### **Se l'avessi tolto o aggiustato, il `4` sarebbe ancora la' e nessuno saprebbe perche'.**
+
+| | la previsione | il misurato |
+|---|---|---|
+| `m1` a `n=4096` | `4.56x` | ### ✅ **`4.389x`** |
+| `m1` a `n=16384` | `4.56x` | ### ✅ **`4.389x`** *(scarto `0.0%`)* |
+| il margine sotto `5x` | `0.44x` | ### ✅ **`0.611x`** |
+
+### ⚠ **MEGLIO DELLA PREVISIONE, E IL MERITO NON E' TUTTO MIO:** fra la misura di `8a9c699` e questa, **`phi` e' diventato COMPLESSO**. ### **Lo stato e' cresciuto** *(da `0.50` a `0.56` MB a `n=4096`)*, e lo stato e' **il denominatore**. ### **Parte del guadagno non viene dalle riduzioni, e va detto** — altrimenti mi prenderei un merito che non e' mio.
+
+### 📌 **LA SCOMPOSIZIONE, e adesso il collaudo LA STAMPA:** stato `1.000x` · struttura `0.389x` · geometria `n` `0.333x` · geometria `U` `0.444x` · `dtau` `0.056x` · ### **buffer `2.167x`** *(da `2.625x`, e da `13` buffer a `12`)*. ### ⛔ **Perche' stamparla: una soglia senza il suo conto e' un numero** — ed e' il numero che mi ha fregato.
+
+### ⛔ **E LA REGOLA PER I PEZZI FUTURI, che Luca chiede scritta:** quando un pezzo nuovo aggiunge buffer *(la saturazione, la mitosi)* ### **la soglia NON si alza a mano.** Si rifa' **il conto voce per voce**, si **dichiara la voce nuova**, e **la soglia nuova la decide Luca**. ### ⭐ **Il motivo e' quello che mi e' successo:** il `4` non era sbagliato perche' era basso, era sbagliato perche' ### **mancava una voce dal conto.** Sta in `[[MEMORIA-PER-TICK]]` e nel task history.
+
+### ⛔ **E LA SECONDA PARTE: UNA SCELTA DI FISICA CHE AVEVO PRESO IO SENZA ACCORGERMENE.** `cresci()` faceva nascere le estremita' nuove con **`psi_h = 0` e `phi_h = 0`**. ### **Zero e' un valore ASSEGNATO**, e va contro tre decisioni di Luca: *«seme piu' vuoto di fondo»* *(un arco nuovo con `phi = 0` nasce **senza vuoto**)*, *«la natura del nato non si assegna»*, e il principio per cui le estremita' nuove nascono con un `phi` **ereditato dai genitori, mai zero per default**.
+
+### ✅ **ADESSO IL MOTORE NON HA PIU' UN DEFAULT DI FISICA:** `cresci()` **riceve** i valori iniziali **dalla legge**, e **se non li riceve SI BLOCCA**. ### ⭐ **`None` non vuol dire <<zero>>: vuol dire <<nessuno ha deciso>>.** E lo zero resta ammesso **solo nei collaudi, scritto esplicitamente** — ### **un default e' una decisione invisibile, un argomento esplicito e' una decisione dichiarata.** Quattro bracci nuovi, nei due versi. La domanda e' `[[DOMANDA-ESTREMITA-NUOVE-INIZIALI]]`, **non critica** *(il motore si blocca invece di indovinare, quindi niente gira sulla scelta sbagliata)*.
+
+### ✅ **E `[[MOTORE-MEMORIA-M1-ROSSO]]` SI E' POTUTA CHIUDERE — la prima prova che la restrizione di `[[PI-ERA-STATO]]` serviva.** Due ore prima **non si poteva**.
+
+### ⚠ **E `[[P-RIF]]` MI HA PRESO DUE VOLTE DI FILA:** la prima perche' l'ID della voce stava **in un commento**; la seconda perche' nel commento in cui spiegavo la sua regola ### **nominavo LUI.**

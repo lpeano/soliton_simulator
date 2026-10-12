@@ -80,7 +80,55 @@ accorgermene.**
 
 ---
 
+## 4-bis. I NUMERI, MISURATI *(e la previsione era SBAGLIATA in meglio)*
+
+| | la previsione | il misurato |
+|---|---|---|
+| `m1` a `n=4096` | `4.56x` | ### ✅ **`4.39x`** |
+| `m1` a `n=16384` | `4.56x` | ### ✅ **`4.39x`** |
+| **identico alle due taglie?** | si' | ### ✅ **si', scarto `0.0%`** |
+| **il margine sotto `5x`** | `0.44x` | ### ✅ **`0.61x`** |
+
+### ⭐ **PERCHE' MEGLIO DELLA PREVISIONE, e il motivo non e' un caso:** fra la
+misura di `8a9c699` e questa, **`phi` e' diventato COMPLESSO** *(decisione di Luca)*.
+### **Lo stato e' cresciuto** — da `0.50` a `0.56` MB a `n=4096` — e lo stato e'
+**il DENOMINATORE**. ### ⚠ **Quindi parte del guadagno non viene dalle riduzioni:
+viene dal fatto che il denominatore e' piu' grande.** E va detto, perche' altrimenti
+mi prenderei un merito che non e' mio.
+
+### 📌 **LA SCOMPOSIZIONE, voce per voce** *(identica alle due taglie)*:
+
+| | prima *(`8a9c699`)* | adesso |
+|---|---|---|
+| stato | `1.000x` | `1.000x` |
+| struttura | `0.438x` | `0.389x` |
+| geometria `n` | `0.375x` | `0.333x` |
+| geometria `U` | `0.500x` | `0.444x` |
+| `dtau` | `0.062x` | `0.056x` |
+| ### **buffer** | ### **`2.625x`** *(`13`)* | ### **`2.167x`** *(`12`)* |
+| **totale** | **`5.000x`** | ### ✅ **`4.389x`** |
+
+### ✅ **E `m2` e `m3` restano verdi:** `m2` rapporto `4.389x` a **entrambe** le
+taglie *(scarto `0.0%`)*, col controllo positivo che la scena **cresce come gli archi**;
+`m3` **`0.0075` MB/tick a `1.73 sigma`** da zero, e **la causa provata direttamente**:
+**`9` buffer in `60` tick.** ### **`m1`..`m4`: `10` su `10`.**
+
+---
+
 ## 5. LA STELLA POLARE
+
+> ### ⚠ **Si risponde per il punto `4`** *(togliere il default di fisica da
+> `cresci()`)*. ### **I punti `1`..`3` sono riscritture di buffer e una soglia di
+> misura: non toccano la fisica.**
+
+| | la domanda | la risposta |
+|--:|---|---|
+| **1** | conserva **energia e carica LOCALMENTE**? | ### ✅ **Non introduce una legge**, quindi non conserva ne' viola: **TOGLIE** una scelta che il motore faceva da solo. ### ⭐ **E anzi va NEL VERSO della conservazione locale:** `psi_h = 0` e `phi_h = 0` su un'estremita' nuova **cambiavano `Lambda` del nodo senza che nessuna legge lo dicesse** — cioe' **il vuoto spariva** |
+| **2** | **quale dei tre gradini**? | ### **(a) robusto al rumore numerico**, e **non piu' in su**: e' un cambiamento di **interfaccia**, e non afferma nessun risultato di fisica. ### ⛔ **Dichiararlo `(b)` o `(c)` sarebbe falso** |
+| **3** | **aggiunge un numero o una legge**? | ### ✅ **NE' l'uno NE' l'altra: TOGLIE un numero** — lo zero implicito. ### ⭐ **E lo zero implicito era del terzo tipo, il peggiore:** non una costante di accoppiamento *(legittima)*, non una toppa *(un debito)*, ma ### **un valore imposto allo stato che nessuna legge dichiarava** |
+| **4** | tocca `rho`, `c_s` o **il SEGNO**? | ### **No.** Non tocca nessuna delle tre, e **non c'e' nessun verso di accoppiamento** in gioco |
+| **5** | **emergente o imposto**? | ### ⛔ **La domanda si rovescia, ed e' il punto:** lo zero sulle estremita' nuove era **IMPOSTO**, e **da me senza accorgermene**. ### ✅ **Toglierlo non rende emergente niente: rende VISIBILE che la scelta non e' ancora stata fatta** -- ed e' la domanda che va a Luca |
+
 
 > ### ⚠ **SI APPLICA, e per una ragione sola: il punto `4`.** Togliere un default di
 > fisica dal motore **cambia che cosa il simulatore puo' fare senza una legge** — e le

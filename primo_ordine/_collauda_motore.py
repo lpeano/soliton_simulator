@@ -102,7 +102,7 @@ def main(argv):
     print()
     tieni = np.ones(inc.m, dtype=bool)
     mot.apri_tick()
-    mot.cresci(tieni, [], [], 0)
+    mot.cresci(tieni, [], [], 0, None)
     quante = mot.chiudi_tick()
     esito("### (2) UNA `cresci()` in un tick: passa, e il tick la conta",
           quante == 1 and mot.cresciute == 1,
@@ -111,8 +111,8 @@ def main(argv):
     # ### chiesto: il raddoppio ### **non toglie la ricostruzione**, che costa
     # ### `O(m log m)` ### **a chiamata.**
     mot.apri_tick()
-    mot.cresci(tieni, [], [], 0)
-    mot.cresci(tieni, [], [], 0)
+    mot.cresci(tieni, [], [], 0, None)
+    mot.cresci(tieni, [], [], 0, None)
     try:
         mot.chiudi_tick()
         passa, nota = False, "### NON ha alzato: la regola NON e' un impedimento"
@@ -128,7 +128,7 @@ def main(argv):
           "### altrimenti il motore resterebbe bloccato in un tick senza uscita")
     for che, fai, chiave in (
             ("`cresci()` FUORI da un tick",
-             lambda: mot.cresci(tieni, [], [], 0), "fuori da un tick"),
+             lambda: mot.cresci(tieni, [], [], 0, None), "fuori da un tick"),
             ("`chiudi_tick` senza `apri_tick`", mot.chiudi_tick, "nessun tick aperto")):
         try:
             fai()
@@ -236,7 +236,14 @@ def main(argv):
     tieni = np.ones(inc.m, dtype=bool)
     tieni[0] = False
     mot.apri_tick()
-    dove = mot.cresci(tieni, [0, 10], [10, 1], 1)
+    # ### ⛔ **LO ZERO E- SCRITTO, non per omissione** *(mandato del
+    # ### `2026-10-12`)*: il motore ### **non ha un default di fisica**, quindi un
+    # ### collaudo che vuole estremita- nuove a zero ### **passa un array di zeri.**
+    # ### ⭐ **E la differenza e- tutta qui: un default e- una decisione
+    # ### invisibile, un argomento esplicito e- una decisione dichiarata.**
+    zeri = {"psi_h": np.zeros((4, 2), dtype=complex),
+            "phi_h": np.zeros(4, dtype=complex)}
+    dove = mot.cresci(tieni, [0, 10], [10, 1], 1, zeri)
     mot.chiudi_tick()
     vive = dove >= 0
     buono = bool(np.allclose(st["psi_h"][dove[vive]], prima[:2 * 10][vive], atol=0))
@@ -245,6 +252,73 @@ def main(argv):
     esito("### e le estremita' NUOVE nascono a ZERO",
           abs(_norma(st["psi_h"]) - _norma(prima[:2 * 10][vive])) <= 1e-12,
           "### altrimenti un'estremita' nuova porterebbe un dato che nessuno ha messo")
+
+    # ======================== (5-bis) NESSUN DEFAULT DI FISICA: `iniziali` e- OBBLIGATORIO
+    print()
+    # ### ⛔ **IL BRACCIO CHE IL MANDATO CHIEDE:** `cresci()` con estremita-
+    # ### nuove e ### **senza valori iniziali** DEVE fallire. ### ⭐ **E questo
+    # ### braccio POTEVA fallire fino a poco fa**: il motore nasceva le estremita- nuove a
+    # ### ### **zero**, e lo zero era ### **una scelta di fisica presa da me senza
+    # ### accorgermene** -- la verifica esterna l-ha trovata.
+    _i6, s6, m6 = _banco(10, "numpy", 4)
+    t6 = np.ones(_i6.m, dtype=bool)
+    t6[0] = False
+    m6.apri_tick()
+    try:
+        m6.cresci(t6, [0, 10], [10, 1], 1, None)
+        passa, nota = False, "### NON ha alzato: il motore avrebbe scelto lo ZERO"
+    except AssertionError as e:
+        passa = "nessuno ha deciso" in str(e)
+        nota = ("### e per la chiave giusta: `None` non vuol dire <<zero>>" if passa
+                else "### altra ragione: %r" % str(e)[:50])
+    m6.chiudi_tick()
+    esito("### (5-bis) DEVE fallire: estremita- nuove SENZA valori iniziali",
+          passa, nota)
+    # ### ⚠ **E il VERSO OPPOSTO: con i valori, passa** -- senza questo braccio
+    # ### il primo proverebbe solo che `cresci()` alza SEMPRE quando nascono archi.
+    _i7, s7, m7 = _banco(10, "numpy", 5)
+    t7 = np.ones(_i7.m, dtype=bool)
+    t7[0] = False
+    m7.apri_tick()
+    m7.cresci(t7, [0, 10], [10, 1], 1,
+              {"psi_h": np.zeros((4, 2), dtype=complex),
+               "phi_h": np.zeros(4, dtype=complex)})
+    m7.chiudi_tick()
+    esito("### e il VERSO OPPOSTO: con i valori iniziali DICHIARATI, passa",
+          m7.inc.m == 11, "### altrimenti il braccio di sopra proverebbe solo che alza"
+                          " sempre")
+    # ### ⛔ **E UNA TAGLIA SBAGLIATA dei valori iniziali DEVE fallire:** un
+    # ### valore iniziale della taglia sbagliata ### **si propagherebbe in silenzio.**
+    _i8, s8, m8 = _banco(10, "numpy", 6)
+    t8 = np.ones(_i8.m, dtype=bool)
+    t8[0] = False
+    m8.apri_tick()
+    try:
+        m8.cresci(t8, [0, 10], [10, 1], 1,
+                  {"psi_h": np.zeros((7, 2), dtype=complex),
+                   "phi_h": np.zeros(4, dtype=complex)})
+        passa, nota = False, "### NON ha alzato"
+    except AssertionError as e:
+        passa = "taglia sbagliata" in str(e)
+        nota = "### e per la chiave giusta" if passa else "### %r" % str(e)[:50]
+    m8.chiudi_tick()
+    esito("### DEVE fallire: valori iniziali della TAGLIA SBAGLIATA", passa, nota)
+    # ### ⛔ **E UNA VARIABILE MANCANTE DEVE fallire:** ogni variabile che vive
+    # ### sulle estremita- deve dire ### **con che valore nasce.**
+    _i9, s9, m9 = _banco(10, "numpy", 7)
+    t9 = np.ones(_i9.m, dtype=bool)
+    t9[0] = False
+    m9.apri_tick()
+    try:
+        m9.cresci(t9, [0, 10], [10, 1], 1,
+                  {"psi_h": np.zeros((4, 2), dtype=complex)})
+        passa, nota = False, "### NON ha alzato: `phi_h` nascerebbe con lo zero"
+    except AssertionError as e:
+        passa = "DEVE dire con che valore nasce" in str(e)
+        nota = "### e per la chiave giusta" if passa else "### %r" % str(e)[:50]
+    m9.chiudi_tick()
+    esito("### DEVE fallire: una variabile che NON dice con che valore nasce",
+          passa, nota)
 
     # ============================================= (6) I CASI CHE DEVONO FALLIRE
     print()

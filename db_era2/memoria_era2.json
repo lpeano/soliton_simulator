@@ -1,37 +1,73 @@
 {
- "costo_per_tick_ms": 1.0218200040981174,
+ "costo_per_tick_ms": 1.4584900112822652,
  "m1": [
   {
-   "byte_scena": 2621448,
-   "byte_stato": 524288,
+   "buffer_quanti": 12,
+   "byte_scena": 2588680,
+   "byte_stato": 589824,
    "m": 4096,
+   "margine": 0.6110975477430554,
    "n": 4096,
-   "volte": 5.0000152587890625
+   "voci": {
+    "buffer": 1277952,
+    "dtau": 32768,
+    "geometria_U": 262144,
+    "geometria_n": 196608,
+    "stato": 589824,
+    "struttura": 229384
+   },
+   "voci_in_volte": {
+    "buffer": 2.1666666666666665,
+    "dtau": 0.05555555555555555,
+    "geometria_U": 0.4444444444444444,
+    "geometria_n": 0.3333333333333333,
+    "stato": 1.0,
+    "struttura": 0.3889024522569444
+   },
+   "volte": 4.388902452256945
   },
   {
-   "byte_scena": 10485768,
-   "byte_stato": 2097152,
+   "buffer_quanti": 12,
+   "byte_scena": 10354696,
+   "byte_stato": 2359296,
    "m": 16384,
+   "margine": 0.6111077202690973,
    "n": 16384,
-   "volte": 5.000003814697266
+   "voci": {
+    "buffer": 5111808,
+    "dtau": 131072,
+    "geometria_U": 1048576,
+    "geometria_n": 786432,
+    "stato": 2359296,
+    "struttura": 917512
+   },
+   "voci_in_volte": {
+    "buffer": 2.1666666666666665,
+    "dtau": 0.05555555555555555,
+    "geometria_U": 0.4444444444444444,
+    "geometria_n": 0.3333333333333333,
+    "stato": 1.0,
+    "struttura": 0.3888922797309028
+   },
+   "volte": 4.388892279730903
   }
  ],
  "m2": {
   "rapporti": [
-   5.0000152587890625,
-   5.000003814697266
+   4.388902452256945,
+   4.388892279730903
   ],
-  "scarto_relativo": 2.2888113744770066e-06
+  "scarto_relativo": 2.3177835808885695e-06
  },
  "m3": {
   "campioni": 10,
-  "in_sigma": 1.7320508075693661,
-  "per_tick_MB": 0.007286931818184218,
-  "sigma": 0.00420711204679392,
+  "in_sigma": 1.7320508075692114,
+  "per_tick_MB": 0.007542613636365196,
+  "sigma": 0.004354730013347948,
   "tick": 60
  },
  "soglie": {
-  "m1_volte": 4.0,
+  "m1_volte": 5.0,
   "m2_tolleranza": 0.2,
   "m3_sigma": 3.0
  },
@@ -88,7 +124,7 @@
   },
   "generati": [
    "osservatori/prova_norma.py=97a979de08e6f361",
-   "stato.py=f5e561e0cfd34255",
+   "stato.py=9f3435722c72e783",
    "termini/camm_forma_d.py=0d3e0bb972c00d53",
    "termini/camm_grover.py=f49defb2ab5e971e",
    "termini/camm_grover_vuoto.py=a62ff99b3a295619",
@@ -100,8 +136,8 @@
    "termini/prova_locale.py=7326fa65e394ab4f"
   ],
   "impronta_config": "collaudo-memoria-5d",
-  "impronta_generati": "98b23e65bf0e15e6",
-  "impronta_tabella": "6fbc41dbad19d3fd",
+  "impronta_generati": "4af5010a74382fd4",
+  "impronta_tabella": "7825809bb4a39a8b",
   "versione_dati": 1,
   "versioni": {
    "macchina": "AMD64",
