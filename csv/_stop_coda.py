@@ -78,7 +78,14 @@ except Exception:                                             # noqa: BLE001
 # ### ⭐ **E' la stessa scelta di `primo_ordine/collauda.py` per i collaudi**, e la ragione
 # ### e' la stessa: ### **un elenco dichiarato si legge**, e un pezzo che spariva da un
 # ### `glob` ### **spariva in silenzio.**
-# ### Ogni riga: `(nome del pezzo, il file che ESISTE quando il pezzo e' fatto)`.
+# ### Ogni riga: `(nome, il file che ESISTE quando e' fatto, le voci che lo BLOCCANO)`.
+# ### \u26d4 **LA TERZA COLONNA E- UNA CORREZIONE DEL `2026-10-12`, e sanava una
+# ### ### **AFFERMAZIONE FALSA NEL MIO CODICE:** il docstring di `pronti()` diceva che
+# ### <<pronto>> vuol dire ### **non e- fatto E non aspetta una decisione di Luca**, e che
+# ### ### **la seconda la dice l-indice**. ### **Ma il codice NON interrogava l-indice
+# ### affatto.** ### \u26a0 **Quindi il presidio avrebbe bloccato il turno su un pezzo che
+# ### aspetta una risposta di Luca** -- cioe- ### **avrebbe girato a vuoto proprio nel
+# ### caso in cui fermarsi e- GIUSTO.**
 # ### ⛔ **E IL MARCATORE E- IL COLLAUDO DI ACCETTAZIONE, NON IL PRIMO FILE** --
 # ### correzione del `2026-10-12`, trovata progettando il pezzo `5`. ### Prima il pezzo
 # ### `5` era segnato FATTO quando esisteva `primo_ordine/motore.py`: ma quello e- il
@@ -90,11 +97,17 @@ except Exception:                                             # noqa: BLE001
 PEZZI = (
     ("il pezzo 5 del simulatore: IL MOTORE (doppio contenitore, CSR, punto unico di "
      "scrittura, checkpoint) -- il suo collaudo di accettazione e- la MEMORIA",
-     "primo_ordine/_collauda_memoria.py"),
+     "primo_ordine/_collauda_memoria.py", ()),
+    # ### \u26d4 **IL PEZZO `6` ASPETTA DUE RISPOSTE, e sono di fisica:** il criterio di
+    # ### passaggio pretende che il generato ### **riproduca il banco congelato**, e per
+    # ### farlo serve sapere ### **di che tipo e- il vuoto** *(la tabella lo dice reale, il
+    # ### banco lo tiene complesso)* e ### **da dove nasce la geometria** nell-era `2`.
     ("il pezzo 6 del simulatore: IL CRITERIO DI PASSAGGIO (il generato riproduce il "
-     "banco congelato al bit)", "primo_ordine/_collauda_passaggio.py"),
+     "banco congelato al bit)", "primo_ordine/_collauda_passaggio.py",
+     ("DOMANDA-PHI-REALE-O-COMPLESSO",)),
     ("la derivazione di SPAZIO-CHE-NASCE (solo task history, nessun codice)",
-     "doc/TASK_HISTORY/2026-10-13_spazio_che_nasce.md"),
+     "doc/TASK_HISTORY/2026-10-13_spazio_che_nasce.md",
+     ("DOMANDA-QUALE-SEGNO",)),
 )
 
 
@@ -121,14 +134,65 @@ def _promemoria():
     return base
 
 
-def pronti():
-    """### I pezzi ### **PRONTI**: quelli il cui file ### **non esiste ancora.**
+def aspettano_luca():
+    """### Gli `id` delle voci su cui ### **l'indice aspetta Luca**, dal file GENERATO.
 
-    ### ⭐ **E <<pronto>> vuol dire DUE cose, entrambe necessarie:** il pezzo
-    ### **non e' fatto**, e ### **non aspetta una decisione di Luca** — e la seconda la
-    dice l'indice, non io.
+    ### ⛔ **Si leggono dal file e non si indovinano:** `DA_DECIDERE_LUCA.md` lo
+    ### **genera** `indice.py da-decidere`, col suo criterio *(priorita' non vuota e stato
+    aperto)*. ### **Un elenco mio accanto a quello sarebbe la seconda verita' che
+    divergerebbe.**
     """
-    return [nome for nome, f in PEZZI if not os.path.exists(os.path.join(RADICE, f))]
+    p = os.path.join(RADICE, "doc", "indice", "DA_DECIDERE_LUCA.md")
+    if not os.path.exists(p):
+        return set()
+    t = io.open(p, encoding="utf-8").read()
+    # ### ⛔ **LO SCHEMA DI UN ID, e non <<tutto cio- che e- maiuscolo>>:** al primo
+    # ### giro prendevo anche il GRASSETTO del markdown -- il collaudo ha nominato
+    # ### ### **`**DUE`** come se fosse una voce. ### ⚠ **Un estrattore troppo largo
+    # ### non e- generoso: DICE IL FALSO**, e un pezzo si sarebbe potuto bloccare su una
+    # ### voce che non esiste.
+    import re as _re
+    return set(_re.findall(r"\b[A-Z][A-Z0-9]{2,}(?:-[A-Z0-9]+)+\b", t))
+
+
+def pronti():
+    """### I pezzi ### **PRONTI**, e <<pronto>> vuol dire ### **DUE cose.**
+
+    ### ⭐ **Entrambe necessarie:** il pezzo ### **non e' fatto**, e ### **non aspetta
+    una decisione di Luca** -- e la seconda ### **la dice l'indice**, non io.
+
+    ### ⚠ **E fino al `2026-10-12` la seconda NON ERA CONTROLLATA:** il docstring la
+    diceva e il codice ### **non interrogava l'indice affatto**. ### **Era
+    un'affermazione falsa nel mio codice**, e avrebbe fatto bloccare il turno
+    ### **proprio quando fermarsi e' giusto.**
+    """
+    attesa = aspettano_luca()
+    fuori = []
+    for nome, f, blocchi in PEZZI:
+        if os.path.exists(os.path.join(RADICE, f)):
+            # ### il ramo FATTO: il suo collaudo di accettazione ESISTE
+            continue
+        fermi = [b for b in blocchi if b in attesa]
+        if fermi:
+            # ### il ramo ASPETTA LUCA: ### **non e' pronto, ed e' una cosa DIVERSA da
+            # ### <<fatto>>** -- per questo il motivo lo NOMINA.
+            continue
+        fuori.append(nome)
+    return fuori
+
+
+def fermi_su_luca():
+    """### I pezzi che ### **aspettano Luca**, col nome della voce. ### **Per DIRLO.**
+
+    ### ⛔ **Un pezzo che aspetta e un pezzo che non c'e' non sono la stessa cosa**, e
+    un presidio che li confondesse direbbe *<<la coda e' vuota>>* ### **quando invece e'
+    BLOCCATA.**
+    """
+    attesa = aspettano_luca()
+    return [(nome, [b for b in blocchi if b in attesa])
+            for nome, f, blocchi in PEZZI
+            if not os.path.exists(os.path.join(RADICE, f))
+            and any(b in attesa for b in blocchi)]
 
 
 def quante_aspettano_luca():
@@ -168,6 +232,15 @@ def decidi(testa, memo_letto, attivo=False):
                        " cominciato")
     p = pronti()
     if not p:
+        # ### \u2b50 **E SI DICE PERCHE-: <<vuota>> e <<BLOCCATA>> non sono la stessa
+        # ### cosa.** Se la coda e- ferma su una decisione di Luca, il motivo
+        # ### ### **NOMINA la voce** -- cosi- chi legge sa ### **che cosa sbloccherebbe il
+        # ### lavoro**, invece di credere che non ci sia niente da fare.
+        fermi = fermi_su_luca()
+        if fermi:
+            return (False, "la coda e' BLOCCATA, non vuota: %s"
+                    % "; ".join("%s aspetta %s" % (n[:60], ",".join(v))
+                                for n, v in fermi))
         return (False, "la coda non ha pezzi pronti: il turno puo' finire")
     if memo_letto == testa:
         # ### ⛔ **LA PROTEZIONE DAI CICLI, e la sua condizione e' `HEAD`:** se ho gia'
@@ -249,17 +322,17 @@ def collaudo():
     veri = PEZZI
     try:
         # ### (1) LAVORO PRONTO -> BLOCCA
-        globals()["PEZZI"] = (("il pezzo finto", "non/esisto/affatto.py"),)
+        globals()["PEZZI"] = (("il pezzo finto", "non/esisto/affatto.py", ()),)
         b, m = decidi("aaaaaaaa", None)
         esito("### (1) c'e' lavoro PRONTO: BLOCCA, e NOMINA il pezzo",
               b and "il pezzo finto" in m, "### %r" % m[:60])
         # ### (2) NIENTE PRONTO -> LASCIA FERMARE
-        globals()["PEZZI"] = (("un pezzo fatto", "CLAUDE.md"),)
+        globals()["PEZZI"] = (("un pezzo fatto", "CLAUDE.md", ()),)
         b2, m2 = decidi("aaaaaaaa", None)
         esito("### (2) la coda NON ha pezzi pronti: LASCIA FERMARE",
               not b2, "### %r" % m2[:60])
         # ### (3) GIA' BLOCCATO, NESSUN COMMIT NUOVO -> LASCIA FERMARE
-        globals()["PEZZI"] = (("il pezzo finto", "non/esisto/affatto.py"),)
+        globals()["PEZZI"] = (("il pezzo finto", "non/esisto/affatto.py", ()),)
         b3, m3 = decidi("aaaaaaaa", "aaaaaaaa")
         esito("### (3) GIA' bloccato a questo commit: LASCIA FERMARE, e dice perche'",
               (not b3) and "GIA'" in m3 and "il pezzo finto" in m3,
@@ -277,6 +350,28 @@ def collaudo():
         esito("### (3-ter) `stop_hook_active` VERO: NON blocca, col lavoro pronto",
               (not b5) and "stop_hook_active" in m5,
               "### e il contratto e- CITATO nel motivo")
+        # ### \u26d4 **(3-quater) UN PEZZO CHE ASPETTA LUCA NON E- PRONTO**, e il
+        # ### motivo ### **NOMINA la voce**: <<vuota>> e <<BLOCCATA>> non sono la stessa
+        # ### cosa. ### \u2b50 **E questo braccio POTEVA fallire:** fino a poco fa
+        # ### `pronti()` ### **non guardava l-indice affatto.**
+        attesa = sorted(aspettano_luca())
+        if attesa:
+            globals()["PEZZI"] = (("un pezzo che aspetta Luca",
+                                   "non/esisto/affatto.py", (attesa[0],)),)
+            b6, m6 = decidi("cccccccc", None)
+            esito("### (3-quater) un pezzo che ASPETTA LUCA: NON blocca, e lo DICE",
+                  (not b6) and "BLOCCATA" in m6 and attesa[0] in m6,
+                  "### la voce nominata e- `%s`" % attesa[0])
+            # ### \u2705 **E IL VERSO OPPOSTO: una voce che NON aspetta non lo ferma.**
+            globals()["PEZZI"] = (("un pezzo libero", "non/esisto/affatto.py",
+                                   ("UNA-VOCE-CHE-NON-ESISTE",)),)
+            b7, _m7 = decidi("cccccccc", None)
+            esito("### e una voce che NON aspetta Luca NON ferma il pezzo",
+                  b7, "### altrimenti ogni pezzo con una voce sarebbe bloccato")
+        else:
+            esito("### (3-quater) il braccio su <<aspetta Luca>> NON HA MATERIA",
+                  False, "### `DA_DECIDERE_LUCA.md` non elenca nessuna voce: il braccio"
+                         " passerebbe PER VACUITA-, e questo e- un FALLIMENTO")
     finally:
         globals()["PEZZI"] = veri
     # ### ⭐ **E un braccio sul VERO elenco**, per non provare solo i casi finti.
@@ -297,7 +392,7 @@ def collaudo():
                        % (len(msg), len(sporchi)))
     # ### ⚠ **(6) E IL NOME DEI PEZZI SI LEGGE:** un elenco dichiarato serve a chi legge,
     # ### e un nome vuoto o un percorso assoluto ### **lo renderebbero inutile.**
-    male = [f for _n, f in PEZZI if os.path.isabs(f) or not _n.strip()]
+    male = [f for _n, f, _b in PEZZI if os.path.isabs(f) or not _n.strip()]
     esito("### (6) l'elenco dei pezzi e' relativo e nominato",
           not male, "### %d pezzi dichiarati" % len(PEZZI))
     # ### ⛔ **(7) LA REGISTRAZIONE PUNTA A UN FILE CHE ESISTE.** ### ⭐ **E questo

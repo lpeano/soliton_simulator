@@ -14181,3 +14181,19 @@ Ogni dato di `db_era2/` ha ### **il suo TIMBRO accanto**, col campo `versione_da
 ### ✅ **LE ALTRE TRE PASSANO, e due hanno il loro controllo positivo.** `m2`: rapporto **`5.000x` a entrambe le taglie**, scarto **`0.0%`** su una tolleranza del `20%`, e ### **il controllo positivo verifica che la scena CRESCA come gli archi** *(`4.00x` su `4.00x` atteso)* -- senza quello, **un rapporto stabile potrebbe esserlo per vacuita'**. `m3`: **`0.005114` MB/tick, `sigma` `0.002952`, cioe' `1.73 sigma`** da zero su `10` campioni, dentro la soglia di `3 sigma`; ### ⭐ **e la CAUSA e' provata DIRETTAMENTE e non dedotta da una pendenza**: `10` buffer in `60` tick, cioe' **zero dopo i primi**. `m4`: timbrata in `db_era2/memoria_era2.json`, **`0.960` ms per tick**.
 
 ### ⚠ **E UNA SCELTA DI METODO, dichiarata:** `m1` si misura sui **byte DICHIARATI** e non sulla **privata** del processo, perche' la privata contiene **l'interprete, `numpy` e gli arrotondamenti dell'allocatore** -- su una scena piccola ### **il rumore e' piu' grande del segnale**. ### La privata resta il misurando di `m3`, **dove si guarda una PENDENZA** e il fondo costante **si cancella**. ### ✅ **E `m3` fa `gc.collect()` PRIMA del campione**, cosi' misura **cio' che non si libera** e non la spazzatura che aspetta: ### **e' l'errore che la prima diagnosi della memoria aveva fatto**, dove i `104` MB erano **spazzatura in attesa.**
+
+---
+
+## DUE CONTROLLI CHE NON CONTROLLAVANO, TROVATI DAI MIEI STESSI COLLAUDI *(2026-10-12)*
+
+### ⛔ **(1) IL PRESIDIO SULLO STOP NON LEGGEVA L'INDICE.** Il docstring di `pronti()` diceva che *<<pronto>>* vuol dire **due** cose -- il pezzo **non e' fatto** e **non aspetta una decisione di Luca** -- e che *<<la seconda la dice l'indice>>*. ### **Ma il codice non interrogava l'indice affatto.**
+
+### ⚠ **E la conseguenza non era teorica:** finito il pezzo `5`, il successivo in coda e' **il criterio di passaggio**, che **aspetta due risposte di fisica**. Il presidio **avrebbe bloccato il turno su quel pezzo** -- cioe' ### **avrebbe girato a vuoto proprio nel caso in cui fermarsi e' GIUSTO.**
+
+### ✅ **LA CURA:** ogni pezzo **dichiara le voci che lo bloccano**, e `pronti()` le confronta con `doc/indice/DA_DECIDERE_LUCA.md` -- **il file GENERATO, col suo criterio**, non un elenco mio accanto che divergerebbe. ### E il motivo adesso distingue **VUOTA** da **BLOCCATA**, nominando la voce: ### **chi legge sa CHE COSA sbloccherebbe il lavoro**, invece di credere che non ci sia niente da fare.
+
+### ⛔ **(2) `m4` RISCRIVEVA IL REFERTO CHE DOVEVA VERIFICARE.** Il collaudo scriveva `db_era2/memoria_era2.json` a **ogni** esecuzione, e il referto porta **i tempi**: quindi **sporcava l'albero a ogni giro**, e la suite lo segnalava come *<<un generato SCADUTO>>* ogni volta. ### ⛔ **E il difetto vero e' piu' grosso di un fastidio: un collaudo che riscrive il dato che controlla NON LO CONTROLLA.** Si certificava da solo. ### ✅ Adesso il referto si scrive **solo con `--scrivi`**, e `m4` **verifica quello committato**.
+
+### ⚠ **E UN TERZO DIFETTO, DENTRO LA CURA DI (2), NASCOSTO DA UN `except` TROPPO LARGO.** Mancava `import io`, quindi `io.open` alzava `NameError` -- e il mio `except Exception` **lo trasformava in <<il referto e' vuoto>>**: `m4` diceva FALLISCE con *<<nan nel referto committato>>* **mentre il referto era perfetto**. ### ⛔ **Un `except` largo non e' prudenza: nasconde il difetto e lascia passare un verdetto FALSO.** L'`except` e' **TOLTO**.
+
+### ⭐ **I NUMERI.** Il presidio sullo STOP: **`11` su `11`**, coi due bracci nuovi *(un pezzo che aspetta Luca **non** blocca e lo **dice**; una voce che **non** aspetta **non** ferma il pezzo)*. Col processo: la coda e' riconosciuta **BLOCCATA**, e il motivo **nomina entrambe le voci**. La suite: ### **`45` su `46`, e l'unico rosso e' `m1`** -- lo stato dichiarato, in attesa di Luca. E ### **l'albero non si sporca piu': zero file toccati dalla suite.**

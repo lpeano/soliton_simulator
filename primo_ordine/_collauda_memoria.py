@@ -28,6 +28,7 @@ e **la privata resta il controllo di `m3`**, dove si guarda **una pendenza** e i
 fondo costante **si cancella**.
 """
 import gc
+import io
 import json
 import math
 import os
@@ -236,22 +237,49 @@ def main(argv):
         mot.chiudi_tick()
     referto["costo_per_tick_ms"] = (time.perf_counter() - t0) / 10 * 1e3
     p_ref = os.path.join(fuori, "memoria_era2.json")
-    TI.scrivi_atomico(p_ref, (json.dumps(referto, sort_keys=True, ensure_ascii=False,
-                                         indent=1) + chr(10)).encode("utf-8"))
+    # ### ⛔ **IL REFERTO SI SCRIVE SOLO CON `--scrivi`, e il motivo e- un difetto
+    # ### che il COLLAUDO STESSO mi ha trovato:** il referto porta ### **i tempi**, che
+    # ### variano a ogni corsa -- quindi scriverlo a ogni collaudo
+    # ### ### **sporcava l-albero a ogni giro**, e la suite lo segnalava come
+    # ### ### **<<un generato SCADUTO>>** a ogni esecuzione.
+    # ### ⭐ **E LA CURA NON E- SPEGNERE IL CONTROLLO: e- che il referto committato
+    # ### sia quello della CORSA DICHIARATA**, e che `m4` lo ### **VERIFICHI** invece di
+    # ### riscriverlo. ### **Un collaudo che riscrive il dato che controlla non lo
+    # ### controlla.**
+    scrivi = "--scrivi" in argv
+    if scrivi:
     # ### ⛔ **E IL TIMBRO VA ACCANTO, come file a SE-**, non solo dentro il referto:
     # ### il presidio dei dati lo cerca come `<file>.timbro.json`, e ### **un dato senza
     # ### il suo timbro accanto non si sa da dove viene.** ### ⚠ **Me l-ha preso al
     # ### primo giro**, perche- il timbro dentro il referto ### **non e- dove chi legge la
     # ### cartella lo cerca.**
-    TI.scrivi_atomico(p_ref + ".timbro.json",
-                      (json.dumps(dict(t, passo=TICK_M3), sort_keys=True,
-                                  ensure_ascii=False, indent=1)
-                       + chr(10)).encode("utf-8"))
+        TI.scrivi_atomico(p_ref, (json.dumps(referto, sort_keys=True,
+                                              ensure_ascii=False, indent=1)
+                                   + chr(10)).encode("utf-8"))
+        TI.scrivi_atomico(p_ref + ".timbro.json",
+                          (json.dumps(dict(t, passo=TICK_M3), sort_keys=True,
+                                      ensure_ascii=False, indent=1)
+                           + chr(10)).encode("utf-8"))
+    # ### ⭐ **E `m4` VERIFICA il referto COMMITTATO**, non quello che ha appena
+    # ### scritto: altrimenti ### **si controllerebbe da solo.**
+    vecchio = {}
+    if os.path.exists(p_ref):
+        # ### ⛔ **E QUI NON C-E- UN `try` CHE INGHIOTTE, e il motivo e- che me ne
+        # ### ha nascosto uno:** mancava `import io`, `io.open` alzava `NameError`, e
+        # ### il mio `except Exception` ### **lo trasformava in <<il referto e- vuoto>>**.
+        # ### ⚠ **Un `except` largo non e- prudenza: nasconde il difetto e lascia
+        # ### passare un verdetto FALSO.** ### Se il referto committato non si legge,
+        # ### ### **`m4` DEVE rompersi**, non dire <<manca>>.
+        vecchio = json.load(io.open(p_ref, encoding="utf-8"))
     esito("### `m4`: le tre misure sono TIMBRATE, col costo per tick",
-          os.path.exists(p_ref)
-          and all(k in t for k in ("impronta_tabella", "impronta_generati")),
-          "### %.3f ms per tick, e il referto sta in db_era2/memoria_era2.json"
-          % referto["costo_per_tick_ms"])
+          os.path.exists(p_ref) and os.path.exists(p_ref + ".timbro.json")
+          and all(k in (vecchio.get("timbro") or {})
+                  for k in ("impronta_tabella", "impronta_generati"))
+          and "costo_per_tick_ms" in vecchio,
+          "### %.3f ms per tick adesso, %.3f nel referto committato%s"
+          % (referto["costo_per_tick_ms"],
+             vecchio.get("costo_per_tick_ms", float("nan")),
+             "  ### RISCRITTO (--scrivi)" if scrivi else ""))
     esito("### e il TIMBRO porta l'impronta della TABELLA e dei GENERATI",
           bool(t.get("impronta_tabella")) and bool(t.get("impronta_generati")),
           "### tabella `%s`, generati `%s`: un numero senza il codice che lo ha prodotto"
