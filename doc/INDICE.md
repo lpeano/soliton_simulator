@@ -212,7 +212,7 @@
 | `CURA2-STRUTTURALE` | CURA | INFRASTRUTTURA | 1 | ### **CHIUSA** |  | la CURA 2 diventa STRUTTURALE: i rami `else` di TEMPO_UNICO_MITOSI escono dal si |
 | `D-AGGIORNA-COMMIT-FALSO` | DIFETTO | METODO | ENTRAMBE | ### **APERTA** |  | il flag --commit di aggiorna era falso per costruzione: la riga finisce in un co |
 | `D-CREA-LOTTO-ROTTA` | DIFETTO | METODO | ENTRAMBE | ### **CHIUSA** |  | crea-lotto non poteva far nascere NESSUNA voce: il modello non copriva i tre cam |
-| `D-ERA2-NON-SI-CHIUDE` | DIFETTO | METODO | ENTRAMBE | ### **APERTA** |  | due presidi insieme vietano di registrare una domanda dell era 2 come decisa |
+| `D-ERA2-NON-SI-CHIUDE` | DIFETTO | METODO | ENTRAMBE | ### **CHIUSA** |  | due presidi insieme vietano di registrare una domanda dell era 2 come decisa |
 | `D0` | MISURA | FISICA | 1 | ### **CHIUSA** |  | CHI FA SCAPPARE d0 / 21/9 / MISURATO: e' IL FRENO. Gli scrittori spingono giu' - |
 | `D01` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | S09 clippa al passo causale — quindi e' gia' una LUNGHEZZA — e poi moltiplica pe |
 | `D02` | DIFETTO | FISICA | 1 | ### **CHIUSA** |  | pozzografo calcola L da self.pos — IL DISEGNO — mentre il suo docstring dichiara |
