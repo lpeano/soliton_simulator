@@ -16,7 +16,7 @@
 | `INFRASTRUTTURA` | `ENTRAMBE` | 24 |
 | `METODO` | `1` | 156 |
 | `METODO` | `2` | 16 |
-| `METODO` | `ENTRAMBE` | 92 |
+| `METODO` | `ENTRAMBE` | 93 |
 
 | id | classe | dominio | era | stato | blocca | titolo |
 |---|---|---|---|---|---|---|
@@ -210,6 +210,7 @@
 | `CURA1-CORTO` | MISURA | FISICA | 1 | ### **CHIUSA** |  | APERTO CURA1-CORTO |
 | `CURA2-CORTO` | MISURA | FISICA | 1 | ### **CHIUSA** |  | APERTO CURA2-CORTO |
 | `CURA2-STRUTTURALE` | CURA | INFRASTRUTTURA | 1 | ### **CHIUSA** |  | la CURA 2 diventa STRUTTURALE: i rami `else` di TEMPO_UNICO_MITOSI escono dal si |
+| `D-AGGIORNA-COMMIT-FALSO` | DIFETTO | METODO | ENTRAMBE | ### **APERTA** |  | il flag --commit di aggiorna era falso per costruzione: la riga finisce in un co |
 | `D-CREA-LOTTO-ROTTA` | DIFETTO | METODO | ENTRAMBE | ### **CHIUSA** |  | crea-lotto non poteva far nascere NESSUNA voce: il modello non copriva i tre cam |
 | `D0` | MISURA | FISICA | 1 | ### **CHIUSA** |  | CHI FA SCAPPARE d0 / 21/9 / MISURATO: e' IL FRENO. Gli scrittori spingono giu' - |
 | `D01` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | S09 clippa al passo causale — quindi e' gia' una LUNGHEZZA — e poi moltiplica pe |

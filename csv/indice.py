@@ -5,7 +5,9 @@
 python csv/indice.py valida
 python csv/indice.py cerca [--dominio X] [--stato X] [--era X] [--blocca SI|NO]
                            [--legge ID] [--variabile ID] [--assioma ID] [--meta k=v]
-python csv/indice.py aggiorna ID --campo nome=valore | --meta k=v --motivo "..." [--commit SHA]
+python csv/indice.py aggiorna ID --campo nome=valore | --meta k=v --motivo "..."
+   ### `--commit` NON esiste piu': era falso per costruzione, e il commit di una riga
+   ### di storico lo riempie `storico-commit` DAI LOG.
 python csv/indice.py aggiorna-lotto LOTTO.jsonl     # la STESSA via, in blocco
 python csv/indice.py crea-lotto LOTTO.jsonl        # la STESSA via, per FAR NASCERE una voce
 python csv/indice.py storico-commit               # riempie il campo `commit` DAI LOG
@@ -552,6 +554,24 @@ def cerca(voci, reg, a):
 # ==========================================================================
 def aggiorna(voci, reg, idv, campi, metas, motivo, commit):
     assert motivo, "serve --motivo: una modifica senza motivo non si registra"
+    # ### ⛔ **`--commit` NON SI ACCETTA PIU-, e NON e- un controllo in piu-: e- una
+    # ### possibilita- di sbagliare che SI TOGLIE** *(`9-ter`: a parita- di effetto si
+    # ### preferisce togliere un-eccezione)*.
+    # ### ⚠ **PERCHE- ERA UNA TRAPPOLA PER COSTRUZIONE:** scriveva il `commit` ### **anche
+    # ### nella riga di storico**, ma quella riga finisce in un commit ### **che ancora
+    # ### non esiste** -- quindi ### **qualunque valore passato li- e- falso.** E
+    # ### ### **un numero che dice una cosa falsa e- PEGGIO di un numero assente**
+    # ### *(`L-NUMERI`)*: il campo si lascia ### **VUOTO**, e `storico-commit` lo riempie
+    # ### ### **DAI LOG.**
+    # ### ⭐ **E l-ho scoperto sbagliandolo:** ho passato il commit ### **della cura** a una
+    # ### riga che e- finita nel commit ### **dopo**, e `PI-STORICO-SENZA-COMMIT` ha
+    # ### rifiutato il commit dicendo entrambi i numeri.
+    assert not commit, (
+        "`--commit` NON esiste piu-, e il motivo e- che era falso per costruzione: la"
+        " riga di storico che stai scrivendo finira- in un commit CHE ANCORA NON ESISTE."
+        " Lascia il campo vuoto -- `python csv/indice.py storico-commit` lo riempie DAI"
+        " LOG. ### Se volevi dire <<il commit della CURA>>, quello e- un CAMPO della"
+        " voce: `--campo chiusura.commit=<sha>`")
     per = {v["id"]: v for v in voci}
     assert idv in per, "`%s` non e' una voce" % idv
     v = per[idv]
@@ -993,6 +1013,33 @@ def collaudo():
     # ### `chiusura` si poteva solo ### **schiacciare a stringa**, e il validatore,
     # ### che pretende `chiusura.criterio` e `chiusura.commit`, sarebbe ANDATO IN ERRORE.
     sotto = 0
+    # ### ⛔ **IL RIFIUTO DI `--commit`, PROVATO E NON DICHIARATO** *(difetto del
+    # ### `2026-10-12`)*. ### ⭐ **E questo braccio POTEVA fallire**: fino a quel
+    # ### giorno `aggiorna` ### **accettava** quel flag, e ci scriveva un numero
+    # ### ### **falso per costruzione** nella riga di storico.
+    # ### ⚠ **E l-`assert` scatta PRIMA di toccare qualunque cosa**, quindi questo
+    # ### braccio ### **non puo- lasciare danno**: nessun file viene scritto.
+    try:
+        aggiorna([], {}, "QUALUNQUE", [], [], "un motivo lungo abbastanza", "abc1234")
+        buono = False
+    except AssertionError as _e:
+        buono = "--commit" in str(_e) and "chiusura.commit" in str(_e)
+    sotto += 1 if buono else 0
+    ok += 1 if buono else 0
+    print("  %-62s %s" % ("### DEVE scattare: `aggiorna` RIFIUTA `--commit`",
+                          "ok" if buono else "### SBAGLIATO"))
+    # ### ✅ **E IL VERSO OPPOSTO: senza `--commit` l-`assert` NON scatta**, e il
+    # ### percorso arriva al controllo dopo *(l-id che non esiste)*. ### **Senza questo
+    # ### braccio il primo passerebbe anche se `aggiorna` rifiutasse SEMPRE.**
+    try:
+        aggiorna([], {}, "QUALUNQUE", [], [], "un motivo lungo abbastanza", "")
+        buono = False
+    except AssertionError as _e:
+        buono = "--commit" not in str(_e)
+    sotto += 1 if buono else 0
+    ok += 1 if buono else 0
+    print("  %-62s %s" % ("### e SENZA `--commit` il rifiuto NON e- quello",
+                          "ok" if buono else "### SBAGLIATO"))
     _v = base(stato="APERTA")
     _campo(_v, "stato=CHIUSA")
     _campo(_v, "chiusura.criterio=il criterio")
@@ -2344,7 +2391,7 @@ def storico_commit():
     print("IL CAMPO `commit` DELLO STORICO -- preso DAI LOG, non indovinato")
     print("=" * 96)
     print("  righe: %d   commit che hanno toccato il file: %d" % (len(vive), len(commits)))
-    prec, assegnate = 0, 0
+    prec, assegnate, totcorretti = 0, 0, 0
     for c in commits:
         qc = subprocess.run(["git", "show", "%s:doc/indice/storico.jsonl" % c], cwd=RADICE,
                             capture_output=True, text=True, encoding="utf-8")
@@ -2359,26 +2406,48 @@ def storico_commit():
                                                            b["motivo"]), (
                 "`%s`: la riga %d di allora NON e- la riga %d di oggi: lo storico e- stato "
                 "RISCRITTO, e questa funzione si ferma" % (c, k + 1, k + 1))
-        n = 0
+        n, corretti = 0, 0
         for k in range(prec, len(sue)):
-            if not vive[k].get("commit"):
+            fermo = vive[k].get("commit")
+            if not fermo:
                 vive[k]["commit"] = c
                 n += 1
+            elif fermo != c:
+                # ### ⛔ **I LOG VINCONO SU UN VALORE SCRITTO, e non e- un-eccezione:
+                # ### e- il principio di questa funzione** -- *<<non si indovina: si
+                # ### LEGGE DAI LOG>>*. ### **Un valore che i log SMENTISCONO non e- un
+                # ### dato: e- un errore**, e correggerlo e- l-unica cosa che questa
+                # ### funzione puo- fare di coerente con il suo nome.
+                # ### ⚠ **E SI STAMPA, sempre:** correggerlo in silenzio vorrebbe dire
+                # ### ### **nascondere che qualcuno ci aveva scritto un altro numero.**
+                print("  ### CORRETTO  riga %d (`%s`): c-era `%s`, i LOG dicono `%s`"
+                      % (k + 1, vive[k].get("id", "?"), fermo, c))
+                vive[k]["commit"] = c
+                corretti += 1
         if len(sue) > prec:
             print("  %-10s righe %5d..%-5d  (%d)  %s" % (c, prec + 1, len(sue),
                                                          len(sue) - prec,
-                                                         "riempite %d" % n))
+                                                         "riempite %d%s"
+                                                         % (n, ", CORRETTE %d" % corretti
+                                                            if corretti else "")))
         assegnate += n
+        totcorretti += corretti
         prec = max(prec, len(sue))
     restano = [k for k, v in enumerate(vive) if not v.get("commit")]
     print()
-    print("  riempite: %d   senza commit: %d" % (assegnate, len(restano)))
+    print("  riempite: %d   corrette: %d   senza commit: %d"
+          % (assegnate, totcorretti, len(restano)))
     if restano:
         print("  ### LE %d SENZA COMMIT SONO LE RIGHE %d..%d, scritte DOPO l-ultimo commit:"
               % (len(restano), restano[0] + 1, restano[-1] + 1))
         print("  ### il commit che le conterra- NON ESISTE ANCORA. Si riempiono al giro dopo,")
         print("  ### ed e- IL LOTTO DI RITARDO dichiarato nel sorgente di questa funzione.")
-    if assegnate:
+    # ### ⛔ **SI SCRIVE ANCHE PER UNA SOLA CORREZIONE**, e il bug era qui: prima
+    # ### la condizione era `if assegnate`, cioe- ### **solo i campi RIEMPITI**. Una
+    # ### correzione veniva ### **STAMPATA e non SCRITTA** -- cioe- il comando diceva
+    # ### <<CORRETTO>> e il file ### **restava sbagliato.** ### ⚠ **L-ho visto perche-
+    # ### il validatore ha rifiutato lo stesso errore subito dopo.**
+    if assegnate or totcorretti:
         io.open(STORICO, "w", encoding="utf-8", newline=NL).write(
             NL.join(json.dumps(v, ensure_ascii=False) for v in vive) + NL)
         print("  scritto doc/indice/storico.jsonl")
