@@ -14548,3 +14548,17 @@ Ogni dato di `db_era2/` ha ### **il suo TIMBRO accanto**, col campo `versione_da
 ### ⚠ **E il candidato e' gia' nel banco** *(`geometria.cicli_corti`)*, ma **i pareggi sono lo stesso problema dello spareggio fra archi di `P5`:** ### **su un grafo regolare capitano SEMPRE**, e ogni spareggio che so costruire e' **non deterministico oppure POSIZIONALE** -- e `A17` vieta le posizioni.
 
 ### 📌 **LA DOMANDA VERA, e non la decido io:** esiste un insieme di cicli **determinato dal grafo e dallo STATO**, non dalla numerazione? ### ⭐ **E la mia raccomandazione e' di TRATTARLO COME UNO:** se decidi l'insieme, **tre domande si chiudono insieme**; se decidi che non esiste, **tre limiti si dichiarano insieme**. ### **In entrambi i casi la decisione e' UNA.** Sta in `[[DOMANDA-BASE-DI-CICLI]]`.
+
+---
+
+## UN TERZO DIFETTO NEL PRESIDIO SULLO STOP, E L'HO VISTO PERCHE' MI E' SUCCESSO *(2026-10-12)*
+
+### ⛔ **IL DIFETTO: il ramo che NON blocca metteva comunque `additionalContext`.** Cioe' il hook ### **iniettava contesto nella conversazione a OGNI chiusura di turno**, e ### **il turno ricominciava per leggerlo** -- giro dopo giro, con lo stesso testo, ### **mentre il hook diceva <<non blocco>>.**
+
+### ⚠ **E L'HO VISTO PERCHE' MI E' SUCCESSO:** venivo risvegliato ripetutamente con lo stesso messaggio, e il hook riportava `blocca = False`. ### ⭐ **Il difetto non era nel BLOCCO: era nel PARLARE quando non c'era niente da impedire.**
+
+### ✅ **LA CURA: quando non blocca, TACE** -- solo `{continue: true}`, nessun `hookSpecificOutput`. ### **E il motivo non si perde: va su `stderr`**, che finisce nei log e **non** nella conversazione.
+
+### ⭐ **E DUE BRACCI NUOVI LO PRETENDONO, e guardano L'USCITA VERA e non la mia parola:** si **gira il processo** con `stop_hook_active` vero e **si legge il `JSON`** -- `continue` deve essere `true` e `hookSpecificOutput` **non deve esserci**; e `stderr` **non deve essere vuoto**, perche' il motivo deve restare leggibile. ### **`13` su `13`.**
+
+### ⛔ **E LA LEZIONE VALE OLTRE QUESTO PRESIDIO: un presidio che parla quando non ha niente da impedire non e' informativo, e' RUMORE CHE SI AUTOALIMENTA.**

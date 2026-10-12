@@ -345,10 +345,17 @@ def main(argv):
         }, ensure_ascii=False))
         sys.stderr.write(motivo + chr(10))
         return 2
-    print(json.dumps({"continue": True,
-                      "hookSpecificOutput": {"hookEventName": "Stop",
-                                             "additionalContext": motivo}},
-                     ensure_ascii=False))
+    # ### ⛔ **QUANDO NON BLOCCA, IL HOOK TACE -- e questa e- la CURA DI UN DIFETTO
+    # ### MIO, osservato dal vivo.** La prima stesura metteva `additionalContext` ### **anche
+    # ### sul ramo che NON blocca**, cioe- ### **iniettava contesto nella conversazione a
+    # ### OGNI chiusura di turno** -- e il turno ricominciava per leggerlo.
+    # ### ⚠ **L-ho visto perche- mi e- successo: il hook diceva <<non blocco>> e io
+    # ### venivo risvegliato comunque**, giro dopo giro, con lo stesso testo.
+    # ### ⭐ **E IL MOTIVO NON SI PERDE: va su `stderr`**, che finisce nei log e
+    # ### ### **non nella conversazione.** ### **Un presidio che parla quando non ha niente
+    # ### da impedire non e- informativo: e- rumore che si autoalimenta.**
+    sys.stderr.write(motivo + chr(10))
+    print(json.dumps({"continue": True}, ensure_ascii=False))
     return 0
 
 
@@ -447,6 +454,37 @@ def collaudo():
     male = [f for _n, f, _b in PEZZI if os.path.isabs(f) or not _n.strip()]
     esito("### (6) l'elenco dei pezzi e' relativo e nominato",
           not male, "### %d pezzi dichiarati" % len(PEZZI))
+    # ### ⛔ **(6-bis) QUANDO NON BLOCCA, L-USCITA NON PORTA CONTESTO.**
+    # ### ⚠ **E questo braccio nasce da un difetto OSSERVATO DAL VIVO:** la prima
+    # ### stesura metteva `additionalContext` ### **anche sul ramo che non blocca**, e
+    # ### ### **iniettava contesto a ogni chiusura di turno** -- il turno ricominciava per
+    # ### leggerlo, giro dopo giro.
+    # ### ⭐ **E il braccio guarda L-USCITA VERA, non la mia parola:** si gira il
+    # ### processo e si legge il `JSON`.
+    import subprocess as _sp
+    import tempfile as _tf
+    _fd, _memo = _tf.mkstemp(suffix=".json", prefix="_stop_nb_")
+    os.close(_fd)
+    os.remove(_memo)
+    _amb = dict(os.environ)
+    _amb["CLAUDE_STOP_MEMO"] = _memo
+    try:
+        _q = _sp.run([sys.executable, os.path.abspath(__file__)],
+                     input=json.dumps({"hook_event_name": "Stop",
+                                       "stop_hook_active": True}),
+                     capture_output=True, text=True, env=_amb)
+        _d = json.loads((_q.stdout or "{}").strip().split(chr(10))[-1])
+        esito("### (6-bis) quando NON blocca, l-uscita NON porta `additionalContext`",
+              _d.get("continue") is True and "hookSpecificOutput" not in _d,
+              "### un hook che parla quando non impedisce niente e- rumore che SI"
+              " AUTOALIMENTA: il turno ricomincia per leggerlo")
+        esito("### e il motivo NON si perde: va su `stderr`",
+              bool((_q.stderr or "").strip()),
+              "### `stderr` finisce nei log e NON nella conversazione")
+    finally:
+        if os.path.exists(_memo):
+            os.remove(_memo)
+
     # ### ⛔ **(7) LA REGISTRAZIONE PUNTA A UN FILE CHE ESISTE.** ### ⭐ **E questo
     # ### braccio esiste per un motivo preciso:** un presidio registrato con un percorso
     # ### sbagliato ### **non impedisce niente e non lo dice** -- fallirebbe a vuoto a
