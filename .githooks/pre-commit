@@ -84,6 +84,11 @@ python "$(git rev-parse --show-toplevel)/primo_ordine/_collauda_guida.py" || exi
 #  IL COLLAUDO DELLA CATENA -- e sta QUI perche' L'HO MISURATO: 2.55 s.
 #  ### Era classificato <<LENTO, oltre i 120 secondi>>, e quel numero era di
 #  ### un'altra cosa: i lenti veri sono i GENERATORI DI REFERTO (45.99 e 28.33 s).
+#  ### [2026-10-12] E LA DIVISIONE FRA VELOCI E LENTI ORA STA A 500 SECONDI, PER
+#  ### DECISIONE DI LUCA: e' una SOGLIA DI LAVORO (quanto e' disposto ad aspettare a
+#  ### ogni commit), non una grandezza derivata. La frase qui sopra resta perche' e'
+#  ### STORICA: dice come quel collaudo ERA classificato, e falsificarla per far
+#  ### tornare un numero sarebbe riscrivere il passato.
 #  ### Un comando che STAMPA I TEMPI (`primo_ordine/collauda.py`) l'ha trovato,
 #  ### e una classificazione ASSERITA invece che misurata e' esattamente cio' che
 #  ### il par. 2 dice di non fare.

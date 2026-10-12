@@ -757,7 +757,9 @@ METODI['REFERTO-FOTOGRAFIA-RIGENERATA'] = (
 
 METODI['P-TEMPI'] = (
     "NATO NELL-ERA 2: `python primo_ordine/collauda.py` fa girare TUTTI i collaudi "
-    "dichiarati, stampa il tempo di ognuno, e confronta il totale col budget di 120 s. "
+    "dichiarati, stampa il tempo di ognuno, e confronta il totale col budget di 500 s "
+    "(### DECISO DA LUCA il 2026-10-12: e' una SOGLIA DI LAVORO, non una grandezza "
+    "derivata -- il 120 di prima era ereditato da un'altra classificazione). "
     "### E OLTRE IL BUDGET E- UN SEGNALE, NON UN RIFIUTO: il tempo di una macchina non e- "
     "una proprieta- del repo, e fermare su quello vorrebbe dire rifiutare un commit "
     "perche- il computer era occupato. ### Ma un `pre-commit` troppo lento E- UNA RAGIONE "

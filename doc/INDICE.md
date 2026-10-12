@@ -16,7 +16,7 @@
 | `INFRASTRUTTURA` | `ENTRAMBE` | 24 |
 | `METODO` | `1` | 156 |
 | `METODO` | `2` | 16 |
-| `METODO` | `ENTRAMBE` | 88 |
+| `METODO` | `ENTRAMBE` | 89 |
 
 | id | classe | dominio | era | stato | blocca | titolo |
 |---|---|---|---|---|---|---|
@@ -83,6 +83,7 @@
 | `BARRIERA-ROTTA-NEL-COMMIT` | DIFETTO | INFRASTRUTTURA | ENTRAMBE | ### **CHIUSA** |  | il collaudo della barriera scriveva git config e falliva DENTRO un commit, 9 su  |
 | `BASTA-PROTOTIPI` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | basta prototipi: il simulatore riusa l-architettura provata dell-era 1, adattata |
 | `BLOB-DAL-DISCO-NON-DAL-REPO` | DIFETTO | INFRASTRUTTURA | ENTRAMBE | ### **APERTA** |  | il blob dichiarato di un reperto era quello del DISCO con le CRLF, non dei commi |
+| `BUDGET-COLLAUDI-500` | DECISIONE | METODO | ENTRAMBE | ### **APERTA** |  | il budget dei collaudi e- 500 s, soglia di LAVORO decisa da Luca, e niente paral |
 | `C1` | MISURA | FISICA | 1 | ### **CHIUSA** |  | C1 VALE SEMPRE ⏳[EPOCA 1 · MISURA] / ESITO (I): nessun bug. omega = coppia/inerz |
 | `C1-PEQ-ESATTO` | CURA | FISICA | 1 | ### **CHIUSA** |  | PEQESATTO — rilassamento in forma esatta / GLOBALE §2① / 7/7 (Z95) |
 | `C10` | MISURA | METODO | 1 | ### **CHIUSA** |  | C10 VALE SEMPRE ⏳[EPOCA 1 · MISURA] / LA BARRA D'ERRORE USATA FINORA E' TRE VOLT |

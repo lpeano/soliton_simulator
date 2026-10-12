@@ -13,10 +13,15 @@ occupato.** ### ✅ **Un SEGNALE invece dice una cosa vera: <<questo `pre-commit
 diventando una ragione per dare `--no-verify`>>** — ed è il difetto che `A9` descrive,
 ### **arrivato dal lato del tempo.**
 
-### 📌 **IL BUDGET E' DICHIARATO E NON SCELTO:** `120` secondi, ### **che è il valore che
-questo repo ha già misurato come soglia** — i collaudi lenti *(la catena, il referto
-dell'infrastruttura)* ### **lo superano, e per quello vivono SOLO nella CI.** ### **Non
-l'ho tarato io: era già la riga di divisione fra `VELOCI` e `LENTI`.**
+### 📌 **IL BUDGET È UNA SOGLIA DI LAVORO, DECISA DA LUCA il `2026-10-12`: `500`
+secondi.** È ### **quanto è disposto ad aspettare a ogni commit sulla sua macchina**, e
+### **non si deriva da niente** — non è una grandezza del sistema.
+### ⚠ **E QUI PRIMA C'ERA SCRITTO <<DICHIARATO E NON SCELTO: `120` secondi, il valore
+che questo repo ha già misurato>>, e NON ERA VERO:** quel `120` veniva dalla
+classificazione di ### **un'altra cosa**, e `csv/_replay_registri.py` porta la mia stessa
+annotazione *(<<E QUI AVEVO SCRITTO <<supera i 120 secondi>>>>)*.
+### ✅ **E <<oltre il budget → SEGNALE>> resta la parte che conta**, identica: una
+soglia di lavoro ### **non rifiuta un commit.**
 
 ### ⚠ **E I TEMPI NON SONO UN NUMERO DEL REPO: sono una MISURA DI QUESTA MACCHINA.** Il
 referto li stampa ### **con la piattaforma accanto**, perché ### **un tempo senza la
@@ -49,10 +54,18 @@ sys.path.insert(0, os.path.join(RADICE, "csv"))
 NL = chr(10)
 PRESIDIO = "P-TEMPI"
 
-# ### ⛔ **IL BUDGET, in secondi.** ### **Non e- scelto: e- la riga di divisione fra
-# ### `VELOCI` e `LENTI` che `csv/_replay_registri.py` ha gia-** -- e quella nasce da una
-# ### misura, non da un gusto.
-BUDGET = 120.0
+# ### ⛔ **IL BUDGET, in secondi: `500`, DECISO DA LUCA il `2026-10-12`.**
+# ### ⚠ **E IL COMMENTO CHE STAVA QUI DICEVA UNA COSA FALSA:** *<<non e- scelto: e- la
+# ### riga di divisione fra `VELOCI` e `LENTI` che `csv/_replay_registri.py` ha gia->>*.
+# ### ### **Non era vero.** Quel `120` era ereditato da una classificazione di un-altra
+# ### cosa *(e `csv/_replay_registri.py` porta la mia stessa annotazione: <<E QUI AVEVO
+# ### SCRITTO <<supera i 120 secondi>>>>)*, e chiamarlo <<derivato>> ### **gli dava
+# ### un-autorita- che non aveva.**
+# ### ⭐ **CHE COS-E- DAVVERO: una SOGLIA DI LAVORO**, cioe- ### **quanto Luca e-
+# ### disposto ad aspettare a ogni commit sulla sua macchina.** ### **Non si deriva da
+# ### niente, e non deve: non e- una grandezza del sistema.**
+# ### ✅ **E RESTA UN SEGNALE, NON UN RIFIUTO**, esattamente come prima.
+BUDGET = 500.0
 
 # ### ⚠ **I COLLAUDI, DICHIARATI UNO A UNO.** ### **Non si scoprono con un `glob`:**
 # ### un `glob` prenderebbe ### **anche un file nuovo che nessuno ha ancora guardato**, e

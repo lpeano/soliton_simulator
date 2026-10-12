@@ -13950,3 +13950,19 @@ Ogni dato di `db_era2/` ha ### **il suo TIMBRO accanto**, col campo `versione_da
 
 ### ✅ **E i posti miei scendono da `3` a `2`:** restano `P1` e `P3`, ### **entrambi col loro argomento.**
 
+## ⭐ **IL BUDGET DEI COLLAUDI PASSA A `500` s, E IL COMMENTO CHE LO DICEVA <<DERIVATO>> ERA FALSO** *(2026-10-12)*
+
+### ✅ **I PUNTI `1` E `2` ERANO GIA' FATTI quando la seconda versione del mandato e' arrivata**, e la seconda ### **sostituisce la prima sul punto `3`**: la prima chiedeva di mettere in coda il ### **parallelismo dei collaudi**, la seconda lo ### **VIETA.**
+
+### ⛔ **E LA COSA PIU' IMPORTANTE NON E' IL NUMERO: E' CHE IL COMMENTO DICEVA UNA COSA FALSA.** Diceva *<<IL BUDGET E' DICHIARATO E NON SCELTO: `120` secondi, il valore che questo repo ha gia' misurato come soglia>>*. ### **Non era vero:** quel `120` veniva dalla classificazione di ### **un'altra cosa**, e `csv/_replay_registri.py` porta ### **la mia stessa annotazione** *(<<E QUI AVEVO SCRITTO <<supera i `120` secondi>>>>)*. ### ⭐ **Chiamarlo <<derivato>> gli dava un'autorita' che non aveva.**
+
+### 📌 **CHE COS'E' DAVVERO: una SOGLIA DI LAVORO** — quanto Luca e' disposto ad aspettare a ogni commit sulla sua macchina. ### **Non si deriva da niente, e non deve: non e' una grandezza del sistema.** E il motivo, con le sue parole: ### **preferisce attendere un controllo completo piuttosto che saltarlo.**
+
+### ✅ **LA MISURA DOPO IL CAMBIO:** il `pre-commit` costa ### **`146.7` s su `500`**, cioe' il ### **`29%`**, e i collaudi passano ### **`40` su `40`.**
+
+### ⛔ **E IL NO AL PARALLELISMO E' UNA DECISIONE CON UN NUMERO DIETRO, non una dimenticanza:** la macchina in alcuni momenti ### **non ha memoria sufficiente** per reggerlo. ### **L'ho misurato io quella notte:** `4.4` GB liberi su `32`, commit a `46.1` su `55.3` *(`9.2` liberi)*, coi due blocchi maggiori a `12.5` GB *(l'editor, `35` processi)* e `8.9` *(la VM di Linux)* — e ### **quella notte un run E' CADUTO per memoria esaurita.** ### ⭐ **Far girare i collaudi in parallelo vorrebbe dire moltiplicare il picco di memoria PROPRIO NEL MOMENTO IN CUI SI COMMITTA**, cioe' ### **trasformare un presidio in una causa di caduta.**
+
+### ⚠ **E DUE POSTI NON LI HO TOCCATI, ed e' deliberato:** la mia annotazione in `csv/_replay_registri.py` e la ### **classificazione vecchia** di un collaudo in `csv/_metodi_era2.py` *(<<LENTO, oltre i `120` s>> e misura `2.55` s)*. ### **Sono STORIA: dicono che quella classificazione era SBAGLIATA** — cambiare il numero ### **la renderebbe vera, e non lo era.** ### **Lo stesso vale per il commento del hook**, dove la soglia nuova si ### **AGGIUNGE** accanto alla frase storica.
+
+### ✅ **E L'IMPRONTA DEL HOOK E' RIGENERATA, con la diff visibile:** `pre-commit` da `b85fc070...` a `22695521...` in `csv/_barriera.lock` — che e' esattamente cio' che quel file serve a fare: ### **non impedire, ma RENDERE VISIBILE.**
+
