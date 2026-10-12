@@ -13940,3 +13940,13 @@ Ogni dato di `db_era2/` ha ### **il suo TIMBRO accanto**, col campo `versione_da
 
 ### ✅ **E `9-ter` E' RISPETTATO AL CONTRARIO DI COME SEMBRA:** la tabella ### **NON aggiunge leggi**, ne ### **TOGLIE una duplicazione** — oggi la stessa fisica vive ### **in `proto_camminata/` E in `primo_ordine/`.**
 
+## ✅ **IL POSTO `P2` E' CHIUSO: L'ORDINE DI STRANG E' UNA LISTA, E L'ARGOMENTO NON E' MIO** *(2026-10-12)*
+
+### ⭐ **L'ARGOMENTO CHE CHIUDE E' UNA RIGA, e io non l'avevo visto:** la composizione di Strang usa ### **LO STESSO PEZZO DUE VOLTE** — `N(dtau/2)` → lineare → `N(dtau/2)`. ### ⛔ **Un campo per pezzo non puo' esprimere un pezzo che compare due volte**, perche' vorrebbe ### **due valori nello stesso campo**; una ### **lista ammette ripetizioni.**
+
+### ⚠ **E IL SECONDO ARGOMENTO LO DICHIARO PER QUELLO CHE E':** il guardiano cita `A10` *(«una sola fonte dell'ordine»)*, ma ### **`A10` parla letteralmente dei DOMINI DELLA FISICA** — quindi qui e' ### **una somiglianza di forma, non una prova.** ### **Il lavoro lo fa il primo argomento**, e dirlo e' meglio che appoggiarsi a un assioma che parla d'altro.
+
+### 📌 **CONSEGUENZA SULLO SCHEMA, concreta:** l'ordine va in tabella come ### **lista**, e lo schema ### **deve AMMETTERE le ripetizioni** — quindi il collaudo ha ### **due bracci**: una lista con lo stesso pezzo due volte ### **PASSA**, e l'assenza dell'ordine ### **RIFIUTA.**
+
+### ✅ **E i posti miei scendono da `3` a `2`:** restano `P1` e `P3`, ### **entrambi col loro argomento.**
+

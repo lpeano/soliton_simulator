@@ -151,3 +151,16 @@ avanti.
 ### ⛔ **E LA COSA CHE NON FARO': TOCCARE IL BANCO.** `[[BANCO-CONGELATO]]` dice che
 `proto_camminata/` e' un ### **riferimento**: il criterio di passaggio lo ### **legge**,
 e non lo cambia ### **nemmeno di un byte.**
+
+---
+
+## ✅ **ANNOTAZIONE: IL POSTO `P2` E' CHIUSO — L'ORDINE DI STRANG E' UNA LISTA** *(argomento del guardiano, accettato da Luca, `2026-10-12`)*
+
+### ⭐ **L'ARGOMENTO CHE CHIUDE, e si regge da solo:** la composizione di Strang usa ### **LO STESSO PEZZO DUE VOLTE** — `N(dtau/2)` → passo lineare → `N(dtau/2)`. ### ⛔ **Un CAMPO PER PEZZO non puo' esprimere un pezzo che compare due volte:** un campo dice *«questo pezzo sta al posto `k`»*, e un pezzo che sta ### **a due posti** vorrebbe ### **due valori nello stesso campo.** ### ✅ **Una LISTA lo esprime senza sforzo**, perche' una lista ### **ammette ripetizioni.**
+
+### 📌 **E IL SECONDO ARGOMENTO E' UN'ANALOGIA, e la dichiaro per quello che e':** il guardiano cita `A10` *(«una sola fonte dell'ordine»)*. ### ⚠ **`A10` parla letteralmente dei DOMINI DELLA FISICA** — *«dove due domini devono parlarsi il PONTE dev'essere UNO SOLO»* — quindi qui ### **non e' una prova, e' una somiglianza di forma**: la lista e' ### **un ponte solo**, i campi sparsi sono ### **tanti ponti che possono contraddirsi.** ### **La somiglianza regge, ma il lavoro lo fa il primo argomento.**
+
+### ⛔ **QUINDI `P2` NON E' PIU' UN POSTO DICHIARATO: E' DECISO.** L'ordine di composizione va in tabella come ### **UNA LISTA**, e lo schema ### **deve ammettere le ripetizioni** — cioe' ### **un collaudo verifica che una lista con lo stesso pezzo due volte PASSI**, e che l'assenza dell'ordine ### **RIFIUTI.**
+
+### ✅ **E I POSTI MIEI SCENDONO DA TRE A DUE:** restano `P1` *(i tipi di estremita' come tipo nuovo)* e `P3` *(la crescita col raddoppio)*. ### **Entrambi hanno il loro argomento; quello di `P2` me l'ha dato il guardiano.**
+
