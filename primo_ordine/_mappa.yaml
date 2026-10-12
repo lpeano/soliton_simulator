@@ -86,6 +86,14 @@ moduli:
     responsabilita: il collaudo della struttura compatta, e i sette casi che devono fallire
     importa: [_presidio, incidenza]
 
+  - nome: motore.py
+    responsabilita: il doppio contenitore, i cinque pezzi unitari, e la regola del tick
+    importa: [_presidio, incidenza, stato]
+
+  - nome: _collauda_motore.py
+    responsabilita: il collaudo del motore -- zero allocazioni, unitarieta-, regola del tick
+    importa: [_presidio, incidenza, motore, stato]
+
   - nome: crescita.py
     responsabilita: la crescita del grafo, regola NON-H col suo bilancio
     importa: []

@@ -106,6 +106,12 @@ FILE_FISICA = (
     # ### derivato tenuto accanto si-.
     'primo_ordine/incidenza.py',
     'primo_ordine/_collauda_incidenza.py',
+    # ### IL MOTORE *(sotto-pezzo `5b`)*: il doppio contenitore, le scritture in
+    # ### posto, ### **le cache che portano la loro taglia**, e i cinque pezzi
+    # ### unitari. ### ⛔ **E LA REGOLA DEL TICK: `cresci()` AL PIU- UNA VOLTA**,
+    # ### perche- la ricostruzione dei derivati costa `O(m log m)` ### **a chiamata.**
+    'primo_ordine/motore.py',
+    'primo_ordine/_collauda_motore.py',
     # ### IL COSTRUTTO `@rif` *(punto `14`)*: ### **byte-inerte**, e il suo
     # ### collaudo lo verifica ### **con `is`.**
     'primo_ordine/_rif.py',

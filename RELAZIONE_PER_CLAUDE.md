@@ -14104,3 +14104,32 @@ Ogni dato di `db_era2/` ha ### **il suo TIMBRO accanto**, col campo `versione_da
 ### ✅ **E IL LAVORO NON SI FERMA:** la regola dice che una decisione di fisica non presa va in `DA_DECIDERE_LUCA` e, **se c'e' altro lavoro indipendente, si continua con quello**. Il contenitore del motore e i **tre operatori su `psi`** *(Grover, moneta di spin, spostamento con trasporto)* **non dipendono da questa risposta**.
 
 ### ⭐ **E UNA BUONA NOTIZIA, verificata e non assunta:** la numerazione delle estremita' del banco **COINCIDE con la mia**. `camminata2.py` fa `psi.reshape(-1, 2, 2)`, cioe' *(arco, lato, componente)* -- che e' **esattamente** *<<l'arco `k` porta le estremita' `2k` e `2k+1`>>*. ### **Il sotto-pezzo `5a` e' allineato al banco PER COSTRUZIONE**, e non per fortuna.
+
+---
+
+## IL SOTTO-PEZZO `5b`: IL DOPPIO CONTENITORE -- E LA VERIFICA ESTERNA MI HA PRESO DUE AFFERMAZIONI SBAGLIATE IN `5a` *(2026-10-12)*
+
+### ⛔ **COMINCIO DALLE DUE CORREZIONI, perche' erano MIE.** La verifica esterna di `8787f8c` ha trovato, nel codice e nel commit:
+
+| | che cosa avevo scritto | perche' e' sbagliato |
+|---|---|---|
+| `1` | *«`2` e' **l'unico** valore per cui il costo e' `O(n)` ammortizzato ... un `1.5` o un `3` sarebbero una manopola; il `2` e' **la legge**»* | ### **FALSO: qualunque `r > 1`** da' costo ammortizzato **`O(1)` per inserimento**, con lo spreco limitato da un fattore `r`. ### **Il `2` e' una CONVENZIONE dichiarata** -- l'usuale -- e il suo limite *(al piu' `2x`)* sta **gia' dentro la soglia della memoria |
+| `2` | *«la ricostruzione a ogni nascita costa `O(m²)` su una corsa che cresce; il raddoppio costa `O(m)` ammortizzato»* | ### **FUORVIANTE: il raddoppio NON TOGLIE la ricostruzione.** `cresci()` chiama `_rifa()` **ogni volta**, e quello e' **un `argsort`: `O(m log m)` A CHIAMATA**, qualunque sia la capacita' |
+
+### ⭐ **E CHIAMARE <<LEGGE>> UNA CONVENZIONE NON E' UNA SFUMATURA:** una legge non si cambia senza una derivazione, **una convenzione si cambia dichiarandolo** -- e dire *<<legge>>* le dava **un'autorita' che non ha**. ### Corretto in **quattro posti**: `incidenza.py` *(commento e docstring)*, `[[MOTORE-INCIDENZA]]`, `INVENTARIO_strumenti.md`, e il task history. ### ⚠ **Il commit `8787f8c` non si riscrive: la correzione sta QUI, e dice che cosa era falso.**
+
+### ✅ **E LA CONSEGUENZA E' UNA REGOLA, non una nota:** le nascite e le morti di un tick **si RACCOLGONO**, e `cresci()` si chiama **al piu' UNA VOLTA PER TICK**. `apri_tick()` azzera il contatore, `chiudi_tick()` **ALZA** oltre una, e **un braccio di collaudo lo pretende**. ### ⭐ **Il contatore comincia a `-1` e non a `0`**, e la differenza conta: ### **crescere FUORI da un tick e' un errore DIVERSO da crescere DUE VOLTE DENTRO.**
+
+### 📌 **E IL RAPPORTO, MISURATO sullo stesso grafo come il mandato chiedeva:** una `cresci()` costa **`0.88x`** un passo a `m=1000`, **`0.77x`** a `m=1e4`, **`0.50x`** a `m=1e5`. ### ✅ **IL PASSO DOMINA, e il rapporto MIGLIORA con la taglia** -- quindi, con **una** `cresci()` per tick, **la ricostruzione non e' il costo dominante**. ### ⚠ **E una cura possibile resta NON FATTA e NON DECISA:** la `CSR` si costruirebbe in **`O(m)`** con un conteggio piu' una somma cumulata, e **non violerebbe il punto unico di scrittura** *(resta una ricostruzione intera)*. ### **Non la faccio perche' il mandato dice <<solo misura e dichiarazione>>**, e perche' **un'ottimizzazione prima della misura sarebbe una cura senza il suo errore.**
+
+### ⭐ **IL `5b` VERO: ZERO ALLOCAZIONI NEI TICK DOPO IL PRIMO.** E' **la promessa del doppio contenitore**, e si misura: **`10` buffer al primo tick, `0` nei `20` dopo**, su `n = 64`, `256`, `1024`. ### ⛔ **Il difetto che impedisce e' preciso:** una cache fra due passi **che non porta la taglia** -- il grafo cresce, il buffer resta della taglia di prima, e **`numpy` non se ne accorge** se la forma e' compatibile. ### **Il risultato e' sbagliato senza sembrarlo.** Qui ogni buffer e' una chiave **`(nome, forma, tipo)`**: una taglia nuova e' **un'altra chiave**, quindi ### **non esiste il caso <<riuso quello vecchio>>.**
+
+### ⛔ **QUATTRO DEI CINQUE PEZZI RIFIUTANO UNA FRAZIONE DIVERSA DA `1`**, e il motivo e' **matematico**: ### **la radice di una riflessione non e' una riflessione**, quindi *mezzo Grover* **non significa niente** -- e una frazione diversa da `1` **ALZA** invece di fare **una cosa plausibile e sbagliata**. ### ✅ **La moneta di spin INVECE la prende**, perche' e' **un flusso in `eps dtau`**, e il collaudo prova che **DUE META' FANNO L'INTERO** *(scarto `5.0e-16`)*: ### **senza quel braccio, quello di sopra proverebbe solo che TUTTO alza.**
+
+### ⚠ **E `_ruota_attorno_a_n` USA DUE TEMPORANEI, che non sono uno spreco:** `out[0]` dipende da `psi[1]` e `out[1]` da `psi[0]`, quindi scrivere la prima componente **distruggerebbe** cio' che serve alla seconda. ### **Un <<in posto>> ingenuo qui darebbe un risultato sbagliato senza sembrarlo.**
+
+### ⚠ **E `[[P-ES1]]` ME L'HA PRESA:** quella funzione **scrive la forma `-1j`**, e il presidio vuole che chi integra **sia l'esecutore o si dichiari**. ### ✅ **Dichiarata, col suo perche':** *non integra, **applica una FORMA ESATTA*** -- `exp(-i a sigma.n) = cos a I - i sin a (sigma.n)` vale **esattamente** perche' `(sigma.n)^2 = I` quando `|n| = 1`, e ### **il motore MISURA che i versori siano unitari invece di assumerlo**. Un esecutore che la integrasse numericamente darebbe **un risultato PEGGIORE**. ### ⚠ **E al primo colpo l'ho messa nel dizionario SBAGLIATO** *(quello delle chiamate invece di `SCRITTI_A_MANO`)*, e il presidio **me l'ha detto dicendo entrambe le cose**: *<<non e' dichiarato>>* e *<<l'eccezione e' dichiarata e la chiamata non c'e' piu'>>*.
+
+### 📌 **I NUMERI.** `python primo_ordine/_collauda_motore.py`: **`30` su `30`**, di cui **`12`** casi che **DEVONO fallire**. Unitarieta': **`1.3e-16`** per il Grover, **`2.5e-16`** per la moneta, **`0` esatto** per lo spostamento. Il Grover e' **un'involuzione entro `0.6` ulp**. Le due sommatorie: **scarto `0.000e+00`**. ### E la suite intera: ### **`44` su `44`**, `pre-commit` **`131.7` s su `500`** *(`26%`)*.
+
+### ⚠ **CHE COSA NON C'E' ANCORA, e il perche' non e' mio:** il flusso di saturazione **per intero**. La sua parte su `phi` **da' una fase a `phi`**, e ### **il tipo di `phi` e' la domanda aperta `[[DOMANDA-PHI-REALE-O-COMPLESSO]]`**. ### ✅ **I cinque pezzi unitari invece non dipendono da quella risposta:** lavorano **su qualunque tipo lo stato dichiari.**

@@ -108,6 +108,17 @@ ECCEZIONI = {
 FORMA_PASSO = "-1j"
 
 SCRITTI_A_MANO = {
+    "primo_ordine/motore.py::_ruota_attorno_a_n":
+        "NON integra: APPLICA UNA FORMA ESATTA. `exp(-i a sigma.n) = cos a I - i "
+        "sin a (sigma.n)` vale ESATTAMENTE perche- `(sigma.n)^2 = I` quando"
+        " `|n| = 1`, e il motore MISURA che i versori siano unitari invece di"
+        " assumerlo. ### Quindi quel `-1j` NON e- un passo di integrazione a"
+        " mano: e- la FORMA CHIUSA dell-esponenziale, e un esecutore che la"
+        " integrasse numericamente darebbe un risultato PEGGIORE -- con un"
+        " errore di troncamento che qui NON ESISTE, e perdendo l-unitarieta-"
+        " al bit. ### E il collaudo lo verifica nei DUE versi: la norma si"
+        " conserva entro pochi ulp, e DUE META- fanno l-INTERO",
+
     "primo_ordine/_collauda_passo.py::eulero_esplicito":
         "e- l-EULERO ESPLICITO, scritto SOLO per il caso che DEVE fallire del punto 8: "
         "senza di lui il braccio della reversibilita- non distinguerebbe un metodo "

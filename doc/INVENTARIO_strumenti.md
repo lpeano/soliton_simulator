@@ -3323,3 +3323,22 @@ etichette rimosse, con ### **`0` persi, `0` doppi, `0` conflitti**.
 | ### ⛔ **perche' NESSUNA matrice sparsa** | lo spostamento con trasporto e' **una PERMUTAZIONE delle estremita'**, non un prodotto matrice-vettore: una permutazione vuole **un array di indici**, e una sparsa porterebbe una struttura **che nessuno usa** |
 | ### ⭐ **la cosa che TOGLIE un array** | il censimento prevedeva **due** derivati, `nodo[h]` e `compagna[h]`. Con la numerazione *(arco `k` -> estremita' `2k`, `2k+1`)* la compagna e' **`h ^ 1`**. ### **E la differenza non e' <<un array in meno>>: e' che NON PUO' DIVERGERE** |
 | ### ⚠ **il prezzo del raddoppio, dichiarato** | tiene **fino al doppio** della memoria utile, e `byte()` conta **la CAPACITA'** e non gli archi vivi: ### **dichiarare i vivi direbbe un numero piu' bello e falso** |
+| ### ⛔ **e che cosa il raddoppio NON risolve** *(verifica esterna, `2026-10-12`)* | risparmia **solo le riallocazioni di `ii` e `jj`**: `cresci()` **ricostruisce comunque** i derivati con un `argsort`, cioe' **`O(m log m)` a chiamata** — ~`30` ms a `1e5` archi, ~`0.3` s a `1e6` |
+| ### ⭐ **e il fattore `2` e' una CONVENZIONE, non una legge** | avevo scritto che fosse **l'unico** valore buono: **falso**, **qualunque `r > 1`** da' `O(1)` ammortizzato con spreco limitato da `r`. ### **Il `2` e' l'usuale**, e il suo limite *(`2x`)* sta **gia' dentro la soglia della memoria** |
+
+---
+
+## IL SOTTO-PEZZO `5b` DEL MOTORE -- IL DOPPIO CONTENITORE *(2026-10-12)*
+
+| file | BLOB *(`sha1` dei BYTE grezzi)* | che cosa misura | il collaudo |
+|---|---|---|---|
+| `primo_ordine/motore.py` | `d1512ce3` | ### **ZERO allocazioni nei tick dopo il primo**, e ### **`cresci()` al piu' UNA VOLTA per tick** | `python primo_ordine/motore.py` *(le allocazioni e il rapporto `cresci()`/passo)* |
+| `primo_ordine/_collauda_motore.py` | `69fef858` | unitarieta', involuzione, la regola del tick **nei due versi** | ### **`30`/`30`**, di cui **`12`** casi che DEVONO fallire |
+
+| | |
+|---|---|
+| **IL COMANDO, verbatim** | `python primo_ordine/_collauda_motore.py` |
+| **le allocazioni, MISURATE** | `10` buffer al primo tick, **`0` nei `20` dopo**, su `n = 64`, `256`, `1024` |
+| ### ⭐ **il rapporto `cresci()` / passo, MISURATO** | **`0.88x`** a `m=1000`, **`0.77x`** a `m=1e4`, **`0.50x`** a `m=1e5` -- ### **il PASSO domina, e il rapporto MIGLIORA con la taglia** |
+| ### ⛔ **la regola del tick** | `apri_tick()` azzera, `chiudi_tick()` **ALZA** oltre una `cresci()`. ### **Il contatore comincia a `-1`**: crescere **fuori** da un tick e' **un errore diverso** da crescere **due volte dentro** |
+| ### ⚠ **che cosa NON c'e' ancora** | il flusso di saturazione **per intero**: la sua parte su `phi` **da' una fase a `phi`**, e **il tipo di `phi` e' una domanda aperta per Luca** |

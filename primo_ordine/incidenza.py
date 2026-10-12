@@ -39,12 +39,27 @@ lo pretende **dopo ogni crescita**.
 il grado e' `offset[v+1] - offset[v]`. ### I nodi vicini, se servono, sono
 `nodo[compagna(h)]` — **derivati, non tenuti.**
 
-## ⚠ LA CAPACITA' COL RADDOPPIO, e il suo prezzo DICHIARATO
+## ⛔ LA CAPACITA' COL RADDOPPIO — **e CHE COSA NON RISOLVE**
 
-La ricostruzione a ogni nascita costa `O(m)`, cioe' **`O(m**2)` su una corsa che cresce**;
-il raddoppio costa **`O(m)` ammortizzato**. ### ⛔ **E il prezzo e' che si tiene fino al
-DOPPIO della memoria utile**, e quel prezzo sta **DENTRO** la soglia della memoria della
-scena, non accanto.
+> ### ⚠ **QUI AVEVO SCRITTO UNA COSA FUORVIANTE, e la verifica esterna me l'ha presa.**
+> Avevo scritto che *«la ricostruzione a ogni nascita costa `O(m)`, cioe' `O(m**2)` su una
+> corsa che cresce; il raddoppio costa `O(m)` ammortizzato»* — ### **come se il raddoppio
+> togliesse la ricostruzione. NON LA TOGLIE.**
+
+| | |
+|---|---|
+| ### **che cosa risolve il raddoppio** | **solo le riallocazioni di `_ii` e `_jj`**: senza, ogni nascita rialloca due array, cioe' `O(m)` **a ogni nascita** |
+| ### ⛔ **che cosa NON risolve** | `cresci()` chiama `_rifa()` **ogni volta**, e `_rifa()` ricostruisce `nodo`, `offset` ed `estremita'` **con un `argsort`**: ### **`O(m log m)` A CHIAMATA, qualunque sia la capacita'** |
+| ### 📌 **il costo vero, MISURATO** | la verifica esterna lo ha misurato: **~`30` ms a `1e5` archi**, **~`0.3` s a `1e6`** |
+| ### ⭐ **LA CONSEGUENZA, ed e' una REGOLA per il motore** | le nascite e le morti di un tick **si RACCOLGONO**, e `cresci()` si chiama **AL PIU' UNA VOLTA PER TICK**. ### **Non e' un consiglio: il motore lo dichiara e un braccio di collaudo lo pretende** |
+| ### ⚠ **il prezzo della memoria, dichiarato** | si tiene fino al **doppio** della memoria utile, e quel prezzo sta **DENTRO** la soglia della memoria, non accanto |
+
+### ⚠ **E UNA CURA POSSIBILE, NON FATTA E NON DECISA:** la `CSR` si costruirebbe in
+**`O(m)`** con un conteggio piu' una somma cumulata, invece di `O(m log m)` con
+l'`argsort` — e ### **non violerebbe il punto unico di scrittura**, perche' resta una
+**ricostruzione intera** e non un aggiornamento a pezzi. ### ⛔ **Non la faccio adesso
+perche' il mandato dice <<solo misura e dichiarazione>>**, e perche' **un'ottimizzazione
+prima della misura del `5b` sarebbe una cura senza il suo errore.**
 
 ### ⛔ **IL PUNTO UNICO DI SCRITTURA:** `cresci()` e' **l'unica** funzione che cambia
 `m`, e **ricostruisce `nodo`, `offset` ed `estremita` da `(ii, jj)`** invece di
@@ -70,11 +85,20 @@ import grafo as GR                                            # noqa: E402
 # ### sotto-pezzo che viene dopo questo.
 INDICE = np.int64
 
-# ### ⚠ **IL FATTORE DI CRESCITA, e NON e- una manopola:** `2` e- l-unico valore per cui
-# ### il costo di `n` inserimenti e- ### **`O(n)` ammortizzato** con ### **memoria
-# ### sprecata limitata** -- e' il conto classico del vettore dinamico, non una scelta
-# ### tarata su questo problema. ### **Un `1.5` o un `3` sarebbero una manopola; il `2`
-# ### e- la legge.**
+# ### ⛔ **IL FATTORE DI CRESCITA E- UNA CONVENZIONE DICHIARATA, NON UNA LEGGE** --
+# ### e questa riga ### **correggeva un-affermazione FALSA che avevo scritto io.**
+# ### ⚠ **QUELLO CHE AVEVO SCRITTO:** *<<`2` e- l-UNICO valore per cui il costo e-
+# ### `O(n)` ammortizzato ... un `1.5` o un `3` sarebbero una manopola; il `2` e- la
+# ### legge>>*. ### **E- falso, e la verifica esterna me l-ha preso:**
+# ### ### **QUALUNQUE `r > 1`** da- costo ammortizzato ### **`O(1)` per inserimento**,
+# ### con lo spreco di memoria limitato da un fattore `r`. ### **Non c-e- niente di
+# ### unico nel `2`.**
+# ### ✅ **PERCHE- ALLORA `2`:** perche- e- ### **il valore usuale**, e perche- il
+# ### suo limite sulla memoria -- ### **al piu- `2x`** -- sta ### **gia- dentro la
+# ### soglia della memoria per tick**, quindi ### **non apre un margine nuovo.**
+# ### ⭐ **E chiamarla CONVENZIONE invece di LEGGE non e- una sfumatura:** una legge
+# ### non si cambia senza una derivazione, una convenzione ### **si cambia dichiarandolo**
+# ### -- e dire <<legge>> le dava ### **un-autorita- che non ha.**
 CRESCITA = 2
 
 
@@ -205,7 +229,13 @@ class Incidenza(object):
         self.nodo, self.offset, self.estremita = _derivati(self.ii, self.jj, self.n)
 
     def _allarga(self, serve):
-        """### Raddoppia finche' ci stanno `serve` archi. ### **E conta il ripiego.**"""
+        """### Raddoppia finche' ci stanno `serve` archi. ### **E conta il ripiego.**
+
+        ### ⚠ **E QUESTO NON E- IL COSTO DI `cresci()`:** allargare e- ammortizzato,
+        ma `cresci()` ### **ricostruisce comunque i derivati con un `argsort`**, cioe-
+        ### **`O(m log m)` a chiamata.** ### **Il raddoppio risparmia le riallocazioni di
+        `_ii` e `_jj`, non la ricostruzione.**
+        """
         if serve <= self.capacita:
             # ### ✅ **IL RAMO CHE NON FA NIENTE, e va dichiarato:** la capacita- basta,
             # ### e ### **non allargare e- la cosa giusta** -- allargare <<per sicurezza>>

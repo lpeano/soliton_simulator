@@ -88,6 +88,13 @@ COLLAUDI = (
     # ### diventare ### **una seconda verita- accanto al grafo.**
     ("la struttura compatta delle estremita-",
      "primo_ordine/_collauda_incidenza.py", "pre-commit"),
+    # ### ⭐ **IL SOTTO-PEZZO `5b`: il doppio contenitore.** ### I due bracci che
+    # ### contano: ### **ZERO allocazioni nei tick dopo il primo** *(e- la promessa del
+    # ### contenitore)* e ### **`cresci()` AL PIU- UNA VOLTA PER TICK** -- la regola che
+    # ### la verifica esterna ha chiesto, dopo aver mostrato che il raddoppio
+    # ### ### **non toglie** la ricostruzione *(`argsort`, `O(m log m)` a chiamata)*.
+    ("il motore: contenitore e pezzi unitari",
+     "primo_ordine/_collauda_motore.py", "pre-commit"),
     # ### ⭐ **LO SCHEMA DELLA CAMMINATA, nei DUE VERSI** *(pezzo `2` del
     # ### simulatore)*: i tipi sulle estremita-, i pezzi unitari, i flussi, e
     # ### l-### **ordine di composizione con le ripetizioni AMMESSE.**
