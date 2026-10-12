@@ -3360,3 +3360,42 @@ etichette rimosse, con ### **`0` persi, `0` doppi, `0` conflitti**.
 | ### ⚠ **l'unico contatore che NON si rimette** | i **ripieghi dei buffer**: quelli **ricominciano davvero**, perche' i buffer del processo nuovo **non esistono ancora** -- e dire il contrario **nasconderebbe le allocazioni della ripresa** |
 | ### ✅ **e il collaudo usa una geometria NON banale** | versori **casuali** e trasporto **unitario non banale**: ### **con versori tutti uguali, un salvataggio che li scambiasse passerebbe comunque** |
 | **il costo, MISURATO** | salva `174` ms, riprendi `162` ms a `m=4096`, file di `1.09` MB |
+
+---
+
+## IL SOTTO-PEZZO `5d` -- I QUATTRO COLLAUDI DELLA MEMORIA *(2026-10-12)*
+
+> ### ⛔ **`m1` E' ROSSO: `5.00x` contro `4x`.** E il piano lo prescrive: *«`m1`
+> oltre `4` volte lo stato ⟹ **FERMO e si guarda dove**»*. ### **Si e' guardato.**
+
+| file | BLOB *(`sha1` dei BYTE grezzi)* | che cosa misura | l'esito |
+|---|---|---|---|
+| `primo_ordine/_collauda_memoria.py` | `f5ffe0c9` | le quattro soglie `m1`..`m4`, **fissate nel task history PRIMA** | ### **`8`/`10`**: `m2`, `m3`, `m4` passano, ### **`m1` NO** |
+
+### 📌 **DOVE VA LA MEMORIA, a `n=4096`** *(e identico a `16384`, scarto `0.0%`)*
+
+| | byte | in multipli dello stato |
+|---|---|---|
+| lo **stato** | `524 288` | `1.000x` |
+| la **struttura** | `229 384` | `0.438x` |
+| la **geometria** *(versori + trasporto)* | `458 752` | `0.875x` |
+| `dtau` | `32 768` | `0.062x` |
+| ### ⛔ **i BUFFER** | ### **`1 376 256`** | ### **`2.625x`** |
+| **totale** | | ### **`5.000x`** |
+
+### ⚠ **IL COLPEVOLE NON E' IL MOTORE: E' LA MIA SOGLIA.** Il `4` che avevo
+fissato contava **il raddoppio, `offset`, le estremita' raggruppate e il derivato** --
+cioe' **la struttura, che misura `0.438x`**. ### **Non contava i buffer affatto**, e i
+buffer sono ### **`2.625x`, il termine DOMINANTE.**
+
+| | |
+|---|---|
+| **cosa si puo' togliere senza perdere precisione** | `cos`+`sin` in uno *(`-0.125x`)*, lo spostamento salva **un lato solo** *(`-0.250x`)*, lo stesso per lo scalare *(`-0.062x`)*: ### **in tutto `-0.4375x`, cioe' `4.5625x` -- ANCORA SOPRA `4`** |
+| ### ⛔ **e il PAVIMENTO** | stato + struttura + geometria + `dtau` = ### **`2.375x` PRIMA DI OGNI BUFFER** |
+| ### ⚠ **cosa NON faccio** | condividere i buffer fra operatori diversi *(un altro `-0.500x`, e comunque `4.06x`)*: ### **se due usi vivi si sovrapponessero sarebbe una corruzione silenziosa** -- il difetto che quel modulo esiste per impedire |
+
+### ⭐ **LE ALTRE TRE PASSANO, e due hanno il loro CONTROLLO POSITIVO:** `m2`
+rapporto `5.000x` a entrambe le taglie *(scarto `0.0%` su `20%`)*, col controllo che la
+scena **cresca** come gli archi *(`4.00x` su `4.00x` atteso)*; `m3` **`0.005114` MB/tick,
+`1.73 sigma`** da zero, **e la CAUSA provata direttamente** *(`10` buffer in `60` tick)*;
+`m4` timbrata in `db_era2/memoria_era2.json`, **`0.960` ms per tick**.

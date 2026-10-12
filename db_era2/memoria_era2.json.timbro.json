@@ -1,0 +1,72 @@
+{
+ "config": {
+  "collaudo": "5d",
+  "taglie": [
+   4096,
+   16384
+  ],
+  "tick": 60
+ },
+ "conto_leggi": {
+  "di_prova": 3,
+  "per_tipo": {
+   "flusso": 2,
+   "osservatore": 1,
+   "pezzo_unitario": 5,
+   "termine_arco": 1,
+   "termine_nodo": 1
+  },
+  "totale": 10,
+  "variabili": 5
+ },
+ "determinismo": {
+  "rng_globali": 0,
+  "un_thread": [
+   "MKL_NUM_THREADS",
+   "NUMEXPR_NUM_THREADS",
+   "OMP_NUM_THREADS",
+   "OPENBLAS_NUM_THREADS",
+   "VECLIB_MAXIMUM_THREADS"
+  ],
+  "un_thread_in_tempo": false,
+  "versioni": {
+   "numpy": "2.3.0",
+   "piattaforma": "windows",
+   "python": "3.13.2",
+   "sympy": "1.14.0",
+   "yaml": "6.0.3"
+  },
+  "versioni_blocco": {
+   "numpy": "2.3.0",
+   "piattaforma": "windows",
+   "python": "3.13.2",
+   "sympy": "1.14.0",
+   "yaml": "6.0.3"
+  },
+  "versioni_differenze": []
+ },
+ "generati": [
+  "osservatori/prova_norma.py=97a979de08e6f361",
+  "stato.py=f5e561e0cfd34255",
+  "termini/camm_forma_d.py=0d3e0bb972c00d53",
+  "termini/camm_grover.py=f49defb2ab5e971e",
+  "termini/camm_grover_vuoto.py=a62ff99b3a295619",
+  "termini/camm_moneta_spin.py=780b45c8b5a946a9",
+  "termini/camm_saturazione.py=3a621b12c1cceb44",
+  "termini/camm_spostamento.py=beaab171adee43db",
+  "termini/camm_spostamento_vuoto.py=62bc6e21f6d392f9",
+  "termini/prova_hopping.py=50643d0cf0d9642f",
+  "termini/prova_locale.py=7326fa65e394ab4f"
+ ],
+ "impronta_config": "collaudo-memoria-5d",
+ "impronta_generati": "98b23e65bf0e15e6",
+ "impronta_tabella": "6fbc41dbad19d3fd",
+ "passo": 60,
+ "versione_dati": 1,
+ "versioni": {
+  "macchina": "AMD64",
+  "numpy": "2.3.0",
+  "piattaforma": "Windows-11-10.0.26300-SP0",
+  "python": "3.13.2"
+ }
+}

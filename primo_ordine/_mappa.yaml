@@ -102,6 +102,10 @@ moduli:
     responsabilita: il collaudo della ripresa -- coincide AL BIT, e i cinque casi che falliscono
     importa: [_presidio, checkpoint, incidenza, motore, stato, timbro]
 
+  - nome: _collauda_memoria.py
+    responsabilita: i quattro collaudi della memoria, e sono l-accettazione del pezzo 5
+    importa: [_presidio, incidenza, motore, stato, timbro]
+
   - nome: crescita.py
     responsabilita: la crescita del grafo, regola NON-H col suo bilancio
     importa: []

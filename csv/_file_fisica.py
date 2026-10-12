@@ -119,6 +119,12 @@ FILE_FISICA = (
     # ### misura.**
     'primo_ordine/checkpoint.py',
     'primo_ordine/_collauda_checkpoint.py',
+    # ### I QUATTRO COLLAUDI DELLA MEMORIA *(sotto-pezzo `5d`)*: sono
+    # ### ### **l-ACCETTAZIONE del pezzo `5`**, e le soglie stanno nel task history
+    # ### fissate ### **prima** delle misure. ### ⛔ **Oggi `m1` e- ROSSO**, e il
+    # ### file sta qui ### **rosso**: un fallimento che nessuno fa girare
+    # ### ### **e- un fallimento che si dimentica.**
+    'primo_ordine/_collauda_memoria.py',
     # ### IL COSTRUTTO `@rif` *(punto `14`)*: ### **byte-inerte**, e il suo
     # ### collaudo lo verifica ### **con `is`.**
     'primo_ordine/_rif.py',

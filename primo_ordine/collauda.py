@@ -101,6 +101,13 @@ COLLAUDI = (
     # ### tolleranza. ### **Una ripresa che perde un bit non e- una ripresa.**
     ("il checkpoint e la ripresa",
      "primo_ordine/_collauda_checkpoint.py", "pre-commit"),
+    # ### ⛔ **IL SOTTO-PEZZO `5d`: L-ACCETTAZIONE DEL PEZZO `5`, E OGGI E- ROSSO.**
+    # ### `m1` misura `5.00x` contro una soglia di `4x` fissata ### **prima** nel task
+    # ### history. ### ⚠ **STA QUI COMUNQUE, e rosso:** un collaudo che fallisce e
+    # ### che nessuno fa girare ### **e- un fallimento che si dimentica**, e il piano
+    # ### dice ### **FERMO e si guarda dove** -- non ### **togli il collaudo.**
+    ("la memoria: `m1`..`m4` (### `m1` ROSSO)",
+     "primo_ordine/_collauda_memoria.py", "pre-commit"),
     # ### ⭐ **LO SCHEMA DELLA CAMMINATA, nei DUE VERSI** *(pezzo `2` del
     # ### simulatore)*: i tipi sulle estremita-, i pezzi unitari, i flussi, e
     # ### l-### **ordine di composizione con le ripetizioni AMMESSE.**

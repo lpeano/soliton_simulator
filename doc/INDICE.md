@@ -12,7 +12,7 @@
 | `FISICA` | `2` | 86 |
 | `FISICA` | `ENTRAMBE` | 17 |
 | `INFRASTRUTTURA` | `1` | 39 |
-| `INFRASTRUTTURA` | `2` | 19 |
+| `INFRASTRUTTURA` | `2` | 20 |
 | `INFRASTRUTTURA` | `ENTRAMBE` | 24 |
 | `METODO` | `1` | 156 |
 | `METODO` | `2` | 16 |
@@ -486,6 +486,7 @@
 | `MOTORE-CHECKPOINT` | CURA | INFRASTRUTTURA | 2 | ### **AGENDA** |  | checkpoint e ripresa: si salva anche il grafo, e la ripresa coincide al bit |
 | `MOTORE-CONTENITORE` | CURA | INFRASTRUTTURA | 2 | ### **AGENDA** |  | il doppio contenitore del motore, le cache con la taglia e la regola del tick |
 | `MOTORE-INCIDENZA` | CURA | INFRASTRUTTURA | 2 | ### **AGENDA** |  | la struttura compatta delle estremita d arco, col punto unico di scrittura |
+| `MOTORE-MEMORIA-M1-ROSSO` | MISURA | INFRASTRUTTURA | 2 | ### **AGENDA** | SI | m1 fallisce a 5.00x contro 4x, e la soglia era derivata da un conto senza i buff |
 | `N1` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 15 volte, MAI definito in un registro) [N1] |
 | `N1b` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 8 volte, MAI definito in un registro) [N1b] |
 | `N2` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 17 volte, MAI definito in un registro) [N2] |

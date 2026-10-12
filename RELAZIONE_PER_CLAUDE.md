@@ -14153,3 +14153,31 @@ Ogni dato di `db_era2/` ha ### **il suo TIMBRO accanto**, col campo `versione_da
 ### ⛔ **IL PREFISSO RISERVATO E IL SUO PRESIDIO:** grafo, geometria e contatori vivono nello stesso `npz` sotto un prefisso riservato, e un nome di stato che cominciasse con quel prefisso **sovrascriverebbe un pezzo del motore in silenzio**. ### **Quindi si controlla, e un nome che collide ALZA.** ### ⚠ **E i contatori da salvare sono DICHIARATI uno a uno**, non scoperti guardando gli attributi: ### **un attributo nuovo che nessuno ha deciso di salvare sparirebbe alla ripresa senza che nessuno lo veda.**
 
 ### 📌 **Il costo, misurato:** salva `174` ms, riprendi `162` ms a `m=4096`, con un file di `1.09` MB. La suite intera: ### **`45` su `45`**, `pre-commit` **`128.6` s su `500`** *(`26%`)*.
+
+---
+
+## IL SOTTO-PEZZO `5d`: `m1` E' ROSSO, E IL COLPEVOLE E' LA MIA SOGLIA -- NON IL MOTORE *(2026-10-12)*
+
+### ⛔ **`m1` FALLISCE: la scena e' `5.00x` lo stato, e la soglia fissata PRIMA era `4x`.** Il piano dice *«`m1` oltre `4` volte lo stato ⟹ **FERMO e si guarda dove**»*, e ### **mi sono fermato e ho guardato.**
+
+| | byte | in multipli dello stato |
+|---|---|---|
+| lo **stato** | `524 288` | `1.000x` |
+| la **struttura** | `229 384` | `0.438x` |
+| la **geometria** *(versori `0.375x` + trasporto `0.500x`)* | `458 752` | `0.875x` |
+| `dtau` | `32 768` | `0.062x` |
+| ### ⛔ **i BUFFER** | ### **`1 376 256`** | ### **`2.625x`** |
+
+### ⚠ **IL COLPEVOLE NON E' IL MOTORE: E' LA MIA SOGLIA.** Il `4` che avevo fissato a priori contava **il raddoppio della capacita', `offset`, le estremita' raggruppate e il derivato `nodo`** -- cioe' **la struttura, che misura `0.438x`**. ### ⛔ **NON CONTAVA I BUFFER AFFATTO**, e i buffer sono **`2.625x`**, cioe' **il termine dominante**. ### **Quindi il `4` non era sbagliato di poco: era derivato da un conto che OMETTEVA il termine piu' grande.**
+
+### ⭐ **E L'HO CALCOLATO INVECE DI IMMAGINARLO.** Cosa si puo' togliere **senza perdere precisione** *(il vincolo di Luca: la precisione non si riduce mai per risparmiare memoria)*: `cos` e `sin` in uno, col coseno **in posto dentro `ang`** *(`-0.125x`)*; lo spostamento e' **uno scambio**, quindi basta salvare **un lato** *(`-0.250x`)*; lo stesso per lo scalare *(`-0.062x`)*. ### **In tutto `-0.4375x`: `5.000x` diventa `4.5625x`. ANCORA SOPRA `4`.**
+
+### ⛔ **E C'E' UN PAVIMENTO:** stato `1.000x` + struttura `0.438x` + geometria `0.875x` + `dtau` `0.062x` = ### **`2.375x` PRIMA DI OGNI BUFFER.** Il `4` sarebbe raggiungibile **solo condividendo i buffer fra operatori diversi** -- un altro `-0.500x`, e **comunque `4.06x`** -- e ### **se due usi vivi si sovrapponessero sarebbe una corruzione silenziosa**, cioe' **esattamente il difetto che quel modulo esiste per impedire.**
+
+### ⚠ **LA MIA RACCOMANDAZIONE, e non e' una decisione:** la soglia va corretta **sul conto giusto, che include i buffer**, e le tre riduzioni sicure vanno fatte perche' sono **un guadagno misurato senza perdita di precisione**. ### ⛔ **MA SPOSTARE UNA SOGLIA PER FARLA PASSARE E' ESATTAMENTE LA MOSSA VIETATA**, e quella soglia era **dichiarata PRIMA della misura**: ### **quindi la decide Luca, non io.**
+
+### 📌 **CHE COSA NON SO, e cambia la risposta:** se il `4` fosse **un VINCOLO di Luca** *(quanta memoria la sua macchina regge)* oppure **una MIA stima** del costo della struttura. ### Se era **un vincolo**, non si sposta: vanno **tagliati i buffer** fino a rientrare, e la condivisione fra operatori va progettata **con un presidio che PROVI che due usi vivi non si sovrappongono**. ### Se era **una mia stima**, si corregge **col conto giusto**. Sta in **`[[MOTORE-MEMORIA-M1-ROSSO]]`**, priorita' **CRITICA**.
+
+### ✅ **LE ALTRE TRE PASSANO, e due hanno il loro controllo positivo.** `m2`: rapporto **`5.000x` a entrambe le taglie**, scarto **`0.0%`** su una tolleranza del `20%`, e ### **il controllo positivo verifica che la scena CRESCA come gli archi** *(`4.00x` su `4.00x` atteso)* -- senza quello, **un rapporto stabile potrebbe esserlo per vacuita'**. `m3`: **`0.005114` MB/tick, `sigma` `0.002952`, cioe' `1.73 sigma`** da zero su `10` campioni, dentro la soglia di `3 sigma`; ### ⭐ **e la CAUSA e' provata DIRETTAMENTE e non dedotta da una pendenza**: `10` buffer in `60` tick, cioe' **zero dopo i primi**. `m4`: timbrata in `db_era2/memoria_era2.json`, **`0.960` ms per tick**.
+
+### ⚠ **E UNA SCELTA DI METODO, dichiarata:** `m1` si misura sui **byte DICHIARATI** e non sulla **privata** del processo, perche' la privata contiene **l'interprete, `numpy` e gli arrotondamenti dell'allocatore** -- su una scena piccola ### **il rumore e' piu' grande del segnale**. ### La privata resta il misurando di `m3`, **dove si guarda una PENDENZA** e il fondo costante **si cancella**. ### ✅ **E `m3` fa `gc.collect()` PRIMA del campione**, cosi' misura **cio' che non si libera** e non la spazzatura che aspetta: ### **e' l'errore che la prima diagnosi della memoria aveva fatto**, dove i `104` MB erano **spazzatura in attesa.**
