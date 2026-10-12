@@ -13924,3 +13924,19 @@ Ogni dato di `db_era2/` ha ### **il suo TIMBRO accanto**, col campo `versione_da
 
 ### ⭐ **E IL RIORDINO E' REGISTRATO: `(b)` IL SIMULATORE VIENE PRIMA.** La derivazione passa dopo, e il ### **presidio che rifiuta di accendere un posto aperto senza la sua voce nasce COL GENERATORE** — cioe' come ### **impedimento vero**, non come regola scritta *(`A9`)*.
 
+## ⭐ **IL SIMULATORE PARTE, E IL PIANO TROVA DUE DISALLINEAMENTI DELLO SCHEMA PRIMA DI SCRIVERE UNA RIGA** *(2026-10-12)*
+
+### ✅ **LO STATO DI PARTENZA, MISURATO E NON RICORDATO:** `python primo_ordine/collauda.py` da' ### **`40` su `40`**, `indice.py valida` passa, e `leggi.yaml` ha ### **`3` leggi tutte in prova**, cioe' ### **zero leggi vere.**
+
+### ⛔ **IL PRIMO DISALLINEAMENTO:** lo schema dice *<<`psi`, `C^2` sul NODO>>*, ma `F1` dice *<<stato sulle ESTREMITA' d'arco>>*. ### **Non e' una scelta di fisica** *(`F1` e' deciso)*: e' un'### **estensione che `F1` pretende** — servono `complesso_c2_estremita` e `reale_estremita`.
+
+### ⛔ **IL SECONDO E' PIU' PROFONDO: i pezzi del passo NON SONO termini di `H`.** La moneta di spin, il Grover e lo spostamento con trasporto sono ### **operatori UNITARI**: si ### **compongono**, non si ### **sommano.** ### **Lo schema di oggi sa esprimere `H` e NON sa esprimere una COMPOSIZIONE** — servono un tipo `pezzo_unitario`, un tipo `flusso`, e l'### **ordine di Strang DICHIARATO in tabella.**
+
+### 📌 **E HO DICHIARATO TRE POSTI MIEI, perche' sono scelte di PROGETTO e non di fisica:** `P1` i tipi di estremita' come ### **tipo nuovo** e non come campo *(il dominio decide ### **quanti simboli** esistono e ### **quali lati** ha una legge, e nasconderlo in un campo lo renderebbe invisibile all'ambiente)*; `P2` l'ordine di Strang come ### **lista** — ### **e qui non ho un argomento che chiuda, e lo dico**; `P3` la crescita della `CSR` col ### **raddoppio**, per il conto del censimento.
+
+### ⭐ **E IL CRITERIO DI PASSAGGIO HA UNA PREVISIONE ONESTA: NON SO SE L'AL BIT SIA RAGGIUNGIBILE.** Un `out=` cambia ### **dove** si somma, non ### **come**, ma `numpy` puo' scegliere un percorso diverso — e allora la differenza e' di ### **ULP**. ### **La soglia `s2` dice che gli ulp si CONTANO e si dichiara QUALE OPERAZIONE li introduce**, e la mia previsione e' ### **lo spostamento con trasporto**, che e' il pezzo con l'`einsum`.
+
+### ⚠ **E UNA SOGLIA CHE NON HO SCRITTO, col suo perche':** nessuna soglia sul ### **TEMPO** del passo generato. ### **Il tempo di una macchina non e' una proprieta' del repo** — si ### **misura e si timbra**, e non rifiuta. *(E il collaudo lo dice gia' del `pre-commit`, che costa `151.4` s contro un budget di `120`.)*
+
+### ✅ **E `9-ter` E' RISPETTATO AL CONTRARIO DI COME SEMBRA:** la tabella ### **NON aggiunge leggi**, ne ### **TOGLIE una duplicazione** — oggi la stessa fisica vive ### **in `proto_camminata/` E in `primo_ordine/`.**
+
