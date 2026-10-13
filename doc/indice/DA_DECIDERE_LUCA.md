@@ -16,14 +16,13 @@
 
 ## LE ALTRE, per priorita-
 
-### `CRITICA` — **13**
+### `CRITICA` — **12**
 
 | la domanda | pronta? | che cosa aspetta |
 |---|---|---|
 | **[[DOMANDA-CONDIZIONI-INIZIALI-IN-TABELLA]]** la tabella non ha un posto dove dichiarare le condizioni iniziali | ### ✅ **PRONTA** | ### **niente** |
 | **[[DOMANDA-D13-CONIUGATI]]** D13: i coniugati delle memorie -- tw come fase U(1) sull-arco? | ### ⏳ aspetta | ### **aspetta:** `DOMANDA-D9-GEOMETRIA` |
 | **[[DOMANDA-D9-GEOMETRIA]]** D9: la geometria viene da d e p_d dentro H, o dalle relazioni fra gli ps | ### ⏳ aspetta | ### **aspetta:** `DOMANDA-QUANTITA-CONSERVATA` |
-| **[[DOMANDA-E-NON-SI-CONSERVA-A-X-UNO]]** E non si conserva nel regime in cui la saturazione lavora, e i termini n | ### ✅ **PRONTA** | ### **niente** |
 | **[[DOMANDA-LA-CARTA-NON-ESISTE]]** la carta della fisica non ha un documento, e le sue etichette collidono  | ### ✅ **PRONTA** | ### **niente** |
 | **[[DOMANDA-LA-FORMA-DI-CS-DAL-VUOTO]]** la forma di f in cs_k = f'(pi_k): il posto A1 della carta, dichiarato ap | ### ✅ **PRONTA** | ### **niente** |
 | **[[DOMANDA-MITOSI-LE-FORME]]** le quattro forme della mitosi: lo spareggio, phi, il ramo della radice,  | ### ✅ **PRONTA** | ### **niente** |
@@ -57,7 +56,7 @@
 | **[[DOMANDA-QUANDO-LA-CAMMINATA-IN-TABELLA]]** quando si porta la camminata nella tabella? il porting aspetta TRE decis | ### ⏳ aspetta | ### **aspetta:** `DOMANDA-PASSO-FRAZIONARIO-O-ASINCRONO`, `DOMANDA-COME-LA-MATERIA-CAMBIA-LAMBDA`, `DOMANDA-QUALE-FORMA-FISSA-CS` |
 | **[[DOMANDA-UNITA-DI-STATO]]** l-unita- di stato: qual e- la capacita- di un nodo? | ### ⏳ aspetta | ### **aspetta:** `DOMANDA-D9-GEOMETRIA` |
 
-### `MINORE` — **8**
+### `MINORE` — **7**
 
 | la domanda | pronta? | che cosa aspetta |
 |---|---|---|
@@ -66,7 +65,6 @@
 | **[[DOMANDA-DOVE-STA-LA-C-IN-TABELLA]]** la C e decisa al punto F3 e nessuna legge della tabella la dichiara | ### ✅ **PRONTA** | ### **niente** |
 | **[[DOMANDA-FLUSSO-SENZA-AZIONE]]** un flusso non dichiara dove agisce: lo schema non ha il campo azione per | ### ✅ **PRONTA** | ### **niente** |
 | **[[DOMANDA-REGOLE-FUORI-CLAUDE]]** le regole di gestione fuori da CLAUDE.md, e quelle dentro senza presidio | ### ✅ **PRONTA** | ### **niente** |
-| **[[DOMANDA-TRASPORTO-DEVE-STARE-IN-SU2]]** la C e una simmetria della TEORIA INTERA: il controllo di efc113b era in | ### ✅ **PRONTA** | ### **niente** |
 | **[[DUE-STRUMENTI-ARCHIVIO-E]]** due strumenti per lo stesso mestiere: spostare gli output su E- | ### ✅ **PRONTA** | ### **niente** |
 | **[[L-NUMERI-DERIVA-ORFANA]]** il rapporto 4.20 della deriva di E non esce da nessuno script: numero or | ### ✅ **PRONTA** | ### **niente** |
 
@@ -74,7 +72,7 @@
 
 ## IL CONTO
 
-> ### ⛔ **aperte `40`, di cui pronte `31`.**
+> ### ⛔ **aperte `38`, di cui pronte `29`.**
 >
 > ### ✅ **E una domanda DECISA esce da sola:** si chiude con la decisione di Luca e il commit, e ### **nessuno la spunta a mano** -- la lista ### **si genera dai campi**, e un campo che cambia ### **cambia la lista.**
 
@@ -99,7 +97,7 @@
 | `DOMANDA-C2-O-C4` | `DECISIONE`/`FISICA`/`2`/`AGENDA` | C2 senza massa come misurato, oppure si prova C4 | due componenti o quattro: il gap c-e- solo con C4? ### DOMANDA APERTA PER LUCA, da decidere da Luca, ed e- la domanda C2 contro C4 di A16. ### IL FATT |
 | `DOMANDA-CHI-CAUSA-L-ANISOTROPIA` | `DECISIONE`/`FISICA`/`2`/`AGENDA` | sul cubico i versori riducono l-anisotropia direzionale; e l-attribuzione del 14 per cento del v3 ai versori RESTA, perche- l-anello e- vertex-transitivo | sul cubico i versori del v3 RIDUCONO l-anisotropia direzionale: e- una leva o si lascia? ### DOMANDA APERTA PER LUCA, da decidere da Luca. ### ##### A |
 | `DOMANDA-COME-LA-MATERIA-CAMBIA-LAMBDA` | `DECISIONE`/`FISICA`/`2`/`AGENDA` | scattering nel nodo o trasmissione sull-arco | come la materia cambia la densita- del vuoto: scattering nel nodo o trasmissione sull-arco? ### DOMANDA APERTA PER LUCA, da decidere da Luca. ### E- i |
-| `DOMANDA-E-NON-SI-CONSERVA-A-X-UNO` | `DECISIONE`/`FISICA`/`2`/`AGENDA` | E (la somma dei due termini) NON si conserva nel regime in cui la saturazione lavora -- escursione relativa 5.8 per cento a x ~ 1 e 28 per cento a x ~ 4 -- e i due termini NON si compensano. E la base | E non si conserva nel regime in cui la saturazione lavora, e i termini non si compensano MISURATO il 2026-10-13 eseguendo il punto 1(c) del mandato pi |
+| `DOMANDA-E-NON-SI-CONSERVA-A-X-UNO` | `DECISIONE`/`FISICA`/`2`/`CHIUSA` | E (la somma dei due termini) NON si conserva nel regime in cui la saturazione lavora -- escursione relativa 5.8 per cento a x ~ 1 e 28 per cento a x ~ 4 -- e i due termini NON si compensano. E la base | E non si conserva nel regime in cui la saturazione lavora, e i termini non si compensano MISURATO il 2026-10-13 eseguendo il punto 1(c) del mandato pi |
 | `DOMANDA-GUSCIO-E-INTERFERENZA` | `DECISIONE`/`FISICA`/`2`/`AGENDA` | il guscio e- interferenza, quindi l-ipotesi si riformula o manca qualcosa | il guscio e- interferenza e non materia: che cosa resta dell-ipotesi del guscio? ### DOMANDA APERTA PER LUCA, da decidere da Luca. ### IL FATTO MISURA |
 | `DOMANDA-IL-PI-DEL-NODO-CHE-NASCE` | `DECISIONE`/`FISICA`/`2`/`AGENDA` | da dove viene il pi di un nodo che nasce? F10 chiede norme conservate anche attraverso le nascite, e A7b che cio che nasce nasca da cio che c e li. Raccomando che sia SOTTRATTO ai genitori -- e la dec | il pi di un nodo nuovo: la decisione 10 (il calore paga la nascita) riscritta su pi DOMANDA APERTA PER LUCA, nata derivando la strada (A) il 2026-10-1 |
 | `DOMANDA-LA-FORMA-DI-CS-DAL-VUOTO` | `DECISIONE`/`FISICA`/`2`/`AGENDA` | la forma di f in cs_k = f'(pi_k), cioe il posto A1 della carta (la forma di cs dal vuoto). Non raccomando una forma: propongo tre criteri su cui giudicarle, e il primo e che f' > 0 PER COSTRUZIONE, pe | la forma di f in cs_k = f'(pi_k): il posto A1 della carta, dichiarato aperto DOMANDA APERTA PER LUCA, nata derivando la strada (A) il 2026-10-13. IL R |

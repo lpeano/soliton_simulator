@@ -213,7 +213,7 @@
 | `D-AGGIORNA-COMMIT-FALSO` | DIFETTO | METODO | ENTRAMBE | ### **APERTA** |  | il flag --commit di aggiorna era falso per costruzione: la riga finisce in un co |
 | `D-BILANCIO-NASCITA` | DECISIONE | FISICA | ENTRAMBE | ### **APERTA** |  | la nascita si paga: i genitori con la tensione, il vuoto col suo termine |
 | `D-CREA-LOTTO-ROTTA` | DIFETTO | METODO | ENTRAMBE | ### **CHIUSA** |  | crea-lotto non poteva far nascere NESSUNA voce: il modello non copriva i tre cam |
-| `D-ENERGIA` | DECISIONE | FISICA | ENTRAMBE | ### **APERTA** |  | l energia del sistema e la grandezza conservata del v3, promossa in via provviso |
+| `D-ENERGIA` | DECISIONE | FISICA | ENTRAMBE | ### **SUPERATA** |  | l energia del sistema e la grandezza conservata del v3, promossa in via provviso |
 | `D-ERA2-NON-SI-CHIUDE` | DIFETTO | METODO | ENTRAMBE | ### **CHIUSA** |  | due presidi insieme vietano di registrare una domanda dell era 2 come decisa |
 | `D0` | MISURA | FISICA | 1 | ### **CHIUSA** |  | CHI FA SCAPPARE d0 / 21/9 / MISURATO: e' IL FRENO. Gli scrittori spingono giu' - |
 | `D01` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | S09 clippa al passo causale — quindi e' gia' una LUNGHEZZA — e poi moltiplica pe |
@@ -281,7 +281,7 @@
 | `DOMANDA-D13-CONIUGATI` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | D13: i coniugati delle memorie -- tw come fase U(1) sull-arco? |
 | `DOMANDA-D9-GEOMETRIA` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | D9: la geometria viene da d e p_d dentro H, o dalle relazioni fra gli psi? |
 | `DOMANDA-DOVE-STA-LA-C-IN-TABELLA` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | la C e decisa al punto F3 e nessuna legge della tabella la dichiara |
-| `DOMANDA-E-NON-SI-CONSERVA-A-X-UNO` | DECISIONE | FISICA | 2 | ### **AGENDA** | SI | E non si conserva nel regime in cui la saturazione lavora, e i termini non si co |
+| `DOMANDA-E-NON-SI-CONSERVA-A-X-UNO` | DECISIONE | FISICA | 2 | ### **CHIUSA** |  | E non si conserva nel regime in cui la saturazione lavora, e i termini non si co |
 | `DOMANDA-ESTREMITA-NUOVE-INIZIALI` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | con che psi e che phi nascono le estremita di un arco nuovo |
 | `DOMANDA-FLUSSO-SENZA-AZIONE` | DECISIONE | METODO | 2 | ### **AGENDA** |  | un flusso non dichiara dove agisce: lo schema non ha il campo azione per lui |
 | `DOMANDA-FORME-VUOTO` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | le TRE forme del vuoto locale: che cos-e- un grado, quanti per nodo, l-accoppiam |
@@ -308,7 +308,7 @@
 | `DOMANDA-QUANDO-LA-CAMMINATA-IN-TABELLA` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | quando si porta la camminata nella tabella? il porting aspetta TRE decisioni ape |
 | `DOMANDA-QUANTITA-CONSERVATA` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | esiste una moneta isotropa, causale e simmetrica fra le bande con una quantita-  |
 | `DOMANDA-REGOLE-FUORI-CLAUDE` | DECISIONE | METODO | 2 | ### **AGENDA** |  | le regole di gestione fuori da CLAUDE.md, e quelle dentro senza presidio: vanno  |
-| `DOMANDA-TRASPORTO-DEVE-STARE-IN-SU2` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | la C e una simmetria della TEORIA INTERA: il controllo di efc113b era incompleto |
+| `DOMANDA-TRASPORTO-DEVE-STARE-IN-SU2` | DECISIONE | FISICA | 2 | ### **CHIUSA** |  | la C e una simmetria della TEORIA INTERA: il controllo di efc113b era incompleto |
 | `DOMANDA-U-DINAMICA-LE-FORME` | DECISIONE | FISICA | 2 | ### **AGENDA** | SI | le quattro forme della U d arco dinamica: la scala, il caso senza vuoto, le olon |
 | `DOMANDA-UNITA-DI-STATO` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | l-unita- di stato: qual e- la capacita- di un nodo? |
 | `DOMANDA-VIA-DEL-CAMPO` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | si passa alla via del campo, dato che nessuna non linearita- locale lega in 3D? |

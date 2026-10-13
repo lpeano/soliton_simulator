@@ -14982,3 +14982,20 @@ quella dello spinore. ### **E' un presidio sulla tabella, e lo segno come cosa d
 
 ### ⚠ **E CHE COSA QUESTO RESIDUO NON VERIFICA:** `phi -> phi*` non entra, perche' `W` non
 tocca `phi`. ### **Lo dichiaro invece di lasciar credere che sia verificato.**
+
+## 2026-10-13 — IL SECONDO ATTO: **tre voci chiuse coi loro sha**
+
+| la voce | lo stato | il commit che la chiude |
+|---|---|---|
+| `[[DOMANDA-E-NON-SI-CONSERVA-A-X-UNO]]` | ### ✅ **CHIUSA, decisa da Luca** | `1bfde50` |
+| `[[DOMANDA-TRASPORTO-DEVE-STARE-IN-SU2]]` | ### ✅ **CHIUSA, correzione fatta e misurata** | `9c46a68` |
+| `[[D-ENERGIA]]` | ### **SUPERATA** da `[[DECISIONE-VUOTO-MEDIATORE]]` | — |
+
+### ⚠ **E IL VALIDATORE MI HA CORRETTO, e aveva ragione:** avevo provato a chiudere la
+prima **lasciandola `blocca: true`**, e `PI-ERA-STATO` ha detto *«`blocca=true` con stato
+`CHIUSA`: contraddizione»*. ### **Una voce chiusa che blocca e' una contraddizione**, e il
+campo e' passato a `false` **nello stesso comando** invece che in un giro dopo.
+
+### 📌 **E' il modello a DUE ATTI:** `chiusura.commit` ### **non puo' citare un commit che
+ancora non esiste**, quindi le chiusure stanno nel commit **successivo** a quello che le
+ha risolte — e cosi' l'ordine e' **verificabile da git** invece che asserito da me.
