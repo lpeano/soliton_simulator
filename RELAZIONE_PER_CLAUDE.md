@@ -14999,3 +14999,47 @@ campo e' passato a `false` **nello stesso comando** invece che in un giro dopo.
 ### 📌 **E' il modello a DUE ATTI:** `chiusura.commit` ### **non puo' citare un commit che
 ancora non esiste**, quindi le chiusure stanno nel commit **successivo** a quello che le
 ha risolte — e cosi' l'ordine e' **verificabile da git** invece che asserito da me.
+
+## 2026-10-13 — IL FLOQUET SULLA SCENA GRANDE: **le bande vanno alla parita', `E` non ha tendenza**
+
+### ⭐ **MISURATO** *(`doc/REFERTO_floquet_grande.md`)*: toro `2D` `10x10`, `n = 100`,
+`m = 200`, **`4m = 800`**, `4000` tick, `x = 0.9055` *(la soglia era `>= 0.5`:
+**la misura ha materia**)*. ### ⚠ **E un toro e NON un anello di `208` nodi, per una
+ragione precisa:** un trasporto casuale su un anello e' un sistema `1D` **disordinato**, e
+quelli **LOCALIZZANO** — ### **e la localizzazione sopprime il riscaldamento per una
+ragione che non c'entra con Floquet.**
+
+| | la previsione | l'esito |
+|---|---|---|
+| `F1` | una **tendenza** in `E` | ### ⛔ **FALSA:** rapporto **`0.0054`**, e la soglia era `> 1` |
+| `F2` | le bande **verso la parita'** | ### ✅ **VERA:** lo squilibrio `1.000 -> 0.336 -> 0.0658 -> 0.00835` |
+| `F3` *(del mandato)* | l'energia locale **sale** | ### ⛔ **no:** `E` oscilla fra `-107` e `+105` |
+
+### ⛔ **E `F2` SI VEDE SOLO DOPO AVER CORRETTO UN DIFETTO MIO, trovato misurando.** Con
+lo stato **casuale** lo squilibrio **CRESCE** *(`0.00195 -> 0.0368`)*, e la prima lettura
+sarebbe stata *«si allontana dalla parita'»*. ### ⭐ **Ma un vettore casuale PARTE GIA'
+ALLA PARITA':** da li' si puo' solo **andare via** — ### **la misura non poteva vedere
+cio' che il mandato chiede di cercare.** ### ✅ **Corretta preparando lo stato in UNA
+banda** *(`P+ psi`)*.
+
+### ⭐⭐ **E LA CORREZIONE RICONCILIA LE DUE CORSE:** il valore d'equilibrio dello
+squilibrio e' **`1/sqrt(4m) = 0.0354`** — la **fluttuazione di taglia finita** — contro una
+media misurata di **`0.0312`**. ### **Quindi lo stato casuale non si allontanava: era GIA'
+all'equilibrio.** ### ✅ **Le due corse dicono la stessa cosa**, e non ho dovuto scegliere
+fra due letture incompatibili.
+
+### ✅ **E DICHIARO CIO' CHE IL MANDATO CHIEDE DI DICHIARARE:** *«se resta senza tendenza
+anche li', dichiaralo»* — ### **su `800` dimensioni e `4000` tick, `E` NON MOSTRA UNA
+TENDENZA SECOLARE.** ### ⚠ **Ma `4000` tick non la ESCLUDONO: con un'ampiezza di `212` una
+deriva lenta sarebbe SEPOLTA.**
+
+### ⭐ **E IL SETTORE `0` E' VUOTO ANCHE SUL TORO** *(`0` su `800`)*: ### **non era una
+proprieta' dell'anello**, ed era uno dei *«cosa ricontrollare»* di `efc113b`.
+
+### ⚠ **LA LETTURA, separata dai numeri perche' l'ho scritta DOPO:** il sistema
+**termalizza nel grado di liberta' DELLE BANDE**, ### **ma `E` non cresce**, perche' non e'
+limitata dal basso e non ha un serbatoio verso cui salire: **oscilla.**
+
+### 📌 **`primo_ordine/bande_floquet.py`** *(diviso da `bande.py`, che aveva passato le
+`700` righe)*, e i risultati si salvano **durante la corsa** in `doc/dati_floquet.tsv`:
+### **se la corsa si ferma, cio' che e' stato misurato RESTA.**

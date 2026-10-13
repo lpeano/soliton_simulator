@@ -320,6 +320,9 @@ def main(argv):
     sys.path.insert(0, os.path.join(os.path.dirname(_QUI), "csv"))
     import _presidio
     _presidio.avvia(__file__)
+    # ### ⭐ **IL RAMO DEL FLOQUET E- SEPARATO, e non e- comodita-:** gira su una scena
+    # ### di  dimensioni e ### **non deve girare per sbaglio** insieme alle misure
+    # ### piccole.
     nl = chr(10)
     r = []
     print("=" * 100)

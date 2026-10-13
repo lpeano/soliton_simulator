@@ -78,3 +78,48 @@ un'oscillazione di quell'ampiezza va distinta dal rumore**, e con un seme solo
 1. il **toro `2D` `10x10`** nello strumento delle bande *(oggi costruisce solo anelli)*.
 2. `4000` tick a `x ~ 1`, **salvando durante la corsa**.
 3. il referto, e la dichiarazione **in ogni caso** — anche *«nessuna tendenza»*.
+
+---
+
+## 4. ⭐ L'ESITO — **`F2` vera, `F1` falsa, e un difetto MIO nel mezzo**
+
+| | la previsione | l'esito | |
+|---|---|---|---|
+| `F1` *(mia e del mandato)* | una **tendenza** in `E` | rapporto **`0.0054`** *(casuale)*, **`0.0349`** *(preparato)*; la soglia era `> 1`, e `< 0.3` = nessuna | ### ⛔ **FALSA** |
+| `F2` *(mia e del mandato)* | le popolazioni **verso la parita'** | lo squilibrio va `1.000 -> 0.336 -> 0.0658 -> 0.00835`, **un fattore `623`** fino al minimo | ### ✅ **VERA** |
+| `F3` *(del mandato)* | l'energia locale **sale** | `E` **oscilla** fra `-107` e `+105` e non sale | ### ⛔ **no** — e avevo scritto *«non lo so»* |
+
+### ⛔ **E `F2` E' VISIBILE SOLO DOPO AVER CORRETTO UN DIFETTO DELLA MIA MISURA, trovato
+misurando.** Con lo stato **casuale** lo squilibrio va da `0.00195` a `0.0368`:
+### **CRESCE**, e la prima lettura sarebbe stata *«si allontana dalla parita'»* — che era
+la mia condizione di stop numero `3`.
+
+### ⭐ **MA UN VETTORE CASUALE PARTE GIA' ALLA PARITA':** ha peso uguale nelle due meta'
+dello spettro. ### ⚠ **Da li' non si puo' ANDARE VERSO la parita': si puo' solo andare
+via** — cioe' ### **la misura non poteva vedere cio' che il mandato chiede di cercare.**
+### ✅ **Corretta preparando lo stato in UNA banda** *(`P+ psi`, squilibrio `1`)*, e
+allora si vede.
+
+### ⭐⭐ **E LA CORREZIONE RICONCILIA LE DUE CORSE invece di scegliere fra due letture:**
+il valore d'equilibrio dello squilibrio e' **`1/sqrt(4m) = 0.0354`** *(la fluttuazione di
+taglia finita)*, contro una media misurata di **`0.0312`** sugli ultimi `20` campioni.
+### ✅ **Quindi lo stato casuale NON si allontanava: era GIA' all'equilibrio, e
+fluttuava.** ### **Le due corse dicono la stessa cosa.**
+
+### ⭐ **E IL SETTORE `0` E' VUOTO ANCHE SUL TORO** *(`0` su `800`)*: ### **non era una
+proprieta' dell'anello**, ed era uno dei <<cosa ricontrollare>> di `efc113b`.
+
+### ⚠ **LA LETTURA, e la dico SEPARATA dai numeri perche' l'ho scritta DOPO:** il sistema
+**termalizza nel grado di liberta' DELLE BANDE** *(l'equipartizione e' l'<<infinita
+temperatura>> di quel grado)*, ### **ma `E` non cresce**, perche' `E` non e' limitata dal
+basso e non ha un serbatoio verso cui salire: **oscilla.**
+
+### ⛔ **E IL MANDATO DICEVA COSA FARE SE NON CI FOSSE TENDENZA: <<se resta senza tendenza
+anche li', dichiaralo>>.** ### ✅ **Lo dichiaro: su un toro `2D` `10x10` (`4m = 800`), a
+`x = 0.9055`, per `4000` tick, `E` NON MOSTRA UNA TENDENZA SECOLARE.**
+
+### ⚠ **I LIMITI, e il terzo e' il piu' serio:** ① **non e' la scena del banco** *(il toro
+e' regolare, il banco irregolare)*; ② **un seme solo**; ### ⛔ **③ `4000` tick NON
+ESCLUDONO una tendenza su scale piu' lunghe: con un'ampiezza di `212` una deriva lenta
+sarebbe SEPOLTA**; ④ i proiettori sono **spettrali**, quindi tutto cio' che e' <<per
+banda>> e' **globale**.

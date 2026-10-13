@@ -165,6 +165,7 @@ FILE_FISICA = (
     # ### ### **`|CW - WC| = 4.33` su scala `2.76`**, con `SU(2)` ### **`8.0e-16`.**
     # ### ⚠ **E il motore valida SOLO l-unitarieta-.**
     'primo_ordine/bande.py',
+    'primo_ordine/bande_floquet.py',
     'primo_ordine/_collauda_deriva.py',
     # ### IL COSTRUTTO `@rif` *(punto `14`)*: ### **byte-inerte**, e il suo
     # ### collaudo lo verifica ### **con `is`.**
