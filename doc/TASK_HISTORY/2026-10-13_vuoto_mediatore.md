@@ -276,3 +276,35 @@ comoda.
 4. ### ⛔ **NIENTE CODICE DI `(A)` finche' le domande `1` e `3` non hanno una risposta:**
    senza la coppia e senza `f` ### **scriverei io la fisica.**
 5. se il budget regge, `M1a` sulla **scena grande** *(il riscaldamento di Floquet)*.
+
+---
+
+## 10. ⛔ ANNOTAZIONE DEL 2026-10-13 — **QUESTA DERIVAZIONE USA UNA SOLA DELLE DUE EQUAZIONI DI HAMILTON**
+
+> **Riserva della verifica esterna, accolta dal mandato di Luca delle `14:30`:** *«lo
+> sbilancio entra nel vuoto **PER DEFINIZIONE**. Perche' sia meccanica, `Delta pi_k` deve
+> **uscire dalle equazioni di Hamilton**, non essere imposto.»*
+
+### ⛔ **NON RISCRIVO NIENTE DI SOPRA.** ### **E l'esito del conto e' NEGATIVO:**
+
+| | l'equazione di Hamilton | che cosa ne ho fatto qui sopra |
+|---|---|---|
+| `1` | `d theta_k / dt = dK / d pi_k = f'(pi_k)` | ### ✅ **USATA:** da qui `cs_k = f'(pi_k)` |
+| `2` | `d pi_k / dt = - dE / d theta_k` | ### ⛔ **SALTATA:** `Delta pi_k = -s_k` l'ho messo **a mano** |
+
+### ⛔⛔ **E `dE / d theta_k = 0`**, perche' `E` e' una funzione dello **stato** e della
+**geometria** e ### **`theta_k` non compare in nessuno dei suoi termini.** Quindi Hamilton
+da' ### **`d pi_k / dt = 0`**, che **contraddice** cio' che avevo imposto.
+### **`(A)` cosi' com'e' NON E' MECCANICA.**
+
+### ⚠ **E VALE ANCHE PER `A-ii`:** la fase di `phi` **non entra in `E`** da nessuna parte,
+quindi `dE/d alpha_k = 0` pure. ### **Il fallimento e' STRUTTURALE, non della
+realizzazione.**
+
+### ⛔ **E `P4` VA MARCATA: NON ERA IL TEST DELLA COERENZA.** *«Due corse con `pi_k(0)`
+diverso divergono»* ### **passerebbe anche con `pi` imposto a mano**, perche' basta che
+`cs_k` dipenda da `pi_k`. ### **`P4` testava il canale di RITORNO, non la struttura** — e
+la verifica esterna ha ragione a dirlo. ### ✅ **Le altre previsioni restano scritte.**
+
+### 📌 **Il conto, le tre vie e la raccomandazione** *(raccomando il ripiego `(C)`)* stanno
+in `doc/TASK_HISTORY/2026-10-13_pe_hamilton.md` e in `[[DOMANDA-A-NON-E-MECCANICA]]`.

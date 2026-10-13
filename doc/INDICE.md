@@ -9,7 +9,7 @@
 | `DOCUMENTAZIONE` | `2` | 1 |
 | `DOCUMENTAZIONE` | `ENTRAMBE` | 9 |
 | `FISICA` | `1` | 343 |
-| `FISICA` | `2` | 105 |
+| `FISICA` | `2` | 106 |
 | `FISICA` | `ENTRAMBE` | 21 |
 | `INFRASTRUTTURA` | `1` | 39 |
 | `INFRASTRUTTURA` | `2` | 21 |
@@ -272,6 +272,7 @@
 | `DIMENSIONE-E-ISOTROPIA-DELLE-SCENE` | MISURA | FISICA | 2 | ### **AGENDA** |  | le scene del banco non hanno dimensione 3, e la mia misura dell-isotropia era co |
 | `DISEGNO-3D-OSSERVATORE` | STANDARD | METODO | 2 | ### **AGENDA** |  | il disegno 3D e- un OSSERVATORE, e il 3D che distorce E- UNA MISURA |
 | `DIVISIONE-AUTOCONSISTENTE` | FRONTE | FISICA | 2 | ### **AGENDA** |  | la divisione dell arco come UNA legge: dove si rompe, cosa ereditano i figli, il |
+| `DOMANDA-A-NON-E-MECCANICA` | DECISIONE | FISICA | 2 | ### **AGENDA** | SI | (A) non e meccanica: dE/d theta_k = 0, quindi Hamilton da d pi_k / dt = 0 |
 | `DOMANDA-A3B-CLASSE` | DECISIONE | METODO | 2 | ### **AGENDA** |  | A3b: con che classe entra nell-indice? |
 | `DOMANDA-BANDE-O-SEGNO-LOCALE` | DECISIONE | FISICA | 2 | ### **AGENDA** | SI | il parametro d ordine della strada (3): le popolazioni di banda o il segno local |
 | `DOMANDA-BASE-DI-CICLI` | DECISIONE | FISICA | ENTRAMBE | ### **APERTA** | SI | la base di cicli non e unica, e lo stesso difetto compare in tre pezzi diversi |

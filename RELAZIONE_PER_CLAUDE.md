@@ -15156,3 +15156,54 @@ energia e' ### **PROPRIO `Re<psi|W psi>`**, il primo termine dell'energia promos
 ### ⛔ **Non la propongo come niente** *(e' lineare: non satura)*: la registro perche' se
 servira' un pezzo **che non mescola le bande**, ### **la famiglia e' questa, e si sa
 perche'.**
+
+## 2026-10-13 — `(P-e)`: **la riserva era giusta, e `(A)` NON E' MECCANICA**
+
+### ⛔⛔ **IL CONTO, e l'esito e' NEGATIVO.** La derivazione di `1bfde50` poneva
+`K = E(psi, phi; theta) + somma_k f(pi_k)`. Le **due** equazioni di Hamilton:
+
+| | l'equazione | che cosa ne avevo fatto |
+|---|---|---|
+| `1` | `d theta_k / dt = f'(pi_k)` | ### ✅ **usata:** da qui `cs_k = f'(pi_k)` |
+| `2` | `d pi_k / dt = - dE / d theta_k` | ### ⛔ **SALTATA:** `Delta pi_k = -s_k` **a mano** |
+
+### ⛔ **E `dE/d theta_k = 0`**, perche' `E = Re<psi|W psi> + somma_k Lambda_k G(h_k/Lambda_k)`
+e' una funzione dello **stato** e della **geometria**, e ### **`theta_k` non compare in
+nessuno dei suoi termini.** Quindi Hamilton da' ### **`d pi_k / dt = 0`** — e cio'
+contraddice `Delta pi_k = -s_k`. ### ✅ **La verifica esterna aveva ragione.**
+
+### ⚠ **E `A-ii` NON SALVA NIENTE, e l'ho controllato perche' ci speravo:** la fase di `phi`
+**non entra in `E`** da nessuna parte *(`Lambda_k` e' una somma di MODULI)*, quindi
+`dE/d alpha_k = 0` pure. ### **Il fallimento e' STRUTTURALE, non della realizzazione.**
+
+### ⭐ **E PERCHE' `P4` NON BASTAVA, che e' la lezione:** *«due corse con `pi_k(0)` diverso
+divergono»* ### **passerebbe anche con `pi` imposto a mano**, perche' basta che `cs_k`
+dipenda da `pi_k`. ### **`P4` testava il CANALE DI RITORNO, non la COERENZA DELLA
+STRUTTURA** — ed e' esattamente la distinzione del mandato.
+
+### ⭐ **LA DIAGNOSI, e non e' tecnica:** il trucco dello spazio delle fasi esteso cura la
+non conservazione di un'hamiltoniana che dipende **esplicitamente dal tempo**. ### ⛔ **La
+nostra e' di un altro tipo: `s_k` e' la NON-COMMUTAZIONE di `W` e `N`, e `W` non e'
+un'hamiltoniana dipendente dal tempo — non e' un flusso AFFATTO.** ### **Il problema non e'
+che `E` perde energia per via del tempo: e' che LA MAPPA COMPOSTA NON HA
+UN'HAMILTONIANA**, e lo spazio esteso non ne crea una che non c'e'.
+
+### ⭐ **E L'OGGETTO GIUSTO `DOMANDA-QUANTITA-CONSERVATA` LO AVEVA GIA' NOMINATO:** la
+**QUASI-ENERGIA**, `U_tick = exp(-i H_eff T)`, conservata **per costruzione**.
+### ⚠ **Ma il suo problema e' la LOCALITA':** `H_eff` e' un **logaritmo di operatore**, e
+questo **riapre** un vantaggio che la scheda di `D-ENERGIA` dava per acquisito
+*(«niente logaritmo dell'operatore, nessuna ambiguita' di ramo»)*. ### ⛔ **E `a67b68f` e'
+un indizio CONTRO:** un sistema che **termalizza** *(e le bande vanno alla parita')* **non
+ha** una quasi-energia locale conservata su tempi lunghi.
+
+### ⛔ **MI FERMO E LO PORTO A TE**, come il mandato dice — ### **non ci passo da solo.**
+`[[DOMANDA-A-NON-E-MECCANICA]]`, con le **tre vie** e la raccomandazione **separata**:
+### ⭐ **raccomando `(iii)`, il ripiego `(C)`**, perche' `(i)` aggiungerebbe **una legge
+SCELTA per far tornare un conto** *(e la rifiuterei se la proponesse un altro)*, `(ii)`
+oggi **non e' verificabile**, e `(iii)` ### **e' GIA' scritto come criterio di riapertura**
+— e la strada `(3)` **non ha bisogno di un'energia conservata:** le serve una **carica**
+*(globale)* e un **segno locale**, ### **protetti da SIMMETRIE, non da un'hamiltoniana.**
+
+### ⚠ **E dico che cosa mi farebbe cambiare idea**, perche' senza quello e' una preferenza:
+se `H_eff` avesse una **portata finita MISURATA**, ### **`(ii)` diventerebbe la via
+migliore di tutte** — e sarebbe **una misura**, non un argomento.
