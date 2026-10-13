@@ -15619,3 +15619,44 @@ minuscoli sono ammessi *(`A2b`, `H-P1-bis`, `P1-quater`)*, ### **una minuscola I
 no.** ### ✅ **Rinominata in `[[DOMANDA-Q-DEL-NODO-SOMMA-O-MEDIA]]`, e il nome vecchio
 resta come ALIAS** — la voce non era ancora committata, quindi ### **non lascia un reperto
 col nome sbagliato.**
+
+## 2026-10-13 — **IL TICK E' L'OROLOGIO PIU' VELOCE POSSIBILE**, e chiude nel verso giusto una cosa che avevo segnalato io
+
+### ✅ **REGISTRATA:** `[[DECISIONE-TICK-OROLOGIO-MASSIMO]]`. Il tick e' la frequenza del
+cambiamento di stato, quindi ### **e' l'orologio piu' veloce che esista** — nessun orologio
+locale puo' battere piu' in fretta del cambiamento di stato. ### ⚠ **E non e' una decisione
+nuova sul modello: rende ESPLICITO il principio originario**, accanto al chiarimento di
+`[[TEMPO-PROPRIO-LOCALE]]` — ### **e' lo stesso principio da un altro lato: il tick e' il
+CONO ED E' L'OROLOGIO MASSIMO.**
+
+### ⭐⭐ **E CHIUDE NEL VERSO GIUSTO LA TERZA COSA CHE AVEVO SEGNALATO IO in `(B-5)`:** avevo
+scritto che se `cs` non avesse un tetto allora `theta` potrebbe superare `pi`, e che a
+`theta = 2 pi` il `hop` diventa **l'identita'** — cioe' ### **oltre il limite della luce la
+materia RALLENTA e a `2 pi` SI FERMA.** Avevo detto che segnalava **una cosa sola**: o `cs`
+e' limitata da un **meccanismo derivato**, o `theta > pi` e' un regime strano.
+### ✅ **La decisione dice la PRIMA, e aggiunge il COME: una forma che SATURA, MAI un
+tetto** — e avevo scritto che la tentazione sarebbe stata un tetto e che `A11` lo vieta.
+### **La decisione e' d'accordo, e lo dice esplicitamente.**
+
+### ✅ **LE CONSEGUENZE REGISTRATE** *(punto `2`)*, anche dentro
+`[[DECISIONE-STRADA-B-FLUSSI]]`:
+① la camminata di **oggi** e il **banco congelato** *(angolo `pi`)* descrivono ### **il
+CASO LIMITE alla velocita' della luce, NON il tipico** — e restano validi **come
+riferimento di quel limite** *(`M-B1` resta il controllo **al bit** ad angolo `pi`)*;
+② nel regime fisico *(`theta < pi`)* `H_tot` e' conservata a meno di `O(theta^2)`, **tanto
+meglio quanto piu' gli orologi locali sono LENTI** rispetto al tick; al limite l'errore e'
+**massimo** *(il `6`–`28%` di `db328b9`)* — ### **e quello e' IL DOMINIO DI VALIDITA' DA
+DICHIARARE.**
+
+### ✅ **E `[[DOMANDA-LA-FORMA-DI-CS-DAL-VUOTO]]` e' SUPERATA, non sparita:** chiedeva la
+forma di `cs` **dentro la strada `(A)`** *(che e' fallita, quindi `pi_k` non esiste piu')*.
+### **Si RIFORMULA**, e la nuova e' l'erede — come il tuo mandato dice.
+
+### ✅ **`(4)` IL PIANO E' RIORDINATO, nei due task history che lo riguardano:** non c'e'
+piu' una misura di `(P-b)` **a se'**, perche' ### **non esisteva un modo di farla.** La
+misura e' **il CONFRONTO** fra `(D3)`/`(D4)` **col termine acceso** e **spento**.
+### ⭐ **E questo rende `(D3)`/`(D4)` il punto di convergenza: il congelamento e il
+raffreddamento sono lo stesso meccanismo, e adesso anche la loro MISURA e' la stessa.**
+
+### ⛔ **La chiusura di `(B-5)` segue nel commit successivo col suo sha**, e la derivazione
+`(3)` *(la forma di `cs` che satura)* e' **il prossimo pezzo.**

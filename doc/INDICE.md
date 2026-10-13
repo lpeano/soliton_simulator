@@ -9,7 +9,7 @@
 | `DOCUMENTAZIONE` | `2` | 1 |
 | `DOCUMENTAZIONE` | `ENTRAMBE` | 9 |
 | `FISICA` | `1` | 343 |
-| `FISICA` | `2` | 115 |
+| `FISICA` | `2` | 116 |
 | `FISICA` | `ENTRAMBE` | 21 |
 | `INFRASTRUTTURA` | `1` | 39 |
 | `INFRASTRUTTURA` | `2` | 21 |
@@ -266,6 +266,7 @@
 | `DEC-Z47-TRANSIZIONE` | DECISIONE | METODO | ENTRAMBE | ### **CHIUSA** |  | Z47 non si puo- portare ad AGENDA: CHIUSA -> AGENDA e- una transizione VIETATA |
 | `DECISIONE-DIREZIONE-STRADA-3` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | strada (3): C esatta nelle leggi e ROTTA SPONTANEAMENTE nello stato, con pareti |
 | `DECISIONE-STRADA-B-FLUSSI` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | strada (B): Grover e spostamento diventano FLUSSI, e l angolo pi e la velocita d |
+| `DECISIONE-TICK-OROLOGIO-MASSIMO` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | il tick e l orologio piu veloce possibile: theta <= pi e cs ha un massimo |
 | `DECISIONE-VUOLE-UN-CAMPO` | STANDARD | METODO | ENTRAMBE | ### **APERTA** |  | una decisione che serve a un programma vuole un CAMPO, non una frase nel titolo |
 | `DECISIONE-VUOTO-MEDIATORE` | DECISIONE | FISICA | 2 | ### **CHIUSA** |  | strada (A): lo sbilancio d energia di ogni tick va nel vuoto locale e ne torna |
 | `DERIVA-DELLA-FORMA-D` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | la forma (D) non conserva la sua conservazione modificata: perche-? |
@@ -293,12 +294,12 @@
 | `DOMANDA-GRAFO-INIZIALE` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | il grafo iniziale SENZA pos: reticolo, k-regolare, espansore? |
 | `DOMANDA-GRANDEZZA-LOCALE-TEMPO` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | da dove viene la grandezza locale da cui escono r_k e cs_k? |
 | `DOMANDA-GUSCIO-E-INTERFERENZA` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | il guscio e- interferenza e non materia: che cosa resta dell-ipotesi del guscio? |
-| `DOMANDA-IL-LIMITE-DELLA-LUCE-SI-RAGGIUNGE` | DECISIONE | FISICA | 2 | ### **AGENDA** | SI | il limite omega*dtau = pi si raggiunge? E che cosa limita cs, se niente lo limit |
+| `DOMANDA-IL-LIMITE-DELLA-LUCE-SI-RAGGIUNGE` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | il limite omega*dtau = pi si raggiunge? E che cosa limita cs, se niente lo limit |
 | `DOMANDA-IL-PI-DEL-NODO-CHE-NASCE` | DECISIONE | FISICA | 2 | ### **AGENDA** | SI | il pi di un nodo nuovo: la decisione 10 (il calore paga la nascita) riscritta su |
 | `DOMANDA-IL-V4-ENTRA-NELL-ERA-2` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | cinque gruppi di operatori del v4 sono nel banco e non in tabella |
 | `DOMANDA-L-ORDINAMENTO-IN-H-O-NON-H` | DECISIONE | FISICA | 2 | ### **AGENDA** | SI | il termine di ordinamento entra in H (e nel flusso) o come legge NON-H? |
 | `DOMANDA-LA-CARTA-NON-ESISTE` | DECISIONE | DOCUMENTAZIONE | ENTRAMBE | ### **APERTA** |  | la carta della fisica non ha un documento, e le sue etichette collidono con ID v |
-| `DOMANDA-LA-FORMA-DI-CS-DAL-VUOTO` | DECISIONE | FISICA | 2 | ### **AGENDA** | SI | la forma di f in cs_k = f'(pi_k): il posto A1 della carta, dichiarato aperto |
+| `DOMANDA-LA-FORMA-DI-CS-DAL-VUOTO` | DECISIONE | FISICA | 2 | ### **SUPERATA** |  | la forma di f in cs_k = f'(pi_k): il posto A1 della carta, dichiarato aperto |
 | `DOMANDA-LA-FORMA-DI-F-NELL-ORDINAMENTO` | DECISIONE | FISICA | 2 | ### **AGENDA** | SI | quale F in Lambda F(q q / Lambda^2): esiste, NON e unica, ed e la stessa classe  |
 | `DOMANDA-LAMBDA-GRANDEZZA` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | lambda: su quale grandezza si misura, e da dove viene il suo valore? |
 | `DOMANDA-MASSA-E-FORME-MANCANTI` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | il termine di massa e due forme del flusso sono nel banco e non in tabella |

@@ -173,3 +173,29 @@ per cui `(D3)` non e' una scorciatoia: ### **e' una ricognizione.**
 2. `(D2)` la curva `Gamma(x)`, `8` punti, **e l'esponente dichiarato**.
 3. `(D3)` il protocollo, `>= 4` velocita' su un fattore `>= 16`, **coi due controlli**.
 4. ### ⚠ **E la memoria si DICHIARA** per ogni scena grande, come il mandato chiede.
+
+---
+
+## 10. ✅ IL RIORDINO DEL PIANO — **accolto da Luca il `2026-10-13` alle `17:58`**
+
+> **Luca:** *«Accolta la tua conclusione di `f23d971`: il termine di ordinamento da solo
+> non ordina un sistema chiuso, quindi `(P-b)` NON si misura a spazio fisso. **LA MISURA
+> DI `(P-b)` E' `(D3)`/`(D4)` COL TERMINE ACCESO**, confrontata con `(D3)`/`(D4)` col
+> termine spento.»*
+
+### ⭐ **Quindi il piano cambia cosi', e il confronto E' la misura:**
+
+| | la corsa | che cosa decide |
+|---|---|---|
+| `1` | `(D3)`/`(D4)` **col termine SPENTO** | ### **il CONTROLLO:** e' il congelamento per diluizione **da solo** |
+| `2` | `(D3)`/`(D4)` **col termine ACCESO** | ### **la misura di `(P-b)`** |
+| `3` | ### ⭐ **la DIFFERENZA fra le due** | ### **se il termine ORDINA, e QUANTO** |
+
+### ⛔ **E NON C'E' PIU' UNA MISURA DI `(P-b)` A SE': non esisteva un modo di farla.**
+### ⚠ **La previsione `r2a` lo diceva** *(a spazio fisso si ha la parita' **qualunque** sia
+il termine)*, e ### **adesso il piano lo riflette invece di tenere in lista una misura che
+non si puo' fare.**
+
+### ⭐ **E questo rende `(D3)`/`(D4)` il PUNTO DI CONVERGENZA di due pezzi:** il
+**congelamento per diluizione** e il **raffreddamento** sono lo stesso meccanismo,
+### **e adesso anche la loro MISURA e' la stessa.**
