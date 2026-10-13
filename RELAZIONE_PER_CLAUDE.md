@@ -15294,3 +15294,42 @@ un risultato e' il contrario di una legge derivata»*.
 ### **NON sono topologicamente protetti.** ### **Questo pezzo non sostituisce `(P-b)`:
 risponde a una domanda diversa** — *«i domini possono esistere?»* invece di *«sono
 stabili?»*.
+
+## 2026-10-13 — `(D1)`: **lo strumento funziona, e una mia previsione CADE per un errore preciso**
+
+| scena | `dim` | memoria | `x0` | `corr` **variazioni** | `corr` **valori** | `C`: `q -> -q` | localita' |
+|---|--:|--:|--:|--:|--:|--:|--:|
+| `anello-16` *(la scena di `B3`)* | 64 | `0.06` MB | `0.9700` | **`+0.9345`** *(prevista `+0.9438`)* | `+0.6340` | `0.0e+00` | `0.0e+00` |
+| `toro2d-10x10` | 800 | `9.77` MB | `0.9055` | **`+0.7543`** | `+0.6946` | `0.0e+00` | `0.0e+00` |
+
+### ⛔ **LA PREVISIONE `+0.9438` SUL TORO ERA SBAGLIATA, e l'errore e' preciso:** quel
+numero viene da `B3`, misurato su un **ANELLO DI 16 NODI**, e io l'ho previsto per un
+**TORO `10x10`**. ### ⚠ **La correlazione dipende dai pesi `sin(omega_k)`, cioe' DALLO
+SPETTRO, cioe' DALLA SCENA** — e trasferire un numero fra due scene senza dirlo
+### **e' `L-NUMERI` in un'altra forma: il numero aveva una provenienza, e non era quella.**
+
+### ✅ **E L'HO VERIFICATO invece di spiegarlo: sull'anello-16 fa `+0.9345`, dentro `0.01`
+dalla previsione.** ### **La previsione era giusta PER LA SUA SCENA.**
+
+### ⭐ **E I DUE BRACCI PIU' IMPORTANTI TORNANO ESATTAMENTE:**
+
+| | il braccio | il numero |
+|---|---|--:|
+| `d1c` | sotto la `C` completa, `q_k -> -q_k` | ### ✅ **`0.000e+00`, ESATTO** |
+| `d1d` | perturbando `psi` a distanza `>= 3`, `q_k` **non cambia** | ### ✅ **`0.000e+00`, ESATTO** |
+| `d1d` | e ### ⛔ **DEVE cambiare** perturbando **sul nodo** | ### ✅ **`2.0`** |
+
+### ⚠ **E `d1c` E' UN CONTROLLO DELLO STRUMENTO, NON UNA PROVA:** la `C`-disparita' di
+`q_h` l'ho **DERIVATA** in `(P-b)`, estremita' per estremita'. ### **Che venga `0.000e+00`
+ESATTO dice che il codice fa cio' che il conto dice** — ed e' il modo giusto di leggerlo.
+
+### ⭐ **E UNA COSA CHE SI IMPARA, e non era nel piano:** `q` segue le **VARIAZIONI** di
+`Q` meglio del suo **LIVELLO** *(`+0.75` contro `+0.69` sul toro; `+0.93` contro `+0.63`
+sull'anello)*. ### **Come proxy della DINAMICA dello squilibrio e' buono; come proxy del
+suo VALORE ASSOLUTO e' piu' debole** — e per `(D3)`, che misura una **lunghezza di
+correlazione**, e' la dinamica che conta.
+
+### ⭐ **E LA CAUSA DELLA DIFFERENZA E' STRUTTURALE, non un difetto:** `q` e' un `Q`
+**pesato con `sin(omega_k)`**. ### ⛔ **Se la correlazione fosse `+1.000` esatta sarebbe LO
+STRUMENTO a essere sbagliato**, ed e' per questo che `d1b` e' un braccio che deve fallire
+al rovescio.

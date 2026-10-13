@@ -150,6 +150,10 @@ moduli:
     responsabilita: il riscaldamento di Floquet sulla scena grande, e il salvataggio durante la corsa
     importa: [_presidio, bande, composizione, corrente, deriva, incidenza, motore, stato]
 
+  - nome: segno.py
+    responsabilita: lo squilibrio LOCALE q, C-dispari, e la sua validazione contro Q
+    importa: [_presidio, bande, bande_floquet, composizione, corrente, deriva, motore]
+
   - nome: _collauda_deriva.py
     responsabilita: il collaudo della deriva, e presidia il FALSO-ZERO della saturazione spenta
     importa: [_presidio, composizione, deriva, energia]

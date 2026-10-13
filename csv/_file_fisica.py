@@ -166,6 +166,11 @@ FILE_FISICA = (
     # ### ⚠ **E il motore valida SOLO l-unitarieta-.**
     'primo_ordine/bande.py',
     'primo_ordine/bande_floquet.py',
+    # ### LO SQUILIBRIO LOCALE `q`, lo strumento di `(D1)`.
+    # ### ⭐ **E la sua `C`-disparita- e- DERIVATA e non misurata:** il controllo
+    # ### numerico da- ### **`0.000e+00` ESATTO**, e serve a dire che il codice fa cio-
+    # ### che il conto dice.
+    'primo_ordine/segno.py',
     'primo_ordine/_collauda_deriva.py',
     # ### IL COSTRUTTO `@rif` *(punto `14`)*: ### **byte-inerte**, e il suo
     # ### collaudo lo verifica ### **con `is`.**
