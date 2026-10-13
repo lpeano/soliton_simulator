@@ -6,7 +6,7 @@
 |---|--:|
 ## ⭐ **LA PROSSIMA**
 
-> ### ✅ **[[DOMANDA-BASE-DI-CICLI]]** — la base di cicli non e unica, e lo stesso difetto compare in tre pezzi diversi
+> ### ✅ **[[DOMANDA-BANDE-O-SEGNO-LOCALE]]** — il parametro d ordine della strada (3): le popolazioni di banda o il segno locale?
 >
 > ### 📌 **Che cosa SBLOCCA:** ### **niente di dichiarato**
 >
@@ -16,10 +16,11 @@
 
 ## LE ALTRE, per priorita-
 
-### `CRITICA` — **12**
+### `CRITICA` — **13**
 
 | la domanda | pronta? | che cosa aspetta |
 |---|---|---|
+| **[[DOMANDA-BASE-DI-CICLI]]** la base di cicli non e unica, e lo stesso difetto compare in tre pezzi d | ### ✅ **PRONTA** | ### **niente** |
 | **[[DOMANDA-CONDIZIONI-INIZIALI-IN-TABELLA]]** la tabella non ha un posto dove dichiarare le condizioni iniziali | ### ✅ **PRONTA** | ### **niente** |
 | **[[DOMANDA-D13-CONIUGATI]]** D13: i coniugati delle memorie -- tw come fase U(1) sull-arco? | ### ⏳ aspetta | ### **aspetta:** `DOMANDA-D9-GEOMETRIA` |
 | **[[DOMANDA-D9-GEOMETRIA]]** D9: la geometria viene da d e p_d dentro H, o dalle relazioni fra gli ps | ### ⏳ aspetta | ### **aspetta:** `DOMANDA-QUANTITA-CONSERVATA` |
@@ -72,7 +73,7 @@
 
 ## IL CONTO
 
-> ### ⛔ **aperte `38`, di cui pronte `29`.**
+> ### ⛔ **aperte `39`, di cui pronte `30`.**
 >
 > ### ✅ **E una domanda DECISA esce da sola:** si chiude con la decisione di Luca e il commit, e ### **nessuno la spunta a mano** -- la lista ### **si genera dai campi**, e un campo che cambia ### **cambia la lista.**
 
@@ -82,18 +83,19 @@
 
 > ### 📌 **Queste arrivano dai DUE criteri vecchi** *(la nota che dice <<da decidere da Luca>>, e lo stato `DA_CLASSIFICARE`)*, e ### **non hanno una `priorita`**: quindi ### **non stanno nell-ordine delle dipendenze.** ### ✅ **Non le tolgo: le DICHIARO**, perche- una lista che ne nasconde una parte ### **sembra completa.**
 
-| **voci che aspettano una decisione** | ### **`23`** |
-| **domande in tutto** | `23` |
+| **voci che aspettano una decisione** | ### **`24`** |
+| **domande in tutto** | `24` |
 | **segnaposto `NON_DEFINITA`**, che NON sono una domanda | `187` |
 
 ---
 
-## le DOMANDE aperte -- `23`
+## le DOMANDE aperte -- `24`
 
 | id | `classe`/`dominio`/era/stato | LA DOMANDA | LA FRASE |
 |---|---|---|---|
 | `COESIONE-TERMINE-O-CAMPO` | `DECISIONE`/`FISICA`/`2`/`AGENDA` | la coesione e- un termine locale con una forza da derivare, oppure un campo dinamico | la coesione simmetrica viene da un termine LOCALE o da un CAMPO? ### DOMANDA APERTA PER LUCA, da decidere da Luca. ### IL FATTO MISURATO (referto doc/ |
 | `DERIVA-DELLA-FORMA-D` | `DECISIONE`/`FISICA`/`2`/`AGENDA` | se vale la pena cercare la causa: la forma N funziona, (D) deriva e non so perche- | la forma (D) non conserva la sua conservazione modificata: perche-? ### DOMANDA APERTA PER LUCA, e anche per me: NON SO PERCHE-. ### IL FATTO MISURATO |
+| `DOMANDA-BANDE-O-SEGNO-LOCALE` | `DECISIONE`/`FISICA`/`2`/`AGENDA` | il parametro d ordine della strada (3) e N+ - N- (di banda, GLOBALE e non definito con W dinamica) o q_h, il segno LOCALE? Raccomando q_h. E (P-a) resta un ostacolo: non si possono avere insieme local | il parametro d ordine della strada (3): le popolazioni di banda o il segno locale? DOMANDA APERTA PER LUCA, nata dalla derivazione di (P-a) il 2026-10 |
 | `DOMANDA-C2-O-C4` | `DECISIONE`/`FISICA`/`2`/`AGENDA` | C2 senza massa come misurato, oppure si prova C4 | due componenti o quattro: il gap c-e- solo con C4? ### DOMANDA APERTA PER LUCA, da decidere da Luca, ed e- la domanda C2 contro C4 di A16. ### IL FATT |
 | `DOMANDA-CHI-CAUSA-L-ANISOTROPIA` | `DECISIONE`/`FISICA`/`2`/`AGENDA` | sul cubico i versori riducono l-anisotropia direzionale; e l-attribuzione del 14 per cento del v3 ai versori RESTA, perche- l-anello e- vertex-transitivo | sul cubico i versori del v3 RIDUCONO l-anisotropia direzionale: e- una leva o si lascia? ### DOMANDA APERTA PER LUCA, da decidere da Luca. ### ##### A |
 | `DOMANDA-COME-LA-MATERIA-CAMBIA-LAMBDA` | `DECISIONE`/`FISICA`/`2`/`AGENDA` | scattering nel nodo o trasmissione sull-arco | come la materia cambia la densita- del vuoto: scattering nel nodo o trasmissione sull-arco? ### DOMANDA APERTA PER LUCA, da decidere da Luca. ### E- i |

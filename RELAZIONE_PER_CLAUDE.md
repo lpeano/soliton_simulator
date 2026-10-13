@@ -15105,3 +15105,54 @@ che la saturazione avra' sotto la strada `(3)`. ### **Ritiro la raccomandazione 
 finche' `(P-a)` non risponde:** era costruita sul flusso **attuale**, e raccomandare su un
 oggetto che sta per cambiare ### **sarebbe una raccomandazione senza oggetto.**
 ### ✅ **Ma la voce RESTA in `DA_DECIDERE_LUCA.md`: sospesa non vuol dire chiusa.**
+
+## 2026-10-13 — `(P-a)`: **l'ostacolo e' vero, ma la mia previsione era SBAGLIATA**
+
+### ⭐ **LA CONDIZIONE ESATTA, derivata in quattro righe:** un flusso
+`d psi / d tau = -i A psi` conserva `N+ = <psi|P+|psi>` per **ogni** stato se e solo se
+`d/d tau <psi|P+|psi> = i <psi|[A, P+]|psi> = 0`, cioe' ### **`[A, P+] = 0`** — e questo
+vuol dire che `A` e' **diagonale a blocchi nelle bande**.
+
+### ⛔ **E LA MIA PREVISIONE ERA CHE NESSUNA FORMA LOCALE FUNZIONASSE. ERA SBAGLIATA.**
+La famiglia esiste, ed e' **costruttiva**:
+
+> **`A = somma_j ( c_j W^j + coniugato(c_j) W^{-j} )`**, `c_j` **scalari**, somma **finita**
+
+### ✅ **hermitiana** *(`W` unitaria, quindi `W^{-j} = (W^j)^dagger`)* · **commuta con `W`**
+quindi con `P+` · ### ⭐ **LOCALE con portata FINITA: `W` ha portata `1` arco, quindi la
+PORTATA E' IL GRADO** · **`C`-simmetrica** *(sotto `C`, `W(U) -> W(C U)`, misurato
+`0.000e+00`)* · **esatta** *(`exp(-iA tau)` e' una funzione di `W`)*.
+
+### ⛔⛔ **MA L'OSTACOLO E' VERO, E NON E' LA LOCALITA': E' IL GLOBALE.** Quella famiglia e'
+**LINEARE**, e una saturazione **deve** essere non lineare — e' il suo scopo. Rendendo i
+coefficienti dipendenti dallo stato, i due casi **si escludono**:
+
+| `c_j` dipende da | commuta con `P+`? | `F10` lo ammette? |
+|---|---|---|
+| uno scalare **GLOBALE** | ### ✅ **si'** *(restano numeri, `A` resta un polinomio in `W`)* | ### ⛔ **NO: vieta i riferimenti globali** |
+| grandezze **DI NODO** | ### ⛔ **no** *(non e' piu' un polinomio in `W`)* | ### ✅ si' |
+
+> ### ⛔ **NON SI POSSONO AVERE INSIEME, TUTTE E CINQUE: locale · esatta · `C`-simmetrica ·
+> conserva le bande · NON LINEARE.**
+
+### ⚠ **E DICHIARO LA PORTATA DELL'ARGOMENTO:** la parte **costruttiva** e' una
+**dimostrazione**; la parte **negativa** e' un argomento di **GENERICITA'** — pulito su una
+scena traslazionalmente invariante *(gli autovettori di `W` ruotano col momento, e un
+generatore diagonale sui nodi e non costante collega momenti diversi, quindi bande
+diverse)*, ### **ma su una scena qualunque NON ho una dimostrazione.** ### **<<Generico>>
+non e' <<sempre>>**, e un controesempio farebbe cadere **quel** paragrafo, non la famiglia.
+
+### ✅ **E NON BLOCCA LA STRADA `(3)`**, perche' il parametro d'ordine puo' essere il segno
+**LOCALE** `q_h` invece delle popolazioni di banda. ### ⚠ **E non e' un modo di aggirare
+l'ostacolo: e' un CAMBIO DI OGGETTO, e lo dichiaro come tale** — resta vero che
+`N+ - N-` non si conserva. ### ⭐ **Va a Luca:** `[[DOMANDA-BANDE-O-SEGNO-LOCALE]]`, e
+raccomando `q_h` per **tre** ragioni, nessuna delle quali e' *«cosi' l'ostacolo sparisce»*
+— la prima e' che ### **`N+` non e' nemmeno DEFINITA con la `U` dinamica, che e' GIA'
+decisa.**
+
+### ⭐ **E UN RISULTATO CHE NON CERCAVO:** con `c` reale e `j = 1` la famiglia si riduce a
+`A = c (W + W^dagger)`, cioe' alla **parte hermitiana di `W`** — portata `1` arco, e la sua
+energia e' ### **PROPRIO `Re<psi|W psi>`**, il primo termine dell'energia promossa.
+### ⛔ **Non la propongo come niente** *(e' lineare: non satura)*: la registro perche' se
+servira' un pezzo **che non mescola le bande**, ### **la famiglia e' questa, e si sa
+perche'.**
