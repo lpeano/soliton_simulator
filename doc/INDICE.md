@@ -9,7 +9,7 @@
 | `DOCUMENTAZIONE` | `2` | 1 |
 | `DOCUMENTAZIONE` | `ENTRAMBE` | 9 |
 | `FISICA` | `1` | 343 |
-| `FISICA` | `2` | 100 |
+| `FISICA` | `2` | 104 |
 | `FISICA` | `ENTRAMBE` | 21 |
 | `INFRASTRUTTURA` | `1` | 39 |
 | `INFRASTRUTTURA` | `2` | 21 |
@@ -264,6 +264,7 @@
 | `DEC-NASCITA-PSI` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | con che stato nasce un nodo? il punto 3 chiede UNA REGOLA DICHIARATA per ogni gr |
 | `DEC-REGOLA-FORMA` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | che CODICE genera una `regola`? il punto 11(a) chiede che crescita e vuoto si ge |
 | `DEC-Z47-TRANSIZIONE` | DECISIONE | METODO | ENTRAMBE | ### **CHIUSA** |  | Z47 non si puo- portare ad AGENDA: CHIUSA -> AGENDA e- una transizione VIETATA |
+| `DECISIONE-DIREZIONE-STRADA-3` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | strada (3): C esatta nelle leggi e ROTTA SPONTANEAMENTE nello stato, con pareti |
 | `DECISIONE-VUOLE-UN-CAMPO` | STANDARD | METODO | ENTRAMBE | ### **APERTA** |  | una decisione che serve a un programma vuole un CAMPO, non una frase nel titolo |
 | `DECISIONE-VUOTO-MEDIATORE` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | strada (A): lo sbilancio d energia di ogni tick va nel vuoto locale e ne torna |
 | `DERIVA-DELLA-FORMA-D` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | la forma (D) non conserva la sua conservazione modificata: perche-? |
@@ -301,7 +302,7 @@
 | `DOMANDA-PHI-REALE-O-COMPLESSO` | DECISIONE | FISICA | 2 | ### **CHIUSA** |  | la tabella dichiara phi_h reale, il banco congelato lo tiene complesso: quale de |
 | `DOMANDA-PORTATA-DEL-VUOTO-MEDIATORE` | DECISIONE | FISICA | 2 | ### **AGENDA** | SI | quale instradamento, cioe quale cono: la liberta di ricircolo adesso sceglie la  |
 | `DOMANDA-PRIMA-LEGARE-POI-MISURARE` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | senza stato legato tre letture non sono decidibili: si cerca prima un legame? |
-| `DOMANDA-QUALE-COPPIA-CONIUGATA-DEL-VUOTO` | DECISIONE | FISICA | 2 | ### **AGENDA** | SI | la coppia coniugata del vuoto: una variabile nuova, o la fase e l ampiezza di ph |
+| `DOMANDA-QUALE-COPPIA-CONIUGATA-DEL-VUOTO` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | la coppia coniugata del vuoto: una variabile nuova, o la fase e l ampiezza di ph |
 | `DOMANDA-QUALE-FORMA-FISSA-CS` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | quale forma del vuoto fissa cs: nessuna delle tre e- libera da tutti i difetti |
 | `DOMANDA-QUALE-SCENA-3D-PRINCIPALE` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | quale scena 3D fa da principale, se nessuna delle due provate e- isotropa? |
 | `DOMANDA-QUALE-SEGNO` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | quale segno della non linearita-, se quello che lega lega solo in 1D? |
@@ -412,6 +413,7 @@
 | `INTERO-BLOCCO` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 7 volte, MAI definito in un registro) [INTERO-BLOCCO] |
 | `INVARIANZA-LOCALE-CS` | FRONTE | FISICA | 2 | ### **AGENDA** |  | ogni legge che usa una grandezza GLOBALE da all osservatore locale un riferiment |
 | `INVENTARIO-SIGILLI-SENZA-COMMIT` | DIFETTO | INFRASTRUTTURA | 1 | ### **SOSPESA** |  | 79 voci di sigillo su 82 non hanno il commit con cui rigirarle, piu una riga dup |
+| `IPOTESI-DOMINI-SEPARATI` | TEORIA | FISICA | 2 | ### **AGENDA** |  | ipotesi di Luca: materia e antimateria in domini fisici separati, oltre l orizzo |
 | `ISOTROPIA-LOCALE` | FRONTE | FISICA | 2 | ### **AGENDA** |  | l-irregolarita- locale si attenua con la distanza? e si riduce costruendo meglio |
 | `ISOTROPIA-MISURATA` | CRITERIO | METODO | 2 | ### **AGENDA** |  | l-isotropia del supporto e- un criterio MISURATO, prima di dire che un campo e-  |
 | `J2` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 3 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
@@ -781,6 +783,8 @@
 | `S8d` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 4 volte, MAI definito in un registro) [S8d] |
 | `SABOTATURA-NO-OP` | DIFETTO | METODO | ENTRAMBE | ### **CHIUSA** |  | la sabotatura di un braccio che DEVE fallire era un no-op silenzioso: P-MOD da 1 |
 | `SCALE-TW` | FRONTE | FISICA | 1 | ### **SOSPESA** | SI | LE SCALE DELLA TORSIONE: un'analisi completa, DA CAPO / mandato di Luca ricevuto |
+| `SCARTATA-ECCESSO-NEL-SEME` | DECISIONE | FISICA | 2 | ### **SUPERATA** |  | SCARTATA da Luca: carica conservata con l eccesso di materia messo nel seme |
+| `SCARTATA-SAKHAROV-C-ESPLICITA` | DECISIONE | FISICA | 2 | ### **SUPERATA** |  | SCARTATA da Luca: Sakharov con violazione ESPLICITA di C nelle leggi |
 | `SCENA-1` | MISURA | FISICA | 1 | ### **CHIUSA** |  | CHIUSA il 2026-09-25, strada (1) (decisione di Luca) / SEMINALAM era approvata m |
 | `SCENA-3D-PRINCIPALE` | STANDARD | FISICA | 2 | ### **AGENDA** |  | la (ii) e- il BANCO DI MISURA: punti che si respingono, gradi 2-6 |
 | `SCHED-PASSO` | CURA | FISICA | 1 | ### **SOSPESA** | SI | il passo pieno diventa uno SCHEDULATORE: le regole del passo sono architettura,  |

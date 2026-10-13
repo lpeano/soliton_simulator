@@ -15043,3 +15043,65 @@ limitata dal basso e non ha un serbatoio verso cui salire: **oscilla.**
 ### 📌 **`primo_ordine/bande_floquet.py`** *(diviso da `bande.py`, che aveva passato le
 `700` righe)*, e i risultati si salvano **durante la corsa** in `doc/dati_floquet.tsv`:
 ### **se la corsa si ferma, cio' che e' stato misurato RESTA.**
+
+## 2026-10-13 — L'IPOTESI DEI **DOMINI SEPARATI**, la strada `(3)`, e il piano
+
+### ✅ **REGISTRATE QUATTRO VOCI:** `[[IPOTESI-DOMINI-SEPARATI]]` *(l'ipotesi di Luca)*,
+`[[DECISIONE-DIREZIONE-STRADA-3]]` *(la direzione: **non ancora una legge**)*, e le due
+alternative **scartate** — `[[SCARTATA-ECCESSO-NEL-SEME]]` e
+`[[SCARTATA-SAKHAROV-C-ESPLICITA]]`. ### ⚠ **Le scartate si registrano perche' una
+direzione scartata che non si registra TORNA, e torna senza la ragione per cui era stata
+scartata.**
+
+### ⛔ **IL PROBLEMA, in tre numeri che ho misurato io:** la saturazione mescola le bande
+**in coppie esatte** *(`-1.0000`)*, porta uno stato di sola materia **alla parita'** *(un
+fattore `623` in `~1000` tick)*, e la **`C` completa e' esatta** *(`0.000e+00`)*.
+### **Con la `C` esatta e all'equilibrio, Sakharov dice che la parita' e' l'unico esito:
+cosi' com'e', il modello CANCELLA ogni eccesso di materia.**
+
+### ⭐ **E IL PIANO HA DUE RISULTATI CHE NON MI ASPETTAVO, trovati scrivendolo.**
+
+### ⭐ **① LA FORMA `C`-SICURA DELL'ORDINAMENTO ESISTE, e il conto e' di una riga:**
+**il PRODOTTO di due grandezze `C`-dispari e' `C`-pari**, quindi un termine
+`- somma_{k,l vicini} q_k q_l` con `q` dispari e' ### **`C`-simmetrico nelle leggi** e ha
+### **energia piu' bassa quando i vicini hanno lo STESSO segno.** ### **E' il
+ferromagnete, e rompe la simmetria NELLO STATO e non nelle leggi** — cioe' esattamente la
+rottura spontanea che la strada `(3)` chiede. ### ⚠ **E l'<<antifase -> repulsione>>
+dell'era `1` E' GIA' di quella famiglia:** la traduzione **non e' un innesto.**
+
+### ⭐⭐ **② E LA GRANDEZZA `C`-DISPARI LOCALE ESISTE GIA':**
+**`q_h = Im[conj(psi_h) (W psi)_h]`** — la **parte immaginaria** della stessa correlazione
+a due tempi la cui **parte reale** e' la densita' d'energia. ### **La `C`-disparita' globale
+la DERIVO dalla misura di `9c46a68`** *(`C` antiunitaria piu' `C W(U) C^-1 = W(C U)` danno
+`<C psi|W(C U)|C psi> = coniugato di <psi|W(U)|psi>`, quindi `Re` pari e `Im` DISPARI)*.
+### ⭐ **E questo risolve anche un problema che avevo trovato in `(P-a)`:** i proiettori di
+banda presuppongono **`W` FISSA**, e con la `U` dinamica *(gia' decisa)* ### **`N+` non e'
+nemmeno ben definita lungo l'evoluzione.** ### ✅ **`q_h` e' locale, costa un prodotto per
+estremita', e resta definita anche con `W` dinamica.**
+
+### ⛔ **E LA PREVISIONE SU `(P-a)` E' CHE SIA UN OSTACOLO VERO**, per cinque passi che
+scrivo nel piano: `P+` e' **spettrale**, i suoi autovettori sono **delocalizzati**,
+commutarci vuol dire essere **diagonale in momento**, e quello e' **non locale** salvo che
+sia **costante** — ### **mentre il generatore della saturazione e' diagonale sui nodi e NON
+costante.** ### ⚠ **Ma nomino DUE vie d'uscita prima di dichiarare l'ostacolo**, e la prima
+cambia il piano: ### **potrebbe non servire la conservazione esatta, basta che
+l'ORDINAMENTO sia piu' veloce del mescolamento** — e allora `(P-a)` non e' un ostacolo ma
+**un rapporto fra due ritmi, che si MISURA.**
+
+### ⛔ **E IL PUNTO DEBOLE DEL PIANO LO DICO IO:** il termine di ordinamento ha **un `J`**,
+e `CARTA-FISICA-SIMULATORE/F10` **vieta le costanti nuove**. ### **O si deriva, o la forma
+cade** — ### **la forma la so, la costante no**, e quella e' la domanda vera di `(P-b)`.
+
+### ✅ **E ACCETTO LA RISERVA DELLA VERIFICA ESTERNA SU `(A)`, senza attenuarla:** nella
+derivazione ho usato **una sola** delle due equazioni di Hamilton, e `Delta pi_k = -s_k`
+l'ho messo **a mano**. ### ⭐ **Il controllo che aggiungo e' una CONDIZIONE SU `E`, non una
+definizione di `pi`:** deve valere **`dE/d theta_k = s_k / dt`**, e ### **puo' essere
+falsa.** ### ⛔ **E noto che questo controllo e' PIU' FORTE di `P4`: `P4` passerebbe anche
+con `pi` imposto a mano**, perche' basta che `cs_k` dipenda da `pi_k`. ### **Quindi `P4`
+non era il test della coerenza, e la verifica esterna ha ragione a dirlo.**
+
+### ⚠ **E LA SCELTA FRA `A-i` E `A-ii` E' SOSPESA da Luca**, perche' dipende dalla forma
+che la saturazione avra' sotto la strada `(3)`. ### **Ritiro la raccomandazione per `A-ii`
+finche' `(P-a)` non risponde:** era costruita sul flusso **attuale**, e raccomandare su un
+oggetto che sta per cambiare ### **sarebbe una raccomandazione senza oggetto.**
+### ✅ **Ma la voce RESTA in `DA_DECIDERE_LUCA.md`: sospesa non vuol dire chiusa.**
