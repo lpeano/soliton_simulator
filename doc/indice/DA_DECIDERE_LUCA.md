@@ -16,17 +16,18 @@
 
 ## LE ALTRE, per priorita-
 
-### `CRITICA` — **18**
+### `CRITICA` — **19**
 
 | la domanda | pronta? | che cosa aspetta |
 |---|---|---|
 | **[[DOMANDA-BASE-DI-CICLI]]** la base di cicli non e unica, e lo stesso difetto compare in tre pezzi d | ### ✅ **PRONTA** | ### **niente** |
+| **[[DOMANDA-COME-LA-MATERIA-CAMBIA-LAMBDA]]** come la materia cambia la densita- del vuoto: scattering nel nodo o tras | ### ⏳ aspetta | ### **aspetta:** `DOMANDA-PASSO-FRAZIONARIO-O-ASINCRONO` |
 | **[[DOMANDA-CONDIZIONI-INIZIALI-IN-TABELLA]]** la tabella non ha un posto dove dichiarare le condizioni iniziali | ### ✅ **PRONTA** | ### **niente** |
 | **[[DOMANDA-D13-CONIUGATI]]** D13: i coniugati delle memorie -- tw come fase U(1) sull-arco? | ### ⏳ aspetta | ### **aspetta:** `DOMANDA-D9-GEOMETRIA` |
 | **[[DOMANDA-D9-GEOMETRIA]]** D9: la geometria viene da d e p_d dentro H, o dalle relazioni fra gli ps | ### ⏳ aspetta | ### **aspetta:** `DOMANDA-QUANTITA-CONSERVATA` |
-| **[[DOMANDA-IL-LIMITE-DELLA-LUCE-SI-RAGGIUNGE]]** il limite omega*dtau = pi si raggiunge? E che cosa limita cs, se niente  | ### ✅ **PRONTA** | ### **niente** |
 | **[[DOMANDA-L-ORDINAMENTO-IN-H-O-NON-H]]** il termine di ordinamento entra in H (e nel flusso) o come legge NON-H? | ### ✅ **PRONTA** | ### **niente** |
 | **[[DOMANDA-LA-CARTA-NON-ESISTE]]** la carta della fisica non ha un documento, e le sue etichette collidono  | ### ✅ **PRONTA** | ### **niente** |
+| **[[DOMANDA-LA-FORMA-DI-CS-CHE-SATURA]]** la forma di cs dal vuoto che satura: la scala Lambda_0 non esiste in tab | ### ⏳ aspetta | ### **aspetta:** `DOMANDA-COME-LA-MATERIA-CAMBIA-LAMBDA` |
 | **[[DOMANDA-LA-FORMA-DI-F-NELL-ORDINAMENTO]]** quale F in Lambda F(q q / Lambda^2): esiste, NON e unica, ed e la stessa | ### ✅ **PRONTA** | ### **niente** |
 | **[[DOMANDA-MITOSI-LE-FORME]]** le quattro forme della mitosi: lo spareggio, phi, il ramo della radice,  | ### ✅ **PRONTA** | ### **niente** |
 | **[[DOMANDA-OMEGA-E-UNITA-O-COSTANTE]]** omega e una scelta di unita o una costante nuova? E i rapporti fra i tre | ### ✅ **PRONTA** | ### **niente** |
@@ -39,12 +40,11 @@
 | **[[DOMANDA-U-DINAMICA-LE-FORME]]** le quattro forme della U d arco dinamica: la scala, il caso senza vuoto, | ### ✅ **PRONTA** | ### **niente** |
 | **[[SCENA-3D-PRINCIPALE]]** la (ii) e- il BANCO DI MISURA: punti che si respingono, gradi 2-6 | ### ✅ **PRONTA** | ### **niente** |
 
-### `DIPENDENTE` — **18**
+### `DIPENDENTE` — **17**
 
 | la domanda | pronta? | che cosa aspetta |
 |---|---|---|
 | **[[DOMANDA-CHI-CAUSA-L-ANISOTROPIA]]** sul cubico i versori del v3 RIDUCONO l-anisotropia direzionale: e- una l | ### ✅ **PRONTA** | ### **niente** |
-| **[[DOMANDA-COME-LA-MATERIA-CAMBIA-LAMBDA]]** come la materia cambia la densita- del vuoto: scattering nel nodo o tras | ### ⏳ aspetta | ### **aspetta:** `DOMANDA-PASSO-FRAZIONARIO-O-ASINCRONO` |
 | **[[DOMANDA-ESTREMITA-NUOVE-INIZIALI]]** con che psi e che phi nascono le estremita di un arco nuovo | ### ✅ **PRONTA** | ### **niente** |
 | **[[DOMANDA-FORME-VUOTO]]** le TRE forme del vuoto locale: che cos-e- un grado, quanti per nodo, l-a | ### ⏳ aspetta | ### **aspetta:** `DOMANDA-QUANTITA-CONSERVATA` |
 | **[[DOMANDA-FUSIONE]]** la FUSIONE di due nodi: si vieta, e con che cosa? | ### ✅ **PRONTA** | ### **niente** |
@@ -78,7 +78,7 @@
 
 ## IL CONTO
 
-> ### ⛔ **aperte `44`, di cui pronte `35`.**
+> ### ⛔ **aperte `44`, di cui pronte `34`.**
 >
 > ### ✅ **E una domanda DECISA esce da sola:** si chiude con la decisione di Luca e il commit, e ### **nessuno la spunta a mano** -- la lista ### **si genera dai campi**, e un campo che cambia ### **cambia la lista.**
 
@@ -103,7 +103,7 @@
 | `DOMANDA-A-NON-E-MECCANICA` | `DECISIONE`/`FISICA`/`2`/`AGENDA` | (A) NON e meccanica. dE/d theta_k = 0, quindi Hamilton da d pi_k / dt = 0 e contraddice Delta pi_k = -s_k, che avevo imposto. Vale anche per A-ii. Tre vie: (i) una legge nuova SCELTA, (ii) la quasi-en | (A) non e meccanica: dE/d theta_k = 0, quindi Hamilton da d pi_k / dt = 0 DOMANDA APERTA PER LUCA, dal conto di (P-e) del 2026-10-13 (il task history  |
 | `DOMANDA-C2-O-C4` | `DECISIONE`/`FISICA`/`2`/`AGENDA` | C2 senza massa come misurato, oppure si prova C4 | due componenti o quattro: il gap c-e- solo con C4? ### DOMANDA APERTA PER LUCA, da decidere da Luca, ed e- la domanda C2 contro C4 di A16. ### IL FATT |
 | `DOMANDA-CHI-CAUSA-L-ANISOTROPIA` | `DECISIONE`/`FISICA`/`2`/`AGENDA` | sul cubico i versori riducono l-anisotropia direzionale; e l-attribuzione del 14 per cento del v3 ai versori RESTA, perche- l-anello e- vertex-transitivo | sul cubico i versori del v3 RIDUCONO l-anisotropia direzionale: e- una leva o si lascia? ### DOMANDA APERTA PER LUCA, da decidere da Luca. ### ##### A |
-| `DOMANDA-COME-LA-MATERIA-CAMBIA-LAMBDA` | `DECISIONE`/`FISICA`/`2`/`AGENDA` | scattering nel nodo o trasmissione sull-arco | come la materia cambia la densita- del vuoto: scattering nel nodo o trasmissione sull-arco? ### DOMANDA APERTA PER LUCA, da decidere da Luca. ### E- i |
+| `DOMANDA-COME-LA-MATERIA-CAMBIA-LAMBDA` | `DECISIONE`/`FISICA`/`2`/`AGENDA` | e adesso la domanda e UNA: con che regola la materia modifica la densita del vuoto, E CON CHE SEGNO? Il verso di cs SEGUE da qui (vicino alla materia gli orologi rallentano), quindi DOMANDA-LA-FORMA-D | come la materia cambia la densita- del vuoto: scattering nel nodo o trasmissione sull-arco? ### DOMANDA APERTA PER LUCA, da decidere da Luca. ### E- i |
 | `DOMANDA-E-NON-SI-CONSERVA-A-X-UNO` | `DECISIONE`/`FISICA`/`2`/`CHIUSA` | E (la somma dei due termini) NON si conserva nel regime in cui la saturazione lavora -- escursione relativa 5.8 per cento a x ~ 1 e 28 per cento a x ~ 4 -- e i due termini NON si compensano. E la base | E non si conserva nel regime in cui la saturazione lavora, e i termini non si compensano MISURATO il 2026-10-13 eseguendo il punto 1(c) del mandato pi |
 | `DOMANDA-GUSCIO-E-INTERFERENZA` | `DECISIONE`/`FISICA`/`2`/`AGENDA` | il guscio e- interferenza, quindi l-ipotesi si riformula o manca qualcosa | il guscio e- interferenza e non materia: che cosa resta dell-ipotesi del guscio? ### DOMANDA APERTA PER LUCA, da decidere da Luca. ### IL FATTO MISURA |
 | `DOMANDA-IL-PI-DEL-NODO-CHE-NASCE` | `DECISIONE`/`FISICA`/`2`/`AGENDA` | da dove viene il pi di un nodo che nasce? F10 chiede norme conservate anche attraverso le nascite, e A7b che cio che nasce nasca da cio che c e li. Raccomando che sia SOTTRATTO ai genitori -- e la dec | il pi di un nodo nuovo: la decisione 10 (il calore paga la nascita) riscritta su pi DOMANDA APERTA PER LUCA, nata derivando la strada (A) il 2026-10-1 |

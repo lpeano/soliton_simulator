@@ -15715,3 +15715,50 @@ come appare un errore di discretizzazione:** raffinando `dt` **a `cs_k` fissi** 
 fisica.**
 
 ### ✅ **E `(B-5)` e' CHIUSA**, citando `bbd7fee`.
+
+## 2026-10-13 — ⛔ **LA STRADA `(B)` ERA GIA' DECISA L'11 OTTOBRE, e io ne avevo letto solo il titolo**
+
+### ⛔⛔ **IL DIFETTO E' MIO, e lo dico prima di tutto.** Il `2026-10-13`, prima di
+derivare, **ho verificato che `[[CS-LOCALE-DAL-VUOTO]]` esistesse** — ### **e ne ho letto
+SOLO IL TITOLO.** I suoi cinque punti contenevano gia':
+
+| | il punto dell'`11` ottobre | che cosa ho <<derivato>> il `13` |
+|---|---|---|
+| `(4)` | lo spostamento diventa **PARZIALE**, con la frazione fissata da `cs` dell'arco | ### ⛔ **la strada `(B)`** |
+| `(2)` | **il cono resta il tetto assoluto**, `cs <= 1` | ### ⛔ **la decisione di `(B-5)`** |
+| `(5)` | tutto cio' che fissa `cs` e' **`C`-pari**, mai l'elicita' | ### ✅ **il mio primo passo, ritrovato** |
+
+### ⛔ **E `[[P1]]` dice esattamente questo:** *«prima di una diagnosi o di una cura si
+RILEGGE DAL DISCO»*. ### **<<Verificare che una voce esista>> non e' <<leggerla>>, e la
+differenza mi e' costata DUE derivazioni.**
+
+### ⚠ **CHE COSA SALVO:** la derivazione del `13` ha **aggiunto** due cose che l'`11` non
+aveva — ### **`Lambda_0` NON ESISTE in tabella** *(la forma ovvia e' esclusa da `F10`)* e
+### **un vuoto uniforme da' `cs = cs_max/2` da `G'(1)`**, un numero derivato.
+### ⛔ **Ma il prezzo e' un giro speso su una decisione gia' presa.**
+
+### ✅ **`(3)` LE DUE DOMANDE SONO UNA SOLA, e hai ragione:** il verso di `cs` **non e'
+indipendente** — ### **segue dal segno con cui la materia modifica `Lambda`**, perche' il
+principio e' che **vicino alla materia gli orologi rallentano**. Se la materia **diminuisce**
+`Lambda` intorno a se', meno vuoto deve dare luce **piu' lenta** ⟹ `G'(u)`; se la **aumenta**
+⟹ `G'(1/u)`.
+
+### ✅ **ACCORPATA in `[[DOMANDA-COME-LA-MATERIA-CAMBIA-LAMBDA]]`**, che passa a **`CRITICA`
+e blocca**, e la domanda per te diventa **una**: ### **con che regola la materia modifica la
+densita' del vuoto, E CON CHE SEGNO?** ### ⚠ **E il SEGNO e' la parte che prima non era
+chiesta:** quella voce aveva **due candidate misurate** *(`SCATTER` e `TRASMISSIONE`, che
+cambiano `Lambda` di `2.759` e `2.565`)* ### **ma NON il segno vicino alla materia** — e
+quello decide il verso di `cs`.
+
+### ✅ **E `[[DOMANDA-LA-FORMA-DI-CS-CHE-SATURA]]` resta SOSPESA** *(`dipende_da` quella)*:
+### **deciderle separatamente vorrebbe dire decidere due volte la stessa cosa, e magari in
+modo incoerente.**
+
+### ⭐ **E IL RIFERIMENTO DELLA FASE 1 DA' IL SEGNO CHE QUEL CODICE AVEVA:** in `_cs_nodo`
+era **piu' materia rispetto al vuoto ⟹ luce piu' lenta**, l'analogo della dilatazione
+gravitazionale. ### ⚠ **Ma e' un riferimento DEI PRINCIPI e non un argomento:** la' `cs`
+dipendeva dall'**intensita' dell'interferenza** *(materia)*, mentre l'`11` ottobre dice che
+`cs` viene **dal vuoto** — ### **quel segno dice che cosa si vuole OTTENERE, non da quale
+regola.** ### ✅ **E i due difetti non si ereditano:** `CS_M = 2.0` *(a mano; in `(B)` il
+massimo lo fissa **il cono**)* e `Lambda` come **media globale**
+*(`[[CS-LAMBDA-GLOBALE]]`; in `1dcf315` la scala e' **locale**)*.
