@@ -15514,3 +15514,38 @@ invece di accelerare, e sarebbe VISIBILE.**
 `[[DOMANDA-OMEGA-E-UNITA-O-COSTANTE]]`,
 `[[DOMANDA-IL-LIMITE-DELLA-LUCE-SI-RAGGIUNGE]]` — tutte `CRITICA`, in
 `doc/indice/DA_DECIDERE_LUCA.md` *(ora `28` domande)*.
+
+## 2026-10-13 — IL PARAMETRO D'ORDINE E' **`q_h`**, deciso da Luca — e una contraddizione fra due voci, sanata
+
+### ✅ **`(0)` LA COERENZA, e la contraddizione era proprio sul punto che avevi corretto:**
+`[[TEMPO-PROPRIO-LOCALE]]` registrava un **CHIARIMENTO**, mentre
+`[[DECISIONE-STRADA-B-FLUSSI]]` diceva ancora *«PRECISATA alle 15:50»*, cioe' **una
+decisione nuova**. ### **Le due voci si contraddicevano**, e adesso dicono la stessa cosa.
+
+### ✅ **`(1)` DECISO:** il parametro d'ordine materia/antimateria della strada `(3)` e'
+**`q_h = Im[conj(psi_h)(W psi)_h]`** per estremita', `q_k = somma_h q_h` per nodo —
+### **e NON le bande globali.** Le tre ragioni registrate sono **le mie, accettate**.
+
+### ⚠ **E IL PREZZO RESTA SCRITTO, come chiedi:** `q` segue le **VARIAZIONI** dello
+squilibrio meglio del suo **VALORE ASSOLUTO** *(`0.75` contro `0.69` sul toro)*, e la
+relazione **dipende dalla scena** *(i pesi `sin(omega_k)`)*. ### **Come proxy della
+dinamica e' buono, come proxy del livello e' piu' debole, e chi lo usa deve saperlo.**
+### ✅ **E le bande restano uno STRUMENTO DI CONTROLLO dove sono definite, non un parametro
+della fisica.**
+
+### ⭐⭐ **E LA TUA PREVISIONE SU `(B)` NON E' UNA PREVISIONE: E' GIA' DERIVATA.** In `(B)`
+`q_h` si ridefinisce col `W` del tick di `(B)`, e la `C`-disparita' **resta un'identita'** —
+perche' la dimostrazione usa **due cose sole**: che `C W C^{-1} = W(C U)` e l'unitarieta' di
+`i sigma_y`. ### ✅ **E `697953a` ha esteso la prima A OGNI ANGOLO:**
+`C hop_U(theta) C^{-1} = hop_{CU}(theta)` *(perche' `theta` e' **reale**)* e
+`C Grover(theta) C^{-1} = Grover(theta)` *(perche' `P_u` e' **reale** e agisce sull'indice
+di estremita')*. ### **Quindi il `W` di `(B)` soddisfa la stessa relazione, e le cinque
+righe del conto di `8f94f0c` si ripetono IDENTICHE.**
+### ⚠ **La verifica numerica restera' un CONTROLLO DELLO STRUMENTO**, non una prova.
+
+### ⛔ **E LA CHIUSURA DELLA VOCE SEGUE NEL COMMIT SUCCESSIVO col suo sha**, nel modello a
+due atti: ### **`chiusura.commit` non puo' citare un commit che ancora non esiste.**
+
+### ⚠ **E `(2)` — le due riserve su `(P-b)` — e `(3)` NON sono in questo commit:** il tuo
+mandato dice *«se il limite d'uso e' vicino: prima `(0)` e `(1)`, e committa»*.
+### **Il limite e' vicino, e ho fatto cosi'.**

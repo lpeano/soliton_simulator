@@ -275,7 +275,7 @@
 | `DIVISIONE-AUTOCONSISTENTE` | FRONTE | FISICA | 2 | ### **AGENDA** |  | la divisione dell arco come UNA legge: dove si rompe, cosa ereditano i figli, il |
 | `DOMANDA-A-NON-E-MECCANICA` | DECISIONE | FISICA | 2 | ### **AGENDA** | SI | (A) non e meccanica: dE/d theta_k = 0, quindi Hamilton da d pi_k / dt = 0 |
 | `DOMANDA-A3B-CLASSE` | DECISIONE | METODO | 2 | ### **AGENDA** |  | A3b: con che classe entra nell-indice? |
-| `DOMANDA-BANDE-O-SEGNO-LOCALE` | DECISIONE | FISICA | 2 | ### **AGENDA** | SI | il parametro d ordine della strada (3): le popolazioni di banda o il segno local |
+| `DOMANDA-BANDE-O-SEGNO-LOCALE` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | il parametro d ordine della strada (3): le popolazioni di banda o il segno local |
 | `DOMANDA-BASE-DI-CICLI` | DECISIONE | FISICA | ENTRAMBE | ### **APERTA** | SI | la base di cicli non e unica, e lo stesso difetto compare in tre pezzi diversi |
 | `DOMANDA-C2-O-C4` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | due componenti o quattro: il gap c-e- solo con C4? |
 | `DOMANDA-CHI-CAUSA-L-ANISOTROPIA` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | sul cubico i versori del v3 RIDUCONO l-anisotropia direzionale: e- una leva o si |
