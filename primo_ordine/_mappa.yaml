@@ -142,6 +142,10 @@ moduli:
     responsabilita: il referto della deriva, e la configurazione INTERA che dichiara
     importa: []
 
+  - nome: bande.py
+    responsabilita: le due bande spettrali di W, il controllo C, e le grandezze per banda
+    importa: [_presidio, composizione, deriva, energia]
+
   - nome: _collauda_deriva.py
     responsabilita: il collaudo della deriva, e presidia il FALSO-ZERO della saturazione spenta
     importa: [_presidio, composizione, deriva, energia]

@@ -14744,3 +14744,75 @@ rapporto e' `0.004`, cioe' **nessuna tendenza secolare** — ma l'ampiezza e' `7
 ### ⛔ **MI FERMO SU QUESTO PEZZO** *(il mandato lo dice)* **e passo al successivo in coda:**
 il punto `3` del mandato di stamattina *(la carta esiste, la citazione nuda e' ambigua)*,
 che **non dipende da una decisione di Luca**.
+
+## 2026-10-13 — LE DUE BANDE DI `W`: il controllo `C` **passa, ma solo in `SU(2)`**, e nessuna grandezza per banda si conserva
+
+### ⛔ **PRIMA DI TUTTO, UN MIO INADEMPIMENTO: non ho scritto le previsioni di `B2` e
+`B3` PRIMA dei numeri.** Ho eseguito direttamente, perche' la priorita' di Luca dice di
+usare il budget *«SOLO per le misure»*. ### **Non e' una scusa: la priorita' ordina COSA
+misurare, non sospende il rito del paragrafo `8`.** ### ✅ **E non le back-dato**, che
+sarebbe peggio: il commit di questo task history e' **dopo** la misura, e git lo mostra.
+
+### ⭐ **IL CONTROLLO DELLA LETTURA — e ha trovato una CONDIZIONE DI FISICA.** `C` e'
+antilineare, quindi se `W v = e^{-i omega} v` e `C W = W C` allora `C v` ha `e^{+i omega}`:
+le bande si scambiano. Il test e' `||C(W psi) - W(C psi)||`:
+
+| `U` | `|CW - WC|` | spettro simmetrico | `|P+C - CP-|` | |
+|---|--:|--:|--:|---|
+| `U(2)` generico | `4.327e+00` | `8.852e-03` | `2.175e+00` | ### ⛔ **FALLISCE** |
+| **`SU(2)`** | `8.006e-16` | `2.220e-15` | `1.061e-14` | ### ✅ **PASSA** |
+
+### ⛔ **LA `C` CHIEDE `det U = 1`**, perche' `C A = A C` vuol dire `sigma_y A* sigma_y^-1
+= A`, e per lo spostamento con trasporto questo vale **se e solo se `U` sta in `SU(2)`**.
+### ⚠ **E `motore.Geometria` valida SOLO l'unitarieta', non il determinante:** la tabella
+**permette un trasporto che rompe la `C`**, che e' una legge della carta.
+### **Un vincolo di fisica senza presidio e' una tenda** *(`A9`)*, e la decisione e' di
+Luca: **`[[DOMANDA-TRASPORTO-DEVE-STARE-IN-SU2]]`**.
+
+### ✅ **Ho aggiunto `su2` a `deriva.py` col default SPENTO**, perche' la misura della
+deriva *(`db328b9`)* e' **gia' committata con `U(2)`** e ribaltare un default cambierebbe
+un numero pubblicato senza che nessuno l'abbia chiesto.
+
+### ⭐ **IL SETTORE `0` E' VUOTO** *(`0` su `64`, peso `0.0000`)*: le bande piatte dei
+Grover **non compaiono su questa scena**, quindi `Q = N+ - N-` e' definita senza un pezzo
+di stato che non ha segno.
+
+### ✅ **`B1` IL CONTROLLO REGGE:** con `N` **spento** le popolazioni sono costanti a
+**`2.02e-14` relativo** — `W` commuta coi suoi proiettori spettrali, quindi i proiettori
+sono giusti.
+
+### ⭐ **E IL FATTO PIU' NETTO: `corr(Delta N+, Delta N-) = -1.0000` ESATTO**, e le due
+escursioni coincidono a tutte le cifre a ogni `x`. ### **`N` mescola le bande IN COPPIE**,
+ed e' la forma misurabile dell'idea di Luca. ### ⚠ **E in parte e' strutturale:**
+`||psi||^2` e' conservata a `2.05e-14` e il settore `0` e' vuoto, quindi `N+ + N-` **non
+puo'** cambiare — ### **il contenuto vero del `-1.0000` e' che le coppie sono ESATTE.**
+
+### ⭐ **E IL MESCOLAMENTO E' MONOTONO IN `x`:** `3.45e-05` relativo a `x ~ 0.015`,
+`1.39e-01` a `x ~ 1`, `3.99e-01` a `x ~ 15`. ### **La creazione di coppie e' accesa dalla
+saturazione**, con la stessa monotonia in `x` trovata per l'energia.
+
+### ⛔ **`B2` LA RISPOSTA E' NO:** l'ipotesi che la variazione di `E+ + E-` sia compensata
+dal termine del vuoto ### **non e' cio' che succede** — `corr(Delta Re<psi|W psi>, Delta`
+`vuoto) = +0.1049`, e una compensazione darebbe `~ -1`. E `E+` e `E-` sono **praticamente
+scorrelate** *(`-0.0468`)*. ### ✅ **Non ho cercato una combinazione diversa finche'
+tornava:** il mandato lo vieta, e sarebbe **lo stesso errore della candidata corrente di
+ieri** — costruire la risposta invece di misurarla.
+
+### ⛔ **`B3` NESSUNA CANDIDATA CARICA SI CONSERVA:** `Q` relativo `7.21e-01`,
+`Im<psi|W psi>` `1.19e+00`, `somma_k h_k` `3.75e+00`. ### ⭐ **Ma `Im<psi|W psi>` segue `Q`
+a `-0.944`**, e il perche' e' **strutturale**: `Im<psi|W psi> = - somma |c_k|^2
+sin(omega_k)` e `sin(omega)` ha **segno di banda**, quindi e' ### **un `-Q` PESATO.**
+### **Le due candidate sono la stessa cosa a meno di un peso, e nessuna si conserva.**
+
+### ⚠ **IL LIMITE:** `P+` e `P-` sono **proiettori spettrali**, quindi tutto cio' che e'
+*«per banda»* e' definito **GLOBALMENTE**. ### **Una forma locale e' un passo successivo,
+da proporre a Luca e non da fare qui.**
+
+### ⛔ **E CHE COSA NON HO MISURATO:** ① la scena del **banco congelato** *(`4m ~ 830`)* —
+ho usato un anello di `16` nodi *(`4m = 64`)*, e ### **il settore `0` vuoto potrebbe essere
+una proprieta' dell'anello**; ② **un seme solo**; ③ la **deriva in `SU(2)`** — non credo
+che la conclusione cambi, ### **ma non l'ho misurato e non lo affermo.**
+
+### 📌 **I pezzi:** `primo_ordine/bande.py` *(`--scrivi` fa il referto)*,
+`doc/REFERTO_bande.md`, e il task history
+`doc/TASK_HISTORY/2026-10-13_bande_materia_antimateria.md`.

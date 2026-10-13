@@ -159,6 +159,12 @@ FILE_FISICA = (
     # ### distingue ### **<<`E` si conserva>> da <<il termine non c-e->>.**
     'primo_ordine/deriva.py',
     'primo_ordine/deriva_referto.py',
+    # ### LE DUE BANDE DI `W`: particella e antiparticella.
+    # ### ⛔ **E IL SUO CONTROLLO HA TROVATO UNA CONDIZIONE DI FISICA:** la `C`
+    # ### chiede `det U = 1`, cioe- ### **`U` in `SU(2)`** -- con `U(2)` generico
+    # ### ### **`|CW - WC| = 4.33` su scala `2.76`**, con `SU(2)` ### **`8.0e-16`.**
+    # ### ⚠ **E il motore valida SOLO l-unitarieta-.**
+    'primo_ordine/bande.py',
     'primo_ordine/_collauda_deriva.py',
     # ### IL COSTRUTTO `@rif` *(punto `14`)*: ### **byte-inerte**, e il suo
     # ### collaudo lo verifica ### **con `is`.**

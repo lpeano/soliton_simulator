@@ -89,7 +89,8 @@ def due_termini(st, mot, par):
 NORME = ("locale", "globale")
 
 
-def scena(nn, seme, dtau, lunghezza=0, norma="locale", vuoto_modulo=1.0):
+def scena(nn, seme, dtau, lunghezza=0, norma="locale", vuoto_modulo=1.0,
+          su2=False):
     """### L'anello di `nn` nodi, ### **e `lunghezza` sceglie la LUNGHEZZA D'ONDA.**
 
     ### ⚠ **`lunghezza = 0` vuol dire CASUALE** *(il caso piu' ruvido)*; un intero `L`
@@ -129,6 +130,15 @@ def scena(nn, seme, dtau, lunghezza=0, norma="locale", vuoto_modulo=1.0):
     for a in range(inc.m):
         X = r.normal(size=(2, 2)) + 1j * r.normal(size=(2, 2))
         Qm, _ = np.linalg.qr(X)
+        if su2:
+            # ### ⭐ **`det U = 1`, e NON e- un abbellimento: e- CIO- CHE SERVE ALLA
+            # ### `C`.** La `C` antilineare chiede `sigma_y U* sigma_y^-1 = U`, che vale
+            # ### ### **se e solo se `U` sta in `SU(2)`.** ### ⛔ **Misurato: con `U(2)`
+            # ### generico `|CW - WC| = 4.33` su scala `2.76`; con `SU(2)` fa `8.0e-16`.**
+            # ### ⚠ **OFF di default**, perche- la misura della deriva e- ### **gia-
+            # ### committata con `U(2)`** e un default che cambia ### **cambierebbe un
+            # ### numero senza che nessuno l-abbia chiesto.**
+            Qm = Qm / np.sqrt(np.linalg.det(Qm))
         U[a] = Qm
     st = ST.nuovo(nn, inc.m)
     if lunghezza <= 0:
@@ -167,9 +177,9 @@ def satura(st, mot):
 
 
 def corri(nn, dtau, ticks, seme=7, lunghezza=0, ogni=1, norma="locale",
-          vuoto_modulo=1.0):
+          vuoto_modulo=1.0, su2=False):
     """### Fa girare `ticks` tick e rende ### **le tre serie: `E`, primo, vuoto.**"""
-    inc, mot, st, par = scena(nn, seme, dtau, lunghezza, norma, vuoto_modulo)
+    inc, mot, st, par = scena(nn, seme, dtau, lunghezza, norma, vuoto_modulo, su2)
     sat = satura(st, mot)
     e1, e2 = due_termini(st, mot, par)
     serie = [(0, e1 + e2, e1, e2)]

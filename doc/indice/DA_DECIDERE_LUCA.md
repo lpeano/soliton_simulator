@@ -16,7 +16,7 @@
 
 ## LE ALTRE, per priorita-
 
-### `CRITICA` — **10**
+### `CRITICA` — **11**
 
 | la domanda | pronta? | che cosa aspetta |
 |---|---|---|
@@ -28,6 +28,7 @@
 | **[[DOMANDA-MITOSI-LE-FORME]]** le quattro forme della mitosi: lo spareggio, phi, il ramo della radice,  | ### ✅ **PRONTA** | ### **niente** |
 | **[[DOMANDA-PASSO-FRAZIONARIO-O-ASINCRONO]]** pezzi frazionari o tick asincroni, e l-invarianza locale dei secondi NON | ### ✅ **PRONTA** | ### **niente** |
 | **[[DOMANDA-QUANTITA-CONSERVATA]]** esiste una moneta isotropa, causale e simmetrica fra le bande con una qu | ### ✅ **PRONTA** | ### **niente** |
+| **[[DOMANDA-TRASPORTO-DEVE-STARE-IN-SU2]]** la C chiede det U = 1, e il motore valida solo l unitarieta: un vincolo  | ### ✅ **PRONTA** | ### **niente** |
 | **[[DOMANDA-U-DINAMICA-LE-FORME]]** le quattro forme della U d arco dinamica: la scala, il caso senza vuoto, | ### ✅ **PRONTA** | ### **niente** |
 | **[[SCENA-3D-PRINCIPALE]]** la (ii) e- il BANCO DI MISURA: punti che si respingono, gradi 2-6 | ### ✅ **PRONTA** | ### **niente** |
 
@@ -69,7 +70,7 @@
 
 ## IL CONTO
 
-> ### ⛔ **aperte `35`, di cui pronte `26`.**
+> ### ⛔ **aperte `36`, di cui pronte `27`.**
 >
 > ### ✅ **E una domanda DECISA esce da sola:** si chiude con la decisione di Luca e il commit, e ### **nessuno la spunta a mano** -- la lista ### **si genera dai campi**, e un campo che cambia ### **cambia la lista.**
 
@@ -79,13 +80,13 @@
 
 > ### 📌 **Queste arrivano dai DUE criteri vecchi** *(la nota che dice <<da decidere da Luca>>, e lo stato `DA_CLASSIFICARE`)*, e ### **non hanno una `priorita`**: quindi ### **non stanno nell-ordine delle dipendenze.** ### ✅ **Non le tolgo: le DICHIARO**, perche- una lista che ne nasconde una parte ### **sembra completa.**
 
-| **voci che aspettano una decisione** | ### **`19`** |
-| **domande in tutto** | `19` |
+| **voci che aspettano una decisione** | ### **`20`** |
+| **domande in tutto** | `20` |
 | **segnaposto `NON_DEFINITA`**, che NON sono una domanda | `187` |
 
 ---
 
-## le DOMANDE aperte -- `19`
+## le DOMANDE aperte -- `20`
 
 | id | `classe`/`dominio`/era/stato | LA DOMANDA | LA FRASE |
 |---|---|---|---|
@@ -102,6 +103,7 @@
 | `DOMANDA-QUALE-FORMA-FISSA-CS` | `DECISIONE`/`FISICA`/`2`/`AGENDA` | quale forma fissa cs, e nessuna delle tre e- libera da tutti i difetti | quale forma del vuoto fissa cs: nessuna delle tre e- libera da tutti i difetti ### DOMANDA APERTA PER LUCA, da decidere da Luca. ### E- il punto A2 de |
 | `DOMANDA-QUALE-SEGNO` | `DECISIONE`/`FISICA`/`2`/`AGENDA` | il segno che lega in 1D in 3D e- PEGGIO del lineare, e il segno va scelto sulla misura CON LA U DINAMICA ACCESA | quale segno della non linearita-, se quello che lega lega solo in 1D? ### DOMANDA APERTA PER LUCA, da decidere da Luca. E- una delle due domande che i |
 | `DOMANDA-QUANDO-LA-CAMMINATA-IN-TABELLA` | `DECISIONE`/`FISICA`/`2`/`AGENDA` | quando si porta la camminata nella tabella, e il porting aspetta le tre scelte del v4 | quando si porta la camminata nella tabella? il porting aspetta TRE decisioni aperte ### DOMANDA APERTA PER LUCA, da decidere da Luca. ### E- il punto  |
+| `DOMANDA-TRASPORTO-DEVE-STARE-IN-SU2` | `DECISIONE`/`FISICA`/`2`/`AGENDA` | la C chiede det U = 1 (misurato: con U(2) generico /CW-WC/ = 4.33 su scala 2.76, con SU(2) 8.0e-16) e motore.Geometria valida SOLO l unitarieta. Il trasporto deve stare in SU(2) per legge, e Geometria | la C chiede det U = 1, e il motore valida solo l unitarieta: un vincolo senza presidio MISURATO il 2026-10-13 eseguendo il controllo che il mandato de |
 | `DUE-STRUMENTI-ARCHIVIO-E` | `DIFETTO`/`INFRASTRUTTURA`/`ENTRAMBE`/`APERTA` | quale dei due strumenti resta, e un solo registro degli archiviati | due strumenti per lo stesso mestiere: spostare gli output su E- ### DOMANDA APERTA PER LUCA, da decidere da Luca: QUALE DEI DUE RESTA. ### IL FATTO: ` |
 | `PROMOZIONE-CONSERVAZIONE-MODIFICATA` | `DECISIONE`/`FISICA`/`2`/`CHIUSA` | la conservazione modificata si conserva; promuoverla a energia e- una sua decisione | la conservazione modificata si conserva: si promuove a energia? ### DOMANDA APERTA PER LUCA, da decidere da Luca. ### IL FATTO MISURATO (referto doc/R |
 | `PROPOSTA-FASE-DISPARI-COESIONE` | `DECISIONE`/`FISICA`/`2`/`AGENDA` | la fase dispari sotto C e- ammissibile al bit; la sua forza g resta da derivare | la fase DISPARI sotto coniugazione di carica come forma della coesione ### DOMANDA APERTA PER LUCA, da decidere da Luca. ### IL FATTO MISURATO (refert |
