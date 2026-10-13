@@ -9,7 +9,7 @@
 | `DOCUMENTAZIONE` | `2` | 1 |
 | `DOCUMENTAZIONE` | `ENTRAMBE` | 9 |
 | `FISICA` | `1` | 343 |
-| `FISICA` | `2` | 111 |
+| `FISICA` | `2` | 115 |
 | `FISICA` | `ENTRAMBE` | 21 |
 | `INFRASTRUTTURA` | `1` | 39 |
 | `INFRASTRUTTURA` | `2` | 21 |
@@ -275,7 +275,7 @@
 | `DIVISIONE-AUTOCONSISTENTE` | FRONTE | FISICA | 2 | ### **AGENDA** |  | la divisione dell arco come UNA legge: dove si rompe, cosa ereditano i figli, il |
 | `DOMANDA-A-NON-E-MECCANICA` | DECISIONE | FISICA | 2 | ### **AGENDA** | SI | (A) non e meccanica: dE/d theta_k = 0, quindi Hamilton da d pi_k / dt = 0 |
 | `DOMANDA-A3B-CLASSE` | DECISIONE | METODO | 2 | ### **AGENDA** |  | A3b: con che classe entra nell-indice? |
-| `DOMANDA-BANDE-O-SEGNO-LOCALE` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | il parametro d ordine della strada (3): le popolazioni di banda o il segno local |
+| `DOMANDA-BANDE-O-SEGNO-LOCALE` | DECISIONE | FISICA | 2 | ### **CHIUSA** |  | il parametro d ordine della strada (3): le popolazioni di banda o il segno local |
 | `DOMANDA-BASE-DI-CICLI` | DECISIONE | FISICA | ENTRAMBE | ### **APERTA** | SI | la base di cicli non e unica, e lo stesso difetto compare in tre pezzi diversi |
 | `DOMANDA-C2-O-C4` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | due componenti o quattro: il gap c-e- solo con C4? |
 | `DOMANDA-CHI-CAUSA-L-ANISOTROPIA` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | sul cubico i versori del v3 RIDUCONO l-anisotropia direzionale: e- una leva o si |
@@ -296,8 +296,10 @@
 | `DOMANDA-IL-LIMITE-DELLA-LUCE-SI-RAGGIUNGE` | DECISIONE | FISICA | 2 | ### **AGENDA** | SI | il limite omega*dtau = pi si raggiunge? E che cosa limita cs, se niente lo limit |
 | `DOMANDA-IL-PI-DEL-NODO-CHE-NASCE` | DECISIONE | FISICA | 2 | ### **AGENDA** | SI | il pi di un nodo nuovo: la decisione 10 (il calore paga la nascita) riscritta su |
 | `DOMANDA-IL-V4-ENTRA-NELL-ERA-2` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | cinque gruppi di operatori del v4 sono nel banco e non in tabella |
+| `DOMANDA-L-ORDINAMENTO-IN-H-O-NON-H` | DECISIONE | FISICA | 2 | ### **AGENDA** | SI | il termine di ordinamento entra in H (e nel flusso) o come legge NON-H? |
 | `DOMANDA-LA-CARTA-NON-ESISTE` | DECISIONE | DOCUMENTAZIONE | ENTRAMBE | ### **APERTA** |  | la carta della fisica non ha un documento, e le sue etichette collidono con ID v |
 | `DOMANDA-LA-FORMA-DI-CS-DAL-VUOTO` | DECISIONE | FISICA | 2 | ### **AGENDA** | SI | la forma di f in cs_k = f'(pi_k): il posto A1 della carta, dichiarato aperto |
+| `DOMANDA-LA-FORMA-DI-F-NELL-ORDINAMENTO` | DECISIONE | FISICA | 2 | ### **AGENDA** | SI | quale F in Lambda F(q q / Lambda^2): esiste, NON e unica, ed e la stessa classe  |
 | `DOMANDA-LAMBDA-GRANDEZZA` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | lambda: su quale grandezza si misura, e da dove viene il suo valore? |
 | `DOMANDA-MASSA-E-FORME-MANCANTI` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | il termine di massa e due forme del flusso sono nel banco e non in tabella |
 | `DOMANDA-MITOSI-LE-FORME` | DECISIONE | FISICA | 2 | ### **AGENDA** | SI | le quattro forme della mitosi: lo spareggio, phi, il ramo della radice, la conne |
@@ -307,8 +309,10 @@
 | `DOMANDA-PHI-REALE-O-COMPLESSO` | DECISIONE | FISICA | 2 | ### **CHIUSA** |  | la tabella dichiara phi_h reale, il banco congelato lo tiene complesso: quale de |
 | `DOMANDA-PORTATA-DEL-VUOTO-MEDIATORE` | DECISIONE | FISICA | 2 | ### **AGENDA** | SI | quale instradamento, cioe quale cono: la liberta di ricircolo adesso sceglie la  |
 | `DOMANDA-PRIMA-LEGARE-POI-MISURARE` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | senza stato legato tre letture non sono decidibili: si cerca prima un legame? |
+| `DOMANDA-Q-DEL-NODO-SOMMA-O-MEDIA` | DECISIONE | FISICA | 2 | ### **AGENDA** | SI | q_k e la SOMMA o la MEDIA dei q_h sulle estremita del nodo? |
 | `DOMANDA-QUALE-COPPIA-CONIUGATA-DEL-VUOTO` | DECISIONE | FISICA | 2 | ### **SUPERATA** |  | la coppia coniugata del vuoto: una variabile nuova, o la fase e l ampiezza di ph |
 | `DOMANDA-QUALE-FORMA-FISSA-CS` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | quale forma del vuoto fissa cs: nessuna delle tre e- libera da tutti i difetti |
+| `DOMANDA-QUALE-LAMBDA-SULL-ARCO` | DECISIONE | FISICA | 2 | ### **AGENDA** | SI | quale Lambda usa l arco nel termine di ordinamento: del nodo, la media, o dell a |
 | `DOMANDA-QUALE-SCENA-3D-PRINCIPALE` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | quale scena 3D fa da principale, se nessuna delle due provate e- isotropa? |
 | `DOMANDA-QUALE-SEGNO` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | quale segno della non linearita-, se quello che lega lega solo in 1D? |
 | `DOMANDA-QUALE-TEMPO-PROPRIO-USA-L-ARCO` | DECISIONE | FISICA | 2 | ### **AGENDA** | SI | quale tempo proprio usa l arco, che vive fra due nodi con dtau diversi |

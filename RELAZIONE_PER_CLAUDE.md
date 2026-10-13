@@ -15549,3 +15549,73 @@ due atti: ### **`chiusura.commit` non puo' citare un commit che ancora non esist
 ### ⚠ **E `(2)` — le due riserve su `(P-b)` — e `(3)` NON sono in questo commit:** il tuo
 mandato dice *«se il limite d'uso e' vicino: prima `(0)` e `(1)`, e committa»*.
 ### **Il limite e' vicino, e ho fatto cosi'.**
+
+## 2026-10-13 — `(R1)` e `(R2)`: **entrambe giuste, e `G` NON si trasferisce**
+
+### ✅ **`(R1)` E' GIUSTA, e il mio conto non la copriva.** Avevo previsto
+`|q_k| <= ||psi||^2` per Cauchy-Schwarz ### **ed e' vero**, ma ### ⛔ **un limite sul
+NUMERATORE non impedisce una divergenza in `1/Lambda`.** ### **Avevo controllato il
+numeratore e non il denominatore.**
+
+### ⭐⭐ **E IL TRUCCO DEL TERMINE DEL VUOTO NON E' QUELLO CHE SEMBRA: `G` NON E' LIMITATA
+— CRESCE LINEARMENTE.** `Lambda G(h/Lambda) -> h` perche' `Lambda` **moltiplica** e
+l'argomento ha `Lambda` **al denominatore di grado `1`**: ### **i due si CANCELLANO.**
+
+### ⛔⛔ **E ALLORA `G` NON SI TRASFERISCE, e questo non me lo aspettavo:**
+`Lambda G(q q / Lambda^2)` a `Lambda -> 0` da' `q q/Lambda - (pi/2) Lambda` —
+### **ESPLODE ANCORA.** ### ⭐ **Il perche' e' preciso: l'argomento ha `Lambda` al GRADO
+`2`**, perche' `q_k q_l` e' **quadratico** dove `h` era **lineare**. ### ✅ **Quindi serve
+una `F` DAVVERO LIMITATA, che e' un requisito DIVERSO da quello di `G`** — e lo dico
+perche' *«l'analogo di `G`»* suonava come *«la stessa cosa»*.
+
+### ✅ **LA FORMA ESISTE**, `Lambda_kl F(q q/Lambda_kl^2)` con `F ~ u` a `0` e **limitata**
+a `infinito`: a `Lambda` grande ritrova `q q/Lambda` *(dove e' sicura)*, a `Lambda -> 0`
+### **svanisce.** ### ⭐⭐ **E CHE SVANISCA HA UNA LETTURA: senza vuoto non c'e' mediazione,
+quindi non c'e' ordinamento.** ### **E' il vuoto come MEDIATORE — l'idea di `(A)` — che
+sopravvive come proprieta' STRUTTURALE.** ### ⚠ **E lo noto perche' `(A)` e' chiusa come
+fallita: la sua INTUIZIONE non lo era.**
+
+### ⛔ **MA NON E' UNICA, e lo dichiaro:** `arctan u`, `u/(1+|u|)`, `tanh u` vanno **tutte
+e tre**, nessuna porta costanti, e ### **nessun argomento che ho le distingue.**
+### ⭐ **So pero' dire CHE CLASSE DI SCELTA E': la stessa di `G` stessa.** ### **Quindi `F`
+la deve scegliere chi ha scelto `G`** — e propongo **tre requisiti** su cui giudicarle.
+
+### ⚠ **E UNA CONSEGUENZA CHE NON ERA NELLA RISERVA:** con `F` limitata il termine
+**SATURA**, quindi la forza che ordina **si indebolisce dove c'e' gia' ordine**.
+### ⭐ **Previsione: l'ordine satura a `|q| ~ Lambda`, NON a `|q| ~ ||psi||^2`** — ### **il
+vuoto fissa la scala dell'ordine, e dove e' sottile l'ordine satura PRIMA.**
+### ✅ **E nessun tetto: la limitatezza viene dalla FORMA di `F`** *(`A11`)*.
+
+### ✅ **`(R2)` E' GIUSTA, E CAMBIA IL SENSO DI `(P-b)`.** Il termine **non e' un meccanismo
+che ordina**: e' **un termine che rende l'ordine un minimo di energia.** ### ⛔ **E un
+sistema hamiltoniano CHIUSO non scende al minimo.** ### **Quindi il termine, DA SOLO, non
+ordina niente.**
+
+### ⭐⭐ **E IL RAFFREDDAMENTO E' LO STESSO MECCANISMO DEL CONGELAMENTO — una cosa, non due:**
+la crescita dello spazio **① abbassa `x`, e con lui `Gamma(x)`** *(e' `(D2)`–`(D3)`)*, e
+**② diluisce l'energia per nodo** *(e' `(R2)`)*. ### **Il congelamento spegne cio' che
+disordina; il raffreddamento permette a cio' che ordina di funzionare.** ### ✅ **E la
+MISURA e' una sola: `(D3)`/`(D4)`, con e senza il termine.**
+
+### ⛔ **E QUESTO CAMBIA L'ORDINE DEL PIANO, e non lo cambio da solo:** `(P-b)` **non si
+puo' misurare a spazio fisso** — darebbe la parita' **qualunque sia il termine**.
+### **Quindi la misura di `(P-b)` E' `(D3)` col termine acceso, non una misura a se'.**
+### ⚠ **Lo porto a te invece di riordinare il piano.**
+
+### ✅ **E LE QUATTRO FORME SONO A TE, una per voce, con la raccomandazione separata:**
+`[[DOMANDA-LA-FORMA-DI-F-NELL-ORDINAMENTO]]` *(tre requisiti, nessuna `F`)*,
+`[[DOMANDA-QUALE-LAMBDA-SULL-ARCO]]` *(il `Lambda` dell'ARCO)*,
+`[[DOMANDA-Q-DEL-NODO-SOMMA-O-MEDIA]]` *(la SOMMA, **col contro dichiarato**: favorisce i
+nodi di grado alto)*, `[[DOMANDA-L-ORDINAMENTO-IN-H-O-NON-H]]` *(IN `H`)*.
+
+### ✅ **E `[[DOMANDA-BANDE-O-SEGNO-LOCALE]]` e' CHIUSA**, citando `4979c8a`.
+
+### ⛔ **E UN DIFETTO MIO CHE IL PRESIDIO HA PRESO, mentre committavo:** avevo battezzato
+una voce **`DOMANDA-q-DEL-NODO-SOMMA-O-MEDIA`**, con la **`q` MINUSCOLA in mezzo a due
+trattini**. ### **`H-INDICE` non la legge intera**, e il presidio dell'indice ha rifiutato
+il commit dicendo ### **<<`1` ID su `1040` non si legge intero>>.**
+### ⚠ **E la distinzione e' fine, e la scrivo perche' mi ricapitera':** i **suffissi**
+minuscoli sono ammessi *(`A2b`, `H-P1-bis`, `P1-quater`)*, ### **una minuscola IN MEZZO
+no.** ### ✅ **Rinominata in `[[DOMANDA-Q-DEL-NODO-SOMMA-O-MEDIA]]`, e il nome vecchio
+resta come ALIAS** — la voce non era ancora committata, quindi ### **non lascia un reperto
+col nome sbagliato.**

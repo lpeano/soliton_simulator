@@ -168,3 +168,138 @@ sara' un TETTO su `q`:** ### **`A11` lo vieta senza un errore trovato.**
 3. le **quattro forme** del `3.2` a Luca, **una voce**.
 4. ### ⛔ **E NIENTE CODICE finche' `[[DOMANDA-BANDE-O-SEGNO-LOCALE]]` non risponde:** se il
    parametro d'ordine fosse `N+ - N-`, ### **questo pezzo non serve.**
+
+---
+
+## 8. ⛔ `(R1)` — **DIVIDERE PER `Lambda` ESPLODE DOVE IL VUOTO E' SOTTILE**
+
+> **Riserva della verifica esterna, accolta dal mandato di Luca delle `16:11`:** *«Il
+> termine del vuoto `Lambda G(h/Lambda)` resta LIMITATO quando `Lambda -> 0`. Invece
+> `q_k q_l / Lambda` ESPLODE. E per decisione di Luca il vuoto nasce solo dove c'e' spazio,
+> quindi zone a `Lambda` piccolo CI SARANNO.»*
+
+### ✅ **E' GIUSTA, E LA ACCETTO.** E noto che **il mio conto su `q` non la copriva**:
+avevo previsto `|q_k| <= ||psi||^2` per Cauchy-Schwarz ### **ed e' VERO** *(`W` e'
+unitaria)*, ### ⛔ **ma un limite su `q` NON IMPEDISCE una divergenza in `1/Lambda`.**
+### **Avevo controllato il numeratore e non il denominatore.**
+
+### `8.1` ⭐⭐ PERCHE' IL TERMINE DEL VUOTO E' LIMITATO, e **dove sta il trucco**
+
+A `Lambda -> 0` l'argomento `x = h/Lambda -> infinito`, e `G(x) = x - arctan x -> x - pi/2`.
+Quindi
+
+> **`Lambda G(h/Lambda) -> Lambda (h/Lambda - pi/2) = h - (pi/2) Lambda -> h`**
+
+### ⭐ **IL TRUCCO NON E' CHE `G` SIA LIMITATA — `G` CRESCE LINEARMENTE.** E' che
+`Lambda` **moltiplica** e l'argomento ha `Lambda` **al denominatore di grado `1`**:
+### **i due si CANCELLANO.**
+
+### `8.2` ⛔ **E ALLORA `G` NON SI TRASFERISCE, e questo non me lo aspettavo**
+
+La tentazione ovvia e' riusare `G`, cioe' `Lambda G(q_k q_l / Lambda^2)`. ### **Non
+funziona:** a `Lambda -> 0` l'argomento va a infinito, `G(u) -> u - pi/2`, e
+
+> **`Lambda (q_k q_l / Lambda^2 - pi/2) = q_k q_l / Lambda - (pi/2) Lambda`** ### **⟹ ESPLODE ANCORA**
+
+### ⭐ **E IL PERCHE' E' PRECISO: l'argomento ha `Lambda` AL GRADO `2`, non `1`.** La
+cancellazione che salva il termine del vuoto ### **qui non avviene**, perche' `q_k q_l` e'
+**quadratico** dove `h` era **lineare**.
+
+> ### ⛔ **QUINDI SERVE UNA `F` DAVVERO LIMITATA, non una che cresce linearmente come `G`.**
+> ### **E' un requisito DIVERSO da quello di `G`**, e lo dico perche' <<l'analogo di `G`>>
+> suonava come *«la stessa cosa»*.
+
+### `8.3` ✅ LA FORMA ESISTE, E **NON E' UNICA**
+
+> **`N_ord = - somma_{k,l vicini} Lambda_{kl} F( q_k q_l / Lambda_{kl}^2 )`**,
+> con **`F(u) ~ u`** a piccolo argomento e **`F` LIMITATA** a grande.
+
+| | il limite | il conto | |
+|---|---|---|---|
+| `Lambda` **grande** | argomento `-> 0`, `F ~ u` | `Lambda (q q/Lambda^2) = q q / Lambda` | ### ✅ **piccolo: ritrova la forma ingenua dove e' SICURA** |
+| `Lambda -> 0` | argomento `-> infinito`, `F -> F_inf` | `Lambda F_inf -> 0` | ### ✅ **LIMITATO, e in realta' SVANISCE** |
+
+### ⭐⭐ **E CHE SVANISCA HA UNA LETTURA FISICA, e non e' un effetto collaterale:**
+### **senza vuoto non c'e' mediazione, quindi non c'e' ordinamento.** ### ✅ **E' il vuoto
+come MEDIATORE — l'idea della strada `(A)` — che sopravvive qui come una proprieta'
+STRUTTURALE, non come una legge.** ### ⚠ **E lo noto perche' `(A)` e' chiusa come fallita:
+la sua INTUIZIONE non lo era.**
+
+### ⛔ **E NON E' UNICA, e lo dichiaro invece di scegliere:** `F(u) = arctan u`,
+`F(u) = u/(1 + |u|)`, `F(u) = tanh u` ### **vanno tutte e tre**, nessuna porta costanti
+nuove, e ### **nessun argomento che ho le distingue.**
+
+### ⭐ **MA SO DIRE CHE CLASSE DI SCELTA E', ed e' il modo di consegnarla:** e'
+### **la stessa classe di `G` stessa** — `G(x) = x - arctan x` e' una forma **scelta** con
+quei requisiti. ### ✅ **Quindi `F` la deve scegliere chi ha scelto `G`**, e con lo stesso
+tipo di criterio.
+
+### `8.4` ⚠ E UNA CONSEGUENZA CHE NON ERA NELLA RISERVA, da mettere a previsione
+
+### ⛔ **Con `F` LIMITATA il termine di ordinamento SATURA:** oltre un certo
+`q_k q_l / Lambda^2` **non cresce piu'**. ### ⚠ **Quindi la forza che ordina si INDEBOLISCE
+nelle regioni GIA' molto ordinate**, e questo ### **potrebbe limitare l'ordine
+raggiungibile.**
+
+> ### ⭐ **PREVISIONE, scritta prima:** l'ordine di saturazione sara' **`|q| ~ Lambda`**
+> *(dove l'argomento e' di ordine `1`)*, ### **e non `|q| ~ ||psi||^2`** che e' il limite
+> di Cauchy-Schwarz. ### ⚠ **Cioe' il vuoto fissa la scala dell'ordine**, e dove il vuoto
+> e' sottile ### **l'ordine satura PRIMA.**
+
+### ✅ **E NON METTO NESSUN TETTO** *(`A11`)*: la limitatezza viene **dalla forma di `F`**,
+### **non da un clip.**
+
+---
+
+## 9. ⛔ `(R2)` — **UN SISTEMA CHIUSO SI ORDINA SOLO SE E' ABBASTANZA FREDDO**
+
+> **Riserva della verifica esterna:** *«La parita' misurata (`a67b68f`) e' lo stato
+> all'equilibrio a TEMPERATURA INFINITA del grado di liberta' delle bande. Un termine
+> ferromagnetico conservativo produce ordine SOLO se la densita' d'energia del sistema sta
+> sotto quella della transizione.»*
+
+### ✅ **E' GIUSTA, E CAMBIA IL SENSO DI `(P-b)`.** Il termine di ordinamento **non e' un
+meccanismo che ordina**: e' **un termine che RENDE L'ORDINE un minimo di energia.**
+### ⛔ **E un sistema hamiltoniano CHIUSO non scende al minimo: resta sulla sua superficie
+di energia.** ### **Quindi il termine, DA SOLO, non ordina niente.**
+
+### `9.1` LA CONDIZIONE, scritta
+
+Sia `u` la densita' d'energia **per nodo** disponibile nel grado di liberta' del segno, e
+`J_eff` la **scala del termine di ordinamento** *(`~ q^2/Lambda`, o la sua versione
+limitata)*. Allora
+
+> ### ⭐ **l'ordine si forma solo se `u <~ J_eff`** *(a meno di un fattore `O(1)`, che e'
+> la temperatura di transizione in unita' di `J`)*.
+
+### ⚠ **E NON CONOSCO quel fattore `O(1)`:** dipende dalla dimensione effettiva del grafo e
+dal numero di vicini. ### ⛔ **Quindi la <<soglia>> e' una PREVISIONE DI ESISTENZA, non un
+numero** — e scrivere un numero adesso sarebbe inventarlo.
+
+### `9.2` ⭐ LE PREVISIONI, scritte PRIMA
+
+| | la previsione | la soglia |
+|---|---|---|
+| `r2a` | ### ⛔ **con lo SPAZIO FISSO NON si ordina, nemmeno col termine** | lo squilibrio per regione **si spegne verso la parita'**, come **gia' misurato** senza il termine *(un fattore `623`)*. ### **Se si ordinasse, la mia lettura di `(R2)` e' sbagliata** |
+| `r2b` | **con la CRESCITA si ordina, ma SOLO sotto una soglia di diluizione** | la lunghezza di correlazione **cresce** *(coarsening)* **solo** per rampe piu' lente di una velocita' critica, e ### **la velocita' critica SI MISURA** |
+| `r2c` | e la **scala dell'ordine** e' fissata dal vuoto | `\|q\| ~ Lambda` al punto di saturazione *(par. `8.4`)* |
+
+### `9.3` ⭐⭐ E IL RAFFREDDAMENTO E' LO STESSO MECCANISMO DEL CONGELAMENTO — *una cosa, non due*
+
+### ⭐ **Il candidato naturale e' la CRESCITA DELLO SPAZIO**, e il mandato lo dice. Ma c'e'
+di piu', e lo noto perche' unifica due pezzi che avevo tenuto separati:
+
+| | la crescita dello spazio... | dove sta nel piano |
+|---|---|---|
+| `1` | ...**abbassa `x = \|h\|/Lambda`**, e con lui **il tasso di mescolamento `Gamma(x)`** | ### **e' `(D2)`–`(D3)`: il congelamento per diluizione** |
+| `2` | ...**diluisce l'energia per nodo `u`**, perche' **il vuoto nasce con lo spazio e la materia no** | ### **e' `(R2)`: il raffreddamento** |
+
+> ### ⭐⭐ **SONO LO STESSO MECCANISMO VISTO DUE VOLTE.** Il congelamento per diluizione
+> **spegne cio' che disordina**; il raffreddamento **permette a cio' che ordina di
+> funzionare**. ### ✅ **E la MISURA e' una sola: `(D3)`/`(D4)`, con e senza il termine di
+> ordinamento.**
+
+### ⚠ **E QUESTO CAMBIA L'ORDINE DEL PIANO, e non lo cambio da solo:** `(P-b)` **non si
+puo' misurare a spazio fisso** — ### **`r2a` dice che darebbe la parita' QUALUNQUE sia il
+termine.** ### ⛔ **Quindi la misura di `(P-b)` E' `(D3)` con il termine acceso**, non una
+misura a se'. ### **Lo porto a Luca invece di riordinare il piano.**
