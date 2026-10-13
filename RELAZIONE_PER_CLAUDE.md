@@ -15660,3 +15660,58 @@ raffreddamento sono lo stesso meccanismo, e adesso anche la loro MISURA e' la st
 
 ### ⛔ **La chiusura di `(B-5)` segue nel commit successivo col suo sha**, e la derivazione
 `(3)` *(la forma di `cs` che satura)* e' **il prossimo pezzo.**
+
+## 2026-10-13 — `(3)` **LA FORMA DI `cs` CHE SATURA: la forma ovvia e' ESCLUSA prima di scegliere**
+
+### ⭐ **PRIMO PASSO, e restringe da solo:** i tre requisiti *(locale, `C`-pari, invariante
+di gauge, **dal vuoto**)* lasciano in piedi ### **SOLO `Lambda_k` e i `Lambda` dei vicini.**
+La **fase** di `phi` cade *(la `C` la coniuga, la gauge la ruota)*, e `h_k` cade perche'
+### **e' MATERIA**, e `[[CS-LOCALE-DAL-VUOTO]]` dice che `cs` viene **dal vuoto**.
+### **Non e' una scelta: e' cio' che i requisiti lasciano.**
+
+### ⛔⛔ **SECONDO PASSO, E CAMBIA LA DERIVAZIONE: LA SCALA NON C'E' IN TABELLA.** Prima
+serve una dimensione, e **si deriva**: `Lambda G(h/Lambda)` e' **un'energia** e `G` prende
+un **adimensionale** ⟹ ### **`h` e `Lambda` hanno dimensione `E^1`.** ### **E ho guardato
+la tabella:** i parametri sono **`K`**, **`g`**, **`eps`**, tutti `E^1` — ### **e nessuno e'
+una scala del VUOTO.** ### ⛔ **`Lambda_0` NON ESISTE in `leggi.yaml`** *(il `LAMBDA0` del
+banco vive nel **banco congelato**)*.
+
+> ### ⛔ **Quindi `cs = c(Lambda/Lambda_0)` porterebbe UNA COSTANTE NUOVA, e `F10` la
+> vieta: la forma OVVIA e' esclusa PRIMA di scegliere.**
+
+### ⭐ **TERZO PASSO: due modi di avere una scala senza una costante.**
+**`(C-A)` RELAZIONALE:** `u_k = Lambda_k / Lambda_medio(k)` *(media su `k` e i vicini)* —
+### **non prende in prestito NIENTE: la scala e' il vuoto DEI VICINI.**
+**`(C-B)` UNITA':** `u_k = Lambda_k / eps` — `eps` e' **gia'** in tabella, ### ⛔ **ma e' un
+parametro DELLA MATERIA.**
+
+### ⭐⭐ **E `(C-A)` HA UNA CONSEGUENZA CHE ESCE DAL CONTO, non messa dentro:** in un vuoto
+**uniforme** `u_k = 1`, quindi
+
+> **`cs = cs_max · G'(1) = cs_max / 2`**
+
+### ✅ **Un vuoto uniforme da' META' della velocita' massima, e quel `1/2` NON L'HO SCELTO:
+viene da `G'(1)`.** ### ⭐ **E `cs` varia SOLO dove il vuoto e' NON UNIFORME** — che e'
+esattamente dove gli effetti di tipo gravitazionale dovrebbero comparire, ### **ed e' la
+tesi del progetto.**
+
+### ✅ **E LA FUNZIONE NON E' NUOVA: `G'(x) = x^2/(1+x^2)` E' GIA' IN TABELLA**, monotona e
+satura a `1` ⟹ `cs_k = cs_max G'(u_k)` ### **non aggiunge nessuna funzione** *(`9-ter`)* e
+### **satura PER COSTRUZIONE, non per un tetto** *(`A11`)*. E `cs_max` e' fissata dal
+**raccordo** di `(B-4)`: ### **e' un'unita', non una costante.**
+
+### ⛔ **MA IL VERSO NON LO SO, E NON LO SCELGO:** `G'(u_k)` dice **piu' vuoto ⟹ luce piu'
+veloce**, `G'(1/u_k)` dice **piu' lenta**. La crescita **aggiunge vuoto**, quindi col primo
+le regioni nuove sarebbero **veloci** e col secondo **lente** — ### **sono due cosmologie
+diverse.** ### **Va a te:** `[[DOMANDA-LA-FORMA-DI-CS-CHE-SATURA]]`.
+
+### ⭐ **E LA PREVISIONE CHE CHIEDI — <<le regioni veloci piu' calde?>> — e' SI':** l'errore
+e' `O(theta^2)` con `theta = omega cs_k dt`, quindi ### **cresce col QUADRATO di `cs_k`.**
+`c1` correlazione `> 0.5`; `c2` esponente fra `1.5` e `2.5`.
+
+### ⛔ **E `c3` E' OBBLIGATORIO, perche' <<le regioni veloci sono piu' calde>> e' ESATTAMENTE
+come appare un errore di discretizzazione:** raffinando `dt` **a `cs_k` fissi** l'effetto
+**deve** scendere come `dt^2`. ### **Senza quel braccio riporterei un artefatto come
+fisica.**
+
+### ✅ **E `(B-5)` e' CHIUSA**, citando `bbd7fee`.
