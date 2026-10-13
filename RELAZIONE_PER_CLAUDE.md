@@ -14816,3 +14816,16 @@ che la conclusione cambi, ### **ma non l'ho misurato e non lo affermo.**
 ### 📌 **I pezzi:** `primo_ordine/bande.py` *(`--scrivi` fa il referto)*,
 `doc/REFERTO_bande.md`, e il task history
 `doc/TASK_HISTORY/2026-10-13_bande_materia_antimateria.md`.
+
+## 2026-10-13 — IL DOCUMENTO DI RIPRESA, e **niente lavoro non committato**
+
+### ✅ **`doc/RIPRESA_2026-10-15.md`**, come la priorita' di Luca chiede: lo stato della
+coda, che cosa e' finito **coi numeri**, che cosa e' fermo **e su che cosa**, e il **punto
+esatto** da cui riprendere ogni pezzo.
+
+### ⭐ **NIENTE E' A META'.** Le due misure che la priorita' chiedeva sono **finite,
+committate e pushate** *(`db328b9` e `efc113b`)*. ### ⛔ **Cio' che e' fermo e' fermo su UNA
+DECISIONE DI LUCA** — due domande `CRITICA` — **non su lavoro mio incompiuto.**
+
+### ⚠ **E IL DOCUMENTO DICE ANCHE CHE COSA NON HO MISURATO**, perche' un elenco di cio'
+che e' fatto senza il suo perimetro ### **si legge come se fosse tutto.**
