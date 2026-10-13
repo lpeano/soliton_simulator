@@ -15395,3 +15395,62 @@ dipendere. ### **Senza quello, il primo braccio passerebbe anche con TUTTO fermo
 linearita' di tipo Kerr al posto di `N`)*: `4.43e-01` ad angolo `pi`, poi `5.18e-03`,
 `1.32e-03`, `3.29e-04` — ### **un fattore `4` a ogni dimezzamento.** ### **Vanno RIFATTE
 sul motore, ed e' `M-B2`.**
+
+## 2026-10-13 — `(B-1)` e `(B-2)`: **i generatori si derivano, e `H_tot` e' MIGLIORE di `E`**
+
+### ⚠ **Ho raggruppato i due pezzi, e lo dichiaro:** sono **lo stesso oggetto matematico**
+— i generatori, e l'energia che quei generatori generano. ### **Separarli vorrebbe dire
+scrivere `H_tot` prima di aver verificato che i suoi pezzi siano hermitiani.**
+
+### ✅ **`(B-1)` LE QUATTRO PROPRIETA' SI DERIVANO, una per una.** `S_U = [[0, U^dag],
+[U, 0]]` e' **hermitiana** *(`(U^dag)^dag = U`)* e **unitaria** *(`S_U^2 = I`)*, quindi
+**un'involuzione**; `P- = (I - S_U)/2` e' un **proiettore**; e `exp(i pi P-) = I - 2P- =
+S_U`. Lo stesso per `G = 2P_u - I = exp(i pi (I - P_u))`.
+
+### ⭐⭐ **E UN FATTO CHE NON MI ASPETTAVO: ogni strato si fattorizza ESATTAMENTE.** Due
+`P-` di archi diversi **commutano**, perche' ogni estremita' appartiene a **un arco solo**;
+e due `(I - P_u)` di nodi diversi **commutano**, perche' ogni estremita' appartiene a **un
+nodo solo**. ### ⛔ **Allora l'errore di Strang NON sta DENTRO uno strato: sta FRA GLI
+STRATI** — gli archi partizionano le estremita' in un modo, i nodi **in un altro**.
+### ⚠ **E questo dice una cosa operativa che non era nel mandato: raffinare `dtau` riduce
+l'errore, raffinare la SCENA no.** L'errore non e' estensivo negli archi, e' nel **numero
+di strati**.
+
+### ⭐ **E LA `C`-COVARIANZA SOPRAVVIVE ALLA GENERALIZZAZIONE, e non era ovvio:**
+`sigma_y S_U* sigma_y^{-1} = S_{CU}` *(usando `(U^dag)* = U^T = (U*)^dag`)*, e `theta` e'
+**reale** ⟹ ### **`C hop_U(theta) C^{-1} = hop_{CU}(theta)` PER OGNI `theta`**, non solo
+per `pi` dove la misura di `9c46a68` l'aveva vista. ### **E il Grover e' ancora piu'
+semplice: `P_u` e' REALE e agisce sull'indice di ESTREMITA', non su quello di spinore.**
+
+### ⭐⭐ **`(B-2)` E IL RISULTATO CHE CONTA: le densita' di `H_tot` hanno portata ZERO**
+*(per arco, per nodo, per estremita')*, mentre la densita' di `E` era
+`e_h = Re[conj(psi_h)(W psi)_h]`, che **usa `W`** e quindi ha **portata `1`** ed e'
+### **una CORRELAZIONE FRA DUE TEMPI.**
+
+> ### ⭐ **`H_tot` e' un valore d'attesa A UN TEMPO.**
+
+### ✅ **E QUESTO FA CADERE, DA SOLO, L'OSTACOLO CHE MI AVEVA FERMATO IL `2026-10-12`:** la
+causa del fallimento della mia prima candidata di corrente era *«`e_h` e' una correlazione
+fra due tempi, non una carica trasportata»* — ### **in `(B)` NON SI PONE.** ### ⚠ **Lo
+noto perche' un ostacolo che sparisce perche' l'OGGETTO e' cambiato va dichiarato, non
+dimenticato.**
+
+### ⭐ **E IL CANALE FRA NODI E' UNO SOLO, e si vede dai supporti:** `H_G`, la moneta e il
+vuoto vivono **su un nodo o un'estremita'** ⟹ **non attraversano**; solo `H_hop` vive **su
+un arco**. ### **PREVISIONE: la corrente di `H_tot` ha portata `1` ARCO, contro `3`
+misurati per `E`.** ### ⚠ **E va MISURATA, non dichiarata: e' la lezione di ieri.**
+
+### ⭐ **E LA PREVISIONE DI `M-B1` E' PIU' FORTE DI <<entro ulp>>: e' AL BIT.**
+`hop(pi) = S_U` e `Grover(pi) = G` sono **identita' algebriche**, non approssimazioni.
+### ⛔ **Se ci fosse anche un solo ulp di scarto sarebbe un ERRORE DI IMPLEMENTAZIONE**, e
+non una tolleranza da allargare.
+
+### ⚠ **E CHE COSA NON HO DERIVATO:** ① che `H_tot` si conservi a `O((omega dtau)^2)` —
+segue dall'analisi all'indietro, e **adesso i pezzi sono flussi**, ### **ma il conto
+dell'ordine NON l'ho fatto** *(e' `M-B2`)*; ② che `omega` sia **uno e lo stesso** per i tre
+pezzi *(e' `(B-4)`)*; ③ **quale tempo proprio usa l'ARCO** *(e' `(B-3)`, e va a te)*.
+
+### ⭐ **E `9-ter` premia `(B)`:** i generatori **erano gia' la' all'angolo `pi`**, quindi
+### **`(B)` non aggiunge un meccanismo: TOGLIE UN VINCOLO** *(l'angolo fissato)*.
+### **Il numero di leggi non cambia.** ### ⚠ **Ma aggiunge `omega`, e `F10` vieta le
+costanti: va deciso se e' una SCELTA DI UNITA'.**
