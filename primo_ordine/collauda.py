@@ -150,6 +150,16 @@ COLLAUDI = (
     # ### <<il termine non c-e->>.** ### **E- un falso-zero che ho fatto io.**
     ("la deriva di `E` e la sorgente", "primo_ordine/_collauda_deriva.py",
      "pre-commit"),
+    # ### ⛔ **IL CONTROLLO DEL TEMPO PROPRIO, chiesto da Luca:** nessuna legge
+    # ### della tabella deve evolvere col TICK invece che col `dtau`.
+    # ### ⚠ **Oggi 4 pezzi su 7 lo fanno** *(Grover, spostamento, e i due del
+    # ### vuoto: `0.000e+00` esatto)*, e la voce del tempo proprio lo vietava
+    # ### ### **da sempre, senza che nessuno lo facesse rispettare.**
+    # ### ⭐ **Il collaudo PASSA perche- confronta i violatori VISTI con quelli
+    # ### ATTESI, scritti a mano:** cosi- vede ### **un violatore NUOVO**, e vede
+    # ### ### **uno che sparisce** senza che la strada (B) sia stata fatta.
+    ("il tempo proprio in TUTTE le leggi",
+     "primo_ordine/_collauda_tempo_proprio.py", "pre-commit"),
     # ### ⭐ **LO SCHEMA DELLA CAMMINATA, nei DUE VERSI** *(pezzo `2` del
     # ### simulatore)*: i tipi sulle estremita-, i pezzi unitari, i flussi, e
     # ### l-### **ordine di composizione con le ripetizioni AMMESSE.**

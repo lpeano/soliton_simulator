@@ -171,6 +171,13 @@ FILE_FISICA = (
     # ### numerico da- ### **`0.000e+00` ESATTO**, e serve a dire che il codice fa cio-
     # ### che il conto dice.
     'primo_ordine/segno.py',
+    # ### IL CONTROLLO DEL TEMPO PROPRIO, chiesto da Luca il 2026-10-13.
+    # ### ⛔ **E MISURA invece di leggere il sorgente:** applica ogni pezzo con
+    # ### `dtau` e con `dtau/2` e guarda ### **se il risultato cambia.** Un pezzo che
+    # ### non cambia ### **NON dipende dal tempo proprio**, e non lo puo- nascondere.
+    # ### ⚠ **Oggi 4 pezzi su 7 danno `0.000e+00`:** e- il difetto che la strada
+    # ### (B) corregge, e questo file e- ### **il suo criterio di accettazione.**
+    'primo_ordine/_collauda_tempo_proprio.py',
     'primo_ordine/_collauda_deriva.py',
     # ### IL COSTRUTTO `@rif` *(punto `14`)*: ### **byte-inerte**, e il suo
     # ### collaudo lo verifica ### **con `is`.**

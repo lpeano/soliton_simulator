@@ -9,7 +9,7 @@
 | `DOCUMENTAZIONE` | `2` | 1 |
 | `DOCUMENTAZIONE` | `ENTRAMBE` | 9 |
 | `FISICA` | `1` | 343 |
-| `FISICA` | `2` | 106 |
+| `FISICA` | `2` | 108 |
 | `FISICA` | `ENTRAMBE` | 21 |
 | `INFRASTRUTTURA` | `1` | 39 |
 | `INFRASTRUTTURA` | `2` | 21 |
@@ -265,8 +265,9 @@
 | `DEC-REGOLA-FORMA` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | che CODICE genera una `regola`? il punto 11(a) chiede che crescita e vuoto si ge |
 | `DEC-Z47-TRANSIZIONE` | DECISIONE | METODO | ENTRAMBE | ### **CHIUSA** |  | Z47 non si puo- portare ad AGENDA: CHIUSA -> AGENDA e- una transizione VIETATA |
 | `DECISIONE-DIREZIONE-STRADA-3` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | strada (3): C esatta nelle leggi e ROTTA SPONTANEAMENTE nello stato, con pareti |
+| `DECISIONE-STRADA-B-FLUSSI` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | strada (B): Grover e spostamento diventano FLUSSI, e l angolo pi e la velocita d |
 | `DECISIONE-VUOLE-UN-CAMPO` | STANDARD | METODO | ENTRAMBE | ### **APERTA** |  | una decisione che serve a un programma vuole un CAMPO, non una frase nel titolo |
-| `DECISIONE-VUOTO-MEDIATORE` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | strada (A): lo sbilancio d energia di ogni tick va nel vuoto locale e ne torna |
+| `DECISIONE-VUOTO-MEDIATORE` | DECISIONE | FISICA | 2 | ### **CHIUSA** |  | strada (A): lo sbilancio d energia di ogni tick va nel vuoto locale e ne torna |
 | `DERIVA-DELLA-FORMA-D` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | la forma (D) non conserva la sua conservazione modificata: perche-? |
 | `DIFETTO-TERNARIO-CHE-NON-SCEGLIE` | DIFETTO | FISICA | 2 | ### **AGENDA** |  | un ternario che non scegliE: per il braccio lineare misuravo la Q di N |
 | `DIMENSIONE-E-ISOTROPIA-DELLE-SCENE` | MISURA | FISICA | 2 | ### **AGENDA** |  | le scene del banco non hanno dimensione 3, e la mia misura dell-isotropia era co |
@@ -304,7 +305,7 @@
 | `DOMANDA-PHI-REALE-O-COMPLESSO` | DECISIONE | FISICA | 2 | ### **CHIUSA** |  | la tabella dichiara phi_h reale, il banco congelato lo tiene complesso: quale de |
 | `DOMANDA-PORTATA-DEL-VUOTO-MEDIATORE` | DECISIONE | FISICA | 2 | ### **AGENDA** | SI | quale instradamento, cioe quale cono: la liberta di ricircolo adesso sceglie la  |
 | `DOMANDA-PRIMA-LEGARE-POI-MISURARE` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | senza stato legato tre letture non sono decidibili: si cerca prima un legame? |
-| `DOMANDA-QUALE-COPPIA-CONIUGATA-DEL-VUOTO` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | la coppia coniugata del vuoto: una variabile nuova, o la fase e l ampiezza di ph |
+| `DOMANDA-QUALE-COPPIA-CONIUGATA-DEL-VUOTO` | DECISIONE | FISICA | 2 | ### **SUPERATA** |  | la coppia coniugata del vuoto: una variabile nuova, o la fase e l ampiezza di ph |
 | `DOMANDA-QUALE-FORMA-FISSA-CS` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | quale forma del vuoto fissa cs: nessuna delle tre e- libera da tutti i difetti |
 | `DOMANDA-QUALE-SCENA-3D-PRINCIPALE` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | quale scena 3D fa da principale, se nessuna delle due provate e- isotropa? |
 | `DOMANDA-QUALE-SEGNO` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | quale segno della non linearita-, se quello che lega lega solo in 1D? |
@@ -787,6 +788,7 @@
 | `SCALE-TW` | FRONTE | FISICA | 1 | ### **SOSPESA** | SI | LE SCALE DELLA TORSIONE: un'analisi completa, DA CAPO / mandato di Luca ricevuto |
 | `SCARTATA-ECCESSO-NEL-SEME` | DECISIONE | FISICA | 2 | ### **SUPERATA** |  | SCARTATA da Luca: carica conservata con l eccesso di materia messo nel seme |
 | `SCARTATA-SAKHAROV-C-ESPLICITA` | DECISIONE | FISICA | 2 | ### **SUPERATA** |  | SCARTATA da Luca: Sakharov con violazione ESPLICITA di C nelle leggi |
+| `SCARTATA-SPOSTAMENTO-PIENO-SOLO-GROVER` | DECISIONE | FISICA | 2 | ### **SUPERATA** |  | SCARTATA: spostamento PIENO a ogni tick e solo il resto nel tempo proprio |
 | `SCENA-1` | MISURA | FISICA | 1 | ### **CHIUSA** |  | CHIUSA il 2026-09-25, strada (1) (decisione di Luca) / SEMINALAM era approvata m |
 | `SCENA-3D-PRINCIPALE` | STANDARD | FISICA | 2 | ### **AGENDA** |  | la (ii) e- il BANCO DI MISURA: punti che si respingono, gradi 2-6 |
 | `SCHED-PASSO` | CURA | FISICA | 1 | ### **SOSPESA** | SI | il passo pieno diventa uno SCHEDULATORE: le regole del passo sono architettura,  |

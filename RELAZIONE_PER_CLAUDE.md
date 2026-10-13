@@ -15333,3 +15333,65 @@ correlazione**, e' la dinamica che conta.
 **pesato con `sin(omega_k)`**. ### ⛔ **Se la correlazione fosse `+1.000` esatta sarebbe LO
 STRUMENTO a essere sbagliato**, ed e' per questo che `d1b` e' un braccio che deve fallire
 al rovescio.
+
+## 2026-10-13 — LA STRADA `(B)` REGISTRATA, `(A)` CHIUSA COME FALLITA, e **un controllo MISURATO del tempo proprio**
+
+### ✅ **REGISTRATO:** `[[DECISIONE-STRADA-B-FLUSSI]]`. Grover e spostamento sono
+**involuzioni hermitiane**, cioe' **flussi di un generatore locale presi per un angolo
+`pi`**: `S_U = exp(i pi P-)` con `P- = (I - S_U)/2` *(proiettore dell'**arco**)*, e
+`G = exp(i pi (I - P_u))` *(generatore del **nodo**)*. ### ⭐ **In `(B)` diventano**
+`hop(theta) = I + (e^{i theta} - 1) P-` e `Grover(theta) = P_u + e^{i theta}(I - P_u)`,
+con `theta = omega * dtau`. ### **E lo scambio PIENO (`theta = pi`) e' il LIMITE DELLA
+VELOCITA' DELLA LUCE: la camminata di oggi E' esattamente quel caso.**
+
+### ⭐⭐ **E QUESTO RISPONDE A UN'OBIEZIONE CHE AVEVO SOLLEVATO IO** in `7141812`: avevo
+scritto che il tick **non tende all'identita'** per `dtau -> 0` perche' `4` pezzi su `7`
+non scalano, quindi **non e' un integratore di un flusso** e l'analisi all'indietro non si
+applica. ### ✅ **In `(B) quei 4 pezzi SCALANO**, e l'obiezione cade — ### ⚠ **non perche'
+fosse sbagliata, ma perche' la decisione CAMBIA L'OGGETTO di cui parlava.**
+
+### ✅ **E `(A)` E' CHIUSA COME FALLITA**, citando `5fa3751`; la mia raccomandazione `(iii)`
+`= (C)` e' **registrata e NON adottata**; e `[[DOMANDA-QUALE-COPPIA-CONIUGATA-DEL-VUOTO]]`
+e' **superata** — ### **non perche' la risposta sia una delle due, ma perche' nessuna delle
+due funziona.**
+
+### ⚠ **E HO CORRETTO COME LO AVEVO REGISTRATO, su tua nota:** avevo scritto *«PRECISAZIONE
+delle 15:50»*, cioe' **una decisione nuova**. ### ⛔ **Era sbagliato: e' un CHIARIMENTO DEL
+TESTO** — l'intenzione originaria di `[[TEMPO-PROPRIO-LOCALE]]`, **scritta male**. La frase
+*«lo spostamento avanza sul contatore»* si leggeva come *«non dipende dal tempo proprio»*,
+e ### **sul contatore sta IL CONO, non l'INTENSITA'.** ### ✅ **E il testo vecchio non l'ho
+riscritto: resta leggibile, con la lettura giusta accanto** — cosi' chi legge vede **anche
+la frase che si poteva fraintendere**, che e' il motivo per cui il chiarimento esiste.
+
+### ⭐ **IL CONTROLLO CHE HAI CHIESTO, E LO FA MISURANDO:**
+`primo_ordine/_collauda_tempo_proprio.py` applica **ogni pezzo** della composizione con
+`dtau` e con `dtau/2` e guarda **se il risultato cambia.** ### ⛔ **Un controllo che
+LEGGESSE il sorgente direbbe <<questa funzione non usa `dtau`>>, e sarebbe una lettura:
+questo e' un numero.**
+
+| il pezzo | `|psi(dtau) - psi(dtau/2)|` | |
+|---|--:|---|
+| `CAMM-SATURAZIONE` | `9.871e-02` | ✅ dipende |
+| `CAMM-MONETA-SPIN` | `3.098e-01` | ✅ dipende |
+| `CAMM-GROVER` | ### ⛔ **`0.000e+00`** | **IGNORA `dtau`** |
+| `CAMM-SPOSTAMENTO` | ### ⛔ **`0.000e+00`** | **IGNORA `dtau`** |
+| `CAMM-GROVER-VUOTO` | ### ⛔ **`0.000e+00`** | **IGNORA `dtau`** |
+| `CAMM-SPOSTAMENTO-VUOTO` | ### ⛔ **`0.000e+00`** | **IGNORA `dtau`** |
+
+### ⛔ **ZERO ESATTO, non <<piccolo>>: quei quattro non dipendono dal tempo proprio AL
+BIT.** ### ⚠ **E `TEMPO-PROPRIO-LOCALE` diceva <<in TUTTI gli step si usa il tempo proprio
+locale>>: quei `4` LA VIOLANO DA SEMPRE, e nessuno lo faceva rispettare** *(`A9`)*.
+
+### ⭐ **E IL COLLAUDO PASSA `3` SU `3` IN `0.41 s`, confrontando i violatori VISTI con
+quelli ATTESI, scritti a mano:** ### **se fosse un elenco calcolato direbbe sempre <<tutto
+come previsto>>.** Cosi' invece vede **un violatore NUOVO**, e vede **uno che sparisce**
+senza che `(B)` sia stata fatta. ### ✅ **E' il criterio di accettazione di `(B)`, scritto
+PRIMA: quando `(B)` sara' fatta, i violatori dovranno diventare ZERO.**
+
+### ⚠ **E un secondo braccio e' obbligatorio:** la moneta e la saturazione **DEVONO**
+dipendere. ### **Senza quello, il primo braccio passerebbe anche con TUTTO fermo.**
+
+### ⛔ **E le prove di `(B)` sono su un GIOCATTOLO, non sul mio motore** *(toro `6x6`, non
+linearita' di tipo Kerr al posto di `N`)*: `4.43e-01` ad angolo `pi`, poi `5.18e-03`,
+`1.32e-03`, `3.29e-04` — ### **un fattore `4` a ogni dimezzamento.** ### **Vanno RIFATTE
+sul motore, ed e' `M-B2`.**

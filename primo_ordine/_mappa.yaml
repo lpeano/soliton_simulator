@@ -154,6 +154,10 @@ moduli:
     responsabilita: lo squilibrio LOCALE q, C-dispari, e la sua validazione contro Q
     importa: [_presidio, bande, bande_floquet, composizione, corrente, deriva, motore]
 
+  - nome: _collauda_tempo_proprio.py
+    responsabilita: misura quali pezzi evolvono col TICK invece che col tempo proprio
+    importa: [_presidio, composizione, deriva]
+
   - nome: _collauda_deriva.py
     responsabilita: il collaudo della deriva, e presidia il FALSO-ZERO della saturazione spenta
     importa: [_presidio, composizione, deriva, energia]
