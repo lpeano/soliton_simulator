@@ -16,7 +16,7 @@
 
 ## LE ALTRE, per priorita-
 
-### `CRITICA` — **14**
+### `CRITICA` — **16**
 
 | la domanda | pronta? | che cosa aspetta |
 |---|---|---|
@@ -25,12 +25,14 @@
 | **[[DOMANDA-CONDIZIONI-INIZIALI-IN-TABELLA]]** la tabella non ha un posto dove dichiarare le condizioni iniziali | ### ✅ **PRONTA** | ### **niente** |
 | **[[DOMANDA-D13-CONIUGATI]]** D13: i coniugati delle memorie -- tw come fase U(1) sull-arco? | ### ⏳ aspetta | ### **aspetta:** `DOMANDA-D9-GEOMETRIA` |
 | **[[DOMANDA-D9-GEOMETRIA]]** D9: la geometria viene da d e p_d dentro H, o dalle relazioni fra gli ps | ### ⏳ aspetta | ### **aspetta:** `DOMANDA-QUANTITA-CONSERVATA` |
+| **[[DOMANDA-IL-LIMITE-DELLA-LUCE-SI-RAGGIUNGE]]** il limite omega*dtau = pi si raggiunge? E che cosa limita cs, se niente  | ### ✅ **PRONTA** | ### **niente** |
 | **[[DOMANDA-LA-CARTA-NON-ESISTE]]** la carta della fisica non ha un documento, e le sue etichette collidono  | ### ✅ **PRONTA** | ### **niente** |
 | **[[DOMANDA-LA-FORMA-DI-CS-DAL-VUOTO]]** la forma di f in cs_k = f'(pi_k): il posto A1 della carta, dichiarato ap | ### ✅ **PRONTA** | ### **niente** |
 | **[[DOMANDA-MITOSI-LE-FORME]]** le quattro forme della mitosi: lo spareggio, phi, il ramo della radice,  | ### ✅ **PRONTA** | ### **niente** |
+| **[[DOMANDA-OMEGA-E-UNITA-O-COSTANTE]]** omega e una scelta di unita o una costante nuova? E i rapporti fra i tre | ### ✅ **PRONTA** | ### **niente** |
 | **[[DOMANDA-PASSO-FRAZIONARIO-O-ASINCRONO]]** pezzi frazionari o tick asincroni, e l-invarianza locale dei secondi NON | ### ✅ **PRONTA** | ### **niente** |
 | **[[DOMANDA-PORTATA-DEL-VUOTO-MEDIATORE]]** quale instradamento, cioe quale cono: la liberta di ricircolo adesso sce | ### ✅ **PRONTA** | ### **niente** |
-| **[[DOMANDA-QUALE-COPPIA-CONIUGATA-DEL-VUOTO]]** la coppia coniugata del vuoto: una variabile nuova, o la fase e l ampiez | ### ✅ **PRONTA** | ### **niente** |
+| **[[DOMANDA-QUALE-TEMPO-PROPRIO-USA-L-ARCO]]** quale tempo proprio usa l arco, che vive fra due nodi con dtau diversi | ### ✅ **PRONTA** | ### **niente** |
 | **[[DOMANDA-QUANTITA-CONSERVATA]]** esiste una moneta isotropa, causale e simmetrica fra le bande con una qu | ### ✅ **PRONTA** | ### **niente** |
 | **[[DOMANDA-U-DINAMICA-LE-FORME]]** le quattro forme della U d arco dinamica: la scala, il caso senza vuoto, | ### ✅ **PRONTA** | ### **niente** |
 | **[[SCENA-3D-PRINCIPALE]]** la (ii) e- il BANCO DI MISURA: punti che si respingono, gradi 2-6 | ### ✅ **PRONTA** | ### **niente** |
@@ -74,7 +76,7 @@
 
 ## IL CONTO
 
-> ### ⛔ **aperte `40`, di cui pronte `31`.**
+> ### ⛔ **aperte `42`, di cui pronte `33`.**
 >
 > ### ✅ **E una domanda DECISA esce da sola:** si chiude con la decisione di Luca e il commit, e ### **nessuno la spunta a mano** -- la lista ### **si genera dai campi**, e un campo che cambia ### **cambia la lista.**
 
@@ -84,13 +86,13 @@
 
 > ### 📌 **Queste arrivano dai DUE criteri vecchi** *(la nota che dice <<da decidere da Luca>>, e lo stato `DA_CLASSIFICARE`)*, e ### **non hanno una `priorita`**: quindi ### **non stanno nell-ordine delle dipendenze.** ### ✅ **Non le tolgo: le DICHIARO**, perche- una lista che ne nasconde una parte ### **sembra completa.**
 
-| **voci che aspettano una decisione** | ### **`25`** |
-| **domande in tutto** | `25` |
+| **voci che aspettano una decisione** | ### **`28`** |
+| **domande in tutto** | `28` |
 | **segnaposto `NON_DEFINITA`**, che NON sono una domanda | `187` |
 
 ---
 
-## le DOMANDE aperte -- `25`
+## le DOMANDE aperte -- `28`
 
 | id | `classe`/`dominio`/era/stato | LA DOMANDA | LA FRASE |
 |---|---|---|---|
@@ -103,15 +105,18 @@
 | `DOMANDA-COME-LA-MATERIA-CAMBIA-LAMBDA` | `DECISIONE`/`FISICA`/`2`/`AGENDA` | scattering nel nodo o trasmissione sull-arco | come la materia cambia la densita- del vuoto: scattering nel nodo o trasmissione sull-arco? ### DOMANDA APERTA PER LUCA, da decidere da Luca. ### E- i |
 | `DOMANDA-E-NON-SI-CONSERVA-A-X-UNO` | `DECISIONE`/`FISICA`/`2`/`CHIUSA` | E (la somma dei due termini) NON si conserva nel regime in cui la saturazione lavora -- escursione relativa 5.8 per cento a x ~ 1 e 28 per cento a x ~ 4 -- e i due termini NON si compensano. E la base | E non si conserva nel regime in cui la saturazione lavora, e i termini non si compensano MISURATO il 2026-10-13 eseguendo il punto 1(c) del mandato pi |
 | `DOMANDA-GUSCIO-E-INTERFERENZA` | `DECISIONE`/`FISICA`/`2`/`AGENDA` | il guscio e- interferenza, quindi l-ipotesi si riformula o manca qualcosa | il guscio e- interferenza e non materia: che cosa resta dell-ipotesi del guscio? ### DOMANDA APERTA PER LUCA, da decidere da Luca. ### IL FATTO MISURA |
+| `DOMANDA-IL-LIMITE-DELLA-LUCE-SI-RAGGIUNGE` | `DECISIONE`/`FISICA`/`2`/`AGENDA` | il limite omega*dtau = pi si raggiunge dove cs e massima? E una terza cosa che i due casi non coprono: CHE COSA LIMITA cs? Se niente, theta puo superare pi, e a 2 pi il hop e l IDENTITA -- la materia  | il limite omega*dtau = pi si raggiunge? E che cosa limita cs, se niente lo limita? DOMANDA APERTA PER LUCA, dal punto (B-5) del mandato del 2026-10-13 |
 | `DOMANDA-IL-PI-DEL-NODO-CHE-NASCE` | `DECISIONE`/`FISICA`/`2`/`AGENDA` | da dove viene il pi di un nodo che nasce? F10 chiede norme conservate anche attraverso le nascite, e A7b che cio che nasce nasca da cio che c e li. Raccomando che sia SOTTRATTO ai genitori -- e la dec | il pi di un nodo nuovo: la decisione 10 (il calore paga la nascita) riscritta su pi DOMANDA APERTA PER LUCA, nata derivando la strada (A) il 2026-10-1 |
 | `DOMANDA-LA-FORMA-DI-CS-DAL-VUOTO` | `DECISIONE`/`FISICA`/`2`/`AGENDA` | la forma di f in cs_k = f'(pi_k), cioe il posto A1 della carta (la forma di cs dal vuoto). Non raccomando una forma: propongo tre criteri su cui giudicarle, e il primo e che f' > 0 PER COSTRUZIONE, pe | la forma di f in cs_k = f'(pi_k): il posto A1 della carta, dichiarato aperto DOMANDA APERTA PER LUCA, nata derivando la strada (A) il 2026-10-13. IL R |
+| `DOMANDA-OMEGA-E-UNITA-O-COSTANTE` | `DECISIONE`/`FISICA`/`2`/`AGENDA` | omega e una scelta di UNITA o una costante nuova? Raccomando di FISSARLA col raccordo omega*dtau_rif = pi (continuita col motore di oggi), non di sceglierla, e omega_hop = omega_G. E i RAPPORTI fra i  | omega e una scelta di unita o una costante nuova? E i rapporti fra i tre angoli DOMANDA APERTA PER LUCA, dal punto (B-4) del mandato del 2026-10-13 su |
 | `DOMANDA-PASSO-FRAZIONARIO-O-ASINCRONO` | `DECISIONE`/`FISICA`/`2`/`AGENDA` | e l-invarianza locale dei tick asincroni NON e- dimostrata dove cs varia, perche- la frequenza dell-arco e- una COINCIDENZA | pezzi frazionari o tick asincroni, e l-invarianza locale dei secondi NON e- dimostrata dove cs varia ### DOMANDA APERTA PER LUCA, da decidere da Luca. |
 | `DOMANDA-PESO-ARCO-COME-MEMORIA` | `DECISIONE`/`FISICA`/`2`/`AGENDA` | il peso d-arco resta una strada per la MEMORIA DINAMICA, e NON e- una scena -- la scena e- decisa (SCENA-3D-PRINCIPALE) | il peso d-arco come memoria dinamica: la geometria nasce dalla dinamica? ### DOMANDA APERTA PER LUCA, da decidere da Luca. ### E- il punto (d) dell-id |
 | `DOMANDA-PORTATA-DEL-VUOTO-MEDIATORE` | `DECISIONE`/`FISICA`/`2`/`AGENDA` | nella strada (A) la liberta di ricircolo della corrente SCEGLIE IL CONO CAUSALE della dinamica estesa, e F10 chiede scala minima un arco (A13). Quale instradamento? Raccomando il piu corto, ma la port | quale instradamento, cioe quale cono: la liberta di ricircolo adesso sceglie la portata DOMANDA APERTA PER LUCA, nata derivando la strada (A) il 2026- |
 | `DOMANDA-PRIMA-LEGARE-POI-MISURARE` | `DECISIONE`/`FISICA`/`2`/`AGENDA` | cercare prima un legame, o riformulare le letture come letture sulla dispersione | senza stato legato tre letture non sono decidibili: si cerca prima un legame? ### DOMANDA APERTA PER LUCA, da decidere da Luca. ### IL FATTO: tre lett |
-| `DOMANDA-QUALE-COPPIA-CONIUGATA-DEL-VUOTO` | `DECISIONE`/`FISICA`/`2`/`AGENDA` | MA SOSPESA da Luca stesso il 2026-10-13: la scelta fra A-i e A-ii dipende dalla forma che la saturazione avra sotto la strada (3), e il pezzo (P-a) potrebbe cambiare il flusso. Non raccomando finche ( | la coppia coniugata del vuoto: una variabile nuova, o la fase e l ampiezza di phi? DOMANDA APERTA PER LUCA, nata derivando la strada (A) il 2026-10-13 |
+| `DOMANDA-QUALE-COPPIA-CONIUGATA-DEL-VUOTO` | `DECISIONE`/`FISICA`/`2`/`SUPERATA` | MA SOSPESA da Luca stesso il 2026-10-13: la scelta fra A-i e A-ii dipende dalla forma che la saturazione avra sotto la strada (3), e il pezzo (P-a) potrebbe cambiare il flusso. Non raccomando finche ( | la coppia coniugata del vuoto: una variabile nuova, o la fase e l ampiezza di phi? DOMANDA APERTA PER LUCA, nata derivando la strada (A) il 2026-10-13 |
 | `DOMANDA-QUALE-FORMA-FISSA-CS` | `DECISIONE`/`FISICA`/`2`/`AGENDA` | quale forma fissa cs, e nessuna delle tre e- libera da tutti i difetti | quale forma del vuoto fissa cs: nessuna delle tre e- libera da tutti i difetti ### DOMANDA APERTA PER LUCA, da decidere da Luca. ### E- il punto A2 de |
 | `DOMANDA-QUALE-SEGNO` | `DECISIONE`/`FISICA`/`2`/`AGENDA` | il segno che lega in 1D in 3D e- PEGGIO del lineare, e il segno va scelto sulla misura CON LA U DINAMICA ACCESA | quale segno della non linearita-, se quello che lega lega solo in 1D? ### DOMANDA APERTA PER LUCA, da decidere da Luca. E- una delle due domande che i |
+| `DOMANDA-QUALE-TEMPO-PROPRIO-USA-L-ARCO` | `DECISIONE`/`FISICA`/`2`/`AGENDA` | quale tempo proprio usa l ARCO, che vive fra due nodi con dtau diversi? Raccomando LA MEDIA ARMONICA, perche e L UNICA CON UNA DERIVAZIONE (il tempo per attraversare: t = meta/cs_k + meta/cs_l). E il  | quale tempo proprio usa l arco, che vive fra due nodi con dtau diversi DOMANDA APERTA PER LUCA, dal punto (B-3) del mandato del 2026-10-13 sulla strad |
 | `DOMANDA-QUANDO-LA-CAMMINATA-IN-TABELLA` | `DECISIONE`/`FISICA`/`2`/`AGENDA` | quando si porta la camminata nella tabella, e il porting aspetta le tre scelte del v4 | quando si porta la camminata nella tabella? il porting aspetta TRE decisioni aperte ### DOMANDA APERTA PER LUCA, da decidere da Luca. ### E- il punto  |
 | `DUE-STRUMENTI-ARCHIVIO-E` | `DIFETTO`/`INFRASTRUTTURA`/`ENTRAMBE`/`APERTA` | quale dei due strumenti resta, e un solo registro degli archiviati | due strumenti per lo stesso mestiere: spostare gli output su E- ### DOMANDA APERTA PER LUCA, da decidere da Luca: QUALE DEI DUE RESTA. ### IL FATTO: ` |
 | `PROMOZIONE-CONSERVAZIONE-MODIFICATA` | `DECISIONE`/`FISICA`/`2`/`CHIUSA` | la conservazione modificata si conserva; promuoverla a energia e- una sua decisione | la conservazione modificata si conserva: si promuove a energia? ### DOMANDA APERTA PER LUCA, da decidere da Luca. ### IL FATTO MISURATO (referto doc/R |

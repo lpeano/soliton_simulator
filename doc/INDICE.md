@@ -9,7 +9,7 @@
 | `DOCUMENTAZIONE` | `2` | 1 |
 | `DOCUMENTAZIONE` | `ENTRAMBE` | 9 |
 | `FISICA` | `1` | 343 |
-| `FISICA` | `2` | 108 |
+| `FISICA` | `2` | 111 |
 | `FISICA` | `ENTRAMBE` | 21 |
 | `INFRASTRUTTURA` | `1` | 39 |
 | `INFRASTRUTTURA` | `2` | 21 |
@@ -293,6 +293,7 @@
 | `DOMANDA-GRAFO-INIZIALE` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | il grafo iniziale SENZA pos: reticolo, k-regolare, espansore? |
 | `DOMANDA-GRANDEZZA-LOCALE-TEMPO` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | da dove viene la grandezza locale da cui escono r_k e cs_k? |
 | `DOMANDA-GUSCIO-E-INTERFERENZA` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | il guscio e- interferenza e non materia: che cosa resta dell-ipotesi del guscio? |
+| `DOMANDA-IL-LIMITE-DELLA-LUCE-SI-RAGGIUNGE` | DECISIONE | FISICA | 2 | ### **AGENDA** | SI | il limite omega*dtau = pi si raggiunge? E che cosa limita cs, se niente lo limit |
 | `DOMANDA-IL-PI-DEL-NODO-CHE-NASCE` | DECISIONE | FISICA | 2 | ### **AGENDA** | SI | il pi di un nodo nuovo: la decisione 10 (il calore paga la nascita) riscritta su |
 | `DOMANDA-IL-V4-ENTRA-NELL-ERA-2` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | cinque gruppi di operatori del v4 sono nel banco e non in tabella |
 | `DOMANDA-LA-CARTA-NON-ESISTE` | DECISIONE | DOCUMENTAZIONE | ENTRAMBE | ### **APERTA** |  | la carta della fisica non ha un documento, e le sue etichette collidono con ID v |
@@ -300,6 +301,7 @@
 | `DOMANDA-LAMBDA-GRANDEZZA` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | lambda: su quale grandezza si misura, e da dove viene il suo valore? |
 | `DOMANDA-MASSA-E-FORME-MANCANTI` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | il termine di massa e due forme del flusso sono nel banco e non in tabella |
 | `DOMANDA-MITOSI-LE-FORME` | DECISIONE | FISICA | 2 | ### **AGENDA** | SI | le quattro forme della mitosi: lo spareggio, phi, il ramo della radice, la conne |
+| `DOMANDA-OMEGA-E-UNITA-O-COSTANTE` | DECISIONE | FISICA | 2 | ### **AGENDA** | SI | omega e una scelta di unita o una costante nuova? E i rapporti fra i tre angoli |
 | `DOMANDA-PASSO-FRAZIONARIO-O-ASINCRONO` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | pezzi frazionari o tick asincroni, e l-invarianza locale dei secondi NON e- dimo |
 | `DOMANDA-PESO-ARCO-COME-MEMORIA` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | il peso d-arco come memoria dinamica: la geometria nasce dalla dinamica? |
 | `DOMANDA-PHI-REALE-O-COMPLESSO` | DECISIONE | FISICA | 2 | ### **CHIUSA** |  | la tabella dichiara phi_h reale, il banco congelato lo tiene complesso: quale de |
@@ -309,6 +311,7 @@
 | `DOMANDA-QUALE-FORMA-FISSA-CS` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | quale forma del vuoto fissa cs: nessuna delle tre e- libera da tutti i difetti |
 | `DOMANDA-QUALE-SCENA-3D-PRINCIPALE` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | quale scena 3D fa da principale, se nessuna delle due provate e- isotropa? |
 | `DOMANDA-QUALE-SEGNO` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | quale segno della non linearita-, se quello che lega lega solo in 1D? |
+| `DOMANDA-QUALE-TEMPO-PROPRIO-USA-L-ARCO` | DECISIONE | FISICA | 2 | ### **AGENDA** | SI | quale tempo proprio usa l arco, che vive fra due nodi con dtau diversi |
 | `DOMANDA-QUANDO-LA-CAMMINATA-IN-TABELLA` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | quando si porta la camminata nella tabella? il porting aspetta TRE decisioni ape |
 | `DOMANDA-QUANTITA-CONSERVATA` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | esiste una moneta isotropa, causale e simmetrica fra le bande con una quantita-  |
 | `DOMANDA-REGOLE-FUORI-CLAUDE` | DECISIONE | METODO | 2 | ### **AGENDA** |  | le regole di gestione fuori da CLAUDE.md, e quelle dentro senza presidio: vanno  |

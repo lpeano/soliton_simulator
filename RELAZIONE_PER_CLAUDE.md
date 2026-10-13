@@ -15454,3 +15454,63 @@ pezzi *(e' `(B-4)`)*; ③ **quale tempo proprio usa l'ARCO** *(e' `(B-3)`, e va 
 ### **`(B)` non aggiunge un meccanismo: TOGLIE UN VINCOLO** *(l'angolo fissato)*.
 ### **Il numero di leggi non cambia.** ### ⚠ **Ma aggiunge `omega`, e `F10` vieta le
 costanti: va deciso se e' una SCELTA DI UNITA'.**
+
+## 2026-10-13 — `(B-3)`, `(B-4)`, `(B-5)`: **tre forme a te, e una ha una DERIVAZIONE**
+
+### ⭐⭐ **`(B-3)` NON E' UNA SCELTA FRA MEDIE: c'e' un conto.** Il `hop` vive su un arco
+fra due nodi con `dtau` diversi, e un segnale percorre **meta' arco nel regime di `k` e
+meta' in quello di `l`**; ### **i TEMPI si sommano:**
+
+> `t = (1/2)/cs_k + (1/2)/cs_l` ⟹ ### **`cs_arco = 2/(1/cs_k + 1/cs_l)`: LA MEDIA ARMONICA**
+
+### ✅ **E' l'unica delle quattro candidate che ha una derivazione** *(minimo, aritmetica e
+geometrica non ne hanno nessuna)*, e **la raccomando per quella ragione sola.**
+### ⚠ **E dico che cosa NON so: ho assunto che l'arco si attraversi in DUE META' UGUALI,
+una per nodo — e quello e' UN MODELLO della geometria dell'arco, non un fatto.**
+
+### ⭐ **E LA DERIVAZIONE DA' UN CHIARIMENTO IN REGALO:** il **cono non dipende dalla
+scelta.** `P-` collega **solo le due estremita' di un arco**, quindi ### **niente va oltre
+un arco per tick PER QUALUNQUE `theta`.** ### ✅ **E' il tuo chiarimento — <<sul contatore
+sta il CONO, non l'intensita'>> — e qui si vede che e' una proprieta' della STRUTTURA e non
+una convenzione.**
+
+### ⭐ **`(B-4)` LA DISTINZIONE SI FA GUARDANDO CHE COSA COMPARE, e compaiono SOLO
+PRODOTTI:** `omega_hop dtau`, `omega_G dtau`, `eps dtau`. ### **Un fattore COMUNE si
+assorbe in `dtau`: e' un'UNITA'. I RAPPORTI sono numeri puri: sarebbero COSTANTI, e `F10`
+le vieta.**
+
+### ⚠ **E un rapporto C'E' GIA' OGGI, e l'ho misurato:** con `dtau = 0.25` e `eps = 0.5`
+l'angolo della moneta e' **`0.125`** contro **`pi`** del `hop`. ### **Quindi `eps` e' GIA'
+un parametro della tabella: il rapporto esiste da sempre, e NON lo introduce `(B)`.**
+
+### ⭐ **E raccomando di NON scegliere `omega`, ma di FISSARLA:** `omega * dtau_rif = pi`,
+cioe' ### **chiedendo che `(B)` si riduca alla camminata di oggi al passo di riferimento.**
+### ✅ **Allora non e' una costante tarata: e' una CONDIZIONE DI RACCORDO.** ### ⚠ **E dico
+il punto debole: che oggi `omega_hop = omega_G` e' UN FATTO STORICO del motore, non un
+argomento — e la raccomandazione si appoggia proprio a quello.**
+
+### ⛔⛔ **`(B-5)` E C'E' UNA TERZA COSA CHE I TUOI DUE CASI NON COPRONO, e mi sembra la
+piu' seria: CHE COSA LIMITA `cs`?** Se non ha un tetto, `theta` puo' **superare `pi`**:
+
+| `theta` | `hop(theta)` | che cosa fa |
+|---|---|---|
+| `pi` | `S_U` | lo **scambio pieno** |
+| fra `pi` e `2 pi` | — | lo scambio **si dis-fa** |
+| `2 pi` | `I` | ### ⛔ **l'IDENTITA': la materia NON SI MUOVE** |
+
+### ⛔ **Cioe' OLTRE il limite della luce la materia RALLENTA, e a `2 pi` si FERMA.**
+### ⚠ **E' un'assurdita' fisica, e segnala una cosa sola: o `cs` e' limitata da un
+meccanismo DERIVATO, o `theta > pi` e' un regime che il modello ammette.**
+### ⛔ **E la tentazione sara' un TETTO su `theta` a `pi`: `A11` lo vieta senza un errore
+trovato** — un `theta` che supera `pi` **non e' un caso da tappare, e' la forma di `cs` che
+non ha un limite.**
+
+### ✅ **E sui tuoi due casi NON raccomando**, perche' non ho una misura: raccomando di
+trattare *«che cosa limita `cs`»* come **la domanda PRIMA**. ### ⭐ **E si misurera' in
+`M-B3`:** se `theta` superasse `pi` in qualche regione, ### **il fronte RALLENTEREBBE
+invece di accelerare, e sarebbe VISIBILE.**
+
+### 📌 **Le tre voci:** `[[DOMANDA-QUALE-TEMPO-PROPRIO-USA-L-ARCO]]`,
+`[[DOMANDA-OMEGA-E-UNITA-O-COSTANTE]]`,
+`[[DOMANDA-IL-LIMITE-DELLA-LUCE-SI-RAGGIUNGE]]` — tutte `CRITICA`, in
+`doc/indice/DA_DECIDERE_LUCA.md` *(ora `28` domande)*.
