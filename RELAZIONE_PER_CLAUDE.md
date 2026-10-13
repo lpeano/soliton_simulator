@@ -14854,3 +14854,83 @@ il dubbio e' chiuso invece di restare dichiarato.
 ### ⚠ **E `P-MOD` mi ha fatto dividere di nuovo:** `deriva.py` era tornato a `714` righe,
 e il blocco del referto e' andato in `deriva_referto.py` — ### **la' la MISURA, qui COME
 SI RACCONTA**, che e' la stessa riga di taglio di prima.
+
+## 2026-10-13 — LA DECISIONE DI LUCA SULL'ENERGIA: **la strada `(A)`, il vuoto come mediatore** — derivazione
+
+### ✅ **REGISTRATA:** `[[DECISIONE-VUOTO-MEDIATORE]]`. Lo sbilancio di ogni tick **non e'
+perso**: va nel vuoto locale **e ne torna**. ### **E la diagnosi che Luca accetta come
+lavoro: il tick ha DUE GENERATORI CON DUE OROLOGI DIVERSI** — la camminata lineare e' una
+**mappa fissa** *(orologio: il contatore dei tick)*, la saturazione e' il **flusso di
+un'hamiltoniana per un tempo `dtau`** *(orologio: il tempo proprio)*. ### ⛔ **E' Floquet:
+nessuna energia comune e' protetta da una simmetria.**
+
+### ⭐ **LA DERIVAZIONE, in una riga** *(`doc/TASK_HISTORY/2026-10-13_vuoto_mediatore.md`,
+**senza codice** come il mandato chiede)*: posta la coppia coniugata **`(theta_k` tempo
+proprio, `pi_k` energia nel vuoto`)`** — che e' `CARTA-FISICA-SIMULATORE/F7` piu'
+`CARTA-FISICA-SIMULATORE/F8` messi insieme — l'energia estesa `E~_k = E_k + pi_k` con
+`Delta pi_k = - s_k` da'
+
+> **`Delta E~_k = (div J)_k`**
+
+cioe' ### **la continuita' CHIUDE NODO PER NODO, SENZA SORGENTE, con la corrente di
+`0080cf3`** — quella di portata `3` archi, gia' costruita e sigillata. E sommando,
+`somma_k (div J)_k = 0` **telescopia**: `Delta E~ = 0` esatto.
+
+### ⛔ **E MI FERMO SUBITO A DIRE CHE QUESTO, DA SOLO, E' CONTABILITA'** — che e'
+esattamente la condizione che Luca ha messo. Avendo **definito** `pi_k` come *«meno lo
+sbilancio»*, la conservazione e' ### **un'identita' algebrica, non una misura**: una prova
+tornerebbe a ulp e ### **non direbbe niente.**
+
+### ⭐⭐ **IL CONTENUTO FISICO STA IN DUE POSTI, E L'EFFETTO DI RITORNO E' OBBLIGATO.** Se
+`(theta_k, pi_k)` sono **coniugate**, l'equazione di Hamilton da'
+`d theta_k / dt = f'(pi_k)`; e `F7` dice `dtau_k = cs_k per dt`, **dove `cs` locale E' la
+velocita' locale della luce, la STESSA grandezza**. Quindi:
+
+> ### ⭐ **`cs_k = f'(pi_k)`** — la velocita' locale della luce **E' la derivata
+> dell'energia del vuoto rispetto all'energia che ci ha messo dentro.**
+
+### ✅ **E NON E' UN EFFETTO CHE HO AGGIUNTO PER SODDISFARE LA CONDIZIONE:** non c'e' modo
+di avere la coppia **senza** l'effetto. ### **La contabilita' e' proprio il caso
+`f' = costante`** — e allora la coppia e' finta, e si ricade in `(C)`.
+
+### ⭐ **E L'ALTRO CONTENUTO: `s_k` NON E' UN RESIDUO.** E' la differenza di **due mappe
+esattamente note**, quindi ha una **forma chiusa** e una **portata**: `Delta E_k` ha
+portata **intrinseca `2`**, e il `div J` di ieri la porta a `4`. ### ⚠ **E allora la
+LIBERTA' DI RICIRCOLO che avevo dichiarato ieri DIVENTA UNA SCELTA FISICA: sceglie la
+PORTATA, cioe' IL CONO.**
+
+### ⛔ **TRE TENSIONI CHE DICHIARO INVECE DI NASCONDERE:** ① la portata `> 1` arco per
+tick e' **un cono piu' largo di `A13`**; ② la **reversibilita' esatta** di `F10` richiede
+un aggiornamento di `pi_k` **simmetrico nel tempo**, e ### **non so se funzioni: va
+misurato**; ③ la via economica `A-ii` *(`pi` = l'ampiezza del vuoto, zero variabili nuove,
+che `9-ter` preferisce)* **rompe l'esattezza MISURATA del flusso di saturazione**, che
+conserva `h` e `Lambda` a `1.9` ulp — ### **ed e' la CAUSA per cui due mezzi fanno
+l'intero.**
+
+### ⭐ **UNA COSA CHE NON MI ASPETTAVO, scrivendo:** in `A-ii` il tempo proprio del nodo
+sarebbe **letteralmente la FASE del suo vuoto** e l'energia assorbita la sua **AMPIEZZA**
+— `(alpha, n)` di `phi = sqrt(n) e^{i alpha}` **e' una coppia canonica**, e il flusso **da'
+gia' una fase a `phi`**. ### **La coppia esisterebbe GIA' nella tabella.** ⚠ Ma l'ostacolo
+③ resta, ed e' misurato.
+
+### ⭐ **LE PREVISIONI SONO SCRITTE PRIMA DEI NUMERI, e `P1` e' DICHIARATA NON
+INFORMATIVA** *(e' l'identita' algebrica)*. ### **Quella che conta e' `P4`: due corse
+identiche tranne `pi_k(0)` DEVONO divergere.** ### ⛔ **Se non divergono, `(A)` e'
+contabilita' e lo scrivo** — e il mandato dice *«non passarci da solo»* a `(C)`:
+### **non ci passo.**
+
+### ⚠ **QUATTRO FORME RESTANO LIBERE, e vanno a Luca una per voce, con la raccomandazione
+separata:** `[[DOMANDA-QUALE-COPPIA-CONIUGATA-DEL-VUOTO]]`,
+`[[DOMANDA-PORTATA-DEL-VUOTO-MEDIATORE]]`, `[[DOMANDA-LA-FORMA-DI-CS-DAL-VUOTO]]`,
+`[[DOMANDA-IL-PI-DEL-NODO-CHE-NASCE]]`.
+
+### ⭐ **E CONTROLLANDO `F10` UNO PER UNO HO TROVATO UN BUCO CHE NON CERCAVO:** `F10`
+chiede **norme conservate anche attraverso le nascite**, e la derivazione ### **non dice da
+dove venga il `pi` di un nodo nuovo.** ### ✅ **Ed e' la decisione `10` (<<il calore paga la
+nascita>>) riscritta su questa variabile** — e `DOMANDA-QUANTITA-CONSERVATA` diceva, con
+queste parole, che quella decisione *«non ha un oggetto»* senza una quantita' conservata.
+### **`E~` e' quell'oggetto, se `(A)` regge** — e lo scrivo **prima** di misurare, perche'
+dopo sembrerebbe una lettura comoda.
+
+### ⛔ **E NON SCRIVO CODICE DI `(A)` finche' le domande `1` e `3` non hanno una risposta:**
+senza la coppia e senza `f` ### **scriverei io la fisica.**
