@@ -15207,3 +15207,53 @@ oggi **non e' verificabile**, e `(iii)` ### **e' GIA' scritto come criterio di r
 ### ⚠ **E dico che cosa mi farebbe cambiare idea**, perche' senza quello e' una preferenza:
 se `H_eff` avesse una **portata finita MISURATA**, ### **`(ii)` diventerebbe la via
 migliore di tutte** — e sarebbe **una misura**, non un argomento.
+
+## 2026-10-13 — `(P-b)`: **la `C`-disparita' di `q_h` si DERIVA**, e `J` non e' una costante
+
+### ⭐⭐ **NEL PIANO AVEVO MESSO `b2` COME UNA MISURA. SI DERIVA, in cinque righe.** Con
+`C: psi -> i sigma_y psi*` e il fatto **misurato** `C W_U = W_{CU} C`:
+
+> `(C psi)_h^dag (W_{CU} C psi)_h = psi_h^T (i s_y)^dag (i s_y) (W_U psi)_h* =`
+> `coniugato di [ psi_h^dag (W_U psi)_h ]`  *(perche' `i sigma_y` e' **unitaria**)*
+
+### ✅ **Quindi `e_h = Re[...]` e' PARI e `q_h = Im[...]` e' DISPARI, ESATTAMENTE,
+estremita' per estremita'.** ### **Non va misurata: e' un'identita'** — e la verifica
+numerica resta utile **come controllo dello strumento**, non come prova.
+
+### ⭐ **E NOTO UNA COSA:** `e_h` e `q_h` sono **la parte reale e immaginaria dello STESSO
+oggetto**. ### **L'energia e il segno sono due facce della stessa correlazione a due
+tempi**, e questo spiega perche' `B3` trovava `Im<psi|W psi>` legata a `Q` a `-0.944`:
+### **non erano due grandezze che si somigliavano, era una grandezza COMPLESSA.**
+
+### ✅ **E IL TERMINE CHE ORDINA:** `- somma_{k,l vicini} q_k q_l` e' **`C`-pari** *(il
+prodotto di due dispari)*, ha energia **piu' bassa quando i vicini hanno lo stesso segno**,
+ed e' **locale** *(portata `2` archi, dichiarata)*. ### ⭐ **E l'<<antifase -> repulsione>>
+dell'era `1` E' GIA' di questa famiglia:** la traduzione **non e' un innesto**. ### ⚠ **Ma
+<<della stessa famiglia>> non e' <<la stessa>>, e la verifica non l'ho fatta.**
+
+### ⭐⭐ **E IL PUNTO DEBOLE DEL PIANO SI CHIUDE: `J` NON E' UNA COSTANTE.** Il conto
+dimensionale: `q` ha la scala di `h` *(sono parte reale e immaginaria dello stesso
+bilineare, e `h` e' della stessa famiglia)*, quindi `q_k q_l` ha la scala di `h^2` e per
+farne un'energia serve dividere per qualcosa della scala di `h`. ### ✅ **E `Lambda` c'e'
+gia', ed e' una VARIABILE DI STATO:**
+
+> ### ⭐ **`- somma_{k,l vicini} (q_k q_l) / Lambda_{kl}`** — ### **nessuna costante nuova.**
+
+### ⭐ **E non e' un'analogia: `h^2/Lambda` e' GIA' la struttura del termine del vuoto**
+*(il primo termine non banale di `Lambda G(h/Lambda)`)*. ### **Il termine di ordinamento e'
+della STESSA famiglia, con `q` al posto di `h`.**
+
+### ⛔ **MA DICHIARO CHE COSA E' E CHE COSA NON E':** ### **non ho una DERIVAZIONE del
+termine, ho un ARGOMENTO DIMENSIONALE.** Il conto dice quali forme sono **ammissibili**,
+non quale e' **vera**, e `A1` chiede *la legge, non il numero*: ### **qui ho RISTRETTO le
+forme, non derivato la legge.**
+
+### ⚠ **E UN RISCHIO CHE NON ERA NEL PIANO:** `- q_k q_l / Lambda` **non e' limitato dal
+basso** se `q` puo' crescere. ### **La tentazione sara' un TETTO su `q`, e `A11` lo vieta.**
+### ⭐ **Previsione, scritta prima:** `|q_k| <= ||psi||^2` per Cauchy-Schwarz, perche' `W`
+e' unitaria — ### **se vale, il termine E' limitato e non serve nessun tetto.** ### ⛔ **E'
+un conto che NON ho finito**, e lo dico.
+
+### ⚠ **E TUTTO QUESTO E' CONDIZIONATO:** vale **se** il parametro d'ordine e' `q_h` e non
+`N+ - N-` — che e' `[[DOMANDA-BANDE-O-SEGNO-LOCALE]]`, **aperta**. ### **Se fosse `N+ - N-`,
+questo pezzo non serve**, perche' `N+` e' globale e `F10` la vieta in una legge.
