@@ -15257,3 +15257,40 @@ un conto che NON ho finito**, e lo dico.
 ### ⚠ **E TUTTO QUESTO E' CONDIZIONATO:** vale **se** il parametro d'ordine e' `q_h` e non
 `N+ - N-` — che e' `[[DOMANDA-BANDE-O-SEGNO-LOCALE]]`, **aperta**. ### **Se fosse `N+ - N-`,
 questo pezzo non serve**, perche' `N+` e' globale e `F10` la vieta in una legge.
+
+## 2026-10-13 — IL PIANO DEL **CONGELAMENTO PER DILUIZIONE**, committato prima di misurare
+
+### ✅ **Il limite d'uso e' vicino, e il mandato dice cosa fare:** *«prima committa il piano
+(task history) e poi misura»*. ### **Fatto:**
+`doc/TASK_HISTORY/2026-10-13_congelamento_diluizione.md`.
+
+### ⭐ **E IL PIANO HA DUE PREVISIONI CHE SONO NUMERI, non aspettative** — ed entrambe
+escono da misure che ho **gia'** fatto:
+
+| | la previsione | da dove viene |
+|---|---|---|
+| `d1a` | la correlazione fra `somma_k q_k` e `Q` e' ### **`+0.9438`** | `B3` aveva misurato `corr(Delta Im_W, Delta Q) = -0.9438`, e ### **col segno di Luca diventa `+`** |
+| `d2b` | `Gamma ~ x^alpha` con ### **`alpha ~ 2`** | dai due punti misurati: `log(4029)/log(64.7) = ` ### **`1.99`** |
+
+### ⭐ **E `alpha = 2` TORNA CON LA FORMA DI `G`:** `G'(x) = x^2/(1+x^2) ~ x^2` a `x`
+piccolo, e `G'` e' **il coefficiente del generatore** del flusso. ### ⚠ **Ma non lo scrivo
+come derivazione: il legame fra `G'` e il tasso di rilassamento NON l'ho derivato.**
+
+### ⚠ **E IL SEGNO DI LUCA IN `q_k` NON E' COSMETICO, e lo noto perche' io avevo scritto
+`+Im` in `(P-b)`:** siccome `Im<psi|W psi> = - somma |c|^2 sin(omega)` e `sin(omega) > 0`
+sulla banda `+`, ### **con il meno `q` ha lo STESSO SEGNO di `Q`.** ### ✅ **Adotto il suo
+segno; la parita' `C` non cambia, quindi la derivazione di `(P-b)` resta valida.**
+
+### ⛔ **E SULL'ESPONENTE DI KIBBLE-ZUREK NON FACCIO UNA PREVISIONE, e dico perche':**
+`xi ~ velocita'^{-nu/(1+nu z)}`, e ### **`nu` e `z` di questo modello NON LI CONOSCO.**
+Prevedo solo che l'esponente sia **`> 0`**. ### **Scriverne uno adesso sarebbe adattare una
+formula scelta prima, che e' proprio cio' che il mandato vieta.**
+
+### ✅ **E SONO D'ACCORDO CON LO SCARTO DELLA CURA A SOGLIA:** e' **la stessa mossa che ho
+criticato io** in `[[SCARTATA-SAKHAROV-C-ESPLICITA]]` — *«un termine aggiunto per ottenere
+un risultato e' il contrario di una legge derivata»*.
+
+### ⚠ **E IL LIMITE STA IN CIMA AL PIANO, non in fondo:** i domini congelati per diluizione
+### **NON sono topologicamente protetti.** ### **Questo pezzo non sostituisce `(P-b)`:
+risponde a una domanda diversa** — *«i domini possono esistere?»* invece di *«sono
+stabili?»*.
