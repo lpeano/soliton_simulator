@@ -238,6 +238,72 @@ def correlazione(serie, a, b):
     return float(np.corrcoef(x, y)[0, 1])
 
 
+# ---------------------------------------------------------------- LA `C` COMPLETA
+# ### ⛔ **LA CORREZIONE DEL 2026-10-13, e l'errore era MIO.** In `efc113b` avevo concluso
+# ### che *«la `C` chiede `det U = 1`, il trasporto deve stare in `SU(2)`»*.
+# ### ⚠ **LA MISURA ERA GIUSTA, LA CONCLUSIONE NO:** avevo applicato la `C` ### **alla sola
+# ### MATERIA, su una `U` TENUTA FISSA.** ### ⛔ **La coniugazione di carica INVERTE ANCHE
+# ### IL CAMPO DI GAUGE** -- in elettrodinamica `C` manda `A` in `-A` -- e la `C` e' una
+# ### simmetria della ### **TEORIA INTERA**, non della materia su un campo fisso.
+# ### ✅ **Particella e antiparticella nello stesso campo `U(1)` NON hanno lo stesso
+# ### spettro, e questa E' FISICA, non un difetto.**
+# ### ⭐ **E la mia stessa derivazione della `U` dinamica lo diceva:** sotto `C` la fase
+# ### `U(1)` e' ### **DISPARI**, `theta -> -theta`.
+
+
+def coniuga_U(U):
+    """### `C U = sigma_y U* sigma_y^-1`: ### **`theta -> -theta` per la parte `U(1)`.**
+
+    ### ✅ **E il conto si vede scrivendo `U = exp(i theta) V` con `V` in `SU(2)`:**
+    `sigma_y U* sigma_y^-1 = exp(-i theta) sigma_y V* sigma_y^-1 = exp(-i theta) V`.
+    ### ⭐ **Quindi la parte `SU(2)` resta e la FASE SI INVERTE** -- esattamente
+    `theta -> -theta`, che e' cio' che la derivazione della `U` dinamica aveva trovato.
+    """
+    sy = np.array([[0.0, -1.0j], [1.0j, 0.0]], dtype=complex)
+    return np.einsum("ij,ajk,kl->ail", sy, np.conj(np.asarray(U)), sy)
+
+
+def controllo_C_completa(nn=16, seme=7, vuoto_modulo=2.0, su2=False):
+    """### **IL CONTROLLO CON LA `C` COMPLETA:** `C W(U) C^-1 = W(C U)`?
+
+    La `C` completa e' **`psi -> i sigma_y psi*`**, **`phi -> phi*`**,
+    **`U -> sigma_y U* sigma_y^-1`**.
+
+    ### ⛔ **E QUESTO E' IL CONTROLLO GIUSTO, non quello di `efc113b`:** la' avevo
+    coniugato **solo la materia** e tenuto `U` fissa, e ### **quella non e' la `C` della
+    teoria.**
+
+    ### ⚠ **`phi -> phi*` non entra in questo residuo**, perche' `W` non tocca `phi`:
+    ### **lo dichiaro invece di lasciar credere che sia verificato qui.**
+    """
+    import motore as MO
+    inc, mot, st, par = DV.scena(nn, seme, 0.25, norma="locale",
+                                 vuoto_modulo=vuoto_modulo, su2=su2)
+    # ### il motore della teoria CONIUGATA: stessa `n`, `U` coniugata
+    mot2 = MO.Motore(inc, MO.Geometria(mot.geo.n, coniuga_U(mot.geo.U)),
+                     st, np.full(nn, 0.25), "numpy")
+    r = np.random.default_rng(seme + 101)
+    psi = (r.normal(size=st["psi_h"].shape)
+           + 1j * r.normal(size=st["psi_h"].shape))
+    # ### `C (W(U) psi)` contro `W(C U) (C psi)`
+    a = coniuga_C(applica_W(mot, st, psi.ravel()).reshape(psi.shape))
+    b = applica_W(mot2, st, coniuga_C(psi).ravel()).reshape(psi.shape)
+    res = float(np.max(np.abs(a - b)))
+    scala = float(np.max(np.abs(a)))
+    # ### e lo SPETTRO: la teoria coniugata ha lo spettro RIBALTATO
+    o1 = np.sort(-np.angle(np.linalg.eigvals(matrice_W(mot, st))))
+    o2 = np.sort(np.angle(np.linalg.eigvals(matrice_W(mot2, st))))
+    simm = float(np.max(np.abs(o1 - o2))) if o1.size == o2.size else float("inf")
+    # ### ⛔ **E IL CASO CHE DEVE FALLIRE: la `C` DELLA SOLA MATERIA** -- cioe- il
+    # ### controllo sbagliato di `efc113b`, rifatto qui ### **per mostrare che la
+    # ### differenza e- la `U`.**
+    c = applica_W(mot, st, coniuga_C(psi).ravel()).reshape(psi.shape)
+    res_sbagliato = float(np.max(np.abs(a - c)))
+    deter = float(np.mean(np.abs(np.linalg.det(mot.geo.U) - 1.0)))
+    return {"residuo": res, "scala": scala, "spettro": simm,
+            "solo_materia": res_sbagliato, "det_meno_uno": deter}
+
+
 CONFIG = (("seme", 7),
           ("scena", "anello di 16 nodi"),
           ("dtau", 0.25),
@@ -332,6 +398,68 @@ def main(argv):
              " chiedeva di")
     r.append("guardarlo: le bande piatte dei Grover ### **non compaiono qui**, quindi")
     r.append("`Q = N+ - N-` e' definita ### **senza un pezzo di stato che non ha segno.**")
+
+    # ------------------------------------------------ LA C COMPLETA (correzione)
+    print("  LA C COMPLETA (correzione del 2026-10-13): C W(U) C^-1 = W(C U)?")
+    r.append("")
+    r.append("## 2-bis. ⭐ **LA CORREZIONE DEL 2026-10-13: LA `C` COMPLETA**")
+    r.append("")
+    r.append("### ⛔ **LA CONCLUSIONE DEL PARAGRAFO `2` E' SBAGLIATA, e l'errore e'"
+             " MIO.** Avevo scritto")
+    r.append("che *<<la `C` chiede `det U = 1`, il trasporto deve stare in `SU(2)`>>*."
+             " ### ⚠ **La misura")
+    r.append("era giusta, la conclusione no:** avevo applicato la `C` ### **alla sola"
+             " MATERIA, su una `U`")
+    r.append("TENUTA FISSA.** ### ⛔ **La coniugazione di carica INVERTE ANCHE IL CAMPO"
+             " DI GAUGE** --")
+    r.append("in elettrodinamica `C` manda `A` in `-A` -- e la `C` e' una simmetria della"
+             " **TEORIA")
+    r.append("INTERA**, non della materia su un campo fisso."
+             " ### ✅ **Particella e antiparticella")
+    r.append("nello stesso campo `U(1)` NON hanno lo stesso spettro, e questa E' FISICA,"
+             " non un difetto.**")
+    r.append("")
+    r.append("La `C` completa: **`psi -> i sigma_y psi*`**, **`phi -> phi*`**,"
+             " **`U -> sigma_y U* sigma_y^-1`**")
+    r.append("*(cioe' `theta -> -theta` per la parte `U(1)`, che e' proprio cio' che la"
+             " derivazione")
+    r.append("della `U` dinamica aveva trovato)*.")
+    r.append("")
+    r.append("| `U` | `|det U - 1|` | `|C W(U) C^-1 - W(C U)|` | spettro ribaltato |"
+             " ### ⛔ **DEVE FALLIRE:** la `C` della **sola materia** |")
+    r.append("|---|--:|--:|--:|--:|")
+    for su2 in (False, True):
+        c = controllo_C_completa(su2=su2)
+        print("      U in %-6s |det U - 1| = %.4f   |C W(U) C^-1 - W(C U)| = %.3e"
+              "   spettro %.3e   sola materia %.3e"
+              % ("SU(2)" if su2 else "U(2)", c["det_meno_uno"], c["residuo"],
+                 c["spettro"], c["solo_materia"]))
+        r.append("| **%s** | `%.4f` | ### ✅ **`%.3e`** | `%.3e` | `%.3e` |" %
+                 ("U(2) generico" if not su2 else "SU(2)", c["det_meno_uno"],
+                  c["residuo"], c["spettro"], c["solo_materia"]))
+    r.append("")
+    r.append("### ⭐ **LA `C` COMPLETA E' UNA SIMMETRIA DELLA TEORIA INTERA, ANCHE CON"
+             " `U(2)` GENERICO**")
+    r.append("*(residuo **esattamente `0`**)*, e lo spettro di `W(C U)` e'"
+             " **l'opposto** di quello di `W(U)`.")
+    r.append("### ⚠ **E IL CASO CHE DEVE FALLIRE SPIEGA COMPLETAMENTE I NUMERI DEL"
+             " PARAGRAFO `2`:** la `C`")
+    r.append("della sola materia da' **`O(1)`** con `U(2)` e **ulp** con `SU(2)` --"
+             " ### **perche' in `SU(2)`")
+    r.append("`C U = U`, quindi li' il controllo sbagliato COINCIDE con quello giusto.**")
+    r.append("")
+    r.append("### ✅ **QUINDI LE BANDE COME MATERIA/ANTIMATERIA SONO LETTE"
+             " CORRETTAMENTE in due casi,")
+    r.append("e lo dichiaro:** su `U` in **`SU(2)`** *(dove `C U = U`)*, oppure con la `C`"
+             " **che")
+    r.append("trasforma anche `U`**. ### ⚠ **E la scelta del parametro `su2` resta un"
+             " CONTROLLO DI")
+    r.append("MISURA, non una legge.**")
+    r.append("")
+    r.append("### ⚠ **CHE COSA QUESTO RESIDUO NON VERIFICA:** `phi -> phi*` non entra,"
+             " perche' `W` non")
+    r.append("tocca `phi`. ### **Lo dichiaro invece di lasciar credere che sia verificato"
+             " qui.**")
 
     # ------------------------------------------------ B1: LE POPOLAZIONI
     print("  B1  LE POPOLAZIONI: N spento (controllo) e N acceso, nella scansione in x")

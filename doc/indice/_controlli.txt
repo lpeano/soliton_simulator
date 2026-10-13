@@ -6,9 +6,9 @@ I CONTROLLI DELLA MIGRAZIONE ALLO SCHEMA 2
   C1 CONSERVAZIONE: ogni ID vecchio in UNO E UNO SOLO posto PASSA   persi 0, doppi 0
   C2 la TRACCIA copre ogni ID vecchio, con la REGOLA       PASSA   senza traccia 0
   C3 LE LISTE DEL GUARDIANO: classificazione come indicata PASSA   fuori posto 0; e 8 SPOSTATE da una scrittura DICHIARATA  M-FLUSSO M-LEGAMI MEM-VERSO M-MASSA M-ISTERESI A3-DISEGNO Z104 G4-MEMARCO
-  C4 IDEMPOTENZA (NON si rilancia: c'e' lavoro di dopo)    PASSA   storico.jsonl ha 2294 righe -> verificata al commit 6b8cb90; e la migrazione ha un PRESIDIO che la ferma
-  C5 `indice.py valida` passa                              PASSA     ### i PRESIDI contro le mescolanze: 36 segnali (PI-GEMELLE
-  C6 la VISTA passa IL VALIDATORE VECCHIO (quello del pre-commit) e la domanda PASSA   22 bloccanti su 1025 voci
+  C4 IDEMPOTENZA (NON si rilancia: c'e' lavoro di dopo)    PASSA   storico.jsonl ha 2296 righe -> verificata al commit 6b8cb90; e la migrazione ha un PRESIDIO che la ferma
+  C5 `indice.py valida` passa                              PASSA     ### i PRESIDI contro le mescolanze: 35 segnali (PI-GEMELLE
+  C6 la VISTA passa IL VALIDATORE VECCHIO (quello del pre-commit) e la domanda PASSA   21 bloccanti su 1025 voci
 ========================================================================================================
 C7 I CONTEGGI
 ========================================================================================================
@@ -28,7 +28,7 @@ C7 I CONTEGGI
       (a4)        1
       (fase2-b1)    1
 
-  bloccanti fra le voci: 22
+  bloccanti fra le voci: 21
   etichette rimosse: 106, con 790 citazioni in tutto
 ========================================================================================================
 I CONTROLLI: 6 su 6   ### TUTTI PASSATI

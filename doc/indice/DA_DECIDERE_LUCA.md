@@ -16,7 +16,7 @@
 
 ## LE ALTRE, per priorita-
 
-### `CRITICA` — **14**
+### `CRITICA` — **13**
 
 | la domanda | pronta? | che cosa aspetta |
 |---|---|---|
@@ -31,7 +31,6 @@
 | **[[DOMANDA-PORTATA-DEL-VUOTO-MEDIATORE]]** quale instradamento, cioe quale cono: la liberta di ricircolo adesso sce | ### ✅ **PRONTA** | ### **niente** |
 | **[[DOMANDA-QUALE-COPPIA-CONIUGATA-DEL-VUOTO]]** la coppia coniugata del vuoto: una variabile nuova, o la fase e l ampiez | ### ✅ **PRONTA** | ### **niente** |
 | **[[DOMANDA-QUANTITA-CONSERVATA]]** esiste una moneta isotropa, causale e simmetrica fra le bande con una qu | ### ✅ **PRONTA** | ### **niente** |
-| **[[DOMANDA-TRASPORTO-DEVE-STARE-IN-SU2]]** la C chiede det U = 1, e il motore valida solo l unitarieta: un vincolo  | ### ✅ **PRONTA** | ### **niente** |
 | **[[DOMANDA-U-DINAMICA-LE-FORME]]** le quattro forme della U d arco dinamica: la scala, il caso senza vuoto, | ### ✅ **PRONTA** | ### **niente** |
 | **[[SCENA-3D-PRINCIPALE]]** la (ii) e- il BANCO DI MISURA: punti che si respingono, gradi 2-6 | ### ✅ **PRONTA** | ### **niente** |
 
@@ -58,7 +57,7 @@
 | **[[DOMANDA-QUANDO-LA-CAMMINATA-IN-TABELLA]]** quando si porta la camminata nella tabella? il porting aspetta TRE decis | ### ⏳ aspetta | ### **aspetta:** `DOMANDA-PASSO-FRAZIONARIO-O-ASINCRONO`, `DOMANDA-COME-LA-MATERIA-CAMBIA-LAMBDA`, `DOMANDA-QUALE-FORMA-FISSA-CS` |
 | **[[DOMANDA-UNITA-DI-STATO]]** l-unita- di stato: qual e- la capacita- di un nodo? | ### ⏳ aspetta | ### **aspetta:** `DOMANDA-D9-GEOMETRIA` |
 
-### `MINORE` — **7**
+### `MINORE` — **8**
 
 | la domanda | pronta? | che cosa aspetta |
 |---|---|---|
@@ -67,6 +66,7 @@
 | **[[DOMANDA-DOVE-STA-LA-C-IN-TABELLA]]** la C e decisa al punto F3 e nessuna legge della tabella la dichiara | ### ✅ **PRONTA** | ### **niente** |
 | **[[DOMANDA-FLUSSO-SENZA-AZIONE]]** un flusso non dichiara dove agisce: lo schema non ha il campo azione per | ### ✅ **PRONTA** | ### **niente** |
 | **[[DOMANDA-REGOLE-FUORI-CLAUDE]]** le regole di gestione fuori da CLAUDE.md, e quelle dentro senza presidio | ### ✅ **PRONTA** | ### **niente** |
+| **[[DOMANDA-TRASPORTO-DEVE-STARE-IN-SU2]]** la C e una simmetria della TEORIA INTERA: il controllo di efc113b era in | ### ✅ **PRONTA** | ### **niente** |
 | **[[DUE-STRUMENTI-ARCHIVIO-E]]** due strumenti per lo stesso mestiere: spostare gli output su E- | ### ✅ **PRONTA** | ### **niente** |
 | **[[L-NUMERI-DERIVA-ORFANA]]** il rapporto 4.20 della deriva di E non esce da nessuno script: numero or | ### ✅ **PRONTA** | ### **niente** |
 
@@ -84,13 +84,13 @@
 
 > ### 📌 **Queste arrivano dai DUE criteri vecchi** *(la nota che dice <<da decidere da Luca>>, e lo stato `DA_CLASSIFICARE`)*, e ### **non hanno una `priorita`**: quindi ### **non stanno nell-ordine delle dipendenze.** ### ✅ **Non le tolgo: le DICHIARO**, perche- una lista che ne nasconde una parte ### **sembra completa.**
 
-| **voci che aspettano una decisione** | ### **`24`** |
-| **domande in tutto** | `24` |
+| **voci che aspettano una decisione** | ### **`23`** |
+| **domande in tutto** | `23` |
 | **segnaposto `NON_DEFINITA`**, che NON sono una domanda | `187` |
 
 ---
 
-## le DOMANDE aperte -- `24`
+## le DOMANDE aperte -- `23`
 
 | id | `classe`/`dominio`/era/stato | LA DOMANDA | LA FRASE |
 |---|---|---|---|
@@ -111,7 +111,6 @@
 | `DOMANDA-QUALE-FORMA-FISSA-CS` | `DECISIONE`/`FISICA`/`2`/`AGENDA` | quale forma fissa cs, e nessuna delle tre e- libera da tutti i difetti | quale forma del vuoto fissa cs: nessuna delle tre e- libera da tutti i difetti ### DOMANDA APERTA PER LUCA, da decidere da Luca. ### E- il punto A2 de |
 | `DOMANDA-QUALE-SEGNO` | `DECISIONE`/`FISICA`/`2`/`AGENDA` | il segno che lega in 1D in 3D e- PEGGIO del lineare, e il segno va scelto sulla misura CON LA U DINAMICA ACCESA | quale segno della non linearita-, se quello che lega lega solo in 1D? ### DOMANDA APERTA PER LUCA, da decidere da Luca. E- una delle due domande che i |
 | `DOMANDA-QUANDO-LA-CAMMINATA-IN-TABELLA` | `DECISIONE`/`FISICA`/`2`/`AGENDA` | quando si porta la camminata nella tabella, e il porting aspetta le tre scelte del v4 | quando si porta la camminata nella tabella? il porting aspetta TRE decisioni aperte ### DOMANDA APERTA PER LUCA, da decidere da Luca. ### E- il punto  |
-| `DOMANDA-TRASPORTO-DEVE-STARE-IN-SU2` | `DECISIONE`/`FISICA`/`2`/`AGENDA` | la C chiede det U = 1 (misurato: con U(2) generico /CW-WC/ = 4.33 su scala 2.76, con SU(2) 8.0e-16) e motore.Geometria valida SOLO l unitarieta. Il trasporto deve stare in SU(2) per legge, e Geometria | la C chiede det U = 1, e il motore valida solo l unitarieta: un vincolo senza presidio MISURATO il 2026-10-13 eseguendo il controllo che il mandato de |
 | `DUE-STRUMENTI-ARCHIVIO-E` | `DIFETTO`/`INFRASTRUTTURA`/`ENTRAMBE`/`APERTA` | quale dei due strumenti resta, e un solo registro degli archiviati | due strumenti per lo stesso mestiere: spostare gli output su E- ### DOMANDA APERTA PER LUCA, da decidere da Luca: QUALE DEI DUE RESTA. ### IL FATTO: ` |
 | `PROMOZIONE-CONSERVAZIONE-MODIFICATA` | `DECISIONE`/`FISICA`/`2`/`CHIUSA` | la conservazione modificata si conserva; promuoverla a energia e- una sua decisione | la conservazione modificata si conserva: si promuove a energia? ### DOMANDA APERTA PER LUCA, da decidere da Luca. ### IL FATTO MISURATO (referto doc/R |
 | `PROPOSTA-FASE-DISPARI-COESIONE` | `DECISIONE`/`FISICA`/`2`/`AGENDA` | la fase dispari sotto C e- ammissibile al bit; la sua forza g resta da derivare | la fase DISPARI sotto coniugazione di carica come forma della coesione ### DOMANDA APERTA PER LUCA, da decidere da Luca. ### IL FATTO MISURATO (refert |

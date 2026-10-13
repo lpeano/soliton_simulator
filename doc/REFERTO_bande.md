@@ -49,6 +49,39 @@ della carta. ### **Non lo decido io: va a Luca.**
 guardarlo: le bande piatte dei Grover ### **non compaiono qui**, quindi
 `Q = N+ - N-` e' definita ### **senza un pezzo di stato che non ha segno.**
 
+## 2-bis. ⭐ **LA CORREZIONE DEL 2026-10-13: LA `C` COMPLETA**
+
+### ⛔ **LA CONCLUSIONE DEL PARAGRAFO `2` E' SBAGLIATA, e l'errore e' MIO.** Avevo scritto
+che *<<la `C` chiede `det U = 1`, il trasporto deve stare in `SU(2)`>>*. ### ⚠ **La misura
+era giusta, la conclusione no:** avevo applicato la `C` ### **alla sola MATERIA, su una `U`
+TENUTA FISSA.** ### ⛔ **La coniugazione di carica INVERTE ANCHE IL CAMPO DI GAUGE** --
+in elettrodinamica `C` manda `A` in `-A` -- e la `C` e' una simmetria della **TEORIA
+INTERA**, non della materia su un campo fisso. ### ✅ **Particella e antiparticella
+nello stesso campo `U(1)` NON hanno lo stesso spettro, e questa E' FISICA, non un difetto.**
+
+La `C` completa: **`psi -> i sigma_y psi*`**, **`phi -> phi*`**, **`U -> sigma_y U* sigma_y^-1`**
+*(cioe' `theta -> -theta` per la parte `U(1)`, che e' proprio cio' che la derivazione
+della `U` dinamica aveva trovato)*.
+
+| `U` | `|det U - 1|` | `|C W(U) C^-1 - W(C U)|` | spettro ribaltato | ### ⛔ **DEVE FALLIRE:** la `C` della **sola materia** |
+|---|--:|--:|--:|--:|
+| **U(2) generico** | `0.8243` | ### ✅ **`0.000e+00`** | `3.553e-15` | `3.799e+00` |
+| **SU(2)** | `0.0000` | ### ✅ **`0.000e+00`** | `2.276e-15` | `1.343e-15` |
+
+### ⭐ **LA `C` COMPLETA E' UNA SIMMETRIA DELLA TEORIA INTERA, ANCHE CON `U(2)` GENERICO**
+*(residuo **esattamente `0`**)*, e lo spettro di `W(C U)` e' **l'opposto** di quello di `W(U)`.
+### ⚠ **E IL CASO CHE DEVE FALLIRE SPIEGA COMPLETAMENTE I NUMERI DEL PARAGRAFO `2`:** la `C`
+della sola materia da' **`O(1)`** con `U(2)` e **ulp** con `SU(2)` -- ### **perche' in `SU(2)`
+`C U = U`, quindi li' il controllo sbagliato COINCIDE con quello giusto.**
+
+### ✅ **QUINDI LE BANDE COME MATERIA/ANTIMATERIA SONO LETTE CORRETTAMENTE in due casi,
+e lo dichiaro:** su `U` in **`SU(2)`** *(dove `C U = U`)*, oppure con la `C` **che
+trasforma anche `U`**. ### ⚠ **E la scelta del parametro `su2` resta un CONTROLLO DI
+MISURA, non una legge.**
+
+### ⚠ **CHE COSA QUESTO RESIDUO NON VERIFICA:** `phi -> phi*` non entra, perche' `W` non
+tocca `phi`. ### **Lo dichiaro invece di lasciar credere che sia verificato qui.**
+
 ## 3. `B1` — **LE POPOLAZIONI**
 
 ### ✅ **IL CONTROLLO:** con `N` **spento** le popolazioni devono essere

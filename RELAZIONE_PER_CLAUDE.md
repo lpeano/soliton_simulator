@@ -14934,3 +14934,51 @@ dopo sembrerebbe una lettura comoda.
 
 ### ⛔ **E NON SCRIVO CODICE DI `(A)` finche' le domande `1` e `3` non hanno una risposta:**
 senza la coppia e senza `f` ### **scriverei io la fisica.**
+
+## 2026-10-13 — LA CORREZIONE DI LUCA: **la `C` e' una simmetria della TEORIA INTERA**, e il mio controllo era incompleto
+
+### ⛔ **LA CONCLUSIONE DI `efc113b` ERA SBAGLIATA, E L'ERRORE E' MIO.** Avevo scritto che
+*«la `C` chiede `det U = 1`, il trasporto deve stare in `SU(2)`»*. ### ⚠ **La misura era
+giusta, la conclusione no:** avevo applicato la `C` ### **alla sola MATERIA, su una `U`
+TENUTA FISSA.**
+
+### ⭐ **LA CONIUGAZIONE DI CARICA INVERTE ANCHE IL CAMPO DI GAUGE** — in elettrodinamica
+`C` manda `A` in `-A` — e la `C` e' una simmetria della **TEORIA INTERA**, non della
+materia su un campo fisso. ### ✅ **Particella e antiparticella nello stesso campo `U(1)`
+NON hanno lo stesso spettro, e questa E' FISICA, non un difetto.** ### ⚠ **E la mia stessa
+derivazione della `U` dinamica lo diceva:** sotto `C` la fase `U(1)` e' **dispari**,
+`theta -> -theta`.
+
+### ✅ **MISURATO COL CONTROLLO GIUSTO** — la `C` completa e' `psi -> i sigma_y psi*`,
+`phi -> phi*`, `U -> sigma_y U* sigma_y^-1`:
+
+| `U` | `|det U - 1|` | `|C W(U) C^-1 - W(C U)|` | spettro ribaltato | ### ⛔ DEVE FALLIRE: `C` della **sola materia** |
+|---|--:|--:|--:|--:|
+| **`U(2)` generico** | `0.8243` | ### ✅ **`0.000e+00`** | `3.553e-15` | `3.799e+00` |
+| `SU(2)` | `0.0000` | ### ✅ **`0.000e+00`** | `2.276e-15` | `1.343e-15` |
+
+### ⭐ **ESATTAMENTE ZERO, anche con `U(2)` generico:** la `C` completa **e'** una
+simmetria della teoria intera. ### ⚠ **E IL CASO CHE DEVE FALLIRE SPIEGA COMPLETAMENTE I
+NUMERI DI `efc113b`:** la `C` della sola materia da' `O(1)` con `U(2)` e **ulp** con
+`SU(2)` — ### **perche' in `SU(2)` `C U = U`, quindi li' il controllo sbagliato COINCIDE
+con quello giusto.** ### **Non <<passava>> perche' `SU(2)` fosse richiesta: passava perche'
+li' la differenza fra i due controlli SPARISCE.**
+
+### ✅ **Quindi le bande sono lette correttamente in due casi, e il referto lo dichiara:**
+su `U` in **`SU(2)`** *(dove `C U = U`)*, oppure con la **`C` che trasforma anche `U`**.
+### **E il parametro `su2` resta un CONTROLLO DI MISURA, non una legge.**
+
+### ⛔ **E LA LEZIONE E' LA STESSA FAMIGLIA DELL'ERRORE DI IERI.** Ieri avevo inferito
+*«la corrente locale non esiste»* dal fallimento della **mia** candidata; qui ho inferito
+*«il trasporto deve stare in `SU(2)`»* dal fallimento di un controllo che avevo scritto
+**incompleto**. ### **In entrambi i casi la misura era giusta e il salto era mio, e in
+entrambi il difetto era lo stesso: NON AVEVO COSTRUITO L'OGGETTO INTERO prima di
+concludere sulla sua esistenza o sui suoi vincoli.**
+
+### ⚠ **CHE COSA RESTA, e non e' una domanda per te:** se serve un presidio, controlla che
+la **`C` della tabella trasformi anche `U`** — cioe' che la legge della simmetria `C`,
+quando sara' scritta in tabella, includa **la trasformazione del trasporto** e non solo
+quella dello spinore. ### **E' un presidio sulla tabella, e lo segno come cosa da fare.**
+
+### ⚠ **E CHE COSA QUESTO RESIDUO NON VERIFICA:** `phi -> phi*` non entra, perche' `W` non
+tocca `phi`. ### **Lo dichiaro invece di lasciar credere che sia verificato.**

@@ -308,7 +308,7 @@
 | `DOMANDA-QUANDO-LA-CAMMINATA-IN-TABELLA` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | quando si porta la camminata nella tabella? il porting aspetta TRE decisioni ape |
 | `DOMANDA-QUANTITA-CONSERVATA` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | esiste una moneta isotropa, causale e simmetrica fra le bande con una quantita-  |
 | `DOMANDA-REGOLE-FUORI-CLAUDE` | DECISIONE | METODO | 2 | ### **AGENDA** |  | le regole di gestione fuori da CLAUDE.md, e quelle dentro senza presidio: vanno  |
-| `DOMANDA-TRASPORTO-DEVE-STARE-IN-SU2` | DECISIONE | FISICA | 2 | ### **AGENDA** | SI | la C chiede det U = 1, e il motore valida solo l unitarieta: un vincolo senza pr |
+| `DOMANDA-TRASPORTO-DEVE-STARE-IN-SU2` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | la C e una simmetria della TEORIA INTERA: il controllo di efc113b era incompleto |
 | `DOMANDA-U-DINAMICA-LE-FORME` | DECISIONE | FISICA | 2 | ### **AGENDA** | SI | le quattro forme della U d arco dinamica: la scala, il caso senza vuoto, le olon |
 | `DOMANDA-UNITA-DI-STATO` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | l-unita- di stato: qual e- la capacita- di un nodo? |
 | `DOMANDA-VIA-DEL-CAMPO` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | si passa alla via del campo, dato che nessuna non linearita- locale lega in 3D? |
