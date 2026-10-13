@@ -276,7 +276,7 @@
 | `DOMANDA-CHI-CAUSA-L-ANISOTROPIA` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | sul cubico i versori del v3 RIDUCONO l-anisotropia direzionale: e- una leva o si |
 | `DOMANDA-COME-LA-MATERIA-CAMBIA-LAMBDA` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | come la materia cambia la densita- del vuoto: scattering nel nodo o trasmissione |
 | `DOMANDA-CONDIZIONI-INIZIALI-IN-TABELLA` | DECISIONE | FISICA | 2 | ### **AGENDA** | SI | la tabella non ha un posto dove dichiarare le condizioni iniziali |
-| `DOMANDA-CORRENTE-LOCALE-NON-ESISTE` | MISURA | FISICA | ENTRAMBE | ### **APERTA** | SI | la corrente locale di E non esiste in forma chiusa, nemmeno per la parte lineare |
+| `DOMANDA-CORRENTE-LOCALE-NON-ESISTE` | MISURA | FISICA | ENTRAMBE | ### **APERTA** |  | la corrente locale di E ESISTE per la parte lineare, portata misurata 3 archi |
 | `DOMANDA-D13-CONIUGATI` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | D13: i coniugati delle memorie -- tw come fase U(1) sull-arco? |
 | `DOMANDA-D9-GEOMETRIA` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | D9: la geometria viene da d e p_d dentro H, o dalle relazioni fra gli psi? |
 | `DOMANDA-DOVE-STA-LA-C-IN-TABELLA` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | la C e decisa al punto F3 e nessuna legge della tabella la dichiara |

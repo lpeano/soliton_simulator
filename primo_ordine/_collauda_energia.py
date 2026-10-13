@@ -11,6 +11,13 @@ invece di togliere il braccio.
 **il caso sbagliato lo rompe** *(il verso invertito)*, e **solo dopo** si usa lo strumento
 sulla corrente vera. ### ⛔ **Senza i primi due, <<il bilancio non chiude>> direbbe solo
 che il mio bilancio e' rotto.**
+
+### ⭐ **ANNOTAZIONE DEL 2026-10-13:** il titolo qui sopra — *<<la CORRENTE NON si
+chiude>>* — ### **e' vero DELLA MIA CANDIDATA, e falso in generale.** Una corrente locale
+di ### **portata `3` archi ESISTE**, ed e' costruita in `primo_ordine/corrente.py` col suo
+collaudo `_collauda_corrente.py`. ### ⛔ **Il braccio `(4)` di questo file resta come
+sta: il fatto che misura e' VERO.** ### ⚠ **Cio' che era sbagliato era la CONCLUSIONE
+che ne avevo tratto**, e sta scritta nel titolo del commit `36182b7`.
 """
 import os
 import sys

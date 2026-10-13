@@ -137,6 +137,13 @@ COLLAUDI = (
     # ### poi che ### **il verso invertito lo rompe**, e solo dopo si usa sulla corrente
     # ### vera.
     ("`P3` l-energia e la corrente", "primo_ordine/_collauda_energia.py", "pre-commit"),
+    # ### ⭐ **LA CORRENTE LOCALE, COSTRUITA -- E CORREGGE LA CONCLUSIONE DI
+    # ### SOPRA.** Che la MIA CANDIDATA non chiuda resta vero; che ### **una corrente
+    # ### locale NON ESISTA era un salto sbagliato.** ### ⛔ **Esiste, ha portata
+    # ### MISURATA `3` archi, e i tre casi che devono fallire inchiodano che la
+    # ### chiusura viene dall-identita- `somma_k Q_k = 0` e non dal caso.**
+    ("la corrente locale costruita", "primo_ordine/_collauda_corrente.py",
+     "pre-commit"),
     # ### ⭐ **LO SCHEMA DELLA CAMMINATA, nei DUE VERSI** *(pezzo `2` del
     # ### simulatore)*: i tipi sulle estremita-, i pezzi unitari, i flussi, e
     # ### l-### **ordine di composizione con le ripetizioni AMMESSE.**

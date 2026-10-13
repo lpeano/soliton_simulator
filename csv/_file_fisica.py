@@ -145,6 +145,13 @@ FILE_FISICA = (
     # ### ### **correlazione fra DUE TEMPI** e non una carica trasportata.
     'primo_ordine/energia.py',
     'primo_ordine/_collauda_energia.py',
+    # ### LA CORRENTE LOCALE, COSTRUITA DALLA FORMA QUADRATICA.
+    # ### ⛔ **E CORREGGE LA CONCLUSIONE DI SOPRA:** da <<la mia candidata non
+    # ### funziona>> avevo inferito <<la corrente locale NON ESISTE>>, e il salto
+    # ### ### **non si fa.** Una corrente locale di portata finita ### **ESISTE**, e
+    # ### questo modulo ### **la COSTRUISCE: portata MISURATA 3 archi.**
+    'primo_ordine/corrente.py',
+    'primo_ordine/_collauda_corrente.py',
     # ### IL COSTRUTTO `@rif` *(punto `14`)*: ### **byte-inerte**, e il suo
     # ### collaudo lo verifica ### **con `is`.**
     'primo_ordine/_rif.py',

@@ -130,3 +130,44 @@ prova **sulla corrente VERA**, non su una costruita.
 2. `(b)` la **costruzione** e la continuita' **entro ulp**, con la **portata MISURATA**.
 3. `(c)` la **sorgente `O(dtau^2)`** con `N`, per nodo.
 4. `(d)` **annotazione**, **correzione della voce**, **ritiro della raccomandazione**.
+
+---
+
+## 7. ⭐ L'ESITO DI `(a)` E `(b)`, CONTRO LE PREVISIONI DEL PARAGRAFO `3`
+
+> ### ✅ **Le due previsioni scritte prima dei numeri sono CONFERMATE, e la terza cosa —
+> la PORTATA, che avevo dichiarato di non sapere — e' MISURATA.**
+
+| | la previsione, scritta PRIMA | il numero | |
+|---|---|---|---|
+| `a` | `somma_R Delta e` **invariante entro ulp** perturbando dentro `R` | **`2.665e-15`**, mentre `Delta e` **per nodo** cambia fino a **`6.183`** | ✅ |
+| `a` | il **controllo positivo** al bordo cambia di `O(1)` | **`7.144e-01`** | ✅ |
+| `b` | la continuita' **chiude entro ulp** | **`2.9`–`70.4` ulp** su `6` scene | ✅ |
+| `b` | la portata: *«mi aspetto `<= 4` archi, ma e' una stima e va MISURATA»* | ### ⭐ **`3` archi** | ✅ |
+
+### ⭐ **E <<PORTATA FINITA>> E' PROVATO DAL FATTO CHE NON CRESCE COL GRAFO**, che era il
+punto `3` di *«che cosa mi farebbe fermare»*: a grado `4`, i diametri `4`, `5` e `6` danno
+### **tutti `3`**, e il supporto massimo di una coppia resta **`8` nodi**.
+
+### ⚠ **E UN FATTO CHE NON AVEVO PREVISTO, trovato mentre scrivevo il collaudo:** sul toro
+`3x3` la portata vale **`2`**, non `3` — ### **perche' quel grafo ha diametro `2` e LA
+TAGLIA.** ### ⛔ **E avevo quasi scritto il braccio confrontando `3x3` con `4x4`:** avrebbe
+detto *«2 contro 3, cioe' CRESCE»*, ### **una conclusione sbagliata presa da un taglio.**
+### ✅ **Il braccio adesso PRETENDE che le due taglie siano sopra la saturazione**, invece
+di sperarlo.
+
+### ⛔ **E IL TERZO BRACCIO CHE DEVE FALLIRE E' QUELLO CHE PROVA L'ARGOMENTO:** con `Q`
+perturbato cosi' che `somma_k Q_k != 0`, l'instradamento ### **non chiude** *(residuo
+`3.742`)*. ### **Cosi' la chiusura e' attribuita all'identita', e non al caso** — che e'
+la differenza fra una prova e un numero piccolo.
+
+### 📌 **I numeri escono da `python primo_ordine/corrente.py --scrivi`** *(`6` scene,
+`3m10s`)*, il presidio e' `python primo_ordine/_collauda_corrente.py` *(`13` bracci,
+`47s`, nel `pre-commit`)*, e il referto e' `doc/REFERTO_corrente_locale.md`.
+
+### ⚠ **IL LIMITE, DICHIARATO:** estrarre `Q` costa `O(D^2)` valutazioni con `D = 8m`.
+### **Questa e' una costruzione PER LA PROVA, non per il percorso caldo** — cio' che
+stabilisce e' **l'ESISTENZA e la PORTATA**, non un algoritmo da far girare a ogni tick.
+
+### ⛔ **CHE COSA RESTA DEL PUNTO `1` DEL MANDATO:** `(c)` la **sorgente `O(dtau^2)`** con
+`N` acceso, per nodo. ### **`(a)`, `(b)` e `(d)` sono fatti.**

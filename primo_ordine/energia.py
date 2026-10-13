@@ -39,6 +39,23 @@ sua corrente e' **zero**; ma **cambia `e_h`**, perche' cambia `psi` e **non comm
 Grover ne' con lo spostamento. ### **Quindi `Delta E_k` da `N` non e' la somma dei flussi**,
 e questo modulo **lo MISURA invece di nasconderlo**: `residuo()` torna il numero.
 
+## ⭐ ANNOTAZIONE DEL 2026-10-13 — **DUE COSE QUI SOPRA SONO SBAGLIATE**
+
+### ⛔ **NON SI RISCRIVE, SI ANNOTA:** cio' che era scritto resta leggibile, e la
+correzione ### **si vede accanto.**
+
+| | che cosa dice il paragrafo qui sopra | la correzione |
+|---|---|---|
+| `1` | *<<la corrente di un arco e' cio' che lo spostamento porta>>* | ### ⛔ **quella candidata NON CHIUDE il bilancio**, ed e' misurato |
+| `2` | *<<LA CORRENTE: UNICA>>* | ### ⛔ **non e' unica, e la non unicita' NON E' UN DIFETTO:** e' la stessa liberta' della corrente d'energia nel continuo, definita **a meno di un rotore** |
+
+### ✅ **E UNA CORRENTE LOCALE ESISTE**, per la parte lineare: ### **portata MISURATA `3` archi**,
+costruita in **`primo_ordine/corrente.py`** dalla forma quadratica di `Delta e_k`.
+### ⚠ **Il referto e' `doc/REFERTO_corrente_locale.md`.**
+
+### ⛔ **E DA <<la mia candidata non funziona>> avevo inferito <<la corrente locale non
+esiste>>:** ### **il salto non si fa**, e questa annotazione esiste per ricordarlo.
+
 ### 📌 **La derivazione sta in `doc/TASK_HISTORY/2026-10-12_energia_corrente.md`**, e il
 limite va a Luca.
 """

@@ -126,6 +126,14 @@ moduli:
     responsabilita: il collaudo di E e del bilancio, e il fallimento affermato come fatto
     importa: [_presidio, energia, incidenza, motore, stato]
 
+  - nome: corrente.py
+    responsabilita: la corrente locale di E, costruita dalla forma quadratica, e la portata
+    importa: [_presidio, energia, incidenza, motore, stato]
+
+  - nome: _collauda_corrente.py
+    responsabilita: il collaudo della corrente locale, e i tre casi che devono fallire
+    importa: [_presidio, corrente]
+
   - nome: crescita.py
     responsabilita: la crescita del grafo, regola NON-H col suo bilancio
     importa: []

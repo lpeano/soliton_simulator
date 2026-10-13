@@ -191,3 +191,52 @@ COMPOSIZIONE INTERA**, non della somma di due pezzi conservati.
 — ### **la firma dell'esponente `2`, cioe' dello splitting di Strang.** ### ⚠ **E
 ai passi grandi il rapporto e' erratico** *(`0.39`, `2.48`)*: ### **fuori dal regime
 asintotico**, e va detto invece di citare solo il numero buono.
+
+---
+
+## 9. ⭐ ANNOTAZIONE DEL 2026-10-13 — **LA CONCLUSIONE DI QUESTO PEZZO ERA TROPPO LARGA**
+
+> **Mandato di Luca, 2026-10-13, punto `1`:** *«Cio' che hai dimostrato e' piu' stretto:
+> **NON FUNZIONA LA TUA CANDIDATA**. L'esistenza di una corrente LOCALE e' un'altra cosa,
+> ed e' **VERA** per la parte lineare.»*
+
+### ⛔ **NON RISCRIVO NIENTE DI SOPRA:** il paragrafo `8` di `CLAUDE.md` dice che un
+ragionamento rivelato sbagliato ### **si ANNOTA, non si riscrive** — e il motivo e' che
+### **la riscrittura cancella la prova di come ci sono arrivato.**
+
+| | che cosa avevo misurato *(e resta VERO)* | che cosa avevo concluso |
+|---|---|---|
+| ✅ | la candidata da' residuo **`1.342e+01`** su scala `4.93`, peggio che senza corrente | — |
+| ✅ | `e_h` e' una **correlazione fra due tempi**, e cambia su `16` nodi su `16` | — |
+| ### ⛔ **FALSO** | — | *«la corrente locale non esiste nemmeno per la parte lineare»* |
+| ### ⛔ **FALSO** | — | *«la corrente e' UNICA, e l'unicita' viene da un campo della tabella»* |
+
+### ⚠ **E IL SECONDO FATTO NON IMPLICA LA TERZA RIGA:** che `e_h` sia una correlazione fra
+due tempi e' vero, ma ### **non impedisce la localita'.**
+
+### ⛔ **E LA NON UNICITA' NON E' UN DIFETTO**, e qui avevo sbagliato una seconda volta,
+nel verso opposto: prima avevo **rivendicato** l'unicita' *(`af8db57`)*, poi l'avevo
+trattata come **un ostacolo**. ### ✅ **E' la stessa liberta' della corrente d'energia nel
+continuo, definita a meno di un rotore:** una corrente e' fisicamente locale se e'
+**funzione LOCALE dello stato** e **chiude la continuita'**. ### **L'unicita' non serve.**
+
+### ⭐ **CHE COSA C'E' ADESSO, misurato** *(`doc/REFERTO_corrente_locale.md`)*:
+
+| | il fatto | il numero |
+|---|---|---|
+| `a` | la variazione d'energia di una regione e' **un termine di bordo** | perturbando **dentro** `R` a distanza `>= 2`: `somma_R Delta e` cambia di **`2.665e-15`**, mentre `Delta e` **per nodo** cambia fino a **`6.183`** |
+| `a-bis` | il **controllo positivo** | perturbando **al bordo**: **`7.144e-01`**, cioe' `O(1)` |
+| `b` | una corrente locale **esiste, ed e' costruita** | la continuita' chiude a **`2.9`–`70.4` ulp** su `6` scene |
+| `b-bis` | la **portata**, MISURATA | **`3` archi**, e **non cresce col grafo**: a grado `4` i diametri `4`, `5`, `6` danno **tutti `3`** |
+
+### ⚠ **E LA MIA PREVISIONE SULLA PORTATA ERA `<= 4`:** il numero vero e' **`3`**.
+### **La previsione era una stima, e l'ho scritta come tale** — questo e' il caso in cui
+l'avere dichiarato *«non la so»* ha fatto la differenza fra una stima e una pretesa.
+
+### ⛔ **E RITIRO LA RACCOMANDAZIONE** che avevo scritto in questo file: *«cambiare la
+grandezza promossa a una densita' funzione dello stato a un tempo»*. ### **Non era
+motivata**, e il mandato me la fa ritirare. ### ✅ **La ritiro.**
+
+### 📌 **La costruzione, il collaudo e il referto:** `primo_ordine/corrente.py`,
+`primo_ordine/_collauda_corrente.py`, `doc/REFERTO_corrente_locale.md`; e il ragionamento
+preliminare sta in `doc/TASK_HISTORY/2026-10-13_corrente_locale_esiste.md`.

@@ -14562,3 +14562,78 @@ Ogni dato di `db_era2/` ha ### **il suo TIMBRO accanto**, col campo `versione_da
 ### ⭐ **E DUE BRACCI NUOVI LO PRETENDONO, e guardano L'USCITA VERA e non la mia parola:** si **gira il processo** con `stop_hook_active` vero e **si legge il `JSON`** -- `continue` deve essere `true` e `hookSpecificOutput` **non deve esserci**; e `stderr` **non deve essere vuoto**, perche' il motivo deve restare leggibile. ### **`13` su `13`.**
 
 ### ⛔ **E LA LEZIONE VALE OLTRE QUESTO PRESIDIO: un presidio che parla quando non ha niente da impedire non e' informativo, e' RUMORE CHE SI AUTOALIMENTA.**
+
+## 2026-10-13 — LA CORRENTE LOCALE **ESISTE**, ed e' COSTRUITA: portata **`3` archi**
+
+### ⛔ **HO CORRETTO UNA MIA CONCLUSIONE, e la correzione non e' mia:** viene dalla
+verifica esterna. In `36182b7` avevo scritto *«la corrente locale non esiste nemmeno per la
+parte lineare»*. ### **Cio' che avevo dimostrato era piu' stretto: NON FUNZIONA LA MIA
+CANDIDATA.** ### ⚠ **Ho inferito <<non esiste>> da <<la mia costruzione non funziona>>, e
+il salto non si fa.**
+
+### ⭐ **L'ARGOMENTO CHE DIMOSTRA L'ESISTENZA:** `Delta e_k` e' una **forma quadratica
+reale** in `x = (Re psi, Im psi)` con supporto in un intorno di `k`, e `somma_k Delta e_k`
+e' **identicamente zero**. ### **Quindi per ogni regione `R`, `somma_R Delta e` dipende
+SOLO da `psi` vicino al BORDO di `R`:** la variazione d'energia di una regione e' **un
+termine di bordo**, e una corrente locale di portata finita **esiste**.
+
+### ✅ **`(a)` IL TERMINE DI BORDO, SUL MIO SIMULATORE** *(anello di `40` nodi, `R` = i nodi
+`0..19`)*:
+
+| la perturbazione | `somma_R Delta e` cambia di | il verdetto |
+|---|---|---|
+| **dentro `R`**, a distanza `>= 2` dal bordo | **`2.665e-15`** | ✅ invariante entro ulp |
+| **al bordo** *(controllo positivo)* | **`7.144e-01`** | ⭐ `O(1)`: la perturbazione **arriva** |
+
+### ⚠ **E `Delta e` NODO PER NODO CAMBIA FINO A `6.183`:** non e' che la perturbazione non
+faccia niente — ### **cambia tutto tranne la somma sulla regione.**
+
+### ✅ **`(b)` LA COSTRUZIONE, E LA PORTATA MISURATA.** Si estrae la matrice `Q_k` della
+forma quadratica valutandola sulla base *(esatto, perche' e' quadratica)*; `somma_k Q_k = 0`
+vale **coefficiente per coefficiente** *(verificato: `<= 3.9e-16`)*; e per ogni coppia
+`(i, j)` i numeri a somma zero **si instradano** da un riferimento lungo cammini piu' corti.
+### **La continuita' chiude PER COSTRUZIONE, e si misura:**
+
+| scena | grado | diametro | **PORTATA** | supporto | continuita' | verso invertito |
+|---|--:|--:|--:|--:|--:|--:|
+| `anello-10` | 2 | 5 | **`1`** | 2 | `2.9` ulp | `1.71e+01` |
+| `toro2d-3x3` | 4 | 2 | **`2`** | 7 | `35.3` ulp | `1.89e+01` |
+| `toro2d-4x4` | 4 | 4 | **`3`** | 8 | `25.2` ulp | `1.86e+01` |
+| `toro2d-4x6` | 4 | 5 | **`3`** | 8 | `26.4` ulp | `2.81e+01` |
+| `toro2d-6x6` | 4 | 6 | **`3`** | 8 | `16.9` ulp | `2.53e+01` |
+| `toro3d-3x3x3` | 6 | 3 | **`3`** | 11 | `70.4` ulp | `2.36e+01` |
+
+### ⭐ **LA PORTATA E' `3` ARCHI E NON CRESCE COL GRAFO:** a grado `4`, i diametri `4`, `5`
+e `6` danno **tutti `3`**, e il supporto massimo resta **`8` nodi**. ### **E' questo che fa
+<<portata FINITA>> invece di <<portata = diametro>>.**
+
+### ⚠ **UN FATTO CHE NON AVEVO PREVISTO:** sul toro `3x3` la portata vale `2`, ### **perche'
+quel grafo ha diametro `2` e LA TAGLIA** — non perche' la portata sia `2`. ### ⛔ **E avevo
+quasi scritto il braccio confrontando `3x3` con `4x4`:** avrebbe detto *«2 contro 3, cioe'
+CRESCE»*, ### **una conclusione sbagliata presa da un taglio.**
+
+### ✅ **LA NON UNICITA' NON E' UN DIFETTO**, e qui avevo sbagliato due volte in versi
+opposti: in `af8db57` avevo **rivendicato** l'unicita', in `36182b7` l'avevo trattata come
+**un ostacolo**. ### **E' la stessa liberta' della corrente d'energia nel continuo,
+definita a meno di un rotore:** una corrente e' fisicamente locale se e' **funzione LOCALE
+dello stato** e **chiude la continuita'**. ### **L'unicita' non serve**, e la scelta del
+riferimento e dei cammini **e' quella liberta' di ricircolo.**
+
+### ⛔ **E RITIRO LA RACCOMANDAZIONE** di cambiare la grandezza promossa: ### **non era
+motivata.**
+
+### ⭐ **I TRE CASI CHE DEVONO FALLIRE, e il terzo e' quello che prova l'argomento:** un
+arco col **verso invertito** rompe *(`1.891e+01`)*; una carica **non instradata** rompe
+*(`7.200e+00`)*; e `Q` **perturbato** cosi' che `somma_k Q_k != 0` ### **non chiude**
+*(`3.742`)*. ### **Cosi' la chiusura e' attribuita all'identita', e non al caso.**
+
+### ⚠ **IL LIMITE, DICHIARATO:** estrarre `Q` costa `O(D^2)` valutazioni con `D = 8m`.
+### **E' una costruzione PER LA PROVA, non per il percorso caldo.**
+
+### 📌 **I pezzi:** `primo_ordine/corrente.py` *(la misura, `--scrivi` fa il referto)*,
+`primo_ordine/_collauda_corrente.py` *(`13` bracci, `47s`, nel `pre-commit`)*,
+`doc/REFERTO_corrente_locale.md`, e le annotazioni in `primo_ordine/energia.py`,
+`primo_ordine/_collauda_energia.py` e `doc/TASK_HISTORY/2026-10-12_energia_corrente.md`.
+
+### ⛔ **CHE COSA RESTA DEL PUNTO `1`:** `(c)` la **sorgente `O(dtau^2)`** con `N` acceso,
+per nodo.
