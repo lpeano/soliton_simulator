@@ -63,3 +63,44 @@ def scrivi_referto(dati):
     dati_b = (nl.join(r) + nl).encode("utf-8")
     io.open(DOVE, "wb").write(dati_b)
     return DOVE
+
+
+def blocco_su2(sx2):
+    """### Il blocco del referto per la scansione in `SU(2)`.
+
+    ### ⛔ **Sta QUI e non nella misura:** `primo_ordine/deriva.py` ha ripassato il
+    tetto di `700` righe quando questo blocco e' nato, e la regola e' ### **oltre SI
+    DIVIDE.** ### ⚠ **E la riga di taglio e' la stessa di sempre: la- la MISURA, qui
+    COME SI RACCONTA.**
+    """
+    b = ["## 8. **LA STESSA SCANSIONE, MA CON `U` IN `SU(2)`**", "",
+         "### ⛔ **PERCHE' SI RIFA':** la misura delle bande"
+         " *(`doc/REFERTO_bande.md`)* ha trovato",
+         "che la `C` chiede **`det U = 1`**, e la scansione qui sopra e' fatta con `U(2)`",
+         "generico. ### ⚠ **Non credevo che la conclusione cambiasse** -- la causa e'"
+         " il termine",
+         "del vuoto, che dipende da `h_k` -- ### **ma non l'avevo misurato.**", "",
+         "| `|phi|` | `x` max | esc. **primo** | esc. **vuoto** | esc. **SOMMA** |"
+         " esc./scala naturale: **SOMMA** |",
+         "|--:|--:|--:|--:|--:|--:|"]
+    for r2 in sx2:
+        print("      |phi|=%-6.2f x_max=%-10.4g  esc: lin %-10.3e vuoto %-10.3e"
+              " SOMMA %-10.3e   esc/scala SOMMA %.2e"
+              % (r2["modulo"], r2["x_max"], r2["esc_primo"], r2["esc_vuoto"],
+                 r2["esc_somma"], r2["relnat_somma"]))
+        b.append("| `%.2f` | `%.4g` | `%.3e` | `%.3e` | **`%.3e`** | **`%.2e`** |" %
+                 (r2["modulo"], r2["x_max"], r2["esc_primo"], r2["esc_vuoto"],
+                  r2["esc_somma"], r2["relnat_somma"]))
+    v2 = min(sx2, key=lambda z: abs(np.log10(max(z["x_max"], 1e-300))))
+    pg2 = max(v2["esc_primo"], v2["esc_vuoto"])
+    f2 = v2["esc_somma"] >= pg2
+    print("      STOP in SU(2): x piu' vicino a 1 = %.4g; esc. SOMMA = %.3e contro %.3e"
+          "  ->  %s" % (v2["x_max"], v2["esc_somma"], pg2,
+                        "FERMA (come con U(2))" if f2 else "NON ferma"))
+    b.append("")
+    b.append("### %s **LA CONDIZIONE DI STOP, in `SU(2)`**, sul punto con `x` piu' vicino"
+             " a `1` *(`x = %.4g`)*: escursione della **SOMMA** `%.3e` contro `%.3e` del"
+             " maggiore dei termini — ### **%s**" %
+             ("⛔" if f2 else "✅", v2["x_max"], v2["esc_somma"], pg2,
+              "SCATTA ANCHE QUI" if f2 else "non scatta"))
+    return b

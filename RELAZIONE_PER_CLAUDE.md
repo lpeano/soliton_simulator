@@ -14829,3 +14829,28 @@ DECISIONE DI LUCA** — due domande `CRITICA` — **non su lavoro mio incompiuto
 
 ### ⚠ **E IL DOCUMENTO DICE ANCHE CHE COSA NON HO MISURATO**, perche' un elenco di cio'
 che e' fatto senza il suo perimetro ### **si legge come se fosse tutto.**
+
+## 2026-10-13 — **LA DERIVA RIFATTA IN `SU(2)`: la conclusione NON cambia**, e ora e' misurato
+
+### ⛔ **ERA UN DUBBIO CHE AVEVO SEGNALATO IO:** la misura della deriva *(`db328b9`)* e'
+fatta con `U(2)` generico, e la misura delle bande *(`efc113b`)* ha trovato che
+### **quello ROMPE la `C`.** Avevo scritto *«non credo che la conclusione cambi, ma non
+l'ho misurato e quindi non lo affermo»*. ### ✅ **Adesso l'ho misurato.**
+
+| `x` max | esc. **somma**, `SU(2)` | il **maggiore dei termini** | esc./scala naturale |
+|--:|--:|--:|--:|
+| `0.0152` | `1.558e-02` | `1.126e-02` | `1.20e-06` |
+| `0.242` | `3.029e+00` | `1.967e+00` | `3.14e-03` |
+| **`0.970`** | **`1.975e+01`** | **`1.661e+01`** | **`5.47e-02`** |
+| `3.88` | `6.182e+01` | `4.244e+01` | `2.93e-01` |
+| `15.52` | `5.608e+01` | `5.058e+01` | `3.24e-01` |
+
+### ⛔ **LA CONDIZIONE DI STOP SCATTA ANCHE IN `SU(2)`**, e con gli stessi ordini di
+grandezza: a `x = 0.97` l'escursione della **somma** e' maggiore di quella del termine
+piu' grande, e la relativa passa da `1.20e-06` a `3.24e-01`. ### ✅ **Quindi
+`[[DOMANDA-E-NON-SI-CONSERVA-A-X-UNO]]` NON dipende dal determinante del trasporto**, e
+il dubbio e' chiuso invece di restare dichiarato.
+
+### ⚠ **E `P-MOD` mi ha fatto dividere di nuovo:** `deriva.py` era tornato a `714` righe,
+e il blocco del referto e' andato in `deriva_referto.py` — ### **la' la MISURA, qui COME
+SI RACCONTA**, che e' la stessa riga di taglio di prima.

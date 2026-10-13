@@ -233,7 +233,7 @@ def escursioni(serie):
     return tuple(float(serie[:, c].max() - serie[:, c].min()) for c in (1, 2, 3))
 
 
-def scansione(moduli, nn=16, dtau=0.25, ticks=400, seme=7):
+def scansione(moduli, nn=16, dtau=0.25, ticks=400, seme=7, su2=False):
     """### **LA SCANSIONE IN `x = |h_k|/Lambda_k`**, dal regime vacuo a quello che LAVORA.
 
     > **Mandato della verifica esterna, 2026-10-13:** *«Un `M0` nel regime `x ~ 1e-3` e'
@@ -251,9 +251,9 @@ def scansione(moduli, nn=16, dtau=0.25, ticks=400, seme=7):
     for f in moduli:
         serie, _i, mot, st, _p, _s = corri(nn, dtau, ticks, seme=seme,
                                            ogni=max(1, ticks // 100),
-                                           vuoto_modulo=f)
+                                           vuoto_modulo=f, su2=su2)
         # ### `x` si rimisura SULLO STATO INIZIALE, ricostruito: la corsa l-ha cambiato
-        _i2, mot2, st2, _p2 = scena(nn, seme, dtau, 0, "locale", f)
+        _i2, mot2, st2, _p2 = scena(nn, seme, dtau, 0, "locale", f, su2)
         h = mot2.elicita(st2)
         lam = mot2.densita_vuoto(st2)
         buoni = lam > 0.0
@@ -586,9 +586,20 @@ def main(argv):
              "FERMA (va a Luca)" if ferma else "non ferma"))
     blocchi.append(b)
 
+    # ------------------------------------- LA STESSA SCANSIONE, MA IN SU(2)
+    # ### ⛔ **PERCHE- SI RIFA-: la misura delle BANDE ha trovato che la `C` chiede
+    # ### `det U = 1`**, e la scansione qui sopra e- fatta con `U(2)` generico.
+    # ### ⚠ **Non credevo che la conclusione cambiasse -- la causa e- il termine del
+    # ### vuoto, che dipende da `h_k` -- ma ### NON L-AVEVO MISURATO**, e un numero su cui
+    # ### si e- fermato un pezzo ### **non si lascia con un dubbio dichiarato.**
+    print("  LA STESSA SCANSIONE IN SU(2), perche' la C chiede det U = 1")
+    sx2 = scansione((16.0, 4.0, 2.0, 1.0, 0.5), su2=True)
+    b = RF.blocco_su2(sx2)
+    blocchi.append(b)
+
     # ---------------------------------------------------------------- (c)
     print("  (c)  LA SORGENTE PER NODO, con N acceso -- e DECOMPOSTA")
-    b = ["## 8. `(c)` \u2014 **LA SORGENTE PER NODO**, con `N` acceso", "",
+    b = ["## 9. `(c)` \u2014 **LA SORGENTE PER NODO**, con `N` acceso", "",
          "`s_k = Delta E_k - (div J)_k`, con `J` la corrente locale **costruita** per il"
          " pezzo",
          "lineare, valutata sullo stato che **entra** nel pezzo lineare *(dopo il primo"

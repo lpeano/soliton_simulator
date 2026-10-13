@@ -138,7 +138,24 @@ porta `x` verso `1`, cioe' ACCENDE la saturazione.**
 | la **maggiore** dei due termini | `1.551e+01` |
 | ### ⛔ **il verdetto** | ### **LA SOMMA NON SI CONSERVA: VA A LUCA** |
 
-## 8. `(c)` — **LA SORGENTE PER NODO**, con `N` acceso
+## 8. **LA STESSA SCANSIONE, MA CON `U` IN `SU(2)`**
+
+### ⛔ **PERCHE' SI RIFA':** la misura delle bande *(`doc/REFERTO_bande.md`)* ha trovato
+che la `C` chiede **`det U = 1`**, e la scansione qui sopra e' fatta con `U(2)`
+generico. ### ⚠ **Non credevo che la conclusione cambiasse** -- la causa e' il termine
+del vuoto, che dipende da `h_k` -- ### **ma non l'avevo misurato.**
+
+| `|phi|` | `x` max | esc. **primo** | esc. **vuoto** | esc. **SOMMA** | esc./scala naturale: **SOMMA** |
+|--:|--:|--:|--:|--:|--:|
+| `16.00` | `0.01516` | `1.126e-02` | `6.078e-03` | **`1.558e-02`** | **`1.20e-06`** |
+| `4.00` | `0.2425` | `1.967e+00` | `1.507e+00` | **`3.029e+00`** | **`3.14e-03`** |
+| `2.00` | `0.97` | `1.661e+01` | `1.120e+01` | **`1.975e+01`** | **`5.47e-02`** |
+| `1.00` | `3.88` | `4.244e+01` | `3.760e+01` | **`6.182e+01`** | **`2.93e-01`** |
+| `0.50` | `15.52` | `2.253e+01` | `5.058e+01` | **`5.608e+01`** | **`3.24e-01`** |
+
+### ⛔ **LA CONDIZIONE DI STOP, in `SU(2)`**, sul punto con `x` piu' vicino a `1` *(`x = 0.97`)*: escursione della **SOMMA** `1.975e+01` contro `1.661e+01` del maggiore dei termini — ### **SCATTA ANCHE QUI**
+
+## 9. `(c)` — **LA SORGENTE PER NODO**, con `N` acceso
 
 `s_k = Delta E_k - (div J)_k`, con `J` la corrente locale **costruita** per il pezzo
 lineare, valutata sullo stato che **entra** nel pezzo lineare *(dopo il primo mezzo
