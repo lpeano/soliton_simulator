@@ -144,6 +144,12 @@ COLLAUDI = (
     # ### chiusura viene dall-identita- `somma_k Q_k = 0` e non dal caso.**
     ("la corrente locale costruita", "primo_ordine/_collauda_corrente.py",
      "pre-commit"),
+    # ### ⛔ **LA DERIVA DI `E`, e il braccio PIU- IMPORTANTE e- la MATERIA:**
+    # ### col `psi` normalizzato su tutto il grafo la saturazione e- ### **spenta**, e
+    # ### una conservazione misurata la- ### **non distingue <<`E` si conserva>> da
+    # ### <<il termine non c-e->>.** ### **E- un falso-zero che ho fatto io.**
+    ("la deriva di `E` e la sorgente", "primo_ordine/_collauda_deriva.py",
+     "pre-commit"),
     # ### ⭐ **LO SCHEMA DELLA CAMMINATA, nei DUE VERSI** *(pezzo `2` del
     # ### simulatore)*: i tipi sulle estremita-, i pezzi unitari, i flussi, e
     # ### l-### **ordine di composizione con le ripetizioni AMMESSE.**

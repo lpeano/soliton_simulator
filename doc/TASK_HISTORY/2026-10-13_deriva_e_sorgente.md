@@ -152,3 +152,99 @@ distinguerebbe niente**: prima si stabilisce il caso semplice.
 4. `D-ENERGIA:M1a` *(run lungo)*, `D-ENERGIA:M1b` *(tre taglie)*, `D-ENERGIA:M1c` *(lunghezza d'onda)*.
 5. `(c)` la **sorgente per nodo**, dichiarata.
 6. il collaudo, con **un caso che deve fallire**.
+
+---
+
+## 5. ⭐ L'ESITO, CONTRO LE PREVISIONI — *e DUE RITIRI, uno chiesto e uno mio*
+
+### ✅ **PRIMO RITIRO, CHIESTO DALLA VERIFICA ESTERNA** *(2026-10-13)*: *«La tua obiezione
+al punto `2` del mandato e' giusta, e la verifica esterna la accetta. [...] L'argomento
+dell'energia modificata `E~ = E + dtau^2 E2 + ...` **NON si applica**. Ritira dal task
+history le previsioni basate su quella premessa.»*
+
+### ⛔ **RITIRATE, e sono DUE:** *(a)* che l'errore su `E` **oscilli con ampiezza
+`O(dtau^2)` senza deriva secolare**; *(b)* che l'errore **cada sui modi lunghi come
+`(dtau omega)^2`**. ### **Nessuna delle due ha piu' una base: il tick non e' un
+integratore di un flusso.** ### ✅ **Restano in piedi LE MIE, scritte in `7141812`.**
+
+### ⚠ **E `L-NUMERI-DERIVA-ORFANA` VALE PER ENTRAMBI**, e la verifica esterna lo dice da
+se': *«Anche il "4.20" era riportato dalla verifica esterna come "tua misura" senza
+controllarne la provenienza»*. ### **Il difetto e' MIO nell'averlo scritto senza script, e
+la catena si e' chiusa perche' NESSUNO DEI DUE ha chiesto da dove venisse.**
+
+### ⭐ **LE MIE PREVISIONI, UNA PER UNA** *(i numeri in `doc/REFERTO_deriva_energia.md`)*:
+
+| | la previsione | il numero | |
+|---|---|---|---|
+| `D-ENERGIA:M0` | `O(1)`, rapporti **verso `1` e non `4`** | i rapporti sono **`0.25`, `1.50`, `5.37`, `0.81`**: erratici, e ### **non `4`** | ✅ |
+| `D-ENERGIA:M0-bis` | il primo termine a **ulp** | ### ✅ **`36` ulp sotto il SOLO pezzo lineare**; ### ⛔ **ma `8.845e-02` sotto `N`** | ⚠ |
+| `D-ENERGIA:M0-ter` | il vuoto `O(1)`, **non scende** | confermato, ed e' **il termine dove sta la deriva** | ✅ |
+| `D-ENERGIA:M1a` | **SECOLARE**, non oscillante | ### ⛔ **SBAGLIATA: rapporto `0.004`**, cioe' **nessuna tendenza secolare** -- ma l'ampiezza e' **`76`** su un `E(0) = 5.86` | ⛔ |
+| `D-ENERGIA:M1b` | l'errore **per nodo costante** | **`3.29`, `2.90`, `2.47`** su un fattore `4` di taglia | ✅ |
+| `D-ENERGIA:M1c` | cade sui modi lunghi, **non** come `(dtau omega)^2` | ### ⛔ **non cade in modo monotono**: a `x` fisso il minimo e' al **periodo `4`** *(`4.91`)*, e il periodo `32` sta a `10.2` | ⛔ |
+| `(c)` | la sorgente **`O(1)` e non `O(dtau^2)`** | rapporti **`1.001`, `0.984`, `0.993`** *(`O(dtau^2)` darebbe `4`)*; e `s_k` vale **circa la META'** di `Delta E_k` | ✅ |
+
+### ⚠ **SU `M0-bis` SONO ONESTO: la mia previsione era AMBIGUA**, e me ne accorgo adesso.
+Avevo scritto *«il flusso non tocca `W`, e `W` conserva il suo valore d'attesa»*: e' vero
+che `W` non cambia, ### **ma `N` cambia `psi`, e quindi cambia `Re<psi|W psi>`.** ### **La
+previsione vale per il pezzo lineare DA SOLO**, e sul tick intero ### **non vale.** ### ⛔
+**Non la conto come confermata.**
+
+---
+
+## 6. ⛔ TRE DIFETTI DELLA MIA MISURA, trovati MISURANDO — *e due li ho trovati prima del mandato*
+
+| | il difetto | come si vedeva | la cura |
+|---|---|---|---|
+| `1` | ### ⛔ **IL REGIME ERA VACUO:** col `psi` normalizzato su tutto il grafo `x = \|h\|/Lambda ~ 1/(2m)`, e `G(x) = x - arctan x` va come `x^3/3` | il termine del vuoto valeva **`1.6e-05`** e `max\|h/Lambda\| = 0.033` | il regime **`locale`**, dove `x` e' di ordine `1`; e la **scansione in `x`** che il mandato chiede |
+| `2` | ### ⛔ **MISURAVO `fine - inizio` INVECE DELL'ESCURSIONE** | `E` oscilla di **`76`** su una scala di `6`: ### **`fine - inizio` era un CAMPIONE A CASO** di quell'oscillazione | `escursioni()`, cioe' `max - min`; ed e' cio' che la verifica esterna ha misurato sul banco |
+| `3` | ### ⛔ **LA DECOMPOSIZIONE DI `(c)` ERA VACUA** | le due righe *(col vuoto che cammina e senza)* coincidevano **a TUTTE le cifre** | **provato** invece di dedotto: con `\|phi\|` uniforme `Lambda_k` e' invariante a **`4.4e-16`**, e il controllo positivo *(`\|phi\|` non uniforme)* cambia di **`2.16`** |
+
+### ⭐ **E IL DIFETTO `1` L'HO TROVATO MISURANDO, un'ora prima che il mandato arrivasse:**
+la prima corsa dava tutto a `1e-5` e ### **i rapporti erratici** -- ed era la mia stessa
+condizione di stop numero `2`, scritta in `7141812`: *«che il termine del vuoto non sia
+PICCOLO sulla scena che userei: piccolo non e' zero, ma su una finestra corta si confonde
+con zero»*. ### ✅ **La condizione di stop ha funzionato**, ed e' il motivo per cui si
+scrivono prima.
+
+### ⚠ **E IL DIFETTO `2` SPIEGA PERCHE' `M1b` SEMBRAVA FALSA:** con `fine - inizio` dava
+`0.19`, `0.55`, `0.005` per nodo *(erratico)*; con l'escursione da' **`3.29`, `2.90`,
+`2.47`**. ### ⛔ **La previsione era giusta e la MISURA era sbagliata**, e senza accorgermene
+avrei scritto che l'estensivita' non vale.
+
+---
+
+## 7. ⛔ LA CONDIZIONE DI STOP DEL MANDATO E' SCATTATA — **`[[DOMANDA-E-NON-SI-CONSERVA-A-X-UNO]]`**
+
+> **Il mandato:** *«Se nel regime `x ~ 1` la somma non si conserva (escursione della somma
+> `>=` quella dei termini), **FERMATI e porta il risultato a Luca**: e' la base della
+> promozione, e la grandezza promossa non la cambi tu (lo hai scritto tu stesso).»*
+
+### ⛔ **SCATTA, e non di poco:** a `x = 0.970` l'escursione della **somma** e' `2.084e+01`
+contro `1.551e+01` del primo termine e `1.120e+01` del vuoto. ### **E scatta in OGNI punto
+della scansione:** i due termini **non si compensano, si sommano.**
+
+| `x` max | escursione della somma / **scala naturale** |
+|--:|--:|
+| `0.0152` | `1.26e-06` |
+| `0.242` | `3.34e-03` |
+| **`0.970`** | **`5.77e-02`** |
+| `3.88` | `2.77e-01` |
+| `62.1` | `4.40e-01` |
+
+### ⭐ **SEI ORDINI DI GRANDEZZA, in modo monotono:** nel regime vacuo `E` sembra
+conservata; ### **nel regime in cui la saturazione lavora oscilla del `5.8%` della sua
+scala in `400` tick**, e a `x ~ 4` del `28%`.
+
+### ⛔ **MI FERMO SU QUESTO PEZZO E LO PORTO A LUCA**, come il mandato dice. ### ⚠ **E NON
+raccomando di cambiare la grandezza promossa:** l'ho raccomandato il `2026-10-12` su una
+base sbagliata e ### **l'ho ritirato stamattina** -- non rifaccio lo stesso passo su una
+base diversa. ### ✅ **Raccomando di DICHIARARE la violazione coi numeri** *(`A14` lo
+chiede)* **e di tenere la domanda aperta finche' le misure delle BANDE hanno girato**: quel
+mandato cerca proprio **una combinazione che torni sul tick intero**, quindi ### **puo'
+rispondere a questa domanda invece di lasciarla a un giudizio.**
+
+### ⚠ **E CHE COSA NON SO, e lo dico:** se il regime `x ~ 1` sia **FISICO**. Ci arrivo
+indebolendo il vuoto a `|phi| = 2` con `psi` di ampiezza di ordine `1` per estremita', e il
+banco congelato sta a `x ~ 1e-3`. ### ⛔ **Quale dei due sia il regime in cui il simulatore
+deve lavorare E' UNA DECISIONE DI FISICA, non una mia scelta di misura.**

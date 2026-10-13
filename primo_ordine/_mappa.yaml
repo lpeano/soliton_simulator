@@ -134,6 +134,18 @@ moduli:
     responsabilita: il collaudo della corrente locale, e i tre casi che devono fallire
     importa: [_presidio, corrente]
 
+  - nome: deriva.py
+    responsabilita: la deriva di E e dei suoi due termini, la scansione in x, e la sorgente
+    importa: [_presidio, composizione, corrente, deriva_referto, energia, incidenza, motore, saturazione, stato]
+
+  - nome: deriva_referto.py
+    responsabilita: il referto della deriva, e la configurazione INTERA che dichiara
+    importa: []
+
+  - nome: _collauda_deriva.py
+    responsabilita: il collaudo della deriva, e presidia il FALSO-ZERO della saturazione spenta
+    importa: [_presidio, composizione, deriva, energia]
+
   - nome: crescita.py
     responsabilita: la crescita del grafo, regola NON-H col suo bilancio
     importa: []

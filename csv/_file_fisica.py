@@ -152,6 +152,14 @@ FILE_FISICA = (
     # ### questo modulo ### **la COSTRUISCE: portata MISURATA 3 archi.**
     'primo_ordine/corrente.py',
     'primo_ordine/_collauda_corrente.py',
+    # ### LA DERIVA DI `E`, e il numero vecchio era ORFANO.
+    # ### ⛔ **E IL SUO COLLAUDO PRESIDIA UN FALSO-ZERO CHE HO FATTO IO:** col
+    # ### `psi` normalizzato su tutto il grafo `x = |h|/Lambda ~ 1/(2m)`, e allora
+    # ### ### **la saturazione e- SPENTA** -- una <<conservazione>> misurata la- non
+    # ### distingue ### **<<`E` si conserva>> da <<il termine non c-e->>.**
+    'primo_ordine/deriva.py',
+    'primo_ordine/deriva_referto.py',
+    'primo_ordine/_collauda_deriva.py',
     # ### IL COSTRUTTO `@rif` *(punto `14`)*: ### **byte-inerte**, e il suo
     # ### collaudo lo verifica ### **con `is`.**
     'primo_ordine/_rif.py',

@@ -14682,3 +14682,65 @@ codice.
 UNA CURA:** `D-ENERGIA` e' una decisione di Luca, e ### **la grandezza promossa non la
 cambio io** — l'ho gia' sbagliato una volta, e la raccomandazione **l'ho ritirata**
 stamattina.
+
+## 2026-10-13 — **`E` NON SI CONSERVA** nel regime in cui la saturazione lavora: la condizione di stop del mandato e' SCATTATA
+
+### ⛔ **LA MISURA, e va a Luca** *(`[[DOMANDA-E-NON-SI-CONSERVA-A-X-UNO]]`)*. Scansione in
+`x = |h_k|/Lambda_k` su un anello di `16` nodi, `400` tick, `dtau = 0.25`, `x` mosso col
+**modulo del vuoto** *(`Lambda_k = somma |phi_h|^2`, quindi `x ~ 1/|phi|^2`)*:
+
+| `x` max | escursione di `E` / **scala naturale** | escursione **somma** vs i **termini** |
+|--:|--:|---|
+| `0.0152` | `1.26e-06` | `1.64e-02` contro `1.18e-02` |
+| `0.242` | `3.34e-03` | `3.22e+00` contro `2.17e+00` |
+| **`0.970`** | **`5.77e-02`** | **`2.08e+01` contro `1.55e+01`** |
+| `3.88` | `2.77e-01` | `5.84e+01` contro `3.80e+01` |
+| `62.1` | `4.40e-01` | `7.20e+01` contro `6.91e+01` |
+
+### ⭐ **SEI ORDINI DI GRANDEZZA, in modo monotono.** Nel regime **vacuo** `E` sembra
+conservata; ### **nel regime in cui la saturazione lavora oscilla del `5.8%` della sua
+scala naturale in `400` tick**, e a `x ~ 4` del `28%`.
+### ⛔ **E I DUE TERMINI NON SI COMPENSANO: l'escursione della SOMMA e' maggiore di quella
+di ciascuno, in OGNI punto.**
+
+### ✅ **CHE COSA RESTA ESATTO, ed e' l'unica cosa:** `Re<psi|W psi>` sotto il **solo pezzo
+lineare**, a **`36` ulp** — ed e' **un'identita'**. ### ⛔ **Sotto `N` cambia di `8.845e-02`
+in un tick solo**, e il termine del vuoto non e' conservato da nessuno dei due.
+
+### ⛔ **QUINDI LA PROVA DELLA PROMOZIONE E' PIU' DEBOLE DI QUANTO SEMBRAVA**, e la verifica
+esterna lo dice con le stesse parole: la *«conservazione modificata»* del `v3` era
+soprattutto **la conservazione ESATTA del termine lineare, appena disturbata da un `N`
+quasi inerte** — sul banco `somma |h| = 0.27` contro `somma Lambda = 416`, cioe' `x ~ 1e-3`.
+
+### ✅ **E LA SORGENTE LOCALE E' `O(1)`, NON `O(dtau^2)`** — era la mia previsione scritta
+prima dei numeri: `max_k |s_k|` vale `4.10`, `4.10`, `4.17`, `4.19` per `dtau` da `0.2` a
+`0.025`, con rapporti **`1.001`, `0.984`, `0.993`** *(`O(dtau^2)` darebbe `4`)*. E `s_k` e'
+### **circa la META' del cambiamento per nodo** *(`s/dE` fra `0.45` e `0.49`)*.
+
+### ⭐ **LA VERIFICA ESTERNA HA ACCETTATO LA MIA OBIEZIONE** al punto `2` del mandato: il
+tick **non e' un integratore di un flusso**, quindi l'argomento dell'energia modificata
+`E~ = E + dtau^2 E2 + ...` **non si applica**. ### **Ho ritirato dal task history le due
+previsioni che ne dipendevano** *(oscillazione `O(dtau^2)`, calo come `(dtau omega)^2`)*.
+
+### ⛔ **E TRE DIFETTI DELLA MIA MISURA, trovati MISURANDO** *(due prima che il mandato
+arrivasse)*: ① **il regime era vacuo** *(`x ~ 0.033`: la saturazione era spenta)*;
+② **misuravo `fine - inizio` invece dell'ESCURSIONE**, e con `E` che oscilla di `76` su una
+scala di `6` quello era **un campione a caso**; ③ **la decomposizione di `(c)` era vacua**,
+perche' con `|phi|` uniforme su un grafo `2`-regolare `Lambda_k` e' invariante a `4.4e-16`
+*(provato, col controllo positivo a `2.16`)*.
+
+### ⚠ **E IL DIFETTO ② SPIEGA PERCHE' `M1b` SEMBRAVA FALSA:** con `fine - inizio` dava
+`0.19`, `0.55`, `0.005` per nodo; con l'escursione da' **`3.29`, `2.90`, `2.47`**.
+### **La previsione era giusta e la MISURA era sbagliata.**
+
+### ⛔ **DUE PREVISIONI MIE SONO SBAGLIATE, e le dico:** `M1a` *(prevedevo **secolare**: il
+rapporto e' `0.004`, cioe' **nessuna tendenza secolare** — ma l'ampiezza e' `76`)* e `M1c`
+*(prevedevo un calo sui modi lunghi: **non cade in modo monotono**)*.
+
+### 📌 **I pezzi:** `primo_ordine/deriva.py` *(`--scrivi` fa il referto)*,
+`primo_ordine/_collauda_deriva.py` *(`8` bracci, `5.5s`, e il braccio `1` presidia
+**proprio il falso-zero** che ho fatto)*, `doc/REFERTO_deriva_energia.md`.
+
+### ⛔ **MI FERMO SU QUESTO PEZZO** *(il mandato lo dice)* **e passo al successivo in coda:**
+il punto `3` del mandato di stamattina *(la carta esiste, la citazione nuda e' ambigua)*,
+che **non dipende da una decisione di Luca**.
