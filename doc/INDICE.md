@@ -15,7 +15,7 @@
 | `INFRASTRUTTURA` | `2` | 21 |
 | `INFRASTRUTTURA` | `ENTRAMBE` | 24 |
 | `METODO` | `1` | 156 |
-| `METODO` | `2` | 18 |
+| `METODO` | `2` | 19 |
 | `METODO` | `ENTRAMBE` | 95 |
 
 | id | classe | dominio | era | stato | blocca | titolo |
@@ -486,6 +486,7 @@
 | `M5b` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 2 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
 | `M5c` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 2 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
 | `M8` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 2 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
+| `MAPPA-DIPENDENZE` | STANDARD | METODO | 2 | ### **AGENDA** |  | la mappa delle dipendenze: tutto si interseca, ma le intersezioni hanno un verso |
 | `MASSA-CRITICA-LOCALE` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | la soglia di collasso deve essere LOCALE e DINAMICA, e dipendere da lambda: dire |
 | `MASSA-ID` | FRONTE | METODO | 1 | ### **SOSPESA** |  | le masse si identificano con l'ID di massa (conc_nodi), non coi nodi del passo 0 |
 | `MASSA-ID-FISSO` | MISURA | METODO | 1 | ### **SOSPESA** |  | MASSA-ID a LIGNAGGIO FISSO: non applicabile, la precondizione V-PRE non regge (i |

@@ -15762,3 +15762,46 @@ dipendeva dall'**intensita' dell'interferenza** *(materia)*, mentre l'`11` ottob
 regola.** ### ✅ **E i due difetti non si ereditano:** `CS_M = 2.0` *(a mano; in `(B)` il
 massimo lo fissa **il cono**)* e `Lambda` come **media globale**
 *(`[[CS-LAMBDA-GLOBALE]]`; in `1dcf315` la scala e' **locale**)*.
+
+## 2026-10-13 — **LA MAPPA DELLE DIPENDENZE**, e il livello corrente e' `L1`
+
+> ### ⭐ **LIVELLO CORRENTE: `L1` — il tempo proprio in ogni legge.** Stato: **fermo su due
+> domande di Luca**. Prossimo passo: quelle risposte, poi il **codice di `(B)`** con `cs`
+> uniforme *(ipotesi provvisoria dichiarata)*, poi **`M-B1` al bit** e **`M-B2`**.
+
+### ✅ **`doc/MAPPA_DIPENDENZE.md`**, registrata come `[[MAPPA-DIPENDENZE]]`. I cinque
+livelli, ciascuno con **stato**, **criterio di uscita misurabile** e **ipotesi
+provvisorie**:
+
+| | il livello | lo stato | il criterio di uscita |
+|---|---|---|---|
+| `L1` | il **tempo proprio** in ogni legge *(la strada `(B)`)* | ⛔ **fermo su `B-3` e `B-4`** | ### ⭐ **`0` violatori** *(oggi **`4` su `7`**)*, `M-B1` **al bit**, `M-B2` rapporto `4` |
+| `L2` | la materia **modifica il vuoto**, e la **forma di `cs`** — la **gravita'** | ⛔ **fermo su una domanda** | `Lambda` non piu' invariante *(oggi `8.88e-16`)*, e **l'ALONE** *(oggi nessun anello oltre `3` sigma)* |
+| `L3` | la **mitosi** e lo **spazio che nasce** | ⛔ **fermo — e' il cuore rimasto indietro** | ### **la prima corsa con lo spazio che cresce da un seme** |
+| `L4` | la **`U` dinamica** | derivazione fatta, `4` forme a Luca | la `U` evolve e l'olonomia e' misurabile |
+| `L5` | i **domini** materia/antimateria | ⚠ **carta fatta, implementazione FERMATA** | `(D3)`/`(D4)` acceso **contro** spento |
+
+### ⛔⛔ **E DICHIARO UNA COSA SU ME STESSO, perche' la regola e' nuova ma il fatto e' di
+ieri: HO IMPLEMENTATO STRUMENTI DI `L5` MENTRE `L1` E' APERTO** — `segno.py` *(`0ab42bb`)*,
+e anche `bande.py`, `bande_floquet.py`, `deriva.py`. ### **Secondo la regola `(b)` non
+avrei dovuto**, e lo dico invece di lasciarlo scoprire.
+### ⚠ **Che cosa ne faccio NON lo decido da solo:** sono **misure** e non **fisica** *(non
+toccano la tabella, non promuovono niente)*, li **tengo** perche' hanno **validato `q_h`**
+che e' poi stato **deciso** — ### **ma il loro USO su `L5` aspetta `L3`**, e quella riga e'
+la loro **ipotesi provvisoria registrata**.
+
+### ⭐ **E LE IPOTESI PROVVISORIE CHE OGGI SERVONO DAVVERO, scritte:** `L1` e `L3` usano
+### **`cs` UNIFORME finche' `L2` non e' chiuso** — e per `L1` **non e' un dettaglio**:
+### **`L1` muove `cs` dentro TUTTE le leggi ma la sua FORMA e' `L2`**, quindi il codice
+### **deve avere IL POSTO dove `cs` varia**, anche se oggi vale una costante.
+
+### ⛔ **E LE DUE TENSIONI COL DISEGNO sono nella mappa come punti aperti:** `(i)` il
+termine di ordinamento e' **una legge in piu'** *(`CARTA-FISICA-SIMULATORE/F1`, `9-ter`)*,
+e ### **se `(D3)`/`(D4)` non mostrasse un effetto netto VA TOLTO** — ed e' il suo **criterio
+di abbandono, scritto prima**; `(ii)` **la carica**: il `2026-10-03` la voleva conservata
+**anche localmente**, ### **oggi la saturazione la mescola localmente** *(`-1.0000`, coppie
+esatte)* **e la strada `(3)` la salva solo globalmente.**
+
+### ⭐ **E IL CRITERIO DI USCITA DI `L1` NON E' UNA PROMESSA: E' UN COMANDO.**
+`python primo_ordine/_collauda_tempo_proprio.py` dice **`4` violatori su `7`**, gira **nel
+`pre-commit`**, e ### **quando saranno `0`, `L1` e' chiuso.**

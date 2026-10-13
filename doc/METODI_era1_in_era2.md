@@ -10,12 +10,12 @@
 |---|--:|
 | **`PORTATO`** | `111` |
 | **`PRONTO`** | `7` |
-| **`DA_PORTARE`** | `18` |
+| **`DA_PORTARE`** | `19` |
 | **`DA_DECIDERE`** | `5` |
 | **`NON_SI_APPLICA`** | `7` |
-| **in tutto** | ### **`148`** |
+| **in tutto** | ### **`149`** |
 
-### ⚠ **E IL NUMERO `148` E- MISURATO, non stimato:** viene dal perimetro che l-indice calcola, e ### **il mandato ne nominava <<una decina>>** per nome piu- *<<e le cure di architettura>>*. ### **La decina era `20`.**
+### ⚠ **E IL NUMERO `149` E- MISURATO, non stimato:** viene dal perimetro che l-indice calcola, e ### **il mandato ne nominava <<una decina>>** per nome piu- *<<e le cure di architettura>>*. ### **La decina era `20`.**
 
 ---
 
@@ -155,7 +155,7 @@
 
 ---
 
-## `DA_PORTARE` — `18` metodi
+## `DA_PORTARE` — `19` metodi
 
 > ### ⚠ **SI APPLICA, E NON C-E- ANCORA**: `dove` dice **quale punto del mandato** lo porta
 
@@ -171,6 +171,7 @@
 | **`H-FISICA-FUORI-LISTA`** | `PRESIDIO` | un `.py` sotto `primo_ordine/` non nella LISTA fa rifiutare il commit. ### E HA UN BUCO MISURATO: legge `FILE_FISICA` DAL DISCO mentre giudica i percorsi STAGED | `.githooks/pre-commit` + `csv/_file_fisica.py` |
 | **`H-P8`** | `PRESIDIO` | un confronto che prende il codice di prima da `HEAD` invece che dal PADRE: l-era 2 non ha ancora confronti prima/dopo | `.githooks/pre-commit` |
 | **`H-P9`** | `PRESIDIO` | uno strumento che avanza una rete fuori dall-esecutore: ### IL PUNTO 9 LO GENERALIZZA all-era 2, e ### il caso da rifiutare potrebbe essere `_collauda_passo.py`, che chiama `mezzo_implicito` direttamente | `.githooks/pre-commit`; punto 9 |
+| **`MAPPA-DIPENDENZE`** | `STANDARD` | il codice e le misure si fanno sul livello PIU- BASSO NON CHIUSO; i superiori si derivano su carta ma NON si implementano e NON si decidono. Ogni task history dichiara la sua CASELLA e le sue IPOTESI PROVVISORIE, e ogni ripresa comincia col LIVELLO CORRENTE | `doc/MAPPA_DIPENDENZE.md` + il presidio della casella (2d, DA FARE) |
 | **`NASCITA-PUNTO-UNICO`** | `CURA` | le grandezze della nascita si scrivono in UN SOLO punto, con una regola dichiarata per ciascuna: ### e- IL PUNTO 3, e `crescita.py` e- ancora uno stub | punto 3, da fare |
 | **`P-DECADIMENTO`** | `STANDARD` | ogni decadimento e- una trasformazione: ### lo pretende il campo `bilancio` di una `regola`, che lo schema rende OBBLIGATORIO | `leggi/schema.py`; nessuna `regola` ancora |
 | **`P3`** | `STANDARD` | nessuna statistica senza barra d-errore: ### l-era 2 non ha ancora una statistica -- le misure fatte sono DETERMINISTICHE (byte, cono, deriva) | nessun sito oggi |

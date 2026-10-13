@@ -68,6 +68,15 @@ CURE_ARCHITETTURA = (
 #   ### corregge qui -- ma ### **una riga che MANCA fa rifiutare il commit.**
 # =====================================================================================
 METODI = {
+    # ### ⭐ **LA MAPPA DEI LIVELLI**, decisa da Luca il 2026-10-13: il codice e le
+    # ### misure si fanno sul livello ### **PIU- BASSO NON CHIUSO.**
+    "MAPPA-DIPENDENZE": (
+        "il codice e le misure si fanno sul livello PIU- BASSO NON CHIUSO; i superiori si "
+        "derivano su carta ma NON si implementano e NON si decidono. Ogni task history "
+        "dichiara la sua CASELLA e le sue IPOTESI PROVVISORIE, e ogni ripresa comincia col "
+        "LIVELLO CORRENTE",
+        "`doc/MAPPA_DIPENDENZE.md` + il presidio della casella (2d, DA FARE)",
+        "DA_PORTARE"),
     # ------------------------------------------------------------------ gli ASSIOMI
     "A1": ("ogni parametro in `leggi.yaml` porta `valore` E `origine`, e lo schema "
            "rifiuta un parametro senza origine", "`leggi/schema.py`", "PORTATO"),
