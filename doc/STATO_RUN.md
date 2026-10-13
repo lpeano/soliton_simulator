@@ -3030,3 +3030,30 @@ raccomandare di non farlo.**
 
 ### ⛔ **E LA SCELTA DELLA SCENA RESTA DI LUCA:** `[[DOMANDA-QUALE-SCENA-3D-PRINCIPALE]]` ha ora ### **la tabella intera**, e cambiare i gradi ### **cambia la fisica locale** *(la moneta di Grover dipende dal grado)*.
 
+## `L-NUMERI-DERIVA-ORFANA` — il rapporto `4.20` non esce da nessuno script *(2026-10-13)*
+
+### ⛔ **CHE COS'E'.** Nel task history `doc/TASK_HISTORY/2026-10-12_energia_corrente.md`,
+committato in `36182b7`, c'e' scritto che a tempo totale fisso `T = 20` l'ultimo
+dimezzamento di `dtau` *(da `0.1` a `0.05`)* da' **rapporto `4.20`** nella deriva di `E`, e
+che ai passi grandi il rapporto e' erratico *(`0.39`, `2.48`)*. ### **Quei tre numeri non
+sono prodotti da nessuno script committato.**
+
+### ⚠ **COME L'HO VERIFICATO.** `36182b7` ha toccato quattro `.py`: `energia.py`,
+`_collauda_energia.py`, `collauda.py`, `_file_fisica.py`. Nessuno dei quattro dimezza
+`dtau` a tempo totale fisso. E una ricerca in `primo_ordine/` non trova niente che lo
+faccia. ### **Il numero compare SOLO in prosa**, in quel file e nel task history del
+`2026-10-13` che lo ha ricopiato.
+
+### ⛔ **PERCHE' CONTA.** Non e' un numero fermo: ### **il mandato di Luca del `2026-10-13`
+lo cita come <<tua misura, rapporto 4.20>>** e ci costruisce sopra la richiesta della
+sorgente `O(dtau^2)` per nodo. ### **Un numero senza provenienza che viene letto come una
+misura orienta il lavoro**, ed e' precisamente cio' che `L-NUMERI` vieta.
+
+### ⭐ **E LA LEZIONE, che e' la ragione per cui questa voce esiste.** Avevo scritto il
+numero mentre scrivevo la prosa, senza passare da uno script, ### **perche' mi sembrava una
+misura DI CONTORNO** rispetto al pezzo che stavo sigillando. ### ⛔ **Un numero di contorno
+che finisce in un documento NON E' DI CONTORNO: viene letto come gli altri.**
+
+### ✅ **LA CURA, nello stesso giro:** `primo_ordine/deriva.py` rimisura la deriva di `E`,
+dei suoi **due termini separatamente**, e la **sorgente per nodo**, col suo referto.
+### **Il vecchio `4.20` non si usa piu'.**

@@ -15,7 +15,7 @@
 | `INFRASTRUTTURA` | `2` | 21 |
 | `INFRASTRUTTURA` | `ENTRAMBE` | 24 |
 | `METODO` | `1` | 156 |
-| `METODO` | `2` | 17 |
+| `METODO` | `2` | 18 |
 | `METODO` | `ENTRAMBE` | 95 |
 
 | id | classe | dominio | era | stato | blocca | titolo |
@@ -428,6 +428,7 @@
 | `L-MEMORIA-PRIMA` | STANDARD | METODO | ENTRAMBE | ### **APERTA** |  | PRIMA di proporre una cura si valuta se una MEMORIA la cura, e la valutazione st |
 | `L-NON-FERMARSI-AL-CHECKPOINT` | CRITERIO | METODO | ENTRAMBE | ### **APERTA** |  | un checkpoint non chiude il turno: si passa SUBITO al pezzo successivo |
 | `L-NUMERI` | STANDARD | METODO | ENTRAMBE | ### **APERTA** |  | OGNI NUMERO SCRITTO IN UN COMMIT O IN UN REFERTO ESCE DA UNO SCRIPT |
+| `L-NUMERI-DERIVA-ORFANA` | DIFETTO | METODO | 2 | ### **AGENDA** |  | il rapporto 4.20 della deriva di E non esce da nessuno script: numero orfano |
 | `L-PATCH` | STANDARD | METODO | ENTRAMBE | ### **APERTA** |  | LE PATCH SI LANCIANO IN PRIMO PIANO; niente git stash con una patch in corso; ne |
 | `L-SOGLIA` | STANDARD | METODO | ENTRAMBE | ### **SUPERATA** |  | UNA SOGLIA NON SI CALCOLA DAI DATI CHE GIUDICA, e si collauda sul caso nullo |
 | `L-STELLA` | STANDARD | METODO | ENTRAMBE | ### **APERTA** |  | LE CINQUE DOMANDE DELLA STELLA POLARE SI RISPONDONO PER ISCRITTO NEL TASK HISTOR |

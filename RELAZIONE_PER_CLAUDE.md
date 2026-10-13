@@ -14637,3 +14637,48 @@ arco col **verso invertito** rompe *(`1.891e+01`)*; una carica **non instradata*
 
 ### ⛔ **CHE COSA RESTA DEL PUNTO `1`:** `(c)` la **sorgente `O(dtau^2)`** con `N` acceso,
 per nodo.
+
+## 2026-10-13 — UN NUMERO CHE HO SCRITTO IO **NON ESCE DA NESSUNO SCRIPT**, e ha orientato un mandato
+
+### ⛔ **IL DIFETTO E' MIO, e l'ho trovato preparando il punto `1(c)`.** Nel task history
+del `2026-10-12` *(commit `36182b7`)* avevo scritto: *«sul tick intero la deriva c'e' e
+scende: a tempo totale fisso `T = 20`, l'ultimo dimezzamento di `dtau` da `0.1` a `0.05`
+da' **rapporto `4.20`**, la firma dell'esponente `2`»*. ### ⚠ **NESSUNO SCRIPT COMMITTATO
+PRODUCE QUEL NUMERO.** In `primo_ordine/` non c'e' niente che dimezzi `dtau` a tempo totale
+fisso, e il commit `36182b7` ha toccato `energia.py`, `_collauda_energia.py`, `collauda.py`
+e `_file_fisica.py` — ### **in nessuno dei quattro c'e' la misura della deriva.**
+
+### ⛔ **E NON E' RIMASTO FERMO: HA ORIENTATO UN MANDATO.** Il mandato di stamattina lo
+cita come *«tua misura, rapporto `4.20`»* e ci costruisce sopra la richiesta della sorgente
+`O(dtau^2)`. ### **Un numero senza provenienza che viene letto come una misura e' peggio di
+un numero assente** *(`L-NUMERI`)*. Voce: **`[[L-NUMERI-DERIVA-ORFANA]]`**.
+
+### ⚠ **E CREDO CHE LA CONCLUSIONE ATTACCATA A QUEL NUMERO SIA SBAGLIATA, e lo scrivo
+PRIMA di misurare.** Il pezzo lineare **non e'** il flusso di un'hamiltoniana per un tempo
+`dtau`. In `primo_ordine/composizione.py`, che e' **generata dalla tabella**, ### **quattro
+pezzi su sette non dipendono da `dtau`:** il Grover e' **un'involuzione** `(2/d)J - I`, lo
+spostamento e' **una permutazione con trasporto**, e le due camminate del vuoto sono le
+stesse cose sul vuoto. ### **Solo la moneta di spin e il flusso di saturazione scalano.**
+
+### ⛔ **Quindi a `dtau -> 0` il tick NON tende all'identita':** e' **un cammino quantistico
+a tempo discreto**, non un integratore di un flusso. ### **E allora <<`E` conservata a
+`O(dtau^2)`>> non puo' voler dire <<per tick>>**, e a tempo totale fisso la deriva
+### **dovrebbe CRESCERE quando `dtau` si dimezza, non dividersi per `4`.**
+
+### ✅ **CIO' CHE SO DI ESATTO, invece:** `Re<psi|W psi>` e' conservato **esattamente** dal
+pezzo lineare *(`0.6` ulp)*, perche' `Re<W psi|W (W psi)> = Re<psi|W psi>` per **qualunque**
+`W` unitario — ### **e' un'identita', non una proprieta' di `dtau`.** E il flusso di
+saturazione conserva `h` e `Lambda` *(`1.9` ulp)*. ### ⛔ **Cio' che cambia di `O(1)` e' il
+termine del vuoto**, perche' il pezzo lineare cambia `h_k` e la camminata del vuoto cambia
+`Lambda_k`.
+
+### ⚠ **NON LO DICO PER CONTRADDIRE IL MANDATO:** il mandato stesso dice *«se cresce, la
+mappa non e' simplettica come crediamo, **e quello e' un risultato**»*. ### **Questo e' quel
+ramo, e lo misuro invece di argomentarlo.** Le previsioni stanno scritte **prima dei
+numeri** in `doc/TASK_HISTORY/2026-10-13_deriva_e_sorgente.md`, committato **prima** del
+codice.
+
+### ⛔ **E SE LA MISURA DICESSE CHE IL TICK NON CONSERVA `E`, MI FERMO PRIMA DI PROPORRE
+UNA CURA:** `D-ENERGIA` e' una decisione di Luca, e ### **la grandezza promossa non la
+cambio io** — l'ho gia' sbagliato una volta, e la raccomandazione **l'ho ritirata**
+stamattina.
