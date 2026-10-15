@@ -16953,3 +16953,18 @@ vuole ### **un decennio di `r`** *(distanza toroidale massima `30`)*, non tre an
 ### **cinque risposte della STELLA POLARE scritte PRIMA del codice**, i nove passi con
 ### **cosa mi FERMA** per ognuno, e le previsioni di sopra. ### **Committato prima, cosi'
 l'ordine lo verifica `git` invece che io.**
+
+### ⛔⛔ **E L'INTEGRAZIONE DEL GUARDIANO MI E' ARRIVATA MENTRE IL BRACCIO `(3)` LASTAVA GIA' MISURANDO**, e lo scrivo perche' e' la cosa piu' onesta che posso dire di questo pezzo:
+
+> ### ⭐ **La mia previsione *<<`alpha` non puo' contare niente>>* E' FALSA col> congelamento per tick**, e il numero e' ### **`1.060e+01` su `S2`** *(su `S1` e'> `7.3e-14`)*. ### **Il motivo e' IL PASSO PALINDROMO:** la saturazione agisce> ### **DUE volte per tick** *(posizioni `0` e `11` di `composizione.ORDINE`)*, e fra le> due girano ### **Grover e spostamento su `psi`** — quindi la ### **seconda** meta'> leggeva una `rho` ### **GIA' SPOSTATA.**
+
+### ✅ **E non l'ho affermato: l'ho MISURATO.** Il braccio `(3-bis)` registra `rho`### **come il termine la vede, chiamata per chiamata**: con `rho` corrente la differenza fra `alpha` e `alpha = 0` e' ### **`0.0e+00` alla PRIMA chiamata e `8.9e-16` alla SECONDA** — ### **nasce esattamente dove il meccanismo dice.**
+
+### ⭐⭐ **QUINDI ADOTTO LA FOTOGRAFIA FISSA, come l'integrazione chiede**, e il mio metodo diventa ### **il controllo del punto `2`.** Con la fotografia:
+### **`alpha = 0` da' lo STESSO `Lambda(t)` AL BIT** *(`0.000e+00`, braccio `(3)`)*, e### **ogni chiamata vede la stessa `rho`** *(`0.0e+00` su `6` chiamate)*.
+
+### ⭐ **E UN BRACCIO CHE HO AGGIUNTO IO, perche' la fotografia rende possibile una domanda che prima non si poteva fare:** se la saturazione e' ### **l'unico canale `materia -> vuoto`**, allora con la fotografia ### **`psi` LIBERA deve dare lo stesso `Lambda(t)` AL BIT.** ### ✅ **Misurato: `0.000e+00`** — ### **e cosi' <<la saturazione e' l'unico canale>> non e' piu' una mia assunzione, e' un numero.**
+
+### 📌 **DUE COSE CHE HO AGGIUNTO SCRIVENDO IL CODICE, e le dichiaro invece di nasconderle:**
+### **(i) il TRANSITORIO di `200` tick** prima della finestra di misura — il task history diceva *«la finestra comincia al tick `T`»*, ma con l'accensione ### **DI COLPO** *(`T = 0`)* comincerebbe ### **dentro il transitorio**, e misurerei l'onda invece dello stato stazionario. ### **E il confronto fra i tre `T` E' il controllo che il transitorio sia finito.**
+### **(ii) la SOVRAPPOSIZIONE a DUE intensita'** *(`x = 1` e `x = 0.1`)*, e il motivo e' un numero: ### **a `x = 1` la risposta e' SATURA** *(`|dLambda|` arriva a `~3.9` su `Lambda = 4`, cioe' il vuoto e' quasi tutto cacciato)*, e ### **una sovrapposizione provata solo la' misurerebbe la saturazione invece della linearita'.**

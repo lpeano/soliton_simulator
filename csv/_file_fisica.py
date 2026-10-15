@@ -152,6 +152,12 @@ FILE_FISICA = (
     # ### e una ### **FASE** su `psi`: il verso, l-indipendenza dallo spin,
     # ### l-esponente, ### **il cono nei DUE modi**, e la larghezza del grumo.
     'primo_ordine/_misura_forme_l2.py',
+    # ### ⭐⭐ **E LA RISPOSTA A UNA SORGENTE FERMA** *(quarto pezzo)*: il termine
+    # ### legge ### **una FOTOGRAFIA FISSA di `rho`** in entrambe le meta- della
+    # ### saturazione, perche- un campo ### **STATICO** vuole che il vuoto veda la stessa
+    # ### `rho` ### **in ogni istante** -- e col solo ripristino per tick
+    # ### ### **non era cosi-**, misurato.
+    'primo_ordine/_misura_statica_l2.py',
     'primo_ordine/motore.py',
     'primo_ordine/_collauda_motore.py',
     # ### IL CHECKPOINT *(sotto-pezzo `5c`)*: salva e riprende ### **stato, grafo,

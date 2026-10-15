@@ -3636,6 +3636,22 @@ scena **cresca** come gli archi *(`4.00x` su `4.00x` atteso)*; `m3` **`0.005114`
 
 ---
 
+### `primo_ordine/_misura_statica_l2.py` — **LA RISPOSTA A UNA SORGENTE FERMA** *(2026-10-15)*
+
+| | |
+|---|---|
+| **file** | `primo_ordine/_misura_statica_l2.py` |
+| **BLOB** *(sha1 dei byte grezzi)* | `4a1402ed` |
+| **IL COMANDO, verbatim** | `python primo_ordine/_misura_statica_l2.py` |
+| ### ⚠ **sta FUORI dal `pre-commit`** | corsa lunga su un toro `31x31`: **misura DICHIARATA** |
+| ### ⛔⛔ **LA SORGENTE CONGELATA E' UNO STRUMENTO, NON UNA LEGGE** | e' la ### **<<massa di prova>>**: un corpo che **genera il campo e non lo subisce.** ### **Viola la conservazione PER COSTRUZIONE**, e percio' ### **non entra in nessuna tabella** |
+| ### ⭐⭐ **e il congelamento e' una FOTOGRAFIA di `rho`** | il termine legge ### **una `rho` FISSA, presa al tick `0`, in ENTRAMBE le meta' della saturazione** *(integrazione del guardiano dopo `e01e46f`)*. ### ⚠ **Col solo ripristino per tick la sorgente era ferma SOLO ai confini dei tick**, e il motivo e' ### **il passo PALINDROMO**: la saturazione agisce `2` volte, e fra le due girano Grover e spostamento su `psi` |
+| **che cosa misura** | `(a)` il **segno** di `dLambda` sulla sorgente · `(b)` la **linearita'** in `x` · `(c)` la **sovrapposizione** di due sorgenti · `(d)` il **profilo** in distanza · `(e)` ### **i DUE metodi a confronto** |
+| **i controlli** | `1` base **stazionaria** · `2` il congelamento **fa qualcosa** *(altrimenti <<`rho` costante>> e' un **FALSO-ZERO**)* · `3` ### **`alpha` non conta, AL BIT** · `3-bis` **dove nasce** la differenza · `3-ter` ### **`psi` libera da' lo stesso `Lambda(t)` al bit** *(cioe' la saturazione e' l'**unico** canale `materia -> vuoto`)* · `4` `beta = 0` **esatto** · `9` la somma di `|phi|^2` **conservata** |
+| ### 📌 **e il VERSO e' uno solo** | `materia -> vuoto`: il congelamento ### **ESCLUDE la retroazione**, quindi ### **questa misura non dice niente sul verso opposto** |
+
+---
+
 ### `primo_ordine/_misura_forme_l2.py` — **LE QUATTRO FORME, MISURATE** *(2026-10-15)*
 
 | | |

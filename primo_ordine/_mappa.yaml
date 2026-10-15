@@ -98,6 +98,10 @@ moduli:
     responsabilita: le quattro forme misurate con rho come sorgente, e il cono nei due modi
     importa: [_presidio, deriva, flussi_parziali, scena_l2]
 
+  - nome: _misura_statica_l2.py
+    responsabilita: la risposta del vuoto a una sorgente FERMA, con la fotografia di rho
+    importa: [_presidio, composizione, deriva, flussi_parziali, scena_l2, _misura_forme_l2]
+
   - nome: _deriva_forme_l2.py
     responsabilita: la derivazione simbolica delle quattro forme e del prezzo della linearita
     importa: [_presidio]
