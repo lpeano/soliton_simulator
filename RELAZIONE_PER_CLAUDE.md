@@ -15855,3 +15855,56 @@ dico io: che oggi `omega_hop = omega_Grover` e' UN FATTO STORICO, non un argomen
 
 ### ⛔ **STOP, come il mandato dice.** ### **Il codice di `L1` riparte solo con le tue
 risposte.**
+
+## 2026-10-15 — `L1`: **le decisioni `B-3` e `B-4` registrate, prima del codice**
+
+> ### ⭐ **LIVELLO CORRENTE: `L1`.** Le due domande che lo bloccavano **sono decise.**
+
+### ✅ **`B-3`: il tempo proprio dell'arco e' la MEDIA ARMONICA**,
+`dtau_arco = 2 dtau_i dtau_j/(dtau_i + dtau_j)`, col motivo che avevo derivato *(la somma
+dei tempi di attraversamento delle due meta')*. ### ⚠ **E l'ipotesi <<DUE META' UGUALI>> e'
+registrata CON la decisione** — e' **un modello** della geometria dell'arco, non un fatto.
+
+### ✅ **`B-4`: `omega · dtau_rif = pi`**, con `dtau_rif` **l'orologio piu' veloce**, e **un
+solo `omega`** per spostamento e Grover. ### ⚠ **E il punto debole e' registrato con la
+decisione:** l'uguaglianza dei due `omega` e' **un fatto storico del motore, non un
+principio.**
+
+### ⭐⭐ **E LA DECISIONE `B-4` MI DA' UNA COSA CHE NON AVEVO: `theta <= pi` DIVENTA VERO
+PER COSTRUZIONE.** Posto `s = dtau/dtau_rif` con `dtau_rif` ### **IL MASSIMO** dei `dtau`,
+si ha `s <= 1` **sempre** ⟹ `theta = pi·s <= pi`. ### ✅ **Nessun tetto e nessun clip**
+*(`A11`)*: ### **il limite viene dalla DEFINIZIONE di `dtau_rif`**, non da un controllo.
+### ⚠ **Prima lo avevo dichiarato come un requisito da rispettare; adesso e' una
+conseguenza.**
+
+### 📌 **Le chiusure delle due voci seguono nel commit successivo** col suo sha *(modello a
+due atti)*. ### **Il codice e' il prossimo pezzo.**
+
+## 2026-10-15 — ⭐ **IL PERIMETRO DEL CONGELAMENTO: la mia domanda ha una risposta, e il
+congelamento SI SAREBBE BLOCCATO DA SOLO**
+
+> ### **La versione rifinita del mandato risponde alla domanda che avevo fatto in `717bb60`.**
+> **Vale l'ULTIMA versione** *(`PRECEDENZA-IN-CODA`)*, e la registro.
+
+### ✅ **AMMESSO:** `primo_ordine/deriva.py` ### **IN SOLA LETTURA** per i criteri di uscita
+di `L1` — **`M-B2`** e **`_collauda_tempo_proprio.py`**.
+### ⛔ **VIETATO:** nessuna misura **nuova** di `L5`, nessuna modifica alle sue **parti di
+`L5`** *(la sorgente per nodo)*. ### ⚠ **E le parti che servono a `L1`, se vanno toccate, si
+dichiarano UNA PER UNA nel commit.**
+
+### ⚠⚠ **E DEVO DIRE UNA COSA CHE NON AVEVO VISTO QUANDO HO FATTO LA DOMANDA:**
+`_collauda_tempo_proprio.py` ### **IMPORTA GIA' `deriva.py`** *(`DV.scena`, `DV.OPERATORE`)*.
+### **Quindi il congelamento preso alla lettera avrebbe bloccato il CRITERIO DI USCITA di
+`L1`** — cioe' ### **si sarebbe bloccato da solo**, e il livello corrente non avrebbe potuto
+chiudersi. ### **La domanda era giusta a monte, non solo utile.**
+
+### ✅ **E UNA PRECISAZIONE SU `B-3` CHE RENDE LA DECISIONE PIU' FORTE DI COME L'AVEVO
+SCRITTA:** siccome `dtau_k = cs_k · dt`, la media armonica dei `dtau` ### **equivale a quella
+dei `cs`** — `cs_arco` = media armonica di `cs_i` e `cs_j` — perche' ### **il `dt` globale si
+cancella nel rapporto.** ### ⭐ **Quindi la decisione e' INDIPENDENTE da come si misura il
+tick:** si legge sui tempi propri o sulle velocita', ed e' **la stessa cosa.**
+
+### 📌 **E le altre due differenze della versione rifinita, che cambiano il lavoro:**
+### ① **i flussi parziali sono per `psi` E per il vuoto `phi`** — quindi **quattro**
+operatori nuovi, non due *(per `phi` il trasporto NEUTRO, senza `U`)*; ### ② **`M-B1` si
+misura contro `717bb60`**, non contro `784976d`.

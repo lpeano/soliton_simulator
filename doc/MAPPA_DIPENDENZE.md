@@ -195,3 +195,65 @@ criterio di raccordo PUNTA a un oggetto che sta per cambiare.**
 
 ### ⛔ **E CHE COSA NON FACCIO:** nessuna derivazione, nessun task history, nessuna voce.
 ### **La collocazione e' questa riga, e basta.**
+
+---
+
+## 7. ✅ `L1` — **LE DUE DECISIONI DI LUCA DEL `2026-10-15`**
+
+### `B-3` — **IL TEMPO PROPRIO DELL'ARCO E' LA MEDIA ARMONICA**
+
+> ### ⭐ **`dtau_arco = 2 · dtau_i · dtau_j / (dtau_i + dtau_j)`**
+
+**Il motivo:** e' **la somma dei tempi di attraversamento delle due meta' dell'arco**,
+ciascuna alla velocita' del proprio nodo.
+### ⚠ **E L'IPOTESI RESTA DICHIARATA, registrata CON la decisione: <<DUE META' UGUALI>>.**
+### **E' un MODELLO della geometria dell'arco, non un fatto** — se il tempo proprio
+cambiasse lungo l'arco in un altro modo, **il conto cambierebbe.**
+
+### `B-4` — **`omega` DAL RACCORDO, E UN SOLO `omega`**
+
+> ### ⭐ **`omega · dtau_rif = pi`**, con **`dtau_rif` = il tempo proprio dell'orologio
+> PIU' VELOCE** *(`cs` al massimo)*. ### **UN SOLO `omega`** per lo spostamento **e** per
+> il Grover.
+
+### ✅ **Quindi `omega` NON e' una costante tarata: e' una CONDIZIONE DI RACCORDO** — al
+passo di riferimento il motore nuovo **riproduce quello di oggi**. E siccome compaiono
+**solo i prodotti `omega · dtau`**, un fattore comune **si assorbe**: ### **e' una SCELTA
+DI UNITA'**, e `CARTA-FISICA-SIMULATORE/F10` e' rispettato.
+
+### ⚠ **E IL PUNTO DEBOLE RESTA DICHIARATO, registrato CON la decisione:** l'uguaglianza
+dei due `omega` e' ### **UN FATTO STORICO DEL MOTORE, NON UN PRINCIPIO.** Oggi sono
+entrambi involuzioni *(entrambi all'angolo `pi`)*, e tenerli uguali **non aggiunge niente**;
+### **ma nessun argomento dice che debbano esserlo**, e separarli aggiungerebbe **un numero
+puro** da derivare.
+
+### ⭐⭐ **E UNA CONSEGUENZA OPERATIVA, che e' cio' che rende `theta <= pi` vero PER
+COSTRUZIONE:** posto **`s = dtau / dtau_rif`** con `dtau_rif` ### **IL MASSIMO** dei
+`dtau`, si ha **`s <= 1` SEMPRE**, quindi `theta = pi·s <= pi`.
+### ✅ **NESSUN TETTO E NESSUN CLIP** *(`A11`)*: ### **il limite viene dalla DEFINIZIONE di
+`dtau_rif`.**
+
+### ⭐ **E UNA PRECISAZIONE SU `B-3`:** siccome `dtau_k = cs_k · dt`, la media armonica dei
+`dtau` **equivale** a quella dei `cs` — ### **`cs_arco` = media armonica di `cs_i` e
+`cs_j`** — perche' ### **il `dt` globale si cancella nel rapporto.** ### ✅ **Quindi la
+decisione si legge sui tempi propri o sulle velocita', e sono LA STESSA COSA:** e' ### **indipendente
+da come si misura il tick.**
+
+---
+
+## 8. ✅ IL **PERIMETRO DEL CONGELAMENTO** — *scelta di Luca, `2026-10-15`*
+
+> ### ⭐ **E' LA RISPOSTA ALLA DOMANDA CHE AVEVO FATTO IN `717bb60`**, e la riporto perche'
+> era mia: *«il congelamento di `L5` blocca anche il riuso di `deriva.py` per una misura di
+> `L1`?»*
+
+| | la regola | |
+|---|---|---|
+| ✅ **ammesso** | `primo_ordine/deriva.py` **IN SOLA LETTURA** per i criteri di uscita di `L1` — **`M-B2`** e **`_collauda_tempo_proprio.py`**, che ### **lo importa gia'** |
+| ⛔ **vietato** | ### **nessuna misura NUOVA di `L5`**, e ### **nessuna modifica alle sue parti di `L5`** *(la **sorgente per nodo**)* |
+| ⚠ **e se una parte che serve a `L1` va toccata** | ### **si dichiara UNA PER UNA nel commit** |
+
+### ⚠ **E NOTO CHE LA DOMANDA ERA GIUSTA A MONTE, non solo utile:** `_collauda_tempo_proprio.py`
+### **importa gia' `deriva.py`** *(per `DV.scena` e `DV.OPERATORE`)*, quindi
+### **il congelamento preso alla lettera avrebbe bloccato il criterio di uscita di `L1`**
+— cioe' ### **si sarebbe bloccato da solo.**
