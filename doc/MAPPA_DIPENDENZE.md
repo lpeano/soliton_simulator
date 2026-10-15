@@ -62,6 +62,66 @@
 | ### ⭐ **il criterio di uscita** | ### **`(D3)`/`(D4)` col termine ACCESO contro SPENTO**, e la **lunghezza di correlazione** dei domini che **cresce** *(coarsening)* con un esponente **`> 0`** dichiarato col suo errore |
 | ### ⛔ **l'ipotesi provvisoria che usa** | ### **HA BISOGNO DELLA CRESCITA DI `L3`**: `(R2)` dice che un sistema chiuso **non si ordina** senza raffreddamento, e il raffreddamento **e' la crescita dello spazio.** ### **Quindi `L5` non si puo' MISURARE prima di `L3`** |
 
+#### `L5` — ⭐ **SECONDA CANDIDATA: L'ASIMMETRIA NELLA LEGGE** *(strada `A`, alla
+Sakharov)*, **accanto ai domini** *(strada `B`, decisa il `2026-10-13`)*
+
+> ### ⛔ **COLLOCATA, NON OPERATIVA** *(decisione di Luca, `2026-10-15` alle `15:25`)*.
+> ### **Non si apre prima di `L5`**, e `L5` non si apre prima di `L1`-`L4`.
+> ### **La voce e' `[[L5-ASIMMETRIA-NELLA-LEGGE]]`.**
+
+### **LE TRE CONDIZIONI DI SAKHAROV** *(1967)* per avere **piu' materia che antimateria**:
+
+| | la condizione |
+|---|---|
+| `1` | **un processo che CAMBI il bilancio** materia/antimateria |
+| `2` | **leggi che DISTINGUANO** materia e antimateria — *rottura di `C` e di `CP`* |
+| `3` | **uscita dall'EQUILIBRIO** |
+
+### ⭐ **I CANDIDATI NEL MODELLO, uno per condizione**
+
+| | il candidato | dove sta oggi |
+|---|---|---|
+| `1` | **la saturazione che MESCOLA le bande**, e **la carica che non si conserva localmente** | ### ⚠ **oggi e' UNA DELLE DUE TENSIONI col disegno** *(par. `3.2`, punto `(ii)`: la saturazione mescola `N+` e `N-` localmente, `corr = -1.0000`)*. ### **Qui non e' una tensione: e' UN INGREDIENTE** |
+| `2` | **lo spettro del passo NON APPAIATO `eps <-> -eps`** | ### **trovato in `L1` il `2026-10-15`** *(`8bf0ded` e la misura della terza parte, `5219e1b`)*: col tempo proprio nelle leggi, ### **la legge stessa tratta materia e antimateria in modo diverso** |
+| `3` | **la CRESCITA DELLO SPAZIO** *(mitosi)*, la freccia fondamentale ammessa | ### **e' il congelamento per diluizione, GIA' nel piano di `L5`** — e `(R2)` dice che senza raffreddamento un sistema chiuso **non si ordina** |
+
+### ⚠⚠ **E SUL CANDIDATO `2` DEVO METTERE I NUMERI ESATTI, perche' la frase <<non appaiato
+a `dtau < 1`>> e' piu' grossolana di cio' che la misura dice:**
+
+| `dtau` | appaiamento *(collo di bottiglia)* | il CASO *(minimo su `20` tiri)* | la lettura |
+|---|---|---|---|
+| `1` | **`0.0820`** | `0.248` | ### ⚠ **NON appaiato** *(l'esatto e' `~1e-15`)*, **ma `3` volte sotto il caso**: c'e' struttura |
+| `0.5` | `1.379` | `0.280` | **NON appaiato**, e **sopra** il caso |
+| `0.25` | `1.776` | `1.486` | **NON appaiato** |
+
+### ⛔ **Quindi l'asimmetria c'e' anche a `dtau = 1`**, non solo sotto; ### **e a `dtau = 1`
+e' PICCOLA ma non nulla.** ### ⭐ **E senza la moneta di spin l'appaiamento a `dtau = 1`
+torna ESATTO** *(`4.133e-15`)*: ### **cioe' il candidato `2` e', piu' precisamente, LA
+MONETA DI SPIN.**
+
+### ⭐⭐ **LE DUE PREVISIONI, E SONO DIVERSE — ed e' questo che le rende due strade e non
+due parole**
+
+| | la strada | la previsione |
+|---|---|---|
+| `A` | **l'asimmetria nella legge** | ### **un eccesso dello STESSO SEGNO OVUNQUE** |
+| `B` | **i domini** *(decisa il `2026-10-13`)* | ### **domini con PARETI e carica totale ZERO** — e **domini piu' grandi dell'universo osservabile**, perche' dalle pareti non arrivano raggi gamma di annichilazione |
+
+### ⛔ **CHE COSA NON E' ANCORA STABILITO, e va MISURATO quando `L5` si apre**
+
+| | la domanda aperta |
+|---|---|
+| `1` | **l'asimmetria della legge rompe anche `CP`?** *(oggi si sa che rompe `C`, nel senso che `C W C^-1 != W`)* |
+| `2` | **ha un SEGNO preferito?** ### ⚠ **Senza un segno preferito, l'asimmetria c'e' e non produce un eccesso** |
+| `3` | **sopravvive quando il tempo proprio VARIA DAVVERO** *(dopo `L2`)*? ### **Oggi `cs` e' UNIFORME**, quindi l'asimmetria misurata nasce dal `dtau` **come angolo**, non da una sua variazione |
+| `4` | ### ⭐⭐ **come la cambia la scelta <<`n` = DIREZIONI DI MOTO>>?** E qui c'e' un fatto **misurato nella terza parte di `L1`, e va letto come un AVVERTIMENTO a questa idea:** con `n` **GEOMETRICI** e `U = I` esiste una simmetria antiunitaria **ESATTA** del passo *(`(P Theta)`, scarto `5.5e-16`)*, **con Kramers** *(molteplicita' `2`)*. ### ⛔ **Cioe' quella scelta POTREBBE RESTITUIRE la simmetria, e togliere il candidato `2`.** ### **Non e' detto che lo faccia** *(la' `U = I`, e il gauge rompe la mappa: `1.218` con `U` casuale)*, **ma e' la prima cosa da misurare.** |
+
+### 📌 **E UNA COSA CHE QUESTA COLLOCAZIONE RENDE VISIBILE, e che prima non si vedeva:**
+### **le due strade NON sono alternative esclusive per costruzione** — la `1` e la `3` sono
+**ingredienti comuni**, e cio' che le separa e' ### **la condizione `2`.** ### **Quindi
+quando `L5` si apre, la prima misura utile e' sulla `2`**, non sulle altre due.
+
+
 ---
 
 ## 2. LE REGOLE OPERATIVE

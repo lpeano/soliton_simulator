@@ -16416,3 +16416,28 @@ bracci di `_collauda_deriva.py`, che restano rossi **per il perimetro di `L5`**.
 ### ✅ **Gli altri due rossi del paragrafo `12` della `RIPRESA` sono chiusi:** la memoria
 *(il braccio misura la proprieta')* e la `C` *(che non era un collaudo: era il confronto
 sbagliato)*.
+
+## 2026-10-15 — 📌 **COLLOCATA IN `L5` LA SECONDA CANDIDATA: L'ASIMMETRIA NELLA LEGGE**
+
+> ### **Solo collocazione, come il mandato dice: nessun codice e nessuna misura.**
+
+### ✅ **Fatto:** il sotto-paragrafo **dentro `L5`** nella mappa, la voce
+`[[L5-ASIMMETRIA-NELLA-LEGGE]]` *(`AGENDA`, `blocca = false`)*, e la riga nella `RIPRESA`.
+
+### ⚠ **E DUE COSE CHE HO AGGIUNTO AL TESTO DEL MANDATO, perche' erano misure mie e
+andavano messe accanto all'idea:**
+### ① **il candidato `2` l'ho scritto COI NUMERI**, perche' *«non appaiato a `dtau < 1`»* e'
+piu' grossolano del vero: ### **non e' appaiato nemmeno a `dtau = 1`** *(`0.0820` contro
+`~1e-15` dell'esatto)*, **ma la' e' piccolo e sta tre volte SOTTO il caso** — e
+### ⭐ **senza la moneta di spin l'appaiamento a `dtau = 1` torna ESATTO** *(`4.133e-15`)*,
+### **quindi il candidato `2` e', piu' precisamente, LA MONETA DI SPIN.**
+### ② ⛔⛔ **E UN AVVERTIMENTO CONTRO L'IDEA, che e' giusto stia nella sua stessa voce:**
+con `n` **GEOMETRICI** esiste una simmetria antiunitaria **ESATTA** *(`5.5e-16`, con
+Kramers)*. ### **Cioe' la scelta <<`n` = direzioni di moto>> POTREBBE RESTITUIRE la
+simmetria e TOGLIERE il candidato `2`.** ### **Non e' detto che lo faccia** *(la' `U = I`,
+e col gauge casuale la mappa si rompe)*, **ma e' la prima cosa da misurare.**
+
+### 📌 **E una cosa che la collocazione rende visibile:** le due strade ### **non sono
+alternative esclusive per costruzione** — le condizioni `1` e `3` di Sakharov sono
+**ingredienti comuni**, e cio' che le separa e' ### **la `2`.** ### **Quindi la prima misura
+utile, quando `L5` si aprira', e' sulla `2`.**
