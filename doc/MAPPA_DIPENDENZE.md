@@ -556,3 +556,55 @@ toccato, e la forma dell'accoppiamento e' una DECISIONE DI LUCA** — con tre fa
 ### **la sorgente `rho` non ripara l'equivalenza**, ### **la linearita' di `beta` non da'
 un effetto lineare**, e ### **`beta` lineare ⟺ `alpha` logaritmica**, che il vincolo `L6`
 dice ### **sperimentalmente limitato in meccanica quantistica** *(da confrontare in `L6`)*.
+
+---
+
+## 16. ⭐⭐ `L2` — **CON LA SORGENTE FERMA IL VERSO SI ROVESCIA, E LA RISPOSTA E' LINEARE**
+*(`2026-10-15`)*
+
+> ### ⛔⛔ **E LA CAUSA DI ENTRAMBI I ROVESCIAMENTI E' UNA SOLA: nei tre pezzi precedenti
+> la sorgente NON ERA FERMA.** Il grumo si disperde, e ### **la risposta di primo ordine di
+> una sorgente che si muove e' un'onda che si media a zero: resta `beta^2`.**
+> ### ⭐ **La gravita' di una massa e' il suo campo STATICO.**
+
+### ⛔ **IL VERSO:** `dLambda` sulla sorgente e' ### **NEGATIVA in tutti e `24` i casi**
+*(`4` forme x `2` `dtau` x `3` accensioni)*, da `85` a ### **`1560` barre.**
+### **IL VUOTO SI RITIRA: LA MATERIA CONSUMA IL VUOTO** — cioe' ### **il verso che Luca
+aveva DECISO**, e che la misura a sorgente libera dava **al contrario.**
+### 📌 **Non e' che una delle due sia sbagliata: misurano DUE COSE DIVERSE** — la
+### **scia** *(canale `beta^2`, segno positivo)* e il ### **campo** *(primo ordine, segno
+negativo)*.
+
+### ⭐⭐ **LA LINEARITA', e questo e' il numero che pesa di piu' su tutto il disegno:**
+la pendenza `log`-`log` di `|dLambda|` in `x` e' ### **`3.000` per `S1`** *(dove
+`beta ~ x^3`)* e ### **`1.645` per `S4`** *(dove `beta ~ x^1.6366`)* — ### **tre cifre.**
+### ⛔ **Cioe' LA RISPOSTA STATICA E' LINEARE IN `beta`, e l'esponente di `beta` E'
+l'esponente dell'effetto.** ### **L'`x^6` del secondo pezzo era un ARTEFATTO.**
+
+### ⚠ **E riguarda IL BERSAGLIO DEL PROGETTO:** la prova `②` di
+`doc/IPOTESI_gravita_a_spinta.md` chiede ### **con che legge** due masse si avvicinano, e
+questo numero dice che ### **la legge dell'effetto e' quella di `beta`** — quindi
+### **la linearita' chiesta su `beta` TORNA a essere la cosa giusta da chiedere**, al
+contrario di quello che avevo concluso nel terzo pezzo.
+
+### ⭐ **LA SOVRAPPOSIZIONE VALE** dove la risposta non e' satura: a `x = 0.01` lo scarto
+relativo e' ### **`< 1e-4` per `S1`**, `0.003` per `S4`, `0.02` per `S2` e `S3`.
+### ⚠ **A `x = 0.1` tre forme su quattro sono GIA' SATURE** *(`|dLambda| = 3.8` su `4`)*, e
+la' il confronto ### **non distingue <<non si sovrappone>> da <<e' satura>>.**
+
+### 📌 **IL PROFILO e' monotono e cambia segno a `r = 14`-`15`, che e' MEZZO TORO:**
+### **non e' una lunghezza fisica, e' la compensazione delle immagini periodiche.**
+### ⛔ **Quindi il toro `31x31` non basta a leggere la legge di decadimento**, e `log r`
+### **non si adatta** — ne' si potrebbe.
+
+### ⛔⛔ **E DUE COSE CHE QUESTA MISURA NON DICE, e che vanno lette con lei:**
+### **① niente sul verso `vuoto -> materia`** *(il congelamento esclude la retroazione per
+costruzione)*; ### **② niente sul principio di equivalenza** *(la sorgente e' di una sola
+elicita')*.
+### ⚠ **E la sorgente congelata VIOLA la conservazione per costruzione: e' uno STRUMENTO**
+*(la «massa di prova»)*, ### **non una legge, e non entra in nessuna tabella.**
+
+### ⛔ **Il livello resta `L2`, e la scelta della forma e' una DECISIONE DI LUCA**, da
+prendere con questi quattro fatti: ### **il verso statico e' quello deciso**;
+### **l'esponente dell'effetto E' quello di `beta`**; ### **la sovrapposizione vale fuori
+dalla saturazione**; ### **`S1` e' l'unica che resta perturbativa oltre `x = 0.1`.**

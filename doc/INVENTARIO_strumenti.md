@@ -3643,6 +3643,8 @@ scena **cresca** come gli archi *(`4.00x` su `4.00x` atteso)*; `m3` **`0.005114`
 | **file** | `primo_ordine/_misura_statica_l2.py` |
 | **BLOB** *(sha1 dei byte grezzi)* | `429c2441` |
 | **IL COMANDO, verbatim** | `python primo_ordine/_misura_statica_l2.py` |
+| **i DUE REFERTI** | `doc/referti_l2/risposta_statica_tre_intensita.txt` dal blob ### **`429c2441`** *(`618.2` s, `20`/`21`)* · `doc/referti_l2/risposta_statica.txt` dal blob `4a1402ed` *(la PRIMA corsa, `532.4` s: la sovrapposizione provata solo a `x = 1` e `0.1`)*. ### ⚠ **Due corse, due blob, due referti: un file di risultati NON SI SOVRASCRIVE** |
+| ### ⛔ **il braccio che FALLISCE** | `(9)` la somma di `|phi|^2` deriva di `1.666e-09` contro una soglia ### **mia e ASSOLUTA** di `1e-9`; la deriva ### **relativa** e' `4.3e-13` su `3844`, cioe' ### **un ulp per tick.** ### **La soglia NON e' stata cambiata** |
 | ### ⚠ **sta FUORI dal `pre-commit`** | corsa lunga su un toro `31x31`: **misura DICHIARATA** |
 | ### ⛔⛔ **LA SORGENTE CONGELATA E' UNO STRUMENTO, NON UNA LEGGE** | e' la ### **<<massa di prova>>**: un corpo che **genera il campo e non lo subisce.** ### **Viola la conservazione PER COSTRUZIONE**, e percio' ### **non entra in nessuna tabella** |
 | ### ⭐⭐ **e il congelamento e' una FOTOGRAFIA di `rho`** | il termine legge ### **una `rho` FISSA, presa al tick `0`, in ENTRAMBE le meta' della saturazione** *(integrazione del guardiano dopo `e01e46f`)*. ### ⚠ **Col solo ripristino per tick la sorgente era ferma SOLO ai confini dei tick**, e il motivo e' ### **il passo PALINDROMO**: la saturazione agisce `2` volte, e fra le due girano Grover e spostamento su `psi` |

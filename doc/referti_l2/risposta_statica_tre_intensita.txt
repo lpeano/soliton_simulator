@@ -1,0 +1,170 @@
+[TIMBRO] _misura_statica_l2.py  sha1-BYTE 429c2441  committato e pulito
+================================================================================================
+LA RISPOSTA DEL VUOTO A UNA SORGENTE FERMA -- L2, quarto pezzo.
+### LA SORGENTE CONGELATA E' UNO STRUMENTO (la <<massa di prova>>), NON UNA
+### LEGGE: viola la conservazione PER COSTRUZIONE, e non entra in nessuna
+### tabella. IL MOTORE NON SI TOCCA.
+================================================================================================
+  LA CONFIGURAZIONE: toro (31, 31) = 961 nodi   TICK = 2000 (1200 nella scansione)
+  accensioni T = (0, 100, 800) (0 = DI COLPO)   transitorio = 200   finestre = 10
+  dtau = (0.5, 0.25)   x = (0.01, 0.03, 0.1, 0.3, 1.0)   x del verso = 1.00   separazione = 10
+  raggio = 1   seme = 7   vuoto = 1.0   forme = ('S1', 'S2', 'S3', 'S4')
+  ### IL CONGELAMENTO: psi si RIPRISTINA a ogni tick (scelta DICHIARATA).
+  ### CORSA LUNGA: sta FUORI dal pre-commit, come misura DICHIARATA.
+------------------------------------------------------------------------------------------------
+### (1) IL VUOTO DI RIFERIMENTO su (31, 31): senza sorgente, dev'essere STAZIONARIO
+  (1) vuoto libero fermo a dtau = 0.50                       PASSA   max |Lambda(t) - Lambda(0)| = 0.000e+00 su 2000 tick, e la somma |phi|^2 deriva di 0.000e+00
+  (1) vuoto libero fermo a dtau = 0.25                       PASSA   max |Lambda(t) - Lambda(0)| = 0.000e+00 su 2000 tick, e la somma |phi|^2 deriva di 0.000e+00
+------------------------------------------------------------------------------------------------
+### (2) IL CONGELAMENTO FA QUALCOSA? rho con e SENZA il ripristino
+###     (senza questo braccio <<rho costante>> sarebbe un FALSO-ZERO:
+###      e' costante perche' LO IMPONGO, e devo mostrare che altrimenti cambia)
+  (2) ripristino a ogni TICK: max |rho(t) - rho(0)|          PASSA   0.000e+00 su 400 tick  (atteso: ESATTAMENTE 0)
+      larghezza di rho (raggio quadratico medio): t=0 0.8944   t=400 0.8944
+  (2) ripristino SPENTO: max |rho(t) - rho(0)|               PASSA   3.173e+00 su 400 tick  (atteso: > 1e-3, cioe' la sorgente SI MUOVE)
+      larghezza di rho (raggio quadratico medio): t=0 0.8944   t=400 12.5019
+------------------------------------------------------------------------------------------------
+### (3) alpha NON PUO' CONTARE: col metodo della FOTOGRAFIA deve valere AL BIT
+###     e col MIO metodo (rho corrente) il mandato non lo garantiva: si misura
+###     la differenza, e si dice A QUALE delle due applicazioni per tick nasce.
+  (3) S1 FOTO: alpha = 0 da' lo STESSO Lambda(t)             PASSA   max |differenza| = 0.000e+00 su 200 tick  (0 = identico AL BIT)
+      S1 rho CORRENTE: max |differenza| = 5.951e-14   <- il mio metodo di e01e46f
+  (3) S2 FOTO: alpha = 0 da' lo STESSO Lambda(t)             PASSA   max |differenza| = 0.000e+00 su 200 tick  (0 = identico AL BIT)
+      S2 rho CORRENTE: max |differenza| = 1.484e+00   <- il mio metodo di e01e46f
+  (3-bis) la saturazione agisce DUE volte per tick           PASSA   2 applicazioni in composizione.ORDINE su 12 pezzi: e' il PALINDROMO
+      corrente  rho vista dal termine, chiamata per chiamata (3 tick): #1 0.0e+00  #2 8.9e-16  #3 0.0e+00  #4 4.4e-16  #5 0.0e+00  #6 8.9e-16
+  (3-bis) con rho CORRENTE la differenza nasce alla SECONDA  PASSA   chiamata 1: 0.0e+00 (identica)   chiamata 2: 8.9e-16 (diversa)
+      foto      rho vista dal termine, chiamata per chiamata (3 tick): #1 0.0e+00  #2 0.0e+00  #3 0.0e+00  #4 0.0e+00  #5 0.0e+00  #6 0.0e+00
+  (3-bis) con la FOTOGRAFIA ogni chiamata vede la STESSA rho PASSA   massimo su 6 chiamate: 0.0e+00
+  (3-ter) FOTO: psi LIBERA da' lo stesso Lambda(t) AL BIT    PASSA   max |differenza| = 0.000e+00 -> la saturazione E' l'unico canale materia->vuoto
+------------------------------------------------------------------------------------------------
+### (4) IL CONTROLLO NULLO: beta = 0 -> dLambda = 0 esatto
+  (4) beta = 0 a dtau = 0.50                                 PASSA   max |dLambda| = 0.000e+00 su 200 tick
+  (4) beta = 0 a dtau = 0.25                                 PASSA   max |dLambda| = 0.000e+00 su 200 tick
+------------------------------------------------------------------------------------------------
+### (a) IL SEGNO di dLambda sulla sorgente, e per TRE accensioni
+###     x = 1.00   2000 tick   finestra da T+200   10 blocchi
+  S1 dtau=0.50 T=0     dLambda = -3.942689e+00 +- 4.797e-03 (821.9 barre)   somma-nodi -9.45e-13   rho fermo 0.0e+00   [6.4 s]
+  S1 dtau=0.50 T=100   dLambda = -3.958104e+00 +- 5.310e-03 (745.5 barre)   somma-nodi -9.89e-13   rho fermo 0.0e+00   [6.2 s]
+  S1 dtau=0.50 T=800   dLambda = -3.960144e+00 +- 4.639e-03 (853.7 barre)   somma-nodi -1.29e-12   rho fermo 0.0e+00   [6.3 s]
+  S1 dtau=0.25 T=0     dLambda = -3.958342e+00 +- 2.678e-03 (1478.4 barre)   somma-nodi -9.24e-16   rho fermo 0.0e+00   [6.1 s]
+  S1 dtau=0.25 T=100   dLambda = -3.973796e+00 +- 3.120e-03 (1273.7 barre)   somma-nodi +1.44e-16   rho fermo 0.0e+00   [6.1 s]
+  S1 dtau=0.25 T=800   dLambda = -3.978846e+00 +- 2.549e-03 (1560.6 barre)   somma-nodi +6.78e-16   rho fermo 0.0e+00   [6.1 s]
+  S2 dtau=0.50 T=0     dLambda = -3.260887e+00 +- 3.162e-02 (103.1 barre)   somma-nodi -9.21e-13   rho fermo 0.0e+00   [6.2 s]
+  S2 dtau=0.50 T=100   dLambda = -3.246839e+00 +- 3.209e-02 (101.2 barre)   somma-nodi -9.64e-13   rho fermo 0.0e+00   [6.1 s]
+  S2 dtau=0.50 T=800   dLambda = -3.210339e+00 +- 3.251e-02 (98.8 barre)   somma-nodi -1.27e-12   rho fermo 0.0e+00   [6.2 s]
+  S2 dtau=0.25 T=0     dLambda = -3.629795e+00 +- 2.223e-02 (163.3 barre)   somma-nodi -1.03e-15   rho fermo 0.0e+00   [6.1 s]
+  S2 dtau=0.25 T=100   dLambda = -3.695235e+00 +- 2.022e-02 (182.8 barre)   somma-nodi -1.92e-15   rho fermo 0.0e+00   [6.1 s]
+  S2 dtau=0.25 T=800   dLambda = -3.723581e+00 +- 1.333e-02 (279.3 barre)   somma-nodi -2.37e-15   rho fermo 0.0e+00   [6.2 s]
+  S3 dtau=0.50 T=0     dLambda = -3.893402e+00 +- 9.319e-03 (417.8 barre)   somma-nodi -9.44e-13   rho fermo 0.0e+00   [6.2 s]
+  S3 dtau=0.50 T=100   dLambda = -3.919142e+00 +- 1.017e-02 (385.5 barre)   somma-nodi -9.87e-13   rho fermo 0.0e+00   [6.2 s]
+  S3 dtau=0.50 T=800   dLambda = -3.921646e+00 +- 7.689e-03 (510.0 barre)   somma-nodi -1.29e-12   rho fermo 0.0e+00   [6.2 s]
+  S3 dtau=0.25 T=0     dLambda = -3.926162e+00 +- 5.485e-03 (715.8 barre)   somma-nodi +1.74e-16   rho fermo 0.0e+00   [6.2 s]
+  S3 dtau=0.25 T=100   dLambda = -3.947374e+00 +- 5.935e-03 (665.1 barre)   somma-nodi -1.08e-15   rho fermo 0.0e+00   [6.5 s]
+  S3 dtau=0.25 T=800   dLambda = -3.956702e+00 +- 4.260e-03 (928.9 barre)   somma-nodi -9.15e-16   rho fermo 0.0e+00   [6.1 s]
+  S4 dtau=0.50 T=0     dLambda = -3.316990e+00 +- 3.552e-02 (93.4 barre)   somma-nodi -9.24e-13   rho fermo 0.0e+00   [6.6 s]
+  S4 dtau=0.50 T=100   dLambda = -3.332391e+00 +- 3.919e-02 (85.0 barre)   somma-nodi -9.69e-13   rho fermo 0.0e+00   [6.2 s]
+  S4 dtau=0.50 T=800   dLambda = -3.329940e+00 +- 1.805e-02 (184.5 barre)   somma-nodi -1.28e-12   rho fermo 0.0e+00   [6.2 s]
+  S4 dtau=0.25 T=0     dLambda = -3.712455e+00 +- 2.430e-02 (152.8 barre)   somma-nodi -2.01e-15   rho fermo 0.0e+00   [6.1 s]
+  S4 dtau=0.25 T=100   dLambda = -3.777888e+00 +- 1.866e-02 (202.4 barre)   somma-nodi -6.91e-16   rho fermo 0.0e+00   [6.2 s]
+  S4 dtau=0.25 T=800   dLambda = -3.735069e+00 +- 1.091e-02 (342.5 barre)   somma-nodi -1.44e-15   rho fermo 0.0e+00   [6.1 s]
+  (9) la somma di |phi|^2 e' CONSERVATA in ogni corsa        ### FALLISCE   deriva massima 1.666e-09 su tutte le corse del braccio (a)
+------------------------------------------------------------------------------------------------
+### (d) IL PROFILO in distanza: dLambda(r) per anelli, e DOVE cambia segno
+###     ⛔ NON lo adatto a log r: il mandato lo vieta, e un profilo si guarda
+###        PRIMA di sceglierne la legge.
+  S1 dtau=0.50  r=0  -3.992e+00+-9.9e-04  r=1  -3.950e+00+-6.4e-03  r=2  -3.616e+00+-4.8e-02  r=3  -3.154e+00+-1.0e-01  r=4  -2.713e+00+-1.5e-01  r=5  -2.318e+00+-1.9e-01  r=6  -1.958e+00+-2.1e-01
+      r=7  -1.628e+00+-2.2e-01  r=8  -1.321e+00+-2.1e-01  r=12 -2.922e-01+-1.3e-01  r=16 +3.485e-01+-1.4e-01  r=20 +7.410e-01+-8.7e-02  r=24 +1.209e+00+-3.1e-01  r=28 +1.676e+00+-5.8e-01   cambio di segno a r = 14
+  S1 dtau=0.25  r=0  -3.997e+00+-3.7e-04  r=1  -3.968e+00+-3.8e-03  r=2  -3.667e+00+-3.9e-02  r=3  -3.264e+00+-8.2e-02  r=4  -2.889e+00+-1.1e-01  r=5  -2.545e+00+-1.3e-01  r=6  -2.220e+00+-1.3e-01
+      r=7  -1.910e+00+-1.2e-01  r=8  -1.609e+00+-1.1e-01  r=12 -4.454e-01+-1.5e-01  r=16 +3.647e-01+-1.8e-01  r=20 +8.999e-01+-1.1e-01  r=24 +1.463e+00+-3.1e-01  r=28 +2.031e+00+-5.8e-01   cambio di segno a r = 14
+  S2 dtau=0.50  r=0  -3.042e+00+-3.9e-02  r=1  -3.298e+00+-3.1e-02  r=2  -3.422e+00+-4.3e-02  r=3  -3.182e+00+-8.2e-02  r=4  -2.792e+00+-1.3e-01  r=5  -2.397e+00+-1.7e-01  r=6  -2.027e+00+-1.9e-01
+      r=7  -1.687e+00+-2.1e-01  r=8  -1.365e+00+-2.1e-01  r=12 -3.047e-01+-1.5e-01  r=16 +3.445e-01+-1.3e-01  r=20 +7.477e-01+-9.3e-02  r=24 +1.243e+00+-3.2e-01  r=28 +1.741e+00+-5.8e-01   cambio di segno a r = 14
+  S2 dtau=0.25  r=0  -3.574e+00+-3.5e-02  r=1  -3.725e+00+-1.8e-02  r=2  -3.719e+00+-2.7e-02  r=3  -3.393e+00+-7.2e-02  r=4  -3.030e+00+-1.1e-01  r=5  -2.687e+00+-1.4e-01  r=6  -2.356e+00+-1.4e-01
+      r=7  -2.041e+00+-1.3e-01  r=8  -1.732e+00+-1.1e-01  r=12 -5.225e-01+-1.4e-01  r=16 +3.814e-01+-1.8e-01  r=20 +9.830e-01+-1.1e-01  r=24 +1.592e+00+-3.1e-01  r=28 +2.142e+00+-6.2e-01   cambio di segno a r = 15
+  S3 dtau=0.50  r=0  -3.976e+00+-3.0e-03  r=1  -3.905e+00+-1.2e-02  r=2  -3.528e+00+-5.7e-02  r=3  -3.053e+00+-1.1e-01  r=4  -2.613e+00+-1.6e-01  r=5  -2.223e+00+-1.9e-01  r=6  -1.873e+00+-2.1e-01
+      r=7  -1.555e+00+-2.1e-01  r=8  -1.261e+00+-2.0e-01  r=12 -2.837e-01+-1.3e-01  r=16 +3.348e-01+-1.3e-01  r=20 +7.181e-01+-8.9e-02  r=24 +1.162e+00+-3.0e-01  r=28 +1.602e+00+-5.5e-01   cambio di segno a r = 14
+  S3 dtau=0.25  r=0  -3.988e+00+-1.3e-03  r=1  -3.937e+00+-7.1e-03  r=2  -3.606e+00+-4.3e-02  r=3  -3.196e+00+-8.3e-02  r=4  -2.820e+00+-1.1e-01  r=5  -2.477e+00+-1.2e-01  r=6  -2.155e+00+-1.2e-01
+      r=7  -1.848e+00+-1.2e-01  r=8  -1.550e+00+-1.1e-01  r=12 -4.188e-01+-1.4e-01  r=16 +3.532e-01+-1.7e-01  r=20 +8.659e-01+-1.0e-01  r=24 +1.413e+00+-3.1e-01  r=28 +1.966e+00+-5.7e-01   cambio di segno a r = 14
+  S4 dtau=0.50  r=0  -3.178e+00+-4.4e-02  r=1  -3.371e+00+-3.8e-02  r=2  -3.466e+00+-4.7e-02  r=3  -3.196e+00+-8.6e-02  r=4  -2.798e+00+-1.3e-01  r=5  -2.408e+00+-1.7e-01  r=6  -2.039e+00+-2.0e-01
+      r=7  -1.701e+00+-2.1e-01  r=8  -1.377e+00+-2.1e-01  r=12 -3.052e-01+-1.5e-01  r=16 +3.473e-01+-1.4e-01  r=20 +7.490e-01+-9.6e-02  r=24 +1.254e+00+-3.3e-01  r=28 +1.757e+00+-5.9e-01   cambio di segno a r = 14
+  S4 dtau=0.25  r=0  -3.686e+00+-3.2e-02  r=1  -3.801e+00+-1.6e-02  r=2  -3.749e+00+-2.7e-02  r=3  -3.398e+00+-7.3e-02  r=4  -3.032e+00+-1.1e-01  r=5  -2.687e+00+-1.4e-01  r=6  -2.357e+00+-1.4e-01
+      r=7  -2.042e+00+-1.3e-01  r=8  -1.735e+00+-1.1e-01  r=12 -5.228e-01+-1.4e-01  r=16 +3.823e-01+-1.9e-01  r=20 +9.852e-01+-1.1e-01  r=24 +1.593e+00+-3.1e-01  r=28 +2.146e+00+-6.2e-01   cambio di segno a r = 15
+------------------------------------------------------------------------------------------------
+### (e) I DUE METODI A CONFRONTO: fotografia FISSA di rho contro rho CORRENTE
+###     (il secondo e' il mio metodo di e01e46f: la sorgente ferma SOLO ai
+###      confini dei tick. Se la differenza e' piccola, il prezzo che avevo
+###      dichiarato era trascurabile; se no, conta la FOTOGRAFIA.)
+  S1 dtau=0.50  sorgente: FOTO -3.9544e+00 +- 7.4e-03   CORRENTE -3.9884e+00 +- 3.6e-03
+      e lo scarto FRA I DUE PROFILI dLambda(r): 0.1366 relativo (su 31 anelli)   stesso segno: SI'
+  S2 dtau=0.50  sorgente: FOTO -3.2997e+00 +- 3.4e-02   CORRENTE -3.7058e+00 +- 3.5e-02
+      e lo scarto FRA I DUE PROFILI dLambda(r): 0.1566 relativo (su 31 anelli)   stesso segno: SI'
+  S3 dtau=0.50  sorgente: FOTO -3.9116e+00 +- 1.4e-02   CORRENTE -3.9770e+00 +- 4.6e-03
+      e lo scarto FRA I DUE PROFILI dLambda(r): 0.1490 relativo (su 31 anelli)   stesso segno: SI'
+  S4 dtau=0.50  sorgente: FOTO -3.3782e+00 +- 4.6e-02   CORRENTE -3.7519e+00 +- 3.3e-02
+      e lo scarto FRA I DUE PROFILI dLambda(r): 0.1480 relativo (su 31 anelli)   stesso segno: SI'
+------------------------------------------------------------------------------------------------
+### (b) LA LINEARITA' in x: pendenza log-log di |dLambda| sulla sorgente
+###     x = (0.01, 0.03, 0.1, 0.3, 1.0)   1200 tick   T = 100   finestra da 300
+###     ATTESO se la risposta statica e' LINEARE in beta:
+###       S1 ~ 3   S2 ~ 1   S3 ~ 1   S4 ~ 1.64   (l'esponente di beta)
+###     e il DOPPIO se la risposta e' quadratica, come nei tre pezzi precedenti.
+  S1 dtau=0.50  dLambda: 0.01:-4.04e-05  0.03:-1.09e-03  0.1:-4.09e-02  0.3:-3.96e+00  1:-3.95e+00
+      pendenze LOCALI: [0.01->0.03] 3.000  [0.03->0.1] 3.010  [0.1->0.3] 4.162  [0.3->1] -0.001
+  S1 dtau=0.25  dLambda: 0.01:-4.70e-05  0.03:-1.27e-03  0.1:-4.76e-02  0.3:-3.97e+00  1:-3.97e+00
+      pendenze LOCALI: [0.01->0.03] 3.000  [0.03->0.1] 3.010  [0.1->0.3] 4.028  [0.3->1] 0.000
+  S2 dtau=0.50  dLambda: 0.01:-6.34e-01  0.03:-2.36e+00  0.1:-3.78e+00  0.3:-3.66e+00  1:-3.30e+00
+      pendenze LOCALI: [0.01->0.03] 1.194  [0.03->0.1] 0.394  [0.1->0.3] -0.030  [0.3->1] -0.087
+  S2 dtau=0.25  dLambda: 0.01:-7.38e-01  0.03:-2.87e+00  0.1:-3.93e+00  0.3:-3.87e+00  1:-3.73e+00
+      pendenze LOCALI: [0.01->0.03] 1.236  [0.03->0.1] 0.262  [0.1->0.3] -0.013  [0.3->1] -0.030
+  S3 dtau=0.50  dLambda: 0.01:-6.27e-01  0.03:-2.11e+00  0.1:-3.83e+00  0.3:-3.90e+00  1:-3.91e+00
+      pendenze LOCALI: [0.01->0.03] 1.106  [0.03->0.1] 0.495  [0.1->0.3] 0.016  [0.3->1] 0.002
+  S3 dtau=0.25  dLambda: 0.01:-7.28e-01  0.03:-2.47e+00  0.1:-3.94e+00  0.3:-3.94e+00  1:-3.95e+00
+      pendenze LOCALI: [0.01->0.03] 1.110  [0.03->0.1] 0.388  [0.1->0.3] 0.002  [0.3->1] 0.001
+  S4 dtau=0.50  dLambda: 0.01:-7.45e-02  0.03:-4.54e-01  0.1:-3.81e+00  0.3:-3.72e+00  1:-3.38e+00
+      pendenze LOCALI: [0.01->0.03] 1.645  [0.03->0.1] 1.766  [0.1->0.3] -0.023  [0.3->1] -0.079
+  S4 dtau=0.25  dLambda: 0.01:-8.66e-02  0.03:-5.29e-01  0.1:-3.94e+00  0.3:-3.92e+00  1:-3.83e+00
+      pendenze LOCALI: [0.01->0.03] 1.647  [0.03->0.1] 1.669  [0.1->0.3] -0.007  [0.3->1] -0.019
+------------------------------------------------------------------------------------------------
+### (c) LA SOVRAPPOSIZIONE: due sorgenti a distanza 10 (nodi 0 e 310)
+###     dLambda(A+B) contro dLambda(A) + dLambda(B), NODO PER NODO
+  S1 dtau=0.50 x=1.00  scarto relativo = 0.4829 +- 0.1007   (nodo peggiore 0.1879)
+  S1 dtau=0.50 x=0.10  scarto relativo = 0.0030 +- 0.0008   (nodo peggiore 0.0010)
+  S1 dtau=0.50 x=0.01  scarto relativo = 0.0000 +- 0.0000   (nodo peggiore 0.0000)
+  S1 dtau=0.25 x=1.00  scarto relativo = 0.2409 +- 0.0094   (nodo peggiore 0.2449)
+  S1 dtau=0.25 x=0.10  scarto relativo = 0.0016 +- 0.0001   (nodo peggiore 0.0012)
+  S1 dtau=0.25 x=0.01  scarto relativo = 0.0000 +- 0.0000   (nodo peggiore 0.0000)
+  S2 dtau=0.50 x=1.00  scarto relativo = 0.4648 +- 0.0768   (nodo peggiore 0.2679)
+  S2 dtau=0.50 x=0.10  scarto relativo = 0.4148 +- 0.0782   (nodo peggiore 0.1925)
+  S2 dtau=0.50 x=0.01  scarto relativo = 0.0197 +- 0.0041   (nodo peggiore 0.0107)
+  S2 dtau=0.25 x=1.00  scarto relativo = 0.2676 +- 0.0095   (nodo peggiore 0.2980)
+  S2 dtau=0.25 x=0.10  scarto relativo = 0.2610 +- 0.0082   (nodo peggiore 0.2686)
+  S2 dtau=0.25 x=0.01  scarto relativo = 0.0117 +- 0.0009   (nodo peggiore 0.0120)
+  S3 dtau=0.50 x=1.00  scarto relativo = 0.4538 +- 0.0954   (nodo peggiore 0.1550)
+  S3 dtau=0.50 x=0.10  scarto relativo = 0.3713 +- 0.0709   (nodo peggiore 0.1228)
+  S3 dtau=0.50 x=0.01  scarto relativo = 0.0193 +- 0.0040   (nodo peggiore 0.0105)
+  S3 dtau=0.25 x=1.00  scarto relativo = 0.2284 +- 0.0089   (nodo peggiore 0.2199)
+  S3 dtau=0.25 x=0.10  scarto relativo = 0.2100 +- 0.0056   (nodo peggiore 0.1985)
+  S3 dtau=0.25 x=0.01  scarto relativo = 0.0115 +- 0.0009   (nodo peggiore 0.0118)
+  S4 dtau=0.50 x=1.00  scarto relativo = 0.4614 +- 0.0762   (nodo peggiore 0.2682)
+  S4 dtau=0.50 x=0.10  scarto relativo = 0.3908 +- 0.0720   (nodo peggiore 0.1869)
+  S4 dtau=0.50 x=0.01  scarto relativo = 0.0029 +- 0.0007   (nodo peggiore 0.0014)
+  S4 dtau=0.25 x=1.00  scarto relativo = 0.2712 +- 0.0097   (nodo peggiore 0.2994)
+  S4 dtau=0.25 x=0.10  scarto relativo = 0.2464 +- 0.0067   (nodo peggiore 0.2608)
+  S4 dtau=0.25 x=0.01  scarto relativo = 0.0015 +- 0.0001   (nodo peggiore 0.0016)
+================================================================================================
+### IL VERDETTO SUL SEGNO, forma per forma (accensione T = 100)
+  (a) S1 a dtau=0.50: dLambda fuori da 3 barre               PASSA   dLambda = -3.9581e+00 +- 5.310e-03 (745.5 barre) -> il vuoto SI RITIRA
+  (a) S1 a dtau=0.25: dLambda fuori da 3 barre               PASSA   dLambda = -3.9738e+00 +- 3.120e-03 (1273.7 barre) -> il vuoto SI RITIRA
+  (a) S2 a dtau=0.50: dLambda fuori da 3 barre               PASSA   dLambda = -3.2468e+00 +- 3.209e-02 (101.2 barre) -> il vuoto SI RITIRA
+  (a) S2 a dtau=0.25: dLambda fuori da 3 barre               PASSA   dLambda = -3.6952e+00 +- 2.022e-02 (182.8 barre) -> il vuoto SI RITIRA
+  (a) S3 a dtau=0.50: dLambda fuori da 3 barre               PASSA   dLambda = -3.9191e+00 +- 1.017e-02 (385.5 barre) -> il vuoto SI RITIRA
+  (a) S3 a dtau=0.25: dLambda fuori da 3 barre               PASSA   dLambda = -3.9474e+00 +- 5.935e-03 (665.1 barre) -> il vuoto SI RITIRA
+  (a) S4 a dtau=0.50: dLambda fuori da 3 barre               PASSA   dLambda = -3.3324e+00 +- 3.919e-02 (85.0 barre) -> il vuoto SI RITIRA
+  (a) S4 a dtau=0.25: dLambda fuori da 3 barre               PASSA   dLambda = -3.7779e+00 +- 1.866e-02 (202.4 barre) -> il vuoto SI RITIRA
+================================================================================================
+  20 su 21   [corsa intera: 618.2 s]
+### ⛔ E LA FORMA NON SI DECIDE QUI: la tabella NON e' toccata, e la scelta
+###   fra S1-S4 (o altro) e' di Luca, coi numeri di questa misura.
+### ⛔ E IL VERSO E' UNO SOLO (materia -> vuoto): il congelamento ESCLUDE la
+###   retroazione, quindi questa misura non dice niente sul verso opposto.
+================================================================================================

@@ -16977,3 +16977,71 @@ A `x = 0.01` invece `S2` vale `0.63` su `4`: ### **fuori dalla saturazione.**
 ### ✅ **E NON E' UNA SOGLIA AGGIUSTATA PER FAR PASSARE UN BRACCIO:** e' una **scena
 aggiunta** perche' quella di prima ### **rispondeva a un'altra domanda.** ### **Il criterio
 non l'ho toccato.**
+
+### ⚠ **E UNA CORREZIONE A UN COMMIT CHE HO APPENA FATTO, prima che qualcuno la trovi:**
+in `e3486bd8` il referto della **PRIMA** corsa e' entrato nel commit *(l'ha preso
+`git add -A`)*, e la riga *«il referto nasce dal blob DI QUESTO commit»* del suo messaggio
+### **e' imprecisa:** `doc/referti_l2/risposta_statica.txt` nasce dal blob ### **`4a1402ed`**
+*(committato in `0e2a986a`)*, e il suo timbro in testa lo dice. ### ✅ **Il referto della
+seconda corsa e' un FILE NUOVO** — `doc/referti_l2/risposta_statica_tre_intensita.txt` —
+### **perche' un file di risultati NON SI SOVRASCRIVE**, ed e' esattamente il caso per cui
+quella regola esiste: ### **due corse, due blob, due referti.**
+
+## ⭐⭐ **I NUMERI DEL QUARTO PEZZO: IL VERSO SI ROVESCIA, E LA RISPOSTA E' LINEARE**
+
+> ### ⭐⭐ **IL VUOTO SI RITIRA DALLA MATERIA**, e non per poco: `dLambda` sulla sorgente e'
+> ### **NEGATIVA in tutti e `24` i casi** *(`4` forme x `2` `dtau` x `3` accensioni)*, da
+> `85` a ### **`1560` barre.** ### **E' il verso che avevi DECISO il `15` ottobre**, e che
+> la misura a sorgente libera dava ### **AL CONTRARIO.**
+
+### 📌 **E non dico che una delle due misure sia sbagliata: misurano DUE COSE DIVERSE.**
+Con la sorgente libera misuravo ### **la SCIA** di qualcosa che scappa *(canale `beta^2`,
+pari, segno positivo)*; con la sorgente ferma misuro ### **il CAMPO** di una massa che sta
+*(primo ordine, segno negativo)*. ### **La gravita' e' il secondo.**
+
+> ### ⭐⭐ **E LA RISPOSTA STATICA E' LINEARE IN `beta`, a tre cifre:** pendenza `log`-`log`
+> di `|dLambda|` in `x`, sull'intervallo piu' piccolo — ### **`S1` `3.000`** *(dove
+> `beta ~ x^3`)* e ### **`S4` `1.645`** *(dove `beta ~ x^1.6366`)*; `S2` `1.194` e `S3`
+> `1.106` *(atteso `1`)*.
+> ### ⛔ **Quindi l'`x^6` del secondo pezzo era un ARTEFATTO della sorgente che si muove**,
+> e ### **l'esponente di `beta` E' l'esponente dell'effetto.**
+
+### ✅ **E la previsione era scritta PRIMA**, nel task history, col suo motivo meccanico —
+il termine incrociato del hop, che dipende dalla **differenza di fase fra vicini**, `~ beta
+dtau` al primo ordine, e ### **ferma non oscilla.** ### 📌 **Avevo anche scritto perche'
+potevo sbagliarmi** *(la somma su tutti i nodi e' `0` per identita', e un profilo a somma
+nulla puo' perdere il primo ordine nell'integrale)*: ### **non e' andata cosi', e il primo
+ordine SOPRAVVIVE.**
+
+### ⚠ **E QUESTO RIMETTE IN PIEDI LA TUA RICHIESTA DI LINEARITA':** nel terzo pezzo avevo
+concluso che *«la linearita' di `beta` non basta, perche' l'effetto risponde a `beta^2`»*.
+### ⛔ **Con la sorgente ferma quella conclusione CADE:** l'effetto risponde a `beta`, e
+### **chiedere `beta` lineare torna a essere la cosa giusta da chiedere.**
+
+### ⭐ **LA SOVRAPPOSIZIONE VALE**, dove la risposta non e' satura: a `x = 0.01` lo scarto
+relativo fra `dLambda(A+B)` e `dLambda(A) + dLambda(B)` e' ### **`< 1e-4` per `S1`**,
+`0.0029` per `S4`, `0.0197` per `S2`, `0.0193` per `S3`. ### **A `x = 0.1` invece `S2`,
+`S3` e `S4` sono SATURE** *(`|dLambda| = 3.8` su `4`)*, e la' lo scarto e' `0.37`-`0.42` —
+### **che e' la saturazione, non la non-linearita'.**
+
+### 📌 **IL PROFILO lo riporto e NON lo adatto**, come dici: monotono, e ### **cambia segno
+a `r = 14`-`15`**, che e' ### **mezzo toro.** ### ⚠⚠ **Cioe' non e' una lunghezza fisica:
+e' la compensazione delle immagini periodiche**, che la somma nulla impone per identita'.
+### ⛔ **Il toro `31x31` NON basta a leggere la legge di decadimento** — e lo dico come
+limite dello strumento, non come risultato.
+
+### ⛔ **UN BRACCIO FALLISCE, E LO LASCIO FALLITO:** la somma di `|phi|^2` deriva di
+`1.666e-09` contro la mia soglia di `1e-9`. ### **La soglia e' MIA e ASSOLUTA**, e la
+deriva ### **relativa** e' `4.3e-13` su `3844` in `2000` tick, cioe' ### **circa un ulp per
+tick**: arrotondamento, non una perdita. ### ⛔ **E non la cambio:** *«non aggiustare
+parametri per far passare un braccio»* ### **vale anche quando so perche' fallisce**,
+altrimenti la regola non servirebbe a niente.
+
+### ✅ **E gli altri quattro controlli passano:** base ### **stazionaria a `0.000e+00`** su
+`2000` tick; il congelamento ### **fa qualcosa** *(senza ripristino la larghezza di `rho` va
+da `0.894` a `12.502`)*; `beta = 0` da' ### **`0` esatto**; `rho` resta fermo a
+### **`0.000e+00`** in ogni corsa.
+
+### ⛔ **E CIO' CHE QUESTA MISURA NON DICE:** ### **niente sul verso `vuoto -> materia`**
+*(il congelamento esclude la retroazione per costruzione)* e ### **niente sul principio di
+equivalenza** *(la sorgente e' di una sola elicita')*. ### **La forma non si decide qui.**
