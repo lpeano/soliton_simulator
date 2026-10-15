@@ -7,12 +7,10 @@ r"""**LA RISPOSTA DEL VUOTO A UNA SORGENTE FERMA** — *`L2`, quarto pezzo.*
 
 ## ⛔⛔ PERCHE' QUESTA MISURA ESISTE — *un difetto di protocollo dei tre pezzi precedenti*
 
-### **La sorgente NON ERA FERMA.** Il grumo si disperde *(larghezza da `0.894` a `~3.6`-`4.1`
-sul toro `7x7`, misurato in `74ba200`)*, e ### **con una sorgente che si muove la risposta di
-primo ordine e' un'onda che si media a zero: resta solo il secondo ordine, `beta^2`** — ed e'
-esattamente cio' che i tre pezzi hanno misurato *(esponente `= 2 x` quello di `beta`)*.
-### ⭐⭐ **E la gravita' di una massa e' il suo campo STATICO.** ### **Qui la sorgente sta
-ferma, e la risposta statica si isola.**
+### **La sorgente NON ERA FERMA**, e si disperde *(larghezza da `0.894` a `~3.6`-`4.1` sul
+toro `7x7`, misurato in `74ba200`)*: ### **con una sorgente che si muove la risposta di
+primo ordine e' un'onda che si media a zero, e resta solo `beta^2`** — cioe' cio' che i tre
+pezzi hanno misurato. ### ⭐⭐ **E la gravita' di una massa e' il suo campo STATICO.**
 
 ## ⛔⛔ LA SORGENTE CONGELATA E' UNO STRUMENTO DI MISURA, NON UNA LEGGE
 
@@ -87,11 +85,17 @@ FORME = ("S1", "S2", "S3", "S4")
 # ### ### **molto piu- di `2 x RAGGIO`**, e il codice VERIFICA che i due grumi siano
 # ### disgiunti invece di assumerlo.
 SEP = 10
-# ### ⛔ **LA SOVRAPPOSIZIONE SI MISURA A DUE INTENSITA-, e il motivo e- un numero:** a
+# ### ⛔ **LA SOVRAPPOSIZIONE SI MISURA A TRE INTENSITA-, e il motivo e- un numero:** a
 # ### `x = 1` la risposta e- ### **SATURA** *(`|dLambda|` arriva a `~3.9` su `Lambda = 4`,
 # ### cioe- il vuoto e- quasi tutto cacciato)*, e ### **una sovrapposizione provata solo
 # ### la- misurerebbe la saturazione invece della linearita-.**
-X_SOVR = (1.0, 0.1)
+# ### ⚠⚠ **E `0.01` E- ARRIVATA DOPO LA PRIMA CORSA, con il suo numero:** a `x = 0.1`
+# ### ### **`S2`, `S3` e `S4` sono GIA- SATURE** *(`|dLambda| = 3.8` su `4`)*, quindi la-
+# ### il confronto ### **non distingue <<non si sovrappone>> da <<e- satura>>.** A
+# ### `x = 0.01` invece `S2` vale `0.63` su `4`, ### **cioe- e- fuori dalla saturazione.**
+# ### ✅ **Non e- una soglia aggiustata per far passare un braccio: e- una SCENA
+# ### AGGIUNTA perche- quella di prima rispondeva a un-altra domanda.**
+X_SOVR = (1.0, 0.1, 0.01)
 _BASE = {}
 _CHI = {}
 # ### ⭐ **`rho` ALL'INIZIO E ALLA FINE dell'ultima corsa.** ### ⚠ **Perche' un canale

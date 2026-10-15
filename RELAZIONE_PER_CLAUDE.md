@@ -16968,3 +16968,12 @@ l'ordine lo verifica `git` invece che io.**
 ### 📌 **DUE COSE CHE HO AGGIUNTO SCRIVENDO IL CODICE, e le dichiaro invece di nasconderle:**
 ### **(i) il TRANSITORIO di `200` tick** prima della finestra di misura — il task history diceva *«la finestra comincia al tick `T`»*, ma con l'accensione ### **DI COLPO** *(`T = 0`)* comincerebbe ### **dentro il transitorio**, e misurerei l'onda invece dello stato stazionario. ### **E il confronto fra i tre `T` E' il controllo che il transitorio sia finito.**
 ### **(ii) la SOVRAPPOSIZIONE a DUE intensita'** *(`x = 1` e `x = 0.1`)*, e il motivo e' un numero: ### **a `x = 1` la risposta e' SATURA** *(`|dLambda|` arriva a `~3.9` su `Lambda = 4`, cioe' il vuoto e' quasi tutto cacciato)*, e ### **una sovrapposizione provata solo la' misurerebbe la saturazione invece della linearita'.**
+
+### ⚠⚠ **E UNA SCENA CHE HO AGGIUNTO DOPO LA PRIMA CORSA, col numero che me lo ha chiesto:**
+la sovrapposizione a ### **`x = 0.01`.** ### ⛔ **Perche' a `x = 0.1` tre forme su quattro
+sono GIA' SATURE** — `|dLambda| = 3.8` su `Lambda = 4`, cioe' il vuoto e' quasi tutto
+cacciato — e la' il confronto ### **non distingue <<non si sovrappone>> da <<e' satura>>.**
+A `x = 0.01` invece `S2` vale `0.63` su `4`: ### **fuori dalla saturazione.**
+### ✅ **E NON E' UNA SOGLIA AGGIUSTATA PER FAR PASSARE UN BRACCIO:** e' una **scena
+aggiunta** perche' quella di prima ### **rispondeva a un'altra domanda.** ### **Il criterio
+non l'ho toccato.**

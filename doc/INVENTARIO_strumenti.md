@@ -3641,7 +3641,7 @@ scena **cresca** come gli archi *(`4.00x` su `4.00x` atteso)*; `m3` **`0.005114`
 | | |
 |---|---|
 | **file** | `primo_ordine/_misura_statica_l2.py` |
-| **BLOB** *(sha1 dei byte grezzi)* | `4a1402ed` |
+| **BLOB** *(sha1 dei byte grezzi)* | `429c2441` |
 | **IL COMANDO, verbatim** | `python primo_ordine/_misura_statica_l2.py` |
 | ### ⚠ **sta FUORI dal `pre-commit`** | corsa lunga su un toro `31x31`: **misura DICHIARATA** |
 | ### ⛔⛔ **LA SORGENTE CONGELATA E' UNO STRUMENTO, NON UNA LEGGE** | e' la ### **<<massa di prova>>**: un corpo che **genera il campo e non lo subisce.** ### **Viola la conservazione PER COSTRUZIONE**, e percio' ### **non entra in nessuna tabella** |
