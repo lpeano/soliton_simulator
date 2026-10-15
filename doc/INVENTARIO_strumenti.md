@@ -3491,15 +3491,17 @@ scena **cresca** come gli archi *(`4.00x` su `4.00x` atteso)*; `m3` **`0.005114`
 
 ---
 
-### `primo_ordine/_misura_mb1.py` — **`M-B1`: IL RACCORDO AL BIT** *(2026-10-15)*
+### `primo_ordine/_misura_mb1.py` — **`M-B1`: IL RACCORDO AL BIT, PEZZO PER PEZZO** *(2026-10-15, riformulato la sera)*
 
 | | |
 |---|---|
 | **file** | `primo_ordine/_misura_mb1.py` |
-| **BLOB** *(sha1 dei byte grezzi)* | `89b49ac6` |
+| **BLOB** *(sha1 dei byte grezzi)* | `4e4bb9c3` |
 | **IL COMANDO, verbatim** | `python primo_ordine/_misura_mb1.py --contro 717bb60` |
-| **cosa misura** | che a `dtau = dtau_rif = 1` *(`theta = pi`)* il passo nuovo dia **gli stessi BYTE** del passo di `717bb60`, su **250 tick**, **`psi` E `phi`**, **2 scene** |
-| ### ✅ **il verdetto** | **PASSA**: `sha1` dei byte `eff92bbd8622` da entrambe le parti, `2720` byte |
+| **cosa misura** | che a `dtau = dtau_rif = 1` *(`theta = pi`)* ### **OGNI PEZZO** dia **gli stessi BYTE** dell'operatore di `717bb60`. ### **Sei pezzi x 2 scene**, e i due in piu' *(moneta e saturazione)* sono **il CONTROLLO**: non sono stati toccati, quindi **devono** coincidere |
+| ### ✅ **il verdetto** | **PASSA**: `12`/`12` confronti al bit |
+| ### ⛔ **PERCHE' E' STATO RIFORMULATO, ed e' un mio errore** | la prima versione pretendeva il **passo INTERO** al bit, e quella **con `M-B2` era impossibile**: `M-B2` chiede una composizione **palindroma**, che **non e'** il passo di `717bb60`. ### **Li avevo riportati dalla mappa senza controllarli**, e me ne sono accorto **solo dopo averli misurati entrambi**. ### **La riformulazione e' di Luca** |
+| ### 📌 **e l'informazione che resta** | la distanza fra il passo palindromo e quello di `717bb60` su `250` tick: **`4.55`** e **`4.13`** su scale `3.27` e `2.42`. ### **NON e' un criterio e NON e' un difetto:** i pezzi **non commutano** |
 | ### ⭐ **e il <<prima>> si prende da un `git worktree`** | non da una copia nel file *(che `H-P8` impedisce)* e **non da `git archive`**: in un albero nudo `_presidio` ### **RIFIUTA DI GIRARE** *(`P-BARRIERA`: `core.hooksPath` non impostato)*, e ha ragione — ### **un misuratore non misura dove i presidi non esistono** |
 
 ---
@@ -3509,11 +3511,13 @@ scena **cresca** come gli archi *(`4.00x` su `4.00x` atteso)*; `m3` **`0.005114`
 | | |
 |---|---|
 | **file** | `primo_ordine/_misura_mb2.py` |
-| **BLOB** *(sha1 dei byte grezzi)* | `09849679` |
+| **BLOB** *(sha1 dei byte grezzi)* | `3385a5f0` |
 | **IL COMANDO, verbatim** | `python primo_ordine/_misura_mb2.py` |
 | **cosa misura** | l'**escursione** di `H_tot` *(la somma dei generatori LOCALI, raggio ZERO)* a **tempo totale FISSO** `T = 8`, con `dtau = 1/2^k`, `k = 1..4` |
-| ### ⛔ **il verdetto** | **NON PASSA**: i rapporti sono **`2.540`, `2.204`, `2.111`** *(pendenza `1`)*, e il criterio chiedeva **`4`** |
-| ### ⭐ **e la CAUSA e' MISURATA nello stesso file** | col solo ordine **spezzato a meta' e rispecchiato** *(diagnosi, **non** una modifica alla tabella)* i rapporti diventano **`5.342`, `3.691`, `4.291`** *(pendenza `2`)*: ### **il `2` viene dalla composizione NON SIMMETRICA** |
+| ### ✅ **il verdetto, col passo PALINDROMO** | **secondo ordine**: la **pendenza complessiva** su `5` dimezzamenti e' **`2.006`** *(globale `2.32e+01 -> 2.72e-02`, fattore `854.9` dove `4^5 = 1024`)*. ### ⚠ **Ma i rapporti UNO PER UNO oscillano** — `2.966`, `3.544`, `4.684`, `5.194`, `3.343` — perche' l'errore e' **un MASSIMO su una finestra**, e un massimo **non e' una funzione liscia di `dtau`** |
+| ### ⛔ **la controprova** | lo stesso con l'ordine **di prima** *(non palindromo)*: pendenza **`1.183`**, cioe' **primo ordine**. ### **Senza, il verdetto sarebbe un FALSO-UNO:** una pendenza `2` non proverebbe che e' **il palindromo** a comprarla |
+| ### ⚠ **e una banda che e' MIA, dichiarata** | il verdetto guarda `|pendenza - 2| <= 0.25`. ### **Il criterio di Luca dice <<rapporto ~ 4>>**, e un rapporto per volta qui **non ci sta**: ### **la lettura la decide lui**, e i numeri sono tutti stampati |
+| ### 📌 **e la DIAGNOSI del 15 ottobre e' diventata la CONTROPROVA** | era *«che rapporti darebbe un ordine palindromo?»* **prima** che il palindromo entrasse in tabella *(`5.342`, `3.691`, `4.291`)*; adesso che c'e', ### **la domanda si e' rovesciata** e si misura l'ordine **vecchio** |
 | ### ⚠ **e il protocollo e' dichiarato PRIMA** | a **tick fissi** l'errore andrebbe come `N dtau^3` *(fattore `8`)*, a **tempo fisso** come `T dtau^2` *(fattore `4`)*: e' il `4` che il criterio nomina, quindi il protocollo e' **a tempo fisso** |
 
 ---
@@ -3529,3 +3533,18 @@ scena **cresca** come gli archi *(`4.00x` su `4.00x` atteso)*; `m3` **`0.005114`
 | ### ⭐ **che cosa dice** | `C Op(theta) C^-1 = Op(-theta)` vale a **OGNI** `theta` *(`0.0`–`2.4` ulp, tutti e quattro i pezzi)*; `C Op C^-1 = Op` vale a `theta = pi` con **`0.000e+00`** e **SI ROMPE** a `theta = 0.25 pi` *(`2.303`–`3.387` su scala `~3`)* |
 | ### ⛔ **LA LETTURA** | ### **la `C`-simmetria del cammino NON ERA UNA PROPRIETA' SUA: era una CONSEGUENZA del fatto che i pezzi erano INVOLUZIONI** — tutti all'angolo `pi`, dove la fase e' reale. ### **Cio' che sopravvive a `(B)` e' una `CT`**, e quella e' una decisione di Luca |
 | ### ⚠ **e il `dtau` negativo non serve** | il cono lo vieta, e **non serve**: `Op` e' unitaria e normale, quindi `Op^*= Op(-theta) = Op^-1`, e si prova **componendo** |
+
+---
+
+### `primo_ordine/_misura_spettro_l1.py` — **LO SPETTRO DEL PASSO PALINDROMO** *(2026-10-15)*
+
+| | |
+|---|---|
+| **file** | `primo_ordine/_misura_spettro_l1.py` |
+| **BLOB** *(sha1 dei byte grezzi)* | `32e1b4bd` |
+| **IL COMANDO, verbatim** | `python primo_ordine/_misura_spettro_l1.py` |
+| **cosa misura** | su un **TORO** `3x3` *(grado `4`, e senza bordi)*, col passo **palindromo** e **senza la saturazione**: l'appaiamento `eps <-> -eps`, le **degeneranze doppie** *(Kramers)*, e `C W C^-1 = W^-1` |
+| ### ⭐ **che cosa dice** | ### **la MONETA DI SPIN non si rovescia sotto `C`:** `C M C^-1 = M` da' **`0.000e+00`** mentre `= M^-1` da' `1.33e-01`. ### **E senza la moneta** `C W C^-1 = W^-1` torna **esatta** *(`3.9e-16`, `2` ulp)* e la **degenerazione di Kramers compare** *(molteplicita' minima `2`)* |
+| ### ⛔ **il caso che DEVE fallire** | lo stesso con l'ordine **NON palindromo**: `1.589`, `0.878`, `0.300`. ### **Senza, il braccio sarebbe un FALSO-UNO** |
+| ### ⚠ **un mio difetto di misura, curato** | raggruppavo le fasi **per ANGOLO**, e una coppia vicina a `+-pi` finiva in **due gruppi**: davo <<molteplicita' `1`>> dove Kramers dice `2`. ### **Si raggruppa per AUTOVALORE**, sul piano complesso |
+| ### 📌 **e `W` non e' scritta a mano** | si costruisce **applicando il passo ai vettori di base**: cosi' e' **l'operatore che il motore applica davvero**, non la mia idea di quale sia |

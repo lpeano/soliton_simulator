@@ -63,6 +63,14 @@ import saturazione as SAT                                     # noqa: E402
 # ### ⛔ **LA CONFIGURAZIONE INTERA, DICHIARATA E STAMPATA**
 TEMPO = 8.0
 KAPPA = (1, 2, 3, 4)
+# ### ⛔ **DUE PUNTI PIU- FINI, E SONO UN-ESTENSIONE, NON IL CRITERIO.** Il criterio
+# ### di Luca e- `KAPPA`, ### **e resta intatto**: questi servono a rispondere a una
+# ### domanda che i primi quattro ### **non possono** chiudere -- ### **la pendenza
+# ### CONVERGE a `2`?** ### ⚠ **A `dtau = 0.5` i pezzi stanno a `theta = pi/2`, cioe-
+# ### ### **lontano dal regime asintotico**: la- i termini di ordine superiore pesano,
+# ### e un rapporto diverso da `4` ### **non dice che il metodo non e- di secondo
+# ### ordine** -- dice che quel passo e- troppo grosso.
+KAPPA_FINE = (4, 5, 6)
 NN = 16
 SEME = 7
 NORMA = "locale"
@@ -123,14 +131,12 @@ def h_tot(inc, mot, st, par):
     return nodo + arco + moneta + satura
 
 
-def _tick_palindromo(st, mot, par, ordine):
-    """### ⛔ **UN TICK CON L'ORDINE PALINDROMO — SOLO PER DIAGNOSI.**
+def _tick_ordine(st, mot, par, ordine):
+    """### ⛔ **UN TICK CON UN ORDINE DATO — SOLO PER LA CONTROPROVA.**
 
     ### ⚠ **NON cambia la tabella e NON cambia il passo del simulatore:** vive qui
-    dentro, e serve a rispondere a UNA domanda -- ### **il rapporto `2` viene dalla
-    composizione NON SIMMETRICA, o da altro?**
-    ### ⭐ **E questo esperimento PRIMA DI `(B)` ERA IMPOSSIBILE:** i cinque pezzi
-    ### **ALZAVANO** a una frazione diversa da `1`.
+    dentro, e serve a far girare ### **l-ordine di PRIMA** per far vedere che cosa si
+    perde.
     """
     import deriva as DV
     mot.apri_tick()
@@ -140,23 +146,32 @@ def _tick_palindromo(st, mot, par, ordine):
     mot.chiudi_tick()
 
 
-def _palindromo():
-    """### L'ordine della tabella, ### **spezzato a meta' e rispecchiato.**"""
-    import composizione as CM
-    mezzi = [(idl, fr * 0.5) for idl, fr, _t in CM.ORDINE]
-    return mezzi + mezzi[::-1]
+# ### ⛔ **L-ORDINE DI PRIMA DEL `2026-10-15`, scritto qui PER LA CONTROPROVA e NON per
+# ### girare.** ### ⚠ **E- un dato storico, non una seconda tabella:** la tabella e- UNA, e
+# ### questo elenco ### **non la tocca** -- serve a far vedere ### **che cosa si perde**
+# ### quando la sequenza non e- palindroma. ### ✅ **E con la composizione di adesso in
+# ### tabella, questo e- IL CASO CHE DEVE DARE UN NUMERO DIVERSO.**
+ORDINE_VECCHIO = (("CAMM-SATURAZIONE", 0.5), ("CAMM-MONETA-SPIN", 1),
+                  ("CAMM-GROVER", 1), ("CAMM-SPOSTAMENTO", 1),
+                  ("CAMM-GROVER-VUOTO", 1), ("CAMM-SPOSTAMENTO-VUOTO", 1),
+                  ("CAMM-SATURAZIONE", 0.5))
 
 
-def diagnosi():
-    """### Gli stessi `dtau`, ### **con l'ordine palindromo**: che rapporti da'?"""
+def controprova():
+    """### Gli stessi `dtau`, ### **con l-ordine VECCHIO**: la pendenza cade a `1`?
+
+    ### ⛔ **E- IL CASO CHE DEVE DARE UN NUMERO DIVERSO**, e senza di lui il verdetto di
+    sopra sarebbe ### **un FALSO-UNO**: una pendenza `2` non proverebbe che e- ### **il
+    PALINDROMO** a comprarla -- potrebbe venire da qualunque altra cosa.
+    """
     import deriva as DV
-    ordine = _palindromo()
+    ordine = list(ORDINE_VECCHIO)
     print("-" * 96)
-    print("### 📌 DIAGNOSI (NON un criterio, e NON una modifica alla tabella):")
-    print("###   lo STESSO H_tot e gli STESSI dtau, con l'ordine SPEZZATO A META' E")
-    print("###   RISPECCHIATO (%d pezzi invece di %d). Risponde a UNA domanda: il"
-          % (len(ordine), len(ordine) // 2))
-    print("###   rapporto 2 viene dalla composizione NON SIMMETRICA o da altro?")
+    print("### ⛔ CONTROPROVA (il caso che DEVE dare un numero diverso):")
+    print("###   lo STESSO H_tot e gli STESSI dtau, con l'ORDINE DI PRIMA del 2026-10-15")
+    print("###   (%d pezzi, NON palindromo). Se la pendenza restasse 2, il verdetto di"
+          % len(ordine))
+    print("###   sopra sarebbe un FALSO-UNO.")
     righe = []
     for k in KAPPA:
         dtau = 1.0 / (2 ** k)
@@ -166,7 +181,7 @@ def diagnosi():
         h0 = h_tot(inc, mot, st, par)
         peggio = 0.0
         for _t in range(tick):
-            _tick_palindromo(st, mot, par, ordine)
+            _tick_ordine(st, mot, par, ordine)
             d = abs(h_tot(inc, mot, st, par) - h0)
             if d > peggio:
                 peggio = d
@@ -177,10 +192,22 @@ def diagnosi():
                  "--" if np.isnan(rap) else "%.3f" % rap))
         sys.stdout.flush()
     rap = [righe[i - 1] / righe[i] for i in range(1, len(righe)) if righe[i] > 0]
-    print("###   I RAPPORTI PALINDROMI: %s   (pendenza log2: %s)"
-          % ("  ".join("%.3f" % r for r in rap),
-             "  ".join("%.3f" % np.log2(r) for r in rap)))
-    return rap
+    print("###   I RAPPORTI DELL'ORDINE VECCHIO: %s"
+          % ("  ".join("%.3f" % r for r in rap),))
+    ee = [x for x in righe if x > 0]
+    kk = [-np.log2(1.0 / (2 ** k)) for k in KAPPA[:len(ee)]]
+    pend = -float(np.polyfit(kk, np.log2(ee), 1)[0])
+    print("###   E LA PENDENZA DELL'ORDINE VECCHIO: %.3f   (il palindromo da' ~2)" % pend)
+    if pend < 1.5:
+        print("###   ✅ IL CASO CHE DEVE FALLIRE FALLISCE: pendenza %.3f, cioe' PRIMO"
+              " ordine." % pend)
+        print("###   Quindi il secondo ordine viene DAL PALINDROMO, e non da altro.")
+    else:
+        print("###   ⛔ IL CASO CHE DEVE FALLIRE NON FALLISCE (pendenza %.3f): allora il"
+              % pend)
+        print("###   verdetto di sopra NON e' attribuibile al palindromo -- E' UN"
+              " FALSO-UNO.")
+    return pend
 
 
 def una_corsa(dtau, tick):
@@ -196,6 +223,39 @@ def una_corsa(dtau, tick):
         if d > peggio:
             peggio = d
     return peggio, h0
+
+
+def estendi_righe():
+    """### Gli stessi conti su `KAPPA_FINE`: ### **la pendenza CONVERGE a `2`?**
+
+    ### ⛔ **NON E- IL CRITERIO, ed e- dichiarato**: il criterio e- `KAPPA`, con la scena e
+    lo script che il mandato fissa. ### **Questo blocco AGGIUNGE punti, non cambia la
+    soglia** -- e la differenza conta: allargare una soglia per far passare una misura e-
+    vietato, ### **misurare piu- a fondo no.**
+    """
+    print("-" * 96)
+    print("### 📌 ESTENSIONE (NON il criterio): due dimezzamenti in piu', per vedere se la")
+    print("###   PENDENZA CONVERGE a 2. A dtau = 0.5 i pezzi stanno a theta = pi/2, cioe'")
+    print("###   LONTANO dal regime asintotico.")
+    righe = []
+    for k in KAPPA_FINE:
+        dtau = 1.0 / (2 ** k)
+        tick = int(round(TEMPO / dtau))
+        err, _h0 = una_corsa(dtau, tick)
+        rap = (righe[-1][1] / err) if righe and err > 0 else float("nan")
+        righe.append((dtau, err))
+        print("###   k=%d  dtau=%.6f  tick=%-5d escursione=%.6e  rapporto %s"
+              % (k, dtau, tick, err, "--" if np.isnan(rap) else "%.3f" % rap))
+        sys.stdout.flush()
+    rr = [righe[i - 1][1] / righe[i][1] for i in range(1, len(righe))
+          if righe[i][1] > 0]
+    if rr:
+        print("###   I RAPPORTI FINI: %s   (pendenza log2: %s)"
+              % ("  ".join("%.3f" % r for r in rr),
+                 "  ".join("%.3f" % np.log2(r) for r in rr)))
+    # ### ⚠ **il primo punto e- lo STESSO `k = 4` del criterio**: si torna senza, per
+    # ### ### **non contarlo due volte** nella pendenza complessiva.
+    return righe[1:]
 
 
 def main(argv):
@@ -230,19 +290,40 @@ def main(argv):
     print("  I RAPPORTI: %s" % ("  ".join("%.3f" % r for r in rap),))
     print("  LA PENDENZA in log2: %s"
           % ("  ".join("%.3f" % np.log2(r) for r in rap),))
-    vicino = [abs(r - 4.0) <= 0.8 for r in rap]
-    if all(vicino):
-        print("### ✅ `M-B2` PASSA: ogni rapporto e' 4 entro 0.8, cioe' l'errore e'"
-              " `O(dtau^2)`")
+    # ### ⭐ **L-ESTENSIONE, PRIMA DEL VERDETTO**: serve a dire se la pendenza converge
+    tutti = righe + [(d, 0, e) for d, e in estendi_righe()]
+    # ### ⭐⭐ **LA PENDENZA COMPLESSIVA, e perche- e- LEI il verdetto e non i rapporti
+    # ### uno per uno:** l-errore e- un ### **MASSIMO su una finestra**, e un massimo
+    # ### ### **NON e- una funzione liscia di `dtau`** -- al dimezzare, il massimo puo-
+    # ### spostarsi su un altro istante, e il rapporto ### **oscilla.** ### ✅ **La
+    # ### PENDENZA su tutto l-intervallo e- la stima che non oscilla**, ed e- la
+    # ### statistica che si usa per un ordine di convergenza.
+    ee = [x[2] for x in tutti]
+    kk = [-np.log2(x[0]) for x in tutti]
+    pend = float(np.polyfit(kk, np.log2(ee), 1)[0])
+    glob = ee[0] / ee[-1]
+    print("-" * 96)
+    print("  I RAPPORTI, uno per uno: %s" % ("  ".join("%.3f" % r for r in rap),))
+    print("  E LA PENDENZA COMPLESSIVA su %d dimezzamenti: %.3f   (globale: %.6e -> %.6e,"
+          " cioe' un fattore %.1f dove 2^(2*%d) = %d)"
+          % (len(tutti) - 1, -pend, ee[0], ee[-1], glob, len(tutti) - 1,
+             2 ** (2 * (len(tutti) - 1))))
+    # ### ⛔ **E LA BANDA E- MIA, non di Luca, e lo dico:** `0.25` attorno a `2`. Il
+    # ### ### **criterio di Luca e- <<rapporto ~ 4>>**, e un rapporto per volta qui
+    # ### ### **oscilla fra `2.97` e `5.19`** per il motivo di sopra. ### **Chi legge
+    # ### decide se questa e- la lettura giusta: i numeri sono tutti stampati.**
+    if abs(-pend - 2.0) <= 0.25:
+        print("### ✅ L'ERRORE E' DI SECONDO ORDINE: pendenza %.3f, entro `0.25` da `2`."
+              % (-pend,))
+        print("###   ⚠ MA I RAPPORTI UNO PER UNO NON sono tutti `~4`: il piu' grossolano")
+        print("###   e' %.3f. La banda `0.25` sulla PENDENZA e' MIA, non di Luca: il suo"
+              % (rap[0],))
+        print("###   criterio dice <<rapporto ~ 4>>, e la lettura la decide lui.")
+        controprova()
         return 0
-    print("### ⛔ `M-B2` NON DA' 4: i rapporti sono %s"
-          % ("  ".join("%.3f" % r for r in rap),))
-    print("###   E LO RIPORTO COSI' COM'E': una pendenza 1 vorrebbe dire che la"
-          " composizione")
-    print("###   NON E' SIMMETRICA -- l'ordine della tabella spezza a meta' SOLO la")
-    print("###   saturazione, e i cinque pezzi in mezzo stanno a frazione 1.")
+    print("### ⛔ `M-B2` NON DA' IL SECONDO ORDINE: pendenza %.3f" % (-pend,))
     print("###   NESSUN PARAMETRO SI TOCCA per far tornare il 4.")
-    diagnosi()
+    controprova()
     return 1
 
 

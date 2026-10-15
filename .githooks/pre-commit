@@ -152,6 +152,17 @@ python "$(git rev-parse --show-toplevel)/primo_ordine/_collauda_grafo.py" || exi
 #  ### assente, e le frazioni di Strang che NON sommano a 1.
 python "$(git rev-parse --show-toplevel)/primo_ordine/_collauda_schema_camminata.py" || exit 1
 
+#  IL TEMPO PROPRIO IN TUTTE LE LEGGI -- CABLATO IL 2026-10-15.
+#  ### ⛔ PRIMA NON C'ERA, e io avevo scritto che <<fa fallire il pre-commit>>:
+#  ### ERA FALSO. <<pre-commit>> in primo_ordine/collauda.py e' UNA ETICHETTA, e
+#  ### questo collaudo girava SOLO IN CI -- cioe' non fermava nessun commit, ed e'
+#  ### esattamente la tenda che `A9` descrive.
+#  ### ✅ Adesso FERMA: misura se ogni pezzo della composizione cambia quando `dtau`
+#  ### cambia, e un pezzo che tornasse a evolvere COL TICK fa uscire 1.
+#  ### ⚠ E COSTA POCO: ~0.4 s misurati, su un budget di 500 s.
+python "$(git rev-parse --show-toplevel)/primo_ordine/_collauda_tempo_proprio.py" || exit 1
+
+
 #  `P-ALB` -- L'ALBERO DELLE SCELTE.
 #  ### Il collaudo, non il solo `controlla()`: `indice.py valida` lo chiama GIA'
 #  ### (ed e' quello che il mandato chiede), ma il collaudo ha il ramo

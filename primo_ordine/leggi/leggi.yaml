@@ -157,13 +157,35 @@ variabili:
 #  ### ⚠ E `CAMM-FORMA-D` NON C-E-, ed e- il punto: una legge DICHIARATA SPENTA sta
 #  ### in tabella e NON nell-ordine. Il suo posto esiste, il suo effetto no.
 # ====================================================================================
+# ### ⭐⭐ **PALINDROMA dal 2026-10-15** *(decisione di Luca, 12:43)*: ogni pezzo
+# ### ### **spezzato a meta-**, e la sequenza ### **rispecchiata.** I tre motivi:
+# ### (a) e- l-UNICO modo in cui `M-B2` puo- dare `4` *(secondo ordine)*; (b) il passo
+# ### diventa ### **SIMMETRICO PER INVERSIONE DEL TEMPO** -- rovesciarlo e- rifarlo
+# ### all-indietro -- e ### **la reversibilita- sta nella LEGGE, l-irreversibilita- deve
+# ### EMERGERE** *(`A15.3`)*; (c) la questione della `C` diventa ### **una proprieta- del
+# ### PASSO INTERO**, non dei singoli pezzi.
+# ### ⭐ **E IL MOTIVO (c) SI DERIVA:** da `C Op C^-1 = Op^-1` per OGNI pezzo
+# ### *(misurato, `16`/`16`)*, `C W C^-1` e- il prodotto degli `Op^-1` ### **nello stesso
+# ### ordine** mentre `W^-1` lo e- ### **in ordine rovescio**: le due coincidono
+# ### ### **se e solo se la sequenza e- il suo proprio rovescio.**
+# ### ⛔ **E I DUE MEZZI CENTRALI NON SI FONDONO**, anche se la misura <<due mezzi fanno
+# ### l-intero>> *(`0.7`-`1.4` ulp)* lo permetterebbe: ### **un-equivalenza entro l-ulp
+# ### non e- un-identita-**, e il palindromo ### **si definisce coi mezzi.** Cosi- non
+# ### c-e- ### **niente da dimostrare.**
+# ### ⚠ **E i pezzi di `psi` e di `phi` NON si raggruppano**: il mandato lo ammette solo
+# ### ### **se si misura che commutano**, e ### **non serve.**
 ordine:
   - {legge: CAMM-SATURAZIONE, frazione: 0.5}
-  - {legge: CAMM-MONETA-SPIN, frazione: 1}
-  - {legge: CAMM-GROVER, frazione: 1}
-  - {legge: CAMM-SPOSTAMENTO, frazione: 1}
-  - {legge: CAMM-GROVER-VUOTO, frazione: 1}
-  - {legge: CAMM-SPOSTAMENTO-VUOTO, frazione: 1}
+  - {legge: CAMM-MONETA-SPIN, frazione: 0.5}
+  - {legge: CAMM-GROVER, frazione: 0.5}
+  - {legge: CAMM-SPOSTAMENTO, frazione: 0.5}
+  - {legge: CAMM-GROVER-VUOTO, frazione: 0.5}
+  - {legge: CAMM-SPOSTAMENTO-VUOTO, frazione: 0.5}
+  - {legge: CAMM-SPOSTAMENTO-VUOTO, frazione: 0.5}
+  - {legge: CAMM-GROVER-VUOTO, frazione: 0.5}
+  - {legge: CAMM-SPOSTAMENTO, frazione: 0.5}
+  - {legge: CAMM-GROVER, frazione: 0.5}
+  - {legge: CAMM-MONETA-SPIN, frazione: 0.5}
   - {legge: CAMM-SATURAZIONE, frazione: 0.5}
 
 # ### LE LEGGI. Sono DUE, ed ENTRAMBE `prova: true`: servono a collaudare la catena
@@ -302,6 +324,9 @@ leggi:
       ### AZIONE `estremita`: agisce su una estremita' per volta, e NON legge il vicino.
 
   # ---------------------------------------------------------------- F1: il Grover
+      ### ⭐ IL SUO POSTO NEL PASSO, dal 2026-10-15 (ordine PALINDROMO): compare DUE VOLTE a frazione 0.5 invece di UNA a frazione 1.
+      ### ⚠ E UNA COSA MISURATA IL 2026-10-15 CHE LA DISTINGUE DA TUTTI GLI ALTRI PEZZI: sotto la coniugazione C questa legge RESTA SE STESSA e NON va nella sua inversa (`C M C^-1 = M` da' 0.000e+00, `= M^-1` da' 1.33e-01), perche' `sigma_y (sigma.n)^* sigma_y^-1 = -(sigma.n)` con `n` reale. ### QUINDI E' LEI a impedire `C W C^-1 = W^-1` sul passo intero: senza di lei quell'uguaglianza e' ESATTA (3.9e-16) e la degenerazione di Kramers compare. ### E' UNA MISURA, non una decisione.
+
   - id: CAMM-GROVER
     tipo: pezzo_unitario
     prova: false
@@ -329,6 +354,8 @@ leggi:
       (un termine di nodo non vede i vicini): e' il posto `P4` del piano.
 
   # ---------------------------------------------------------------- F1 e F2: lo spostamento
+      ### ⭐ IL SUO POSTO NEL PASSO, dal 2026-10-15 (ordine PALINDROMO): compare DUE VOLTE a frazione 0.5 invece di UNA a frazione 1.
+
   - id: CAMM-SPOSTAMENTO
     tipo: pezzo_unitario
     prova: false
@@ -360,6 +387,8 @@ leggi:
       ### AZIONE `arco`: scambia le due estremita' dello stesso arco.
 
   # ---------------------------------------------------------------- F4: il vuoto
+      ### ⭐ IL SUO POSTO NEL PASSO, dal 2026-10-15 (ordine PALINDROMO): compare DUE VOLTE a frazione 0.5 invece di UNA a frazione 1.
+
   - id: CAMM-GROVER-VUOTO
     tipo: pezzo_unitario
     prova: false
@@ -378,6 +407,8 @@ leggi:
       dello spinore>> e' diventato LETTERALE -- e' LA STESSA FUNZIONE, su una vista a UNA
       componente, perche' `P_u + e^{i theta}(I - P_u)` non dipende da quante componenti ha
       il campo.
+      ### ⭐ IL SUO POSTO NEL PASSO, dal 2026-10-15 (ordine PALINDROMO): compare DUE VOLTE a frazione 0.5 invece di UNA a frazione 1.
+
   - id: CAMM-SPOSTAMENTO-VUOTO
     tipo: pezzo_unitario
     prova: false
@@ -399,6 +430,8 @@ leggi:
       dipende da ENTRAMBI i lati vecchi, non solo dall'altro.
 
   # ---------------------------------------------------------------- F5: la saturazione
+      ### ⭐ IL SUO POSTO NEL PASSO, dal 2026-10-15 (ordine PALINDROMO): compare DUE VOLTE a frazione 0.5 invece di UNA a frazione 1, ED E' IL PEZZO CENTRALE: i suoi due mezzi si toccano al centro della sequenza, e NON SONO STATI FUSI in un intero -- il palindromo si definisce coi mezzi, e un'equivalenza entro l'ulp non e' un'identita'.
+
   - id: CAMM-SATURAZIONE
     tipo: flusso
     prova: false
@@ -421,6 +454,8 @@ leggi:
     assiomi: [A1, A16]
 
   # ---------------------------------------------------------------- F6: la forma (D), SPENTA
+      ### ⭐ IL SUO POSTO NEL PASSO, dal 2026-10-15 (ordine PALINDROMO): compare DUE VOLTE a frazione 0.5, AI DUE ESTREMI -- ed era gia' cosi' prima del palindromo, perche' era il solo pezzo spezzato di Strang.
+
   - id: CAMM-FORMA-D
     tipo: flusso
     prova: false

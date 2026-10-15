@@ -86,7 +86,19 @@ OK = [0, 0]
 # ### perche- era basso, era sbagliato perche- ### **MANCAVA UNA VOCE DAL CONTO** -- e una
 # ### soglia alzata a mano ### **nasconderebbe la voce nuova esattamente come il `4`
 # ### nascondeva i buffer.**
-M1_VOLTE = 5.0
+# ### ⭐⭐ **`6x` DAL `2026-10-15`, DECISIONE DI LUCA** *(era `5x` dal `2026-10-12`)*.
+# ### **Il motivo, con le sue parole:** ### **e- UN BUDGET DI CALCOLO, NON FISICA**, e
+# ### la crescita e- ### **strutturale e dichiarata** -- lo spostamento non e- piu- una
+# ### permutazione, ### **ogni lato dipende da ENTRAMBI i lati vecchi**, e i pesi del
+# ### Grover sono ### **COMPLESSI** invece che reali.
+# ### ⛔ **E L-ORDINE DEI DUE ATTI E- OBBLIGATO, e lo ha scritto lui: SI MISURA PRIMA**
+# ### col passo palindromo, ### **E POI** si cambia la soglia. ### **Misurato `5.56x`
+# ### PRIMA di toccare questa riga**, e la misura sta nel referto: cambiarla prima
+# ### vorrebbe dire ### **scegliere la soglia sapendo che fa passare.**
+# ### ⚠ **E la regola di sopra NON e- aggirata:** il conto e- stato rifatto ### **voce
+# ### per voce** *(la voce che cresce e- `buffer`, da `2.167x` a `3.333x`)*, la voce e-
+# ### ### **dichiarata**, e ### **la soglia nuova l-ha decisa Luca.**
+M1_VOLTE = 6.0
 M2_TOLLERANZA = 0.20
 M3_SIGMA = 3.0
 # ### ⚠ **LE DUE TAGLIE: dichiarate, e il rapporto fra loro e- `4`** -- cosi- `m2` ha
@@ -208,6 +220,28 @@ def main(argv):
           TAGLIE[1] > TAGLIE[0] and rapporti[0] > 1.0,
           "### con una taglia sola `m2` non esisterebbe, e con rapporto 1 la scena"
           " sarebbe il solo stato")
+    # ### ⛔⛔ **IL CASO CHE DEVE FALLIRE, dal 2026-10-15, e Luca lo chiede DIMOSTRATO:**
+    # ### ### **una soglia che non rifiuta piu- niente non e- una soglia.**
+    # ### ⭐ **E si fa END-TO-END, non su un numero finto:** si alloca ### **UN BUFFER
+    # ### VERO** nel motore, grosso quanto serve a passare la soglia, e si rimisura
+    # ### ### **con la stessa funzione** che misura la scena. ### ⚠ **Cosi- il braccio
+    # ### prova IL PERCORSO DI MISURA**, non la mia aritmetica.
+    bt = _byte_stato(st)
+    serve = int((M1_VOLTE + 0.5) * bt - _byte_scena(inc, st, mot))
+    mot._b("finto_oltre_soglia", (max(1, serve // 8),), float)
+    oltre = _byte_scena(inc, st, mot) / float(bt)
+    esito("### DEVE fallire: un buffer in piu' porta la scena OLTRE la soglia",
+          not (oltre <= M1_VOLTE),
+          "### %.2fx contro la soglia %.0fx: la soglia RIFIUTA ancora" % (oltre, M1_VOLTE))
+    # ### ⚠ **la chiave si CERCA PER NOME, non si ricostruisce:** ricostruirla
+    # ### vuol dire ### **indovinare la forma della chiave**, e la prima volta
+    # ### l-ho indovinata sbagliata *(`KeyError`)*.
+    for ch in [k for k in mot._buf if k[0] == "finto_oltre_soglia"]:
+        del mot._buf[ch]
+    tornato = _byte_scena(inc, st, mot) / float(bt)
+    esito("### e tolto il buffer finto la scena TORNA sotto la soglia",
+          tornato <= M1_VOLTE,
+          "### %.2fx: ### e l'albero resta come l'ho trovato" % tornato)
 
     # ================================================================== m2, il rapporto
     print()
@@ -230,12 +264,18 @@ def main(argv):
     print()
     inc, st, mot = _scena(TAGLIE[0], "numpy")
     xs, ys = [], []
+    # ### ⭐ **I RIPIEGHI DOPO IL PRIMO TICK, tenuti da parte**: servono a dire se cio-
+    # ### che il braccio PRETENDE *(<<zero allocazioni DOPO>>)* vale, ### **anche quando
+    # ### il suo proxy sul TOTALE non vale.**
+    RIP1 = [0]
     for k in range(TICK_M3):
         mot.apri_tick()
         mot.operatori["grover"](st, {}, 1)
         mot.operatori["moneta_spin"](st, {"eps": 0.5}, 1)
         mot.operatori["spostamento_trasporto"](st, {}, 1)
         mot.chiudi_tick()
+        if k == 0:
+            RIP1[0] = mot.ripieghi
         if k >= 10 and (k % 5) == 0:
             # ### ⛔ **`gc.collect()` PRIMA del campione:** cosi- si misura
             # ### ### **cio- che NON si libera**, non la spazzatura che aspetta -- ed e-
@@ -259,6 +299,17 @@ def main(argv):
     # ### ⚠ **E IL RIPIEGO DEI BUFFER DEVE ESSERE ZERO DOPO IL PRIMO TICK:** e- la
     # ### ### **causa** che `m3` cerca, e provarla direttamente e- piu- forte che
     # ### dedurla da una pendenza.
+    # ### ⚠⚠ **E QUI UN NUMERO CHE RIPORTO E NON TOCCO:** la soglia e- ### **`13`**, e
+    # ### i buffer adesso sono ### **`18`** -- quindi questo braccio ### **FALLISCE.**
+    # ### ⛔ **E NON ALZO IL `13`: Luca ha deciso la soglia di `m1`, NON questa.**
+    # ### ⭐ **Ma la cosa che il braccio DICE di misurare -- <<zero allocazioni DOPO i
+    # ### primi tick>> -- si puo- guardare, e la guardo:** ### **i ripieghi dopo il primo
+    # ### tick** sono stampati qui sotto. ### **Se quel numero e- `0`, la PROPRIETA- vale
+    # ### e cio- che non vale e- il PROXY** *(che conta il TOTALE)*. ### **La lettura la
+    # ### decide Luca.**
+    print("        ### I RIPIEGHI, prima e dopo: %d dopo il PRIMO tick, %d dopo tutti i"
+          " %d -- cioe' %d DOPO il primo"
+          % (RIP1[0], mot.ripieghi, TICK_M3, mot.ripieghi - RIP1[0]))
     esito("### e la CAUSA e' provata direttamente: ZERO allocazioni dopo i primi tick",
           mot.ripieghi <= 13,
           "### %d buffer in %d tick: la pendenza dice l'effetto, questo dice la CAUSA"

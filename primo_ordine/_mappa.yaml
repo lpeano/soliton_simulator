@@ -90,17 +90,21 @@ moduli:
     responsabilita: le quattro funzioni del generatore della saturazione, e il LIMITE
     importa: []
 
+  - nome: _misura_spettro_l1.py
+    responsabilita: lo spettro del passo lineare palindromo, e dove la C si rovescia
+    importa: [_presidio, composizione, corrente, deriva, incidenza, motore, stato]
+
   - nome: _misura_mb2.py
     responsabilita: l-errore di conservazione di H_tot contro dtau, a tempo totale fisso
-    importa: [_presidio, composizione, deriva, saturazione]
+    importa: [_presidio, deriva, saturazione]
 
   - nome: _misura_c_flussi.py
     responsabilita: dove la C si rompe coi flussi parziali, e che cosa la riparerebbe
     importa: [_presidio, deriva]
 
   - nome: _misura_mb1.py
-    responsabilita: il raccordo al bit del passo nuovo contro il commit di riferimento
-    importa: [_presidio, deriva]
+    responsabilita: il raccordo al bit pezzo per pezzo contro il commit di riferimento
+    importa: [_presidio, composizione, deriva]
 
   - nome: flussi_parziali.py
     responsabilita: il tempo proprio locale, la fase esatta, e i due flussi parziali

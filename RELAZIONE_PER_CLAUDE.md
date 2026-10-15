@@ -16158,3 +16158,122 @@ perche' `C^2 = -1` su `psi`)*, e `C W C^-1 = W^-1` al bit o all'ulp.
 validatore pretende `chiusura.commit` **non vuoto**, e lo sha del commit che applica la
 decisione **non esiste ancora**. ### **Quindi la chiusura e' il SECONDO ATTO**, col sha del
 commit che porta l'ordine palindromo.
+
+## 2026-10-15 — ⭐⭐ **IL PASSO E' PALINDROMO: L'ERRORE E' DI SECONDO ORDINE — E LA MONETA
+DI SPIN E' CIO' CHE IMPEDISCE L'INVERSIONE DEL TEMPO**
+
+> ### ⭐ **Il fatto nuovo piu' grosso e' l'ultimo**, e non lo cercavo: ### **non e' la
+> composizione a rompere `C W C^-1 = W^-1`, e' LA MONETA.**
+
+### ✅ **IL CODICE E I CRITERI**
+
+| | | |
+|---|---|---|
+| **l'ordine** | `871a7b37dab75b06` *(7 pezzi)* → **`f1fca71b952bb8c8`** *(12 pezzi)* | ### **dichiarata prima e dopo**, come il mandato chiede |
+| ✅ **`M-B1` nuovo** | **`12`/`12` confronti AL BIT** | 6 pezzi x 2 scene, e i due in piu' *(moneta, saturazione)* sono **il CONTROLLO**: non toccati, quindi **devono** coincidere |
+| 📌 **l'informazione** | il passo palindromo dista **`4.55`** e **`4.13`** da quello di `717bb60` su `250` tick *(scale `3.27`, `2.42`)* | ### **non e' un criterio e non e' un difetto:** i pezzi **non commutano** |
+| ✅ **`_collauda_tempo_proprio`** | **`0` violatori su `12` pezzi**, `3`/`3` | e il conteggio dei pezzi adesso **si legge dalla composizione**: il `7` scritto a mano era **un secondo posto da aggiornare** |
+
+### ⭐ **`M-B2`: IL SECONDO ORDINE C'E', E LA CONTROPROVA LO ATTRIBUISCE AL PALINDROMO**
+
+```
+palindromo (12 pezzi)    escursione  2.322e+01 -> 2.717e-02 su 5 dimezzamenti
+                         PENDENZA COMPLESSIVA 2.006   (fattore 854.9, e 4^5 = 1024)
+                         i rapporti: 2.966  3.544  4.684  5.194  3.343
+ordine vecchio (7)       PENDENZA 1.183   (primo ordine)   <- IL CASO CHE DEVE FALLIRE
+```
+
+### ⚠ **E DEVO DIRE DUE COSE SU QUESTO NUMERO, perche' senza di esse e' mezzo numero.**
+### ① **I rapporti UNO PER UNO oscillano** fra `2.97` e `5.19`, e il motivo e'
+strutturale: ### **l'errore e' un MASSIMO su una finestra**, e un massimo ### **non e'
+una funzione liscia di `dtau`** — al dimezzare, il massimo puo' spostarsi su un altro
+istante. ### **La pendenza su tutto l'intervallo e' la stima che non oscilla.**
+### ② ⛔ **E LA BANDA `0.25` ATTORNO A `2` E' MIA, NON TUA:** il tuo criterio dice
+*«rapporto ≈ 4»*, e ### **il piu' grossolano fa `2.966`.** ### **I numeri sono tutti
+stampati, e la lettura la decidi tu.**
+### 📌 **E ho aggiunto DUE punti piu' fini** *(`k = 5, 6`)* **come estensione dichiarata,
+non toccando la soglia:** allargare una soglia per far passare una misura e' vietato,
+### **misurare piu' a fondo no.**
+
+---
+
+### ⭐⭐⭐ **IL PUNTO 3 — LO SPETTRO, E UNA COSA CHE NON SAPEVO**
+
+> ### ⛔ **`C W C^-1 = W^-1` NON VALE, nemmeno col palindromo:** `6.68e-01`, `4.49e-01`,
+> `2.58e-01` a `dtau = 1`, `0.5`, `0.25`. ### **E il palindromo migliora ma non basta.**
+
+### ⭐⭐ **E LA CAUSA L'HO ISOLATA, E NON E' LA COMPOSIZIONE: E' LA MONETA DI SPIN.**
+Il conto, in due righe:
+
+```
+C exp(-i a sigma.n) C^-1 = (i sigma_y) exp(+i a (sigma.n)^*) (i sigma_y)^-1
+e con n REALE:   sigma_y (sigma.n)^* sigma_y^-1 = -(sigma.n)
+==>  C M C^-1 = exp(-i a sigma.n) = M        <- LA STESSA COSA, non la sua INVERSA
+```
+
+### ✅ **E MISURATO, non dedotto: `C M C^-1 = M` da' `0.000e+00`**, mentre `= M^-1` da'
+`1.33e-01`.
+### ⭐⭐ **E LA PROVA CHE LA CAUSA E' TUTTA LI': SENZA LA MONETA `C W C^-1 = W^-1` TORNA
+ESATTA** — **`3.9e-16`**, `2` ulp — ### **e la degenerazione di Kramers COMPARE**
+*(molteplicita' minima `2`, dove col la moneta era `1`)*.
+
+### ⚠⚠ **E DEVO DIRTI CHE NON L'AVEVO MAI MISURATA.** Il test del `15` ottobre
+*(`16`/`16`)* guardava **i quattro pezzi cambiati** — Grover, spostamento, e i due del
+vuoto — ### **e la moneta non c'era.** ### **Quindi <<`C Op C^-1 = Op^-1` per ogni
+pezzo>> era vero per i pezzi che avevo guardato, e io l'ho scritto come se valesse per
+tutti.**
+
+### 📌 **I NUMERI DELLO SPETTRO, e nessuna conclusione di fisica:**
+
+| `dtau` | `dist(eps, -eps)` | molt. minima | `C W C^-1 = W^-1` | NON palindromo | senza la moneta | molt. senza |
+|---|---|---|---|---|---|---|
+| `1.00` | `1.987` | `1` | `6.68e-01` | `1.589` | **`5.16e-16`** | **`2`** |
+| `0.50` | `2.000` | `1` | `4.49e-01` | `0.878` | **`3.97e-16`** | **`2`** |
+| `0.25` | `1.942` | `1` | `2.58e-01` | `0.300` | **`3.86e-16`** | **`2`** |
+
+### ⚠ **E L'APPAIAMENTO `eps <-> -eps` NON C'E'** *(distanza `~2`, cioe' il diametro del
+cerchio)*, ### **nemmeno senza la moneta** — tranne a `dtau = 1`, dove senza la moneta
+fa **`4.1e-15`**. ### 📌 **E lo avevo previsto PRIMA di misurare**, e lo scrivo perche'
+e' una previsione che ha retto: ### **un'antiunitaria da' LA DEGENERAZIONE, non
+l'appaiamento** — quello vorrebbe un'antisimmetria **UNITARIA**, che nessuno ha mostrato
+esistere.
+
+### ⛔ **E UN MIO DIFETTO DI MISURA, trovato perche' il numero contraddiceva la
+derivazione:** raggruppavo le fasi **per ANGOLO**, e una coppia vicina a `±pi` finiva in
+### **due gruppi** — davo *«molteplicita' `1`»* dove Kramers dice `2`. ### ✅ **Si
+raggruppa per AUTOVALORE, sul piano complesso.** ### **Era l'avvolgimento, non la fisica.**
+
+---
+
+### ✅ **IL PUNTO 4 — IL HOOK VERO, E LA SOGLIA**
+
+### ✅ **`_collauda_tempo_proprio.py` E' NEL `.githooks/pre-commit`** *(riga `163`; il hook
+lancia `29` comandi, era `28`)*. ### ⚠ **E la barriera se ne e' accorta**, che e' il suo
+mestiere: impronta `699d3304` → `badccf2b`, ridichiarata con `_barriera.py --scrivi`, e
+### **la diff del `.lock` lo mostra.**
+
+### ✅ **LA SOGLIA DELLA MEMORIA: misurata PRIMA, cambiata DOPO.** Col passo palindromo la
+scena fa **`5.56x`** lo stato — ### **identica a prima del palindromo**, perche' un ordine
+diverso **non aggiunge buffer** — e la soglia e' andata a **`6x`**: margine **`+0.44x`**.
+### ⛔ **E il caso che DEVE fallire fallisce, END-TO-END:** un buffer vero in piu' porta la
+scena a **`6.50x`** e ### **la soglia RIFIUTA**; toltolo, torna `5.56x`.
+
+### ⚠⚠ **E UN NUMERO CHE RIPORTO E NON TOCCO:** l'altro braccio della memoria pretende
+**`ripieghi <= 13`** e i buffer sono **`18`**: ### **FALLISCE.** ### ⛔ **Non alzo il `13`:
+tu hai deciso la soglia di `m1`, non quella.**
+### ⭐ **Ma ho guardato cio' che quel braccio DICE di misurare** — *«zero allocazioni DOPO
+i primi tick»* — e il numero e': ### **`18` dopo il PRIMO tick, `18` dopo tutti i `60`,
+cioe' `0` DOPO il primo.** ### ✅ **Quindi la PROPRIETA' vale esattamente; cio' che non vale
+e' il PROXY**, che conta il TOTALE. ### **La lettura la decidi tu.**
+
+### ⚠ **E UN BUCO DI UN PRESIDIO, trovato pagandolo:** `P-E6` pretende che quando
+`leggi.yaml` cambia ci sia ### **una riga di `leggi.jsonl` nello stesso commit.** ### ⛔ **Ma
+io avevo cambiato l'`ordine`, che NON E' UNA LEGGE:** le righe del registro erano **identiche
+byte per byte**, quindi `git` non vedeva niente e ### **il commit veniva rifiutato senza che
+ci fosse nulla da scrivere.**
+### ✅ **L'ho risolto in modo che AGGIUNGE un fatto invece di aggirare il presidio:** la
+`scheda` di ognuna delle sei leggi adesso dice ### **dove sta nel passo** *(due volte a
+frazione `0.5`)*, e per la moneta dice anche ### **che non si rovescia sotto `C`.**
+### 📌 **Ma il buco resta:** `P-E6` assume che ogni cambiamento di `leggi.yaml` sia un
+cambiamento **di legge**, e ### **l'`ordine` non lo e'.** ### **Lo segnalo, non lo curo:**
+toccare un presidio non e' nel mandato.

@@ -95,8 +95,9 @@ def main(argv):
     print("IL CONTROLLO DEL TEMPO PROPRIO: quali pezzi EVOLVONO COL TICK invece che col"
           " dtau")
     print("=" * 96)
-    visti = []
+    visti, guardati = [], []
     for idl, frazione, _tipo in CM.ORDINE:
+        guardati.append((idl, frazione))
         d = dipende_da_dtau(idl, frazione)
         viola = d < CAMBIA_MIN
         if viola and idl not in visti:
@@ -121,10 +122,19 @@ def main(argv):
     # ### c-era ### **`4`** scritto a mano, e svuotando l-elenco ### **sarebbe diventato
     # ### una SECONDA cosa da cambiare a mano.** ### ✅ **Cosi- il numero SEGUE la
     # ### decisione**, e l-unica cosa scritta a mano resta ### **l-elenco.**
-    esito("### (3) e sono %d su 7, cioe' quanti l'elenco ne attende"
-          % len(VIOLATORI_ATTESI),
-          len(visti) == len(VIOLATORI_ATTESI) and len(CM.ORDINE) == 7,
-          "%d violatori su %d pezzi" % (len(visti), len(CM.ORDINE)))
+    # ### ⚠ **E ANCHE IL NUMERO DEI PEZZI SI LEGGE DALLA COMPOSIZIONE**, dal
+    # ### 2026-10-15: prima qui c-era ### **`7`** scritto a mano, e quando l-ordine e-
+    # ### diventato ### **PALINDROMO (12 pezzi)** questo braccio e- fallito ### **per il
+    # ### letterale, non per la fisica.** ### ⛔ **Un numero scritto a mano in un
+    # ### collaudo diventa un secondo posto da aggiornare**, ed e- lo stesso difetto che
+    # ### l-elenco dei violatori aveva. ### ✅ **Cio- che il braccio pretende DAVVERO e-
+    # ### che OGNI pezzo della composizione sia stato guardato**, e quello si dice senza
+    # ### nessun letterale.
+    esito("### (3) e sono %d violatori su %d pezzi, tutti guardati"
+          % (len(VIOLATORI_ATTESI), len(CM.ORDINE)),
+          len(visti) == len(VIOLATORI_ATTESI) and len(guardati) == len(CM.ORDINE),
+          "%d violatori su %d pezzi, e %d pezzi guardati"
+          % (len(visti), len(CM.ORDINE), len(guardati)))
     print("=" * 96)
     print("  %d su %d" % (OK[0], OK[1]))
     print("### ✅ E IL CENSIMENTO DICE CHE ZERO PEZZI VIOLANO `TEMPO-PROPRIO-LOCALE`:")

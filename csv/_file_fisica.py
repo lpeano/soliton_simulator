@@ -126,6 +126,10 @@ FILE_FISICA = (
     'primo_ordine/_misura_mb1.py',
     'primo_ordine/_misura_mb2.py',
     'primo_ordine/_misura_c_flussi.py',
+    # ### ⭐ **NATO il `2026-10-15`, seconda parte**: lo spettro del passo lineare
+    # ### palindromo, ### **le degeneranze di Kramers**, e ### **chi rompe
+    # ### l-inversione del tempo** *(la moneta di spin)*.
+    'primo_ordine/_misura_spettro_l1.py',
     'primo_ordine/motore.py',
     'primo_ordine/_collauda_motore.py',
     # ### IL CHECKPOINT *(sotto-pezzo `5c`)*: salva e riprende ### **stato, grafo,

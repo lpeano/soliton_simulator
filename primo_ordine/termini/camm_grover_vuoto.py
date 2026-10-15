@@ -3,14 +3,14 @@
 
 ### **CAMM-GROVER-VUOTO** -- `pezzo_unitario`
 
-`G(theta)` sul vuoto `phi` (punto `F4`), che e' uno SCALARE NEUTRO. ### Mescola le estremita' del nodo come quello dello spinore, e la differenza sta nel pezzo dopo: il vuoto si sposta SENZA `U`. ### ⭐ DAL 2026-10-15 IL TEMPO PROPRIO VALE ANCHE QUI, e il mandato di Luca lo chiede ESPLICITAMENTE: i flussi parziali sono per `psi` E per `phi`. E <<come quello dello spinore>> e' diventato LETTERALE -- e' LA STESSA FUNZIONE, su una vista a UNA componente, perche' `P_u + e^{i theta}(I - P_u)` non dipende da quante componenti ha il campo.
+`G(theta)` sul vuoto `phi` (punto `F4`), che e' uno SCALARE NEUTRO. ### Mescola le estremita' del nodo come quello dello spinore, e la differenza sta nel pezzo dopo: il vuoto si sposta SENZA `U`. ### ⭐ DAL 2026-10-15 IL TEMPO PROPRIO VALE ANCHE QUI, e il mandato di Luca lo chiede ESPLICITAMENTE: i flussi parziali sono per `psi` E per `phi`. E <<come quello dello spinore>> e' diventato LETTERALE -- e' LA STESSA FUNZIONE, su una vista a UNA componente, perche' `P_u + e^{i theta}(I - P_u)` non dipende da quante componenti ha il campo. ### ⭐ IL SUO POSTO NEL PASSO, dal 2026-10-15 (ordine PALINDROMO): compare DUE VOLTE a frazione 0.5 invece di UNA a frazione 1.
 
 ### ⛔ **QUESTO MODULO E- UN LEGAME, non uno stub:** `applica()` chiede
 l-operatore ### **al motore**, e se il motore non ce l-ha ### **ALZA** -- non
 torna un risultato finto.
 """
 
-IMPRONTA = 'b736274a2199adbd'
+IMPRONTA = '37a3094794cfe718'
 LEGGE = 'CAMM-GROVER-VUOTO'
 TIPO = 'pezzo_unitario'
 AMBITO = ('phi_h',)
