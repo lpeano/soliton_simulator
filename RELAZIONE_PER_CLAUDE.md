@@ -15908,3 +15908,61 @@ tick:** si legge sui tempi propri o sulle velocita', ed e' **la stessa cosa.**
 ### ① **i flussi parziali sono per `psi` E per il vuoto `phi`** — quindi **quattro**
 operatori nuovi, non due *(per `phi` il trasporto NEUTRO, senza `U`)*; ### ② **`M-B1` si
 misura contro `717bb60`**, non contro `784976d`.
+
+## 2026-10-15 — ⭐⭐ `L1`, PRIMA DEL CODICE: **CHE COS'E' `dtau_rif`? CI SONO DUE LETTURE,
+E I TUOI CRITERI NE ESCLUDONO UNA**
+
+> ### **Il task history e' `doc/TASK_HISTORY/2026-10-15_l1_tempo_proprio_nel_codice.md`,
+> committato PRIMA del codice** *(il suo commit e' antenato di quelli del lavoro: l'ordine
+> si verifica da `git`, non dalla mia parola)*.
+
+### ⚠ **E LA COSA CHE DEVO DIRTI SUBITO, perche' decide tutto il codice:** `B-4` dice
+`dtau_rif` = *«il tempo proprio dell'orologio piu' veloce»*, e ### **quella frase ha DUE
+letture che danno codici diversi:**
+
+| | la lettura | che cosa implica |
+|---|---|---|
+| **(i)** | `dtau_rif = max(dtau)` **dei nodi di adesso**, ricalcolato | `s = dtau/max(dtau)` ⟹ un riscalamento **uniforme** di `dtau` e' **INERTE** |
+| **(ii)** | `dtau_rif` = **il tetto del CONO**, l'orologio piu' veloce **POSSIBILE**, cioe' **un'UNITA'** | `theta = pi·dtau/dtau_rif` **scala con `dtau`** |
+
+### ⭐⭐ **E NON L'HO SCELTA IO: L'HANNO SCELTA I TUOI CRITERI DI USCITA.** Sotto la `(i)`:
+### ⛔ **`_collauda_tempo_proprio.py` NON POTREBBE MAI PASSARE** — misura
+`|psi(dtau) - psi(dtau/2)|` con `dtau` **uniforme**, e sotto la `(i)` dimezzare un `dtau`
+uniforme **non cambia niente**: `s` resta `1`, e i quattro violatori ### **resterebbero
+violatori per sempre.** ### ⛔ **E `M-B2` SAREBBE VUOTA** — `dtau` uniforme `= dtau_rif/2^k`
+sotto la `(i)` da' ancora `s = 1`: ### **zero cambiamento, nessun fattore `4`.**
+
+### ✅ **Quindi la lettura e' la `(ii)`, e il motivo e' DERIVATO e non una preferenza: la
+`(i)` rende VUOTI DUE dei tuoi quattro criteri.** Ed e' anche cio' che il tuo testo dice
+*(«e' una SCELTA DI UNITA', non una costante nuova»)*, con `B-5` — **il tick e' l'orologio
+piu' veloce possibile** — che e' **il tetto del cono.**
+
+### ⭐ **E LA CONSEGUENZA E' CHE `omega` SPARISCE DAL CODICE:** con `dtau_rif = 1`
+*(l'unita')* il raccordo da' `omega = pi`, e nel codice compare **solo `theta = pi·dtau`**.
+### ✅ **Nessuna costante nuova, e `CARTA-FISICA-SIMULATORE/F10` rispettato PER COSTRUZIONE
+e non per disciplina.**
+
+### 📌 **E UN FATTO MISURATO prima di scriverlo**, perche' la `(ii)` pretende `dtau <= 1`:
+### **tutti i `dtau` in uso nel repo sono `0.1`, `0.2`, `0.25`, `0.31`, `0.37`, `0.4`**
+*(censimento col grep su `primo_ordine/*.py`)* — ### ✅ **nessuno viola il cono**, quindi la
+lettura non rompe nessuna scena esistente, e il `<= 1` ### **si asserisce** *(ALZA)*,
+**non si taglia** *(`A11`)*.
+
+### ⚠⚠ **E CIO' CHE MI ASPETTO DI ROMPERE, scritto PRIMA per non poterlo minimizzare
+dopo:** con le scene di oggi *(`dtau ~ 0.2-0.37`)* il Grover e lo spostamento agiscono a
+### **`theta = 0.2 pi` - `0.37 pi`, non a `pi`** — quindi ### **non sono piu' involuzioni**,
+e ogni collaudo che asserisce `G^2 = I` **DEVE fallire.** ### ⭐ **Non e' un difetto del mio
+codice: e' il CONTENUTO di `L1`** — e il mio dovere e' **censirli con i numeri**, non
+aggiustarli perche' tornino verdi.
+
+### ⭐ **E DUE NUMERI CHE HO MISURATO E CHE CAMBIANO IL CODICE:**
+### ① **il male sta nel SENO, non nel coseno** — `np.cos(np.pi) = -1.0` **ESATTO**, mentre
+`np.sin(np.pi) = 1.2246e-16`: quindi `espi` si cura **con un'identita'**
+*(`sin(pi s) = sin(pi(1-s))`, e `1-s` e' esatto per `s >= 0.5` — Sterbenz)*, **non con un
+caso particolare.**
+### ② ⛔ **UNA TRAPPOLA VISTA SOLO PERCHE' HO PROVATO PIU' VALORI:** la forma ovvia della
+media armonica `2dd/(d+d)` e' **esatta per `0.25`, `0.31`, `0.37`** e ### **SBAGLIATA per
+`0.1`, `0.2`, `0.4`.** ### **Cioe' sulla scena a `dtau = 0.25` la forma sbagliata AVREBBE
+PASSATO `M-B1`**, e il difetto sarebbe uscito dopo, altrove. ### ✅ **La forma
+`S/2 - D^2/(2S)` e' esatta su tutti e otto, simmetrica in `i<->j` AL BIT, e coincide con
+`2ab/(a+b)` entro `7.2` ulp** su `100000` coppie casuali.
