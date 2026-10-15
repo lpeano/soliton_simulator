@@ -16895,3 +16895,61 @@ il loro commit**, e la mia era l'ultima. ### ✅ **Verificato che il cambiamento
 quello:** `2364` righe prima e dopo, `96` cambiate, e ### **l'unico campo toccato e'
 `commit`, da vuoto** *(controllato confrontando il `jsonl` di `HEAD` con quello sul disco,
 campo per campo — non a occhio)*.
+
+## ⭐⭐ **`L2`, QUARTO PEZZO: LA RISPOSTA A UNA SORGENTE FERMA** — *il task history,
+PRIMA del codice*
+
+> ### ⛔⛔ **E IL MOTIVO DI QUESTO PEZZO E' UN DIFETTO DI PROTOCOLLO MIO, in tutti e
+> tre i pezzi precedenti: LA SORGENTE NON ERA FERMA.** Il grumo si disperde *(larghezza da
+> `0.894` a `~3.6`-`4.1`, che ho misurato io stesso nel terzo pezzo)*, e ### **con una
+> sorgente che si muove la risposta di primo ordine e' un'onda che si media a zero: resta
+> solo `beta^2`.** ### ⭐ **La gravita' di una massa e' il suo campo STATICO, e questa
+> misura lo isola.**
+
+### ✅ **E ACCETTO LA CORREZIONE DEL GUARDIANO SU SE STESSO:** la richiesta di una
+`beta` lineare presupponeva ### **un effetto proporzionale a `beta`** — e il mio numero del
+secondo pezzo *(risposta PARI)* e del terzo *(esponente `= 2 x` quello di `beta`)*
+### **diceva gia' che non lo era.** ### ⚠ **Cioe' avevamo misurato la SCIA di una
+sorgente che scappa, non il CAMPO di una massa che sta.**
+
+### ⛔⛔ **LA SCELTA CHE IL MANDATO MI CHIEDE DI DICHIARARE, e la dichiaro:** la materia
+si congela ### **ripristinando `psi` a ogni tick**, non togliendo i pezzi che agiscono su
+`psi`. ### **Il motivo che decide e' il terzo:** *(i)* non mi obbliga a ### **classificare
+i pezzi**, che sarebbe una decisione di fisica mia; *(ii)* e' ### **una riga**; *(iii)*
+### **`rho_k` risulta esattamente costante ai confini dei tick, E LO MISURO.**
+### ⚠ **E il prezzo lo dichiaro: DENTRO il tick i pezzi del vuoto vedono una `psi` che
+si e' mossa di un passo** — la sorgente e' ferma ai confini dei tick, non dentro.
+
+### ⛔ **E LA SORGENTE CONGELATA E' UNO STRUMENTO, NON UNA LEGGE:** e' la ### **<<massa
+di prova>>** della fisica, un corpo che genera il campo e non lo subisce. ### **Viola la
+conservazione PER COSTRUZIONE** *(il ripristino rimette dentro cio' che la dinamica aveva
+tolto)*, ed e' la risposta alla ### **prima domanda della STELLA POLARE**: percio'
+### **non puo' stare in nessuna tabella.**
+
+### ⭐ **UNA PREVISIONE CHE SI MISURA AL BIT, e la scrivo prima:** con la sorgente
+congelata ### **`alpha` non puo' contare NIENTE** — scrive una fase su `psi`, il ripristino
+la cancella, e tutto cio' che il vuoto legge da `psi` *(`rho`, `h`)* e' ### **invariante
+di fase.** ### **Quindi `alpha = 0` forzato deve dare lo STESSO RISULTATO AL BIT**, ed e'
+un braccio: ### **se conta, ho capito male il meccanismo.**
+
+### 📌 **E LA PREVISIONE CENTRALE: credo che la risposta statica sia LINEARE in `beta`,
+con un motivo meccanico** *(il hop fa `phi' = alpha phi + beta_hop S_U phi`, e il
+cambiamento di `|phi|^2` contiene il termine incrociato, che dipende dalla DIFFERENZA di
+fase fra vicini: `~ beta dtau` al primo ordine, e ferma non oscilla)*.
+### ⚠ **Ma dico anche perche' potrei sbagliarmi:** su un toro `somma_k dLambda_k = 0`
+### **per identita'**, e un profilo a somma nulla puo' avere il primo ordine che si annulla
+nell'integrale. ### **Se esce `2x`, il mio ragionamento e' sbagliato e lo scrivo.**
+
+### ⚠⚠ **E IL SEGNO NON LO PREVEDO, ed e' il punto:** il segno dei tre pezzi viene dal
+canale `beta^2`, e ### **il canale di primo ordine puo' averlo OPPOSTO** — `beta` cambia
+segno, `beta^2` no. ### **Non ho una previsione, e non ne invento una dopo.**
+
+### ✅ **IL BUDGET E' MISURATO, non stimato:** `0.760` ms/tick su `7x7`, `1.224` su
+`15x15`, `1.813` su `21x21`, ### **`2.998` su `31x31`.** ### ⭐ **Prendo `31x31`** —
+il mandato chiede *«almeno `15x15`, o il massimo del budget»*, e un profilo in distanza
+vuole ### **un decennio di `r`** *(distanza toroidale massima `30`)*, non tre anelli.
+
+### 📌 **Il task history:** `doc/TASK_HISTORY/2026-10-15_l2_risposta_statica.md`, con le
+### **cinque risposte della STELLA POLARE scritte PRIMA del codice**, i nove passi con
+### **cosa mi FERMA** per ognuno, e le previsioni di sopra. ### **Committato prima, cosi'
+l'ordine lo verifica `git` invece che io.**
