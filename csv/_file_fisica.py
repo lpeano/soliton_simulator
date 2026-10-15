@@ -144,6 +144,10 @@ FILE_FISICA = (
     # ### di `dLambda` *(che e- quella che ha un VERSO)*, con la sua ### **barra
     # ### d-errore**, e ### **l-esponente in `x`.**
     'primo_ordine/_misura_pari_l2.py',
+    # ### ⭐ **NATO il `2026-10-15`, terzo pezzo di `L2`**: la derivazione
+    # ### ### **SIMBOLICA** *(`sympy`)* delle quattro forme candidate, e il
+    # ### ### **PREZZO DELLA LINEARITA-** -- un `se e solo se`, non un-implicazione.
+    'primo_ordine/_deriva_forme_l2.py',
     'primo_ordine/motore.py',
     'primo_ordine/_collauda_motore.py',
     # ### IL CHECKPOINT *(sotto-pezzo `5c`)*: salva e riprende ### **stato, grafo,

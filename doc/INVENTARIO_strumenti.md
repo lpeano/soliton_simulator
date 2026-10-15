@@ -3616,3 +3616,20 @@ scena **cresca** come gli archi *(`4.00x` su `4.00x` atteso)*; `m3` **`0.005114`
 | ### ⚠ **e la parte DISPARI NON e' solo oscillazione** | a `dtau = 0.25`: `O = -1.21e-01 +- 1.05e-02` *(`11.6` barre)*, e ### **cambia segno con l'elicita'** *(`+7.24e-02` con `-1`)*. ### **A `dtau = 0.25` `|O|` e' DELLO STESSO ORDINE di `|E|`**: c'e' un canale **che distingue lo spin** |
 | ### ✅ **il controllo nullo, l'unico** | `beta = 0` → `dLambda = `**`0.000e+00`** esatto, a tutti e tre i `dtau` |
 | ### ⚠ **e una cache con la chiave sbagliata, pagata** | la corsa senza materia era in cache su `dtau` **e non su `(dtau, tick)`**: il braccio del controllo *(`200` tick)* ha riempito la cache, e il braccio del verso ha trovato `201` righe dove ne voleva `2001`. ### **Un `ValueError` RUMOROSO, per fortuna** |
+
+---
+
+### `primo_ordine/_deriva_forme_l2.py` — **LE QUATTRO FORME, VERIFICATE DA `sympy`** *(2026-10-15)*
+
+| | |
+|---|---|
+| **file** | `primo_ordine/_deriva_forme_l2.py` |
+| **BLOB** *(sha1 dei byte grezzi)* | `f6927bea` |
+| **IL COMANDO, verbatim** | `python primo_ordine/_deriva_forme_l2.py` |
+| **che cosa verifica** | ### **un CONTO, non una misura:** l'identita' `beta' = -x alpha'`, il **se e solo se** del logaritmo, le quattro forme `S1`-`S4`, e la natura del flusso su `psi` |
+| ### ⭐⭐ **il risultato che conta** | ### **`beta` esattamente lineare ⟺ `alpha` LOGARITMICA.** `sympy` **risolve** `F - x F' = -c x` e da' `F = x(C1 + c ln x)`, quindi `alpha = c ln x + (C1 + c)`. ### **Non e' <<obbliga>>: e' <<equivale>>** |
+| ### ✅ **e il verso inverso** | se `alpha` e' **limitata e LIPSCHITZ**, `beta' = -x alpha' -> 0`: ### **`beta` non puo' essere lineare fino a zero.** ### ⚠ **L'ipotesi Lipschitz e' DICHIARATA** — con `alpha'` che oscilla come `1/x` il conto non si chiude |
+| **le quattro forme** | `S1` `beta ~ -(2/3)x^3` · `S2` `beta = -x` esatto e `alpha = 1 + ln x` *(diverge)* · `S3` `beta = -x/(1+x)` · `S4` `|alpha| < pi`, `beta ~ x^1.6363` *(contro `1+2/pi = 1.6366`)*, `beta(1) = -0.871`, e **satura** *(rapporto `3.087` dove il lineare darebbe `10`)* |
+| ### ⛔ **e `S4` NON passa da `sympy.integrate`** | l'integrale di `alpha` esce in **`lerchphi`**, che ### **non si lambdifica** — quindi gli attesi non si potrebbero verificare. ### ✅ **Si usa la forma CHIUSA ipergeometrica** *(`F = pi x - 2 pi x 2F1(1, 1/p; 1+1/p; -x^p)`)*, ### **verificata contro una QUADRATURA a `2.4e-13`** |
+| ### ⭐ **il flusso su `psi` cambia NATURA** | con `rho`: `dN/dpsi^* = alpha psi`, cioe' ### **UNA FASE**; con `h`: `(sigma.n) psi`, cioe' ### **una ROTAZIONE**. ### ✅ **E una fase NON cambia `rho`: il termine CONSERVA la sua sorgente** |
+| **l'esito** | **`20`/`20`** |
