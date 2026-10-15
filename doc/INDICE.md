@@ -268,8 +268,8 @@
 | `DECISIONE-COMPOSIZIONE-SIMMETRICA` | DECISIONE | FISICA | 2 | ### **CHIUSA** |  | L ordine della tabella non e simmetrico: l errore di H_tot va come dtau e non dt |
 | `DECISIONE-DIREZIONE-STRADA-3` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | strada (3): C esatta nelle leggi e ROTTA SPONTANEAMENTE nello stato, con pareti |
 | `DECISIONE-LA-C-VUOLE-IL-TEMPO-ROVESCIATO` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | La C del cammino era una conseguenza delle involuzioni: coi flussi parziali serv |
-| `DECISIONE-M-B2-SI-LEGGE-SULLA-PENDENZA` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | M-B2 si legge sulla PENDENZA complessiva, non sui rapporti singoli |
-| `DECISIONE-STRADA-B-FLUSSI` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | strada (B): Grover e spostamento diventano FLUSSI, e l angolo pi e la velocita d |
+| `DECISIONE-M-B2-SI-LEGGE-SULLA-PENDENZA` | DECISIONE | FISICA | 2 | ### **CHIUSA** |  | M-B2 si legge sulla PENDENZA complessiva, non sui rapporti singoli |
+| `DECISIONE-STRADA-B-FLUSSI` | DECISIONE | FISICA | 2 | ### **CHIUSA** |  | strada (B): Grover e spostamento diventano FLUSSI, e l angolo pi e la velocita d |
 | `DECISIONE-TICK-OROLOGIO-MASSIMO` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | il tick e l orologio piu veloce possibile: theta <= pi e cs ha un massimo |
 | `DECISIONE-VUOLE-UN-CAMPO` | STANDARD | METODO | ENTRAMBE | ### **APERTA** |  | una decisione che serve a un programma vuole un CAMPO, non una frase nel titolo |
 | `DECISIONE-VUOTO-MEDIATORE` | DECISIONE | FISICA | 2 | ### **CHIUSA** |  | strada (A): lo sbilancio d energia di ogni tick va nel vuoto locale e ne torna |
@@ -310,7 +310,7 @@
 | `DOMANDA-LAMBDA-GRANDEZZA` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | lambda: su quale grandezza si misura, e da dove viene il suo valore? |
 | `DOMANDA-MASSA-E-FORME-MANCANTI` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | il termine di massa e due forme del flusso sono nel banco e non in tabella |
 | `DOMANDA-MITOSI-LE-FORME` | DECISIONE | FISICA | 2 | ### **AGENDA** | SI | le quattro forme della mitosi: lo spareggio, phi, il ramo della radice, la conne |
-| `DOMANDA-OMEGA-E-UNITA-O-COSTANTE` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | omega e una scelta di unita o una costante nuova? E i rapporti fra i tre angoli |
+| `DOMANDA-OMEGA-E-UNITA-O-COSTANTE` | DECISIONE | FISICA | 2 | ### **CHIUSA** |  | omega e una scelta di unita o una costante nuova? E i rapporti fra i tre angoli |
 | `DOMANDA-PASSO-FRAZIONARIO-O-ASINCRONO` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | pezzi frazionari o tick asincroni, e l-invarianza locale dei secondi NON e- dimo |
 | `DOMANDA-PESO-ARCO-COME-MEMORIA` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | il peso d-arco come memoria dinamica: la geometria nasce dalla dinamica? |
 | `DOMANDA-PHI-REALE-O-COMPLESSO` | DECISIONE | FISICA | 2 | ### **CHIUSA** |  | la tabella dichiara phi_h reale, il banco congelato lo tiene complesso: quale de |
@@ -322,7 +322,7 @@
 | `DOMANDA-QUALE-LAMBDA-SULL-ARCO` | DECISIONE | FISICA | 2 | ### **AGENDA** | SI | quale Lambda usa l arco nel termine di ordinamento: del nodo, la media, o dell a |
 | `DOMANDA-QUALE-SCENA-3D-PRINCIPALE` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | quale scena 3D fa da principale, se nessuna delle due provate e- isotropa? |
 | `DOMANDA-QUALE-SEGNO` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | quale segno della non linearita-, se quello che lega lega solo in 1D? |
-| `DOMANDA-QUALE-TEMPO-PROPRIO-USA-L-ARCO` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | quale tempo proprio usa l arco, che vive fra due nodi con dtau diversi |
+| `DOMANDA-QUALE-TEMPO-PROPRIO-USA-L-ARCO` | DECISIONE | FISICA | 2 | ### **CHIUSA** |  | quale tempo proprio usa l arco, che vive fra due nodi con dtau diversi |
 | `DOMANDA-QUANDO-LA-CAMMINATA-IN-TABELLA` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | quando si porta la camminata nella tabella? il porting aspetta TRE decisioni ape |
 | `DOMANDA-QUANTITA-CONSERVATA` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | esiste una moneta isotropa, causale e simmetrica fra le bande con una quantita-  |
 | `DOMANDA-REGOLE-FUORI-CLAUDE` | DECISIONE | METODO | 2 | ### **AGENDA** |  | le regole di gestione fuori da CLAUDE.md, e quelle dentro senza presidio: vanno  |
@@ -860,7 +860,7 @@
 | `T8` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 4 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
 | `T9` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 7 volte, MAI definito in un registro) [T9] |
 | `TAGLIA-FINITA` | STANDARD | METODO | ENTRAMBE | ### **APERTA** |  | lo scaling di taglia finita come via al limite continuo: reti diverse e si estra |
-| `TEMPO-PROPRIO-LOCALE` | STANDARD | FISICA | 2 | ### **AGENDA** |  | in TUTTI gli step si usa il tempo proprio LOCALE del nodo, e anche la cs LOCALE |
+| `TEMPO-PROPRIO-LOCALE` | STANDARD | FISICA | 2 | ### **CHIUSA** |  | in TUTTI gli step si usa il tempo proprio LOCALE del nodo, e anche la cs LOCALE |
 | `TERMOSTATO-E-FRENO` | MISURA | FISICA | 1 | ### **SOSPESA** |  | il termostato frena piu' di quanto rifornisca: togliergli il freno, non la sorge |
 | `TERRA-BUCONERO` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 3 volte, MAI definito in un registro) [TERRA-BUCONERO] |
 | `TETTO-CAUSALE-TEMPO-COORDINATO` | DIFETTO | FISICA | 1 | ### **SOSPESA** | SI | il tetto causale usa c_s LOCALE ma DT COORDINATO: dove r e piccolo permette moti |

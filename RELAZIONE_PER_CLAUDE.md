@@ -16473,3 +16473,24 @@ materia modifica `Lambda`?** ### **Finche' non c'e', nessun codice di `L2` si sc
 ### ⭐ **E il primo pezzo, quando arriva, e' il costruttore della scena di riferimento**
 *(`n` geometriche, `U = I`)* — ### ⚠ **che oggi non esiste in nessun file**, e che quando
 esistera' ### **obblighera' a rifare la' tutti i numeri misurati finora.**
+
+## 2026-10-15 — ✅ **LE CINQUE CHIUSURE DI `L1` NELL'INDICE** *(il secondo atto, col sha
+di `de89549`)*
+
+| la voce | che cosa dice la chiusura |
+|---|---|
+| `[[TEMPO-PROPRIO-LOCALE]]` | **SODDISFATTO**: lo standard diceva *«in TUTTI gli step»*, e ### **quattro pezzi su sette lo violavano DA SEMPRE** *(`0.000e+00` esatto al dimezzare `dtau`)*. Adesso ### **`0` su `12`** |
+| `[[DECISIONE-STRADA-B-FLUSSI]]` | **ATTUATA**, e con due cose che **non erano nel suo mandato**: i pezzi sono diventati **flussi veri** *(due mezzi fanno l'intero, `0.7`-`1.4` ulp)*, e questo ha ### **reso possibile il palindromo**, che ha portato l'errore dal **primo** al **secondo** ordine |
+| `[[DOMANDA-QUALE-TEMPO-PROPRIO-USA-L-ARCO]]` | **la media armonica**, nella forma `S/2 - D^2/(2S)`. ### ⚠ **E l'ipotesi <<due meta' uguali>> resta DICHIARATA** |
+| `[[DOMANDA-OMEGA-E-UNITA-O-COSTANTE]]` | **il raccordo**, con una verifica che vale piu' di un argomento: ### **`omega` NON COMPARE NEL CODICE** |
+| `[[DECISIONE-M-B2-SI-LEGGE-SULLA-PENDENZA]]` | **decisa e applicata**: pendenza `2.006`, criterio **soddisfatto** |
+
+### ⭐ **E UNA COSA CHE HO SCRITTO NELLA CHIUSURA DELLO STANDARD, perche' <<chiuso>> su uno
+standard puo' ingannare:** ### **non e' chiuso <<per sempre>> — e' chiuso perche' OGGI UN
+COMANDO LO VERIFICA**, e quel comando sta **nel hook**. ### **Se un giorno un pezzo tornasse
+a evolvere col tick, FERMEREBBE UN COMMIT.** ### **E' questa la differenza fra un livello
+chiuso e un livello dimenticato.**
+
+### 📌 **`[[N-DIREZIONI-DI-MOTO]]` RESTA APERTA, ed e' voluto:** la decisione c'e', ma il
+**costruttore della scena di riferimento e' il primo pezzo di `L2`** — e il punto `(a)`
+*(da dove vengono le `n` in un grafo nato dalla mitosi)* ### **e' di `L3`-`L4`.**
