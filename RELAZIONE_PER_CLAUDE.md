@@ -16620,3 +16620,29 @@ tabulati *(`beta` vero e `beta` rovesciato)* stampati a **quattro cifre** erano
 **identici** — e <<identici>> letto a occhio ### **non e' un numero.** ### ✅ **La
 scomposizione PARI/DISPARI e' il numero**, e senza di lei avrei scritto *«il verso e'
 opposto»*: ### **esattamente cio' che la misura non dice.**
+
+## 2026-10-15 — ⭐⭐ **DUE ERRORI NEL PROTOCOLLO DEL PRIMO PEZZO, E SONO DEL GUARDIANO —
+e il mio <<nessun verdetto>> era TROPPO PRUDENTE su uno dei due**
+
+### ⛔ **(a) Il caso che DOVEVA fallire presupponeva una risposta LINEARE in `beta`.**
+Il criterio diceva *«`beta` rovesciato deve rovesciare `dLambda`»*, e ### **quello vale solo
+se la risposta e' lineare.** La risposta misurata e' **PARI**, e
+
+> ### ⭐⭐ **UNA RISPOSTA PARI HA UN VERSO.** E' **la stessa** per le due elicita', cioe'
+> ### **indipendente dall'orientamento dello spin** — ed e' **proprio cio' che il principio
+> di equivalenza richiede.**
+
+### ⚠ **Quindi avevo trattato la parita' come UN'ASSENZA DI VERSO, mentre e' UN VERSO CHE
+NON DIPENDE DALL'ELICITA'.** ### **Il precondizionamento <<canale dispari presente>> si
+toglie come criterio del verso**, e lo accetto.
+
+### ⛔ **(b) Il grumo isotropo non e' un controllo nullo** — e questo l'avevo misurato io
+*(`h(0) = 0` ma `max|h(t)| = 2.1617`)*. ### ✅ **Il controllo nullo e' `beta = 0`, che da'
+`dLambda = 0` ESATTO: resta, ed e' l'UNICO.**
+
+### 📌 **E RILETTI COSI', I MIEI NUMERI DI `38853a9` A `dtau = 1` DICONO:** parte pari
+**positiva** sul grumo e **crescente** *(anello `0` da `+0.043` a `+0.105`)*, **negativa
+all'anello `3`**, **uguale per le due elicita'** *(`1.10`–`1.24`)* —
+### ⛔ **cioe' IL VUOTO SI ACCUMULA SULLA MATERIA, verso OPPOSTO alla tua decisione.**
+### ⚠ **E NON lo uso come conclusione: `dtau = 1` e' il caso CIECO**, e il secondo pezzo
+serve a misurarlo dove non lo e'.
