@@ -1,0 +1,133 @@
+[TIMBRO] _misura_verso_l2.py  sha1-BYTE 19a77870  committato e pulito
+================================================================================================
+IL VERSO DI L2: LA MATERIA CONSUMA IL VUOTO? -- una misura, criteri fissati prima
+================================================================================================
+  LA CONFIGURAZIONE: toro (7, 7)   tick = 400   finestre = 4   raggio del grumo = 1   seme = 7   dtau = (1.0, 0.5)
+  I REGIMI: x piccolo (ampiezza 0.01, vuoto 1, x = 0.0001), x di ordine 1 (ampiezza 1, vuoto 1, x = 1)
+------------------------------------------------------------------------------------------------
+### (A) `beta = dN/dLambda` e `al = dN/dh`: il conto a mano contro il codice
+  (A1) `al` e' `dN/dh` (differenze finite)                       PASSA   scarto massimo 8.993e-10 su 5 valori di x
+  (A2) `be` e' `dN/dLambda` (differenze finite)                  PASSA   scarto massimo 7.541e-10 su 5 valori di x
+  (A3) `be < 0` e vale `-(2/3)x^3` per `x` piccolo               PASSA   be(0.03) = -1.798058e-05, e -(2/3)x^3 = -1.800000e-05
+------------------------------------------------------------------------------------------------
+### (B) IL VUOTO DI RIFERIMENTO SENZA MATERIA: stazionario su 240 tick?
+  (B) `Lambda_k` invariante all'ulp, dtau = 1.00                 PASSA   scarto relativo 0.000e+00 = 0 ulp; e somma|phi|^2 cambia di 0.000e+00
+  (B) `Lambda_k` invariante all'ulp, dtau = 0.50                 PASSA   scarto relativo 0.000e+00 = 0 ulp; e somma|phi|^2 cambia di 0.000e+00
+------------------------------------------------------------------------------------------------
+### (C) `h` DEL GRUMO: l'elicita' +1 contro il grumo ISOTROPO
+  (C1) col grumo ALLINEATO `h` e' > 0 sui nodi del grumo         PASSA   h sul grumo: min 4.0000  max 4.0000; fuori: max |h| = 0.000e+00
+  (C2) e `h_k` E' la densita' `somma |psi_h|^2` (l'elicita' +1 l PASSA   scarto massimo 0.000e+00
+  ### (C3) DEVE ESSERE ZERO: col grumo ISOTROPO `h` si annulla   PASSA   max |h| = 0.000e+00: ### un grumo isotropo NON TOCCA IL VUOTO
+------------------------------------------------------------------------------------------------
+### (D) IL VERSO: dLambda = Lambda(materia) - Lambda(vuoto)
+  x piccolo        dtau=1.00  x=0.0001   dLambda sul GRUMO per finestra: -5.623e-14  -1.731e-13  -2.868e-13  -3.976e-13
+      anello 0 ( 1 nodi): -5.625e-14  -1.728e-13  -2.868e-13  -3.981e-13
+      anello 1 ( 4 nodi): -5.622e-14  -1.732e-13  -2.868e-13  -3.974e-13
+      anello 2 ( 8 nodi): -5.622e-14  -1.733e-13  -2.863e-13  -3.980e-13
+      anello 3 (12 nodi): -5.630e-14  -1.732e-13  -2.860e-13  -3.983e-13
+      e il vuoto TOTALE somma|phi|^2 cambia di 1.131e-13 (relativo);  pavimento del rumore 0.000e+00
+  x piccolo        dtau=0.50  x=0.0001   dLambda sul GRUMO per finestra: -4.869e-13  +1.720e-13  -9.578e-13  +1.967e-13
+      anello 0 ( 1 nodi): -7.777e-13  +1.987e-13  -1.291e-12  +2.015e-13
+      anello 1 ( 4 nodi): -4.143e-13  +1.653e-13  -8.744e-13  +1.955e-13
+      anello 2 ( 8 nodi): -2.110e-13  +3.837e-14  -5.143e-13  -1.266e-14
+      anello 3 (12 nodi): -6.223e-14  -8.249e-14  -2.715e-13  -2.235e-13
+      e il vuoto TOTALE somma|phi|^2 cambia di 8.672e-14 (relativo);  pavimento del rumore 0.000e+00
+  x di ordine 1    dtau=1.00  x=1   dLambda sul GRUMO per finestra: +2.182e-02  +3.447e-02  +4.618e-02  +4.845e-02
+      anello 0 ( 1 nodi): +4.260e-02  +6.433e-02  +8.566e-02  +1.050e-01
+      anello 1 ( 4 nodi): +1.663e-02  +2.701e-02  +3.631e-02  +3.431e-02
+      anello 2 ( 8 nodi): +1.443e-03  +3.366e-03  +3.943e-03  +4.193e-03
+      anello 3 (12 nodi): -4.569e-03  -6.889e-03  -1.071e-02  -5.675e-03
+      e il vuoto TOTALE somma|phi|^2 cambia di 1.476e-13 (relativo);  pavimento del rumore 0.000e+00
+  x di ordine 1    dtau=0.50  x=1   dLambda sul GRUMO per finestra: -1.367e-01  +1.214e-01  -1.984e-01  +2.072e-01
+      anello 0 ( 1 nodi): -2.064e-01  +1.704e-01  -2.260e-01  +3.116e-01
+      anello 1 ( 4 nodi): -1.193e-01  +1.091e-01  -1.915e-01  +1.811e-01
+      anello 2 ( 8 nodi): -5.900e-02  +5.479e-02  -1.150e-01  +8.651e-02
+      anello 3 (12 nodi): -6.769e-03  +1.452e-02  -3.523e-02  +1.948e-02
+      e il vuoto TOTALE somma|phi|^2 cambia di 8.527e-14 (relativo);  pavimento del rumore 0.000e+00
+------------------------------------------------------------------------------------------------
+### (E) IL CASO CHE DEVE FALLIRE: `beta` col SEGNO ROVESCIATO (solo qui)
+      dLambda sul GRUMO, beta vero            : +2.182e-02  +3.447e-02  +4.618e-02  +4.845e-02
+      dLambda sul GRUMO, beta rovesciato      : +2.182e-02  +3.447e-02  +4.618e-02  +4.845e-02
+      dLambda sul GRUMO, beta SPENTO (be = 0) : +0.000e+00  +0.000e+00  +0.000e+00  +0.000e+00
+      ### LA SCOMPOSIZIONE: max |parte PARI| = 1.732470e+00,  max |parte DISPARI| = 2.784439e-13  ->  dispari/pari = 1.607e-13
+  ### (E1) la parte DISPARI in `beta` e' NON TRASCURABILE        ### FALLISCE   dispari/pari = 1.607e-13: ### se e' ~0, il SEGNO di `dLambda` NON viene dal segno di `beta`, e nessun verdetto sul VERSO vale
+      al tick 1  : max |pari| = 1.554312e-15   max |dispari| = 1.776357e-15   -> 1.143e+00
+      al tick 2  : max |pari| = 6.098549e-02   max |dispari| = 1.332268e-15   -> 2.185e-14
+      al tick 3  : max |pari| = 6.243372e-01   max |dispari| = 3.108624e-15   -> 4.979e-15
+      al tick 10 : max |pari| = 2.790615e-01   max |dispari| = 3.996803e-15   -> 1.432e-14
+      PALINDROMO, dtau = 1           max|pari| = 1.7325e+00  max|dispari| = 2.7844e-13  -> 1.607e-13
+      PALINDROMO, dtau = 0.5         max|pari| = 1.1545e+00  max|dispari| = 3.4576e+00  -> 2.995e+00
+      NON palindromo, dtau = 1       max|pari| = 2.1282e+00  max|dispari| = 0.0000e+00  -> 0.000e+00
+      NON palindromo, dtau = 0.5     max|pari| = 3.6439e-01  max|dispari| = 1.4860e+00  -> 4.078e+00
+  ### (E2) la parte DISPARI compare in ALMENO UNO dei quattro ca PASSA   i quattro rapporti: pal, dtau = 1=1.61e-13  pal, dtau = 0.5=2.99e+00  nonpal, dtau = 1=0.00e+00  nonpal, dtau = 0.5=4.08e+00
+  ### (E0) la sostituzione ARRIVA al motore: con `beta = 0` `dLa PASSA   max |dLambda| con beta = 0: 0.000e+00  ### se NON fosse ~0, il caso che deve fallire non starebbe misurando niente
+------------------------------------------------------------------------------------------------
+### (H) I TRE GRUMI: elicita' +1, -1, e ISOTROPO -- stessa densita', stessa scena
+  elicita' +1        dtau=1.00  h(0) = +4.0000   max|h(t)| = 4.0000   dLambda per finestra: +2.182e-02  +3.447e-02  +4.618e-02  +4.845e-02
+        anello 0: +4.260e-02  +6.433e-02  +8.566e-02  +1.050e-01
+        anello 1: +1.663e-02  +2.701e-02  +3.631e-02  +3.431e-02
+        anello 2: +1.443e-03  +3.366e-03  +3.943e-03  +4.193e-03
+  elicita' +1        dtau=0.50  h(0) = +4.0000   max|h(t)| = 7.0147   dLambda per finestra: -1.367e-01  +1.214e-01  -1.984e-01  +2.072e-01
+        anello 0: -2.064e-01  +1.704e-01  -2.260e-01  +3.116e-01
+        anello 1: -1.193e-01  +1.091e-01  -1.915e-01  +1.811e-01
+        anello 2: -5.900e-02  +5.479e-02  -1.150e-01  +8.651e-02
+  elicita' -1        dtau=1.00  h(0) = -4.0000   max|h(t)| = 5.5675   dLambda per finestra: +1.992e-02  +3.118e-02  +4.081e-02  +3.903e-02
+        anello 0: +4.083e-02  +6.544e-02  +8.972e-02  +8.983e-02
+        anello 1: +1.469e-02  +2.262e-02  +2.858e-02  +2.633e-02
+        anello 2: +9.770e-04  +1.696e-03  -7.123e-04  +6.481e-04
+  elicita' -1        dtau=0.50  h(0) = -4.0000   max|h(t)| = 6.8616   dLambda per finestra: +1.517e-01  -3.757e-02  +2.417e-01  -8.257e-02
+        anello 0: +2.475e-01  +4.303e-03  +3.689e-01  -1.541e-02
+        anello 1: +1.277e-01  -4.804e-02  +2.099e-01  -9.936e-02
+        anello 2: +5.412e-02  -4.812e-02  +8.361e-02  -8.431e-02
+  ISOTROPO (h = 0)   dtau=1.00  h(0) = +0.0000   max|h(t)| = 2.1617   dLambda per finestra: +1.718e-04  +7.190e-04  +1.149e-03  +1.710e-03
+        anello 0: +3.805e-04  +1.494e-03  +2.302e-03  +3.225e-03
+        anello 1: +1.197e-04  +5.252e-04  +8.610e-04  +1.331e-03
+        anello 2: -9.774e-07  +7.260e-05  +1.926e-04  +3.512e-04
+  ISOTROPO (h = 0)   dtau=0.50  h(0) = +0.0000   max|h(t)| = 2.0013   dLambda per finestra: -1.310e-02  +6.930e-03  -2.392e-02  +1.943e-02
+        anello 0: -2.209e-02  +7.670e-03  -3.438e-02  +2.089e-02
+        anello 1: -1.085e-02  +6.745e-03  -2.131e-02  +1.907e-02
+        anello 2: -4.750e-03  +4.956e-03  -1.117e-02  +1.112e-02
+  ### (H0) il grumo ISOTROPO da' `dLambda = 0` all'ulp, dtau = 1 ### FALLISCE   max |dLambda| = 4.012e-02, e il MOTIVO e' misurato: `h(0) = 0` ma `max|h(t)| = 2.1617` -> ### L'ELICITA' NASCE mentre `psi` evolve, quindi <<isotropo>> NON E' UN CONTROLLO NULLO
+  ### (H0) il grumo ISOTROPO da' `dLambda = 0` all'ulp, dtau = 0 ### FALLISCE   max |dLambda| = 4.186e-01, e il MOTIVO e' misurato: `h(0) = 0` ma `max|h(t)| = 2.0013` -> ### L'ELICITA' NASCE mentre `psi` evolve, quindi <<isotropo>> NON E' UN CONTROLLO NULLO
+  dtau=1.00  |dLambda(+1)|/|dLambda(-1)| per finestra: 1.0956  1.1056  1.1317  1.2414
+  ### (H1) a dtau = 1.00 `(a)` e `(b)` hanno lo STESSO segno     PASSA   se OPPOSTI, la fonte della <<gravita'>> e' L'ELICITA' e non la materia: conflitto col principio di equivalenza, e DECISIONE DI LUCA
+  dtau=0.50  |dLambda(+1)|/|dLambda(-1)| per finestra: 0.9013  3.2302  0.8208  2.5098
+  ### (H1) a dtau = 0.50 `(a)` e `(b)` hanno lo STESSO segno     ### FALLISCE   se OPPOSTI, la fonte della <<gravita'>> e' L'ELICITA' e non la materia: conflitto col principio di equivalenza, e DECISIONE DI LUCA
+------------------------------------------------------------------------------------------------
+### (F) ROBUSTEZZA: n casuali, e phi a fasi casuali
+  n CASUALI              dLambda sul GRUMO: +7.203e-03  +5.564e-03  +7.236e-03  +5.869e-03   (h sul grumo: max 4.0000)
+  phi a FASI CASUALI     dLambda sul GRUMO: +3.902e-02  +3.593e-02  +3.570e-03  +4.144e-02   (h sul grumo: max 4.0000)
+================================================================================================
+### IL VERDETTO
+------------------------------------------------------------------------------------------------
+  dtau = 1.00:  canale DISPARI (dispari/pari) = 1.607e-13
+      dLambda sul grumo per finestra: +2.182e-02  +3.447e-02  +4.618e-02  +4.845e-02
+      media sulle finestre +3.773e-02,  scarto quadratico 1.061e-02
+  (G) a dtau = 1.00 la PRECONDIZIONE vale (il canale dispari c'e ### FALLISCE   dispari/pari = 1.607e-13: ### sotto ~0 il segno di `dLambda` NON viene da `beta`
+  (G) e a dtau = 1.00 il SEGNO e' lo STESSO in tutte le finestre PASSA   negative 0 su 4 sopra il pavimento; media/scarto = 3.558
+------------------------------------------------------------------------------------------------
+  dtau = 0.50:  canale DISPARI (dispari/pari) = 2.995e+00
+      dLambda sul grumo per finestra: -1.367e-01  +1.214e-01  -1.984e-01  +2.072e-01
+      media sulle finestre -1.635e-03,  scarto quadratico 1.701e-01
+  (G) a dtau = 0.50 la PRECONDIZIONE vale (il canale dispari c'e PASSA   dispari/pari = 2.995e+00: ### sotto ~0 il segno di `dLambda` NON viene da `beta`
+  (G) e a dtau = 0.50 il SEGNO e' lo STESSO in tutte le finestre ### FALLISCE   negative 2 su 4 sopra il pavimento; media/scarto = -0.010
+------------------------------------------------------------------------------------------------
+### ⛔⛔ NESSUN VERDETTO SUL VERSO, e i DUE motivi sono DIVERSI ai due `dtau`:
+###   a dtau = 1 il SEGNO e' costante (+) ma IL CANALE DISPARI NON C'E'
+###     (dispari/pari = 1.6e-13): il hop del vuoto a theta = pi e' una
+###     PERMUTAZIONE PURA, e una permutazione non ha termine d'interferenza.
+###     Quindi quel + e' un effetto in `beta^2`, SENZA verso.
+###   a dtau = 0.5 IL CANALE DISPARI C'E' (dispari/pari = 2.99) ma IL SEGNO
+###     ALTERNA fra le finestre: il vuoto OSCILLA attorno alla scena senza
+###     materia, con una media molto piu' piccola dell'ampiezza.
+###   ### E IL MECCANISMO C'E' IN ENTRAMBI I CASI: con `beta = 0` il dLambda
+###   e' ESATTAMENTE zero. Cio' che manca non e' l'effetto: e' il suo VERSO.
+###   ### CHE COSA SERVIREBBE, e NON lo decido io: misurare a `dtau < 1`
+###   (dove il canale dispari esiste) con corse PIU' LUNGHE e una media
+###   temporale con la sua barra d'errore, perche' a 400 tick l'oscillazione
+###   domina la media.
+================================================================================================
+  13 su 19
+### ⛔ E COME `cs` DIPENDE DA `Lambda` NON SI DECIDE QUI: a `L2` `cs` e'
+###   ANCORA UNIFORME, e questa misura guarda SOLO la risposta del vuoto.
+================================================================================================

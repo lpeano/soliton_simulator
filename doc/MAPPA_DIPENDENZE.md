@@ -462,3 +462,28 @@ primo pezzo di `L2`*
 misurati finora *(la deriva, le bande, il segno, `M-B2`)* vengono da scene con `n`
 **casuali**. ### ⚠ **Quando la scena di riferimento esistera', quei numeri andranno RIFATTI
 la', e NON si potranno confrontare con i vecchi come se fossero la stessa misura.**
+
+---
+
+## 13. ⛔ `L2` — **IL PRIMO PEZZO E' FATTO, E IL VERSO NON ESCE** *(`2026-10-15`)*
+
+### ✅ **La scena di riferimento ESISTE** *(`primo_ordine/scena_l2.py`)*, con **tre grumi**
+*(elicita' `+1`, `-1`, isotropo)*, e con lei **tre fatti che non erano nel disegno:**
+### ① **`h_k` e' l'ELICITA', non la densita'** *(correzione del guardiano a una mia frase)*,
+e `G` e' **dispari**, quindi ### **`beta` cambia segno con `h`**;
+### ② **il vuoto uniforme e' stazionario a `0` ulp** *(previsione mia sbagliata in meglio)*;
+### ③ ⛔ **l'elicita' NASCE:** un grumo isotropo ha `h(0) = 0` e **`max|h(t)| = 2.16`.**
+
+### ⛔⛔ **E DUE TRAPPOLE DI SCENA CHE VALGONO PER TUTTI I LIVELLI, e stanno qui per
+questo:**
+### ⭐ **(i) `dtau = 1` E' UN CASO CIECO:** la' il hop del vuoto a `theta = pi` e'
+### **una permutazione pura**, quindi ### **ogni misura che dipenda dall'interferenza del
+vuoto NON LA VEDE** *(`dispari/pari = 1.6e-13`)*. ### **Ed e' il caso che si prende per
+primo, perche' e' l'unita'.**
+### ⭐ **(ii) UN GRUMO ISOTROPO NON E' UN CONTROLLO NULLO:** `h = 0` vale **solo a
+`t = 0`**. ### **Chi costruisce un controllo deve guardare `h(t)`, non `h(0)`.**
+
+### 📌 **E la decisione `[[DOMANDA-COME-LA-MATERIA-CAMBIA-LAMBDA]]` resta in piedi come
+DECISIONE e non come fatto misurato:** il verso e' ### **deciso da Luca e NON ancora
+uscito dalla dinamica** — e il mandato diceva esattamente questo: ### **se non esce, si
+riporta e si ferma.**
