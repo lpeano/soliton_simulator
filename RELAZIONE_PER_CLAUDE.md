@@ -16886,3 +16886,12 @@ intera passa.**
 > ### ⛔ **E QUI MI FERMO, come il mandato dice.** ### **La forma dell'accoppiamento —
 > modificare la saturazione, aggiungere un termine, `S1`-`S4` o altro — e' una decisione di
 > Luca**, e nessuna delle quattro e' in tabella: ### **il motore non e' stato toccato.**
+
+### 📌 **E UNA COSA CHE HO TROVATO CHIUDENDO:** `python csv/indice.py storico-commit` —
+il comando che riempie il campo `commit` delle righe di storico ### **DAI LOG**, perche'
+una riga di storico finisce in un commit **che quando la scrivi non esiste ancora** — ha
+riempito ### **`96` righe**, non una. ### ⚠ **Cioe' erano `96` le righe di storico senza
+il loro commit**, e la mia era l'ultima. ### ✅ **Verificato che il cambiamento sia SOLO
+quello:** `2364` righe prima e dopo, `96` cambiate, e ### **l'unico campo toccato e'
+`commit`, da vuoto** *(controllato confrontando il `jsonl` di `HEAD` con quello sul disco,
+campo per campo — non a occhio)*.
