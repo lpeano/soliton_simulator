@@ -16356,3 +16356,51 @@ pezzo `(c)`:** gli `n` sono **casuali gaussiani normalizzati per estremita'** in
 spettro)*, **`z` uniforme** nei due banchi di `_collauda_memoria` e `_collauda_motore`
 *(dove e' **dichiarato come CONTROLLO**, non come fisica)*, e ### ⛔ **GEOMETRICI IN
 NESSUNA SCENA.** ### **Quelli li devo costruire io.**
+
+## 2026-10-15 — ⭐ **LE DUE CORREZIONI DEL GUARDIANO, E UNA DI ESSE E' CONTRO LA MIA**
+**AUTOCRITICA**
+
+> ### **La prima la accetto e cambia i numeri. La seconda mi dice che mi ero accusato di**
+> ### **troppo, e la registro con la stessa cura.**
+
+### ⛔ **① IL CRITERIO DI <<APPAIATO>> E' ALL'ULP, NON <<ENTRO LA SPAZIATURA>>.** Con un
+accoppiamento **ottimo**, anche uno spettro ### **CASUALE** da' distanze dell'ordine della
+spaziatura — quindi `0.082` su `0.088` ### **non vuol dire <<appaiato>>.** Un appaiamento
+esatto da' ### **`~1e-15`.** ### ✅ **Soglia dichiarata: `1e-10`.**
+
+### ⚠⚠ **② E LA SECONDA CORREZIONE E' CONTRO CIO' CHE AVEVO SCRITTO DI ME:** avevo detto
+che il goloso *«diceva il contrario del vero»*. ### **Non e' cosi', e il guardiano ha
+ragione:** il goloso ### **gonfiava il numero** *(`1.99` contro `0.082`)*, ma la
+**conclusione** — ### **<<non appaiato esattamente>>** — ### **REGGEVA.**
+### ⛔ **Cio' che era sbagliato e' la lettura che ne ho fatto DOPO**, insieme al guardiano:
+*«`0.082` contro `0.088`, quindi appaiato entro la spaziatura»*. ### **Quella si': quella
+diceva il contrario del vero.**
+
+### ⭐⭐ **E IL CONTROLLO DI SCALA DA' UN TERZO NUMERO CHE NESSUNA DELLE DUE LETTURE**
+**AVEVA.** Su **`20`** spettri casuali con lo **stesso intervallo**:
+
+| | `dtau = 1` | `dtau = 0.5` | `dtau = 0.25` |
+|---|---|---|---|
+| **collo di bottiglia misurato** | **`0.0820`** | `1.379` | `1.776` |
+| spaziatura dei livelli | `0.0879` | `0.0745` | `0.0237` |
+| **il CASO: mediana su `20` tiri** | `0.505` | `0.506` | `1.558` |
+| **il CASO: MINIMO su `20` tiri** | **`0.248`** | `0.280` | `1.486` |
+
+### ✅ **Quindi la lettura giusta e' in TRE pezzi, e non in uno:**
+### ① **NON e' un appaiamento esatto** *(sarebbe `~1e-15`, ed e' `0.082`)*;
+### ② **ma NON e' nemmeno <<indistinguibile dal caso>>:** `0.082` sta ### **tre volte sotto
+il MINIMO di `20` tiri casuali** *(`0.248`)*. ### **C'e' struttura, e non e' appaiamento.**
+### ③ ⭐ **E SENZA LA MONETA, A `dtau = 1`, L'APPAIAMENTO E' ESATTO: `4.133e-15`** — cioe'
+### **appaiato ALL'ULP.** ### **Ed e' la soglia nuova che lo ha reso visibile:** col
+criterio <<entro la spaziatura>> quel caso e il caso `0.082` ### **sarebbero finiti nella
+stessa casella.**
+
+### 📌 **③ E IL CENSIMENTO DEGLI `n`: il mio <<6 scene>> era sbagliato DUE VOLTE** — il
+numero **e** l'elenco. ### ✅ **Adesso il censimento lo fa LO SCRIPT a ogni corsa**, e dice:
+### **`8` file con `n` casuali gaussiani** *(`_collauda_checkpoint`, `_collauda_energia`,
+`_collauda_saturazione`, `_misura_spettro_l1`, `_misura_theta_n`, `bande_floquet`,
+`corrente`, `deriva`)*, ### **`3` con `z` uniforme** *(`_collauda_memoria`,
+`_collauda_motore`, e ### **`checkpoint.py`, che alla mia lista a mano MANCAVA**)*, e
+### ⛔ **`0` con `n` GEOMETRICI.**
+### ⚠ **E' `L-NUMERI` applicato a un elenco:** un conteggio ricopiato a mano **non ha
+provenienza**, e il mio ne aveva perso uno.

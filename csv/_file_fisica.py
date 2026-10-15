@@ -130,6 +130,10 @@ FILE_FISICA = (
     # ### palindromo, ### **le degeneranze di Kramers**, e ### **chi rompe
     # ### l-inversione del tempo** *(la moneta di spin)*.
     'primo_ordine/_misura_spettro_l1.py',
+    # ### ⭐ **NATO il `2026-10-15`, terza parte**: l-identita-
+    # ### `Theta W[n] Theta^-1 = W[-n]^-1`, e ### **la mappa del reticolo che la
+    # ### rende una simmetria ESATTA** con gli `n` geometrici.
+    'primo_ordine/_misura_theta_n.py',
     'primo_ordine/motore.py',
     'primo_ordine/_collauda_motore.py',
     # ### IL CHECKPOINT *(sotto-pezzo `5c`)*: salva e riprende ### **stato, grafo,

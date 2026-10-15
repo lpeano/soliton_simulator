@@ -69,6 +69,20 @@ DTAU = (1.0, 0.5, 0.25)
 EPS = 0.5
 VUOTO_MODULO = 2.0
 SY = np.array([[0.0, -1.0j], [1.0j, 0.0]], dtype=complex)
+# ### ⛔⛔ **LA SOGLIA DELL-APPAIAMENTO E- ALL-ULP, NON <<ENTRO LA SPAZIATURA>>**
+# ### *(correzione del guardiano, 2026-10-15)*. ### **E il motivo e- una cosa che ne io ne
+# ### lui avevamo visto: con un accoppiamento OTTIMO anche uno spettro CASUALE, senza
+# ### nessun appaiamento, da- distanze DELL-ORDINE DELLA SPAZIATURA** -- perche- l-ottimo
+# ### trova sempre un partner vicino quando i livelli sono fitti.
+# ### ✅ **Quindi <<appaiato>> vuol dire `~1e-15`**, e un numero come `0.082` su una
+# ### spaziatura di `0.088` vuol dire ### **<<NON DISTINGUIBILE DAL CASO>>**, non
+# ### <<appaiato>>. ### 📌 **E la spaziatura serve ancora, ma a UN-ALTRA COSA: dire quanto
+# ### e- grande una distanza CASUALE.**
+APPAIATO = 1e-10
+# ### ⚠ **I TIRI DEL CONTROLLO: `20`, e non `1`.** ### **Un tiro e- un campione,
+# ### non una scala**, e cio- che risponde alla domanda <<il caso potrebbe dare
+# ### un numero cosi- piccolo?>> e- ### **il MINIMO su molti tiri.**
+TIRI = 20
 # ### ⛔ **L-ORDINE DI PRIMA, per il CASO CHE DEVE FALLIRE.** ### **Non e- una seconda
 # ### tabella:** e- un dato storico, e serve solo a questo braccio.
 ORDINE_VECCHIO = (("CAMM-SATURAZIONE", 0.5), ("CAMM-MONETA-SPIN", 1),
@@ -78,23 +92,141 @@ ORDINE_VECCHIO = (("CAMM-SATURAZIONE", 0.5), ("CAMM-MONETA-SPIN", 1),
 
 
 def accoppia(a, b):
-    """### `max` distanza di un accoppiamento GOLOSO fra due multinsiemi complessi.
+    """### `max` distanza dell-accoppiamento **OTTIMO** fra due multinsiemi complessi.
 
-    ### ⛔ **E SI FA SUL PIANO COMPLESSO, NON SUGLI ANGOLI, ed e' la correzione di un mio
-    difetto di misura:** confrontare angoli ordinati ### **spezza una coppia vicina a
-    `+-pi`** — la' `-(-pi) = +pi` e' **lo stesso autovalore**, ma due angoli lontani `2pi`.
-    ### ⚠ **Con gli angoli avevo misurato <<molteplicita' 1>> a `dtau = 1`, che
-    CONTRADDICEVA la derivazione di Kramers: era l'avvolgimento, non la fisica.**
+    ### ⛔⛔ **PRIMA QUESTA FUNZIONE ERA GOLOSA, E IL SUO NUMERO DICEVA IL CONTRARIO DEL
+    VERO.** Un goloso prende per ogni elemento il piu- vicino ancora libero, quindi
+    ### **gli ultimi rimasti vengono accoppiati PER FORZA, anche lontanissimi**: cio- che
+    ne usciva ### **non era la distanza fra i due multinsiemi**, era **il peggior residuo
+    di una scelta miope.**
+    ### ⚠ **Misurato sulla stessa scena a `dtau = 1`: goloso `1.99`, OTTIMO `0.082`, con
+    una spaziatura dei livelli di `0.088`** -- cioe- il goloso diceva <<lontanissimo>> dove
+    l-ottimo dice <<appaiato entro la spaziatura>>.
+
+    ### ✅ **Un accoppiamento fra multinsiemi E- UN PROBLEMA DI OTTIMIZZAZIONE**, e si
+    risolve: `scipy.optimize.linear_sum_assignment` sulla matrice delle distanze.
+    ### 📌 **E si resta SUL PIANO COMPLESSO, non sugli angoli:** sugli angoli una coppia
+    vicina a `+-pi` si spezza, perche- la- `-(-pi) = +pi` e- **lo stesso autovalore** ma
+    due angoli lontani `2pi`.
     """
-    b = list(b)
+    # ### ⚠ **E DICO CHE COSA MINIMIZZA, perche- non e- il massimo:**
+    # ### `linear_sum_assignment` minimizza ### **la SOMMA** dei costi, e qui si riporta
+    # ### ### **il MASSIMO di QUELL-accoppiamento.** ### **Non e- garantito che sia il
+    # ### minimo possibile fra i massimi** *(quello sarebbe un problema <<bottleneck>>)*:
+    # ### e- una grandezza ben definita e standard, e ### **va letta per quella che e-.**
+    from scipy.optimize import linear_sum_assignment
+    a = np.asarray(a).reshape(-1)
+    b = np.asarray(b).reshape(-1)
+    assert a.shape == b.shape, (a.shape, b.shape)
+    costo = np.abs(a.reshape(-1, 1) - b.reshape(1, -1))
+    ri, ci = linear_sum_assignment(costo)
+    return float(np.max(costo[ri, ci]))
+
+
+def accoppia_collo(a, b):
+    """### L-ottimo **A COLLO DI BOTTIGLIA**: ### **il MINIMO dei MASSIMI.**
+
+    ### ⭐⭐ **E- QUESTA la grandezza che risponde alla domanda <<lo spettro e- appaiato
+    entro `d`?>>**, perche- e- ### **il piu- piccolo `d` per cui esiste una biiezione
+    che sta tutta entro `d`.** ### ⚠ **`linear_sum_assignment` minimizza la SOMMA**, e il
+    massimo di quell-accoppiamento ### **puo- essere piu- grande del minimo possibile.**
+    ### 📌 **E la differenza si vede nei numeri: a `dtau = 0.5` la somma-ottima da-
+    `2.000` e il collo di bottiglia da- un altro valore** -- e il guardiano aveva riportato
+    `1.40`, che e- la- in mezzo. ### **Quindi si stampano TUTTE E TRE**, e chi legge sa
+    quale sta guardando.
+
+    ### **Come:** ricerca binaria sulle distanze presenti, e a ogni soglia si chiede se
+    esiste ### **un abbinamento COMPLETO** nel grafo bipartito delle coppie ammesse.
+    """
+    from scipy.sparse import csr_matrix
+    from scipy.sparse.csgraph import maximum_bipartite_matching
+    a = np.asarray(a).reshape(-1)
+    b = np.asarray(b).reshape(-1)
+    n = a.shape[0]
+    assert b.shape[0] == n, (a.shape, b.shape)
+    d = np.abs(a.reshape(-1, 1) - b.reshape(1, -1))
+    cand = np.unique(d)
+
+    def basta(soglia):
+        m = csr_matrix(d <= soglia)
+        acc = maximum_bipartite_matching(m, perm_type="column")
+        return int(np.sum(acc >= 0)) == n
+
+    lo, hi = 0, len(cand) - 1
+    if not basta(cand[hi]):
+        return float(cand[hi])
+    while lo < hi:
+        mid = (lo + hi) // 2
+        if basta(cand[mid]):
+            hi = mid
+        else:
+            lo = mid + 1
+    return float(cand[lo])
+
+
+def spettro_casuale(lam, seme):
+    """### Uno spettro **CASUALE** con lo **STESSO numero** e lo **STESSO intervallo**.
+
+    ### ⛔⛔ **E- IL CONTROLLO DI SCALA, e senza di lui il numero dell-appaiamento NON SI
+    PUO- LEGGERE:** dice ### **quanto vale una distanza DOVUTA AL CASO** su uno spettro
+    fitto come questo.
+    ### ⚠ **L-intervallo si copia da quello vero** *(non tutto il cerchio)*, perche-
+    altrimenti ### **la spaziatura del controllo sarebbe un-altra** e il confronto non
+    starebbe in piedi.
+    """
+    a = np.angle(lam)
+    r = np.random.default_rng(seme)
+    fasi = r.uniform(float(np.min(a)), float(np.max(a)), len(lam))
+    return np.exp(1j * fasi)
+
+
+def _goloso(a, b):
+    """### L-accoppiamento GOLOSO, ### **tenuto SOLO per far vedere che sbaglia.**
+
+    ### ⛔ **NON si usa per misurare niente:** e- qui perche- ### **un difetto che non si
+    puo- piu- riprodurre non si puo- piu- spiegare** -- e questo ha fatto scrivere nella
+    `RIPRESA` un numero che diceva il contrario del vero.
+    """
+    b = list(np.asarray(b).reshape(-1))
     peggio = 0.0
-    for x in a:
+    for x in np.asarray(a).reshape(-1):
         k = min(range(len(b)), key=lambda j: abs(b[j] - x))
-        d = abs(b[k] - x)
-        if d > peggio:
-            peggio = d
+        peggio = max(peggio, abs(b[k] - x))
         b.pop(k)
-    return peggio
+    return float(peggio)
+
+
+def hausdorff(a, b):
+    """### La distanza di **Hausdorff** fra i due insiemi, ### **nei DUE versi.**
+
+    ### ⭐ **Dice una cosa DIVERSA dall-accoppiamento, e per questo ci vogliono entrambe:**
+    Hausdorff guarda <<ogni elemento ha QUALCUNO vicino?>> e ### **ignora le
+    molteplicita-**; l-accoppiamento guarda <<esiste una BIIEZIONE vicina?>> e le conta.
+    ### ⚠ **Hausdorff e- sempre `<=` dell-accoppiamento ottimo**, quindi un Hausdorff
+    piccolo con un accoppiamento grande vuol dire ### **molteplicita- che non tornano.**
+    """
+    a = np.asarray(a).reshape(-1)
+    b = np.asarray(b).reshape(-1)
+    d = np.abs(a.reshape(-1, 1) - b.reshape(1, -1))
+    return float(max(np.max(np.min(d, axis=1)), np.max(np.min(d, axis=0))))
+
+
+def spaziatura(lam):
+    """### La **spaziatura media dei livelli**: ### **il metro con cui si legge il resto.**
+
+    ### ⛔ **Senza di lei una distanza fra spettri NON SI PUO- LEGGERE:** `0.082` e-
+    <<appaiato>> o <<no>> ### **solo rispetto a qualcosa**, e quel qualcosa e- **quanto
+    distano fra loro i livelli vicini.**
+    ### 📌 **Si misura come CORDA fra autovalori consecutivi** *(ordinati per angolo)*,
+    cosi- e- ### **nella stessa unita-** dell-accoppiamento e di Hausdorff -- e per
+    separazioni piccole la corda e- l-arco, quindi il numero coincide con la spaziatura
+    ANGOLARE.
+    """
+    lam = np.asarray(lam).reshape(-1)
+    ord_ = lam[np.argsort(np.angle(lam))]
+    if len(ord_) < 2:
+        return float("nan")
+    return float(np.mean(np.abs(np.diff(ord_))))
 
 
 def gruppi_di(lam, toll):
@@ -202,6 +334,47 @@ def c_su_U(U):
     return np.einsum("ij,ajk,kl->ail", SY, np.conj(U), SY)
 
 
+def valida_la_misura():
+    """### ⛔ **DUE CASI CHE VALIDANO LA MISURA, non la fisica.**
+
+    ### ⚠ **Servono perche- la versione di prima di `accoppia` era ROTTA e nessuno se ne
+    accorgeva:** il numero usciva, era plausibile, e ### **diceva il contrario del vero.**
+    ### ✅ **Un caso che DEVE passare e uno che DEVE fallire lo avrebbero preso.**
+    """
+    print("-" * 96)
+    print("### LA VALIDAZIONE DELLA MISURA (non della fisica):")
+    r = np.random.default_rng(3)
+    eps = r.uniform(0.05, 3.0, 36)
+    # ### il caso che DEVE PASSARE: uno spettro ### **appaiato PER COSTRUZIONE**
+    app = np.concatenate([np.exp(1j * eps), np.exp(-1j * eps)])
+    d1 = accoppia(app, np.conj(app))
+    h1 = hausdorff(app, np.conj(app))
+    s1 = spaziatura(app)
+    esito("### DEVE PASSARE: uno spettro appaiato PER COSTRUZIONE da- ~0",
+          d1 <= 1024 * float(np.finfo(float).eps),
+          "ottimo %.3e  Hausdorff %.3e  spaziatura %.3e" % (d1, h1, s1))
+    # ### il caso che DEVE FALLIRE: ### **le stesse fasi TRASLATE**, cosi- l-insieme
+    # ### ### **non e- piu- chiuso per coniugazione**
+    delta = 0.3
+    rot = app * np.exp(1j * delta)
+    d2 = accoppia(rot, np.conj(rot))
+    s2 = spaziatura(rot)
+    esito("### DEVE FALLIRE: le stesse fasi TRASLATE di %.1f NON sono appaiate" % delta,
+          d2 > 10.0 * s2,
+          "ottimo %.3e contro una spaziatura di %.3e, cioe- %.0f volte"
+          % (d2, s2, d2 / s2))
+    # ### ⚠⚠ **E UN BRACCIO CHE AVEVO SCRITTO MALE, e lo dico invece di toglierlo in
+    # ### silenzio:** avevo messo qui il confronto col goloso, aspettandomi che sbagliasse.
+    # ### ### **NON sbaglia su un insieme ESATTAMENTE appaiato** -- la- ogni elemento ha
+    # ### il suo partner a distanza zero, e ### **anche il goloso lo trova** *(misurato:
+    # ### goloso `0.000e+00` come l-ottimo)*.
+    # ### ✅ **Il goloso sbaglia dove l-appaiamento e- APPROSSIMATO, cioe- SULLO SPETTRO
+    # ### VERO**, ed e- la- che il confronto sta adesso *(in `prove`)*.
+    # ### ⭐ **E la lezione e- la stessa di prima, applicata a me due volte: un caso di
+    # ### prova COSTRUITO TROPPO FACILE non prova niente.**
+    return d1, d2
+
+
 def prove(dtau):
     """### Le tre domande, ### **a un `dtau` dato.**"""
     eps_m = float(np.finfo(float).eps)
@@ -222,13 +395,46 @@ def prove(dtau):
     e = np.sort(np.angle(autov))
     toll = 1e-8
     # ------------------------------------------------- (1) eps <-> -eps?
-    # ### ⭐ **`eps -> -eps` e- `lambda -> coniugato(lambda)`**, e il confronto si fa
-    # ### ### **sul piano complesso** per non spezzare le coppie vicine a `+-pi`.
+    # ### ⭐ **`eps -> -eps` e- `lambda -> coniugato(lambda)`**, e si misurano ### **TRE
+    # ### numeri, non uno**: l-accoppiamento OTTIMO, Hausdorff, e ### **la spaziatura dei
+    # ### livelli**, che e- il metro.
     dist = accoppia(autov, np.conj(autov))
+    collo = accoppia_collo(autov, np.conj(autov))
+    haus = hausdorff(autov, np.conj(autov))
+    spa = spaziatura(autov)
     print("    le fasi: min %.6f  max %.6f  (su pi: %.4f .. %.4f)"
           % (e[0], e[-1], e[0] / np.pi, e[-1] / np.pi))
-    print("    ### (1) APPAIAMENTO `eps <-> -eps`: max distanza fra lo spettro e il suo"
-          " opposto = %.6e" % dist)
+    print("    ### (1) APPAIAMENTO: somma-ottima %.6e   COLLO DI BOTTIGLIA %.6e"
+          "   Hausdorff %.6e" % (dist, collo, haus))
+    print("    ###     e IL METRO: spaziatura media dei livelli %.6e  ->  collo su"
+          " spaziatura = %.2f" % (spa, collo / spa if spa > 0 else float("nan")))
+    # ### ⛔ **IL CONTROLLO DI SCALA: uno spettro CASUALE, stesso numero e stesso
+    # ### intervallo.** ### **Se il casuale da- lo stesso ordine di grandezza, allora il
+    # ### numero vero NON DICE <<appaiato>>: dice <<non distinguibile dal caso>>.**
+    # ### ⚠ **E IL CONTROLLO SI FA CON PIU- TIRI, non con uno:** ### **un tiro casuale
+    # ### e- UN CAMPIONE, non una scala.** ### **Cio- che serve e- il MINIMO su molti
+    # ### tiri**, perche- la domanda e- <<il caso POTREBBE dare un numero cosi- piccolo?>>.
+    tiri = [accoppia_collo(c, np.conj(c))
+            for c in (spettro_casuale(autov, 101 + t) for t in range(TIRI))]
+    c_collo = float(np.median(tiri))
+    c_min = float(np.min(tiri))
+    c_spa = spaziatura(spettro_casuale(autov, 101))
+    print("    ###     e IL CONTROLLO DI SCALA (%d spettri CASUALI, stesso intervallo):"
+          " collo mediano %.6e, MINIMO %.6e, spaziatura %.6e"
+          % (TIRI, c_collo, c_min, c_spa))
+    esito("(1) APPAIATO ALL'ULP (<= %.0e)? e non <<entro la spaziatura>>" % APPAIATO,
+          collo <= APPAIATO,
+          "collo %.3e: %s   (e il CASO su %d tiri: mediana %.3e, MINIMO %.3e)"
+          % (collo, "APPAIATO" if collo <= APPAIATO else "NON appaiato", TIRI,
+             c_collo, c_min))
+    # ### ⛔⛔ **E QUI IL CONFRONTO COL GOLOSO, SULLO SPETTRO VERO: e- la prova che la
+    # ### cura serviva.** ### **Su un insieme esattamente appaiato il goloso non sbaglia;
+    # ### dove l-appaiamento e- APPROSSIMATO, sbaglia di un fattore 20.**
+    gol = _goloso(autov, np.conj(autov))
+    print("    ###     e il GOLOSO di prima: %.6e  ->  diverso dal collo di %.3e,"
+          " cioe' %.1f spaziature" % (gol, abs(gol - collo),
+                                      abs(gol - collo) / spa if spa > 0 else
+                                      float("nan")))
     # ------------------------------------------------- (2) degeneranze doppie?
     gruppi = gruppi_di(autov, toll)
     molt = {}
@@ -279,9 +485,16 @@ def prove(dtau):
     g2 = gruppi_di(l2, toll)
     esito("(6) e SENZA la moneta la degenerazione di Kramers C'E'",
           min(g2) >= 2, "molteplicita' minima %d su %d gruppi" % (min(g2), len(g2)))
-    d2 = accoppia(l2, np.conj(l2))
-    print("    ### (7) e SENZA la moneta l'appaiamento `eps <-> -eps` vale %.6e" % d2)
-    return dist, min(gruppi), scarto, rotto, m_ug, s_senza, min(g2), d2
+    # ### ⚠ **anche qui il COLLO DI BOTTIGLIA**, non la somma-ottima: altrimenti i due
+    # ### numeri della tabella ### **non sarebbero confrontabili fra loro.**
+    d2 = accoppia_collo(l2, np.conj(l2))
+    s2 = spaziatura(l2)
+    esito("(7) e SENZA la moneta: APPAIATO ALL'ULP?", d2 <= APPAIATO,
+          "collo %.3e   Hausdorff %.3e   spaziatura %.3e   -> %s"
+          % (d2, hausdorff(l2, np.conj(l2)), s2,
+             "APPAIATO" if d2 <= APPAIATO else "NON appaiato"))
+    return (dist, collo, spa, min(gruppi), scarto, rotto, m_ug, s_senza, min(g2),
+            d2, s2, gol)
 
 
 def _prova_c_uguale(mot, st, forma, ordine):
@@ -339,6 +552,7 @@ def main(argv):
     print("  LA CONFIGURAZIONE: toro %s   seme = %d   dtau = %s   eps = %.1f"
           "   vuoto_modulo = %.1f   U in SU(2)"
           % (LATI, SEME, DTAU, EPS, VUOTO_MODULO))
+    valida_la_misura()
     tab = []
     for dtau in DTAU:
         tab.append((dtau,) + prove(dtau))
@@ -346,12 +560,27 @@ def main(argv):
     print("  LA TABELLA, in una riga per `dtau`. ### ATTENZIONE AL FATTORE 2: con l'ordine")
     print("  palindromo OGNI PEZZO sta a frazione 0.5, quindi un pezzo agisce a")
     print("  `theta = pi*dtau/2`, non a `pi*dtau`.")
-    print("  %-8s %-14s %-7s %-12s %-12s %-12s %-12s %s"
-          % ("dtau", "dist(e,-e)", "molt.", "C W C-1=W-1", "NON palind.",
-             "moneta=se", "senza mon.", "molt./dist senza"))
-    for dtau, dist, mm, sc, rotto, m_ug, s_senza, mm2, d2 in tab:
-        print("  %-8.4f %-14.6e %-7d %-12.3e %-12.3e %-12.3e %-12.3e %d / %.3e"
-              % (dtau, dist, mm, sc, rotto, m_ug, s_senza, mm2, d2))
+    print("  %-7s %-11s %-11s %-11s %-6s %-11s %-11s %s"
+          % ("dtau", "collo", "spaziatura", "collo/spaz", "molt.", "C W C-1=W-1",
+             "senza mon.", "molt. senza / appaiam. senza"))
+    for (dtau, dist, collo, spa, mm, sc, rotto, m_ug, s_senza, mm2, d2, s2,
+         gol) in tab:
+        print("  %-7.4f %-11.3e %-11.3e %-11.2f %-6d %-11.3e %-11.3e %d / %.3e (sp. %.3e)"
+              % (dtau, collo, spa, collo / spa, mm, sc, s_senza, mm2, d2, s2))
+    # ### ⛔ **E L-ASSERZIONE SUL GOLOSO STA QUI, non dentro `prove`:** <<il goloso
+    # ### sbaglia>> ### **NON e- vero a OGNI `dtau`** -- a `dtau = 0.5` da- lo stesso
+    # ### numero. ### ✅ **Cio- che e- vero, e che basta, e- che ALMENO A UN `dtau` il
+    # ### goloso da- UN ALTRO VERDETTO**, e quello e- il `dtau` su cui avevo scritto la
+    # ### frase sbagliata nella `RIPRESA`.
+    # ### ⚠ **gli indici si contano dalla tupla, non a memoria:** la prima volta avevo
+    # ### preso `x[11]` *(la spaziatura senza moneta)* per il goloso, ed e- `x[12]`.
+    diversi = [(x[0], x[12], x[2], x[3]) for x in tab
+               if abs(x[12] - x[2]) > x[3]]
+    esito("### ALMENO A UN `dtau` il GOLOSO dava un altro verdetto",
+          len(diversi) >= 1,
+          "a %s: goloso %.3e contro collo %.3e, su spaziatura %.3e"
+          % (diversi[0][0], diversi[0][1], diversi[0][2], diversi[0][3])
+          if diversi else "nessuno: allora la cura non era necessaria")
     print("=" * 96)
     print("  %d su %d" % (OK[0], OK[1]))
     print("### ⛔ E NESSUNA CONCLUSIONE DI FISICA: i numeri sono questi, e la lettura")

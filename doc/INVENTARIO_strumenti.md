@@ -3541,10 +3541,30 @@ scena **cresca** come gli archi *(`4.00x` su `4.00x` atteso)*; `m3` **`0.005114`
 | | |
 |---|---|
 | **file** | `primo_ordine/_misura_spettro_l1.py` |
-| **BLOB** *(sha1 dei byte grezzi)* | `32e1b4bd` |
+| **BLOB** *(sha1 dei byte grezzi)* | `f1346ebe` |
 | **IL COMANDO, verbatim** | `python primo_ordine/_misura_spettro_l1.py` |
 | **cosa misura** | su un **TORO** `3x3` *(grado `4`, e senza bordi)*, col passo **palindromo** e **senza la saturazione**: l'appaiamento `eps <-> -eps`, le **degeneranze doppie** *(Kramers)*, e `C W C^-1 = W^-1` |
 | ### ⭐ **che cosa dice** | ### **la MONETA DI SPIN non si rovescia sotto `C`:** `C M C^-1 = M` da' **`0.000e+00`** mentre `= M^-1` da' `1.33e-01`. ### **E senza la moneta** `C W C^-1 = W^-1` torna **esatta** *(`3.9e-16`, `2` ulp)* e la **degenerazione di Kramers compare** *(molteplicita' minima `2`)* |
 | ### ⛔ **il caso che DEVE fallire** | lo stesso con l'ordine **NON palindromo**: `1.589`, `0.878`, `0.300`. ### **Senza, il braccio sarebbe un FALSO-UNO** |
-| ### ⚠ **un mio difetto di misura, curato** | raggruppavo le fasi **per ANGOLO**, e una coppia vicina a `+-pi` finiva in **due gruppi**: davo <<molteplicita' `1`>> dove Kramers dice `2`. ### **Si raggruppa per AUTOVALORE**, sul piano complesso |
+| ### ⚠ **DUE miei difetti di misura, curati** | ### ① raggruppavo le fasi **per ANGOLO**, e una coppia vicina a `+-pi` finiva in **due gruppi**; ### ② l'accoppiamento era **GOLOSO**, che accoppia per forza gli ultimi rimasti *(`1.99` contro `0.082`)*. ### ✅ **Adesso: raggruppamento per AUTOVALORE**, e ### **accoppiamento OTTIMO A COLLO DI BOTTIGLIA** *(il minimo dei massimi, per ricerca binaria piu' abbinamento bipartito)*, **piu' Hausdorff**, **piu' la spaziatura dei livelli** |
+| ### ⛔ **e la SOGLIA di <<appaiato>> e' ALL'ULP** *(`1e-10`)*, **non <<entro la spaziatura>>** | correzione del guardiano: ### **con un accoppiamento ottimo anche uno spettro CASUALE da' distanze dell'ordine della spaziatura.** ### ✅ **E c'e' un CONTROLLO DI SCALA su `20` tiri casuali:** a `dtau = 1` il caso da' mediana `0.505` e **minimo `0.248`**, il misurato **`0.0820`** — ### **tre volte sotto il minimo del caso: c'e' struttura, e NON e' appaiamento** |
+| ### ⭐ **e il numero che la soglia nuova ha reso visibile** | ### **senza la moneta, a `dtau = 1`, l'appaiamento e' ESATTO: `4.133e-15`.** ### **Col criterio vecchio quel caso e il caso `0.082` finivano nella stessa casella** |
 | ### 📌 **e `W` non e' scritta a mano** | si costruisce **applicando il passo ai vettori di base**: cosi' e' **l'operatore che il motore applica davvero**, non la mia idea di quale sia |
+
+---
+
+### `primo_ordine/_misura_theta_n.py` — **`Theta` CONTRO LE DIREZIONI `n`** *(2026-10-15, terza parte)*
+
+| | |
+|---|---|
+| **file** | `primo_ordine/_misura_theta_n.py` |
+| **BLOB** *(sha1 dei byte grezzi)* | `0d14b153` |
+| **IL COMANDO, verbatim** | `python primo_ordine/_misura_theta_n.py` |
+| **cosa misura** | l'identita' ### **`Theta W[n] Theta^-1 = W[-n]^-1`** su un toro `3x3`, a `dtau = 1`, `0.5`, `0.25`, **come MATRICI** *(costruite applicando il passo ai vettori di base)* |
+| ### ✅ **`(a)` l'identita'** | vale **ALL'ULP** con `n` casuali: **`7.9e-16`**, `4.4e-16`, `6.0e-16` — ### **`2`-`3` ulp** |
+| ### ⛔ **`(b)` il caso che DEVE fallire** | lo stesso confrontato con **`W[+n]^-1`** *(`n` **non** rovesciato)*: `0.483`, `0.277`, `0.217`. ### **E' il confronto che avevo fatto io, e che mi aveva dato `6.68e-01`: non era un difetto del modello, era il confronto sbagliato** |
+| ### ⭐⭐ **`(c)` la mappa del reticolo** | con `n` **GEOMETRICI** *(l'`n` dell'estremita' = la direzione dell'arco uscente, quindi i due capi hanno `n` opposti)* e **`U = I`**: ### **`P W[n] P^-1 = W[-n]`** da' **`0.000e+00`**, `2.8e-17`, `1.4e-17`; e ### **`(P Theta) W (P Theta)^-1 = W^-1`** da' **`5.5e-16`** *(`2` ulp)* — ### **UNA SIMMETRIA ANTIUNITARIA ESATTA DEL PASSO** |
+| ### ⭐ **e la conseguenza, misurata** | `(P Theta)^2 = P^2 Theta^2 = -1`, quindi **Kramers**: ### **molteplicita' minima `2`** su `12` gruppi, a tutti e tre i `dtau` |
+| ### ⛔ **e il caso che DEVE rompersi** | lo stesso con **`U` CASUALE**: `1.218`, `1.250`, `0.742`. ### **E il motivo e' DERIVATO prima di misurarlo:** l'inversione **rovescia l'orientamento dell'arco**, e la' ### **`U` va in `U^dagger`** — quindi servirebbe `U^dagger = U` su ogni arco |
+| ### 📌 **e il censimento degli `n`, letto DAL CODICE a ogni corsa** | **`8`** file con `n` casuali gaussiani, **`3`** con `z` uniforme *(e uno, `checkpoint.py`, alla mia lista a mano **mancava**)*, ### **`0` con `n` GEOMETRICI** |
+| ### ⚠ **e la permutazione si VERIFICA, non si assume** | `P` e' asserita **biiezione** e **involuzione** *(`P^2 = 1`)*: ### **un conto sugli indici e' il posto tipico dove si sbaglia un segno**, e `P^2 = 1` serve alla derivazione |

@@ -299,21 +299,46 @@ def main(argv):
     # ### ⚠ **E IL RIPIEGO DEI BUFFER DEVE ESSERE ZERO DOPO IL PRIMO TICK:** e- la
     # ### ### **causa** che `m3` cerca, e provarla direttamente e- piu- forte che
     # ### dedurla da una pendenza.
-    # ### ⚠⚠ **E QUI UN NUMERO CHE RIPORTO E NON TOCCO:** la soglia e- ### **`13`**, e
-    # ### i buffer adesso sono ### **`18`** -- quindi questo braccio ### **FALLISCE.**
-    # ### ⛔ **E NON ALZO IL `13`: Luca ha deciso la soglia di `m1`, NON questa.**
-    # ### ⭐ **Ma la cosa che il braccio DICE di misurare -- <<zero allocazioni DOPO i
-    # ### primi tick>> -- si puo- guardare, e la guardo:** ### **i ripieghi dopo il primo
-    # ### tick** sono stampati qui sotto. ### **Se quel numero e- `0`, la PROPRIETA- vale
-    # ### e cio- che non vale e- il PROXY** *(che conta il TOTALE)*. ### **La lettura la
-    # ### decide Luca.**
-    print("        ### I RIPIEGHI, prima e dopo: %d dopo il PRIMO tick, %d dopo tutti i"
-          " %d -- cioe' %d DOPO il primo"
-          % (RIP1[0], mot.ripieghi, TICK_M3, mot.ripieghi - RIP1[0]))
-    esito("### e la CAUSA e' provata direttamente: ZERO allocazioni dopo i primi tick",
-          mot.ripieghi <= 13,
-          "### %d buffer in %d tick: la pendenza dice l'effetto, questo dice la CAUSA"
-          % (mot.ripieghi, TICK_M3))
+    # ### ⭐⭐ **DAL `2026-10-15` QUESTO BRACCIO MISURA LA PROPRIETA- CHE DICHIARA, e non
+    # ### un suo PROXY** *(scelta di Luca)*. ### **Prima pretendeva `ripieghi <= 13`,
+    # ### cioe- un tetto sul TOTALE**, e col passo palindromo i buffer sono diventati
+    # ### ### **`18`**: il braccio ### **falliva per il letterale, non per la proprieta-.**
+    # ### ⛔ **E IL `13` NON E- STATO ALZATO: e- stato TOLTO**, perche- non era una
+    # ### soglia da spostare -- era ### **la cosa sbagliata da guardare.**
+    # ### ✅ **Cio- che il braccio dichiara e- <<ZERO allocazioni DOPO i primi tick>>, e
+    # ### adesso e- esattamente cio- che misura:** ### **`ripieghi` alla fine meno
+    # ### `ripieghi` dopo il primo tick.**
+    # ### 📌 **E il numero che resta DA RIPORTARE e- il TOTALE**, che e- una grandezza
+    # ### utile *(quanti buffer distinti serve la scena)*: si STAMPA, e non decide niente.
+    nuovi = mot.ripieghi - RIP1[0]
+    print("        ### I RIPIEGHI: %d dopo il PRIMO tick, %d dopo tutti i %d"
+          " -> %d NUOVI dopo il primo" % (RIP1[0], mot.ripieghi, TICK_M3, nuovi))
+    esito("### e la CAUSA e' provata direttamente: ZERO allocazioni NUOVE dopo il primo"
+          " tick", nuovi == 0,
+          "### %d allocazioni nuove dopo il primo tick (totale %d buffer distinti):"
+          " la pendenza dice l'effetto, questo dice la CAUSA" % (nuovi, mot.ripieghi))
+    # ### ⛔⛔ **IL CASO CHE DEVE FALLIRE, e l-ho fatto PERMANENTE invece che temporaneo.**
+    # ### ⚠ **Il mandato diceva <<dimostralo, poi togli la prova>>, e una prova
+    # ### temporanea dimostra UNA VOLTA.** ### ✅ **Un braccio permanente dimostra A OGNI
+    # ### CORSA**, e gira su ### **un motore SUO**, quindi non tocca la misura di sopra.
+    # ### 📌 **Lo dichiaro perche- e- uno scostamento dal mandato, in piu- e non in meno.**
+    _i2, s2, m2 = _scena(TAGLIE[0], "numpy")
+    rip1b = [0]
+    for k in range(TICK_M3):
+        m2.apri_tick()
+        m2.operatori["grover"](s2, {}, 1)
+        m2.chiudi_tick()
+        if k == 0:
+            rip1b[0] = m2.ripieghi
+        if k == 5:
+            # ### **l-allocazione messa APPOSTA**, e la taglia dipende dal tick cosi-
+            # ### che sia ### **una CHIAVE NUOVA** e non un buffer riusato
+            m2._b("finto_al_tick_%d" % k, (k + 1,), float)
+    nuovi2 = m2.ripieghi - rip1b[0]
+    esito("### DEVE fallire: un'allocazione al tick 5 fa scattare il braccio",
+          nuovi2 > 0,
+          "### %d allocazioni nuove dopo il primo tick: ### senza questo, il braccio di"
+          " sopra sarebbe un FALSO-UNO" % nuovi2)
 
     # ================================================================== m4, il TIMBRO
     print()

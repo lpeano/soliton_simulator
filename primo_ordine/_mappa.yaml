@@ -90,6 +90,10 @@ moduli:
     responsabilita: le quattro funzioni del generatore della saturazione, e il LIMITE
     importa: []
 
+  - nome: _misura_theta_n.py
+    responsabilita: se Theta e le direzioni n danno una simmetria esatta del passo
+    importa: [_presidio, composizione, corrente, deriva, incidenza, motore, stato]
+
   - nome: _misura_spettro_l1.py
     responsabilita: lo spettro del passo lineare palindromo, e dove la C si rovescia
     importa: [_presidio, composizione, corrente, deriva, incidenza, motore, stato]
