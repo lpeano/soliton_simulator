@@ -16494,3 +16494,51 @@ chiuso e un livello dimenticato.**
 ### 📌 **`[[N-DIREZIONI-DI-MOTO]]` RESTA APERTA, ed e' voluto:** la decisione c'e', ma il
 **costruttore della scena di riferimento e' il primo pezzo di `L2`** — e il punto `(a)`
 *(da dove vengono le `n` in un grafo nato dalla mitosi)* ### **e' di `L3`-`L4`.**
+
+## 2026-10-15 — ⭐⭐ **`L2`: IL VERSO E LA FORMA SONO DECISI — e una cosa che ho derivato
+prima del codice CAMBIA LA SCENA**
+
+> ### **Le decisioni sono registrate su `[[DOMANDA-COME-LA-MATERIA-CAMBIA-LAMBDA]]`, e il
+> task history e' `doc/TASK_HISTORY/2026-10-15_l2_scena_e_verso.md`.**
+
+### ✅ **IL VERSO:** la materia **CONSUMA** il vuoto — dove `psi` e' densa `Lambda` scende,
+quindi `cs` scende e ### **gli orologi rallentano.** ### **Nello stesso verso della fase
+`1`.**
+
+### ✅ **LA FORMA: strada `A`, DERIVATA, nessuna legge nuova.** E ### **<<derivata>> non e'
+una parola: il conto si chiude a mano**, e l'ho fatto prima di scrivere codice —
+
+```
+N = Lambda G(h/Lambda),  G(x) = x - arctan x,  x = h/Lambda
+dN/dh      = G'(x)           = x^2/(1+x^2)            <- saturazione.Gp
+dN/dLambda = G(x) - x G'(x)  = x/(1+x^2) - arctan x    <- saturazione.b
+```
+
+### ⭐ **cioe' ESATTAMENTE i due numeri che `_saturazione` usa** come velocita' angolare di
+`psi` e velocita' di fase di `phi`. ### **`beta` non e' una scelta: e' `dN/dLambda`
+dell'unica `H`.** *(E lo verifico col codice nello script, non solo a mano.)*
+
+### 📌 **E la conseguenza di principio, registrata con la decisione:** il vuoto **TOTALE**
+si conserva *(la camminata e' unitaria)*, quindi ### **la materia SPOSTA il vuoto, non lo
+distrugge.**
+
+### ⛔⛔ **MA C'E' UNA COSA CHE HO DERIVATO PRIMA DI MISURARE E CHE CAMBIA LA SCENA DI
+RIFERIMENTO: CON `n` GEOMETRICI UN GRUMO ISOTROPO NON SATURA.**
+
+`h_k = somma_h psi_h^dagger (sigma.n_h) psi_h`, e ### **la fase di `psi` NON conta**
+*(`psi^dagger A psi` e' invariante per fase)*. Quindi se le estremita' di un nodo hanno **lo
+stesso spinore e lo stesso modulo**, le direzioni uscenti — che su un toro ### **sommano a
+zero** — danno ### **`h_k = 0` ESATTO.** ### **Cioe' `x = 0`, `al = be = 0`, e la materia
+NON TOCCA IL VUOTO PER NIENTE.**
+
+### ✅ **E LA VIA D'USCITA NON E' UN TRUCCO: E' `sigma.p`.** Se lo spinore di ogni
+estremita' e' **allineato con la sua direzione** *(autovettore `+1` di `sigma.n_h`)*, allora
+### **`h_k = somma_h |psi_h|^2`, cioe' LA DENSITA' DI MATERIA**, e ### ⭐ **`x = h/Lambda`
+diventa esattamente il rapporto materia/vuoto** — che e' la grandezza che la scansione del
+punto 2 vuole.
+### 📌 **Il grumo di riferimento ha ELICITA' `+1`, e lo DICHIARO: e' una scelta di SCENA,
+non una legge.**
+
+### ⚠ **E lo scrivo PRIMA di misurare perche' e' una previsione che puo' cadere:** se anche
+col grumo allineato `h` restasse `~0`, ### **la scena di riferimento non sarebbe costruibile
+cosi'** — e andrei a riportarlo, non a cambiare scena di nascosto.

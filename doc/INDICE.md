@@ -285,7 +285,7 @@
 | `DOMANDA-BASE-DI-CICLI` | DECISIONE | FISICA | ENTRAMBE | ### **APERTA** | SI | la base di cicli non e unica, e lo stesso difetto compare in tre pezzi diversi |
 | `DOMANDA-C2-O-C4` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | due componenti o quattro: il gap c-e- solo con C4? |
 | `DOMANDA-CHI-CAUSA-L-ANISOTROPIA` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | sul cubico i versori del v3 RIDUCONO l-anisotropia direzionale: e- una leva o si |
-| `DOMANDA-COME-LA-MATERIA-CAMBIA-LAMBDA` | DECISIONE | FISICA | 2 | ### **AGENDA** | SI | come la materia cambia la densita- del vuoto: scattering nel nodo o trasmissione |
+| `DOMANDA-COME-LA-MATERIA-CAMBIA-LAMBDA` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | come la materia cambia la densita- del vuoto: scattering nel nodo o trasmissione |
 | `DOMANDA-CONDIZIONI-INIZIALI-IN-TABELLA` | DECISIONE | FISICA | 2 | ### **AGENDA** | SI | la tabella non ha un posto dove dichiarare le condizioni iniziali |
 | `DOMANDA-CORRENTE-LOCALE-NON-ESISTE` | MISURA | FISICA | ENTRAMBE | ### **APERTA** |  | la corrente locale di E ESISTE per la parte lineare, portata misurata 3 archi |
 | `DOMANDA-D13-CONIUGATI` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | D13: i coniugati delle memorie -- tw come fase U(1) sull-arco? |
