@@ -3643,6 +3643,7 @@ scena **cresca** come gli archi *(`4.00x` su `4.00x` atteso)*; `m3` **`0.005114`
 | **file** | `primo_ordine/_misura_forme_l2.py` |
 | **BLOB** *(sha1 dei byte grezzi)* | `b729ab36` |
 | **IL COMANDO, verbatim** | `python primo_ordine/_misura_forme_l2.py` |
+| **il REFERTO** | `doc/referti_l2/forme_candidate.txt`, generato ### **dal blob COMMITTATO** `b729ab36` *(il timbro in testa lo dice)*, ### **`321.2` s** |
 | ### ⚠ **sta FUORI dal `pre-commit`** | corse lunghe *(`2000`, e `10000` nell'estensione)*: **misure DICHIARATE** |
 | ### ⛔ **e il MOTORE NON SI TOCCA** | si sostituisce **`mot.operatori[...]` a runtime**, con un termine che prende `rho` *(la densita')* e mette su `psi` ### **una FASE** — non una rotazione |
 | ### ⭐⭐ **la sorgente E' `rho`, e si DIMOSTRA** | al **PRIMO tick** le tre elicita' *(`+1`, `-1`, isotropo)* danno **lo stesso `dLambda`**: `8.9e-17` e `1.8e-15` |

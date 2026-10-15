@@ -1,0 +1,95 @@
+[TIMBRO] _misura_forme_l2.py  sha1-BYTE b729ab36  committato e pulito
+================================================================================================
+LE QUATTRO FORME, MISURATE -- con rho come sorgente. IL MOTORE NON SI TOCCA.
+================================================================================================
+  LA CONFIGURAZIONE: toro (7, 7)   TICK = 2000 (1000 nella scansione)   FINESTRE = 10   raggio = 1   seme = 7   vuoto = 1.0
+  dtau = (0.5, 0.25) (lo spin a (0.5,))   x = (0.01, 0.03, 0.1, 0.2, 0.5, 1.0, 2.0)   forme = ('S1', 'S2', 'S3', 'S4')
+  ### CORSE LUNGHE: stanno FUORI dal pre-commit, come misure DICHIARATE.
+------------------------------------------------------------------------------------------------
+### (A) IL CONTROLLO NULLO: termine SPENTO -> dLambda = 0 esatto
+  (A) termine spento, dtau = 0.50                          PASSA   max |dLambda| = 0.000e+00 su 200 tick
+  (A) termine spento, dtau = 0.25                          PASSA   max |dLambda| = 0.000e+00 su 200 tick
+------------------------------------------------------------------------------------------------
+### (B) IL VERSO, per forma: media di E sul grumo su 2000 tick, 10 finestre
+  S1 dtau=0.50   E = +2.202055e-01 +- 9.949e-02 (2.2 barre)   O = -4.687392e-01 +- 9.498e-02   somma-nodi -8.69e-13   [5.0 s]
+  S1 dtau=0.25   E = -5.709636e-01 +- 2.575e-01 (2.2 barre)   O = -1.223605e+00 +- 2.373e-01   somma-nodi -1.20e-14   [5.0 s]
+  S2 dtau=0.50   E = +2.063169e-01 +- 1.345e-01 (1.5 barre)   O = -2.745019e-01 +- 1.715e-01   somma-nodi -6.26e-13   [3.2 s]
+  S2 dtau=0.25   E = +1.066251e-01 +- 4.179e-01 (0.3 barre)   O = -1.458071e+00 +- 4.904e-01   somma-nodi -2.14e-14   [3.1 s]
+  S3 dtau=0.50   E = -5.542519e-01 +- 1.932e-01 (2.9 barre)   O = -9.746560e-01 +- 3.489e-01   somma-nodi -7.98e-13   [3.2 s]
+  S3 dtau=0.25   E = -2.446131e-01 +- 3.642e-01 (0.7 barre)   O = -1.655399e+00 +- 3.529e-01   somma-nodi -4.02e-15   [3.1 s]
+  S4 dtau=0.50   E = +3.697786e-01 +- 1.522e-01 (2.4 barre)   O = -3.886813e-01 +- 1.984e-01   somma-nodi -7.15e-13   [3.8 s]
+  S4 dtau=0.25   E = +1.970324e-01 +- 5.219e-01 (0.4 barre)   O = -4.453758e-01 +- 6.348e-01   somma-nodi -2.06e-14   [3.3 s]
+------------------------------------------------------------------------------------------------
+### (C) L'INDIPENDENZA DALLO SPIN: +1, -1 e isotropo alla STESSA densita'
+  S1 dtau=0.50   E(+1) = +2.2021e-01   E(-1) = -1.0183e-01   E(iso) = -8.3557e-01
+        differenze: +1 contro -1 = 2.3 barre, +1 contro iso = 7.4 barre
+  (C) S1: al PRIMO tick le tre elicita' danno lo STESSO dL PASSA   max differenza al tick 1 = 8.882e-17: ### la sorgente E' rho
+  S2 dtau=0.50   E(+1) = +2.0632e-01   E(-1) = +3.8355e-01   E(iso) = +7.3093e-02
+        differenze: +1 contro -1 = 0.8 barre, +1 contro iso = 0.7 barre
+  (C) S2: al PRIMO tick le tre elicita' danno lo STESSO dL PASSA   max differenza al tick 1 = 1.776e-15: ### la sorgente E' rho
+  S3 dtau=0.50   E(+1) = -5.5425e-01   E(-1) = +1.8617e-02   E(iso) = +2.4872e-01
+        differenze: +1 contro -1 = 1.5 barre, +1 contro iso = 2.0 barre
+  (C) S3: al PRIMO tick le tre elicita' danno lo STESSO dL PASSA   max differenza al tick 1 = 3.109e-16: ### la sorgente E' rho
+  S4 dtau=0.50   E(+1) = +3.6978e-01   E(-1) = +3.2629e-01   E(iso) = +3.8864e-01
+        differenze: +1 contro -1 = 0.2 barre, +1 contro iso = 0.1 barre
+  (C) S4: al PRIMO tick le tre elicita' danno lo STESSO dL PASSA   max differenza al tick 1 = 1.155e-15: ### la sorgente E' rho
+------------------------------------------------------------------------------------------------
+### (D) L'ESPONENTE in x, per forma (1000 tick)
+  S1 dtau=0.50   E: 0.01:+9.50e-12  0.03:+7.20e-09  0.1:+9.59e-06  0.2:+5.56e-04  0.5:+4.32e-02  1:+6.93e-02  2:-8.27e-01
+        pendenze LOCALI: [0.01->0.03] 6.035  [0.03->0.1] 5.976  [0.1->0.2] 5.857  [0.2->0.5] 4.750  [0.5->1] 0.683
+  S1 dtau=0.25   E: 0.01:+3.60e-12  0.03:+2.59e-09  0.1:+3.58e-06  0.2:+2.41e-04  0.5:-1.11e-01  1:-1.02e+00  2:-1.29e+00
+        pendenze LOCALI: [0.01->0.03] 5.989  [0.03->0.1] 6.006  [0.1->0.2] 6.074  [0.5->1] 3.202  [1->2] 0.337
+  S2 dtau=0.50   E: 0.01:-1.88e-02  0.03:-3.27e-02  0.1:-1.30e-01  0.2:+3.71e-01  0.5:+6.64e-01  1:+4.78e-01  2:+3.10e-01
+        pendenze LOCALI: [0.01->0.03] 0.502  [0.03->0.1] 1.149  [0.2->0.5] 0.635  [0.5->1] -0.475  [1->2] -0.624
+  S2 dtau=0.25   E: 0.01:-1.35e-02  0.03:-5.01e-02  0.1:+1.01e-01  0.2:-3.04e-01  0.5:+1.16e-01  1:-5.26e-01  2:-5.10e-01
+        pendenze LOCALI: [0.01->0.03] 1.191  [1->2] -0.045
+  S3 dtau=0.50   E: 0.01:-1.19e-02  0.03:-5.12e-02  0.1:-1.70e-01  0.2:-3.76e-01  0.5:-2.21e-01  1:-7.29e-01  2:-4.01e-01
+        pendenze LOCALI: [0.01->0.03] 1.325  [0.03->0.1] 0.998  [0.1->0.2] 1.143  [0.2->0.5] -0.583  [0.5->1] 1.725  [1->2] -0.864
+  S3 dtau=0.25   E: 0.01:-4.40e-03  0.03:-9.01e-02  0.1:-5.05e-01  0.2:-7.34e-01  0.5:-1.04e+00  1:-1.16e+00  2:-5.69e-01
+        pendenze LOCALI: [0.01->0.03] 2.748  [0.03->0.1] 1.432  [0.1->0.2] 0.539  [0.2->0.5] 0.383  [0.5->1] 0.155  [1->2] -1.027
+  S4 dtau=0.50   E: 0.01:+1.16e-04  0.03:+2.54e-03  0.1:-4.57e-02  0.2:+1.75e-01  0.5:+2.56e-01  1:+6.57e-01  2:+3.14e-02
+        pendenze LOCALI: [0.01->0.03] 2.810  [0.2->0.5] 0.414  [0.5->1] 1.363  [1->2] -4.387
+  S4 dtau=0.25   E: 0.01:+3.94e-04  0.03:-1.82e-03  0.1:-1.53e-01  0.2:-7.47e-02  0.5:-3.49e-01  1:-1.17e+00  2:-8.56e-01
+        pendenze LOCALI: [0.03->0.1] 3.685  [0.1->0.2] -1.038  [0.2->0.5] 1.683  [0.5->1] 1.750  [1->2] -0.455
+------------------------------------------------------------------------------------------------
+### (B-bis) ESTENSIONE DICHIARATA: 10000 tick e 20 finestre, per le forme indecise
+  S1 dtau=0.50   E = +3.370774e-01 +- 3.501e-02 (9.6 barre)   O = -3.405629e-01 +- 3.233e-02 (10.5 barre)   [23.5 s]
+  S1 dtau=0.25   E = +1.588629e-01 +- 1.012e-01 (1.6 barre)   O = -5.520467e-01 +- 9.915e-02 (5.6 barre)   [23.8 s]
+  S2 dtau=0.50   E = +2.753848e-02 +- 5.056e-02 (0.5 barre)   O = -7.566847e-02 +- 4.845e-02 (1.6 barre)   [16.1 s]
+  S2 dtau=0.25   E = +5.731231e-02 +- 1.324e-01 (0.4 barre)   O = -2.624295e-01 +- 2.115e-01 (1.2 barre)   [16.8 s]
+  S3 dtau=0.50   E = -2.712099e-02 +- 1.479e-01 (0.2 barre)   O = -1.142918e-01 +- 1.874e-01 (0.6 barre)   [17.9 s]
+  S3 dtau=0.25   E = -2.285283e-01 +- 3.104e-01 (0.7 barre)   O = -6.263773e-01 +- 3.100e-01 (2.0 barre)   [17.2 s]
+  S4 dtau=0.50   E = +1.107335e-01 +- 7.029e-02 (1.6 barre)   O = -9.498083e-02 +- 8.675e-02 (1.1 barre)   [16.8 s]
+  S4 dtau=0.25   E = +1.490907e-01 +- 2.010e-01 (0.7 barre)   O = -9.454005e-03 +- 2.347e-01 (0.0 barre)   [16.2 s]
+------------------------------------------------------------------------------------------------
+### (E) IL CONO, nei DUE modi: |alpha| dtau contro pi, e il cambiamento dello STATO
+  S1   |alpha| dtau > pi per la PRIMA volta a rho = MAI (su rho da 1e-12 a 1)   (la' la fase vale -)
+        e il CAMBIAMENTO DI STATO per tick, max |d rho_k|: col termine 2.277795e+00, senza 3.488187e+00  -> rapporto 0.653
+  S2   |alpha| dtau > pi per la PRIMA volta a rho = 1e-12   (la' la fase vale 13.316)
+        e il CAMBIAMENTO DI STATO per tick, max |d rho_k|: col termine 6.577108e+00, senza 3.488187e+00  -> rapporto 1.886
+  S3   |alpha| dtau > pi per la PRIMA volta a rho = 1e-12   (la' la fase vale 13.316)
+        e il CAMBIAMENTO DI STATO per tick, max |d rho_k|: col termine 2.804763e+00, senza 3.488187e+00  -> rapporto 0.804
+  S4   |alpha| dtau > pi per la PRIMA volta a rho = MAI (su rho da 1e-12 a 1)   (la' la fase vale -)
+        e il CAMBIAMENTO DI STATO per tick, max |d rho_k|: col termine 3.174029e+00, senza 3.488187e+00  -> rapporto 0.910
+------------------------------------------------------------------------------------------------
+### (F) LA LARGHEZZA DEL GRUMO nel tempo (raggio quadratico medio di rho)
+  S1                     larghezza: t=0 0.8944   meta' 3.4020   fine 4.0676   max 4.5657
+  S2                     larghezza: t=0 0.8944   meta' 3.6641   fine 3.6143   max 3.9191
+  S3                     larghezza: t=0 0.8944   meta' 4.3160   fine 3.7856   max 4.3840
+  S4                     larghezza: t=0 0.8944   meta' 3.7752   fine 3.7362   max 4.1328
+  ATTUALE (h, rotazione) larghezza: t=0 0.8944   meta' 3.6341   fine 3.6162   max 4.4426
+================================================================================================
+### IL VERDETTO, forma per forma
+  (B) S1 a dtau=0.50: E fuori da 3 barre                   PASSA   E = +3.3708e-01 +- 3.501e-02 (9.6 barre, 10000 tick) -> il vuoto si ACCUMULA
+  (B) S1 a dtau=0.25: E fuori da 3 barre                   ### FALLISCE   E = +1.5886e-01 +- 1.012e-01 (1.6 barre, 10000 tick) -> indeciso
+  (B) S2 a dtau=0.50: E fuori da 3 barre                   ### FALLISCE   E = +2.7538e-02 +- 5.056e-02 (0.5 barre, 10000 tick) -> indeciso
+  (B) S2 a dtau=0.25: E fuori da 3 barre                   ### FALLISCE   E = +5.7312e-02 +- 1.324e-01 (0.4 barre, 10000 tick) -> indeciso
+  (B) S3 a dtau=0.50: E fuori da 3 barre                   ### FALLISCE   E = -2.7121e-02 +- 1.479e-01 (0.2 barre, 10000 tick) -> indeciso
+  (B) S3 a dtau=0.25: E fuori da 3 barre                   ### FALLISCE   E = -2.2853e-01 +- 3.104e-01 (0.7 barre, 10000 tick) -> indeciso
+  (B) S4 a dtau=0.50: E fuori da 3 barre                   ### FALLISCE   E = +1.1073e-01 +- 7.029e-02 (1.6 barre, 10000 tick) -> indeciso
+  (B) S4 a dtau=0.25: E fuori da 3 barre                   ### FALLISCE   E = +1.4909e-01 +- 2.010e-01 (0.7 barre, 10000 tick) -> indeciso
+================================================================================================
+  7 su 14   [corsa intera: 321.2 s]
+### ⛔ E LA FORMA NON SI DECIDE QUI: la tabella delle leggi NON e' toccata,
+###   e la scelta fra S1-S4 (o altro) e' di Luca.
+================================================================================================

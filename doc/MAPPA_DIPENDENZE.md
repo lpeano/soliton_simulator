@@ -515,3 +515,44 @@ cioe' ### **c'e' un trasporto NETTO che distingue lo spin.**
 
 ### ⛔ **Il livello resta `L2`, e la prossima mossa e' una DECISIONE DI LUCA**, non una
 misura: ### **che fare di un verso opposto e di un esponente `6`.**
+
+---
+
+## 15. ⛔⛔ `L2` — **LA SORGENTE E' `rho`, E NON RIPARA L'EQUIVALENZA** *(`2026-10-15`)*
+
+### ⭐⭐ **IL CONTO, DIMOSTRATO:** con `N = Lambda F(rho/Lambda)`, `sympy` **RISOLVE**
+`F - xF' = -cx` e da' `F = x(C1 + c ln x)`. ### **Quindi `beta` esattamente lineare ⟺
+`alpha` LOGARITMICA**: non e' un «obbliga», e' un ### **se e solo se.**
+### 📌 **E il verso inverso con l'ipotesi DICHIARATA:** `alpha` limitata **e Lipschitz**
+→ `beta' = -x alpha' → 0` → `beta` non puo' essere lineare fino a zero.
+
+### ⭐ **E IL FLUSSO CAMBIA NATURA:** con `rho` come sorgente il flusso su `psi` e'
+### **UNA FASE** *(`d rho / d psi* = psi`, stesso segno nelle due componenti)*, non una
+rotazione attorno a `n`. ### **E una fase NON cambia `rho`: il termine conserva la sua
+sorgente** — mentre la rotazione `h` **lo cambiava**.
+
+### ⛔⛔ **MA LA MISURA DICE CHE NON BASTA:** al **primo** tick le tre elicita' danno lo
+stesso `dLambda` *(`8.9e-17`)* — con `h` era **impossibile** — e a `2000` tick la
+differenza fra `+1` e isotropo e' ### **`7.4` BARRE.**
+### **Cambiare sorgente ripara l'ACCOPPIAMENTO, non la DINAMICA:** la materia **si muove**
+in modo diverso per spinori diversi, e il moto ### **cambia `rho(t)`.**
+
+### ⛔⛔ **E L'ESPONENTE MISURATO E' IL DOPPIO DI QUELLO DI `beta`** *(`6.0` per `S1`, dove
+`beta ~ x^3`; `2.8`-`3.7` per `S4`, dove `beta ~ x^1.64`)*, perche' ### **la risposta e'
+QUADRATICA in `beta`.** ### ⛔ **Quindi anche una `beta` ESATTAMENTE lineare non da' un
+effetto lineare nella massa:** ### **la linearita' chiesta su `beta` non basta.**
+
+### ✅ **IL CONO, nei due modi:** la **fase** per tick supera `pi` gia' a `rho = 1e-12` per
+`S2` e `S3`, ### **mai per `S1` e `S4`**; ma il ### **cambiamento di STATO** per tick dice
+che solo ### **`S2`** cambia lo stato **piu' del passo libero** *(`1.886x`)*.
+### ⭐ **Cioe' la correzione del guardiano serve:** una fase grande ### **non basta** a dire
+che il cono e' violato — ### **va misurato lo STATO.**
+
+### 📌 **E nessuna forma tiene la figura meglio di quella di oggi:** larghezza finale
+`3.61`-`4.07` per `S1`-`S4` contro ### **`3.616` dell'ATTUALE**, da `0.894`.
+
+### ⛔ **Il livello resta `L2`. Nessuna forma e' in tabella, il motore non e' stato
+toccato, e la forma dell'accoppiamento e' una DECISIONE DI LUCA** — con tre fatti in mano:
+### **la sorgente `rho` non ripara l'equivalenza**, ### **la linearita' di `beta` non da'
+un effetto lineare**, e ### **`beta` lineare ⟺ `alpha` logaritmica**, che il vincolo `L6`
+dice ### **sperimentalmente limitato in meccanica quantistica** *(da confrontare in `L6`)*.

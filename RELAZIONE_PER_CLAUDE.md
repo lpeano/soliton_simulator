@@ -16855,3 +16855,34 @@ tocca>>*, e quel `-1j` e' ### **la FASE ESATTA** di un termine la cui sorgente e
 invece di `SCRITTI_A_MANO` — e il presidio me lo ha detto con `8` errori invece di `4`:
 ### **<<l'eccezione e' DICHIARATA e la chiamata NON C'E' PIU'>>.** ### **Due dizionari,
 due cose diverse: le CHIAMATE che avanzano lo stato, e i PASSI scritti a mano.**
+
+### ✅ **E IL REFERTO DELLA MISURA NASCE DAL BLOB COMMITTATO:**
+`doc/referti_l2/forme_candidate.txt`, dal blob `b729ab36` *(il timbro in testa dice
+«committato e pulito»)*, ### **`7` bracci su `14`** — e ### **quelli che non passano SONO
+il risultato**: sono gli `8` casi del verso, di cui ne arriva a verdetto ### **uno solo.**
+
+### 📌 **UN NUMERO CHE CORREGGO, ed e' mio:** nel commit `74ba200` avevo scritto
+### **`309` s** per la corsa — era la corsa **di prova**. La corsa che ha prodotto il
+referto fa ### **`321.2` s**, e ### **il numero che vale e' quello del referto**, non
+quello che ricordavo *(`L-NUMERI`: un numero ricopiato non ha provenienza)*. ### ✅ **Tutti
+gli altri numeri del referto coincidono con quelli che ti ho riferito**, verificati uno per
+uno: `8.882e-17`, `7.4` barre, `+3.370774e-01 ± 3.501e-02` *(`9.6`)*, `6.035`/`5.976`/
+`5.857`, `13.316`, `1.886`, e le larghezze `4.0676`/`3.6143`/`3.7856`/`3.7362`/`3.6162`.
+
+### ⚠⚠ **E UN CAVEAT CHE DEVO DIRE, perche' il `7.4` da solo direbbe troppo:** le `7.4`
+barre sono su ### **`S1`, l'unica forma che un effetto lo ha.** Su `S2`, `S3` e `S4` le
+differenze fra le elicita' stanno fra `0.1` e `2.0` barre — ### **ma la' `E` e' compatibile
+con ZERO**, quindi quel confronto e' ### **fra tre numeri che sono tutti zero: non dice
+nulla sull'equivalenza.** ### **Il verdetto si legge SOLO dove c'e' un effetto da
+confrontare, e la' dice `7.4` barre.**
+
+### ✅ **E L'INDICE REGISTRA L'ESITO, non solo le decisioni:** la voce
+`[[DOMANDA-COME-LA-MATERIA-CAMBIA-LAMBDA]]` diceva **le decisioni di Luca** e non cio' che
+la misura ha detto. ### **Aggiornata con `aggiorna-lotto`** *(la via unica, con una riga di
+storico e un motivo che cita)*: `rho` non ripara l'equivalenza, l'esponente e' il doppio di
+quello di `beta`, il **se e solo se**, e i due referti coi loro blob. ### **La validazione
+intera passa.**
+
+> ### ⛔ **E QUI MI FERMO, come il mandato dice.** ### **La forma dell'accoppiamento —
+> modificare la saturazione, aggiungere un termine, `S1`-`S4` o altro — e' una decisione di
+> Luca**, e nessuna delle quattro e' in tabella: ### **il motore non e' stato toccato.**
