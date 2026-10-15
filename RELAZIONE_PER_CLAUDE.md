@@ -17045,3 +17045,8 @@ da `0.894` a `12.502`)*; `beta = 0` da' ### **`0` esatto**; `rho` resta fermo a
 ### ⛔ **E CIO' CHE QUESTA MISURA NON DICE:** ### **niente sul verso `vuoto -> materia`**
 *(il congelamento esclude la retroazione per costruzione)* e ### **niente sul principio di
 equivalenza** *(la sorgente e' di una sola elicita')*. ### **La forma non si decide qui.**
+
+### ⚠⚠ **E UNA VERRUCA CHE HO TROVATO CHIUDENDO, con il suo numero:** `python csv/indice.py storico-commit` ha detto ### **<<riempite: `1`, corrette: `2364`>>** — cioe' ha voluto riscrivere ### **tutte** le righe di storico.
+### ✅ **Ho guardato la diff prima di committarla** *(campo per campo, confrontando il `jsonl` di `HEAD` con quello sul disco)*: ### **l'unico campo toccato e' `commit`, e il cambiamento e' `a7569dd` -> `a7569dde`.** ### **Non e' un commit diverso: e' UNA CIFRA IN PIU'.**
+### ⛔ **Il motivo:** il campo porta ### **l'abbreviazione automatica di `git`**, e `git` la ### **allunga quando il repo cresce** — oggi siamo a ### **`8` cifre**, prima erano `7`. ### **Quindi a ogni scatto dell'abbreviazione il file churna PER INTERO**, `2365` righe, e la diff non dice niente.
+### 📌 **La cura sarebbe il HASH PIENO nel campo** *(`40` cifre: non si allunga mai, e l'abbreviazione la fa chi legge)* — ma e' ### **una decisione sul formato dell'indice**, e il mandato di stasera non la comprende: ### **la riporto e non la prendo.** ### **La commit come viene dal comando, che e' l'unica via di scrittura.**
