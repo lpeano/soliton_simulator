@@ -3576,8 +3576,9 @@ scena **cresca** come gli archi *(`4.00x` su `4.00x` atteso)*; `m3` **`0.005114`
 | | |
 |---|---|
 | **file** | `primo_ordine/scena_l2.py` |
-| **BLOB** *(sha1 dei byte grezzi)* | `af2d7019` |
+| **BLOB** *(sha1 dei byte grezzi)* | `6e6da993` |
 | **COMANDO** | non si gira da solo: e' il modulo che `_misura_verso_l2.py` usa |
+| ### ⛔⛔ **e una MIA AFFERMAZIONE SBAGLIATA, corretta dal guardiano** | avevo scritto che `h_k` **e'** la densita' di materia. ### **Non lo e': e' l'ELICITA', col suo segno** — ed e' la densita' **solo per elicita' `+1`**. ### ⚠ **E `G` e' DISPARI, quindi `beta` CAMBIA SEGNO con `h`:** la materia a elicita' `-1` da' al vuoto **la fase opposta**. ### ✅ **Percio' la scena costruisce TRE grumi:** `+1`, `-1`, e **isotropo** |
 | **che cosa costruisce** | il toro **`7x7`** *(taglia dichiarata, scelta per il budget)*, `n` **GEOMETRICI**, **`U = I`**, `phi` **UNIFORME**, e un grumo di materia a **elicita' `+1`** |
 | ### ⭐ **e la cosa che rende la scena possibile** | con `n` geometrici un grumo **ISOTROPO** da' ### **`h = 0` ESATTO** *(le direzioni uscenti di un nodo sommano a zero, e la fase di `psi` non conta)*: ### **non toccherebbe il vuoto per niente.** Con lo spinore **allineato alla direzione** si ha `h_k = somma |psi_h|^2`, cioe' **la densita'**, e `x = h/Lambda` e' **il rapporto materia/vuoto** |
 | ### 📌 **e lo spinore si costruisce PROIETTANDO** | `(I + sigma.n)/2` su un vettore di prova, e ### **si verifica che l'autovalore sia `+1`** — cosi' vale per **qualunque** `n`, non solo per gli assi |
@@ -3589,7 +3590,7 @@ scena **cresca** come gli archi *(`4.00x` su `4.00x` atteso)*; `m3` **`0.005114`
 | | |
 |---|---|
 | **file** | `primo_ordine/_misura_verso_l2.py` |
-| **BLOB** *(sha1 dei byte grezzi)* | `ba2d695b` |
+| **BLOB** *(sha1 dei byte grezzi)* | `19a77870` |
 | **IL COMANDO, verbatim** | `python primo_ordine/_misura_verso_l2.py` |
 | **cosa misura** | `dLambda_k = Lambda_k(con materia) - Lambda_k(senza)`, sui nodi del grumo e sugli **anelli**, su **`4` finestre** di `100` tick, a `dtau = 1` e `0.5`, con `x = 1e-4` e `x = 1` |
 | ### ⛔⛔ **IL VERDETTO: NESSUN VERDETTO SUL VERSO** | e i **due motivi sono DIVERSI** ai due `dtau` |

@@ -75,7 +75,8 @@ def lambda_per_nodo(mot, st):
     return mot.densita_vuoto(st).copy()
 
 
-def corri(dtau, vuoto, ampiezza, materia, geometrici, fasi, tick, ordine=None):
+def corri(dtau, vuoto, ampiezza, materia, geometrici, fasi, tick, ordine=None,
+          elicita=1):
     """### `(Lambda(t), somma|phi|^2(t), h(0))`, ### **campionati a OGNI tick.**
 
     ### ⚠ **`ordine = None` vuol dire L-ORDINE DELLA TABELLA** *(via `DV.tick`)*. Un
@@ -85,8 +86,9 @@ def corri(dtau, vuoto, ampiezza, materia, geometrici, fasi, tick, ordine=None):
     import deriva as DV
     import scena_l2 as SC
     inc, mot, st, par, centro, per = SC.scena(dtau, vuoto, ampiezza, RAGGIO, materia,
-                                              geometrici, fasi, SEME)
+                                              geometrici, fasi, SEME, elicita)
     h0 = mot.elicita(st).copy()
+    storia_h = [h0.copy()]
     lam = [lambda_per_nodo(mot, st)]
     tot = [float(np.sum(np.abs(st["phi_h"]) ** 2))]
     for _t in range(tick):
@@ -100,16 +102,18 @@ def corri(dtau, vuoto, ampiezza, materia, geometrici, fasi, tick, ordine=None):
             mot.chiudi_tick()
         lam.append(lambda_per_nodo(mot, st))
         tot.append(float(np.sum(np.abs(st["phi_h"]) ** 2)))
-    return np.array(lam), np.array(tot), h0, per, centro
+        storia_h.append(mot.elicita(st).copy())
+    return np.array(lam), np.array(tot), h0, per, centro, np.array(storia_h)
 
 
-def differenziale(dtau, vuoto, ampiezza, geometrici, fasi, tick, ordine=None):
+def differenziale(dtau, vuoto, ampiezza, geometrici, fasi, tick, ordine=None,
+                  elicita=1):
     """### `dLambda_k(t)` fra la scena **con** e la scena **senza** materia."""
-    a, ta, h0, per, centro = corri(dtau, vuoto, ampiezza, True, geometrici, fasi, tick,
-                                   ordine)
-    b, tb, _h, _p, _c = corri(dtau, vuoto, ampiezza, False, geometrici, fasi, tick,
-                              ordine)
-    return a - b, a, b, ta, tb, h0, per
+    a, ta, h0, per, centro, sh = corri(dtau, vuoto, ampiezza, True, geometrici, fasi,
+                                       tick, ordine, elicita)
+    b, tb, _h, _p, _c, _s = corri(dtau, vuoto, ampiezza, False, geometrici, fasi, tick,
+                                  ordine, elicita)
+    return a - b, a, b, ta, tb, h0, per, sh
 
 
 def per_finestre(dl, per, quante):
@@ -171,7 +175,7 @@ def braccio_fermo():
           % TICK_FERMO)
     peggio = {}
     for dtau in DTAU:
-        lam, tot, _h, _p, _c = corri(dtau, 1.0, 0.0, False, True, False, TICK_FERMO)
+        lam, tot, _h, _p, _c, _sh = corri(dtau, 1.0, 0.0, False, True, False, TICK_FERMO)
         scarto = float(np.max(np.abs(lam - lam[0])))
         scala = float(np.max(np.abs(lam[0])))
         rel = scarto / scala
@@ -190,7 +194,8 @@ def braccio_h():
     import scena_l2 as SC
     print("-" * 96)
     print("### (C) `h` DEL GRUMO: l'elicita' +1 contro il grumo ISOTROPO")
-    inc, mot, st, _par, _c, per = SC.scena(1.0, 1.0, 1.0, RAGGIO, True, True, False, SEME)
+    inc, mot, st, _par, _c, per = SC.scena(1.0, 1.0, 1.0, RAGGIO, True, True, False,
+                                           SEME, 1)
     h_all = mot.elicita(st).copy()
     dentro = [v for d, nodi in per.items() if d <= RAGGIO for v in nodi]
     esito("(C1) col grumo ALLINEATO `h` e' > 0 sui nodi del grumo",
@@ -220,7 +225,7 @@ def braccio_verso(pavimento):
     fuori = {}
     for nome, amp, vuo in REGIMI:
         for dtau in DTAU:
-            dl, a, b, ta, tb, h0, per = differenziale(dtau, vuo, amp, True, False, TICK)
+            dl, a, b, ta, tb, h0, per, sh = differenziale(dtau, vuo, amp, True, False, TICK)
             tab = per_finestre(dl, per, FINESTRE)
             x = (amp / vuo) ** 2
             dentro = [v for d, nodi in per.items() if d <= RAGGIO for v in nodi]
@@ -243,6 +248,72 @@ def braccio_verso(pavimento):
 def _bordi(t, quante):
     b = [int(round(t * i / float(quante))) for i in range(quante + 1)]
     return [(b[i], b[i + 1]) for i in range(quante)]
+
+
+def braccio_tre_grumi(pavimento):
+    """### ⭐⭐ **I TRE GRUMI: elicita' `+1`, `-1`, e ISOTROPO** *(integrazione del
+    guardiano del `2026-10-15`)*.
+
+    ### ⛔ **E nasce da una MIA AFFERMAZIONE SBAGLIATA:** avevo scritto che `h_k` **e'** la
+    densita' di materia. ### **Non lo e': e' l'ELICITA', col suo segno** — e coincide con
+    la densita' **solo a elicita' `+1`.** ### ⚠ **E `G(x) = x - arctan x` e' DISPARI**,
+    quindi `beta` ### **cambia segno con `h`.**
+
+    ### ⭐ **E UNA PREVISIONE, scritta prima di misurare:** siccome `dLambda` e' risultato
+    ### **PARI in `beta`** *(braccio `E1`)*, e rovesciare l'elicita' ### **rovescia
+    `beta`**, allora `(a)` e `(b)` dovrebbero dare ### **lo STESSO `dLambda`**, cioe'
+    ### **rapporto `~1`.** ### ⛔ **Se invece danno segni OPPOSTI, la mia misura della
+    parita' era sbagliata** — e allora e' quella da rifare, non questa.
+    """
+    print("-" * 96)
+    print("### (H) I TRE GRUMI: elicita' +1, -1, e ISOTROPO -- stessa densita', stessa"
+          " scena")
+    fuori = {}
+    for nome, el in (("elicita' +1", 1), ("elicita' -1", -1), ("ISOTROPO (h = 0)", 0)):
+        for dtau in DTAU:
+            dl, a, b, ta, tb, h0, per, sh = differenziale(dtau, 1.0, 1.0, True, False, TICK,
+                                                      None, el)
+            dentro = [v for d, nodi in per.items() if d <= RAGGIO for v in nodi]
+            grumo = [float(np.mean(dl[s:e][:, dentro]))
+                     for s, e in _bordi(dl.shape[0], FINESTRE)]
+            anelli_ = per_finestre(dl, per, FINESTRE)
+            fuori[(nome, dtau)] = (grumo, float(np.max(np.abs(dl))), h0,
+                                   float(np.max(np.abs(sh[:, dentro]))))
+            # ### ⛔⛔ **E LA STORIA DI `h`, che e- la cosa che spiega tutto:** `h = 0` vale
+            # ### ### **solo a `t = 0`** -- poi `psi` evolve, il grumo ### **non e- piu-
+            # ### isotropo**, e ### **l-elicita- NASCE.** ### **Un controllo <<nullo>> che
+            # ### si accende da solo NON E- UN CONTROLLO.**
+            hmax = float(np.max(np.abs(sh[:, dentro])))
+            print("  %-18s dtau=%.2f  h(0) = %+.4f   max|h(t)| = %.4f   dLambda per"
+                  " finestra: %s" % (nome, dtau, float(h0[dentro[0]]), hmax,
+                                     "  ".join("%+.3e" % g for g in grumo)))
+            for d in sorted(anelli_):
+                if d <= 2:
+                    print("        anello %d: %s"
+                          % (d, "  ".join("%+.3e" % y for y in anelli_[d])))
+    # ---------------------------------------------------- il controllo ISOTROPO, col numero
+    for dtau in DTAU:
+        m = fuori[("ISOTROPO (h = 0)", dtau)][1]
+        hm = fuori[("ISOTROPO (h = 0)", dtau)][3]
+        esito("### (H0) il grumo ISOTROPO da' `dLambda = 0` all'ulp, dtau = %.2f" % dtau,
+              m <= 1e-12,
+              "max |dLambda| = %.3e, e il MOTIVO e' misurato: `h(0) = 0` ma"
+              " `max|h(t)| = %.4f` -> ### L'ELICITA' NASCE mentre `psi` evolve, quindi"
+              " <<isotropo>> NON E' UN CONTROLLO NULLO" % (m, hm))
+    # ---------------------------------------------------- (a) contro (b)
+    for dtau in DTAU:
+        ga = fuori[("elicita' +1", dtau)][0]
+        gb = fuori[("elicita' -1", dtau)][0]
+        rap = [abs(x) / abs(y) if abs(y) > 0 else float("nan")
+               for x, y in zip(ga, gb)]
+        stesso = all(np.sign(x) == np.sign(y) for x, y in zip(ga, gb))
+        print("  dtau=%.2f  |dLambda(+1)|/|dLambda(-1)| per finestra: %s"
+              % (dtau, "  ".join("%.4f" % r for r in rap)))
+        esito("### (H1) a dtau = %.2f `(a)` e `(b)` hanno lo STESSO segno" % dtau,
+              stesso,
+              "se OPPOSTI, la fonte della <<gravita'>> e' L'ELICITA' e non la materia:"
+              " conflitto col principio di equivalenza, e DECISIONE DI LUCA")
+    return fuori
 
 
 def braccio_rovescio(pavimento):
@@ -269,7 +340,7 @@ def braccio_rovescio(pavimento):
     for nome, f in (("vero", vero), ("rovesciato", rovescio), ("SPENTO (be = 0)", spento)):
         SAT.pezzi = f
         try:
-            dl, a, b, ta, tb, h0, per = differenziale(1.0, 1.0, 1.0, True, False, TICK)
+            dl, a, b, ta, tb, h0, per, sh = differenziale(1.0, 1.0, 1.0, True, False, TICK)
             dentro = [v for d, nodi in per.items() if d <= RAGGIO for v in nodi]
             fuori[nome] = [float(np.mean(dl[s:e][:, dentro]))
                            for s, e in _bordi(dl.shape[0], FINESTRE)]
@@ -314,7 +385,7 @@ def braccio_rovescio(pavimento):
         for segno, f in (("vero", vero), ("rovesciato", rovescio)):
             SAT.pezzi = f
             try:
-                dl, _a, _b, _ta, _tb, _h, _per = differenziale(1.0, 1.0, 1.0, True,
+                dl, _a, _b, _ta, _tb, _h, _per, _sh = differenziale(1.0, 1.0, 1.0, True,
                                                                False, t)
                 cc[segno] = dl[-1].copy()
             finally:
@@ -341,7 +412,7 @@ def braccio_rovescio(pavimento):
         for segno, f in (("vero", vero), ("rovesciato", rovescio)):
             SAT.pezzi = f
             try:
-                dl, _a, _b, _ta, _tb, _h, _per = differenziale(dt, 1.0, 1.0, True,
+                dl, _a, _b, _ta, _tb, _h, _per, _sh = differenziale(dt, 1.0, 1.0, True,
                                                                False, TICK, ordine)
                 campo[segno] = dl.copy()
             finally:
@@ -380,7 +451,7 @@ def braccio_robustezza(pavimento):
     fuori = {}
     for nome, geo, fasi in (("n CASUALI", False, False),
                             ("phi a FASI CASUALI", True, True)):
-        dl, a, b, ta, tb, h0, per = differenziale(1.0, 1.0, 1.0, geo, fasi, TICK)
+        dl, a, b, ta, tb, h0, per, sh = differenziale(1.0, 1.0, 1.0, geo, fasi, TICK)
         dentro = [v for d, nodi in per.items() if d <= RAGGIO for v in nodi]
         grumo = [float(np.mean(dl[s:e][:, dentro]))
                  for s, e in _bordi(dl.shape[0], FINESTRE)]
@@ -408,6 +479,7 @@ def main(argv):
     braccio_h()
     tab = braccio_verso(pavimento)
     rov, spe, rapporti = braccio_rovescio(pavimento)
+    tre = braccio_tre_grumi(pavimento)
     braccio_robustezza(pavimento)
     # ============================================================ IL VERDETTO
     print("=" * 96)

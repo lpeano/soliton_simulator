@@ -19,12 +19,21 @@ r"""**LA SCENA DI RIFERIMENTO DI `L2`** — *`n` geometrici, `U = I`, vuoto unif
 estremita' **allineato con la sua direzione** *(autovettore `+1` di `sigma.n_h`)*:
 
 ```
-h_k = somma_h |psi_h|^2   =   la densita' di materia del nodo
-x   = h/Lambda            =   il rapporto materia/vuoto, esatto
+h_k = + somma_h |psi_h|^2        con elicita' +1
+h_k = - somma_h |psi_h|^2        con elicita' -1
 ```
 
-### 📌 **E' UNA SCELTA DI SCENA, DICHIARATA, non una legge.** ### **Chi rifa' la misura con
-un altro grumo deve sapere che il risultato dipende da questa scelta.**
+### ⛔⛔ **E QUI UNA MIA AFFERMAZIONE ERA SBAGLIATA, e la correzione e' del guardiano
+*(2026-10-15)*:** avevo scritto che `h_k` **E'** la densita' di materia. ### **Non lo e':
+`h_k` e' L'ELICITA', CON IL SUO SEGNO** — e coincide con la densita' ### **solo per
+elicita' `+1`.**
+### ⚠⚠ **E il segno conta, perche' `G(x) = x - arctan x` e' DISPARI:** quindi `N` e
+`beta = dN/dLambda` ### **cambiano segno con `h`**, e ### **la materia a elicita' `-1` da'
+al vuoto la FASE OPPOSTA.**
+
+### 📌 **Percio' la misura del verso si fa su TRE grumi** *(a elicita' `+1`, `-1`, e
+isotropo)*, **con la stessa densita' `|psi|^2` e la stessa scena** — e il grumo isotropo e'
+### **il controllo che la misura non vede rumore.**
 
 ## 📌 IL VUOTO DI RIFERIMENTO
 
@@ -108,6 +117,24 @@ def spinore_allineato(nv):
     return chi
 
 
+def spinore_antiallineato(nv):
+    """### Lo spinore **ANTI-allineato**: l'autovettore `-1` di `sigma.n`.
+
+    ### ⭐ **E si ottiene allineandolo a `-n`**, che e' la stessa cosa: l'autovettore `+1`
+    di `sigma.(-n)` ### **e' l'autovettore `-1` di `sigma.n`.** ### ✅ **Cosi' non c'e' una
+    seconda costruzione da tenere d'accordo con la prima.**
+    """
+    chi = spinore_allineato(-np.asarray(nv, dtype=float))
+    # ### il controllo: `(sigma.n) chi = -chi`
+    for h in range(chi.shape[0]):
+        nx, ny, nz = nv[h]
+        S = np.array([[nz, nx - 1j * ny], [nx + 1j * ny, -nz]], dtype=complex)
+        sb = float(np.max(np.abs(S.dot(chi[h]) + chi[h])))
+        assert sb <= 1e-12, ("lo spinore dell'estremita' %d non e' autovettore `-1`:"
+                             " scarto %.3e" % (h, sb))
+    return chi
+
+
 def coord(v, lati):
     c, r = [], v
     for a in reversed(lati):
@@ -139,14 +166,21 @@ def anelli(lati, centro):
 
 
 def scena(dtau, vuoto, ampiezza, raggio, materia, geometrici, fasi_casuali, seme,
-          lati=LATI):
+          elicita, lati=LATI):
     """### La scena: `(inc, mot, st, par, centro, per_anello)`.
 
     ### ⛔ **Nessun argomento ha un valore di comodo:** una scena con un default sarebbe
     ### **una scelta mia che nessuno vede**, e qui ogni scelta cambia un numero.
     ### 📌 **`materia = False` da' la scena GEMELLA senza grumo**, con **lo stesso `phi` e
     lo stesso grafo**: e' cio' che rende la misura **DIFFERENZIALE.**
+    ### ⭐ **E `elicita` vale `+1`, `-1` o `0`:** `+1` e `-1` sono gli spinori allineato e
+    anti-allineato *(e danno `h` opposti)*, `0` e' ### **il grumo ISOTROPO**, che da'
+    `h = 0` e serve da **controllo**. ### ⚠ **La densita' `|psi|^2` e' LA STESSA in tutti
+    e tre**: cambia **solo la direzione dello spinore.**
     """
+    assert elicita in (1, -1, 0), (
+        "`elicita` vale `+1`, `-1` o `0` (isotropo), e non ha un valore di comodo: e' la"
+        " cosa che cambia il SEGNO di `h`, cioe' il segno di `beta` (%r)" % (elicita,))
     import corrente as CO
     import incidenza as IN
     import motore as MO
@@ -177,7 +211,15 @@ def scena(dtau, vuoto, ampiezza, raggio, materia, geometrici, fasi_casuali, seme
     centro = 0
     per = anelli(lati, centro)
     if materia:
-        chi = spinore_allineato(nv)
+        if elicita == 1:
+            chi = spinore_allineato(nv)
+        elif elicita == -1:
+            chi = spinore_antiallineato(nv)
+        else:
+            # ### ⛔ **ISOTROPO: lo STESSO spinore su tutte le estremita-**, che con `n`
+            # ### geometrici da- ### **`h = 0` esatto.**
+            chi = np.zeros((2 * inc.m, 2), dtype=complex)
+            chi[:, 0] = 1.0
         dentro = set()
         for d, nodi in per.items():
             if d <= raggio:
