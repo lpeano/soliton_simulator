@@ -16441,3 +16441,35 @@ e col gauge casuale la mappa si rompe)*, **ma e' la prima cosa da misurare.**
 alternative esclusive per costruzione** — le condizioni `1` e `3` di Sakharov sono
 **ingredienti comuni**, e cio' che le separa e' ### **la `2`.** ### **Quindi la prima misura
 utile, quando `L5` si aprira', e' sulla `2`.**
+
+## 2026-10-15 — ✅✅ **`L1` E' CHIUSO, E IL LIVELLO CORRENTE E' `L2`**
+
+> ### **Il criterio di merito e' MISURATO, e il lascito e' una tabella di quattro righe:**
+> ### **niente di cio' che `L1` lascia aperto si decide dentro `L1`.**
+
+### ✅ **I TRE NUMERI:** `0` violatori su `12` *(e il collaudo e' **nel hook**, provato su
+un commit vero in `f46d854`)*; **`M-B1` `12`/`12`** al bit pezzo per pezzo; **`M-B2`
+pendenza `2.006`** *(controprova `1.183`)*.
+
+### ⭐ **LE DUE DECISIONI REGISTRATE**
+### ① **`[[N-DIREZIONI-DI-MOTO]]`** — le `n` sono **direzioni di moto**: e' `sigma.p` di
+Dirac, e ### **un `n` fisso sarebbe un Zeeman che il vuoto non deve avere.**
+### ② **`[[DECISIONE-M-B2-SI-LEGGE-SULLA-PENDENZA]]`** — e la lettura e' **sua**, come
+doveva essere: ### **io avevo dichiarato che la banda `0.25` era MIA e non sua.**
+
+### ⚠⚠ **E UNA CORREZIONE A UNA MIA FRASE, che il guardiano ha trovato e che accetto:**
+avevo scritto che la simmetria col gauge *«richiederebbe `U^dagger = U` su ogni arco»*.
+### ⛔ **Era una condizione PIU' FORTE del necessario**, e sarebbe stata soddisfatta solo da
+`U` **hermitiane**. ### ✅ **La condizione giusta e' `U_{P(a)} = U_a^dagger`:** l'inversione
+porta l'arco `a` nell'arco **`P(a)` percorso al contrario**, quindi e' ### **una condizione
+sulla CONFIGURAZIONE di gauge, non sull'arco singolo** — e appartiene a **`L4`**.
+### 📌 **E dichiaro che la condizione giusta e' DERIVATA e NON ancora misurata:** la misura
+usava `U = I` *(che la soddisfa banalmente)* e `U` casuale *(che non la soddisfa)*.
+### **Costruire una configurazione `P`-simmetrica NON BANALE e misurarla e' un pezzo di
+`L4`**, e non l'ho fatto perche' il mandato dice <<nessun codice>>.
+
+### ⛔⛔ **E `L2` E' FERMO SU UNA TUA DECISIONE:** ### **con che regola, e con che segno, la
+materia modifica `Lambda`?** ### **Finche' non c'e', nessun codice di `L2` si scrive.**
+### ⭐ **E il primo pezzo, quando arriva, e' il costruttore della scena di riferimento**
+*(`n` geometriche, `U = I`)* — ### ⚠ **che oggi non esiste in nessun file**, e che quando
+esistera' ### **obblighera' a rifare la' tutti i numeri misurati finora.**

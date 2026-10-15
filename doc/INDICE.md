@@ -9,7 +9,7 @@
 | `DOCUMENTAZIONE` | `2` | 1 |
 | `DOCUMENTAZIONE` | `ENTRAMBE` | 9 |
 | `FISICA` | `1` | 343 |
-| `FISICA` | `2` | 122 |
+| `FISICA` | `2` | 124 |
 | `FISICA` | `ENTRAMBE` | 21 |
 | `INFRASTRUTTURA` | `1` | 39 |
 | `INFRASTRUTTURA` | `2` | 21 |
@@ -268,6 +268,7 @@
 | `DECISIONE-COMPOSIZIONE-SIMMETRICA` | DECISIONE | FISICA | 2 | ### **CHIUSA** |  | L ordine della tabella non e simmetrico: l errore di H_tot va come dtau e non dt |
 | `DECISIONE-DIREZIONE-STRADA-3` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | strada (3): C esatta nelle leggi e ROTTA SPONTANEAMENTE nello stato, con pareti |
 | `DECISIONE-LA-C-VUOLE-IL-TEMPO-ROVESCIATO` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | La C del cammino era una conseguenza delle involuzioni: coi flussi parziali serv |
+| `DECISIONE-M-B2-SI-LEGGE-SULLA-PENDENZA` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | M-B2 si legge sulla PENDENZA complessiva, non sui rapporti singoli |
 | `DECISIONE-STRADA-B-FLUSSI` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | strada (B): Grover e spostamento diventano FLUSSI, e l angolo pi e la velocita d |
 | `DECISIONE-TICK-OROLOGIO-MASSIMO` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | il tick e l orologio piu veloce possibile: theta <= pi e cs ha un massimo |
 | `DECISIONE-VUOLE-UN-CAMPO` | STANDARD | METODO | ENTRAMBE | ### **APERTA** |  | una decisione che serve a un programma vuole un CAMPO, non una frase nel titolo |
@@ -530,6 +531,7 @@
 | `MOTORE-INCIDENZA` | CURA | INFRASTRUTTURA | 2 | ### **AGENDA** |  | la struttura compatta delle estremita d arco, col punto unico di scrittura |
 | `MOTORE-MEMORIA-M1-ROSSO` | MISURA | INFRASTRUTTURA | 2 | ### **CHIUSA** |  | m1 fallisce a 5.00x contro 4x, e la soglia era derivata da un conto senza i buff |
 | `MOTORE-SATURAZIONE` | CURA | INFRASTRUTTURA | 2 | ### **AGENDA** |  | il flusso di saturazione nel motore: esatto, e il suo inverso lo annulla al bit |
+| `N-DIREZIONI-DI-MOTO` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | le direzioni n della moneta sono DIREZIONI DI MOTO, non un campo fisso |
 | `N1` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 15 volte, MAI definito in un registro) [N1] |
 | `N1b` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 8 volte, MAI definito in un registro) [N1b] |
 | `N2` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 17 volte, MAI definito in un registro) [N2] |

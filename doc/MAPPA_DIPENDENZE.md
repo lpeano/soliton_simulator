@@ -171,16 +171,26 @@ hanno **validato `q_h`** che e' poi stato **deciso**; ### ⛔ **ma il loro USO s
 
 ## 4. ⭐ IL LIVELLO CORRENTE
 
-> ### **`L1` — IL TEMPO PROPRIO IN OGNI LEGGE.**
-> ### ⛔ **Stato: FERMO su due domande di Luca** — `[[DOMANDA-QUALE-TEMPO-PROPRIO-USA-L-ARCO]]`
-> e `[[DOMANDA-OMEGA-E-UNITA-O-COSTANTE]]`.
-> ### ⭐ **Prossimo passo:** quelle due risposte, poi **il codice di `(B)`** con `cs` uniforme
-> *(ipotesi provvisoria dichiarata)*, poi **`M-B1` al bit** e **`M-B2`**.
+> ### ⭐⭐ **`L2` — LA MATERIA MODIFICA IL VUOTO, e quindi `cs`** *(dal `2026-10-15`)*.
+> ### ⛔ **Stato: FERMO SU UNA DECISIONE DI FISICA DI LUCA** —
+> `[[DOMANDA-COME-LA-MATERIA-CAMBIA-LAMBDA]]`: ### **con che REGOLA, e con che SEGNO, la
+> materia modifica la densita' del vuoto `Lambda`.**
+> ### 📌 **Luca la sta decidendo col guardiano**, e finche' non c'e' ### **nessun codice di
+> `L2` si scrive**: la regola `(b)` vale anche qui.
+> ### ⭐ **Prossimo passo, quando la decisione arriva:** il **costruttore della scena di
+> riferimento** *(`n` GEOMETRICI, `U = I`)*, che e' **il primo pezzo di `L2`** — e la scena
+> oggi ### **non esiste in nessun file.**
 
-### ⚠ **E IL CRITERIO DI USCITA DI `L1` E' GIA' MISURABILE OGGI:**
-`python primo_ordine/_collauda_tempo_proprio.py` dice **`4` violatori su `7`**.
-### ✅ **Quando saranno `0`, `L1` e' chiuso** — e quel collaudo **esiste e gira nel
-`pre-commit`**, quindi ### **il criterio non e' una promessa: e' un comando.**
+### ✅✅ **E `L1` E' CHIUSO** *(il `2026-10-15`)*, col criterio di merito **misurato**:
+### **`0` violatori su `12`** *(e il collaudo e' **nel `.githooks/pre-commit`**, con la
+prova su un commit vero in `f46d854`)*; ### **`M-B1` pezzo per pezzo al bit, `12`/`12`**;
+### **`M-B2` pendenza `2.006`** *(controprova dell'ordine vecchio: `1.183`)*.
+### 📌 **Il lascito di `L1` — cio' che lascia aperto e DOVE VA — sta nel paragrafo `12`.**
+
+### ⚠ **E IL CRITERIO DI USCITA DI `L1` RESTA UN COMANDO, non un ricordo:**
+`python primo_ordine/_collauda_tempo_proprio.py` ### **oggi dice `0` su `12`, e se un
+giorno tornasse a dire `1` FERMEREBBE UN COMMIT.** ### **Un criterio chiuso che resta
+eseguibile e' la differenza fra un livello chiuso e un livello dimenticato.**
 
 ---
 
@@ -391,3 +401,64 @@ estremita' e il gauge sugli archi.
 i livelli:** ### **nessuna scena del motore costruisce `n` GEOMETRICI** — sono casuali in
 `8` file e `z` uniforme in `3`. ### **Quindi la scena <<naturale>> del modello, oggi, non
 esiste.**
+
+---
+
+## 12. ✅✅ `L1` **E' CHIUSO** — *e `L2` e' il livello corrente* *(`2026-10-15`)*
+
+> ### ⭐ **IL CRITERIO DI MERITO E' MISURATO, non asserito**, e sta tutto in tre righe.
+
+| | il criterio di uscita | il numero | dove |
+|---|---|---|---|
+| `1` | **`_collauda_tempo_proprio.py`: `0` violatori su `12`** — e ### **E' NEL `.githooks/pre-commit`** | `0`/`12`, `3`/`3` bracci | la prova su **un commit VERO** sta in **`f46d854`**: su un ramo usa-e-getta, col Grover a tick fisso, `git commit` e' tornato `1` e `HEAD` non si e' mosso |
+| `2` | **`M-B1` PEZZO PER PEZZO al bit** contro `717bb60` | **`12`/`12`** *(6 pezzi x 2 scene)* | `5219e1b`, referto `doc/referti_l1/mb1_palindromo.txt` |
+| `3` | **`M-B2`: pendenza `2.006`** su `5` dimezzamenti *(fattore `854.9`, e `4^5 = 1024`)* | e la **CONTROPROVA**: l'ordine vecchio da' **`1.183`**, cioe' **primo** ordine | `8bf0ded`, e la lettura sulla pendenza e' `[[DECISIONE-M-B2-SI-LEGGE-SULLA-PENDENZA]]` |
+
+### ✅ **E CIO' CHE `L1` HA CONSEGNATO, oltre ai tre numeri:**
+### ① **il PUNTO UNICO di lettura del tempo proprio** *(`flussi_parziali.dtau_nodo`)* —
+### **nessuna legge calcola il suo `dtau` da se'**, ed e' da li' che `L2` fara' variare
+`cs`;
+### ② **un passo REVERSIBILE per costruzione** *(palindromo)*, che e' cio' che rende
+sensato chiedersi **da dove venga l'irreversibilita'** *(`A15.3`)*;
+### ③ **`0` leggi nuove e `0` parametri nuovi** — `7` leggi prima, `7` dopo *(`9-ter`)*.
+
+### ⛔⛔ **E CIO' CHE `L1` LASCIA APERTO, con il livello a cui VA.** *(Questa tabella e' il
+lascito: niente di cio' che sta qui si decide dentro `L1`.)*
+
+| | che cosa resta aperto | dove va | perche' la' |
+|---|---|---|---|
+| `1` | **la simmetria materia/antimateria e l'appaiamento `eps <-> -eps`** | ### **`L5`** — `[[L5-ASIMMETRIA-NELLA-LEGGE]]` | e' la **seconda candidata** di `L5` *(strada `A`, alla Sakharov)*, e l'appaiamento e' **il suo candidato `2`** |
+| `2` | **l'ORIGINE delle `n`**: da dove vengono le direzioni in un grafo **nato dalla mitosi**, senza posizioni | ### **`L3`-`L4`** — `[[N-DIREZIONI-DI-MOTO]]`, punto `(a)` | `R2` **vieta** di prendere le direzioni dalle posizioni, e un grafo che **nasce** non ha coordinate: e' la mitosi *(`L3`)* e il trasporto *(`L4`)* |
+| `3` | **i due bracci rossi di `_collauda_deriva.py`** *(`Lambda_k` non piu' invariante: `1.078e+00`; la sorgente per nodo: `4.625`)* | ### **`L5`** *(perimetro)* | `deriva.py` e' uno **strumento di `L5`** e si usa **IN SOLA LETTURA** *(scelta di Luca del `2026-10-15`)* |
+| `4` | **il GAUGE `P`-SIMMETRICO**: `U_{P(a)} = U_a^dagger` | ### **`L4`** — `[[N-DIREZIONI-DI-MOTO]]`, punto `(b)` | e' una **condizione sulla CONFIGURAZIONE di gauge**, e il gauge dinamico e' `L4` |
+
+### ⚠ **E SUL PUNTO `4` C'E' UNA CORREZIONE A UNA MIA FRASE, che il guardiano ha trovato
+e che accetto:** avevo scritto che la simmetria col gauge *«richiederebbe `U^dagger = U`
+su ogni arco»*. ### ⛔ **Non e' vero, ed era una condizione PIU' FORTE del necessario:**
+l'inversione porta l'arco `a` nell'arco **`P(a)` percorso al contrario**, quindi la
+condizione e' ### **`U_{P(a)} = U_a^dagger`** — **sulla configurazione, non sull'arco
+singolo.** ### 📌 **E la condizione giusta e' DERIVATA e NON ancora misurata:** la misura
+di `5219e1b` usa `U = I` *(che la soddisfa banalmente)* e `U` casuale *(che non la
+soddisfa, `1.218`)*. ### **Costruire una configurazione `P`-simmetrica non banale e
+misurarla e' un pezzo di `L4`.**
+
+---
+
+### ⭐⭐ **LA SCENA DI RIFERIMENTO DI `L2`** — *solo dichiarazione, il costruttore e' il
+primo pezzo di `L2`*
+
+> ### ⛔ **OGGI NESSUNA SCENA DEL MOTORE USA `n` GEOMETRICI**, e il censimento lo dice:
+> **`8` file** con `n` **casuali gaussiani**, **`3`** con **`z` uniforme**, ### **`0` con
+> `n` GEOMETRICI.** ### **Cioe' la scena <<naturale>> del modello, oggi, NON ESISTE.**
+
+| | la scena di riferimento di `L2` |
+|---|---|
+| **le `n`** | ### **GEOMETRICHE: direzioni di moto** *(`[[N-DIREZIONI-DI-MOTO]]`)* — l'`n` di un'estremita' e' la direzione dell'arco uscente, e i due capi di un arco hanno `n` **opposti** |
+| **il gauge** | ### **`U = I`** |
+| ### ⚠ **e le scene con `n` CASUALI** | ### **restano, come PROVE DI ROBUSTEZZA DICHIARATE** — ### ⛔ **non come fisica.** Un `n` casuale fisso e' **un campo magnetico**, cioe' **un termine di Zeeman che il vuoto non deve avere**: va bene per scuotere un collaudo, **non per dire come va il mondo** |
+| **quando si scrive** | ### **il costruttore e' il PRIMO PEZZO di `L2`**, non adesso: qui c'e' **solo la dichiarazione** |
+
+### 📌 **E una conseguenza pratica che vale scrivere, perche' si paghera':** tutti i numeri
+misurati finora *(la deriva, le bande, il segno, `M-B2`)* vengono da scene con `n`
+**casuali**. ### ⚠ **Quando la scena di riferimento esistera', quei numeri andranno RIFATTI
+la', e NON si potranno confrontare con i vecchi come se fossero la stessa misura.**
