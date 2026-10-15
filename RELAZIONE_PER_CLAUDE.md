@@ -16066,3 +16066,24 @@ vuole.
 IMPLEMENTATO:** `dtau_rif = 1` **unita'**, quindi ### **`omega` non compare nel codice** e
 resta solo `theta = pi dtau`. ### ✅ **Nessuna costante nuova, nessuna legge nuova:** `7`
 leggi prima e `7` dopo *(`9-ter`)* — cambia **la FORMA** di quattro, non il loro numero.
+
+## 2026-10-15 — 📌 **I QUATTRO REFERTI DI `L1`, RIGIRATI COL CODICE COMMITTATO**
+
+> ### ⛔ **I primi output li avevo fatti col codice NON ANCORA COMMITTATO**, e il timbro lo
+> diceva: *«NON TRACCIATO -- questo output NON e' riproducibile dal repo»*. ### **Un
+> referto che nasce da un blob non committato non ha provenienza**, quindi li ho rifatti
+> **dopo** `1eeb73f`.
+
+### ✅ **E I BLOB DEL TIMBRO COINCIDONO CON L'INVENTARIO:** `89b49ac6` *(`M-B1`)*,
+`09849679` *(`M-B2`)*, `c27e03eb` *(la `C`)*. ### **I verdetti non cambiano:** `M-B1`
+**PASSA** *(`eff92bbd8622`)*, `M-B2` torna `1`, la `C` da' `16`/`16`, il tempo proprio
+`3`/`3` con **zero violatori**.
+
+### ⚠ **E UNA COSA DA NON LEGGERE COME UN DIFETTO:** nel referto di `M-B1` ci sono **DUE**
+timbri — il secondo dice **NON TRACCIATO**, ed e' **giusto che lo dica**: e' la corsa
+**dentro il worktree di `717bb60`**, dove il misuratore e' **un file copiato**, quindi
+### **non tracciato PER COSTRUZIONE.** ### **Il codice MISURATO la' dentro e' committato;
+il misuratore no.**
+
+### 📌 **E il worktree e' stato rimosso** *(`git worktree remove`)*: resta solo
+`st_main`, che non e' mio e non l'ho toccato.

@@ -1,0 +1,15 @@
+[TIMBRO] _misura_mb1.py  sha1-BYTE 89b49ac6  committato e pulito
+================================================================================================
+M-B1: IL RACCORDO AL BIT -- dtau = dtau_rif = 1.0, 250 tick, psi E phi
+================================================================================================
+### (1) IL PASSO DI ADESSO, col flusso parziale:
+  nn=16   seme=7     psi sha1-BYTE 085cc892d6f0   phi sha1-BYTE 9f3261eec606
+  nn=12   seme=11    psi sha1-BYTE b96b517e07a6   phi sha1-BYTE 1b606395c195
+### (2) IL PASSO DI 717bb60, estratto dal commit:
+[TIMBRO] _misura_mb1.py  sha1-BYTE 89b49ac6  !! NON TRACCIATO -- questo output NON e' riproducibile dal repo (par.5-quinquies)
+  nn=16   seme=7     psi sha1-BYTE 085cc892d6f0   phi sha1-BYTE 9f3261eec606
+  nn=12   seme=11    psi sha1-BYTE b96b517e07a6   phi sha1-BYTE 1b606395c195
+------------------------------------------------------------------------------------------------
+  byte di adesso: 2720   byte di 717bb60: 2720
+  sha1-BYTE adesso eff92bbd8622   sha1-BYTE prima eff92bbd8622
+### ✅ `M-B1` PASSA: identita' AL BIT su 250 tick, psi E phi, 2 scene
