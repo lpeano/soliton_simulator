@@ -9,7 +9,7 @@
 | `DOCUMENTAZIONE` | `2` | 1 |
 | `DOCUMENTAZIONE` | `ENTRAMBE` | 9 |
 | `FISICA` | `1` | 343 |
-| `FISICA` | `2` | 124 |
+| `FISICA` | `2` | 125 |
 | `FISICA` | `ENTRAMBE` | 21 |
 | `INFRASTRUTTURA` | `1` | 39 |
 | `INFRASTRUTTURA` | `2` | 21 |
@@ -461,6 +461,7 @@
 | `L-UN-PROMPT` | STANDARD | METODO | ENTRAMBE | ### **APERTA** |  | UN PROMPT ALLA VOLTA: i rilievi che arrivano durante un lavoro vanno in CODA |
 | `L0` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 2 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
 | `L1` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 9 volte, MAI definito in un registro) |
+| `L4-TORSIONE-DALL-ELICITA` | TEORIA | FISICA | 2 | ### **AGENDA** |  | L4: l accoppiamento con l elicita e il candidato per spin-geometria (torsione) |
 | `L5-ASIMMETRIA-NELLA-LEGGE` | TEORIA | FISICA | 2 | ### **AGENDA** |  | L5, seconda candidata: l asimmetria nella LEGGE (strada A, alla Sakharov) |
 | `LAMBDA-INVARIANTE-OGNI-ARCO` | STANDARD | FISICA | 2 | ### **AGENDA** |  | la lunghezza minima lambda e- un INVARIANTE SU OGNI ARCO, non una regola di mito |
 | `LEGAME-SCENE-GRANDI` | FRONTE | FISICA | 2 | ### **AGENDA** |  | il completamento del legame: scene 3D grandi, misura in archi assoluti, e M2 |

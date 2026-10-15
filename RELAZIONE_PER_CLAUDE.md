@@ -17050,3 +17050,63 @@ equivalenza** *(la sorgente e' di una sola elicita')*. ### **La forma non si dec
 ### ✅ **Ho guardato la diff prima di committarla** *(campo per campo, confrontando il `jsonl` di `HEAD` con quello sul disco)*: ### **l'unico campo toccato e' `commit`, e il cambiamento e' `a7569dd` -> `a7569dde`.** ### **Non e' un commit diverso: e' UNA CIFRA IN PIU'.**
 ### ⛔ **Il motivo:** il campo porta ### **l'abbreviazione automatica di `git`**, e `git` la ### **allunga quando il repo cresce** — oggi siamo a ### **`8` cifre**, prima erano `7`. ### **Quindi a ogni scatto dell'abbreviazione il file churna PER INTERO**, `2365` righe, e la diff non dice niente.
 ### 📌 **La cura sarebbe il HASH PIENO nel campo** *(`40` cifre: non si allunga mai, e l'abbreviazione la fa chi legge)* — ma e' ### **una decisione sul formato dell'indice**, e il mandato di stasera non la comprende: ### **la riporto e non la prendo.** ### **La commit come viene dal comando, che e' l'unica via di scrittura.**
+
+## ⭐⭐ **`L2`, QUINTO PEZZO: `S3` ENTRA IN TABELLA** — *il punto `0`, prima del codice*
+
+> ### ⛔⛔ **E PRIMA DI TUTTO UN CONFLITTO CON LA GUIDA, che dichiaro invece di
+> aggirare.** `doc/COME_SI_AGGIUNGE_UNA_LEGGE.md`, passo `1`: *«la DECISIONE che governa
+> la legge e' `presa` nell'albero? Se NON lo e', FERMATI»*.
+> ### **Il nodo che governa questa legge e' `DEC-D6F-FORME-VUOTO`** — *«le TRE forme del
+> vuoto locale: tipo, quanti per nodo, **accoppiamento**»*, punto `(c)`: *«la forma
+> dell'accoppiamento con la fase, DA DERIVARE»*. ### ⛔ **E NON E' `presa`, perche' dipende
+> da `DEC-QC-CONSERVATA`**, che non lo e' — e ### **`P-ALB` rifiuta** un nodo `presa` con
+> una dipendenza non `presa`.
+
+### ✅ **COSA HO FATTO, seguendo un PRECEDENTE DEL REPO invece di inventare una via:** nel
+nodo `DEC-D7-DIVISIONE` la stessa cosa e' gia' capitata, e la cura e' scritta la' —
+### **il CONTENUTO della decisione si registra nel nodo, verificabile, e `presa` resta
+`false` finche' le sue dipendenze non lo sono.** ### **Quindi: contenuto registrato nella
+nota di `D6f`, `presa: false`, e il conflitto scritto in TRE posti** *(l'albero, il task
+history, la voce)*.
+### ⛔ **LA VIA D'USCITA FORMALE E' TUA, e non la prendo io:** ### **o si decide `QC`** *(la
+quantita' conservata)*, ### **o si dichiara che questa legge e' governata da un altro
+nodo.** ### ⚠ **E la guida stessa dice che quel passo NON HA UN PRESIDIO: non l'ho usato
+come permesso, l'ho usato come motivo per scriverlo tre volte.**
+
+### 📌 **E DUE COSE CHE LA TABELLA NON SA DIRE, trovate leggendo lo schema:**
+### **(i) una LEGGE non ha un campo `stato` ne' `superata_da`** — le chiavi di un `flusso`
+sono chiuse *(`generatore`, `ambito`, `parametri`, `esatto`, `simmetrie`, `conserva`, piu'
+`posto`/`voce_decisione`)*. ### **Quindi <<`CAMM-SATURAZIONE` passa a SUPERATA>> si scrive
+dove un programma lo legge: nella VOCE `MOTORE-SATURAZIONE`**, piu' la scheda della legge.
+### ⚠ **Lo riporto come un buco** *(`DECISIONE-VUOLE-UN-CAMPO`)*: ### **lo stato di una
+legge oggi vive in prosa.**
+### **(ii) l'ID: `CAMM-MATERIA-VUOTO`** — descrittivo *(dice le due cose che accoppia)*,
+nella famiglia `CAMM-` come tutte le leggi della camminata, e unico nel vocabolario.
+### ⛔ **E NON ho creato una voce in `voci.jsonl` con lo stesso id:** le righe delle leggi
+stanno in `doc/indice/leggi.jsonl`, che e' ### **GENERATO dalla tabella**, e due ID uguali
+in due vocabolari ### **romperebbero l'unicita'.**
+
+### ⭐⭐ **E UNA COSA CHE IL MIO NUMERO DICE, E CHE VA LETTA CON LA TUA DECISIONE:** il
+motivo `(a)` della sostituzione e' giusto — la saturazione con l'elicita' da' **per forza**
+una fase al vuoto che dipende dallo spin — ### **ma cambiare sorgente toglie la dipendenza
+dallo spin DELLA SORGENTE, non della DINAMICA.** Al primo tick le tre elicita' danno lo
+stesso `dLambda` *(`8.9e-17`)*, ### **ma a `2000` tick la differenza fra `+1` e isotropo
+era `7.4` barre**, perche' la materia ### **si muove** in modo diverso per spinori diversi.
+### ⛔ **Quindi la sostituzione CHIUDE UN CANALE e NON chiude la questione
+dell'equivalenza.** ### **L'ho scritto nella voce e nel task history perche' nessuno possa
+leggere questo commit come <<l'equivalenza e' sistemata>>.**
+
+### ⭐ **E LA COSA CHE MI CONVINCE PIU' DI TUTTE, e si DIMOSTRA invece di misurarsi:**
+questo flusso e' esatto ### **per un motivo strutturale.** `N` dipende **solo** da `rho` e
+`Lambda`; il flusso mette ### **una fase** su `psi` e ### **una fase** su `phi`; e
+### **una fase non cambia ne' `rho` ne' `Lambda`** — quindi ### **`alpha` e `beta` sono
+COSTANTI durante il pezzo**, e `exp(-i a dtau/2)^2 = exp(-i a dtau)` ### **in aritmetica
+esatta.** ### ✅ **Cioe' il flusso CONSERVA LE PROPRIE SORGENTI, e percio' conserva `N_k`
+stesso.** ### **E' questo che rende `esatto: true` una dichiarazione verificabile.**
+
+### 📌 **La collocazione in `L4`:** voce nuova `[[L4-TORSIONE-DALL-ELICITA]]`,
+### **COLLOCATA e NON OPERATIVA** — l'accoppiamento con l'elicita' esce dal canale della
+gravita' *(dove l'equivalenza lo vieta)* e diventa il candidato per ### **spin-geometria,
+cioe' la torsione.** ### ⚠ **E la citazione di Einstein-Cartan e' QUALIFICATA come
+analogia, non come derivazione:** qui non esiste ancora ne' una connessione ne' una
+metrica — sono `L3` e `L4`.

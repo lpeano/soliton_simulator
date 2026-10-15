@@ -91,6 +91,25 @@ nodi:
       nodo; (c) la forma dell-accoppiamento con la fase, DA DERIVARE (A1).
       ### Dipendono dalla QUANTITA- CONSERVATA, perche- l-accoppiamento sposta
       energia e senza una grandezza conservata non si scrive un bilancio.
+      ### ⛔⛔ IL CONTENUTO DEL PUNTO (c) E- DECISO DA LUCA, e `presa` RESTA false:
+      DECISIONE DEL 2026-10-15 (23:30 e 23:38): la forma dell-accoppiamento e-
+      N_k = rho_k ln(rho_k/(rho_k + Lambda_k)) -- cioe- la forma S3 dei pezzi 3 e 4 di
+      L2 -- e SOSTITUISCE CAMM-SATURAZIONE. La legge nuova e- CAMM-MATERIA-VUOTO, e i
+      cinque motivi sono MISURATI (pendenza statica 1.11 e verso in 24 casi su 24 in
+      ebf5317; cono 0.80 del passo libero in 74ba200; sovrapposizione ~2% a x = 0.01).
+      ### ⛔ E PERCHE- `presa` RESTA false: questo nodo DIPENDE da DEC-QC-CONSERVATA,
+      che non e- presa, e P-ALB RIFIUTA un nodo presa con una dipendenza non presa.
+      ### E- LO STESSO PRECEDENTE DI DEC-D7-DIVISIONE: il contenuto si registra QUI,
+      verificabile, e lo stato aspetta le sue dipendenze.
+      ### ⚠ E IL CONFLITTO CON LA GUIDA E- DICHIARATO, non aggirato:
+      doc/COME_SI_AGGIUNGE_UNA_LEGGE.md al passo 1 dice <<se il nodo che governa la tua
+      legge NON e- presa, FERMATI>>, e la stessa guida dice che quel passo NON HA UN
+      PRESIDIO. ### Non lo uso come permesso: la legge entra perche- LUCA L-HA DECISA,
+      e la via d-uscita formale e- SUA -- o si decide QC, o si dichiara che questa legge
+      e- governata da un altro nodo. ### Scritto qui, nel task history del 2026-10-15
+      (l2_s3_in_tabella) e nella voce DOMANDA-COME-LA-MATERIA-CAMBIA-LAMBDA.
+      ### 📌 E DUE DELLE TRE FORME DI QUESTO NODO RESTANO APERTE: (a) che cos-e- un
+      grado di liberta- del vuoto e (b) quanti per nodo. ### Decisa e- la (c).
 
   - id: DEC-FC-COESIONE
     etichetta: FC
