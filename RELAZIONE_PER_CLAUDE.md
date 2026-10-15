@@ -17110,3 +17110,67 @@ gravita' *(dove l'equivalenza lo vieta)* e diventa il candidato per ### **spin-g
 cioe' la torsione.** ### ⚠ **E la citazione di Einstein-Cartan e' QUALIFICATA come
 analogia, non come derivazione:** qui non esiste ancora ne' una connessione ne' una
 metrica — sono `L3` e `L4`.
+
+## ⭐⭐ **IL CONFLITTO E' CHIUSO: `QC` E' DECISA, E `D6f` E' PRESA** *(`2026-10-16`)*
+
+### ✅ **LA TUA DECISIONE SU `QC` E' REGISTRATA**, voce e nodo: le quantita' conservate sono
+### **le due NORME esattamente** *(`M = somma |psi|^2` e `V = somma |phi|^2`: la camminata
+e' unitaria su ciascuna, e la legge nuova da' ### **solo fasi**)*, e ### **l'energia al
+SECONDO ORDINE** *(`M-B2` `2.006`, `8bf0ded`)*. ### ⛔ **E il LIMITE e' registrato con la
+decisione, non accanto:** *«un bilancio che pretenda l'esattezza va scritto sulle norme,
+oppure va dichiarato approssimato»*.
+
+### ⛔⛔ **E LA VERIFICA CHE MI HAI CHIESTO SU `(a)` E `(b)`: ENTRAMBE SONO DECISIONI
+REGISTRATE, e ho trovato una fonte PIU' DIRETTA di quella che suggerivi.**
+
+| | la forma | la fonte VERIFICATA |
+|---|---|---|
+| **`(a)`** | il grado di liberta' del vuoto: ### **ampiezza complessa scalare sull'estremita'** | ### **il punto `F4` della carta**, che e' una ### **decisione tua del `2026-10-12`** *(voce `CARTA-FISICA-SIMULATORE`)*: alla lettera ### **«scalare NEUTRO sulle estremita', mescolato da Grover, spostato SENZA `U`»** · piu' il commit ### **`4e0659ef`** *(«IL VUOTO E' COMPLESSO»)*, registrato nella scheda di `phi_h` |
+| **`(b)`** | ### **uno per estremita'**, quindi `d` per nodo di grado `d` | ### **lo STESSO punto `F4`** *(«sulle estremita'»)*, e il tipo `complesso_estremita` che lo cabla · piu' il principio generale `DEC-CAM-CAMMINATA` *(presa)* e il punto `F1` *(«stato sulle ESTREMITA' d'arco»)* |
+
+### ⚠ **E UNA PRECISAZIONE ONESTA, perche' la tua riga diceva <<e la sua voce>>:** la
+variabile `phi_h` ha ### **`voce: "-"`** in `variabili.jsonl`, cioe' ### **NON ha una voce
+in `voci.jsonl`.** La decisione vive ### **nel commit `4e0659ef` e nella SCHEDA della
+tabella** *(che e' la fonte autorevole)*. ### **Lo dico invece di scrivere <<verificato>>
+su una cosa che non c'e'.**
+
+> ### ✅ **QUINDI `D6f` E' `presa: true`**, e `P-ALB` passa: ### **`14` nodi, `5` PRESE**
+> *(erano `3`)*. ### **Il passo `1` della guida e' soddisfatto, e il conflitto dichiarato in
+> `8718e91` E' CHIUSO.**
+
+### 📌 **E IL PROBLEMA APERTO E' SCRITTO IN TRE POSTI**, come chiedi *(RIPRESA §`20`, mappa
+§`17`, e la voce)*: la sostituzione chiude il canale di dipendenza dallo spin ### **della
+SORGENTE** *(`8.9e-17` fra le tre elicita' al primo tick)*, ### **non quello della
+DINAMICA** *(`7.4` barre a `2000` tick, `74ba200`)*. ### **Da rimisurare quando la materia
+sara' stabile**, e il posto dove si chiude e' ### **la coesione** *(`DEC-FC-COESIONE`, non
+presa)*.
+
+---
+
+### ⭐⭐ **E UNA COSA CHE IL BANCO CONGELATO MI HA DETTO MENTRE SCRIVEVO IL CODICE, e vale
+piu' di una mia deduzione**
+
+### ✅ **`rho` NON E' UNA VARIABILE NUOVA: il banco CE L'HA GIA'.**
+`camminata.rho_nodo` e' ### **la stessa formula riga per riga**
+*(`np.add.at(out, nodo, somma |psi|^2 sulle bande)`)*. ### **Quindi nel confronto
+tabella/banco l'esito e' `COINCIDE` e non `NUOVA`**, e non ho dovuto citare un punto della
+carta per farla entrare. ### ⚠ **E ho aggiunto la chiamata al collaudo del confronto**, che
+non la faceva: ### **ora `rho` viene confrontata DAVVERO** *(tipo, forma, dove vive)* invece
+di passare per <<nuova>>. ### **`16`/`16`.**
+
+> ### ⛔⛔ **E IL BANCO DICE ANCHE UNA COSA CHE DEVO RIMISURARE, non dedurre:**
+> `nonlineare2.fase_pari2` e' la forma `(A)`, `phi_k = g rho_k dtau_k`, e il suo docstring
+> dice ### **«PARI sotto `C` ⟹ ROMPE `C`»** — mentre `fase_elicita` *(con `h`)* e'
+> ### **DISPARI e commuta con `C`.**
+> ### ⛔ **Cioe' il cambio di sorgente da `h` a `rho` CAMBIA LA PARITA' DEL TERMINE SOTTO
+> `C`**, e la simmetria del passo *(`C W C^-1 = W^-1`, misurata `16`/`16` in `L1`)*
+> ### **va RIMISURATA.** ### **E' il punto `2(b)` del mandato del quinto pezzo, e lo
+> scrivo PRIMA di misurarlo perche' il banco lo diceva gia' e io stavo per non guardarlo.**
+
+### 📌 **E UN BUCO CHE HO TROVATO IN UN PRESIDIO, e non lo chiudo io:** `P-R1` *(«ogni ramo
+e' dichiarato»)* ### **guarda una lista HARDCODED di file** — `stato.py`,
+`hamiltoniana.py`, `passo.py`, `crescita.py`, `vuoto.py` piu' `termini/*.py`.
+### ⛔ **Quindi NON guarda `motore.py`, `energia.py`, `flussi_parziali.py`,
+`saturazione.py` ne' il `materia_vuoto.py` di oggi** — cioe' ### **non guarda il posto dove
+sta la maggior parte della fisica.** ### ⚠ **Estendere la lista e' una decisione** *(farebbe
+emergere decine di rami da dichiarare in un colpo)*: ### **lo riporto e non lo faccio.**

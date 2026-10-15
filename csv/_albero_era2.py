@@ -274,8 +274,15 @@ def collaudo():
     # ### sulla camminata: la camminata e- ### **la radice PRESA**, e il PRINCIPIO del
     # ### vuoto locale e- ### **preso perche- NON USA DISTANZE** -- cioe- la risposta
     # ### alla domanda che bloccava tre punti di due mandati.
+    # ### ✅ **CINQUE dal `2026-10-16`**, per la risposta di Luca al conflitto
+    # ### dichiarato in `8718e91`: ### **`DEC-QC-CONSERVATA`** *(le due NORME
+    # ### esattamente, l-ENERGIA al secondo ordine, e il LIMITE registrato)* e
+    # ### ### **`DEC-D6F-FORME-VUOTO`** *(la forma `(c)` decisa il `2026-10-15`, e le
+    # ### `(a)` e `(b)` VERIFICATE come decisioni gia- registrate: il punto `F4` della
+    # ### carta, del `2026-10-12`)*.
     PRESI_DICHIARATI = ("DEC-CAM-CAMMINATA", "DEC-D6-VUOTO",
-                        "DEC-INT-INTEGRATORE")
+                        "DEC-D6F-FORME-VUOTO", "DEC-INT-INTEGRATORE",
+                        "DEC-QC-CONSERVATA")
     _presi = sorted(x["id"] for x in nodi if x.get("presa"))
     esito("### i nodi PRESI sono esattamente quelli DICHIARATI",
           _presi == sorted(PRESI_DICHIARATI),

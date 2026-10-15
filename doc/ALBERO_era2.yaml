@@ -68,9 +68,26 @@ nodi:
     titolo: "esiste una quantita- conservata su cui fare il bilancio della nascita?"
     argomento_noto: true
     dipende_da: [DEC-CAM-CAMMINATA]
-    presa: false
+    presa: true
     fonte: "doc/CODA_2026-10-09.md::la camminata quantistica a moneta, punto 5"
     nota: >
+      ### ⭐⭐ DECISIONE DI LUCA, 2026-10-16 (00:00), in risposta al conflitto
+      dichiarato in 8718e91: SI, LE QUANTITA- CONSERVATE CI SONO.
+      ### (a) ESATTAMENTE: la NORMA DELLA MATERIA M = somma_h |psi_h|^2 e la NORMA
+      DEL VUOTO V = somma_h |phi_h|^2. La camminata e- UNITARIA su ciascuna, e la
+      legge materia-vuoto (CAMM-MATERIA-VUOTO) da- SOLO FASI, quindi non le cambia.
+      MISURATO: il vuoto totale conservato a ~4e-13 relativo (ebf5317).
+      ### (b) AL SECONDO ORDINE in dtau: l-ENERGIA TOTALE H_tot (strada B, passo
+      palindromo), pendenza di M-B2 2.006 (8bf0ded). Ogni scambio materia-vuoto passa
+      per un termine dell-UNICA H, quindi il bilancio di quello scambio e- AUTOMATICO.
+      ### (c) IL BILANCIO DELLA NASCITA (L3) SI SCRIVERA- SU QUESTE GRANDEZZE, ed e-
+      coerente con la decisione del 12 ottobre: alla nascita la materia NON PAGA
+      (psi = 0), PAGA IL VUOTO.
+      ### ⛔ E IL LIMITE E- REGISTRATO CON LA DECISIONE: L-ENERGIA NON E- CONSERVATA
+      ESATTAMENTE, solo al SECONDO ORDINE. Un bilancio che pretenda l-esattezza va
+      scritto SULLE NORME, oppure va DICHIARATO APPROSSIMATO.
+      ### 📌 E QUESTA DECISIONE SBLOCCA DEC-D6F-FORME-VUOTO, che dipendeva da lei.
+      --- la nota di prima:
       E- LA PROSSIMA, e il comando lo dice: `python csv/indice.py prossima`.
       La camminata conserva la NORMA esattamente, ma una quantita- usabile come
       ENERGIA non e- garantita -- e la decisione 10 (il calore paga la nascita) E-
@@ -82,7 +99,7 @@ nodi:
     titolo: "le TRE forme del vuoto locale: tipo, quanti per nodo, accoppiamento"
     argomento_noto: true
     dipende_da: [DEC-QC-CONSERVATA]
-    presa: false
+    presa: true
     fonte: "doc/CODA_2026-10-09.md::la camminata a moneta, punto 4"
     nota: >
       IL PRINCIPIO del vuoto locale e- PRESO (nodo D6); QUESTE SONO LE FORME, e
@@ -108,8 +125,32 @@ nodi:
       e la via d-uscita formale e- SUA -- o si decide QC, o si dichiara che questa legge
       e- governata da un altro nodo. ### Scritto qui, nel task history del 2026-10-15
       (l2_s3_in_tabella) e nella voce DOMANDA-COME-LA-MATERIA-CAMBIA-LAMBDA.
-      ### 📌 E DUE DELLE TRE FORME DI QUESTO NODO RESTANO APERTE: (a) che cos-e- un
-      grado di liberta- del vuoto e (b) quanti per nodo. ### Decisa e- la (c).
+      ### ⭐⭐ E IL 2026-10-16 (00:00) LUCA HA CHIESTO DI VERIFICARE SE LE FORME (a) E
+      (b) FOSSERO GIA- DECISIONI REGISTRATE. ### VERIFICATO NEL REPO, ed ENTRAMBE lo
+      sono -- percio- `presa` e- diventata true e il nodo e- COMPLETO:
+      ### (a) CHE COS-E- UN GRADO DI LIBERTA- DEL VUOTO: e- un-AMPIEZZA COMPLESSA
+      SCALARE sull-estremita- d-arco. ### LE FONTI: il punto F4 della carta della
+      fisica -- che e- una DECISIONE DI LUCA del 2026-10-12, voce
+      CARTA-FISICA-SIMULATORE -- dice alla lettera <<VUOTO LOCALE DETERMINISTICO phi,
+      erede dello scuotimento dell-era 1: SCALARE NEUTRO SULLE ESTREMITA-, mescolato
+      da Grover, spostato SENZA U; Lambda_k densita- locale del vuoto>>; e la
+      DECISIONE DI LUCA del 2026-10-12 (commit 4e0659ef, <<IL VUOTO E- COMPLESSO>>)
+      lo rende COMPLESSO e non reale -- registrata nella scheda della variabile
+      phi_h (V-PHI-H-ERA2, tipo complesso_estremita).
+      ### ⚠ E UNA PRECISAZIONE ONESTA: Luca cita <<la sua voce>>, ma la variabile
+      phi_h ha `voce: -` in variabili.jsonl, cioe- NON HA UNA VOCE in voci.jsonl: la
+      decisione e- registrata nel COMMIT e nella SCHEDA della tabella (che e- la
+      fonte autorevole), non in una voce. ### Lo scrivo invece di far finta.
+      ### (b) QUANTI PER NODO: UNO PER ESTREMITA-, quindi d per nodo di grado d.
+      ### LA FONTE E- LA STESSA: il punto F4 dice <<SULLE ESTREMITA->>, e il tipo
+      complesso_estremita lo cabla. ### E il principio generale e- il nodo
+      DEC-CAM-CAMMINATA (presa: true): la camminata e- UN-UNICA REGOLA PER TUTTE LE
+      GRANDEZZE, e lo stato vive sulle ESTREMITA- D-ARCO (punto F1 della carta).
+      ### (c) LA FORMA DELL-ACCOPPIAMENTO: decisa il 2026-10-15 (23:30 e 23:38), ed e-
+      CAMM-MATERIA-VUOTO, N = rho ln(rho/(rho+Lambda)).
+      ### ✅ QUINDI IL PASSO 1 DELLA GUIDA (doc/COME_SI_AGGIUNGE_UNA_LEGGE.md) E-
+      SODDISFATTO: la decisione che governa la legge e- PRESA, e il conflitto
+      dichiarato in 8718e91 E- CHIUSO.
 
   - id: DEC-FC-COESIONE
     etichetta: FC

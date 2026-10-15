@@ -608,3 +608,23 @@ elicita')*.
 prendere con questi quattro fatti: ### **il verso statico e' quello deciso**;
 ### **l'esponente dell'effetto E' quello di `beta`**; ### **la sovrapposizione vale fuori
 dalla saturazione**; ### **`S1` e' l'unica che resta perturbativa oltre `x = 0.1`.**
+
+---
+
+## 17. ⛔ `L2` — **LA FORMA E' DECISA, E RESTANO DUE COSE APERTE** *(`2026-10-16`)*
+
+### ✅ **DECISA** *(Luca, `2026-10-15` `23:30` e `23:38`)*: la forma dell'accoppiamento e'
+### **`CAMM-MATERIA-VUOTO`**, `N_k = rho_k ln(rho_k/(rho_k + Lambda_k))`, che
+### **SOSTITUISCE `CAMM-SATURAZIONE`** — e le leggi restano ### **`7`.**
+
+### ⛔⛔ **APERTA `1`: IL PRINCIPIO DI EQUIVALENZA.** La sostituzione chiude il canale di
+dipendenza dallo spin ### **della SORGENTE** *(al primo tick `8.9e-17` fra le tre
+elicita')*, ### **non quello della DINAMICA**: a `2000` tick la differenza fra `+1` e
+isotropo e' ### **`7.4` barre** *(`74ba200`)*, perche' la materia ### **si muove** in modo
+diverso per spinori diversi. ### **Da rimisurare quando la materia sara' STABILE**, e il
+posto dove si chiude e' la coesione *(`DEC-FC-COESIONE`, non presa)*.
+
+### ⛔ **APERTA `2`: LA FORMA DI `cs(Lambda)`** — come la velocita' locale della luce
+dipende dal vuoto. ### **E' la prossima decisione di Luca** *(voce
+`DOMANDA-LA-FORMA-DI-CS`)*, e il suo POSTO e' cablato da `F7` mentre ### **la FORMA e'
+aperta** *(`A1`)*.
