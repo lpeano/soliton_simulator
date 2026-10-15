@@ -16646,3 +16646,84 @@ all'anello `3`**, **uguale per le due elicita'** *(`1.10`–`1.24`)* —
 ### ⛔ **cioe' IL VUOTO SI ACCUMULA SULLA MATERIA, verso OPPOSTO alla tua decisione.**
 ### ⚠ **E NON lo uso come conclusione: `dtau = 1` e' il caso CIECO**, e il secondo pezzo
 serve a misurarlo dove non lo e'.
+
+## 2026-10-15 — ⛔⛔ **IL VERSO ESCE, ED E' OPPOSTO ALLA TUA DECISIONE — e l'esponente e'
+`6`, cioe' la gravita' del modello NON ESISTE PER POCA MATERIA**
+
+### ⛔⛔ **IL VERSO ESCE DALLA DINAMICA, ED E' QUELLO OPPOSTO ALLA DECISIONE**
+
+| `dtau` | elicita' | `E` sul grumo | barre |
+|---|---|---|---|
+| `1.00` | `+1` | `+3.450e-01 ± 1.228e-01` | `2.8` |
+| `1.00` | `-1` | `+4.865e-01 ± 1.587e-01` | `3.1` |
+| **`0.50`** | `+1` | **`+1.073e-01 ± 1.174e-02`** | ### **`9.1`** |
+| **`0.50`** | `-1` | **`+5.461e-02 ± 6.936e-03`** | ### **`7.9`** |
+| **`0.25`** | `+1` | **`+2.498e-01 ± 3.029e-02`** | ### **`8.2`** *(`10000` tick)* |
+| **`0.25`** | `-1` | **`+7.466e-02 ± 8.788e-03`** | ### **`8.5`** *(`10000` tick)* |
+
+### ⛔ **`E` E' POSITIVA IN TUTTI E SEI I CASI**, e a `dtau = 0.5` e `0.25` lo e' a
+### **`8`-`9` BARRE** — il criterio delle `3` barre e' soddisfatto **con margine**.
+
+> ### ⛔⛔ **IL VUOTO SI ACCUMULA SULLA MATERIA.** ### **E' il verso OPPOSTO alla
+> decisione del `2026-10-15`** *(«la materia consuma il vuoto»)*.
+> ### ✅ **E il verso ESCE dalla dinamica, che e' cio' che la decisione chiedeva: nessuna
+> riga lo impone.** ### **Solo che esce AL CONTRARIO.**
+
+### ⛔ **RIPORTO E MI FERMO, come il mandato dice: NESSUNA LEGGE per raddrizzarlo, e la
+saturazione non si tocca.**
+
+### ✅ **E IL VUOTO SI SPOSTA, NON NASCE** *(il controllo che mi ero promesso nel task
+history)*: `E > 0` sugli anelli `0`, `1`, `2` e ### **NEGATIVA all'anello `3`**
+*(`+3.033e-01`, `+5.836e-02`, `+3.058e-03`, **`-1.900e-02`**)*, e la media su **TUTTI** i
+nodi e' `~0` *(`-1.8e-12`, `+8.8e-15`)*. ### **Il vuoto viene TIRATO DENTRO DA FUORI.**
+
+---
+
+### ⛔⛔ **L'ESPONENTE: `E ~ x^6`, E QUESTA E' LA COSA PIU' PESANTE**
+
+| | esponente su `x <= 0.5` | pendenze LOCALI |
+|---|---|---|
+| `dtau = 1.00` | **`5.627 ± 0.183`** | `[0.1→0.2]` ### **`6.013`** · `[0.2→0.5] 5.361` · `[0.5→1] 5.920` · `[1→2] 2.601` |
+| `dtau = 0.50` | **`5.487 ± 0.169`** | `[0.1→0.2]` ### **`5.844`** · `[0.2→0.5] 5.241` · `[0.5→1] 4.306` · `[1→2] 2.081` |
+
+### ⭐ **Sul primo intervallo — dove `x` e' piu' piccolo — la pendenza e' `6.013` e
+`5.844`:** ### **esattamente cio' che la derivazione dice** se `E` e' quadratica in `beta`
+e `beta ~ -(2/3)x^3`. ### 📌 **E il fit su `x <= 0.5` da' `5.5`-`5.6` perche' `x = 0.5`
+NON e' ancora asintotico:** la pendenza **scende** al crescere di `x`, e a `x = 1→2` fa
+`~2` — ### **la saturazione.**
+
+> ### ⚠⚠ **UNA <<GRAVITA'>> CHE VA COME `x^6` NON ESISTE PER POCA MATERIA.** La gravita'
+> newtoniana e' **lineare nella massa**; `x^6` vuol dire che ### **dimezzare la materia
+> divide l'effetto per `64`.**
+
+### 📌 **E lo avevo scritto PRIMA di misurare**, nel task history: ### **non e' una
+lettura fatta dopo aver visto il numero.**
+
+---
+
+### ⚠⚠ **E LA PARTE DISPARI NON E' SOLO OSCILLAZIONE: LA MIA PREVISIONE E' SMENTITA**
+
+A `dtau = 1` `O` e' `~1e-14`, cioe' **zero**. Ma a `dtau < 1` **no:**
+
+| `dtau` | elicita' | `O` sul grumo | barre |
+|---|---|---|---|
+| `0.50` | `+1` | `-7.152e-02 ± 5.168e-03` | **`13.8`** |
+| `0.25` | `+1` | `-1.212e-01 ± 1.048e-02` | **`11.6`** |
+| `0.25` | `-1` | `+7.240e-02 ± 5.897e-03` | **`12.3`** |
+
+### ✅ **E `O` cambia segno con l'elicita', come DEVE** *(e' dispari in `beta`, e `beta`
+cambia segno con `h`)*: **una verifica di coerenza che tiene.**
+### ⛔⛔ **Ma la cosa da dire e' un'altra: a `dtau = 0.25` `|O|` E' DELLO STESSO ORDINE DI
+`|E|`** *(`1.21e-01` contro `2.50e-01`, e `7.24e-02` contro `7.47e-02`)*.
+### **Quindi c'e' un canale CHE DISTINGUE LO SPIN, con un trasporto NETTO e non solo
+oscillante** — ### **un secondo problema per il principio di equivalenza, nel canale
+dispari.**
+
+### ✅ **E il controllo nullo, l'unico che resta:** `beta = 0` → `dLambda =`
+**`0.000e+00`** esatto, a tutti e tre i `dtau`.
+
+### ⚠ **E una cosa che ho pagato, e che vale scrivere perche' e' andata BENE per caso:**
+la corsa senza materia era in **cache su `dtau`** e non su **`(dtau, tick)`**, e il
+braccio del controllo *(`200` tick)* l'ha riempita — cosi' il braccio del verso ha trovato
+`201` righe dove ne voleva `2001`. ### ✅ **Un `ValueError` RUMOROSO**, per fortuna:
+### ⚠ **con le forme uguali avrebbe dato numeri sbagliati IN SILENZIO.**

@@ -1,0 +1,94 @@
+[TIMBRO] _misura_pari_l2.py  sha1-BYTE 198a6406  committato e pulito
+================================================================================================
+LA PARTE PARI DI dLambda: IL VERSO, E L'ESPONENTE
+================================================================================================
+  LA CONFIGURAZIONE: toro (7, 7)   TICK = 2000   FINESTRE = 10   raggio = 1   seme = 7   vuoto = 1.0
+  dtau = (1.0, 0.5, 0.25)   elicita' = (1, -1)   x della scansione = (0.1, 0.2, 0.5, 1.0, 2.0) (a dtau = (1.0, 0.5))
+  ### E LE CORSE SONO LUNGHE: stanno FUORI dal pre-commit, come misure DICHIARATE.
+------------------------------------------------------------------------------------------------
+### (A) IL CONTROLLO NULLO: `beta = 0` deve dare `dLambda = 0` ESATTO
+  (A) `beta = 0` -> `dLambda = 0`, dtau = 1.00               PASSA   max |dLambda| = 0.000e+00 su 200 tick
+  (A) `beta = 0` -> `dLambda = 0`, dtau = 0.50               PASSA   max |dLambda| = 0.000e+00 su 200 tick
+  (A) `beta = 0` -> `dLambda = 0`, dtau = 0.25               PASSA   max |dLambda| = 0.000e+00 su 200 tick
+------------------------------------------------------------------------------------------------
+### (B) IL VERSO: media di E sul grumo, su 2000 tick e 10 finestre
+  dtau=1.00  elicita'=+1   E = +3.450476e-01 +- 1.228e-01  (2.8 barre)   O = -4.882942e-14 +- 5.539e-14   [6.4 s]
+        e la MEDIA SU TUTTI I NODI: -1.819704e-12 +- 3.896e-13   (se il vuoto si sposta, deve essere ~0)
+        anello 0 ( 1 nodi): E = +7.326803e-01 +- 2.561e-01
+        anello 1 ( 4 nodi): E = +2.481394e-01 +- 8.948e-02
+        anello 2 ( 8 nodi): E = +6.726809e-03 +- 4.641e-03
+        anello 3 (12 nodi): E = -5.292307e-02 +- 1.795e-02
+  dtau=1.00  elicita'=-1   E = +4.865334e-01 +- 1.587e-01  (3.1 barre)   O = +5.718766e-14 +- 4.675e-14   [4.4 s]
+        e la MEDIA SU TUTTI I NODI: -1.877406e-12 +- 3.987e-13   (se il vuoto si sposta, deve essere ~0)
+        anello 0 ( 1 nodi): E = +1.111285e+00 +- 3.674e-01
+        anello 1 ( 4 nodi): E = +3.303455e-01 +- 1.066e-01
+        anello 2 ( 8 nodi): E = +2.086775e-02 +- 6.456e-03
+        anello 3 (12 nodi): E = -2.788122e-03 +- 4.165e-03
+  dtau=0.50  elicita'=+1   E = +1.073443e-01 +- 1.174e-02  (9.1 barre)   O = -7.152085e-02 +- 5.168e-03   [5.7 s]
+        e la MEDIA SU TUTTI I NODI: -8.596642e-13 +- 1.650e-13   (se il vuoto si sposta, deve essere ~0)
+        anello 0 ( 1 nodi): E = +3.033016e-01 +- 3.809e-02
+        anello 1 ( 4 nodi): E = +5.835502e-02 +- 5.389e-03
+        anello 2 ( 8 nodi): E = +3.058482e-03 +- 1.665e-03
+        anello 3 (12 nodi): E = -1.900380e-02 +- 3.530e-03
+  dtau=0.50  elicita'=-1   E = +5.460699e-02 +- 6.936e-03  (7.9 barre)   O = +1.962625e-02 +- 8.207e-03   [3.8 s]
+        e la MEDIA SU TUTTI I NODI: -8.585730e-13 +- 1.644e-13   (se il vuoto si sposta, deve essere ~0)
+        anello 0 ( 1 nodi): E = +1.479427e-01 +- 2.332e-02
+        anello 1 ( 4 nodi): E = +3.127306e-02 +- 3.528e-03
+        anello 2 ( 8 nodi): E = +3.020904e-05 +- 1.939e-03
+        anello 3 (12 nodi): E = -1.386772e-02 +- 1.570e-03
+  dtau=0.25  elicita'=+1   E = +7.005393e-02 +- 3.348e-02  (2.1 barre)   O = -1.177174e-01 +- 4.089e-02   [5.6 s]
+        e la MEDIA SU TUTTI I NODI: +8.800351e-15 +- 1.501e-15   (se il vuoto si sposta, deve essere ~0)
+        anello 0 ( 1 nodi): E = +1.913415e-01 +- 4.394e-02
+        anello 1 ( 4 nodi): E = +3.973203e-02 +- 3.193e-02
+        anello 2 ( 8 nodi): E = -6.513774e-03 +- 2.067e-02
+        anello 3 (12 nodi): E = -2.973319e-02 +- 9.627e-03
+  dtau=0.25  elicita'=-1   E = +3.376821e-02 +- 1.271e-02  (2.7 barre)   O = +7.178075e-02 +- 3.187e-02   [3.7 s]
+        e la MEDIA SU TUTTI I NODI: +4.398771e-15 +- 1.938e-15   (se il vuoto si sposta, deve essere ~0)
+        anello 0 ( 1 nodi): E = +8.969022e-02 +- 1.930e-02
+        anello 1 ( 4 nodi): E = +1.978771e-02 +- 1.144e-02
+        anello 2 ( 8 nodi): E = -1.693536e-03 +- 7.345e-03
+        anello 3 (12 nodi): E = -1.300853e-02 +- 3.489e-03
+------------------------------------------------------------------------------------------------
+### (C) L'ESPONENTE: media di E sul grumo contro x = h/Lambda
+  dtau=1.00  x=0.1     E = +6.487375e-07 +- 8.781e-08   (7.4 barre)  [3.8 s]
+  dtau=1.00  x=0.2     E = +4.190892e-05 +- 6.435e-06   (6.5 barre)  [3.8 s]
+  dtau=1.00  x=0.5     E = +5.698544e-03 +- 9.514e-04   (6.0 barre)  [3.7 s]
+  dtau=1.00  x=1       E = +3.450476e-01 +- 1.228e-01   (2.8 barre)  [3.8 s]
+  dtau=1.00  x=2       E = +2.093336e+00 +- 1.620e-01   (12.9 barre)  [3.8 s]
+      pendenze LOCALI: [0.1->0.2] 6.013  [0.2->0.5] 5.361  [0.5->1] 5.920  [1->2] 2.601
+      ### L'ESPONENTE su x <= 0.5 (3 punti): 5.627 +- 0.183
+  dtau=0.50  x=0.1     E = +7.754884e-07 +- 5.797e-08   (13.4 barre)  [3.8 s]
+  dtau=0.50  x=0.2     E = +4.453814e-05 +- 3.279e-06   (13.6 barre)  [3.9 s]
+  dtau=0.50  x=0.5     E = +5.426565e-03 +- 3.821e-04   (14.2 barre)  [3.6 s]
+  dtau=0.50  x=1       E = +1.073443e-01 +- 1.174e-02   (9.1 barre)  [3.9 s]
+  dtau=0.50  x=2       E = +4.540871e-01 +- 5.376e-02   (8.4 barre)  [3.8 s]
+      pendenze LOCALI: [0.1->0.2] 5.844  [0.2->0.5] 5.241  [0.5->1] 4.306  [1->2] 2.081
+      ### L'ESPONENTE su x <= 0.5 (3 punti): 5.487 +- 0.169
+------------------------------------------------------------------------------------------------
+### (D) ESTENSIONE DICHIARATA: 10000 tick e 20 finestre, a dtau = (0.25,)
+  dtau=0.25  elicita'=+1   E = +2.497754e-01 +- 3.029e-02  (8.2 barre)   O = -1.212182e-01 +- 1.048e-02  (11.6 barre)   [29.0 s]
+  (D) a dtau=0.25 el=+1, su 10000 tick, E e' fuori da 3 barr PASSA   E = +2.497754e-01 +- 3.029e-02 -> VUOTO SI ACCUMULA (verso OPPOSTO)
+  dtau=0.25  elicita'=-1   E = +7.465516e-02 +- 8.788e-03  (8.5 barre)   O = +7.239728e-02 +- 5.897e-03  (12.3 barre)   [19.0 s]
+  (D) a dtau=0.25 el=-1, su 10000 tick, E e' fuori da 3 barr PASSA   E = +7.465516e-02 +- 8.788e-03 -> VUOTO SI ACCUMULA (verso OPPOSTO)
+================================================================================================
+### IL VERDETTO
+  (B) a dtau=1.00 el=+1 la media di E e' fuori da 3 barre    ### FALLISCE   E = +3.450476e-01 +- 1.228e-01, cioe' 2.8 barre -> indeciso
+  (B) a dtau=1.00 el=-1 la media di E e' fuori da 3 barre    PASSA   E = +4.865334e-01 +- 1.587e-01, cioe' 3.1 barre -> VUOTO SI ACCUMULA (verso OPPOSTO)
+  (B) a dtau=0.50 el=+1 la media di E e' fuori da 3 barre    PASSA   E = +1.073443e-01 +- 1.174e-02, cioe' 9.1 barre -> VUOTO SI ACCUMULA (verso OPPOSTO)
+  (B) a dtau=0.50 el=-1 la media di E e' fuori da 3 barre    PASSA   E = +5.460699e-02 +- 6.936e-03, cioe' 7.9 barre -> VUOTO SI ACCUMULA (verso OPPOSTO)
+  (B) a dtau=0.25 el=+1 la media di E e' fuori da 3 barre    ### FALLISCE   E = +7.005393e-02 +- 3.348e-02, cioe' 2.1 barre -> indeciso
+  (B) a dtau=0.25 el=-1 la media di E e' fuori da 3 barre    ### FALLISCE   E = +3.376821e-02 +- 1.271e-02, cioe' 2.7 barre -> indeciso
+  (B) e a dtau=1.00 le DUE ELICITA' danno lo stesso E        PASSA   E(+1) = +3.4505e-01, E(-1) = +4.8653e-01, rapporto 0.7092, differenza 0.7 barre
+  (B) e a dtau=0.50 le DUE ELICITA' danno lo stesso E        PASSA   E(+1) = +1.0734e-01, E(-1) = +5.4607e-02, rapporto 1.9658, differenza 3.9 barre
+  (B) e a dtau=0.25 le DUE ELICITA' danno lo stesso E        PASSA   E(+1) = +7.0054e-02, E(-1) = +3.3768e-02, rapporto 2.0746, differenza 1.0 barre
+------------------------------------------------------------------------------------------------
+### (C) a dtau = 1.00 l'esponente di `E` in `x` e': 5.627 +- 0.183
+### (C) a dtau = 0.50 l'esponente di `E` in `x` e': 5.487 +- 0.169
+###   ### E IL CONFRONTO CHE CONTA: `x^6` e' cio' che la derivazione dice se
+###   `E` e' quadratica in `beta` *(beta ~ -(2/3)x^3)*; `x^1` sarebbe la
+###   gravita' newtoniana, LINEARE nella massa.
+================================================================================================
+  11 su 14   [corsa intera: 116.5 s]
+### ⛔ E NESSUNA LEGGE E' STATA AGGIUNTA, e la saturazione non e' stata
+###   toccata: il verso e l'esponente vanno a Luca.
+================================================================================================

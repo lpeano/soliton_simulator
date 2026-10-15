@@ -487,3 +487,31 @@ primo, perche' e' l'unita'.**
 DECISIONE e non come fatto misurato:** il verso e' ### **deciso da Luca e NON ancora
 uscito dalla dinamica** — e il mandato diceva esattamente questo: ### **se non esce, si
 riporta e si ferma.**
+
+---
+
+## 14. ⛔⛔ `L2` — **IL VERSO E' OPPOSTO, E L'ESPONENTE E' `6`** *(`2026-10-15`)*
+
+### ⛔ **MISURATO, con la barra d'errore:** `E` *(la parte PARI di `dLambda`, che e'
+quella che ha un verso)* e' ### **POSITIVA in tutti e sei i casi**, e a `dtau = 0.5` e
+`0.25` a ### **`8`-`9` barre**. ### **Il vuoto si ACCUMULA sulla materia: il verso
+OPPOSTO alla decisione.**
+
+### ⛔⛔ **E L'ESPONENTE E' LA COSA CHE PESA DI PIU' SU TUTTO IL DISEGNO:** `E ~ x^6`
+*(pendenza locale `6.013` dove `x` e' piu' piccolo)*. ### **Una <<gravita'>> che va come
+`x^6` NON ESISTE PER POCA MATERIA**, mentre quella newtoniana e' **lineare nella massa.**
+### ⚠ **E riguarda IL BERSAGLIO DEL PROGETTO:** la prova `②` di
+`doc/IPOTESI_gravita_a_spinta.md` chiede **con che legge** due masse si avvicinano, e la
+prova `③` chiede ### **il principio di equivalenza.** ### **Questo numero parla a
+entrambe.**
+
+### ⚠ **E un SECONDO problema per l'equivalenza, nel canale DISPARI:** a `dtau = 0.25`
+`|O|` e' **dello stesso ordine** di `|E|`, e `O` ### **cambia segno con l'elicita'** —
+cioe' ### **c'e' un trasporto NETTO che distingue lo spin.**
+
+### 📌 **E cio' che REGGE:** il vuoto **si sposta e non nasce** *(media su tutti i nodi
+`~0`, e l'anello `3` NEGATIVO mentre il centro e' positivo)*, e il controllo nullo
+`beta = 0` da' **`0.000e+00`** esatto.
+
+### ⛔ **Il livello resta `L2`, e la prossima mossa e' una DECISIONE DI LUCA**, non una
+misura: ### **che fare di un verso opposto e di un esponente `6`.**
