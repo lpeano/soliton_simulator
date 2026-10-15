@@ -16727,3 +16727,48 @@ la corsa senza materia era in **cache su `dtau`** e non su **`(dtau, tick)`**, e
 braccio del controllo *(`200` tick)* l'ha riempita — cosi' il braccio del verso ha trovato
 `201` righe dove ne voleva `2001`. ### ✅ **Un `ValueError` RUMOROSO**, per fortuna:
 ### ⚠ **con le forme uguali avrebbe dato numeri sbagliati IN SILENZIO.**
+
+## 2026-10-15 — ⭐⭐ **LA SORGENTE E' LA DENSITA', E IL PREZZO DELLA LINEARITA' E' UN
+`alpha` LOGARITMICO — un conto che chiude a SE E SOLO SE**
+
+> ### **Le decisioni sono registrate su `[[DOMANDA-COME-LA-MATERIA-CAMBIA-LAMBDA]]`, e il
+> task history e' `doc/TASK_HISTORY/2026-10-15_l2_sorgente_densita_e_forme.md`.**
+
+### ✅ **E la tua correzione sul cono la accetto, ed era mia la frase troppo forte:** il
+cono limita **quanto cambia lo STATO** in un tick, **non l'angolo di una fase** — e una
+fase cambia lo stato di `|psi| |e^{-i alpha dtau} - 1| <= 2|psi|`, che ### **va a zero con
+la materia.** ### **Quindi un `alpha` che diverge dove `rho -> 0` non viola di per se' il
+cono: va MISURATO.**
+
+### ⭐⭐ **E LA DERIVAZIONE LA SO CHIUDERE PIU' FORTE DI COME E' SCRITTA NEL MANDATO: NON
+E' <<OBBLIGA>>, E' <<EQUIVALE>>.** Con `N = Lambda F(x)`, `x = rho/Lambda`:
+
+```
+alpha = F'(x)          beta = F(x) - x F'(x)          beta' = -x alpha'      <- l'identita'
+
+e se beta = -c x  (esattamente lineare):
+   F - x F' = -c x   ==>   (F/x)' = c/x   ==>   F = c x ln x + k x
+                     ==>   alpha = c ln x + (c + k)        <- LOGARITMICA
+```
+
+> ### ⛔⛔ **`beta` esattamente lineare ⟺ `alpha` logaritmica.** ### **E il verso inverso:
+> se `alpha` e' limitata E Lipschitz, `beta' = -x alpha' -> 0`, quindi `beta` NON puo'
+> essere lineare fino a zero.**
+
+### 📌 **L'ipotesi <<Lipschitz>> la DICHIARO:** con `alpha` limitata ma `alpha'` che
+oscilla come `1/x` il conto non si chiude, e ### **non voglio enunciare un teorema piu'
+largo di quello che dimostro.** ### ✅ **Lo verifico con `sympy`, non solo a mano.**
+
+### ⭐ **E UNA COSA CHE CAMBIA NATURA PASSANDO DA `h` A `rho`:** `dN/dpsi_h^* = alpha
+psi_h`, quindi il flusso su `psi` e' ### **UNA FASE, `exp(-i alpha dtau)`, non una
+rotazione attorno a `n`.** ### ✅ **E una fase NON cambia `rho`: il termine CONSERVA LA SUA
+SORGENTE** — mentre con `h` il flusso era una rotazione, che `h` **lo cambia** *(ed e'
+esattamente il <<l'elicita' nasce>> che avevo misurato)*.
+
+### ⚠⚠ **E UNA COSA CHE NON MI PIACE E CHE DICO SUBITO:** `S2`, `S3` e `S4` **non sono la
+saturazione di oggi** — sono **forme NUOVE**, e metterne una in tabella vorrebbe dire
+### **cambiare una legge.** ### ✅ **In questo pezzo NON ne metto nessuna:** vivono
+**dentro lo script**, come sostituzioni a runtime, e ### **la tabella non si tocca.**
+### 📌 **E `S4` ha una SCELTA dentro — la forma `tanh`:** la scala viene da `pi` *(il
+cono)*, ma la forma e' **una scelta**, e tu la dichiari tale: ### **la registro come
+scelta, non come derivazione.**
