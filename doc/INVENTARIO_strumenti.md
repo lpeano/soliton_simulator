@@ -3568,3 +3568,32 @@ scena **cresca** come gli archi *(`4.00x` su `4.00x` atteso)*; `m3` **`0.005114`
 | ### ⛔ **e il caso che DEVE rompersi** | lo stesso con **`U` CASUALE**: `1.218`, `1.250`, `0.742`. ### **E il motivo e' DERIVATO prima di misurarlo:** l'inversione **rovescia l'orientamento dell'arco**, e la' ### **`U` va in `U^dagger`** — quindi servirebbe `U^dagger = U` su ogni arco |
 | ### 📌 **e il censimento degli `n`, letto DAL CODICE a ogni corsa** | **`8`** file con `n` casuali gaussiani, **`3`** con `z` uniforme *(e uno, `checkpoint.py`, alla mia lista a mano **mancava**)*, ### **`0` con `n` GEOMETRICI** |
 | ### ⚠ **e la permutazione si VERIFICA, non si assume** | `P` e' asserita **biiezione** e **involuzione** *(`P^2 = 1`)*: ### **un conto sugli indici e' il posto tipico dove si sbaglia un segno**, e `P^2 = 1` serve alla derivazione |
+
+---
+
+### `primo_ordine/scena_l2.py` — **LA SCENA DI RIFERIMENTO DI `L2`** *(2026-10-15)*
+
+| | |
+|---|---|
+| **file** | `primo_ordine/scena_l2.py` |
+| **BLOB** *(sha1 dei byte grezzi)* | `af2d7019` |
+| **COMANDO** | non si gira da solo: e' il modulo che `_misura_verso_l2.py` usa |
+| **che cosa costruisce** | il toro **`7x7`** *(taglia dichiarata, scelta per il budget)*, `n` **GEOMETRICI**, **`U = I`**, `phi` **UNIFORME**, e un grumo di materia a **elicita' `+1`** |
+| ### ⭐ **e la cosa che rende la scena possibile** | con `n` geometrici un grumo **ISOTROPO** da' ### **`h = 0` ESATTO** *(le direzioni uscenti di un nodo sommano a zero, e la fase di `psi` non conta)*: ### **non toccherebbe il vuoto per niente.** Con lo spinore **allineato alla direzione** si ha `h_k = somma |psi_h|^2`, cioe' **la densita'**, e `x = h/Lambda` e' **il rapporto materia/vuoto** |
+| ### 📌 **e lo spinore si costruisce PROIETTANDO** | `(I + sigma.n)/2` su un vettore di prova, e ### **si verifica che l'autovalore sia `+1`** — cosi' vale per **qualunque** `n`, non solo per gli assi |
+
+---
+
+### `primo_ordine/_misura_verso_l2.py` — **IL VERSO: LA MATERIA CONSUMA IL VUOTO?** *(2026-10-15)*
+
+| | |
+|---|---|
+| **file** | `primo_ordine/_misura_verso_l2.py` |
+| **BLOB** *(sha1 dei byte grezzi)* | `ba2d695b` |
+| **IL COMANDO, verbatim** | `python primo_ordine/_misura_verso_l2.py` |
+| **cosa misura** | `dLambda_k = Lambda_k(con materia) - Lambda_k(senza)`, sui nodi del grumo e sugli **anelli**, su **`4` finestre** di `100` tick, a `dtau = 1` e `0.5`, con `x = 1e-4` e `x = 1` |
+| ### ⛔⛔ **IL VERDETTO: NESSUN VERDETTO SUL VERSO** | e i **due motivi sono DIVERSI** ai due `dtau` |
+| ### ⛔ **a `dtau = 1`** | il segno e' **costante `+`** *(media/scarto `3.56`)*, ### **ma il canale DISPARI in `beta` NON C'E'** *(dispari/pari `1.6e-13`)*: il hop del vuoto a `theta = pi` e' ### **una PERMUTAZIONE PURA**, e una permutazione **non ha termine d'interferenza**. ### **Quel `+` e' un effetto in `beta^2`, SENZA verso** |
+| ### ⛔ **a `dtau = 0.5`** | il canale dispari **C'E'** *(dispari/pari `2.99`)*, ### **ma il segno ALTERNA** fra le finestre *(`-0.137`, `+0.121`, `-0.198`, `+0.207`; media/scarto `-0.010`)*: il vuoto **OSCILLA** attorno alla scena senza materia |
+| ### ✅ **e il MECCANISMO c'e'** | con **`beta = 0`** il `dLambda` e' ### **ESATTAMENTE `0.000e+00`**: cio' che manca **non e' l'effetto, e' il suo VERSO** |
+| ### ⭐ **i bracci che validano la misura** | `beta = dN/dLambda` **verificato con differenze finite** *(`7.5e-10`)*; il vuoto di riferimento **stazionario a `0` ulp** su `240` tick; `h` del grumo **isotropo `0.000e+00`**; e la **scomposizione PARI/DISPARI** in `beta`, che e' il braccio che ha fermato il verdetto |

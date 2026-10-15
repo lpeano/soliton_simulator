@@ -90,6 +90,14 @@ moduli:
     responsabilita: le quattro funzioni del generatore della saturazione, e il LIMITE
     importa: []
 
+  - nome: scena_l2.py
+    responsabilita: la scena di riferimento di L2 -- n geometrici, U uno, vuoto uniforme
+    importa: [corrente, incidenza, motore, stato]
+
+  - nome: _misura_verso_l2.py
+    responsabilita: se la materia consuma il vuoto, e se il verso viene dal segno di beta
+    importa: [_presidio, deriva, saturazione, scena_l2]
+
   - nome: _misura_theta_n.py
     responsabilita: se Theta e le direzioni n danno una simmetria esatta del passo
     importa: [_presidio, composizione, corrente, deriva, incidenza, motore, stato]

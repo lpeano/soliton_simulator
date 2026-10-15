@@ -134,6 +134,12 @@ FILE_FISICA = (
     # ### `Theta W[n] Theta^-1 = W[-n]^-1`, e ### **la mappa del reticolo che la
     # ### rende una simmetria ESATTA** con gli `n` geometrici.
     'primo_ordine/_misura_theta_n.py',
+    # ### ⭐ **NATI il `2026-10-15` col primo pezzo di `L2`**: la scena di
+    # ### riferimento *(`n` geometrici, `U = I`, vuoto uniforme)* e la misura del
+    # ### ### **VERSO** -- se la materia consuma il vuoto, e ### **se quel verso
+    # ### viene dal segno di `beta`.**
+    'primo_ordine/scena_l2.py',
+    'primo_ordine/_misura_verso_l2.py',
     'primo_ordine/motore.py',
     'primo_ordine/_collauda_motore.py',
     # ### IL CHECKPOINT *(sotto-pezzo `5c`)*: salva e riprende ### **stato, grafo,
