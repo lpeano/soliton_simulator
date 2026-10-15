@@ -1,0 +1,46 @@
+[TIMBRO] _misura_theta_n.py  sha1-BYTE 0d14b153  committato e pulito
+================================================================================================
+`Theta` CONTRO LE DIREZIONI `n` -- una misura, nessuna decisione di fisica
+================================================================================================
+  LA CONFIGURAZIONE: toro (3, 3)   seme = 7   dtau = (1.0, 0.5, 0.25)   eps = 0.5
+------------------------------------------------------------------------------------------------
+### IL CENSIMENTO DEGLI `n`, letto dal codice adesso:
+  casuali gaussiani (poi normalizzati): _collauda_checkpoint.py, _collauda_energia.py, _collauda_saturazione.py, _misura_spettro_l1.py, _misura_theta_n.py, bande_floquet.py, corrente.py, deriva.py
+  `z` uniforme (nv[:,2] = 1.0):         _collauda_memoria.py, _collauda_motore.py, checkpoint.py
+  altri modi:                           nessuno
+  ### ⛔ GEOMETRICI (dalla direzione dell'arco): NESSUNA SCENA DEL MOTORE. Li costruisce questo file.
+------------------------------------------------------------------------------------------------
+  dtau = 1.0000   (con l'ordine palindromo OGNI pezzo sta a frazione 0.5, quindi un pezzo agisce a theta = pi*dtau/2)
+  (a) `Theta W[n] Theta^-1 = W[-n]^-1`, n CASUALI              PASSA   scarto 7.920e-16, cioe' 4 ulp
+  ### (b) DEVE FALLIRE: confrontato con `W[+n]^-1` (n NON rove PASSA   scarto 4.834e-01: ### e' il confronto che avevo fatto io, e dava 6.68e-01
+  (c1) `P W[n] P^-1 = W[-n]` con n GEOMETRICI e `U = I`        PASSA   scarto 0.000e+00, cioe' 0 ulp
+  (c2) `(P Theta) W (P Theta)^-1 = W^-1`: UNA SIMMETRIA ESATTA PASSA   scarto 5.551e-16, cioe' 2 ulp
+  (c3) e la DEGENERAZIONE di Kramers c'e', come `(P Theta)^2 = PASSA   molteplicita' minima 2 su 12 gruppi
+  ### (c4) DEVE ROMPERSI: lo stesso con `U` CASUALE            PASSA   scarto 1.218e+00: ### l'inversione ROVESCIA l'arco, e la' `U` va in `U^dagger`
+------------------------------------------------------------------------------------------------
+  dtau = 0.5000   (con l'ordine palindromo OGNI pezzo sta a frazione 0.5, quindi un pezzo agisce a theta = pi*dtau/2)
+  (a) `Theta W[n] Theta^-1 = W[-n]^-1`, n CASUALI              PASSA   scarto 4.441e-16, cioe' 2 ulp
+  ### (b) DEVE FALLIRE: confrontato con `W[+n]^-1` (n NON rove PASSA   scarto 2.766e-01: ### e' il confronto che avevo fatto io, e dava 6.68e-01
+  (c1) `P W[n] P^-1 = W[-n]` con n GEOMETRICI e `U = I`        PASSA   scarto 2.776e-17, cioe' 0 ulp
+  (c2) `(P Theta) W (P Theta)^-1 = W^-1`: UNA SIMMETRIA ESATTA PASSA   scarto 5.237e-16, cioe' 2 ulp
+  (c3) e la DEGENERAZIONE di Kramers c'e', come `(P Theta)^2 = PASSA   molteplicita' minima 2 su 12 gruppi
+  ### (c4) DEVE ROMPERSI: lo stesso con `U` CASUALE            PASSA   scarto 1.250e+00: ### l'inversione ROVESCIA l'arco, e la' `U` va in `U^dagger`
+------------------------------------------------------------------------------------------------
+  dtau = 0.2500   (con l'ordine palindromo OGNI pezzo sta a frazione 0.5, quindi un pezzo agisce a theta = pi*dtau/2)
+  (a) `Theta W[n] Theta^-1 = W[-n]^-1`, n CASUALI              PASSA   scarto 5.979e-16, cioe' 3 ulp
+  ### (b) DEVE FALLIRE: confrontato con `W[+n]^-1` (n NON rove PASSA   scarto 2.173e-01: ### e' il confronto che avevo fatto io, e dava 6.68e-01
+  (c1) `P W[n] P^-1 = W[-n]` con n GEOMETRICI e `U = I`        PASSA   scarto 1.388e-17, cioe' 0 ulp
+  (c2) `(P Theta) W (P Theta)^-1 = W^-1`: UNA SIMMETRIA ESATTA PASSA   scarto 4.743e-16, cioe' 2 ulp
+  (c3) e la DEGENERAZIONE di Kramers c'e', come `(P Theta)^2 = PASSA   molteplicita' minima 2 su 12 gruppi
+  ### (c4) DEVE ROMPERSI: lo stesso con `U` CASUALE            PASSA   scarto 7.418e-01: ### l'inversione ROVESCIA l'arco, e la' `U` va in `U^dagger`
+================================================================================================
+  LA TABELLA:
+  dtau     (a) n/-n     (b) deve !=  (c1) P       (c2) P Theta molt.   (c4) U casuale, deve !=
+  1.0000   7.920e-16    4.834e-01    0.000e+00    5.551e-16    2       1.218e+00
+  0.5000   4.441e-16    2.766e-01    2.776e-17    5.237e-16    2       1.250e+00
+  0.2500   5.979e-16    2.173e-01    1.388e-17    4.743e-16    2       7.418e-01
+================================================================================================
+  18 su 18
+### ⛔ E NESSUNA CONCLUSIONE DI FISICA: la simmetria del modello -- la `C`, il
+###   ruolo di `n` -- e' una decisione di Luca. Qui ci sono solo numeri.
+================================================================================================

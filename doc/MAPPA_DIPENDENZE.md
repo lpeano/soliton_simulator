@@ -305,3 +305,29 @@ l'inversione del tempo del passo e' ESATTA** *(`3.9e-16`)* e **Kramers c'e'**.
 lettura del tempo proprio.** Adesso con, in piu', ### **un passo reversibile per
 costruzione** — che e' cio' che rende sensato chiedersi, a `L2`, **da dove venga
 l'irreversibilita'** *(`A15.3`)*.
+
+---
+
+## 11. ⭐⭐ `L1` — **UNA SIMMETRIA ANTIUNITARIA ESATTA, CON GLI `n` GEOMETRICI**
+*(`2026-10-15`, terza parte)*
+
+### ✅ **MISURATO:** `Theta W[n] Theta^-1 = W[-n]^-1` **all'ulp** *(`2`-`3` ulp, `n`
+casuali)*; e con `n` **GEOMETRICI** e `U = I` l'inversione spaziale del toro da'
+`P W[n] P^-1 = W[-n]` *(`0.000e+00`)*, quindi
+### **`(P Theta) W (P Theta)^-1 = W^-1`** *(`5.5e-16`)* ### **con Kramers**
+*(molteplicita' `2`)*.
+
+### ⛔ **E il limite e' derivato, non trovato dopo:** l'inversione **rovescia l'arco**, e
+la' **`U` va in `U^dagger`** — con `U` casuale la simmetria **non puo'** esistere, e la
+misura lo conferma *(`1.218`)*.
+
+### ⚠ **E questo cambia la forma della decisione aperta**
+`[[DECISIONE-LA-C-VUOLE-IL-TEMPO-ROVESCIATO]]`: non piu' solo *«la moneta deve
+rovesciarsi?»*, ma anche ### **«gli `n` del modello devono essere le DIREZIONI DI MOTO?»**
+— e quella e' una domanda che ### **tocca `L2` e `L4`**, perche' gli `n` vivono sulle
+estremita' e il gauge sugli archi.
+
+### 📌 **E una cosa che il censimento ha trovato, e che va detta qui perche' riguarda tutti
+i livelli:** ### **nessuna scena del motore costruisce `n` GEOMETRICI** — sono casuali in
+`8` file e `z` uniforme in `3`. ### **Quindi la scena <<naturale>> del modello, oggi, non
+esiste.**

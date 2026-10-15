@@ -16404,3 +16404,15 @@ numero **e** l'elenco. ### ✅ **Adesso il censimento lo fa LO SCRIPT a ogni cor
 ### ⛔ **`0` con `n` GEOMETRICI.**
 ### ⚠ **E' `L-NUMERI` applicato a un elenco:** un conteggio ricopiato a mano **non ha
 provenienza**, e il mio ne aveva perso uno.
+
+## 2026-10-15 — 📌 **I TRE REFERTI DELLA TERZA PARTE, dal codice committato**
+
+### ✅ **`doc/referti_l1/spettro_ottimo.txt`**, **`theta_n.txt`**,
+**`memoria_proprieta.txt`** — ### **accanto ai vecchi, non sopra** *(un file di risultati
+non si sovrascrive)*, e coi timbri `committato e pulito` del blob di `5219e1b`.
+
+### 📌 **E lo stato della suite: `261.7` s su `500`, e UN SOLO collaudo rosso** — i due
+bracci di `_collauda_deriva.py`, che restano rossi **per il perimetro di `L5`**.
+### ✅ **Gli altri due rossi del paragrafo `12` della `RIPRESA` sono chiusi:** la memoria
+*(il braccio misura la proprieta')* e la `C` *(che non era un collaudo: era il confronto
+sbagliato)*.

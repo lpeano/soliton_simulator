@@ -1,0 +1,75 @@
+[TIMBRO] _misura_spettro_l1.py  sha1-BYTE f1346ebe  committato e pulito
+================================================================================================
+LO SPETTRO DEL PASSO LINEARE PALINDROMO -- una MISURA, nessuna decisione
+================================================================================================
+  LA CONFIGURAZIONE: toro (3, 3)   seme = 7   dtau = (1.0, 0.5, 0.25)   eps = 0.5   vuoto_modulo = 2.0   U in SU(2)
+------------------------------------------------------------------------------------------------
+### LA VALIDAZIONE DELLA MISURA (non della fisica):
+  ### DEVE PASSARE: uno spettro appaiato PER COSTRUZIONE da- PASSA   ottimo 0.000e+00  Hausdorff 0.000e+00  spaziatura 8.223e-02
+  ### DEVE FALLIRE: le stesse fasi TRASLATE di 0.3 NON sono  PASSA   ottimo 1.345e+00 contro una spaziatura di 8.735e-02, cioe- 15 volte
+------------------------------------------------------------------------------------------------
+  dtau = 1.0000 -> theta = 1.0000 pi   |   W e' 72x72, 10 pezzi lineari
+  (0) `W` e' UNITARIA (senza questo, le fasi non sono fasi)  PASSA   scarto 9.992e-16, cioe' 5 ulp
+    le fasi: min -3.109522  max 3.136504  (su pi: -0.9898 .. 0.9984)
+    ### (1) APPAIAMENTO: somma-ottima 8.200777e-02   COLLO DI BOTTIGLIA 8.200777e-02   Hausdorff 5.775266e-02
+    ###     e IL METRO: spaziatura media dei livelli 8.787076e-02  ->  collo su spaziatura = 0.93
+    ###     e IL CONTROLLO DI SCALA (20 spettri CASUALI, stesso intervallo): collo mediano 5.050543e-01, MINIMO 2.481825e-01, spaziatura 8.386035e-02
+  (1) APPAIATO ALL'ULP (<= 1e-10)? e non <<entro la spaziatu ### FALLISCE   collo 8.201e-02: NON appaiato   (e il CASO su 20 tiri: mediana 5.051e-01, MINIMO 2.482e-01)
+    ###     e il GOLOSO di prima: 1.987038e+00  ->  diverso dal collo di 1.905e+00, cioe' 21.7 spaziature
+  (2) ogni autovalore e' ALMENO DOPPIO (Kramers, `C^2 = -1`) ### FALLISCE   molteplicita': {1: 72} su 72 gruppi (tolleranza 1e-08)
+  (3) `C W C^-1 = W^-1` (inversione del tempo del PASSO INTE ### FALLISCE   scarto 6.684e-01, cioe' 3010288773081236 ulp
+  ### DEVE ROMPERSI: lo stesso con l'ordine NON palindromo   PASSA   scarto 1.589e+00: ### senza questo il braccio (3) sarebbe un FALSO-UNO
+    ### LA DIAGNOSI DEL BRACCIO (3): chi non si rovescia?
+  (4) la MONETA sotto `C` resta SE STESSA, non la sua invers PASSA   `C M C^-1 = M` da' 0.000e+00, `= M^-1` da' 5.256e-01
+  (5) e SENZA la moneta `C W C^-1 = W^-1` TORNA ESATTA       PASSA   scarto 5.162e-16 su 8 pezzi, cioe' 2 ulp
+  (6) e SENZA la moneta la degenerazione di Kramers C'E'     PASSA   molteplicita' minima 2 su 20 gruppi
+  (7) e SENZA la moneta: APPAIATO ALL'ULP?                   PASSA   collo 4.133e-15   Hausdorff 4.133e-15   spaziatura 8.764e-02   -> APPAIATO
+------------------------------------------------------------------------------------------------
+  dtau = 0.5000 -> theta = 0.5000 pi   |   W e' 72x72, 10 pezzi lineari
+  (0) `W` e' UNITARIA (senza questo, le fasi non sono fasi)  PASSA   scarto 6.663e-16, cioe' 3 ulp
+    le fasi: min -3.126699  max 3.121347  (su pi: -0.9953 .. 0.9936)
+    ### (1) APPAIAMENTO: somma-ottima 1.999863e+00   COLLO DI BOTTIGLIA 1.378758e+00   Hausdorff 1.342228e+00
+    ###     e IL METRO: spaziatura media dei livelli 7.446887e-02  ->  collo su spaziatura = 18.51
+    ###     e IL CONTROLLO DI SCALA (20 spettri CASUALI, stesso intervallo): collo mediano 5.056334e-01, MINIMO 2.803209e-01, spaziatura 8.388737e-02
+  (1) APPAIATO ALL'ULP (<= 1e-10)? e non <<entro la spaziatu ### FALLISCE   collo 1.379e+00: NON appaiato   (e il CASO su 20 tiri: mediana 5.056e-01, MINIMO 2.803e-01)
+    ###     e il GOLOSO di prima: 1.999750e+00  ->  diverso dal collo di 6.210e-01, cioe' 8.3 spaziature
+  (2) ogni autovalore e' ALMENO DOPPIO (Kramers, `C^2 = -1`) ### FALLISCE   molteplicita': {1: 72} su 72 gruppi (tolleranza 1e-08)
+  (3) `C W C^-1 = W^-1` (inversione del tempo del PASSO INTE ### FALLISCE   scarto 4.485e-01, cioe' 2019792119355860 ulp
+  ### DEVE ROMPERSI: lo stesso con l'ordine NON palindromo   PASSA   scarto 8.779e-01: ### senza questo il braccio (3) sarebbe un FALSO-UNO
+    ### LA DIAGNOSI DEL BRACCIO (3): chi non si rovescia?
+  (4) la MONETA sotto `C` resta SE STESSA, non la sua invers PASSA   `C M C^-1 = M` da' 0.000e+00, `= M^-1` da' 2.655e-01
+  (5) e SENZA la moneta `C W C^-1 = W^-1` TORNA ESATTA       PASSA   scarto 3.970e-16 su 8 pezzi, cioe' 2 ulp
+  (6) e SENZA la moneta la degenerazione di Kramers C'E'     PASSA   molteplicita' minima 2 su 20 gruppi
+  (7) e SENZA la moneta: APPAIATO ALL'ULP?                   ### FALLISCE   collo 1.414e+00   Hausdorff 1.414e+00   spaziatura 7.075e-02   -> NON appaiato
+------------------------------------------------------------------------------------------------
+  dtau = 0.2500 -> theta = 0.2500 pi   |   W e' 72x72, 10 pezzi lineari
+  (0) `W` e' UNITARIA (senza questo, le fasi non sono fasi)  PASSA   scarto 8.883e-16, cioe' 4 ulp
+    le fasi: min -0.002929  max 1.678613  (su pi: -0.0009 .. 0.5343)
+    ### (1) APPAIAMENTO: somma-ottima 1.999988e+00   COLLO DI BOTTIGLIA 1.775663e+00   Hausdorff 1.486402e+00
+    ###     e IL METRO: spaziatura media dei livelli 2.367755e-02  ->  collo su spaziatura = 74.99
+    ###     e IL CONTROLLO DI SCALA (20 spettri CASUALI, stesso intervallo): collo mediano 1.557968e+00, MINIMO 1.485719e+00, spaziatura 2.261549e-02
+  (1) APPAIATO ALL'ULP (<= 1e-10)? e non <<entro la spaziatu ### FALLISCE   collo 1.776e+00: NON appaiato   (e il CASO su 20 tiri: mediana 1.558e+00, MINIMO 1.486e+00)
+    ###     e il GOLOSO di prima: 1.942047e+00  ->  diverso dal collo di 1.664e-01, cioe' 7.0 spaziature
+  (2) ogni autovalore e' ALMENO DOPPIO (Kramers, `C^2 = -1`) ### FALLISCE   molteplicita': {1: 72} su 72 gruppi (tolleranza 1e-08)
+  (3) `C W C^-1 = W^-1` (inversione del tempo del PASSO INTE ### FALLISCE   scarto 2.578e-01, cioe' 1160894162135611 ulp
+  ### DEVE ROMPERSI: lo stesso con l'ordine NON palindromo   PASSA   scarto 3.004e-01: ### senza questo il braccio (3) sarebbe un FALSO-UNO
+    ### LA DIAGNOSI DEL BRACCIO (3): chi non si rovescia?
+  (4) la MONETA sotto `C` resta SE STESSA, non la sua invers PASSA   `C M C^-1 = M` da' 0.000e+00, `= M^-1` da' 1.328e-01
+  (5) e SENZA la moneta `C W C^-1 = W^-1` TORNA ESATTA       PASSA   scarto 3.855e-16 su 8 pezzi, cioe' 2 ulp
+  (6) e SENZA la moneta la degenerazione di Kramers C'E'     PASSA   molteplicita' minima 2 su 20 gruppi
+  (7) e SENZA la moneta: APPAIATO ALL'ULP?                   ### FALLISCE   collo 1.830e+00   Hausdorff 1.445e+00   spaziatura 2.148e-02   -> NON appaiato
+================================================================================================
+  LA TABELLA, in una riga per `dtau`. ### ATTENZIONE AL FATTORE 2: con l'ordine
+  palindromo OGNI PEZZO sta a frazione 0.5, quindi un pezzo agisce a
+  `theta = pi*dtau/2`, non a `pi*dtau`.
+  dtau    collo       spaziatura  collo/spaz  molt.  C W C-1=W-1 senza mon.  molt. senza / appaiam. senza
+  1.0000  8.201e-02   8.787e-02   0.93        1      6.684e-01   5.162e-16   2 / 4.133e-15 (sp. 8.764e-02)
+  0.5000  1.379e+00   7.447e-02   18.51       1      4.485e-01   3.970e-16   2 / 1.414e+00 (sp. 7.075e-02)
+  0.2500  1.776e+00   2.368e-02   74.99       1      2.578e-01   3.855e-16   2 / 1.830e+00 (sp. 2.148e-02)
+  ### ALMENO A UN `dtau` il GOLOSO dava un altro verdetto    PASSA   a 1.0: goloso 1.987e+00 contro collo 8.201e-02, su spaziatura 8.787e-02
+================================================================================================
+  19 su 30
+### ⛔ E NESSUNA CONCLUSIONE DI FISICA: i numeri sono questi, e la lettura
+###   la decide Luca. Cio' che questo file NON dice e' se il modello DEVE
+###   avere la C, la CT, o un'altra simmetria.
+================================================================================================
