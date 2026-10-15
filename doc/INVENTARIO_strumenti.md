@@ -3475,3 +3475,57 @@ scena **cresca** come gli archi *(`4.00x` su `4.00x` atteso)*; `m3` **`0.005114`
 | ### ⛔ **che cosa NON regge** | la corrente derivata **non chiude**: residuo **`1.342e+01`** su scala `4.93`, contro **`7.768e+00`** *senza* nessuna corrente. ### **Non toglie: AGGIUNGE** |
 | ### ⭐ **e la CAUSA, provata** | `e_h` cambia su **TUTTI** i nodi *(`16`/`16`)*, anche dove gli archi non portano niente: ### **e' una correlazione fra DUE TEMPI, non una carica trasportata** |
 | ### ⚠ **l'ordine dei bracci** | prima **lo strumento** *(corrente costruita: `4.4e-16`)*, poi **il verso invertito** *(rompe **esattamente** i due nodi di quell'arco)*, **poi** la corrente vera |
+
+---
+
+### `primo_ordine/flussi_parziali.py` — **IL TEMPO PROPRIO DENTRO LE LEGGI** *(2026-10-15)*
+
+| | |
+|---|---|
+| **file** | `primo_ordine/flussi_parziali.py` |
+| **BLOB** *(sha1 dei byte grezzi)* | `2197eaa8` |
+| **COMANDO** | non si gira da solo: e' **il modulo** che `motore.py` chiama. Lo esercitano `python primo_ordine/_collauda_motore.py` e `python primo_ordine/_collauda_tempo_proprio.py` |
+| **cosa contiene** | **il PUNTO UNICO di lettura del tempo proprio** *(`dtau_nodo`, `dtau_rif`, `s_nodo`, `s_arco`)*, **la fase esatta** `espi`, e **i due flussi parziali** — `grover` *(per `psi` **e** per `phi`)* e `hop_psi` / `hop_phi` |
+| ### ⭐ **e le due esattezze che reggono tutto** | `espi(1) = -1 + 0j` **AL BIT** *(il seno si riduce con `min(s, 1-s)`, che e' esatto per Sterbenz)*; e la media armonica nella forma `S/2 - D^2/(2S)`, che **da' `d` AL BIT quando i due nodi sono uguali** — mentre `2dd/(d+d)` ### **sbaglia per `0.1`, `0.2` e `0.4`** |
+| ### ⛔ **e il cono si ASSERISCE** | `0 < s <= 1` **ALZA**, non taglia *(e ha trovato un `dtau` NEGATIVO in `_collauda_checkpoint.py`, gaussiano da sempre)* |
+
+---
+
+### `primo_ordine/_misura_mb1.py` — **`M-B1`: IL RACCORDO AL BIT** *(2026-10-15)*
+
+| | |
+|---|---|
+| **file** | `primo_ordine/_misura_mb1.py` |
+| **BLOB** *(sha1 dei byte grezzi)* | `89b49ac6` |
+| **IL COMANDO, verbatim** | `python primo_ordine/_misura_mb1.py --contro 717bb60` |
+| **cosa misura** | che a `dtau = dtau_rif = 1` *(`theta = pi`)* il passo nuovo dia **gli stessi BYTE** del passo di `717bb60`, su **250 tick**, **`psi` E `phi`**, **2 scene** |
+| ### ✅ **il verdetto** | **PASSA**: `sha1` dei byte `eff92bbd8622` da entrambe le parti, `2720` byte |
+| ### ⭐ **e il <<prima>> si prende da un `git worktree`** | non da una copia nel file *(che `H-P8` impedisce)* e **non da `git archive`**: in un albero nudo `_presidio` ### **RIFIUTA DI GIRARE** *(`P-BARRIERA`: `core.hooksPath` non impostato)*, e ha ragione — ### **un misuratore non misura dove i presidi non esistono** |
+
+---
+
+### `primo_ordine/_misura_mb2.py` — **`M-B2`: LA SCALA DELL'ERRORE DI `H_tot`** *(2026-10-15)*
+
+| | |
+|---|---|
+| **file** | `primo_ordine/_misura_mb2.py` |
+| **BLOB** *(sha1 dei byte grezzi)* | `09849679` |
+| **IL COMANDO, verbatim** | `python primo_ordine/_misura_mb2.py` |
+| **cosa misura** | l'**escursione** di `H_tot` *(la somma dei generatori LOCALI, raggio ZERO)* a **tempo totale FISSO** `T = 8`, con `dtau = 1/2^k`, `k = 1..4` |
+| ### ⛔ **il verdetto** | **NON PASSA**: i rapporti sono **`2.540`, `2.204`, `2.111`** *(pendenza `1`)*, e il criterio chiedeva **`4`** |
+| ### ⭐ **e la CAUSA e' MISURATA nello stesso file** | col solo ordine **spezzato a meta' e rispecchiato** *(diagnosi, **non** una modifica alla tabella)* i rapporti diventano **`5.342`, `3.691`, `4.291`** *(pendenza `2`)*: ### **il `2` viene dalla composizione NON SIMMETRICA** |
+| ### ⚠ **e il protocollo e' dichiarato PRIMA** | a **tick fissi** l'errore andrebbe come `N dtau^3` *(fattore `8`)*, a **tempo fisso** come `T dtau^2` *(fattore `4`)*: e' il `4` che il criterio nomina, quindi il protocollo e' **a tempo fisso** |
+
+---
+
+### `primo_ordine/_misura_c_flussi.py` — **DOVE SI ROMPE LA `C`** *(2026-10-15)*
+
+| | |
+|---|---|
+| **file** | `primo_ordine/_misura_c_flussi.py` |
+| **BLOB** *(sha1 dei byte grezzi)* | `c27e03eb` |
+| **IL COMANDO, verbatim** | `python primo_ordine/_misura_c_flussi.py` |
+| **cosa misura** | con la **`C` COMPLETA** *(`psi -> i sigma_y psi^*`, `phi -> phi^*`, **`U -> sigma_y U^* sigma_y^-1`**)* e col **segno di `C^2`** portato nel confronto *(`-1` su `psi`, `+1` su `phi` e su `U`)*: **`16`/`16`** |
+| ### ⭐ **che cosa dice** | `C Op(theta) C^-1 = Op(-theta)` vale a **OGNI** `theta` *(`0.0`–`2.4` ulp, tutti e quattro i pezzi)*; `C Op C^-1 = Op` vale a `theta = pi` con **`0.000e+00`** e **SI ROMPE** a `theta = 0.25 pi` *(`2.303`–`3.387` su scala `~3`)* |
+| ### ⛔ **LA LETTURA** | ### **la `C`-simmetria del cammino NON ERA UNA PROPRIETA' SUA: era una CONSEGUENZA del fatto che i pezzi erano INVOLUZIONI** — tutti all'angolo `pi`, dove la fase e' reale. ### **Cio' che sopravvive a `(B)` e' una `CT`**, e quella e' una decisione di Luca |
+| ### ⚠ **e il `dtau` negativo non serve** | il cono lo vieta, e **non serve**: `Op` e' unitaria e normale, quindi `Op^*= Op(-theta) = Op^-1`, e si prova **componendo** |

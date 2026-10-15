@@ -54,7 +54,15 @@ def _motore(nn, seme):
     st["psi_h"][...] = (r.normal(size=st["psi_h"].shape)
                         + 1j * r.normal(size=st["psi_h"].shape))
     st["phi_h"][...] = r.normal(size=st["phi_h"].shape)
-    mot = MO.Motore(inc, MO.Geometria(nv, U), st, r.normal(size=nn) * 0.1, "numpy")
+    # ### ⛔ **E IL `dtau` E- IN VALORE ASSOLUTO, dal 2026-10-15, perche- UN TEMPO
+    # ### PROPRIO NON PUO- ESSERE NEGATIVO.** ### ⚠ **Prima era `r.normal(...) * 0.1`
+    # ### nudo, cioe- ### GAUSSIANO: circa META- DEI NODI aveva un `dtau` NEGATIVO**,
+    # ### e nessuno se ne era accorto perche- ### **nulla lo controllava.** ### Lo ha
+    # ### trovato l-assert del cono *(un orologio che va indietro)*, non una lettura.
+    # ### ✅ **E resta NON UNIFORME**, che e- cio- che questo collaudo vuole: il
+    # ### checkpoint deve riportare ### **un `dtau` diverso per nodo.**
+    mot = MO.Motore(inc, MO.Geometria(nv, U), st,
+                    np.abs(r.normal(size=nn)) * 0.1, "numpy")
     return mot
 
 

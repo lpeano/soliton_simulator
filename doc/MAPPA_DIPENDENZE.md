@@ -257,3 +257,33 @@ da come si misura il tick.**
 ### **importa gia' `deriva.py`** *(per `DV.scena` e `DV.OPERATORE`)*, quindi
 ### **il congelamento preso alla lettera avrebbe bloccato il criterio di uscita di `L1`**
 — cioe' ### **si sarebbe bloccato da solo.**
+
+---
+
+## 9. ⚠ `L1` — **IL CODICE E' FATTO, E IL LIVELLO NON E' CHIUSO** *(`2026-10-15`)*
+
+> ### ⛔ **`L1` RESTA IL LIVELLO CORRENTE**, e non per lavoro mancante: ### **per due
+> criteri di uscita che non passano, e che chiedono una decisione di fisica.**
+
+| | il criterio di uscita | esito |
+|---|---|---|
+| `1` | `_collauda_tempo_proprio.py`: `0` violatori su `7` | ### ✅ **PASSA**, e il presidio **impedisce** *(dimostrato)* |
+| `2` | `M-B1`: identita' AL BIT con `717bb60` | ### ✅ **PASSA** *(`eff92bbd8622`, `250` tick, `psi` e `phi`)* |
+| `3` | `M-B2`: fattore `4` a ogni dimezzamento | ### ⛔ **NO: `2.540`, `2.204`, `2.111`** — e la causa e' misurata: **la composizione non e' simmetrica** |
+| `4` | la `C`-simmetria resta verde | ### ⛔ **NO: da `0.000e+00` a `5.343`** — e la causa e' derivata: **`G^* = G(-theta)`** |
+
+### ⛔ **LE DUE DECISIONI CHE SERVONO A LUCA, e non le prendo io:**
+### ① **`[[DECISIONE-COMPOSIZIONE-SIMMETRICA]]`** — l'`ordine` palindromo darebbe
+`O(dtau^2)` *(misurato: `5.342`, `3.691`, `4.291`)*, ma ### **cambia IL PASSO**, e
+### ⚠ **`M-B1` e `M-B2` cosi' come sono scritti non possono valere insieme.**
+### ② **`[[DECISIONE-LA-C-VUOLE-IL-TEMPO-ROVESCIATO]]`** — la simmetria che sopravvive e'
+una **`CT`**, non una `C`.
+
+### 📌 **E DUE COSTI REGISTRATI:** `[[COSTO-MEMORIA-DEI-FLUSSI-PARZIALI]]`
+*(`4.39x` -> `5.56x`, soglia `5x`)* e
+`[[DIFETTO-LAMBDA-NON-PIU-INVARIANTE-SOTTO-IL-VUOTO]]`.
+
+### ⭐ **E CIO' CHE `L1` HA GIA' CONSEGNATO A `L2`, qualunque sia la decisione:**
+### **il PUNTO UNICO di lettura del tempo proprio** *(`flussi_parziali.dtau_nodo`)* —
+### **nessuna legge calcola il suo `dtau` da se'**, e quello e' il posto da cui `L2` fara'
+variare `cs`.

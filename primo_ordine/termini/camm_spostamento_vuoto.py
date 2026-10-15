@@ -3,14 +3,14 @@
 
 ### **CAMM-SPOSTAMENTO-VUOTO** -- `pezzo_unitario`
 
-Lo spostamento del vuoto (punto `F4`), SENZA `U`. ### E il <<senza `U`>> non e' una semplificazione: `phi` e' NEUTRO, quindi non ha carica da trasportare -- e dargli una `U` vorrebbe dire dargli una carica che non ha.
+`hop(theta) = alpha I + beta S` sul vuoto (punto `F4`), SENZA `U`: `S` e' la permutazione PURA. ### E il <<senza `U`>> non e' una semplificazione: `phi` e' NEUTRO, quindi non ha carica da trasportare -- e dargli una `U` vorrebbe dire dargli una carica che non ha. ### ⭐ DAL 2026-10-15 E' UN FLUSSO PARZIALE come quello dello spinore, con lo STESSO `dtau_arco` (la media armonica di `B-3`) e lo STESSO `omega` (`B-4`): a `theta = pi` torna lo scambio di prima AL BIT. ### ⚠ E <<in posto con una fetta rovesciata>> NON SI PUO' PIU': ogni lato nuovo dipende da ENTRAMBI i lati vecchi, non solo dall'altro.
 
 ### ⛔ **QUESTO MODULO E- UN LEGAME, non uno stub:** `applica()` chiede
 l-operatore ### **al motore**, e se il motore non ce l-ha ### **ALZA** -- non
 torna un risultato finto.
 """
 
-IMPRONTA = '68c3e9df884091ae'
+IMPRONTA = '71448ef44d49f694'
 LEGGE = 'CAMM-SPOSTAMENTO-VUOTO'
 TIPO = 'pezzo_unitario'
 AMBITO = ('phi_h',)

@@ -15966,3 +15966,103 @@ media armonica `2dd/(d+d)` e' **esatta per `0.25`, `0.31`, `0.37`** e ### **SBAG
 PASSATO `M-B1`**, e il difetto sarebbe uscito dopo, altrove. ### ✅ **La forma
 `S/2 - D^2/(2S)` e' esatta su tutti e otto, simmetrica in `i<->j` AL BIT, e coincide con
 `2ab/(a+b)` entro `7.2` ulp** su `100000` coppie casuali.
+
+## 2026-10-15 — ⭐⭐ `L1`, IL CODICE: **IL TEMPO PROPRIO E' IN TUTTE LE SETTE LEGGI,
+`M-B1` PASSA AL BIT — E DUE CRITERI SU QUATTRO NON PASSANO, PER MOTIVI STRUTTURALI**
+
+> ### ⛔ **MI FERMO QUI, come il mandato dice:** *«se un criterio fallisce: NON aggiustare
+> parametri per farlo passare. Committa la misura, spiega e fermati.»*
+> ### **Non ho toccato un parametro.**
+
+### ✅ **CHE COSA PASSA**
+
+| | il criterio | il numero |
+|---|---|---|
+| ✅ | **`_collauda_tempo_proprio.py`: `0` violatori su `7`** | i quattro violatori *(Grover, spostamento, e i due del vuoto)* sono **spariti**: `1.480`, `1.006`, `1.236`, `1.232` dove prima c'era **`0.000e+00` esatto** |
+| ✅ | **e il presidio IMPEDISCE, e l'ho DIMOSTRATO** | rimesso per prova il Grover a tick fisso, il collaudo ha visto `('CAMM-GROVER',)` e **e' tornato `1`**; tolta la prova, **`0`**. ### **Non e' una tenda** *(`A9`)* |
+| ✅ | **`M-B1`: identita' AL BIT con `717bb60`** | `sha1` dei byte **`eff92bbd8622`** da entrambe le parti, `250` tick, **`psi` E `phi`**, `2` scene |
+| ✅ | **e DUE MEZZI FANNO L'INTERO** *(il braccio nuovo che prova che sono FLUSSI)* | `0.7`–`1.4` ulp su tutti e quattro i pezzi — e ### **prima era IMPOSSIBILE**: una frazione diversa da `1` **ALZAVA** |
+| ✅ | **e a `theta < pi` l'involuzione DEVE rompersi** *(controllo positivo)* | `4.660` su scala `3.762`: ### **senza questo braccio, quello di sopra passerebbe anche col difetto che `(B)` e' venuta a curare** |
+
+### ⛔ **CHE COSA NON PASSA, e perche' non e' un parametro**
+
+#### ⛔ **`M-B2`: i rapporti sono `2`, non `4`** — `[[DECISIONE-COMPOSIZIONE-SIMMETRICA]]`
+
+A tempo totale **fisso** *(`T = 8`)*, con `dtau = 1/2^k`: ### **`2.540`, `2.204`,
+`2.111`** — pendenza `1`, cioe' l'errore e' **`O(dtau)`** e non `O(dtau^2)`.
+### ⭐⭐ **E LA CAUSA L'HO MISURATA, non supposta:** con lo **stesso** `H_tot` e gli
+**stessi** `dtau`, ma con l'ordine **spezzato a meta' e rispecchiato**, i rapporti
+diventano ### **`5.342`, `3.691`, `4.291`** — pendenza `2`. ### ✅ **Quindi il `2` viene
+dalla COMPOSIZIONE NON SIMMETRICA:** l'`ordine` della tabella spezza a meta' **solo la
+saturazione**, e i cinque pezzi in mezzo stanno a frazione `1` in una sequenza **non
+palindroma** — che e' una Lie-Trotter, e una Lie-Trotter ha errore di **primo** ordine.
+
+### ⛔ **E NON LA CAMBIO IO, per due motivi che devi sapere:**
+### ① **un ordine palindromo NON da' lo stesso passo** *(i pezzi non commutano)*, quindi
+### ⚠⚠ **`M-B1` e `M-B2`, COSI' COME SONO SCRITTI, NON POSSONO VALERE INSIEME:** il primo
+fissa il passo AL BIT su quello di `717bb60`, il secondo chiede una composizione che quel
+passo **non e'**. ### **E' una tensione fra i criteri, e la decidi tu.**
+### ② l'`ordine` e' **un dato della tabella**, e la tabella e' la fonte unica.
+### ⭐ **E una cosa che `(B)` HA RESO POSSIBILE:** prima un ordine palindromo **non era
+nemmeno esprimibile.**
+
+#### ⛔ **LA `C`-SIMMETRIA NON RESTA VERDE** — `[[DECISIONE-LA-C-VUOLE-IL-TEMPO-ROVESCIATO]]`
+
+| | su `717bb60` | adesso |
+|---|---|---|
+| `C W(U) C^-1 - W(C U)` *(U(2))* | **`0.000e+00`** | **`5.343e+00`** |
+| `C W(U) C^-1 - W(C U)` *(SU(2))* | **`0.000e+00`** | **`5.125e+00`** |
+| la `C` di sola materia in SU(2) | `8.006e-16` **PASSA** | `3.989e+00` |
+
+### ⭐⭐ **E IL MECCANISMO L'HO DERIVATO E POI MISURATO.** La `C` contiene una
+**coniugazione complessa**, e con `P_u` **reale**:
+### **`G(theta)^* = P_u + e^{-i theta}(I - P_u) = G(-theta)`.**
+### ⛔ **Quindi `G(-theta) = G(theta)` SOLO SE la fase e' REALE, cioe' solo a `theta = 0`
+o `theta = pi`.**
+
+> ### ⭐⭐⭐ **LA LETTURA, ed e' il fatto che conta piu' di tutti: LA `C`-SIMMETRIA DEL
+> CAMMINO NON ERA UNA PROPRIETA' SUA — ERA UNA CONSEGUENZA DEL FATTO CHE I PEZZI ERANO
+> INVOLUZIONI.** Stavano **tutti** all'angolo `pi`, dove la fase e' reale.
+> ### **Rendendoli flussi, `(B)` la toglie.**
+
+### ✅ **E LA MISURA CHE LO PROVA e' `_misura_c_flussi.py`, `16` su `16`**, con la `C`
+**completa** *(e `U -> sigma_y U^* sigma_y^-1` c'e': ### **e' la tua correzione del
+`2026-10-13`, e non la rifaccio sbagliata**)* e col segno di `C^2` portato nel confronto:
+### ① `C Op(theta) C^-1 = Op(-theta)` vale a **OGNI** `theta`, `0.0`–`2.4` ulp, tutti e
+quattro i pezzi; ### ② `C Op C^-1 = Op` vale a `theta = pi` con **`0.000e+00`** e **si
+rompe** a `0.25 pi` *(`2.303`–`3.387`)*.
+### 📌 **Cio' che sopravvive e' la `C` COMBINATA COL ROVESCIAMENTO DEL TEMPO PROPRIO —
+una `CT`.** ### ⛔ **E quale simmetria deve avere il modello e' fisica: la decidi tu.**
+
+### ⚠ **E DUE COSTI CHE RIPORTO SENZA ADDOLCIRLI**
+
+### ⛔ **`[[COSTO-MEMORIA-DEI-FLUSSI-PARZIALI]]`:** la scena passa da **`4.39x`** a
+**`5.56x`** lo stato *(buffer `2.167x` -> `3.333x`, `9` -> `18`)*, e la soglia dichiarata
+e' **`5x`**: ### **il collaudo della memoria FALLISCE di `-0.56x`.**
+### ✅ **Ho ridotto PRIMA di riportare, non dopo:** da `6.28x` a `5.56x`, togliendo quattro
+buffer — e ### **ogni riduzione e' una RISCRITTURA, non un'approssimazione:** `M-B1` resta
+identica al bit dopo tutte e quattro *(lo stesso `eff92bbd8622`)*.
+### ⛔ **E LA SOGLIA NON LA TOCCO:** alzarla da `5x` a `6x` sarebbe **aggiustare un
+parametro per far passare una misura.**
+
+### ⛔ **`[[DIFETTO-LAMBDA-NON-PIU-INVARIANTE-SOTTO-IL-VUOTO]]`:** due bracci di
+`_collauda_deriva.py` cambiano verdetto — `Lambda_k` invariante passa da **`4.441e-16`** a
+**`1.078e+00`**, e la sorgente per nodo da `O(1)` a un rapporto `2.090`.
+### ⭐ **E il motivo e' lo stesso di prima:** quell'invarianza era **una conseguenza del
+Grover all'angolo `pi`** su un grafo `2`-regolare, **non una legge**.
+### ⛔ **E NON LA CURO, per il TUO PERIMETRO:** `deriva.py` e i suoi collaudi sono di `L5`
+e si usano **in sola lettura**. ### **Lo riporto e mi fermo.**
+
+### 📌 **E UNA COSA CHE L'ASSERT DEL CONO HA TROVATO, e nessuno cercava**
+
+### ⛔ **`_collauda_checkpoint.py` costruiva `dtau` GAUSSIANO** *(`r.normal(size=nn)*0.1`
+nudo)*: ### **circa META' DEI NODI aveva un tempo proprio NEGATIVO**, cioe' **un orologio
+che va indietro** — da sempre, e ### **nulla lo controllava.** ### ✅ **L'ha trovato
+l'assert `0 < s <= 1`**, non una lettura *(e `A11` e' rispettato: l'assert **ALZA**, non
+taglia)*. Curato con `np.abs`, e ### **resta non uniforme**, che e' cio' che quel collaudo
+vuole.
+
+### 📌 **E LA LETTURA DI `dtau_rif` CHE AVEVO DICHIARATO PRIMA DEL CODICE E' QUELLA CHE HO
+IMPLEMENTATO:** `dtau_rif = 1` **unita'**, quindi ### **`omega` non compare nel codice** e
+resta solo `theta = pi dtau`. ### ✅ **Nessuna costante nuova, nessuna legge nuova:** `7`
+leggi prima e `7` dopo *(`9-ter`)* — cambia **la FORMA** di quattro, non il loro numero.

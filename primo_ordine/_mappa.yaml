@@ -90,9 +90,25 @@ moduli:
     responsabilita: le quattro funzioni del generatore della saturazione, e il LIMITE
     importa: []
 
+  - nome: _misura_mb2.py
+    responsabilita: l-errore di conservazione di H_tot contro dtau, a tempo totale fisso
+    importa: [_presidio, composizione, deriva, saturazione]
+
+  - nome: _misura_c_flussi.py
+    responsabilita: dove la C si rompe coi flussi parziali, e che cosa la riparerebbe
+    importa: [_presidio, deriva]
+
+  - nome: _misura_mb1.py
+    responsabilita: il raccordo al bit del passo nuovo contro il commit di riferimento
+    importa: [_presidio, deriva]
+
+  - nome: flussi_parziali.py
+    responsabilita: il tempo proprio locale, la fase esatta, e i due flussi parziali
+    importa: []
+
   - nome: motore.py
     responsabilita: il doppio contenitore, i pezzi unitari, il flusso, e la regola del tick
-    importa: [_presidio, incidenza, saturazione, stato]
+    importa: [_presidio, flussi_parziali, incidenza, saturazione, stato]
 
   - nome: _collauda_motore.py
     responsabilita: il collaudo del motore -- zero allocazioni, unitarieta-, regola del tick

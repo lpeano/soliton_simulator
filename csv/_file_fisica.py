@@ -115,6 +115,17 @@ FILE_FISICA = (
     # ### ### **oltre, SI DIVIDE, NON SI ALLUNGA.** ### ⛔ **E il limite
     # ### `Lambda -> 0` NON e- un pavimento: e- il valore che la funzione PRENDE.**
     'primo_ordine/saturazione.py',
+    # ### ⭐ **NATO il `2026-10-15` con la strada `(B)`**, e sta qui dal commit in
+    # ### cui nasce: ### **il tempo proprio locale, la fase esatta `e^{i pi s}`, e i
+    # ### due flussi parziali** del Grover e dello spostamento.
+    'primo_ordine/flussi_parziali.py',
+    # ### ⭐ **LE TRE MISURE DEI CRITERI DI USCITA**, nate il `2026-10-15`: il
+    # ### raccordo al bit, la scala dell-errore di `H_tot`, e ### **dove la `C` si
+    # ### rompe.** ### ⚠ **Due dei tre criteri NON passano**, e i file restano: ###
+    # ### **una misura che fallisce e- una misura, non uno scarto.**
+    'primo_ordine/_misura_mb1.py',
+    'primo_ordine/_misura_mb2.py',
+    'primo_ordine/_misura_c_flussi.py',
     'primo_ordine/motore.py',
     'primo_ordine/_collauda_motore.py',
     # ### IL CHECKPOINT *(sotto-pezzo `5c`)*: salva e riprende ### **stato, grafo,

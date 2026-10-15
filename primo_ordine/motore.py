@@ -56,6 +56,7 @@ _QUI = os.path.dirname(os.path.abspath(__file__))
 if _QUI not in sys.path:
     sys.path.insert(0, _QUI)
 
+import flussi_parziali as FP                                  # noqa: E402
 import incidenza as IN                                        # noqa: E402
 import saturazione as SAT                                     # noqa: E402
 
@@ -365,47 +366,31 @@ class Motore(object):
         il vettore uniforme: **una riflessione**. ### ✅ **E' la ragione per cui la norma
         si conserva senza normalizzare niente** — nessuna cura dove non c'e' un errore.
 
-        ### ⛔ **E NON PRENDE LA FRAZIONE: e' un'INVOLUZIONE, non un flusso.** `G` a
-        meta' passo **non e' `G` meta'**: la radice di una riflessione **non e' una
-        riflessione**. ### Quindi una frazione diversa da `1` **ALZA** invece di fare
-        una cosa plausibile e sbagliata.
+        ### ⭐⭐ **E DAL `2026-10-15` E' UN FLUSSO PARZIALE** *(strada `(B)`, decisioni
+        `B-3` e `B-4` di Luca)*: ### **`G(theta) = P_u + e^{i theta}(I - P_u)`** con
+        **`theta = pi · dtau_nodo/dtau_rif`**.
+        ### ⚠ **PRIMA QUESTA FUNZIONE RIFIUTAVA una frazione diversa da `1`**, col motivo
+        *«la radice di una riflessione non e' una riflessione»*: ### **quel motivo era
+        giusto e NON E' PIU' VERO** -- un'involuzione e' un flusso all'angolo `pi`, e la
+        sua radice e' il flusso a `pi/2`, che esiste ed e' unitaria.
+        ### ✅ **E a `theta = pi` torna ESATTAMENTE il `(2/d) Somma - I` di prima, AL
+        BIT** *(e' cio' che `M-B1` misura)*.
         """
-        assert frazione == 1, (
-            "il Grover e' un'INVOLUZIONE e non un flusso: una frazione %r non ha"
-            " significato, perche' la radice di una riflessione non e' una riflessione"
-            % (frazione,))
-        psi = st["psi_h"]
-        n, nodo = self.inc.n, self.inc.nodo
-        S = self._b("S_psi", (n, 2), psi.dtype)
-        self._somma_per_nodo(psi, S)
-        presa = self._b("presa_psi", psi.shape, psi.dtype)
-        peso = self._b("peso", (self.inc.n, 1), float)
-        np.divide(2.0, self.inc.grado.reshape(-1, 1), out=peso)
-        np.take(S, nodo, axis=0, out=presa)
-        np.multiply(presa, np.take(peso, nodo, axis=0,
-                                   out=self._b("peso_h", (psi.shape[0], 1), float)),
-                    out=presa)
-        np.subtract(presa, psi, out=psi)
+        FP.grover(self, st["psi_h"], frazione)
         self.applicazioni["grover"] += 1
         return st
 
     def _grover_scalare(self, st, parametri, frazione):
-        """### La **stessa** moneta di Grover, sullo scalare del vuoto."""
-        assert frazione == 1, (
-            "il Grover scalare e' un'INVOLUZIONE come quello dello spinore: una"
-            " frazione %r non ha significato" % (frazione,))
+        """### La **stessa** moneta di Grover, sullo scalare del vuoto.
+
+        ### ⭐ **E <<la stessa>> e' diventato LETTERALE:** dal `2026-10-15` chiama
+        ### **la stessa funzione** dello spinore, su una **VISTA** `(2m, 1)` di `phi` --
+        perche' la forma `G(theta) = P_u + e^{i theta}(I - P_u)` ### **non dipende da
+        quante componenti ha il campo.** ### ✅ **E il mandato lo chiede: il tempo proprio
+        vale per `psi` E per `phi`.**
+        """
         phi = st["phi_h"]
-        n, nodo = self.inc.n, self.inc.nodo
-        S = self._b("S_phi", (n, 1), phi.dtype)
-        self._somma_per_nodo(phi.reshape(-1, 1), S)
-        presa = self._b("presa_phi", (phi.shape[0], 1), phi.dtype)
-        np.take(S, nodo, axis=0, out=presa)
-        pesoh = self._b("peso_h", (phi.shape[0], 1), float)
-        np.take(np.divide(2.0, self.inc.grado.reshape(-1, 1),
-                          out=self._b("peso", (n, 1), float)),
-                nodo, axis=0, out=pesoh)
-        np.multiply(presa, pesoh, out=presa)
-        np.subtract(presa.reshape(-1), phi, out=phi)
+        FP.grover(self, phi.reshape(-1, 1), frazione)
         self.applicazioni["grover_scalare"] += 1
         return st
 
@@ -423,7 +408,7 @@ class Motore(object):
         psi = st["psi_h"]
         nodo, nn = self.inc.nodo, self.geo.n
         ang = self._b("ang", (psi.shape[0],), float)
-        np.take(self.dtau, nodo, out=ang)
+        np.take(FP.dtau_nodo(self), nodo, out=ang)
         np.multiply(ang, float(eps) * float(frazione), out=ang)
         self._ruota_attorno_a_n(psi, ang)
         self.applicazioni["moneta_spin"] += 1
@@ -472,26 +457,18 @@ class Motore(object):
         spostamento UNITARIO.** ### Qui si tiene **una `U` per arco** e il verso
         contrario usa **la sua coniugata trasposta**: ### ✅ **cosi' la relazione non e'
         una disciplina, e' la rappresentazione.**
+
+        ### ⭐⭐ **E DAL `2026-10-15` E' IL FLUSSO PARZIALE `alpha I + beta S_U`**
+        *(strada `(B)`)*, con `alpha = (1 + e^{i theta})/2`, `beta = (1 - e^{i theta})/2`
+        e ### **`theta = pi · dtau_arco/dtau_rif`**, dove `dtau_arco` e' ### **la MEDIA
+        ARMONICA** dei due nodi *(`B-3`)*.
+        ### ⚠ **E <<non e' un flusso>> era VERO e non lo e' piu':** `S_U` e' hermitiana E
+        unitaria, quindi `exp(i pi P-) = S_U` con `P- = (I - S_U)/2` -- ### **lo
+        spostamento E' un flusso, preso all'angolo `pi`.**
+        ### ✅ **A `theta = pi`: `alpha = 0` e `beta = 1` ESATTI**, e resta la permutazione
+        con trasporto di prima, **AL BIT**.
         """
-        assert frazione == 1, (
-            "lo spostamento e' una PERMUTAZIONE con trasporto, non un flusso: una"
-            " frazione %r non ha significato" % (frazione,))
-        psi = st["psi_h"]
-        m = self.inc.m
-        v = psi.reshape(m, 2, 2)
-        U = self.geo.U
-        # ### ✅ **RIDUZIONE `(b)`: lo spostamento e- uno SCAMBIO, quindi basta
-        # ### salvare UN LATO.** ### ⭐ **`-0.250x`**, ed e- la riduzione piu-
-        # ### grossa delle tre.
-        # ### ⛔ **E L-ORDINE E- OBBLIGATO, non comodo:** si salva il lato `0`,
-        # ### poi si scrive il lato `0` ### **leggendo il lato 1** *(che e- ancora
-        # ### intatto)*, poi si scrive il lato `1` ### **dalla copia.** ### **Qualunque
-        # ### altro ordine distrugge un dato che serve ancora**, e darebbe un risultato
-        # ### sbagliato senza sembrarlo.
-        t0 = self._b("sposta_lato0", (m, 2), psi.dtype)
-        t0[...] = v[:, 0, :]
-        np.einsum("aji,aj->ai", np.conj(U), v[:, 1, :], out=v[:, 0, :])
-        np.einsum("aij,aj->ai", U, t0, out=v[:, 1, :])
+        FP.hop_psi(self, st["psi_h"], frazione)
         self.applicazioni["spostamento_trasporto"] += 1
         return st
 
@@ -557,10 +534,11 @@ class Motore(object):
         f = float(frazione)
         # ### l-angolo e la fase ### **per ESTREMITA-**, prese dal loro nodo
         ang = self._b("sat_ang", (st["psi_h"].shape[0],), float)
-        np.take(al * self.dtau * f, nodo, out=ang)
+        dtau = FP.dtau_nodo(self)
+        np.take(al * dtau * f, nodo, out=ang)
         self._ruota_attorno_a_n(st["psi_h"], ang)
         fas = self._b("sat_fas", (st["phi_h"].shape[0],), float)
-        np.take(be * self.dtau * f, nodo, out=fas)
+        np.take(be * dtau * f, nodo, out=fas)
         # ### ⛔ **e la fase su `phi` si applica IN POSTO:** `exp(-i fas)` si
         # ### costruisce in un buffer complesso, e ### **non si alloca.**
         ef = self._b("sat_ef", fas.shape, st["phi_h"].dtype)
@@ -573,22 +551,14 @@ class Motore(object):
     def _spostamento_scalare(self, st, parametri, frazione):
         """### Lo scambio delle due estremita', ### **senza trasporto**: e' uno scalare.
 
-        ### ⭐ **E qui <<in posto>> si fa DAVVERO, con una fetta rovesciata:** uno
-        scalare non ha nulla da trasportare, quindi lo scambio e' **la permutazione
-        `h -> h ^ 1`**, che su `(m, 2)` e' `[:, ::-1]`.
+        ### ⭐⭐ **E DAL `2026-10-15` E' IL FLUSSO PARZIALE `alpha I + beta S`**, con
+        `S` ### **la permutazione PURA** *(il vuoto e' NEUTRO: non ha carica da
+        trasportare, e dargli una `U` vorrebbe dire dargli una carica che non ha)*.
+        ### ✅ **A `theta = pi` torna lo scambio di prima, AL BIT.**
+        ### ⚠ **E <<in posto DAVVERO>> non si puo' piu':** ogni lato nuovo dipende da
+        ### **ENTRAMBI** i lati vecchi, quindi la fetta rovesciata non basta.
         """
-        assert frazione == 1, (
-            "lo spostamento scalare e' una PERMUTAZIONE, non un flusso: una frazione %r"
-            " non ha significato" % (frazione,))
-        phi = st["phi_h"]
-        v = phi.reshape(self.inc.m, 2)
-        # ### ✅ **RIDUZIONE `(c)`: lo stesso scambio, e lo stesso lato solo.**
-        # ### ### **`-0.062x`**. ### Uno scalare non ha nulla da trasportare, quindi lo
-        # ### scambio e- ### **la permutazione pura.**
-        t0 = self._b("sposta_s_lato0", (self.inc.m,), phi.dtype)
-        t0[...] = v[:, 0]
-        v[:, 0] = v[:, 1]
-        v[:, 1] = t0
+        FP.hop_phi(self, st["phi_h"], frazione)
         self.applicazioni["spostamento_scalare"] += 1
         return st
 

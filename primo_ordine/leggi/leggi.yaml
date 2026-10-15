@@ -312,8 +312,16 @@ leggi:
     simmetrie: [U1-FASE-GLOBALE]
     assiomi: [A16]
     scheda: >-
-      `(2/d) Somma - I` nel NODO (punto `F1`): mescola le estremita' di uno stesso nodo,
-      ed e' un'INVOLUZIONE (`G^2 = I`). ### NON HA PARAMETRI, e non e' una semplificazione:
+      `G(theta) = P_u + e^{i theta} (I - P_u)` nel NODO (punto `F1`), con
+      `theta = pi dtau_nodo/dtau_rif`: mescola le estremita' di uno stesso nodo.
+      ### ⭐ DAL 2026-10-15 E' UN FLUSSO PARZIALE (strada `(B)`, decisioni `B-3` e `B-4`
+      di Luca): `G = 2 P_u - I = exp(i pi (I - P_u))`, quindi il Grover di prima E' questo
+      flusso ALL'ANGOLO `pi` -- e a `theta = pi` torna AL BIT (`M-B1`, misurato su 250
+      tick contro `717bb60`).
+      ### ⚠ E NON E' PIU' UN'INVOLUZIONE PER OGNI `theta`: lo e' SOLO a `theta = pi`.
+      La frase <<la radice di una riflessione non e' una riflessione>>, che prima vietava
+      una frazione, era VERA e NON LO E' PIU': la radice e' il flusso a `pi/2`.
+      ### NON HA PARAMETRI, e non e' una semplificazione:
       il `2/d` viene dal GRADO del nodo, cioe' da una proprieta' del grafo -- `A1` e'
       rispettato perche' non c'e' nessun numero da tarare.
       ### AZIONE `nodo`: e' il SOLO pezzo che mescola estremita' diverse dello stesso
@@ -331,8 +339,20 @@ leggi:
     simmetrie: [U1-FASE-GLOBALE]
     assiomi: [A13, A16]
     scheda: >-
-      `psi'[partner(h)] = U[h] psi[h]` (punti `F1` e `F2`): E' IL CONO, un arco per tick,
-      cioe' LA VELOCITA' DELLA LUCE del sistema. ### E' una PERMUTAZIONE composta col
+      `hop(theta) = alpha I + beta S_U` sull'ARCO (punti `F1` e `F2`), con
+      `alpha = (1 + e^{i theta})/2`, `beta = (1 - e^{i theta})/2`,
+      `S_U = [[0, U^dagger],[U, 0]]` e `theta = pi dtau_arco/dtau_rif`.
+      ### ⭐ DAL 2026-10-15 E' UN FLUSSO PARZIALE (strada `(B)`): `S_U` e' hermitiana E
+      unitaria, quindi con `P- = (I - S_U)/2` si ha `exp(i pi P-) = S_U` -- lo spostamento
+      di prima E' questo flusso ALL'ANGOLO `pi`, e a `theta = pi` torna AL BIT (`M-B1`).
+      ### ⭐ E `dtau_arco` E' LA MEDIA ARMONICA dei due nodi (`B-3`),
+      `2 dtau_i dtau_j/(dtau_i + dtau_j)`, perche' e' la somma dei tempi di
+      attraversamento delle DUE META' dell'arco, ciascuna alla velocita' del proprio
+      nodo. L'ipotesi <<due meta' uguali>> e' DICHIARATA, non dimostrata.
+      ### ⚠ E IL CONO RESTA: `theta <= pi` PER COSTRUZIONE, perche' `dtau <= dtau_rif`
+      (`B-5`: il tick e' l'orologio piu' veloce possibile). NESSUN TETTO E NESSUN CLIP
+      (`A11`): un `dtau` oltre il cono ALZA.
+      ### E' una PERMUTAZIONE composta col
       trasporto `U(2)`, e non un prodotto matrice-vettore: la parte `U(1)` di `U` e'
       l'elettromagnetismo, la parte `SU(2)` la geometria.
       ### E `A13` c'e' perche' la SCALA MINIMA E' UN ARCO: sotto l'arco non esiste
@@ -350,9 +370,14 @@ leggi:
     simmetrie: [U1-FASE-GLOBALE]
     assiomi: [A16]
     scheda: >-
-      Il Grover sul vuoto `phi` (punto `F4`), che e' uno SCALARE NEUTRO. ### Mescola le
+      `G(theta)` sul vuoto `phi` (punto `F4`), che e' uno SCALARE NEUTRO. ### Mescola le
       estremita' del nodo come quello dello spinore, e la differenza sta nel pezzo dopo:
       il vuoto si sposta SENZA `U`.
+      ### ⭐ DAL 2026-10-15 IL TEMPO PROPRIO VALE ANCHE QUI, e il mandato di Luca lo
+      chiede ESPLICITAMENTE: i flussi parziali sono per `psi` E per `phi`. E <<come quello
+      dello spinore>> e' diventato LETTERALE -- e' LA STESSA FUNZIONE, su una vista a UNA
+      componente, perche' `P_u + e^{i theta}(I - P_u)` non dipende da quante componenti ha
+      il campo.
   - id: CAMM-SPOSTAMENTO-VUOTO
     tipo: pezzo_unitario
     prova: false
@@ -363,9 +388,15 @@ leggi:
     simmetrie: [U1-FASE-GLOBALE]
     assiomi: [A13]
     scheda: >-
-      Lo spostamento del vuoto (punto `F4`), SENZA `U`. ### E il <<senza `U`>> non e' una
+      `hop(theta) = alpha I + beta S` sul vuoto (punto `F4`), SENZA `U`: `S` e' la
+      permutazione PURA. ### E il <<senza `U`>> non e' una
       semplificazione: `phi` e' NEUTRO, quindi non ha carica da trasportare -- e dargli
       una `U` vorrebbe dire dargli una carica che non ha.
+      ### ⭐ DAL 2026-10-15 E' UN FLUSSO PARZIALE come quello dello spinore, con lo STESSO
+      `dtau_arco` (la media armonica di `B-3`) e lo STESSO `omega` (`B-4`): a `theta = pi`
+      torna lo scambio di prima AL BIT.
+      ### ⚠ E <<in posto con una fetta rovesciata>> NON SI PUO' PIU': ogni lato nuovo
+      dipende da ENTRAMBI i lati vecchi, non solo dall'altro.
 
   # ---------------------------------------------------------------- F5: la saturazione
   - id: CAMM-SATURAZIONE

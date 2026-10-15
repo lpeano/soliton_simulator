@@ -29,13 +29,21 @@ import stato as ST                                            # noqa: E402
 OK = [0, 0]
 
 
+# ### ⛔ **IL `dtau` DEL BANCO, DICHIARATO E NON SPARSO.** ### ⚠ **E `0.37` NON e-
+# ### un numero di comodo: e- ### **un `dtau` MINORE DI `1`**, cioe- `theta < pi`,
+# ### che e- il caso in cui ### **l-involuzione NON vale** -- ed e- il caso NORMALE.
+# ### ✅ **Il valore e- quello che questo banco aveva da sempre**, cosi- i bracci che
+# ### non parlano del tempo proprio ### **misurano la stessa cosa di prima.**
+DTAU_BANCO = 0.37
+
+
 def esito(che, passa, nota=""):
     OK[1] += 1
     OK[0] += 1 if passa else 0
     print("  %-64s %s   %s" % (che[:64], "PASSA" if passa else "### FALLISCE", nota))
 
 
-def _banco(nn, sommatoria, seme):
+def _banco(nn, sommatoria, seme, dtau):
     """### Un anello con la geometria **banale** *(`n = z`, `U = I`)* e uno stato casuale.
 
     ### ⚠ **La geometria banale NON e' una semplificazione della fisica:** e' **il caso
@@ -56,7 +64,14 @@ def _banco(nn, sommatoria, seme):
     st["psi_h"][...] = (r.normal(size=st["psi_h"].shape)
                         + 1j * r.normal(size=st["psi_h"].shape))
     st["phi_h"][...] = r.normal(size=st["phi_h"].shape)
-    mot = MO.Motore(inc, MO.Geometria(nv, U), st, np.full(nn, 0.37), sommatoria)
+    # ### ⚠ **`dtau` ARRIVA DA FUORI dal 2026-10-15**, e non e' un vezzo: con i
+    # ### flussi parziali ### **l-angolo dei pezzi d-arco e di nodo E- `pi dtau`**,
+    # ### quindi un collaudo che vuole ### **l-involuzione** deve poter chiedere
+    # ### ### **`dtau = 1`** *(cioe- `theta = pi`)*, e uno che vuole il contrario
+    # ### ### **`dtau < 1`.** ### ⛔ **Senza questo, <<`G^2 = I`>> sarebbe FALSO** --
+    # ### e non per un difetto: ### **perche- a `theta < pi` il Grover NON E- una
+    # ### riflessione.**
+    mot = MO.Motore(inc, MO.Geometria(nv, U), st, np.full(nn, dtau), sommatoria)
     return inc, st, mot
 
 
@@ -71,7 +86,7 @@ def main(argv):
     print("=" * 100)
 
     # =============================================== (1) ZERO ALLOCAZIONI DOPO IL PRIMO
-    inc, st, mot = _banco(64, "numpy", 11)
+    inc, st, mot = _banco(64, "numpy", 11, DTAU_BANCO)
     esito("### il collaudo ha MATERIA: lo stato NON e' nullo",
           _norma(st["psi_h"]) > 1.0 and _norma(st["phi_h"]) > 1.0,
           "### |psi|^2=%.3f |phi|^2=%.3f: su zero ogni operatore sarebbe l'identita'"
@@ -149,7 +164,7 @@ def main(argv):
 
     # ================================================ (3) L'UNITARIETA', e l'involuzione
     print()
-    inc, st, mot = _banco(32, "numpy", 7)
+    inc, st, mot = _banco(32, "numpy", 7, DTAU_BANCO)
     n0 = _norma(st["psi_h"])
     eps_m = float(np.finfo(float).eps)
     for nome, par in (("grover", {}), ("moneta_spin", {"eps": 0.5}),
@@ -166,31 +181,74 @@ def main(argv):
     # ### e- un modo di dire:** `(2/d)S - psi` con `d` intero e `S` somma di `d` termini
     # ### ### **non e- esatto in virgola mobile**, quindi la lettura giusta e- ### **entro
     # ### pochi ulp**, e il numero si STAMPA.
+    # ### ⭐ **E IL CONFRONTO SI FA A `dtau = 1`, cioe- A `theta = pi`**, su un banco
+    # ### suo: ### **li- il Grover E- la riflessione di sempre.**
+    _i1, s1, m1 = _banco(32, "numpy", 7, 1.0)
+    prima = s1["psi_h"].copy()
+    m1.apri_tick()
+    m1.operatori["grover"](s1, {}, 1)
+    m1.operatori["grover"](s1, {}, 1)
+    m1.chiudi_tick()
+    scarto = float(np.max(np.abs(s1["psi_h"] - prima)))
+    scala = float(np.max(np.abs(prima)))
+    esito("### (3) a `theta = pi` il Grover e' un'INVOLUZIONE: `G^2 = I`",
+          scarto <= 64 * eps_m * scala,
+          "### scarto %.3e su scala %.3e, cioe' %.1f ulp"
+          % (scarto, scala, scarto / (eps_m * scala)))
+    # ### ⛔ **E IL CONTROLLO POSITIVO, che PUO- FALLIRE: a `theta < pi` il Grover NON
+    # ### DEVE essere un-involuzione.** ### ⚠ **Senza questo braccio, quello di sopra
+    # ### passerebbe anche se l-operatore IGNORASSE `dtau`** -- cioe- passerebbe anche
+    # ### col difetto che la strada `(B)` e- venuta a curare.
     prima = st["psi_h"].copy()
     mot.apri_tick()
     mot.operatori["grover"](st, {}, 1)
     mot.operatori["grover"](st, {}, 1)
     mot.chiudi_tick()
-    scarto = float(np.max(np.abs(st["psi_h"] - prima)))
+    rotto = float(np.max(np.abs(st["psi_h"] - prima)))
     scala = float(np.max(np.abs(prima)))
-    esito("### (3) il Grover e' un'INVOLUZIONE: `G^2 = I` entro pochi ulp",
-          scarto <= 64 * eps_m * scala,
-          "### scarto %.3e su scala %.3e, cioe' %.1f ulp"
-          % (scarto, scala, scarto / (eps_m * scala)))
-    # ### ⛔ **E UNA FRAZIONE DIVERSA DA `1` DEVE ALZARE:** la radice di una riflessione
-    # ### ### **non e- una riflessione**, quindi mezzo Grover ### **non significa niente.**
+    esito("### (3-bis) DEVE ROMPERSI: a `theta < pi` NON e' un'involuzione",
+          rotto > 64 * eps_m * scala,
+          "### scarto %.3e su scala %.3e con dtau = %.2f" % (rotto, scala, DTAU_BANCO))
+    # ### ⭐⭐ **E IL BRACCIO CHE PROVA CHE SONO FLUSSI: DUE MEZZI FANNO L-INTERO.**
+    # ### ⛔ **Prima questo era IMPOSSIBILE e il collaudo lo pretendeva al contrario:**
+    # ### una frazione diversa da `1` ### **ALZAVA**, col motivo *<<la radice di una
+    # ### riflessione non e- una riflessione>>* -- vero allora, ### **falso adesso.**
+    # ### ✅ **E non e- una formalita-: `G(t/2) G(t/2) = G(t)` vale PERCHE- `P_u` e- un
+    # ### PROIETTORE**, e `hop(t/2) hop(t/2) = hop(t)` perche- `P-` lo e-. ### **Se un
+    # ### operatore non fosse un vero flusso, questo braccio lo direbbe.**
     for nome in ("grover", "spostamento_trasporto", "grover_scalare",
                  "spostamento_scalare"):
-        mot.apri_tick()
-        try:
-            mot.operatori[nome](st, {}, 0.5)
-            passa, nota = False, "### NON ha alzato: mezzo pezzo unitario passerebbe"
-        except AssertionError as e:
-            passa = "non ha significato" in str(e)
-            nota = ("### e per la chiave giusta" if passa
-                    else "### altra ragione: %r" % str(e)[:50])
-        mot.chiudi_tick()
-        esito("### DEVE fallire: `%s` a frazione 0.5" % nome, passa, nota)
+        _ia, sa, ma = _banco(32, "numpy", 7, DTAU_BANCO)
+        _ib, sb, mb = _banco(32, "numpy", 7, DTAU_BANCO)
+        ma.apri_tick()
+        ma.operatori[nome](sa, {}, 1)
+        ma.chiudi_tick()
+        mb.apri_tick()
+        mb.operatori[nome](sb, {}, 0.5)
+        mb.operatori[nome](sb, {}, 0.5)
+        mb.chiudi_tick()
+        d = max(float(np.max(np.abs(sa["psi_h"] - sb["psi_h"]))),
+                float(np.max(np.abs(sa["phi_h"] - sb["phi_h"]))))
+        sc = max(float(np.max(np.abs(sa["psi_h"]))), float(np.max(np.abs(sa["phi_h"]))))
+        esito("### (3-ter) `%s`: due mezzi fanno l'intero" % nome,
+              d <= 64 * eps_m * sc,
+              "### scarto %.3e su scala %.3e, cioe' %.1f ulp" % (d, sc, d / (eps_m * sc)))
+    # ### ⛔ **E CIO- CHE DEVE ANCORA ALZARE: una frazione FUORI da `(0, 1]`.** ### **Non
+    # ### e- il vecchio divieto addolcito:** `<= 0` ### **non e- un passo**, e `> 1`
+    # ### vorrebbe dire ### **integrare PIU- del passo.**
+    for nome in ("grover", "spostamento_trasporto", "grover_scalare",
+                 "spostamento_scalare"):
+        for f in (0.0, -0.5, 1.5):
+            mot.apri_tick()
+            try:
+                mot.operatori[nome](st, {}, f)
+                passa, nota = False, "### NON ha alzato: una frazione fuori passerebbe"
+            except AssertionError as e:
+                passa = "una frazione di passo sta in" in str(e)
+                nota = ("### e per la chiave giusta" if passa
+                        else "### altra ragione: %r" % str(e)[:50])
+            mot.chiudi_tick()
+            esito("### DEVE fallire: `%s` a frazione %r" % (nome, f), passa, nota)
     # ### ⚠ **E la moneta di spin INVECE la prende**, perche- ### **e- un flusso in
     # ### `eps dtau`**: `exp(-i a) exp(-i b) = exp(-i(a+b))`. ### **Senza questo braccio,
     # ### il braccio di sopra proverebbe solo che tutto alza.**
@@ -200,7 +258,7 @@ def main(argv):
     esito("### e la moneta di spin INVECE accetta 0.5: e' un FLUSSO in `eps dtau`",
           True, "### altrimenti il braccio di sopra proverebbe solo che tutto alza")
     # ### ⭐ **E LE DUE META- FANNO L-INTERO: `exp(-ia/2) exp(-ia/2) = exp(-ia)`.**
-    _i2, s2, m2 = _banco(16, "numpy", 3)
+    _i2, s2, m2 = _banco(16, "numpy", 3, DTAU_BANCO)
     pr = s2["psi_h"].copy()
     m2.apri_tick()
     m2.operatori["moneta_spin"](s2, {"eps": 0.5}, 1)
@@ -218,8 +276,8 @@ def main(argv):
 
     # ====================================== (4) LE DUE SOMMATORIE DANNO LO STESSO NUMERO
     print()
-    _a, sa, ma = _banco(24, "numpy", 5)
-    _b, sb, mb = _banco(24, "esatta", 5)
+    _a, sa, ma = _banco(24, "numpy", 5, DTAU_BANCO)
+    _b, sb, mb = _banco(24, "esatta", 5, DTAU_BANCO)
     ma.apri_tick(); ma.operatori["grover"](sa, {}, 1); ma.chiudi_tick()
     mb.apri_tick(); mb.operatori["grover"](sb, {}, 1); mb.chiudi_tick()
     d = float(np.max(np.abs(sa["psi_h"] - sb["psi_h"])))
@@ -231,7 +289,7 @@ def main(argv):
 
     # ========================================== (5) LO STATO SEGUE LA PERMUTAZIONE
     print()
-    inc, st, mot = _banco(10, "numpy", 2)
+    inc, st, mot = _banco(10, "numpy", 2, DTAU_BANCO)
     prima = st["psi_h"].copy()
     tieni = np.ones(inc.m, dtype=bool)
     tieni[0] = False
@@ -260,7 +318,7 @@ def main(argv):
     # ### braccio POTEVA fallire fino a poco fa**: il motore nasceva le estremita- nuove a
     # ### ### **zero**, e lo zero era ### **una scelta di fisica presa da me senza
     # ### accorgermene** -- la verifica esterna l-ha trovata.
-    _i6, s6, m6 = _banco(10, "numpy", 4)
+    _i6, s6, m6 = _banco(10, "numpy", 4, DTAU_BANCO)
     t6 = np.ones(_i6.m, dtype=bool)
     t6[0] = False
     m6.apri_tick()
@@ -276,7 +334,7 @@ def main(argv):
           passa, nota)
     # ### ⚠ **E il VERSO OPPOSTO: con i valori, passa** -- senza questo braccio
     # ### il primo proverebbe solo che `cresci()` alza SEMPRE quando nascono archi.
-    _i7, s7, m7 = _banco(10, "numpy", 5)
+    _i7, s7, m7 = _banco(10, "numpy", 5, DTAU_BANCO)
     t7 = np.ones(_i7.m, dtype=bool)
     t7[0] = False
     m7.apri_tick()
@@ -289,7 +347,7 @@ def main(argv):
                           " sempre")
     # ### ⛔ **E UNA TAGLIA SBAGLIATA dei valori iniziali DEVE fallire:** un
     # ### valore iniziale della taglia sbagliata ### **si propagherebbe in silenzio.**
-    _i8, s8, m8 = _banco(10, "numpy", 6)
+    _i8, s8, m8 = _banco(10, "numpy", 6, DTAU_BANCO)
     t8 = np.ones(_i8.m, dtype=bool)
     t8[0] = False
     m8.apri_tick()
@@ -305,7 +363,7 @@ def main(argv):
     esito("### DEVE fallire: valori iniziali della TAGLIA SBAGLIATA", passa, nota)
     # ### ⛔ **E UNA VARIABILE MANCANTE DEVE fallire:** ogni variabile che vive
     # ### sulle estremita- deve dire ### **con che valore nasce.**
-    _i9, s9, m9 = _banco(10, "numpy", 7)
+    _i9, s9, m9 = _banco(10, "numpy", 7, DTAU_BANCO)
     t9 = np.ones(_i9.m, dtype=bool)
     t9[0] = False
     m9.apri_tick()
@@ -359,7 +417,7 @@ def main(argv):
         esito("### DEVE fallire: %s" % che, passa, nota)
     # ### ⛔ **E LA MONETA SENZA `eps` DEVE ALZARE:** un `eps` scelto dal motore
     # ### ### **non ha origine**, e l-origine di un numero e- il punto della tabella.
-    _i3, s3, m3 = _banco(8, "numpy", 1)
+    _i3, s3, m3 = _banco(8, "numpy", 1, DTAU_BANCO)
     m3.apri_tick()
     try:
         m3.operatori["moneta_spin"](s3, {}, 1)

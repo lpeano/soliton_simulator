@@ -7,11 +7,11 @@
 | **tipo** | `pezzo_unitario` |
 | **operatore** | `grover_scalare`, azione `nodo` |
 | **ambito** | `phi_h` |
-| **impronta della riga** | `56f7d8b51994b56b` |
+| **impronta della riga** | `b736274a2199adbd` |
 | **assiomi soddisfatti** | `A16` |
 
 
 ## LA SCHEDA, dalla tabella
 
-Il Grover sul vuoto `phi` (punto `F4`), che e' uno SCALARE NEUTRO. ### Mescola le estremita' del nodo come quello dello spinore, e la differenza sta nel pezzo dopo: il vuoto si sposta SENZA `U`.
+`G(theta)` sul vuoto `phi` (punto `F4`), che e' uno SCALARE NEUTRO. ### Mescola le estremita' del nodo come quello dello spinore, e la differenza sta nel pezzo dopo: il vuoto si sposta SENZA `U`. ### ⭐ DAL 2026-10-15 IL TEMPO PROPRIO VALE ANCHE QUI, e il mandato di Luca lo chiede ESPLICITAMENTE: i flussi parziali sono per `psi` E per `phi`. E <<come quello dello spinore>> e' diventato LETTERALE -- e' LA STESSA FUNZIONE, su una vista a UNA componente, perche' `P_u + e^{i theta}(I - P_u)` non dipende da quante componenti ha il campo.
 

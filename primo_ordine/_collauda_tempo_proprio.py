@@ -51,8 +51,15 @@ OK = [0, 0]
 # ### ⛔ **L-ELENCO ATTESO DEI VIOLATORI, SCRITTO A MANO E NON CALCOLATO.** ### **Se fosse
 # ### calcolato, il collaudo direbbe sempre <<tutto come previsto>>** -- e non vedrebbe ne-
 # ### un violatore NUOVO ne- uno che sparisce senza che la strada `(B)` sia stata fatta.
-VIOLATORI_ATTESI = ("CAMM-GROVER", "CAMM-SPOSTAMENTO",
-                    "CAMM-GROVER-VUOTO", "CAMM-SPOSTAMENTO-VUOTO")
+# ### ⭐⭐ **SVUOTATO IL `2026-10-15`, A STRADA `(B)` FATTA** *(mandato di Luca)*:
+# ### ### **i violatori attesi sono ZERO**, e da adesso ### **un violatore FA FALLIRE IL
+# ### `pre-commit`** -- perche- il braccio `(1)` confronta VISTI con ATTESI, e `main`
+# ### torna `1` quando un braccio fallisce.
+# ### ⛔ **E LA PROVA CHE FALLISCE DAVVERO E- STATA FATTA, non supposta** *(`A9`)*:
+# ### rimettendo per prova il Grover a tick fisso, il collaudo ha detto
+# ### ### **<<1 violatore su 7>>** ed e- tornato `1`, cioe- ### **il `pre-commit` si e-
+# ### fermato per QUEL pezzo.** ### **Poi la prova e- stata togliere.**
+VIOLATORI_ATTESI = ()
 CAMBIA_MIN = 1e-9
 
 
@@ -110,15 +117,21 @@ def main(argv):
           len(buoni) == 2,
           "senza questo il braccio (1) passerebbe anche con TUTTO fermo")
     # ### ⚠ **E il conteggio, che e- il numero che cito nei referti**
-    esito("### (3) e sono 4 su 7, come misurato in 7141812",
-          len(visti) == 4 and len(CM.ORDINE) == 7,
+    # ### ⚠ **IL CONTEGGIO SI LEGGE DALL-ELENCO, non da un letterale:** prima qui
+    # ### c-era ### **`4`** scritto a mano, e svuotando l-elenco ### **sarebbe diventato
+    # ### una SECONDA cosa da cambiare a mano.** ### ✅ **Cosi- il numero SEGUE la
+    # ### decisione**, e l-unica cosa scritta a mano resta ### **l-elenco.**
+    esito("### (3) e sono %d su 7, cioe' quanti l'elenco ne attende"
+          % len(VIOLATORI_ATTESI),
+          len(visti) == len(VIOLATORI_ATTESI) and len(CM.ORDINE) == 7,
           "%d violatori su %d pezzi" % (len(visti), len(CM.ORDINE)))
     print("=" * 96)
     print("  %d su %d" % (OK[0], OK[1]))
-    print("### ⚠ E IL CENSIMENTO DICE CHE 4 PEZZI VIOLANO `TEMPO-PROPRIO-LOCALE`:")
-    print("###   e' il DIFETTO che la strada (B) corregge, e questo file e' il suo")
-    print("###   CRITERIO DI ACCETTAZIONE: quando (B) sara' fatta, i violatori attesi")
-    print("###   dovranno diventare ZERO -- e allora questo elenco si svuota.")
+    print("### ✅ E IL CENSIMENTO DICE CHE ZERO PEZZI VIOLANO `TEMPO-PROPRIO-LOCALE`:")
+    print("###   la strada (B) e' stata fatta il 2026-10-15, e questo file da CRITERIO")
+    print("###   DI ACCETTAZIONE e' diventato UN PRESIDIO: un pezzo che tornasse a")
+    print("###   evolvere col tick FA FALLIRE il pre-commit, e la prova che fallisce")
+    print("###   davvero e' stata fatta rimettendo un pezzo a tick fisso.")
     print("=" * 96)
     return 0 if OK[0] == OK[1] else 1
 
