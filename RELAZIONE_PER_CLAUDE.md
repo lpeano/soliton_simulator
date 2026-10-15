@@ -16307,3 +16307,52 @@ verdi.**
 `C` ### **non era idempotente**, l'ho girato due volte e ### **ha concatenato due volte lo
 stesso testo** *(descrizione da `4353` a `3330` caratteri)*. ### **Corretto con una riga di
 storico che dice perche'.**
+
+## 2026-10-15 — ⛔⛔ **UN TERZO ERRORE MIO, E QUESTA VOLTA LA MISURA DICEVA IL CONTRARIO
+DEL VERO: `accoppia` ERA GOLOSO**
+
+> ### **Trovato dal guardiano, e non e' un'imprecisione: e' un'inversione di senso.**
+
+### ⛔ **Un accoppiamento goloso ACCOPPIA PER FORZA GLI ULTIMI RIMASTI**, anche
+lontanissimi: il numero che ne esce **non e' la distanza fra i due multinsiemi**, e' ### **il
+peggior residuo di una scelta miope.**
+
+| `dtau` | goloso *(mio)* | **ottimo** *(del guardiano)* | spaziatura media |
+|---|---|---|---|
+| `1` | `1.99` | **`0.082`** | `0.088` |
+| `0.5` | `2.00` | **`1.40`** | `0.088` |
+| `0.25` | `1.94` | **`2.00`** | `0.024` |
+
+### ⛔⛔ **E LA PRIMA RIGA E' QUELLA CHE CONTA: `0.082` CONTRO UNA SPAZIATURA DI `0.088`.**
+Cioe' a `dtau = 1` ### **lo spettro E' appaiato entro la spaziatura dei livelli** — e io
+avevo scritto *«distanza `~2`, cioe' il diametro del cerchio: NON appaiato»*.
+### **Il mio numero non era impreciso: diceva il contrario del vero.**
+
+### ⚠ **E la cosa che mi pesa di piu': il goloso l'ho scritto DOPO aver curato un altro
+difetto della stessa misura** *(il raggruppamento per angolo invece che per autovalore)*.
+### **Ho curato l'avvolgimento e ho lasciato in piedi un errore piu' grosso, nella stessa
+funzione, nello stesso giro.**
+
+### ⭐ **E LA LEZIONE VALE PIU' DEL NUMERO:** un accoppiamento fra multinsiemi ### **e' un
+problema di OTTIMIZZAZIONE**, e il goloso non lo risolve. ### **E senza la SPAZIATURA DEI
+LIVELLI accanto, una distanza fra spettri non si puo' leggere:** `0.082` e' *«appaiato»* o
+*«no»* ### **solo rispetto a qualcosa.**
+
+### ⭐⭐ **E IL PUNTO 2 DEL MANDATO MI DICE ANCHE PERCHE' LA MIA MISURA DELLA `C` TROVAVA
+`6.68e-01`: STAVO FACENDO IL CONFRONTO SBAGLIATO.** L'identita' vera, che si deriva in due
+righe, e'
+
+> ### **`Theta · W[n] · Theta^-1 = W[-n]^-1`**
+
+— la moneta con `n` va **nell'inversa della moneta con `-n`** *(perche'
+`Theta exp(-i a sigma.n) Theta^-1 = exp(-i a sigma.n)`, che letta su `-n` da' l'inversa
+di quella con `n`)*, gli altri pezzi vanno nel loro inverso, e **il palindromo rimette
+l'ordine**. ### ⚠ **Io confrontavo con `W[n]^-1`, cioe' col `-n` MANCANTE:**
+### **non era un difetto del modello, era il confronto sbagliato.**
+
+### 📌 **E UN CENSIMENTO LETTO DAL CODICE, che il punto 2 chiede e che serve al suo
+pezzo `(c)`:** gli `n` sono **casuali gaussiani normalizzati per estremita'** in sei scene
+*(`deriva`, `corrente`, checkpoint, energia, saturazione, `bande_floquet`, e la mia dello
+spettro)*, **`z` uniforme** nei due banchi di `_collauda_memoria` e `_collauda_motore`
+*(dove e' **dichiarato come CONTROLLO**, non come fisica)*, e ### ⛔ **GEOMETRICI IN
+NESSUNA SCENA.** ### **Quelli li devo costruire io.**
