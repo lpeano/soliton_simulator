@@ -94,6 +94,10 @@ moduli:
     responsabilita: la scena di riferimento di L2 -- n geometrici, U uno, vuoto uniforme
     importa: [corrente, incidenza, motore, stato]
 
+  - nome: _misura_forme_l2.py
+    responsabilita: le quattro forme misurate con rho come sorgente, e il cono nei due modi
+    importa: [_presidio, deriva, flussi_parziali, scena_l2]
+
   - nome: _deriva_forme_l2.py
     responsabilita: la derivazione simbolica delle quattro forme e del prezzo della linearita
     importa: [_presidio]

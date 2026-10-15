@@ -16777,3 +16777,81 @@ scelta, non come derivazione.**
 `doc/referti_l2/derivazione_forme.txt`, generato dal blob `f6927bea` *(il timbro lo dicein testa: <<committato e pulito>>)*, ### **`20` bracci su `20`.** ### ⚠ **E il motivo per
 cui arriva in un commit a se' e' che un referto si genera DOPO il commit del codice che lo
 produce:** prima il codice, poi il referto che lo cita.
+
+## ⭐⭐ **LA MISURA DELLE QUATTRO FORME: LA SORGENTE E' `rho`, MA L'EFFETTO
+ACCUMULATO DIPENDE ANCORA DALLO SPIN** *(`L2`, terzo pezzo, punto 2)*
+
+> ### ⛔⛔ **IL RISULTATO CHE CONTA, E NON E' QUELLO CHE SPERAVO:** cambiare la
+> sorgente da `h` a `rho` ### **ripara l'accoppiamento, NON la dinamica.** Al **primo**
+> tick le tre elicita' danno lo stesso `dLambda` *(`8.9e-17` e `1.8e-15`)* — con `h`
+> era impossibile — ma a `2000` tick, per `S1`, ### **`E(+1) = +2.20e-01`,
+> `E(-1) = -1.02e-01`, `E(iso) = -8.36e-01`, cioe' `7.4` BARRE fra `+1` e isotropo.**
+> ### **La materia SI MUOVE in modo diverso per spinori diversi, e il moto cambia
+> `rho(t)`: il problema del principio di equivalenza NON si risolve scegliendo la
+> sorgente.**
+
+### ⭐ **IL VERSO: UNA SOLA FORMA ARRIVA A VERDETTO**, e con l'estensione dichiarata a
+`10000` tick e `20` finestre:
+
+```
+S1 dtau=0.50   E = +3.371e-01 +- 3.501e-02   ( 9.6 barre)  -> IL VUOTO SI ACCUMULA
+S1 dtau=0.25   E = +1.589e-01 +- 1.012e-01   ( 1.6 barre)  -> indeciso
+S2 dtau=0.50   E = +2.754e-02 +- 5.056e-02   ( 0.5 barre)  -> indeciso
+S2 dtau=0.25   E = +5.731e-02 +- 1.324e-01   ( 0.4 barre)  -> indeciso
+S3 dtau=0.50   E = -2.712e-02 +- 1.479e-01   ( 0.2 barre)  -> indeciso
+S3 dtau=0.25   E = -2.285e-01 +- 3.104e-01   ( 0.7 barre)  -> indeciso
+S4 dtau=0.50   E = +1.107e-01 +- 7.029e-02   ( 1.6 barre)  -> indeciso
+S4 dtau=0.25   E = +1.491e-01 +- 2.010e-01   ( 0.7 barre)  -> indeciso
+```
+
+### 📌 **E la cosa da notare e' che le medie SI RESTRINGONO allungando la corsa:**
+`S2` a `dtau = 0.5` passa da `+0.206` a `+0.028`, `S3` da `-0.554` a `-0.027`.
+### **Cioe' sono compatibili con ZERO: non e' che la barra non basta, e' che il
+trasporto NETTO si media via.** ### ✅ **E dove il verdetto restava indeciso HO
+ALLUNGATO LA CORSA, non abbassato la soglia.**
+
+### ⚠⚠ **E QUI DEVO CORREGGERE UN ATTESO DEL MANDATO, col numero misurato:** il
+mandato aspettava un esponente *<<circa `3` (`S1`), `1` (`S2`, `S3`)>>*, cioe'
+### **l'esponente di `beta`.** ### **Misurato: `6.035 5.976 5.857` per `S1` a
+`dtau = 0.5`, e `5.989 6.006 6.074` a `0.25`; `2.810` e `3.685` per `S4`.**
+### ⛔ **Cioe' IL DOPPIO** — e il motivo e' che ### **la risposta e' QUADRATICA in
+`beta`**, come avevo misurato nel secondo pezzo.
+
+> ### ⛔⛔ **E LA CONSEGUENZA PESA SUL PRINCIPIO DI LINEARITA':** anche una `beta`
+> ESATTAMENTE lineare ### **non da' un effetto lineare nella massa**, perche' l'effetto
+> risponde a `beta^2`. ### **La linearita' chiesta su `beta` NON BASTA a ottenere cio'
+> che serve**, e questo e' un fatto che una decisione deve sapere PRIMA di scegliere una
+> forma.
+
+### 📌 **E `S2`/`S3` NON danno un esponente leggibile:** `E` e' piccola, ### **CAMBIA
+SEGNO**, e la loro `alpha` ### **DIVERGE** — la' la dinamica non e' perturbativa, e
+### **un esponente non si legge.** ### **Non lo invento.**
+
+### ✅ **IL CONO, NEI DUE MODI, E LA TUA CORREZIONE SERVE DAVVERO:**
+*(i)* la fase per tick `|alpha| dtau > pi` ### **gia' a `rho = 1e-12` per `S2` e `S3`**
+*(la' la fase vale `13.316`)*, ### **MAI per `S1` e `S4`**; *(ii)* il cambiamento dello
+STATO per tick, col termine contro senza: ### **`S1` `0.653`, `S2` `1.886`, `S3`
+`0.804`, `S4` `0.910`.** ### ⛔ **Quindi una fase grande NON basta a dire che il cono e'
+violato** — `S3` ha la STESSA fase di `S2` a `rho = 1e-12` e cambia lo stato MENO del
+passo libero — ### **ma su `S2` il cono MORDE: `1.886` volte il passo libero.**
+
+### 📌 **LA LARGHEZZA DEL GRUMO: NESSUNA FORMA TIENE LA FIGURA.** Da `0.894` a:
+`S1` `4.068`, `S2` `3.614`, `S3` `3.786`, `S4` `3.736`, e l'### **ATTUALE** *(`h`,
+rotazione)* `3.616`. ### **Nessuna forma tiene la figura meglio di quella di oggi**, e le
+differenze fra `S2`, `S4` e l'attuale sono ### **nella terza cifra.** ### ✅ **E non
+dichiaro nessun legame con la letteratura: ho misurato la larghezza, e basta.**
+
+### ✅ **IL CONTROLLO NULLO:** termine spento → `dLambda = 0.000e+00` ESATTO, a entrambi
+i `dtau`. ### **E i bracci sono `7` su `14`: quelli che non passano SONO il risultato**,
+non un difetto dello script.
+
+### 📌 **E UN PRESIDIO MI HA FERMATO, giustamente:** `P-ES1` ha rifiutato il commit
+perche' quattro funzioni dello script ### **scrivono un passo a mano** *(la forma `-1j`)*.
+### **Le ho DICHIARATE in `csv/_un_solo_esecutore.py`**, ognuna col suo perche': la forma
+candidata ### **deve vivere nello script** perche' il mandato dice *<<il motore NON si
+tocca>>*, e quel `-1j` e' ### **la FASE ESATTA** di un termine la cui sorgente e' `rho`
+*(`d rho / d psi* = psi`, verificato con `sympy`)*, ### **non un passo di integrazione.**
+### ⚠ **E al primo tentativo le avevo messe nel dizionario SBAGLIATO** — `ECCEZIONI`
+invece di `SCRITTI_A_MANO` — e il presidio me lo ha detto con `8` errori invece di `4`:
+### **<<l'eccezione e' DICHIARATA e la chiamata NON C'E' PIU'>>.** ### **Due dizionari,
+due cose diverse: le CHIAMATE che avanzano lo stato, e i PASSI scritti a mano.**

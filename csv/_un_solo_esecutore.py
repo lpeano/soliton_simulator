@@ -136,6 +136,44 @@ SCRITTI_A_MANO = {
         "non lo diventera-",
     "primo_ordine/passo.py::mezzo_implicito":
         "E- L-ESECUTORE: e- il posto dove lo stato avanza, e l-unico",
+
+    "primo_ordine/_misura_forme_l2.py::_termine":
+        "e- il TERMINE CANDIDATO (`S1`-`S4`) della misura di `L2`, e deve agire"
+        " SENZA entrare nel motore, perche- il mandato di Luca del `2026-10-15`"
+        " dice <<il motore NON si tocca>>: la forma vive QUI, e si sostituisce a"
+        " `mot.operatori[...]` a runtime."
+        " ### E QUEL `-1j` NON E- UN PASSO DI INTEGRAZIONE: il flusso di un termine la"
+        " cui sorgente e- `rho` e- UNA FASE ESATTA, `exp(-i alpha dtau)`, perche-"
+        " `d rho / d psi* = psi` -- ed e- il conto che `_deriva_forme_l2.py` verifica"
+        " con sympy, nel commit `2a933f6`. ### Un integratore darebbe un risultato"
+        " PEGGIORE, e perderebbe la norma al bit, dove qui il troncamento NON ESISTE.",
+    "primo_ordine/_misura_forme_l2.py::agisci":
+        "e- il CORPO del termine sostituito: la fase su `psi` e la fase su `phi`."
+        " Senza di lei le quattro forme candidate non si potrebbero misurare senza"
+        " toccare il motore, che e- cio- che il mandato VIETA."
+        " ### E QUEL `-1j` NON E- UN PASSO DI INTEGRAZIONE: il flusso di un termine la"
+        " cui sorgente e- `rho` e- UNA FASE ESATTA, `exp(-i alpha dtau)`, perche-"
+        " `d rho / d psi* = psi` -- ed e- il conto che `_deriva_forme_l2.py` verifica"
+        " con sympy, nel commit `2a933f6`. ### Un integratore darebbe un risultato"
+        " PEGGIORE, e perderebbe la norma al bit, dove qui il troncamento NON ESISTE.",
+    "primo_ordine/_misura_forme_l2.py::rov":
+        "e- lo STESSO corpo col segno di `beta` ROVESCIATO, cioe- IL CASO CHE DEVE"
+        " FALLIRE del protocollo: dice se la risposta e- pari o dispari in `beta`,"
+        " e senza di lui nessun verdetto sul verso vale."
+        " ### E QUEL `-1j` NON E- UN PASSO DI INTEGRAZIONE: il flusso di un termine la"
+        " cui sorgente e- `rho` e- UNA FASE ESATTA, `exp(-i alpha dtau)`, perche-"
+        " `d rho / d psi* = psi` -- ed e- il conto che `_deriva_forme_l2.py` verifica"
+        " con sympy, nel commit `2a933f6`. ### Un integratore darebbe un risultato"
+        " PEGGIORE, e perderebbe la norma al bit, dove qui il troncamento NON ESISTE.",
+    "primo_ordine/_misura_forme_l2.py::_corri":
+        "e- la CORSA, e contiene la forma solo perche- il termine sostituito ci vive"
+        " DENTRO: deve poter girare col termine SOSTITUITO, SPENTO o ROVESCIATO, che"
+        " sono i tre bracci che il mandato chiede."
+        " ### E QUEL `-1j` NON E- UN PASSO DI INTEGRAZIONE: il flusso di un termine la"
+        " cui sorgente e- `rho` e- UNA FASE ESATTA, `exp(-i alpha dtau)`, perche-"
+        " `d rho / d psi* = psi` -- ed e- il conto che `_deriva_forme_l2.py` verifica"
+        " con sympy, nel commit `2a933f6`. ### Un integratore darebbe un risultato"
+        " PEGGIORE, e perderebbe la norma al bit, dove qui il troncamento NON ESISTE.",
 }
 
 

@@ -148,6 +148,10 @@ FILE_FISICA = (
     # ### ### **SIMBOLICA** *(`sympy`)* delle quattro forme candidate, e il
     # ### ### **PREZZO DELLA LINEARITA-** -- un `se e solo se`, non un-implicazione.
     'primo_ordine/_deriva_forme_l2.py',
+    # ### ⭐ **E LA MISURA DELLE QUATTRO FORME**, con ### **`rho` come sorgente**
+    # ### e una ### **FASE** su `psi`: il verso, l-indipendenza dallo spin,
+    # ### l-esponente, ### **il cono nei DUE modi**, e la larghezza del grumo.
+    'primo_ordine/_misura_forme_l2.py',
     'primo_ordine/motore.py',
     'primo_ordine/_collauda_motore.py',
     # ### IL CHECKPOINT *(sotto-pezzo `5c`)*: salva e riprende ### **stato, grafo,

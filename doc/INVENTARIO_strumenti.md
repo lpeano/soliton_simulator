@@ -2807,7 +2807,7 @@ etichette rimosse, con ### **`0` persi, `0` doppi, `0` conflitti**.
 
 | | |
 |---|---|
-| **i file** | `primo_ordine/timbro.py` *(BLOB `87f46ab9`)* · `csv/_un_solo_esecutore.py` *(BLOB `76181b4f`)* |
+| **i file** | `primo_ordine/timbro.py` *(BLOB `87f46ab9`)* · `csv/_un_solo_esecutore.py` *(BLOB `43694c73`)* |
 | **COMANDO** | `python primo_ordine/driver.py primo_ordine/config/prova.yaml` *(stampa il timbro e salva)* · `python csv/_un_solo_esecutore.py` · `--collaudo` *(nei due versi, `8`/`8`)* |
 | ### ⭐ **e i tre punti stanno in UN file, non per comodita'** | sono ### **la stessa cosa guardata da tre lati** — ### **l'impronta di cio' che ha girato.** Il timbro la ### **stampa**, il salvataggio la ### **scrive accanto ai dati**, la ripresa la ### **confronta e RIFIUTA.** ### **Tenerli separati vorrebbe dire calcolarla in TRE POSTI, e tre posti divergono** |
 | **`5` il TIMBRO** | l'impronta della ### **tabella**, dei ### **generati** *(dei generati, non del generatore: se il generatore cambia senza cambiare cio' che genera, ### **l'uscita e' la stessa**)*, della ### **configurazione**, piu' scena, seme, `dt`, passi, integratore, ### **le leggi ATTIVE** e ### **le versioni** |
@@ -2815,7 +2815,7 @@ etichette rimosse, con ### **`0` persi, `0` doppi, `0` conflitti**.
 | **`15(e)` la scrittura e' ATOMICA** | temporaneo + `os.replace`: ### **il PC si riavvia da solo fra `00:00` e `02:00`**, e ### **un file a meta' e' peggio di nessun file** |
 | **`10` il CONTO DELLE LEGGI** | dalla ### **TABELLA**, non dai file *(contare i file direbbe **quante ne sono state generate**, non **quante ce ne sono**)*. ### **Stampato dal timbro E dal referto** |
 | **`9` UN SOLO ESECUTORE** | `P-ES1` guarda le chiamate ### **E I NOMI**: il driver scrive `avanza = PA.passo_locale if …` e poi chiama `avanza(…)`, e ### **un presidio che guardasse solo le chiamate NON VEDREBBE NIENTE** |
-| ### ⚠ **e le eccezioni sono DICHIARATE** | `5` su `2` file, ognuna col suo ### **perche' di almeno `40` caratteri**: *«una via di fuga a costo zero non e' un'eccezione, e' un buco»*. E ### **un'eccezione ORFANA e' rifiutata** |
+| ### ⚠ **e le eccezioni sono DICHIARATE** | `8` su `5` file, piu' ### **`8` PASSI SCRITTI A MANO** *(### **i quattro di `_misura_forme_l2.py` perche' il mandato dice <<il motore NON si tocca>>: la forma candidata vive nello SCRIPT e si sostituisce a runtime, e quel `-1j` e' la FASE ESATTA di un termine la cui sorgente e' `rho`, non un passo di integrazione**)*, ognuna col suo ### **perche' di almeno `40` caratteri**: *«una via di fuga a costo zero non e' un'eccezione, e' un buco»*. E ### **un'eccezione ORFANA e' rifiutata** |
 | **l'uscita** | `db_era2/stato_<impronta>.npz` *(### **non tracciato**)* + `.timbro.json` *(### **tracciato**: e' il comando che riproduce quel dato)* |
 
 ---
@@ -3633,3 +3633,23 @@ scena **cresca** come gli archi *(`4.00x` su `4.00x` atteso)*; `m3` **`0.005114`
 | ### ⛔ **e `S4` NON passa da `sympy.integrate`** | l'integrale di `alpha` esce in **`lerchphi`**, che ### **non si lambdifica** — quindi gli attesi non si potrebbero verificare. ### ✅ **Si usa la forma CHIUSA ipergeometrica** *(`F = pi x - 2 pi x 2F1(1, 1/p; 1+1/p; -x^p)`)*, ### **verificata contro una QUADRATURA a `2.4e-13`** |
 | ### ⭐ **il flusso su `psi` cambia NATURA** | con `rho`: `dN/dpsi^* = alpha psi`, cioe' ### **UNA FASE**; con `h`: `(sigma.n) psi`, cioe' ### **una ROTAZIONE**. ### ✅ **E una fase NON cambia `rho`: il termine CONSERVA la sua sorgente** |
 | **l'esito** | **`20`/`20`** |
+
+---
+
+### `primo_ordine/_misura_forme_l2.py` — **LE QUATTRO FORME, MISURATE** *(2026-10-15)*
+
+| | |
+|---|---|
+| **file** | `primo_ordine/_misura_forme_l2.py` |
+| **BLOB** *(sha1 dei byte grezzi)* | `b729ab36` |
+| **IL COMANDO, verbatim** | `python primo_ordine/_misura_forme_l2.py` |
+| ### ⚠ **sta FUORI dal `pre-commit`** | corse lunghe *(`2000`, e `10000` nell'estensione)*: **misure DICHIARATE** |
+| ### ⛔ **e il MOTORE NON SI TOCCA** | si sostituisce **`mot.operatori[...]` a runtime**, con un termine che prende `rho` *(la densita')* e mette su `psi` ### **una FASE** — non una rotazione |
+| ### ⭐⭐ **la sorgente E' `rho`, e si DIMOSTRA** | al **PRIMO tick** le tre elicita' *(`+1`, `-1`, isotropo)* danno **lo stesso `dLambda`**: `8.9e-17` e `1.8e-15` |
+| ### ⛔ **ma l'effetto ACCUMULATO dipende ANCORA dallo spin** | a `2000` tick: `E(+1) = +2.20e-01`, `E(-1) = -1.02e-01`, `E(iso) = -8.36e-01` per `S1`, e ### **`7.4` barre di differenza fra `+1` e isotropo.** ### **Cambiare sorgente ripara l'ACCOPPIAMENTO, non la DINAMICA:** la materia si muove in modo diverso, e cio' cambia `rho(t)` |
+| ### ⭐ **IL VERSO** | solo **`S1` a `dtau = 0.5`** arriva a verdetto: **`+3.371e-01 ± 3.50e-02`**, ### **`9.6` barre → il vuoto si ACCUMULA.** ### ⚠ **Le altre restano indecise, e le loro medie SI RESTRINGONO allungando la corsa** *(`S2` da `+0.206` a `+0.028`; `S3` da `-0.554` a `-0.027`)*: sono **compatibili con ZERO** |
+| ### ⛔⛔ **L'ESPONENTE, e la correzione a un atteso del mandato** | il mandato aspettava `~3` per `S1` e `~1` per `S2`/`S3` — cioe' **l'esponente di `beta`.** ### **Misurato: `S1` da' `6.035`, `5.976`, `5.857` e `5.989`, `6.006`, `6.074`**, cioe' ### **il DOPPIO** — perche' la risposta e' **quadratica in `beta`.** ### **E `S4` da' `2.81`-`3.69`, cioe' `2 x 1.64`** ✓ |
+| ### ⚠ **e `S2`/`S3` NON danno un esponente pulito** | `E` e' piccola, **cambia segno**, e la loro `alpha` **DIVERGE**: ### **la' la dinamica non e' perturbativa** |
+| ### ⛔ **IL CONO, nei due modi** | `|alpha| dtau > pi` **gia' a `rho = 1e-12`** per `S2` e `S3` *(la' la fase vale `13.3`)*, **MAI** per `S1` e `S4`. ### **E il cambiamento di STATO per tick:** `S2` fa **`1.886x`** quello del passo **senza** il termine — ### **l'unica forma che cambia lo stato PIU' del passo libero** *(`S1` `0.65`, `S3` `0.80`, `S4` `0.91`)* |
+| ### 📌 **LA LARGHEZZA del grumo** | da `0.894` a `~3.6`-`4.1` per **tutte**: `S1` `4.07`, `S2` `3.61`, `S3` `3.79`, `S4` `3.74`, e **l'ATTUALE `3.62`**. ### **Nessuna forma tiene la figura meglio di quella di oggi** — e ### ⛔ **non dichiaro nessun legame con la letteratura: ho misurato la larghezza, e basta** |
+| ### ✅ **il controllo nullo** | termine **spento** → `dLambda =` **`0.000e+00`** esatto |
