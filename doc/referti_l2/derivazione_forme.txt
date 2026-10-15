@@ -1,0 +1,63 @@
+[TIMBRO] _deriva_forme_l2.py  sha1-BYTE f6927bea  committato e pulito
+================================================================================================
+LA DERIVAZIONE DELLE QUATTRO FORME, VERIFICATA DA sympy -- un conto, non una misura
+================================================================================================
+  sympy 1.14.0
+------------------------------------------------------------------------------------------------
+### (A) L'IDENTITA' beta' = -x alpha', per una F GENERICA
+  (A1) `alpha = F'(x)`                                       PASSA   sympy: alpha = Derivative(F(x), x)
+  (A2) `beta = F(x) - x F'(x)`                               PASSA   sympy: beta = -x*Derivative(F(x), x) + F(x)
+  (A3) `beta'(x) + x alpha'(x) = 0`                          PASSA   sympy: la differenza fa 0
+------------------------------------------------------------------------------------------------
+### (B) IL SE E SOLO SE: beta esattamente lineare  <==>  alpha logaritmica
+      sympy risolve  F - x F' = -c x  e da':  Eq(F(x), x*(C1 + c*log(x)))
+      e allora alpha = F' = C1 + c*log(x) + c
+  (B1) `alpha` ha la forma `c ln x + costante`               PASSA   la parte che dipende da ln x e' esattamente `c ln x`
+  (B2) con `alpha'` LIMITATA, `beta' = -x alpha' -> 0` per ` PASSA   sympy: il limite fa 0  (l'ipotesi `alpha'` limitata e' DICHIARATA)
+      ### QUINDI: non esiste una F con beta lineare fino a 0 E alpha limitata
+      ### e Lipschitz. La costrizione e' DIMOSTRATA, non supposta.
+------------------------------------------------------------------------------------------------
+### (C) LE QUATTRO FORME: alpha, beta, e gli attesi del mandato
+  S1  N = Lambda G(x), G = x - arctan x
+      alpha = x**2/(x**2 + 1)
+      beta  = (-x**2*atan(x) + x - atan(x))/(x**2 + 1)
+  (C) S1 rispetta `beta' = -x alpha'`                        PASSA   la differenza fa 0
+  S2  N = rho ln(rho/Lambda)
+      alpha = log(x) + 1
+      beta  = -x
+  (C) S2 rispetta `beta' = -x alpha'`                        PASSA   la differenza fa 0
+  S3  N = rho ln(rho/(rho+Lambda))
+      alpha = (log(x**(x + 1)*(x + 1)**(-x - 1)) + 1)/(x + 1)
+      beta  = -x/(x + 1)
+  (C) S3 rispetta `beta' = -x alpha'`                        PASSA   la differenza fa 0
+------------------------------------------------------------------------------------------------
+### (D) GLI ATTESI DEL MANDATO, verificati uno per uno
+  (D1) `S1`: `beta ~ -(2/3) x^3` per `x` piccolo             PASSA   sympy: la serie fa -2*x**3/3
+  (D2) `S2`: `beta = -x` a OGNI x, e `alpha = 1 + ln x` (div PASSA   beta = -x, alpha = log(x) + 1, e alpha(0+) = -oo
+  (D3) `S3`: `beta = -x/(1+x)`, e `alpha` diverge per `x ->  PASSA   beta = -x/(x + 1), e alpha(0+) = -oo
+------------------------------------------------------------------------------------------------
+### (D4) `S4`: la forma chiusa ipergeometrica contro una QUADRATURA, e i quattro attesi
+  (D4-0) `F` in forma chiusa == la QUADRATURA di `alpha`     PASSA   scarto relativo massimo 2.431e-13 su 6 valori di x
+  (D4-1) `S4` rispetta `beta' = -x alpha'` (differenze finit PASSA   scarto massimo 1.098e-09 su 4 valori di x
+  (D4a) `|alpha| < pi` ovunque                               PASSA   max |alpha| = 3.141593 su x da 1e-12 a 1e12, e pi = 3.141593
+  (D4b) `beta ~ x^(1+2/pi)` per `x` piccolo                  PASSA   pendenza 1.6363 contro 1+2/pi = 1.6366
+  (D4c) `beta ~ -x` vicino a `x = 1`                         PASSA   beta(1) = -0.87131, e il lineare darebbe -1
+  (D4d) `beta` SATURA per `x` grande (cresce meno che linear PASSA   |beta| a 10, 100, 1000: 7.8529 35.0137 108.0895 -> rapporto 1000/100 = 3.087 (lineare darebbe 10)
+      ### I NUMERI DI `S4` CHE SERVONO ALLA MISURA:
+        x = 0.01   alpha = -2.823622   beta = -1.208694e-03
+        x = 0.03   alpha = -2.532857   beta = -6.787369e-03
+        x = 0.1    alpha = -1.963049   beta = -4.171493e-02
+        x = 0.2    alpha = -1.482000   beta = -1.120809e-01
+        x = 0.5    alpha = -0.682114   beta = -3.779361e-01
+        x = 1      alpha = +0.000000   beta = -8.713067e-01
+        x = 2      alpha = +0.682114   beta = -1.852610e+00
+------------------------------------------------------------------------------------------------
+### (E) IL FLUSSO SU psi: una FASE con rho, una ROTAZIONE con h
+  (E1) `drho/dpsi^*` e' `psi` (quindi il flusso e' una FASE) PASSA   drho/d(a*) = a, drho/d(b*) = b
+  (E2) `dh/dpsi^*` NON e' `psi` (il flusso e' una ROTAZIONE) PASSA   dh/d(a*) = a, dh/d(b*) = -b: ### i segni sono OPPOSTI, e' sigma_z
+  (E3) e una FASE NON cambia `rho`: la sorgente e' CONSERVAT PASSA   |a e^{-i alpha t}|^2 - |a|^2 = 0 per sympy
+================================================================================================
+  20 su 20
+### ⛔ E LA FORMA NON SI DECIDE QUI: `S1`-`S4` vivono dentro gli script, la
+###   tabella delle leggi NON e' toccata, e la scelta e' di Luca.
+================================================================================================

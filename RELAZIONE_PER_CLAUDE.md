@@ -16772,3 +16772,8 @@ saturazione di oggi** — sono **forme NUOVE**, e metterne una in tabella vorreb
 ### 📌 **E `S4` ha una SCELTA dentro — la forma `tanh`:** la scala viene da `pi` *(il
 cono)*, ma la forma e' **una scelta**, e tu la dichiari tale: ### **la registro come
 scelta, non come derivazione.**
+
+### ✅ **E IL REFERTO DELLA DERIVAZIONE C'E', e nasce dal codice COMMITTATO:**
+`doc/referti_l2/derivazione_forme.txt`, generato dal blob `f6927bea` *(il timbro lo dicein testa: <<committato e pulito>>)*, ### **`20` bracci su `20`.** ### ⚠ **E il motivo per
+cui arriva in un commit a se' e' che un referto si genera DOPO il commit del codice che lo
+produce:** prima il codice, poi il referto che lo cita.
