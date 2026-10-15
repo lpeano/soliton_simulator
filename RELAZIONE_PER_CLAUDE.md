@@ -16277,3 +16277,33 @@ frazione `0.5`)*, e per la moneta dice anche ### **che non si rovescia sotto `C`
 ### 📌 **Ma il buco resta:** `P-E6` assume che ogni cambiamento di `leggi.yaml` sia un
 cambiamento **di legge**, e ### **l'`ordine` non lo e'.** ### **Lo segnalo, non lo curo:**
 toccare un presidio non e' nel mandato.
+
+## 2026-10-15 — ✅ **LA PROVA CHE IL PRESIDIO FERMA UN COMMIT VERO, E LA `CI` DICHIARATA
+ROSSA**
+
+> ### ⭐ **La differenza fra <<lo script torna `1`>> e <<il commit non si fa>> e' tutta**,
+> ed e' l'errore che ho fatto stamattina. ### **Adesso e' il commit.**
+
+### ✅ **LA PROVA:** su un ramo usa-e-getta *(`prova-presidio-tp`)*, col Grover dello
+spinore rimesso **a tick fisso**: ### **`git commit` e' tornato `1`, e `HEAD` e' rimasto
+`8bf0ded`** — il commit **non e' atterrato**. Il hook si e' fermato su
+`_collauda_tempo_proprio.py`, che ha visto
+`CAMM-GROVER ... 0.000e+00 ### IGNORA dtau` e ha detto `1 su 3`.
+### 📌 **Il referto e' `doc/referti_l1/prova_del_hook.md`**, il ramo e' stato **buttato**,
+e `motore.py` sul ramo vero e' ### **byte-identico a `HEAD`** *(verificato con
+`git diff --quiet`)*.
+
+### 📌 **I TEMPI, misurati e non stimati:** ### **`146` s** il commit intero *(hook
+compreso)*, ### **`263.2` s** la suite di `collauda.py`. ### ✅ **Entrambi dentro i `500`
+s**, e il collaudo nuovo costa **`~0.4` s**.
+
+### ⛔⛔ **E LA `CI` RESTA ROSSA, con l'elenco esatto nel paragrafo `12` della `RIPRESA`:**
+due bracci di `_collauda_deriva.py` *(`L5`, sola lettura — non li curo)*, il braccio dei
+ripieghi della memoria *(il `13` non lo alzo)*, e la `C` *(decisione di Luca)*.
+### ⚠ **E non ho toccato nessun'altra soglia e nessun altro collaudo per farli tornare
+verdi.**
+
+### ⚠ **E UN MIO SCIVOLONE, piccolo e registrato:** lo script che precisava la voce della
+`C` ### **non era idempotente**, l'ho girato due volte e ### **ha concatenato due volte lo
+stesso testo** *(descrizione da `4353` a `3330` caratteri)*. ### **Corretto con una riga di
+storico che dice perche'.**

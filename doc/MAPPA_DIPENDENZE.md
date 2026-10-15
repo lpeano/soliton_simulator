@@ -287,3 +287,21 @@ una **`CT`**, non una `C`.
 ### **il PUNTO UNICO di lettura del tempo proprio** *(`flussi_parziali.dtau_nodo`)* —
 ### **nessuna legge calcola il suo `dtau` da se'**, e quello e' il posto da cui `L2` fara'
 variare `cs`.
+
+---
+
+## 10. ✅ `L1` — **IL PALINDROMO E' IN TABELLA** *(`2026-10-15`, sera)*
+
+### ✅ **`[[DECISIONE-COMPOSIZIONE-SIMMETRICA]]` E' CHIUSA**: l'ordine e' palindromo,
+`12` pezzi, impronta `871a7b37dab75b06` → **`f1fca71b952bb8c8`**, e l'errore di `H_tot`
+passa da **primo** a **secondo** ordine *(pendenza `1.183` → `2.006`)*.
+
+### ⚠ **E RESTA APERTA UNA SOLA DECISIONE, piu' precisa di prima:**
+`[[DECISIONE-LA-C-VUOLE-IL-TEMPO-ROVESCIATO]]` — ### **non <<la `C` o la `CT`?>> ma
+<<la MONETA DI SPIN deve rovesciarsi sotto la `C`?>>**, perche' ### **senza la moneta
+l'inversione del tempo del passo e' ESATTA** *(`3.9e-16`)* e **Kramers c'e'**.
+
+### 📌 **E cio' che `L1` ha consegnato a `L2` resta quello:** ### **il punto UNICO di
+lettura del tempo proprio.** Adesso con, in piu', ### **un passo reversibile per
+costruzione** — che e' cio' che rende sensato chiedersi, a `L2`, **da dove venga
+l'irreversibilita'** *(`A15.3`)*.

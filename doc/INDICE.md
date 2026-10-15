@@ -265,7 +265,7 @@
 | `DEC-NASCITA-PSI` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | con che stato nasce un nodo? il punto 3 chiede UNA REGOLA DICHIARATA per ogni gr |
 | `DEC-REGOLA-FORMA` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | che CODICE genera una `regola`? il punto 11(a) chiede che crescita e vuoto si ge |
 | `DEC-Z47-TRANSIZIONE` | DECISIONE | METODO | ENTRAMBE | ### **CHIUSA** |  | Z47 non si puo- portare ad AGENDA: CHIUSA -> AGENDA e- una transizione VIETATA |
-| `DECISIONE-COMPOSIZIONE-SIMMETRICA` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | L ordine della tabella non e simmetrico: l errore di H_tot va come dtau e non dt |
+| `DECISIONE-COMPOSIZIONE-SIMMETRICA` | DECISIONE | FISICA | 2 | ### **CHIUSA** |  | L ordine della tabella non e simmetrico: l errore di H_tot va come dtau e non dt |
 | `DECISIONE-DIREZIONE-STRADA-3` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | strada (3): C esatta nelle leggi e ROTTA SPONTANEAMENTE nello stato, con pareti |
 | `DECISIONE-LA-C-VUOLE-IL-TEMPO-ROVESCIATO` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | La C del cammino era una conseguenza delle involuzioni: coi flussi parziali serv |
 | `DECISIONE-STRADA-B-FLUSSI` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | strada (B): Grover e spostamento diventano FLUSSI, e l angolo pi e la velocita d |

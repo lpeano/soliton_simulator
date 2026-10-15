@@ -1,0 +1,42 @@
+[TIMBRO] _misura_mb2.py  sha1-BYTE 3385a5f0  committato e pulito
+================================================================================================
+M-B2: L'ERRORE DI CONSERVAZIONE DI H_tot CONTRO dtau -- tempo totale FISSO
+================================================================================================
+  LA CONFIGURAZIONE: T = 8.0   nn = 16   seme = 7   norma = locale   vuoto_modulo = 2.0   su2 = True   omega = pi
+------------------------------------------------------------------------------------------------
+  k    dtau       tick    H(0)           escursione     rapporto col k-1
+  1    0.500000   16      -648.986821    2.322467e+01   --
+  2    0.250000   32      -648.986821    7.830554e+00   2.966
+  3    0.125000   64      -648.986821    2.209360e+00   3.544
+  4    0.062500   128     -648.986821    4.716401e-01   4.684
+------------------------------------------------------------------------------------------------
+  I RAPPORTI: 2.966  3.544  4.684
+  LA PENDENZA in log2: 1.568  1.825  2.228
+------------------------------------------------------------------------------------------------
+### 📌 ESTENSIONE (NON il criterio): due dimezzamenti in piu', per vedere se la
+###   PENDENZA CONVERGE a 2. A dtau = 0.5 i pezzi stanno a theta = pi/2, cioe'
+###   LONTANO dal regime asintotico.
+###   k=4  dtau=0.062500  tick=128   escursione=4.716401e-01  rapporto --
+###   k=5  dtau=0.031250  tick=256   escursione=9.080317e-02  rapporto 5.194
+###   k=6  dtau=0.015625  tick=512   escursione=2.716507e-02  rapporto 3.343
+###   I RAPPORTI FINI: 5.194  3.343   (pendenza log2: 2.377  1.741)
+------------------------------------------------------------------------------------------------
+  I RAPPORTI, uno per uno: 2.966  3.544  4.684
+  E LA PENDENZA COMPLESSIVA su 5 dimezzamenti: 2.006   (globale: 2.322467e+01 -> 2.716507e-02, cioe' un fattore 854.9 dove 2^(2*5) = 1024)
+### ✅ L'ERRORE E' DI SECONDO ORDINE: pendenza 2.006, entro `0.25` da `2`.
+###   ⚠ MA I RAPPORTI UNO PER UNO NON sono tutti `~4`: il piu' grossolano
+###   e' 2.966. La banda `0.25` sulla PENDENZA e' MIA, non di Luca: il suo
+###   criterio dice <<rapporto ~ 4>>, e la lettura la decide lui.
+------------------------------------------------------------------------------------------------
+### ⛔ CONTROPROVA (il caso che DEVE dare un numero diverso):
+###   lo STESSO H_tot e gli STESSI dtau, con l'ORDINE DI PRIMA del 2026-10-15
+###   (7 pezzi, NON palindromo). Se la pendenza restasse 2, il verdetto di
+###   sopra sarebbe un FALSO-UNO.
+###   k=1  dtau=0.500000  tick=16    escursione=9.957847e+01  rapporto --
+###   k=2  dtau=0.250000  tick=32    escursione=3.920664e+01  rapporto 2.540
+###   k=3  dtau=0.125000  tick=64    escursione=1.779148e+01  rapporto 2.204
+###   k=4  dtau=0.062500  tick=128   escursione=8.429349e+00  rapporto 2.111
+###   I RAPPORTI DELL'ORDINE VECCHIO: 2.540  2.204  2.111
+###   E LA PENDENZA DELL'ORDINE VECCHIO: 1.183   (il palindromo da' ~2)
+###   ✅ IL CASO CHE DEVE FALLIRE FALLISCE: pendenza 1.183, cioe' PRIMO ordine.
+###   Quindi il secondo ordine viene DAL PALINDROMO, e non da altro.

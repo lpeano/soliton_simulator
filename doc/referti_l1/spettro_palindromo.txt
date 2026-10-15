@@ -1,0 +1,58 @@
+[TIMBRO] _misura_spettro_l1.py  sha1-BYTE 32e1b4bd  committato e pulito
+================================================================================================
+LO SPETTRO DEL PASSO LINEARE PALINDROMO -- una MISURA, nessuna decisione
+================================================================================================
+  LA CONFIGURAZIONE: toro (3, 3)   seme = 7   dtau = (1.0, 0.5, 0.25)   eps = 0.5   vuoto_modulo = 2.0   U in SU(2)
+------------------------------------------------------------------------------------------------
+  dtau = 1.0000 -> theta = 1.0000 pi   |   W e' 72x72, 10 pezzi lineari
+  (0) `W` e' UNITARIA (senza questo, le fasi non sono fasi)  PASSA   scarto 9.992e-16, cioe' 5 ulp
+    le fasi: min -3.109522  max 3.136504  (su pi: -0.9898 .. 0.9984)
+    ### (1) APPAIAMENTO `eps <-> -eps`: max distanza fra lo spettro e il suo opposto = 1.987038e+00
+  (2) ogni autovalore e' ALMENO DOPPIO (Kramers, `C^2 = -1`) ### FALLISCE   molteplicita': {1: 72} su 72 gruppi (tolleranza 1e-08)
+  (3) `C W C^-1 = W^-1` (inversione del tempo del PASSO INTE ### FALLISCE   scarto 6.684e-01, cioe' 3010288773081236 ulp
+  ### DEVE ROMPERSI: lo stesso con l'ordine NON palindromo   PASSA   scarto 1.589e+00: ### senza questo il braccio (3) sarebbe un FALSO-UNO
+    ### LA DIAGNOSI DEL BRACCIO (3): chi non si rovescia?
+  (4) la MONETA sotto `C` resta SE STESSA, non la sua invers PASSA   `C M C^-1 = M` da' 0.000e+00, `= M^-1` da' 5.256e-01
+  (5) e SENZA la moneta `C W C^-1 = W^-1` TORNA ESATTA       PASSA   scarto 5.162e-16 su 8 pezzi, cioe' 2 ulp
+  (6) e SENZA la moneta la degenerazione di Kramers C'E'     PASSA   molteplicita' minima 2 su 20 gruppi
+    ### (7) e SENZA la moneta l'appaiamento `eps <-> -eps` vale 4.132892e-15
+------------------------------------------------------------------------------------------------
+  dtau = 0.5000 -> theta = 0.5000 pi   |   W e' 72x72, 10 pezzi lineari
+  (0) `W` e' UNITARIA (senza questo, le fasi non sono fasi)  PASSA   scarto 6.663e-16, cioe' 3 ulp
+    le fasi: min -3.126699  max 3.121347  (su pi: -0.9953 .. 0.9936)
+    ### (1) APPAIAMENTO `eps <-> -eps`: max distanza fra lo spettro e il suo opposto = 1.999750e+00
+  (2) ogni autovalore e' ALMENO DOPPIO (Kramers, `C^2 = -1`) ### FALLISCE   molteplicita': {1: 72} su 72 gruppi (tolleranza 1e-08)
+  (3) `C W C^-1 = W^-1` (inversione del tempo del PASSO INTE ### FALLISCE   scarto 4.485e-01, cioe' 2019792119355860 ulp
+  ### DEVE ROMPERSI: lo stesso con l'ordine NON palindromo   PASSA   scarto 8.779e-01: ### senza questo il braccio (3) sarebbe un FALSO-UNO
+    ### LA DIAGNOSI DEL BRACCIO (3): chi non si rovescia?
+  (4) la MONETA sotto `C` resta SE STESSA, non la sua invers PASSA   `C M C^-1 = M` da' 0.000e+00, `= M^-1` da' 2.655e-01
+  (5) e SENZA la moneta `C W C^-1 = W^-1` TORNA ESATTA       PASSA   scarto 3.970e-16 su 8 pezzi, cioe' 2 ulp
+  (6) e SENZA la moneta la degenerazione di Kramers C'E'     PASSA   molteplicita' minima 2 su 20 gruppi
+    ### (7) e SENZA la moneta l'appaiamento `eps <-> -eps` vale 2.000000e+00
+------------------------------------------------------------------------------------------------
+  dtau = 0.2500 -> theta = 0.2500 pi   |   W e' 72x72, 10 pezzi lineari
+  (0) `W` e' UNITARIA (senza questo, le fasi non sono fasi)  PASSA   scarto 8.883e-16, cioe' 4 ulp
+    le fasi: min -0.002929  max 1.678613  (su pi: -0.0009 .. 0.5343)
+    ### (1) APPAIAMENTO `eps <-> -eps`: max distanza fra lo spettro e il suo opposto = 1.942047e+00
+  (2) ogni autovalore e' ALMENO DOPPIO (Kramers, `C^2 = -1`) ### FALLISCE   molteplicita': {1: 72} su 72 gruppi (tolleranza 1e-08)
+  (3) `C W C^-1 = W^-1` (inversione del tempo del PASSO INTE ### FALLISCE   scarto 2.578e-01, cioe' 1160894162135611 ulp
+  ### DEVE ROMPERSI: lo stesso con l'ordine NON palindromo   PASSA   scarto 3.004e-01: ### senza questo il braccio (3) sarebbe un FALSO-UNO
+    ### LA DIAGNOSI DEL BRACCIO (3): chi non si rovescia?
+  (4) la MONETA sotto `C` resta SE STESSA, non la sua invers PASSA   `C M C^-1 = M` da' 0.000e+00, `= M^-1` da' 1.328e-01
+  (5) e SENZA la moneta `C W C^-1 = W^-1` TORNA ESATTA       PASSA   scarto 3.855e-16 su 8 pezzi, cioe' 2 ulp
+  (6) e SENZA la moneta la degenerazione di Kramers C'E'     PASSA   molteplicita' minima 2 su 20 gruppi
+    ### (7) e SENZA la moneta l'appaiamento `eps <-> -eps` vale 2.000000e+00
+================================================================================================
+  LA TABELLA, in una riga per `dtau`. ### ATTENZIONE AL FATTORE 2: con l'ordine
+  palindromo OGNI PEZZO sta a frazione 0.5, quindi un pezzo agisce a
+  `theta = pi*dtau/2`, non a `pi*dtau`.
+  dtau     dist(e,-e)     molt.   C W C-1=W-1  NON palind.  moneta=se    senza mon.   molt./dist senza
+  1.0000   1.987038e+00   1       6.684e-01    1.589e+00    0.000e+00    5.162e-16    2 / 4.133e-15
+  0.5000   1.999750e+00   1       4.485e-01    8.779e-01    0.000e+00    3.970e-16    2 / 2.000e+00
+  0.2500   1.942047e+00   1       2.578e-01    3.004e-01    0.000e+00    3.855e-16    2 / 2.000e+00
+================================================================================================
+  15 su 21
+### ⛔ E NESSUNA CONCLUSIONE DI FISICA: i numeri sono questi, e la lettura
+###   la decide Luca. Cio' che questo file NON dice e' se il modello DEVE
+###   avere la C, la CT, o un'altra simmetria.
+================================================================================================

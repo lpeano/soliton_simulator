@@ -1,0 +1,28 @@
+[TIMBRO] _collauda_memoria.py  sha1-BYTE 96dcad4e  committato e pulito
+====================================================================================================
+IL SOTTO-PEZZO `5d`: I QUATTRO COLLAUDI DELLA MEMORIA -- L'ACCETTAZIONE DEL `5`
+====================================================================================================
+  ### Le soglie stanno nel task history, fissate PRIMA: m1 <= 6x lo stato,
+  ### m2 rapporto stabile entro il 20%, m3 pendenza a 3 sigma da zero.
+
+  ### `m1` a n=4096: la scena e' 5.56x lo stato (soglia 6x)      PASSA   ### 3.13 MB su 0.56 MB, e il MARGINE sotto 6x e' 0.44x
+        ### la SCOMPOSIZIONE, voce per voce: stato 1.000x  struttura 0.389x  geometria_n 0.333x  geometria_U 0.444x  dtau 0.056x  buffer 3.333x
+  ### `m1` a n=16384: la scena e' 5.56x lo stato (soglia 6x)     PASSA   ### 12.50 MB su 2.25 MB, e il MARGINE sotto 6x e' 0.44x
+        ### la SCOMPOSIZIONE, voce per voce: stato 1.000x  struttura 0.389x  geometria_n 0.333x  geometria_U 0.444x  dtau 0.056x  buffer 3.333x
+  ### e il collaudo di `m1` ha MATERIA: le due taglie sono DIVER PASSA   ### con una taglia sola `m2` non esisterebbe, e con rapporto 1 la scena sarebbe il solo stato
+  ### DEVE fallire: un buffer in piu' porta la scena OLTRE la so PASSA   ### 6.50x contro la soglia 6x: la soglia RIFIUTA ancora
+  ### e tolto il buffer finto la scena TORNA sotto la soglia     PASSA   ### 5.56x: ### e l'albero resta come l'ho trovato
+
+  ### `m2`: il rapporto e' STABILE fra le due taglie entro il 20 PASSA   ### 5.556x e 5.556x, scarto 0.0%: stabile vuol dire PROPORZIONALE AGLI ARCHI
+  ### e il CONTROLLO POSITIVO: la scena cresce come gli archi (4 PASSA   ### senza questo, un rapporto stabile potrebbe esserlo PER VACUITA-
+
+  ### `m3`: la memoria per tick e' PIATTA (pendenza a 3 sigma da PASSA   ### 0.006776 MB/tick, sigma 0.003912, cioe' 1.73 sigma su 10 campioni
+  ### e `m3` ha MATERIA: i campioni sono almeno `6` e la privata PASSA   ### 10 campioni
+        ### I RIPIEGHI, prima e dopo: 18 dopo il PRIMO tick, 18 dopo tutti i 60 -- cioe' 0 DOPO il primo
+  ### e la CAUSA e' provata direttamente: ZERO allocazioni dopo  ### FALLISCE   ### 18 buffer in 60 tick: la pendenza dice l'effetto, questo dice la CAUSA
+
+  ### `m4`: le tre misure sono TIMBRATE, col costo per tick      PASSA   ### 1.830 ms per tick adesso, 1.458 nel referto committato
+  ### e il TIMBRO porta l'impronta della TABELLA e dei GENERATI  PASSA   ### tabella `e88ccbbb`, generati `029af2fb`: un numero senza il codice che lo ha prodotto non ha provenienza
+====================================================================================================
+IL SOTTO-PEZZO `5d`: 11 su 12   ### CI SONO BUCHI
+====================================================================================================
