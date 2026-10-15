@@ -16087,3 +16087,74 @@ il misuratore no.**
 
 ### 📌 **E il worktree e' stato rimosso** *(`git worktree remove`)*: resta solo
 `st_main`, che non e' mio e non l'ho toccato.
+
+## 2026-10-15 — ⛔⛔ **UN MIO ERRORE TROVATO DAL GUARDIANO: IL COLLAUDO DEL TEMPO PROPRIO
+NON ERA NEL `pre-commit` VERO** — e le decisioni della seconda parte
+
+> ### **Lo dico prima delle decisioni, perche' e' la cosa che conta di piu'.**
+
+### ⛔ **L'HO RILETTO DAL DISCO** *(`P1`)*, e confermo: `.githooks/pre-commit` lancia **`28`
+comandi**, e fra questi ### **NON c'e' `_collauda_tempo_proprio.py`**, ne'
+`_collauda_deriva.py`, ne' quello della memoria. ### **<<`pre-commit`>> in `collauda.py` e'
+UNA ETICHETTA, non un fatto:** quei collaudi girano **solo in CI**.
+
+> ### ⚠⚠ **Io avevo misurato una cosa VERA — che lo script torna `1` — e ne avevo dedotta
+> una FALSA: che fermasse un commit.** ### **E' esattamente la forma di errore che `A9`
+> descrive: ho chiamato PRESIDIO una cosa che non impediva niente.**
+
+### 📌 **E la stessa frase era sbagliata anche in `717bb60`**, dove avevo scritto che i due
+collaudi *«restano nel `pre-commit`»*: **non ci erano.** ### ✅ **Il punto 4 lo cabla per
+davvero**, e la prova non e' che lo script torni `1`: e' che ### **un commit VERO si
+fermi.**
+
+### ⚠ **E IL SECONDO ERRORE, che Luca chiama col suo nome:** `M-B1` e `M-B2` **non potevano
+valere insieme**, e ### **li avevo riportati dalla mappa senza controllarli.** Me ne sono
+accorto **solo dopo averli misurati entrambi**. ### **Li ha riformulati lui, non io.**
+
+---
+
+### ✅ **LE DECISIONI, REGISTRATE PRIMA DEL CODICE**
+
+#### ⭐ **① LA COMPOSIZIONE E' PALINDROMA** *(Strang)* — `[[DECISIONE-COMPOSIZIONE-SIMMETRICA]]`
+
+I tre motivi, **registrati con la decisione**: ### **(a)** e' l'unico modo in cui `M-B2`
+puo' dare `4`; ### **(b)** il passo diventa **simmetrico per inversione del tempo** —
+*rovesciarlo e' rifarlo all'indietro* — e ### **la reversibilita' sta nella legge,
+l'irreversibilita' deve EMERGERE** *(`A15.3`)*; ### **(c)** la questione della `C` diventa
+**una proprieta' del passo INTERO**, non dei singoli pezzi.
+
+### ⭐⭐ **E IL MOTIVO `(c)` HA UNA DERIVAZIONE CHE SI LEGGE IN TRE RIGHE**, e dice perche'
+il palindromo **non e' una preferenza di stile**. Da `C Op C^-1 = Op^-1` **per ogni pezzo**
+*(misurato in `1eeb73f`, `16`/`16`)*:
+
+```
+C W C^-1  =  Op_1^-1 Op_2^-1 ... Op_n^-1        <- NELLO STESSO ORDINE
+W^-1      =  Op_n^-1 ... Op_2^-1 Op_1^-1        <- IN ORDINE ROVESCIO
+```
+
+### ✅ **Le due coincidono SE E SOLO SE la sequenza e' il suo proprio rovescio.**
+### ⭐ **Quindi `C W C^-1 = W^-1` non e' un effetto SPERATO del palindromo: e' la sua
+DEFINIZIONE, vista da un'altra parte.** ### ⛔ **E da qui viene anche il caso che DEVE
+fallire del punto 3.**
+
+#### ⭐ **② LA SOGLIA DELLA MEMORIA A `6x`** — `[[COSTO-MEMORIA-DEI-FLUSSI-PARZIALI]]`
+
+### **E' un BUDGET DI CALCOLO, non fisica**, e la crescita e' **strutturale e dichiarata**.
+### ⛔ **E L'ORDINE DEI DUE ATTI E' OBBLIGATO, e lo scrive Luca: si MISURA prima col
+palindromo, POI si cambia la soglia.** ### **Cambiarla prima vorrebbe dire scegliere la
+soglia sapendo che fa passare.** ### ⚠ **E due vincoli restano:** un caso oltre `6x` deve
+**ancora fallire**, e se la misura **supera** `6x` ### **NON si alza oltre: si riporta e si
+ferma.**
+
+#### ⚠ **③ LA `C` RESTA APERTA** — `[[DECISIONE-LA-C-VUOLE-IL-TEMPO-ROVESCIATO]]`
+
+### **Si decide DOPO la misura** *(punto 3)*, che e' ### **una misura e nessuna
+decisione**: lo spettro appaiato `eps <-> -eps`, le degeneranze doppie *(alla Kramers,
+perche' `C^2 = -1` su `psi`)*, e `C W C^-1 = W^-1` al bit o all'ulp.
+### ⛔ **Script NUOVO di `L1`: `bande.py` resta CONGELATO.**
+
+### 📌 **E una cosa che registro perche' e' un vincolo del repo, non una scelta mia:**
+`DECISIONE-COMPOSIZIONE-SIMMETRICA` ### **non si puo' chiudere in QUESTO commit** — il
+validatore pretende `chiusura.commit` **non vuoto**, e lo sha del commit che applica la
+decisione **non esiste ancora**. ### **Quindi la chiusura e' il SECONDO ATTO**, col sha del
+commit che porta l'ordine palindromo.
