@@ -140,6 +140,10 @@ FILE_FISICA = (
     # ### viene dal segno di `beta`.**
     'primo_ordine/scena_l2.py',
     'primo_ordine/_misura_verso_l2.py',
+    # ### ⭐ **NATO il `2026-10-15`, secondo pezzo di `L2`**: la ### **parte PARI**
+    # ### di `dLambda` *(che e- quella che ha un VERSO)*, con la sua ### **barra
+    # ### d-errore**, e ### **l-esponente in `x`.**
+    'primo_ordine/_misura_pari_l2.py',
     'primo_ordine/motore.py',
     'primo_ordine/_collauda_motore.py',
     # ### IL CHECKPOINT *(sotto-pezzo `5c`)*: salva e riprende ### **stato, grafo,

@@ -94,6 +94,10 @@ moduli:
     responsabilita: la scena di riferimento di L2 -- n geometrici, U uno, vuoto uniforme
     importa: [corrente, incidenza, motore, stato]
 
+  - nome: _misura_pari_l2.py
+    responsabilita: la parte pari di dLambda -- il verso con la barra, e l-esponente in x
+    importa: [_presidio, deriva, saturazione, scena_l2]
+
   - nome: _misura_verso_l2.py
     responsabilita: se la materia consuma il vuoto, e se il verso viene dal segno di beta
     importa: [_presidio, deriva, saturazione, scena_l2]

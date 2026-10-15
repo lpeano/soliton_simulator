@@ -3598,3 +3598,21 @@ scena **cresca** come gli archi *(`4.00x` su `4.00x` atteso)*; `m3` **`0.005114`
 | ### ⛔ **a `dtau = 0.5`** | il canale dispari **C'E'** *(dispari/pari `2.99`)*, ### **ma il segno ALTERNA** fra le finestre *(`-0.137`, `+0.121`, `-0.198`, `+0.207`; media/scarto `-0.010`)*: il vuoto **OSCILLA** attorno alla scena senza materia |
 | ### ✅ **e il MECCANISMO c'e'** | con **`beta = 0`** il `dLambda` e' ### **ESATTAMENTE `0.000e+00`**: cio' che manca **non e' l'effetto, e' il suo VERSO** |
 | ### ⭐ **i bracci che validano la misura** | `beta = dN/dLambda` **verificato con differenze finite** *(`7.5e-10`)*; il vuoto di riferimento **stazionario a `0` ulp** su `240` tick; `h` del grumo **isotropo `0.000e+00`**; e la **scomposizione PARI/DISPARI** in `beta`, che e' il braccio che ha fermato il verdetto |
+
+---
+
+### `primo_ordine/_misura_pari_l2.py` — **LA PARTE PARI: IL VERSO E L'ESPONENTE** *(2026-10-15)*
+
+| | |
+|---|---|
+| **file** | `primo_ordine/_misura_pari_l2.py` |
+| **BLOB** *(sha1 dei byte grezzi)* | `198a6406` |
+| **IL COMANDO, verbatim** | `python primo_ordine/_misura_pari_l2.py` |
+| ### ⚠ **e sta FUORI dal `pre-commit`** | sono **corse lunghe** *(`2000` tick, e `10000` nell'estensione)*: ### **misure DICHIARATE, non collaudi** — il budget di `500` s resta |
+| **cosa misura** | `E = [dLambda(beta) + dLambda(-beta)]/2` *(la parte **PARI**, che e' quella che ha un verso)* e `O = ...-...` *(la **DISPARI**)*, sul grumo e per anelli, con **media sulle finestre** e **barra = scarto fra finestre / `sqrt(N)`** |
+| ### ⛔⛔ **IL VERSO** | ### **`E > 0` SEMPRE: IL VUOTO SI ACCUMULA SULLA MATERIA** — **verso OPPOSTO** alla decisione. ### **`9.1` e `7.9` barre a `dtau = 0.5`**, e ### **`8.2` e `8.5` barre a `dtau = 0.25`** *(con `10000` tick)* |
+| ### ⭐ **e il vuoto si SPOSTA** | `E > 0` sugli anelli `0`, `1`, `2` e ### **`< 0` all'anello `3`**, e la media su **TUTTI** i nodi e' `~0` *(`-1.8e-12`, `+8.8e-15`)*: ### **il vuoto viene TIRATO DENTRO da fuori, non creato** |
+| ### ⛔⛔ **L'ESPONENTE** | ### **`5.627 +- 0.183`** a `dtau = 1` e ### **`5.487 +- 0.169`** a `0.5`, e la pendenza **LOCALE** sul primo intervallo *(`x = 0.1 -> 0.2`)* e' ### **`6.013`** e `5.844`. ### ⚠⚠ **Cioe' `E ~ x^6`: una <<gravita'>> che va come `x^6` NON ESISTE PER POCA MATERIA** — dimezzare la materia **divide l'effetto per `64`** |
+| ### ⚠ **e la parte DISPARI NON e' solo oscillazione** | a `dtau = 0.25`: `O = -1.21e-01 +- 1.05e-02` *(`11.6` barre)*, e ### **cambia segno con l'elicita'** *(`+7.24e-02` con `-1`)*. ### **A `dtau = 0.25` `|O|` e' DELLO STESSO ORDINE di `|E|`**: c'e' un canale **che distingue lo spin** |
+| ### ✅ **il controllo nullo, l'unico** | `beta = 0` → `dLambda = `**`0.000e+00`** esatto, a tutti e tre i `dtau` |
+| ### ⚠ **e una cache con la chiave sbagliata, pagata** | la corsa senza materia era in cache su `dtau` **e non su `(dtau, tick)`**: il braccio del controllo *(`200` tick)* ha riempito la cache, e il braccio del verso ha trovato `201` righe dove ne voleva `2001`. ### **Un `ValueError` RUMOROSO, per fortuna** |
