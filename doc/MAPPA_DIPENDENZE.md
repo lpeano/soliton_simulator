@@ -121,3 +121,77 @@ hanno **validato `q_h`** che e' poi stato **deciso**; ### ⛔ **ma il loro USO s
 `python primo_ordine/_collauda_tempo_proprio.py` dice **`4` violatori su `7`**.
 ### ✅ **Quando saranno `0`, `L1` e' chiuso** — e quel collaudo **esiste e gira nel
 `pre-commit`**, quindi ### **il criterio non e' una promessa: e' un comando.**
+
+---
+
+## 5. ⛔ GLI STRUMENTI DI `L5`, **CONGELATI** *(decisione di Luca, 2026-10-15)*
+
+> *«Gli strumenti di `L5` che hai dichiarato in `784976d` restano **CONGELATI**: nessun
+> codice e nessuna misura finche' `L1`–`L4` non sono chiusi.»*
+
+| il file | che cosa fa | perche' e' `L5` |
+|---|---|---|
+| `primo_ordine/segno.py` | lo **squilibrio locale `q`**, e la sua validazione contro `Q` | e' **il parametro d'ordine** della strada `(3)` |
+| `primo_ordine/bande.py` | le **due bande spettrali** di `W`, il controllo `C`, le grandezze per banda | e' **materia/antimateria** |
+| `primo_ordine/bande_floquet.py` | il **riscaldamento di Floquet** sulla scena grande | misura la **termalizzazione delle bande** |
+| `primo_ordine/deriva.py` *(+ `deriva_referto.py`)* | la **deriva di `E`**, la scansione in `x`, la **sorgente per nodo** | dichiarato con gli altri in `784976d` |
+
+### ⛔ **NESSUNO DI QUESTI SI TOCCA E NESSUNO GIRA** per produrre misure nuove, finche'
+`L1`–`L4` non sono chiusi. ### ⚠ **I loro COLLAUDI restano nel `pre-commit`**
+*(`_collauda_corrente.py`, `_collauda_deriva.py`)*: ### **girano per NON LASCIARLI
+IMPUTRIDIRE, non per misurare** — e se un collaudo cominciasse a fallire, ### **quello e'
+un fatto da riportare, non un lavoro da riprendere.**
+
+### ⚠ **E UNA DOMANDA DI PERIMETRO CHE NON DECIDO IO, e la segnalo invece di risolverla a
+mio favore:** `deriva.py` contiene la macchina che serve a **`M-B2`**, che e' **un criterio
+di uscita di `L1`** — la scansione in `x`, le escursioni relative, il rapporto fra
+dimezzamenti. ### ⛔ **Il congelamento di `L5` BLOCCA anche il riuso di quella macchina per
+una misura di `L1`?** ### ✅ **Finche' non c'e' una risposta la tratto come BLOCCATA**, e
+quando `M-B2` servira' lo chiedo: ### **riscrivere la stessa macchina altrove per aggirare
+il congelamento sarebbe aggirarlo, non rispettarlo.**
+
+### 📌 **E DUE FILE CHE NON SONO NELL'ELENCO, e dico perche':** `corrente.py` e il suo
+collaudo costruiscono **la corrente locale dell'energia**, che serve a `H_tot` di `(B)` —
+### **cioe' sono `L1`/`L2`, non `L5`.** ### ⚠ **Non li aggiungo ai congelati e non li uso:
+li classifico, e la classificazione e' una mia lettura.**
+
+---
+
+## 6. ⭐ IDEE COLLOCATE, **NON OPERATIVE**
+
+> ### ⛔ **Qui stanno le idee che hanno gia' una CASELLA e NON si lavorano:** la regola
+> `(a)` dice che ogni idea si colloca **prima** di lavorarci, e ### **collocare non e'
+> cominciare.**
+
+### `6.1` **`MISURA-DOPPIONI`** — *dopo `L1`*
+
+| | |
+|---|---|
+| **la casella** | ### **dopo `L1`** — si apre **solo quando `L1` e' chiuso** |
+| **che cosa e'** | calcolare la **relazione di dispersione** del passo della camminata **sul toro** *(senza bordi)* e **contare i minimi** della curva: ### **uno o due coni?** |
+| **la domanda** | ### **la camminata ha <<DOPPIONI>>?** *(Nielsen–Ninomiya)* |
+| **perche' non e' un effetto dei bordi** | si misura **sul toro**, che **non ha bordi**: ### **sono una proprieta' del RETICOLO ALL'INTERNO** |
+| **perche' dopo `L1`** | la dispersione e' quella di `W`, e ### **in `(B)` `W` CAMBIA** *(`hop(theta)` e `Grover(theta)` invece delle involuzioni)*: ### ⛔ **misurarla adesso darebbe la dispersione di un passo che sta per essere sostituito** |
+| ### ⚠ **che cosa NON faccio** | nessun codice, nessuna misura. ### **E non la registro nemmeno come voce dell'indice**, perche' il mandato dice *«solo collocazione»* — ### **quando si apre, la voce e' il primo passo** |
+
+### `6.2` **`L6` — IL TEMA QUANTISTICO** — *dopo `L1`–`L5`, decisione di Luca del 14 ottobre*
+
+| | |
+|---|---|
+| **la casella** | ### **`L6`, dopo `L1`–`L5`** |
+| **che cosa e'** | la **seconda quantizzazione di `psi`** — un **automa cellulare quantistico** — ### **con la STESSA tabella delle leggi** |
+| ### ⭐ **il legame col simulatore di oggi** | il simulatore attuale ne sarebbe ### **IL CAMPO MEDIO** |
+| **i quanti** | **spinoriali FERMIONICI** |
+| ### ⭐ **i bosoni** | **figure d'interferenza** *(la materia)*, ### **NON coppie** |
+| **il primo passo** | a **grafo FISSO** |
+| ### ⭐ **il controllo di raccordo** | con **`1` quanto** deve dare ### **AL BIT** lo stesso risultato di `primo_ordine/motore.py` |
+| **lo stato** | ### ⛔ **SOLO TEORIA fino all'apertura di `L6`** |
+
+### ⚠ **E NOTO UNA COSA SUL CONTROLLO DI RACCORDO, perche' e' la sua forza:** *«con `1`
+quanto, AL BIT come `motore.py`»* e' ### **un criterio che non si puo' addolcire** — come
+`M-B1` per `(B)`. ### **E ha una conseguenza sull'ordine:** il raccordo e' con `motore.py`,
+che in `(B)` **cambia** ⟹ ### **`L6` aspetta `L1` non per comodita', ma perche' il suo
+criterio di raccordo PUNTA a un oggetto che sta per cambiare.**
+
+### ⛔ **E CHE COSA NON FACCIO:** nessuna derivazione, nessun task history, nessuna voce.
+### **La collocazione e' questa riga, e basta.**

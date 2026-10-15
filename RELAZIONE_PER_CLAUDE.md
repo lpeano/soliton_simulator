@@ -15805,3 +15805,53 @@ esatte)* **e la strada `(3)` la salva solo globalmente.**
 ### ⭐ **E IL CRITERIO DI USCITA DI `L1` NON E' UNA PROMESSA: E' UN COMANDO.**
 `python primo_ordine/_collauda_tempo_proprio.py` dice **`4` violatori su `7`**, gira **nel
 `pre-commit`**, e ### **quando saranno `0`, `L1` e' chiuso.**
+
+## 2026-10-15 — LA RIPRESA: **albero pulito, `L5` congelato, due idee collocate**
+
+> ### ⭐ **LIVELLO CORRENTE: `L1` — il tempo proprio in ogni legge (strada `(B)`).**
+> Stato: **fermo su `B-3` e `B-4`**, che Luca sta decidendo col guardiano.
+
+### ✅ **`1.` LO STATO: niente da decidere.** `git status` dice **working tree clean**, `0`
+commit non pushati, ultimo **`784976d`**. ### **Quindi non c'era nessuna modifica da
+completare ne' da scartare**, e non ho dovuto dichiarare nessuna scelta.
+### ✅ **E il blob dell'era `1` e' `b8c21049`: COINCIDE** *(`909787` byte)*.
+### ⚠ **Ed e' lo `sha1` dei BYTE GREZZI, non `git hash-object`:** sono **due convenzioni
+con numeri diversi**, e quando si cita un blob **si dice quale**.
+
+### ⛔ **`2.` GLI STRUMENTI DI `L5` SONO CONGELATI**, elencati coi file nel paragrafo `5`
+della mappa: `segno.py`, `bande.py`, `bande_floquet.py`, `deriva.py` *(+
+`deriva_referto.py`)*. ### **Nessun codice e nessuna misura finche' `L1`–`L4` non sono
+chiusi.** ### ⚠ **I loro COLLAUDI restano nel `pre-commit`**, e lo dichiaro: ### **girano
+per non lasciarli imputridire, NON per misurare** — e un collaudo che cominciasse a fallire
+sarebbe **un fatto da riportare, non un lavoro da riprendere.**
+
+### ⚠ **E TI FACCIO UNA DOMANDA DI PERIMETRO invece di risolverla a mio favore:**
+`deriva.py` contiene **la macchina che serve a `M-B2`**, che e' ### **un criterio di uscita
+di `L1`.** ### ⛔ **Il congelamento di `L5` blocca anche il riuso di quella macchina per una
+misura di `L1`?** ### ✅ **Finche' non rispondi la tratto come BLOCCATA** — ### **riscrivere
+la stessa macchina altrove sarebbe aggirare il congelamento, non rispettarlo.**
+
+### ✅ **`3.` LE DUE IDEE SONO COLLOCATE E NON OPERATIVE** *(paragrafo `6` della mappa)*:
+**`MISURA-DOPPIONI`** *(la dispersione sul toro, contare i minimi: uno o due coni?)* **dopo
+`L1`**; e **`L6` il tema quantistico** *(seconda quantizzazione di `psi`, stessa tabella, il
+simulatore di oggi come **campo medio**; raccordo: con `1` quanto **al bit** come
+`motore.py`)* **dopo `L1`–`L5`**.
+
+### ⭐ **E HO NOTATO CHE LE DUE HANNO LA STESSA RAGIONE DI ASPETTARE `L1`, e non e' la
+comodita':** la **dispersione** e' quella di `W` e il **raccordo di `L6`** punta a
+`motore.py` — ### **e in `(B)` entrambi CAMBIANO.** ### **Misurarle adesso vorrebbe dire
+misurare un oggetto che sta per essere sostituito.**
+
+### ⚠ **E non le ho registrate come voci dell'indice**, perche' il mandato dice *«solo
+collocazione»*: ### **quando si apriranno, la voce sara' il primo passo.**
+
+### ✅ **`4.` LE DUE DOMANDE SU CUI `L1` E' FERMO sono scritte nella `RIPRESA` con la mia
+raccomandazione SEPARATA:** `B-3` **si'** alla media armonica — ### **e' l'unica con una
+DERIVAZIONE** *(i tempi di mezza traversata si sommano)*, ### ⚠ **e ho assunto che l'arco
+si attraversi in due META' UGUALI, che e' un MODELLO e non un fatto**; `B-4` **si'** al
+raccordo — ### **compaiono solo PRODOTTI `omega dtau`, quindi un fattore comune e' un'UNITA'
+e i rapporti sarebbero COSTANTI**, che `F10` vieta. ### ⚠ **E il punto debole di `B-4` lo
+dico io: che oggi `omega_hop = omega_Grover` e' UN FATTO STORICO, non un argomento.**
+
+### ⛔ **STOP, come il mandato dice.** ### **Il codice di `L1` riparte solo con le tue
+risposte.**
