@@ -505,7 +505,10 @@ leggi:
       L'accoppiamento fra la MATERIA e il VUOTO: `N_k = rho_k ln(rho_k / (rho_k +
       Lambda_k))`, con `rho_k = somma_h |psi_h|^2` e `Lambda_k = somma_h |phi_h|^2`
       (punto `F5`). ### DECISIONE DI LUCA del 2026-10-15 (23:30 e 23:38): SOSTITUISCE
-      `CAMM-SATURAZIONE`, e le leggi restano `7`.
+      `CAMM-SATURAZIONE`. ### IL CONTO GIUSTO (errore n.1 del guardiano, corretto il
+      2026-10-16): LE LEGGI CHE GIRANO ERANO 6 E RESTANO 6 -- nell'ordine entra questa ed
+      esce la saturazione, che RESTA in tabella come scheda SUPERATA. Le righe non di prova
+      sono 8, e non c'e' niente da decidere.
       ### LE DUE DERIVATE, che sono il flusso: `alpha = dN/drho = ln(rho/(rho+Lambda)) +
       Lambda/(rho+Lambda)` su `psi`, e `beta = dN/dLambda = -rho/(rho+Lambda) = -x/(1+x)`
       su `phi`, con `x = rho/Lambda`.

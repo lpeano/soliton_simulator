@@ -624,7 +624,10 @@ dalla saturazione**; ### **`S1` e' l'unica che resta perturbativa oltre `x = 0.1
 
 ### ✅ **DECISA** *(Luca, `2026-10-15` `23:30` e `23:38`)*: la forma dell'accoppiamento e'
 ### **`CAMM-MATERIA-VUOTO`**, `N_k = rho_k ln(rho_k/(rho_k + Lambda_k))`, che
-### **SOSTITUISCE `CAMM-SATURAZIONE`** — e le leggi restano ### **`7`.**
+### **SOSTITUISCE `CAMM-SATURAZIONE`** — e ### **le leggi che GIRANO erano `6` e restano
+`6`** *(la saturazione RESTA in tabella come scheda SUPERATA, e le righe non di prova sono
+`8`)*. ### ✅ **Il <<restano `7`>> era un conto sbagliato: errore `n.1` del guardiano,
+corretto il `2026-10-16`, e il punto si chiude SENZA decisione.**
 
 ### ⛔⛔ **APERTA `1`: IL PRINCIPIO DI EQUIVALENZA.** La sostituzione chiude il canale di
 dipendenza dallo spin ### **della SORGENTE** *(al primo tick `8.9e-17` fra le tre

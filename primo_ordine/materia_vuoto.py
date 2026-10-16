@@ -3,7 +3,11 @@
 
 > `N_k = rho_k ln(rho_k / (rho_k + Lambda_k))`, con `rho_k = somma_h |psi_h|^2` e
 > `Lambda_k = somma_h |phi_h|^2`. ### **Decisione di Luca del `2026-10-15`** *(`23:30`)*:
-> sostituisce `CAMM-SATURAZIONE`, e le leggi restano `7`.
+> sostituisce `CAMM-SATURAZIONE`. ### ⚠ **E IL CONTO GIUSTO E' QUESTO** *(errore `n.1`
+> del guardiano, corretto il `2026-10-16`)*: ### **le leggi che GIRANO erano `6` e restano
+> `6`** -- nell'ordine di composizione entra questa ed esce la saturazione, che
+> ### **RESTA in tabella come SCHEDA SUPERATA.** ### **Le righe non di prova della tabella
+> sono `8`, e non c'e' niente da decidere.**
 
 ## ⭐⭐ LE DUE DERIVATE, CHE SONO IL FLUSSO
 
