@@ -17803,3 +17803,28 @@ checkout su Linux.** ### **Si normalizzano o la regola si dichiara in `.gitattri
 e il controllo *«la suite non sporca niente»* ### **va verificato su un checkout
 pulito** — perche' oggi quel controllo gira ### **sul mio disco, dove i byte sono
 quelli.**
+### ⛔ **PEZZO `4` COMINCIATO: IL CENSIMENTO DI `P-R1`, E L'AGGIUNTA `C`**
+
+**Il task history e' committato prima del codice**
+*(`doc/TASK_HISTORY/2026-10-16_4_censimento_p_r1_esteso.md`)*, e dentro ci sono
+### **quattro previsioni** scritte ### **prima di guardare** — cosi' se mi sbaglio
+si vede.
+
+### ⭐ **LA PREVISIONE CHE CONTA, e che potrebbe cambiare il senso del mandato:**
+credo che ### **i `default` nelle firme fuori dalla lista siano TANTISSIMI.** Se e' vero,
+### **estendere `P-R1` a tutti i file non e' un allargamento di lista: e' vietare i
+default la' dove oggi sono la norma** — e un `default` e' ### **un valore che gira
+senza che nessuno l'abbia scelto**, cioe' `CONFIG-1`, ### **`28` leggi su `31` che
+giravano SPENTE.** ### ⛔ **Quella e' una decisione di Luca, non un numero.**
+
+### ✅ **E UNA COSA CHE HO VERIFICATO INVECE DI ASSUMERLA:** la lista dei file
+### **si puo' DERIVARE dal disco**, perche' `[[H-FISICA-FUORI-LISTA]]` pretende che ogni
+`.py` sotto `primo_ordine/` stia nella LISTA dichiarata. ### **Misurato: `80` file sul
+disco, `0` fuori dal dichiarato.** ### **Quindi un file nuovo entra da solo**, che e' cio'
+che il mandato chiede — e il censimento ### **lo verifica a ogni corsa** invece di
+fidarsi.
+
+### ⭐⭐ **E IL CENSIMENTO NON RISCRIVE LA LOGICA DI `P-R1`: LA IMPORTA.** E' la
+regola `[[STRUMENTO-LEGGE-DALLA-TABELLA]]` applicata ### **a un presidio** — un
+censimento che riscrivesse il conteggio dei rami misurerebbe ### **la SUA idea di ramo**,
+e il numero non sarebbe confrontabile con niente.
