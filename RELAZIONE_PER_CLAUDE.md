@@ -17464,3 +17464,27 @@ deve fallire e' ### **`beta_zero=True` con `SOSTITUISCI=False`**, che adesso alz
 > delle due strade e' una COPIA NASCOSTA della scelta** — non e' una legge scritta dentro,
 > ma e' ### **la stessa malattia**: due strade che si credono uguali e non lo sono, e
 > ### **nessuno le obbligava a dirlo.**
+
+### ⛔⛔ **IL SESTO CASO TOCCA UN NUMERO CHE AVEVO GIA' PUBBLICATO, E IL VERDETTO E' SOSPESO**
+
+`deriva.sorgente_per_nodo` **applica `mot.operatori["CAMM-SATURAZIONE"]` a mano**
+*(riga `~396`)*, e poi fa `CM.ORDINE[1:]` — che contiene **`CAMM-MATERIA-VUOTO` alla
+posizione `11`**. ### ⛔ **Quindi applica MEZZA SATURAZIONE + i pezzi lineari + MEZZO
+MATERIA-VUOTO: un passo che non e' NESSUNA delle due leggi.**
+
+> ### ⚠⚠ **SOSPENDO IL VERDETTO DI `3bd2b75` PER IL BRACCIO `(6)`:** gli esponenti
+> ### **`0.8436` e `0.9891`** sono su quel passo misto, quindi ### **<<`53` ok, `0`
+> rossi>> NON VALE per quel braccio** finche' non e' rimisurato sul passo che gira.
+> ### 📌 **Gli altri `52` non sono toccati**, e nemmeno il braccio `(4)`: la' non c'e'
+> nessun id scritto a mano.
+
+### 📌 **E IL MIO PEZZO DI COLPA:** il sesto caso l'ho trovato ### **facendo il censimento
+che il mandato chiedeva**, ### **non prima di pubblicare il numero** — avevo riscritto il
+braccio `(6)` leggendo `sorgente_per_nodo` ### **dall'alto** *(la firma, il ritorno)* e
+### **non il suo corpo.** ### **E' esattamente la cosa che `P1` dice di non fare.**
+
+### ✅ **E la cura e' quella del mandato, senza scorciatoie:** `sorgente_per_nodo`
+### **percorre l'ordine INTERO dalla tabella** e prende il mezzo tick ### **dopo il PRIMO
+pezzo, qualunque esso sia** — con il controllo positivo che ### **il tick percorso dallo
+strumento coincide AL BIT con `DV.tick`**, e un caso che ### **DEVE fallire** *(un id che
+lo strumento non sa misurare: ALZA)*.
