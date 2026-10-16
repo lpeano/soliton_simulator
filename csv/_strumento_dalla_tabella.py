@@ -85,9 +85,6 @@ ECCEZIONI = {
     "serve all-operatore `_saturazione`, che resta registrato",
  ("primo_ordine/deriva.py", "CAMM-SATURAZIONE"):
     "`OPERATORE` registra ENTRAMBE le leggi, per lo stesso motivo del motore",
- ("primo_ordine/deriva.py", "saturazione"):
-    "serve a `nat2`, la scala naturale del termine del vuoto -- ### SCADUTA, ed e- la"
-    " voce `DOMANDA-LA-SCALA-NATURALE-DI-N`: la forma nuova la decide Luca",
  ("primo_ordine/_collauda_saturazione.py", "CAMM-SATURAZIONE"):
     "e- il collaudo DELLA saturazione: la legge resta in tabella, e il suo collaudo"
     " dev-essere ancora ri-girabile",

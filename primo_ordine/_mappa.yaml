@@ -208,7 +208,7 @@ moduli:
 
   - nome: deriva.py
     responsabilita: la deriva di E e dei suoi due termini, la scansione in x, e la sorgente
-    importa: [_presidio, composizione, corrente, deriva_referto, deriva_serie, deriva_variabile, energia, incidenza, motore, saturazione, stato]
+    importa: [_presidio, composizione, corrente, deriva_referto, deriva_serie, deriva_variabile, energia, incidenza, motore, stato]
 
   - nome: deriva_variabile.py
     responsabilita: la variabile del flusso che gira, letta dalla tabella

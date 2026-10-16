@@ -17734,3 +17734,46 @@ e' verde per costruzione; ### ② ### **la forma float che gira DEVE superare `V
 ### **una modifica della FORMA FLOAT della legge**, e ### **`M-B1` al bit non reggerebbe
 piu'.** ### **Lo dichiaro come proposta e mi fermo la'**; il limite va ### **nella scheda
 della legge.**
+
+### ✅ **PEZZO `5` FATTO: LA SCALA E' `V`, E LA VOCE E' CHIUSA SENZA LUCA**
+
+**La disuguaglianza regge**, e l'ho misurata col braccio `(s1)` di
+`primo_ordine/_collauda_materia_vuoto.py` *(### **`26` su `26`**, erano `22`)*:
+
+| il braccio | il numero | il criterio, fissato PRIMA |
+|---|---|---|
+| `(s1)` la scala, su `1e6` coppie log-uniformi in `[1e-8, 1e8]`, seme `7` | ### **`max |N|/Lambda = 1.0000000000000002`** | `<= 1 + 8` ulp |
+| `(s2)` e la stima e' ### **STRETTA** per `rho >> Lambda` | `1.000000000000` | `>= 0.99` |
+| `(s1)` DEVE fallire ①: ### **`rho` come scala** | `max |N|/rho = 36.7913` | `> 10` |
+| `(s3)` DEVE fallire ②: ### **la forma FLOAT che gira** | `1.9761` contro `1.0000000000000002` | `> 1 + 8` ulp |
+
+### ⭐⭐ **`V` NON E' SOLO UN LIMITE: E' CONSERVATA ESATTAMENTE**, quindi la scala del
+termine del vuoto ### **esiste ED E' COSTANTE** — che e' meglio di quello che la
+saturazione aveva. ### **E la stima e' stretta**, cioe' `V` non e' una scala lasca.
+
+**NEL CODICE:** `deriva.corri` calcola ### **`nat2 = somma Lambda`**, e
+### **l'import di `saturazione` e l'uso di `elicita` ESCONO da `deriva.py`** —
+### **due delle `8` coppie SCADUTE sono curate qui**, e le dichiarate in `[[P-TAB]]`
+scendono a ### **`7`**.
+
+### ⭐⭐ **E IL PRESIDIO NATO IERI HA LAVORATO PER ME OGGI.** Togliendo l'import,
+l'eccezione `deriva.py`/`saturazione` e' diventata ### **ORFANA nello stesso istante**, e
+`P-TAB` me l'ha detto con il suo messaggio: *«una cura non lascia dietro la sua
+eccezione»*. ### **Il task history lo aveva previsto al punto `6` del TODO**, ed e' la prova
+che il presidio ### **non e' decorativo.**
+
+### ✅ **E L'INCOGNITA `(b)` DEL TASK HISTORY HA UNA RISPOSTA: NESSUN REFERTO
+COMMITTATO PORTA UN NUMERO `relnat`** — verificato con un `grep` su `doc/**`. ### **Non
+c'e' niente di pubblicato da rimisurare**, e percio' non c'e' nessun numero vecchio da
+mettere accanto.
+
+**LA NOTA DI PRECISIONE** e' nella ### **scheda della legge** *(`leggi.yaml`, e la scheda
+si ### **rigenera**)*, come limite ### **DICHIARATO** e non come difetto: nelle scene di
+oggi `rho/Lambda` e' lontanissimo da `1e15`.
+### ⛔ **E `log1p` NON L'HO TOCCATO:** sarebbe ### **una modifica della FORMA FLOAT
+della legge**, e `M-B1` al bit ### **non reggerebbe piu'.** ### **Resta una proposta.**
+
+**LA VOCE `[[DOMANDA-LA-SCALA-NATURALE-DI-N]]` E' CHIUSA**, col criterio scritto e col
+motivo: ### **non serviva una decisione di Luca, era un conto** — e il `commit` della
+chiusura e' ### **`6c7ecda7`, il task history**, perche' e' la' che il criterio e' stato
+fissato ### **prima della misura.**

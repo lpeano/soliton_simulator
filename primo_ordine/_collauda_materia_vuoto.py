@@ -312,6 +312,79 @@ def braccio_frazione():
     esito("### (5) DEVE fallire: un `dtau` che non ha una riga per NODO", passa, nota)
 
 
+# ### ⛔ **LA BANDA DEL BRACCIO DELLA SCALA, fissata nel task history del `5`**:
+# ### `8` ulp sopra `1` per la disuguaglianza, `0.99` per la strettezza, `10` per il caso
+# ### che ### **deve** fallire.
+ULP_SCALA = 8.0
+STRETTA = 0.99
+RHO_NON_E_SCALA = 10.0
+SEME_SCALA = 7
+QUANTI = 1000000
+
+
+def braccio_scala():
+    r"""### `somma_k |N_k| <= V`: ### **LA SCALA NATURALE DEL TERMINE DEL VUOTO.**
+
+    ### ⭐⭐ **LA DERIVAZIONE, in due righe** *(e non serviva nessuna decisione di
+    Luca: era un conto)*:
+
+    ```
+    |N_k| = rho_k ln(1 + Lambda_k/rho_k) <= rho_k * (Lambda_k/rho_k) = Lambda_k
+                                            perche-  ln(1 + y) <= y
+    quindi   somma_k |N_k| <= somma_k Lambda_k = V
+    ```
+
+    ### ✅ **E `V` non e- solo un limite: e- CONSERVATA esattamente** dai pezzi del
+    tick -- quindi la scala del termine del vuoto ### **esiste, ed e- COSTANTE.**
+
+    ### ⛔⛔ **IL MIO ERRORE, che questo braccio ripara:** avevo scritto che
+    ### **<<nessuna funzione affine limita `N`>>** guardando l-asintoto
+    `Lambda/rho -> infinito`, dove `N/rho` diverge come un logaritmo. ### **Ma la
+    divergenza e- in `N/rho`, e il limite che serviva era in `Lambda`.**
+    """
+    import numpy as np
+    r = np.random.default_rng(SEME_SCALA)
+    rho = 10.0 ** r.uniform(-8, 8, QUANTI)
+    lam = 10.0 ** r.uniform(-8, 8, QUANTI)
+    # ### ⚠ **QUI `log1p` E- LO STRUMENTO, NON LA LEGGE:** la legge gira con
+    # ### `ln(rho/(rho+Lambda))`, e il braccio `(s3)` misura la differenza. ### **Si usa
+    # ### la forma stabile per provare la MATEMATICA**, e quella che gira per provare
+    # ### ### **il FLOAT.**
+    n_stabile = rho * np.log1p(lam / rho)
+    r_max = float(np.max(n_stabile / lam))
+    esito("### (s1) la SCALA: `|N_k| <= Lambda_k` su %d coppie casuali" % QUANTI,
+          r_max <= 1.0 + ULP_SCALA * EPS,
+          "max |N|/Lambda = %r   (il tetto e- 1 + %.0f ulp)" % (r_max, ULP_SCALA))
+    # ### ⭐ **E LA STIMA E- STRETTA dove `rho >> Lambda`**, cioe- il limite non e-
+    # ### lasco: senza questo il braccio di sopra sarebbe vero ### **e inutile.**
+    grande = 10.0 ** r.uniform(6, 8, 10000)
+    piccolo = 10.0 ** r.uniform(-8, -6, 10000)
+    stretto = float(np.max(grande * np.log1p(piccolo / grande) / piccolo))
+    esito("### (s2) e la stima e- STRETTA per `rho >> Lambda`: il rapporto tende a `1`",
+          stretto >= STRETTA,
+          "max |N|/Lambda = %.12f   (sotto %.2f il limite sarebbe LASCO)"
+          % (stretto, STRETTA))
+    # ### ⛔ **IL CASO CHE DEVE FALLIRE ①: `rho` NON E- UNA SCALA.**
+    # ### `|N|/rho = ln(1 + Lambda/rho)` ### **non e- limitata**, e una scala plausibile
+    # ### che non e- un limite ### **e- la prova che `(s1)` non e- verde per
+    # ### costruzione.**
+    peggio = float(np.max(n_stabile / rho))
+    esito("### (s1) DEVE fallire ①: `rho` come scala, cioe- `|N| <= rho`",
+          peggio > RHO_NON_E_SCALA,
+          "max |N|/rho = %.4f: `ln(1 + Lambda/rho)` NON e- limitata" % peggio)
+    # ### ⛔⛔ **IL CASO CHE DEVE FALLIRE ②: LA FORMA FLOAT CHE GIRA SUPERA `V`.**
+    # ### ⚠ **Ed e- la PRECISIONE, non la legge:** `ln(rho/(rho+Lambda))` perde cifre
+    # ### quando `Lambda/rho` e- minuscolo, e il rapporto ### **sfonda `1`.**
+    # ### ✅ **Il braccio esiste perche- un difetto del float NON si attribuisce alla
+    # ### legge** -- e la nota sta nella scheda della legge.
+    n_gira = -rho * np.log(rho / (rho + lam))
+    sfonda = float(np.max(n_gira / lam))
+    esito("### (s3) DEVE fallire ②: la forma FLOAT che gira supera `V`",
+          sfonda > 1.0 + ULP_SCALA * EPS,
+          "max |N|/Lambda = %.4f con `ln(rho/(rho+Lambda))` contro %r con `log1p`:"
+          " e- la PRECISIONE, non la legge" % (sfonda, r_max))
+
+
 def main(argv):
     _presidio.avvia(__file__)
     print("=" * 100)
@@ -324,6 +397,7 @@ def main(argv):
     braccio_esatto()
     braccio_singolarita()
     braccio_frazione()
+    braccio_scala()
     print("=" * 100)
     print("IL COLLAUDO DI `CAMM-MATERIA-VUOTO`: %d su %d   %s"
           % (OK[0], OK[1], "### TUTTI PASSATI" if OK[0] == OK[1] else "### CI SONO BUCHI"))

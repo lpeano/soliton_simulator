@@ -309,7 +309,7 @@
 | `DOMANDA-LA-FORMA-DI-CS-DAL-VUOTO` | DECISIONE | FISICA | 2 | ### **SUPERATA** |  | la forma di f in cs_k = f'(pi_k): il posto A1 della carta, dichiarato aperto |
 | `DOMANDA-LA-FORMA-DI-F-NELL-ORDINAMENTO` | DECISIONE | FISICA | 2 | ### **AGENDA** | SI | quale F in Lambda F(q q / Lambda^2): esiste, NON e unica, ed e la stessa classe  |
 | `DOMANDA-LA-GERARCHIA-GRAVITA-EM` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | la gerarchia gravita/elettromagnetismo deve EMERGERE dal modello, o si accetta c |
-| `DOMANDA-LA-SCALA-NATURALE-DI-N` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | la scala naturale di N: l-asintoto della saturazione non vale, e N diverge come  |
+| `DOMANDA-LA-SCALA-NATURALE-DI-N` | DECISIONE | FISICA | 2 | ### **CHIUSA** |  | la scala naturale di N: l-asintoto della saturazione non vale, e N diverge come  |
 | `DOMANDA-LAMBDA-GRANDEZZA` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | lambda: su quale grandezza si misura, e da dove viene il suo valore? |
 | `DOMANDA-MASSA-E-FORME-MANCANTI` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | il termine di massa e due forme del flusso sono nel banco e non in tabella |
 | `DOMANDA-MITOSI-LE-FORME` | DECISIONE | FISICA | 2 | ### **AGENDA** | SI | le quattro forme della mitosi: lo spareggio, phi, il ramo della radice, la conne |

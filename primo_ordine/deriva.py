@@ -46,7 +46,6 @@ import deriva_serie as DS                                     # noqa: E402
 import deriva_variabile as DVAR                                     # noqa: E402
 import energia as EN                                          # noqa: E402
 import deriva_referto as RF                                   # noqa: E402
-import saturazione as SAT                                     # noqa: E402
 
 # ### ⛔ **LA LEGGE -> L'OPERATORE, e NON e' una mia scelta:** la lista delle leggi e il
 # ### loro ordine stanno in `composizione.py`, che e' ### **GENERATA dalla tabella**; qui
@@ -272,7 +271,6 @@ def scansione(moduli, nn=16, dtau=0.25, ticks=400, seme=7, su2=False):
         _i2, mot2, st2, _p2 = scena(nn, seme, dtau, 0, "locale", f, su2)
         # ### ⛔ **LA VARIABILE E- QUELLA DEL FLUSSO CHE GIRA** *(cura del `2026-10-16`)*:
         # ### era ### **`|h|/Lambda`**, la variabile della saturazione.
-        h = mot2.elicita(st2)
         rho = mot2.densita_materia(st2)
         lam = mot2.densita_vuoto(st2)
         buoni = lam > 0.0
@@ -284,11 +282,19 @@ def scansione(moduli, nn=16, dtau=0.25, ticks=400, seme=7, su2=False):
         # ### iniziale del primo termine puo- capitare ### **vicino a uno zero**, e
         # ### allora un-escursione divisa per lui ### **sembra enorme senza esserlo.**
         # ### ⭐ `|Re<psi|W psi>| <= ||psi||^2` sempre, quindi ### **`||psi||^2` E- la
-        # ### scala del primo termine**; e per il vuoto, siccome
-        # ### `Lambda G(h/Lambda) -> h - (pi/2) Lambda sign(h)` a grande `x`, la scala e-
-        # ### ### **`somma|h| + (pi/2) somma Lambda`.**
+        # ### scala del primo termine.**
+        # ### ⛔⛔ **E LA SCALA DEL VUOTO E- `V`, dal `2026-10-16`** *(task history del
+        # ### pezzo `5`)*: era ### **`somma|h| + (pi/2) somma Lambda`**, cioe- l-asintoto
+        # ### ### **DELLA SATURAZIONE** -- e io avevo scritto che per `N` una scala affine
+        # ### ### **non esisteva.** ### **Era FALSO**, e il conto sta in due righe:
+        # ### `|N_k| = rho_k ln(1 + Lambda_k/rho_k) <= Lambda_k` perche- `ln(1+y) <= y`,
+        # ### quindi ### **`somma|N| <= somma Lambda = V`.**
+        # ### ✅ **E `V` e- CONSERVATA esattamente**, quindi la scala del termine del
+        # ### vuoto non e- solo giusta: e- ### **COSTANTE.** ### Il braccio che la misura
+        # ### e- `(s1)` di `_collauda_materia_vuoto.py`, coi suoi due casi che devono
+        # ### fallire.
         nat1 = float(np.sum(np.abs(st2["psi_h"]) ** 2))
-        nat2 = float(np.sum(np.abs(h)) + SAT.PIMEZZI * np.sum(lam))
+        nat2 = float(np.sum(lam))
         righe.append({"modulo": f, "x_max": x_max, "x_medio": x_med,
                       "nat_primo": nat1, "nat_vuoto": nat2,
                       "relnat_primo": esc[1] / max(nat1, 1e-300),

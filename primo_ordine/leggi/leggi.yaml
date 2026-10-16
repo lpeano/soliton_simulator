@@ -539,6 +539,22 @@ leggi:
       scelta: `beta` da' al vuoto una fase che dipende dalla materia, e `alpha` da' alla
       materia una fase che dipende dal vuoto -- e quella fase CONTA, perche' il Grover e
       lo spostamento che seguono INTERFERISCONO.
+      ### ⭐ LA SCALA NATURALE DI `N` E' `V`, LA NORMA DEL VUOTO (2026-10-16, e NON
+      serviva una decisione di Luca: era un conto). `ln(1 + y) <= y` da'
+      `|N_k| = rho_k ln(1 + Lambda_k/rho_k) <= Lambda_k`, quindi `somma_k |N_k| <= V`; e
+      `V` e' CONSERVATA esattamente, quindi la scala e' anche COSTANTE. La stima e'
+      STRETTA: per `rho >> Lambda` il rapporto `|N|/Lambda` tende a `1`.
+      ### ⚠ IL LIMITE NOTO DI PRECISIONE, misurato il 2026-10-16: calcolato come
+      `ln(rho/(rho+Lambda))` -- che e' LA FORMA CHE GIRA -- `N` perde cifre quando
+      `Lambda/rho` e' minuscolo, e su `1e6` coppie log-uniformi in `[1e-8, 1e8]` il
+      rapporto `|N|/Lambda` arriva a `1.976` invece di stare sotto `1`. Con `log1p` lo
+      stesso campione da' `1.0000000000000002`. ### NELLE SCENE DI OGGI `rho/Lambda` E'
+      LONTANISSIMO da quei valori e l'errore assoluto sulla fase e' trascurabile, quindi
+      OGGI NON E' UN DIFETTO: e' un limite DICHIARATO.
+      ### ⛔ E PASSARE A `log1p` SAREBBE UNA MODIFICA DELLA FORMA FLOAT DELLA LEGGE,
+      non una cura di uno strumento: il confronto AL BIT di `M-B1` non reggerebbe piu'.
+      Quindi NON si fa senza dichiararlo prima -- ed e' una proposta, non una decisione
+      presa.
     assiomi: [A1, A16]
 
   # ---------------------------------------------------------------- F6: la forma (D), SPENTA
