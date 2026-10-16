@@ -17174,3 +17174,18 @@ e' dichiarato»)* ### **guarda una lista HARDCODED di file** — `stato.py`,
 `saturazione.py` ne' il `materia_vuoto.py` di oggi** — cioe' ### **non guarda il posto dove
 sta la maggior parte della fisica.** ### ⚠ **Estendere la lista e' una decisione** *(farebbe
 emergere decine di rami da dichiarare in un colpo)*: ### **lo riporto e non lo faccio.**
+
+### ✅ **IL MANDATO SU `P-R1` E' IN CODA, non in chat:** `doc/CODA_2026-10-16.md`, col
+suo ordine *(### **dopo** il quinto pezzo, come dici)*, i suoi quattro punti e lo STOP.
+### 📌 **E nasce da un buco che ho trovato io e segnalato in `9fbcddf`:** `P-R1` guarda
+una ### **lista HARDCODED** e ### **non vede `motore.py`, `energia.py`,
+`flussi_parziali.py`, `saturazione.py`** — cioe' dove sta la maggior parte della fisica.
+
+### ⚠⚠ **E NELLO STESSO GIRO NE HO TROVATO UN SECONDO, della stessa famiglia, e mi e'
+scattato ADDOSSO:** ### **`P-ES1` cerca la STRINGA LETTERALE `-1j`**, quindi
+### **`- 1j` con lo spazio LO EVADE.** La prima stesura dell'Eulero del collaudo nuovo,
+scritta con lo spazio, ### **non veniva vista**: il presidio si lamentava dell'
+### **eccezione ORFANA** *(<<dichiarato come passo a mano e NON LO E' PIU'>>)*, non del
+passo nascosto. ### ✅ **Ho riscritto IL MIO file nella forma che il presidio vede, e il
+buco NON l'ho chiuso:** e' un presidio che sorveglia ### **una FORMA** invece di
+### **un FATTO**, ed e' una decisione tua come il primo.
