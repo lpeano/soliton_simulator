@@ -62,7 +62,7 @@
   "termini/camm_forma_d.py=0d3e0bb972c00d53",
   "termini/camm_grover.py=925a9103e94b1ef8",
   "termini/camm_grover_vuoto.py=60ef84764328df62",
-  "termini/camm_materia_vuoto.py=ae28747ebe3febb8",
+  "termini/camm_materia_vuoto.py=cdd475655800a810",
   "termini/camm_moneta_spin.py=780b45c8b5a946a9",
   "termini/camm_saturazione.py=9308ef5d0e37dc48",
   "termini/camm_spostamento.py=4123e1397a355d72",
@@ -71,8 +71,8 @@
   "termini/prova_locale.py=7326fa65e394ab4f"
  ],
  "impronta_config": "0bc547638e5fda6f",
- "impronta_generati": "87cb9cc1e706c7c1",
- "impronta_tabella": "941780936945d355",
+ "impronta_generati": "c3e5353cb4dbea95",
+ "impronta_tabella": "7d57c73d78cce48a",
  "passo": 200,
  "versione_dati": 1,
  "versioni": {

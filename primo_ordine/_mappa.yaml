@@ -106,6 +106,10 @@ moduli:
     responsabilita: lo strumento della risposta statica -- scena, rampa, congelamento, passo e barre a blocchi
     importa: [composizione, deriva, flussi_parziali, motore, scena_l2, _misura_forme_l2]
 
+  - nome: _misura_completa_l2.py
+    responsabilita: le tre misure del punto A -- cono, divergenza e simmetria su stati
+    importa: [_presidio, corrente, _misura_theta_n, _misura_theta_nonlineare, statica_protocollo]
+
   - nome: _misura_statica_motore.py
     responsabilita: la risposta statica con la legge NEL MOTORE, e il confronto con S3 di ebf5317
     importa: [_presidio, statica_protocollo]

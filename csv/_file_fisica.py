@@ -177,6 +177,11 @@ FILE_FISICA = (
     'primo_ordine/statica_protocollo.py',
     # ### ⭐ **E LA STESSA MISURA CON LA LEGGE NEL MOTORE** *(punto `2(c)`)*: nessuna
     # ### sostituzione, e la fotografia e- il congelamento ### **per PEZZO.**
+    # ### ⭐ **LE TRE MISURE DEL PUNTO `A`** *(mandato unico del `2026-10-16`)*: il
+    # ### ### **cono a `dtau` FINI** *(il gate del punto `D`)*, la ### **curva della
+    # ### divergenza** fra i due protocolli statici, e la ### **simmetria su OTTO
+    # ### stati** *(alcuni con nodi a `rho = 0`)*.
+    'primo_ordine/_misura_completa_l2.py',
     'primo_ordine/_misura_statica_motore.py',
     'primo_ordine/_misura_statica_l2.py',
     'primo_ordine/motore.py',
