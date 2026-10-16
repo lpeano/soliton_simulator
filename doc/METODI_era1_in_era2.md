@@ -8,18 +8,18 @@
 
 | | quanti |
 |---|--:|
-| **`PORTATO`** | `111` |
+| **`PORTATO`** | `113` |
 | **`PRONTO`** | `7` |
 | **`DA_PORTARE`** | `19` |
 | **`DA_DECIDERE`** | `5` |
 | **`NON_SI_APPLICA`** | `7` |
-| **in tutto** | ### **`149`** |
+| **in tutto** | ### **`151`** |
 
-### ⚠ **E IL NUMERO `149` E- MISURATO, non stimato:** viene dal perimetro che l-indice calcola, e ### **il mandato ne nominava <<una decina>>** per nome piu- *<<e le cure di architettura>>*. ### **La decina era `20`.**
+### ⚠ **E IL NUMERO `151` E- MISURATO, non stimato:** viene dal perimetro che l-indice calcola, e ### **il mandato ne nominava <<una decina>>** per nome piu- *<<e le cure di architettura>>*. ### **La decina era `20`.**
 
 ---
 
-## `PORTATO` — `111` metodi
+## `PORTATO` — `113` metodi
 
 > ### ✅ **GIA- NELL-ERA `2`**, e `dove` dice dove
 
@@ -92,6 +92,7 @@
 | **`P-T1`** | `PRESIDIO` | NATO NELL-ERA 2, ed e- il principio del mandato CABLATO: un presidio dichiarato ERRORE non puo- NOMINARE un campo di testo (via AST), e chi legge la prosa PUO- SOLO SEGNALARE. ### Non ripara: MANTIENE -- la misura dice che oggi e- gia- vero | `csv/_testo_e_metadati.py::controlla`, `pre-commit` + CI |
 | **`P-T2`** | `PRESIDIO` | NATO NELL-ERA 2: il REPLAY su TUTTI i registri (4 REPLAY, 5 REPERTO col blob dichiarato) e i testi generati BYTE-IDENTICI (9 file, VELOCI nel pre-commit e LENTI solo nella CI). ### E metadati.jsonl e- un REPERTO PER NECESSITA-: ha una via di scrittura e ZERO storico | `csv/_replay_registri.py::controlla`, `pre-commit` + CI |
 | **`P-T3`** | `PRESIDIO` | NATO NELL-ERA 2: una citazione e- {file, riga, commit, impronta, frase} e si RI-VERIFICA su `git show`. ### Il par.2 dice che i numeri di riga SONO SHIFTATI: con il commit una citazione e- vera PER SEMPRE, senza e- destinata a diventare falsa | `csv/_citazioni_strutturate.py::controlla`, `pre-commit` + CI |
+| **`P-TAB`** | `PRESIDIO` | NATO NELL-ERA 2: e- il presidio della regola STRUMENTO-LEGGE-DALLA-TABELLA, e guarda CON L-AST e non col testo -- la costante, la CONCATENAZIONE, la f-string a pezzi costanti e il join di costanti, perche- una forma equivalente non deve evadere come `- 1j` con lo spazio evade `P-ES1`. ### Cio- che sta FUORI dall-ordine SI DERIVA dalla tabella (e le leggi `prova: true` non contano, sono fuori per costruzione); le eccezioni sono DICHIARATE una per una col motivo, e un-eccezione ORFANA fa fallire anche lei. ### E IL SUO COLLAUDO SCRIVE FUORI DAL REPO, perche- due collaudi di presidio che ripristinavano i byte hanno lasciato l-albero sporco DUE VOLTE | `csv/_strumento_dalla_tabella.py::main`, `pre-commit` + CI |
 | **`P-TEMPI`** | `PRESIDIO` | NATO NELL-ERA 2: `python primo_ordine/collauda.py` fa girare TUTTI i collaudi dichiarati, stampa il tempo di ognuno, e confronta il totale col budget di 500 s (### DECISO DA LUCA il 2026-10-12: e' una SOGLIA DI LAVORO, non una grandezza derivata -- il 120 di prima era ereditato da un'altra classificazione). ### E OLTRE IL BUDGET E- UN SEGNALE, NON UN RIFIUTO: il tempo di una macchina non e- una proprieta- del repo, e fermare su quello vorrebbe dire rifiutare un commit perche- il computer era occupato. ### Ma un `pre-commit` troppo lento E- UNA RAGIONE PER DARE `--no-verify`, che e- `A9` dal lato del tempo. ### AL PRIMO GIRO HA CORRETTO UNA MIA CLASSIFICAZIONE SBAGLIATA: la catena era dichiarata <<lenta, oltre 120 s>> e misura 2.55 s | `primo_ordine/collauda.py`; MISURATO: 17 collaudi, pre-commit 44.4 s su 120 (37%) |
 | **`P1`** | `STANDARD` | non usare l-associazione senza verificare lo storico: in questo mandato ho riletto dal disco prima di ogni cura, e due volte la rilettura mi ha smentito | metodo, non codice |
 | **`P1-bis`** | `STANDARD` | la relazione si scrive nello stesso commit del riscontro: ogni commit di questo mandato ha il suo paragrafo | `RELAZIONE_PER_CLAUDE.md` + `H-P1-bis` |
@@ -128,6 +129,7 @@
 | **`STANDARD-4`** | `STANDARD` | snapshot contro snapshot allo stesso istante. ### PORTATO nel modello di sigillo (punto 7): i bracci partono dallo STESSO SEME e fanno lo STESSO numero di passi, e il confronto e- AL BYTE. ### E il <<prima>> NON E- PIU- UNA COPIA PATCHATA: si ottiene mettendo a ZERO il coefficiente, quindi il braccio zero e- byte-identico PER COSTRUZIONE | `primo_ordine/sigilli/_modello.py` |
 | **`STANDARD-8`** | `STANDARD` | un difetto dimostrato si cura: ### SUPERATA, assorbita in `A12` | vedi `A12` |
 | **`STATI-LOCALI`** | `PRESIDIO` | gli stati pesanti restano locali, in git solo sha1, percorso e comando. ### PORTATO: `db_era2/*.npz` e- nel `.gitignore`, e IL `.timbro.json` ACCANTO SI TRACCIA -- e- leggero e porta l-impronta della tabella, dei generati e della configurazione, cioe- IL COMANDO CHE RIPRODUCE QUEL DATO | `.gitignore` + `timbro.py::salva` |
+| **`STRUMENTO-LEGGE-DALLA-TABELLA`** | `STANDARD` | NATA NELL-ERA 2, da un CONTO: in un giorno sono emersi SETTE strumenti con la legge vecchia scritta dentro, mentre IL MOTORE NON SI E- AMMALATO perche- LEGGE DALLA TABELLA. ### Uno strumento non CONTIENE una legge (formula, id a mano, nome dell-operatore, conto di leggi): la legge SI LEGGE dalla tabella o SI IMPORTA dal modulo della legge, e se lo strumento ne trova una che non sa misurare ALZA. ### Unica eccezione la SECONDA FONTE voluta, ammessa solo se DICHIARATA e solo se si CONFRONTA a ogni corsa: una seconda fonte che non si confronta e- UNA COPIA | `csv/_strumento_dalla_tabella.py` (il presidio `P-TAB`), `pre-commit` + CI |
 | **`U3`** | `PRESIDIO` | confrontava con uno sviluppo invece del valore esatto: ### LA LEZIONE E- PORTATA -- la derivata generata si confronta con la differenza finita, non con una forma approssimata scritta a mano | `_collauda_genera.py` |
 | **`VELENO-ARCHI-KEEP`** | `DIFETTO` | il veleno allunga le derivate d-arco e non applica `keep`. ### IL PUNTO 4 E- VERO E VUOTO, e il collaudo lo MISURA: zero derivati, perche- lo stato e- solo `psi`. ### E la garanzia arriva dall-altro lato -- `senza_cache` rifiuta una memoria non dichiarata (`A8b`) -- quindi non c-e- IL BERSAGLIO | `_collauda_passo.py` sezione (I); il braccio FALLIRA- al primo derivato |
 | **`VELENO-ORIENTATO`** | `DIFETTO` | il veleno cade su UNO dei due archi figli, e quale dipende dall-orientamento: ### LA LEZIONE E- PORTATA -- `strati()` usa la chiave `(min, max)`, quindi l-arco `(3,7)` e `(7,3)` hanno LA STESSA chiave e lo strato non dipende da come e- scritto | `passo.py::strati` |

@@ -203,3 +203,11 @@ python "$(git rev-parse --show-toplevel)/csv/_modularita_era2.py" || exit 1
 #  ### confronto con due variabili e' DUE MISURE SOVRAPPOSTE. E ogni dato ha il
 #  ### suo TIMBRO accanto, con la versione del formato.
 python "$(git rev-parse --show-toplevel)/csv/_confronti_e_dati.py" || exit 1
+
+#  `P-TAB` -- LO STRUMENTO LEGGE LA LEGGE DALLA TABELLA (decisione di Luca, 13:25
+#  del 2026-10-16).
+#  ### Un id di legge FUORI dall-ordine scritto nel codice, l-import del modulo di
+#  ### una legge superata, un CONTO della tabella scritto a mano, una SECONDA FONTE
+#  ### che non confronta -> RIFIUTATI, se non c-e- un-eccezione DICHIARATA col suo
+#  ### motivo. E un-eccezione ORFANA fa fallire anche lei.
+python "$(git rev-parse --show-toplevel)/csv/_strumento_dalla_tabella.py" || exit 1

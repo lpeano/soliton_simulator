@@ -232,6 +232,8 @@ COLLAUDI = (
     ("`P-ES1` un solo esecutore", "csv/_un_solo_esecutore.py --collaudo", "pre-commit"),
     ("`P-MOD` la modularita-", "csv/_modularita_era2.py --collaudo", "pre-commit"),
     ("`P-AB` i confronti e i dati", "csv/_confronti_e_dati.py --collaudo", "pre-commit"),
+    ("`P-TAB` la legge si legge dalla tabella",
+     "csv/_strumento_dalla_tabella.py --collaudo", "pre-commit"),
     # ------------------------------------- E I TRE CHE IL CENSIMENTO HA TROVATO
     # ### ✅ **Questi non li ho messi a mano: li ha trovati `censimento()`**,
     # ### ### **e il nome non diceva che erano collaudi.** `_rinomina.py` lo e-

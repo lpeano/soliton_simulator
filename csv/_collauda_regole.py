@@ -79,8 +79,13 @@ def collaudo():
     # ### sempre**, cioe- ### **il braccio passerebbe per costruzione** e non direbbe
     # ### piu- niente.
     esito("### e le regole NUOVE sono quelle che ho creato IO, non altre",
+          # ### ⭐ **E E- CRESCIUTO UNA TERZA VOLTA, il `2026-10-16`: la regola
+          # ### `STRUMENTO-LEGGE-DALLA-TABELLA` e il suo presidio `P-TAB`.** ### Il
+          # ### braccio ### **me l-ha detto di nuovo**, e la cura e- quella che il
+          # ### commento prescrive: ### **si aggiorna l-elenco.**
           sorted(ora - pri) == ["DECISIONE-VUOLE-UN-CAMPO", "H-STOP-CODA", "P-E10",
-                                "P-REG", "PRECEDENZA-IN-CODA"],
+                                "P-REG", "P-TAB", "PRECEDENZA-IN-CODA",
+                                "STRUMENTO-LEGGE-DALLA-TABELLA"],
           "%s: ### se comparisse una regola che non ho creato, vorrebbe dire che il "
           "generatore ne INVENTA" % sorted(ora - pri))
     print()

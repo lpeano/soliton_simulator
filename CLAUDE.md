@@ -255,8 +255,9 @@ vive in **`doc/COMPONENTI_PROMOSSE.md`**, insieme al registro che governa.
 | **`[[P1-quater]]`** | Ogni sostituzione di testo si asserisce per se-, mai in blocco: un helper che CONTA l-ancora e fallisce se non e- unica | ⚠ **regola scritta** *(`A9`)* |
 | **`[[P2]]`** | Prima di escludere un flag da una misura: FORZA il sistema o lo CORREGGE? Escludere una correzione significa misurare un sistema che si sa difettoso | ⚠ **regola scritta** *(`A9`)* |
 | **`[[PRECEDENZA-IN-CODA]]`** | Fra piu- versioni di un mandato in coda vale SOLO L-ULTIMA, e l-ordine di esecuzione si REGISTRA | ⚠ **regola scritta** *(`A9`)* |
+| **`[[STRUMENTO-LEGGE-DALLA-TABELLA]]`** | Uno strumento non CONTIENE una legge (formula, id a mano, nome dell-operatore, conto di leggi): la legge SI LEGGE dalla tabella, e se lo strumento ne trova una che non sa misurare ALZA | **`P-TAB`** |
 
-> ### ⚠ **`9` di queste `10` NON HANNO NESSUN PRESIDIO che le faccia rispettare** *(`A9`)*: `DECISIONE-VUOLE-UN-CAMPO`, `L-DOPO-STOP`, `L-NUMERI`, `L-STELLA`, `L-UN-PROMPT`, `P1`, `P1-quater`, `P2`, `PRECEDENZA-IN-CODA`. ### **E il numero esiste perche' <<chi la fa rispettare>> e' UN CAMPO: in prosa non si contava.** ### **IL DETTAGLIO:** `doc/REGOLE/par11.md`.
+> ### ⚠ **`9` di queste `11` NON HANNO NESSUN PRESIDIO che le faccia rispettare** *(`A9`)*: `DECISIONE-VUOLE-UN-CAMPO`, `L-DOPO-STOP`, `L-NUMERI`, `L-STELLA`, `L-UN-PROMPT`, `P1`, `P1-quater`, `P2`, `PRECEDENZA-IN-CODA`. ### **E il numero esiste perche' <<chi la fa rispettare>> e' UN CAMPO: in prosa non si contava.** ### **IL DETTAGLIO:** `doc/REGOLE/par11.md`.
 
 <!-- FINE REGOLE GENERATE par11.md -->
 *(Il **metodo di una misura** — barre d'errore, semi, soglie, criteri, epoche — **non e'
@@ -296,8 +297,9 @@ qui**: sta in `doc/PATTERN_DI_PROVA.md`.)*
 | **`[[H-VALIDATORE]]`** | un indice mal formato, o con una voce persa | **`H-VALIDATORE`** |
 | **`[[P-E10]]`** | una variabile in tabella SENZA la sua riga nel confronto tabella/banco, o NUOVA senza il punto della carta che la decide | **`P-E10`** |
 | **`[[P-REG]]`** | una regola di gestione e- una VOCE, e le due sezioni delle regole SI GENERANO dall-indice: modificate a mano, RIFIUTATE | **`P-REG`** |
+| **`[[P-TAB]]`** | un id di legge FUORI dall-ordine nel codice, l-import del modulo di una legge superata, un CONTO della tabella scritto a mano, o una SECONDA FONTE che non confronta -- e un-eccezione ORFANA fallisce anche lei | **`P-TAB`** |
 
-> ### ⚠ **`0` di queste `17` NON HANNO NESSUN PRESIDIO che le faccia rispettare** *(`A9`)*. ### **E il numero esiste perche' <<chi la fa rispettare>> e' UN CAMPO: in prosa non si contava.** ### **IL DETTAGLIO:** `doc/REGOLE/par12.md`.
+> ### ⚠ **`0` di queste `18` NON HANNO NESSUN PRESIDIO che le faccia rispettare** *(`A9`)*. ### **E il numero esiste perche' <<chi la fa rispettare>> e' UN CAMPO: in prosa non si contava.** ### **IL DETTAGLIO:** `doc/REGOLE/par12.md`.
 
 <!-- FINE REGOLE GENERATE par12.md -->
 **LE VIE D'USCITA OBBLIGANO A DICHIARARE:** `[SENZA-RELAZIONE: …]` ·

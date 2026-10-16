@@ -12,10 +12,10 @@
 | `FISICA` | `2` | 128 |
 | `FISICA` | `ENTRAMBE` | 21 |
 | `INFRASTRUTTURA` | `1` | 39 |
-| `INFRASTRUTTURA` | `2` | 21 |
+| `INFRASTRUTTURA` | `2` | 22 |
 | `INFRASTRUTTURA` | `ENTRAMBE` | 24 |
 | `METODO` | `1` | 156 |
-| `METODO` | `2` | 20 |
+| `METODO` | `2` | 21 |
 | `METODO` | `ENTRAMBE` | 95 |
 
 | id | classe | dominio | era | stato | blocca | titolo |
@@ -594,6 +594,7 @@
 | `P-T1` | PRESIDIO | METODO | ENTRAMBE | ### **APERTA** |  | il TESTO LIBERO non si interpreta per decidere: chi RIFIUTA legge solo campi str |
 | `P-T2` | PRESIDIO | METODO | ENTRAMBE | ### **APERTA** |  | il REPLAY su TUTTI i registri, e i testi generati che si rigenerano byte-identic |
 | `P-T3` | PRESIDIO | METODO | ENTRAMBE | ### **APERTA** |  | le CITAZIONI sono STRUTTURATE e si ri-verificano su git show, non a occhio |
+| `P-TAB` | PRESIDIO | INFRASTRUTTURA | 2 | ### **AGENDA** |  | un id di legge fuori dall-ordine, un conto della tabella a mano, una seconda fon |
 | `P-TEMPI` | PRESIDIO | INFRASTRUTTURA | 2 | ### **AGENDA** |  | un solo comando per tutti i collaudi, coi TEMPI, e il budget SEGNALA invece di r |
 | `P0` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 12 volte, MAI definito in un registro; citato solo in referti/sigilli/ta |
 | `P1` | STANDARD | METODO | ENTRAMBE | ### **APERTA** |  | NON USARE L'ASSOCIAZIONE SENZA VERIFICARE LO STORICO. |
@@ -852,6 +853,7 @@
 | `STATI-LOCALI` | PRESIDIO | INFRASTRUTTURA | 1 | ### **SOSPESA** |  | gli stati .npz del grafo restano LOCALI: in git vanno solo sha1, percorso e coma |
 | `STORICO-COMMIT-STRUTTURALE` | DIFETTO | INFRASTRUTTURA | ENTRAMBE | ### **CHIUSA** |  | il commit di una riga di storico si pretendeva SCRITTO, e nessun clone poteva av |
 | `STRUMENTI-SULLA-LEGGE-VECCHIA` | DIFETTO | METODO | 2 | ### **AGENDA** |  | 20 coppie file/simbolo misurano, saltano o sostituiscono la legge che NON gira |
+| `STRUMENTO-LEGGE-DALLA-TABELLA` | STANDARD | METODO | 2 | ### **AGENDA** |  | uno strumento non CONTIENE una legge: la legge si LEGGE dalla tabella, o ALZA |
 | `SYNCDB-HEADLESS` | DIFETTO | INFRASTRUTTURA | 1 | ### **SOSPESA** |  | `--sync-db` in headless CARICA ma non SALVA: lo dice il docstring del driver |
 | `T0` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 32 volte, MAI definito in un registro) |
 | `T1` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | OMONIMO `T1`: 34 definizioni con significati DIVERSI |

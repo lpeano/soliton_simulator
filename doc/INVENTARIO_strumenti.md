@@ -3712,3 +3712,15 @@ scena **cresca** come gli archi *(`4.00x` su `4.00x` atteso)*; `m3` **`0.005114`
 ### ⚠ **I verdetti sono un GIUDIZIO, i conteggi sono una MISURA:** i primi stanno nel
 dizionario `V` del generatore *(e si leggono, si discutono, si cambiano con un commit)*, i
 secondi ### **escono dai file a ogni corsa.**
+
+### `csv/_strumento_dalla_tabella.py` — **`P-TAB`: la legge si legge dalla tabella**
+
+| | |
+|---|---|
+| **il comando** | `python csv/_strumento_dalla_tabella.py` *(nel `pre-commit`)* |
+| **il collaudo** | `python csv/_strumento_dalla_tabella.py --collaudo` — ### **`8` su `8`** |
+| **il referto** | `python csv/_strumento_dalla_tabella.py --referto` |
+| **cosa misura** | nel perimetro attivo e ### **con l'AST**: ogni `id` di legge ### **fuori dall'ordine** scritto nel codice *(### **in qualunque forma ripiegabile**: costante, concatenazione, `f-string`, `join`)*, ogni ### **import del modulo** di una legge fuori dall'ordine, ogni ### **intero letterale `>= 2`** confrontato con un'espressione che ### **nomina la tabella**, e ogni ### **seconda fonte dichiarata che non confronta** |
+| **il presidio dentro** | ### ⛔ **un'eccezione ORFANA fa fallire**, e ### **una legge fuori dall'ordine senza il suo modulo dichiarato fa ALZARE**: una legge superata nuova ### **non entra in silenzio** |
+| ### ⭐ **e il collaudo scrive FUORI dal repo** | i cinque casi che devono fallire stanno in ### **una cartella temporanea**, perche' l'analizzatore ### **prende le radici come argomento** — e due collaudi di presidio che ripristinavano i byte hanno lasciato l'albero sporco ### **due volte** |
+| **il BLOB** | `sha1-BYTE b557a18a` |

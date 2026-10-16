@@ -134,3 +134,41 @@ strumento legge un titolo per decidere.** ### **È una regola scritta** *(`A9`)*
 dare:** `csv/_regole_gestione.py` sceglie le regole ### **da `classe` e `dominio`**, quelle
 da mettere in `CLAUDE.md` ### **dal metadato `in_claude`**, e il loro gruppo
 ### **da `dettaglio_regola`** — ### **tre campi, zero titoli.**
+
+## `[[STRUMENTO-LEGGE-DALLA-TABELLA]]` — **uno strumento non CONTIENE una legge**
+*(decisione di Luca, `2026-10-16` alle `13:25`)*
+
+### ⭐⭐ **NASCE DA UN CONTO, E IL CONTO E' MIO.** In un giorno sono emersi ### **SETTE**
+strumenti con la legge vecchia scritta dentro:
+
+| | lo strumento | che cosa aveva dentro |
+|---|---|---|
+| `1` | `h_tot` di `M-B2` | la `N` della saturazione ### **cablata** |
+| `2` | `ordine_lineare` di `_misura_theta_n` | filtrava il flusso ### **per NOME** |
+| `3` | `_misura_statica_l2` | sostituiva l'operatore ### **per NOME** |
+| `4` | le guardie di `P-R1` | il numero ### **`7` scritto a mano** |
+| `5` | `deriva.satura` | la variabile ### **`|h|/Lambda`**, cioe' quella della legge sostituita |
+| `6` | `deriva.sorgente_per_nodo` | applicava ### **un pezzo A MANO** e poi `ORDINE[1:]`: un passo ### **MISTO fra due leggi** |
+| `7` | il braccio `(3)` di `_collauda_deriva` | il controllo positivo del `(2)` ### **parlava della legge che non gira** |
+
+> ### ⛔ **IL MOTIVO PER CUI IL MOTORE NON SI E' AMMALATO: LEGGE DALLA TABELLA.**
+> ### **Le copie no, e nessuno le obbligava.**
+
+### ⚠ **E IL MANDATO DICEVA <<CINQUE>>:** i due in piu' *(`6` e `7`)* sono emersi dopo,
+nel `2-quater`. ### **Il numero del mandato non si corregge in silenzio.**
+
+### ⭐ **L'UNICA ECCEZIONE: LA SECONDA FONTE VOLUTA.** `h_tot` di `M-B2` riscrive `N`
+### **per controllare il motore**, ed e' una cosa buona — ma solo se ### **DICHIARATA** e
+solo se ### **a ogni corsa si confronta e ALZA quando divergono.**
+### ⛔ **Una seconda fonte che non si confronta e' una COPIA.**
+
+### 📌 **E UN ESEMPIO IN PIU', della stessa malattia:** ### **un PARAMETRO DI STRUMENTO
+che agisce solo su UNA delle due strade e' una COPIA NASCOSTA della scelta.** I casi
+trovati sono la ### **rampa** *(agiva solo sul termine sostituito: errore `n.3` del
+guardiano)* e i tre parametri ### **`senza_alpha`, `beta_zero`, `visto`** *(ignorati in
+silenzio con `SOSTITUISCI = False`)*.
+### ⚠ **Non e' una legge scritta dentro, ma e' lo stesso difetto:** due strade che si
+credono uguali e non lo sono, e ### **nessuno le obbligava a dirlo.**
+
+### ✅ **CHI LA FA RISPETTARE: `[[P-TAB]]`**, dal `2026-10-16` — e il dettaglio del
+presidio sta in `par12.md`.

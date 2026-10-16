@@ -162,3 +162,48 @@ la riga **`PUSHATO:`**, che Luca vede a colpo d'occhio.
 | **il collaudo, nei DUE versi** | dentro il collaudo dei presidi dell'era `2`: il verso **sano** *(tace oggi)* e **TRE** casi che **devono scattare** -- una variabile **finta senza riga**, una `NUOVA` **senza il punto**, e il **documento che non c'e'** |
 | ### ⭐ **e i casi cattivi si provano IN MEMORIA** | un presidio provato **modificando la fonte** lascerebbe danno se il collaudo morisse a meta'. ### E un braccio verifica che **il documento vero sia tornato al suo posto**: un collaudo che lasciasse il presidio **puntato altrove lo SPEGNEREBBE** |
 | **il compagno eseguibile** | `primo_ordine/_collauda_confronto.py`: costruisce lo stato iniziale **con le funzioni del banco** e confronta `dtype`, forma e dove-vive. ### **`15`/`15`**, di cui **`4`** casi che devono fallire |
+
+## `P-TAB`: **LA LEGGE SI LEGGE DALLA TABELLA** *(decisione di Luca, `2026-10-16` `13:25`)*
+
+| | |
+|---|---|
+| **il codice** | `csv/_strumento_dalla_tabella.py`, nel `pre-commit` |
+| **il collaudo** | `python csv/_strumento_dalla_tabella.py --collaudo` — ### **`8` su `8`**, di cui ### **`5` casi che DEVONO fallire** e ### **`2` controlli che POTREBBERO** |
+| **la regola** | `[[STRUMENTO-LEGGE-DALLA-TABELLA]]`, e il suo dettaglio sta in `par11.md` |
+| ### ⭐ **con l'AST, non col testo** | e ### **in qualunque forma ripiegabile**: la costante, la ### **concatenazione**, la `f-string` a pezzi costanti, il `join` di costanti. ### ⛔ **Perche':** `P-ES1` cerca la stringa letterale `-1j` e ### **`- 1j` con lo spazio LO EVADE** — una forma equivalente ### **non deve evadere** |
+| ### ⛔ **le quattro specie** | `id-fuori-ordine` · `import-legge-vecchia` · `conto-letterale` *(un intero `>= 2` confrontato con un'espressione che ### **NOMINA la tabella**)* · `seconda-fonte-senza-confronto` |
+| ### ⭐ **cio' che sta FUORI dall'ordine SI DERIVA** | gli `id` da `leggi.yaml`, l'ordine da `composizione.py`, e le leggi ### **`prova: true` NON contano** — sono fuori dall'ordine ### **per costruzione**, e segnalarle sarebbe un falso-uno |
+| ### ⛔ **l'eccezione ORFANA fallisce anche lei** | cosi' ### **una cura non lascia dietro la sua eccezione** |
+
+### ⛔⛔ **I TRE LIMITI, DICHIARATI NEL DOCSTRING E NON NASCOSTI**
+
+### ① **I commenti sono invisibili all'AST, e i `docstring` sono ESCLUSI.** Un `id` in un
+commento ### **passa**: quello e' il perimetro di `[[P-RIF]]`, non di questo presidio.
+### ⚠ **E escludere i `docstring` non e' una comodita':** la prosa che ### **spiega**
+perche' una legge e' stata sostituita ### **deve poterla nominare.**
+
+### ② **<<Un intero letterale confrontato con un conto>> non e' decidibile in generale.**
+Quella del presidio e' ### **una regola NOMINATA**, e ### **un conto scritto in un'altra
+forma la evade.**
+
+### ③ **La mappa legge → modulo NON e' derivabile dalla tabella:** `leggi.yaml`
+### **non ha un campo `modulo`** *(verificato il `2026-10-16`)*. ### ✅ **Quindi e'
+DICHIARATA nel presidio, e il presidio ALZA se una legge fuori dall'ordine non ce l'ha** —
+cosi' ### **una legge superata nuova non entra in silenzio.**
+### 📌 **La cura pulita e' un campo nella TABELLA, ed e' una proposta per Luca**, perche'
+cambia lo schema che `_genera.py` valida.
+
+### ⭐⭐ **E IL COLLAUDO SCRIVE FUORI DAL REPO** — *la lezione di due albero sporchi*
+
+I cinque casi che devono fallire stanno in ### **una cartella TEMPORANEA**, perche'
+l'analizzatore ### **prende le radici come argomento.**
+### ⛔ **Due collaudi di presidio che scrivono nel repo e poi ripristinano i byte hanno
+lasciato l'albero sporco DUE VOLTE** *(`OSError: [Errno 22]` sul ripristino: una volta con
+una regola di `CLAUDE.md` ### **rinominata**, una volta con ### **una legge finta in
+tabella** e due file generati)*.
+### ✅ **Qui non c'e' niente da ripristinare**, e il controllo e' `git status`.
+
+### 📌 **SUL REPO DI OGGI:** ### **`60` reperti su `21` coppie** file/simbolo,
+### **`21` eccezioni dichiarate**, ### **`0` non coperte** e ### **`0` orfane.**
+### ⚠ **E `7` di quelle `21` sono marcate SCADUTE nel loro motivo:** le cure sono i pezzi
+`2-quinquies`, `2-sexies` e `2-septies` della coda — ### **un interruttore alla volta.**

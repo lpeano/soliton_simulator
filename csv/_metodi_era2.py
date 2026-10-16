@@ -618,6 +618,27 @@ METODI['P-MOD'] = (
 METODI['P-E9'] = (
     'NATO NELL-ERA 2: ogni sigillo dichiara `LEGGE` e `CRITERI`, letti VIA AST, e il criterio `deve-fallire` e- OBBLIGATORIO. ### Un sigillo che DICE di avere criteri senza averli e- PEGGIO di uno senza criteri: il primo SEMBRA FATTO',
     '`csv/_presidi_era2.py::pe9`, `pre-commit` + CI', "PORTATO")
+METODI['STRUMENTO-LEGGE-DALLA-TABELLA'] = (
+    'NATA NELL-ERA 2, da un CONTO: in un giorno sono emersi SETTE strumenti con la legge '
+    'vecchia scritta dentro, mentre IL MOTORE NON SI E- AMMALATO perche- LEGGE DALLA '
+    'TABELLA. ### Uno strumento non CONTIENE una legge (formula, id a mano, nome '
+    'dell-operatore, conto di leggi): la legge SI LEGGE dalla tabella o SI IMPORTA dal '
+    'modulo della legge, e se lo strumento ne trova una che non sa misurare ALZA. '
+    '### Unica eccezione la SECONDA FONTE voluta, ammessa solo se DICHIARATA e solo se '
+    'si CONFRONTA a ogni corsa: una seconda fonte che non si confronta e- UNA COPIA',
+    '`csv/_strumento_dalla_tabella.py` (il presidio `P-TAB`), `pre-commit` + CI',
+    "PORTATO")
+METODI['P-TAB'] = (
+    'NATO NELL-ERA 2: e- il presidio della regola STRUMENTO-LEGGE-DALLA-TABELLA, e '
+    'guarda CON L-AST e non col testo -- la costante, la CONCATENAZIONE, la f-string a '
+    'pezzi costanti e il join di costanti, perche- una forma equivalente non deve '
+    'evadere come `- 1j` con lo spazio evade `P-ES1`. ### Cio- che sta FUORI '
+    'dall-ordine SI DERIVA dalla tabella (e le leggi `prova: true` non contano, sono '
+    'fuori per costruzione); le eccezioni sono DICHIARATE una per una col motivo, e '
+    'un-eccezione ORFANA fa fallire anche lei. ### E IL SUO COLLAUDO SCRIVE FUORI DAL '
+    'REPO, perche- due collaudi di presidio che ripristinavano i byte hanno lasciato '
+    'l-albero sporco DUE VOLTE',
+    '`csv/_strumento_dalla_tabella.py::main`, `pre-commit` + CI', "PORTATO")
 METODI['P-AB'] = (
     'NATO NELL-ERA 2: un `A`/`B` dichiara IL CAMPO UNICO in cui i bracci differiscono, e se ne differiscono due ### IL CONFRONTO NON PARTE (la lezione di `Z20`: due misure sovrapposte). ### Piu- i dati con la versione del formato e nessun file a meta-',
     '`csv/_confronti_e_dati.py::controlla`, `pre-commit` + CI', "PORTATO")

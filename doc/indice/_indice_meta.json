@@ -868,6 +868,7 @@
    "P-T1",
    "P-T2",
    "P-T3",
+   "P-TAB",
    "P-TEMPI",
    "P0",
    "P1",
@@ -1124,6 +1125,7 @@
    "STATI-LOCALI",
    "STORICO-COMMIT-STRUTTURALE",
    "STRUMENTI-SULLA-LEGGE-VECCHIA",
+   "STRUMENTO-LEGGE-DALLA-TABELLA",
    "SYNCDB-HEADLESS",
    "T0",
    "T1",
@@ -2352,6 +2354,7 @@
    "P-T1",
    "P-T2",
    "P-T3",
+   "P-TAB",
    "P-TEMPI",
    "PI-CHIUSURA-ORFANA",
    "PI-CICLO-DIPENDENZE",
@@ -2430,6 +2433,7 @@
    "STANDARD-4",
    "STANDARD-6",
    "STANDARD-8",
+   "STRUMENTO-LEGGE-DALLA-TABELLA",
    "TAGLIA-FINITA",
    "TEMPO-PROPRIO-LOCALE",
    "VETTORI-DAI-BILINEARI",
@@ -3217,6 +3221,7 @@
    "P-MOD",
    "P-PULIZIA",
    "P-R1",
+   "P-TAB",
    "P-TEMPI",
    "PERC-TW-MORTA",
    "PI-CICLO-DIPENDENZE",
@@ -3477,6 +3482,7 @@
    "STANDARD-6",
    "STANDARD-8",
    "STRUMENTI-SULLA-LEGGE-VECCHIA",
+   "STRUMENTO-LEGGE-DALLA-TABELLA",
    "T3a",
    "T3b",
    "T4-TAUTOLOGICO",
@@ -4218,6 +4224,7 @@
    "P-R1",
    "P-RIF",
    "P-SIM",
+   "P-TAB",
    "P-TEMPI",
    "PERCHE-NON-LEGA",
    "PRIMA-LO-SPAZIO-POI-LA-MATERIA",
@@ -4236,6 +4243,7 @@
    "SPAZIO-DALLA-DINAMICA",
    "SPIN-LEGATO-AL-MOTO",
    "STRUMENTI-SULLA-LEGGE-VECCHIA",
+   "STRUMENTO-LEGGE-DALLA-TABELLA",
    "TEMPO-PROPRIO-LOCALE",
    "U-ARCO-DINAMICA",
    "VETTORI-DAI-BILINEARI",
@@ -5731,7 +5739,8 @@
    "P1",
    "P1-quater",
    "P2",
-   "PRECEDENZA-IN-CODA"
+   "PRECEDENZA-IN-CODA",
+   "STRUMENTO-LEGGE-DALLA-TABELLA"
   ],
   "par12.md": [
    "H-FILE",
@@ -5750,7 +5759,8 @@
    "H-STOP-CODA",
    "H-VALIDATORE",
    "P-E10",
-   "P-REG"
+   "P-REG",
+   "P-TAB"
   ]
  },
  "meta:duplicato_di": {
@@ -6580,6 +6590,9 @@
   "Una decisione che serve a un PROGRAMMA vuole un CAMPO: nessuno strumento legge `titolo` o `descrizione` per decidere || regola scritta": [
    "DECISIONE-VUOLE-UN-CAMPO"
   ],
+  "Uno strumento non CONTIENE una legge (formula, id a mano, nome dell-operatore, conto di leggi): la legge SI LEGGE dalla tabella, e se lo strumento ne trova una che non sa misurare ALZA || P-TAB": [
+   "STRUMENTO-LEGGE-DALLA-TABELLA"
+  ],
   "`CLAUDE.md` oltre le 400 righe || H-RIGHE": [
    "H-RIGHE"
   ],
@@ -6606,6 +6619,9 @@
   ],
   "un flag il cui commento cambia senza nominare quel flag || H-P7": [
    "H-P7"
+  ],
+  "un id di legge FUORI dall-ordine nel codice, l-import del modulo di una legge superata, un CONTO della tabella scritto a mano, o una SECONDA FONTE che non confronta -- e un-eccezione ORFANA fallisce anche lei || P-TAB": [
+   "P-TAB"
   ],
   "un indice mal formato, o con una voce persa || H-VALIDATORE": [
    "H-VALIDATORE"
@@ -7965,6 +7981,7 @@
    "P-R1",
    "P-RIF",
    "P-SIM",
+   "P-TAB",
    "P-TEMPI",
    "PERCHE-NON-LEGA",
    "PRIMA-LO-SPAZIO-POI-LA-MATERIA",
@@ -7979,6 +7996,7 @@
    "SPAZIO-DALLA-DINAMICA",
    "SPIN-LEGATO-AL-MOTO",
    "STRUMENTI-SULLA-LEGGE-VECCHIA",
+   "STRUMENTO-LEGGE-DALLA-TABELLA",
    "U-ARCO-DINAMICA",
    "VETTORI-DAI-BILINEARI",
    "VUOTO-LOCALE-DETERMINISTICO"

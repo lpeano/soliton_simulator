@@ -17626,3 +17626,37 @@ collaudo.
 
 ### ⛔ **E QUESTO COMMIT NON CURA NIENTE DELLA FISICA:** le cure stanno in coda
 *(`2-quinquies`, `2-sexies`, `2-septies`)*, un interruttore alla volta.
+### ⛔⛔ **ERRORE MIO, IL QUINTO: <<NESSUNA FUNZIONE AFFINE LIMITA `N`>> E' FALSO**
+
+**Il guardiano lo ha verificato e ha ragione**, e il conto sta in due righe:
+
+```
+|N_k| = rho_k ln(1 + Lambda_k/rho_k) <= rho_k * (Lambda_k/rho_k) = Lambda_k
+                                        perche'  ln(1 + y) <= y  per ogni y > 0
+quindi   somma_k |N_k| <= somma_k Lambda_k = V
+```
+
+### ⭐ **E `V` NON E' SOLO UN LIMITE: E' CONSERVATA ESATTAMENTE** — cioe' la scala
+naturale del termine del vuoto ### **esiste, e per di piu' e' COSTANTE.**
+### ⚠ **Io avevo guardato l'asintoto `Lambda/rho -> infinito`** *(dove `N` diverge come
+un logaritmo ### **in `Lambda/rho`**)* e ### **ne avevo concluso che nessuna funzione
+affine limitasse `N`** — ### **ma la divergenza e' in `Lambda/rho`, e il limite che
+serviva era in `Lambda`.**
+
+**L'HO RIMISURATO IO, in modo indipendente** *(`1e6` coppie `(rho, Lambda)` log-uniformi
+in `[1e-8, 1e8]`, seme `7`)*:
+
+| la forma | `max |N|/Lambda` |
+|---|---|
+| `rho * log1p(Lambda/rho)` | ### **`1.0000000000000002`** — ### **lo stesso numero del guardiano, cifra per cifra** |
+| `-rho * log(rho/(rho+Lambda))` *(la forma che gira)* | `1.9761410820732366` |
+
+### ⚠ **E il secondo numero NON smentisce la disuguaglianza: e' la PRECISIONE.** A
+`rho/Lambda = 1e15`: `log1p` da' `0.9999999999999997`, la forma ingenua `0.9992007221626414`
+*(e su qualche campione arriva sopra `1`)*. ### **E' la nota `2` del mandato, e nelle scene
+di oggi `rho/Lambda` e' lontanissimo da la'.**
+
+### ⛔ **LA VOCE `[[DOMANDA-LA-SCALA-NATURALE-DI-N]]` VA CHIUSA, NON RISPOSTA DA LUCA**
+— e il pezzo e' ### **in coda come `5`**, ### **commit a se'**, perche' il lavoro in
+corso e' il presidio della regola *(`L-UN-PROMPT`: un mandato che arriva DURANTE un lavoro
+va in CODA, non lo interrompe)*.
