@@ -9,7 +9,7 @@
 | `DOCUMENTAZIONE` | `2` | 1 |
 | `DOCUMENTAZIONE` | `ENTRAMBE` | 9 |
 | `FISICA` | `1` | 343 |
-| `FISICA` | `2` | 128 |
+| `FISICA` | `2` | 129 |
 | `FISICA` | `ENTRAMBE` | 21 |
 | `INFRASTRUTTURA` | `1` | 39 |
 | `INFRASTRUTTURA` | `2` | 22 |
@@ -657,6 +657,7 @@
 | `PROBLEMI-CHK3` | FRONTE | FISICA | 1 | ### **SOSPESA** |  | IL PIANO DEI PROBLEMI APERTI — per ciascuno: la domanda da chiudere · la misura  |
 | `PROMOZIONE-CONSERVAZIONE-MODIFICATA` | DECISIONE | FISICA | 2 | ### **CHIUSA** |  | la conservazione modificata si conserva: si promuove a energia? |
 | `PROPOSTA-FASE-DISPARI-COESIONE` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | la fase DISPARI sotto coniugazione di carica come forma della coesione |
+| `PROPOSTA-LOG1P-IN-N` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | log1p nella formula di N: la proposta resta APERTA, e NON si fa ora |
 | `PROPOSTA-SCANSIONE-FORZA-NONLINEARE` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | la coerenza del cluster migliora con la forza: si estende la scansione? |
 | `PROVA-COMB` | FRONTE | FISICA | 1 | ### **SOSPESA** |  | LA PROVA COMBINATA: TUTTE LE CURE APPROVATE ACCESE INSIEME — 600 passi, stesso s |
 | `PROVA1-40-80` | MISURA | FISICA | 1 | ### **SOSPESA** |  | i NODI delle masse del passo 0 si avvicinano piu' dei controlli a 40-80 passi; i |

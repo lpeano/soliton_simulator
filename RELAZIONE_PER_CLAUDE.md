@@ -17777,3 +17777,29 @@ della legge**, e `M-B1` al bit ### **non reggerebbe piu'.** ### **Resta una prop
 motivo: ### **non serviva una decisione di Luca, era un conto** — e il `commit` della
 chiusura e' ### **`6c7ecda7`, il task history**, perche' e' la' che il criterio e' stato
 fissato ### **prima della misura.**
+### 📌 **REGISTRATO IL MANDATO DEL CAMPO `modulo`** *(decisione di Luca, `2026-10-16`
+`18:09`)*, **e le due note**
+
+**In coda come `6`, dopo il pezzo `4` e prima del punto `D`**, come il mandato prescrive.
+### ⭐ **E il motivo e' una cosa che ho scritto io ieri:** `[[P-TAB]]` tiene
+### **una mappa legge -> modulo DICHIARATA A MANO dentro il presidio** *(il limite `(c)`
+di `fcee431`)*, ### **che e' una piccola copia della legge dentro uno strumento** —
+cioe' ### **esattamente cio' che la regola `[[STRUMENTO-LEGGE-DALLA-TABELLA]]` vieta.**
+### ⚠ **L'avevo dichiarato come limite e proposto come cura: Luca l'ha deciso.**
+
+### ⛔ **E IL VINCOLO CHE TENGO D'OCCHIO:** *«`M-B1` deve restare AL BIT contro
+`b150003`»* — ### **il campo e' dichiarativo e non tocca la fisica**, e se `M-B1`
+si muove ### **mi fermo e relaziono.**
+
+**LE DUE NOTE, registrate e senza azione di fisica:**
+### ① `[[PROPOSTA-LOG1P-IN-N]]` — la proposta di passare a `log1p` resta
+### **APERTA e NON decisa**, e il guardiano ### **raccomanda di non farla ora**: nelle
+scene di oggi quel regime ### **non c'e'**, e romperebbe il confronto al bit di `M-B1`
+### **senza comprare niente di misurabile.**
+### ② **in coda come `6-bis`:** tre referti committati con fine riga ### **`CRLF`**
+*(`doc/referti_l1/mb1.txt`, `mb1_palindromo.txt`,
+`doc/referti_l2/suite_dopo_la_sostituzione.txt`)* risultano ### **<<modificati>> a ogni
+checkout su Linux.** ### **Si normalizzano o la regola si dichiara in `.gitattributes`**,
+e il controllo *«la suite non sporca niente»* ### **va verificato su un checkout
+pulito** — perche' oggi quel controllo gira ### **sul mio disco, dove i byte sono
+quelli.**
