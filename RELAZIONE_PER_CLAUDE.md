@@ -17357,3 +17357,29 @@ cioe' ### **la crescita continua oltre i `200` tick misurati qui.**
 ### ✅ **`A3`: la simmetria su OTTO stati regge a `2.97`, `2.67` e `3.32` ulp** *(criterio
 `8`)*, e ### **quattro semi su otto hanno nodi a `rho = 0`** — il caso del limite e'
 ### **dentro** la misura. I due casi che devono fallire falliscono.
+
+### ⛔⛔ **ERRORE `n.3`, E IL DIFETTO E' NEL MIO STRUMENTO: LA RAMPA AGIVA SOLO DA UNA PARTE**
+
+`statica_protocollo.corri` applica la **rampa** *(`ag.acceso`)* **solo al termine
+SOSTITUITO**: con `SOSTITUISCI = False` la legge del motore **non ha rampa**, cioe' la
+sorgente e' **accesa di colpo dal tick `0`**. ### ⛔ **Quindi il confronto di `371731f` era
+fra CONDIZIONI DIVERSE**, e i tuoi numeri lo dicono: al tick `50`, `dtau = 0.25`,
+`dLambda` vale `-3.184` per `S3` e ### **`-3.970`** per il motore, e `max|dLambda|` sul
+grafo e' ### **`0.13` GIA' AL TICK `1`.** ### ✅ **Con `acceso = 0` da entrambe le parti i
+due protocolli coincidono a `1.2e-13` su `2000` tick.**
+
+> ### ⛔ **E RITIRO TRE COSE CHE AVEVO SCRITTO:** ① le `3.53` barre erano ### **la storia
+> dell'accensione**, non un'amplificazione degli ulp; ② il braccio `(d)` di `371731f` e'
+> ### **un FALSO-UNO** *(girava con `acceso = 0`, in condizioni diverse da `(a)`)*;
+> ③ la frase *«a `2000` tick lo scarto vale `2.1e-02`, la crescita continua»* di `403e4a0`
+> ### **confronta due grandezze diverse** *(una differenza di MEDIE col referto e la
+> divergenza TICK PER TICK)*: ### **la ritiro.**
+
+### 📌 **E LA LEZIONE, in una riga: un parametro che agisce solo da una parte deve ALZARE**,
+non passare in silenzio. ### **Lo strumento confronta solo condizioni uguali, o non
+confronta.**
+
+### 📌 **E PER `dd3d13e` LA RELAZIONE MANCAVA, hai ragione:** i due errori `n.1` *(il conto
+delle leggi: `6` girano e restano `6`, le righe sono `8`, e il punto si chiude SENZA
+decisione)* e `n.2` *(l'invarianza di scala: `Lambda_c` sarebbe LA PRIMA SCALA ASSOLUTA, e
+si misura in `D1`)* stavano ### **solo nella RIPRESA §`22`.** ### **Adesso sono anche qui.**
