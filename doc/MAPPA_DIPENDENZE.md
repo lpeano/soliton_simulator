@@ -52,6 +52,7 @@
 | **lo stato** | ### **derivazione FATTA** *(`60f869c`)*; **quattro forme a Luca** |
 | ### ⭐ **il criterio di uscita** | la `U` **evolve** e la sua **olonomia su un ciclo** e' misurabile e **invariante di gauge** |
 | ### ⚠ **l'ipotesi provvisoria che usa** | ### **la REGOLA DI CONNESSIONE di `L3`:** la nota del `2026-10-13` dice che **se il nato chiude triangoli coi vicini comuni dei genitori**, allora i cicli piu' corti sono **triangoli**, cioe' **plaquette locali** — e la **localita' del termine magnetico dipende da questo.** ### **Quindi `L4` aspetta `L3`** |
+| ### ⭐ **la domanda che SI DECIDE QUI** *(`2026-10-16`)* | `[[DOMANDA-LA-GERARCHIA-GRAVITA-EM]]`: ### **prima di `L4` il campo di gauge `U` e' FERMO** *(`U = I`)*, quindi l'accoppiamento elettromagnetico ### **non esiste nel modello** e il rapporto con la gravita' ### **non e' calcolabile.** ### **Resta collegata alla scelta di `Lambda_c`, che sta in `L2`** *(`[[DOMANDA-IL-VALORE-DI-LAMBDA-C]]`)* |
 
 ### `L5` — **I DOMINI DI MATERIA/ANTIMATERIA** — *la strada `(3)`*
 
@@ -674,3 +675,31 @@ differenza fra ### **una regola** e ### **una struttura che la fa rispettare.**
 chiamavano ### **`DV.satura`**, che e' andata in `deriva_variabile`.
 ### ⛔ **`P-MOD` NON li ha visti**, perche' guarda ### **gli import dichiarati**, non
 ### **gli attributi usati**: li ha trovati un `grep` del censimento.
+
+## 19. 📌 `L2`/`L4` — **`Lambda_c` E LA COSTANTE DI STRUTTURA FINE** — *una domanda di
+Luca, e quattro considerazioni del guardiano* *(`2026-10-16`, `13:10`)*
+
+> ### ⛔ **QUI NON SI DECIDE NIENTE, e non c'e' nessun numero mio:** il mandato chiedeva
+> ### **di registrare**, e le quattro considerazioni sono ### **del guardiano**, scritte
+> ### **come considerazioni e non come risultati.**
+
+### ⭐ **LA DOMANDA, di Luca:** *«`Lambda_c` c'entra con la costante di struttura fine?»*
+### **La voce e' `[[DOMANDA-IL-VALORE-DI-LAMBDA-C]]`** — aperta adesso, perche' la
+### **forma** di `cs` e' decisa *(`cs_k = Lambda_k/(Lambda_k + Lambda_c)`)* e il
+### **valore** di `Lambda_c` ### **no.**
+
+| | la considerazione *(del guardiano)* | dove tocca la mappa |
+|---|---|---|
+| `1` | ### **NO, non e' la struttura fine.** `alpha ~ 1/137` misura l'accoppiamento della **carica** al campo elettromagnetico; nel modello l'analogo e' ### **il campo di gauge `U` sugli archi**, che oggi e' ### **FERMO** *(`U = I`)*. ### **Oggi NON esiste una costante che faccia da `alpha`** | nascera' in ### **`L4`**, come intensita' dell'accoppiamento `psi`-`U` |
+| `2` | `Lambda_c/Lambda_medio` e' ### **UN FATTORE** della `G` del modello, che e' il prodotto di ### **due anelli**: *(i)* quanto vuoto toglie la materia *(la risposta statica della legge nuova — il guardiano la cita come pendenza `~1.1`)*; *(ii)* quanto rallenta la luce per unita' di vuoto tolto *(`dcs/dLambda`, che dipende da `Lambda_c/Lambda_medio`)* | ### **`L2`**: e' il punto `D` |
+| `3` | ### **IL CONFRONTO CHE DIVENTA UNA PREVISIONE:** in natura `alpha_G/alpha ~ 1e-36` *(il problema della gerarchia)*. Quando esisteranno ### **tutti e due** gli accoppiamenti, il loro rapporto ### **nel modello** va confrontato con quel numero | ### **dopo `L4`** |
+| `4` | ### **L'EFFETTO SULLA SCELTA:** con `Lambda_c` ### **parametro scelto**, la debolezza della gravita' e' ### **messa a mano** *(come nella fisica di oggi)*; con `Lambda_c` come ### **memoria di nascita** del nodo, `Lambda_c/Lambda_medio ~ 1` e la gravita' esce ### **dello stesso ordine degli altri effetti** — e se anche l'accoppiamento di `U` uscisse di ordine `1`, il modello sarebbe in contrasto con la natura di ### **circa `36` ordini**, a meno che una scala enorme emerga altrove *(la crescita, il numero dei nodi, la mitosi)* | ### **`L2` adesso**, ### **`L3` per la scala che potrebbe emergere** |
+
+### ⚠ **E IL GUARDIANO DICE CHE NON E' UN ARGOMENTO PER SCARTARE LA MEMORIA DI NASCITA:**
+e' ### **la domanda da tenere ACCANTO ai numeri di `D4`** — *«una gravita' forte nel
+simulatore e' un difetto o una tappa?»*
+
+### ⛔⛔ **LA DOMANDA APERTA PER LUCA, registrata e da spuntare quando risponde:**
+`[[DOMANDA-LA-GERARCHIA-GRAVITA-EM]]` — *«la gerarchia gravita'/elettromagnetismo deve
+### **EMERGERE** dal modello *(e da dove)*, o ### **si accetta come parametro**?»*
+### **Livello: si decide DOPO `L4`**, e resta collegata alla scelta di `Lambda_c` *(`L2`)*.

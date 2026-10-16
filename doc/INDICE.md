@@ -9,7 +9,7 @@
 | `DOCUMENTAZIONE` | `2` | 1 |
 | `DOCUMENTAZIONE` | `ENTRAMBE` | 9 |
 | `FISICA` | `1` | 343 |
-| `FISICA` | `2` | 126 |
+| `FISICA` | `2` | 128 |
 | `FISICA` | `ENTRAMBE` | 21 |
 | `INFRASTRUTTURA` | `1` | 39 |
 | `INFRASTRUTTURA` | `2` | 21 |
@@ -302,11 +302,13 @@
 | `DOMANDA-IL-LIMITE-DELLA-LUCE-SI-RAGGIUNGE` | DECISIONE | FISICA | 2 | ### **CHIUSA** |  | il limite omega*dtau = pi si raggiunge? E che cosa limita cs, se niente lo limit |
 | `DOMANDA-IL-PI-DEL-NODO-CHE-NASCE` | DECISIONE | FISICA | 2 | ### **AGENDA** | SI | il pi di un nodo nuovo: la decisione 10 (il calore paga la nascita) riscritta su |
 | `DOMANDA-IL-V4-ENTRA-NELL-ERA-2` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | cinque gruppi di operatori del v4 sono nel banco e non in tabella |
+| `DOMANDA-IL-VALORE-DI-LAMBDA-C` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | il valore di Lambda_c: parametro dichiarato, memoria di nascita, o altro |
 | `DOMANDA-L-ORDINAMENTO-IN-H-O-NON-H` | DECISIONE | FISICA | 2 | ### **AGENDA** | SI | il termine di ordinamento entra in H (e nel flusso) o come legge NON-H? |
 | `DOMANDA-LA-CARTA-NON-ESISTE` | DECISIONE | DOCUMENTAZIONE | ENTRAMBE | ### **APERTA** |  | la carta della fisica non ha un documento, e le sue etichette collidono con ID v |
 | `DOMANDA-LA-FORMA-DI-CS-CHE-SATURA` | DECISIONE | FISICA | 2 | ### **AGENDA** | SI | la forma di cs dal vuoto che satura: la scala Lambda_0 non esiste in tabella |
 | `DOMANDA-LA-FORMA-DI-CS-DAL-VUOTO` | DECISIONE | FISICA | 2 | ### **SUPERATA** |  | la forma di f in cs_k = f'(pi_k): il posto A1 della carta, dichiarato aperto |
 | `DOMANDA-LA-FORMA-DI-F-NELL-ORDINAMENTO` | DECISIONE | FISICA | 2 | ### **AGENDA** | SI | quale F in Lambda F(q q / Lambda^2): esiste, NON e unica, ed e la stessa classe  |
+| `DOMANDA-LA-GERARCHIA-GRAVITA-EM` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | la gerarchia gravita/elettromagnetismo deve EMERGERE dal modello, o si accetta c |
 | `DOMANDA-LA-SCALA-NATURALE-DI-N` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | la scala naturale di N: l-asintoto della saturazione non vale, e N diverge come  |
 | `DOMANDA-LAMBDA-GRANDEZZA` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | lambda: su quale grandezza si misura, e da dove viene il suo valore? |
 | `DOMANDA-MASSA-E-FORME-MANCANTI` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | il termine di massa e due forme del flusso sono nel banco e non in tabella |

@@ -17561,3 +17561,46 @@ sistema due volte.** ### ✅ **La cura e' meccanica** *(filtrare per `MO.FLUSSI`
 *(`59%`)*. **E i quattro presidi strutturali** — `P-MOD` `10/10`, `P-RIF` `10/10`,
 `P-ES1` `8/8`, `P-R1` `12/12`. **I moduli dopo la divisione:** `deriva.py` ### **`687`
 righe** *(tetto `700`)*, `deriva_serie.py` `48`, `deriva_variabile.py` `75`.
+
+### 📌 **`2-ter`: LA DOMANDA DI LUCA SU `Lambda_c` E LA STRUTTURA FINE, REGISTRATA**
+
+**Nessun codice, nessuna legge, nessuna decisione** — il mandato del `2026-10-16` alle
+`13:10` chiedeva ### **di registrare**, e lo dico anche per il contrario: ### **le quattro
+considerazioni sono del GUARDIANO**, e le ho scritte ### **come considerazioni, non come
+risultati miei.**
+
+**LA DOMANDA, di Luca:** *«`Lambda_c` c'entra con la costante di struttura fine?»*
+**La risposta del guardiano e' NO**, e il motivo e' strutturale: `alpha ~ 1/137` misura
+l'accoppiamento della ### **carica** al campo elettromagnetico, e nel modello l'analogo e'
+### **il campo di gauge `U` sugli archi — che oggi e' FERMO** *(`U = I`)*.
+### **Quindi oggi nel modello NON esiste una costante che faccia da `alpha`:** nascera' in
+`L4` come intensita' dell'accoppiamento `psi`-`U`.
+
+**QUELLO CHE C'ENTRA DAVVERO:** `Lambda_c/Lambda_medio` e' ### **un FATTORE della `G` del
+modello**, che il guardiano scompone in ### **due anelli** — ① quanto vuoto toglie la
+materia *(la risposta statica, che lui cita come pendenza `~1.1`)* e ② quanto rallenta la
+luce per unita' di vuoto tolto *(`dcs/dLambda`)*.
+### ⭐ **E il confronto diventa una PREVISIONE:** in natura
+`alpha_G = G m_p^2/(hbar c) ~ 6e-39` e `alpha ~ 1/137`, quindi
+`alpha_G/alpha ~ 1e-36` — ### **il problema della gerarchia.** ### **Quando esisteranno
+tutti e due gli accoppiamenti, dopo `L4`, il rapporto NEL MODELLO va confrontato con quel
+numero.**
+
+### ⚠ **L'EFFETTO SULLA SCELTA, che e' la parte operativa:** con `Lambda_c`
+### **parametro scelto** la debolezza della gravita' e' ### **messa a mano**, come nella
+fisica di oggi; con `Lambda_c` come ### **memoria di nascita del nodo** si ha
+`Lambda_c/Lambda_medio ~ 1`, e la gravita' esce ### **dello stesso ordine degli altri
+effetti** — cioe' ### **~`36` ordini lontano dalla natura**, a meno che una scala enorme
+emerga altrove *(la crescita, il numero dei nodi, la mitosi)*.
+### ⛔ **E il guardiano dice che NON e' un argomento per scartare la memoria di nascita:**
+e' ### **la domanda da tenere accanto ai numeri di `D4`** — *«una gravita' forte nel
+simulatore e' un difetto o una tappa?»*
+
+**LE DUE VOCI APERTE, e nessuna delle due la decido io** *(`A1`)*:
+### ① `[[DOMANDA-IL-VALORE-DI-LAMBDA-C]]` *(`AGENDA`, `CRITICA`)* — ### **la FORMA di `cs`
+e' decisa, il VALORE di `Lambda_c` no**, e la voce non esisteva: l'ho aperta adesso, come
+il mandato chiede.
+### ② `[[DOMANDA-LA-GERARCHIA-GRAVITA-EM]]` *(`AGENDA`, `DIPENDENTE`)* —
+*«la gerarchia gravita'/elettromagnetismo deve ### **EMERGERE** dal modello *(e da dove)*,
+o ### **si accetta come parametro**?»* ### **Si decide dopo `L4`**, e il rimando sta
+### **nella tabella di `L4` della mappa**, non solo in una sezione in fondo.
