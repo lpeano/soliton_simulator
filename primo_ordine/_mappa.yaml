@@ -102,9 +102,17 @@ moduli:
     responsabilita: le quattro forme misurate con rho come sorgente, e il cono nei due modi
     importa: [_presidio, deriva, flussi_parziali, scena_l2]
 
+  - nome: statica_protocollo.py
+    responsabilita: lo strumento della risposta statica -- scena, rampa, congelamento, passo e barre a blocchi
+    importa: [composizione, deriva, flussi_parziali, motore, scena_l2, _misura_forme_l2]
+
+  - nome: _misura_statica_motore.py
+    responsabilita: la risposta statica con la legge NEL MOTORE, e il confronto con S3 di ebf5317
+    importa: [_presidio, statica_protocollo]
+
   - nome: _misura_statica_l2.py
-    responsabilita: la risposta del vuoto a una sorgente FERMA, con la fotografia di rho
-    importa: [_presidio, composizione, deriva, flussi_parziali, scena_l2, _misura_forme_l2]
+    responsabilita: le MISURE della risposta statica -- i bracci, i verdetti e il confronto fra i due metodi
+    importa: [_presidio, composizione, scena_l2, statica_protocollo]
 
   - nome: _deriva_forme_l2.py
     responsabilita: la derivazione simbolica delle quattro forme e del prezzo della linearita

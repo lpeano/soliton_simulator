@@ -154,7 +154,7 @@ SCRITTI_A_MANO = {
     "primo_ordine/passo.py::mezzo_implicito":
         "E- L-ESECUTORE: e- il posto dove lo stato avanza, e l-unico",
 
-    "primo_ordine/_misura_statica_l2.py::_termine_statico":
+    "primo_ordine/statica_protocollo.py::_termine_statico":
         "e- il TERMINE CANDIDATO del quarto pezzo di `L2`, quello che misura la risposta"
         " a una sorgente FERMA, e deve agire SENZA entrare nel motore perche- il mandato"
         " di Luca del `2026-10-15` dice <<il motore NON si tocca>>: vive qui, e si"
@@ -165,7 +165,7 @@ SCRITTI_A_MANO = {
         " `d rho / d psi* = psi` -- il conto sta in `_deriva_forme_l2.py`, commit"
         " `2a933f6`. ### Un integratore darebbe un risultato PEGGIORE, e perderebbe la"
         " norma al bit, dove qui il troncamento NON ESISTE.",
-    "primo_ordine/_misura_statica_l2.py::agisci":
+    "primo_ordine/statica_protocollo.py::agisci":
         "e- il CORPO del termine sostituito: la fase su `psi` e la fase su `phi`, con la"
         " rampa su `beta` e la `rho` FOTOGRAFATA. Senza di lei la risposta statica non si"
         " potrebbe misurare senza toccare il motore, che e- cio- che il mandato VIETA."

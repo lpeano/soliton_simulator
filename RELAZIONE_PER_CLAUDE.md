@@ -17230,3 +17230,45 @@ passo ### **palindromo** — e l'avviso del banco *(<<`rho` e' PARI, rompe `C`>>
 ### **l'ALTRO criterio**, quello che la saturazione con `h` soddisfaceva.
 ### ⚠ **E nessuna conclusione di fisica: che cosa voglia dire una simmetria del passo e'
 una decisione tua. Qui ci sono numeri.**
+
+### ⭐⭐ **I CONTROLLI `(c)` E `(d)`: LA LEGGE IN TABELLA E' LA LEGGE CHE HO MISURATO**
+
+| la lettura | col MOTORE | `S3` di `ebf5317` |
+|---|---|---|
+| il **verso** a `dtau = 0.50` | `-3.892e+00 ± 1.01e-02` *(`384` barre)* | `-3.919e+00` |
+| il **verso** a `dtau = 0.25` | `-3.926e+00 ± 7.01e-03` *(`560` barre)* | `-3.947e+00` |
+| la **pendenza** a `x` piccolo | ### **`1.108`** e `1.119` | ### **`1.106`** e `1.110` |
+| la **sovrapposizione** a `x = 0.01` | `0.0210` e `0.0117` | `0.0193` e `0.0115` |
+| il **cono** *(contro il passo libero)* | ### **`0.805`** e `0.990` | `0.80` *(`74ba200`)* |
+
+### ✅ **E la fotografia, con la legge nel motore, e' IL CONGELAMENTO DI `psi` DOPO OGNI
+PEZZO** — cosi' il termine del motore vede sempre `rho(psi0)`. ### **Non e' un'equivalenza
+supposta:** nel quarto pezzo il braccio `(3-ter)` ha misurato che con la fotografia `psi`
+libera da' lo stesso `Lambda(t)` ### **al bit.**
+
+### ⛔ **UN BRACCIO FALLISCE, E LO LASCIO FALLITO:** il mio criterio era *«la MEDIA
+coincide entro `3` barre del referto»*, e a `dtau = 0.25` da' ### **`3.53` barre.**
+### ✅ **E ho misurato DA DOVE VIENE, invece di dichiararla trascurabile: al PRIMO TICK i
+due protocolli coincidono a `0.000e+00`** *(a entrambi i `dtau`)*, e la differenza nasce
+dagli ulp e ### **cresce** *(`1.5e-14` a `60` tick)*. ### **Quindi non e' la forma di
+`beta` in virgola mobile:** e' ### **amplificazione**, e il sistema e' in
+### **saturazione profonda** *(`|dLambda| = 3.93` su `Lambda = 4`)*.
+### ⚠ **Non cambio la banda** *(era mia, scritta prima)*: dico che e' ### **mal posta**
+per un confronto fra due protocolli in regime caotico, e che la domanda del mandato e'
+risposta dalle ### **tre letture** e dall'identita' al primo tick.
+
+### ⚠⚠ **E UN TERZO FILE ERA SCADUTO:** `_misura_statica_l2.py` sostituiva
+`mot.operatori["CAMM-SATURAZIONE"]` ### **per nome** — con la legge sostituita finiva su
+un operatore ### **che il passo non chiama piu'**, cioe' la misura girava con la legge del
+motore e il parametro `forma` ### **non faceva niente, in silenzio.**
+### ✅ **Adesso il pezzo si LEGGE dalla tabella** *(il flusso che sta nell'ordine)*, e la
+funzione ### **ALZA** se i flussi fossero piu' di uno: quale sostituire diventerebbe
+### **una decisione**, e non la prendo io.
+### ⛔ **E' IL TERZO**, dopo `h_tot` di `M-B2` e `ordine_lineare` di `_misura_theta_n`:
+### **tutti e tre avevano la legge vecchia SCRITTA A MANO DENTRO.**
+
+### 📌 **E il primo tentativo del braccio del cono dava `rapporto nan`**, con un motivo che
+vale la pena scrivere: guardavo `max |d Lambda_k|`, e sulla scena di riferimento `phi` e'
+### **uniforme** — quindi il passo LIBERO lascia `Lambda` ### **esattamente ferma**, cioe'
+### **zero al denominatore.** ### ✅ **`74ba200` guardava `max |d rho_k|`**, ed e' quello
+che si legge adesso.

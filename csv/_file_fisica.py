@@ -171,6 +171,13 @@ FILE_FISICA = (
     # ### saturazione, perche- un campo ### **STATICO** vuole che il vuoto veda la stessa
     # ### `rho` ### **in ogni istante** -- e col solo ripristino per tick
     # ### ### **non era cosi-**, misurato.
+    # ### ⭐⭐ **LO STRUMENTO DELLA RISPOSTA STATICA**, uscito da
+    # ### `_misura_statica_l2.py` quando quello ha superato ### **il tetto di `700`
+    # ### righe** col punto `2(c)`: ### **oltre, SI DIVIDE, NON SI ALLUNGA.**
+    'primo_ordine/statica_protocollo.py',
+    # ### ⭐ **E LA STESSA MISURA CON LA LEGGE NEL MOTORE** *(punto `2(c)`)*: nessuna
+    # ### sostituzione, e la fotografia e- il congelamento ### **per PEZZO.**
+    'primo_ordine/_misura_statica_motore.py',
     'primo_ordine/_misura_statica_l2.py',
     'primo_ordine/motore.py',
     'primo_ordine/_collauda_motore.py',
