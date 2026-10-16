@@ -1,0 +1,41 @@
+[TIMBRO] _collauda_materia_vuoto.py  sha1-BYTE 207b3597  committato e pulito
+====================================================================================================
+IL FLUSSO DI `CAMM-MATERIA-VUOTO` -- ESATTO, e il suo inverso lo ANNULLA
+### `N = rho ln(rho/(rho+Lambda))`, decisione di Luca del 2026-10-15.
+====================================================================================================
+### (0) LE FUNZIONI, sui numeri: nessun motore, nessuno stato
+  (0) `beta = -x/(1+x)` ESATTO su ogni valore                    PASSA   scarto massimo 0.000e+00
+  (0) `alpha` e `beta` sono `0` dove `rho = 0`, ESATTAMENTE      PASSA   alpha 0.0e+00 e beta 0.0e+00: il LIMITE, non un pavimento
+  (0) e con `rho > 0` PICCOLO `alpha` resta GRANDE: nessun pavim PASSA   alpha(1e-12) = -28.017 e alpha(1e-6) = -14.202: diverge come `ln rho`
+  (0) `beta` SATURA a `-1` per molta materia                     PASSA   beta(100/4) = -0.961538, e il limite e' -1
+  (0) `N = rho ln(rho/(rho+Lambda))` fa `0` dove `rho = 0`       PASSA   `x ln x -> 0`: e' il valore che la funzione PRENDE
+  (0) `alpha` E' la derivata di `N` (differenze finite)          PASSA   numerica -0.809437914 contro analitica -0.809437912
+  (0) `beta` E' la derivata di `N` (differenze finite)           PASSA   numerica -0.200000000 contro analitica -0.200000000
+
+### (1) IL FLUSSO CAMBIA LO STATO, e l'INVERSO lo ANNULLA
+  (1) il flusso CAMBIA lo stato: non e' l'identita'              PASSA   |dpsi| 3.986e-02 e |dphi| 2.692e-01: se fossero zero il collaudo sarebbe VUOTO
+  (1) e l'INVERSO lo ANNULLA: `psi` torna entro pochi ulp        PASSA   scarto 4.475e-16 su scala 2.693e+00, cioe' 0.7 ulp
+  (1) e `phi` torna anche lui: la FASE si annulla                PASSA   scarto 1.570e-16, cioe' 0.7 ulp
+
+### (2) LE NORME: una FASE non cambia NESSUN modulo, nemmeno per estremita'
+  (2) ogni `|psi_h|` resta, componente per componente            PASSA   scarto 8.882e-16: la saturazione RUOTAVA, questa legge da' UNA FASE
+  (2) e ogni `|phi_h|` resta                                     PASSA   scarto 3.331e-16
+  (2) e le DUE NORME TOTALI (`M` e `V`) sono quelle della decisi PASSA   M = 170.145292 e V = 36.000000: conservate ESATTAMENTE, non al secondo ordine
+
+### (3) DUE MEZZI FANNO L'INTERO -- e un EULERO che DEVE fallire
+  (3) DUE MEZZI FANNO L'INTERO al bit: il flusso e' ESATTO       PASSA   scarto 4.442e-16 su scala 2.538e+00, cioe' 0.8 ulp
+  (3) e la CAUSA: il flusso CONSERVA `rho` e `Lambda`, i suoi co PASSA   |drho| 7.105e-15 e |dLambda| 8.882e-16: una FASE non cambia un modulo quadro
+  ### (3) DEVE fallire: con l'EULERO due mezzi NON fanno l'inter PASSA   scarto 3.333e-03, cioe' 5914752882669 ulp -- il braccio di sopra HA DENTI
+  ### (3) DEVE fallire: `0.5 + 0.4` NON fa l'intero              PASSA   scarto 9.588e-03: il confronto guarda DAVVERO le frazioni
+
+### (4) `rho = 0`: lo stato NON cambia di un bit, e non c'e' nessun pavimento
+  (4) il braccio HA MATERIA: ci sono nodi con `rho = 0` E nodi c PASSA   2 nodi vuoti su 16, e il minimo non nullo e' 3.093e+00
+  (4) dove `rho = 0` lo stato resta IDENTICO (`psi = 0`, e la fa PASSA   scarto 0.0e+00 su 4 estremita': la fase di un vettore nullo non vuol dire niente
+  (4) e `alpha` NON e' tagliata dove `rho > 0`: la si usa com'e' PASSA   alpha minima sui nodi pieni -0.1060, e nessun valore non finito
+
+### (5) I CASI DI BORDO
+  (5) con `frazione = 0` il flusso e' l'IDENTITA', e non alza    PASSA   scarto esattamente 0: `exp(0) = 1`
+  ### (5) DEVE fallire: un `dtau` che non ha una riga per NODO   PASSA   ### ha alzato: `dtau` ha forma (3,) e i nodi sono 12: dopo una crescita `dt
+====================================================================================================
+IL COLLAUDO DI `CAMM-MATERIA-VUOTO`: 22 su 22   ### TUTTI PASSATI
+====================================================================================================

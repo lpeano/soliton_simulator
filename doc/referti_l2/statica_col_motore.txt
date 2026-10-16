@@ -1,0 +1,55 @@
+[TIMBRO] _misura_statica_motore.py  sha1-BYTE 728cce48  committato e pulito
+================================================================================================
+LA RISPOSTA STATICA CON LA LEGGE NEL MOTORE -- punto 2(c) del quinto pezzo
+### La legge e' CAMM-MATERIA-VUOTO del MOTORE: NESSUNA sostituzione.
+### La fotografia e' il congelamento di `psi` DOPO OGNI PEZZO.
+================================================================================================
+  LA CONFIGURAZIONE: toro (31, 31) = 961 nodi   TICK = 2000 (1200 nella scansione)
+  dtau = (0.5, 0.25)   T = 100   transitorio = 200   finestre = 10   x del verso = 1.00
+  raggio = 1   seme = 7   vuoto = 1.0   separazione = 10
+  ### IL RIFERIMENTO: `S3` nel referto di ebf5317 (blob 429c2441).
+------------------------------------------------------------------------------------------------
+### (0) LO STRUMENTO: la legge e' QUELLA DEL MOTORE, e `rho` sta FERMA
+  (0) il pezzo del passo si legge dalla TABELLA              PASSA   e' `CAMM-MATERIA-VUOTO`: se un giorno cambia, questa misura lo dice
+  (0) e NON si sostituisce niente                            PASSA   SOSTITUISCI = False: gira l'operatore del MOTORE
+  (0) `rho` resta FERMA col congelamento per PEZZO           PASSA   max |rho(t) - rho(0)| = 0.0e+00 su 200 tick: e' la FOTOGRAFIA
+  (0) e la somma di `|phi|^2` deriva poco                    PASSA   deriva 1.555e-10 su 200 tick
+------------------------------------------------------------------------------------------------
+### (a) IL SEGNO di dLambda sulla sorgente, contro S3 di ebf5317
+  dtau=0.50  MOTORE -3.892340e+00 +- 1.014e-02 (383.9 barre)   S3 -3.919142e+00 +- 1.017e-02   [17.1 s]
+  (a) dtau=0.50: il verso e' quello di `S3`, e a >= 3 barre  PASSA   il vuoto SI RITIRA in entrambi, e il mio e' a 383.9 barre
+  (a) dtau=0.50: il numero COINCIDE entro 3 barre del refert PASSA   differenza 2.680e-02, cioe' 2.64 barre del referto
+  dtau=0.25  MOTORE -3.926423e+00 +- 7.012e-03 (560.0 barre)   S3 -3.947374e+00 +- 5.935e-03   [15.7 s]
+  (a) dtau=0.25: il verso e' quello di `S3`, e a >= 3 barre  PASSA   il vuoto SI RITIRA in entrambi, e il mio e' a 560.0 barre
+  (a) dtau=0.25: il numero COINCIDE entro 3 barre del refert ### FALLISCE   differenza 2.095e-02, cioe' 3.53 barre del referto
+------------------------------------------------------------------------------------------------
+### (b) LA PENDENZA log-log in x (0.01 -> 0.03), contro S3 di ebf5317
+  dtau=0.50  dLambda: 0.01:-6.179e-01  0.03:-2.087e+00   pendenza MOTORE 1.108   S3 1.106
+  (b) dtau=0.50: la pendenza COINCIDE con `S3` entro 0.05    PASSA   mia 1.108 contro 1.106: differenza 0.0018
+  dtau=0.25  dLambda: 0.01:-7.400e-01  0.03:-2.531e+00   pendenza MOTORE 1.119   S3 1.110
+  (b) dtau=0.25: la pendenza COINCIDE con `S3` entro 0.05    PASSA   mia 1.119 contro 1.110: differenza 0.0092
+------------------------------------------------------------------------------------------------
+### (c) LA SOVRAPPOSIZIONE a x = 0.01 (nodi 0 e 310), contro S3
+  dtau=0.50  scarto MOTORE 0.0210 +- 0.0043   S3 0.0193 +- 0.0040
+  (c) dtau=0.50: lo scarto COINCIDE con `S3` entro 0.010     PASSA   mio 0.0210 contro 0.0193: differenza 0.0017
+  dtau=0.25  scarto MOTORE 0.0117 +- 0.0009   S3 0.0115 +- 0.0009
+  (c) dtau=0.25: lo scarto COINCIDE con `S3` entro 0.010     PASSA   mio 0.0117 contro 0.0115: differenza 0.0002
+------------------------------------------------------------------------------------------------
+### (d) DA DOVE VIENE LA DIFFERENZA: il primo tick, e la crescita
+  dtau=0.50  |dLambda| fra i due protocolli:  tick 1 0.000e+00   tick 10 4.441e-15   tick 60 1.510e-14
+  (d) dtau=0.50: al PRIMO tick i due protocolli coincidono   PASSA   scarto 0.000e+00: la differenza NON e' nella forma di `beta`, e' AMPLIFICAZIONE
+  (d) dtau=0.50: e CRESCE coi tick (sistema in saturazione)  PASSA   da 0.0e+00 (tick 1) a 1.5e-14 (tick 60): la differenza NASCE dagli ulp e CRESCE
+  dtau=0.25  |dLambda| fra i due protocolli:  tick 1 0.000e+00   tick 10 2.665e-15   tick 60 1.332e-14
+  (d) dtau=0.25: al PRIMO tick i due protocolli coincidono   PASSA   scarto 0.000e+00: la differenza NON e' nella forma di `beta`, e' AMPLIFICAZIONE
+  (d) dtau=0.25: e CRESCE coi tick (sistema in saturazione)  PASSA   da 0.0e+00 (tick 1) a 1.3e-14 (tick 60): la differenza NASCE dagli ulp e CRESCE
+------------------------------------------------------------------------------------------------
+### (e) IL CONO: max |d rho_k| per tick, col termine contro SENZA
+  dtau=0.50  col termine 2.805671e+00   senza 3.486221e+00   -> rapporto 0.805
+  (e) dtau=0.50: il termine NON fa cambiare lo stato PIU' de PASSA   rapporto 0.805: in `74ba200` `S3` dava 0.80, e `S2` VIOLAVA con 1.89
+  dtau=0.25  col termine 1.875594e+00   senza 1.893923e+00   -> rapporto 0.990
+  (e) dtau=0.25: il termine NON fa cambiare lo stato PIU' de PASSA   rapporto 0.990: in `74ba200` `S3` dava 0.80, e `S2` VIOLAVA con 1.89
+================================================================================================
+  17 su 18   [corsa intera: 102.8 s]
+### ⛔ E SE UN NUMERO NON COINCIDE, la legge in tabella NON e' la legge che e'
+###   stata misurata: e' il criterio del mandato, e non si aggiusta.
+================================================================================================

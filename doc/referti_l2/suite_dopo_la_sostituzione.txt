@@ -1,0 +1,87 @@
+[TIMBRO] collauda.py  sha1-BYTE c21cabb8  committato e pulito
+====================================================================================================
+TUTTI I COLLAUDI, CON I TEMPI   (punto 6)
+====================================================================================================
+  la macchina: Windows AMD64, python 3.13.2
+  il budget del `pre-commit`: 500 s   ### e oltre il budget e- un SEGNALE, non un rifiuto
+
+  il collaudo                            dove         secondi  esito
+  ----------------------------------------------------------------------------------------------
+  il grafo valido                        pre-commit      0.56  ok
+  il determinismo                        pre-commit      7.28  ok
+  le simmetrie e le conservazioni        pre-commit      1.52  ok
+  lo schema della tabella                pre-commit      0.73  ok
+  il generatore                          pre-commit      2.62  ok
+  la struttura compatta delle estremita- pre-commit      0.33  ok
+  il motore: contenitore e pezzi unitari pre-commit      0.40  ok
+  il checkpoint e la ripresa             pre-commit      4.24  ok
+  il confronto tabella / banco           pre-commit      3.19  ok
+  la memoria: `m1`..`m4`                 pre-commit      1.47  ok
+  il flusso di saturazione               pre-commit      0.34  ok
+  il flusso materia-vuoto                pre-commit      0.36  ok
+  `P3` l-energia e la corrente           pre-commit      0.36  ok
+  la corrente locale costruita           pre-commit     73.10  ok
+  la deriva di `E` e la sorgente         pre-commit      8.76  ### FALLISCE (codice 1)
+  il tempo proprio in TUTTE le leggi     pre-commit      0.41  ok
+  lo schema della camminata              pre-commit      0.26  ok
+  lo schema della configurazione         pre-commit      0.23  ok
+  `@rif` byte-inerte                     pre-commit      0.25  ok
+  il modello di sigillo                  pre-commit      1.50  ok
+  la catena                              pre-commit      4.05  ok
+  la GUIDA, eseguita                     pre-commit      2.04  ok
+  il referto dell-infrastruttura (LENTO) solo-CI        53.47  ok
+  la barriera dei hook                   pre-commit      0.77  ok
+  `P-ALB` l-albero delle scelte          pre-commit     39.51  ok
+  `P-ID` un id che nasce                 pre-commit      0.60  ok
+  `P-T2` il replay dei registri          pre-commit      7.89  ok
+  l-arbitro fra le due vie               pre-commit      0.49  ok
+  i presidi dell-indice                  pre-commit      8.27  ok
+  `P-REG` le regole di gestione          pre-commit      0.92  ok
+  il presidio sullo STOP                 pre-commit      0.49  ok
+  `P-E1`..`P-E5` i presidi dell-era 2    pre-commit      0.76  ok
+  `P-M1` il documento dei metodi         pre-commit      0.39  ok
+  `P-C1` i controlli nell-indice         pre-commit      1.84  ok
+  `P-T1` il testo non si interpreta      pre-commit      1.17  ok
+  `P-R1` ogni ramo e- dichiarato         pre-commit      0.81  ok
+  `P-T3` le citazioni strutturate        pre-commit      1.64  ok
+  `P-RIF` un ID nel codice e- un costrutto pre-commit      7.21  ok
+  `P-ES1` un solo esecutore              pre-commit      9.15  ok
+  `P-MOD` la modularita-                 pre-commit      4.87  ok
+  `P-AB` i confronti e i dati            pre-commit      0.35  ok
+  i presidi dell-indice, nei due versi   pre-commit     23.03  ok
+  i controlli della migrazione           pre-commit     22.27  ok
+  il rinominamento, sul piano            pre-commit      0.48  ok
+  la FORMA dei testi generati            pre-commit     10.46  ok
+  i controlli sullo STAGE e non sul disco solo-CI        93.34  ok
+  la pulizia delle temporanee            pre-commit      0.54  ok
+  il banco della camminata               pre-commit      0.94  ok
+  il banco della camminata v2            pre-commit      1.05  ok
+  il banco della camminata v3            pre-commit      1.09  ok
+  le letture del guscio e del moto       solo-CI        37.15  ok
+  il banco del v4                        pre-commit      5.28  ok
+  il banco del legame                    solo-CI        34.18  ok
+  ----------------------------------------------------------------------------------------------
+  IL TOTALE del `pre-commit`                           266.27
+  piu- i LENTI, solo in CI                             218.13
+  IN TUTTO                                             484.40
+
+  ### 1 COLLAUDI FALLISCONO:
+     la deriva di `E` e la sorgente         `primo_ordine/_collauda_deriva.py` -> codice 1
+        | [TIMBRO] _collauda_deriva.py  sha1-BYTE 569ad12a  committato e pulito
+        | ================================================================================================
+        | IL COLLAUDO DELLA DERIVA: LA MATERIA PRIMA DI TUTTO, E I TRE CASI CHE DEVONO CAMBIARE
+        | ================================================================================================
+        |   ### (1) MATERIA: nel regime di misura `x = |h|/Lambda` e- di o PASSA   x_max = 0.9700   (sotto 0.10 sarebbe un FALSO-ZERO)
+        |   ### (1-bis) e il regime `globale` E- quello vacuo, come dichia PASSA   x_max = 0.03289: la- `G ~ x^3/3 ~ 0`
+        |   ### (2) il PRIMO termine: il pezzo lineare lo conserva ESATTAM PASSA   |Delta| = 2.842e-14 su 84.5649  (1.5 ulp)
+        |   ### (3) DEVE CAMBIARE: il primo termine sotto `N` NON e- conse PASSA   |Delta| = 1.219e-02: senza questo il braccio (2) sarebbe un FALSO-UNO
+        |   ### (4) con `|phi|` UNIFORME `Lambda_k` e- esattamente invaria ### FALLISCE   max |Delta Lambda| = 1.078e+00
+        |   ### (5) DEVE CAMBIARE: con `|phi|` NON uniforme                PASSA   max |Delta Lambda| = 9.886e-01: la misura SA vedere
+        |   ### (6) la SORGENTE per nodo e- `O(1)` in `dtau`, non `O(dtau^ ### FALLISCE   rapporto su un fattore 4 di `dtau`: 3.220  (`O(dtau^2)` darebbe ~16)
+        |   ### (7) DEVE FERMARE: una legge dell-ordine di composizione no PASSA   un pezzo del tick che non gira e- un tick diverso
+        | ================================================================================================
+        |   6 su 8
+        | ================================================================================================
+  ### il `pre-commit` sta nel budget: 266.3 s su 500 s (53%)
+====================================================================================================
+====================================================================================================

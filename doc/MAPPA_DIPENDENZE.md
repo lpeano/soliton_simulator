@@ -613,6 +613,15 @@ dalla saturazione**; ### **`S1` e' l'unica che resta perturbativa oltre `x = 0.1
 
 ## 17. ⛔ `L2` — **LA FORMA E' DECISA, E RESTANO DUE COSE APERTE** *(`2026-10-16`)*
 
+### ✅✅ **IN TABELLA dal `2026-10-16`** *(`b4972a7`)*: `CAMM-MATERIA-VUOTO`,
+`N_k = rho_k ln(rho_k/(rho_k + Lambda_k))`, col flusso ### **esatto a `0.8` ulp** e
+### **l'Eulero che fallisce come deve** *(`3.3e-03`)*. ### **`L1` resta chiuso**
+*(`0` violatori, `M-B1` `12`/`12` al bit, `M-B2` `1.965`)*, la simmetria `(P Theta)`
+### **regge col termine non lineare** *(`2` ulp)*, e la `C` sul flusso da'
+`C Op C^-1 = Op^-1` ### **esattamente** *(`0` ulp)*.
+### 📌 **E la risposta statica col motore COINCIDE con `S3`:** pendenza `1.108` contro
+`1.106`, cono ### **`0.805`** contro `0.80`.
+
 ### ✅ **DECISA** *(Luca, `2026-10-15` `23:30` e `23:38`)*: la forma dell'accoppiamento e'
 ### **`CAMM-MATERIA-VUOTO`**, `N_k = rho_k ln(rho_k/(rho_k + Lambda_k))`, che
 ### **SOSTITUISCE `CAMM-SATURAZIONE`** — e le leggi restano ### **`7`.**

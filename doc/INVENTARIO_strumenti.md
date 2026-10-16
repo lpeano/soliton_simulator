@@ -3636,6 +3636,20 @@ scena **cresca** come gli archi *(`4.00x` su `4.00x` atteso)*; `m3` **`0.005114`
 
 ---
 
+### `CAMM-MATERIA-VUOTO` — **LA LEGGE IN TABELLA, E I SUOI CONTROLLI** *(2026-10-16)*
+
+| | |
+|---|---|
+| **i file** | `primo_ordine/materia_vuoto.py` *(BLOB `3a344568`)* · `primo_ordine/_collauda_materia_vuoto.py` *(BLOB `207b3597`)* · `primo_ordine/_misura_theta_nonlineare.py` *(BLOB `17ced226`)* · `primo_ordine/statica_protocollo.py` *(BLOB `f56445ec`)* · `primo_ordine/_misura_statica_motore.py` *(BLOB `728cce48`)* |
+| **I COMANDI, verbatim** | `python primo_ordine/_collauda_materia_vuoto.py` *(`22`/`22`, nel pre-commit)* · `python primo_ordine/_misura_theta_nonlineare.py` *(`27`/`27`)* · `python primo_ordine/_misura_statica_motore.py` *(`17`/`18`, `103` s)* · `python primo_ordine/_misura_mb1.py --contro 9fbcddf` · `python primo_ordine/_misura_mb2.py` · `python primo_ordine/collauda.py` |
+| **i REFERTI** | `doc/referti_l2/legge_in_tabella.txt` · `simmetria_nonlineare.txt` · `statica_col_motore.txt` · `suite_dopo_la_sostituzione.txt` — ### **tutti dal codice COMMITTATO** |
+| ### ⭐⭐ **che cosa misura il collaudo** | che il flusso sia ### **ESATTO**: due mezzi fanno l'intero a ### **`0.8` ulp**, l'inverso annulla a `0.7`, e ### **LA CAUSA** — il flusso conserva `rho` e `Lambda`, cioe' i propri coefficienti. ### ⛔ **E il caso che DEVE fallire e' un EULERO ESPLICITO** *(`3.3e-03`)*: senza di lui il braccio sarebbe ### **un FALSO-UNO** |
+| ### ⛔ **e `rho = 0`** | lo stato resta ### **IDENTICO** *(`0.0e+00`)*, e ### **nessun pavimento su `rho > 0`** *(`alpha(1e-12) = -28.017`)*: e' un ### **LIMITE** |
+| ### ⭐ **la simmetria col termine NON lineare** | `W` non e' una ### **matrice** quando il flusso c'e' dentro, quindi l'identita' si prova ### **su uno STATO** e nella forma ### **`W A W A^-1 = 1`** — che usa solo passi AVANTI, perche' i pezzi unitari ### **rifiutano una frazione negativa** *(l'assert del cono)*. ### **`2`-`3` ulp** |
+| ### ⚠ **e il braccio che FALLISCE** | nella risposta statica col motore: la MEDIA a `dtau = 0.25` sta a ### **`3.53` barre** del referto *(criterio MIO)*. ### **Al primo tick i due protocolli coincidono a `0.000e+00`**: e' ### **amplificazione** in saturazione profonda, e ### **la banda NON e' stata cambiata** |
+
+---
+
 ### `primo_ordine/_misura_statica_l2.py` — **LA RISPOSTA A UNA SORGENTE FERMA** *(2026-10-15)*
 
 | | |

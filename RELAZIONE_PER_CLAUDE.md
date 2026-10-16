@@ -17296,3 +17296,29 @@ non una copia patchata a mano.**
 porta ### **il conto delle leggi** *(da `10` a `11` righe, da `5` a `6` variabili)*.
 ### **Rigenerato col suo comando**, e adesso ### **la suite non sporca niente.**
 ### **Budget: `266.3` s su `500`** *(`53%`)*.
+
+### ✅✅ **IL QUINTO PEZZO E' FINITO, e i quattro referti nascono dal codice
+COMMITTATO** *(il timbro in testa a tutti dice «committato e pulito»)*:
+`legge_in_tabella.txt` *(`207b3597`, `22`/`22`)* · `simmetria_nonlineare.txt`
+*(`17ced226`, `27`/`27`)* · `statica_col_motore.txt` *(`728cce48`, `17`/`18`)* ·
+`suite_dopo_la_sostituzione.txt` *(`c21cabb8`, `52` ok e `1` rosso)*.
+
+### ✅ **E LA VOCE SI CHIUDE su `b4972a7`, col CRITERIO scritto:** il validatore ha
+rifiutato la prima versione che aveva ### **solo commit e data** — *«CHIUSA senza
+`chiusura.criterio`»* — e ### **non ho forzato: ho scritto il criterio**, che e' la lista
+dei cinque controlli coi loro numeri.
+
+### 📌 **E LE QUATTRO COSE CHE NON SI CHIUDONO sono scritte dove si leggono**
+*(RIPRESA §`20` e §`21`, mappa §`17`, e la voce)*:
+### ① **il principio di equivalenza** *(`7.4` barre a `2000` tick restano: da rimisurare
+quando la materia sara' STABILE)*; ### ② **un braccio della risposta statica**, che e' un
+### **criterio MIO** mal posto *(e al primo tick i due protocolli coincidono a
+`0.000e+00`)*; ### ③ **`_collauda_deriva.py` rosso, e NON di questo pezzo** *(`6`/`8`
+prima e dopo, verificato con un worktree)*; ### ④ **il conto delle leggi** — quelle che
+### **girano** sono `6`, le ### **righe** della tabella sono `8` perche' la saturazione
+resta con la sua scheda. ### ⛔ **Se <<`7`>> va contato sulle righe, la saturazione va
+TOLTA: e quella e' una decisione tua.**
+
+### ⛔ **FERMO QUI, come il mandato dice.** ### **La prossima decisione e' la forma di
+`cs(Lambda)`**, e in coda resta ### **il censimento di `P-R1`**
+*(`doc/CODA_2026-10-16.md`)*.
