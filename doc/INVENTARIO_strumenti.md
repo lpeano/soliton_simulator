@@ -3642,7 +3642,7 @@ scena **cresca** come gli archi *(`4.00x` su `4.00x` atteso)*; `m3` **`0.005114`
 |---|---|
 | **il file** | `primo_ordine/_misura_completa_l2.py` *(BLOB `096f5f52`)* |
 | **IL COMANDO, verbatim** | `python primo_ordine/_misura_completa_l2.py` *(`11`/`13`, `12.7` s)* |
-| **il REFERTO** | `doc/referti_l2/punto_A_tre_misure.txt`, dal blob ### **COMMITTATO** `096f5f52` |
+| **i REFERTI** | `doc/referti_l2/punto_A_tre_misure_rumore.txt` dal blob ### **`134fd231`** *(dopo il `2-bis`, `13`/`13`)* · `punto_A_tre_misure.txt` dal blob `096f5f52` *(prima, `11`/`13`: ### **il braccio `(A2)` asseriva una crescita esponenziale**, smentita)* — ### **due corse, due blob, due referti** |
 | ### ⭐⭐ **`A1` il CONO a `dtau` FINI** | ### **`0.8048`** *(`0.50`)* · ### **`0.9903`** *(`0.25`)* · ### **`0.9127`** *(`0.125`)* · ### **`0.9228`** *(`0.0625`)* — ### **TUTTI sotto `1`**, quindi ### **il gate del punto `D` e' passato.** ### ⚠ **E NON converge in modo monotono:** oscilla fra `0.80` e `0.99` |
 | ### ⚠ **`A2` la DIVERGENZA, e una MIA ipotesi SMENTITA** | pendenza di `log10(scarto)` per tick ### **`0.00489 ± 0.00460`** *(`1.1` barre)* e `0.00413 ± 0.00496` *(`0.8`)*: ### **NON risolvibile.** ### **E le fette lo dicono meglio di un fit:** `0.0261` nella prima quinta parte, `0.0017` nell'ultima — ### **la crescita e' tutta all'inizio.** ### ✅ **E il controllo che deve dare un'altra risposta passa: due copie IDENTICHE restano a `0.0` AL BIT** |
 | ### ✅ **`A3` la SIMMETRIA su OTTO stati** | il peggio: ### **`2.97`**, `2.67`, ### **`3.32` ulp** ai tre `dtau` *(criterio `8`)*, con ### **quattro semi su otto che hanno nodi a `rho = 0`** — e i due casi che devono fallire falliscono |

@@ -1,0 +1,45 @@
+[TIMBRO] _misura_completa_l2.py  sha1-BYTE 134fd231  committato e pulito
+================================================================================================
+LE TRE MISURE CHE COMPLETANO IL QUINTO PEZZO -- punto A del mandato unico
+### I CRITERI SONO DEL MANDATO, fissati PRIMA della misura.
+================================================================================================
+  (A1) toro (31, 31)   300 tick   x = 1.00   dtau = (0.5, 0.25, 0.125, 0.0625)
+  (A2) 200 tick   dtau = (0.5, 0.25)   i due protocolli: `S3`+foto+tick contro MOTORE+pezzo
+  (A3) toro (3, 3)   8 semi (11, 23, 37, 41, 53, 67, 71, 89)   dtau = (1.0, 0.5, 0.25)   nodi vuoti: {11: (0, 4), 23: (2,), 37: (1, 5, 7), 41: (8,)}
+------------------------------------------------------------------------------------------------
+### (A1) IL CONO a dtau FINI: max |d rho_k| col termine contro SENZA
+###      criterio DAL MANDATO: rapporto <= 1 a OGNI dtau
+  dtau=0.5000  col termine 2.805671e+00   senza 3.486221e+00   -> rapporto 0.8048   [2.0 s]
+  (A1) dtau=0.5000: rapporto <= 1                            PASSA   0.8048 -- sopra `1` sarebbe UNA VIOLAZIONE DEL CONO, e il punto `D` non si fa
+  dtau=0.2500  col termine 1.875594e+00   senza 1.893923e+00   -> rapporto 0.9903   [1.9 s]
+  (A1) dtau=0.2500: rapporto <= 1                            PASSA   0.9903 -- sopra `1` sarebbe UNA VIOLAZIONE DEL CONO, e il punto `D` non si fa
+  dtau=0.1250  col termine 8.873211e-01   senza 9.721706e-01   -> rapporto 0.9127   [2.0 s]
+  (A1) dtau=0.1250: rapporto <= 1                            PASSA   0.9127 -- sopra `1` sarebbe UNA VIOLAZIONE DEL CONO, e il punto `D` non si fa
+  dtau=0.0625  col termine 4.496367e-01   senza 4.872366e-01   -> rapporto 0.9228   [1.9 s]
+  (A1) dtau=0.0625: rapporto <= 1                            PASSA   0.9228 -- sopra `1` sarebbe UNA VIOLAZIONE DEL CONO, e il punto `D` non si fa
+  ### I RAPPORTI, uno per uno: 0.8048  0.9903  0.9127  0.9228
+------------------------------------------------------------------------------------------------
+### (A2) IL RUMORE fra i due protocolli statici, 1..200 tick
+###      criterio: il PEGGIO resta sotto 1e-10. La pendenza e' INFORMAZIONE, non un criterio
+  (A2) dtau=0.50: due copie IDENTICHE restano a `0.0` AL BIT PASSA   scarto 0.0e+00: il motore e' DETERMINISTICO
+  dtau=0.50  primo tick con differenza: 2 (4.441e-16)   a 200 tick: 4.974e-14
+      pendenza di log10(scarto) per tick: 0.00489 +- 0.00460   (fette: 0.0261  0.0060  0.0037  0.0023  0.0017)
+  (A2) dtau=0.50: il PEGGIO del rumore resta sotto 1e-10     PASSA   peggio 5.063e-14 su 200 tick, e la pendenza 0.00489 +- 0.00460 e' INFORMAZIONE
+  (A2) dtau=0.25: due copie IDENTICHE restano a `0.0` AL BIT PASSA   scarto 0.0e+00: il motore e' DETERMINISTICO
+  dtau=0.25  primo tick con differenza: 3 (1.776e-15)   a 200 tick: 2.842e-14
+      pendenza di log10(scarto) per tick: 0.00413 +- 0.00496   (fette: 0.0273  0.0051  0.0026  0.0034  0.0003)
+  (A2) dtau=0.25: il PEGGIO del rumore resta sotto 1e-10     PASSA   peggio 3.997e-14 su 200 tick, e la pendenza 0.00413 +- 0.00496 e' INFORMAZIONE
+------------------------------------------------------------------------------------------------
+### (A3) LA SIMMETRIA `W A W A^-1 = 1` su 8 stati, ai tre dtau
+###      criterio DAL MANDATO: <= 8 ulp ovunque
+  dtau=1.0000  il PEGGIO su 8 semi: 2.97 ulp (seme 11)
+  (A3) dtau=1.0000: <= 8 ulp su tutti gli stati              PASSA   peggio 2.97 ulp, sul seme 11
+  dtau=0.5000  il PEGGIO su 8 semi: 2.67 ulp (seme 37)
+  (A3) dtau=0.5000: <= 8 ulp su tutti gli stati              PASSA   peggio 2.67 ulp, sul seme 37
+  dtau=0.2500  il PEGGIO su 8 semi: 3.32 ulp (seme 37)
+  (A3) dtau=0.2500: <= 8 ulp su tutti gli stati              PASSA   peggio 3.32 ulp, sul seme 37
+  ### (A3) DEVE fallire: `Theta` SENZA `P`                   PASSA   scarto 9.475e-01: `P` SERVE
+  ### (A3) DEVE fallire: con `U` CASUALE                     PASSA   scarto 2.498e+00: `U = I` SERVE
+================================================================================================
+  13 su 13   [corsa intera: 11.8 s]
+================================================================================================

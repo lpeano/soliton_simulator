@@ -17403,3 +17403,32 @@ permutazione di moduli: ### **la permutazione e' lo spostamento.**
 ### 📌 **E una cosa che vale la pena dire sul metodo:** l'errore e' emerso ### **perche' il
 braccio era spezzato PEZZO PER PEZZO.** Con un braccio solo *(«il vuoto cammina e `Lambda`
 non cambia»)* la spiegazione sbagliata ### **sarebbe passata.**
+
+### ✅✅ **`2-bis`: A PARITA' DI ACCENSIONE I DUE PROTOCOLLI SONO LO STESSO CONTO**
+
+| la lettura | col MOTORE | `S3` di `ebf5317` | differenza |
+|---|---|---|---|
+| le due **traiettorie**, `2000` tick | — | — | ### **`2.007e-13`** e `1.830e-13` *(criterio `1e-10`)* |
+| la **media** a `dtau = 0.50` | `-3.919142e+00` | `-3.919142e+00` | `1.594e-07` = ### **`0.000` barre** |
+| la **media** a `dtau = 0.25` | `-3.947374e+00` | `-3.947374e+00` | `3.786e-07` = ### **`0.000` barre** |
+| la **pendenza** | `1.106` · `1.110` | `1.106` · `1.110` | `0.0002` · `0.0001` |
+| la **sovrapposizione** | `0.0193` · `0.0115` | `0.0193` · `0.0115` | ### **`0.0000`** |
+
+### ⛔ **E IL CASO CHE DEVE FALLIRE FALLISCE:** con l'accensione ### **solo da una parte**
+lo scarto ricompare a ### **`5.529e+00`** *(`545` barre)* e `3.841e+00` *(`379` barre)*.
+### ✅ **Quindi la cura e' verificata nei due versi**, e non e' una banda allargata: il
+criterio e' ### **`0.1` barre**, cioe' ### **PIU' STRETTO** delle `3` di prima.
+
+### ⛔ **LA CURA STA NELLO STRUMENTO, E LA LEGGE NON E' TOCCATA:** il termine entra con
+`exp(-i beta dtau f)`, quindi ### **moltiplicare la FRAZIONE per `s(t)` E' la rampa su
+`beta`.** ### ⚠ **E vale perche' `beta` entra SOLO in quel prodotto:** se un giorno
+entrasse altrove l'equivalenza cadrebbe, e ### **sta scritto nel docstring.**
+### ✅ **E un parametro che agisse solo da una parte adesso ALZA**, che e' la lezione
+dell'errore `n.3` messa in un `assert` invece che in una nota.
+
+### 📌 **E `(A2)` CAMBIA NATURA, come dici:** era *«la curva della divergenza»* e io ci
+avevo scritto un braccio che ### **asseriva una crescita esponenziale** *(smentito a `1.1`
+e `0.8` barre)*. ### **Adesso e' IL RUMORE fra due protocolli** che differiscono
+### **solo nel modo di congelare**, col criterio sul ### **PEGGIO**: `5.063e-14` e
+`3.997e-14` su `200` tick. ### **La pendenza si stampa come INFORMAZIONE.**
+### **`13`/`13`** *(era `11`/`13`)*.

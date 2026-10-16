@@ -1,0 +1,58 @@
+[TIMBRO] _misura_statica_motore.py  sha1-BYTE 2c1edab9  committato e pulito
+================================================================================================
+LA RISPOSTA STATICA CON LA LEGGE NEL MOTORE -- punto 2(c) del quinto pezzo
+### La legge e' CAMM-MATERIA-VUOTO del MOTORE: NESSUNA sostituzione.
+### La fotografia e' il congelamento di `psi` DOPO OGNI PEZZO.
+================================================================================================
+  LA CONFIGURAZIONE: toro (31, 31) = 961 nodi   TICK = 2000 (1200 nella scansione)
+  dtau = (0.5, 0.25)   T = 100   transitorio = 200   finestre = 10   x del verso = 1.00
+  raggio = 1   seme = 7   vuoto = 1.0   separazione = 10
+  ### IL RIFERIMENTO: `S3` nel referto di ebf5317 (blob 429c2441).
+------------------------------------------------------------------------------------------------
+### (0) LO STRUMENTO: la legge e' QUELLA DEL MOTORE, e `rho` sta FERMA
+  (0) il pezzo del passo si legge dalla TABELLA              PASSA   e' `CAMM-MATERIA-VUOTO`: se un giorno cambia, questa misura lo dice
+  (0) e NON si sostituisce niente                            PASSA   SOSTITUISCI = False: gira l'operatore del MOTORE
+  (0) `rho` resta FERMA col congelamento per PEZZO           PASSA   max |rho(t) - rho(0)| = 0.0e+00 su 200 tick: e' la FOTOGRAFIA
+  (0) e la somma di `|phi|^2` deriva poco                    PASSA   deriva 1.555e-10 su 200 tick
+------------------------------------------------------------------------------------------------
+### (a) IL SEGNO di dLambda sulla sorgente, contro S3 di ebf5317
+  dtau=0.50  MOTORE -3.919142e+00 +- 1.017e-02 (385.5 barre)   S3 -3.919142e+00 +- 1.017e-02   [14.4 s]
+  (a) dtau=0.50: il verso e' quello di `S3`, e a >= 3 barre  PASSA   il vuoto SI RITIRA in entrambi, e il mio e' a 385.5 barre
+  (a) dtau=0.50: il numero COINCIDE entro 0.1 barre del refe PASSA   differenza 1.594e-07, cioe' 0.000 barre del referto -- e la banda e' quella STRETTA del mandato, non la mia di prima
+  dtau=0.25  MOTORE -3.947374e+00 +- 5.935e-03 (665.1 barre)   S3 -3.947374e+00 +- 5.935e-03   [12.8 s]
+  (a) dtau=0.25: il verso e' quello di `S3`, e a >= 3 barre  PASSA   il vuoto SI RITIRA in entrambi, e il mio e' a 665.1 barre
+  (a) dtau=0.25: il numero COINCIDE entro 0.1 barre del refe PASSA   differenza 3.786e-07, cioe' 0.000 barre del referto -- e la banda e' quella STRETTA del mandato, non la mia di prima
+------------------------------------------------------------------------------------------------
+### (b) LA PENDENZA log-log in x (0.01 -> 0.03), contro S3 di ebf5317
+  dtau=0.50  dLambda: 0.01:-6.266e-01  0.03:-2.112e+00   pendenza MOTORE 1.106   S3 1.106
+  (b) dtau=0.50: la pendenza COINCIDE con `S3` entro 0.05    PASSA   mia 1.106 contro 1.106: differenza 0.0002
+  dtau=0.25  dLambda: 0.01:-7.284e-01  0.03:-2.465e+00   pendenza MOTORE 1.110   S3 1.110
+  (b) dtau=0.25: la pendenza COINCIDE con `S3` entro 0.05    PASSA   mia 1.110 contro 1.110: differenza 0.0001
+------------------------------------------------------------------------------------------------
+### (c) LA SOVRAPPOSIZIONE a x = 0.01 (nodi 0 e 310), contro S3
+  dtau=0.50  scarto MOTORE 0.0193 +- 0.0040   S3 0.0193 +- 0.0040
+  (c) dtau=0.50: lo scarto COINCIDE con `S3` entro 0.010     PASSA   mio 0.0193 contro 0.0193: differenza 0.0000
+  dtau=0.25  scarto MOTORE 0.0115 +- 0.0009   S3 0.0115 +- 0.0009
+  (c) dtau=0.25: lo scarto COINCIDE con `S3` entro 0.010     PASSA   mio 0.0115 contro 0.0115: differenza 0.0000
+------------------------------------------------------------------------------------------------
+### (d) LE DUE TRAIETTORIE A PARITA' DI ACCENSIONE, su 2000 tick
+###     criterio DAL MANDATO: coincidono entro 1e-10
+  dtau=0.50  |dLambda| fra i due protocolli: tick 1 0.000e+00   tick 2000 1.350e-13   PEGGIO su tutta la corsa 2.007e-13
+  (d) dtau=0.50: le due traiettorie coincidono entro 1e-10   PASSA   peggio 2.007e-13 su 2000 tick: a PARITA' di accensione
+      e con l-accensione SOLO da una parte (il motore di colpo): peggio 5.529e+00
+  ### (d) DEVE fallire: accensione diversa da UNA SOLA PARTE PASSA   scarto 5.529e+00, cioe' 545.3 barre del referto: E- LA STORIA DELL-ACCENSIONE
+  dtau=0.25  |dLambda| fra i due protocolli: tick 1 0.000e+00   tick 2000 1.004e-13   PEGGIO su tutta la corsa 1.830e-13
+  (d) dtau=0.25: le due traiettorie coincidono entro 1e-10   PASSA   peggio 1.830e-13 su 2000 tick: a PARITA' di accensione
+      e con l-accensione SOLO da una parte (il motore di colpo): peggio 3.841e+00
+  ### (d) DEVE fallire: accensione diversa da UNA SOLA PARTE PASSA   scarto 3.841e+00, cioe' 378.8 barre del referto: E- LA STORIA DELL-ACCENSIONE
+------------------------------------------------------------------------------------------------
+### (e) IL CONO: max |d rho_k| per tick, col termine contro SENZA
+  dtau=0.50  col termine 2.805671e+00   senza 3.486221e+00   -> rapporto 0.805
+  (e) dtau=0.50: il termine NON fa cambiare lo stato PIU' de PASSA   rapporto 0.805: in `74ba200` `S3` dava 0.80, e `S2` VIOLAVA con 1.89
+  dtau=0.25  col termine 1.875594e+00   senza 1.893923e+00   -> rapporto 0.990
+  (e) dtau=0.25: il termine NON fa cambiare lo stato PIU' de PASSA   rapporto 0.990: in `74ba200` `S3` dava 0.80, e `S2` VIOLAVA con 1.89
+================================================================================================
+  18 su 18   [corsa intera: 118.5 s]
+### ⛔ E SE UN NUMERO NON COINCIDE, la legge in tabella NON e' la legge che e'
+###   stata misurata: e' il criterio del mandato, e non si aggiusta.
+================================================================================================

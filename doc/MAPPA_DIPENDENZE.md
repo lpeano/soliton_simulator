@@ -619,8 +619,11 @@ dalla saturazione**; ### **`S1` e' l'unica che resta perturbativa oltre `x = 0.1
 *(`0` violatori, `M-B1` `12`/`12` al bit, `M-B2` `1.965`)*, la simmetria `(P Theta)`
 ### **regge col termine non lineare** *(`2` ulp)*, e la `C` sul flusso da'
 `C Op C^-1 = Op^-1` ### **esattamente** *(`0` ulp)*.
-### 📌 **E la risposta statica col motore COINCIDE con `S3`:** pendenza `1.108` contro
-`1.106`, cono ### **`0.805`** contro `0.80`.
+### 📌 **E la risposta statica col motore COINCIDE con `S3`**, e dal `2026-10-16`
+### **a parita' di accensione**: pendenza ### **`1.106` contro `1.106`**, medie a
+### **`0.000` barre**, traiettorie a ### **`2.0e-13` su `2000` tick**, cono ### **`0.805`**
+contro `0.80`. ### ⚠ **I numeri di prima** *(`1.108`, `3.53` barre)* ### **erano misurati
+con la RAMPA da una sola parte** — difetto dello strumento, errore `n.3`.
 
 ### ✅ **DECISA** *(Luca, `2026-10-15` `23:30` e `23:38`)*: la forma dell'accoppiamento e'
 ### **`CAMM-MATERIA-VUOTO`**, `N_k = rho_k ln(rho_k/(rho_k + Lambda_k))`, che
