@@ -128,6 +128,12 @@ COLLAUDI = (
     # ### facessero l-intero, e la misura dice ### **`0.8` ulp** -- perche- il flusso
     # ### ### **conserva i propri coefficienti.**
     ("il flusso di saturazione", "primo_ordine/_collauda_saturazione.py", "pre-commit"),
+    # ### ⭐⭐ **IL FLUSSO CHE GIRA dal `2026-10-15`**, e il suo collaudo sta
+    # ### ### **accanto a quello della legge che sostituisce**: la saturazione resta in
+    # ### tabella, e il suo collaudo ### **resta un fatto misurato** anche se la legge
+    # ### non gira piu-.
+    ("il flusso materia-vuoto", "primo_ordine/_collauda_materia_vuoto.py",
+     "pre-commit"),
     # ### \u26d4 **`P3`: L-ENERGIA E LA CORRENTE, E QUESTO COLLAUDO AFFERMA UN
     # ### FALLIMENTO.** La previsione scritta ### **prima** dei numeri diceva *<<la parte
     # ### lineare chiude il bilancio locale ESATTAMENTE>>*: ### **non chiude**, e il

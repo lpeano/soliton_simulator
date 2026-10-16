@@ -68,6 +68,7 @@ _QUI = os.path.dirname(os.path.abspath(__file__))
 if _QUI not in sys.path:
     sys.path.insert(0, _QUI)
 
+import materia_vuoto as MV                                    # noqa: E402
 import saturazione as SAT                                     # noqa: E402
 
 
@@ -101,18 +102,21 @@ def densita_estremita(st, mot, par_moneta, fuori):
 
 
 def densita_nodo(st, mot, fuori):
-    """### `e_k = Lambda_k G(h_k / Lambda_k)`, ### **col LIMITE.**
+    """### `e_k = rho_k ln(rho_k / (rho_k + Lambda_k))`: ### **LA LEGGE CHE GIRA.**
 
-    ### ⛔ **Dove `Lambda == 0` esatto, `N -> h - (pi/2) Lambda sign(h)`**, che a
-    `Lambda = 0` fa **`h`**: ### **e' il valore che la funzione PRENDE la'**, non un
-    pavimento.
+    ### ⭐⭐ **DAL `2026-10-15` E- LA `N` DI `CAMM-MATERIA-VUOTO`, non piu- quella della
+    saturazione** *(decisione di Luca, `23:30`)*: ### **`E` deve essere l-energia della
+    legge CHE GIRA**, e la saturazione e- ### **fuori dall-ordine di composizione.**
+    ### ⛔ **Lasciare qui la vecchia `N` vorrebbe dire misurare l-energia di una legge
+    che non agisce** -- e il collaudo dell-energia la confronterebbe con un passo che
+    non la usa.
+    ### 📌 **E dove `rho = 0` il termine fa `0`**, perche- `x ln x -> 0`: ### **e- il
+    valore che la funzione PRENDE**, non un pavimento *(il conto sta in
+    `materia_vuoto.py`)*.
     """
-    h = mot.elicita(st)
+    rho = mot.densita_materia(st)
     lam = mot.densita_vuoto(st)
-    buoni = lam > 0.0
-    fuori[...] = h
-    if np.any(buoni):
-        fuori[buoni] = lam[buoni] * SAT.G(h[buoni] / lam[buoni])
+    fuori[...] = MV.N(rho, lam)
     return fuori
 
 

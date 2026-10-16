@@ -88,6 +88,14 @@ def stato_del_banco(nn):
         "phi_h": phi,
         "Lambda": V3.lambda_nodo(phi, sc),
         "h_int": N2.elicita_nodo(psi, sc, geo),
+        # ### ⭐⭐ **`rho` E- ENTRATA IN TABELLA IL `2026-10-15`, E IL BANCO CE L-HA
+        # ### GIA-:** `camminata.rho_nodo` e- ### **la stessa formula riga per riga**
+        # ### *(`np.add.at(out, nodo, somma |psi|^2 sulle bande)`)*. ### ✅ **Quindi
+        # ### l-esito e- `COINCIDE` e non `NUOVA`**, e questa riga ### **la fa
+        # ### CONFRONTARE davvero** invece di farla passare per <<nuova>>.
+        # ### ⚠ **Non e- una soglia aggiustata: e- la funzione del banco CHIAMATA**,
+        # ### che e- cio- che il docstring di questo modulo promette.
+        "rho": CM.rho_nodo(psi, sc),
     }, sc
 
 

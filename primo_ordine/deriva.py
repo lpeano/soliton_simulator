@@ -52,6 +52,13 @@ import saturazione as SAT                                     # noqa: E402
 # ### ⚠ **E un `id` che non e' in questa mappa FERMA**, invece di essere saltato in
 # ### silenzio: ### **un pezzo del tick che non gira e' un tick diverso.**
 OPERATORE = {
+    # ### ⭐⭐ **IL FLUSSO CHE GIRA dal `2026-10-15`** *(decisione di Luca)*:
+    # ### `CAMM-MATERIA-VUOTO` ### **sostituisce** `CAMM-SATURAZIONE` nell-ordine di
+    # ### composizione. ### ⚠ **La riga della saturazione RESTA**, perche- la legge
+    # ### resta in tabella e il suo operatore esiste: ### **una riga tolta da qui
+    # ### farebbe ALZARE il tick se qualcuno la rimettesse nell-ordine**, invece di
+    # ### girare.
+    "CAMM-MATERIA-VUOTO": ("CAMM-MATERIA-VUOTO", False),
     "CAMM-SATURAZIONE": ("CAMM-SATURAZIONE", False),
     "CAMM-MONETA-SPIN": ("moneta_spin", True),
     "CAMM-GROVER": ("grover", False),

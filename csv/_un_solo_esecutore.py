@@ -118,6 +118,16 @@ SCRITTI_A_MANO = {
         " CAUSA e- provata direttamente, perche- il flusso ### **CONSERVA `h` e `Lambda`**,"
         " cioe- i suoi propri coefficienti: la rotazione attorno a `n` conserva `s.n` e la"
         " fase conserva `|phi|^2`",
+    "primo_ordine/materia_vuoto.py::applica":
+        "NON integra: APPLICA IL FLUSSO ESATTO di `CAMM-MATERIA-VUOTO`, e l-esattezza SI"
+        " DIMOSTRA invece di promettersi: `N = rho ln(rho/(rho+Lambda))` dipende SOLO da"
+        " `rho` e `Lambda`, e il flusso mette UNA FASE su `psi` e UNA FASE su `phi` --"
+        " quindi NON cambia ne- l-una ne- l-altra, `alpha` e `beta` sono COSTANTI durante"
+        " il pezzo, e `exp(-i a dtau/2)` due volte fa `exp(-i a dtau)` IN ARITMETICA"
+        " ESATTA. ### Cioe- il flusso CONSERVA LE PROPRIE SORGENTI, e percio- conserva"
+        " `N_k` stesso: quel `-1j` e- LA FORMA CHIUSA DI UNA FASE, non un passo a mano."
+        " ### E IL COLLAUDO LO PROVA NEI DUE VERSI: due mezzi fanno l-intero agli ulp, e"
+        " il suo inverso lo annulla -- un integratore NON passerebbe.",
     "primo_ordine/motore.py::_ruota_attorno_a_n":
         "NON integra: APPLICA UNA FORMA ESATTA. `exp(-i a sigma.n) = cos a I - i "
         "sin a (sigma.n)` vale ESATTAMENTE perche- `(sigma.n)^2 = I` quando"
@@ -129,6 +139,13 @@ SCRITTI_A_MANO = {
         " al bit. ### E il collaudo lo verifica nei DUE versi: la norma si"
         " conserva entro pochi ulp, e DUE META- fanno l-INTERO",
 
+    "primo_ordine/_collauda_materia_vuoto.py::eulero_della_fase":
+        "e- l-EULERO ESPLICITO della fase di `CAMM-MATERIA-VUOTO`, scritto SOLO per IL"
+        " CASO CHE DEVE FALLIRE: senza di lui <<due mezzi fanno l-intero>> e <<l-inverso"
+        " annulla>> passerebbero anche per un metodo che sbaglia all-ordine `dtau^2`,"
+        " cioe- il collaudo sarebbe UN FALSO-UNO. ### Misurato: con l-Eulero i due mezzi"
+        " NON fanno l-intero (scarto 3.3e-03 contro 0.8 ulp del flusso esatto)."
+        " ### NON e- un candidato e non lo diventera-: vive in un collaudo.",
     "primo_ordine/_collauda_passo.py::eulero_esplicito":
         "e- l-EULERO ESPLICITO, scritto SOLO per il caso che DEVE fallire del punto 8: "
         "senza di lui il braccio della reversibilita- non distinguerebbe un metodo "

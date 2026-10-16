@@ -12,7 +12,7 @@ esiste.**
 import numpy as np
 
 # ### L-IMPRONTA del blocco `variabili` della tabella: un presidio la confronta.
-IMPRONTA = 'd5ef6e68d2388410'
+IMPRONTA = 'ca55acb6941b7eba'
 
 # ### (nome, tipo, ID della voce in `doc/indice/variabili.jsonl`)
 VARIABILI = (
@@ -20,6 +20,7 @@ VARIABILI = (
     ('psi_h', 'complesso_c2_estremita', 'V-PSI-H-ERA2'),
     ('phi_h', 'complesso_estremita', 'V-PHI-H-ERA2'),
     ('Lambda', 'reale_nodo', 'V-LAMBDA-ERA2'),
+    ('rho', 'reale_nodo', 'V-RHO-ERA2'),
     ('h_int', 'reale_nodo', 'V-H-INT-ERA2'),
 )
 
@@ -32,6 +33,7 @@ DOMINI = (
     ('psi_h', 'complesso_c2_estremita', 'finito'),
     ('phi_h', 'complesso_estremita', 'finito'),
     ('Lambda', 'reale_nodo', 'finito'),
+    ('rho', 'reale_nodo', 'finito'),
     ('h_int', 'reale_nodo', 'finito'),
 )
 

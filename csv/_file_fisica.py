@@ -114,6 +114,14 @@ FILE_FISICA = (
     # ### `motore.py` quando quello ha superato il tetto delle `700` righe:
     # ### ### **oltre, SI DIVIDE, NON SI ALLUNGA.** ### ⛔ **E il limite
     # ### `Lambda -> 0` NON e- un pavimento: e- il valore che la funzione PRENDE.**
+    # ### ⭐⭐ **L-ACCOPPIAMENTO MATERIA-VUOTO** *(decisione di Luca del
+    # ### `2026-10-15`, `23:30`)*: `N = rho ln(rho/(rho+Lambda))`, che
+    # ### ### **SOSTITUISCE la saturazione.** ### **Qui stanno le sue tre funzioni
+    # ### E l-applicazione del flusso**, perche- col corpo nel motore quel file
+    # ### arrivava a ### **`714` righe**, oltre il tetto di `700`.
+    # ### ⛔ **E il limite `rho -> 0` NON e- un pavimento:** la- `psi = 0`, e
+    # ### ### **la fase di un vettore nullo non vuol dire niente.**
+    'primo_ordine/materia_vuoto.py',
     'primo_ordine/saturazione.py',
     # ### ⭐ **NATO il `2026-10-15` con la strada `(B)`**, e sta qui dal commit in
     # ### cui nasce: ### **il tempo proprio locale, la fase esatta `e^{i pi s}`, e i
@@ -181,6 +189,11 @@ FILE_FISICA = (
     # ### IL COLLAUDO DEL FLUSSO DI SATURAZIONE *(`P1`)*: il suo inverso lo
     # ### ### **ANNULLA AL BIT**, e la CAUSA e- provata direttamente -- il flusso
     # ### ### **conserva `h` e `Lambda`**, cioe- i suoi propri coefficienti.
+    # ### ⭐ **IL COLLAUDO DEL FLUSSO NUOVO**, col ### **caso che DEVE fallire**:
+    # ### un ### **EULERO ESPLICITO** della stessa fase. ### ⛔ **Senza di lui
+    # ### <<due mezzi fanno l-intero>> passerebbe anche per un metodo APPROSSIMATO**,
+    # ### cioe- il collaudo sarebbe ### **un FALSO-UNO.**
+    'primo_ordine/_collauda_materia_vuoto.py',
     'primo_ordine/_collauda_saturazione.py',
     # ### `P3`: L-ENERGIA COME SOMMA DI DENSITA- LOCALI, e la corrente sugli archi.
     # ### \u26d4 **E il suo collaudo AFFERMA UN FALLIMENTO MISURATO:** la corrente
@@ -275,6 +288,7 @@ FILE_FISICA = (
     'primo_ordine/termini/camm_spostamento.py',
     'primo_ordine/termini/camm_grover_vuoto.py',
     'primo_ordine/termini/camm_spostamento_vuoto.py',
+    'primo_ordine/termini/camm_materia_vuoto.py',
     'primo_ordine/termini/camm_saturazione.py',
     'primo_ordine/termini/camm_forma_d.py',
     # ### ✅ **Nato il `2026-10-10` dividendo `schema.py`**, che era

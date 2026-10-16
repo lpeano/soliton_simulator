@@ -84,6 +84,8 @@ RAMI = {
     ("primo_ordine/termini/camm_spostamento_vuoto.py", "applica"): (
         1, "guardia", _LEGAME),
     ("primo_ordine/termini/camm_saturazione.py", "applica"): (1, "guardia", _LEGAME),
+    ("primo_ordine/termini/camm_materia_vuoto.py", "applica"): (
+        1, "guardia", _LEGAME),
     ("primo_ordine/termini/camm_forma_d.py", "applica"): (1, "guardia", _LEGAME),
     ("primo_ordine/stato.py", "controlla_domini"): (
         2, "validazione",

@@ -58,6 +58,7 @@ if _QUI not in sys.path:
 
 import flussi_parziali as FP                                  # noqa: E402
 import incidenza as IN                                        # noqa: E402
+import materia_vuoto as MV                                    # noqa: E402
 import saturazione as SAT                                     # noqa: E402
 
 # ### ⚠ **I MODI DI SOMMARE, a vocabolario CHIUSO.** Un terzo modo si aggiunge qui, e
@@ -75,7 +76,12 @@ OPERATORI = ("moneta_spin", "grover", "spostamento_trasporto",
 # ### quello di un `pezzo_unitario` fa `quale = OPERATORE`. ### **Il motivo e- che un
 # ### flusso NON ha un operatore in tabella: ha un GENERATORE**, e il generatore e- scritto
 # ### nella sua riga.
-FLUSSI = ("CAMM-SATURAZIONE",)
+# ### ⭐⭐ **E DAL `2026-10-15` IL FLUSSO CHE GIRA E- `CAMM-MATERIA-VUOTO`** *(decisione
+# ### di Luca, `23:30`)*: ### **sostituisce `CAMM-SATURAZIONE`**, che resta in tabella
+# ### ### **fuori dall-ordine** -- e il suo operatore resta qui, perche-
+# ### ### **cio- che si e- misurato non si cancella** e `_collauda_saturazione.py` lo prova
+# ### ancora sui numeri.
+FLUSSI = ("CAMM-SATURAZIONE", "CAMM-MATERIA-VUOTO")
 
 # ### ⛔ **E LE FUNZIONI DELLA SATURAZIONE STANNO IN `saturazione.py`**, perche-
 # ### questo file ha superato ### **il tetto di `700` righe** quando il flusso e- entrato:
@@ -177,6 +183,7 @@ class Motore(object):
             # ### ✅ **IL FLUSSO, per `id` di legge e non per nome di
             # ### operatore**: il legame generato di un `flusso` cerca ### **l-`ID`.**
             "CAMM-SATURAZIONE": self._saturazione,
+            "CAMM-MATERIA-VUOTO": self._materia_vuoto,
         }
 
     # ------------------------------------------------------------------ le porte del tick
@@ -495,6 +502,23 @@ class Motore(object):
         np.add.at(h, self.inc.nodo, sn)
         return h
 
+    def densita_materia(self, st):
+        """### `rho_k = somma_h |psi_h|^2`: ### **LA SORGENTE** dell-accoppiamento.
+
+        ### ⭐ **Decisione di Luca del `2026-10-15`:** la sorgente e- la ### **densita- di
+        materia**, non l-elicita-. ### **E- POSITIVA, locale, invariante di gauge e
+        bilineare, e conta materia e antimateria ALLO STESSO MODO** -- mentre `h_int` e-
+        ### **dispari sotto `C`**, cioe- darebbe al vuoto una fase ### **che dipende dallo
+        spin.**
+        ### ⚠ **E non e- la stessa cosa di `Lambda`, anche se la formula si assomiglia:**
+        quella somma `|phi|^2` *(il vuoto)*, questa `|psi|^2` *(la materia)*.
+        """
+        psi = st["psi_h"]
+        r = st["rho"]
+        r.fill(0)
+        np.add.at(r, self.inc.nodo, np.sum(np.abs(psi) ** 2, axis=1))
+        return r
+
     def densita_vuoto(self, st):
         """### `Lambda_k`: la densita' del vuoto del nodo, ### **somma di `|phi|^2`.**
 
@@ -547,6 +571,34 @@ class Motore(object):
         np.multiply(st["phi_h"], ef, out=st["phi_h"])
         self.applicazioni["CAMM-SATURAZIONE"] += 1
         return st
+
+    def _materia_vuoto(self, st, parametri, frazione):
+        """### **IL FLUSSO ESATTO di `N = rho ln(rho/(rho+Lambda))`**, per
+        `frazione * dtau`.
+
+        ### ✅ **DUE FASI, e nient-altro:** `psi -> psi exp(-i alpha dtau)` e
+        `phi -> phi exp(-i beta dtau)`. ### **Niente integratore, niente passo interno,
+        niente troncamento**, e il suo inverso e- `frazione -> -frazione`.
+        ### ⭐⭐ **E L-ESATTEZZA SI DIMOSTRA:** `N` dipende ### **solo** da `rho` e
+        `Lambda`, e ### **una fase non cambia ne- l-uno ne- l-altro** -- quindi `alpha` e
+        `beta` sono ### **COSTANTI durante il pezzo**, e
+        `exp(-i a dtau/2) exp(-i a dtau/2) = exp(-i a dtau)` ### **in aritmetica esatta.**
+        ### **Cioe- il flusso CONSERVA LE PROPRIE SORGENTI**, e percio- conserva `N_k`.
+        ### ⚠ **E LA DIFFERENZA CON LA SATURAZIONE E- NELLA PRIMA FASE:** la- `psi`
+        prendeva ### **una ROTAZIONE attorno a `n`** *(la sorgente era `h = s . n`)*, qui
+        prende ### **una FASE** -- perche- `drho/dpsi^* = psi` ### **con lo stesso segno
+        nelle due componenti.**
+        ### ⛔ **E dove `rho = 0`, `alpha = 0`:** la- `psi = 0`, e ### **la fase di un
+        vettore nullo non vuol dire niente.** ### **Singolarita- ELIMINABILE, non
+        pavimento** *(il conto sta in `materia_vuoto.py`)*.
+        ### ⛔⛔ **E IL CORPO STA IN `materia_vuoto.py`, NON QUI, e il motivo e-
+        MISURATO:** con il corpo qui dentro `motore.py` arrivava a ### **`714` righe**,
+        oltre ### **il tetto di `700`** -- e la regola dice ### **oltre, SI DIVIDE, NON
+        SI ALLUNGA.** ### ⭐ **E- lo STESSO motivo per cui `saturazione.py` esiste**
+        *(sta scritto in testa a questo file)*: ### **le funzioni della legge col suo
+        modulo, l-applicazione dove sta la legge, e il motore come REGISTRO.**
+        """
+        return MV.applica(self, st, frazione)
 
     def _spostamento_scalare(self, st, parametri, frazione):
         """### Lo scambio delle due estremita', ### **senza trasporto**: e' uno scalare.

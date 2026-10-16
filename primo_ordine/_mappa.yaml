@@ -86,6 +86,10 @@ moduli:
     responsabilita: il collaudo della struttura compatta, e i sette casi che devono fallire
     importa: [_presidio, incidenza]
 
+  - nome: materia_vuoto.py
+    responsabilita: il generatore dell accoppiamento materia-vuoto, il flusso esatto e il limite rho uguale a zero
+    importa: [flussi_parziali]
+
   - nome: saturazione.py
     responsabilita: le quattro funzioni del generatore della saturazione, e il LIMITE
     importa: []
@@ -140,7 +144,7 @@ moduli:
 
   - nome: motore.py
     responsabilita: il doppio contenitore, i pezzi unitari, il flusso, e la regola del tick
-    importa: [_presidio, flussi_parziali, incidenza, saturazione, stato]
+    importa: [_presidio, flussi_parziali, incidenza, materia_vuoto, saturazione, stato]
 
   - nome: _collauda_motore.py
     responsabilita: il collaudo del motore -- zero allocazioni, unitarieta-, regola del tick
@@ -162,13 +166,17 @@ moduli:
     responsabilita: il confronto tabella/banco ESEGUIBILE, e i cinque casi che falliscono
     importa: [_presidio]
 
+  - nome: _collauda_materia_vuoto.py
+    responsabilita: il flusso di CAMM-MATERIA-VUOTO -- esatto, il limite rho zero, e l Eulero che DEVE fallire
+    importa: [_presidio, flussi_parziali, incidenza, materia_vuoto, motore, stato]
+
   - nome: _collauda_saturazione.py
     responsabilita: il collaudo del flusso di saturazione, e la causa della sua esattezza
     importa: [_presidio, incidenza, motore, saturazione, stato]
 
   - nome: energia.py
     responsabilita: E come somma di densita- locali, la corrente sugli archi e il bilancio
-    importa: [saturazione]
+    importa: [materia_vuoto, saturazione]
 
   - nome: _collauda_energia.py
     responsabilita: il collaudo di E e del bilancio, e il fallimento affermato come fatto
@@ -249,6 +257,11 @@ moduli:
 
   - nome: termini/camm_spostamento_vuoto.py
     responsabilita: lo spostamento del vuoto, generato -- legame
+    generato: true
+    importa: []
+
+  - nome: termini/camm_materia_vuoto.py
+    responsabilita: l accoppiamento materia-vuoto, generato -- flusso esatto
     generato: true
     importa: []
 

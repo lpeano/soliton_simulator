@@ -19,12 +19,29 @@
 
 | esito | variabili | leggi | operatori del banco | che cosa vuol dire |
 |---|---|---|---|---|
-| **`COINCIDE`** | `4` | `7` | — | tabella, banco e carta d'accordo |
+| **`COINCIDE`** | `5` | `8` | — | tabella, banco e carta d'accordo |
 | **`ERRORE DI TRASCRIZIONE`** | `0` *(era `1`, corretto)* | `0` | — | banco e carta d'accordo, tabella no ⟹ **si corregge la tabella** |
 | **`CONFLITTO`** | `1` | `0` | — | ### ⛔ **NON si corregge: va a Luca** |
 | **`MANCANTE`** | `0` | — | `12` | un operatore del banco **usato nelle misure** senza la sua legge |
 | **`NUOVA`** | `1` | `3` | — | dell'era `2`, **senza riferimento**, col punto della carta |
 | **`ORFANA`** | `0` | `0` | — | ### **si segnala e NON si toglie** |
+
+### ⭐⭐ **E `rho` E' ENTRATA IN TABELLA IL `2026-10-15` (`23:30`), e NON E' <<NUOVA>>:**
+la decisione di Luca che sostituisce la saturazione con `CAMM-MATERIA-VUOTO` prende come
+sorgente la ### **densita' di materia**, e ### **il banco congelato CE L'HA GIA'** —
+`camminata.rho_nodo`, che e' ### **la stessa formula riga per riga**
+*(`np.add.at(out, nodo, somma |psi|^2 sulle bande)`)*. ### ✅ **Quindi l'esito e'
+`COINCIDE`, non `NUOVA`: non ho dovuto citare un punto della carta perche' la variabile
+### **non e' un'invenzione dell'era `2`.**
+
+### ⚠⚠ **E IL BANCO DICE ANCHE UNA COSA CHE VA LETTA CON LA DECISIONE, e la riporto
+perche' e' MISURATA la' dentro:** `nonlineare2.fase_pari2` e' la forma `(A)`,
+`phi_k = g rho_k dtau_k`, e il suo docstring dice ### **<<PARI sotto `C` ⟹ ROMPE `C`>>**,
+mentre `fase_elicita` *(la forma `(B)`, con `h`)* e' ### **DISPARI e commuta con `C`.**
+### ⛔ **Cioe' il cambio di sorgente da `h` a `rho` CAMBIA LA PARITA' DEL TERMINE SOTTO
+`C`**, e la simmetria del passo ### **va RIMISURATA, non dedotta** — e' il punto `2(b)`
+del mandato del quinto pezzo. ### **Lo scrivo qui prima di misurarlo, perche' il banco lo
+diceva gia' e io stavo per non guardarlo.**
 
 ### ⚠ **E IL `CONFLITTO` E' UNO SOLO, ma non e' piccolo: LE CONDIZIONI INIZIALI.**
 La tabella **non ha un posto dove dichiararle**, e il generato fa `np.zeros`.
@@ -40,6 +57,7 @@ La tabella **non ha un posto dove dichiararle**, e il generato fa `np.zeros`.
 | **`phi_h`** | `complesso_estremita` | `vuoto3.vuoto_fondo`, `vuoto3.vuoto_zero` | `complex128`, `(2m,)` | estremita' | ### ✅ **`COINCIDE`** |
 | **`Lambda`** | `reale_nodo` | `vuoto3.lambda_nodo` | `float64`, `(n,)` | nodo | ### ✅ **`COINCIDE`** |
 | **`h_int`** | `reale_nodo` | `nonlineare2.elicita_nodo` | `float64`, `(n,)` | nodo | ### ✅ **`COINCIDE`** |
+| **`rho`** | `reale_nodo` | `camminata.rho_nodo` | `float64`, `(n,)` | nodo | ### ✅ **`COINCIDE`** |
 | **`psi`** | `complesso_c2_nodo` | ### **nessuna: nel banco NON ESISTE** | `complex128`, `(n, 2)` | nodo | ### ⭐ **`NUOVA`** — punto **`A16`** |
 
 ### ⭐ **`phi_h` ERA L'ERRORE DI TRASCRIZIONE, ed e' CORRETTO** *(decisione di Luca,
