@@ -266,6 +266,14 @@ def _con_rampa(op, ag):
     """
     def avvolto(st, parametri, frazione):
         return op(st, parametri, frazione * rampa(ag.passo, ag.acceso))
+    # ### ⛔⛔ **LA MARCA, E IL MOTIVO E' UN FALSO-UNO MIO** *(trovato dal guardiano il
+    # ### `2026-10-16`)*: il primo assert diceva
+    # ### `ag.acceso == 0 or callable(mot.operatori[quale])`, ed era ### **SEMPRE VERO**,
+    # ### perche- ### **entrambi i rami installano un callable.** ### **La frase <<un
+    # ### parametro che agisse solo da una parte adesso ALZA>> era FALSA.**
+    # ### ✅ **Adesso l-operatore che porta la rampa SI MARCA**, e l-assert
+    # ### ### **guarda la marca.**
+    avvolto.rampa_dello_strumento = True
     return avvolto
 
 
@@ -311,6 +319,10 @@ def corri(dtau, x, forma, tick, acceso, centri, senza_alpha=False, beta_zero=Fal
     ag.visto = visto
     ag.foto = None
     ag.quale = quale
+    # ### ⭐ **E IL TERMINE SOSTITUITO PORTA LA STESSA MARCA**, perche- la rampa la applica
+    # ### ### **da se-** *(`s = rampa(agisci.passo, agisci.acceso)`)*: la marca dice
+    # ### ### **<<qui la rampa agisce>>**, non ### **<<sono avvolto>>.**
+    ag.rampa_dello_strumento = True
     if SOSTITUISCI:
         mot.operatori[quale] = ag
     else:
@@ -324,11 +336,26 @@ def corri(dtau, x, forma, tick, acceso, centri, senza_alpha=False, beta_zero=Fal
         # ### la rampa su `beta`** -- esattamente la stessa cosa, fatta ### **dallo
         # ### STRUMENTO.**
         mot.operatori[quale] = _con_rampa(vero, ag)
-    # ### ⛔ **E UN PARAMETRO CHE AGISSE SOLO DA UNA PARTE DEVE ALZARE**, non passare in
-    # ### silenzio: ### **e- la lezione dell-errore `n.3`**, e qui e- un `assert`.
-    assert ag.acceso == 0 or callable(mot.operatori[quale]), (
-        "`acceso = %d` e il pezzo `%s` non ha chi gli applichi la rampa: un parametro che"
-        " agisce SOLO DA UNA PARTE non confronta niente" % (ag.acceso, quale))
+    # ### ⛔ **E UN PARAMETRO CHE AGISCE SOLO DA UNA PARTE ALZA**, non passa in silenzio:
+    # ### ### **e- la lezione dell-errore `n.3`**, e qui e- un `assert` CHE GUARDA LA MARCA
+    # ### *(il primo guardava `callable`, ed era ### **un FALSO-UNO**)*.
+    assert ag.acceso == 0 or getattr(
+        mot.operatori[quale], "rampa_dello_strumento", False), (
+        "`acceso = %d` e il pezzo `%s` NON porta la marca `rampa_dello_strumento`: la"
+        " rampa agirebbe solo da una parte, e un parametro cosi- NON CONFRONTA NIENTE"
+        % (ag.acceso, quale))
+    # ### ⛔⛔ **E I TRE PARAMETRI DEL TERMINE SOSTITUITO NON SI IGNORANO IN SILENZIO**
+    # ### *(la stessa famiglia, trovata dal guardiano il `2026-10-16`)*: `senza_alpha`,
+    # ### `beta_zero` e `visto` vivono ### **dentro `_termine_statico`**, quindi con
+    # ### `SOSTITUISCI = False` ### **non avrebbero nessun effetto.**
+    # ### ⭐ **E NON si applicano al motore**, perche- vorrebbe dire ### **toccare la
+    # ### legge**: `senza_alpha` azzera `alpha` DENTRO il termine, e dall-esterno non si
+    # ### esprime. ### ✅ **Quindi si ALZA**, che e- l-altra via che il mandato ammette.
+    assert SOSTITUISCI or not (senza_alpha or beta_zero or visto is not None), (
+        "`senza_alpha`, `beta_zero` e `visto` agiscono SOLO sul termine SOSTITUITO, e con"
+        " `SOSTITUISCI = False` sarebbero IGNORATI IN SILENZIO: o si sostituisce il pezzo,"
+        " o non si chiedono (senza_alpha=%r, beta_zero=%r, visto=%r)"
+        % (senza_alpha, beta_zero, visto is not None))
     salvati = dict(mot.operatori)
     try:
         psi0 = st["psi_h"].copy()

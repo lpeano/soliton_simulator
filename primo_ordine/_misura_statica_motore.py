@@ -105,6 +105,36 @@ def braccio_strumento():
           "max |rho(t) - rho(0)| = %.1e su 200 tick: e' la FOTOGRAFIA" % drho)
     esito("(0) e la somma di `|phi|^2` deriva poco", dtot <= 1e-9,
           "deriva %.3e su 200 tick" % dtot)
+    # ### ⛔⛔ **I DUE CASI CHE DEVONO FALLIRE DELLO STRUMENTO** *(integrazione del
+    # ### guardiano, `2026-10-16`)*: il primo assert che avevo scritto era
+    # ### ### **UN FALSO-UNO** *(`callable(...)`, sempre vero)*, e questi due bracci sono
+    # ### la prova che ### **adesso gli assert ALZANO DAVVERO.**
+    # ### ① **la rampa senza la MARCA, END-TO-END:** si sostituisce `_con_rampa` con
+    # ### una versione che ### **NON marca**, e si chiama `corri` con `acceso > 0`.
+    # ### ⚠ **La prima stesura di questo braccio provava la CONDIZIONE a mano**, non il
+    # ### cablaggio: ### **cosi- invece passa da `corri`.**
+    salva = PR._con_rampa
+    passa, nota = False, "NON ha alzato: l-assert e- ancora un falso-uno"
+    try:
+        def _senza_marca(op, ag):
+            def avvolto(st_, parametri, frazione):
+                return op(st_, parametri, frazione * PR.rampa(ag.passo, ag.acceso))
+            return avvolto
+        PR._con_rampa = _senza_marca
+        PR.corri(0.5, PR.X_RIF, "MOTORE", 20, 10, (0,), congela=CONGELA)
+    except AssertionError as e:                               # noqa: BLE001
+        passa, nota = True, "### ha alzato: %s" % str(e)[:52]
+    finally:
+        PR._con_rampa = salva
+    esito("### (0) DEVE fallire: il pezzo del motore SENZA la marca della rampa",
+          passa, nota)
+    # ### ② **i tre parametri del termine sostituito, con `SOSTITUISCI = False`.**
+    passa2, nota2 = False, "NON ha alzato: sarebbero IGNORATI in silenzio"
+    try:
+        PR.corri(0.5, PR.X_RIF, "MOTORE", 20, 0, (0,), beta_zero=True, congela=CONGELA)
+    except AssertionError as e:                               # noqa: BLE001
+        passa2, nota2 = True, "### ha alzato: %s" % str(e)[:52]
+    esito("### (0) DEVE fallire: `beta_zero` con `SOSTITUISCI = False`", passa2, nota2)
 
 
 def braccio_segno():

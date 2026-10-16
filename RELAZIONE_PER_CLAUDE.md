@@ -17432,3 +17432,35 @@ e `0.8` barre)*. ### **Adesso e' IL RUMORE fra due protocolli** che differiscono
 ### **solo nel modo di congelare**, col criterio sul ### **PEGGIO**: `5.063e-14` e
 `3.997e-14` su `200` tick. ### **La pendenza si stampa come INFORMAZIONE.**
 ### **`13`/`13`** *(era `11`/`13`)*.
+
+### ⛔⛔ **IL MIO ASSERT ERA UN FALSO-UNO, E LA FRASE DI `04345d0` ERA FALSA**
+
+Avevo scritto `ag.acceso == 0 or callable(mot.operatori[quale])`, ed e' ### **SEMPRE
+VERO**: ### **entrambi i rami** *(`SOSTITUISCI` vero e falso)* installano un callable.
+### ⛔ **Quindi la frase della relazione di `04345d0`** — *«un parametro che agisse solo da
+una parte adesso ALZA»* — ### **era FALSA, e la correggo qui.**
+
+### ✅ **ADESSO E' REALE, e la cosa che guarda e' UNA MARCA:** l'operatore che porta la
+rampa si marca *(`rampa_dello_strumento`)*, ### **su entrambi i rami** — il termine
+sostituito la applica da se', l'avvolto la applica dallo strumento — e l'assert
+### **guarda la marca.**
+### ⭐ **E il caso che DEVE fallire passa da `corri`, non dalla condizione a mano:** si
+sostituisce `_con_rampa` con una versione ### **che non marca**, e `corri` con `acceso > 0`
+### **ALZA** — *«`acceso = 10` e il pezzo `CAMM-MATERIA-VUOTO` NON porta la marca»*.
+### ⚠ **La prima stesura di quel braccio provava la CONDIZIONE invece del cablaggio**, e
+l'ho rifatta.
+
+### ⛔⛔ **E LA STESSA FAMIGLIA ERA ANCORA APERTA IN TRE POSTI, come dici:** `senza_alpha`,
+`beta_zero` e `visto` vivono ### **dentro `_termine_statico`**, quindi con
+`SOSTITUISCI = False` ### **venivano IGNORATI IN SILENZIO.**
+### ⭐ **E non si applicano al motore, perche' vorrebbe dire TOCCARE LA LEGGE:**
+`senza_alpha` azzera `alpha` ### **dentro** il termine, e dall'esterno ### **non si
+esprime** *(la frazione scala entrambe le fasi, non una sola)*.
+### ✅ **Quindi `corri()` ALZA**, che e' l'altra via che il mandato ammette — e il caso che
+deve fallire e' ### **`beta_zero=True` con `SOSTITUISCI=False`**, che adesso alza.
+
+> ### 📌 **E QUESTO CASO ENTRA FRA GLI ESEMPI DELLA REGOLA
+> `STRUMENTO-LEGGE-DALLA-TABELLA`:** ### **un parametro di STRUMENTO che agisce solo su una
+> delle due strade e' una COPIA NASCOSTA della scelta** — non e' una legge scritta dentro,
+> ma e' ### **la stessa malattia**: due strade che si credono uguali e non lo sono, e
+> ### **nessuno le obbligava a dirlo.**
