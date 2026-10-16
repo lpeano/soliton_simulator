@@ -17604,3 +17604,25 @@ il mandato chiede.
 *«la gerarchia gravita'/elettromagnetismo deve ### **EMERGERE** dal modello *(e da dove)*,
 o ### **si accetta come parametro**?»* ### **Si decide dopo `L4`**, e il rimando sta
 ### **nella tabella di `L4` della mappa**, non solo in una sezione in fondo.
+### ⛔ **PEZZO `3` COMINCIATO: LA REGOLA `STRUMENTO-LEGGE-DALLA-TABELLA` E IL SUO PRESIDIO**
+
+**Il task history e' committato PRIMA del codice**, come il rito chiede
+*(`doc/TASK_HISTORY/2026-10-16_3_regola_strumento_legge_dalla_tabella.md`)*, e dentro ci
+sono ### **le quattro cose che NON so**, scritte prima di guardare.
+
+### ⚠ **E UNA CORREZIONE AL NUMERO DEL MANDATO:** il mandato dice ### **CINQUE**
+strumenti con la legge vecchia scritta dentro; oggi sono ### **SETTE**, perche' due li ho
+trovati io dopo *(`deriva.sorgente_per_nodo` e il braccio `(3)` di `_collauda_deriva`)*.
+### **Il numero del mandato non lo correggo in silenzio.**
+
+### ⭐⭐ **LA DECISIONE DI DISEGNO CHE VALE PIU' DI TUTTE: l'analizzatore prende le
+RADICI come argomento.** Il presidio vero gli passa il repo; il collaudo gli passa
+### **una cartella temporanea FUORI dal repo**, coi cinque file finti.
+### ⛔ **Perche':** due collaudi di presidio, per provare i casi che devono fallire,
+### **scrivono nel repo e poi ripristinano i byte** — e ### **due volte il ripristino
+e' fallito** *(`OSError: [Errno 22]`)*, lasciando l'albero sporco. ### **Cosi' quella
+fragilita' qui NON si puo' presentare**, e il controllo e' `git status` pulito dopo il
+collaudo.
+
+### ⛔ **E QUESTO COMMIT NON CURA NIENTE DELLA FISICA:** le cure stanno in coda
+*(`2-quinquies`, `2-sexies`, `2-septies`)*, un interruttore alla volta.
