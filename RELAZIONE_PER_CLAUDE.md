@@ -17886,3 +17886,41 @@ confrontabile con niente.
 ### ② la lista dei file ### **si DERIVA dal disco** *(`80` file)* e il derivato
 ### **si CONFRONTA col dichiarato** *(`0` fuori)*: se non fosse contenuto, ### **sarebbe
 `[[H-FISICA-FUORI-LISTA]]` a essere rotto**, e il censimento lo dice ### **a ogni corsa.**
+
+### ✅ **`6-bis` FATTO: ERA IL CR DOPPIO, E LA CAUSA STA IN UN TUBO**
+
+**I tre referti sono esattamente quelli che il guardiano ha nominato** — misurati:
+### **`3` file su `2662` tracciati** *(fuori dai reperti)* hanno un `CR LF`
+### **nel BLOB.**
+
+| il file | `CR LF` nel blob | sul disco | byte prima → dopo | `sha1` prima → dopo |
+|---|---|---|---|---|
+| `doc/referti_l1/mb1.txt` | `3` | `15` | `1160` → `1142` | `5ee5350f` → ### **`62d27a7d`** |
+| `doc/referti_l1/mb1_palindromo.txt` | `16` | `49` | `3737` → `3672` | `aabda6b3` → ### **`78584de1`** |
+| `doc/referti_l2/suite_dopo_la_sostituzione.txt` | `15` | `87` | `6602` → `6500` | `9488998b` → ### **`fa823ff8`** |
+
+### ⭐⭐ **LA CAUSA, E NON ERA `.gitattributes`:** la regola `*.txt text eol=lf`
+### **c'era gia'.** Sul disco quei file hanno ### **`CR CR LF`**, e il filtro di `git`
+### **toglie UN CR SOLO** *(`CR LF` diventa `LF`)*: quindi di un `CR CR LF`
+### **resta un `CR LF` NEL BLOB.**
+### ⛔ **E IL CR DOPPIO NASCE IN UN TUBO:** `primo_ordine/collauda.py` cattura l'uscita
+dei sotto-collaudi con `capture_output` ### **senza `text=True`**, quindi le fini di riga
+del figlio restano `CR LF`, e ### **stampare quella stringa su Windows aggiunge un ALTRO
+CR.**
+### ✅ **CURATO LA' DENTRO, non nei tre file:** `.replace(CR_LF, NL)` sull'uscita
+catturata — ### **un referto nuovo non puo' piu' nascere col CR doppio.**
+
+### ⚠⚠ **E UNA MISURA MIA ERA ROTTA, e me ne sono accorto per il CASO NULLO**
+
+Al primo giro avevo contato i `CR` con `grep -c` in `bash`, e mi diceva che
+### **~`700` file di `doc/` avevano il `CR` nel blob** — stavo per riferirti che il
+problema era ### **di tutto il repo** e che normalizzare avrebbe ### **invalidato ogni
+blob dichiarato.**
+### ⛔ **ERA FALSO:** lo stesso `grep` diceva `174` per `CLAUDE.md`, che in python
+da' ### **`0`.** Contava ### **le righe**, non i `CR`.
+### ✅ **Mi ha salvato la domanda che e' una regola di questo repo:
+<<che numero da' il CASO NULLO?>>** — e il numero vero e' ### **`3` su `2662`.**
+
+### ✅ **E I BLOB DICHIARATI NON SONO TOCCATI:** ho verificato che il `c21cabb8` citato
+nella RIPRESA per `suite_dopo_la_sostituzione.txt` e' ### **il blob dello STRUMENTO che
+l'ha prodotto**, non del referto — ### **nessuna impronta dichiarata cambia.**

@@ -52,6 +52,9 @@ RADICE = os.path.dirname(_QUI)
 sys.path.insert(0, os.path.join(RADICE, "csv"))
 
 NL = chr(10)
+# ### ⚠ **CR LF SI SCRIVE COSI', con `chr`:** un backslash dentro un commento che parla di fini di riga
+# ### ### **e- il modo di scriverci dentro una fine di riga VERA**, e mi e- appena successo.
+CR_LF = chr(13) + chr(10)
 PRESIDIO = "P-TEMPI"
 
 # ### ⛔ **IL BUDGET, in secondi: `500`, DECISO DA LUCA il `2026-10-12`.**
@@ -428,7 +431,19 @@ def gira(cmd):
     pezzi = cmd.split()
     t0 = time.perf_counter()
     r = subprocess.run([sys.executable] + pezzi, cwd=RADICE, capture_output=True)
-    uscita = ((r.stdout or b"") + (r.stderr or b"")).decode("utf-8", "replace")
+    # ### ⛔⛔ **LE FINI DI RIGA SI NORMALIZZANO QUI, e il motivo e' MISURATO**
+    # ### *(`2026-10-16`)*: `capture_output` senza `text=True` lascia le fini di riga
+    # ### del figlio ### **come sono** -- su Windows ### **CR LF** -- e stampare quella
+    # ### stringa ### **aggiunge un ALTRO CR**, cioe' ### **CR CR LF.**
+    # ### ⚠ **E il filtro di `git` toglie UN CR SOLO** *(CR LF diventa LF)*, quindi
+    # ### di un ### **CR CR LF resta un CR LF NEL BLOB** -- e tre referti committati
+    # ### risultavano ### **<<modificati>> a ogni checkout su Linux**
+    # ### *(`doc/referti_l1/mb1.txt`, `mb1_palindromo.txt`,
+    # ### `doc/referti_l2/suite_dopo_la_sostituzione.txt`)*.
+    # ### ✅ **Normalizzare QUI cura la CAUSA**, non i tre file: un referto nuovo
+    # ### ### **non puo' piu' nascere col CR doppio.**
+    uscita = (((r.stdout or b"") + (r.stderr or b"")).decode("utf-8", "replace")
+              .replace(CR_LF, NL))
     return time.perf_counter() - t0, r.returncode, uscita
 
 
