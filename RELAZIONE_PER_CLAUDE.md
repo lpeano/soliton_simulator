@@ -17322,3 +17322,38 @@ TOLTA: e quella e' una decisione tua.**
 ### ⛔ **FERMO QUI, come il mandato dice.** ### **La prossima decisione e' la forma di
 `cs(Lambda)`**, e in coda resta ### **il censimento di `P-R1`**
 *(`doc/CODA_2026-10-16.md`)*.
+
+### ⭐⭐ **PUNTO `A`: IL CONO STA SOTTO `1` A QUATTRO `dtau`, E IL GATE DEL PUNTO `D` E' PASSATO**
+
+| `dtau` | col termine | senza | **rapporto** |
+|---|---|---|---|
+| `0.5000` | `2.805671e+00` | `3.486221e+00` | ### **`0.8048`** |
+| `0.2500` | `1.875594e+00` | `1.893923e+00` | ### **`0.9903`** |
+| `0.1250` | `8.873211e-01` | `9.721706e-01` | ### **`0.9127`** |
+| `0.0625` | `4.496367e-01` | `4.872366e-01` | ### **`0.9228`** |
+
+### ⚠ **E la cosa che chiedevi di guardare: NON converge in modo monotono** — oscilla fra
+`0.80` e `0.99` ### **senza una tendenza.** ### **Non dico perche': e' un numero, e la
+lettura e' tua.**
+
+> ### ⛔⛔ **E SU `A2` UNA MIA IPOTESI E' SMENTITA, e la lascio scritta cosi'.** Il mandato
+> diceva *«SE cresce in modo esponenziale, stima la pendenza»*: ### **io avevo scritto un
+> braccio che ASSERIVA la crescita esponenziale**, e la misura lo smentisce —
+> ### **`0.00489 ± 0.00460`** *(`1.1` barre)* e `0.00413 ± 0.00496` *(`0.8`)*, cioe'
+> ### **non risolvibile.**
+> ### ⭐ **E le FETTE lo dicono meglio di un fit unico:** `0.0261` nella prima quinta parte
+> del tratto, `0.0017` nell'ultima — ### **la crescita e' tutta all'inizio e poi si
+> appiattisce.**
+> ### ✅ **Lascio il braccio FALLITO:** il criterio era ### **mio**, non del mandato, e
+> aggiustarlo adesso sarebbe esattamente cio' che il mandato vieta.
+
+### ✅ **E il controllo che deve dare un'altra risposta PASSA: due copie IDENTICHE del
+motore restano a `0.0` AL BIT**, a entrambi i `dtau`. ### **Quindi la differenza misurata
+e' fra i due PROTOCOLLI, non rumore del motore.**
+### 📌 **E un numero fuori finestra, per non lasciare un'impressione sbagliata:** a `2000`
+tick lo scarto fra i due protocolli vale ### **`2.1e-02`** *(dal confronto di `371731f`)*,
+cioe' ### **la crescita continua oltre i `200` tick misurati qui.**
+
+### ✅ **`A3`: la simmetria su OTTO stati regge a `2.97`, `2.67` e `3.32` ulp** *(criterio
+`8`)*, e ### **quattro semi su otto hanno nodi a `rho = 0`** — il caso del limite e'
+### **dentro** la misura. I due casi che devono fallire falliscono.
