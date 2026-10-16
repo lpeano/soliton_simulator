@@ -1,0 +1,32 @@
+[TIMBRO] _rami_era2.py  sha1-BYTE abc2f3c5  committato e pulito
+  `P-R1`: 50 rami dichiarati in 24 funzioni, sui 11 file del NUCLEO
+     il nucleo, DERIVATO dalle radici tick passo motore materia_vuoto saturazione: composizione.py flussi_parziali.py grafo.py hamiltoniana.py incidenza.py materia_vuoto.py motore.py passo.py saturazione.py stato.py tick.py
+     ### e FUORI dal nucleo `P-R1` NON si applica: i numeri di fuori stanno nel CENSIMENTO (`csv/_censimento_rami.py`), che NON blocca
+     iterazione      4 funzioni,  6 rami
+     smistamento    17 funzioni, 31 rami
+     validazione     3 funzioni, 13 rami
+  ### 0 errori
+[TIMBRO] _rami_era2.py  sha1-BYTE abc2f3c5  committato e pulito
+====================================================================================================
+IL COLLAUDO DI `P-R1` -- nei DUE VERSI
+====================================================================================================
+  sul disco: `P-R1` TACE                                           PASSA   50 rami in 24 funzioni
+  ### il braccio sopra HA MATERIA (ci sono rami da dichiarare)     PASSA   50 rami: se fosse 0 il braccio sarebbe un FALSO-UNO. ### Erano 27, e il punto 15(b) ne ha tolti 8
+  ### DEVE scattare: una funzione con rami e NON dichiarata        PASSA   `A8`: un ramo silenzioso non e- un ramo
+  ### DEVE scattare: un CONTEGGIO che non coincide con l-AST       PASSA   ### un ramo NATO o MORTO senza che nessuno lo dicesse
+  ### DEVE scattare: un RUOLO fuori vocabolario                    PASSA   
+  ### DEVE scattare: un `perche-` troppo corto                     PASSA   ### dire QUANTI senza dire A CHE SERVONO non e- dichiararli
+  ### DEVE scattare: una riga DICHIARATA che l-AST non trova       PASSA   
+  NON deve scattare: rimesso tutto a posto, `P-R1` TACE            PASSA   ### i bracci di sopra scattavano per i loro casi finti
+  `15(b)` i DEFAULT nelle firme della fisica sono ZERO             PASSA   ### erano NOVE il 2026-10-09, e il punto 15(b) li ha TOLTI
+  ### DEVE scattare: un default in una firma di fisica             PASSA   ### misurato su una COPIA del sorgente, non sul file vero
+  ### e i `default` NON sono piu- nella tabella dei ruoli          PASSA   ### il debito e- PAGATO: 27 rami -> 19, e 9 default -> 0
+  ### ogni LEGAME generato ha ESATTAMENTE la sua guardia (contata, non dichiarata) PASSA   ### 8 legami generati, 0 senza la loro guardia. ### L-errore che la guardia nomina: la tabella dichiara un operatore che il MOTORE non ha, cioe- la biiezione tabella <-> motore rotta
+  ### il FONDO dell-albero finto e' noto, e i bracci guardano la DIFFERENZA PASSA   ### 15 errori di fondo (le righe vere citano funzioni che il finto non ha), e sul pulito la differenza e' VUOTA
+  ### ① DEVE fallire: un ramo NUOVO non dichiarato in un file del NUCLEO PASSA   ### 1 errori NUOVI, e il nucleo derivato dalla mappa finta e' 5 file
+  ### ② DEVE fallire: un `default` in una firma del NUCLEO (tetto ZERO) PASSA   ### 1 errori NUOVI
+  ### ③ DEVE fallire: un file che ENTRA nel nucleo per import, coi suoi rami PASSA   ### senza l-import: 0 errori nuovi; con l-import: 1. ### Il file e' lo STESSO: cambia solo CHI LO IMPORTA
+  ### (c) DEVE PASSARE: un ramo nuovo in un COLLAUDO fuori dal nucleo PASSA   ### 0 errori nuovi: fuori dal nucleo `P-R1` NON si applica, e il collaudo finto ha 1 ramo
+====================================================================================================
+IL COLLAUDO DI `P-R1`: 17 su 17   ### TUTTI PASSATI
+====================================================================================================

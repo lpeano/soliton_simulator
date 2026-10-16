@@ -18020,3 +18020,10 @@ solo nella RIPRESA, lo dici e la chiudo.
 
 **LA SUITE:** ### **`55` su `55`**, `pre-commit` a ### **`257.1 s` su `500`** *(`51%`)*, e
 `P-R1` costa ### **`1.66 s`.**
+### ✅ **IL REFERTO DEL PEZZO `7`, dal blob committato**
+
+`doc/REFERTO_nucleo_p_r1.txt`, da ### **`sha1-BYTE abc2f3c5`**, timbrato
+*«committato e pulito»*: il nucleo derivato coi suoi `11` file, la tabella dei ruoli, e
+### **il collaudo `17` su `17`** coi quattro bracci.
+### ⭐ **E il braccio `③` sta nel referto con i suoi numeri:** ### **`0` errori nuovi
+senza l'import, `1` con l'import** — ### **la derivazione, provata su carta.**
