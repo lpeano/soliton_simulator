@@ -9,7 +9,15 @@ r"""**LE TRE MISURE CHE COMPLETANO IL QUINTO PEZZO** — *il cono, la divergenza
 | | il braccio | il criterio, **dal mandato** |
 |---|---|---|
 | `A1` | **il CONO a `dtau` piu' fini** *(`0.50`, `0.25`, `0.125`, `0.0625`)* | ### **rapporto `<= 1` a OGNI `dtau`.** ### ⛔ **Se supera `1`, e' una violazione del cono della legge in tabella: si relaziona e IL PUNTO `D` NON SI FA** |
-| `A2` | **la CURVA della divergenza** fra i due protocolli statici, tick per tick | ### **nessuna conclusione di fisica**: solo numeri *(la lettura e' di Luca)*. ### **Controllo che DEVE dare un'altra risposta: due copie IDENTICHE restano a `0.0` AL BIT** |
+| `A2` | **il RUMORE fra i due protocolli statici**, tick per tick | ### **nessuna conclusione di fisica**: solo numeri. ### **Controllo che DEVE dare un'altra risposta: due copie IDENTICHE restano a `0.0` AL BIT** |
+
+### ⛔⛔ **E `A2` HA CAMBIATO NOME IL `2026-10-16`, per l'errore `n.3` del guardiano:** era
+*«la CURVA DELLA DIVERGENZA»*, e con quel nome ### **io avevo scritto un braccio che
+asseriva una crescita ESPONENZIALE.** ### **La misura lo ha smentito** *(pendenza a `1.1`
+e `0.8` barre dalla sua barra)*, e ### **il guardiano ha chiarito che non e' nemmeno la
+domanda giusta:** i due protocolli differiscono ### **solo nel modo di congelare**
+*(`tick` contro `pezzo`)*, quindi cio' che si misura e' ### **il RUMORE DI ARROTONDAMENTO
+fra due strade che danno la stessa cosa** — ### **non una prova di caos.**
 | `A3` | **la simmetria su PIU' STATI** *(`>= 8` semi, alcuni con nodi a `rho = 0`)* | ### **`<= 8` ulp ovunque**, ai tre `dtau`, e ### **i due casi che devono fallire restano** |
 
 ### ⛔ **E IL CONO SI LEGGE SU `rho` E NON SU `Lambda`**, come in `371731f`: sulla scena di
@@ -46,6 +54,11 @@ DTAU_DIV = (0.5, 0.25)
 SEMI = (11, 23, 37, 41, 53, 67, 71, 89)
 VUOTI_PER_SEME = {11: (0, 4), 23: (2,), 37: (1, 5, 7), 41: (8,)}
 ULP_SIMMETRIA = 8.0
+# ### ⛔ **IL TETTO DEL RUMORE fra i due protocolli, dal `2-bis`:** il mandato fissa
+# ### ### **`1e-10` su `2000` tick**, e qui i tick sono `200` -- quindi lo stesso tetto
+# ### e- ### **largo**, ed e- giusto che lo sia: il braccio dice ### **<<resta
+# ### piccolo>>**, non <<quanto cresce>>.
+RUMORE_MAX = 1e-10
 
 
 def esito(che, passa, nota=""):
@@ -87,11 +100,21 @@ def braccio_cono():
 
 
 # ====================================================================== A2: la divergenza
-def braccio_divergenza():
+def braccio_rumore():
+    """### `(A2)` **IL RUMORE fra i due protocolli**, a parita' di accensione.
+
+    ### ⛔ **NON E' UNA PROVA DI CAOS** *(errore `n.3`, `2026-10-16`)*: i due protocolli
+    differiscono ### **solo nel modo di congelare** `psi` *(`tick` contro `pezzo`)*, e
+    la rampa agisce ### **da entrambe le parti** — quindi la differenza e'
+    ### **arrotondamento**, e il numero che conta e' ### **quanto resta piccola.**
+    ### ⚠ **La pendenza si STAMPA come informazione e NON e' un criterio:** il braccio che
+    la usava come criterio ### **asseriva una crescita esponenziale**, e la misura lo ha
+    ### **smentito.**
+    """
     print("-" * 96)
-    print("### (A2) LA CURVA DELLA DIVERGENZA fra i due protocolli statici, 1..%d tick"
-          % TICK_DIV)
-    print("###      NESSUNA CONCLUSIONE DI FISICA: solo numeri, la lettura e' di Luca")
+    print("### (A2) IL RUMORE fra i due protocolli statici, 1..%d tick" % TICK_DIV)
+    print("###      criterio: il PEGGIO resta sotto %.0e. La pendenza e' INFORMAZIONE,"
+          " non un criterio" % RUMORE_MAX)
     fuori = {}
     for dtau in DTAU_DIV:
         # ### il protocollo di `ebf5317` *(`S3` sostituito, fotografia, congelamento per
@@ -130,10 +153,13 @@ def braccio_divergenza():
               % (dtau, vivi[0], d[vivi[0]], TICK_DIV, d[-1]))
         print("      pendenza di log10(scarto) per tick: %.5f +- %.5f   (fette: %s)"
               % (pend, barra, "  ".join("%.4f" % x for x in pp)))
-        esito("(A2) dtau=%.2f: la pendenza e' POSITIVA e fuori dalla sua barra" % dtau,
-              pend > 3.0 * barra if barra == barra else False,
-              "%.5f contro %.5f: %.1f barre" % (pend, barra, pend / barra)
-              if barra == barra else "barra non calcolabile")
+        # ### ⛔ **IL CRITERIO E- SUL PEGGIO, non sulla pendenza:** la pendenza
+        # ### ### **si stampa** *(e' informazione)*, e il braccio dice soltanto che
+        # ### ### **il rumore resta piccolo.**
+        esito("(A2) dtau=%.2f: il PEGGIO del rumore resta sotto %.0e"
+              % (dtau, RUMORE_MAX), float(np.max(d)) <= RUMORE_MAX,
+              "peggio %.3e su %d tick, e la pendenza %.5f +- %.5f e' INFORMAZIONE"
+              % (float(np.max(d)), TICK_DIV, pend, barra))
         sys.stdout.flush()
     return fuori
 
@@ -207,7 +233,7 @@ def main(argv):
           % (TN.LATI, len(SEMI), SEMI, TN.DTAU, VUOTI_PER_SEME))
     sys.stdout.flush()
     cono = braccio_cono()
-    braccio_divergenza()
+    braccio_rumore()
     braccio_simmetria()
     print("=" * 96)
     print("  %d su %d   [corsa intera: %.1f s]" % (OK[0], OK[1], time.time() - t0))

@@ -249,6 +249,26 @@ def _avvolgi(op, psi0):
     return avvolto
 
 
+def _con_rampa(op, ag):
+    """### La legge ### **DEL MOTORE**, con la rampa dello STRUMENTO addosso.
+
+    ### ⛔⛔ **PERCHE' ESISTE** *(errore `n.3` del guardiano, `2026-10-16`)*: la rampa
+    viveva ### **solo nel termine sostituito**, quindi con `SOSTITUISCI = False` i due
+    protocolli giravano ### **in condizioni diverse** — il motore ### **acceso di colpo**
+    contro `S3` ### **con la rampa.** ### **Le `3.53` barre di `371731f` erano LA STORIA
+    DELL'ACCENSIONE, non un'amplificazione.**
+
+    ### ⭐ **E LA LEGGE NON SI TOCCA:** il termine entra con `exp(-i beta dtau f)`, e
+    ### **moltiplicare la FRAZIONE per `s(t)` E' la rampa su `beta`** — la stessa cosa,
+    fatta ### **dallo strumento.** ### ⚠ **E vale perche' `beta` entra SOLO nel prodotto
+    `beta dtau f`:** se un giorno entrasse altrove, questa equivalenza cadrebbe, e
+    ### **sta scritto qui.**
+    """
+    def avvolto(st, parametri, frazione):
+        return op(st, parametri, frazione * rampa(ag.passo, ag.acceso))
+    return avvolto
+
+
 def corri(dtau, x, forma, tick, acceso, centri, senza_alpha=False, beta_zero=False,
           congela="tick", visto=None, sorgente="foto"):
     """### `(Lambda(t), max|drho|, max|dSomma|phi|^2|, per_anello)`.
@@ -293,6 +313,22 @@ def corri(dtau, x, forma, tick, acceso, centri, senza_alpha=False, beta_zero=Fal
     ag.quale = quale
     if SOSTITUISCI:
         mot.operatori[quale] = ag
+    else:
+        # ### ⛔⛔ **LA RAMPA DEVE AGIRE ANCHE SULLA LEGGE DEL MOTORE** *(errore `n.3`,
+        # ### `2026-10-16`)*: prima la rampa viveva ### **solo nel termine sostituito**, e
+        # ### con `SOSTITUISCI = False` la sorgente era ### **accesa DI COLPO dal tick
+        # ### `0`** -- cioe- il confronto fra i due protocolli girava ### **in condizioni
+        # ### DIVERSE**, e le `3.53` barre erano ### **la storia dell-accensione.**
+        # ### ⭐ **E SI FA SENZA TOCCARE LA LEGGE:** il termine entra con
+        # ### `exp(-i beta dtau f)`, quindi ### **moltiplicare la FRAZIONE per `s(t)` E-
+        # ### la rampa su `beta`** -- esattamente la stessa cosa, fatta ### **dallo
+        # ### STRUMENTO.**
+        mot.operatori[quale] = _con_rampa(vero, ag)
+    # ### ⛔ **E UN PARAMETRO CHE AGISSE SOLO DA UNA PARTE DEVE ALZARE**, non passare in
+    # ### silenzio: ### **e- la lezione dell-errore `n.3`**, e qui e- un `assert`.
+    assert ag.acceso == 0 or callable(mot.operatori[quale]), (
+        "`acceso = %d` e il pezzo `%s` non ha chi gli applichi la rampa: un parametro che"
+        " agisce SOLO DA UNA PARTE non confronta niente" % (ag.acceso, quale))
     salvati = dict(mot.operatori)
     try:
         psi0 = st["psi_h"].copy()

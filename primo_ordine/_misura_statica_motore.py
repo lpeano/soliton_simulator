@@ -57,6 +57,17 @@ S3_SOVRA = {0.5: (0.0193, 0.0040), 0.25: (0.0115, 0.0009)}
 # ### margine entro cui dico <<coincide>>.**
 BANDA_PENDENZA = 0.05
 BANDA_SOVRA = 0.01
+# ### ⛔⛔ **I CRITERI DEL `2-bis`, DAL MANDATO** *(errore `n.3`, `2026-10-16`)*:
+# ### ### **le due traiettorie coincidono entro `1e-10` su `2000` tick, e le MEDIE
+# ### entro `0.1` barre** -- e il caso che ### **DEVE fallire** e-
+# ### ### **l-accensione diversa da UNA SOLA PARTE** *(piu- di `3` barre a
+# ### `dtau = 0.25`)*.
+# ### ⚠ **E `0.1` barre e- PIU' STRETTO delle `3` di prima:** non e- una banda
+# ### allargata, e- ### **una banda STRINGATA dal mandato** dopo che il difetto dello
+# ### strumento e- stato trovato.
+TRAIETTORIE_MAX = 1e-10
+BARRE_MEDIE = 0.1
+BARRE_MUST_FAIL = 3.0
 # ### ⚠ **I TICK DEL CONO, dichiarati:** il cono e- una proprieta- ### **per tick**, quindi
 # ### ### **non serve una corsa lunga** -- serve il MASSIMO su abbastanza tick.
 TICK_CONO = 300
@@ -114,8 +125,10 @@ def braccio_segno():
               "il vuoto SI RITIRA in entrambi, e il mio e' a %.1f barre" % barre)
         # ### ⛔ **E IL CONFRONTO VERO: la differenza in BARRE DEL REFERTO.**
         d = abs(m - rm) / max(rs, 1e-300)
-        esito("(a) dtau=%.2f: il numero COINCIDE entro 3 barre del referto" % dtau,
-              d <= 3.0, "differenza %.3e, cioe' %.2f barre del referto" % (abs(m - rm), d))
+        esito("(a) dtau=%.2f: il numero COINCIDE entro %.1f barre del referto"
+              % (dtau, BARRE_MEDIE), d <= BARRE_MEDIE,
+              "differenza %.3e, cioe' %.3f barre del referto -- e la banda e' quella"
+              " STRETTA del mandato, non la mia di prima" % (abs(m - rm), d))
 
 
 def braccio_pendenza():
@@ -209,49 +222,57 @@ def _cambio(dtau, forma, extra):
     return float(PR.ULTIMA["salto_rho"])
 
 
-def braccio_divergenza():
-    """### `(d)` **DA DOVE VIENE LA DIFFERENZA**: il primo tick, e la crescita.
+def braccio_traiettorie():
+    """### `(d)` **LE DUE TRAIETTORIE A PARITA' DI ACCENSIONE**, tick per tick.
 
-    ### ⛔⛔ **PERCHE' QUESTO BRACCIO C'E':** il braccio `(a)` dice che a
-    `dtau = 0.25` la media differisce da `S3` di ### **`3.5` barre del referto**
-    *(`2.1e-02` su `3.93`, cioe' lo `0.5%`)*, e ### **una differenza si SPIEGA, non si
-    dichiara trascurabile.**
+    ### ⛔⛔ **RIFATTO IL `2026-10-16`, E LA VERSIONE DI PRIMA ERA UN FALSO-UNO**
+    *(errore `n.3` del guardiano)*: girava con ### **`acceso = 0`**, cioe'
+    ### **in condizioni DIVERSE dal braccio `(a)`** *(che usa `T_SCAN = 100`)*, e il suo
+    *«al primo tick coincidono a `0.000e+00`»* ### **misurava un'altra cosa.**
+    ### ⛔ **E la spiegazione che ne avevo tratto** — *«amplificazione in saturazione
+    profonda»* — ### **E' RITIRATA:** le `3.53` barre erano ### **la storia
+    dell'accensione.**
 
-    ### ⭐ **LE DUE CANDIDATE, e si distinguono con UN numero:**
-    ### ① **la forma in virgola mobile di `beta`**: la misura di `ebf5317` scrive
-    `-x/(1+x)` con `x = rho/Lambda`, il motore scrive ### **`-rho/(rho+Lambda)`** — la
-    stessa funzione, ### **ULTIMI BIT DIVERSI**;
-    ### ② **il modo di congelare**: `tick` la', ### **`pezzo`** qui.
-    ### ✅ **Se al PRIMO tick le due coincidono al bit, la differenza e'
-    AMPLIFICAZIONE** *(e il sistema e' in SATURAZIONE PROFONDA: `|dLambda| = 3.93` su
-    `Lambda = 4`)*; ### **se no, e' la forma di `beta`.**
+    ### ✅ **ADESSO LA RAMPA AGISCE DA ENTRAMBE LE PARTI** *(nello STRUMENTO, mai nella
+    legge)*, e il braccio misura cio' che il mandato chiede: ### **le due traiettorie
+    coincidono entro `1e-10` su `2000` tick.**
+    ### ⛔ **E IL CASO CHE DEVE FALLIRE E' L'ACCENSIONE DIVERSA DA UNA SOLA PARTE:**
+    la' lo scarto ### **ricompare**, ed e' la prova che il braccio ### **guarda davvero
+    l'accensione.**
     """
     print("-" * 96)
-    print("### (d) DA DOVE VIENE LA DIFFERENZA: il primo tick, e la crescita")
+    print("### (d) LE DUE TRAIETTORIE A PARITA' DI ACCENSIONE, su %d tick" % PR.TICK)
+    print("###     criterio DAL MANDATO: coincidono entro %.0e" % TRAIETTORIE_MAX)
     import numpy as _np
     for dtau in PR.DTAU:
         PR.SOSTITUISCI = True
-        a3, _d1, _t1, _p1 = PR.corri(dtau, PR.X_RIF, "S3", 60, 0, (0,),
+        a3, _d1, _t1, _p1 = PR.corri(dtau, PR.X_RIF, "S3", PR.TICK, PR.T_SCAN, (0,),
                                      congela="tick")
         PR.SOSTITUISCI = False
-        am, _d2, _t2, _p2 = PR.corri(dtau, PR.X_RIF, "MOTORE", 60, 0, (0,),
+        am, _d2, _t2, _p2 = PR.corri(dtau, PR.X_RIF, "MOTORE", PR.TICK, PR.T_SCAN, (0,),
                                      congela=CONGELA)
-        d1 = float(_np.max(_np.abs(a3[1] - am[1])))
-        d10 = float(_np.max(_np.abs(a3[10] - am[10])))
-        d60 = float(_np.max(_np.abs(a3[60] - am[60])))
-        print("  dtau=%.2f  |dLambda| fra i due protocolli:  tick 1 %.3e   tick 10 %.3e"
-              "   tick 60 %.3e" % (dtau, d1, d10, d60))
-        esito("(d) dtau=%.2f: al PRIMO tick i due protocolli coincidono" % dtau,
-              d1 <= 1e-14,
-              "scarto %.3e: la differenza NON e' nella forma di `beta`, e'"
-              " AMPLIFICAZIONE" % d1)
-        # ### ⚠ **IL RAPPORTO NON SI STAMPA QUANDO IL PRIMO TICK E- ZERO ESATTO:**
-        # ### dividere per zero dava ### **un numero di 300 cifre**, che e- peggio di
-        # ### nessun numero. ### **Si stampano i due VALORI.**
-        esito("(d) dtau=%.2f: e CRESCE coi tick (sistema in saturazione)" % dtau,
-              d60 > max(d1 * 10.0, 1e-16),
-              "da %.1e (tick 1) a %.1e (tick 60): la differenza NASCE dagli ulp e"
-              " CRESCE" % (d1, d60))
+        d = _np.max(_np.abs(a3 - am), axis=1)
+        peggio = float(_np.max(d))
+        print("  dtau=%.2f  |dLambda| fra i due protocolli: tick 1 %.3e   tick %d %.3e"
+              "   PEGGIO su tutta la corsa %.3e"
+              % (dtau, d[1], PR.TICK, d[-1], peggio))
+        esito("(d) dtau=%.2f: le due traiettorie coincidono entro %.0e"
+              % (dtau, TRAIETTORIE_MAX), peggio <= TRAIETTORIE_MAX,
+              "peggio %.3e su %d tick: a PARITA' di accensione" % (peggio, PR.TICK))
+        # ### ⛔⛔ **IL CASO CHE DEVE FALLIRE: L-ACCENSIONE DIVERSA DA UNA SOLA PARTE.**
+        # ### ### **E- il difetto dell-errore `n.3`, rimesso di proposito**, e senza di lui
+        # ### il braccio di sopra ### **non proverebbe che l-accensione conta.**
+        PR.SOSTITUISCI = False
+        amz, _d3, _t3, _p3 = PR.corri(dtau, PR.X_RIF, "MOTORE", PR.TICK, 0, (0,),
+                                      congela=CONGELA)
+        dz = float(_np.max(_np.abs(a3 - amz)))
+        barre = dz / 1.014e-02
+        print("      e con l-accensione SOLO da una parte (il motore di colpo):"
+              " peggio %.3e" % dz)
+        esito("### (d) DEVE fallire: accensione diversa da UNA SOLA PARTE (dtau=%.2f)"
+              % dtau, barre > BARRE_MUST_FAIL,
+              "scarto %.3e, cioe' %.1f barre del referto: E- LA STORIA"
+              " DELL-ACCENSIONE" % (dz, barre))
     PR.SOSTITUISCI = False
 
 
@@ -276,7 +297,7 @@ def main(argv):
     braccio_segno()
     braccio_pendenza()
     braccio_sovrapposizione()
-    braccio_divergenza()
+    braccio_traiettorie()
     braccio_cono()
     print("=" * 96)
     print("  %d su %d   [corsa intera: %.1f s]" % (OK[0], OK[1], time.time() - t0))
