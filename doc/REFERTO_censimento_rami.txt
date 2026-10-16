@@ -1,0 +1,215 @@
+[TIMBRO] _censimento_rami.py  sha1-BYTE 83251e63  committato e pulito
+IL CENSIMENTO DI `P-R1` ESTESO A TUTTI I FILE DI FISICA
+
+  la lista dei file e- DERIVATA dal disco (ogni `.py` sotto `primo_ordine/`, meno gli `__init__`)
+  e il derivato FUORI dal dichiarato di `csv/_file_fisica.py`: 0   ### se non fosse 0, `H-FISICA-FUORI-LISTA` sarebbe ROTTO
+
+                                   oggi    fuori
+                               sorvegliati    lista
+  ------------------------------------------------
+  file                               15       65
+  funzioni NON dichiarate             0      263
+  rami in quelle funzioni             -      837
+  default nelle firme                 0      142
+
+  ### I FILE FUORI DALLA LISTA, ordinati per rami non dichiarati
+  file                                               fn   rami default
+  ----------------------------------------------------------------------
+  primo_ordine/leggi/schema.py                        8     74       2
+  primo_ordine/_genera.py                            10     53       3
+  primo_ordine/collauda.py                            8     33       1
+  primo_ordine/config/schema_config.py                4     30       5
+  primo_ordine/leggi/schema_camminata.py              4     27       0
+  primo_ordine/_misura_forme_l2.py                   11     26       2
+  primo_ordine/statica_protocollo.py                 10     26       5
+  primo_ordine/_misura_statica_l2.py                  8     25       1
+  primo_ordine/_collauda_confronto.py                 5     24       1
+  primo_ordine/_misura_pari_l2.py                     9     24       1
+  primo_ordine/deriva.py                              9     23      29
+  primo_ordine/_collauda_passo.py                    11     22       3
+  primo_ordine/bande.py                               6     22      12
+  primo_ordine/_collauda_motore.py                    2     21       1
+  primo_ordine/determinismo.py                       11     21       5
+  primo_ordine/_collauda_memoria.py                   4     19       1
+  primo_ordine/_collauda_checkpoint.py                2     18       1
+  primo_ordine/simmetrie.py                           5     18       0
+  primo_ordine/_collauda_determinismo.py              3     17       1
+  primo_ordine/_misura_verso_l2.py                    6     17       5
+  primo_ordine/_collauda_guida.py                     4     16       1
+  primo_ordine/_misura_mb2.py                         6     14       0
+  primo_ordine/_misura_spettro_l1.py                  7     13       1
+  primo_ordine/corrente.py                            5     13       6
+  primo_ordine/_misura_theta_n.py                     6     12       1
+  primo_ordine/segno.py                               3     12       5
+  primo_ordine/_collauda_deriva.py                    2     10       1
+  primo_ordine/_collauda_genera.py                    2     10       1
+  primo_ordine/_misura_mb1.py                         4     10       0
+  primo_ordine/_rif.py                                2     10       1
+  primo_ordine/scena_l2.py                            3     10       1
+  primo_ordine/motore.py                              4      9       0
+  primo_ordine/_misura_completa_l2.py                 5      8       1
+  primo_ordine/_misura_statica_motore.py              5      8       1
+  primo_ordine/bande_floquet.py                       4      8      12
+  primo_ordine/checkpoint.py                          3      8       0
+  primo_ordine/driver.py                              4      8       0
+  primo_ordine/sigilli/_modello.py                    4      8       8
+  primo_ordine/_collauda_grafo.py                     3      7       1
+  primo_ordine/_collauda_materia_vuoto.py             5      7       2
+  primo_ordine/_genera_camminata.py                   1      7       0
+  primo_ordine/_misura_theta_nonlineare.py            5      7       4
+  primo_ordine/leggi/_collauda_schema.py              2      7       1
+  primo_ordine/_collauda_corrente.py                  2      6       2
+  primo_ordine/_collauda_incidenza.py                 2      6       1
+  primo_ordine/_collauda_saturazione.py               2      6       1
+  primo_ordine/_collauda_schema_camminata.py          2      6       1
+  primo_ordine/_collauda_simmetrie.py                 2      6       1
+  primo_ordine/_collauda_tempo_proprio.py             3      6       3
+  primo_ordine/grafo.py                               2      6       3
+  primo_ordine/incidenza.py                           4      5       0
+  primo_ordine/timbro.py                              2      5       0
+  primo_ordine/_collauda_energia.py                   2      4       1
+  primo_ordine/_misura_c_flussi.py                    3      4       1
+  primo_ordine/_deriva_forme_l2.py                    2      3       1
+  primo_ordine/deriva_referto.py                      1      3       0
+  primo_ordine/materia_vuoto.py                       3      3       0
+  primo_ordine/deriva_serie.py                        2      2       0
+  primo_ordine/deriva_variabile.py                    2      2       0
+  primo_ordine/energia.py                             1      1       0
+  primo_ordine/saturazione.py                         1      1       0
+
+  ### I MODULI DI FISICA (non `_collauda_*`, non `_misura_*`), FUNZIONE PER FUNZIONE
+  ### e- qui che una SCELTA DI FISICA NASCOSTA si cercherebbe: la decide Luca
+  file                           funzione                             rami
+  --------------------------------------------------------------------------
+  primo_ordine/_deriva_forme_l2.py esito                                   2
+  primo_ordine/_deriva_forme_l2.py main                                    1
+  primo_ordine/_genera.py        genera                                 12
+  primo_ordine/_genera.py        scheda                                 10
+  primo_ordine/_genera.py        _locali                                 6
+  primo_ordine/_genera.py        controlla                               6
+  primo_ordine/_genera.py        ambiente                                5
+  primo_ordine/_genera.py        carica                                  4
+  primo_ordine/_genera.py        coppie_di                               3
+  primo_ordine/_genera.py        simboli_di                              3
+  primo_ordine/_genera.py        coniugati_di                            2
+  primo_ordine/_genera.py        modulo                                  2
+  primo_ordine/_genera_camminata.py modulo_legame                           7
+  primo_ordine/_rif.py           collaudo                                8
+  primo_ordine/_rif.py           esito                                   2
+  primo_ordine/bande.py          main                                   11
+  primo_ordine/bande.py          corri_bande                             6
+  primo_ordine/bande.py          correlazione                            2
+  primo_ordine/bande.py          controllo_C                             1
+  primo_ordine/bande.py          controllo_C_completa                    1
+  primo_ordine/bande.py          proiettore                              1
+  primo_ordine/bande_floquet.py  floquet                                 5
+  primo_ordine/bande_floquet.py  main_floquet                            1
+  primo_ordine/bande_floquet.py  scena_toro                              1
+  primo_ordine/bande_floquet.py  tendenza                                1
+  primo_ordine/checkpoint.py     riprendi                                4
+  primo_ordine/checkpoint.py     forse                                   2
+  primo_ordine/checkpoint.py     main                                    2
+  primo_ordine/collauda.py       main                                   12
+  primo_ordine/collauda.py       collaudo_censimento                     6
+  primo_ordine/collauda.py       censimento                              5
+  primo_ordine/collauda.py       _normale                                3
+  primo_ordine/collauda.py       _sporchi                                2
+  primo_ordine/collauda.py       esito                                   2
+  primo_ordine/collauda.py       gira                                    2
+  primo_ordine/collauda.py       _e_un_collaudo                          1
+  primo_ordine/config/schema_config.py valida                                 22
+  primo_ordine/config/schema_config.py collaudo                                5
+  primo_ordine/config/schema_config.py esito                                   2
+  primo_ordine/config/schema_config.py carica                                  1
+  primo_ordine/corrente.py       main                                    6
+  primo_ordine/corrente.py       instrada                                4
+  primo_ordine/corrente.py       _cammini                                1
+  primo_ordine/corrente.py       forma_quadratica                        1
+  primo_ordine/corrente.py       termine_di_bordo                        1
+  primo_ordine/deriva.py         main                                    9
+  primo_ordine/deriva.py         percorri_tick                           3
+  primo_ordine/deriva.py         scena                                   3
+  primo_ordine/deriva.py         corri                                   2
+  primo_ordine/deriva.py         scansione                               2
+  primo_ordine/deriva.py         _f                                      1
+  primo_ordine/deriva.py         fotografo                               1
+  primo_ordine/deriva.py         lambda_sotto_vuoto                      1
+  primo_ordine/deriva.py         sorgente_per_nodo                       1
+  primo_ordine/deriva_referto.py blocco_su2                              3
+  primo_ordine/deriva_serie.py   rapporti                                1
+  primo_ordine/deriva_serie.py   secolare                                1
+  primo_ordine/deriva_variabile.py satura                                  1
+  primo_ordine/deriva_variabile.py satura_elicita                          1
+  primo_ordine/determinismo.py   scarti                                  5
+  primo_ordine/determinismo.py   usi_di_random                           5
+  primo_ordine/determinismo.py   main                                    3
+  primo_ordine/determinismo.py   _tupla                                  1
+  primo_ordine/determinismo.py   avvia                                   1
+  primo_ordine/determinismo.py   blocco                                  1
+  primo_ordine/determinismo.py   controlla                               1
+  primo_ordine/determinismo.py   per_il_timbro                           1
+  primo_ordine/determinismo.py   rng_globale                             1
+  primo_ordine/determinismo.py   verifica_versioni                       1
+  primo_ordine/determinismo.py   versioni                                1
+  primo_ordine/driver.py         osservatori_attivi                      3
+  primo_ordine/driver.py         gira                                    2
+  primo_ordine/driver.py         grafo                                   2
+  primo_ordine/driver.py         main                                    1
+  primo_ordine/energia.py        corrente                                1
+  primo_ordine/grafo.py          errori                                  5
+  primo_ordine/grafo.py          costo                                   1
+  primo_ordine/incidenza.py      cresci                                  2
+  primo_ordine/incidenza.py      _allarga                                1
+  primo_ordine/incidenza.py      costo                                   1
+  primo_ordine/incidenza.py      main                                    1
+  primo_ordine/leggi/schema.py   valida_legge                           42
+  primo_ordine/leggi/schema.py   dimensioni_incoerenti                  17
+  primo_ordine/leggi/schema.py   valida_variabile                        8
+  primo_ordine/leggi/schema.py   _base_del_simbolo                       2
+  primo_ordine/leggi/schema.py   _nominati                               2
+  primo_ordine/leggi/schema.py   dimensione_valida                       1
+  primo_ordine/leggi/schema.py   esponente                               1
+  primo_ordine/leggi/schema.py   valida_posti                            1
+  primo_ordine/leggi/schema_camminata.py errori_ordine                          11
+  primo_ordine/leggi/schema_camminata.py errori_posti_accesi                     9
+  primo_ordine/leggi/schema_camminata.py errori_flusso                           5
+  primo_ordine/leggi/schema_camminata.py errori_pezzo                            2
+  primo_ordine/materia_vuoto.py  N                                       1
+  primo_ordine/materia_vuoto.py  alpha                                   1
+  primo_ordine/materia_vuoto.py  beta                                    1
+  primo_ordine/motore.py         _somma_per_nodo                         3
+  primo_ordine/motore.py         cresci                                  3
+  primo_ordine/motore.py         main                                    2
+  primo_ordine/motore.py         _b                                      1
+  primo_ordine/saturazione.py    pezzi                                   1
+  primo_ordine/scena_l2.py       scena                                   7
+  primo_ordine/scena_l2.py       grumo_isotropo                          2
+  primo_ordine/scena_l2.py       spinore_allineato                       1
+  primo_ordine/segno.py          main                                    6
+  primo_ordine/segno.py          valida                                  4
+  primo_ordine/segno.py          q_regione                               2
+  primo_ordine/sigilli/_modello.py sigillo                                 4
+  primo_ordine/sigilli/_modello.py esito                                   2
+  primo_ordine/sigilli/_modello.py _corsa                                  1
+  primo_ordine/sigilli/_modello.py _termini                                1
+  primo_ordine/simmetrie.py      rompe                                   9
+  primo_ordine/simmetrie.py      conservazioni_valide                    3
+  primo_ordine/simmetrie.py      _sost_scambio                           2
+  primo_ordine/simmetrie.py      _sost_u1                                2
+  primo_ordine/simmetrie.py      soglia                                  2
+  primo_ordine/statica_protocollo.py corri                                   9
+  primo_ordine/statica_protocollo.py _termine_statico                        4
+  primo_ordine/statica_protocollo.py agisci                                  4
+  primo_ordine/statica_protocollo.py metti_grumi                             2
+  primo_ordine/statica_protocollo.py rampa                                   2
+  primo_ordine/statica_protocollo.py _avvolgi                                1
+  primo_ordine/statica_protocollo.py avvolto                                 1
+  primo_ordine/statica_protocollo.py barra                                   1
+  primo_ordine/statica_protocollo.py base                                    1
+  primo_ordine/statica_protocollo.py chi_allineato                           1
+  primo_ordine/timbro.py         conto_leggi                             4
+  primo_ordine/timbro.py         riprendi                                1
+
+  ### L-AGGIUNTA `C`: IL BUCO DI `P-ES1` (la ricerca LETTERALE `-1j`)
+  nessuna funzione EVADE oggi la ricerca letterale: il buco E- APERTO
+  ma NON HA MATERIA nel repo di adesso -- e il braccio che segue lo PROVA su un file finto

@@ -17828,3 +17828,61 @@ fidarsi.
 regola `[[STRUMENTO-LEGGE-DALLA-TABELLA]]` applicata ### **a un presidio** — un
 censimento che riscrivesse il conteggio dei rami misurerebbe ### **la SUA idea di ramo**,
 e il numero non sarebbe confrontabile con niente.
+
+### ✅ **PEZZO `4` FATTO: `263` FUNZIONI E `837` RAMI FUORI DALLA LISTA, E NON NE
+DICHIARO NESSUNO**
+
+*(referto `doc/REFERTO_censimento_rami.txt`, dal blob ### **committato**
+`sha1-BYTE 83251e63`. Strumento `csv/_censimento_rami.py`, collaudo ### **`6` su `6`**.)*
+
+| | dentro i `15` sorvegliati | ### **fuori**, nei `65` |
+|---|---|---|
+| funzioni ### **non dichiarate** | ### **`0`** | ### **`263`** |
+| i loro rami | `—` | ### **`837`** |
+| `default` nelle firme | ### **`0`** | ### **`142`** |
+
+### ⭐ **IL PRESIDIO FUNZIONA DOVE GUARDA** *(zero e zero nei `15`)*, ### **e guarda
+`15` file su `80`.**
+
+### ⛔⛔ **LA COSA PIU' GROSSA NON E' UN ALLARGAMENTO DI LISTA: SONO I `142`
+`default`.** Un `default` e' ### **un valore che gira senza che nessuno l'abbia scelto**,
+ed e' `CONFIG-1` — ### **`28` leggi su `31` che giravano SPENTE.** Il punto `15(b)` li
+vieta ### **solo nei file della lista**, quindi ### **estendere `P-R1` a tutti i file
+vorrebbe dire vietarli la' dove oggi sono la norma:** `deriva.py` ne ha ### **`29`**,
+`bande.py` `12`, `corrente.py` `6`.
+### ⛔ **Quella e' una decisione tua, non un numero.**
+
+### ⚠⚠ **E UNA MIA PREVISIONE ERA SBAGLIATA, e la ANNOTO invece di riscriverla.**
+Nel task history avevo scritto che la maggior parte dei rami sarebbe stata ### **nei
+collaudi e nelle misure.** ### **NON e' cosi': i piu' grossi sono gli SCHEMI e i
+GENERATORI** — `leggi/schema.py` ### **`74` rami**, `_genera.py` `53`, `collauda.py`
+`33`, `config/schema_config.py` `30`. ### **I moduli di fisica veri sono relativamente
+puliti:** `motore.py` `9`, `materia_vuoto.py` `3`, `energia.py` `1`, `saturazione.py` `1`.
+
+### ⛔⛔ **I TRE RAMI DA GUARDARE, e sono CANDIDATI e non dichiarazioni**
+
+| | dove | il ramo, e perche' va guardato |
+|---|---|---|
+| `a` | `materia_vuoto.N`, `.alpha`, `.beta` | `if np.any(vivi)` — ### **E' la decisione di fisica della singolarita' eliminabile a `rho = 0`**, gia' registrata nella scheda della legge, e ### **INVISIBILE a `P-R1`** perche' il file non e' guardato |
+| `b` | `motore._somma_per_nodo` | `if self.sommatoria == "numpy"` — ### **SCEGLIE LA VIA DELLA SOMMA**, e con tre addendi l'ordine della somma ### **CAMBIA I BIT** |
+| `c` | `corrente.instrada` | `np.abs(c) > tol` — ### **UNA SOGLIA**, e `A11` dice che prima di scriverne una ### **si cerca l'errore da cui protegge** |
+
+### ✅ **L'AGGIUNTA `C`: IL BUCO DI `P-ES1` ESISTE, E OGGI NON HA MATERIA**
+
+### **Nessuna funzione evade oggi** la ricerca letterale `-1j`. ### ⚠ **E non e' un braccio
+vacuo:** il collaudo lo prova ### **su un file finto FUORI DAL REPO** — con
+### **`- 1j` (spazio)** l'AST vede la funzione e la ricerca letterale ### **no**; con
+### **`-1j` attaccato** la vedono ### **entrambe.** ### **Cioe' il problema e' LO SPAZIO e
+non il rivelatore.**
+### ⛔ **E NON L'HO CHIUSO:** `P-ES1` ha ### **eccezioni dichiarate una per una**, e un
+rivelatore nuovo ### **potrebbe invalidarle** — cambiare il presidio significa
+### **rileggere le sue eccezioni**, e la decisione e' tua.
+
+### ⭐ **E DUE COSE DEL METODO, che valgono oltre questo pezzo:**
+### ① il censimento ### **IMPORTA** `_rami_era2._conta` invece di riscriverlo —
+### **`[[STRUMENTO-LEGGE-DALLA-TABELLA]]` applicata A UN PRESIDIO**: un censimento che
+riscrivesse il conteggio misurerebbe ### **la SUA idea di ramo**, e il numero non sarebbe
+confrontabile con niente.
+### ② la lista dei file ### **si DERIVA dal disco** *(`80` file)* e il derivato
+### **si CONFRONTA col dichiarato** *(`0` fuori)*: se non fosse contenuto, ### **sarebbe
+`[[H-FISICA-FUORI-LISTA]]` a essere rotto**, e il censimento lo dice ### **a ogni corsa.**
