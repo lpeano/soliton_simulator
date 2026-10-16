@@ -83,8 +83,13 @@ def collaudo():
           # ### `STRUMENTO-LEGGE-DALLA-TABELLA` e il suo presidio `P-TAB`.** ### Il
           # ### braccio ### **me l-ha detto di nuovo**, e la cura e- quella che il
           # ### commento prescrive: ### **si aggiorna l-elenco.**
+          # ### ⭐ **E E- CRESCIUTO UNA QUARTA VOLTA, il `2026-10-16` alle `19:33`:
+          # ### `P-R1`**, che ### **esisteva come presidio e NON era dichiarato in
+          # ### `CLAUDE.md`** -- e il mandato che gli ha ristretto la portata al NUCLEO
+          # ### chiede di dichiararlo. ### **La cura e' sempre la stessa: si aggiorna
+          # ### l-elenco.**
           sorted(ora - pri) == ["DECISIONE-VUOLE-UN-CAMPO", "H-STOP-CODA", "P-E10",
-                                "P-REG", "P-TAB", "PRECEDENZA-IN-CODA",
+                                "P-R1", "P-REG", "P-TAB", "PRECEDENZA-IN-CODA",
                                 "STRUMENTO-LEGGE-DALLA-TABELLA"],
           "%s: ### se comparisse una regola che non ho creato, vorrebbe dire che il "
           "generatore ne INVENTA" % sorted(ora - pri))

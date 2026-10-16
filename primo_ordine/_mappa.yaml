@@ -100,11 +100,11 @@ moduli:
 
   - nome: _misura_forme_l2.py
     responsabilita: le quattro forme misurate con rho come sorgente, e il cono nei due modi
-    importa: [_presidio, deriva, flussi_parziali, scena_l2]
+    importa: [_presidio, deriva, flussi_parziali, scena_l2, tick]
 
   - nome: statica_protocollo.py
     responsabilita: lo strumento della risposta statica -- scena, rampa, congelamento, passo e barre a blocchi
-    importa: [composizione, deriva, flussi_parziali, motore, scena_l2, _misura_forme_l2]
+    importa: [_misura_forme_l2, composizione, deriva, flussi_parziali, motore, scena_l2, tick]
 
   - nome: _misura_completa_l2.py
     responsabilita: le tre misure del punto A -- cono, divergenza e simmetria su stati
@@ -124,27 +124,27 @@ moduli:
 
   - nome: _misura_pari_l2.py
     responsabilita: la parte pari di dLambda -- il verso con la barra, e l-esponente in x
-    importa: [_presidio, deriva, saturazione, scena_l2]
+    importa: [_presidio, deriva, saturazione, scena_l2, tick]
 
   - nome: _misura_verso_l2.py
     responsabilita: se la materia consuma il vuoto, e se il verso viene dal segno di beta
-    importa: [_presidio, deriva, saturazione, scena_l2]
+    importa: [_presidio, deriva, saturazione, scena_l2, tick]
 
   - nome: _misura_theta_nonlineare.py
     responsabilita: la simmetria P Theta sul passo INTERO col termine non lineare, e la C sul flusso nuovo
-    importa: [_presidio, _misura_c_flussi, _misura_theta_n, composizione, corrente, deriva, motore]
+    importa: [_misura_c_flussi, _misura_theta_n, _presidio, composizione, corrente, deriva, motore, tick]
 
   - nome: _misura_theta_n.py
     responsabilita: se Theta e le direzioni n danno una simmetria esatta del passo
-    importa: [_presidio, composizione, corrente, deriva, incidenza, motore, stato]
+    importa: [_presidio, composizione, corrente, deriva, incidenza, motore, stato, tick]
 
   - nome: _misura_spettro_l1.py
     responsabilita: lo spettro del passo lineare palindromo, e dove la C si rovescia
-    importa: [_presidio, composizione, corrente, deriva, incidenza, motore, stato]
+    importa: [_presidio, composizione, corrente, deriva, incidenza, motore, stato, tick]
 
   - nome: _misura_mb2.py
     responsabilita: l-errore di conservazione di H_tot contro dtau, a tempo totale fisso
-    importa: [_presidio, deriva, saturazione]
+    importa: [_presidio, deriva, saturazione, tick]
 
   - nome: _misura_c_flussi.py
     responsabilita: dove la C si rompe coi flussi parziali, e che cosa la riparerebbe
@@ -152,7 +152,7 @@ moduli:
 
   - nome: _misura_mb1.py
     responsabilita: il raccordo al bit pezzo per pezzo contro il commit di riferimento
-    importa: [_presidio, composizione, deriva]
+    importa: [_presidio, composizione, deriva, tick]
 
   - nome: flussi_parziali.py
     responsabilita: il tempo proprio locale, la fase esatta, e i due flussi parziali
@@ -208,7 +208,7 @@ moduli:
 
   - nome: deriva.py
     responsabilita: la deriva di E e dei suoi due termini, la scansione in x, e la sorgente
-    importa: [_presidio, composizione, corrente, deriva_referto, deriva_serie, deriva_variabile, energia, incidenza, motore, stato]
+    importa: [_presidio, composizione, corrente, deriva_referto, deriva_serie, deriva_variabile, energia, incidenza, motore, stato, tick]
 
   - nome: deriva_variabile.py
     responsabilita: la variabile del flusso che gira, letta dalla tabella
@@ -224,23 +224,23 @@ moduli:
 
   - nome: bande.py
     responsabilita: le due bande spettrali di W, il controllo C, e le grandezze per banda
-    importa: [_presidio, composizione, deriva, deriva_variabile, energia, motore]
+    importa: [_presidio, composizione, deriva, deriva_variabile, energia, motore, tick]
 
   - nome: bande_floquet.py
     responsabilita: il riscaldamento di Floquet sulla scena grande, e il salvataggio durante la corsa
-    importa: [_presidio, bande, composizione, corrente, deriva, deriva_variabile, incidenza, motore, stato]
+    importa: [_presidio, bande, composizione, corrente, deriva, deriva_variabile, incidenza, motore, stato, tick]
 
   - nome: segno.py
     responsabilita: lo squilibrio LOCALE q, C-dispari, e la sua validazione contro Q
-    importa: [_presidio, bande, bande_floquet, composizione, corrente, deriva, deriva_variabile, motore]
+    importa: [_presidio, bande, bande_floquet, composizione, corrente, deriva, deriva_variabile, motore, tick]
 
   - nome: _collauda_tempo_proprio.py
     responsabilita: misura quali pezzi evolvono col TICK invece che col tempo proprio
-    importa: [_presidio, composizione, deriva]
+    importa: [_presidio, composizione, deriva, tick]
 
   - nome: _collauda_deriva.py
     responsabilita: il collaudo della deriva, e presidia il FALSO-ZERO del termine spento
-    importa: [_presidio, composizione, deriva, deriva_variabile, energia, materia_vuoto, motore, saturazione]
+    importa: [_presidio, composizione, deriva, deriva_variabile, energia, materia_vuoto, motore, saturazione, tick]
 
   - nome: crescita.py
     responsabilita: la crescita del grafo, regola NON-H col suo bilancio
@@ -318,6 +318,10 @@ moduli:
   - nome: _rif.py
     responsabilita: il costrutto @rif, byte-inerte, e il vocabolario dei ruoli
     importa: [_presidio]
+
+  - nome: tick.py
+    responsabilita: il passo della camminata -- un tick nell ordine della tabella, e la mappa legge-operatore
+    importa: [composizione]
 
   - nome: timbro.py
     responsabilita: l-impronta di cio- che ha girato, e la ripresa che rifiuta

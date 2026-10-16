@@ -49,6 +49,7 @@ import sys
 import time
 
 import numpy as np
+import tick as TK
 
 _QUI = os.path.dirname(os.path.abspath(__file__))
 if _QUI not in sys.path:
@@ -112,7 +113,7 @@ def _corri(dtau, ampiezza, materia, elicita, rovescia, tick):
                                              True, False, SEME, elicita)
         lam = [mot.densita_vuoto(st).copy()]
         for _t in range(tick):
-            DV.tick(st, mot, par)
+            TK.tick(st, mot, par)
             lam.append(mot.densita_vuoto(st).copy())
     finally:
         SAT.pezzi = vero

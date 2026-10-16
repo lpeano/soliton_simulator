@@ -123,7 +123,9 @@ def censisci(file=None, base=None):
     logica e' ### **quella di `P-R1`**, importata.
     """
     import _rami_era2 as R1
-    gia = set(R1.file_fisica())
+    # ### ⚠ **DAL `2026-10-16` `P-R1` GUARDA IL NUCLEO**, non una lista: qui
+    # ### <<sorvegliato>> vuol dire ### **sta nel nucleo derivato.**
+    gia = set(R1.nucleo())
     fuori = []
     for rel in (file if file is not None else derivata()):
         p = os.path.join(base or RADICE, rel)

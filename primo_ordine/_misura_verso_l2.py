@@ -36,6 +36,7 @@ import os
 import sys
 
 import numpy as np
+import tick as TK
 
 _QUI = os.path.dirname(os.path.abspath(__file__))
 if _QUI not in sys.path:
@@ -79,7 +80,7 @@ def corri(dtau, vuoto, ampiezza, materia, geometrici, fasi, tick, ordine=None,
           elicita=1):
     """### `(Lambda(t), somma|phi|^2(t), h(0))`, ### **campionati a OGNI tick.**
 
-    ### ⚠ **`ordine = None` vuol dire L-ORDINE DELLA TABELLA** *(via `DV.tick`)*. Un
+    ### ⚠ **`ordine = None` vuol dire L-ORDINE DELLA TABELLA** *(via `TK.tick`)*. Un
     ordine dato serve ### **a un braccio solo** -- quello che chiede se la parte dispari
     ricompare col passo **non palindromo** -- e ### **non cambia la tabella.**
     """
@@ -93,11 +94,11 @@ def corri(dtau, vuoto, ampiezza, materia, geometrici, fasi, tick, ordine=None,
     tot = [float(np.sum(np.abs(st["phi_h"]) ** 2))]
     for _t in range(tick):
         if ordine is None:
-            DV.tick(st, mot, par)
+            TK.tick(st, mot, par)
         else:
             mot.apri_tick()
             for idl, fr in ordine:
-                nome, vuole_par = DV.OPERATORE[idl]
+                nome, vuole_par = TK.OPERATORE[idl]
                 mot.operatori[nome](st, par if vuole_par else {}, fr)
             mot.chiudi_tick()
         lam.append(lambda_per_nodo(mot, st))

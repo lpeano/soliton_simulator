@@ -45,6 +45,7 @@ if _QUI not in sys.path:
 
 import bande as BD                                            # noqa: E402
 import bande_floquet as BF                                    # noqa: E402
+import tick as TK                                             # noqa: E402
 
 DOVE = os.path.join(os.path.dirname(_QUI), "doc", "REFERTO_segno_locale.md")
 # ### ⚠ **LE SOGLIE, FISSATE QUI E PRIMA DEI NUMERI** *(stanno nel piano, par. `2.2`)*
@@ -110,7 +111,7 @@ def valida(lati=(10, 10), ticks=400, seme=7, vuoto_modulo=2.0, ogni=2):
         if t:
             mot.apri_tick()
             for idl, frazione, _tipo in CM.ORDINE:
-                nome, vuole_par = DV.OPERATORE[idl]
+                nome, vuole_par = TK.OPERATORE[idl]
                 mot.operatori[nome](st, par if vuole_par else {}, frazione)
             mot.chiudi_tick()
         if t == 0 or (t % ogni) == 0 or t == ticks:

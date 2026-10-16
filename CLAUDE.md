@@ -296,10 +296,11 @@ qui**: sta in `doc/PATTERN_DI_PROVA.md`.)*
 | **`[[H-STOP-CODA]]`** | che un turno finisca mentre la coda ha lavoro PRONTO: legge la coda, NOMINA il pezzo successivo, e non blocca due volte senza un commit nuovo | **`H-STOP-CODA`** |
 | **`[[H-VALIDATORE]]`** | un indice mal formato, o con una voce persa | **`H-VALIDATORE`** |
 | **`[[P-E10]]`** | una variabile in tabella SENZA la sua riga nel confronto tabella/banco, o NUOVA senza il punto della carta che la decide | **`P-E10`** |
+| **`[[P-R1]]`** | ogni ramo del NUCLEO della fisica e- dichiarato col suo ruolo e il suo perche-, e i `default` nelle firme sono VIETATI (tetto zero) -- e il nucleo e- la CHIUSURA DEGLI IMPORT dalle radici, non una lista | **`P-R1`** |
 | **`[[P-REG]]`** | una regola di gestione e- una VOCE, e le due sezioni delle regole SI GENERANO dall-indice: modificate a mano, RIFIUTATE | **`P-REG`** |
 | **`[[P-TAB]]`** | un id di legge FUORI dall-ordine nel codice, l-import del modulo di una legge superata, un CONTO della tabella scritto a mano, o una SECONDA FONTE che non confronta -- e un-eccezione ORFANA fallisce anche lei | **`P-TAB`** |
 
-> ### ⚠ **`0` di queste `18` NON HANNO NESSUN PRESIDIO che le faccia rispettare** *(`A9`)*. ### **E il numero esiste perche' <<chi la fa rispettare>> e' UN CAMPO: in prosa non si contava.** ### **IL DETTAGLIO:** `doc/REGOLE/par12.md`.
+> ### ⚠ **`0` di queste `19` NON HANNO NESSUN PRESIDIO che le faccia rispettare** *(`A9`)*. ### **E il numero esiste perche' <<chi la fa rispettare>> e' UN CAMPO: in prosa non si contava.** ### **IL DETTAGLIO:** `doc/REGOLE/par12.md`.
 
 <!-- FINE REGOLE GENERATE par12.md -->
 **LE VIE D'USCITA OBBLIGANO A DICHIARARE:** `[SENZA-RELAZIONE: …]` ·

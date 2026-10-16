@@ -17956,3 +17956,67 @@ in cui il passo le importera'.**
 ### **una radice dichiarata e PROVVISORIA** *(fino al campo `modulo`, pezzo `6`)*.
 ### ⛔ **NON in `composizione.py`, che SI GENERA.** ### **Il criterio e' `M-B1` AL BIT
 e il braccio `(c)` invariato: se si muove un bit, STOP.**
+
+### ✅ **PEZZO `7` FATTO: `P-R1` GUARDA `11` FILE E BLOCCA, E IL NUCLEO SI DERIVA**
+
+| | prima | dopo |
+|---|---|---|
+| i file guardati | `15` *(lista FISSA)* | ### **`11`** *(### **chiusura degli import**)* |
+| funzioni dichiarate | `32` | ### **`24`** *(`15` nuove, `8` dei legami ### **togliate**)* |
+| rami nel perimetro | `58` | ### **`50`** |
+| `default` nel nucleo | ### **`5`** | ### **`0`** |
+| il collaudo | `12`/`12` | ### **`17`/`17`** |
+
+### ⭐⭐ **IL BRACCIO CHE PROVA LA DERIVAZIONE, ed e' il piu' bello del pezzo:**
+lo stesso file finto, ### **senza l'import da' `0` errori nuovi e con l'import `1`.**
+### **Il file e' lo STESSO: cambia solo CHI LO IMPORTA.** ### ✅ **Cioe' un modulo
+entra nel nucleo DA SOLO quando il passo comincia a importarlo**, e ne esce da solo
+quando smette.
+
+### ⛔⛔ **LE DUE PREMESSE DEL MANDATO CHE NON TORNAVANO, riferite PRIMA del codice**
+
+### ① **I `default` nel nucleo NON erano zero: erano `3`** *(`grafo.costo`)*, e
+### **ne sono diventati `5`** quando `percorri_tick` si e' spostato dentro
+*(`salta=()` e `al_primo=None` sono venuti con lui)*. ### ✅ **Tutti e `5` resi
+espliciti**, e ### **nessun numero cambia.**
+### ② **`energia.py` NON e' nel nucleo** — nessuna radice lo importa, lo importa
+`deriva.py`: ### **il suo ramo NON l'ho dichiarato**, invece di dichiararlo per
+somiglianza con l'elenco del mandato.
+
+### ⭐ **E LO SPOSTAMENTO DI `percorri_tick` NON HA CAMBIATO UN BIT, provato in DUE modi:**
+### ① le due funzioni e il dizionario `OPERATORE` sono ### **IDENTICI AL CARATTERE** a
+quelli di `26f5f247`; ### ② ### **`M-B1` PASSA: tutti i `12` pezzi coincidono AL BIT**,
+e la distanza su `250` tick e' ### **`0.000000e+00`** su entrambe le scene.
+### 📌 **E il confronto di `M-B1` ha avuto bisogno di una cura dichiarata:** nell'albero
+vecchio `tick.py` ### **non esiste**, quindi la misura di oggi non partiva. Adesso
+`VIAGGIANO = ("_misura_mb1.py", "tick.py")` ### **porta con se' i moduli DELLA MISURA**, e
+il motivo e' scritto la' — ### **lo spostamento e' verbatim, quindi non porta dentro codice
+NUOVO: porta lo stesso codice da un altro file.**
+
+### ⚠ **CHE COSA LA RESTRIZIONE RINUNCIA, e lo dico perche' e' una perdita:**
+`crescita.py`, `vuoto.py` e i ### **legami generati** escono dal nucleo, e
+### **oggi avevano TUTTI i rami dichiarati.** ### **Le `8` righe dei legami le ho TOLTE**:
+una dichiarazione per un file che il presidio non guarda piu' e' ### **una riga morta.**
+### ✅ **Ma il controllo dei legami NON si perde: diventa DERIVATO** — non chiede piu' una
+riga per legame, chiede che ### **ogni legame abbia esattamente la sua guardia, contata
+dall'AST** *(`8` legami, `0` senza)*. ### **E `A11` ha ancora il suo errore: la biiezione
+tabella ↔ motore rotta.**
+
+### ⭐ **E `[[P-TAB]]` HA LAVORATO DI NUOVO:** spostando `OPERATORE` l'eccezione di
+`deriva.py` e' diventata ### **ORFANA nello stesso istante**, e il presidio me l'ha detto.
+### **E' la seconda volta in due giorni.**
+
+### ⛔ **LE DUE DOMANDE `A11` CHE NON DECIDO**, e sono nella RIPRESA e nella voce
+`[[DOMANDA-DUE-SOGLIE-SENZA-ERRORE]]`:
+### ① ### **la soglia `tol` di `corrente.instrada`** *(`np.abs(c) > tol`)* — `A11`
+chiede ### **da che errore protegge**, e `corrente.py` e' ### **fuori dal nucleo** *(lo usa
+la misura)*;
+### ② ### **il limite a `Lambda = 0` di `saturazione.pezzi`** e' argomentato
+### **nel docstring** con `A11`, ma ### **la scheda della legge NON lo nomina** — e la
+legge e' fuori dall'ordine.
+### 📌 **La voce l'ho aperta oltre la lettera del mandato** *(che chiedeva la RIPRESA)*,
+perche' il par. `9` dice ### **<<un difetto nuovo = una voce>>**: se preferisci che resti
+solo nella RIPRESA, lo dici e la chiudo.
+
+**LA SUITE:** ### **`55` su `55`**, `pre-commit` a ### **`257.1 s` su `500`** *(`51%`)*, e
+`P-R1` costa ### **`1.66 s`.**

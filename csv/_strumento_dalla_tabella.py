@@ -83,8 +83,11 @@ ECCEZIONI = {
     " nell-ordine, invece di girare",
  ("primo_ordine/motore.py", "saturazione"):
     "serve all-operatore `_saturazione`, che resta registrato",
- ("primo_ordine/deriva.py", "CAMM-SATURAZIONE"):
-    "`OPERATORE` registra ENTRAMBE le leggi, per lo stesso motivo del motore",
+ ("primo_ordine/tick.py", "CAMM-SATURAZIONE"):
+    "`OPERATORE` registra ENTRAMBE le leggi, per lo stesso motivo del motore."
+    " ### ⚠ L-ECCEZIONE SI E- SPOSTATA CON `OPERATORE` il 2026-10-16, da"
+    " `deriva.py` a `tick.py`: `P-TAB` l-ha chiamata ORFANA nello stesso istante in cui"
+    " il dizionario ha cambiato casa",
  ("primo_ordine/_collauda_saturazione.py", "CAMM-SATURAZIONE"):
     "e- il collaudo DELLA saturazione: la legge resta in tabella, e il suo collaudo"
     " dev-essere ancora ri-girabile",

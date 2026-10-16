@@ -35,6 +35,7 @@ sys.path.insert(0, os.path.join(os.path.dirname(_QUI), "csv"))
 import _presidio                                              # noqa: E402
 import composizione as CM                                     # noqa: E402
 import deriva as DV                                           # noqa: E402
+import tick as TK                                           # noqa: E402
 import deriva_variabile as DVAR                               # noqa: E402
 import energia as EN                                          # noqa: E402
 import materia_vuoto as MV                                    # noqa: E402
@@ -151,19 +152,20 @@ def main(argv):
           "a x_max = %.5f: |beta| di `S3` = %.6e contro %.6e della saturazione,"
           " cioe- %.0f volte" % (x2, b_s3, b_sat, b_s3 / b_sat))
     # ### ⭐⭐ **IL CONTROLLO POSITIVO: IL TICK DELLO STRUMENTO COINCIDE AL BIT CON
-    # ### `DV.tick`.** ### ⚠ **E non e- un falso-uno:** la fotografia di mezzo tick
+    # ### `TK.tick`.** ### ⚠ **E non e- un falso-uno:** la fotografia di mezzo tick
     # ### costruisce `Q` e `J` ### **passando dai buffer di `mot`**, e se uno di quei
     # ### buffer servisse a un pezzo successivo ### **il resto del tick cambierebbe.**
     # ### ### **Questo braccio dice che NON cambia.**
     _ia, mota, sta, para = DV.scena(16, 7, 0.2, norma="locale", vuoto_modulo=2.0)
     _ib, motb, stb, parb = DV.scena(16, 7, 0.2, norma="locale", vuoto_modulo=2.0)
     cassa = {}
-    DV.percorri_tick(sta, mota, para, al_primo=DV.fotografo(_ia, mota, para, cassa))
-    DV.tick(stb, motb, parb)
+    TK.percorri_tick(sta, mota, para, (),
+                     DV.fotografo(_ia, mota, para, cassa))
+    TK.tick(stb, motb, parb)
     chiavi = [k for k in sta if hasattr(sta[k], "shape")]
     diff = max(float(np.max(np.abs(sta[k] - stb[k]))) if sta[k].size else 0.0
                for k in chiavi)
-    esito("### (c) il tick dello strumento coincide AL BIT con `DV.tick`",
+    esito("### (c) il tick dello strumento coincide AL BIT con `TK.tick`",
           diff == 0.0, "max|differenza| = %.1e su %d campi (`J` costruito a meta- tick"
           " NON disturba il resto)" % (diff, len(chiavi)))
 
@@ -266,17 +268,17 @@ def main(argv):
           % "  ".join("%.4f" % x for x in espo))
 
     # ### (7) DEVE FERMARE: una legge dell-ordine NON mappata
-    salvato = dict(DV.OPERATORE)
+    salvato = dict(TK.OPERATORE)
     rotto = False
     try:
-        DV.OPERATORE.pop(CM.ORDINE[2][0])
+        TK.OPERATORE.pop(CM.ORDINE[2][0])
         _i5, mot5, st5, par5 = DV.scena(8, 7, 0.2)
-        DV.tick(st5, mot5, par5)
+        TK.tick(st5, mot5, par5)
     except AssertionError:
         rotto = True
     finally:
-        DV.OPERATORE.clear()
-        DV.OPERATORE.update(salvato)
+        TK.OPERATORE.clear()
+        TK.OPERATORE.update(salvato)
     esito("### (7) DEVE FERMARE: una legge dell-ordine di composizione non mappata",
           rotto, "un pezzo del tick che non gira e- un tick diverso")
 

@@ -27,6 +27,7 @@ import os
 import sys
 
 import numpy as np
+import tick as TK
 
 _QUI = os.path.dirname(os.path.abspath(__file__))
 if _QUI not in sys.path:
@@ -381,7 +382,7 @@ def corri(dtau, x, forma, tick, acceso, centri, senza_alpha=False, beta_zero=Fal
         rprec = rho0.copy()
         for t in range(tick):
             ag.passo = t
-            DV.tick(st, mot, par)
+            TK.tick(st, mot, par)
             if congela in ("tick", "pezzo"):
                 st["psi_h"][...] = psi0
             lam[t + 1] = mot.densita_vuoto(st)

@@ -37,6 +37,7 @@ import sys
 import time
 
 import numpy as np
+import tick as TK
 
 _QUI = os.path.dirname(os.path.abspath(__file__))
 if _QUI not in sys.path:
@@ -174,7 +175,7 @@ def _corri(dtau, ampiezza, materia, elicita, forma, rovescia, tick, spento=False
         lam = [mot.densita_vuoto(st).copy()]
         rho = [densita_materia(mot, st)]
         for _t in range(tick):
-            DV.tick(st, mot, par)
+            TK.tick(st, mot, par)
             lam.append(mot.densita_vuoto(st).copy())
             rho.append(densita_materia(mot, st))
     finally:
@@ -375,7 +376,7 @@ def braccio_larghezza():
                                                    False, SEME, 1)
             r = [densita_materia(mot, st)]
             for _t in range(TICK):
-                DV.tick(st, mot, par)
+                TK.tick(st, mot, par)
                 r.append(densita_materia(mot, st))
             r = np.array(r)
         else:

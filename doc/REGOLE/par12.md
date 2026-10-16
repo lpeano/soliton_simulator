@@ -207,3 +207,63 @@ tabella** e due file generati)*.
 ### **`21` eccezioni dichiarate**, ### **`0` non coperte** e ### **`0` orfane.**
 ### ⚠ **E `7` di quelle `21` sono marcate SCADUTE nel loro motivo:** le cure sono i pezzi
 `2-quinquies`, `2-sexies` e `2-septies` della coda — ### **un interruttore alla volta.**
+
+## `P-R1`: **OGNI RAMO DEL NUCLEO E' DICHIARATO** — *e il nucleo **si DERIVA***
+*(decisione di Luca, `2026-10-16` alle `19:33`)*
+
+| | |
+|---|---|
+| **il codice** | `csv/_rami_era2.py`, nel `pre-commit` — ### **BLOCCANTE** |
+| **il collaudo** | `python csv/_rami_era2.py --collaudo` — ### **`17` su `17`** |
+| ### ⭐⭐ **che cos'e' il NUCLEO** | la ### **CHIUSURA DEGLI IMPORT** dalle radici dichiarate: `tick.py` e `passo.py` *(i due ingressi del passo: la camminata e la via di `H`)*, `motore.py`, `materia_vuoto.py`, `saturazione.py`. ### **La lista degli import si legge da `primo_ordine/_mappa.yaml`**, che `[[P-MOD]]` tiene allineata al codice |
+| ### ✅ **perche' DERIVARLO conta** | ### **un import nuovo allarga il nucleo DA SOLO**, e un modulo che smette di essere importato ### **ne esce da solo** — dove una lista fissa ### **restava indietro in silenzio** |
+| ### ⚠ **le radici sono PROVVISORIE** | i moduli delle leggi dovrebbero venire dal ### **campo `modulo` della tabella**, che ### **non esiste ancora** *(pezzo `6` della coda)*: finche' non c'e', la radice e' ### **dichiarata nel codice**, e il codice lo dice |
+| **il nucleo di oggi** | `11` file, ### **`15` funzioni dichiarate una per una**, `27` rami, e ### **`0` default** |
+| ### ⛔ **fuori dal nucleo NON si applica** | e la regola lo dice ### **esplicitamente**: ### **niente eccezioni file per file.** Chi vuole i numeri di fuori usa il ### **censimento** *(`csv/_censimento_rami.py`, `solo-CI`, ### **non blocca**)* |
+
+### ⛔⛔ **PERCHE' LA REGOLA LARGA NON AVEVA SENSO, e lo dice un numero**
+
+Il censimento del pezzo `4` ha misurato ### **`837` rami e `142` default** fuori dalla
+lista — ### **ma quasi tutti in SCHEMI, GENERATORI, COLLAUDI e STRUMENTI**, dove un `if`
+### **non puo' cambiare la legge che gira.** ### ✅ **La regola stretta ha senso SOLO nel
+nucleo**, e la' i `default` sono ### **zero.**
+
+### ⚠ **E LA RESTRIZIONE RINUNCIA A QUALCOSA, detto prima di farla:** `crescita.py`,
+`vuoto.py` e i ### **legami generati** di `termini/*.py` ### **non sono importati da
+nessuno**, quindi escono dal nucleo — e ### **oggi avevano TUTTI i rami dichiarati.**
+### **Le `8` righe dei legami sono state TOLTE**, perche' una dichiarazione per un file che
+il presidio non guarda piu' e' ### **una riga morta.**
+
+> ### ✅ **MA IL CONTROLLO DEI LEGAMI NON SI PERDE: DIVENTA DERIVATO.** Il braccio non
+> chiede piu' ### **una riga per legame**; chiede che ### **ogni legame generato abbia
+> ESATTAMENTE la sua guardia**, contata dall'AST *(`8` legami, `0` senza guardia)*.
+> ### ⭐ **E `A11` ha il suo errore, che resta quello di prima:** la guardia scatta quando
+> ### **la tabella dichiara un operatore che il MOTORE non ha**, cioe' quando la biiezione
+> ### **tabella ↔ motore** e' rotta.
+
+### ⭐⭐ **E IL PASSO E' TORNATO NEL NUCLEO: `percorri_tick` si e' SPOSTATO**
+
+Percorreva l'ordine di composizione — ### **cioe' E' il passo** — e viveva in
+`deriva.py`, che e' ### **una misura.** ### ⛔ **Tirare `deriva.py` nel nucleo ci avrebbe
+portato dentro `energia`, `corrente`, `deriva_serie`, `deriva_variabile`.**
+### ✅ **Adesso sta in `primo_ordine/tick.py`**, che e' ### **una radice.**
+### ⚠ **NON in `composizione.py`, che SI GENERA.**
+
+> ### ✅ **E LO SPOSTAMENTO NON HA CAMBIATO UN BIT, provato in DUE modi:** le due funzioni
+> e il dizionario `OPERATORE` sono ### **IDENTICI AL CARATTERE** a quelli di `26f5f247`, e
+> ### **`M-B1` PASSA con tutti i `12` pezzi coincidenti AL BIT**, con distanza
+> `0.000000e+00` su `250` tick in entrambe le scene.
+
+### ⛔ **I QUATTRO BRACCI, su un albero FINTO *fuori dal repo* e DIFFERENZIALI**
+
+### ⚠ **Differenziali perche' misurato:** sull'albero finto `controlla` da'
+### **`15` errori DI FONDO**, perche' le righe VERE nominano funzioni che il finto non ha.
+### **Quindi si guarda la DIFFERENZA da un albero pulito**: cosi' il braccio dice
+*«questo errore e' NATO dal mio caso finto»*, e non *«ci sono errori»*.
+
+| | il caso | l'esito atteso |
+|---|---|---|
+| `①` | un ramo nuovo ### **non dichiarato** in un file del nucleo | ### **DEVE fallire** |
+| `②` | un `default` in una firma del nucleo | ### **DEVE fallire** *(tetto zero)* |
+| `③` | un file che ### **ENTRA nel nucleo PER IMPORT** e porta rami non dichiarati | ### **DEVE fallire** — e il braccio misura ### **`0` errori nuovi senza l'import, `1` con l'import**: ### **il file e' lo STESSO, cambia solo CHI LO IMPORTA** |
+| `(c)` | un ramo nuovo in un ### **COLLAUDO fuori dal nucleo** | ### **DEVE PASSARE**, altrimenti *«fuori dal nucleo non si applica»* ### **sarebbe una frase e non un fatto** |

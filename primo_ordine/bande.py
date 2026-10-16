@@ -47,6 +47,7 @@ if _QUI not in sys.path:
     sys.path.insert(0, _QUI)
 
 import deriva as DV                                           # noqa: E402
+import tick as TK                                           # noqa: E402
 import deriva_variabile as DVAR                               # noqa: E402
 import energia as EN                                          # noqa: E402
 
@@ -206,7 +207,7 @@ def corri_bande(nn=16, dtau=0.25, ticks=200, seme=7, vuoto_modulo=2.0,
             for idl, frazione, _tipo in CM.ORDINE:
                 if idl in salta:
                     continue
-                nome, vuole_par = DV.OPERATORE[idl]
+                nome, vuole_par = TK.OPERATORE[idl]
                 mot.operatori[nome](st, par if vuole_par else {}, frazione)
             mot.chiudi_tick()
         if t == 0 or (t % ogni) == 0 or t == ticks:

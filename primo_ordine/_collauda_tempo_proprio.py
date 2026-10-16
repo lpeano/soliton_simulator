@@ -46,6 +46,7 @@ sys.path.insert(0, os.path.join(os.path.dirname(_QUI), "csv"))
 import _presidio                                              # noqa: E402
 import composizione as CM                                     # noqa: E402
 import deriva as DV                                           # noqa: E402
+import tick as TK                                           # noqa: E402
 
 OK = [0, 0]
 # ### ⛔ **L-ELENCO ATTESO DEI VIOLATORI, SCRITTO A MANO E NON CALCOLATO.** ### **Se fosse
@@ -75,7 +76,7 @@ def dipende_da_dtau(idl, frazione, nn=12, seme=7):
     ### ⚠ **Si confrontano DUE `dtau` sullo STESSO stato iniziale**, non due corse: cosi'
     cio' che si misura e' ### **la dipendenza del pezzo dal passo**, e nient'altro.
     """
-    nome, vuole_par = DV.OPERATORE[idl]
+    nome, vuole_par = TK.OPERATORE[idl]
     fuori = []
     for dt in (0.4, 0.2):
         _i, mot, st, par = DV.scena(nn, seme, dt, norma="locale", vuoto_modulo=2.0,

@@ -37,7 +37,7 @@ misurare.
 
 ## ⛔ IL PERIMETRO
 
-### Usa `deriva.py` **IN SOLA LETTURA** *(`DV.scena`, `DV.tick`)*, che la scelta di
+### Usa `deriva.py` **IN SOLA LETTURA** *(`DV.scena`, `TK.tick`)*, che la scelta di
 perimetro di Luca del `2026-10-15` ammette per i criteri di uscita di questo livello.
 
 ## 📌 E IL LIMITE A `Lambda == 0` NON E' UN PAVIMENTO
@@ -59,6 +59,7 @@ if _QUI not in sys.path:
 sys.path.insert(0, os.path.join(os.path.dirname(_QUI), "csv"))
 
 import saturazione as SAT                                     # noqa: E402
+import tick as TK                                             # noqa: E402
 
 # ### ⛔ **LA CONFIGURAZIONE INTERA, DICHIARATA E STAMPATA**
 TEMPO = 8.0
@@ -150,7 +151,7 @@ def _tick_ordine(st, mot, par, ordine):
     import deriva as DV
     mot.apri_tick()
     for idl, frazione in ordine:
-        nome, vuole_par = DV.OPERATORE[idl]
+        nome, vuole_par = TK.OPERATORE[idl]
         mot.operatori[nome](st, par if vuole_par else {}, frazione)
     mot.chiudi_tick()
 
@@ -227,7 +228,7 @@ def una_corsa(dtau, tick):
     h0 = h_tot(inc, mot, st, par)
     peggio = 0.0
     for _t in range(tick):
-        DV.tick(st, mot, par)
+        TK.tick(st, mot, par)
         d = abs(h_tot(inc, mot, st, par) - h0)
         if d > peggio:
             peggio = d

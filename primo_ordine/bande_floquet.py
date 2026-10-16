@@ -26,6 +26,7 @@ if _QUI not in sys.path:
 
 import bande as BD                                            # noqa: E402
 import deriva as DV                                           # noqa: E402
+import tick as TK                                           # noqa: E402
 import deriva_variabile as DVAR                               # noqa: E402
 
 
@@ -108,7 +109,7 @@ def floquet(lati=(10, 10), ticks=4000, seme=7, vuoto_modulo=2.0, ogni=20,
         if t:
             mot.apri_tick()
             for idl, frazione, _tipo in CM.ORDINE:
-                nome, vuole_par = DV.OPERATORE[idl]
+                nome, vuole_par = TK.OPERATORE[idl]
                 mot.operatori[nome](st, par if vuole_par else {}, frazione)
             mot.chiudi_tick()
         if t == 0 or (t % ogni) == 0 or t == ticks:

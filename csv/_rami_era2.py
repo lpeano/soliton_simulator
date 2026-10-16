@@ -35,17 +35,54 @@ PRESIDIO = "P-R1"
 
 RUOLI = ("smistamento", "validazione", "iterazione", "default", "guardia")
 
-# ### I file di FISICA dell'era `2`: gli stessi di `P-E4`, piu' i generati.
-def file_fisica():
-    f = [os.path.join("primo_ordine", x) for x in
-         ("stato.py", "hamiltoniana.py", "passo.py", "crescita.py", "vuoto.py")]
-    f += sorted(glob.glob(os.path.join("primo_ordine", "termini", "*.py")))
-    # ### ⚠ **I PERCORSI CON `/`, SEMPRE:** `os.path.join` su Windows da- `\\`,
-    # ### e la tabella usa `/`. ### **Una chiave che cambia col sistema operativo non e-
-    # ### una chiave** -- e me l-ha detto il presidio, con 24 errori al primo giro.
-    return [x.replace(os.sep, "/") for x in f
-            if os.path.exists(os.path.join(RADICE, x))
-            and not x.endswith("__init__.py")]
+# ### ⛔⛔ **LE RADICI DEL NUCLEO, DICHIARATE E PROVVISORIE** *(decisione di Luca
+# ### del `2026-10-16` alle `19:33`)*. ### **Sono gli INGRESSI DEL PASSO** -- `tick.py` per
+# ### la camminata, `passo.py` per la via di `H` -- ### **piu' il motore e i moduli delle
+# ### leggi.**
+# ### ⚠ **PERCHE' <<PROVVISORIE>>:** i moduli delle leggi ### **dovrebbero venire dal
+# ### campo `modulo` della tabella**, che ### **non esiste ancora** *(pezzo `6` della
+# ### coda)*. ### **Finche' non c-e-, la radice la dichiaro qui e lo scrivo.**
+RADICI = ("tick", "passo", "motore", "materia_vuoto", "saturazione")
+
+
+def nucleo(base=None):
+    """### IL NUCLEO DELLA FISICA: la ### **CHIUSURA DEGLI IMPORT** dalle radici.
+
+    ### ⭐⭐ **SI DERIVA, non si scrive a mano** *(mandato del `2026-10-16`)*: la
+    lista si legge da `primo_ordine/_mappa.yaml`, che ### **`P-MOD` tiene allineata al
+    codice** -- quindi ### **un import nuovo allarga il nucleo DA SOLO**, e un modulo che
+    smette di essere importato ### **ne esce da solo.**
+
+    ### ⚠ **E LA CHIUSURA SI LIMITA A `primo_ordine/`, dichiarato:** `motore.py`
+    importa `_presidio`, che vive in `csv/` ed e- ### **il timbro del blob**, non fisica.
+    ### **Il perimetro della fisica e- quello di `H-FISICA-FUORI-LISTA`.**
+
+    ### ⛔ **COSA FA GRATIS:** `crescita.py` e `vuoto.py` sono regole `NON-H`
+    ### **che nessuno importa** -- oggi non girano, quindi ### **non sono nel nucleo**, e
+    ### **ci rientreranno DA SOLE il giorno in cui il passo le importera-.**
+    """
+    import yaml
+    base = base or RADICE
+    testo = io.open(os.path.join(base, "primo_ordine", "_mappa.yaml"),
+                    encoding="utf-8").read()
+    mappa = yaml.safe_load(testo)
+    per = {r["nome"][:-3]: list(r.get("importa") or [])
+           for r in mappa["moduli"] if str(r["nome"]).endswith(".py")}
+    visti, coda = set(), list(RADICI)
+    while coda:
+        x = coda.pop()
+        if x in visti:
+            continue
+        visti.add(x)
+        for y in per.get(x, []):
+            if y not in visti:
+                coda.append(y)
+    fuori = []
+    for x in sorted(visti):
+        rel = "primo_ordine/%s.py" % x
+        if os.path.exists(os.path.join(base, rel)):
+            fuori.append(rel)
+    return fuori
 
 
 # =====================================================================================
@@ -58,9 +95,6 @@ def file_fisica():
 # ### sette moduli generati hanno ### **lo STESSO ramo**, perche- vengono ### **dalla
 # ### stessa riga del generatore** -- e scriverla sette volte vorrebbe dire ### **sette
 # ### copie che possono divergere.**
-_LEGAME = ("se il motore non ha l-operatore, il legame ALZA invece di tornare un"
-           " risultato finto. ### Non e- uno smistamento: e- una GUARDIA, e un"
-           " legame senza il suo operatore NON DEVE sembrare funzionante")
 
 RAMI = {
     ("primo_ordine/stato.py", "nuovo"): (
@@ -76,17 +110,6 @@ RAMI = {
     # ### ### **sono generati dalla stessa riga di codice.** ### ⭐ **E il ramo e- una
     # ### GUARDIA, non uno smistamento:** se il motore non ha l-operatore, il legame
     # ### ### **ALZA** invece di tornare un risultato finto.
-    ("primo_ordine/termini/camm_moneta_spin.py", "applica"): (
-        1, "guardia", _LEGAME),
-    ("primo_ordine/termini/camm_grover.py", "applica"): (1, "guardia", _LEGAME),
-    ("primo_ordine/termini/camm_spostamento.py", "applica"): (1, "guardia", _LEGAME),
-    ("primo_ordine/termini/camm_grover_vuoto.py", "applica"): (1, "guardia", _LEGAME),
-    ("primo_ordine/termini/camm_spostamento_vuoto.py", "applica"): (
-        1, "guardia", _LEGAME),
-    ("primo_ordine/termini/camm_saturazione.py", "applica"): (1, "guardia", _LEGAME),
-    ("primo_ordine/termini/camm_materia_vuoto.py", "applica"): (
-        1, "guardia", _LEGAME),
-    ("primo_ordine/termini/camm_forma_d.py", "applica"): (1, "guardia", _LEGAME),
     ("primo_ordine/stato.py", "controlla_domini"): (
         2, "validazione",
         "i DUE controlli di dominio (punto 1): le componenti FINITE, e `> 0` per la "
@@ -130,9 +153,107 @@ RAMI = {
 # ### ⭐ **UNA FIRMA UNIFORME E- UN RAMO IN MENO** *(`A8`)*, e non l-avevo
 # ### previsto: ### **cercavo di pagare un debito, e ne ho pagati due.**
 
-def _conta(p):
+# =====================================================================================
+#   IL NUCLEO, DICHIARATO UNO PER UNO -- **decisione di Luca del `2026-10-16`, `19:33`**
+# -------------------------------------------------------------------------------------
+# ### ⛔⛔ **`15` FUNZIONI, `27` RAMI, `0` DEFAULT.** ### ⚠ **Il conteggio lo misura
+# ### l'AST; il RUOLO e il PERCHE' li ho scritti io LEGGENDOLI** -- ed e' il limite
+# ### dichiarato in testa a questo file.
+# ### 📌 **E UNA FUNZIONE HA UN SOLO RUOLO**, anche quando i suoi rami ne mescolano due:
+# ### allora il ruolo e' **quello dominante**, e il `perche'` **nomina tutti i rami.**
+
+# ------------------------------------------------------------------ `grafo.py`
+RAMI[("primo_ordine/grafo.py", "errori")] = (
+    5, "validazione",
+    "le CINQUE forme malformate di un grafo, una per ramo: `ii` e `jj` di forma diversa, "
+    "grafo VUOTO, indice FUORI dal numero dei nodi, AUTOANELLO, ARCO DOPPIO. ### Ogni "
+    "ramo COSTRUISCE UN MESSAGGIO e non cambia nessun valore: e' il presidio stesso")
+RAMI[("primo_ordine/grafo.py", "costo")] = (
+    1, "smistamento",
+    "sceglie fra il grafo PASSATO e la CATENA di prova. ### E dal `2026-10-16` l-argomento "
+    "e' ESPLICITO (`costo(n, archi, giri)`, tetto zero sui default): `None` e' una SCELTA "
+    "DICHIARATA del chiamante, non un valore mancante")
+# ------------------------------------------------------------------ `incidenza.py`
+RAMI[("primo_ordine/incidenza.py", "_allarga")] = (
+    1, "smistamento",
+    "il RADDOPPIO a capacita' preallocata: se la capacita' BASTA non si rialloca, e ### il "
+    "ramo che NON FA NIENTE va dichiarato -- allargare <<per sicurezza>> sprecherebbe "
+    "memoria senza che nessuno l-abbia deciso. ### Non protegge da un errore: EVITA un "
+    "costo `O(m)` a ogni nascita, che su una corsa che cresce sarebbe `O(m^2)`")
+RAMI[("primo_ordine/incidenza.py", "cresci")] = (
+    2, "smistamento",
+    "DUE rami: `tieni.dtype == bool` smista fra una MASCHERA e una lista di INDICI (due "
+    "forme che il chiamante puo' avere), e l-`or` su `resta` VALIDA che gli indici "
+    "superstiti stiano nel nuovo intervallo. ### Il secondo e' una validazione, il primo "
+    "uno smistamento su un campo (il `dtype`), e nessuno dei due sceglie fisica")
+RAMI[("primo_ordine/incidenza.py", "costo")] = (
+    1, "smistamento",
+    "scarta gli ARCHI DOPPI prima di misurare, tenendo la prima occorrenza di ogni coppia "
+    "non ordinata. ### E' dentro un MISURATORE del costo: non tocca lo stato, e serve "
+    "perche' misurare su un grafo con doppioni misurerebbe un grafo che non esiste")
+RAMI[("primo_ordine/incidenza.py", "main")] = (
+    1, "iterazione",
+    "quanti GIRI di misura fare secondo la taglia (`50` sotto `10000` archi, `10` sopra). "
+    "### La soglia e' DICHIARATA nel sorgente, e serve a non far durare la misura piu' "
+    "del necessario: non entra in nessun risultato di fisica")
+# ------------------------------------------------------------------ `materia_vuoto.py`
+_SING = (
+    "la SINGOLARITA' ELIMINABILE a `rho = 0`: dove non c-e- materia il valore si prende "
+    "dal LIMITE, e NON e' un pavimento. ### E' FISICA GIA' DECISA, e il rimando e' la "
+    "scheda della legge (`doc/leggi_era2/CAMM-MATERIA-VUOTO.md`): <<la fase di un vettore "
+    "nullo non vuol dire niente>>, quindi la' `alpha = 0` ed e' il valore che "
+    "l-espressione PRENDE dove e' definita. ### Il mandato del 2026-10-16 chiede "
+    "esattamente questo: dichiararlo col rimando, senza deciderlo di nuovo")
+RAMI[("primo_ordine/materia_vuoto.py", "N")] = (1, "smistamento", _SING)
+RAMI[("primo_ordine/materia_vuoto.py", "alpha")] = (1, "smistamento", _SING)
+RAMI[("primo_ordine/materia_vuoto.py", "beta")] = (1, "smistamento", _SING)
+# ------------------------------------------------------------------ `motore.py`
+RAMI[("primo_ordine/motore.py", "_b")] = (
+    1, "smistamento",
+    "il BUFFER si alloca UNA VOLTA per scena e poi si RIUSA: il ramo smista fra <<non "
+    "c-e- ancora>> e <<c-e->>. ### E' il vincolo della memoria per tick PIATTA: allocare "
+    "a ogni tick la farebbe crescere, e il conto e' misurato")
+RAMI[("primo_ordine/motore.py", "cresci")] = (
+    3, "smistamento",
+    "TRE rami: `nuove` (due volte) smista fra <<in questo tick NON e' nato niente>> e "
+    "<<sono nate delle estremita'>>, e `v is None` smista sulla VARIABILE ASSENTE -- una "
+    "tabella che non dichiara `psi_h` o `phi_h` e' LEGITTIMA, e pretenderla qui vorrebbe "
+    "dire che il motore sa quali leggi esistono, e NON LO SA")
+RAMI[("primo_ordine/motore.py", "_somma_per_nodo")] = (
+    3, "smistamento",
+    "TRE rami: `self.sommatoria` scegli la VIA DELLA SOMMA, `ee.size == 0` il nodo senza "
+    "estremita', `complesso` il tipo del campo. ### E LA VIA DELLA SOMMA CAMBIA I BIT (con "
+    "tre addendi l-ordine conta), percio' NON e' un valore implicito: e' un ARGOMENTO "
+    "ESPLICITO del motore (`Motore.__init__(self, inc, geo, st, dtau, sommatoria)`, senza "
+    "default) -- verificato il 2026-10-16, come il mandato chiede")
+RAMI[("primo_ordine/motore.py", "main")] = (
+    2, "iterazione",
+    "DUE rami: quanti GIRI di misura secondo la taglia (`20` sotto `10000` nodi, `5` "
+    "sopra), e la frase del referto che dice QUALE dei due costi domina. ### Sono dentro "
+    "il misuratore del modulo: nessuno dei due entra in un risultato di fisica")
+# ------------------------------------------------------------------ `saturazione.py`
+RAMI[("primo_ordine/saturazione.py", "pezzi")] = (
+    1, "smistamento",
+    "il LIMITE a `Lambda = 0` ESATTO: la' si usa la forma limite (`G' = 1`, "
+    "`b = -(pi/2) sign(h)`), e NON e' un pavimento -- e' il valore che la funzione PRENDE "
+    "la'. ### L-argomento sta nel docstring della funzione, con `A11`: un pavimento "
+    "violerebbe `A11`, un LIMITE e' la funzione. ### ⚠ E la scheda della legge NON lo "
+    "nomina: il buco e' riferito, e la legge e' fuori dall-ordine")
+# ------------------------------------------------------------------ `tick.py`
+RAMI[("primo_ordine/tick.py", "percorri_tick")] = (
+    3, "smistamento",
+    "TRE rami, tutti su CAMPI DICHIARATI: `idl not in salta` toglie dei pezzi per `id` "
+    "(e `salta` lo passa il chiamante, esplicito), `k == 0 and al_primo is not None` "
+    "chiama la FOTOGRAFIA dopo il primo pezzo, e `vuole_par` dice se l-operatore prende i "
+    "parametri -- e viene dalla tabella `OPERATORE`, non da un indovinello. ### Nessuno "
+    "dei tre scegli una legge: l-ordine e le frazioni vengono da `composizione.py`, che "
+    "SI GENERA dalla tabella")
+
+
+def _conta(p, base=None):
     """### I rami per funzione, ### **contati dall-AST.**"""
-    arb = ast.parse(io.open(os.path.join(RADICE, p), encoding="utf-8").read(), filename=p)
+    arb = ast.parse(io.open(os.path.join(base or RADICE, p), encoding="utf-8").read(),
+                    filename=p)
     fuori = {}
     for fn in [n for n in ast.walk(arb) if isinstance(n, ast.FunctionDef)]:
         c = 0
@@ -146,16 +267,17 @@ def _conta(p):
     return fuori
 
 
-def default_nelle_firme(p):
+def default_nelle_firme(p, base=None):
     """### I parametri con ### **un valore di default** in un file di fisica.
 
-    ### \u26d4 **IL PUNTO `15(b)`:** *<<un parametro non presente e- un ERRORE, e un
+    ### ⛔ **IL PUNTO `15(b)`:** *<<un parametro non presente e- un ERRORE, e un
     controllo sull-AST RIFIUTA i valori di default nei moduli di fisica>>*.
-    ### \u2b50 **E la ragione e- `CONFIG-1`:** un default e- ### **un valore che gira
+    ### ⭐ **E la ragione e- `CONFIG-1`:** un default e- ### **un valore che gira
     senza che nessuno l-abbia scelto**, e `CONFIG-1` ha misurato dove porta --
     ### **`28` leggi su `31` che giravano SPENTE** senza che nessuno lo sapesse.
     """
-    arb = ast.parse(io.open(os.path.join(RADICE, p), encoding="utf-8").read(), filename=p)
+    arb = ast.parse(io.open(os.path.join(base or RADICE, p), encoding="utf-8").read(),
+                    filename=p)
     fuori = []
     for fn in [n for n in ast.walk(arb) if isinstance(n, ast.FunctionDef)]:
         a = fn.args
@@ -166,20 +288,27 @@ def default_nelle_firme(p):
     return fuori
 
 
-def controlla():
+def controlla(base=None):
+    """### ⛔ **SI APPLICA AL NUCLEO E BASTA**, e la regola lo dice: ### **fuori dal
+    nucleo `P-R1` NON si applica** -- ### **niente eccezioni file per file** *(mandato di
+    Luca del `2026-10-16`)*. ### **Chi vuole i numeri di fuori usa il CENSIMENTO**
+    *(`csv/_censimento_rami.py`)*, che ### **non blocca.**
+    """
     err = []
     visti = set()
-    # ### \u26d4 **IL `15(b)`, PRIMA DI TUTTO:** nessun default nelle firme.
-    for p in file_fisica():
-        for fn, arg in default_nelle_firme(p):
+    dentro = set(nucleo(base))
+    # ### ⛔ **IL `15(b)`, PRIMA DI TUTTO:** nessun default nelle firme, ### **tetto
+    # ### ZERO** -- e nel nucleo e' ### **rispettato** dal `2026-10-16`.
+    for p in nucleo(base):
+        for fn, arg in default_nelle_firme(p, base):
             err.append("`P-R1` `%s::%s`: il parametro `%s` HA UN VALORE DI DEFAULT. "
                        "### Il punto 15(b): un parametro NON PRESENTE e- un ERRORE, non "
                        "un comportamento a sorpresa -- e viene DALLA CONFIGURAZIONE. "
                        "### `CONFIG-1` ha misurato dove porta un valore che gira senza "
                        "che nessuno l-abbia scelto: 28 leggi su 31 SPENTE"
                        % (p, fn, arg))
-    for p in file_fisica():
-        for fn, c in sorted(_conta(p).items()):
+    for p in nucleo(base):
+        for fn, c in sorted(_conta(p, base).items()):
             visti.add((p, fn))
             riga = RAMI.get((p, fn))
             if riga is None:
@@ -200,7 +329,13 @@ def controlla():
                 err.append("`P-R1` `%s::%s`: il `perche-` e- di %d caratteri. "
                            "### Dire QUANTI senza dire A CHE SERVONO non e- dichiararli"
                            % (p, fn, len(str(perche or ""))))
+    # ### ⚠ **UNA RIGA DICHIARATA PER UN FILE CHE NON E' PIU' NEL NUCLEO non e' un
+    # ### errore:** il nucleo ### **si deriva**, e un modulo puo' uscirne perche' nessuno
+    # ### lo importa piu'. ### **Resta un errore se il file E' nel nucleo e la funzione
+    # ### non c'e' piu'.**
     for k in sorted(set(RAMI) - visti):
+        if k[0] not in dentro:
+            continue
         err.append("`P-R1` `%s::%s`: DICHIARATO e l-AST non lo trova. ### O la funzione "
                    "e- sparita, o non ha piu- rami: la riga va tolta" % k)
     return err
@@ -235,6 +370,118 @@ def _finto_default():
     os.remove(p)
     os.rmdir(d)
     return "senza_cache" in trovati
+
+
+# =====================================================================================
+#   I QUATTRO BRACCI DEL NUCLEO -- **su un albero FINTO, fuori dal repo**
+# -------------------------------------------------------------------------------------
+# ### ⛔⛔ **PERCHE' FUORI DAL REPO** *(punto `6` del mandato del `2026-10-16`)*: due
+# ### collaudi di presidio che scrivevano nel repo e poi ripristinavano i byte hanno
+# ### lasciato l'albero sporco ### **due volte** (`OSError: [Errno 22]`). ### ✅ **Qui non
+# ### c'e' niente da ripristinare**, e il controllo e' `git status`.
+# ### ⭐ **E si puo' fare perche' `nucleo()` e `controlla()` prendono `base`:** la mappa e
+# ### i file si leggono da la', e la DERIVAZIONE e' la stessa che gira sul repo.
+_MAPPA_FINTA = """versione: 1
+tetto_righe: 700
+moduli:
+  - nome: tick.py
+    responsabilita: finto
+    importa: []
+  - nome: passo.py
+    responsabilita: finto
+    importa: []
+  - nome: motore.py
+    responsabilita: finto
+    importa: [%s]
+  - nome: materia_vuoto.py
+    responsabilita: finto
+    importa: []
+  - nome: saturazione.py
+    responsabilita: finto
+    importa: []
+  - nome: nuovo.py
+    responsabilita: finto
+    importa: []
+  - nome: _collauda_finto.py
+    responsabilita: finto
+    importa: []
+"""
+
+
+def _albero_finto(base, motore_importa, motore_src, passo_src, nuovo_src, coll_src):
+    po = os.path.join(base, "primo_ordine")
+    if not os.path.isdir(po):
+        os.makedirs(po)
+    io.open(os.path.join(po, "_mappa.yaml"), "wb").write(
+        (_MAPPA_FINTA % motore_importa).encode("utf-8"))
+    for nome, src in (("tick.py", "X = 1" + NL), ("materia_vuoto.py", "X = 1" + NL),
+                      ("saturazione.py", "X = 1" + NL), ("motore.py", motore_src),
+                      ("passo.py", passo_src), ("nuovo.py", nuovo_src),
+                      ("_collauda_finto.py", coll_src)):
+        io.open(os.path.join(po, nome), "wb").write(src.encode("utf-8"))
+    return po
+
+
+def bracci_del_nucleo(esito):
+    import shutil
+    import tempfile
+    PULITO = "X = 1" + NL
+    RAMO = ("def finta(x):" + NL + "    if x:" + NL + "        return 1" + NL
+            + "    return 0" + NL)
+    DFLT = ("def finta2(x, quanti=3):" + NL + "    return x * quanti" + NL)
+    base = tempfile.mkdtemp(prefix="pr1_")
+    try:
+        # ### ⛔⛔ **I BRACCI SONO DIFFERENZIALI, e il motivo e' MISURATO:** sul
+        # ### l-albero finto `controlla` da' ### **`15` errori DI FONDO**, perche' le righe
+        # ### VERE di `RAMI` nominano funzioni che ### **il finto non ha.** ### ✅ **Quindi
+        # ### si guarda la DIFFERENZA da un albero PULITO**: cosi' il braccio dice
+        # ### ### **<<questo errore e' NATO dal mio caso finto>>**, e non
+        # ### ### **<<ci sono errori>>**.
+        _albero_finto(base, "", PULITO, PULITO, PULITO, PULITO)
+        fondo = controlla(base)
+
+        def nuovi():
+            return [x for x in controlla(base) if x not in fondo]
+
+        esito("### il FONDO dell-albero finto e' noto, e i bracci guardano la DIFFERENZA",
+              bool(fondo) and not nuovi(),
+              "### %d errori di fondo (le righe vere citano funzioni che il finto non ha),"
+              " e sul pulito la differenza e' VUOTA" % len(fondo))
+        # ### ⛔ **① UN RAMO NUOVO NON DICHIARATO IN UN FILE DEL NUCLEO.**
+        _albero_finto(base, "", RAMO, PULITO, PULITO, PULITO)
+        e = nuovi()
+        esito("### ① DEVE fallire: un ramo NUOVO non dichiarato in un file del NUCLEO",
+              any("motore.py::finta" in x and "NON E- DICHIARATO" in x for x in e),
+              "### %d errori NUOVI, e il nucleo derivato dalla mappa finta e' %d file"
+              % (len(e), len(nucleo(base))))
+        # ### ⛔ **② UN DEFAULT IN UN FILE DEL NUCLEO: il tetto e' ZERO.**
+        _albero_finto(base, "", PULITO, DFLT, PULITO, PULITO)
+        e = nuovi()
+        esito("### ② DEVE fallire: un `default` in una firma del NUCLEO (tetto ZERO)",
+              any("passo.py::finta2" in x and "VALORE DI DEFAULT" in x for x in e),
+              "### %d errori NUOVI" % len(e))
+        # ### ⛔⛔ **③ UN FILE CHE ENTRA NEL NUCLEO PER IMPORT, e porta rami non
+        # ### dichiarati.** ### **E' la prova che la DERIVAZIONE lavora**: il file non e'
+        # ### in nessuna lista, e ### **ci entra perche' il motore lo importa.**
+        _albero_finto(base, "", PULITO, PULITO, RAMO, PULITO)
+        prima = nuovi()
+        _albero_finto(base, "nuovo", PULITO, PULITO, RAMO, PULITO)
+        dopo = nuovi()
+        esito("### ③ DEVE fallire: un file che ENTRA nel nucleo per import, coi suoi rami",
+              not prima and any("nuovo.py::finta" in x for x in dopo),
+              "### senza l-import: %d errori nuovi; con l-import: %d. ### Il file e' lo"
+              " STESSO: cambia solo CHI LO IMPORTA" % (len(prima), len(dopo)))
+        # ### ⭐⭐ **IL CASO CHE DEVE PASSARE: un ramo nuovo in un COLLAUDO fuori dal
+        # ### nucleo.** ### **Senza questo, <<fuori dal nucleo non si applica>> sarebbe
+        # ### una frase e non un fatto.**
+        _albero_finto(base, "", PULITO, PULITO, PULITO, RAMO)
+        e = nuovi()
+        esito("### (c) DEVE PASSARE: un ramo nuovo in un COLLAUDO fuori dal nucleo",
+              not e,
+              "### %d errori nuovi: fuori dal nucleo `P-R1` NON si applica, e il collaudo"
+              " finto ha 1 ramo" % len(e))
+    finally:
+        shutil.rmtree(base, ignore_errors=True)
 
 
 def collaudo():
@@ -298,8 +545,7 @@ def collaudo():
           "### i bracci di sopra scattavano per i loro casi finti")
     # --- E IL RAPPORTO: i `default` erano NOVE, e il punto `15(b)` li ha TOLTI
     r = rapporto()
-    ng = r.get("guardia", [0, 0])
-    # ### \u26d4 **IL `15(b)`: i default sono ZERO, e il braccio che DEVE scattare.**
+    # ### ⛔ **IL `15(b)`: i default sono ZERO, e il braccio che DEVE scattare.**
     esito("`15(b)` i DEFAULT nelle firme della fisica sono ZERO",
           not any("VALORE DI DEFAULT" in e for e in controlla()),
           "### erano NOVE il 2026-10-09, e il punto 15(b) li ha TOLTI")
@@ -334,18 +580,35 @@ def collaudo():
     # ### dentro ma ### **non sono legami** -- hanno le DERIVATE, non un operatore del
     # ### motore. ### **Il primo conto diceva `10` contro `8` guardie, e il braccio lo
     # ### ha detto.**
-    legami = 0
-    for _x in file_fisica():
-        if "/termini/" not in _x:
+    # ### ⛔⛔ **DAL `2026-10-16` I LEGAMI GENERATI SONO FUORI DAL NUCLEO**, e le
+    # ### loro `8` righe di `RAMI` sono state ### **togliate**: una dichiarazione per un
+    # ### file che il presidio non guarda piu' sarebbe ### **una riga morta.**
+    # ### ✅ **MA IL CONTROLLO NON SI PERDE: DIVENTA DERIVATO.** Non chiede piu' una
+    # ### riga per legame; chiede che ### **ogni legame generato abbia ESATTAMENTE la sua
+    # ### guardia**, contata dall-AST. ### **Cosi' una legge nuova entra da sola, e una
+    # ### guardia che spariva si vedrebbe.**
+    # ### ⭐ **E `A11` HA IL SUO ERRORE, che resta quello di prima:** la guardia scatta
+    # ### quando ### **la tabella dichiara un operatore che il MOTORE non ha**, cioe' quando
+    # ### la biiezione ### **tabella <-> motore** e' rotta.
+    # ### ⚠ **E <<legame>> vuol dire <<ha `applica`>>, non <<sta in `termini/`>>:** i
+    # ### termini di PROVA sono generati la' dentro e ### **non sono legami** -- hanno le
+    # ### derivate, non un operatore del motore.
+    legami, senza = [], []
+    for _x in sorted(glob.glob(os.path.join(RADICE, "primo_ordine", "termini", "*.py"))):
+        _t = io.open(_x, encoding="utf-8").read()
+        if "def applica(" not in _t:
             continue
-        if "def applica(" in io.open(os.path.join(RADICE, _x),
-                                    encoding="utf-8").read():
-            legami += 1
-    esito("### e le `guardia` sono UNA PER LEGAME, e `A11` ha il suo errore",
-          ng[0] == legami,
-          "### %d guardie e %d legami generati. ### L-errore: la tabella dichiara un "
-          "operatore che il MOTORE non ha, cioe- la biiezione tabella <-> motore rotta"
-          % (ng[0], legami))
+        _rel = os.path.relpath(_x, RADICE).replace(os.sep, "/")
+        legami.append(_rel)
+        if _conta(_rel).get("applica") != 1:
+            senza.append((_rel, _conta(_rel).get("applica")))
+    esito("### ogni LEGAME generato ha ESATTAMENTE la sua guardia (contata, non dichiarata)",
+          bool(legami) and not senza,
+          "### %d legami generati, %d senza la loro guardia%s. ### L-errore che la guardia "
+          "nomina: la tabella dichiara un operatore che il MOTORE non ha, cioe- la "
+          "biiezione tabella <-> motore rotta" % (len(legami), len(senza),
+                                                  ("   " + str(senza)) if senza else ""))
+    bracci_del_nucleo(esito)
     print("=" * 100)
     print("IL COLLAUDO DI `P-R1`: %d su %d   %s"
           % (ok[0], ok[1], "### TUTTI PASSATI" if ok[0] == ok[1] else "### CI SONO BUCHI"))
@@ -360,8 +623,13 @@ def main(argv):
         return collaudo()
     err = controlla()
     tot = sum(q for q, _r, _p in RAMI.values())
-    print("  `P-R1`: %d rami dichiarati in %d funzioni, su %d file di fisica"
-          % (tot, len(RAMI), len(file_fisica())))
+    n = nucleo()
+    print("  `P-R1`: %d rami dichiarati in %d funzioni, sui %d file del NUCLEO"
+          % (tot, len(RAMI), len(n)))
+    print("     il nucleo, DERIVATO dalle radici %s: %s"
+          % (" ".join(RADICI), " ".join(x.split("/")[-1] for x in n)))
+    print("     ### e FUORI dal nucleo `P-R1` NON si applica: i numeri di fuori stanno"
+          " nel CENSIMENTO (`csv/_censimento_rami.py`), che NON blocca")
     for r, (nf, nr) in sorted(rapporto().items()):
         print("     %-14s %2d funzioni, %2d rami%s"
               % (r, nf, nr,

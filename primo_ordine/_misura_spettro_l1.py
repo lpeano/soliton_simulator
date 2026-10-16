@@ -55,6 +55,7 @@ import os
 import sys
 
 import numpy as np
+import tick as TK
 
 _QUI = os.path.dirname(os.path.abspath(__file__))
 if _QUI not in sys.path:
@@ -300,7 +301,7 @@ def passo(mot, st, ordine):
     import deriva as DV
     mot.apri_tick()
     for idl, fr in ordine:
-        nome, vuole_par = DV.OPERATORE[idl]
+        nome, vuole_par = TK.OPERATORE[idl]
         mot.operatori[nome](st, {"eps": EPS} if vuole_par else {}, fr)
     mot.chiudi_tick()
 

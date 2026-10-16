@@ -9,7 +9,7 @@
 | `DOCUMENTAZIONE` | `2` | 1 |
 | `DOCUMENTAZIONE` | `ENTRAMBE` | 9 |
 | `FISICA` | `1` | 343 |
-| `FISICA` | `2` | 129 |
+| `FISICA` | `2` | 130 |
 | `FISICA` | `ENTRAMBE` | 21 |
 | `INFRASTRUTTURA` | `1` | 39 |
 | `INFRASTRUTTURA` | `2` | 22 |
@@ -291,6 +291,7 @@
 | `DOMANDA-D13-CONIUGATI` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | D13: i coniugati delle memorie -- tw come fase U(1) sull-arco? |
 | `DOMANDA-D9-GEOMETRIA` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | D9: la geometria viene da d e p_d dentro H, o dalle relazioni fra gli psi? |
 | `DOMANDA-DOVE-STA-LA-C-IN-TABELLA` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | la C e decisa al punto F3 e nessuna legge della tabella la dichiara |
+| `DOMANDA-DUE-SOGLIE-SENZA-ERRORE` | DIFETTO | FISICA | 2 | ### **AGENDA** |  | due soglie senza l-errore da cui proteggono: tol in corrente.instrada e il limit |
 | `DOMANDA-E-NON-SI-CONSERVA-A-X-UNO` | DECISIONE | FISICA | 2 | ### **CHIUSA** |  | E non si conserva nel regime in cui la saturazione lavora, e i termini non si co |
 | `DOMANDA-ESTREMITA-NUOVE-INIZIALI` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | con che psi e che phi nascono le estremita di un arco nuovo |
 | `DOMANDA-FLUSSO-SENZA-AZIONE` | DECISIONE | METODO | 2 | ### **AGENDA** |  | un flusso non dichiara dove agisce: lo schema non ha il campo azione per lui |

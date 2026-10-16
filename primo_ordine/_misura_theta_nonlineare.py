@@ -56,6 +56,7 @@ if _QUI not in sys.path:
 sys.path.insert(0, os.path.join(os.path.dirname(_QUI), "csv"))
 
 import _misura_theta_n as TN                                  # noqa: E402
+import tick as TK                                             # noqa: E402
 
 OK = [0, 0]
 # ### ⛔ **LA CONFIGURAZIONE INTERA, DICHIARATA E STAMPATA.** ### **La scena e' quella di
@@ -109,7 +110,7 @@ def passo(mot, st, solo_lineare=False):
     for idl, fr, _t in CM.ORDINE:
         if solo_lineare and idl in MO.FLUSSI:
             continue
-        nome, vuole_par = DV.OPERATORE[idl]
+        nome, vuole_par = TK.OPERATORE[idl]
         mot.operatori[nome](st, {"eps": TN.EPS} if vuole_par else {}, fr)
     mot.chiudi_tick()
     return (st["psi_h"].copy(), st["phi_h"].copy())
@@ -167,7 +168,7 @@ def braccio_strumenti(dtau, P):
         import deriva as DV
         metti(st, s0)
         mot.apri_tick()
-        nome, _vp = DV.OPERATORE["CAMM-GROVER"]
+        nome, _vp = TK.OPERATORE["CAMM-GROVER"]
         mot.operatori[nome](st, {}, -0.5)
         mot.chiudi_tick()
     except AssertionError as e:                               # noqa: BLE001

@@ -87,6 +87,7 @@ FILE_FISICA = (
     "soliton_simulator.py",
     'primo_ordine/__init__.py',
     'primo_ordine/stato.py',
+    'primo_ordine/tick.py',
     'primo_ordine/hamiltoniana.py',
     'primo_ordine/passo.py',
     'primo_ordine/grafo.py',

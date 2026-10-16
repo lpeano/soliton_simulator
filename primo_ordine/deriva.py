@@ -42,58 +42,11 @@ if _QUI not in sys.path:
     sys.path.insert(0, _QUI)
 
 import composizione as CM                                     # noqa: E402
+import tick as TK                                             # noqa: E402
 import deriva_serie as DS                                     # noqa: E402
 import deriva_variabile as DVAR                                     # noqa: E402
 import energia as EN                                          # noqa: E402
 import deriva_referto as RF                                   # noqa: E402
-
-# ### ⛔ **LA LEGGE -> L'OPERATORE, e NON e' una mia scelta:** la lista delle leggi e il
-# ### loro ordine stanno in `composizione.py`, che e' ### **GENERATA dalla tabella**; qui
-# ### c'e' solo ### **il nome con cui il motore registra ciascuna.**
-# ### ⚠ **E un `id` che non e' in questa mappa FERMA**, invece di essere saltato in
-# ### silenzio: ### **un pezzo del tick che non gira e' un tick diverso.**
-OPERATORE = {
-    # ### ⭐⭐ **IL FLUSSO CHE GIRA dal `2026-10-15`** *(decisione di Luca)*:
-    # ### `CAMM-MATERIA-VUOTO` ### **sostituisce** `CAMM-SATURAZIONE` nell-ordine di
-    # ### composizione. ### ⚠ **La riga della saturazione RESTA**, perche- la legge
-    # ### resta in tabella e il suo operatore esiste: ### **una riga tolta da qui
-    # ### farebbe ALZARE il tick se qualcuno la rimettesse nell-ordine**, invece di
-    # ### girare.
-    "CAMM-MATERIA-VUOTO": ("CAMM-MATERIA-VUOTO", False),
-    "CAMM-SATURAZIONE": ("CAMM-SATURAZIONE", False),
-    "CAMM-MONETA-SPIN": ("moneta_spin", True),
-    "CAMM-GROVER": ("grover", False),
-    "CAMM-SPOSTAMENTO": ("spostamento_trasporto", False),
-    "CAMM-GROVER-VUOTO": ("grover_scalare", False),
-    "CAMM-SPOSTAMENTO-VUOTO": ("spostamento_scalare", False),
-}
-
-
-def percorri_tick(st, mot, par, salta=(), al_primo=None):
-    """### IL TICK, PERCORSO IN UN SOLO POSTO: ### **l-ordine della tabella, INTERO.**
-
-    ### ⛔⛔ **ESISTE PERCHE- C-ERANO DUE PERCORSI** *(cura del `2026-10-16`)*:
-    `tick` faceva l-ordine intero, `sorgente_per_nodo` applicava ### **un pezzo A MANO,
-    per nome**, e poi `CM.ORDINE[1:]` -- cioe- ### **un passo MISTO fra due leggi.** Con
-    un solo posto ### **quel difetto non si puo- piu- scrivere.**
-
-    `al_primo(st)` *(se dato)* si chiama ### **dopo il PRIMO pezzo dell-ordine, qualunque
-    esso sia**: e- la fotografia dello stato che entra nei pezzi lineari.
-    `salta` toglie dei pezzi ### **per id**, e serve a `vuoto_cammina=False`.
-    """
-    mot.apri_tick()
-    for k, (idl, frazione, _tipo) in enumerate(CM.ORDINE):
-        if idl not in salta:
-            nome, vuole_par = OPERATORE.get(idl, (None, None))
-            assert nome, (
-                "la legge `%s` e' nell'ordine di composizione e NON e' in `OPERATORE`:"
-                " ### **un pezzo del tick che non gira e' un tick diverso**, e saltarlo in"
-                " silenzio sarebbe misurare un'altra cosa" % idl)
-            mot.operatori[nome](st, par if vuole_par else {}, frazione)
-        if k == 0 and al_primo is not None:
-            al_primo(st)
-    mot.chiudi_tick()
-
 
 def fotografo(inc, mot, par, cassa):
     """### IL CALLBACK che fotografa lo stato ### **e costruisce `J` SU QUELLO.**
@@ -110,11 +63,6 @@ def fotografo(inc, mot, par, cassa):
         cassa["J"], cassa["portata"], cassa["dia"] = CO.instrada(
             cassa["Q"], inc, CO.x_da_psi(mezzo["psi_h"]))
     return _f
-
-
-def tick(st, mot, par):
-    """### UN tick, ### **nell'ordine della tabella e non in uno mio.**"""
-    percorri_tick(st, mot, par)
 
 
 def due_termini(st, mot, par):
@@ -216,7 +164,7 @@ def corri(nn, dtau, ticks, seme=7, lunghezza=0, ogni=1, norma="locale",
     e1, e2 = due_termini(st, mot, par)
     serie = [(0, e1 + e2, e1, e2)]
     for t in range(1, ticks + 1):
-        tick(st, mot, par)
+        TK.tick(st, mot, par)
         if (t % ogni) == 0 or t == ticks:
             e1, e2 = due_termini(st, mot, par)
             serie.append((t, e1 + e2, e1, e2))
@@ -398,8 +346,7 @@ def sorgente_per_nodo(nn=16, dtau=0.2, seme=7, norma="locale", vuoto_cammina=Tru
     DVAR.flusso_che_gira()
     salta = () if vuoto_cammina else ("CAMM-GROVER-VUOTO", "CAMM-SPOSTAMENTO-VUOTO")
     cassa = {}
-    percorri_tick(st, mot, par, salta=salta,
-                  al_primo=fotografo(inc, mot, par, cassa))
+    TK.percorri_tick(st, mot, par, salta, fotografo(inc, mot, par, cassa))
     dopo = EN.per_nodo(st, mot, par).copy()
     s = (dopo - prima) - CO.divergenza(cassa["J"], inc)
     return s, (dopo - prima), cassa["portata"], sat

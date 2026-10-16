@@ -43,6 +43,7 @@ import subprocess
 import sys
 
 import numpy as np
+import tick as TK
 
 _QUI = os.path.dirname(os.path.abspath(__file__))
 if _QUI not in sys.path:
@@ -60,6 +61,10 @@ SU2 = True
 PEZZI = ("CAMM-GROVER", "CAMM-SPOSTAMENTO", "CAMM-GROVER-VUOTO",
          "CAMM-SPOSTAMENTO-VUOTO", "CAMM-MONETA-SPIN", "CAMM-SATURAZIONE")
 
+# ### ⛔ **I FILE DELLA MISURA che viaggiano nell-albero vecchio**, e nient-altro: il
+# ### ### **SIMULATORE la- dentro resta QUELLO DI PRIMA.**
+VIAGGIANO = ("_misura_mb1.py", "tick.py")
+
 
 def timbra(b):
     return hashlib.sha1(b).hexdigest()[:12]
@@ -73,7 +78,7 @@ def _byte(st):
 def un_pezzo(idl, nn, seme):
     """### I byte dopo **UNA** applicazione del pezzo `idl`, a `theta = pi`."""
     import deriva as DV
-    nome, vuole_par = DV.OPERATORE[idl]
+    nome, vuole_par = TK.OPERATORE[idl]
     _i, mot, st, par = DV.scena(nn, seme, DTAU, norma=NORMA,
                                 vuoto_modulo=VUOTO_MODULO, su2=SU2)
     mot.apri_tick()
@@ -88,7 +93,7 @@ def il_passo(nn, seme):
     _i, mot, st, par = DV.scena(nn, seme, DTAU, norma=NORMA,
                                 vuoto_modulo=VUOTO_MODULO, su2=SU2)
     for _t in range(TICK):
-        DV.tick(st, mot, par)
+        TK.tick(st, mot, par)
     return _byte(st), (st["psi_h"].copy(), st["phi_h"].copy())
 
 
@@ -166,8 +171,19 @@ def contro(commit):
     qui, la = os.path.join(fuori, "ora.bin"), os.path.join(fuori, "prima.bin")
     print("### (1) QUESTO ALBERO:")
     scrivi(qui)
-    shutil.copyfile(os.path.abspath(__file__),
-                    os.path.join(vecchio, "primo_ordine", "_misura_mb1.py"))
+    # ### ⛔⛔ **I MODULI CHE VIAGGIANO COL CONFRONTO, dichiarati** *(`2026-10-16`)*:
+    # ### la misura di oggi gira ### **sul codice di prima**, quindi deve poter essere
+    # ### ### **importata** la- dentro. ### ⚠ **`tick.py` e- nell-elenco perche- il
+    # ### `2026-10-16` `percorri_tick` e `OPERATORE` sono stati SPOSTATI** da `deriva.py`
+    # ### a un modulo suo: nell-albero vecchio quel file ### **non esiste**, e senza di lui
+    # ### la misura ### **non parte.**
+    # ### ✅ **E lo spostamento e- VERBATIM, provato al carattere** *(le due funzioni e
+    # ### il dizionario sono ### **identici** a quelli di `26f5f247`)*: portarlo nell-albero
+    # ### vecchio ### **non porta dentro codice NUOVO**, porta ### **lo stesso codice da
+    # ### un altro file.**
+    for q in VIAGGIANO:
+        shutil.copyfile(os.path.join(radice, "primo_ordine", q),
+                        os.path.join(vecchio, "primo_ordine", q))
     print("### (2) %s, dal worktree:" % commit[:7])
     r = subprocess.run([sys.executable, os.path.join("primo_ordine", "_misura_mb1.py"),
                         "--scrivi", la], cwd=vecchio, capture_output=True)

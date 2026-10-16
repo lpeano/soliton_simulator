@@ -104,8 +104,15 @@ def controlla(ii, jj, n, dove):
         chr(10) + "  " + x for x in err)
 
 
-def costo(n=9, archi=None, giri=2000):
-    """### Il costo del controllo, ### **MISURATO** -- per il budget del punto `6`."""
+def costo(n, archi, giri):
+    """### Il costo del controllo, ### **MISURATO** -- per il budget del punto `6`.
+
+    ### ⛔ **NESSUN ARGOMENTO HA UN VALORE DI COMODO** *(punto `15(b)`, dal
+    `2026-10-16`)*: `grafo.py` e- ### **nel NUCLEO della fisica** -- ci entra perche-
+    ### **`incidenza.py` lo importa** -- e la- il tetto dei `default` e- ### **ZERO.**
+    ### ⚠ **E i tre numeri sono i PARAMETRI DELLA MISURA**, quindi stanno
+    ### **in `main`, dove sta la misura**, e non nella firma.
+    """
     import time
     if archi is None:
         ii = np.arange(n - 1, dtype=int)
@@ -130,7 +137,8 @@ def main(argv):
     puo- vivere dentro quel modulo.**
     """
     del argv
-    t = costo()
+    # ### i parametri DELLA MISURA, espliciti: una catena di `9` nodi, `2000` giri
+    t = costo(9, None, 2000)
     print("  il controllo del grafo: %.3f us per chiamata (catena, 9 nodi, 8 archi)"
           % (t * 1e6))
     return 0
