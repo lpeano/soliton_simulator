@@ -17924,3 +17924,35 @@ da' ### **`0`.** Contava ### **le righe**, non i `CR`.
 ### ✅ **E I BLOB DICHIARATI NON SONO TOCCATI:** ho verificato che il `c21cabb8` citato
 nella RIPRESA per `suite_dopo_la_sostituzione.txt` e' ### **il blob dello STRUMENTO che
 l'ha prodotto**, non del referto — ### **nessuna impronta dichiarata cambia.**
+### ⛔ **PEZZO `7` COMINCIATO: `P-R1` SI RESTRINGE AL NUCLEO — E DUE PREMESSE DEL
+MANDATO NON TORNANO**
+
+**Il task history e' committato prima del codice**
+*(`doc/TASK_HISTORY/2026-10-16_7_p_r1_si_restringe_al_nucleo.md`)*.
+
+### ⭐ **IL NUCLEO, DERIVATO: `9` file**, dalla chiusura degli import a partire dalle
+radici dichiarate `passo.py` · `motore.py` · `materia_vuoto.py` · `saturazione.py`
+— letta da `_mappa.yaml`, che `[[P-MOD]]` tiene allineata al codice.
+### **I numeri: `14` funzioni non dichiarate, `24` rami, `3` default.**
+
+### ⛔⛔ **PREMESSA `n.1` CHE NON TORNA: i `default` nel nucleo NON sono zero.**
+Il mandato dice *«tetto zero, gia' rispettato»*: ### **`grafo.py` ne ha `3`**, tutti
+in `costo(n=9, archi=None, giri=2000)` — ### **un MISURATORE dentro un modulo del
+nucleo**, e `grafo.py` entra perche' ### **`incidenza.py` lo importa.** L'elenco informale
+del mandato ### **non conteneva `grafo.py`.**
+### ✅ **Li rendo espliciti** *(non e' una scelta di fisica: nessun numero cambia)*.
+
+### ⛔⛔ **PREMESSA `n.2`: `energia.py` NON E' NEL NUCLEO.** Il mandato lo elenca, ma
+### **nessuna radice lo importa** — lo importa `deriva.py`, che e' uno strumento.
+### **Quindi il suo ramo NON lo dichiaro**, invece di dichiararlo per somiglianza.
+
+### ⚠ **E LA RESTRIZIONE RINUNCIA A QUALCOSA, lo dico adesso:** `crescita.py`,
+`vuoto.py` e `termini/*.py` ### **non sono importati da nessuno** *(misurato)*, quindi
+escono dal nucleo — e ### **oggi hanno TUTTI i rami dichiarati.**
+### ✅ **Ma e' il nucleo derivato che lavora per noi: ci rientreranno DA SOLE il giorno
+in cui il passo le importera'.**
+
+### ⭐ **E `percorri_tick` si sposta in `primo_ordine/tick.py`**, che diventa
+### **una radice dichiarata e PROVVISORIA** *(fino al campo `modulo`, pezzo `6`)*.
+### ⛔ **NON in `composizione.py`, che SI GENERA.** ### **Il criterio e' `M-B1` AL BIT
+e il braccio `(c)` invariato: se si muove un bit, STOP.**
