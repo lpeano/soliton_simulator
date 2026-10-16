@@ -17705,3 +17705,32 @@ va in CODA, non lo interrompe)*.
 L'avevo ### **ricopiato a mano**, e `[[L-NUMERI]]` dice che ### **un numero ricopiato non
 ha provenienza.** ### **Adesso lo conta lo script** che scrive la tabella qui sopra, e la
 voce `[[P-TAB]]` porta la correzione col suo motivo.
+### ⛔ **PEZZO `5` COMINCIATO, E IL CASO CHE DEVE FALLIRE DEL MANDATO E' IMPOSSIBILE**
+
+**Il task history e' committato prima del codice**
+*(`doc/TASK_HISTORY/2026-10-16_5_scala_naturale_di_N.md`)*, e dentro ci sono
+### **la derivazione**, ### **l'errore mio** e ### **due cose che non so.**
+
+### ⛔⛔ **LA COSA CHE DEVO DIRE AL GUARDIANO PRIMA DI MISURARE:** il mandato chiede
+*«un caso che DEVE fallire: la vecchia scala `nat2` della saturazione applicata a uno
+stato dove viene superata»*. ### **Quel caso non esiste**, e il conto e' di una riga:
+
+```
+nat2 = somma|h| + (pi/2) * somma Lambda  >=  (pi/2) * V  ~  1.5708 * V
+somma|N| <= V                            quindi   somma|N| / nat2 <= 2/pi ~ 0.6366
+```
+
+### ⚠ **Cioe' `nat2` e' un limite VALIDO ma LASCO di almeno `pi/2`:** un caso che lo supera
+### **non si puo' costruire**, e un braccio che *«deve fallire»* su una cosa
+impossibile ### **passerebbe SEMPRE** — ### **un falso-uno.**
+
+### ✅ **QUINDI NE METTO DUE CHE POSSONO FALLIRE DAVVERO**, e li dichiaro:
+### ① ### **`rho` come scala DEVE fallire** *(`|N|/rho = ln(1 + Lambda/rho)` non e'
+limitata: a `rho = 1e-8` e `Lambda = 1e8` vale `~36.8`)* — cosi' il braccio di `V` non
+e' verde per costruzione; ### ② ### **la forma float che gira DEVE superare `V`** a
+`rho/Lambda` enorme *(misurato `1.976`)*, ### **ed e' la PRECISIONE e non la legge.**
+
+### ⛔ **E `log1p` NON LO TOCCO in questo pezzo**, come il mandato prescrive: sarebbe
+### **una modifica della FORMA FLOAT della legge**, e ### **`M-B1` al bit non reggerebbe
+piu'.** ### **Lo dichiaro come proposta e mi fermo la'**; il limite va ### **nella scheda
+della legge.**
