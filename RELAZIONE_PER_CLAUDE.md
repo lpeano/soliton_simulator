@@ -17660,3 +17660,48 @@ di oggi `rho/Lambda` e' lontanissimo da la'.**
 — e il pezzo e' ### **in coda come `5`**, ### **commit a se'**, perche' il lavoro in
 corso e' il presidio della regola *(`L-UN-PROMPT`: un mandato che arriva DURANTE un lavoro
 va in CODA, non lo interrompe)*.
+
+### ✅ **`P-TAB` APPLICATO A CIO' CHE C'E' OGGI** — *la tabella file/simbolo/esito, punto `5` del mandato*
+
+*(dal referto `doc/REFERTO_strumento_dalla_tabella.txt`, generato dal blob ### **committato** `sha1-BYTE b557a18a`.)*
+
+| file | simbolo | specie | volte | esito |
+|---|---|---|---|---|
+| `csv/_censimento_legge_vecchia.py` | `CAMM-SATURAZIONE` | `id-fuori-ordine` | `18` | `DICHIARATA` *(legittima)* |
+| `primo_ordine/_collauda_deriva.py` | `saturazione` | `import-legge-vecchia` | `1` | `DICHIARATA` *(legittima)* |
+| `primo_ordine/_collauda_saturazione.py` | `CAMM-SATURAZIONE` | `id-fuori-ordine` | `8` | `DICHIARATA` *(legittima)* |
+| `primo_ordine/_collauda_saturazione.py` | `saturazione` | `import-legge-vecchia` | `1` | `DICHIARATA` *(legittima)* |
+| `primo_ordine/_collauda_tempo_proprio.py` | `CAMM-SATURAZIONE` | `id-fuori-ordine` | `1` | ### ⛔ **DICHIARATA, e SCADUTA** |
+| `primo_ordine/_misura_forme_l2.py` | `CAMM-SATURAZIONE` | `id-fuori-ordine` | `7` | ### ⛔ **DICHIARATA, e SCADUTA** |
+| `primo_ordine/_misura_mb1.py` | `CAMM-SATURAZIONE` | `id-fuori-ordine` | `1` | ### ⛔ **DICHIARATA, e SCADUTA** |
+| `primo_ordine/_misura_mb2.py` | `CAMM-SATURAZIONE` | `id-fuori-ordine` | `2` | `DICHIARATA` *(legittima)* |
+| `primo_ordine/_misura_mb2.py` | `saturazione` | `import-legge-vecchia` | `1` | ### ⛔ **DICHIARATA, e SCADUTA** |
+| `primo_ordine/_misura_pari_l2.py` | `saturazione` | `import-legge-vecchia` | `2` | `DICHIARATA` *(legittima)* |
+| `primo_ordine/_misura_spettro_l1.py` | `CAMM-SATURAZIONE` | `id-fuori-ordine` | `3` | ### ⛔ **DICHIARATA, e SCADUTA** |
+| `primo_ordine/_misura_verso_l2.py` | `CAMM-SATURAZIONE` | `id-fuori-ordine` | `2` | `DICHIARATA` *(legittima)* |
+| `primo_ordine/_misura_verso_l2.py` | `saturazione` | `import-legge-vecchia` | `2` | `DICHIARATA` *(legittima)* |
+| `primo_ordine/bande.py` | `CAMM-SATURAZIONE` | `id-fuori-ordine` | `1` | ### ⛔ **DICHIARATA, e SCADUTA** |
+| `primo_ordine/deriva.py` | `CAMM-SATURAZIONE` | `id-fuori-ordine` | `2` | `DICHIARATA` *(legittima)* |
+| `primo_ordine/deriva.py` | `saturazione` | `import-legge-vecchia` | `1` | ### ⛔ **DICHIARATA, e SCADUTA** |
+| `primo_ordine/energia.py` | `saturazione` | `import-legge-vecchia` | `1` | ### ⛔ **DICHIARATA, e SCADUTA** |
+| `primo_ordine/motore.py` | `CAMM-SATURAZIONE` | `id-fuori-ordine` | `3` | `DICHIARATA` *(legittima)* |
+| `primo_ordine/motore.py` | `saturazione` | `import-legge-vecchia` | `1` | `DICHIARATA` *(legittima)* |
+| `primo_ordine/termini/camm_forma_d.py` | `CAMM-FORMA-D` | `id-fuori-ordine` | `1` | `DICHIARATA` *(legittima)* |
+| `primo_ordine/termini/camm_saturazione.py` | `CAMM-SATURAZIONE` | `id-fuori-ordine` | `1` | `DICHIARATA` *(legittima)* |
+
+| | quante |
+|---|---|
+| reperti | **`60`** |
+| coppie file/simbolo | **`21`** |
+| eccezioni dichiarate | `21` |
+| coppie ### **NON coperte** | ### **`0`** |
+| eccezioni ### **ORFANE** | ### **`0`** |
+| di cui ### **dichiarate SCADUTE nel motivo** | ### **`8`** |
+
+### ⚠ **`DICHIARATA` NON VUOL DIRE ASSOLTA:** ### **`8` delle `21`** dichiarano ### **SCADUTO nel loro motivo**, e le cure sono i pezzi `2-quinquies`, `2-sexies` e `2-septies` della coda. ### **Il presidio le tiene VISIBILI invece di lasciarle invisibili**, che e' tutto cio' che un presidio puo' fare quando la cura e' un altro commit.
+
+### ⭐ **E IL NUMERO CHE CONTA DAVVERO E' `0`:** ### **zero coppie non coperte** e ### **zero orfane.** ### **Da oggi un riferimento nuovo a una legge fuori dall'ordine NON passa**, e un'eccezione che sopravvive alla sua cura ### **fa fallire il commit.**
+### ⚠ **E UNA CORREZIONE AL MESSAGGIO DI `fcee431`: le SCADUTE sono `8`, non `7`.**
+L'avevo ### **ricopiato a mano**, e `[[L-NUMERI]]` dice che ### **un numero ricopiato non
+ha provenienza.** ### **Adesso lo conta lo script** che scrive la tabella qui sopra, e la
+voce `[[P-TAB]]` porta la correzione col suo motivo.

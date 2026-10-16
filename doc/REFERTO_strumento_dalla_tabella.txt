@@ -1,0 +1,34 @@
+[TIMBRO] _strumento_dalla_tabella.py  sha1-BYTE b557a18a  committato e pulito
+`P-TAB` -- LO STRUMENTO LEGGE LA LEGGE DALLA TABELLA
+
+  le leggi FUORI dall-ordine, DERIVATE dalla tabella: CAMM-FORMA-D  CAMM-SATURAZIONE
+  i moduli di quelle leggi, DICHIARATI: saturazione
+
+  file                                         simbolo                specie                         righe
+  ----------------------------------------------------------------------------------------------------------------
+  csv/_censimento_legge_vecchia.py             CAMM-SATURAZIONE       id-fuori-ordine                25 25 36 38 42 48 50 54 61 63 71 73 75 78 96 98 101 110
+  primo_ordine/_collauda_deriva.py             saturazione            import-legge-vecchia           41
+  primo_ordine/_collauda_saturazione.py        CAMM-SATURAZIONE       id-fuori-ordine                109 115 134 151 156 157 184 236
+  primo_ordine/_collauda_saturazione.py        saturazione            import-legge-vecchia           26
+  primo_ordine/_collauda_tempo_proprio.py      CAMM-SATURAZIONE       id-fuori-ordine                115
+  primo_ordine/_misura_forme_l2.py             CAMM-SATURAZIONE       id-fuori-ordine                128 140 144 168 170 172 181
+  primo_ordine/_misura_mb1.py                  CAMM-SATURAZIONE       id-fuori-ordine                61
+  primo_ordine/_misura_mb2.py                  CAMM-SATURAZIONE       id-fuori-ordine                163 166
+  primo_ordine/_misura_mb2.py                  saturazione            import-legge-vecchia           61
+  primo_ordine/_misura_pari_l2.py              saturazione            import-legge-vecchia           100 171
+  primo_ordine/_misura_spettro_l1.py           CAMM-SATURAZIONE       id-fuori-ordine                88 91 289
+  primo_ordine/_misura_verso_l2.py             CAMM-SATURAZIONE       id-fuori-ordine                62 65
+  primo_ordine/_misura_verso_l2.py             saturazione            import-legge-vecchia           142 326
+  primo_ordine/bande.py                        CAMM-SATURAZIONE       id-fuori-ordine                201
+  primo_ordine/deriva.py                       CAMM-SATURAZIONE       id-fuori-ordine                64 64
+  primo_ordine/deriva.py                       saturazione            import-legge-vecchia           49
+  primo_ordine/energia.py                      saturazione            import-legge-vecchia           72
+  primo_ordine/motore.py                       CAMM-SATURAZIONE       id-fuori-ordine                84 185 572
+  primo_ordine/motore.py                       saturazione            import-legge-vecchia           62
+  primo_ordine/termini/camm_forma_d.py         CAMM-FORMA-D           id-fuori-ordine                14
+  primo_ordine/termini/camm_saturazione.py     CAMM-SATURAZIONE       id-fuori-ordine                14
+
+  reperti 60, coppie file/simbolo 21, eccezioni dichiarate 21, ORFANE 0
+  coppie NON coperte da un-eccezione: 0
+  `P-TAB`: 60 reperti su 21 coppie, 21 eccezioni dichiarate
+  ### 0 errori
