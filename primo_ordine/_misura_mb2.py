@@ -116,19 +116,28 @@ def h_tot(inc, mot, st, par):
     # ------------------------------------------------- la moneta di spin
     h = mot.elicita(st).copy()
     moneta = float(par["eps"]) * float(np.sum(h))
-    # ------------------------------------------------- la saturazione
-    lam = mot.densita_vuoto(st).copy()
-    buoni = lam > 0.0
-    N = np.where(buoni, h, 0.0).astype(float)
-    if np.any(buoni):
-        x = h[buoni] / lam[buoni]
-        N[buoni] = lam[buoni] * SAT.G(x)
-    # ### ⚠ **E DOVE `Lambda == 0` il LIMITE e' `h`**, non uno zero: `Lambda G(h/Lambda)`
-    # ### ### **tende a `h`** *(`Lambda arctan -> 0`)*. ### **E- la funzione, non un
-    # ### pavimento** -- e il perche- sta nel docstring del modulo.
-    N[~buoni] = h[~buoni]
-    satura = float(np.sum(N))
-    return nodo + arco + moneta + satura
+    # ------------------------------------------------- l-accoppiamento materia-vuoto
+    # ### ⛔⛔ **DAL `2026-10-15` IL TERMINE E- `CAMM-MATERIA-VUOTO`**, e il motivo per
+    # ### cui questa riga e- CAMBIATA e- un numero: con la `N` della saturazione qui
+    # ### dentro, ### **`M-B2` dava pendenza `0.078`** invece di `~2` -- cioe-
+    # ### ### **misurava un `H` CHE NON E- QUELLO DEL PASSO.**
+    # ### ⚠ **Non e- un parametro aggiustato: e- la misura che deve guardare LA LEGGE
+    # ### CHE GIRA.** La saturazione e- ### **fuori dall-ordine di composizione**, quindi
+    # ### ### **il suo generatore non e- piu- in `H`.**
+    # ### ⭐ **E resta UNA SECONDA FONTE, come tutto il resto di questa funzione:** la
+    # ### `N` si scrive ### **qui**, con `rho` e `Lambda` ### **che questa funzione ha
+    # ### gia- calcolato da se-** (`nrm_psi` e `nrm_phi`), e ### **non si importa da
+    # ### `materia_vuoto.py`** -- se le due divergessero, il confronto lo direbbe.
+    rho = nrm_psi
+    lam = nrm_phi
+    N = np.zeros(inc.n, dtype=float)
+    vivi = rho > 0.0
+    if np.any(vivi):
+        N[vivi] = rho[vivi] * np.log(rho[vivi] / (rho[vivi] + lam[vivi]))
+    # ### ⛔ **E dove `rho == 0` il termine fa `0`**, perche- `x ln x -> 0`: ### **e- il
+    # ### valore che la funzione PRENDE**, non un pavimento.
+    accoppia = float(np.sum(N))
+    return nodo + arco + moneta + accoppia
 
 
 def _tick_ordine(st, mot, par, ordine):

@@ -118,6 +118,10 @@ moduli:
     responsabilita: se la materia consuma il vuoto, e se il verso viene dal segno di beta
     importa: [_presidio, deriva, saturazione, scena_l2]
 
+  - nome: _misura_theta_nonlineare.py
+    responsabilita: la simmetria P Theta sul passo INTERO col termine non lineare, e la C sul flusso nuovo
+    importa: [_presidio, _misura_c_flussi, _misura_theta_n, composizione, corrente, deriva, motore]
+
   - nome: _misura_theta_n.py
     responsabilita: se Theta e le direzioni n danno una simmetria esatta del passo
     importa: [_presidio, composizione, corrente, deriva, incidenza, motore, stato]

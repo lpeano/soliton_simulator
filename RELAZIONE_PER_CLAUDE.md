@@ -17189,3 +17189,44 @@ scritta con lo spazio, ### **non veniva vista**: il presidio si lamentava dell'
 passo nascosto. ### ✅ **Ho riscritto IL MIO file nella forma che il presidio vede, e il
 buco NON l'ho chiuso:** e' un presidio che sorveglia ### **una FORMA** invece di
 ### **un FATTO**, ed e' una decisione tua come il primo.
+
+### ⭐⭐ **I CONTROLLI `(a)` E `(b)`: `L1` RESTA CHIUSO, E LA SIMMETRIA REGGE** —
+*ma due misure su tre erano SCADUTE*
+
+| | il numero |
+|---|---|
+| `L1`, tempo proprio | ### **`0` violatori** su `12` pezzi |
+| `M-B1` contro `9fbcddf` | ### **`12` su `12` AL BIT** *(`6` pezzi x `2` scene)*: le leggi non toccate e l'operatore della saturazione sono IDENTICI, e cambia ### **l'ORDINE** |
+| `M-B2` | ### **pendenza `1.965`**, rapporti fini `3.984` e `3.996` *(log2 `1.994`, `1.999`)*; controprova col vecchio ordine: ### **primo ordine** |
+| `(P Theta) W (P Theta)^-1 = W^-1` col termine NON lineare | ### **`2`-`3` ulp** *(`1.8e-15`, `9.4e-16`, `1.0e-15`)* |
+| `C Op C^-1 = Op^-1` sul flusso nuovo | ### **`0.000e+00`, `0` ulp** |
+
+### ⛔⛔ **MA `M-B2` PRIMA DAVA `0.078`, E IL COLPEVOLE ERA LA MISURA:** `h_tot` aveva
+### **la `N` della saturazione scritta a mano dentro.** Con la legge sostituita misurava
+### **un `H` che non e' quello del passo** — e il numero che ne usciva *(escursione da
+`17.45` a `13.39` su cinque dimezzamenti, cioe' un fattore `1.3` dove `2^10 = 1024`)*
+### **non diceva niente del passo.** ### ✅ **Corretta la MISURA, non il passo:**
+`1.965`.
+
+### ⚠⚠ **E UNA SECONDA MISURA SCADUTA, che non si vedeva per un ACCIDENTE:**
+`ordine_lineare()` escludeva `CAMM-SATURAZIONE` ### **per NOME**, quindi con la legge
+sostituita ### **non escludeva piu' niente** — e <<la parte lineare>> avrebbe incluso
+### **un termine NON lineare.** ### **Non si vedeva** perche' la matrice si costruisce con
+`phi = 0`, e la' `alpha = ln(rho/rho) + 0 = 0` ### **esattamente**: il termine era
+l'identita'. ### ✅ **Adesso filtra per TIPO** *(`motore.FLUSSI`)*: `18`/`18`.
+
+### ⛔ **E PER LA SIMMETRIA HO DOVUTO RISCRIVERE L'IDENTITA', perche' `W^-1` NON SI PUO'
+COSTRUIRE:** i pezzi unitari ### **rifiutano una frazione negativa** *(`0 < f <= 1`, ed e'
+l'assert del CONO di `L1`)*. ### ✅ **Quindi la forma misurata e'**
+`W A W A^-1 = 1`, che e' ### **la stessa affermazione** e usa ### **solo passi avanti.**
+### **Non ho aggirato l'assert: ho cambiato la forma del conto, e l'ho scritto.**
+
+### ⭐ **E LA `C` SUL FLUSSO NUOVO, che nessuna misura copriva** *(il banco mi aveva
+avvisato, e `_misura_c_flussi.py` copre solo i quattro pezzi unitari)*: il flusso
+### **soddisfa `C Op C^-1 = Op^-1` ESATTAMENTE** *(`0` ulp)* e ### **NON commuta con `C`**
+*(scarto `0.82`-`2.98`)*. ### ⛔ **Cioe' il flusso nuovo si comporta come i quattro pezzi
+unitari**, che e' esattamente la relazione da cui `L1` deriva `C W C^-1 = W^-1` per un
+passo ### **palindromo** — e l'avviso del banco *(<<`rho` e' PARI, rompe `C`>>)* riguarda
+### **l'ALTRO criterio**, quello che la saturazione con `h` soddisfaceva.
+### ⚠ **E nessuna conclusione di fisica: che cosa voglia dire una simmetria del passo e'
+una decisione tua. Qui ci sono numeri.**

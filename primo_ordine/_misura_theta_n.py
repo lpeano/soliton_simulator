@@ -197,9 +197,22 @@ def scena(dtau, geometrici, identita):
 
 # ====================================================================== la matrice
 def ordine_lineare():
-    """### L'ordine della TABELLA **senza la saturazione**: la parte LINEARE."""
+    """### L'ordine della TABELLA **senza i FLUSSI**: la parte LINEARE.
+
+    ### ⛔⛔ **E IL FILTRO E' PER TIPO, NON PER `id`, e il motivo e' un difetto
+    pagato:** fino al `2026-10-15` questa riga escludeva ### **`CAMM-SATURAZIONE` per
+    nome**, e quando la legge e' stata ### **sostituita da `CAMM-MATERIA-VUOTO`** il
+    filtro ### **non escludeva piu' niente** -- cioe' <<la parte lineare>> avrebbe
+    incluso ### **un termine NON lineare.**
+    ### ⚠ **E non si vedeva, per un ACCIDENTE:** la matrice si costruisce con
+    `phi = 0`, e la' `alpha = ln(rho/(rho+0)) + 0 = 0` ### **esattamente** -- quindi il
+    termine era ### **l'identita' su `psi`** e il numero non cambiava.
+    ### ✅ **Un filtro che dipende da un accidente non e' un filtro:** adesso si legge
+    ### **`motore.FLUSSI`**, cioe' ### **il tipo**, e una legge nuova entra da sola.
+    """
     import composizione as CM
-    return [(idl, fr) for idl, fr, _t in CM.ORDINE if idl != "CAMM-SATURAZIONE"]
+    import motore as MO
+    return [(idl, fr) for idl, fr, _t in CM.ORDINE if idl not in MO.FLUSSI]
 
 
 def matrice(mot, st, ordine):

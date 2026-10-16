@@ -141,6 +141,12 @@ FILE_FISICA = (
     # ### ⭐ **NATO il `2026-10-15`, terza parte**: l-identita-
     # ### `Theta W[n] Theta^-1 = W[-n]^-1`, e ### **la mappa del reticolo che la
     # ### rende una simmetria ESATTA** con gli `n` geometrici.
+    # ### ⭐⭐ **LA SIMMETRIA SUL PASSO INTERO, COL TERMINE NON LINEARE**
+    # ### *(punto `2(b)` del quinto pezzo di `L2`)*: `W` non e- una MATRICE quando il
+    # ### flusso c-e- dentro, quindi l-identita- si prova ### **SU UNO STATO** -- e
+    # ### nella forma ### **`W A W A^-1 = 1`**, che usa solo passi AVANTI perche-
+    # ### ### **i pezzi unitari rifiutano una frazione negativa** *(l-assert del cono)*.
+    'primo_ordine/_misura_theta_nonlineare.py',
     'primo_ordine/_misura_theta_n.py',
     # ### ⭐ **NATI il `2026-10-15` col primo pezzo di `L2`**: la scena di
     # ### riferimento *(`n` geometrici, `U = I`, vuoto uniforme)* e la misura del
