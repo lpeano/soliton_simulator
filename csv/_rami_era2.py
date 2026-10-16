@@ -322,10 +322,30 @@ def collaudo():
     # ### ✅ **Quando il motore arrivera-, quell-errore diventera- un difetto di
     # ### COSTRUZIONE** *(una legge in tabella senza il suo operatore)*, e la guardia
     # ### restera- a nominarlo.
-    esito("### e le `guardia` sono SETTE: una per LEGAME, e `A11` ha il suo errore",
-          ng[0] == 7,
-          "### l-errore: la tabella dichiara un operatore che il MOTORE non ha -- e "
-          "oggi e- lo stato normale, perche- il motore e- il pezzo 5")
+    # ### ⛔⛔ **E IL NUMERO NON SI SCRIVE A MANO, dal `2026-10-16`:** era
+    # ### ### **`7`**, e quando `CAMM-MATERIA-VUOTO` e- entrata in tabella sono
+    # ### diventati ### **`8`** -- cioe- il braccio ### **FALLIVA per una legge NUOVA**,
+    # ### che e- esattamente cio- che NON deve segnalare. ### ✅ **Si CONTANO i legami
+    # ### generati** *(`primo_ordine/termini/*.py`)*, cosi- una legge nuova entra da
+    # ### sola. ### ⚠ **Non e- una soglia aggiustata: e- un numero che DEVE seguire la
+    # ### tabella, e scritto a mano non la seguiva.**
+    # ### ⚠ **E <<legame>> vuol dire <<ha `applica`>>, non <<sta in `termini/`>>:**
+    # ### i due termini di PROVA (`PROVA-HOPPING`, `PROVA-LOCALE`) sono generati la-
+    # ### dentro ma ### **non sono legami** -- hanno le DERIVATE, non un operatore del
+    # ### motore. ### **Il primo conto diceva `10` contro `8` guardie, e il braccio lo
+    # ### ha detto.**
+    legami = 0
+    for _x in file_fisica():
+        if "/termini/" not in _x:
+            continue
+        if "def applica(" in io.open(os.path.join(RADICE, _x),
+                                    encoding="utf-8").read():
+            legami += 1
+    esito("### e le `guardia` sono UNA PER LEGAME, e `A11` ha il suo errore",
+          ng[0] == legami,
+          "### %d guardie e %d legami generati. ### L-errore: la tabella dichiara un "
+          "operatore che il MOTORE non ha, cioe- la biiezione tabella <-> motore rotta"
+          % (ng[0], legami))
     print("=" * 100)
     print("IL COLLAUDO DI `P-R1`: %d su %d   %s"
           % (ok[0], ok[1], "### TUTTI PASSATI" if ok[0] == ok[1] else "### CI SONO BUCHI"))

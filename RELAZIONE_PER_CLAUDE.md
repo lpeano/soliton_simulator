@@ -17272,3 +17272,27 @@ vale la pena scrivere: guardavo `max |d Lambda_k|`, e sulla scena di riferimento
 ### **uniforme** — quindi il passo LIBERO lascia `Lambda` ### **esattamente ferma**, cioe'
 ### **zero al denominatore.** ### ✅ **`74ba200` guardava `max |d rho_k|`**, ed e' quello
 che si legge adesso.
+
+### ⭐ **`(e)` LA SUITE: `52` ok e `1` ROSSO — e il rosso ERA GIA' ROSSO**
+
+| il collaudo | cambia esito? | il motivo |
+|---|---|---|
+| **`P-R1`** | ### **SI'** | il braccio *«le guardia sono SETTE: una per LEGAME»* aveva il ### **`7` scritto a mano**, e con la legge nuova i legami generati sono ### **`8`**: ### **falliva PER UNA LEGGE NUOVA.** ### ✅ **Curato: il numero SI CONTA**, e *«legame»* vuol dire *«ha `applica`»* — i due termini di PROVA stanno in `termini/` ma ### **non sono legami.** `12`/`12` |
+| **`_collauda_deriva.py`** | ### **NO: `6`/`8` prima e dopo** | ### **verificato con un `git worktree` di `9fbcddf`**, che da' lo ### **stesso `6`/`8`** col braccio `(4)` che fallisce con lo ### **STESSO numero** *(`1.078e+00`)*. ### **E' SCADUTO DA PRIMA:** dice *«con `|phi|` uniforme `Lambda_k` e' esattamente invariante»*, vero quando il Grover scalare era ### **un'involuzione** — dalla strada `(B)` e' un flusso parziale, e a `dtau = 0.2` ### **mescola.** |
+| *il flusso materia-vuoto* | ### **NUOVO** | `22`/`22`, con due casi che devono fallire |
+| *il flusso di saturazione* | NO, resta **verde** | la legge e' fuori dall'ordine ma il suo operatore e il suo collaudo restano: ### **cio' che si e' misurato non si cancella** |
+| gli altri `49` | NO | esito invariato |
+
+### 📌 **E UN NUMERO DI `_collauda_deriva.py` CAMBIA, questo si':** il braccio `(6)` passa
+da `4.625` a ### **`3.220`**, perche' la ### **sorgente** e' il termine nuovo. ### **Il
+verdetto no** *(fallisce in entrambi)*. ### ⛔ **E non lo curo in questo pezzo:** e' un
+difetto di prima, e curarlo qui vorrebbe dire ### **mescolare due cose.**
+
+### ✅ **Senza il worktree avrei attribuito alla mia sostituzione un difetto che non e'
+mio.** ### **E' lo stesso modo in cui `M-B1` prende il <<prima>>: un worktree del commit,
+non una copia patchata a mano.**
+
+### 📌 **E un file GENERATO e COMMITTATO era scaduto:** `doc/REFERTO_infrastruttura_era2.md`
+porta ### **il conto delle leggi** *(da `10` a `11` righe, da `5` a `6` variabili)*.
+### **Rigenerato col suo comando**, e adesso ### **la suite non sporca niente.**
+### **Budget: `266.3` s su `500`** *(`53%`)*.
