@@ -3724,3 +3724,15 @@ secondi ### **escono dai file a ogni corsa.**
 | **il presidio dentro** | ### ⛔ **un'eccezione ORFANA fa fallire**, e ### **una legge fuori dall'ordine senza il suo modulo dichiarato fa ALZARE**: una legge superata nuova ### **non entra in silenzio** |
 | ### ⭐ **e il collaudo scrive FUORI dal repo** | i cinque casi che devono fallire stanno in ### **una cartella temporanea**, perche' l'analizzatore ### **prende le radici come argomento** — e due collaudi di presidio che ripristinavano i byte hanno lasciato l'albero sporco ### **due volte** |
 | **il BLOB** | `sha1-BYTE b557a18a` |
+
+### `csv/_censimento_rami.py` — **il censimento di `P-R1` esteso, e il buco di `P-ES1`**
+
+| | |
+|---|---|
+| **il comando** | `python csv/_censimento_rami.py` *(### ⛔ **NON blocca niente**, e non ha una riga nel hook)* |
+| **il collaudo** | `python csv/_censimento_rami.py --collaudo` — ### **`6` su `6`**, di cui ### **`3` casi che DEVONO comparire** e ### **`3` controlli che POTREBBERO fallire** |
+| **cosa misura** | per ogni `.py` sotto `primo_ordine/`: le funzioni ### **non dichiarate** a `P-R1` coi loro rami, e i ### **`default` nelle firme**; piu' l'### **aggiunta `C`**, cioe' le funzioni che l'AST vede e che la ricerca ### **LETTERALE `-1j`** di `P-ES1` ### **non vede** |
+| ### ⭐ **non riscrive la logica: la IMPORTA** | `_rami_era2._conta`, `_rami_era2.default_nelle_firme` e `_un_solo_esecutore.passi_a_mano`. ### **E' `[[STRUMENTO-LEGGE-DALLA-TABELLA]]` applicata A UN PRESIDIO:** un censimento che riscrivesse il conteggio misurerebbe ### **la SUA idea di ramo** |
+| ### ⭐ **la lista si DERIVA, e si CONFRONTA** | dal disco, e il derivato dev'essere ### **contenuto nel dichiarato** di `csv/_file_fisica.py`: se non lo e', ### **`[[H-FISICA-FUORI-LISTA]]` e' rotto** e il censimento lo dice |
+| ### ⛔ **e il collaudo scrive FUORI dal repo** | i file finti stanno in una cartella ### **temporanea**, e `_conta` accetta un percorso ### **assoluto** |
+| **il BLOB** | `sha1-BYTE 83251e63` |

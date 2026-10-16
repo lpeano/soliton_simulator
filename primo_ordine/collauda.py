@@ -234,6 +234,14 @@ COLLAUDI = (
     ("`P-AB` i confronti e i dati", "csv/_confronti_e_dati.py --collaudo", "pre-commit"),
     ("`P-TAB` la legge si legge dalla tabella",
      "csv/_strumento_dalla_tabella.py --collaudo", "pre-commit"),
+    # ### ⚠ **`solo-CI` E NON <<pre-commit>>, e non per il tempo:** il CENSIMENTO dei
+    # ### rami ### **non e- un presidio e non blocca niente** *(lo dice il mandato)*,
+    # ### quindi ### **non ha una riga nel hook** -- e scrivere `pre-commit` qui sarebbe
+    # ### ### **un-etichetta falsa**, che e- il difetto registrato al par. `157` di questo
+    # ### file. ### ✅ **Il suo collaudo gira comunque**, cosi- i casi che devono
+    # ### fallire ### **non invecchiano.**
+    ("il censimento dei rami (NON blocca)", "csv/_censimento_rami.py --collaudo",
+     "solo-CI"),
     # ------------------------------------- E I TRE CHE IL CENSIMENTO HA TROVATO
     # ### ✅ **Questi non li ho messi a mano: li ha trovati `censimento()`**,
     # ### ### **e il nome non diceva che erano collaudi.** `_rinomina.py` lo e-
