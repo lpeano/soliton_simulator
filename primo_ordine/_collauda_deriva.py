@@ -44,7 +44,16 @@ EPS = float(np.finfo(float).eps)
 X_MINIMO = 0.1          # ### sotto questo la saturazione e- SPENTA: falso-zero
 ULP_MAX = 1000.0
 CAMBIA_MIN = 1e-6
-RAPPORTO_O1 = 2.0       # ### `O(dtau^2)` darebbe `~4`; `O(1)` da- `~1`
+# ### ⛔⛔ **LA BANDA DELL-ESPONENTE DELLA SORGENTE, dal task history
+# ### `2026-10-16_b_due_bracci_scaduti.md` e FISSATA PRIMA DELLA MISURA:** la sorgente
+# ### e- ### **`O(dtau)` PER PASSO** -- il termine agisce con una fase `beta dtau`,
+# ### quindi al primo ordine l-energia scambiata per tick e- proporzionale a `dtau`.
+# ### ⚠ **La banda e- LARGA e il motivo e- dichiarato:** `s_k` e- un ### **MASSIMO su
+# ### nodi**, non una media, e un massimo su `16` nodi ha una dispersione che
+# ### ### **non e- una barra d-errore.** ### **Non si allarga dopo.**
+ESPONENTE_ATTESO = 1.0
+BANDA_ESPONENTE = 0.25
+DTAU_SORGENTE = (0.2, 0.05, 0.0125)
 
 
 def esito(che, passa, nota=""):
@@ -96,23 +105,75 @@ def main(argv):
           "|Delta| = %.3e: senza questo il braccio (2) sarebbe un FALSO-UNO"
           % abs(q1 - q0))
 
-    # ### (4) e (5) `Lambda` sotto la camminata del vuoto, nei due casi
-    lu = DV.lambda_sotto_vuoto(uniforme=True)
-    lnu = DV.lambda_sotto_vuoto(uniforme=False)
-    esito("### (4) con `|phi|` UNIFORME `Lambda_k` e- esattamente invariante",
-          lu < 1e-12, "max |Delta Lambda| = %.3e" % lu)
-    esito("### (5) DEVE CAMBIARE: con `|phi|` NON uniforme",
-          lnu > CAMBIA_MIN, "max |Delta Lambda| = %.3e: la misura SA vedere" % lnu)
+    # ### ⛔⛔ **(4) RISCRITTO IL `2026-10-16` SU TRE AFFERMAZIONI DERIVATE**, una per
+    # ### pezzo *(task history `2026-10-16_b_due_bracci_scaduti.md`)*. ### **Il vecchio
+    # ### braccio diceva <<con `|phi|` uniforme `Lambda_k` e- invariante>>, vero quando il
+    # ### Grover era un-INVOLUZIONE e falso dalla strada `(B)`.**
+    # ### ⭐ **(4a) IL GROVER DEL VUOTO CONSERVA `Lambda_k` ESATTAMENTE**, perche- agisce
+    # ### ### **dentro il nodo** ed e- ### **unitario** su quello spazio: vale a
+    # ### ### **ogni frazione** e con ### **`|phi|` NON uniforme** -- cioe- NON e- una
+    # ### proprieta- del vuoto uniforme.
+    for fr in (1.0, 0.5):
+        g, gv = DV.lambda_sotto_vuoto(16, 7, False, ("grover_scalare",), fr, 0.2)
+        esito("### (4a) il GROVER del vuoto conserva `Lambda_k` (frazione %.1f, `|phi|`"
+              " NON uniforme)" % fr, g <= 4096 * EPS,
+              "max |Delta Lambda| = %.3e, e |Delta V| = %.3e: e- l-UNITARIETA- del pezzo,"
+              " non il vuoto uniforme" % (g, gv))
+    # ### ⭐ **(4b) LO SPOSTAMENTO CONSERVA IL TOTALE `V` E MUOVE `Lambda_k`:** agisce
+    # ### ### **sull-arco**, e le due estremita- di un arco stanno in ### **due nodi
+    # ### diversi** -- e- ### **il TRASPORTO.**
+    s, sv = DV.lambda_sotto_vuoto(16, 7, False, ("spostamento_scalare",), 0.5, 0.2)
+    esito("### (4b) lo SPOSTAMENTO conserva il TOTALE `V`", sv <= 4096 * EPS,
+          "|Delta V| = %.3e" % sv)
+    esito("### (4b) e MUOVE `Lambda_k`: e- il TRASPORTO", s > CAMBIA_MIN,
+          "max |Delta Lambda| = %.3e: se fosse zero il vuoto non si sposterebbe" % s)
+    # ### ⭐ **(4c) A `theta = pi` LO SPOSTAMENTO E- UNA PERMUTAZIONE PURA**, e con
+    # ### ### **`|phi|` UNIFORME** i moduli scambiati sono uguali ⟹ `Lambda_k` torna
+    # ### ### **invariante.** ### **E- l-affermazione di ieri, CON LA SUA CONDIZIONE.**
+    # ### ⚠ **`theta = pi dtau frazione`, e la scena ha `dtau = 0.2`: la frazione che
+    # ### da- `theta = pi` sarebbe `5`, che NON e- una frazione** -- quindi si misura
+    # ### ### **sulla scena a `dtau = 1`**, dove `frazione = 1` da- `theta = pi`.
+    pu, _pv = DV.lambda_sotto_vuoto(16, 7, True, ("spostamento_scalare",), 1.0, 1.0)
+    esito("### (4c) a `theta = pi` e `|phi|` UNIFORME `Lambda_k` e- invariante",
+          pu <= 4096 * EPS,
+          "max |Delta Lambda| = %.3e: la permutazione scambia moduli UGUALI" % pu)
+    # ### ⛔ **IL CASO CHE DEVE FALLIRE: `theta = pi` con `|phi|` NON uniforme.**
+    # ### **Senza di lui la `(4c)` passerebbe per vacuita-.**
+    pn, _pnv = DV.lambda_sotto_vuoto(16, 7, False, ("spostamento_scalare",), 1.0, 1.0)
+    esito("### (4c) DEVE fallire: `theta = pi` con `|phi|` NON uniforme",
+          pn > CAMBIA_MIN,
+          "max |Delta Lambda| = %.3e: la permutazione scambia moduli DIVERSI" % pn)
 
-    # ### (6) la SORGENTE per nodo e- `O(1)` in `dtau`
+    # ### ⛔⛔ **(6) RISCRITTO IL `2026-10-16`: LA SORGENTE E- `O(dtau)` PER PASSO.**
+    # ### Il vecchio braccio diceva ### **`O(1)`**, e la misura lo smentiva da sola: il
+    # ### rapporto su un fattore `4` valeva `4.625` *(legge vecchia)* e `3.220` *(nuova)*,
+    # ### cioe- ### **circa `4`** -- e `O(1)` darebbe ### **`1`.**
+    # ### ⭐ **E L-AFFERMAZIONE SI DERIVA:** il termine agisce con una fase
+    # ### `beta dtau frazione`, quindi al primo ordine ### **l-energia scambiata per tick
+    # ### e- proporzionale a `dtau`** -- ed e- cio- che un flusso parziale deve dare.
     mm = []
-    for dt in (0.2, 0.05):
+    for dt in DTAU_SORGENTE:
         s, _dE, _po, _sa = DV.sorgente_per_nodo(dtau=dt, vuoto_modulo=2.0)
         mm.append(float(np.max(np.abs(s))))
-    rap = mm[0] / mm[1] if mm[1] > 0 else float("inf")
-    esito("### (6) la SORGENTE per nodo e- `O(1)` in `dtau`, non `O(dtau^2)`",
-          rap < RAPPORTO_O1,
-          "rapporto su un fattore 4 di `dtau`: %.3f  (`O(dtau^2)` darebbe ~16)" % rap)
+    espo = []
+    for k in range(len(mm) - 1):
+        rap = mm[k] / mm[k + 1] if mm[k + 1] > 0 else float("inf")
+        espo.append(float(np.log(rap) / np.log(4.0)))
+    print("      la SORGENTE ai tre `dtau` %s: %s" % (DTAU_SORGENTE,
+                                                      "  ".join("%.6e" % x for x in mm)))
+    print("      gli ESPONENTI (log del rapporto / log 4): %s"
+          % "  ".join("%.4f" % x for x in espo))
+    esito("### (6) la SORGENTE per nodo e- `O(dtau)` PER PASSO",
+          all(abs(e - ESPONENTE_ATTESO) <= BANDA_ESPONENTE for e in espo),
+          "esponenti %s, attesi `%.1f` entro `%.2f`"
+          % ("  ".join("%.4f" % x for x in espo), ESPONENTE_ATTESO, BANDA_ESPONENTE))
+    # ### ⛔ **E LE DUE ALTERNATIVE SONO ESCLUSE CON LO STESSO NUMERO**, invece che con
+    # ### due misure diverse: ### **`O(1)` darebbe esponente `0`, `O(dtau^2)` darebbe `2`.**
+    esito("### (6) DEVE fallire: `O(1)` (esponente `0`) e `O(dtau^2)` (esponente `2`)",
+          all(abs(e - 0.0) > BANDA_ESPONENTE and abs(e - 2.0) > BANDA_ESPONENTE
+              for e in espo),
+          "gli esponenti misurati sono %s: entrambe le alternative sono FUORI banda"
+          % "  ".join("%.4f" % x for x in espo))
 
     # ### (7) DEVE FERMARE: una legge dell-ordine NON mappata
     salvato = dict(DV.OPERATORE)

@@ -290,22 +290,25 @@ def scansione(moduli, nn=16, dtau=0.25, ticks=400, seme=7, su2=False):
     return righe
 
 
-def lambda_sotto_vuoto(nn=16, seme=7, uniforme=True):
-    """### `max_k |Delta Lambda_k|` sotto la **sola camminata del vuoto.**
+def lambda_sotto_vuoto(nn, seme, uniforme, pezzi, frazione, dtau):
+    """### `(max_k |Delta Lambda_k|, |Delta V|)` sotto **i pezzi del vuoto che si dicono.**
 
-    ### ⛔ **PERCHE' QUESTA MISURA ESISTE: la decomposizione di `(c)` dava numeri
-    IDENTICI** col vuoto che cammina e senza, a tutte le cifre. ### ⚠ **Un'identita' a
-    tutte le cifre non si spiega con <<e' piccolo>>: o la si capisce, o e' un difetto.**
+    ### ⛔ **RISCRITTA IL `2026-10-16`, e la derivazione sta nel task history**
+    `2026-10-16_b_due_bracci_scaduti.md` *(non si ripete qui)*: ### **il Grover agisce
+    DENTRO IL NODO ed e' unitario la' ⟹ conserva `Lambda_k` ESATTAMENTE**, a ogni
+    frazione e con ogni `|phi|`; ### **lo spostamento agisce SULL'ARCO, fra due nodi
+    DIVERSI ⟹ conserva il TOTALE `V` e MUOVE `Lambda_k`** — e' il TRASPORTO.
+    ### ⚠ **E niente valori di comodo: e' una misura.**
 
-    ### ⭐ **E la si capisce:** su un grafo **`2`-regolare** il Grover scalare e'
-    `(2/2)(phi_a + phi_b) - phi_h`, cioe' **uno SCAMBIO**, e lo spostamento e' una
-    **permutazione**. ### **Con `|phi|` UNIFORME le due cose permutano moduli tutti
-    uguali, quindi `Lambda_k` E' ESATTAMENTE INVARIANTE** — e la camminata del vuoto
-    ### **non porta energia di vuoto da nessuna parte.**
+    ### ⛔ **PERCHE' ESISTE: la decomposizione di `(c)` dava numeri IDENTICI col vuoto
+    che cammina e senza** — e ### **un'identita' a tutte le cifre o la si capisce, o e'
+    un difetto.**
 
-    ### ⛔ **Quindi la decomposizione di `(c)` e' VACUA PER QUESTO VUOTO**, e va detto:
-    `uniforme=False` e' il **controllo positivo** che lo prova, con `|phi|` **non
-    uniforme**.
+    ### ⚠ **E LA SPIEGAZIONE DI IERI ERA SBAGLIATA SU DUE PUNTI** *(ritirata il
+    `2026-10-16`)*: ### **il Grover conserva `Lambda_k` per UNITARIETA'**, a ogni
+    frazione, quindi il rosso veniva ### **solo dallo SPOSTAMENTO**; e a `theta = pi` il
+    Grover e' ### **una RIFLESSIONE** `2 P_u - I`, non una permutazione di moduli —
+    ### **la permutazione e' lo spostamento.**
     """
     import incidenza as IN
     import motore as MO
@@ -324,13 +327,19 @@ def lambda_sotto_vuoto(nn=16, seme=7, uniforme=True):
     moduli = (np.ones(2 * inc.m) if uniforme
               else (0.5 + r.random(2 * inc.m)))
     st["phi_h"][...] = moduli * np.exp(1j * r.random(2 * inc.m) * 2.0 * np.pi)
-    mot = MO.Motore(inc, MO.Geometria(nv, U), st, np.full(nn, 0.2), "numpy")
+    mot = MO.Motore(inc, MO.Geometria(nv, U), st, np.full(nn, dtau), "numpy")
+    assert pezzi, ("`pezzi` NON ha un valore di comodo: si dice QUALI pezzi del vuoto"
+                   " girano, perche' il Grover e lo spostamento conservano COSE DIVERSE")
+    assert 0.0 < float(frazione) <= 1.0, (
+        "`frazione` sta in `(0, 1]`: e' la frazione di passo, non un numero libero")
     prima = mot.densita_vuoto(st).copy()
+    v0 = float(np.sum(prima))
     mot.apri_tick()
-    mot.operatori["grover_scalare"](st, {}, 1)
-    mot.operatori["spostamento_scalare"](st, {}, 1)
+    for quale in pezzi:
+        mot.operatori[quale](st, {}, frazione)
     mot.chiudi_tick()
-    return float(np.max(np.abs(mot.densita_vuoto(st) - prima)))
+    dopo = mot.densita_vuoto(st)
+    return (float(np.max(np.abs(dopo - prima))), abs(float(np.sum(dopo)) - v0))
 
 
 def secolare(serie):
@@ -360,12 +369,11 @@ def sorgente_per_nodo(nn=16, dtau=0.2, seme=7, norma="locale", vuoto_cammina=Tru
     pezzo lineare *(`primo_ordine/corrente.py`)*, valutata sullo stato che **entra** nel
     pezzo lineare, cioe' **dopo il primo mezzo flusso.**
 
-    ### ⛔ **E `N` NON ATTRAVERSA**, perche' il suo generatore dipende solo da grandezze
-    di nodo: ### **la sua corrente e' ZERO, e cio' che resta nel bilancio e' la
-    SORGENTE.**
+    ### ⛔ **E `N` NON ATTRAVERSA** *(il suo generatore e' di NODO)*: ### **la sua
+    corrente e' ZERO, e cio' che resta nel bilancio e' la SORGENTE.**
 
-    ### ⚠ **E si misura PER NODO, come il mandato chiede**, non solo in totale: una
-    sorgente che in totale fa zero ### **puo' essere grande su ogni nodo.**
+    ### ⚠ **E si misura PER NODO**, non in totale: una sorgente che in totale fa zero
+    ### **puo' essere grande su ogni nodo.**
 
     ## ⛔ `vuoto_cammina` SEPARA DUE COSE CHE IL RESIDUO MESCOLA
 

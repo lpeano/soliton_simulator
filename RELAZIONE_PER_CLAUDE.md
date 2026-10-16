@@ -17383,3 +17383,23 @@ confronta.**
 delle leggi: `6` girano e restano `6`, le righe sono `8`, e il punto si chiude SENZA
 decisione)* e `n.2` *(l'invarianza di scala: `Lambda_c` sarebbe LA PRIMA SCALA ASSOLUTA, e
 si misura in `D1`)* stavano ### **solo nella RIPRESA §`22`.** ### **Adesso sono anche qui.**
+
+### ✅✅ **PUNTO `B`: `53` ok, `0` rossi — e i due bracci ora dicono cio' che la legge GARANTISCE**
+
+| | l'affermazione **derivata** | il numero |
+|---|---|---|
+| `4a` | il **Grover del vuoto** conserva `Lambda_k` ### **per UNITARIETA'**, a ogni frazione e con `|phi|` NON uniforme | ### **`8.882e-16`** |
+| `4b` | lo **spostamento** conserva `V` e ### **MUOVE `Lambda_k`** | `0.000e+00` · `5.314e-01` |
+| `4c` | a `theta = pi`, permutazione pura: con `|phi|` uniforme `Lambda_k` torna | `6.661e-16`, e il must-fail da' `2.244` |
+| `6` | la **sorgente** e' ### **`O(dtau)` per passo** | esponenti ### **`0.8436`** e **`0.9891`** *(banda `[0.75, 1.25]`, fissata PRIMA)* |
+
+### ⛔⛔ **E RITIRO LA MIA SPIEGAZIONE DI `7e0a7d0`, come chiedi:** *«il Grover del vuoto a
+`dtau = 0.2` mescola»* ### **e' falsa**, e la smentisce ### **la mia stessa `(4a)`** — il
+Grover conserva `Lambda_k` a qualunque frazione, quindi il rosso veniva ### **solo dallo
+SPOSTAMENTO.** ### ⚠ **E a `theta = pi` il Grover e' una RIFLESSIONE `2 P_u - I`**, non una
+permutazione di moduli: ### **la permutazione e' lo spostamento.**
+### 📌 **Nel task history le due righe NON sono riscritte: sono ANNOTATE.**
+
+### 📌 **E una cosa che vale la pena dire sul metodo:** l'errore e' emerso ### **perche' il
+braccio era spezzato PEZZO PER PEZZO.** Con un braccio solo *(«il vuoto cammina e `Lambda`
+non cambia»)* la spiegazione sbagliata ### **sarebbe passata.**

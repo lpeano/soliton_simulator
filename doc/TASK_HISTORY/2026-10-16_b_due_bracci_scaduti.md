@@ -19,6 +19,22 @@ cioe' `theta = pi`)*: la' Grover e spostamento erano ### **permutazioni di modul
 uguali.** ### ⛔ **Dalla strada `(B)` sono flussi parziali a `theta = pi dtau frazione`**, e
 a `dtau = 0.2` ### **mescolano.**
 
+> ### ⛔⛔ **ANNOTAZIONE DEL `2026-10-16` (integrazione del guardiano, verifica fino a
+> `2b72739`): LE DUE RIGHE QUI SOPRA SONO SBAGLIATE SU DUE PUNTI, e NON le riscrivo —
+> ### **si ANNOTANO**, come il par.`8` pretende.**
+> ### ① **<<il Grover a `dtau = 0.2` MESCOLA>> e' falso**, e lo smentisce
+> ### **la mia stessa `(4a)`**: il Grover del vuoto agisce ### **dentro il nodo** ed e'
+> ### **unitario** la', quindi ### **conserva `Lambda_k` a QUALUNQUE frazione**
+> *(misurato: `8.882e-16`)*. ### ⛔ **Quindi il rosso del braccio `(4)` veniva SOLO
+> dallo SPOSTAMENTO sugli archi**, e la spiegazione che avevo scritto in `7e0a7d0`
+> — *«dalla strada `(B)` e' un flusso parziale, e a `dtau = 0.2` mescola»* —
+> ### **la RITIRO.**
+> ### ② **e a `theta = pi` il Grover NON e' una permutazione di moduli: e' una
+> RIFLESSIONE** `2 P_u − I`. ### **La permutazione e' lo SPOSTAMENTO**, e la `(4c)`
+> parla di quello.
+> ### ✅ **E le TRE affermazioni derivate sotto NON cambiano:** erano gia' scritte
+> ### **pezzo per pezzo**, ed e' esattamente cio' che ha fatto emergere l'errore.
+
 ### **E CIO' CHE LA LEGGE DI OGGI GARANTISCE SI DERIVA DAI DUE PEZZI, uno per volta:**
 
 | | il pezzo | che cosa conserva, e PERCHE' |
