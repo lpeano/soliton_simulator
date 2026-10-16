@@ -17488,3 +17488,76 @@ braccio `(6)` leggendo `sorgente_per_nodo` ### **dall'alto** *(la firma, il rito
 pezzo, qualunque esso sia** — con il controllo positivo che ### **il tick percorso dallo
 strumento coincide AL BIT con `DV.tick`**, e un caso che ### **DEVE fallire** *(un id che
 lo strumento non sa misurare: ALZA)*.
+
+### ✅ **`2-quater` FATTO: `17` BRACCI SU `17`, E IL CENSIMENTO DICE `20` SCADUTE**
+
+**La cura, e il punto che conta:** il tick adesso lo percorre ### **un solo posto**,
+`deriva.percorri_tick`. Prima erano ### **due** — `deriva.tick` faceva l'ordine intero,
+`sorgente_per_nodo` applicava ### **un pezzo A MANO per nome** e poi `ORDINE[1:]` — e con
+un solo posto ### **quel difetto non si puo' piu' scrivere.** `sorgente_per_nodo` passa da
+la' dentro con un callback *(`deriva.fotografo`)* che fotografa lo stato ### **dopo il
+PRIMO pezzo, qualunque esso sia**, e `deriva_variabile.flusso_che_gira()` ### **ALZA** se
+quel posto non e' un flusso che lo strumento conosce.
+
+**I numeri, tutti dal collaudo** *(`python primo_ordine/_collauda_deriva.py`,
+### **`17` su `17`**, erano `13`)*:
+
+| il braccio | il numero | il criterio |
+|---|---|---|
+| `(1)` la materia, su ### **`rho/Lambda`** | `x_max = 1.9109` | `>= 0.10` |
+| `(1)` DEVE fallire ①: `rho = 0` su tutti i nodi | `x_max = 0.0e+00` | `< 0.10` |
+| `(1)` DEVE fallire ②: ### **la variabile VECCHIA** a `h = 0` e `rho > 0` | vecchia `0.0e+00`, nuova `0.2500` | la vecchia direbbe *«nessuna materia»* |
+| `(1)` DEVE fallire ③: un flusso che non sa misurare | ### **`2` ALZATE su `2`** | non-flusso al posto `0`, e flusso fuori dai `CONOSCIUTI` |
+| `(1-bis)` ### **CAPOVOLTO** | a `x = 0.06479`: `6.084923e-02` contro `1.804200e-04`, ### **`337` volte** | `> 1e-2` e `> 100` |
+| `(c)` il tick dello strumento ### **AL BIT** con `DV.tick` | ### **`0.0e+00`** su `6` campi | `== 0` |
+| `(3)` il controllo positivo del `(2)`, ### **sul pezzo dell'ordine** | `|Delta| = 1.511e-03` *(era `1.219e-02`, ma ### **della saturazione**)* | `> CAMBIA_MIN` |
+| `(6)` ### **RIMISURATO** sul passo giusto | ### **`0.8466`** e `0.9891` *(sul passo MISTO erano `0.8436` e `0.9891`)* | `[0.75, 1.25]` |
+
+### ⛔⛔ **E UNA CORREZIONE A ME STESSO: il `1344` del task history NON E' CONFERMATO.**
+L'avevo calcolato a `x = 0.03289`, che era il `x_max` del regime `globale`
+### **misurato sulla variabile VECCHIA.** Sulla variabile giusta quel regime sta a
+`x_max = 0.06479`, e la' il rapporto e' ### **`337`.** ### ✅ **Il criterio fissato PRIMA
+tiene** *(`> 1e-2` e `> 100`)*, ### ⚠ **ma la previsione numerica era a un `x` che non
+c'entrava**, e non la spaccio per provata.
+
+### 📌 **IL VERDETTO DEL BRACCIO `(6)` DI `3bd2b75` NON E' PIU' SOSPESO.**
+### ⚠ **E la differenza e' piccola — `0.0030` — il che NON assolve il passo misto:**
+che un passo che non era nessuna delle due leggi dia lo stesso esponente di quello giusto
+e' ### **una fortuna, non un argomento.**
+
+**IL CENSIMENTO** *(`doc/CENSIMENTO_legge_vecchia.md`, voce
+`[[STRUMENTI-SULLA-LEGGE-VECCHIA]]`)*: ### **`45` coppie file/simbolo su `23` file**,
+### **`20` SCADUTE** e `25` LEGITTIME. ### ✅ **Il documento SI GENERA**
+*(`python csv/_censimento_legge_vecchia.py`)*, e ### **una coppia senza verdetto FA ALZARE
+il generatore**: un uso nuovo della legge vecchia ### **non entra in silenzio.**
+### ⚠ **`SCADUTO` non vuol dire <<rotto>>:** vuol dire che ### **oggi, nel perimetro
+attivo**, quel codice misurerebbe o salterebbe ### **la legge sbagliata** — e un referto
+gia' committato ### **resta valido AL SUO COMMIT.**
+
+**LE SETTE CURATE IN QUESTO COMMIT:** `deriva.satura` *(la variabile)*,
+`deriva.sorgente_per_nodo` *(il passo misto)*, il braccio `(3)` *(il controllo positivo
+parlava della legge vecchia)*, la tabella di `deriva.corri` *(`x_max`, `x_med`)*, e
+### **`bande.py`, `bande_floquet.py`, `segno.py`**, che chiamavano `DV.satura`:
+### **la DIVISIONE del modulo li aveva rotti, e li ho rotti io.**
+
+### ⛔⛔ **LE DUE TROVATE E NON CURATE QUI — un interruttore alla volta:**
+### ① **`bande.py` e `_misura_spettro_l1.ordine_lineare` SPENGONO `N` PER NOME**, quindi
+### **oggi non spengono niente**, e il braccio *«senza `N`»* misurerebbe ### **lo stesso
+sistema due volte.** ### ✅ **La cura e' meccanica** *(filtrare per `MO.FLUSSI`, come
+`_misura_theta_n.py`)*, ed e' ### **in coda.**
+### ② ### **UNA DOMANDA PER LUCA, e non la prendo io** *(`A1`)*:
+
+> ### ⛔ **`deriva.nat2` E' L'ASINTOTO DELLA SATURAZIONE.** La scala naturale del termine
+> del vuoto era `somma|h| + (pi/2) somma Lambda`, ### **perche' `Lambda G(h/Lambda) -> h -
+> (pi/2) Lambda sign(h)`**, cioe' la saturazione e' ### **LIMITATA da una funzione affine
+> di `h` e `Lambda`.** ### **`N = rho ln(rho/(rho+Lambda)) = -rho ln(1 + Lambda/rho)` NON
+> lo e': a `Lambda/rho -> infinito` DIVERGE come un logaritmo.**
+> ### ⚠ **Cosa cambia la risposta:** il ### **denominatore** di ogni numero RELATIVO dei
+> referti della deriva *(`relnat_primo`, `relnat_vuoto`, `relnat_somma`)*. ### **I numeri
+> ASSOLUTI non passano da `nat2` e non sono toccati.**
+> ### **La voce e' `[[DOMANDA-LA-SCALA-NATURALE-DI-N]]`, `priorita: MINORE`.**
+
+**LA SUITE:** ### **`53` su `53`, `0` rossi**, `pre-commit` a ### **`295.6 s` su `500`**
+*(`59%`)*. **E i quattro presidi strutturali** — `P-MOD` `10/10`, `P-RIF` `10/10`,
+`P-ES1` `8/8`, `P-R1` `12/12`. **I moduli dopo la divisione:** `deriva.py` ### **`687`
+righe** *(tetto `700`)*, `deriva_serie.py` `48`, `deriva_variabile.py` `75`.

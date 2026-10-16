@@ -9,13 +9,13 @@
 | `DOCUMENTAZIONE` | `2` | 1 |
 | `DOCUMENTAZIONE` | `ENTRAMBE` | 9 |
 | `FISICA` | `1` | 343 |
-| `FISICA` | `2` | 125 |
+| `FISICA` | `2` | 126 |
 | `FISICA` | `ENTRAMBE` | 21 |
 | `INFRASTRUTTURA` | `1` | 39 |
 | `INFRASTRUTTURA` | `2` | 21 |
 | `INFRASTRUTTURA` | `ENTRAMBE` | 24 |
 | `METODO` | `1` | 156 |
-| `METODO` | `2` | 19 |
+| `METODO` | `2` | 20 |
 | `METODO` | `ENTRAMBE` | 95 |
 
 | id | classe | dominio | era | stato | blocca | titolo |
@@ -307,6 +307,7 @@
 | `DOMANDA-LA-FORMA-DI-CS-CHE-SATURA` | DECISIONE | FISICA | 2 | ### **AGENDA** | SI | la forma di cs dal vuoto che satura: la scala Lambda_0 non esiste in tabella |
 | `DOMANDA-LA-FORMA-DI-CS-DAL-VUOTO` | DECISIONE | FISICA | 2 | ### **SUPERATA** |  | la forma di f in cs_k = f'(pi_k): il posto A1 della carta, dichiarato aperto |
 | `DOMANDA-LA-FORMA-DI-F-NELL-ORDINAMENTO` | DECISIONE | FISICA | 2 | ### **AGENDA** | SI | quale F in Lambda F(q q / Lambda^2): esiste, NON e unica, ed e la stessa classe  |
+| `DOMANDA-LA-SCALA-NATURALE-DI-N` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | la scala naturale di N: l-asintoto della saturazione non vale, e N diverge come  |
 | `DOMANDA-LAMBDA-GRANDEZZA` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | lambda: su quale grandezza si misura, e da dove viene il suo valore? |
 | `DOMANDA-MASSA-E-FORME-MANCANTI` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | il termine di massa e due forme del flusso sono nel banco e non in tabella |
 | `DOMANDA-MITOSI-LE-FORME` | DECISIONE | FISICA | 2 | ### **AGENDA** | SI | le quattro forme della mitosi: lo spareggio, phi, il ramo della radice, la conne |
@@ -848,6 +849,7 @@
 | `STANDARD-9` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 13 volte, MAI definito in un registro) [STANDARD 9] |
 | `STATI-LOCALI` | PRESIDIO | INFRASTRUTTURA | 1 | ### **SOSPESA** |  | gli stati .npz del grafo restano LOCALI: in git vanno solo sha1, percorso e coma |
 | `STORICO-COMMIT-STRUTTURALE` | DIFETTO | INFRASTRUTTURA | ENTRAMBE | ### **CHIUSA** |  | il commit di una riga di storico si pretendeva SCRITTO, e nessun clone poteva av |
+| `STRUMENTI-SULLA-LEGGE-VECCHIA` | DIFETTO | METODO | 2 | ### **AGENDA** |  | 20 coppie file/simbolo misurano, saltano o sostituiscono la legge che NON gira |
 | `SYNCDB-HEADLESS` | DIFETTO | INFRASTRUTTURA | 1 | ### **SOSPESA** |  | `--sync-db` in headless CARICA ma non SALVA: lo dice il docstring del driver |
 | `T0` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 32 volte, MAI definito in un registro) |
 | `T1` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | OMONIMO `T1`: 34 definizioni con significati DIVERSI |

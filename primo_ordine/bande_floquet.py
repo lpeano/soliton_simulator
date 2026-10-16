@@ -26,6 +26,7 @@ if _QUI not in sys.path:
 
 import bande as BD                                            # noqa: E402
 import deriva as DV                                           # noqa: E402
+import deriva_variabile as DVAR                               # noqa: E402
 
 
 # ------------------------------------------------- LA SCENA GRANDE, E IL FLOQUET
@@ -77,7 +78,7 @@ def floquet(lati=(10, 10), ticks=4000, seme=7, vuoto_modulo=2.0, ogni=20,
     import composizione as CM
     import io
     inc, mot, st, par = scena_toro(lati, seme, dtau, vuoto_modulo)
-    x0 = DV.satura(st, mot)
+    x0 = DVAR.satura(st, mot)
     Wm = BD.matrice_W(mot, st)
     omega, V, piu, meno, zero = BD.diagonalizza(Wm)
     Pp, Pm, P0 = BD.proiettore(V, piu), BD.proiettore(V, meno), BD.proiettore(V, zero)

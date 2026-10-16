@@ -98,8 +98,9 @@ def valida(lati=(10, 10), ticks=400, seme=7, vuoto_modulo=2.0, ogni=2):
     """### `(D1)`: ### **la validazione dello strumento, coi quattro bracci del piano.**"""
     import composizione as CM
     import deriva as DV
+    import deriva_variabile as DVAR
     inc, mot, st, par = BF.scena_toro(lati, seme, 0.25, vuoto_modulo)
-    x0 = DV.satura(st, mot)
+    x0 = DVAR.satura(st, mot)
     Wm = BD.matrice_W(mot, st)
     omega, V, piu, meno, zero = BD.diagonalizza(Wm)
     Pp, Pm, P0 = (BD.proiettore(V, piu), BD.proiettore(V, meno),

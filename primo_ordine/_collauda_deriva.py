@@ -35,13 +35,16 @@ sys.path.insert(0, os.path.join(os.path.dirname(_QUI), "csv"))
 import _presidio                                              # noqa: E402
 import composizione as CM                                     # noqa: E402
 import deriva as DV                                           # noqa: E402
+import deriva_variabile as DVAR                               # noqa: E402
 import energia as EN                                          # noqa: E402
+import materia_vuoto as MV                                    # noqa: E402
+import saturazione as SAT                                     # noqa: E402
 
 OK = [0, 0]
 EPS = float(np.finfo(float).eps)
 # ### ⚠ **LE SOGLIE, FISSATE QUI:** una soglia dentro un braccio e' ### **una soglia che
 # ### si puo- aggiustare dopo aver visto il numero.**
-X_MINIMO = 0.1          # ### sotto questo la saturazione e- SPENTA: falso-zero
+X_MINIMO = 0.1          # ### sotto questo il termine e- SPENTO: falso-zero
 ULP_MAX = 1000.0
 CAMBIA_MIN = 1e-6
 # ### ⛔⛔ **LA BANDA DELL-ESPONENTE DELLA SORGENTE, dal task history
@@ -69,16 +72,100 @@ def main(argv):
           " CAMBIARE")
     print("=" * 96)
 
-    # ### (1) LA MATERIA: `x` di ordine `1` nel regime di misura
+    # ### ⛔⛔ **`(1)` RISCRITTO IL `2026-10-16` SULLA VARIABILE DELLA LEGGE CHE
+    # ### GIRA** *(task history `2026-10-16_2quater_deriva_satura.md`)*: misurava
+    # ### ### **`|h|/Lambda`**, la variabile della ### **SATURAZIONE**, che dal
+    # ### `2026-10-15` ### **non e- piu- nell-ordine.**
+    idl, fr = DVAR.flusso_che_gira()
+    print("      il flusso NELL-ORDINE, letto dalla tabella: `%s` a frazione %.3f,"
+          " variabile `%s`" % (idl, fr, DVAR.CONOSCIUTI[idl]))
     _i, mot, st, _p = DV.scena(16, 7, 0.2, norma="locale", vuoto_modulo=2.0)
-    x = DV.satura(st, mot)
-    esito("### (1) MATERIA: nel regime di misura `x = |h|/Lambda` e- di ordine 1",
+    x = DVAR.satura(st, mot)
+    esito("### (1) MATERIA: nel regime di misura `x = rho/Lambda` e- di ordine 1",
           x >= X_MINIMO, "x_max = %.4f   (sotto %.2f sarebbe un FALSO-ZERO)"
           % (x, X_MINIMO))
+    # ### ⛔ **IL CASO CHE DEVE FALLIRE ①: `rho = 0` SU TUTTI I NODI.** ### **Senza
+    # ### materia il braccio `(1)` DEVE fallire** -- e senza questo non si saprebbe se
+    # ### guarda qualcosa.
+    _iv, motv, stv, _pv = DV.scena(16, 7, 0.2, norma="locale", vuoto_modulo=2.0)
+    stv["psi_h"].fill(0)
+    xv = DVAR.satura(stv, motv)
+    esito("### (1) DEVE fallire ①: `rho = 0` su TUTTI i nodi", xv < X_MINIMO,
+          "x_max = %.1e: senza materia il braccio (1) NON passa" % xv)
+    # ### ⛔⛔ **IL CASO CHE DEVE FALLIRE ②: LA VARIABILE VECCHIA, su uno stato a
+    # ### `h = 0` ma `rho > 0`.** Con `psi = (1, 1)/sqrt(2)` su ogni estremita- e `n`
+    # ### lungo ### **`z`**, `s.n = |a|^2 - |c|^2 = 0` ### **esattamente**, mentre
+    # ### `rho = 1` per estremita-: ### **il controllo vecchio direbbe <<nessuna
+    # ### materia>>, e la materia C-E-.**
+    _ih, moth, sth, _ph = DV.scena(16, 7, 0.2, norma="locale", vuoto_modulo=2.0)
+    moth.geo.n[:, :] = 0.0
+    moth.geo.n[:, 2] = 1.0
+    sth["psi_h"][:, 0] = 1.0 / np.sqrt(2.0)
+    sth["psi_h"][:, 1] = 1.0 / np.sqrt(2.0)
+    xh_vecchia = DVAR.satura_elicita(sth, moth)
+    xh_nuova = DVAR.satura(sth, moth)
+    esito("### (1) DEVE fallire ②: LA VARIABILE VECCHIA, con `h = 0` e `rho > 0`",
+          xh_vecchia < X_MINIMO <= xh_nuova,
+          "la vecchia `|h|/Lambda` = %.1e (direbbe <<nessuna materia>>), la nuova"
+          " `rho/Lambda` = %.4f: LA MATERIA C-E-" % (xh_vecchia, xh_nuova))
+    # ### ⛔⛔ **IL CASO CHE DEVE FALLIRE ③: UN FLUSSO CHE LO STRUMENTO NON SA
+    # ### MISURARE.** ### **Due sotto-casi**, perche- `flusso_che_gira` ha due assert: il
+    # ### primo pezzo ### **non e- un flusso**, e il primo pezzo e- un flusso
+    # ### ### **che non e- fra i `CONOSCIUTI`.**
+    import motore as MO
+    vecchio_ordine, vecchi_flussi = CM.ORDINE, MO.FLUSSI
+    alzati = []
+    try:
+        # ### ⚠ **il pezzo NON-flusso si PRENDE dalla tabella**, non si scrive a
+        # ### mano: ### **un id di legge cablato in uno strumento e- il difetto che
+        # ### questo braccio sta provando.**
+        non_flusso = [q[0] for q in vecchio_ordine if q[0] not in vecchi_flussi][0]
+        CM.ORDINE = ((non_flusso, 1.0, "lineare"),) + tuple(vecchio_ordine[1:])
+        try:
+            DVAR.flusso_che_gira()
+        except AssertionError as e:                              # noqa: PERF203
+            alzati.append(("il primo pezzo NON e- un flusso", str(e)[:44]))
+        MO.FLUSSI = tuple(vecchi_flussi) + ("CAMM-INVENTATA",)
+        CM.ORDINE = (("CAMM-INVENTATA", 1.0, "flusso"),) + tuple(vecchio_ordine[1:])
+        try:
+            DVAR.flusso_che_gira()
+        except AssertionError as e:
+            alzati.append(("un flusso NON fra i CONOSCIUTI", str(e)[:44]))
+    finally:
+        CM.ORDINE, MO.FLUSSI = vecchio_ordine, vecchi_flussi
+    esito("### (1) DEVE fallire ③: un flusso che lo strumento non sa misurare",
+          len(alzati) == 2,
+          "ha alzato %d volte su 2: %s" % (len(alzati), "; ".join(
+              "%s -> %s" % (q, n) for q, n in alzati)))
+    # ### ⛔ **`(1-bis)` SI CAPOVOLGE** *(non si adatta la banda: si cambia
+    # ### l-affermazione)*: diceva *<<il regime globale e- VACUO>>*, ### **vero per la
+    # ### saturazione** *(`b ~ -x^3/3`, CUBICA)* e ### **FALSO per `S3`** *(`beta ~ -x`,
+    # ### LINEARE)*. ### ⚠ **Il braccio serviva a dire <<una misura fatta qui sarebbe un
+    # ### FALSO-ZERO>>: con `S3` quel pericolo NON C-E- PIU-, e il braccio lo PROVA.**
     _i2, mot2, st2, _p2 = DV.scena(16, 7, 0.2, norma="globale")
-    x2 = DV.satura(st2, mot2)
-    esito("### (1-bis) e il regime `globale` E- quello vacuo, come dichiarato",
-          x2 < X_MINIMO, "x_max = %.5f: la- `G ~ x^3/3 ~ 0`" % x2)
+    x2 = DVAR.satura(st2, mot2)
+    b_s3 = abs(float(MV.beta(x2, 1.0)))
+    b_sat = abs(float(SAT.b(x2)))
+    esito("### (1-bis) nel regime `globale` il termine NON e- spento, con `S3`",
+          b_s3 > 1e-2 and b_s3 / b_sat > 100.0,
+          "a x_max = %.5f: |beta| di `S3` = %.6e contro %.6e della saturazione,"
+          " cioe- %.0f volte" % (x2, b_s3, b_sat, b_s3 / b_sat))
+    # ### ⭐⭐ **IL CONTROLLO POSITIVO: IL TICK DELLO STRUMENTO COINCIDE AL BIT CON
+    # ### `DV.tick`.** ### ⚠ **E non e- un falso-uno:** la fotografia di mezzo tick
+    # ### costruisce `Q` e `J` ### **passando dai buffer di `mot`**, e se uno di quei
+    # ### buffer servisse a un pezzo successivo ### **il resto del tick cambierebbe.**
+    # ### ### **Questo braccio dice che NON cambia.**
+    _ia, mota, sta, para = DV.scena(16, 7, 0.2, norma="locale", vuoto_modulo=2.0)
+    _ib, motb, stb, parb = DV.scena(16, 7, 0.2, norma="locale", vuoto_modulo=2.0)
+    cassa = {}
+    DV.percorri_tick(sta, mota, para, al_primo=DV.fotografo(_ia, mota, para, cassa))
+    DV.tick(stb, motb, parb)
+    chiavi = [k for k in sta if hasattr(sta[k], "shape")]
+    diff = max(float(np.max(np.abs(sta[k] - stb[k]))) if sta[k].size else 0.0
+               for k in chiavi)
+    esito("### (c) il tick dello strumento coincide AL BIT con `DV.tick`",
+          diff == 0.0, "max|differenza| = %.1e su %d campi (`J` costruito a meta- tick"
+          " NON disturba il resto)" % (diff, len(chiavi)))
 
     # ### (2) il PRIMO termine sotto il SOLO pezzo lineare: un-IDENTITA-
     _i3, mot3, st3, par = DV.scena(16, 7, 0.2, norma="locale", vuoto_modulo=2.0)
@@ -94,10 +181,13 @@ def main(argv):
           ulp < ULP_MAX, "|Delta| = %.3e su %.4f  (%.1f ulp)" % (d, p0, ulp))
 
     # ### (3) DEVE CAMBIARE: lo stesso termine sotto `N`
+    # ### ⛔ **IL PEZZO SI PRENDE DALL-ORDINE** *(cura del `2026-10-16`)*: applicava
+    # ### ### **la SATURAZIONE per nome**, cioe- il controllo positivo del braccio `(2)`
+    # ### parlava di ### **una legge che non gira piu-.**
     _i4, mot4, st4, par4 = DV.scena(16, 7, 0.2, norma="locale", vuoto_modulo=2.0)
     q0, _w0 = DV.due_termini(st4, mot4, par4)
     mot4.apri_tick()
-    mot4.operatori["CAMM-SATURAZIONE"](st4, {}, 1)
+    mot4.operatori[idl](st4, {}, 1)
     mot4.chiudi_tick()
     q1, _w1 = DV.due_termini(st4, mot4, par4)
     esito("### (3) DEVE CAMBIARE: il primo termine sotto `N` NON e- conservato",

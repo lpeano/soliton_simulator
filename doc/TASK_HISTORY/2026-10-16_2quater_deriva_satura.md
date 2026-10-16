@@ -97,3 +97,44 @@ resta `[0.75, 1.25]`. ### **Se un numero ne esce, si riporta e si ritira il brac
 3. il **CENSIMENTO** *(`43` coppie file/simbolo su `22` file)* classificato
    ### **LEGITTIMO** o ### **SCADUTO**, in tabella nella relazione.
 4. la suite: ### **`53` ok, `0` rossi**, e i numeri nuovi del `(6)`.
+
+---
+
+## 4. ⭐ ANNOTAZIONE DOPO LE MISURE — *il ragionamento di sopra NON si riscrive*
+
+### ⛔⛔ **IL NUMERO `1344` DEL PARAGRAFO `1` NON E' CONFERMATO, ed e' colpa mia:**
+l'avevo calcolato a ### **`x = 0.03289`**, che era il `x_max` del regime `globale`
+### **misurato sulla variabile VECCHIA** *(`|h|/Lambda`)*. Sulla variabile della legge che
+gira quel regime sta a ### **`x_max = 0.06479`**, e la' il rapporto vale
+### **`337`** *(`|beta|` di `S3` `= 6.084923e-02`, la saturazione `= 1.804200e-04`)*.
+
+> ### ✅ **IL CRITERIO, fissato PRIMA, TIENE:** *«`|beta| > 1e-2` e il rapporto con la
+> saturazione `> 100`»* — ### **`6.1e-02` e `337`.** ### ⚠ **Ma il `1344` era un conto
+> fatto al `x` SBAGLIATO**, e scriverlo accanto a `337` come se fosse la stessa cosa
+> sarebbe ### **far passare una previsione che non e' stata provata.**
+
+### ⭐⭐ **IL BRACCIO `(6)` RIMISURATO, coi vecchi ACCANTO ai nuovi**
+
+| | il passo | esponente `1` | esponente `2` |
+|---|---|---|---|
+| `3bd2b75` | ### **MISTO** *(mezza saturazione + lineari + mezzo `S3`)* | `0.8436` | `0.9891` |
+| ### **oggi** | ### **l'ordine INTERO dalla tabella** | ### **`0.8466`** | ### **`0.9891`** |
+
+### ✅ **Entrambi in `[0.75, 1.25]`**, la banda fissata nel task history di `B` e
+### **non toccata.** ### **La sorgente ai tre `dtau`** *(`0.2`, `0.05`, `0.0125`)*:
+`2.330036e+00`, `7.205664e-01`, `1.828900e-01`.
+### 📌 **Quindi il verdetto del braccio `(6)` NON E' PIU' SOSPESO.**
+### ⚠ **E la differenza e' piccola** — `0.0030` sul primo esponente — ### **il che NON
+assolve il passo misto:** diceva `O(dtau)` di ### **un passo che non era nessuna delle
+due leggi**, e che adesso dica la stessa cosa del passo giusto e' ### **una fortuna, non
+un argomento.**
+
+### ⛔ **E TRE SITI IN PIU', che la DIVISIONE del modulo ha fatto uscire:**
+`bande.py`, `bande_floquet.py` e `segno.py` chiamavano ### **`DV.satura`** — e `satura`
+e' andata in `deriva_variabile.py`, quindi ### **erano rotti.** ### **Curati nello stesso
+commit**, perche' li ho rotti io.
+
+### 📌 **E una cosa che il mandato non chiedeva e che il censimento ha trovato:**
+`deriva.nat2` ### **e' l'asintoto AFFINE della saturazione**, e `N = -rho ln(1 +
+Lambda/rho)` ### **diverge come un logaritmo:** non c'e' una funzione affine che la limiti.
+### ⛔ **Non la scelgo io** — e' la voce `[[DOMANDA-LA-SCALA-NATURALE-DI-N]]`.

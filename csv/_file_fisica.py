@@ -232,6 +232,10 @@ FILE_FISICA = (
     # ### ### **la saturazione e- SPENTA** -- una <<conservazione>> misurata la- non
     # ### distingue ### **<<`E` si conserva>> da <<il termine non c-e->>.**
     'primo_ordine/deriva.py',
+    # ### ⭐ **LE STATISTICHE DELLE SERIE**, uscite da `deriva.py` con la cura del
+    # ### `2-quater`: quel file era arrivato a ### **`763` righe**, oltre il tetto.
+    'primo_ordine/deriva_variabile.py',
+    'primo_ordine/deriva_serie.py',
     'primo_ordine/deriva_referto.py',
     # ### LE DUE BANDE DI `W`: particella e antiparticella.
     # ### ⛔ **E IL SUO CONTROLLO HA TROVATO UNA CONDIZIONE DI FISICA:** la `C`

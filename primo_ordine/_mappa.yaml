@@ -208,7 +208,15 @@ moduli:
 
   - nome: deriva.py
     responsabilita: la deriva di E e dei suoi due termini, la scansione in x, e la sorgente
-    importa: [_presidio, composizione, corrente, deriva_referto, energia, incidenza, motore, saturazione, stato]
+    importa: [_presidio, composizione, corrente, deriva_referto, deriva_serie, deriva_variabile, energia, incidenza, motore, saturazione, stato]
+
+  - nome: deriva_variabile.py
+    responsabilita: la variabile del flusso che gira, letta dalla tabella
+    importa: [composizione, motore]
+
+  - nome: deriva_serie.py
+    responsabilita: le statistiche PURE sulle serie -- nessuna scena, nessun motore
+    importa: []
 
   - nome: deriva_referto.py
     responsabilita: il referto della deriva, e la configurazione INTERA che dichiara
@@ -216,23 +224,23 @@ moduli:
 
   - nome: bande.py
     responsabilita: le due bande spettrali di W, il controllo C, e le grandezze per banda
-    importa: [_presidio, composizione, deriva, energia, motore]
+    importa: [_presidio, composizione, deriva, deriva_variabile, energia, motore]
 
   - nome: bande_floquet.py
     responsabilita: il riscaldamento di Floquet sulla scena grande, e il salvataggio durante la corsa
-    importa: [_presidio, bande, composizione, corrente, deriva, incidenza, motore, stato]
+    importa: [_presidio, bande, composizione, corrente, deriva, deriva_variabile, incidenza, motore, stato]
 
   - nome: segno.py
     responsabilita: lo squilibrio LOCALE q, C-dispari, e la sua validazione contro Q
-    importa: [_presidio, bande, bande_floquet, composizione, corrente, deriva, motore]
+    importa: [_presidio, bande, bande_floquet, composizione, corrente, deriva, deriva_variabile, motore]
 
   - nome: _collauda_tempo_proprio.py
     responsabilita: misura quali pezzi evolvono col TICK invece che col tempo proprio
     importa: [_presidio, composizione, deriva]
 
   - nome: _collauda_deriva.py
-    responsabilita: il collaudo della deriva, e presidia il FALSO-ZERO della saturazione spenta
-    importa: [_presidio, composizione, deriva, energia]
+    responsabilita: il collaudo della deriva, e presidia il FALSO-ZERO del termine spento
+    importa: [_presidio, composizione, deriva, deriva_variabile, energia, materia_vuoto, motore, saturazione]
 
   - nome: crescita.py
     responsabilita: la crescita del grafo, regola NON-H col suo bilancio

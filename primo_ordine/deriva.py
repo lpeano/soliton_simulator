@@ -42,6 +42,8 @@ if _QUI not in sys.path:
     sys.path.insert(0, _QUI)
 
 import composizione as CM                                     # noqa: E402
+import deriva_serie as DS                                     # noqa: E402
+import deriva_variabile as DVAR                                     # noqa: E402
 import energia as EN                                          # noqa: E402
 import deriva_referto as RF                                   # noqa: E402
 import saturazione as SAT                                     # noqa: E402
@@ -66,17 +68,54 @@ OPERATORE = {
     "CAMM-GROVER-VUOTO": ("grover_scalare", False),
     "CAMM-SPOSTAMENTO-VUOTO": ("spostamento_scalare", False),
 }
+
+
+def percorri_tick(st, mot, par, salta=(), al_primo=None):
+    """### IL TICK, PERCORSO IN UN SOLO POSTO: ### **l-ordine della tabella, INTERO.**
+
+    ### ⛔⛔ **ESISTE PERCHE- C-ERANO DUE PERCORSI** *(cura del `2026-10-16`)*:
+    `tick` faceva l-ordine intero, `sorgente_per_nodo` applicava ### **un pezzo A MANO,
+    per nome**, e poi `CM.ORDINE[1:]` -- cioe- ### **un passo MISTO fra due leggi.** Con
+    un solo posto ### **quel difetto non si puo- piu- scrivere.**
+
+    `al_primo(st)` *(se dato)* si chiama ### **dopo il PRIMO pezzo dell-ordine, qualunque
+    esso sia**: e- la fotografia dello stato che entra nei pezzi lineari.
+    `salta` toglie dei pezzi ### **per id**, e serve a `vuoto_cammina=False`.
+    """
+    mot.apri_tick()
+    for k, (idl, frazione, _tipo) in enumerate(CM.ORDINE):
+        if idl not in salta:
+            nome, vuole_par = OPERATORE.get(idl, (None, None))
+            assert nome, (
+                "la legge `%s` e' nell'ordine di composizione e NON e' in `OPERATORE`:"
+                " ### **un pezzo del tick che non gira e' un tick diverso**, e saltarlo in"
+                " silenzio sarebbe misurare un'altra cosa" % idl)
+            mot.operatori[nome](st, par if vuole_par else {}, frazione)
+        if k == 0 and al_primo is not None:
+            al_primo(st)
+    mot.chiudi_tick()
+
+
+def fotografo(inc, mot, par, cassa):
+    """### IL CALLBACK che fotografa lo stato ### **e costruisce `J` SU QUELLO.**
+
+    ### ⚠ **Sta qui e non nello strumento** perche- il controllo positivo del collaudo
+    deve usare ### **lo STESSO codice** che gira nella misura: un callback riscritto nel
+    collaudo proverebbe ### **un-altra cosa.**
+    """
+    import corrente as CO
+
+    def _f(st):
+        mezzo = {kk: (v.copy() if hasattr(v, "copy") else v) for kk, v in st.items()}
+        cassa["Q"] = CO.forma_quadratica(mezzo, mot, par)
+        cassa["J"], cassa["portata"], cassa["dia"] = CO.instrada(
+            cassa["Q"], inc, CO.x_da_psi(mezzo["psi_h"]))
+    return _f
+
+
 def tick(st, mot, par):
     """### UN tick, ### **nell'ordine della tabella e non in uno mio.**"""
-    mot.apri_tick()
-    for idl, frazione, _tipo in CM.ORDINE:
-        nome, vuole_par = OPERATORE.get(idl, (None, None))
-        assert nome, (
-            "la legge `%s` e' nell'ordine di composizione e NON e' in `OPERATORE`:"
-            " ### **un pezzo del tick che non gira e' un tick diverso**, e saltarlo in"
-            " silenzio sarebbe misurare un'altra cosa" % idl)
-        mot.operatori[nome](st, par if vuole_par else {}, frazione)
-    mot.chiudi_tick()
+    percorri_tick(st, mot, par)
 
 
 def due_termini(st, mot, par):
@@ -170,24 +209,11 @@ def scena(nn, seme, dtau, lunghezza=0, norma="locale", vuoto_modulo=1.0,
     return inc, mot, st, {"eps": 0.5}
 
 
-def satura(st, mot):
-    """### `max_k |h_k / Lambda_k|`: ### **la prova che la saturazione e' ACCESA.**
-
-    ### ⛔ **Senza questo numero ogni misura su `N` e' un FALSO-ZERO sospetto:** a
-    `h/Lambda ~ 0` si ha `G ~ x^3/3 ~ 0`, e ### **una sorgente nulla non direbbe che `N`
-    non ha sorgente, direbbe che `N` non c'era.**
-    """
-    h = mot.elicita(st)
-    lam = mot.densita_vuoto(st)
-    buoni = lam > 0.0
-    return float(np.max(np.abs(h[buoni] / lam[buoni]))) if np.any(buoni) else 0.0
-
-
 def corri(nn, dtau, ticks, seme=7, lunghezza=0, ogni=1, norma="locale",
           vuoto_modulo=1.0, su2=False):
     """### Fa girare `ticks` tick e rende ### **le tre serie: `E`, primo, vuoto.**"""
     inc, mot, st, par = scena(nn, seme, dtau, lunghezza, norma, vuoto_modulo, su2)
-    sat = satura(st, mot)
+    sat = DVAR.satura(st, mot)
     e1, e2 = due_termini(st, mot, par)
     serie = [(0, e1 + e2, e1, e2)]
     for t in range(1, ticks + 1):
@@ -196,6 +222,7 @@ def corri(nn, dtau, ticks, seme=7, lunghezza=0, ogni=1, norma="locale",
             e1, e2 = due_termini(st, mot, par)
             serie.append((t, e1 + e2, e1, e2))
     return np.asarray(serie, dtype=float), inc, mot, st, par, sat
+
 
 
 def m0(nn=16, tempo=2.0, dimezzamenti=5, dtau0=0.2, seme=7, norma="locale"):
@@ -222,24 +249,6 @@ def m0(nn=16, tempo=2.0, dimezzamenti=5, dtau0=0.2, seme=7, norma="locale"):
     return righe, sat, scale
 
 
-def rapporti(righe, col):
-    """### I rapporti fra dimezzamenti consecutivi. ### **`4` = esponente `2`.**"""
-    fuori = []
-    for a, b in zip(righe[:-1], righe[1:]):
-        fuori.append(a[col] / b[col] if b[col] > 0 else float("inf"))
-    return fuori
-
-
-def escursioni(serie):
-    """### `(somma, primo, vuoto)`: ### **`max - min` lungo la corsa**, non `fine - inizio`.
-
-    ### ⛔ **E la differenza conta:** `fine - inizio` di un'oscillazione puo' fare **zero**
-    anche quando l'escursione e' grande. ### **L'escursione e' cio' che la verifica esterna
-    ha misurato sul banco**, e si misura la stessa cosa per poter confrontare.
-    """
-    return tuple(float(serie[:, c].max() - serie[:, c].min()) for c in (1, 2, 3))
-
-
 def scansione(moduli, nn=16, dtau=0.25, ticks=400, seme=7, su2=False):
     """### **LA SCANSIONE IN `x = |h_k|/Lambda_k`**, dal regime vacuo a quello che LAVORA.
 
@@ -261,12 +270,15 @@ def scansione(moduli, nn=16, dtau=0.25, ticks=400, seme=7, su2=False):
                                            vuoto_modulo=f, su2=su2)
         # ### `x` si rimisura SULLO STATO INIZIALE, ricostruito: la corsa l-ha cambiato
         _i2, mot2, st2, _p2 = scena(nn, seme, dtau, 0, "locale", f, su2)
+        # ### ⛔ **LA VARIABILE E- QUELLA DEL FLUSSO CHE GIRA** *(cura del `2026-10-16`)*:
+        # ### era ### **`|h|/Lambda`**, la variabile della saturazione.
         h = mot2.elicita(st2)
+        rho = mot2.densita_materia(st2)
         lam = mot2.densita_vuoto(st2)
         buoni = lam > 0.0
-        x_max = float(np.max(np.abs(h[buoni] / lam[buoni]))) if np.any(buoni) else 0.0
-        x_med = float(np.mean(np.abs(h[buoni] / lam[buoni]))) if np.any(buoni) else 0.0
-        esc = escursioni(serie)
+        x_max = float(np.max(rho[buoni] / lam[buoni])) if np.any(buoni) else 0.0
+        x_med = float(np.mean(rho[buoni] / lam[buoni])) if np.any(buoni) else 0.0
+        esc = DS.escursioni(serie)
         sc = (abs(float(serie[0, 2])), abs(float(serie[0, 3])))
         # ### ⛔ **LE SCALE NATURALI, e non solo il valore iniziale:** il valore
         # ### iniziale del primo termine puo- capitare ### **vicino a uno zero**, e
@@ -342,25 +354,6 @@ def lambda_sotto_vuoto(nn, seme, uniforme, pezzi, frazione, dtau):
     return (float(np.max(np.abs(dopo - prima))), abs(float(np.sum(dopo)) - v0))
 
 
-def secolare(serie):
-    """### `(pendenza, ampiezza, rapporto)`: ### **deriva SECOLARE o OSCILLAZIONE?**
-
-    ### ⭐ **Il criterio e' un rapporto e non un occhio:** si adatta una retta a `E(t)` e
-    si confronta la **variazione che la retta spiega** con l'**ampiezza dei residui**.
-    ### ✅ **`rapporto >> 1` vuol dire SECOLARE** *(la retta spiega quasi tutto)*;
-    ### ⛔ **`rapporto << 1` vuol dire OSCILLANTE** *(la retta non spiega niente, e il
-    segnale e' tutto nei residui)*.
-    """
-    t = serie[:, 0]
-    e = serie[:, 1] - serie[0, 1]
-    pend, quota = np.polyfit(t, e, 1)
-    spiegata = abs(pend) * (t[-1] - t[0])
-    residui = e - (pend * t + quota)
-    amp = float(np.max(residui) - np.min(residui))
-    return (float(pend), amp,
-            spiegata / amp if amp > 0 else float("inf"))
-
-
 def sorgente_per_nodo(nn=16, dtau=0.2, seme=7, norma="locale", vuoto_cammina=True,
                       vuoto_modulo=1.0):
     """### `(c)` — **LA SORGENTE PER NODO sul tick INTERO, con `N` acceso.**
@@ -389,26 +382,21 @@ def sorgente_per_nodo(nn=16, dtau=0.2, seme=7, norma="locale", vuoto_cammina=Tru
     import corrente as CO
     inc, mot, st, par = scena(nn, seme, dtau, norma=norma,
                               vuoto_modulo=vuoto_modulo)
-    sat = satura(st, mot)
+    sat = DVAR.satura(st, mot)
     prima = EN.per_nodo(st, mot, par).copy()
-    # ### il PRIMO MEZZO FLUSSO, poi si fotografa lo stato che entra nel pezzo lineare
-    mot.apri_tick()
-    mot.operatori["CAMM-SATURAZIONE"](st, {}, 0.5)
-    mezzo = {k: (v.copy() if hasattr(v, "copy") else v) for k, v in st.items()}
-    # ### la corrente del pezzo lineare, costruita SU QUELLO STATO
-    Q = CO.forma_quadratica(mezzo, mot, par)
-    J, portata, dia = CO.instrada(Q, inc, CO.x_da_psi(mezzo["psi_h"]))
-    # ### e il resto del tick, ### **saltando la camminata del vuoto se richiesto**
+    # ### ⛔⛔ **IL TICK LO PERCORRE `percorri_tick`, E NON QUESTA FUNZIONE** *(cura
+    # ### del `2026-10-16`: applicava ### **la SATURAZIONE a mano** e poi `CM.ORDINE[1:]`,
+    # ### cioe- un passo ### **MISTO** -- il perche- sta nel task history del `2-quater`)*.
+    # ### **Il <<mezzo tick>> e- dopo il PRIMO pezzo, qualunque esso sia**, e
+    # ### `flusso_che_gira()` ### **ALZA** se quel posto non e- un flusso conosciuto.
+    DVAR.flusso_che_gira()
     salta = () if vuoto_cammina else ("CAMM-GROVER-VUOTO", "CAMM-SPOSTAMENTO-VUOTO")
-    for idl, frazione, _tipo in CM.ORDINE[1:]:
-        if idl in salta:
-            continue
-        nome, vuole_par = OPERATORE[idl]
-        mot.operatori[nome](st, par if vuole_par else {}, frazione)
-    mot.chiudi_tick()
+    cassa = {}
+    percorri_tick(st, mot, par, salta=salta,
+                  al_primo=fotografo(inc, mot, par, cassa))
     dopo = EN.per_nodo(st, mot, par).copy()
-    s = (dopo - prima) - CO.divergenza(J, inc)
-    return s, (dopo - prima), portata, sat
+    s = (dopo - prima) - CO.divergenza(cassa["J"], inc)
+    return s, (dopo - prima), cassa["portata"], sat
 
 
 def main(argv):
@@ -429,7 +417,7 @@ def main(argv):
          " sua sorgente la\' sarebbe un FALSO-ZERO.**", ""]
     for norma in NORME:
         print("  D-ENERGIA:M0 (%s)  deriva a T = 2.0, anello di 16 nodi" % norma)
-        righe, sat, scale = m0(norma=norma)
+        righe, sat, scale = DS.m0(norma=norma)
         print("      LA SCALA:  primo termine = %.6e   vuoto = %.6e"
               "   max|h/Lambda| = %.4f" % (scale[0], scale[1], sat))
         b.append("### %s **regime `%s`:** `primo = %.4e`, `vuoto = %.4e`,"
@@ -443,9 +431,9 @@ def main(argv):
             print("      dtau=%-8.5f tick=%-5d |dE|=%.6e  |d primo|=%.3e"
                   "  |d vuoto|=%.6e" % (dt, tk, de, d1, d2))
             b.append("| `%.5f` | %d | `%.6e` | `%.3e` | `%.6e` |" % (dt, tk, de, d1, d2))
-        rE = rapporti(righe, 2)
-        r1 = rapporti(righe, 3)
-        r2 = rapporti(righe, 4)
+        rE = DS.rapporti(righe, 2)
+        r1 = DS.rapporti(righe, 3)
+        r2 = DS.rapporti(righe, 4)
         print("      rapporti su |dE|:    " + "  ".join("%.3f" % x for x in rE))
         print("      rapporti sul vuoto:  " + "  ".join("%.3f" % x for x in r2))
         b.append("")
@@ -485,7 +473,7 @@ def main(argv):
     # ---------------------------------------------------------------- M1a
     print("  D-ENERGIA:M1a  il run LUNGO: oscilla o deriva?")
     serie, _i, _m, _s, _p, sat = corri(16, 0.2, 20000, ogni=20)
-    pend, amp, rap = secolare(serie)
+    pend, amp, rap = DS.secolare(serie)
     estremi = (float(np.min(serie[:, 1] - serie[0, 1])),
                float(np.max(serie[:, 1] - serie[0, 1])))
     print("      20000 tick:  pendenza %.3e per tick, ampiezza residui %.3e,"
@@ -520,7 +508,7 @@ def main(argv):
         # ### una scala di `6`, ### **`fine - inizio` E- UN CAMPIONE A CASO** di
         # ### un-oscillazione grande -- e tre campioni a caso non dicono niente
         # ### sull-estensivita-.
-        d = escursioni(s2)[0]
+        d = DS.escursioni(s2)[0]
         print("      n=%-4d E(0) = %-12.4f |dE| = %.6e   per nodo = %.6e"
               % (nn, float(s2[0, 1]), d, d / nn))
         b.append("| %d | `%.4f` | `%.6e` | `%.6e` |" % (nn, float(s2[0, 1]), d, d / nn))
@@ -535,7 +523,7 @@ def main(argv):
                        (4, "periodo 4 nodi"), (8, "periodo 8 nodi"),
                        (32, "periodo 32 nodi (il piu\' liscio)")):
         s3, _i, _m, _s, _p, sa = corri(32, 0.2, 200, lunghezza=lung, ogni=2)
-        d = escursioni(s3)[0]
+        d = DS.escursioni(s3)[0]
         print("      %-34s max|h/Lam| = %-8.4f |dE| = %.6e" % (etic, sa, d))
         b.append("| %s | `%.4f` | `%.6e` |" % (etic, sa, d))
     blocchi.append(b)

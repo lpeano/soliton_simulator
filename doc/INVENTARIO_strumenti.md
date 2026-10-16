@@ -3699,3 +3699,16 @@ scena **cresca** come gli archi *(`4.00x` su `4.00x` atteso)*; `m3` **`0.005114`
 | ### ⛔ **IL CONO, nei due modi** | `|alpha| dtau > pi` **gia' a `rho = 1e-12`** per `S2` e `S3` *(la' la fase vale `13.3`)*, **MAI** per `S1` e `S4`. ### **E il cambiamento di STATO per tick:** `S2` fa **`1.886x`** quello del passo **senza** il termine — ### **l'unica forma che cambia lo stato PIU' del passo libero** *(`S1` `0.65`, `S3` `0.80`, `S4` `0.91`)* |
 | ### 📌 **LA LARGHEZZA del grumo** | da `0.894` a `~3.6`-`4.1` per **tutte**: `S1` `4.07`, `S2` `3.61`, `S3` `3.79`, `S4` `3.74`, e **l'ATTUALE `3.62`**. ### **Nessuna forma tiene la figura meglio di quella di oggi** — e ### ⛔ **non dichiaro nessun legame con la letteratura: ho misurato la larghezza, e basta** |
 | ### ✅ **il controllo nullo** | termine **spento** → `dLambda =` **`0.000e+00`** esatto |
+
+### `csv/_censimento_legge_vecchia.py` — **il censimento di chi parla della legge vecchia**
+
+| | |
+|---|---|
+| **il comando** | `python csv/_censimento_legge_vecchia.py` |
+| **cosa misura** | quante volte `elicita`, `CAMM-SATURAZIONE`, `SAT.`, `x^3/3` e `import saturazione` compaiono nel ### **perimetro attivo** *(`primo_ordine/**` e `csv/**`, meno `_archivio`, `_seal_*`, `_test_fork` e ### **se stesso**)*, e ### **genera `doc/CENSIMENTO_legge_vecchia.md`** coi verdetti `LEGITTIMO` / `SCADUTO` |
+| **il presidio dentro** | ### ⛔ **una coppia file/simbolo SENZA verdetto FA ALZARE**, e un verdetto che non corrisponde a nessuna coppia pure: cosi' ### **un uso nuovo della legge vecchia non entra in silenzio**, e ### **uno curato non resta nell'elenco** |
+| **il BLOB** | `sha1-BYTE 603a6405` |
+
+### ⚠ **I verdetti sono un GIUDIZIO, i conteggi sono una MISURA:** i primi stanno nel
+dizionario `V` del generatore *(e si leggono, si discutono, si cambiano con un commit)*, i
+secondi ### **escono dai file a ogni corsa.**

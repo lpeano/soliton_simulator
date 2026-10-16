@@ -47,6 +47,7 @@ if _QUI not in sys.path:
     sys.path.insert(0, _QUI)
 
 import deriva as DV                                           # noqa: E402
+import deriva_variabile as DVAR                               # noqa: E402
 import energia as EN                                          # noqa: E402
 
 # ### ⚠ **LA SOGLIA DEL SETTORE `0`, e NON e' una manopola di fisica:** separa
@@ -194,7 +195,7 @@ def corri_bande(nn=16, dtau=0.25, ticks=200, seme=7, vuoto_modulo=2.0,
     # ### non e- la lettura giusta**, quindi la misura ### **non si fa.**
     inc, mot, st, par = DV.scena(nn, seme, dtau, norma="locale",
                                  vuoto_modulo=vuoto_modulo, su2=True)
-    sat = DV.satura(st, mot)
+    sat = DVAR.satura(st, mot)
     cc = controllo_C(mot, st)
     Wm, Pp, Pm, P0 = cc["Wm"], cc["Pp"], cc["Pm"], cc["P0"]
     salta = () if enne else ("CAMM-SATURAZIONE",)

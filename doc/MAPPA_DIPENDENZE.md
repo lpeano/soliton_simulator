@@ -643,3 +643,34 @@ posto dove si chiude e' la coesione *(`DEC-FC-COESIONE`, non presa)*.
 dipende dal vuoto. ### **E' la prossima decisione di Luca** *(voce
 `DOMANDA-LA-FORMA-DI-CS`)*, e il suo POSTO e' cablato da `F7` mentre ### **la FORMA e'
 aperta** *(`A1`)*.
+
+## 18. ✅ `L2` — **UN SOLO POSTO PERCORRE IL TICK, E `deriva` SI DIVIDE IN TRE**
+*(`2026-10-16`)*
+
+### ⭐⭐ **LA DIPENDENZA NUOVA CHE CONTA: `percorri_tick`**
+
+```
+deriva.tick              -> deriva.percorri_tick     (l'ordine INTERO dalla tabella)
+deriva.sorgente_per_nodo -> deriva.percorri_tick     (+ deriva.fotografo come callback)
+```
+
+### ⛔ **Prima erano DUE percorsi**, e il secondo applicava ### **un pezzo per nome.**
+### ✅ **Con un solo posto il passo MISTO non si puo' piu' scrivere**, e questa e' la
+differenza fra ### **una regola** e ### **una struttura che la fa rispettare.**
+
+### ⭐ **LA DIVISIONE DI `deriva.py`** *(era `763` righe, tetto `P-MOD` `700`)*
+
+| modulo | righe | che cosa ci sta | `importa` |
+|---|---|---|---|
+| `deriva.py` | ### **`687`** | la scena, il tick, le misure, `corri` | *(come prima, piu' `deriva_serie` e `deriva_variabile`)* |
+| `deriva_serie.py` | `48` | `rapporti`, `escursioni`, `secolare` — ### **statistica PURA** | ### **niente** |
+| `deriva_variabile.py` | `75` | `flusso_che_gira`, `CONOSCIUTI`, `satura`, `satura_elicita` | `motore`, `composizione` |
+
+### ⚠ **E `m0` E' TORNATA IN `deriva.py`:** messa in `deriva_serie.py` faceva
+### **un CICLO di import** *(`_collauda_deriva -> deriva -> deriva_serie -> deriva`)*, e
+`P-MOD` ### **l'ha rifiutato.** ### **Il ciclo e' il criterio, non il numero di righe.**
+
+### 📌 **E I TRE CHE LA DIVISIONE HA ROTTO:** `bande.py`, `bande_floquet.py` e `segno.py`
+chiamavano ### **`DV.satura`**, che e' andata in `deriva_variabile`.
+### ⛔ **`P-MOD` NON li ha visti**, perche' guarda ### **gli import dichiarati**, non
+### **gli attributi usati**: li ha trovati un `grep` del censimento.
