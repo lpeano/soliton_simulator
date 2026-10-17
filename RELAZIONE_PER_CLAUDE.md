@@ -18579,3 +18579,20 @@ nullo *(`1902e0a9`)* aveva rotto ### **tre strumenti**, e ### **la suite diceva 
 *(`62` su `62`)*, col controllo ### **contro il PADRE del commit del divieto**: numeri
 ### **identici.** ### ⚠ **E resta aperto un censimento:** quanti altri file della
 fisica la suite non gira.
+### 📌 **IL TASK HISTORY DI `D3`, PRIMA DEL CODICE**
+
+`doc/TASK_HISTORY/2026-10-17_D3_l1_resta_chiuso_con_cs.md`: i ### **quattro criteri sono
+quelli della tabella di `D`**, e qui ### **non si cambiano.**
+### ✅ **E I TRE FATTI DI OGGI, letti a forma SPENTA prima di progettare:**
+### **`0` violatori su `12`** del tempo proprio, ### **`M-B2` pendenza `1.965` su `5`
+dimezzamenti** *(controprova `0.837`)*, ### **la simmetria `<= 8` ulp su `8` semi.**
+### ⛔ **Quindi i quattro reggono OGGI, e la domanda di `D3` e' SOLO se la forma
+accesa li rompe.**
+### ⚠ **E DICO QUAL E' IL BRACCIO CHE MI ASPETTO PIU' FRAGILE, prima di misurarlo:**
+la simmetria, perche' la banda la' e' ### **`8` ulp** *(`512` volte piu' stretta di quella
+della `PTheta`)* e il punto fisso di `cs` ### **si ferma agli ulp**, cioe' ### **aggiunge
+un arrotondamento che la forma spenta non ha.**
+### ⛔ **E un fatto che ho letto e che cambia il disegno:** `_misura_mb2._tick_ordine`
+e `_misura_theta_nonlineare.passo` ### **percorrono il tick DA SOLI**, quindi
+### **accendere `cs` sul motore NON basta** a far misurare con `cs` gli strumenti
+esistenti.
