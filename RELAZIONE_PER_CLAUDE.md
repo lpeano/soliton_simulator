@@ -18274,3 +18274,34 @@ di `M-B1` e' ### **nella sua scheda** *(l'integrazione del `2026-10-17`)*.
 timbrato *«committato e pulito»*: ### **`4` su `4`**, e dentro ci sono le due righe che
 contano — ### **`6` pezzi distinti dall'ordine** col piu' debole a `1.415e-01`, e il
 ### **violatore VISTO** con `|differenza| = 0.0e+00`.
+### ⛔ **IL PUNTO `D` COMINCIATO: il task history con LA STELLA POLARE**
+
+*(`doc/TASK_HISTORY/2026-10-17_D_cs_lambda_nel_motore.md`, committato ### **prima del
+codice**.)*
+
+### ⭐⭐ **LE CINQUE RISPOSTE, in breve, e due di loro sono SCOMODE:**
+
+### ① **`A14`:** la ### **NORMA** si conserva ### **al bit** *(ogni pezzo e' unitario
+per qualunque `dtau`)*; l'### **ENERGIA** no, ed e' ### **una violazione GIA' dichiarata**
+*(`[[DEC-QC-CONSERVATA]]`: solo al secondo ordine)*. ### ⚠ **E con `cs` DINAMICO il secondo
+ordine POTREBBE degradare: e' il criterio `D3`, e se degrada lo riferisco.**
+### ② **i tre gradini:** `(a)` ### **superato e piu' che superato** *(si chiede
+### **AL BIT**)*; `(b)` ### **e' il caso che deve fallire di `D4`** *(senza sorgente `cs`
+resta uniforme)*; `(c)` ### ⛔ **NON raggiunto, e lo dico: non esiste un limite noto di
+`cs(Lambda)`** con cui confrontare.
+### ③ ### ⛔⛔ **AGGIUNGE UN NUMERO, ED E' IL PRIMO DEL MODELLO:** `Lambda_c` e'
+### **LA PRIMA SCALA ASSOLUTA** — tutte le leggi di oggi sono ### **rapporti**, e
+`parametri: {}` in tabella. ### **Il tipo e' COSTANTE DI ACCOPPIAMENTO** *(legittima, va
+dichiarata)*, ### **non una toppa e non un clip**; e ### **nessun pavimento**, perche'
+`cs < 1` viene ### **dalla forma stessa.**
+### ④ **tocca `c_s`, ed e' il suo oggetto.** Il verso e' ### **curvatura → EM** *(il
+vuoto decide come si propaga tutto il resto)*. ### ⛔ **Il verso OPPOSTO NON e' in questo
+pezzo: e' `L4`** — e ### **un accoppiamento a un solo verso non e' quello della
+natura**, quindi ### **questo pezzo fa META' del lavoro e lo dichiara.**
+### ⑤ ### **`Lambda_c` e' IMPOSTO**, e il pezzo e' costruito perche' si veda: con la
+forma ### **spenta** non succede ### **niente, al bit.**
+
+### ⛔⛔ **E LA COSA CHE PIU' PROBABILMENTE MI FERMERA', scritta PRIMA:**
+### **`Lambda = 0` da' `cs = 0`**, e l'assert del cono *(`_frazione_valida`, `0 < f <= 1`)*
+### **lo rifiuta per costruzione.** ### ⛔ **Non cambio l'assert:** se succede,
+### **il punto `D` si ferma la' e lo scrivo.**
