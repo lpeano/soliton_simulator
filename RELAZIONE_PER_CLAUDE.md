@@ -18650,8 +18650,13 @@ uniforme.**
 ### **esce `1`**, e la scelta e' di Luca *(`[[DOMANDA-QUALE-INVARIANTE-CON-CS]]`)*.
 
 ### 📌 **E LO STOP E' REGISTRATO IN CODA, non solo detto qui:**
- ha la tabella di cio' che e' ### **PRONTO** *(il pezzo 6, il
-, il censimento della suite, il buco di )* e cio' che e' ### **BLOCCATO**.
-### ⚠ **E  NON lo faccio senza risposta**, col motivo scritto: produce i numeri con cui
-si ### **SCEGLIE **, e se la risposta fosse la lettura  *(la forma non e' la
-strada)* ### **quei numeri non servirebbero a decidere niente.**
+`doc/CODA_2026-10-16.md` ha la tabella di cio' che e' ### **PRONTO** *(il pezzo `6`, il
+`2-quinquies`, il censimento della suite, il buco di `P-ES1`)* e cio' che e' ### **BLOCCATO**.
+### ⚠ **E `D4` NON lo faccio senza risposta**, col motivo scritto: produce i numeri
+con cui si ### **SCEGLIE `Lambda_c`**, e se la risposta fosse la lettura `(c)`
+*(la forma non e' la strada)* ### **quei numeri non servirebbero a decidere niente.**
+### ⛔⛔ **E I BACKTICK ME LI HA MANGIATI LA SHELL, per la seconda volta oggi:** il
+testo ### **non passa dalla shell**, mai. ### **La prima volta era un commento in
+`_misura_mb1.py`, questa un paragrafo di qui** -- e in entrambi i casi ### **il contenuto
+era GIA' committato quando l'ho visto.** ### ✅ **Il modo giusto e' un file nello
+scratchpad**, ed e' cosi' che questa riga e' stata scritta.
