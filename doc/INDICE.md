@@ -9,10 +9,10 @@
 | `DOCUMENTAZIONE` | `2` | 1 |
 | `DOCUMENTAZIONE` | `ENTRAMBE` | 9 |
 | `FISICA` | `1` | 343 |
-| `FISICA` | `2` | 130 |
+| `FISICA` | `2` | 131 |
 | `FISICA` | `ENTRAMBE` | 21 |
 | `INFRASTRUTTURA` | `1` | 39 |
-| `INFRASTRUTTURA` | `2` | 22 |
+| `INFRASTRUTTURA` | `2` | 23 |
 | `INFRASTRUTTURA` | `ENTRAMBE` | 24 |
 | `METODO` | `1` | 156 |
 | `METODO` | `2` | 21 |
@@ -291,6 +291,7 @@
 | `DOMANDA-D13-CONIUGATI` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | D13: i coniugati delle memorie -- tw come fase U(1) sull-arco? |
 | `DOMANDA-D9-GEOMETRIA` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | D9: la geometria viene da d e p_d dentro H, o dalle relazioni fra gli psi? |
 | `DOMANDA-DOVE-STA-LA-C-IN-TABELLA` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | la C e decisa al punto F3 e nessuna legge della tabella la dichiara |
+| `DOMANDA-DOVE-VIVE-LAMBDA-C-SENZA-UN-VALORE` | DECISIONE | INFRASTRUTTURA | 2 | ### **AGENDA** |  | la scheda di Lambda_c non si genera dalla tabella: lo schema pretende valore E o |
 | `DOMANDA-DUE-SOGLIE-SENZA-ERRORE` | DIFETTO | FISICA | 2 | ### **AGENDA** |  | due soglie senza l-errore da cui proteggono: tol in corrente.instrada e il limit |
 | `DOMANDA-E-NON-SI-CONSERVA-A-X-UNO` | DECISIONE | FISICA | 2 | ### **CHIUSA** |  | E non si conserva nel regime in cui la saturazione lavora, e i termini non si co |
 | `DOMANDA-ESTREMITA-NUOVE-INIZIALI` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | con che psi e che phi nascono le estremita di un arco nuovo |
@@ -332,6 +333,7 @@
 | `DOMANDA-REGOLE-FUORI-CLAUDE` | DECISIONE | METODO | 2 | ### **AGENDA** |  | le regole di gestione fuori da CLAUDE.md, e quelle dentro senza presidio: vanno  |
 | `DOMANDA-TRASPORTO-DEVE-STARE-IN-SU2` | DECISIONE | FISICA | 2 | ### **CHIUSA** |  | la C e una simmetria della TEORIA INTERA: il controllo di efc113b era incompleto |
 | `DOMANDA-U-DINAMICA-LE-FORME` | DECISIONE | FISICA | 2 | ### **AGENDA** | SI | le quattro forme della U d arco dinamica: la scala, il caso senza vuoto, le olon |
+| `DOMANDA-UN-NODO-SENZA-VUOTO-HA-L-OROLOGIO-FERMO` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | Lambda = 0 da cs = 0, e l-assert del cono lo rifiuta: orologio fermo o stato non |
 | `DOMANDA-UNITA-DI-STATO` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | l-unita- di stato: qual e- la capacita- di un nodo? |
 | `DOMANDA-VIA-DEL-CAMPO` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | si passa alla via del campo, dato che nessuna non linearita- locale lega in 3D? |
 | `DOPPIA-COP` | CURA | FISICA | 1 | ### **SOSPESA** |  | LA CURA (b): la doppia copertura 4 pi e' un ASSIOMA e va resa STRUTTURALE, non m |

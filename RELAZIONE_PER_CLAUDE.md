@@ -18366,3 +18366,17 @@ stessa cosa che `grafo.costo` era.** ### **I due metodi di `cs` sono andati in
 `flussi_parziali`, dove vive il tempo proprio.**
 
 **LA SUITE:** ### **`57` su `57`**, `pre-commit` a `269.5 s` su `500` *(`54%`)*.
+### 📌 **E LE DUE DOMANDE DI `D0` SONO VOCI, non solo prosa**
+
+### ① `[[DOMANDA-UN-NODO-SENZA-VUOTO-HA-L-OROLOGIO-FERMO]]` — le ### **due letture
+possibili** sono scritte dentro: `(a)` un nodo senza vuoto ### **ha davvero l'orologio
+fermo**, e allora l'assert del cono va ### **RILETTO** *(e non e' un indebolimento: e' una
+decisione su che cosa significa un vuoto nullo)*; `(b)` uno stato con `Lambda = 0`
+### **non e' fisico**, e allora il posto per fermarlo e' ### **la costruzione della
+scena.**
+### ② `[[DOMANDA-DOVE-VIVE-LAMBDA-C-SENZA-UN-VALORE]]` — le ### **tre vie**, col
+costo di ciascuna: `(a)` cambia ### **lo SCHEMA** che il generatore valida; `(b)` cambia
+### **DOVE vive un numero di fisica**; `(c)` ### **rimanda**, ed e' cio' che `D0` fa oggi.
+### ✅ **E intanto `D0` gira:** la forma e' attuata, ### **spenta**, e il valore si
+passa ### **esplicitamente** — quindi ### **nessuna manopola gira senza che qualcuno
+l'abbia scelta.**
