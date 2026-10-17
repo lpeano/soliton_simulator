@@ -762,3 +762,57 @@ c'e' ancora niente, perche' la mitosi e' `L3`** — e quando ci sara',
 ### 📌 **E il motivo e' lo stesso:** un nodo con `Lambda = 0` avrebbe `cs = 0`, e con lui
 ### **gli archi che lo toccano** *(media armonica `B-3`)*: ### **una cella sigillata per
 sempre.** ### **Far NASCERE un pozzo murato sarebbe peggio che trovarne uno.**
+
+## 22. ⭐⭐ `L2`/`L4` — **DUE CANDIDATE DOPO `H_w`: L'ACCOPPIAMENTO HAMILTONIANO E LA RIGIDITA' DEL VUOTO** *(`2026-10-17`, `22:08`)*
+
+> ### ⛔⛔ **SI COLLOCANO, NON SI ATTUANO.** Nessuna delle due e' decisa, nessuna
+> e' scritta in codice: ### **vivono qui perche' la misura di `H_w` dice che valgono una
+> prova**, e ### **la scelta e' di Luca** *(`[[DOMANDA-QUALE-INVARIANTE-CON-CS]]`)*.
+
+### 📌 **IL FATTO DA CUI NASCONO, misurato** *(`doc/referti_l2/hw_energia_pesata.txt`,
+blob `578b3d69`)*: con `cs` ### **non uniforme ma CONGELATO** il passo conserva
+### **l'energia PESATA `H_w`** al secondo ordine *(pendenza ### **`2.030`**)*, mentre
+`H_tot` ### **non pesato e' piatto** *(`-0.003`)*; con `cs` ### **DINAMICO** anche `H_w`
+si perde *(`-0.001`)*.
+### ✅ **Quindi il pesaggio e' COERENTE col modo in cui il passo usa `cs`, e cio' che
+rompe la conservazione e' SOLO LA DINAMICA di `cs`.**
+
+### ⛔ **`(d)` L'ACCOPPIAMENTO HAMILTONIANO** *(proposta del guardiano)*
+
+Il passo ### **si deriva dal generatore**
+
+```
+G = somma_k  cs(Lambda_k) * H_k            (gli archi col loro peso: la media armonica B-3)
+```
+
+e da quella derivazione ### **nasce un termine in piu' sul vuoto**: una ### **FASE su
+`phi`** proporzionale a `cs'(Lambda_k) * H_k`.
+### ✅ **E' una fase PURA** *(nessun modulo cambia)*, ### **flusso esatto come `S3`**,
+e ### **non introduce nessuna costante nuova**: `cs'` ### **viene dalla forma gia'
+scelta.**
+### ⭐ **LA LETTURA FISICA, ed e' il suo interesse:** il vuoto sentirebbe
+### **l'ENERGIA della materia**, non solo la sua ### **densita'** — cioe'
+### **l'energia gravita.**
+### ⚠ **DA DERIVARE E VERIFICARE**, e la misura di `H_w` dice ### **che ha senso
+provarla** *(il pesaggio regge: manca la dinamica coerente)*. ### ⛔ **Non e' attuata,
+e non la attuo.**
+
+### ⛔ **`(e)` LA RIGIDITA' DEL VUOTO** *(proposta di Luca)*
+
+Una dinamica che ### **rende simili i nodi vicini.**
+### ⛔⛔ **LA CONDIZIONE, SCRITTA, e non e' negoziabile:** deve essere
+### **REVERSIBILE** — ### **un termine di energia del GRADIENTE nel generatore** — e
+### **MAI una diffusione che smorza.** ### ⚠ **Una diffusione romperebbe la simmetria
+`PTheta` e la reversibilita', cioe' RIAPRIREBBE `L1`** *(che e' chiuso dal `2026-10-15`, e
+la `PTheta` col termine non lineare sta a `2`-`3` ulp)*.
+### 📌 **I COLLEGAMENTI:** ### **la LEGGE DEL PROFILO del campo**
+*(Newton/Poisson: i vicini si somigliano ### **salvo dove c'e' materia**)* e
+### **`[[PERCHE-NON-LEGA]]`.**
+### ⚠⚠ **E LA NOTA DEL GUARDIANO, che va tenuta:** ### **NON risolve da sola il
+criterio `(2)` di `D3`**, perche' ### **la non uniformita' di `cs` E' la gravita'** — una
+rigidita' ### **non la toglie**, la ### **modella.** ### **E' un ingrediente diverso, non
+una cura.**
+
+### ⛔ **E LE CINQUE STRADE, ADESSO, SONO IN UN SOLO POSTO:** le tre letture
+`(a)` `(b)` `(c)` della voce piu' queste due. ### **Il loro costo e i numeri stanno nella
+voce**, e ### **la scelta e' di Luca.**

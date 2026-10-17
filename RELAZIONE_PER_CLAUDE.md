@@ -18731,3 +18731,18 @@ le due escursioni per `dtau`, il ### **quadro** delle pendenze, e ### **la LETTU
 dentro il referto** come il mandato chiede.
 ### ⛔ **E il referto dichiara che non e' una decisione:** la scelta fra le cinque
 strade e' di Luca, e ### **`D4` resta fermo.**
+### ✅ **LE DUE CANDIDATE SONO NELLA MAPPA, e NON le attuo**
+
+`doc/MAPPA_DIPENDENZE.md`, sezione `22`: ### **`(d)` l'ACCOPPIAMENTO HAMILTONIANO**
+*(il passo derivato da `G = somma_k cs(Lambda_k) H_k`, da cui nasce ### **una FASE su
+`phi`** proporzionale a `cs'(Lambda_k) H_k` -- fase pura, nessuna costante nuova; la
+lettura fisica e' ### **<<l'energia gravita>>**)* e ### **`(e)` la RIGIDITA' DEL VUOTO**
+*(con la condizione scritta: ### **reversibile, un termine di GRADIENTE nel generatore**,
+### **mai una diffusione**, che riaprirebbe `L1`)*.
+### ⚠ **E la nota del guardiano e' tenuta:** `(e)` ### **non risolve da sola il
+criterio `(2)`**, perche' ### **la non uniformita' di `cs` E' la gravita'.**
+
+### ⚠ **E UN MIO NUMERO SBAGLIATO NEL COMMIT DI PRIMA** *(`7c76ba4f`)*: ho scritto
+che il referto di `H_w` ha ### **`82` righe**, e ne ha ### **`84`.** ### **L'ho ricopiato
+a mano invece di contarlo** *(`[[L-NUMERI]]`: un numero ricopiato non ha provenienza)*.
+### **Il referto e' quello giusto, il numero nel messaggio no.**
