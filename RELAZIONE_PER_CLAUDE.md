@@ -18528,3 +18528,8 @@ estremita')*: ### **va fatta LA'**, e riscriverla nel collaudo di `D2` sarebbe
 `quanti` al ciclo del tick. ### **E' cio' che un'ancora CONTATA deve fare.**
 
 **LA SUITE:** ### **`59` su `59`**, `pre-commit` a `276.9 s` su `500` *(`55%`)*.
+### ✅ **IL REFERTO DI `D2`, dal blob committato**
+
+`doc/referti_l2/cs_al_centro.txt`, da ### **`sha1-BYTE c67153ea`**, timbrato
+*«committato e pulito»*: la ### **tabella dei giri sui sei regimi** e le
+### **tre pendenze**, piu' la riga che dice che la `PTheta` ### **non e' qui e perche'.**

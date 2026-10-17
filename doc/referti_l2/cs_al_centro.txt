@@ -1,0 +1,30 @@
+[TIMBRO] _collauda_cs_centro.py  sha1-BYTE c67153ea  committato e pulito
+====================================================================================================
+`D2`: `cs` AL CENTRO DEL PALINDROMO, A PUNTO FISSO
+====================================================================================================
+      scena / Lambda_c      giri contrazione
+      nn=16  lc=0.8         38      0.415
+  ### (f) il punto fisso converge: nn=16, `Lambda_c = 0.8`       PASSA   38 giri, contrazione 0.415
+      nn=16  lc=8.0         47      0.490
+  ### (f) il punto fisso converge: nn=16, `Lambda_c = 8.0`       PASSA   47 giri, contrazione 0.490
+      nn=16  lc=80.0        11      0.041
+  ### (f) il punto fisso converge: nn=16, `Lambda_c = 80.0`      PASSA   11 giri, contrazione 0.041
+      nn=12  lc=0.8         28      0.307
+  ### (f) il punto fisso converge: nn=12, `Lambda_c = 0.8`       PASSA   28 giri, contrazione 0.307
+      nn=12  lc=8.0         34      0.364
+  ### (f) il punto fisso converge: nn=12, `Lambda_c = 8.0`       PASSA   34 giri, contrazione 0.364
+      nn=12  lc=80.0        12      0.046
+  ### (f) il punto fisso converge: nn=12, `Lambda_c = 80.0`      PASSA   12 giri, contrazione 0.046
+  ### (f) e il MASSIMO dei giri sta sotto il tetto dichiarato    PASSA   massimo 47 giri su un tetto di 120: ogni giro costa MEZZO tick, quindi ~23 tick di lavoro per tick
+      modo         pendenza   le pendenze a ogni dimezzamento
+      spenta          2.007   2.130 2.028 2.007
+      centro          2.001   2.031 2.003 2.001
+      inizio          0.997   1.281 0.996 0.997
+  ### (o1) la forma SPENTA e' del SECONDO ordine                 PASSA   pendenza 2.007 >= 1.9
+  ### (o2) `cs` al CENTRO CONSERVA il secondo ordine             PASSA   pendenza 2.001 >= 1.9: la valutazione simmetrica FUNZIONA
+  ### (o3) DEVE fallire: `cs` a INIZIO PASSO PERDE il secondo or PASSA   pendenza 0.997 <= 1.5: e' il PRIMO ordine, e il palindromo e' rotto
+====================================================================================================
+`D2`: 10 su 10   ### TUTTI PASSATI
+  ### ⚠ E LA `PTheta` NON E' QUI: vive sulla scena di `_misura_theta_nonlineare.py`,
+  ###   e riscriverla qui sarebbe un SECONDO strumento per la stessa simmetria.
+====================================================================================================
