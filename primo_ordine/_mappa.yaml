@@ -160,7 +160,11 @@ moduli:
 
   - nome: _misura_mb1.py
     responsabilita: il raccordo al bit pezzo per pezzo contro il commit di riferimento
-    importa: [_presidio, composizione, deriva, tick]
+    importa: [_censimento_strumenti, _presidio, composizione, deriva, tick]
+
+  - nome: _censimento_strumenti.py
+    responsabilita: chi, fra gli strumenti, materializza un albero vecchio o scrive nel repo
+    importa: []
 
   - nome: flussi_parziali.py
     responsabilita: il tempo proprio locale, la fase esatta, e i due flussi parziali

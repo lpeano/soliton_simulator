@@ -18533,3 +18533,16 @@ estremita')*: ### **va fatta LA'**, e riscriverla nel collaudo di `D2` sarebbe
 `doc/referti_l2/cs_al_centro.txt`, da ### **`sha1-BYTE c67153ea`**, timbrato
 *«committato e pulito»*: la ### **tabella dei giri sui sei regimi** e le
 ### **tre pendenze**, piu' la riga che dice che la `PTheta` ### **non e' qui e perche'.**
+### ✅ **IL COSTO DEL PUNTO FISSO, E I TEMPORANEI FUORI DAL REPO**
+
+### 📌 **Il costo di `cs` al centro:** `7..74` giri per tick, col
+### **MASSIMO a un rapporto INTERMEDIO (`~0.3`, `74` giri)** e non a rapporto piccolo
+-- ### **questo corregge una premessa del mandato**, e il `11..47` veniva dai sei regimi
+di `D2`, che ### **non contengono il massimo.** ### **Informazione per Luca, nessuna
+decisione presa.**
+
+### ✅ **E il difetto dei temporanei e' curato in `5` posti** *(`tempfile`, piu' un
+`finally` che cancella anche se la misura ALZA)*, con ### **un braccio che lo impedisce**
+in `M-B1 --collaudo` *(`11` su `11`)* -- e ### **il braccio prima della cura FALLIVA**,
+nominando `csv/_stop_coda.py`. ### **Dopo `--contro` e `--collaudo`, `git status` e'
+pulito.**

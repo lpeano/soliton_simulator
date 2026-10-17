@@ -55,6 +55,7 @@ import json
 import os
 import subprocess
 import sys
+import tempfile
 
 _QUI = os.path.dirname(os.path.abspath(__file__))
 RADICE = os.path.dirname(_QUI)
@@ -180,9 +181,11 @@ def _promemoria():
     ### **un file che il presidio scrive a ogni turno**, e il mandato dice
     ### **<<legge soltanto>>.**
     """
+    # ### ⚠ **QUI il ripiego NON era il repo** *(era `~`)*, quindi il difetto del
+    # ### `2026-10-17` non c'era. ### ✅ **Si cura comunque**, perche' cosi' il censimento
+    # ### di `M-B1` ### **non ha ECCEZIONI**, e un lettore nuovo di `TEMP` FA FALLIRE.
     base = (os.environ.get("CLAUDE_STOP_MEMO")
-            or os.path.join(os.environ.get("TEMP") or os.path.expanduser("~"),
-                            "_stop_coda_memo.json"))
+            or os.path.join(tempfile.gettempdir(), "_stop_coda_memo.json"))
     return base
 
 

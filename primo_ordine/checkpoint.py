@@ -36,6 +36,7 @@ Gira con:  python primo_ordine/checkpoint.py   (il giro salva-riprendi, misurato
 """
 import os
 import sys
+import tempfile
 
 import numpy as np
 
@@ -209,7 +210,7 @@ def main(argv):
         st = ST.nuovo(nn, inc.m)
         st["psi_h"][0, 0] = 1.0
         mot = MO.Motore(inc, MO.Geometria(nv, U), st, np.full(nn, 0.1), "numpy")
-        p = os.path.join(os.environ.get("TEMP") or ".", "_chk_%d.npz" % nn)
+        p = os.path.join(tempfile.gettempdir(), "_chk_%d.npz" % nn)
         t0 = time.perf_counter()
         salva(p, mot, 7, cfg, imp)
         ts = time.perf_counter() - t0

@@ -56,6 +56,7 @@ Gira con:  python primo_ordine/_misura_mb1.py --contro 717bb60
 """
 import hashlib
 import io
+import tempfile
 import os
 import shutil
 import subprocess
@@ -304,9 +305,32 @@ def _leggi(dove):
 def contro(commit):
     """### Il confronto **pezzo per pezzo**, piu' la distanza del passo intero."""
     radice = os.path.dirname(_QUI)
-    fuori = os.path.join(os.environ.get("TEMP", radice), "mb1")
-    if not os.path.isdir(fuori):
-        os.makedirs(fuori)
+    # ### ⛔⛔ **IL TEMPORANEO STA FUORI DAL REPO** *(difetto trovato dal guardiano
+    # ### il `2026-10-17`)*: prima era `os.environ.get("TEMP", radice)`, e
+    # ### ### **su Linux `TEMP` non esiste** -- quindi questa misura scriveva
+    # ### ### **una copia INTERA dell-albero vecchio DENTRO IL REPO**, e non la
+    # ### cancellava. ### ✅ **`tempfile.mkdtemp()` non ha ripieghi**, e il `finally`
+    # ### qui sotto ### **cancella anche se la misura ALZA.**
+    fuori = tempfile.mkdtemp(prefix="mb1_")
+    try:
+        return _contro(commit, radice, fuori)
+    finally:
+        # ### ⛔ **IL WORKTREE SI TOGLIE CON `git`, non con `rmtree`:** una cartella
+        # ### cancellata a mano lascia ### **la registrazione in `.git/worktrees`.**
+        _sgombera(radice, os.path.join(fuori, "albero"))
+        shutil.rmtree(fuori, ignore_errors=True)
+
+
+def _sgombera(radice, dove):
+    """### Toglie un `git worktree` ### **e la sua registrazione.**"""
+    if os.path.isdir(dove):
+        subprocess.run(["git", "worktree", "remove", "--force", dove], cwd=radice,
+                       capture_output=True)
+    subprocess.run(["git", "worktree", "prune"], cwd=radice, capture_output=True)
+
+
+def _contro(commit, radice, fuori):
+    """Il corpo del confronto, ### **dentro il `try` di `contro`.**"""
     vecchio = _albero_vecchio(commit, os.path.join(fuori, "albero"))
     qui, la = os.path.join(fuori, "ora.bin"), os.path.join(fuori, "prima.bin")
     print("### (1) QUESTO ALBERO:")
@@ -488,55 +512,16 @@ def _esito(che, passa, nota=""):
     print("  %-66s %s   %s" % (che[:66], "PASSA" if passa else "### FALLISCE", nota))
 
 
-# ### ⛔ **GLI STRUMENTI CHE MATERIALIZZANO UN ALBERO DEL PASSATO E VI ESEGUONO PYTHON.**
-# ### ⚠ **La lista e' DICHIARATA, e uno nuovo FA FALLIRE** invece di passare: la stessa
-# ### regola vale per lui, cioe' ### **nell-albero vecchio non si copia codice del passo.**
-# ### 📌 **E <<materializzare un ALBERO>> non e' <<leggere un file da un commit>>:**
-# ### `12` strumenti leggono TESTO da un commit *(documenti, indice)* e fanno girare
-# ### ### **i comandi di OGGI** -- e quelli non hanno questo problema.
-CONFRONTANO_ESEGUENDO = ("primo_ordine/_misura_mb1.py",)
-
-
-def _censimento():
-    """Chi materializza un albero del passato ### **e vi esegue python.**
-
-    ### ⛔⛔ **CON L-AST, E NON CON UNA PAROLA** *(e la prima stesura cercava la
-    parola: ha pescato ### **il commento che avevo appena scritto in `collauda.py`**)*.
-    ### ✅ **Si cerca la FORMA VERA: una lista di argomenti che contiene `"worktree"`
-    o `"archive"`** -- cioe' ### **una chiamata a `git`**, non una frase in prosa.
-    ### ⭐ **E i commenti sono INVISIBILI all-AST**, che qui e' esattamente cio- che
-    serve: e- la stessa lezione di `P-TAB`.
-    """
-    import ast
-    import glob
-    fuori_perimetro = ("_archivio", "_seal_", "_test_")
-    tro = []
-    for q in sorted(glob.glob(os.path.join(RADICE, "csv", "**", "*.py"), recursive=True)
-                    + glob.glob(os.path.join(RADICE, "primo_ordine", "**", "*.py"),
-                                recursive=True)):
-        rel = os.path.relpath(q, RADICE).replace(os.sep, "/")
-        if any(k in rel for k in fuori_perimetro):
-            continue
-        try:
-            arb = ast.parse(io.open(q, encoding="utf-8").read())
-        except SyntaxError:
-            continue
-        albero, esegue = False, False
-        for n in ast.walk(arb):
-            if isinstance(n, (ast.List, ast.Tuple)):
-                for x in n.elts:
-                    if (isinstance(x, ast.Constant)
-                            and x.value in ("worktree", "archive")):
-                        albero = True
-            if isinstance(n, ast.Attribute) and n.attr == "executable":
-                esegue = True
-        if albero and esegue:
-            tro.append(rel)
-    return tro
-
-
 def collaudo():
     import tempfile
+    # ### ⛔ **L-IMPORT STA QUI, NON IN TESTA:** questo file ### **viaggia nell-albero
+    # ### vecchio** *(`VIAGGIANO`)*, e la' ### **`_censimento_strumenti.py` NON ESISTE**:
+    # ### in testa farebbe fallire la corsa del commit vecchio con un
+    # ### `ModuleNotFoundError`.
+    # ### ✅ **E i censimenti servono SOLO al collaudo**, che nell-albero vecchio
+    # ### ### **non gira mai.** ### ⚠ **L-alternativa era far viaggiare un file in piu-,
+    # ### e un file in piu- nell-albero vecchio e- ### **la famiglia del difetto n.6.**
+    import _censimento_strumenti as CENS
     print("=" * 100)
     print("IL COLLAUDO DI `M-B1`: LA PROVA CHE PUO' FALLIRE")
     print("=" * 100)
@@ -634,16 +619,25 @@ def collaudo():
         _esito("### la misura NON definisce nessuna funzione del passo", True,
                "### l-assert gira a OGNI confronto, non solo qui")
         # ### ⭐ **IL CENSIMENTO, e la lista DICHIARATA.**
-        visti = _censimento()
+        visti = CENS._censimento()
         _esito("### e SOLO gli strumenti DICHIARATI materializzano un albero ed eseguono",
-               tuple(visti) == CONFRONTANO_ESEGUENDO,
-               "### visti %s, dichiarati %s" % (visti, list(CONFRONTANO_ESEGUENDO)))
+               tuple(visti) == CENS.CONFRONTANO_ESEGUENDO,
+               "### visti %s, dichiarati %s" % (visti, list(CENS.CONFRONTANO_ESEGUENDO)))
+        # ### ⛔ **E NESSUNO SCRIVE NEL REPO:** chi legge `TEMP` dall'ambiente ha
+        # ### ### **un ripiego**, e su Linux quel ripiego e' ### **la radice del repo.**
+        tempi = CENS._censimento_temporanei()
+        _esito("### e NESSUNO strumento legge `TEMP` dall'ambiente (il ripiego e' il repo)",
+               tuple(tempi) == CENS.TEMPORANEI_AMMESSI,
+               "### visti %s, ammessi %s -- la cura e' `tempfile`, che non ha ripieghi"
+               % (tempi, list(CENS.TEMPORANEI_AMMESSI)))
     finally:
+        # ### ⛔ **E SI SGOMBERA COME IN `contro`:** `git worktree remove` piu'
+        # ### ### **`prune`**, perche' una cartella cancellata a mano lascia
+        # ### ### **la registrazione in `.git/worktrees`** -- e `git worktree list` la
+        # ### mostrerebbe per sempre. ### **Misurato il `2026-10-17`: ce n'erano `4` di
+        # ### corse vecchie.**
         for q in ("pert", "puro", "infetto", "ordine"):
-            d = os.path.join(base, q)
-            if os.path.isdir(d):
-                subprocess.run(["git", "worktree", "remove", "--force", d], cwd=RADICE,
-                               capture_output=True)
+            _sgombera(RADICE, os.path.join(base, q))
         shutil.rmtree(base, ignore_errors=True)
     print("=" * 100)
     print("IL COLLAUDO DI `M-B1`: %d su %d   %s"
@@ -668,7 +662,11 @@ def main(argv):
                                                  VUOTO_MODULO, SU2))
     if argv and argv[0] == "--contro":
         return contro(argv[1])
-    scrivi(os.path.join(os.environ.get("TEMP", "."), "mb1_solo.bin"))
+    _solo = tempfile.mkdtemp(prefix="mb1s_")
+    try:
+        scrivi(os.path.join(_solo, "mb1_solo.bin"))
+    finally:
+        shutil.rmtree(_solo, ignore_errors=True)
     print("### ⚠ senza `--contro <commit>` questa e' UNA SOLA corsa: nessun confronto")
     return 0
 

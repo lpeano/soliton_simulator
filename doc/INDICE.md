@@ -15,7 +15,7 @@
 | `INFRASTRUTTURA` | `2` | 23 |
 | `INFRASTRUTTURA` | `ENTRAMBE` | 24 |
 | `METODO` | `1` | 156 |
-| `METODO` | `2` | 21 |
+| `METODO` | `2` | 22 |
 | `METODO` | `ENTRAMBE` | 95 |
 
 | id | classe | dominio | era | stato | blocca | titolo |
@@ -275,6 +275,7 @@
 | `DECISIONE-VUOTO-MEDIATORE` | DECISIONE | FISICA | 2 | ### **CHIUSA** |  | strada (A): lo sbilancio d energia di ogni tick va nel vuoto locale e ne torna |
 | `DERIVA-DELLA-FORMA-D` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | la forma (D) non conserva la sua conservazione modificata: perche-? |
 | `DIFETTO-LAMBDA-NON-PIU-INVARIANTE-SOTTO-IL-VUOTO` | DIFETTO | FISICA | 2 | ### **AGENDA** |  | Con i flussi parziali Lambda_k non e piu invariante sotto la camminata del vuoto |
+| `DIFETTO-TEMPORANEI-NEL-REPO` | DIFETTO | METODO | 2 | ### **AGENDA** |  | i temporanei finivano DENTRO il repo: TEMP non esiste su Linux, e il ripiego era |
 | `DIFETTO-TERNARIO-CHE-NON-SCEGLIE` | DIFETTO | FISICA | 2 | ### **AGENDA** |  | un ternario che non scegliE: per il braccio lineare misuravo la Q di N |
 | `DIMENSIONE-E-ISOTROPIA-DELLE-SCENE` | MISURA | FISICA | 2 | ### **AGENDA** |  | le scene del banco non hanno dimensione 3, e la mia misura dell-isotropia era co |
 | `DISEGNO-3D-OSSERVATORE` | STANDARD | METODO | 2 | ### **AGENDA** |  | il disegno 3D e- un OSSERVATORE, e il 3D che distorce E- UNA MISURA |

@@ -38,6 +38,7 @@ import json
 import math
 import os
 import sys
+import tempfile
 
 import numpy as np
 
@@ -352,7 +353,7 @@ def main(argv):
     print()
     fuori = os.path.join(os.path.dirname(_QUI), "db_era2")
     if not os.path.isdir(fuori):
-        fuori = os.environ.get("TEMP") or "."
+        fuori = tempfile.gettempdir()
     cfg = {"collaudo": "5d", "taglie": list(TAGLIE), "tick": TICK_M3}
     t = TI.timbro(cfg, "collaudo-memoria-5d")
     referto["timbro"] = t

@@ -12,6 +12,7 @@ import io
 import json
 import os
 import sys
+import tempfile
 
 import numpy as np
 
@@ -79,7 +80,7 @@ def main(argv):
     print("=" * 100)
     print("IL SOTTO-PEZZO `5c`: CHECKPOINT E RIPRESA")
     print("=" * 100)
-    tmp = os.environ.get("TEMP") or "."
+    tmp = tempfile.gettempdir()
     p = os.path.join(tmp, "_collauda_5c.npz")
     for q in (p, p + ".timbro.json", p + ".parziale"):
         if os.path.exists(q):

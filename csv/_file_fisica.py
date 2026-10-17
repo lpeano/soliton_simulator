@@ -137,6 +137,7 @@ FILE_FISICA = (
     # ### rompe.** ### ⚠ **Due dei tre criteri NON passano**, e i file restano: ###
     # ### **una misura che fallisce e- una misura, non uno scarto.**
     'primo_ordine/_misura_mb1.py',
+    'primo_ordine/_censimento_strumenti.py',
     'primo_ordine/_misura_mb2.py',
     'primo_ordine/_misura_c_flussi.py',
     # ### ⭐ **NATO il `2026-10-15`, seconda parte**: lo spettro del passo lineare

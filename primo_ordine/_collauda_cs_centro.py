@@ -171,6 +171,41 @@ def braccio_secondo_ordine():
           % (fuori["inizio"], PENDENZA_INGENUA_MAX))
 
 
+# ### ⛔ **LA SPAZZATA DEL COSTO: sette rapporti**, e ### **non e' un criterio.**
+# ### ⚠ **Serve perche' i tre rapporti di `D4` NON vedono il massimo:** il costo ha un
+# ### ### **MASSIMO INTERMEDIO**, e i tre punti ci cadono intorno senza prenderlo.
+SPAZZATA = (0.08, 0.8, 2.4, 8.0, 24.0, 80.0, 800.0)
+
+
+def informazione_costo():
+    """### 📌 **IL COSTO contro `Lambda_c/Lambda`, e ### **ha un MASSIMO INTERMEDIO.**
+
+    ### ⛔⛔ **E QUESTO CORREGGE UNA PREMESSA:** il mandato del guardiano dice che
+    ### **<<il regime piu' lento e' quello a `Lambda_c/Lambda_medio` PICCOLO>>**.
+    ### **Misurato, non e' cosi':** il massimo e' a ### **`~0.3`** *(`74` giri)*, e
+    ### **il costo CALA su ENTRAMBI i lati** -- a `0.01` si torna a `11` giri.
+
+    ### ⭐ **E il perche' si legge nella contrazione:** a `Lambda_c` ### **piccolissima**
+    `cs ~ 1` dappertutto *(la forma e' quasi spenta)*, quindi il mezzo tick
+    ### **non muove `Lambda`** e la retroazione e' debole; a `Lambda_c` ### **grande**
+    `cs ~ Lambda/Lambda_c` e' piccolo, il passo e' ### **corto**, e `Lambda` si muove
+    poco. ### **In mezzo la retroazione e' massima.**
+    """
+    nn, seme = SCENE[0]
+    print("      IL COSTO contro `Lambda_c/Lambda` (informazione, NON un criterio):")
+    print("      %10s %8s %7s %12s" % ("Lambda_c", "Lc/Lam", "giri", "contrazione"))
+    peggio = (0, 0.0)
+    for lc in SPAZZATA:
+        g, r = giri_del_punto_fisso(nn, seme, lc)
+        if g > peggio[0]:
+            peggio = (g, lc)
+        print("      %10.2f %8.3f %7d %12.3f" % (lc, lc / LAMBDA_INIZIALE, g, r))
+    print("      ### il MASSIMO e' %d giri a `Lambda_c = %.2f` (rapporto %.2f), cioe'"
+          " ~%d tick di lavoro per tick"
+          % (peggio[0], peggio[1], peggio[1] / LAMBDA_INIZIALE, peggio[0] // 2))
+    print("      ### e il costo CALA su ENTRAMBI i lati: NON e' monotono nel rapporto")
+
+
 def main(argv):
     del argv
     _presidio.avvia(__file__)
@@ -179,6 +214,7 @@ def main(argv):
     print("=" * 100)
     braccio_punto_fisso()
     braccio_secondo_ordine()
+    informazione_costo()
     print("=" * 100)
     print("`D2`: %d su %d   %s"
           % (OK[0], OK[1], "### TUTTI PASSATI" if OK[0] == OK[1] else "### CI SONO BUCHI"))
