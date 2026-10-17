@@ -18779,3 +18779,9 @@ lettura aperta, non collaudi rotti.**
 nella suite. ### **Tre costano piu' di `180` s e il tetto e' `500`: non ci stanno tutti**,
 e servirebbe ### **una TERZA etichetta** oltre a `pre-commit` e `solo-CI`.
 ### ✅ **Per ora il censimento e' NELLA suite e NON BLOCCA.**
+### ✅ **E LA CODA E' AGGIORNATA, col prossimo NOMINATO**
+
+`doc/CODA_2026-10-16.md`: la misura `H_w` e il censimento sono ### **FATTI**; il
+### **prossimo PRONTO e' il pezzo `6`** *(il campo `modulo`)*, poi il `2-quinquies` e il
+buco di `P-ES1`. ### ⛔ **`D4` resta FERMO** e ### **la terza etichetta della suite
+decide Luca.**
