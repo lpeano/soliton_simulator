@@ -18051,3 +18051,61 @@ punto `4` serve a quello**, ed e' la cosa che conta di piu' del pezzo.
 in `grafo.py`; `energia.py` elencato nel nucleo: ### **nessuna radice lo importa**)*, e le
 aveva prese ### **dal censimento PER NOME DI FILE senza derivare il nucleo.**
 ### ✅ **Le avevo segnalate prima del codice**, e lui dice che era giusto.
+
+### ✅ **PEZZO `8` FATTO: `M-B1` PUO' FALLIRE, E ADESSO E' PROVATO**
+
+*(collaudo `python primo_ordine/_misura_mb1.py --collaudo`: ### **`8` su `8`**, `18.9 s`,
+`solo-CI`.)*
+
+| il braccio | il numero |
+|---|---|
+| ### ⛔ **DEVE fallire:** col passo di oggi ### **MODIFICATO**, contro `8c7b928` | ### **`2` pezzi su `12` NON coincidono** |
+| ### ⛔ **e col DIFETTO DI IERI passerebbe** *(il passo copiato anche nel vecchio)* | ### **`0` pezzi diversi** — ### **il falso-uno, mostrato** |
+| controllo positivo contro ### **`8c7b928`** | ### **`12`/`12` AL BIT**, e il passo viene da `tick.py` ### **dai due lati** |
+| controllo positivo contro ### **`b150003`** *(prima dello spostamento)* | ### **`12`/`12` AL BIT**, e il passo viene da ### **`deriva.py`** nell'albero vecchio |
+| il censimento | ### **`1` strumento** materializza un albero ed esegue: ### **solo `M-B1`** |
+
+### ⭐⭐ **E IL RAMO SI VEDE, non si deduce:** la misura stampa
+*«il passo viene da `tick.py`»* oppure *«da `deriva.py`»* — ed e' ### **l'unica prova
+che il ramo dichiarato e' esercitato in entrambi i versi.**
+
+### ⛔⛔ **DOVE IL MIO PIANO DIFFERISCE DAL PUNTO `1.c`, e il perche' e' MISURATO**
+
+Il mandato chiede *«un `tick.py` MODIFICATO (### **es. due pezzi scambiati**)»*.
+### ⛔ **Due pezzi scambiati NON farebbero fallire `M-B1`**, e il motivo e' che
+### **il criterio sono I PEZZI:** `un_pezzo(idl)` applica ### **UN pezzo da solo** a
+`theta = pi`, quindi ### **l'ordine in cui il tick li percorre non lo tocca.**
+### ✅ **Quindi ho perturbato `OPERATORE`** *(due operatori scambiati)*, che e'
+### **cio' che il criterio guarda** — e ### **due pezzi su dodici divergono.**
+
+> ### ⚠⚠ **E HO MESSO ANCHE LA PERTURBAZIONE DEL CAMMINO, per misurare il CONFINE.**
+> Il risultato e' ### **da leggere prima del punto `D`:**
+>
+> | la perturbazione | i PEZZI *(criterio)* | l'IMPRONTA | il PASSO INTERO *(informazione)* |
+> |---|---|---|---|
+> | ### **`OPERATORE`** | ### **`2`/`12` diversi** | uguale | diverso |
+> | ### **il CAMMINO** *(due posizioni scambiate)* | ### **`0` diversi** | ### **UGUALE** | ### **`2` scene su `2` diverse** |
+>
+> ### ⛔⛔ **E L'IMPRONTA NON LO VEDE, ed e' la cosa che il braccio ha fatto uscire:**
+> l'impronta viene da ### **`composizione.py`**, cioe' ### **dalla TABELLA**, e
+> ### **non da come `tick.py` percorre l'ordine.**
+> ### 📌 **QUINDI, PER IL PUNTO `D`: se cambia IL CAMMINO e non la tabella, `M-B1` dice
+> <<`12` su `12` AL BIT>> e l'impronta e' IDENTICA.** ### **La sola cosa che lo dice e' la
+> distanza del passo intero, che `contro()` riporta come <<informazione, non criterio>>
+> — e quel numero VA LETTO.**
+> ### ⚠ **Non lo cambio io:** estendere il criterio di `M-B1` ### **cambia che cosa `M-B1`
+> SIGNIFICA**, e i referti vecchi sono stati letti con quello di oggi.
+
+### ⛔⛔ **E UNA CORREZIONE A CIO' CHE HO SCRITTO IERI, che il `2-sexies` fa uscire**
+
+Il mandato dice che `_misura_mb1.PEZZI` e' ### **una lista A MANO di `6` id**, che
+### **contiene `CAMM-SATURAZIONE`** *(fuori dall'ordine)* e ### **NON contiene
+`CAMM-MATERIA-VUOTO`** *(la legge che GIRA)*. ### **E' vero.**
+
+> ### ⛔ **Quindi quando ho scritto <<`M-B1` PASSA: tutti i `12` pezzi AL BIT>> per
+> giustificare lo spostamento, quei `12` pezzi NON contenevano il flusso che gira.**
+> ### ✅ **La conclusione REGGE, ma per un altro numero:** la ### **distanza del passo
+> intero** era ### **`0.000000e+00` su entrambe le scene**, e il passo intero
+> ### **contiene `CAMM-MATERIA-VUOTO`.** ### **Piu' la prova al carattere** *(le funzioni
+> e il dizionario IDENTICI)*, che non dipende da nessuna misura.
+> ### 📌 **La cura della lista e' il `2-sexies`, il prossimo in coda.**

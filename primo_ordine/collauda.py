@@ -245,6 +245,13 @@ COLLAUDI = (
     # ### fallire ### **non invecchiano.**
     ("il censimento dei rami (NON blocca)", "csv/_censimento_rami.py --collaudo",
      "solo-CI"),
+    # ### ⚠ **`solo-CI`, e NON per il tempo** *(costa `18.9 s`)*: questo collaudo
+    # ### ### **crea dei `git worktree`**, e farlo ### **dentro un `pre-commit`**, mentre
+    # ### un commit e' in corso, ### **tocca `.git` sotto le mani di git.**
+    # ### ✅ **I bracci restano vivi nella suite**, ed e' cio' che serve: provano che
+    # ### ### **`M-B1` PUO' fallire.**
+    ("`M-B1` PUO- fallire, ed e- provato", "primo_ordine/_misura_mb1.py --collaudo",
+     "solo-CI"),
     # ------------------------------------- E I TRE CHE IL CENSIMENTO HA TROVATO
     # ### ✅ **Questi non li ho messi a mano: li ha trovati `censimento()`**,
     # ### ### **e il nome non diceva che erano collaudi.** `_rinomina.py` lo e-

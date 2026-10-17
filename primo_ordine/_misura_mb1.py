@@ -37,18 +37,21 @@ stampate**, che e' cio' che il presidio dei referti pretende.
 Gira con:  python primo_ordine/_misura_mb1.py --contro 717bb60
 """
 import hashlib
+import io
 import os
 import shutil
 import subprocess
 import sys
 
 import numpy as np
-import tick as TK
 
 _QUI = os.path.dirname(os.path.abspath(__file__))
+# ### la radice del repo, DERIVATA: la misura gira anche in un ALBERO VECCHIO, e la-
+# ### ### **la radice e- quella dell-albero**, non quella di oggi.
+RADICE = os.path.dirname(_QUI)
 if _QUI not in sys.path:
     sys.path.insert(0, _QUI)
-sys.path.insert(0, os.path.join(os.path.dirname(_QUI), "csv"))
+sys.path.insert(0, os.path.join(RADICE, "csv"))
 
 DTAU = 1.0
 TICK = 250
@@ -63,7 +66,60 @@ PEZZI = ("CAMM-GROVER", "CAMM-SPOSTAMENTO", "CAMM-GROVER-VUOTO",
 
 # ### ⛔ **I FILE DELLA MISURA che viaggiano nell-albero vecchio**, e nient-altro: il
 # ### ### **SIMULATORE la- dentro resta QUELLO DI PRIMA.**
-VIAGGIANO = ("_misura_mb1.py", "tick.py")
+VIAGGIANO = ("_misura_mb1.py",)
+
+
+def il_passo_dell_albero():
+    """### IL PASSO SI PRENDE ### **DALL-ALBERO IN CUI LA MISURA GIRA**, non da oggi.
+
+    ### ⛔⛔ **PERCHE- ESISTE QUESTA FUNZIONE** *(cura del `2026-10-17`, difetto
+    mio del `2026-10-16`)*: `VIAGGIANO` conteneva ### **`tick.py`**, e `contro()` lo
+    copiava nell-albero vecchio ### **SEMPRE** -- quindi il <<prima>> girava
+    ### **col ciclo del passo di OGGI.** ### ⚠ **Era innocuo finche- lo spostamento
+    era VERBATIM**, ### **ma il punto `D` cambiera- il passo**, e da allora `M-B1`
+    avrebbe confrontato ### **il passo nuovo col passo nuovo: un FALSO-UNO.**
+
+    ### ✅ **ADESSO: `import tick` trova il `tick.py` DI QUELL-ALBERO**, perche-
+    `python primo_ordine/_misura_mb1.py` mette ### **`primo_ordine/` per primo** in
+    `sys.path`. ### **E dove `tick.py` non c-e- ancora** *(gli alberi prima del
+    `2026-10-16`)* ### **si cade su `deriva`**, che la- dentro ha `tick` e `OPERATORE`.
+
+    ### ⚠ **IL RAMO E- DICHIARATO**, e si vede ### **in entrambi i versi**: contro
+    `8c7b928` passa da `tick.py`, contro `b150003` da `deriva.py`.
+    """
+    try:
+        import tick as TK
+        return TK, "tick.py"
+    except ImportError:
+        # ### ⭐ **L-ALBERO DI PRIMA DELLO SPOSTAMENTO:** `percorri_tick`, `tick` e
+        # ### `OPERATORE` vivevano in `deriva.py`, e la misura li prende ### **da la-.**
+        import deriva as DV
+        return DV, "deriva.py"
+
+
+def _la_misura_non_porta_il_passo():
+    """### ⛔ **LA MISURA NON DEFINISCE NESSUNA FUNZIONE DEL PASSO**, e lo si ASSERISCE.
+
+    ### ⚠ **Serve perche- `_misura_mb1.py` VIAGGIA nell-albero vecchio:** se un giorno
+    qualcuno ci scrivesse dentro un `tick` o un `percorri_tick`, ### **il passo di oggi
+    tornerebbe a viaggiare** -- per un-altra porta, e in silenzio.
+    """
+    import ast
+    DEL_PASSO = ("tick", "percorri_tick", "OPERATORE")
+    src = io.open(os.path.abspath(__file__), encoding="utf-8").read()
+    arb = ast.parse(src)
+    dentro = []
+    for n in arb.body:
+        if isinstance(n, (ast.FunctionDef, ast.AsyncFunctionDef)) and n.name in DEL_PASSO:
+            dentro.append(n.name)
+        if isinstance(n, ast.Assign):
+            for t in n.targets:
+                if isinstance(t, ast.Name) and t.id in DEL_PASSO:
+                    dentro.append(t.id)
+    assert not dentro, (
+        "`M-B1` definisce %r, che sono nomi DEL PASSO: questo file VIAGGIA nell-albero"
+        " vecchio, quindi il passo di oggi tornerebbe a girare la- dentro -- per un-altra"
+        " porta e in silenzio. ### Il passo si PRENDE dall-albero, non si porta" % dentro)
 
 
 def timbra(b):
@@ -78,7 +134,8 @@ def _byte(st):
 def un_pezzo(idl, nn, seme):
     """### I byte dopo **UNA** applicazione del pezzo `idl`, a `theta = pi`."""
     import deriva as DV
-    nome, vuole_par = TK.OPERATORE[idl]
+    PASSO, _dove = il_passo_dell_albero()
+    nome, vuole_par = PASSO.OPERATORE[idl]
     _i, mot, st, par = DV.scena(nn, seme, DTAU, norma=NORMA,
                                 vuoto_modulo=VUOTO_MODULO, su2=SU2)
     mot.apri_tick()
@@ -92,8 +149,9 @@ def il_passo(nn, seme):
     import deriva as DV
     _i, mot, st, par = DV.scena(nn, seme, DTAU, norma=NORMA,
                                 vuoto_modulo=VUOTO_MODULO, su2=SU2)
+    PASSO, _dove = il_passo_dell_albero()
     for _t in range(TICK):
-        TK.tick(st, mot, par)
+        PASSO.tick(st, mot, par)
     return _byte(st), (st["psi_h"].copy(), st["phi_h"].copy())
 
 
@@ -103,8 +161,13 @@ def scrivi(dove):
     with open(dove, "wb") as f:
         f.write(len(CM.ORDINE).to_bytes(4, "little"))
         f.write(CM.IMPRONTA.encode("ascii"))
-        print("  l'ordine di questo albero: %d pezzi, impronta %s"
-              % (len(CM.ORDINE), CM.IMPRONTA))
+        _p, _dove = il_passo_dell_albero()
+        # ### ⭐ **IL RAMO DICHIARATO SI VEDE, e non si deduce:** stampare DA DOVE
+        # ### viene il passo e' l'unica prova che ### **il ramo e' esercitato in entrambi
+        # ### i versi** -- `tick.py` negli alberi dopo il `2026-10-16`, `deriva.py` in
+        # ### quelli di prima.
+        print("  l'ordine di questo albero: %d pezzi, impronta %s;"
+              " il passo viene da `%s`" % (len(CM.ORDINE), CM.IMPRONTA, _dove))
         for nn, seme in SCENE:
             for idl in PEZZI:
                 b = un_pezzo(idl, nn, seme)
@@ -171,16 +234,14 @@ def contro(commit):
     qui, la = os.path.join(fuori, "ora.bin"), os.path.join(fuori, "prima.bin")
     print("### (1) QUESTO ALBERO:")
     scrivi(qui)
-    # ### ⛔⛔ **I MODULI CHE VIAGGIANO COL CONFRONTO, dichiarati** *(`2026-10-16`)*:
-    # ### la misura di oggi gira ### **sul codice di prima**, quindi deve poter essere
-    # ### ### **importata** la- dentro. ### ⚠ **`tick.py` e- nell-elenco perche- il
-    # ### `2026-10-16` `percorri_tick` e `OPERATORE` sono stati SPOSTATI** da `deriva.py`
-    # ### a un modulo suo: nell-albero vecchio quel file ### **non esiste**, e senza di lui
-    # ### la misura ### **non parte.**
-    # ### ✅ **E lo spostamento e- VERBATIM, provato al carattere** *(le due funzioni e
-    # ### il dizionario sono ### **identici** a quelli di `26f5f247`)*: portarlo nell-albero
-    # ### vecchio ### **non porta dentro codice NUOVO**, porta ### **lo stesso codice da
-    # ### un altro file.**
+    # ### ⛔⛔ **NELL-ALBERO VECCHIO NON SI COPIA MAI CODICE DEL PASSO**
+    # ### *(cura del `2026-10-17`)*. ### **Viaggia SOLO la misura**, e il passo
+    # ### ### **si PRENDE dall-albero in cui la misura gira**
+    # ### *(`il_passo_dell_albero`)*.
+    # ### ⚠ **E prima di copiarla si ASSERISCE che la misura non PORTI il passo**: se
+    # ### un giorno ci finisse dentro un `tick`, il passo di oggi tornerebbe a viaggiare
+    # ### ### **per un-altra porta.**
+    _la_misura_non_porta_il_passo()
     for q in VIAGGIANO:
         shutil.copyfile(os.path.join(radice, "primo_ordine", q),
                         os.path.join(vecchio, "primo_ordine", q))
@@ -235,11 +296,248 @@ def contro(commit):
     return 1 if rotti else 0
 
 
+# =====================================================================================
+#   IL COLLAUDO -- **la prova che `M-B1` PUO' FALLIRE**
+# -------------------------------------------------------------------------------------
+# ### ⛔⛔ **PERCHE' QUESTO COLLAUDO ESISTE** *(integrazione del guardiano del
+# ### `2026-10-16`)*: `M-B1` e' ### **il criterio** con cui ogni cura dimostra di
+# ### **non aver mosso un bit** -- e ### **finora nessuno aveva mostrato che PUO'
+# ### fallire.** ### **Un criterio di cui non si e' visto il fallimento e' una promessa.**
+#
+# ### ⚠⚠ **E IL COLLAUDO DICE ANCHE CHE COSA `M-B1` NON VEDE, per disegno:** il criterio
+# ### sono ### **I PEZZI** *(`un_pezzo` applica UN pezzo a `theta = pi`)*. ### **L'ORDINE
+# ### di composizione e' RIPORTATO** *(l'impronta, riga per riga)* ### **e NON e' un
+# ### criterio** -- cosi' c'e' scritto nel codice dal primo giorno.
+# ### 📌 **Quindi per il punto `D`: `M-B1` da solo NON prova che il passo e' lo stesso.**
+# ### **Prova che i PEZZI sono gli stessi**, e ### **l'impronta dell'ordine va LETTA.**
+# ### **I due bracci qui sotto provano le DUE META' di questo confine.**
+_LA_MISURA = os.path.abspath(__file__)
+
+
+def _perturba_operatore(src):
+    """Il `tick.py` di oggi con ### **DUE OPERATORI SCAMBIATI** in `OPERATORE`.
+
+    ### ⭐ **Tocca cio' che IL CRITERIO GUARDA:** `un_pezzo` prende il nome
+    dell-operatore da `OPERATORE`, quindi scambiarne due ### **cambia i byte DI DUE
+    PEZZI** -- ed e' esattamente il genere di cambiamento che `M-B1` deve vedere.
+    """
+    a = '    "CAMM-GROVER": ("grover", False),\n'
+    b = '    "CAMM-GROVER": ("grover_scalare", False),\n'
+    assert src.count(a) == 1, "l-ancora di `CAMM-GROVER` non e- unica in `tick.py`"
+    return src.replace(a, b)
+
+
+def _perturba_ordine(src):
+    """Il `tick.py` di oggi che percorre l-ordine ### **con DUE PEZZI SCAMBIATI.**
+
+    ### ⛔⛔ **E NON SI PUO' INVERTIRE L-ORDINE: E- UN PALINDROMO** *(misurato: la
+    sequenza invertita e- ### **IDENTICA**)*. ### **Una perturbazione che non cambia
+    niente darebbe un braccio VACUO**, quindi si SCAMBIANO le posizioni `1` e `2`, e
+    ### **un braccio verifica che la sequenza sia DAVVERO cambiata.**
+    """
+    a = "    for k, (idl, frazione, _tipo) in enumerate(CM.ORDINE):\n"
+    b = ("    _o = list(CM.ORDINE)\n"
+         "    _o[1], _o[2] = _o[2], _o[1]\n"
+         "    for k, (idl, frazione, _tipo) in enumerate(tuple(_o)):\n")
+    assert src.count(a) == 1, "l-ancora del ciclo non e- unica in `tick.py`"
+    return src.replace(a, b)
+
+
+def _byte_dell_albero(commit, dove, tick_src):
+    """I byte dei pezzi, facendo girare ### **la misura di oggi** in un albero di `commit`.
+
+    `tick_src` e' ### **il sorgente del passo da METTERE nell-albero**, oppure `None` per
+    ### **non toccarlo** -- che e' la via giusta, e l-altra serve solo ### **a mostrare il
+    difetto.**
+    """
+    alb = _albero_vecchio(commit, dove)
+    shutil.copyfile(_LA_MISURA, os.path.join(alb, "primo_ordine", "_misura_mb1.py"))
+    if tick_src is not None:
+        io.open(os.path.join(alb, "primo_ordine", "tick.py"), "wb").write(
+            tick_src.encode("utf-8"))
+    fuori = dove + ".bin"
+    r = subprocess.run([sys.executable, os.path.join("primo_ordine", "_misura_mb1.py"),
+                        "--scrivi", fuori], cwd=alb, capture_output=True)
+    assert not r.returncode, ("la corsa in %s e- FALLITA: %s"
+                              % (commit[:7],
+                                 (r.stdout + r.stderr).decode("utf-8", "replace")[-700:]))
+    _n, _i, blocchi = _leggi(fuori)
+    return _n, _i, blocchi
+
+
+def _passo_intero_diversi(ba, bb):
+    """Quante volte il ### **PASSO INTERO** non coincide: e' l-ultimo blocco di ogni scena.
+
+    ### ⚠ **Non e' il criterio di `contro()`** -- la' e' <<informazione>>. ### **Serve
+    a dire CHE COSA si muove quando si muove solo il CAMMINO**, e il numero sta nel
+    collaudo.
+    """
+    diversi, k = 0, 0
+    for _nn, _seme in SCENE:
+        k += len(PEZZI)
+        if ba[k] != bb[k]:
+            diversi += 1
+        k += 1
+    return diversi
+
+
+def _pezzi_diversi(ba, bb):
+    """Quanti PEZZI non coincidono, col criterio di `contro()`."""
+    rotti, k = 0, 0
+    for _nn, _seme in SCENE:
+        for _idl in PEZZI:
+            if ba[k] != bb[k]:
+                rotti += 1
+            k += 1
+        k += 1
+    return rotti
+
+
+_OK = []
+
+
+def _esito(che, passa, nota=""):
+    _OK.append(bool(passa))
+    print("  %-66s %s   %s" % (che[:66], "PASSA" if passa else "### FALLISCE", nota))
+
+
+# ### ⛔ **GLI STRUMENTI CHE MATERIALIZZANO UN ALBERO DEL PASSATO E VI ESEGUONO PYTHON.**
+# ### ⚠ **La lista e' DICHIARATA, e uno nuovo FA FALLIRE** invece di passare: la stessa
+# ### regola vale per lui, cioe' ### **nell-albero vecchio non si copia codice del passo.**
+# ### 📌 **E <<materializzare un ALBERO>> non e' <<leggere un file da un commit>>:**
+# ### `12` strumenti leggono TESTO da un commit *(documenti, indice)* e fanno girare
+# ### ### **i comandi di OGGI** -- e quelli non hanno questo problema.
+CONFRONTANO_ESEGUENDO = ("primo_ordine/_misura_mb1.py",)
+
+
+def _censimento():
+    """Chi materializza un albero del passato ### **e vi esegue python.**
+
+    ### ⛔⛔ **CON L-AST, E NON CON UNA PAROLA** *(e la prima stesura cercava la
+    parola: ha pescato ### **il commento che avevo appena scritto in `collauda.py`**)*.
+    ### ✅ **Si cerca la FORMA VERA: una lista di argomenti che contiene `"worktree"`
+    o `"archive"`** -- cioe' ### **una chiamata a `git`**, non una frase in prosa.
+    ### ⭐ **E i commenti sono INVISIBILI all-AST**, che qui e' esattamente cio- che
+    serve: e- la stessa lezione di `P-TAB`.
+    """
+    import ast
+    import glob
+    fuori_perimetro = ("_archivio", "_seal_", "_test_")
+    tro = []
+    for q in sorted(glob.glob(os.path.join(RADICE, "csv", "**", "*.py"), recursive=True)
+                    + glob.glob(os.path.join(RADICE, "primo_ordine", "**", "*.py"),
+                                recursive=True)):
+        rel = os.path.relpath(q, RADICE).replace(os.sep, "/")
+        if any(k in rel for k in fuori_perimetro):
+            continue
+        try:
+            arb = ast.parse(io.open(q, encoding="utf-8").read())
+        except SyntaxError:
+            continue
+        albero, esegue = False, False
+        for n in ast.walk(arb):
+            if isinstance(n, (ast.List, ast.Tuple)):
+                for x in n.elts:
+                    if (isinstance(x, ast.Constant)
+                            and x.value in ("worktree", "archive")):
+                        albero = True
+            if isinstance(n, ast.Attribute) and n.attr == "executable":
+                esegue = True
+        if albero and esegue:
+            tro.append(rel)
+    return tro
+
+
+def collaudo():
+    import tempfile
+    print("=" * 100)
+    print("IL COLLAUDO DI `M-B1`: LA PROVA CHE PUO' FALLIRE")
+    print("=" * 100)
+    base = tempfile.mkdtemp(prefix="mb1c_")
+    oggi = io.open(os.path.join(_QUI, "tick.py"), encoding="utf-8").read()
+    try:
+        # ### ⭐ **LA GUARDIA CONTRO IL BRACCIO VACUO: la perturbazione CAMBIA la sequenza.**
+        import composizione as CM
+        _o = list(CM.ORDINE)
+        _o[1], _o[2] = _o[2], _o[1]
+        seq = [x[0] for x in CM.ORDINE]
+        _esito("### la perturbazione dell-ORDINE cambia DAVVERO la sequenza",
+               [x[0] for x in _o] != seq and seq[::-1] == seq,
+               "### e l-ordine e- un PALINDROMO (invertirlo NON cambia niente): per questo"
+               " si SCAMBIANO due posizioni")
+        # ### ⛔⛔ **IL CASO CHE DEVE FALLIRE: il passo di oggi MODIFICATO.**
+        n1, i1, b_pert = _byte_dell_albero("8c7b9288", os.path.join(base, "pert"),
+                                           _perturba_operatore(oggi))
+        n2, i2, b_puro = _byte_dell_albero("8c7b9288", os.path.join(base, "puro"), None)
+        rotti = _pezzi_diversi(b_pert, b_puro)
+        _esito("### ⛔ DEVE FALLIRE: col passo di oggi MODIFICATO il confronto DIVERGE",
+               rotti > 0, "### %d pezzi su %d NON coincidono: il criterio VEDE il"
+               " cambiamento" % (rotti, len(SCENE) * len(PEZZI)))
+        # ### ⛔⛔ **E COL DIFETTO DI IERI PASSEREBBE**, ed e' il punto dell-integrazione:
+        # ### copiando il passo modificato ### **ANCHE nell-albero vecchio**, i due lati
+        # ### usano ### **lo stesso passo** e il confronto ### **non vede niente.**
+        n3, i3, b_infetto = _byte_dell_albero("8c7b9288", os.path.join(base, "infetto"),
+                                              _perturba_operatore(oggi))
+        _esito("### ⛔ e COL DIFETTO DI IERI il confronto PASSEREBBE (falso-uno)",
+               _pezzi_diversi(b_pert, b_infetto) == 0,
+               "### 0 pezzi diversi: copiando il passo di oggi nell-albero vecchio, i due"
+               " lati girano LO STESSO passo")
+        # ### ⚠⚠ **E LA META' CHE `M-B1` NON VEDE, per disegno:** una perturbazione del
+        # ### SOLO ORDINE ### **non cambia i pezzi** -- li cambia l-IMPRONTA, che e'
+        # ### ### **riportata e non e' un criterio.**
+        n4, i4, b_ordine = _byte_dell_albero("8c7b9288", os.path.join(base, "ordine"),
+                                             _perturba_ordine(oggi))
+        _esito("### ⚠ e una perturbazione del SOLO CAMMINO NON tocca i pezzi (per disegno)",
+               _pezzi_diversi(b_ordine, b_puro) == 0,
+               "### 0 pezzi diversi: il criterio di `M-B1` sono I PEZZI")
+        # ### ⛔⛔ **E NEMMENO L-IMPRONTA LA VEDE, ed e' la cosa che questo braccio ha
+        # ### fatto uscire:** l-impronta viene da ### **`composizione.py`**, cioe' dalla
+        # ### TABELLA, e ### **non da come `tick.py` percorre l-ordine.**
+        # ### ✅ **CIO- CHE SI MUOVE E- IL PASSO INTERO**, che `contro()` riporta come
+        # ### ### **informazione e NON come criterio.**
+        # ### 📌 **Quindi per il punto `D`: se cambia IL CAMMINO e non la tabella, `M-B1`
+        # ### dice <<12 su 12 AL BIT>> e l-impronta e- IDENTICA** -- e la sola cosa che lo
+        # ### dice e' ### **la distanza del passo intero, che va LETTA.**
+        _esito("### ⛔ e NEMMENO l-impronta la vede: viene dalla TABELLA, non dal cammino",
+               i4 == i2,
+               "### le due impronte sono UGUALI (%s): l-impronta segue `composizione.py`,"
+               " non `tick.py`" % i4)
+        _esito("### ✅ ma il PASSO INTERO si muove, e `contro()` lo RIPORTA",
+               _passo_intero_diversi(b_ordine, b_puro) == len(SCENE),
+               "### %d scene su %d col passo intero DIVERSO: e- l-unico numero che vede un"
+               " cammino cambiato, ed e- <<informazione, non criterio>>"
+               % (_passo_intero_diversi(b_ordine, b_puro), len(SCENE)))
+        # ### ⭐ **E l-assert che la misura non PORTA il passo: si chiama, non si descrive.**
+        _la_misura_non_porta_il_passo()
+        _esito("### la misura NON definisce nessuna funzione del passo", True,
+               "### l-assert gira a OGNI confronto, non solo qui")
+        # ### ⭐ **IL CENSIMENTO, e la lista DICHIARATA.**
+        visti = _censimento()
+        _esito("### e SOLO gli strumenti DICHIARATI materializzano un albero ed eseguono",
+               tuple(visti) == CONFRONTANO_ESEGUENDO,
+               "### visti %s, dichiarati %s" % (visti, list(CONFRONTANO_ESEGUENDO)))
+    finally:
+        for q in ("pert", "puro", "infetto", "ordine"):
+            d = os.path.join(base, q)
+            if os.path.isdir(d):
+                subprocess.run(["git", "worktree", "remove", "--force", d], cwd=RADICE,
+                               capture_output=True)
+        shutil.rmtree(base, ignore_errors=True)
+    print("=" * 100)
+    print("IL COLLAUDO DI `M-B1`: %d su %d   %s"
+          % (sum(_OK), len(_OK),
+             "### TUTTI PASSATI" if all(_OK) else "### CI SONO ROSSI"))
+    print("=" * 100)
+    return 0 if all(_OK) else 1
+
+
 def main(argv):
     import _presidio
     _presidio.avvia(__file__)
     if argv and argv[0] == "--scrivi":
         return scrivi(argv[1])
+    if "--collaudo" in argv:
+        return collaudo()
     print("=" * 96)
     print("M-B1: IL RACCORDO AL BIT, PEZZO PER PEZZO -- dtau = dtau_rif = %.1f" % DTAU)
     print("=" * 96)
