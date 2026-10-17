@@ -18214,3 +18214,25 @@ stati letti col criterio dei ### **pezzi**, e la' il passo intero era ### **info
 `1.c` ### **non poteva far fallire `M-B1`.** ### **La lezione: un caso che deve fallire va
 scelto DENTRO il perimetro del criterio** — fuori, ### **passa sempre, ed e' un
 falso-uno con l'aria di un presidio.**
+### ⛔ **`2-SEPTIES` COMINCIATO: il braccio `(2)` e' un falso-uno PER META'**
+
+**Il task history e' committato prima del codice**
+*(`doc/TASK_HISTORY/2026-10-17_2septies_tempo_proprio_legge_che_gira.md`)*.
+
+### ✅ **E UNA COSA CHE GIA' FA BENE, da dire prima del difetto:** il ciclo principale
+### **percorre l'ordine** e misura ogni pezzo ### **che gira.** ### **Quella parte legge
+dalla tabella, ed e' giusta.**
+
+### ⛔⛔ **IL DIFETTO E' SOLO NEL BRACCIO `(2)`:** `visti` sono ### **i
+violatori**, e `CAMM-SATURAZIONE` ### **non e' nell'ordine**, quindi ### **non viene mai
+misurata**, quindi ### **non e' mai fra i violatori** — e il braccio ### **la conta
+BUONA.** ### **Meta' del braccio e' soddisfatta DALL'ASSENZA.**
+
+### ⭐⭐ **E A CHE SERVIVA IL BRACCIO `(2)`: e' il CONTROLLO POSITIVO del `(1)`.**
+Il `(1)` dice *«i violatori sono esattamente quelli attesi»*, e gli attesi sono
+### **zero** — quindi passa in ### **due** casi: ### ① nessuno viola *(la verita')*, e
+### ② ### **la misura non sa VEDERE una violazione.**
+### ⛔ **Il `(2)` dovrebbe escludere il `②` e non lo fa:** dire *«questi due dipendono da
+`dtau`»* ### **e' la stessa affermazione del `(1)`, non il suo controllo.**
+### ✅ **Il controllo vero e' quello che il mandato chiede:** ### **un pezzo dell'ordine
+reso INDIPENDENTE da `dtau` deve essere VISTO come violatore.**
