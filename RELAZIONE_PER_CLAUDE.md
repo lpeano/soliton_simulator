@@ -18785,3 +18785,22 @@ e servirebbe ### **una TERZA etichetta** oltre a `pre-commit` e `solo-CI`.
 ### **prossimo PRONTO e' il pezzo `6`** *(il campo `modulo`)*, poi il `2-quinquies` e il
 buco di `P-ES1`. ### ⛔ **`D4` resta FERMO** e ### **la terza etichetta della suite
 decide Luca.**
+### ⭐⭐ **LA DECISIONE E' REGISTRATA: LA STRADA `(d)`, E LA `QC` SI ESTENDE**
+
+### ✅ **La scelta e' chiusa**, l'attuazione no: la voce resta `AGENDA` finche' i
+criteri `C1`-`C5` non hanno i numeri.
+### 📌 **E l'estensione della `QC` sta dove sta la `QC`**: il nodo
+`DEC-QC-CONSERVATA` dell'albero, ### **con la data**, e detta come
+### **ESTENSIONE e non come correzione** -- il punto `(b)` di quella decisione
+### **non e' sbagliato: e' PARZIALE** *(vale a `cs` uniforme, dove `G = c H_tot`)*.
+### ✅ **E la prova e' quella gia' misurata:** `2.030` contro `-0.003`, `1.996`
+### **coincidenti** a `cs` uniforme, e `-0.034` col peso d'arco sbagliato.
+
+### ✅ **E L'ERRORE `n.10` E' NELLA RIPRESA** *(sezione `46`)*: la fase e'
+### **pura** *(`M` e `V` restano)*, ### **ma il flusso NON e' esatto** -- la fase muove
+### **le fasi relative del vuoto sugli archi**, che stanno ### **dentro `Omega`.**
+### ⭐ **E la differenza con `CAMM-MATERIA-VUOTO` e' istruttiva:** quel flusso e'
+esatto perche' ### **conserva le proprie sorgenti** *(`N` dipende solo da `rho` e
+`Lambda`, e una fase non li cambia)*; ### **questo no.**
+### ⚠ **Quindi va INTEGRATO, col suo errore misurato** -- ed e' la prima cosa che il
+task history deve derivare.

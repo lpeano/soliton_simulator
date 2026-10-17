@@ -87,6 +87,21 @@ nodi:
       ESATTAMENTE, solo al SECONDO ORDINE. Un bilancio che pretenda l-esattezza va
       scritto SULLE NORME, oppure va DICHIARATO APPROSSIMATO.
       ### 📌 E QUESTA DECISIONE SBLOCCA DEC-D6F-FORME-VUOTO, che dipendeva da lei.
+      ### ⭐⭐ ESTENSIONE DEL 2026-10-18 (decisione di Luca, 00:07), e non e- una
+      correzione: con cs NON UNIFORME la quantita- su cui si legge il secondo ordine
+      NON e- H_tot ma IL GENERATORE PESATO
+          G = somma_k cs_k * H_k(nodo) + somma_a w_a * H_a(arco),
+      con w_a il peso d-arco che il passo GIA- usa (la media armonica B-3).
+      ### CON cs UNIFORME G = c * H_tot, quindi il punto (b) di questa decisione RESTA
+      VERO in quel caso: non si toglie niente, si dice SU CHE COSA si legge quando cs
+      varia fra i nodi.
+      ### E LA PROVA E- MISURATA (2026-10-17, referto hw_energia_pesata.txt, blob
+      578b3d69): con cs CONGELATO non uniforme la pendenza di G e- 2.030 su 4
+      dimezzamenti, mentre quella di H_tot non pesato e- -0.003; a cs uniforme le
+      due coincidono (1.996); e col peso d-arco ARITMETICO invece che ARMONICO la
+      pendenza si perde (-0.034), cioe- il peso giusto e- quello che il passo usa.
+      ### IL LIMITE RESTA QUELLO DI PRIMA, e cambia solo oggetto: l-energia NON e-
+      conservata esattamente, solo al SECONDO ORDINE -- e adesso quell-energia e- G.
       --- la nota di prima:
       E- LA PROSSIMA, e il comando lo dice: `python csv/indice.py prossima`.
       La camminata conserva la NORMA esattamente, ma una quantita- usabile come
