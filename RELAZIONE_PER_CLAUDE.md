@@ -18178,3 +18178,17 @@ commit** — ed e' ### **la terza volta in tre giorni** che quel presidio trova 
 a meta'.
 
 **LA SUITE:** ### **`56` su `56`**, `pre-commit` a `268.0 s` su `500` *(`54%`)*.
+### ✅ **IL REFERTO DEL `2-SEXIES`, dal blob committato**
+
+`doc/REFERTO_mb1_pezzi_dalla_tabella.txt`, da ### **`sha1-BYTE f6e78427`**, timbrato
+*«committato e pulito»*: ### **il collaudo `10` su `10`** piu' il confronto contro
+`8c7b928` col ### **set nuovo**, e dentro c'e' la riga che conta:
+
+```
+  ### la legge CHE GIRA e' fra i pezzi, e coincide AL BIT contro 8c7b928
+      `CAMM-MATERIA-VUOTO` e' il pezzo n.1 di 6, e i suoi byte coincidono su 2 scene su 2
+```
+
+### ⭐ **E le due righe `CAMM-MATERIA-VUOTO` coi loro `sha1-BYTE`** stanno nel referto
+per entrambe le scene: ### **fino a ieri non c'erano, perche' il pezzo non era fra quelli
+misurati.**
