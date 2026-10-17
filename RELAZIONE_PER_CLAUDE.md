@@ -18804,3 +18804,32 @@ esatto perche' ### **conserva le proprie sorgenti** *(`N` dipende solo da `rho` 
 `Lambda`, e una fase non li cambia)*; ### **questo no.**
 ### ⚠ **Quindi va INTEGRATO, col suo errore misurato** -- ed e' la prima cosa che il
 task history deve derivare.
+### 📌 **IL TASK HISTORY DELLA LEGGE NUOVA, PRIMA DEL CODICE**
+
+`doc/TASK_HISTORY/2026-10-18_fase_vuoto_la_strada_d.md`, con ### **LA STELLA POLARE** e
+### **la derivazione di `Omega`.**
+
+### ✅ **E DUE FATTI LI HO MISURATI PRIMA DI SCRIVERE, non supposti:**
+### `1)` ### **`dw_a/dcs_k = 2 cs_j^2/(cs_i+cs_j)^2`**, verificata contro
+### **la differenza finita di `flussi_parziali.s_arco`** *(la funzione che il passo
+chiama)*: coincidono entro ### **`1.3e-07`** con `h = 1e-7`, e l'omogeneita' di grado `1`
+regge ### **al bit** *(`2.2e-16`)*.
+### `2)` ### **QUALI termini di `H` muove la fase**, che e' la sostanza dell'errore
+`n.10`: ### **`H^nodo` NO** *(`1.4e-14` su `5.8e+01`: la fase e' la stessa per tutte le
+estremita' del nodo, quindi esce dalla somma)*, ### **`H^arco` SI'** *(`1.5e+01` su
+`4.8e+01`: i due capi stanno in nodi DIVERSI, quindi la fase RELATIVA cambia)*.
+### ✅ **Quindi `Omega` si muove SOLO attraverso il termine d'arco del vuoto** -- una
+cosa precisa da collaudare, non una vaghezza.
+
+### ⭐ **E DUE COSE DERIVATE, non copiate:**
+### `a)` ### **il tempo del pezzo e' `dtau`, NON `dtau_nodo`**: i pezzi di oggi sono
+`exp(-i (cs_k H_k) dtau)`, quindi ### **il parametro di flusso della composizione e' il
+tick**, e il pezzo nuovo e' ### **un altro addendo dello stesso generatore.**
+### ⚠ **Con `dtau_nodo` sarebbe `cs_k Omega_k`, cioe' UN'ALTRA legge** -- e il
+collaudo del tempo proprio ### **non lo vedrebbe.**
+### `b)` ### **il posto nel palindromo:** il vincolo e' solo la simmetria *(due volte a
+`0.5`)*, e ### **fra le posizioni simmetriche l'ordine di convergenza NON cambia** --
+quindi la scelta la decide ### **un vincolo verificabile**: `percorri_tick` chiama
+`al_primo` ### **dopo il PRIMO pezzo** *(la fotografia di `deriva`)*, e metterlo in
+posizione `1` ### **cambierebbe il significato di quella fotografia.**
+### ✅ **Quindi `2` e `13`, e la posizione `1`/`14` si MISURA come informazione.**
