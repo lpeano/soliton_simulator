@@ -250,6 +250,13 @@ COLLAUDI = (
     # ### fallire ### **non invecchiano.**
     ("il censimento dei rami (NON blocca)", "csv/_censimento_rami.py --collaudo",
      "solo-CI"),
+    # ### ⛔ **IL CENSIMENTO DI CHI LA SUITE NON GIRA** *(`2026-10-17`)*, e ### **NON
+    # ### BLOCCA, per un motivo:** dire ### **QUALI giudici devono stare nella suite**
+    # ### e- una decisione -- ### **tre di loro costano piu- di `180` s**, e un tetto di
+    # ### `500` s non li regge tutti. ### ⚠ **Quindi conta e stampa**, e la scelta
+    # ### ### **resta a Luca.**
+    ("chi la suite NON gira (NON blocca)", "csv/_censimento_suite.py",
+     "pre-commit"),
     # ### ⚠ **`solo-CI`, e NON per il tempo** *(costa `18.9 s`)*: questo collaudo
     # ### ### **crea dei `git worktree`**, e farlo ### **dentro un `pre-commit`**, mentre
     # ### un commit e' in corso, ### **tocca `.git` sotto le mani di git.**

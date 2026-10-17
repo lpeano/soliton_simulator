@@ -18762,3 +18762,20 @@ sua nota *«giusto averlo misurato invece di copiarlo»*.
 ### ⚠ **E ci ho aggiunto una cosa mia:** quel numero non misurato
 ### **era arrivato nei MIEI commenti** *(i due `47`, corretti in `bf91edd5`)* -- una
 premessa non misurata ### **si propaga.**
+### ✅ **IL CENSIMENTO DELLA SUITE E' FATTO: `11` GIUDICI FUORI, E NESSUNA REGRESSIONE SILENZIOSA**
+
+### ⛔ **Il primo numero che avevo era ROTTO (`63`)**: comprendeva ### **le
+LIBRERIE**, che non hanno un `main`. ### **Il censimento vero ha tre livelli**
+*(eseguibile / giudica / nella suite)* e sta in ### **uno script**, cosi' il numero ha
+provenienza: ### **`94` `.py`, `55` eseguibili, `39` librerie, `60` comandi nella suite,
+`11` giudici fuori.**
+### ✅✅ **E girati tutti: `3` passano, `5` escono `1`, `3` vanno oltre i `180`
+s** -- ma ### **ogni rosso e' DICHIARATO DENTRO IL SUO FILE** *(<<la lettura la decide
+Luca>>, <<la previsione cade: era per un'altra scena>>)*: ### **sono misure con una
+lettura aperta, non collaudi rotti.**
+### ⚠ **Quattro su undici NON li ho guardati** *(uno da `96` s e i tre oltre i
+`180`)*, e lo dico.
+### ⛔ **E QUELLO CHE RESTA E' UNA TUA DECISIONE:** quali degli undici devono stare
+nella suite. ### **Tre costano piu' di `180` s e il tetto e' `500`: non ci stanno tutti**,
+e servirebbe ### **una TERZA etichetta** oltre a `pre-commit` e `solo-CI`.
+### ✅ **Per ora il censimento e' NELLA suite e NON BLOCCA.**
