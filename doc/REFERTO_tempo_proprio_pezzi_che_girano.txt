@@ -1,0 +1,29 @@
+[TIMBRO] _collauda_tempo_proprio.py  sha1-BYTE ac6aedda  committato e pulito
+================================================================================================
+IL CONTROLLO DEL TEMPO PROPRIO: quali pezzi EVOLVONO COL TICK invece che col dtau
+================================================================================================
+  CAMM-MATERIA-VUOTO         frazione 0.5   |psi(dtau) - psi(dtau/2)| = 1.415e-01   dipende dal tempo proprio
+  CAMM-MONETA-SPIN           frazione 0.5   |psi(dtau) - psi(dtau/2)| = 1.591e-01   dipende dal tempo proprio
+  CAMM-GROVER                frazione 0.5   |psi(dtau) - psi(dtau/2)| = 7.493e-01   dipende dal tempo proprio
+  CAMM-SPOSTAMENTO           frazione 0.5   |psi(dtau) - psi(dtau/2)| = 5.095e-01   dipende dal tempo proprio
+  CAMM-GROVER-VUOTO          frazione 0.5   |psi(dtau) - psi(dtau/2)| = 6.255e-01   dipende dal tempo proprio
+  CAMM-SPOSTAMENTO-VUOTO     frazione 0.5   |psi(dtau) - psi(dtau/2)| = 6.236e-01   dipende dal tempo proprio
+  CAMM-SPOSTAMENTO-VUOTO     frazione 0.5   |psi(dtau) - psi(dtau/2)| = 6.236e-01   dipende dal tempo proprio
+  CAMM-GROVER-VUOTO          frazione 0.5   |psi(dtau) - psi(dtau/2)| = 6.255e-01   dipende dal tempo proprio
+  CAMM-SPOSTAMENTO           frazione 0.5   |psi(dtau) - psi(dtau/2)| = 5.095e-01   dipende dal tempo proprio
+  CAMM-GROVER                frazione 0.5   |psi(dtau) - psi(dtau/2)| = 7.493e-01   dipende dal tempo proprio
+  CAMM-MONETA-SPIN           frazione 0.5   |psi(dtau) - psi(dtau/2)| = 1.591e-01   dipende dal tempo proprio
+  CAMM-MATERIA-VUOTO         frazione 0.5   |psi(dtau) - psi(dtau/2)| = 1.415e-01   dipende dal tempo proprio
+------------------------------------------------------------------------------------------------
+  ### (1) i violatori sono ESATTAMENTE quelli attesi       PASSA   visti ()
+  ### (2) DEVE DIPENDERE: TUTTI i pezzi che GIRANO, letti  PASSA   6 pezzi distinti dall-ordine; il piu- debole e- CAMM-MATERIA-VUOTO con 1.415e-01 (la soglia e- 1e-09)
+  ### (2) DEVE fallire: un pezzo dell-ordine reso INDIPEND PASSA   `CAMM-MATERIA-VUOTO` col passo del motore FISSO: |differenza| = 0.0e+00, cioe- VIOLATORE -- senza questo il braccio (1) passerebbe anche con la misura CIECA
+  ### (3) e sono 0 violatori su 12 pezzi, tutti guardati   PASSA   0 violatori su 12 pezzi, e 12 pezzi guardati
+================================================================================================
+  4 su 4
+### ✅ E IL CENSIMENTO DICE CHE ZERO PEZZI VIOLANO `TEMPO-PROPRIO-LOCALE`:
+###   la strada (B) e' stata fatta il 2026-10-15, e questo file da CRITERIO
+###   DI ACCETTAZIONE e' diventato UN PRESIDIO: un pezzo che tornasse a
+###   evolvere col tick FA FALLIRE il pre-commit, e la prova che fallisce
+###   davvero e' stata fatta rimettendo un pezzo a tick fisso.
+================================================================================================

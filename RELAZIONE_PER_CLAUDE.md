@@ -18268,3 +18268,9 @@ usata e' un permesso che nessuno ha chiesto.** ### **Due righe della mappa, corr
 ### ✅ **E i TRE GIUDICI del punto `D` sono riparati:** `M-B1` copre la legge che gira
 *(`2-sexies`)*, il tempo proprio guarda i pezzi che girano *(`2-septies`)*, e il confine
 di `M-B1` e' ### **nella sua scheda** *(l'integrazione del `2026-10-17`)*.
+### ✅ **IL REFERTO DEL `2-SEPTIES`, dal blob committato**
+
+`doc/REFERTO_tempo_proprio_pezzi_che_girano.txt`, da ### **`sha1-BYTE ac6aedda`**,
+timbrato *«committato e pulito»*: ### **`4` su `4`**, e dentro ci sono le due righe che
+contano — ### **`6` pezzi distinti dall'ordine** col piu' debole a `1.415e-01`, e il
+### **violatore VISTO** con `|differenza| = 0.0e+00`.
