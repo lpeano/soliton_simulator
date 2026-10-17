@@ -18833,3 +18833,16 @@ quindi la scelta la decide ### **un vincolo verificabile**: `percorri_tick` chia
 `al_primo` ### **dopo il PRIMO pezzo** *(la fotografia di `deriva`)*, e metterlo in
 posizione `1` ### **cambierebbe il significato di quella fotografia.**
 ### ✅ **Quindi `2` e `13`, e la posizione `1`/`14` si MISURA come informazione.**
+### 📌 **UN MANDATO NUOVO E' ARRIVATO MENTRE LAVORAVO, E STA IN CODA**
+
+*(il vuoto ### **per estremita'** e la scala che segue la topologia, `2026-10-18` `00:22`)*.
+### ✅ **Registrato in `doc/CODA_2026-10-16.md` appena arrivato, e NON ha interrotto
+niente** *(`L-UN-PROMPT`)*: lo dice il mandato stesso -- ### **in coda dopo la strada
+`(d)`, commit a se', solo mappa e voce.**
+### ⚠ **E una cosa la segnalo adesso perche' tocca il lavoro in corso:** il punto
+`3(b)` dice che ### **se `Lambda_c` dipendesse dallo stato durante la corsa, quella
+dipendenza dovrebbe entrare in `G`** -- ### **ed e' esattamente la lezione di `D3` che
+sto attuando ora.** ### ✅ **Con `Lambda_c` costante** *(oggi)* ### **il termine che
+sto scrivendo e' completo**; con un `Lambda_c = d_k lambda_c` ### **resterebbe completo a
+grafo fisso**, perche' `d_k` ### **non cambia** -- e questo e' ### **un fatto, non una
+decisione.**
