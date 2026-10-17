@@ -18464,3 +18464,8 @@ accesa rompe l'invarianza ### **al primo tick**, perche' ### **e' la forma a int
 la scala, non la dinamica ad amplificarla.**
 
 **LA SUITE:** ### **`58` su `58`**, `pre-commit` a `277.7 s` su `500` *(`56%`)*.
+### ✅ **IL REFERTO DI `D1`, dal blob committato**
+
+`doc/referti_l2/invarianza_di_scala.txt`, da ### **`sha1-BYTE 0e4452b6`**, timbrato
+*«committato e pulito»*: i ### **`14` bracci** piu' ### **la tabella della
+crescita**, che e' la parte che spiega ### **perche' il criterio va letto a un tick.**

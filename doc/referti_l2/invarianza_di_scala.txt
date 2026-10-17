@@ -1,0 +1,31 @@
+[TIMBRO] _collauda_scala.py  sha1-BYTE 0e4452b6  committato e pulito
+====================================================================================================
+`D1`: L'INVARIANZA DI SCALA -- AL BIT su 50 tick per le potenze di 2, 8 ulp a 1 tick per 3
+====================================================================================================
+  ### (s1) SPENTA, `lambda = 2.0`: AL BIT su 50 tick             PASSA   nn=16 seme=7: scarto 0.0e+00   (e' la prova che NON c'e' una scala nascosta)
+  ### (s1) SPENTA, `lambda = 0.5`: AL BIT su 50 tick             PASSA   nn=16 seme=7: scarto 0.0e+00   (e' la prova che NON c'e' una scala nascosta)
+  ### (s2) SPENTA, `lambda = 3.0`: entro 8 ulp a 1 tick          PASSA   nn=16 seme=7: 1.570e-15 su scala 3.520e+00 = 2.0 ulp
+  ### (s1) SPENTA, `lambda = 2.0`: AL BIT su 50 tick             PASSA   nn=12 seme=11: scarto 0.0e+00   (e' la prova che NON c'e' una scala nascosta)
+  ### (s1) SPENTA, `lambda = 0.5`: AL BIT su 50 tick             PASSA   nn=12 seme=11: scarto 0.0e+00   (e' la prova che NON c'e' una scala nascosta)
+  ### (s2) SPENTA, `lambda = 3.0`: entro 8 ulp a 1 tick          PASSA   nn=12 seme=11: 1.337e-15 su scala 3.273e+00 = 1.8 ulp
+  ### (a1) DEVE fallire: ACCESA a `Lambda_c` FISSA, `lambda = 2` PASSA   nn=16 seme=7: 3.499441e+00 su scala 3.486e+00 = 4.521e+15 ulp -- e GIA' A UN TICK
+  ### (a1) DEVE fallire: ACCESA a `Lambda_c` FISSA, `lambda = 2` PASSA   nn=12 seme=11: 3.619475e+00 su scala 3.395e+00 = 4.801e+15 ulp -- e GIA' A UN TICK
+  ### (c1) `Lambda_c` per `lambda^2`, `lambda = 2.0`: AL BIT su  PASSA   nn=16 seme=7: scarto 0.0e+00   (l'invarianza TORNA)
+  ### (c1) `Lambda_c` per `lambda^2`, `lambda = 0.5`: AL BIT su  PASSA   nn=16 seme=7: scarto 0.0e+00   (l'invarianza TORNA)
+  ### (c2) `Lambda_c` per `lambda^2`, `lambda = 3.0`: entro 8 ul PASSA   nn=16 seme=7: 1.884e-15 su scala 3.486e+00 = 2.4 ulp
+  ### (c1) `Lambda_c` per `lambda^2`, `lambda = 2.0`: AL BIT su  PASSA   nn=12 seme=11: scarto 0.0e+00   (l'invarianza TORNA)
+  ### (c1) `Lambda_c` per `lambda^2`, `lambda = 0.5`: AL BIT su  PASSA   nn=12 seme=11: scarto 0.0e+00   (l'invarianza TORNA)
+  ### (c2) `Lambda_c` per `lambda^2`, `lambda = 3.0`: entro 8 ul PASSA   nn=12 seme=11: 2.156e-15 su scala 3.395e+00 = 2.9 ulp
+      LA CRESCITA (informazione, NON un criterio) -- nn=16 seme=7:
+          tick    ulp lam=3    ulp lam=2
+             0          0.6          0.0
+             1          2.0          0.0
+             2          2.7          0.0
+             5          5.6          0.0
+            10         15.2          0.0
+            25         28.7          0.0
+            50         96.3          0.0
+           100       1902.1          0.0
+====================================================================================================
+`D1`: 14 su 14   ### TUTTI PASSATI
+====================================================================================================
