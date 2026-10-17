@@ -18723,3 +18723,11 @@ motore ### **azzera `cs` a fine tick.** ### **Non e' vero**, `chiudi_tick` non l
 adesso il commento dice ### **perche' quella riga c'e' davvero** *(rendere esplicito che
 il peso di quel modo e' costante)* e che ### **e' una riga che non serve, non una riga che
 cura.**
+### ✅ **IL REFERTO DI `H_w`, dal blob committato**
+
+`doc/referti_l2/hw_energia_pesata.txt`, da ### **`sha1-BYTE 578b3d69`**, timbrato
+*«committato e pulito»*: la configurazione intera, le ### **quattro corse** con
+le due escursioni per `dtau`, il ### **quadro** delle pendenze, e ### **la LETTURA scritta
+dentro il referto** come il mandato chiede.
+### ⛔ **E il referto dichiara che non e' una decisione:** la scelta fra le cinque
+strade e' di Luca, e ### **`D4` resta fermo.**

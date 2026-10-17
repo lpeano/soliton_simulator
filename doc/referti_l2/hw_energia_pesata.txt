@@ -1,0 +1,84 @@
+[TIMBRO] _misura_hw.py  sha1-BYTE 578b3d69  committato e pulito
+====================================================================================================
+`H_w`: L'ENERGIA PESATA, E LA MISURA CHE SEPARA LE STRADE DI `cs`
+### Mandato del guardiano del 2026-10-17, 22:08. NESSUNA DECISIONE.
+====================================================================================================
+  LA CONFIGURAZIONE INTERA, dichiarata:
+  la scena di `M-B2`: nn = 16   seme = 7   T = 8.0   norma = locale   vuoto_modulo = 2.0   su2 = True   omega = pi
+  `Lambda_c` = 1.0 x la MEDIA di `Lambda` sulla scena, UNA volta e PRIMA della corsa
+  i dimezzamenti: k in (1, 2, 3, 4, 5)   la soglia: 1.9 (quella di `M-B2`, nessuna banda nuova)
+  i pesi: `s_nodo` e `s_arco` DAL PASSO, come rapporto con/senza `cs`
+
+### (0) LA SECONDA FONTE: a peso uniforme `H_w` = `c * h_tot`, e si confronta
+###     A OGNI TICK DI OGNI CORSA. Senza, `pezzi_di_h` sarebbe una copia che
+###     puo' divergere in silenzio.
+  (0) a forma SPENTA `H_w` e' `h_tot` entro 4096 ulp             PASSA   il PEGGIO su 8 tick e' 0.7 ulp: e' l'ordine della somma, non una legge diversa
+
+### (b) IL CONTROLLO POSITIVO: `cs` UNIFORME, e le due pendenze coincidono
+     k    dtau       tick    escursione H_w   escursione H_tot
+     1    0.500000   16      8.709755e-01     1.934196e+00
+     2    0.250000   32      2.185362e-01     4.853084e-01
+     3    0.125000   64      5.496325e-02     1.220582e-01
+     4    0.062500   128     1.377234e-02     3.058456e-02
+     5    0.031250   256     3.441564e-03     7.642763e-03
+  (b) `cs` UNIFORME = 0.450304: la pendenza di `H_w` e' `>= 1.9` PASSA   pendenza 1.996 su 4 dimezzamenti
+  (b) e quella di `H_tot` COINCIDE, come deve a peso costante    PASSA   pendenza 1.996: a peso costante `H_w = c H_tot`
+  (b) e le due fonti restano d'accordo entro 4096 ulp            PASSA   il PEGGIO su tutte le corse e' 1.6 ulp
+
+### (a) LA DOMANDA: `cs` NON UNIFORME ma CONGELATO -- la pendenza di `H_w`
+     k    dtau       tick    escursione H_w   escursione H_tot
+     1    0.500000   16      2.351748e+00     7.191029e+01
+     2    0.250000   32      5.237171e-01     7.225465e+01
+     3    0.125000   64      1.359165e-01     7.237083e+01
+     4    0.062500   128     3.382504e-02     7.240124e+01
+     5    0.031250   256     8.446580e-03     7.243986e+01
+  (a) con `cs` CONGELATO la pendenza di `H_w` e' `>= 1.9`        PASSA   pendenza 2.030 (e `H_tot` NON pesato: -0.003) -- `cs` va da 0.217531 a 0.686555
+  (a) e il braccio HA MATERIA: `cs` NON e' uniforme              PASSA   spread 0.469024: se fosse 0 questo braccio sarebbe `(b)`
+
+### (c) INFORMAZIONE (non un criterio): `cs` DINAMICO, al centro come `D2`
+     k    dtau       tick    escursione H_w   escursione H_tot
+     1    0.500000   16      4.216716e+02     3.028617e+01
+     2    0.250000   32      4.223444e+02     2.513940e+01
+     3    0.125000   64      4.224705e+02     2.545236e+01
+     4    0.062500   128     4.224349e+02     2.546419e+01
+     5    0.031250   256     4.223915e+02     2.551644e+01
+     ### la pendenza di `H_w` e' -0.001, quella di `H_tot` 0.062 su 4 dimezzamenti
+     ### E NON E' UN CRITERIO: il mandato la chiede PER INFORMAZIONE.
+
+### (d) IL CASO CHE DEVE FALLIRE: media ARITMETICA al posto dell'ARMONICA
+     k    dtau       tick    escursione H_w   escursione H_tot
+     1    0.500000   16      5.614378e+00     7.191029e+01
+     2    0.250000   32      5.907576e+00     7.225465e+01
+     3    0.125000   64      6.104238e+00     7.237083e+01
+     4    0.062500   128     6.157908e+00     7.240124e+01
+     5    0.031250   256     6.169082e+00     7.243986e+01
+  ### (d) DEVE fallire: coi pesi d'arco SBAGLIATI la pendenza si PASSA   pendenza -0.034: se fosse `>= 1.9` la misura NON guarderebbe i pesi
+
+====================================================================================================
+### IL QUADRO, in una tabella
+  il modo di `cs`                    pendenza H_w     pendenza H_tot
+  uniforme (0.450304), controllo     1.996            1.996
+  CONGELATO non uniforme             2.030            -0.003
+  DINAMICO (al centro, come `D2`)    -0.001           0.062
+  congelato, pesi ARITMETICI [deve fallire] -0.034           --
+
+### LA LETTURA, fissata nel task history PRIMA della misura:
+###   (a) REGGE e (c) NO: il pesaggio e' COERENTE col modo in cui il passo
+###   usa `cs`, e cio' che rompe la conservazione e' SOLO LA DINAMICA.
+### ⛔ E NESSUNA DECISIONE: la scelta fra le cinque strade e'
+###   di Luca (`DOMANDA-QUALE-INVARIANTE-CON-CS`).
+====================================================================================================
+`H_w`: 7 su 7
+====================================================================================================
+
+### ⭐ LA LETTURA, SCRITTA NEL REFERTO COME IL MANDATO CHIEDE (e NON una decisione):
+###   (a) REGGE (2.030) e (c) NO (-0.001), quindi IL PESAGGIO E- COERENTE col modo
+###   in cui il passo usa cs, e CIO- CHE ROMPE LA CONSERVAZIONE E- SOLO LA DINAMICA
+###   di cs. L-alternativa prevista -- (a) non regge, cioe- il passo non corrisponde
+###   a nessuna energia pesata -- E- ESCLUSA DALLA MISURA.
+### ✅ E I TRE CONTROLLI CHE LO RENDONO LEGGIBILE: (0) a peso uniforme H_w e-
+###   h_tot entro 1.6 ulp, a ogni tick di ogni corsa; (b) a cs costante le due
+###   pendenze coincidono (1.996 e 1.996); (d) coi pesi d-arco ARITMETICI la
+###   pendenza si perde (-0.034), quindi la misura guarda DAVVERO i pesi.
+### ⛔ E NESSUNA DECISIONE: la scelta fra le cinque strade (a)(b)(c)(d)(e) e- di
+###   Luca, e sta in DOMANDA-QUALE-INVARIANTE-CON-CS, che BLOCCA. D4 resta fermo.
