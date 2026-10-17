@@ -18554,3 +18554,15 @@ pulito.**
 commit X" e non e' chiusa MENTE, e mente in un campo che un programma legge>>.**
 ### ✅ **Ha ragione**, ed e' il motivo per cui la chiusura e' ### **un commit a se'**:
 il commit che cura ### **non puo' citare il proprio hash.**
+### ⛔⛔ **DUE NUMERI SCADUTI NEL CODICE, E LI AVEVO SCRITTI IO**
+
+La spazzata ha cambiato il massimo da `47` a `74` giri, e ### **il `47` era rimasto in
+due posti**: il docstring di `_collauda_cs_centro.py` *(che diceva anche
+«~`23` tick di lavoro per tick»)* e il commento di `GIRI_MAX` in `tick.py`.
+### ⚠ **Corretti entrambi, e col PERCHE' accanto:** il `47` era il massimo
+### **sui SEI regimi di `D2`**, che ### **non contengono il massimo.**
+### ✅ **E `M-B1` e' AL BIT** *(`12` pezzi su `12`, impronta `3fc01fac756b20d1`)*:
+un commento non muove un bit, e ### **si misura invece di affermarlo.**
+### 📌 **E' la trappola scritta in `CLAUDE.md`:** ### **<<verifica dal codice, non
+dai commenti>>** -- e il modo di non lasciarne uno scaduto e' ### **correggerlo nel giro
+in cui il numero cambia.**

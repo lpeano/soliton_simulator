@@ -100,7 +100,11 @@ def percorri_tick(st, mot, par, salta, al_primo, quanti):
 # ### ⛔ **IL TETTO DEI GIRI, e NON e- una manopola:** e- ### **il numero oltre il
 # ### quale si DICHIARA che il punto fisso non converge**, e il mandato dice
 # ### ### **<<relaziona coi numeri e NON scegliere un altro schema>>.**
-# ### ⚠ **Misurato il `2026-10-17`: il MASSIMO dei giri e` 47 (scena nn=16, Lambda_c = Lambda), e il tetto e` 120 -- cioe` il numero oltre il quale si DICHIARA che non converge.**
+# ### ⚠ **Misurato il `2026-10-17`: il MASSIMO dei giri e` 74 (scena nn=16, Lambda_c/Lambda = 0.3), e il tetto di `GIRI_MAX` e` 120 -- cioe` il numero oltre il quale si DICHIARA che non converge.**
+# ### ⛔ **E IL 47 DI PRIMA ERA IL MASSIMO SUI SEI REGIMI DI `D2`, che NON
+# ### contengono il massimo:** la spazzata a sette punti lo prende, e sta a ### **un
+# ### rapporto INTERMEDIO.** ### **Il costo CALA su ENTRAMBI i lati**, quindi `GIRI_MAX`
+# ### ### **non si taglia guardando solo i rapporti piccoli.**
 GIRI_MAX = 120
 
 

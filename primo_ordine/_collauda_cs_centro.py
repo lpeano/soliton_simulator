@@ -27,12 +27,19 @@ cs a INIZIO PASSO            0.998        <- IL SECONDO ORDINE E' PERSO
 | `nn=12 seme=11` | `8.0` | `34` | `0.364` |
 | `nn=12 seme=11` | `80.0` | `12` | `0.046` |
 
-### ⛔⛔ **IL MASSIMO E' `47` GIRI, e ogni giro costa MEZZO TICK:** cioe'
-### **~`23` tick di lavoro per OGNI tick.** ### ⚠ **E' un numero che Luca deve vedere**,
-perche' ### **fa il simulatore ~`23` volte piu' lento** quando la forma e' accesa.
-### 📌 **E la convergenza e' PIU' RAPIDA dove `Lambda_c` e' grande** *(`11` giri a
-`Lambda_c/Lambda = 10`)*, perche' la' ### **`cs` e' piccolo, il passo e' corto, e `Lambda`
-si muove meno.**
+### ⛔⛔ **IL MASSIMO E' `74` GIRI, e ogni giro costa MEZZO TICK:** cioe'
+### **~`37` tick di lavoro per OGNI tick** -- ### **il simulatore ~`37` volte piu'
+lento** quando la forma e' accesa. ### ⚠ **E' un numero che Luca deve vedere.**
+### ⛔⛔ **E IL MASSIMO STA A UN RAPPORTO INTERMEDIO, `~0.3`:** i SEI regimi qui
+sotto davano `11..47` e ### **NON contenevano il massimo**; la spazzata di `informazione_costo()`
+ha SETTE punti e lo prende. ### **E il costo CALA SU ENTRAMBI I LATI** -- a `0.01` si torna
+a `11` giri, gli stessi di `10`. ### ⚠ **Quindi NON e' monotono nel rapporto**, e
+### **il regime piu' lento NON e' quello a `Lambda_c` piccola** *(che era la premessa
+del mandato)*.
+### 📌 **IL PERCHE', e si legge nella contrazione:** a `Lambda_c` ### **piccolissima**
+`cs ~ 1` dappertutto *(la forma e' quasi spenta)*, quindi il mezzo tick ### **non muove
+`Lambda`**; a `Lambda_c` ### **grande** `cs` e' piccolo, il passo e' ### **corto**, e `Lambda`
+si muove poco. ### **In mezzo la retroazione e' massima.**
 ### ✅ **In nessun regime provato il punto fisso NON converge** — ### **nemmeno a
 `Lambda_c/Lambda = 0.1`**, che e' il regime che il mandato temeva.
 
