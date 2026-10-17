@@ -18846,3 +18846,15 @@ sto attuando ora.** ### ✅ **Con `Lambda_c` costante** *(oggi)* ### **il termin
 sto scrivendo e' completo**; con un `Lambda_c = d_k lambda_c` ### **resterebbe completo a
 grafo fisso**, perche' `d_k` ### **non cambia** -- e questo e' ### **un fatto, non una
 decisione.**
+### 📌 **E UN SECONDO MANDATO IN CODA: IL SOLITONE A DUE LUNGHEZZE DI PLANCK**
+
+*(`2026-10-18` `00:29`, solo mappa, dopo la strada `(d)`)*. ### ✅ **Registrato
+appena arrivato, e di nuovo senza interrompere** -- ### **i due mandati in coda sono
+adesso DUE**, e stanno entrambi in `doc/CODA_2026-10-16.md` ### **nell'ordine in cui sono
+arrivati.**
+### ⭐ **E perche' il suo posto e' DOPO `(d)` sta nel mandato stesso:** il punto
+`2(b)` -- *«col vuoto che sente l'ENERGIA la risposta a `k = pi` deve DIFFERIRE da
+quella a `k = 0`»* -- ### **non si puo' misurare prima che `(d)` giri.**
+### 📌 **E il punto `2(a)` e' un CONTROLLO che si puo' fare GIA' OGGI** *(con `S3`
+sola le due risposte devono COINCIDERE)*: ### **lo segnalo perche' e' la meta' che non
+aspetta `(d)`**, e ### **non la faccio ora** perche' il mandato dice ### **solo mappa.**
