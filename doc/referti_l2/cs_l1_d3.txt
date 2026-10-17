@@ -1,0 +1,54 @@
+[TIMBRO] _collauda_cs_l1.py  sha1-BYTE 1586cc67  committato e pulito
+====================================================================================================
+`D3`: `L1` RESTA CHIUSO CON `cs` DINAMICO? -- i quattro criteri della tabella
+====================================================================================================
+  LA CONFIGURAZIONE INTERA, dichiarata:
+  `M-B2`: nn = 16   seme = 7   T = 8.0   norma = locale   vuoto_modulo = 2.0   su2 = True
+  la simmetria: toro (3, 3)   semi (11, 23, 37, 41, 53, 67, 71, 89)   banda 8 ulp   vuoti {11: (0, 4), 23: (2,), 37: (1, 5, 7), 41: (8,)}
+  `Lambda_c` = 1.0 x la MEDIA di `Lambda` sulla scena, calcolata UNA volta e PRIMA della corsa
+  i dimezzamenti: k in (1, 2, 3, 4, 5)   la pendenza minima: 1.9   le norme: 64 tick, banda 256 ulp
+
+### (0) IL BRACCIO 0: a forma SPENTA i cicli di questo file sono quelli
+###     degli strumenti originali. Senza, nulla di sotto si attribuisce.
+  (0) `M-B2`: il mio ciclo a forma SPENTA e' il suo AL BIT       PASSA   escursione 3.783367e+00 contro 3.783367e+00, `H(0)` -732.181680472 contro -732.181680472
+  (0) la simmetria: il mio ciclo a forma SPENTA e' il suo AL BIT PASSA   scarto 9.420555e-16 contro 9.420555e-16
+
+### (1) IL TEMPO PROPRIO con `cs` ACCESO: 0 violatori, e sono 12 pezzi
+  (1) con `cs` acceso i violatori sono `0` su 12 pezzi           PASSA   il piu' DEBOLE e' `CAMM-MATERIA-VUOTO` con 7.077e-02 (la soglia e' 1e-09)
+  ### (1) DEVE fallire: col passo FISSO il pezzo e' VIOLATORE an PASSA   |differenza| = 0.0e+00: senza questo, `(1)` passerebbe anche con la misura CIECA
+
+### (2) `M-B2` con `cs` AL CENTRO: la pendenza di `H_tot` su 4 dimezzamenti
+     k    dtau       tick    escursione     giri
+     1    0.500000   16      5.555853e+01   354
+     2    0.250000   32      5.663168e+01   468
+     3    0.125000   64      5.618259e+01   720
+     4    0.062500   128     5.606886e+01   1177
+     5    0.031250   256     5.604036e+01   2007
+  (2) la pendenza con `cs` al CENTRO e' `>= 1.9`                 ### FALLISCE   pendenza -0.003 su 4 dimezzamenti (a forma spenta `M-B2` da' 1.965 su 5)
+     LA DIAGNOSI (informazione, NON un criterio): `cs` UNIFORME
+     `cs` = 1.00 su tutti i nodi -> pendenza 1.951   (1.383e+01 -> 6.180e-02)
+     `cs` = 0.50 su tutti i nodi -> pendenza 2.009   (3.190e+00 -> 1.217e-02)
+  (2) LA DIAGNOSI: con `cs` UNIFORME la pendenza TORNA `>= 1.9`  PASSA   `cs=1` 1.951 e `cs=0.5` 2.009: il CICLO E' GIUSTO, e la causa del `(2)` e' che `H_tot` NON e' l'invariante di un `cs` che VARIA fra i nodi
+  ### (2) DEVE fallire: `cs` a INIZIO PASSO perde il secondo ord ### FALLISCE   pendenza -0.153 contro -0.003 del caso vero: se il caso VERO e' rosso questo braccio NON HA MATERIA, e lo dice invece di passare
+
+### (3) LA SIMMETRIA con `cs` AL CENTRO: 8 stati, banda 8 ulp
+  (3) dtau=0.5000: `<= 8` ulp su tutti gli 8 stati               PASSA   il PEGGIO e' 2.85 ulp (seme 71)
+  (3) dtau=0.2500: `<= 8` ulp su tutti gli 8 stati               PASSA   il PEGGIO e' 3.71 ulp (seme 71)
+  ### (3) DEVE fallire: `cs` a INIZIO PASSO sfonda la banda      PASSA   scarto 6.394e-01, cioe' 1037944734801996 ulp
+
+### (4) LE NORME `M` e `V` su 64 tick con `cs` acceso
+  (4) la norma `M` si conserva entro 256 ulp                     PASSA   da 117.973634195 a 117.973634195, cioe' 3.3 ulp
+  (4) la norma `V` si conserva entro 256 ulp                     PASSA   da 128.000000000 a 128.000000000, cioe' 3.5 ulp
+  (4) e il braccio HA MATERIA: `cs` NON e' uniforme              PASSA   `cs` va da 0.128518 a 0.750295: se fosse uniforme la forma non starebbe facendo niente
+====================================================================================================
+`D3`: 11 su 13
+### ⛔ E NESSUNA CONCLUSIONE DI FISICA: qui ci sono numeri. Che cosa voglia
+###   dire <<`L1` resta chiuso>> e' una lettura, e la decide Luca.
+====================================================================================================
+
+### ⚠ QUESTO REFERTO PORTA UN ROSSO, E NON E- UN ERRORE DI CORSA: il criterio (2)
+###   del mandato di D3 NON E- SODDISFATTO, e il collaudo esce 1. La causa e- nella
+###   riga <<LA DIAGNOSI>>: con cs UNIFORME la pendenza torna a 1.951 e 2.009, quindi
+###   il ciclo e- giusto e H_tot NON e- l-invariante del flusso somma_k cs_k H_k.
+### ⛔ E LA SCELTA DI QUALE QUANTITA- DEBBA CONSERVARSI E- DI LUCA:
+###   DOMANDA-QUALE-INVARIANTE-CON-CS, che BLOCCA.

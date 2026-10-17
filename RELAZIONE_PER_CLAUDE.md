@@ -18639,3 +18639,12 @@ la suite si gira ### **una volta sola**, e la riga si cerca ### **nell'uscita di
 ### **`354`+`468`+`720`+`1177`+`2007` = `4726` giri in tutto** *(da `22.1` a `7.8` giri
 per tick, contati e stampati nella tabella)*. ### **Mezzo tick per giro, quindi
 `~2363` tick di lavoro** -- ### **`4.6` s in tutto**, perche' la scena e' `nn = 16`.
+### ✅ **IL REFERTO DI `D3`, dal blob committato**
+
+`doc/referti_l2/cs_l1_d3.txt`, da ### **`sha1-BYTE 1586cc67`**, timbrato
+*«committato e pulito»*: i quattro criteri uno per uno, la tabella dei
+### **giri del punto fisso** *(`354` a `2007` per `dtau`)*, e ### **la DIAGNOSI con `cs`
+uniforme.**
+### ⚠ **E IL REFERTO DICHIARA DENTRO SE STESSO che porta un ROSSO**, e che
+### **non e' un errore di corsa**: il criterio `(2)` non e' soddisfatto, il collaudo
+### **esce `1`**, e la scelta e' di Luca *(`[[DOMANDA-QUALE-INVARIANTE-CON-CS]]`)*.
