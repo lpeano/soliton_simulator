@@ -18746,3 +18746,19 @@ criterio `(2)`**, perche' ### **la non uniformita' di `cs` E' la gravita'.**
 che il referto di `H_w` ha ### **`82` righe**, e ne ha ### **`84`.** ### **L'ho ricopiato
 a mano invece di contarlo** *(`[[L-NUMERI]]`: un numero ricopiato non ha provenienza)*.
 ### **Il referto e' quello giusto, il numero nel messaggio no.**
+### ✅ **I NUMERI E LE CINQUE STRADE SONO NELLA VOCE**
+
+`[[DOMANDA-QUALE-INVARIANTE-CON-CS]]`: la descrizione passa da `2429` a `5517` caratteri
+coi ### **numeri misurati** *(`2.030` / `-0.003` / `-0.001` / `-0.034` / `1.6` ulp)* e
+### **le cinque strade col loro costo** -- e ### **dico quali numeri sono MISURATI e quali
+sono STIME DI LAVORO**, perche' una stima non e' una misura.
+### ⛔ **E una cosa che la misura dice sulla strada `(a)`:** il codice c'e' gia' *(il
+costo per misurare e' ZERO)*, ### **ma con `cs` DINAMICO nemmeno `H_w` si conserva** --
+quindi `(a)` chiude il criterio `(2)` ### **solo se il criterio si legge su `cs`
+CONGELATO**, e un `cs` congelato ### **non e' la gravita' che si vuole.**
+
+### ✅ **E L'ERRORE `n.9` DEL GUARDIANO E' NELLA RIPRESA** *(sezione `43`)*, con la
+sua nota *«giusto averlo misurato invece di copiarlo»*.
+### ⚠ **E ci ho aggiunto una cosa mia:** quel numero non misurato
+### **era arrivato nei MIEI commenti** *(i due `47`, corretti in `bf91edd5`)* -- una
+premessa non misurata ### **si propaga.**
