@@ -88,6 +88,24 @@ SU2 = True
 # ### contenevano il flusso che gira.**
 # ### ✅ **E LA SATURAZIONE ESCE DA SOLA**, perche- non e- nell-ordine: ### **non la
 # ### togliamo noi.** Se Luca la rimettesse nell-ordine, ### **rientrerebbe da sola.**
+# ### ⛔⛔ **I PEZZI NUOVI: DICHIARATI, E NON CONFRONTATI** *(`2026-10-18`)*.
+# ### ⚠ **Un pezzo che nell-albero vecchio NON ESISTE non si puo- confrontare**,
+# ### e il confronto per posizione ### **lo crederebbe un altro pezzo**: e- il difetto
+# ### che il controllo degli `id` impedisce dal `2026-10-17`.
+# ### ✅ **E ALLORA SI DICHIARA, con la data e il motivo**, e il criterio diventa:
+# ### ### **i pezzi di PRIMA devono coincidere TUTTI al bit**, e ### **la distanza del
+# ### passo intero deve essere `0`** -- che e- cio- che dimostra che il pezzo nuovo
+# ### ### **a forma spenta NON FA NIENTE.**
+# ### ⛔ **E la lista NON e- una via d-uscita: e- un IMPEDIMENTO IN MENO che si paga** --
+# ### con un nome qui dentro ### **quel pezzo non e- piu- sorvegliato da `M-B1`**, e va
+# ### ### **TOLTO** appena esiste un commit in cui c-e- da entrambi i lati.
+PEZZI_NUOVI = (
+    # ### `CAMM-FASE-VUOTO` nasce il `2026-10-18` *(la strada `(d)`)*: nell-albero
+    # ### prima di questo mandato ### **non c-e-**.
+    "CAMM-FASE-VUOTO",
+)
+
+
 def pezzi_dell_ordine():
     """Gli `id` ### **DISTINTI** dell-ordine, in ordine di ### **prima apparizione.**
 
@@ -359,33 +377,51 @@ def _contro(commit, radice, fuori):
     # ### ⛔⛔ **IL CONFRONTO NON PARTE SE LE DUE LISTE DI PEZZI DIFFERISCONO**
     # ### *(dal `2026-10-17`)*. ### **Confrontare pezzi diversi credendoli uguali e' PEGGIO
     # ### di non confrontare**, e i blocchi si mettono a confronto ### **per POSIZIONE.**
-    assert ids_a == ids_b, (
+    nuovi = [q for q in ids_a if q in PEZZI_NUOVI]
+    assert [q for q in ids_a if q not in PEZZI_NUOVI] == list(ids_b), (
         "`M-B1`: i PEZZI dei due alberi NON COINCIDONO, e il confronto NON PARTE."
-        " ### adesso %s;  %s %s. ### I pezzi si leggono dall-ORDINE di ciascun albero:"
-        " se l-ordine e- cambiato, i due lati misurerebbero COSE DIVERSE, e il confronto"
-        " per posizione le crederebbe uguali" % (list(ids_a), commit[:7], list(ids_b)))
+        " ### adesso %s;  %s %s;  dichiarati NUOVI %s. ### I pezzi si leggono"
+        " dall-ORDINE di ciascun albero: se l-ordine e- cambiato, i due lati"
+        " misurerebbero COSE DIVERSE, e il confronto per posizione le crederebbe uguali."
+        " ### Un pezzo che nasce si DICHIARA in `PEZZI_NUOVI`, con la data e il motivo"
+        % (list(ids_a), commit[:7], list(ids_b), list(PEZZI_NUOVI)))
+    if nuovi:
+        print("### \u26a0 PEZZI NUOVI, DICHIARATI e NON confrontati: %s" % nuovi)
+        print("###   Nell-albero vecchio NON ESISTONO, quindi non c-e- niente con cui")
+        print("###   confrontarli. ### CIO- CHE LI SORVEGLIA E- LA DISTANZA DEL PASSO")
+        print("###   INTERO: se a forma spenta non fosse `0`, il pezzo nuovo farebbe")
+        print("###   qualcosa -- e invece a forma spenta NON DEVE FARE NIENTE.")
     print("-" * 96)
     print("  l'ORDINE: adesso %d pezzi (impronta %s) -- %s %d pezzi (impronta %s)"
           % (na, ia, commit[:7], nb, ib))
-    assert len(ba) == len(bb), (len(ba), len(bb))
-    # ### ⭐ **IL CRITERIO: i PEZZI.** L-ultimo blocco di ogni scena e- il passo intero,
-    # ### ### **e NON e- un criterio**: e- un numero da riportare.
+    # ### ⛔⛔ **I BLOCCHI SI CONFRONTANO PER `id`, NON PER POSIZIONE**
+    # ### *(dal `2026-10-18`)*: con un pezzo NUOVO le due liste hanno
+    # ### ### **lunghezze diverse**, e un confronto per posizione
+    # ### ### **accoppierebbe pezzi SBAGLIATI** -- cioe' direbbe <<diversi>> di pezzi
+    # ### che non si e' nemmeno guardati.
+    # ### ✅ **Ogni scena ha `len(ids) + 1` blocchi** *(i pezzi, e poi il passo
+    # ### intero)*, e l'indice si calcola ### **dentro la lista di CIASCUN lato.**
+    pa_ids, pb_ids = list(ids_a), list(ids_b)
+    assert len(ba) == len(SCENE) * (len(pa_ids) + 1), (len(ba), len(pa_ids))
+    assert len(bb) == len(SCENE) * (len(pb_ids) + 1), (len(bb), len(pb_ids))
+    # ### ⭐ **IL CRITERIO: i PEZZI CHE ESISTONO DA ENTRAMBI I LATI.** L-ultimo blocco
+    # ### di ogni scena e- il passo intero, ### **e NON e- un criterio**: e- un numero da
+    # ### riportare.
     quanti, rotti = 0, []
-    k = 0
-    for nn, seme in SCENE:
-        for idl in PEZZI:
+    for s, (nn, seme) in enumerate(SCENE):
+        ka = s * (len(pa_ids) + 1)
+        kb = s * (len(pb_ids) + 1)
+        for idl in pb_ids:
             quanti += 1
-            if ba[k] != bb[k]:
+            if ba[ka + pa_ids.index(idl)] != bb[kb + pb_ids.index(idl)]:
                 rotti.append((nn, seme, idl))
-            k += 1
-        k += 1  # ### il passo intero, che NON e- un criterio
     print("-" * 96)
     if rotti:
         print("### ⛔ `M-B1` FALLISCE: %d pezzi su %d NON coincidono al bit: %s"
               % (len(rotti), quanti, rotti))
     else:
-        print("### ✅ `M-B1` PASSA: TUTTI i %d pezzi coincidono AL BIT (6 pezzi x %d scene)"
-              % (quanti, len(SCENE)))
+        print("### ✅ `M-B1` PASSA: TUTTI i %d pezzi coincidono AL BIT (%d pezzi x %d"
+              " scene)" % (quanti, len(pb_ids), len(SCENE)))
     # ------------------------------------------------- l-INFORMAZIONE, non il criterio
     print("-" * 96)
     print("### 📌 INFORMAZIONE (NON un criterio): la distanza fra il passo PALINDROMO di")
@@ -473,7 +509,11 @@ def _byte_dell_albero(commit, dove, tick_src):
                               % (commit[:7],
                                  (r.stdout + r.stderr).decode("utf-8", "replace")[-700:]))
     _n, _i, _ids, blocchi = _leggi(fuori)
-    return _n, _i, blocchi
+    # ### ⛔⛔ **E GLI `id` VIAGGIANO COL RISULTATO** *(`2026-10-18`)*: chi
+    # ### confronta ha bisogno di sapere ### **quanti pezzi ha QUESTO lato**, perche'
+    # ### un albero vecchio puo' averne ### **meno** -- e con lo stride di oggi
+    # ### ### **si leggono i blocchi sbagliati.**
+    return _n, _i, blocchi, _ids
 
 
 def _passo_intero_diversi(ba, bb):
@@ -483,9 +523,19 @@ def _passo_intero_diversi(ba, bb):
     a dire CHE COSA si muove quando si muove solo il CAMMINO**, e il numero sta nel
     collaudo.
     """
+    # ### ⛔⛔ **QUANTI PEZZI SI CONTA DAI BLOCCHI, NON DAL `PEZZI` DI QUESTO ALBERO**
+    # ### *(`2026-10-18`)*: questi due aiutanti confrontano ### **alberi VECCHI**, che
+    # ### possono avere ### **meno pezzi** -- e con `len(PEZZI)` di oggi l-indice ### **usciva
+    # ### dalla lista.** ### ✅ **Ogni scena ha `pezzi + 1` blocchi** *(i pezzi, poi il
+    # ### passo intero)*, quindi il numero ### **si DERIVA.**
+    quanti = len(ba) // len(SCENE) - 1
+    assert len(ba) == len(bb) == len(SCENE) * (quanti + 1), (
+        "i due lati hanno %d e %d blocchi su %d scene: non sono lo stesso numero di"
+        " pezzi, e un confronto per posizione accoppierebbe pezzi SBAGLIATI"
+        % (len(ba), len(bb), len(SCENE)))
     diversi, k = 0, 0
     for _nn, _seme in SCENE:
-        k += len(PEZZI)
+        k += quanti
         if ba[k] != bb[k]:
             diversi += 1
         k += 1
@@ -494,9 +544,19 @@ def _passo_intero_diversi(ba, bb):
 
 def _pezzi_diversi(ba, bb):
     """Quanti PEZZI non coincidono, col criterio di `contro()`."""
+    # ### ⛔⛔ **QUANTI PEZZI SI CONTA DAI BLOCCHI, NON DAL `PEZZI` DI QUESTO ALBERO**
+    # ### *(`2026-10-18`)*: questi due aiutanti confrontano ### **alberi VECCHI**, che
+    # ### possono avere ### **meno pezzi** -- e con `len(PEZZI)` di oggi l-indice ### **usciva
+    # ### dalla lista.** ### ✅ **Ogni scena ha `pezzi + 1` blocchi** *(i pezzi, poi il
+    # ### passo intero)*, quindi il numero ### **si DERIVA.**
+    quanti = len(ba) // len(SCENE) - 1
+    assert len(ba) == len(bb) == len(SCENE) * (quanti + 1), (
+        "i due lati hanno %d e %d blocchi su %d scene: non sono lo stesso numero di"
+        " pezzi, e un confronto per posizione accoppierebbe pezzi SBAGLIATI"
+        % (len(ba), len(bb), len(SCENE)))
     rotti, k = 0, 0
     for _nn, _seme in SCENE:
-        for _idl in PEZZI:
+        for _k in range(quanti):
             if ba[k] != bb[k]:
                 rotti += 1
             k += 1
@@ -512,148 +572,22 @@ def _esito(che, passa, nota=""):
     print("  %-66s %s   %s" % (che[:66], "PASSA" if passa else "### FALLISCE", nota))
 
 
-def collaudo():
-    import tempfile
-    # ### ⛔ **L-IMPORT STA QUI, NON IN TESTA:** questo file ### **viaggia nell-albero
-    # ### vecchio** *(`VIAGGIANO`)*, e la' ### **`_censimento_strumenti.py` NON ESISTE**:
-    # ### in testa farebbe fallire la corsa del commit vecchio con un
-    # ### `ModuleNotFoundError`.
-    # ### ✅ **E i censimenti servono SOLO al collaudo**, che nell-albero vecchio
-    # ### ### **non gira mai.** ### ⚠ **L-alternativa era far viaggiare un file in piu-,
-    # ### e un file in piu- nell-albero vecchio e- ### **la famiglia del difetto n.6.**
-    import _censimento_strumenti as CENS
-    print("=" * 100)
-    print("IL COLLAUDO DI `M-B1`: LA PROVA CHE PUO' FALLIRE")
-    print("=" * 100)
-    base = tempfile.mkdtemp(prefix="mb1c_")
-    oggi = io.open(os.path.join(_QUI, "tick.py"), encoding="utf-8").read()
-    try:
-        # ### ⭐ **LA GUARDIA CONTRO IL BRACCIO VACUO: la perturbazione CAMBIA la sequenza.**
-        import composizione as CM
-        _o = list(CM.ORDINE)
-        _o[1], _o[2] = _o[2], _o[1]
-        seq = [x[0] for x in CM.ORDINE]
-        _esito("### la perturbazione dell-ORDINE cambia DAVVERO la sequenza",
-               [x[0] for x in _o] != seq and seq[::-1] == seq,
-               "### e l-ordine e- un PALINDROMO (invertirlo NON cambia niente): per questo"
-               " si SCAMBIANO due posizioni")
-        # ### ⛔⛔ **IL CASO CHE DEVE FALLIRE: il passo di oggi MODIFICATO.**
-        n1, i1, b_pert = _byte_dell_albero("8c7b9288", os.path.join(base, "pert"),
-                                           _perturba_operatore(oggi))
-        n2, i2, b_puro = _byte_dell_albero("8c7b9288", os.path.join(base, "puro"), None)
-        rotti = _pezzi_diversi(b_pert, b_puro)
-        _esito("### ⛔ DEVE FALLIRE: col passo di oggi MODIFICATO il confronto DIVERGE",
-               rotti > 0, "### %d pezzi su %d NON coincidono: il criterio VEDE il"
-               " cambiamento" % (rotti, len(SCENE) * len(PEZZI)))
-        # ### ⛔⛔ **E COL DIFETTO DI IERI PASSEREBBE**, ed e' il punto dell-integrazione:
-        # ### copiando il passo modificato ### **ANCHE nell-albero vecchio**, i due lati
-        # ### usano ### **lo stesso passo** e il confronto ### **non vede niente.**
-        n3, i3, b_infetto = _byte_dell_albero("8c7b9288", os.path.join(base, "infetto"),
-                                              _perturba_operatore(oggi))
-        _esito("### ⛔ e COL DIFETTO DI IERI il confronto PASSEREBBE (falso-uno)",
-               _pezzi_diversi(b_pert, b_infetto) == 0,
-               "### 0 pezzi diversi: copiando il passo di oggi nell-albero vecchio, i due"
-               " lati girano LO STESSO passo")
-        # ### ⚠⚠ **E LA META' CHE `M-B1` NON VEDE, per disegno:** una perturbazione del
-        # ### SOLO ORDINE ### **non cambia i pezzi** -- li cambia l-IMPRONTA, che e'
-        # ### ### **riportata e non e' un criterio.**
-        n4, i4, b_ordine = _byte_dell_albero("8c7b9288", os.path.join(base, "ordine"),
-                                             _perturba_ordine(oggi))
-        _esito("### ⚠ e una perturbazione del SOLO CAMMINO NON tocca i pezzi (per disegno)",
-               _pezzi_diversi(b_ordine, b_puro) == 0,
-               "### 0 pezzi diversi: il criterio di `M-B1` sono I PEZZI")
-        # ### ⛔⛔ **E NEMMENO L-IMPRONTA LA VEDE, ed e' la cosa che questo braccio ha
-        # ### fatto uscire:** l-impronta viene da ### **`composizione.py`**, cioe' dalla
-        # ### TABELLA, e ### **non da come `tick.py` percorre l-ordine.**
-        # ### ✅ **CIO- CHE SI MUOVE E- IL PASSO INTERO**, che `contro()` riporta come
-        # ### ### **informazione e NON come criterio.**
-        # ### 📌 **Quindi per il punto `D`: se cambia IL CAMMINO e non la tabella, `M-B1`
-        # ### dice <<12 su 12 AL BIT>> e l-impronta e- IDENTICA** -- e la sola cosa che lo
-        # ### dice e' ### **la distanza del passo intero, che va LETTA.**
-        _esito("### ⛔ e NEMMENO l-impronta la vede: viene dalla TABELLA, non dal cammino",
-               i4 == i2,
-               "### le due impronte sono UGUALI (%s): l-impronta segue `composizione.py`,"
-               " non `tick.py`" % i4)
-        _esito("### ✅ ma il PASSO INTERO si muove, e `contro()` lo RIPORTA",
-               _passo_intero_diversi(b_ordine, b_puro) == len(SCENE),
-               "### %d scene su %d col passo intero DIVERSO: e- l-unico numero che vede un"
-               " cammino cambiato, ed e- <<informazione, non criterio>>"
-               % (_passo_intero_diversi(b_ordine, b_puro), len(SCENE)))
-        # ### ⛔⛔ **IL `2-SEXIES`, braccio che DEVE fallire: un id nell-ORDINE che la
-        # ### misura NON SA applicare.** ### **Si perturba `CM.ORDINE` IN MEMORIA**, come
-        # ### fa il collaudo della deriva: nessun file del repo si tocca.
-        import composizione as CM
-        vecchio_ordine = CM.ORDINE
-        alzato = ""
-        try:
-            CM.ORDINE = (("CAMM-INVENTATA", 0.5, "flusso"),) + tuple(vecchio_ordine)
-            vecchi_pezzi = PEZZI
-            globals()["PEZZI"] = pezzi_dell_ordine()
-            try:
-                pezzi_applicabili()
-            except AssertionError as e:
-                alzato = str(e)[:60]
-            globals()["PEZZI"] = vecchi_pezzi
-        finally:
-            CM.ORDINE = vecchio_ordine
-        _esito("### ⛔ DEVE fallire: un id NELL-ORDINE che la misura non sa applicare",
-               bool(alzato), "### ha alzato: %s" % alzato)
-        # ### ⭐⭐ **IL CONTROLLO POSITIVO DEL `2-SEXIES`: la legge CHE GIRA e- fra i
-        # ### pezzi confrontati, e COINCIDE AL BIT.** ### ⚠ **Fino al `2026-10-16` NON
-        # ### c-era:** `PEZZI` era una lista a mano che conteneva la ### **saturazione**
-        # ### *(fuori dall-ordine)* e ### **non la legge che gira.**
-        import tempfile as _tf
-        _oggi_bin = os.path.join(base, "oggi.bin")
-        scrivi(_oggi_bin)
-        _n5, _i5, ids5, b_oggi = _leggi(_oggi_bin)
-        _k = PEZZI.index("CAMM-MATERIA-VUOTO") if "CAMM-MATERIA-VUOTO" in PEZZI else -1
-        ugua = _k >= 0 and all(
-            b_oggi[j * (len(PEZZI) + 1) + _k] == b_puro[j * (len(PEZZI) + 1) + _k]
-            for j in range(len(SCENE)))
-        _esito("### ⭐ la legge CHE GIRA e- fra i pezzi, e coincide AL BIT contro 8c7b928",
-               ugua, "### `CAMM-MATERIA-VUOTO` e- il pezzo n.%d di %d, e i suoi byte"
-               " coincidono su %d scene su %d" % (_k + 1, len(PEZZI), len(SCENE),
-                                                  len(SCENE)))
-        # ### ⭐ **E l-assert che la misura non PORTA il passo: si chiama, non si descrive.**
-        _la_misura_non_porta_il_passo()
-        _esito("### la misura NON definisce nessuna funzione del passo", True,
-               "### l-assert gira a OGNI confronto, non solo qui")
-        # ### ⭐ **IL CENSIMENTO, e la lista DICHIARATA.**
-        visti = CENS._censimento()
-        _esito("### e SOLO gli strumenti DICHIARATI materializzano un albero ed eseguono",
-               tuple(visti) == CENS.CONFRONTANO_ESEGUENDO,
-               "### visti %s, dichiarati %s" % (visti, list(CENS.CONFRONTANO_ESEGUENDO)))
-        # ### ⛔ **E NESSUNO SCRIVE NEL REPO:** chi legge `TEMP` dall'ambiente ha
-        # ### ### **un ripiego**, e su Linux quel ripiego e' ### **la radice del repo.**
-        tempi = CENS._censimento_temporanei()
-        _esito("### e NESSUNO strumento legge `TEMP` dall'ambiente (il ripiego e' il repo)",
-               tuple(tempi) == CENS.TEMPORANEI_AMMESSI,
-               "### visti %s, ammessi %s -- la cura e' `tempfile`, che non ha ripieghi"
-               % (tempi, list(CENS.TEMPORANEI_AMMESSI)))
-    finally:
-        # ### ⛔ **E SI SGOMBERA COME IN `contro`:** `git worktree remove` piu'
-        # ### ### **`prune`**, perche' una cartella cancellata a mano lascia
-        # ### ### **la registrazione in `.git/worktrees`** -- e `git worktree list` la
-        # ### mostrerebbe per sempre. ### **Misurato il `2026-10-17`: ce n'erano `4` di
-        # ### corse vecchie.**
-        for q in ("pert", "puro", "infetto", "ordine"):
-            _sgombera(RADICE, os.path.join(base, q))
-        shutil.rmtree(base, ignore_errors=True)
-    print("=" * 100)
-    print("IL COLLAUDO DI `M-B1`: %d su %d   %s"
-          % (sum(_OK), len(_OK),
-             "### TUTTI PASSATI" if all(_OK) else "### CI SONO ROSSI"))
-    print("=" * 100)
-    return 0 if all(_OK) else 1
-
-
 def main(argv):
     import _presidio
     _presidio.avvia(__file__)
     if argv and argv[0] == "--scrivi":
         return scrivi(argv[1])
     if "--collaudo" in argv:
-        return collaudo()
+        # ### ⛔⛔ **IL COLLAUDO NON STA PIU- QUI** *(`2026-10-18`, su rifiuto del
+        # ### presidio della MODULARITA-: questo file era a `712` righe su `700`)*, e questo
+        # ### e- ### **UN
+        # ### CARTELLO**: ### **esce `1`** invece di tacere, perche' chi lancia il
+        # ### comando di prima ### **deve accorgersene.** ### ✅ **E- la stessa forma di
+        # ### `primo_ordine/leggi/schema.py`**, che fa cosi- dal `2026-10-10`.
+        print("  IL COLLAUDO DI `M-B1` NON STA PIU- QUI.")
+        print("  ### Gira:  python primo_ordine/_collauda_mb1.py")
+        print("  ### (diviso il 2026-10-18: questo file era oltre il tetto di 700 righe)")
+        return 1
     print("=" * 96)
     print("M-B1: IL RACCORDO AL BIT, PEZZO PER PEZZO -- dtau = dtau_rif = %.1f" % DTAU)
     print("=" * 96)

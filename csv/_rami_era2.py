@@ -97,6 +97,34 @@ def nucleo(base=None):
 # ### copie che possono divergere.**
 
 RAMI = {
+    # ### ⛔⛔ **I RAMI DELLA LEGGE NUOVA** *(`CAMM-FASE-VUOTO`, `2026-10-18`,
+    # ### la strada `(d)`)*: tutti e tre ### **decidono se un pezzo ESISTE o no**, e
+    # ### ### **nessuno scegle un valore.**
+    ("primo_ordine/energia_pesata.py", "applica"): (
+        4, "guardia",
+        "### QUATTRO RAMI, e sono TUTTI GUARDIE. ### (1) LA FORMA SPENTA: con "
+        "`mot.cs is None` oppure `mot.lambda_c is None` il pezzo NON ESISTE -- e "
+        "i due casi sono UN ramo solo per un motivo ESATTO: un `cs` messo A MANO "
+        "come COSTANTE non e- una funzione di `Lambda`, quindi `cs'` e- ZERO PER "
+        "DEFINIZIONE. ### (2) `dtau` UNIFORME: il tempo di questo pezzo e- IL "
+        "TICK, e un tick per nodo non e- definito -- ALZA invece di prenderne uno. "
+        "### (3) la CONVERGENZA del punto medio: si ferma quando due giri "
+        "coincidono agli ulp, oppure quando la scala e- zero (e la- qualunque "
+        "fase e- la stessa). ### (4) il tetto `GIRI_MAX_OMEGA`: ALZA, perche- la "
+        "regola dice di RELAZIONARE e non di scegliere un altro schema"),
+    ("primo_ordine/energia_pesata.py", "termini_di_h"): (
+        1, "smistamento",
+        "### UN RAMO, e non e- un pavimento: `rho_k = 0` vuol dire `psi = 0` "
+        "in quel nodo, e la- `N = rho ln(rho/(rho+Lambda))` PRENDE il valore "
+        "`0` (`x ln x -> 0`). ### E- LA STESSA SINGOLARITA- ELIMINABILE di "
+        "`materia_vuoto`, e il ramo esiste perche- `np.log(0)` darebbe `-inf` "
+        "-- non perche- il valore sia in dubbio"),
+    ("primo_ordine/energia_pesata.py", "g_pesata"): (
+        1, "smistamento",
+        "### UN RAMO: a forma SPENTA i pesi sono `1`, e `G` e- `H_tot` -- "
+        "chiamare `pesi()` la- dentro vorrebbe dire DIVIDERE `s_nodo` per se- "
+        "stesso, cioe- fare un conto per ottenere `1`. ### E il confronto fra i "
+        "due casi e- IL BRACCIO che tiene onesta questa funzione"),
     ("primo_ordine/stato.py", "nuovo"): (
         4, "smistamento",
         "### QUATTRO RAMI, e sono UNO SMISTAMENTO SUI TIPI: i due di NODO (lo spinore "

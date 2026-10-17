@@ -117,7 +117,7 @@ def evolvi(nn, seme, dtau, modo, lambda_c):
     quanti = int(round(T_FISICO / dtau))
     for _t in range(quanti):
         if modo == "centro":
-            TK.tick_con_cs(st, mot, par, lambda_c)
+            TK.tick_con_cs(st, mot, par, lambda_c, ())
         elif modo == "inizio":
             FP.accendi_cs(mot, lambda_c, st)
             TK.percorri_tick(st, mot, par, (), None, len(CM.ORDINE))

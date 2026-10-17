@@ -160,15 +160,19 @@ moduli:
 
   - nome: _collauda_cs_l1.py
     responsabilita: i quattro criteri con cui L1 e- chiuso, rigirati con la forma cs ACCESA
-    importa: [_collauda_tempo_proprio, _misura_completa_l2, _misura_mb2, _misura_theta_n, _misura_theta_nonlineare, _presidio, composizione, corrente, deriva, flussi_parziali, tick]
+    importa: [_collauda_tempo_proprio, _misura_completa_l2, _misura_mb2, _misura_theta_n, _misura_theta_nonlineare, _presidio, composizione, corrente, deriva, energia_pesata, flussi_parziali, tick]
 
   - nome: _misura_hw.py
     responsabilita: la pendenza dell-energia PESATA H_w, e se il passo con cs la conserva
     importa: [_misura_mb2, _presidio, composizione, deriva, flussi_parziali, tick]
 
+  - nome: _collauda_mb1.py
+    responsabilita: la prova che il criterio di M-B1 PUO- fallire, coi casi finti
+    importa: [_censimento_strumenti, _misura_mb1, _presidio, composizione]
+
   - nome: _misura_mb1.py
     responsabilita: il raccordo al bit pezzo per pezzo contro il commit di riferimento
-    importa: [_censimento_strumenti, _presidio, composizione, deriva, tick]
+    importa: [_presidio, composizione, deriva, tick]
 
   - nome: _censimento_strumenti.py
     responsabilita: chi, fra gli strumenti, materializza un albero vecchio o scrive nel repo
@@ -178,9 +182,13 @@ moduli:
     responsabilita: il tempo proprio locale, la fase esatta, e i due flussi parziali
     importa: []
 
+  - nome: energia_pesata.py
+    responsabilita: il generatore pesato G, Omega, e la fase sul vuoto che ne viene
+    importa: [flussi_parziali]
+
   - nome: motore.py
     responsabilita: il doppio contenitore, i pezzi unitari, il flusso, e la regola del tick
-    importa: [flussi_parziali, incidenza, materia_vuoto, saturazione]
+    importa: [energia_pesata, flussi_parziali, incidenza, materia_vuoto, saturazione]
 
   - nome: _collauda_motore.py
     responsabilita: il collaudo del motore -- zero allocazioni, unitarieta-, regola del tick
@@ -314,6 +322,11 @@ moduli:
 
   - nome: termini/camm_materia_vuoto.py
     responsabilita: l accoppiamento materia-vuoto, generato -- flusso esatto
+    generato: true
+    importa: []
+
+  - nome: termini/camm_fase_vuoto.py
+    responsabilita: la fase sul vuoto che nasce da G, generato -- flusso approssimato
     generato: true
     importa: []
 

@@ -10,11 +10,12 @@ lista, e l-esecutore unico la legge: generare qui una seconda funzione
 ### **fa `1` esatto** -- lo schema lo verifica.
 """
 
-IMPRONTA = '3fc01fac756b20d1'
+IMPRONTA = '2e7f795d2a52fbe7'
 
 # ### `(id della legge, frazione di passo, tipo)`
 ORDINE = (
     ('CAMM-MATERIA-VUOTO', 0.5, 'flusso'),
+    ('CAMM-FASE-VUOTO', 0.5, 'flusso'),
     ('CAMM-MONETA-SPIN', 0.5, 'pezzo_unitario'),
     ('CAMM-GROVER', 0.5, 'pezzo_unitario'),
     ('CAMM-SPOSTAMENTO', 0.5, 'pezzo_unitario'),
@@ -25,6 +26,7 @@ ORDINE = (
     ('CAMM-SPOSTAMENTO', 0.5, 'pezzo_unitario'),
     ('CAMM-GROVER', 0.5, 'pezzo_unitario'),
     ('CAMM-MONETA-SPIN', 0.5, 'pezzo_unitario'),
+    ('CAMM-FASE-VUOTO', 0.5, 'flusso'),
     ('CAMM-MATERIA-VUOTO', 0.5, 'flusso'),
 )
 

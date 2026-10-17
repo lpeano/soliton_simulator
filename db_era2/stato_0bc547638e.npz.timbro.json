@@ -21,13 +21,13 @@
  "conto_leggi": {
   "di_prova": 3,
   "per_tipo": {
-   "flusso": 3,
+   "flusso": 4,
    "osservatore": 1,
    "pezzo_unitario": 5,
    "termine_arco": 1,
    "termine_nodo": 1
   },
-  "totale": 11,
+  "totale": 12,
   "variabili": 6
  },
  "determinismo": {
@@ -59,6 +59,7 @@
  "generati": [
   "osservatori/prova_norma.py=97a979de08e6f361",
   "stato.py=12f7f770e026a712",
+  "termini/camm_fase_vuoto.py=55a6c77191e1a1bd",
   "termini/camm_forma_d.py=0d3e0bb972c00d53",
   "termini/camm_grover.py=925a9103e94b1ef8",
   "termini/camm_grover_vuoto.py=60ef84764328df62",
@@ -71,8 +72,8 @@
   "termini/prova_locale.py=7326fa65e394ab4f"
  ],
  "impronta_config": "0bc547638e5fda6f",
- "impronta_generati": "3b5c6bb0d122ce35",
- "impronta_tabella": "61ec0237806edc09",
+ "impronta_generati": "d0ce04cda188f0ab",
+ "impronta_tabella": "2593860bcb3439a2",
  "passo": 200,
  "versione_dati": 1,
  "versioni": {

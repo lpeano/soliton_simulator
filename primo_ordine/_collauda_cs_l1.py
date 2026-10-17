@@ -54,6 +54,7 @@ import _misura_theta_nonlineare as TNL                        # noqa: E402
 import composizione as CM                                     # noqa: E402
 import corrente as CO                                         # noqa: E402
 import deriva as DV                                           # noqa: E402
+import energia_pesata as EP                                   # noqa: E402
 import tick as TK                                             # noqa: E402
 
 OK = [0, 0]
@@ -95,12 +96,27 @@ def braccio_zero():
     k = KAPPA_D3[1]
     dtau = 1.0 / (2 ** k)
     tick = int(round(MB2.TEMPO / dtau))
-    mia, h0 = una_corsa_cs(dtau, tick, None)
+    mia, h0 = una_corsa_cs(dtau, tick, None, "h_tot")
     loro, h0l = MB2.una_corsa(dtau, tick)
+    # ### ⛔⛔ **L-ESCURSIONE AL BIT, `H(0)` AGLI ULP, E IL PERCHE- DELLA
+    # ### DIFFERENZA** *(`2026-10-18`)*: da quando il criterio si legge su `G`, la linea
+    # ### di base viene da ### **`energia_pesata.termini_di_h`** e quella di `M-B2` da
+    # ### ### **`h_tot`** -- due fonti che sommano ### **NELLO STESSO ordine di grandezza
+    # ### ma non nello stesso ORDINE**, e la somma di float ### **non commuta.**
+    # ### ✅ **L-ESCURSIONE invece DEVE coincidere al bit**, perche- e- un massimo di
+    # ### differenze e ### **lo scarto costante fra le due fonti si cancella.**
     esito("(0) `M-B2`: il mio ciclo a forma SPENTA e' il suo AL BIT",
           mia == loro and h0 == h0l,
-          "escursione %.6e contro %.6e, `H(0)` %.9f contro %.9f"
-          % (mia, loro, h0, h0l))
+          "escursione %.17g, `H(0)` %.17g: STESSO funzionale, STESSO ciclo" % (mia, h0))
+    # ### ⭐ **E QUANTO DISTANO LE DUE FONTI, misurato e non supposto:** `G` a forma
+    # ### spenta e `h_tot` ### **sommano gli STESSI termini in ordine DIVERSO.**
+    _i0, m0, s0, p0 = DV.scena(MB2.NN, MB2.SEME, 0.25, norma=MB2.NORMA,
+                               vuoto_modulo=MB2.VUOTO_MODULO, su2=MB2.SU2)
+    _g, _h = EP.g_pesata(m0, s0, p0), MB2.h_tot(_i0, m0, s0, p0)
+    _u = abs(_g - _h) / (float(np.finfo(float).eps) * abs(_h))
+    esito("(0) e le DUE FONTI di `H` distano %.1f ulp (l'ordine della somma)" % _u,
+          _u <= 4096.0,
+          "`%.17g` contro `%.17g`: una somma di float NON COMMUTA" % (_g, _h))
     # ### e la simmetria: il mio ciclo contro `passo` di `_misura_theta_nonlineare`
     ii, jj, _nn = CO.toro(TN.LATI)
     P = TN._inversione(TN.LATI, ii, jj)
@@ -158,7 +174,7 @@ def braccio_tempo_proprio():
 
 
 # ====================================================================== (2) M-B2
-def una_corsa_cs(dtau, tick, lambda_c):
+def una_corsa_cs(dtau, tick, lambda_c, quale):
     """### `(escursione, H0)` ### **con `cs` al centro**, oppure a forma spenta.
 
     ### ⚠ **Il ciclo e' scritto qui perche' `MB2.una_corsa` chiama `TK.tick`**, cioe'
@@ -167,14 +183,35 @@ def una_corsa_cs(dtau, tick, lambda_c):
     inc, mot, st, par = DV.scena(MB2.NN, MB2.SEME, dtau, norma=MB2.NORMA,
                                  vuoto_modulo=MB2.VUOTO_MODULO, su2=MB2.SU2)
     lc = lambda_c_di(mot, st) if lambda_c == "dalla scena" else lambda_c
-    h0 = MB2.h_tot(inc, mot, st, par)
+    # ### ⛔⛔ **IL CRITERIO `(2)` SI LEGGE SU `G`, NON SU `H_tot`**
+    # ### *(decisione di Luca del `2026-10-18`, `00:07`, punto `1`)*: con `cs` NON
+    # ### uniforme ### **`H_tot` non e' l'invariante** -- lo e' il generatore PESATO.
+    # ### ✅ **E a forma SPENTA i due COINCIDONO** *(i pesi sono `1`)*, quindi il
+    # ### braccio `0` di questo file ### **continua a confrontarsi con `M-B2`.**
+    # ### ⚠ **E LA FORMA SI ACCENDE PRIMA DELLA LINEA DI BASE**, altrimenti `g0`
+    # ### sarebbe ### **`H_tot`** e l'escursione misurerebbe ### **uno scarto costante**
+    # ### invece della deriva -- e' il difetto che ho trovato in `_misura_hw` il
+    # ### `2026-10-18`.
+    import flussi_parziali as FP
+    if lc is not None:
+        FP.accendi_cs(mot, lc, st)
+    # ### ⛔⛔ **`quale` NON HA UN VALORE DI COMODO** *(`2026-10-18`)*: il CRITERIO
+    # ### si legge su ### **`G`** *(decisione di Luca)*, ma ### **il braccio `0` deve
+    # ### confrontare LO STESSO FUNZIONALE di `M-B2`** -- altrimenti confronta
+    # ### ### **due fonti che sommano in ordine diverso**, e la differenza *(misurata:
+    # ### ### **`~2700` ulp sull'escursione**)* ### **non dice niente sul CICLO.**
+    # ### ⚠ **E la frase che avevo scritto -- <<lo scarto costante si cancella in un
+    # ### massimo di differenze>> -- ERA FALSA**, e la misura l'ha smentita subito.
+    fun = EP.g_pesata if quale == "G" else (
+        lambda m, s, p: MB2.h_tot(inc, m, s, p))
+    h0 = fun(mot, st, par)
     peggio, giri = 0.0, 0
     for _t in range(tick):
         if lc is None:
             TK.tick(st, mot, par)
         else:
-            giri += TK.tick_con_cs(st, mot, par, lc)
-        d = abs(MB2.h_tot(inc, mot, st, par) - h0)
+            giri += TK.tick_con_cs(st, mot, par, lc, ())
+        d = abs(fun(mot, st, par) - h0)
         if d > peggio:
             peggio = d
     if lc is None:
@@ -234,7 +271,7 @@ def pendenza_mb2(modo, uniforme=None):
             FP.spegni_cs(mot)
             righe.append((dtau, tick, peggio, 0))
         else:
-            fuori = una_corsa_cs(dtau, tick, "dalla scena")
+            fuori = una_corsa_cs(dtau, tick, "dalla scena", "G")
             righe.append((dtau, tick, fuori[0], fuori[2]))
     primo, ultimo = righe[0][2], righe[-1][2]
     dim = len(KAPPA_D3) - 1
@@ -251,7 +288,7 @@ def braccio_mb2():
     print("     %-4s %-10s %-7s %-14s %s" % ("k", "dtau", "tick", "escursione", "giri"))
     for (dtau, tick, err, giri), k in zip(righe, KAPPA_D3):
         print("     %-4d %-10.6f %-7d %-14.6e %d" % (k, dtau, tick, err, giri))
-    esito("(2) la pendenza con `cs` al CENTRO e' `>= %.1f`" % PENDENZA_MIN,
+    esito("(2) la pendenza di `G` con `cs` al CENTRO e' `>= %.1f`" % PENDENZA_MIN,
           pend >= PENDENZA_MIN,
           "pendenza %.3f su %d dimezzamenti (a forma spenta `M-B2` da' 1.965 su 5)"
           % (pend, dim))
@@ -351,7 +388,7 @@ def braccio_norme():
     m0 = float(np.sum(np.abs(st["psi_h"]) ** 2))
     v0 = float(np.sum(np.abs(st["phi_h"]) ** 2))
     for _t in range(TICK_NORME):
-        TK.tick_con_cs(st, mot, par, lc)
+        TK.tick_con_cs(st, mot, par, lc, ())
     m1 = float(np.sum(np.abs(st["psi_h"]) ** 2))
     v1 = float(np.sum(np.abs(st["phi_h"]) ** 2))
     esito("(4) la norma `M` si conserva entro %.0f ulp" % ULP_NORME,

@@ -81,7 +81,7 @@ OPERATORI = ("moneta_spin", "grover", "spostamento_trasporto",
 # ### ### **fuori dall-ordine** -- e il suo operatore resta qui, perche-
 # ### ### **cio- che si e- misurato non si cancella** e `_collauda_saturazione.py` lo prova
 # ### ancora sui numeri.
-FLUSSI = ("CAMM-SATURAZIONE", "CAMM-MATERIA-VUOTO")
+FLUSSI = ("CAMM-SATURAZIONE", "CAMM-MATERIA-VUOTO", "CAMM-FASE-VUOTO")
 
 # ### ⛔ **E LE FUNZIONI DELLA SATURAZIONE STANNO IN `saturazione.py`**, perche-
 # ### questo file ha superato ### **il tetto di `700` righe** quando il flusso e- entrato:
@@ -177,6 +177,16 @@ class Motore(object):
         # ### ⛔ **LA FORMA `cs` NASCE SPENTA**, e ### **`None` NON e- un valore di
         # ### `Lambda_c`**: il perche- sta in `flussi_parziali.cs` *(`D0`)*.
         self.cs = None
+        # ### ⛔⛔ **E `lambda_c` NASCE CON LEI** *(`2026-10-18`, la strada `(d)`)*:
+        # ### `CAMM-FASE-VUOTO` ha bisogno di ### **`cs'(Lambda) = Lambda_c/(Lambda+Lambda_c)^2`**,
+        # ### cioe' del ### **numero**, non del vettore `cs`. ### ⚠ **I due vanno INSIEME:**
+        # ### chi accende la forma mette ### **entrambi**, e chi la spegne ### **entrambi** --
+        # ### un `cs` senza il suo `lambda_c` sarebbe ### **una forma di cui non si sa la
+        # ### derivata.**
+        self.lambda_c = None
+        # ### 📌 **I giri del punto medio di `Omega`, per il REFERTO:** e' un COSTO
+        # ### ### **misurato**, non stimato.
+        self.giri_omega = 0
         self.operatori = {
             "moneta_spin": self._moneta_spin,
             "grover": self._grover,
@@ -187,6 +197,7 @@ class Motore(object):
             # ### operatore**: il legame generato di un `flusso` cerca ### **l-`ID`.**
             "CAMM-SATURAZIONE": self._saturazione,
             "CAMM-MATERIA-VUOTO": self._materia_vuoto,
+            "CAMM-FASE-VUOTO": self._fase_vuoto,
         }
         self._vieta_vuoto_nullo()
 
@@ -642,6 +653,21 @@ class Motore(object):
         modulo, l-applicazione dove sta la legge, e il motore come REGISTRO.**
         """
         return MV.applica(self, st, frazione)
+
+    def _fase_vuoto(self, st, parametri, frazione):
+        """### **LA FASE SUL VUOTO CHE NASCE DA `G`** *(la strada `(d)`, `2026-10-18`)*.
+
+        ### ⛔ **IL CORPO STA IN `energia_pesata.py`, NON QUI**, per lo stesso motivo
+        di `materia_vuoto.py`: ### **le funzioni della legge col suo modulo, e il
+        motore come REGISTRO** -- e `motore.py` e' ### **a un passo dal tetto di `700`.**
+        ### ✅ **E A FORMA SPENTA NON FA NIENTE:** `mot.cs is None` vuol dire
+        ### **nessuna `cs'`**, quindi ### **nessun termine** -- e il passo resta quello
+        di prima ### **AL BIT.**
+        """
+        import energia_pesata as EP
+        EP.applica(self, st, parametri, frazione)
+        self.applicazioni["CAMM-FASE-VUOTO"] += 1
+        return st
 
     def _spostamento_scalare(self, st, parametri, frazione):
         """### Lo scambio delle due estremita', ### **senza trasporto**: e' uno scalare.

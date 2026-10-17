@@ -250,7 +250,7 @@ def passo_cs(mot, st, modo, lambda_c):
     import flussi_parziali as FP
     par = {"eps": TN.EPS}
     if modo == "centro":
-        TK.tick_con_cs(st, mot, par, lambda_c)
+        TK.tick_con_cs(st, mot, par, lambda_c, ())
     elif modo == "inizio":
         FP.accendi_cs(mot, lambda_c, st)
         TK.percorri_tick(st, mot, par, (), None, len(CM.ORDINE))

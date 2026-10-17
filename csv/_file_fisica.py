@@ -134,11 +134,13 @@ FILE_FISICA = (
     # ### cui nasce: ### **il tempo proprio locale, la fase esatta `e^{i pi s}`, e i
     # ### due flussi parziali** del Grover e dello spostamento.
     'primo_ordine/flussi_parziali.py',
+    'primo_ordine/energia_pesata.py',
     # ### ⭐ **LE TRE MISURE DEI CRITERI DI USCITA**, nate il `2026-10-15`: il
     # ### raccordo al bit, la scala dell-errore di `H_tot`, e ### **dove la `C` si
     # ### rompe.** ### ⚠ **Due dei tre criteri NON passano**, e i file restano: ###
     # ### **una misura che fallisce e- una misura, non uno scarto.**
     'primo_ordine/_misura_mb1.py',
+    'primo_ordine/_collauda_mb1.py',
     'primo_ordine/_censimento_strumenti.py',
     'primo_ordine/_misura_mb2.py',
     'primo_ordine/_misura_c_flussi.py',
@@ -319,6 +321,7 @@ FILE_FISICA = (
     'primo_ordine/termini/camm_grover_vuoto.py',
     'primo_ordine/termini/camm_spostamento_vuoto.py',
     'primo_ordine/termini/camm_materia_vuoto.py',
+    'primo_ordine/termini/camm_fase_vuoto.py',
     'primo_ordine/termini/camm_saturazione.py',
     'primo_ordine/termini/camm_forma_d.py',
     # ### ✅ **Nato il `2026-10-10` dividendo `schema.py`**, che era

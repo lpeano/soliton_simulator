@@ -262,7 +262,7 @@ COLLAUDI = (
     # ### un commit e' in corso, ### **tocca `.git` sotto le mani di git.**
     # ### ✅ **I bracci restano vivi nella suite**, ed e' cio' che serve: provano che
     # ### ### **`M-B1` PUO' fallire.**
-    ("`M-B1` PUO- fallire, ed e- provato", "primo_ordine/_misura_mb1.py --collaudo",
+    ("`M-B1` PUO- fallire, ed e- provato", "primo_ordine/_collauda_mb1.py",
      "solo-CI"),
     # ------------------------------------- E I TRE CHE IL CENSIMENTO HA TROVATO
     # ### ✅ **Questi non li ho messi a mano: li ha trovati `censimento()`**,

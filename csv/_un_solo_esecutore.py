@@ -108,6 +108,16 @@ ECCEZIONI = {
 FORMA_PASSO = "-1j"
 
 SCRITTI_A_MANO = {
+    "primo_ordine/energia_pesata.py::applica":
+        "INTEGRA, E LO DICE: e- il solo caso dichiarato in cui la forma `-1j` NON"
+        " e- un flusso esatto. ### `CAMM-FASE-VUOTO` mette una FASE su `phi` col"
+        " coefficiente `Omega`, e `Omega` dipende dalle FASI RELATIVE del vuoto"
+        " sugli archi -- che quella fase MUOVE. ### Quindi il flusso NON e- esatto"
+        " (`esatto: false` in tabella, e il collaudo lo misura), e il pezzo si"
+        " integra col PUNTO MEDIO IMPLICITO a punto fisso: del SECONDO ORDINE e"
+        " REVERSIBILE, cioe- non rompe il palindromo. ### E NON PUO- PASSARE DALL-ESECUTORE:"
+        " `passo.py` compone pezzi il cui generatore e- FISSO durante il pezzo, e questo"
+        " non lo e-. ### E- l-errore n.10 del guardiano, corretto PRIMA del codice.",
     "primo_ordine/motore.py::_saturazione":
         "NON integra: APPLICA IL FLUSSO ESATTO. La saturazione e- `N = Lambda G(h/Lambda)`"
         " e il suo flusso per un tempo `dtau` e- ### **una rotazione attorno a `n` piu- una"

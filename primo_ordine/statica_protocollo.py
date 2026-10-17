@@ -87,6 +87,10 @@ X_SOVR = (1.0, 0.1, 0.01)
 # ### da sola.
 
 
+# ### ⛔ **IL FLUSSO CHE QUESTA MISURA SOSTITUISCE, per nome e per iscritto.**
+FLUSSO_SOSTITUITO = "CAMM-MATERIA-VUOTO"
+
+
 def pezzo_del_passo():
     """### L-`id` del ### **FLUSSO che sta nell-ORDINE di composizione.**"""
     import composizione as CM
@@ -96,6 +100,17 @@ def pezzo_del_passo():
         "nell-ordine di composizione NON c-e- nessun flusso: questa misura sostituisce"
         " UN FLUSSO, e senza di lui non ha niente da sostituire")
     uni = sorted(set(dentro))
+    # ### ⛔⛔ **QUALE FLUSSO SOSTITUISCE, DICHIARATO** *(`2026-10-18`)*:
+    # ### dal giorno in cui l'ordine ha ### **DUE flussi** questo assert ALZAVA, e
+    # ### ### **faceva bene** -- <<quale>> era diventata una decisione.
+    # ### ✅ **E LA RISPOSTA NON E' UNA DECISIONE NUOVA: E' CIO' CHE QUESTA MISURA HA
+    # ### SEMPRE FATTO.** Il protocollo statico confronta ### **LE FORME
+    # ### dell'accoppiamento materia-vuoto** *(`S1`, `S2`, `S3`, `(D)`)*, quindi il pezzo
+    # ### che sostituisce e' ### **`CAMM-MATERIA-VUOTO`** -- e quando ce n'era uno solo,
+    # ### ### **era quello.**
+    # ### ⚠ **E `CAMM-FASE-VUOTO` NON si sostituisce: RESTA ACCESA**, perche' la
+    # ### domanda di `C4` e' proprio ### **se il ritiro del vuoto cambia con lei.**
+    uni = [q for q in uni if q == FLUSSO_SOSTITUITO] or uni
     assert len(uni) == 1, (
         "nell-ordine ci sono %d flussi diversi (%s): questa misura ne sostituisce UNO,"
         " e quale sia diventa una DECISIONE -- non la prendo io" % (len(uni), uni))

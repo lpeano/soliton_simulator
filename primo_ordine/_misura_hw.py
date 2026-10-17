@@ -102,7 +102,12 @@ def stato_non_uniforme():
         inc, mot, st, par = DV.scena(MB2.NN, MB2.SEME, DTAU_PRE, norma=MB2.NORMA,
                                      vuoto_modulo=MB2.VUOTO_MODULO, su2=MB2.SU2)
         for _k in range(int(round(MB2.TEMPO / DTAU_PRE))):
-            TK.percorri_tick(st, mot, par, (), None, len(CM.ORDINE))
+            # ### ⛔ **LA PRE-CORSA GIRA A FORMA SPENTA**, quindi la legge nuova
+            # ### ### **non c-e- comunque** -- e si salta ESPLICITAMENTE, perche'
+            # ### ### **lo stato di partenza deve essere QUELLO DI PRIMA**, cioe' lo
+            # ### stesso che il referto `578b3d69` ha misurato.
+            TK.percorri_tick(st, mot, par, ("CAMM-FASE-VUOTO",), None,
+                             len(CM.ORDINE))
         _PRE["s"] = (st["psi_h"].copy(), st["phi_h"].copy())
     return _PRE["s"]
 
@@ -187,17 +192,38 @@ def corsa(dtau, tick, modo, c_uniforme=None, aritmetica=False):
         # ### vuol dire, e ### **`mot.cs` sopravvive al tick** *(verificato: `chiudi_tick`
         # ### non lo tocca)*.
         FP.accendi_cs(mot, lc, st)
-    elif modo != "dinamico":
+    elif modo == "dinamico":
+        # ### ⛔⛔ **IL DIFETTO CHE QUESTA RIGA CURA, ED E' MIO** *(trovato il
+        # ### `2026-10-18`)*: senza di lei la linea di base `w0` si calcolava
+        # ### ### **A FORMA SPENTA** *(`mot.cs is None` fino al primo tick)*, cioe'
+        # ### ### **`H_tot` invece di `G`** -- e l'escursione era dominata da
+        # ### ### **uno scarto COSTANTE fra le due** *(`~4e+02`)*, non dalla deriva.
+        # ### ⚠ **Il `-0.001` del referto `578b3d69` e' misurato COSI', ed e'
+        # ### SBAGLIATO:** il numero giusto sta nel referto nuovo.
+        # ### ✅ **E la forma si accende PRIMA della linea di base**, col
+        # ### ### **lo stesso `Lambda_c`** che i tick useranno.
+        FP.accendi_cs(mot, lc, st)
+    else:
         FP.spegni_cs(mot)
     arit = aritmetica or modo == "aritmetica"
+    # ### ⛔⛔ **NEI MODI A PESO CONGELATO LA LEGGE `CAMM-FASE-VUOTO` SI SALTA, E
+    # ### NON E' UNA SCAPPATOIA** *(`2026-10-18`)*: quei modi sono definiti da
+    # ### ### **<<`cs` NON dipende dallo stato>>** -- uniforme, oppure calcolato una volta
+    # ### e congelato. ### **E se `cs` non dipende dallo stato, `cs'` e' ZERO**, quindi
+    # ### ### **la reazione NON ESISTE in quella dinamica.**
+    # ### ⚠ **Tenerla accesa misurerebbe un passo MISTO**, che non e' ne' quello a
+    # ### pesi congelati ne' quello dinamico -- e il numero non direbbe niente.
+    # ### ✅ **MISURATO:** con la legge accesa nel modo `congelato` la pendenza
+    # ### scende da `2.030` a `-0.121`, ed e' il segno che i due non si mescolano.
+    salta = () if modo == "dinamico" else ("CAMM-FASE-VUOTO",)
     w0 = h_w(inc, mot, st, par, arit)
     t0 = MB2.h_tot(inc, mot, st, par)
     peggio_w, peggio_t, peggio_fonte = 0.0, 0.0, 0.0
     for _k in range(tick):
         if modo == "dinamico":
-            TK.tick_con_cs(st, mot, par, lc)
+            TK.tick_con_cs(st, mot, par, lc, salta)
         else:
-            TK.percorri_tick(st, mot, par, (), None, len(CM.ORDINE))
+            TK.percorri_tick(st, mot, par, salta, None, len(CM.ORDINE))
         hw = h_w(inc, mot, st, par, arit)
         ht = MB2.h_tot(inc, mot, st, par)
         peggio_w = max(peggio_w, abs(hw - w0))

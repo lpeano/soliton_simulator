@@ -61,6 +61,30 @@ OK = [0, 0]
 # ### ### **<<1 violatore su 7>>** ed e- tornato `1`, cioe- ### **il `pre-commit` si e-
 # ### fermato per QUEL pezzo.** ### **Poi la prova e- stata togliere.**
 VIOLATORI_ATTESI = ()
+# ### ⛔⛔ **I PEZZI CHE ESISTONO SOLO CON LA FORMA `cs` ACCESA** *(`2026-10-18`)*:
+# ### `CAMM-FASE-VUOTO` ha coefficiente `cs'(Lambda)`, e ### **a forma spenta NON C'E'**
+# ### -- quindi a forma spenta ### **non dipende da `dtau` perche' non dipende da NIENTE.**
+# ### ⚠ **Misurarlo a forma spenta direbbe <<VIOLATORE>> di un pezzo che non gira**, ed
+# ### e' ### **un falso-zero.** ### ✅ **Si misura dove ESISTE: con la forma accesa**, e
+# ### `Lambda_c` ### **derivata dalla scena** *(`A1`)*, non scelta.
+SOLO_CON_CS = ("CAMM-FASE-VUOTO",)
+RAPPORTO_CS = 1.0
+# ### ⛔⛔ **I PEZZI CHE ESISTONO SOLO CON LA FORMA `cs` ACCESA** *(`2026-10-18`)*:
+# ### `CAMM-FASE-VUOTO` ha coefficiente `cs'(Lambda)`, e ### **a forma spenta NON C'E'**
+# ### -- quindi a forma spenta ### **non dipende da `dtau` perche' non dipende da NIENTE.**
+# ### ⚠ **Misurarlo a forma spenta direbbe <<VIOLATORE>> di un pezzo che non gira**, ed
+# ### e' ### **un falso-zero.** ### ✅ **Si misura dove ESISTE: con la forma accesa**, e
+# ### `Lambda_c` ### **derivata dalla scena** *(`A1`)*, non scelta.
+SOLO_CON_CS = ("CAMM-FASE-VUOTO",)
+RAPPORTO_CS = 1.0
+# ### ⛔⛔ **I PEZZI CHE ESISTONO SOLO CON LA FORMA `cs` ACCESA** *(`2026-10-18`)*:
+# ### `CAMM-FASE-VUOTO` ha coefficiente `cs'(Lambda)`, e ### **a forma spenta NON C'E'**
+# ### -- quindi a forma spenta ### **non dipende da `dtau` perche' non dipende da NIENTE.**
+# ### ⚠ **Misurarlo a forma spenta direbbe <<VIOLATORE>> di un pezzo che non gira**, ed
+# ### e' ### **un falso-zero.** ### ✅ **Si misura dove ESISTE: con la forma accesa**, e
+# ### `Lambda_c` ### **derivata dalla scena** *(`A1`)*, non scelta.
+SOLO_CON_CS = ("CAMM-FASE-VUOTO",)
+RAPPORTO_CS = 1.0
 CAMBIA_MIN = 1e-9
 
 
@@ -126,7 +150,11 @@ def main(argv):
     visti, guardati = [], []
     for idl, frazione, _tipo in CM.ORDINE:
         guardati.append((idl, frazione))
-        d = dipende_da_dtau(idl, frazione)
+        # ### ⛔ **IL RAMO DEI PEZZI CHE VIVONO SOLO CON LA FORMA:** si accende,
+        # ### e ### **lo si dice nella riga del censimento.**
+        d = dipende_da_dtau(idl, frazione,
+                            rapporto_cs=(RAPPORTO_CS if idl in SOLO_CON_CS
+                                         else None))
         viola = d < CAMBIA_MIN
         if viola and idl not in visti:
             visti.append(idl)
@@ -150,7 +178,11 @@ def main(argv):
     # ### misurato accanto.
     per_pezzo = {}
     for idl, frazione in guardati:
-        d = dipende_da_dtau(idl, frazione)
+        # ### ⛔ **IL RAMO DEI PEZZI CHE VIVONO SOLO CON LA FORMA:** si accende,
+        # ### e ### **lo si dice nella riga del censimento.**
+        d = dipende_da_dtau(idl, frazione,
+                            rapporto_cs=(RAPPORTO_CS if idl in SOLO_CON_CS
+                                         else None))
         per_pezzo[idl] = min(per_pezzo.get(idl, d), d)
     peggio = min(per_pezzo.values()) if per_pezzo else 0.0
     quale = [k for k, v in per_pezzo.items() if v == peggio]

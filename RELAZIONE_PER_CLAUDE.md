@@ -18858,3 +18858,46 @@ quella a `k = 0`»* -- ### **non si puo' misurare prima che `(d)` giri.**
 ### 📌 **E il punto `2(a)` e' un CONTROLLO che si puo' fare GIA' OGGI** *(con `S3`
 sola le due risposte devono COINCIDERE)*: ### **lo segnalo perche' e' la meta' che non
 aspetta `(d)`**, e ### **non la faccio ora** perche' il mandato dice ### **solo mappa.**
+### ✅ **IL CODICE DELLA STRADA `(d)`: `CAMM-FASE-VUOTO` E' IN TABELLA, E IL BRACCIO `0` E' AL BIT**
+
+### ⭐ **IL BRACCIO `0`, che e' la prima cosa che il mandato chiede:** a forma
+### **SPENTA** i ### **`12` pezzi di prima coincidono AL BIT** e la
+### **distanza del passo intero e' `0.000000e+00` ESATTO** su entrambe le scene.
+### ✅ **Quindi la legge nuova, a default, NON ESISTE** -- e non e' una promessa:
+e' `M-B1` contro il commit prima di questo mandato.
+
+### ⛔ **E `M-B1` HA RIFIUTATO, la prima volta, E AVEVA RAGIONE:** l'insieme dei
+pezzi era cambiato *(`6` -> `7` distinti)*, e il confronto ### **per posizione avrebbe
+accoppiato pezzi SBAGLIATI.** ### ✅ **Due cure:** i pezzi nuovi si
+### **DICHIARANO** *(`PEZZI_NUOVI`, con la data e il motivo)*, e il confronto si fa
+### **PER `id`, non per posizione** -- cosi' ### **un pezzo nuovo non sposta niente.**
+
+### ⭐⭐ **E DUE COSE LE HO VERIFICATE NUMERICAMENTE PRIMA DI FIDARMI DELLA
+DERIVAZIONE:**
+### `1)` ### **`A_k = dG/dcs_k`** *(la parentesi quadra di `Omega`)* contro la
+### **differenza finita di `G`**: errore relativo ### **`7.9e-08`** con `h = 1e-7`.
+### `2)` ### **`dw_a/dcs_k`** contro la ### **differenza finita di `s_arco`**
+*(la funzione che il passo chiama)*: ### **`1.3e-07`.**
+### ✅ **Quindi `Omega` e' quello di `G`, e non <<un termine plausibile>>.**
+
+### ⛔ **E LA LEGGE NUOVA HA RESO CIECHI TRE STRUMENTI, e ognuno voleva una cosa
+diversa:**
+### `(a)` il ### **tempo proprio** la vedeva ### **VIOLATRICE** -- perche' a forma spenta
+### **non dipende da niente**: si misura ### **dove esiste**, con la forma accesa
+*(`0` violatori su `14` pezzi)*;
+### `(b)` ### **`H_w`** la teneva accesa nei modi a ### **peso CONGELATO**, e la' la
+reazione ### **non esiste per definizione** *(`cs` costante -> `cs' = 0`)*: si
+### **salta**, e i numeri del referto `578b3d69` ### **tornano identici** *(`2.030`,
+`-0.003`, `1.996`, `-0.034`)*;
+### `(c)` il ### **protocollo statico** ALZAVA perche' con ### **due flussi** non sapeva
+piu' ### **quale sostituisce** -- e ### **faceva bene**: la risposta e' dichiarata, ed e'
+### **quella che ha sempre avuto** *(`CAMM-MATERIA-VUOTO`)*.
+
+### ⛔⛔ **E UN DIFETTO MIO, DEL MANDATO PRECEDENTE, TROVATO E CORRETTO:** in
+`_misura_hw` il modo ### **dinamico** calcolava la linea di base
+### **A FORMA SPENTA** *(`mot.cs is None` fino al primo tick)*, cioe' ### **`H_tot`
+invece di `G`** -- e l'escursione era dominata da ### **uno scarto COSTANTE fra le due
+fonti** *(`~4e+02`)*, non dalla deriva.
+### ⚠⚠ **Quindi il `-0.001` del referto `578b3d69` E' MISURATO MALE**, e con la
+linea di base giusta la stessa corsa da' ### **`1.002`.** ### **Il numero sta nella voce e
+nella RIPRESA, e va corretto la': lo faccio nel commit delle misure.**

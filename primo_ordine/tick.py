@@ -51,6 +51,11 @@ OPERATORE = {
     # ### farebbe ALZARE il tick se qualcuno la rimettesse nell-ordine**, invece di
     # ### girare.
     "CAMM-MATERIA-VUOTO": ("CAMM-MATERIA-VUOTO", False),
+    # ### ⛔⛔ **LA FASE SUL VUOTO** *(`2026-10-18`, la strada `(d)`)*: ### **VUOLE IL
+    # ### `par`**, e non e- un dettaglio -- ### **`Omega` contiene il termine della MONETA**,
+    # ### che porta `eps`. ### ⚠ **Senza il `par` quel termine sparirebbe da `H`
+    # ### IN SILENZIO**, e `Omega` sarebbe quello di ### **un-ALTRA energia.**
+    "CAMM-FASE-VUOTO": ("CAMM-FASE-VUOTO", True),
     "CAMM-SATURAZIONE": ("CAMM-SATURAZIONE", False),
     "CAMM-MONETA-SPIN": ("moneta_spin", True),
     "CAMM-GROVER": ("grover", False),
@@ -122,7 +127,7 @@ def meta_del_palindromo():
     return n // 2
 
 
-def cs_al_centro(st, mot, par, lambda_c, fp):
+def cs_al_centro(st, mot, par, lambda_c, fp, salta):
     """### `(cs, giri)`: ### **`cs` dallo stato al CENTRO del palindromo, a PUNTO FISSO.**
 
     ### ⛔⛔ **IL PUNTO DELICATO DI `D2`, con le parole del mandato:** `cs` dipende
@@ -145,12 +150,18 @@ def cs_al_centro(st, mot, par, lambda_c, fp):
     ### **di relazionare e NON di scegliere un altro schema.**
     """
     meta = meta_del_palindromo()
+    # ### ⛔ **IL NUMERO PRIMA DEL VETTORE** *(`2026-10-18`)*: il tick con `cs`
+    # ### percorre ### **mezzo palindromo**, e la' dentro c'e' ### **`CAMM-FASE-VUOTO`**,
+    # ### che legge `mot.lambda_c`. ### ⚠ **Senza questa riga il pezzo nuovo
+    # ### non girerebbe DENTRO il punto fisso**, e il `cs` del centro
+    # ### ### **sarebbe quello di un altro passo.**
+    mot.lambda_c = float(lambda_c)
     lam = mot.densita_vuoto(st)
     prec = FP.cs(lam, lambda_c, fp).copy()
     for giri in range(1, GIRI_MAX + 1):
         copia = {k: (v.copy() if hasattr(v, "copy") else v) for k, v in st.items()}
         mot.cs = prec
-        percorri_tick(copia, mot, par, (), None, meta)
+        percorri_tick(copia, mot, par, salta, None, meta)
         nuovo = FP.cs(mot.densita_vuoto(copia), lambda_c, fp).copy()
         scarto = float(np.max(np.abs(nuovo - prec)))
         if scarto <= EPS_CS * float(np.max(np.abs(nuovo))):
@@ -163,11 +174,18 @@ def cs_al_centro(st, mot, par, lambda_c, fp):
         " ALZA invece di fermarsi a un valore qualunque" % (GIRI_MAX, scarto))
 
 
-def tick_con_cs(st, mot, par, lambda_c):
-    """### Un tick ### **con `cs` SIMMETRICO**: `(giri,)` che il punto fisso ha speso."""
+def tick_con_cs(st, mot, par, lambda_c, salta):
+    """### Un tick ### **con `cs` SIMMETRICO**: `(giri,)` che il punto fisso ha speso.
+
+    ### ⛔⛔ **E `salta` NON HA UN VALORE DI COMODO** *(`2026-10-18`)*: serve al
+    ### **caso che DEVE fallire di `C1`** -- la stessa corsa ### **senza il termine
+    nuovo** -- e passarlo ### **esplicito** e' la regola del nucleo *(zero `default`)*.
+    ### ⚠ **E va dato anche al punto fisso**, altrimenti il `cs` del centro
+    ### **sarebbe quello di un altro passo.**
+    """
     fp = mot._b("tk_cs", (mot.inc.n,), float)
-    _c, giri = cs_al_centro(st, mot, par, lambda_c, fp)
-    percorri_tick(st, mot, par, (), None, len(CM.ORDINE))
+    _c, giri = cs_al_centro(st, mot, par, lambda_c, fp, salta)
+    percorri_tick(st, mot, par, salta, None, len(CM.ORDINE))
     return giri
 
 

@@ -148,12 +148,24 @@ def accendi_cs(mot, lambda_c, st):
     """
     lam = mot.densita_vuoto(st)
     mot.cs = cs(lam, lambda_c, mot._b("fp_cs", (mot.inc.n,), float)).copy()
+    # ### ⛔⛔ **E IL NUMERO SI METTE INSIEME AL VETTORE** *(`2026-10-18`)*:
+    # ### `CAMM-FASE-VUOTO` ha bisogno di ### **`cs'(Lambda)`**, che si calcola da
+    # ### ### **`Lambda_c`** e non da `cs`. ### ⚠ **Un `cs` senza il suo `lambda_c`
+    # ### e' una forma di cui non si sa la derivata**, e il pezzo nuovo
+    # ### ### **non girerebbe** -- in silenzio.
+    mot.lambda_c = float(lambda_c)
     return mot.cs
 
 
 def spegni_cs(mot):
-    """### Rimette la forma SPENTA: ### **il passo di oggi AL BIT.**"""
+    """### Rimette la forma SPENTA: ### **il passo di oggi AL BIT.**
+
+    ### ⛔ **E spegne ENTRAMBI**, perche' sono ### **una cosa sola**: lasciare
+    `lambda_c` acceso con `cs` spento vorrebbe dire ### **una derivata senza la sua
+    funzione.**
+    """
     mot.cs = None
+    mot.lambda_c = None
 
 
 def s_nodo(mot):
