@@ -18546,3 +18546,11 @@ decisione presa.**
 in `M-B1 --collaudo` *(`11` su `11`)* -- e ### **il braccio prima della cura FALLIVA**,
 nominando `csv/_stop_coda.py`. ### **Dopo `--contro` e `--collaudo`, `git status` e'
 pulito.**
+### ✅ **LA VOCE DEI TEMPORANEI E' CHIUSA, col hash che prima non esisteva**
+
+`DIFETTO-TEMPORANEI-NEL-REPO` passa ad ### **`CHIUSA`**, `chiusura.commit = 402a4d51`.
+### ⚠ **E i quattro campi vanno in UN SOLO ATTO:** `PI-CHIUSURA-ORFANA` rifiuta una
+`chiusura` piena su una voce ancora `AGENDA` -- ### **<<una voce che dice "chiusa dal
+commit X" e non e' chiusa MENTE, e mente in un campo che un programma legge>>.**
+### ✅ **Ha ragione**, ed e' il motivo per cui la chiusura e' ### **un commit a se'**:
+il commit che cura ### **non puo' citare il proprio hash.**
