@@ -219,8 +219,13 @@ def pendenza_mb2(modo, uniforme=None):
             h0 = MB2.h_tot(inc, mot, st, par)
             peggio = 0.0
             for _t in range(tick):
-                # ### ⚠ **`cs` si rimette a OGNI tick**, perche- il motore lo
-                # ### ### **azzera a fine tick** quando la forma non e- accesa da `FP`.
+                # ### ⚠⚠ **`cs` SI RIMETTE A OGNI TICK, E NON PERCHE- IL MOTORE LO AZZERI:**
+                # ### ### **quel commento era SBAGLIATO, e l-avevo scritto io** *(corretto il
+                # ### `2026-10-17`)*. ### ✅ **`chiudi_tick` NON tocca `cs`**, e l-ho
+                # ### ### **verificato correndo**: dopo un tick `mot.cs` e- intatto.
+                # ### ⚠ **Si rimette per rendere ESPLICITO che il peso di questo modo e-
+                # ### COSTANTE**, cioe- che il ciclo non dipende da cio- che un tick
+                # ### lascia dietro: ### **e- una riga che non serve, non una riga che cura.**
                 mot.cs = np.full(mot.inc.n, float(uniforme))
                 TK.percorri_tick(st, mot, par, (), None, len(CM.ORDINE))
                 d = abs(MB2.h_tot(inc, mot, st, par) - h0)

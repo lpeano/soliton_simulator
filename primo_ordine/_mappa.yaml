@@ -162,6 +162,10 @@ moduli:
     responsabilita: i quattro criteri con cui L1 e- chiuso, rigirati con la forma cs ACCESA
     importa: [_collauda_tempo_proprio, _misura_completa_l2, _misura_mb2, _misura_theta_n, _misura_theta_nonlineare, _presidio, composizione, corrente, deriva, flussi_parziali, tick]
 
+  - nome: _misura_hw.py
+    responsabilita: la pendenza dell-energia PESATA H_w, e se il passo con cs la conserva
+    importa: [_misura_mb2, _presidio, composizione, deriva, flussi_parziali, tick]
+
   - nome: _misura_mb1.py
     responsabilita: il raccordo al bit pezzo per pezzo contro il commit di riferimento
     importa: [_censimento_strumenti, _presidio, composizione, deriva, tick]

@@ -18679,3 +18679,47 @@ la risposta piu' informativa.**
 `_collauda_cs_l1.py` avevo scritto che il motore ### **azzera `cs` a fine tick.**
 ### **NON E' VERO:** `chiudi_tick` non tocca `cs`, e l'ho ### **verificato correndo**
 *(`mot.cs` dopo un tick e' intatto)*. ### **Si corregge col codice del prossimo commit.**
+### ⭐⭐ **`H_w` SEPARA LE STRADE: IL PESAGGIO E' COERENTE, E CIO' CHE ROMPE E' SOLO LA DINAMICA**
+
+| il modo di `cs` | pendenza `H_w` | pendenza `H_tot` |
+|---|---|---|
+| uniforme *(`0.450304`)*, ### **controllo positivo** | `1.996` | `1.996` |
+| ### **CONGELATO non uniforme** *(la domanda)* | ### **`2.030`** | ### **`-0.003`** |
+| DINAMICO *(al centro, come `D2`)* | `-0.001` | `0.062` |
+| congelato, pesi ### **ARITMETICI** *(deve fallire)* | ### **`-0.034`** | -- |
+
+### ✅ **LA LETTURA E' QUELLA FISSATA PRIMA DELLA MISURA** *(task history `adc895c7`)*:
+### ⛔ **`(a)` REGGE e `(c)` NO**, quindi ### **il pesaggio e' COERENTE col modo in cui
+il passo usa `cs`**, e ### **cio' che rompe la conservazione e' SOLO LA DINAMICA di `cs`.**
+### ⚠ **E questo NON decide niente:** la scelta fra le cinque strade e' di Luca.
+
+### ⭐ **I TRE CONTROLLI CHE RENDONO IL `2.030` LEGGIBILE:**
+### `(0)` a peso uniforme `H_w` e' `h_tot` entro ### **`1.6` ulp** *(e' l'ordine della
+somma)*, confrontato ### **a ogni tick di ogni corsa**; ### `(b)` a `cs` costante le due
+pendenze ### **coincidono** *(`1.996` e `1.996`)*, altrimenti un `(a)` verde non direbbe
+niente; ### `(d)` coi pesi d'arco ### **ARITMETICI** la pendenza ### **si perde**
+*(`-0.034`)*, quindi la misura ### **guarda DAVVERO i pesi** -- e la media ARMONICA di
+`B-3` e' quella giusta.
+### ✅ **E i pesi vengono DAL PASSO**, come rapporto `s_nodo`/`s_arco` con e senza
+`cs`: ### **non ho riscritto la media armonica.**
+
+### ⚠⚠ **E UNA COSA CHE AVEVO SCRITTO PRIMA E CHE LA MISURA SMENTISCE:** nel
+task history avevo detto *«non e' affatto detto che il generatore che il passo integra
+sull'arco sia `w_a` volte il generatore d'arco di `h_tot`»*. ### **Lo e'**, e il
+braccio `(d)` lo dimostra ### **per esclusione**: col peso sbagliato la pendenza
+### **crolla.**
+
+### ⛔ **E LA PRE-CORSA E' SERVITA PER UN MOTIVO MISURATO:** sulla scena di `M-B2` il
+vuoto nasce ### **UNIFORME** *(`vuoto_modulo = 2.0`)*, quindi `cs` nasce
+### **COSTANTE** -- e il primo giro di questa misura ha dato `cs` da `0.5` a `0.5`, cioe'
+### **il braccio `(a)` era una copia del `(b)`.** ### ✅ **Lo stato non uniforme NON
+l'ho scelto: lo fa la dinamica**, lasciando correre il sistema per
+### **lo stesso tempo fisico della misura** *(`T = 8.0` a `dtau = 0.25`)*, e
+### **la stessa pre-corsa per tutti i `dtau`** -- altrimenti i cinque punti partirebbero
+da cinque stati diversi.
+
+### ✅ **E IL COMMENTO FALSO E' CORRETTO:** in `_collauda_cs_l1.py` dicevo che il
+motore ### **azzera `cs` a fine tick.** ### **Non e' vero**, `chiudi_tick` non lo tocca, e
+adesso il commento dice ### **perche' quella riga c'e' davvero** *(rendere esplicito che
+il peso di quel modo e' costante)* e che ### **e' una riga che non serve, non una riga che
+cura.**

@@ -140,6 +140,73 @@ def h_tot(inc, mot, st, par):
     return nodo + arco + moneta + accoppia
 
 
+def pezzi_di_h(inc, mot, st, par):
+    """### `(per_nodo, per_arco)`: ### **i termini di `h_tot`, NON sommati.**
+
+    ### ⛔⛔ **PERCHE' ESISTE** *(mandato del guardiano del `2026-10-17` alle
+    `22:08`)*: l'energia ### **PESATA** `H_w` ha bisogno dei termini ### **separati**, e
+    `h_tot` ne restituisce ### **UNO SOMMATO.**
+    ### ⛔ **E `h_tot` NON SI TOCCA:** il suo valore e' ### **il criterio di `M-B2`**,
+    e una somma fatta in un ordine diverso ### **cambia i bit.**
+
+    ### ⚠⚠ **QUESTA E' UNA SECONDA FONTE, E LO DICO:** ripete i quattro termini
+    di `h_tot` ### **senza sommarli.** ### ✅ **E si CONFRONTA, a ogni corsa:** a
+    `cs = 1` uniforme ### **`sum(per_nodo) + sum(per_arco)` deve dare `h_tot`**, a meno
+    dell'ORDINE DELLA SOMMA -- ed e' il braccio `0` di `_misura_hw.py`.
+    ### ⛔ **Senza quel confronto sarebbe una copia che puo' divergere in silenzio**,
+    ed e' cio' che `STRUMENTO-LEGGE-DALLA-TABELLA` vieta.
+
+    ### ⭐ **E LA DIVISIONE IN DUE GRUPPI NON E' UNA SCELTA: E' LA MAPPA PEZZO ->
+    PESO**, letta da `flussi_parziali`:
+    ### **NODO** *(i due Grover via `z_nodo`, la moneta via `dtau_nodo`,
+    l'accoppiamento `N` via `dtau_nodo`)* ·
+    ### **ARCO** *(i due spostamenti via `z_arco`, la media ARMONICA di `B-3`)*.
+    """
+    psi, phi = st["psi_h"], st["phi_h"]
+    m = inc.m
+    U = mot.geo.U
+    # ------------------------------------------------- i termini di NODO
+    nrm_psi = _per_nodo(inc, np.abs(psi[:, 0]) ** 2 + np.abs(psi[:, 1]) ** 2)
+    nrm_phi = _per_nodo(inc, np.abs(phi) ** 2)
+    S_psi = np.zeros((inc.n, 2), dtype=complex)
+    np.add.at(S_psi, inc.nodo, psi)
+    S_phi = np.zeros(inc.n, dtype=complex)
+    np.add.at(S_phi, inc.nodo, phi)
+    d = inc.grado.astype(float)
+    pu_psi = (np.abs(S_psi[:, 0]) ** 2 + np.abs(S_psi[:, 1]) ** 2) / d
+    pu_phi = np.abs(S_phi) ** 2 / d
+    per_nodo = -OMEGA * ((nrm_psi - pu_psi) + (nrm_phi - pu_phi))
+    # ### la MONETA: `elicita` e' ### **GIA' SOMMATA PER NODO** *(letto dal sorgente:
+    # ### `motore.elicita` fa `np.add.at(h, inc.nodo, sn)` e torna `(n,)`)*, quindi
+    # ### ### **non si raccoglie una seconda volta** -- e il peso che la moneta
+    # ### legge e' `dtau_nodo`, cioe' ### **il peso del NODO.**
+    h = mot.elicita(st).copy()
+    assert h.shape == (inc.n,), (
+        "`elicita` ha forma %r invece di `(n,)`: se tornasse per ESTREMITA' andrebbe"
+        " raccolta sui nodi, e questo termine starebbe pesato SBAGLIATO" % (h.shape,))
+    per_nodo = per_nodo + float(par["eps"]) * h
+    # ### l'ACCOPPIAMENTO `N`, ### **per nodo**: la stessa riga di `h_tot`
+    rho = nrm_psi
+    lam = nrm_phi
+    N = np.zeros(inc.n, dtype=float)
+    vivi = rho > 0.0
+    if np.any(vivi):
+        N[vivi] = rho[vivi] * np.log(rho[vivi] / (rho[vivi] + lam[vivi]))
+    per_nodo = per_nodo + N
+    # ------------------------------------------------- i termini di ARCO
+    v = psi.reshape(m, 2, 2)
+    p0, p1 = v[:, 0, :], v[:, 1, :]
+    incro = np.einsum("ai,aji,aj->a", np.conj(p0), np.conj(U), p1)
+    nrm_a = (np.abs(p0) ** 2).sum(axis=1) + (np.abs(p1) ** 2).sum(axis=1)
+    arco_psi = (nrm_a - 2.0 * np.real(incro)) / 2.0
+    w = phi.reshape(m, 2)
+    f0, f1 = w[:, 0], w[:, 1]
+    arco_phi = (np.abs(f0) ** 2 + np.abs(f1) ** 2
+                - 2.0 * np.real(np.conj(f0) * f1)) / 2.0
+    per_arco = -OMEGA * (arco_psi + arco_phi)
+    return per_nodo, per_arco
+
+
 def _tick_ordine(st, mot, par, ordine):
     """### ⛔ **UN TICK CON UN ORDINE DATO — SOLO PER LA CONTROPROVA.**
 

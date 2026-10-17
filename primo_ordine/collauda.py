@@ -290,6 +290,14 @@ COLLAUDI = (
      "primo_ordine/_misura_theta_nonlineare.py", "pre-commit"),
     ("la misura COMPLETA di `L2`, su piu- stati", "primo_ordine/_misura_completa_l2.py",
      "solo-CI"),
+    # ### ⭐⭐ **`H_w`, L-ENERGIA PESATA** *(mandato del guardiano del `2026-10-17`,
+    # ### `22:08`)*: misura se esiste un-energia PESATA che il passo con `cs` conserva
+    # ### al secondo ordine. ### ✅ **E CI STA NELLA SUITE perche- e- VERDE** *(`7` su
+    # ### `7`, `4.1` s misurati)*: ### **non e- il caso di `D3`**, che resta fuori col suo
+    # ### motivo scritto. ### ⚠ **E porta dentro il confronto delle DUE FONTI**
+    # ### *(`pezzi_di_h` contro `h_tot`)*, che senza di lui girerebbe solo a mano.
+    ("`H_w`: l-energia PESATA, e se il passo con `cs` la conserva",
+     "primo_ordine/_misura_hw.py", "pre-commit"),
     # ### ⭐ **IL BANCO DELLA CAMMINATA** *(mandato di Luca, 2026-10-10)*: e-
     # ### ### **il primo codice di fisica dell-era 2**, e il suo collaudo porta
     # ### ### **il braccio 0** -- la simmetria di coniugazione di carica, AL BIT.
