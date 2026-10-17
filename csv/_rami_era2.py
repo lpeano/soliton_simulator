@@ -226,12 +226,10 @@ RAMI[("primo_ordine/motore.py", "_somma_per_nodo")] = (
     "tre addendi l-ordine conta), percio' NON e' un valore implicito: e' un ARGOMENTO "
     "ESPLICITO del motore (`Motore.__init__(self, inc, geo, st, dtau, sommatoria)`, senza "
     "default) -- verificato il 2026-10-16, come il mandato chiede")
-RAMI[("primo_ordine/motore.py", "main")] = (
-    2, "iterazione",
-    "DUE rami: quanti GIRI di misura secondo la taglia (`20` sotto `10000` nodi, `5` "
-    "sopra), e la frase del referto che dice QUALE dei due costi domina. ### Sono dentro "
-    "il misuratore del modulo: nessuno dei due entra in un risultato di fisica")
-# ------------------------------------------------------------------ `saturazione.py`
+# ### ⚠ **`motore.main` NON E' PIU' NEL NUCLEO** *(`2026-10-17`)*: era
+# ### ### **un MISURATORE dentro un modulo del nucleo**, e `P-MOD` ha rifiutato il commit
+# ### perche- `motore.py` era a ### **`699` righe su `700`.** ### **E' uscito in
+# ### `_misura_costo_motore.py`**, e la sua riga ### **esce con lui.**
 RAMI[("primo_ordine/saturazione.py", "pezzi")] = (
     1, "smistamento",
     "il LIMITE a `Lambda = 0` ESATTO: la' si usa la forma limite (`G' = 1`, "
@@ -240,6 +238,12 @@ RAMI[("primo_ordine/saturazione.py", "pezzi")] = (
     "violerebbe `A11`, un LIMITE e' la funzione. ### ⚠ E la scheda della legge NON lo "
     "nomina: il buco e' riferito, e la legge e' fuori dall-ordine")
 # ------------------------------------------------------------------ `tick.py`
+RAMI[("primo_ordine/flussi_parziali.py", "dtau_nodo")] = (
+    1, "smistamento",
+    "il ramo della forma `cs` (`D0`, 2026-10-17): `mot.cs is None` vuol dire ### LA FORMA "
+    "NON C-E-, e allora si ritorna `mot.dtau` TALE E QUALE -- cioe- il passo di oggi AL "
+    "BIT, senza una moltiplicazione e senza un ulp. ### E `None` NON e- <<`Lambda_c` vale "
+    "zero>>: la scala zero la funzione `cs` la RIFIUTA, e spegnere si fa NON ACCENDENDO")
 RAMI[("primo_ordine/tick.py", "percorri_tick")] = (
     3, "smistamento",
     "TRE rami, tutti su CAMPI DICHIARATI: `idl not in salta` toglie dei pezzi per `id` "

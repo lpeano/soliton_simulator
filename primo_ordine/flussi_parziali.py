@@ -85,7 +85,75 @@ def dtau_nodo(mot):
         "`dtau` ha forma %r e i nodi sono %d: dopo una crescita `dtau` NON si estende da"
         " solo, e un `dtau` di un'altra taglia darebbe numeri che sembrano buoni"
         % (d.shape, mot.inc.n))
-    return d
+    # ### ⛔⛔ **IL RAMO DELLA FORMA `cs`** *(`D0`, `2026-10-17`)*: ### **`mot.cs`
+    # ### e- `None` finche- Luca non decide `Lambda_c`**, e allora questo ritorna
+    # ### ### **`mot.dtau` TALE E QUALE** -- cioe- ### **il passo di oggi AL BIT.**
+    # ### ✅ **Il ramo NON e- un default:** `None` vuol dire ### **la forma non c-e-**,
+    # ### non ### **<<`Lambda_c` vale zero>>** -- e la differenza e' nel docstring di `cs`.
+    # ### ⚠ **E quando c-e-, `dtau_k = cs_k * dt` e- il POSTO che `F7` cabla**: uno
+    # ### solo, non sette.
+    if mot.cs is None:
+        return d
+    eff = mot._b("fp_dtau_cs", (mot.inc.n,), float)
+    np.multiply(d, mot.cs, out=eff)
+    return eff
+
+
+def cs(lam, lambda_c, fuori):
+    """### `cs_k = Lambda_k / (Lambda_k + Lambda_c)` — ### **la velocita- locale della luce.**
+
+    ### ⛔⛔ **`lambda_c` SI PASSA, SEMPRE: NESSUN VALORE PREDEFINITO**
+    *(`D0` del mandato del `2026-10-16`)*. ### **Finche- Luca non decide il valore, questa
+    funzione non si puo- chiamare per sbaglio** -- e il motore gira con ### **la forma
+    SPENTA**, cioe- il passo di oggi ### **AL BIT.**
+
+    ### ✅ **E NON SERVE NESSUN PAVIMENTO** *(`A11`)*: la forma sta in ### **`[0, 1)`
+    per costruzione** -- `Lambda >= 0` e `Lambda_c > 0` danno `0 <= cs < 1`, e
+    ### **`cs < 1` viene dalla FORMA, non da un taglio.**
+
+    ### ⚠ **E `Lambda = 0` da- `cs = 0` ESATTO**, che e- ### **il valore della forma**
+    e non un pavimento. ### ⛔ **MA L-ASSERT DEL CONO** *(`_nel_cono`)* ### **pretende
+    `s > 0`**, e con `cs = 0` quel nodo avrebbe ### **un orologio fermo**: l-assert
+    ### **lo RIFIUTA.** ### **Misurato il `2026-10-17`:** nelle scene di `M-B1` il minimo
+    di `Lambda` su `250` tick e- ### **`5.6e-02`**, e ### **`Lambda = 0` non si presenta
+    mai** -- quindi l-assert ### **non scatta.** ### **Non l-ho cambiato, e il caso resta
+    una domanda per Luca.**
+    """
+    assert lambda_c > 0.0, (
+        "`lambda_c` vale %r: la scala del vuoto e- UNA SCALA, quindi POSITIVA -- e a"
+        " `lambda_c = 0` la forma darebbe `Lambda/Lambda`, cioe- `1` dove c-e- vuoto e"
+        " `0/0` dove non ce n-e-. ### La forma SPENTA non si ottiene con uno ZERO: si"
+        " ottiene NON ACCENDENDOLA (`mot.cs is None`)" % (lambda_c,))
+    np.add(lam, lambda_c, out=fuori)
+    np.divide(lam, fuori, out=fuori)
+    return fuori
+
+
+def accendi_cs(mot, lambda_c, st):
+    """### Accende la forma `cs` ### **sullo stato DI ADESSO**, e pretende `lambda_c`.
+
+    ### ⚠ **STA QUI E NON NEL MOTORE, e il motivo e' `P-MOD`:** `motore.py` era a
+    ### **`726` righe su un tetto di `700`**, e ### **oltre si DIVIDE, non si allunga.**
+    ### ✅ **E questo e' il posto giusto comunque:** il tempo proprio ### **vive in
+    questo modulo** *(`dtau_nodo`, `s_nodo`, `s_arco`)*, e `cs` ### **e' il tempo proprio.**
+
+    ### ⛔⛔ **QUESTA E' LA VARIANTE <<`cs` A INIZIO PASSO>>, e il mandato dice che
+    e' SBAGLIATA:** `cs` dipende da `Lambda`, che ### **cambia DURANTE il passo**, quindi un
+    `cs` letto all'inizio ### **rompe il palindromo.**
+    ### ✅ **La variante GIUSTA e' `D2`** *(`cs` dallo stato al CENTRO del palindromo, a
+    punto fisso)*, e ### **questa resta perche' `D2` la usa come IL CASO CHE DEVE
+    FALLIRE:** deve ### **perdere il secondo ordine** e la simmetria.
+    ### ⚠ **Quindi non e' un ripiego: e' il TERMINE DI CONFRONTO**, e il docstring lo
+    dice perche' nessuno la usi credendola la forma buona.
+    """
+    lam = mot.densita_vuoto(st)
+    mot.cs = cs(lam, lambda_c, mot._b("fp_cs", (mot.inc.n,), float)).copy()
+    return mot.cs
+
+
+def spegni_cs(mot):
+    """### Rimette la forma SPENTA: ### **il passo di oggi AL BIT.**"""
+    mot.cs = None
 
 
 def s_nodo(mot):

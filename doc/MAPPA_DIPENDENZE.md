@@ -703,3 +703,46 @@ simulatore e' un difetto o una tappa?»*
 `[[DOMANDA-LA-GERARCHIA-GRAVITA-EM]]` — *«la gerarchia gravita'/elettromagnetismo deve
 ### **EMERGERE** dal modello *(e da dove)*, o ### **si accetta come parametro**?»*
 ### **Livello: si decide DOPO `L4`**, e resta collegata alla scelta di `Lambda_c` *(`L2`)*.
+
+## 20. ⛔⛔ `L2` — **`Lambda_c`: LE TRE STRADE, E PERCHE' DUE SONO SCARTATE**
+*(`2026-10-17`, su osservazione di Luca delle `15:14`)*
+
+> ### ⛔⛔ **IL VINCOLO, e viene da Luca:** ### **NESSUNA COSTANTE GLOBALE NELLA
+> DINAMICA.** `cs_k = Lambda_k/(Lambda_k + Lambda_c)` usa ### **solo grandezze del nodo
+> `k`** e ### **un NUMERO FISSO.** ### **`Lambda_c` non si calcola MAI dallo stato durante
+> la corsa** — niente `Lambda_medio`, niente `V/N`, nessuna media, nessun massimo, nessuna
+> somma sul grafo ### **dentro il passo.**
+
+| | la strada | lo stato |
+|---|---|---|
+| `1` | ### **`Lambda_c` PARAMETRO SCELTO**, fisso, uguale per tutti i nodi | ### ✅ **E' quella attuata in `D0`**, ed e' ### **LOCALE** per costruzione. ### ⚠ **Il valore NON e' deciso** — `[[DOMANDA-IL-VALORE-DI-LAMBDA-C]]` |
+| `2` | ### **`Lambda_c` MEMORIA DI NASCITA del nodo** *(ogni nodo il suo valore, fissato alla nascita)* | ### ✅ **E' LOCALE, e resta una candidata:** un nodo porta il suo numero e ### **non guarda nessun altro.** ### 📌 **Oggi non c'e' la mitosi, quindi non c'e' una nascita** *(`L3`)* |
+| `3` | ### **`Lambda_c = Lambda_medio` DINAMICO** *(ricalcolato dallo stato)* | ### ⛔⛔ **SCARTATA, per NON LOCALITA'** — e il motivo e' ### **MISURATO** |
+
+### ⭐⭐ **E LA NON LOCALITA' DELLA STRADA `3` E' UN NUMERO, non un'opinione**
+*(braccio `(l2)` di `primo_ordine/_collauda_cs.py`)*:
+
+| | si cambia `Lambda` in ### **UN SOLO nodo**… | quanti `cs` cambiano |
+|---|---|---|
+| la forma ### **LOCALE** *(strada `1`)* | …e `cs` cambia ### **solo la'** | ### **`1` su `16`** |
+| `Lambda_c = V/N` ### **dinamico** *(strada `3`)* | …e `cs` cambia ### **in TUTTI** | ### **`16` su `16`** |
+
+### ⛔ **E I DUE MOTIVI DELLO SCARTO, scritti per intero:** ### ① **NON LOCALE** — un nodo
+dovrebbe ### **conoscere la media del grafo**, e nessuna legge di questo simulatore lo fa;
+### ② **con la mitosi di `L3` `Lambda_medio` cambierebbe**, e ### **la luce rallenterebbe
+OVUNQUE** per una nascita avvenuta ### **da qualche altra parte.**
+
+### 📌 **E NELLE MISURE DI `D4` IL RAPPORTO `Lambda_c/Lambda_medio` E' SOLO UN'ETICHETTA:**
+`Lambda_c` si calcola ### **UNA VOLTA alla costruzione della scena**, si stampa
+### **come numero**, e da li' ### **resta costante.** ### **Il referto riporta IL NUMERO,
+non la formula.**
+
+### ⭐ **E UNA QUARTA STRADA, SOTTO `L6`: <<LA STRADA QUANTISTICA PER `Lambda_c`>>**
+*(nota di mappa chiesta dal mandato del `2026-10-16`, da SCRIVERE e non attuare)*
+
+Nell'automa quantistico c'e' ### **una scala naturale** — ### **un quanto per mezzo-arco,
+al massimo `2d` quanti per nodo** — e la' `Lambda_c` potrebbe ### **smettere di essere
+scelta** e diventare ### **<<un quanto>>.**
+### ⛔ **Oggi il simulatore e' IL CAMPO MEDIO, e quella scala NON C'E'.**
+### ⚠ **Quindi non e' una via disponibile: e' il posto dove la domanda potrebbe chiudersi
+da sola**, e sta scritta perche' ### **non si perda.**

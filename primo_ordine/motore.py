@@ -174,6 +174,9 @@ class Motore(object):
         self.cresciute_nel_tick = -1
         self.tick = 0
         self.cresciute = 0
+        # ### ⛔ **LA FORMA `cs` NASCE SPENTA**, e ### **`None` NON e- un valore di
+        # ### `Lambda_c`**: il perche- sta in `flussi_parziali.cs` *(`D0`)*.
+        self.cs = None
         self.operatori = {
             "moneta_spin": self._moneta_spin,
             "grover": self._grover,
@@ -613,87 +616,3 @@ class Motore(object):
         FP.hop_phi(self, st["phi_h"], frazione)
         self.applicazioni["spostamento_scalare"] += 1
         return st
-
-
-def main(argv):
-    sys.path.insert(0, os.path.join(os.path.dirname(_QUI), "csv"))
-    import _presidio
-    _presidio.avvia(__file__)
-    import stato as ST
-    print("=" * 96)
-    print("LE ALLOCAZIONI PER TICK -- misurate, non dichiarate")
-    print("=" * 96)
-    for nn in (64, 256, 1024):
-        ii = np.arange(nn, dtype=IN.INDICE)
-        jj = (ii + 1) % nn
-        inc = IN.Incidenza(ii, jj, nn, capacita=nn)
-        n_ver = np.zeros((2 * inc.m, 3), dtype=float)
-        n_ver[:, 2] = 1.0
-        U = np.zeros((inc.m, 2, 2), dtype=complex)
-        U[:, 0, 0] = 1.0
-        U[:, 1, 1] = 1.0
-        st = ST.nuovo(nn, inc.m)
-        st["psi_h"][0, 0] = 1.0
-        mot = Motore(inc, Geometria(n_ver, U), st, np.full(nn, 0.1), "numpy")
-        for _ in range(3):
-            mot.operatori["grover"](st, {}, 1)
-            mot.operatori["moneta_spin"](st, {"eps": 0.5}, 1)
-            mot.operatori["spostamento_trasporto"](st, {}, 1)
-        primi = mot.ripieghi
-        for _ in range(20):
-            mot.operatori["grover"](st, {}, 1)
-            mot.operatori["moneta_spin"](st, {"eps": 0.5}, 1)
-            mot.operatori["spostamento_trasporto"](st, {}, 1)
-        print("  n=%-6d  buffer allocati: %d nei primi 3 tick, %d nei 20 dopo"
-              "   byte: %d" % (nn, primi, mot.ripieghi - primi, mot.byte()))
-    print("=" * 96)
-    print("  ### ZERO allocazioni nei tick dopo i primi: e' la lettura che conta")
-    print("=" * 96)
-    print()
-    print("=" * 96)
-    print("UNA `cresci()` CONTRO UN PASSO, SULLO STESSO GRAFO -- il rapporto, MISURATO")
-    print("=" * 96)
-    print("  ### Il mandato della verifica esterna: se la ricostruzione supera il passo,")
-    print("  ### SI DICHIARA come limite noto. ### NON si ottimizza adesso.")
-    import time
-    for nn in (1000, 10000, 100000):
-        ii = np.arange(nn, dtype=IN.INDICE)
-        jj = (ii + 1) % nn
-        inc = IN.Incidenza(ii, jj, nn, capacita=2 * nn)
-        n_ver = np.zeros((2 * inc.m, 3), dtype=float)
-        n_ver[:, 2] = 1.0
-        U = np.zeros((inc.m, 2, 2), dtype=complex)
-        U[:, 0, 0] = 1.0
-        U[:, 1, 1] = 1.0
-        st = ST.nuovo(nn, inc.m)
-        st["psi_h"][0, 0] = 1.0
-        mot = Motore(inc, Geometria(n_ver, U), st, np.full(nn, 0.1), "numpy")
-        # ### un passo = i tre pezzi su `psi`, cioe- cio- che un tick fa DAVVERO
-        def _passo():
-            mot.operatori["grover"](st, {}, 1)
-            mot.operatori["moneta_spin"](st, {"eps": 0.5}, 1)
-            mot.operatori["spostamento_trasporto"](st, {}, 1)
-        _passo()                                   # ### scalda i buffer: il primo ALLOCA
-        giri = 20 if nn <= 10000 else 5
-        t0 = time.perf_counter()
-        for _ in range(giri):
-            _passo()
-        tp = (time.perf_counter() - t0) / giri
-        # ### e una `cresci()` che NON cambia niente: ### **si misura la RICOSTRUZIONE**,
-        # ### non la chirurgia -- cosi- il numero e- quello dell-`argsort`.
-        tieni = np.ones(inc.m, dtype=bool)
-        t0 = time.perf_counter()
-        for _ in range(giri):
-            mot.apri_tick()
-            mot.cresci(tieni, [], [], 0, None)
-            mot.chiudi_tick()
-        tc = (time.perf_counter() - t0) / giri
-        print("  n=%-7d m=%-7d  passo %8.3f ms   cresci() %8.3f ms   rapporto %6.2fx  %s"
-              % (nn, inc.m, tp * 1e3, tc * 1e3, tc / tp,
-                 "### LA RICOSTRUZIONE DOMINA" if tc > tp else "il passo domina"))
-    print("=" * 96)
-    return 0
-
-
-if __name__ == "__main__":
-    sys.exit(main(sys.argv[1:]))

@@ -150,6 +150,10 @@ moduli:
     responsabilita: dove la C si rompe coi flussi parziali, e che cosa la riparerebbe
     importa: [_presidio, deriva]
 
+  - nome: _misura_costo_motore.py
+    responsabilita: il costo del motore e le allocazioni per tick -- misurati, non stimati
+    importa: [_presidio, incidenza, motore, stato]
+
   - nome: _misura_mb1.py
     responsabilita: il raccordo al bit pezzo per pezzo contro il commit di riferimento
     importa: [_presidio, composizione, deriva, tick]
@@ -160,7 +164,7 @@ moduli:
 
   - nome: motore.py
     responsabilita: il doppio contenitore, i pezzi unitari, il flusso, e la regola del tick
-    importa: [_presidio, flussi_parziali, incidenza, materia_vuoto, saturazione, stato]
+    importa: [flussi_parziali, incidenza, materia_vuoto, saturazione]
 
   - nome: _collauda_motore.py
     responsabilita: il collaudo del motore -- zero allocazioni, unitarieta-, regola del tick
@@ -237,6 +241,10 @@ moduli:
   - nome: _collauda_tempo_proprio.py
     responsabilita: misura quali pezzi evolvono col TICK invece che col tempo proprio
     importa: [_presidio, composizione, deriva, tick]
+
+  - nome: _collauda_cs.py
+    responsabilita: il collaudo della forma cs -- la forma spenta e' il passo di oggi al bit
+    importa: [_presidio, deriva, flussi_parziali, tick]
 
   - nome: _collauda_deriva.py
     responsabilita: il collaudo della deriva, e presidia il FALSO-ZERO del termine spento

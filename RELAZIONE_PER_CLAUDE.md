@@ -18305,3 +18305,64 @@ forma ### **spenta** non succede ### **niente, al bit.**
 ### **`Lambda = 0` da' `cs = 0`**, e l'assert del cono *(`_frazione_valida`, `0 < f <= 1`)*
 ### **lo rifiuta per costruzione.** ### ⛔ **Non cambio l'assert:** se succede,
 ### **il punto `D` si ferma la' e lo scrivo.**
+### ✅ **`D0` FATTO: LA FORMA `cs` C'E', E' LOCALE, ED E' SPENTA**
+
+*(collaudo `python primo_ordine/_collauda_cs.py`: ### **`12` su `12`**, `1.04 s`, nel
+`pre-commit`.)*
+
+### ⭐⭐ **IL BRACCIO `0`, coi DUE criteri dell'integrazione** — `M-B1 --contro
+84199e26`:
+
+| | |
+|---|---|
+| i `12` pezzi | ### **AL BIT** |
+| la distanza del passo intero | ### **`0.000000e+00` su ENTRAMBE le scene** — che da `D0` in avanti e' ### **UN CRITERIO** |
+| ### ⛔ **il caso che DEVE fallire** | con la forma ### **ACCESA**: `4.75`/`7.75` e `3.68`/`6.29` — ### **`> 0` su entrambe** |
+
+### ✅ **E <<spenta>> NON E' <<`Lambda_c = 0`>>:** con la forma spenta `dtau_nodo`
+restituisce ### **LO STESSO OGGETTO** `mot.dtau` — ### **nessuna moltiplicazione,
+nessun ulp** — e `cs(lam, 0.0)` ### **ALZA**, perche' spegnere si fa
+### **NON ACCENDENDO.**
+
+### ⭐⭐ **E L'OSSERVAZIONE DI LUCA DELLE `15:14` ERA GIA' RISPETTATA, ma ora e'
+MISURATA.** La forma usa ### **solo `Lambda_k` e uno scalare passato**: niente medie,
+niente somme sul grafo. ### **E il braccio `(l1)`/`(l2)` lo prova con un numero:**
+
+| si cambia `Lambda` in ### **UN nodo**… | quanti `cs` cambiano |
+|---|---|
+| la forma ### **LOCALE** | ### **`1` su `16`** |
+| `Lambda_c = V/N` ### **dinamico** *(la <<strada `3`>>)* | ### **`16` su `16`** |
+
+### ⛔ **Cioe' la non localita' della strada `3` non e' un'opinione: e' `16` contro `1`.**
+### **Le tre strade sono nella mappa** *(sezione `20`)*, con i due motivi dello scarto e
+la nota che ### **la memoria di nascita, se scelta, e' LOCALE.**
+
+### ⛔⛔ **DUE COSE TROVATE, ED ENTRAMBE SONO DOMANDE PER TE**
+
+### ① **`Lambda = 0` da' `cs = 0`, e L'ASSERT DEL CONO LO RIFIUTA** — il messaggio
+dice *«un tempo proprio nullo o negativo e' un orologio fermo, e NON si corregge con un
+pavimento»*. ### ✅ **Non l'ho cambiato**, come il mandato chiede, e il braccio `(z2)`
+### **lo fissa nel codice** cosi' che non cambi in silenzio.
+### 📌 **E nelle scene di oggi NON si presenta:** il minimo di `Lambda` su `250` tick e'
+### **`5.6e-02`**, misurato. ### **Quindi la forma e' usabile, e la domanda resta: un nodo
+senza vuoto ha un orologio fermo, o uno stato senza vuoto non e' fisico?**
+
+### ② ### ⛔ **LA SCHEDA DI `Lambda_c` NON SI PUO' GENERARE DALLA TABELLA, OGGI.**
+`D0` la chiede *«generata dalla tabella, non scritta a mano»*, ### **ma lo schema pretende
+che ogni parametro abbia `valore` E `origine`** *(`primo_ordine/leggi/schema.py`,
+verificato)* — e ### **il valore di `Lambda_c` NON e' deciso.**
+### ⚠ **Le tre vie che vedo, e NON ne scelgo nessuna:** `(a)` ammettere nello schema un
+`valore: NON-DECISO` *(cambia lo schema)*; `(b)` `Lambda_c` nella ### **configurazione** e
+non in tabella *(e allora la scheda non e' generata dalla tabella)*; `(c)` la legge entra
+in tabella ### **quando il valore e' deciso**, e fino ad allora la forma vive nel motore
+col valore ### **passato esplicitamente** — che e' ### **esattamente cio' che `D0` fa
+oggi.**
+
+### ⚠ **E `P-MOD` HA RIFIUTATO IL COMMIT, con ragione:** `motore.py` era a
+### **`699` righe su `700`**, e `D0` lo ha portato oltre. ### ✅ **Non ho accorciato i
+commenti per infilarmici: ho DIVISO**, e ### **cio' che e' uscito e' il MISURATORE**
+*(`_misura_costo_motore.py`)* — ### **un misuratore dentro un modulo del nucleo e' la
+stessa cosa che `grafo.costo` era.** ### **I due metodi di `cs` sono andati in
+`flussi_parziali`, dove vive il tempo proprio.**
+
+**LA SUITE:** ### **`57` su `57`**, `pre-commit` a `269.5 s` su `500` *(`54%`)*.
