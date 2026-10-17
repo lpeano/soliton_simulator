@@ -18109,3 +18109,16 @@ Il mandato dice che `_misura_mb1.PEZZI` e' ### **una lista A MANO di `6` id**, c
 > ### **contiene `CAMM-MATERIA-VUOTO`.** ### **Piu' la prova al carattere** *(le funzioni
 > e il dizionario IDENTICI)*, che non dipende da nessuna misura.
 > ### 📌 **La cura della lista e' il `2-sexies`, il prossimo in coda.**
+### ✅ **IL REFERTO DEL PEZZO `8`, dal blob committato**
+
+`doc/REFERTO_mb1_puo_fallire.txt`, da ### **`sha1-BYTE f5764ea7`**, timbrato
+*«committato e pulito»*: ### **il collaudo `8` su `8`** piu' il confronto contro
+`b150003` — e dentro ci sono ### **le due righe che provano il ramo:**
+
+```
+  l'ordine di questo albero: 12 pezzi, impronta 3fc01fac...; il passo viene da `tick.py`
+  l'ordine di questo albero: 12 pezzi, impronta 3fc01fac...; il passo viene da `deriva.py`
+```
+
+### ⭐ **La prima e' l'albero di oggi, la seconda e' `b150003`** — cioe'
+### **il ramo dichiarato e' esercitato nei DUE versi, e si LEGGE.**
