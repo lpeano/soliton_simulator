@@ -59,10 +59,51 @@ SCENE = ((16, 7), (12, 11))
 NORMA = "locale"
 VUOTO_MODULO = 2.0
 SU2 = True
-# ### ⛔ **I SEI PEZZI, per `id` di legge**: i quattro cambiati ### **piu- i due di
-# ### controllo** *(la moneta e la saturazione, che non sono stati toccati)*.
-PEZZI = ("CAMM-GROVER", "CAMM-SPOSTAMENTO", "CAMM-GROVER-VUOTO",
-         "CAMM-SPOSTAMENTO-VUOTO", "CAMM-MONETA-SPIN", "CAMM-SATURAZIONE")
+# ### ⛔⛔ **I PEZZI SI LEGGONO DALL-ORDINE, dal `2026-10-17`** *(punto `2` del
+# ### mandato unico; la regola e- nominata nel docstring qui sotto)*. ### **Erano una
+# ### LISTA A MANO di `6` id**, che ### **conteneva `CAMM-SATURAZIONE`** *(fuori
+# ### dall-ordine dal `2026-10-15`)* e ### **NON conteneva `CAMM-MATERIA-VUOTO`**, cioe-
+# ### ### **la legge che GIRA.**
+# ### ⚠ **E il `2026-10-16` l-ho USATA COME PROVA:** <<tutti i `12` pezzi coincidono
+# ### AL BIT>> per giustificare lo spostamento del passo -- e ### **quei `12` pezzi non
+# ### contenevano il flusso che gira.**
+# ### ✅ **E LA SATURAZIONE ESCE DA SOLA**, perche- non e- nell-ordine: ### **non la
+# ### togliamo noi.** Se Luca la rimettesse nell-ordine, ### **rientrerebbe da sola.**
+def pezzi_dell_ordine():
+    """Gli `id` ### **DISTINTI** dell-ordine, in ordine di ### **prima apparizione.**
+
+    ### ⛔ **E' la regola `STRUMENTO-LEGGE-DALLA-TABELLA`** *(decisione di Luca del
+    `2026-10-16`)*: uno strumento ### **non contiene** l-`id` di una legge scritto a mano.
+
+    ### ⚠ **Distinti perche- l-ordine e- PALINDROMO:** `12` voci, `6` `id`, e un pezzo
+    misurato due volte ### **darebbe due volte lo stesso byte.**
+    """
+    import composizione as CM
+    fuori = []
+    for idl, _frazione, _tipo in CM.ORDINE:
+        if idl not in fuori:
+            fuori.append(idl)
+    return tuple(fuori)
+
+
+PEZZI = pezzi_dell_ordine()
+
+
+def pezzi_applicabili():
+    """### ⛔ **ALZA se un pezzo dell-ordine NON e- misurabile al bit.**
+
+    ### ⭐ **Il mandato lo chiede cosi-:** *<<la misura ALZA se un pezzo dell-ordine non
+    e- misurabile al bit>>*. ### **Un pezzo che non si sa applicare non si salta: FERMA**,
+    perche- ### **un confronto su un sottoinsieme SILENZIOSO e- un falso-uno.**
+    """
+    PASSO, dove = il_passo_dell_albero()
+    manca = [i for i in PEZZI if i not in PASSO.OPERATORE]
+    assert not manca, (
+        "`M-B1`: i pezzi %r sono NELL-ORDINE e NON sono in `OPERATORE` (letto da `%s`):"
+        " la misura NON SA applicarli da soli, quindi NON PUO- confrontarli al bit."
+        " ### Si aggiunge la riga, oppure la misura ALZA -- un confronto su un"
+        " sottoinsieme silenzioso e- un falso-uno" % (manca, dove))
+    return PEZZI
 
 # ### ⛔ **I FILE DELLA MISURA che viaggiano nell-albero vecchio**, e nient-altro: il
 # ### ### **SIMULATORE la- dentro resta QUELLO DI PRIMA.**
@@ -161,6 +202,18 @@ def scrivi(dove):
     with open(dove, "wb") as f:
         f.write(len(CM.ORDINE).to_bytes(4, "little"))
         f.write(CM.IMPRONTA.encode("ascii"))
+        # ### ⛔⛔ **GLI ID VANNO NEL FILE, dal `2026-10-17`**, e il motivo e- un
+        # ### secondo falso-uno che la cura di oggi ### **avrebbe APERTO:** `contro()`
+        # ### confronta i blocchi ### **per POSIZIONE** e asserisce solo che i due file
+        # ### hanno ### **lo stesso NUMERO di blocchi.**
+        # ### ⚠ **Finche- `PEZZI` era una lista FISSA le due liste erano uguali per
+        # ### costruzione; leggendole DALLA TABELLA possono differire fra i due alberi** --
+        # ### e il confronto metterebbe ### **pezzi diversi credendoli uguali.**
+        # ### ✅ **Percio- il primo blocco sono GLI ID**, e `contro()` li CONFRONTA.
+        _ids = " ".join(PEZZI).encode("utf-8")
+        f.write(len(_ids).to_bytes(8, "little"))
+        f.write(_ids)
+        pezzi_applicabili()
         _p, _dove = il_passo_dell_albero()
         # ### ⭐ **IL RAMO DICHIARATO SI VEDE, e non si deduce:** stampare DA DOVE
         # ### viene il passo e' l'unica prova che ### **il ramo e' esercitato in entrambi
@@ -210,7 +263,11 @@ def _albero_vecchio(commit, dove):
 
 
 def _leggi(dove):
-    """### `(n_pezzi, impronta, [blocchi])` dal file scritto da `scrivi`."""
+    """### `(n_pezzi, impronta, ids, [blocchi])` dal file scritto da `scrivi`.
+
+    ### ⚠ **Il PRIMO blocco sono GLI ID** *(dal `2026-10-17`)*, e non e- un blocco di
+    byte da confrontare: e- ### **la lista dei pezzi di QUELL-albero.**
+    """
     b = open(dove, "rb").read()
     n = int.from_bytes(b[:4], "little")
     imp = b[4:20].decode("ascii")
@@ -221,7 +278,9 @@ def _leggi(dove):
         k += 8
         fuori.append(b[k:k + L])
         k += L
-    return n, imp, fuori
+    assert fuori, "il file dei byte e- VUOTO: %s" % dove
+    ids = tuple(fuori[0].decode("utf-8").split())
+    return n, imp, ids, fuori[1:]
 
 
 def contro(commit):
@@ -253,8 +312,16 @@ def contro(commit):
         sys.stdout.write(r.stderr.decode("utf-8", "replace")[-3000:])
         print("### ⛔ la corsa su %s e' FALLITA" % commit[:7])
         return 1
-    na, ia, ba = _leggi(qui)
-    nb, ib, bb = _leggi(la)
+    na, ia, ids_a, ba = _leggi(qui)
+    nb, ib, ids_b, bb = _leggi(la)
+    # ### ⛔⛔ **IL CONFRONTO NON PARTE SE LE DUE LISTE DI PEZZI DIFFERISCONO**
+    # ### *(dal `2026-10-17`)*. ### **Confrontare pezzi diversi credendoli uguali e' PEGGIO
+    # ### di non confrontare**, e i blocchi si mettono a confronto ### **per POSIZIONE.**
+    assert ids_a == ids_b, (
+        "`M-B1`: i PEZZI dei due alberi NON COINCIDONO, e il confronto NON PARTE."
+        " ### adesso %s;  %s %s. ### I pezzi si leggono dall-ORDINE di ciascun albero:"
+        " se l-ordine e- cambiato, i due lati misurerebbero COSE DIVERSE, e il confronto"
+        " per posizione le crederebbe uguali" % (list(ids_a), commit[:7], list(ids_b)))
     print("-" * 96)
     print("  l'ORDINE: adesso %d pezzi (impronta %s) -- %s %d pezzi (impronta %s)"
           % (na, ia, commit[:7], nb, ib))
@@ -361,7 +428,7 @@ def _byte_dell_albero(commit, dove, tick_src):
     assert not r.returncode, ("la corsa in %s e- FALLITA: %s"
                               % (commit[:7],
                                  (r.stdout + r.stderr).decode("utf-8", "replace")[-700:]))
-    _n, _i, blocchi = _leggi(fuori)
+    _n, _i, _ids, blocchi = _leggi(fuori)
     return _n, _i, blocchi
 
 
@@ -507,6 +574,41 @@ def collaudo():
                "### %d scene su %d col passo intero DIVERSO: e- l-unico numero che vede un"
                " cammino cambiato, ed e- <<informazione, non criterio>>"
                % (_passo_intero_diversi(b_ordine, b_puro), len(SCENE)))
+        # ### ⛔⛔ **IL `2-SEXIES`, braccio che DEVE fallire: un id nell-ORDINE che la
+        # ### misura NON SA applicare.** ### **Si perturba `CM.ORDINE` IN MEMORIA**, come
+        # ### fa il collaudo della deriva: nessun file del repo si tocca.
+        import composizione as CM
+        vecchio_ordine = CM.ORDINE
+        alzato = ""
+        try:
+            CM.ORDINE = (("CAMM-INVENTATA", 0.5, "flusso"),) + tuple(vecchio_ordine)
+            vecchi_pezzi = PEZZI
+            globals()["PEZZI"] = pezzi_dell_ordine()
+            try:
+                pezzi_applicabili()
+            except AssertionError as e:
+                alzato = str(e)[:60]
+            globals()["PEZZI"] = vecchi_pezzi
+        finally:
+            CM.ORDINE = vecchio_ordine
+        _esito("### ⛔ DEVE fallire: un id NELL-ORDINE che la misura non sa applicare",
+               bool(alzato), "### ha alzato: %s" % alzato)
+        # ### ⭐⭐ **IL CONTROLLO POSITIVO DEL `2-SEXIES`: la legge CHE GIRA e- fra i
+        # ### pezzi confrontati, e COINCIDE AL BIT.** ### ⚠ **Fino al `2026-10-16` NON
+        # ### c-era:** `PEZZI` era una lista a mano che conteneva la ### **saturazione**
+        # ### *(fuori dall-ordine)* e ### **non la legge che gira.**
+        import tempfile as _tf
+        _oggi_bin = os.path.join(base, "oggi.bin")
+        scrivi(_oggi_bin)
+        _n5, _i5, ids5, b_oggi = _leggi(_oggi_bin)
+        _k = PEZZI.index("CAMM-MATERIA-VUOTO") if "CAMM-MATERIA-VUOTO" in PEZZI else -1
+        ugua = _k >= 0 and all(
+            b_oggi[j * (len(PEZZI) + 1) + _k] == b_puro[j * (len(PEZZI) + 1) + _k]
+            for j in range(len(SCENE)))
+        _esito("### ⭐ la legge CHE GIRA e- fra i pezzi, e coincide AL BIT contro 8c7b928",
+               ugua, "### `CAMM-MATERIA-VUOTO` e- il pezzo n.%d di %d, e i suoi byte"
+               " coincidono su %d scene su %d" % (_k + 1, len(PEZZI), len(SCENE),
+                                                  len(SCENE)))
         # ### ⭐ **E l-assert che la misura non PORTA il passo: si chiama, non si descrive.**
         _la_misura_non_porta_il_passo()
         _esito("### la misura NON definisce nessuna funzione del passo", True,

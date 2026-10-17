@@ -18137,3 +18137,44 @@ metterebbe ### **pezzi diversi credendoli uguali.**
 ### ✅ **Quindi il file dei byte portera' ANCHE GLI ID, e `contro()` asserira' che le
 due liste coincidono.** ### **Non lo so ancora misurato** — e' scritto fra le cose che
 non so, e lo verifico.
+
+### ✅ **`2-SEXIES` FATTO: `M-B1` ADESSO COPRE LA LEGGE CHE GIRA**
+
+| | prima | dopo |
+|---|---|---|
+| i pezzi | una ### **lista A MANO** di `6` id | i ### **`6` id DISTINTI dell'ordine** *(l'ordine ha `12` voci, ### **palindromo**)* |
+| `CAMM-SATURAZIONE` *(fuori dall'ordine)* | ### **DENTRO** | ### **fuori** — ### **esce DA SOLA**, perche' non e' nell'ordine |
+| `CAMM-MATERIA-VUOTO` *(la legge che GIRA)* | ### **FUORI** | ### **dentro**, ed e' ### **il pezzo n.`1` di `6`** |
+| il conteggio | `6` | ### **`6`** — ### **lo stesso numero, un INSIEME diverso** |
+| il collaudo | `8`/`8` | ### **`10`/`10`** |
+
+### ⭐⭐ **E IL CONTROLLO POSITIVO E' QUELLO CHE MANCAVA:** `CAMM-MATERIA-VUOTO` e'
+fra i pezzi confrontati e ### **coincide AL BIT contro `8c7b928`**, su ### **`2` scene su
+`2`**. ### **Adesso la frase <<`M-B1` passa al bit>> parla anche del flusso che gira.**
+
+### ✅ **E I DUE CONTROLLI POSITIVI COL SET NUOVO:** contro `8c7b928` e contro
+`b150003`, ### **`12`/`12` AL BIT** *(`6` pezzi x `2` scene)*, e la distanza del passo
+intero ### **`0.000000e+00`** su entrambe le scene.
+
+### ⛔⛔ **E IL SECONDO BUCO, CHE LA CURA AVREBBE APERTO, E' CHIUSO NELLO STESSO
+COMMIT**
+
+`contro()` confronta i blocchi ### **per POSIZIONE** e asseriva solo che i due file hanno
+### **lo stesso NUMERO di blocchi.** ### **Finche' `PEZZI` era una lista fissa, le due
+liste erano uguali per costruzione** — leggendole ### **dalla tabella** possono
+differire fra i due alberi.
+### ✅ **Adesso il file dei byte porta ANCHE GLI ID**, e `contro()` ### **ALZA se le due
+liste non coincidono:** *«confrontare pezzi diversi credendoli uguali e' peggio di non
+confrontare»*.
+### 📌 **L'avevo scritto fra le cose che NON sapevo, nel task history, e l'ho chiuso.**
+
+### ⭐ **E DUE PRESIDI HANNO MORSO, entrambi con ragione:**
+### ① `[[P-RIF]]`: avevo messo l'`id` della regola ### **in un COMMENTO** — e un
+riferimento che una macchina deve seguire ### **non vive nella prosa.** ### **Spostato nel
+docstring.**
+### ② `[[P-TAB]]`: l'eccezione di `_misura_mb1.py` e' diventata ### **ORFANA**, perche'
+### **la cura ha TOLTO il riferimento alla saturazione.** ### **Togliata nello stesso
+commit** — ed e' ### **la terza volta in tre giorni** che quel presidio trova una cura
+a meta'.
+
+**LA SUITE:** ### **`56` su `56`**, `pre-commit` a `268.0 s` su `500` *(`54%`)*.

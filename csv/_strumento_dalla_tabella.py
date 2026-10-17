@@ -99,9 +99,6 @@ ECCEZIONI = {
  ("primo_ordine/termini/camm_saturazione.py", "CAMM-SATURAZIONE"):
     "e- il LEGAME GENERATO della legge: si rigenera dalla tabella, e scriverlo a mano"
     " e- vietato",
- ("primo_ordine/_misura_mb1.py", "CAMM-SATURAZIONE"):
-    "`PEZZI` e- una lista A MANO di `6` id, e la legge nuova NON E- COPERTA -- ###"
-    " SCADUTA, e la cura e- il pezzo `2-sexies` della coda",
  ("primo_ordine/_misura_mb2.py", "CAMM-SATURAZIONE"):
     "`ORDINE_VECCHIO`: un confronto STORICO dichiarato, che DEVE nominare l-ordine di"
     " allora",
