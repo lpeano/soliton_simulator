@@ -69,7 +69,6 @@ if _QUI not in sys.path:
     sys.path.insert(0, _QUI)
 
 import materia_vuoto as MV                                    # noqa: E402
-import saturazione as SAT                                     # noqa: E402
 
 
 def densita_estremita(st, mot, par_moneta, fuori):

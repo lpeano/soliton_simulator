@@ -102,8 +102,6 @@ ECCEZIONI = {
  ("primo_ordine/_misura_mb2.py", "CAMM-SATURAZIONE"):
     "`ORDINE_VECCHIO`: un confronto STORICO dichiarato, che DEVE nominare l-ordine di"
     " allora",
- ("primo_ordine/_misura_mb2.py", "saturazione"):
-    "IMPORT MORTO -- ### SCADUTO, e la cura e- il pezzo `2-septies` della coda",
  ("primo_ordine/_misura_verso_l2.py", "CAMM-SATURAZIONE"):
     "`ORDINE_VECCHIO`: un confronto STORICO dichiarato",
  ("primo_ordine/_misura_verso_l2.py", "saturazione"):
@@ -116,14 +114,9 @@ ECCEZIONI = {
  ("primo_ordine/bande.py", "CAMM-SATURAZIONE"):
     "`salta` spegne `N` PER NOME, e oggi non spegne niente -- ### SCADUTO, e la cura e-"
     " il pezzo `2-quinquies` della coda",
- ("primo_ordine/_collauda_tempo_proprio.py", "CAMM-SATURAZIONE"):
-    "il braccio `(2)` chiede che la saturazione dipenda da `dtau` -- ### SCADUTO, e la"
-    " cura e- il pezzo `2-septies` della coda",
  ("primo_ordine/_misura_forme_l2.py", "CAMM-SATURAZIONE"):
     "SOSTITUISCE l-operatore PER NOME -- ### SCADUTO, misura storica col referto gia-"
     " committato",
- ("primo_ordine/energia.py", "saturazione"):
-    "IMPORT MORTO -- ### SCADUTO, e la cura e- il pezzo `2-septies` della coda",
  ("primo_ordine/termini/camm_forma_d.py", "CAMM-FORMA-D"):
     "e- il LEGAME GENERATO della legge: si rigenera dalla tabella",
  ("csv/_censimento_legge_vecchia.py", "CAMM-SATURAZIONE"):

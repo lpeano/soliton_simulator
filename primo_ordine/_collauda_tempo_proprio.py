@@ -70,17 +70,30 @@ def esito(che, passa, nota=""):
     print("  %-56s %s   %s" % (che[:56], "PASSA" if passa else "### FALLISCE", nota))
 
 
-def dipende_da_dtau(idl, frazione, nn=12, seme=7):
+def dipende_da_dtau(idl, frazione, nn=12, seme=7, dtau_fisso=None):
     """### `max |psi(dtau) - psi(dtau/2)|` per **UN pezzo** della composizione.
 
     ### ⚠ **Si confrontano DUE `dtau` sullo STESSO stato iniziale**, non due corse: cosi'
     cio' che si misura e' ### **la dipendenza del pezzo dal passo**, e nient'altro.
+
+    ### ⛔⛔ **`dtau_fisso` SERVE AL CASO CHE DEVE FALLIRE** *(punto `3` del mandato
+    unico del `2026-10-17`)*: con un valore, il passo del motore si ### **FISSA dopo aver
+    costruito la scena**, quindi ### **il pezzo diventa INDIPENDENTE da `dtau`** e
+    ### **deve risultare VIOLATORE.**
+    ### ✅ **E la perturbazione e- IN MEMORIA, su una scena costruita qui:** nessun file
+    del repo si tocca. ### ⚠ **Misurato il `2026-10-17`: con `mot.dtau` fisso la
+    differenza e- `0.0` ESATTO** -- cioe- l-operatore lo legge ### **a ogni corsa**, e il
+    braccio ### **NON e- vacuo.**
     """
     nome, vuole_par = TK.OPERATORE[idl]
     fuori = []
     for dt in (0.4, 0.2):
         _i, mot, st, par = DV.scena(nn, seme, dt, norma="locale", vuoto_modulo=2.0,
                                     su2=True)
+        if dtau_fisso is not None:
+            # ### ⛔ **IL RAMO DEL CASO CHE DEVE FALLIRE**, e non c-e- altra via: il
+            # ### passo vive ### **nel motore**, e un pezzo lo legge da la-.
+            mot.dtau[:] = dtau_fisso
         mot.apri_tick()
         mot.operatori[nome](st, par if vuole_par else {}, frazione)
         mot.chiudi_tick()
@@ -112,12 +125,36 @@ def main(argv):
     esito("### (1) i violatori sono ESATTAMENTE quelli attesi",
           tuple(sorted(visti)) == tuple(sorted(VIOLATORI_ATTESI)),
           "visti %s" % (tuple(sorted(visti)),))
-    # ### ⛔ **E IL CASO CHE DEVE CAMBIARE: la moneta e la saturazione DIPENDONO da `dtau`**
-    buoni = [x for x in ("CAMM-MONETA-SPIN", "CAMM-SATURAZIONE")
-             if x not in visti]
-    esito("### (2) DEVE DIPENDERE: la moneta di spin e la saturazione",
-          len(buoni) == 2,
-          "senza questo il braccio (1) passerebbe anche con TUTTO fermo")
+    # ### ⛔⛔ **IL BRACCIO `(2)` RISCRITTO IL `2026-10-17`, e prima era un
+    # ### FALSO-UNO PER META-.** Diceva *<<la moneta e LA SATURAZIONE dipendono da
+    # ### `dtau`>>* nominandole ### **a mano** -- e `CAMM-SATURAZIONE` ### **non e- nell-
+    # ### ordine dal `2026-10-15`**, quindi ### **non viene MAI misurata**, quindi
+    # ### ### **non e- mai fra i violatori**, quindi ### **il braccio la contava BUONA.**
+    # ### ⚠ **Meta- del braccio era soddisfatta DALL-ASSENZA.**
+    # ### ✅ **Adesso i pezzi si leggono DALLA TABELLA**, e il braccio dice
+    # ### ### **<<TUTTI i pezzi che GIRANO dipendono da `dtau`>>**, col numero piu- piccolo
+    # ### misurato accanto.
+    per_pezzo = {}
+    for idl, frazione in guardati:
+        d = dipende_da_dtau(idl, frazione)
+        per_pezzo[idl] = min(per_pezzo.get(idl, d), d)
+    peggio = min(per_pezzo.values()) if per_pezzo else 0.0
+    quale = [k for k, v in per_pezzo.items() if v == peggio]
+    esito("### (2) DEVE DIPENDERE: TUTTI i pezzi che GIRANO, letti dalla tabella",
+          bool(per_pezzo) and peggio >= CAMBIA_MIN,
+          "%d pezzi distinti dall-ordine; il piu- debole e- %s con %.3e (la soglia e- %.0e)"
+          % (len(per_pezzo), quale[0] if quale else "-", peggio, CAMBIA_MIN))
+    # ### ⛔⛔ **IL CASO CHE DEVE FALLIRE, ed e- il CONTROLLO POSITIVO VERO del
+    # ### braccio `(1)`:** il `(1)` dice *<<i violatori sono esattamente quelli attesi>>* con
+    # ### ### **ZERO attesi**, e passerebbe ### **anche se la misura non sapesse VEDERE una
+    # ### violazione.** ### ✅ **Rendendo un pezzo dell-ordine INDIPENDENTE da `dtau`, la
+    # ### misura DEVE vederlo** -- e questo esclude quel caso.
+    idl0, fraz0 = guardati[0]
+    d_fisso = dipende_da_dtau(idl0, fraz0, dtau_fisso=0.4)
+    esito("### (2) DEVE fallire: un pezzo dell-ordine reso INDIPENDENTE da `dtau`",
+          d_fisso < CAMBIA_MIN,
+          "`%s` col passo del motore FISSO: |differenza| = %.1e, cioe- VIOLATORE -- senza"
+          " questo il braccio (1) passerebbe anche con la misura CIECA" % (idl0, d_fisso))
     # ### ⚠ **E il conteggio, che e- il numero che cito nei referti**
     # ### ⚠ **IL CONTEGGIO SI LEGGE DALL-ELENCO, non da un letterale:** prima qui
     # ### c-era ### **`4`** scritto a mano, e svuotando l-elenco ### **sarebbe diventato

@@ -58,7 +58,6 @@ if _QUI not in sys.path:
     sys.path.insert(0, _QUI)
 sys.path.insert(0, os.path.join(os.path.dirname(_QUI), "csv"))
 
-import saturazione as SAT                                     # noqa: E402
 import tick as TK                                             # noqa: E402
 
 # ### ⛔ **LA CONFIGURAZIONE INTERA, DICHIARATA E STAMPATA**

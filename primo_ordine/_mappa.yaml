@@ -144,7 +144,7 @@ moduli:
 
   - nome: _misura_mb2.py
     responsabilita: l-errore di conservazione di H_tot contro dtau, a tempo totale fisso
-    importa: [_presidio, deriva, saturazione, tick]
+    importa: [_presidio, deriva, tick]
 
   - nome: _misura_c_flussi.py
     responsabilita: dove la C si rompe coi flussi parziali, e che cosa la riparerebbe
@@ -192,7 +192,7 @@ moduli:
 
   - nome: energia.py
     responsabilita: E come somma di densita- locali, la corrente sugli archi e il bilancio
-    importa: [materia_vuoto, saturazione]
+    importa: [materia_vuoto]
 
   - nome: _collauda_energia.py
     responsabilita: il collaudo di E e del bilancio, e il fallimento affermato come fatto

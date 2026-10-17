@@ -18236,3 +18236,35 @@ Il `(1)` dice *«i violatori sono esattamente quelli attesi»*, e gli attesi son
 `dtau`»* ### **e' la stessa affermazione del `(1)`, non il suo controllo.**
 ### ✅ **Il controllo vero e' quello che il mandato chiede:** ### **un pezzo dell'ordine
 reso INDIPENDENTE da `dtau` deve essere VISTO come violatore.**
+
+### ✅ **`2-SEPTIES` FATTO: il braccio `(2)` adesso CONTROLLA qualcosa**
+
+| il braccio | prima | dopo |
+|---|---|---|
+| `(2)` | *«la moneta e ### **la saturazione** dipendono da `dtau`»*, ### **due id a mano** | *«### **TUTTI** i pezzi che GIRANO dipendono da `dtau`»*, ### **letti dalla tabella**: `6` pezzi distinti, il piu' debole e' ### **`CAMM-MATERIA-VUOTO` con `1.415e-01`** *(soglia `1e-09`)* |
+| il ### **caso che DEVE fallire** | ### **non c'era** | un pezzo dell'ordine reso ### **INDIPENDENTE da `dtau`** *(il passo del motore FISSO)*: ### **`|differenza| = 0.0e+00`, cioe' VIOLATORE** |
+
+### ⭐⭐ **E IL CASO CHE DEVE FALLIRE E' IL CONTROLLO POSITIVO CHE MANCAVA.** Il
+braccio `(1)` dice *«i violatori sono esattamente quelli attesi»* con ### **zero attesi**,
+e passava ### **anche se la misura fosse stata CIECA.** ### **Adesso quel caso e'
+escluso.**
+
+### ✅ **E L'INCOGNITA `(a)` DEL TASK HISTORY AVEVA UNA RISPOSTA:** fissare `mot.dtau`
+dopo la costruzione della scena ### **funziona** — la differenza e' ### **`0.0` ESATTO**,
+cioe' l'operatore legge il passo ### **a ogni corsa.** ### **Il braccio non e' vacuo.**
+
+### ✅ **E L'INCOGNITA `(c)` ERA GIUSTA: le eccezioni orfane erano `3`**, non `2`
+— `energia.py`, `_misura_mb2.py` e ### **`_collauda_tempo_proprio.py`**, che non nomina
+piu' la saturazione. ### **Togliate nello stesso commit**, e `[[P-TAB]]` torna a `0`.
+### 📌 **E `ORDINE_VECCHIO` di `_misura_mb2.py` RESTA**, con la sua eccezione: e'
+### **un confronto storico dichiarato**, e un confronto storico ### **deve** nominare
+l'ordine di allora.
+
+### ⚠ **E `[[P-MOD]]` HA MORSO ANCHE LUI:** togliendo i due `import` morti, la mappa
+dichiarava ancora `saturazione` per quei file — ### **una dipendenza dichiarata e non
+usata e' un permesso che nessuno ha chiesto.** ### **Due righe della mappa, corrette.**
+
+**LA SUITE:** ### **`56` su `56`**, `pre-commit` a `267.8 s` su `500` *(`54%`)*.
+### ✅ **E i TRE GIUDICI del punto `D` sono riparati:** `M-B1` copre la legge che gira
+*(`2-sexies`)*, il tempo proprio guarda i pezzi che girano *(`2-septies`)*, e il confine
+di `M-B1` e' ### **nella sua scheda** *(l'integrazione del `2026-10-17`)*.
