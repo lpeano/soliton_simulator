@@ -239,6 +239,7 @@ COLLAUDI = (
      "csv/_strumento_dalla_tabella.py --collaudo", "pre-commit"),
     ("`D0` la forma `cs` spenta e' il passo di oggi",
      "primo_ordine/_collauda_cs.py", "pre-commit"),
+    ("`D1` l-invarianza di scala", "primo_ordine/_collauda_scala.py", "pre-commit"),
     # ### ⚠ **`solo-CI` E NON <<pre-commit>>, e non per il tempo:** il CENSIMENTO dei
     # ### rami ### **non e- un presidio e non blocca niente** *(lo dice il mandato)*,
     # ### quindi ### **non ha una riga nel hook** -- e scrivere `pre-commit` qui sarebbe

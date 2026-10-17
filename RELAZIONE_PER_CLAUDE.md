@@ -18414,3 +18414,53 @@ gia' aperta** *(`[[DOMANDA-ESTREMITA-NUOVE-INIZIALI]]`)*. ### **Far nascere un p
 sarebbe peggio che trovarne uno.**
 
 **Il collaudo di `cs`: ### `15` su `15`** *(erano `12`)*. **La suite: `57` su `57`.**
+### ✅ **`D1` FATTO: L'INVARIANZA DI SCALA REGGE, E IL PUNTO `D` NON SI FERMA**
+
+*(collaudo `python primo_ordine/_collauda_scala.py`: ### **`14` su `14`**, `1.16 s`, nel
+`pre-commit`.)*
+
+| il braccio | il numero |
+|---|---|
+| forma ### **SPENTA**, `lambda = 2` e `0.5` | ### **AL BIT su `50` tick**, entrambe le scene |
+| forma ### **SPENTA**, `lambda = 3`, a ### **`1` tick** | `2.0` e `1.8` ulp *(soglia `8`)* |
+| ### ⛔ **DEVE fallire:** ACCESA a `Lambda_c` ### **FISSA** | ### **`4.5e+15` e `4.8e+15` ulp, GIA' A UN TICK** |
+| ### ⭐ **la CONTROPROVA:** `Lambda_c` per `lambda^2` | ### **AL BIT su `50` tick** per le potenze di `2`; `2.4` e `2.9` ulp a `lambda = 3` |
+
+### ⭐⭐ **E LA CONTROPROVA E' LA COSA CHE CONTA:** se contasse `Lambda_c` da sola,
+### **scalarla non rimetterebbe le cose a posto.** ### **Le rimette AL BIT** — quindi
+### **conta SOLO il rapporto `Lambda_c/Lambda_medio`**, che e' cio' che `D1` doveva
+provare.
+
+### ⛔⛔ **MA DEVO CORREGGERE IL CRITERIO DEL MANDATO, e il motivo e' MISURATO**
+
+Il mandato chiede *«`3` per il controllo in ulp (`8` ulp), su `50` tick»*.
+### **Su `50` tick quel braccio FALLISCE: `96.3` e `100.0` ulp.**
+### ⚠ **E NON ho allargato la banda** *(una banda non si allarga per far passare un
+braccio)*: ho ### **misurato che cosa stesse misurando.**
+
+```
+tick:        0      1      2      5     10     25     50    100
+ulp lam=3:  0.6    2.0    2.7    5.6   15.2   28.7   96.3  1902.1
+ulp lam=2:  0.0    0.0    0.0    0.0    0.0    0.0    0.0     0.0
+```
+
+### ⛔ **A TICK `0` — SENZA EVOLVERE — `lambda = 3` da' GIA' `0.6` ulp:** e'
+### **`(3x)/3 != x` in IEEE-754**, e non c'entra niente con la fisica. ### **Da li' il
+residuo CRESCE**, perche' la dinamica non e' lineare: a `50` tick quel braccio misura
+### **l'AMPLIFICAZIONE di un arrotondamento**, non l'invarianza.
+
+> ### ✅ **E LA PROVA CHE NON C'E' NESSUNA SCALA NASCOSTA E' UN'ALTRA, ed e' PIU'
+> FORTE di quella chiesta:** ### **`lambda = 2` e `0.5` sono AL BIT a OGNI numero di
+> tick, fino a `100`.** ### ⛔ **Una scala assoluta in una legge romperebbe ANCHE
+> quelli** — una soglia ### **non guarda** se `lambda` e' una potenza di `2`.
+> ### **Quindi la prima riga di `D1` regge, e il punto `D` NON si ferma.**
+
+### 📌 **PERCIO' I BRACCI SONO: al bit per le potenze di `2` su `50` tick** *(piu' forte
+del chiesto)*, e ### **`8` ulp per `lambda = 3` a UN tick** — ### **il numero di tick
+in cui quella soglia misura l'equivarianza e non l'amplificazione.** ### **La crescita
+resta STAMPATA come informazione**, cosi' chi legge il referto ### **vede perche'.**
+### ⚠ **E il caso che DEVE fallire non ha avuto bisogno di `50` tick:** la forma
+accesa rompe l'invarianza ### **al primo tick**, perche' ### **e' la forma a introdurre
+la scala, non la dinamica ad amplificarla.**
+
+**LA SUITE:** ### **`58` su `58`**, `pre-commit` a `277.7 s` su `500` *(`56%`)*.

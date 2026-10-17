@@ -66,6 +66,10 @@ moduli:
     responsabilita: il collaudo del determinismo, e i due processi byte-identici
     importa: [determinismo, schema_config]
 
+  - nome: _collauda_scala.py
+    responsabilita: l invarianza di scala -- al bit per le potenze di due, e la controprova con la scala del vuoto
+    importa: [_presidio, deriva, flussi_parziali, tick]
+
   - nome: _collauda_schema_camminata.py
     responsabilita: il collaudo dello schema della camminata, nei DUE VERSI
     importa: [_presidio, schema]
