@@ -18660,3 +18660,22 @@ testo ### **non passa dalla shell**, mai. ### **La prima volta era un commento i
 `_misura_mb1.py`, questa un paragrafo di qui** -- e in entrambi i casi ### **il contenuto
 era GIA' committato quando l'ho visto.** ### ✅ **Il modo giusto e' un file nello
 scratchpad**, ed e' cosi' che questa riga e' stata scritta.
+### 📌 **IL TASK HISTORY DELLA MISURA `H_w`, PRIMA DEL CODICE**
+
+`doc/TASK_HISTORY/2026-10-17_Hw_energia_pesata_che_separa_le_strade.md`.
+### ✅ **E LA MAPPA PEZZO -> PESO, letta dal sorgente e non supposta:** i due Grover,
+la moneta e l'accoppiamento `N` leggono ### **il peso del NODO** *(`s_nodo` /
+`dtau_nodo`)*; i due spostamenti leggono ### **`s_arco`, la media ARMONICA di `B-3`.**
+### **E' questa mappa che divide i termini di `h_tot` in due gruppi** -- non una scelta
+mia.
+### ⛔ **E DICO PRIMA CHE COSA MI ASPETTO, e dove potrei sbagliare:** credo che `(a)`
+REGGA *(con `cs` congelato il generatore non dipende dal tempo, e lo Strang di un
+generatore fisso conserva l'energia DI QUEL generatore)*, ### **ma il peso dell'arco e'
+una media ARMONICA dei capi**, e non e' detto che il generatore che il passo integra
+sull'arco sia `w_a` volte quello di `h_tot`. ### **Se non lo e', `(a)` cade -- e sarebbe
+la risposta piu' informativa.**
+
+### ⛔ **E UN MIO COMMENTO FALSO, trovato rileggendo il codice per questo lavoro:** in
+`_collauda_cs_l1.py` avevo scritto che il motore ### **azzera `cs` a fine tick.**
+### **NON E' VERO:** `chiudi_tick` non tocca `cs`, e l'ho ### **verificato correndo**
+*(`mot.cs` dopo un tick e' intatto)*. ### **Si corregge col codice del prossimo commit.**
