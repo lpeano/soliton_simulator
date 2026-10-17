@@ -250,6 +250,10 @@ moduli:
     responsabilita: il collaudo della forma cs -- la forma spenta e' il passo di oggi al bit
     importa: [_presidio, checkpoint, deriva, flussi_parziali, incidenza, motore, schema_config, stato, tick]
 
+  - nome: _collauda_cs_centro.py
+    responsabilita: cs al centro del palindromo a punto fisso -- i giri e il secondo ordine
+    importa: [_presidio, composizione, deriva, flussi_parziali, tick]
+
   - nome: _collauda_deriva.py
     responsabilita: il collaudo della deriva, e presidia il FALSO-ZERO del termine spento
     importa: [_presidio, composizione, deriva, deriva_variabile, energia, materia_vuoto, motore, saturazione, tick]
@@ -333,7 +337,7 @@ moduli:
 
   - nome: tick.py
     responsabilita: il passo della camminata -- un tick nell ordine della tabella, e la mappa legge-operatore
-    importa: [composizione]
+    importa: [composizione, flussi_parziali]
 
   - nome: timbro.py
     responsabilita: l-impronta di cio- che ha girato, e la ripresa che rifiuta

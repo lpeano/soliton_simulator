@@ -28,7 +28,15 @@ import sys
 _QUI = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, _QUI)
 sys.path.insert(0, os.path.join(_QUI, "leggi"))
+import numpy as np                                             # noqa: E402
+
 import composizione as CM                                     # noqa: E402
+import flussi_parziali as FP                                  # noqa: E402
+
+# ### ⛔ **LA SOGLIA DEL PUNTO FISSO: gli ULP**, come il mandato chiede *(<<risolto a
+# ### punto fisso fino agli ulp>>)*. ### ⚠ **E- RELATIVA al massimo di `cs`**, perche-
+# ### un assoluto su una grandezza in `[0, 1)` ### **sarebbe una scala nascosta.**
+EPS_CS = 8.0 * float(np.finfo(float).eps)
 
 # ### ⛔ **LA LEGGE -> L'OPERATORE, e NON e' una mia scelta:** la lista delle leggi e il
 # ### loro ordine stanno in `composizione.py`, che e' ### **GENERATA dalla tabella**; qui
@@ -52,7 +60,7 @@ OPERATORE = {
 }
 
 
-def percorri_tick(st, mot, par, salta, al_primo):
+def percorri_tick(st, mot, par, salta, al_primo, quanti):
     """### IL TICK, PERCORSO IN UN SOLO POSTO: ### **l-ordine della tabella, INTERO.**
 
     ### ⛔⛔ **ESISTE PERCHE- C-ERANO DUE PERCORSI** *(cura del `2026-10-16`)*:
@@ -64,13 +72,19 @@ def percorri_tick(st, mot, par, salta, al_primo):
     esso sia**: e- la fotografia dello stato che entra nei pezzi lineari.
     `salta` toglie dei pezzi ### **per id**, e serve a `vuoto_cammina=False`.
 
-    ### ⛔ **E I DUE ARGOMENTI NON HANNO UN VALORE DI COMODO** *(punto `15(b)`, dal
-    `2026-10-16`)*: si passa ### **`()` e `None` ESPLICITI.** ### **Un parametro non
-    presente e- un ERRORE, non un comportamento a sorpresa** -- e questo modulo e-
+    `quanti` dice ### **QUANTI pezzi applicare**: `len(CM.ORDINE)` e- il tick intero.
+    ### ⛔⛔ **ESISTE PER `D2`** *(`2026-10-17`)*: `cs` si valuta ### **sullo stato
+    al CENTRO del palindromo**, e per arrivare al centro ### **serve META- del tick.**
+    ### ✅ **E serve QUI e non in una copia del ciclo:** un secondo percorso del tick
+    ### **e- il difetto che questo modulo esiste per impedire.**
+
+    ### ⛔ **E I TRE ARGOMENTI NON HANNO UN VALORE DI COMODO** *(punto `15(b)`, dal
+    `2026-10-16`)*: si passa ### **`()`, `None` e il numero ESPLICITI.** ### **Un parametro
+    non presente e- un ERRORE, non un comportamento a sorpresa** -- e questo modulo e-
     ### **nel NUCLEO**, dove il tetto dei `default` e- ### **ZERO.**
     """
     mot.apri_tick()
-    for k, (idl, frazione, _tipo) in enumerate(CM.ORDINE):
+    for k, (idl, frazione, _tipo) in enumerate(CM.ORDINE[:quanti]):
         if idl not in salta:
             nome, vuole_par = OPERATORE.get(idl, (None, None))
             assert nome, (
@@ -83,6 +97,76 @@ def percorri_tick(st, mot, par, salta, al_primo):
     mot.chiudi_tick()
 
 
+# ### ⛔ **IL TETTO DEI GIRI, e NON e- una manopola:** e- ### **il numero oltre il
+# ### quale si DICHIARA che il punto fisso non converge**, e il mandato dice
+# ### ### **<<relaziona coi numeri e NON scegliere un altro schema>>.**
+# ### ⚠ **Misurato il `2026-10-17`: il MASSIMO dei giri e` 47 (scena nn=16, Lambda_c = Lambda), e il tetto e` 120 -- cioe` il numero oltre il quale si DICHIARA che non converge.**
+GIRI_MAX = 120
+
+
+def meta_del_palindromo():
+    """### ⭐ **IL CENTRO: metà dei pezzi dell-ordine**, e ### **si DERIVA.**
+
+    ### ⚠ **E l-ordine deve avere un numero PARI di pezzi**, altrimenti ### **un
+    <<centro>> non esiste** e si ALZA invece di arrotondare.
+    """
+    n = len(CM.ORDINE)
+    assert n % 2 == 0, (
+        "l-ordine di composizione ha %d pezzi, che e- DISPARI: un palindromo di %d pezzi"
+        " NON HA UN CENTRO fra due pezzi, e `cs` al centro non si puo- definire."
+        " ### Si cambia la tabella, non si arrotonda" % (n, n))
+    return n // 2
+
+
+def cs_al_centro(st, mot, par, lambda_c, fp):
+    """### `(cs, giri)`: ### **`cs` dallo stato al CENTRO del palindromo, a PUNTO FISSO.**
+
+    ### ⛔⛔ **IL PUNTO DELICATO DI `D2`, con le parole del mandato:** `cs` dipende
+    da `Lambda`, e ### **`Lambda` cambia DURANTE il passo**, quindi il tempo proprio
+    diventa ### **dinamico.** ### **Un `cs` letto all-INIZIO del passo ROMPE IL
+    PALINDROMO.**
+
+    ### ✅ **LA VALUTAZIONE SIMMETRICA:** `cs` si legge ### **sullo stato al centro**,
+    e siccome per arrivare al centro serve ### **`cs`**, si itera:
+
+    ```
+    cs_0        = cs(Lambda allo stato INIZIALE)        (la prima ipotesi)
+    cs_{n+1}    = cs(Lambda allo stato al CENTRO, avanzato con cs_n)
+    ```
+
+    ### **e si ferma quando due giri coincidono AGLI ULP.**
+    ### ⚠ **L-iterazione gira su una COPIA**: lo stato vero ### **non si muove** finche-
+    il `cs` non e- deciso.
+    ### ⛔ **E se non converge entro `GIRI_MAX` si ALZA**, perche- il mandato dice
+    ### **di relazionare e NON di scegliere un altro schema.**
+    """
+    meta = meta_del_palindromo()
+    lam = mot.densita_vuoto(st)
+    prec = FP.cs(lam, lambda_c, fp).copy()
+    for giri in range(1, GIRI_MAX + 1):
+        copia = {k: (v.copy() if hasattr(v, "copy") else v) for k, v in st.items()}
+        mot.cs = prec
+        percorri_tick(copia, mot, par, (), None, meta)
+        nuovo = FP.cs(mot.densita_vuoto(copia), lambda_c, fp).copy()
+        scarto = float(np.max(np.abs(nuovo - prec)))
+        if scarto <= EPS_CS * float(np.max(np.abs(nuovo))):
+            mot.cs = nuovo
+            return nuovo, giri
+        prec = nuovo
+    raise AssertionError(
+        "il punto fisso di `cs` NON CONVERGE in %d giri (ultimo scarto %.3e): il mandato"
+        " dice di RELAZIONARE coi numeri e NON di scegliere un altro schema, quindi questo"
+        " ALZA invece di fermarsi a un valore qualunque" % (GIRI_MAX, scarto))
+
+
+def tick_con_cs(st, mot, par, lambda_c):
+    """### Un tick ### **con `cs` SIMMETRICO**: `(giri,)` che il punto fisso ha speso."""
+    fp = mot._b("tk_cs", (mot.inc.n,), float)
+    _c, giri = cs_al_centro(st, mot, par, lambda_c, fp)
+    percorri_tick(st, mot, par, (), None, len(CM.ORDINE))
+    return giri
+
+
 def tick(st, mot, par):
     """### UN tick, ### **nell'ordine della tabella e non in uno mio.**"""
-    percorri_tick(st, mot, par, (), None)
+    percorri_tick(st, mot, par, (), None, len(CM.ORDINE))

@@ -18469,3 +18469,62 @@ la scala, non la dinamica ad amplificarla.**
 `doc/referti_l2/invarianza_di_scala.txt`, da ### **`sha1-BYTE 0e4452b6`**, timbrato
 *«committato e pulito»*: i ### **`14` bracci** piu' ### **la tabella della
 crescita**, che e' la parte che spiega ### **perche' il criterio va letto a un tick.**
+### ✅ **`D2` FATTO: LA VALUTAZIONE SIMMETRICA FUNZIONA, E COSTA `23` TICK PER TICK**
+
+*(collaudo `python primo_ordine/_collauda_cs_centro.py`: ### **`10` su `10`**, `0.9 s`,
+nel `pre-commit`.)*
+
+### ⭐⭐ **IL RISULTATO, in tre numeri — e il caso che DEVE fallire e' il terzo:**
+
+| il modo | la pendenza |
+|---|---|
+| forma ### **SPENTA** | ### **`2.007`** — il secondo ordine di oggi |
+| `cs` al ### **CENTRO** *(punto fisso)* | ### **`2.001`** — ### **IL SECONDO ORDINE E' CONSERVATO** |
+| `cs` a ### **INIZIO PASSO** | ### **`0.997`** — ### **PERSO: e' il primo ordine, il palindromo e' rotto** |
+
+### ✅ **Cioe' la valutazione simmetrica fa esattamente il suo lavoro, e la variante
+ingenua perde ESATTAMENTE cio' che il mandato prevedeva che perdesse.**
+
+### ⛔⛔ **IL PUNTO FISSO CONVERGE IN OGNI REGIME, MA IL COSTO E' UN NUMERO CHE DEVI
+VEDERE**
+
+| la scena | `Lambda_c` | i giri | la contrazione |
+|---|---|---|---|
+| `nn=16 seme=7` | `0.8` | `38` | `0.415` |
+| `nn=16 seme=7` | `8.0` | ### **`47`** | `0.490` |
+| `nn=16 seme=7` | `80.0` | `11` | `0.041` |
+| `nn=12 seme=11` | `0.8` | `28` | `0.307` |
+| `nn=12 seme=11` | `8.0` | `34` | `0.364` |
+| `nn=12 seme=11` | `80.0` | `12` | `0.046` |
+
+### ⛔ **IL MASSIMO E' `47` GIRI, e ogni giro costa MEZZO TICK: cioe' ~`23` tick di lavoro
+per OGNI tick.** ### **Con la forma accesa il simulatore e' ~`23` volte piu' lento.**
+### ✅ **E in NESSUN regime provato il punto fisso NON converge** — nemmeno a
+`Lambda_c/Lambda = 0.1`, che e' ### **il regime che il mandato temeva** *(<<saturazione
+profonda>>)*.
+### 📌 **E converge PIU' IN FRETTA dove `Lambda_c` e' grande** *(`11` giri a
+`Lambda_c/Lambda = 10`)*: la' ### **`cs` e' piccolo, il passo e' corto, e `Lambda` si
+muove meno.**
+
+### ⚠ **IL TETTO DEI GIRI E' `120`, E NON E' UNA MANOPOLA:** e' ### **il numero oltre
+il quale si DICHIARA che non converge**, e il mandato dice ### **di relazionare e NON di
+scegliere un altro schema.** ### **Il massimo misurato e' `47`, scritto accanto.**
+### ⛔ **La mia prima stesura aveva `40` e ALZAVA** — e ### **ho misurato la
+successione degli scarti prima di toccarlo:** contrazione geometrica a rapporto `0.49`,
+quindi ### **converge, lentamente**, e `40` era ### **troppo pochi.** ### **Non ho
+abbassato la soglia: ho alzato il tetto, e il motivo e' la contrazione misurata.**
+
+### ⚠⚠ **CHE COSA MANCA DI `D2`, e lo dico:** il mandato chiede che la variante
+ingenua perda ### **il secondo ordine `E` la simmetria `PTheta`.** ### **Il secondo ordine
+e' misurato.** ### ⛔ **La `PTheta` NO**, e il motivo e' che vive su ### **un'altra
+scena** *(quella di `_misura_theta_nonlineare.py`, con la sua permutazione delle
+estremita')*: ### **va fatta LA'**, e riscriverla nel collaudo di `D2` sarebbe
+### **un secondo strumento per la stessa simmetria** — che e' il difetto che la regola
+`[[STRUMENTO-LEGGE-DALLA-TABELLA]]` vieta. ### **E' il pezzo che resta di `D2`.**
+
+### ⭐ **E DUE PRESIDI HANNO MORSO, entrambi utili:** `[[P-R1]]` ha chiesto
+### **il ramo del punto fisso dichiarato** *(con la soglia e i giri nel motivo)*, e
+### **il collaudo di `M-B1` ha alzato su <<ancora non unica>>** perche' `D2` ha aggiunto
+`quanti` al ciclo del tick. ### **E' cio' che un'ancora CONTATA deve fare.**
+
+**LA SUITE:** ### **`59` su `59`**, `pre-commit` a `276.9 s` su `500` *(`55%`)*.

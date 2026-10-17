@@ -244,6 +244,16 @@ RAMI[("primo_ordine/flussi_parziali.py", "dtau_nodo")] = (
     "NON C-E-, e allora si ritorna `mot.dtau` TALE E QUALE -- cioe- il passo di oggi AL "
     "BIT, senza una moltiplicazione e senza un ulp. ### E `None` NON e- <<`Lambda_c` vale "
     "zero>>: la scala zero la funzione `cs` la RIFIUTA, e spegnere si fa NON ACCENDENDO")
+RAMI[("primo_ordine/tick.py", "cs_al_centro")] = (
+    2, "iterazione",
+    "il PUNTO FISSO di `D2` (2026-10-17): `cs` si legge sullo stato AL CENTRO del"
+    " palindromo, e per arrivare al centro serve `cs` -- quindi si itera. ### I DUE rami"
+    " sono la CONDIZIONE DI ARRESTO (due giri che coincidono agli ulp, soglia RELATIVA al"
+    " massimo di `cs` perche- un assoluto su una grandezza in [0,1) sarebbe una scala"
+    " nascosta) e il ramo del `salta`, che qui e- vuoto. ### LA SOGLIA E- DICHIARATA e i"
+    " GIRI SI RIPORTANO: massimo 47 misurato su 6 regimi, con contrazione fra 0.04 e 0.49,"
+    " e il tetto di 120 e- IL NUMERO OLTRE IL QUALE SI DICHIARA CHE NON CONVERGE -- non una"
+    " manopola")
 RAMI[("primo_ordine/tick.py", "percorri_tick")] = (
     3, "smistamento",
     "TRE rami, tutti su CAMPI DICHIARATI: `idl not in salta` toglie dei pezzi per `id` "

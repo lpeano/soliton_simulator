@@ -160,7 +160,7 @@ def main(argv):
     _ib, motb, stb, parb = DV.scena(16, 7, 0.2, norma="locale", vuoto_modulo=2.0)
     cassa = {}
     TK.percorri_tick(sta, mota, para, (),
-                     DV.fotografo(_ia, mota, para, cassa))
+                     DV.fotografo(_ia, mota, para, cassa), len(CM.ORDINE))
     TK.tick(stb, motb, parb)
     chiavi = [k for k in sta if hasattr(sta[k], "shape")]
     diff = max(float(np.max(np.abs(sta[k] - stb[k]))) if sta[k].size else 0.0

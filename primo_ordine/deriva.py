@@ -346,7 +346,8 @@ def sorgente_per_nodo(nn=16, dtau=0.2, seme=7, norma="locale", vuoto_cammina=Tru
     DVAR.flusso_che_gira()
     salta = () if vuoto_cammina else ("CAMM-GROVER-VUOTO", "CAMM-SPOSTAMENTO-VUOTO")
     cassa = {}
-    TK.percorri_tick(st, mot, par, salta, fotografo(inc, mot, par, cassa))
+    TK.percorri_tick(st, mot, par, salta, fotografo(inc, mot, par, cassa),
+                     len(CM.ORDINE))
     dopo = EN.per_nodo(st, mot, par).copy()
     s = (dopo - prima) - CO.divergenza(cassa["J"], inc)
     return s, (dopo - prima), cassa["portata"], sat
@@ -362,11 +363,11 @@ def main(argv):
     print("=" * 100)
 
     # ---------------------------------------------------------------- M0, I DUE REGIMI
-    b = ["## 2. `D-ENERGIA:M0` \u2014 la deriva a **tempo totale fisso** `T = 2.0`,"
+    b = ["## 2. `D-ENERGIA:M0` — la deriva a **tempo totale fisso** `T = 2.0`,"
          " nei **DUE REGIMI**", "",
-         "### \u26d4 **E IL REGIME NON E\' UN DETTAGLIO:** con `||psi|| = 1` su tutto il"
+         "### ⛔ **E IL REGIME NON E\' UN DETTAGLIO:** con `||psi|| = 1` su tutto il"
          " grafo si ha", "`h_k/Lambda_k ~ 1/(2m)`, e `G(x) = x - arctan x` va come"
-         " `x^3/3` \u2014 ### **la saturazione e\'", "praticamente SPENTA, e misurare la"
+         " `x^3/3` — ### **la saturazione e\'", "praticamente SPENTA, e misurare la"
          " sua sorgente la\' sarebbe un FALSO-ZERO.**", ""]
     for norma in NORME:
         print("  D-ENERGIA:M0 (%s)  deriva a T = 2.0, anello di 16 nodi" % norma)
@@ -375,7 +376,7 @@ def main(argv):
               "   max|h/Lambda| = %.4f" % (scale[0], scale[1], sat))
         b.append("### %s **regime `%s`:** `primo = %.4e`, `vuoto = %.4e`,"
                  " ### **`max|h/Lambda| = %.4f`**" %
-                 ("\u2705" if sat > 0.1 else "\u26d4", norma, scale[0], scale[1], sat))
+                 ("✅" if sat > 0.1 else "⛔", norma, scale[0], scale[1], sat))
         b.append("")
         b.append("| `dtau` | tick | `|Delta E|` | `|Delta` primo`|` |"
                  " `|Delta` vuoto`|` |")
@@ -398,7 +399,7 @@ def main(argv):
         b.append("| il termine del **vuoto** | " + "  ".join("`%.3f`" % x for x in r2)
                  + " |")
         b.append("")
-        b.append("### \u2b50 **`4` sarebbe l\'esponente `2`; `1` vuol dire CHE NON"
+        b.append("### ⭐ **`4` sarebbe l\'esponente `2`; `1` vuol dire CHE NON"
                  " SCENDE.**")
         b.append("")
         if norma == "locale":
@@ -413,7 +414,7 @@ def main(argv):
           % (primo_max, sc[0], primo_max / max(sc[0], 1e-300)))
     print("      max |Delta vuoto| = %.6e   su un vuoto di          %.6e  (relativo %.2e)"
           % (vuoto_max, sc[1], vuoto_max / max(sc[1], 1e-300)))
-    b = ["## 3. `D-ENERGIA:M0-bis` e `D-ENERGIA:M0-ter` \u2014 **DOVE** sta la deriva",
+    b = ["## 3. `D-ENERGIA:M0-bis` e `D-ENERGIA:M0-ter` — **DOVE** sta la deriva",
          "", "*(regime `locale`, quello in cui la saturazione e\' accesa)*", "",
          "| il termine | `max |Delta|` | la sua SCALA | relativo |",
          "|---|--:|--:|--:|",
@@ -433,7 +434,7 @@ def main(argv):
           " rapporto %.3f" % (pend, amp, rap))
     print("      E(t) - E(0) sta fra %.6f e %.6f   su E(0) = %.6f"
           % (estremi[0], estremi[1], float(serie[0, 1])))
-    b = ["## 4. `D-ENERGIA:M1a` \u2014 il **run lungo**: `20000` tick", "",
+    b = ["## 4. `D-ENERGIA:M1a` — il **run lungo**: `20000` tick", "",
          "| la grandezza | il valore |", "|---|--:|",
          "| `E(0)` | `%.6f` |" % float(serie[0, 1]),
          "| `max|h/Lambda|` all\'inizio | `%.4f` |" % sat,
@@ -442,14 +443,14 @@ def main(argv):
          "| il **rapporto** *(spiegata dalla retta / ampiezza)* | **`%.3f`** |" % rap,
          "| `E(t) - E(0)` sta fra | `%.6f` e `%.6f` |" % estremi,
          "",
-         "### \u2b50 **IL CRITERIO, fissato PRIMA:** `rapporto >> 1` = **SECOLARE**,"
+         "### ⭐ **IL CRITERIO, fissato PRIMA:** `rapporto >> 1` = **SECOLARE**,"
          " `rapporto << 1` = **OSCILLANTE**."]
     blocchi.append(b)
 
     # ---------------------------------------------------------------- M1b
     print("  D-ENERGIA:M1b  tre taglie, fattore 4 fra gli estremi (regime locale)")
-    b = ["## 5. `D-ENERGIA:M1b` \u2014 **tre taglie**, fattore `4` fra gli estremi", "",
-         "### \u26a0 **A STATO LOCALE UGUALE** *(regime `locale`)*: con la"
+    b = ["## 5. `D-ENERGIA:M1b` — **tre taglie**, fattore `4` fra gli estremi", "",
+         "### ⚠ **A STATO LOCALE UGUALE** *(regime `locale`)*: con la"
          " normalizzazione globale",
          "le tre taglie ### **non avrebbero lo stesso stato locale**, e il confronto non"
          " direbbe", "niente sull\'estensivita\'.", "",
@@ -469,7 +470,7 @@ def main(argv):
 
     # ---------------------------------------------------------------- M1c
     print("  D-ENERGIA:M1c  per lunghezza d'onda (n = 32, regime locale)")
-    b = ["## 6. `D-ENERGIA:M1c` \u2014 per **lunghezza d\'onda**, `n = 32`", "",
+    b = ["## 6. `D-ENERGIA:M1c` — per **lunghezza d\'onda**, `n = 32`", "",
          "| lo stato iniziale | `max|h/Lambda|` | **escursione** di `E` su `200` tick |",
          "|---|--:|--:|"]
     for lung, etic in ((0, "CASUALE (il piu\' ruvido)"), (2, "periodo 2 nodi"),
@@ -555,19 +556,19 @@ def main(argv):
 
     # ---------------------------------------------------------------- (c)
     print("  (c)  LA SORGENTE PER NODO, con N acceso -- e DECOMPOSTA")
-    b = ["## 9. `(c)` \u2014 **LA SORGENTE PER NODO**, con `N` acceso", "",
+    b = ["## 9. `(c)` — **LA SORGENTE PER NODO**, con `N` acceso", "",
          "`s_k = Delta E_k - (div J)_k`, con `J` la corrente locale **costruita** per il"
          " pezzo",
          "lineare, valutata sullo stato che **entra** nel pezzo lineare *(dopo il primo"
          " mezzo",
          "flusso)*.", "",
-         "### \u26d4 **E SI DECOMPONE, perche\' il residuo MESCOLA DUE COSE:** il mio `J`"
+         "### ⛔ **E SI DECOMPONE, perche\' il residuo MESCOLA DUE COSE:** il mio `J`"
          " copre il",
          "pezzo lineare **dello spinore**, e la **camminata del vuoto** muove `phi` fra i"
          " nodi,",
          "cioe\' ### **trasferisce energia di vuoto senza che io la modelli.**"
-         " ### \u26a0 **Quello e\' una",
-         "CORRENTE CHE MANCA, non una sorgente** \u2014 e chiamarlo sorgente sarebbe"
+         " ### ⚠ **Quello e\' una",
+         "CORRENTE CHE MANCA, non una sorgente** — e chiamarlo sorgente sarebbe"
          " attribuire al",
          "fenomeno un buco del mio strumento. ### **Lo stesso errore della candidata di"
          " ieri.**", ""]
@@ -605,7 +606,7 @@ def main(argv):
                           (True, "col tick INTERO (sorgente + corrente del vuoto che manca)")):
         print("    %s" % etic)
         b.append("### %s **%s**" %
-                 ("\u2705" if not cammina else "\u26a0", etic))
+                 ("✅" if not cammina else "⚠", etic))
         b.append("")
         b.append("| `dtau` | `max_k |s_k|` | `somma_k s_k` | `max_k |Delta E_k|` |"
                  " `s/Delta E` | rapporto col precedente |")
@@ -624,7 +625,7 @@ def main(argv):
                      (dt, mx, tot, mdE, mx / max(mdE, 1e-300), rr))
             prec = mx
         b.append("")
-        b.append("### \u2b50 **`4` sarebbe `O(dtau^2)`; `1` vuol dire `O(1)`, cioe\' CHE"
+        b.append("### ⭐ **`4` sarebbe `O(dtau^2)`; `1` vuol dire `O(1)`, cioe\' CHE"
                  " NON SCENDE.**")
         b.append("")
     blocchi.append(b)

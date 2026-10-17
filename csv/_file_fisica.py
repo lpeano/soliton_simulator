@@ -89,6 +89,7 @@ FILE_FISICA = (
     'primo_ordine/stato.py',
     'primo_ordine/tick.py',
     'primo_ordine/_collauda_cs.py',
+    'primo_ordine/_collauda_cs_centro.py',
     'primo_ordine/_collauda_scala.py',
     'primo_ordine/_misura_costo_motore.py',
     'primo_ordine/hamiltoniana.py',

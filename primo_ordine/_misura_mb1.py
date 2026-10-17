@@ -420,8 +420,10 @@ def _perturba_ordine(src):
     niente darebbe un braccio VACUO**, quindi si SCAMBIANO le posizioni `1` e `2`, e
     ### **un braccio verifica che la sequenza sia DAVVERO cambiata.**
     """
-    a = "    for k, (idl, frazione, _tipo) in enumerate(CM.ORDINE):\n"
-    b = ("    _o = list(CM.ORDINE)\n"
+    # ### ⚠ **L-ANCORA E- CAMBIATA il `2026-10-17`**, perche- `D2` ha aggiunto `quanti`
+    # ### al ciclo: ### **il collaudo l-ha detto subito**, alzando su <<ancora non unica>>.
+    a = "    for k, (idl, frazione, _tipo) in enumerate(CM.ORDINE[:quanti]):\n"
+    b = ("    _o = list(CM.ORDINE[:quanti])\n"
          "    _o[1], _o[2] = _o[2], _o[1]\n"
          "    for k, (idl, frazione, _tipo) in enumerate(tuple(_o)):\n")
     assert src.count(a) == 1, "l-ancora del ciclo non e- unica in `tick.py`"
