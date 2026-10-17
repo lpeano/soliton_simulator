@@ -25,6 +25,24 @@ CONTROLLARLI** — me ne sono accorto **solo dopo averli misurati entrambi.**
 saturazione sono il CONTROLLO** — non sono stati toccati, quindi **devono** coincidere, e se
 non coincidessero vorrebbe dire che ho cambiato qualcosa che non volevo cambiare.
 
+## ⛔⛔ IL CONFINE DI QUESTA MISURA, **misurato il `2026-10-17`**
+
+### **IL CRITERIO SONO I PEZZI**: `un_pezzo` applica ### **UN pezzo da solo** a
+`theta = pi`. ### ⚠ **Quindi un cambiamento del CAMMINO del tick** *(non dei pezzi, non
+della tabella)* ### **lascia questa misura a <<12 su 12 AL BIT>> con l'IMPRONTA
+IDENTICA** — l'impronta viene da `composizione.py`, cioe' ### **dalla TABELLA**, non da
+come il modulo del passo percorre l'ordine.
+### 📌 **Lo vede SOLO la distanza del passo intero**, che qui sotto e' riportata come
+### **<<informazione, NON criterio>>**.
+
+> ### ⛔ **E DA QUI IN POI, per decisione del guardiano del `2026-10-17`:**
+> ### **per `D0` e per OGNI misura che tocca il CAMMINO, la distanza del passo intero
+> ### `= 0` esatto su entrambe le scene E' UN CRITERIO** — e ### **i `12` pezzi al bit
+> restano richiesti IN PIU', non al posto.**
+> ### ⚠⚠ **E questo NON cambia il significato della misura per i referti VECCHI:** quelli
+> sono stati letti col criterio dei ### **pezzi**, e la' il passo intero era
+> ### **informazione.** ### **Il criterio nuovo vale da `D0` in avanti.**
+
 ### ⛔ **E il <<prima>> si prende da un `git worktree`** del commit, non da una copia nel
 file: in un albero nudo `_presidio` ### **rifiuta di girare**, e ha ragione.
 

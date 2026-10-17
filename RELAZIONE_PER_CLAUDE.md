@@ -18192,3 +18192,25 @@ a meta'.
 ### ⭐ **E le due righe `CAMM-MATERIA-VUOTO` coi loro `sha1-BYTE`** stanno nel referto
 per entrambe le scene: ### **fino a ieri non c'erano, perche' il pezzo non era fra quelli
 misurati.**
+### 📌 **REGISTRATA L'INTEGRAZIONE SUL CONFINE DI `M-B1`, e l'errore `n.7`**
+
+**Va al punto `D`, che e' il `4` in coda**, quindi ### **registrata e non eseguita** — e
+il punto `3` *(«la scheda di `M-B1` lo dice»)* ### **l'ho fatto subito**, perche' il
+confine l'ho misurato io ieri e ### **una cosa misurata che non sta nella scheda si
+perde.**
+
+### ⛔⛔ **CHE COSA CAMBIA PER IL GIUDIZIO DI `D`:** il punto `D` cambia
+### **proprio il CAMMINO** *(`cs` al centro del palindromo, a punto fisso)*, e un
+cambiamento del cammino ### **lascia `M-B1` a <<`12` su `12` AL BIT>> con l'impronta
+identica.** ### ✅ **Quindi per `D0` la distanza del passo intero `= 0` esatto diventa
+UN CRITERIO**, e i `12` pezzi ### **restano richiesti in piu', non al posto**; il caso che
+deve fallire e' ### **la forma accesa, con distanza `> 0` su entrambe le scene.**
+
+### ⚠ **E il significato di `M-B1` per i referti VECCHI non si tocca:** quelli sono
+stati letti col criterio dei ### **pezzi**, e la' il passo intero era ### **informazione.**
+### **Il criterio nuovo vale da `D0` in avanti**, e la scheda dice ### **anche questo.**
+
+### 📌 **L'ERRORE `n.7`, che il guardiano registra:** il caso che deve fallire del punto
+`1.c` ### **non poteva far fallire `M-B1`.** ### **La lezione: un caso che deve fallire va
+scelto DENTRO il perimetro del criterio** — fuori, ### **passa sempre, ed e' un
+falso-uno con l'aria di un presidio.**
