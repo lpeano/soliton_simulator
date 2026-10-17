@@ -18648,3 +18648,10 @@ uniforme.**
 ### ⚠ **E IL REFERTO DICHIARA DENTRO SE STESSO che porta un ROSSO**, e che
 ### **non e' un errore di corsa**: il criterio `(2)` non e' soddisfatto, il collaudo
 ### **esce `1`**, e la scelta e' di Luca *(`[[DOMANDA-QUALE-INVARIANTE-CON-CS]]`)*.
+
+### 📌 **E LO STOP E' REGISTRATO IN CODA, non solo detto qui:**
+ ha la tabella di cio' che e' ### **PRONTO** *(il pezzo 6, il
+, il censimento della suite, il buco di )* e cio' che e' ### **BLOCCATO**.
+### ⚠ **E  NON lo faccio senza risposta**, col motivo scritto: produce i numeri con cui
+si ### **SCEGLIE **, e se la risposta fosse la lettura  *(la forma non e' la
+strada)* ### **quei numeri non servirebbero a decidere niente.**
