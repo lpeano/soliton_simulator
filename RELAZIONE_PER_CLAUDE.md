@@ -18122,3 +18122,18 @@ Il mandato dice che `_misura_mb1.PEZZI` e' ### **una lista A MANO di `6` id**, c
 
 ### ⭐ **La prima e' l'albero di oggi, la seconda e' `b150003`** — cioe'
 ### **il ramo dichiarato e' esercitato nei DUE versi, e si LEGGE.**
+### ⛔ **`2-SEXIES` COMINCIATO: e il difetto l'ho usato IERI come prova**
+
+**Il task history e' committato prima del codice**
+*(`doc/TASK_HISTORY/2026-10-17_2sexies_mb1_legge_i_pezzi_dalla_tabella.md`)*.
+
+### ⭐⭐ **E DENTRO C'E' UNA COSA CHE IL MANDATO NON NOMINA, e che credo PIU' GRAVE
+del difetto che chiede di curare:** `contro()` confronta i blocchi ### **per POSIZIONE**, e
+asserisce soltanto che i due file hanno ### **lo stesso NUMERO di blocchi.**
+### ⛔ **Finche' `PEZZI` era una lista FISSA, le due liste erano uguali per costruzione.**
+### ⛔⛔ **Ma leggere i pezzi DALLA TABELLA le rende DIVERSE fra i due alberi se la tabella
+e' cambiata** — cioe' ### **la cura del punto `2` APRIREBBE quel buco**, e il confronto
+metterebbe ### **pezzi diversi credendoli uguali.**
+### ✅ **Quindi il file dei byte portera' ANCHE GLI ID, e `contro()` asserira' che le
+due liste coincidono.** ### **Non lo so ancora misurato** — e' scritto fra le cose che
+non so, e lo verifico.
