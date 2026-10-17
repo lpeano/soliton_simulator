@@ -70,7 +70,8 @@ def esito(che, passa, nota=""):
     print("  %-56s %s   %s" % (che[:56], "PASSA" if passa else "### FALLISCE", nota))
 
 
-def dipende_da_dtau(idl, frazione, nn=12, seme=7, dtau_fisso=None):
+def dipende_da_dtau(idl, frazione, nn=12, seme=7, dtau_fisso=None,
+                    rapporto_cs=None):
     """### `max |psi(dtau) - psi(dtau/2)|` per **UN pezzo** della composizione.
 
     ### ⚠ **Si confrontano DUE `dtau` sullo STESSO stato iniziale**, non due corse: cosi'
@@ -80,6 +81,14 @@ def dipende_da_dtau(idl, frazione, nn=12, seme=7, dtau_fisso=None):
     unico del `2026-10-17`)*: con un valore, il passo del motore si ### **FISSA dopo aver
     costruito la scena**, quindi ### **il pezzo diventa INDIPENDENTE da `dtau`** e
     ### **deve risultare VIOLATORE.**
+    ### ⛔⛔ **`rapporto_cs` SERVE A `D3`** *(`2026-10-17`)*: accende la forma `cs`
+    ### ### **sullo stato di partenza**, con `Lambda_c = rapporto_cs * media(Lambda)` --
+    ### cioeè ### **DERIVATA dalla scena**, non un numero scelto (`A1`).
+    ### ⚠ **E su UN pezzo <<al centro del palindromo>> non ha senso** *(un pezzo non e- un
+    ### tick)*: ### **la sola forma definita per un pezzo solo e- quella a stato di
+    ### partenza**, e lo si dice invece di lasciarlo capire.
+    ### ⭐ **E QUESTO NON TOCCA IL CENSIMENTO DI OGGI:** senza il parametro il ramo
+    ### ### **non esiste**, e i numeri di questo file ### **sono quelli di prima.**
     ### ✅ **E la perturbazione e- IN MEMORIA, su una scena costruita qui:** nessun file
     del repo si tocca. ### ⚠ **Misurato il `2026-10-17`: con `mot.dtau` fisso la
     differenza e- `0.0` ESATTO** -- cioe- l-operatore lo legge ### **a ogni corsa**, e il
@@ -94,6 +103,11 @@ def dipende_da_dtau(idl, frazione, nn=12, seme=7, dtau_fisso=None):
             # ### ⛔ **IL RAMO DEL CASO CHE DEVE FALLIRE**, e non c-e- altra via: il
             # ### passo vive ### **nel motore**, e un pezzo lo legge da la-.
             mot.dtau[:] = dtau_fisso
+        if rapporto_cs is not None:
+            # ### ⛔ **IL RAMO DI `D3`:** la forma si accende QUI, e ### **`Lambda_c` esce
+            # ### dalla scena** -- una volta, e prima del pezzo.
+            import flussi_parziali as FP
+            FP.accendi_cs(mot, rapporto_cs * float(np.mean(mot.densita_vuoto(st))), st)
         mot.apri_tick()
         mot.operatori[nome](st, par if vuole_par else {}, frazione)
         mot.chiudi_tick()

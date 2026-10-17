@@ -158,6 +158,10 @@ moduli:
     responsabilita: il costo del motore e le allocazioni per tick -- misurati, non stimati
     importa: [_presidio, incidenza, motore, stato]
 
+  - nome: _collauda_cs_l1.py
+    responsabilita: i quattro criteri con cui L1 e- chiuso, rigirati con la forma cs ACCESA
+    importa: [_collauda_tempo_proprio, _misura_completa_l2, _misura_mb2, _misura_theta_n, _misura_theta_nonlineare, _presidio, composizione, corrente, deriva, flussi_parziali, tick]
+
   - nome: _misura_mb1.py
     responsabilita: il raccordo al bit pezzo per pezzo contro il commit di riferimento
     importa: [_censimento_strumenti, _presidio, composizione, deriva, tick]
@@ -248,7 +252,7 @@ moduli:
 
   - nome: _collauda_tempo_proprio.py
     responsabilita: misura quali pezzi evolvono col TICK invece che col tempo proprio
-    importa: [_presidio, composizione, deriva, tick]
+    importa: [_presidio, composizione, deriva, flussi_parziali, tick]
 
   - nome: _collauda_cs.py
     responsabilita: il collaudo della forma cs -- la forma spenta e' il passo di oggi al bit

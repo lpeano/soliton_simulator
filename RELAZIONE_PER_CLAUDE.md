@@ -18596,3 +18596,46 @@ un arrotondamento che la forma spenta non ha.**
 e `_misura_theta_nonlineare.passo` ### **percorrono il tick DA SOLI**, quindi
 ### **accendere `cs` sul motore NON basta** a far misurare con `cs` gli strumenti
 esistenti.
+### ⛔⛔ **`D3`: `11` SU `13`, E IL CRITERIO `(2)` CADE -- MI FERMO**
+
+### ✅ **Tre criteri su quattro reggono con la forma accesa:** ### **`0` violatori**
+del tempo proprio su `12` pezzi, la simmetria a ### **`2.85` e `3.71` ulp** sul peggio di
+`8` stati *(banda `8`)*, le norme a ### **`3.3` e `3.5` ulp.**
+### ⛔ **Il quarto NO:** `M-B2` con `cs` al centro da' pendenza ### **`-0.003`** su `4`
+dimezzamenti, cioe' ### **l'escursione di `H_tot` non cala affatto** *(a forma spenta:
+`1.965`)*.
+### ⭐ **E LA CAUSA E' PROVATA, non supposta:** con `cs` ### **UNIFORME** la pendenza
+### **torna** *(`1.951` e `2.009`)*, quindi ### **il ciclo e' giusto** e cio' che rompe il
+criterio e' ### **la NON UNIFORMITA' di `cs`**: ### **`H_tot` non e' l'invariante del
+flusso `somma_k cs_k H_k`.**
+### ⛔ **LA DOMANDA E' PER TE, con tre letture e le loro conseguenze:**
+`[[DOMANDA-QUALE-INVARIANTE-CON-CS]]`. ### **Non scelgo, non ho toccato nessuna banda.**
+### ⚠ **E la mia previsione scritta prima era SBAGLIATA:** avevo detto che il braccio
+fragile era la simmetria, ### **ed e' caduto quello che credevo solido.**
+### ✅ **LA DOMANDA DEL GUARDIANO SUI PROCESSI: NESSUNO E' IN ESECUZIONE**
+
+### ⛔ **Ne' `(a)` ne' `(b)`:** ho elencato i processi `python` e `git` con la loro
+### **ora di nascita** *(`Win32_Process`, `CreationDate`)*, e ### **l'unico vivo era
+l'elenco stesso.** ### **Nessuna misura, nessun `pre-commit`, nessun comando `git`
+appeso.**
+
+### 📌 **E I TEMPI VERI, misurati, perche' la domanda nasce da qualcosa:**
+| che cosa | quanto |
+|---|---|
+| `D3` intero *(`_collauda_cs_l1.py`)* | ### **`4.6` s** |
+| la suite intera | ### **`~520` s** *(`pre-commit` `283.4` s su `500`)* |
+| `M-B1 --collaudo` | `21` s |
+| `_misura_completa_l2.py` | `12.1` s |
+
+### ⚠⚠ **E CIO' CHE IL GUARDIANO HA PROBABILMENTE VISTO E' UN MIO ERRORE, non un
+blocco:** avevo lanciato ### **un comando che girava la suite DUE VOLTE** *(`~1040` s)*
+per cercare una riga con `grep`. ### **Ha sfondato il mio timeout, e' finito in
+background, e l'ho FERMATO io** *(`TaskStop`)*. ### ✅ **La cura e' gia' applicata:**
+la suite si gira ### **una volta sola**, e la riga si cerca ### **nell'uscita di quella.**
+### ⛔ **Nessun `--no-verify`, in nessun momento.**
+
+### 📌 **E IL COSTO DI `D3` CON `cs` ACCESO, poiche' il guardiano lo chiede:**
+`M-B2` gira `16`+`32`+`64`+`128`+`256` = ### **`496` tick**, e il punto fisso costa
+### **`354`+`468`+`720`+`1177`+`2007` = `4726` giri in tutto** *(da `22.1` a `7.8` giri
+per tick, contati e stampati nella tabella)*. ### **Mezzo tick per giro, quindi
+`~2363` tick di lavoro** -- ### **`4.6` s in tutto**, perche' la scena e' `nn = 16`.

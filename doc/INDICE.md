@@ -9,7 +9,7 @@
 | `DOCUMENTAZIONE` | `2` | 1 |
 | `DOCUMENTAZIONE` | `ENTRAMBE` | 9 |
 | `FISICA` | `1` | 343 |
-| `FISICA` | `2` | 131 |
+| `FISICA` | `2` | 132 |
 | `FISICA` | `ENTRAMBE` | 21 |
 | `INFRASTRUTTURA` | `1` | 39 |
 | `INFRASTRUTTURA` | `2` | 23 |
@@ -326,6 +326,7 @@
 | `DOMANDA-Q-DEL-NODO-SOMMA-O-MEDIA` | DECISIONE | FISICA | 2 | ### **AGENDA** | SI | q_k e la SOMMA o la MEDIA dei q_h sulle estremita del nodo? |
 | `DOMANDA-QUALE-COPPIA-CONIUGATA-DEL-VUOTO` | DECISIONE | FISICA | 2 | ### **SUPERATA** |  | la coppia coniugata del vuoto: una variabile nuova, o la fase e l ampiezza di ph |
 | `DOMANDA-QUALE-FORMA-FISSA-CS` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | quale forma del vuoto fissa cs: nessuna delle tre e- libera da tutti i difetti |
+| `DOMANDA-QUALE-INVARIANTE-CON-CS` | DECISIONE | FISICA | 2 | ### **AGENDA** | SI | con cs non uniforme H_tot non e conservato: quale quantita deve conservare il pa |
 | `DOMANDA-QUALE-LAMBDA-SULL-ARCO` | DECISIONE | FISICA | 2 | ### **AGENDA** | SI | quale Lambda usa l arco nel termine di ordinamento: del nodo, la media, o dell a |
 | `DOMANDA-QUALE-SCENA-3D-PRINCIPALE` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | quale scena 3D fa da principale, se nessuna delle due provate e- isotropa? |
 | `DOMANDA-QUALE-SEGNO` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | quale segno della non linearita-, se quello che lega lega solo in 1D? |
