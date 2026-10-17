@@ -18566,3 +18566,16 @@ un commento non muove un bit, e ### **si misura invece di affermarlo.**
 ### 📌 **E' la trappola scritta in `CLAUDE.md`:** ### **<<verifica dal codice, non
 dai commenti>>** -- e il modo di non lasciarne uno scaduto e' ### **correggerlo nel giro
 in cui il numero cambia.**
+### ✅ **LA `PTheta` DI `D2` E' CHIUSA, e il divieto aveva rotto TRE strumenti**
+
+### ✅ **`cs` al CENTRO: `2`-`6` ulp** *(la banda e' `4096`, la stessa del braccio
+`(3)`)*; ### ⛔ **`cs` a INIZIO PASSO: `3e14`-`2.5e15` ulp**, cioe'
+### **`11` ordini di grandezza oltre la banda.** ### **Il caso che DEVE fallire di `D2` e'
+completo su entrambe le meta'.**
+
+### ⛔⛔ **E L'HO TROVATO PERCHE' LA MISURA NON PARTIVA:** il divieto del vuoto
+nullo *(`1902e0a9`)* aveva rotto ### **tre strumenti**, e ### **la suite diceva `59` su
+`59` perche' NESSUNO DEI TRE era in `collauda.py`.** ### **Curati e messi nella suite**
+*(`62` su `62`)*, col controllo ### **contro il PADRE del commit del divieto**: numeri
+### **identici.** ### ⚠ **E resta aperto un censimento:** quanti altri file della
+fisica la suite non gira.

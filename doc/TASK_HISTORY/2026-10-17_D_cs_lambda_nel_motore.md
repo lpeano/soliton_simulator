@@ -128,3 +128,12 @@ deflessione della luce**, ### **due masse che si avvicinano**, ### **l'auto-lega
 7. ### **LA DOMANDA PER LUCA** sul valore di `Lambda_c/Lambda_medio` — ### **la `G` del
    modello** — coi numeri di `D4`, ### **registrata come voce** e committata.
    ### ⛔ **Non scelgo.**
+### ✅ **ANNOTAZIONE DEL `2026-10-17`, a cose fatte** *(e NON riscrivo niente di sopra)*
+
+La meta' ### **`PTheta`** del caso che DEVE fallire di `D2` e' ### **FATTA**, e sta in
+`_misura_theta_nonlineare.py` *(bracci `(5)`, `(6)`, `(7)`; `36` su `36`)*:
+### **`cs` al CENTRO `2`-`6` ulp, `cs` a INIZIO PASSO `3e14`-`2.5e15` ulp**, banda
+`4096`.
+### ⚠ **E una cosa che qui non avevo previsto:** per farla ho dovuto curare
+### **la scena**, perche' il divieto del vuoto nullo ### **aveva rotto tre strumenti** --
+e ### **la suite non li girava.** Sta nella `40` della RIPRESA.

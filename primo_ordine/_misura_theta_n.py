@@ -192,6 +192,17 @@ def scena(dtau, geometrici, identita):
             Qm, _ = np.linalg.qr(X)
             U[a] = Qm / np.sqrt(np.linalg.det(Qm))
     st = ST.nuovo(nn, inc.m)
+    # ### ⛔⛔ **IL VUOTO SI ACCENDE PRIMA DI COSTRUIRE IL MOTORE** *(`2026-10-17`)*:
+    # ### `ST.nuovo` da- ### **`phi = 0` su OGNI nodo**, e dal `1902e0a9` ### **quello
+    # ### non e- uno stato fisico** *(decisione di Luca)* -- quindi il costruttore ALZAVA,
+    # ### e ### **TRE strumenti non partivano piu-**: questo, `_misura_theta_nonlineare.py`
+    # ### e `_misura_completa_l2.py`.
+    # ### ✅ **E IL NUMERO NON E- UNA MANOPOLA** *(`A1`)*: ogni chiamante SOVRASCRIVE
+    # ### `phi` subito dopo *(`stato_di_prova`, o i vettori di base)*, quindi questo e-
+    # ### ### **il vuoto di COSTRUZIONE e non entra in nessun numero** -- e il controllo
+    # ### e- MISURATO: gli esiti dei tre strumenti sono ### **IDENTICI a quelli del PADRE
+    # ### del commit del divieto**, dove la costruzione era `phi = 0`.
+    st["phi_h"][...] = 1.0
     mot = MO.Motore(inc, MO.Geometria(nv, U), st, np.full(nn, dtau), "numpy")
     return inc, mot, st
 

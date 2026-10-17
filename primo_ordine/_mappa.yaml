@@ -136,7 +136,7 @@ moduli:
 
   - nome: _misura_theta_nonlineare.py
     responsabilita: la simmetria P Theta sul passo INTERO col termine non lineare, e la C sul flusso nuovo
-    importa: [_misura_c_flussi, _misura_theta_n, _presidio, composizione, corrente, deriva, motore, tick]
+    importa: [_misura_c_flussi, _misura_theta_n, _presidio, composizione, corrente, deriva, flussi_parziali, motore, tick]
 
   - nome: _misura_theta_n.py
     responsabilita: se Theta e le direzioni n danno una simmetria esatta del passo

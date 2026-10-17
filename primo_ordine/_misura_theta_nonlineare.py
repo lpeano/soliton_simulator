@@ -216,6 +216,101 @@ def braccio_simmetria(dtau, P):
     return d, sc
 
 
+# ### ⛔⛔ **LA META- `PTheta` DEL CASO CHE DEVE FALLIRE DI `D2`**
+# ### *(`2026-10-17`)*: il mandato di `D2` chiede che la variante ingenua
+# ### *(`cs` letto a INIZIO PASSO)* perda ### **il secondo ordine E la simmetria
+# ### `PTheta`.** ### **Il secondo ordine e- misurato in `_collauda_cs_centro.py`**;
+# ### ### **la simmetria vive QUI**, perche- qui c-e- la permutazione delle estremita-
+# ### e la scena in cui l-identita- e- MISURATA. ### ✅ **Riscriverla la- dentro
+# ### sarebbe stato un SECONDO strumento per la stessa simmetria.**
+#
+# ### ⛔ **E `Lambda_c` NON E- UNA MANOPOLA** *(`A1`)*: si prende
+# ### ### **la MEDIA di `Lambda` sullo stato di prova**, cioe- il rapporto
+# ### `Lambda_c/Lambda_medio = 1` -- ### **un-ETICHETTA DERIVATA dalla scena**, non un
+# ### numero scelto. ### ⚠ **E il mandato del guardiano lo dice:** nelle misure il
+# ### rapporto ### **e- un-etichetta**, e `Lambda_c` ### **non si calcola MAI dallo stato
+# ### durante la corsa** -- qui si calcola ### **PRIMA**, una volta, e poi e- FISSO.
+RAPPORTO_LAMBDA_C = 1.0
+
+
+def lambda_c_della_scena(mot, st):
+    """### `Lambda_c` ### **dalla scena, una volta sola e PRIMA della corsa.**"""
+    import numpy as _np
+    return RAPPORTO_LAMBDA_C * float(_np.mean(mot.densita_vuoto(st)))
+
+
+def passo_cs(mot, st, modo, lambda_c):
+    """### `W` ### **con la forma `cs`**, nei due modi di `D2`.
+
+    ### ⛔ **E PASSA DA `tick.py`, non da un ciclo mio:** `percorri_tick` esiste
+    ### **perche- c-erano due percorsi del tick**, e un terzo qui dentro sarebbe
+    ### **lo stesso difetto.**
+    """
+    import composizione as CM
+    import flussi_parziali as FP
+    par = {"eps": TN.EPS}
+    if modo == "centro":
+        TK.tick_con_cs(st, mot, par, lambda_c)
+    elif modo == "inizio":
+        FP.accendi_cs(mot, lambda_c, st)
+        TK.percorri_tick(st, mot, par, (), None, len(CM.ORDINE))
+    else:
+        TK.tick(st, mot, par)
+    return (st["psi_h"].copy(), st["phi_h"].copy())
+
+
+def identita_con_cs(mot, st, s0, P, modo, lambda_c):
+    """### Lo scarto di `W A W A^-1 s` da `s`, ### **con la forma `cs` nel modo dato.**"""
+    import flussi_parziali as FP
+    FP.spegni_cs(mot)
+    metti(st, antiunitaria(s0, P, inversa=True))
+    passo_cs(mot, st, modo, lambda_c)
+    metti(st, antiunitaria((st["psi_h"].copy(), st["phi_h"].copy()), P))
+    fine = passo_cs(mot, st, modo, lambda_c)
+    FP.spegni_cs(mot)
+    return scarto(fine, s0)
+
+
+def braccio_cs(dtau, P):
+    """### `(5)`-`(6)`-`(7)`: ### **la `PTheta` con `cs`, e la variante che DEVE romperla.**
+
+    ### ⛔⛔ **I CRITERI SONO QUELLI GIA- FISSATI**, e non ne nasce uno nuovo:
+    la banda e- ### **la stessa del braccio `(3)`** *(`4096` ulp)*, e il verdetto atteso
+    e- quello scritto nel task history di `D` ### **prima del codice**:
+    ### **`cs` al CENTRO conserva la simmetria, `cs` a INIZIO PASSO la rompe.**
+    """
+    import flussi_parziali as FP
+    inc, mot, st = TN.scena(dtau, True, True)
+    s0 = stato_di_prova(mot, st, SEME_STATO)
+    lam_c = lambda_c_della_scena(mot, metti(st, s0))
+    # ### ⭐ **`(5)` IL CONTROLLO CHE RENDE SENSATO IL CONFRONTO:** con la forma
+    # ### SPENTA il percorso di `tick.py` e- ### **il passo di questo file AL BIT.**
+    # ### ⚠ **Senza questo braccio, `(6)` e `(7)` confronterebbero DUE CAMMINI**, e
+    # ### un-eventuale differenza non direbbe niente su `cs`.
+    FP.spegni_cs(mot)
+    metti(st, s0)
+    a_mano = passo(mot, st)
+    FP.spegni_cs(mot)
+    metti(st, s0)
+    da_tick = passo_cs(mot, st, "spenta", lam_c)
+    d5, _s5 = scarto(a_mano, da_tick)
+    esito("(5) a forma SPENTA il passo di `tick.py` e' questo AL BIT", d5 == 0.0,
+          "scarto %.1e: `(6)` e `(7)` confrontano LO STESSO cammino, non due" % d5)
+    # ### ✅ **`(6)` `cs` AL CENTRO: la simmetria REGGE**
+    d6, s6 = identita_con_cs(mot, st, s0, P, "centro", lam_c)
+    esito("(6) con `cs` al CENTRO `W A W A^-1 = 1` REGGE",
+          d6 <= 4096 * EPSM * s6,
+          "scarto %.3e su scala %.3e, cioe' %.0f ulp (Lambda_c = %.4f, rapporto %.1f)"
+          % (d6, s6, d6 / (EPSM * s6), lam_c, RAPPORTO_LAMBDA_C))
+    # ### ⛔ **`(7)` IL CASO CHE DEVE FALLIRE: `cs` a INIZIO PASSO**
+    d7, s7 = identita_con_cs(mot, st, s0, P, "inizio", lam_c)
+    esito("### (7) DEVE fallire: `cs` a INIZIO PASSO ROMPE la simmetria",
+          d7 > 4096 * EPSM * s7,
+          "scarto %.3e, cioe' %.0f ulp: e' %.0fx la banda, e il palindromo e' rotto"
+          % (d7, d7 / (EPSM * s7), d7 / (4096 * EPSM * s7)))
+    return d6, s6, d7, s7
+
+
 def braccio_c(dtau):
     """### **`(4)` LA `C` SUL FLUSSO NUOVO**, che nessuna misura copriva.
 
@@ -284,19 +379,28 @@ def main(argv):
     print("  nodi SVUOTATI (per il caso `rho = 0`): %s" % (NODI_VUOTI,))
     print("  ### `Theta psi = i sigma_y psi*`, `Theta phi = phi*`, `P` = inversione")
     sys.stdout.flush()
-    fuori = {}
+    fuori, con_cs = {}, {}
     for dtau in DTAU:
         print("-" * 96)
         print("### dtau = %.4f" % dtau)
         braccio_strumenti(dtau, P)
         fuori[dtau] = braccio_simmetria(dtau, P)
         braccio_c(dtau)
+        con_cs[dtau] = braccio_cs(dtau, P)
     print("=" * 96)
     print("### LO SCARTO DELL'IDENTITA', per `dtau`")
     for dtau in DTAU:
         d, sc = fuori[dtau]
         print("  dtau = %.4f   scarto %.3e   scala %.3e   %.0f ulp"
               % (dtau, d, sc, d / (EPSM * sc)))
+    print("=" * 96)
+    print("### LA `PTheta` CON LA FORMA `cs`, nei due modi di `D2`")
+    for dtau in DTAU:
+        d6, s6, d7, s7 = con_cs[dtau]
+        print("  dtau = %.4f   al CENTRO %6.0f ulp   a INIZIO PASSO %9.0f ulp"
+              % (dtau, d6 / (EPSM * s6), d7 / (EPSM * s7)))
+    print("###   e la banda e' 4096 ulp, LA STESSA del braccio (3):"
+          " non ne nasce una nuova")
     print("=" * 96)
     print("  %d su %d" % (OK[0], OK[1]))
     print("### ⛔ E NESSUNA CONCLUSIONE DI FISICA: qui ci sono numeri. Che cosa voglia")

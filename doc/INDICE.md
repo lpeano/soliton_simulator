@@ -15,7 +15,7 @@
 | `INFRASTRUTTURA` | `2` | 23 |
 | `INFRASTRUTTURA` | `ENTRAMBE` | 24 |
 | `METODO` | `1` | 156 |
-| `METODO` | `2` | 22 |
+| `METODO` | `2` | 23 |
 | `METODO` | `ENTRAMBE` | 95 |
 
 | id | classe | dominio | era | stato | blocca | titolo |
@@ -277,6 +277,7 @@
 | `DIFETTO-LAMBDA-NON-PIU-INVARIANTE-SOTTO-IL-VUOTO` | DIFETTO | FISICA | 2 | ### **AGENDA** |  | Con i flussi parziali Lambda_k non e piu invariante sotto la camminata del vuoto |
 | `DIFETTO-TEMPORANEI-NEL-REPO` | DIFETTO | METODO | 2 | ### **CHIUSA** |  | i temporanei finivano DENTRO il repo: TEMP non esiste su Linux, e il ripiego era |
 | `DIFETTO-TERNARIO-CHE-NON-SCEGLIE` | DIFETTO | FISICA | 2 | ### **AGENDA** |  | un ternario che non scegliE: per il braccio lineare misuravo la Q di N |
+| `DIFETTO-TRE-MISURE-FUORI-DALLA-SUITE` | DIFETTO | METODO | 2 | ### **AGENDA** |  | tre misure della simmetria rotte dal divieto del vuoto nullo, e la suite non le  |
 | `DIMENSIONE-E-ISOTROPIA-DELLE-SCENE` | MISURA | FISICA | 2 | ### **AGENDA** |  | le scene del banco non hanno dimensione 3, e la mia misura dell-isotropia era co |
 | `DISEGNO-3D-OSSERVATORE` | STANDARD | METODO | 2 | ### **AGENDA** |  | il disegno 3D e- un OSSERVATORE, e il 3D che distorce E- UNA MISURA |
 | `DIVISIONE-AUTOCONSISTENTE` | FRONTE | FISICA | 2 | ### **AGENDA** |  | la divisione dell arco come UNA legge: dove si rompe, cosa ereditano i figli, il |

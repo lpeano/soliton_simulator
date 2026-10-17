@@ -275,6 +275,21 @@ COLLAUDI = (
     # ### ### **24 cartelle che `rmtree` non riusciva a cancellare in silenzio.**
     # ### ✅ **Costa meno di un secondo**, quindi sta nel `pre-commit`.
     ("la pulizia delle temporanee", "csv/_pulizia.py --collaudo", "pre-commit"),
+    # ------------------------------------- LE TRE MISURE DELLA SIMMETRIA `(P Theta)`
+    # ### ⛔⛔ **NESSUNO LE GIRAVA, E IL DIVIETO DEL VUOTO NULLO LE AVEVA
+    # ### ROTTE TUTTE TRE** *(`2026-10-17`)*: `1902e0a9` ha vietato `Lambda = 0` alla
+    # ### costruzione, e ### **la scena di `_misura_theta_n.scena` si costruiva su
+    # ### `phi = 0`** -- quindi i tre ALZAVANO al primo rigo, e ### **la suite diceva
+    # ### 59 su 59.** ### ⚠ **Un collaudo che la suite non gira non e- un collaudo:**
+    # ### e- ### **un file che qualcuno dovrebbe ricordarsi di lanciare.**
+    # ### ✅ **E COSTANO POCO:** `1.1` + `0.5` s nel `pre-commit`, e ### **i `12.1` s
+    # ### del terzo in `solo-CI`** -- misurati, non stimati.
+    ("la simmetria `(P Theta)` sulla parte LINEARE", "primo_ordine/_misura_theta_n.py",
+     "pre-commit"),
+    ("la `(P Theta)` col termine NON lineare, e `cs` nei due modi",
+     "primo_ordine/_misura_theta_nonlineare.py", "pre-commit"),
+    ("la misura COMPLETA di `L2`, su piu- stati", "primo_ordine/_misura_completa_l2.py",
+     "solo-CI"),
     # ### ⭐ **IL BANCO DELLA CAMMINATA** *(mandato di Luca, 2026-10-10)*: e-
     # ### ### **il primo codice di fisica dell-era 2**, e il suo collaudo porta
     # ### ### **il braccio 0** -- la simmetria di coniugazione di carica, AL BIT.
