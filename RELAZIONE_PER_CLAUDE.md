@@ -18380,3 +18380,37 @@ costo di ciascuna: `(a)` cambia ### **lo SCHEMA** che il generatore valida; `(b)
 ### ✅ **E intanto `D0` gira:** la forma e' attuata, ### **spenta**, e il valore si
 passa ### **esplicitamente** — quindi ### **nessuna manopola gira senza che qualcuno
 l'abbia scelta.**
+### ✅ **DECISIONE DI LUCA ATTUATA: IL VUOTO NULLO NON E' UNO STATO FISICO**
+
+*(lettura `B`, `2026-10-17` alle `16:25`. La voce
+`[[DOMANDA-UN-NODO-SENZA-VUOTO-HA-L-OROLOGIO-FERMO]]` e' ### **CHIUSA** col criterio
+scritto.)*
+
+### ⭐⭐ **IL DIVIETO E' IN UN SOLO POSTO, e non per comodita':** il costruttore del
+motore — ### **da cui OGNI scena passa**, e da cui passa ### **anche il caricamento**
+*(`checkpoint.riprendi` ricostruisce un `Motore`)*. ### **Quindi non c'e' un divieto per
+costruttore, e non se ne puo' dimenticare uno.**
+### ✅ **E non e' un pavimento** *(`A11`)*: ### **si rifiuta LO STATO**, non si corregge
+il valore. ### **Nessun numero viene toccato.**
+
+| il braccio | l'esito |
+|---|---|
+| `(v1)` una scena con `Lambda = 0` | ### **ALZA alla costruzione** |
+| `(v3)` uno stato ### **SALVATO** con `Lambda = 0` | ### **ALZA al caricamento** — e il file si guasta ### **dopo** il salvataggio, che e' ### **il caso vero** *(un file di una versione vecchia, o modificato)* |
+| `(v2)` il controllo positivo: con `phi` non nullo | ### **passa**, `min Lambda = 1.000` |
+| `(z2)` l'assert del cono | ### **invariato**, e resta ### **un ALLARME** |
+
+### ⚠⚠ **E IL DIVIETO HA MORSO SUBITO UN FILE, il primo giorno:**
+`_collauda_memoria.py` costruiva `phi = 0` su ### **TUTTI i nodi** — cioe'
+### **misurava le allocazioni su uno stato che non esiste.** ### ✅ **Corretto nello stesso
+commit** *(le allocazioni non dipendono dai valori, ma lo stato deve essere fisico
+comunque)*.
+### 📌 **E' il genere di cosa che un divieto trova il primo giorno, e che nessuno avrebbe
+cercato.**
+
+### ✅ **E IL VINCOLO SU `L3` E' SCRITTO NELLA MAPPA** *(sezione `21`)*: ### **un nodo
+che NASCE deve avere `Lambda > 0`** — ed e' ### **un vincolo su una domanda che `L3` ha
+gia' aperta** *(`[[DOMANDA-ESTREMITA-NUOVE-INIZIALI]]`)*. ### **Far nascere un pozzo murato
+sarebbe peggio che trovarne uno.**
+
+**Il collaudo di `cs`: ### `15` su `15`** *(erano `12`)*. **La suite: `57` su `57`.**

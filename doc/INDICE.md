@@ -333,7 +333,7 @@
 | `DOMANDA-REGOLE-FUORI-CLAUDE` | DECISIONE | METODO | 2 | ### **AGENDA** |  | le regole di gestione fuori da CLAUDE.md, e quelle dentro senza presidio: vanno  |
 | `DOMANDA-TRASPORTO-DEVE-STARE-IN-SU2` | DECISIONE | FISICA | 2 | ### **CHIUSA** |  | la C e una simmetria della TEORIA INTERA: il controllo di efc113b era incompleto |
 | `DOMANDA-U-DINAMICA-LE-FORME` | DECISIONE | FISICA | 2 | ### **AGENDA** | SI | le quattro forme della U d arco dinamica: la scala, il caso senza vuoto, le olon |
-| `DOMANDA-UN-NODO-SENZA-VUOTO-HA-L-OROLOGIO-FERMO` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | Lambda = 0 da cs = 0, e l-assert del cono lo rifiuta: orologio fermo o stato non |
+| `DOMANDA-UN-NODO-SENZA-VUOTO-HA-L-OROLOGIO-FERMO` | DECISIONE | FISICA | 2 | ### **CHIUSA** |  | Lambda = 0 da cs = 0, e l-assert del cono lo rifiuta: orologio fermo o stato non |
 | `DOMANDA-UNITA-DI-STATO` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | l-unita- di stato: qual e- la capacita- di un nodo? |
 | `DOMANDA-VIA-DEL-CAMPO` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | si passa alla via del campo, dato che nessuna non linearita- locale lega in 3D? |
 | `DOPPIA-COP` | CURA | FISICA | 1 | ### **SOSPESA** |  | LA CURA (b): la doppia copertura 4 pi e' un ASSIOMA e va resa STRUTTURALE, non m |

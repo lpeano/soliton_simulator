@@ -244,7 +244,7 @@ moduli:
 
   - nome: _collauda_cs.py
     responsabilita: il collaudo della forma cs -- la forma spenta e' il passo di oggi al bit
-    importa: [_presidio, deriva, flussi_parziali, tick]
+    importa: [_presidio, checkpoint, deriva, flussi_parziali, incidenza, motore, schema_config, stato, tick]
 
   - nome: _collauda_deriva.py
     responsabilita: il collaudo della deriva, e presidia il FALSO-ZERO del termine spento

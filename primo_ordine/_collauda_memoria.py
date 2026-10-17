@@ -145,6 +145,14 @@ def _scena(nn, sommatoria):
     U[:, 1, 1] = 1.0
     st = ST.nuovo(nn, inc.m)
     st["psi_h"][0, 0] = 1.0
+    # ### ⛔⛔ **IL VUOTO NON SI PUO- LASCIARE A ZERO** *(decisione di Luca del
+    # ### `2026-10-17`: il vuoto nullo NON e- uno stato fisico)*. ### **Qui si misurano le
+    # ### ALLOCAZIONI**, che non dipendono dai valori -- ma lo stato ### **dev-essere
+    # ### fisico comunque**, altrimenti il costruttore del motore lo ### **RIFIUTA.**
+    # ### ⚠ **E il divieto ha morso QUESTO file per primo**, che costruiva `phi = 0`
+    # ### su ### **tutti** i nodi: la misura delle allocazioni girava ### **su uno stato
+    # ### che non esiste.**
+    st["phi_h"][:] = 1.0
     mot = MO.Motore(inc, MO.Geometria(nv, U), st, np.full(nn, 0.1), sommatoria)
     return inc, st, mot
 

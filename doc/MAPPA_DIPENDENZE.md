@@ -746,3 +746,19 @@ scelta** e diventare ### **<<un quanto>>.**
 ### ⛔ **Oggi il simulatore e' IL CAMPO MEDIO, e quella scala NON C'E'.**
 ### ⚠ **Quindi non e' una via disponibile: e' il posto dove la domanda potrebbe chiudersi
 da sola**, e sta scritta perche' ### **non si perda.**
+
+## 21. ⛔ `L3` — **UN NODO CHE NASCE DEVE AVERE `Lambda > 0`** *(`2026-10-17`)*
+
+> ### ⛔ **Viene da una decisione di Luca** *(il vuoto nullo ### **non e' uno stato
+> fisico**, lettura `B`)*, e ### **e' un VINCOLO su una domanda che `L3` ha gia' aperta:**
+> ### **con che `phi` nasce un'estremita' di un arco nuovo**
+> *(`[[DOMANDA-ESTREMITA-NUOVE-INIZIALI]]`)*.
+
+### ⚠ **Oggi il divieto vive ### **alla costruzione della scena** e al
+### **caricamento** *(un solo posto: il costruttore del motore)*. ### **Alla nascita non
+c'e' ancora niente, perche' la mitosi e' `L3`** — e quando ci sara',
+### **`Lambda > 0` sara' una condizione sul nato**, non una verifica a posteriori.
+
+### 📌 **E il motivo e' lo stesso:** un nodo con `Lambda = 0` avrebbe `cs = 0`, e con lui
+### **gli archi che lo toccano** *(media armonica `B-3`)*: ### **una cella sigillata per
+sempre.** ### **Far NASCERE un pozzo murato sarebbe peggio che trovarne uno.**

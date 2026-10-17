@@ -205,6 +205,71 @@ def braccio_locale():
           " SCARTATA" % (cam2.size, pr2.size))
 
 
+def braccio_vuoto_vietato():
+    """### ⛔⛔ **IL VUOTO NULLO NON E' UNO STATO FISICO** *(decisione di Luca del
+    `2026-10-17` alle `16:25`)*, e i ### **due casi che DEVONO fallire** sono quelli che il
+    mandato chiede: ### **alla COSTRUZIONE** e ### **al CARICAMENTO.**
+
+    ### ✅ **E PASSANO DALLO STESSO POSTO:** `checkpoint.riprendi` ### **ricostruisce un
+    `Motore`**, quindi il divieto e' ### **uno** e non due.
+    """
+    import incidenza as IN
+    import motore as MO
+    import stato as ST
+    # ### ① **ALLA COSTRUZIONE.**
+    nn = 8
+    ii = np.arange(nn - 1, dtype=int)
+    jj = np.arange(1, nn, dtype=int)
+    inc = IN.Incidenza(ii, jj, nn, capacita=nn)
+    nv = np.zeros((2 * inc.m, 3), dtype=float)
+    nv[:, 2] = 1.0
+    U = np.zeros((inc.m, 2, 2), dtype=complex)
+    U[:, 0, 0] = 1.0
+    U[:, 1, 1] = 1.0
+    st = ST.nuovo(nn, inc.m)
+    st["psi_h"][0, 0] = 1.0
+    alzato = ""
+    try:
+        MO.Motore(inc, MO.Geometria(nv, U), st, np.full(nn, 0.1), "numpy")
+    except AssertionError as e:                               # noqa: BLE001
+        alzato = str(e)[:58]
+    esito("### (v1) DEVE fallire: una scena con `Lambda = 0` ALZA alla COSTRUZIONE",
+          bool(alzato), "### ha alzato: %s" % alzato)
+    # ### ✅ **E il controllo positivo: con `phi` non nullo la stessa scena PASSA.**
+    st["phi_h"][:] = 1.0
+    mot = MO.Motore(inc, MO.Geometria(nv, U), st, np.full(nn, 0.1), "numpy")
+    esito("### (v2) e con `phi` NON nullo la stessa scena passa",
+          mot is not None and float(np.min(mot.densita_vuoto(st))) > 0.0,
+          "min `Lambda` = %.3f: si rifiuta LO STATO, non si corregge un valore"
+          % float(np.min(mot.densita_vuoto(st))))
+    # ### ② **AL CARICAMENTO**, e il file si guasta ### **dopo** il salvataggio: e' il
+    # ### caso vero *(un file di una versione vecchia, o modificato)*.
+    import checkpoint as CK
+    import schema_config as SC
+    import tempfile
+    base = tempfile.mkdtemp(prefix="vuoto_")
+    alzato2 = ""
+    try:
+        cfg = SC.carica(os.path.join(_QUI, "config", "prova.yaml"))
+        imp = "0" * 16
+        q = os.path.join(base, "chk.npz")
+        CK.salva(q, mot, 7, cfg, imp)
+        # ### il guasto: `phi` a zero NEL FILE, lasciando tutto il resto
+        d = dict(np.load(q, allow_pickle=False))
+        assert "phi_h" in d, "la chiave `phi_h` non e- nel checkpoint: %s" % sorted(d)[:6]
+        d["phi_h"] = np.zeros_like(d["phi_h"])
+        np.savez(q, **d)
+        try:
+            CK.riprendi(q, cfg, imp)
+        except AssertionError as e:                           # noqa: BLE001
+            alzato2 = str(e)[:58]
+    finally:
+        import shutil
+        shutil.rmtree(base, ignore_errors=True)
+    esito("### (v3) DEVE fallire: uno stato salvato con `Lambda = 0` ALZA al CARICAMENTO",
+          bool(alzato2), "### ha alzato: %s" % alzato2)
+
+
 def main(argv):
     del argv
     _presidio.avvia(__file__)
@@ -216,6 +281,7 @@ def main(argv):
     braccio_accesa()
     braccio_lambda_zero()
     braccio_locale()
+    braccio_vuoto_vietato()
     print("=" * 100)
     print("IL COLLAUDO DI `cs`: %d su %d   %s"
           % (OK[0], OK[1], "### TUTTI PASSATI" if OK[0] == OK[1] else "### CI SONO BUCHI"))

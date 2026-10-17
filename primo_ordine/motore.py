@@ -188,7 +188,47 @@ class Motore(object):
             "CAMM-SATURAZIONE": self._saturazione,
             "CAMM-MATERIA-VUOTO": self._materia_vuoto,
         }
+        self._vieta_vuoto_nullo()
 
+    def _vieta_vuoto_nullo(self):
+        """### ⛔⛔ **IL VUOTO NULLO NON E' UNO STATO FISICO** *(decisione di Luca del
+        `2026-10-17` alle `16:25`)*, e ### **si rifiuta QUI, dove ogni scena passa.**
+
+        ### ⭐ **`Lambda = 0` in un nodo e' un LIMITE, non uno stato ammesso:** la luce
+        ### **puo' rallentare quanto vuole** *(`cs -> 0` quando `Lambda -> 0`)*, ### **ma
+        non si ferma mai del tutto.**
+
+        ### ⛔ **IL MOTIVO, e non e' un'opinione:** con `cs = 0` in un nodo ### **anche gli
+        archi che lo toccano** avrebbero tempo proprio ### **zero** *(la media armonica di
+        `B-3`)*, e quel nodo diventerebbe ### **una cella SIGILLATA PER SEMPRE** -- niente
+        entra, niente esce, e ### **il suo vuoto resta zero.**
+        ### ⚠ **Non e' un orizzonte: e' un pozzo murato**, e un orizzonte ### **si puo'
+        attraversare in un verso**, un pozzo murato ### **no.**
+        ### 📌 **E la dinamica di oggi NON produce uno zero esatto:** `CAMM-MATERIA-VUOTO`
+        ### **cambia solo FASI** *(quindi non tocca `|phi|`)*, e il trasporto
+        ### **non annulla TUTTE le estremita' di un nodo.** ### **Misurato: il minimo di
+        `Lambda` su `250` tick e' `5.6e-02`.**
+
+        ### ✅ **E NON E' UN PAVIMENTO** *(`A11`)*: ### **si RIFIUTA lo stato, non si
+        corregge il valore.** ### **Nessun numero viene toccato.**
+        ### ⚠ **E l'assert del cono NON si tocca: resta come ALLARME.** Se la dinamica
+        portasse un nodo a `Lambda = 0` ### **durante** una corsa, la corsa
+        ### **si ferma con l'errore** -- e quello e' ### **un risultato da relazionare, non
+        da curare.**
+        """
+        lam = self.densita_vuoto(self.st)
+        mi = float(np.min(lam))
+        quanti = int(np.sum(lam <= 0.0))
+        assert mi > 0.0, (
+            "questo stato ha `Lambda = 0` su %d nodi su %d (il minimo e' %.17g): IL VUOTO"
+            " NULLO NON E' UNO STATO FISICO (decisione di Luca del 2026-10-17)."
+            " ### `cs = Lambda/(Lambda + Lambda_c)` darebbe `cs = 0` la', e con lui gli"
+            " archi che toccano quel nodo (media armonica `B-3`): il nodo diventerebbe UNA"
+            " CELLA SIGILLATA PER SEMPRE -- niente entra, niente esce, il suo vuoto resta"
+            " zero. ### NON e' un orizzonte: e' UN POZZO MURATO."
+            " ### E NON SI CORREGGE CON UN PAVIMENTO (`A11`): si rifiuta LO STATO. La"
+            " scena va costruita con `phi` non nullo su ogni nodo"
+            % (quanti, lam.size, mi))
     # ------------------------------------------------------------------ le porte del tick
     def apri_tick(self):
         """### Apre un tick. ### **Azzera il contatore delle crescite.**"""
