@@ -18027,3 +18027,27 @@ solo nella RIPRESA, lo dici e la chiudo.
 ### **il collaudo `17` su `17`** coi quattro bracci.
 ### ⭐ **E il braccio `③` sta nel referto con i suoi numeri:** ### **`0` errori nuovi
 senza l'import, `1` con l'import** — ### **la derivazione, provata su carta.**
+### ⛔⛔ **PEZZO `8` COMINCIATO: UN FALSO-UNO IN ATTESA, E L'HO FATTO IO IERI**
+
+**Il task history e' committato prima del codice**
+*(`doc/TASK_HISTORY/2026-10-17_8_mb1_non_copia_il_passo.md`)*.
+
+### ⛔ **IL DIFETTO:** per far girare `M-B1` dopo lo spostamento ho dichiarato
+`VIAGGIANO = ("_misura_mb1.py", "tick.py")`, e `contro()` copia quei file
+### **nell'albero vecchio SEMPRE.** ### **Quindi il <<prima>> gira col CICLO DEL PASSO DI
+OGGI.**
+### ⚠ **Oggi e' innocuo** *(lo spostamento era verbatim, provato al carattere)*,
+### ⛔ **ma il punto `D` cambiera' `tick.py`: da allora `M-B1` confronterebbe il passo
+nuovo col passo nuovo** — ### **verde per costruzione.**
+
+### ⭐ **E LA COSA CHE RENDE IL DIFETTO GRAVE:** `M-B1` e' ### **il criterio** con cui
+ho giustificato lo spostamento, e con cui ogni mandato chiede di provare che una cura
+### **non ha mosso un bit.** ### **Un criterio che non puo' fallire non e' un criterio** —
+e ### **finora non avevo MAI mostrato che `M-B1` puo' fallire.** ### **Il braccio del
+punto `4` serve a quello**, ed e' la cosa che conta di piu' del pezzo.
+
+### 📌 **E L'ERRORE `n.6` DEL GUARDIANO, che lui stesso registra:** nel mandato del
+`19:33` due premesse erano sbagliate *(i `default` nel nucleo *<<gia' zero>>*: erano `3`
+in `grafo.py`; `energia.py` elencato nel nucleo: ### **nessuna radice lo importa**)*, e le
+aveva prese ### **dal censimento PER NOME DI FILE senza derivare il nucleo.**
+### ✅ **Le avevo segnalate prima del codice**, e lui dice che era giusto.
