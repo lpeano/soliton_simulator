@@ -19075,3 +19075,13 @@ MISURO**, cosi' la scelta ### **non e' un'opinione.**
 ### **la composizione resta quella** -- se restasse un'asimmetria fra i due mezzi del
 palindromo, ### **`C1` non arriverebbe a `1.9`.** ### ✅ **E in quel caso il punto `4`
 del mandato dice cosa faro': pendenza PEZZO PER PEZZO, localizzare, committare, FERMARMI.**
+
+### 📌 **L'AGGIUNTA SULLA MEMORIA E' IN CODA, e va DOPO `C1`**
+
+*(Luca, `2026-10-18`)*: la voce `L3` si allarga a ### **TUTTI i punti fissi del secondo
+ordine**, con un ### **censimento CONTATO** *(file, funzione, grandezza, giri medi e
+massimi, quota del costo)*, la ### **matrice delle dipendenze fra i `14` pezzi** come
+prerequisito della variante leapfrog, e la nota che ### **la scelta e' UNA per il modello
+intero** -- *«lo stato contiene il passato: si' o no»*.
+### ✅ **Registrata appena arrivata, e NON interrompe:** la misura dei `14` pezzi
+### **e' il pezzo in corso.**
