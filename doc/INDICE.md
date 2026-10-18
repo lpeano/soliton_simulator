@@ -9,7 +9,7 @@
 | `DOCUMENTAZIONE` | `2` | 1 |
 | `DOCUMENTAZIONE` | `ENTRAMBE` | 9 |
 | `FISICA` | `1` | 343 |
-| `FISICA` | `2` | 132 |
+| `FISICA` | `2` | 133 |
 | `FISICA` | `ENTRAMBE` | 21 |
 | `INFRASTRUTTURA` | `1` | 39 |
 | `INFRASTRUTTURA` | `2` | 23 |
@@ -313,6 +313,7 @@
 | `DOMANDA-LA-FORMA-DI-CS-DAL-VUOTO` | DECISIONE | FISICA | 2 | ### **SUPERATA** |  | la forma di f in cs_k = f'(pi_k): il posto A1 della carta, dichiarato aperto |
 | `DOMANDA-LA-FORMA-DI-F-NELL-ORDINAMENTO` | DECISIONE | FISICA | 2 | ### **AGENDA** | SI | quale F in Lambda F(q q / Lambda^2): esiste, NON e unica, ed e la stessa classe  |
 | `DOMANDA-LA-GERARCHIA-GRAVITA-EM` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | la gerarchia gravita/elettromagnetismo deve EMERGERE dal modello, o si accetta c |
+| `DOMANDA-LA-MITOSI-CREA-VUOTO` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | la mitosi CREA vuoto? a densita costante V cresce, e oggi V si conserva esattame |
 | `DOMANDA-LA-SCALA-NATURALE-DI-N` | DECISIONE | FISICA | 2 | ### **CHIUSA** |  | la scala naturale di N: l-asintoto della saturazione non vale, e N diverge come  |
 | `DOMANDA-LAMBDA-GRANDEZZA` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | lambda: su quale grandezza si misura, e da dove viene il suo valore? |
 | `DOMANDA-MASSA-E-FORME-MANCANTI` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | il termine di massa e due forme del flusso sono nel banco e non in tabella |

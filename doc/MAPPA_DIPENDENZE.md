@@ -904,3 +904,96 @@ dichiarata e uguale)*, e il confronto di ### **verso, pendenza e profilo** del r
 grossa ### **l'ampiezza media del modo a `k = pi` si annulla mentre la sua densita' no**
 -- cioe' ### **da lontano si vedrebbe la sua gravita' ma non la sua onda.**
 ### ⛔ **Nessuna conclusione prima della misura.**
+
+## 25. ⭐⭐ `L3` — **LA `G` DEL MODELLO: UNIVERSALITA', STABILITA', E IL VUOTO ALLA NASCITA** *(`2026-10-18`, `00:55`-`01:04`)*
+
+> ### 📌 **Ragionamento di Luca, integrazione del guardiano**, e si colloca
+> ### **sotto `L3`, accanto alla domanda del vuoto alla nascita.**
+> ### ⛔ **Nessun codice, nessuna decisione.**
+> ### ⚠⚠ **E OGNI PUNTO PORTA LA SUA ETICHETTA**, perche' ### **pesano in modo
+> diverso:** ### **FATTO DERIVATO** · ### **IPOTESI DI LUCA** ·
+> ### **CONSIDERAZIONE DEL GUARDIANO** · ### **VALORE DI LETTERATURA DA
+> VERIFICARE.**
+
+### `1)` ⭐ **FATTO DERIVATO** *(dalla strada `(d)`, ### **da riverificare ora che e'
+nel codice**)*: il termine nuovo accoppia al vuoto ### **l'ENERGIA TOTALE del nodo**, con
+un coefficiente che nel tempo proprio vale
+
+```
+d ln cs / d Lambda  =  Lambda_c / (Lambda (Lambda + Lambda_c))
+```
+
+### `(a)` ⭐ **UNIVERSALITA' PER SPECIE** *(FATTO DERIVATO)*: ### **lo stesso
+coefficiente moltiplica OGNI forma di energia del nodo** -- camminata della materia,
+moneta di spin, accoppiamento materia-vuoto, energia del vuoto.
+### ✅ **Nessun coefficiente per specie: e' il PRINCIPIO DI EQUIVALENZA ALLA
+SORGENTE, per STRUTTURA.** ### ⚠ **Da verificare con una misura**, ora che `(d)`
+gira: ### **due sorgenti con la STESSA energia e composizione DIVERSA.**
+### 📌 **E il codice lo dice:** `Omega_k` moltiplica ### **`H_k(nodo)` INTERO**
+*(i due Grover, la moneta, `N`)* piu' i contributi d'arco -- ### **non un termine scelto.**
+### `(b)` **STESSA LEGGE IN OGNI NODO** *(FATTO DERIVATO)*: ### **nessun parametro per
+nodo**, la formula e' ### **locale.**
+### `(c)` ⛔ **IL VALORE DIPENDE DAL VUOTO DI FONDO** *(FATTO DERIVATO)*: la `G`
+efficace ### **segue `Lambda` locale.** Dove il fondo e' uguale ### **`G` e' uguale**; con
+fondo diverso ### **`G` diversa**; se il fondo medio ### **cambia nel tempo**,
+### **`G` cambia nel tempo.**
+### 📌 **CONSIDERAZIONE DEL GUARDIANO:** e' il comportamento delle teorie
+### **scalare-tensore** *(tipo Brans-Dicke)*, col ### **vuoto come campo di fondo.**
+
+### `2)` ⭐ **IPOTESI DI LUCA:** se la mitosi produce un vuoto ### **LOCALMENTE
+UNIFORME A GRAPPOLI**, e un grappolo e' ### **piu' grande dello spazio osservabile**,
+dentro il grappolo ### **`G` e' la stessa ovunque**; le differenze stanno
+### **solo ai confini**, oltre l'orizzonte.
+### 📌 **CONSIDERAZIONE DEL GUARDIANO:** il ragionamento e' ### **coerente**, ed
+e' ### **la stessa logica con cui in cosmologia una regione uniforme piu' grande
+dell'orizzonte spiega l'omogeneita' osservata.** ### **Regge a DUE condizioni:**
+### `(i)` ### **UNIFORMITA' NELLO SPAZIO:** il grappolo deve ### **superare le scale dove
+`G` e' misurata** *(sistema solare, galassie, radiazione di fondo)*;
+### `(ii)` ### **UNIFORMITA' NEL TEMPO:** `G` ### **non deve derivare** mentre il
+grappolo cresce.
+### ⚠⚠ **VALORI DI LETTERATURA DA VERIFICARE con le fonti PRIMA di usarli come
+criterio:** la deriva di `G` oggi e' vincolata a ### **circa una parte su `1e12`-`1e13`
+all'anno** *(misure Terra-Luna)*, e ### **dall'epoca della nucleosintesi a qualche decina
+di percento al massimo.**
+
+### `3)` 📌 **CONSEGUENZA DELLA CONDIZIONE `(ii)`** *(CONSIDERAZIONE DEL
+GUARDIANO)*: perche' `G` resti stabile mentre lo spazio cresce, ### **il vuoto PER
+ESTREMITA' del nodo che nasce deve essere quello dei vicini** -- cioe' ### **la DENSITA'
+di vuoto deve restare costante durante l'espansione.**
+### ⭐ **E' il comportamento di una COSTANTE COSMOLOGICA** *(energia oscura)*: il
+modello ### **ne sarebbe SPINTO, non lo si mette a mano.**
+### ⛔ **Nessuna conclusione prima della misura.**
+
+### `4)` ⛔⛔ **LA TENSIONE DA RISOLVERE IN `L3`** *(domanda per Luca, registrata
+come voce aperta: `[[DOMANDA-LA-MITOSI-CREA-VUOTO]]`)*: ### **oggi `V` si conserva
+ESATTAMENTE.** Se i nodi si moltiplicano ### **a densita' di vuoto costante**,
+### **`V` totale CRESCE** -- quindi ### **la mitosi dovrebbe CREARE vuoto.**
+### ⚠ **E la decisione del `2026-10-12` sul bilancio della nascita** *(genitori +
+vuoto, la materia non paga)* ### **va riletta**, perche' il vuoto del figlio:
+### `(a)` ### **si PRELEVA dai vicini** -- allora ### **la densita' si diluisce e `G`
+deriva**; oppure
+### `(b)` ### **NASCE** -- allora ### **`V` non si conserva nella mitosi**, e la
+conservazione di `V` vale ### **solo a grafo fisso**; oppure
+### `(c)` ⭐ **IPOTESI DI LUCA** *(aggiunta delle `01:04`)*: ### **`V` CONSERVATO
+GLOBALMENTE**, grappoli ### **omogenei ma a densita' DIVERSE fra loro.**
+### 📌 **CONSIDERAZIONE DEL GUARDIANO sulla `(c)`:** ### **nello spazio regge**;
+### **nel tempo**, perche' `G` resti stabile in un grappolo che ### **CRESCE**
+*(l'espansione osservata)*, ### **il vuoto deve ENTRARE nel grappolo dai vicini allo
+stesso ritmo della nascita dei nodi** -- gli altri grappoli ### **si svuotano**, e `V`
+totale ### **resta.** ### ⚠ **E' coerente ma richiede un MECCANISMO di trasporto
+legato alla crescita**, e ### **il vincolo sulla deriva di `G`** *(valore di letteratura
+da verificare)* ### **misura quanto preciso deve essere quel ritmo.**
+### ⛔ **E LE ALTERNATIVE NON REGGONO:** *(1)* il grappolo ### **non cresce** -- non
+da' l'espansione; *(2)* `G` ### **poco sensibile alla densita'** -- ### **esclusa dalla
+FORMA**, perche' `d ln cs/d Lambda` ### **dipende SEMPRE da `Lambda`.**
+### ✅ **LE TRE LETTURE PORTANO A CODICE DIVERSO, e la differenza e' FISICA.**
+
+### `5)` 📌 **RIMANDO A `L5`** *(CONSIDERAZIONE DEL GUARDIANO)*: i confini fra
+grappoli di vuoto diverso sarebbero ### **pareti di dominio dove `G` cambia**, ed e'
+### **un'eco della strada `(3)` dei domini di materia/antimateria.**
+### ⛔ **Solo un rimando, nessuna ipotesi da perseguire.**
+
+### `6)` **LE MISURE, quando arrivera' `L3`:** `(a)` ### **`G` efficace contro il vuoto di
+fondo**, su una scena con ### **due regioni uniformi a fondo diverso**; `(b)` ### **la
+deriva del vuoto medio PER ESTREMITA' sotto mitosi**, per ### **le tre letture del punto
+`4`.**

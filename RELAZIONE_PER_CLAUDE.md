@@ -19023,3 +19023,27 @@ due corse.** ### **Quello che manca e' solo LA SORGENTE a `k = pi`.**
 ### 📌 **E il punto `2(a)` -- il CONTROLLO con `S3` sola -- si potrebbe fare
 SUBITO**, perche' ### **non aspetta `(d)`**: lo segnalo, e ### **non lo faccio ora**
 perche' il mandato dice ### **solo mappa.**
+
+### ✅ **LA `G` DEL MODELLO E' IN MAPPA, CON LE ETICHETTE** *(sezione `25`)*
+
+### ⭐ **E le etichette non sono una formalita':** ### **`FATTO DERIVATO`** *(i tre
+del punto `1`: universalita' per specie, stessa legge in ogni nodo, `G` che segue il
+fondo)*, ### **`IPOTESI DI LUCA`** *(i grappoli, e la `(c)` del punto `4`)*,
+### **`CONSIDERAZIONE DEL GUARDIANO`** *(Brans-Dicke, le due condizioni, il meccanismo di
+trasporto)*, ### **`VALORE DI LETTERATURA DA VERIFICARE`** *(la deriva di `G`: `1e12`-
+`1e13` all'anno, e qualche decina di percento dalla nucleosintesi)*.
+### ⚠ **E QUEL VALORE NON L'HO VERIFICATO SULLE FONTI, e lo scrivo nella voce:**
+### **non e' un criterio finche' non lo e'.**
+
+### ✅ **E IL PUNTO `1(a)` HA UN RISCONTRO NEL CODICE DI OGGI, non solo una
+promessa:** `Omega_k` moltiplica ### **`H_k(nodo)` INTERO** -- i due Grover, la moneta,
+l'accoppiamento `N` -- piu' i contributi d'arco. ### **Nessun coefficiente per specie
+c'e' DAVVERO**, e ### **si vede nel sorgente.**
+### ⚠ **Ma la misura che il mandato chiede** *(due sorgenti con la STESSA energia e
+composizione DIVERSA)* ### **non l'ho fatta:** il mandato dice ### **solo mappa e voce.**
+
+### ⛔⛔ **E LA TENSIONE DEL PUNTO `4` E' UNA VOCE APERTA:**
+`[[DOMANDA-LA-MITOSI-CREA-VUOTO]]` -- ### **oggi `V` si conserva ESATTAMENTE**
+*(rimisurato col termine acceso: `1.5` ulp su `64` tick)*, ma ### **se i nodi si
+moltiplicano a densita' costante `V` CRESCE.** ### **Tre letture, e portano a codice
+diverso.**
