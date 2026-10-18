@@ -1,0 +1,24 @@
+[TIMBRO] _censimento_osservabili.py  sha1-BYTE 408d8f59  committato e pulito
+====================================================================================================
+CHI LEGGE `mot.cs` IN UN'OSSERVABILE -- l'errore `n.12`, CENSITO
+====================================================================================================
+  le forme cercate: `g_pesata()`, `pesi()`, `pesi_dal_passo()` e `.cs`   (con l'AST)
+----------------------------------------------------------------------------------------------------
+  ### I FILE DA GUARDARE, e sono 5:
+     primo_ordine/_collauda_cs.py                 69:.cs  82:.cs  92:.cs  147:.cs  175:.cs  182:.cs  195:.cs
+     primo_ordine/_collauda_cs_centro.py          97:.cs  101:.cs  103:.cs
+     primo_ordine/_collauda_cs_l1.py              115:g_pesata()  270:.cs  407:.cs  409:.cs
+     primo_ordine/_misura_hw.py                   143:.cs  149:.cs  153:.cs  178:pesi_dal_passo()  201:.cs  312:.cs  338:.cs
+     primo_ordine/_misura_punto_medio.py          276:.cs  278:.cs  281:g_pesata()  426:.cs  430:.cs
+----------------------------------------------------------------------------------------------------
+  ### E I 4 DICHIARATI LEGITTIMI, col loro motivo:
+     primo_ordine/energia_pesata.py               12 righe
+     primo_ordine/flussi_parziali.py              8 righe
+     primo_ordine/motore.py                       2 righe
+     primo_ordine/tick.py                         4 righe
+----------------------------------------------------------------------------------------------------
+  ### CONTATI: 5 file da guardare, 26 righe in tutto; 4 file legittimi.
+  ### ⚠ E <<da guardare>> NON vuol dire <<sbagliato>>: vuol dire che la
+  ###   riga va letta, perche' se e' un'OSSERVABILE DOPO UN TICK e' l'errore
+  ###   `n.12`. ### Il censimento dice DOVE, non chi.
+====================================================================================================

@@ -1,0 +1,173 @@
+[TIMBRO] _misura_punto_medio.py  sha1-BYTE 8b83ee05  committato e pulito
+====================================================================================================
+IL PUNTO MEDIO PER PEZZO -- il CENSIMENTO dei 14 pezzi, PRIMA del codice
+### Mandato di Luca del 2026-10-18, 12:07.
+====================================================================================================
+  LA CONFIGURAZIONE INTERA, dichiarata:
+  la scena di `M-B2`: nn = 16   seme = 7   norma = locale   vuoto_modulo = 2.0   su2 = True
+  lo stato: la PRE-CORSA di `_misura_hw` (`T = 8.0` a `dtau = 0.25`)
+  `Lambda_c` = la MEDIA di `Lambda` sulla scena, DERIVATA e non scelta
+  l'ordine: 14 voci, impronta 2e7f795d2a52fbe7
+----------------------------------------------------------------------------------------------------
+### I 14 PEZZI DEL PALINDROMO: quanto muovono `Lambda` e `rho` DENTRO la
+###   propria applicazione, con la forma `cs` ACCESA. La soglia e' 1e-09
+###   (`dtau = 0.2500`, lo stato NON uniforme della pre-corsa di `H_w`)
+     n.   il pezzo                 frazione  |dLambda|        |drho|           muove Lambda?
+     1    CAMM-MATERIA-VUOTO       0.50      3.552714e-15     3.552714e-15     no
+     2    CAMM-FASE-VUOTO          0.50      3.552714e-15     0.000000e+00     no
+     3    CAMM-MONETA-SPIN         0.50      0.000000e+00     3.552714e-15     no
+     4    CAMM-GROVER              0.50      0.000000e+00     3.552714e-15     no
+     5    CAMM-SPOSTAMENTO         0.50      0.000000e+00     5.929228e-01     no
+     6    CAMM-GROVER-VUOTO        0.50      5.329071e-15     0.000000e+00     no
+     7    CAMM-SPOSTAMENTO-VUOTO   0.50      1.989525e+00     0.000000e+00     ### SI'
+     8    CAMM-SPOSTAMENTO-VUOTO   0.50      1.989525e+00     0.000000e+00     ### SI'
+     9    CAMM-GROVER-VUOTO        0.50      5.329071e-15     0.000000e+00     no
+     10   CAMM-SPOSTAMENTO         0.50      0.000000e+00     5.929228e-01     no
+     11   CAMM-GROVER              0.50      0.000000e+00     3.552714e-15     no
+     12   CAMM-MONETA-SPIN         0.50      0.000000e+00     3.552714e-15     no
+     13   CAMM-FASE-VUOTO          0.50      3.552714e-15     0.000000e+00     no
+     14   CAMM-MATERIA-VUOTO       0.50      3.552714e-15     3.552714e-15     no
+----------------------------------------------------------------------------------------------------
+     ### I PEZZI CHE MUOVONO `Lambda`, CONTATI: 1 su 7 id distinti
+     ###   CAMM-SPOSTAMENTO-VUOTO
+  il pezzo che muove `Lambda` e' UNO SOLO, e e' `CAMM-SPOSTAMENT PASSA   contati 1: ['CAMM-SPOSTAMENTO-VUOTO']
+
+### 📌 DI CHE ORDINE E' IL MOVIMENTO di `CAMM-SPOSTAMENTO-VUOTO` (informazione)
+     dtau         |dLambda|        rapporto col precedente
+     0.500000     4.016602e+00     --
+     0.250000     1.989525e+00     2.019
+     0.125000     1.028057e+00     1.935
+     0.062500     5.216191e-01     1.971
+     0.031250     2.626131e-01     1.986
+     ### un rapporto `~2` vuol dire `O(dtau)`: il peso sbagliato di `O(dtau)`
+###   e' cio' che da' la deriva del PRIMO ordine.
+
+### `C1` LA PENDENZA DI `G` COL PUNTO MEDIO PER PEZZO (regola `ii`)
+     k    dtau       tick    escursione G
+     1    0.500000   16      7.552826e+00
+     2    0.250000   32      1.856304e+00
+     3    0.125000   64      4.743411e-01
+     4    0.062500   128     1.108640e-01
+     5    0.031250   256     2.798811e-02
+     ### i giri del punto fisso del peso: medio 8.37, massimo 19
+  `C1` la pendenza di `G` col punto medio e' `>= 1.9`            PASSA   pendenza 2.019
+
+### `C1` IL CASO CHE DEVE FALLIRE: l'OSSERVABILE VECCHIA (`g_pesata`)
+     k    dtau       tick    escursione G
+     1    0.500000   16      1.224621e+01
+     2    0.250000   32      6.338366e+00
+     3    0.125000   64      2.865771e+00
+     4    0.062500   128     1.506837e+00
+     5    0.031250   256     7.619396e-01
+  ### `C1` DEVE fallire: l'osservabile VECCHIA da' `1.002 +- 0.0 PASSA   pendenza 1.002: il numero di prima si RITROVA, cioe' il difetto era LA LETTURA e non lo schema
+
+### 📌 E I PESI BLOCCATI, CON L'OSSERVABILE GIUSTA (informazione):
+     k    dtau       tick    escursione G
+     1    0.500000   16      1.070057e+01
+     2    0.250000   32      2.209896e+00
+     3    0.125000   64      5.507999e-01
+     4    0.062500   128     1.302730e-01
+     5    0.031250   256     3.243482e-02
+     ### pendenza 2.091 -- cioe' ### IL PUNTO MEDIO PER PEZZO NON SERVIVA:
+###   il passo di default era GIA' del secondo ordine, e col punto medio da'
+###   2.019, cioe' un filo PEGGIO.
+
+### 📌 `C1` CON LA REGOLA `(i)` (informazione, NON un criterio)
+     k    dtau       tick    escursione G
+     1    0.500000   16      5.985737e+00
+     2    0.250000   32      1.710948e+00
+     3    0.125000   64      4.490933e-01
+     4    0.062500   128     1.082951e-01
+     5    0.031250   256     2.754028e-02
+     ### pendenza 1.941 (la `(ii)` da' 2.019); giri medio 8.39, massimo 22
+
+### IL CONTROLLO POSITIVO dell'errore `n.12`: `cs` dello STATO contro
+###   `mot.cs` DOPO un tick. ### Se e' `O(dtau)`, l'osservabile vecchia
+###   sbagliava di `O(dtau)` -- ed e' la pendenza `1`.
+     dtau       |dcs| relativo     rapporto       dG/G
+     0.500000   2.248467e-01       --             3.222715e-02
+     0.250000   1.199481e-01       1.875          1.002092e-02
+     0.125000   5.877037e-02       2.041          2.239158e-03
+     0.062500   2.867561e-02       2.049          3.334225e-04
+     0.031250   1.398948e-02       2.050          3.733496e-05
+  le due letture di `cs` distano `O(dtau)` dopo un tick          PASSA   i rapporti: 1.875  2.041  2.049  2.050 -- e la differenza su `G` segue
+
+### IL CONTROLLO POSITIVO: il peso del punto medio DIFFERISCE da quello
+###   bloccato, e di quanto. ### Il RELATIVO deve essere `O(dtau)`.
+     dtau       |ds| assoluto    scala di s       RELATIVO     rapporto
+     0.500000   2.474888e-02     3.236002e-01     7.647981e-02 --
+     0.250000   5.969337e-03     1.618001e-01     3.689329e-02 2.073
+     0.125000   1.550046e-03     8.090005e-02     1.916002e-02 1.926
+     0.062500   3.943233e-04     4.045002e-02     9.748408e-03 1.965
+     0.031250   9.940156e-05     2.022501e-02     4.914784e-03 1.983
+  il peso del punto medio differisce da quello bloccato di `O(dt PASSA   i rapporti dei RELATIVI: 2.073  1.926  1.965  1.983 (l'assoluto e' `O(dtau^2)` perche' il peso stesso e' `O(dtau)`)
+
+### LA REVERSIBILITA' del pezzo col punto medio: `+h`, poi `-h`
+     dtau       |phi - phi_0|    ulp            entro 256?
+     0.500000   8.881784e-16     1.0            si
+     0.250000   6.280370e-16     0.7            si
+     0.125000   8.881784e-16     1.0            si
+     0.062500   8.881784e-16     1.0            si
+     0.031250   4.577567e-16     0.5            si
+  il pezzo col punto medio e' REVERSIBILE entro 256 ulp          PASSA   il PEGGIO e' 1.0 ulp
+
+### 📌 I GIRI DEL PUNTO FISSO DEL PESO (informazione): due taglie,
+###   quattro rapporti `Lambda_c/Lambda`. ### Il punto fisso ACCOPPIA LA RETE,
+###   quindi i giri dicono quanto e' accoppiata -- non la difficolta' di un arco.
+     taglia   rapporto   pendenza G   giri medio giri max
+     16       0.10       ### NON CONVERGE: il punto fisso di `cs` NON CONVERGE in 120 giri (ultimo scarto 1.217e-01): il mandato dice di RELAZIONARE coi numeri e N
+     16       0.30       ### NON CONVERGE: il punto fisso di `cs` NON CONVERGE in 120 giri (ultimo scarto 5.560e-02): il mandato dice di RELAZIONARE coi numeri e N
+     16       1.00       2.019        8.37       19
+     16       10.00      1.996        6.47       11
+     32       0.10       ### NON CONVERGE: il punto fisso di `cs` NON CONVERGE in 120 giri (ultimo scarto 4.350e-01): il mandato dice di RELAZIONARE coi numeri e N
+     32       0.30       ### NON CONVERGE: il punto fisso di `cs` NON CONVERGE in 120 giri (ultimo scarto 1.925e-08): il mandato dice di RELAZIONARE coi numeri e N
+     32       1.00       2.066        8.49       20
+     32       10.00      2.000        6.66       13
+     ### ⛔⛔ E QUESTO E- UN RISULTATO NUOVO, NON un intoppo: con il punto
+###   medio acceso il punto fisso di `cs` AL CENTRO non converge in 4
+###   dei 8 casi provati: [(16, 0.1), (16, 0.3), (32, 0.1), (32, 0.3)]. ### Va relazionato, e la scelta torna a Luca.
+
+### ⛔⛔ DOVE STA L'OSTACOLO CHE RESTA (informazione): il peso di NODO
+###   e' quello del CENTRO del palindromo, e `Lambda` cambia DURANTE il tick.
+     dtau       PEGGIO relativo    rapporto
+     0.500000   2.307954e-01       --
+     0.250000   1.225850e-01       1.883
+     0.125000   5.959237e-02       2.057
+     0.062500   2.863838e-02       2.081
+     ### un rapporto `~2` vuol dire `O(dtau)`: ed e' LO STESSO ordine che
+###   il punto medio ha TOLTO dal peso d'arco.
+     ### E PEZZO PER PEZZO (`dtau = 0.25`), il peso di nodo usato contro
+###   quello dello stato di quel pezzo:
+      1 CAMM-MATERIA-VUOTO       1.0892e-01 
+      2 CAMM-FASE-VUOTO          1.0892e-01 
+      3 CAMM-MONETA-SPIN         1.0892e-01 
+      4 CAMM-GROVER              1.0892e-01 
+      5 CAMM-SPOSTAMENTO         1.0892e-01 
+      6 CAMM-GROVER-VUOTO        1.0892e-01 
+      7 CAMM-SPOSTAMENTO-VUOTO   1.0892e-01 
+      8 CAMM-SPOSTAMENTO-VUOTO   2.4068e-16 ### <- il CENTRO: qui e' ESATTO
+      9 CAMM-GROVER-VUOTO        1.2259e-01 
+     10 CAMM-SPOSTAMENTO         1.2259e-01 
+     11 CAMM-GROVER              1.2259e-01 
+     12 CAMM-MONETA-SPIN         1.2259e-01 
+     13 CAMM-FASE-VUOTO          1.2259e-01 
+     14 CAMM-MATERIA-VUOTO       1.2259e-01 
+     ### ⭐ E IL PEZZO `8` E' ESATTO PERCHE' E' IL CENTRO: `cs` e' valutato
+###   LA'. ### Tutti gli altri portano un peso sbagliato di `O(dtau)`.
+
+====================================================================================================
+IL CENSIMENTO: 6 su 6
+====================================================================================================
+
+### ✅ LA LETTURA, SCRITTA NEL REFERTO (e NON una decisione): C1 PASSA.
+###   La pendenza di G col passo di DEFAULT e- 2.091, contro una soglia di 1.9, e
+###   TUTTI E TRE i casi che DEVONO fallire falliscono: l-osservabile VECCHIA da-
+###   1.002 (il numero che misuravo, cioe- il difetto era LA LETTURA), senza CAMM-
+###   FASE-VUOTO 0.044 con escursione che NON cala (41.5 -> 36.7), e col segno di
+###   Omega invertito 0.012.
+### ⭐ E IL PUNTO MEDIO PER PEZZO NON SERVIVA: col conto giusto il passo di
+###   default da- 2.091 e col punto medio 2.019, cioe- un filo PEGGIO. ### Il ramo
+###   resta SPENTO, e toglierlo e- una decisione di Luca.
+### ⛔ E QUESTO REFERTO RITIRA DUE DIAGNOSI dei referti strada_d_c1_c2_c5.txt e
+###   punto_medio_per_pezzo.txt: <<i pesi congelati dentro il pezzo>> e <<il peso di
+###   nodo>>. ### Erano lo STESSO artefatto dell-osservabile.

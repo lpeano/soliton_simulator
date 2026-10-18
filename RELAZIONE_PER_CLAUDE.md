@@ -19287,3 +19287,12 @@ l'impronta ### **resta `2e7f795d2a52fbe7`.**
 toglierlo e' una decisione di Luca, come il mandato dice)*.
 ### 📌 **E la non convergenza a rapporto `0.1` e `0.3` col ramo acceso resta
 registrata**, perche' ### **e' un fatto misurato su quel ramo**, non su quello che gira.
+
+### ✅ **I DUE REFERTI NUOVI, dai blob committati**
+
+`doc/referti_l2/g_dello_stato.txt` da ### **`8b83ee05`** *(il censimento dei `14`, `C1` a
+`2.091`, i tre casi che devono fallire, i due controlli positivi, i giri, e la nota che
+RITIRA le due diagnosi)* e `doc/referti_l2/censimento_osservabili.txt` da
+### **`408d8f59`** *(`6` file da guardare, `27` righe, `4` legittimi)*.
+### ✅ **Entrambi timbrati *«committato e pulito»***, e il primo
+### **dichiara dentro se stesso che C1 PASSA** e ### **che ritira due diagnosi mie.**
