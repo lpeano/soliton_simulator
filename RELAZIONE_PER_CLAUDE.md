@@ -19011,3 +19011,15 @@ dipendesse dallo stato ### **durante** la corsa, quella dipendenza dovrebbe
 l'ostacolo localizzato, ### **`C4` che passa** e ### **`C5` il costo.**
 ### ⚠ **E `D4` e' ESEGUIBILE ma non lo faccio:** il giudizio di `D` dipende dalla
 scelta sullo ### **SCHEMA**, e quella e' tua.
+
+### ✅ **IL SOLITONE A DUE LUNGHEZZE DI PLANCK E' IN MAPPA** *(sezione `24`)*
+
+E con un rimando nella voce della strada `(d)`.
+### ⭐ **E UNA COSA E' CAMBIATA MENTRE LO SCRIVEVO:** il mandato diceva *«come
+misura da fare QUANDO `(d)` e' nel codice»* -- e ### **da oggi lo e'.**
+### ✅ **E il protocollo e' pronto:** `statica_protocollo.corri` sa
+### **accendere la forma**, e `C4` l'ha gia' usato ### **con la stessa accensione nelle
+due corse.** ### **Quello che manca e' solo LA SORGENTE a `k = pi`.**
+### 📌 **E il punto `2(a)` -- il CONTROLLO con `S3` sola -- si potrebbe fare
+SUBITO**, perche' ### **non aspetta `(d)`**: lo segnalo, e ### **non lo faccio ora**
+perche' il mandato dice ### **solo mappa.**

@@ -863,3 +863,44 @@ quindi ### **non portano termini nuovi**; ### ⚠ **con la mitosi andra' riguard
 ### `4)` ### **E UNA NOTA CHE CHIUDE UNA STRADA:** far dipendere `Lambda_c` da `cs`
 *(la <<metrica>>)* sarebbe ### **CIRCOLARE**, perche' ### **`cs` e' definita da
 `Lambda_c`.**
+
+## 24. ⭐⭐ `L2` — **IL SOLITONE A DUE LUNGHEZZE DI PLANCK** *(`2026-10-18`, `00:29`)*
+
+> ### 📌 **Domanda di Luca, integrazione del guardiano**, e si colloca
+> ### **accanto alle misure che chiudono `L2`.** ### ⛔ **Nessun codice, nessuna
+> decisione**, e ### **la misura si fa quando `(d)` e' nel codice** -- che da oggi
+> ### **lo e'** *(`CAMM-FASE-VUOTO`, `2026-10-18`)*.
+
+### `1)` ### **IL MODO:** la lunghezza d'onda di ### **DUE ARCHI** *(fase alternata
+`+,-,+,-` fra nodi vicini, `k = pi`)* e' ### **il piu' corto che il grafo rappresenta**,
+ed e' ### **il modo del DOPPIONE** della camminata.
+### ✅ **E la nota del guardiano e' GIA' registrata:** i doppioni
+### **non sono un effetto di bordo**, e l'affermazione *«velocita' di gruppo
+zero»* e' ### **RITIRATA.**
+
+### `2)` ### **LA PREVISIONE DA VERIFICARE, e sono due meta':**
+### `(a)` con ### **`S3` sola** la sorgente e' ### **`rho`**, e `rho` di un modo a fasi
+alternate e' ### **LISCIA** -> il vuoto deve ritirarsi ### **ALLO STESSO MODO** attorno a
+un solitone ### **fermo** *(`k = 0`)* e a uno ### **a fasi alternate** *(`k = pi`)*
+### **con la STESSA densita'**;
+### `(b)` con ### **la strada `(d)`** il vuoto sente anche ### **l'ENERGIA**, e il modo a
+`k = pi` ha ### **l'energia d'arco MASSIMA** per una data densita' -> la risposta
+### **deve DIFFERIRE** da quella a `k = 0`, e ### **la differenza E' la misura
+dell'effetto dell'energia** *(<<l'energia gravita>>)*.
+
+### `3)` ### **LA MISURA, e adesso si puo' fare:** due sorgenti con la ### **stessa
+`rho`**, una a `k = 0` e una a `k = pi`, ### **stesso protocollo statico** *(accensione
+dichiarata e uguale)*, e il confronto di ### **verso, pendenza e profilo** del ritiro;
+### **prima con `S3` sola** *(deve COINCIDERE: e' il CONTROLLO)*, ### **poi con `(d)`**
+*(deve DIFFERIRE, e si riporta ### **di quanto e con che segno**)*.
+### ⚠ **E anche se il modo a `k = pi` resta COESO con `cs` dinamico o si disperde.**
+
+### 📌 **E IL PROTOCOLLO E' PRONTO:** `statica_protocollo.corri` sa
+### **accendere la forma** *(`lambda_c`, dal `2026-10-18`)*, e `C4` l'ha gia' usato --
+### **con la stessa accensione nelle due corse.** ### **Quello che manca e' la SORGENTE a
+`k = pi`.**
+
+### `4)` ### **E UNA NOTA COME OSSERVAZIONE, NON come ipotesi da perseguire:** a grana
+grossa ### **l'ampiezza media del modo a `k = pi` si annulla mentre la sua densita' no**
+-- cioe' ### **da lontano si vedrebbe la sua gravita' ma non la sua onda.**
+### ⛔ **Nessuna conclusione prima della misura.**
