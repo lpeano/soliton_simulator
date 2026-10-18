@@ -19085,3 +19085,32 @@ prerequisito della variante leapfrog, e la nota che ### **la scelta e' UNA per i
 intero** -- *«lo stato contiene il passato: si' o no»*.
 ### ✅ **Registrata appena arrivata, e NON interrompe:** la misura dei `14` pezzi
 ### **e' il pezzo in corso.**
+
+### ✅ **IL CENSIMENTO DEI `14` PEZZI: UNO SOLO MUOVE `Lambda`, E L'HO CONTATO**
+
+### ⛔ **Il mandato chiedeva i numeri VISTI e non l'elenco atteso**, e i numeri sono
+questi *(forma `cs` ACCESA, `dtau = 0.25`, soglia `1e-9`)*:
+
+| il pezzo | `|dLambda|` | `|drho|` |
+|---|---|---|
+| `CAMM-MATERIA-VUOTO` | `3.6e-15` | `3.6e-15` |
+| `CAMM-FASE-VUOTO` | `3.6e-15` | `0.0` |
+| `CAMM-MONETA-SPIN` | `0.0` | `3.6e-15` |
+| `CAMM-GROVER` | `0.0` | `3.6e-15` |
+| `CAMM-SPOSTAMENTO` | `0.0` | ### **`5.9e-01`** |
+| `CAMM-GROVER-VUOTO` | `5.3e-15` | `0.0` |
+| ### **`CAMM-SPOSTAMENTO-VUOTO`** | ### **`1.99e+00`** | `0.0` |
+
+### ✅ **CONTATI: `1` su `7` id distinti**, e ### **le `14` voci guardate una per
+una** *(le due di ciascun id danno lo stesso numero, come deve essere: stessa frazione)*.
+### **Quindi il punto fisso va SOLO in `CAMM-SPOSTAMENTO-VUOTO`**, e
+### **non c'e' nessuna sorpresa da segnalare.**
+
+### ⭐ **E IL MOVIMENTO E' `O(dtau)`, misurato al dimezzare:** `4.02`, `1.99`,
+`1.03`, `0.52`, `0.26` -- rapporti ### **`2.019`, `1.935`, `1.971`, `1.986`.**
+### **E' quello che da' la deriva del PRIMO ordine.**
+
+### 📌 **E UNA COSA IN PIU' CHE IL CENSIMENTO HA FATTO VEDERE, e servira' al
+punto `3` dell'aggiunta sulla memoria:** ### **`CAMM-SPOSTAMENTO` muove `rho` di `5.9e-01`
+-- cioe' `O(1)` --** mentre ### **non muove `Lambda` affatto** *(`0.0` esatto)*.
+### **La matrice delle dipendenze fra i `14` pezzi avra' questa riga dentro.**

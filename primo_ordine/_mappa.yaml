@@ -162,6 +162,10 @@ moduli:
     responsabilita: i quattro criteri con cui L1 e- chiuso, rigirati con la forma cs ACCESA
     importa: [_collauda_tempo_proprio, _misura_completa_l2, _misura_mb2, _misura_theta_n, _misura_theta_nonlineare, _presidio, composizione, corrente, deriva, energia_pesata, flussi_parziali, tick]
 
+  - nome: _misura_punto_medio.py
+    responsabilita: il punto medio per pezzo -- dove serve, e se porta G al secondo ordine
+    importa: [_collauda_tempo_proprio, _misura_hw, _misura_mb2, _presidio, composizione, deriva, flussi_parziali, tick]
+
   - nome: _misura_statica_d.py
     responsabilita: C4, la risposta statica del vuoto con la strada (d) accesa e spenta
     importa: [_presidio, scena_l2, statica_protocollo]
