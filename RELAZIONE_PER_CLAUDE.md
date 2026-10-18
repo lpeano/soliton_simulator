@@ -19209,3 +19209,13 @@ sulla scena di `D3`; e ### **sulla taglia `32` medio `8.5`, massimo `20`** -- ci
 ### **i giri NON crescono con la taglia** *(il punto fisso accoppia la rete, ma la rete
 piu' grande non costa piu' giri)*. ### ⚠ **La PENDENZA invece peggiora: `0.818` a
 taglia `32` contro `0.973` a `16`.**
+
+### ✅ **IL REFERTO DEL PUNTO MEDIO, dal blob committato**
+
+`doc/referti_l2/punto_medio_per_pezzo.txt`, da ### **`sha1-BYTE e3678b7b`**, timbrato
+*«committato e pulito»*: il ### **censimento dei `14`**, `C1` coi suoi due casi,
+il ### **controllo positivo**, la ### **reversibilita'**, i ### **giri su due taglie e
+quattro `Lambda_c`**, e ### **la tabella che localizza l'ostacolo.**
+### ⚠ **E dichiara DENTRO SE STESSO che porta un rosso e perche'**, compresa
+### **la non convergenza a rapporto `0.1` e `0.3`** e il fatto che
+### **lo schema nasce SPENTO.**
