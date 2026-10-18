@@ -19114,3 +19114,30 @@ una** *(le due di ciascun id danno lo stesso numero, come deve essere: stessa fr
 punto `3` dell'aggiunta sulla memoria:** ### **`CAMM-SPOSTAMENTO` muove `rho` di `5.9e-01`
 -- cioe' `O(1)` --** mentre ### **non muove `Lambda` affatto** *(`0.0` esatto)*.
 ### **La matrice delle dipendenze fra i `14` pezzi avra' questa riga dentro.**
+
+### ✅ **LE PRECISAZIONI SONO NEL TASK HISTORY, PRIMA DEL CODICE DEL PUNTO FISSO**
+
+### `A1)` ### **USO LA REGOLA `(ii)`: la MEDIA DEI DUE `Lambda`**, e il motivo
+### **si controlla:** ### **`(phi_0 + phi_1)/2` NON E' UNO STATO DEL FLUSSO** -- il pezzo
+e' una rotazione, e la media fra partenza e arrivo di una rotazione di angolo `theta` ha
+norma ### **`cos(theta/2)`** volte quella di partenza, quindi `Lambda` letta la' e'
+### **sistematicamente PIU' PICCOLA** di un fattore `cos^2(theta/2)`.
+### ⚠ **E' `O(h^2)`, quindi non rompe il secondo ordine -- ma e' un BIAS CON UN
+SEGNO**, e fra due regole che costano uguale prendo ### **quella che non ce l'ha.**
+### 📌 **E la `(i)` la misuro comunque:** ### **`C1` per tutte e due**, nel
+referto, ### **come informazione e non come criterio.**
+### ⚠ **E DICO ANCHE CHE ESISTE UNA TERZA REGOLA** *(il peso allo stato a meta' del
+pezzo, `Phi(h/2)`)*, che e' ### **la piu' fedele alla frase** e ### **non ha il difetto di
+norma**: ### **non la uso perche' il mandato chiede di scegliere fra le DUE**, e perche'
+costa ### **un'applicazione in piu' per giro.** ### **Lo scrivo per non nasconderlo.**
+
+### `A2)` ### **E IL PUNTO FISSO NON E' PER ARCO: ACCOPPIA LA RETE INTERA.**
+`hop_phi` applica ### **tutti gli archi insieme**, e `Lambda_k` ### **somma i semiarchi di
+piu' archi** -- quindi il peso di un arco dipende da `Lambda` dei suoi due nodi, che
+dipendono da ### **tutti gli archi che li toccano.**
+### ✅ **Quindi e' UN punto fisso su tutta la rete, non `m` indipendenti** -- e cambia
+cio' che il numero dei giri misura: ### **non la difficolta' di un arco, ma quanto e'
+accoppiata la rete.**
+### 📌 **E percio' misurero' i giri su DUE taglie** oltre alle quattro `Lambda_c`:
+### **se crescessero con la taglia, il costo per tick non sarebbe una costante del
+modello ma una funzione della rete** -- e sarebbe una cosa da dirti.

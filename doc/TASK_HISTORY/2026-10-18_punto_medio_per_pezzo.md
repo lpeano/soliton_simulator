@@ -181,3 +181,55 @@ variazione rispetto a oggi *(`D3(2) = 1.254`, `C4` `-3.145` contro `-3.919`)*, e
 5. I referti ### **dal blob committato**, la `RIPRESA`, la relazione.
 6. La mappa: ### **l'alternativa di Luca** *(la memoria invece del punto fisso)*,
    ### **solo la voce, senza codice.**
+
+
+---
+
+## 4. ⭐⭐ LE PRECISAZIONI DEL `2026-10-18` — *quale punto medio, e che cosa accoppia*
+
+> ### 📌 **Precisazioni al mandato**, e ### **stanno QUI perche' vengono PRIMA
+> del codice del punto fisso.**
+
+### `A1)` ⛔⛔ **QUALE REGOLA SIMMETRICA USO: LA `(ii)`, LA MEDIA DEI DUE `Lambda`**
+
+```
+Lambda_medio = (Lambda_0 + Lambda_1)/2        e il peso si legge LA' DENTRO
+```
+
+### ⚠ **E la `(i)` -- `Lambda` calcolato sul `phi` medio `(phi_0 + phi_1)/2` -- NON la
+uso, per un motivo che si CONTROLLA:** ### **`(phi_0 + phi_1)/2` NON E' UNO STATO DEL
+FLUSSO.** Il pezzo e' ### **una rotazione**, e la media fra il punto di partenza e quello
+d'arrivo di una rotazione di angolo `theta` ha norma ### **`cos(theta/2)`** volte quella
+di partenza -- quindi `Lambda` letta la' e' ### **sistematicamente PIU' PICCOLA**, di un
+fattore ### **`cos^2(theta/2)`.**
+### ⛔ **E' un errore `O(h^2)`**, cioe' ### **non rompe il secondo ordine** -- ma e'
+### **un BIAS con un segno**, e fra due regole che costano uguale ### **si prende quella
+che non ce l'ha.**
+### ✅ **La `(ii)` non ha quel difetto:** e' ### **la media di DUE `Lambda` VERI**, cioe'
+di due stati che il flusso attraversa davvero.
+### 📌 **E LA `(i)` LA MISURO COMUNQUE, come informazione:** ### **`C1` per tutte e
+due**, nel referto. ### ⛔ **Non e' un criterio nuovo:** il criterio e' `C1 >= 1.9`, e
+quello resta uno.
+
+### ⚠ **E UNA TERZA REGOLA ESISTE, e la scarto DICENDOLO:** il peso allo stato
+### **a META' del pezzo** *(`Phi(h/2)`)*, che e' ### **la piu' fedele alla frase
+<<il proprio punto medio>>** e ### **non ha il difetto di norma.**
+### ⛔ **Non la uso perche' il mandato chiede di scegliere fra le DUE**, e perche'
+costerebbe ### **un'applicazione in piu' per giro** *(mezzo pezzo per il punto medio, poi
+il pezzo intero)*. ### **Sta scritta perche' la scelta sia leggibile, non per nasconderla.**
+
+### `A2)` ⛔⛔ **IL PUNTO FISSO NON E' PER ARCO: ACCOPPIA LA RETE INTERA**
+
+### **`hop_phi` applica TUTTI gli archi insieme**, e ### **`Lambda_k` somma i semiarchi di
+PIU' archi** -- quindi il peso di un arco dipende da `Lambda` dei suoi due nodi, che
+dipendono da ### **tutti gli archi che li toccano.**
+### ✅ **Quindi il punto fisso e' UNO, su tutta la rete**, e ### **non `m` punti fissi
+indipendenti.** ### **Lo dichiaro perche' cambia cio' che il numero dei giri misura:**
+non *«quanto e' difficile un arco»* ma ### **quanto e' accoppiata la rete.**
+### 📌 **E IL MANDATO CHIEDE LA DIPENDENZA DALLA TAGLIA, e ha ragione:** se il punto
+fisso accoppia la rete, ### **i giri possono crescere con la taglia** -- e questo
+### **si misura**, su ### **almeno DUE taglie** oltre alle ### **quattro `Lambda_c`**
+gia' dichiarate *(i rapporti `0.1`, `0.3`, `1`, `10`)*.
+### ⚠ **E se i giri crescessero con la taglia sarebbe una cosa da dire a Luca**, perche'
+vorrebbe dire che ### **il costo per tick non e' una costante del modello** ma
+### **una funzione della rete.**
