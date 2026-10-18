@@ -164,7 +164,7 @@ moduli:
 
   - nome: _misura_punto_medio.py
     responsabilita: il punto medio per pezzo -- dove serve, e se porta G al secondo ordine
-    importa: [_collauda_tempo_proprio, _misura_hw, _misura_mb2, _presidio, composizione, deriva, flussi_parziali, tick]
+    importa: [_collauda_tempo_proprio, _misura_hw, _misura_mb2, _presidio, composizione, deriva, energia_pesata, flussi_parziali, tick]
 
   - nome: _misura_statica_d.py
     responsabilita: C4, la risposta statica del vuoto con la strada (d) accesa e spenta

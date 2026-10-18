@@ -187,6 +187,15 @@ class Motore(object):
         # ### 📌 **I giri del punto medio di `Omega`, per il REFERTO:** e' un COSTO
         # ### ### **misurato**, non stimato.
         self.giri_omega = 0
+        # ### 📌 **E i giri del punto medio del PESO, per il REFERTO:** e- un COSTO
+        # ### ### **misurato**, non stimato.
+        self.giri_peso = 0
+        # ### ⛔ **LA REGOLA DEL PUNTO MEDIO NASCE SPENTA, E NON E- UNA SCELTA MIA:**
+        # ### e- ### **la regola d-oro** *(par.3: i flag nuovi OFF di default)*, e la misura
+        # ### dice perche- conta: ### **`C1 = 0.973`** *(soglia `1.9`)* e ### **il punto
+        # ### fisso di `cs` non converge piu- a rapporto `0.1` e `0.3`.** ### **Accenderlo
+        # ### e- una decisione di Luca**; il resto sta nel task history.
+        self.regola_punto_medio = None
         self.operatori = {
             "moneta_spin": self._moneta_spin,
             "grover": self._grover,
@@ -679,6 +688,12 @@ class Motore(object):
         ### ⚠ **E <<in posto DAVVERO>> non si puo' piu':** ogni lato nuovo dipende da
         ### **ENTRAMBI** i lati vecchi, quindi la fetta rovesciata non basta.
         """
-        FP.hop_phi(self, st["phi_h"], frazione)
+        # ### ⛔ **IL RAMO E- UNO: senza la forma, o col peso BLOCCATO, si fa il passo
+        # ### di prima.** ### **Il perche- nel docstring di `FP.hop_phi_punto_medio`.**
+        if (self.cs is None or self.lambda_c is None
+                or self.regola_punto_medio is None):
+            FP.hop_phi(self, st["phi_h"], frazione)
+        else:
+            FP.hop_phi_punto_medio(self, st, frazione, self.regola_punto_medio)
         self.applicazioni["spostamento_scalare"] += 1
         return st

@@ -19156,3 +19156,56 @@ e' cieco)*, e l'osservazione su `ambito` ### **senza toccare `leggi.yaml`.**
 `CAMM-SPOSTAMENTO` ### **scrive `rho`** *(`5.9e-01`, cioe' `O(1)`)* e
 ### **non scrive `Lambda`** *(`0.0` esatto)* -- e ### **legge `cs`**, che la tabella
 ### **non dice.**
+
+### ⛔⛔ **`C1` CADE ANCORA: `0.973`. E IL PUNTO MEDIO HA TOLTO IL SUO `O(dtau)`, MA NE RESTA UN ALTRO**
+
+| | la corsa | pendenza di `G` |
+|---|---|---|
+| ### **`C1`** | col ### **punto medio per pezzo** *(regola `ii`)* | ### **`0.973`** |
+| `C1` *(deve fallire)* | lo STESSO codice ### **coi pesi BLOCCATI** | ### **`1.002`** |
+| informazione | la regola ### **`(i)`** *(`Lambda` sul `phi` medio)* | `0.953` |
+
+### ✅ **E IL CASO CHE DEVE FALLIRE E' ESATTO AL NUMERO CHE IL MANDATO CHIEDEVA:**
+### **`1.002`**, cioe' ### **`1.002 +- 0.01`** -- ### **lo schema di prima si RITROVA**,
+e quindi ### **il ramo e' quello giusto.**
+
+### ✅ **E LO SCHEMA E' ATTIVO, non inerte** *(il controllo positivo)*: il peso del
+punto medio differisce da quello bloccato di ### **`7.6%`, `3.7%`, `1.9%`, `0.97%`,
+`0.49%`** al dimezzare -- ### **rapporti `2.07`, `1.93`, `1.97`, `1.98`**, cioe'
+### **`O(dtau)` RELATIVO.**
+### 📌 **E l'ASSOLUTO e' `O(dtau^2)`, perche' il peso stesso e' `O(dtau)`:** lo
+dico perche' ### **il mandato chiedeva `O(dtau)`**, e ### **i due numeri sono entrambi
+veri -- conta il RELATIVO.**
+### ✅ **E il pezzo e' REVERSIBILE: `1.0` ulp** *(`+h` poi `-h`, con la tolleranza
+dichiarata `256`)*.
+
+### ⭐⭐ **E L'OSTACOLO CHE RESTA E' LOCALIZZATO, pezzo per pezzo:** il peso
+### **DI NODO** e' quello del ### **CENTRO del palindromo** *(la scelta di `D2`)*, e
+`Lambda` ### **cambia DURANTE il tick.**
+### ✅ **Misurato: differisce di `2.36e-1`, `1.15e-1`, `5.80e-2`, `2.83e-2`** al
+dimezzare *(rapporti `2.05`, `1.99`, `2.05`: ### **`O(dtau)`**)* -- ### **lo STESSO ordine
+che il punto medio ha TOLTO dal peso d'arco.**
+### ⭐ **E la tabella pezzo per pezzo lo dice meglio di me:** il pezzo
+### **`8` e' ESATTO** *(`3.2e-16`: ### **e' il CENTRO**, `cs` e' valutato la')*, e
+### **tutti gli altri `13` portano `1.15e-1`.**
+
+### ⛔⛔ **E UN RISULTATO NUOVO, CHE NON CERCAVO: a `Lambda_c/Lambda` `0.1` e
+`0.3` IL PUNTO FISSO DI `cs` NON CONVERGE PIU'** *(con il punto medio acceso)*:
+### **`4` casi su `8`** fra due taglie e quattro rapporti, con scarti
+### **`1.2e-1`, `5.6e-2`, `4.4e-1`, `1.9e-8`.**
+### ⚠ **Cioe' il passo ALZEREBBE in regimi in cui oggi gira** *(la spazzata di `D2`
+convergeva ovunque, al massimo `74` giri)*.
+
+### ✅ **PERCIO' LO SCHEMA NASCE SPENTO, e NON e' una decisione mia:** e'
+### **la regola d'oro** *(`CLAUDE.md` par.`3`: ### **i flag nuovi OFF di default**)*.
+### ✅ **Il passo di default resta QUELLO DI PRIMA, al bit** *(`M-B1`: `14` pezzi su
+`14`, distanza del passo intero ### **`0` esatto** su entrambe le scene)*, quindi
+### **`C2`, `C5`, `D3` e `C4` tengono i numeri gia' committati** -- e non li ho rifatti,
+perche' ### **con lo schema spento misurerebbero lo stesso passo.**
+### ⛔ **ACCENDERLO E' UNA DECISIONE DI LUCA**, e i numeri per prenderla sono questi.
+
+### 📌 **E I GIRI, come il mandato chiede:** ### **medio `8.4`, massimo `19`**
+sulla scena di `D3`; e ### **sulla taglia `32` medio `8.5`, massimo `20`** -- cioe'
+### **i giri NON crescono con la taglia** *(il punto fisso accoppia la rete, ma la rete
+piu' grande non costa piu' giri)*. ### ⚠ **La PENDENZA invece peggiora: `0.818` a
+taglia `32` contro `0.973` a `16`.**

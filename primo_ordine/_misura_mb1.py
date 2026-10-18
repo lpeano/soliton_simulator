@@ -100,9 +100,15 @@ SU2 = True
 # ### con un nome qui dentro ### **quel pezzo non e- piu- sorvegliato da `M-B1`**, e va
 # ### ### **TOLTO** appena esiste un commit in cui c-e- da entrambi i lati.
 PEZZI_NUOVI = (
-    # ### `CAMM-FASE-VUOTO` nasce il `2026-10-18` *(la strada `(d)`)*: nell-albero
-    # ### prima di questo mandato ### **non c-e-**.
-    "CAMM-FASE-VUOTO",
+    # ### ✅ **E LA LISTA SI E- SVUOTATA IL `2026-10-18`, COME LA SUA DICHIARAZIONE
+    # ### DICEVA:** `CAMM-FASE-VUOTO` adesso c-e- ### **DA ENTRAMBI I LATI** *(e- entrato
+    # ### in `7aaeb907`)*, quindi ### **si confronta come tutti gli altri** e ### **non ha
+    # ### piu- bisogno di un-eccezione.**
+    # ### ⛔⛔ **E NON E- UNA PULIZIA: E- LA PROMESSA MANTENUTA.** Una lista di
+    # ### eccezioni che ### **non si svuota mai** diventa ### **un impedimento in meno per
+    # ### sempre** -- e il `M-B1` di oggi ### **ha ALZATO** appena i due lati hanno
+    # ### coinciso, invece di passare: ### **e- il presidio che chiede indietro la sua
+    # ### eccezione.**
 )
 
 
