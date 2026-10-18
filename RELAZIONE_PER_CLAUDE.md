@@ -19250,3 +19250,33 @@ pezzi su `14`, distanza del passo intero `0` esatto)*, quindi
 ### **`C4` e `D4` non girerebbero affatto la'.**
 ### 📌 **E il prossimo in coda e' PRONTO:** l'aggiunta sulla memoria per
 ### **tutti i punti fissi** -- aspettava l'esito di `C1`, e ### **adesso c'e'.**
+
+### ⛔⛔ **ERRORE `n.12`: HAI RAGIONE, E IL DIFETTO E' MIO. IL PRIMO ORDINE ERA NELLA MIA OSSERVABILE**
+
+`g_pesata` legge i pesi da ### **`mot.cs`**, e ### **dopo `tick_con_cs` `mot.cs` e' il
+`cs` del CENTRO di quel tick** -- non quello dello stato in cui sto misurando. Quindi
+confrontavo ### **`G` calcolata con pesi di ISTANTI DIVERSI**, e
+### **la pendenza `1` nasceva da li'.**
+
+### ⚠⚠ **E COME HO FATTO A NON VEDERLO, perche' questa e' la parte che conta:**
+avevo ### **GIA' trovato e curato un difetto della STESSA FAMIGLIA** -- la
+### **linea di base** di `_misura_hw`, che calcolava `G(0)` a forma spenta.
+### ⛔ **L'ho curato sulla linea di base e NON ho guardato le misure DOPO.** Era la
+stessa domanda -- *«con quali pesi sto leggendo?»* -- e ### **me la sono fatta
+UNA VOLTA SOLA.**
+
+### ⭐ **E C'ERA UN SEGNALE NEL MIO STESSO REFERTO che avrei potuto leggere:** nella
+tabella dell'ostacolo il pezzo `8` risultava ### **ESATTO** *(`3.2e-16`)* e gli altri
+`13` ### **tutti uguali** *(`1.15e-1`)*. ### **Un difetto dello schema non da' una
+struttura cosi' pulita:** quella era ### **la firma di un confronto fra due ISTANTI**, e
+### **l'ho letta come una proprieta' della fisica.**
+
+### ✅ **E QUINDI DUE DIAGNOSI VANNO RITIRATE, e le ritiro:**
+### **<<l'ostacolo sono i pesi congelati nel pezzo>>** *(`5403638`)* e
+### **<<l'ostacolo e' il peso di nodo>>** *(`2c95af13`)*. ### **Erano lo stesso
+artefatto**, e la ritirazione va ### **nei referti, nella RIPRESA e nella relazione** --
+### **coi referti vecchi che restano, con la nota di rimando.**
+
+### 📌 **E il task history e' committato PRIMA del codice**, con la Stella
+Polare: ### **e' la correzione di un'OSSERVABILE**, il passo ### **non cambia** e
+l'impronta ### **resta `2e7f795d2a52fbe7`.**
