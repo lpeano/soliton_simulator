@@ -19238,3 +19238,15 @@ rompe la simmetria proprio all'inizio)*.
 ### 📌 **E il motivo per cui l'idea vale la pena, detto con onesta':** il punto
 medio ### **non e' bastato** e ### **ha fatto PERDERE una convergenza** -- *una strada che
 TOGLIE un punto fisso invece di aggiungerlo merita di essere guardata.*
+
+### ✅ **E LO STOP E' REGISTRATO IN CODA, con quello che NON ho rifatto**
+
+### ⚠ **`C2`, `C5`, i quattro di `D3` e `C4` NON li ho rifatti**, e il motivo e'
+scritto: ### **con lo schema SPENTO il passo e' quello di prima AL BIT** *(`M-B1`: `14`
+pezzi su `14`, distanza del passo intero `0` esatto)*, quindi
+### **misurerebbero lo STESSO passo e darebbero gli STESSI numeri.**
+### ⛔ **Se accendi lo schema, vanno rifatti** -- e ce n'e' un motivo in piu':
+### **la convergenza persa a rapporto `0.1` e `0.3`** vuol dire che
+### **`C4` e `D4` non girerebbero affatto la'.**
+### 📌 **E il prossimo in coda e' PRONTO:** l'aggiunta sulla memoria per
+### **tutti i punti fissi** -- aspettava l'esito di `C1`, e ### **adesso c'e'.**
