@@ -19296,3 +19296,18 @@ RITIRA le due diagnosi)* e `doc/referti_l2/censimento_osservabili.txt` da
 ### **`408d8f59`** *(`6` file da guardare, `27` righe, `4` legittimi)*.
 ### ✅ **Entrambi timbrati *«committato e pulito»***, e il primo
 ### **dichiara dentro se stesso che C1 PASSA** e ### **che ritira due diagnosi mie.**
+
+### ⛔⛔ **E LA RITIRAZIONE ORA STA ANCHE DENTRO IL CODICE, non solo nei referti**
+
+### ⚠ **Me ne sono accorto rileggendo:** il braccio di `_misura_punto_medio` si chiamava
+### **`informazione_ostacolo`** e stampava *«DOVE STA L'OSTACOLO CHE RESTA»*.
+### **E' la diagnosi che ho appena ritirato, scritta in un file che GIRA** -- cioe'
+### **esattamente la trappola del commento scaduto** che le regole mi dicono di non lasciare.
+### ✅ **Curato:** si chiama ### **`informazione_peso_di_nodo`**, dice che e'
+### **un FATTO e non l'ostacolo**, e spiega ### **perche' i numeri restano veri:** il peso di
+nodo ### **differisce davvero di `O(dtau)`**, ma il palindromo e' simmetrico attorno al
+centro, quindi ### **lo scarto dei pezzi prima si cancella con quello dei pezzi dopo** -- ed
+e' per questo che ### **il passo e' del secondo ordine comunque.**
+### ⭐ **E la tabella lo diceva gia', se la leggevo bene:** il pezzo `8` esatto e
+### **gli altri `13` tutti allo STESSO scarto** non e' il ritratto di un difetto, e'
+### **il ritratto di una CANCELLAZIONE.**

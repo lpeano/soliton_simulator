@@ -400,17 +400,29 @@ def informazione_giri():
               % (len(fuori), rotti))
 
 
-def informazione_ostacolo():
-    """### ⛔⛔ **DOVE STA L'OSTACOLO CHE RESTA: il peso di NODO.**
+def informazione_peso_di_nodo():
+    """### 📌 **QUANTO IL PESO DI NODO SI SCOSTA DURANTE IL TICK** -- *un fatto,
+    e ### **NON l'ostacolo.***
 
-    ### **`cs` si valuta UNA VOLTA per tick, al CENTRO del palindromo** *(la scelta di
-    `D2`)*, e ### **`Lambda` cambia durante il tick** -- quindi il peso di nodo che ogni
-    pezzo usa e' ### **quello del centro**, non il proprio.
-    ### ✅ **E si misura: quanto differisce, pezzo per pezzo, e di che ordine.**
+    ### ⛔⛔ **RITIRATA IL `2026-10-18` (errore `n.12` del guardiano):** questa
+    tabella l'avevo chiamata ### **<<dove sta l'ostacolo>>**, e ### **era sbagliato.**
+    ### **Il passo era GIA' del secondo ordine** *(`C1 = 2.091`)*, e il primo ordine che
+    vedevo stava ### **nella mia OSSERVABILE** *(`g_pesata` dopo un tick legge i pesi del
+    CENTRO)*.
+    ### ✅ **I NUMERI RESTANO VERI, ed e' il motivo per cui la misura resta:** `cs` si
+    valuta ### **una volta per tick, al CENTRO** *(la scelta di `D2`)*, e `Lambda`
+    ### **cambia durante il tick** -- quindi il peso di nodo che ogni pezzo usa
+    ### **differisce di `O(dtau)`** da quello del suo stato.
+    ### ⚠ **Ma questo NON impedisce il secondo ordine:** il palindromo
+    ### **e' simmetrico attorno al centro**, e ### **l'errore dei pezzi prima si cancella
+    con quello dei pezzi dopo.** ### **E' esattamente cio' che la tabella mostra**, se si
+    legge bene: ### **i pezzi `1`-`7` e `9`-`14` portano lo STESSO scarto**, e il centro
+    e' esatto.
     """
     print()
-    print("### ⛔⛔ DOVE STA L'OSTACOLO CHE RESTA (informazione): il peso di NODO")
-    print("###   e' quello del CENTRO del palindromo, e `Lambda` cambia DURANTE il tick.")
+    print("### 📌 IL PESO DI NODO durante il tick (informazione, e NON")
+    print("###   l'OSTACOLO: quella diagnosi e' RITIRATA -- errore `n.12`).")
+    print("###   `cs` e' quello del CENTRO, e `Lambda` cambia durante il tick.")
     print("     %-10s %-18s %s" % ("dtau", "PEGGIO relativo", "rapporto"))
     prec, righe14 = None, None
     for k in KAPPA[:4]:
@@ -450,7 +462,10 @@ def informazione_ostacolo():
             print("     %2d %-24s %.4e %s"
                   % (j, idl, d, "### <- il CENTRO: qui e' ESATTO" if d < 1e-12 else ""))
     print("     ### ⭐ E IL PEZZO `8` E' ESATTO PERCHE' E' IL CENTRO: `cs` e' valutato")
-    print("###   LA'. ### Tutti gli altri portano un peso sbagliato di `O(dtau)`.")
+    print("###   LA'. ### E i pezzi PRIMA e DOPO portano lo STESSO scarto -- che e'")
+    print("###   il modo in cui un palindromo CANCELLA l'errore, non il modo in cui lo")
+    print("###   subisce. ### Per questo il passo e' del SECONDO ordine (`C1 = 2.091`),")
+    print("###   e la diagnosi <<l'ostacolo e' il peso di nodo>> E' RITIRATA.")
     sys.stdout.flush()
 
 
@@ -483,7 +498,7 @@ def main(argv):
     braccio_controllo_positivo()
     braccio_reversibile()
     informazione_giri()
-    informazione_ostacolo()
+    informazione_peso_di_nodo()
     print()
     print("=" * 100)
     print("IL CENSIMENTO: %d su %d" % (OK[0], OK[1]))
