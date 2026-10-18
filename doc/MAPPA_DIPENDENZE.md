@@ -997,3 +997,52 @@ grappoli di vuoto diverso sarebbero ### **pareti di dominio dove `G` cambia**, e
 fondo**, su una scena con ### **due regioni uniformi a fondo diverso**; `(b)` ### **la
 deriva del vuoto medio PER ESTREMITA' sotto mitosi**, per ### **le tre letture del punto
 `4`.**
+
+## 26. ⭐⭐ `L3` — **IL SECONDO ORDINE CON UNA MEMORIA, INVECE DEL PUNTO FISSO** *(idea di Luca, `2026-10-18`)*
+
+> ### 📌 **Punto `5` del mandato del punto medio per pezzo.**
+> ### ⛔ **Solo la voce, SENZA CODICE**, e ### **la decisione e' di Luca.**
+
+### ⛔ **DA DOVE VIENE:** il secondo ordine di `G` oggi si cerca ### **con dei punti
+fissi** *(`cs` al centro del palindromo, e il peso d'arco al punto medio)*, e
+### **un punto fisso costa giri** -- misurati: ### **`8.4` medi e `19` massimi** per il
+peso, ### **`7`-`19`** per `cs`. ### **L'idea di Luca e' di prendere il secondo ordine
+DALLA MEMORIA invece che dall'iterazione.**
+
+### ⭐ **LE DUE VARIANTI, e NON sono equivalenti:**
+
+| | la variante | che cos'e' | il difetto |
+|---|---|---|---|
+| `(a)` | ### **ESTRAPOLAZIONE dal passo precedente** | il peso del tick nuovo si stima dai pesi dei tick passati | ### **ESPLICITA e NON simmetrica**, e porta ### **MODI PARASSITI** *(una ricorrenza a due passi ha una seconda soluzione, che puo' crescere)* |
+| `(b)` | ### **PESO SFALSATO a meta' tick** *(alla maniera del `leapfrog`)* | il peso vive ### **a meta' tick**, e i campi ai tick interi | ### **SIMMETRICA**, ed e' la variante che vale la pena guardare |
+
+### ⛔⛔ **E IN ENTRAMBE IL PASSATO DIVENTA PARTE DELLO STATO: LO STATO NON E'
+PIU' MARKOVIANO.** ### ⚠ **Non e' un dettaglio di implementazione:** oggi
+### **lo stato e' `(psi, phi)` e basta**, e tutto cio' che serve al tick dopo
+### **sta li' dentro.** ### **Con la memoria servirebbe anche il peso** *(o `cs`)*
+### **a meta' tick**, e ### **quello diventa una variabile di stato a tutti gli
+effetti** -- da salvare nel checkpoint, da confrontare in `M-B1`, da far nascere alla
+mitosi.
+
+### ⛔ **E DUE PROBLEMI CHE LA MEMORIA PORTA CON SE', e vanno scritti PRIMA di
+provarla:**
+### `1)` ### **L'EREDITA' ALLA MITOSI** *(`L3`)*: un nodo che ### **nasce** non ha un
+passato. ### **Con che memoria nasce?** ### ✅ **E' la stessa domanda della
+`[[DOMANDA-ESTREMITA-NUOVE-INIZIALI]]`**, e ### **la stessa famiglia della <<memoria di
+nascita del nodo>>** -- la strada `2` di `[[DOMANDA-IL-VALORE-DI-LAMBDA-C]]`.
+### ⚠ **Se la risposta fosse <<la media dei vicini>>, la memoria smetterebbe di
+essere locale**, ed e' il difetto che ha fatto scartare la strada `3` di `Lambda_c`.
+### `2)` ### **IL PRIMO TICK:** al tick `0` ### **il passato non c'e'.** Un avvio
+### **esplicito** *(un tick di primo ordine per partire)* ### **rompe la simmetria
+all'inizio**, e ### **un errore di avvio `O(dtau)` costa l'ordine a tutta la corsa** se
+non si cura.
+
+### 📌 **E IL MOTIVO PER CUI L'IDEA VALE LA PENA, detto con onesta':** il punto
+medio che ho appena misurato ### **non e' bastato** *(`C1 = 0.973`)*, e
+### **ha fatto perdere la convergenza del punto fisso di `cs` a `Lambda_c/Lambda` `0.1` e
+`0.3`.** ### **Una strada che toglie un punto fisso invece di aggiungerlo merita di
+essere guardata.**
+
+### ⛔ **E LA DECISIONE E' UNA SOLA, E DI LUCA:** ### **<<lo stato contiene il
+passato: SI' o NO>>.** ### **Vale per il modello INTERO**, non per un pezzo -- e
+### **si decide dopo l'esito di `C1`**, che adesso c'e'.

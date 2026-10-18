@@ -19219,3 +19219,22 @@ quattro `Lambda_c`**, e ### **la tabella che localizza l'ostacolo.**
 ### ⚠ **E dichiara DENTRO SE STESSO che porta un rosso e perche'**, compresa
 ### **la non convergenza a rapporto `0.1` e `0.3`** e il fatto che
 ### **lo schema nasce SPENTO.**
+
+### ✅ **L'ALTERNATIVA DI LUCA E' IN MAPPA** *(sezione `26`, `L3`)*
+
+Le due varianti, ### **con la differenza che conta:** la `(a)` *(estrapolazione)* e'
+### **esplicita, NON simmetrica, e porta modi parassiti**; la `(b)` *(peso sfalsato a
+meta' tick, alla `leapfrog`)* e' ### **simmetrica**, ed e' quella che vale la pena
+guardare.
+### ⛔⛔ **E in entrambe IL PASSATO DIVENTA PARTE DELLO STATO:** oggi lo stato e'
+### **`(psi, phi)` e basta**, e con la memoria servirebbe anche ### **il peso a meta'
+tick** -- da salvare nel checkpoint, da confrontare in `M-B1`, ### **da far nascere alla
+mitosi.**
+### ⚠ **E i due problemi li ho scritti PRIMA che si provi:** ### **l'eredita' alla
+mitosi** *(un nodo che nasce non ha passato -- ed e' la stessa famiglia della <<memoria di
+nascita>>, e se la risposta fosse <<la media dei vicini>> la memoria smetterebbe di essere
+LOCALE)* e ### **il primo tick** *(al tick `0` il passato non c'e', e un avvio esplicito
+rompe la simmetria proprio all'inizio)*.
+### 📌 **E il motivo per cui l'idea vale la pena, detto con onesta':** il punto
+medio ### **non e' bastato** e ### **ha fatto PERDERE una convergenza** -- *una strada che
+TOGLIE un punto fisso invece di aggiungerlo merita di essere guardata.*
