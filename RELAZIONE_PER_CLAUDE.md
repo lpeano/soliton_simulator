@@ -18901,3 +18901,41 @@ fonti** *(`~4e+02`)*, non dalla deriva.
 ### ⚠⚠ **Quindi il `-0.001` del referto `578b3d69` E' MISURATO MALE**, e con la
 linea di base giusta la stessa corsa da' ### **`1.002`.** ### **Il numero sta nella voce e
 nella RIPRESA, e va corretto la': lo faccio nel commit delle misure.**
+### ⛔⛔ **`C1` CADE: `1.002` INVECE DI `>= 1.9`. E SO DOVE STA L'OSTACOLO.**
+
+| | la corsa | pendenza di `G` |
+|---|---|---|
+| ### **`C1`** | `cs` dinamico, ### **COL termine** | ### **`1.002`** -- *primo ordine* |
+| `C1` *(deve fallire)* | la stessa ### **SENZA il termine** | ### **`-0.007`** -- *non converge affatto* |
+| ### **`C2`** *(deve fallire)* | col ### **SEGNO di `Omega` invertito** | ### **`-0.013`** |
+| diagnosi | `cs` ### **riletto prima di OGNI pezzo**, col termine | `1.044` |
+| diagnosi | idem, ### **senza** il termine | `-0.007` |
+
+### ✅ **QUINDI IL TERMINE FA QUALCOSA, E DI GIUSTO:** porta `G` da
+### **<<non converge>>** a ### **PRIMO ordine**, e ### **col segno invertito il
+guadagno sparisce** -- cioe' ### **il segno non l'ho scelto: esce dalla derivazione.**
+### ⛔ **Ma `1.002` NON E' `1.9`: il criterio `C1` CADE**, e
+### **non allargo nessuna banda e non aggiungo niente.**
+
+### ⭐⭐ **E LA MIA PRIMA IPOTESI SULL'OSTACOLO ERA SBAGLIATA, e la diagnosi
+l'ha smentita:** credevo fosse ### **`cs` congelato al CENTRO** *(la scelta di `D2`)*.
+### ⛔ **Rileggendo `cs` prima di OGNI pezzo la pendenza resta `1.044`** -- cioe'
+### **non e' quello.**
+### ✅ **L'OSTACOLO E' PIU' DENTRO, ED E' MISURATO:** i pesi sono congelati
+### **DURANTE il pezzo**, e ### **`CAMM-SPOSTAMENTO-VUOTO` muove `Lambda` di `O(dtau)`
+dentro la propria applicazione** *(`4.02`, `1.99`, `1.03`, `0.52`, `0.26` al dimezzare)*,
+mentre gli altri due pezzi del vuoto ### **la conservano** *(`5e-15`)*.
+### ⛔ **Un peso sbagliato di `O(dtau)` da' una deriva del PRIMO ordine**, e
+### **qualunque sia il posto in cui `cs` si valuta.**
+
+### ⚠⚠ **CHE COSA SERVIREBBE, E NON LO FACCIO:** ogni pezzo dovrebbe usare
+### **il proprio peso al PROPRIO punto medio** *(un punto fisso per pezzo)*, cioe'
+### **un cambio di SCHEMA sui pezzi che esistono gia'** -- ### **non un'aggiunta a questa
+legge.** ### ⛔ **E' una decisione, e torna a te.**
+
+### 📌 **E `C5`, IL COSTO, misurato sui sette rapporti:** da ### **`3.7` a `9.7`
+tick di lavoro per tick** *(il peggio a `Lambda_c/Lambda = 0.3`, come il punto fisso di
+`cs`)*: ### **`7`-`19` giri per `cs`** e ### **`6`-`13` per `Omega`.**
+### ✅ **E costa MENO del `~37x` di prima**, perche' il punto fisso di `Omega` costa
+### **un ventottesimo di tick per giro** *(il pezzo e' `1` dei `14`, e il punto medio ne
+fa mezzo)*.
