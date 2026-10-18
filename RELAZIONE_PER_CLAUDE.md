@@ -18939,3 +18939,14 @@ tick di lavoro per tick** *(il peggio a `Lambda_c/Lambda = 0.3`, come il punto f
 ### ✅ **E costa MENO del `~37x` di prima**, perche' il punto fisso di `Omega` costa
 ### **un ventottesimo di tick per giro** *(il pezzo e' `1` dei `14`, e il punto medio ne
 fa mezzo)*.
+### ✅ **I DUE REFERTI DELLA STRADA `(d)`, dai blob committati**
+
+`doc/referti_l2/strada_d_c1_c2_c5.txt` da ### **`092a4056`** e
+`doc/referti_l2/cs_l1_d3_con_la_fase.txt` da ### **`93a6a6ef`**, entrambi timbrati
+*«committato e pulito»*.
+### ⚠ **E ognuno DICHIARA DENTRO SE STESSO che porta un rosso e perche'**, cosi' chi
+legge il repo da fuori ### **non lo prende per una corsa fallita.**
+### 📌 **E nel secondo c'e' la riga che conta per `C3`:** ### **tre criteri di
+`D3` su quattro REGGONO col termine acceso** *(`0` violatori su `14`, la `PTheta` a
+`5.78`/`3.43` ulp nella banda `8`, le norme a `1.6`/`1.5` ulp)*, e
+### **il quarto e' `C1`.**

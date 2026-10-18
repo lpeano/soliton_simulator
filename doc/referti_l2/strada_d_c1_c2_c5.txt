@@ -1,0 +1,94 @@
+[TIMBRO] _misura_strada_d.py  sha1-BYTE 092a4056  committato e pulito
+====================================================================================================
+LA STRADA `(d)`: `C1`, `C2`, `C5` -- il termine nuovo conserva `G`?
+### Mandato del 2026-10-18. NESSUNA DECISIONE.
+====================================================================================================
+  LA CONFIGURAZIONE INTERA, dichiarata:
+  la scena di `M-B2`: nn = 16   seme = 7   T = 8.0   norma = locale   vuoto_modulo = 2.0   su2 = True
+  lo stato di partenza: la PRE-CORSA di `_misura_hw` (`T = 8.0` a `dtau = 0.25`), la STESSA per tutti i `dtau`
+  `Lambda_c` = la MEDIA di `Lambda` sulla scena, UNA volta e PRIMA della corsa
+  i dimezzamenti: k in (1, 2, 3, 4, 5)   la soglia: 1.9 (quella di `M-B2`)
+  l'ordine: 14 voci, impronta 2e7f795d2a52fbe7
+
+### `C1` LA PENDENZA DI `G` con `cs` DINAMICO, COL TERMINE
+     k    dtau       tick    escursione G     giri cs    giri Omega
+     1    0.500000   16      1.224621e+01     386        13
+     2    0.250000   32      6.338366e+00     499        11
+     3    0.125000   64      2.865771e+00     767        9
+     4    0.062500   128     1.506837e+00     1238       9
+     5    0.031250   256     7.619396e-01     2103       8
+  `C1` la pendenza di `G` col termine e' `>= 1.9`                ### FALLISCE   pendenza 1.002 su 4 dimezzamenti
+
+### `C1` IL CASO CHE DEVE FALLIRE: la STESSA corsa SENZA il termine
+     k    dtau       tick    escursione G     giri cs    giri Omega
+     1    0.500000   16      3.597829e+01     347        0
+     2    0.250000   32      3.665102e+01     459        0
+     3    0.125000   64      3.677713e+01     702        0
+     4    0.062500   128     3.674155e+01     1155       0
+     5    0.031250   256     3.669817e+01     1979       0
+  ### `C1` DEVE fallire: SENZA il termine la pendenza e' PEGGIOR PASSA   senza -0.007 contro 1.002 col termine: il termine MIGLIORA di 1.009
+
+### `C2` IL CASO CHE DEVE FALLIRE: il SEGNO di `Omega` INVERTITO
+     k    dtau       tick    escursione G     giri cs    giri Omega
+     1    0.500000   16      6.777061e+01     360        14
+     2    0.250000   32      6.921392e+01     444        11
+     3    0.125000   64      6.953554e+01     681        8
+     4    0.062500   128     7.002694e+01     1120       7
+     5    0.031250   256     7.022395e+01     1942       7
+  ### `C2` DEVE fallire: col segno INVERTITO la pendenza CADE    PASSA   segno meno -0.013 contro 1.002: il segno NON l'ho scelto, esce dalla derivazione
+
+### 📌 LA DIAGNOSI (informazione, NON un criterio): `cs` RILETTO prima
+###   di OGNI pezzo, che e' ESPLICITO e quindi NON simmetrico.
+     k    dtau       tick    escursione G     giri cs    giri Omega
+     1    0.500000   16      2.079948e+01     0          18
+     2    0.250000   32      9.522561e+00     0          14
+     3    0.125000   64      4.712299e+00     0          12
+     4    0.062500   128     2.238975e+00     0          9
+     5    0.031250   256     1.150331e+00     0          7
+     ### e la stessa SENZA il termine: -0.007
+     ### IL QUADRO:
+                                        col termine    senza
+     cs al CENTRO (la scelta di `D2`)   1.002          -0.007
+     cs RILETTO per pezzo (esplicito)   1.044          -0.007
+
+### 📌 DOVE STA L'OSTACOLO (informazione): quanto cambia `Lambda`
+###   DENTRO un pezzo, per `dtau`. ### Se e' `O(dtau)`, i pesi congelati
+###   durante il pezzo bastano a fare il PRIMO ordine.
+     dtau                       CAMM-SPOSTAMENTO-VUOTO   CAMM-GROVER-VUOTO   CAMM-SPOSTAMENTO
+     0.50000                    4.016602e+00     5.329071e-15     0.000000e+00  
+     0.25000                    1.989525e+00     5.329071e-15     0.000000e+00  
+     0.12500                    1.028057e+00     3.552714e-15     0.000000e+00  
+     0.06250                    5.216191e-01     5.329071e-15     0.000000e+00  
+     0.03125                    2.626131e-01     3.552714e-15     0.000000e+00  
+     ### e `CAMM-SPOSTAMENTO-VUOTO` e' IL SOLO che muove `Lambda`: gli altri
+###   due la conservano (`5e-15`, cioe' l'arrotondamento).
+
+### `C5` IL COSTO: i giri dei DUE punti fissi per tick, sui sette rapporti
+       Lambda_c   Lc/Lam    giri cs   giri Omega tick di lavoro per tick
+           0.08    0.010        8.0          6.8 4.2
+           0.80    0.100       17.1         11.0 9.0
+           2.40    0.300       18.6         11.6 9.7
+           8.00    1.000       16.8         12.5 8.8
+          24.00    3.000       13.6         10.8 7.2
+          80.00   10.000       10.9          8.9 5.8
+         800.00  100.000        7.0          6.0 3.7
+     ### il PEGGIO e' ~9.7 tick di lavoro per tick, a `Lambda_c = 2.40`
+     ### e il vuoto medio della scena e' 8.0000
+
+====================================================================================================
+LA STRADA `(d)`: 2 su 3
+### ⛔ E NESSUNA DECISIONE: se `C1` cade non si allarga nessuna banda e non
+###   si aggiunge niente -- si relaziona coi numeri, e la scelta torna a Luca.
+====================================================================================================
+
+### ⛔ QUESTO REFERTO PORTA UN ROSSO, E NON E- UN ERRORE DI CORSA: il criterio C1
+###   del mandato del 2026-10-18 NON E- SODDISFATTO (1.002 contro >= 1.9), e il
+###   collaudo esce 1.
+### ✅ E CIO- CHE IL TERMINE FA SI VEDE NEI DUE CASI CHE DEVONO FALLIRE: SENZA
+###   di lui la pendenza e- -0.007 (non converge affatto), e col SEGNO invertito
+###   -0.013 -- quindi il termine porta G al PRIMO ordine, e il segno esce dalla
+###   derivazione invece di essere scelto.
+### ⭐ E L-OSTACOLO E- LOCALIZZATO: i pesi sono congelati DENTRO il pezzo, e
+###   CAMM-SPOSTAMENTO-VUOTO muove Lambda di O(dtau) nella propria applicazione.
+###   Servirebbe il peso al punto medio DI OGNI PEZZO, cioe- un cambio di SCHEMA
+###   sui pezzi che esistono gia-: NON si fa qui, ed e- una decisione di Luca.
