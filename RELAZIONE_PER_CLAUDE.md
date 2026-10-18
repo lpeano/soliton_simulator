@@ -18950,3 +18950,16 @@ legge il repo da fuori ### **non lo prende per una corsa fallita.**
 `D3` su quattro REGGONO col termine acceso** *(`0` violatori su `14`, la `PTheta` a
 `5.78`/`3.43` ulp nella banda `8`, le norme a `1.6`/`1.5` ulp)*, e
 ### **il quarto e' `C1`.**
+### ✅ **I NUMERI DELLA STRADA `(d)` SONO NELLA VOCE, E LA CORREZIONE DEL `-0.001` CON LORO**
+
+`[[DOMANDA-QUALE-INVARIANTE-CON-CS]]`: da `7457` a `10286` caratteri, con
+### **il braccio `0`**, ### **`C1` che cade** *(`1.002`)*, i ### **due casi che DEVONO
+fallire** *(`-0.007` e `-0.013`)*, ### **`C3` tre su quattro**, ### **`C5` il costo**, e
+### **l'ostacolo localizzato.**
+### ⚠⚠ **E LA CORREZIONE STA NELLA STESSA VOCE, accanto al numero sbagliato:**
+il ### **`-0.001`** che ti avevo dato *(la pendenza di `G` senza il termine)* e'
+### **misurato male** -- la linea di base era calcolata ### **a forma spenta**, cioe'
+### **`H_tot` invece di `G`**, e l'escursione misurava ### **uno scarto costante**
+*(`~4e+02`)*. ### ✅ **Il numero giusto e' `-0.007`**, e la conclusione
+### **non cambia** *(senza il termine `G` non converge)* -- ### **ma il numero era
+sbagliato e lo dico.**

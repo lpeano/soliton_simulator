@@ -93,6 +93,7 @@ FILE_FISICA = (
     'primo_ordine/_collauda_cs_l1.py',
     'primo_ordine/_misura_hw.py',
     'primo_ordine/_misura_strada_d.py',
+    'primo_ordine/_misura_statica_d.py',
     'primo_ordine/_collauda_scala.py',
     'primo_ordine/_misura_costo_motore.py',
     'primo_ordine/hamiltoniana.py',

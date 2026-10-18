@@ -294,7 +294,7 @@ def _con_rampa(op, ag):
 
 
 def corri(dtau, x, forma, tick, acceso, centri, senza_alpha=False, beta_zero=False,
-          congela="tick", visto=None, sorgente="foto"):
+          congela="tick", visto=None, sorgente="foto", lambda_c=None):
     """### `(Lambda(t), max|drho|, max|dSomma|phi|^2|, per_anello)`.
 
     ### ⛔ **`congela` vale `"tick"`, `"pezzo"` o `"no"`**, e sono ### **le due opzioni
@@ -395,9 +395,19 @@ def corri(dtau, x, forma, tick, acceso, centri, senza_alpha=False, beta_zero=Fal
         # ### zero al denominatore ### **non e- un numero.**
         salto = 0.0
         rprec = rho0.copy()
+        if lambda_c is not None:
+            # ### ⛔⛔ **LA FORMA `cs` ACCESA DENTRO IL PROTOCOLLO** *(`2026-10-18`, `C4`)*:
+            # ### serve a chiedere ### **se il ritiro del vuoto cambia con la strada `(d)`**,
+            # ### e ### **l'accensione della sorgente resta LA STESSA** -- e' cio' che il
+            # ### mandato chiede *(<<accensione dichiarata e uguale>>)*.
+            import flussi_parziali as _FP
+            _FP.accendi_cs(mot, lambda_c, st)
         for t in range(tick):
             ag.passo = t
-            TK.tick(st, mot, par)
+            if lambda_c is None:
+                TK.tick(st, mot, par)
+            else:
+                TK.tick_con_cs(st, mot, par, lambda_c, ())
             if congela in ("tick", "pezzo"):
                 st["psi_h"][...] = psi0
             lam[t + 1] = mot.densita_vuoto(st)
@@ -416,16 +426,19 @@ def corri(dtau, x, forma, tick, acceso, centri, senza_alpha=False, beta_zero=Fal
     return lam, drho, dtot, per
 
 
-def base(dtau, tick):
+def base(dtau, tick, lambda_c=None):
     """### Il vuoto SENZA sorgente, ### **in cache per `(dtau, tick)`.**
 
     ### ⭐ **Non dipende dalla forma ne' dall'accensione:** con `psi = 0` si ha `x = 0`, e
     ### **tutte e quattro le forme danno `beta(0) = 0`** — quindi il termine non fa niente,
     e la base e' ### **il vuoto libero.**
     """
-    ch = (dtau, tick)
+    # ### ⚠ **LA CACHE PORTA `lambda_c` NELLA CHIAVE** *(`2026-10-18`)*: la base
+    # ### ### **con la forma accesa NON e' quella a forma spenta**, e una cache che non
+    # ### distingue ### **restituirebbe il vuoto sbagliato.**
+    ch = (dtau, tick, lambda_c)
     if ch not in _BASE:
-        _BASE[ch] = corri(dtau, 0.0, "S1", tick, 0, ())
+        _BASE[ch] = corri(dtau, 0.0, "S1", tick, 0, (), lambda_c=lambda_c)
     return _BASE[ch]
 
 
