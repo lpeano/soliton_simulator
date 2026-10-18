@@ -19003,3 +19003,11 @@ dipendesse dallo stato ### **durante** la corsa, quella dipendenza dovrebbe
 ### **entrare in `G`** -- ### **ed e' esattamente la lezione di `D3`.** ### ✅ **Con
 `Lambda_c,k = d_k lambda_c` il termine resta COMPLETO a grafo fisso**, perche' `d_k`
 ### **non cambia** -- e con la mitosi ### **andra' riguardato.**
+
+### ✅ **E LO STATO DEL PUNTO `D` E' REGISTRATO IN CODA**
+
+`doc/CODA_2026-10-16.md`: la tabella con ### **`D0`-`D2` che reggono col termine**, `D3`
+### **tre su quattro**, la legge ### **al bit a default**, ### **`C1` che cade** con
+l'ostacolo localizzato, ### **`C4` che passa** e ### **`C5` il costo.**
+### ⚠ **E `D4` e' ESEGUIBILE ma non lo faccio:** il giudizio di `D` dipende dalla
+scelta sullo ### **SCHEMA**, e quella e' tua.
