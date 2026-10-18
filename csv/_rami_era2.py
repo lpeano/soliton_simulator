@@ -97,6 +97,26 @@ def nucleo(base=None):
 # ### copie che possono divergere.**
 
 RAMI = {
+    # ### ⛔⛔ **I RAMI DELLE DUE LETTURE DEI PESI** *(errore `n.12` del guardiano,
+    # ### `2026-10-18`)*: ### **nessuno dei due scegle un valore** -- dicono ### **con
+    # ### quali pesi si sta leggendo.**
+    ("primo_ordine/energia_pesata.py", "g_dello_stato"): (
+        2, "smistamento",
+        "### DUE RAMI, e sono LO SMISTAMENTO SULLA FORMA. ### (1) a forma SPENTA "
+        "(`mot.cs is None` oppure `mot.lambda_c is None`) i pesi sono `1` e `G` e- "
+        "`H_tot`: calcolare i pesi vorrebbe dire DIVIDERE `s_nodo` per se- stesso. "
+        "### (2) altrimenti si leggono i pesi DELLO STATO. ### E questa funzione "
+        "esiste perche- `g_pesata` leggeva `mot.cs`, che DOPO UN TICK e- il `cs` "
+        "del CENTRO: un-osservabile che lo usa confronta DUE ISTANTI, e sbaglia "
+        "di `O(dtau)` -- e- l-errore n.12, e mi ha fatto misurare 1.002 dove il "
+        "passo dava 2.091"),
+    ("primo_ordine/energia_pesata.py", "pesi_dello_stato"): (
+        1, "guardia",
+        "### UN RAMO, ed e- il `finally` che RIMETTE `mot.cs` com-era. ### Questa "
+        "funzione mette il `cs` dello STATO nel motore per il tempo di una "
+        "lettura, e se lo lasciasse dentro ### IL PASSO DOPO GIREREBBE CON UN "
+        "ALTRO PESO -- in silenzio. ### Un-osservabile che cambia la dinamica non "
+        "e- un-osservabile"),
     # ### ⛔⛔ **I RAMI DEL PUNTO MEDIO PER PEZZO** *(`2026-10-18`, la decisione di
     # ### Luca delle `12:07`)*: ### **nessuno dei tre scegle un valore** -- due dicono
     # ### ### **quale SCHEMA gira**, e uno ### **quale REGOLA del punto medio.**

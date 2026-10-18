@@ -65,6 +65,12 @@ def esito(che, passa, nota=""):
 
 
 def corsa(dtau, quanti, col_termine, modo, segno):
+    # ### ⛔⛔ **L'OSSERVABILE E' `g_dello_stato`, E NON `g_pesata`** *(errore
+    # ### `n.12` del guardiano, `2026-10-18`)*: qui `cs` e' ### **DINAMICO**, e dopo un
+    # ### tick ### **`mot.cs` e' il `cs` del CENTRO** -- leggere `G` con quello vuol dire
+    # ### ### **confrontare due istanti**, e la differenza e' `O(dtau)`.
+    # ### ⚠ **E i numeri di questo file ERANO SBAGLIATI per questo:** `1.002` invece
+    # ### di ### **`2.091`.**
     """### `(escursione di G, giri di cs, giri di Omega)`.
 
     ### ⛔ **`modo`:** `centro` *(la scelta di `D2`)* oppure `pezzo` *(`cs` RILETTO prima
@@ -81,7 +87,7 @@ def corsa(dtau, quanti, col_termine, modo, segno):
         EP.omega = lambda m, s, p: segno * vero(m, s, p)
     try:
         FP.accendi_cs(mot, lc, st)
-        g0 = EP.g_pesata(mot, st, par)
+        g0 = EP.g_dello_stato(mot, st, par)
         peggio, giri_cs = 0.0, 0
         for _t in range(quanti):
             if modo == "centro":
@@ -97,7 +103,7 @@ def corsa(dtau, quanti, col_termine, modo, segno):
                     nome, vp = TK.OPERATORE[idl]
                     mot.operatori[nome](st, par if vp else {}, fr)
                 mot.chiudi_tick()
-            d = abs(EP.g_pesata(mot, st, par) - g0)
+            d = abs(EP.g_dello_stato(mot, st, par) - g0)
             if d > peggio:
                 peggio = d
         return peggio, giri_cs, mot.giri_omega

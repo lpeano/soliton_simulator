@@ -1037,11 +1037,22 @@ essere locale**, ed e' il difetto che ha fatto scartare la strada `3` di `Lambda
 all'inizio**, e ### **un errore di avvio `O(dtau)` costa l'ordine a tutta la corsa** se
 non si cura.
 
-### 📌 **E IL MOTIVO PER CUI L'IDEA VALE LA PENA, detto con onesta':** il punto
-medio che ho appena misurato ### **non e' bastato** *(`C1 = 0.973`)*, e
-### **ha fatto perdere la convergenza del punto fisso di `cs` a `Lambda_c/Lambda` `0.1` e
-`0.3`.** ### **Una strada che toglie un punto fisso invece di aggiungerlo merita di
-essere guardata.**
+### ⛔⛔ **CORREZIONE DEL `2026-10-18` (errore `n.12`): LA MOTIVAZIONE DI PRIMA
+ERA SBAGLIATA, E LA SCRIVO QUI INVECE DI CANCELLARLA.** Avevo scritto che l'idea vale la
+pena perche' *«il punto medio non e' bastato (`C1 = 0.973`)»*: ### **quel
+`0.973` era un artefatto della MIA OSSERVABILE** *(`g_pesata` dopo un tick legge i pesi
+del CENTRO)*, e ### **col conto giusto il passo da' `2.091`** -- cioe'
+### **il punto medio non serviva, e il secondo ordine c'era gia'.**
+
+### ✅ **E LA VOCE RESTA, PERCHE' IL SUO OGGETTO C'E' COMUNQUE:** il punto fisso di
+### **`cs` al CENTRO del palindromo** *(`D2`)* ### **esiste e costa** -- misurato,
+### **`7`-`19` giri per tick**, e ### **fino a `74` nella spazzata di `D2`.**
+### ⛔ **Quello e' il punto fisso che una memoria potrebbe togliere**, e
+### **la domanda <<lo stato contiene il passato?>> resta intera.**
+### ⚠ **E resta registrato anche questo:** col ramo del punto medio ### **ACCESO**,
+il punto fisso di `cs` ### **non converge a rapporto `0.1` e `0.3`** *(`4` casi su `8`)* --
+e ### **quel ramo e' SPENTO di default, e non si toglie: toglierlo e' una decisione di
+Luca.**
 
 ### ⛔ **E LA DECISIONE E' UNA SOLA, E DI LUCA:** ### **<<lo stato contiene il
 passato: SI' o NO>>.** ### **Vale per il modello INTERO**, non per un pezzo -- e

@@ -19280,3 +19280,10 @@ artefatto**, e la ritirazione va ### **nei referti, nella RIPRESA e nella relazi
 ### 📌 **E il task history e' committato PRIMA del codice**, con la Stella
 Polare: ### **e' la correzione di un'OSSERVABILE**, il passo ### **non cambia** e
 l'impronta ### **resta `2e7f795d2a52fbe7`.**
+
+### ✅ **E IL PUNTO MEDIO PER PEZZO NON SERVIVA: col conto giusto il passo di DEFAULT da' `2.091`, e col punto medio `2.019`**
+
+### ⛔ **Cioe' un filo PEGGIO**, e ### **il ramo resta SPENTO** *(e non lo togllo:
+toglierlo e' una decisione di Luca, come il mandato dice)*.
+### 📌 **E la non convergenza a rapporto `0.1` e `0.3` col ramo acceso resta
+registrata**, perche' ### **e' un fatto misurato su quel ramo**, non su quello che gira.

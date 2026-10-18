@@ -219,11 +219,62 @@ def omega(mot, st, par):
     return fuori
 
 
-def g_pesata(mot, st, par):
-    """### `G`: ### **il generatore PESATO**, lo scalare su cui si legge il secondo ordine.
+def pesi_dello_stato(mot, st):
+    """### `(w_nodo, w_arco)` ### **che la `Lambda` DI ADESSO darebbe.**
 
-    ### ⚠ **A forma SPENTA i pesi sono `1` e `G` e' `H_tot`** *(a meno dell'ordine della
-    somma)*: ### **e' il confronto che tiene onesta questa funzione.**
+    ### ⛔⛔ **I PESI SONO DUE COSE DIVERSE, E CONFONDERLE E' COSTATO UN
+    RISULTATO** *(errore `n.12` del guardiano, `2026-10-18`)*:
+
+    | | quali pesi | chi li usa | perche' |
+    |---|---|---|---|
+    | ### **DEL PASSO** *(`pesi(mot)`)* | quelli in `mot.cs` | ### **i pezzi del passo** | sono quelli con cui il passo ha girato: ### **cambiarli vorrebbe dire cambiare la DINAMICA** |
+    | ### **DELLO STATO** *(questa)* | `cs(Lambda di adesso)` | ### **le OSSERVABILI** | misurano ### **lo stato in cui mi trovo**: usare gli altri vorrebbe dire ### **leggere due istanti diversi** |
+
+    ### ⚠ **E dopo `tick_con_cs`, `mot.cs` e' il `cs` del CENTRO di quel tick** --
+    quindi un'osservabile che lo usasse ### **confronterebbe `G(t)` con `G(0)` calcolate
+    con pesi di istanti diversi**, e la differenza e' ### **`O(dtau)`.**
+    ### ✅ **E `mot.cs` NON SI TOCCA:** si mette il `cs` dello stato
+    ### **per il tempo di una lettura**, e il `finally` ### **lo rimette** -- se restasse
+    dentro, ### **il passo dopo girerebbe con un altro peso.**
+    """
+    salvo = mot.cs
+    mot.cs = FP.cs(mot.densita_vuoto(st), mot.lambda_c,
+                   mot._b("ep_cs_stato", (mot.inc.n,), float)).copy()
+    try:
+        return pesi(mot)
+    finally:
+        mot.cs = salvo
+
+
+def g_dello_stato(mot, st, par):
+    """### ⭐⭐ **`G` LETTA SULLO STATO: l'osservabile GIUSTA.**
+
+    ### ⛔ **E' quella che `C1` deve usare**, e la differenza con `g_pesata` non e'
+    un dettaglio: ### **con `g_pesata` la pendenza di `G` dava `1.002`** *(un artefatto)*,
+    ### **con questa da' `~2.09`** -- e ### **il passo e' lo stesso.**
+    ### ✅ **A forma SPENTA le due COINCIDONO**, perche' i pesi sono `1` da entrambe
+    le parti: ### **la correzione si vede solo dove la forma gira.**
+    """
+    per_nodo, per_arco = termini_di_h(mot, st, par)
+    if mot.cs is None or mot.lambda_c is None:
+        # ### ✅ **A forma spenta i pesi sono `1`**, e `G` e' `H_tot` *(a meno
+        # ### dell'ordine della somma)*: ### **nessun peso da calcolare.**
+        return float(np.sum(per_nodo)) + float(np.sum(per_arco))
+    w_nodo, w_arco = pesi_dello_stato(mot, st)
+    return float(np.sum(w_nodo * per_nodo)) + float(np.sum(w_arco * per_arco))
+
+
+def g_pesata(mot, st, par):
+    """### `G` ### **coi pesi DEL PASSO** *(`mot.cs`)*.
+
+    ### ⛔⛔ **NON E' L'OSSERVABILE DA USARE DOPO UN TICK** *(errore `n.12` del
+    guardiano, `2026-10-18`)*: dopo `tick_con_cs` ### **`mot.cs` e' il `cs` del CENTRO**
+    di quel tick, quindi questa funzione ### **legge lo stato di adesso coi pesi di
+    allora** -- e la differenza e' ### **`O(dtau)`.**
+    ### ✅ **PER UN'OSSERVABILE SI USA `g_dello_stato`.** ### **Questa resta** perche'
+    e' ### **`G` come il PASSO la vede**, e serve ### **dove i pesi del passo sono cio'
+    che si vuole** *(per esempio per dire quanto le due letture distano)*.
+    ### ⚠ **A forma SPENTA le due COINCIDONO**, perche' i pesi sono `1`.
     """
     per_nodo, per_arco = termini_di_h(mot, st, par)
     if mot.cs is None:

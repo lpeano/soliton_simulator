@@ -150,7 +150,7 @@ TAGLIE = (16, 32)
 ULP_REVERSIBILE = 256.0
 
 
-def pendenza_di_g(regola, taglia, rapporto):
+def pendenza_di_g(regola, taglia, rapporto, osservabile):
     """### `(pendenza, righe, giri_medi, giri_max)` di `G`, ### **nel modo dato.**
 
     ### ⛔ **`regola` vale `ii`, `i` oppure `None`** *(il peso BLOCCATO: lo schema di
@@ -178,12 +178,18 @@ def pendenza_di_g(regola, taglia, rapporto):
         lc = rapporto * float(np.mean(mot.densita_vuoto(st)))
         mot.regola_punto_medio = regola
         FP.accendi_cs(mot, lc, st)
-        g0 = EP.g_pesata(mot, st, par)
+        # ### ⛔⛔ **QUALE OSSERVABILE, E NON HA UN VALORE DI
+        # ### COMODO** *(errore `n.12`, `2026-10-18`)*: ### **`stato`** legge `G` coi pesi
+        # ### ### **dello stato di adesso** *(quella GIUSTA con `cs` dinamico)*, e
+        # ### ### **`passo`** coi pesi di `mot.cs` -- che dopo un tick sono
+        # ### ### **quelli del CENTRO**, e servono ### **al caso che DEVE fallire.**
+        fun = EP.g_dello_stato if osservabile == "stato" else EP.g_pesata
+        g0 = fun(mot, st, par)
         peggio = 0.0
         for _t in range(quanti):
             TK.tick_con_cs(st, mot, par, lc, ())
             giri.append(mot.giri_peso)
-            d = abs(EP.g_pesata(mot, st, par) - g0)
+            d = abs(fun(mot, st, par) - g0)
             if d > peggio:
                 peggio = d
         righe.append((dtau, quanti, peggio))
@@ -206,28 +212,83 @@ def braccio_c1():
     """### `C1` col punto medio, e il caso che DEVE fallire coi pesi BLOCCATI."""
     print()
     print("### `C1` LA PENDENZA DI `G` COL PUNTO MEDIO PER PEZZO (regola `ii`)")
-    p_pm, righe, gm, gx = pendenza_di_g("ii", MB2.NN, 1.0)
+    p_pm, righe, gm, gx = pendenza_di_g("ii", MB2.NN, 1.0, "stato")
     stampa(righe)
     print("     ### i giri del punto fisso del peso: medio %.2f, massimo %d" % (gm, gx))
     esito("`C1` la pendenza di `G` col punto medio e' `>= %.1f`" % PENDENZA_MIN,
           p_pm >= PENDENZA_MIN, "pendenza %.3f" % p_pm)
     print()
-    print("### `C1` IL CASO CHE DEVE FALLIRE: lo STESSO codice coi pesi BLOCCATI")
-    p_bl, righe2, _gm, _gx = pendenza_di_g(None, MB2.NN, 1.0)
+    print("### `C1` IL CASO CHE DEVE FALLIRE: l'OSSERVABILE VECCHIA (`g_pesata`)")
+    # ### ⛔⛔ **IL CASO CHE DEVE FALLIRE E' L'OSSERVABILE, NON LO SCHEMA**
+    # ### *(mandato del `2026-10-18`, errore `n.12`)*: ### **la `G` vecchia deve ridare
+    # ### `1.002 +- 0.01`** -- cioe' ### **il numero che misuravo**, e questo prova che
+    # ### ### **il difetto era LA LETTURA.**
+    # ### ⚠ **E col PASSO DI DEFAULT (`None`), perche- il `1.002` del mandato e- quello:
+    # ### l-osservabile vecchia SUL PASSO CHE GIRA, non su uno schema acceso.
+    p_vecchia, righe2, _gm, _gx = pendenza_di_g(None, MB2.NN, 1.0, "passo")
     stampa(righe2)
-    # ### ⛔⛔ **E IL MANDATO CHIEDE IL NUMERO, non <<peggio>>:** deve ridare
-    # ### ### **`1.002 +- 0.01`**, cioe' ### **la pendenza di prima dello schema.**
-    esito("### `C1` DEVE fallire: coi pesi BLOCCATI la pendenza e' `1.002 +- 0.01`",
-          abs(p_bl - 1.002) <= 0.01,
-          "pendenza %.3f: lo schema di prima si RITROVA, cioe' il ramo e' QUELLO"
+    esito("### `C1` DEVE fallire: l'osservabile VECCHIA da' `1.002 +- 0.01`",
+          abs(p_vecchia - 1.002) <= 0.01,
+          "pendenza %.3f: il numero di prima si RITROVA, cioe' il difetto era LA"
+          " LETTURA e non lo schema" % p_vecchia)
+    print()
+    print("### 📌 E I PESI BLOCCATI, CON L'OSSERVABILE GIUSTA (informazione):")
+    p_bl, righe3, _gm2, _gx2 = pendenza_di_g(None, MB2.NN, 1.0, "stato")
+    stampa(righe3)
+    print("     ### pendenza %.3f -- cioe' ### IL PUNTO MEDIO PER PEZZO NON SERVIVA:"
           % p_bl)
+    print("###   il passo di default era GIA' del secondo ordine, e col punto medio da'")
+    print("###   %.3f, cioe' un filo PEGGIO." % p_pm)
     print()
     print("### 📌 `C1` CON LA REGOLA `(i)` (informazione, NON un criterio)")
-    p_i, righe3, gmi, gxi = pendenza_di_g("i", MB2.NN, 1.0)
+    p_i, righe3, gmi, gxi = pendenza_di_g("i", MB2.NN, 1.0, "stato")
     stampa(righe3)
     print("     ### pendenza %.3f (la `(ii)` da' %.3f); giri medio %.2f, massimo %d"
           % (p_i, p_pm, gmi, gxi))
     return p_pm, p_bl, p_i
+
+
+def braccio_cs_dello_stato():
+    """### ⭐⭐ **IL CONTROLLO POSITIVO DELL'ERRORE `n.12`: quanto distano le due
+    letture di `cs` DOPO un tick**, e ### **di che ordine.**
+
+    ### ⛔ **`mot.cs` dopo `tick_con_cs` e' il `cs` del CENTRO di quel tick**, e
+    ### **`cs(Lambda di adesso)` e' quello dello stato in cui misuro.** ### ✅ **Se la
+    differenza e' `O(dtau)`, allora un'osservabile che usa `mot.cs` sbaglia di `O(dtau)`**
+    -- ed e' ### **esattamente la pendenza `1` che misuravo.**
+    """
+    import energia_pesata as EP
+    print()
+    print("### IL CONTROLLO POSITIVO dell'errore `n.12`: `cs` dello STATO contro")
+    print("###   `mot.cs` DOPO un tick. ### Se e' `O(dtau)`, l'osservabile vecchia")
+    print("###   sbagliava di `O(dtau)` -- ed e' la pendenza `1`.")
+    print("     %-10s %-18s %-14s %s" % ("dtau", "|dcs| relativo", "rapporto", "dG/G"))
+    prec, rapporti = None, []
+    for k in KAPPA:
+        dtau = 1.0 / (2 ** k)
+        inc, mot, st, par = DV.scena(MB2.NN, MB2.SEME, dtau, norma=MB2.NORMA,
+                                     vuoto_modulo=MB2.VUOTO_MODULO, su2=MB2.SU2)
+        st["psi_h"][...], st["phi_h"][...] = HW.stato_non_uniforme()
+        lc = float(np.mean(mot.densita_vuoto(st)))
+        mot.regola_punto_medio = None
+        FP.accendi_cs(mot, lc, st)
+        TK.tick_con_cs(st, mot, par, lc, ())
+        cs_stato = FP.cs(mot.densita_vuoto(st), lc,
+                         mot._b("pm_cs_s", (mot.inc.n,), float)).copy()
+        d = (float(np.max(np.abs(cs_stato - mot.cs)))
+             / float(np.max(np.abs(cs_stato))))
+        g_s = EP.g_dello_stato(mot, st, par)
+        g_p = EP.g_pesata(mot, st, par)
+        dg = abs(g_s - g_p) / abs(g_s)
+        if prec is not None:
+            rapporti.append(prec / d)
+        print("     %-10.6f %-18.6e %-14s %.6e"
+              % (dtau, d, "--" if prec is None else "%.3f" % (prec / d), dg))
+        prec = d
+    esito("le due letture di `cs` distano `O(dtau)` dopo un tick",
+          all(1.7 <= r <= 2.3 for r in rapporti),
+          "i rapporti: %s -- e la differenza su `G` segue"
+          % ("  ".join("%.3f" % r for r in rapporti)))
 
 
 def braccio_controllo_positivo():
@@ -322,7 +383,7 @@ def informazione_giri():
             # ### la misura ### **non muore** e ### **non nasconde** -- il messaggio
             # ### dell-`assert` porta ### **l-ultimo scarto**, ed e- il numero che serve.
             try:
-                p, _righe, gm, gx = pendenza_di_g("ii", taglia, r)
+                p, _righe, gm, gx = pendenza_di_g("ii", taglia, r, "stato")
                 print("     %-8d %-10.2f %-12.3f %-10.2f %d"
                       % (taglia, r, p, gm, gx))
                 fuori.append((taglia, r, p, gm, gx))
@@ -418,6 +479,7 @@ def main(argv):
     for q in muovono:
         informazione_ordine(q)
     braccio_c1()
+    braccio_cs_dello_stato()
     braccio_controllo_positivo()
     braccio_reversibile()
     informazione_giri()

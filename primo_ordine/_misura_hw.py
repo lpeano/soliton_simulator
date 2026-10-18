@@ -161,7 +161,19 @@ def pesi_dal_passo(mot, aritmetica=False):
 
 
 def h_w(inc, mot, st, par, aritmetica=False):
-    """### `H_w`: ### **i termini di `H` pesati col peso che il passo usa.**"""
+    """### `H_w` ### **coi pesi che il passo usa** *(`mot.cs`)*.
+
+    ### ⛔⛔ **E QUESTA E' L'OSSERVABILE GIUSTA PER I MODI A PESO CONGELATO**, e
+    ### **quella SBAGLIATA per il modo dinamico** *(errore `n.12` del guardiano,
+    `2026-10-18`)*: ### **la quantita' conservata e' quella del GENERATORE CHE HA
+    GIRATO.**
+    ### ✅ **Coi pesi CONGELATI** *(uniforme, congelato)* il generatore ha
+    ### **quei pesi**, quindi `mot.cs` e' ### **giusto** -- ed e' per questo che il
+    `2.030` del braccio `(a)` ### **era vero.**
+    ### ⛔ **Col `cs` DINAMICO no:** dopo un tick `mot.cs` e' il `cs` del
+    ### **CENTRO**, e il confronto con `G(0)` ### **legge due istanti** -- per quello si
+    usa ### **`energia_pesata.g_dello_stato`.**
+    """
     per_nodo, per_arco = MB2.pezzi_di_h(inc, mot, st, par)
     w_nodo, w_arco = pesi_dal_passo(mot, aritmetica)
     return float(np.sum(w_nodo * per_nodo)) + float(np.sum(w_arco * per_arco))
@@ -216,7 +228,15 @@ def corsa(dtau, tick, modo, c_uniforme=None, aritmetica=False):
     # ### ✅ **MISURATO:** con la legge accesa nel modo `congelato` la pendenza
     # ### scende da `2.030` a `-0.121`, ed e' il segno che i due non si mescolano.
     salta = () if modo == "dinamico" else ("CAMM-FASE-VUOTO",)
-    w0 = h_w(inc, mot, st, par, arit)
+    # ### ✅ **E NEL MODO DINAMICO L'OSSERVABILE E' QUELLA DELLO STATO**
+    # ### *(errore `n.12`)*: nei modi a peso congelato ### **`h_w` e' giusta**, perche' il
+    # ### generatore ha quei pesi.
+    import energia_pesata as _EP
+    def _fun(i_, m_, s_, p_):
+        if modo == "dinamico":
+            return _EP.g_dello_stato(m_, s_, p_)
+        return h_w(i_, m_, s_, p_, arit)
+    w0 = _fun(inc, mot, st, par)
     t0 = MB2.h_tot(inc, mot, st, par)
     peggio_w, peggio_t, peggio_fonte = 0.0, 0.0, 0.0
     for _k in range(tick):
@@ -224,7 +244,7 @@ def corsa(dtau, tick, modo, c_uniforme=None, aritmetica=False):
             TK.tick_con_cs(st, mot, par, lc, salta)
         else:
             TK.percorri_tick(st, mot, par, salta, None, len(CM.ORDINE))
-        hw = h_w(inc, mot, st, par, arit)
+        hw = _fun(inc, mot, st, par)
         ht = MB2.h_tot(inc, mot, st, par)
         peggio_w = max(peggio_w, abs(hw - w0))
         peggio_t = max(peggio_t, abs(ht - t0))

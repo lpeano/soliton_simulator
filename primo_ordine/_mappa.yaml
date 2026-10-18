@@ -176,7 +176,7 @@ moduli:
 
   - nome: _misura_hw.py
     responsabilita: la pendenza dell-energia PESATA H_w, e se il passo con cs la conserva
-    importa: [_misura_mb2, _presidio, composizione, deriva, flussi_parziali, tick]
+    importa: [_misura_mb2, _presidio, composizione, deriva, energia_pesata, flussi_parziali, tick]
 
   - nome: _collauda_mb1.py
     responsabilita: la prova che il criterio di M-B1 PUO- fallire, coi casi finti

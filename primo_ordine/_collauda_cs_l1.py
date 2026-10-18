@@ -202,7 +202,11 @@ def una_corsa_cs(dtau, tick, lambda_c, quale):
     # ### ### **`~2700` ulp sull'escursione**)* ### **non dice niente sul CICLO.**
     # ### ⚠ **E la frase che avevo scritto -- <<lo scarto costante si cancella in un
     # ### massimo di differenze>> -- ERA FALSA**, e la misura l'ha smentita subito.
-    fun = EP.g_pesata if quale == "G" else (
+    # ### ⛔⛔ **`G` SI LEGGE SULLO STATO, NON COI PESI DEL PASSO** *(errore
+    # ### `n.12` del guardiano, `2026-10-18`)*: dopo `tick_con_cs` ### **`mot.cs` e' il
+    # ### `cs` del CENTRO**, e `g_pesata` confronterebbe ### **due istanti.**
+    # ### ⚠ **Il criterio `(2)` di `D3` dava `1.254` per questo**, non per la fisica.
+    fun = EP.g_dello_stato if quale == "G" else (
         lambda m, s, p: MB2.h_tot(inc, m, s, p))
     h0 = fun(mot, st, par)
     peggio, giri = 0.0, 0
