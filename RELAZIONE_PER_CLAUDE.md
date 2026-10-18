@@ -18963,3 +18963,43 @@ il ### **`-0.001`** che ti avevo dato *(la pendenza di `G` senza il termine)* e'
 *(`~4e+02`)*. ### ✅ **Il numero giusto e' `-0.007`**, e la conclusione
 ### **non cambia** *(senza il termine `G` non converge)* -- ### **ma il numero era
 sbagliato e lo dico.**
+### ⭐⭐ **IL RIASSUNTO DELLA STRADA `(d)`, per te**
+
+### ✅ **LA LEGGE C'E', E A DEFAULT NON ESISTE:** `CAMM-FASE-VUOTO` e' in tabella
+*(`14` voci, impronta `2e7f795d2a52fbe7`, le leggi che girano da `6` a `7`)*, e a forma
+spenta ### **i `12` pezzi di prima sono AL BIT** con la distanza del passo intero
+### **`0` esatto.**
+### ✅ **E `Omega` E' QUELLO DI `G`, verificato numericamente** *(`A_k` a `7.9e-08`,
+`dw/dcs` a `1.3e-07`)*, col ### **segno confermato dal caso che DEVE fallire** `C2`.
+
+### ⛔⛔ **MA `C1` CADE: `1.002` contro `1.9`.** Il termine porta `G` da
+### **<<non converge>>** *(`-0.007`)* a ### **PRIMO ordine**, e non oltre.
+### ⭐ **E SO PERCHE', perche' l'ho cercato:** non e' `cs` al centro *(rileggendolo
+per pezzo resta `1.044`)*, e' che ### **i pesi sono congelati DENTRO il pezzo** --
+### **`CAMM-SPOSTAMENTO-VUOTO` muove `Lambda` di `O(dtau)` nella propria
+applicazione.** ### **Un peso sbagliato di `O(dtau)` da' il primo ordine.**
+### ⚠ **Servirebbe il peso al punto medio DI OGNI PEZZO: un cambio di SCHEMA sui
+pezzi che esistono gia', e NON lo faccio.** ### **Decidi tu.**
+
+### ✅ **E IL RESTO REGGE, col termine ACCESO:** `D0` `15`/`15`, `D1` `14`/`14`, `D2`
+`10`/`10`, e in `D3` ### **`0` violatori del tempo proprio**, la ### **`PTheta` dentro la
+banda** e le ### **norme conservate.**
+### ✅ **E `C4`, LA MISURA CHE POTEVA DIRE NO, DICE SI':** il vuoto
+### **si ritira ancora** *(`-3.92` -> `-3.14`, lo stesso verso, `385` e `143` barre)*, e
+la risposta e' ### **l'`80%` di prima** -- cioe' ### **il termine la ATTENUA del `20%`**,
+con `76` barre di differenza. ### **Il verso NON si inverte.**
+### 📌 **E il costo e' `3.7`-`9.7` tick di lavoro per tick** *(`C5`)*: meno del
+`~37x` che temevo.
+### ✅ **IL VUOTO PER ESTREMITA' E' IN MAPPA, E IL GRADO L'HO CONTATO**
+
+`doc/MAPPA_DIPENDENZE.md` sezione `23`, ### **come vincolo su `L3`** accanto a *«un
+nodo che nasce deve avere `Lambda > 0`»*, piu' il rimando nella voce di `Lambda_c`.
+### ✅ **E CHE OGGI IL GRADO SIA UNIFORME NON L'HO DETTO: L'HO CONTATO** --
+### **`2` su `2`** nelle due scene di `deriva` e ### **`4` su `4`** nella `scena_l2`
+`31x31`, cioe' ### **uniforme in tutte e tre.** ### **Quindi la cura candidata oggi non
+cambierebbe NESSUN numero, ed e' il momento giusto per deciderla.**
+### 📌 **E il punto `3(b)` tocca il lavoro appena fatto:** se `Lambda_c`
+dipendesse dallo stato ### **durante** la corsa, quella dipendenza dovrebbe
+### **entrare in `G`** -- ### **ed e' esattamente la lezione di `D3`.** ### ✅ **Con
+`Lambda_c,k = d_k lambda_c` il termine resta COMPLETO a grafo fisso**, perche' `d_k`
+### **non cambia** -- e con la mitosi ### **andra' riguardato.**

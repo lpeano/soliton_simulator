@@ -1,0 +1,71 @@
+[TIMBRO] _misura_statica_d.py  sha1-BYTE 32257fd1  committato e pulito
+====================================================================================================
+`C4`: LA RISPOSTA STATICA CON LA STRADA `(d)` -- il vuoto si ritira ancora?
+### Mandato del 2026-10-18. NESSUNA DECISIONE.
+====================================================================================================
+  LA CONFIGURAZIONE INTERA, dichiarata e IMPORTATA dal protocollo:
+  lati = (31, 31)   vuoto = 1.0   seme = 7   raggio = 1   x = 1.00
+  dtau = 0.50   forma = S3   tick = 2000   accensione = 100 (DICHIARATA e UGUALE nelle due corse)
+  la finestra: da T+200, 10 blocchi   e il pezzo sostituito e' CAMM-MATERIA-VUOTO
+  `Lambda_c` = 4.0000 (1.0 x il vuoto medio della scena, DERIVATO)
+----------------------------------------------------------------------------------------------------
+### LE DUE CORSE, col MEDESIMO protocollo:
+     spenta         dLambda = -3.919142e+00 +- 1.017e-02 (385.5 barre)   rho fermo 0.0e+00   somma |phi|^2 1.7e-09   [12.8 s]
+     ACCESA         dLambda = -3.144907e+00 +- 2.205e-02 (142.6 barre)   rho fermo 0.0e+00   somma |phi|^2 2.3e-11   [363.3 s]
+----------------------------------------------------------------------------------------------------
+  `C4` il vuoto si RITIRA ancora: il VERSO non si inverte        PASSA   spenta -3.919e+00, ACCESA -3.145e+00: lo STESSO verso
+  `C4` e le due risposte hanno MATERIA (`>= 3` barre ciascuna)   PASSA   spenta 385.5 barre, ACCESA 142.6 barre
+----------------------------------------------------------------------------------------------------
+### 📌 DI QUANTO CAMBIA (informazione, NON un criterio):
+     il rapporto fra le due risposte: 0.8024
+     e la differenza: +7.742348e-01 (76.2 barre della spenta)
+----------------------------------------------------------------------------------------------------
+### 📌 IL PROFILO per anelli (informazione): dLambda(r)
+          r   nodi             spenta             ACCESA
+          0      1      -3.976296e+00      -3.016827e+00
+          1      4      -3.904854e+00      -3.176928e+00
+          2      8      -3.527520e+00      -3.565409e+00
+          3     12      -3.053226e+00      -3.853997e+00
+          4     16      -2.612950e+00      -3.831895e+00
+          5     20      -2.222721e+00      -3.816436e+00
+          6     24      -1.873413e+00      -3.794430e+00
+          7     28      -1.555114e+00      -3.765241e+00
+          8     32      -1.261100e+00      -3.548449e+00
+          9     36      -9.874123e-01      -3.741181e+00
+         10     40      -7.326672e-01      -3.571049e+00
+         11     44      -4.975995e-01      -3.238760e+00
+         12     48      -2.837022e-01      -2.932592e+00
+         13     52      -9.173685e-02      -2.567279e+00
+         14     56      +7.846285e-02      -2.278146e+00
+         15     60      +2.263656e-01      -1.933274e+00
+         16     60      +3.347837e-01      -5.425324e-01
+         17     56      +4.237080e-01      +1.240988e-01
+         18     52      +5.168111e-01      +9.139403e-01
+         19     48      +6.149889e-01      +1.811709e+00
+         20     44      +7.181101e-01      +2.640355e+00
+         21     40      +8.255785e-01      +3.477985e+00
+         22     36      +9.364311e-01      +4.310811e+00
+         23     32      +1.049238e+00      +5.117908e+00
+         24     28      +1.162164e+00      +5.881898e+00
+         25     24      +1.273636e+00      +6.584889e+00
+         26     20      +1.383498e+00      +7.216001e+00
+         27     16      +1.493026e+00      +7.758475e+00
+         28     12      +1.601901e+00      +8.203222e+00
+         29      8      +1.702656e+00      +8.534170e+00
+         30      4      +1.777713e+00      +8.750953e+00
+====================================================================================================
+`C4`: 2 su 2
+### ⛔ E NESSUNA DECISIONE: il verso e' FISICA, e la legge Luca.
+====================================================================================================
+
+### ✅ LA LETTURA, SCRITTA NEL REFERTO (e NON una decisione): IL VERSO NON SI INVERTE.
+###   Il vuoto si ritira ancora vicino alla sorgente: -3.919e+00 a forma spenta e
+###   -3.145e+00 con la strada (d) ACCESA, cioe- LO STESSO SEGNO, con 385.5 e 142.6
+###   barre. ### Quindi la misura che poteva dire NO alla strada (d) dice SI-.
+### 📌 E DI QUANTO CAMBIA: la risposta accesa e- l-80.2% di quella spenta, cioe- il
+###   termine la ATTENUA del ~20%, e la differenza e- 76.2 barre della spenta --
+###   e- un effetto MISURATO, non un margine.
+### ⚠ E IL PROFILO PER ANELLI MOSTRA UNA COSA IN PIU-, e non la interpreto: a
+###   distanza media (r fra 13 e 16) i due segni DIFFERISCONO -- la spenta e- gia-
+###   positiva e l-accesa e- ancora negativa. ### Che cosa voglia dire e- una lettura,
+###   e la decide Luca.

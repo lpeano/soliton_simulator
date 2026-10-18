@@ -816,3 +816,50 @@ una cura.**
 ### ⛔ **E LE CINQUE STRADE, ADESSO, SONO IN UN SOLO POSTO:** le tre letture
 `(a)` `(b)` `(c)` della voce piu' queste due. ### **Il loro costo e i numeri stanno nella
 voce**, e ### **la scelta e' di Luca.**
+
+## 23. ⛔⛔ `L3` — **IL VUOTO PER ESTREMITA', E LA SCALA CHE SEGUE LA TOPOLOGIA** *(`2026-10-18`, `00:22`)*
+
+> ### 📌 **Osservazione di Luca, integrazione del guardiano**, e
+> ### **si colloca QUI: accanto a *«un nodo che nasce deve avere `Lambda > 0`»***
+> *(la sezione `21`)*. ### ⛔ **Nessun codice, nessuna decisione.**
+
+### `1)` ### **IL FATTO:** `Lambda_k` e' ### **la somma del vuoto sulle `d_k` ESTREMITA'
+del nodo `k`.** ### **Oggi il grafo e' REGOLARE e la cosa non si vede**; con la
+### **mitosi** i gradi diventano diversi, e ### **un nodo con piu' archi avrebbe <<piu'
+vuoto>>** -- quindi ### **luce piu' veloce PER TOPOLOGIA, non per fisica.**
+
+### ✅ **E CHE OGGI IL GRADO SIA UNIFORME NON LO DICO: L'HO CONTATO** *(`2026-10-18`)*:
+
+| la scena | nodi | grado min | grado max | uniforme? |
+|---|---|---|---|---|
+| `deriva` `nn=16` *(quella di `M-B2`)* | `16` | `2` | `2` | ### **SI'** |
+| `deriva` `nn=12` | `12` | `2` | `2` | ### **SI'** |
+| `scena_l2` `31x31` *(la statica)* | `961` | `4` | `4` | ### **SI'** |
+
+### ⛔ **Quindi la cura candidata, OGGI, NON CAMBIEREBBE NESSUN NUMERO** -- e questo
+e' ### **il momento giusto per deciderla**, perche' ### **dopo la mitosi
+cambierebbe tutto.**
+
+### `2)` ### **LA CURA CANDIDATA:** la forma guarda il vuoto ### **PER ESTREMITA'**
+
+```
+cs_k = (Lambda_k/d_k) / (Lambda_k/d_k + lambda_c)      equivalente a   Lambda_c,k = d_k * lambda_c
+```
+
+### ✅ **E' una scala che SI AUTOREGOLA quando cambia la topologia**, ed e'
+### **LOCALE** *(`d_k` e' del nodo)*. ### ⛔ **Va decisa PRIMA di `L3`.**
+
+### `3)` ### **I DUE VINCOLI DA SCRIVERE ACCANTO:**
+### `(a)` ### **`lambda_c` resta UN NUMERO PURO:** per la simmetria di scala
+### **cio' che si deriva dallo stato scala con lo stato**, e le strade per il suo valore
+restano ### **costante**, ### **memoria di nascita del nodo**, ### **scala dei quanti di
+`L6`** *(`[[DOMANDA-IL-VALORE-DI-LAMBDA-C]]`)*.
+### `(b)` ### **SE `Lambda_c` DIPENDESSE DALLO STATO DURANTE LA CORSA** *(vuoto, vicini,
+`cs`)*, ### **quella dipendenza dovrebbe entrare nel generatore `G` della strada
+`(d)`** -- altrimenti ### **la conservazione si rompe di nuovo**, ed e' ### **la lezione
+di `D3`.** ### ✅ **E `d_k` e una memoria di nascita NON cambiano a grafo fisso**,
+quindi ### **non portano termini nuovi**; ### ⚠ **con la mitosi andra' riguardato.**
+
+### `4)` ### **E UNA NOTA CHE CHIUDE UNA STRADA:** far dipendere `Lambda_c` da `cs`
+*(la <<metrica>>)* sarebbe ### **CIRCOLARE**, perche' ### **`cs` e' definita da
+`Lambda_c`.**
