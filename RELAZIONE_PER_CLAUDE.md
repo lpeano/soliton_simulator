@@ -19047,3 +19047,31 @@ composizione DIVERSA)* ### **non l'ho fatta:** il mandato dice ### **solo mappa 
 *(rimisurato col termine acceso: `1.5` ulp su `64` tick)*, ma ### **se i nodi si
 moltiplicano a densita' costante `V` CRESCE.** ### **Tre letture, e portano a codice
 diverso.**
+
+### 📌 **IL TASK HISTORY DEL PUNTO MEDIO PER PEZZO, PRIMA DEL CODICE**
+
+`doc/TASK_HISTORY/2026-10-18_punto_medio_per_pezzo.md`, con ### **LA STELLA POLARE.**
+
+### ✅ **E LE DUE DICHIARAZIONI CHE IL MANDATO CHIEDE:**
+### `1)` ### **E' UN CAMBIO DI SCHEMA, NON UNA LEGGE NUOVA:** la legge dice
+### **CHE COSA** fa un pezzo, lo schema ### **QUANDO si valuta il peso** -- e il secondo
+e' ### **mestiere dell'integratore.**
+### `2)` ### **L'IMPRONTA DELLA TABELLA NON CAMBIA**, e col suo perche':
+### **`leggi.yaml` non si tocca** *(nessuna riga, nessun campo, nessun ordine)*, quindi
+la composizione resta ### **`2e7f795d2a52fbe7`.** ### ⚠ **E se avessi scritto lo
+schema nella SCHEDA della legge l'impronta SAREBBE cambiata** -- e
+### **sarebbe stato sbagliato:** direbbe che ### **la legge e' cambiata** mentre e'
+cambiato ### **il modo di integrarla.**
+
+### ⭐ **E DICO PRIMA DOVE VALUTO IL PESO, e perche':** ### **sullo STATO a meta' del
+pezzo** *(punto medio implicito)*, ### **non sulla media dei due `cs`** -- perche' `cs` e'
+### **NON LINEARE** in `Lambda` *(`media(cs) != cs(media)`)*, e la regola del punto medio
+implicito e' ### **del secondo ordine E reversibile**, che e' la proprieta' che
+### **non rompe il palindromo.** ### ✅ **E la differenza fra le due letture la
+MISURO**, cosi' la scelta ### **non e' un'opinione.**
+
+### ⚠⚠ **E UNA COSA CHE POTREBBE NON BASTARE, detta adesso:** il punto medio
+### **per pezzo** rende ogni pezzo del secondo ordine ### **nel proprio peso**, ma
+### **la composizione resta quella** -- se restasse un'asimmetria fra i due mezzi del
+palindromo, ### **`C1` non arriverebbe a `1.9`.** ### ✅ **E in quel caso il punto `4`
+del mandato dice cosa faro': pendenza PEZZO PER PEZZO, localizzare, committare, FERMARMI.**
