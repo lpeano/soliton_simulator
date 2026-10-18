@@ -19141,3 +19141,18 @@ accoppiata la rete.**
 ### 📌 **E percio' misurero' i giri su DUE taglie** oltre alle quattro `Lambda_c`:
 ### **se crescessero con la taglia, il costo per tick non sarebbe una costante del
 modello ma una funzione della rete** -- e sarebbe una cosa da dirti.
+
+### ✅ **L'ERRORE `n.11` DEL GUARDIANO E' REGISTRATO, E HA RAGIONE**
+
+La matrice delle dipendenze ### **non si puo' prendere dalla tabella:** `ambito` e'
+### **una lista unica** *(non distingue lettura da scrittura)* e
+### **non dichiara che ogni pezzo legge `cs` attraverso il proprio tempo proprio** --
+i pezzi della materia hanno ### **`ambito: [psi_h]`** e ### **leggono `cs` comunque.**
+### ⛔ **Sarebbe stato un FALSO ZERO proprio sulla dipendenza che conta.**
+### ✅ **Quindi la matrice si ricavera' DAL CODICE**, con ### **un caso che DEVE
+riuscire** *(lo strumento deve trovare che `CAMM-SPOSTAMENTO` legge `cs`: se non lo trova
+e' cieco)*, e l'osservazione su `ambito` ### **senza toccare `leggi.yaml`.**
+### 📌 **E ho gia' una riga di quella matrice, dal censimento di oggi:**
+`CAMM-SPOSTAMENTO` ### **scrive `rho`** *(`5.9e-01`, cioe' `O(1)`)* e
+### **non scrive `Lambda`** *(`0.0` esatto)* -- e ### **legge `cs`**, che la tabella
+### **non dice.**
