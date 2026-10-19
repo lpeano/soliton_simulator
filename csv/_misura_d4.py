@@ -359,10 +359,10 @@ def leggi_e_giudica(bracci, lm, acceso, cfg):
             ok = monot and dentro
             esiti["lineare"].append(ok)
             print("  rapporto %-5g  |R-1| non cresce quando x cala: %s;  al x = %g |R-1| ="
-                  " %.3e <= curvatura %.3e + 3 barre %.1e: %s   -> %s"
-                  % (r, "si" if monot else "### NO", x0[0], abs(x0[1] - 1), x0[4],
-                     3 * x0[2], "si" if dentro else "### NO",
-                     "LINEARE -- PASSA" if ok else "### FALLISCE"))
+                  " %.3e <= curvatura %.3e + 3 barre %.1e: %s   -> verdetto SOSPESO"
+                  " (avrebbe detto %s)"
+                  % (r, "si" if monot else "NO", x0[0], abs(x0[1] - 1), x0[4],
+                     3 * x0[2], "si" if dentro else "NO", "PASSA" if ok else "FALLISCE"))
         else:
             print("  rapporto %-5g  ### NON DECIDIBILE: meno di due x convergono" % r)
     # ---------------------------------------------------------- i verdetti
@@ -375,6 +375,14 @@ def leggi_e_giudica(bracci, lm, acceso, cfg):
         v = esiti[k]
         stato = ("PASSA" if v and all(v) else
                  ("NON DECIDIBILE" if not v else "### FALLISCE"))
+        # ### ⛔⛔ **IL VERDETTO DI `LINEARE` E' SOSPESO** *(decisione di Luca del
+        # ### `2026-10-19`, e l'errore `n.16` del guardiano)*: il criterio verifica
+        # ### ### **soprattutto l'algebra della forma**, e la sua sistemazione e' la prossima
+        # ### domanda a Luca. ### **I numeri si riportano, il verdetto non conta.**
+        if k == "lineare":
+            print("  %-62s %d su %d   SOSPESO (avrebbe detto: %s)"
+                  % (che, sum(v), len(v), stato))
+            continue
         tutti &= stato == "PASSA"
         print("  %-62s %d su %d   %s" % (che, sum(v), len(v), stato))
     nc = sorted(set((a[0], a[1], a[2], b["punto_fisso"]) for a, b in bracci.items()
