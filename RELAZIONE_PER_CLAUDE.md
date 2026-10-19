@@ -19517,3 +19517,7 @@ L'unico pezzo che muove `Lambda` e' `CAMM-SPOSTAMENTO-VUOTO` *(la matrice di `e9
 
 ### ⚠ **Due cose da sapere:** `_rami_era2.py` aveva ### **TRE** voci del ramo, non due *(anche `motore._spostamento_scalare`, che senza il ramo non ha piu' rami)*: tolte tutte, ed erano ### **le `32` righe** che `2c95af13` aveva aggiunto. ### **E il mio primo tentativo del caso che deve fallire ha lanciato il file sbagliato** *(`_misura_mb1.py --collaudo`, che dice «il collaudo non sta piu' qui»)*: ### **referto scartato prima del commit**, e rifatto con `_collauda_mb1.py`.
 ### 📌 **I referti `censimento_punti_fissi.txt` e `matrice_dipendenze.txt` sono RISCRITTI**: le versioni di stamattina ### **restano valide al loro commit** *(`95c81e97` e `e989872d`)*, e ### **l'inventario lo dice.**
+
+### ✅ **LA RIMOZIONE E' CHIUSA NEI DOCUMENTI: MAPPA, CODA, RIPRESA, VOCE**
+
+### **Mappa** *(sez.`26`)* e **coda**: la frase *«il ramo e' SPENTO e non si toglie»* resta, con accanto ### **«SUPERATO: il ramo e' TOLTO»** e i rimandi *(`3b467aa4`, `b9edb2be`, `2c95af13`, `880955bb`)*; nella mappa anche ### **il numero dopo** *(`2` punti fissi nel tick, `3` nel nucleo)*. ### **RIPRESA:** ### **la sezione `49` che mancava** *(`C1` non cadeva, cadeva la mia osservabile; rimando a `g_dello_stato.txt` e all'errore `n.12`)* e ### **la `50`** *(la rimozione)*. ### **La voce `DOMANDA-LO-STATO-CONTIENE-IL-PASSATO`** e' aggiornata con `aggiorna-lotto` *(una riga di storico)*: ### **conta il passo DOPO la rimozione, e lo dice.**

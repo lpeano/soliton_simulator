@@ -1087,6 +1087,7 @@ del CENTRO)*, e ### **col conto giusto il passo da' `2.091`** -- cioe'
 il punto fisso di `cs` ### **non converge a rapporto `0.1` e `0.3`** *(`4` casi su `8`)* --
 e ### **quel ramo e' SPENTO di default, e non si toglie: toglierlo e' una decisione di
 Luca.**
+### ✅ **SUPERATO IL `2026-10-19`: IL RAMO E' TOLTO** *(decisione di Luca del `2026-10-18`, `21:48`; commit `3b467aa4`, prove in `b9edb2be`: braccio `0` al bit su due scene, `C1 = 2.091`)*. ### **Il codice e i numeri restano nella storia** *(`2c95af13`)* e nel referto `doc/referti_l2/punto_medio_per_pezzo.txt` *(`880955bb`)*.
 
 ### ⛔ **E LA DECISIONE E' UNA SOLA, E DI LUCA:** ### **<<lo stato contiene il
 passato: SI' o NO>>.** ### **Vale per il modello INTERO**, non per un pezzo -- e
@@ -1112,6 +1113,8 @@ passato: SI' o NO>>.** ### **Vale per il modello INTERO**, non per un pezzo -- e
 | `B` | ### **il costo** | ### **`cs_al_centro` `76`-`92%` del tick, `Omega` `69`-`84%`**, di cui `52`-`77%` dentro i giri di `cs`; il modello `giri * c(giro)` ### **non spiegato, non bloccante** | `costo_punti_fissi.txt` |
 | `C` | ### **la matrice** | tutti e `7` i pezzi leggono `cs`; ### **muove `Lambda` solo `CAMM-SPOSTAMENTO-VUOTO`, AUTO-DIPENDENTE**; incrociate ### **solo per l'auto-dipendenza** | `matrice_dipendenze.txt` |
 | `D` | ### **`ambito`** | ### **`7` letture di `cs` su `7` non dichiarate**, e `cs` non e' nel vocabolario | `ambito_contro_matrice.txt` |
+
+### ✅ **E LA RIMOZIONE E' FATTA** *(`3b467aa4`)*: il censimento rifatto dopo *(`censimento_punti_fissi.txt`, blob `bcfae04a`)* da' ### **`2` punti fissi nel percorso del tick e `3` nel nucleo**, come la previsione dichiarata prima.
 
 ### ⛔ **QUESTO CORREGGE IL NUMERO DELL'INIZIO DELLA SEZIONE**, che parlava di punti fissi *«`cs` al centro e il peso d'arco al punto medio»*: ### **quello che gira davvero a ogni tick con `cs` dinamico e' la fase del vuoto dentro `cs`**, ed e' li' il costo. ### **E per le varianti** *(lettura, non decisione)*: `(a)` resta esplicita ma non simmetrica, ### **ed e' un buffer di storia, in tensione con `[[MEMORIA-DENTRO-H]]`**; `(b)` non e' disponibile come esplicita simmetrica; `(c)` porta il passato nel resto e nelle code, con la simmetria nel tempo aperta.
 ### ⛔ **LA DECISIONE «lo stato contiene il passato» RESTA UNA E DI LUCA.**
