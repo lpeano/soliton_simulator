@@ -19450,3 +19450,7 @@ Il messaggio di `56dd95b7` dice *«`doc/RIPRESA_2026-10-15.md`: la sezione 49»*
 
 ### **Il risultato del passo `B` sono le QUOTE**, che non dipendono dal controllo: ### **`cs_al_centro` `76`-`92%` del tick, `Omega` `69`-`84%`, di cui `52`-`77%` dentro i giri di `cs`** -- ### **il costo del tick e' il punto fisso di `Omega` annidato in quello di `cs`.** La mia previsione *«`cs` sopra il `90%`»* vale in ### **`3` casi su `13`**.
 ### ⚠ **Il modello `giri * c(giro)` non torna in `12` bracci su `26`** *(`r` fra `0.92` e `1.26`, piu' `0.663` e `0.502` a `32`/`2.4`)*: ### **NON SPIEGATO e NON BLOCCANTE**, perche' lo scarto ### **non puo' cambiare la conclusione sulle quote.** Le due ipotesi *(costo fisso per chiamata; `c(giro)` solo sullo stato iniziale)* ### **restano ipotesi**, da riprendere solo se servira' il costo di un singolo giro. ### **Annotato nel task history**, in fondo al par.`2`.
+
+### 📌 **NELLA MAPPA, sez.`26`, LA LETTURA DEL GUARDIANO ACCANTO AL CICLO DI PERIODO `2`** *(scritta come sua: una lettura, non una misura)*
+
+L'unico pezzo che muove `Lambda` e' `CAMM-SPOSTAMENTO-VUOTO` *(la matrice di `e989872d`)*, quindi ### **l'anello «`cs` -> `Lambda`» del ciclo al nodo `10` passa per il trasporto del vuoto** -- ### **la stessa auto-dipendenza che esclude `(b)`.** Per la `(c)` la memoria del resto renderebbe esplicita quella dipendenza senza punto fisso, e ### **resta aperta la simmetria nel tempo**, la domanda su cui cade `(b)`.
