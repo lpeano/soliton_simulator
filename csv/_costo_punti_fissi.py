@@ -37,12 +37,24 @@ applica (Omega)   T  ~  somma sulle chiamate  (giri + 1) * c(giro di Omega)
 *(il `+1` di `Omega` e' la valutazione iniziale piu' la fase finale, che il corpo del
 ciclo fa una volta in piu'; `cs` fa la prima ipotesi FUORI dal ciclo, ed e' un costo per
 chiamata che si riporta a parte)*.
-### ✅ **La soglia e' la dispersione delle ripetizioni** *(`P1-sexies`: si deriva dal
-nullo)*: `|T - T_previsto| <= 3 sqrt(s_T^2 + s_prev^2)`, con `s` la deviazione standard
-su ### **`5` ripetizioni** *(`P3`: almeno `4`)*.
-### ⛔ **IL CASO CHE DEVE FALLIRE e' il conto di `C5`:** i giri di `Omega` letti da
-`mot.giri_omega` ### **una volta per tick** *(l'ultima applicazione)*. Se il criterio
-**non** lo boccia, ### **il criterio non distingue niente.**
+### ⛔⛔ **IL CRITERIO E' QUELLO DI `652eeb52`** *(decisione di Luca del `2026-10-19`,
+scritta nel task history PRIMA di questa versione)*, che sostituisce quello di
+`a43eb14a` *(caduto in due versi, `ec0d5f7f`)*:
+### ✅ **statistica ROBUSTA:** `1 + 5` ripetizioni, ### **la prima di riscaldamento
+SCARTATA**; la ### **MEDIANA** delle `5`, la dispersione ### **`1.4826 * MAD`**, e
+`|T - T_previsto| <= 3 sqrt(s_T^2 + s_prev^2)` *(`s_prev` del costo di un giro, per i
+giri, diviso la radice dei campioni -- come prima)*.
+### ⛔ **UN BRACCIO E' INFORMATIVO solo se la soglia e' MINORE della distanza** fra il
+previsto giusto e ### **il previsto del caso che deve fallire** *(il conto di `C5`)*; se
+no e' ### **NON INFORMATIVO**, si conta a parte e ### **non vale MAI come <<torna>>.**
+### **IL VERDETTO**, per punto fisso e per taglia: ### **TORNA** se tutti gli informativi
+tornano e in tutti il conto di `C5` fallisce; ### **NON DECIDIBILE** se nessun braccio e'
+informativo *(e non vale come PASSA)*.
+### ⛔ **IL CASO CHE DEVE FALLIRE, il conto di `C5`** *(`_misura_strada_d.informazione_
+costo`)*: per ### **`Omega`** i giri letti da `mot.giri_omega` ### **una volta per tick**
+*(l'ultima applicazione)*; per ### **`cs`** ### **<<un giro costa MEZZO TICK>>**, cioe'
+mezzo tick ### **SPENTO** della stessa taglia per giro *(ignora il punto fisso di `Omega`
+dentro ogni mezzo palindromo)*.
 ### ⛔ **E SE IL CONTROLLO VERO NON TORNA, c'e' un costo non capito:** si scrive e ### **ci
 si FERMA** *(par.`2` del task history)*.
 
@@ -86,7 +98,9 @@ TAGLIE = (16, 32)            # _misura_punto_medio.TAGLIE: <<due taglie>> del ta
 DTAU = 0.25                  # quello di C5 (_misura_strada_d.informazione_costo)
 TICK = 8                     # quelli di C5
 RIPETIZIONI = 5              # P3: per una barra ne servono ALMENO 4
-SIGMA = 3.0                  # la soglia in deviazioni standard: P1-sexies (3 sigma)
+RISCALDAMENTO = 1            # 652eeb52: la prima ripetizione e' di riscaldamento, SCARTATA
+SIGMA = 3.0                  # la soglia: 3 volte la dispersione (652eeb52)
+MAD_SCALA = 1.4826           # 652eeb52: la MAD scalata alla sigma di una normale
 
 
 # =====================================================================================
@@ -262,16 +276,18 @@ def braccio(taglia, irapporto, modo, involucro):
     # ### il costo di UN giro, A PARTE e PRIMA dell'involucro
     if involucro == "strumentato" and modo == "acceso":
         FP.accendi_cs(mot, lc, st0)
-        fuori["giro_cs"] = [costo_giro_cs(st0, mot, par, lc) for _ in range(TICK)]
+        fuori["giro_cs"] = [costo_giro_cs(st0, mot, par, lc)
+                            for _ in range(RISCALDAMENTO + TICK)]
         FP.accendi_cs(mot, lc, st0)
-        fuori["giro_om"] = [costo_giro_om(st0, mot, par) for _ in range(TICK)]
+        fuori["giro_om"] = [costo_giro_om(st0, mot, par)
+                            for _ in range(RISCALDAMENTO + TICK)]
         FP.spegni_cs(mot)
     ripetizioni = []
     firme = set()
     try:
         if inv is not None:
             inv.installa()
-        for _r in range(RIPETIZIONI if inv is not None else 1):
+        for _r in range(RISCALDAMENTO + RIPETIZIONI if inv is not None else 1):
             st = _copia(st0)
             if inv is not None:
                 inv.azzera()
@@ -322,15 +338,33 @@ def lancia(taglia, irapporto, modo, involucro):
 
 
 # =====================================================================================
-#   LA LETTURA
+#   LA LETTURA -- il criterio ROBUSTO di `652eeb52` (decisione di Luca, 2026-10-19)
+# =====================================================================================
+#   ### ⛔⛔ **IL CRITERIO E' SCRITTO NEL TASK HISTORY PRIMA DI QUESTA CORSA** *(par.`2`,
+#   ### annotazione del `2026-10-19`)*, e qui ### **si applica, non si sceglie**:
+#   ### la MEDIANA delle ripetizioni dopo il RISCALDAMENTO, la dispersione `1.4826 MAD`,
+#   ### la soglia `3` volte quella dispersione combinata fra misura e previsto, e un
+#   ### braccio ### **INFORMATIVO solo se la soglia e' minore della distanza fra il
+#   ### previsto giusto e quello del caso che deve fallire.**
 # =====================================================================================
 def _ms(x):
     return 1e3 * x
 
 
-def leggi(b):
-    """### Le quote, i giri, e il controllo ### **misurato contro previsto.**"""
-    rr = b["ripetizioni"]
+def mediana_e_s(v):
+    """### `(mediana, 1.4826 * MAD)`: ### **la statistica robusta del criterio.**"""
+    v = np.asarray(v, dtype=float)
+    m = float(np.median(v))
+    return m, MAD_SCALA * float(np.median(np.abs(v - m)))
+
+
+def leggi(b, t_spento):
+    """### Le quote, i giri, e i TRE previsti ### **per il controllo.**
+
+    `t_spento` e' `(mediana, s)` del tick SPENTO della stessa taglia, ### **per tick**:
+    serve al conto di `C5` per `cs`.
+    """
+    rr = b["ripetizioni"][RISCALDAMENTO:]
     T = np.array([r["T_tick"] for r in rr])
     cs_t = np.array([sum(x[0] for x in r["cs"]) for r in rr])
     om_in = np.array([sum(x[0] for x in r["om"] if x[2] and x[1] > 0) for r in rr])
@@ -345,43 +379,80 @@ def leggi(b):
          "om_tutte": om_tutte, "pm": pm_t, "giri_cs": giri_cs, "giri_om": giri_om,
          "giri_pm": giri_pm, "n_om": len(giri_om), "n_pm": len(giri_pm)}
     if "giro_cs" in b:
-        gcs = np.array(b["giro_cs"])
-        gom = np.array(b["giro_om"])
-        L["c_cs"], L["c_om"] = gcs, gom
+        gcs = np.array(b["giro_cs"][RISCALDAMENTO:])
+        gom = np.array(b["giro_om"][RISCALDAMENTO:])
         n_cs = float(sum(giri_cs))
         n_om = float(sum(g + 1 for g in giri_om if g > 0))
-        # ### ⛔ **IL CASO CHE DEVE FALLIRE, il conto di `C5`:** `Omega` letto
-        # ### ### **una volta per tick** dall'ultima applicazione.
-        # ### ⚠ **le applicazioni per tick NON sono uguali** *(dipendono dai giri di
-        # ### `cs`)*: si usano ### **i confini dei tick registrati.**
+        # ### ⛔ **IL CASO CHE DEVE FALLIRE PER `Omega`, il conto di `C5`:** i giri
+        # ### letti ### **una volta per tick** dall'ultima applicazione, coi confini dei
+        # ### tick registrati *(le applicazioni per tick non sono uguali)*.
         ultima = [giri_om[f - 1] for f in rr[0]["fine_tick"]]
         n_c5 = float(sum(g + 1 for g in ultima if g > 0))
-        # ### ⚠ **l'incertezza del previsto e' l'ERRORE STANDARD del costo di un giro**
-        # ### *(`TICK` campioni)*, per il numero di giri.
+
+        # ### ⚠ **l'incertezza del previsto e' quella del costo di UN giro, per il
+        # ### numero di giri, divisa per la radice dei campioni** -- ### **come prima**
+        # ### *(<<combinata come oggi>>)*, con la statistica robusta al posto di quella
+        # ### normale.
         def prev(n, c):
-            return (n * float(np.mean(c)),
-                    n * float(np.std(c, ddof=1)) / float(np.sqrt(len(c))))
+            m, s = mediana_e_s(c)
+            return n * m, n * s / float(np.sqrt(len(c)))
         L["prev_cs"] = prev(n_cs, gcs)
         L["prev_om"] = prev(n_om, gom)
-        L["prev_c5"] = prev(n_c5, gom)
+        L["prev_c5_om"] = prev(n_c5, gom)
+        # ### ⛔ **IL CASO CHE DEVE FALLIRE PER `cs`, il conto di `C5`:**
+        # ### `_misura_strada_d.informazione_costo` scrive ### **<<UN GIRO DI `cs` COSTA
+        # ### MEZZO TICK>>** *(`lavoro = g_cs * 0.5 + ...`)*, cioe' ### **mezzo tick
+        # ### SENZA punti fissi per giro** -- e ignora che ogni mezzo palindromo contiene
+        # ### il punto fisso di `Omega`. ### **Il tick senza punti fissi e' quello SPENTO
+        # ### della stessa taglia, misurato.**
+        L["prev_c5_cs"] = (n_cs * 0.5 * t_spento[0], n_cs * 0.5 * t_spento[1])
     return L
 
 
-def torna(misura, previsto):
-    """### `(torna?, scarto, soglia)`: ### **`3 sigma` delle due dispersioni.**"""
-    m, sm = float(np.mean(misura)), float(np.std(misura, ddof=1))
+def giudica(misura, previsto, previsto_c5):
+    """### Il giudizio di UN braccio, ### **col criterio di `652eeb52`.**
+
+    ### `misura`: le ripetizioni *(gia' senza il riscaldamento)*; `previsto` e
+    `previsto_c5`: `(valore, s)`. ### Torna un dizionario: `r`, `soglia`, `distanza`,
+    ### **`informativo`**, `torna` *(solo se informativo)*, `c5_fallisce`.
+    """
+    m, sm = mediana_e_s(misura)
     p, sp = previsto
+    c, sc = previsto_c5
     soglia = SIGMA * float(np.sqrt(sm * sm + sp * sp))
-    return abs(m - p) <= soglia, m - p, soglia
+    soglia_c5 = SIGMA * float(np.sqrt(sm * sm + sc * sc))
+    distanza = abs(p - c)
+    informativo = soglia < distanza
+    return {"misura": m, "previsto": p, "previsto_c5": c, "r": m / p if p else float("nan"),
+            "soglia": soglia, "distanza": distanza, "informativo": informativo,
+            "torna": informativo and abs(m - p) <= soglia,
+            "c5_fallisce": abs(m - c) > soglia_c5}
 
 
 def collaudo_del_criterio():
-    """### `P1-sexies`: ### **il criterio su due casi a risposta NOTA**, prima del vero."""
+    """### `P1-sexies`: ### **il criterio su TRE casi a risposta NOTA**, prima del vero.
+
+    ### ✅ **giusto:** misura attorno al previsto, previsto di `C5` lontano -> informativo,
+    torna. ### ⛔ **sbagliato:** misura lontana dal previsto -> informativo, NON torna.
+    ### ⚠ **non informativo:** la stessa misura giusta ma con ### **una soglia larga
+    apposta** *(dispersione piu' grande della distanza fra i due previsti)* -> etichettato
+    ### **NON INFORMATIVO**, e ### **mai** <<torna>>.
+    """
     r = np.random.default_rng(0)
-    base = 1.0 + 0.01 * r.standard_normal(RIPETIZIONI)
-    giusto = torna(base, (1.0, 0.01))[0]
-    sbagliato = torna(base, (0.5, 0.005))[0]
-    return giusto, sbagliato
+    rumore = r.standard_normal(RIPETIZIONI)
+    giusto = giudica(1.0 + 0.01 * rumore, (1.0, 0.01), (0.5, 0.005))
+    sbagliato = giudica(1.5 + 0.01 * rumore, (1.0, 0.01), (0.5, 0.005))
+    largo = giudica(1.0 + 0.01 * rumore, (1.0, 0.5), (0.5, 0.005))
+    ok = (giusto["informativo"] and giusto["torna"]
+          and sbagliato["informativo"] and not sbagliato["torna"]
+          and not largo["informativo"] and not largo["torna"])
+    return ok, giusto, sbagliato, largo
+
+
+def _etichetta(g):
+    if not g["informativo"]:
+        return "NON INFORMATIVO"
+    return "torna" if g["torna"] else "### NON TORNA"
 
 
 def main(argv):
@@ -406,13 +477,17 @@ def main(argv):
           " su2=%s)" % (MB2.SEME, DTAU, MB2.NORMA, MB2.VUOTO_MODULO, MB2.SU2))
     print("  lo stato: la pre-corsa (TEMPO=%.1f, a forma spenta, senza CAMM-FASE-VUOTO)"
           % MB2.TEMPO)
-    print("  taglie %s   tick per braccio %d   ripetizioni %d   soglia %.0f sigma"
-          % (list(taglie), TICK, RIPETIZIONI, SIGMA))
+    print("  taglie %s   tick per braccio %d   ripetizioni %d + %d di riscaldamento SCARTATA"
+          % (list(taglie), TICK, RIPETIZIONI, RISCALDAMENTO))
+    print("  il criterio (652eeb52): MEDIANA, dispersione %.4f*MAD, soglia %.0f volte;"
+          " INFORMATIVO se soglia < |previsto - previsto di C5|" % (MAD_SCALA, SIGMA))
     print("  Lambda_c: D2.SPAZZATA = %s (valori di C5 sulla taglia %d; sull'altra lo stesso"
           " RAPPORTO)" % (list(D2.SPAZZATA), MB2.NN))
     print("  il passo: l'ordine della tabella, impronta %s; regola_punto_medio = None"
           " (default)" % CM.IMPRONTA)
     print("  il tick acceso: tick.tick_con_cs(st, mot, par, Lambda_c, ());  spento: tick.tick")
+    print("  il caso che DEVE fallire (il conto di C5): per `cs` mezzo tick SPENTO per giro;"
+          " per `Omega` i giri dell'ULTIMA applicazione per tick")
     percorso = sorted(CPF.chiusura_import(CPF.RADICI_TICK))
     print("  i file del percorso del tick, sha1 dei BYTE:")
     for rel in percorso:
@@ -420,37 +495,43 @@ def main(argv):
         print("     %-36s %s" % (rel, hashlib.sha1(d).hexdigest()[:8]))
     sys.stdout.flush()
     print("-" * 100)
-    g, s = collaudo_del_criterio()
-    print("### IL CRITERIO SU DUE CASI NOTI (P1-sexies): giusto torna %s   sbagliato torna %s"
-          "   %s" % (g, s, "PASSA" if g and not s else "### FALLISCE"))
-    if not (g and not s):
+    ok, g1, g2, g3 = collaudo_del_criterio()
+    print("### IL CRITERIO SU TRE CASI NOTI (P1-sexies)")
+    for che, g in (("giusto (deve tornare)", g1), ("sbagliato (NON deve tornare)", g2),
+                   ("soglia larga (deve essere NON INFORMATIVO)", g3)):
+        print("     %-44s r=%.3f soglia=%.4f distanza=%.4f  %s"
+              % (che, g["r"], g["soglia"], g["distanza"], _etichetta(g)))
+    print("     %s" % ("PASSA" if ok else "### FALLISCE"))
+    if not ok:
         print("### ⛔ IL CRITERIO E' ROTTO: niente misura.")
         return 1
     print("-" * 100)
-    esito = {"inerte": True, "spento_zero": True, "torna": True, "c5_fallisce": True,
-             "righe": 0}
+    esito = {"inerte": True, "spento_zero": True, "righe": 0, "verdetti": []}
     for taglia in taglie:
         print()
         print("### TAGLIA %d" % taglia)
         # ---------------------------------------------------------- il braccio spento
         sp = lancia(taglia, irapporti[0], "spento", "strumentato")
         sn = lancia(taglia, irapporti[0], "spento", "nudo")
-        Ls = leggi(sp)
+        Ls = leggi(sp, None)
+        t_sp = mediana_e_s(Ls["T"] / TICK)
         inerte = sp["firme"] == sn["firme"] and len(sp["firme"]) == 1
         zero = (len(Ls["giri_cs"]) == 0 and float(np.max(Ls["om_iter"])) == 0.0
                 and float(np.max(Ls["pm"])) == 0.0)
         esito["inerte"] &= inerte
         esito["spento_zero"] &= zero
-        print("  `cs` SPENTO (riferimento): T tick %.3f ms   chiamate cs %d   applica %d"
-              " (tutte con giri 0: %s, il loro tempo %.4f ms = %.2f%%)   punto medio %d"
-              % (_ms(np.mean(Ls["T"])), len(Ls["giri_cs"]), Ls["n_om"],
-                 all(gg == 0 for gg in Ls["giri_om"]), _ms(np.mean(Ls["om_tutte"])),
-                 100 * np.mean(Ls["om_tutte"]) / np.mean(Ls["T"]), Ls["n_pm"]))
+        print("  `cs` SPENTO (riferimento): T tick %.3f ms (mediana; %.4f ms per tick)"
+              "   chiamate cs %d   applica %d (tutte con giri 0: %s, il loro tempo %.4f ms"
+              " = %.2f%%)   punto medio %d"
+              % (_ms(np.median(Ls["T"])), _ms(t_sp[0]), len(Ls["giri_cs"]), Ls["n_om"],
+                 all(gg == 0 for gg in Ls["giri_om"]), _ms(np.median(Ls["om_tutte"])),
+                 100 * np.median(Ls["om_tutte"]) / np.median(Ls["T"]), Ls["n_pm"]))
         print("     quota dei tre nelle chiamate che ITERANO: %s   involucro inerte: %s"
               % ("0 esatto -- PASSA" if zero else "### NON ZERO -- FALLISCE",
                  "PASSA" if inerte else "### FALLISCE (%s / %s)" % (sp["firme"],
                                                                     sn["firme"])))
-        print("  %-8s %-6s %-9s %-15s %-17s %-17s %-11s %s"
+        print("  ### le quote sono MEDIANE delle ripetizioni")
+        print("  %-8s %-7s %-9s %-15s %-10s %-17s %-12s %s"
               % ("Lc", "Lc/Lm", "T tick", "cs: giri m/max", "cs: quota", "Omega: giri m/max",
                  "Omega: quota", "dentro cs / fuori"))
         sys.stdout.flush()
@@ -459,68 +540,81 @@ def main(argv):
             b = lancia(taglia, ir, "acceso", "strumentato")
             bn = lancia(taglia, ir, "acceso", "nudo")
             if "non_converge" in b or "non_converge" in bn:
-                print("  %-8.2f ### NON CONVERGE: %s"
-                      % (b["lambda_c"], (b.get("non_converge") or bn["non_converge"])[:90]))
+                print("  %-8.2f %-7.3f ### NON CONVERGE: %s"
+                      % (b["lambda_c"], b["rapporto"],
+                         (b.get("non_converge") or bn["non_converge"])[:90]))
                 sys.stdout.flush()
                 continue
             inerte = b["firme"] == bn["firme"] and len(b["firme"]) == 1
             esito["inerte"] &= inerte
-            L = leggi(b)
-            Tm = np.mean(L["T"])
+            L = leggi(b, t_sp)
+            Tm = float(np.median(L["T"]))
             gom = [x for x in L["giri_om"] if x > 0]
-            print("  %-8.2f %-6.3f %-9.3f %-15s %-17s %-17s %-11s %s%s"
+            print("  %-8.2f %-7.3f %-9.3f %-15s %-10s %-17s %-12s %s%s"
                   % (b["lambda_c"], b["rapporto"], _ms(Tm),
                      "%.2f/%d" % (np.mean(L["giri_cs"]), max(L["giri_cs"])),
-                     "%.1f%%" % (100 * np.mean(L["cs"]) / Tm),
+                     "%.1f%%" % (100 * np.median(L["cs"]) / Tm),
                      "%.2f/%d" % (np.mean(gom), max(gom)),
-                     "%.1f%%" % (100 * np.mean(L["om_iter"]) / Tm),
-                     "%.1f%% / %.1f%%" % (100 * np.mean(L["om_in"]) / Tm,
-                                          100 * np.mean(L["om_fu"]) / Tm),
+                     "%.1f%%" % (100 * np.median(L["om_iter"]) / Tm),
+                     "%.1f%% / %.1f%%" % (100 * np.median(L["om_in"]) / Tm,
+                                          100 * np.median(L["om_fu"]) / Tm),
                      "" if inerte else "   ### INVOLUCRO NON INERTE"))
             sys.stdout.flush()
             controlli.append((b, L))
             esito["righe"] += 1
         print("  ### il punto medio per pezzo: chiamate %s -> SPENTO in questa configurazione"
               % sorted(set(len(L["giri_pm"]) for _b, L in controlli)))
-        print("  ### IL CONTROLLO: il tempo misurato contro giri * c(giro)  [ms, 3 sigma]")
-        print("  ### r = misura/previsto: la soglia dice se TORNA, r dice DI QUANTO")
-        print("  %-8s %-34s %-34s %s" % ("Lc", "cs_al_centro  misura/previsto/soglia",
-                                         "Omega  misura/previsto/soglia",
-                                         "C5 (DEVE fallire)"))
-        for b, L in controlli:
-            ok_cs, d_cs, s_cs = torna(L["cs"], L["prev_cs"])
-            ok_om, d_om, s_om = torna(L["om_iter"], L["prev_om"])
-            ok_c5, d_c5, s_c5 = torna(L["om_iter"], L["prev_c5"])
-            esito["torna"] &= ok_cs and ok_om
-            esito["c5_fallisce"] &= not ok_c5
-            print("  %-8.2f %-34s %-34s %s"
-                  % (b["lambda_c"],
-                     "%.1f/%.1f/%.1f r=%.3f %s"
-                     % (_ms(np.mean(L["cs"])), _ms(L["prev_cs"][0]), _ms(s_cs),
-                        np.mean(L["cs"]) / L["prev_cs"][0],
-                        "torna" if ok_cs else "### NO"),
-                     "%.1f/%.1f/%.1f r=%.3f %s"
-                     % (_ms(np.mean(L["om_iter"])), _ms(L["prev_om"][0]), _ms(s_om),
-                        np.mean(L["om_iter"]) / L["prev_om"][0],
-                        "torna" if ok_om else "### NO"),
-                     "%.3f previsto: %s" % (_ms(L["prev_c5"][0]),
-                                            "fallisce" if not ok_c5 else
-                                            "### TORNA")))
+        print("  ### IL CONTROLLO (criterio di 652eeb52): misura contro giri * c(giro)  [ms]")
+        print("  ### r = misura/previsto; soglia = 3*1.4826*MAD combinata; distanza ="
+              " |previsto - previsto di C5|")
+        print("  %-8s %-6s %-48s %s" % ("Lc", "", "r / soglia / distanza  etichetta",
+                                       "il conto di C5 (DEVE fallire)"))
+        for chi, k_mis, k_prev, k_c5 in (("cs", "cs", "prev_cs", "prev_c5_cs"),
+                                         ("Omega", "om_iter", "prev_om", "prev_c5_om")):
+            informativi, tornano, c5_ok = 0, 0, 0
+            for b, L in controlli:
+                g = giudica(L[k_mis], L[k_prev], L[k_c5])
+                if g["informativo"]:
+                    informativi += 1
+                    tornano += 1 if g["torna"] else 0
+                    c5_ok += 1 if g["c5_fallisce"] else 0
+                print("  %-8.2f %-6s %-48s %s"
+                      % (b["lambda_c"], chi,
+                         "r=%.3f  %.1f / %.1f  %s" % (g["r"], _ms(g["soglia"]),
+                                                     _ms(g["distanza"]), _etichetta(g)),
+                         "previsto %.1f ms: %s" % (_ms(g["previsto_c5"]),
+                                                   "fallisce" if g["c5_fallisce"]
+                                                   else "### TORNA")))
+            if informativi == 0:
+                v = "NON DECIDIBILE"
+            elif tornano == informativi and c5_ok == informativi:
+                v = "TORNA"
+            else:
+                v = "### NON TORNA"
+            esito["verdetti"].append((taglia, chi, v, informativi, len(controlli),
+                                      tornano, c5_ok))
+            print("  ### taglia %d, %s: %d bracci informativi su %d, di cui %d tornano e in %d"
+                  " il conto di C5 fallisce -> %s"
+                  % (taglia, chi, informativi, len(controlli), tornano, c5_ok, v))
             sys.stdout.flush()
     print()
     print("=" * 100)
     print("### I VERDETTI")
     for k, che in (("inerte", "l'involucro e' inerte (sha1 dello stato finale, ogni braccio)"),
-                   ("spento_zero", "cs SPENTO: quota 0 esatto per i tre (chiamate che iterano)"),
-                   ("c5_fallisce", "il caso che DEVE fallire (il conto di C5) fallisce"),
-                   ("torna", "il tempo misurato torna con giri * c(giro), cs e Omega")):
+                   ("spento_zero", "cs SPENTO: quota 0 esatto per i tre (chiamate che iterano)")):
         print("  %-66s %s" % (che, "PASSA" if esito[k] else "### FALLISCE"))
+    for taglia, chi, v, inf, tot, tor, c5 in esito["verdetti"]:
+        print("  %-66s %s" % ("il controllo, taglia %d, %s (%d informativi su %d)"
+                              % (taglia, chi, inf, tot), v))
     print("  righe misurate: %d" % esito["righe"])
-    if not esito["torna"]:
+    tutti = [v for (_t, _c, v, _i, _n, _r, _5) in esito["verdetti"]]
+    if any(v.startswith("###") for v in tutti):
         print("### ⛔ C'E' UN COSTO NON CAPITO: il par.2 del task history dice di FERMARSI.")
+    if any(v == "NON DECIDIBILE" for v in tutti):
+        print("### ⚠ C'E' UN VERDETTO NON DECIDIBILE: non vale come PASSA.")
     print("=" * 100)
-    return 0 if all(esito[k] for k in ("inerte", "spento_zero", "c5_fallisce", "torna")) \
-        else 1
+    ok = (esito["inerte"] and esito["spento_zero"] and all(v == "TORNA" for v in tutti))
+    return 0 if ok else 1
 
 
 if __name__ == "__main__":
