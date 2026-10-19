@@ -1,0 +1,34 @@
+[TIMBRO] _ciclo_cs.py  sha1-BYTE d89f81f5  committato e pulito
+====================================================================================================
+IL PUNTO FISSO DI `cs` A RAPPORTO 0.01: IL CICLO, RIPRODOTTO -- un'OSSERVAZIONE
+====================================================================================================
+  la scena e lo stato di `C5` (csv/_costo_punti_fissi.scena), `cs` acceso, tick.tick_con_cs, ramo del punto medio SPENTO (default)
+  la tolleranza di cs_al_centro: EPS_CS = 1.776e-15 (relativa al max di cs); GIRI_MAX = 120
+----------------------------------------------------------------------------------------------------
+### TAGLIA 32   Lambda_c = 0.0800   Lambda_medio = 8.0000   rapporto = 0.0100   -> NON CONVERGE
+     il punto fisso ALZA al tick 7 (contato da 1), dopo 120 giri: il punto fisso di `cs` NON CONVERGE in 120 giri (ultimo scarto 6.206e-02): il mandato dice di RELAZI
+     all'ultimo giro: max|x_n - x_{n-1}| = 6.206e-02   max|x_n - x_{n-2}| = 0.000e+00
+     ### un periodo 2 ha il primo GRANDE e il secondo PICCOLO
+     max|x_n - x_{n-2}| lungo gli ultimi giri (dal piu' vecchio):
+        0.0e+00  0.0e+00  0.0e+00  0.0e+00  0.0e+00  0.0e+00  0.0e+00  0.0e+00  0.0e+00  0.0e+00
+     i nodi che oscillano (|x_n - x_{n-1}| > tolleranza): 10
+        nodo   Lambda       cs pari      cs dispari   |differenza|
+        10     0.03399      0.606343     0.544278     6.206e-02
+        9      9.30173      0.990903     0.990936     3.227e-05
+        11     1.33028      0.972411     0.972381     3.066e-05
+        8      0.26135      0.911754     0.911753     1.004e-06
+        12     17.67068     0.994225     0.994224     1.670e-07
+        7      4.22124      0.978514     0.978514     4.406e-08
+        6      2.35521      0.981038     0.981038     9.069e-11
+        13     20.47504     0.996710     0.996710     8.416e-12
+        14     2.64405      0.949664     0.949664     1.976e-12
+        5      10.94550     0.992437     0.992437     4.521e-13
+     il PEGGIORE e' il nodo 10: Lambda = 0.0340, SOTTO Lambda_c = 0.0800
+     Lambda minimo della rete in quel tick: 0.0340 (nodo 10)
+----------------------------------------------------------------------------------------------------
+### TAGLIA 16   Lambda_c = 0.0800   Lambda_medio = 8.0000   rapporto = 0.0100   -> CONVERGE
+     tutti gli 8 tick convergono
+====================================================================================================
+### IL CONFRONTO: 32 non converge e 16 converge allo stesso rapporto -> SI'
+### ⛔ OSSERVAZIONE: nessuna cura, nessuna scelta. La decisione e' di Luca.
+====================================================================================================

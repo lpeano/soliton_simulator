@@ -19406,3 +19406,11 @@ Il messaggio di `56dd95b7` dice *«`doc/RIPRESA_2026-10-15.md`: la sezione 49»*
 ### `(ii)` **il costo di un giro misurato SOLO sullo stato iniziale**: un giro di `cs` contiene il punto fisso di `Omega`, i cui giri ### **cambiano col tick**, quindi `c(giro di cs)` ### **non e' una costante** della corsa.
 ### ⛔ **Non aggiungo un termine al modello dopo aver visto i numeri** *(sarebbe adattare il modello ai dati che giudica)*. ### **Il modo onesto di decidere fra `(i)` e `(ii)`** e' misurare **a parte**, prima: ### **il tempo di una chiamata con `0` giri utili** *(il costo fisso)* e ### **`c(giro)` sugli stati di ogni tick** invece che su quello iniziale -- ### **e la scelta di farlo e' di Luca.**
 ### ✅ **E i due fuori riga** *(`0.5` e `0.66` a `32`/`2.4`)* ### **vanno guardati prima di qualunque modello**: un `c(giro)` ### **due volte piu' caro** del tempo reale e' piu' probabilmente ### **un campione disturbato** nella misura a parte che un costo fisico -- ma ### **non l'ho verificato.**
+
+
+### ⛔ **IL CICLO DI PERIODO `2` DEL PUNTO FISSO DI `cs`, RIPRODOTTO COI MIEI NUMERI** *(un'osservazione, nessuna cura)*
+
+`doc/referti_l2/ciclo_cs.txt`, dal blob ### **`d89f81f5`** *(`csv/_ciclo_cs.py` di `5c24c5ef`, «committato e pulito»)*. Gli iterati non sono una copia del ciclo: ### **sono le uscite di `FP.cs`**, che `cs_al_centro` chiama una volta per giro.
+### ✅ **Taglia `32`, rapporto `0.01`: NON CONVERGE al tick `7` (contato da `1`)**, con ### **`|x_n - x_{n-1}| = 6.206e-02` e `|x_n - x_{n-2}| = 0` esatto**; il peggiore e' il **nodo `10`, `Lambda = 0.0340` sotto `Lambda_c = 0.08`**. ### **Taglia `16`, stesso rapporto: CONVERGE in tutti gli `8` tick.**
+### ⚠ **LE DIFFERENZE COL GUARDIANO, spiegate:** il tick *(`7` da `1` contro `6` da `0`: probabilmente lo stesso)*; ### **`|x_n - x_{n-2}|`** *(`0` esatto io, `7.9e-12` lui: non verificato da che cosa dipenda -- il giro in cui si misura o la piattaforma)*; ### **i nodi che oscillano** *(`10` sopra la tolleranza del punto fisso, `1.8e-15`; `4` sopra `1e-6`: il suo `4` corrisponde alla soglia piu' larga)*.
+### 📌 **Registrata in coda e nella mappa (sez.`26`) come OSSERVAZIONE**, con la lettura del guardiano scritta come tale: ### **non e' dimostrato che il punto fisso non esista.** ### **La decisione e' di Luca.**

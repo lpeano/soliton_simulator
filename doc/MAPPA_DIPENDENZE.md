@@ -1057,3 +1057,14 @@ Luca.**
 ### ⛔ **E LA DECISIONE E' UNA SOLA, E DI LUCA:** ### **<<lo stato contiene il
 passato: SI' o NO>>.** ### **Vale per il modello INTERO**, non per un pezzo -- e
 ### **si decide dopo l'esito di `C1`**, che adesso c'e'.
+
+### ⛔ **OSSERVAZIONE DEL `2026-10-19`, SENZA CURE E SENZA SCELTE: IL PUNTO FISSO DI `cs` NON CONVERGE A TAGLIA `32` E `Lambda_c/Lambda_medio = 0.01`, COL SCHEMA DI DEFAULT** *(ramo del punto medio SPENTO)*
+
+**Trovata** dal passo `B` *(`ec0d5f7f`)*, **riprodotta dal guardiano**, e **riprodotta da me** con `csv/_ciclo_cs.py` *(referto `doc/referti_l2/ciclo_cs.txt`, blob `d89f81f5`)*, sulla scena e lo stato di `C5`, `Lambda_c = 0.08`:
+- il punto fisso alza al **tick `7` contato da `1`** *(il `6` del guardiano, contato da `0`)*, dopo `120` giri;
+- all'ultimo giro **`max|x_n - x_{n-1}| = 6.206e-02`** e **`max|x_n - x_{n-2}| = 0`** esatto *(il guardiano: `7.9e-12`)*: ### **un CICLO DI PERIODO `2`**, esatto al bit nella mia corsa;
+- **oscillano `10` nodi** sopra la tolleranza di `cs_al_centro` *(`1.8e-15` relativa)*, e **`4` sopra `1e-6`** *(nodi `10`, `9`, `11`, `8`: i `4` del guardiano)*; ### **il peggiore e' il nodo `10`, con `Lambda = 0.0340`, SOTTO `Lambda_c = 0.08`**, ed e' **il `Lambda` minimo della rete** in quel tick; i due valori fra cui oscilla `cs` sono `0.606` e `0.544`;
+- ### **a taglia `16`, allo stesso rapporto, tutti gli `8` tick CONVERGONO.**
+
+### 📌 **LA LETTURA DEL GUARDIANO, scritta come tale:** *e' l'ITERAZIONE SEMPLICE a non convergere dove `Lambda` scende sotto `Lambda_c` (`cs` ripido); NON e' dimostrato che il punto fisso non esista.*
+### ⚠ **Riguarda `D4` e la domanda sulla memoria** *(«lo stato contiene il passato?»)*: ### **la decisione e' di Luca, e qui non si cura niente.**
