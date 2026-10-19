@@ -77,6 +77,13 @@ solo pezzo**. Se e' vero, la sua quota dovrebbe stare **sopra il `90%`**.
 
 **ANNOTAZIONE DEL 2026-10-18 SERA, PRIMA DEI NUMERI (precisazione del guardiano):** la definizione di 'incrociate' del punto 3 si estende all'AUTO-DIPENDENZA. Un solo pezzo che scrive Lambda e legge cs (come CAMM-SPOSTAMENTO-VUOTO) basta a rendere le dipendenze incrociate: anche la variante sfalsata alla leapfrog diventerebbe implicita. La matrice riporta quindi, per ogni pezzo, anche le coppie (scrive X, legge una funzione di X) dentro lo stesso pezzo.
 
+**ANNOTAZIONE DEL 2026-10-19, PRIMA DEI NUMERI NUOVI (decisione di Luca delle 11:14, strada (a), con la precisazione del guardiano): IL CRITERIO NUOVO DEL CONTROLLO DEL PASSO `B`.** Il controllo di `ec0d5f7f` e' caduto in due versi (un braccio che non torna, e il caso che deve fallire che torna con una soglia di `327` ms); il criterio si cambia **qui, prima della corsa nuova**, e **non** guardando i numeri di quella.
+- **La statistica e' ROBUSTA.** Per ogni braccio: **`6` ripetizioni**, di cui **la prima di riscaldamento, SCARTATA**; sulle `5` restanti la **MEDIANA**, e la dispersione e' la **MAD scalata**, `1.4826 * MAD`. La soglia e' **`3` volte quella dispersione**, combinata fra misura e previsto come prima: `3 sqrt(s_misura^2 + s_previsto^2)`.
+- **UN BRACCIO E' INFORMATIVO solo se la soglia e' MINORE della distanza** fra il previsto giusto (`giri * c(giro)`) e il previsto del caso che deve fallire (il conto di `C5`). Altrimenti e' **NON INFORMATIVO**: **si conta a parte e non vale MAI come «torna».**
+- **IL VERDETTO:** «torna» se **tutti i bracci informativi tornano** e **i casi che devono fallire falliscono**. Se per un punto fisso, in una taglia, **nessun braccio e' informativo**, il verdetto e' **NON DECIDIBILE**, non PASSA.
+- **IL REFERTO** stampa per ogni braccio `r = misura/previsto`, la soglia, e l'etichetta **informativo / non informativo**.
+- **IL COLLAUDO DEL CRITERIO** resta sui due casi noti (uno che torna, uno che non torna), e se ne aggiunge un **terzo: un caso NON INFORMATIVO** (soglia larga apposta), che deve uscire **etichettato come tale, e non come «torna».**
+
 ## 3. TODO DEL NEXT STEP — *operativo*
 
 1. `csv/_censimento_punti_fissi.py`, con il caso che deve riuscire (`>= 3`).
