@@ -1,0 +1,25 @@
+[TIMBRO] _jeans_del_modello.py  sha1-BYTE 1064feff  committato e pulito
+====================================================================================================
+IL TEST DI JEANS DEL MODELLO, CON MATERIA UNIFORME DINAMICA -- una misura
+====================================================================================================
+  la scena di D4: lati (31, 31), VUOTO 1.0; il passo: impronta 2e7f795d2a52fbe7; rapporto 1; congela = no
+  la materia: lo spinore allineato su ogni estremita', ampiezza sqrt(x); la perturbazione su psi e phi, seme 20261019
+  la banda di M1/M2: 256 ulp ogni 64 tick
+  i bracci si salvano mentre corrono in doc\referti_l2\jeans_del_modello.jsonl
+----------------------------------------------------------------------------------------------------
+### SAPER CREARE LA MATERIA: M1-M4 (se una cade, STOP)
+  M1 x 0.01      [866 s]
+  M1 x 0.1       [1236 s]   ### NON CONVERGE al tick 1685: il punto fisso di `cs` NON CONVERGE in 120 giri (ultimo scarto 2.193e-
+  M1 x 1         [142 s]   ### NON CONVERGE al tick 270: il punto fisso di `cs` NON CONVERGE in 120 giri (ultimo scarto 1.065e-
+  M1 x 0.01    M1 rho 26306186765181.246 lam 13598541475717.633 (di banda) ### FALLISCE | M2 M 0.296 V 0.095 PASSA, G 9.616e-01 | M3 fuori/zero 0.00e+00 PASSA
+  M1 x 0.1     M1 rho 16411166022344.754 lam 28699948324270.863 (di banda) ### FALLISCE | M2 M 0.024 V 0.046 PASSA, G 2.347e+00 | M3 fuori/zero 0.00e+00 PASSA
+  M1 x 1       M1 rho 23875545646883.766 lam 48122466467132.828 (di banda) ### FALLISCE | M2 M 0.035 V 0.037 PASSA, G 2.644e-01 | M3 fuori/zero 0.00e+00 PASSA
+  M4 gamma noto 1e-03: il fit da' 1.0035e-03 +- 1.6e-06 (tratto 20-2001)   PASSA
+  M4 gamma noto 1e-02: il fit da' 9.9827e-03 +- 5.1e-06 (tratto 20-922)   ### FALLISCE
+  ### (nel test di ieri sera M4 NON c'era: lo strumento e' lo stesso, e vale anche per lui)
+  ### INFORMAZIONE, non criterio: lo stesso fit su 200 semi (0..199)
+     gamma 1e-03: media di z +0.03 (bias)   dispersione di z 1.47 (1 se le barre sono giuste)   fuori da 3 barre 5.5%
+     gamma 1e-02: media di z -0.13 (bias)   dispersione di z 1.32 (1 se le barre sono giuste)   fuori da 3 barre 4.0%
+====================================================================================================
+### ⛔ STOP: una prova di M1-M4 e' caduta -- i bracci J NON si lanciano.
+====================================================================================================

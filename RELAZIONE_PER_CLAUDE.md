@@ -19671,3 +19671,23 @@ La domanda di Luca *(«l'instabilita', se c'e', dipende dal fatto che lo spazio 
 ### 📌 **IL TEST DI JEANS DEL MODELLO: IL TASK HISTORY, PRIMA DEL CODICE** *(decisione di Luca delle `20:33`)*
 
 ### **La materia uniforme, dichiarata:** uno stesso spinore su tutte le estremita' ### **NON e' stazionario** *(la moneta ruota diverso ogni tipo d'estremita')*; il modo `k = 0` e' ### **lo stato invariante per traslazione** *(lo spinore allineato col suo `n` su ogni estremita', ampiezza `sqrt(x)`)* -- il grumo di `D4` steso sul toro. ### **Stazionario per le densita' per simmetria, non autostato di `psi`**, e lo dico. ### **Prima le prove `M1`-`M4`** *(equilibrio, conservazione, spettro, il controllo positivo del fit -- che nel test di ieri sera non c'era)*, ### **poi i bracci `J1`-`J4`**, con `J4` che rifa il braccio di `D4` a materia dinamica.
+
+
+### ⛔⛔ **IL TEST DI JEANS: LE PROVE DELLA MATERIA CADONO -- E `M1` CADE PERCHE' LA MATERIA UNIFORME CRESCE DAL RUMORE D'ARROTONDAMENTO. STOP**
+
+`doc/referti_l2/jeans_del_modello.txt` e `.jsonl`, dal blob ### **`1064feff`** *(`csv/_jeans_del_modello.py` di `d85360ab`, «committato e pulito»)*. ### **Uscita `1`: STOP prima dei bracci `J`**, come il task history prevede.
+
+| la prova | il risultato |
+|---|---|
+| `M3` lo spettro | ### **PASSA**: potenza fuori da `k = 0` esattamente `0` ai tre `x` -- ### **la materia si COSTRUISCE come dichiarato** |
+| `M2` `M` e `V` | ### **PASSA** *(`0.02`-`0.30` della banda)* -- ### **la materia NON e' congelata, e si conserva** |
+| `M2` `G` | ### **deriva di `26`-`235%`** *(riportata, non criterio)* |
+| `M1` l'equilibrio | ### ⛔⛔ **CADE di `~10^13` bande** ai tre `x`: `rho_k` e `Lambda_k` si scostano dall'uniforme ### **di quantita' di ordine `1`** |
+| `M4` il fit | `1e-3` PASSA; ### **`1e-2` CADE** *(`3.4` barre, come la prova a vuoto: `d85360ab`)* |
+| il punto fisso di `cs` | ### **NON converge** a `x = 0.1` *(tick `1685`)* e `x = 1` *(tick `270`)*, ### **dopo** che lo stato e' diventato disomogeneo |
+
+### ⭐⭐ **PERCHE' `M1` CADE, LETTO DALLE SERIE NEL `jsonl`:** lo scostamento `max_k|rho_k - rho_m|` ### **parte dal rumore d'arrotondamento e cresce ESPONENZIALMENTE**: a `x = 0.01` e' `2e-17` al tick `1`, `1e-15` al `50`, `4e-9` al `200`, ### **`0.37` al `400`**; a `x = 0.1` raggiunge `1e-6 rho_m` al tick `191`; a `x = 1` ### **gia' `2.9e-4` al tick `100` e `16` al `200`**. ### **Piu' materia, crescita piu' rapida.**
+### ⛔ **Cioe' `M1` non cade perche' la materia sia costruita male** *(`M3` passa, e al tick `0` lo stato e' uniforme a qualche ulp)*: ### **cade perche' la materia uniforme, col passo di oggi e `cs` acceso, NON resta uniforme** -- ### **un seme d'arrotondamento basta.** ### **E' la domanda del test, comparsa nella prova che doveva esserne la premessa.**
+### ⚠ **UN ERRORE MIO nel task history:** avevo scritto che l'uniformita' era esatta «per simmetria». ### **Al bit NON lo e':** a `x = 0.1` e `x = 1` i nodi differiscono gia' al tick `0` di `1e-16` *(`rho_m = 0.4000000000000001`)* -- ### **l'ordine delle somme d'estremita' non e' lo stesso in ogni nodo.** ### **Il seme del rumore c'e' dal primo istante.**
+### 📌 **CHE COSA NON SO, perche' lo STOP l'ha impedito:** ### **se la crescita sia FISICA o NUMERICA** -- e' cio' che `J2` *(`cs` spento)* e `J3` *(`dtau` dimezzato)* avrebbero detto. ### **`M4` cade per la statistica del fit** *(`5` blocchi: barre strette di circa il `40%`, nessun bias; vedi la diagnosi nel referto)*, e ### **vale anche per lo strumento del test di ieri sera.**
+### ⛔ **LE STRADE PER LUCA:** ### **(a)** lanciare comunque `J1`-`J4` sapendo che `M1` e' caduto per l'instabilita' stessa *(le prove della materia dicono «si costruisce, si conserva, ma non resta ferma»)*; ### **(b)** rifare `M1` come la versione «a cs spento» prima di tutto *(se la materia uniforme e' stabile senza `cs`, il seme e' la dinamica con `cs`)*; ### **(c)** decidere su `M4` *(barre con la `t` di Student, o piu' blocchi)* prima di qualunque `gamma`. ### **Raccomando `(b)` subito, poi `(a)`**, e `(c)` insieme. ### **`LINEARE` e `Lambda_c` restano FERMI.**
