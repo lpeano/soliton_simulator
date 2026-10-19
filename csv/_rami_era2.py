@@ -117,38 +117,6 @@ RAMI = {
         "lettura, e se lo lasciasse dentro ### IL PASSO DOPO GIREREBBE CON UN "
         "ALTRO PESO -- in silenzio. ### Un-osservabile che cambia la dinamica non "
         "e- un-osservabile"),
-    # ### ⛔⛔ **I RAMI DEL PUNTO MEDIO PER PEZZO** *(`2026-10-18`, la decisione di
-    # ### Luca delle `12:07`)*: ### **nessuno dei tre scegle un valore** -- due dicono
-    # ### ### **quale SCHEMA gira**, e uno ### **quale REGOLA del punto medio.**
-    ("primo_ordine/motore.py", "_spostamento_scalare"): (
-        2, "smistamento",
-        "### DUE RAMI, e sono LO SMISTAMENTO SULLO SCHEMA. ### (1) senza la forma "
-        "`cs` (oppure senza `lambda_c`), oppure col peso BLOCCATO (`regola_punto_medio "
-        "is None`), si fa IL PASSO DI PRIMA: il peso non dipende dallo stato, "
-        "quindi non c-e- niente da risolvere -- ed e- cio- che tiene il braccio 0 "
-        "AL BIT. ### (2) altrimenti il peso si valuta AL PROPRIO PUNTO MEDIO. "
-        "### E il ramo del peso BLOCCATO NON e- una via d-uscita: e- IL CASO CHE "
-        "DEVE FALLIRE di `C1`, e serve a far vedere che il punto medio cambia "
-        "qualcosa"),
-    ("primo_ordine/flussi_parziali.py", "hop_phi_punto_medio"): (
-        2, "iterazione",
-        "### DUE RAMI, e sono IL PUNTO FISSO. ### (1) la REGOLA: `ii` prende la "
-        "media dei due `Lambda` (quella dichiarata nel task history), `i` prende "
-        "`Lambda` del `phi` MEDIO e si misura come INFORMAZIONE -- e un `assert` "
-        "rifiuta tutto il resto, perche- un valore di comodo renderebbe "
-        "illeggibile quale delle due ha prodotto un numero. ### (2) la "
-        "CONVERGENZA: si ferma quando due giri coincidono AGLI ULP, e oltre il "
-        "tetto ALZA invece di fermarsi a un valore qualunque. ### E il punto "
-        "fisso ACCOPPIA LA RETE INTERA, perche- `Lambda_k` somma i semiarchi di "
-        "piu- archi: i giri misurano quanto e- accoppiata la rete, non la "
-        "difficolta- di un arco"),
-    ("primo_ordine/flussi_parziali.py", "s_arco_da_lambda"): (
-        1, "guardia",
-        "### UN RAMO, e non e- uno smistamento: e- il `finally` che RIMETTE `cs` "
-        "com-era. ### Questa funzione mette `cs` di una `Lambda` DATA nel motore "
-        "per il tempo di una lettura, e se lo lasciasse dentro ### IL PASSO DOPO "
-        "GIREREBBE CON UN ALTRO PESO -- in silenzio. ### Il `finally` e- la "
-        "garanzia che la lettura non ha effetti"),
     # ### ⛔⛔ **I RAMI DELLA LEGGE NUOVA** *(`CAMM-FASE-VUOTO`, `2026-10-18`,
     # ### la strada `(d)`)*: tutti e tre ### **decidono se un pezzo ESISTE o no**, e
     # ### ### **nessuno scegle un valore.**

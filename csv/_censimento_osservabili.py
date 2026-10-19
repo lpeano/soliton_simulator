@@ -43,9 +43,8 @@ ATTRIBUTO = "cs"
 # ### ⛔ **CHI PUO' LEGGERE I PESI DEL PASSO, e il perche' di ciascuno.**
 LEGITTIMI = {
     "primo_ordine/flussi_parziali.py":
-        "E' IL PASSO: `dtau_nodo` legge `mot.cs` perche' il tempo proprio E' quello, e"
-        " `hop_phi_punto_medio` risolve il peso CHE IL PEZZO USERA'. Qui `mot.cs` non e'"
-        " un'osservabile: e' la dinamica",
+        "E' IL PASSO: `dtau_nodo` legge `mot.cs` perche' il tempo proprio E' quello."
+        " Qui `mot.cs` non e' un'osservabile: e' la dinamica",
     "primo_ordine/motore.py":
         "E' IL REGISTRO DEL PASSO: `self.cs` nasce qui, e i rami che lo guardano decidono"
         " QUALE SCHEMA gira -- non misurano niente",

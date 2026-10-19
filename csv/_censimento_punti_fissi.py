@@ -32,8 +32,9 @@ RICERCA** che esce con `break` su un `not in` *(e' `passo.strati`)*.
 
 ## ⛔ E IL CASO CHE DEVE RIUSCIRE SUL NUCLEO
 
-### **`>= 3`, e i tre previsti per nome.** ### **Se ne trova meno, lo strumento e' cieco
-su uno che SO che c'e'** -- ed ESCE con errore invece di stampare un numero bello.
+### **dal `2026-10-19`: `2` nel percorso del tick e `3` nel nucleo, e i previsti per
+nome.** ### **Se ne trova meno, lo strumento e' cieco su uno che SO che c'e'; se ne trova
+di piu', c'e' un punto fisso che non conosco** -- ed ESCE con errore invece di stampare un numero bello.
 
 Gira con:  python csv/_censimento_punti_fissi.py
 """
@@ -47,12 +48,18 @@ if _QUI not in sys.path:
     sys.path.insert(0, _QUI)
 RADICE = os.path.dirname(_QUI)
 
-# ### ⛔ **I TRE PREVISTI dal task history**, PRIMA della misura: `(file, funzione)`.
+# ### ⛔⛔ **LA PREVISIONE, DICHIARATA PRIMA DELLA CORSA** *(`2026-10-19`, annotazione del
+# ### task history `2026-10-19_rimozione_punto_medio.md`)*: col ramo del punto medio per
+# ### pezzo ### **TOLTO dal passo**, nel percorso del tick restano ### **`2`** punti fissi,
+# ### e nel nucleo ### **`3`** *(piu' il punto medio implicito della via di `H`)*.
+# ### ⚠ **La previsione di prima** *(`3` nel tick, col peso al punto medio)* ### **e' quella
+# ### del referto `censimento_punti_fissi.txt` a `95c81e97`, che resta valido al suo
+# ### commit.**
 PREVISTI = (
     ("primo_ordine/tick.py", "cs_al_centro"),
     ("primo_ordine/energia_pesata.py", "applica"),
-    ("primo_ordine/flussi_parziali.py", "hop_phi_punto_medio"),
 )
+PREVISTI_NUCLEO = PREVISTI + (("primo_ordine/passo.py", "mezzo_implicito"),)
 
 _SINTETICO_SI = '''
 def risolvi(x):
@@ -295,16 +302,20 @@ def main(argv):
     print("     ###   un ramo spento e' nel percorso. Acceso o spento: il passo `B`.")
     print("-" * 100)
     chiavi = set((r[0], r[1]) for r in trovati)
-    mancano = [p for p in PREVISTI if p not in chiavi]
-    nuovi = sorted(k for k in chiavi if k not in PREVISTI)
-    print("### IL CASO CHE DEVE RIUSCIRE: >= %d, e i %d previsti per nome"
-          % (len(PREVISTI), len(PREVISTI)))
-    for p in PREVISTI:
+    mancano = [p for p in PREVISTI_NUCLEO if p not in chiavi]
+    nuovi = sorted(k for k in chiavi if k not in PREVISTI_NUCLEO)
+    print("### IL CASO CHE DEVE RIUSCIRE (la previsione del 2026-10-19): %d nel percorso"
+          " del tick, %d nel nucleo, e i previsti per nome"
+          % (len(PREVISTI), len(PREVISTI_NUCLEO)))
+    for p in PREVISTI_NUCLEO:
         print("     %-34s %-22s %s" % (p[0], p[1], "trovato" if p in chiavi
                                          else "### MANCA"))
     print("     e quelli NON previsti: %s" % (", ".join("%s:%s" % k for k in nuovi)
                                               or "nessuno"))
-    ok = len(trovati) >= len(PREVISTI) and not mancano
+    print("     nel percorso del tick: %d (previsti %d)   nel nucleo: %d (previsti %d)"
+          % (nel_tick, len(PREVISTI), len(trovati), len(PREVISTI_NUCLEO)))
+    ok = (not mancano and not nuovi and nel_tick == len(PREVISTI)
+          and len(trovati) == len(PREVISTI_NUCLEO))
     print("     %s" % ("PASSA" if ok else
                        "### FALLISCE: lo strumento e' cieco su uno che so che c'e'"))
     print("-" * 100)

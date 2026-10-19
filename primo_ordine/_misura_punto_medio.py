@@ -134,118 +134,15 @@ def informazione_ordine(idl):
     sys.stdout.flush()
 
 
-# ### ⛔ **LA SOGLIA DI `C1`, dal mandato del `2026-10-18`: `1.9`.** ### **Non e'
-# ### una banda nuova:** e' quella di `M-B2`, che `H_w` importa.
-PENDENZA_MIN = HW.PENDENZA_MIN
-# ### ⛔ **LE QUATTRO `Lambda_c`, DICHIARATE nel task history e non scelte qui:** i
-# ### rapporti ### **`0.1`, `0.3`, `1`, `10`** -- i tre di `D4` piu' il massimo MISURATO
-# ### del punto fisso di `cs`.
-RAPPORTI = (0.1, 0.3, 1.0, 10.0)
-# ### ⛔ **LE DUE TAGLIE**, perche' il punto fisso ### **accoppia la rete intera**:
-# ### se i giri crescessero con la taglia, ### **il costo per tick non sarebbe una
-# ### costante del modello.**
-TAGLIE = (16, 32)
-# ### ⚠ **LA TOLLERANZA DELLA REVERSIBILITA':** `256` ulp sulla scala di `phi`, ed e'
-# ### ### **quella delle norme** *(`_collauda_materia_vuoto`, e `D3` braccio `(4)`)*.
-ULP_REVERSIBILE = 256.0
-
-
-def pendenza_di_g(regola, taglia, rapporto, osservabile):
-    """### `(pendenza, righe, giri_medi, giri_max)` di `G`, ### **nel modo dato.**
-
-    ### ⛔ **`regola` vale `ii`, `i` oppure `None`** *(il peso BLOCCATO: lo schema di
-    prima, cioe' ### **il caso che DEVE fallire**)*, e ### **non ha un valore di comodo.**
-    """
-    import energia_pesata as EP
-    righe, giri = [], []
-    for k in KAPPA:
-        dtau = 1.0 / (2 ** k)
-        quanti = int(round(MB2.TEMPO / dtau))
-        inc, mot, st, par = DV.scena(taglia, MB2.SEME, dtau, norma=MB2.NORMA,
-                                     vuoto_modulo=MB2.VUOTO_MODULO, su2=MB2.SU2)
-        if taglia == MB2.NN:
-            st["psi_h"][...], st["phi_h"][...] = HW.stato_non_uniforme()
-        else:
-            # ### ⚠ **PER L'ALTRA TAGLIA la pre-corsa di `H_w` non vale** *(ha la
-            # ### forma della sua rete)*: si fa ### **la stessa cosa**, cioe'
-            # ### ### **lo stesso tempo fisico a `dtau` della pre-corsa**, su questa rete.
-            _i2, m2, s2, p2 = DV.scena(taglia, MB2.SEME, HW.DTAU_PRE, norma=MB2.NORMA,
-                                       vuoto_modulo=MB2.VUOTO_MODULO, su2=MB2.SU2)
-            for _t in range(int(round(MB2.TEMPO / HW.DTAU_PRE))):
-                TK.percorri_tick(s2, m2, p2, ("CAMM-FASE-VUOTO",), None,
-                                 len(CM.ORDINE))
-            st["psi_h"][...], st["phi_h"][...] = s2["psi_h"], s2["phi_h"]
-        lc = rapporto * float(np.mean(mot.densita_vuoto(st)))
-        mot.regola_punto_medio = regola
-        FP.accendi_cs(mot, lc, st)
-        # ### ⛔⛔ **QUALE OSSERVABILE, E NON HA UN VALORE DI
-        # ### COMODO** *(errore `n.12`, `2026-10-18`)*: ### **`stato`** legge `G` coi pesi
-        # ### ### **dello stato di adesso** *(quella GIUSTA con `cs` dinamico)*, e
-        # ### ### **`passo`** coi pesi di `mot.cs` -- che dopo un tick sono
-        # ### ### **quelli del CENTRO**, e servono ### **al caso che DEVE fallire.**
-        fun = EP.g_dello_stato if osservabile == "stato" else EP.g_pesata
-        g0 = fun(mot, st, par)
-        peggio = 0.0
-        for _t in range(quanti):
-            TK.tick_con_cs(st, mot, par, lc, ())
-            giri.append(mot.giri_peso)
-            d = abs(fun(mot, st, par) - g0)
-            if d > peggio:
-                peggio = d
-        righe.append((dtau, quanti, peggio))
-    primo, ultimo = righe[0][2], righe[-1][2]
-    dim = len(KAPPA) - 1
-    p = float(np.log2(primo / ultimo) / dim) if ultimo > 0 else float("nan")
-    gm = float(np.mean(giri)) if giri else float("nan")
-    gx = max(giri) if giri else 0
-    return p, righe, gm, gx
-
-
-def stampa(righe):
-    print("     %-4s %-10s %-7s %s" % ("k", "dtau", "tick", "escursione G"))
-    for (dtau, quanti, e), k in zip(righe, KAPPA):
-        print("     %-4d %-10.6f %-7d %.6e" % (k, dtau, quanti, e))
-    sys.stdout.flush()
-
-
-def braccio_c1():
-    """### `C1` col punto medio, e il caso che DEVE fallire coi pesi BLOCCATI."""
-    print()
-    print("### `C1` LA PENDENZA DI `G` COL PUNTO MEDIO PER PEZZO (regola `ii`)")
-    p_pm, righe, gm, gx = pendenza_di_g("ii", MB2.NN, 1.0, "stato")
-    stampa(righe)
-    print("     ### i giri del punto fisso del peso: medio %.2f, massimo %d" % (gm, gx))
-    esito("`C1` la pendenza di `G` col punto medio e' `>= %.1f`" % PENDENZA_MIN,
-          p_pm >= PENDENZA_MIN, "pendenza %.3f" % p_pm)
-    print()
-    print("### `C1` IL CASO CHE DEVE FALLIRE: l'OSSERVABILE VECCHIA (`g_pesata`)")
-    # ### ⛔⛔ **IL CASO CHE DEVE FALLIRE E' L'OSSERVABILE, NON LO SCHEMA**
-    # ### *(mandato del `2026-10-18`, errore `n.12`)*: ### **la `G` vecchia deve ridare
-    # ### `1.002 +- 0.01`** -- cioe' ### **il numero che misuravo**, e questo prova che
-    # ### ### **il difetto era LA LETTURA.**
-    # ### ⚠ **E col PASSO DI DEFAULT (`None`), perche- il `1.002` del mandato e- quello:
-    # ### l-osservabile vecchia SUL PASSO CHE GIRA, non su uno schema acceso.
-    p_vecchia, righe2, _gm, _gx = pendenza_di_g(None, MB2.NN, 1.0, "passo")
-    stampa(righe2)
-    esito("### `C1` DEVE fallire: l'osservabile VECCHIA da' `1.002 +- 0.01`",
-          abs(p_vecchia - 1.002) <= 0.01,
-          "pendenza %.3f: il numero di prima si RITROVA, cioe' il difetto era LA"
-          " LETTURA e non lo schema" % p_vecchia)
-    print()
-    print("### 📌 E I PESI BLOCCATI, CON L'OSSERVABILE GIUSTA (informazione):")
-    p_bl, righe3, _gm2, _gx2 = pendenza_di_g(None, MB2.NN, 1.0, "stato")
-    stampa(righe3)
-    print("     ### pendenza %.3f -- cioe' ### IL PUNTO MEDIO PER PEZZO NON SERVIVA:"
-          % p_bl)
-    print("###   il passo di default era GIA' del secondo ordine, e col punto medio da'")
-    print("###   %.3f, cioe' un filo PEGGIO." % p_pm)
-    print()
-    print("### 📌 `C1` CON LA REGOLA `(i)` (informazione, NON un criterio)")
-    p_i, righe3, gmi, gxi = pendenza_di_g("i", MB2.NN, 1.0, "stato")
-    stampa(righe3)
-    print("     ### pendenza %.3f (la `(ii)` da' %.3f); giri medio %.2f, massimo %d"
-          % (p_i, p_pm, gmi, gxi))
-    return p_pm, p_bl, p_i
+# ### ⛔⛔ **I BRACCI CHE ACCENDEVANO IL RAMO DEL PUNTO MEDIO PER PEZZO SONO TOLTI**
+# ### *(`2026-10-19`, decisione di Luca del `2026-10-18` alle `21:48`)*: il ramo e'
+# ### ### **tolto dal passo**, e i bracci che lo misuravano ### **non avrebbero piu' niente
+# ### da accendere.** ### ✅ **Il codice e i numeri restano nella STORIA:** il ramo e'
+# ### nato in `2c95af13`, e ### **questo file, coi suoi bracci, e' rigirabile al commit
+# ### `880955bb`**, che ha prodotto ### **`doc/referti_l2/punto_medio_per_pezzo.txt`**.
+# ### **Restano qui** il censimento dei `14` pezzi, l'ordine del movimento, il controllo
+# ### positivo dell'errore `n.12` e il peso di nodo durante il tick: ### **nessuno dei
+# ### quattro accende il ramo.**
 
 
 def braccio_cs_dello_stato():
@@ -270,7 +167,6 @@ def braccio_cs_dello_stato():
                                      vuoto_modulo=MB2.VUOTO_MODULO, su2=MB2.SU2)
         st["psi_h"][...], st["phi_h"][...] = HW.stato_non_uniforme()
         lc = float(np.mean(mot.densita_vuoto(st)))
-        mot.regola_punto_medio = None
         FP.accendi_cs(mot, lc, st)
         TK.tick_con_cs(st, mot, par, lc, ())
         cs_stato = FP.cs(mot.densita_vuoto(st), lc,
@@ -289,115 +185,6 @@ def braccio_cs_dello_stato():
           all(1.7 <= r <= 2.3 for r in rapporti),
           "i rapporti: %s -- e la differenza su `G` segue"
           % ("  ".join("%.3f" % r for r in rapporti)))
-
-
-def braccio_controllo_positivo():
-    """### Il peso USATO contro quello BLOCCATO: ### **`O(dtau)` RELATIVO.**
-
-    ### ⛔⛔ **E LA DISTINZIONE CONTA:** la differenza ASSOLUTA e' `O(dtau^2)`
-    ### **perche' il peso stesso e' `O(dtau)`** -- quindi il numero da guardare e'
-    ### **il RELATIVO**, e il mandato chiede ### **`O(dtau)`.**
-    """
-    print()
-    print("### IL CONTROLLO POSITIVO: il peso del punto medio DIFFERISCE da quello")
-    print("###   bloccato, e di quanto. ### Il RELATIVO deve essere `O(dtau)`.")
-    print("     %-10s %-16s %-16s %-12s %s"
-          % ("dtau", "|ds| assoluto", "scala di s", "RELATIVO", "rapporto"))
-    prec, ultimi = None, []
-    for k in KAPPA:
-        dtau = 1.0 / (2 ** k)
-        inc, mot, st, par = DV.scena(MB2.NN, MB2.SEME, dtau, norma=MB2.NORMA,
-                                     vuoto_modulo=MB2.VUOTO_MODULO, su2=MB2.SU2)
-        st["psi_h"][...], st["phi_h"][...] = HW.stato_non_uniforme()
-        lc = float(np.mean(mot.densita_vuoto(st)))
-        FP.accendi_cs(mot, lc, st)
-        s_bl = FP.s_arco(mot).copy()
-        salvo = st["phi_h"].copy()
-        lam0 = mot.densita_vuoto(st).copy()
-        FP.hop_phi_con_s(mot, st["phi_h"], s_bl.copy(), 0.5)
-        lam = 0.5 * (lam0 + mot.densita_vuoto(st))
-        s_pm = FP.s_arco_da_lambda(mot, lam)
-        st["phi_h"][...] = salvo
-        d = float(np.max(np.abs(s_pm - s_bl)))
-        sc = float(np.max(np.abs(s_bl)))
-        rel = d / sc
-        ultimi.append(rel)
-        print("     %-10.6f %-16.6e %-16.6e %-12.6e %s"
-              % (dtau, d, sc, rel, "--" if prec is None else "%.3f" % (prec / rel)))
-        prec = rel
-    # ### ✅ **IL CRITERIO DEL CONTROLLO: il rapporto dei RELATIVI sta vicino a `2`.**
-    rap = [ultimi[i - 1] / ultimi[i] for i in range(1, len(ultimi))]
-    esito("il peso del punto medio differisce da quello bloccato di `O(dtau)`",
-          all(1.7 <= r <= 2.3 for r in rap),
-          "i rapporti dei RELATIVI: %s (l'assoluto e' `O(dtau^2)` perche' il peso"
-          " stesso e' `O(dtau)`)" % ("  ".join("%.3f" % r for r in rap)))
-
-
-def braccio_reversibile():
-    """### `+h` e poi `-h`: lo stato ### **torna all'inizio.**
-
-    ### ⛔ **E NON si puo' fare con una frazione negativa** *(l'assert del cono)*:
-    il verso si rovescia ### **coniugando** -- `hop` e' `alpha I + beta S` con
-    `alpha, beta` che vengono da `e^{i theta}`, e ### **il suo inverso e' il coniugato.**
-    ### ✅ **Quindi si applica il pezzo, si CONIUGA lo stato, si riapplica, e si
-    coniuga di nuovo:** se il pezzo e' ### **reversibile**, si torna al punto di partenza.
-    """
-    print()
-    print("### LA REVERSIBILITA' del pezzo col punto medio: `+h`, poi `-h`")
-    print("     %-10s %-16s %-14s %s" % ("dtau", "|phi - phi_0|", "ulp", "entro 256?"))
-    peggio = 0.0
-    for k in KAPPA:
-        dtau = 1.0 / (2 ** k)
-        inc, mot, st, par = DV.scena(MB2.NN, MB2.SEME, dtau, norma=MB2.NORMA,
-                                     vuoto_modulo=MB2.VUOTO_MODULO, su2=MB2.SU2)
-        st["psi_h"][...], st["phi_h"][...] = HW.stato_non_uniforme()
-        lc = float(np.mean(mot.densita_vuoto(st)))
-        FP.accendi_cs(mot, lc, st)
-        phi0 = st["phi_h"].copy()
-        FP.hop_phi_punto_medio(mot, st, 0.5, "ii")
-        np.conj(st["phi_h"], out=st["phi_h"])
-        FP.hop_phi_punto_medio(mot, st, 0.5, "ii")
-        np.conj(st["phi_h"], out=st["phi_h"])
-        d = float(np.max(np.abs(st["phi_h"] - phi0)))
-        sc = float(np.max(np.abs(phi0)))
-        u = d / (float(np.finfo(float).eps) * sc)
-        peggio = max(peggio, u)
-        print("     %-10.6f %-16.6e %-14.1f %s"
-              % (dtau, d, u, "si" if u <= ULP_REVERSIBILE else "### NO"))
-    esito("il pezzo col punto medio e' REVERSIBILE entro %.0f ulp" % ULP_REVERSIBILE,
-          peggio <= ULP_REVERSIBILE, "il PEGGIO e' %.1f ulp" % peggio)
-
-
-def informazione_giri():
-    """### 📌 **I GIRI: medio e massimo, su DUE taglie e QUATTRO `Lambda_c`.**"""
-    print()
-    print("### 📌 I GIRI DEL PUNTO FISSO DEL PESO (informazione): due taglie,")
-    print("###   quattro rapporti `Lambda_c/Lambda`. ### Il punto fisso ACCOPPIA LA RETE,")
-    print("###   quindi i giri dicono quanto e' accoppiata -- non la difficolta' di un arco.")
-    print("     %-8s %-10s %-12s %-10s %s"
-          % ("taglia", "rapporto", "pendenza G", "giri medio", "giri max"))
-    fuori = []
-    for taglia in TAGLIE:
-        for r in RAPPORTI:
-            # ### ⛔⛔ **E SE UN PUNTO FISSO NON CONVERGE, SI RIPORTA** *(`2026-10-18`)*:
-            # ### la misura ### **non muore** e ### **non nasconde** -- il messaggio
-            # ### dell-`assert` porta ### **l-ultimo scarto**, ed e- il numero che serve.
-            try:
-                p, _righe, gm, gx = pendenza_di_g("ii", taglia, r, "stato")
-                print("     %-8d %-10.2f %-12.3f %-10.2f %d"
-                      % (taglia, r, p, gm, gx))
-                fuori.append((taglia, r, p, gm, gx))
-            except AssertionError as e:
-                print("     %-8d %-10.2f ### NON CONVERGE: %s"
-                      % (taglia, r, str(e)[:120]))
-                fuori.append((taglia, r, None, None, None))
-            sys.stdout.flush()
-    rotti = [(t, r) for (t, r, p, _m, _x) in fuori if p is None]
-    if rotti:
-        print("     ### ⛔⛔ E QUESTO E- UN RISULTATO NUOVO, NON un intoppo: con il punto")
-        print("###   medio acceso il punto fisso di `cs` AL CENTRO non converge in %d" % len(rotti))
-        print("###   dei %d casi provati: %s. ### Va relazionato, e la scelta torna a Luca."
-              % (len(fuori), rotti))
 
 
 def informazione_peso_di_nodo():
@@ -453,8 +240,8 @@ def informazione_peso_di_nodo():
         prec = peggio
         if abs(dtau - 0.25) < 1e-12:
             righe14 = righe
-    print("     ### un rapporto `~2` vuol dire `O(dtau)`: ed e' LO STESSO ordine che")
-    print("###   il punto medio ha TOLTO dal peso d'arco.")
+    print("     ### un rapporto `~2` vuol dire `O(dtau)`: ed e' LO STESSO ordine che il")
+    print("###   punto medio per pezzo toglieva dal peso d'arco (ramo tolto il 2026-10-19).")
     if righe14:
         print("     ### E PEZZO PER PEZZO (`dtau = 0.25`), il peso di nodo usato contro")
         print("###   quello dello stato di quel pezzo:")
@@ -474,6 +261,8 @@ def main(argv):
     _presidio.avvia(__file__)
     print("=" * 100)
     print("IL PUNTO MEDIO PER PEZZO -- il CENSIMENTO dei 14 pezzi, PRIMA del codice")
+    print("### I bracci che accendevano il ramo sono TOLTI (2026-10-19): rigirabili al")
+    print("###   commit 880955bb, referto doc/referti_l2/punto_medio_per_pezzo.txt.")
     print("### Mandato di Luca del 2026-10-18, 12:07.")
     print("=" * 100)
     print("  LA CONFIGURAZIONE INTERA, dichiarata:")
@@ -493,11 +282,7 @@ def main(argv):
           "contati %d: %s" % (len(muovono), muovono))
     for q in muovono:
         informazione_ordine(q)
-    braccio_c1()
     braccio_cs_dello_stato()
-    braccio_controllo_positivo()
-    braccio_reversibile()
-    informazione_giri()
     informazione_peso_di_nodo()
     print()
     print("=" * 100)

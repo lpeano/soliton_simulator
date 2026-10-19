@@ -78,7 +78,7 @@ import _costo_punti_fissi as CPF                               # noqa: E402
 TAGLIA = 16
 IRAPPORTO = 3                # D2.SPAZZATA[3] = 8.0: rapporto 1
 NOMI_MOTORE = ("self", "mot", "motore")
-INTERESSANTI = ("cs", "lambda_c", "dtau", "geo.U", "geo.n", "regola_punto_medio")
+INTERESSANTI = ("cs", "lambda_c", "dtau", "geo.U", "geo.n")
 
 
 # =====================================================================================

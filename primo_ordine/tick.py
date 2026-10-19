@@ -36,15 +36,6 @@ import flussi_parziali as FP                                  # noqa: E402
 # ### ⛔ **LA SOGLIA DEL PUNTO FISSO: gli ULP**, come il mandato chiede *(<<risolto a
 # ### punto fisso fino agli ulp>>)*. ### ⚠ **E- RELATIVA al massimo di `cs`**, perche-
 # ### un assoluto su una grandezza in `[0, 1)` ### **sarebbe una scala nascosta.**
-# ### ⛔⛔ **LA TOLLERANZA E- SCRITTA QUI, E E- UN DOPPIONE DICHIARATO** *(`2026-10-18`)*:
-# ### lo stesso numero vive in ### **`flussi_parziali.EPS_PUNTO_FISSO`**, e la via giusta
-# ### sarebbe ### **leggerlo da la-.** ### ⚠ **E L-HO PROVATO: NON SI PUO-, e il motivo
-# ### e- MISURATO.** Il collaudo di `M-B1` ### **copia il `tick.py` di OGGI in un albero
-# ### VECCHIO** *(per mostrare il falso-uno)*, e la- dentro `flussi_parziali` e- quello di
-# ### allora: ### **un `EPS_CS = FP.EPS_PUNTO_FISSO` fa ALZARE l-import** *(`AttributeError`)*.
-# ### ✅ **Quindi il doppione resta, ma NON in silenzio:** i due ### **si confrontano**
-# ### dentro `cs_al_centro` *(non all-import, per la stessa ragione)*, e ### **se divergono
-# ### ALZANO.**
 EPS_CS = 8.0 * float(np.finfo(float).eps)
 
 # ### ⛔ **LA LEGGE -> L'OPERATORE, e NON e' una mia scelta:** la lista delle leggi e il
@@ -159,15 +150,6 @@ def cs_al_centro(st, mot, par, lambda_c, fp, salta):
     ### **di relazionare e NON di scegliere un altro schema.**
     """
     meta = meta_del_palindromo()
-    # ### ✅ **IL CONFRONTO DEL DOPPIONE, E STA QUI E NON ALL-IMPORT:** in un albero
-    # ### vecchio `flussi_parziali` ### **non ha quel nome**, e un confronto all-import
-    # ### ### **farebbe ALZARE il collaudo di `M-B1`** -- che e- il motivo per cui il
-    # ### doppione esiste. ### ⚠ **Qui invece gira solo quando la forma `cs` gira.**
-    assert EPS_CS == getattr(FP, "EPS_PUNTO_FISSO", EPS_CS), (
-        "`tick.EPS_CS` (%r) e `flussi_parziali.EPS_PUNTO_FISSO` (%r) sono DIVERSI: sono"
-        " lo stesso numero scritto in due posti, e due numeri uguali in due posti"
-        " DIVERGONO -- questo assert e- il presidio di quel doppione"
-        % (EPS_CS, getattr(FP, "EPS_PUNTO_FISSO", None)))
     # ### ⛔ **IL NUMERO PRIMA DEL VETTORE** *(`2026-10-18`)*: il tick con `cs`
     # ### percorre ### **mezzo palindromo**, e la' dentro c'e' ### **`CAMM-FASE-VUOTO`**,
     # ### che legge `mot.lambda_c`. ### ⚠ **Senza questa riga il pezzo nuovo

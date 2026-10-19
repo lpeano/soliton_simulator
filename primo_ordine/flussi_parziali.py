@@ -168,19 +168,6 @@ def spegni_cs(mot):
     mot.lambda_c = None
 
 
-# ### ⛔⛔ **LA TOLLERANZA DEI PUNTI FISSI, E STA QUI PERCHE- SIA UNA**
-# ### *(`2026-10-18`)*: `tick.EPS_CS` *(il punto fisso di `cs` al centro, `D2`)*
-# ### ### **la legge da qui**, e il punto medio del peso d-arco usa ### **la stessa.**
-# ### ⚠ **Due numeri uguali in due posti DIVERGONO.** ### ✅ **E e- un numero di
-# ### METODO, non di fisica:** dice ### **quando due giri coincidono AGLI ULP**, e
-# ### ### **non cambia nessun risultato.**
-EPS_PUNTO_FISSO = 8.0 * float(np.finfo(float).eps)
-# ### ⛔ **IL TETTO DEI GIRI DEL PESO, e NON e- una manopola:** e- ### **il numero
-# ### oltre il quale si DICHIARA che non converge**, come `GIRI_MAX` di `tick.py`.
-# ### ⚠ **Il massimo MISURATO sta nel referto**, accanto a questo numero.
-GIRI_MAX_PESO = 120
-
-
 def s_nodo(mot):
     """### `s = dtau/dtau_rif` **per nodo**, e ### **`s <= 1` si ASSERISCE, non si taglia.**
 
@@ -315,46 +302,15 @@ def z_nodo(mot, frazione):
     return espi(s.reshape(-1, 1), z, mot._b("fp_w_nodo", (mot.inc.n, 1), float))
 
 
-def z_arco_da_s(mot, s, frazione):
-    """### `e^{i theta}` **per arco**, con `s` ### **DATA invece che letta dallo stato.**
-
-    ### ⛔⛔ **PERCHE- ESISTE** *(`2026-10-18`, il punto medio per pezzo)*: il
-    pezzo d-arco del vuoto ### **muove `Lambda` DENTRO la propria applicazione**
-    *(misurato: `O(dtau)`, rapporti `2.019`-`1.986` al dimezzare)*, quindi il peso che usa
-    ### **va valutato al punto medio** -- e per farlo serve ### **poterglielo DARE.**
-    ### ✅ **E le operazioni sono LE STESSE di prima, nello stesso ordine:** e- cio-
-    che tiene il braccio `0` ### **al bit.**
-    ### ⚠ **`s` VIENE CONSUMATA** *(si moltiplica in posto per la frazione)*: chi la
-    riusa ### **passa una copia.**
-    """
+def z_arco(mot, frazione):
+    """### `e^{i theta}` **per arco**, con `theta = pi · s_arco · frazione`."""
     f = _frazione_valida(frazione)
+    s = s_arco(mot)
     # ### ⛔ **SEMPRE, anche a `f = 1`: `s * 1.0` e- ESATTO**, e un ramo
     # ### ### **farebbe collaudare il ramo invece del codice.**
     np.multiply(s, f, out=s)
     z = mot._b("fp_z_arco", (mot.inc.m, 1), complex)
     return espi(s.reshape(-1, 1), z, mot._b("fp_w_arco", (mot.inc.m, 1), float))
-
-
-def z_arco(mot, frazione):
-    """### `e^{i theta}` **per arco**, col peso ### **letto dallo stato di ADESSO.**"""
-    return z_arco_da_s(mot, s_arco(mot), frazione)
-
-
-def s_arco_da_lambda(mot, lam):
-    """### Il peso d-arco ### **che si avrebbe con QUESTA `Lambda`.**
-
-    ### ⛔ **Serve al punto medio**, e ### **non riscrive niente:** mette `cs` di
-    quella `Lambda` ### **nel motore per il tempo di una lettura**, chiama
-    ### **la stessa `s_arco` che il passo chiama**, e ### **rimette `cs` com-era.**
-    ### ⚠ **E pretende `mot.lambda_c`:** senza il numero ### **`cs` non si calcola**,
-    e il punto medio ### **non esiste.**
-    """
-    salvo = mot.cs
-    mot.cs = cs(lam, mot.lambda_c, mot._b("fp_cs_pm", (mot.inc.n,), float)).copy()
-    try:
-        return s_arco(mot).copy()
-    finally:
-        mot.cs = salvo
 
 
 # ====================================================================== I DUE FLUSSI
@@ -459,90 +415,9 @@ def hop_phi(mot, phi, frazione):
     trasportare, e dargli una `U` vorrebbe dire ### **dargli una carica che non ha.**
     ### ⭐ **Quindi `S` e' la permutazione pura**, e `hop` resta `alpha I + beta S`.
     """
-    return hop_phi_con_s(mot, phi, s_arco(mot), frazione)
-
-
-def hop_phi_punto_medio(mot, st, frazione, regola):
-    """### ⭐⭐ **IL PEZZO DEL VUOTO COL PESO AL PROPRIO PUNTO MEDIO.**
-
-    ### ⛔⛔ **PERCHE- SOLO QUESTO PEZZO** *(decisione di Luca del `2026-10-18`,
-    `12:07`)*: ### **e- il SOLO dei `14` che muove `Lambda` dentro la propria
-    applicazione** -- ### **CONTATO**, non supposto *(`1.99e+00` a `dtau = 0.25`, contro
-    `0.0` o `5e-15` di tutti gli altri)*. ### **E il movimento e- `O(dtau)`**, che e-
-    esattamente cio- che da- ### **la deriva del PRIMO ordine** di `G`.
-
-    ### ✅ **LA REGOLA, DICHIARATA NEL TASK HISTORY PRIMA DEL CODICE:**
-    ### **`(ii)` la MEDIA DEI DUE `Lambda`** -- `Lambda_medio = (Lambda_0 + Lambda_1)/2`.
-    ### ⛔ **E NON la `(i)`** *(`Lambda` sul `phi` medio)*, perche-
-    ### **`(phi_0 + phi_1)/2` NON E- UNO STATO DEL FLUSSO:** il pezzo e- una rotazione, e
-    la media fra partenza e arrivo ha norma ### **`cos(theta/2)`** volte quella di
-    partenza -- quindi la- `Lambda` e- ### **sistematicamente piu- piccola**, di
-    `cos^2(theta/2)`. ### ⚠ **E- `O(h^2)`, ma e- UN BIAS CON UN SEGNO**, e fra due
-    regole che costano uguale ### **si prende quella che non ce l-ha.**
-    ### 📌 **E `regola` permette di misurare ANCHE la `(i)`**, come informazione:
-    ### **non e- un criterio nuovo**, e ### **non ha un valore di comodo.**
-
-    ### ⛔⛔ **E IL PUNTO FISSO NON E- PER ARCO: ACCOPPIA LA RETE INTERA.**
-    `hop_phi` applica ### **tutti gli archi insieme**, e `Lambda_k` ### **somma i
-    semiarchi di piu- archi** -- quindi il peso di un arco dipende da `Lambda` dei suoi
-    due nodi, che dipendono da ### **tutti gli archi che li toccano.**
-    ### ✅ **Quindi i giri misurano QUANTO E- ACCOPPIATA LA RETE**, non la difficolta-
-    di un arco -- e il referto li riporta ### **su due taglie.**
-
-    ### ⛔ **E se non converge entro `GIRI_MAX_PESO` ALZA**, perche- la regola dice
-    ### **di relazionare e NON di scegliere un altro schema.**
-    """
-    assert regola in ("ii", "i"), (
-        "`regola` vale `ii` (la media dei due `Lambda`, quella DICHIARATA) o `i`"
-        " (`Lambda` sul `phi` medio, che si misura come INFORMAZIONE): un valore di"
-        " comodo renderebbe illeggibile quale delle due ha prodotto un numero (%r)"
-        % (regola,))
-    phi = st["phi_h"]
-    salvo = mot._b("fp_phi_pm", phi.shape, phi.dtype)
-    salvo[...] = phi
-    lam0 = mot.densita_vuoto(st).copy()
-    # ### ✅ **LA PRIMA IPOTESI E- IL PESO BLOCCATO**, cioe- ### **lo schema di
-    # ### prima**: cosi- il primo giro ### **riproduce il punto di partenza.**
-    s = s_arco(mot).copy()
-    giri = 0
-    for giri in range(1, GIRI_MAX_PESO + 1):
-        phi[...] = salvo
-        hop_phi_con_s(mot, phi, s.copy(), frazione)
-        if regola == "ii":
-            lam = 0.5 * (lam0 + mot.densita_vuoto(st))
-        else:
-            # ### ⚠ **LA REGOLA `(i)`, SOLO PER INFORMAZIONE:** `Lambda` del `phi`
-            # ### ### **MEDIO**, che NON e- uno stato del flusso.
-            mezzo = 0.5 * (salvo + phi)
-            vecchio = phi.copy()
-            phi[...] = mezzo
-            lam = mot.densita_vuoto(st).copy()
-            phi[...] = vecchio
-        nuovo = s_arco_da_lambda(mot, lam)
-        scarto = float(np.max(np.abs(nuovo - s)))
-        scala = float(np.max(np.abs(nuovo)))
-        s = nuovo
-        if scarto <= EPS_PUNTO_FISSO * scala:
-            break
-    else:
-        phi[...] = salvo
-        raise AssertionError(
-            "il punto medio del PESO non converge in %d giri (ultimo scarto %.3e): la"
-            " regola dice di RELAZIONARE coi numeri e NON di scegliere un altro schema,"
-            " quindi questo ALZA invece di fermarsi a un valore qualunque"
-            % (GIRI_MAX_PESO, scarto))
-    # ### ✅ **E ADESSO IL PEZZO INTERO, dallo stato VERO, col peso del punto medio.**
-    phi[...] = salvo
-    hop_phi_con_s(mot, phi, s.copy(), frazione)
-    mot.giri_peso = giri
-    return phi
-
-
-def hop_phi_con_s(mot, phi, s, frazione):
-    """### `hop(theta)` sul vuoto, col peso ### **DATO.** ### **Il corpo di `hop_phi`.**"""
     m = mot.inc.m
     v = phi.reshape(m, 2)
-    al, be = _alfa_beta(mot, z_arco_da_s(mot, s, frazione))
+    al, be = _alfa_beta(mot, z_arco(mot, frazione))
     a1 = al.reshape(-1)
     b1 = be.reshape(-1)
     # ### ⭐ **DUE buffer anche qui**, e per lo stesso motivo: il lato `1` vecchio si

@@ -3736,3 +3736,22 @@ secondi ### **escono dai file a ogni corsa.**
 | ### ⭐ **la lista si DERIVA, e si CONFRONTA** | dal disco, e il derivato dev'essere ### **contenuto nel dichiarato** di `csv/_file_fisica.py`: se non lo e', ### **`[[H-FISICA-FUORI-LISTA]]` e' rotto** e il censimento lo dice |
 | ### ⛔ **e il collaudo scrive FUORI dal repo** | i file finti stanno in una cartella ### **temporanea**, e `_conta` accetta un percorso ### **assoluto** |
 | **il BLOB** | `sha1-BYTE 83251e63` |
+
+---
+
+## GLI STRUMENTI DELLA MEMORIA E DELLA RIMOZIONE DEL PUNTO MEDIO *(`2026-10-19`)*
+
+> ### ⛔ **Su richiesta del guardiano** *(verifica fino a `8d63be67`)*: ### **i referti di
+> stamattina restano validi AL LORO COMMIT**, anche dove lo strumento e' stato aggiornato
+> dalla rimozione del ramo del punto medio per pezzo. ### **Un referto si rigira con `git
+> checkout` del commit che l'ha prodotto.** I blob sono `sha1` dei BYTE grezzi.
+
+| strumento | il comando | cosa misura | il blob OGGI | il referto, e il commit a cui resta valido |
+|---|---|---|---|---|
+| `csv/_censimento_punti_fissi.py` | `python csv/_censimento_punti_fissi.py` | i punti fissi del nucleo con l'AST, e quali stanno nel percorso del tick | `bcfae04a` *(la previsione nuova: `2` nel tick, `3` nel nucleo)* | `doc/referti_l2/censimento_punti_fissi.txt` a `95c81e97` *(blob `d65655fc`: `3` nel tick, `4` nel nucleo, col ramo)* -- ### **rifatto dopo la rimozione** |
+| `csv/_costo_punti_fissi.py` | `python csv/_costo_punti_fissi.py` *(`--corto` per il giro corto)* | il costo dei punti fissi del tick, a tempo, col criterio robusto di `652eeb52` | `6cf97421` *(avvolge `2` punti fissi)* | `doc/referti_l2/costo_punti_fissi.txt` a `8b2bdb16` *(blob `ba489fc0`, `3` punti fissi)* -- ### **non si rigira: il passo `B` e' chiuso con le quote** |
+| `csv/_matrice_dipendenze.py` | `python csv/_matrice_dipendenze.py` | la matrice lettura/scrittura dei `14` pezzi, statica e dinamica, e l'auto-dipendenza | `eed83277` | `doc/referti_l2/matrice_dipendenze.txt` a `e989872d` *(blob `db7b8c5d`)* -- ### **rifatto dopo la rimozione** |
+| `csv/_ambito_contro_matrice.py` | `python csv/_ambito_contro_matrice.py` | le dipendenze misurate che `ambito` non dichiara | `32cbdb68` | `doc/referti_l2/ambito_contro_matrice.txt` a `9e1803ae` |
+| `csv/_ciclo_cs.py` | `python csv/_ciclo_cs.py` | il ciclo di periodo `2` del punto fisso di `cs` a taglia `32`, rapporto `0.01` | `d89f81f5` | `doc/referti_l2/ciclo_cs.txt` a `98aca092` |
+| `csv/_censimento_ramo_punto_medio.py` | `python csv/_censimento_ramo_punto_medio.py [--dopo]` | i nomi del ramo nei file tracciati, codice e documentazione; `--dopo` pretende `0` nel codice | `2d4ff85c` | `doc/referti_l2/ramo_punto_medio_prima.txt` a `4db3b943`; il referto `--dopo` dopo la rimozione |
+| `primo_ordine/_misura_punto_medio.py` | `python primo_ordine/_misura_punto_medio.py` | il censimento dei `14` pezzi, l'ordine del movimento, il controllo positivo dell'errore `n.12`, il peso di nodo | `232bf619` *(senza i bracci che accendevano il ramo)* | ### **`doc/referti_l2/punto_medio_per_pezzo.txt` resta legato a `880955bb`**: ### **al suo commit il file, coi suoi bracci, e' rigirabile** |

@@ -10,15 +10,20 @@ r"""**IL COSTO DEI PUNTI FISSI DEL TICK, MISURATO A TEMPO** — *il passo `B` de
 
 ## ⛔ LA CONFIGURAZIONE E' QUELLA DI `C5`, NON UNA MIA
 
-### **Col passo di default la forma `cs` e' SPENTA** *(`mot.cs is None`)* e ### **nessuno
-dei tre gira**: misurarla darebbe ### **tre zeri, che sono un FALSO ZERO.** Si misura
+### **Col passo di default la forma `cs` e' SPENTA** *(`mot.cs is None`)* e ### **nessun
+punto fisso gira**: misurarla darebbe ### **degli zeri, che sono un FALSO ZERO.** Si misura
 quindi ### **con `cs` acceso**, sulla scena e sui `Lambda_c` di `C5`
 *(`_misura_strada_d.informazione_costo`)*: `DV.scena(MB2.NN, MB2.SEME, 0.25, ...)`, lo
 stato della pre-corsa, ### **`8` tick**, e `Lambda_c` presi da `D2.SPAZZATA`.
-### ⚠ **Sulla seconda taglia** (`32`, come `_misura_punto_medio.TAGLIE`) si tengono
-### **gli STESSI RAPPORTI** `Lambda_c/Lambda_medio` di `C5`, e lo stato e' quello della
-### **stessa pre-corsa** sulla rete di quella taglia *(la costruzione di
-`_misura_punto_medio.pendenza_di_g`)*.
+### ⚠ **Sulla seconda taglia** (`32`, come le due taglie di `_misura_punto_medio` al
+commit `880955bb`) si tengono ### **gli STESSI RAPPORTI** `Lambda_c/Lambda_medio` di `C5`,
+e lo stato e' quello della ### **stessa pre-corsa** sulla rete di quella taglia *(la
+costruzione che quel file usava allo stesso commit)*.
+### ⛔⛔ **DAL `2026-10-19` I PUNTI FISSI AVVOLTI SONO DUE** *(`tick.cs_al_centro`,
+`energia_pesata.applica`)*: il terzo, il peso al punto medio per pezzo, e' ### **tolto dal
+passo** con la rimozione del ramo. ### **Il referto `costo_punti_fissi.txt` resta valido al
+suo commit** *(`8b2bdb16`, blob `ba489fc0`)*, e ### **il passo `B` e' chiuso con le quote**
+*(`bef39500`)*: questo file ### **non si rigira** per lui.
 
 ## ⭐ CHE COSA SI MISURA, PER OGNI PUNTO FISSO
 
@@ -60,7 +65,7 @@ si FERMA** *(par.`2` del task history)*.
 
 ## ⭐ I DUE BRACCI DI RIFERIMENTO
 
-### **`cs` SPENTO:** lo stesso tick *(`tick.tick`)*, e ### **i tre devono dare quota `0`**
+### **`cs` SPENTO:** lo stesso tick *(`tick.tick`)*, e ### **i due devono dare quota `0`**
 *(nessuna iterazione)*. ### ⚠ **`applica` viene CHIAMATA anche la'** e torna subito: il
 suo tempo **non e' zero** *(e' la chiamata)*, e si riporta a parte da quello delle chiamate
 che ### **hanno iterato**, che deve essere ### **zero esatto.**
@@ -94,7 +99,7 @@ for _p in (_QUI, _PO, os.path.join(_PO, "leggi")):
 import numpy as np                                             # noqa: E402
 
 # ### ⛔ **I NUMERI DELLA MISURA, e da dove vengono:** nessuno e' scelto qui.
-TAGLIE = (16, 32)            # _misura_punto_medio.TAGLIE: <<due taglie>> del task history
+TAGLIE = (16, 32)            # le due taglie del task history (_misura_punto_medio a 880955bb)
 DTAU = 0.25                  # quello di C5 (_misura_strada_d.informazione_costo)
 TICK = 8                     # quelli di C5
 RIPETIZIONI = 5              # P3: per una barra ne servono ALMENO 4
@@ -149,7 +154,7 @@ def lambda_c(taglia, irapporto):
 #   L'INVOLUCRO: tempo e giri per chiamata, IN MEMORIA
 # =====================================================================================
 class Involucro(object):
-    """### Avvolge i tre punti fissi e conta ### **tempo e giri di OGNI chiamata.**
+    """### Avvolge i due punti fissi e conta ### **tempo e giri di OGNI chiamata.**
 
     ### ⛔ **Non tocca nessun file:** sostituisce tre attributi di modulo per la durata
     del braccio, e ### **`STANDARD 5` verifica che lo stato finale non cambi.**
@@ -160,18 +165,17 @@ class Involucro(object):
         import flussi_parziali as FP
         import tick as TK
         self.EP, self.FP, self.TK = EP, FP, TK
-        self.veri = (TK.cs_al_centro, EP.applica, FP.hop_phi_punto_medio)
+        self.veri = (TK.cs_al_centro, EP.applica)
         self.dentro_cs = False
         self.azzera()
 
     def azzera(self):
         self.cs = []          # (secondi, giri)
         self.om = []          # (secondi, giri, dentro_cs)
-        self.pm = []          # (secondi, giri)
 
     def installa(self):
         TK, EP, FP = self.TK, self.EP, self.FP
-        v_cs, v_om, v_pm = self.veri
+        v_cs, v_om = self.veri
         io_ = self
 
         def cs_al_centro(st, mot, par, lc, fp, salta):
@@ -191,19 +195,11 @@ class Involucro(object):
             io_.om.append((time.perf_counter() - t0, mot.giri_omega, io_.dentro_cs))
             return r
 
-        def hop_phi_punto_medio(mot, st, frazione, regola):
-            mot.giri_peso = 0
-            t0 = time.perf_counter()
-            r = v_pm(mot, st, frazione, regola)
-            io_.pm.append((time.perf_counter() - t0, mot.giri_peso))
-            return r
-
         TK.cs_al_centro = cs_al_centro
         EP.applica = applica
-        FP.hop_phi_punto_medio = hop_phi_punto_medio
 
     def togli(self):
-        self.TK.cs_al_centro, self.EP.applica, self.FP.hop_phi_punto_medio = self.veri
+        self.TK.cs_al_centro, self.EP.applica = self.veri
 
 
 def _firma(st, mot):
@@ -310,7 +306,6 @@ def braccio(taglia, irapporto, modo, involucro):
             if inv is not None:
                 rip["cs"] = inv.cs
                 rip["om"] = inv.om
-                rip["pm"] = inv.pm
                 rip["fine_tick"] = fine
             ripetizioni.append(rip)
     except AssertionError as e:
@@ -371,13 +366,11 @@ def leggi(b, t_spento):
     om_fu = np.array([sum(x[0] for x in r["om"] if not x[2] and x[1] > 0) for r in rr])
     om_tutte = np.array([sum(x[0] for x in r["om"]) for r in rr])
     om_iter = om_in + om_fu
-    pm_t = np.array([sum(x[0] for x in r["pm"] if x[1] > 0) for r in rr])
     giri_cs = [x[1] for x in rr[0]["cs"]]
     giri_om = [x[1] for x in rr[0]["om"]]
-    giri_pm = [x[1] for x in rr[0]["pm"]]
     L = {"T": T, "cs": cs_t, "om_in": om_in, "om_fu": om_fu, "om_iter": om_iter,
-         "om_tutte": om_tutte, "pm": pm_t, "giri_cs": giri_cs, "giri_om": giri_om,
-         "giri_pm": giri_pm, "n_om": len(giri_om), "n_pm": len(giri_pm)}
+         "om_tutte": om_tutte, "giri_cs": giri_cs, "giri_om": giri_om,
+         "n_om": len(giri_om)}
     if "giro_cs" in b:
         gcs = np.array(b["giro_cs"][RISCALDAMENTO:])
         gom = np.array(b["giro_om"][RISCALDAMENTO:])
@@ -483,8 +476,8 @@ def main(argv):
           " INFORMATIVO se soglia < |previsto - previsto di C5|" % (MAD_SCALA, SIGMA))
     print("  Lambda_c: D2.SPAZZATA = %s (valori di C5 sulla taglia %d; sull'altra lo stesso"
           " RAPPORTO)" % (list(D2.SPAZZATA), MB2.NN))
-    print("  il passo: l'ordine della tabella, impronta %s; regola_punto_medio = None"
-          " (default)" % CM.IMPRONTA)
+    print("  il passo: l'ordine della tabella, impronta %s (il passo di default)"
+          % CM.IMPRONTA)
     print("  il tick acceso: tick.tick_con_cs(st, mot, par, Lambda_c, ());  spento: tick.tick")
     print("  il caso che DEVE fallire (il conto di C5): per `cs` mezzo tick SPENTO per giro;"
           " per `Omega` i giri dell'ULTIMA applicazione per tick")
@@ -516,17 +509,16 @@ def main(argv):
         Ls = leggi(sp, None)
         t_sp = mediana_e_s(Ls["T"] / TICK)
         inerte = sp["firme"] == sn["firme"] and len(sp["firme"]) == 1
-        zero = (len(Ls["giri_cs"]) == 0 and float(np.max(Ls["om_iter"])) == 0.0
-                and float(np.max(Ls["pm"])) == 0.0)
+        zero = len(Ls["giri_cs"]) == 0 and float(np.max(Ls["om_iter"])) == 0.0
         esito["inerte"] &= inerte
         esito["spento_zero"] &= zero
         print("  `cs` SPENTO (riferimento): T tick %.3f ms (mediana; %.4f ms per tick)"
               "   chiamate cs %d   applica %d (tutte con giri 0: %s, il loro tempo %.4f ms"
-              " = %.2f%%)   punto medio %d"
+              " = %.2f%%)"
               % (_ms(np.median(Ls["T"])), _ms(t_sp[0]), len(Ls["giri_cs"]), Ls["n_om"],
                  all(gg == 0 for gg in Ls["giri_om"]), _ms(np.median(Ls["om_tutte"])),
-                 100 * np.median(Ls["om_tutte"]) / np.median(Ls["T"]), Ls["n_pm"]))
-        print("     quota dei tre nelle chiamate che ITERANO: %s   involucro inerte: %s"
+                 100 * np.median(Ls["om_tutte"]) / np.median(Ls["T"])))
+        print("     quota dei due nelle chiamate che ITERANO: %s   involucro inerte: %s"
               % ("0 esatto -- PASSA" if zero else "### NON ZERO -- FALLISCE",
                  "PASSA" if inerte else "### FALLISCE (%s / %s)" % (sp["firme"],
                                                                     sn["firme"])))
@@ -562,8 +554,6 @@ def main(argv):
             sys.stdout.flush()
             controlli.append((b, L))
             esito["righe"] += 1
-        print("  ### il punto medio per pezzo: chiamate %s -> SPENTO in questa configurazione"
-              % sorted(set(len(L["giri_pm"]) for _b, L in controlli)))
         print("  ### IL CONTROLLO (criterio di 652eeb52): misura contro giri * c(giro)  [ms]")
         print("  ### r = misura/previsto; soglia = 3*1.4826*MAD combinata; distanza ="
               " |previsto - previsto di C5|")
@@ -601,7 +591,7 @@ def main(argv):
     print("=" * 100)
     print("### I VERDETTI")
     for k, che in (("inerte", "l'involucro e' inerte (sha1 dello stato finale, ogni braccio)"),
-                   ("spento_zero", "cs SPENTO: quota 0 esatto per i tre (chiamate che iterano)")):
+                   ("spento_zero", "cs SPENTO: quota 0 esatto per i due (chiamate che iterano)")):
         print("  %-66s %s" % (che, "PASSA" if esito[k] else "### FALLISCE"))
     for taglia, chi, v, inf, tot, tor, c5 in esito["verdetti"]:
         print("  %-66s %s" % ("il controllo, taglia %d, %s (%d informativi su %d)"
