@@ -35,6 +35,21 @@
 | ### ⭐ **il criterio di uscita** | ① `Lambda` **non e' piu' invariante** sotto il tick *(oggi: **`8.88e-16`**, cioe' **il vuoto e' PASSIVO**)*; ② l'effetto si vede **FUORI dal grumo** — ### **l'ALONE** *(oggi: **nessun anello oltre `3` sigma**, misurato nel `v4`)*; ③ gli orologi **rallentano INTORNO** al grumo, non solo dentro *(punto `1` dell'`11` ottobre)* |
 | **l'ipotesi provvisoria che usa** | ### **nessuna verso l'alto:** `L2` chiede solo `L1`, che e' **sotto** |
 
+### 📌 **SOTTO `L2`: UN VINCOLO DI `L2` SU `L3`** *(domanda di Luca del `2026-10-19`, `20:02`-`20:06`; ### **non e' lavoro di `L3`**)*
+
+> *«L'instabilita', se c'e', dipende dal fatto che lo spazio non si espande ancora? Sul grafo
+> fisso `V` e' conservato e manca il canale di dissipazione globale della crescita (la legge
+> generale del 3 ottobre). Non si tratta di fare `L3` prima di `L2`, ma di stimare da `L2` come
+> `L3` si deve comportare: tutti i livelli sono collegati, e le misure di un livello diventano
+> requisiti per gli altri.»*
+
+**LE CONSIDERAZIONI DEL GUARDIANO, scritte come tali:**
+- se `gamma` e' ### **FISICA**, il vincolo che `L2` consegna a `L3` e' ### **UN NUMERO**: la crescita della rete deve avere un tasso ### **almeno dell'ordine di `gamma`** *(in tempo proprio)* alla scala della lunghezza d'onda misurata -- ### **col suo valore e le sue barre**;
+- se `gamma` e' ### **NUMERICA**, l'espansione non c'entra, e il difetto e' dello schema di `L2`;
+- ### **il vincolo NON chiude `L2` da solo:** `L2` si chiude coi suoi criteri, e il vincolo resta ### **un requisito verificabile per `L3`.** ### **La decisione su come chiudere `L2` e' di Luca.**
+
+### ✅ **L'ESITO DEL TEST** *(`c2dd6453`, `doc/referti_l2/instabilita_vuoto.txt`)*: ### **il vuoto uniforme NON e' instabile** -- `gamma` compatibile con zero in tutti e sette i bracci *(il piu' vicino: rapporto `10`, `+1.0e-04 +- 5.5e-05` per tick, `+1.8` barre)*, `V` conservato, nessun modo dominante. ### **Quindi oggi il vincolo e' VUOTO:** non c'e' un'instabilita' che la crescita di `L3` debba compensare, ### **entro le barre riportate nel referto** *(a rapporto `1`: `-2.0e-05 +- 1.5e-04` per unita' di tempo proprio)*. ### **E lo svuotamento di `D4` a sorgente debole non e' un'instabilita' del vuoto: e' una risposta alla materia, da indagare.**
+
 ### `L3` — **LA MITOSI E LO SPAZIO CHE NASCE** — *«prima lo spazio, poi la materia»*
 
 | | |
