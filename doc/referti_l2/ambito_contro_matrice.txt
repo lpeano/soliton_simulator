@@ -1,0 +1,26 @@
+[TIMBRO] _ambito_contro_matrice.py  sha1-BYTE 32cbdb68  committato e pulito
+====================================================================================================
+`ambito` CONTRO LA MATRICE DAL CODICE, CONTATO -- il passo `D` della memoria
+====================================================================================================
+  la matrice: csv/_matrice_dipendenze.dinamica (taglia 16, Lambda_c = 8.00, rapporto 1.000)
+  la tabella: primo_ordine/leggi/leggi.yaml (via _genera.carica)
+  il vocabolario delle variabili: ['psi', 'psi_h', 'phi_h', 'Lambda', 'rho', 'h_int']   -- `cs` NON C'E'
+----------------------------------------------------------------------------------------------------
+  legge                    ambito                             misurate                 NON dichiarate (stretto | largo)
+  CAMM-FASE-VUOTO          psi_h,phi_h,Lambda,rho,h_int       R cs R psi_h W phi_h     R cs | -
+  CAMM-GROVER              psi_h                              R cs W psi_h             R cs | R cs
+  CAMM-GROVER-VUOTO        phi_h                              R cs W phi_h             R cs | R cs
+  CAMM-MATERIA-VUOTO       psi_h,phi_h,Lambda,rho             R cs R phi_h R psi_h W phi_h W psi_h R cs | -
+  CAMM-MONETA-SPIN         psi_h                              R cs W psi_h             R cs | R cs
+  CAMM-SPOSTAMENTO         psi_h                              R cs W psi_h             R cs | R cs
+  CAMM-SPOSTAMENTO-VUOTO   phi_h                              R cs W phi_h             R cs | R cs
+----------------------------------------------------------------------------------------------------
+### CONTATE: 18 dipendenze misurate; NON dichiarate in `ambito`: 7 (stretto), 5 (largo)
+### e le letture di `cs`: 7 leggi su 7 la leggono; in `ambito` c'e' `cs` in 0, c'e' `Lambda` in 2
+----------------------------------------------------------------------------------------------------
+  DEVE RIUSCIRE: R cs di CAMM-SPOSTAMENTO NON dichiarato (stretto e largo)  PASSA
+  DEVE FALLIRE:  W psi_h di CAMM-MATERIA-VUOTO risulta non dichiarato      PASSA (non risulta)
+----------------------------------------------------------------------------------------------------
+### ⛔ OSSERVAZIONE, NON UNA DECISIONE: `leggi.yaml` NON si tocca. Se vada aggiunto
+###   un campo alla tabella (cambierebbe l'impronta) e' una decisione di Luca.
+====================================================================================================

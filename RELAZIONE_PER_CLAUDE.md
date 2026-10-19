@@ -19454,3 +19454,11 @@ Il messaggio di `56dd95b7` dice *«`doc/RIPRESA_2026-10-15.md`: la sezione 49»*
 ### 📌 **NELLA MAPPA, sez.`26`, LA LETTURA DEL GUARDIANO ACCANTO AL CICLO DI PERIODO `2`** *(scritta come sua: una lettura, non una misura)*
 
 L'unico pezzo che muove `Lambda` e' `CAMM-SPOSTAMENTO-VUOTO` *(la matrice di `e989872d`)*, quindi ### **l'anello «`cs` -> `Lambda`» del ciclo al nodo `10` passa per il trasporto del vuoto** -- ### **la stessa auto-dipendenza che esclude `(b)`.** Per la `(c)` la memoria del resto renderebbe esplicita quella dipendenza senza punto fisso, e ### **resta aperta la simmetria nel tempo**, la domanda su cui cade `(b)`.
+
+
+### ✅ **IL PASSO `D`: `ambito` NON DICHIARA NESSUNA DELLE `7` LETTURE DI `cs`** *(un'osservazione: `leggi.yaml` non si tocca)*
+
+`doc/referti_l2/ambito_contro_matrice.txt`, dal blob ### **`32cbdb68`** *(`csv/_ambito_contro_matrice.py` di `3d82a266`, «committato e pulito»; la matrice e' quella di `_matrice_dipendenze.py`, blob `db7b8c5d`)*.
+### **CONTATE: `18` dipendenze misurate; NON dichiarate in `ambito`: `7` (stretto), `5` (largo).** ### **Tutte e `7` sono letture di `cs`** -- ### **`7` leggi su `7` leggono `cs`, e `cs` non e' nemmeno nel vocabolario delle variabili**, quindi ### **nessun `ambito` puo' dichiararlo**. Contando largo *(basta `Lambda`, perche' `cs` e' una sua funzione)* se ne salvano `2`: `CAMM-MATERIA-VUOTO` e `CAMM-FASE-VUOTO`, che hanno `Lambda` in `ambito`.
+### ✅ **I due casi passano:** `R cs` di `CAMM-SPOSTAMENTO` *(`ambito: [psi_h]`)* risulta ### **non dichiarato** -- e' il falso zero che la correzione `n.11` aveva previsto; e `W psi_h` di `CAMM-MATERIA-VUOTO` ### **non** risulta mancante *(il confronto non segna tutto)*.
+### ⛔ **Se vada aggiunto un campo alla tabella** *(cambierebbe l'impronta)* ### **e' una decisione di Luca.**
