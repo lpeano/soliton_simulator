@@ -1,24 +1,30 @@
 # -*- coding: utf-8 -*-
-r"""**LE PROVE DELLA TOLLERANZA DI `Omega` SULLA SCALA DEI DATI** — *`P1`-`P4` e `P6`.*
+r"""**LE PROVE DEL TETTO DI `Omega`** — *`Q2`-`Q7` dell'annotazione del task history.*
 
-> ### ⛔ **Il task history e' `2026-10-19_tolleranza_omega.md`** *(`1c6f4167`)*, che fissa
-> la scala, le prove e cosa ferma ciascuna; il codice e' `7395cd9a`.
+> ### ⛔ **Il task history e' `2026-10-19_tolleranza_omega.md`**, con l'annotazione della
+> strada `(b)` *(`ce37a148`)*: la scala e' ### **il TETTO dei termini di `Omega`**
+> *(`energia_pesata.tetto_omega`, codice `418546c8`)*, e un controllo dentro il codice lo
+> verifica. ### **`Q0` (`M-B1`) e `Q1` (`C1`) girano coi loro script.**
+> ### ⚠ **La versione di `bfb80c6f` provava la scala di `7395cd9a`** *(che NON era un tetto,
+> errore `n.17`)*, e si fermava a meta' perche' ### **non intercettava la non convergenza VERA
+> di `cs`**: questa e' la cura chiesta da Luca.
 
-- `P1` ### **il fatto del guardiano, riprodotto:** rapporto `1`, `dtau 0.5`, `x 0.01`, la
-  prima applicazione dove ### **il criterio di prima** non si sarebbe fermato.
-- `P2` ### **il controllo positivo, che puo' fallire:** `6` bracci di `D4` *(`x 0.01` e `x 1`,
-  ai tre rapporti, `dtau 0.5`, i primi `20` tick)*; per ogni applicazione il punto fisso si
-  itera ### **fino a `GIRI_MAX_OMEGA`** *(una copia DICHIARATA del corpo del ciclo di
-  `applica`, che non si ferma)*, e la STAGNAZIONE e' ### **la mediana degli ultimi `10`
-  scarti.** ### **Passa se `stagnazione / (eps * scala) <= 8` in tutte.**
-- `P3` ### **i due casi sintetici:** uno scarto che si ferma al rumore ### **converge**; un
-  ciclo di periodo `2` di ampiezza `1e-6` ### **ALZA**.
-- `P4` ### **il braccio reale che deve ALZARE:** `applica` a frazione `16` *(`tau = 8`)* sul
+- `Q2` ### **`C5` sui sette `Lambda_c`, NON REGRESSIONE braccio per braccio:** la scena di
+  `C1`, `dtau 0.25`, `8` tick, col criterio di `fab82ed2` *(`energia_pesata` a quel blob,
+  caricato da `git show`)* e con quello di adesso: ### **converge ovunque convergeva prima.**
+- `Q3` ### **il braccio debole di `D4`** *(rapporto `1`, `dtau 0.5`, `x 0.01`, `20` tick)*:
+  ### **converge**, e la stagnazione e' `<= 8` ulp del tetto.
+- `Q4` ### **il controllo positivo**, sui `6` bracci di `D4` *(`x 0.01` e `x 1`, tre rapporti,
+  `dtau 0.5`, `20` tick)*: per ogni applicazione il punto fisso si itera ### **fino a
+  `GIRI_MAX_OMEGA`** *(una copia DICHIARATA del corpo del ciclo di `applica`)*, e la
+  stagnazione *(mediana degli ultimi `10` scarti)* e' ### **`<= 8` ulp del tetto.**
+  ### **La non convergenza VERA di `cs` si intercetta, si registra e si va avanti.**
+- `Q5` ### **i due casi sintetici:** il rumore ### **converge**, un ciclo di periodo `2` di
+  ampiezza `1e-6` ### **ALZA**.
+- `Q6` ### **il braccio reale che deve ALZARE:** `applica` a frazione `16` *(`tau = 8`)* sul
   grumo a `x = 1`.
-- `P6` ### **il braccio `0` con `cs` ACCESO:** la scena di `C1`, `dtau 0.25`, `32` tick; a
-  ogni tick ### **un tick dal MEDESIMO stato** col codice di PRIMA *(`energia_pesata` al blob
-  di `1c6f4167`)* e con quello di adesso: `max|delta phi| <= n_app * tau * max|phi| *
-  EPS_OMEGA * scala`.
+- `Q7` ### **il caso che deve fallire DEL CONTROLLO:** la scala di `7395cd9a` *(solo il nodo)*,
+  messa APPOSTA, ### **fa ALZARE `controlla_tetto`** sulla scena di `C5` a `Lambda_c = 0.8`.
 
 Gira con:  python csv/_tolleranza_omega.py
 """
@@ -39,10 +45,10 @@ for _p in (_QUI, _PO, os.path.join(_PO, "leggi")):
 
 import numpy as np                                             # noqa: E402
 
-PRIMA = "1c6f4167"            # il commit PRIMA del codice (il task history)
+PRIMA = "fab82ed2"            # il criterio di PRIMA, come la decisione di Luca lo nomina
 TICK_P2 = 20
-FRAZIONE_P4 = 16.0
-TICK_P6 = 32
+FRAZIONE_Q6 = 16.0
+TICK_C5 = 8                   # come C5 (_misura_strada_d.informazione_costo)
 EPS = float(np.finfo(float).eps)
 OK = [0, 0]
 
@@ -58,143 +64,6 @@ def _copia(st):
     return {k: (v.copy() if hasattr(v, "copy") else v) for k, v in st.items()}
 
 
-# =====================================================================================
-#   LA DIAGNOSI DI UNA APPLICAZIONE: la copia DICHIARATA del corpo del ciclo
-# =====================================================================================
-def diagnosi(mot, st, par, frazione):
-    """### Lo scarto a ogni giro, ### **fino a `GIRI_MAX_OMEGA`, senza fermarsi.**"""
-    import energia_pesata as EP
-    s = _copia(st)
-    tau = float(mot.dtau[0]) * float(frazione)
-    phi = s["phi_h"]
-    salvo = phi.copy()
-    prec = EP.omega(mot, s, par).copy()
-    seq = []
-    for _g in range(EP.GIRI_MAX_OMEGA):
-        np.multiply(salvo, np.exp(-1j * (prec * (tau * 0.5))[mot.inc.nodo]), out=phi)
-        nuovo = EP.omega(mot, s, par)
-        seq.append(float(np.max(np.abs(nuovo - prec))))
-        prec = nuovo.copy()
-    pn, pa = EP.termini_di_h(mot, s, par)
-    lam = mot.densita_vuoto(s)
-    csp = EP.cs_primo(lam, mot.lambda_c, np.empty(mot.inc.n))
-    dw = EP.d_peso_arco(mot)
-    arco = EP._per_nodo(mot, dw * np.repeat(pa, 2), np.empty(mot.inc.n))
-    return {"seq": seq, "stagnazione": float(np.median(seq[-10:])),
-            "max_omega": float(np.max(np.abs(prec))),
-            "nodo": float(np.max(np.abs(csp * pn))), "arco": float(np.max(np.abs(csp * arco))),
-            "scala": EP.scala_omega(mot, st)}
-
-
-def braccio_p2(rapporto, x):
-    """### Le diagnosi di tutte le applicazioni nei primi `TICK_P2` tick di un braccio."""
-    import _misura_d4 as D4
-    import energia_pesata as EP
-    import statica_protocollo as PR
-    PR.SOSTITUISCI = False
-    lc = rapporto * D4.lambda_medio(PR.DTAU[0])
-    vero = EP.applica
-    diag = []
-
-    def applica(mot, st, par, frazione):
-        if mot.cs is not None and mot.lambda_c is not None:
-            diag.append(diagnosi(mot, st, par, frazione))
-        return vero(mot, st, par, frazione)
-    EP.applica = applica
-    try:
-        PR.corri(PR.DTAU[0], x, "S3", TICK_P2, PR.T_ACCENSIONE[1], (0,), congela="pezzo",
-                 lambda_c=lc)
-    finally:
-        EP.applica = vero
-    return diag
-
-
-def p1_p2():
-    import energia_pesata as EP
-    print("### P1 + P2: la stagnazione dello scarto, contro la scala VECCHIA e la NUOVA")
-    print("  (le prime %d tick di 6 bracci di D4, dtau 0.5; scala vecchia = max|Omega|)"
-          % TICK_P2)
-    peggio_nuova, quanti, falsi_vecchi = 0.0, 0, 0
-    p1 = None
-    print("  %-8s %-6s %-6s %-14s %-14s %-12s %s"
-          % ("rapporto", "x", "app.", "stagn. max", "ulp NUOVA max", "ulp VECCHIA", "alzava?"))
-    for r in (0.1, 1.0, 10.0):
-        for x in (0.01, 1.0):
-            dd = braccio_p2(r, x)
-            un = [d["stagnazione"] / (EPS * d["scala"]) for d in dd]
-            uv = [d["stagnazione"] / (EPS * d["max_omega"]) if d["max_omega"] > 0
-                  else float("inf") for d in dd]
-            falsi = sum(1 for d in dd
-                        if not any(q <= EP.EPS_OMEGA * d["max_omega"] for q in d["seq"]))
-            falsi_vecchi += falsi
-            quanti += len(dd)
-            peggio_nuova = max([peggio_nuova] + un)
-            print("  %-8g %-6g %-6d %-14.3e %-14.2f %-12.2f %d applicazioni su %d"
-                  % (r, x, len(dd), max(d["stagnazione"] for d in dd), max(un), max(uv),
-                     falsi, len(dd)))
-            sys.stdout.flush()
-            if p1 is None and r == 1.0 and x == 0.01:
-                for d in dd:
-                    if not any(q <= EP.EPS_OMEGA * d["max_omega"] for q in d["seq"]):
-                        p1 = d
-                        break
-    print("-" * 100)
-    if p1 is not None:
-        print("### P1: il punto del guardiano (rapporto 1, dtau 0.5, x 0.01), la prima")
-        print("  applicazione in cui il criterio di PRIMA non si sarebbe fermato:")
-        print("     gli ultimi 10 scarti: %s" % "  ".join("%.2e" % q for q in p1["seq"][-10:]))
-        print("     stagnazione (mediana degli ultimi 10) %.3e" % p1["stagnazione"])
-        print("     max|Omega| = %.3e  -> soglia VECCHIA 8 eps max|Omega| = %.3e"
-              % (p1["max_omega"], EP.EPS_OMEGA * p1["max_omega"]))
-        print("     i termini: max|cs' x nodo| = %.3e   max|cs' x arco| = %.3e"
-              % (p1["nodo"], p1["arco"]))
-        print("     la scala NUOVA max|cs'| pi (Lambda + rho) = %.3e -> soglia %.3e"
-              % (p1["scala"], EP.EPS_OMEGA * p1["scala"]))
-    else:
-        print("### P1: ### nessuna applicazione del braccio (1, 0.01) era un falso non-converge")
-    esito("P2 la stagnazione sta entro 8 ulp della scala NUOVA, in tutte le "
-          "applicazioni", peggio_nuova <= 8.0,
-          "%d applicazioni, il peggio %.2f ulp; con la scala VECCHIA alzavano %d"
-          % (quanti, peggio_nuova, falsi_vecchi))
-
-
-def p3():
-    import energia_pesata as EP
-    print("-" * 100)
-    print("### P3: il criterio sui due casi SINTETICI (scala 1)")
-
-    def converge(seq):
-        for q in seq[:EP.GIRI_MAX_OMEGA]:
-            if EP.entro_tolleranza(q, 1.0):
-                return True
-        return False
-    rumore = [max(1e-2 * 0.1 ** k, 1.5 * EPS) for k in range(EP.GIRI_MAX_OMEGA)]
-    ciclo = [2e-6] * EP.GIRI_MAX_OMEGA
-    esito("P3 (i) uno scarto che si ferma al rumore (1.5 ulp) CONVERGE", converge(rumore), "")
-    esito("P3 (ii) un ciclo di periodo 2 di ampiezza 1e-6 ALZA", not converge(ciclo),
-          "lo scarto resta 2e-6 a ogni giro")
-
-
-def p4():
-    import energia_pesata as EP
-    import flussi_parziali as FP
-    import scena_l2 as SC
-    import statica_protocollo as PR
-    print("-" * 100)
-    print("### P4: il braccio REALE che deve ALZARE: applica a frazione %g (tau = %g)"
-          % (FRAZIONE_P4, PR.DTAU[0] * FRAZIONE_P4))
-    inc, mot, st, par, _c, _per = SC.scena(PR.DTAU[0], PR.VUOTO, 0.0, PR.RAGGIO, False, True,
-                                           False, PR.SEME, 1, lati=PR.LATI)
-    PR.metti_grumi(st, inc, PR.LATI, (0,), PR.RAGGIO, PR.VUOTO)
-    FP.accendi_cs(mot, float(np.mean(mot.densita_vuoto(st))), st)
-    try:
-        EP.applica(mot, st, par, FRAZIONE_P4)
-        alza, nota = False, "### ha CONVERGIUTO in %d giri" % mot.giri_omega
-    except AssertionError as e:
-        alza, nota = True, str(e)[:90]
-    esito("P4 una NON convergenza vera continua ad ALZARE", alza, nota)
-
-
 def _vecchio():
     """### `energia_pesata` al blob di `PRIMA`, ### **come modulo a parte.**"""
     src = subprocess.check_output(["git", "show", PRIMA + ":primo_ordine/energia_pesata.py"],
@@ -208,49 +77,223 @@ def _vecchio():
     return m, hashlib.sha1(src).hexdigest()[:8]
 
 
-def p6():
+# =====================================================================================
+#   LA DIAGNOSI DI UNA APPLICAZIONE: la copia DICHIARATA del corpo del ciclo
+# =====================================================================================
+def diagnosi(mot, st, par, frazione):
+    """### Lo scarto a ogni giro, ### **fino a `GIRI_MAX_OMEGA`, senza fermarsi.**"""
+    import energia_pesata as EP
+    tetto = float(np.max(EP.tetto_omega(mot, _copia(st), par)))
+    s = _copia(st)
+    tau = float(mot.dtau[0]) * float(frazione)
+    phi = s["phi_h"]
+    salvo = phi.copy()
+    prec = EP.omega(mot, s, par).copy()
+    seq = []
+    for _g in range(EP.GIRI_MAX_OMEGA):
+        np.multiply(salvo, np.exp(-1j * (prec * (tau * 0.5))[mot.inc.nodo]), out=phi)
+        nuovo = EP.omega(mot, s, par)
+        seq.append(float(np.max(np.abs(nuovo - prec))))
+        prec = nuovo.copy()
+    return {"seq": seq, "stagnazione": float(np.median(seq[-10:])),
+            "max_omega": float(np.max(np.abs(prec))), "tetto": tetto}
+
+
+def braccio_d4(rapporto, x):
+    """### `(diagnosi, chi_alza)` delle applicazioni nei primi `TICK_P2` tick di un braccio."""
+    import _misura_d4 as D4
+    import energia_pesata as EP
+    import statica_protocollo as PR
+    PR.SOSTITUISCI = False
+    lc = rapporto * D4.lambda_medio(PR.DTAU[0])
+    vero = EP.applica
+    diag = []
+
+    def applica(mot, st, par, frazione):
+        if mot.cs is not None and mot.lambda_c is not None:
+            diag.append(diagnosi(mot, st, par, frazione))
+        return vero(mot, st, par, frazione)
+    EP.applica = applica
+    alza = None
+    try:
+        PR.corri(PR.DTAU[0], x, "S3", TICK_P2, PR.T_ACCENSIONE[1], (0,), congela="pezzo",
+                 lambda_c=lc)
+    except AssertionError as e:
+        # ### ⛔ **LA NON CONVERGENZA VERA DI `cs` SI INTERCETTA E SI REGISTRA**: le
+        # ### applicazioni fatte fin li' restano. ### **Un `Omega` o un tetto che alzano,
+        # ### invece, NON si nascondono:** il chiamante li conta come fallimento.
+        alza = str(e)[:100]
+    finally:
+        EP.applica = vero
+    return diag, alza
+
+
+def q3_q4():
+    import energia_pesata as EP
+    print("### Q3 + Q4: la STAGNAZIONE dello scarto, in ulp del TETTO e di max|Omega|")
+    print("  (i primi %d tick di 6 bracci di D4, dtau 0.5)" % TICK_P2)
+    print("  %-8s %-6s %-6s %-12s %-14s %-14s %s"
+          % ("rapporto", "x", "app.", "stagn. max", "ulp TETTO max", "ulp |Omega| max",
+             "alzerebbero con |Omega|"))
+    peggio, quanti, falsi, altri = 0.0, 0, 0, []
+    q3 = None
+    for r in (0.1, 1.0, 10.0):
+        for x in (0.01, 1.0):
+            dd, alza = braccio_d4(r, x)
+            if alza is not None:
+                vera = "punto fisso di `cs`" in alza
+                if not vera:
+                    altri.append((r, x, alza))
+                print("  %-8g %-6g ### il braccio si ferma dopo %d applicazioni: %s"
+                      % (r, x, len(dd), "la NON convergenza VERA di cs, registrata"
+                         if vera else "### " + alza))
+            if not dd:
+                continue
+            ut = [d["stagnazione"] / (EPS * d["tetto"]) for d in dd]
+            uo = [d["stagnazione"] / (EPS * d["max_omega"]) if d["max_omega"] > 0
+                  else float("inf") for d in dd]
+            f = sum(1 for d in dd
+                    if not any(q <= EP.EPS_OMEGA * d["max_omega"] for q in d["seq"]))
+            falsi += f
+            quanti += len(dd)
+            peggio = max([peggio] + ut)
+            print("  %-8g %-6g %-6d %-12.3e %-14.2f %-14.2f %d su %d"
+                  % (r, x, len(dd), max(d["stagnazione"] for d in dd), max(ut), max(uo),
+                     f, len(dd)))
+            sys.stdout.flush()
+            if r == 1.0 and x == 0.01:
+                q3 = (dd, alza)
+    print("-" * 100)
+    dd, alza = q3
+    u3 = [d["stagnazione"] / (EPS * d["tetto"]) for d in dd]
+    print("### Q3: il braccio debole (rapporto 1, dtau 0.5, x 0.01): %d applicazioni; la prima:"
+          % len(dd))
+    print("     gli ultimi 10 scarti: %s" % "  ".join("%.2e" % q for q in dd[0]["seq"][-10:]))
+    print("     max|Omega| = %.3e   il TETTO (max) = %.3e   max|Omega|/tetto = %.3f"
+          % (dd[0]["max_omega"], dd[0]["tetto"], dd[0]["max_omega"] / dd[0]["tetto"]))
+    esito("Q3 il braccio debole CONVERGE, stagnazione <= 8 ulp del tetto",
+          alza is None and max(u3) <= 8.0,
+          "il peggio %.2f ulp su %d applicazioni%s" % (max(u3), len(dd),
+                                                      "" if alza is None else "; ### " + alza))
+    esito("Q4 la stagnazione sta entro 8 ulp del TETTO, in tutte le applicazioni",
+          peggio <= 8.0 and not altri,
+          "%d applicazioni, il peggio %.2f ulp; con max|Omega| ne alzerebbero %d; altri"
+          " che alzano: %d" % (quanti, peggio, falsi, len(altri)))
+
+
+def q5():
+    import energia_pesata as EP
+    print("-" * 100)
+    print("### Q5: il criterio sui due casi SINTETICI (scala 1)")
+
+    def converge(seq):
+        return any(EP.entro_tolleranza(q, 1.0) for q in seq[:EP.GIRI_MAX_OMEGA])
+    rumore = [max(1e-2 * 0.1 ** k, 1.5 * EPS) for k in range(EP.GIRI_MAX_OMEGA)]
+    ciclo = [2e-6] * EP.GIRI_MAX_OMEGA
+    esito("Q5 (i) uno scarto che si ferma al rumore (1.5 ulp) CONVERGE", converge(rumore), "")
+    esito("Q5 (ii) un ciclo di periodo 2 di ampiezza 1e-6 ALZA", not converge(ciclo),
+          "lo scarto resta 2e-6 a ogni giro")
+
+
+def q6():
+    import energia_pesata as EP
+    import flussi_parziali as FP
+    import scena_l2 as SC
+    import statica_protocollo as PR
+    print("-" * 100)
+    print("### Q6: il braccio REALE che deve ALZARE: applica a frazione %g (tau = %g)"
+          % (FRAZIONE_Q6, PR.DTAU[0] * FRAZIONE_Q6))
+    inc, mot, st, par, _c, _per = SC.scena(PR.DTAU[0], PR.VUOTO, 0.0, PR.RAGGIO, False, True,
+                                           False, PR.SEME, 1, lati=PR.LATI)
+    PR.metti_grumi(st, inc, PR.LATI, (0,), PR.RAGGIO, PR.VUOTO)
+    FP.accendi_cs(mot, float(np.mean(mot.densita_vuoto(st))), st)
+    try:
+        EP.applica(mot, st, par, FRAZIONE_Q6)
+        alza, nota = False, "### ha CONVERGIUTO in %d giri" % mot.giri_omega
+    except AssertionError as e:
+        alza, nota = "NON CONVERGE" in str(e), str(e)[:90]
+    esito("Q6 una NON convergenza vera continua ad ALZARE", alza, nota)
+
+
+def _scena_c5(lc):
     import _misura_hw as HW
     import _misura_mb2 as MB2
     import deriva as DV
-    import energia_pesata as EP
     import flussi_parziali as FP
-    import tick as TK
-    print("-" * 100)
-    vecchio, blob = _vecchio()
-    print("### P6: il braccio 0 con cs ACCESO -- la scena di C1, dtau 0.25, %d tick; a ogni"
-          " tick UN tick dal medesimo stato col codice di PRIMA (energia_pesata a %s, sha1"
-          " %s) e con quello di adesso" % (TICK_P6, PRIMA, blob))
-    dtau = 0.25
-    inc, mot, st, par = DV.scena(MB2.NN, MB2.SEME, dtau, norma=MB2.NORMA,
-                                 vuoto_modulo=MB2.VUOTO_MODULO, su2=MB2.SU2)
+    _inc, mot, st, par = DV.scena(MB2.NN, MB2.SEME, 0.25, norma=MB2.NORMA,
+                                  vuoto_modulo=MB2.VUOTO_MODULO, su2=MB2.SU2)
     st["psi_h"][...], st["phi_h"][...] = HW.stato_non_uniforme()
-    lc = float(np.mean(mot.densita_vuoto(st)))
     FP.accendi_cs(mot, lc, st)
-    vero = EP.applica
-    conto = {"n": 0, "scala": 0.0}
+    return mot, st, par
 
-    def nuovo(m, s, p, f):
-        conto["n"] += 1
-        conto["scala"] = max(conto["scala"], EP.scala_omega(m, s))
-        return vero(m, s, p, f)
-    peggio = 0.0
+
+def _corsa_c5(lc, applica):
+    """### `None` se gli `8` tick convergono, se no il messaggio di chi ha alzato."""
+    import energia_pesata as EP
+    import tick as TK
+    mot, st, par = _scena_c5(lc)
+    vero = EP.applica
+    EP.applica = applica
     try:
-        for _t in range(TICK_P6):
-            pre = _copia(st)
-            EP.applica = vecchio.applica
-            TK.tick_con_cs(pre, mot, par, lc, ())
-            EP.applica = nuovo
-            conto["n"], conto["scala"] = 0, 0.0
+        for _t in range(TICK_C5):
             TK.tick_con_cs(st, mot, par, lc, ())
-            d = float(np.max(np.abs(st["phi_h"] - pre["phi_h"])))
-            d = max(d, float(np.max(np.abs(st["psi_h"] - pre["psi_h"]))))
-            limite = (conto["n"] * dtau * 0.5 * float(np.max(np.abs(st["phi_h"])))
-                      * EP.EPS_OMEGA * conto["scala"])
-            peggio = max(peggio, d / limite if limite > 0 else (0.0 if d == 0 else 1e300))
+        return None
+    except AssertionError as e:
+        return str(e)[:90]
     finally:
         EP.applica = vero
-    esito("P6 con cs acceso il passo resta entro la tolleranza nuova, a ogni tick",
-          peggio <= 1.0, "il peggio: %.3f volte il limite" % peggio)
+
+
+def q2():
+    import _collauda_cs_centro as D2
+    import energia_pesata as EP
+    print("-" * 100)
+    vecchio, blob = _vecchio()
+    print("### Q2: C5 sui sette Lambda_c, NON REGRESSIONE -- il criterio di %s (energia_pesata"
+          " sha1 %s) contro quello di adesso, %d tick per braccio" % (PRIMA, blob, TICK_C5))
+    regressi = []
+    for lc in D2.SPAZZATA:
+        a = _corsa_c5(lc, vecchio.applica)
+        b = _corsa_c5(lc, EP.applica)
+        if a is None and b is not None:
+            regressi.append(lc)
+        print("  Lambda_c %-8g  PRIMA: %-10s  ADESSO: %s"
+              % (lc, "converge" if a is None else "alza", "converge" if b is None
+                 else "### ALZA: " + b))
+        sys.stdout.flush()
+    esito("Q2 converge ovunque convergeva col criterio di PRIMA", not regressi,
+          "regressioni: %s" % (regressi or "nessuna"))
+
+
+def q7():
+    import energia_pesata as EP
+    print("-" * 100)
+    print("### Q7: il caso che deve fallire DEL CONTROLLO -- la scala di 7395cd9a (solo il"
+          " nodo), messa APPOSTA, sulla scena di C5 a Lambda_c 0.8")
+    vero_tetto, vero_contr = EP.tetto_omega, EP.controlla_tetto
+    scattato = {"si": False}
+
+    def tetto_vecchio(mot, st, par):
+        lam = EP._per_nodo(mot, np.abs(st["phi_h"]) ** 2, np.empty(mot.inc.n))
+        psi = st["psi_h"]
+        rho = EP._per_nodo(mot, np.abs(psi[:, 0]) ** 2 + np.abs(psi[:, 1]) ** 2,
+                           np.empty(mot.inc.n))
+        csp = EP.cs_primo(lam, mot.lambda_c, np.empty(mot.inc.n))
+        return np.full(mot.inc.n, float(np.max(np.abs(csp) * EP.OMEGA_H * (lam + rho))))
+
+    def controlla(om, tt, dove):
+        try:
+            vero_contr(om, tt, dove)
+        except AssertionError:
+            scattato["si"] = True
+            raise
+    EP.tetto_omega, EP.controlla_tetto = tetto_vecchio, controlla
+    try:
+        msg = _corsa_c5(0.8, EP.applica)
+    finally:
+        EP.tetto_omega, EP.controlla_tetto = vero_tetto, vero_contr
+    esito("Q7 con la scala VECCHIA il controllo del tetto ALZA", scattato["si"],
+          msg or "### nessuno ha alzato")
 
 
 def main(argv):
@@ -258,15 +301,16 @@ def main(argv):
     _presidio.avvia(__file__)
     import energia_pesata as EP
     print("=" * 100)
-    print("LE PROVE DELLA TOLLERANZA DI `Omega` SULLA SCALA DEI DATI -- P1-P4 e P6")
+    print("LE PROVE DEL TETTO DI `Omega` -- Q2-Q7 (Q0 e Q1 coi loro script)")
     print("=" * 100)
-    print("  EPS_OMEGA = 8 eps = %.3e   GIRI_MAX_OMEGA = %d   la scala: max|cs'| pi"
-          " (Lambda + rho)" % (EP.EPS_OMEGA, EP.GIRI_MAX_OMEGA))
+    print("  EPS_OMEGA = 8 eps = %.3e   GIRI_MAX_OMEGA = %d   la scala: il TETTO di Omega"
+          " (energia_pesata.tetto_omega)" % (EP.EPS_OMEGA, EP.GIRI_MAX_OMEGA))
     print("-" * 100)
-    p1_p2()
-    p3()
-    p4()
-    p6()
+    q2()
+    q3_q4()
+    q5()
+    q6()
+    q7()
     print("=" * 100)
     print("LE PROVE: %d su %d" % (OK[0], OK[1]))
     print("=" * 100)
