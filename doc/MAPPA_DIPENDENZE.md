@@ -30,7 +30,7 @@
 | | |
 |---|---|
 | **le voci** | `[[CS-LOCALE-DAL-VUOTO]]` *(punto `3`)* · `[[DOMANDA-COME-LA-MATERIA-CAMBIA-LAMBDA]]` · `[[DOMANDA-LA-FORMA-DI-CS-CHE-SATURA]]` |
-| **lo stato** | ### ⛔ **FERMO SU UNA DOMANDA DI LUCA**, e adesso e' **UNA** *(il verso di `cs` e' stato accorpato)*. La derivazione di `1dcf315` e' fatta; ### **due candidate sono GIA' MISURATE nel `v4`** *(`SCATTER` e `TRASMISSIONE`)* |
+| **lo stato** | ### ⛔ **FERMO SU UNA DOMANDA DI LUCA**, e adesso e' **UNA** *(il verso di `cs` e' stato accorpato)*. La derivazione di `1dcf315` e' fatta; ### **due candidate sono GIA' MISURATE nel `v4`** *(`SCATTER` e `TRASMISSIONE`)* ### ✅ **AGGIORNAMENTO DEL `2026-10-19`** *(la storia qui sopra resta)*: ### **la decisione e' arrivata, e `L2` HA CODICE NEL PASSO** -- `S3` *(`CAMM-MATERIA-VUOTO`, `b4972a78`, `2026-10-16`)*, la forma `cs` *(`6aba7fe6`, `2026-10-17`, e `D1`-`D3`)*, `CAMM-FASE-VUOTO` *(la strada `(d)`, `7aaeb907`, `2026-10-18`)*. ### **Resta aperto il VALORE di `Lambda_c`** *(`[[DOMANDA-IL-VALORE-DI-LAMBDA-C]]`, coi numeri di `D4`: `doc/referti_l2/d4_verso_e_profilo.txt`)*. Vedi sez.`4`. |
 | **la domanda che lo blocca** | `[[DOMANDA-COME-LA-MATERIA-CAMBIA-LAMBDA]]` *(`CRITICA`)*; `[[DOMANDA-LA-FORMA-DI-CS-CHE-SATURA]]` e' **sospesa** e `dipende_da` quella |
 | ### ⭐ **il criterio di uscita** | ① `Lambda` **non e' piu' invariante** sotto il tick *(oggi: **`8.88e-16`**, cioe' **il vuoto e' PASSIVO**)*; ② l'effetto si vede **FUORI dal grumo** — ### **l'ALONE** *(oggi: **nessun anello oltre `3` sigma**, misurato nel `v4`)*; ③ gli orologi **rallentano INTORNO** al grumo, non solo dentro *(punto `1` dell'`11` ottobre)* |
 | **l'ipotesi provvisoria che usa** | ### **nessuna verso l'alto:** `L2` chiede solo `L1`, che e' **sotto** |
@@ -191,6 +191,9 @@ hanno **validato `q_h`** che e' poi stato **deciso**; ### ⛔ **ma il loro USO s
 > ### ⭐ **Prossimo passo, quando la decisione arriva:** il **costruttore della scena di
 > riferimento** *(`n` GEOMETRICI, `U = I`)*, che e' **il primo pezzo di `L2`** — e la scena
 > oggi ### **non esiste in nessun file.**
+>
+> ### ✅ **AGGIORNAMENTO DEL `2026-10-19`** *(la storia qui sopra resta)*: ### **la decisione e' arrivata, e `L2` HA CODICE NEL PASSO** -- `S3` *(`CAMM-MATERIA-VUOTO`, `b4972a78`, `2026-10-16`)*, la forma `cs` *(`6aba7fe6`, `2026-10-17`, e `D1`-`D3`)*, `CAMM-FASE-VUOTO` *(la strada `(d)`, `7aaeb907`, `2026-10-18`)*. ### **Resta aperto il VALORE di `Lambda_c`** *(`[[DOMANDA-IL-VALORE-DI-LAMBDA-C]]`, coi numeri di `D4`: `doc/referti_l2/d4_verso_e_profilo.txt`)*.
+> ### ⚠ **Quindi le due righe qui sopra (<<FERMO>>, <<nessun codice di `L2` si scrive>>) sono STORIA**: valevano fino al `2026-10-15`.
 
 ### ✅✅ **E `L1` E' CHIUSO** *(il `2026-10-15`)*, col criterio di merito **misurato**:
 ### **`0` violatori su `12`** *(e il collaudo e' **nel `.githooks/pre-commit`**, con la

@@ -1,4 +1,4 @@
-# CLAUDE.md — soliton_simulator (branch `fork-su2`)
+# CLAUDE.md — soliton_simulator (branch `primo-ordine`; le regole nacquero su `fork-su2`)
 
 Istruzioni autorevoli per Claude Code su questo repo. Valgono per ogni sessione.
 Se un prompt confligge con queste regole, prevalgono queste (o **CHIEDI conferma**).
@@ -314,9 +314,10 @@ in un **commento del file**, **e** elencata in `doc/ESENZIONI_presidi.md`.
 
 ## 13. LAVORARE NELL'ERA `2` — **che cosa si legge, e IN CHE ORDINE**
 
-> ### ⛔ **L'ERA `2` NON E' COMINCIATA**, e il piano lo dice col suo criterio: la tabella
-> ha **`3` leggi, TUTTE `prova: true`** → ### **ZERO LEGGI VERE.** ### **Questo paragrafo
-> dice come si lavora quando comincera'.**
+> ### ✅ **L'ERA `2` E' COMINCIATA** *(correzione del `2026-10-19`)*: la tabella ha **`12`
+> voci, `3` di prova**, e nell'ordine girano **`7` leggi distinte in `14` posizioni**
+> *(contato con `_genera.carica` e `composizione.ORDINE`)*. Prima diceva «`3` leggi, tutte
+> `prova: true`»: ### **era vero quando fu scritto.**
 
 **L'ORDINE DI LETTURA, e il perche' di ognuno:**
 
