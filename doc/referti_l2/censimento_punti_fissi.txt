@@ -1,4 +1,4 @@
-[TIMBRO] _censimento_punti_fissi.py  sha1-BYTE 8267c8e9  committato e pulito
+[TIMBRO] _censimento_punti_fissi.py  sha1-BYTE d65655fc  committato e pulito
 ====================================================================================================
 I PUNTI FISSI DEL PASSO, CONTATI CON L'AST -- il passo `A` della memoria
 ====================================================================================================
@@ -17,7 +17,7 @@ I PUNTI FISSI DEL PASSO, CONTATI CON L'AST -- il passo `A` della memoria
      primo_ordine/flussi_parziali.py    hop_phi_punto_medio    508    EPS_PUNTO_FISSO    GIRI_MAX_PESO    si
      primo_ordine/passo.py              mezzo_implicito        201    -                  -                no
      primo_ordine/tick.py               cs_al_centro           179    EPS_CS             GIRI_MAX         si
-     ### il percorso del tick = la chiusura degli import di tick e motore: 10 file
+     ### il percorso del tick = la chiusura degli import di tick e motore: 9 file
      ### NEL PERCORSO DEL TICK: 3 punti fissi su 4
      ### ⚠ <<nel percorso>> vuol dire RAGGIUNGIBILE dagli import, non ACCESO:
      ###   un ramo spento e' nel percorso. Acceso o spento: il passo `B`.

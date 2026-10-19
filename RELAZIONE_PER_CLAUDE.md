@@ -19361,3 +19361,12 @@ Il messaggio di `56dd95b7` dice *«`doc/RIPRESA_2026-10-15.md`: la sezione 49»*
 
 ### ⛔ **ANNOTAZIONE ALLA RIGA DI `bde7a07a` «E LA PREVISIONE `3` ERA SBAGLIATA PER DIFETTO»** *(si annota, non si riscrive)*: ### **la previsione del task history va letta sul PERCORSO DEL TICK**, perche' il mandato chiede i punti fissi **del passo** -- e la' sono ### **`3`, come previsto.** ### **La previsione era GIUSTA sul suo perimetro**; ero io a leggerla sul nucleo intero, dove c'e' anche `mezzo_implicito`, che ### **non e' nel tick della camminata.** *(Integrazione del guardiano, punto `2`.)*
 ### 📌 **Quanti dei `3` sono ACCESI col passo di default, e quanto costano: il passo `B`.**
+
+
+### ⛔ **IL PERCORSO DEL TICK E' DI `9` FILE, NON `10`: UN ERRORE MIO NEL PASSO `A`, TROVATO DAL GIRO CORTO DEL PASSO `B`**
+
+`chiusura_import` restituiva anche `primo_ordine/_presidio.py`, che **non esiste**: la mappa elenca `_presidio` *(il timbro del blob, in `csv/`)*, e `_rami_era2.nucleo` lo filtra -- ### **io non avevo copiato il filtro.** Il giro corto del passo `B` legge i byte dei file del percorso per dichiararne lo `sha1`, ed e' morto su quel file.
+### ✅ **Curato in `b5730a7a`, e il referto e' rifatto** dal blob ### **`d65655fc`** *(«committato e pulito»)*: ### **`9` file; `3` punti fissi su `4` nel percorso, INVARIATO**, perche' l'appartenenza si verifica sui file trovati, che esistono tutti.
+### ⚠ **ANNOTAZIONE al paragrafo di `ce338b9c`** *(si annota, non si riscrive)*: dove dice *«ricavata dagli import di `tick.py` e `motore.py` (`10` file)»*, ### **i file sono `9`.**
+
+### ⛔ **E UN COMMIT RIFIUTATO, CON UNA CORSA CHE NON DOVEVA PARTIRE:** il primo tentativo di `b5730a7a` e' stato ### **rifiutato** da `H-NON-TRACCIATI` *(lo script del passo `B` non era ancora tracciato)*, ma ### **il mio comando ha fatto girare il censimento lo stesso**, perche' un `grep` dopo il commit ### **nascondeva il suo codice d'uscita.** Il referto di quella corsa ### **portava il timbro «MODIFICATO rispetto a HEAD»** e ### **l'ho scartato** *(`git checkout` del file)*. ### **Da adesso la corsa parte solo se il commit e' riuscito, e se il file e' pulito.**
