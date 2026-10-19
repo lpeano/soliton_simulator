@@ -69,6 +69,48 @@ una non convergenza VERA, non rumore.**
 | `P6` | ### **il braccio `0`, `cs` ACCESO:** sulla scena di `C1` *(strada `(d)`, `dtau 0.25`)*, per `32` tick, ### **un tick dal MEDESIMO stato** col codice di prima e con quello nuovo | ### **`max|delta phi|` per tick `<= n_app * tau * max|phi| * EPS_OMEGA * scala`** *(`n_app` le applicazioni di `applica` nel tick, contate)* | oltre: STOP |
 | `P7` | ### **`C1` rifatto** | ### **`2.091`** con le sue cifre, e `0.044`, `0.012` | un numero diverso: STOP |
 
+**ANNOTAZIONE DEL 2026-10-19 SERA, PRIMA DEL CODICE (decisione di Luca sullo STOP di `a03494ab`: strada `(b)`).** *(Si annota, non si riscrive.)* ### **La scala del par.`1` NON era un tetto di `Omega`**: il guardiano misura, sulla scena di `C5` a `Lambda_c = 0.8`, ### **`max|Omega|/scala` fino a `3.24`** *(minimo `0.68`)*. ### **Errore `n.17` del guardiano** *(aveva proposto `cs' Lambda` senza verificare che fosse un tetto)* -- ### **e mio, che l'ho dichiarata senza verificarlo.**
+
+### **LA SCALA NUOVA, ricavata dalla formula di `omega()` e `termini_di_h()`, e scritta qui prima del codice:**
+
+```
+Omega_k = cs'_k * ( per_nodo_k + somma_{h in k} dw_h * per_arco_{a(h)} )
+
+per_nodo_k = -pi (nrm_psi - pu_psi) - pi (nrm_phi - pu_phi) + eps h_k + N_k
+per_arco_a = -pi (arco_psi_a + arco_phi_a)
+  arco_psi = (nrm_a - 2 Re incro)/2          arco_phi = (|f0|^2 + |f1|^2 - 2 Re(f0* f1))/2
+
+TETTO, termine per termine (la SOMMA DEI VALORI ASSOLUTI):
+tetto_nodo_k = pi (nrm_psi + pu_psi + nrm_phi + pu_phi) + |eps| |h_k| + |N_k|
+tetto_arco_a = pi ( (nrm_a + 2 |incro|)/2 + (|f0|^2 + |f1|^2 + 2 |f0| |f1|)/2 )
+scala_k      = |cs'_k| * ( tetto_nodo_k + somma_{h in k} |dw_h| * tetto_arco_{a(h)} )
+
+=> |Omega_k| <= scala_k PER COSTRUZIONE (disuguaglianza triangolare), coi VICINI dentro
+   (le norme sull'arco) e i pesi dw.
+converge <=> scarto <= EPS_OMEGA * max_k scala_k          EPS_OMEGA = 8 eps, INVARIATO
+```
+
+### ⚠ **UNA SOLA FONTE:** i termini e il loro tetto ### **si calcolano nella STESSA funzione**, dai MEDESIMI pezzi -- `termini_di_h` resta e ### **restituisce i numeri di prima AL BIT** *(le stesse operazioni nello stesso ordine)*.
+### ⛔ **IL CONTROLLO DENTRO IL CODICE:** a ogni chiamata di `applica` si verifica ### **`max_k (|Omega_k| - scala_k) <= 0`**, sull'`Omega` di partenza e su quello finale; ### **se no ALZA, con un messaggio che lo dice.** ### **E' il controllo che avrebbe preso l'errore `n.17`.** ### ⚠ **Un limite che dichiaro:** se tutti i termini di un nodo avessero lo STESSO segno, `|Omega_k|` e `scala_k` sarebbero uguali in aritmetica esatta, e l'arrotondamento potrebbe metterli in ordine opposto di un ulp -- ### **se succede, il controllo alza e lo relaziono, non lo allargo.**
+
+### **IL CASO CHE DEVE FALLIRE DEL CONTROLLO:** la scala di `7395cd9a` *(solo il nodo)*, messa APPOSTA in memoria, ### **deve far ALZARE il controllo** sulla scena di `C5` a `Lambda_c = 0.8`.
+
+### **LE PROVE, e cosa ferma:**
+
+| | la prova | il criterio |
+|---|---|---|
+| `Q0` | ### **braccio `0`:** `M-B1 --contro` il commit prima del codice, `cs` spento | ### **AL BIT**, distanza del passo intero `0`, due scene |
+| `Q1` | ### **`C1`** | ### **`2.091`**, `0.044`, `0.012` |
+| `Q2` | ### **`C5` sui sette `Lambda_c`, NON REGRESSIONE contata braccio per braccio:** `8` tick per braccio *(come `C5`)*, col criterio di `fab82ed2` e con quello nuovo | ### **converge OVUNQUE convergeva col criterio di `fab82ed2`** |
+| `Q3` | ### **il braccio debole di `D4`** *(rapporto `1`, `dtau 0.5`, `x 0.01`)*, i primi `20` tick | ### **converge**, e lo scarto di STAGNAZIONE *(la diagnosi di `P2`)* si riporta ### **in ulp della scala nuova**, `<= 8` |
+| `Q4` | ### **il controllo positivo di `P2`**, sui `6` bracci *(con la non convergenza VERA di `cs` intercettata e registrata)* | ### **`<= 8` ulp della scala nuova** in tutte le applicazioni |
+| `Q5` | ### **le due successioni sintetiche** | il rumore ### **converge**, il ciclo di periodo `2` di ampiezza `1e-6` ### **ALZA** |
+| `Q6` | ### **il braccio reale che deve alzare** *(frazione `16`)* | ### **ALZA** |
+| `Q7` | ### **il caso che deve fallire del controllo** *(la scala vecchia, apposta)* | ### **ALZA il controllo** |
+
+### ⚠ **`P6` del par.`2`** *(il tick dal medesimo stato, entro la tolleranza)* ### **non si rifa'**: la non regressione di `C5` *(`Q2`)* e' cio' che il mandato chiede al suo posto.
+### ⛔ **SE UNA PROVA CADE: commit dello stato e STOP.** ### **Solo se passano tutte, `D4` rifatto intero** dal blob nuovo *(`LINEARE` SOSPESO)*.
+
 ## 3. TODO
 
 1. il codice *(`energia_pesata`: `scala_omega`, `entro_tolleranza`, `applica`)*, un commit.
