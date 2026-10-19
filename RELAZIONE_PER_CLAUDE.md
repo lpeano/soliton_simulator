@@ -19346,3 +19346,18 @@ Il messaggio di `56dd95b7` dice *«`doc/RIPRESA_2026-10-15.md`: la sezione 49»*
 
 ### ⛔ **ERRORE `n.13` DEL GUARDIANO, REGISTRATO:** la verifica di `56dd95b7` **non ha visto** che il messaggio dichiarava un file *(`doc/RIPRESA_2026-10-15.md`, «la sezione 49»)* **non presente nel commit**. ### **D'ora in poi il guardiano controlla che ogni file nominato come cambiato nel TESTO del messaggio sia nel diff** -- non solo la lista FILE CAMBIATI, che `H-FILE` gia' confronta.
 ### 📌 **E le altre tre cose dell'integrazione:** la riga sulla RIPRESA e' nella sezione della rimozione in coda; il ciclo **piu' interno** e la colonna **«nel percorso del tick»** vanno nello strumento **prima** di rifare la corsa -- ### **il primo andava insieme alla cura (`82b92eba`), e arriva nel commit subito dopo.**
+
+
+### ✅ **IL PASSO `A` RIFATTO: `4` PUNTI FISSI NEL NUCLEO, `3` NEL PERCORSO DEL TICK**
+
+`doc/referti_l2/censimento_punti_fissi.txt`, rifatto dal blob ### **`8267c8e9`** *(sha1-BYTE, `csv/_censimento_punti_fissi.py` di `6dbc6a3f`, timbrato «committato e pulito»)*, con ### **le due cure** *(il confronto di ORDINE, `82b92eba`; il ciclo PIU' INTERNO, `6dbc6a3f`)* e ### **la colonna «nel percorso del tick»**, ricavata dagli import di `tick.py` e `motore.py` *(`10` file)*. ### **I tre controlli sintetici passano** *(`1`; l'annidato `1` e non `2`; la ricerca `0`)*, e ### **il caso che deve riuscire PASSA.**
+
+| | file : funzione | nel percorso del tick |
+|---|---|---|
+| `1` | `tick.py : cs_al_centro` | ### **si** |
+| `2` | `energia_pesata.py : applica` | ### **si** |
+| `3` | `flussi_parziali.py : hop_phi_punto_medio` | ### **si** *(raggiungibile, SPENTO, in coda per la rimozione)* |
+| `4` | `passo.py : mezzo_implicito` | ### **no** -- la via di `H`, che `tick.py` e `motore.py` non importano |
+
+### ⛔ **ANNOTAZIONE ALLA RIGA DI `bde7a07a` «E LA PREVISIONE `3` ERA SBAGLIATA PER DIFETTO»** *(si annota, non si riscrive)*: ### **la previsione del task history va letta sul PERCORSO DEL TICK**, perche' il mandato chiede i punti fissi **del passo** -- e la' sono ### **`3`, come previsto.** ### **La previsione era GIUSTA sul suo perimetro**; ero io a leggerla sul nucleo intero, dove c'e' anche `mezzo_implicito`, che ### **non e' nel tick della camminata.** *(Integrazione del guardiano, punto `2`.)*
+### 📌 **Quanti dei `3` sono ACCESI col passo di default, e quanto costano: il passo `B`.**

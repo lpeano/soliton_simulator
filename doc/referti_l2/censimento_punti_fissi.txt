@@ -1,29 +1,32 @@
-[TIMBRO] _censimento_punti_fissi.py  sha1-BYTE 19c329c5  committato e pulito
+[TIMBRO] _censimento_punti_fissi.py  sha1-BYTE 8267c8e9  committato e pulito
 ====================================================================================================
 I PUNTI FISSI DEL PASSO, CONTATI CON L'AST -- il passo `A` della memoria
 ====================================================================================================
-  la definizione: un ciclo con un `if` di CONFRONTO che contiene `break`/`return`
+  la definizione: un ciclo con un `if` di CONFRONTO DI ORDINE che contiene `break`/`return`
 ----------------------------------------------------------------------------------------------------
-### I DUE CONTROLLI SUL CODICE SINTETICO
-     deve essere contato      1   PASSA
-     NON deve essere contato  0   PASSA
+### I TRE CONTROLLI SUL CODICE SINTETICO
+     deve essere contato                     1   PASSA
+     un punto fisso dentro un ciclo: 1, NON 2 1   PASSA
+     NON deve essere contato (e una ricerca) 0   PASSA
 ----------------------------------------------------------------------------------------------------
 ### IL NUCLEO (chiusura degli import dalle radici tick passo motore materia_vuoto saturazione): 12 file
 ----------------------------------------------------------------------------------------------------
-### I PUNTI FISSI TROVATI, e sono 6 (su 32 cicli del nucleo):
-     file                               funzione               riga   tolleranza                     tetto dei giri
-     primo_ordine/energia_pesata.py     applica                319    EPS_OMEGA                      GIRI_MAX_OMEGA
-     primo_ordine/flussi_parziali.py    hop_phi_punto_medio    508    EPS_PUNTO_FISSO                GIRI_MAX_PESO
-     primo_ordine/passo.py              strati                 109    -                              -
-     primo_ordine/passo.py              strati                 111    -                              -
-     primo_ordine/passo.py              mezzo_implicito        201    -                              -
-     primo_ordine/tick.py               cs_al_centro           179    EPS_CS                         GIRI_MAX
+### I PUNTI FISSI TROVATI, e sono 4 (su 32 cicli del nucleo):
+     file                               funzione               riga   tolleranza         tetto dei giri   nel percorso del tick
+     primo_ordine/energia_pesata.py     applica                319    EPS_OMEGA          GIRI_MAX_OMEGA   si
+     primo_ordine/flussi_parziali.py    hop_phi_punto_medio    508    EPS_PUNTO_FISSO    GIRI_MAX_PESO    si
+     primo_ordine/passo.py              mezzo_implicito        201    -                  -                no
+     primo_ordine/tick.py               cs_al_centro           179    EPS_CS             GIRI_MAX         si
+     ### il percorso del tick = la chiusura degli import di tick e motore: 10 file
+     ### NEL PERCORSO DEL TICK: 3 punti fissi su 4
+     ### ⚠ <<nel percorso>> vuol dire RAGGIUNGIBILE dagli import, non ACCESO:
+     ###   un ramo spento e' nel percorso. Acceso o spento: il passo `B`.
 ----------------------------------------------------------------------------------------------------
 ### IL CASO CHE DEVE RIUSCIRE: >= 3, e i 3 previsti per nome
      primo_ordine/tick.py               cs_al_centro           trovato
      primo_ordine/energia_pesata.py     applica                trovato
      primo_ordine/flussi_parziali.py    hop_phi_punto_medio    trovato
-     e quelli NON previsti: primo_ordine/passo.py:mezzo_implicito, primo_ordine/passo.py:strati
+     e quelli NON previsti: primo_ordine/passo.py:mezzo_implicito
      PASSA
 ----------------------------------------------------------------------------------------------------
 ### ⚠ QUESTO E' IL CENSIMENTO STATICO: dice DOVE sono, non se GIRANO ne'
