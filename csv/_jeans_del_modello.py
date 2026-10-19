@@ -1,23 +1,32 @@
 # -*- coding: utf-8 -*-
-r"""**IL TEST DI JEANS DEL MODELLO, CON MATERIA UNIFORME DINAMICA** — *una misura.*
+r"""**IL TEST DI JEANS DEL MODELLO: I BRACCI DIAGNOSTICI** — *una misura, nessun codice di fisica.*
 
-> ### ⛔ **Il task history e' `2026-10-19_jeans_del_modello.md`** *(`5f2a39e5`)*: la
-> materia uniforme, le prove `M1`-`M4`, i bracci `J1`-`J4`, la misura e i criteri ### **sono
-> fissati la', prima di questa corsa.** ### **`LINEARE` e `Lambda_c` restano FERMI.**
+> ### ⛔ **Il task history e' `2026-10-19_jeans_del_modello.md`** *(`5f2a39e5`)*, con
+> l'annotazione della decisione di Luca delle `21:45` *(`6f5299e2`)*: ### **`M1` e'
+> l'equilibrio al tick `0`**, ### **le barre del fit usano la `t` di Student coi gradi di
+> liberta' veri**, e ### **i bracci sono diagnostici, dal SOLO rumore d'arrotondamento.**
+> ### **`LINEARE` e `Lambda_c` restano FERMI.**
+> ### ⚠ **La versione di `d85360ab` aveva `M1` sbagliata** *(errore `n.18`: «resta uniforme
+> per tutta la corsa» e' la domanda, non una precondizione)* e le barre gaussiane.
 
 ## ⭐ LA MATERIA UNIFORME
 
-### **Lo stato invariante per traslazione:** su ogni estremita' lo spinore ALLINEATO col suo
-`n` *(`statica_protocollo.chi_allineato`)*, ampiezza `sqrt(x)`, cosi' `rho_k = x Lambda_m`.
-### **Stazionario per le DENSITA'** per simmetria del passo, ### **non autostato di `psi`.**
+Lo stato invariante per traslazione: su ogni estremita' lo spinore ALLINEATO col suo `n`
+*(`statica_protocollo.chi_allineato`)*, ampiezza `sqrt(x)`, `rho_k = x Lambda_m`.
 
-## ⛔ PRIMA LE PROVE, POI I BRACCI
+## ⛔ LE PROVE *(se una cade: STOP)*
 
-`M1` equilibrio *(`256` ulp ogni `64` tick)* · `M2` `M`, `V` nella stessa banda, `G` riportata ·
-`M3` lo spettro di `psi` solo a `k = 0` · `M4` il fit su una successione sintetica.
-### **Se una cade: STOP**, e i bracci `J` NON si lanciano.
-`J1` `x` in `{0.01, 0.1, 1}` · `J2` `cs` spento · `J3` `dtau 0.25` · `J4` il braccio di `D4` a
-materia DINAMICA *(`congela = "no"`)* contro quello congelato di `963535bc`.
+`M1` ### **la variazione di `rho_k` e `Lambda_k` nel PRIMO tick entro `256` ulp della scala**;
+`M3` lo spettro di `psi` solo a `k = 0`; `M4` ### **la copertura della soglia di Student sui
+semi `0`..`199`: `99.73%` entro `3` deviazioni binomiali.**
+
+## ⭐ I BRACCI *(rapporto `1`, `dtau 0.5`, `2000` tick, `x = 0.1` se non detto; NESSUNA
+perturbazione aggiunta)*
+
+`D1` `x` in `{0.01, 0.1, 1}` · `D2` `cs` SPENTO · `D3` `dtau 0.25`, `4000` tick · `D4'` senza
+`CAMM-FASE-VUOTO` · `D5` in ogni braccio, ### **la deriva di `G` nella fase esponenziale**
+contro `max|delta rho|/rho_m` · `J4` ### **il braccio di `D4` a materia DINAMICA.**
+### **Se il punto fisso di `cs` non converge, il braccio si chiude li'.**
 
 Gira con:  python csv/_jeans_del_modello.py
 Un braccio: python csv/_jeans_del_modello.py --braccio NOME
@@ -42,27 +51,34 @@ import _instabilita_vuoto as IV                                 # noqa: E402
 
 SEME = 20261019
 EPS = float(np.finfo(float).eps)
-ULP_BANDA = 256.0              # _collauda_cs_l1.ULP_NORME, ogni 64 tick (la scala di D3)
-TICK_BANDA = 64
+ULP_BANDA = 256.0              # _collauda_cs_l1.ULP_NORME
+COPERTURA = 0.9973             # il significato di <<3 barre>>, tenuto (decisione di Luca)
+SEMI_M4 = range(200)           # dichiarati nel task history
 JSONL = os.path.join(RADICE, "doc", "referti_l2", "jeans_del_modello.jsonl")
 D4_JSONL = os.path.join(RADICE, "doc", "referti_l2", "d4_bracci.jsonl")
-
-# nome -> (modo, x, dtau, tick, ampiezza)
-BRACCI = {
-    "M1 x 0.01": ("acceso", 0.01, 0.5, 2000, 0.0),
-    "M1 x 0.1": ("acceso", 0.1, 0.5, 2000, 0.0),
-    "M1 x 1": ("acceso", 1.0, 0.5, 2000, 0.0),
-    "J1 x 0.01": ("acceso", 0.01, 0.5, 2000, 1e-6),
-    "J1 x 0.1": ("acceso", 0.1, 0.5, 2000, 1e-6),
-    "J1 x 1": ("acceso", 1.0, 0.5, 2000, 1e-6),
-    "J2 cs SPENTO": ("spento", 0.1, 0.5, 2000, 1e-6),
-    "J3 dtau 0.25": ("acceso", 0.1, 0.25, 4000, 1e-6),
-}
+IV_JSONL = os.path.join(RADICE, "doc", "referti_l2", "instabilita_vuoto.jsonl")
+LEGGE_FASE = "CAMM-FASE-VUOTO"
 RAPPORTO = 1.0
+
+# nome -> (modo, x, dtau, tick)
+BRACCI = {
+    "D1 x 0.01": ("acceso", 0.01, 0.5, 2000),
+    "D1 x 0.1": ("acceso", 0.1, 0.5, 2000),
+    "D1 x 1": ("acceso", 1.0, 0.5, 2000),
+    "D2 cs SPENTO": ("spento", 0.1, 0.5, 2000),
+    "D3 dtau 0.25": ("acceso", 0.1, 0.25, 4000),
+    "D4' senza fase": ("senza_fase", 0.1, 0.5, 2000),
+}
+
+
+def t_soglia():
+    """### La soglia di Student al `99.73%` coi gradi di liberta' dei blocchi."""
+    import scipy.stats as SS
+    return float(SS.t.ppf(1.0 - (1.0 - COPERTURA) / 2.0, IV.BLOCCHI - 1))
 
 
 # =====================================================================================
-#   LA SCENA E LA PERTURBAZIONE
+#   LA SCENA
 # =====================================================================================
 def scena(dtau, x):
     import scena_l2 as SC
@@ -73,24 +89,8 @@ def scena(dtau, x):
     return inc, mot, st, par
 
 
-def perturba(st, a):
-    """### `phi` e `psi` per `sqrt(1 + a r)`, `r` a media pesata nulla: ### **`V` e `M`.**"""
-    g = np.random.default_rng(SEME)
-    for chiave in ("phi_h", "psi_h"):
-        v = st[chiave]
-        w = np.abs(v) ** 2 if v.ndim == 1 else np.sum(np.abs(v) ** 2, axis=1)
-        r = g.standard_normal(w.shape[0])
-        r = r - float(np.sum(w * r)) / float(np.sum(w))
-        f = np.sqrt(1.0 + a * r)
-        if v.ndim == 1:
-            v *= f
-        else:
-            v *= f.reshape(-1, 1)
-
-
 def spettro_psi(inc, st, lati):
     """### `(potenza fuori da k = 0) / (potenza a k = 0)`, ### **per tipo d'estremita'.**"""
-    import statica_protocollo as PR
     peggio = 0.0
     for tipo in range(4):
         h = np.arange(tipo % 2, 2 * inc.m, 2)[(np.arange(inc.m) % 2) == tipo // 2]
@@ -99,10 +99,8 @@ def spettro_psi(inc, st, lati):
             campo[inc.nodo[h]] = st["psi_h"][h, c]
             f = np.abs(np.fft.fft2(campo.reshape(lati))) ** 2
             zero = float(f[0, 0])
-            fuori = float(np.sum(f)) - zero
             if zero > 0:
-                peggio = max(peggio, fuori / zero)
-    _ = PR
+                peggio = max(peggio, (float(np.sum(f)) - zero) / zero)
     return peggio
 
 
@@ -139,27 +137,23 @@ def braccio(nome):
     import tick as TK
     if nome == "J4":
         return braccio_j4()
-    modo, x, dtau, tick, a = BRACCI[nome]
+    modo, x, dtau, tick = BRACCI[nome]
     inc, mot, st, par = scena(dtau, x)
     lm = float(np.mean(mot.densita_vuoto(st)))
     rm = float(np.mean(mot.densita_materia(st)))
     lc = RAPPORTO * lm
-    fuori = {"nome": nome, "modo": modo, "x": x, "dtau": dtau, "tick": tick, "ampiezza": a,
+    fuori = {"nome": nome, "modo": modo, "x": x, "dtau": dtau, "tick": tick,
              "lambda_m": lm, "rho_m": rm, "lambda_c": lc,
              "cs_m": 1.0 if modo == "spento" else lm / (lm + lc),
              "spettro": spettro_psi(inc, st, PR.LATI)}
-    if a > 0:
-        perturba(st, a)
+    salta = (LEGGE_FASE,) if modo == "senza_fase" else ()
     if modo != "spento":
         FP.accendi_cs(mot, lc, st)
-    g0 = EP.g_dello_stato(mot, st, par)
-    rho, lam, M, V, G = [], [], [], [], []
+    rho, lam, G = [], [], []
 
     def foto():
         rho.append(mot.densita_materia(st).copy())
         lam.append(mot.densita_vuoto(st).copy())
-        M.append(float(np.sum(rho[-1])))
-        V.append(float(np.sum(lam[-1])))
         G.append(float(EP.g_dello_stato(mot, st, par)))
     foto()
     fuori["non_converge"] = None
@@ -168,23 +162,33 @@ def braccio(nome):
             if modo == "spento":
                 TK.tick(st, mot, par)
             else:
-                TK.tick_con_cs(st, mot, par, lc, ())
+                TK.tick_con_cs(st, mot, par, lc, salta)
             foto()
     except AssertionError as e:
+        # ### ⛔ **il braccio si CHIUDE qui**: si registra, senza cure.
         fuori["non_converge"] = {"tick": len(rho), "lam_min": float(np.min(lam[-1])),
                                  "lambda_c": lc, "msg": str(e)[:120]}
-    rho, lam = np.array(rho), np.array(lam)
-    t = np.arange(rho.shape[0])
-    banda = ULP_BANDA * EPS * np.maximum(1.0, t / float(TICK_BANDA))
-    fuori["m1_rho"] = float(np.max(np.max(np.abs(rho - rm), axis=1) / (banda * rm)))
-    fuori["m1_lam"] = float(np.max(np.max(np.abs(lam - lm), axis=1) / (banda * lm)))
-    fuori["m2_M"] = float(np.max(np.abs(np.array(M) - M[0]) / (banda * abs(M[0]))))
-    fuori["m2_V"] = float(np.max(np.abs(np.array(V) - V[0]) / (banda * abs(V[0]))))
-    fuori["m2_G"] = float(np.max(np.abs(np.array(G) - g0)) / abs(g0)) if g0 else None
+    rho, lam, G = np.array(rho), np.array(lam), np.array(G)
+    # ### `M1` RIDEFINITA: l'equilibrio al tick 0 -- la variazione nel PRIMO tick
+    if rho.shape[0] > 1:
+        fuori["m1_rho_ulp"] = float(np.max(np.abs(rho[1] - rho[0]))) / (EPS * rm)
+        fuori["m1_lam_ulp"] = float(np.max(np.abs(lam[1] - lam[0]))) / (EPS * lm)
     mr = np.max(np.abs(rho - rm), axis=1)
     ml = np.max(np.abs(lam - lm), axis=1)
     fuori["m_rho"] = [float(v) for v in mr]
     fuori["m_lam"] = [float(v) for v in ml]
+    fuori["G"] = [float(v) for v in G]
+    # ### `D5`: la deriva di G nella SOLA fase esponenziale
+    fine = len(mr) - 1
+    for t in range(len(mr)):
+        if mr[t] >= IV.SOGLIA_PICCOLA * rm:
+            fine = t
+            break
+    dg = float(abs(G[fine] - G[0]) / abs(G[0])) if G[0] else float("nan")
+    dg20 = float(abs(G[min(IV.T0, fine)] - G[0]) / abs(G[0])) if G[0] else float("nan")
+    cresc = float(mr[fine] / rm)
+    fuori["d5"] = {"fine": int(fine), "dG_rel_fine": dg, "dG_rel_T0": dg20,
+                   "crescita_fine": cresc, "rapporto": dg / cresc if cresc > 0 else None}
     for chiave, m, scala, campi, centro in (("rho", mr, rm, rho, rm),
                                             ("lam", ml, lm, lam, lm)):
         g, b, t0, t1 = IV.gamma_del_tratto(m, scala)
@@ -201,30 +205,27 @@ def braccio(nome):
 def braccio_j4():
     """### Il braccio di `D4` a rapporto `1`, `x 0.01`, ### **con la materia DINAMICA.**"""
     import _misura_d4 as D4
+    import scena_l2 as SC
     import statica_protocollo as PR
     import tick as TK
     PR.SOSTITUISCI = False
     lm = D4.lambda_medio(PR.DTAU[0])
     lc = RAPPORTO * lm
+    per = SC.anelli(PR.LATI, 0)
+    nodi = [v for d, nn in per.items() if d <= PR.RAGGIO for v in nn]
     rho_g = []
     vero = TK.tick_con_cs
-    grumo = {"nodi": None}
 
     def avvolto(st, mot, par, lambda_c, salta):
         g = vero(st, mot, par, lambda_c, salta)
-        if grumo["nodi"] is None:
-            import scena_l2 as SC
-            per = SC.anelli(PR.LATI, 0)
-            grumo["nodi"] = [v for d, nn in per.items() if d <= PR.RAGGIO for v in nn]
-        rho_g.append(float(np.mean(mot.densita_materia(st)[grumo["nodi"]])))
+        rho_g.append(float(np.mean(mot.densita_materia(st)[nodi])))
         return g
     TK.tick_con_cs = avvolto
     fuori = {"nome": "J4", "x": 0.01, "dtau": PR.DTAU[0], "tick": PR.TICK_SCAN,
              "acceso": PR.T_SCAN, "lambda_m": lm, "lambda_c": lc, "non_converge": None}
     try:
-        lam, drho, _dt, per = PR.corri(PR.DTAU[0], 0.01, "S3", PR.TICK_SCAN, PR.T_SCAN,
-                                       (0,), congela="no", lambda_c=lc)
-        nodi = [v for d, nn in per.items() if d <= PR.RAGGIO for v in nn]
+        lam, drho, _dt, _per = PR.corri(PR.DTAU[0], 0.01, "S3", PR.TICK_SCAN, PR.T_SCAN,
+                                        (0,), congela="no", lambda_c=lc)
         bl = PR.blocchi(lam, PR.inizio_finestra(PR.T_SCAN), PR.FINESTRE)
         fuori["dlam_blocchi"] = [float(v) for v in np.mean(bl[:, nodi], axis=1) - lm]
         fuori["drho_max"] = drho
@@ -237,7 +238,6 @@ def braccio_j4():
 
 
 def congelato_d4():
-    """### `<delta Lambda>` del grumo per blocco, ### **dal braccio CONGELATO di `D4`.**"""
     import statica_protocollo as PR
     for r in io.open(D4_JSONL, encoding="utf-8"):
         b = json.loads(r)
@@ -261,41 +261,37 @@ def lancia(nome):
 
 
 # =====================================================================================
-#   LE PROVE E LA LETTURA
+#   LE PROVE DELLO STRUMENTO
 # =====================================================================================
-def m4():
-    """### Il fit su `exp(gamma t)(1 + 0.01 n_t)`: ### **restituisce `gamma` entro 3 barre?**"""
-    g = np.random.default_rng(SEME)
-    fuori = []
-    for gamma in (1e-3, 1e-2):
-        t = np.arange(2001)
-        m = 1e-6 * np.exp(gamma * t) * (1.0 + 0.01 * g.standard_normal(t.size))
-        gf, b, t0, t1 = IV.gamma_del_tratto(m, 1.0)
-        fuori.append((gamma, gf, b, t0, t1,
-                      gf is not None and abs(gf - gamma) <= 3 * b))
-    return fuori
-
-
-def m4_diagnosi():
-    """### INFORMAZIONE, non criterio: ### **lo stesso fit su `200` semi** *(0..199)*.
-
-    ### Dice se lo strumento ha un BIAS *(la media di `z = (gamma_fit - gamma)/barra`)* e se
-    le sue barre sono giuste *(la dispersione di `z`: `1` se lo sono)*, e quanti casi escono
-    da `3` barre per caso.
-    """
+def m4(ts):
+    """### La copertura della soglia di Student sui semi `0`..`199`, a due `gamma` noti."""
     fuori = []
     for gamma in (1e-3, 1e-2):
         z = []
-        for s in range(200):
+        for s in SEMI_M4:
             g = np.random.default_rng(s)
             t = np.arange(2001)
             m = 1e-6 * np.exp(gamma * t) * (1.0 + 0.01 * g.standard_normal(t.size))
             gf, b, _t0, _t1 = IV.gamma_del_tratto(m, 1.0)
             z.append((gf - gamma) / b)
         z = np.array(z)
-        fuori.append((gamma, float(np.mean(z)), float(np.std(z)),
-                      float(np.mean(np.abs(z) > 3))))
+        cop = float(np.mean(np.abs(z) <= ts))
+        err = np.sqrt(COPERTURA * (1.0 - COPERTURA) / len(z))
+        fuori.append((gamma, cop, err, abs(cop - COPERTURA) <= 3 * err,
+                      float(np.mean(z)), float(np.std(z))))
     return fuori
+
+
+def ieri_sera(ts):
+    """### I verdetti del test d'instabilita' (`c2dd6453`) con la soglia di Student."""
+    righe = []
+    for r in io.open(IV_JSONL, encoding="utf-8"):
+        b = json.loads(r)
+        if b["gamma"] is None:
+            continue
+        z = b["gamma"] / b["barra"]
+        righe.append((b["modo"], b["rapporto"], b["dtau"], b["ampiezza"], z, z >= ts))
+    return righe
 
 
 def _gt(b, r):
@@ -311,14 +307,15 @@ def main(argv):
     _presidio.avvia(__file__)
     import composizione as CM
     import statica_protocollo as PR
+    ts = t_soglia()
     print("=" * 100)
-    print("IL TEST DI JEANS DEL MODELLO, CON MATERIA UNIFORME DINAMICA -- una misura")
+    print("IL TEST DI JEANS DEL MODELLO: I BRACCI DIAGNOSTICI -- una misura")
     print("=" * 100)
     print("  la scena di D4: lati %s, VUOTO %.1f; il passo: impronta %s; rapporto %g;"
-          " congela = no" % (PR.LATI, PR.VUOTO, CM.IMPRONTA, RAPPORTO))
-    print("  la materia: lo spinore allineato su ogni estremita', ampiezza sqrt(x); la"
-          " perturbazione su psi e phi, seme %d" % SEME)
-    print("  la banda di M1/M2: %g ulp ogni %d tick" % (ULP_BANDA, TICK_BANDA))
+          " NESSUNA perturbazione aggiunta: il solo rumore d'arrotondamento"
+          % (PR.LATI, PR.VUOTO, CM.IMPRONTA, RAPPORTO))
+    print("  la soglia: t di Student al %.2f%% con %d gradi di liberta' = %.3f barre"
+          % (100 * COPERTURA, IV.BLOCCHI - 1, ts))
     print("  i bracci si salvano mentre corrono in %s" % os.path.relpath(JSONL, RADICE))
     print("-" * 100)
     sys.stdout.flush()
@@ -332,87 +329,101 @@ def main(argv):
         with io.open(JSONL, "a", encoding="utf-8") as f:
             f.write(json.dumps(b) + "\n")
         nc = b.get("non_converge")
-        print("  %-14s [%.0f s]%s" % (nome, time.time() - t0, "" if nc is None
-                                      else "   ### NON CONVERGE al tick %d: %s"
-                                      % (nc["tick"], nc["msg"][:70])))
+        print("  %-15s [%.0f s]%s" % (nome, time.time() - t0, "" if nc is None
+                                      else "   ### NON CONVERGE al tick %d, il braccio si"
+                                      " chiude li': %s" % (nc["tick"], nc["msg"][:60])))
         sys.stdout.flush()
-    # ------------------------------------------------------------ M1-M4
-    print("### SAPER CREARE LA MATERIA: M1-M4 (se una cade, STOP)")
-    for nome in ("M1 x 0.01", "M1 x 0.1", "M1 x 1"):
+    # ------------------------------------------------------------ le prove
+    print("### LE PROVE (se una cade, STOP)")
+    for nome in ("D1 x 0.01", "D1 x 0.1", "D1 x 1"):
         corri(nome)
     ok = True
-    for nome in ("M1 x 0.01", "M1 x 0.1", "M1 x 1"):
+    for nome in ("D1 x 0.01", "D1 x 0.1", "D1 x 1"):
         b = bb[nome]
-        m1 = b["non_converge"] is None and b["m1_rho"] <= 1.0 and b["m1_lam"] <= 1.0
-        m2 = b["m2_M"] <= 1.0 and b["m2_V"] <= 1.0
+        m1 = (b["m1_rho_ulp"] <= ULP_BANDA and b["m1_lam_ulp"] <= ULP_BANDA)
         m3 = b["spettro"] <= ULP_BANDA * EPS
-        ok &= m1 and m2 and m3
-        print("  %-12s M1 rho %.3f lam %.3f (di banda) %s | M2 M %.3f V %.3f %s, G %.3e"
-              " | M3 fuori/zero %.2e %s"
-              % (nome, b["m1_rho"], b["m1_lam"], "PASSA" if m1 else "### FALLISCE",
-                 b["m2_M"], b["m2_V"], "PASSA" if m2 else "### FALLISCE",
-                 b["m2_G"] if b["m2_G"] is not None else float("nan"), b["spettro"],
+        ok &= m1 and m3
+        print("  %-12s M1 (il primo tick): rho %.1f ulp, Lambda %.1f ulp (banda %g)  %s"
+              "   | M3 fuori/zero %.1e  %s"
+              % (nome, b["m1_rho_ulp"], b["m1_lam_ulp"], ULP_BANDA,
+                 "PASSA" if m1 else "### FALLISCE", b["spettro"],
                  "PASSA" if m3 else "### FALLISCE"))
-    for gamma, gf, b, t0, t1, passa in m4():
+    for gamma, cop, err, passa, mz, sz in m4(ts):
         ok &= passa
-        print("  M4 gamma noto %.0e: il fit da' %s (tratto %d-%d)   %s"
-              % (gamma, "non misurabile" if gf is None else "%.4e +- %.1e" % (gf, b), t0, t1,
-                 "PASSA" if passa else "### FALLISCE"))
-    print("  ### (nel test di ieri sera M4 NON c'era: lo strumento e' lo stesso, e vale"
-          " anche per lui)")
-    print("  ### INFORMAZIONE, non criterio: lo stesso fit su 200 semi (0..199)")
-    for gamma, mz, sz, fz in m4_diagnosi():
-        print("     gamma %.0e: media di z %+.2f (bias)   dispersione di z %.2f (1 se le barre"
-              " sono giuste)   fuori da 3 barre %.1f%%" % (gamma, mz, sz, 100 * fz))
+        print("  M4 gamma noto %.0e, semi 0..199: copertura %.4f (attesa %.4f +- %.4f)  %s"
+              "   [media di z %+.2f, dispersione %.2f]"
+              % (gamma, cop, COPERTURA, err, "PASSA" if passa else "### FALLISCE", mz, sz))
+    print("  ### I VERDETTI DEL TEST DI IERI SERA (c2dd6453) con la soglia %.2f:" % ts)
+    for modo, rap, dt, a, z, inst in ieri_sera(ts):
+        print("     %-11s rapporto %-5g dtau %-5g ampiezza %-6g  %+.1f barre  %s"
+              % (modo, rap, dt, a, z, "### INSTABILE" if inst else "no"))
     if not ok:
         print("=" * 100)
-        print("### ⛔ STOP: una prova di M1-M4 e' caduta -- i bracci J NON si lanciano.")
+        print("### ⛔ STOP: una prova e' caduta -- i bracci diagnostici NON si lanciano.")
         print("=" * 100)
         return 1
-    # ------------------------------------------------------------ J1-J4
+    # ------------------------------------------------------------ i bracci
     print("-" * 100)
-    print("### I BRACCI J")
-    for nome in ("J1 x 0.01", "J1 x 0.1", "J1 x 1", "J2 cs SPENTO", "J3 dtau 0.25", "J4"):
+    print("### I BRACCI DIAGNOSTICI (dal solo rumore)")
+    for nome in ("D2 cs SPENTO", "D3 dtau 0.25", "D4' senza fase", "J4"):
         corri(nome)
     print("-" * 100)
-    print("### gamma (in tick e in tempo proprio) di max|delta rho| e di max|delta Lambda|")
-    for nome in ("J1 x 0.01", "J1 x 0.1", "J1 x 1", "J2 cs SPENTO", "J3 dtau 0.25"):
+    print("### gamma (in tick e in tempo proprio), il modo, la lunghezza minima")
+    nomi = ("D1 x 0.01", "D1 x 0.1", "D1 x 1", "D2 cs SPENTO", "D3 dtau 0.25",
+            "D4' senza fase")
+    for nome in nomi:
         b = bb[nome]
         for chiave, che in (("rho", "rho"), ("lam", "Lambda")):
             r = b[chiave]
             if r["gamma"] is None:
-                print("  %-14s %-7s non misurabile (tratto %d-%d)"
+                print("  %-15s %-7s non misurabile (tratto %d-%d)"
                       % (nome, che, r["T0"], r["T1"]))
                 continue
-            gt, btau = _gt(b, r)
+            gt, _bt = _gt(b, r)
             o = r.get("onda", {})
-            inst = r["gamma"] > 0 and r["gamma"] >= 3 * r["barra"]
-            print("  %-14s %-7s %+.3e +- %.1e (%5.1f) tick  %+.3e tempo proprio  %-10s"
-                  " modo lambda %.2f (%d,%d) frazione %.2f"
-                  % (nome, che, r["gamma"], r["barra"],
-                     r["gamma"] / r["barra"] if r["barra"] > 0 else float("nan"), gt,
-                     "INSTABILE" if inst else "no", o.get("lambda", float("nan")),
-                     o.get("kx", 0), o.get("ky", 0), o.get("frazione", float("nan"))))
+            z = r["gamma"] / r["barra"] if r["barra"] > 0 else float("inf")
+            print("  %-15s %-7s %+.4e +- %.1e (%6.1f barre) per tick  %+.4e tempo proprio"
+                  "  %-10s modo lambda %.2f (%d,%d) %.2f"
+                  % (nome, che, r["gamma"], r["barra"], z, gt,
+                     "INSTABILE" if r["gamma"] > 0 and z >= ts else "no",
+                     o.get("lambda", float("nan")), o.get("kx", 0), o.get("ky", 0),
+                     o.get("frazione", float("nan"))))
             gk = r.get("gamma_k", [])
-            sopra = [q for q in gk if q[3] > 0 and q[2] >= 3 * q[3]]
-            print("  %-14s %-7s gamma(|k|) sopra 3 barre: %s" % (
-                "", "", ", ".join("|k| %d (lambda %.1f)" % (q[0], q[1]) for q in sopra)
-                or "nessun anello -> nessuna lunghezza minima"))
+            sopra = [q for q in gk if q[3] > 0 and q[2] >= ts * q[3]]
+            print("  %-15s %-7s anelli |k| con gamma(k) sopra la soglia: %s" % (
+                "", "", ", ".join("%d (lambda %.1f)" % (q[0], q[1]) for q in sopra)
+                or "nessuno"))
     print("-" * 100)
-    b1, b3 = bb["J1 x 0.1"], bb["J3 dtau 0.25"]
+    print("### D1: gamma(rho) contro x")
+    for nome in ("D1 x 0.01", "D1 x 0.1", "D1 x 1"):
+        r = bb[nome]["rho"]
+        print("  %-12s x %-5g gamma %s" % (nome, bb[nome]["x"], "non misurabile"
+                                           if r["gamma"] is None else "%+.4e" % r["gamma"]))
+    print("### D3: fisica o numerica")
+    b1, b3 = bb["D1 x 0.1"], bb["D3 dtau 0.25"]
     for chiave in ("rho", "lam"):
         r1, r3 = b1[chiave], b3[chiave]
         if r1["gamma"] is None or r3["gamma"] is None:
-            print("  J3 %s: non decidibile" % chiave)
+            print("  %-4s non decidibile" % chiave)
             continue
         g1, s1 = _gt(b1, r1)
         g3, s3 = _gt(b3, r3)
-        print("  J3 %-4s gamma in tempo proprio: dtau 0.5 %+.3e, dtau 0.25 %+.3e -> %s"
-              % (chiave, g1, g3, "coincide entro 3 barre" if abs(g1 - g3)
-                 <= 3 * np.sqrt(s1 * s1 + s3 * s3) else "NON coincide"))
-    gl = [bb[n]["lam"]["gamma"] for n in ("J1 x 0.01", "J1 x 0.1", "J1 x 1")]
-    print("  alla Jeans? gamma(Lambda) ai tre x: %s" % ", ".join(
-        "non misurabile" if g is None else "%+.3e" % g for g in gl))
+        print("  %-4s tempo proprio: dtau 0.5 %+.4e, dtau 0.25 %+.4e -> %s   (per tick: %+.4e"
+              " e %+.4e)" % (chiave, g1, g3, "FISICA (coincide entro la soglia)"
+                             if abs(g1 - g3) <= ts * np.sqrt(s1 * s1 + s3 * s3)
+                             else "NUMERICA (non coincide)", r1["gamma"], r3["gamma"]))
+    print("### D2 e D4': quale legge alimenta la crescita")
+    for nome in ("D2 cs SPENTO", "D4' senza fase"):
+        r = bb[nome]["rho"]
+        cresce = r["gamma"] is not None and r["gamma"] > 0 and r["gamma"] >= ts * r["barra"]
+        print("  %-15s cresce? %s" % (nome, "SI'" if cresce else "no"))
+    print("### D5: la deriva di G nella fase esponenziale (fino a max|delta rho| = 1%% rho_m)")
+    for nome in nomi:
+        d = bb[nome]["d5"]
+        print("  %-15s fine %4d  |dG/G| al tick %d %.2e, alla fine %.2e;  max|delta rho|/rho_m"
+              " %.2e;  rapporto %s"
+              % (nome, d["fine"], IV.T0, d["dG_rel_T0"], d["dG_rel_fine"], d["crescita_fine"],
+                 "%.2e" % d["rapporto"] if d["rapporto"] is not None else "--"))
     print("-" * 100)
     print("### J4: LA PROVA DEL PROTOCOLLO -- <delta Lambda> nel grumo per blocco")
     j4 = bb["J4"]
@@ -425,12 +436,13 @@ def main(argv):
             print("  %-8d %+-16.4f %s" % (i, v, "%+.4f" % cg[i] if cg else "--"))
     rg = j4["rho_grumo"]
     if rg:
-        print("  rho del grumo nel tempo (media sui nodi r <= %d): tick 1 %.4e, %s"
-              % (PR.RAGGIO, rg[0], ", ".join("tick %d %.4e" % (k, rg[k - 1])
-                                             for k in (100, 300, 600, 900, len(rg))
-                                             if k <= len(rg))))
+        print("  rho del grumo (media sui nodi r <= %d): %s"
+              % (PR.RAGGIO, ", ".join("tick %d %.4e" % (k, rg[k - 1])
+                                      for k in (1, 100, 300, 600, 900, len(rg))
+                                      if k <= len(rg))))
     print("=" * 100)
-    print("### NESSUN VERDETTO DI FISICA OLTRE I CRITERI: i numeri. LINEARE e Lambda_c FERMI.")
+    print("### NESSUN VERDETTO DI FISICA OLTRE fisica/numerica E la legge che alimenta la"
+          " crescita. LINEARE e Lambda_c FERMI.")
     print("=" * 100)
     return 0
 
