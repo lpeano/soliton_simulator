@@ -70,7 +70,40 @@ OMEGA_H = float(np.pi)
 # ### oltre il quale si DICHIARA che non converge**, come `GIRI_MAX` di `tick.py`.
 # ### ⚠ **Misurato il `2026-10-18`: il massimo osservato e' scritto nel referto.**
 GIRI_MAX_OMEGA = 120
+# ### ⛔⛔ **`8` ULP, E LA DOMANDA E' DI CHE COSA** *(decisione di Luca del `2026-10-19`
+# ### alle `16:29`, task history `2026-10-19_tolleranza_omega.md`)*: fino a ieri la soglia
+# ### era ### **relativa a `max|Omega|`**, e in campo DEBOLE chiedeva ### **meno dello zero
+# ### macchina dei dati** -- `10` bracci di `D4` alzavano con lo scarto FERMO a `~1e-16`.
+# ### ✅ **Il numero resta `8 eps`**; la scala e' quella ### **dei termini da cui `Omega` si
+# ### calcola** *(`scala_omega`)*.
 EPS_OMEGA = 8.0 * float(np.finfo(float).eps)
+
+
+def scala_omega(mot, st):
+    """### La scala dei DATI di `Omega`: ### **`max_k |cs'_k| * OMEGA_H * (Lambda_k + rho_k)`.**
+
+    ### ⭐ **Perche' questa:** in `termini_di_h` il termine di nodo e' `-pi [(rho - pu_psi) +
+    (Lambda - pu_phi)] + eps h + N` *(con `|h| <= rho`, `|N| <= Lambda`)*, e quello d'arco
+    `-pi (arco_psi + arco_phi)`: ### **differenze fra grandezze dell'ordine di `pi rho` e
+    `pi Lambda`**, poi moltiplicate per `cs'`. ### **Il rumore d'arrotondamento di `Omega` sta
+    su QUESTA scala**, non su `|Omega|`, che in campo debole e' molto piu' piccolo.
+    ### ⚠ **Si calcola nei buffer del pezzo, non in `st`**: lo stato non si tocca.
+    """
+    lam = _per_nodo(mot, np.abs(st["phi_h"]) ** 2, mot._b("ep_sc_lam", (mot.inc.n,), float))
+    psi = st["psi_h"]
+    rho = _per_nodo(mot, np.abs(psi[:, 0]) ** 2 + np.abs(psi[:, 1]) ** 2,
+                    mot._b("ep_sc_rho", (mot.inc.n,), float))
+    csp = cs_primo(lam, mot.lambda_c, mot._b("ep_sc_csp", (mot.inc.n,), float))
+    return float(np.max(np.abs(csp) * OMEGA_H * (lam + rho)))
+
+
+def entro_tolleranza(scarto, scala):
+    """### Il criterio d'arresto del punto fisso di `Omega`: ### **`8` ulp della scala dei dati.**
+
+    ### ⛔ **E' una funzione per poterlo COLLAUDARE** *(il task history: uno scarto fermo al
+    rumore converge, un ciclo di periodo `2` di ampiezza `1e-6` ALZA)*.
+    """
+    return scarto <= EPS_OMEGA * scala
 
 
 def _per_nodo(mot, v, fuori):
@@ -315,14 +348,16 @@ def applica(mot, st, par, frazione):
     salvo = mot._b("ep_phi_salvo", phi.shape, phi.dtype)
     salvo[...] = phi
     prec = omega(mot, st, par).copy()
+    # ### ✅ **LA SCALA E' COSTANTE DENTRO IL PEZZO:** la fase non cambia ne' `Lambda` ne'
+    # ### `rho`, quindi si calcola ### **una volta**.
+    scala = scala_omega(mot, st)
     giri = 0
     for giri in range(1, GIRI_MAX_OMEGA + 1):
         # ### il punto MEDIO: ### **mezza fase**, poi si rilegge `Omega`
         np.multiply(salvo, np.exp(-1j * (prec * (tau * 0.5))[mot.inc.nodo]), out=phi)
         nuovo = omega(mot, st, par)
         scarto = float(np.max(np.abs(nuovo - prec)))
-        scala = float(np.max(np.abs(nuovo)))
-        if scarto <= EPS_OMEGA * scala or scala == 0.0:
+        if entro_tolleranza(scarto, scala):
             prec = nuovo.copy()
             break
         prec = nuovo.copy()

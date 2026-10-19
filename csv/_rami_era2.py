@@ -121,16 +121,19 @@ RAMI = {
     # ### la strada `(d)`)*: tutti e tre ### **decidono se un pezzo ESISTE o no**, e
     # ### ### **nessuno scegle un valore.**
     ("primo_ordine/energia_pesata.py", "applica"): (
-        4, "guardia",
-        "### QUATTRO RAMI, e sono TUTTI GUARDIE. ### (1) LA FORMA SPENTA: con "
+        3, "guardia",
+        "### TRE RAMI dal 2026-10-19 (erano QUATTRO: la convergenza aveva anche il "
+        "caso <<scala == 0>>, che con la scala dei dati non esiste piu' -- il vuoto "
+        "nullo e- rifiutato dal motore), e sono TUTTI GUARDIE. ### (1) LA FORMA SPENTA: con "
         "`mot.cs is None` oppure `mot.lambda_c is None` il pezzo NON ESISTE -- e "
         "i due casi sono UN ramo solo per un motivo ESATTO: un `cs` messo A MANO "
         "come COSTANTE non e- una funzione di `Lambda`, quindi `cs'` e- ZERO PER "
         "DEFINIZIONE. ### (2) `dtau` UNIFORME: il tempo di questo pezzo e- IL "
         "TICK, e un tick per nodo non e- definito -- ALZA invece di prenderne uno. "
         "### (3) la CONVERGENZA del punto medio: si ferma quando due giri "
-        "coincidono agli ulp, oppure quando la scala e- zero (e la- qualunque "
-        "fase e- la stessa). ### (4) il tetto `GIRI_MAX_OMEGA`: ALZA, perche- la "
+        "coincidono entro 8 ulp della SCALA DEI DATI (`scala_omega`, dal "
+        "2026-10-19: prima era `max|Omega|`, e in campo debole chiedeva meno dello "
+        "zero macchina). ### (4) il tetto `GIRI_MAX_OMEGA`: ALZA, perche- la "
         "regola dice di RELAZIONARE e non di scegliere un altro schema"),
     ("primo_ordine/energia_pesata.py", "termini_di_h"): (
         1, "smistamento",
