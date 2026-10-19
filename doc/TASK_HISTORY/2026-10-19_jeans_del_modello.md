@@ -86,6 +86,26 @@ ancora *(la moneta, Grover, la fase)*; ### **e' stazionario per le DENSITA', che
 - ### **Se il punto fisso di `cs` non converge:** si registra e si va avanti, senza cure.
 - ### **SE `M1`-`M4` NON PASSANO: STOP**, prima di leggere `J1`-`J4`.
 
+**ANNOTAZIONE DEL 2026-10-19 SERA, PRIMA DEL CODICE (decisione di Luca delle 21:45 sullo STOP di `82b2e79f`: i BRACCI DIAGNOSTICI).** *(Si annota, non si riscrive.)* ### **Errore `n.18` del guardiano:** `M1` *(«senza perturbazione `rho` e `Lambda` restano costanti per tutta la corsa»)* ### **confondeva «so creare la materia» con «la materia e' stabile»**, che e' la domanda stessa del test. ### **Se esiste un'instabilita', nessuno stato uniforme puo' restare uniforme al bit.**
+
+- ### **`M1` RIDEFINITA: l'EQUILIBRIO AL TICK `0`.** La variazione di `rho_k` e `Lambda_k` nel ### **PRIMO tick** sta entro ### **`256` ulp della scala** *(`rho_m`, `Lambda_m`: la banda delle norme, `_collauda_cs_l1.ULP_NORME`)*. ### **Che poi resti uniforme o no e' il RISULTATO, non una precondizione.**
+- ### **LE BARRE DEL FIT (`M4`):** «`3` barre» resta il ### **`99.73%`**, ma la soglia si prende ### **dalla `t` di Student coi gradi di liberta' veri** *(`5` blocchi: `4`)*, ### **calcolata dallo strumento** *(`scipy.stats.t.ppf`)*: con `4` gradi e' ### **circa `6.6` barre**. ### **Nessun numero nuovo.** ### **`M4` si ripete sui semi `0`..`199`** *(dichiarati)* e la copertura ### **deve essere `99.73%` entro `3` deviazioni binomiali** *(`sqrt(p(1-p)/200)`)*. ### **E si riportano i verdetti del test di ieri sera** *(`c2dd6453`)* **con la soglia corretta.**
+- ### **I BRACCI DIAGNOSTICI**, tutti ### **dalla materia uniforme col SOLO rumore d'arrotondamento** *(nessuna perturbazione aggiunta)*, `x = 0.1` e rapporto `1` se non detto, `dtau 0.5`, `2000` tick:
+
+| | il braccio | che cosa dice |
+|---|---|---|
+| `D1` | il riferimento: `cs` acceso, ### **`x` in `{0.01, 0.1, 1}`** | `gamma` e la sua dipendenza da `x` |
+| `D2` | ### **`cs` SPENTO** | cresce ancora? |
+| `D3` | ### **`dtau 0.25`, `4000` tick** | ### **`gamma` in tempo proprio uguale entro la soglia: FISICA; altrimenti NUMERICA** |
+| `D4'` | ### **senza `CAMM-FASE-VUOTO`** | quale legge alimenta la crescita |
+| `D5` | ### **la deriva di `G` nella SOLA fase esponenziale** *(fino a quando `max|delta rho|` supera l'`1%` di `rho_m`)*, con `g_dello_stato`, in ogni braccio | ### **resta al livello del secondo ordine o cresce con la perturbazione?** Si riporta ### **il rapporto fra la deriva relativa di `G` e `max|delta rho|/rho_m`** alla fine della fase |
+| `J4` | ### **la prova del protocollo** *(il braccio di `D4` a materia dinamica)*, come gia' fissato | lo svuotamento contro quello congelato |
+
+- **Per ogni braccio:** `gamma` *(in tick e in tempo proprio)*, la lunghezza d'onda del modo che cresce, ### **la lunghezza minima** *(il `lambda` piu' corto il cui `gamma(k)` supera la soglia di Student)*, e ### **`gamma` contro `x`** *(`D1`)*.
+- ### **«instabile» se `gamma >= t_(99.73%, 4) * barra`**; e la stessa soglia per `D3` *(sulle barre combinate)*.
+- ### **Se il punto fisso di `cs` non converge, il braccio si chiude li'** *(tick, `Lambda` min, `Lambda_c`)*, senza cure.
+- ### **Nessun verdetto di fisica oltre a fisica/numerica e alla legge che alimenta la crescita.** ### **`LINEARE` e `Lambda_c` FERMI.**
+
 ## 5. TODO
 
 1. `csv/_jeans_del_modello.py`, un processo per braccio, i risultati scritti mentre corrono;
