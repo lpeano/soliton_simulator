@@ -19558,3 +19558,8 @@ A rapporto `1` il braccio a `x = 1` converge *(`cs` CALA a `98` barre)*, ma ### 
 ### 📌 **LA VOCE `DOMANDA-IL-VALORE-DI-LAMBDA-C` HA I NUMERI DI `D4`** *(senza scegliere)*
 
 Accanto alle strade gia' registrate: ### **`cs` CALA in `5` casi su `5`**, l'alone, le non convergenze, il minimo di `Lambda/Lambda_c`, e `LINEARE` caduto. ### **Il rapporto `1` e' segnalato come quello della memoria di nascita col vuoto uniforme: un'ETICHETTA, non una scelta.** ### **La decisione e' di Luca.**
+
+### 📌 **LA TOLLERANZA DI `Omega`: IL TASK HISTORY, PRIMA DEL CODICE** *(decisione di Luca delle `16:29`)*
+
+### **La scala, dichiarata prima:** `max_k |cs'_k| * pi * (Lambda_k + rho_k)`, con `EPS_OMEGA = 8 eps` invariato -- ### **la materia entra in `H` con la stessa forma del vuoto**, quindi la scala e' sui termini che entrano davvero, e `pi` c'e' perche' i termini lo portano. ### **Sette prove fissate prima**, col controllo positivo che puo' fallire *(stagnazione entro `8` ulp della scala su `6` bracci di `D4`)* e due casi che devono alzare *(un ciclo sintetico, un braccio reale a frazione `16`)*.
+### ⛔ **E RITIRO LA MIA LETTURA DI `a59994b9`** *(«`Omega` e' la differenza di termini di ordine `1`»)*: ### **i termini sono dello stesso ordine del risultato** *(il guardiano)*; il rumore viene dalle norme di ordine `Lambda` da cui le energie di `H` si costruiscono.
