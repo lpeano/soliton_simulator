@@ -19554,3 +19554,7 @@ A rapporto `1` il braccio a `x = 1` converge *(`cs` CALA a `98` barre)*, ma ### 
 
 **IL PROFILO E IL CRITERIO DI USCITA DI `L2`, come INFORMAZIONE:** ### `(1)` **`Lambda` NON e' piu' invariante:** `max|Lambda(t+1) - Lambda(t)|` da `0.14` a `1.35` con la sorgente, ### **`0` esatto** senza. ### `(2)` **l'alone:** `|delta cs|` sopra `3` barre ### **fino a `r = 30`** *(tutto il toro)* ai rapporti `0.1` e `1`, ### **fino a `14`-`20`** a rapporto `10`. ### `(3)` **gli orologi rallentano INTORNO alla materia:** `13`-`15` anelli FUORI dal grumo con `cs` che CALA a `>= 3` barre *(rapporti `0.1` e `1`)*, `5`-`7` a rapporto `10`. ### ⚠ **E oltre `r ~ 16` `delta cs` cambia SEGNO** *(il vuoto cacciato si accumula lontano, sul toro)*. ### **Nessun verdetto su `L2`.**
 ### 📌 **Il minimo di `Lambda/Lambda_c`** *(protezione `b`)*: ### **`0.001`-`0.009`** in tutte le corse con la sorgente a `x = 1` -- ### **`D4` sta tutto nel regime in cui e' nato il ciclo di periodo `2`.**
+
+### 📌 **LA VOCE `DOMANDA-IL-VALORE-DI-LAMBDA-C` HA I NUMERI DI `D4`** *(senza scegliere)*
+
+Accanto alle strade gia' registrate: ### **`cs` CALA in `5` casi su `5`**, l'alone, le non convergenze, il minimo di `Lambda/Lambda_c`, e `LINEARE` caduto. ### **Il rapporto `1` e' segnalato come quello della memoria di nascita col vuoto uniforme: un'ETICHETTA, non una scelta.** ### **La decisione e' di Luca.**
