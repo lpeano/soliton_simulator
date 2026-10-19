@@ -226,7 +226,13 @@ def chiusura_import(radici):
             continue
         visti.add(x)
         coda.extend(y for y in per.get(x, []) if y not in visti)
-    return set("primo_ordine/%s.py" % x for x in visti)
+    # ### ⛔⛔ **SOLO I FILE CHE ESISTONO SOTTO `primo_ordine/`** *(cura del
+    # ### `2026-10-19`)*: la mappa elenca anche `_presidio`, che vive in `csv/` ed e- ### **il
+    # ### timbro del blob, non fisica** -- e la versione di `6dbc6a3f` lo contava,
+    # ### stampando ### **`10` file invece di `9`.** E- lo stesso filtro di
+    # ### `_rami_era2.nucleo`, che ### **avrei dovuto copiare con la lettura.**
+    return set(rel for rel in ("primo_ordine/%s.py" % x for x in visti)
+               if os.path.exists(os.path.join(RADICE, rel)))
 
 
 def cicli_tutti(sorgente):
