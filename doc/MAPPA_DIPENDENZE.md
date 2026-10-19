@@ -1015,7 +1015,30 @@ DALLA MEMORIA invece che dall'iterazione.**
 |---|---|---|---|
 | `(a)` | ### **ESTRAPOLAZIONE dal passo precedente** | il peso del tick nuovo si stima dai pesi dei tick passati | ### **ESPLICITA e NON simmetrica**, e porta ### **MODI PARASSITI** *(una ricorrenza a due passi ha una seconda soluzione, che puo' crescere)* |
 | `(b)` | ### **PESO SFALSATO a meta' tick** *(alla maniera del `leapfrog`)* | il peso vive ### **a meta' tick**, e i campi ai tick interi | ### **SIMMETRICA**, ed e' la variante che vale la pena guardare |
+| `(c)` | ### **LA MEMORIA COME INERZIA** *(idea di Luca, `2026-10-19`)* | ogni nodo avanza a **scatti del proprio tempo proprio** e conserva il **RESTO**; cio' che e' in transito resta in **coda sull'arco**; l'assorbimento a **sotto-tick pesati** | ### **IDEA COLLOCATA, NON OPERATIVA**: i punti aperti sono scritti sotto |
 
+
+### ⭐ **(c) LA MEMORIA COME INERZIA: SCATTI DI TEMPO PROPRIO, CODA SULL'ARCO, SOTTO-TICK PESATI** *(idea di Luca del `2026-10-19`, `11:39`-`12:02`, discussa col guardiano; registrata come ### **idea collocata e NON operativa**, testo del mandato)*
+
+1) Ogni nodo avanza a passi del proprio tempo proprio e conserva da un tick all'altro il RESTO di tempo proprio non ancora speso. Quel resto e' una memoria locale, deterministica e senza numeri scelti (A15); Luca la descrive come una forma di INERZIA. Anche l'arco ha il suo tempo proprio (la media armonica dei due capi, B-3) e il suo resto.
+   Parentela da annotare, non da perseguire ora: il tempo proprio come NUMERO DI SCATTI e' l'idea degli insiemi causali (causal sets: il tempo proprio fra due eventi e', a meno di una scala, la lunghezza della catena piu' lunga che li collega). E i pacchetti in coda sull'arco sono il posto naturale dove, in L6, entrerebbero i quanti (un quanto per pacchetto). Oggi cio' che si rende discreto sono gli EVENTI di scambio, non le ampiezze: il modello resta un'onda classica e deterministica.
+2) Con cs che decide QUANDO un nodo avanza, e non quanto tempo scorre dentro il passo, il punto fisso di cs al centro non serve piu'.
+3) La conservazione: cio' che un nodo manda e il vicino non ha ancora assorbito resta IN TRANSITO sull'arco, come in una coda. Il totale conservato e' nodi piu' code. I pacchetti in coda restano separati: sommarli romperebbe la norma (|a+b|^2 != |a|^2+|b|^2).
+4) L'assorbimento: il nodo assorbe nel suo tick tutto cio' che e' arrivato, con un SOTTO-PASSO PER OGNI ARRIVO. Ogni sotto-passo ha un angolo pesato; la proposta del guardiano e' che il peso sia il tempo proprio trascorso fra un arrivo e il successivo, in modo che la somma degli angoli sia il tempo proprio del nodo: Sum(theta_i) = pi * cs * dt. Cosi' l'orologio del nodo resta lento, ogni pacchetto e' trattato da solo e la norma si conserva perche' ogni sotto-passo e' unitario. La risoluzione si adatta da sola al traffico.
+5) I CRITERI, fissati prima di qualunque misura:
+   - la norma conservata al bit (nodi piu' code);
+   - in un campo fermo la coda resta LIMITATA, non cresce col tempo;
+   - il rapporto delle frequenze fra due nodi e' cs_A/cs_B: il redshift gravitazionale come contabilita' della coda, legato al criterio (3) di L2.
+6) I PUNTI APERTI:
+   - l'ordine dei sotto-passi conta (le rotazioni non commutano), e la simmetria nel tempo richiede di percorrere la sequenza al contrario, quindi di ricordarla;
+   - M-B1 al bit non vale piu' come braccio 0, e serve un controllo di raccordo diverso (senza differenze di cs deve ridare il passo di oggi);
+   - la stabilita' nel nodo 10 della scena 32/0.01 (il guadagno -1.02);
+   - il costo, che cresce col traffico;
+   - l'eredita' del resto alla mitosi.
+7) LA PROVA MINIMA, quando sara' il momento: due nodi, un arco, cs diversi. Si verificano norma, coda limitata e rapporto delle frequenze.
+8) La decisione "lo stato contiene il passato" resta UNA e di Luca. La variante (c) entra nel confronto con i punti fissi dopo il passo C e la misura della non convergenza.
+
+### 📌 *(La frase qui sotto e' stata scritta per `(a)` e `(b)`; la `(c)` porta il passato nel RESTO e nelle CODE.)*
 ### ⛔⛔ **E IN ENTRAMBE IL PASSATO DIVENTA PARTE DELLO STATO: LO STATO NON E'
 PIU' MARKOVIANO.** ### ⚠ **Non e' un dettaglio di implementazione:** oggi
 ### **lo stato e' `(psi, phi)` e basta**, e tutto cio' che serve al tick dopo
