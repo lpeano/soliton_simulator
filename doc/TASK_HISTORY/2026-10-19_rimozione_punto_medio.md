@@ -74,6 +74,16 @@ qui, prima.**
 ### 📌 **E `_misura_punto_medio.py` resta RIGIRABILE AL SUO COMMIT** *(`880955bb`, il
 referto `punto_medio_per_pezzo.txt`)*: ### **l'inventario lo dice.**
 
+**ANNOTAZIONE DEL 2026-10-19, PRIMA DEL CODICE (integrazione del guardiano alla verifica fino a `8d63be67`): I TRE STRUMENTI DI STAMATTINA CHE NOMINANO IL RAMO.** *(Si annota, non si riscrive.)* Il censimento *(`4db3b943`)* li trova nel codice; ### **la decisione, per ognuno, presa qui:**
+
+| strumento | righe | che cosa farebbe dopo la rimozione | **la decisione** |
+|---|---|---|---|
+| `csv/_costo_punti_fissi.py` | `10` | l'involucro accede a `FP.hop_phi_punto_medio`: ### **si fermerebbe con un errore** | ### **SI AGGIORNA:** l'involucro avvolge **i due** punti fissi che restano, e il peso al punto medio esce dalla misura. ### **Non si rigira**: il passo `B` e' chiuso con le quote *(`bef39500`)* |
+| `csv/_censimento_punti_fissi.py` | `1` | il caso che deve riuscire cerca per nome **i `3` previsti**, compreso quello tolto: ### **fallirebbe** | ### **SI AGGIORNA, con la PREVISIONE NUOVA, dichiarata qui prima della corsa: `2` nel percorso del tick** *(`tick.cs_al_centro`, `energia_pesata.applica`)* ### **e `3` nel nucleo** *(piu' `passo.mezzo_implicito`)*. ### **Si rigira dopo la rimozione** |
+| `csv/_matrice_dipendenze.py` | `1` | `regola_punto_medio` fra le grandezze interessanti: ### **non si romperebbe**, stamperebbe un nome che non esiste piu' | ### **SI AGGIORNA** *(il nome esce dalla lista)*. ### **Si rigira dopo**, e la statica di `CAMM-SPOSTAMENTO-VUOTO` ### **deve perdere** la lettura del ramo |
+
+### ✅ **IN OGNI CASO I REFERTI DI STAMATTINA RESTANO VALIDI AL LORO COMMIT** *(`censimento_punti_fissi.txt` a `95c81e97`, `costo_punti_fissi.txt` a `8b2bdb16`, `matrice_dipendenze.txt` a `e989872d`)*, e ### **l'inventario lo dice**, insieme a `_misura_punto_medio.py` rigirabile a `880955bb`.
+
 ## 3. TODO DEL NEXT STEP
 
 1. lo script del censimento, committato; la corsa **prima** della rimozione, col referto.

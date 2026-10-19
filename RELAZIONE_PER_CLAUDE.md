@@ -19495,3 +19495,8 @@ L'unico pezzo che muove `Lambda` e' `CAMM-SPOSTAMENTO-VUOTO` *(la matrice di `e9
 | **totale** | ### **`49`** | ### **`49` dai suoi numeri per file, `53` nel suo totale** |
 
 ### ⚠ **I file coincidono tutti e `11`, e cosi' le righe file per file.** ### **Il suo totale `53` non torna coi suoi stessi numeri per file** *(`37 + 10 + 1 + 1 = 49`)*: ### **o e' un errore di somma, o il suo conteggio vede `4` righe che il mio non vede** *(per esempio contando occorrenze invece di righe, o sottostringhe invece di parole intere)* -- ### **non so dire quale**, e il mio criterio e' scritto nello script: ### **righe con almeno un nome, a parola intera.**
+
+### 📌 **PRIMA DEL CODICE DELLA RIMOZIONE: LA DECISIONE SUI TRE STRUMENTI DI STAMATTINA** *(integrazione del guardiano, punto `1`)*
+
+### **Tutti e tre SI AGGIORNANO**, e l'ho scritto nel task history prima del codice: `_costo_punti_fissi.py` *(l'involucro altrimenti si fermerebbe: avvolgera' i due punti fissi che restano; non si rigira, il passo `B` e' chiuso)*; `_censimento_punti_fissi.py` *(altrimenti il caso che deve riuscire fallirebbe: ### **la previsione nuova e' `2` nel percorso del tick e `3` nel nucleo**, dichiarata prima della corsa)*; `_matrice_dipendenze.py` *(il nome esce dalla lista; si rigira)*. ### **I referti di stamattina restano validi al loro commit**, e l'inventario lo dira'.
+### 📌 **Il punto `2`** *(la tensione fra la variante `(c)` e `MEMORIA-DENTRO-H`: la coda e la sequenza degli arrivi sono un buffer di storia)* ### **e' in coda, dopo la rimozione.**
