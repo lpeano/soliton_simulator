@@ -1103,3 +1103,15 @@ passato: SI' o NO>>.** ### **Vale per il modello INTERO**, non per un pezzo -- e
 ### 📌 **LA LETTURA DEL GUARDIANO, scritta come tale:** *e' l'ITERAZIONE SEMPLICE a non convergere dove `Lambda` scende sotto `Lambda_c` (`cs` ripido); NON e' dimostrato che il punto fisso non esista.*
 ### ⚠ **Riguarda `D4` e la domanda sulla memoria** *(«lo stato contiene il passato?»)*: ### **la decisione e' di Luca, e qui non si cura niente.**
 ### 📌 **LA LETTURA DEL GUARDIANO, scritta come tale** *(`2026-10-19`, `12:36`; ### **una lettura, non una misura**)*: la matrice del passo `C` *(`e989872d`)* dice che ### **l'unico pezzo che muove `Lambda` e' `CAMM-SPOSTAMENTO-VUOTO`** *(`S3` e `CAMM-FASE-VUOTO` cambiano solo fasi)*. Quindi ### **l'anello «`cs` -> `Lambda`» del ciclo al nodo `10` passa per il trasporto del vuoto**: e' ### **la stessa auto-dipendenza che esclude la variante `(b)`.** Per la variante `(c)` *(in coda)* ### **la memoria del resto accumulato renderebbe esplicita questa dipendenza senza punto fisso**; ### **resta aperta la simmetria nel tempo**, la stessa domanda su cui cade `(b)`.
+
+### ⭐⭐ **IL CENSIMENTO CONTATO DEI PUNTI FISSI E DELLE DIPENDENZE** *(passi `A`-`D` del task history `2026-10-18_memoria_e_punti_fissi.md`, `2026-10-19`)* -- ### **la voce e' `[[DOMANDA-LO-STATO-CONTIENE-IL-PASSATO]]`**
+
+| | il passo | il numero | il referto |
+|---|---|---|---|
+| `A` | ### **i punti fissi** | ### **`3` nel percorso del tick** *(`cs_al_centro`, la fase del vuoto, il peso al punto medio SPENTO)*, `4` nel nucleo *(piu' `passo.mezzo_implicito`, via di `H`)*. ### **Dopo la rimozione del ramo** *(in coda)* ### **nel tick ne restano `2`** | `censimento_punti_fissi.txt` |
+| `B` | ### **il costo** | ### **`cs_al_centro` `76`-`92%` del tick, `Omega` `69`-`84%`**, di cui `52`-`77%` dentro i giri di `cs`; il modello `giri * c(giro)` ### **non spiegato, non bloccante** | `costo_punti_fissi.txt` |
+| `C` | ### **la matrice** | tutti e `7` i pezzi leggono `cs`; ### **muove `Lambda` solo `CAMM-SPOSTAMENTO-VUOTO`, AUTO-DIPENDENTE**; incrociate ### **solo per l'auto-dipendenza** | `matrice_dipendenze.txt` |
+| `D` | ### **`ambito`** | ### **`7` letture di `cs` su `7` non dichiarate**, e `cs` non e' nel vocabolario | `ambito_contro_matrice.txt` |
+
+### ⛔ **QUESTO CORREGGE IL NUMERO DELL'INIZIO DELLA SEZIONE**, che parlava di punti fissi *«`cs` al centro e il peso d'arco al punto medio»*: ### **quello che gira davvero a ogni tick con `cs` dinamico e' la fase del vuoto dentro `cs`**, ed e' li' il costo. ### **E per le varianti** *(lettura, non decisione)*: `(a)` resta esplicita ma non simmetrica, ### **ed e' un buffer di storia, in tensione con `[[MEMORIA-DENTRO-H]]`**; `(b)` non e' disponibile come esplicita simmetrica; `(c)` porta il passato nel resto e nelle code, con la simmetria nel tempo aperta.
+### ⛔ **LA DECISIONE «lo stato contiene il passato» RESTA UNA E DI LUCA.**

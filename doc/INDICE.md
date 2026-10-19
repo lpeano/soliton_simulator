@@ -9,7 +9,7 @@
 | `DOCUMENTAZIONE` | `2` | 1 |
 | `DOCUMENTAZIONE` | `ENTRAMBE` | 9 |
 | `FISICA` | `1` | 343 |
-| `FISICA` | `2` | 133 |
+| `FISICA` | `2` | 134 |
 | `FISICA` | `ENTRAMBE` | 21 |
 | `INFRASTRUTTURA` | `1` | 39 |
 | `INFRASTRUTTURA` | `2` | 23 |
@@ -316,6 +316,7 @@
 | `DOMANDA-LA-MITOSI-CREA-VUOTO` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | la mitosi CREA vuoto? a densita costante V cresce, e oggi V si conserva esattame |
 | `DOMANDA-LA-SCALA-NATURALE-DI-N` | DECISIONE | FISICA | 2 | ### **CHIUSA** |  | la scala naturale di N: l-asintoto della saturazione non vale, e N diverge come  |
 | `DOMANDA-LAMBDA-GRANDEZZA` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | lambda: su quale grandezza si misura, e da dove viene il suo valore? |
+| `DOMANDA-LO-STATO-CONTIENE-IL-PASSATO` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | lo stato contiene il passato? una memoria al posto dei punti fissi di cs, scelta |
 | `DOMANDA-MASSA-E-FORME-MANCANTI` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | il termine di massa e due forme del flusso sono nel banco e non in tabella |
 | `DOMANDA-MITOSI-LE-FORME` | DECISIONE | FISICA | 2 | ### **AGENDA** | SI | le quattro forme della mitosi: lo spareggio, phi, il ramo della radice, la conne |
 | `DOMANDA-OMEGA-E-UNITA-O-COSTANTE` | DECISIONE | FISICA | 2 | ### **CHIUSA** |  | omega e una scelta di unita o una costante nuova? E i rapporti fra i tre angoli |
