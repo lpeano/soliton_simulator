@@ -1,0 +1,38 @@
+[TIMBRO] _instabilita_vuoto.py  sha1-BYTE 4d8de066  committato e pulito
+====================================================================================================
+IL TEST DI INSTABILITA' DEL VUOTO UNIFORME -- una misura
+====================================================================================================
+  la scena di D4 senza sorgente: lati (31, 31), VUOTO 1.0, SEME scena 7; il passo: impronta 2e7f795d2a52fbe7
+  la perturbazione: phi_h *= sqrt(1 + a r_h), r normale, seme 20261019, somma w r = 0
+  il tratto: da T0 = 20 al primo m >= 0.01 Lambda_m (minimo 50 tick); 5 blocchi
+  i bracci si salvano mentre corrono in doc\referti_l2\instabilita_vuoto.jsonl
+----------------------------------------------------------------------------------------------------
+  (1) r 0.1          m(0) 7.54e-06  m(fine) 5.00e-06  V 3844 -> 3844  [43 s]
+  (1) r 1            m(0) 7.54e-06  m(fine) 4.61e-06  V 3844 -> 3844  [45 s]
+  (1) r 10           m(0) 7.54e-06  m(fine) 4.87e-06  V 3844 -> 3844  [38 s]
+  (2) senza fase     m(0) 7.54e-06  m(fine) 4.61e-06  V 3844 -> 3844  [15 s]
+  (3) cs SPENTO      m(0) 7.54e-06  m(fine) 5.06e-06  V 3844 -> 3843.99999999833  [6 s]
+  (4) dtau 0.25      m(0) 7.54e-06  m(fine) 4.82e-06  V 3844 -> 3844  [89 s]
+  (5) ampiezza 1e-9  m(0) 7.54e-09  m(fine) 4.61e-09  V 3844 -> 3844  [36 s]
+----------------------------------------------------------------------------------------------------
+### gamma, nel tratto (in tick e in tempo proprio), e il modo che cresce
+  braccio            tratto       gamma / tick (barre)       gamma / tempo proprio      inst.  il modo: lambda (kx,ky) frazione
+  (1) r 0.1          20-2001      -2.008e-05 +- 2.4e-05 ( -0.8)  -4.417e-05 +- 5.2e-05   no     3.13 (7,-7) 0.01
+  (1) r 1            20-2001      -4.874e-06 +- 3.9e-05 ( -0.1)  -1.950e-05 +- 1.5e-04   no     2.31 (6,-12) 0.01
+  (1) r 10           20-2001      +9.992e-05 +- 5.5e-05 (  1.8)  +2.198e-03 +- 1.2e-03   no     3.13 (7,-7) 0.01
+  (2) senza fase     20-2001      -4.872e-06 +- 3.9e-05 ( -0.1)  -1.949e-05 +- 1.5e-04   no     2.31 (6,-12) 0.01
+  (3) cs SPENTO      20-2001      -3.603e-05 +- 2.8e-05 ( -1.3)  -7.206e-05 +- 5.6e-05   no     2.31 (6,-12) 0.01
+  (4) dtau 0.25      20-4001      +6.138e-06 +- 9.3e-06 (  0.7)  +4.910e-05 +- 7.5e-05   no     2.31 (6,-12) 0.01
+  (5) ampiezza 1e-9  20-2001      -4.871e-06 +- 3.9e-05 ( -0.1)  -1.948e-05 +- 1.5e-04   no     2.31 (6,-12) 0.01
+----------------------------------------------------------------------------------------------------
+### I CRITERI (task history 027a3f70, annotazione 91311771)
+  (3) il caso che DEVE fallire: a cs SPENTO NON e' instabile       PASSA   gamma -3.603e-05 a -1.3 barre
+  (1) r 0.1: instabile?                                            no
+  (1) r 1: instabile?                                              no
+  (1) r 10: instabile?                                             no
+  (2) senza fase: instabile?                                       no
+  (4) gamma in tempo proprio: dtau 0.5 -1.950e-05, dtau 0.25 +4.910e-05 -> FISICA (coincide entro 3 barre)   (in tick: -4.874e-06 e +6.138e-06)
+  (5) gamma a 1e-6 -4.874e-06, a 1e-9 -4.871e-06 -> LINEARE
+====================================================================================================
+### I CRITERI DI CONTROLLO: 1 su 1.  ### NESSUNA DECISIONE: LINEARE e Lambda_c restano FERMI.
+====================================================================================================

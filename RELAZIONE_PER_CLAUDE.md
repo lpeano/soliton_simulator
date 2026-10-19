@@ -19635,3 +19635,22 @@ Tre referti dai blob committati e puliti: `doc/referti_l2/tetto_omega.txt` *(`cs
 ### 📌 **IL TEST D'INSTABILITA': LA SECONDA VERSIONE DEL MANDATO, ANNOTATA PRIMA DEL CODICE**
 
 ### **Si riporta anche la LUNGHEZZA D'ONDA del modo che cresce**: dichiarato come -- la trasformata di Fourier 2D di `delta Lambda` sul toro al tick in cui finisce il tratto, il massimo di `|FFT|^2` escluso `k = 0`, `lambda` in archi, e ### **la frazione di potenza di quel modo.** ### **E la domanda di Luca andra' nella mappa come VINCOLO DI `L2` SU `L3`**, non come lavoro di `L3`.
+
+
+### ✅ **IL TEST DI INSTABILITA' DEL VUOTO UNIFORME: NESSUNA INSTABILITA', IN NESSUN BRACCIO** *(decisione di Luca delle `20:02`)*
+
+`doc/referti_l2/instabilita_vuoto.txt` e `instabilita_vuoto.jsonl`, dal blob ### **`4d8de066`** *(`csv/_instabilita_vuoto.py` di `e00188f6`, «committato e pulito»)*. ### **`V` conservato** in tutti i bracci *(`3844` -> `3844`; a `cs` spento `3843.99999999833`, l'arrotondamento su `2000` tick)*.
+
+| il braccio | `gamma` per tick *(barre)* | `gamma` in tempo proprio | instabile? |
+|---|---|---|---|
+| `(1)` rapporto `0.1` | `-2.0e-05 +- 2.4e-05` *(`-0.8`)* | `-4.4e-05 +- 5.2e-05` | ### **no** |
+| `(1)` rapporto `1` | `-4.9e-06 +- 3.9e-05` *(`-0.1`)* | `-2.0e-05 +- 1.5e-04` | ### **no** |
+| `(1)` rapporto `10` | `+1.0e-04 +- 5.5e-05` *(`+1.8`)* | `+2.2e-03 +- 1.2e-03` | ### **no** *(il piu' vicino, sotto `3` barre)* |
+| `(2)` senza `CAMM-FASE-VUOTO` | `-4.9e-06 +- 3.9e-05` | -- | ### **no** |
+| `(3)` ### **`cs` SPENTO** *(il caso che DEVE fallire)* | `-3.6e-05 +- 2.8e-05` *(`-1.3`)* | -- | ### **no -- PASSA** |
+| `(4)` `dtau 0.25`, `4000` tick | `+6.1e-06 +- 9.3e-06` *(`+0.7`)* | `+4.9e-05 +- 7.5e-05` | ### **no** |
+| `(5)` ampiezza `1e-9` | `-4.9e-06 +- 3.9e-05` | -- | ### **no** |
+
+### ⛔ **LA LETTURA:** ### **il vuoto uniforme NON e' instabile** sulla scena di `D4`, con `cs` dinamico e col passo di oggi, ai tre rapporti: `max|delta Lambda|` resta al livello della perturbazione *(da `7.5e-06` a `~5e-06` in `2000` tick)*. ### **L'ipotesi del guardiano non e' sostenuta.**
+### ⚠ **I due verdetti `(4)` «FISICA» e `(5)` «LINEARE» li da' il criterio applicato a lettera, ma con `gamma` compatibile con zero dicono solo che DUE ZERI coincidono** -- ### **non sono informazione.** E ### **il «modo» dominante porta l'`1%` della potenza**: e' rumore bianco, non un modo che cresce.
+### 📌 **Che cosa vuol dire per `D4`, come mia lettura:** lo svuotamento quasi totale a `x = 0.01` arriva ### **in poche centinaia di tick**, e un'instabilita' compatibile con questi `gamma` ci metterebbe ### **molto di piu'**. ### **Quindi e' una risposta alla MATERIA, fortemente non lineare** -- ### **da indagare, non spiegata.** ### **`LINEARE` e `Lambda_c` restano FERMI**: l'esito e' qui, la decisione e' di Luca.
