@@ -96,6 +96,12 @@
 entra nel regime del ciclo di stamattina** *(`Lambda` sotto `Lambda_c`)*, e la protezione
 `(a)` ### **servira'.** ### **Lo scrivo PRIMA, perche' l'ho visto prima.**
 
+### ⛔ **ANNOTAZIONE, PRIMA DELLA CORSA VERA: IL GIRO CORTO HA FATTO ALZARE UN ALTRO PUNTO FISSO** *(si annota, non si riscrive)*
+
+Il giro corto dello strumento *(`STANDARD 7`, non tenuto)* a rapporto `1`, `dtau = 0.5`: ### **`x = 1` converge** *(e `cs` CALA a `98` e `64` barre)*, ma ### **`x = 0.01` e `x = 0.1` alzano al tick `2` e `4`** con `Lambda/Lambda_c` a ### **`0.998` e `0.922`** -- cioe' ### **NON dove `Lambda` scende sotto `Lambda_c`.** E ### **a alzare non e' il punto fisso di `cs`, ma quello di `Omega`** *(`energia_pesata.applica`)*, con ### **ultimo scarto `1.7e-16` e `3.6e-16` ASSOLUTI**.
+### 📌 **LA MIA LETTURA, scritta come tale e NON provata:** la tolleranza di `applica` e' ### **relativa a `max|Omega|`** *(`EPS_OMEGA * scala`)*, e con poca materia ### **`Omega` e' piccolo ma e' la differenza di termini di ordine `1`**: il suo rumore d'arrotondamento assoluto *(`~1e-16`)* ### **supera la tolleranza**, e il punto fisso non puo' scendere sotto. ### **Se e' cosi', e' un difetto del passo di default con `cs` acceso nei campi DEBOLI** -- proprio dove il criterio LINEARE di `D4` vuole guardare.
+### ✅ **CHE COSA FACCIO:** ### **niente cure** *(la protezione `(a)` dice di registrare e andare avanti, e una tolleranza e' una decisione)*; ### **lo strumento dice QUALE punto fisso alza** *(`cs` o `Omega`)*, invece di chiamarli tutti «di `cs`» come faceva la mia prima versione; ### **e il criterio LINEARE, se a `x` piccolo nessun braccio converge, sara' NON DECIDIBILE** -- non PASSA. ### **Il difetto si registra, e la cura torna a Luca.**
+
 ## 5. TODO
 
 1. `csv/_misura_d4.py`: un braccio per processo *(`STANDARD 1`)*, i risultati scritti
