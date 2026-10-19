@@ -19444,3 +19444,9 @@ Il messaggio di `56dd95b7` dice *«`doc/RIPRESA_2026-10-15.md`: la sezione 49»*
 
 *«La quantizzazione puo' emergere dal quanto di olonomia (`2 pi` su un ciclo, gia' deciso per la mitosi) quando `U` sara' dinamica?»* -- con le considerazioni del guardiano scritte come tali: `(i)` la quantizzazione **topologica** *(attesa per costruzione, da verificare in `L4`)*; `(ii)` i **quanti di radiazione** come **ipotesi**, che ### **non segue da sola** *(indivisibilita', una costante unica, le statistiche solo in `L6`)*; `(iii)` la **tensione da decidere** fra il quanto della mitosi e quello della radiazione -- ### **nessuna delle due e' scelta.** Rimandi in `L3` *(accanto a `MITOSI-QUANTO-OLONOMIA`)* e in `L6`, e il legame con la variante `(c)`.
 ### ⚠ **Il rimando «nella voce» l'ho messo dove la MAPPA nomina la voce** *(la tabella di `L3`)*: il mandato dice «solo mappa e relazione», e ### **l'indice non l'ho toccato.** ### **Nessuna conclusione: e' una domanda con i suoi criteri.**
+
+
+### ✅ **IL PASSO `B` E' CHIUSO CON LE QUOTE** *(decisione di Luca, `2026-10-19` `12:36`, sullo STOP di `8b2bdb16`)*
+
+### **Il risultato del passo `B` sono le QUOTE**, che non dipendono dal controllo: ### **`cs_al_centro` `76`-`92%` del tick, `Omega` `69`-`84%`, di cui `52`-`77%` dentro i giri di `cs`** -- ### **il costo del tick e' il punto fisso di `Omega` annidato in quello di `cs`.** La mia previsione *«`cs` sopra il `90%`»* vale in ### **`3` casi su `13`**.
+### ⚠ **Il modello `giri * c(giro)` non torna in `12` bracci su `26`** *(`r` fra `0.92` e `1.26`, piu' `0.663` e `0.502` a `32`/`2.4`)*: ### **NON SPIEGATO e NON BLOCCANTE**, perche' lo scarto ### **non puo' cambiare la conclusione sulle quote.** Le due ipotesi *(costo fisso per chiamata; `c(giro)` solo sullo stato iniziale)* ### **restano ipotesi**, da riprendere solo se servira' il costo di un singolo giro. ### **Annotato nel task history**, in fondo al par.`2`.

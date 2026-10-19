@@ -84,6 +84,10 @@ solo pezzo**. Se e' vero, la sua quota dovrebbe stare **sopra il `90%`**.
 - **IL REFERTO** stampa per ogni braccio `r = misura/previsto`, la soglia, e l'etichetta **informativo / non informativo**.
 - **IL COLLAUDO DEL CRITERIO** resta sui due casi noti (uno che torna, uno che non torna), e se ne aggiunge un **terzo: un caso NON INFORMATIVO** (soglia larga apposta), che deve uscire **etichettato come tale, e non come «torna».**
 
+**ANNOTAZIONE DEL 2026-10-19 (decisione di Luca delle 12:36): IL PASSO `B` SI CHIUDE CON LE QUOTE.** *(Si annota, non si riscrive.)*
+- **IL RISULTATO DEL PASSO `B` SONO LE QUOTE**, che non dipendono dal controllo *(referto `costo_punti_fissi.txt`, `8b2bdb16`)*: **`cs_al_centro` `76`-`92%` del tick**, **`Omega` `69`-`84%`**, di cui **`52`-`77%` dentro i giri di `cs`**. **Il costo del tick e' il punto fisso di `Omega` annidato in quello di `cs`.** La previsione del par.`1` *(«`cs_al_centro` sopra il `90%`»)* **vale in `3` casi su `13`**.
+- **IL MODELLO `giri * c(giro)` NON TORNA in `12` bracci su `26`** *(`r` fra `0.92` e `1.26`, piu' i due anomali a `32` / `Lambda_c = 2.4`: `0.663` e `0.502`)*. E' registrato come **NON SPIEGATO e NON BLOCCANTE**: lo scarto **non puo' cambiare la conclusione sulle quote.** Le due ipotesi *(un costo fisso per chiamata; `c(giro)` misurato solo sullo stato iniziale)* **restano scritte come ipotesi**, da riprendere **solo se un giorno servira' il costo di un singolo giro**.
+
 ## 3. TODO DEL NEXT STEP — *operativo*
 
 1. `csv/_censimento_punti_fissi.py`, con il caso che deve riuscire (`>= 3`).
