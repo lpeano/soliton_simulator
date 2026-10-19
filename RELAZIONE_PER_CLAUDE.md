@@ -19662,3 +19662,8 @@ La domanda di Luca *(«l'instabilita', se c'e', dipende dal fatto che lo spazio 
 ### 📌 **NELLA MAPPA, SEZ.`25`: L'IPOTESI DELLE COSTANTI DI OMOGENEITA'** *(idea di Luca del `2026-10-19`, `20:09`-`20:16`)*
 
 ### **`G` e `Lambda` costanti DENTRO domini omogenei generati dalla crescita**, e variabili su scala piu' grande dell'orizzonte -- *«una costante di omogeneita'»*. Registrata come ### **una sola ipotesi** accanto ai grappoli omogenei, con le considerazioni del guardiano scritte come tali *(la storia di `Lambda`; la distinzione fra il `Lambda` LOCALE del modello e la costante cosmologica come comportamento MEDIO; il simulatore che vede la rete tutta)* e ### **tre criteri fissati prima** per quando `L3` fara' crescere lo spazio: domini omogenei, la loro taglia contro l'orizzonte causale, costanti dentro e non fra. ### **Nessuna decisione.**
+
+### ⛔ **UN FATTO DEL GUARDIANO, REGISTRATO PRIMA DEL TEST DI JEANS: IN `D4` LA MATERIA ERA CONGELATA**
+
+`statica_protocollo.corri` con `congela = "pezzo"` ### **rimette `psi_h = psi0` dopo OGNI pezzo**: la sorgente non si muove, e cio' che il vuoto restituisce alla materia ### **viene scartato** -- ### **una riserva infinita senza retroazione.** ### **La lettura del guardiano, un'ipotesi:** lo svuotamento quasi totale del grumo a qualunque `x` e la risposta non monotona ### **potrebbero venire dal PROTOCOLLO, non dalla fisica.**
+### ⚠ **E la scelta di `congela = pezzo` era MIA:** la lettura operativa di «sorgente fotografata» nel task history di `D4` *(`a632e866`)*. ### **La sua conseguenza non l'avevo vista.** ### **Registrato anche nella voce di `Lambda_c`**, accanto ai numeri di `D4`; lo decide il braccio `J4` del test di Jeans.
