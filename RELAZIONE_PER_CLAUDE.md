@@ -19631,3 +19631,7 @@ Tre referti dai blob committati e puliti: `doc/referti_l2/tetto_omega.txt` *(`cs
 ### 📌 **IL TEST DI INSTABILITA' DEL VUOTO UNIFORME: IL TASK HISTORY, PRIMA DEL CODICE** *(decisione di Luca delle `20:02`)*
 
 `doc/TASK_HISTORY/2026-10-19_instabilita_vuoto.md`: la scena di `D4` **senza sorgente**, una perturbazione casuale **che conserva `V` esattamente** *(seme `20261019`, ampiezza `1e-6`)*, cinque bracci *(tre rapporti; senza `CAMM-FASE-VUOTO`; ### **`cs` spento, il caso che deve fallire**; `dtau` dimezzato; ampiezza `1e-9`)*, e ### **il tratto e le barre di `gamma` dichiarati prima**. ### **`LINEARE` e `Lambda_c` restano FERMI** fino all'esito.
+
+### 📌 **IL TEST D'INSTABILITA': LA SECONDA VERSIONE DEL MANDATO, ANNOTATA PRIMA DEL CODICE**
+
+### **Si riporta anche la LUNGHEZZA D'ONDA del modo che cresce**: dichiarato come -- la trasformata di Fourier 2D di `delta Lambda` sul toro al tick in cui finisce il tratto, il massimo di `|FFT|^2` escluso `k = 0`, `lambda` in archi, e ### **la frazione di potenza di quel modo.** ### **E la domanda di Luca andra' nella mappa come VINCOLO DI `L2` SU `L3`**, non come lavoro di `L3`.

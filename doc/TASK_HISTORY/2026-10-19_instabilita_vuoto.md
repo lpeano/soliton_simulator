@@ -77,6 +77,10 @@
 - ### **Se il punto fisso di `cs` non converge:** si registra *(tick, `Lambda` minimo,
   `Lambda_c`)* e si va avanti. ### **Niente cure.**
 
+**ANNOTAZIONE, PRIMA DEL CODICE: LA SECONDA VERSIONE DEL MANDATO** *(arrivata dopo `027a3f70`; `PRECEDENZA-IN-CODA`: vale l'ultima)*. *(Si annota, non si riscrive.)* Due cose cambiano:
+- ### **SI RIPORTA ANCHE LA LUNGHEZZA D'ONDA DEL MODO CHE CRESCE.** **Come, dichiarato qui:** al tick in cui finisce il tratto *(`T1`)*, il campo `delta Lambda_k = Lambda_k - Lambda_medio` si dispone sul toro `31x31` *(l'indice del nodo e' `statica_protocollo.nodo_di`, riga per riga)*, se ne prende ### **la trasformata di Fourier 2D**, e il modo dominante e' ### **il massimo di `|FFT|^2` escluso `k = 0`**, con `kx, ky` riportati in `[-15, 15]`. ### **`lambda = 1/sqrt((kx/31)^2 + (ky/31)^2)` in ARCHI.** Si riporta anche ### **la frazione di `|FFT|^2` che quel modo porta** *(se e' piccola, «il modo dominante» non dice molto, e lo si dice)*.
+- ### **LA DOMANDA DI LUCA VA NELLA MAPPA COME VINCOLO DI `L2` SU `L3`**, non come lavoro di `L3`: se `gamma` e' FISICA, ### **il vincolo e' UN NUMERO** *(il tasso di crescita della rete almeno dell'ordine di `gamma`, in tempo proprio, alla scala della lunghezza d'onda misurata)*; se e' NUMERICA, l'espansione non c'entra; ### **e il vincolo NON chiude `L2` da solo.**
+
 ## 4. TODO
 
 1. `csv/_instabilita_vuoto.py`, un processo per braccio, le serie salvate mentre corrono;
