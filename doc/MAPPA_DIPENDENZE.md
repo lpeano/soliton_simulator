@@ -1046,6 +1046,7 @@ DALLA MEMORIA invece che dall'iterazione.**
    - la stabilita' nel nodo 10 della scena 32/0.01 (il guadagno -1.02);
    - il costo, che cresce col traffico;
    - l'eredita' del resto alla mitosi.
+   - ### 📌 **LA TENSIONE CON `[[MEMORIA-DENTRO-H]]`** *(lettura del guardiano, scritta come tale; integrazione alla verifica fino a `8d63be67`)*: la decisione di Luca del `2026-10-10` dice ### **«nessun buffer di storia»**. ### **Il RESTO accumulato e' una variabile dinamica, e va bene;** ### **la CODA di pacchetti separati e la SEQUENZA degli arrivi da ricordare sono un buffer di storia.** Sono compatibili con la decisione ### **solo se il contenuto in transito sull'arco diventa una variabile di stato dell'arco dentro `H`, con la sua energia.** ### **Da decidere da Luca quando `(c)` si aprira'.** *(La stessa tensione e' registrata per `(a)` nella voce `DOMANDA-LO-STATO-CONTIENE-IL-PASSATO`.)*
 7) LA PROVA MINIMA, quando sara' il momento: due nodi, un arco, cs diversi. Si verificano norma, coda limitata e rapporto delle frequenze.
 8) La decisione "lo stato contiene il passato" resta UNA e di Luca. La variante (c) entra nel confronto con i punti fissi dopo il passo C e la misura della non convergenza.
 

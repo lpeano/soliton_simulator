@@ -19521,3 +19521,7 @@ L'unico pezzo che muove `Lambda` e' `CAMM-SPOSTAMENTO-VUOTO` *(la matrice di `e9
 ### ✅ **LA RIMOZIONE E' CHIUSA NEI DOCUMENTI: MAPPA, CODA, RIPRESA, VOCE**
 
 ### **Mappa** *(sez.`26`)* e **coda**: la frase *«il ramo e' SPENTO e non si toglie»* resta, con accanto ### **«SUPERATO: il ramo e' TOLTO»** e i rimandi *(`3b467aa4`, `b9edb2be`, `2c95af13`, `880955bb`)*; nella mappa anche ### **il numero dopo** *(`2` punti fissi nel tick, `3` nel nucleo)*. ### **RIPRESA:** ### **la sezione `49` che mancava** *(`C1` non cadeva, cadeva la mia osservabile; rimando a `g_dello_stato.txt` e all'errore `n.12`)* e ### **la `50`** *(la rimozione)*. ### **La voce `DOMANDA-LO-STATO-CONTIENE-IL-PASSATO`** e' aggiornata con `aggiorna-lotto` *(una riga di storico)*: ### **conta il passo DOPO la rimozione, e lo dice.**
+
+### 📌 **LA VARIANTE `(c)` E `MEMORIA-DENTRO-H`: NELLA MAPPA, FRA I PUNTI APERTI** *(lettura del guardiano, punto `2` della verifica fino a `8d63be67`)*
+
+La tensione che avevo registrato per `(a)` ### **tocca anche `(c)`**: il RESTO accumulato e' una variabile dinamica e va bene; ### **la CODA di pacchetti separati e la SEQUENZA degli arrivi sono un buffer di storia**, compatibili con `MEMORIA-DENTRO-H` ### **solo se il contenuto in transito diventa una variabile di stato dell'arco dentro `H`, con la sua energia.** ### **Da decidere da Luca quando `(c)` si aprira'.**
