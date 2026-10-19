@@ -75,6 +75,8 @@ solo pezzo**. Se e' vero, la sua quota dovrebbe stare **sopra il `90%`**.
    che scrive la materia e legge `cs`, **e i due stanno nello stesso palindromo**. Non «a
    occhio sulla matrice».
 
+**ANNOTAZIONE DEL 2026-10-18 SERA, PRIMA DEI NUMERI (precisazione del guardiano):** la definizione di 'incrociate' del punto 3 si estende all'AUTO-DIPENDENZA. Un solo pezzo che scrive Lambda e legge cs (come CAMM-SPOSTAMENTO-VUOTO) basta a rendere le dipendenze incrociate: anche la variante sfalsata alla leapfrog diventerebbe implicita. La matrice riporta quindi, per ogni pezzo, anche le coppie (scrive X, legge una funzione di X) dentro lo stesso pezzo.
+
 ## 3. TODO DEL NEXT STEP — *operativo*
 
 1. `csv/_censimento_punti_fissi.py`, con il caso che deve riuscire (`>= 3`).

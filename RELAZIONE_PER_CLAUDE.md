@@ -19311,3 +19311,10 @@ e' per questo che ### **il passo e' del secondo ordine comunque.**
 ### ⭐ **E la tabella lo diceva gia', se la leggevo bene:** il pezzo `8` esatto e
 ### **gli altri `13` tutti allo STESSO scarto** non e' il ritratto di un difetto, e'
 ### **il ritratto di una CANCELLAZIONE.**
+
+
+### 📌 **RIPRESA DA `9feeebba`: L'AUTO-DIPENDENZA NEL PIANO, E LA RIMOZIONE DEL RAMO IN CODA** *(solo documenti)*
+
+`1)` Nel task history della memoria e dei punti fissi, in fondo al par.`2`, c'e' l'**annotazione** del guardiano *(la definizione originale resta, par.`8`)*: ### **«incrociate» si estende all'AUTO-DIPENDENZA.** Un solo pezzo che scrive `Lambda` e legge `cs` *(`CAMM-SPOSTAMENTO-VUOTO`)* basta, e rende implicita anche la variante sfalsata alla leapfrog; la matrice riportera' per ogni pezzo le coppie *(scrive `X`, legge una funzione di `X`)*.
+
+`2)` In `doc/CODA_2026-10-16.md` c'e' la sezione nuova: ### **la rimozione del ramo del punto medio per pezzo** *(decisione di Luca, `21:48`)*, **dopo** il censimento e la matrice e **prima** di `D4`. Supera la riga *«SPENTO e NON si toglie»*; il perimetro del guardiano e' `8` file e `37` righe, e ### **il mio numero lo dara' uno script.**
