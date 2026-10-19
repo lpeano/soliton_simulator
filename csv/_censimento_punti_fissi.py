@@ -10,8 +10,10 @@ r"""**I PUNTI FISSI DEL PASSO, CONTATI** — *il passo `A` del task history dell
 ## ⭐ CHE COSA CONTA, E LA DEFINIZIONE E' SCRITTA PRIMA
 
 ### ✅ **UN PUNTO FISSO E' un ciclo (`for` o `while`) che contiene un `if` il cui test
-e' un CONFRONTO, e dentro quell'`if` un `break` o un `return`** -- cioe' ### **un ciclo
-che si ferma quando qualcosa converge**, non quando ha finito di contare.
+e' un CONFRONTO DI ORDINE (`<`, `<=`, `>`, `>=`), e dentro quell'`if` un `break` o un
+`return`** -- cioe' ### **un ciclo che si ferma quando qualcosa converge**, non quando
+ha finito di contare ### **ne' quando ha TROVATO qualcosa** *(la cura di `bde7a07a`: la
+prima versione accettava ogni `Compare`, e contava `passo.strati`)*.
 ### 📌 Per ognuno riporta ### **file, funzione, riga**, i ### **nomi** che compaiono nel
 confronto *(la tolleranza)* e quelli del `range` *(il tetto dei giri)*.
 
@@ -23,8 +25,9 @@ un punto fisso fuori dal nucleo ### **non e' nel passo.**
 ## ⭐ I DUE CONTROLLI, sul codice SINTETICO, prima di guardare il nucleo
 
 ### ✅ **DEVE ESSERE CONTATO:** un ciclo con tetto e uscita su tolleranza.
-### ⛔ **NON DEVE ESSERE CONTATO:** un ciclo che somma e basta, e un ciclo con un `if`
-che fa `continue` *(e' il ramo del nodo isolato di `_somma_per_nodo`)*.
+### ⛔ **NON DEVE ESSERE CONTATO:** un ciclo che somma e basta, un ciclo con un `if`
+che fa `continue` *(e' il ramo del nodo isolato di `_somma_per_nodo`)*, e ### **una
+RICERCA** che esce con `break` su un `not in` *(e' `passo.strati`)*.
 ### **Se uno dei due sbaglia, lo strumento e' rotto e il numero non vale niente.**
 
 ## ⛔ E IL CASO CHE DEVE RIUSCIRE SUL NUCLEO
@@ -67,7 +70,23 @@ def somma(v):
             continue
         t += v[k]
     return t
+
+
+def strato_libero(occupati, a, b):
+    for s in range(len(occupati)):
+        if a not in occupati[s] and b not in occupati[s]:
+            break
+    return s
 '''
+# ### ⛔⛔ **LA RICERCA NEL CONTROLLO NEGATIVO** *(`2026-10-19`, cura di `bde7a07a`)*:
+# ### la prima versione contava ### **`passo.strati`** *(la colorazione golosa degli
+# ### archi)*, perche- `a not in occupati[s]` ### **per l-AST e- un `Compare`.** Un ciclo
+# ### che si ferma quando ### **TROVA** qualcosa non e- un ciclo che si ferma quando
+# ### qualcosa ### **CONVERGE**: `strato_libero` qui sopra ### **e- quel caso**, e deve
+# ### risultare ### **non contato.**
+# ### ✅ **IL CONFRONTO DI CONVERGENZA E- DI ORDINE:** uno scarto ### **sotto** una
+# ### tolleranza. `==`, `!=`, `in`, `is` ### **non lo sono.**
+ORDINE_OP = (ast.Lt, ast.LtE, ast.Gt, ast.GtE)
 
 
 def _nomi(nodo):
@@ -86,7 +105,9 @@ def _esce_su_confronto(ciclo):
     for n in ast.walk(ciclo):
         if n is ciclo or not isinstance(n, ast.If):
             continue
-        confronto = any(isinstance(t, ast.Compare) for t in ast.walk(n.test))
+        confronto = any(isinstance(t, ast.Compare)
+                        and any(isinstance(o, ORDINE_OP) for o in t.ops)
+                        for t in ast.walk(n.test))
         if not confronto:
             continue
         if any(isinstance(b, (ast.Break, ast.Return))
@@ -135,7 +156,8 @@ def main(argv):
     print("=" * 100)
     print("I PUNTI FISSI DEL PASSO, CONTATI CON L'AST -- il passo `A` della memoria")
     print("=" * 100)
-    print("  la definizione: un ciclo con un `if` di CONFRONTO che contiene `break`/`return`")
+    print("  la definizione: un ciclo con un `if` di CONFRONTO DI ORDINE che contiene"
+          " `break`/`return`")
     print("-" * 100)
     print("### I DUE CONTROLLI SUL CODICE SINTETICO")
     si = len(punti_fissi(_SINTETICO_SI, "<si>"))
