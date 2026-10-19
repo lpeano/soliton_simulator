@@ -1,0 +1,33 @@
+[TIMBRO] _censimento_ramo_punto_medio.py  sha1-BYTE 2d4ff85c  committato e pulito
+====================================================================================================
+I NOMI DEL RAMO DEL PUNTO MEDIO PER PEZZO, CONTATI -- DOPO la rimozione
+====================================================================================================
+  i nomi: regola_punto_medio, hop_phi_punto_medio, s_arco_da_lambda, z_arco_da_s, hop_phi_con_s, giri_peso, EPS_PUNTO_FISSO, _misura_punto_medio
+  le righe che contengono almeno un nome (parola intera), nei file tracciati da git; escluso questo file
+----------------------------------------------------------------------------------------------------
+### CODICE (fuori da doc/ e dalla relazione): 4 file, 5 righe
+     csv/_costo_punti_fissi.py                              2   _misura_punto_medio:2
+     csv/_file_fisica.py                                    1   _misura_punto_medio:1
+     primo_ordine/_mappa.yaml                               1   _misura_punto_medio:1
+     primo_ordine/_misura_punto_medio.py                    1   _misura_punto_medio:1
+----------------------------------------------------------------------------------------------------
+### DOCUMENTAZIONE (doc/ e la relazione): 15 file, 59 righe
+     RELAZIONE_PER_CLAUDE.md                                4   EPS_PUNTO_FISSO:1  _misura_punto_medio:2  hop_phi_punto_medio:2
+     doc/CODA_2026-10-16.md                                 1   EPS_PUNTO_FISSO:1  _misura_punto_medio:1  giri_peso:1  hop_phi_con_s:1  hop_phi_punto_medio:1  regola_punto_medio:1  s_arco_da_lambda:1  z_arco_da_s:1
+     doc/INDICE_ID.tsv                                      1   hop_phi_punto_medio:1
+     doc/INVENTARIO_strumenti.md                            1   _misura_punto_medio:1
+     doc/TASK_HISTORY/2026-10-18_memoria_e_punti_fissi.md   2   giri_peso:1  hop_phi_punto_medio:1
+     doc/TASK_HISTORY/2026-10-19_rimozione_punto_medio.md  15   EPS_PUNTO_FISSO:2  _misura_punto_medio:5  giri_peso:1  hop_phi_con_s:3  hop_phi_punto_medio:4  regola_punto_medio:2  s_arco_da_lambda:2  z_arco_da_s:4
+     doc/indice/storico.jsonl                               1   hop_phi_punto_medio:1
+     doc/indice/voci.jsonl                                  1   hop_phi_punto_medio:1
+     doc/referti_l2/censimento_osservabili.txt              1   _misura_punto_medio:1
+     doc/referti_l2/censimento_punti_fissi.txt              2   EPS_PUNTO_FISSO:1  hop_phi_punto_medio:2
+     doc/referti_l2/costo_punti_fissi.txt                   1   regola_punto_medio:1
+     doc/referti_l2/g_dello_stato.txt                       1   _misura_punto_medio:1
+     doc/referti_l2/matrice_dipendenze.txt                  2   regola_punto_medio:1  s_arco_da_lambda:1
+     doc/referti_l2/punto_medio_per_pezzo.txt               1   _misura_punto_medio:1
+     doc/referti_l2/ramo_punto_medio_prima.txt             25   EPS_PUNTO_FISSO:7  _misura_punto_medio:11  giri_peso:8  hop_phi_con_s:5  hop_phi_punto_medio:16  regola_punto_medio:10  s_arco_da_lambda:7  z_arco_da_s:4
+----------------------------------------------------------------------------------------------------
+### DOPO: righe di CODICE con un nome TOLTO (ammesso solo _misura_punto_medio): 0
+     PASSA
+====================================================================================================

@@ -1,0 +1,36 @@
+[TIMBRO] _collauda_mb1.py  sha1-BYTE b74c228e  committato e pulito
+<unknown>:2: SyntaxWarning: invalid escape sequence '\|'
+====================================================================================================
+IL COLLAUDO DI `M-B1`: LA PROVA CHE PUO' FALLIRE
+====================================================================================================
+  ### la perturbazione dell-ORDINE cambia DAVVERO la sequenza        PASSA   ### e l-ordine e- un PALINDROMO (invertirlo NON cambia niente): per questo si SCAMBIANO due posizioni
+  ### ⛔ DEVE FALLIRE: col passo di oggi MODIFICATO il confronto DIVE PASSA   ### 2 pezzi su 14 NON coincidono: il criterio VEDE il cambiamento
+  ### ⛔ e COL DIFETTO DI IERI il confronto PASSEREBBE (falso-uno)    PASSA   ### 0 pezzi diversi: copiando il passo di oggi nell-albero vecchio, i due lati girano LO STESSO passo
+  ### ⚠ e una perturbazione del SOLO CAMMINO NON tocca i pezzi (per  PASSA   ### 0 pezzi diversi: il criterio di `M-B1` sono I MB1.PEZZI
+  ### ⛔ e NEMMENO l-impronta la vede: viene dalla TABELLA, non dal c PASSA   ### le due impronte sono UGUALI (3fc01fac756b20d1): l-impronta segue `composizione.py`, non `tick.py`
+  ### ✅ ma il PASSO INTERO si muove, e `MB1.contro()` lo RIPORTA     PASSA   ### 2 scene su 2 col passo intero DIVERSO: e- l-unico numero che vede un cammino cambiato, ed e- <<informazione, non criterio>>
+  ### ⛔ DEVE fallire: un id NELL-ORDINE che la misura non sa applica PASSA   ### ha alzato: `M-B1`: i pezzi ['CAMM-INVENTATA'] sono NELL-ORDINE e NON so
+  l'ordine di questo albero: 14 pezzi, impronta 2e7f795d2a52fbe7; il passo viene da `tick.py`
+    nn=16   seme=7    CAMM-MATERIA-VUOTO       sha1-BYTE 8a168b6d3c62
+    nn=16   seme=7    CAMM-FASE-VUOTO          sha1-BYTE 97bf7f39a5bb
+    nn=16   seme=7    CAMM-MONETA-SPIN         sha1-BYTE 83a5ba6ba39e
+    nn=16   seme=7    CAMM-GROVER              sha1-BYTE cfd93fe5de57
+    nn=16   seme=7    CAMM-SPOSTAMENTO         sha1-BYTE 0390d1739a43
+    nn=16   seme=7    CAMM-GROVER-VUOTO        sha1-BYTE 54173695ad70
+    nn=16   seme=7    CAMM-SPOSTAMENTO-VUOTO   sha1-BYTE c5666a692703
+    nn=16   seme=7    (il passo intero)        sha1-BYTE e99035d80da0
+    nn=12   seme=11   CAMM-MATERIA-VUOTO       sha1-BYTE 8e3729637472
+    nn=12   seme=11   CAMM-FASE-VUOTO          sha1-BYTE 560e11be749e
+    nn=12   seme=11   CAMM-MONETA-SPIN         sha1-BYTE 5ea32d8bc974
+    nn=12   seme=11   CAMM-GROVER              sha1-BYTE 8d81e3f7317b
+    nn=12   seme=11   CAMM-SPOSTAMENTO         sha1-BYTE 08aadd523728
+    nn=12   seme=11   CAMM-GROVER-VUOTO        sha1-BYTE 662971b75d39
+    nn=12   seme=11   CAMM-SPOSTAMENTO-VUOTO   sha1-BYTE 4e9b969201c9
+    nn=12   seme=11   (il passo intero)        sha1-BYTE 4f0b5798b1af
+  ### ⭐ la legge CHE GIRA e- fra i pezzi, e coincide AL BIT contro 8 PASSA   ### `CAMM-MATERIA-VUOTO` e- il pezzo n.1 di 7 (n.1 di 6 nell-albero vecchio), e i suoi byte coincidono su 2 scene su 2
+  ### la misura NON definisce nessuna funzione del passo             PASSA   ### l-assert gira a OGNI confronto, non solo qui
+  ### e SOLO gli strumenti DICHIARATI materializzano un albero ed es PASSA   ### visti ['primo_ordine/_misura_mb1.py'], dichiarati ['primo_ordine/_misura_mb1.py']
+  ### e NESSUNO strumento legge `TEMP` dall'ambiente (il ripiego e'  PASSA   ### visti [], ammessi [] -- la cura e' `tempfile`, che non ha ripieghi
+====================================================================================================
+IL COLLAUDO DI `M-B1`: 11 su 11   ### TUTTI PASSATI
+====================================================================================================

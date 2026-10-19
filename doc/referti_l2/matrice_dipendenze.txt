@@ -1,4 +1,4 @@
-[TIMBRO] _matrice_dipendenze.py  sha1-BYTE db7b8c5d  committato e pulito
+[TIMBRO] _matrice_dipendenze.py  sha1-BYTE eed83277  committato e pulito
 ====================================================================================================
 LA MATRICE LETTURA/SCRITTURA DEI 14 PEZZI, DAL CODICE -- il passo `C` della memoria
 ====================================================================================================
@@ -24,9 +24,9 @@ LA MATRICE LETTURA/SCRITTURA DEI 14 PEZZI, DAL CODICE -- il passo `C` della memo
   CAMM-SPOSTAMENTO         Motore._spostamento_trasporto legge: cs, dtau, geo.U
                                                       la prima strada fino a `.cs`: Motore._spostamento_trasporto -> hop_psi -> z_arco -> s_arco -> dtau_nodo
                                                       TUTTE le funzioni che leggono `.cs`: dtau_nodo
-  CAMM-SPOSTAMENTO-VUOTO   Motore._spostamento_scalare legge: cs, lambda_c, dtau, regola_punto_medio
-                                                      la prima strada fino a `.cs`: Motore._spostamento_scalare
-                                                      TUTTE le funzioni che leggono `.cs`: Motore._spostamento_scalare, dtau_nodo, s_arco_da_lambda
+  CAMM-SPOSTAMENTO-VUOTO   Motore._spostamento_scalare legge: cs, dtau
+                                                      la prima strada fino a `.cs`: Motore._spostamento_scalare -> hop_phi -> z_arco -> s_arco -> dtau_nodo
+                                                      TUTTE le funzioni che leggono `.cs`: dtau_nodo
 ----------------------------------------------------------------------------------------------------
 ### LA LETTURA DINAMICA: taglia 16, Lambda_c = 8.00 (rapporto 1.000), cs al CENTRO; la banda delle norme 256 ulp
   pos pezzo                    scr.  scr.  muove  muove  legge  legge    legge    AUTO   max|d rho| / max|d Lambda|

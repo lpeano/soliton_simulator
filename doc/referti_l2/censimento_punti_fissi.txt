@@ -1,4 +1,4 @@
-[TIMBRO] _censimento_punti_fissi.py  sha1-BYTE d65655fc  committato e pulito
+[TIMBRO] _censimento_punti_fissi.py  sha1-BYTE bcfae04a  committato e pulito
 ====================================================================================================
 I PUNTI FISSI DEL PASSO, CONTATI CON L'AST -- il passo `A` della memoria
 ====================================================================================================
@@ -11,22 +11,22 @@ I PUNTI FISSI DEL PASSO, CONTATI CON L'AST -- il passo `A` della memoria
 ----------------------------------------------------------------------------------------------------
 ### IL NUCLEO (chiusura degli import dalle radici tick passo motore materia_vuoto saturazione): 12 file
 ----------------------------------------------------------------------------------------------------
-### I PUNTI FISSI TROVATI, e sono 4 (su 32 cicli del nucleo):
+### I PUNTI FISSI TROVATI, e sono 3 (su 31 cicli del nucleo):
      file                               funzione               riga   tolleranza         tetto dei giri   nel percorso del tick
      primo_ordine/energia_pesata.py     applica                319    EPS_OMEGA          GIRI_MAX_OMEGA   si
-     primo_ordine/flussi_parziali.py    hop_phi_punto_medio    508    EPS_PUNTO_FISSO    GIRI_MAX_PESO    si
      primo_ordine/passo.py              mezzo_implicito        201    -                  -                no
-     primo_ordine/tick.py               cs_al_centro           179    EPS_CS             GIRI_MAX         si
+     primo_ordine/tick.py               cs_al_centro           161    EPS_CS             GIRI_MAX         si
      ### il percorso del tick = la chiusura degli import di tick e motore: 9 file
-     ### NEL PERCORSO DEL TICK: 3 punti fissi su 4
+     ### NEL PERCORSO DEL TICK: 2 punti fissi su 3
      ### ⚠ <<nel percorso>> vuol dire RAGGIUNGIBILE dagli import, non ACCESO:
      ###   un ramo spento e' nel percorso. Acceso o spento: il passo `B`.
 ----------------------------------------------------------------------------------------------------
-### IL CASO CHE DEVE RIUSCIRE: >= 3, e i 3 previsti per nome
+### IL CASO CHE DEVE RIUSCIRE (la previsione del 2026-10-19): 2 nel percorso del tick, 3 nel nucleo, e i previsti per nome
      primo_ordine/tick.py               cs_al_centro           trovato
      primo_ordine/energia_pesata.py     applica                trovato
-     primo_ordine/flussi_parziali.py    hop_phi_punto_medio    trovato
-     e quelli NON previsti: primo_ordine/passo.py:mezzo_implicito
+     primo_ordine/passo.py              mezzo_implicito        trovato
+     e quelli NON previsti: nessuno
+     nel percorso del tick: 2 (previsti 2)   nel nucleo: 3 (previsti 3)
      PASSA
 ----------------------------------------------------------------------------------------------------
 ### ⚠ QUESTO E' IL CENSIMENTO STATICO: dice DOVE sono, non se GIRANO ne'

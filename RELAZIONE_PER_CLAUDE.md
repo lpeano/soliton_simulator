@@ -19500,3 +19500,20 @@ L'unico pezzo che muove `Lambda` e' `CAMM-SPOSTAMENTO-VUOTO` *(la matrice di `e9
 
 ### **Tutti e tre SI AGGIORNANO**, e l'ho scritto nel task history prima del codice: `_costo_punti_fissi.py` *(l'involucro altrimenti si fermerebbe: avvolgera' i due punti fissi che restano; non si rigira, il passo `B` e' chiuso)*; `_censimento_punti_fissi.py` *(altrimenti il caso che deve riuscire fallirebbe: ### **la previsione nuova e' `2` nel percorso del tick e `3` nel nucleo**, dichiarata prima della corsa)*; `_matrice_dipendenze.py` *(il nome esce dalla lista; si rigira)*. ### **I referti di stamattina restano validi al loro commit**, e l'inventario lo dira'.
 ### 📌 **Il punto `2`** *(la tensione fra la variante `(c)` e `MEMORIA-DENTRO-H`: la coda e la sequenza degli arrivi sono un buffer di storia)* ### **e' in coda, dopo la rimozione.**
+
+
+### ✅ **IL RAMO DEL PUNTO MEDIO PER PEZZO E' TOLTO, E LE PROVE PASSANO TUTTE** *(`3b467aa4`, e i referti dal suo blob)*
+
+### **I tre file del nucleo sono tornati ai BYTE di `2c95af13^`** *(sha1-BYTE `e892f0e0`, `461b71c8`, `d9a59ff9`, uguali ai blob del padre)*: dopo il padre li aveva toccati solo `2c95af13`, e il suo diff su quei tre era tutto ramo. ### **`z_arco_da_s` e `hop_phi_con_s` sono tolte anche loro**, perche' `z_arco` e `hop_phi` riprendono la forma che avevano -- ### **e il braccio `0` dice che il passo e' identico al bit.**
+
+| la prova | il referto | il risultato |
+|---|---|---|
+| ### **braccio `0`**: `M-B1 --contro b78683a7` | `mb1_rimozione_punto_medio.txt` *(`_misura_mb1.py`, blob `046fb206`)* | ### **`14` pezzi su `14` AL BIT** *(7 x 2 scene)*, e ### **distanza del passo intero `0` esatto** su `250` tick, ### **su entrambe le scene** |
+| ### **il caso che DEVE fallire**: il passo alterato apposta | `mb1_collaudo_rimozione.txt` *(`_collauda_mb1.py`, blob `b74c228e`)* | ### **`11` su `11`**: col passo modificato ### **`2` pezzi su `14` NON coincidono** e il passo intero e' diverso su `2` scene su `2` |
+| ### **il controllo che deve riuscire**: `C1` | `c1_dopo_rimozione.txt` *(`_misura_strada_d.py`, blob `718de448`)* | ### **`2.091`**, e i casi che devono fallire ### **`0.044`** e ### **`0.012`**; le escursioni di `G` ### **coincidono a tutte le cifre stampate** con quelle di `g_dello_stato.txt` |
+| il censimento dei nomi `--dopo` | `ramo_punto_medio_dopo.txt` *(blob `2d4ff85c`)* | ### **`0` righe di codice con un nome tolto**; restano `4` file e `5` righe col solo nome `_misura_punto_medio`, il file che resta |
+| i punti fissi | `censimento_punti_fissi.txt` *(blob `bcfae04a`)* | ### **`2` nel percorso del tick, `3` nel nucleo: la previsione dichiarata prima** |
+| la matrice | `matrice_dipendenze.txt` *(blob `eed83277`)* | ### **`5` su `5`**, e la statica di `CAMM-SPOSTAMENTO-VUOTO` legge ora ### **`cs, dtau`** -- non piu' `lambda_c` e il ramo |
+
+### ⚠ **Due cose da sapere:** `_rami_era2.py` aveva ### **TRE** voci del ramo, non due *(anche `motore._spostamento_scalare`, che senza il ramo non ha piu' rami)*: tolte tutte, ed erano ### **le `32` righe** che `2c95af13` aveva aggiunto. ### **E il mio primo tentativo del caso che deve fallire ha lanciato il file sbagliato** *(`_misura_mb1.py --collaudo`, che dice «il collaudo non sta piu' qui»)*: ### **referto scartato prima del commit**, e rifatto con `_collauda_mb1.py`.
+### 📌 **I referti `censimento_punti_fissi.txt` e `matrice_dipendenze.txt` sono RISCRITTI**: le versioni di stamattina ### **restano valide al loro commit** *(`95c81e97` e `e989872d`)*, e ### **l'inventario lo dice.**
