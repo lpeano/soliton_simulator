@@ -19414,3 +19414,21 @@ Il messaggio di `56dd95b7` dice *«`doc/RIPRESA_2026-10-15.md`: la sezione 49»*
 ### ✅ **Taglia `32`, rapporto `0.01`: NON CONVERGE al tick `7` (contato da `1`)**, con ### **`|x_n - x_{n-1}| = 6.206e-02` e `|x_n - x_{n-2}| = 0` esatto**; il peggiore e' il **nodo `10`, `Lambda = 0.0340` sotto `Lambda_c = 0.08`**. ### **Taglia `16`, stesso rapporto: CONVERGE in tutti gli `8` tick.**
 ### ⚠ **LE DIFFERENZE COL GUARDIANO, spiegate:** il tick *(`7` da `1` contro `6` da `0`: probabilmente lo stesso)*; ### **`|x_n - x_{n-2}|`** *(`0` esatto io, `7.9e-12` lui: non verificato da che cosa dipenda -- il giro in cui si misura o la piattaforma)*; ### **i nodi che oscillano** *(`10` sopra la tolleranza del punto fisso, `1.8e-15`; `4` sopra `1e-6`: il suo `4` corrisponde alla soglia piu' larga)*.
 ### 📌 **Registrata in coda e nella mappa (sez.`26`) come OSSERVAZIONE**, con la lettura del guardiano scritta come tale: ### **non e' dimostrato che il punto fisso non esista.** ### **La decisione e' di Luca.**
+
+
+### ⭐⭐ **IL PASSO `C`: LA MATRICE DAL CODICE. CON LA DEFINIZIONE ORIGINALE LE DIPENDENZE NON SONO INCROCIATE; LO SONO SOLO PER L'AUTO-DIPENDENZA DI `CAMM-SPOSTAMENTO-VUOTO`**
+
+`doc/referti_l2/matrice_dipendenze.txt`, dal blob ### **`db7b8c5d`** *(sha1-BYTE, `csv/_matrice_dipendenze.py` di `852c3d4e`, «committato e pulito»)*: scena di `C5`, taglia `16`, `Lambda_c = 8.0` *(rapporto `1`)*. ### **I casi: `5` su `5`** -- `M1` *(`CAMM-SPOSTAMENTO` legge `cs`, statico e dinamico, per `hop_psi -> z_arco -> s_arco -> dtau_nodo`)*, `M1-cieco` *(senza la chiusura delle chiamate lo statico ### **NON** lo trova: il corpo dell'operatore legge solo `applicazioni`)*, `M3`, `M4` *(`CAMM-GROVER-VUOTO` scrive `phi_h` e muove `Lambda` di `7e-15`, l'arrotondamento)*, `M5` *(statico e dinamico concordano su «legge `cs»` per tutti e `7`)*.
+
+**LA MATRICE, in breve** *(le `14` posizioni nel referto)*:
+- ### **TUTTI E SETTE i pezzi leggono `cs`** -- sei attraverso `dtau_nodo`, ### **`CAMM-FASE-VUOTO` attraverso `d_peso_arco`** *(e `applica`)*, senza `dtau_nodo`.
+- ### **muove `Lambda` SOLO `CAMM-SPOSTAMENTO-VUOTO`** *(`2.1`-`2.2` per applicazione a `dtau = 0.25`)*; ### **muove `rho` SOLO `CAMM-SPOSTAMENTO`** *(`0.56`-`0.62`)*: per `Lambda` e' ### **lo stesso fatto gia' misurato** nel referto della strada `(d)` *(`strada_d_c1_c2_c5.txt`)*, e quello su `rho` ### **e' nuovo**.
+- ### **legge la materia** *(per il vuoto)*: `CAMM-MATERIA-VUOTO` e `CAMM-FASE-VUOTO` -- ### **ed entrambi lasciano `Lambda` invariata** *(fasi)*.
+- ### **AUTO-DIPENDENTE** *(muove `Lambda` E legge `cs`)*: ### **solo `CAMM-SPOSTAMENTO-VUOTO`**, posizioni `7` e `8`.
+
+### ⛔ **INCROCIATE?** Con la definizione del par.`2` *(un pezzo che muove `Lambda` e legge la materia, E uno che scrive la materia e legge `cs`)*: ### **NO** -- il gruppo `(A)` e' ### **vuoto**, perche' i due pezzi che leggono la materia ### **non muovono `Lambda`.** ### **Con l'annotazione di `557f3e66`** *(l'auto-dipendenza basta)*: ### **SI'**, per `CAMM-SPOSTAMENTO-VUOTO`.
+### ⚠ **E il mio sospetto del par.`1` (`c`) era giusto per la ragione SBAGLIATA:** credevo che fossero incrociate ### **perche' il tempo proprio entra in ogni pezzo, materia compresa** -- ### **e questo e' vero** *(tutti leggono `cs`)*, ma ### **non basta**: nessuno che legge la materia muove `Lambda`. ### **E' l'auto-dipendenza a incrociarle.**
+
+**PER LE VARIANTI DELLA MEMORIA** *(lettura, non una decisione)*: `(a)` l'estrapolazione ### **resta esplicita, ma non simmetrica**; `(b)` il peso sfalsato alla leapfrog ### **non e' disponibile come variante esplicita simmetrica**: in `CAMM-SPOSTAMENTO-VUOTO` il passo dipende da cio' che il pezzo muove, e servirebbe di nuovo un punto fisso. ### **La scelta «lo stato contiene il passato» e' UNA e di Luca.**
+
+### ⛔ **UN DIFETTO DELLA MIA SONDA, preso da `M5` nella prova a vuoto prima del commit:** dimezzare `cs` dappertutto ### **non vedeva** che `CAMM-FASE-VUOTO` legge `cs`, perche' `d_peso_arco` e' ### **omogeneo di grado zero** -- un `0.5` uniforme lo lascia identico al bit. ### **La sonda dimezza solo sui nodi pari.** E' scritto nel docstring e nel messaggio di `852c3d4e`.

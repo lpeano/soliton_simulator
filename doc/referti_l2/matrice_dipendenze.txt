@@ -1,0 +1,73 @@
+[TIMBRO] _matrice_dipendenze.py  sha1-BYTE db7b8c5d  committato e pulito
+====================================================================================================
+LA MATRICE LETTURA/SCRITTURA DEI 14 PEZZI, DAL CODICE -- il passo `C` della memoria
+====================================================================================================
+  i moduli letti (il percorso del tick): composizione energia_pesata flussi_parziali grafo incidenza materia_vuoto motore saturazione tick
+  l'ordine: composizione.ORDINE, impronta 2e7f795d2a52fbe7, 14 pezzi
+----------------------------------------------------------------------------------------------------
+### LA LETTURA STATICA (AST, chiusura delle chiamate; segue anche i rami spenti)
+  CAMM-FASE-VUOTO          Motore._fase_vuoto       legge: cs, lambda_c, dtau, geo.U, geo.n
+                                                      la prima strada fino a `.cs`: Motore._fase_vuoto -> applica
+                                                      TUTTE le funzioni che leggono `.cs`: applica, d_peso_arco
+  CAMM-GROVER              Motore._grover           legge: cs, dtau
+                                                      la prima strada fino a `.cs`: Motore._grover -> grover -> z_nodo -> s_nodo -> dtau_nodo
+                                                      TUTTE le funzioni che leggono `.cs`: dtau_nodo
+  CAMM-GROVER-VUOTO        Motore._grover_scalare   legge: cs, dtau
+                                                      la prima strada fino a `.cs`: Motore._grover_scalare -> grover -> z_nodo -> s_nodo -> dtau_nodo
+                                                      TUTTE le funzioni che leggono `.cs`: dtau_nodo
+  CAMM-MATERIA-VUOTO       Motore._materia_vuoto    legge: cs, dtau
+                                                      la prima strada fino a `.cs`: Motore._materia_vuoto -> applica -> dtau_nodo
+                                                      TUTTE le funzioni che leggono `.cs`: dtau_nodo
+  CAMM-MONETA-SPIN         Motore._moneta_spin      legge: cs, dtau, geo.n
+                                                      la prima strada fino a `.cs`: Motore._moneta_spin -> dtau_nodo
+                                                      TUTTE le funzioni che leggono `.cs`: dtau_nodo
+  CAMM-SPOSTAMENTO         Motore._spostamento_trasporto legge: cs, dtau, geo.U
+                                                      la prima strada fino a `.cs`: Motore._spostamento_trasporto -> hop_psi -> z_arco -> s_arco -> dtau_nodo
+                                                      TUTTE le funzioni che leggono `.cs`: dtau_nodo
+  CAMM-SPOSTAMENTO-VUOTO   Motore._spostamento_scalare legge: cs, lambda_c, dtau, regola_punto_medio
+                                                      la prima strada fino a `.cs`: Motore._spostamento_scalare
+                                                      TUTTE le funzioni che leggono `.cs`: Motore._spostamento_scalare, dtau_nodo, s_arco_da_lambda
+----------------------------------------------------------------------------------------------------
+### LA LETTURA DINAMICA: taglia 16, Lambda_c = 8.00 (rapporto 1.000), cs al CENTRO; la banda delle norme 256 ulp
+  pos pezzo                    scr.  scr.  muove  muove  legge  legge    legge    AUTO   max|d rho| / max|d Lambda|
+                               psi   phi   rho    Lambda cs     materia  vuoto    L<-cs 
+  1   CAMM-MATERIA-VUOTO       si    si    -      -      si     si       si       -      3.6e-15 / 7.1e-15
+  2   CAMM-FASE-VUOTO          -     si    -      -      si     si       -        -      0.0e+00 / 7.1e-15
+  3   CAMM-MONETA-SPIN         si    -     -      -      si     -        -        -      3.6e-15 / 0.0e+00
+  4   CAMM-GROVER              si    -     -      -      si     -        -        -      3.6e-15 / 0.0e+00
+  5   CAMM-SPOSTAMENTO         si    -     si     -      si     -        -        -      5.6e-01 / 0.0e+00
+  6   CAMM-GROVER-VUOTO        -     si    -      -      si     -        -        -      0.0e+00 / 7.1e-15
+  7   CAMM-SPOSTAMENTO-VUOTO   -     si    -      si     si     -        -        ### SI 0.0e+00 / 2.1e+00
+  8   CAMM-SPOSTAMENTO-VUOTO   -     si    -      si     si     -        -        ### SI 0.0e+00 / 2.2e+00
+  9   CAMM-GROVER-VUOTO        -     si    -      -      si     -        -        -      0.0e+00 / 5.3e-15
+  10  CAMM-SPOSTAMENTO         si    -     si     -      si     -        -        -      6.2e-01 / 0.0e+00
+  11  CAMM-GROVER              si    -     -      -      si     -        -        -      5.3e-15 / 0.0e+00
+  12  CAMM-MONETA-SPIN         si    -     -      -      si     -        -        -      3.6e-15 / 0.0e+00
+  13  CAMM-FASE-VUOTO          -     si    -      -      si     si       -        -      0.0e+00 / 7.1e-15
+  14  CAMM-MATERIA-VUOTO       si    si    -      -      si     si       si       -      3.6e-15 / 3.6e-15
+----------------------------------------------------------------------------------------------------
+### I CASI, fissati nel task history PRIMA dei numeri
+  M1  CAMM-SPOSTAMENTO legge cs (statico E dinamico)             PASSA   statico True, dinamico True
+  M1-cieco  senza la chiusura lo statico NON lo trova            PASSA   il corpo dell'operatore da solo legge: ['applicazioni']
+  M3  CAMM-GROVER non scrive phi_h                               PASSA   
+  M4  CAMM-GROVER-VUOTO scrive phi_h e NON muove Lambda          PASSA   max|d Lambda| = 7.1e-15
+  M5  statico e dinamico concordano su <<legge cs>>              PASSA   discordi: nessuno
+----------------------------------------------------------------------------------------------------
+### INCROCIATE? -- la definizione del par.2 del task history, e l'annotazione
+  (A) muove Lambda E legge la materia:        nessuno
+  (B) scrive la materia E legge cs o il vuoto: ['CAMM-GROVER', 'CAMM-MATERIA-VUOTO', 'CAMM-MONETA-SPIN', 'CAMM-SPOSTAMENTO']
+  la definizione del par.2 (A e B nello stesso palindromo): NON incrociate
+  l'AUTO-DIPENDENZA (muove Lambda E legge cs, nello stesso pezzo): ['CAMM-SPOSTAMENTO-VUOTO']
+  con l'annotazione di 557f3e66 (l'auto-dipendenza basta): INCROCIATE
+----------------------------------------------------------------------------------------------------
+### E PER LE VARIANTI DELLA MEMORIA (lettura, NON una decisione)
+  (a) estrapolazione: resta ESPLICITA -- l'auto-dipendenza non la rende
+      implicita, ma il peso estrapolato e' fisso dentro un pezzo che muove la
+      grandezza da cui dipende: NON simmetrica (come gia' scritto in mappa).
+  (b) peso sfalsato alla leapfrog: ESCLUSA come variante esplicita simmetrica.
+      In CAMM-SPOSTAMENTO-VUOTO il passo del pezzo dipende da cio' che il pezzo muove: per essere
+      simmetrica dentro il pezzo servirebbe di nuovo un punto fisso.
+  la scelta <<lo stato contiene il passato>> e' UNA e di Luca.
+====================================================================================================
+### I CASI: 5 su 5   PASSA
+====================================================================================================
