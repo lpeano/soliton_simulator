@@ -19533,3 +19533,24 @@ La tensione che avevo registrato per `(a)` ### **tocca anche `(c)`**: il RESTO a
 ### ⛔ **`D4`, PRIMA DELLA CORSA: IL GIRO CORTO FA ALZARE IL PUNTO FISSO DI `Omega` A `x` PICCOLO** *(annotato nel task history)*
 
 A rapporto `1` il braccio a `x = 1` converge *(`cs` CALA a `98` barre)*, ma ### **a `x = 0.01` e `0.1` il passo alza al tick `2` e `4`**, con `Lambda/Lambda_c` a `0.998` e `0.922` -- ### **e a alzare e' `energia_pesata.applica`** *(il punto fisso di `Omega`)*, con ultimo scarto ### **`1.7e-16` e `3.6e-16` assoluti.** ### **La mia lettura, non provata:** la tolleranza e' relativa a `max|Omega|`, e con poca materia `Omega` e' piccolo ma e' la differenza di termini di ordine `1` -- ### **il suo rumore assoluto supera la tolleranza.** ### **Se e' cosi', e' un difetto del passo con `cs` acceso nei campi DEBOLI.** ### **Niente cure:** lo strumento dira' quale punto fisso alza, e ### **LINEARE potra' risultare NON DECIDIBILE.**
+
+
+### ⛔⛔ **`D4`: `cs` CALA VICINO ALLA MATERIA (`5` su `5`), IL CASO CHE DEVE FALLIRE FALLISCE (`9` su `9`), E IL CRITERIO `LINEARE` CADE -- STOP**
+
+`doc/referti_l2/d4_verso_e_profilo.txt` e `d4_bracci.jsonl`, dal blob ### **`6be2ad6b`** *(`csv/_misura_d4.py` di `1c665388`, «committato e pulito»)*. `30` bracci, uno per processo. ### **Uscita `1`.**
+
+| il criterio | il risultato |
+|---|---|
+| ### **il caso che DEVE fallire** *(senza sorgente)* | ### **`cs` uniforme AL BIT in `9` basi su `9`** |
+| ### **`cs` CALA vicino alla materia** *(`x = 1`)* | ### **`5` su `5`** dei casi che convergono: rapporto `0.1` *(`dtau 0.25`)* `-0.494` a `177` barre; rapporto `1` `-0.350` e `-0.334` a `177` e `101`; rapporto `10` `-0.063` e `-0.051` a `87` e `32` |
+| ### **`delta cs` LINEARE per `x` piccolo** | ### ⛔ **FALLISCE** *(`0` su `1`)*, e la lettura e' sotto |
+| ### **NON CONVERGE** *(protezione `a`)* | ### **`11` bracci:** `1` del punto fisso di `cs` *(rapporto `0.1`, `dtau 0.5`, `x = 1`: tick `10`, `Lambda` min `0.18` sotto `Lambda_c = 0.4`)* e ### **`10` del punto fisso di `Omega`** *(tutti i `x <= 0.1` ai tre rapporti, e `x = 0.3` a rapporto `10`)* |
+
+### ⛔ **PERCHE' `LINEARE` CADE, e che cosa vuol dire** *(la mia lettura)*:
+### `1)` **il regime «`x` piccolo» NON E' STATO RAGGIUNTO**: a `x <= 0.1` il passo alza ### **per il punto fisso di `Omega`** *(`a59994b9`)*, a tutti e tre i rapporti. ### **L'unico rapporto con due punti e' `1`, e i suoi punti sono `x = 0.3` e `x = 1`**, cioe' ### **saturi** *(`<delta Lambda>` `-3.58` e `-3.27` su `Lambda = 4`)*.
+### `2)` ### **E UN ERRORE MIO NELLA SOGLIA:** il codice usa la curvatura **al primo ordine**, `|delta Lambda|/(Lambda_m + Lambda_c)`, mentre la parentesi del task history scriveva quella **esatta**, `d/(Lambda_m + Lambda_c + d)` -- ### **e le due coincidono solo a `x` piccolo.** ### **Il criterio e' caduto fuori dal suo dominio, con una soglia che io avevo scritto incoerente.**
+### `3)` ### **E UNA COSA CHE I NUMERI SUGGERISCONO, e NON ho verificato con uno script:** i `R` misurati *(`1.82` e `1.70` a rapporto `1`, `1.07` a rapporto `10`)* ### **somigliano a `(Lambda_m + Lambda_c)/(Lambda_m + Lambda_c + delta Lambda)`**, cioe' all'algebra esatta della forma. ### **Se fosse cosi', `delta cs` seguirebbe la forma, e la «non linearita'» sarebbe la sua curvatura.** ### **Va provato con uno script, non a occhio.**
+### ⛔ **E NON CORREGGO NIENTE DA SOLO:** la soglia e' un criterio, ### **e un criterio caduto non si riscrive dopo aver visto i numeri.** ### **La scelta torna a Luca.**
+
+**IL PROFILO E IL CRITERIO DI USCITA DI `L2`, come INFORMAZIONE:** ### `(1)` **`Lambda` NON e' piu' invariante:** `max|Lambda(t+1) - Lambda(t)|` da `0.14` a `1.35` con la sorgente, ### **`0` esatto** senza. ### `(2)` **l'alone:** `|delta cs|` sopra `3` barre ### **fino a `r = 30`** *(tutto il toro)* ai rapporti `0.1` e `1`, ### **fino a `14`-`20`** a rapporto `10`. ### `(3)` **gli orologi rallentano INTORNO alla materia:** `13`-`15` anelli FUORI dal grumo con `cs` che CALA a `>= 3` barre *(rapporti `0.1` e `1`)*, `5`-`7` a rapporto `10`. ### ⚠ **E oltre `r ~ 16` `delta cs` cambia SEGNO** *(il vuoto cacciato si accumula lontano, sul toro)*. ### **Nessun verdetto su `L2`.**
+### 📌 **Il minimo di `Lambda/Lambda_c`** *(protezione `b`)*: ### **`0.001`-`0.009`** in tutte le corse con la sorgente a `x = 1` -- ### **`D4` sta tutto nel regime in cui e' nato il ciclo di periodo `2`.**
