@@ -19592,3 +19592,22 @@ Tre referti dal blob di `bfb80c6f` *(codice `7395cd9a`)*, tutti «committato e p
 
 ### **Il guardiano** aveva proposto `cs' Lambda` ### **senza verificare che fosse un tetto**, e ### **io l'ho dichiarata** *(estesa a `rho`)* ### **senza verificarlo neanch'io.** Il suo fatto: sulla scena di `C5` a `Lambda_c = 0.8`, ### **`max|Omega|/scala` fino a `3.24`** -- ed e' la regressione di `a03494ab`.
 ### ✅ **La decisione di Luca, strada `(b)`:** la scala diventa ### **la somma dei valori assoluti dei termini di `Omega_k`** *(nodo e TUTTI gli archi, coi vicini e i pesi `dw`)*, per `|cs'_k|` -- ### **un tetto per costruzione** -- e ### **un controllo DENTRO il codice** che alza se `|Omega_k| > scala_k`. ### **La strada `(c)` non si prende: nasconderebbe una scala sbagliata.** Annotato nel task history prima del codice, con otto prove e il caso che deve fallire del controllo.
+
+
+### ✅ **IL TETTO DI `Omega`: TUTTE LE PROVE PASSANO, NESSUNA REGRESSIONE** *(strada `(b)`, codice `418546c8`)*
+
+Tre referti dai blob committati e puliti: `doc/referti_l2/tetto_omega.txt` *(`csv/_tolleranza_omega.py`, sha1-BYTE `ea854b8a`)*, `mb1_tetto_omega.txt` e `c1_tetto_omega.txt`.
+
+| la prova | il risultato |
+|---|---|
+| `Q0` braccio `0` *(`M-B1 --contro fab82ed2`, `cs` spento)* | ### **`14` pezzi su `14` AL BIT**, distanza del passo intero `0` su entrambe le scene |
+| `Q1` `C1` | ### **`2.091`**, `0.044`, `0.012`, e le escursioni di `G` ### **identiche a tutte le cifre** |
+| `Q2` `C5`, NON REGRESSIONE | ### **`7` `Lambda_c` su `7` convergono, come col criterio di `fab82ed2`** -- `0.8` compreso |
+| `Q3` il braccio debole di `D4` | ### **converge**, stagnazione ### **`0.73` ulp** del tetto *(`155` applicazioni)* |
+| `Q4` il controllo positivo | ### **il peggio `1.52` ulp** su `1191` applicazioni in `6` bracci; ### **col criterio `max|Omega|` ne avrebbero alzato `21`**; la non convergenza VERA di `cs` *(rapporto `0.1`, `x 1`)* ### **registrata, e la corsa e' andata avanti** |
+| `Q5` i sintetici | il rumore ### **converge**, il ciclo ### **alza** |
+| `Q6` il braccio reale | ### **alza** *(scarto `0.258`: una non convergenza vera)* |
+| `Q7` il controllo con la scala VECCHIA | ### **alza**, eccesso `1.06` sull'`Omega` di partenza -- ### **e' il controllo che avrebbe preso l'errore `n.17`** |
+
+### ⚠ **UNA COSA DA DIRE, perche' e' il rovescio di questa cura:** in campo debole ### **il tetto e' molto piu' largo di `|Omega|`** *(`max|Omega|/tetto = 0.008` al braccio debole)*, quindi la' la soglia vale ### **circa `2e-13` RELATIVO a `|Omega|`**, non `8` ulp. ### **E' ancora molto stretta, e `C1` non cambia di una cifra** -- ### **ma non e' piu' «`8` ulp di `Omega`», e lo scrivo.**
+### 📌 **Il prossimo:** `D4` rifatto intero dal blob nuovo, con `LINEARE` SOSPESO.

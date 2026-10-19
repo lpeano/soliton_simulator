@@ -1,0 +1,45 @@
+[TIMBRO] _tolleranza_omega.py  sha1-BYTE ea854b8a  committato e pulito
+====================================================================================================
+LE PROVE DEL TETTO DI `Omega` -- Q2-Q7 (Q0 e Q1 coi loro script)
+====================================================================================================
+  EPS_OMEGA = 8 eps = 1.776e-15   GIRI_MAX_OMEGA = 120   la scala: il TETTO di Omega (energia_pesata.tetto_omega)
+----------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
+### Q2: C5 sui sette Lambda_c, NON REGRESSIONE -- il criterio di fab82ed2 (energia_pesata sha1 ce0b43d0) contro quello di adesso, 8 tick per braccio
+  Lambda_c 0.08      PRIMA: converge    ADESSO: converge
+  Lambda_c 0.8       PRIMA: converge    ADESSO: converge
+  Lambda_c 2.4       PRIMA: converge    ADESSO: converge
+  Lambda_c 8         PRIMA: converge    ADESSO: converge
+  Lambda_c 24        PRIMA: converge    ADESSO: converge
+  Lambda_c 80        PRIMA: converge    ADESSO: converge
+  Lambda_c 800       PRIMA: converge    ADESSO: converge
+  Q2 converge ovunque convergeva col criterio di PRIMA             PASSA   regressioni: nessuna
+### Q3 + Q4: la STAGNAZIONE dello scarto, in ulp del TETTO e di max|Omega|
+  (i primi 20 tick di 6 bracci di D4, dtau 0.5)
+  rapporto x      app.   stagn. max   ulp TETTO max  ulp |Omega| max alzerebbero con |Omega|
+  0.1      0.01   120    6.449e-17    0.35           44.72          2 su 120
+  0.1      1      ### il braccio si ferma dopo 256 applicazioni: la NON convergenza VERA di cs, registrata
+  0.1      1      256    1.421e-14    1.52           3.45           0 su 256
+  1        0.01   155    3.920e-16    0.73           87.85          18 su 155
+  1        1      311    1.776e-15    0.92           2.63           0 su 311
+  10       0.01   132    1.151e-16    0.66           86.69          1 su 132
+  10       1      217    2.845e-16    0.91           3.52           0 su 217
+----------------------------------------------------------------------------------------------------
+### Q3: il braccio debole (rapporto 1, dtau 0.5, x 0.01): 155 applicazioni; la prima:
+     gli ultimi 10 scarti: 0.00e+00  0.00e+00  0.00e+00  0.00e+00  0.00e+00  0.00e+00  0.00e+00  0.00e+00  0.00e+00  0.00e+00
+     max|Omega| = 1.814e-02   il TETTO (max) = 2.385e+00   max|Omega|/tetto = 0.008
+  Q3 il braccio debole CONVERGE, stagnazione <= 8 ulp del tetto    PASSA   il peggio 0.73 ulp su 155 applicazioni
+  Q4 la stagnazione sta entro 8 ulp del TETTO, in tutte le applica PASSA   1191 applicazioni, il peggio 1.52 ulp; con max|Omega| ne alzerebbero 21; altri che alzano: 0
+----------------------------------------------------------------------------------------------------
+### Q5: il criterio sui due casi SINTETICI (scala 1)
+  Q5 (i) uno scarto che si ferma al rumore (1.5 ulp) CONVERGE      PASSA   
+  Q5 (ii) un ciclo di periodo 2 di ampiezza 1e-6 ALZA              PASSA   lo scarto resta 2e-6 a ogni giro
+----------------------------------------------------------------------------------------------------
+### Q6: il braccio REALE che deve ALZARE: applica a frazione 16 (tau = 8)
+  Q6 una NON convergenza vera continua ad ALZARE                   PASSA   il punto medio di `Omega` NON CONVERGE in 120 giri (ultimo scarto 2.580e-01): la regola di
+----------------------------------------------------------------------------------------------------
+### Q7: il caso che deve fallire DEL CONTROLLO -- la scala di 7395cd9a (solo il nodo), messa APPOSTA, sulla scena di C5 a Lambda_c 0.8
+  Q7 con la scala VECCHIA il controllo del tetto ALZA              PASSA   il TETTO di `Omega` NON e' un tetto (Omega di partenza): max_k(|Omega_k| - tetto_k) = 1.06
+====================================================================================================
+LE PROVE: 7 su 7
+====================================================================================================
