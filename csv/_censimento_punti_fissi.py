@@ -78,6 +78,19 @@ def strato_libero(occupati, a, b):
             break
     return s
 '''
+# ### ⛔⛔ **IL CICLO ESTERNO NON EREDITA L'USCITA DI QUELLO INTERNO** *(integrazione
+# ### del guardiano, `2026-10-19`)*: un ciclo che ### **contiene** un punto fisso e'
+# ### ### **UN** punto fisso, non due. ### **Deve dare `1`.**
+_SINTETICO_ANNIDATO = '''
+def molti_passi(x, n):
+    for t in range(n):
+        for giri in range(1, GIRI_MAX + 1):
+            nuovo = f(x)
+            if abs(nuovo - x) <= EPS * abs(nuovo):
+                break
+            x = nuovo
+    return x
+'''
 # ### ⛔⛔ **LA RICERCA NEL CONTROLLO NEGATIVO** *(`2026-10-19`, cura di `bde7a07a`)*:
 # ### la prima versione contava ### **`passo.strati`** *(la colorazione golosa degli
 # ### archi)*, perche- `a not in occupati[s]` ### **per l-AST e- un `Compare`.** Un ciclo
@@ -100,20 +113,63 @@ def _nomi(nodo):
     return fuori
 
 
+_CHIUDONO = (ast.For, ast.While, ast.FunctionDef, ast.AsyncFunctionDef, ast.Lambda,
+             ast.ClassDef)
+
+
+def _propri(ciclo):
+    """### I nodi del CORPO del ciclo, ### **senza scendere in un ciclo o in una funzione
+    annidati.**
+
+    ### ⛔⛔ **UN `if` APPARTIENE AL CICLO PIU' INTERNO CHE LO CONTIENE** *(integrazione
+    del guardiano, `2026-10-19`)*: la versione di `82b92eba` camminava ### **tutto**
+    l'albero del ciclo, e un ciclo esterno ### **ereditava l'uscita di quello interno** --
+    e' per questo che `passo.strati` era contato ### **due volte** *(righe `109` e `111`)*.
+    ### ⚠ **E l'`else` del ciclo non e' il corpo:** gira ### **dopo** l'ultimo giro, quindi
+    un suo `if` non ferma l'iterazione.
+    """
+    coda = list(ciclo.body)
+    while coda:
+        n = coda.pop()
+        yield n
+        if isinstance(n, _CHIUDONO):
+            continue
+        coda.extend(ast.iter_child_nodes(n))
+
+
 def _esce_su_confronto(ciclo):
     """### Il primo `if` con test di CONFRONTO che contiene `break`/`return`, o `None`."""
-    for n in ast.walk(ciclo):
-        if n is ciclo or not isinstance(n, ast.If):
+    for n in _propri(ciclo):
+        if not isinstance(n, ast.If):
             continue
         confronto = any(isinstance(t, ast.Compare)
                         and any(isinstance(o, ORDINE_OP) for o in t.ops)
                         for t in ast.walk(n.test))
         if not confronto:
             continue
-        if any(isinstance(b, (ast.Break, ast.Return))
-               for s in n.body for b in ast.walk(s)):
+        # ### ⚠ **E il `break` deve essere DEL CICLO:** un `break` dentro un ciclo
+        # ### annidato nell'`if` esce da quello. Il `return` invece esce da tutto.
+        if _esce(n.body, True):
             return n
     return None
+
+
+def _esce(corpo, break_vale):
+    """### C'e' un'uscita DAL CICLO in `corpo`? ### **`break` solo fuori dai cicli
+    annidati, `return` solo fuori dalle funzioni annidate.**"""
+    for s in corpo:
+        if isinstance(s, ast.Break) and break_vale:
+            return True
+        if isinstance(s, ast.Return):
+            return True
+        if isinstance(s, (ast.FunctionDef, ast.AsyncFunctionDef, ast.Lambda,
+                          ast.ClassDef)):
+            continue
+        dentro = break_vale and not isinstance(s, (ast.For, ast.While))
+        figli = [x for x in ast.iter_child_nodes(s) if isinstance(x, ast.stmt)]
+        if _esce(figli, dentro):
+            return True
+    return False
 
 
 def punti_fissi(sorgente, rel):
@@ -143,6 +199,36 @@ def punti_fissi(sorgente, rel):
     return sorted(per_riga.values(), key=lambda r: (r[0], r[2]))
 
 
+# ### ⛔⛔ **IL PERCORSO DEL TICK DELLA CAMMINATA: le sue radici** *(integrazione del
+# ### guardiano, `2026-10-19`)*. `tick.py` percorre l-ordine, e i pezzi sono
+# ### ### **operatori del motore** -- che `tick.py` riceve e ### **non importa**: per
+# ### questo le radici sono ### **DUE.** ### ⚠ **La colonna si DERIVA dagli import**,
+# ### non si scrive a mano.
+RADICI_TICK = ("tick", "motore")
+
+
+def chiusura_import(radici):
+    """### I moduli raggiunti dagli import di `radici`, ### **dalla mappa del codice.**
+
+    ### ⚠ **LEGGE LA STESSA MAPPA di `_rami_era2.nucleo`** *(`primo_ordine/_mappa.yaml`,
+    che `P-MOD` tiene allineata al codice)*, con radici ### **diverse**: quella funzione
+    ha le radici scritte dentro, e questo censimento non la tocca.
+    """
+    import yaml
+    mappa = yaml.safe_load(io.open(os.path.join(RADICE, "primo_ordine", "_mappa.yaml"),
+                                   encoding="utf-8").read())
+    per = {r["nome"][:-3]: list(r.get("importa") or [])
+           for r in mappa["moduli"] if str(r["nome"]).endswith(".py")}
+    visti, coda = set(), list(radici)
+    while coda:
+        x = coda.pop()
+        if x in visti:
+            continue
+        visti.add(x)
+        coda.extend(y for y in per.get(x, []) if y not in visti)
+    return set("primo_ordine/%s.py" % x for x in visti)
+
+
 def cicli_tutti(sorgente):
     """### Quanti cicli ci sono in tutto, ### **per dire quanti NON sono punti fissi.**"""
     return sum(1 for n in ast.walk(ast.parse(sorgente))
@@ -159,14 +245,17 @@ def main(argv):
     print("  la definizione: un ciclo con un `if` di CONFRONTO DI ORDINE che contiene"
           " `break`/`return`")
     print("-" * 100)
-    print("### I DUE CONTROLLI SUL CODICE SINTETICO")
+    print("### I TRE CONTROLLI SUL CODICE SINTETICO")
     si = len(punti_fissi(_SINTETICO_SI, "<si>"))
+    an = len(punti_fissi(_SINTETICO_ANNIDATO, "<annidato>"))
     no = len(punti_fissi(_SINTETICO_NO, "<no>"))
-    print("     deve essere contato      %d   %s" % (si, "PASSA" if si == 1 else
-                                                     "### FALLISCE"))
-    print("     NON deve essere contato  %d   %s" % (no, "PASSA" if no == 0 else
-                                                     "### FALLISCE"))
-    if si != 1 or no != 0:
+    print("     deve essere contato                     %d   %s"
+          % (si, "PASSA" if si == 1 else "### FALLISCE"))
+    print("     un punto fisso dentro un ciclo: 1, NON 2 %d   %s"
+          % (an, "PASSA" if an == 1 else "### FALLISCE"))
+    print("     NON deve essere contato (e una ricerca) %d   %s"
+          % (no, "PASSA" if no == 0 else "### FALLISCE"))
+    if si != 1 or an != 1 or no != 0:
         print("### ⛔ LO STRUMENTO E' ROTTO: il numero sul nucleo NON si stampa.")
         return 1
     nucleo = R.nucleo()
@@ -181,11 +270,23 @@ def main(argv):
     print("-" * 100)
     print("### I PUNTI FISSI TROVATI, e sono %d (su %d cicli del nucleo):"
           % (len(trovati), cicli))
-    print("     %-34s %-22s %-6s %-30s %s"
-          % ("file", "funzione", "riga", "tolleranza", "tetto dei giri"))
+    percorso = chiusura_import(RADICI_TICK)
+    print("     %-34s %-22s %-6s %-18s %-16s %s"
+          % ("file", "funzione", "riga", "tolleranza", "tetto dei giri",
+             "nel percorso del tick"))
+    nel_tick = 0
     for rel, fn, riga, toll, tetto in trovati:
-        print("     %-34s %-22s %-6d %-30s %s"
-              % (rel, fn, riga, ",".join(toll) or "-", ",".join(tetto) or "-"))
+        dentro = rel in percorso
+        nel_tick += 1 if dentro else 0
+        print("     %-34s %-22s %-6d %-18s %-16s %s"
+              % (rel, fn, riga, ",".join(toll) or "-", ",".join(tetto) or "-",
+                 "si" if dentro else "no"))
+    print("     ### il percorso del tick = la chiusura degli import di %s: %d file"
+          % (" e ".join(RADICI_TICK), len(percorso)))
+    print("     ### NEL PERCORSO DEL TICK: %d punti fissi su %d" % (nel_tick,
+                                                                   len(trovati)))
+    print("     ### ⚠ <<nel percorso>> vuol dire RAGGIUNGIBILE dagli import, non ACCESO:")
+    print("     ###   un ramo spento e' nel percorso. Acceso o spento: il passo `B`.")
     print("-" * 100)
     chiavi = set((r[0], r[1]) for r in trovati)
     mancano = [p for p in PREVISTI if p not in chiavi]
