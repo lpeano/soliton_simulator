@@ -19658,3 +19658,7 @@ Tre referti dai blob committati e puliti: `doc/referti_l2/tetto_omega.txt` *(`cs
 ### 📌 **NELLA MAPPA, SOTTO `L2`: IL VINCOLO DI `L2` SU `L3`, COL SUO ESITO**
 
 La domanda di Luca *(«l'instabilita', se c'e', dipende dal fatto che lo spazio non si espande ancora?»)* e' registrata ### **come vincolo di `L2` su `L3`, non come lavoro di `L3`**, con le considerazioni del guardiano scritte come tali. ### **E accanto c'e' l'esito del test:** il vuoto uniforme non e' instabile, quindi ### **oggi il vincolo e' VUOTO** -- nessuna instabilita' da compensare, entro le barre del referto. ### **Il vincolo non chiude `L2`; la decisione e' di Luca.**
+
+### 📌 **NELLA MAPPA, SEZ.`25`: L'IPOTESI DELLE COSTANTI DI OMOGENEITA'** *(idea di Luca del `2026-10-19`, `20:09`-`20:16`)*
+
+### **`G` e `Lambda` costanti DENTRO domini omogenei generati dalla crescita**, e variabili su scala piu' grande dell'orizzonte -- *«una costante di omogeneita'»*. Registrata come ### **una sola ipotesi** accanto ai grappoli omogenei, con le considerazioni del guardiano scritte come tali *(la storia di `Lambda`; la distinzione fra il `Lambda` LOCALE del modello e la costante cosmologica come comportamento MEDIO; il simulatore che vede la rete tutta)* e ### **tre criteri fissati prima** per quando `L3` fara' crescere lo spazio: domini omogenei, la loro taglia contro l'orizzonte causale, costanti dentro e non fra. ### **Nessuna decisione.**

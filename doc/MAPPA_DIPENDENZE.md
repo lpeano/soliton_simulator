@@ -1027,6 +1027,27 @@ fondo**, su una scena con ### **due regioni uniformi a fondo diverso**; `(b)` ##
 deriva del vuoto medio PER ESTREMITA' sotto mitosi**, per ### **le tre letture del punto
 `4`.**
 
+### ⭐ `7)` **UNA SOLA IPOTESI, ACCANTO AI GRAPPOLI OMOGENEI: LE COSTANTI DI OMOGENEITA'** *(idea di Luca del `2026-10-19`, `20:09`-`20:16`, discussa col guardiano)*
+
+> *«LE COSTANTI DI OMOGENEITA': `G` e `Lambda` non sono costanti vere. Sono costanti DENTRO
+> domini omogenei generati dalla crescita della rete; se i domini sono piu' grandi
+> dell'orizzonte, chi sta dentro le vede costanti, ma su scala piu' grande possono variare.»*
+> Luca: *«la costante cosmologica la notiamo come costante localmente, ma oltre l'universo
+> osservabile potrebbe non esserlo: e' una costante di omogeneita'.»*
+
+**LE CONSIDERAZIONI DEL GUARDIANO, scritte come tali:**
+1. **Storia:** Einstein introdusse `Lambda` *(1917)* per tenere fermo l'universo, cioe' per far tornare i conti. Oggi l'accelerazione dell'espansione e' osservata *(supernove dal 1998, fondo cosmico, oscillazioni barioniche)*, ma il valore di `Lambda` non ha una spiegazione *(il problema della costante cosmologica)*, e dati recenti *(DESI)* discutono una possibile variazione nel tempo, ### **non consolidata**. Che l'energia del vuoto vari oltre l'orizzonte e' gia' in alcuni scenari inflazionari *(e' la base della stima di Weinberg del 1987)*: ### **nel modello potrebbe invece USCIRE dalla crescita.**
+2. ### **La distinzione da non perdere:** il `Lambda` del modello e' ### **la densita' LOCALE del vuoto**, una variabile per nodo; la «costante cosmologica» sarebbe al piu' ### **il comportamento MEDIO di quel vuoto mentre la rete cresce.** Legame con l'idea gia' registrata qui: un vuoto a densita' costante durante la crescita si comporterebbe come una costante cosmologica.
+3. In natura una variazione oltre l'orizzonte ### **non si osserva direttamente**; nel simulatore ### **si', perche' la rete si vede tutta.**
+4. ### **I CRITERI, quando `L3` fara' crescere lo spazio** *(fissati qui, prima di qualunque misura)*:
+   `(a)` il vuoto si organizza in ### **DOMINI omogenei**? *(la lunghezza di correlazione di `Lambda`, e di `G` efficace, sulla rete cresciuta)*;
+   `(b)` quanto sono grandi i domini rispetto all'### **ORIZZONTE CAUSALE** della rete *(la distanza percorsa con `cs` nel tempo trascorso)*;
+   `(c)` ### **DENTRO** un dominio `Lambda` e `G` costanti entro le barre, ### **FRA** domini diversi no.
+   ### **Se `(b)` da' domini piu' grandi dell'orizzonte, l'ipotesi e' sostenuta; se piu' piccoli, un osservatore interno vedrebbe le «costanti» variare, e l'ipotesi CADE per questo modello.**
+5. **Collegamenti:** il test di instabilita' del vuoto *(il vincolo di `L2` su `L3`, sez.`1`: oggi vuoto)*, `[[DOMANDA-LA-MITOSI-CREA-VUOTO]]`, e il vuoto per estremita' *(sez.`23`)*.
+
+### ⛔ **E' UNA SOLA IPOTESI, NON UNA DECISIONE**: si misura quando `L3` fara' crescere lo spazio.
+
 ## 26. ⭐⭐ `L3` — **IL SECONDO ORDINE CON UNA MEMORIA, INVECE DEL PUNTO FISSO** *(idea di Luca, `2026-10-18`)*
 
 > ### 📌 **Punto `5` del mandato del punto medio per pezzo.**
