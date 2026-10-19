@@ -19473,3 +19473,25 @@ L'unico pezzo che muove `Lambda` e' `CAMM-SPOSTAMENTO-VUOTO` *(la matrice di `e9
 ### 📌 **LA RIMOZIONE DEL RAMO DEL PUNTO MEDIO: IL TASK HISTORY, PRIMA DEL CODICE**
 
 `doc/TASK_HISTORY/2026-10-19_rimozione_punto_medio.md`, con la Stella Polare. ### **La previsione:** dopo `2c95af13^` i tre file del nucleo li ha toccati solo `2c95af13`, e il suo diff su quei tre e' tutto ramo -- ### **quindi la rimozione e' tornare ai byte del padre**, e `z_arco`/`hop_phi` riprendono la loro forma. ### **Il braccio `0` (`M-B1 --contro`, due scene, al bit) lo decide**; il caso che deve fallire e' il `--collaudo` di `_misura_mb1.py` *(il passo alterato apposta, come chiede il guardiano)*; `C1` deve ridare `2.091`.
+
+
+### 📌 **IL CENSIMENTO DEI NOMI DEL RAMO, PRIMA DELLA RIMOZIONE: `11` FILE E `49` RIGHE NEL CODICE** *(e il confronto col guardiano)*
+
+`doc/referti_l2/ramo_punto_medio_prima.txt`, dal blob ### **`2d4ff85c`** *(`csv/_censimento_ramo_punto_medio.py` di `f1bf908d`, «committato e pulito»)*. ### **CODICE `11` file, `49` righe; DOCUMENTAZIONE `13` file, `29` righe.**
+
+| file | io | il guardiano |
+|---|---|---|
+| `primo_ordine/flussi_parziali.py` | `13` | `13` |
+| `primo_ordine/_misura_punto_medio.py` | `8` | `8` |
+| `primo_ordine/motore.py` | `5` | `5` |
+| `primo_ordine/tick.py` | `5` | `5` |
+| `csv/_rami_era2.py` | `3` | `3` |
+| `csv/_censimento_osservabili.py` | `1` | `1` |
+| `csv/_file_fisica.py` | `1` | `1` |
+| `primo_ordine/_mappa.yaml` | `1` | `1` |
+| `csv/_costo_punti_fissi.py` | `10` | `10` |
+| `csv/_censimento_punti_fissi.py` | `1` | `1` |
+| `csv/_matrice_dipendenze.py` | `1` | `1` |
+| **totale** | ### **`49`** | ### **`49` dai suoi numeri per file, `53` nel suo totale** |
+
+### ⚠ **I file coincidono tutti e `11`, e cosi' le righe file per file.** ### **Il suo totale `53` non torna coi suoi stessi numeri per file** *(`37 + 10 + 1 + 1 = 49`)*: ### **o e' un errore di somma, o il suo conteggio vede `4` righe che il mio non vede** *(per esempio contando occorrenze invece di righe, o sottostringhe invece di parole intere)* -- ### **non so dire quale**, e il mio criterio e' scritto nello script: ### **righe con almeno un nome, a parola intera.**

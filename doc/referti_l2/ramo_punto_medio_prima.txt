@@ -1,0 +1,35 @@
+[TIMBRO] _censimento_ramo_punto_medio.py  sha1-BYTE 2d4ff85c  committato e pulito
+====================================================================================================
+I NOMI DEL RAMO DEL PUNTO MEDIO PER PEZZO, CONTATI -- PRIMA la rimozione
+====================================================================================================
+  i nomi: regola_punto_medio, hop_phi_punto_medio, s_arco_da_lambda, z_arco_da_s, hop_phi_con_s, giri_peso, EPS_PUNTO_FISSO, _misura_punto_medio
+  le righe che contengono almeno un nome (parola intera), nei file tracciati da git; escluso questo file
+----------------------------------------------------------------------------------------------------
+### CODICE (fuori da doc/ e dalla relazione): 11 file, 49 righe
+     csv/_censimento_osservabili.py                         1   hop_phi_punto_medio:1
+     csv/_censimento_punti_fissi.py                         1   hop_phi_punto_medio:1
+     csv/_costo_punti_fissi.py                             10   _misura_punto_medio:3  giri_peso:2  hop_phi_punto_medio:4  regola_punto_medio:1
+     csv/_file_fisica.py                                    1   _misura_punto_medio:1
+     csv/_matrice_dipendenze.py                             1   regola_punto_medio:1
+     csv/_rami_era2.py                                      3   hop_phi_punto_medio:1  regola_punto_medio:1  s_arco_da_lambda:1
+     primo_ordine/_mappa.yaml                               1   _misura_punto_medio:1
+     primo_ordine/_misura_punto_medio.py                    8   _misura_punto_medio:1  giri_peso:1  hop_phi_con_s:1  hop_phi_punto_medio:2  regola_punto_medio:2  s_arco_da_lambda:1
+     primo_ordine/flussi_parziali.py                       13   EPS_PUNTO_FISSO:2  giri_peso:1  hop_phi_con_s:4  hop_phi_punto_medio:1  s_arco_da_lambda:2  z_arco_da_s:3
+     primo_ordine/motore.py                                 5   giri_peso:1  hop_phi_punto_medio:2  regola_punto_medio:3
+     primo_ordine/tick.py                                   5   EPS_PUNTO_FISSO:5
+----------------------------------------------------------------------------------------------------
+### DOCUMENTAZIONE (doc/ e la relazione): 13 file, 29 righe
+     RELAZIONE_PER_CLAUDE.md                                3   EPS_PUNTO_FISSO:1  _misura_punto_medio:1  hop_phi_punto_medio:2
+     doc/CODA_2026-10-16.md                                 1   EPS_PUNTO_FISSO:1  _misura_punto_medio:1  giri_peso:1  hop_phi_con_s:1  hop_phi_punto_medio:1  regola_punto_medio:1  s_arco_da_lambda:1  z_arco_da_s:1
+     doc/INDICE_ID.tsv                                      1   hop_phi_punto_medio:1
+     doc/TASK_HISTORY/2026-10-18_memoria_e_punti_fissi.md   2   giri_peso:1  hop_phi_punto_medio:1
+     doc/TASK_HISTORY/2026-10-19_rimozione_punto_medio.md  12   EPS_PUNTO_FISSO:2  _misura_punto_medio:4  giri_peso:1  hop_phi_con_s:3  hop_phi_punto_medio:3  regola_punto_medio:1  s_arco_da_lambda:2  z_arco_da_s:4
+     doc/indice/storico.jsonl                               1   hop_phi_punto_medio:1
+     doc/indice/voci.jsonl                                  1   hop_phi_punto_medio:1
+     doc/referti_l2/censimento_osservabili.txt              1   _misura_punto_medio:1
+     doc/referti_l2/censimento_punti_fissi.txt              2   EPS_PUNTO_FISSO:1  hop_phi_punto_medio:2
+     doc/referti_l2/costo_punti_fissi.txt                   1   regola_punto_medio:1
+     doc/referti_l2/g_dello_stato.txt                       1   _misura_punto_medio:1
+     doc/referti_l2/matrice_dipendenze.txt                  2   regola_punto_medio:1  s_arco_da_lambda:1
+     doc/referti_l2/punto_medio_per_pezzo.txt               1   _misura_punto_medio:1
+====================================================================================================
