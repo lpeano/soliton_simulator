@@ -19318,3 +19318,10 @@ e' per questo che ### **il passo e' del secondo ordine comunque.**
 `1)` Nel task history della memoria e dei punti fissi, in fondo al par.`2`, c'e' l'**annotazione** del guardiano *(la definizione originale resta, par.`8`)*: ### **«incrociate» si estende all'AUTO-DIPENDENZA.** Un solo pezzo che scrive `Lambda` e legge `cs` *(`CAMM-SPOSTAMENTO-VUOTO`)* basta, e rende implicita anche la variante sfalsata alla leapfrog; la matrice riportera' per ogni pezzo le coppie *(scrive `X`, legge una funzione di `X`)*.
 
 `2)` In `doc/CODA_2026-10-16.md` c'e' la sezione nuova: ### **la rimozione del ramo del punto medio per pezzo** *(decisione di Luca, `21:48`)*, **dopo** il censimento e la matrice e **prima** di `D4`. Supera la riga *«SPENTO e NON si toglie»*; il perimetro del guardiano e' `8` file e `37` righe, e ### **il mio numero lo dara' uno script.**
+
+
+### ⛔ **UNA COSA CHE NON TORNA, TROVATA RILEGGENDO: LA SEZIONE `49` DELLA RIPRESA NON ESISTE**
+
+Il messaggio di `56dd95b7` dice *«`doc/RIPRESA_2026-10-15.md`: la sezione 49»*, ma ### **quel file NON e' fra i FILE CAMBIATI di quel commit** *(`git show --stat 56dd95b7`)*, e ### **nel file non c'e' nessuna sezione `49`**: l'ultima e' la `48`, che dice ancora ### **«`C1` CADE A `1.002`, E L'OSTACOLO E' LOCALIZZATO»** -- cioe' ### **il numero e la diagnosi ritirati** con l'errore `n.12`.
+### ⚠ **Chi riprende dalla RIPRESA legge quindi una diagnosi ritirata, senza rimando.**
+### 📌 **Qui la registro e basta:** la cura *(la sezione che manca, col rimando a `g_dello_stato.txt`)* e' **un commit a se'**, e ### **il mandato della rimozione del ramo la chiede comunque al suo punto `7`** *(«aggiorna mappa, coda e RIPRESA»)*: la faccio la', ### **salvo che Luca la voglia prima.**
