@@ -19611,3 +19611,19 @@ Tre referti dai blob committati e puliti: `doc/referti_l2/tetto_omega.txt` *(`cs
 
 ### ⚠ **UNA COSA DA DIRE, perche' e' il rovescio di questa cura:** in campo debole ### **il tetto e' molto piu' largo di `|Omega|`** *(`max|Omega|/tetto = 0.008` al braccio debole)*, quindi la' la soglia vale ### **circa `2e-13` RELATIVO a `|Omega|`**, non `8` ulp. ### **E' ancora molto stretta, e `C1` non cambia di una cifra** -- ### **ma non e' piu' «`8` ulp di `Omega`», e lo scrivo.**
 ### 📌 **Il prossimo:** `D4` rifatto intero dal blob nuovo, con `LINEARE` SOSPESO.
+
+
+### ✅ **`D4` RIFATTO INTERO DAL BLOB COL TETTO DI `Omega`: UNA SOLA NON CONVERGENZA (QUELLA VERA DI `cs`), `cs` CALA `5` SU `5`, E UN FATTO NUOVO SUL CAMPO DEBOLE**
+
+`doc/referti_l2/d4_verso_e_profilo.txt` e `d4_bracci.jsonl`, dal blob ### **`76a86c32`** *(`csv/_misura_d4.py` di `9c153ace`; il passo e' quello di `418546c8`)*. `30` bracci, stessa configurazione e stessa accensione di `7d061581`. ### **Uscita `0`.**
+
+| | prima *(`7d061581`)* | adesso |
+|---|---|---|
+| ### **NON CONVERGE** | `11` *(`1` di `cs`, `10` di `Omega`)* | ### **`1`**: la non convergenza VERA di `cs` *(rapporto `0.1`, `dtau 0.5`, `x 1`, tick `10`, `Lambda` min `0.18` sotto `Lambda_c = 0.4`)*, ### **registrata come tale, senza cure** |
+| il caso che DEVE fallire | `9` su `9` | ### **`9` su `9`**: senza sorgente `cs` uniforme AL BIT |
+| `cs` CALA *(`x = 1`)* | `5` su `5` | ### **`5` su `5`**: `-0.467` *(rapporto `0.1`, `dtau 0.25`, `191` barre)*; `-0.353` e `-0.328` *(rapporto `1`, `85` e `93` barre)*; `-0.063` e `-0.051` *(rapporto `10`, `87` e `32` barre)* |
+| `LINEARE` | `0` su `1`, FALLISCE | ### **SOSPESO** *(avrebbe detto FALLISCE, `0` su `3`)*: i numeri sono nel referto |
+
+### ⭐ **IL FATTO NUOVO, come INFORMAZIONE e non verdetto: NON C'E' UN REGIME STAZIONARIO «`x` PICCOLO».** Adesso che i bracci deboli girano, ### **anche a `x = 0.01` la sorgente caccia quasi tutto il vuoto del grumo** in `1200` tick: `<delta Lambda>` ### **`-3.86` su `Lambda = 4`** a rapporto `1`, ### **`-3.19`** a rapporto `10`; solo a rapporto `0.1` resta ### **`-1.36`**. ### **La risposta stazionaria satura qualunque sia l'ampiezza** -- e per questo il criterio `LINEARE` ### **non trova il suo dominio**: non perche' il passo non converga piu', ma ### **perche' il regime lineare, a stato stazionario, non esiste su questa scena.**
+### ⚠ **Va letto accanto alla sez.`16` della mappa** *(«la risposta e' LINEARE»)*, che era misurata ### **col termine `S3` sostituito, senza `cs` e senza `CAMM-FASE-VUOTO`**: ### **non e' una contraddizione dimostrata**, sono due passi diversi -- ### **ma la domanda c'e', ed e' di Luca.**
+### 📌 **L2, come prima:** `Lambda` non invariante *(`0.14`-`1.35` per tick)*, l'alone fino a `r = 30` ai rapporti `0.1` e `1` *(`14`-`20` a `10`)*, `13`-`15` anelli fuori dal grumo con `cs` che cala.
