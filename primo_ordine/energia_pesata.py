@@ -74,31 +74,51 @@ GIRI_MAX_OMEGA = 120
 # ### alle `16:29`, task history `2026-10-19_tolleranza_omega.md`)*: fino a ieri la soglia
 # ### era ### **relativa a `max|Omega|`**, e in campo DEBOLE chiedeva ### **meno dello zero
 # ### macchina dei dati** -- `10` bracci di `D4` alzavano con lo scarto FERMO a `~1e-16`.
-# ### ✅ **Il numero resta `8 eps`**; la scala e' quella ### **dei termini da cui `Omega` si
-# ### calcola** *(`scala_omega`)*.
+# ### ✅ **Il numero resta `8 eps`**; la scala e' ### **il TETTO dei termini di `Omega`**
+# ### *(`tetto_omega`, dal `2026-10-19` sera: la prima versione, `scala_omega`, NON era un
+# ### tetto -- errore `n.17`)*.
 EPS_OMEGA = 8.0 * float(np.finfo(float).eps)
 
 
-def scala_omega(mot, st):
-    """### La scala dei DATI di `Omega`: ### **`max_k |cs'_k| * OMEGA_H * (Lambda_k + rho_k)`.**
+def tetto_omega(mot, st, par):
+    """### Il TETTO di `|Omega_k|`, nodo per nodo: ### **`|cs'_k| (tetto_nodo_k + somma_h |dw_h| tetto_arco_a(h))`.**
 
-    ### ⭐ **Perche' questa:** in `termini_di_h` il termine di nodo e' `-pi [(rho - pu_psi) +
-    (Lambda - pu_phi)] + eps h + N` *(con `|h| <= rho`, `|N| <= Lambda`)*, e quello d'arco
-    `-pi (arco_psi + arco_phi)`: ### **differenze fra grandezze dell'ordine di `pi rho` e
-    `pi Lambda`**, poi moltiplicate per `cs'`. ### **Il rumore d'arrotondamento di `Omega` sta
-    su QUESTA scala**, non su `|Omega|`, che in campo debole e' molto piu' piccolo.
-    ### ⚠ **Si calcola nei buffer del pezzo, non in `st`**: lo stato non si tocca.
+    ### ⛔⛔ **PERCHE' UN TETTO E NON UNA SCALA** *(errore `n.17`, decisione di Luca del
+    `2026-10-19`, strada `(b)`)*: la scala di `7395cd9a` *(`|cs'| pi (Lambda + rho)`, solo il
+    nodo)* ### **NON era un tetto** -- `max|Omega|/scala` arrivava a `3.24` sulla scena di `C5`,
+    perche' il termine d'arco porta ### **le norme dei VICINI.**
+    ### ✅ **Qui il tetto e' la SOMMA DEI VALORI ASSOLUTI dei termini che entrano in
+    `Omega_k`**, calcolati ### **da `termini_di_h` nello stesso passaggio dei termini** *(una
+    sola fonte)*, e composti come `omega()` compone i termini: ### **`|Omega_k| <= tetto_k`
+    per costruzione.** ### ⚠ **Dipende dalle FASI di `phi`** *(`pu_phi`, gli incroci
+    sull'arco)*: va calcolato ### **sullo stesso stato** del suo `Omega`.
     """
-    lam = _per_nodo(mot, np.abs(st["phi_h"]) ** 2, mot._b("ep_sc_lam", (mot.inc.n,), float))
-    psi = st["psi_h"]
-    rho = _per_nodo(mot, np.abs(psi[:, 0]) ** 2 + np.abs(psi[:, 1]) ** 2,
-                    mot._b("ep_sc_rho", (mot.inc.n,), float))
-    csp = cs_primo(lam, mot.lambda_c, mot._b("ep_sc_csp", (mot.inc.n,), float))
-    return float(np.max(np.abs(csp) * OMEGA_H * (lam + rho)))
+    termini_di_h(mot, st, par)
+    tn = mot._b("ep_tetto_nodo", (mot.inc.n,), float)
+    ta = mot._b("ep_tetto_arco", (mot.inc.m,), float)
+    lam = mot.densita_vuoto(st)
+    csp = cs_primo(lam, mot.lambda_c, mot._b("ep_tt_csp", (mot.inc.n,), float))
+    dw = d_peso_arco(mot)
+    arco = _per_nodo(mot, np.abs(dw) * np.repeat(ta, 2),
+                     mot._b("ep_tt_arco_nodo", (mot.inc.n,), float))
+    return np.abs(csp) * (tn + arco)
+
+
+def controlla_tetto(omega_k, tetto_k, dove):
+    """### ⛔ **IL CONTROLLO DENTRO IL CODICE:** `max_k (|Omega_k| - tetto_k) <= 0`, o ALZA.
+
+    ### **E' il controllo che avrebbe preso l'errore `n.17`:** una scala che non e' un tetto
+    ### **si vede qui**, invece di diventare un falso «non converge» o una soglia troppo larga.
+    """
+    eccesso = float(np.max(np.abs(omega_k) - tetto_k))
+    assert eccesso <= 0.0, (
+        "il TETTO di `Omega` NON e' un tetto (%s): max_k(|Omega_k| - tetto_k) = %.3e > 0."
+        " ### La scala della tolleranza dev'essere un tetto PER COSTRUZIONE (errore n.17):"
+        " se non lo e', la formula del tetto non segue piu' quella di `omega()`" % (dove, eccesso))
 
 
 def entro_tolleranza(scarto, scala):
-    """### Il criterio d'arresto del punto fisso di `Omega`: ### **`8` ulp della scala dei dati.**
+    """### Il criterio d'arresto del punto fisso di `Omega`: ### **`8` ulp del TETTO di `Omega`** *(il suo massimo)*.
 
     ### ⛔ **E' una funzione per poterlo COLLAUDARE** *(il task history: uno scarto fermo al
     rumore converge, un ciclo di periodo `2` di ampiezza `1e-6` ALZA)*.
@@ -168,6 +188,16 @@ def termini_di_h(mot, st, par):
     arco_phi = (np.abs(f0) ** 2 + np.abs(f1) ** 2
                 - 2.0 * np.real(np.conj(f0) * f1)) / 2.0
     per_arco = -OMEGA_H * (arco_psi + arco_phi)
+    # ### ⭐ **I TETTI, DAGLI STESSI PEZZI** *(errore `n.17`)*: la SOMMA DEI VALORI ASSOLUTI
+    # ### dei termini, nei buffer del motore -- `per_nodo` e `per_arco` qui sopra
+    # ### ### **non cambiano**, ne' nelle operazioni ne' nell'ordine.
+    tn = mot._b("ep_tetto_nodo", (inc.n,), float)
+    tn[...] = (OMEGA_H * (nrm_psi + pu_psi + nrm_phi + pu_phi) + abs(float(eps)) * np.abs(h)
+               + np.abs(N))
+    ta = mot._b("ep_tetto_arco", (m,), float)
+    ta[...] = OMEGA_H * ((nrm_a + 2.0 * np.abs(incro)) / 2.0
+                         + (np.abs(f0) ** 2 + np.abs(f1) ** 2
+                            + 2.0 * np.abs(f0) * np.abs(f1)) / 2.0)
     return per_nodo, per_arco
 
 
@@ -348,9 +378,10 @@ def applica(mot, st, par, frazione):
     salvo = mot._b("ep_phi_salvo", phi.shape, phi.dtype)
     salvo[...] = phi
     prec = omega(mot, st, par).copy()
-    # ### ✅ **LA SCALA E' COSTANTE DENTRO IL PEZZO:** la fase non cambia ne' `Lambda` ne'
-    # ### `rho`, quindi si calcola ### **una volta**.
-    scala = scala_omega(mot, st)
+    # ### ✅ **LA SCALA E' IL TETTO, sullo stato di PARTENZA, e il CONTROLLO lo verifica.**
+    tetto = tetto_omega(mot, st, par)
+    controlla_tetto(prec, tetto, "Omega di partenza")
+    scala = float(np.max(tetto))
     giri = 0
     for giri in range(1, GIRI_MAX_OMEGA + 1):
         # ### il punto MEDIO: ### **mezza fase**, poi si rilegge `Omega`
@@ -359,6 +390,9 @@ def applica(mot, st, par, frazione):
         scarto = float(np.max(np.abs(nuovo - prec)))
         if entro_tolleranza(scarto, scala):
             prec = nuovo.copy()
+            # ### ⛔ **E IL CONTROLLO SULL'`Omega` FINALE**, sullo stato del PUNTO MEDIO
+            # ### da cui e' calcolato *(il tetto dipende dalle fasi)*.
+            controlla_tetto(prec, tetto_omega(mot, st, par), "Omega finale")
             break
         prec = nuovo.copy()
     else:
