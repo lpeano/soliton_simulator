@@ -19525,3 +19525,7 @@ L'unico pezzo che muove `Lambda` e' `CAMM-SPOSTAMENTO-VUOTO` *(la matrice di `e9
 ### 📌 **LA VARIANTE `(c)` E `MEMORIA-DENTRO-H`: NELLA MAPPA, FRA I PUNTI APERTI** *(lettura del guardiano, punto `2` della verifica fino a `8d63be67`)*
 
 La tensione che avevo registrato per `(a)` ### **tocca anche `(c)`**: il RESTO accumulato e' una variabile dinamica e va bene; ### **la CODA di pacchetti separati e la SEQUENZA degli arrivi sono un buffer di storia**, compatibili con `MEMORIA-DENTRO-H` ### **solo se il contenuto in transito diventa una variabile di stato dell'arco dentro `H`, con la sua energia.** ### **Da decidere da Luca quando `(c)` si aprira'.**
+
+### 📌 **`D4`: IL TASK HISTORY, PRIMA DEL CODICE**
+
+`doc/TASK_HISTORY/2026-10-19_D4_verso_e_profilo.md`: i criteri del 17 ottobre ### **copiati senza modifiche**, e ### **cinque letture operative fissate prima dei numeri** *(la sorgente fotografata con la legge del motore e' `congela = pezzo`; `cs` e' quello che il passo usa; i criteri CALA, LINEARE e il caso che deve fallire resi operativi)*. ### **E una cosa gia' vista in una prova di costo:** a rapporto `0.1` e `dtau = 0.5` il punto fisso di `cs` ### **non converge gia' nei primi `20` tick**, e il minimo di `Lambda/Lambda_c` scende a `0.02`-`0.16`: ### **`D4` entra nel regime del ciclo di stamattina.**
