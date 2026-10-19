@@ -19388,3 +19388,21 @@ Il messaggio di `56dd95b7` dice *«`doc/RIPRESA_2026-10-15.md`: la sezione 49»*
 ### ⛔⛔ **E UN FATTO NUOVO, NON CHIESTO: A TAGLIA `32` E `Lambda_c/Lambda_medio = 0.01` IL PUNTO FISSO DI `cs` NON CONVERGE COL RAMO SPENTO** *(ultimo scarto `6.2e-02` in `120` giri)*, cioe' ### **con lo schema di DEFAULT a `cs` dinamico.** Finora la non convergenza era registrata ### **solo col ramo del punto medio ACCESO** *(rapporti `0.1` e `0.3`)*. ### **Riguarda `D4` e il mandato della rimozione, che la cita come motivo** -- e la decisione su cosa farne ### **e' di Luca.**
 
 ### 📌 **PERCHE' MI FERMO, e che cosa propongo senza farlo:** il par.`2` dice di fermarsi se la quota non torna coi giri. ### **Due strade, la scelta e' di Luca:** ### **(a)** *(raccomandata)* rifare lo stesso controllo con ### **una statistica robusta al cronometro** -- la **mediana** e la **dispersione fra ripetizioni scartando la prima** *(il riscaldamento dei buffer)* -- dichiarata **prima**, sullo stesso blob di configurazione: e' il modo di separare *rumore* da *costo non capito*; ### **(b)** accettare le quote come misura e ### **non** usare il controllo del modello per decidere niente. ### ⚠ **Non scelgo io la statistica dopo aver visto i numeri** *(sarebbe tarare la soglia sui dati che giudica, `P1-sexies`)*.
+
+
+### ⛔⛔ **IL PASSO `B` COL CRITERIO ROBUSTO: IL CRITERIO ORA DISTINGUE, E IL MODELLO DEL COSTO NON TORNA IN `12` BRACCI SU `26` -- STOP** *(par.`2`)*
+
+`doc/referti_l2/costo_punti_fissi.txt`, rifatto dal blob ### **`ba489fc0`** *(sha1-BYTE, `csv/_costo_punti_fissi.py` di `c2e560bf`, «committato e pulito»)*, col criterio di `652eeb52` *(decisione di Luca, strada `(a)`)*. ### **Uscita `1`.**
+
+**CHE COSA E' CAMBIATO RISPETTO A `ec0d5f7f`:** ### **tutti i `26` bracci sono INFORMATIVI** *(`13` per `cs`, `13` per `Omega`; la soglia robusta sta fra `3` e `170` ms, la distanza dal conto di `C5` fra `44` e `540`)* e ### **il conto di `C5` FALLISCE in tutti e `26`**: ### **il criterio adesso distingue**, e il problema di `ec0d5f7f` *(una soglia di `327` ms che non bocciava niente)* ### **non c'e' piu'.** Passano ancora: l'involucro inerte, `cs` spento a quota `0` esatto, il punto medio mai chiamato.
+
+**CHE COSA NON TORNA:** il modello `giri * c(giro)` ### **non torna in `12` bracci su `26`**, e il verdetto e' ### **NON TORNA per tutti e quattro** *(due punti fissi per due taglie)*. Il rapporto `r = misura/previsto` sta ### **quasi sempre fra `0.92` e `1.26`, e piu' spesso SOPRA `1`** *(il misurato e' piu' grande del previsto)*, con ### **due valori fuori riga a taglia `32`, `Lambda_c = 2.4`** *(`cs` `0.663`, `Omega` `0.502`)*.
+### ⚠ **Con la statistica robusta la soglia si e' STRETTA** -- ed e' per questo che un modello che sbaglia del `5`-`25%` ora viene bocciato.
+
+**LE QUOTE, che non dipendono dal controllo:** ### **`cs_al_centro` `76`-`92%` del tick, `Omega` `69`-`84%`, di cui `52`-`77%` dentro i giri di `cs`** -- le stesse di `ec0d5f7f`.
+
+### 📌 **DUE IPOTESI SUL COSTO NON CAPITO, SCRITTE COME IPOTESI E NON PROVATE:**
+### `(i)` **un costo FISSO PER CHIAMATA che il modello non ha**: `applica` fa a ogni chiamata la copia `salvo`, l'`assert` su `dtau` uniforme e la fase finale; `cs_al_centro` la `cs` iniziale e l'`assert` del doppione. Un termine fisso darebbe ### **`r > 1` di qualche per cento, piu' grande dove i giri sono POCHI** -- ed e' il verso che si vede piu' spesso.
+### `(ii)` **il costo di un giro misurato SOLO sullo stato iniziale**: un giro di `cs` contiene il punto fisso di `Omega`, i cui giri ### **cambiano col tick**, quindi `c(giro di cs)` ### **non e' una costante** della corsa.
+### ⛔ **Non aggiungo un termine al modello dopo aver visto i numeri** *(sarebbe adattare il modello ai dati che giudica)*. ### **Il modo onesto di decidere fra `(i)` e `(ii)`** e' misurare **a parte**, prima: ### **il tempo di una chiamata con `0` giri utili** *(il costo fisso)* e ### **`c(giro)` sugli stati di ogni tick** invece che su quello iniziale -- ### **e la scelta di farlo e' di Luca.**
+### ✅ **E i due fuori riga** *(`0.5` e `0.66` a `32`/`2.4`)* ### **vanno guardati prima di qualunque modello**: un `c(giro)` ### **due volte piu' caro** del tempo reale e' piu' probabilmente ### **un campione disturbato** nella misura a parte che un costo fisico -- ma ### **non l'ho verificato.**
