@@ -19696,3 +19696,47 @@ La domanda di Luca *(«l'instabilita', se c'e', dipende dal fatto che lo spazio 
 
 ### **L'errore:** `M1` *(«senza perturbazione `rho` e `Lambda` restano costanti per tutta la corsa»)* ### **confondeva «so creare la materia» con «la materia e' stabile»**, che e' la domanda del test: ### **se esiste un'instabilita', nessuno stato uniforme resta uniforme al bit.** ### **E io l'ho scritta e applicata senza vederlo.**
 ### ✅ **Le correzioni, annotate nel task history prima del codice:** `M1` diventa ### **l'equilibrio al tick `0`** *(la variazione nel primo tick entro `256` ulp)*; ### **le barre del fit usano la `t` di Student coi gradi di liberta' veri** *(`4`: circa `6.6` barre per il `99.73%`)*, con `M4` ripetuta sui semi `0`..`199`; e ### **i bracci diagnostici** `D1` *(tre `x`)*, `D2` *(`cs` spento)*, `D3` *(`dtau` dimezzato)*, `D4'` *(senza `CAMM-FASE-VUOTO`)*, `D5` *(la deriva di `G` nella fase esponenziale)*, piu' `J4`, ### **tutti dal solo rumore d'arrotondamento.** ### **I verdetti del test di ieri sera si riportano con la soglia corretta.**
+
+### 📊 **IL TEST DI JEANS: I BRACCI DIAGNOSTICI, I NUMERI** *(referto `doc/referti_l2/jeans_diagnostici.txt`, dallo strumento `csv/_jeans_del_modello.py` blob sha1-BYTE `1e522f13`, commit `ab4ebc1e`, committato e pulito)*
+
+**Tutti i bracci partono dalla materia uniforme col SOLO rumore d'arrotondamento.** La soglia e' la `t` di Student al `99.73%` con `4` gradi di liberta': ### **`6.620` barre.**
+
+- ### ✅ **LE PROVE PASSANO.** `M1` *(il primo tick)*: da `0` a `2.3` ulp, con la banda a `256`. `M3`: `0`. `M4` sui semi `0..199`: ### **copertura `1.0000`** *(attesa `0.9973 +- 0.0037`)* a gamma `1e-3` e `1e-2`. **Una nota:** la dispersione di `z` e' `1.47` e `1.32`, quindi le barre `std/sqrt(5)` sono strette, ma la soglia di Student le copre.
+- ### **I VERDETTI DI IERI SERA** *(`c2dd6453`)* con la soglia `6.62`: ### **tutti «no»**, col massimo a `+1.8` barre.
+- ### **D1, gamma(rho) per tick contro `x`:**
+
+  | `x` | gamma(rho) | barre | tempo proprio | verdetto |
+  |---|---|---|---|---|
+  | `0.01` | `+9.82e-2` | `8.9` | `+0.393` | INSTABILE |
+  | `0.1` | `+1.17e-1` | `16.2` | `+0.469` | INSTABILE |
+  | `1` | `+2.79e-1` | `33.7` | `+1.114` | INSTABILE |
+
+  **Per `Lambda` a `x 0.01`:** `6.2` barre, sotto la soglia, quindi «no». ### **`D1 x 0.1` e `D1 x 1` si chiudono per NON-CONVERGENZA di `cs`** *(`120` giri)* **ai tick `1685` e `270`**, ma dopo la fase esponenziale, che e' misurata.
+- ### **D3 (`dtau 0.25`, `4000` tick): FISICA.** In tempo proprio, `rho` da `+0.4690` *(`dtau 0.5`)* a `+0.4680` *(`dtau 0.25`)*, e `Lambda` da `+0.4799` a `+0.4305`: coincidono entro la soglia. Per tick gamma si dimezza.
+- ### **QUALE LEGGE ALIMENTA LA CRESCITA:**
+  - ### **`D2` (`cs` SPENTO) cresce:** `+1.53e-1` per tick, `23.1` barre.
+  - ### **`D4'` (senza `CAMM-FASE-VUOTO`) cresce:** `+9.57e-2`, `9.6` barre.
+  - ### **Quindi la crescita NON richiede ne' `cs` ne' `CAMM-FASE-VUOTO`:** la alimenta ### **un'altra legge del passo con la materia.** **Quale, questi bracci non lo dicono:** per isolarla serve un braccio per legge, e non e' nel mandato.
+- ### **IL MODO e la lunghezza minima:**
+  - ### **NESSUNA lunghezza minima:** **tutti** gli anelli `|k|` da `1` a `21` *(lambda da `31` a `1.5`)* stanno sopra la soglia, **in ogni braccio**.
+  - ### **Il modo dominante e' a lambda `1.46`** *(`k = (15, +-15)`, la scala della griglia)*, e a `2.07` *(`(0, 15)`)* per `x 1`.
+- ### **D5, la deriva di `G` fino a `max|delta rho| = 1%` di `rho_m`** *(rapporto fra `|dG/G|` alla fine e `max|delta rho|/rho_m`)*:
+
+  | braccio | rapporto |
+  |---|---|
+  | `D1` `x 0.01` | `2.30` |
+  | `D1` `x 0.1` | `2.70` |
+  | `D1` `x 1` | `5.28` |
+  | `D2` | `18.8` *(`3.3e-15` al tick `20`, `0.198` alla fine)* |
+  | `D3` | `0.20` *(⚠ `1.01e-2` al tick `20`, piu' che alla fine, `2.24e-3`)* |
+  | `D4'` | `3.93` |
+
+  ### **In `5` bracci su `6` `G` deriva PIU' della perturbazione: non resta al secondo ordine.**
+- ### **J4 (il braccio di D4 a materia DINAMICA):** `<delta Lambda>` nel grumo per blocco va ### **da `-1.06` a `-2.40`**, contro ### **`-3.76` … `-3.94` del protocollo congelato** *(`963535bc`)*. La `rho` del grumo **cala** da `3.65e-2` *(tick `1`)* a `5.30e-3` *(tick `100`)*, poi **risale** a `1.17e-2` *(tick `1200`)*. ### **Il protocollo congelato SOPRAVVALUTAVA lo svuotamento di D4.**
+
+### ⚠ **UNA TENSIONE, COME DOMANDA E NON COME VERDETTO:**
+- **Un modo a scala di griglia, senza lunghezza minima,** e' la firma tipica di un'instabilita' **numerica**.
+- **Pero' `D3` dice FISICA:** gamma in tempo proprio non cambia dimezzando `dtau`.
+- **Le due cose stanno insieme solo se la crescita e' legata alla griglia SPAZIALE** *(il passo d'arco)* **e non a quella temporale:** `D3` dimezza `dtau`, non il lato del reticolo.
+- ### **Criterio di chiusura:** gamma(k) e il modo dominante su un toro a passo d'arco diverso *(o `D3` ripetuto sul lato)*. **Se il modo segue la griglia, la crescita e' della discretizzazione spaziale.**
+- ### **La decisione e' di Luca.** **`LINEARE` e `Lambda_c` restano FERMI.**
