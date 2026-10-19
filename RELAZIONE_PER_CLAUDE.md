@@ -19370,3 +19370,21 @@ Il messaggio di `56dd95b7` dice *«`doc/RIPRESA_2026-10-15.md`: la sezione 49»*
 ### ⚠ **ANNOTAZIONE al paragrafo di `ce338b9c`** *(si annota, non si riscrive)*: dove dice *«ricavata dagli import di `tick.py` e `motore.py` (`10` file)»*, ### **i file sono `9`.**
 
 ### ⛔ **E UN COMMIT RIFIUTATO, CON UNA CORSA CHE NON DOVEVA PARTIRE:** il primo tentativo di `b5730a7a` e' stato ### **rifiutato** da `H-NON-TRACCIATI` *(lo script del passo `B` non era ancora tracciato)*, ma ### **il mio comando ha fatto girare il censimento lo stesso**, perche' un `grep` dopo il commit ### **nascondeva il suo codice d'uscita.** Il referto di quella corsa ### **portava il timbro «MODIFICATO rispetto a HEAD»** e ### **l'ho scartato** *(`git checkout` del file)*. ### **Da adesso la corsa parte solo se il commit e' riuscito, e se il file e' pulito.**
+
+
+### ⛔⛔ **IL PASSO `B`: IL CONTROLLO FALLISCE IN DUE MODI, E MI FERMO** *(par.`2` del task history)*
+
+`doc/referti_l2/costo_punti_fissi.txt`, dal blob dichiarato nel suo timbro *(`csv/_costo_punti_fissi.py` di `a43eb14a`)*, con `cs` **acceso** sulla scena e sui `Lambda_c` di `C5`, due taglie, `8` tick, `5` ripetizioni. ### **Uscita `1`.**
+
+**CHE COSA PASSA:** il criterio sui due casi noti; ### **l'involucro e' inerte** *(sha1 dello stato finale uguale al braccio nudo, ogni braccio)*; ### **`cs` SPENTO da' quota `0` esatto** ai tre nelle chiamate che iterano, sulle due taglie *(`applica` viene chiamata `16` volte e torna subito: `0.11%` e `0.20%` del tick, riportato a parte)*; ### **il punto medio per pezzo non e' MAI chiamato** *(spento in questa configurazione, come previsto)*.
+
+**CHE COSA FALLISCE:**
+### `1)` **il tempo misurato NON torna coi giri per il costo di un giro** in `1` caso su `13`: taglia `16`, `Lambda_c = 0.8`, `cs_al_centro` ### **`r = 1.156`** fuori dai `3 sigma`. Sugli altri il rapporto `r` sta fra ### **`0.82` e `1.45`**, cioe' ### **il modello torna entro ~`±20%` nella maggior parte dei casi, ma non sempre, e non so ancora dire se lo scarto e' rumore del cronometro o un costo che non ho capito.**
+### `2)` **il caso che DEVE fallire NON fallisce** in `1` caso su `13`: taglia `32`, `Lambda_c = 24`, dove ### **la soglia e' `327` ms su una misura di `314`**: una ripetizione fuori scala ha gonfiato la dispersione, e ### **il criterio li' non distingue niente.** ### ⛔ **Un criterio che non boccia il caso sbagliato non vale come controllo, e lo dico invece di toglierlo.**
+
+**CHE COSA RESTA VERO ANCHE COL CONTROLLO CADUTO** *(sono quote, non il controllo del modello)*: ### **`cs_al_centro` e' il `76`-`92%` del tick**, e ### **`Omega` il `69`-`84%`**, di cui ### **il `52`-`77%` DENTRO i giri di `cs`.** ### ⭐ **Il costo e' il punto fisso di `Omega` annidato in quello di `cs`.**
+### ⚠ **E la previsione del task history** *(«`cs_al_centro` sopra il `90%`»)* ### **e' sbagliata per la maggior parte dei rapporti:** sopra il `90%` ### **solo in `3` casi su `13`.**
+
+### ⛔⛔ **E UN FATTO NUOVO, NON CHIESTO: A TAGLIA `32` E `Lambda_c/Lambda_medio = 0.01` IL PUNTO FISSO DI `cs` NON CONVERGE COL RAMO SPENTO** *(ultimo scarto `6.2e-02` in `120` giri)*, cioe' ### **con lo schema di DEFAULT a `cs` dinamico.** Finora la non convergenza era registrata ### **solo col ramo del punto medio ACCESO** *(rapporti `0.1` e `0.3`)*. ### **Riguarda `D4` e il mandato della rimozione, che la cita come motivo** -- e la decisione su cosa farne ### **e' di Luca.**
+
+### 📌 **PERCHE' MI FERMO, e che cosa propongo senza farlo:** il par.`2` dice di fermarsi se la quota non torna coi giri. ### **Due strade, la scelta e' di Luca:** ### **(a)** *(raccomandata)* rifare lo stesso controllo con ### **una statistica robusta al cronometro** -- la **mediana** e la **dispersione fra ripetizioni scartando la prima** *(il riscaldamento dei buffer)* -- dichiarata **prima**, sullo stesso blob di configurazione: e' il modo di separare *rumore* da *costo non capito*; ### **(b)** accettare le quote come misura e ### **non** usare il controllo del modello per decidere niente. ### ⚠ **Non scelgo io la statistica dopo aver visto i numeri** *(sarebbe tarare la soglia sui dati che giudica, `P1-sexies`)*.

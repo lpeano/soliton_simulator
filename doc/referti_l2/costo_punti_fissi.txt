@@ -1,0 +1,79 @@
+[TIMBRO] _costo_punti_fissi.py  sha1-BYTE 88997f8e  committato e pulito
+====================================================================================================
+IL COSTO DEI PUNTI FISSI DEL TICK, MISURATO A TEMPO -- il passo `B` della memoria
+====================================================================================================
+### LA CONFIGURAZIONE INTERA
+  la scena di `C5`: DV.scena(taglia, seme=7, dtau=0.25, norma=locale, vuoto_modulo=2.0, su2=True)
+  lo stato: la pre-corsa (TEMPO=8.0, a forma spenta, senza CAMM-FASE-VUOTO)
+  taglie [16, 32]   tick per braccio 8   ripetizioni 5   soglia 3 sigma
+  Lambda_c: D2.SPAZZATA = [0.08, 0.8, 2.4, 8.0, 24.0, 80.0, 800.0] (valori di C5 sulla taglia 16; sull'altra lo stesso RAPPORTO)
+  il passo: l'ordine della tabella, impronta 2e7f795d2a52fbe7; regola_punto_medio = None (default)
+  il tick acceso: tick.tick_con_cs(st, mot, par, Lambda_c, ());  spento: tick.tick
+  i file del percorso del tick, sha1 dei BYTE:
+     primo_ordine/composizione.py         4f6f0b4e
+     primo_ordine/energia_pesata.py       ce0b43d0
+     primo_ordine/flussi_parziali.py      94123ece
+     primo_ordine/grafo.py                cc8938b9
+     primo_ordine/incidenza.py            2143fe11
+     primo_ordine/materia_vuoto.py        68ff3ffd
+     primo_ordine/motore.py               4c3fdf89
+     primo_ordine/saturazione.py          e58e04de
+     primo_ordine/tick.py                 5577c8c6
+----------------------------------------------------------------------------------------------------
+### IL CRITERIO SU DUE CASI NOTI (P1-sexies): giusto torna True   sbagliato torna False   PASSA
+----------------------------------------------------------------------------------------------------
+
+### TAGLIA 16
+  `cs` SPENTO (riferimento): T tick 6.366 ms   chiamate cs 0   applica 16 (tutte con giri 0: True, il loro tempo 0.0067 ms = 0.11%)   punto medio 0
+     quota dei tre nelle chiamate che ITERANO: 0 esatto -- PASSA   involucro inerte: PASSA
+  Lc       Lc/Lm  T tick    cs: giri m/max  cs: quota         Omega: giri m/max Omega: quota dentro cs / fuori
+  0.08     0.010  152.928   8.00/9          81.0%             6.85/8            73.8%       59.5% / 14.3%
+  0.80     0.100  385.766   17.12/23        90.1%             11.30/15          81.0%       72.8% / 8.1%
+  2.40     0.300  426.542   18.62/26        91.1%             13.34/17          83.1%       75.7% / 7.4%
+  8.00     1.000  369.540   16.75/21        89.7%             12.57/16          82.3%       73.7% / 8.6%
+  24.00    3.000  251.450   13.62/16        87.5%             10.80/12          80.4%       70.2% / 10.2%
+  80.00    10.000 180.735   10.88/11        84.5%             8.88/9            77.6%       65.3% / 12.2%
+  800.00   100.000 100.226   7.00/7          78.6%             6.00/6            71.6%       55.9% / 15.7%
+  ### il punto medio per pezzo: chiamate [0] -> SPENTO in questa configurazione
+  ### IL CONTROLLO: il tempo misurato contro giri * c(giro)  [ms, 3 sigma]
+  ### r = misura/previsto: la soglia dice se TORNA, r dice DI QUANTO
+  Lc       cs_al_centro  misura/previsto/soglia Omega  misura/previsto/soglia      C5 (DEVE fallire)
+  0.08     123.8/128.5/37.9 r=0.964 torna     112.8/137.5/49.1 r=0.821 torna     13.576 previsto: fallisce
+  0.80     347.5/300.6/42.0 r=1.156 ### NO    312.3/282.3/37.8 r=1.106 torna     14.400 previsto: fallisce
+  2.40     388.6/362.4/44.2 r=1.072 torna     354.6/364.2/39.7 r=0.973 torna     15.549 previsto: fallisce
+  8.00     331.4/348.6/68.9 r=0.950 torna     304.1/316.4/56.1 r=0.961 torna     16.783 previsto: fallisce
+  24.00    220.1/228.5/13.1 r=0.963 torna     202.2/206.9/14.5 r=0.977 torna     13.188 previsto: fallisce
+  80.00    152.7/151.0/15.8 r=1.011 torna     140.2/136.8/13.2 r=1.025 torna     10.617 previsto: fallisce
+  800.00   78.8/79.5/10.5 r=0.991 torna       71.8/66.0/9.7 r=1.087 torna        7.339 previsto: fallisce
+
+### TAGLIA 32
+  `cs` SPENTO (riferimento): T tick 5.805 ms   chiamate cs 0   applica 16 (tutte con giri 0: True, il loro tempo 0.0117 ms = 0.20%)   punto medio 0
+     quota dei tre nelle chiamate che ITERANO: 0 esatto -- PASSA   involucro inerte: PASSA
+  Lc       Lc/Lm  T tick    cs: giri m/max  cs: quota         Omega: giri m/max Omega: quota dentro cs / fuori
+  0.08     ### NON CONVERGE: il punto fisso di `cs` NON CONVERGE in 120 giri (ultimo scarto 6.206e-02): il mandato dice
+  0.80     0.100  493.279   21.62/42        92.0%             14.27/19          84.2%       77.4% / 6.8%
+  2.40     0.300  397.499   18.38/23        89.6%             12.44/21          82.5%       73.8% / 8.7%
+  8.00     1.000  401.307   16.88/22        89.5%             13.28/16          83.1%       74.4% / 8.7%
+  24.00    3.000  359.746   13.38/16        87.4%             10.72/12          80.0%       69.8% / 10.2%
+  80.00    10.000 169.802   9.50/11         83.0%             8.02/9            76.4%       63.1% / 13.2%
+  800.00   100.000 91.359    6.00/6          75.8%             5.00/5            68.7%       51.7% / 17.0%
+  ### il punto medio per pezzo: chiamate [0] -> SPENTO in questa configurazione
+  ### IL CONTROLLO: il tempo misurato contro giri * c(giro)  [ms, 3 sigma]
+  ### r = misura/previsto: la soglia dice se TORNA, r dice DI QUANTO
+  Lc       cs_al_centro  misura/previsto/soglia Omega  misura/previsto/soglia      C5 (DEVE fallire)
+  0.80     453.6/427.9/37.9 r=1.060 torna     415.2/418.9/35.0 r=0.991 torna     16.839 previsto: fallisce
+  2.40     356.3/306.3/50.5 r=1.163 torna     327.8/316.3/45.1 r=1.036 torna     17.612 previsto: fallisce
+  8.00     359.3/276.3/133.2 r=1.300 torna    333.7/286.7/119.6 r=1.164 torna    14.752 previsto: fallisce
+  24.00    314.4/225.6/326.7 r=1.393 torna    287.8/198.9/292.7 r=1.447 torna    12.973 previsto: ### TORNA
+  80.00    140.9/133.6/37.3 r=1.054 torna     129.6/109.9/29.8 r=1.180 torna     9.529 previsto: fallisce
+  800.00   69.2/79.7/19.6 r=0.868 torna       62.8/61.6/14.9 r=1.020 torna       7.694 previsto: fallisce
+
+====================================================================================================
+### I VERDETTI
+  l'involucro e' inerte (sha1 dello stato finale, ogni braccio)      PASSA
+  cs SPENTO: quota 0 esatto per i tre (chiamate che iterano)         PASSA
+  il caso che DEVE fallire (il conto di C5) fallisce                 ### FALLISCE
+  il tempo misurato torna con giri * c(giro), cs e Omega             ### FALLISCE
+  righe misurate: 13
+### ⛔ C'E' UN COSTO NON CAPITO: il par.2 del task history dice di FERMARSI.
+====================================================================================================
