@@ -1,0 +1,31 @@
+[TIMBRO] _censimento_punti_fissi.py  sha1-BYTE 19c329c5  committato e pulito
+====================================================================================================
+I PUNTI FISSI DEL PASSO, CONTATI CON L'AST -- il passo `A` della memoria
+====================================================================================================
+  la definizione: un ciclo con un `if` di CONFRONTO che contiene `break`/`return`
+----------------------------------------------------------------------------------------------------
+### I DUE CONTROLLI SUL CODICE SINTETICO
+     deve essere contato      1   PASSA
+     NON deve essere contato  0   PASSA
+----------------------------------------------------------------------------------------------------
+### IL NUCLEO (chiusura degli import dalle radici tick passo motore materia_vuoto saturazione): 12 file
+----------------------------------------------------------------------------------------------------
+### I PUNTI FISSI TROVATI, e sono 6 (su 32 cicli del nucleo):
+     file                               funzione               riga   tolleranza                     tetto dei giri
+     primo_ordine/energia_pesata.py     applica                319    EPS_OMEGA                      GIRI_MAX_OMEGA
+     primo_ordine/flussi_parziali.py    hop_phi_punto_medio    508    EPS_PUNTO_FISSO                GIRI_MAX_PESO
+     primo_ordine/passo.py              strati                 109    -                              -
+     primo_ordine/passo.py              strati                 111    -                              -
+     primo_ordine/passo.py              mezzo_implicito        201    -                              -
+     primo_ordine/tick.py               cs_al_centro           179    EPS_CS                         GIRI_MAX
+----------------------------------------------------------------------------------------------------
+### IL CASO CHE DEVE RIUSCIRE: >= 3, e i 3 previsti per nome
+     primo_ordine/tick.py               cs_al_centro           trovato
+     primo_ordine/energia_pesata.py     applica                trovato
+     primo_ordine/flussi_parziali.py    hop_phi_punto_medio    trovato
+     e quelli NON previsti: primo_ordine/passo.py:mezzo_implicito, primo_ordine/passo.py:strati
+     PASSA
+----------------------------------------------------------------------------------------------------
+### ⚠ QUESTO E' IL CENSIMENTO STATICO: dice DOVE sono, non se GIRANO ne'
+###   quanto COSTANO. Acceso o spento, giri e quota: il passo `B`.
+====================================================================================================

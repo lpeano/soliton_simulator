@@ -19325,3 +19325,21 @@ e' per questo che ### **il passo e' del secondo ordine comunque.**
 Il messaggio di `56dd95b7` dice *«`doc/RIPRESA_2026-10-15.md`: la sezione 49»*, ma ### **quel file NON e' fra i FILE CAMBIATI di quel commit** *(`git show --stat 56dd95b7`)*, e ### **nel file non c'e' nessuna sezione `49`**: l'ultima e' la `48`, che dice ancora ### **«`C1` CADE A `1.002`, E L'OSTACOLO E' LOCALIZZATO»** -- cioe' ### **il numero e la diagnosi ritirati** con l'errore `n.12`.
 ### ⚠ **Chi riprende dalla RIPRESA legge quindi una diagnosi ritirata, senza rimando.**
 ### 📌 **Qui la registro e basta:** la cura *(la sezione che manca, col rimando a `g_dello_stato.txt`)* e' **un commit a se'**, e ### **il mandato della rimozione del ramo la chiede comunque al suo punto `7`** *(«aggiorna mappa, coda e RIPRESA»)*: la faccio la', ### **salvo che Luca la voglia prima.**
+
+
+### ⭐ **IL PASSO `A`: IL CENSIMENTO DEI PUNTI FISSI DA' `6`, E DUE SONO FALSI POSITIVI MIEI**
+
+`doc/referti_l2/censimento_punti_fissi.txt`, dal blob ### **`19c329c5`** *(sha1-BYTE, `csv/_censimento_punti_fissi.py` di `a2050831`, timbrato «committato e pulito»)*. Il nucleo e' di ### **`12` file**, con ### **`32` cicli**; i controlli sintetici ### **passano** *(`1` contato, `0` non contato)*, e il caso che deve riuscire ### **PASSA** *(i tre previsti trovati per nome)*.
+
+| | file : funzione | riga | la mia lettura del sorgente |
+|---|---|---|---|
+| `1` | `tick.py : cs_al_centro` | `179` | ### **PUNTO FISSO** -- `cs` al centro *(`EPS_CS`, `GIRI_MAX`)*: previsto |
+| `2` | `energia_pesata.py : applica` | `319` | ### **PUNTO FISSO** -- la fase del vuoto *(`EPS_OMEGA`, `GIRI_MAX_OMEGA`)*: previsto |
+| `3` | `flussi_parziali.py : hop_phi_punto_medio` | `508` | ### **PUNTO FISSO** -- il peso al punto medio *(`EPS_PUNTO_FISSO`, `GIRI_MAX_PESO`)*: previsto, ### **SPENTO**, e ### **in coda per la rimozione** |
+| `4` | `passo.py : mezzo_implicito` | `201` | ### **PUNTO FISSO, NON PREVISTO** -- il punto medio implicito della **via di `H`** *(uno dei due integratori candidati, la cui scelta e' di Luca)*. `passo` e' una radice del nucleo, ma ### **`tick.py` non lo importa**: se gira nel tick della camminata lo dice il passo `B` |
+| `5`-`6` | `passo.py : strati` | `109`, `111` | ### ⛔ **FALSI POSITIVI** -- e' la **colorazione golosa** degli archi in strati: il confronto e' `a not in occupati[s]`, e il `break` esce quando ### **trova uno strato libero**, non quando qualcosa converge |
+
+### ⛔ **IL DIFETTO E' NELLA MIA DEFINIZIONE, e l'avevo anche scritto:** *«un `if` con test di CONFRONTO»* comprende `in` / `not in`, che per l'AST sono `Compare`. Nel messaggio di `a2050831` avevo messo fra le cose da ricontrollare proprio *«una ricerca sarebbe contata»*, ### **e il controllo sintetico negativo non ne conteneva una.**
+### ✅ **La cura e' un commit a se':** il confronto di convergenza e' ### **di ORDINE** *(`<`, `<=`, `>`, `>=`)*, e il controllo sintetico negativo ### **aggiunge una ricerca con `not in`**, che deve risultare ### **non contata.** Poi il referto si rifa' dal blob nuovo.
+
+### 📌 **E LA PREVISIONE `3` ERA SBAGLIATA PER DIFETTO, NON PER ECCESSO:** nel nucleo i punti fissi veri sono ### **`4`**. Nel **tick della camminata** dovrebbero essere ### **`3`** *(cs, `Omega`, il peso spento)*, cioe' ### **`2` accesi col passo di default con `cs` dinamico** -- ### **lo dira' la misura dinamica del passo `B`, non la lettura.** Dopo la rimozione del ramo resteranno ### **`2` nel tick, piu' `mezzo_implicito` nella via di `H`.**
