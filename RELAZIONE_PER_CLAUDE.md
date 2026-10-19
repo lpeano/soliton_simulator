@@ -19439,3 +19439,8 @@ Il messaggio di `56dd95b7` dice *«`doc/RIPRESA_2026-10-15.md`: la sezione 49»*
 ### ⚠ **E una frase della sezione che va letta accanto:** *«in entrambe il passato diventa parte dello stato»* era scritta per `(a)` e `(b)`; ### **per la `(c)` il passato sta nel RESTO e nelle CODE** -- e l'ho annotato li', non riscritto.
 
 ### ⛔ **ERRORE `n.14` DEL GUARDIANO, detto a Luca in chat:** aveva chiamato *«orologio piu' veloce del tick»* un nodo che ha invece un orologio ### **LENTO** *(`cs` circa `0.57`)*. ### **Cio' che e' piu' veloce del tick e' un PROCESSO** -- lo scambio fra vuoto e tempo nel nodo -- ### **non un orologio.** ### **Il tick resta l'orologio piu' veloce** *(`L1`)*.
+
+### 📌 **UNA DOMANDA DI LUCA NELLA MAPPA, SOTTO `L4`: LA QUANTIZZAZIONE DAL QUANTO DI OLONOMIA** *(`2026-10-19`, `12:03`-`12:05`)*
+
+*«La quantizzazione puo' emergere dal quanto di olonomia (`2 pi` su un ciclo, gia' deciso per la mitosi) quando `U` sara' dinamica?»* -- con le considerazioni del guardiano scritte come tali: `(i)` la quantizzazione **topologica** *(attesa per costruzione, da verificare in `L4`)*; `(ii)` i **quanti di radiazione** come **ipotesi**, che ### **non segue da sola** *(indivisibilita', una costante unica, le statistiche solo in `L6`)*; `(iii)` la **tensione da decidere** fra il quanto della mitosi e quello della radiazione -- ### **nessuna delle due e' scelta.** Rimandi in `L3` *(accanto a `MITOSI-QUANTO-OLONOMIA`)* e in `L6`, e il legame con la variante `(c)`.
+### ⚠ **Il rimando «nella voce» l'ho messo dove la MAPPA nomina la voce** *(la tabella di `L3`)*: il mandato dice «solo mappa e relazione», e ### **l'indice non l'ho toccato.** ### **Nessuna conclusione: e' una domanda con i suoi criteri.**

@@ -39,7 +39,7 @@
 
 | | |
 |---|---|
-| **le voci** | `[[SPAZIO-CHE-NASCE]]` · `[[D-BILANCIO-NASCITA]]` · `[[MITOSI-QUANTO-OLONOMIA]]` · `[[PRIMA-LO-SPAZIO-POI-LA-MATERIA]]` |
+| **le voci** | `[[SPAZIO-CHE-NASCE]]` · `[[D-BILANCIO-NASCITA]]` · `[[MITOSI-QUANTO-OLONOMIA]]` *(e la domanda del `2026-10-19`: la quantizzazione dal quanto di olonomia, sotto `L4`)* · `[[PRIMA-LO-SPAZIO-POI-LA-MATERIA]]` |
 | **lo stato** | ### ⛔ **FERMO, ed e' IL CUORE DEL DISEGNO rimasto indietro.** Le derivazioni di `P5` *(la mitosi)* ci sono; ### **le quattro forme aspettano Luca** |
 | ### ⭐ **il criterio di uscita** | ### **LA PRIMA CORSA CON LO SPAZIO CHE CRESCE DA UN SEME**, con ① le **norme conservate attraverso le nascite** *(`CARTA-FISICA-SIMULATORE/F10`)*, ② il **bilancio locale** che chiude attorno all'arco che si divide *(`D-BILANCIO-NASCITA`)*, ③ e **nessun parametro nuovo** |
 | ### ⚠ **le ipotesi provvisorie che usa** | ### **`cs` UNIFORME finche' `L2` non e' chiuso** *(altrimenti un nodo nuovo non saprebbe che `cs` ha)*; e ### **`D-BILANCIO-NASCITA` si scrivera' su `H_tot` di `(B)`**, quindi **aspetta `L1`** |
@@ -53,6 +53,16 @@
 | ### ⭐ **il criterio di uscita** | la `U` **evolve** e la sua **olonomia su un ciclo** e' misurabile e **invariante di gauge** |
 | ### ⚠ **l'ipotesi provvisoria che usa** | ### **la REGOLA DI CONNESSIONE di `L3`:** la nota del `2026-10-13` dice che **se il nato chiude triangoli coi vicini comuni dei genitori**, allora i cicli piu' corti sono **triangoli**, cioe' **plaquette locali** — e la **localita' del termine magnetico dipende da questo.** ### **Quindi `L4` aspetta `L3`** |
 | ### ⭐ **la domanda che SI DECIDE QUI** *(`2026-10-16`)* | `[[DOMANDA-LA-GERARCHIA-GRAVITA-EM]]`: ### **prima di `L4` il campo di gauge `U` e' FERMO** *(`U = I`)*, quindi l'accoppiamento elettromagnetico ### **non esiste nel modello** e il rapporto con la gravita' ### **non e' calcolabile.** ### **Resta collegata alla scelta di `Lambda_c`, che sta in `L2`** *(`[[DOMANDA-IL-VALORE-DI-LAMBDA-C]]`)* |
+
+### 📌 **SOTTO `L4`: UNA DOMANDA DI LUCA DEL `2026-10-19` (`12:03`-`12:05`) -- IL QUANTO DI OLONOMIA E LA QUANTIZZAZIONE** *(con le considerazioni del guardiano, scritte come tali; ### **nessuna conclusione: e' una domanda con i suoi criteri**)*
+
+"DOMANDA: la quantizzazione puo' emergere dal QUANTO DI OLONOMIA (2 pi su un ciclo, gia' deciso per la mitosi) quando U sara' dinamica?
+(i) QUANTIZZAZIONE TOPOLOGICA (attesa per costruzione, da verificare in L4): l'olonomia si misura modulo 2 pi, quindi il numero di giri e' un intero. Ne seguirebbero flussi e cariche quantizzati, come in Dirac, Aharonov-Bohm e nel quanto di flusso dei superconduttori, anche in un campo classico se psi e' a un solo valore.
+(ii) QUANTI DI RADIAZIONE (ipotesi): h = 2 pi hbar, cioe' un giro completo di fase e' un quanto d'azione. Se gli scambi di U avvenissero a giri interi, ogni scambio porterebbe un'azione h, e un processo a frequenza nu scambierebbe energia a pacchetti h*nu. NON segue da solo; restano da verificare: l'indivisibilita' (il quanto si rivela intero in un punto), una costante unica per tutte le frequenze, e le statistiche (solo in L6, con lo stato quantistico).
+(iii) TENSIONE DA DECIDERE (Luca): oggi il quanto 2 pi fa scattare la mitosi. Se fosse anche il quanto della radiazione, o le due cose sono distinte e serve una regola che dica quando un giro diventa nodo e quando radiazione, oppure sono la stessa cosa: ogni quanto d'azione completato crea spazio ('prima lo spazio, poi la materia'). Nessuna delle due e' scelta.
+Legame con la variante (c) della sez.26: gli scambi a scatti sugli archi sono il posto dove questi quanti viaggerebbero."
+
+### ⛔ **Nessuna delle due strade di `(iii)` e' scelta: la decisione e' di Luca.** *(Rimandi: la voce `MITOSI-QUANTO-OLONOMIA` in `L3`, e `L6`.)*
 
 ### `L5` — **I DOMINI DI MATERIA/ANTIMATERIA** — *la strada `(3)`*
 
@@ -257,6 +267,7 @@ li classifico, e la classificazione e' una mia lettura.**
 | **il primo passo** | a **grafo FISSO** |
 | ### ⭐ **il controllo di raccordo** | con **`1` quanto** deve dare ### **AL BIT** lo stesso risultato di `primo_ordine/motore.py` |
 | **lo stato** | ### ⛔ **SOLO TEORIA fino all'apertura di `L6`** |
+| ### 📌 **la domanda dal quanto di olonomia** *(`2026-10-19`)* | sotto `L4`: la quantizzazione **topologica** *(attesa per costruzione)*, i **quanti di radiazione** come ipotesi -- e ### **le statistiche, che solo `L6` puo' dire** |
 
 ### ⚠ **E NOTO UNA COSA SUL CONTROLLO DI RACCORDO, perche' e' la sua forza:** *«con `1`
 quanto, AL BIT come `motore.py`»* e' ### **un criterio che non si puo' addolcire** — come
