@@ -1,0 +1,53 @@
+[TIMBRO] _misura_mb1.py  sha1-BYTE 046fb206  committato e pulito
+================================================================================================
+M-B1: IL RACCORDO AL BIT, PEZZO PER PEZZO -- dtau = dtau_rif = 1.0
+================================================================================================
+  LA CONFIGURAZIONE: dtau = 1.0   tick = 250   scene = ((16, 7), (12, 11))   norma = locale   vuoto_modulo = 2.0   su2 = True
+### (1) QUESTO ALBERO:
+  l'ordine di questo albero: 14 pezzi, impronta 2e7f795d2a52fbe7; il passo viene da `tick.py`
+    nn=16   seme=7    CAMM-MATERIA-VUOTO       sha1-BYTE 8a168b6d3c62
+    nn=16   seme=7    CAMM-FASE-VUOTO          sha1-BYTE 97bf7f39a5bb
+    nn=16   seme=7    CAMM-MONETA-SPIN         sha1-BYTE 83a5ba6ba39e
+    nn=16   seme=7    CAMM-GROVER              sha1-BYTE cfd93fe5de57
+    nn=16   seme=7    CAMM-SPOSTAMENTO         sha1-BYTE 0390d1739a43
+    nn=16   seme=7    CAMM-GROVER-VUOTO        sha1-BYTE 54173695ad70
+    nn=16   seme=7    CAMM-SPOSTAMENTO-VUOTO   sha1-BYTE c5666a692703
+    nn=16   seme=7    (il passo intero)        sha1-BYTE e99035d80da0
+    nn=12   seme=11   CAMM-MATERIA-VUOTO       sha1-BYTE 8e3729637472
+    nn=12   seme=11   CAMM-FASE-VUOTO          sha1-BYTE 560e11be749e
+    nn=12   seme=11   CAMM-MONETA-SPIN         sha1-BYTE 5ea32d8bc974
+    nn=12   seme=11   CAMM-GROVER              sha1-BYTE 8d81e3f7317b
+    nn=12   seme=11   CAMM-SPOSTAMENTO         sha1-BYTE 08aadd523728
+    nn=12   seme=11   CAMM-GROVER-VUOTO        sha1-BYTE 662971b75d39
+    nn=12   seme=11   CAMM-SPOSTAMENTO-VUOTO   sha1-BYTE 4e9b969201c9
+    nn=12   seme=11   (il passo intero)        sha1-BYTE 4f0b5798b1af
+### (2) 1c6f416, dal worktree:
+[TIMBRO] _misura_mb1.py  sha1-BYTE 046fb206  committato e pulito
+  l'ordine di questo albero: 14 pezzi, impronta 2e7f795d2a52fbe7; il passo viene da `tick.py`
+    nn=16   seme=7    CAMM-MATERIA-VUOTO       sha1-BYTE 8a168b6d3c62
+    nn=16   seme=7    CAMM-FASE-VUOTO          sha1-BYTE 97bf7f39a5bb
+    nn=16   seme=7    CAMM-MONETA-SPIN         sha1-BYTE 83a5ba6ba39e
+    nn=16   seme=7    CAMM-GROVER              sha1-BYTE cfd93fe5de57
+    nn=16   seme=7    CAMM-SPOSTAMENTO         sha1-BYTE 0390d1739a43
+    nn=16   seme=7    CAMM-GROVER-VUOTO        sha1-BYTE 54173695ad70
+    nn=16   seme=7    CAMM-SPOSTAMENTO-VUOTO   sha1-BYTE c5666a692703
+    nn=16   seme=7    (il passo intero)        sha1-BYTE e99035d80da0
+    nn=12   seme=11   CAMM-MATERIA-VUOTO       sha1-BYTE 8e3729637472
+    nn=12   seme=11   CAMM-FASE-VUOTO          sha1-BYTE 560e11be749e
+    nn=12   seme=11   CAMM-MONETA-SPIN         sha1-BYTE 5ea32d8bc974
+    nn=12   seme=11   CAMM-GROVER              sha1-BYTE 8d81e3f7317b
+    nn=12   seme=11   CAMM-SPOSTAMENTO         sha1-BYTE 08aadd523728
+    nn=12   seme=11   CAMM-GROVER-VUOTO        sha1-BYTE 662971b75d39
+    nn=12   seme=11   CAMM-SPOSTAMENTO-VUOTO   sha1-BYTE 4e9b969201c9
+    nn=12   seme=11   (il passo intero)        sha1-BYTE 4f0b5798b1af
+------------------------------------------------------------------------------------------------
+  l'ORDINE: adesso 14 pezzi (impronta 2e7f795d2a52fbe7) -- 1c6f416 14 pezzi (impronta 2e7f795d2a52fbe7)
+------------------------------------------------------------------------------------------------
+### ✅ `M-B1` PASSA: TUTTI i 14 pezzi coincidono AL BIT (7 pezzi x 2 scene)
+------------------------------------------------------------------------------------------------
+### 📌 INFORMAZIONE (NON un criterio): la distanza fra il passo PALINDROMO di
+###   adesso e il passo di 1c6f416, su 250 tick.
+###   nn=16   seme=7     max|d psi| = 0.000000e+00   max|d phi| = 0.000000e+00   su scala 3.478e+00
+###   nn=12   seme=11    max|d psi| = 0.000000e+00   max|d phi| = 0.000000e+00   su scala 3.310e+00
+###   E NON E' UN DIFETTO: i pezzi NON COMMUTANO, quindi una composizione
+###   palindroma NON PUO' dare il passo di una composizione che non lo era.

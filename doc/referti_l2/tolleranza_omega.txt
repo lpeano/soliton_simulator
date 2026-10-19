@@ -1,0 +1,35 @@
+[TIMBRO] _tolleranza_omega.py  sha1-BYTE f489f645  committato e pulito
+====================================================================================================
+LE PROVE DELLA TOLLERANZA DI `Omega` SULLA SCALA DEI DATI -- P1-P4 e P6
+====================================================================================================
+  EPS_OMEGA = 8 eps = 1.776e-15   GIRI_MAX_OMEGA = 120   la scala: max|cs'| pi (Lambda + rho)
+----------------------------------------------------------------------------------------------------
+### P1 + P2: la stagnazione dello scarto, contro la scala VECCHIA e la NUOVA
+  (le prime 20 tick di 6 bracci di D4, dtau 0.5; scala vecchia = max|Omega|)
+  rapporto x      app.   stagn. max     ulp NUOVA max  ulp VECCHIA  alzava?
+  0.1      0.01   120    6.449e-17      1.07           44.72        2 applicazioni su 120
+Traceback (most recent call last):
+  File "C:\Users\lpeano\soliton_simulator\csv\_tolleranza_omega.py", line 277, in <module>
+    sys.exit(main(sys.argv[1:]))
+             ~~~~^^^^^^^^^^^^^^
+  File "C:\Users\lpeano\soliton_simulator\csv\_tolleranza_omega.py", line 266, in main
+    p1_p2()
+    ~~~~~^^
+  File "C:\Users\lpeano\soliton_simulator\csv\_tolleranza_omega.py", line 123, in p1_p2
+    dd = braccio_p2(r, x)
+  File "C:\Users\lpeano\soliton_simulator\csv\_tolleranza_omega.py", line 105, in braccio_p2
+    PR.corri(PR.DTAU[0], x, "S3", TICK_P2, PR.T_ACCENSIONE[1], (0,), congela="pezzo",
+    ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+             lambda_c=lc)
+             ^^^^^^^^^^^^
+  File "C:\Users\lpeano\soliton_simulator\primo_ordine\statica_protocollo.py", line 410, in corri
+    TK.tick_con_cs(st, mot, par, lambda_c, ())
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lpeano\soliton_simulator\primo_ordine\tick.py", line 187, in tick_con_cs
+    _c, giri = cs_al_centro(st, mot, par, lambda_c, fp, salta)
+               ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lpeano\soliton_simulator\primo_ordine\tick.py", line 171, in cs_al_centro
+    raise AssertionError(
+    ...<2 lines>...
+        " ALZA invece di fermarsi a un valore qualunque" % (GIRI_MAX, scarto))
+AssertionError: il punto fisso di `cs` NON CONVERGE in 120 giri (ultimo scarto 1.652e-06): il mandato dice di RELAZIONARE coi numeri e NON di scegliere un altro schema, quindi questo ALZA invece di fermarsi a un valore qualunque

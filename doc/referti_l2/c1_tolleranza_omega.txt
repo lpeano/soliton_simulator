@@ -1,0 +1,95 @@
+[TIMBRO] _misura_strada_d.py  sha1-BYTE 718de448  committato e pulito
+====================================================================================================
+LA STRADA `(d)`: `C1`, `C2`, `C5` -- il termine nuovo conserva `G`?
+### Mandato del 2026-10-18. NESSUNA DECISIONE.
+====================================================================================================
+  LA CONFIGURAZIONE INTERA, dichiarata:
+  la scena di `M-B2`: nn = 16   seme = 7   T = 8.0   norma = locale   vuoto_modulo = 2.0   su2 = True
+  lo stato di partenza: la PRE-CORSA di `_misura_hw` (`T = 8.0` a `dtau = 0.25`), la STESSA per tutti i `dtau`
+  `Lambda_c` = la MEDIA di `Lambda` sulla scena, UNA volta e PRIMA della corsa
+  i dimezzamenti: k in (1, 2, 3, 4, 5)   la soglia: 1.9 (quella di `M-B2`)
+  l'ordine: 14 voci, impronta 2e7f795d2a52fbe7
+
+### `C1` LA PENDENZA DI `G` con `cs` DINAMICO, COL TERMINE
+     k    dtau       tick    escursione G     giri cs    giri Omega
+     1    0.500000   16      1.070057e+01     387        13
+     2    0.250000   32      2.209896e+00     499        11
+     3    0.125000   64      5.507999e-01     767        9
+     4    0.062500   128     1.302730e-01     1240       9
+     5    0.031250   256     3.243482e-02     2102       8
+  `C1` la pendenza di `G` col termine e' `>= 1.9`                PASSA   pendenza 2.091 su 4 dimezzamenti
+
+### `C1` IL CASO CHE DEVE FALLIRE: la STESSA corsa SENZA il termine
+     k    dtau       tick    escursione G     giri cs    giri Omega
+     1    0.500000   16      4.150428e+01     347        0
+     2    0.250000   32      3.781678e+01     459        0
+     3    0.125000   64      3.693036e+01     702        0
+     4    0.062500   128     3.671156e+01     1155       0
+     5    0.031250   256     3.671540e+01     1979       0
+  ### `C1` DEVE fallire: SENZA il termine la pendenza e' PEGGIOR PASSA   senza 0.044 contro 2.091 col termine: il termine MIGLIORA di 2.047
+
+### `C2` IL CASO CHE DEVE FALLIRE: il SEGNO di `Omega` INVERTITO
+     k    dtau       tick    escursione G     giri cs    giri Omega
+     1    0.500000   16      7.265966e+01     360        14
+     2    0.250000   32      7.108320e+01     443        11
+     3    0.125000   64      6.954670e+01     681        8
+     4    0.062500   128     7.013148e+01     1121       7
+     5    0.031250   256     7.022815e+01     1943       7
+  ### `C2` DEVE fallire: col segno INVERTITO la pendenza CADE    PASSA   segno meno 0.012 contro 2.091: il segno NON l'ho scelto, esce dalla derivazione
+
+### 📌 LA DIAGNOSI (informazione, NON un criterio): `cs` RILETTO prima
+###   di OGNI pezzo, che e' ESPLICITO e quindi NON simmetrico.
+     k    dtau       tick    escursione G     giri cs    giri Omega
+     1    0.500000   16      2.079948e+01     0          19
+     2    0.250000   32      9.522561e+00     0          14
+     3    0.125000   64      4.712299e+00     0          12
+     4    0.062500   128     2.238975e+00     0          9
+     5    0.031250   256     1.150331e+00     0          7
+     ### e la stessa SENZA il termine: -0.007
+     ### IL QUADRO:
+                                        col termine    senza
+     cs al CENTRO (la scelta di `D2`)   2.091          0.044
+     cs RILETTO per pezzo (esplicito)   1.044          -0.007
+
+### 📌 DOVE STA L'OSTACOLO (informazione): quanto cambia `Lambda`
+###   DENTRO un pezzo, per `dtau`. ### Se e' `O(dtau)`, i pesi congelati
+###   durante il pezzo bastano a fare il PRIMO ordine.
+     dtau                       CAMM-SPOSTAMENTO-VUOTO   CAMM-GROVER-VUOTO   CAMM-SPOSTAMENTO
+     0.50000                    4.016602e+00     5.329071e-15     0.000000e+00  
+     0.25000                    1.989525e+00     5.329071e-15     0.000000e+00  
+     0.12500                    1.028057e+00     3.552714e-15     0.000000e+00  
+     0.06250                    5.216191e-01     5.329071e-15     0.000000e+00  
+     0.03125                    2.626131e-01     3.552714e-15     0.000000e+00  
+     ### e `CAMM-SPOSTAMENTO-VUOTO` e' IL SOLO che muove `Lambda`: gli altri
+###   due la conservano (`5e-15`, cioe' l'arrotondamento).
+
+### `C5` IL COSTO: i giri dei DUE punti fissi per tick, sui sette rapporti
+       Lambda_c   Lc/Lam    giri cs   giri Omega tick di lavoro per tick
+           0.08    0.010        8.0          6.8 4.2
+Traceback (most recent call last):
+  File "C:\Users\lpeano\soliton_simulator\primo_ordine\_misura_strada_d.py", line 296, in <module>
+    sys.exit(main(sys.argv[1:]))
+             ~~~~^^^^^^^^^^^^^^
+  File "C:\Users\lpeano\soliton_simulator\primo_ordine\_misura_strada_d.py", line 285, in main
+    informazione_costo()
+    ~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\lpeano\soliton_simulator\primo_ordine\_misura_strada_d.py", line 245, in informazione_costo
+    tot_cs += TK.tick_con_cs(st, mot, par, lc, ())
+              ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lpeano\soliton_simulator\primo_ordine\tick.py", line 187, in tick_con_cs
+    _c, giri = cs_al_centro(st, mot, par, lambda_c, fp, salta)
+               ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lpeano\soliton_simulator\primo_ordine\tick.py", line 164, in cs_al_centro
+    percorri_tick(copia, mot, par, salta, None, meta)
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lpeano\soliton_simulator\primo_ordine\tick.py", line 99, in percorri_tick
+    mot.operatori[nome](st, par if vuole_par else {}, frazione)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lpeano\soliton_simulator\primo_ordine\motore.py", line 668, in _fase_vuoto
+    EP.applica(self, st, parametri, frazione)
+    ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lpeano\soliton_simulator\primo_ordine\energia_pesata.py", line 366, in applica
+    raise AssertionError(
+    ...<3 lines>...
+        % (GIRI_MAX_OMEGA, scarto))
+AssertionError: il punto medio di `Omega` NON CONVERGE in 120 giri (ultimo scarto 1.421e-14): la regola dice di RELAZIONARE coi numeri e NON di scegliere un altro schema, quindi questo ALZA invece di fermarsi a un valore qualunque

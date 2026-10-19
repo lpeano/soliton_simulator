@@ -19563,3 +19563,20 @@ Accanto alle strade gia' registrate: ### **`cs` CALA in `5` casi su `5`**, l'alo
 
 ### **La scala, dichiarata prima:** `max_k |cs'_k| * pi * (Lambda_k + rho_k)`, con `EPS_OMEGA = 8 eps` invariato -- ### **la materia entra in `H` con la stessa forma del vuoto**, quindi la scala e' sui termini che entrano davvero, e `pi` c'e' perche' i termini lo portano. ### **Sette prove fissate prima**, col controllo positivo che puo' fallire *(stagnazione entro `8` ulp della scala su `6` bracci di `D4`)* e due casi che devono alzare *(un ciclo sintetico, un braccio reale a frazione `16`)*.
 ### ⛔ **E RITIRO LA MIA LETTURA DI `a59994b9`** *(«`Omega` e' la differenza di termini di ordine `1`»)*: ### **i termini sono dello stesso ordine del risultato** *(il guardiano)*; il rumore viene dalle norme di ordine `Lambda` da cui le energie di `H` si costruiscono.
+
+
+### ⛔⛔ **LA TOLLERANZA DI `Omega`: LA SCALA NUOVA CURA IL CAMPO DEBOLE, MA FA REGREDIRE `C5` A `Lambda_c = 0.8` -- STOP**
+
+Tre referti dal blob di `bfb80c6f` *(codice `7395cd9a`)*, tutti «committato e pulito»:
+
+| la prova | il referto | il risultato |
+|---|---|---|
+| `P5` braccio `0`, `cs` spento | `mb1_tolleranza_omega.txt` *(`--contro 1c6f4167`)* | ### ✅ **`14` pezzi su `14` AL BIT, distanza del passo intero `0`** su entrambe le scene |
+| `P7` `C1` | `c1_tolleranza_omega.txt` | ### ✅ **`2.091`**, `0.044`, `0.012`, e le escursioni di `G` ### **identiche a tutte le cifre** *(`1.070057e+01` ... `3.243482e-02`)* |
+| ### ⛔ **`C5`, nello stesso script** | `c1_tolleranza_omega.txt` | ### ⛔⛔ **REGRESSIONE:** al secondo dei sette `Lambda_c` *(`0.8`, rapporto `0.1`, la scena di `C1`)* ### **il punto fisso di `Omega` ALZA**, ultimo scarto ### **`1.4e-14`** -- e col criterio di PRIMA ### **convergeva** *(il `C5` di ieri e' passato su tutti e sette)* |
+| `P1`/`P2` | `tolleranza_omega.txt` | ### ⚠ **INTERROTTO da un difetto MIO:** il braccio di `P2` a rapporto `0.1`, `x = 1` e' ### **la non convergenza VERA del punto fisso di `cs`** *(gia' nota)*, e lo strumento ### **non la intercettava**. ### **Il primo braccio era uscito:** `x = 0.01`, rapporto `0.1`, `120` applicazioni, la stagnazione ### **entro `1.07` ulp della scala NUOVA** contro ### **`44.7` della VECCHIA** *(`2` applicazioni su `120` alzavano)* |
+
+### ⛔ **CHE COSA VUOL DIRE:** ### **la scala dichiarata, `max_k |cs'_k| pi (Lambda_k + rho_k)`, e' SBAGLIATA in quel regime** -- e' il caso «la scala e' sbagliata: STOP» del task history. ### **Non la correggo dopo aver visto i numeri.**
+### 📌 **LA MIA IPOTESI, scritta come tale e NON provata:** a `Lambda_c` piccolo `cs'_k = Lambda_c/(Lambda_k + Lambda_c)^2` e' ### **grande nei nodi a vuoto basso**, e il termine d'arco che entra in `Omega_k` *(`somma dw * per_arco`)* ### **porta le norme dei VICINI** -- che la mia scala, ### **per nodo**, non vede. ### **Il rumore di `Omega_k` sta su `|cs'_k|` per le norme del nodo E dei suoi archi.**
+### ⛔ **E IL PASSO OGGI, A `HEAD`, HA LA TOLLERANZA NUOVA:** con `cs` spento non cambia niente *(`P5` al bit)*, ma con `cs` acceso ### **alza dove prima convergeva.** ### **Tornare indietro e' una correzione, e una correzione e' un commit a se': lo propongo e NON lo faccio da solo.**
+### **LE STRADE PER LUCA:** ### **(a)** tornare al criterio di prima *(un `git revert` di `7395cd9a`)* finche' la scala non e' giusta -- `D4` resta col suo STOP; ### **(b)** una scala che includa gli ARCHI *(le norme dei vicini, `|cs'_k|` per le norme del nodo e dei suoi archi)*, ### **dichiarata prima** e provata con le stesse prove; ### **(c)** la soglia come ### **`8 eps * max(max|Omega|, scala dei dati)`** -- converge se UNO dei due criteri e' soddisfatto: ### **e' l'unione, e non puo' regredire rispetto a prima.** ### **Raccomando `(b)` con `(c)` come rete**, e ### **la scelta e' di Luca.**
