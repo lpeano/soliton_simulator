@@ -20061,3 +20061,31 @@ La domanda di Luca *(«l'instabilita', se c'e', dipende dal fatto che lo spazio 
 ### 📌 **LA FRASE STANTIA DI `PI-ERA-STATO`, CORRETTA NEL SOLO TESTO VIVO** *(mandato di Luca del `2026-10-20`, `19:11`)*: ### **5 occorrenze corrette** -- `3` in `csv/indice.py` *(il docstring e un commento di `_f9_era_stato`, il messaggio d'errore)*, `1` in `doc/REGOLE/par9.md` *(con la nota di rimando datata)*, `1` nell'etichetta di un caso di `csv/_collaudo_presidi_indice.py` -- con la frase nuova: ### **«l'era `2` e' l'era corrente (`CLAUDE.md` par.`13`): una sua voce rimandata e' `AGENDA`, non `SOSPESA`»**. ### **Il registro storico lasciato com'era: `48` occorrenze in `9` file** *(relazione, storico, voci, lotti, task history, coda, piano)*. ### **Nessuna regola cambiata:** `valida` uguale prima e dopo *(stesse `8` righe, `37` segnali, `0` errori; cambia solo il timbro)*, `P-T1` `11/11`, il collaudo dei presidi `68` passati e `0` falliti, `doc/COLLAUDO_presidio_indice.txt` rigenerato ### **identico**; era `2`: `AGENDA` `159`, `SOSPESA` `0`, prima e dopo.
 
 ### 📌 **LA VOCE MITOSI-ASSORBITORE** *(`2026-10-20`, decisione di Luca delle `19:13`)*: ### **la voce `[[MITOSI-ASSORBITORE]]` c'e'**, era `2`, `AGENDA`, nell'indice *(`doc/indice/voci.jsonl`)*; ### **si valuta SOLO per ragioni sue** *(come nasce lo spazio, `L3`)*, ### **MAI come cura**, e prima vengono il referto della base proiettata e la scelta della cura di `S3`. ### **Chiude l'errore `n.25` del guardiano** *(la registrazione detta fatta alle `15:17`, e non fatta)*.
+
+### 📊 **LA BASE PROIETTATA E GAMMA COME PENDENZA: CON `cs` VINCE IL PICCO A `(pi, pi)`, CON `S3` SOLA VINCE LA BANDA; LA PREVISIONE DEL GUARDIANO REGGE; `k = 0` E' UN TRANSITORIO** *(referto `doc/referti_l2/stabilita_base_proiettata.txt` e `.jsonl`, strumento `csv/_stabilita_lineare.py --proiettata` blob sha1-BYTE `3e054285`, commit `7afb17d0`, committato e pulito)*
+
+- ### ✅ **`18/18` PROVE PASSANO:**
+  - `c38367db` e `16b5d10f` ### **rifatti AL BIT** dai modi vecchi;
+  - ### **la proiezione SPENTA riproduce il difetto** *(`4.8e15` ulp)*;
+  - la camminata sola esatta `2.1e-13`;
+  - ### **`P3`: nessuna memoria in `mot`, AL BIT**, con `cs` acceso e spento;
+  - con la base proiettata ### **`c38367db` ridato entro `4.2e-6` e `2.4e-7`**, e i numeri del guardiano *(`0.3754`, `0.5847`)*;
+  - ### **BASE VALIDA in ogni braccio: l'uniformita' resta fra `0.7` e `1.3` ulp** *(tetto `1e3`)*;
+  - la linearita' a lato `32`: `3.8e-5` e `3.9e-6`.
+- ### ✅ **LA PREVISIONE DEL GUARDIANO REGGE:** i quattro quarti di `R1` a `(pi, pi)` ridanno quelli di `16b5d10f` ### **entro `6.3e-7`** *(lato `32`) e `5.8e-7`* *(lato `64`)*. ### **I quarti di `R1` NON erano contaminati, e la loro oscillazione e' DETERMINISTICA, dello stimatore.** *(Per `R2` il quarto quarto a `(pi, pi)` cambia: `0.209` contro `0.273` di `16b5d10f` -- li' la contaminazione c'era.)*
+- **LE PENDENZE DELLA SECONDA META'** *(tempo proprio, stimatore autovalore)*:
+
+  | braccio | lato | `(pi, pi)` | la banda | `k = 0` | chi vince |
+  |---|---|---|---|---|---|
+  | `R1` `cs` acceso | `32` | `0.545` ### *NON asintotico* | `0.480` a `(pi, 0)` | `0.033` | ### **IL PICCO** |
+  | | `64` | `0.541` ### *NON asintotico* | `0.477` a `(pi, 0)` | `0.028` | ### **IL PICCO** |
+  | `R2` `S3` sola | `32` | `0.351` | `0.407` a `(0, 0.5 pi)` | `0.008` | ### **LA BANDA** |
+  | | `64` | `0.351` | `0.406` a `(0.53 pi, 0)` | `0.013` | ### **LA BANDA** |
+
+  - **`R1` a `(pi, pi)` NON ASINTOTICO:** l'ultimo quarto da' `0.586` *(lato `32`)* e `0.596` *(lato `64`)* contro `0.545` e `0.541` sulla seconda meta': ### **la differenza supera il `5%` del massimo.** La banda e `R2` sono asintotici.
+  - ### **E la banda di `R1` cade a `(pi, 0)`**: anche lei sul bordo della zona, ### **ma non e' il modo alternato della bipartizione.**
+- ### **`k = 0`: TRANSITORIO in tutti e quattro i bracci** *(per il criterio fissato: `R1` `0.033` e `0.028` sulla seconda meta' ma l'ultimo quarto sotto la meta'; `R2` sotto `0.02`)*. ### **Quindi la frase «nessuna lunghezza minima», detta su `k = 0`, si RITIRA.**
+- **LA LARGHEZZA DEL PICCO:** semi-larghezza `2` e `3` *(`R1`)*, `1` e `2` *(`R2`)* a lato `32` e `64`: ### **NON SEPARABILE** fra «segue la griglia» e «segue `k`».
+- ### **IL LEGAME CON `[[GRIGLIA-A-TRIANGOLI]]`** *(la sua condizione: «come prova di cura SOLO se a regime vince il picco a `(pi, pi)`»)*: ### **vince con `cs` acceso** *(ma non asintotico)*, ### **NON con `S3` sola.** ### **Il verdetto e' diviso, e leggerlo e' di Luca.**
+
+### **NESSUNA CURA SCELTA.** ### **`LINEARE`, `Lambda_c`, le letture «alla Jeans» o di modulazione, lo stato finale FERMI; `D4` da rileggere.**

@@ -1,0 +1,101 @@
+[TIMBRO] _stabilita_lineare.py  sha1-BYTE 3e054285  committato e pulito
+====================================================================================================
+L'INTERVALLO LUNGO CON LA BASE PROIETTATA E GAMMA COME PENDENZA -- un conto
+====================================================================================================
+  LA CONFIGURAZIONE INTERA, dichiarata:
+  la materia uniforme: x 0.1, VUOTO 1.0, rapporto 1, chi_allineato; la cella: 24 reali
+  il passo: 14 pezzi, impronta 2e7f795d2a52fbe7; lati 32 (dtau 0.125) e 64 (dtau 0.0625); N dtau = 100; la BASE PROIETTATA sulla media delle celle dopo ogni tick; la monodromia rinormalizzata per k
+  gamma = la PENDENZA (minimi quadrati, tempo proprio) di ln|lambda| e ln||M||, campioni ogni 4 tick, sulla seconda meta' e sull'ultimo quarto
+  soglie: base valida <= 1000 ulp (prima della proiezione); 5% del massimo; previsione 0.01; P3 64 ulp; linearita' 0.001; budget 10800 s
+----------------------------------------------------------------------------------------------------
+### I CASI DI CONTROLLO
+  il conto di c38367db (senza argomenti) AL BIT: R2 a lato 31            PASSA   
+  --lungo (16b5d10f) AL BIT: R2 lato 32, i quattro L                     PASSA   
+  DEVE FALLIRE: la proiezione SPENTA, R2 lato 32, N dtau 100: uniformita PASSA   4.824e+15 ulp
+  DEVE FALLIRE: la camminata sola esatta, lato 32, N dtau 100: <= N*64 u PASSA   2.101e-13 contro 1.137e-11
+  P3 cs acceso: la base dopo un tick perturbato = dopo un tick della bas PASSA   AL BIT, 0.0 ulp
+  P3 cs spento: la base dopo un tick perturbato = dopo un tick della bas PASSA   AL BIT, 0.0 ulp
+  DEVE RIUSCIRE: R1 proiettato, lato 31, N dtau 25 = c38367db entro 1e-3 PASSA   4.247e-06 contro 5.290e-04; uniformita' 0.7 ulp
+  DEVE RIUSCIRE: R2 proiettato, lato 31, N dtau 25 = c38367db entro 1e-3 PASSA   2.435e-07 contro 3.749e-04; uniformita' 0.3 ulp
+  DEVE RIUSCIRE: R2 proiettato lato 32, N dtau 25, intero: 0.3754 a (0,1 PASSA   
+  DEVE RIUSCIRE: R2 proiettato lato 32, N dtau 25, seconda meta': 0.5847 PASSA   
+----------------------------------------------------------------------------------------------------
+  R1 lato 32                     lato 32   dtau 0.125    x 0.1   N 800  [N, 622 s]  uniformita' 1.3 ulp
+      gamma max +5.5718e-01 a k = (16,16) = (1.000, 1.000) pi;  gamma(k=0) +8.863e-02;  N/2: +5.8685e-01;  nu_S3/OMEGA_H 0.2631
+      ### INFORMAZIONE: gamma della seconda meta' -- max +5.2751e-01 a k = (16,16); a k = 0 +4.201e-02
+      lungo (m,0), m = 0,2,..: +0.089 +0.172 +0.275 +0.343 +0.344 +0.408 +0.459 +0.487 +0.495
+      lungo (m,m), m = 0,2,..: +0.089 +0.226 +0.358 +0.428 +0.430 +0.385 +0.321 +0.255 +0.557
+  BASE VALIDA R1 lato 32: uniformita' <= 1000 ulp per tutto l'intervallo PASSA   1.3 ulp
+      LE PENDENZE (tempo proprio): il massimo della seconda meta' +5.4451e-01
+      punto    k                      meta' eig   meta' norma q4 eig      q4 norma     etichetta
+      (pi,pi)  (16,16)=(1.000,1.000)pi +5.4451e-01 +5.4112e-01 +5.8561e-01 +5.3966e-01  NON ASINTOTICO
+      banda    (16,0)=(1.000,0.000)pi +4.7980e-01 +4.7787e-01 +4.9270e-01 +4.7785e-01  ASINTOTICO
+      k=0      (0,0)=(0.000,0.000)pi +3.2724e-02 +2.7307e-02 +1.4666e-02 +2.2963e-02  ASINTOTICO
+      CHI VINCE (pendenza della seconda meta'): IL PICCO a (pi,pi)  (picco +5.4451e-01, banda +4.7980e-01, differenza 6.471e-02 contro 2.723e-02)
+      k = 0: seconda meta' +3.2724e-02, ultimo quarto +1.4666e-02 -> TRANSITORIO: la frase <<nessuna lunghezza minima>> si RITIRA
+      la diagonale negli ultimi 4 m prima di pi (m = 12..16): +3.2222e-01 +2.8642e-01 +2.5695e-01 +4.4034e-01 +5.4451e-01;  semi-larghezza 2
+      la pendenza della seconda meta' lungo (m,0), m = 0,2,..: +0.033 +0.158 +0.265 +0.337 +0.365 +0.406 +0.446 +0.473 +0.480
+      la pendenza della seconda meta' lungo (m,m), m = 0,2,..: +0.033 +0.214 +0.360 +0.434 +0.434 +0.385 +0.322 +0.257 +0.545
+      INFORMAZIONE, i quattro quarti alla vecchia a (pi,pi): +5.4894e-01 +6.2477e-01 +4.5022e-01 +6.0480e-01
+  LA PREVISIONE DEL GUARDIANO, R1 lato 32: i quarti a (pi,pi) = 16b5d10f PASSA   16b5d10f 0.5489 0.6248 0.4502 0.6048; differenza massima 6.325e-07
+  linearita' R1 lato 32: la pendenza della seconda meta', 1e-7 contro 1e PASSA   3.845e-05 contro 5.445e-04
+  R2 lato 32                     lato 32   dtau 0.125    x 0.1   N 800  [N, 128 s]  uniformita' 1.1 ulp
+      gamma max +4.0476e-01 a k = (0,8) = (0.000, 0.500) pi;  gamma(k=0) +4.857e-02;  N/2: +3.8872e-01;  nu_S3/OMEGA_H 0.2631
+      ### INFORMAZIONE: gamma della seconda meta' -- max +4.3414e-01 a k = (0,9); a k = 0 +4.915e-02
+      lungo (m,0), m = 0,2,..: +0.049 +0.162 +0.285 +0.371 +0.405 +0.385 +0.332 +0.287 +0.272
+      lungo (m,m), m = 0,2,..: +0.049 +0.216 +0.347 +0.310 +0.124 +0.056 +0.023 +0.019 +0.316
+  BASE VALIDA R2 lato 32: uniformita' <= 1000 ulp per tutto l'intervallo PASSA   1.1 ulp
+      LE PENDENZE (tempo proprio): il massimo della seconda meta' +4.0689e-01
+      punto    k                      meta' eig   meta' norma q4 eig      q4 norma     etichetta
+      (pi,pi)  (16,16)=(1.000,1.000)pi +3.5119e-01 +3.5473e-01 +3.5666e-01 +3.5458e-01  ASINTOTICO
+      banda    (0,8)=(0.000,0.500)pi +4.0689e-01 +4.0177e-01 +4.0763e-01 +4.0178e-01  ASINTOTICO
+      k=0      (0,0)=(0.000,0.000)pi +7.5611e-03 +1.3631e-02 +3.8033e-02 +1.1467e-02  NON ASINTOTICO
+      CHI VINCE (pendenza della seconda meta'): LA BANDA  (picco +3.5119e-01, banda +4.0689e-01, differenza 5.570e-02 contro 2.034e-02)
+      k = 0: seconda meta' +7.5611e-03, ultimo quarto +3.8033e-02 -> TRANSITORIO: la frase <<nessuna lunghezza minima>> si RITIRA
+      la diagonale negli ultimi 4 m prima di pi (m = 12..16): +2.4543e-02 +9.0121e-03 +1.3676e-02 +1.6382e-01 +3.5119e-01;  semi-larghezza 1
+      la pendenza della seconda meta' lungo (m,0), m = 0,2,..: +0.008 +0.143 +0.276 +0.378 +0.407 +0.389 +0.328 +0.276 +0.262
+      la pendenza della seconda meta' lungo (m,m), m = 0,2,..: +0.008 +0.196 +0.349 +0.308 +0.118 +0.067 +0.025 +0.014 +0.351
+      INFORMAZIONE, i quattro quarti alla vecchia a (pi,pi): +3.6935e-01 +3.3629e-01 +3.5019e-01 +2.0929e-01
+  linearita' R2 lato 32: la pendenza della seconda meta', 1e-7 contro 1e PASSA   3.894e-06 contro 4.069e-04
+  R1 lato 64                     lato 64   dtau 0.0625   x 0.1   N 1600 [N, 3711 s]  uniformita' 0.7 ulp
+      gamma max +5.5529e-01 a k = (32,32) = (1.000, 1.000) pi;  gamma(k=0) +8.871e-02;  N/2: +5.8557e-01;  nu_S3/OMEGA_H 0.2631
+      ### INFORMAZIONE: gamma della seconda meta' -- max +5.2502e-01 a k = (32,32); a k = 0 +4.172e-02
+      lungo (m,0), m = 0,4,..: +0.089 +0.172 +0.275 +0.344 +0.344 +0.410 +0.460 +0.488 +0.496
+      lungo (m,m), m = 0,4,..: +0.089 +0.226 +0.358 +0.428 +0.430 +0.385 +0.321 +0.256 +0.555
+  BASE VALIDA R1 lato 64: uniformita' <= 1000 ulp per tutto l'intervallo PASSA   0.7 ulp
+      LE PENDENZE (tempo proprio): il massimo della seconda meta' +5.4132e-01
+      punto    k                      meta' eig   meta' norma q4 eig      q4 norma     etichetta
+      (pi,pi)  (32,32)=(1.000,1.000)pi +5.4132e-01 +5.3850e-01 +5.9641e-01 +5.3702e-01  NON ASINTOTICO
+      banda    (32,0)=(1.000,0.000)pi +4.7655e-01 +4.7916e-01 +4.6565e-01 +4.7913e-01  ASINTOTICO
+      k=0      (0,0)=(0.000,0.000)pi +2.8480e-02 +2.7339e-02 +1.1898e-02 +2.2941e-02  ASINTOTICO
+      CHI VINCE (pendenza della seconda meta'): IL PICCO a (pi,pi)  (picco +5.4132e-01, banda +4.7655e-01, differenza 6.477e-02 contro 2.707e-02)
+      k = 0: seconda meta' +2.8480e-02, ultimo quarto +1.1898e-02 -> TRANSITORIO: la frase <<nessuna lunghezza minima>> si RITIRA
+      la diagonale negli ultimi 4 m prima di pi (m = 28..32): +2.5845e-01 +2.4061e-01 +4.3513e-01 +5.1837e-01 +5.4132e-01;  semi-larghezza 3
+      la pendenza della seconda meta' lungo (m,0), m = 0,4,..: +0.028 +0.155 +0.266 +0.336 +0.362 +0.400 +0.443 +0.468 +0.477
+      la pendenza della seconda meta' lungo (m,m), m = 0,4,..: +0.028 +0.216 +0.360 +0.436 +0.437 +0.388 +0.325 +0.258 +0.541
+      INFORMAZIONE, i quattro quarti alla vecchia a (pi,pi): +5.4942e-01 +6.2171e-01 +4.4687e-01 +6.0317e-01
+  LA PREVISIONE DEL GUARDIANO, R1 lato 64: i quarti a (pi,pi) = 16b5d10f PASSA   16b5d10f 0.5494 0.6217 0.4469 0.6032; differenza massima 5.814e-07
+  R2 lato 64                     lato 64   dtau 0.0625   x 0.1   N 1600 [N, 1012 s]  uniformita' 0.7 ulp
+      gamma max +4.0944e-01 a k = (17,0) = (0.531, 0.000) pi;  gamma(k=0) +4.719e-02;  N/2: +3.9268e-01;  nu_S3/OMEGA_H 0.2631
+      ### INFORMAZIONE: gamma della seconda meta' -- max +4.6901e-01 a k = (19,-3); a k = 0 +4.156e-02
+      lungo (m,0), m = 0,4,..: +0.047 +0.162 +0.285 +0.372 +0.409 +0.392 +0.339 +0.293 +0.278
+      lungo (m,m), m = 0,4,..: +0.047 +0.215 +0.349 +0.318 +0.124 +0.049 +0.026 +0.019 +0.328
+  BASE VALIDA R2 lato 64: uniformita' <= 1000 ulp per tutto l'intervallo PASSA   0.7 ulp
+      LE PENDENZE (tempo proprio): il massimo della seconda meta' +4.0630e-01
+      punto    k                      meta' eig   meta' norma q4 eig      q4 norma     etichetta
+      (pi,pi)  (32,32)=(1.000,1.000)pi +3.5144e-01 +3.5232e-01 +3.5477e-01 +3.5231e-01  ASINTOTICO
+      banda    (17,0)=(0.531,0.000)pi +4.0630e-01 +4.0630e-01 +4.1060e-01 +4.0630e-01  ASINTOTICO
+      k=0      (0,0)=(0.000,0.000)pi +1.3461e-02 +1.3627e-02 +1.4834e-02 +1.1465e-02  ASINTOTICO
+      CHI VINCE (pendenza della seconda meta'): LA BANDA  (picco +3.5144e-01, banda +4.0630e-01, differenza 5.486e-02 contro 2.032e-02)
+      k = 0: seconda meta' +1.3461e-02, ultimo quarto +1.4834e-02 -> TRANSITORIO: la frase <<nessuna lunghezza minima>> si RITIRA
+      la diagonale negli ultimi 4 m prima di pi (m = 28..32): +1.2616e-02 +1.1977e-01 +1.6379e-01 +3.2503e-01 +3.5144e-01;  semi-larghezza 2
+      la pendenza della seconda meta' lungo (m,0), m = 0,4,..: +0.013 +0.144 +0.276 +0.367 +0.406 +0.390 +0.338 +0.291 +0.275
+      la pendenza della seconda meta' lungo (m,m), m = 0,4,..: +0.013 +0.202 +0.343 +0.319 +0.123 +0.067 +0.026 +0.013 +0.351
+      INFORMAZIONE, i quattro quarti alla vecchia a (pi,pi): +3.6719e-01 +3.3540e-01 +3.4629e-01 +2.6405e-01
+----------------------------------------------------------------------------------------------------
+### LA LARGHEZZA DEL PICCO a (pi,pi): semi-larghezza in m (NUMERO DI ARCHI)
+  R1: lato 32 2, lato 64 3 -> NON SEPARABILE (entrambe)
+  R2: lato 32 1, lato 64 2 -> NON SEPARABILE (entrambe)
+====================================================================================================
+### 18/18 prove passate. NESSUNA CURA. LINEARE e Lambda_c FERMI; D4 da rileggere.
+====================================================================================================
