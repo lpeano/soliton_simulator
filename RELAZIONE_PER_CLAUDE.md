@@ -19758,3 +19758,10 @@ La domanda di Luca *(«l'instabilita', se c'e', dipende dal fatto che lo spazio 
 - `C1`: `G` e `H` a `cs` spento, tick per tick e a meta' tick, contro la banda di `C1` di strada `(d)`, ### **con la scena di `M-B2` come caso che deve riuscire**;
 - `C2`: la materia senza `CAMM-MATERIA-VUOTO`, ### **la sola camminata, che non deve crescere.**
 - ### **La cadenza di `29b997da`, letta dal sorgente:** un campione di `G` per tick INTERO, nessuno a meta' tick. ### **Il periodo `2` non e' quindi un aliasing.**
+
+### 📌 **UN'IDEA COLLOCATA DI LUCA (`2026-10-20`, `09:19`-`09:23`): LA QUANTIZZAZIONE COME TAGLIO ULTRAVIOLETTO** *(nella mappa sotto `L6`, coi rimandi dalle sez.`24` e `27`; nessun codice, nessuna decisione)*
+
+- ### **L'idea:** il modo a scala di griglia *(la scacchiera a `k = pi`)* ### **potrebbe essere spento dalla quantizzazione**, come Planck spense la catastrofe ultravioletta. ### **Il modo a `k = pi` ha l'energia d'arco massima per una data densita':** sarebbe il piu' caro.
+- ### **Le due condizioni, lette dal guardiano:** **(a)** serve lo stato quantistico vero di `L6`, perche' oggi le ampiezze sono continue; **(b)** ### **prima `C1` e `C2` devono escludere un difetto del passo.**
+- ### **Il rischio di metodo:** *«la quantizzazione lo sistemera' in `L6`»* ### **non chiude `L2`.** Il simulatore di oggi e' il campo medio, ### **e la quantizzazione salverebbe solo dove i quanti per modo sono meno di uno.**
+- ### **Il criterio, fissato ora per quando `L6` si aprira':** sul controllo di raccordo, il modo a `k = pi` ### **si spegne nello stato quantistico e NON nel campo medio**, a parita' di energia e di norma. ### **Se si accende in entrambi, l'idea cade.**

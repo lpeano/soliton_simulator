@@ -296,6 +296,27 @@ criterio di raccordo PUNTA a un oggetto che sta per cambiare.**
 ### ⛔ **E CHE COSA NON FACCIO:** nessuna derivazione, nessun task history, nessuna voce.
 ### **La collocazione e' questa riga, e basta.**
 
+### 📌 **SOTTO `L6`: UN'IDEA COLLOCATA DI LUCA DEL `2026-10-20` (`09:19`-`09:23`) -- LA QUANTIZZAZIONE COME TAGLIO ULTRAVIOLETTO** *(discussa col guardiano; le considerazioni del guardiano sono scritte come tali. ### **Nessun codice, nessuna decisione.** Rimandi: la sez.`27`, l'osservazione sull'era `1`, e la sez.`24`, il solitone a due lunghezze di Planck)*
+
+> *«LA QUANTIZZAZIONE COME TAGLIO ULTRAVIOLETTO: il modo a scala di griglia (la scacchiera
+> a `k = pi`, il doppione) potrebbe essere spento dalla quantizzazione, come Planck spense
+> la catastrofe ultravioletta nel 1900.»*
+
+**Le considerazioni del guardiano, scritte come tali:**
+1. ### **IL MECCANISMO DI PLANCK:** un modo di frequenza `nu` si eccita solo a pacchetti di energia `h nu`; ### **i modi troppo cari restano spenti** perche' non si possono riempire a frazioni. ### **Nel modello il modo a `k = pi` ha l'energia d'arco MASSIMA per una data densita':** sarebbe il piu' caro.
+2. ### **DUE IDEE GIA' REGISTRATE nella stessa direzione:**
+   - **il quanto d'azione**: un giro di fase per scambio, ### **la domanda sotto `L4` sul quanto di olonomia** *(`E = h nu`)*;
+   - **il tetto di Pauli di `L6`**: al massimo `2d` quanti per nodo, che ### **LIMITEREBBE** l'ammucchiarsi della materia a scacchiera, ### **senza impedirlo.**
+3. ### **LE DUE CONDIZIONI:**
+   - **(a)** ### **serve lo stato quantistico vero di `L6`.** Il simulatore di oggi ha ampiezze continue, quindi ### **anche frazioni di quanto entrano nella scacchiera**, come nel caso classico;
+   - **(b)** ### **prima va escluso un difetto del passo** *(`C1` e `C2`, task history `2026-10-20_controllo_passo_materia_uniforme.md`)*: se il passo non conserva `H` sulla materia uniforme, l'instabilita' ### **e' un errore da correggere, e la quantizzazione non va invocata.**
+4. ### **IL RISCHIO DI METODO:** *«la quantizzazione lo sistemera' in `L6`»* ### **NON chiude `L2`.**
+   - Il simulatore di oggi ### **e' il CAMPO MEDIO**: dove i quanti per modo sono molti, i due devono coincidere;
+   - ### **quindi la quantizzazione salverebbe solo dove i quanti per modo sono MENO DI UNO.**
+5. ### **IL CRITERIO, quando `L6` si aprira'** *(fissato qui)*:
+   - sul **controllo di raccordo gia' previsto** *(grafo piccolo, campo medio contro stato quantistico)*, ### **il modo a `k = pi` si spegne nello stato quantistico e NON nel campo medio, a parita' di energia e di norma**;
+   - ### **se si accende in entrambi, l'idea cade.**
+
 ---
 
 ## 7. ✅ `L1` — **LE DUE DECISIONI DI LUCA DEL `2026-10-15`**
@@ -934,6 +955,8 @@ grossa ### **l'ampiezza media del modo a `k = pi` si annulla mentre la sua densi
 -- cioe' ### **da lontano si vedrebbe la sua gravita' ma non la sua onda.**
 ### ⛔ **Nessuna conclusione prima della misura.**
 
+### 📌 **RIMANDO** *(`2026-10-20`)*: ### **la quantizzazione come taglio ultravioletto** del modo a `k = pi`, un'idea collocata di Luca, ### **sta sotto `L6`** *(sez.`6.2`)*.
+
 ## 25. ⭐⭐ `L3` — **LA `G` DEL MODELLO: UNIVERSALITA', STABILITA', E IL VUOTO ALLA NASCITA** *(`2026-10-18`, `00:55`-`01:04`)*
 
 > ### 📌 **Ragionamento di Luca, integrazione del guardiano**, e si colloca
@@ -1186,3 +1209,5 @@ guardare allora:
 - ### **il tetto di Pauli di `L6`**: un'esclusione da' ### **una densita' massima, non una lunghezza** *(`doc/STATO_RUN.md`, e `doc/REGISTRO_FISICA.md`, candidata `(C)`)*, e il passaggio densita' → lunghezza ### **va derivato.**
 
 ### ⛔ **Se invece `C1` o `C2` trovano un difetto del passo, questa domanda NON si apre:** prima si cura il passo.
+
+### 📌 **RIMANDO** *(`2026-10-20`, `09:19`-`09:23`)*: ### **un'idea collocata di Luca sul modo a `k = pi`, la quantizzazione come taglio ultravioletto**, sta ### **sotto `L6`** *(sez.`6.2`)*, con le sue due condizioni e il criterio per quando `L6` si aprira'.
