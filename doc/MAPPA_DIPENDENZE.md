@@ -1158,3 +1158,31 @@ passato: SI' o NO>>.** ### **Vale per il modello INTERO**, non per un pezzo -- e
 
 ### ⛔ **QUESTO CORREGGE IL NUMERO DELL'INIZIO DELLA SEZIONE**, che parlava di punti fissi *«`cs` al centro e il peso d'arco al punto medio»*: ### **quello che gira davvero a ogni tick con `cs` dinamico e' la fase del vuoto dentro `cs`**, ed e' li' il costo. ### **E per le varianti** *(lettura, non decisione)*: `(a)` resta esplicita ma non simmetrica, ### **ed e' un buffer di storia, in tensione con `[[MEMORIA-DENTRO-H]]`**; `(b)` non e' disponibile come esplicita simmetrica; `(c)` porta il passato nel resto e nelle code, con la simmetria nel tempo aperta.
 ### ⛔ **LA DECISIONE «lo stato contiene il passato» RESTA UNA E DI LUCA.**
+
+## 27. 📌 `L2`/`L3` — **NELL'ERA `2` L'UNICA LUNGHEZZA E' IL PASSO DELLA GRIGLIA** *(osservazione, `2026-10-20`)*
+
+> ### ⛔ **UN'OSSERVAZIONE: e' una LETTURA DEL GUARDIANO, scritta come tale. Nessuna decisione.**
+> Registrata su mandato di Luca del `2026-10-20` *(`09:12`)*, ### **insieme ai due controlli
+> del passo** *(`doc/TASK_HISTORY/2026-10-20_controllo_passo_materia_uniforme.md`)*.
+
+**Il fatto da cui nasce:** l'instabilita' della materia uniforme di `29b997da` cresce ### **su
+tutti gli anelli**, e il modo dominante e' `(15, 15)` su `31x31`: ### **`k` circa `pi`, la scala
+della griglia.**
+
+**L'era `1` aveva cose che tagliavano le scale corte PER COSTRUZIONE** *(verificate nel sorgente,
+`soliton_simulator.py`)*:
+- ### **una lunghezza fisica piu' grande della griglia:** `LAM = 0.8`, la larghezza del solitone nel nucleo `exp(-|x-p|/LAM)`;
+- ### **il taglio del rumore:** un processo di Ornstein-Uhlenbeck correlato su `tau_c = LAM/CS_M`, il tempo-luce del solitone;
+- ### **le saturazioni.**
+
+**L'era `2` e' invariante di scala per scelta:**
+- ### **l'unica lunghezza e' il passo della griglia**, quindi ### **nessuna legge protegge il modo a `k = pi`**;
+- con la norma conservata esattamente non e' una catastrofe a energia infinita: ### **e' un trasferimento verso la scala della griglia.**
+
+### 📌 **LA DOMANDA PER LUCA, SE `C1` E `C2` CONFERMANO CHE IL PASSO E' SANO:**
+### **quale legge, o quale scala emergente, stabilizza il modo piu' corto?** I collegamenti da
+guardare allora:
+- ### **il solitone a due lunghezze di Planck** *(sez.`24`)*;
+- ### **il tetto di Pauli di `L6`**: un'esclusione da' ### **una densita' massima, non una lunghezza** *(`doc/STATO_RUN.md`, e `doc/REGISTRO_FISICA.md`, candidata `(C)`)*, e il passaggio densita' → lunghezza ### **va derivato.**
+
+### ⛔ **Se invece `C1` o `C2` trovano un difetto del passo, questa domanda NON si apre:** prima si cura il passo.

@@ -19740,3 +19740,21 @@ La domanda di Luca *(«l'instabilita', se c'e', dipende dal fatto che lo spazio 
 - **Le due cose stanno insieme solo se la crescita e' legata alla griglia SPAZIALE** *(il passo d'arco)* **e non a quella temporale:** `D3` dimezza `dtau`, non il lato del reticolo.
 - ### **Criterio di chiusura:** gamma(k) e il modo dominante su un toro a passo d'arco diverso *(o `D3` ripetuto sul lato)*. **Se il modo segue la griglia, la crescita e' della discretizzazione spaziale.**
 - ### **La decisione e' di Luca.** **`LINEARE` e `Lambda_c` restano FERMI.**
+
+### ⛔ **ERRORE `n.19` DEL GUARDIANO: IL VERDETTO `D3` DI `29b997da` NON DICE CIO' CHE IL CRITERIO PROMETTEVA** *(decisione di Luca del `2026-10-20`, `09:12`)*
+
+- ### **Il criterio «`dtau` dimezzato separa il fisico dal numerico» vede solo gli artefatti del passo nel TEMPO.**
+- ### **Un'instabilita' legata al passo SPAZIALE** *(la griglia)* **ha lo stesso gamma in tempo proprio a ogni `dtau`, e passa per «FISICA».**
+- ### **Quindi «D3: FISICA» di `29b997da` va letto come «non e' un artefatto del passo nel tempo», e niente di piu'.** Nella relazione di quel commit l'avevo gia' messo come tensione, ### **ma il verdetto stampato dallo strumento resta piu' forte di cio' che misura.**
+
+### 📌 **E IL FATTO che il guardiano ha letto nelle serie del `jsonl`:**
+- il modo dominante e' `(15, 15)` su `31x31`, cioe' `k` circa `pi`: ### **la scacchiera**;
+- nessuna lunghezza minima;
+- gamma cresce di `2.8` volte da `x 0.01` a `x 1`, non come la radice di `rho`;
+- con `cs` acceso `G` cambia gia' fra i primi campioni, su uno stato uniforme a `1e-16`;
+- ### **con `cs` spento `G` oscilla di periodo `2`** *(`-1937.2`, `-2321.6`, `-1937.2`)*, ### **e a `cs` spento `G` e' `H`, che dovrebbe conservarsi.**
+
+### ✅ **Il mandato: DUE CONTROLLI DEL PASSO prima di qualunque interpretazione** *(task history `doc/TASK_HISTORY/2026-10-20_controllo_passo_materia_uniforme.md`, coi criteri fissati prima)*:
+- `C1`: `G` e `H` a `cs` spento, tick per tick e a meta' tick, contro la banda di `C1` di strada `(d)`, ### **con la scena di `M-B2` come caso che deve riuscire**;
+- `C2`: la materia senza `CAMM-MATERIA-VUOTO`, ### **la sola camminata, che non deve crescere.**
+- ### **La cadenza di `29b997da`, letta dal sorgente:** un campione di `G` per tick INTERO, nessuno a meta' tick. ### **Il periodo `2` non e' quindi un aliasing.**
