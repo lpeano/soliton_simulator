@@ -19798,3 +19798,39 @@ La domanda di Luca *(«l'instabilita', se c'e', dipende dal fatto che lo spazio 
   - ### **`P2` ordinario** *(`~ dtau^2`: `0.2`, `0.05`, `0.0125`)* contro ### **`P1` non conservato** *(`~ rho_medio dtau`: `0.2`, `0.1`, `0.05`)*;
   - la scomposizione termine per termine, ### **verificata al bit**;
   - ### **la scena di `M-B2` come caso che deve riuscire** *(pendenza `2`)*.
+
+### ⛔ **LA SCALA DEL SALTO DI `H`: IL TERMINE CHE SALTA E' LA MONETA, LA PENDENZA E' VICINA A `2`, MA IL VERDETTO FISSATO PRIMA E' «NON SEPARABILE». STOP** *(referto `doc/referti_l2/scala_salto.txt`, strumento `csv/_scala_salto.py` blob sha1-BYTE `16e5079d`, commit `4e742a0d`, committato e pulito)*
+
+- **`S4`, il caso di `M-B2`:**
+  - l'escursione di `H` a tempo totale `10` e' `1.383e+1`, `3.783e+0`, `9.538e-1` a `dtau` `0.5`, `0.25`, `0.125`;
+  - ### **pendenza `1.929`** *(a coppie `1.870`, `1.988`)*, quindi «PASSA»;
+  - ### ⚠ **MA LA REGOLA NON DISCRIMINA:** con la `t` di Student a `1` grado *(`235.78`)* `t * barra` vale `13.9`, ### **e passerebbe anche a pendenza `1`.**
+- **`S1`/`S2`, la materia uniforme, il salto per nodo:**
+
+  | `dtau` | `x 0.01` | `x 0.1` | `x 1` | `P2` previsto *(`x 0.1`)* | `P1` previsto *(`x 0.1`)* |
+  |---|---|---|---|---|---|
+  | `0.5` | `2.000e-2` | `2.000e-1` | `2.000e+0` | `0.2` | `0.2` |
+  | `0.25` | `3.818e-3` | `3.818e-2` | `3.818e-1` | `0.05` | `0.1` |
+  | `0.125` | `9.837e-4` | `9.837e-3` | `9.837e-2` | `0.0125` | `0.05` |
+
+  - ### **pendenza `2.173`** *(a coppie `2.389`, `1.957`)*, ### **identica alle tre `x`**;
+  - ### **IL VERDETTO FISSATO PRIMA: «entrambe (non separabili)»**: la barra e' `1.15`, e `t * barra` vale `272`;
+  - ### **in `x` il salto e' ESATTAMENTE proporzionale:** pendenza `1.0000` in `log x` a ogni `dtau`, ### **cioe' proporzionale a `rho_medio`.**
+- **INFORMAZIONE, NON CRITERIO** *(riga aggiunta dopo la prova a vuoto, dichiarata nel commit dello strumento)*: ### **la pendenza dell'ESCURSIONE di `H` e' `2.141`** *(a coppie `2.229`, `2.054`)*, a ogni `x`.
+- ### **`S3`, LA SCOMPOSIZIONE, ricostruita AL BIT** *(`per_nodo`, `per_arco` e `G` identici a `termini_di_h`)*:
+  - ### **IL SALTO E' TUTTO NEL TERMINE DELLA MONETA** *(`eps h`)*: a mezzo tick ### **`0.2000` per nodo**;
+  - ### **tutti gli altri termini saltano di meno di `4e-15` per nodo**;
+  - la moneta vale ### **`+192.2`, `0`, `-192.2`, `0`, `+192.2`**: ### **l'elicita' lungo `n` si ROVESCIA a ogni tick.**
+  - *(Una lettura, scritta come tale e NON verificata: a `dtau 0.5` il salto per nodo `0.2` e' l'ampiezza intera della moneta, `eps * rho_medio` se `eps = 0.5` -- quindi la coincidenza con `rho_medio * dtau` potrebbe venire da `eps = dtau = 0.5`.)*
+
+### ⛔ **ERRORE `n.20` DEL GUARDIANO, IL MIO:** ### **la barra e la soglia che ho fissato rendono il verdetto non discriminante.**
+- **La `t` di Student a `1` grado** *(`236`)*, ### **su qualunque barra non minuscola, accetta sia `1` sia `2`** -- e lo fa anche nel caso che deve riuscire.
+- **E la «dispersione» dei salti lungo l'orbita** *(min `2.8e-4`, max `6.1e-2` a `dtau 0.25`)* ### **non e' un'incertezza: e' la forma dell'oscillazione**, che a `dtau 0.5` e' triangolare e a `dtau` minori no. ### **L'ho messa nella barra come se fosse rumore.**
+- ### **Non cambio il criterio dopo aver visto i numeri.** Il verdetto resta «non separabile», e per la sez.`S5` del task history ### **si riporta il numero e ci si FERMA.**
+
+### **I NUMERI PER LUCA, senza verdetto:**
+- pendenza del salto `2.17`, dell'escursione `2.14`; a coppie da `1.96` a `2.39`;
+- ### **la previsione di `P1` a `dtau 0.125` era `0.05`, e la misura e' `0.0098`**: ### **cinque volte meno.** Quella di `P2` era `0.0125`.
+- Il termine e' **la moneta**, e la dipendenza e' **lineare in `rho_medio`**.
+
+### **La decisione e' di Luca:** leggere i numeri come `P2` *(e allora `C2` a un `dtau` da dichiarare)*, oppure rifare il verdetto con un criterio discriminante, fissato prima. ### **`C2` non gira. `LINEARE`, `Lambda_c` e ogni lettura «alla Jeans» FERMI.**

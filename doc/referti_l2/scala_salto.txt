@@ -1,0 +1,67 @@
+[TIMBRO] _scala_salto.py  sha1-BYTE 16e5079d  committato e pulito
+====================================================================================================
+LA SCALA DEL SALTO DI H SULLA MATERIA UNIFORME -- una misura, nessun codice di fisica
+====================================================================================================
+  LA CONFIGURAZIONE INTERA, dichiarata:
+  la materia uniforme (29b997da): lati (31, 31), VUOTO 1.0, cs SPENTO, nessuna perturbazione; x in (0.01, 0.1, 1.0)
+  la scena di M-B2: nn 16, seme 7, norma locale, vuoto_modulo 2, su2 True
+  dtau in (0.5, 0.25, 0.125), a TEMPO TOTALE FISSO T = 10 (tick [20, 40, 80])
+  il passo: 14 pezzi, impronta 2e7f795d2a52fbe7; la soglia: t di Student a 1 grado al 99.73% = 235.78
+----------------------------------------------------------------------------------------------------
+### S4, IL CASO CHE DEVE RIUSCIRE: la scena di M-B2, l'escursione di H
+     dtau 0.5    tick 20    escursione 1.382722e+01   relativa 1.888e-02
+     dtau 0.25   tick 40    escursione 3.783367e+00   relativa 5.167e-03
+     dtau 0.125  tick 80    escursione 9.538010e-01   relativa 1.303e-03
+     pendenza 1.929 (a coppie 1.870, 1.988), barra 0.059 (curvatura)
+     ### INFORMAZIONE: |p - 1| = 0.929, |p - 2| = 0.071, t*barra = 13.928 -> la regola NON DISCRIMINA (passerebbe anche p = 1)
+  S4 M-B2: |p - 2| <= t * barra                                      PASSA   p 1.929, t*barra 13.928
+----------------------------------------------------------------------------------------------------
+### S1, LA MATERIA UNIFORME: il salto di H a mezzo tick, PER NODO
+     x 0.01  dtau 0.5    rho_medio 0.040000  salto/nodo 2.000000e-02  [min 2.000000e-02, max 2.000000e-02]  rho_medio*dtau 2.000000e-02  escursione 3.8440e+01
+     x 0.01  dtau 0.25   rho_medio 0.040000  salto/nodo 3.817866e-03  [min 2.827714e-05, max 6.090804e-03]  rho_medio*dtau 1.000000e-02  escursione 8.1984e+00
+     x 0.01  dtau 0.125  rho_medio 0.040000  salto/nodo 9.837043e-04  [min 4.992829e-06, max 1.537079e-03]  rho_medio*dtau 5.000000e-03  escursione 1.9747e+00
+     x 0.1   dtau 0.5    rho_medio 0.400000  salto/nodo 2.000000e-01  [min 2.000000e-01, max 2.000000e-01]  rho_medio*dtau 2.000000e-01  escursione 3.8440e+02
+     x 0.1   dtau 0.25   rho_medio 0.400000  salto/nodo 3.817866e-02  [min 2.827714e-04, max 6.090804e-02]  rho_medio*dtau 1.000000e-01  escursione 8.1984e+01
+     x 0.1   dtau 0.125  rho_medio 0.400000  salto/nodo 9.837043e-03  [min 4.992829e-05, max 1.537079e-02]  rho_medio*dtau 5.000000e-02  escursione 1.9747e+01
+     x 1     dtau 0.5    rho_medio 4.000000  salto/nodo 2.000000e+00  [min 2.000000e+00, max 2.000000e+00]  rho_medio*dtau 2.000000e+00  escursione 3.8440e+03
+     x 1     dtau 0.25   rho_medio 4.000000  salto/nodo 3.817866e-01  [min 2.827714e-03, max 6.090804e-01]  rho_medio*dtau 1.000000e+00  escursione 8.1984e+02
+     x 1     dtau 0.125  rho_medio 4.000000  salto/nodo 9.837043e-02  [min 4.992829e-04, max 1.537079e-01]  rho_medio*dtau 5.000000e-01  escursione 1.9747e+02
+### S2, LE PENDENZE E IL VERDETTO
+     x 0.01  pendenza 2.1728 (a coppie 2.3892, 1.9565)  barra 1.15e+00 (curvatura 2.16e-01, dispersione 1.13e+00)  t*barra 2.72e+02  -> entrambe (non separabili)
+     x 0.1   pendenza 2.1728 (a coppie 2.3892, 1.9565)  barra 1.15e+00 (curvatura 2.16e-01, dispersione 1.13e+00)  t*barra 2.72e+02  -> entrambe (non separabili)
+     x 1     pendenza 2.1728 (a coppie 2.3892, 1.9565)  barra 1.15e+00 (curvatura 2.16e-01, dispersione 1.13e+00)  t*barra 2.72e+02  -> entrambe (non separabili)
+### INFORMAZIONE, NON CRITERIO: la pendenza dell'ESCURSIONE di H in log dtau
+     x 0.01  pendenza 2.1414 (a coppie 2.2292, 2.0537)
+     x 0.1   pendenza 2.1414 (a coppie 2.2292, 2.0537)
+     x 1     pendenza 2.1414 (a coppie 2.2292, 2.0537)
+### IN x, a ogni dtau: il salto per nodo diviso quello a x 0.1
+     dtau 0.5     x 0.01: 0.1000  x 0.1: 1.0000  x 1: 10.0000   pendenza in log x 1.0000
+     dtau 0.25    x 0.01: 0.1000  x 0.1: 1.0000  x 1: 10.0000   pendenza in log x 1.0000
+     dtau 0.125   x 0.01: 0.1000  x 0.1: 1.0000  x 1: 10.0000   pendenza in log x 1.0000
+----------------------------------------------------------------------------------------------------
+### S3, LA SCOMPOSIZIONE a dtau 0.5, x 0.1, a ogni mezzo tick
+  S3 per_nodo, per_arco e G ricostruiti AL BIT                       PASSA   
+     t      nodo psi            nodo phi            moneta (eps h)      N                   arco psi norma      arco psi incrocio   arco phi norma      arco phi incrocio   G
+     0      -6.03814108020e+02  +0.00000000000e+00  +1.92200000000e+02  -9.21750942864e+02  -6.03814108020e+02  +0.00000000000e+00  -6.03814108020e+03  +6.03814108020e+03  -1.93717915890e+03
+     0.5    -6.03814108020e+02  +0.00000000000e+00  -6.27539685360e-15  -9.21750942864e+02  -6.03814108020e+02  -1.25694060997e-13  -6.03814108020e+03  +6.03814108020e+03  -2.12937915890e+03
+     1      -6.03814108020e+02  +0.00000000000e+00  -1.92200000000e+02  -9.21750942864e+02  -6.03814108020e+02  -4.18348027158e-13  -6.03814108020e+03  +6.03814108020e+03  -2.32157915890e+03
+     1.5    -6.03814108020e+02  +0.00000000000e+00  -4.19610368385e-14  -9.21750942864e+02  -6.03814108020e+02  -5.01468293301e-13  -6.03814108020e+03  +6.03814108020e+03  -2.12937915890e+03
+     2      -6.03814108020e+02  +0.00000000000e+00  +1.92200000000e+02  -9.21750942864e+02  -6.03814108020e+02  -6.46694417887e-13  -6.03814108020e+03  +6.03814108020e+03  -1.93717915890e+03
+     2.5    -6.03814108020e+02  +0.00000000000e+00  -6.64586715712e-14  -9.21750942864e+02  -6.03814108020e+02  -6.89181016028e-13  -6.03814108020e+03  +6.03814108020e+03  -2.12937915890e+03
+     3      -6.03814108020e+02  +0.00000000000e+00  -1.92200000000e+02  -9.21750942864e+02  -6.03814108020e+02  -7.54033570913e-13  -6.03814108020e+03  +6.03814108020e+03  -2.32157915890e+03
+     3.5    -6.03814108020e+02  +0.00000000000e+00  -4.17013509447e-14  -9.21750942864e+02  -6.03814108020e+02  -8.91368393022e-13  -6.03814108020e+03  +6.03814108020e+03  -2.12937915890e+03
+     4      -6.03814108020e+02  +0.00000000000e+00  +1.92200000000e+02  -9.21750942864e+02  -6.03814108020e+02  -9.68145098335e-13  -6.03814108020e+03  +6.03814108020e+03  -1.93717915890e+03
+     ...
+     il salto medio a mezzo tick, PER NODO, di ciascun termine:
+       nodo psi             1.478757e-16   [min 0.000e+00, max 4.732e-16]
+       nodo phi             1.117134e-16   [min 0.000e+00, max 4.079e-16]
+       moneta (eps h)       2.000000e-01   [min 2.000e-01, max 2.000e-01]
+       N                    1.094280e-16   [min 0.000e+00, max 3.549e-16]
+       arco psi norma       4.436271e-17   [min 0.000e+00, max 2.366e-16]
+       arco psi incrocio    1.293620e-16   [min 8.643e-18, max 3.914e-16]
+       arco phi norma       1.324966e-15   [min 0.000e+00, max 3.786e-15]
+       arco phi incrocio    5.915028e-16   [min 0.000e+00, max 3.786e-15]
+       G (il totale)        2.000000e-01
+====================================================================================================
+### 2/2 prove passate. NESSUNA INTERPRETAZIONE FISICA. LINEARE e Lambda_c FERMI.
+====================================================================================================
