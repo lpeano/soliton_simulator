@@ -1,0 +1,123 @@
+[TIMBRO] _stabilita_lineare.py  sha1-BYTE 0cb4ec58  committato e pulito
+====================================================================================================
+L'ANALISI DI STABILITA' LINEARE ESATTA DELLO STATO DI MATERIA UNIFORME -- un conto
+====================================================================================================
+  LA CONFIGURAZIONE INTERA, dichiarata:
+  la materia uniforme: VUOTO 1.0, rapporto 1, chi_allineato; la cella: 4 estremita', 24 reali
+  il passo: 14 pezzi, impronta 2e7f795d2a52fbe7; la monodromia su N dtau = 25; eps_rel 1e-07 (e 1e-06); banda di linearita' 0.001; budget 14400 s
+  la soglia di Student (4 gradi) 6.620; OMEGA_H = pi
+----------------------------------------------------------------------------------------------------
+### P1: NESSUNA MEMORIA NELLE CACHE
+  P1 cs acceso: un tick con le cache azzerate = con le cache, AL BIT     PASSA   
+  P1 cs spento: un tick con le cache azzerate = con le cache, AL BIT     PASSA   
+----------------------------------------------------------------------------------------------------
+### IL CASO CHE DEVE FALLIRE: LA CAMMINATA SOLA (senza CAMM-MATERIA-VUOTO, cs spento), ESATTA
+  C2 esatta: max |ln|lambda|| <= N * 64 ulp, per ogni k                  PASSA   4.008e-14 contro 2.842e-12 (N 200; la base nulla resta 0.0e+00)
+  ### INFORMAZIONE: il pavimento del metodo (C2 con le differenze sulla base uniforme): max |gamma| 4.358e-08
+  C2 differenze (pavimento)      lato 31   dtau 0.125    x 0.1   N 200  [N, 24 s]  uniformita' 9.6 ulp
+      gamma max +4.3579e-08 a k = (0,0) = (0.000, 0.000) pi;  gamma(k=0) +4.358e-08;  N/2: +4.3579e-08;  nu_S3/OMEGA_H 0.2631
+      ### INFORMAZIONE: gamma della seconda meta' -- max +4.3579e-08 a k = (0,0); a k = 0 +4.358e-08
+      lungo (m,0), m = 0,1,..: +0.000 +0.000 +0.000 +0.000 +0.000 +0.000 +0.000 +0.000 +0.000 +0.000 +0.000 +0.000 +0.000 +0.000 +0.000 +0.000
+      lungo (m,m), m = 0,1,..: +0.000 +0.000 +0.000 +0.000 +0.000 +0.000 +0.000 +0.000 +0.000 +0.000 +0.000 +0.000 +0.000 +0.000 +0.000 +0.000
+----------------------------------------------------------------------------------------------------
+### P2 E IL CASO CHE DEVE RIUSCIRE (lato 31, dtau 0.125, x 0.1)
+  R1 (b)                         lato 31   dtau 0.125    x 0.1   N 200  [N, 110 s]  uniformita' 1605.2 ulp
+      gamma max +5.2896e-01 a k = (15,15) = (0.968, 0.968) pi;  gamma(k=0) +2.445e-01;  N/2: +6.7585e-01;  nu_S3/OMEGA_H 0.2631
+      ### INFORMAZIONE: gamma della seconda meta' -- max +6.5946e-01 a k = (15,-15); a k = 0 +1.062e-01
+      lungo (m,0), m = 0,1,..: +0.245 +0.245 +0.223 +0.241 +0.320 +0.327 +0.327 +0.330 +0.354 +0.323 +0.333 +0.298 +0.358 +0.391 +0.412 +0.422
+      lungo (m,m), m = 0,1,..: +0.245 +0.241 +0.237 +0.337 +0.367 +0.423 +0.451 +0.459 +0.453 +0.428 +0.399 +0.372 +0.330 +0.294 +0.227 +0.529
+  P2 R1: max_k |gamma_1e-7 - gamma_1e-6| <= 0.001 max gamma              PASSA   4.029e-06 contro 5.290e-04
+  R1: gamma max 0.5290 = misurato 0.4497 +- 0.0207 entro t*barra         PASSA   3.83 barre semplici
+  R1: il k misurato (14,0) fra i massimi: gamma 0.4118 >= 0.3921         PASSA   
+  R1: il k misurato (15,15) fra i massimi: gamma 0.5290 >= 0.3921        PASSA   
+  R2 (a) S3 sola                 lato 31   dtau 0.125    x 0.1   N 200  [N, 25 s]  uniformita' 7884.9 ulp
+      gamma max +3.7485e-01 a k = (9,0) = (0.581, 0.000) pi;  gamma(k=0) +1.010e-01;  N/2: +3.9015e-01;  nu_S3/OMEGA_H 0.2631
+      ### INFORMAZIONE: gamma della seconda meta' -- max +5.1459e-01 a k = (11,0); a k = 0 +4.302e-02
+      lungo (m,0), m = 0,1,..: +0.101 +0.126 +0.176 +0.229 +0.274 +0.305 +0.313 +0.240 +0.353 +0.375 +0.373 +0.358 +0.336 +0.316 +0.302 +0.295
+      lungo (m,m), m = 0,1,..: +0.101 +0.145 +0.220 +0.281 +0.303 +0.265 +0.288 +0.197 +0.131 +0.095 +0.067 +0.040 +0.028 +0.021 +0.122 +0.334
+  P2 R2: max_k |gamma_1e-7 - gamma_1e-6| <= 0.001 max gamma              PASSA   1.496e-07 contro 3.749e-04
+  R2: gamma max 0.3749 = misurato 0.3707 +- 0.0185 entro t*barra         PASSA   0.23 barre semplici
+  R2: il k misurato (8,0) fra i massimi: gamma 0.3533 >= 0.2525          PASSA   
+  R2: il k misurato (8,0) fra i massimi: gamma 0.3533 >= 0.2525          PASSA   
+----------------------------------------------------------------------------------------------------
+### LA SCOMPOSIZIONE (lato 31)
+  (c) senza FASE, cs acceso      lato 31   dtau 0.125    x 0.1   N 200  [N, 44 s]  uniformita' 500.2 ulp
+      gamma max +3.7845e-01 a k = (7,0) = (0.452, 0.000) pi;  gamma(k=0) +1.494e-01;  N/2: +5.2123e-01;  nu_S3/OMEGA_H 0.2631
+      ### INFORMAZIONE: gamma della seconda meta' -- max +4.0232e-01 a k = (15,15); a k = 0 +9.188e-02
+      lungo (m,0), m = 0,1,..: +0.149 +0.149 +0.129 +0.154 +0.214 +0.307 +0.356 +0.378 +0.376 +0.349 +0.259 +0.243 +0.219 +0.263 +0.290 +0.297
+      lungo (m,m), m = 0,1,..: +0.149 +0.147 +0.156 +0.254 +0.345 +0.326 +0.250 +0.204 +0.197 +0.179 +0.167 +0.151 +0.136 +0.112 +0.128 +0.290
+### x in {0.01, 0.1, 1}: gamma max, il k, e nu_S3/OMEGA_H
+  R1 x 0.01                      lato 31   dtau 0.125    x 0.01  N 200  [N, 107 s]  uniformita' 98.3 ulp
+      gamma max +4.7904e-01 a k = (15,15) = (0.968, 0.968) pi;  gamma(k=0) +1.479e-01;  N/2: +5.3372e-01;  nu_S3/OMEGA_H 0.3120
+      ### INFORMAZIONE: gamma della seconda meta' -- max +6.3924e-01 a k = (15,15); a k = 0 +8.833e-03
+      lungo (m,0), m = 0,1,..: +0.148 +0.152 +0.167 +0.206 +0.241 +0.263 +0.250 +0.219 +0.271 +0.372 +0.411 +0.429 +0.435 +0.435 +0.432 +0.430
+      lungo (m,m), m = 0,1,..: +0.148 +0.156 +0.199 +0.245 +0.241 +0.202 +0.289 +0.250 +0.148 +0.119 +0.106 +0.091 +0.070 +0.031 +0.202 +0.479
+  R1 x 1                         lato 31   dtau 0.125    x 1     N 200  [N, 126 s]  uniformita' 450538.9 ulp
+      gamma max +1.1583e+00 a k = (10,-10) = (0.645, -0.645) pi;  gamma(k=0) +2.636e-01;  N/2: +1.1904e+00;  nu_S3/OMEGA_H 0.0796
+      ### INFORMAZIONE: gamma della seconda meta' -- max +1.4014e+00 a k = (10,-14); a k = 0 +4.717e-02
+      lungo (m,0), m = 0,1,..: +0.264 +0.293 +0.375 +0.473 +0.570 +0.659 +0.757 +0.794 +0.834 +0.849 +0.834 +0.855 +0.923 +1.060 +1.127 +1.157
+      lungo (m,m), m = 0,1,..: +0.264 +0.323 +0.460 +0.608 +0.749 +0.874 +1.009 +1.054 +1.150 +1.119 +1.158 +1.077 +1.043 +1.032 +1.076 +1.090
+  R2 x 0.01                      lato 31   dtau 0.125    x 0.01  N 200  [N, 26 s]  uniformita' 900.1 ulp
+      gamma max +4.3794e-01 a k = (15,15) = (0.968, 0.968) pi;  gamma(k=0) +1.179e-01;  N/2: +4.4403e-01;  nu_S3/OMEGA_H 0.3120
+      ### INFORMAZIONE: gamma della seconda meta' -- max +4.9951e-01 a k = (0,8); a k = 0 +1.264e-01
+      lungo (m,0), m = 0,1,..: +0.118 +0.140 +0.186 +0.234 +0.275 +0.302 +0.296 +0.311 +0.367 +0.385 +0.383 +0.370 +0.352 +0.335 +0.322 +0.316
+      lungo (m,m), m = 0,1,..: +0.118 +0.158 +0.225 +0.279 +0.284 +0.296 +0.285 +0.198 +0.137 +0.102 +0.074 +0.048 +0.006 +0.000 +0.177 +0.438
+  R2 x 1                         lato 31   dtau 0.125    x 1     N 200  [N, 26 s]  uniformita' 1428.6 ulp
+      gamma max +2.7174e-01 a k = (7,0) = (0.452, 0.000) pi;  gamma(k=0) +8.621e-02;  N/2: +2.6560e-01;  nu_S3/OMEGA_H 0.0796
+      ### INFORMAZIONE: gamma della seconda meta' -- max +3.1594e-01 a k = (8,0); a k = 0 +1.015e-01
+      lungo (m,0), m = 0,1,..: +0.086 +0.103 +0.136 +0.166 +0.175 +0.147 +0.246 +0.272 +0.265 +0.225 +0.151 +0.095 +0.046 +0.059 +0.062 +0.061
+      lungo (m,m), m = 0,1,..: +0.086 +0.116 +0.162 +0.166 +0.231 +0.258 +0.168 +0.055 +0.038 +0.028 +0.020 +0.012 +0.000 +0.034 +0.042 +0.085
+### IL NUMERO DI COURANT: dtau a griglia fissa (lato 31, x 0.1)
+  R1 dtau 0.25                   lato 31   dtau 0.25     x 0.1   N 100  [N, 60 s]  uniformita' 713.3 ulp
+      gamma max +5.2826e-01 a k = (15,15) = (0.968, 0.968) pi;  gamma(k=0) +2.425e-01;  N/2: +6.7398e-01;  nu_S3/OMEGA_H 0.2631
+      ### INFORMAZIONE: gamma della seconda meta' -- max +6.5747e-01 a k = (15,15); a k = 0 +1.017e-01
+      lungo (m,0), m = 0,1,..: +0.242 +0.241 +0.211 +0.241 +0.322 +0.331 +0.333 +0.336 +0.354 +0.329 +0.332 +0.300 +0.352 +0.384 +0.405 +0.414
+      lungo (m,m), m = 0,1,..: +0.242 +0.236 +0.237 +0.332 +0.371 +0.421 +0.454 +0.461 +0.451 +0.429 +0.400 +0.372 +0.330 +0.293 +0.236 +0.528
+  R1 dtau 0.0625                 lato 31   dtau 0.0625   x 0.1   N 400  [N, 218 s]  uniformita' 350.6 ulp
+      gamma max +5.2912e-01 a k = (15,15) = (0.968, 0.968) pi;  gamma(k=0) +2.450e-01;  N/2: +6.7631e-01;  nu_S3/OMEGA_H 0.2631
+      ### INFORMAZIONE: gamma della seconda meta' -- max +6.5992e-01 a k = (15,15); a k = 0 +1.073e-01
+      lungo (m,0), m = 0,1,..: +0.245 +0.246 +0.225 +0.241 +0.319 +0.326 +0.325 +0.328 +0.354 +0.322 +0.333 +0.297 +0.359 +0.393 +0.414 +0.423
+      lungo (m,m), m = 0,1,..: +0.245 +0.242 +0.237 +0.338 +0.366 +0.425 +0.451 +0.459 +0.455 +0.428 +0.399 +0.370 +0.330 +0.294 +0.230 +0.529
+  R2 dtau 0.25                   lato 31   dtau 0.25     x 0.1   N 100  [N, 13 s]  uniformita' 3240.5 ulp
+      gamma max +3.5928e-01 a k = (9,0) = (0.581, 0.000) pi;  gamma(k=0) +1.021e-01;  N/2: +3.8573e-01;  nu_S3/OMEGA_H 0.2631
+      ### INFORMAZIONE: gamma della seconda meta' -- max +5.4865e-01 a k = (15,15); a k = 0 +6.705e-02
+      lungo (m,0), m = 0,1,..: +0.102 +0.126 +0.175 +0.225 +0.266 +0.291 +0.278 +0.304 +0.350 +0.359 +0.349 +0.328 +0.304 +0.285 +0.271 +0.265
+      lungo (m,m), m = 0,1,..: +0.102 +0.146 +0.217 +0.271 +0.275 +0.282 +0.263 +0.176 +0.123 +0.091 +0.066 +0.042 +0.031 +0.022 +0.128 +0.343
+  R2 dtau 0.0625                 lato 31   dtau 0.0625   x 0.1   N 400  [N, 51 s]  uniformita' 5134.8 ulp
+      gamma max +3.7798e-01 a k = (10,0) = (0.645, 0.000) pi;  gamma(k=0) +1.007e-01;  N/2: +3.9191e-01;  nu_S3/OMEGA_H 0.2631
+      ### INFORMAZIONE: gamma della seconda meta' -- max +5.2426e-01 a k = (11,0); a k = 0 +3.807e-02
+      lungo (m,0), m = 0,1,..: +0.101 +0.126 +0.176 +0.229 +0.275 +0.308 +0.320 +0.223 +0.352 +0.378 +0.378 +0.364 +0.344 +0.324 +0.310 +0.302
+      lungo (m,m), m = 0,1,..: +0.101 +0.145 +0.220 +0.283 +0.309 +0.250 +0.293 +0.203 +0.133 +0.095 +0.068 +0.040 +0.028 +0.021 +0.120 +0.331
+----------------------------------------------------------------------------------------------------
+### L'INVARIANZA DI RAFFINAMENTO (regola di scala di Luca)
+  R1 lato 62                     lato 62   dtau 0.0625   x 0.1   N 400  [N, 746 s]  uniformita' 348.5 ulp
+      gamma max +5.4942e-01 a k = (31,31) = (1.000, 1.000) pi;  gamma(k=0) +2.450e-01;  N/2: +6.7681e-01;  nu_S3/OMEGA_H 0.2631
+      ### INFORMAZIONE: gamma della seconda meta' -- max +6.6243e-01 a k = (31,29); a k = 0 +1.073e-01
+      lungo (m,0), m = 0,3,..: +0.245 +0.241 +0.241 +0.332 +0.325 +0.339 +0.322 +0.309 +0.359 +0.405 +0.423
+      lungo (m,m), m = 0,3,..: +0.245 +0.213 +0.338 +0.391 +0.451 +0.456 +0.428 +0.382 +0.330 +0.271 +0.529
+  R1 lato 62: gamma max 0.5494 = misurato 0.4338 +- 0.0584 entro t*barra PASSA   1.98 barre semplici
+      la curva sui k comuni con lato 31: max |gamma_62 - gamma_31| 4.505e-03 (relativo al massimo 8.518e-03)
+  R1 lato 124                    lato 124  dtau 0.03125  x 0.1   N 800  [N, 6161 s]  uniformita' 980.5 ulp
+      gamma max +5.4954e-01 a k = (62,62) = (1.000, 1.000) pi;  gamma(k=0) +2.450e-01;  N/2: +6.7693e-01;  nu_S3/OMEGA_H 0.2631
+      ### INFORMAZIONE: gamma della seconda meta' -- max +6.6459e-01 a k = (-60,-59); a k = 0 +1.072e-01
+      lungo (m,0), m = 0,7,..: +0.245 +0.236 +0.285 +0.330 +0.328 +0.303 +0.309 +0.369 +0.414
+      lungo (m,m), m = 0,7,..: +0.245 +0.207 +0.341 +0.427 +0.459 +0.434 +0.382 +0.321 +0.231
+  R1 lato 124: gamma max 0.5495 = misurato 0.4371 +- 0.0446 entro t*barr PASSA   2.52 barre semplici
+      la curva sui k comuni con lato 31: max |gamma_124 - gamma_31| 5.571e-03 (relativo al massimo 1.053e-02)
+  R2 lato 62                     lato 62   dtau 0.0625   x 0.1   N 400  [N, 213 s]  uniformita' 5238.0 ulp
+      gamma max +3.8006e-01 a k = (19,0) = (0.613, 0.000) pi;  gamma(k=0) +1.007e-01;  N/2: +3.9200e-01;  nu_S3/OMEGA_H 0.2631
+      ### INFORMAZIONE: gamma della seconda meta' -- max +5.9552e-01 a k = (31,-30); a k = 0 +3.807e-02
+      lungo (m,0), m = 0,3,..: +0.101 +0.150 +0.229 +0.294 +0.320 +0.319 +0.378 +0.372 +0.344 +0.316 +0.302
+      lungo (m,m), m = 0,3,..: +0.101 +0.183 +0.283 +0.290 +0.293 +0.162 +0.095 +0.053 +0.028 +0.018 +0.331
+  R2 lato 62: gamma max 0.3801 = misurato 0.3550 +- 0.0436 entro t*barra PASSA   0.57 barre semplici
+      la curva sui k comuni con lato 31: max |gamma_62 - gamma_31| 5.083e-02 (relativo al massimo 1.356e-01)
+  R2 lato 124                    lato 124  dtau 0.03125  x 0.1   N 800  [N, 1620 s]  uniformita' 10472.2 ulp
+      gamma max +3.8097e-01 a k = (0,-38) = (0.000, -0.613) pi;  gamma(k=0) +1.006e-01;  N/2: +3.9287e-01;  nu_S3/OMEGA_H 0.2631
+      ### INFORMAZIONE: gamma della seconda meta' -- max +6.0453e-01 a k = (61,-61); a k = 0 +3.688e-02
+      lungo (m,0), m = 0,7,..: +0.101 +0.163 +0.254 +0.315 +0.242 +0.375 +0.374 +0.341 +0.312
+      lungo (m,m), m = 0,7,..: +0.101 +0.202 +0.303 +0.288 +0.204 +0.103 +0.053 +0.026 +0.119
+  R2 lato 124: gamma max 0.3810 = misurato 0.3429 +- 0.0446 entro t*barr PASSA   0.85 barre semplici
+      la curva sui k comuni con lato 31: max |gamma_124 - gamma_31| 8.364e-02 (relativo al massimo 2.231e-01)
+====================================================================================================
+### 15/15 prove passate. NESSUNA CURA: ogni cura tocca una legge. LINEARE e Lambda_c FERMI.
+====================================================================================================

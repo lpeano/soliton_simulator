@@ -19935,3 +19935,44 @@ La domanda di Luca *(«l'instabilita', se c'e', dipende dal fatto che lo spazio 
 - ### **Il caso che deve riuscire:** gamma massimo come le misure *(`R1` `0.450`, `R2` `0.371`)* entro la banda, e i `k` misurati fra i modi di crescita massima.
 - ### **La scomposizione** *(`S3` sola, con `cs`, senza `CAMM-FASE-VUOTO`)*, ### **`x`**, ### **il numero di Courant**, ### **il rapporto `nu_S3 / OMEGA_H`**, e ### **l'invarianza di raffinamento** come controllo di coerenza.
 - ### **Nella mappa, sotto `L2`, l'osservazione:** il verdetto `A` col ritmo invariante, e ### **`D4` da rileggere dopo l'esito.** ### **Nessuna cura in questo mandato.**
+
+### 📊 **L'ANALISI DI STABILITA' LINEARE: LE PROVE PASSANO, LA CRESCITA E' TUTTA DI `S3`, IL MASSIMO SI SPOSTA CON `nu_S3` E CON `cs` -- MA L'INTERVALLO NON E' ASINTOTICO** *(referto `doc/referti_l2/stabilita_lineare.txt` e `.jsonl`, strumento `csv/_stabilita_lineare.py` blob sha1-BYTE `0cb4ec58`, commit `3f4e4acd`, committato e pulito)*
+
+- ### ✅ **`15/15` PROVE PASSANO:**
+  - **`P1`:** le cache *(`rho`, `Lambda`, `h_int`, `psi`)* ### **non sono memoria**: un tick con le cache azzerate e' uguale AL BIT, con `cs` acceso e spento;
+  - ### **IL CASO CHE DEVE FALLIRE: la camminata sola, calcolata ESATTA, ha `max |ln|lambda|| = 4.0e-14`** *(tetto `2.8e-12`)* ### **su ogni `k`: nessuna crescita senza `S3`.** Con le differenze sulla base uniforme ### **il pavimento del metodo e' `4.4e-8`**;
+  - **`P2`, la linearita':** `4.0e-6` *(`R1`)* e `1.5e-7` *(`R2`)*, contro la banda `5.3e-4` e `3.7e-4`;
+  - ### **IL CASO CHE DEVE RIUSCIRE:**
+    - `R2` *(`S3` sola)*: ### **`0.375` a `k = (9, 0) = 0.58 pi`**, contro il misurato `0.371 +- 0.018` *(`0.23` barre)*;
+    - `R1` *(`cs` acceso)*: ### **`0.529` a `k = (15, 15)`**, contro il misurato `0.450 +- 0.021` *(`3.8` barre)*;
+    - i `k` misurati stanno fra i massimi entro la banda.
+- **LA SCOMPOSIZIONE** *(lato `31`, `dtau 0.125`; gamma massimo nel tempo proprio, e dove)*:
+
+  | | `x 0.01` | `x 0.1` | `x 1` |
+  |---|---|---|---|
+  | `nu_S3 / OMEGA_H` | `0.312` | `0.263` | `0.080` |
+  | `(a)` `S3` sola, `cs` spento | `0.438` a `(pi, pi)` | `0.375` a `0.58 pi` | `0.272` a `0.45 pi` |
+  | `(b)` `cs` acceso | `0.479` a `(pi, pi)` | `0.529` a `(pi, pi)` | `1.158` a `(0.65, -0.65) pi` |
+  | `(c)` `cs` acceso, senza `CAMM-FASE-VUOTO` | | `0.378` a `0.45 pi` | |
+
+  - ### **Con `S3` sola il massimo SI SPOSTA col rapporto dei ritmi:** a `(pi, pi)` quando `nu_S3 / OMEGA_H` e' grande *(`0.31`)*, verso `0.45 pi` quando e' piccolo *(`0.08`)*; e gamma cala con lui.
+  - ### **`cs` con `CAMM-FASE-VUOTO` alza gamma e porta il massimo a `(pi, pi)`**; senza `CAMM-FASE-VUOTO` torna `0.378` a `0.45 pi`, ### **come `S3` sola.**
+  - ### **Il numero di Courant non conta:** `R1` `0.528`, `0.529`, `0.529` a `dtau` `0.25`, `0.125`, `0.0625`; `R2` `0.359`, `0.375`, `0.378`.
+- **L'INVARIANZA DI RAFFINAMENTO** *(lati `62`, `124`)*:
+  - `R1`: `0.549` a `(pi, pi)` esatto *(lati pari)*, contro il misurato `0.434` e `0.437` *(`2.0` e `2.5` barre: passa)*; ### **la curva sui `k` comuni differisce dell'`0.9%` e dell'`1.1%`** del massimo;
+  - `R2`: `0.380` e `0.381`, contro `0.355` e `0.343` *(passa)*; ### **la curva differisce del `14%` e del `22%`.**
+- ### **LA BANDA: gamma e' positivo a OGNI `k`**, anche a `k = 0` *(`0.10` con `S3` sola, `0.24` con `cs`)*. ### **Nessuna lunghezza minima nemmeno nel conto lineare.**
+
+### ⚠ **LA CAUTELA PRINCIPALE, dai numeri stessi: L'INTERVALLO `N dtau = 25` NON E' ASINTOTICO.**
+- ### **Il gamma della seconda meta' dell'intervallo** *(riga di informazione, dichiarata nel commit dello strumento)* ### **e' piu' grande:** `R1` `0.659` contro `0.529`; `R2` `0.515` contro `0.375`; ### **e il suo massimo cade altrove** *(`R2` a `(11, 0)`)*.
+- ### **E gamma a `k = 0` positivo** e' il segno piu' chiaro: perturbare l'ampiezza dello stato uniforme ### **sposta la frequenza della precessione**, e una fase che deriva linearmente nel tempo ### **pesa `ln(t)/t` su un intervallo corto**, ### **senza essere una crescita esponenziale.** *(E' una lettura, non verificata.)*
+- ### **Quindi:** i casi che dovevano riuscire riescono **all'intervallo dichiarato**, ma ### **i numeri del conto dipendono dall'intervallo.** ### **Le tendenze** *(il massimo che si sposta con `nu_S3`; `cs` che lo porta a `(pi, pi)`; Courant invariante; nessuna crescita senza `S3`)* ### **sono le stesse nelle due meta'**; ### **i valori di gamma ai `k` piccoli no.**
+
+### 📌 **DOMANDE PER LUCA, coi numeri** *(nessuna cura scelta: ogni cura tocca una legge)*:
+1. ### **Il conto va rifatto su un intervallo piu' lungo prima di leggerlo?** Con `N dtau = 25` la seconda meta' da' valori piu' alti del `25`-`40%`. ### **Un intervallo piu' lungo e' un parametro nuovo del conto**, e va dichiarato prima.
+2. ### **Che tipo di cura suggerisce il conto**, se e quando l'intervallo sara' sufficiente:
+   - ### **un termine che renda «cari» i modi corti** *(come il termine di Wilson che da' massa ai doppioni)* agirebbe ### **sul massimo a `(pi, pi)`**, che e' cio' che `cs` e `CAMM-FASE-VUOTO` creano; ### **ma con `S3` sola il massimo sta a `0.45`-`0.58 pi`**, e ### **la banda e' positiva anche a `k` piccolo** *(da confermare con l'intervallo lungo)*: ### **un taglio ai modi corti potrebbe non bastare;**
+   - ### **una `S3` che legga la densita' mediata sui vicini** agirebbe ### **su `nu_S3` a `k` grande** *(la media sui vicini e' un filtro passa-basso)*, ### **cioe' proprio sul rapporto dei ritmi che sposta il massimo.**
+   - ### **Il conto non sceglie: dice dove sta il massimo e cosa lo muove.**
+
+### **`LINEARE`, `Lambda_c`, ogni lettura «alla Jeans» o di modulazione, e lo stato finale restano FERMI.** ### **`D4` resta da rileggere** *(mappa, sotto `L2`)*.
