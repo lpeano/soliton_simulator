@@ -331,7 +331,7 @@ def main():
           IX._f9_era_stato([_e2]) == [])
     _e2b = json.loads(json.dumps(_e2))
     _e2b["stato"] = "APERTA"
-    esito("PI-ERA-STATO  DEVE scattare: era `2` con stato `APERTA` -- l-era 2 NON E- COMINCIATA",
+    esito("PI-ERA-STATO  DEVE scattare: era `2` con stato `APERTA` -- una voce aperta dell-era 2 e- AGENDA",
           len(IX._f9_era_stato([_e2b])) == 1)
     # ### ⛔ **E IL SALTO DICHIARATO:** un ### **segnaposto** non ha ancora uno stato, e
     # ### ### **non si giudica.** Senza questo braccio il salto sarebbe

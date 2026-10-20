@@ -1967,8 +1967,10 @@ def _f9_era_stato(voci):
     cosa vive, e lo stato dice COM-E- ADESSO:** una voce che vale per ### **entrambe le
     ere** non puo- essere ### **SOSPESA**, perche- <<sospesa>> vuol dire
     ### **<<rimandata all-era 2>>** -- e una cosa che vale ### **anche** nell-era 2
-    ### **non si puo- rimandare a se stessa.** Una voce dell-era `2` e- ### **agenda**,
-    perche- l-era 2 ### **non e- cominciata.**
+    ### **non si puo- rimandare a se stessa.** Una voce dell-era `2` e- ### **agenda**:
+    l-era `2` e- ### **l-era corrente** *(`CLAUDE.md` par.13)*, e una sua voce rimandata
+    e- `AGENDA`, non `SOSPESA` -- ### **una voce dell-era 2 non si puo- rimandare a se
+    stessa.** *(Frase corretta il 2026-10-20, `c8f1683d` e il commit di questo testo.)*
 
     ### ⛔ **NON E- NEL VALIDATORE, E NON E- UN PRESIDIO** *(`A9`)*: il mandato lo
     vuole ### **BLOCCANTE**, e oggi ### **`5` voci lo violano** -- `A2`,
@@ -2013,14 +2015,16 @@ def _f9_era_stato(voci):
         # ### dell-era `2` ### **a cui Luca aveva risposto** -- la prima a cui ha
         # ### risposto ### **ha trovato il muro**, e ce ne sono `18`.
         # ### ⭐ **E LA RAGIONE DEL PRESIDIO NON SI APPLICA A UNA DOMANDA RISPOSTA:**
-        # ### *<<una voce dell-era `2` e- in agenda perche- l-era `2` non e- cominciata>>*
+        # ### *<<una voce dell-era `2` rimandata e- in agenda, non sospesa>>*
         # ### vale per cio- che ### **si deve ancora fare**; ### **una domanda decisa non
         # ### e- <<in agenda>>.**
         # ### ⚠ **E NON E- UNA LEGGE NUOVA: e- UN-ECCEZIONE TOLTA** *(`9-ter`)* --
         # ### il presidio guarda ### **meno** casi, non piu-.
         if e == "2" and v["stato"] in APERTI_ERA2:
-            err.append("`PI-ERA-STATO` `%s`: era `2` con stato `%s`. L-era 2 NON E- COMINCIATA: "
-                       "una sua voce APERTA e- AGENDA. ### Una voce DECISA o CHIUSA invece "
+            err.append("`PI-ERA-STATO` `%s`: era `2` con stato `%s`. L-era 2 e- l-era CORRENTE "
+                       "(CLAUDE.md par.13): una sua voce APERTA e- AGENDA, non SOSPESA, perche- "
+                       "SOSPESA vuol dire <<rimandata all-era 2>> e una voce dell-era 2 non si "
+                       "puo- rimandare a se stessa. ### Una voce DECISA o CHIUSA invece "
                        "puo- stare cosi-: una domanda a cui Luca ha risposto NON E- <<in "
                        "agenda>>" % (v["id"], v["stato"]))
     return err
