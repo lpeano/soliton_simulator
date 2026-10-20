@@ -20031,3 +20031,29 @@ La domanda di Luca *(«l'instabilita', se c'e', dipende dal fatto che lo spazio 
 ### 📌 **LA VOCE GRIGLIA-A-TRIANGOLI** *(`2026-10-20`, decisione di Luca delle `18:19`, seconda versione delle `18:21`)*: ### **la voce `[[GRIGLIA-A-TRIANGOLI]]` c'e'**, era `2`, nell'indice *(`doc/indice/voci.jsonl`)*; ### **si apre SOLO dopo il referto della base proiettata**, e come prova di cura ### **solo se li' a regime vince il picco a `(pi, pi)`.** Nessuna relazione di fisica. ### ⚠ **Lo stato e' `AGENDA`, non `SOSPESA`:** il validatore *(`PI-ERA-STATO`)* rifiuta `SOSPESA` per l'era `2` *(«l'era `2` non e' cominciata: una sua voce aperta e' `AGENDA`»)*, mentre `CLAUDE.md` par.`13` dice che e' cominciata. ### **Il presidio non l'ho toccato: la domanda e' tua.**
 
 ### 📌 **LA CORREZIONE ALLA CODA DELLE `18:25`** *(`[[PRECEDENZA-IN-CODA]]`)*: ### **dei due mandati sulla griglia a triangoli ho eseguito SOLO il secondo** *(quello delle `18:21`, che contiene il primo)*: la voce `[[GRIGLIA-A-TRIANGOLI]]` e' nata ### **una volta sola, gia' con le due aggiunte e i due collegamenti** *(`68446777`)*. ### **Contato con uno script sull'indice: `1` voce con quell'id, `1` voce con «triangol» nell'id o nel titolo, `1` riga di storico.** ### ⚠ **L'ORDINE:** la coda mette «l'intervallo lungo con la base proiettata» ### **PRIMA** della registrazione; ### **io ho committato la registrazione mentre il conto della base proiettata girava** *(blob `3e054285`)*, ### **prima del suo referto.** Il conto non ne e' toccato *(la voce e la relazione non sono nel suo percorso)*; ### **il referto arriva nel commit dopo.**
+
+### ⛔ **IL PRESIDIO `PI-ERA-STATO` CONTRO `CLAUDE.md` par.`13`: LA DIAGNOSI DA' IL SECONDO RAMO -- IL PRESIDIO HA RAGIONE SULLO STATO, LA SUA FRASE E' STANTIA. NESSUNA MODIFICA. STOP** *(mandato di Luca del `2026-10-20`, `18:55`; task history `doc/TASK_HISTORY/2026-10-20_presidio_era_stato.md`, `e282e5bf`)*
+
+**LE TRE DOMANDE, con le citazioni alla lettera:**
+
+- **a) DOVE il presidio prende «l'era `2` non e' cominciata».** ### **Da nessuna fonte: e' scritto DENTRO la regola.** `csv/indice.py`, funzione `_f9_era_stato`:
+  - il codice: `if e == "2" and v["stato"] in APERTI_ERA2:` con `APERTI_ERA2 = ("APERTA", "IN_CORSO", "SOSPESA")`;
+  - il messaggio: *«L-era 2 NON E- COMINCIATA: una sua voce APERTA e- AGENDA»*;
+  - il docstring: *«Una voce dell-era `2` e- **agenda**, perche- l-era 2 **non e- cominciata.**»*
+  - ### **Nessuna costante, nessun campo di `_indice_meta.json`, nessuna tabella:** il fatto non si legge, ### **e' la ragione scritta accanto alla regola.**
+- **b) CHE COSA significa `SOSPESA`.** ### **«Rimandata all'era `2`»**:
+  - `_f9_era_stato`, docstring: *«<<sospesa>> vuol dire **<<rimandata all-era 2>>** -- e una cosa che vale **anche** nell-era 2 **non si puo- rimandare a se stessa.**»*;
+  - `doc/REGOLE/par9.md`, la tabella dei presidi: *«*«sospesa»* vuol dire **«rimandata all'era `2`»**»*;
+  - `doc/INDICE_SCHEMA.md`: `stato_era_1` *«lo stato al tag `era-1-secondo-ordine`. **obbligatorio se `stato = SOSPESA`**»*;
+  - e il docstring stesso indica come cura *«portarle a **era `1`** (dove `SOSPESA` e- lecito)»*.
+  - ### **Quindi `SOSPESA` e' per definizione uno stato delle voci dell'era `1`**, l'era CHIUSA *(`doc/ERA_1_CHIUSURA.md`)*: ### **una voce dell'era `1` rimandata all'era `2`.** ### **La regola nasce dal mandato che ha acceso `PI-ERA-STATO`** *(«la regola del mandato: era `ENTRAMBE` => `APERTA` o `CHIUSA`; era `2` => `AGENDA`»)*, ### **ristretta il `2026-10-12` da Luca** *(`D-ERA2-NON-SI-CHIUDE`: la pretesa di `AGENDA` vale solo per le voci APERTE)*.
+- **c) CHE COSA significa `AGENDA`.** ### **«Cio' che si deve ancora fare» nell'era `2`**: `_f9_era_stato`, il commento della restrizione: *«<<una voce dell-era `2` e- in agenda perche- l-era `2` non e- cominciata>> vale per cio- che **si deve ancora fare**; **una domanda decisa non e- <<in agenda>>.**»*
+  - ### **Lo schema non ne da' altra definizione** *(`doc/INDICE_SCHEMA.md`: solo l'elenco e la tavola delle transizioni)*.
+
+**IL RAMO DEL BIVIO: IL SECONDO.**
+- ### **`SOSPESA` e' riservata per definizione alle voci dell'era `1`** *(rimandate all'era `2`; `stato_era_1` obbligatorio)*, e ### **`AGENDA` e' «cio' che si deve ancora fare» nell'era `2`**, cioe' ### **lo stato giusto per una voce rimandata dell'era corrente.**
+- ### **IL PRESIDIO HA RAGIONE SULLO STATO, e la raccomandazione del guardiano** *(`SOSPESA` per le voci dell'era `2`)* ### **CADE.** ### **Nessuna modifica:** `[[GRIGLIA-A-TRIANGOLI]]` resta `AGENDA`, e la voce speculativa *(non ancora registrata)* ### **nascera' in `AGENDA`.**
+- ### ⚠ **MA LA RAGIONE SCRITTA E' STANTIA:** *«l'era `2` NON E' COMINCIATA»*, nel messaggio, nel docstring e in `doc/REGOLE/par9.md`, ### **contraddice `CLAUDE.md` par.`13`** *(«l'era `2` E' COMINCIATA», correzione del `2026-10-19`)*. ### **Non tocca il comportamento del presidio**, ma ### **chi legge il messaggio d'errore legge un fatto falso** -- ed e' cio' che ha fatto nascere la domanda di `68446777`. ### **Correggere la frase e' una modifica che questo ramo non autorizza: la domanda e' di Luca.**
+- ### **IL CONTO, da script** *(prima e dopo coincidono, perche' nessuna modifica)*: voci dell'era `2` ### **in `SOSPESA`: `0`**, ### **in `AGENDA`: `159`** *(e `CHIUSA` `18`, `SUPERATA` `5`)*. *(Per confronto: le voci dell'era `1` in `SOSPESA` sono `321`.)*
+
+### ⛔ **ERRORE `n.25` DEL GUARDIANO:** alle `15:17` il guardiano ha detto a Luca che la mitosi come ### **«assorbitore»** era ### **«gia' registrata»**; ### **non lo era**: la registrazione era condizionata a *«se l'instabilita' sopravvive»* e ### **non fu mai fatta**, e `68446777` ### **non l'ha trovata nell'indice** *(cercando «assorbi» in id, titoli e descrizioni)*. ### **Nessuna voce si crea qui: la decisione e' di Luca.**
