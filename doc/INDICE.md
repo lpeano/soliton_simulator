@@ -9,7 +9,7 @@
 | `DOCUMENTAZIONE` | `2` | 1 |
 | `DOCUMENTAZIONE` | `ENTRAMBE` | 9 |
 | `FISICA` | `1` | 343 |
-| `FISICA` | `2` | 134 |
+| `FISICA` | `2` | 135 |
 | `FISICA` | `ENTRAMBE` | 21 |
 | `INFRASTRUTTURA` | `1` | 39 |
 | `INFRASTRUTTURA` | `2` | 23 |
@@ -395,6 +395,7 @@
 | `GEOMETRIA-DELLA-CRESCITA` | FRONTE | FISICA | 2 | ### **AGENDA** |  | SPECULATIVA: lo spazio delle fasi CRESCE, e una forza nuova come OSTRUZIONE fra  |
 | `GRAFO-PESATO-TUTTI-I-VICINI` | TEORIA | FISICA | 2 | ### **AGENDA** |  | tutti i vicini collegati, e un peso d-arco che NON viene dalle posizioni |
 | `GRAVITA-POTENZIALE` | FRONTE | FISICA | 2 | ### **AGENDA** |  | due potenziali nel codice e nessun Poisson risolto: Poisson e un VINCOLO DI SCAL |
+| `GRIGLIA-A-TRIANGOLI` | FRONTE | FISICA | 2 | ### **AGENDA** |  | GRIGLIA A TRIANGOLI: GEOMETRIA DALLE SOLE CONNESSIONI |
 | `GUSCIO-ANTIFASE-EMERGENTE` | FRONTE | FISICA | 1 | ### **SOSPESA** |  | il guscio in antifase si forma DA SOLO e scherma? Oggi emergente e imposta sono  |
 | `H-ETC-1` | PRESIDIO | METODO | 1 | ### **SOSPESA** |  | PRESIDIO PROPOSTO E NON CABLATO: zero calcola_psi senza w dentro passo_pieno |
 | `H-ETC-2` | PRESIDIO | METODO | 1 | ### **SOSPESA** |  | PRESIDIO PROPOSTO E NON CABLATO: permutare le cinque leggi deve dare lo STESSO s |
