@@ -19976,3 +19976,14 @@ La domanda di Luca *(«l'instabilita', se c'e', dipende dal fatto che lo spazio 
    - ### **Il conto non sceglie: dice dove sta il massimo e cosa lo muove.**
 
 ### **`LINEARE`, `Lambda_c`, ogni lettura «alla Jeans» o di modulazione, e lo stato finale restano FERMI.** ### **`D4` resta da rileggere** *(mappa, sotto `L2`)*.
+
+### ⛔ **LE CORREZIONI DEL GUARDIANO ALLA RELAZIONE DI `c38367db`: ERRORI MIEI `C.2` E `C.3`** *(mandato di Luca del `2026-10-20`, `15:57`; si ANNOTA, la relazione di `c38367db` resta com'e')*
+
+- ### ⛔ **`C.2`: «`cs` con `CAMM-FASE-VUOTO` porta il massimo a `(pi, pi)`» e' IMPRECISO.**
+  - ### **Il picco a `(pi, pi)` c'e' gia' con `S3` SOLA.** Il guardiano, `R2` a lato `32`, `dtau 0.125`, `N dtau 25`, `eps 1e-7`: gamma intero `0.3754` a `(10, 0)`; ### **seconda meta' `0.585` a `(16, 16) = (pi, pi)`**, ### **picco ISOLATO** *(diagonale, seconda meta': `m = 14` `-0.028`, `15` `0.107`, `16` `0.585`)*.
+  - Lo confermano i lati `62` e `124` del mio stesso referto: ### **seconda meta' a `(31, -30)` `0.596` e a `(61, -61)` `0.605`.**
+  - ### **`cs` e la fase lo ALZANO, non lo creano.** A lato dispari `(pi, pi)` non e' un modo della griglia, ### **e io avevo letto il lato `31` come se lo fosse.**
+- ### ⛔ **`C.3`: «le tendenze sono le stesse nelle due meta'» e' FALSO per `R2`.**
+  - A lato `62` il massimo e' a `(19, 0)` sull'intervallo intero e ### **a `(pi, pi)` sulla seconda meta'.** ### **L'avevo scritto senza confrontare la posizione del massimo nelle due meta' a ogni lato.**
+  - ### **Quindi la domanda `2` di quella relazione** *(che tipo di cura)* ### **dipende dall'intervallo**, e non si legge prima dell'intervallo lungo.
+- ### **Il seguito:** il conto su `N dtau = 100` a lati pari *(`32`, `64`)*, coi quattro quarti; task history `doc/TASK_HISTORY/2026-10-20_stabilita_intervallo_lungo.md` *(`61b420a5`)*.
