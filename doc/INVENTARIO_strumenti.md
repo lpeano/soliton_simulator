@@ -3763,3 +3763,4 @@ secondi ### **escono dai file a ogni corsa.**
 | strumento | il comando | cosa misura | il blob | il referto |
 |---|---|---|---|---|
 | `csv/_controllo_passo.py` | `python csv/_controllo_passo.py` | `C1`: `G` e `H` *(`h_tot`, da zero)* a `cs` spento sulla materia uniforme di `D2`, a tick intero e a meta' tick, contro la banda di `C1` di strada `(d)`, col caso di `M-B2` che deve riuscire; `C2`: la sola camminata senza `CAMM-MATERIA-VUOTO` *(gira solo se `C1` passa)* | `sha1-BYTE fee36862` | `doc/referti_l2/controllo_passo.txt` e `.jsonl` |
+| `csv/_scala_salto.py` | `python csv/_scala_salto.py` | la scala del salto di `H` sulla materia uniforme a `dtau` `0.5`, `0.25`, `0.125` e `x` `0.01`, `0.1`, `1` *(tempo totale `10`)*, le previsioni `P2`/`P1`, la scomposizione termine per termine al bit, e la scena di `M-B2` come caso che deve riuscire | `sha1-BYTE 16e5079d` | `doc/referti_l2/scala_salto.txt` |
