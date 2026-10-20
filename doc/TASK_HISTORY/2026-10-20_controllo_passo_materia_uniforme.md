@@ -152,6 +152,19 @@
 
 ### ⛔ **`LINEARE`, `Lambda_c` e ogni lettura «alla Jeans» restano FERMI.**
 
+## 2-ter. ANNOTAZIONE DEL `2026-10-20`, `10:27` *(si annota, non si riscrive)*
+
+### **IL VERDETTO E' `P2`** *(decisione di Luca del `2026-10-20`, `10:27`, sullo STOP di `69094682`)*
+- ### **Come e' stato letto: dalle PREVISIONI NUMERICHE fissate prima** in questo task history *(sez.`2-bis`, tabella di `S2`)*, ### **non da un criterio nuovo.**
+  - a `dtau 0.25`: `P2` `0.05`, `P1` `0.1`, ### **misurato `0.038`**;
+  - a `dtau 0.125`: `P2` `0.0125`, `P1` `0.05`, ### **misurato `0.0098`**;
+  - ### **`P1` e' escluso di un fattore `5`.**
+- ### **Il test di significativita' non poteva separare** *(`3` punti, `1` grado di liberta', soglia `235.8`)*: ### **e' un difetto del criterio, non dei dati.**
+- ### **LA CAUSA:** il salto di `H` sta ### **TUTTO nel termine della moneta** *(`eps h`)*, che vale `+192.2`, `0`, `-192.2`, `0`: ### **sulla materia uniforme l'elicita' dello spinore PRECEDE a ogni tick**; l'ampiezza va a zero come `dtau^2` *(pendenza `2.17`)*. Gli altri termini sono costanti entro `4e-15` per nodo.
+- ### **LA NUMERAZIONE DEGLI ERRORI, allineata:**
+  - **errori del guardiano:** ### **`n.20`** e' la correzione detta in chat il `2026-10-20` *(«l'instabilita' potrebbe sparire a `dtau` piu' piccolo»: `D3` di `29b997da` l'aveva gia' escluso, gamma in tempo proprio `0.469` contro `0.468`)*; ### **`n.21`** e' il criterio a tre punti, che non regge un test di significativita';
+  - ### **il mio «errore `n.20`» di `69094682` NON e' della serie del guardiano: e' MIO**, e lo rinumero ### **`C.1`**, il primo di una serie mia numerata *(i miei errori precedenti nella relazione non erano numerati in modo coerente)*. ### **`C.1`:** ho messo nella barra ### **la dispersione dei salti lungo l'orbita**, che non e' rumore ma la forma dell'oscillazione.
+
 ## 3. TODO DEL NEXT STEP
 
 1. Questo task history, l'**errore `n.19`** nella relazione, e ### **l'OSSERVAZIONE nella mappa** *(la lunghezza dell'era `1`, la scala della griglia)*: commit e push ### **PRIMA del codice**.

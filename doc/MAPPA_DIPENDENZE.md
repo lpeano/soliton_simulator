@@ -25,6 +25,16 @@
 | ### ⭐ **il criterio di uscita** | **tre numeri, tutti misurabili:** ① `python primo_ordine/_collauda_tempo_proprio.py` con ### **ZERO violatori** *(oggi **`4` su `7`**, e il collaudo c'e' gia')*; ② **`M-B1` AL BIT** *(ad angolo `pi` il motore nuovo riproduce quello attuale — e' **un'identita' algebrica**, non una tolleranza)*; ③ **`M-B2`**: l'errore su `H_tot` scala come `(omega dtau)^2`, **rapporto `4` a ogni dimezzamento** |
 | ### ⚠ **l'ipotesi provvisoria che usa** | ### **`cs` UNIFORME**, cioe' il valore di oggi, **finche' `L2` non e' chiuso.** ### ⛔ **E non e' un dettaglio: `L1` MUOVE `cs` dentro tutte le leggi, ma la sua FORMA e' `L2`** — quindi `L1` si implementa **con `cs` costante**, e il codice **deve avere il posto dove `cs` varia** |
 
+### 📌 **SOTTO `L1`: UNA DOMANDA PER LUCA (`2026-10-20`, `10:27`) -- «IL MODELLO E' L'AUTOMA AL PASSO DI PLANCK, O IL SUO LIMITE CONTINUO?»** *(nessuna decisione; rimandi: `L2` qui sotto, e la variante `(c)` della sez.`26`)*
+
+**Le considerazioni del guardiano, scritte come tali:**
+- per la regola di `L1` ### **l'angolo per tick e' `theta = pi * cs * dtau`**;
+- ### **a `dtau = 1` e `cs = 1` l'angolo e' `pi`**: e' il passo che riproduce AL BIT il motore vecchio *(`M-B1`)*; ### **a `dtau < 1` si fanno sotto-passi verso il limite continuo**;
+- ### **SE IL MODELLO E' L'AUTOMA:** il passo fisico e' `dtau = 1`, ### **l'oscillazione di `H` non e' un errore ma la dinamica dell'automa**, e la grandezza conservata ### **va cercata fra quelle che l'automa conserva ESATTAMENTE a ogni scatto**;
+- ### **SE E' IL LIMITE CONTINUO:** `dtau` e' un parametro numerico, ### **e va scelto piccolo quanto basta**;
+- ### **finora si e' lavorato nel secondo modo**; ### **la visione di automa di Luca e la variante `(c)` vanno nel primo.**
+- ### ⛔ **DA DECIDERE PRIMA DI CHIUDERE `L2`.** *(Il fatto che l'ha sollevata: sulla materia uniforme `H` salta nel termine della moneta, e il salto va come `dtau^2` -- `doc/referti_l2/scala_salto.txt`.)*
+
 ### `L2` — **LA MATERIA MODIFICA IL VUOTO, e quindi LA FORMA DI `cs`** — *la «gravita'» del modello*
 
 | | |
@@ -34,6 +44,8 @@
 | **la domanda che lo blocca** | `[[DOMANDA-COME-LA-MATERIA-CAMBIA-LAMBDA]]` *(`CRITICA`)*; `[[DOMANDA-LA-FORMA-DI-CS-CHE-SATURA]]` e' **sospesa** e `dipende_da` quella |
 | ### ⭐ **il criterio di uscita** | ① `Lambda` **non e' piu' invariante** sotto il tick *(oggi: **`8.88e-16`**, cioe' **il vuoto e' PASSIVO**)*; ② l'effetto si vede **FUORI dal grumo** — ### **l'ALONE** *(oggi: **nessun anello oltre `3` sigma**, misurato nel `v4`)*; ③ gli orologi **rallentano INTORNO** al grumo, non solo dentro *(punto `1` dell'`11` ottobre)* |
 | **l'ipotesi provvisoria che usa** | ### **nessuna verso l'alto:** `L2` chiede solo `L1`, che e' **sotto** |
+
+### 📌 **RIMANDO** *(`2026-10-20`)*: ### **la domanda «automa al passo di Planck, o limite continuo?» sta sotto `L1`**, qui sopra, ed ### **e' da decidere prima di chiudere `L2`.**
 
 ### 📌 **SOTTO `L2`: UN VINCOLO DI `L2` SU `L3`** *(domanda di Luca del `2026-10-19`, `20:02`-`20:06`; ### **non e' lavoro di `L3`**)*
 
@@ -1092,6 +1104,8 @@ DALLA MEMORIA invece che dall'iterazione.**
 
 
 ### ⭐ **(c) LA MEMORIA COME INERZIA: SCATTI DI TEMPO PROPRIO, CODA SULL'ARCO, SOTTO-TICK PESATI** *(idea di Luca del `2026-10-19`, `11:39`-`12:02`, discussa col guardiano; registrata come ### **idea collocata e NON operativa**, testo del mandato)*
+
+### 📌 **RIMANDO** *(`2026-10-20`)*: ### **la variante `(c)` sta nel lato «automa» della domanda «automa al passo di Planck, o limite continuo?»**, sotto `L1` *(sez.`1`)*.
 
 1) Ogni nodo avanza a passi del proprio tempo proprio e conserva da un tick all'altro il RESTO di tempo proprio non ancora speso. Quel resto e' una memoria locale, deterministica e senza numeri scelti (A15); Luca la descrive come una forma di INERZIA. Anche l'arco ha il suo tempo proprio (la media armonica dei due capi, B-3) e il suo resto.
    Parentela da annotare, non da perseguire ora: il tempo proprio come NUMERO DI SCATTI e' l'idea degli insiemi causali (causal sets: il tempo proprio fra due eventi e', a meno di una scala, la lunghezza della catena piu' lunga che li collega). E i pacchetti in coda sull'arco sono il posto naturale dove, in L6, entrerebbero i quanti (un quanto per pacchetto). Oggi cio' che si rende discreto sono gli EVENTI di scambio, non le ampiezze: il modello resta un'onda classica e deterministica.
