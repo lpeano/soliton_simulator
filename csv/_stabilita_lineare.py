@@ -20,7 +20,8 @@ monodromia `M(k) = R_N(k) ... R_1(k)` su `N dtau = 25`, e ### **`gamma(k) = ln |
 fallire: la camminata sola, ESATTA** · ### **il caso che deve riuscire: gamma e `k` come le
 misure.**
 
-Gira con:  python csv/_stabilita_lineare.py
+Gira con:  python csv/_stabilita_lineare.py            (il conto di `c38367db`)
+           python csv/_stabilita_lineare.py --lungo    (l'intervallo lungo, a lati pari)
 """
 import io
 import json
@@ -399,5 +400,287 @@ def main(argv):
     return 0
 
 
+# =====================================================================================
+#   L'INTERVALLO LUNGO, A LATI PARI  (mandato di Luca del 2026-10-20, 15:57)
+#   ### task history `2026-10-20_stabilita_intervallo_lungo.md` (`61b420a5`).
+#   ### ⛔ **SI AGGIUNGE, non si riscrive:** tutto cio' che sta sopra resta il conto di
+#   ### `c38367db`, e la prima prova di `--lungo` lo rifa' AL BIT.
+# =====================================================================================
+TEMPO_LUNGO = 100.0            # N dtau, dal mandato
+BUDGET_LUNGO = 3 * 3600.0      # dal mandato
+SOGLIA_5 = 0.05                # asintotico e chi vince, dal mandato
+INTORNO = 0.1                  # l'intorno di (pi, pi), in unita' di pi, dal mandato
+GUARDIANO = {"intero": (0.3754, (10, 0)), "meta": (0.585, (16, 16)), "banda": 1e-3}
+JSONL_LUNGO = os.path.join(RADICE, "doc", "referti_l2", "stabilita_intervallo_lungo.jsonl")
+
+
+def braccio_lungo(nome, lato, dtau, x, acceso, salta, eps_rel):
+    """### Come `braccio`, con ### **la monodromia RINORMALIZZATA per `k`** e i quattro quarti."""
+    import flussi_parziali as FP
+    inc, mot, st, par = scena(lato, dtau, x)
+    n = inc.n
+    lm = float(np.mean(mot.densita_vuoto(st)))
+    rm = float(np.mean(mot.densita_materia(st)))
+    lc = RAPPORTO * lm
+    cs_m = lm / (lm + lc) if acceso else 1.0
+    if acceso:
+        FP.accendi_cs(mot, lc, st)
+    N = int(round(TEMPO_LUNGO / dtau))
+    assert N % 4 == 0, "N = %d non si divide in quattro quarti" % N
+    scale = (float(np.max(np.abs(st["psi_h"]))), float(np.max(np.abs(st["phi_h"]))))
+    fuori = {"nome": nome, "lato": lato, "dtau": dtau, "x": x, "acceso": acceso,
+             "salta": list(salta), "eps_rel": eps_rel, "N": N, "cs_m": cs_m,
+             "rho_m": rm, "lambda_m": lm, "fine": "N"}
+    M = np.broadcast_to(np.eye(2 * NC, dtype=complex), (lato, lato, 2 * NC, 2 * NC)).copy()
+    acc = np.zeros((lato, lato))
+    L = []
+    unif = uniformita(st, n)
+    t0 = time.time()
+    base = st
+    for t in range(1, N + 1):
+        R, dopo = green(base, mot, par, acceso, salta, lc, lato, scale, eps_rel)
+        M = np.matmul(R, M)
+        s = np.sqrt(np.sum(np.abs(M) ** 2, axis=(-2, -1)))
+        M /= s[..., None, None]
+        acc += np.log(s)
+        base = dopo
+        unif = max(unif, uniformita(base, n))
+        if t % (N // 4) == 0:
+            L.append(acc + np.log(np.max(np.abs(np.linalg.eigvals(M)), axis=-1)))
+        if time.time() - t0 > BUDGET_LUNGO:
+            fuori["fine"] = "BUDGET superato al passo %d di %d" % (t, N)
+            break
+    fuori["secondi"] = time.time() - t0
+    fuori["uniformita_ulp"] = unif
+    fuori["L"] = L
+    if fuori["fine"] == "N":
+        tq = (N // 4) * dtau * cs_m
+        fuori["gamma"] = L[3] / (4 * tq)
+        fuori["gamma_meta"] = L[1] / (2 * tq)
+        fuori["quarti"] = [(L[q] - (L[q - 1] if q else 0.0)) / tq for q in range(4)]
+        fuori["seconda_meta"] = (L[3] - L[1]) / (2 * tq)
+    fuori["nu_s3"] = lm ** 2 / (rm + lm) ** 2
+    return fuori
+
+
+def c2_esatto_lungo(lato, dtau):
+    """### La camminata sola, ESATTA, su `N dtau = 100`."""
+    inc, mot, st, par = scena(lato, dtau, X)
+    for k in st:
+        st[k][...] = 0
+    zero = copia(st)
+    passo(zero, mot, par, False, (S3,), 0.0)
+    R, _ = green(st, mot, par, False, (S3,), 0.0, lato, (1.0, 1.0), 1.0, dopo=zero)
+    N = int(round(TEMPO_LUNGO / dtau))
+    lam = np.linalg.eigvals(np.linalg.matrix_power(R, N))
+    return {"N": N, "dev": float(np.max(np.abs(np.log(np.abs(lam)))))}
+
+
+def fase_pi(m, lato):
+    """### `k` in unita' di `pi`, in `(-1, 1]`."""
+    m = m % lato
+    return 2.0 * (m if m <= lato // 2 else m - lato) / lato
+
+
+def punto_banda(g4, lato):
+    """### Il massimo di `g4` su assi e diagonale, esclusi `k = 0` e l'intorno di `(pi, pi)`."""
+    meglio, dove = -np.inf, None
+    for m in range(1, lato):
+        for kx, ky in ((m, 0), (0, m), (m, m)):
+            px, py = fase_pi(kx, lato), fase_pi(ky, lato)
+            if (1.0 - abs(px)) <= INTORNO and (1.0 - abs(py)) <= INTORNO:
+                continue
+            if g4[kx, ky] > meglio:
+                meglio, dove = float(g4[kx, ky]), (kx, ky)
+    return dove
+
+
+def semi_larghezza(g4, lato):
+    h = lato // 2
+    for d in range(1, 5):
+        if g4[h - d, h - d] < 0.5 * g4[h, h]:
+            return d
+    return None
+
+
+def leggi_lungo(b):
+    """### Le etichette del task history, sezione `3`."""
+    lato = b["lato"]
+    q = [np.asarray(v) for v in b["quarti"]]
+    g4 = q[3]
+    mx = float(np.max(g4))
+    h = lato // 2
+    kb = punto_banda(g4, lato)
+    punti = (("(pi,pi)", (h, h)), ("banda", kb), ("k=0", (0, 0)))
+    print("      i quattro quarti (gamma nel tempo proprio); il massimo assoluto dell'ultimo"
+          " quarto %+.4e" % mx)
+    et = {}
+    for nome, (kx, ky) in punti:
+        v = [float(qq[kx, ky]) for qq in q]
+        asin = abs(v[3] - v[2]) <= SOGLIA_5 * mx
+        et[nome] = {"k": [int(kx), int(ky)], "quarti": v, "asintotico": bool(asin)}
+        print("      %-8s k = (%d,%d) = (%.3f, %.3f) pi:  %s   -> %s"
+              % (nome, kx, ky, fase_pi(kx, lato), fase_pi(ky, lato),
+                 " ".join("%+.4e" % w for w in v),
+                 "ASINTOTICO" if asin else "NON ASINTOTICO"))
+    a, c = et["(pi,pi)"]["quarti"][3], et["banda"]["quarti"][3]
+    if abs(a - c) < SOGLIA_5 * mx:
+        vince = "NON DECIDIBILE"
+    else:
+        vince = "IL PICCO a (pi,pi)" if a > c else "LA BANDA"
+    print("      CHI VINCE nell'ultimo quarto: %s  (picco %+.4e, banda %+.4e, differenza %.3e"
+          " contro %.3e)" % (vince, a, c, abs(a - c), SOGLIA_5 * mx))
+    sm = float(np.asarray(b["seconda_meta"])[0, 0])
+    z = et["k=0"]["quarti"][3]
+    vera = z >= 0.5 * sm and z > 0.02
+    print("      k = 0: ultimo quarto %+.4e, seconda meta' %+.4e -> %s"
+          % (z, sm, "CRESCITA VERA" if vera else
+             "TRANSITORIO: la frase <<nessuna lunghezza minima>> si RITIRA"))
+    diag = [float(g4[h - d, h - d]) for d in (4, 3, 2, 1, 0)]
+    sl = semi_larghezza(g4, lato)
+    print("      la diagonale negli ultimi 4 m prima di pi (m = %d..%d): %s;  semi-larghezza %s"
+          % (h - 4, h, " ".join("%+.4e" % w for w in diag), sl if sl else "> 4"))
+    sys.stdout.flush()
+    return {"punti": et, "vince": vince, "k0_vera": bool(vera), "diagonale": diag,
+            "semi_larghezza": sl}
+
+
+def salva_lungo(b, et):
+    d = {k: v for k, v in b.items() if k not in ("L", "gamma", "gamma_meta", "quarti",
+                                                  "seconda_meta")}
+    for k in ("L", "quarti"):
+        if k in b:
+            d[k] = [np.asarray(v).tolist() for v in b[k]]
+    for k in ("gamma", "gamma_meta", "seconda_meta"):
+        if k in b:
+            d[k] = np.asarray(b[k]).tolist()
+    d["etichette"] = et
+    with io.open(JSONL_LUNGO, "a", encoding="utf-8") as f:
+        f.write(json.dumps(d) + "\n")
+
+
+def vecchio_jsonl(nome):
+    with io.open(JSONL, encoding="utf-8") as f:
+        for riga in f:
+            b = json.loads(riga)
+            if b["nome"] == nome:
+                return b
+    raise AssertionError("il braccio `%s` non e' nel jsonl di c38367db" % nome)
+
+
+def simmetrici(k, lato):
+    """### Le immagini di `k` per le simmetrie del quadrato."""
+    a, b = k
+    fuori = set()
+    for x, y in ((a, b), (b, a)):
+        for sx in (1, -1):
+            for sy in (1, -1):
+                fuori.add(((sx * x) % lato, (sy * y) % lato))
+    return fuori
+
+
+def main_lungo(argv):
+    import _presidio
+    _presidio.avvia(__file__)
+    import composizione as CM
+    import statica_protocollo as PR
+    print("=" * 100)
+    print("L'ANALISI DI STABILITA' LINEARE SU UN INTERVALLO LUNGO, A LATI PARI -- un conto")
+    print("=" * 100)
+    print("  LA CONFIGURAZIONE INTERA, dichiarata:")
+    print("  la materia uniforme: x %g, VUOTO %.1f, rapporto %g, chi_allineato; la cella: 24 reali"
+          % (X, PR.VUOTO, RAPPORTO))
+    print("  il passo: %d pezzi, impronta %s; lati 32 (dtau 0.125) e 64 (dtau 0.0625);"
+          " N dtau = %g; la monodromia RINORMALIZZATA per k; i quattro quarti"
+          % (len(CM.ORDINE), CM.IMPRONTA, TEMPO_LUNGO))
+    print("  eps_rel %g (e %g a lato 32); banda di linearita' %g; soglie %g; intorno di (pi,pi)"
+          " %g pi; budget %.0f s" % (EPS_REL, EPS_REL_2, BANDA_LIN, SOGLIA_5, INTORNO,
+                                     BUDGET_LUNGO))
+    print("-" * 100)
+    sys.stdout.flush()
+    io.open(JSONL_LUNGO, "w", encoding="utf-8").close()
+
+    print("### I CASI DI CONTROLLO")
+    vecchio = vecchio_jsonl("R2 (a) S3 sola")
+    b = braccio("R2 (a) S3 sola", 31, 0.125, X, False, (), EPS_REL)
+    g = np.asarray(b["gamma"])
+    i, j = np.unravel_index(int(np.argmax(g)), g.shape)
+    if not esito("il conto di c38367db AL BIT: R2 a lato 31, gamma %.4f a (%d,%d)"
+                 % (float(g[i, j]), kpi(i, 31)[0], kpi(j, 31)[0]),
+                 np.array_equal(g, np.asarray(vecchio["gamma"]))):
+        print("### STOP: lo strumento esteso non riproduce c38367db")
+        return 1
+    c2 = c2_esatto_lungo(32, 0.125)
+    tetto = c2["N"] * ULP_C2 * EPS
+    if not esito("DEVE FALLIRE: la camminata sola esatta, lato 32, N dtau 100: <= N*64 ulp",
+                 c2["dev"] <= tetto, "%.3e contro %.3e (N %d)" % (c2["dev"], tetto, c2["N"])):
+        print("### STOP: il metodo e' rotto")
+        return 1
+    b = braccio("R2 lato 32, N dtau 25", 32, 0.125, X, False, (), EPS_REL)
+    g = np.asarray(b["gamma"])
+    tn = b["N"] * b["dtau"] * b["cs_m"]
+    tm = (b["N"] // 2) * b["dtau"] * b["cs_m"]
+    g2 = (g * tn - np.asarray(b["gamma_meta"]) * tm) / (tn - tm)
+    ok = True
+    for che, arr, (val, kk) in (("intero", g, GUARDIANO["intero"]),
+                                ("seconda meta'", g2, GUARDIANO["meta"])):
+        i, j = np.unravel_index(int(np.argmax(arr)), arr.shape)
+        ok &= esito("DEVE RIUSCIRE: R2 lato 32, N dtau 25, %s: %.4f a (%d,%d) contro %.3f a %s"
+                    % (che, float(arr[i, j]), kpi(i, 32)[0], kpi(j, 32)[0], val, kk),
+                    abs(float(arr[i, j]) - val) <= GUARDIANO["banda"]
+                    and (i, j) in simmetrici(kk, 32))
+    if not ok:
+        print("### STOP: il conto non riproduce i numeri del guardiano")
+        return 1
+    print("-" * 100)
+
+    risultati = {}
+    for lato, dtau in ((32, 0.125), (64, 0.0625)):
+        for nome, acceso in (("R1", True), ("R2", False)):
+            b = braccio_lungo("%s lato %d" % (nome, lato), lato, dtau, X, acceso, (), EPS_REL)
+            if b["fine"] != "N":
+                salva_lungo(b, None)
+                print("  %s lato %d: %s -- ### STOP: si dichiara e ci si ferma"
+                      % (nome, lato, b["fine"]))
+                return 1
+            sommario(b)
+            et = leggi_lungo(b)
+            salva_lungo(b, et)
+            risultati[(nome, lato)] = et
+            if lato == 32:
+                b2 = braccio_lungo("%s lato 32 eps 1e-6" % nome, lato, dtau, X, acceso, (),
+                                   EPS_REL_2)
+                if b2["fine"] != "N":
+                    print("  linearita' %s: %s -- ### STOP" % (nome, b2["fine"]))
+                    return 1
+                d = float(np.max(np.abs(np.asarray(b["gamma"]) - np.asarray(b2["gamma"]))))
+                gm = float(np.max(b["gamma"]))
+                salva_lungo(b2, None)
+                if not esito("linearita' %s lato 32: max_k |gamma_1e-7 - gamma_1e-6| <= %g max"
+                             % (nome, BANDA_LIN), d <= BANDA_LIN * gm,
+                             "%.3e contro %.3e" % (d, BANDA_LIN * gm)):
+                    print("### STOP: il conto non e' lineare in eps")
+                    return 1
+    print("-" * 100)
+    print("### LA LARGHEZZA DEL PICCO a (pi,pi): semi-larghezza in m (NUMERO DI ARCHI)")
+    for nome in ("R1", "R2"):
+        a, c = risultati[(nome, 32)]["semi_larghezza"], risultati[(nome, 64)]["semi_larghezza"]
+        if a is None or c is None:
+            v = "non misurabile entro 4 m"
+        else:
+            griglia, segue_k = abs(c - a) <= 1, abs(c - 2 * a) <= 1
+            v = ("NON SEPARABILE (entrambe)" if griglia and segue_k else
+                 "SEGUE LA GRIGLIA" if griglia else "SEGUE k" if segue_k else
+                 "ne' l'una ne' l'altra")
+        print("  %s: lato 32 %s, lato 64 %s -> %s" % (nome, a, c, v))
+    print("=" * 100)
+    print("### %d/%d prove passate. NESSUNA CURA. LINEARE e Lambda_c FERMI; D4 da rileggere."
+          % tuple(OK))
+    print("=" * 100)
+    return 0
+
+
 if __name__ == "__main__":
+    if sys.argv[1:2] == ["--lungo"]:
+        sys.exit(main_lungo(sys.argv[2:]))
     sys.exit(main(sys.argv[1:]))
