@@ -82,6 +82,11 @@
 
 ### 📌 **RIMANDO** *(`2026-10-20`)*: ### **la domanda «automa al passo di Planck, o limite continuo?» sta sotto `L1`**, qui sopra, ed ### **e' da decidere prima di chiudere `L2`.**
 
+### 📌 **SOTTO `L2`: UN'OSSERVAZIONE -- IL VERDETTO `A` DELLA PROVA DI RAFFINAMENTO** *(`2026-10-20`, mandato di Luca delle `12:32`; ### **nessuna conclusione**)*
+
+- ### **L'instabilita' della materia uniforme e' legata alla griglia** *(verdetto `A`, `83edbaa7`: il modo resta fisso in archi raffinando)*, ### **con un ritmo fisico INVARIANTE** *(gamma nel tempo fisico uguale a `31`, `62`, `124`)*.
+- ### **`D4`** *(`cs` che cala, l'alone, lo svuotamento: `doc/referti_l2/d4_verso_e_profilo.txt`)* ### **e' stato misurato in un sistema che ha questa instabilita', e va RILETTO dopo l'esito** dell'analisi di stabilita' lineare *(task history `2026-10-20_stabilita_lineare.md`)*. ### **Nessuna conclusione ora.**
+
 ### 📌 **SOTTO `L2`: UN VINCOLO DI `L2` SU `L3`** *(domanda di Luca del `2026-10-19`, `20:02`-`20:06`; ### **non e' lavoro di `L3`**)*
 
 > *«L'instabilita', se c'e', dipende dal fatto che lo spazio non si espande ancora? Sul grafo

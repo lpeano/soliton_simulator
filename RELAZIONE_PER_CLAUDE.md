@@ -19927,3 +19927,11 @@ La domanda di Luca *(«l'instabilita', se c'e', dipende dal fatto che lo spazio 
   - `R1` a `62`: ### **`Lambda` resta un punto fisso AL BIT** *(zero esatto)* mentre `rho` cresce.
   - `R2` a `124`: ### **per la prima volta compare una lunghezza minima** *(`1.44` archi, `0.360` fisico)*: `3` anelli su `86` non crescono.
 - ### **NESSUNA LETTURA OLTRE IL VERDETTO `F`/`A`.** ### **`LINEARE`, `Lambda_c`, ogni lettura «alla Jeans» o di modulazione, e lo stato finale restano FERMI.** ### **Che cosa ne segue** *(una legge o una scala che stabilizzi la griglia, il legame con `L6`, o altro)* ### **e' di Luca.**
+
+### 📌 **L'ANALISI DI STABILITA' LINEARE ESATTA: I CRITERI, PRIMA DEL CONTO** *(decisione di Luca del `2026-10-20`, `12:32`; task history `doc/TASK_HISTORY/2026-10-20_stabilita_lineare.md`)*
+
+- ### **Il metodo:** la funzione di Green di un tick, lungo l'orbita dello stato uniforme, ### **trasformata di Fourier per avere `R_t(k)` a ogni `k`**; la monodromia su `N dtau = 25`; `gamma(k)` nel tempo proprio.
+- ### **Il caso che deve fallire:** la camminata sola, ### **esatta** *(e' lineare)*: autovalori di modulo `1` entro `N * 64` ulp.
+- ### **Il caso che deve riuscire:** gamma massimo come le misure *(`R1` `0.450`, `R2` `0.371`)* entro la banda, e i `k` misurati fra i modi di crescita massima.
+- ### **La scomposizione** *(`S3` sola, con `cs`, senza `CAMM-FASE-VUOTO`)*, ### **`x`**, ### **il numero di Courant**, ### **il rapporto `nu_S3 / OMEGA_H`**, e ### **l'invarianza di raffinamento** come controllo di coerenza.
+- ### **Nella mappa, sotto `L2`, l'osservazione:** il verdetto `A` col ritmo invariante, e ### **`D4` da rileggere dopo l'esito.** ### **Nessuna cura in questo mandato.**
