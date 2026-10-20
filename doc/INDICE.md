@@ -9,7 +9,7 @@
 | `DOCUMENTAZIONE` | `2` | 1 |
 | `DOCUMENTAZIONE` | `ENTRAMBE` | 9 |
 | `FISICA` | `1` | 343 |
-| `FISICA` | `2` | 135 |
+| `FISICA` | `2` | 136 |
 | `FISICA` | `ENTRAMBE` | 21 |
 | `INFRASTRUTTURA` | `1` | 39 |
 | `INFRASTRUTTURA` | `2` | 23 |
@@ -534,6 +534,7 @@
 | `MISURA-NORMA-ERA2` | MISURA | FISICA | 2 | ### **AGENDA** |  | la norma totale sum_nodi psi^dag psi: l-invariante QUADRATICO su cui si misura l |
 | `MISURA-SEGNO-LEGA-IN-1D` | MISURA | FISICA | 2 | ### **AGENDA** |  | la forma (D) col segno diretto LEGA IN 1D, e in 3D l-effetto cala con la taglia |
 | `MITOSI-2LAM-ACCESO` | DIFETTO | DOCUMENTAZIONE | 1 | ### **CHIUSA** |  | il piano dichiara MITOSI_2LAM e PLAST_DIN OFF, e il DRIVER li ACCENDE: --mitosi- |
+| `MITOSI-ASSORBITORE` | TEORIA | FISICA | 2 | ### **AGENDA** |  | LA MITOSI COME ASSORBITORE: LA CREAZIONE DI SPAZIO CONTRO L-INSTABILITA- DI S3 |
 | `MITOSI-NON-DIVISA` | MISURA | INFRASTRUTTURA | 1 | ### **CHIUSA** |  | la mitosi NON si spezza per TIPO restando byte-identica: struttura e stato si al |
 | `MITOSI-QUANTO-OLONOMIA` | TEORIA | FISICA | 2 | ### **AGENDA** |  | la mitosi scatta al quanto di olonomia, col tetto della doppia copertura |
 | `MITOSI-SOGLIA-GRAD` | DIFETTO | FISICA | 1 | ### **CHIUSA** |  | la soglia di mitosi si abbassa col gradiente di tempo proprio: ampiezza 0.3 e ta |
