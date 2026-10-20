@@ -3755,3 +3755,11 @@ secondi ### **escono dai file a ogni corsa.**
 | `csv/_ciclo_cs.py` | `python csv/_ciclo_cs.py` | il ciclo di periodo `2` del punto fisso di `cs` a taglia `32`, rapporto `0.01` | `d89f81f5` | `doc/referti_l2/ciclo_cs.txt` a `98aca092` |
 | `csv/_censimento_ramo_punto_medio.py` | `python csv/_censimento_ramo_punto_medio.py [--dopo]` | i nomi del ramo nei file tracciati, codice e documentazione; `--dopo` pretende `0` nel codice | `2d4ff85c` | `doc/referti_l2/ramo_punto_medio_prima.txt` a `4db3b943`; il referto `--dopo` dopo la rimozione |
 | `primo_ordine/_misura_punto_medio.py` | `python primo_ordine/_misura_punto_medio.py` | il censimento dei `14` pezzi, l'ordine del movimento, il controllo positivo dell'errore `n.12`, il peso di nodo | `232bf619` *(senza i bracci che accendevano il ramo)* | ### **`doc/referti_l2/punto_medio_per_pezzo.txt` resta legato a `880955bb`**: ### **al suo commit il file, coi suoi bracci, e' rigirabile** |
+
+---
+
+## IL CONTROLLO DEL PASSO SULLA MATERIA UNIFORME *(`2026-10-20`)*
+
+| strumento | il comando | cosa misura | il blob | il referto |
+|---|---|---|---|---|
+| `csv/_controllo_passo.py` | `python csv/_controllo_passo.py` | `C1`: `G` e `H` *(`h_tot`, da zero)* a `cs` spento sulla materia uniforme di `D2`, a tick intero e a meta' tick, contro la banda di `C1` di strada `(d)`, col caso di `M-B2` che deve riuscire; `C2`: la sola camminata senza `CAMM-MATERIA-VUOTO` *(gira solo se `C1` passa)* | `sha1-BYTE fee36862` | `doc/referti_l2/controllo_passo.txt` e `.jsonl` |
