@@ -19846,3 +19846,40 @@ La domanda di Luca *(«l'instabilita', se c'e', dipende dal fatto che lo spazio 
   - **errori del guardiano:** ### **`n.20`** e' la correzione detta in chat il `2026-10-20` *(«l'instabilita' potrebbe sparire a `dtau` piu' piccolo»: `D3` di `29b997da` l'aveva gia' escluso, gamma in tempo proprio `0.469` contro `0.468`)*; ### **`n.21`** e' il criterio a tre punti, che non regge un test di significativita';
   - ### **il mio «errore `n.20`» di `69094682` NON e' della serie del guardiano: e' MIO**, e lo rinumero ### **`C.1`**, il primo di una serie mia numerata *(i miei errori precedenti nella relazione non erano numerati in modo coerente)*. ### **`C.1`:** ho messo nella barra ### **la dispersione dei salti lungo l'orbita**, che non e' rumore ma la forma dell'oscillazione.
 - ### **Il seguito** *(stesso mandato)*: l'instabilita' rifatta a `dtau 0.125`, coi bracci `C2`, `I1`, `I2` e le serie dell'energia separate *(task history `2026-10-20_instabilita_a_dtau_piccolo.md`)*; ### **e nella mappa, sotto `L1`, la domanda «automa al passo di Planck, o limite continuo?»** ### **`LINEARE`, `Lambda_c` e le letture «alla Jeans» FERMI.**
+
+### 📊 **L'INSTABILITA' A `dtau 0.125`: RESTA, CON GAMMA IN TEMPO PROPRIO UGUALE; LA SOLA CAMMINATA NON CRESCE** *(referto `doc/referti_l2/instabilita_dtau_piccolo.txt` e `.jsonl`, strumento `csv/_instabilita_dtau_piccolo.py` blob sha1-BYTE `c47df2c1`, commit `9f97193e`, committato e pulito)*
+
+- ### ✅ **`21/21` PROVE PASSANO:**
+  - ### **`P0a`: `I1` a `x 0.1`, `dtau 0.25` riproduce `D3` di `29b997da` AL BIT** *(`562` tick)*;
+  - `P0b`: i termini di `H` sono ricostruiti al bit a ogni tick, in tutti i `10` bracci;
+  - `M1`: da `0` a `3.1` ulp nel primo tick.
+- ### **`C2`, LA SOLA CAMMINATA** *(senza `CAMM-MATERIA-VUOTO`, `cs` spento)*: ### **NON CRESCE, a entrambi i `dtau`.**
+  - `rho`: gamma `1.8` barre a `0.125` e `1.9` a `0.25`, sotto la soglia `6.62`;
+  - `max|delta rho| / rho_m` alla fine `5.1e-13` e `7.2e-13`;
+  - ### **`Lambda`: zero esatto, un punto fisso al bit.**
+  - ### **Per la lettura fissata prima: l'instabilita' nasce dall'accoppiamento `S3` materia-vuoto**, e non dalla camminata.
+- ### **`I1` e `I2` A `dtau 0.125`: INSTABILI, e GAMMA IN TEMPO PROPRIO COINCIDE con `0.25`:**
+
+  | braccio | `0.125` | `0.25` | differenza *(barre combinate)* |
+  |---|---|---|---|
+  | `I1 x 0.01` | `0.400` | `0.426` | `0.7` |
+  | `I1 x 0.1` | `0.450` | `0.468` | `0.8` |
+  | `I1 x 1` | `0.975` | `0.984` | `0.1` |
+  | `I2` *(`cs` spento)* | `0.371` | `0.350` | `0.8` |
+
+  - ### **NESSUNA LUNGHEZZA MINIMA in nessun braccio instabile:** crescono tutti i `21` anelli.
+  - ### **IL MODO DOMINANTE:**
+    - con `cs` acceso, `k` circa `pi`: `(15,15)` a `x 0.01`; `(15,0)` a `x 1`; a `x 0.1` e `dtau 0.125` `(14,0)` per `rho` e `(15,15)` per `Lambda`;
+    - ### ⚠ **con `cs` SPENTO** *(`I2`)* ### **il modo e' `(8,0)`, lambda `3.88`, a ENTRAMBI i `dtau`: NON `k = pi`.** In `29b997da`, a `dtau 0.5`, `D2` dava `(15,-15)`.
+  - ### **gamma per tick contro `x`** *(`3` punti, nessun test, dichiarato)*: rapporti `0.89`, `1`, `2.17` a `0.125` *(`0.91`, `1`, `2.10` a `0.25`)*; ### **pendenza in `log x` `0.19` e `0.18`.**
+- **LA DERIVA DI `G` NELLA FASE ESPONENZIALE** *(rapporto con `max|delta rho| / rho_m`)*:
+  - a `0.125`: `0.082`, `5.1e-4`, `0.10` *(`I1` a `x 0.01`, `0.1`, `1`)*, `4.4e-3` *(`I2`)*;
+  - a `0.25`: `0.66`, `0.20`, `0.97`, `0.67`.
+- **LE SERIE DELL'ENERGIA SEPARATE** *(variazioni da tick `0` alla fine della fase esponenziale; tutte nel `jsonl`, a ogni tick)*:
+  - ### **`D_vuoto` e' piccolo in ogni braccio**, al massimo `4.5` a `x 1` contro `1.4e3`;
+  - ### **`D_materia` e `D_scambio` sono grandi e opposti** *(per esempio `I1 x 1`, `0.125`: `+1367` e `-1383`)*;
+  - la compensazione `|somma| / somma dei moduli`: da `0.0065` a `0.12`.
+  - ### ⚠ **UNA CAUTELA, MIA, dai numeri stessi:** ### **`C2`, che NON cresce, ha la stessa struttura** *(`+14.2` e `-15.0`, compensazione `0.027`)*. ### **Quindi `D_materia` e `D_scambio` qui misurano soprattutto la PRECESSIONE dell'elicita'** *(il termine della moneta che oscilla, `scala_salto.txt`)*, ### **e non la crescita del modo.** Il valore `0.027`, che ricorre in molti bracci, ### **e' quello della sola oscillazione.** ### **Separare le due cose richiede un'osservabile diversa** *(per esempio l'energia sul solo modo che cresce)*: ### **non e' nel mandato, e non la scelgo io.**
+  - ### **La stessa cautela vale per la deriva di `G`:** dove il rapporto e' piccolo, la deriva puo' essere la fase dell'oscillazione alla fine del tratto.
+
+### **NESSUNA LETTURA OLTRE QUELLE FISSATE:** ### **`C2` non cresce** *(la crescita richiede `S3`)*; ### **gamma in tempo proprio non cambia da `0.25` a `0.125`.** ### **`LINEARE`, `Lambda_c` e ogni lettura «alla Jeans» FERMI**, e ### **la domanda «automa o limite continuo» e' di Luca** *(mappa, sotto `L1`)*.

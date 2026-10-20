@@ -1,0 +1,123 @@
+[TIMBRO] _instabilita_dtau_piccolo.py  sha1-BYTE c47df2c1  committato e pulito
+====================================================================================================
+L'INSTABILITA' DELLA MATERIA UNIFORME, RIFATTA A dtau 0.125 -- una misura
+====================================================================================================
+  LA CONFIGURAZIONE INTERA, dichiarata:
+  la materia uniforme (29b997da): lati (31, 31), VUOTO 1.0, rapporto 1, SOLO rumore d'arrotondamento
+  il passo: 14 pezzi, impronta 2e7f795d2a52fbe7; dtau in (0.125, 0.25); tempo totale 1000; arresto a max|drho| > 0.1 rho_m
+  la soglia: t di Student al 99.73% con 4 gradi = 6.620 barre; gamma contro x: 3 punti, NESSUN test (dichiarato)
+  i bracci si salvano mentre corrono in doc\referti_l2\instabilita_dtau_piccolo.jsonl
+----------------------------------------------------------------------------------------------------
+### I1 x 0.1 dtau 0.25   [19 s]
+  P0b I1 x 0.1 dtau 0.25: i termini di H al bit a ogni tick          PASSA   
+  M1 I1 x 0.1 dtau 0.25: il primo tick entro 256 ulp                 PASSA   rho 0.6, Lambda 1.0 ulp
+  P0a I1 x 0.1 dtau 0.25 = D3 di 29b997da AL BIT (562 tick)          PASSA   
+  I1 x 0.1 dtau 0.25     tick 562/4000  cs_m 0.500  escursione rel. di H (T 10) 1.019e-02
+      rho  gamma +5.8498e-02 +- 9.6e-04 (  60.7 barre) per tick, +4.6799e-01 tempo proprio  INSTABILE modo (15,15) lambda 1.46 0.17, k = pi in ENTRAMBE
+           anelli sopra la soglia 21 su 21; NESSUNA lunghezza minima (crescono tutti)
+      lam  gamma +5.3808e-02 +- 5.4e-03 (   9.9 barre) per tick, +4.3047e-01 tempo proprio  INSTABILE modo (15,15) lambda 1.46 0.23, k = pi in ENTRAMBE
+           anelli sopra la soglia 21 su 21; NESSUNA lunghezza minima (crescono tutti)
+      la fase esponenziale fino al tick 523: max|drho|/rho_m 1.119e-02, |dG/G| 2.241e-03, rapporto 2.003e-01
+      l'energia: D_materia +7.8270e+01  D_vuoto -9.1273e-03  D_scambio -8.2600e+01  -> compensazione 2.697e-02 (0 esatta, 1 nessuna)
+C:\Users\lpeano\soliton_simulator\csv\_instabilita_vuoto.py:84: RuntimeWarning: divide by zero encountered in log
+  pend.append(float(np.polyfit(tt, np.log(np.asarray(m)[tt]), 1)[0]))
+### C2 dtau 0.125   [35 s]
+  P0b C2 dtau 0.125: i termini di H al bit a ogni tick               PASSA   
+  M1 C2 dtau 0.125: il primo tick entro 256 ulp                      PASSA   rho 0.6, Lambda 0.0 ulp
+  C2 dtau 0.125          tick 8000/8000  cs_m 1.000  escursione rel. di H (T 10) 1.019e-02
+      rho  gamma +5.2392e-04 +- 2.9e-04 (   1.8 barre) per tick, +4.1914e-03 tempo proprio  no        modo (1,-14) lambda 2.21 0.01, NON k = pi
+      lam  zero esatto nel tratto: punto fisso al bit, NON cresce   modo (0,1) lambda 31.00 nan, NON k = pi
+      la fase esponenziale fino al tick 8000: max|drho|/rho_m 5.071e-13, |dG/G| 4.078e-04, rapporto 8.041e+08
+      l'energia: D_materia +1.4240e+01  D_vuoto +0.0000e+00  D_scambio -1.5030e+01  -> compensazione 2.699e-02 (0 esatta, 1 nessuna)
+### I1 x 0.01 dtau 0.125   [27 s]
+  P0b I1 x 0.01 dtau 0.125: i termini di H al bit a ogni tick        PASSA   
+  M1 I1 x 0.01 dtau 0.125: il primo tick entro 256 ulp               PASSA   rho 0.0, Lambda 0.0 ulp
+  I1 x 0.01 dtau 0.125   tick 1194/8000  cs_m 0.500  escursione rel. di H (T 10) 1.754e-03
+      rho  gamma +2.5012e-02 +- 2.3e-03 (  11.1 barre) per tick, +4.0020e-01 tempo proprio  INSTABILE modo (15,15) lambda 1.46 0.27, k = pi in ENTRAMBE
+           anelli sopra la soglia 21 su 21; NESSUNA lunghezza minima (crescono tutti)
+      lam  gamma +2.3207e-02 +- 4.0e-03 (   5.7 barre) per tick, +3.7131e-01 tempo proprio  no        modo (15,15) lambda 1.46 0.27, k = pi in ENTRAMBE
+      la fase esponenziale fino al tick 1126: max|drho|/rho_m 1.063e-02, |dG/G| 8.738e-04, rapporto 8.224e-02
+      l'energia: D_materia +1.8443e+01  D_vuoto -6.3549e-04  D_scambio -1.8686e+01  -> compensazione 6.561e-03 (0 esatta, 1 nessuna)
+### I1 x 0.1 dtau 0.125   [28 s]
+  P0b I1 x 0.1 dtau 0.125: i termini di H al bit a ogni tick         PASSA   
+  M1 I1 x 0.1 dtau 0.125: il primo tick entro 256 ulp                PASSA   rho 3.1, Lambda 0.0 ulp
+  I1 x 0.1 dtau 0.125    tick 1093/8000  cs_m 0.500  escursione rel. di H (T 10) 2.525e-03
+      rho  gamma +2.8107e-02 +- 1.3e-03 (  21.8 barre) per tick, +4.4970e-01 tempo proprio  INSTABILE modo (14,0) lambda 2.21 0.17, NON k = pi
+           anelli sopra la soglia 21 su 21; NESSUNA lunghezza minima (crescono tutti)
+      lam  gamma +2.8028e-02 +- 1.7e-03 (  16.9 barre) per tick, +4.4845e-01 tempo proprio  INSTABILE modo (15,15) lambda 1.46 0.23, k = pi in ENTRAMBE
+           anelli sopra la soglia 21 su 21; NESSUNA lunghezza minima (crescono tutti)
+      la fase esponenziale fino al tick 1027: max|drho|/rho_m 1.116e-02, |dG/G| 5.685e-06, rapporto 5.095e-04
+      l'energia: D_materia +8.4150e-01  D_vuoto -1.3961e-02  D_scambio -8.3855e-01  -> compensazione 6.501e-03 (0 esatta, 1 nessuna)
+### I1 x 1 dtau 0.125   [17 s]
+  P0b I1 x 1 dtau 0.125: i termini di H al bit a ogni tick           PASSA   
+  M1 I1 x 1 dtau 0.125: il primo tick entro 256 ulp                  PASSA   rho 2.0, Lambda 0.0 ulp
+  I1 x 1 dtau 0.125      tick 542/8000  cs_m 0.500  escursione rel. di H (T 10) 3.816e-03
+      rho  gamma +6.0961e-02 +- 5.6e-03 (  10.9 barre) per tick, +9.7538e-01 tempo proprio  INSTABILE modo (15,0) lambda 2.07 0.43, k = pi in UNA
+           anelli sopra la soglia 21 su 21; NESSUNA lunghezza minima (crescono tutti)
+      lam  gamma +6.3350e-02 +- 5.7e-03 (  11.1 barre) per tick, +1.0136e+00 tempo proprio  INSTABILE modo (15,0) lambda 2.07 0.46, k = pi in UNA
+           anelli sopra la soglia 21 su 21; NESSUNA lunghezza minima (crescono tutti)
+      la fase esponenziale fino al tick 509: max|drho|/rho_m 1.353e-02, |dG/G| 1.414e-03, rapporto 1.045e-01
+      l'energia: D_materia +1.3670e+03  D_vuoto -4.5303e+00  D_scambio -1.3827e+03  -> compensazione 7.363e-03 (0 esatta, 1 nessuna)
+### I2 dtau 0.125   [3 s]
+  P0b I2 dtau 0.125: i termini di H al bit a ogni tick               PASSA   
+  M1 I2 dtau 0.125: il primo tick entro 256 ulp                      PASSA   rho 0.6, Lambda 2.0 ulp
+  I2 dtau 0.125          tick 703/8000  cs_m 1.000  escursione rel. di H (T 10) 1.019e-02
+      rho  gamma +4.6335e-02 +- 2.3e-03 (  20.0 barre) per tick, +3.7068e-01 tempo proprio  INSTABILE modo (8,0) lambda 3.88 0.26, NON k = pi
+           anelli sopra la soglia 21 su 21; NESSUNA lunghezza minima (crescono tutti)
+      lam  gamma +4.2172e-02 +- 5.9e-03 (   7.1 barre) per tick, +3.3738e-01 tempo proprio  INSTABILE modo (8,0) lambda 3.88 0.26, NON k = pi
+           anelli sopra la soglia 21 su 21; NESSUNA lunghezza minima (crescono tutti)
+      la fase esponenziale fino al tick 656: max|drho|/rho_m 1.024e-02, |dG/G| 4.550e-05, rapporto 4.443e-03
+      l'energia: D_materia +1.5880e+00  D_vuoto -8.6702e-04  D_scambio -1.6753e+00  -> compensazione 2.701e-02 (0 esatta, 1 nessuna)
+### C2 dtau 0.25   [17 s]
+  P0b C2 dtau 0.25: i termini di H al bit a ogni tick                PASSA   
+  M1 C2 dtau 0.25: il primo tick entro 256 ulp                       PASSA   rho 0.6, Lambda 0.0 ulp
+  C2 dtau 0.25           tick 4000/4000  cs_m 1.000  escursione rel. di H (T 10) 4.232e-02
+      rho  gamma +1.0289e-03 +- 5.5e-04 (   1.9 barre) per tick, +4.1155e-03 tempo proprio  no        modo (12,-4) lambda 2.45 0.01, NON k = pi
+      lam  zero esatto nel tratto: punto fisso al bit, NON cresce   modo (0,1) lambda 31.00 nan, NON k = pi
+      la fase esponenziale fino al tick 4000: max|drho|/rho_m 7.243e-13, |dG/G| 4.370e-03, rapporto 6.033e+09
+      l'energia: D_materia +3.0609e+01  D_vuoto +0.0000e+00  D_scambio -3.9074e+01  -> compensazione 1.215e-01 (0 esatta, 1 nessuna)
+### I1 x 0.01 dtau 0.25   [14 s]
+  P0b I1 x 0.01 dtau 0.25: i termini di H al bit a ogni tick         PASSA   
+  M1 I1 x 0.01 dtau 0.25: il primo tick entro 256 ulp                PASSA   rho 0.8, Lambda 2.0 ulp
+  I1 x 0.01 dtau 0.25    tick 596/4000  cs_m 0.500  escursione rel. di H (T 10) 7.079e-03
+      rho  gamma +5.3239e-02 +- 1.7e-03 (  31.1 barre) per tick, +4.2591e-01 tempo proprio  INSTABILE modo (15,15) lambda 1.46 0.29, k = pi in ENTRAMBE
+           anelli sopra la soglia 21 su 21; NESSUNA lunghezza minima (crescono tutti)
+      lam  gamma +4.9573e-02 +- 6.2e-03 (   7.9 barre) per tick, +3.9659e-01 tempo proprio  INSTABILE modo (15,15) lambda 1.46 0.29, k = pi in ENTRAMBE
+           anelli sopra la soglia 21 su 21; NESSUNA lunghezza minima (crescono tutti)
+      la fase esponenziale fino al tick 557: max|drho|/rho_m 1.051e-02, |dG/G| 6.947e-03, rapporto 6.609e-01
+      l'energia: D_materia +3.4935e+01  D_vuoto -4.3776e-04  D_scambio -3.6873e+01  -> compensazione 2.699e-02 (0 esatta, 1 nessuna)
+### I1 x 1 dtau 0.25   [9 s]
+  P0b I1 x 1 dtau 0.25: i termini di H al bit a ogni tick            PASSA   
+  M1 I1 x 1 dtau 0.25: il primo tick entro 256 ulp                   PASSA   rho 1.0, Lambda 0.0 ulp
+  I1 x 1 dtau 0.25       tick 256/4000  cs_m 0.500  escursione rel. di H (T 10) 1.540e-02
+      rho  gamma +1.2303e-01 +- 1.1e-02 (  10.8 barre) per tick, +9.8422e-01 tempo proprio  INSTABILE modo (15,0) lambda 2.07 0.45, k = pi in UNA
+           anelli sopra la soglia 21 su 21; NESSUNA lunghezza minima (crescono tutti)
+      lam  gamma +1.3452e-01 +- 4.9e-03 (  27.2 barre) per tick, +1.0761e+00 tempo proprio  INSTABILE modo (15,0) lambda 2.07 0.45, k = pi in UNA
+           anelli sopra la soglia 21 su 21; NESSUNA lunghezza minima (crescono tutti)
+      la fase esponenziale fino al tick 240: max|drho|/rho_m 1.291e-02, |dG/G| 1.254e-02, rapporto 9.711e-01
+      l'energia: D_materia +2.8970e+03  D_vuoto -2.0586e+00  D_scambio -3.0565e+03  -> compensazione 2.713e-02 (0 esatta, 1 nessuna)
+### I2 dtau 0.25   [2 s]
+  P0b I2 dtau 0.25: i termini di H al bit a ogni tick                PASSA   
+  M1 I2 dtau 0.25: il primo tick entro 256 ulp                       PASSA   rho 1.2, Lambda 0.0 ulp
+  I2 dtau 0.25           tick 371/4000  cs_m 1.000  escursione rel. di H (T 10) 4.232e-02
+      rho  gamma +8.7471e-02 +- 5.1e-03 (  17.1 barre) per tick, +3.4989e-01 tempo proprio  INSTABILE modo (0,8) lambda 3.88 0.24, NON k = pi
+           anelli sopra la soglia 21 su 21; NESSUNA lunghezza minima (crescono tutti)
+      lam  gamma +8.5825e-02 +- 7.2e-03 (  12.0 barre) per tick, +3.4330e-01 tempo proprio  INSTABILE modo (0,8) lambda 3.88 0.23, NON k = pi
+           anelli sopra la soglia 21 su 21; NESSUNA lunghezza minima (crescono tutti)
+      la fase esponenziale fino al tick 348: max|drho|/rho_m 1.133e-02, |dG/G| 7.578e-03, rapporto 6.687e-01
+      l'energia: D_materia +5.3081e+01  D_vuoto -6.0150e-04  D_scambio -6.7761e+01  -> compensazione 1.215e-01 (0 esatta, 1 nessuna)
+----------------------------------------------------------------------------------------------------
+### C2: LA SOLA CAMMINATA (senza CAMM-MATERIA-VUOTO)
+  dtau 0.125  NON cresce: l'instabilita' nasce dall'accoppiamento S3
+  dtau 0.25   NON cresce: l'instabilita' nasce dall'accoppiamento S3
+### I1/I2: gamma(rho) in TEMPO PROPRIO, dtau 0.125 contro 0.25
+  I1 x 0.01  0.125: +4.0020e-01   0.25: +4.2591e-01   differenza 0.7 barre combinate -> COINCIDE entro la soglia
+  I1 x 0.1   0.125: +4.4970e-01   0.25: +4.6799e-01   differenza 0.8 barre combinate -> COINCIDE entro la soglia
+  I1 x 1     0.125: +9.7538e-01   0.25: +9.8422e-01   differenza 0.1 barre combinate -> COINCIDE entro la soglia
+  I2         0.125: +3.7068e-01   0.25: +3.4989e-01   differenza 0.8 barre combinate -> COINCIDE entro la soglia
+### I1: gamma(rho) per tick contro x (3 punti: nessun test, i numeri)
+  dtau 0.125  gamma 2.5012e-02 2.8107e-02 6.0961e-02   rapporti a x 0.1: 0.890 1.000 2.169   pendenza in log x 0.193
+  dtau 0.25   gamma 5.3239e-02 5.8498e-02 1.2303e-01   rapporti a x 0.1: 0.910 1.000 2.103   pendenza in log x 0.182
+====================================================================================================
+### 21/21 prove passate. NESSUNA LETTURA OLTRE QUELLE FISSATE. LINEARE e Lambda_c FERMI.
+====================================================================================================
