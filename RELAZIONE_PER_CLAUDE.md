@@ -19899,3 +19899,31 @@ La domanda di Luca *(«l'instabilita', se c'e', dipende dal fatto che lo spazio 
 - ### **L'ordine di esecuzione:** la prima versione *(`11:05`-`11:26`)* e' stata eseguita per intero fino alla corsa: registrazioni e task history in `e3c2bebf`, lo strumento in `14a0b02b` *(blob `7a63e850`)*, ### **la corsa in background.** ### **La seconda versione** *(`11:05`-`11:45`)* ### **e' arrivata durante la corsa**, ed e' identica alla prima ### **salvo la precisazione di Luca al punto `2`.**
 - ### **La precisazione, registrata nella mappa accanto alla regola di scala:** ### **la regola NON introduce una densita' minima**; contano solo i RAPPORTI *(`rho/Lambda` per `S3`, `Lambda/Lambda_c` per `cs`)*; `Lambda > 0` e' positivita', non un minimo; ### **la griglia da' una LUNGHEZZA minima** *(due archi)*, ### **quindi un limite sui CONTRASTI di densita'**; i limiti di densita' veri ### **appartengono a `L6`.**
 - ### **Non cambia niente della prova in corsa:** i criteri, i bracci e le previsioni sono gli stessi. ### **Nessun file del percorso della corsa e' stato toccato** *(solo mappa e relazione)*.
+
+### ⛔ **LA PROVA DI RAFFINAMENTO: IL VERDETTO E' `A`, ARTEFATTO DELLA GRIGLIA, IN TUTTI E QUATTRO I CASI** *(referto `doc/referti_l2/raffinamento.txt` e `.jsonl`, strumento `csv/_raffinamento.py` blob sha1-BYTE `7a63e850`, commit `14a0b02b`, committato e pulito)*
+
+- ### ✅ **`8/8` PROVE PASSANO:**
+  - `M1` a ogni risoluzione;
+  - ### **il braccio `0`: a `31`, `R1` e `R2` riproducono `9018188b` AL BIT** *(`1093` e `703` tick)*, ### **senza calcolare i termini di `H` a ogni tick**: quell'osservazione non toccava la dinamica.
+- **I numeri** *(lati `31`, `62`, `124`, `dtau` proporzionale al passo, tempo fisico `1000`; ogni braccio si e' fermato all'arresto del `10%`, nessuno ha toccato il budget: il piu' lungo `1571` s)*:
+
+  | braccio | lato | modo *(in unita' di `pi`)* | `lambda` archi | `lambda` fisico | gamma tempo fisico | lunghezza minima |
+  |---|---|---|---|---|---|---|
+  | `R1` `rho` | `31` | `(0.903, 0)` | `2.21` | `2.21` | `0.450` | nessuna |
+  | | `62` | ### **`(1, 1)`** | `1.41` | `0.707` | `0.434` | nessuna |
+  | | `124` | ### **`(1, 1)`** | `1.41` | `0.354` | `0.437` | nessuna |
+  | `R2` `rho` | `31` | `(0.516, 0)` | `3.88` | `3.88` | `0.371` | nessuna |
+  | | `62` | `(0, 0.516)` | `3.88` | `1.94` | `0.355` | nessuna |
+  | | `124` | `(0.532, 0)` | `3.76` | `0.939` | `0.343` | ### **`1.44` archi** *(`83` anelli su `86`)* |
+
+- ### **IL VERDETTO, dalle previsioni fissate prima** *(`F`: rapporti `2` e `4`; `A`: `1` e `1`)*:
+  - `R1` `rho`: `0.639` e `0.639` → ### **`A`**; `R1` `Lambda`: `0.968` e `0.968` → ### **`A`**;
+  - `R2` `rho` e `Lambda`: `1.000` e `0.970` → ### **`A`**.
+  - ### **La lunghezza d'onda resta FISSA IN ARCHI, quindi la sua lunghezza fisica si dimezza a ogni raffinamento.** *(Tre punti: nessun test, come dichiarato.)*
+- ### 📌 **E UN FATTO CHE LE PREVISIONI NON AVEVANO:** ### **gamma nel tempo fisico NON cambia raffinando** *(`R1`: rapporti `0.965`, `0.972`; `R2`: `0.958`, `0.925`)*. ### **Il modo segue la griglia, ma il suo tasso di crescita nel tempo fisico no.**
+- **Altri fatti, senza lettura:**
+  - ### **`R1` a `62` e `124` cresce sulla scacchiera ESATTA `(1, 1) pi`**; a `31`, che e' dispari, su `(0.903, 0)` e `(0.968, 0.968)`: ### **il rapporto `0.639` di `R1 rho` viene dalla PARITA'** *(dichiarata prima)*, ### **e il verdetto `A` non cambia.**
+  - ### **`R2`** *(`cs` spento)* **cresce a `k` circa `0.52 pi`**, cioe' ### **circa `4` archi, a ogni risoluzione**: ### **non e' il limite di Nyquist, ma segue la griglia lo stesso.**
+  - `R1` a `62`: ### **`Lambda` resta un punto fisso AL BIT** *(zero esatto)* mentre `rho` cresce.
+  - `R2` a `124`: ### **per la prima volta compare una lunghezza minima** *(`1.44` archi, `0.360` fisico)*: `3` anelli su `86` non crescono.
+- ### **NESSUNA LETTURA OLTRE IL VERDETTO `F`/`A`.** ### **`LINEARE`, `Lambda_c`, ogni lettura «alla Jeans» o di modulazione, e lo stato finale restano FERMI.** ### **Che cosa ne segue** *(una legge o una scala che stabilizzi la griglia, il legame con `L6`, o altro)* ### **e' di Luca.**

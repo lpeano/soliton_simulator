@@ -1,0 +1,58 @@
+[TIMBRO] _raffinamento.py  sha1-BYTE 7a63e850  committato e pulito
+====================================================================================================
+LA PROVA DI RAFFINAMENTO SULL'INSTABILITA' DELLA MATERIA UNIFORME -- una misura
+====================================================================================================
+  LA CONFIGURAZIONE INTERA, dichiarata:
+  la materia uniforme: x 0.1, VUOTO 1.0, rapporto 1, SOLO rumore d'arrotondamento; R1 cs acceso, R2 cs spento
+  le risoluzioni (lato, dtau): ((31, 0.125), (62, 0.0625), (124, 0.03125)); a = 31 / lato; tempo fisico 1000; arresto a max|drho| > 0.1 rho_m; budget 14400 s per braccio
+  il passo: 14 pezzi, impronta 2e7f795d2a52fbe7; la soglia di Student 6.620 barre (4 gradi); il verdetto F/A dalle previsioni, NESSUN test con tre punti
+  ### dichiarato prima: 31 e' DISPARI, 62 e 124 PARI -- k = pi esiste esattamente solo sui lati pari
+----------------------------------------------------------------------------------------------------
+  M1 R1 lato 31: il primo tick entro 256 ulp                         PASSA   rho 3.1, Lambda 0.0 ulp
+  braccio 0: R1 a 31 = I1 x 0.1 dtau 0.125 di 9018188b AL BIT (1093  PASSA   
+  R1  lato 31   dtau 0.125    a 1     tick 1093/8000  [arresto 10%, 30 s]
+      rho  gamma +2.8107e-02 +- 1.3e-03 (  21.8 barre) per tick, +4.4970e-01 tempo fisico  INSTABILE modo (14,0) = (0.903, 0.000) pi; lambda 2.21 archi, 2.214 fisico
+           anelli sopra la soglia 21 su 21; NESSUNA lunghezza minima (crescono tutti gli anelli)
+      lam  gamma +2.8028e-02 +- 1.7e-03 (  16.9 barre) per tick, +4.4845e-01 tempo fisico  INSTABILE modo (15,15) = (0.968, 0.968) pi; lambda 1.46 archi, 1.461 fisico
+           anelli sopra la soglia 21 su 21; NESSUNA lunghezza minima (crescono tutti gli anelli)
+  M1 R2 lato 31: il primo tick entro 256 ulp                         PASSA   rho 0.6, Lambda 2.0 ulp
+  braccio 0: R2 a 31 = I2 dtau 0.125 di 9018188b AL BIT (703 tick)   PASSA   
+  R2  lato 31   dtau 0.125    a 1     tick 703/8000  [arresto 10%, 3 s]
+      rho  gamma +4.6335e-02 +- 2.3e-03 (  20.0 barre) per tick, +3.7068e-01 tempo fisico  INSTABILE modo (8,0) = (0.516, 0.000) pi; lambda 3.88 archi, 3.875 fisico
+           anelli sopra la soglia 21 su 21; NESSUNA lunghezza minima (crescono tutti gli anelli)
+      lam  gamma +4.2172e-02 +- 5.9e-03 (   7.1 barre) per tick, +3.3738e-01 tempo fisico  INSTABILE modo (8,0) = (0.516, 0.000) pi; lambda 3.88 archi, 3.875 fisico
+           anelli sopra la soglia 21 su 21; NESSUNA lunghezza minima (crescono tutti gli anelli)
+C:\Users\lpeano\soliton_simulator\csv\_instabilita_vuoto.py:84: RuntimeWarning: divide by zero encountered in log
+  pend.append(float(np.polyfit(tt, np.log(np.asarray(m)[tt]), 1)[0]))
+  M1 R1 lato 62: il primo tick entro 256 ulp                         PASSA   rho 2.5, Lambda 0.0 ulp
+  R1  lato 62   dtau 0.0625   a 0.5   tick 2184/16000  [arresto 10%, 172 s]
+      rho  gamma +1.3558e-02 +- 1.8e-03 (   7.4 barre) per tick, +4.3384e-01 tempo fisico  INSTABILE modo (31,31) = (1.000, 1.000) pi; lambda 1.41 archi, 0.707 fisico
+           anelli sopra la soglia 43 su 43; NESSUNA lunghezza minima (crescono tutti gli anelli)
+      lam  zero esatto: NON cresce   modo (31,31) = (1.000, 1.000) pi; lambda 1.41 archi, 0.707 fisico
+  M1 R2 lato 62: il primo tick entro 256 ulp                         PASSA   rho 3.1, Lambda 2.0 ulp
+  R2  lato 62   dtau 0.0625   a 0.5   tick 1391/16000  [arresto 10%, 18 s]
+      rho  gamma +2.2186e-02 +- 2.7e-03 (   8.1 barre) per tick, +3.5498e-01 tempo fisico  INSTABILE modo (0,16) = (0.000, 0.516) pi; lambda 3.88 archi, 1.938 fisico
+           anelli sopra la soglia 38 su 38; NESSUNA lunghezza minima (crescono tutti gli anelli)
+      lam  gamma +2.1325e-02 +- 2.9e-03 (   7.4 barre) per tick, +3.4120e-01 tempo fisico  INSTABILE modo (0,16) = (0.000, 0.516) pi; lambda 3.88 archi, 1.938 fisico
+           anelli sopra la soglia 39 su 39; NESSUNA lunghezza minima (crescono tutti gli anelli)
+  M1 R1 lato 124: il primo tick entro 256 ulp                        PASSA   rho 3.1, Lambda 0.0 ulp
+  R1  lato 124  dtau 0.03125  a 0.25  tick 4192/32000  [arresto 10%, 1571 s]
+      rho  gamma +6.8289e-03 +- 7.0e-04 (   9.8 barre) per tick, +4.3705e-01 tempo fisico  INSTABILE modo (62,62) = (1.000, 1.000) pi; lambda 1.41 archi, 0.354 fisico
+           anelli sopra la soglia 87 su 87; NESSUNA lunghezza minima (crescono tutti gli anelli)
+      lam  gamma +6.6057e-03 +- 8.8e-04 (   7.5 barre) per tick, +4.2277e-01 tempo fisico  INSTABILE modo (62,62) = (1.000, 1.000) pi; lambda 1.41 archi, 0.354 fisico
+           anelli sopra la soglia 56 su 56; NESSUNA lunghezza minima (crescono tutti gli anelli)
+  M1 R2 lato 124: il primo tick entro 256 ulp                        PASSA   rho 2.5, Lambda 0.0 ulp
+  R2  lato 124  dtau 0.03125  a 0.25  tick 2746/32000  [arresto 10%, 161 s]
+      rho  gamma +1.0715e-02 +- 1.4e-03 (   7.7 barre) per tick, +3.4288e-01 tempo fisico  INSTABILE modo (33,0) = (0.532, 0.000) pi; lambda 3.76 archi, 0.939 fisico
+           anelli sopra la soglia 83 su 86; la lunghezza minima: 1.44 archi, 0.360 fisico
+      lam  gamma +1.1198e-02 +- 1.1e-03 (  10.4 barre) per tick, +3.5833e-01 tempo fisico  INSTABILE modo (-33,0) = (-0.532, 0.000) pi; lambda 3.76 archi, 0.939 fisico
+           anelli sopra la soglia 60 su 60; NESSUNA lunghezza minima (crescono tutti gli anelli)
+----------------------------------------------------------------------------------------------------
+### IL VERDETTO, dalle previsioni (F: rapporti 2 e 4; A: 1 e 1; soglie 1.41 e 2)
+  R1  rho  lambda in archi 31: 2.21   62/31: 0.639   124/31: 0.639  -> A (artefatto)   gamma fisico 4.4970e-01 4.3384e-01 4.3705e-01 (rapporti 0.965 0.972)
+  R1  lam  lambda in archi 31: 1.46   62/31: 0.968   124/31: 0.968  -> A (artefatto)   gamma fisico 4.4845e-01 nan 4.2277e-01 (rapporti nan 0.943)
+  R2  rho  lambda in archi 31: 3.88   62/31: 1.000   124/31: 0.970  -> A (artefatto)   gamma fisico 3.7068e-01 3.5498e-01 3.4288e-01 (rapporti 0.958 0.925)
+  R2  lam  lambda in archi 31: 3.88   62/31: 1.000   124/31: 0.970  -> A (artefatto)   gamma fisico 3.3738e-01 3.4120e-01 3.5833e-01 (rapporti 1.011 1.062)
+====================================================================================================
+### 8/8 prove passate. NESSUNA LETTURA OLTRE IL VERDETTO F/A. LINEARE e Lambda_c FERMI.
+====================================================================================================
