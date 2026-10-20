@@ -93,6 +93,65 @@
 
 ### ⛔ **NESSUNA INTERPRETAZIONE FISICA**: ne' «alla Jeans», ne' una legge che stabilizzi. ### **`LINEARE` e `Lambda_c` FERMI.**
 
+## 2-bis. ANNOTAZIONE DEL `2026-10-20`, `09:58`, PRIMA DEL CODICE: LA SCALA DEL SALTO DI `H` *(decisione di Luca sullo STOP di `363c6559`; si annota, non si riscrive)*
+
+**IL FATTO, letto dal guardiano** nel referto `doc/referti_l2/controllo_passo.txt`:
+- sulla materia uniforme *(`x 0.1`, `cs` spento, `dtau 0.5`)* ### **`H` e' un'ONDA TRIANGOLARE ESATTA di periodo `2` tick** *(`-1937.18`, `-2129.38`, `-2321.58`, `-2129.38`, `-1937.18`, ...)*, ripetuta a `12` cifre;
+- ### **lo stato uniforme e' un'orbita periodica esatta del passo, e `H` non e' costante lungo l'orbita**;
+- `192.2 / 961 = 0.2` per nodo, `= rho_medio * dtau` *(`0.4 * 0.5`)*: ### **forse una coincidenza.**
+
+### ⚠ **LA CAUTELA DEL GUARDIANO:** il criterio di `C1` prendeva la banda del secondo ordine ### **da un'ALTRA scena** *(`C1` di strada `(d)`)* e la applicava alla materia uniforme. ### **Un passo con `theta = pi dtau` non piccolo puo' avere, su uno stato particolare, un errore di discretizzazione grande ma ORDINARIO, che scala come `dtau^2`.** ### **«Difetto del passo» si dice solo dopo questa misura.** *(Lo STOP di `363c6559` resta com'e', e la sua frase «difetto del passo» si legge con questa cautela.)*
+
+### `S1` — LA MISURA
+
+- **Lo strumento:** `csv/_scala_salto.py`, che riusa `_controllo_passo` *(il campione a tick intero e a meta' tick, la seconda fonte, la scena di `M-B2`)*.
+- **Le corse:**
+  - **la materia uniforme**, `cs` spento, ### **`dtau` in `{0.5, 0.25, 0.125}`** e ### **`x` in `{0.01, 0.1, 1}`**: `9` corse;
+  - **la scena di `M-B2`**, `cs` spento, agli stessi tre `dtau`.
+- ### ⚠ **LA DURATA E' A TEMPO TOTALE FISSO, `T = 10`** *(`20` tick a `dtau 0.5`, come il mandato; `40` a `0.25`; `80` a `0.125`)*. ### **Perche':** e' il protocollo di `M-B2` *(a tick fissi l'errore globale ha un'altra pendenza)*, e a tick fissi la corsa a `0.125` durerebbe `2.5` unita' di tempo, ### **forse meno di un periodo dell'oscillazione.** ### **E' una scelta mia, dichiarata qui.**
+- **Che cosa si misura:**
+  - **sulla materia uniforme:** ### **il salto di `H` a mezzo tick, per nodo** = la media di `|H(t + 1/2) - H(t)|` *(e `|H(t+1) - H(t+1/2)|`)* su tutta la corsa, diviso `n`; la sua dispersione *(min, max)*; e l'escursione `max |H - H(0)|`;
+  - **sulla scena di `M-B2`:** ### **l'escursione** `max_t |H(t) - H(0)|` sui tick interi *(lo stato non e' uniforme: il salto non e' costante)*.
+- **`rho_medio`** si stampa dallo strumento *(`mean(densita_materia)`)*, ### **non si ricopia.**
+
+### `S2` — LE DUE PREVISIONI, che si escludono *(scritte prima)*
+
+**Partendo da `0.2` per nodo a `dtau 0.5`, `x 0.1`:**
+
+| `dtau` | **`P2` errore ORDINARIO** *(`~ dtau^2`)* | **`P1` termine NON conservato al primo ordine** *(`~ rho_medio * dtau`)* |
+|---|---|---|
+| `0.5` | `0.2` | `0.2` |
+| `0.25` | `0.05` | `0.1` |
+| `0.125` | `0.0125` | `0.05` |
+
+- **E in `x`:** sotto `P1` il salto e' ### **proporzionale a `rho_medio`, cioe' a `x`** *(a `dtau 0.5`: `0.02`, `0.2`, `2` per `x` `0.01`, `0.1`, `1`)*; sotto `P2` ### **la previsione in `x` non c'e'**, e si riporta e basta.
+- ### **IL VERDETTO, dalla pendenza `p` di `log(salto)` contro `log(dtau)` sui tre punti:**
+  - `p` e' il fit ai minimi quadrati sui tre punti; si stampano ### **anche le due pendenze a coppie** *(`0.5 -> 0.25` e `0.25 -> 0.125`)*;
+  - ### **LA BARRA, dichiarata qui:** `barra = |p_(0.5->0.25) - p_(0.25->0.125)| / 2`, ### **la curvatura, cioe' quanto i tre punti sono lontani dal regime asintotico**, piu' in quadratura la propagazione della dispersione dei salti *(trascurabile se il salto e' costante a `12` cifre)*. ### **Un fit a tre punti con un parametro libero ha UN grado di liberta':** la soglia e' la `t` di Student a `1` grado al `99.73%`, ### **calcolata dallo strumento.**
+  - ### **`P2` se `|p - 2| <= t * barra`; `P1` se `|p - 1| <= t * barra`.** ### **Se valgono entrambe, o nessuna: si riporta il numero, e basta.**
+  - **lo stesso verdetto per ognuna delle tre `x`.**
+
+### `S3` — LA SCOMPOSIZIONE, a `dtau 0.5`, `x 0.1`, a ogni mezzo tick
+
+- **I termini**, ### **con le stesse operazioni e nello stesso ordine** di `energia_pesata.termini_di_h`:
+  - **nodo:** `psi` *(`-OMEGA_H (nrm_psi - pu_psi)`)*, `phi` *(`-OMEGA_H (nrm_phi - pu_phi)`)*, la moneta *(`eps h`)*, `N`;
+  - **arco:** `psi` e `phi`, ### **ciascuno diviso in norma** *(`-OMEGA_H nrm/2`)* **e incrocio** *(`+OMEGA_H Re(incro)`)*.
+- ### **LA PROVA AL BIT:** `per_nodo` e `per_arco` ricostruiti dai pezzi ### **coincidono AL BIT, elemento per elemento**, con quelli di `termini_di_h`, e la loro somma con `g_dello_stato`. ### **Se no: STOP** *(la scomposizione non e' quella di `H`)*.
+- **Si riporta:** ogni termine a ogni mezzo tick, e ### **quale termine porta il salto** *(il salto di ciascuno, per nodo)*.
+
+### `S4` — IL CASO CHE DEVE RIUSCIRE
+
+- ### **Sulla scena di `M-B2` l'escursione di `H` scala come `dtau^2`:** ### **`|p - 2| <= t * barra`**, con la stessa barra e la stessa soglia.
+- ### **E' cio' che `C1` di strada `(d)` ha gia' misurato** *(con `cs` acceso)*: lo strumento sa riconoscere il secondo ordine. ### **Se non riesce: STOP**, nessun verdetto sulla materia uniforme.
+
+### `S5` — DOPO, secondo l'esito *(il mandato di Luca)*
+
+- ### **Se `P2`:** si registra; ### **`C2` gira a un `dtau` per cui il salto di `H` sulla materia uniforme sta entro la banda `B`**, e ### **l'instabilita' di `29b997da` va RIFATTA a quel `dtau`** prima di qualunque lettura. ### **Il `dtau` lo dichiaro PRIMA, in un'annotazione, dai numeri di questa misura.**
+- ### **Se `P1`: STOP.** Il termine che salta e la sua legge vanno a Luca; `C2` non gira.
+- **Se ne' l'una ne' l'altra:** il numero, e ### **STOP** *(non decido io quale dei due rami si applica)*.
+
+### ⛔ **`LINEARE`, `Lambda_c` e ogni lettura «alla Jeans» restano FERMI.**
+
 ## 3. TODO DEL NEXT STEP
 
 1. Questo task history, l'**errore `n.19`** nella relazione, e ### **l'OSSERVAZIONE nella mappa** *(la lunghezza dell'era `1`, la scala della griglia)*: commit e push ### **PRIMA del codice**.

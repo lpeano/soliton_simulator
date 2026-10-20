@@ -19788,3 +19788,13 @@ La domanda di Luca *(«l'instabilita', se c'e', dipende dal fatto che lo spazio 
 - ### **Per il criterio fissato prima:** ### **il passo NON conserva `H` sulla materia uniforme. E' un difetto del passo, indipendente da `cs`** *(che qui e' spento)*. ### **Si FERMA TUTTO: `C2` NON ha girato.**
 - ### ⛔ **QUINDI LA DOMANDA DELLA SEZ.`27` DELLA MAPPA NON SI APRE**, e nemmeno l'idea della quantizzazione come taglio ultravioletto *(la sua condizione `(b)`)*: ### **prima si cura il passo.** ### **La cura e' una decisione di Luca.**
 - ### **`LINEARE`, `Lambda_c` e ogni lettura «alla Jeans» restano FERMI.**
+
+### ⚠ **LA CAUTELA DEL GUARDIANO SULLA BANDA DI `C1`, E LA MISURA DELLA SCALA DEL SALTO** *(decisione di Luca del `2026-10-20`, `09:58`, sullo STOP di `363c6559`)*
+
+- ### **Il fatto:** sulla materia uniforme `H` e' ### **un'onda triangolare esatta di periodo `2` tick**: lo stato uniforme e' un'orbita periodica esatta del passo, e `H` non e' costante lungo l'orbita. `0.2` per nodo `= rho_medio * dtau` *(`0.4 * 0.5`)*: ### **forse una coincidenza.**
+- ### **La cautela:** `C1` prendeva la banda da ### **un'altra scena**. Un passo con `theta = pi dtau` non piccolo ### **puo' avere su uno stato particolare un errore grande ma ORDINARIO, che scala come `dtau^2`.** ### **«Difetto del passo» si dice solo dopo la misura della scala.** ### **Quindi la frase del mio STOP di `363c6559` era piu' forte di cio' che la misura diceva.**
+- ### **La misura, con le previsioni scritte prima** *(task history, sez.`2-bis`)*:
+  - il salto per nodo a `dtau` `0.5`, `0.25`, `0.125` e `x` `0.01`, `0.1`, `1`, ### **a tempo totale fisso `T = 10`**;
+  - ### **`P2` ordinario** *(`~ dtau^2`: `0.2`, `0.05`, `0.0125`)* contro ### **`P1` non conservato** *(`~ rho_medio dtau`: `0.2`, `0.1`, `0.05`)*;
+  - la scomposizione termine per termine, ### **verificata al bit**;
+  - ### **la scena di `M-B2` come caso che deve riuscire** *(pendenza `2`)*.
