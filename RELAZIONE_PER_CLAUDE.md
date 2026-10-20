@@ -20017,3 +20017,13 @@ La domanda di Luca *(«l'instabilita', se c'e', dipende dal fatto che lo spazio 
 - ### **tenere la base ESATTAMENTE sull'orbita uniforme:** lo stato uniforme e' ### **una varieta' invariante del passo** *(la mappa conserva l'uniformita')*, quindi ### **a ogni tick si puo' riportare la base sulla media delle celle**, che toglie il rumore d'arrotondamento ### **senza cambiare l'orbita** *(se non agli ulp)*. ### **Il controllo:** coi parametri di `c38367db` deve ridare ### **gli stessi gamma entro la banda di linearita'.**
 - ### **In alternativa:** la base calcolata su ### **una griglia piccola** *(l'orbita uniforme non dipende dal lato)* e ricopiata, ### **o un intervallo che resti sotto la soglia** *(ma e' la domanda stessa: piu' corto non e' asintotico)*.
 - ### **Finche' non decidi, le domande di `c38367db` sulla cura restano aperte, e nessuna cura e' scelta.** ### **`LINEARE`, `Lambda_c`, le letture «alla Jeans» o di modulazione, lo stato finale FERMI; `D4` da rileggere.**
+
+### 📌 **LE ANNOTAZIONI DEL GUARDIANO SU `16b5d10f`: L'ERRORE `n.24` E UNA LETTURA DA METTERE ALLA PROVA** *(mandato di Luca del `2026-10-20`, `18:02`; si annota)*
+
+- ### ⛔ **ERRORE `n.24` DEL GUARDIANO:** l'intervallo `N dtau 100` ### **l'ha proposto lui senza il conto di una riga**, `eps exp(gamma t) ~ 1e-16 * e^40 ~ 1e1`. ### **Il mio `C.4` e' lo stesso difetto, ma il mandato era del guardiano.**
+- ### **LA LETTURA DEL GUARDIANO, da mettere alla prova** *(non e' un risultato)*:
+  - ### **i quarti di `R1` NON sono contaminati dalla base** *(deviazione `~1e-5` relativa)*;
+  - a `(pi, pi)` coincidono fra lato `32` e `64` *(`0.549/0.625/0.450/0.605` contro `0.549/0.622/0.447/0.603`)* ### **con rumori diversi**;
+  - ### **l'oscillazione dei quarti e' DETERMINISTICA, dello stimatore lungo l'orbita.**
+  - ### **LA PREVISIONE:** con la base proiettata, i quattro quarti di `R1` a `(pi, pi)` ### **ridanno quelli di `16b5d10f` entro `1e-2`.** ### **Se no, la lettura cade e lo si scrive.**
+- ### **Il seguito:** la base proiettata sulla media delle celle e gamma come pendenza *(task history `doc/TASK_HISTORY/2026-10-20_base_proiettata.md`, `29faf0ef`)*.
