@@ -20089,3 +20089,5 @@ La domanda di Luca *(«l'instabilita', se c'e', dipende dal fatto che lo spazio 
 - ### **IL LEGAME CON `[[GRIGLIA-A-TRIANGOLI]]`** *(la sua condizione: «come prova di cura SOLO se a regime vince il picco a `(pi, pi)`»)*: ### **vince con `cs` acceso** *(ma non asintotico)*, ### **NON con `S3` sola.** ### **Il verdetto e' diviso, e leggerlo e' di Luca.**
 
 ### **NESSUNA CURA SCELTA.** ### **`LINEARE`, `Lambda_c`, le letture «alla Jeans» o di modulazione, lo stato finale FERMI; `D4` da rileggere.**
+
+### 📌 **LA VOCE SPAZIO-TRIANGOLAZIONE-SENZA-POSIZIONI** *(`2026-10-20`, decisione di Luca delle `18:38`)*: ### **la voce `[[SPAZIO-TRIANGOLAZIONE-SENZA-POSIZIONI]]` c'e'**, era `2`, nell'indice *(`doc/indice/voci.jsonl`)*, ### **SPECULATIVA** *(come `[[GEOMETRIA-DELLA-CRESCITA]]`)*; ### **si apre SOLO dopo che `[[GRIGLIA-A-TRIANGOLI]]` avra' dato un risultato MISURATO.** ### **Contiene IL LIMITE DEL 3D** *(aggiunta delle `19:06`, nella descrizione della voce)*. Nessuna relazione di fisica. ### **Lo stato e' `AGENDA`:** una voce rimandata dell'era `2` e' `AGENDA`, perche' `SOSPESA` vuol dire «rimandata all'era `2`» *(la diagnosi di `c8f1683d`)*.

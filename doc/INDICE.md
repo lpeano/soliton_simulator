@@ -9,7 +9,7 @@
 | `DOCUMENTAZIONE` | `2` | 1 |
 | `DOCUMENTAZIONE` | `ENTRAMBE` | 9 |
 | `FISICA` | `1` | 343 |
-| `FISICA` | `2` | 136 |
+| `FISICA` | `2` | 137 |
 | `FISICA` | `ENTRAMBE` | 21 |
 | `INFRASTRUTTURA` | `1` | 39 |
 | `INFRASTRUTTURA` | `2` | 23 |
@@ -849,6 +849,7 @@
 | `SOTTO-PASSO` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 4 volte, MAI definito in un registro) [SOTTO-PASSO] |
 | `SPAZIO-CHE-NASCE` | FRONTE | FISICA | 2 | ### **AGENDA** |  | lo spazio nasce dalla dinamica: U d-arco dinamica, mitosi al quanto di olonomia |
 | `SPAZIO-DALLA-DINAMICA` | TEORIA | FISICA | 2 | ### **AGENDA** |  | lo spazio nasce dalla dinamica: un seme minimo, e nodi e archi dove la fisica li |
+| `SPAZIO-TRIANGOLAZIONE-SENZA-POSIZIONI` | FRONTE | FISICA | 2 | ### **AGENDA** |  | SPECULATIVA: lo spazio come triangolazione senza posizioni, curvatura nei vertic |
 | `SPIN-LEGATO-AL-MOTO` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | lo spin si lega al moto: una moneta exp(-i eps dtau sigma.n) e il trasporto U(2) |
 | `SPINORE-SENZA-FASE` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | la coppia muove phivel ma deriva da un'ALTRA fase: lo spinore ha un orologio tut |
 | `STANDARD-1` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 10 volte, MAI definito in un registro) [STANDARD 1] |
