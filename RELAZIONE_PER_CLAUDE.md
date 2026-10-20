@@ -19893,3 +19893,9 @@ La domanda di Luca *(«l'instabilita', se c'e', dipende dal fatto che lo spazio 
   - e con `[[PRIMA-LO-SPAZIO-POI-LA-MATERIA]]` *(il nodo nasce vuoto, la materia ci arriva camminando)* ### **la mitosi crea spazio NUOVO.**
   - ### **Il collegamento «raffinamento = mitosi» e' RITIRATO:** la prova di raffinamento ### **e' un controllo di risoluzione, indipendente dalla mitosi.**
 - ### **La prova di raffinamento:** task history `doc/TASK_HISTORY/2026-10-20_raffinamento.md`, coi criteri fissati prima.
+
+### 📌 **LA SECONDA VERSIONE DEL MANDATO DELLE `11:05`, CON LA PRECISAZIONE DELLE `11:45`** *(`[[PRECEDENZA-IN-CODA]]`: vale solo l'ultima, e l'ordine si registra)*
+
+- ### **L'ordine di esecuzione:** la prima versione *(`11:05`-`11:26`)* e' stata eseguita per intero fino alla corsa: registrazioni e task history in `e3c2bebf`, lo strumento in `14a0b02b` *(blob `7a63e850`)*, ### **la corsa in background.** ### **La seconda versione** *(`11:05`-`11:45`)* ### **e' arrivata durante la corsa**, ed e' identica alla prima ### **salvo la precisazione di Luca al punto `2`.**
+- ### **La precisazione, registrata nella mappa accanto alla regola di scala:** ### **la regola NON introduce una densita' minima**; contano solo i RAPPORTI *(`rho/Lambda` per `S3`, `Lambda/Lambda_c` per `cs`)*; `Lambda > 0` e' positivita', non un minimo; ### **la griglia da' una LUNGHEZZA minima** *(due archi)*, ### **quindi un limite sui CONTRASTI di densita'**; i limiti di densita' veri ### **appartengono a `L6`.**
+- ### **Non cambia niente della prova in corsa:** i criteri, i bracci e le previsioni sono gli stessi. ### **Nessun file del percorso della corsa e' stato toccato** *(solo mappa e relazione)*.

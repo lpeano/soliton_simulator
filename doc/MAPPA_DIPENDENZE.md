@@ -61,6 +61,15 @@
 
 - ### **Il guardiano annota:** la regola ### **si appoggia a `D1`**; se un giorno la tabella perdesse l'invarianza di scala *(per esempio con un numero assoluto nuovo)*, ### **la regola andrebbe rivista.**
 
+### ⭐ **E LA PRECISAZIONE DI LUCA** *(`2026-10-20`, `11:45`)*
+
+> *«La regola di scala NON introduce una densita' minima: nel modello di oggi la densita'
+> assoluta non ha significato, contano solo i RAPPORTI (`rho/Lambda` per `S3`, `Lambda/Lambda_c`
+> per `cs`). `Lambda > 0` e' una condizione di positivita' (lettura B), non un valore minimo. La
+> griglia da' una LUNGHEZZA minima (due archi), quindi un limite sui CONTRASTI di densita', non
+> sulla densita'. Limiti di densita' veri (un quanto per cella in basso, il tetto di Pauli di
+> `2d` quanti per nodo in alto) appartengono a `L6`.»*
+
 ### `L2` — **LA MATERIA MODIFICA IL VUOTO, e quindi LA FORMA DI `cs`** — *la «gravita'» del modello*
 
 | | |
