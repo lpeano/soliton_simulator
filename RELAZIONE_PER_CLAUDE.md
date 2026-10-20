@@ -19765,3 +19765,26 @@ La domanda di Luca *(«l'instabilita', se c'e', dipende dal fatto che lo spazio 
 - ### **Le due condizioni, lette dal guardiano:** **(a)** serve lo stato quantistico vero di `L6`, perche' oggi le ampiezze sono continue; **(b)** ### **prima `C1` e `C2` devono escludere un difetto del passo.**
 - ### **Il rischio di metodo:** *«la quantizzazione lo sistemera' in `L6`»* ### **non chiude `L2`.** Il simulatore di oggi e' il campo medio, ### **e la quantizzazione salverebbe solo dove i quanti per modo sono meno di uno.**
 - ### **Il criterio, fissato ora per quando `L6` si aprira':** sul controllo di raccordo, il modo a `k = pi` ### **si spegne nello stato quantistico e NON nel campo medio**, a parita' di energia e di norma. ### **Se si accende in entrambi, l'idea cade.**
+
+### ⛔⛔ **IL CONTROLLO DEL PASSO: `C1` CADE -- IL PASSO NON CONSERVA `H` SULLA MATERIA UNIFORME. STOP** *(referto `doc/referti_l2/controllo_passo.txt` e `.jsonl`, dallo strumento `csv/_controllo_passo.py` blob sha1-BYTE `fee36862`, commit `76f86e6d`, committato e pulito)*
+
+- ### ✅ **LE PROVE DELLO STRUMENTO PASSANO:**
+  - **la banda:** il braccio `k = 1` di `C1` di strada `(d)`, rifatto, da' l'escursione `1.070057e+01`, ### **uguale al referto alle `7` cifre**, con `|G(0)|` `3.454832e+02`: ### **`B = 3.097e-2`**;
+  - **il rivelatore del periodo `2`:** scatta sulla serie alternante e non su quella piatta;
+  - ### **i `21` campioni di `G` di `D2` di `29b997da` sono riprodotti AL BIT** *(`-1937.2`, `-2321.6`, `-1937.2`)*: la cadenza dichiarata e' quella vera;
+  - i campioni a meta' tick non toccano quelli a tick intero.
+- ### ✅ **IL CASO CHE DEVE RIUSCIRE RIESCE:** sulla scena di `M-B2`, `cs` spento, `20` tick: seconda fonte `0.5` ulp, ### **escursione relativa `1.888e-2` entro `B`**, nessun periodo `2`.
+- ### ⛔ **`C1` SULLA MATERIA UNIFORME DI `D2` CADE:**
+  - la seconda fonte passa *(`0.1` ulp)*: ### **`g_dello_stato` e `h_tot` vedono lo STESSO `H`**;
+  - ### **(i) cade:** escursione relativa ### **`1.984e-1`, contro `B = 3.097e-2`**;
+  - ### **(ii) cade: `H` oscilla di periodo `2` sul tick intero**, fra `-1937.179158904` e `-2321.579158904`;
+  - ### **a meta' tick `H` vale `-2129.379158904`, il punto medio esatto.**
+- 📌 **LA STRUTTURA, calcolata dal `jsonl`** *(un comando python sui campioni, nessuna cura)*:
+  - ### **ogni mezzo tick `H` salta di `192.2000000000` esatti** *(min `192.199999999998`, max `192.200000000001`)*;
+  - ### **cioe' `0.200000000000000` per nodo** *(`961` nodi)*.
+  - ### **Un salto COSTANTE per nodo, su uno stato che resta uniforme: non e' rumore.**
+  - ### ⚠ **Se cali con `dtau` NON l'ho misurato** *(un solo `dtau`, `0.5`)*. **La lettura possibile, scritta come tale e non verificata:** un termine di `H` che il passo scambia per intero a ogni mezzo tick.
+  - ### **Quale termine, questa misura non lo dice:** serve `H` termine per termine, pezzo per pezzo. ### **Non lo faccio: il mandato dice di FERMARSI.**
+- ### **Per il criterio fissato prima:** ### **il passo NON conserva `H` sulla materia uniforme. E' un difetto del passo, indipendente da `cs`** *(che qui e' spento)*. ### **Si FERMA TUTTO: `C2` NON ha girato.**
+- ### ⛔ **QUINDI LA DOMANDA DELLA SEZ.`27` DELLA MAPPA NON SI APRE**, e nemmeno l'idea della quantizzazione come taglio ultravioletto *(la sua condizione `(b)`)*: ### **prima si cura il passo.** ### **La cura e' una decisione di Luca.**
+- ### **`LINEARE`, `Lambda_c` e ogni lettura «alla Jeans» restano FERMI.**
