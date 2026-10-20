@@ -22,6 +22,7 @@ misure.**
 
 Gira con:  python csv/_stabilita_lineare.py            (il conto di `c38367db`)
            python csv/_stabilita_lineare.py --lungo    (l'intervallo lungo, a lati pari)
+           python csv/_stabilita_lineare.py --proiettata  (la base proiettata, gamma come pendenza)
 """
 import io
 import json
@@ -680,7 +681,351 @@ def main_lungo(argv):
     return 0
 
 
+# =====================================================================================
+#   LA BASE PROIETTATA E GAMMA COME PENDENZA  (mandato di Luca del 2026-10-20, 18:02)
+#   ### task history `2026-10-20_base_proiettata.md` (`29faf0ef`).
+#   ### ⛔ **SI AGGIUNGE, non si riscrive:** il conto di `c38367db` (senza argomenti) e
+#   ### quello di `16b5d10f` (`--lungo`) restano intatti, e le prove li rifanno AL BIT.
+# =====================================================================================
+OGNI = 4                       # ogni quanti tick si registra ln|lambda| e ln||M||, dal mandato
+SOGLIA_UNIF = 1e3              # ulp: la base valida, dal mandato
+PREV_GUARDIANO = 1e-2          # la previsione del guardiano, dal mandato
+ULP_P3 = 64.0                  # P3, dal mandato
+JSONL_PROIETTATA = os.path.join(RADICE, "doc", "referti_l2", "stabilita_base_proiettata.jsonl")
+
+
+def proietta(st, n):
+    """### Ogni campo sulla MEDIA DELLE CELLE, componente per componente della cella."""
+    for v in st.values():
+        if v.shape[0] == n:
+            v[...] = np.mean(v, axis=0)
+        elif v.shape[0] == 4 * n:
+            w = v.reshape((n, 4) + v.shape[1:])
+            w[...] = np.mean(w, axis=0)
+        else:
+            raise AssertionError("un campo di forma %r non e' ne' per nodo ne' per estremita'"
+                                 % (v.shape,))
+
+
+def pendenze(tt, LL, da, a):
+    """### La pendenza dei minimi quadrati di `L(k)` contro `t` sui campioni in `[da, a]`."""
+    sel = [i for i, t in enumerate(tt) if da - 1e-12 <= t <= a + 1e-12]
+    t = np.asarray([tt[i] for i in sel])
+    y = np.stack([LL[i] for i in sel])
+    tm = t - t.mean()
+    return np.tensordot(tm, y - y.mean(axis=0), axes=(0, 0)) / float(np.sum(tm ** 2))
+
+
+def braccio_proiettato(nome, lato, dtau, x, acceso, salta, eps_rel, tempo):
+    import flussi_parziali as FP
+    inc, mot, st, par = scena(lato, dtau, x)
+    n = inc.n
+    lm = float(np.mean(mot.densita_vuoto(st)))
+    rm = float(np.mean(mot.densita_materia(st)))
+    lc = RAPPORTO * lm
+    cs_m = lm / (lm + lc) if acceso else 1.0
+    if acceso:
+        FP.accendi_cs(mot, lc, st)
+    N = int(round(tempo / dtau))
+    assert N % 4 == 0, "N = %d non si divide in quattro quarti" % N
+    scale = (float(np.max(np.abs(st["psi_h"]))), float(np.max(np.abs(st["phi_h"]))))
+    fuori = {"nome": nome, "lato": lato, "dtau": dtau, "x": x, "acceso": acceso,
+             "salta": list(salta), "eps_rel": eps_rel, "N": N, "cs_m": cs_m,
+             "rho_m": rm, "lambda_m": lm, "fine": "N", "proiettata": True}
+    M = np.broadcast_to(np.eye(2 * NC, dtype=complex), (lato, lato, 2 * NC, 2 * NC)).copy()
+    acc = np.zeros((lato, lato))
+    zero = np.zeros((lato, lato))
+    tt, Le, Ln, Lq = [0.0], [zero], [zero], {}
+    unif = uniformita(st, n)
+    t0 = time.time()
+    base = st
+    for t in range(1, N + 1):
+        R, dopo = green(base, mot, par, acceso, salta, lc, lato, scale, eps_rel)
+        unif = max(unif, uniformita(dopo, n))
+        proietta(dopo, n)
+        M = np.matmul(R, M)
+        s = np.sqrt(np.sum(np.abs(M) ** 2, axis=(-2, -1)))
+        M /= s[..., None, None]
+        acc += np.log(s)
+        base = dopo
+        if t % OGNI == 0 or t % (N // 4) == 0:
+            le = acc + np.log(np.max(np.abs(np.linalg.eigvals(M)), axis=-1))
+            tt.append(t * dtau * cs_m)
+            Le.append(le)
+            Ln.append(acc.copy())
+            if t % (N // 4) == 0:
+                Lq[t // (N // 4)] = le
+        if time.time() - t0 > BUDGET_LUNGO:
+            fuori["fine"] = "BUDGET superato al passo %d di %d" % (t, N)
+            break
+    fuori["secondi"] = time.time() - t0
+    fuori["uniformita_ulp"] = unif
+    fuori["nu_s3"] = lm ** 2 / (rm + lm) ** 2
+    if fuori["fine"] != "N":
+        return fuori
+    T = N * dtau * cs_m
+    tq = T / 4.0
+    fuori["gamma"] = Lq[4] / T
+    fuori["gamma_meta"] = Lq[2] / (T / 2.0)
+    fuori["quarti"] = [(Lq[q] - (Lq[q - 1] if q > 1 else 0.0)) / tq for q in (1, 2, 3, 4)]
+    fuori["pend"] = {"meta_eig": pendenze(tt, Le, T / 2.0, T),
+                     "meta_norm": pendenze(tt, Ln, T / 2.0, T),
+                     "q4_eig": pendenze(tt, Le, 3.0 * T / 4.0, T),
+                     "q4_norm": pendenze(tt, Ln, 3.0 * T / 4.0, T)}
+    h = lato // 2
+    fuori["serie"] = {"t": tt,
+                      "(pi,pi)": [[float(a[h, h]) for a in Le], [float(a[h, h]) for a in Ln]],
+                      "k=0": [[float(a[0, 0]) for a in Le], [float(a[0, 0]) for a in Ln]]}
+    return fuori
+
+
+def leggi_proiettata(b):
+    lato = b["lato"]
+    p = {k: np.asarray(v) for k, v in b["pend"].items()}
+    sm = p["meta_eig"]
+    mx = float(np.max(sm))
+    h = lato // 2
+    kb = punto_banda(sm, lato)
+    punti = (("(pi,pi)", (h, h)), ("banda", kb), ("k=0", (0, 0)))
+    print("      LE PENDENZE (tempo proprio): il massimo della seconda meta' %+.4e" % mx)
+    print("      %-8s %-22s %-11s %-11s %-11s %-11s  %s"
+          % ("punto", "k", "meta' eig", "meta' norma", "q4 eig", "q4 norma", "etichetta"))
+    et = {}
+    for nome, (kx, ky) in punti:
+        v = {k: float(a[kx, ky]) for k, a in p.items()}
+        asin = (abs(v["meta_eig"] - v["q4_eig"]) <= SOGLIA_5 * mx
+                and abs(v["meta_eig"] - v["meta_norm"]) <= SOGLIA_5 * mx)
+        et[nome] = {"k": [int(kx), int(ky)], "pendenze": v, "asintotico": bool(asin)}
+        print("      %-8s (%d,%d)=(%.3f,%.3f)pi %+.4e %+.4e %+.4e %+.4e  %s"
+              % (nome, kx, ky, fase_pi(kx, lato), fase_pi(ky, lato), v["meta_eig"],
+                 v["meta_norm"], v["q4_eig"], v["q4_norm"],
+                 "ASINTOTICO" if asin else "NON ASINTOTICO"))
+    a, c = et["(pi,pi)"]["pendenze"]["meta_eig"], et["banda"]["pendenze"]["meta_eig"]
+    if abs(a - c) < SOGLIA_5 * mx:
+        vince = "NON DECIDIBILE"
+    else:
+        vince = "IL PICCO a (pi,pi)" if a > c else "LA BANDA"
+    print("      CHI VINCE (pendenza della seconda meta'): %s  (picco %+.4e, banda %+.4e,"
+          " differenza %.3e contro %.3e)" % (vince, a, c, abs(a - c), SOGLIA_5 * mx))
+    z, zq = et["k=0"]["pendenze"]["meta_eig"], et["k=0"]["pendenze"]["q4_eig"]
+    vera = z > 0.02 and zq >= 0.5 * z
+    print("      k = 0: seconda meta' %+.4e, ultimo quarto %+.4e -> %s"
+          % (z, zq, "CRESCITA VERA" if vera else
+             "TRANSITORIO: la frase <<nessuna lunghezza minima>> si RITIRA"))
+    diag = [float(sm[h - d, h - d]) for d in (4, 3, 2, 1, 0)]
+    sl = semi_larghezza(sm, lato)
+    print("      la diagonale negli ultimi 4 m prima di pi (m = %d..%d): %s;  semi-larghezza %s"
+          % (h - 4, h, " ".join("%+.4e" % w for w in diag), sl if sl else "> 4"))
+    passo_ = max(1, lato // 16)
+    print("      la pendenza della seconda meta' lungo (m,0), m = 0,%d,..: %s" % (passo_, " ".join(
+        "%+.3f" % float(sm[m, 0]) for m in range(0, h + 1, passo_))))
+    print("      la pendenza della seconda meta' lungo (m,m), m = 0,%d,..: %s" % (passo_, " ".join(
+        "%+.3f" % float(sm[m, m]) for m in range(0, h + 1, passo_))))
+    q = [float(np.asarray(qq)[h, h]) for qq in b["quarti"]]
+    print("      INFORMAZIONE, i quattro quarti alla vecchia a (pi,pi): %s"
+          % " ".join("%+.4e" % w for w in q))
+    sys.stdout.flush()
+    return {"punti": et, "vince": vince, "k0_vera": bool(vera), "diagonale": diag,
+            "semi_larghezza": sl, "quarti_pipi": q}
+
+
+def salva_proiettata(b, et):
+    d = {}
+    for k, v in b.items():
+        if k in ("gamma", "gamma_meta"):
+            d[k] = np.asarray(v).tolist()
+        elif k == "quarti":
+            d[k] = [np.asarray(w).tolist() for w in v]
+        elif k == "pend":
+            d[k] = {kk: np.asarray(w).tolist() for kk, w in v.items()}
+        else:
+            d[k] = v
+    d["etichette"] = et
+    with io.open(JSONL_PROIETTATA, "a", encoding="utf-8") as f:
+        f.write(json.dumps(d) + "\n")
+
+
+def lungo_jsonl(nome):
+    with io.open(JSONL_LUNGO, encoding="utf-8") as f:
+        for riga in f:
+            b = json.loads(riga)
+            if b["nome"] == nome:
+                return b
+    raise AssertionError("il braccio `%s` non e' nel jsonl di 16b5d10f" % nome)
+
+
+def prova_p3(acceso):
+    """### `(ulp, al_bit)`: la base dopo un tick con `mot` sporcato da un tick PERTURBATO."""
+    import flussi_parziali as FP
+    inc, mot, st, par = scena(31, 0.125, X)
+    lc = float(np.mean(mot.densita_vuoto(st)))
+    if acceso:
+        FP.accendi_cs(mot, lc, st)
+    scale = (float(np.max(np.abs(st["psi_h"]))), float(np.max(np.abs(st["phi_h"]))))
+    peggio, al_bit = 0.0, True
+    for j in (0, 5, 13, 20):
+        p = copia(st)
+        perturba(p, j, EPS_REL * scale[0 if (j % NC) < 8 else 1])
+        passo(p, mot, par, acceso, (), lc)
+        a = copia(st)
+        passo(a, mot, par, acceso, (), lc)
+        q = copia(st)
+        passo(q, mot, par, acceso, (), lc)
+        c = copia(st)
+        passo(c, mot, par, acceso, (), lc)
+        for k in ("psi_h", "phi_h"):
+            d = float(np.max(np.abs(a[k] - c[k])))
+            al_bit &= bool(np.array_equal(a[k], c[k]))
+            peggio = max(peggio, d / (EPS * float(np.max(np.abs(c[k])))))
+    return peggio, al_bit
+
+
+def main_proiettata(argv):
+    import _presidio
+    _presidio.avvia(__file__)
+    import composizione as CM
+    import statica_protocollo as PR
+    print("=" * 100)
+    print("L'INTERVALLO LUNGO CON LA BASE PROIETTATA E GAMMA COME PENDENZA -- un conto")
+    print("=" * 100)
+    print("  LA CONFIGURAZIONE INTERA, dichiarata:")
+    print("  la materia uniforme: x %g, VUOTO %.1f, rapporto %g, chi_allineato; la cella: 24 reali"
+          % (X, PR.VUOTO, RAPPORTO))
+    print("  il passo: %d pezzi, impronta %s; lati 32 (dtau 0.125) e 64 (dtau 0.0625);"
+          " N dtau = %g; la BASE PROIETTATA sulla media delle celle dopo ogni tick;"
+          " la monodromia rinormalizzata per k" % (len(CM.ORDINE), CM.IMPRONTA, TEMPO_LUNGO))
+    print("  gamma = la PENDENZA (minimi quadrati, tempo proprio) di ln|lambda| e ln||M||, campioni"
+          " ogni %d tick, sulla seconda meta' e sull'ultimo quarto" % OGNI)
+    print("  soglie: base valida <= %g ulp (prima della proiezione); 5%% del massimo; previsione"
+          " %g; P3 %g ulp; linearita' %g; budget %.0f s" % (SOGLIA_UNIF, PREV_GUARDIANO, ULP_P3,
+                                                            BANDA_LIN, BUDGET_LUNGO))
+    print("-" * 100)
+    sys.stdout.flush()
+    io.open(JSONL_PROIETTATA, "w", encoding="utf-8").close()
+
+    print("### I CASI DI CONTROLLO")
+    vecchio = vecchio_jsonl("R2 (a) S3 sola")
+    b = braccio("R2 (a) S3 sola", 31, 0.125, X, False, (), EPS_REL)
+    if not esito("il conto di c38367db (senza argomenti) AL BIT: R2 a lato 31",
+                 np.array_equal(np.asarray(b["gamma"]), np.asarray(vecchio["gamma"]))):
+        print("### STOP: lo strumento non riproduce c38367db")
+        return 1
+    lu = lungo_jsonl("R2 lato 32")
+    b = braccio_lungo("R2 lato 32", 32, 0.125, X, False, (), EPS_REL)
+    bit = all(np.array_equal(np.asarray(x_), np.asarray(y_)) for x_, y_ in zip(b["L"], lu["L"]))
+    if not esito("--lungo (16b5d10f) AL BIT: R2 lato 32, i quattro L", bit):
+        print("### STOP: lo strumento non riproduce 16b5d10f")
+        return 1
+    if not esito("DEVE FALLIRE: la proiezione SPENTA, R2 lato 32, N dtau 100: uniformita' > %g ulp"
+                 % SOGLIA_UNIF, b["uniformita_ulp"] > SOGLIA_UNIF,
+                 "%.3e ulp" % b["uniformita_ulp"]):
+        print("### STOP: la proiezione non e' cio' che tiene la base")
+        return 1
+    c2 = c2_esatto_lungo(32, 0.125)
+    tetto = c2["N"] * ULP_C2 * EPS
+    if not esito("DEVE FALLIRE: la camminata sola esatta, lato 32, N dtau 100: <= N*64 ulp",
+                 c2["dev"] <= tetto, "%.3e contro %.3e" % (c2["dev"], tetto)):
+        print("### STOP: il metodo e' rotto")
+        return 1
+    for acceso in (True, False):
+        u, bit = prova_p3(acceso)
+        if not esito("P3 cs %s: la base dopo un tick perturbato = dopo un tick della base"
+                     % ("acceso" if acceso else "spento"), bit or u <= ULP_P3,
+                     "%s, %.1f ulp" % ("AL BIT" if bit else "non al bit", u)):
+            print("### STOP: la funzione di Green ha una memoria in `mot`")
+            return 1
+    ok = True
+    for nome, vnome, acceso in (("R1", "R1 (b)", True), ("R2", "R2 (a) S3 sola", False)):
+        b = braccio_proiettato("%s lato 31 N dtau 25" % nome, 31, 0.125, X, acceso, (),
+                               EPS_REL, TEMPO_N)
+        g, gv = np.asarray(b["gamma"]), np.asarray(vecchio_jsonl(vnome)["gamma"])
+        d = float(np.max(np.abs(g - gv)))
+        ok &= esito("DEVE RIUSCIRE: %s proiettato, lato 31, N dtau 25 = c38367db entro 1e-3 max"
+                    % nome, d <= 1e-3 * float(np.max(gv)),
+                    "%.3e contro %.3e; uniformita' %.1f ulp" % (d, 1e-3 * float(np.max(gv)),
+                                                               b["uniformita_ulp"]))
+    b = braccio_proiettato("R2 lato 32 N dtau 25", 32, 0.125, X, False, (), EPS_REL, TEMPO_N)
+    g = np.asarray(b["gamma"])
+    T = b["N"] * b["dtau"]
+    g2 = (g * T - np.asarray(b["gamma_meta"]) * T / 2.0) / (T / 2.0)
+    for che, arr, (val, kk) in (("intero", g, GUARDIANO["intero"]),
+                                ("seconda meta'", g2, GUARDIANO["meta"])):
+        i, j = np.unravel_index(int(np.argmax(arr)), arr.shape)
+        ok &= esito("DEVE RIUSCIRE: R2 proiettato lato 32, N dtau 25, %s: %.4f a (%d,%d)"
+                    " contro %.4f a %s" % (che, float(arr[i, j]), kpi(i, 32)[0], kpi(j, 32)[0],
+                                          val, kk),
+                    abs(float(arr[i, j]) - val) <= GUARDIANO["banda"]
+                    and (i, j) in simmetrici(kk, 32))
+    if not ok:
+        print("### STOP: la base proiettata non riproduce i conti di controllo")
+        return 1
+    print("-" * 100)
+
+    risultati = {}
+    for lato, dtau in ((32, 0.125), (64, 0.0625)):
+        for nome, acceso in (("R1", True), ("R2", False)):
+            b = braccio_proiettato("%s lato %d" % (nome, lato), lato, dtau, X, acceso, (),
+                                   EPS_REL, TEMPO_LUNGO)
+            if b["fine"] != "N":
+                salva_proiettata(b, None)
+                print("  %s lato %d: %s -- ### STOP: si dichiara e ci si ferma"
+                      % (nome, lato, b["fine"]))
+                return 1
+            sommario(b)
+            if not esito("BASE VALIDA %s lato %d: uniformita' <= %g ulp per tutto l'intervallo"
+                         % (nome, lato, SOGLIA_UNIF), b["uniformita_ulp"] <= SOGLIA_UNIF,
+                         "%.1f ulp" % b["uniformita_ulp"]):
+                salva_proiettata(b, None)
+                print("### STOP: il braccio NON VALE")
+                return 1
+            et = leggi_proiettata(b)
+            salva_proiettata(b, et)
+            risultati[(nome, lato)] = et
+            if nome == "R1":
+                v = lungo_jsonl("R1 lato %d" % lato)["etichette"]["punti"]["(pi,pi)"]["quarti"]
+                d = max(abs(a_ - c_) for a_, c_ in zip(et["quarti_pipi"], v))
+                esito("LA PREVISIONE DEL GUARDIANO, R1 lato %d: i quarti a (pi,pi) = 16b5d10f"
+                      " entro %g" % (lato, PREV_GUARDIANO), d <= PREV_GUARDIANO,
+                      "16b5d10f %s; differenza massima %.3e"
+                      % (" ".join("%.4f" % w for w in v), d))
+            if lato == 32:
+                b2 = braccio_proiettato("%s lato 32 eps 1e-6" % nome, lato, dtau, X, acceso, (),
+                                        EPS_REL_2, TEMPO_LUNGO)
+                if b2["fine"] != "N":
+                    print("  linearita' %s: %s -- ### STOP" % (nome, b2["fine"]))
+                    return 1
+                p1 = np.asarray(b["pend"]["meta_eig"])
+                p2 = np.asarray(b2["pend"]["meta_eig"])
+                d = float(np.max(np.abs(p1 - p2)))
+                salva_proiettata(b2, None)
+                if not esito("linearita' %s lato 32: la pendenza della seconda meta', 1e-7"
+                             " contro 1e-6, <= %g max" % (nome, BANDA_LIN),
+                             d <= BANDA_LIN * float(np.max(p1)),
+                             "%.3e contro %.3e" % (d, BANDA_LIN * float(np.max(p1)))):
+                    print("### STOP: il conto non e' lineare in eps")
+                    return 1
+    print("-" * 100)
+    print("### LA LARGHEZZA DEL PICCO a (pi,pi): semi-larghezza in m (NUMERO DI ARCHI)")
+    for nome in ("R1", "R2"):
+        a, c = risultati[(nome, 32)]["semi_larghezza"], risultati[(nome, 64)]["semi_larghezza"]
+        if a is None or c is None:
+            v = "non misurabile entro 4 m"
+        else:
+            griglia, segue_k = abs(c - a) <= 1, abs(c - 2 * a) <= 1
+            v = ("NON SEPARABILE (entrambe)" if griglia and segue_k else
+                 "SEGUE LA GRIGLIA" if griglia else "SEGUE k" if segue_k else
+                 "ne' l'una ne' l'altra")
+        print("  %s: lato 32 %s, lato 64 %s -> %s" % (nome, a, c, v))
+    print("=" * 100)
+    print("### %d/%d prove passate. NESSUNA CURA. LINEARE e Lambda_c FERMI; D4 da rileggere."
+          % tuple(OK))
+    print("=" * 100)
+    return 0
+
+
 if __name__ == "__main__":
     if sys.argv[1:2] == ["--lungo"]:
         sys.exit(main_lungo(sys.argv[2:]))
+    if sys.argv[1:2] == ["--proiettata"]:
+        sys.exit(main_proiettata(sys.argv[2:]))
     sys.exit(main(sys.argv[1:]))
