@@ -1,0 +1,72 @@
+[TIMBRO] _stabilita_lineare.py  sha1-BYTE 0610bf5e  committato e pulito
+====================================================================================================
+L'ANALISI DI STABILITA' LINEARE SU UN INTERVALLO LUNGO, A LATI PARI -- un conto
+====================================================================================================
+  LA CONFIGURAZIONE INTERA, dichiarata:
+  la materia uniforme: x 0.1, VUOTO 1.0, rapporto 1, chi_allineato; la cella: 24 reali
+  il passo: 14 pezzi, impronta 2e7f795d2a52fbe7; lati 32 (dtau 0.125) e 64 (dtau 0.0625); N dtau = 100; la monodromia RINORMALIZZATA per k; i quattro quarti
+  eps_rel 1e-07 (e 1e-06 a lato 32); banda di linearita' 0.001; soglie 0.05; intorno di (pi,pi) 0.1 pi; budget 10800 s
+----------------------------------------------------------------------------------------------------
+### I CASI DI CONTROLLO
+  il conto di c38367db AL BIT: R2 a lato 31, gamma 0.3749 a (9,0)        PASSA   
+  DEVE FALLIRE: la camminata sola esatta, lato 32, N dtau 100: <= N*64 u PASSA   2.101e-13 contro 1.137e-11 (N 800)
+  DEVE RIUSCIRE: R2 lato 32, N dtau 25, intero: 0.3754 a (10,0) contro 0 PASSA   
+  DEVE RIUSCIRE: R2 lato 32, N dtau 25, seconda meta': 0.5847 a (16,16)  PASSA   
+----------------------------------------------------------------------------------------------------
+  R1 lato 32                     lato 32   dtau 0.125    x 0.1   N 800  [N, 513 s]  uniformita' 43487205094.0 ulp
+      gamma max +5.5718e-01 a k = (16,16) = (1.000, 1.000) pi;  gamma(k=0) +8.862e-02;  N/2: +5.8685e-01;  nu_S3/OMEGA_H 0.2631
+      ### INFORMAZIONE: gamma della seconda meta' -- max +5.2751e-01 a k = (16,16); a k = 0 +4.198e-02
+      lungo (m,0), m = 0,2,..: +0.089 +0.172 +0.275 +0.343 +0.344 +0.408 +0.459 +0.487 +0.495
+      lungo (m,m), m = 0,2,..: +0.089 +0.226 +0.358 +0.428 +0.430 +0.385 +0.321 +0.255 +0.557
+      i quattro quarti (gamma nel tempo proprio); il massimo assoluto dell'ultimo quarto +6.0480e-01
+      (pi,pi)  k = (16,16) = (1.000, 1.000) pi:  +5.4894e-01 +6.2477e-01 +4.5022e-01 +6.0480e-01   -> NON ASINTOTICO
+      banda    k = (0,16) = (0.000, 1.000) pi:  +4.2271e-01 +5.8062e-01 +4.8852e-01 +4.8933e-01   -> ASINTOTICO
+      k=0      k = (0,0) = (0.000, 0.000) pi:  +2.4453e-01 +2.6005e-02 -5.9205e-03 +8.9880e-02   -> NON ASINTOTICO
+      CHI VINCE nell'ultimo quarto: IL PICCO a (pi,pi)  (picco +6.0480e-01, banda +4.8933e-01, differenza 1.155e-01 contro 3.024e-02)
+      k = 0: ultimo quarto +8.9880e-02, seconda meta' +4.1980e-02 -> CRESCITA VERA
+      la diagonale negli ultimi 4 m prima di pi (m = 12..16): +3.8154e-01 +3.5197e-01 +3.0667e-01 +5.3796e-01 +6.0480e-01;  semi-larghezza > 4
+  linearita' R1 lato 32: max_k |gamma_1e-7 - gamma_1e-6| <= 0.001 max    PASSA   3.479e-07 contro 5.572e-04
+  R2 lato 32                     lato 32   dtau 0.125    x 0.1   N 800  [N, 108 s]  uniformita' 4824467499610409.0 ulp
+      gamma max +3.8935e-01 a k = (1,8) = (0.062, 0.500) pi;  gamma(k=0) +3.756e-02;  N/2: +3.8872e-01;  nu_S3/OMEGA_H 0.2631
+      ### INFORMAZIONE: gamma della seconda meta' -- max +4.1752e-01 a k = (2,9); a k = 0 +2.712e-02
+      lungo (m,0), m = 0,2,..: +0.038 +0.141 +0.262 +0.340 +0.364 +0.353 +0.308 +0.267 +0.253
+      lungo (m,m), m = 0,2,..: +0.038 +0.203 +0.333 +0.300 +0.133 +0.076 +0.033 +0.024 +0.332
+      i quattro quarti (gamma nel tempo proprio); il massimo assoluto dell'ultimo quarto +5.3034e-01
+      (pi,pi)  k = (16,16) = (1.000, 1.000) pi:  +3.6935e-01 +3.3629e-01 +3.5021e-01 +2.7289e-01   -> NON ASINTOTICO
+      banda    k = (0,9) = (0.000, 0.562) pi:  +3.7175e-01 +3.6408e-01 +4.0604e-01 +4.0821e-01   -> ASINTOTICO
+      k=0      k = (0,0) = (0.000, 0.000) pi:  +1.0101e-01 -5.0190e-03 +9.6051e-02 -4.1807e-02   -> NON ASINTOTICO
+      CHI VINCE nell'ultimo quarto: LA BANDA  (picco +2.7289e-01, banda +4.0821e-01, differenza 1.353e-01 contro 2.652e-02)
+      k = 0: ultimo quarto -4.1807e-02, seconda meta' +2.7122e-02 -> TRANSITORIO: la frase <<nessuna lunghezza minima>> si RITIRA
+      la diagonale negli ultimi 4 m prima di pi (m = 12..16): +9.0941e-02 +1.0222e-02 +1.5959e-02 +1.4844e-01 +2.7289e-01;  semi-larghezza 2
+  linearita' R2 lato 32: max_k |gamma_1e-7 - gamma_1e-6| <= 0.001 max    PASSA   6.603e-08 contro 3.893e-04
+  R1 lato 64                     lato 64   dtau 0.0625   x 0.1   N 1600 [N, 3725 s]  uniformita' 20828251769.7 ulp
+      gamma max +5.5529e-01 a k = (32,32) = (1.000, 1.000) pi;  gamma(k=0) +8.873e-02;  N/2: +5.8557e-01;  nu_S3/OMEGA_H 0.2631
+      ### INFORMAZIONE: gamma della seconda meta' -- max +5.2502e-01 a k = (32,32); a k = 0 +4.170e-02
+      lungo (m,0), m = 0,4,..: +0.089 +0.172 +0.275 +0.344 +0.344 +0.410 +0.460 +0.488 +0.496
+      lungo (m,m), m = 0,4,..: +0.089 +0.226 +0.358 +0.428 +0.430 +0.385 +0.321 +0.256 +0.555
+      i quattro quarti (gamma nel tempo proprio); il massimo assoluto dell'ultimo quarto +6.0317e-01
+      (pi,pi)  k = (32,32) = (1.000, 1.000) pi:  +5.4942e-01 +6.2171e-01 +4.4687e-01 +6.0317e-01   -> NON ASINTOTICO
+      banda    k = (32,0) = (1.000, 0.000) pi:  +4.2443e-01 +5.8175e-01 +4.9013e-01 +4.8968e-01   -> ASINTOTICO
+      k=0      k = (0,0) = (0.000, 0.000) pi:  +2.4505e-01 +2.6483e-02 -6.1121e-03 +8.9513e-02   -> NON ASINTOTICO
+      CHI VINCE nell'ultimo quarto: IL PICCO a (pi,pi)  (picco +6.0317e-01, banda +4.8968e-01, differenza 1.135e-01 contro 3.016e-02)
+      k = 0: ultimo quarto +8.9513e-02, seconda meta' +4.1701e-02 -> CRESCITA VERA
+      la diagonale negli ultimi 4 m prima di pi (m = 28..32): +3.0747e-01 +2.7188e-01 +5.3888e-01 +5.9288e-01 +6.0317e-01;  semi-larghezza 3
+  R2 lato 64                     lato 64   dtau 0.0625   x 0.1   N 1600 [N, 830 s]  uniformita' 4569384119737680.0 ulp
+      gamma max +3.9630e-01 a k = (1,-18) = (0.031, -0.562) pi;  gamma(k=0) +3.695e-02;  N/2: +3.9268e-01;  nu_S3/OMEGA_H 0.2631
+      ### INFORMAZIONE: gamma della seconda meta' -- max +4.6664e-01 a k = (-3,19); a k = 0 +2.107e-02
+      lungo (m,0), m = 0,4,..: +0.037 +0.121 +0.269 +0.358 +0.388 +0.367 +0.319 +0.284 +0.270
+      lungo (m,m), m = 0,4,..: +0.037 +0.191 +0.341 +0.313 +0.123 +0.062 +0.011 +0.021 +0.326
+      i quattro quarti (gamma nel tempo proprio); il massimo assoluto dell'ultimo quarto +5.0584e-01
+      (pi,pi)  k = (32,32) = (1.000, 1.000) pi:  +3.6719e-01 +3.3540e-01 +3.4628e-01 +2.5660e-01   -> NON ASINTOTICO
+      banda    k = (12,12) = (0.375, 0.375) pi:  +3.0017e-01 +2.7263e-01 +1.7380e-01 +5.0584e-01   -> NON ASINTOTICO
+      k=0      k = (0,0) = (0.000, 0.000) pi:  +1.0065e-01 +5.0093e-03 +8.7652e-02 -4.5516e-02   -> NON ASINTOTICO
+      CHI VINCE nell'ultimo quarto: LA BANDA  (picco +2.5660e-01, banda +5.0584e-01, differenza 2.492e-01 contro 2.529e-02)
+      k = 0: ultimo quarto -4.5516e-02, seconda meta' +2.1068e-02 -> TRANSITORIO: la frase <<nessuna lunghezza minima>> si RITIRA
+      la diagonale negli ultimi 4 m prima di pi (m = 28..32): +3.2712e-03 +9.7809e-02 +5.9168e-02 +1.3292e-01 +2.5660e-01;  semi-larghezza 2
+----------------------------------------------------------------------------------------------------
+### LA LARGHEZZA DEL PICCO a (pi,pi): semi-larghezza in m (NUMERO DI ARCHI)
+  R1: lato 32 None, lato 64 3 -> non misurabile entro 4 m
+  R2: lato 32 2, lato 64 2 -> SEGUE LA GRIGLIA
+====================================================================================================
+### 6/6 prove passate. NESSUNA CURA. LINEARE e Lambda_c FERMI; D4 da rileggere.
+====================================================================================================

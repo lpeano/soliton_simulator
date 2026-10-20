@@ -19987,3 +19987,33 @@ La domanda di Luca *(«l'instabilita', se c'e', dipende dal fatto che lo spazio 
   - A lato `62` il massimo e' a `(19, 0)` sull'intervallo intero e ### **a `(pi, pi)` sulla seconda meta'.** ### **L'avevo scritto senza confrontare la posizione del massimo nelle due meta' a ogni lato.**
   - ### **Quindi la domanda `2` di quella relazione** *(che tipo di cura)* ### **dipende dall'intervallo**, e non si legge prima dell'intervallo lungo.
 - ### **Il seguito:** il conto su `N dtau = 100` a lati pari *(`32`, `64`)*, coi quattro quarti; task history `doc/TASK_HISTORY/2026-10-20_stabilita_intervallo_lungo.md` *(`61b420a5`)*.
+
+### ⛔⛔ **L'INTERVALLO LUNGO: I CONTROLLI PASSANO, MA LA BASE NON E' PIU' UNIFORME -- I QUARTI TARDI NON SONO VALIDI. ERRORE MIO `C.4`. STOP** *(referto `doc/referti_l2/stabilita_intervallo_lungo.txt` e `.jsonl`, strumento `csv/_stabilita_lineare.py --lungo` blob sha1-BYTE `0610bf5e`, commit `b2756b7f`, committato e pulito)*
+
+- ### ✅ **I CONTROLLI PASSANO** *(`6/6`)*:
+  - ### **il conto di `c38367db` AL BIT** *(`R2` lato `31`, `0.3749` a `(9, 0)`)*;
+  - ### **la camminata sola esatta** a lato `32`, `N dtau 100`: `2.1e-13` contro il tetto `1.1e-11`;
+  - ### **i numeri del guardiano** *(`R2` lato `32`, `N dtau 25`)*: intero `0.3754` a `(10, 0)`, seconda meta' `0.5847` a `(16, 16)`;
+  - la linearita' a lato `32`: `3.5e-7` *(`R1`)* e `6.6e-8` *(`R2`)*.
+- ### ⛔ **MA LA BASE HA PERSO L'UNIFORMITA'** *(la riga «uniformita'» che lo strumento stampa: la deviazione massima fra celle, in ulp)*:
+  - ### **`R2`: `4.8e15` ulp a lato `32` e `4.6e15` a lato `64`**, cioe' ### **una deviazione relativa d'ordine `1`**;
+  - ### **`R1`: `4.3e10` e `2.1e10` ulp**, cioe' ### **circa `1e-5` relativo**, ### **cento volte l'ampiezza delle differenze** *(`eps_rel = 1e-7`)*.
+  - ### **La causa e' l'instabilita' stessa:** la base parte uniforme al bit, ma ### **il rumore d'arrotondamento della base cresce col gamma che si sta misurando.** A `N dtau = 25` *(`c38367db`)* era cresciuto fino a `1e4` ulp, innocuo; ### **a `N dtau = 100` cresce di `exp(gamma t)` in piu'.**
+  - ### **Una stima, non misurata quarto per quarto** *(lo strumento non stampa l'uniformita' per quarto)*: la base supera l'ampiezza delle differenze ### **intorno a `t ~ ln(1e9) / gamma`**: per `R2` *(`gamma ~ 0.4`)* ### **circa a meta' intervallo**, per `R1` *(`gamma ~ 0.55` nel tempo proprio, che e' meta' di `t`)* ### **nell'ultimo quarto.**
+  - ### **Da li' in poi la funzione di Green non e' piu' una convoluzione** *(la base non e' invariante per traslazione)*, ### **e il conto per `k` non e' piu' quello dello stato uniforme.**
+- ### **QUINDI LE ETICHETTE DEL REFERTO** *(ASINTOTICO, CHI VINCE, `k = 0`, la larghezza del picco)*, ### **che leggono il TERZO e il QUARTO quarto, NON SONO VALIDE**:
+  - ### **per `R2` nessuna;**
+  - ### **per `R1` il quarto quarto e' contaminato**, il terzo al limite.
+  - *(I numeri sono nel referto e nel `jsonl` cosi' come sono usciti, e non li uso.)*
+- **CIO' CHE SI PUO' LEGGERE, con cautela:** i primi due quarti, prima che la base si allontani:
+  - `R2` lato `32`: `(pi, pi)` `0.369`, `0.336`; la banda a `(0, 9)` `0.372`, `0.364`;
+  - `R1` lato `32`: `(pi, pi)` `0.549`, `0.625`; la banda a `(0, 16)` `0.423`, `0.581`;
+  - ### **e i lati `32` e `64` coincidono quasi alla terza cifra** per `R1` *(`(pi, pi)`: `0.549`, `0.625` contro `0.549`, `0.622`)*.
+  - ### **Non bastano per i criteri del mandato**, che guardano il terzo e il quarto quarto.
+
+### ⛔ **ERRORE MIO `C.4`:** ### **non ho previsto che la base dell'orbita cresce col gamma stesso.** In `c38367db` la riga «uniformita'» c'era e andava gia' fino a `1e4` ulp; ### **a quattro volte l'intervallo la crescita e' `exp(4 gamma t)`, e non l'ho calcolata prima.** ### **Nemmeno il criterio di linearita' lo vede**, perche' confronta due ampiezze ### **sulla STESSA base contaminata.**
+
+### 📌 **LA DOMANDA PER LUCA** *(un cambio di METODO del conto, non di fisica, e quindi una tua decisione)*:
+- ### **tenere la base ESATTAMENTE sull'orbita uniforme:** lo stato uniforme e' ### **una varieta' invariante del passo** *(la mappa conserva l'uniformita')*, quindi ### **a ogni tick si puo' riportare la base sulla media delle celle**, che toglie il rumore d'arrotondamento ### **senza cambiare l'orbita** *(se non agli ulp)*. ### **Il controllo:** coi parametri di `c38367db` deve ridare ### **gli stessi gamma entro la banda di linearita'.**
+- ### **In alternativa:** la base calcolata su ### **una griglia piccola** *(l'orbita uniforme non dipende dal lato)* e ricopiata, ### **o un intervallo che resti sotto la soglia** *(ma e' la domanda stessa: piu' corto non e' asintotico)*.
+- ### **Finche' non decidi, le domande di `c38367db` sulla cura restano aperte, e nessuna cura e' scelta.** ### **`LINEARE`, `Lambda_c`, le letture «alla Jeans» o di modulazione, lo stato finale FERMI; `D4` da rileggere.**
