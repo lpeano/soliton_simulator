@@ -19883,3 +19883,13 @@ La domanda di Luca *(«l'instabilita', se c'e', dipende dal fatto che lo spazio 
   - ### **La stessa cautela vale per la deriva di `G`:** dove il rapporto e' piccolo, la deriva puo' essere la fase dell'oscillazione alla fine del tratto.
 
 ### **NESSUNA LETTURA OLTRE QUELLE FISSATE:** ### **`C2` non cresce** *(la crescita richiede `S3`)*; ### **gamma in tempo proprio non cambia da `0.25` a `0.125`.** ### **`LINEARE`, `Lambda_c` e ogni lettura «alla Jeans» FERMI**, e ### **la domanda «automa o limite continuo» e' di Luca** *(mappa, sotto `L1`)*.
+
+### ⭐ **LA RISPOSTA DI PRINCIPIO DI LUCA, LA REGOLA DI SCALA, E L'ERRORE `n.22` DEL GUARDIANO** *(decisione di Luca del `2026-10-20`, `11:05`-`11:26`)*
+
+- ### **La risposta** *(nella mappa sotto `L1`, accanto alla domanda)*: ### **l'automa vero sta alla scala di Planck**, a stati finiti nelle SCELTE e continuo nelle RELAZIONI; ### **la griglia del simulatore ne e' un campionamento GROSSOLANO**, e ### **i risultati fisici sono quelli che CONVERGONO raffinando.**
+- ### **La regola di scala:** valori per nodo invariati; ### **`dtau` proporzionale al passo della griglia**; la stessa scena fisica sulla griglia fine. *(Si appoggia a `D1`: se la tabella perdesse l'invarianza di scala, va rivista.)*
+- ### ⛔ **ERRORE `n.22` DEL GUARDIANO:** aveva letto ### **«immersione isometrica»** *(`[[SPAZIO-CHE-NASCE]]`)* come una divisione dell'arco che non cambia le distanze, e ne aveva dedotto ### **che la mitosi fosse un raffinamento.**
+  - ### **Nella voce «isometrica» vuol dire che CONSERVA LA NORMA**;
+  - e con `[[PRIMA-LO-SPAZIO-POI-LA-MATERIA]]` *(il nodo nasce vuoto, la materia ci arriva camminando)* ### **la mitosi crea spazio NUOVO.**
+  - ### **Il collegamento «raffinamento = mitosi» e' RITIRATO:** la prova di raffinamento ### **e' un controllo di risoluzione, indipendente dalla mitosi.**
+- ### **La prova di raffinamento:** task history `doc/TASK_HISTORY/2026-10-20_raffinamento.md`, coi criteri fissati prima.

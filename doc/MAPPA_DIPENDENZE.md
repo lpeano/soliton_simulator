@@ -35,6 +35,32 @@
 - ### **finora si e' lavorato nel secondo modo**; ### **la visione di automa di Luca e la variante `(c)` vanno nel primo.**
 - ### ⛔ **DA DECIDERE PRIMA DI CHIUDERE `L2`.** *(Il fatto che l'ha sollevata: sulla materia uniforme `H` salta nel termine della moneta, e il salto va come `dtau^2` -- `doc/referti_l2/scala_salto.txt`.)*
 
+### ⭐ **LA RISPOSTA DI PRINCIPIO DI LUCA** *(`2026-10-20`, `11:05`-`11:26`)*
+
+> *«L'automa vero sta alla scala di Planck: e' a stati finiti nelle SCELTE (scattare o no,
+> dividersi o no, un quanto c'e' o non c'e') e continuo nelle RELAZIONI (ampiezze e fasi). Il
+> suo compito e' MANTENERE I VINCOLI DELLO SPAZIO-TEMPO (il cono, la causalita', la
+> conservazione locale), e lo fa con un CAMPIONAMENTO IPERFINE della continuita'. La griglia
+> del simulatore non e' la scala di Planck: ne e' un CAMPIONAMENTO GROSSOLANO, perche'
+> l'iperfine non si puo' simulare. I risultati fisici sono quelli che CONVERGONO raffinando il
+> campionamento.»*
+
+**Le considerazioni del guardiano, scritte come tali:**
+- ### **cio' che vive alla scala della NOSTRA griglia** *(il modo a `k = pi`, il limite di Nyquist di due archi)* ### **e' sospetto per costruzione**;
+- ### **la prova che lo separa e' il RAFFINAMENTO SPAZIALE** *(task history `2026-10-20_raffinamento.md`)*. ### **La prova `D3` di `29b997da`** *(`dtau` dimezzato a griglia fissa)* ### **NON e' questa prova:** cambia il numero di Courant, non la risoluzione *(errore `n.19`)*;
+- ### **legame con la Stella Polare, `TAGLIA-FINITA`:** due taglie non sono uno scaling, ### **ne servono almeno tre**;
+- ### **una tensione da riformulare:** il solitone a due archi *(sez.`24`)* era collegato a `lambda = 2 l_P` della VQT; ### **se un arco non e' una lunghezza di Planck, va detto «il piu' corto che la NOSTRA griglia rappresenta», non «due lunghezze di Planck».**
+
+### ⭐ **LA REGOLA DI SCALA, decisione di Luca** *(`2026-10-20`, `11:26`)*
+
+> *«Per confrontare due risoluzioni: VALORI PER NODO INVARIATI (`rho`, `Lambda`, `Lambda_c`);
+> per l'invarianza di scala misurata in `D1` (fattori `2` e `0.5` al bit) equivale a tenere
+> costanti le DENSITA' FISICHE. `dtau` PROPORZIONALE AL PASSO DELLA GRIGLIA, cosi' la velocita'
+> della luce fisica (archi per tick per lunghezza d'arco) resta la stessa. STESSA SCENA FISICA
+> sulla griglia fine.»*
+
+- ### **Il guardiano annota:** la regola ### **si appoggia a `D1`**; se un giorno la tabella perdesse l'invarianza di scala *(per esempio con un numero assoluto nuovo)*, ### **la regola andrebbe rivista.**
+
 ### `L2` — **LA MATERIA MODIFICA IL VUOTO, e quindi LA FORMA DI `cs`** — *la «gravita'» del modello*
 
 | | |
@@ -927,6 +953,8 @@ quindi ### **non portano termini nuovi**; ### ⚠ **con la mitosi andra' riguard
 `Lambda_c`.**
 
 ## 24. ⭐⭐ `L2` — **IL SOLITONE A DUE LUNGHEZZE DI PLANCK** *(`2026-10-18`, `00:29`)*
+
+> ### ⚠ **UNA TENSIONE DA RIFORMULARE** *(considerazione del guardiano, `2026-10-20`; la risposta di principio di Luca sta sotto `L1`)*: ### **la griglia del simulatore non e' la scala di Planck**, quindi «due archi» ### **va letto come «il piu' corto che la NOSTRA griglia rappresenta», non come «due lunghezze di Planck».** *(Il titolo resta: e' un reperto.)*
 
 > ### 📌 **Domanda di Luca, integrazione del guardiano**, e si colloca
 > ### **accanto alle misure che chiudono `L2`.** ### ⛔ **Nessun codice, nessuna
