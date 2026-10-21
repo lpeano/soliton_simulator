@@ -62,6 +62,14 @@
   - ### **LA MISURA DEL FATTORE** *(informazione per la domanda di `L1` sull'automa)*: ### **il fattore di contrazione sulla scena di `D0` a `dtau` `0.5`, `1`, `1.25` (e `1.5` se converge)**: il medio e il massimo, ### **e se a qualche `dtau` non converge entro `200` giri** *(dirlo: non e' un errore della misura)*.
 - ### **LA REGOLA DELLA SUITE** *(in `CLAUDE.md`, regola scritta, `A9`)* e ### **il file generato** `doc/REFERTO_infrastruttura_era2.md` *(stato nel working tree, e perche' era scaduto)*.
 
+## 4-ter. ANNOTAZIONE DEL `2026-10-21`, `21:52`, PRIMA DEL CODICE: LA PULIZIA DEL NUCLEO E DEI CONTROLLI *(decisione di Luca dopo `a688c219`; si annota)*
+
+- ### ⛔ **L'ERRORE `n.32` DEL GUARDIANO:** ### **la soglia d'avviso `0.9` sul fattore l'ha proposta lui**, e ### **`D0` arriva a `0.857`** *(`0` avvisi su `8` corse, `a688c219`)*: ### **l'avviso non avrebbe visto il caso per cui era nato.**
+- ### **I TRE PUNTI, un commit ciascuno, ogni risultato al bit, `leggi.yaml` intatto:**
+  1. ### **l'avviso sui GIRI:** un avviso quando una chiamata usa ### **piu' di `GIRI_MAX_OMEGA / 2`** *(oggi `100`)*; il fattore resta, ### **come informazione**. ### **DEVE RIUSCIRE:** `D0` *(`braccio_accesa`, `dtau 1`)* ### **almeno `1` avviso**; ### **DEVE RESTARE `0`:** `R1` di `594417f6` a lato `32`, `C1` di strada `(d)`;
+  2. ### **`[[CONO-MESSAGGIO-ROTTO]]`:** il secondo `assert` di `_nel_cono` riceve ### **gli argomenti che chiede**; ### **DEVE RIUSCIRE:** `dtau 1.25` alza ### **`AssertionError` con `s` e `dove`**, non `TypeError`; al bit dentro il cono; la voce chiusa;
+  3. ### **`csv/_struttura_regole.py` verde:** ### `(a)` il titolo col ramo `fork-su2` *(il fatto, da `git branch -r`)*; ### `(b)` il rimando fuori intestazione in `doc/REGOLE/par9.md`. ### **Se una correzione cambia il SENSO di una regola: STOP.**
+
 ## 5. TODO
 
 1. Questo task history, ### **committato DA SOLO.**
