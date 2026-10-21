@@ -20216,3 +20216,21 @@ La domanda di Luca *(«l'instabilita', se c'e', dipende dal fatto che lo spazio 
 ### ❓ **LE DOMANDE PER LUCA** *(una alla volta)*:
 1. ### **La regressione di `D0`** *(`7395cd9a`)*: ### **si cura prima di andare avanti?** *(la tolleranza del punto fisso di `Omega` nel braccio `cs` a inizio passo; e se il `pre-commit` debba girare anche la suite)*
 2. *(dopo la prima)* ### **Il gradino `2` dei triangoli:** quali leggi portare per prime, ### **cominciando da `S3`**, e con quali controlli *(la regola di scala fra geometrie: `Lambda` per nodo passa da `4` a `6` a vuoto per estremita' uguale)*.
+
+### ⛔ **LA REGRESSIONE DI `D0`: L'IPOTESI DEL GUARDIANO CADE -- IL CRITERIO NON DEGENERA, IL PUNTO FISSO CONVERGE TROPPO LENTO PER `120` GIRI. NESSUNA CURA APPLICATA. STOP** *(referto `doc/referti_l2/diagnosi_d0.txt` e `.jsonl`, strumento `csv/_diagnosi_d0.py` blob sha1-BYTE `929682e5`, commit `71d34991`, committato e pulito; task history `db3ee090`)*
+
+- ### **IL BRACCIO CHE CADE** *(letto dal codice prima dei numeri)*: ### **`braccio_accesa` di `_collauda_cs.py`**, ### **con `cs` ACCESO** *(`accendi_cs` con `Lambda_c = 8` a ogni tick)*, `DTAU = 1.0`, `250` tick. ### **Arriva in `applica` perche' `accendi_cs` mette `mot.cs` e `mot.lambda_c`;** il braccio a forma spenta esce subito, e passa. ### **Quindi in `D0` la forma NON e' spenta.**
+- ### **LA COPIA DEL CICLO RIPETE L'ORIGINALE** *(stesso tick `64`, stesso scarto finale `1.252e-12`)*.
+- ### **I NUMERI della chiamata che alza** *(scena `nn=16`, `seme=7`)*: ### **`max|cs'|` `0.123`, `max tetto` `20.8`, il criterio `3.69e-14`**: ### **niente degenera.** ### **Lo scarto CALA, geometrico, di `0.813` per giro**; al giro `120` vale `1.252e-12`, ### **`34` volte il criterio**; ### **a quel ritmo ne mancano `17`** *(in tutto `~137`)*. *(La scena `12`/`11` converge sempre, fino a `66` giri.)*
+- ### **LA LETTURA FISSATA PRIMA:** l'ipotesi teneva se la scala del criterio fosse `<= 64` ulp di uno scarto non nullo che non cala ### → **lo scarto cala, e la scala e' `20.8`: L'IPOTESI CADE.**
+- ### **LA CAUSA VERA:** ### **a `DTAU 1` il punto fisso di `Omega` puo' contrarre LENTAMENTE** *(`0.81` per giro)*, e ### **`GIRI_MAX_OMEGA = 120` non basta per quella chiamata.**
+  - ### **Perche' a `3b467aa4` passava:** il criterio di allora *(`8` ulp di `max|Omega|`, `2.35e-14` qui)* ### **era PIU' STRETTO di quello di oggi**, quindi ### **non e' il criterio a spiegarlo.** ### **La lettura, NON verificata:** ogni chiamata si ferma in un punto diverso agli ulp, ### **la traiettoria a `DTAU 1` si separa**, e ### **con il criterio di allora la corsa non incontrava una chiamata cosi' lenta.**
+- ### ⛔ **NESSUNA CURA APPLICATA:** il mandato la prevedeva ### **solo se l'ipotesi teneva** *(un criterio che degenera)*. ### **Le cure possibili non sono «solo un criterio d'arresto»:**
+  - ### **alzare `GIRI_MAX_OMEGA`** e' ### **scegliere un numero** *(«il numero oltre il quale si DICHIARA che non converge»)*;
+  - ### **accelerare il punto fisso** *(Aitken, Anderson)* e' ### **cambiare il metodo**;
+  - ### **rifare il collaudo a un `DTAU` dove la contrazione e' rapida** e' ### **cambiare il collaudo.**
+  - ### **La scelta e' di Luca.**
+- ### ⛔ **ERRORE MIO `C.8`:** ### **ho lanciato la diagnosi in una catena di comandi che NON dipendeva dall'esito del commit**: il commit e' stato RIFIUTATO *(`H-NON-TRACCIATI`: la prova a vuoto aveva lasciato il `jsonl`)*, ### **e la corsa e' partita da un blob NON committato** *(il timbro diceva «confronto con HEAD NON RIUSCITO»)*. ### **Quel referto l'ho cancellato**, ho committato lo strumento e ### **rifatto la corsa SOLO dopo il commit riuscito.**
+- ### **PUNTO `3` DEL MANDATO** *(arrivato TRONCATO: «misura quanto dura `primo_ordine/collauda.py`. Se»)*: ### **la durata, misurata in `3008bd13`: `353.2` s di `pre-commit` + `308.0` s solo in CI = `661.2` s in tutto.** ### **Il resto del punto `3` non l'ho ricevuto.**
+
+### ❓ **LE DOMANDE PER LUCA:** ### **(1) quale cura per `D0`** *(giri, metodo, o il collaudo)*; ### **(2) il resto del punto `3`.** ### **Il secondo gradino dei triangoli aspetta.**

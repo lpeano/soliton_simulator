@@ -1,0 +1,60 @@
+[TIMBRO] _diagnosi_d0.py  sha1-BYTE 929682e5  committato e pulito
+====================================================================================================
+LA DIAGNOSI DELLA REGRESSIONE DI D0: il punto fisso di Omega, giro per giro
+====================================================================================================
+  il braccio: braccio_accesa di _collauda_cs.py: corri(nn, seme, 8), DTAU 1, TICK 250, VUOTO_MODULO 2; EPS_OMEGA 1.776e-15, GIRI_MAX_OMEGA 120
+----------------------------------------------------------------------------------------------------
+### scena nn=16 seme=7
+  l'originale: ALZA al tick 64: il punto medio di `Omega` NON CONVERGE in 120 giri (ultimo scarto 1.252e-12): la regola dice di RELAZIONARE co
+  la copia:    ALZA al tick 64: il punto medio NON CONVERGE: ultimo scarto 1.252e-12
+  ### LA COPIA RIPETE L'ORIGINALE: SI'
+  le chiamate di applica: 130; giri alla convergenza: min 12, max 61
+  L'ULTIMA CHIAMATA (QUELLA CHE ALZA): max|cs'| 1.232295e-01, max tetto 2.076964e+01, il criterio (8 ulp del tetto) 3.689e-14
+     giro   1  scarto 9.739489e-01  max|Omega| 1.326628e+01  scarto/criterio 2.640e+13  scarto/(8 ulp max|Omega|) 4.133e+13
+     giro   2  scarto 7.173589e-02  max|Omega| 1.326085e+01  scarto/criterio 1.944e+12  scarto/(8 ulp max|Omega|) 3.045e+12
+     giro   3  scarto 3.726107e-02  max|Omega| 1.326077e+01  scarto/criterio 1.010e+12  scarto/(8 ulp max|Omega|) 1.582e+12
+     giro   4  scarto 3.033735e-02  max|Omega| 1.326078e+01  scarto/criterio 8.223e+11  scarto/(8 ulp max|Omega|) 1.288e+12
+     giro   5  scarto 2.470187e-02  max|Omega| 1.326078e+01  scarto/criterio 6.695e+11  scarto/(8 ulp max|Omega|) 1.049e+12
+     giro   6  scarto 2.011286e-02  max|Omega| 1.326078e+01  scarto/criterio 5.451e+11  scarto/(8 ulp max|Omega|) 8.538e+11
+     giro   7  scarto 1.637551e-02  max|Omega| 1.326078e+01  scarto/criterio 4.438e+11  scarto/(8 ulp max|Omega|) 6.952e+11
+     giro   8  scarto 1.333175e-02  max|Omega| 1.326078e+01  scarto/criterio 3.614e+11  scarto/(8 ulp max|Omega|) 5.660e+11
+     giro   9  scarto 1.085299e-02  max|Omega| 1.326078e+01  scarto/criterio 2.942e+11  scarto/(8 ulp max|Omega|) 4.607e+11
+     giro  10  scarto 8.834517e-03  max|Omega| 1.326078e+01  scarto/criterio 2.395e+11  scarto/(8 ulp max|Omega|) 3.750e+11
+     giro  11  scarto 7.191005e-03  max|Omega| 1.326078e+01  scarto/criterio 1.949e+11  scarto/(8 ulp max|Omega|) 3.053e+11
+     giro  12  scarto 5.852923e-03  max|Omega| 1.326078e+01  scarto/criterio 1.586e+11  scarto/(8 ulp max|Omega|) 2.485e+11
+     giro 115  scarto 3.510081e-12  max|Omega| 1.326078e+01  scarto/criterio 9.514e+01  scarto/(8 ulp max|Omega|) 1.490e+02
+     giro 116  scarto 2.856382e-12  max|Omega| 1.326078e+01  scarto/criterio 7.742e+01  scarto/(8 ulp max|Omega|) 1.213e+02
+     giro 117  scarto 2.321698e-12  max|Omega| 1.326078e+01  scarto/criterio 6.293e+01  scarto/(8 ulp max|Omega|) 9.856e+01
+     giro 118  scarto 1.891820e-12  max|Omega| 1.326078e+01  scarto/criterio 5.128e+01  scarto/(8 ulp max|Omega|) 8.031e+01
+     giro 119  scarto 1.540101e-12  max|Omega| 1.326078e+01  scarto/criterio 4.174e+01  scarto/(8 ulp max|Omega|) 6.538e+01
+     giro 120  scarto 1.252332e-12  max|Omega| 1.326078e+01  scarto/criterio 3.394e+01  scarto/(8 ulp max|Omega|) 5.316e+01
+  lo scarto negli ultimi 60 giri: min 1.252e-12, max 2.402e-07 (cala? si'); il rapporto dell'ultimo giro 0.8131
+  ### a quel ritmo, i giri che mancano al criterio: 17.0 (in tutto 137)
+----------------------------------------------------------------------------------------------------
+### scena nn=12 seme=11
+  l'originale: passa tutti i 250 tick
+  la copia:    passa tutti i 250 tick
+  ### LA COPIA RIPETE L'ORIGINALE: SI'
+  le chiamate di applica: 500; giri alla convergenza: min 11, max 66
+  L'ULTIMA CHIAMATA: max|cs'| 1.242201e-01, max tetto 2.214964e+01, il criterio (8 ulp del tetto) 3.935e-14
+     giro   1  scarto 2.170166e+00  max|Omega| 1.679746e+01  scarto/criterio 5.516e+13  scarto/(8 ulp max|Omega|) 7.273e+13
+     giro   2  scarto 5.495752e-01  max|Omega| 1.679213e+01  scarto/criterio 1.397e+13  scarto/(8 ulp max|Omega|) 1.842e+13
+     giro   3  scarto 1.633515e-01  max|Omega| 1.679222e+01  scarto/criterio 4.152e+12  scarto/(8 ulp max|Omega|) 5.476e+12
+     giro   4  scarto 4.715593e-02  max|Omega| 1.679222e+01  scarto/criterio 1.199e+12  scarto/(8 ulp max|Omega|) 1.581e+12
+     giro   5  scarto 1.374140e-02  max|Omega| 1.679222e+01  scarto/criterio 3.492e+11  scarto/(8 ulp max|Omega|) 4.607e+11
+     giro   6  scarto 3.993705e-03  max|Omega| 1.679222e+01  scarto/criterio 1.015e+11  scarto/(8 ulp max|Omega|) 1.339e+11
+     giro   7  scarto 1.161605e-03  max|Omega| 1.679222e+01  scarto/criterio 2.952e+10  scarto/(8 ulp max|Omega|) 3.894e+10
+     giro   8  scarto 3.377870e-04  max|Omega| 1.679222e+01  scarto/criterio 8.585e+09  scarto/(8 ulp max|Omega|) 1.132e+10
+     giro   9  scarto 9.823267e-05  max|Omega| 1.679222e+01  scarto/criterio 2.497e+09  scarto/(8 ulp max|Omega|) 3.293e+09
+     giro  10  scarto 2.856674e-05  max|Omega| 1.679222e+01  scarto/criterio 7.260e+08  scarto/(8 ulp max|Omega|) 9.577e+08
+     giro  11  scarto 8.307452e-06  max|Omega| 1.679222e+01  scarto/criterio 2.111e+08  scarto/(8 ulp max|Omega|) 2.785e+08
+     giro  12  scarto 2.415874e-06  max|Omega| 1.679222e+01  scarto/criterio 6.140e+07  scarto/(8 ulp max|Omega|) 8.099e+07
+     giro  22  scarto 1.045297e-11  max|Omega| 1.679222e+01  scarto/criterio 2.657e+02  scarto/(8 ulp max|Omega|) 3.504e+02
+     giro  23  scarto 3.042011e-12  max|Omega| 1.679222e+01  scarto/criterio 7.732e+01  scarto/(8 ulp max|Omega|) 1.020e+02
+     giro  24  scarto 8.872902e-13  max|Omega| 1.679222e+01  scarto/criterio 2.255e+01  scarto/(8 ulp max|Omega|) 2.975e+01
+     giro  25  scarto 2.584599e-13  max|Omega| 1.679222e+01  scarto/criterio 6.569e+00  scarto/(8 ulp max|Omega|) 8.665e+00
+     giro  26  scarto 7.460699e-14  max|Omega| 1.679222e+01  scarto/criterio 1.896e+00  scarto/(8 ulp max|Omega|) 2.501e+00
+     giro  27  scarto 2.042810e-14  max|Omega| 1.679222e+01  scarto/criterio 5.192e-01  scarto/(8 ulp max|Omega|) 6.848e-01
+  lo scarto negli ultimi 27 giri: min 2.043e-14, max 2.170e+00 (cala? si'); il rapporto dell'ultimo giro 0.2738
+----------------------------------------------------------------------------------------------------
+====================================================================================================
