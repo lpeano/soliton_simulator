@@ -1,0 +1,17 @@
+[TIMBRO] _avviso_giri.py  sha1-BYTE 766ac138  committato e pulito
+====================================================================================================
+L'AVVISO DI CONVERGENZA LENTA SUI GIRI: oltre GIRI_AVVISO_OMEGA = 100 (GIRI_MAX_OMEGA 200)
+====================================================================================================
+  D0 dtau 1 scena (16, 7)            chiamate   500  giri max  138  oltre 100: 1  mot.avvisi_omega 1
+  D0 dtau 1 scena (12, 11)           chiamate   500  giri max   66  oltre 100: 0  mot.avvisi_omega 0
+  [PASSA] ### DEVE RIUSCIRE: D0 (braccio_accesa) produce almeno 1 avviso -- 1 avvisi sulle due scene
+  R1 lato 32 (594417f6)              chiamate 85588  giri max    1  oltre 100: 0  mot.avvisi_omega 0
+  [PASSA] ### DEVE RESTARE 0: R1 di 594417f6 a lato 32 -- 0 avvisi su 85588 chiamate
+  [PASSA] ### AL BIT: R1 lato 32 contro il jsonl di 594417f6 -- tutti identici
+  C1 di strada (d)                   chiamate  5986  giri max   22  oltre 100: 0  mot.avvisi_omega 0
+  [PASSA] ### DEVE RESTARE 0: C1 di strada (d) -- 0 avvisi su 5986 chiamate
+  [PASSA] ### AL BIT: l'uscita di braccio_c1 sta riga per riga in c1_tetto_omega.txt -- 16 righe, 0 mancanti
+  [PASSA] ### IL CONTATORE: mot.avvisi_omega = le chiamate oltre soglia contate qui -- su 4 corse
+====================================================================================================
+L'AVVISO SUI GIRI: 6 su 6   ### TUTTI PASSATI
+====================================================================================================

@@ -1,0 +1,13 @@
+[TIMBRO] _cono_messaggio.py  sha1-BYTE 903220fe  committato e pulito
+====================================================================================================
+CONO-MESSAGGIO-ROTTO: il rifiuto del cono, dal nucleo, a dtau 1.25 (scena (16, 7) di D0)
+====================================================================================================
+  eccezione: AssertionError al tick 18
+  messaggio: un `s` del nodo vale 1.0235011240117298 > 1, cioe' `dtau > dtau_rif`: quella scena sta FUORI DAL CONO (`B-5`: il tick e' l'orologio piu' veloce possibile), e il rimedio e' CAMBIARE LA SCENA -- non tagliare il `dtau`, che nasconderebbe l'errore
+  [PASSA] ### DEVE RIUSCIRE: AssertionError (non TypeError), al tick 18 -- AssertionError al tick 18
+  [PASSA] ### il messaggio porta dove e s -- dove = nodo, s = 1.0235011240117298
+  [PASSA] ### e s nel messaggio e' quello vero (max dtau_nodo / dtau_rif prima del tick) -- 1.0235011240117298 contro 1.0235011240117298
+  [PASSA] ### DEVE NON ALZARE: a dtau 1, dentro il cono, 250 tick -- nessuna eccezione
+====================================================================================================
+IL MESSAGGIO DEL CONO: 4 su 4   ### TUTTI PASSATI
+====================================================================================================

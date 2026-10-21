@@ -195,7 +195,7 @@
 | `COMPONENTI:Y0-Y10` | MISURA | METODO | 1 | ### **CHIUSA** |  | Y10, 11/11 PASS. |
 | `COMPONENTI:Z30` | FRONTE | FISICA | 1 | ### **SOSPESA** |  | Z30: la forma del denominatore — nudo (attuale, zero scelte) contro linea (la me |
 | `CONFIG-1` | DIFETTO | METODO | 1 | ### **SOSPESA** |  | APERTA il 2026-09-25 / LE SEI MISURE DI OGGI GIRAVANO CON 28 LEGGI SU 31 SPENTE, |
-| `CONO-MESSAGGIO-ROTTO` | DIFETTO | METODO | 2 | ### **AGENDA** |  | il rifiuto s > 1 di _nel_cono esce come TypeError: il messaggio ha due segnapost |
+| `CONO-MESSAGGIO-ROTTO` | DIFETTO | METODO | 2 | ### **CHIUSA** |  | il rifiuto s > 1 di _nel_cono esce come TypeError: il messaggio ha due segnapost |
 | `CONSERVAZIONE-LOCALE` | FRONTE | FISICA | 2 | ### **AGENDA** |  | A14: ogni legge si giudica su tre domande -- energia locale, carica locale, tota |
 | `CONTA-RIGHE` | FRONTE | METODO | ENTRAMBE | ### **APERTA** |  | DUE CONVENZIONI PER CONTARE LE RIGHE: i miei strumenti contavano uno in piu' di  |
 | `CONTO-BOOLEANI-P5` | DIFETTO | METODO | 1 | ### **SOSPESA** |  | i booleani di modulo contati da P5 sono passati da 79 a 82 col simulatore INTATT |
