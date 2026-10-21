@@ -69,7 +69,16 @@ OMEGA_H = float(np.pi)
 # ### ⛔ **IL TETTO DEI GIRI DEL PUNTO MEDIO, e NON e' una manopola:** e' ### **il numero
 # ### oltre il quale si DICHIARA che non converge**, come `GIRI_MAX` di `tick.py`.
 # ### ⚠ **Misurato il `2026-10-18`: il massimo osservato e' scritto nel referto.**
-GIRI_MAX_OMEGA = 120
+# ### ⛔ **DA `120` A `200` il `2026-10-21`** *(decisione di Luca delle `20:06`, task history
+# ### `2026-10-21_regressione_d0.md`)*: ### **un LIMITE DI SICUREZZA, non una costante di
+# ### fisica.** Il collaudo `D0` *(`cs` acceso, `DTAU 1`)* ### **ne chiede `~137`**: il punto
+# ### fisso contrae di `~0.81` a giro. ### **Dove converge entro `120`, nulla cambia di un bit.**
+GIRI_MAX_OMEGA = 200
+# ### ⚠ **LA SOGLIA DELL'AVVISO di convergenza lenta** *(stessa decisione)*: ### **il fattore di
+# ### contrazione stimato** *(il rapporto fra gli ultimi due scarti)* ### **oltre `0.9` si CONTA
+# ### in `mot.avvisi_omega`**, ### **e non e' un errore.** ### **Soglia di AVVISO, non di fisica:**
+# ### il contatore si legge, ### **non entra in nessun conto.**
+SOGLIA_AVVISO_OMEGA = 0.9
 # ### ⛔⛔ **`8` ULP, E LA DOMANDA E' DI CHE COSA** *(decisione di Luca del `2026-10-19`
 # ### alle `16:29`, task history `2026-10-19_tolleranza_omega.md`)*: fino a ieri la soglia
 # ### era ### **relativa a `max|Omega|`**, e in campo DEBOLE chiedeva ### **meno dello zero
@@ -383,11 +392,17 @@ def applica(mot, st, par, frazione):
     controlla_tetto(prec, tetto, "Omega di partenza")
     scala = float(np.max(tetto))
     giri = 0
+    # ### il FATTORE DI CONTRAZIONE: lo scarto diviso il precedente *(al primo giro `0`: il
+    # ### precedente e' `inf`; e un precedente nullo non esiste, perche' lo scarto `0` converge)*
+    scarto_prec = float("inf")
+    fattore = 0.0
     for giri in range(1, GIRI_MAX_OMEGA + 1):
         # ### il punto MEDIO: ### **mezza fase**, poi si rilegge `Omega`
         np.multiply(salvo, np.exp(-1j * (prec * (tau * 0.5))[mot.inc.nodo]), out=phi)
         nuovo = omega(mot, st, par)
         scarto = float(np.max(np.abs(nuovo - prec)))
+        fattore = scarto / scarto_prec
+        scarto_prec = scarto
         if entro_tolleranza(scarto, scala):
             prec = nuovo.copy()
             # ### ⛔ **E IL CONTROLLO SULL'`Omega` FINALE**, sullo stato del PUNTO MEDIO
@@ -405,4 +420,9 @@ def applica(mot, st, par, frazione):
     # ### ✅ **E ADESSO LA FASE INTERA, dallo stato VERO**: `prec` e' il punto medio.
     np.multiply(salvo, np.exp(-1j * (prec * tau)[mot.inc.nodo]), out=phi)
     mot.giri_omega = giri
+    # ### ⚠ **L'AVVISO, CONTATO e NON un errore** *(senza ramo: il booleano si somma)*: il
+    # ### fattore dell'ultima chiamata, il massimo, e quante chiamate sono oltre la soglia.
+    mot.fattore_omega = fattore
+    mot.fattore_omega_max = max(mot.fattore_omega_max, fattore)
+    mot.avvisi_omega += int(fattore > SOGLIA_AVVISO_OMEGA)
     return st
