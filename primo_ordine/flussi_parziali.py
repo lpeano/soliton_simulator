@@ -239,7 +239,7 @@ def _nel_cono(s, dove):
     assert ma <= 1.0, (
         "un `s` del %s vale %.17g > 1, cioe' `dtau > dtau_rif`: quella scena sta FUORI DAL"
         " CONO (`B-5`: il tick e' l'orologio piu' veloce possibile), e il rimedio e'"
-        " CAMBIARE LA SCENA -- non tagliare il `dtau`, che nasconderebbe l'errore" % dove)
+        " CAMBIARE LA SCENA -- non tagliare il `dtau`, che nasconderebbe l'errore" % (dove, ma))
 
 
 # ====================================================================== LA FASE ESATTA
