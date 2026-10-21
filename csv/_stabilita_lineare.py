@@ -24,6 +24,7 @@ Gira con:  python csv/_stabilita_lineare.py            (il conto di `c38367db`)
            python csv/_stabilita_lineare.py --lungo    (l'intervallo lungo, a lati pari)
            python csv/_stabilita_lineare.py --proiettata  (la base proiettata, gamma come pendenza)
            python csv/_stabilita_lineare.py --risonanza   (D0: la dispersione della camminata contro la banda di S3)
+           python csv/_stabilita_lineare.py --moneta      (la moneta nel gruppo finito, eps dtau = pi/2, solo R2)
 """
 import io
 import json
@@ -71,12 +72,20 @@ def esito(che, passa, nota=""):
 # =====================================================================================
 #   LA SCENA E IL PASSO
 # =====================================================================================
+# ### ⭐ **Dal `2026-10-21` alle `15:08`** *(`--moneta`)*: ### **`eps` della moneta si puo'
+# ### sostituire SOLO nella scena del conto**; `None` *(il valore di sempre)* lascia il `par`
+# ### della scena com'e', e i modi di prima restano AL BIT.
+EPS_MONETA = None
+
+
 def scena(lato, dtau, x):
     import scena_l2 as SC
     import statica_protocollo as PR
     lati = (lato, lato)
     inc, mot, st, par, _c, _p = SC.scena(dtau, PR.VUOTO, 0.0, PR.RAGGIO, False, True, False,
                                          PR.SEME, 1, lati=lati)
+    if EPS_MONETA is not None:
+        par["eps"] = float(EPS_MONETA)
     st["psi_h"][...] = float(np.sqrt(x)) * PR.chi_allineato(lati, inc.m)
     return inc, mot, st, par
 
@@ -1426,6 +1435,145 @@ def main_verdetto(argv):
     print("=" * 100)
     return 0
 
+# =====================================================================================
+#   LA MONETA NEL GRUPPO FINITO  (mandato di Luca del 2026-10-21, 15:08, versione corta)
+#   ### task history `2026-10-21_moneta_gruppo_finito.md` (`a1ae88c0`, sez. `3-bis`): SOLO
+#   ### `R2`. ### ⛔ **`eps` si cambia SOLO nella scena** (`EPS_MONETA`, `None` per i modi di
+#   ### prima): `leggi.yaml` e il passo NON si toccano.
+# =====================================================================================
+BRACCI_MONETA = (("A", 1.0, np.pi / 2.0), ("B", 0.125, 4.0 * np.pi),
+                 ("C045", 0.125, 3.6 * np.pi), ("C055", 0.125, 4.4 * np.pi))
+JSONL_MONETA = os.path.join(RADICE, "doc", "referti_l2", "moneta_gruppo_finito.jsonl")
+
+
+def moneta_matrice(dtau):
+    """### Il massimo, in ulp, fra la moneta di UN tick (due mezzi pezzi) e `-i sigma.n_h`."""
+    inc, mot, st, par = scena(LATO_D0, dtau, X)
+    n = mot.geo.n
+    meno_i_sn = np.empty((n.shape[0], 2, 2), dtype=complex)
+    meno_i_sn[:, 0, 0] = -1j * n[:, 2]
+    meno_i_sn[:, 0, 1] = -1j * (n[:, 0] - 1j * n[:, 1])
+    meno_i_sn[:, 1, 0] = -1j * (n[:, 0] + 1j * n[:, 1])
+    meno_i_sn[:, 1, 1] = 1j * n[:, 2]
+    peggio = 0.0
+    for c in (0, 1):
+        st["psi_h"][...] = 0
+        st["psi_h"][:, c] = 1.0
+        mot.operatori["moneta_spin"](st, par, 0.5)
+        mot.operatori["moneta_spin"](st, par, 0.5)
+        peggio = max(peggio, float(np.max(np.abs(st["psi_h"] - meno_i_sn[:, :, c]))))
+    return peggio / EPS
+
+
+def famiglie(pend, lato):
+    h = lato // 2
+    g = np.asarray(pend)
+    i, j = np.unravel_index(int(np.argmax(g)), g.shape)
+    banda_m = max(range(h // 2, 3 * h // 2 + 1), key=lambda m: g[m, 0])
+    return {"massimo": float(g[i, j]), "dove": (kpi(i, lato)[0], kpi(j, lato)[0]),
+            "(pi,pi)": float(g[h, h]), "(pi,0)": float(g[h, 0]),
+            "banda": float(g[banda_m, 0]), "banda_m": int(banda_m), "k=0": float(g[0, 0])}
+
+
+def main_moneta(argv):
+    global EPS_MONETA
+    import _presidio
+    _presidio.avvia(__file__)
+    import composizione as CM
+    L = LATO_D0
+    print("=" * 100)
+    print("LA MONETA NEL GRUPPO FINITO (eps dtau = pi/2) CONTRO L'INSTABILITA' DI S3 -- SOLO R2")
+    print("=" * 100)
+    print("  LA CONFIGURAZIONE INTERA, dichiarata:")
+    print("  il passo: %d pezzi, impronta %s (leggi.yaml INTATTO: eps cambia SOLO nella scena);"
+          " lato %d; R2 (S3 sola, cs spento); base proiettata, N dtau %g; norma, seconda meta'"
+          % (len(CM.ORDINE), CM.IMPRONTA, L, TEMPO_LUNGO))
+    print("  i bracci: %s" % "; ".join("%s dtau %g eps %.6f (eps dtau %.4f pi)"
+                                       % (n_, d_, e_, e_ * d_ / np.pi) for n_, d_, e_ in BRACCI_MONETA))
+    print("-" * 100)
+    sys.stdout.flush()
+    io.open(JSONL_MONETA, "w", encoding="utf-8").close()
+    rif = None
+    with io.open(JSONL_PROIETTATA, encoding="utf-8") as f:
+        for riga in f:
+            q = json.loads(riga)
+            if q["nome"] == "R2 lato 32":
+                rif = famiglie(q["pend"]["meta_norm"], L)
+    print("  RIF (riletto da 594417f6, norma): massimo %.4f a %s; (pi,pi) %.4f; (pi,0) %.4f;"
+          " banda %.4f a m = %d; k=0 %.4f" % (rif["massimo"], rif["dove"], rif["(pi,pi)"],
+                                             rif["(pi,0)"], rif["banda"], rif["banda_m"], rif["k=0"]))
+    soglia_stabile = 1e-3 * 0.407
+    print("### I CONTROLLI")
+    vecchio = vecchio_jsonl("R2 (a) S3 sola")
+    EPS_MONETA = None
+    b = braccio("R2 (a) S3 sola", 31, 0.125, X, False, (), EPS_REL)
+    if not esito("il conto di c38367db (senza argomenti) AL BIT: R2 a lato 31",
+                 np.array_equal(np.asarray(b["gamma"]), np.asarray(vecchio["gamma"]))):
+        return 1
+    ris = {}
+    for nome, dt, e in BRACCI_MONETA:
+        EPS_MONETA = float(e)
+        if nome in ("A", "B"):
+            u = moneta_matrice(dt)
+            esito("%s: la moneta di un tick = -i sigma.n_h entro 64 ulp" % nome, u <= 64.0,
+                  "%.1f ulp" % u)
+        c2 = c2_esatto_lungo(L, dt)
+        tetto = c2["N"] * ULP_C2 * EPS
+        ok = esito("%s: la camminata sola ESATTA, modulo 1 entro N * 64 ulp" % nome,
+                   c2["dev"] <= tetto, "%.3e contro %.3e" % (c2["dev"], tetto))
+        b = braccio_proiettato("R2 %s" % nome, L, dt, X, False, (), EPS_REL, TEMPO_LUNGO)
+        valido = ok and b["fine"] == "N" and b["uniformita_ulp"] <= SOGLIA_UNIF
+        esito("%s: base valida (uniformita' <= %g ulp), braccio finito" % (nome, SOGLIA_UNIF),
+              valido, "%.1f ulp, %s, %.0f s" % (b["uniformita_ulp"], b["fine"], b["secondi"]))
+        if nome == "B":
+            b2 = braccio_proiettato("R2 B eps 1e-6", L, dt, X, False, (), EPS_REL_2, TEMPO_LUNGO)
+            d = float(np.max(np.abs(np.asarray(b["pend"]["meta_norm"]) -
+                                    np.asarray(b2["pend"]["meta_norm"]))))
+            gm = float(np.max(b["pend"]["meta_norm"]))
+            valido &= esito("B: linearita' 1e-7 contro 1e-6 <= %g del massimo" % BANDA_LIN,
+                            d <= BANDA_LIN * gm, "%.3e contro %.3e" % (d, BANDA_LIN * gm))
+        if not valido:
+            print("  ### %s NON VALIDO: una prova del metodo e' caduta, e non si legge" % nome)
+            ris[nome] = None
+            continue
+        fa = famiglie(b["pend"]["meta_norm"], L)
+        ris[nome] = fa
+        stab = fa["massimo"] <= soglia_stabile
+        print("  %-5s massimo %+.4f a %s  -> %s (rapporto con RIF %.3f);  (pi,pi) %+.4f  (pi,0) %+.4f"
+              "  banda %+.4f a m = %d (%.3f pi)  k=0 %+.4f"
+              % (nome, fa["massimo"], fa["dove"], "STABILE" if stab else "INSTABILE",
+                 fa["massimo"] / rif["massimo"], fa["(pi,pi)"], fa["(pi,0)"], fa["banda"],
+                 fa["banda_m"], 2.0 * fa["banda_m"] / L, fa["k=0"]))
+        with io.open(JSONL_MONETA, "a", encoding="utf-8") as f:
+            f.write(json.dumps({"braccio": nome, "dtau": dt, "eps": e, "famiglie": fa,
+                                "uniformita_ulp": b["uniformita_ulp"],
+                                "pend_meta_norm": np.asarray(b["pend"]["meta_norm"]).tolist()})
+                    + "\n")
+        sys.stdout.flush()
+    EPS_MONETA = None
+    print("-" * 100)
+    print("### LE LETTURE (fissate nel task history, sez. 3-bis)")
+    if all(ris.get(k_) for k_ in ("B", "C045", "C055")):
+        mb, m1, m2 = ris["B"]["massimo"], ris["C045"]["massimo"], ris["C055"]["massimo"]
+        dc = abs(m1 - m2)
+        spec = abs(mb - m1) > 3 * dc and abs(mb - m2) > 3 * dc
+        print("  PUNTO SPECIALE? B %.4f, C045 %.4f, C055 %.4f; |B-C045| %.4f, |B-C055| %.4f contro"
+              " 3 |C045-C055| = %.4f -> %s" % (mb, m1, m2, abs(mb - m1), abs(mb - m2), 3 * dc,
+                                               "PUNTO SPECIALE" if spec else "TENDENZA CONTINUA"))
+    else:
+        print("  PUNTO SPECIALE: non leggibile (un braccio non vale)")
+    if ris.get("A") and ris.get("B"):
+        d = abs(ris["A"]["massimo"] - ris["B"]["massimo"])
+        print("  A CONTRO B: |A - B| %.4f contro il 5%% di 0.407 = %.4f -> %s"
+              % (d, 0.05 * 0.407, "CONTA COME SI ARRIVA A pi/2" if d > 0.05 * 0.407 else
+                 "la condizione sul tick basta"))
+    else:
+        print("  A CONTRO B: non leggibile (A o B non vale)")
+    print("=" * 100)
+    print("### %d/%d prove passate. NESSUNA DECISIONE SULLA PREMESSA." % tuple(OK))
+    print("=" * 100)
+    return 0
+
 if __name__ == "__main__":
     if sys.argv[1:2] == ["--lungo"]:
         sys.exit(main_lungo(sys.argv[2:]))
@@ -1435,4 +1583,6 @@ if __name__ == "__main__":
         sys.exit(main_risonanza(sys.argv[2:]))
     if sys.argv[1:2] == ["--verdetto-taglie"]:
         sys.exit(main_verdetto(sys.argv[2:]))
+    if sys.argv[1:2] == ["--moneta"]:
+        sys.exit(main_moneta(sys.argv[2:]))
     sys.exit(main(sys.argv[1:]))
