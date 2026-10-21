@@ -92,6 +92,22 @@
   mostrato stabile)*; `nu` dalla stessa corsa. ### **Costo:** `~130` s per `x` *(`594417f6`)*.
 - **Il grafico:** ### **opzionale, e non lo faccio** in questo giro *(il referto stampa le curve)*.
 
+## 4-bis. ANNOTAZIONE DEL `2026-10-21`, `10:00`, PRIMA DEL CODICE: `D0` RIFATTO COL RILEVATORE CORRETTO *(decisione di Luca sullo STOP di `ac9d0d7d`; si annota, non si riscrive)*
+
+- **a) ERRORE `n.28` DEL GUARDIANO:** ### **il caso permutato e' un test VUOTO per le condizioni che non dipendono da `nu`** *(`K5`, `K6`)*: ### **non possono fallire per costruzione.** Il permutato ha funzionato ### **per caso**, facendo emergere la degenerazione *(`C.5`)*.
+- **b) IL RILEVATORE NUOVO, fissato qui:**
+  - ### **DEGENERAZIONE:** una combinazione con residuo ### **IDENTICAMENTE nullo** -- `|r(m)| <= 64` ulp della sua scala ### **su TUTTI gli `m` di un asse** *(la scala: il massimo, sugli `m`, della somma dei valori assoluti dei suoi termini)* -- ### **si esclude, e si stampa come tale** *(quali rami e quali fasi della pompa, e perche' doppi)*;
+  - ### **L'INCROCIO:** dove il residuo ### **cambia segno davvero** fra `m` e `m + 1` *(`r(m) r(m+1) < 0`, senza il salto di `2 pi / dtau`)*, ### **oppure vale zero in un `m` isolato** *(la combinazione non e' degenere)*;
+  - ### **SPECIFICITA', per OGNI condizione e OGNI asse:** la frazione degli `m = 1..16` che stanno ### **entro `1` passo da un suo incrocio.** ### **Se supera il `20%`, la condizione e' NON INFORMATIVA su quell'asse, e non puo' «tenere».**
+  - ### **Il caso permutato resta il caso che deve fallire SOLO per `K1`-`K4`** *(dipendono da `nu`)*; ### **per `K5` e `K6` il caso che deve fallire e' la specificita'.**
+- **c) LA LISTA RESTA QUELLA CHIUSA** *(`K1`-`K6`)*, e ### **il criterio delle `09:22` resta com'e':** tutti e tre gli `x`, entrambi gli assi, entro `1` passo. ### ⚠ **Il guardiano segnala, senza cambiare il criterio:** sulla diagonale a `x 0.01` il massimo e' `(pi, pi)`, ### **cioe' l'altra famiglia** *(il picco)*: ### **e' per questo che `K3` cade li'** *(`1.17`)*. ### **Cambiare il criterio ora, dopo i numeri, sarebbe adattarlo ai dati: NON si fa.** ### **La lettura di `K3` «solo sulla banda» resta INFORMAZIONE.**
+- **d) I CASI SINTETICI DEL RILEVATORE:**
+  - ### **DEVE RIUSCIRE:** una combinazione costruita a mano col residuo `r(m) = m - 8` *(un incrocio vero a `m = 8`)*: ### **il rilevatore lo trova a distanza `0`** dal massimo a `m = 8, e con specificita' `<= 20%`** *(`3` `m` su `16`, il `18.75%`)*;
+  - ### **DEVE FALLIRE:** due rami sintetici IDENTICI *(residuo nullo ovunque)*: ### **DEGENERAZIONE, non incrocio.**
+- **e) LE MISURE AL BIT con `ac9d0d7d`:** `omega_a(k)` ### **al bit**, `gamma(k)` ### **entro `1e-12`**, lette dal suo `jsonl` prima di scrivere il nuovo.
+- **f) INFORMAZIONE POST HOC, non verdetto** *(formulata DOPO i numeri di `ac9d0d7d`, e dichiarata tale)*: ### **la velocita' di gruppo** `d omega_a / dk` dei rami gia' misurati lungo `(m, 0)`, e dove ha il massimo.
+- **Il referto nuovo:** `doc/referti_l2/d0_risonanza_bis.txt` e `.jsonl`; ### **quello di `ac9d0d7d` resta valido al suo commit.**
+
 ## 5. TODO
 
 1. Questo task history, ### **committato DA SOLO.**
