@@ -1035,7 +1035,11 @@ DTAU_D0 = 0.125
 XX_D0 = (0.01, 0.1, 1.0)
 PESO_POMPA = 1e-6              # il peso minimo di una fase della pompa, dal task history
 TOLL_PASSI = 1.0               # la distanza massima in passi di k, dal mandato
-JSONL_D0 = os.path.join(RADICE, "doc", "referti_l2", "d0_risonanza.jsonl")
+JSONL_D0_VECCHIO = os.path.join(RADICE, "doc", "referti_l2", "d0_risonanza.jsonl")
+# ### ⭐ **Dal `2026-10-21` alle `10:00`: il referto rifatto ha il suo file** -- quello di
+# ### `ac9d0d7d` resta valido al suo commit, e qui si LEGGE per le misure al bit.
+JSONL_D0 = os.path.join(RADICE, "doc", "referti_l2", "d0_risonanza_bis.jsonl")
+SOGLIA_SPEC = 0.20            # la specificita' massima, dal mandato delle 10:00
 CONDIZIONI = (("K1", "interbanda", 1), ("K2", "interbanda", 2), ("K3", "laterali", 1),
               ("K4", "laterali", 2), ("K5", "laterali", 0), ("K6", "precessione", None))
 
@@ -1094,57 +1098,89 @@ def avvolgi(r, dtau):
 
 
 def residui(nome, om_k, om_mk, Om, nu, dtau):
-    """### `(m, combinazioni)`: i residui di una condizione lungo una retta (`om_*` `(M, 12)`)."""
+    """### `(R, scala, etichette)` di una condizione lungo una retta (`om_*` `(M, 12)`).
+
+    ### ⭐ **Dal `2026-10-21` alle `10:00`** *(annotazione `4-bis`)*: ### **anche la SCALA di ogni
+    combinazione** *(il massimo sugli `m` della somma dei valori assoluti dei termini)* ### **e la
+    sua ETICHETTA**, perche' ### **una DEGENERAZIONE si riconosce e si stampa.**
+    """
     _n, tipo, molt = [c for c in CONDIZIONI if c[0] == nome][0]
-    M = om_k.shape[0]
-    out = []
-    if tipo == "interbanda":
-        d = om_k[:, :, None] - om_k[:, None, :]
-        iu = ~np.eye(NC, dtype=bool)
-        d = d[:, iu]
-        for s in (1, -1):
-            out.append(d - s * molt * nu)
-    elif tipo == "laterali":
-        sm = om_k[:, :, None] + om_mk[:, None, :]
-        sm = sm.reshape(M, -1)
-        pp = np.array([a + b for a in Om for b in Om])
-        base = sm[:, :, None] - pp[None, None, :]
-        base = base.reshape(M, -1)
-        for s in ((1, -1) if molt else (0,)):
-            out.append(base - s * molt * nu)
+    cols, sc, lab = [], [], []
+    a_ = np.abs(om_k)
+    if tipo in ("interbanda", "precessione"):
+        coppie_om = [(a, b) for a in range(NC) for b in range(NC) if a != b]
+        if tipo == "interbanda":
+            sposta = [(s * molt * nu, abs(molt * nu), "s=%+d" % s) for s in (1, -1)]
+        else:
+            sposta = [(Om[p] - Om[q], abs(Om[p]) + abs(Om[q]), "p=%d q=%d" % (p, q))
+                      for p in range(len(Om)) for q in range(len(Om)) if p != q]
+        for a, b in coppie_om:
+            for v, av, et in sposta:
+                cols.append(om_k[:, a] - om_k[:, b] - v)
+                sc.append(float(np.max(a_[:, a] + a_[:, b])) + av)
+                lab.append("rami %d,%d %s" % (a, b, et))
     else:
-        d = om_k[:, :, None] - om_k[:, None, :]
-        iu = ~np.eye(NC, dtype=bool)
-        d = d[:, iu]
-        pr = np.array([a - b for a in Om for b in Om if a != b] or [0.0])
-        base = (d[:, :, None] - pr[None, None, :]).reshape(M, -1)
-        out.append(base)
-    return avvolgi(np.concatenate(out, axis=1), dtau)
+        b_ = np.abs(om_mk)
+        segni = (1, -1) if molt else (0,)
+        for a in range(NC):
+            for b in range(NC):
+                for p in range(len(Om)):
+                    for q in range(len(Om)):
+                        for s in segni:
+                            cols.append(om_k[:, a] + om_mk[:, b] - Om[p] - Om[q] - s * molt * nu)
+                            sc.append(float(np.max(a_[:, a] + b_[:, b])) + abs(Om[p]) + abs(Om[q])
+                                      + abs(molt * nu))
+                            lab.append("rami %d,%d pompa %d,%d s=%+d" % (a, b, p, q, s))
+    R = avvolgi(np.stack(cols, axis=1), dtau)
+    return R, np.asarray(sc), lab
 
 
-def incroci(R, dtau):
-    """### Gli `m` (interpolati) dove un residuo cambia segno, senza il salto di `2 pi / dtau`."""
+def degeneri(R, scala):
+    """### Le colonne IDENTICAMENTE nulle: `|r(m)| <= 64 ulp` della scala su TUTTI gli `m`."""
+    return np.all(np.abs(R) <= 64.0 * EPS * scala[None, :], axis=0)
+
+
+def incroci(R, dtau, escluse):
+    """### Gli incroci delle colonne NON degeneri: un cambio di segno vero, o uno zero isolato."""
+    R = R[:, ~escluse]
     a, b = R[:-1], R[1:]
-    ok = (a * b <= 0) & (np.abs(a) + np.abs(b) < np.pi / dtau)
+    ok = (a * b < 0) & (np.abs(a) + np.abs(b) < np.pi / dtau)
     mi, ci = np.nonzero(ok)
-    fr = np.where(np.abs(a[mi, ci] - b[mi, ci]) > 0,
-                  np.abs(a[mi, ci]) / np.abs(a[mi, ci] - b[mi, ci] + 1e-300), 0.0)
-    return np.unique(np.round(mi + fr, 6))
+    fr = np.abs(a[mi, ci]) / np.abs(a[mi, ci] - b[mi, ci])
+    zi, _zc = np.nonzero(R == 0.0)
+    return np.unique(np.concatenate([np.round(mi + fr, 6), zi.astype(float)]))
 
 
-def distanza(nome, rette, gm, nu, Om, dtau):
-    """### Per ogni retta: `(m del massimo, incrocio piu' vicino, distanza in passi)`."""
+def specificita(cr, m_max):
+    """### La frazione degli `m = 1..m_max` entro `1` passo da un incrocio."""
+    if len(cr) == 0:
+        return 0.0
+    mm = np.arange(1, m_max + 1, dtype=float)
+    return float(np.mean(np.min(np.abs(mm[:, None] - cr[None, :]), axis=1) <= TOLL_PASSI))
+
+
+def esamina(nome, rette, gm, nu, Om, dtau):
+    """### Per ogni retta: `(m del massimo, incrocio vicino, distanza, specificita', degeneri)`."""
     fuori = {}
     for rn, (om_k, om_mk) in rette.items():
         g = gm[rn]
+        M = len(g) - 1
         mmax = 1 + int(np.argmax(g[1:]))
-        cr = incroci(residui(nome, om_k, om_mk, Om, nu, dtau), dtau)
+        R, sc, lab = residui(nome, om_k, om_mk, Om, nu, dtau)
+        es = degeneri(R, sc)
+        cr = incroci(R, dtau, es)
+        spec = specificita(cr, M)
         if len(cr) == 0:
-            fuori[rn] = (mmax, None, float("inf"))
+            fuori[rn] = (mmax, None, float("inf"), spec, [l_ for l_, e in zip(lab, es) if e])
         else:
             j = int(np.argmin(np.abs(cr - mmax)))
-            fuori[rn] = (mmax, float(cr[j]), float(abs(cr[j] - mmax)))
+            fuori[rn] = (mmax, float(cr[j]), float(abs(cr[j] - mmax)), spec,
+                         [l_ for l_, e in zip(lab, es) if e])
     return fuori
+
+
+def tiene(dd):
+    return all(di <= TOLL_PASSI and sp <= SOGLIA_SPEC for (_m, _c, di, sp, _d) in dd.values())
 
 
 def main_risonanza(argv):
@@ -1154,21 +1190,39 @@ def main_risonanza(argv):
     L, dt = LATO_D0, DTAU_D0
     h = L // 2
     print("=" * 100)
-    print("D0: LA BANDA DI S3 E' UNA RISONANZA FRA LA CAMMINATA E IL RITMO DI S3? -- una diagnosi")
+    print("D0 RIFATTO: IL RILEVATORE CORRETTO, LA STESSA LISTA CHIUSA -- una diagnosi")
     print("=" * 100)
     print("  LA CONFIGURAZIONE INTERA, dichiarata:")
     print("  il passo: %d pezzi, impronta %s; lato %d, dtau %g; R2 (S3 sola, cs spento) con la base"
           " proiettata, N dtau %g, x in %s" % (len(CM.ORDINE), CM.IMPRONTA, L, dt, TEMPO_LUNGO,
                                                XX_D0))
-    print("  la dispersione: la camminata sola ESATTA, A(k) 12x12 complessa, omega in (-pi/dtau,"
-          " pi/dtau], rami ordinati, materia (8) e vuoto (4) separati")
-    print("  gamma(k): la pendenza della seconda meta', stimatore della NORMA; le rette (m,0) e (m,m),"
-          " m = 1..%d; la tolleranza %g passo di k (pi/%d)" % (h, TOLL_PASSI, h))
-    print("  la lista CHIUSA: %s" % ", ".join("%s %s%s" % (c[0], c[1], "" if c[2] is None else
-                                                         " x%d nu" % c[2]) for c in CONDIZIONI))
+    print("  il rilevatore (annotazione 4-bis): DEGENERAZIONE se |r| <= 64 ulp della scala su tutto"
+          " l'asse; incrocio = cambio di segno vero o zero isolato; SPECIFICITA' > %g -> non"
+          " informativa; il permutato solo per K1-K4" % SOGLIA_SPEC)
+    print("  la lista CHIUSA: %s; la tolleranza %g passo di k (pi/%d)"
+          % (", ".join(c[0] for c in CONDIZIONI), TOLL_PASSI, h))
     print("-" * 100)
     sys.stdout.flush()
+    vecchio_d0 = json.loads(io.open(JSONL_D0_VECCHIO, encoding="utf-8").readline())
     io.open(JSONL_D0, "w", encoding="utf-8").close()
+
+    print("### I CASI SINTETICI DEL RILEVATORE")
+    mm = np.arange(h + 1, dtype=float)
+    Rv = (mm - 8.0)[:, None]
+    scv = np.array([16.0])
+    es = degeneri(Rv, scv)
+    cr = incroci(Rv, dt, es)
+    sp = specificita(cr, h)
+    ok_s = esito("DEVE RIUSCIRE: un incrocio vero a m = 8, trovato a distanza 0, specificita' <= %g"
+                 % SOGLIA_SPEC, (not es[0]) and len(cr) == 1 and abs(cr[0] - 8.0) == 0.0
+                 and sp <= SOGLIA_SPEC, "incroci %s, specificita' %.4f" % (list(cr), sp))
+    Rz = np.zeros((h + 1, 1))
+    esz = degeneri(Rz, np.array([6.0]))
+    ok_s &= esito("DEVE FALLIRE: due rami IDENTICI -> DEGENERAZIONE, non incrocio",
+                  bool(esz[0]) and len(incroci(Rz, dt, esz)) == 0)
+    if not ok_s:
+        print("### STOP: il rilevatore e' rotto")
+        return 1
 
     print("### I CASI DI CONTROLLO E LE PROVE")
     vecchio = vecchio_jsonl("R2 (a) S3 sola")
@@ -1185,26 +1239,21 @@ def main_risonanza(argv):
     A, lin = camminata_complessa(L, dt)
     om_m, dev_m = fasi(A[..., :8, :8], dt)
     om_v, dev_v = fasi(A[..., 8:, 8:], dt)
-    fuori_blocco = float(max(np.max(np.abs(A[..., :8, 8:])), np.max(np.abs(A[..., 8:, :8]))))
-    if not esito("la camminata sola e' LINEARE IN SENSO COMPLESSO: risposta(i e) = i risposta(e)",
-                 lin <= 64 * EPS, "%.3e" % lin):
-        return 1
-    if not esito("i suoi autovalori hanno modulo 1 (materia e vuoto)",
-                 max(dev_m, dev_v) <= 64 * EPS, "%.3e, %.3e" % (dev_m, dev_v)):
-        return 1
-    esito("psi e phi NON si mescolano nella camminata sola (i blocchi fuori diagonale)",
-          fuori_blocco <= 64 * EPS, "%.3e" % fuori_blocco)
-    om = np.concatenate([om_m, om_v], axis=-1)
-    om = np.sort(om, axis=-1)
+    esito("la camminata sola e' LINEARE IN SENSO COMPLESSO", lin <= 64 * EPS, "%.3e" % lin)
+    esito("i suoi autovalori hanno modulo 1", max(dev_m, dev_v) <= 64 * EPS,
+          "%.3e, %.3e" % (dev_m, dev_v))
+    om = np.sort(np.concatenate([om_m, om_v], axis=-1), axis=-1)
     Om_t = pompa(dt)
     Om = [o for o, _w in Om_t]
-    print("  LA POMPA (le fasi k = 0 della materia occupate dallo stato uniforme, peso > %g): %s"
-          % (PESO_POMPA, "; ".join("omega %+.6f peso %.6f" % (o, w) for o, w in Om_t)))
-    if len(Om) > 1:
-        print("  la precessione (differenze): %s" % " ".join(
-            "%+.6f" % (a - c) for a in Om for c in Om if a > c))
-    proj = lungo_jsonl  # (solo per non confondere i nomi qui sotto)
-    _ = proj
+    print("  LA POMPA: %s" % "; ".join("omega %+.6f peso %.6f" % (o, w) for o, w in Om_t))
+    rette = {}
+    for rn, idx in (("(m,0)", lambda m: (m % L, 0)), ("(m,m)", lambda m: (m % L, m % L))):
+        rette[rn] = (np.array([om[idx(m)] for m in range(h + 1)]),
+                     np.array([om[idx(-m)] for m in range(h + 1)]))
+    bit = all(np.array_equal(np.asarray(rette[rn][i]), np.asarray(vecchio_d0["omega"][rn][i]))
+              for rn in rette for i in (0, 1))
+    if not esito("omega_a(k) AL BIT con ac9d0d7d", bit):
+        return 1
     pr_vecchio = None
     with io.open(JSONL_PROIETTATA, encoding="utf-8") as f:
         for riga in f:
@@ -1221,67 +1270,66 @@ def main_risonanza(argv):
         pn = np.asarray(b["pend"]["meta_norm"])
         gm[x] = {"(m,0)": [float(pn[m, 0]) for m in range(h + 1)],
                  "(m,m)": [float(pn[m, m]) for m in range(h + 1)]}
+        dv = max(float(np.max(np.abs(np.asarray(gm[x][rn]) -
+                                     np.asarray(vecchio_d0["gamma"][str(x)][rn]))))
+                 for rn in gm[x])
+        if not esito("gamma(k) di R2 x %g entro 1e-12 da ac9d0d7d" % x, dv <= 1e-12, "%.3e" % dv):
+            return 1
         if x == 0.1:
             d = max(float(np.max(np.abs(np.asarray(b["pend"][k_]) -
                                         np.asarray(pr_vecchio["pend"][k_]))))
                     for k_ in ("meta_eig", "meta_norm"))
-            if not esito("DEVE RIUSCIRE: R2 x 0.1 = 594417f6 entro 1e-3 su ogni k, due stimatori",
-                         d <= 1e-3, "%.3e" % d):
-                return 1
-        print("  R2 x %-5g  nu_S3 %.6f  uniformita' %.1f ulp  [%.0f s]"
-              % (x, nus[x], b["uniformita_ulp"], b["secondi"]))
+            esito("R2 x 0.1 = 594417f6 entro 1e-3", d <= 1e-3, "%.3e" % d)
+        print("  R2 x %-5g  nu_S3 %.6f  [%.0f s]" % (x, nus[x], b["secondi"]))
         sys.stdout.flush()
     print("-" * 100)
 
-    print("### LA DISPERSIONE DELLA CAMMINATA, omega_a(k) (in 1/tempo), lungo le rette")
-    rette = {}
-    for rn, idx in (("(m,0)", lambda m: (m % L, 0)), ("(m,m)", lambda m: (m % L, m % L))):
-        ok = np.array([om[idx(m)] for m in range(h + 1)])
-        omk = np.array([om[idx(-m)] for m in range(h + 1)])
-        rette[rn] = (ok, omk)
-        print("  %s:" % rn)
-        for m in range(0, h + 1, 2):
-            print("     m %2d  %s" % (m, " ".join("%+.3f" % v for v in ok[m])))
-    print("### gamma(k) di R2 (pendenza della seconda meta', norma), lungo le rette")
-    for x in XX_D0:
-        for rn in ("(m,0)", "(m,m)"):
-            g = gm[x][rn]
-            mm = 1 + int(np.argmax(g[1:]))
-            print("  x %-5g %s  massimo a m = %2d (%.3f pi) %+.4f;  %s"
-                  % (x, rn, mm, 2.0 * mm / L, g[mm], " ".join("%+.3f" % v for v in g)))
-    print("-" * 100)
-
-    print("### LE CONDIZIONI: il m del massimo, l'incrocio piu' vicino, la distanza (passi di k)")
-    tengono = []
-    risultati = {}
+    print("### LE CONDIZIONI: massimo, incrocio vicino, distanza, specificita', degenerazioni")
+    tengono, risultati = [], {}
     for nome, _t, _mo in CONDIZIONI:
         tutte = True
-        righe = []
+        print("  %s" % nome)
         for x in XX_D0:
-            dd = distanza(nome, rette, {rn: gm[x][rn] for rn in rette}, nus[x], Om, dt)
-            for rn, (mm, cr, di) in dd.items():
-                righe.append("x %-5g %s max %2d incrocio %s dist %s"
-                             % (x, rn, mm, "%.2f" % cr if cr is not None else "-",
-                                "%.2f" % di if di != float("inf") else "inf"))
-                tutte &= di <= TOLL_PASSI
+            dd = esamina(nome, rette, {rn: gm[x][rn] for rn in rette}, nus[x], Om, dt)
             risultati[(nome, x)] = dd
-        print("  %s  %s" % (nome, "TIENE" if tutte else "non tiene"))
-        for r_ in righe:
-            print("       %s" % r_)
+            tutte &= tiene(dd)
+            for rn, (mx_, cr_, di, sp, dg) in dd.items():
+                print("       x %-5g %s max %2d incrocio %s dist %s specificita' %.3f%s  degeneri %d"
+                      % (x, rn, mx_, "%.2f" % cr_ if cr_ is not None else "-",
+                         "%.2f" % di if di != float("inf") else "inf", sp,
+                         " NON INFORMATIVA" if sp > SOGLIA_SPEC else "", len(dg)))
+        print("     -> %s" % ("TIENE" if tutte else "non tiene"))
         if tutte:
             tengono.append(nome)
+    print("### LE DEGENERAZIONI escluse (una retta, x 0.1: le prime per condizione)")
+    for nome, _t, _mo in CONDIZIONI:
+        for rn in ("(m,0)", "(m,m)"):
+            dg = risultati[(nome, 0.1)][rn][4]
+            if dg:
+                print("  %s %s: %d combinazioni, per esempio %s" % (nome, rn, len(dg), "; ".join(dg[:3])))
+    print("  (i rami sono doppi per la simmetria della camminata, e la pompa occupa due fasi doppie:"
+          " le differenze fra le copie sono zero ovunque)")
     print("-" * 100)
-    print("### IL CASO PERMUTATO (deve fallire), per ogni condizione che tiene")
+    print("### IL CASO PERMUTATO (deve fallire), SOLO per K1-K4 che tengono")
     troppo_larga = []
     for nome in tengono:
+        if nome in ("K5", "K6"):
+            print("  %s non dipende da nu: il suo caso che deve fallire e' la specificita'" % nome)
+            continue
         for perm in ((XX_D0[2], XX_D0[0], XX_D0[1]), (XX_D0[1], XX_D0[2], XX_D0[0])):
-            tutte = True
-            for x, xp in zip(XX_D0, perm):
-                dd = distanza(nome, rette, {rn: gm[x][rn] for rn in rette}, nus[xp], Om, dt)
-                tutte &= all(di <= TOLL_PASSI for (_m, _c, di) in dd.values())
+            tutte = all(tiene(esamina(nome, rette, {rn: gm[x][rn] for rn in rette}, nus[xp], Om,
+                                      dt)) for x, xp in zip(XX_D0, perm))
             esito("DEVE FALLIRE: %s col nu permutato %s" % (nome, perm), not tutte)
             if tutte:
                 troppo_larga.append(nome)
+    print("-" * 100)
+    print("### INFORMAZIONE POST HOC (dichiarata): la velocita' di gruppo d omega / dk lungo (m,0)")
+    ok_ = rette["(m,0)"][0]
+    kk = 2.0 * np.pi * np.arange(h + 1) / L
+    vg = np.gradient(ok_, kk, axis=0)
+    for a in range(NC):
+        j = int(np.argmax(np.abs(vg[:, a])))
+        print("  ramo %2d  |v_g| massimo %.4f a m = %2d (%.3f pi)" % (a, abs(vg[j, a]), j, 2.0 * j / L))
     print("=" * 100)
     if troppo_larga:
         v = "STOP: il criterio e' TROPPO LARGO (%s tiene anche col nu permutato)" % troppo_larga
@@ -1294,16 +1342,15 @@ def main_risonanza(argv):
     print("### IL VERDETTO: %s" % v)
     with io.open(JSONL_D0, "a", encoding="utf-8") as f:
         f.write(json.dumps({"pompa": Om_t, "nu": {str(k_): v_ for k_, v_ in nus.items()},
-                            "omega": {rn: [r.tolist() for r in rette[rn]] for rn in rette},
                             "gamma": {str(k_): v_ for k_, v_ in gm.items()},
-                            "distanze": {"%s %s" % k_: {rn: list(v_) for rn, v_ in d_.items()}
-                                         for k_, d_ in risultati.items()},
-                            "tengono": tengono, "troppo_larga": troppo_larga,
-                            "verdetto": v}) + "\n")
+                            "esame": {"%s %s" % k_: {rn: [v_[0], v_[1], v_[2], v_[3], len(v_[4])]
+                                                     for rn, v_ in d_.items()}
+                                      for k_, d_ in risultati.items()},
+                            "v_gruppo_m0": vg.tolist(), "tengono": tengono,
+                            "troppo_larga": troppo_larga, "verdetto": v}) + "\n")
     print("### %d/%d prove passate. NESSUNA CURA SCELTA." % tuple(OK))
     print("=" * 100)
     return 0
-
 
 if __name__ == "__main__":
     if sys.argv[1:2] == ["--lungo"]:
