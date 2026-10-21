@@ -23,6 +23,7 @@ misure.**
 Gira con:  python csv/_stabilita_lineare.py            (il conto di `c38367db`)
            python csv/_stabilita_lineare.py --lungo    (l'intervallo lungo, a lati pari)
            python csv/_stabilita_lineare.py --proiettata  (la base proiettata, gamma come pendenza)
+           python csv/_stabilita_lineare.py --risonanza   (D0: la dispersione della camminata contro la banda di S3)
 """
 import io
 import json
@@ -1023,9 +1024,292 @@ def main_proiettata(argv):
     return 0
 
 
+# =====================================================================================
+#   D0: LA RISONANZA  (mandato di Luca del 2026-10-21, 09:22)
+#   ### task history `2026-10-21_d0_risonanza.md` (`605f006b`), con la LISTA CHIUSA delle
+#   ### condizioni scritta prima dei numeri. ### ⛔ **SI AGGIUNGE, non si riscrive:** i modi
+#   ### di prima restano, e le prove li rifanno AL BIT.
+# =====================================================================================
+LATO_D0 = 32
+DTAU_D0 = 0.125
+XX_D0 = (0.01, 0.1, 1.0)
+PESO_POMPA = 1e-6              # il peso minimo di una fase della pompa, dal task history
+TOLL_PASSI = 1.0               # la distanza massima in passi di k, dal mandato
+JSONL_D0 = os.path.join(RADICE, "doc", "referti_l2", "d0_risonanza.jsonl")
+CONDIZIONI = (("K1", "interbanda", 1), ("K2", "interbanda", 2), ("K3", "laterali", 1),
+              ("K4", "laterali", 2), ("K5", "laterali", 0), ("K6", "precessione", None))
+
+
+def camminata_complessa(lato, dtau):
+    """### `A(k)` `(L, L, 12, 12)` della camminata sola, ESATTA, e la prova di linearita' complessa."""
+    inc, mot, st, par = scena(lato, dtau, X)
+    n = inc.n
+    for k in st:
+        st[k][...] = 0
+    zero = copia(st)
+    passo(zero, mot, par, False, (S3,), 0.0)
+    A = np.empty((lato, lato, NC, NC), dtype=complex)
+    peggio = 0.0
+    for c in range(NC):
+        p = copia(st)
+        perturba(p, c, 1.0)
+        passo(p, mot, par, False, (S3,), 0.0)
+        r = celle(p, n)
+        z = r[:, :NC] + 1j * r[:, NC:]
+        A[:, :, :, c] = np.fft.fft2(z.reshape(lato, lato, NC), axes=(0, 1))
+        q = copia(st)
+        perturba(q, c + NC, 1.0)
+        passo(q, mot, par, False, (S3,), 0.0)
+        r2 = celle(q, n)
+        z2 = r2[:, :NC] + 1j * r2[:, NC:]
+        peggio = max(peggio, float(np.max(np.abs(z2 - 1j * z))))
+    return A, peggio
+
+
+def fasi(B, dtau):
+    """### `omega` in `(-pi/dtau, pi/dtau]`, ordinate, e lo scarto massimo di `|lambda|` da `1`."""
+    lam = np.linalg.eigvals(B)
+    om = -np.angle(lam) / dtau
+    return np.sort(om, axis=-1), float(np.max(np.abs(np.abs(lam) - 1.0)))
+
+
+def pompa(dtau):
+    """### Le fasi `k = 0` della MATERIA occupate dallo stato uniforme, coi pesi."""
+    inc, mot, st, par = scena(LATO_D0, dtau, X)
+    A, _ = camminata_complessa(LATO_D0, dtau)
+    Am = A[0, 0][:8, :8]
+    lam, V = np.linalg.eig(Am)
+    c = celle(st, inc.n)[0]
+    z0 = (c[:NC] + 1j * c[NC:])[:8]
+    coef = np.linalg.solve(V, z0)
+    w = np.abs(coef) ** 2 / float(np.sum(np.abs(coef) ** 2))
+    om = -np.angle(lam) / dtau
+    tenute = [(float(o), float(p)) for o, p in zip(om, w) if p > PESO_POMPA]
+    return tenute
+
+
+def avvolgi(r, dtau):
+    m = np.pi / dtau
+    return (r + m) % (2 * m) - m
+
+
+def residui(nome, om_k, om_mk, Om, nu, dtau):
+    """### `(m, combinazioni)`: i residui di una condizione lungo una retta (`om_*` `(M, 12)`)."""
+    _n, tipo, molt = [c for c in CONDIZIONI if c[0] == nome][0]
+    M = om_k.shape[0]
+    out = []
+    if tipo == "interbanda":
+        d = om_k[:, :, None] - om_k[:, None, :]
+        iu = ~np.eye(NC, dtype=bool)
+        d = d[:, iu]
+        for s in (1, -1):
+            out.append(d - s * molt * nu)
+    elif tipo == "laterali":
+        sm = om_k[:, :, None] + om_mk[:, None, :]
+        sm = sm.reshape(M, -1)
+        pp = np.array([a + b for a in Om for b in Om])
+        base = sm[:, :, None] - pp[None, None, :]
+        base = base.reshape(M, -1)
+        for s in ((1, -1) if molt else (0,)):
+            out.append(base - s * molt * nu)
+    else:
+        d = om_k[:, :, None] - om_k[:, None, :]
+        iu = ~np.eye(NC, dtype=bool)
+        d = d[:, iu]
+        pr = np.array([a - b for a in Om for b in Om if a != b] or [0.0])
+        base = (d[:, :, None] - pr[None, None, :]).reshape(M, -1)
+        out.append(base)
+    return avvolgi(np.concatenate(out, axis=1), dtau)
+
+
+def incroci(R, dtau):
+    """### Gli `m` (interpolati) dove un residuo cambia segno, senza il salto di `2 pi / dtau`."""
+    a, b = R[:-1], R[1:]
+    ok = (a * b <= 0) & (np.abs(a) + np.abs(b) < np.pi / dtau)
+    mi, ci = np.nonzero(ok)
+    fr = np.where(np.abs(a[mi, ci] - b[mi, ci]) > 0,
+                  np.abs(a[mi, ci]) / np.abs(a[mi, ci] - b[mi, ci] + 1e-300), 0.0)
+    return np.unique(np.round(mi + fr, 6))
+
+
+def distanza(nome, rette, gm, nu, Om, dtau):
+    """### Per ogni retta: `(m del massimo, incrocio piu' vicino, distanza in passi)`."""
+    fuori = {}
+    for rn, (om_k, om_mk) in rette.items():
+        g = gm[rn]
+        mmax = 1 + int(np.argmax(g[1:]))
+        cr = incroci(residui(nome, om_k, om_mk, Om, nu, dtau), dtau)
+        if len(cr) == 0:
+            fuori[rn] = (mmax, None, float("inf"))
+        else:
+            j = int(np.argmin(np.abs(cr - mmax)))
+            fuori[rn] = (mmax, float(cr[j]), float(abs(cr[j] - mmax)))
+    return fuori
+
+
+def main_risonanza(argv):
+    import _presidio
+    _presidio.avvia(__file__)
+    import composizione as CM
+    L, dt = LATO_D0, DTAU_D0
+    h = L // 2
+    print("=" * 100)
+    print("D0: LA BANDA DI S3 E' UNA RISONANZA FRA LA CAMMINATA E IL RITMO DI S3? -- una diagnosi")
+    print("=" * 100)
+    print("  LA CONFIGURAZIONE INTERA, dichiarata:")
+    print("  il passo: %d pezzi, impronta %s; lato %d, dtau %g; R2 (S3 sola, cs spento) con la base"
+          " proiettata, N dtau %g, x in %s" % (len(CM.ORDINE), CM.IMPRONTA, L, dt, TEMPO_LUNGO,
+                                               XX_D0))
+    print("  la dispersione: la camminata sola ESATTA, A(k) 12x12 complessa, omega in (-pi/dtau,"
+          " pi/dtau], rami ordinati, materia (8) e vuoto (4) separati")
+    print("  gamma(k): la pendenza della seconda meta', stimatore della NORMA; le rette (m,0) e (m,m),"
+          " m = 1..%d; la tolleranza %g passo di k (pi/%d)" % (h, TOLL_PASSI, h))
+    print("  la lista CHIUSA: %s" % ", ".join("%s %s%s" % (c[0], c[1], "" if c[2] is None else
+                                                         " x%d nu" % c[2]) for c in CONDIZIONI))
+    print("-" * 100)
+    sys.stdout.flush()
+    io.open(JSONL_D0, "w", encoding="utf-8").close()
+
+    print("### I CASI DI CONTROLLO E LE PROVE")
+    vecchio = vecchio_jsonl("R2 (a) S3 sola")
+    b = braccio("R2 (a) S3 sola", 31, 0.125, X, False, (), EPS_REL)
+    if not esito("il conto di c38367db (senza argomenti) AL BIT: R2 a lato 31",
+                 np.array_equal(np.asarray(b["gamma"]), np.asarray(vecchio["gamma"]))):
+        return 1
+    lu = lungo_jsonl("R2 lato 32")
+    b = braccio_lungo("R2 lato 32", 32, 0.125, X, False, (), EPS_REL)
+    if not esito("--lungo (16b5d10f) AL BIT: R2 lato 32, i quattro L",
+                 all(np.array_equal(np.asarray(x_), np.asarray(y_))
+                     for x_, y_ in zip(b["L"], lu["L"]))):
+        return 1
+    A, lin = camminata_complessa(L, dt)
+    om_m, dev_m = fasi(A[..., :8, :8], dt)
+    om_v, dev_v = fasi(A[..., 8:, 8:], dt)
+    fuori_blocco = float(max(np.max(np.abs(A[..., :8, 8:])), np.max(np.abs(A[..., 8:, :8]))))
+    if not esito("la camminata sola e' LINEARE IN SENSO COMPLESSO: risposta(i e) = i risposta(e)",
+                 lin <= 64 * EPS, "%.3e" % lin):
+        return 1
+    if not esito("i suoi autovalori hanno modulo 1 (materia e vuoto)",
+                 max(dev_m, dev_v) <= 64 * EPS, "%.3e, %.3e" % (dev_m, dev_v)):
+        return 1
+    esito("psi e phi NON si mescolano nella camminata sola (i blocchi fuori diagonale)",
+          fuori_blocco <= 64 * EPS, "%.3e" % fuori_blocco)
+    om = np.concatenate([om_m, om_v], axis=-1)
+    om = np.sort(om, axis=-1)
+    Om_t = pompa(dt)
+    Om = [o for o, _w in Om_t]
+    print("  LA POMPA (le fasi k = 0 della materia occupate dallo stato uniforme, peso > %g): %s"
+          % (PESO_POMPA, "; ".join("omega %+.6f peso %.6f" % (o, w) for o, w in Om_t)))
+    if len(Om) > 1:
+        print("  la precessione (differenze): %s" % " ".join(
+            "%+.6f" % (a - c) for a in Om for c in Om if a > c))
+    proj = lungo_jsonl  # (solo per non confondere i nomi qui sotto)
+    _ = proj
+    pr_vecchio = None
+    with io.open(JSONL_PROIETTATA, encoding="utf-8") as f:
+        for riga in f:
+            q = json.loads(riga)
+            if q["nome"] == "R2 lato 32":
+                pr_vecchio = q
+    gm, nus = {}, {}
+    for x in XX_D0:
+        b = braccio_proiettato("R2 lato 32 x %g" % x, L, dt, x, False, (), EPS_REL, TEMPO_LUNGO)
+        if b["fine"] != "N":
+            print("  ### STOP: %s" % b["fine"])
+            return 1
+        nus[x] = b["nu_s3"]
+        pn = np.asarray(b["pend"]["meta_norm"])
+        gm[x] = {"(m,0)": [float(pn[m, 0]) for m in range(h + 1)],
+                 "(m,m)": [float(pn[m, m]) for m in range(h + 1)]}
+        if x == 0.1:
+            d = max(float(np.max(np.abs(np.asarray(b["pend"][k_]) -
+                                        np.asarray(pr_vecchio["pend"][k_]))))
+                    for k_ in ("meta_eig", "meta_norm"))
+            if not esito("DEVE RIUSCIRE: R2 x 0.1 = 594417f6 entro 1e-3 su ogni k, due stimatori",
+                         d <= 1e-3, "%.3e" % d):
+                return 1
+        print("  R2 x %-5g  nu_S3 %.6f  uniformita' %.1f ulp  [%.0f s]"
+              % (x, nus[x], b["uniformita_ulp"], b["secondi"]))
+        sys.stdout.flush()
+    print("-" * 100)
+
+    print("### LA DISPERSIONE DELLA CAMMINATA, omega_a(k) (in 1/tempo), lungo le rette")
+    rette = {}
+    for rn, idx in (("(m,0)", lambda m: (m % L, 0)), ("(m,m)", lambda m: (m % L, m % L))):
+        ok = np.array([om[idx(m)] for m in range(h + 1)])
+        omk = np.array([om[idx(-m)] for m in range(h + 1)])
+        rette[rn] = (ok, omk)
+        print("  %s:" % rn)
+        for m in range(0, h + 1, 2):
+            print("     m %2d  %s" % (m, " ".join("%+.3f" % v for v in ok[m])))
+    print("### gamma(k) di R2 (pendenza della seconda meta', norma), lungo le rette")
+    for x in XX_D0:
+        for rn in ("(m,0)", "(m,m)"):
+            g = gm[x][rn]
+            mm = 1 + int(np.argmax(g[1:]))
+            print("  x %-5g %s  massimo a m = %2d (%.3f pi) %+.4f;  %s"
+                  % (x, rn, mm, 2.0 * mm / L, g[mm], " ".join("%+.3f" % v for v in g)))
+    print("-" * 100)
+
+    print("### LE CONDIZIONI: il m del massimo, l'incrocio piu' vicino, la distanza (passi di k)")
+    tengono = []
+    risultati = {}
+    for nome, _t, _mo in CONDIZIONI:
+        tutte = True
+        righe = []
+        for x in XX_D0:
+            dd = distanza(nome, rette, {rn: gm[x][rn] for rn in rette}, nus[x], Om, dt)
+            for rn, (mm, cr, di) in dd.items():
+                righe.append("x %-5g %s max %2d incrocio %s dist %s"
+                             % (x, rn, mm, "%.2f" % cr if cr is not None else "-",
+                                "%.2f" % di if di != float("inf") else "inf"))
+                tutte &= di <= TOLL_PASSI
+            risultati[(nome, x)] = dd
+        print("  %s  %s" % (nome, "TIENE" if tutte else "non tiene"))
+        for r_ in righe:
+            print("       %s" % r_)
+        if tutte:
+            tengono.append(nome)
+    print("-" * 100)
+    print("### IL CASO PERMUTATO (deve fallire), per ogni condizione che tiene")
+    troppo_larga = []
+    for nome in tengono:
+        for perm in ((XX_D0[2], XX_D0[0], XX_D0[1]), (XX_D0[1], XX_D0[2], XX_D0[0])):
+            tutte = True
+            for x, xp in zip(XX_D0, perm):
+                dd = distanza(nome, rette, {rn: gm[x][rn] for rn in rette}, nus[xp], Om, dt)
+                tutte &= all(di <= TOLL_PASSI for (_m, _c, di) in dd.values())
+            esito("DEVE FALLIRE: %s col nu permutato %s" % (nome, perm), not tutte)
+            if tutte:
+                troppo_larga.append(nome)
+    print("=" * 100)
+    if troppo_larga:
+        v = "STOP: il criterio e' TROPPO LARGO (%s tiene anche col nu permutato)" % troppo_larga
+    elif len(tengono) == 1:
+        v = "D0 TIENE: la condizione %s" % tengono[0]
+    elif not tengono:
+        v = "D0 CADE: nessuna condizione della lista tiene"
+    else:
+        v = "NON DECIDIBILE: tengono %s" % tengono
+    print("### IL VERDETTO: %s" % v)
+    with io.open(JSONL_D0, "a", encoding="utf-8") as f:
+        f.write(json.dumps({"pompa": Om_t, "nu": {str(k_): v_ for k_, v_ in nus.items()},
+                            "omega": {rn: [r.tolist() for r in rette[rn]] for rn in rette},
+                            "gamma": {str(k_): v_ for k_, v_ in gm.items()},
+                            "distanze": {"%s %s" % k_: {rn: list(v_) for rn, v_ in d_.items()}
+                                         for k_, d_ in risultati.items()},
+                            "tengono": tengono, "troppo_larga": troppo_larga,
+                            "verdetto": v}) + "\n")
+    print("### %d/%d prove passate. NESSUNA CURA SCELTA." % tuple(OK))
+    print("=" * 100)
+    return 0
+
+
 if __name__ == "__main__":
     if sys.argv[1:2] == ["--lungo"]:
         sys.exit(main_lungo(sys.argv[2:]))
     if sys.argv[1:2] == ["--proiettata"]:
         sys.exit(main_proiettata(sys.argv[2:]))
+    if sys.argv[1:2] == ["--risonanza"]:
+        sys.exit(main_risonanza(sys.argv[2:]))
     sys.exit(main(sys.argv[1:]))
