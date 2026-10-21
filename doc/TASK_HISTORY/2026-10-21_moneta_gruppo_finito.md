@@ -73,6 +73,16 @@
   - ### **`A` contro `B`:** differenza oltre il `5%` di `0.407` → ### **conta come si arriva a `pi/2`.**
 - ### **La relazione in poche righe:** i numeri, le letture, ### **e se vale la pena fare `R1`.**
 
+## 3-ter. ANNOTAZIONE DEL `2026-10-21`, `16:41`: LA SPAZZATA DI `eps dtau`, SOLO `R2` *(decisione di Luca: l'ultimo run prima dei triangoli; si annota)*
+
+- ### **I bracci:** `R2`, lato `32`, `dtau 0.125`, base proiettata, `N dtau 100`, norma, seconda meta'. ### **NUOVI:** `eps dtau` = `0.60`, `0.65`, `0.70`, `0.75 pi`. ### **RILETTI da `b8197923`** *(non rifatti)*: `0.45`, `0.50` *(`B`)*, `0.55 pi`. ### **Controlli:** la camminata sola esatta a ogni `eps`; la base `<= 1e3` ulp. Nessuna linearita'.
+- ### **LE LETTURE, per ogni `eps dtau`:**
+  - ### **il massimo di gamma su tutti i `k`, DOVE, e la famiglia** *(la componente piu' grande di `|k|`, in unita' di `pi`)*: ### **RETICOLO** se `>= 0.75` su almeno un asse; ### **BANDA** se fra `0.25` e `0.75`; ### **ONDE LUNGHE** se sotto `0.25`;
+  - ### **STABILE** se il massimo `<= 1e-3` di `0.407`; ### **la FINESTRA STABILE** e' l'insieme degli `eps dtau` stabili *(anche vuoto)*;
+  - ### **SENZA RETICOLO** se tutti i `k` con `|k| >= 0.75 pi` su un asse hanno gamma `<= 1e-3` di `0.407`.
+- ### **Nessuna cura:** ### **un `eps` scelto perche' stabilizza sarebbe una toppa** *(`A1`)*.
+- ### **E nello stesso commit dello strumento la correzione della colonna «banda»** *(errore `C.6`: `m` fra `h/4` e `3h/4`)*.
+
 ## 4. TODO
 
 1. Questo task history, ### **committato DA SOLO.**
