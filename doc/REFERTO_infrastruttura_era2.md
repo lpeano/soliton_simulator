@@ -8,22 +8,22 @@
 
 ---
 
-## `0.` IL CONTO DELLE LEGGI — ### **`11`** *(punto `10`)*
+## `0.` IL CONTO DELLE LEGGI — ### **`12`** *(punto `10`)*
 
 > ### ⛔ **OGNI REFERTO LO STAMPA, e un commit che lo AUMENTA deve DICHIARARLO** *(`STANDARD-10`, `AUDIT-CURE`)*: ### **una cura non aumenta il numero delle leggi**, e a parita- di effetto ### **si preferisce togliere un-eccezione.**
 
 | | quante |
 |---|--:|
-| `flusso` | `3` |
+| `flusso` | `4` |
 | `osservatore` | `1` |
 | `pezzo_unitario` | `5` |
 | `termine_arco` | `1` |
 | `termine_nodo` | `1` |
-| **in tutto** | ### **`11`** |
+| **in tutto** | ### **`12`** |
 | di cui ### **`prova: true`** | ### **`3`** |
 | le **variabili** | `6` |
 
-### ⚠ **E `3` SU `11` SONO DI PROVA**, cioe- ### **non sono fisica decisa**: valori che vengono ### **da niente**, e la scheda di ognuna lo dice. ### **Il conto delle leggi VERE dell-era `2` e- `8`.**
+### ⚠ **E `3` SU `12` SONO DI PROVA**, cioe- ### **non sono fisica decisa**: valori che vengono ### **da niente**, e la scheda di ognuna lo dice. ### **Il conto delle leggi VERE dell-era `2` e- `9`.**
 
 ---
 
