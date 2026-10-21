@@ -25,6 +25,7 @@ Gira con:  python csv/_stabilita_lineare.py            (il conto di `c38367db`)
            python csv/_stabilita_lineare.py --proiettata  (la base proiettata, gamma come pendenza)
            python csv/_stabilita_lineare.py --risonanza   (D0: la dispersione della camminata contro la banda di S3)
            python csv/_stabilita_lineare.py --moneta      (la moneta nel gruppo finito, eps dtau = pi/2, solo R2)
+           python csv/_stabilita_lineare.py --moneta-spazzata  (la spazzata di eps dtau, solo R2)
 """
 import io
 import json
@@ -1469,7 +1470,10 @@ def famiglie(pend, lato):
     h = lato // 2
     g = np.asarray(pend)
     i, j = np.unravel_index(int(np.argmax(g)), g.shape)
-    banda_m = max(range(h // 2, 3 * h // 2 + 1), key=lambda m: g[m, 0])
+    # ### ⛔ **ERRORE `C.6`, CORRETTO il `2026-10-21` alle `16:41`:** la banda dichiarata nel task
+    # ### history e' il massimo lungo `(m, 0)` per `m` fra `h/4` e `3h/4`; ### **prima il codice
+    # ### cercava fra `h/2` e `3h/2`**, e includeva il bordo `(pi, 0)`.
+    banda_m = max(range(h // 4, 3 * h // 4 + 1), key=lambda m: g[m, 0])
     # ### ⚠ **`int(...)`: il `jsonl` non serializza gli interi di numpy** *(la corsa del
     # ### `2026-10-21` alle `15:40` e' caduta qui dopo il braccio `A`)*.
     return {"massimo": float(g[i, j]), "dove": (int(kpi(i, lato)[0]), int(kpi(j, lato)[0])),
@@ -1576,6 +1580,107 @@ def main_moneta(argv):
     print("=" * 100)
     return 0
 
+
+# =====================================================================================
+#   LA SPAZZATA DI eps dtau, SOLO R2  (mandato di Luca del 2026-10-21, 16:41)
+#   ### task history della moneta, sez. `3-ter` (`628475a8`).
+# =====================================================================================
+SPAZZATA_NUOVI = (0.60, 0.65, 0.70, 0.75)          # eps dtau / pi, dal mandato
+SPAZZATA_RILETTI = (("C045", 0.45), ("B", 0.50), ("C055", 0.55))
+JSONL_SPAZZATA = os.path.join(RADICE, "doc", "referti_l2", "moneta_spazzata.jsonl")
+
+
+def leggi_spazzata(pend, lato, soglia):
+    """### Il massimo, dove, la famiglia; stabile; senza reticolo (sez. `3-ter`)."""
+    g = np.asarray(pend)
+    i, j = np.unravel_index(int(np.argmax(g)), g.shape)
+    kx, ky = abs(fase_pi(i, lato)), abs(fase_pi(j, lato))
+    km = max(kx, ky)
+    fam = "RETICOLO" if km >= 0.75 else ("BANDA" if km >= 0.25 else "ONDE LUNGHE")
+    idx = np.arange(lato)
+    kk = np.abs(np.array([fase_pi(m, lato) for m in idx]))
+    ret = (kk[:, None] >= 0.75) | (kk[None, :] >= 0.75)
+    return {"massimo": float(g[i, j]), "dove": (int(kpi(i, lato)[0]), int(kpi(j, lato)[0])),
+            "k_pi": (round(kx, 4), round(ky, 4)), "famiglia": fam,
+            "stabile": bool(float(g[i, j]) <= soglia),
+            "senza_reticolo": bool(float(np.max(g[ret])) <= soglia),
+            "max_reticolo": float(np.max(g[ret]))}
+
+
+def main_spazzata(argv):
+    global EPS_MONETA
+    import _presidio
+    _presidio.avvia(__file__)
+    import composizione as CM
+    L, dt = LATO_D0, 0.125
+    soglia = 1e-3 * 0.407
+    print("=" * 100)
+    print("LA SPAZZATA DI eps dtau, SOLO R2 -- l'ultima misura sulla moneta")
+    print("=" * 100)
+    print("  LA CONFIGURAZIONE INTERA, dichiarata:")
+    print("  il passo: %d pezzi, impronta %s (leggi.yaml INTATTO: eps SOLO nella scena); lato %d,"
+          " dtau %g; R2; base proiettata, N dtau %g; norma, seconda meta'"
+          % (len(CM.ORDINE), CM.IMPRONTA, L, dt, TEMPO_LUNGO))
+    print("  nuovi: eps dtau = %s pi; riletti da b8197923: %s; la soglia di stabile %.3e"
+          % (SPAZZATA_NUOVI, ", ".join("%s %.2f pi" % r for r in SPAZZATA_RILETTI), soglia))
+    print("-" * 100)
+    sys.stdout.flush()
+    io.open(JSONL_SPAZZATA, "w", encoding="utf-8").close()
+    righe = {}
+    vecchi = {}
+    with io.open(JSONL_MONETA, encoding="utf-8") as f:
+        for riga in f:
+            q = json.loads(riga)
+            vecchi[q["braccio"]] = q
+    for nome, ed in SPAZZATA_RILETTI:
+        righe[ed] = leggi_spazzata(vecchi[nome]["pend_meta_norm"], L, soglia)
+    print("### I CONTROLLI, sui bracci nuovi")
+    for ed in SPAZZATA_NUOVI:
+        EPS_MONETA = ed * np.pi / dt
+        c2 = c2_esatto_lungo(L, dt)
+        tetto = c2["N"] * ULP_C2 * EPS
+        ok = esito("eps dtau %.2f pi: la camminata sola ESATTA" % ed, c2["dev"] <= tetto,
+                   "%.3e contro %.3e" % (c2["dev"], tetto))
+        b = braccio_proiettato("R2 eps dtau %.2f pi" % ed, L, dt, X, False, (), EPS_REL,
+                               TEMPO_LUNGO)
+        ok &= esito("eps dtau %.2f pi: base valida (<= %g ulp), braccio finito" % (ed, SOGLIA_UNIF),
+                    b["fine"] == "N" and b["uniformita_ulp"] <= SOGLIA_UNIF,
+                    "%.1f ulp, %s, %.0f s" % (b["uniformita_ulp"], b["fine"], b["secondi"]))
+        if not ok:
+            print("  ### eps dtau %.2f pi NON VALIDO: non si legge" % ed)
+            righe[ed] = None
+            continue
+        righe[ed] = leggi_spazzata(b["pend"]["meta_norm"], L, soglia)
+        with io.open(JSONL_SPAZZATA, "a", encoding="utf-8") as f:
+            f.write(json.dumps({"eps_dtau_pi": ed, "eps": EPS_MONETA, "lettura": righe[ed],
+                                "pend_meta_norm": np.asarray(b["pend"]["meta_norm"]).tolist()})
+                    + "\n")
+        sys.stdout.flush()
+    EPS_MONETA = None
+    print("-" * 100)
+    print("### LA TABELLA (riletti: 0.45, 0.50, 0.55 pi)")
+    print("  %-10s %-10s %-10s %-14s %-12s %-9s %-14s %s"
+          % ("eps dtau", "massimo", "dove", "k (pi)", "famiglia", "stabile", "senza reticolo",
+             "max reticolo"))
+    fin = []
+    for ed in sorted(righe):
+        r = righe[ed]
+        if r is None:
+            print("  %.2f pi    NON VALIDO" % ed)
+            continue
+        if r["stabile"]:
+            fin.append(ed)
+        print("  %.2f pi    %+.4f    %-10s %-14s %-12s %-9s %-14s %+.4f"
+              % (ed, r["massimo"], r["dove"], r["k_pi"], r["famiglia"],
+                 "SI" if r["stabile"] else "no", "SI" if r["senza_reticolo"] else "no",
+                 r["max_reticolo"]))
+    print("  ### LA FINESTRA STABILE: %s" % (["%.2f pi" % e for e in fin] if fin else "VUOTA"))
+    print("=" * 100)
+    print("### %d/%d prove passate. NESSUNA CURA: un eps scelto perche' stabilizza sarebbe una"
+          " toppa (A1)." % tuple(OK))
+    print("=" * 100)
+    return 0
+
 if __name__ == "__main__":
     if sys.argv[1:2] == ["--lungo"]:
         sys.exit(main_lungo(sys.argv[2:]))
@@ -1587,4 +1692,6 @@ if __name__ == "__main__":
         sys.exit(main_verdetto(sys.argv[2:]))
     if sys.argv[1:2] == ["--moneta"]:
         sys.exit(main_moneta(sys.argv[2:]))
+    if sys.argv[1:2] == ["--moneta-spazzata"]:
+        sys.exit(main_spazzata(sys.argv[2:]))
     sys.exit(main(sys.argv[1:]))
