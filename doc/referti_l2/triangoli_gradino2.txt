@@ -1,0 +1,44 @@
+[TIMBRO] _stabilita_triangoli.py  sha1-BYTE d38ab409  committato e pulito
+====================================================================================================
+TRIANGOLI, GRADINO 2: S3 E LA STABILITA' LINEARE (R2) SUL TORO TRIANGOLARE, BRACCI SN E SE
+====================================================================================================
+  LA CONFIGURAZIONE INTERA, dichiarata:
+  R2: S3 sola, cs SPENTO; lato 32, dtau 0.125, x 0.1, eps 0.5; base proiettata; N dtau 100; gamma = la pendenza della NORMA sulla seconda meta' (e accanto gli autovalori)
+  il passo: 14 pezzi, impronta 2e7f795d2a52fbe7; la cella 6d complessi (24 reali sul quadrato, 36 sui triangoli)
+  SN: psi e phi per sqrt(4/6) (rho e Lambda per nodo come il quadrato); SE: le ampiezze di 594417f6 (per nodo * 6/4)
+  soglie: base <= 1000 ulp; esatta N*64 ulp; P3 64 ulp; linearita' e C6 0.001 * max gamma; STABILE <= 0.001 * 0.407; banda (0.37, 0.45)
+----------------------------------------------------------------------------------------------------
+### 1. S3 SUI TRIANGOLI: il passo intero (14 pezzi, S3 compreso), cs spento
+  S3 gira sui triangoli col passo di oggi, senza toccare il codice               PASSA   8 tick, rho medio 0.600000, Lambda medio 6.000000
+----------------------------------------------------------------------------------------------------
+### 2. I CONTROLLI
+  DEVE RIUSCIRE: R2 di 594417f6 AL BIT sul quadrato del costruttore generale     PASSA   10 campi identici, 128 s
+  DEVE RIUSCIRE: la camminata sola sui triangoli ESATTA, N dtau 100: <= N*64 ulp PASSA   2.782e-13 contro 1.137e-11 (N 800)
+  P1 SN: un tick con le cache azzerate = con le cache, AL BIT                    PASSA   
+  P3 SN: nessuna memoria in mot                                                  PASSA   AL BIT, 0.0 ulp
+  P1 SE: un tick con le cache azzerate = con le cache, AL BIT                    PASSA   
+  P3 SE: nessuna memoria in mot                                                  PASSA   AL BIT, 0.0 ulp
+----------------------------------------------------------------------------------------------------
+### 3. R2 SUI TRIANGOLI, I DUE BRACCI
+  R2 triangoli SN eps 1e-07      rho_m 0.400000  Lambda_m 4.000000  nu_S3/OMEGA_H 0.2630660216  uniformita' 1.9 ulp  264 s  N
+  R2 triangoli SE eps 1e-07      rho_m 0.600000  Lambda_m 6.000000  nu_S3/OMEGA_H 0.2630660216  uniformita' 1.1 ulp  263 s  N
+  R2 triangoli SN eps 1e-06      rho_m 0.400000  Lambda_m 4.000000  nu_S3/OMEGA_H 0.2630660216  uniformita' 1.9 ulp  257 s  N
+  la base SN: uniformita' <= 1000 ulp per tutto l'intervallo                     PASSA   1.9 ulp
+  la base SE: uniformita' <= 1000 ulp per tutto l'intervallo                     PASSA   1.1 ulp
+  DEVE RIUSCIRE: la linearita' su SN, 1e-7 contro 1e-6                           PASSA   1.530e-07 contro 3.768e-04
+  DEVE RIUSCIRE: l'isotropia C6 di gamma(k) sui triangoli, SN                    PASSA   5.632e-09 contro 3.768e-04
+  DEVE RIUSCIRE: l'isotropia C6 di gamma(k) sui triangoli, SE                    PASSA   9.560e-09 contro 3.768e-04
+  DEVE FALLIRE: l'isotropia C6 di gamma(k) sul QUADRATO (594417f6)               PASSA   3.156e-01 contro 4.018e-04
+----------------------------------------------------------------------------------------------------
+### 4. LE LETTURE (fissate nel task history)
+  la zona esagonale: M [(0, 16), (16, 0), (16, 16)]; K (i piu' vicini ai vertici, a 0.1309 su |K| 4.1888) [(10, 11), (11, 10), (11, 11), (21, 21), (21, 22), (22, 21)]
+  QUADRATO: max gamma (norma) 0.4018 a (0, 8); (autovalori) 0.4069; (pi,0) 0.2646  (pi,pi) 0.3547; nu_S3/OMEGA_H 0.2630660216
+  SN: max gamma 0.3768 a (1, 6) (interno), |k| 1.4867; rapporto col quadrato (norma 0.4018) 0.9380, col 0.407 del mandato 0.9259; autovalori 0.3820
+      STABILE (max <= 4.070e-04)? NO;  LA BANDA (escluso centro, M, K): 0.3768 a (1, 6) -> previsione 0.37-0.45 TIENE
+      IL BORDO: M (0, 16) 0.1267  (16, 0) 0.1267  (16, 16) 0.1267;  K (10, 11) 0.0953  (11, 10) 0.0953  (11, 11) 0.0953  (21, 21) 0.0953  (21, 22) 0.0953  (22, 21) 0.0953;  centro +0.0136;  nu_S3/OMEGA_H 0.2630660216 (quadrato 0.2630660216)
+  SE: max gamma 0.3768 a (1, 25) (interno), |k| 1.4867; rapporto col quadrato (norma 0.4018) 0.9380, col 0.407 del mandato 0.9259; autovalori 0.3820
+      STABILE (max <= 4.070e-04)? NO;  LA BANDA (escluso centro, M, K): 0.3768 a (1, 25) -> previsione 0.37-0.45 TIENE
+      IL BORDO: M (0, 16) 0.1267  (16, 0) 0.1267  (16, 16) 0.1267;  K (10, 11) 0.0953  (11, 10) 0.0953  (11, 11) 0.0953  (21, 21) 0.0953  (21, 22) 0.0953  (22, 21) 0.0953;  centro +0.0136;  nu_S3/OMEGA_H 0.2630660216 (quadrato 0.2630660216)
+====================================================================================================
+TRIANGOLI, GRADINO 2: 13 su 13   ### TUTTI PASSATI
+====================================================================================================
