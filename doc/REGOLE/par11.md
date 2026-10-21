@@ -172,3 +172,20 @@ credono uguali e non lo sono, e ### **nessuno le obbligava a dirlo.**
 
 ### ✅ **CHI LA FA RISPETTARE: `[[P-TAB]]`**, dal `2026-10-16` — e il dettaglio del
 presidio sta in `par12.md`.
+
+## `[[SUITE-NEL-COMMIT]]` — **ogni commit che tocca il nucleo gira la SUITE, e il messaggio lo dice**
+
+*(Decisione di Luca del `2026-10-21` alle `20:06`.)* Ogni commit che tocca **il nucleo** --
+`primo_ordine/`, e **gli strumenti che il passo importa** -- fa girare
+**`python primo_ordine/collauda.py`**, e il messaggio porta **una riga `SUITE:`** con l'esito
+*(verdi/rossi, e quali)*.
+
+### ⛔ **PERCHE' E' NATA:** il collaudo `D0` *(`primo_ordine/_collauda_cs.py`)* ### **e' rimasto
+rosso DUE GIORNI**, da `7395cd9a` *(la tolleranza di `Omega` del `2026-10-19`)* a `3008bd13`,
+### **senza che nessuno lo vedesse**: ### **il `pre-commit` di git NON gira la suite** -- la
+parola `pre-commit` dentro `collauda.py` ### **e' un'etichetta, non un aggancio.** Errore `C.7`
+di Claude Code, `n.30` del guardiano.
+
+### ⚠ **E' UNA REGOLA SCRITTA, NON UN PRESIDIO** (`A9`): la suite dura ### **`605.57` s** *(la corsa di `f5b99e91`: `64` su `64`, il `pre-commit` `323.94` s)*,
+e nessun hook la impone. ### **La riga `SUITE:` la rende verificabile da chi legge il log**,
+non impossibile da saltare.

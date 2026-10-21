@@ -316,7 +316,8 @@
    "REPLAY-CIECO-ALLE-CANCELLAZIONI",
    "SABOTATURA-NO-OP",
    "SIMULATORE-ERA-2",
-   "STORICO-COMMIT-STRUTTURALE"
+   "STORICO-COMMIT-STRUTTURALE",
+   "SUITE-NEL-COMMIT"
   ]
  },
  "blocca": {
@@ -1144,6 +1145,7 @@
    "STORICO-COMMIT-STRUTTURALE",
    "STRUMENTI-SULLA-LEGGE-VECCHIA",
    "STRUMENTO-LEGGE-DALLA-TABELLA",
+   "SUITE-NEL-COMMIT",
    "SYNCDB-HEADLESS",
    "T0",
    "T1",
@@ -2464,6 +2466,7 @@
    "STANDARD-6",
    "STANDARD-8",
    "STRUMENTO-LEGGE-DALLA-TABELLA",
+   "SUITE-NEL-COMMIT",
    "TAGLIA-FINITA",
    "TEMPO-PROPRIO-LOCALE",
    "VETTORI-DAI-BILINEARI",
@@ -3526,6 +3529,7 @@
    "STANDARD-8",
    "STRUMENTI-SULLA-LEGGE-VECCHIA",
    "STRUMENTO-LEGGE-DALLA-TABELLA",
+   "SUITE-NEL-COMMIT",
    "T3a",
    "T3b",
    "T4-TAUTOLOGICO",
@@ -4299,6 +4303,7 @@
    "SPIN-LEGATO-AL-MOTO",
    "STRUMENTI-SULLA-LEGGE-VECCHIA",
    "STRUMENTO-LEGGE-DALLA-TABELLA",
+   "SUITE-NEL-COMMIT",
    "TEMPO-PROPRIO-LOCALE",
    "U-ARCO-DINAMICA",
    "VETTORI-DAI-BILINEARI",
@@ -5804,7 +5809,8 @@
    "P1-quater",
    "P2",
    "PRECEDENZA-IN-CODA",
-   "STRUMENTO-LEGGE-DALLA-TABELLA"
+   "STRUMENTO-LEGGE-DALLA-TABELLA",
+   "SUITE-NEL-COMMIT"
   ],
   "par12.md": [
    "H-FILE",
@@ -6639,6 +6645,9 @@
   ],
   "Non usare l-associazione senza verificare lo storico: prima di una diagnosi o di una cura si RILEGGE DAL DISCO || regola scritta": [
    "P1"
+  ],
+  "Ogni commit che tocca il nucleo (primo_ordine/ e gli strumenti che il passo importa) gira primo_ordine/collauda.py, e il messaggio ne porta l-esito in una riga SUITE: || regola scritta": [
+   "SUITE-NEL-COMMIT"
   ],
   "Ogni numero scritto in un commit o in un referto esce da uno script: un numero ricopiato NON HA PROVENIENZA || regola scritta": [
    "L-NUMERI"
@@ -8083,6 +8092,7 @@
    "SPIN-LEGATO-AL-MOTO",
    "STRUMENTI-SULLA-LEGGE-VECCHIA",
    "STRUMENTO-LEGGE-DALLA-TABELLA",
+   "SUITE-NEL-COMMIT",
    "U-ARCO-DINAMICA",
    "VETTORI-DAI-BILINEARI",
    "VUOTO-LOCALE-DETERMINISTICO"

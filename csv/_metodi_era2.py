@@ -831,6 +831,15 @@ METODI['PRECEDENZA-IN-CODA'] = (
     "impedisce (`A9`)",
     "`doc/CODA_2026-10-09.md`; la verifica e- `git merge-base --is-ancestor`",
     "PORTATO")
+METODI['SUITE-NEL-COMMIT'] = (
+    "NATA NELL-ERA 2 (decisione di Luca del 2026-10-21): ogni commit che tocca il nucleo "
+    "(primo_ordine/ e gli strumenti che il passo importa) gira primo_ordine/collauda.py, e "
+    "il messaggio ne porta l-esito in una riga SUITE:. ### Nata perche- D0 e- rimasto rosso "
+    "due giorni da 7395cd9a: il pre-commit di git NON gira la suite. ### Ma e- una REGOLA "
+    "SCRITTA: nessun presidio la impedisce (`A9`), e la riga SUITE: la rende verificabile "
+    "DAL LOG, non impossibile da saltare",
+    "la riga `SUITE:` nel messaggio, letta da chi verifica; nessun hook",
+    "PORTATO")
 METODI['P-REG'] = (
     "NATO NELL-ERA 2: ogni regola di gestione e- una VOCE (`STANDARD` se scritta, "
     "`PRESIDIO` se cablata), e porta IL FILE DI DETTAGLIO e CHI LA FA RISPETTARE. ### E la "

@@ -8,18 +8,18 @@
 
 | | quanti |
 |---|--:|
-| **`PORTATO`** | `113` |
+| **`PORTATO`** | `114` |
 | **`PRONTO`** | `7` |
 | **`DA_PORTARE`** | `19` |
 | **`DA_DECIDERE`** | `5` |
 | **`NON_SI_APPLICA`** | `7` |
-| **in tutto** | ### **`151`** |
+| **in tutto** | ### **`152`** |
 
-### ⚠ **E IL NUMERO `151` E- MISURATO, non stimato:** viene dal perimetro che l-indice calcola, e ### **il mandato ne nominava <<una decina>>** per nome piu- *<<e le cure di architettura>>*. ### **La decina era `20`.**
+### ⚠ **E IL NUMERO `152` E- MISURATO, non stimato:** viene dal perimetro che l-indice calcola, e ### **il mandato ne nominava <<una decina>>** per nome piu- *<<e le cure di architettura>>*. ### **La decina era `20`.**
 
 ---
 
-## `PORTATO` — `113` metodi
+## `PORTATO` — `114` metodi
 
 > ### ✅ **GIA- NELL-ERA `2`**, e `dove` dice dove
 
@@ -130,6 +130,7 @@
 | **`STANDARD-8`** | `STANDARD` | un difetto dimostrato si cura: ### SUPERATA, assorbita in `A12` | vedi `A12` |
 | **`STATI-LOCALI`** | `PRESIDIO` | gli stati pesanti restano locali, in git solo sha1, percorso e comando. ### PORTATO: `db_era2/*.npz` e- nel `.gitignore`, e IL `.timbro.json` ACCANTO SI TRACCIA -- e- leggero e porta l-impronta della tabella, dei generati e della configurazione, cioe- IL COMANDO CHE RIPRODUCE QUEL DATO | `.gitignore` + `timbro.py::salva` |
 | **`STRUMENTO-LEGGE-DALLA-TABELLA`** | `STANDARD` | NATA NELL-ERA 2, da un CONTO: in un giorno sono emersi SETTE strumenti con la legge vecchia scritta dentro, mentre IL MOTORE NON SI E- AMMALATO perche- LEGGE DALLA TABELLA. ### Uno strumento non CONTIENE una legge (formula, id a mano, nome dell-operatore, conto di leggi): la legge SI LEGGE dalla tabella o SI IMPORTA dal modulo della legge, e se lo strumento ne trova una che non sa misurare ALZA. ### Unica eccezione la SECONDA FONTE voluta, ammessa solo se DICHIARATA e solo se si CONFRONTA a ogni corsa: una seconda fonte che non si confronta e- UNA COPIA | `csv/_strumento_dalla_tabella.py` (il presidio `P-TAB`), `pre-commit` + CI |
+| **`SUITE-NEL-COMMIT`** | `STANDARD` | NATA NELL-ERA 2 (decisione di Luca del 2026-10-21): ogni commit che tocca il nucleo (primo_ordine/ e gli strumenti che il passo importa) gira primo_ordine/collauda.py, e il messaggio ne porta l-esito in una riga SUITE:. ### Nata perche- D0 e- rimasto rosso due giorni da 7395cd9a: il pre-commit di git NON gira la suite. ### Ma e- una REGOLA SCRITTA: nessun presidio la impedisce (`A9`), e la riga SUITE: la rende verificabile DAL LOG, non impossibile da saltare | la riga `SUITE:` nel messaggio, letta da chi verifica; nessun hook |
 | **`U3`** | `PRESIDIO` | confrontava con uno sviluppo invece del valore esatto: ### LA LEZIONE E- PORTATA -- la derivata generata si confronta con la differenza finita, non con una forma approssimata scritta a mano | `_collauda_genera.py` |
 | **`VELENO-ARCHI-KEEP`** | `DIFETTO` | il veleno allunga le derivate d-arco e non applica `keep`. ### IL PUNTO 4 E- VERO E VUOTO, e il collaudo lo MISURA: zero derivati, perche- lo stato e- solo `psi`. ### E la garanzia arriva dall-altro lato -- `senza_cache` rifiuta una memoria non dichiarata (`A8b`) -- quindi non c-e- IL BERSAGLIO | `_collauda_passo.py` sezione (I); il braccio FALLIRA- al primo derivato |
 | **`VELENO-ORIENTATO`** | `DIFETTO` | il veleno cade su UNO dei due archi figli, e quale dipende dall-orientamento: ### LA LEZIONE E- PORTATA -- `strati()` usa la chiave `(min, max)`, quindi l-arco `(3,7)` e `(7,3)` hanno LA STESSA chiave e lo strato non dipende da come e- scritto | `passo.py::strati` |

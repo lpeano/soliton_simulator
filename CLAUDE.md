@@ -256,8 +256,9 @@ vive in **`doc/COMPONENTI_PROMOSSE.md`**, insieme al registro che governa.
 | **`[[P2]]`** | Prima di escludere un flag da una misura: FORZA il sistema o lo CORREGGE? Escludere una correzione significa misurare un sistema che si sa difettoso | ⚠ **regola scritta** *(`A9`)* |
 | **`[[PRECEDENZA-IN-CODA]]`** | Fra piu- versioni di un mandato in coda vale SOLO L-ULTIMA, e l-ordine di esecuzione si REGISTRA | ⚠ **regola scritta** *(`A9`)* |
 | **`[[STRUMENTO-LEGGE-DALLA-TABELLA]]`** | Uno strumento non CONTIENE una legge (formula, id a mano, nome dell-operatore, conto di leggi): la legge SI LEGGE dalla tabella, e se lo strumento ne trova una che non sa misurare ALZA | **`P-TAB`** |
+| **`[[SUITE-NEL-COMMIT]]`** | Ogni commit che tocca il nucleo (primo_ordine/ e gli strumenti che il passo importa) gira primo_ordine/collauda.py, e il messaggio ne porta l-esito in una riga SUITE: | ⚠ **regola scritta** *(`A9`)* |
 
-> ### ⚠ **`9` di queste `11` NON HANNO NESSUN PRESIDIO che le faccia rispettare** *(`A9`)*: `DECISIONE-VUOLE-UN-CAMPO`, `L-DOPO-STOP`, `L-NUMERI`, `L-STELLA`, `L-UN-PROMPT`, `P1`, `P1-quater`, `P2`, `PRECEDENZA-IN-CODA`. ### **E il numero esiste perche' <<chi la fa rispettare>> e' UN CAMPO: in prosa non si contava.** ### **IL DETTAGLIO:** `doc/REGOLE/par11.md`.
+> ### ⚠ **`10` di queste `12` NON HANNO NESSUN PRESIDIO che le faccia rispettare** *(`A9`)*: `DECISIONE-VUOLE-UN-CAMPO`, `L-DOPO-STOP`, `L-NUMERI`, `L-STELLA`, `L-UN-PROMPT`, `P1`, `P1-quater`, `P2`, `PRECEDENZA-IN-CODA`, `SUITE-NEL-COMMIT`. ### **E il numero esiste perche' <<chi la fa rispettare>> e' UN CAMPO: in prosa non si contava.** ### **IL DETTAGLIO:** `doc/REGOLE/par11.md`.
 
 <!-- FINE REGOLE GENERATE par11.md -->
 *(Il **metodo di una misura** — barre d'errore, semi, soglie, criteri, epoche — **non e'

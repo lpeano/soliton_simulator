@@ -88,9 +88,11 @@ def collaudo():
           # ### `CLAUDE.md`** -- e il mandato che gli ha ristretto la portata al NUCLEO
           # ### chiede di dichiararlo. ### **La cura e' sempre la stessa: si aggiorna
           # ### l-elenco.**
+          # ### ⭐ **E UNA QUINTA, il `2026-10-21`: `SUITE-NEL-COMMIT`** *(decisione di Luca
+          # ### delle `20:06`, dopo la regressione di `D0`)*. ### **Si aggiorna l-elenco.**
           sorted(ora - pri) == ["DECISIONE-VUOLE-UN-CAMPO", "H-STOP-CODA", "P-E10",
                                 "P-R1", "P-REG", "P-TAB", "PRECEDENZA-IN-CODA",
-                                "STRUMENTO-LEGGE-DALLA-TABELLA"],
+                                "STRUMENTO-LEGGE-DALLA-TABELLA", "SUITE-NEL-COMMIT"],
           "%s: ### se comparisse una regola che non ho creato, vorrebbe dire che il "
           "generatore ne INVENTA" % sorted(ora - pri))
     print()
