@@ -1,0 +1,33 @@
+[TIMBRO] _stabilita_lineare.py  sha1-BYTE 8ede2e0c  committato e pulito
+====================================================================================================
+LA MONETA NEL GRUPPO FINITO (eps dtau = pi/2) CONTRO L'INSTABILITA' DI S3 -- SOLO R2
+====================================================================================================
+  LA CONFIGURAZIONE INTERA, dichiarata:
+  il passo: 14 pezzi, impronta 2e7f795d2a52fbe7 (leggi.yaml INTATTO: eps cambia SOLO nella scena); lato 32; R2 (S3 sola, cs spento); base proiettata, N dtau 100; norma, seconda meta'
+  i bracci: A dtau 1 eps 1.570796 (eps dtau 0.5000 pi); B dtau 0.125 eps 12.566371 (eps dtau 0.5000 pi); C045 dtau 0.125 eps 11.309734 (eps dtau 0.4500 pi); C055 dtau 0.125 eps 13.823008 (eps dtau 0.5500 pi)
+----------------------------------------------------------------------------------------------------
+  RIF (riletto da 594417f6, norma): massimo 0.4018 a (0, 8); (pi,pi) 0.3547; (pi,0) 0.2646; banda 0.4018 a m = 8; k=0 0.0136
+### I CONTROLLI
+  il conto di c38367db (senza argomenti) AL BIT: R2 a lato 31            PASSA   
+  A: la moneta di un tick = -i sigma.n_h entro 64 ulp                    PASSA   1.0 ulp
+  A: la camminata sola ESATTA, modulo 1 entro N * 64 ulp                 PASSA   2.975e-14 contro 1.421e-12
+  A: base valida (uniformita' <= 1000 ulp), braccio finito               PASSA   1.7 ulp, N, 17 s
+  A     massimo +0.4396 a (8, 16)  -> INSTABILE (rapporto con RIF 1.094);  (pi,pi) +0.0138  (pi,0) +0.0062  banda +0.4396 a m = 8 (0.500 pi)  k=0 +0.0138
+  B: la moneta di un tick = -i sigma.n_h entro 64 ulp                    PASSA   1.0 ulp
+  B: la camminata sola ESATTA, modulo 1 entro N * 64 ulp                 PASSA   2.114e-13 contro 1.137e-11
+  B: base valida (uniformita' <= 1000 ulp), braccio finito               PASSA   0.6 ulp, N, 130 s
+  B: linearita' 1e-7 contro 1e-6 <= 0.001 del massimo                    PASSA   2.552e-07 contro 1.693e-04
+  B     massimo +0.1693 a (16, 0)  -> INSTABILE (rapporto con RIF 0.421);  (pi,pi) +0.0136  (pi,0) +0.1693  banda +0.1693 a m = 16 (1.000 pi)  k=0 +0.0136
+  C045: la camminata sola ESATTA, modulo 1 entro N * 64 ulp              PASSA   2.469e-13 contro 1.137e-11
+  C045: base valida (uniformita' <= 1000 ulp), braccio finito            PASSA   0.6 ulp, N, 133 s
+  C045  massimo +0.3648 a (16, 16)  -> INSTABILE (rapporto con RIF 0.908);  (pi,pi) +0.3648  (pi,0) +0.3243  banda +0.3243 a m = 16 (1.000 pi)  k=0 +0.0136
+  C055: la camminata sola ESATTA, modulo 1 entro N * 64 ulp              PASSA   2.108e-13 contro 1.137e-11
+  C055: base valida (uniformita' <= 1000 ulp), braccio finito            PASSA   0.6 ulp, N, 134 s
+  C055  massimo +0.0875 a (3, 4)  -> INSTABILE (rapporto con RIF 0.218);  (pi,pi) -0.0002  (pi,0) +0.0031  banda +0.0060 a m = 8 (0.500 pi)  k=0 +0.0136
+----------------------------------------------------------------------------------------------------
+### LE LETTURE (fissate nel task history, sez. 3-bis)
+  PUNTO SPECIALE? B 0.1693, C045 0.3648, C055 0.0875; |B-C045| 0.1954, |B-C055| 0.0819 contro 3 |C045-C055| = 0.8319 -> TENDENZA CONTINUA
+  A CONTRO B: |A - B| 0.2703 contro il 5% di 0.407 = 0.0204 -> CONTA COME SI ARRIVA A pi/2
+====================================================================================================
+### 12/12 prove passate. NESSUNA DECISIONE SULLA PREMESSA.
+====================================================================================================

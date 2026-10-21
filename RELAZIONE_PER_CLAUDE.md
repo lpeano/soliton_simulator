@@ -20167,3 +20167,21 @@ La domanda di Luca *(«l'instabilita', se c'e', dipende dal fatto che lo spazio 
 - ### **Il palindromo di `14` pezzi resta** *(l'ordine e' delle leggi)*, ### **e l'impronta forse anche**; ### **`M-B1` non si puo' rifare** *(il motore vecchio e' quadrato)*; ### **`64` collaudi e `54` referti** da censire o lasciare validi al loro commit.
 
 ### ❓ **LA PRIMA DOMANDA PER LUCA** *(una alla volta)*: ### **la derivazione della moneta lascia libero UN grado di liberta', `eps dtau`; un sottogruppo finito di `SU(2)` lo fissa a `pi/2`.** ### **Si accetta la premessa «la moneta sta in un gruppo finito», e a quale `dtau`** *(il passo dell'automa, `dtau = 1`, che da' `eps = pi/2` invece di `0.5`)*? ### **Nessuna scelta di fisica fatta.**
+
+### 📊 **LA MONETA NEL GRUPPO FINITO: `R2` NON SI STABILIZZA; `pi/2` NON E' SPECIALE; CONTA COME CI SI ARRIVA** *(referto `doc/referti_l2/moneta_gruppo_finito.txt` e `.jsonl`, strumento blob sha1-BYTE `8ede2e0c`, commit `9a72c21b`, committato e pulito; la prima corsa da `58239eb6` era caduta sul `jsonl` dopo il braccio `A`, e la correzione e' un commit a se')*
+
+- ### **`12/12` controlli:** la moneta a `pi/2` `= -i sigma.n_h` entro `1.0` ulp *(`A` e `B`)*; la camminata sola esatta a ogni `eps`; la base fra `0.6` e `1.7` ulp; la linearita' su `B` `2.6e-7`.
+- ### **I numeri** *(`R2`, pendenza della seconda meta', norma; `RIF` riletto da `594417f6`: massimo `0.4018` a `(0, 8)`, `(pi, pi)` `0.3547`)*:
+
+  | braccio | `eps dtau` | il massimo, dove | rapporto con `RIF` | `(pi, pi)` | `(pi, 0)` |
+  |---|---|---|---|---|---|
+  | `A` *(`dtau 1`, `eps pi/2`)* | `pi/2` | `0.4396` a `(8, 16)` | `1.094` | ### **`0.0138`** | `0.0062` |
+  | `B` *(`dtau 0.125`, `eps 4 pi`)* | `pi/2` | `0.1693` a `(16, 0)` | `0.421` | `0.0136` | `0.1693` |
+  | `C045` | `0.45 pi` | `0.3648` a `(16, 16)` | `0.908` | `0.3648` | `0.3243` |
+  | `C055` | `0.55 pi` | `0.0875` a `(3, 4)` | `0.218` | `-0.0002` | `0.0031` |
+
+- ### **LE LETTURE, fissate prima:** ### **tutti INSTABILI**; ### **`pi/2` NON e' un punto speciale: TENDENZA CONTINUA** *(`|B - C045| = 0.195`, `|B - C055| = 0.082`, contro `3 |C045 - C055| = 0.832`)*; ### **`A` contro `B`: `0.270` contro il `5%` di `0.407` (`0.020`) → CONTA COME SI ARRIVA A `pi/2`.**
+- ### ⛔ **UN ERRORE MIO NELLO STRUMENTO, `C.6`:** la colonna «banda» del referto ### **non e' quella dichiarata nel task history** *(il massimo lungo `(m, 0)` per `m` fra `h/4` e `3h/4`)*: ### **il codice cerca fra `h/2` e `3h/2`**, e include il bordo `(pi, 0)`. ### **I tre verdetti non la usano** *(usano il massimo)*, quindi ### **non cambiano.** ### **La banda dichiarata, ricalcolata dal `jsonl`** *(il comando: le pendenze salvate, `max` su `m = 4..12` della riga `(m, 0)`)*: ### **`A` `0.4396` a `0.50 pi`; `B` `0.1598` a `0.75 pi`; `C045` `0.3060` a `0.75 pi`; `C055` `0.0818` a `0.31 pi`; `RIF` `0.4018` a `0.50 pi`.**
+- **Che cosa dicono, senza decidere:** ### **la moneta conta molto per `S3`**: fra `0.45 pi` e `0.55 pi` il massimo scende da `0.365` a `0.088`, ### **e il picco a `(pi, pi)` sparisce gia' a `pi/2`** *(`A` e `B`)*; ### **ma `pi/2` non stabilizza, e non e' speciale.** ### **A `dtau 1`** *(il passo dell'automa)* ### **la banda a `0.5 pi` resta, anzi cresce** *(`1.094` volte `RIF`)*.
+- ### **Per la domanda di `L1`** *(automa o limite continuo)*: ### **`A` e `B` hanno la stessa moneta per tick e danno crescite diverse**: ### **il modello al passo dell'automa e quello coi sotto-passi NON sono lo stesso**, e la premessa del gruppo finito ### **non li riconcilia.**
+- ### **Vale la pena fare `R1`?** ### **Secondo me non ora:** in `R1` la moneta per tick sta nel gruppo solo con `eps cs dtau = pi/2` *(il task history, sez. `0`)*, e ### **la premessa da sola non stabilizza `R2`**; ### **e' piu' informativa una spazzata di `eps dtau`** *(la caduta fra `0.45` e `0.55 pi` e' ripida)* -- ### **ma e' un'altra misura, e la decisione e' di Luca.** ### **Nessuna decisione sulla premessa.**
