@@ -123,6 +123,15 @@
 - ### **IL COMANDO:** `python csv/_stabilita_lineare.py --risonanza --lato 64 --dtau 0.0625` *(e `128`, `0.03125`)*; ### **senza `--lato` resta il lato `32` di `c8dbdd83`.** Il verdetto fra le taglie: `python csv/_stabilita_lineare.py --verdetto-taglie`.
 - ### **I REFERTI:** `doc/referti_l2/d0_risonanza_64.txt` e `.jsonl` ### **subito**, con la frase «verdetto fra le taglie: in attesa di `128`»; poi `d0_risonanza_128.txt` e `.jsonl`; poi `d0_verdetto.txt`.
 
+## 4-quater. ANNOTAZIONE DEL `2026-10-21`, `13:49`: LA CHIUSURA DI `D0` *(decisione di Luca dopo `fe536eb7`; si annota)*
+
+- ### **IL VERDETTO: `D0` NON DECIDIBILE.**
+  - ### **A lato `32`** *(`c8dbdd83`)* **e a lato `64`** *(`fe536eb7`)* ### **nessuna condizione tiene.**
+  - ### **`K3` e' la piu' vicina** *(a lato `64` distanze `0.16`, `2.35`, `1.05`, `0.03`, `1.00`, `0.15`)*, ### **ma NON INFORMATIVA in `5` casi su `6`.**
+  - ### **Lato `128` INTERROTTO per decisione di Luca** *(`13:49`)*: ### **il verdetto fra le taglie dell'annotazione `4-ter` (`1512e262`) NON si puo' emettere**, e lo si scrive cosi'.
+- ### ⛔ **ERRORE `n.29` DEL GUARDIANO:** aveva previsto che a lato `64` ### **la specificita' DIMEZZASSE** *(`3` punti su `lato/2`: dal `19%` al `9%`)*. ### **Valeva per UNA condizione con UN incrocio.** `K3` ha ### **MOLTI incroci** *(molte combinazioni di rami)*, e ### **raffinando se ne risolvono di piu'**: la specificita' e' scesa solo da `0.25`-`0.56` a `0.16`-`0.41`. ### **La non specificita' e' DELLA CONDIZIONE, non della risoluzione: una taglia piu' grande non la cura.**
+- ### **L'IPOTESI POST HOC della velocita' di gruppo:** a lato `32` la banda `0.50 pi` e `|v_g|` massimo `0.56 pi`; a lato `64` la banda `0.531 pi` e `|v_g|` massimo `0.562 pi`; ### **a `x 1` la banda `0.438 pi` con `|v_g|` fermo.** ### **Vicine ma non coincidenti, e la banda si muove con `x` mentre `|v_g|` no: l'ipotesi SI INDEBOLISCE.** ### **Resta registrata come post hoc, non provata.**
+
 ## 5. TODO
 
 1. Questo task history, ### **committato DA SOLO.**

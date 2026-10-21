@@ -55,6 +55,14 @@ gruppo e' una proprieta' della sola camminata e ### **non dipende da `nu_S3`**, 
 
 ---
 
+### ⛔ **ANNOTAZIONE DEL `2026-10-21`, `13:49`: `D0` CHIUSO, NON DECIDIBILE** *(decisione di Luca; si annota)*
+
+- ### **`D0` e' NON DECIDIBILE** *(lato `32` e `64`: nessuna condizione tiene; lato `128` interrotto)*; ### **l'ipotesi post hoc della velocita' di gruppo SI INDEBOLISCE** *(la banda si muove con `x`, `|v_g|` no)*.
+- ### **LE CONSEGUENZE:** ### **la scelta della cura NON si appoggia su un meccanismo diagnosticato.** ### **La strada e' lo SCREENING DIRETTO:** ### **`gamma(k)` prima e dopo la cura**, con lo strumento lineare *(`csv/_stabilita_lineare.py --proiettata`)*.
+- ### **Il prossimo passo e' una domanda per Luca: quali criteri di screening approvare** *(la domanda `2` della sez.`5`)*.
+
+---
+
 ## 2. LA DIAGNOSI PROPOSTA, PRIMA DELLE CURE: `D0` — LA RISONANZA *(da scrivere, NON fatta)*
 
 - ### **Che cosa si calcola:**
