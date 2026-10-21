@@ -50,6 +50,18 @@
 - ### **DEVE FALLIRE:** la cura tolta, `D0` torna rosso. ### **DEVE RIUSCIRE:** una scena con `cs` acceso e `cs'` grande *(quella di `C5`)* converge con gli stessi giri di prima.
 - ### ⚠ **Se l'ipotesi CADE**, la cura va derivata dalla causa vera: ### **la condizione per applicarla senza chiedere resta la stessa.**
 
+## 4-bis. ANNOTAZIONE DEL `2026-10-21`, `20:06`, PRIMA DEL CODICE: LA CURA `(a)`, `GIRI_MAX_OMEGA` DA 120 A 200 *(decisione di Luca dopo `5ed71b6d`; si annota)*
+
+- ### ⛔ **L'ERRORE `n.31` DEL GUARDIANO:** l'ipotesi «`cs'` zero, tolleranza zero» ### **veniva dalla frase «la forma `cs` spenta» di `3008bd13`, non dalla lettura del collaudo**: ### **il braccio che cade ha `cs` ACCESO** *(`Lambda_c 8`, `DTAU 1`)*. ### **E l'imprecisione di quella frase e' MIA:** in `3008bd13` ho scritto il TITOLO del collaudo *(«la forma `cs` spenta e' il passo di oggi»)* come se dicesse in quale forma il punto fisso cadeva.
+- ### **LA DECISIONE DI LUCA:** ### **`GIRI_MAX_OMEGA` da `120` a `200`.** ### **Stella Polare, domanda `3`:** ### **e' un limite di sicurezza del punto fisso, non una costante di fisica**; ### **dove il punto fisso converge entro `120` giri, il risultato non cambia di un bit** *(il ciclo si ferma allo stesso giro, con gli stessi conti)*.
+- ### **E L'AVVISO:** a ogni chiamata ### **il fattore di contrazione stimato** *(il rapporto fra gli ultimi due scarti)*; ### **se supera `0.9`, un AVVISO contato** *(non un errore)*, col fattore e il `dtau`, ### **un contatore nel motore** *(come `giri_omega`)*. ### **`0.9` e' una soglia di AVVISO, non di fisica.** ### ⚠ **Il contatore NON deve toccare i conti:** si legge, non si usa.
+- ### **I CONTROLLI, copiati prima dei numeri:**
+  - ### **DEVE RIUSCIRE:** `D0` *(`braccio_accesa`)* ### **torna verde**; i giri usati stampati *(`~137` attesi)*;
+  - ### **AL BIT:** l'impronta `2e7f795d2a52fbe7`; ### **la SUITE COMPLETA tutta verde**; ### **a campione `C1` di strada `(d)`, `594417f6` `R2` a lato `32`, `triangoli_gradino1`**, identici al bit *(dove il punto fisso convergeva gia')*. ### **Se anche un solo valore fisico cambia: STOP**, e la domanda a Luca;
+  - ### **DEVE FALLIRE:** con `120` giri `D0` torna rosso;
+  - ### **LA MISURA DEL FATTORE** *(informazione per la domanda di `L1` sull'automa)*: ### **il fattore di contrazione sulla scena di `D0` a `dtau` `0.5`, `1`, `1.25` (e `1.5` se converge)**: il medio e il massimo, ### **e se a qualche `dtau` non converge entro `200` giri** *(dirlo: non e' un errore della misura)*.
+- ### **LA REGOLA DELLA SUITE** *(in `CLAUDE.md`, regola scritta, `A9`)* e ### **il file generato** `doc/REFERTO_infrastruttura_era2.md` *(stato nel working tree, e perche' era scaduto)*.
+
 ## 5. TODO
 
 1. Questo task history, ### **committato DA SOLO.**
