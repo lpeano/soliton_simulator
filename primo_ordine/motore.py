@@ -187,9 +187,9 @@ class Motore(object):
         # ### 📌 **I giri del punto medio di `Omega`, per il REFERTO:** e' un COSTO
         # ### ### **misurato**, non stimato.
         self.giri_omega = 0
-        # ### ⚠ **E L'AVVISO DI CONVERGENZA LENTA** *(`2026-10-21`)*: il fattore di contrazione
-        # ### dell'ultima chiamata, il massimo, e ### **le chiamate oltre
-        # ### `energia_pesata.SOGLIA_AVVISO_OMEGA`.** ### **Si leggono: nessun conto li usa.**
+        # ### ⚠ **E L'AVVISO DI CONVERGENZA LENTA** *(`2026-10-21`)*: ### **le chiamate oltre
+        # ### `energia_pesata.GIRI_AVVISO_OMEGA` giri**, e il fattore di contrazione dell'ultima
+        # ### chiamata e il massimo, come informazione. ### **Si leggono: nessun conto li usa.**
         self.fattore_omega = 0.0
         self.fattore_omega_max = 0.0
         self.avvisi_omega = 0

@@ -74,11 +74,14 @@ OMEGA_H = float(np.pi)
 # ### fisica.** Il collaudo `D0` *(`cs` acceso, `DTAU 1`)* ### **ne chiede `~137`**: il punto
 # ### fisso contrae di `~0.81` a giro. ### **Dove converge entro `120`, nulla cambia di un bit.**
 GIRI_MAX_OMEGA = 200
-# ### ⚠ **LA SOGLIA DELL'AVVISO di convergenza lenta** *(stessa decisione)*: ### **il fattore di
-# ### contrazione stimato** *(il rapporto fra gli ultimi due scarti)* ### **oltre `0.9` si CONTA
-# ### in `mot.avvisi_omega`**, ### **e non e' un errore.** ### **Soglia di AVVISO, non di fisica:**
-# ### il contatore si legge, ### **non entra in nessun conto.**
-SOGLIA_AVVISO_OMEGA = 0.9
+# ### ⚠ **L'AVVISO di convergenza lenta, SUI GIRI** *(decisione di Luca del `2026-10-21` alle
+# ### `21:52`)*: ### **una chiamata che usa piu' di `GIRI_MAX_OMEGA // 2` giri si CONTA in
+# ### `mot.avvisi_omega`**, ### **e non e' un errore.** ### **Soglia di AVVISO, non di fisica:** il
+# ### contatore si legge, ### **non entra in nessun conto.** ### ⛔ **Prima la soglia era `0.9` SUL
+# ### FATTORE** *(`f5b99e91`)*: ### **`D0` arriva a `0.857`** *(`a688c219`)*, e l'avviso ### **non
+# ### avrebbe visto il caso per cui era nato** *(errore `n.32` del guardiano)*. ### **Il fattore resta,
+# ### come INFORMAZIONE.**
+GIRI_AVVISO_OMEGA = GIRI_MAX_OMEGA // 2
 # ### ⛔⛔ **`8` ULP, E LA DOMANDA E' DI CHE COSA** *(decisione di Luca del `2026-10-19`
 # ### alle `16:29`, task history `2026-10-19_tolleranza_omega.md`)*: fino a ieri la soglia
 # ### era ### **relativa a `max|Omega|`**, e in campo DEBOLE chiedeva ### **meno dello zero
@@ -420,9 +423,10 @@ def applica(mot, st, par, frazione):
     # ### ✅ **E ADESSO LA FASE INTERA, dallo stato VERO**: `prec` e' il punto medio.
     np.multiply(salvo, np.exp(-1j * (prec * tau)[mot.inc.nodo]), out=phi)
     mot.giri_omega = giri
-    # ### ⚠ **L'AVVISO, CONTATO e NON un errore** *(senza ramo: il booleano si somma)*: il
-    # ### fattore dell'ultima chiamata, il massimo, e quante chiamate sono oltre la soglia.
+    # ### ⚠ **L'AVVISO, CONTATO e NON un errore** *(senza ramo: il booleano si somma)*: le
+    # ### chiamate oltre `GIRI_AVVISO_OMEGA` giri; ### **e il fattore, come informazione** *(l'ultimo
+    # ### e il massimo)*.
     mot.fattore_omega = fattore
     mot.fattore_omega_max = max(mot.fattore_omega_max, fattore)
-    mot.avvisi_omega += int(fattore > SOGLIA_AVVISO_OMEGA)
+    mot.avvisi_omega += int(giri > GIRI_AVVISO_OMEGA)
     return st
