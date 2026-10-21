@@ -1187,10 +1187,15 @@ def main_risonanza(argv):
     import _presidio
     _presidio.avvia(__file__)
     import composizione as CM
-    L, dt = LATO_D0, DTAU_D0
+    # ### ⭐ **Dal `2026-10-21` alle `10:29`** *(annotazione `4-ter`)*: ### **il lato e `dtau` si
+    # ### scelgono dalla riga di comando**; senza `--lato` restano quelli di `c8dbdd83`.
+    L = int(argv[argv.index("--lato") + 1]) if "--lato" in argv else LATO_D0
+    dt = float(argv[argv.index("--dtau") + 1]) if "--dtau" in argv else DTAU_D0
+    jsonl = JSONL_D0 if L == LATO_D0 else os.path.join(RADICE, "doc", "referti_l2",
+                                                       "d0_risonanza_%d.jsonl" % L)
     h = L // 2
     print("=" * 100)
-    print("D0 RIFATTO: IL RILEVATORE CORRETTO, LA STESSA LISTA CHIUSA -- una diagnosi")
+    print("D0 RIFATTO: IL RILEVATORE CORRETTO, LA STESSA LISTA CHIUSA -- una diagnosi (lato %d)" % L)
     print("=" * 100)
     print("  LA CONFIGURAZIONE INTERA, dichiarata:")
     print("  il passo: %d pezzi, impronta %s; lato %d, dtau %g; R2 (S3 sola, cs spento) con la base"
@@ -1204,18 +1209,21 @@ def main_risonanza(argv):
     print("-" * 100)
     sys.stdout.flush()
     vecchio_d0 = json.loads(io.open(JSONL_D0_VECCHIO, encoding="utf-8").readline())
-    io.open(JSONL_D0, "w", encoding="utf-8").close()
+    io.open(jsonl, "w", encoding="utf-8").close()
 
     print("### I CASI SINTETICI DEL RILEVATORE")
     mm = np.arange(h + 1, dtype=float)
-    Rv = (mm - 8.0)[:, None]
-    scv = np.array([16.0])
+    m0 = float(L // 4)
+    Rv = (mm - m0)[:, None]
+    scv = np.array([float(h)])
     es = degeneri(Rv, scv)
     cr = incroci(Rv, dt, es)
     sp = specificita(cr, h)
-    ok_s = esito("DEVE RIUSCIRE: un incrocio vero a m = 8, trovato a distanza 0, specificita' <= %g"
-                 % SOGLIA_SPEC, (not es[0]) and len(cr) == 1 and abs(cr[0] - 8.0) == 0.0
-                 and sp <= SOGLIA_SPEC, "incroci %s, specificita' %.4f" % (list(cr), sp))
+    attesa = 3.0 / h
+    ok_s = esito("DEVE RIUSCIRE: un incrocio vero a m = %d, distanza 0, specificita' %.4f attesa"
+                 % (int(m0), attesa), (not es[0]) and len(cr) == 1 and abs(cr[0] - m0) == 0.0
+                 and abs(sp - attesa) < 1e-12 and sp <= SOGLIA_SPEC,
+                 "incroci %s, specificita' %.4f" % (list(cr), sp))
     Rz = np.zeros((h + 1, 1))
     esz = degeneri(Rz, np.array([6.0]))
     ok_s &= esito("DEVE FALLIRE: due rami IDENTICI -> DEGENERAZIONE, non incrocio",
@@ -1250,15 +1258,19 @@ def main_risonanza(argv):
     for rn, idx in (("(m,0)", lambda m: (m % L, 0)), ("(m,m)", lambda m: (m % L, m % L))):
         rette[rn] = (np.array([om[idx(m)] for m in range(h + 1)]),
                      np.array([om[idx(-m)] for m in range(h + 1)]))
-    bit = all(np.array_equal(np.asarray(rette[rn][i]), np.asarray(vecchio_d0["omega"][rn][i]))
-              for rn in rette for i in (0, 1))
-    if not esito("omega_a(k) AL BIT con ac9d0d7d", bit):
-        return 1
+    if L == LATO_D0:
+        bit = all(np.array_equal(np.asarray(rette[rn][i]), np.asarray(vecchio_d0["omega"][rn][i]))
+                  for rn in rette for i in (0, 1))
+        if not esito("omega_a(k) AL BIT con ac9d0d7d", bit):
+            return 1
+    else:
+        print("  (a lato %d nessun riferimento per omega_a(k): il lato 32 si rilegge dal jsonl di"
+              " c8dbdd83 nel verdetto fra le taglie)" % L)
     pr_vecchio = None
     with io.open(JSONL_PROIETTATA, encoding="utf-8") as f:
         for riga in f:
             q = json.loads(riga)
-            if q["nome"] == "R2 lato 32":
+            if q["nome"] == "R2 lato %d" % L:
                 pr_vecchio = q
     gm, nus = {}, {}
     for x in XX_D0:
@@ -1270,16 +1282,19 @@ def main_risonanza(argv):
         pn = np.asarray(b["pend"]["meta_norm"])
         gm[x] = {"(m,0)": [float(pn[m, 0]) for m in range(h + 1)],
                  "(m,m)": [float(pn[m, m]) for m in range(h + 1)]}
-        dv = max(float(np.max(np.abs(np.asarray(gm[x][rn]) -
-                                     np.asarray(vecchio_d0["gamma"][str(x)][rn]))))
-                 for rn in gm[x])
-        if not esito("gamma(k) di R2 x %g entro 1e-12 da ac9d0d7d" % x, dv <= 1e-12, "%.3e" % dv):
-            return 1
-        if x == 0.1:
+        if L == LATO_D0:
+            dv = max(float(np.max(np.abs(np.asarray(gm[x][rn]) -
+                                         np.asarray(vecchio_d0["gamma"][str(x)][rn]))))
+                     for rn in gm[x])
+            if not esito("gamma(k) di R2 x %g entro 1e-12 da ac9d0d7d" % x, dv <= 1e-12,
+                         "%.3e" % dv):
+                return 1
+        if x == 0.1 and pr_vecchio is not None:
             d = max(float(np.max(np.abs(np.asarray(b["pend"][k_]) -
                                         np.asarray(pr_vecchio["pend"][k_]))))
                     for k_ in ("meta_eig", "meta_norm"))
-            esito("R2 x 0.1 = 594417f6 entro 1e-3", d <= 1e-3, "%.3e" % d)
+            if not esito("R2 x 0.1 a lato %d = 594417f6 entro 1e-3" % L, d <= 1e-3, "%.3e" % d):
+                return 1
         print("  R2 x %-5g  nu_S3 %.6f  [%.0f s]" % (x, nus[x], b["secondi"]))
         sys.stdout.flush()
     print("-" * 100)
@@ -1327,9 +1342,16 @@ def main_risonanza(argv):
     ok_ = rette["(m,0)"][0]
     kk = 2.0 * np.pi * np.arange(h + 1) / L
     vg = np.gradient(ok_, kk, axis=0)
+    disp = []
     for a in range(NC):
         j = int(np.argmax(np.abs(vg[:, a])))
         print("  ramo %2d  |v_g| massimo %.4f a m = %2d (%.3f pi)" % (a, abs(vg[j, a]), j, 2.0 * j / L))
+        if abs(vg[j, a]) > 0.1:
+            disp.append(2.0 * j / L)
+    print("  ### i rami dispersivi (|v_g| massimo > 0.1): il massimo a %s pi;  la banda di R2 lungo"
+          " (m,0): %s pi" % (sorted(set("%.3f" % d_ for d_ in disp)),
+                             ", ".join("%.3f" % (2.0 * (1 + int(np.argmax(gm[x]["(m,0)"][1:]))) / L)
+                                       for x in XX_D0)))
     print("=" * 100)
     if troppo_larga:
         v = "STOP: il criterio e' TROPPO LARGO (%s tiene anche col nu permutato)" % troppo_larga
@@ -1339,16 +1361,68 @@ def main_risonanza(argv):
         v = "D0 CADE: nessuna condizione della lista tiene"
     else:
         v = "NON DECIDIBILE: tengono %s" % tengono
-    print("### IL VERDETTO: %s" % v)
-    with io.open(JSONL_D0, "a", encoding="utf-8") as f:
+    print("### IL VERDETTO A LATO %d: %s" % (L, v))
+    if L != LATO_D0:
+        print("### verdetto fra le taglie: %s" % ("in attesa di 128" if L < 128 else
+                                                  "python csv/_stabilita_lineare.py --verdetto-taglie"))
+    with io.open(jsonl, "a", encoding="utf-8") as f:
         f.write(json.dumps({"pompa": Om_t, "nu": {str(k_): v_ for k_, v_ in nus.items()},
                             "gamma": {str(k_): v_ for k_, v_ in gm.items()},
                             "esame": {"%s %s" % k_: {rn: [v_[0], v_[1], v_[2], v_[3], len(v_[4])]
                                                      for rn, v_ in d_.items()}
                                       for k_, d_ in risultati.items()},
-                            "v_gruppo_m0": vg.tolist(), "tengono": tengono,
+                            "v_gruppo_m0": vg.tolist(), "tengono": tengono, "lato": L, "dtau": dt,
                             "troppo_larga": troppo_larga, "verdetto": v}) + "\n")
     print("### %d/%d prove passate. NESSUNA CURA SCELTA." % tuple(OK))
+    print("=" * 100)
+    return 0
+
+
+def main_verdetto(argv):
+    """### Il verdetto fra le taglie *(annotazione `4-ter`)*: ### **tiene se tiene a `64` E a `128`.**"""
+    import _presidio
+    _presidio.avvia(__file__)
+    fonti = ((32, JSONL_D0), (64, os.path.join(RADICE, "doc", "referti_l2", "d0_risonanza_64.jsonl")),
+             (128, os.path.join(RADICE, "doc", "referti_l2", "d0_risonanza_128.jsonl")))
+    dati = {}
+    for lato, f in fonti:
+        dati[lato] = json.loads(io.open(f, encoding="utf-8").readline())
+    print("=" * 100)
+    print("D0: IL VERDETTO FRA LE TAGLIE (lato 32 riletto da c8dbdd83; 64 e 128)")
+    print("=" * 100)
+    tiene_a = {}
+    for nome, _t, _mo in CONDIZIONI:
+        for lato in (32, 64, 128):
+            es = dati[lato]["esame"]
+            ok = all(es["%s %s" % (nome, x)][rn][2] <= TOLL_PASSI and
+                     es["%s %s" % (nome, x)][rn][3] <= SOGLIA_SPEC
+                     for x in XX_D0 for rn in ("(m,0)", "(m,m)"))
+            tiene_a[(nome, lato)] = ok
+    print("  %-4s %-10s %-10s %-10s" % ("", "lato 32", "lato 64", "lato 128"))
+    for nome, _t, _mo in CONDIZIONI:
+        print("  %-4s %-10s %-10s %-10s" % (nome, *("tiene" if tiene_a[(nome, l_)] else "no"
+                                                    for l_ in (32, 64, 128))))
+    print("-" * 100)
+    print("### K3 (la piu' vicina a lato 32): distanza e specificita' a ogni taglia")
+    for x in XX_D0:
+        for rn in ("(m,0)", "(m,m)"):
+            print("  x %-5g %s  %s" % (x, rn, "   ".join(
+                "lato %d: dist %s spec %.3f" % (l_, "%.2f" % dati[l_]["esame"]["K3 %s" % x][rn][2]
+                                                 if dati[l_]["esame"]["K3 %s" % x][rn][2] != float("inf")
+                                                 else "inf", dati[l_]["esame"]["K3 %s" % x][rn][3])
+                for l_ in (32, 64, 128))))
+    entrambe = [n for n, _t, _m in CONDIZIONI if tiene_a[(n, 64)] and tiene_a[(n, 128)]]
+    una = [n for n, _t, _m in CONDIZIONI if tiene_a[(n, 64)] != tiene_a[(n, 128)]]
+    if len(entrambe) == 1:
+        v = "TIENE: %s (a 64 e a 128)" % entrambe[0]
+    elif len(entrambe) > 1:
+        v = "NON DECIDIBILE: tengono a entrambe %s" % entrambe
+    elif una:
+        v = "NON DECIDIBILE: tengono a una sola taglia %s" % una
+    else:
+        v = "CADE: nessuna condizione tiene a 64 o a 128"
+    print("=" * 100)
+    print("### IL VERDETTO FRA LE TAGLIE: %s" % v)
     print("=" * 100)
     return 0
 
@@ -1359,4 +1433,6 @@ if __name__ == "__main__":
         sys.exit(main_proiettata(sys.argv[2:]))
     if sys.argv[1:2] == ["--risonanza"]:
         sys.exit(main_risonanza(sys.argv[2:]))
+    if sys.argv[1:2] == ["--verdetto-taglie"]:
+        sys.exit(main_verdetto(sys.argv[2:]))
     sys.exit(main(sys.argv[1:]))
