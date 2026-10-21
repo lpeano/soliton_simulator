@@ -18,6 +18,12 @@ r"""**IL FATTORE DI CONTRAZIONE DEL PUNTO FISSO DI `Omega`, sulla scena di `D0`,
 ## LA MISURA
 Il fattore a `dtau` `0.5`, `1`, `1.25`, `1.5`: medio e massimo, ### **e se a qualche `dtau` non converge
 entro `GIRI_MAX_OMEGA` giri** *(non e' un errore della misura: si dice)*.
+### ⛔ **E SE ESCE DAL CONO:** `s = dtau cs / dtau_rif > 1` *(`B-5`)* e' una scena che il nucleo
+### **rifiuta per costruzione** *(`flussi_parziali._nel_cono`)*. ### **Lo strumento lo guarda
+PRIMA di ogni tick, con la stessa formula**, e lo dice col tick e con `s`: ### **non e' una
+mancata convergenza.** *(Correzione del `2026-10-21`: la prima corsa, blob `a5dd287d`, e' caduta a
+`dtau 1.25` dentro `_nel_cono`, il cui messaggio ha due segnaposto e un argomento solo: un
+`TypeError` al posto dell'`AssertionError`.)*
 
 Gira con:  python csv/_fattore_omega.py
 """
@@ -50,18 +56,22 @@ def corsa(CC, DV, EP, FP, TK, nn, seme, dtau):
             chiamate.append((mot.giri_omega, mot.fattore_omega))
         return r
     EP.applica = avvolta
-    alzato, tick_alza, mot = None, None, None
+    alzato, tick_alza, mot, fuori = None, None, None, None
     try:
         _i, mot, st, par = DV.scena(nn, seme, dtau, norma="locale",
                                     vuoto_modulo=CC.VUOTO_MODULO, su2=True)
         for t in range(CC.TICK):
             FP.accendi_cs(mot, CC.LC_DI_PROVA, st)
+            s_max = float(np.max(FP.dtau_nodo(mot))) / float(FP.dtau_rif(mot))
+            if s_max > 1.0:
+                fuori = (t, s_max)
+                break
             TK.tick(st, mot, par)
     except AssertionError as e:
         alzato, tick_alza = str(e), t
     finally:
         EP.applica = vero
-    return chiamate, alzato, tick_alza, mot
+    return chiamate, alzato, tick_alza, mot, fuori
 
 
 def main(argv):
@@ -94,7 +104,7 @@ def main(argv):
     righe = []
     for dtau in DTAU_MISURA:
         for nn, seme in CC.SCENE:
-            ch, alzato, tick_alza, mot = corsa(CC, DV, EP, FP, TK, nn, seme, dtau)
+            ch, alzato, tick_alza, mot, fuori = corsa(CC, DV, EP, FP, TK, nn, seme, dtau)
             g = np.array([c[0] for c in ch], dtype=float)
             f = np.array([c[1] for c in ch], dtype=float)
             oltre = int(np.sum(f > EP.SOGLIA_AVVISO_OMEGA))
@@ -105,7 +115,9 @@ def main(argv):
                  "fattore_max": float(f.max()) if f.size else None,
                  "oltre_soglia": oltre, "avvisi_omega": int(mot.avvisi_omega) if mot else None,
                  "fattore_omega_max": float(mot.fattore_omega_max) if mot else None,
-                 "alza": alzato, "tick_alza": tick_alza}
+                 "alza": alzato, "tick_alza": tick_alza,
+                 "fuori_cono_tick": fuori[0] if fuori else None,
+                 "fuori_cono_s": fuori[1] if fuori else None}
             righe.append(r)
             print("  dtau %-5g nn=%-3d seme=%-3d  chiamate %4d  giri medio %7.2f max %4s  fattore"
                   " medio %.4f max %.4f  oltre %g: %d (contatore %s)  %s"
@@ -113,14 +125,16 @@ def main(argv):
                      r["fattore_medio"] or 0, r["fattore_max"] or 0, EP.SOGLIA_AVVISO_OMEGA,
                      oltre, r["avvisi_omega"],
                      ("### NON CONVERGE entro %d giri, al tick %d" % (EP.GIRI_MAX_OMEGA, tick_alza))
-                     if alzato else "converge in tutti i %d tick" % CC.TICK))
+                     if alzato else
+                     ("### FUORI DAL CONO prima del tick %d: s max %.6f > 1 (convergeva fin li')"
+                      % fuori) if fuori else "converge in tutti i %d tick" % CC.TICK))
             with io.open(JSONL, "a", encoding="utf-8") as fh:
                 fh.write(json.dumps(r) + "\n")
             sys.stdout.flush()
     print("-" * 100)
     d0 = [r for r in righe if r["dtau"] == CC.DTAU]
     esito("### DEVE RIUSCIRE: a dtau %g le scene di D0 convergono" % CC.DTAU,
-          all(r["alza"] is None for r in d0),
+          all(r["alza"] is None and r["fuori_cono_tick"] is None for r in d0),
           "giri max %s" % ", ".join("(%d,%d) %s" % (r["nn"], r["seme"], r["giri_max"]) for r in d0))
     esito("### IL CONTATORE: mot.avvisi_omega = le chiamate oltre soglia contate qui",
           all(r["avvisi_omega"] == r["oltre_soglia"] for r in righe),
@@ -128,7 +142,7 @@ def main(argv):
     ufficiale = EP.GIRI_MAX_OMEGA
     EP.GIRI_MAX_OMEGA = 120
     try:
-        _ch, alzato, tick_alza, _m = corsa(CC, DV, EP, FP, TK, 16, 7, CC.DTAU)
+        _ch, alzato, tick_alza, _m, _f = corsa(CC, DV, EP, FP, TK, 16, 7, CC.DTAU)
     finally:
         EP.GIRI_MAX_OMEGA = ufficiale
     esito("### DEVE FALLIRE: con GIRI_MAX_OMEGA 120 la scena (16, 7) ALZA",
