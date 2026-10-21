@@ -61,6 +61,18 @@
   - ### **per famiglia:** `(pi, pi)`; `(pi, 0)`; ### **la banda = il massimo lungo `(m, 0)` per `m` fra `h/4` e `3h/4`** *(`0.25`-`0.75 pi`; dichiarato qui)*; `k = 0`.
 - ### **Il comando:** `python csv/_stabilita_lineare.py --moneta > doc/referti_l2/moneta_gruppo_finito.txt`, con `.jsonl`.
 
+## 3-bis. ANNOTAZIONE: LA SECONDA VERSIONE DEL MANDATO (`15:08`), CORTA, SOLO `R2` -- VALE SOLO LEI *(`[[PRECEDENZA-IN-CODA]]`; si annota, la versione lunga sopra resta come era)*
+
+- ### **La stella polare in cinque righe:** `1` `A14` non si applica *(nessuna legge cambia)*; `2` il gradino `(a)` sono i controlli; `3` ### **`eps dtau = pi/2` viene dalla premessa del gruppo finito, non e' scelto per stabilizzare**; `4` tocca la camminata, non `rho` ne' `cs` *(`R2`: `cs` spento)*; `5` ### **se stabilizza, e' un risultato della premessa.**
+- ### **La previsione in due righe:** ### **`R2` resta INSTABILE**, col massimo cambiato di qualche decina per cento; ### **`pi/2` non e' speciale** *(tendenza continua)*, e ### **`A` e `B` differiscono oltre il `5%`.**
+- ### **I bracci, SOLO `R2`** *(lato `32`, base proiettata, `N dtau 100`, norma, seconda meta')*: ### **`RIF` NON si rifa'**, si rilegge da `594417f6`; `A` *(`dtau 1`, `eps pi/2`)*; `B` *(`dtau 0.125`, `eps 4 pi`)*; ### **`C045` e `C055`** *(`dtau 0.125`, `eps dtau = 0.45 pi`, `0.55 pi`)*. ### **Cadono:** `C0`, `A_cs`, `B_cs` e tutti i bracci `R1` *(e con loro il problema dell'angolo `cs * dtau` della sez. `0`, che resta scritto per quando `R1` si fara')*.
+- ### **I controlli:** la moneta a `pi/2` `= -i sigma.n_h` entro `64` ulp; la camminata sola esatta a ogni `eps`; ### **la linearita' SOLO su `B`.** *(E la base uniforme `<= 1e3` ulp, che lo strumento stampa comunque.)*
+- ### **LE LETTURE, copiate:**
+  - ### **STABILE** se la pendenza massima su ogni `k` `<= 1e-3` di `0.407`; altrimenti il massimo, dove, e il rapporto con `RIF`;
+  - ### **PUNTO SPECIALE** se `pi/2` differisce da ENTRAMBI i controlli di piu' di `3` volte la loro differenza; altrimenti ### **TENDENZA CONTINUA**;
+  - ### **`A` contro `B`:** differenza oltre il `5%` di `0.407` → ### **conta come si arriva a `pi/2`.**
+- ### **La relazione in poche righe:** i numeri, le letture, ### **e se vale la pena fare `R1`.**
+
 ## 4. TODO
 
 1. Questo task history, ### **committato DA SOLO.**
