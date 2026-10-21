@@ -20185,3 +20185,18 @@ La domanda di Luca *(«l'instabilita', se c'e', dipende dal fatto che lo spazio 
 - **Che cosa dicono, senza decidere:** ### **la moneta conta molto per `S3`**: fra `0.45 pi` e `0.55 pi` il massimo scende da `0.365` a `0.088`, ### **e il picco a `(pi, pi)` sparisce gia' a `pi/2`** *(`A` e `B`)*; ### **ma `pi/2` non stabilizza, e non e' speciale.** ### **A `dtau 1`** *(il passo dell'automa)* ### **la banda a `0.5 pi` resta, anzi cresce** *(`1.094` volte `RIF`)*.
 - ### **Per la domanda di `L1`** *(automa o limite continuo)*: ### **`A` e `B` hanno la stessa moneta per tick e danno crescite diverse**: ### **il modello al passo dell'automa e quello coi sotto-passi NON sono lo stesso**, e la premessa del gruppo finito ### **non li riconcilia.**
 - ### **Vale la pena fare `R1`?** ### **Secondo me non ora:** in `R1` la moneta per tick sta nel gruppo solo con `eps cs dtau = pi/2` *(il task history, sez. `0`)*, e ### **la premessa da sola non stabilizza `R2`**; ### **e' piu' informativa una spazzata di `eps dtau`** *(la caduta fra `0.45` e `0.55 pi` e' ripida)* -- ### **ma e' un'altra misura, e la decisione e' di Luca.** ### **Nessuna decisione sulla premessa.**
+
+### 📊 **LA SPAZZATA DI `eps dtau`: LA FINESTRA STABILE E' VUOTA** *(referto `doc/referti_l2/moneta_spazzata.txt` e `.jsonl`, strumento blob sha1-BYTE `08c374ef`, commit `d2ebb7f7`, committato e pulito; `R2`, lato `32`, `dtau 0.125`; `8/8` controlli; `0.45`-`0.55 pi` riletti da `b8197923`)*
+
+| `eps dtau` | il massimo | dove | famiglia | stabile | senza reticolo *(il massimo sul reticolo)* |
+|---|---|---|---|---|---|
+| `0.45 pi` | `0.3648` | `(16, 16)` | RETICOLO | no | no *(`0.3648`)* |
+| `0.50 pi` | `0.1693` | `(16, 0)` | RETICOLO | no | no *(`0.1693`)* |
+| `0.55 pi` | `0.0875` | `(3, 4)` | BANDA | no | no *(`0.0033`)* |
+| `0.60 pi` | `0.1020` | `(6, 3)` | BANDA | no | no *(`0.0006`)* |
+| `0.65 pi` | `0.1180` | `(5, -6)` | BANDA | no | no *(`0.0191`)* |
+| `0.70 pi` | `0.1300` | `(6, 6)` | BANDA | no | no *(`0.1045`)* |
+| `0.75 pi` | `0.1425` | `(11, -1)` | BANDA | no | no *(`0.1393`)* |
+
+- ### **Nessun `eps dtau` stabilizza `R2`: la FINESTRA STABILE e' VUOTA.** Il massimo ha un minimo a `0.55 pi` *(`0.0875`)* e risale; ### **il reticolo quasi si spegne fra `0.55` e `0.60 pi`** *(`0.0033`, `0.0006`, sopra la soglia `4.07e-4`)*, ### **ma la banda a onde medie resta.**
+- ### **Nessuna cura:** ### **un `eps` scelto perche' stabilizza sarebbe una toppa** *(`A1`)*, e qui ### **non ce n'e' nemmeno uno.** ### **La coda passa al progetto dei triangoli** *(`a840e8f7`)*: ### **la domanda per Luca e' quella del progetto, i gradi di liberta' della moneta su `6` direzioni.**

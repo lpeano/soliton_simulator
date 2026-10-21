@@ -1,0 +1,31 @@
+[TIMBRO] _stabilita_lineare.py  sha1-BYTE 08c374ef  committato e pulito
+====================================================================================================
+LA SPAZZATA DI eps dtau, SOLO R2 -- l'ultima misura sulla moneta
+====================================================================================================
+  LA CONFIGURAZIONE INTERA, dichiarata:
+  il passo: 14 pezzi, impronta 2e7f795d2a52fbe7 (leggi.yaml INTATTO: eps SOLO nella scena); lato 32, dtau 0.125; R2; base proiettata, N dtau 100; norma, seconda meta'
+  nuovi: eps dtau = (0.6, 0.65, 0.7, 0.75) pi; riletti da b8197923: C045 0.45 pi, B 0.50 pi, C055 0.55 pi; la soglia di stabile 4.070e-04
+----------------------------------------------------------------------------------------------------
+### I CONTROLLI, sui bracci nuovi
+  eps dtau 0.60 pi: la camminata sola ESATTA                             PASSA   2.098e-13 contro 1.137e-11
+  eps dtau 0.60 pi: base valida (<= 1000 ulp), braccio finito            PASSA   0.7 ulp, N, 149 s
+  eps dtau 0.65 pi: la camminata sola ESATTA                             PASSA   2.104e-13 contro 1.137e-11
+  eps dtau 0.65 pi: base valida (<= 1000 ulp), braccio finito            PASSA   0.6 ulp, N, 153 s
+  eps dtau 0.70 pi: la camminata sola ESATTA                             PASSA   2.840e-13 contro 1.137e-11
+  eps dtau 0.70 pi: base valida (<= 1000 ulp), braccio finito            PASSA   0.7 ulp, N, 150 s
+  eps dtau 0.75 pi: la camminata sola ESATTA                             PASSA   3.090e-13 contro 1.137e-11
+  eps dtau 0.75 pi: base valida (<= 1000 ulp), braccio finito            PASSA   0.7 ulp, N, 145 s
+----------------------------------------------------------------------------------------------------
+### LA TABELLA (riletti: 0.45, 0.50, 0.55 pi)
+  eps dtau   massimo    dove       k (pi)         famiglia     stabile   senza reticolo max reticolo
+  0.45 pi    +0.3648    (16, 16)   (np.float64(1.0), np.float64(1.0)) RETICOLO     no        no             +0.3648
+  0.50 pi    +0.1693    (16, 0)    (np.float64(1.0), np.float64(0.0)) RETICOLO     no        no             +0.1693
+  0.55 pi    +0.0875    (3, 4)     (np.float64(0.1875), np.float64(0.25)) BANDA        no        no             +0.0033
+  0.60 pi    +0.1020    (6, 3)     (np.float64(0.375), np.float64(0.1875)) BANDA        no        no             +0.0006
+  0.65 pi    +0.1180    (5, -6)    (np.float64(0.3125), np.float64(0.375)) BANDA        no        no             +0.0191
+  0.70 pi    +0.1300    (6, 6)     (np.float64(0.375), np.float64(0.375)) BANDA        no        no             +0.1045
+  0.75 pi    +0.1425    (11, -1)   (np.float64(0.6875), np.float64(0.0625)) BANDA        no        no             +0.1393
+  ### LA FINESTRA STABILE: VUOTA
+====================================================================================================
+### 8/8 prove passate. NESSUNA CURA: un eps scelto perche' stabilizza sarebbe una toppa (A1).
+====================================================================================================
