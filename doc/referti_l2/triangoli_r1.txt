@@ -1,0 +1,39 @@
+[TIMBRO] _triangoli_r1.py  sha1-BYTE 8e6f6a97  committato e pulito
+====================================================================================================
+TRIANGOLI, GRADINO 2-BIS: R1 (cs + CAMM-FASE-VUOTO) SUL TORO TRIANGOLARE, BRACCIO SN
+====================================================================================================
+  LA CONFIGURAZIONE INTERA, dichiarata:
+  R1: cs ACCESO, Lambda_c = 1 * Lambda medio; lato 32, dtau 0.125, x 0.1, eps 0.5; base proiettata; N dtau 100; gamma = la pendenza della NORMA sulla seconda meta' (e accanto gli autovalori)
+  il passo: 14 pezzi, impronta 2e7f795d2a52fbe7; GIRI_MAX_OMEGA 200, avviso oltre 100; la cella 6d complessi
+  SN: psi e phi per sqrt(4/6) (rho e Lambda per nodo come il quadrato)
+  soglie: base <= 1000 ulp; esatta N*64 ulp; P3 64 ulp; linearita' e C6 0.001 * max gamma; STABILE <= 0.001 * 0.545
+----------------------------------------------------------------------------------------------------
+### 1. I CONTROLLI
+  DEVE RIUSCIRE: R1 di 594417f6 AL BIT sul quadrato del costruttore generale     PASSA   10 campi identici, 469 s
+  DEVE RIUSCIRE: la camminata sola sui triangoli ESATTA, N dtau 100: <= N*64 ulp PASSA   2.782e-13 contro 1.137e-11 (N 800)
+  P1 SN cs acceso: un tick con le cache azzerate = con le cache, AL BIT          PASSA   
+  P3 SN cs acceso: nessuna memoria in mot                                        PASSA   AL BIT, 0.0 ulp
+----------------------------------------------------------------------------------------------------
+### 2. R1 SUI TRIANGOLI, SN
+  R1 triangoli SN eps 1e-07    rho_m 0.400000 Lambda_m 4.000000 Lambda_c 4.000000 cs_m 0.500000 uniformita' 1.2 ulp  952 s  N
+      il cono: s max 0.062500;  il punto fisso: giri max 1, avvisi 0, fattore max 0.0000
+  R1 triangoli SN eps 1e-06    rho_m 0.400000 Lambda_m 4.000000 Lambda_c 4.000000 cs_m 0.500000 uniformita' 1.2 ulp  981 s  N
+      il cono: s max 0.062500;  il punto fisso: giri max 1, avvisi 0, fattore max 0.0000
+  il quadrato: il cono s max 0.062500;  giri max 1, avvisi 0, fattore max 0.0000
+  la base SN: uniformita' <= 1000 ulp per tutto l'intervallo                     PASSA   1.2 ulp
+  il cono: s <= 1 a ogni nodo, dopo ogni tick della base                         PASSA   s max 0.062500
+  il contatore degli avvisi del punto fisso, STAMPATO                            PASSA   0 avvisi (oltre 100 giri), giri max 1
+  DEVE RIUSCIRE: la linearita' su SN, 1e-7 contro 1e-6                           PASSA   5.006e-06 contro 3.897e-04
+  DEVE RIUSCIRE: l'isotropia C6 di gamma(k) sui triangoli, SN                    PASSA   9.413e-08 contro 3.897e-04
+  DEVE FALLIRE: l'isotropia C6 di R1 sul QUADRATO (594417f6)                     PASSA   2.214e-01 contro 5.411e-04
+----------------------------------------------------------------------------------------------------
+### 3. LE LETTURE (fissate nel task history)
+  QUADRATO R1: max gamma (norma) 0.5411 a (16, 16); (autovalori) 0.5445; (pi,0) 0.4779  (pi,pi) 0.5411; banda (punto_banda) 0.4779
+  R1 TRIANGOLI SN: max gamma 0.3897 a (8, 28) (interno), |k| 1.5708; rapporto col quadrato (norma 0.5411) 0.7202, col 0.545 del mandato 0.7150; autovalori 0.3914
+      STABILE (max <= 5.450e-04)? NO
+      IL BORDO: M (0, 16) 0.2500  (16, 0) 0.2500  (16, 16) 0.2500;  K (10, 11) 0.1797  (11, 10) 0.1797  (11, 11) 0.1797  (21, 21) 0.1797  (21, 22) 0.1797  (22, 21) 0.1797;  centro +0.0272  -- il quadrato (pi,0) 0.4779  (pi,pi) 0.5411
+      LA BANDA (escluso centro, M, K): 0.3897 a (8, 28) -- R2 sui triangoli 0.3768
+      QUANTO I TRIANGOLI TOLGONO (1 - max tri / max quadrato, norma): R1 0.2798   R2 0.0620   (R2: 0.3768 contro 0.4018)
+====================================================================================================
+TRIANGOLI, R1: 10 su 10   ### TUTTI PASSATI
+====================================================================================================

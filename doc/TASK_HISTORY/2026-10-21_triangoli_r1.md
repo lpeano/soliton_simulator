@@ -40,6 +40,8 @@
 - **Cosa NON so:** ### **se il bordo dei triangoli in `R1` resta quieto** *(in `R1` il bordo del quadrato e'
   forte: `(pi, 0)` `0.478`)*; ### **quanti giri chiede il punto fisso di `Omega` sui triangoli.**
 
+### ⚠ **ANNOTAZIONE DOPO I NUMERI** *(`2026-10-22`, referto `doc/referti_l2/triangoli_r1.txt`)*: ### **LA PREVISIONE E' CADUTA.** Credevo `~0.45` *(fra `0.41` e `0.48`)*; ### **il massimo e' `0.3897`**, all'interno, ### **sotto la forchetta.** ### **L'errore del ragionamento:** ho preso come riferimento il bordo del quadrato *(`0.478`)* ridotto come in `R2`; ### **invece sui triangoli il bordo resta quieto anche in `R1`** *(`M` `0.250`, `K` `0.180`)* ### **e il massimo interno e' appena sopra quello di `R2`** *(`0.3768`)*.
+
 ## 2. LA PROGETTAZIONE: I PASSI, E COSA MI FA FERMARE
 
 - **Lo strumento:** `csv/_triangoli_r1.py`, ### **le funzioni di `csv/_stabilita_triangoli.py` con `cs`
