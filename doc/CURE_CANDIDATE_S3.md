@@ -36,6 +36,25 @@ gruppo e' una proprieta' della sola camminata e ### **non dipende da `nu_S3`**, 
 
 ---
 
+### ⛔ **ANNOTAZIONE DEL `2026-10-21`, `10:00`: `F4` CORRETTO, E LE SUE CONSEGUENZE** *(mandato di Luca sullo STOP di `ac9d0d7d`; si annota, la tabella sopra resta com'era)*
+
+- ### **`F4` CORRETTO:** con la base proiettata, `N dtau 100` e lo stimatore della norma *(`ac9d0d7d`, rifatto al bit in `d0_risonanza_bis`)*, ### **il massimo di `R2` LUNGO `(m, 0)` sta a `m = 8, 8, 7`, cioe' `0.50`, `0.50`, `0.44 pi`** per `x` `0.01`, `0.1`, `1`: ### **QUASI FERMO.**
+  - ### **Lo «spostamento con `nu_S3`» di `c38367db` veniva da due cose:** ### **l'intervallo corto** *(`N dtau 25`, non asintotico)* e ### **il massimo GLOBALE**, che ### **salta fra le due famiglie** -- la banda sull'asse, il picco a `(pi, pi)` a `x 0.01` *(dove la diagonale ha il massimo a `m = 16`)*.
+- ### **LE CONSEGUENZE:**
+  - ### **la previsione di `C1`** *(«il massimo si sposta a `k` piu' piccoli», scheda di `C1`, `(e)`)* ### **perde la sua base**, perche' si appoggiava su `F4`. ### **Si riformula:** con il filtro binomiale `C1` ### **abbassa la banda di un fattore fra `0.75` e `9/16`**, e ### **del suo spostamento non si sa niente** -- ### **non si prevede.**
+  - ### **L'errore `n.27` del guardiano va RIDIMENSIONATO:** l'ipotesi della velocita' di gruppo era stata ritirata ### **per `F4`**, e `F4` ### **non regge** sull'intervallo lungo. ### **L'ipotesi non era contraddetta: era solo non provata.**
+  - ### **`D0` E' CADUTO** *(`d0_risonanza_bis`)*: nessuna condizione della lista chiusa tiene. ### ⚠ **MA QUASI TUTTE SONO NON INFORMATIVE** *(specificita' oltre il `20%`: con `12` rami gli incroci sono fitti)*: ### **`D0` non conferma la risonanza, e non la smentisce con forza.** ### **Per la regola di questo documento, `C4` PERDE la sua ragione di RISONANZA.**
+
+### 📌 **UN'IPOTESI NUOVA, POST HOC** *(formulata DOPO aver visto i numeri di `ac9d0d7d`, e dichiarata tale)*: ### **«la banda di `S3` sta dove la camminata ha la VELOCITA' DI GRUPPO massima»**
+
+- ### **L'INFORMAZIONE, non un verdetto** *(`d0_risonanza_bis`, `d omega_a / dk` lungo `(m, 0)` dai rami gia' misurati)*: ### **i sei rami dispersivi** *(`3`, `4`, `5`, `9`, `10`, `11`)* ### **hanno `|v_g|` massimo a `m = 9`, cioe' `0.56 pi`** *(`0.45`-`0.46`)*; gli altri sei sono quasi piatti *(`|v_g| <= 0.08`)*. ### **La banda di `R2` sta a `m = 8, 8, 7`.** ### **Vicine, a `1`-`2` passi: compatibile, non provato.**
+- ### **LA PROVA VERA SI PROGETTA, non si fa:** serve ### **una manopola che sposti il massimo della velocita' di gruppo SENZA toccare `S3`** -- per esempio ### **la moneta** *(il suo `eps`, o il peso del Grover)*. ### **E' un cambio di fisica: la decisione e' di Luca.**
+  - ### **LA PROVEREBBE:** spostando il massimo di `v_g` di `Delta m` passi, ### **la banda di `R2` si sposta degli stessi `Delta m`** *(entro `1` passo)*, ### **a tutti e tre gli `x`.**
+  - ### **LA SMENTIREBBE:** il massimo di `v_g` si sposta ### **e la banda resta dov'e'**; oppure la banda si sposta ### **in verso opposto.**
+- ### **SE REGGESSE:** `C4` ### **ritroverebbe una ragione**, diversa dalla risonanza *(la banda segue la propagazione, non un accordo di frequenze)*; e `C1`/`C2` ### **agirebbero sull'ampiezza, non sulla posizione.**
+
+---
+
 ## 2. LA DIAGNOSI PROPOSTA, PRIMA DELLE CURE: `D0` — LA RISONANZA *(da scrivere, NON fatta)*
 
 - ### **Che cosa si calcola:**

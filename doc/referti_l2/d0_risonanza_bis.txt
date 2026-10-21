@@ -1,0 +1,102 @@
+[TIMBRO] _stabilita_lineare.py  sha1-BYTE 352cb4b4  committato e pulito
+====================================================================================================
+D0 RIFATTO: IL RILEVATORE CORRETTO, LA STESSA LISTA CHIUSA -- una diagnosi
+====================================================================================================
+  LA CONFIGURAZIONE INTERA, dichiarata:
+  il passo: 14 pezzi, impronta 2e7f795d2a52fbe7; lato 32, dtau 0.125; R2 (S3 sola, cs spento) con la base proiettata, N dtau 100, x in (0.01, 0.1, 1.0)
+  il rilevatore (annotazione 4-bis): DEGENERAZIONE se |r| <= 64 ulp della scala su tutto l'asse; incrocio = cambio di segno vero o zero isolato; SPECIFICITA' > 0.2 -> non informativa; il permutato solo per K1-K4
+  la lista CHIUSA: K1, K2, K3, K4, K5, K6; la tolleranza 1 passo di k (pi/16)
+----------------------------------------------------------------------------------------------------
+### I CASI SINTETICI DEL RILEVATORE
+  DEVE RIUSCIRE: un incrocio vero a m = 8, trovato a distanza 0, specifi PASSA   incroci [np.float64(8.0)], specificita' 0.1875
+  DEVE FALLIRE: due rami IDENTICI -> DEGENERAZIONE, non incrocio         PASSA   
+### I CASI DI CONTROLLO E LE PROVE
+  il conto di c38367db (senza argomenti) AL BIT: R2 a lato 31            PASSA   
+  --lungo (16b5d10f) AL BIT: R2 lato 32, i quattro L                     PASSA   
+  la camminata sola e' LINEARE IN SENSO COMPLESSO                        PASSA   1.570e-16
+  i suoi autovalori hanno modulo 1                                       PASSA   2.665e-15, 2.887e-15
+  LA POMPA: omega +0.037498 peso 0.467265; omega +0.037498 peso 0.002652; omega -6.320683 peso 0.101754; omega -6.320683 peso 0.428328
+  omega_a(k) AL BIT con ac9d0d7d                                         PASSA   
+  gamma(k) di R2 x 0.01 entro 1e-12 da ac9d0d7d                          PASSA   0.000e+00
+  R2 x 0.01   nu_S3 0.980296  [151 s]
+  gamma(k) di R2 x 0.1 entro 1e-12 da ac9d0d7d                           PASSA   0.000e+00
+  R2 x 0.1 = 594417f6 entro 1e-3                                         PASSA   0.000e+00
+  R2 x 0.1    nu_S3 0.826446  [154 s]
+  gamma(k) di R2 x 1 entro 1e-12 da ac9d0d7d                             PASSA   0.000e+00
+  R2 x 1      nu_S3 0.250000  [143 s]
+----------------------------------------------------------------------------------------------------
+### LE CONDIZIONI: massimo, incrocio vicino, distanza, specificita', degenerazioni
+  K1
+       x 0.01  (m,0) max  8 incrocio 14.63 dist 6.63 specificita' 0.125  degeneri 0
+       x 0.01  (m,m) max 16 incrocio 14.83 dist 1.17 specificita' 0.438 NON INFORMATIVA  degeneri 0
+       x 0.1   (m,0) max  8 incrocio 11.76 dist 3.76 specificita' 0.250 NON INFORMATIVA  degeneri 0
+       x 0.1   (m,m) max  5 incrocio 7.15 dist 2.15 specificita' 0.375 NON INFORMATIVA  degeneri 0
+       x 1     (m,0) max  7 incrocio 6.46 dist 0.54 specificita' 0.250 NON INFORMATIVA  degeneri 0
+       x 1     (m,m) max  5 incrocio 4.38 dist 0.62 specificita' 0.375 NON INFORMATIVA  degeneri 0
+     -> non tiene
+  K2
+       x 0.01  (m,0) max  8 incrocio - dist inf specificita' 0.000  degeneri 0
+       x 0.01  (m,m) max 16 incrocio 13.22 dist 2.78 specificita' 0.438 NON INFORMATIVA  degeneri 0
+       x 0.1   (m,0) max  8 incrocio - dist inf specificita' 0.000  degeneri 0
+       x 0.1   (m,m) max  5 incrocio 10.03 dist 5.03 specificita' 0.312 NON INFORMATIVA  degeneri 0
+       x 1     (m,0) max  7 incrocio 7.99 dist 0.99 specificita' 0.250 NON INFORMATIVA  degeneri 0
+       x 1     (m,m) max  5 incrocio 5.31 dist 0.31 specificita' 0.375 NON INFORMATIVA  degeneri 0
+     -> non tiene
+  K3
+       x 0.01  (m,0) max  8 incrocio 8.30 dist 0.30 specificita' 0.250 NON INFORMATIVA  degeneri 0
+       x 0.01  (m,m) max 16 incrocio 14.83 dist 1.17 specificita' 0.562 NON INFORMATIVA  degeneri 0
+       x 0.1   (m,0) max  8 incrocio 7.95 dist 0.05 specificita' 0.375 NON INFORMATIVA  degeneri 0
+       x 0.1   (m,m) max  5 incrocio 5.00 dist 0.00 specificita' 0.500 NON INFORMATIVA  degeneri 0
+       x 1     (m,0) max  7 incrocio 6.47 dist 0.53 specificita' 0.312 NON INFORMATIVA  degeneri 0
+       x 1     (m,m) max  5 incrocio 4.39 dist 0.61 specificita' 0.438 NON INFORMATIVA  degeneri 0
+     -> non tiene
+  K4
+       x 0.01  (m,0) max  8 incrocio - dist inf specificita' 0.000  degeneri 0
+       x 0.01  (m,m) max 16 incrocio 13.22 dist 2.78 specificita' 0.438 NON INFORMATIVA  degeneri 0
+       x 0.1   (m,0) max  8 incrocio 12.29 dist 4.29 specificita' 0.188  degeneri 0
+       x 0.1   (m,m) max  5 incrocio 7.33 dist 2.33 specificita' 0.438 NON INFORMATIVA  degeneri 0
+       x 1     (m,0) max  7 incrocio 7.99 dist 0.99 specificita' 0.375 NON INFORMATIVA  degeneri 0
+       x 1     (m,m) max  5 incrocio 5.31 dist 0.31 specificita' 0.500 NON INFORMATIVA  degeneri 0
+     -> non tiene
+  K5
+       x 0.01  (m,0) max  8 incrocio 2.88 dist 5.12 specificita' 0.188  degeneri 24
+       x 0.01  (m,m) max 16 incrocio 16.00 dist 0.00 specificita' 1.000 NON INFORMATIVA  degeneri 8
+       x 0.1   (m,0) max  8 incrocio 2.88 dist 5.12 specificita' 0.188  degeneri 24
+       x 0.1   (m,m) max  5 incrocio 5.00 dist 0.00 specificita' 1.000 NON INFORMATIVA  degeneri 8
+       x 1     (m,0) max  7 incrocio 2.88 dist 4.12 specificita' 0.188  degeneri 24
+       x 1     (m,m) max  5 incrocio 5.00 dist 0.00 specificita' 1.000 NON INFORMATIVA  degeneri 8
+     -> non tiene
+  K6
+       x 0.01  (m,0) max  8 incrocio 8.00 dist 0.00 specificita' 1.000 NON INFORMATIVA  degeneri 24
+       x 0.01  (m,m) max 16 incrocio 16.00 dist 0.00 specificita' 1.000 NON INFORMATIVA  degeneri 16
+       x 0.1   (m,0) max  8 incrocio 8.00 dist 0.00 specificita' 1.000 NON INFORMATIVA  degeneri 24
+       x 0.1   (m,m) max  5 incrocio 5.00 dist 0.00 specificita' 1.000 NON INFORMATIVA  degeneri 16
+       x 1     (m,0) max  7 incrocio 7.00 dist 0.00 specificita' 1.000 NON INFORMATIVA  degeneri 24
+       x 1     (m,m) max  5 incrocio 5.00 dist 0.00 specificita' 1.000 NON INFORMATIVA  degeneri 16
+     -> non tiene
+### LE DEGENERAZIONI escluse (una retta, x 0.1: le prime per condizione)
+  K5 (m,0): 24 combinazioni, per esempio rami 5,9 pompa 0,2 s=+0; rami 5,9 pompa 0,3 s=+0; rami 5,9 pompa 1,2 s=+0
+  K5 (m,m): 8 combinazioni, per esempio rami 6,6 pompa 0,2 s=+0; rami 6,6 pompa 0,3 s=+0; rami 6,6 pompa 1,2 s=+0
+  K6 (m,0): 24 combinazioni, per esempio rami 0,1 p=0 q=1; rami 0,1 p=1 q=0; rami 0,1 p=2 q=3
+  K6 (m,m): 16 combinazioni, per esempio rami 0,1 p=0 q=1; rami 0,1 p=1 q=0; rami 0,1 p=2 q=3
+  (i rami sono doppi per la simmetria della camminata, e la pompa occupa due fasi doppie: le differenze fra le copie sono zero ovunque)
+----------------------------------------------------------------------------------------------------
+### IL CASO PERMUTATO (deve fallire), SOLO per K1-K4 che tengono
+----------------------------------------------------------------------------------------------------
+### INFORMAZIONE POST HOC (dichiarata): la velocita' di gruppo d omega / dk lungo (m,0)
+  ramo  0  |v_g| massimo 0.0018 a m =  2 (0.125 pi)
+  ramo  1  |v_g| massimo 0.0018 a m =  2 (0.125 pi)
+  ramo  2  |v_g| massimo 0.0769 a m =  2 (0.125 pi)
+  ramo  3  |v_g| massimo 0.4512 a m =  9 (0.562 pi)
+  ramo  4  |v_g| massimo 0.4512 a m =  9 (0.562 pi)
+  ramo  5  |v_g| massimo 0.4602 a m =  9 (0.562 pi)
+  ramo  6  |v_g| massimo 0.0000 a m = 14 (0.875 pi)
+  ramo  7  |v_g| massimo 0.0008 a m = 11 (0.688 pi)
+  ramo  8  |v_g| massimo 0.0008 a m = 11 (0.688 pi)
+  ramo  9  |v_g| massimo 0.4602 a m =  9 (0.562 pi)
+  ramo 10  |v_g| massimo 0.4520 a m =  9 (0.562 pi)
+  ramo 11  |v_g| massimo 0.4520 a m =  9 (0.562 pi)
+====================================================================================================
+### IL VERDETTO: D0 CADE: nessuna condizione della lista tiene
+### 11/11 prove passate. NESSUNA CURA SCELTA.
+====================================================================================================
