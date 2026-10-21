@@ -1470,7 +1470,9 @@ def famiglie(pend, lato):
     g = np.asarray(pend)
     i, j = np.unravel_index(int(np.argmax(g)), g.shape)
     banda_m = max(range(h // 2, 3 * h // 2 + 1), key=lambda m: g[m, 0])
-    return {"massimo": float(g[i, j]), "dove": (kpi(i, lato)[0], kpi(j, lato)[0]),
+    # ### ⚠ **`int(...)`: il `jsonl` non serializza gli interi di numpy** *(la corsa del
+    # ### `2026-10-21` alle `15:40` e' caduta qui dopo il braccio `A`)*.
+    return {"massimo": float(g[i, j]), "dove": (int(kpi(i, lato)[0]), int(kpi(j, lato)[0])),
             "(pi,pi)": float(g[h, h]), "(pi,0)": float(g[h, 0]),
             "banda": float(g[banda_m, 0]), "banda_m": int(banda_m), "k=0": float(g[0, 0])}
 
