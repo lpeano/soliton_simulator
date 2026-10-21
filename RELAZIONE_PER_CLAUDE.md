@@ -20101,3 +20101,25 @@ La domanda di Luca *(«l'instabilita', se c'e', dipende dal fatto che lo spazio 
 - ### **Ogni cura aggiunge un numero** *(tranne `C3`)*: ### **toppa se scelto per stabilizzare, costante di accoppiamento se derivato.** I criteri di screening sono ### **PROPOSTI, non fissati.**
 
 ### ❓ **LA PRIMA DOMANDA PER LUCA** *(una alla volta)*: ### **fare `D0` -- la risonanza fra la dispersione della camminata e `nu_S3` -- PRIMA delle cure?** Costa ### **pochi minuti di conto e uno strumento piccolo** *(le fasi proprie dalla camminata esatta; `R2` proiettato a `x 0.01` e `x 1`)*, e ### **dice se le cure che spostano i ritmi** *(`C1`, `C2`, `C4`)* ### **hanno una ragione.** ### **Nessuna cura scelta. `LINEARE`, `Lambda_c`, le letture «alla Jeans» o di modulazione, lo stato finale FERMI; `D4` da rileggere.**
+
+### ⛔ **`D0`, LA RISONANZA: STOP -- IL CRITERIO E' TROPPO LARGO, E IL CASO PERMUTATO L'HA DETTO. ERRORE MIO `C.5`** *(referto `doc/referti_l2/d0_risonanza.txt` e `.jsonl`, strumento `csv/_stabilita_lineare.py --risonanza` blob sha1-BYTE `91080085`, commit `62d16f69`, committato e pulito; task history `605f006b`)*
+
+- ### ✅ **LE PROVE DELLA CAMMINATA E I CONTROLLI PASSANO:**
+  - i modi di prima AL BIT *(`c38367db`, `16b5d10f`)*;
+  - ### **la camminata sola e' lineare in senso complesso** *(`1.6e-16`)*, ### **i suoi autovalori hanno modulo `1`** *(`2.7e-15`, `2.9e-15`)*, ### **materia e vuoto non si mescolano** *(`0.0`)*;
+  - ### **`R2` a `x 0.1` ridà `594417f6` ESATTAMENTE** *(`0.0` su ogni `k`, due stimatori)*; la base resta uniforme *(`0.2`-`1.6` ulp)*.
+- **LE MISURE:**
+  - ### **la pompa:** lo stato uniforme occupa ### **due fasi `k = 0` della materia, ciascuna DOPPIA**: `+0.0375` *(pesi `0.467` e `0.003`)* e `-6.3207` *(`0.102` e `0.428`)*; ### **la precessione e' `6.358`** *(per unita' di tempo)*;
+  - `nu_S3`: `0.980`, `0.826`, `0.250` a `x` `0.01`, `0.1`, `1`;
+  - ### **il massimo di `gamma`** *(norma, seconda meta')*: ### **lungo `(m, 0)` a `m = 8, 8, 7`** *(`0.395`, `0.402`, `0.335`)*; ### **lungo `(m, m)` a `m = 16, 5, 5`** *(`0.471`, `0.356`, `0.317`)*.
+- ### **LE CONDIZIONI** *(lista chiusa del task history)*: `K1`, `K2`, `K3`, `K4` ### **non tengono**; ### **`K5` e `K6` «tengono» con distanza `0.00` a OGNI massimo**.
+- ### ⛔ **E IL CASO CHE DOVEVA FALLIRE NON FALLISCE:** `K5` e `K6` ### **tengono anche col `nu` permutato** *(le due permutazioni cicliche)* -- ### **ma `K5` e `K6` non dipendono da `nu`**, quindi ### **per costruzione** non potevano cadere permutando. ### **Per il criterio fissato: il criterio e' TROPPO LARGO → STOP.**
+- ### ⛔ **ERRORE MIO `C.5`: la causa e' nel mio rilevatore degli incroci.**
+  - Conta un incrocio dove il residuo ### **cambia segno OPPURE vale zero** *(`a * b <= 0`)*; ### **un residuo IDENTICAMENTE nullo** e' quindi un «incrocio» ### **a ogni `m`**, e la distanza da qualunque massimo e' `0`.
+  - ### **E i residui identicamente nulli ci sono, per le DEGENERAZIONI:** i rami della camminata sono a coppie *(nella tabella della dispersione quasi tutti compaiono due volte)*, e ### **le fasi della pompa sono doppie** *(la «precessione» stampata contiene due `+0.000000`: la differenza fra le due copie della stessa fase)*. ### **`K6` con precessione `0` e' `omega_a - omega_b = 0` fra due rami degeneri: vero dappertutto.** `K5` ### **ha lo stesso difetto** per una coppia di rami che somma esattamente alla pompa *(non l'ho isolata: e' l'unica lettura compatibile con distanza `0.00` a tutti i `k` e a tutti gli `x`)*.
+  - ### **Il caso permutato e' servito esattamente a questo**, e lo dico: ### **senza di lui avrei letto «`D0` NON DECIDIBILE fra `K5` e `K6`».**
+- **INFORMAZIONE, NON UN VERDETTO:** ### **`K3`** *(le bande laterali con `+- nu`)* ### **e' l'unica condizione che dipende da `nu` e che resta vicina**: distanze `0.30`, `1.17`, `0.05`, `0.00`, `0.53`, `0.61` -- ### **cade solo a `x 0.01` lungo la diagonale** *(`1.17` contro `1`)*. ### **Non la leggo:** col rilevatore corretto potrebbe cambiare, e ### **la tolleranza e' del mandato.**
+- ### **CHE COSA CAMBIA NEL DOCUMENTO DELLE CURE: NIENTE, perche' `D0` NON HA UN ESITO.** `C1` *(«il massimo si sposta»)* e `C4` *(«se `D0` dice risonanza»)* ### **restano come sono.**
+- ### **LA CORREZIONE DEL DOCUMENTO DELLE CURE chiesta dal mandato e' fatta** *(stesso commit)*: ### **per `C1` conta `f(k)^2 >= 0`**, che riduce o spegne ma non rovescia; ### **il «segno rovesciato» vale solo per una legge INNESTATA.**
+
+### 📌 **LA DOMANDA PER LUCA** *(un cambio di METODO del rilevatore, da decidere prima di rifare `D0`)*: ### **escludere le combinazioni IDENTICAMENTE soddisfatte** *(per esempio: una combinazione conta solo se il suo residuo NON e' nullo entro gli ulp su tutta la retta)*, ### **togliere le degenerazioni** *(una sola copia per ramo e per fase della pompa)*, ### **e contare un incrocio solo dove il segno CAMBIA davvero.** ### **La lista chiusa resterebbe la stessa.** ### **Nessuna cura scelta.**

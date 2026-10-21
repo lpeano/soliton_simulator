@@ -1,0 +1,105 @@
+[TIMBRO] _stabilita_lineare.py  sha1-BYTE 91080085  committato e pulito
+====================================================================================================
+D0: LA BANDA DI S3 E' UNA RISONANZA FRA LA CAMMINATA E IL RITMO DI S3? -- una diagnosi
+====================================================================================================
+  LA CONFIGURAZIONE INTERA, dichiarata:
+  il passo: 14 pezzi, impronta 2e7f795d2a52fbe7; lato 32, dtau 0.125; R2 (S3 sola, cs spento) con la base proiettata, N dtau 100, x in (0.01, 0.1, 1.0)
+  la dispersione: la camminata sola ESATTA, A(k) 12x12 complessa, omega in (-pi/dtau, pi/dtau], rami ordinati, materia (8) e vuoto (4) separati
+  gamma(k): la pendenza della seconda meta', stimatore della NORMA; le rette (m,0) e (m,m), m = 1..16; la tolleranza 1 passo di k (pi/16)
+  la lista CHIUSA: K1 interbanda x1 nu, K2 interbanda x2 nu, K3 laterali x1 nu, K4 laterali x2 nu, K5 laterali x0 nu, K6 precessione
+----------------------------------------------------------------------------------------------------
+### I CASI DI CONTROLLO E LE PROVE
+  il conto di c38367db (senza argomenti) AL BIT: R2 a lato 31            PASSA   
+  --lungo (16b5d10f) AL BIT: R2 lato 32, i quattro L                     PASSA   
+  la camminata sola e' LINEARE IN SENSO COMPLESSO: risposta(i e) = i ris PASSA   1.570e-16
+  i suoi autovalori hanno modulo 1 (materia e vuoto)                     PASSA   2.665e-15, 2.887e-15
+  psi e phi NON si mescolano nella camminata sola (i blocchi fuori diago PASSA   0.000e+00
+  LA POMPA (le fasi k = 0 della materia occupate dallo stato uniforme, peso > 1e-06): omega +0.037498 peso 0.467265; omega +0.037498 peso 0.002652; omega -6.320683 peso 0.101754; omega -6.320683 peso 0.428328
+  la precessione (differenze): +0.000000 +6.358181 +6.358181 +6.358181 +6.358181 +0.000000
+  R2 x 0.01   nu_S3 0.980296  uniformita' 0.2 ulp  [157 s]
+  DEVE RIUSCIRE: R2 x 0.1 = 594417f6 entro 1e-3 su ogni k, due stimatori PASSA   0.000e+00
+  R2 x 0.1    nu_S3 0.826446  uniformita' 1.1 ulp  [157 s]
+  R2 x 1      nu_S3 0.250000  uniformita' 1.6 ulp  [136 s]
+----------------------------------------------------------------------------------------------------
+### LA DISPERSIONE DELLA CAMMINATA, omega_a(k) (in 1/tempo), lungo le rette
+  (m,0):
+     m  0  -6.360 -6.360 -6.321 -6.321 -6.283 -6.283 -3.142 -3.065 -3.065 -0.000 +0.037 +0.037
+     m  2  -6.359 -6.359 -6.291 -6.291 -6.283 -6.253 -3.142 -3.065 -3.065 -0.030 +0.007 +0.007
+     m  4  -6.359 -6.359 -6.283 -6.205 -6.205 -6.165 -3.142 -3.065 -3.065 -0.119 -0.080 -0.080
+     m  6  -6.359 -6.359 -6.283 -6.070 -6.070 -6.028 -3.142 -3.065 -3.065 -0.255 -0.214 -0.214
+     m  8  -6.359 -6.359 -6.283 -5.903 -5.903 -5.858 -3.142 -3.064 -3.064 -0.425 -0.382 -0.382
+     m 10  -6.358 -6.358 -6.283 -5.726 -5.726 -5.677 -3.142 -3.064 -3.064 -0.606 -0.559 -0.559
+     m 12  -6.358 -6.358 -6.283 -5.566 -5.566 -5.514 -3.142 -3.064 -3.064 -0.770 -0.719 -0.719
+     m 14  -6.358 -6.358 -6.283 -5.453 -5.453 -5.398 -3.142 -3.064 -3.064 -0.885 -0.832 -0.832
+     m 16  -6.358 -6.358 -6.283 -5.413 -5.413 -5.356 -3.142 -3.064 -3.064 -0.927 -0.873 -0.873
+  (m,m):
+     m  0  -6.360 -6.360 -6.321 -6.321 -6.283 -6.283 -3.142 -3.065 -3.065 -0.000 +0.037 +0.037
+     m  2  -6.359 -6.359 -6.283 -6.261 -6.261 -6.222 -3.142 -3.065 -3.065 -0.061 -0.023 -0.023
+     m  4  -6.359 -6.359 -6.283 -6.083 -6.083 -6.041 -3.142 -3.065 -3.065 -0.242 -0.201 -0.201
+     m  6  -6.359 -6.359 -6.283 -5.796 -5.796 -5.748 -3.142 -3.064 -3.064 -0.535 -0.489 -0.489
+     m  8  -6.359 -6.359 -6.283 -5.411 -5.411 -5.356 -3.142 -3.064 -3.064 -0.927 -0.873 -0.873
+     m 10  -6.359 -6.359 -6.283 -4.950 -4.950 -4.879 -3.142 -3.064 -3.064 -1.404 -1.335 -1.335
+     m 12  -6.360 -6.360 -6.283 -4.438 -4.438 -4.337 -3.142 -3.064 -3.064 -1.946 -1.847 -1.847
+     m 14  -6.360 -6.360 -6.283 -3.930 -3.930 -3.751 -3.142 -3.064 -3.064 -2.532 -2.354 -2.354
+     m 16  -6.360 -6.360 -6.283 -3.642 -3.642 -3.142 -3.142 -3.142 -3.065 -3.065 -2.642 -2.642
+### gamma(k) di R2 (pendenza della seconda meta', norma), lungo le rette
+  x 0.01  (m,0)  massimo a m =  8 (0.500 pi) +0.3946;  +0.014 +0.069 +0.142 +0.209 +0.268 +0.318 +0.357 +0.382 +0.395 +0.394 +0.381 +0.359 +0.335 +0.312 +0.296 +0.286 +0.282
+  x 0.01  (m,m)  massimo a m = 16 (1.000 pi) +0.4713;  +0.014 +0.100 +0.197 +0.276 +0.329 +0.340 +0.289 +0.189 +0.128 +0.096 +0.074 +0.054 +0.028 +0.001 +0.093 +0.333 +0.471
+  x 0.1   (m,0)  massimo a m =  8 (0.500 pi) +0.4018;  +0.014 +0.072 +0.146 +0.215 +0.275 +0.326 +0.365 +0.390 +0.402 +0.399 +0.382 +0.356 +0.327 +0.300 +0.280 +0.268 +0.265
+  x 0.1   (m,m)  massimo a m =  5 (0.312 pi) +0.3557;  +0.014 +0.103 +0.203 +0.285 +0.341 +0.356 +0.308 +0.196 +0.124 +0.091 +0.068 +0.047 +0.020 +0.008 +0.014 +0.181 +0.355
+  x 1     (m,0)  massimo a m =  7 (0.438 pi) +0.3349;  +0.014 +0.070 +0.139 +0.202 +0.256 +0.298 +0.325 +0.335 +0.323 +0.288 +0.230 +0.170 +0.135 +0.117 +0.107 +0.103 +0.101
+  x 1     (m,m)  massimo a m =  5 (0.312 pi) +0.3170;  +0.014 +0.100 +0.193 +0.268 +0.315 +0.317 +0.237 +0.100 +0.058 +0.033 +0.011 +0.007 +0.011 +0.020 +0.039 +0.067 +0.086
+----------------------------------------------------------------------------------------------------
+### LE CONDIZIONI: il m del massimo, l'incrocio piu' vicino, la distanza (passi di k)
+  K1  non tiene
+       x 0.01  (m,0) max  8 incrocio 14.63 dist 6.63
+       x 0.01  (m,m) max 16 incrocio 14.83 dist 1.17
+       x 0.1   (m,0) max  8 incrocio 11.76 dist 3.76
+       x 0.1   (m,m) max  5 incrocio 7.15 dist 2.15
+       x 1     (m,0) max  7 incrocio 6.46 dist 0.54
+       x 1     (m,m) max  5 incrocio 4.38 dist 0.62
+  K2  non tiene
+       x 0.01  (m,0) max  8 incrocio - dist inf
+       x 0.01  (m,m) max 16 incrocio 13.22 dist 2.78
+       x 0.1   (m,0) max  8 incrocio - dist inf
+       x 0.1   (m,m) max  5 incrocio 10.03 dist 5.03
+       x 1     (m,0) max  7 incrocio 7.99 dist 0.99
+       x 1     (m,m) max  5 incrocio 5.31 dist 0.31
+  K3  non tiene
+       x 0.01  (m,0) max  8 incrocio 8.30 dist 0.30
+       x 0.01  (m,m) max 16 incrocio 14.83 dist 1.17
+       x 0.1   (m,0) max  8 incrocio 7.95 dist 0.05
+       x 0.1   (m,m) max  5 incrocio 5.00 dist 0.00
+       x 1     (m,0) max  7 incrocio 6.47 dist 0.53
+       x 1     (m,m) max  5 incrocio 4.39 dist 0.61
+  K4  non tiene
+       x 0.01  (m,0) max  8 incrocio - dist inf
+       x 0.01  (m,m) max 16 incrocio 13.22 dist 2.78
+       x 0.1   (m,0) max  8 incrocio 12.29 dist 4.29
+       x 0.1   (m,m) max  5 incrocio 7.33 dist 2.33
+       x 1     (m,0) max  7 incrocio 7.99 dist 0.99
+       x 1     (m,m) max  5 incrocio 5.31 dist 0.31
+  K5  TIENE
+       x 0.01  (m,0) max  8 incrocio 8.00 dist 0.00
+       x 0.01  (m,m) max 16 incrocio 16.00 dist 0.00
+       x 0.1   (m,0) max  8 incrocio 8.00 dist 0.00
+       x 0.1   (m,m) max  5 incrocio 5.00 dist 0.00
+       x 1     (m,0) max  7 incrocio 7.00 dist 0.00
+       x 1     (m,m) max  5 incrocio 5.00 dist 0.00
+  K6  TIENE
+       x 0.01  (m,0) max  8 incrocio 8.00 dist 0.00
+       x 0.01  (m,m) max 16 incrocio 16.00 dist 0.00
+       x 0.1   (m,0) max  8 incrocio 8.00 dist 0.00
+       x 0.1   (m,m) max  5 incrocio 5.00 dist 0.00
+       x 1     (m,0) max  7 incrocio 7.00 dist 0.00
+       x 1     (m,m) max  5 incrocio 5.00 dist 0.00
+----------------------------------------------------------------------------------------------------
+### IL CASO PERMUTATO (deve fallire), per ogni condizione che tiene
+  DEVE FALLIRE: K5 col nu permutato (1.0, 0.01, 0.1)                     ### FALLISCE   
+  DEVE FALLIRE: K5 col nu permutato (0.1, 1.0, 0.01)                     ### FALLISCE   
+  DEVE FALLIRE: K6 col nu permutato (1.0, 0.01, 0.1)                     ### FALLISCE   
+  DEVE FALLIRE: K6 col nu permutato (0.1, 1.0, 0.01)                     ### FALLISCE   
+====================================================================================================
+### IL VERDETTO: STOP: il criterio e' TROPPO LARGO (['K5', 'K5', 'K6', 'K6'] tiene anche col nu permutato)
+### 6/10 prove passate. NESSUNA CURA SCELTA.
+====================================================================================================

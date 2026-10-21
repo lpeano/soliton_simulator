@@ -90,10 +90,17 @@ moltiplica la perturbazione `delta rho(k)` per ### **`f(k) = w0 + 2 w1 (cos kx +
 | i soli `4` vicini *(`1/4`)* | ### **`-1`** *(rovescia, non riduce)* | `0` | `1/2` | `1` |
 | ### **binomiale** *(`1/2` al nodo, `1/8` ai vicini)* | ### **`0`** | `1/2` | `3/4` | `1` |
 
-### ⚠ **La conseguenza, che vale per `C1` e `C5`:** ### **non ogni media spegne il picco**; lo spegne
-### **solo un peso preciso**, e ### **quel peso e' un numero da DERIVARE** *(altrimenti e' `A1`)*.
-Il segno rovesciato *(prime due righe)* ### **non e' una cura**: trasforma il picco in un'altra
-cosa, di cui ### **non si sa il segno della crescita** senza il conto.
+### ⚠ **La conseguenza:** ### **non ogni media spegne il picco**; lo spegne ### **solo un peso
+preciso**, e ### **quel peso e' un numero da DERIVARE** *(altrimenti e' `A1`)*.
+### ⛔ **CORREZIONE del `2026-10-21`** *(segnalata dal guardiano; mandato di Luca delle `09:22`)*: ###
+**il «segno rovesciato» delle prime due righe NON vale per `C1`.** In `C1` il filtro sta ### **nel
+GENERATORE**, e la perturbazione ci passa ### **due volte** *(in `rho_bar` e nella trasposta del
+flusso)*: ### **l'accoppiamento a `k` e' `f(k)^2 >= 0`**, che ### **riduce o spegne, ma non
+rovescia mai** *(coi pesi uguali `9/25` a `(pi, pi)`, coi soli vicini `1`)*. ### **Il segno
+rovesciato vale solo per una legge INNESTATA** *(una `S3` che legga `rho_bar` una volta sola, senza
+derivarne il flusso)*, ### **e per `C5` dipende da come la fase e' riderivata.** ### **Nella prima
+versione avevo scritto «vale per `C1` e `C5`»: era incoerente con la scheda di `C1`, che usava gia'
+`f(k)^2`.**
 
 ---
 
