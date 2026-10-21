@@ -1,0 +1,13 @@
+[TIMBRO] _al_bit_cura_d0.py  sha1-BYTE 227cea6d  committato e pulito
+====================================================================================================
+LA CURA DI D0 AL BIT, sul referto della base proiettata (594417f6)
+====================================================================================================
+  braccio_proiettato(nome, 32, 0.125, X 0.1, acceso, (), EPS_REL 1e-07, TEMPO_LUNGO 100), gli argomenti di main_proiettata
+----------------------------------------------------------------------------------------------------
+  [PASSA] R2 lato 32 (cs spento): 10 campi confrontati AL BIT -- tutti identici
+      gamma max 0.40476474878650082   uniformita' 1.111 ulp   162 s
+  [PASSA] R1 lato 32 (cs acceso): 10 campi confrontati AL BIT -- tutti identici
+      gamma max 0.55718209229167537   uniformita' 1.324 ulp   602 s
+====================================================================================================
+LA CURA AL BIT: 2 su 2   ### TUTTI IDENTICI
+====================================================================================================

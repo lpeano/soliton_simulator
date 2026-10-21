@@ -20234,3 +20234,38 @@ La domanda di Luca *(«l'instabilita', se c'e', dipende dal fatto che lo spazio 
 - ### **PUNTO `3` DEL MANDATO** *(arrivato TRONCATO: «misura quanto dura `primo_ordine/collauda.py`. Se»)*: ### **la durata, misurata in `3008bd13`: `353.2` s di `pre-commit` + `308.0` s solo in CI = `661.2` s in tutto.** ### **Il resto del punto `3` non l'ho ricevuto.**
 
 ### ❓ **LE DOMANDE PER LUCA:** ### **(1) quale cura per `D0`** *(giri, metodo, o il collaudo)*; ### **(2) il resto del punto `3`.** ### **Il secondo gradino dei triangoli aspetta.**
+
+### ✅ **D0, LA CURA (a): VERDE -- `GIRI_MAX_OMEGA` 200, IL CONTATORE DELL'AVVISO, AL BIT DOVE CONVERGEVA -- MA LA SOGLIA `0.9` NON AVREBBE AVVISATO IL CASO DI `D0`** *(mandato di Luca del `2026-10-21` alle `20:06`; task history `8a5855ab`; cura `f5b99e91`)*
+
+- ### **LA CURA** *(`primo_ordine/energia_pesata.py`, `motore.py`)*: `GIRI_MAX_OMEGA` da `120` a `200`; ### **il fattore di contrazione** *(lo scarto diviso il precedente)* e, a convergenza, `mot.fattore_omega`, `mot.fattore_omega_max`, ### **`mot.avvisi_omega`** *(le chiamate oltre `SOGLIA_AVVISO_OMEGA = 0.9`)*. ### **Senza ramo nuovo** *(il booleano si somma)*: i `3` rami di `P-R1` restano `3`; ### **nessun conto usa i contatori.**
+- ### **LA SUITE** *(sul working tree della cura)*: ### **`64` su `64` verdi, `D0` compreso**, `605.57` s *(`pre-commit` `323.94`, lenti `281.63`)*; il codice d'uscita era `1` ### **solo** per il file generato scaduto *(sotto)*.
+- ### **I CONTROLLI** *(`doc/referti_l2/fattore_omega.txt`, strumento `csv/_fattore_omega.py` blob sha1-BYTE `e95a013b`, committato e pulito)*: ### **3 su 3**
+  - ### **DEVE RIUSCIRE:** a `dtau 1` le due scene di `D0` convergono, ### **giri massimi `138`** *(scena `(16, 7)`; la diagnosi ne stimava `~137`)* e `66` *(`(12, 11)`)*;
+  - ### **DEVE FALLIRE:** con `GIRI_MAX_OMEGA 120` *(in memoria)* la scena `(16, 7)` ### **alza al tick `64` con lo scarto `1.252e-12`** -- ### **lo stesso di `3008bd13`**;
+  - ### **IL CONTATORE:** `mot.avvisi_omega` uguale alle chiamate oltre soglia contate fuori, ### **su `8` corse.**
+- ### **AL BIT, A CAMPIONE:** ### **`C1` di strada `(d)`** *(`primo_ordine/_misura_strada_d.py`, contro `doc/referti_l2/c1_tetto_omega.txt`)* ### **identico riga per riga, giri di `Omega` compresi**; ### **`triangoli_gradino1`** identico *(il `.jsonl` differiva SOLO nei CR: byte rimessi con `git cat-file`)*; ### **`594417f6` a lato `32`** *(`csv/_al_bit_cura_d0.py` blob `227cea6d`, `doc/referti_l2/al_bit_cura_d0.txt`)*: ### **`R2` e `R1`, `10` campi ciascuno, TUTTI IDENTICI.** ### ⚠ **`R2` ha `cs` SPENTO** e `applica` esce alla prima guardia: ### **e' il controllo dello strumento**; ### **`R1` ha `cs` ACCESO, ed e' il confronto che dice qualcosa sulla cura.** ### **L'impronta** `2e7f795d2a52fbe7` e' quella dell'ordine, che la cura non tocca *(e la suite la verifica)*.
+- ### **LA MISURA DEL FATTORE** *(per la domanda di `L1` sull'automa)*, scena di `D0`, `250` tick, `Lambda_c 8`:
+
+| `dtau` | scena | chiamate | giri medio / max | fattore medio / max | esito |
+|---|---|--:|---|---|---|
+| `0.5` | `(16, 7)` | `500` | `17.45` / `31` | `0.1446` / `0.3810` | converge |
+| `0.5` | `(12, 11)` | `500` | `16.11` / `29` | `0.1234` / `0.3793` | converge |
+| `1` | `(16, 7)` | `500` | `22.56` / `138` | `0.2203` / `0.8571` | converge |
+| `1` | `(12, 11)` | `500` | `21.18` / `66` | `0.2036` / `0.6111` | converge |
+| `1.25` | `(16, 7)` | `36` | `22.81` / `56` | `0.2161` / `0.5714` | ### **FUORI DAL CONO prima del tick `18`** *(`s` max `1.0235`)* |
+| `1.25` | `(12, 11)` | `52` | `20.27` / `41` | `0.1954` / `0.4719` | ### **FUORI DAL CONO prima del tick `26`** *(`s` max `1.0527`)* |
+| `1.5` | `(16, 7)` | `2` | `16.50` / `19` | `0.1495` / `0.1759` | ### **FUORI DAL CONO prima del tick `1`** *(`s` max `1.0035`)* |
+| `1.5` | `(12, 11)` | `2` | `15.50` / `18` | `0.1275` / `0.1562` | ### **FUORI DAL CONO prima del tick `1`** *(`s` max `1.0432`)* |
+
+  - ### **A `1.25` e `1.5` il punto fisso NON smette di convergere: e' la SCENA che esce dal cono** *(`s = dtau cs / dtau_rif > 1`, `B-5`)*, ### **e il nucleo la rifiuta per costruzione.** ### **Entro `200` giri, ovunque la scena e' nel cono, converge.**
+  - ### ⛔ **E LA PRIMA CORSA E' CADUTA LI'** *(blob `a5dd287d`)*: il rifiuto del cono ### **esce come `TypeError`**, perche' il messaggio del secondo `assert` di `_nel_cono` ha due segnaposto e un argomento solo. ### **Un difetto del nucleo, nuovo: `[[CONO-MESSAGGIO-ROTTO]]`**, ### **NON curato** *(fuori mandato)*. Lo strumento ora guarda il cono prima di ogni tick *(`94b1102a`)*, ### **e le quattro righe a `dtau 0.5` e `1` sono uscite IDENTICHE nelle due corse.**
+- ### ⚠ **LA LETTURA CHE CONTA PER L'AVVISO:** ### **il fattore massimo misurato e' `0.8571`, proprio nella chiamata che chiede `138` giri** -- ### **sotto `0.9`.** ### **Con la soglia `0.9`, l'avviso NON sarebbe scattato nel caso che lo ha fatto nascere**: `0` avvisi su `8` corse. ### **La soglia e' di Luca, e non la tocco.**
+- ### **LA REGOLA DELLA SUITE** *(`0b16cf6a`)*: ### **`[[SUITE-NEL-COMMIT]]`**, una voce `STANDARD` dell'indice, ### **la riga nella tabella del par.11 di `CLAUDE.md` GENERATA** *(`346` righe su `400`)*, il dettaglio in `doc/REGOLE/par11.md`. ### **Regola scritta, non presidio** (`A9`). ### **Ha voluto anche:** la riga di `P-M1` in `csv/_metodi_era2.py`, e ### **l'elenco letterale delle regole nuove** di `csv/_collauda_regole.py` *(il suo collaudo me l'ha detto: `12` su `13`)*.
+  - ### ⚠ **`python csv/_struttura_regole.py` FALLISCE GIA' A HEAD** *(`21a822d2`, rifatto in una worktree)*, per due cose non di oggi: ### **il titolo di `CLAUDE.md` col branch `fork-su2` dato per «regola persa»**, e ### **un rimando fuori intestazione in `doc/REGOLE/par9.md`** *(`PI-ERA-STATO`)*. ### **Con la regola nuova falliscono le stesse due, nessuna di piu'.**
+- ### **IL FILE GENERATO** *(`21a822d2`)*: `doc/REFERTO_infrastruttura_era2.md` ### **nel working tree era IDENTICO a HEAD** *(la suite rimette a posto i byte)* ### **ma SCADUTO**: ### **`7aaeb907`** *(`CAMM-FASE-VUOTO` in tabella)* ha portato la tabella da `11` a `12` leggi *(`flusso` `3` -> `4`, le vere `8` -> `9`)* e non l'ha rigenerato. ### **Rigenerato col suo generatore, verbatim: «TUTTI I COLLAUDI PASSANO».**
+
+### ❓ **LE DOMANDE PER LUCA** *(una alla volta)*:
+1. ### **La soglia dell'avviso:** il caso di `D0` *(`138` giri)* ha fattore ### **`0.8571`**, e `0.9` non l'avrebbe segnalato. ### **Resta `0.9`?** *(criterio di chiusura: una tua decisione sulla soglia, registrata)*
+2. *(dopo la prima)* ### **`[[CONO-MESSAGGIO-ROTTO]]`:** ### **la cura `% (dove, ma)` nel nucleo, come commit a se'?** *(criterio: il rifiuto esce come `AssertionError` col valore di `s`, e la suite resta verde)*
+3. *(dopo)* ### **`csv/_struttura_regole.py` rosso a HEAD:** ### **si cura** *(il titolo `fork-su2` e il rimando in `par9.md`)*?
+4. *(dopo)* ### **Il gradino `2` dei triangoli**, la domanda di `3008bd13`: ### **quali leggi per prime, cominciando da `S3`**, e con quali controlli.

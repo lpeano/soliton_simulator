@@ -1,0 +1,21 @@
+[TIMBRO] _fattore_omega.py  sha1-BYTE e95a013b  committato e pulito
+====================================================================================================
+IL FATTORE DI CONTRAZIONE DEL PUNTO FISSO DI Omega, sulla scena di D0
+====================================================================================================
+  braccio_accesa di _collauda_cs.py: LC_DI_PROVA 8, TICK 250, VUOTO_MODULO 2, DTAU del collaudo 1; GIRI_MAX_OMEGA 200, SOGLIA_AVVISO_OMEGA 0.9
+----------------------------------------------------------------------------------------------------
+  dtau 0.5   nn=16  seme=7    chiamate  500  giri medio   17.45 max   31  fattore medio 0.1446 max 0.3810  oltre 0.9: 0 (contatore 0)  converge in tutti i 250 tick
+  dtau 0.5   nn=12  seme=11   chiamate  500  giri medio   16.11 max   29  fattore medio 0.1234 max 0.3793  oltre 0.9: 0 (contatore 0)  converge in tutti i 250 tick
+  dtau 1     nn=16  seme=7    chiamate  500  giri medio   22.56 max  138  fattore medio 0.2203 max 0.8571  oltre 0.9: 0 (contatore 0)  converge in tutti i 250 tick
+  dtau 1     nn=12  seme=11   chiamate  500  giri medio   21.18 max   66  fattore medio 0.2036 max 0.6111  oltre 0.9: 0 (contatore 0)  converge in tutti i 250 tick
+  dtau 1.25  nn=16  seme=7    chiamate   36  giri medio   22.81 max   56  fattore medio 0.2161 max 0.5714  oltre 0.9: 0 (contatore 0)  ### FUORI DAL CONO prima del tick 18: s max 1.023501 > 1 (convergeva fin li')
+  dtau 1.25  nn=12  seme=11   chiamate   52  giri medio   20.27 max   41  fattore medio 0.1954 max 0.4719  oltre 0.9: 0 (contatore 0)  ### FUORI DAL CONO prima del tick 26: s max 1.052730 > 1 (convergeva fin li')
+  dtau 1.5   nn=16  seme=7    chiamate    2  giri medio   16.50 max   19  fattore medio 0.1495 max 0.1759  oltre 0.9: 0 (contatore 0)  ### FUORI DAL CONO prima del tick 1: s max 1.003463 > 1 (convergeva fin li')
+  dtau 1.5   nn=12  seme=11   chiamate    2  giri medio   15.50 max   18  fattore medio 0.1275 max 0.1562  oltre 0.9: 0 (contatore 0)  ### FUORI DAL CONO prima del tick 1: s max 1.043197 > 1 (convergeva fin li')
+----------------------------------------------------------------------------------------------------
+  [PASSA] ### DEVE RIUSCIRE: a dtau 1 le scene di D0 convergono -- giri max (16,7) 138, (12,11) 66
+  [PASSA] ### IL CONTATORE: mot.avvisi_omega = le chiamate oltre soglia contate qui -- su 8 corse
+  [PASSA] ### DEVE FALLIRE: con GIRI_MAX_OMEGA 120 la scena (16, 7) ALZA -- al tick 64: il punto medio di `Omega` NON CONVERGE in 120 giri (ultimo scarto 1.252e-12): la regola di
+====================================================================================================
+IL FATTORE DI Omega: 3 su 3   ### TUTTI PASSATI
+====================================================================================================

@@ -3057,3 +3057,16 @@ che finisce in un documento NON E' DI CONTORNO: viene letto come gli altri.**
 ### ✅ **LA CURA, nello stesso giro:** `primo_ordine/deriva.py` rimisura la deriva di `E`,
 dei suoi **due termini separatamente**, e la **sorgente per nodo**, col suo referto.
 ### **Il vecchio `4.20` non si usa piu'.**
+
+## `[[CONO-MESSAGGIO-ROTTO]]` — il rifiuto `s > 1` di `_nel_cono` esce come `TypeError` *(2026-10-21)*
+
+- **Trovato da:** `csv/_fattore_omega.py` *(blob `a5dd287d`, commit `eb0705f5`)*, a `dtau 1.25` sulla
+  scena `(16, 7)` di `D0`: `s = dtau cs / dtau_rif > 1`, la scena esce dal cono *(`B-5`)*.
+- **Che cosa succede:** `flussi_parziali._nel_cono` ### **rifiuta, come deve**, ma il secondo `assert`
+  ha il messaggio con ### **due segnaposto** (`%s`, `%.17g`) e gli passa ### **solo `dove`**: Python alza
+  ### **`TypeError: not enough arguments for format string`** invece dell'`AssertionError`. Chi cattura
+  `AssertionError` ### **non lo riconosce come rifiuto del cono.**
+- **La cura ovvia:** `% (dove, ma)`, come il primo `assert` fa con `(dove, mi)`. ### **NON FATTA:** e' un
+  file del nucleo, fuori dal mandato della cura di `D0`. ### **Decisione di Luca.**
+- **Criterio di chiusura:** con la cura, ### **una scena fuori dal cono alza `AssertionError` col valore
+  di `s`**, e la suite resta verde.
