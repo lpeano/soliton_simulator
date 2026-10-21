@@ -1,0 +1,40 @@
+[TIMBRO] _triangoli.py  sha1-BYTE 57742ca8  committato e pulito
+====================================================================================================
+TRIANGOLI, PRIMO GRADINO: LA SCENA A 6 VICINI E LA CAMMINATA SOLA, VERIFICATE
+====================================================================================================
+  LA CONFIGURAZIONE INTERA, dichiarata:
+  il passo: 14 pezzi, impronta 2e7f795d2a52fbe7 (NON toccato); la camminata sola = senza CAMM-MATERIA-VUOTO, cs spento
+  lato 32, dtau 0.125, eps 0.5 (decisione di Luca, 17:53); N 800 (esattezza, invarianza), N 200 (norma, seme 7); materia uniforme x 0.1, vuoto 1
+  triangoli: spostamenti ((1, 0), (0, 1), (1, 1)), direzioni 0/120/60 gradi; quadrato: (1,0), (0,1)
+----------------------------------------------------------------------------------------------------
+### IL COSTRUTTORE SUL QUADRATO = scena_l2 AL BIT
+  il quadrato: ii, jj, nn e nv identici a corrente.toro e versori_geometri PASSA   
+----------------------------------------------------------------------------------------------------
+### LA BIPARTIZIONE (deve fallire sui triangoli)
+  il quadrato (lato 32 pari) SI colora in due                              PASSA   
+  DEVE FALLIRE: i triangoli NON si colorano in due (un ciclo dispari)      PASSA   ciclo di 3 nodi: [32, 0, 31]
+  il triangolo (0,0)-(0,1)-(1,1) e' un ciclo di 3 archi del grafo          PASSA   nodi [0, 1, 33]
+----------------------------------------------------------------------------------------------------
+### LO STATO DI MATERIA
+  lo spinore allineato: sigma.n_h chi = chi entro 64 ulp                   PASSA   2.289e-16
+  le direzioni uscenti di ogni nodo (grado [6]) sommano a zero             PASSA   max |somma| 1.110e-16
+----------------------------------------------------------------------------------------------------
+### L'UNITARIETA' E L'ESATTEZZA DELLA CAMMINATA SOLA (triangoli)
+  la norma su uno stato casuale, 200 tick: entro N * 64 ulp                PASSA   5.566e-15 contro 2.842e-12
+  ESATTA: ogni autovalore di A(k)^N (cella 36 reali) ha modulo 1 entro N * PASSA   2.538e-13 contro 1.137e-11  [0 s]
+----------------------------------------------------------------------------------------------------
+### L'INVARIANZA PER TRASLAZIONE (la base uniforme, camminata sola, 800 tick)
+  la base uniforme resta uniforme entro 1e3 ulp                            PASSA   23.5 ulp
+----------------------------------------------------------------------------------------------------
+### L'ISOTROPIA C6 (la rotazione di 60 gradi di k)
+  i triangoli: le fasi a k e a k ruotato coincidono entro 64 ulp (scala pi PASSA   1.915e-15 contro 4.464e-14
+  DEVE FALLIRE: il quadrato NON ha la simmetria di 60 gradi (scarto > 1e6  PASSA   2.768e-01
+  la dispersione dei triangoli (omega per unita' di tempo), lungo (m,0), m = 0, 4, .., 16:
+     m  0  -6.360 -6.360 -6.360 -6.360 -6.321 -6.321 -6.283 -6.283 -6.283 -3.142 -3.142 -3.065 -3.065 -3.065 -3.065 +0.000 +0.037 +0.037
+     m  4  -6.360 -6.360 -6.359 -6.359 -6.283 -6.283 -6.165 -6.165 -6.124 -3.142 -3.142 -3.065 -3.065 -3.065 -3.065 -0.159 -0.120 -0.120
+     m  8  -6.360 -6.360 -6.359 -6.359 -6.283 -6.283 -5.749 -5.749 -5.701 -3.142 -3.142 -3.065 -3.065 -3.064 -3.064 -0.582 -0.535 -0.535
+     m 12  -6.360 -6.360 -6.359 -6.359 -6.283 -6.283 -5.257 -5.257 -5.196 -3.142 -3.142 -3.065 -3.065 -3.064 -3.064 -1.087 -1.029 -1.029
+     m 16  -6.360 -6.360 -6.359 -6.359 -6.283 -6.283 -5.017 -5.017 -4.948 -3.142 -3.142 -3.065 -3.065 -3.063 -3.063 -1.336 -1.269 -1.269
+====================================================================================================
+### 11/11 prove passate. NESSUNA LEGGE DELLA MATERIA SUI TRIANGOLI.
+====================================================================================================

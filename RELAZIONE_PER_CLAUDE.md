@@ -20200,3 +20200,19 @@ La domanda di Luca *(«l'instabilita', se c'e', dipende dal fatto che lo spazio 
 
 - ### **Nessun `eps dtau` stabilizza `R2`: la FINESTRA STABILE e' VUOTA.** Il massimo ha un minimo a `0.55 pi` *(`0.0875`)* e risale; ### **il reticolo quasi si spegne fra `0.55` e `0.60 pi`** *(`0.0033`, `0.0006`, sopra la soglia `4.07e-4`)*, ### **ma la banda a onde medie resta.**
 - ### **Nessuna cura:** ### **un `eps` scelto perche' stabilizza sarebbe una toppa** *(`A1`)*, e qui ### **non ce n'e' nemmeno uno.** ### **La coda passa al progetto dei triangoli** *(`a840e8f7`)*: ### **la domanda per Luca e' quella del progetto, i gradi di liberta' della moneta su `6` direzioni.**
+
+### ✅ **TRIANGOLI, PRIMO GRADINO: 11 SU 11 -- LA SCENA A 6 VICINI E LA CAMMINATA SOLA SONO QUELLE DEL PROGETTO** *(referto `doc/referti_l2/triangoli_gradino1.txt` e `.jsonl`, strumento `csv/_triangoli.py` blob sha1-BYTE `57742ca8`, commit `051358ea`, committato e pulito; task history `ec9de266`)*
+
+- ### **Il passo NON e' stato toccato:** `Incidenza`, `Motore` e i pezzi sono gia' per un grafo qualunque; ### **un costruttore nuovo** *(spostamenti interi e un versore per spostamento)* ### **ridà il quadrato di `scena_l2` AL BIT**, e coi triangoli da' `d = 3`; ### **la FCC in base primitiva e' lo stesso costruttore con `d = 6`.**
+- ### **I numeri** *(lato `32`, `dtau 0.125`, `eps 0.5`)*: la bipartizione -- il quadrato si colora in due, ### **i triangoli no** *(ciclo `[32, 0, 31]`)*; lo spinore allineato `2.3e-16`; ### **le `6` direzioni sommano a zero** *(`1.1e-16`)*; ### **la norma** su `200` tick `5.6e-15`; ### **ESATTA**: `A(k)^800` *(cella `36` reali)* modulo `1` entro `2.5e-13`; ### **l'invarianza** `23.5` ulp in `800` tick; ### **l'isotropia `C6` `1.9e-15`** *(soglia `4.5e-14`)*, ### **e sul quadrato `0.277`** *(deve fallire: fallisce)*.
+- ### ⛔ **E SULLA GRIGLIA QUADRATA: L'IMPRONTA E' AL BIT** *(`2e7f795d2a52fbe7`, nessun file del passo toccato)*, ### **MA UN COLLAUDO DELLA SUITE CADE, e il difetto e' MIO, di due giorni fa:**
+  - `python primo_ordine/collauda.py`: ### **`D0` «la forma `cs` spenta e' il passo di oggi»** *(`primo_ordine/_collauda_cs.py`)* ### **FALLISCE**: ### **«il punto medio di `Omega` NON CONVERGE in 120 giri»** *(nel braccio `cs` acceso a inizio passo)*;
+  - ### **rifatto in worktree temporanee:** ### **passa a `3b467aa4`** *(`15/15`)*, ### **cade a `7395cd9a`** *(scarto `7.1e-15`)* ### **e a `418546c8`** *(scarto `1.25e-12`)*: ### **la regressione e' nata con la mia tolleranza di `Omega` del `2026-10-19`.**
+  - ### ⛔ **ERRORE MIO `C.7`:** ### **non ho girato la suite intera dopo `7395cd9a` e `418546c8`**; e ### **il `pre-commit` di git NON la gira** *(«`pre-commit` in `primo_ordine/collauda.py` e' UNA ETICHETTA», dice l'hook)*: ### **e' rimasta rossa due giorni senza che nessuno la vedesse.**
+  - ### **E la suite ha trovato un file GENERATO scaduto,** `doc/REFERTO_infrastruttura_era2.md`, ### **e l'ha rimesso a posto** *(lo stampa: «un commit che ha cambiato cio' che quel file racconta non ha portato il suo generato»)*.
+  - ### **La cura tocca la tolleranza di `Omega` nel nucleo** *(`energia_pesata.applica`)*: ### **e' una decisione di Luca, e non la faccio.**
+- ### **La voce `[[GRIGLIA-A-TRIANGOLI]]`:** il primo gradino fatto, dove sta il referto. ### **Nessuna legge della materia sui triangoli.**
+
+### ❓ **LE DOMANDE PER LUCA** *(una alla volta)*:
+1. ### **La regressione di `D0`** *(`7395cd9a`)*: ### **si cura prima di andare avanti?** *(la tolleranza del punto fisso di `Omega` nel braccio `cs` a inizio passo; e se il `pre-commit` debba girare anche la suite)*
+2. *(dopo la prima)* ### **Il gradino `2` dei triangoli:** quali leggi portare per prime, ### **cominciando da `S3`**, e con quali controlli *(la regola di scala fra geometrie: `Lambda` per nodo passa da `4` a `6` a vuoto per estremita' uguale)*.
