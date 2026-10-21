@@ -108,6 +108,21 @@
 - **f) INFORMAZIONE POST HOC, non verdetto** *(formulata DOPO i numeri di `ac9d0d7d`, e dichiarata tale)*: ### **la velocita' di gruppo** `d omega_a / dk` dei rami gia' misurati lungo `(m, 0)`, e dove ha il massimo.
 - **Il referto nuovo:** `doc/referti_l2/d0_risonanza_bis.txt` e `.jsonl`; ### **quello di `ac9d0d7d` resta valido al suo commit.**
 
+## 4-ter. ANNOTAZIONE DEL `2026-10-21`, `10:29`, PRIMA DEL CODICE: `D0` A LATO `64` E `128` *(decisione di Luca dopo `c8dbdd83`; si annota)*
+
+- ### **LE TAGLIE**, dalla regola di scala di Luca: ### **lato `64` a `dtau 0.0625`, lato `128` a `dtau 0.03125`**; `N dtau 100`; `x` `0.01`, `0.1`, `1`; ### **`R2` con la base proiettata**; ### **lo stimatore della NORMA, pendenza della seconda meta'** *(come `c8dbdd83`)*.
+- ### **LA LISTA CHIUSA `K1`-`K6` E IL RILEVATORE DI `acdfe5e7` INVARIATI:** degenerazioni a `64` ulp; specificita' con soglia `20%`; il permutato solo per `K1`-`K4`; ### **il criterio delle `09:22`**: tutti e tre gli `x`, entrambi gli assi, ### **entro `1` passo di `k` DI QUELLA TAGLIA** *(`pi / 32` a `64`, `pi / 64` a `128`; il massimo su `m = 1..lato/2`)*.
+- ### **IL VERDETTO FRA LE TAGLIE, fissato qui:** una condizione ### **TIENE se tiene a `64` E a `128`.** ### **Se tiene a una sola taglia: NON DECIDIBILE.** ### **Se piu' condizioni tengono a entrambe: NON DECIDIBILE**, con le distanze.
+- ### **IL CONFRONTO DI CONTROLLO:** lato `32` *(`c8dbdd83`)* ### **riletto dal suo `jsonl`, non rifatto.**
+- ### **L'INFORMAZIONE POST HOC sulla velocita' di gruppo, a ogni taglia:** il massimo di `|v_g|` ### **dei rami dispersivi** *(quelli con `|v_g|` massimo `> 0.1`)* in unita' di `pi`, ### **accanto al massimo della banda.** ### **Resta INFORMAZIONE.**
+- ### **IL BUDGET: `3` h per braccio**; se uno lo supera, si ferma e lo dichiara.
+- ### **I CONTROLLI:**
+  - ### **DEVE RIUSCIRE:** il caso sintetico *(un incrocio a `m = lato/4`)* a ogni taglia, ### **con la specificita' attesa** `3 / (lato/2)`: ### **`9.4%` a `64`, `4.7%` a `128`**; ### **`R2` a `x 0.1` a lato `64` coerente con `594417f6`** *(la banda `0.406`; il suo `jsonl` ha `R2 lato 64`)* ### **entro `1e-3`**;
+  - ### **DEVE FALLIRE:** due rami sintetici identici: ### **DEGENERAZIONE**;
+  - i modi di prima AL BIT *(`c38367db`, `16b5d10f`)*.
+- ### **IL COMANDO:** `python csv/_stabilita_lineare.py --risonanza --lato 64 --dtau 0.0625` *(e `128`, `0.03125`)*; ### **senza `--lato` resta il lato `32` di `c8dbdd83`.** Il verdetto fra le taglie: `python csv/_stabilita_lineare.py --verdetto-taglie`.
+- ### **I REFERTI:** `doc/referti_l2/d0_risonanza_64.txt` e `.jsonl` ### **subito**, con la frase «verdetto fra le taglie: in attesa di `128`»; poi `d0_risonanza_128.txt` e `.jsonl`; poi `d0_verdetto.txt`.
+
 ## 5. TODO
 
 1. Questo task history, ### **committato DA SOLO.**
