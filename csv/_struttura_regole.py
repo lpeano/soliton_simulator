@@ -132,6 +132,13 @@ RINOMINATI = {
     # ### `H-FISICA-FUORI-LISTA`, il dodicesimo.)*
     "## 12. I PRESIDI AUTOMATICI — **i hook, e sono UNDICI**":
         "## 12. I PRESIDI AUTOMATICI — **i hook**",
+    # ### Il titolo di `CLAUDE.md` nominava ### **il ramo su cui si lavorava** *(`fork-su2`)*, e
+    # ### dal `2026-10-19` *(`fab82ed2`)* si lavora su `primo-ordine`: ### **il titolo dice il ramo di
+    # ### oggi E dove le regole nacquero.** ### ⚠ **Il ramo `fork-su2` NON e' perso:** c'e' sul remoto
+    # ### *(`git branch -r`, `origin/fork-su2` a `803bfed7`, verificato il `2026-10-21`)*. ### **Nessuna
+    # ### regola cambia senso: e' un titolo.** *(Mandato di Luca del `2026-10-21` alle `21:52`, punto `3a`.)*
+    "# CLAUDE.md — soliton_simulator (branch `fork-su2`)":
+        "# CLAUDE.md — soliton_simulator (branch `primo-ordine`; le regole nacquero su `fork-su2`)",
 }
 
 
