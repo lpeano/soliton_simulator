@@ -1,0 +1,91 @@
+[TIMBRO] _massa_vicino_al_cono.py  sha1-BYTE 5842f83a  committato e pulito
+====================================================================================================
+LA MASSA DELLA CAMMINATA VICINO AL CONO: Delta(s) fra 0.5 e 1, e la prova che conta solo s
+====================================================================================================
+  il passo: 14 pezzi, impronta 2e7f795d2a52fbe7 (intatto); cs spento nella misura 1 (s = dtau); i rami seguiti per continuita'
+----------------------------------------------------------------------------------------------------
+### MISURA 1 -- Delta VICINO AL CONO
+  lato 32 eps 0   s 0.5  : 4 rami; Delta per tick 0.684020, per tempo coordinato 1.368040, per tempo proprio 1.368040; c per tick 0.24682, coord. 0.49364, proprio 0.49364; v_g(2)/v_g(1) 1.962; fit 0.000
+  lato 32 eps 0   s 0.6  : 4 rami; Delta per tick 0.707976, per tempo coordinato 1.179960, per tempo proprio 1.179960; c per tick 0.33830, coord. 0.56383, proprio 0.56383; v_g(2)/v_g(1) 1.951; fit 0.000
+  lato 32 eps 0   s 0.7  : 4 rami; Delta per tick 0.654478, per tempo coordinato 0.934968, per tempo proprio 0.934968; c per tick 0.47809, coord. 0.68298, proprio 0.68298; v_g(2)/v_g(1) 1.927; fit 0.000
+  lato 32 eps 0   s 0.8  : 4 rami; Delta per tick 0.510930, per tempo coordinato 0.638662, per tempo proprio 0.638662; c per tick 0.73158, coord. 0.91447, proprio 0.91447; v_g(2)/v_g(1) 1.869; fit 0.000
+  lato 32 eps 0   s 0.9  : 4 rami; Delta per tick 0.282480, per tempo coordinato 0.313866, per tempo proprio 0.313866; c per tick 1.34592, coord. 1.49547, proprio 1.49547; v_g(2)/v_g(1) 1.684; fit 0.001
+  lato 32 eps 0   s 0.95 : 4 rami; Delta per tick 0.144753, per tempo coordinato 0.152371, per tempo proprio 0.152371; c per tick 2.08700, coord. 2.19685, proprio 2.19685; v_g(2)/v_g(1) 1.444; fit 0.001
+  lato 32 eps 0   s 0.99 : 4 rami; Delta per tick 0.027294, per tempo coordinato 0.027569, per tempo proprio 0.027569; c per tick 3.20508, coord. 3.23746, proprio 3.23746; v_g(2)/v_g(1) 1.102; fit 0.002
+  lato 32 eps 0   s 1    : 4 rami; Delta per tick 0.000000, per tempo coordinato 0.000000, per tempo proprio 0.000000; c per tick 3.58962, coord. 3.58962, proprio 3.58962; v_g(2)/v_g(1) 0.993; fit 0.004
+  lato 32 eps 0.5 s 0.5  : 4 rami; Delta per tick 131.425570, per tempo coordinato 262.851139, per tempo proprio 262.851139; c per tick 0.20435, coord. 0.40870, proprio 0.40870; v_g(2)/v_g(1) 2.119; fit 0.032
+  lato 32 eps 0.5 s 0.6  : 4 rami; Delta per tick 135.335756, per tempo coordinato 225.559594, per tempo proprio 225.559594; c per tick 0.26367, coord. 0.43945, proprio 0.43945; v_g(2)/v_g(1) 2.153; fit 0.040
+  lato 32 eps 0.5 s 0.7  : 4 rami; Delta per tick 211.444285, per tempo coordinato 302.063264, per tempo proprio 302.063264; c per tick 0.35253, coord. 0.50361, proprio 0.50361; v_g(2)/v_g(1) 2.138; fit 0.040
+  lato 32 eps 0.5 s 0.8  : 4 rami; Delta per tick 266.569793, per tempo coordinato 333.212241, per tempo proprio 333.212241; c per tick 0.49952, coord. 0.62439, proprio 0.62439; v_g(2)/v_g(1) 2.056; fit 0.026
+  lato 32 eps 0.5 s 0.9  : 4 rami; Delta per tick 2.547799, per tempo coordinato 2.830888, per tempo proprio 2.830888; c per tick 0.71453, coord. 0.79392, proprio 0.79392; v_g(2)/v_g(1) 1.928; fit 0.003
+  lato 32 eps 0.5 s 0.95 : 6 rami; Delta per tick 0.372466, per tempo coordinato 0.392069, per tempo proprio 0.392069; c per tick 0.62584, coord. 0.65878, proprio 0.65878; v_g(2)/v_g(1) 1.786; fit 0.027
+  lato 32 eps 0.5 s 0.99 : 6 rami; Delta per tick 0.344138, per tempo coordinato 0.347614, per tempo proprio 0.347614; c per tick 0.64876, coord. 0.65531, proprio 0.65531; v_g(2)/v_g(1) 1.764; fit 0.024
+  lato 32 eps 0.5 s 1    : 6 rami; Delta per tick 0.338642, per tempo coordinato 0.338642, per tempo proprio 0.338642; c per tick 0.64781, coord. 0.64781, proprio 0.64781; v_g(2)/v_g(1) 1.760; fit 0.023
+  lato 64 eps 0   s 0.5  : 4 rami; Delta per tick 0.685781, per tempo coordinato 1.371561, per tempo proprio 1.371561; c per tick 0.24920, coord. 0.49840, proprio 0.49840; v_g(2)/v_g(1) 1.990; fit 0.000
+  lato 64 eps 0   s 0.6  : 4 rami; Delta per tick 0.709820, per tempo coordinato 1.183033, per tempo proprio 1.183033; c per tick 0.34263, coord. 0.57104, proprio 0.57104; v_g(2)/v_g(1) 1.987; fit 0.000
+  lato 64 eps 0   s 0.7  : 4 rami; Delta per tick 0.656266, per tempo coordinato 0.937523, per tempo proprio 0.937523; c per tick 0.48742, coord. 0.69632, proprio 0.69632; v_g(2)/v_g(1) 1.981; fit 0.000
+  lato 64 eps 0   s 0.8  : 4 rami; Delta per tick 0.512516, per tempo coordinato 0.640645, per tempo proprio 0.640645; c per tick 0.75933, coord. 0.94916, proprio 0.94916; v_g(2)/v_g(1) 1.962; fit 0.000
+  lato 64 eps 0   s 0.9  : 4 rami; Delta per tick 0.283623, per tempo coordinato 0.315137, per tempo proprio 0.315137; c per tick 1.50629, coord. 1.67365, proprio 1.67365; v_g(2)/v_g(1) 1.879; fit 0.001
+  lato 64 eps 0   s 0.95 : 4 rami; Delta per tick 0.145431, per tempo coordinato 0.153085, per tempo proprio 0.153085; c per tick 2.71811, coord. 2.86117, proprio 2.86117; v_g(2)/v_g(1) 1.693; fit 0.001
+  lato 64 eps 0   s 0.99 : 4 rami; Delta per tick 0.027998, per tempo coordinato 0.028281, per tempo proprio 0.028281; c per tick 5.74893, coord. 5.80700, proprio 5.80700; v_g(2)/v_g(1) 1.210; fit 0.002
+C:\Users\lpeano\soliton_simulator\csv\_moneta_massa.py:86: OptimizeWarning: Covariance of the parameters could not be estimated
+  (D, v), _ = curve_fit(f, kk, z, p0=(1.0, 1.0), maxfev=20000)
+  lato 64 eps 0   s 1    : 4 rami; Delta per tick 0.000000, per tempo coordinato 0.000000, per tempo proprio 0.000000; c per tick 7.19674, coord. 7.19674, proprio 7.19674; v_g(2)/v_g(1) 0.998; fit 0.004
+  lato 64 eps 0.5 s 0.5  : 4 rami; Delta per tick 135.236059, per tempo coordinato 270.472118, per tempo proprio 270.472118; c per tick 0.19572, coord. 0.39145, proprio 0.39145; v_g(2)/v_g(1) 2.069; fit 0.030
+  lato 64 eps 0.5 s 0.6  : 4 rami; Delta per tick 167.553142, per tempo coordinato 279.255237, per tempo proprio 279.255237; c per tick 0.25232, coord. 0.42053, proprio 0.42053; v_g(2)/v_g(1) 2.076; fit 0.038
+  lato 64 eps 0.5 s 0.7  : 4 rami; Delta per tick 261.825185, per tempo coordinato 374.035978, per tempo proprio 374.035978; c per tick 0.34079, coord. 0.48684, proprio 0.48684; v_g(2)/v_g(1) 2.065; fit 0.038
+  lato 64 eps 0.5 s 0.8  : 4 rami; Delta per tick 271.160435, per tempo coordinato 338.950543, per tempo proprio 338.950543; c per tick 0.49377, coord. 0.61722, proprio 0.61722; v_g(2)/v_g(1) 2.034; fit 0.025
+  lato 64 eps 0.5 s 0.9  : 6 rami; Delta per tick 0.425350, per tempo coordinato 0.472611, per tempo proprio 0.472611; c per tick 0.53624, coord. 0.59582, proprio 0.59582; v_g(2)/v_g(1) 1.945; fit 0.032
+  lato 64 eps 0.5 s 0.95 : 6 rami; Delta per tick 0.373468, per tempo coordinato 0.393124, per tempo proprio 0.393124; c per tick 0.62828, coord. 0.66135, proprio 0.66135; v_g(2)/v_g(1) 1.929; fit 0.027
+  lato 64 eps 0.5 s 0.99 : 6 rami; Delta per tick 0.344833, per tempo coordinato 0.348316, per tempo proprio 0.348316; c per tick 0.66057, coord. 0.66724, proprio 0.66724; v_g(2)/v_g(1) 1.919; fit 0.024
+  lato 64 eps 0.5 s 1    : 6 rami; Delta per tick 0.339241, per tempo coordinato 0.339241, per tempo proprio 0.339241; c per tick 0.66108, coord. 0.66108, proprio 0.66108; v_g(2)/v_g(1) 1.916; fit 0.023
+### LE LETTURE DELLA MISURA 1
+  lato 32 eps 0: Delta ['1.3680', '1.1800', '0.9350', '0.6387', '0.3139', '0.1524', '0.0276', '0.0000']; monotono? True; a s = 1 7.51e-10 (<= 1% di s 0.5? True); p (fit fra 0.8 e 0.99, 4 punti) = 1.050 (previsto 1) -> ### LA MASSA SI SPEGNE AL CONO
+  lato 32 eps 0.5: Delta ['262.8511', '225.5596', '302.0633', '333.2122', '2.8309', '0.3921', '0.3476', '0.3386']; monotono? False; a s = 1 3.39e-01 (<= 1% di s 0.5? True); p (fit fra 0.8 e 0.99, 4 punti) = 2.006 (previsto 1) -> ### NON si spegne (o non si legge)
+  lato 64 eps 0: Delta ['1.3716', '1.1830', '0.9375', '0.6406', '0.3151', '0.1531', '0.0283', '0.0000']; monotono? True; a s = 1 1.01e-09 (<= 1% di s 0.5? True); p (fit fra 0.8 e 0.99, 4 punti) = 1.043 (previsto 1) -> ### LA MASSA SI SPEGNE AL CONO
+  lato 64 eps 0.5: Delta ['270.4721', '279.2552', '374.0360', '338.9505', '0.4726', '0.3931', '0.3483', '0.3392']; monotono? False; a s = 1 3.39e-01 (<= 1% di s 0.5? True); p (fit fra 0.8 e 0.99, 4 punti) = 1.801 (previsto 1) -> ### NON si spegne (o non si legge)
+  eps 0: p a lato 32 1.0505, a lato 64 1.0427 -> entro 1%? True
+  eps 0.5: p a lato 32 2.0059, a lato 64 1.8008 -> entro 1%? False
+----------------------------------------------------------------------------------------------------
+### MISURA 2 -- CONTA SOLO s? (cs uniforme a mano); e LA MASSA INVARIANTE LOCALMENTE? (aggiunta di Luca, 21:30)
+  lato 32 eps 0: s 0.5 da (dtau 0.5, cs 1) e da (dtau 1, cs 0.5): le fasi per tick   PASSA   0.000e+00
+      Delta per tick 0.684020 / 0.684020; per tempo coordinato 1.368040 / 0.684020; per tempo PROPRIO 1.368040 / 1.368040 -> INVARIANTE (entro 1%)
+      c per tick 0.24682 / 0.24682; coordinato 0.49364 / 0.24682; proprio 0.49364 / 0.49364
+  lato 32 eps 0: s 0.25 da (dtau 0.25, cs 1) e da (dtau 0.5, cs 0.5): le fasi per ti PASSA   0.000e+00
+      Delta per tick 0.408012 / 0.408012; per tempo coordinato 1.632047 / 0.816023; per tempo PROPRIO 1.632047 / 1.632047 -> INVARIANTE (entro 1%)
+      c per tick 0.10264 / 0.10264; coordinato 0.41055 / 0.20527; proprio 0.41055 / 0.41055
+  lato 32 eps 0: s 0.9 da (dtau 0.9, cs 1) e da (dtau 1, cs 0.9): le fasi per tick   PASSA   0.000e+00
+      Delta per tick 0.282480 / 0.282480; per tempo coordinato 0.313866 / 0.282480; per tempo PROPRIO 0.313866 / 0.313866 -> INVARIANTE (entro 1%)
+      c per tick 1.34592 / 1.34592; coordinato 1.49547 / 1.34592; proprio 1.49547 / 1.49547
+  lato 32 eps 0.5: s 0.5 da (dtau 0.5, cs 1) e da (dtau 1, cs 0.5): le fasi per tick PASSA   0.000e+00
+      Delta per tick 131.425570 / 131.425570; per tempo coordinato 262.851139 / 131.425570; per tempo PROPRIO 262.851139 / 262.851139 -> INVARIANTE (entro 1%)
+      c per tick 0.20435 / 0.20435; coordinato 0.40870 / 0.20435; proprio 0.40870 / 0.40870
+  lato 32 eps 0.5: s 0.25 da (dtau 0.25, cs 1) e da (dtau 0.5, cs 0.5): le fasi per  PASSA   0.000e+00
+      Delta per tick 61.801612 / 61.801612; per tempo coordinato 247.206446 / 123.603223; per tempo PROPRIO 247.206446 / 247.206446 -> INVARIANTE (entro 1%)
+      c per tick 0.09675 / 0.09675; coordinato 0.38702 / 0.19351; proprio 0.38702 / 0.38702
+  lato 32 eps 0.5: s 0.9 da (dtau 0.9, cs 1) e da (dtau 1, cs 0.9): le fasi per tick PASSA   0.000e+00
+      Delta per tick 2.547799 / 2.547799; per tempo coordinato 2.830888 / 2.547799; per tempo PROPRIO 2.830888 / 2.830888 -> INVARIANTE (entro 1%)
+      c per tick 0.71453 / 0.71453; coordinato 0.79392 / 0.71453; proprio 0.79392 / 0.79392
+  lato 64 eps 0: s 0.5 da (dtau 0.5, cs 1) e da (dtau 1, cs 0.5): le fasi per tick   PASSA   0.000e+00
+      Delta per tick 0.685781 / 0.685781; per tempo coordinato 1.371561 / 0.685781; per tempo PROPRIO 1.371561 / 1.371561 -> INVARIANTE (entro 1%)
+      c per tick 0.24920 / 0.24920; coordinato 0.49840 / 0.24920; proprio 0.49840 / 0.49840
+  lato 64 eps 0: s 0.25 da (dtau 0.25, cs 1) e da (dtau 0.5, cs 0.5): le fasi per ti PASSA   0.000e+00
+      Delta per tick 0.409075 / 0.409075; per tempo coordinato 1.636300 / 0.818150; per tempo PROPRIO 1.636300 / 1.636300 -> INVARIANTE (entro 1%)
+      c per tick 0.10332 / 0.10332; coordinato 0.41330 / 0.20665; proprio 0.41330 / 0.41330
+  lato 64 eps 0: s 0.9 da (dtau 0.9, cs 1) e da (dtau 1, cs 0.9): le fasi per tick   PASSA   0.000e+00
+      Delta per tick 0.283623 / 0.283623; per tempo coordinato 0.315137 / 0.283623; per tempo PROPRIO 0.315137 / 0.315137 -> INVARIANTE (entro 1%)
+      c per tick 1.50629 / 1.50629; coordinato 1.67365 / 1.50629; proprio 1.67365 / 1.67365
+  lato 64 eps 0.5: s 0.5 da (dtau 0.5, cs 1) e da (dtau 1, cs 0.5): le fasi per tick PASSA   0.000e+00
+      Delta per tick 135.236059 / 135.236059; per tempo coordinato 270.472118 / 135.236059; per tempo PROPRIO 270.472118 / 270.472118 -> INVARIANTE (entro 1%)
+      c per tick 0.19572 / 0.19572; coordinato 0.39145 / 0.19572; proprio 0.39145 / 0.39145
+  lato 64 eps 0.5: s 0.25 da (dtau 0.25, cs 1) e da (dtau 0.5, cs 0.5): le fasi per  PASSA   0.000e+00
+      Delta per tick 49.707106 / 49.707106; per tempo coordinato 198.828425 / 99.414213; per tempo PROPRIO 198.828425 / 198.828425 -> INVARIANTE (entro 1%)
+      c per tick 0.09556 / 0.09556; coordinato 0.38223 / 0.19112; proprio 0.38223 / 0.38223
+  lato 64 eps 0.5: s 0.9 da (dtau 0.9, cs 1) e da (dtau 1, cs 0.9): le fasi per tick PASSA   0.000e+00
+      Delta per tick 0.425350 / 0.425350; per tempo coordinato 0.472611 / 0.425350; per tempo PROPRIO 0.472611 / 0.472611 -> INVARIANTE (entro 1%)
+      c per tick 0.53624 / 0.53624; coordinato 0.59582 / 0.53624; proprio 0.59582 / 0.59582
+  ### CONTA SOLO s? SI': la massa dipende da cs attraverso s
+  ### MASSA INVARIANTE LOCALMENTE? SI': Delta per tempo proprio uguale nelle due meta' di ogni coppia
+====================================================================================================
+LA MASSA VICINO AL CONO: 12 su 12 controlli (la misura 2)   ### TUTTI PASSATI
+====================================================================================================
