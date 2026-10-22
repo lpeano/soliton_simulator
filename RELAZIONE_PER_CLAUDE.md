@@ -20484,3 +20484,22 @@ La domanda di Luca *(«l'instabilita', se c'e', dipende dal fatto che lo spazio 
 - ### **LA SEZIONE ONESTA:** ### **Nielsen-Ninomiya riguarda i doppioni** *(il modo alternato `(pi, pi)`, che i triangoli tolgono)*, ### **non questo modo.** ### **L'argomento che c'e' e' di dimensioni:** ### **senza costanti, l'unica lunghezza e' l'arco**, ### **e una regola che tiene fissi i rapporti per arco tiene fissa in archi OGNI lunghezza emergente.** ### **Quindi in `(B)` nessuna scala emergente e' fisica senza una SCALA ESTERNA**; ### **la scelta fra `(A)` e `(B)` e' anche la scelta se la teoria ne ha una.**
 
 ### ❓ **LA DOMANDA PER LUCA** *(la prima di tre)*: ### **la regola di scala si tiene** *(allora ogni lunghezza emergente e' in archi, e `(B)` la chiama artefatto per costruzione)*, ### **o si cambia in una che tenga fissa una grandezza FISICA** *(una scala esterna, da derivare)*? *(Criterio di chiusura: una tua decisione registrata. NESSUNA SCELTA qui.)*
+
+### 🧪 **LA MONETA E' LA MASSA? MISURA 1: NO -- IL SALTO C'E' ANCHE SENZA MONETA (`Delta` `1.69` A `eps = 0`), LA DISPERSIONE RESTA PARABOLICA, E `c` DIPENDE POCO DA `eps`** *(mandato di Luca delle `19:43`; task history `2026-10-22_moneta_massa.md`; referto `doc/referti_l2/moneta_massa_1.txt` e `.jsonl`, strumento `csv/_moneta_massa.py` blob sha1-BYTE `c114245d`, committato e pulito)*
+
+- ### **IL CONTROLLO:** a `eps = 0.5` ### **la procedura di `82b40ca1` ridà `c = 0.38943`** *(lato `32`)* ### **e `0.38823`** *(lato `64`)*, entro `1e-4`.
+- ### **LA TABELLA** *(settore della materia, `4` rami dispersivi, il fit `sqrt(Delta^2 + v^2 k^2) - Delta` entro `0.1%`)*:
+
+| `eps` | lato `32`: `Delta` | `c` | `v_g(2)/v_g(1)` | lato `64`: `Delta` | `c` |
+|---|---|---|---|---|---|
+| `0` | `1.686` | `0.3946` | `1.975` | `1.703` | `0.3932` |
+| `0.125` | `1.745` | `0.3942` | `1.978` | `1.716` | `0.3929` |
+| `0.25` | `1.889` | `0.3933` | `1.982` | `1.741` | `0.3919` |
+| `0.5` *(oggi)* | `2.158` | `0.3894` | `1.984` | `1.751` | `0.3882` |
+| `1` | `1.906` | `0.3751` | `1.980` | `1.608` | `0.3744` |
+| `2` | `1.285` | `0.3290` | `1.974` | `1.236` | `0.3307` |
+
+- ### **LE LETTURE: NON E' LA MASSA, a tutte e due le taglie:** ### **`c * Delta` NON costante** *(`0.41`-`0.83` a lato `32`)*, ### **`Delta` NON proporzionale a `eps`** *(e non monotono: cresce fino a `eps 0.5`, poi cala)*, ### **e a `eps = 0` la dispersione NON e' lineare** *(`v_g(2)/v_g(1)` `1.975` e `1.994`: parabolica)*. ### **`c * Delta` fra le taglie: scarti fino al `19%`.**
+- ### **CHE COSA DICE:** ### **la «massa» dei rami a onde lunghe c'e' anche SENZA moneta** *(`Delta` `1.69`)*, ### **e la curvatura `c` cambia di meno del `17%` su `eps` da `0` a `2`**: ### **la curvatura che fa i `32` archi NON viene dalla moneta.** ### **Da dove venga non lo so**: ### **l'ipotesi piu' ovvia e' il GROVER** *(il flusso `pi s` sulle direzioni, che mescola le estremita')* -- ### **NON verificata.**
+- ### **LA MIA PREVISIONE** *(PARZIALE: a `eps = 0` non del tutto senza massa)* ### **era nel verso giusto**, ### **ma non prevedeva che `eps` contasse cosi' poco.**
+- ### **La misura `2` segue** *(`S1` a tre `eps`)*.

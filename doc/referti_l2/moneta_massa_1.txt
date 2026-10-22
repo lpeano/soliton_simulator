@@ -1,0 +1,28 @@
+[TIMBRO] _moneta_massa.py  sha1-BYTE c114245d  committato e pulito
+====================================================================================================
+LA MONETA E' LA MASSA? -- misura 1
+====================================================================================================
+  il passo: 14 pezzi, impronta 2e7f795d2a52fbe7 (intatto); eps SOLO nella scena
+----------------------------------------------------------------------------------------------------
+  lato 32 eps 0     (eps dtau 0.00000): c(82b40ca1) 0.3946; materia: 4 rami dispersivi, Delta 1.68570, v 0.81934, c=v^2/Delta 0.3982, c=v_g(1)/k(1) 0.3946, c*Delta 0.66509, fit 0.000, v_g(2)/v_g(1) 1.975
+  lato 32 eps 0.125 (eps dtau 0.01562): c(82b40ca1) 0.3942; materia: 4 rami dispersivi, Delta 1.74484, v 0.83244, c=v^2/Delta 0.3973, c=v_g(1)/k(1) 0.3936, c*Delta 0.68683, fit 0.000, v_g(2)/v_g(1) 1.978
+  lato 32 eps 0.25  (eps dtau 0.03125): c(82b40ca1) 0.3933; materia: 4 rami dispersivi, Delta 1.88947, v 0.86230, c=v^2/Delta 0.3949, c=v_g(1)/k(1) 0.3913, c*Delta 0.73944, fit 0.001, v_g(2)/v_g(1) 1.982
+  lato 32 eps 0.5   (eps dtau 0.06250): c(82b40ca1) 0.3894; materia: 4 rami dispersivi, Delta 2.15813, v 0.90822, c=v^2/Delta 0.3885, c=v_g(1)/k(1) 0.3851, c*Delta 0.83110, fit 0.001, v_g(2)/v_g(1) 1.984
+  lato 32 eps 1     (eps dtau 0.12500): c(82b40ca1) 0.3751; materia: 4 rami dispersivi, Delta 1.90575, v 0.83672, c=v^2/Delta 0.3719, c=v_g(1)/k(1) 0.3688, c*Delta 0.70277, fit 0.000, v_g(2)/v_g(1) 1.980
+  lato 32 eps 2     (eps dtau 0.25000): c(82b40ca1) 0.3290; materia: 4 rami dispersivi, Delta 1.28462, v 0.64567, c=v^2/Delta 0.3252, c=v_g(1)/k(1) 0.3219, c*Delta 0.41351, fit 0.000, v_g(2)/v_g(1) 1.974
+  lato 64 eps 0     (eps dtau 0.00000): c(82b40ca1) 0.3932; materia: 4 rami dispersivi, Delta 1.70280, v 0.81946, c=v^2/Delta 0.3944, c=v_g(1)/k(1) 0.3932, c*Delta 0.66949, fit 0.000, v_g(2)/v_g(1) 1.994
+  lato 64 eps 0.125 (eps dtau 0.00781): c(82b40ca1) 0.3929; materia: 4 rami dispersivi, Delta 1.71613, v 0.82215, c=v^2/Delta 0.3939, c=v_g(1)/k(1) 0.3924, c*Delta 0.67338, fit 0.000, v_g(2)/v_g(1) 1.996
+  lato 64 eps 0.25  (eps dtau 0.01562): c(82b40ca1) 0.3919; materia: 4 rami dispersivi, Delta 1.74069, v 0.82658, c=v^2/Delta 0.3926, c=v_g(1)/k(1) 0.3908, c*Delta 0.68033, fit 0.000, v_g(2)/v_g(1) 1.996
+  lato 64 eps 0.5   (eps dtau 0.03125): c(82b40ca1) 0.3882; materia: 4 rami dispersivi, Delta 1.75108, v 0.82419, c=v^2/Delta 0.3882, c=v_g(1)/k(1) 0.3866, c*Delta 0.67704, fit 0.000, v_g(2)/v_g(1) 1.995
+  lato 64 eps 1     (eps dtau 0.06250): c(82b40ca1) 0.3744; materia: 4 rami dispersivi, Delta 1.60757, v 0.77506, c=v^2/Delta 0.3739, c=v_g(1)/k(1) 0.3726, c*Delta 0.59903, fit 0.000, v_g(2)/v_g(1) 1.994
+  lato 64 eps 2     (eps dtau 0.12500): c(82b40ca1) 0.3307; materia: 4 rami dispersivi, Delta 1.23569, v 0.63859, c=v^2/Delta 0.3301, c=v_g(1)/k(1) 0.3289, c*Delta 0.40638, fit 0.000, v_g(2)/v_g(1) 1.993
+----------------------------------------------------------------------------------------------------
+  DEVE RIUSCIRE: lato 32 eps 0.5, la c di 82b40ca1 entro 0.0001                      PASSA   0.38943 contro 0.3894
+  DEVE RIUSCIRE: lato 64 eps 0.5, la c di 82b40ca1 entro 0.0001                      PASSA   0.38823 contro 0.3882
+### LE LETTURE
+  lato 32: c*Delta ['0.6868', '0.7394', '0.8311', '0.7028', '0.4135'] (costante entro 5%? False); Delta/eps ['13.9587', '7.5579', '4.3163', '1.9057', '0.6423'] (proporzionale? False); a eps 0 v_g(2)/v_g(1) 1.975 (lineare? False); il fit entro 5% a ogni eps > 0? True -> ### NON E' LA MASSA
+  lato 64: c*Delta ['0.6734', '0.6803', '0.6770', '0.5990', '0.4064'] (costante entro 5%? False); Delta/eps ['13.7290', '6.9628', '3.5022', '1.6076', '0.6178'] (proporzionale? False); a eps 0 v_g(2)/v_g(1) 1.994 (lineare? False); il fit entro 5% a ogni eps > 0? True -> ### NON E' LA MASSA
+  c*Delta lato 64 contro lato 32, stesso eps: scarti ['0.0196', '0.0799', '0.1854', '0.1476', '0.0173'] -> entro 1%? False
+====================================================================================================
+LA MISURA 1: 2 su 2 controlli   ### TUTTI PASSATI
+====================================================================================================
