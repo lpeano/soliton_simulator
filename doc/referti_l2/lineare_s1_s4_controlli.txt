@@ -1,0 +1,22 @@
+[TIMBRO] _lineare_s1_s4.py  sha1-BYTE dc166098  committato e pulito
+====================================================================================================
+DECISIONE-LINEARE: IL CONFRONTO FRA S1 E S4 (in memoria; nessuna forma scelta) -- --parte controlli
+====================================================================================================
+  il passo: 14 pezzi, impronta 2e7f795d2a52fbe7 (intatto); il quadrato; base proiettata; la NORMA, seconda meta'; N dtau 400 (i controlli a 100)
+----------------------------------------------------------------------------------------------------
+  DEVE RIUSCIRE: S3 R2 ridà 594417f6 AL BIT (N dtau 100)                             PASSA   10 campi identici, 142 s
+  DEVE RIUSCIRE: S3 R1 ridà 594417f6 AL BIT (N dtau 100)                             PASSA   10 campi identici, 495 s
+  S1 x 0.01 : rho dalpha/drho, codice contro mano                                    PASSA   1.9996000600e-04 contro 1.9996000600e-04, 1.94e-12
+  S1 x 0.1  : rho dalpha/drho, codice contro mano                                    PASSA   1.9605920988e-02 contro 1.9605920988e-02, 1.32e-11
+  S1 x 0.3  : rho dalpha/drho, codice contro mano                                    PASSA   1.5150239878e-01 contro 1.5150239879e-01, 6.06e-11
+  S1 x 1    : rho dalpha/drho, codice contro mano                                    PASSA   5.0000000000e-01 contro 5.0000000000e-01, 4.55e-12
+  S1 x 3    : rho dalpha/drho, codice contro mano                                    PASSA   1.8000000010e-01 contro 1.8000000000e-01, 5.68e-10
+  S4 x 0.01 : rho dalpha/drho, codice contro mano                                    PASSA   1.9218209060e-01 contro 1.9218209058e-01, 6.66e-11
+  S4 x 0.1  : rho dalpha/drho, codice contro mano                                    PASSA   6.0955243705e-01 contro 6.0955243703e-01, 3.10e-11
+  S4 x 0.3  : rho dalpha/drho, codice contro mano                                    PASSA   8.6639890740e-01 contro 8.6639890733e-01, 7.42e-11
+  S4 x 1    : rho dalpha/drho, codice contro mano                                    PASSA   1.0000000001e+00 contro 1.0000000000e+00, 1.13e-10
+  S4 x 3    : rho dalpha/drho, codice contro mano                                    PASSA   8.8703093497e-01 contro 8.8703093483e-01, 1.59e-10
+  la camminata sola ESATTA, N dtau 100, <= N*64 ulp                                  PASSA   2.101e-13
+====================================================================================================
+LA PARTE controlli: 13 su 13 controlli   ### TUTTI PASSATI
+====================================================================================================
