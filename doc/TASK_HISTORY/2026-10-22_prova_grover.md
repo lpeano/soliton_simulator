@@ -44,6 +44,8 @@
   Fourier *(non sotto `0.04`, non sopra `0.2` del quadrato per il caso innocente)*, ### **e la materia diluita resta
   INSTABILE** *(il logaritmo e' un colpevole indipendente)*. ### **Non so** se Fourier rompe l'isotropia `C6`.
 
+### ⚠ **ANNOTAZIONE DOPO I NUMERI** *(referto `doc/referti_l2/prova_grover.txt`)*: ### **LA PREVISIONE E' CADUTA, ED ERA SCRITTA MALE.** Credevo **PARZIALE**; ### **e' INNOCENTE** *(rapporti `0.87`-`0.92`)*. ### **E la previsione era incoerente con le sue soglie:** il massimo «fra `0.15` e `0.35`» vuol dire un rapporto fra `0.37` e `0.87`, ### **che entra nella zona INNOCENTE** *(`>= 0.5`)*; ### **la parentesi «non sopra `0.2` del quadrato per il caso innocente» non vuol dire niente.** ### **Il massimo misurato `0.335`-`0.354` sta al bordo alto del mio intervallo; la categoria era sbagliata.**
+
 ## 2. LA PROGETTAZIONE, I CONTROLLI E LE LETTURE *(copiati dal mandato)*
 
 - ### **I BRACCI:** `F1` *(Fourier solo per la materia)*, `F2` *(materia e vuoto)*; ### **quadrato `Q` e triangoli `SE`**;

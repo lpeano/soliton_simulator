@@ -20375,3 +20375,18 @@ La domanda di Luca *(«l'instabilita', se c'e', dipende dal fatto che lo spazio 
 - ### **L'ultimo terzo:** lunghe `0.18`-`0.22`, ### **banda `0.54`-`0.58`**, ### **reticolo `0.23`-`0.24`** *(meno del quadrato: `0.28`-`0.32`)*; ### **`max rho/<rho>` `5.6` a lato `32`, `7.1` a lato `64`**. ### **NON DEGENERA.** ### **SATURA a lato `32`, NON SATURA a lato `64`** *(la fascia reticolo cambia del `12%`)*.
 - ### **LA PROVA CHE DECIDE: `L_g` `2.860` a lato `32`, `2.867` a lato `64`, rapporto `1.002` -> `(a)` FISSA IN ARCHI -> ARTEFATTO DEL RETICOLO.** ### **Il pavimento del rumore su `6` vicini e' `sqrt7 = 2.65`**; ### **la lunghezza spettrale `3.31`-`3.43`**, ### **la stessa del quadrato** *(`3.29`-`3.42`)*: ### **fissa in archi, e la stessa sulle due geometrie.**
 - ### **LA CONSERVAZIONE:** ### **`G` `1.02e-2` e `2.53e-3`: rapporto `4.03`, come `R2Q`.**
+
+### ✅ **LA PROVA DI GROVER: GROVER INNOCENTE -- CON FOURIER LE BANDE PIATTE SPARISCONO, LA BANDA DI `S3` NO: `0.87`-`0.92` DI QUELLA CON GROVER, SU QUADRATO E TRIANGOLI; E LA MATERIA DILUITA RESTA INSTABILE** *(mandato di Luca del `2026-10-22` alle `09:10`; task history `2026-10-22_prova_grover.md`; referto `doc/referti_l2/prova_grover.txt` e `.jsonl`, strumento `csv/_prova_grover.py` blob sha1-BYTE `24179457`, committato e pulito; ### **girato IN PARALLELO a `R1T`, un processo su `12` processori logici, `R1T` non toccato**)*
+
+- ### **LA SCELTA:** ### **Fourier SOLO IN MEMORIA** *(l'operatore `grover`, e `grover_scalare` in `F2`, rimpiazzati nella scena dello strumento)*; ### **`leggi.yaml`, il passo, l'impronta intatti.** Il flusso di Fourier ### **allo stesso angolo di Grover**, ### **nessun numero nuovo.** ### **Il nucleo NON e' stato toccato:** niente riga `SUITE:`.
+- ### **LA CAMMINATA SOLA, `12` su `12` controlli:** ### **Grover HA le bande piatte** *(`+pi/4` e `+pi/8` nel settore `phi` su tutte e due le geometrie -- le fasi del guardiano, nel segno `angle(lambda)`; sui triangoli anche due nel settore `psi`, `0.122 pi` e `0.253 pi`; sul quadrato il ramo piu' stretto di `psi` e' `1.75e-4`)*: ### **il caso che deve fallire FALLISCE.** ### **Fourier: unitaria ed esatta** *(`1.1e-12`, `2.1e-12`)*, ### **NESSUNA banda piatta** *(ramo minimo `0.108` e `0.064`)*. ### ⚠ **IL COSTO: Fourier ROMPE L'ISOTROPIA** *(`C4` `0.18`-`0.20`, `C6` `0.14`-`0.16`, contro `~2e-15` di Grover)*: ### **l'ordine ciclico gli da' un verso.**
+- ### **`R2`, Grover AL BIT** con `594417f6` e `bb0ef057`. ### **Con Fourier:**
+
+| | quadrato | triangoli |
+|---|---|---|
+| `F1` *(materia)* | `0.3540` a `(6, 12)` -> `0.881` | `0.3481` a `(8, 2)`, interno -> `0.924` |
+| `F2` *(materia e vuoto)* | `0.3497` a `(6, 13)` -> `0.871` | `0.3349` a `(8, 22)`, interno -> `0.889` |
+
+- ### **LA LETTURA: `F1` E `F2` GROVER INNOCENTE** *(tutti i rapporti `>= 0.5`)*; ### **nessuno stabile.** ### **`F2` a `x 1e-4` sul quadrato: `0.3721` -> INSTABILE: il logaritmo resta un colpevole indipendente.**
+- ### ⚠ **LA MIA PREVISIONE E' CADUTA, ed era scritta male** *(PARZIALE, con un intervallo che entrava nella zona INNOCENTE: annotata nel task history)*.
+- ### **CHE COSA DICE, senza scegliere:** ### **le bande piatte di Grover NON sono la causa della banda di `S3`**: ### **togliendole il guadagno cala solo dell'`8`-`13%`**, e ### **il massimo si sposta** *(dal `(0, 8)` all'asse obliquo `(6, 12)` sul quadrato)*. ### **La lettura «a rami» perde il suo argomento sul ramo lento** *(`S-E`: il `45%` del modo sul ramo lento)*: ### **un ramo lento c'era, ma non era quello che la faceva crescere.**

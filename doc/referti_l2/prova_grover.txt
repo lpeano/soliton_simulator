@@ -1,0 +1,45 @@
+[TIMBRO] _prova_grover.py  sha1-BYTE 24179457  committato e pulito
+====================================================================================================
+LA PROVA DI GROVER: S3 CON LA MONETA DI FOURIER (IN MEMORIA), QUADRATO E TRIANGOLI
+====================================================================================================
+  il passo: 14 pezzi, impronta 2e7f795d2a52fbe7 (intatto); R2: S3 sola, cs spento, lato 32, dtau 0.125, x 0.1, eps 0.5, base proiettata, N dtau 100, la norma, seconda meta'
+  F1: Fourier per la materia (grover); F2: per materia e vuoto (grover, grover_scalare); l'ordine ciclico per angolo; il flusso allo stesso angolo di Grover
+----------------------------------------------------------------------------------------------------
+### 1. LA CAMMINATA SOLA
+  Q GROVER: |lambda(A^N)| -1 max 2.37e-13 (tetto 1.14e-11); fuori settore 0.0e+00; piatte psi [] phi ['0.250000 pi', '0.125000 pi']; ampiezza minima dei rami psi 1.748e-04 phi 1.665e-15; isotropia C4 1.707e-15
+  Q F1    : |lambda(A^N)| -1 max 1.05e-12 (tetto 1.14e-11); fuori settore 0.0e+00; piatte psi [] phi ['0.250000 pi', '0.125000 pi']; ampiezza minima dei rami psi 1.081e-01 phi 1.665e-15; isotropia C4 1.837e-01
+  Q F2    : |lambda(A^N)| -1 max 1.05e-12 (tetto 1.14e-11); fuori settore 0.0e+00; piatte psi [] phi []; ampiezza minima dei rami psi 1.081e-01 phi 1.159e-01; isotropia C4 1.963e-01
+  T GROVER: |lambda(A^N)| -1 max 2.54e-13 (tetto 1.14e-11); fuori settore 0.0e+00; piatte psi ['0.121949 pi', '0.253051 pi'] phi ['0.250000 pi', '0.125000 pi']; ampiezza minima dei rami psi 1.499e-15 phi 1.110e-15; isotropia C6 1.915e-15
+  T F1    : |lambda(A^N)| -1 max 2.07e-12 (tetto 1.14e-11); fuori settore 0.0e+00; piatte psi [] phi ['0.250000 pi', '0.125000 pi']; ampiezza minima dei rami psi 6.389e-02 phi 1.110e-15; isotropia C6 1.388e-01
+  T F2    : |lambda(A^N)| -1 max 2.07e-12 (tetto 1.14e-11); fuori settore 0.0e+00; piatte psi [] phi []; ampiezza minima dei rami psi 6.389e-02 phi 7.095e-02; isotropia C6 1.572e-01
+  DEVE FALLIRE Q: Grover HA bande piatte (le fasi pi/4 e pi/8, in un segno)        PASSA   2 trovate
+  DEVE RIUSCIRE Q F1: unitaria ed esatta, entro N*64 ulp                           PASSA   1.055e-12
+  DEVE RIUSCIRE Q F1: nessuna banda piatta (settori psi), ramo minimo > 0.001      PASSA   ampiezza minima 1.081e-01
+  DEVE RIUSCIRE Q F2: unitaria ed esatta, entro N*64 ulp                           PASSA   1.055e-12
+  DEVE RIUSCIRE Q F2: nessuna banda piatta (settori psi+phi), ramo minimo > 0.001  PASSA   ampiezza minima 1.081e-01
+  DEVE FALLIRE T: Grover HA bande piatte (le fasi pi/4 e pi/8, in un segno)        PASSA   4 trovate
+  DEVE RIUSCIRE T F1: unitaria ed esatta, entro N*64 ulp                           PASSA   2.068e-12
+  DEVE RIUSCIRE T F1: nessuna banda piatta (settori psi), ramo minimo > 0.001      PASSA   ampiezza minima 6.389e-02
+  DEVE RIUSCIRE T F2: unitaria ed esatta, entro N*64 ulp                           PASSA   2.068e-12
+  DEVE RIUSCIRE T F2: nessuna banda piatta (settori psi+phi), ramo minimo > 0.001  PASSA   ampiezza minima 6.389e-02
+----------------------------------------------------------------------------------------------------
+### 2. LA STABILITA' LINEARE R2
+  DEVE RIUSCIRE Q: con Grover lo strumento ridà 594417f6 AL BIT                    PASSA   138 s
+  Q F1 x 0.1   : max gamma 0.3540 a (6, 12); uniformita' 2.0 ulp; 146 s
+  Q F2 x 0.1   : max gamma 0.3497 a (6, 13); uniformita' 1.0 ulp; 147 s
+  Q F2 x 0.0001: max gamma 0.3721 a (6, 13); uniformita' 0.0 ulp; 143 s
+  DEVE RIUSCIRE T: con Grover lo strumento ridà bb0ef057 AL BIT                    PASSA   277 s
+  T F1 x 0.1   : max gamma 0.3481 a (8, 2); uniformita' 1.9 ulp; 316 s
+  T F2 x 0.1   : max gamma 0.3349 a (8, 22); uniformita' 1.5 ulp; 335 s
+----------------------------------------------------------------------------------------------------
+### 3. LE LETTURE (sul massimo di gamma su tutti i k)
+  F1 Q: 0.3540 contro Grover 0.4018 -> rapporto 0.8812; a (6, 12) ; STABILE? no
+  F1 T: 0.3481 contro Grover 0.3768 -> rapporto 0.9237; a (8, 2) (interno); STABILE? no
+  ### F1: GROVER INNOCENTE
+  F2 Q: 0.3497 contro Grover 0.4018 -> rapporto 0.8705; a (6, 13) ; STABILE? no
+  F2 T: 0.3349 contro Grover 0.3768 -> rapporto 0.8886; a (8, 22) (interno); STABILE? no
+  ### F2: GROVER INNOCENTE
+  ### F2 a x 0.0001 sul quadrato: max 0.3721 -> INSTABILE: il logaritmo resta un colpevole indipendente
+====================================================================================================
+LA PROVA DI GROVER: 12 su 12 controlli   ### TUTTI PASSATI
+====================================================================================================
