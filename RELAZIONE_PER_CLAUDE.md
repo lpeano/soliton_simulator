@@ -20515,3 +20515,5 @@ La domanda di Luca *(«l'instabilita', se c'e', dipende dal fatto che lo spazio 
 - ### **Dove guardare dopo** *(non mio da decidere)*: ### **la massa a `eps = 0` viene da altro** -- ### **il mandato delle `20:03`** *(lo spostamento parziale `s`, o il Grover)* ### **e' in coda.**
 
 ### ❓ **LA DOMANDA PER LUCA:** ### **la regola di scala per `eps`** *(oggi `eps` fisso raffinando)*: ### **resta com'e', visto che `eps` non e' la massa e conta poco su `c`, o aspetta il risultato dello spostamento parziale** *(in coda)*? *(Criterio di chiusura: una tua decisione registrata.)*
+
+### 📌 **IL CANALE DI cs, REGISTRATO** *(decisione di Luca delle `19:45`)*: ### **la voce `[[CANALE-CS-SECONDA-SORGENTE]]`** *(`FRONTE`, `FISICA` -- «un filone aperto», lo schema --, era `2`, `AGENDA`)* ### **sta in `doc/indice/voci.jsonl`**: il fatto di `974d411a`, l'ipotesi del guardiano *(`Lambda dcs/dLambda` massimo a rapporto `1`)*, la prova proposta, il legame con `[[DOMANDA-IL-VALORE-DI-LAMBDA-C]]`. ### **Si apre dopo «la moneta e' la massa?»**, che e' FATTA *(`e133316a`, `238b3599`)*: ### **quindi e' apribile, su tua decisione.**
