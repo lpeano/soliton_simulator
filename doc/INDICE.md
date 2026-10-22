@@ -9,7 +9,7 @@
 | `DOCUMENTAZIONE` | `2` | 1 |
 | `DOCUMENTAZIONE` | `ENTRAMBE` | 9 |
 | `FISICA` | `1` | 343 |
-| `FISICA` | `2` | 137 |
+| `FISICA` | `2` | 138 |
 | `FISICA` | `ENTRAMBE` | 21 |
 | `INFRASTRUTTURA` | `1` | 39 |
 | `INFRASTRUTTURA` | `2` | 23 |
@@ -269,6 +269,7 @@
 | `DECISIONE-COMPOSIZIONE-SIMMETRICA` | DECISIONE | FISICA | 2 | ### **CHIUSA** |  | L ordine della tabella non e simmetrico: l errore di H_tot va come dtau e non dt |
 | `DECISIONE-DIREZIONE-STRADA-3` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | strada (3): C esatta nelle leggi e ROTTA SPONTANEAMENTE nello stato, con pareti |
 | `DECISIONE-LA-C-VUOLE-IL-TEMPO-ROVESCIATO` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | La C del cammino era una conseguenza delle involuzioni: coi flussi parziali serv |
+| `DECISIONE-LINEARE` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | LINEARE, il regime di poca materia di S3: l-accoppiamento rho dalpha/drho deve a |
 | `DECISIONE-M-B2-SI-LEGGE-SULLA-PENDENZA` | DECISIONE | FISICA | 2 | ### **CHIUSA** |  | M-B2 si legge sulla PENDENZA complessiva, non sui rapporti singoli |
 | `DECISIONE-STRADA-B-FLUSSI` | DECISIONE | FISICA | 2 | ### **CHIUSA** |  | strada (B): Grover e spostamento diventano FLUSSI, e l angolo pi e la velocita d |
 | `DECISIONE-TICK-OROLOGIO-MASSIMO` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | il tick e l orologio piu veloce possibile: theta <= pi e cs ha un massimo |
