@@ -36,6 +36,7 @@ X_ACC = (0.01, 0.1, 0.3, 1.0, 3.0)
 TOLL_ACC = 1e-8
 ASINT = 0.10                   # seconda meta' contro ultimo quarto, al k del massimo, dal mandato
 GAMMA_TAGLIE = 0.10            # gamma alle due taglie, dal mandato
+SOGLIA_STABILE = 1e-3          # la soglia di stabilita', 1e-3 del massimo di riferimento (decisione di Luca, 18:09)
 CARTELLA = os.path.join(RADICE, "doc", "referti_l2")
 OK = [0, 0]
 
@@ -94,10 +95,25 @@ def riga(nome, b):
     return r
 
 
-def controlli_braccio(nome, b, r):
+def rif_di(legge):
+    """### Il massimo di riferimento *(la forma di oggi, `594417f6`, la norma)*: `R2` `0.4018`, `R1` `0.5411`."""
+    import _al_bit_cura_d0 as AB
+    return float(np.max(AB.committato()["%s lato 32" % legge]["pend"]["meta_norm"]))
+
+
+def controlli_braccio(nome, b, r, rif):
+    """### La base e l'asintoticita'. ### ⚖️ **Decisione di Luca del `2026-10-22` alle `18:09`** *(dopo `b16e58ba`)*: ### **se
+    ENTRAMBI i `gamma` confrontati sono sotto la soglia di stabilita'** *(`1e-3` del massimo di riferimento)* ### **il controllo
+    relativo e' NON INFORMATIVO**, e si stampa cosi' invece di FALLISCE *(non conta ne' come passato ne' come caduto)*."""
     import _stabilita_lineare as SL
     esito("%s: la base <= %g ulp" % (nome, SL.SOGLIA_UNIF), b["uniformita_ulp"] <= SL.SOGLIA_UNIF,
           "%.1f ulp" % b["uniformita_ulp"])
+    soglia = SOGLIA_STABILE * rif
+    if abs(r["max"]) <= soglia and abs(r["q4"]) <= soglia:
+        print("  %-82s NON INFORMATIVO (sotto la soglia di stabilita')   %.3e e %.3e sotto %.3e"
+              % (("%s: asintotico, seconda meta' contro ultimo quarto" % nome)[:82], r["max"], r["q4"], soglia))
+        sys.stdout.flush()
+        return
     esito("%s: asintotico, seconda meta' contro ultimo quarto entro %g" % (nome, ASINT), r["asint"] <= ASINT,
           "%.3f" % r["asint"])
 
@@ -148,7 +164,7 @@ def parte_scala():
         for lato, dtau in TAGLIE:
             nome, b = corsa(nf, "R2", 0.1, lato, dtau, SL.EPS_REL, TEMPO)
             r = riga(nome, b)
-            controlli_braccio(nome, b, r)
+            controlli_braccio(nome, b, r, rif_di("R2"))
             rr[lato] = (b, r)
             salva("scala", {"forma": nf, "lato": lato, "dtau": dtau, "lettura": r,
                             "meta_norm": np.asarray(b["pend"]["meta_norm"]).tolist()})
@@ -187,7 +203,7 @@ def parte_materia():
         for x in X_MATERIA:
             nome, b = corsa(nf, "R2", x, 32, 0.125, SL.EPS_REL, TEMPO)
             r = riga(nome, b)
-            controlli_braccio(nome, b, r)
+            controlli_braccio(nome, b, r, rif_di("R2"))
             salva("materia", {"forma": nf, "x": x, "lettura": r, "nu_s3": b["nu_s3"]})
     return 0
 
@@ -199,7 +215,7 @@ def parte_cs():
     for nf in FORME:
         nome, b = corsa(nf, "R1", 0.1, 32, 0.125, SL.EPS_REL, TEMPO)
         r = riga(nome, b)
-        controlli_braccio(nome, b, r)
+        controlli_braccio(nome, b, r, rif)
         print("      rapporto con R1 di oggi (norma %.4f): %.4f" % (rif, r["max"] / rif))
         salva("cs", {"forma": nf, "lettura": r, "rif": rif, "rapporto": r["max"] / rif})
     return 0
