@@ -1,0 +1,48 @@
+[TIMBRO] _s3_rami.py  sha1-BYTE 9ef5d880  committato e pulito
+====================================================================================================
+S-E: IL MODO CHE CRESCE IN R2, PROIETTATO SUI RAMI DELLA CAMMINATA SOLA
+====================================================================================================
+  R2: S3 sola, cs spento; lato 32, dtau 0.125, x 0.1, eps 0.5; base proiettata; N dtau 100; la banda = argmax della pendenza della norma (seconda meta')
+  il passo: 14 pezzi, impronta 2e7f795d2a52fbe7; g = + (nu_S3 > 0); focalizzante se g D < 0; NON DECIDE sotto il 50% delle particelle
+----------------------------------------------------------------------------------------------------
+  QUADRATO: gamma (norma, seconda meta') AL BIT col referto committato           PASSA   94 s
+  QUADRATO: A(k) della camminata sola UNITARIA, |lambda| = 1 entro 1e-12         PASSA   8.882e-16
+  QUADRATO: la decomposizione e' completa, la somma dei pesi = 1 entro 1e-10     PASSA   0.000e+00 (Schur fuori diagonale 1.1e-15, 7.3e-16)
+  QUADRATO: la banda a k = (0, 8) (gamma 0.4018); |autovalore di M| 6.068153e-01
+      il fondo: la psi uniforme sul ramo 0 di A(0) per 0.571341; phi_0 +0.004687 per tick
+      PESI: particelle 0.500000, buche 0.500000
+        particella ramo  0  peso 0.226730  fase per tick -0.047696
+        buca       ramo  0  peso 0.225065  fase per tick +0.047696
+        buca       ramo  5  peso 0.162245  fase per tick +0.794816
+        particella ramo  5  peso 0.131089  fase per tick -0.794816
+        particella ramo  6  peso 0.067865  fase per tick -0.737929
+        buca       ramo  7  peso 0.057389  fase per tick +0.737929
+        buca       ramo  8  peso 0.038799  fase per tick +0.053164
+        particella ramo  8  peso 0.038799  fase per tick -0.053164
+        particella ramo  4  peso 0.032834  fase per tick -0.794816
+        buca       ramo  6  peso 0.011472  fase per tick +0.737929
+      LA COPPIA DI PESO MASSIMO: particella 0 (0.2267, 45.3% delle particelle), buca 0 (0.2251); D dtau = -5.238343e-02 -> FOCALIZZANTE (g D < 0)
+----------------------------------------------------------------------------------------------------
+  TRIANGOLI: gamma (norma, seconda meta') AL BIT col referto committato          PASSA   192 s
+  TRIANGOLI: A(k) della camminata sola UNITARIA, |lambda| = 1 entro 1e-12        PASSA   1.998e-15
+  TRIANGOLI: la decomposizione e' completa, la somma dei pesi = 1 entro 1e-10    PASSA   0.000e+00 (Schur fuori diagonale 2.2e-15, 2.3e-15)
+  TRIANGOLI: la banda a k = (1, 25) (gamma 0.3768); |autovalore di M| 5.753355e-01
+      il fondo: la psi uniforme sul ramo 0 di A(0) per 0.571341; phi_0 +0.004687 per tick
+      PESI: particelle 0.500000, buche 0.500000
+        particella ramo  0  peso 0.227053  fase per tick -0.045508
+        buca       ramo  3  peso 0.203993  fase per tick +0.045508
+        particella ramo  7  peso 0.146964  fase per tick -0.794837
+        buca       ramo  8  peso 0.087937  fase per tick +0.794837
+        particella ramo  3  peso 0.070267  fase per tick -0.740087
+        buca       ramo  2  peso 0.063609  fase per tick +0.740087
+        buca       ramo  9  peso 0.059350  fase per tick +0.794837
+        buca       ramo 12  peso 0.039161  fase per tick +0.050940
+        particella ramo 12  peso 0.039161  fase per tick -0.050940
+        buca       ramo  4  peso 0.025656  fase per tick +0.045508
+      LA COPPIA DI PESO MASSIMO: particella 0 (0.2271, 45.4% delle particelle), buca 3 (0.2040); D dtau = -5.019486e-02 -> FOCALIZZANTE (g D < 0)
+----------------------------------------------------------------------------------------------------
+### LA LETTURA (la prova 1 della sez. 3.2)
+  ### NON DECIDE (peso sparso: QUADRATO, TRIANGOLI)
+====================================================================================================
+S-E: 6 su 6 controlli   ### TUTTI PASSATI
+====================================================================================================
