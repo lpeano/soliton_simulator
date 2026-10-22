@@ -20368,3 +20368,10 @@ La domanda di Luca *(«l'instabilita', se c'e', dipende dal fatto che lo spazio 
 - ### **L'ultimo terzo:** lunghe `0.03`-`0.04`, ### **banda `0.52`-`0.56`**, ### **reticolo `0.41`-`0.45`** *(sotto il `50%`, ma VICINO)*; ### **`max rho/<rho>` `3.1`-`3.9`**. ### **NON DEGENERA.** ### **NON SATURA in `3` corse su `4`**: ### **lo spettro e' fermo** *(cambi `<= 0.04`)*, ### **ma l'altezza dei grumi CRESCE** *(`max rho/<rho>` `+13%`, `+14%`, `+24%`)*.
 - ### **LA PROVA CHE DECIDE: `L_g` `2.276` a lato `32`, `2.271` a lato `64`, rapporto `0.998` -> `(a)` FISSA IN ARCHI -> ARTEFATTO DEL RETICOLO.** ### ⚠ **Lo stesso controllo di scala di `R2Q`:** ### **`L_g` e' a un passo dal pavimento del rumore** *(`sqrt5 = 2.24`)*; ### **la lunghezza spettrale** *(`2.64`-`2.70` a tutte e due le taglie)* ### **e' fissa in archi anche lei.**
 - ### **LA CONSERVAZIONE:** norme al `1e-14`; ### **`G` `2.9e-3` / `2.8e-3` a lato `32`, `6.5e-4` / `6.6e-4` a lato `64`: rapporto `~4.3`.**
+
+### 🧪 **STATO FINALE, BRACCIO R2T** *(`S3` sola sui triangoli, `SN`; referto `doc/referti_l2/stato_finale_R2T.txt` e `.jsonl`, strumento `csv/_stato_finale.py` blob sha1-BYTE `e75c5a18`, committato e pulito)*
+
+- ### **Le quattro corse arrivano a `tau = 250`**: nessuna si ferma, nessun avviso.
+- ### **L'ultimo terzo:** lunghe `0.18`-`0.22`, ### **banda `0.54`-`0.58`**, ### **reticolo `0.23`-`0.24`** *(meno del quadrato: `0.28`-`0.32`)*; ### **`max rho/<rho>` `5.6` a lato `32`, `7.1` a lato `64`**. ### **NON DEGENERA.** ### **SATURA a lato `32`, NON SATURA a lato `64`** *(la fascia reticolo cambia del `12%`)*.
+- ### **LA PROVA CHE DECIDE: `L_g` `2.860` a lato `32`, `2.867` a lato `64`, rapporto `1.002` -> `(a)` FISSA IN ARCHI -> ARTEFATTO DEL RETICOLO.** ### **Il pavimento del rumore su `6` vicini e' `sqrt7 = 2.65`**; ### **la lunghezza spettrale `3.31`-`3.43`**, ### **la stessa del quadrato** *(`3.29`-`3.42`)*: ### **fissa in archi, e la stessa sulle due geometrie.**
+- ### **LA CONSERVAZIONE:** ### **`G` `1.02e-2` e `2.53e-3`: rapporto `4.03`, come `R2Q`.**
