@@ -36,6 +36,10 @@
   li')*; ### **un taglio ultravioletto NON li tocca** *(e' un'onda LUNGA)*; ### **la scala e' nella REGOLA DI SCALA** *(come `c` e il tempo
   si trasformano raffinando)*, ### **che e' di Luca.**
 
+### ⚠ **ANNOTAZIONE DOPO LO SCRIPT** *(`doc/referti_l2/origine_32_archi.txt`)*: ### **lo scarto dalla parabola a lato `32` e' `1.25%`**
+*(`v_g(2)/v_g(1) = 1.975`)*, ### **non «sotto l'`1%`» come avevo scritto sopra**; a lato `64` `0.3%`. ### **`c` `0.3894` e `0.3882`** *(non `0.390` e
+`0.393`: il conto a mano usava un ramo solo)*. ### **La lettura non cambia.**
+
 ## 2. LA PROGETTAZIONE
 
 1. ### **`csv/_origine_32_archi.py`**: ### **legge SOLO i `jsonl` committati** *(`d0_risonanza_bis`, `d0_risonanza_64`, `lineare_s1_s4_*`,
