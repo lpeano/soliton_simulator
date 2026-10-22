@@ -1,0 +1,26 @@
+[TIMBRO] _lineare_s1_s4.py  sha1-BYTE dc166098  committato e pulito
+====================================================================================================
+DECISIONE-LINEARE: IL CONFRONTO FRA S1 E S4 (in memoria; nessuna forma scelta) -- --sintesi
+====================================================================================================
+  il passo: 14 pezzi, impronta 2e7f795d2a52fbe7 (intatto); il quadrato; base proiettata; la NORMA, seconda meta'; N dtau 400 (i controlli a 100)
+----------------------------------------------------------------------------------------------------
+### LA SINTESI dalle quattro parti
+  controlli: 12 righe
+  scala: 6 righe
+  materia: 8 righe
+  cs: 2 righe
+  LA SCALA S1: (a) FISSO IN ARCHI -> artefatto del reticolo (gamma 0.00570 a lato 32, 0.00576 a lato 64)
+  LA SCALA S4: (a) FISSO IN ARCHI -> artefatto del reticolo (gamma 0.29705 a lato 32, 0.30014 a lato 64)
+  LA MATERIA:  forma  x      gamma max   dove      k (pi)
+               S1     0.01   0.00000     (0, 0)    [0.0, 0.0]
+               S1     0.1    0.00570     (1, 0)    [0.0, 0.0625]
+               S1     0.3    0.10500     (0, 4)    [0.0, 0.25]
+               S1     1      0.65291     (0, 10)   [0.0, 0.625]
+               S1     3      0.56939     (0, 9)    [0.0, 0.5625]
+               S4     0.01   0.07887     (0, 4)    [0.0, 0.25]
+               S4     0.1    0.29705     (0, 7)    [0.0, 0.4375]
+               S4     0.3    0.58041     (10, 0)   [0.0, 0.625]
+               S4     1      1.22888     (16, 0)   [0.0, 1.0]
+               S4     3      2.69646     (16, 16)  [1.0, 1.0]
+  CON cs (R1) S1: 0.40197 a (7, 25), rapporto con oggi 0.7428
+  CON cs (R1) S4: 0.44314 a (7, 7), rapporto con oggi 0.8189

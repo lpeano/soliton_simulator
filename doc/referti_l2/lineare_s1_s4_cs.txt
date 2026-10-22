@@ -1,0 +1,17 @@
+[TIMBRO] _lineare_s1_s4.py  sha1-BYTE dc166098  committato e pulito
+====================================================================================================
+DECISIONE-LINEARE: IL CONFRONTO FRA S1 E S4 (in memoria; nessuna forma scelta) -- --parte cs
+====================================================================================================
+  il passo: 14 pezzi, impronta 2e7f795d2a52fbe7 (intatto); il quadrato; base proiettata; la NORMA, seconda meta'; N dtau 400 (i controlli a 100)
+----------------------------------------------------------------------------------------------------
+  R1 S1 x 0.1 lato 32 eps 1e-07 N dtau 400     max 0.40197 a (7, 25) (k ['0.4375', '0.4375'] pi); ultimo quarto 0.40198 (scarto 0.000); uniformita' 2.1 ulp; 2050 s
+  R1 S1 x 0.1 lato 32 eps 1e-07 N dtau 400: la base <= 1000 ulp                      PASSA   2.1 ulp
+  R1 S1 x 0.1 lato 32 eps 1e-07 N dtau 400: asintotico, seconda meta' contro ultimo  PASSA   0.000
+      rapporto con R1 di oggi (norma 0.5411): 0.7428
+  R1 S4 x 0.1 lato 32 eps 1e-07 N dtau 400     max 0.44314 a (7, 7) (k ['0.4375', '0.4375'] pi); ultimo quarto 0.44316 (scarto 0.000); uniformita' 1.2 ulp; 2120 s
+  R1 S4 x 0.1 lato 32 eps 1e-07 N dtau 400: la base <= 1000 ulp                      PASSA   1.2 ulp
+  R1 S4 x 0.1 lato 32 eps 1e-07 N dtau 400: asintotico, seconda meta' contro ultimo  PASSA   0.000
+      rapporto con R1 di oggi (norma 0.5411): 0.8189
+====================================================================================================
+LA PARTE cs: 4 su 4 controlli   ### TUTTI PASSATI
+====================================================================================================

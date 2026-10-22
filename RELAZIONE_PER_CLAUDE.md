@@ -20460,3 +20460,17 @@ La domanda di Luca *(«l'instabilita', se c'e', dipende dal fatto che lo spazio 
 - ### 📌 **La coda continua senza decisioni prese al tuo posto** *(`L-DOPO-STOP`)*: ### **la parte `cs`, poi il documento sui `32` archi.**
 
 ### ⚖️ **DECISIONE DI LUCA DELLE 18:09** *(sul fallimento di `b16e58ba`)*: ### **il controllo di asintoticita' relativo e' NON INFORMATIVO sotto la soglia di stabilita'** *(`1e-3` del massimo di riferimento)*: ### **`S1` a `x 0.01` si legge NON INFORMATIVO, nessuna lettura cambia, nessuna corsa si rifa'**; annotato nel task history di `DECISIONE-LINEARE`; ### **lo strumento `csv/_lineare_s1_s4.py` stampera' «NON INFORMATIVO (sotto la soglia di stabilita')» quando entrambi i `gamma` sono sotto la soglia** -- ### **la modifica A CORSA DI `cs` CHIUSA** *(lo strumento e' in uso)*, i referti committati non si toccano.
+
+### 🧪 **DECISIONE-LINEARE, PARTE CS: `4` SU `4` -- CON `cs` ACCESO `R1` E' INSTABILE PER TUTTE E DUE: `S1` `0.402` (`0.743` DI OGGI), `S4` `0.443` (`0.819`)** *(referto `doc/referti_l2/lineare_s1_s4_cs.txt` e `.jsonl`; la sintesi `doc/referti_l2/lineare_s1_s4.txt` e `.jsonl`, da `--sintesi`; strumento blob sha1-BYTE `dc166098`)*
+
+- ### **`R1`** *(`cs` + fase, `Lambda_c = 1 * Lambda` medio, `x 0.1`, lato `32`, `N dtau 400`)*: ### **`S1` `0.40197` a `(7, 25)`, `S4` `0.44314` a `(7, 7)`** -- ### **tutti e due sulla DIAGONALE a `0.4375 pi`**; asintotici *(`0.000`)*; la base `<= 2.1` ulp. ### **Rapporto con `R1` di oggi** *(norma `0.5411`)*: ### **`0.743` e `0.819`.**
+- ### ⭐ **IL FATTO CHE CONTA:** ### **con `S1`, `R2` cresce a `0.0057` e `R1` a `0.402`**: ### **l'instabilita' di `R1` NON viene da `S3`: viene da `cs` e dalla fase** *(`CAMM-FASE-VUOTO`)*. ### **Il criterio di Luca toglie quasi tutta l'instabilita' di `S3`, e lascia intera quella di `cs`.**
+- ### **LA MIA PREVISIONE** *(«`S1` con `cs` `~0.1`-`0.2`»)* ### **e' CADUTA: `0.402`.**
+
+### 🧭 **IL CONFRONTO `S1` / `S4`, INSIEME** *(nessuna forma scelta)*
+- ### **la SCALA:** ### **tutte e due `(a)` FISSE IN ARCHI** *(`S1` a `0.0625 pi`, `S4` a `0.4375 pi`)*: ### **l'instabilita' che resta e' un artefatto del reticolo.**
+- ### **la MATERIA:** ### **stabili o quasi a poca materia, FORTEMENTE instabili a molta** *(`S1` `0.65` a `x 1`; `S4` `1.23` a `x 1`, `2.70` a `x 3`)*.
+- ### **con `cs`:** ### **instabili tutte e due, `0.40`-`0.44`, dominate da `cs`.**
+- ### **Fra le due:** ### **`S1` e' piu' quieta di `S4` in `R2` a ogni `x`** *(`0.0057` contro `0.297` a `x 0.1`)* ### **e anche con `cs`** *(`0.402` contro `0.443`)*.
+
+### ❓ **LA DOMANDA PER LUCA:** ### **fra `S1` e `S4`, o che cosa manca per scegliere** -- ### **i numeri dicono che il criterio toglie l'instabilita' di `S3` a poca materia ma NON quella di `cs`** *(`R1` `0.40`-`0.44`)* ### **ne' quella a molta materia** *(`x >= 1`)*: ### **si sceglie ora fra `S1` e `S4`, o prima si guarda `cs`** *(la sua forma, o `Lambda_c`, che restano FERMI)*? *(Criterio di chiusura: una tua decisione registrata.)*
