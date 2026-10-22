@@ -9,7 +9,7 @@
 | `DOCUMENTAZIONE` | `2` | 1 |
 | `DOCUMENTAZIONE` | `ENTRAMBE` | 9 |
 | `FISICA` | `1` | 343 |
-| `FISICA` | `2` | 141 |
+| `FISICA` | `2` | 142 |
 | `FISICA` | `ENTRAMBE` | 21 |
 | `INFRASTRUTTURA` | `1` | 39 |
 | `INFRASTRUTTURA` | `2` | 23 |
@@ -486,6 +486,7 @@
 | `LINGUAGGIO-REGOLE` | FRONTE | METODO | ENTRAMBE | ### **APERTA** |  | un linguaggio dichiarativo delle leggi, da cui GENERARE il codice e il documento |
 | `LORENTZ-MATERIA-INTERFERENZA` | FRONTE | FISICA | 2 | ### **AGENDA** |  | la materia per interferenza aggira la violazione di Lorentz che si propaga alle  |
 | `LOSCHMIDT-ECO` | FRONTE | METODO | ENTRAMBE | ### **APERTA** |  | l'eco di Loschmidt PER VOCE: un errore subito grande e' irreversibilita' del COD |
+| `LUCE-VINCOLO-LAMPI-GAMMA` | FRONTE | FISICA | 2 | ### **AGENDA** |  | LA LUCE DEL MODELLO RISPETTA IL VINCOLO DEI LAMPI GAMMA? |
 | `LUNGA-BATTITO-CADUTA` | DIFETTO | INFRASTRUTTURA | 1 | ### **SOSPESA** |  | la corsa da 1000 passi cade al passo 1: la stampa cita un contatore RINOMINATO |
 | `LUNGHEZZA-COME-SEGNALE` | FRONTE | METODO | 1 | ### **SOSPESA** |  | usare len(x) < n come segnale di <<nodo nuovo>> e una toppa implicita: serve una |
 | `M-FLUSSO` | CURA | FISICA | 1 | ### **SUPERATA** |  | memoria di flusso per ARCO, scalare e antisimmetrica, al posto di mem_mot |
