@@ -20321,3 +20321,27 @@ La domanda di Luca *(«l'instabilita', se c'e', dipende dal fatto che lo spazio 
 - ### **LA BANDA:** quadrato `k = (0, 8)` *(`gamma` `0.4018`)*, triangoli `k = (1, 25)` *(`0.3768`)*. ### **Il modo che cresce e' meta' particella e meta' buca** *(`0.500000` / `0.500000`, come vuole un'instabilita' modulazionale)*.
 - ### **I PESI:** ### **la coppia di peso massimo e' il ramo `0`** *(il ramo lento, fase `-0.048` / `-0.046` per tick)* ### **con il `45.3%` / `45.4%` delle particelle**; ### **il resto su `2`-`3` coppie** *(rami a fase `±0.74`-`0.79` per tick, e un altro lento a `±0.05`)*. ### **Il fondo stesso** *(la `psi` uniforme)* ### **sta per il `57%` su un ramo solo** *(il ramo `0` di `A(0)`)*.
 - ### ⚖️ **LA LETTURA, con la regola fissata prima: NON DECIDE** *(il ramo-particella massimo sotto il `50%`, su tutti e due)*. ### **Come INFORMAZIONE, non come verdetto:** ### **la coppia di peso massimo e' FOCALIZZANTE su tutti e due** *(`D dtau` `-0.0524` e `-0.0502`, `g D < 0`)* -- ### **la lettura `3.2` NON e' smentita**, ### **ma non e' provata**: ### **il modo e' una MISCELA di rami, non un ramo solo.**
+
+### ✅ **LA MATERIA DILUITA: INSTABILE -- `gamma` DELLA BANDA `0.3933` A `x = 1e-4`, IL `97.9%` DI `x = 0.1`: LA LETTURA DEL GUARDIANO REGGE, ANCHE NEL CODICE** *(mandato di Luca del `2026-10-22` alle `02:11`, misura `2`; task history `2026-10-22_s3_due_misure.md`; referto `doc/referti_l2/s3_diluita.txt` e `.jsonl`, strumento `csv/_s3_diluita.py` blob sha1-BYTE `528374c6`, committato e pulito)*
+
+- ### **I CONTROLLI `9` su `9`:** ### **`nu_S3` = `rho d alpha/d rho` per differenze finite DA `materia_vuoto.alpha`** a tutti e cinque gli `x`, ### **entro `1.3e-10` relativo** *(soglia `1e-8`)*: ### **la lettura del guardiano e' quella del CODICE**; la linearita' a `1e-4` `1.5e-07` contro `4.8e-04`; la base `<= 0.1` ulp; la camminata sola esatta.
+- ### **LA TABELLA** *(la banda: `m` da `4` a `12` lungo `(m, 0)`)*:
+
+| `x` | `nu_S3` | `gamma` della banda | `m` | fonte |
+|---|---|---|---|---|
+| `1e-4` | `0.99980` | `0.3933` | `8` | questa corsa |
+| `1e-3` | `0.99800` | `0.3934` | `8` | questa corsa |
+| `1e-2` | `0.98030` | `0.3946` | `8` | `d0_risonanza_bis` |
+| `0.1` | `0.82645` | `0.4018` | `8` | `d0_risonanza_bis` |
+| `1` | `0.25000` | `0.3349` | `7` | `d0_risonanza_bis` |
+
+- ### **LA LETTURA: DILUITA INSTABILE** *(`0.3933 / 0.4018 = 0.979`, soglia `0.5`)*.
+- ### ⚠ **E UN FATTO FUORI DALLA LETTURA FISSATA:** ### **a `x` piccolo il MASSIMO di tutta la zona e' `(pi, pi)`** -- ### **`0.4818` a `1e-3`, `0.4828` a `1e-4`**, contro `0.3547` a `x = 0.1` *(`594417f6`)*: ### **con poca materia il picco alternato supera la banda anche in `R2`** *(come a `x = 0.01`, la diagonale con massimo a `m = 16`, `0.4713`)*.
+
+### 🧭 **LE DUE MISURE INSIEME, E CHE COSA DICONO SULLA FORMA DI `S3`** *(nessuna scelta: la forma e' di Luca; `LINEARE` e `Lambda_c` FERMI)*
+
+- ### **`S-E` NON DECIDE il meccanismo** *(il modo e' una miscela di `3`-`4` coppie di rami; la coppia di peso massimo e' focalizzante, ma porta il `45%`)*.
+- ### **La materia diluita dice una cosa NETTA:** ### **`nu_S3 -> 1` quando la materia sparisce** *(per il logaritmo)*, ### **e la banda NON si spegne: resta `0.393`** -- ### **e il picco alternato CRESCE** *(`0.483`)*.
+- ### **SULLA VOCE `LINEARE`** *(il regime di poca materia)*: ### **il motivo `(a)` della forma** *(«LINEARE per poca materia, pendenza statica `1.11`»)* ### **e' una proprieta' STATICA di `N`** *(`N ~ rho ln(rho/Lambda)` vicino a zero)*; ### **dinamicamente l'autofase di `psi` NON e' piccola con poca materia: e' MASSIMA** *(`rho d alpha/d rho -> 1`)*. ### **Quindi «lineare per poca materia» nel senso statico NON vuol dire «stabile per poca materia».** ### **Questo e' cio' che le misure dicono; che cosa farne e' di Luca.**
+
+### 📌 **LA CODA:** ### **passa al mandato dello STATO FINALE** *(`02:22`)*.
